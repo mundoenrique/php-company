@@ -1,0 +1,218 @@
+// Provide styling for navigation menus.
+
+// Main navigation
+#nav-bar {
+  height: 40px;
+  background:$color-main-nav-background-top;
+  @include background-image(linear-gradient($color-main-nav-background-top, $color-main-nav-background-bottom));
+  @include box-shadow(rgba($color-shadow-base, 0.5) 0 1px 2px);
+  left: 0;
+  overflow: hidden;
+  position: fixed;
+  top: 65px;
+  width: 100%;
+  z-index: 999;
+}
+#status-disable{
+	color:$color-field-normal-placeholder !important;
+	border-left: 1px solid $color-main-nav-border-left;
+	border-right: 1px solid $color-main-nav-border-right;
+	font-family: $font-stack-custom;
+	font-size: 16px;
+	line-height: 40px;
+	padding: 0 10px;
+	@include text-shadow(1px 1px 0 $color-main-nav-background-bottom);
+}
+#status-disable:hover{
+	color:$color-field-normal-placeholder !important;
+	border-left: 1px solid $color-main-nav-border-left;
+	border-right: 1px solid $color-main-nav-border-right;
+	font-family: $font-stack-custom;
+	font-size: 16px;
+	line-height: 40px;
+	padding: 0 10px;
+	@include text-shadow(1px 1px 0 $color-main-nav-background-bottom);
+}
+#main-nav li:hover > ul {
+    display:block;
+}
+
+#main-nav li ul li {
+    position:relative;
+    left: -40px;
+    margin: 0;
+    padding:0;
+    display: block;
+}
+#main-nav {
+	height: 40px;
+	margin: 0 auto;
+	overflow: hidden;
+	width: 960px;
+
+	& ul.menu {
+		float: left;
+		width: 960px;
+		overflow: hidden;
+
+		& li.menu-item {
+			height: 40px;
+			float: left;
+
+			&:first-child {
+				border-left: 1px solid #FFF;
+			}
+
+			&:last-child {
+				border-right: 1px solid #DDD;
+			}
+
+			& a {
+				border-left: 1px solid $color-main-nav-border-left;
+				border-right: 1px solid $color-main-nav-border-right;
+				color: $color-main-nav-item-default-color;
+				font-family: $font-stack-custom;
+				font-size: 16px;
+				line-height: 40px;
+				padding: 0 10px;
+				@include text-shadow(1px 1px 0 $color-main-nav-background-bottom);
+
+				&:hover {
+					background:$color-main-nav-item-hover-background;
+					@include background-image(linear-gradient($color-main-nav-item-hover-background, darken($color-main-nav-item-hover-background, 15%)));
+					border-left: 1px solid darken($color-main-nav-item-hover-background, 15%);
+					border-right: 1px solid darken($color-main-nav-item-hover-background, 15%);
+					color: $color-main-nav-item-hover-color;
+					@include text-shadow(1px 1px 0 $color-main-nav-item-hover-background);
+				}
+
+				& span.icon:before {
+					padding-right: 5px;
+				}
+			}
+		}
+	}
+}
+.menu li > ul{
+	display:none;
+	position:fixed;
+	z-index:999;
+	font-size:18px;
+	line-height:25px;
+	top:104px;
+	@include transition(visibility 400ms ease-in-out 0s);
+	/*@include box-shadow(rgba($color-shadow-base, 0.5) 0 1px 2px);*/
+	&:hover{
+		display:inline;
+	}
+	& li{
+		color: $color-text1;
+		background:$color-field-normal-background;
+		border-bottom:1px solid #D3D3D3;
+		border-top:1px solid $color-field-focus-background;
+		/*@include background-image(linear-gradient($color-main-nav-background-top, $color-main-nav-background-bottom));*/
+		list-style: none;
+		& a{
+			display: block;
+			margin: auto;
+			font-size: 12px !important;
+		}
+	}
+}
+
+// Account navigation
+#account-nav {
+	color:white; 
+	margin-top:10px;
+	/*margin-right:100px;*/
+	/*display:block;*/
+	& ul{
+		float:right;
+		width: 300px;
+		margin-top: 18px;
+		& li{
+			width: auto;
+			height: 20px;
+			/*clear: both;*/
+			margin-bottom: 5px;
+			text-transform: capitalize;
+			margin-left: 20px;
+			& a{
+				color: white;
+				float: left;
+				/*clear: both;*/
+				font-size:$font-size-base;
+				font-weight: bold;
+				& span.icon{
+					font-size:16px;
+				}
+			}
+		}
+	}
+}
+.menu-item .settings{
+ float:right;
+ border-left:1px solid;
+ & span{
+ 	float: right;
+ }
+}
+.menu-item .account{
+	float:left;
+
+}
+// Footer navigation
+#extra-nav {
+	float: left;
+	overflow: hidden;
+	padding: 0 10px;
+
+	& ul.menu {
+		float: left;
+		height: 50px;
+
+		& li.menu-item {
+			line-height: 50px;
+			padding-right: 15px;
+
+			& a {
+				font-size: $font-size-base - 1;
+				font-weight: bold;
+			}
+		}
+	}
+}
+.config-menuH{
+	min-width: 20px; 
+	padding: 5px; 
+	border-radius: 6px 6px 6px 6px; 
+	border: none!important; 
+	box-shadow: 4px 4px 4px rgb(85, 85, 85); 
+	color: rgb(102, 102, 102); 
+	background:$color-base2;
+	@include background-image(linear-gradient($color-base2, darken($color-base2, 15%)));
+	opacity: 1.00 !important; 
+	z-index: 32767; 
+	text-align: left; 
+	visibility: visible; 
+	position: absolute; 
+	top: 41px; 
+	left: 939.5px; 
+	display: none;
+	& span{color:#fff!important;}
+	& div{border-color:transparent transparent $color-base2 !important;}
+	& ul{ float:left; padding-left:-50px;} 
+	& li{
+		list-style: none;
+		padding:5px!important;
+	}
+}
+.menu-item{list-style:none!important;padding:0px;color:red;}
+.submenu{
+	margin-left:-37px!important;
+	float:left;
+	& a{color:#fff!important;
+		&:hover{color:$color-base-var-1!important;
+			}
+		}
+}

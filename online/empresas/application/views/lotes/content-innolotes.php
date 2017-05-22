@@ -1,0 +1,84 @@
+<?php
+
+$pais = $this->uri->segment(1);
+$urlBaseA = $this->config->item('base_url');
+$urlBase = $urlBaseA.$pais;
+$mesesVencimiento = $this->session->userdata('mesesVencimiento');
+
+$info;
+
+?>
+<div id="content-products">
+	<h1><?php echo lang('TITULO_CUENTAS_INNO');?></h1>
+
+	<h2 class="title-marca">
+		<?php echo ucwords(mb_strtolower($programa));?>
+	</h2>
+
+	<ol class="breadcrumb">
+		<li>
+			<a href="<?php echo $urlBase; ?>/dashboard" rel="start"><?php echo lang('BREADCRUMB_INICIO'); ?></a>
+		</li>
+		/
+		<li>
+			<a href="<?php echo $urlBase; ?>/dashboard" rel="section"><?php echo lang('BREADCRUMB_EMPRESAS'); ?></a>
+		</li>
+		/
+		<li>
+			<a href="<?php echo $urlBase; ?>/dashboard/productos" rel="section">
+				<?php echo lang('BREADCRUMB_PRODUCTOS'); ?></a>
+			</li>
+			/
+			<li>
+				<a href="<?php echo $urlBase; ?>/lotes" rel="section"><?php echo lang('BREADCRUMB_LOTES'); ?></a>
+			</li>
+			/
+			<li class="breadcrumb-item-current">
+				<a ><?php echo lang('POSITION_INNO'); ?></a>
+			</li>
+		</ol>
+
+		<div style="display: block;" id="lotes-general" class="elem-hidden">				
+
+			<div id="filtroOS">
+
+				<div id="top-batchs">
+					<span aria-hidden="true" class="icon" data-icon="&#xe09e;"></span>
+					Solicitud
+				</div>
+
+				<div id="lotes-contenedor">
+					<span class="info-OD">
+						<h5>Sucursal</h5>
+						<span id="cargando" style="color:#0072C0">Cargando...</span>
+						<select id="sucursal" name="batch" class="select_sucursales" disabled="disabled">
+							<option value="">Selecciona</option>
+						</select>
+					</span>
+					<div class="info-OD">
+						<h5>Cantidad Tarjetas</h5>
+						<input id="cant_tarjetas" class="required input4 nro" value="" maxLength="5"><!-- onfocus="javascript:this.value=''" -->
+					</div>
+					<span class="info-OD">
+						<h5>Fecha Expiraci&oacute;n</h5>
+						<input id="fecha_expira" class="required input4" placeholder="MM/AA" value="<?php echo $mesesVencimiento; ?>" <?php if($pais=="Co"){echo"disabled";} ?> ><!-- onfocus="javascript:this.value=''" -->
+					</span>
+					<div class="info-OD">
+						<h5>L&iacute;nea Embozo 1</h5>
+						<input id="embozo_1" class="required input4" value=""><!--  onfocus="javascript:this.value=''" -->
+					</div>
+					<div class="info-OD">
+						<h5>L&iacute;nea Embozo 2</h5>
+						<input id="embozo_2" class="required input4" value=""><!-- onfocus="javascript:this.value=''" -->
+					</div>
+				</div>
+				
+				<div id="batchs-last">
+					<button id="procesar">Procesar</button>
+				</div>
+
+			</div>
+
+		</div>
+	</div>
+<div id='loading' style='text-align:center' class='elem-hidden'><?php echo insert_image_cdn("loading.gif"); ?></div>

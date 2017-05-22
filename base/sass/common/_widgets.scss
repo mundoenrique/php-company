@@ -1,0 +1,32 @@
+// Provide styling for sidebar widgets.
+
+#widget-area {
+	background: $color-sidebar-background;
+	@include border-radius(5px);
+	@include box-shadow(rgba($color-shadow-base, 0.35) 0 1px 2px);
+
+	& .widget {
+		& h2.widget-title {
+			background: $color-sidebar-title-background;
+			color: $color-sidebar-title-text;
+			line-height: 50px;
+			margin: 0;
+			padding: 0 10px;
+
+			& span.icon:before {
+				padding-right: 5px;
+			}
+		}
+
+		.widget-content {
+			overflow: hidden;
+			padding: 10px;
+
+			& input,
+			& select,
+			& textarea {
+				width: 178px;
+			}
+		}
+	}
+}
