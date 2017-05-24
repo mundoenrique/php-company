@@ -113,17 +113,13 @@ var datatable;
 			++count;
 			contenido+= "<h6>" + count + ". Ha ingresado una Linea Embozo 1</h6>";
 		}
-		if($("#embozo_2").val()==""){
-			++count;
-			contenido+= "<h6>" + count + ". Ha ingresado una Linea Embozo 2</h6>";
-		}
-		if(!/[^a-zA-Z0-9]/.test($("#embozo_2").val())){
+		if(!/[^a-zA-Z0-9 ]/.test($("#embozo_2").val())){
 			
 		}else {
 			++count;
 			contenido+= "<h6>" + count + ". No haya ingresado caracteres especiales en Linea Embozo 2</h6>";
 		}
-		if(!/[^a-zA-Z0-9]/.test($("#embozo_1").val())){
+		if(!/[^a-zA-Z0-9 ]/.test($("#embozo_1").val())){
 			
 		}else {
 			++count;
