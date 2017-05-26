@@ -8,4 +8,3 @@ RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 	RewriteCond $1 !^(index\.php|cdn|base|info\.php|robots\.txt)
 	RewriteRule ^(.*)$ index.php/$1 [L]
 </IfModule>
-

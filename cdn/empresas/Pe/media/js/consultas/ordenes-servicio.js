@@ -1,6 +1,7 @@
 $(function(){
-
+	
 $('.OS-icon ').attr('style', 'display: none !important;');
+
 $('#lotes-general').show();
 
 if($("#msg").val()){
@@ -85,7 +86,6 @@ var api = "/api/v1/";
     		$('form#formulario').attr('action',baseURL+api+isoPais+"/consulta/downloadOS");
     		$('form#formulario').submit(); 
     		setTimeout(function(){$aux.dialog('destroy')},8000);
-
 	});
 
 
@@ -137,17 +137,13 @@ var api = "/api/v1/";
 			numberOfMonths: 1,
         	dateFormat:"dd/mm/yy",
 			maxDate: "+0D",
-			onClose: function(selectedate){
-				if(input=='fecha_inicial' && selectedate){
+			onSelect: function(selectedate){
+				if(input=='fecha_inicial'){
 					$("#fecha_final").datepicker('option','minDate',selectedate);
-				}else if(input=='fecha_inicial'){
-					$("#fecha_final").datepicker('option','minDate',"");
-				} 
-				if(input=='fecha_final' && selectedate){
+				}
+				if(input=='fecha_final'){
 					$("#fecha_inicial").datepicker('option','maxDate',selectedate);
-				}else if(input=='fecha_inicial'){
-					$("#fecha_inicial").datepicker('option','maxDate',"+0D");
-				} 
+				}
 				if($("#fecha_inicial").val()!=''&&$("#fecha_final").val()!=''){
 					$.each($(":radio"),function(){this.checked=0;});
 					var aux = $("#fecha_inicial").val().split('/');
@@ -202,9 +198,25 @@ showOptions();
 	});
 
 function showOptions(){
-	$('#tbody-datos-general tr').css('margin-left',0);
-	$("#tbody-datos-general table").css('margin-left',31,'important');
-	
+	$('#tabla-datos-general tr').hover(
+		function(){
+
+			if( !$(this).hasClass('OSinfo') ){				
+				$(this).find('.OS-icon').show(); 			
+				$(this).css('margin-left',0);
+			}
+		},
+		function(){
+
+			var OS = $(this).attr('id');
+			var $lotes = $("#tabla-datos-general").find("."+OS);
+
+			if( !$(this).hasClass('OSinfo') && !$lotes.is(":visible") ){
+				$(this).find('.OS-icon').hide();			
+				$(this).css('margin-left',31);
+			}
+		}
+	);
 }	
 
 
@@ -267,93 +279,6 @@ $('#tabla-datos-general').on('click','#anular', function(){
 
 	});
 
-
-
-
-
-
-
-$('#tabla-datos-general').on('click','#pagoCo', function(){
- 
- 	var btnAnular = this;
-	$item = $(this).parents('tr');
-	var idOS = $(this).parents('tr').attr('id');
-	
-
-	var canvas = "<div id='dialog-confirm'>";
-      canvas +="<p>Id Orden: "+idOS+"</p>";          
-      canvas += "<fieldset><input type='password' id='pass' size=30 placeholder='Ingrese su contraseña' class='text ui-widget-content ui-corner-all'/>";
-      canvas += "<h5 id='msg'></h5></fieldset></div>"; 
-
-      var pass;
-
-      $(canvas).dialog({
-        title: 'Pagar Orden de Servicio',
-        modal: true,
-        resizable: false,
-        close: function(){$(this).dialog("destroy");},
-        buttons: {
-          Anular: function(){
-            pass = $(this).find('#pass').val();
-            
-            if( pass!==""){
-
-              pass = hex_md5( pass );
-              $('#pass').val( '' );
-              $(this).dialog('destroy');
-              var $aux = $('#loading').dialog({title:'Pagar Orden de Servicio' ,modal: true, resizable:false, close:function(){$aux.dialog('close');}}); 
-              $.post(baseURL+api+isoPais+'/consulta/anularos',{'data-idOS':idOS, 'data-pass':pass})
-			   .done(function(data){
-            $aux.dialog('destroy');
-                
-                if(!data.ERROR){                  
-                  notificacion("Pagar Orden de Servicio",'Anulación exitosa');
-                                 
-                 COS_var.tablaOS.fnDeleteRow( COS_var.tablaOS.fnGetPosition(btnAnular.parentNode.parentNode) );
-                 
-                }else{     
-                	if(data.ERROR=='-29'){
-                		
-	 				alert('Usuario actualmente desconectado'); location.reload();
-	 				}    else{         
-                  notificacion("Pagar Orden de Servicio",data.ERROR);   }                
-                }
-                
-              });
-              
-            }else{
-              $(this).find( $('#msg') ).text('Debe ingresar su contraseña');
-            }
-           
-          }
-        }
-      });
-
-
-	});
-
-
-
-
-
-
-
-$("#tabla-datos-general").on("click","#factura", function(){
-
-	orden = $(this).parents("tr").attr("id");
-
-		$(this).removeAttr("href");
-		$(this).removeAttr('target');
-		$aux = $("#loading").dialog({title:'Descargando factura',modal:true, close:function(){$(this).dialog('close')}, resizable:false });
-		$('form#formulario').empty();
-    	$('form#formulario').append('<input type="hidden" name="data-idOS" value="'+orden+'" />');
-    	$('form#formulario').append($('#data-OS'));
-    	$('form#formulario').attr('action',baseURL+api+isoPais+"/consulta/facturar");
-    	$('form#formulario').submit(); 
-    	setTimeout(function(){$aux.dialog('destroy')},8000);
-	
-
-});
 
 
 
