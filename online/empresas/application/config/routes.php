@@ -186,8 +186,28 @@ $route['api/v1/(:any)/servicios/actualizar-datos/cargarArchivo'] = "servicios/ca
 $route['api/v1/(:any)/servicios/actualizar-datos/buscar-datos'] = "servicios/buscarDatos/$1";
 $route['api/v1/(:any)/servicios/actualizar-datos/downXLS'] = "servicios/downXLS_AD/$1";
 
+//Routes for Combustible
+$route['(:any)/trayectos'] = "combustible/home/$1";
+$route['(:any)/trayectos/modelo'] = "combustible/callAPImodel/$1";
+
+//Drivers
+$route['(:any)/trayectos/conductores'] = "combustible/drivers/$1";
+$route['(:any)/trayectos/conductores/perfil'] = "combustible/driversAddEdit/$1";
+
+//vehicle Groups
+$route['(:any)/trayectos/gruposVehiculos'] = "combustible/vehicleGroups/$1";
+$route['(:any)/trayectos/vehiculos'] = "combustible/vehicles/$1";
+$route['(:any)/trayectos/vehiculos/incluir'] = "combustible/carsAdd/$1";
+
+//Accounts
+$route['(:any)/trayectos/cuentas'] = "combustible/accounts/$1";
+$route['(:any)/trayectos/detalleCuentas'] = "combustible/accountsDetails/$1";
+
+//travels
+$route['(:any)/trayectos/viajes'] = "combustible/travels/$1";
+$route['(:any)/trayectos/viajes/detalles'] = "combustible/travelAddEdit/$1";
+
 $route['404_override'] = '';
 
- 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

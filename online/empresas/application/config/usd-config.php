@@ -14,6 +14,8 @@ $config['keyNovo']= base64_decode('dGVzdDEyMzQ=');
 
 //URL Servicio Web WebLogic
 $config['urlWS']= 'http://172.24.6.148:8005/NovoEolWebInterfaceWS/webresources/';
+//URL Servicio API
+$config['urlAPI']= 'http://172.24.6.148:8005/ceo-fuel/1.0/';
 
 /*
 |--------------------------------------------------------------------------

@@ -1,0 +1,138 @@
+.container-filter {
+  width: 450px;
+  margin: 0 auto;
+}
+
+.filters {
+  display: block;
+  float:left;
+  padding-left: 10px;
+  padding-right:10px;
+  width: 190px;
+  margin: 5px;
+  text-align: center;
+}
+
+.date {
+    color: #0072c0;
+    margin: 0;
+    width: 190px;
+}
+
+input {
+  text-align: center;
+  width: 80px;
+  margin-top: 5px;
+}
+
+.hour-min {
+    width: 20px;
+}
+
+.date-field {
+    color: #867f7f;
+}
+
+.def-route {
+  float: none;
+  margin: 0;
+  background: #0AA3DC;
+}
+
+.coordinate  {
+  border: none;
+  border-left: 1px solid #0072c0;
+  border-right: 1px solid #0072c0;
+  box-sizing: border-box;
+  float: right;
+  height: 32px;
+  margin: 0;
+  padding: 10px 5px 5px 5px;
+  width: 565px;
+  text-align: justify;
+}
+
+.map {
+  height: 300px;
+}
+
+#map-direction {
+  height: 300px;
+  width: 630px;
+}
+
+#map-direction2 {
+  height: 300px;
+  width: 630px;
+
+}
+
+#map-resume {
+  height: 300px;
+  width: 630px;
+}
+
+#map-detail {
+  height: 300px;
+  width: 630px;
+}
+
+.bg-map {
+  display: none;
+  background: rgba(0, 0, 0, 0.7);
+  height: 100%;
+  width: 100%;
+  top: 0px;
+  left: 0px;
+  z-index: 1;
+  position: fixed;
+}
+
+.map-route {
+  position: relative;
+  background: #FFF;
+  height: 19px;
+  width: 14px;
+  top: 50%;
+  left: 50%;
+  margin-top: -9.5px;
+  margin-left: -7px;
+  transition: all 1s ease;
+}
+
+.map-route-up {
+  position: relative;
+  background: #FFF;
+  border: solid 10px #FFF;
+  height: 600px;
+  width: 95%;
+  top: 55%;
+  left: 50%;
+  margin-top: -300px;
+  margin-left: -48%;
+  transition: all 1s ease;
+}
+
+.map-content {
+  margin: auto;
+  height: 19px;
+  width: 14px;
+  transition: all 1s ease;
+
+}
+
+.map-content-up {
+  margin: auto;
+  height: 565px;
+  width: 100%;
+  transition: all 1s ease;
+}
+
+.coor-map {
+  border: none;
+  width: 625px;
+}
+
+button#v-Ruta {
+    margin-left: 5px;
+}
