@@ -26,7 +26,7 @@ if ( ! function_exists('insert_js_cdn'))
 	{
 		$CI =& get_instance();
 		$url_cdn = $CI->config->item('base_url_cdn');
-		$js='<script src="'.$url_cdn.'media/js/'.$filename.'?20170601" type="text/javascript"></script>';
+		$js='<script src="'.$url_cdn.'media/js/'.$filename.'?20170610" type="text/javascript"></script>';
 		return $js;
 	}
 }
@@ -59,7 +59,7 @@ if ( ! function_exists('insert_image_cdn'))
 	{
 		$CI =& get_instance();
 		$url_cdn = $CI->config->item('base_url_cdn');
-		$css='<img src="'.$url_cdn.'media/img/'.$filename.'?20161228">';
+		$css='<img src="'.$url_cdn.'media/img/'.$filename.'?20170701">';
 		return $css;
 	}
 }
