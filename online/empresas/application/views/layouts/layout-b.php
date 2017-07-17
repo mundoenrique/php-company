@@ -19,7 +19,7 @@
 
 				</div>
 				<div id="widget-info-2">					
-					A partir del 14 de julio de 2017 se ajustará a Bs 10.000,00 el cobro mínimo mensual a aquellas facturas cuyo Servicio Administrativo sea inferior a esa cantidad y la tarifa mensual por concepto de Servicios Operativos y de Logística será de Bs. 7.000,00, quedando exceptuadas aquellas facturas con Servicio Administrativo Mínimo.
+					A partir del 14 de julio de 2017 se ajustará a Bs 10.000 el cobro mínimo mensual a aquellas facturas cuyo Servicio Administrativo sea inferior a esa cantidad y la tarifa mensual por concepto de Servicios Operativos y de Logística será de Bs. 7.500 quedando exceptuadas aquellas facturas con Servicio Administrativo Mínimo.
 				</div>
 			</div>
 			<?php } ?>
