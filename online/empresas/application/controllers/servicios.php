@@ -193,7 +193,8 @@ class Servicios extends CI_Controller {
 
             log_message('info','TM '.$response->rc.'/'.$response->msg);
 
-            if($response->rc==0){
+            if($response->rc==0) {
+	            log_message('INFO', 'RESPONSE callWSbuscarTransferenciaM========>>>>>>>' . json_encode($response) );
                 return $response;
             }else{
                 if($response->rc==-61 || $response->rc==-29){
