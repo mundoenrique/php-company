@@ -26,7 +26,7 @@ if ( ! function_exists('insert_js_cdn'))
 	{
 		$CI =& get_instance();
 		$url_cdn = $CI->config->item('base_url_cdn');
-		$js='<script src="'.$url_cdn.'media/js/'.$filename.'?20170610" type="text/javascript"></script>';
+		$js='<script src="'.$url_cdn.'media/js/'.$filename.'?20170901" type="text/javascript"></script>';
 		return $js;
 	}
 }

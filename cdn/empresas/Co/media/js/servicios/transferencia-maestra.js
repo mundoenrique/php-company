@@ -680,7 +680,7 @@ $(function() {
             var acumSem = 0; // monto acumulado en la semana
             serv_var.acumXsem.filter(function(op) {
                 if (op.operacion == operacion) {
-                    acumSem = toFormat(op.montoOperacion)
+                    acumSem = toFormat(op.montoOperacion);
                 }
             });
 
@@ -776,6 +776,15 @@ $(function() {
                 return parseFloat(valor.replace(',', ''));
 
             } else if (isoPais == 'Ve' || isoPais == 'Co') {
+
+                if(valor.lastIndexOf(",") == (valor.length - 2)) {
+                    valor += '0';
+                }
+
+                if(valor.lastIndexOf(".") == (valor.length - 2)) {
+                    valor += '0';
+                }
+
 
                 if (valor.substr(-3, 1) == ",")
                     valor = valor.replace(/\./g, "").replace(/,/g, ".");
