@@ -302,6 +302,11 @@ class Lotes extends CI_Controller {
 				'funciones' => $funciones
 
 				),TRUE);
+
+			/*Prueba de hz para ver el json que se envía a la vista*/
+			$prueba = json_encode($rTest,JSON_UNESCAPED_UNICODE);
+			log_message('info','Descripción de lote --->>> '.$prueba);
+
 			$sidebarLotes= $this->parser->parse('dashboard/widget-empresa',array('sidebarActive'=>TRUE),TRUE);
 
 			$datos = array(
@@ -2069,10 +2074,14 @@ class Lotes extends CI_Controller {
 			$pass = $this->input->post('data-pass') ;
 			$tipoOrdeServicio = $this->input->post('data-tipoOS');
 			$lotes = explode(',',$this->input->post('data-lotes'));
+			$medio = $this->input->post('data-medio');
+			$ivanuevo = $this->input->post('data-iva');
 
 			array_pop($lotes);
 
-			$calculoOsLotesW = $this->callWScalcularOS($urlCountry,$token,$username,$pass,$lotes,$tipoOrdeServicio);
+			log_message('info',"Prueba para la toma del país --->>> ".$paisS);
+
+			$calculoOsLotesW = $this->callWScalcularOS($urlCountry,$token,$username,$pass,$lotes,$tipoOrdeServicio,$medio,$ivanuevo);
 
 			$this->output->set_content_type('')->set_output($calculoOsLotesW);
 
@@ -2097,7 +2106,7 @@ class Lotes extends CI_Controller {
 	 * @param  string $tipoOrdenServicio
 	 * @return array
 	 */
-	private function callWScalcularOS($urlCountry,$token,$username,$pass,$lotes,$tipoOrdeServicio){
+	private function callWScalcularOS($urlCountry,$token,$username,$pass,$lotes,$tipoOrdeServicio,$medio,$ivanuevo){
 		$this->lang->load('erroreseol');
 		$operacion = "calcularOS";
 		$classname = "com.novo.objects.TOs.OrdenServicioTO";
@@ -2106,6 +2115,32 @@ class Lotes extends CI_Controller {
 
 		$idEmpresa = $this->session->userdata('acrifS');
 		$idProductoS = $this->session->userdata('idProductoS');
+
+		if ($medio == '1') {
+			$descripcion = 'Deposito';
+		}else if ($medio == '2') {
+			$descripcion = 'Transferencia';
+		}else {
+			$descripcion = 'Deposito y Transferencia';
+		}
+
+		$arraymediopago = array(
+			'idPago'=>$medio,
+			'descripcion'=>$descripcion
+		);
+
+		// $arraymediopago = json_encode($arraymediopago,JSON_UNESCAPED_UNICODE);
+		// log_message("info","Array de medios de pago -->> ".$arraymediopago);
+
+		if ($ivanuevo == 1) {
+			$ivanuevo = 'true';
+		}else{
+			$ivanuevo = 'false';
+		}
+
+		log_message("info","Tomando id de medio de pago -->> ".$medio);
+		log_message("info","Tomando tipo de medio de pago -->> ".$descripcion);
+		log_message("info","Tomando valor del nuevo iva -->> ".$ivanuevo);
 
 		foreach ($lotes as $key => $value) {
 			$lote = array(
@@ -2137,6 +2172,8 @@ class Lotes extends CI_Controller {
 			"acprefix"=> $idProductoS,
 			"acUsuario"=>$username,
 			"tipoOrdeServicio"=>$tipoOrdeServicio,
+			"nuevoIva"=>$ivanuevo,
+			"medioPago"=>$arraymediopago,
 			"lotes"=>$listaL,
 			"usuario"=>$datosUsuario,
 			"logAccesoObject"=> $logAcceso,
@@ -2144,6 +2181,8 @@ class Lotes extends CI_Controller {
 			);
 
 		$data = json_encode($data,JSON_UNESCAPED_UNICODE);
+
+		log_message("info","Array de medios de pago -->> ".$data);
 
 		$dataEncry = np_Hoplite_Encryption($data);
 		$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
@@ -2164,6 +2203,7 @@ class Lotes extends CI_Controller {
 				}
 				else if($response->rc==-51){
 				    if ($urlCountry =="Ve"){
+						log_message("info","Mensaje error -->> ".$response->msg);
                         $codigoError = array('ERROR' => 'Error obteniendo los datos de la empresa para la Orden de Servicio. Por favor envíe esta pantalla y su usuario al correo <strong>soporteempresas@tebca.com</strong>' );
                     }else {
                         $codigoError = array('ERROR' => $response->msg );
