@@ -57,16 +57,32 @@ $reten = ($reten == NULL) ? "nonEmpty" : trim($reten, ', ');
 				<div id="lotes-contenedor">
 					<table id="tabla-datos-general" class="tabla-reportes-OS">
 						<thead>
-						<tr id="datos-principales">
-							<th style='display:none'></th>
-							<th style='display:none'></th>
-							<th><?php echo lang('TABLA_OS_MONTO'); ?></th>
-							<th><?php echo lang('TABLA_OS_MONTO_IVA'); ?></th>
-							<th class="th-empresa"><?php echo lang('TABLA_OS'); ?></th>
-							<th><?php echo lang('TABLA_OS_MONTO_TOTAL'); ?></th>
-							<th><?php echo lang('TABLA_OS_MONTO_DEPOSITO'); ?></th>
+						<?php
+							if ($pais == 'Ve') {
+						?>
+							<tr id="datos-principales">
+								<th style='display:none'></th>
+								<th style='display:none'></th>
+								<th><?php echo lang('TABLA_OS_MONTO'); ?></th>
+								<th><?php echo lang('TABLA_OS_MONTO_IVA'); ?></th>
+								<th><!--<?php echo lang('TABLA_OS_MONTO_IVA'); ?>-->Medio de pago</th>
+								<th class="th-empresa"><?php echo lang('TABLA_OS'); ?></th>
+								<th><?php echo lang('TABLA_OS_MONTO_TOTAL'); ?></th>
+								<th><?php echo lang('TABLA_OS_MONTO_DEPOSITO'); ?></th>
+							</tr>
+						<?php }else{?>
+							<tr id="datos-principales">
+								<th style='display:none'></th>
+								<th style='display:none'></th>
+								<th><?php echo lang('TABLA_OS_MONTO'); ?></th>
+								<th><?php echo lang('TABLA_OS_MONTO_IVA'); ?></th>
+								<th class="th-empresa"><?php echo lang('TABLA_OS'); ?></th>
+								<th><?php echo lang('TABLA_OS_MONTO_TOTAL'); ?></th>
+								<th><?php echo lang('TABLA_OS_MONTO_DEPOSITO'); ?></th>
 
-						</tr>
+							</tr>
+						<?php } ?>
+
 						</thead>
 						<tbody id="tbody-datos-general" class="tbody-reportes-OS">
 						<?php
@@ -99,20 +115,40 @@ $reten = ($reten == NULL) ? "nonEmpty" : trim($reten, ', ');
 							<td>$montoNeto</td>
 						</tr>";
 							}
-							echo "
-							<tr id='$value->idOrdenTemp'>
-								<td class='OS-icon'>
-									<a id='ver_lotes' title='Ver lotes'>
-										<span aria-hidden='true' class='icon' data-icon='&#xe003;'></span>
-									</a>
-								</td>
-								<td>$value->montoComision</td>
-								<td>$value->montoIVA</td>
-								<td class='th-empresa'>$value->montoOS</td>
-								<td>".amount_format($value->montoTotal)."</td>
-								<td>".amount_format($value->montoDeposito)."</td>
-								<td style='float:left; padding:0; '><table><tbody>$ltr</tbody></table></td>
-							</tr>";
+							if ($pais == 'Ve') {
+
+								$medio = $value->medioPago;
+								echo "
+								<tr id='$value->idOrdenTemp'>
+									<td class='OS-icon'>
+										<a id='ver_lotes' title='Ver lotes'>
+											<span aria-hidden='true' class='icon' data-icon='&#xe003;'></span>
+										</a>
+									</td>
+									<td>$value->montoComision</td>
+									<td>$value->montoIVA</td>
+									<td>$medio->descripcion</td>
+									<td class='th-empresa'>$value->montoOS</td>
+									<td>".amount_format($value->montoTotal)."</td>
+									<td>".amount_format($value->montoDeposito)."</td>
+									<td style='float:left; padding:0; '><table><tbody>$ltr</tbody></table></td>
+								</tr>";
+							}else {
+								echo "
+								<tr id='$value->idOrdenTemp'>
+									<td class='OS-icon'>
+										<a id='ver_lotes' title='Ver lotes'>
+											<span aria-hidden='true' class='icon' data-icon='&#xe003;'></span>
+										</a>
+									</td>
+									<td>$value->montoComision</td>
+									<td>$value->montoIVA</td>
+									<td class='th-empresa'>$value->montoOS</td>
+									<td>".amount_format($value->montoTotal)."</td>
+									<td>".amount_format($value->montoDeposito)."</td>
+									<td style='float:left; padding:0; '><table><tbody>$ltr</tbody></table></td>
+								</tr>";
+							}
 						}
 						$tempIdOrdenL=serialize($tempidOrdenLotes);
 						?>
