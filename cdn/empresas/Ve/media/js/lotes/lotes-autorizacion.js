@@ -134,8 +134,6 @@ $('#lotes-2').on('click','#select-allA', function() {
 
 	var select_modal = $("#select-modal").val(),
 		nuevo_iva = $("#nuevo-iva").val();
-	console.log("La selección del modal es --->>> "+select_modal);
-	console.log("El nuevo IVA es --->>> "+nuevo_iva);
 
 	if (select_modal == "") {
 		$("#modal-lote").dialog({
@@ -145,59 +143,109 @@ $('#lotes-2').on('click','#select-allA', function() {
 			buttons: {
 	            OK: function(){
 	                $(this).dialog('destroy');
+					var select_modal = $("#select-modal").val(),
+						nuevo_iva = $("#nuevo-iva").val();
+					console.log("La selección del modal es --->>> "+select_modal);
+					console.log("El nuevo IVA es --->>> "+nuevo_iva);
+					if(pass!="" && js_var.loteA!="" && osTipo!=""){
+
+				      pass = hex_md5( pass );
+				      $('#claveAuth').val( '' );
+
+				  /*   if(js_var.loteA.lastIndexOf(',')!=-1){
+				      js_var.loteA = js_var.loteA.substr(0,js_var.loteA.lastIndexOf(','));
+				      }*/
+
+				      $('#loading').dialog({title:'Autorizando lotes...', modal:true, resizable:false, dialogClass: 'hide-close', close:function(){$(this).dialog('destroy')}});
+
+				      $.post(baseURL+'/'+isoPais+'/lotes/preliminar',{'data-lotes':js_var.loteA, 'data-pass':pass, 'data-tipoOS':osTipo, 'data-medio':select_modal, 'data-iva':nuevo_iva})
+				      .done(function(data){
+				        $('#loading').dialog('destroy');
+
+				      if(data.indexOf("ERROR")==-1){
+				        $("#data-COS").attr('value',data);
+				        $("<div><h3>Proceso exitoso</h3><h5>Ha generado el cálculo de la orden de servicio.</h5></div>").dialog({
+				        title:"Autorizando lotes",
+				        modal:true,
+				        resizable:false,
+				        close: function(){
+				          $(this).dialog('destroy')
+				          $('#autorizacion').submit();
+				          }
+				          ,
+				        buttons:{
+				          siguiente: function () {
+				            $('#autorizacion').submit();
+				        }
+
+				        }
+				          });
+				      }else{
+				        var jsonData = $.parseJSON(data);
+				        if(jsonData.ERROR=='-29'){
+				          alert('Usuario actualmente desconectado'); location.reload();
+				        }
+				        notificacion("Autorizando lotes",jsonData.ERROR);
+				      }
+
+				    });
+				    // resetValuesAuth();
+				    }else{
+				        notificacion("Autorizando lotes","<h2>Verifique que: </h2><h3>1. Ha seleccionado al menos un lote</h3><h3>2. Ha ingresado su contraseña</h4><h3>3. Ha seleccionado el tipo orden de servicio</h3>");
+				    }
 	            }
 	        }
 		});
 	}
 
-	if (select_modal != "") {
-		if(pass!="" && js_var.loteA!="" && osTipo!=""){
-
-	      pass = hex_md5( pass );
-	      $('#claveAuth').val( '' );
-
-	  /*   if(js_var.loteA.lastIndexOf(',')!=-1){
-	      js_var.loteA = js_var.loteA.substr(0,js_var.loteA.lastIndexOf(','));
-	      }*/
-
-	      $('#loading').dialog({title:'Autorizando lotes...', modal:true, resizable:false, dialogClass: 'hide-close', close:function(){$(this).dialog('destroy')}});
-
-	      $.post(baseURL+'/'+isoPais+'/lotes/preliminar',{'data-lotes':js_var.loteA, 'data-pass':pass, 'data-tipoOS':osTipo, 'data-medio':select_modal, 'data-iva':nuevo_iva})
-	      .done(function(data){
-	        $('#loading').dialog('destroy');
-
-	      if(data.indexOf("ERROR")==-1){
-	        $("#data-COS").attr('value',data);
-	        $("<div><h3>Proceso exitoso</h3><h5>Ha generado el cálculo de la orden de servicio.</h5></div>").dialog({
-	        title:"Autorizando lotes",
-	        modal:true,
-	        resizable:false,
-	        close: function(){
-	          $(this).dialog('destroy')
-	          $('#autorizacion').submit();
-	          }
-	          ,
-	        buttons:{
-	          siguiente: function () {
-	            $('#autorizacion').submit();
-	        }
-
-	        }
-	          });
-	      }else{
-	        var jsonData = $.parseJSON(data);
-	        if(jsonData.ERROR=='-29'){
-	          alert('Usuario actualmente desconectado'); location.reload();
-	        }
-	        notificacion("Autorizando lotes",jsonData.ERROR);
-	      }
-
-	    });
-	    // resetValuesAuth();
-	    }else{
-	        notificacion("Autorizando lotes","<h2>Verifique que: </h2><h3>1. Ha seleccionado al menos un lote</h3><h3>2. Ha ingresado su contraseña</h4><h3>3. Ha seleccionado el tipo orden de servicio</h3>");
-	    }
-	}
+	// if (select_modal != "") {
+	// 	if(pass!="" && js_var.loteA!="" && osTipo!=""){
+	//
+	//       pass = hex_md5( pass );
+	//       $('#claveAuth').val( '' );
+	//
+	//   /*   if(js_var.loteA.lastIndexOf(',')!=-1){
+	//       js_var.loteA = js_var.loteA.substr(0,js_var.loteA.lastIndexOf(','));
+	//       }*/
+	//
+	//       $('#loading').dialog({title:'Autorizando lotes...', modal:true, resizable:false, dialogClass: 'hide-close', close:function(){$(this).dialog('destroy')}});
+	//
+	//       $.post(baseURL+'/'+isoPais+'/lotes/preliminar',{'data-lotes':js_var.loteA, 'data-pass':pass, 'data-tipoOS':osTipo, 'data-medio':select_modal, 'data-iva':nuevo_iva})
+	//       .done(function(data){
+	//         $('#loading').dialog('destroy');
+	//
+	//       if(data.indexOf("ERROR")==-1){
+	//         $("#data-COS").attr('value',data);
+	//         $("<div><h3>Proceso exitoso</h3><h5>Ha generado el cálculo de la orden de servicio.</h5></div>").dialog({
+	//         title:"Autorizando lotes",
+	//         modal:true,
+	//         resizable:false,
+	//         close: function(){
+	//           $(this).dialog('destroy')
+	//           $('#autorizacion').submit();
+	//           }
+	//           ,
+	//         buttons:{
+	//           siguiente: function () {
+	//             $('#autorizacion').submit();
+	//         }
+	//
+	//         }
+	//           });
+	//       }else{
+	//         var jsonData = $.parseJSON(data);
+	//         if(jsonData.ERROR=='-29'){
+	//           alert('Usuario actualmente desconectado'); location.reload();
+	//         }
+	//         notificacion("Autorizando lotes",jsonData.ERROR);
+	//       }
+	//
+	//     });
+	//     // resetValuesAuth();
+	//     }else{
+	//         notificacion("Autorizando lotes","<h2>Verifique que: </h2><h3>1. Ha seleccionado al menos un lote</h3><h3>2. Ha ingresado su contraseña</h4><h3>3. Ha seleccionado el tipo orden de servicio</h3>");
+	//     }
+	// }
   });
 
 
