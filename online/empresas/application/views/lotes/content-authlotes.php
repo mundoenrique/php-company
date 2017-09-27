@@ -242,6 +242,10 @@
       		}
 
 			?>
+
+		<?php
+			if ($pais == 'Co') {
+		?>
 		<div class="info">
 			<h2>¡Información importante!</h2>
 			<p>Mediante el Decreto Nº 3.085, publicado en Gaceta Oficial Nº 41.239 de fecha 19-09-2017, se estableció la rebaja de la alícuota impositiva del Impuesto al Valor Agregado (IVA), para operaciones de pago realizadas a través de medios electrónicos como se indica a continuación:</p>
@@ -252,6 +256,7 @@
 			  	<li>Los pagos realizados a través de medios no electrónicos <b>(Depósito en cheque y/o efectivo)</b> o con modalidad mixta (Depósito en cheque y/o efectivo y Transferencia electrónica), <b>no gozarán de ningún tipo de rebaja</b>, por lo cual se aplicará la alícuota general impositiva del 12%.</li>
 			</ul>
 		</div>
+		<?php }?>
 
 		</div>
 		<?php }else{
