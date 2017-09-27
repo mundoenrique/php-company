@@ -244,7 +244,7 @@
 			?>
 
 		<?php
-			if ($pais == 'Co') {
+			if ($pais == 'Ve') {
 		?>
 		<div class="info">
 			<h2>¡Información importante!</h2>
