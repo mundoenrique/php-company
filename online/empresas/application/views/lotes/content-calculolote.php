@@ -58,14 +58,15 @@ $reten = ($reten == NULL) ? "nonEmpty" : trim($reten, ', ');
 					<table id="tabla-datos-general" class="tabla-reportes-OS">
 						<thead>
 						<?php
-							if ($pais == 'Ve') {
+						$pruebaIva = $data->lista[0]->nuevoIva;
+							if ($pruebaIva == '1') {
 						?>
 							<tr id="datos-principales">
 								<th style='display:none'></th>
 								<th style='display:none'></th>
 								<th><?php echo lang('TABLA_OS_MONTO'); ?></th>
 								<th><?php echo lang('TABLA_OS_MONTO_IVA'); ?></th>
-								<th><!--<?php echo lang('TABLA_OS_MONTO_IVA'); ?>-->Medio de pago</th>
+								<th>Medio de pago</th>
 								<th class="th-empresa"><?php echo lang('TABLA_OS'); ?></th>
 								<th><?php echo lang('TABLA_OS_MONTO_TOTAL'); ?></th>
 								<th><?php echo lang('TABLA_OS_MONTO_DEPOSITO'); ?></th>
@@ -115,7 +116,9 @@ $reten = ($reten == NULL) ? "nonEmpty" : trim($reten, ', ');
 							<td>$montoNeto</td>
 						</tr>";
 							}
-							if ($pais == 'Ve') {
+							if ($pruebaIva == '1') {
+
+								$oripais = $value->nuevoIva;
 
 								$medio = $value->medioPago;
 								echo "
