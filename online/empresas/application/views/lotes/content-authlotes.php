@@ -283,27 +283,52 @@
 <form id='detalleAuth' method='post' action="<?php echo $urlBase ?>/lotes/autorizacion/detalle"></form>
 
 <?php
-	if ($pais == 'Ve') {
+	if ($pais == 'Ve'):
 
 		$iva = $info->{'nuevoIva'};
 		if ($iva=='true') {
 			$iva = '1';
 		}else{
 			$iva = '0';
-		};
+		}
 ?>
 <input type="hidden" id="nuevo-iva" style="display:none;" value="<?php print $info->{'nuevoIva'}; ?>">
 <div class="modal-lote" id="modal-lote" style="display:none; overflow: hidden; text-overflow: ellipsis;">
-	<select class="select-modal" name="select-modal" id="select-modal">
-		<option value="">Seleccione</option>
-		<?php
-		foreach($info->mediosPago as $medios){
-		echo "<option value='$medios->idPago'>$medios->descripcion</option>";
-		}?>
-	</select>
+	<style type="text/css">
+		.modal-table {
+			border: 0;
+			border-collapse: collapse;
+			width: 100%;
+		}
+
+		.modal-table td {
+			padding: 2px 5px 5px;
+			vertical-align: top;
+		}
+	</style>
+	<table border="0" class="modal-table" width="100%">
+		<tbody>
+			<?php $count = 0;
+			foreach ($info->mediosPago as $medio):
+				$count = $count + 1;
+				$checked = ($count === 1) ? 'checked' : '';
+				$id = $medio->idPago;
+				$description = $medio->descripcion; ?>
+			<tr>
+				<td width="10%">
+					<input type="radio" id="modalidad-<?php echo $count; ?>" <?php echo $checked; ?> name="modalidad" value="<?php echo $id; ?>">
+				</td>
+				<td>
+					<label for="modalidad-<?php echo $count; ?>"><?php echo $description; ?></label>
+				</td>
+			</tr>
+			<?php endforeach; ?>
+		</tbody>
+	</table>
+	<input type="hidden" id="select-modal" name="select-modal">
 </div>
 <?php
-	};
+	endif;
 ?>
 
 <div id='loading' style='text-align:center' class='elem-hidden'><?php echo insert_image_cdn("loading.gif"); ?></div>
