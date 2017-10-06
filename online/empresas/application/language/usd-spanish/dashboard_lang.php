@@ -41,6 +41,7 @@ $lang['CONSUL']= "Consulta";  //perfil
 $lang['SERVIC']= "Servicios"; // perfil
 $lang['GESREP']= "Reportes";  // perfil
 $lang['TEBCAR']= "Carga de Lotes"; // modulo
+$lang['COMBUS']= "Trayectos"; // perfil
 
 $lang['TICARG']= "Solicitud"; // modulo
 $lang['TIINVN']= "Inventario"; // modulo
