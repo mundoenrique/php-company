@@ -20,7 +20,7 @@ class account_model extends CI_Model {
 
         $ruc = $this->session->userdata('acrifS');
         $token = $this->session->userdata('token');
-        $prefix = $this->session->userdata('prefix');
+        $prefix = $this->session->userdata('idProductoS');
         $detail = '';
         if($dataRequest == '' || $dataRequest == 'allocated'){
             $detail = 'account?status=allocated';
@@ -45,7 +45,7 @@ class account_model extends CI_Model {
         $bodyAPI = '';
         $method = 'GET';
 
-        log_message("Listado de cuentas", "REQUEST " . ": ===>>" . json_encode($headerAPI));
+        log_message("INFO", "Listado de cuentas REQUEST : ===>>" . json_encode($headerAPI));
 
         $jsonResponse = GetAPIServ($urlAPI, $headerAPI, $bodyAPI, $method);
 

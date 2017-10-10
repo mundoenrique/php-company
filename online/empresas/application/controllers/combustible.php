@@ -169,7 +169,7 @@ class Combustible extends CI_Controller
                     ]
                 ];
                 $this->dataResponse = json_encode($response);
-                break;                
+                break;
             default:
                 $response = [
                     'code' => 1,
@@ -295,9 +295,6 @@ class Combustible extends CI_Controller
 
         //Cargar modelo
         $this->load->model('account_model', 'account');
-        //Obtener respuesta del API
-        $response = $this->account->callAPIaccounts($urlCountry,$dataRequest='');
-        $this->dataResponse = json_encode($response);
 
         $this->action = [
             'title' => lang('TITLE_ACCOUNT_ADMIN'),
