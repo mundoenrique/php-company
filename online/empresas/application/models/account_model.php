@@ -20,6 +20,7 @@ class account_model extends CI_Model {
 
         $ruc = $this->session->userdata('acrifS');
         $token = $this->session->userdata('token');
+        $prefix = $this->session->userdata('prefix');
         $detail = '';
         if($dataRequest == '' || $dataRequest == 'allocated'){
             $detail = 'account?status=allocated';
@@ -36,7 +37,7 @@ class account_model extends CI_Model {
             'x-country: ' . $urlCountry,
             'x-token: ' . $token,
             'x-company: ' . $ruc,
-            'x-product:' . 'Y'
+            'x-product:' . $prefix
         ];
 
         $urlAPI = $detail;
@@ -291,13 +292,14 @@ class account_model extends CI_Model {
     public function callAPIallocatingDriver($urlCountry, $dataRequest) {
         $ruc = $this->session->userdata('acrifS');
         $token = $this->session->userdata('token');
+        $prefix = $this->session->userdata('prefix');
         log_message("INFO","Data recibida*********>>>>>" . json_encode($dataRequest['card']) );
 
         $header = [
             'x-country: ' . $urlCountry,
             'x-token: ' . $token,
             'x-company: ' . $ruc,
-            'x-product:' . 'Y'
+            'x-product:' . $prefix
         ];
 
         $urlAPI = 'account/allocate/'.$dataRequest['card'].'/'.$dataRequest['user'];
