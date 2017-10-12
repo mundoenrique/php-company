@@ -139,14 +139,15 @@ $('#lotes-2').on('click','#select-allA', function() {
 			close: function(evt, ui) {
 				$('input[name="modalidad"]').prop('checked', false);
 				$('input[name="modalidad"]').first().prop('checked', true);
-				$('#select-modal').val('');
+				//$('#select-modal').val('');
 			},
 			buttons: {
 	            OK: function(){
-	                $(this).dialog('destroy');
-					var modalidad = $('input[name="modalidad"]:checked').val(),
-						select_modal = $('#select-modal').val(modalidad),
+					//var modalidad = $('input[name="modalidad"]:checked').val();
+					var select_modal = $('input[name="modalidad"]:checked').val(),
 						nuevo_iva = $("#nuevo-iva").val();
+
+					$(this).dialog('destroy');
 					if(pass!="" && js_var.loteA!="" && osTipo!=""){
 
 				      pass = hex_md5( pass );
