@@ -59,7 +59,7 @@ $dataResponse = json_decode($dataResponse);
                 <div class="novo-campo">
                     <span>
                         <p class="novo-campo-name"><?= lang('VEHI_PLATE') ?>:</p>
-                        <input type="text" name="plate" id="plate" maxlength="7">
+                        <input type="text" onkeydown="return keyDownVal(event)" name="plate" id="plate" maxlength="7">
                     </span>
                 </div>
                 <div class="novo-campo">

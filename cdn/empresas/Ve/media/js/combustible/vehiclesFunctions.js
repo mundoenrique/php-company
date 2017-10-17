@@ -99,8 +99,28 @@ function modalAddEdit (idVehicle, vehiclesList) {
     }
 }
 
+function keyDownVal(e) {
+
+    tecla = (document.all) ? e.keyCode : e.which;
+
+    if (tecla==8) return true;
+    if (tecla == 17) return false;
+    if (tecla >= 48 && tecla<=57) return true;
+    if (tecla >= 65 && tecla<=90) return true;
+    if (tecla >= 96 && tecla<=105) return true;
+    if (tecla == 45) return true;
+    if (tecla == 189) return true;
+    if (tecla == 173) return true;
+    if (tecla == 109) return true;
+    patron = /1/;
+    tmp = String.fromCharCode(tecla);
+    return patron.test(tmp);
+}
+
+
 //Validar campos del formulario
 function validar_campos() {
+
     var year = new Date();
     year = year.getFullYear() + 1;
     console.log(year);
@@ -109,8 +129,20 @@ function validar_campos() {
         success: "valid"
     });
 
-    var formaterPlate = /[A-Z]{3}-\d{3}/;
-    var formaterModel = /^[a-zA-Z0-9-\s]*$/;
+	jQuery.validator.addMethod('regval', function (value, element) {
+
+		let patron1 = /([A-Za-z]{3}-[0-9]{3})/;
+		let patron2 = /([0-9]{2}[A-Za-z]{3}[0-9]{2})/;
+		let patron3 = /([A-Za-z]{3}-[0-9]{2}[A-Za-z]{1})/;
+		let patron4 = /([A-Za-z]{3}[0-9]{2}[A-Za-z]{1})/;
+
+		if( patron1.test(value) || patron2.test(value) ||
+				patron3.test(value) || patron4.test(value)){
+				return true;
+		}
+      }, 'Formato válido para la placa XXX-000, XXX-00X, XXX00X  y la placa 00XXX00');
+
+	var formaterModel = /^[a-zA-Z0-9-\s]*$/;
 
     $("#formAddEdit").validate({
         errorElement: "label",
@@ -121,7 +153,7 @@ function validar_campos() {
         errorLabelContainer: "#msg",
 
         rules: {
-            'plate': {required: true, pattern: formaterPlate, minlength: 7},
+            'plate': {regval: true},
             'brand': {required: true, lettersonly: true, maxlength: 25},
             'model': {required: true, pattern: formaterModel, maxlength: 25},
             'year' : {required: true, digits: true, minlength: 4, maxlength: 4, max: year},
@@ -130,7 +162,6 @@ function validar_campos() {
         },
 
         messages:{
-            'plate': 'Formato válido para la placa XXX-000',
             'brand': 'La marca no admite números ni caracteres especiales, max 25 caracteres',
             'model': 'El modelo solo admite el carácter especial \"-\", max 25 caracteres',
             'year': 'Formato válido para el año 0000, max ' + year,
