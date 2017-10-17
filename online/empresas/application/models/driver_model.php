@@ -370,16 +370,20 @@ class driver_model extends CI_Model
                 ];
                 break;
             case 400:
-                $rc = $dataResponse->rc;
-                $codeError = [-181, -284, -193];
-                $code = 2;
-                $title = lang('BREADCRUMB_COMBUSTIBLE');
-                $msg = lang('ERROR_(-39)');
-                if(in_array($rc, $codeError)) {
-                    $code = 0;
-                    $title = '';
-                    $msg = lang('ERROR_('.$rc.')');
-                }
+
+				$code = 2;
+				$title = lang('BREADCRUMB_COMBUSTIBLE');
+				$msg = lang('ERROR_(-39)');
+
+				if( $resAPI != "Bad Request"){
+					$rc = $dataResponse->rc;
+					$codeError = [-181, -284, -193];
+					if(in_array($rc, $codeError)) {
+						$code = 0;
+						$title = '';
+						$msg = lang('ERROR_('.$rc.')');
+					}
+				}
 
                 $response = [
                     'code' => $code,
