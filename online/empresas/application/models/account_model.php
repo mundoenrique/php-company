@@ -69,14 +69,33 @@ class account_model extends CI_Model {
                 }
                 break;
             case 400:
-                $response = [
-                    'code' => 2,
-                    'title' => lang('BREADCRUMB_COMBUSTIBLE'),
-                    'msg' => lang('ERROR_(-39)'),
-                    'language' => [
-                        'TAG_ACCEPT' => lang('TAG_ACCEPT')
-                    ]
-                ];
+
+				$code = 2;
+				$title = lang( 'BREADCRUMB_COMBUSTIBLE' );
+				$msg = lang( 'ERROR_(-39)' );
+
+				if( $resAPI != "Bad Request" ){
+					$rc = $dataResponse->rc;
+					$codeError = [ -197 ];
+					if( in_array( $rc, $codeError ) ) {
+						$code = 0;
+						$title = '';
+						$msg = lang('ERROR_('.$rc.')');
+					}
+				}
+
+				$response = [
+					'code' => $code,
+					'title' => $title,
+					'msg' => $msg,
+					'back' => '',
+					'lang' => [
+						'TAG_ACCEPT' => lang('TAG_ACCEPT')
+					]
+				];
+
+			}
+
                 break;
             case 401:
                 $response = [

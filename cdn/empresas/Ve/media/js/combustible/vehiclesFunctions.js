@@ -99,24 +99,6 @@ function modalAddEdit (idVehicle, vehiclesList) {
     }
 }
 
-function keyDownVal(e) {
-
-    tecla = (document.all) ? e.keyCode : e.which;
-
-    if (tecla==8) return true;
-    if (tecla == 17) return false;
-    if (tecla >= 48 && tecla<=57) return true;
-    if (tecla >= 65 && tecla<=90) return true;
-    if (tecla >= 96 && tecla<=105) return true;
-    if (tecla == 45) return true;
-    if (tecla == 189) return true;
-    if (tecla == 173) return true;
-    if (tecla == 109) return true;
-    patron = /1/;
-    tmp = String.fromCharCode(tecla);
-    return patron.test(tmp);
-}
-
 
 //Validar campos del formulario
 function validar_campos() {
@@ -131,16 +113,28 @@ function validar_campos() {
 
 	jQuery.validator.addMethod('regval', function (value, element) {
 
-		let patron1 = /([A-Za-z]{3}-[0-9]{3})/;
-		let patron2 = /([0-9]{2}[A-Za-z]{3}[0-9]{2})/;
-		let patron3 = /([A-Za-z]{3}-[0-9]{2}[A-Za-z]{1})/;
-		let patron4 = /([A-Za-z]{3}[0-9]{2}[A-Za-z]{1})/;
+		let patron1 = /([A-Za-z]{3}-[0-9]{3})/; // XXX-NNN
+		let patron2 = /([0-9]{2}[A-Za-z]{3}[0-9]{2})/; //NNXXXNN
+		let patron3 = /([A-Za-z]{3}-[0-9]{2}[A-Za-z]{1})/;//XXX-NNX
+		let patron4 = /([A-Za-z]{3}[0-9]{2}[A-Za-z]{1})/; //XXXNNX
+
+		//	Formato Antiguo
+		let patron5 = /([A-Za-z]{3}\s[0-9]{2}[A-Za-z]{1})/; // Particulares: XXX NNX
+		let patron6 = /([A-Za-z]{3}\s[0-9]{3})/; // Moto: XXX NNN
+		let patron7 = /([0-9]{2}[A-Za-z]{1}\s[A-Za-z]{3})/; // Carga: NNX XXX
+
+		//Formato Actual
+		let patron8 = /([A-Za-z]{2}[0-9]{3}[A-Za-z]{2})/; // Particulares: XXNNNXX
+		let patron9 = /([A-Za-z]{2}[0-9]{1}[A-Za-z]{1}[0-9]{2}[A-Za-z]{1})/; // Moto: XXNXNNX
+		let patron10 = /([A-Za-z]{1}[0-9]{2}[A-Za-z]{2}[0-9]{1}[A-Za-z]{1})/; // Carga: XNNXXNX
 
 		if( patron1.test(value) || patron2.test(value) ||
-				patron3.test(value) || patron4.test(value)){
+			patron3.test(value) || patron4.test(value) || patron5.test(value) ||
+			patron6.test(value) || patron7.test(value) || patron8.test(value) ||
+			patron9.test(value) || patron10.test(value) ){
 				return true;
 		}
-      }, 'Formato válido para la placa XXX-000, XXX-00X, XXX00X  y la placa 00XXX00');
+	}, 'Formato válido para la placa XXX-000, 00XXX00, XXX-00X, XXX00X, XXX 00X, XXX 000, 00X XXX, XX000XX, XX0X00X, X00XX0X');
 
 	var formaterModel = /^[a-zA-Z0-9-\s]*$/;
 
