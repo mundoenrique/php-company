@@ -52,7 +52,7 @@ class vehicleGroups_Model extends CI_Model {
                     foreach ($dataResponse->fleets as $item => $key) {
 
                         $data[$item]['idFleet'] = $key->idFlota;
-                        $data[$item]['name'] = ucfirst(strtolower($key->nombre));
+                        $data[$item]['name'] = $key->nombre;
                         $data[$item]['description'] = ucfirst(strtolower($key->descripcion));;
                         $data[$item]['status'] =  $key->estatus;
                     }
