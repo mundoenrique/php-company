@@ -18,7 +18,7 @@ $urlBase = $urlBaseA.$pais;
 						<input class="field-medium" maxlength="15" id="userName" name="userName" type="text" />
 						<label for="card-holder-id"><?= lang('RIF_NIT'); ?></label>
 						<input class="field-medium" maxlength="17" id="idEmpresa" name="idEmpresa" placeholder="<?= lang('PLACE_HOLDER_NIT'); ?>" type="text" />
-						<label for="email"><?= lang('mail'); ?></label>
+						<label for="email"><?= lang('MAIL'); ?></label>
 						<input class="field-large" id="email" maxlength="64" name="email" placeholder="<?= lang('PLACE_HOLDER_MAIL') ?>" type="text" />
 					</fieldset>
 				</form>
