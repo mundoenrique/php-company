@@ -115,23 +115,26 @@ function validar_campos() {
 
 		let patron1 = /([A-Za-z]{3}-[0-9]{3})/; // XXX-NNN
 		let patron2 = /([0-9]{2}[A-Za-z]{3}[0-9]{2})/; //NNXXXNN
-		let patron3 = /([A-Za-z]{3}-[0-9]{2}[A-Za-z]{1})/;//XXX-NNX
+		let patron3 = /([A-Za-z]{3}-[0-9]{2}[A-Za-z]{1})||([A-Za-z]{3}\s[0-9]{2}[A-Za-z]{1})/;//XXX-NNX
 		let patron4 = /([A-Za-z]{3}[0-9]{2}[A-Za-z]{1})/; //XXXNNX
 
 		//	Formato Antiguo
-		let patron5 = /([A-Za-z]{3}\s[0-9]{2}[A-Za-z]{1})/; // Particulares: XXX NNX
-		let patron6 = /([A-Za-z]{3}\s[0-9]{3})/; // Moto: XXX NNN
-		let patron7 = /([0-9]{2}[A-Za-z]{1}\s[A-Za-z]{3})/; // Carga: NNX XXX
+		let patron5 = /([A-Za-z]{3}\s[0-9]{2}[A-Za-z]{1})||([A-Za-z]{3}\s[0-9][A-Za-z]{1})/; // Particulares: XXX NNX
+		let patron6 = /([A-Za-z]{3}\s[0-9]{3})||([A-Za-z]{3}[0-9]{3})/; // Moto: XXX NNN
+		let patron7 = /([0-9]{2}[A-Za-z]{1}\s[A-Za-z]{3})||([0-9]{2}[A-Za-z]{1}[A-Za-z]{3})/; // Carga: NNX XXX
 
 		//Formato Actual
 		let patron8 = /([A-Za-z]{2}[0-9]{3}[A-Za-z]{2})/; // Particulares: XXNNNXX
 		let patron9 = /([A-Za-z]{2}[0-9]{1}[A-Za-z]{1}[0-9]{2}[A-Za-z]{1})/; // Moto: XXNXNNX
 		let patron10 = /([A-Za-z]{1}[0-9]{2}[A-Za-z]{2}[0-9]{1}[A-Za-z]{1})/; // Carga: XNNXXNX
 
+		//Otros
+		let patron11 = /([A-Za-z]{2}[0-9]{4})/; // Particulares: XXNNNN
+
 		if( patron1.test(value) || patron2.test(value) ||
 			patron3.test(value) || patron4.test(value) || patron5.test(value) ||
 			patron6.test(value) || patron7.test(value) || patron8.test(value) ||
-			patron9.test(value) || patron10.test(value) ){
+			patron9.test(value) || patron10.test(value)|| patron11.test(value)){
 				return true;
 		}
 	}, 'Formato válido para la placa XXX-000, 00XXX00, XXX-00X, XXX00X, XXX 00X, XXX 000, 00X XXX, XX000XX, XX0X00X, X00XX0X');

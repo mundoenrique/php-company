@@ -94,7 +94,7 @@ class account_model extends CI_Model {
 					]
 				];
 
-			}
+
 
                 break;
             case 401:
@@ -311,8 +311,8 @@ class account_model extends CI_Model {
     public function callAPIallocatingDriver($urlCountry, $dataRequest) {
         $ruc = $this->session->userdata('acrifS');
         $token = $this->session->userdata('token');
-        $prefix = $this->session->userdata('prefix');
-        log_message("INFO","Data recibida*********>>>>>" . json_encode($dataRequest['card']) );
+        $prefix = $this->session->userdata('idProductoS');
+        log_message("INFO","Data recibida*********>>>>>" . json_encode($dataRequest) );
 
         $header = [
             'x-country: ' . $urlCountry,
@@ -323,10 +323,12 @@ class account_model extends CI_Model {
 
         $urlAPI = 'account/allocate/'.$dataRequest['card'].'/'.$dataRequest['user'];
         $headerAPI = $header;
+
         $bodyAPI = '';
         $method = 'PUT';
 
         $jsonResponse = GetAPIServ($urlAPI, $headerAPI, $bodyAPI, $method);
+log_message( "INFO", "GET-APPI ".json_encode($header) );
 
         $httpCode = $jsonResponse->httpCode;
         $resAPI = $jsonResponse->resAPI;
