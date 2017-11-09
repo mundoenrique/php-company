@@ -103,7 +103,7 @@ $lang["TERMINOS"] = "<p><strong>Tebca Perú, Transferencia Electrónica de Benef
 
 <p>La Empresa declara que la data, información y en general los productos y servicios ofrecidos por ésta, cuando pertenecen o se refieren al Usuario, están sometidos a las disposiciones constitucionales, legales y administrativas que garantizan los derechos a la privacidad de las comunicaciones y del acceso a la información personal, según lo dispuesto en el numeral 6 del artículo 2 de la Constitución Política del Perú y en la Ley 29733, Ley de Protección de Datos Personales y su Reglamento, aprobado mediante Decreto Supremo 003-2013-JUS. </p>
 
-<p>En tal sentido, los Usuarios entienden que la información contenida, fijada y puesta a disposición del público en La Plataforma de La Empresa son considerados mensajes de datos, según los términos y condiciones que aquí se exponen. Sobre los mensajes de datos se garantizan los derechos a la privacidad de las comunicaciones y del acceso a la información personal.</p> 
+<p>En tal sentido, los Usuarios entienden que la información contenida, fijada y puesta a disposición del público en La Plataforma de La Empresa son considerados mensajes de datos, según los términos y condiciones que aquí se exponen. Sobre los mensajes de datos se garantizan los derechos a la privacidad de las comunicaciones y del acceso a la información personal.</p>
 
 <p>La Empresa declara que los mensajes de datos vienen resguardados por dispositivos de seguridad que brindan, para verificar que no han sido alterados, que han permanecido íntegros durante su generación, comunicación y transmisión, recepción y archivo, y para confirmar la identidad del emisor, con ello se puede evidenciar su origen. Asimismo, estos mensajes de datos son grabados y pueden ser recuperados para ulterior consulta. </p>
 
@@ -122,10 +122,10 @@ $lang["TERMINOS"] = "<p><strong>Tebca Perú, Transferencia Electrónica de Benef
 //change password
 $lang['FORGOT_PASS']= "Si ha olvidado o bloqueado su contraseña de acceso a <strong>Conexión Empresas Online</strong>, por favor ingrese los datos que se solicitan a continuación.";
 $lang['USER_USER']= "Usuario";
-$lang['RIF_NIT']= "NIT de la Empresa";
+$lang['RIF_NIT']= "RUC de la Empresa";
 $lang['MAIL']= "Correo electrónico";
 $lang['INFO_CHANGE_PASS']= "Cambio de contraseña";
 $lang['INFO_REDIRECT']= "Redireccionando...";
 $lang['CHANGE_OK']= "Proceso exitoso";
-$lang['PLACE_HOLDER_NIT'] = "000.000.000-0";
+$lang['PLACE_HOLDER_NIT'] = "00000000000";
 $lang['PLACE_HOLDER_MAIL'] = "usuario@ejemplo.com";
