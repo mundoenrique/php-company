@@ -595,15 +595,16 @@
 
 					/// in this point we get the value of mesesVencimiento that came in the response and we added to the expire date calculation method and seted in a global variable session to be sended to the view.
 
-					$mesesVencimiento = $responseMenuPorProducto->estadistica->producto->mesesVencimiento;
-					$actualDate = date('Y-m');
-					$newDate = strtotime ( '+'.$mesesVencimiento.' month' , strtotime ( $actualDate ) ) ;
-					$expireDate = date ( 'm/Y' , $newDate );
-					$mesesVencimiento = array(
-						'mesesVencimiento'=>$expireDate
-					);
-					$this->session->set_userdata($mesesVencimiento);
-
+					if (isset($responseMenuPorProducto->estadistica->producto->mesesVencimiento)) {
+						$mesesVencimiento = $responseMenuPorProducto->estadistica->producto->mesesVencimiento;
+						$actualDate = date('Y-m');
+						$newDate = strtotime ('+' . $mesesVencimiento.' month' , strtotime ($actualDate)) ;
+						$expireDate = date ('m/Y' , $newDate);
+						$mesesVencimiento = array(
+							'mesesVencimiento'=>$expireDate
+						);
+						$this->session->set_userdata($mesesVencimiento);
+					}
 
 					$responseMenuPorProducto->estadistica->producto->descripcion;
 					$titlePage = "Conexión Empresas Online - ".$nombreEmpresaT;
