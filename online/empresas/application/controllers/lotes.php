@@ -2403,7 +2403,7 @@ class Lotes extends CI_Controller {
 		if($paisS==$urlCountry && $logged_in && $moduloAct!==false){
 			$FooterCustomInsertJS=["jquery-1.10.2.min.js","jquery-ui-1.10.3.custom.min.js","jquery.balloon.min.js","jquery.paginate.js","header.js","dashboard/widget-empresa.js","jquery.fileupload.js","jquery.iframe-transport.js","jquery-md5.js","lotes/lotes-reproceso.js"];
 			$FooterCustomJS="";
-			$titlePage="Reproceso de lotes";
+			$titlePage="Reproceso de Datos";
 
 			$programa = $this->session->userdata('nombreProductoS').' / '. $this->session->userdata('marcaProductoS') ;
 
