@@ -243,12 +243,12 @@ function initMap() {
                     directionsDisplay.setMap(mapResume);
                     directionsDisplay.setPanel($("#panel_ruta").get(0));
                     directionsDisplay.setDirections(response);
-                } else {                    
-                    notiSystemMap('Viajes');
+                } else {
+                    notiSystemMap('Viajes',1,"");
                 }
             });
         }
-        
+
         if($('#datailTravel').hasClass('elem-hidden') == false) {
 
             //Detalle
@@ -277,13 +277,32 @@ function initMap() {
                 if (status == google.maps.DirectionsStatus.OK) {
                     directionsDisplay.setMap(mapDetail);
                     directionsDisplay.setDirections(response);
-                } else {                    
-                    notiSystemMap('Viajes');
+                } else {
+                    notiSystemMap('Viajes',1,"");
                 }
             });
         }
     }
-    function error(error){console.log('Error: '+ error)}
+    function error(error){
+        switch(error.code) {
+			case error.PERMISSION_DENIED:
+				var Mensaje = "Por favor habilite el permiso para la geolocalización en su navegador.";
+				notiSystemMap ( "Viajes", 0, Mensaje );
+				break;
+			case error.POSITION_UNAVAILABLE:
+				var Mensaje = "La ubicación no está disponible.";
+				notiSystemMap ( "Viajes", 0, Mensaje );
+				break;
+			case error.TIMEOUT:
+				var Mensaje =  "Se ha excedido el tiempo para obtener la ubicación.";
+				notiSystemMap ( "Viajes", 0, Mensaje );
+				break;
+			case error.UNKNOWN_ERROR:
+				var Mensaje =  "La ubicación no está disponible, por favor intente mas tarde.";
+				notiSystemMap ( "Viajes", 0, Mensaje );
+				break;
+		}
+    }
 }
 
 function routeDetail() {
@@ -307,15 +326,12 @@ function routeDetail() {
     var requestDetail = {
         origin: '10.48394044581661,-66.86893584714358',
         destination: '10.491282969640187,-66.85743453488772',
-        travelMode: google.maps.DirectionsTravelMode.DRIVING,
-        // unitSystem: google.maps.DirectionsUnitSystem.METRIC,
-        // provideRouteAlternatives: true
+        travelMode: google.maps.DirectionsTravelMode.DRIVING
     };
 
     directionsService.route(requestDetail, function (response, status) {
         if (status == google.maps.DirectionsStatus.OK) {
             directionsDisplay.setMap(mapDetail);
-            // directionsDisplay.setPanel($("#panel_ruta").get(0));
             directionsDisplay.setDirections(response);
         } else {
             console.log("No existen rutas entre ambos puntos");
@@ -325,7 +341,14 @@ function routeDetail() {
 
 }
 
-function notiSystemMap (title) {
+function notiSystemMap ( title, init = 1, Mensaje ) {
+
+	let htmlMsg = (init == 1)?
+		"<p>No existen rutas entre ambos puntos</p>":
+			"<p>"+Mensaje+"</p>";
+
+	$( "#msg" ).html(htmlMsg);
+  
     $( "#msj-map").dialog({
         title : title,
         modal: 'true',
@@ -344,9 +367,11 @@ function notiSystemMap (title) {
         $('#travelAdd, #clear-form').attr('step', 'third');
         $('#pointStart, #get-route, #clear-form, #travelAdd').removeClass('elem-hidden');
         $( "#msj-map" ).dialog('close');
-        initMap();
+
+		    if(init == 1){	initMap(); }
+
         $('#clear-form').text(lang.TAG_RETURN);
         $('#travelAdd').text(lang.TAG_FOLLOW);
-    });
 
+    });
 }

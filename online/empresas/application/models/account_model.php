@@ -69,13 +69,28 @@ class account_model extends CI_Model {
                 }
                 break;
             case 400:
+                $code = 2;
+                $title = lang( 'BREADCRUMB_COMBUSTIBLE' );
+                $msg = lang( 'ERROR_(-39)' );
+
+                if( $resAPI != "Bad Request" ){
+                  $rc = $dataResponse->rc;
+                  $codeError = [ -197 ];
+                  if( in_array( $rc, $codeError ) ) {
+                    $code = 0;
+                    $title = '';
+                    $msg = lang('ERROR_('.$rc.')');
+                  }
+                }
+
                 $response = [
-                    'code' => 2,
-                    'title' => lang('BREADCRUMB_COMBUSTIBLE'),
-                    'msg' => lang('ERROR_(-39)'),
-                    'language' => [
-                        'TAG_ACCEPT' => lang('TAG_ACCEPT')
-                    ]
+                  'code' => $code,
+                  'title' => $title,
+                  'msg' => $msg,
+                  'back' => '',
+                  'lang' => [
+                    'TAG_ACCEPT' => lang('TAG_ACCEPT')
+                  ]
                 ];
                 break;
             case 401:
@@ -87,8 +102,6 @@ class account_model extends CI_Model {
                         'TAG_ACCEPT' => lang('TAG_ACCEPT')
                     ]
                 ];
-//                $this->session->sess_destroy();
-//                $this->session->unset_userdata($this->session->all_userdata());
                 break;
             case 404:
                 $response = [
@@ -108,9 +121,6 @@ class account_model extends CI_Model {
                         'TAG_ACCEPT' => lang('TAG_ACCEPT')
                     ]
                 ];
-//                $this->session->sess_destroy();
-//                $this->session->unset_userdata($this->session->all_userdata());
-
         }
 
         return $response;
@@ -292,8 +302,8 @@ class account_model extends CI_Model {
     public function callAPIallocatingDriver($urlCountry, $dataRequest) {
         $ruc = $this->session->userdata('acrifS');
         $token = $this->session->userdata('token');
-        $prefix = $this->session->userdata('prefix');
-        log_message("INFO","Data recibida*********>>>>>" . json_encode($dataRequest['card']) );
+        $prefix = $this->session->userdata('idProductoS');
+        log_message("INFO","Data recibida*********>>>>>" . json_encode($dataRequest) );
 
         $header = [
             'x-country: ' . $urlCountry,
@@ -308,6 +318,7 @@ class account_model extends CI_Model {
         $method = 'PUT';
 
         $jsonResponse = GetAPIServ($urlAPI, $headerAPI, $bodyAPI, $method);
+        log_message( "INFO", "GET-APPI ".json_encode($header) );
 
         $httpCode = $jsonResponse->httpCode;
         $resAPI = $jsonResponse->resAPI;
