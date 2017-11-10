@@ -248,7 +248,7 @@ function initMap() {
                 }
             });
         }
-
+      
         if($('#datailTravel').hasClass('elem-hidden') == false) {
 
             //Detalle
@@ -351,7 +351,7 @@ function notiSystemMap ( title, init = 1, Mensaje ) {
 			"<p>"+Mensaje+"</p>";
 
 	$( "#msg" ).html(htmlMsg);
-
+  
     $( "#msj-map").dialog({
         title : title,
         modal: 'true',
@@ -360,7 +360,6 @@ function notiSystemMap ( title, init = 1, Mensaje ) {
         draggable: false,
         rezise: false,
         open: function(event, ui) {
-
             $('.ui-dialog-titlebar-close', ui.dialog).hide();
         }
     });
@@ -372,7 +371,7 @@ function notiSystemMap ( title, init = 1, Mensaje ) {
         $('#pointStart, #get-route, #clear-form, #travelAdd').removeClass('elem-hidden');
         $( "#msj-map" ).dialog('close');
 
-		if(init == 1){	initMap(); }
+		    if(init == 1){	initMap(); }
 
         $('#clear-form').text(lang.TAG_RETURN);
         $('#travelAdd').text(lang.TAG_FOLLOW);

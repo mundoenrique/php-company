@@ -326,15 +326,12 @@ function routeDetail() {
     var requestDetail = {
         origin: '10.48394044581661,-66.86893584714358',
         destination: '10.491282969640187,-66.85743453488772',
-        travelMode: google.maps.DirectionsTravelMode.DRIVING,
-        // unitSystem: google.maps.DirectionsUnitSystem.METRIC,
-        // provideRouteAlternatives: true
+        travelMode: google.maps.DirectionsTravelMode.DRIVING
     };
 
     directionsService.route(requestDetail, function (response, status) {
         if (status == google.maps.DirectionsStatus.OK) {
             directionsDisplay.setMap(mapDetail);
-            // directionsDisplay.setPanel($("#panel_ruta").get(0));
             directionsDisplay.setDirections(response);
         } else {
             console.log("No existen rutas entre ambos puntos");
@@ -351,7 +348,7 @@ function notiSystemMap ( title, init = 1, Mensaje ) {
 			"<p>"+Mensaje+"</p>";
 
 	$( "#msg" ).html(htmlMsg);
-
+  
     $( "#msj-map").dialog({
         title : title,
         modal: 'true',
@@ -360,7 +357,6 @@ function notiSystemMap ( title, init = 1, Mensaje ) {
         draggable: false,
         rezise: false,
         open: function(event, ui) {
-
             $('.ui-dialog-titlebar-close', ui.dialog).hide();
         }
     });
@@ -372,7 +368,7 @@ function notiSystemMap ( title, init = 1, Mensaje ) {
         $('#pointStart, #get-route, #clear-form, #travelAdd').removeClass('elem-hidden');
         $( "#msj-map" ).dialog('close');
 
-		if(init == 1){	initMap(); }
+		    if(init == 1){	initMap(); }
 
         $('#clear-form').text(lang.TAG_RETURN);
         $('#travelAdd').text(lang.TAG_FOLLOW);

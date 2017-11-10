@@ -69,33 +69,29 @@ class account_model extends CI_Model {
                 }
                 break;
             case 400:
+                $code = 2;
+                $title = lang( 'BREADCRUMB_COMBUSTIBLE' );
+                $msg = lang( 'ERROR_(-39)' );
 
-				$code = 2;
-				$title = lang( 'BREADCRUMB_COMBUSTIBLE' );
-				$msg = lang( 'ERROR_(-39)' );
+                if( $resAPI != "Bad Request" ){
+                  $rc = $dataResponse->rc;
+                  $codeError = [ -197 ];
+                  if( in_array( $rc, $codeError ) ) {
+                    $code = 0;
+                    $title = '';
+                    $msg = lang('ERROR_('.$rc.')');
+                  }
+                }
 
-				if( $resAPI != "Bad Request" ){
-					$rc = $dataResponse->rc;
-					$codeError = [ -197 ];
-					if( in_array( $rc, $codeError ) ) {
-						$code = 0;
-						$title = '';
-						$msg = lang('ERROR_('.$rc.')');
-					}
-				}
-
-				$response = [
-					'code' => $code,
-					'title' => $title,
-					'msg' => $msg,
-					'back' => '',
-					'lang' => [
-						'TAG_ACCEPT' => lang('TAG_ACCEPT')
-					]
-				];
-
-
-
+                $response = [
+                  'code' => $code,
+                  'title' => $title,
+                  'msg' => $msg,
+                  'back' => '',
+                  'lang' => [
+                    'TAG_ACCEPT' => lang('TAG_ACCEPT')
+                  ]
+                ];
                 break;
             case 401:
                 $response = [
@@ -106,8 +102,6 @@ class account_model extends CI_Model {
                         'TAG_ACCEPT' => lang('TAG_ACCEPT')
                     ]
                 ];
-//                $this->session->sess_destroy();
-//                $this->session->unset_userdata($this->session->all_userdata());
                 break;
             case 404:
                 $response = [
@@ -127,9 +121,6 @@ class account_model extends CI_Model {
                         'TAG_ACCEPT' => lang('TAG_ACCEPT')
                     ]
                 ];
-//                $this->session->sess_destroy();
-//                $this->session->unset_userdata($this->session->all_userdata());
-
         }
 
         return $response;
@@ -323,12 +314,11 @@ class account_model extends CI_Model {
 
         $urlAPI = 'account/allocate/'.$dataRequest['card'].'/'.$dataRequest['user'];
         $headerAPI = $header;
-
         $bodyAPI = '';
         $method = 'PUT';
 
         $jsonResponse = GetAPIServ($urlAPI, $headerAPI, $bodyAPI, $method);
-log_message( "INFO", "GET-APPI ".json_encode($header) );
+        log_message( "INFO", "GET-APPI ".json_encode($header) );
 
         $httpCode = $jsonResponse->httpCode;
         $resAPI = $jsonResponse->resAPI;

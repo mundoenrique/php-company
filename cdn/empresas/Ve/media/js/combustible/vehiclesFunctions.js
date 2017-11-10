@@ -99,10 +99,8 @@ function modalAddEdit (idVehicle, vehiclesList) {
     }
 }
 
-
 //Validar campos del formulario
 function validar_campos() {
-
     var year = new Date();
     year = year.getFullYear() + 1;
     console.log(year);

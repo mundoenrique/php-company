@@ -49,7 +49,7 @@ function initMap() {
             var bounds = new google.maps.LatLngBounds();
 
             marker.setPosition(places[0].geometry.location);
-
+          
             var markerPosition={
                 "latitud": marker.position.lat(),
                 "longitud": marker.position.lng()
@@ -73,7 +73,7 @@ function initMap() {
             }
             map.fitBounds(bounds);
         });
-
+      
         //Marcador de ubicación
         marker2 = new google.maps.Marker({
             position: latLng,
@@ -126,9 +126,8 @@ function initMap() {
             }
             map2.fitBounds(bounds2);
         });
-
+      
         google.maps.event.addListener(marker, 'dragend', function (event) {
-
             var lat  = event.latLng.lat(),
                 lng = event.latLng.lng();
             var startPosition = [event.latLng.lat(),event.latLng.lng()];
@@ -143,7 +142,6 @@ function initMap() {
                 });
         });
         google.maps.event.addListener(marker2, 'dragend', function (event) {
-
             var lat  = event.latLng.lat(),
                 lng = event.latLng.lng();
 
@@ -176,6 +174,7 @@ function initMap() {
             };
 
             var mapResume = new google.maps.Map(document.getElementById('map-resume'), mapOptionsResume);
+          
             var start = $('#orgL').val();
             var end = $('#desL').val();
 
@@ -197,7 +196,7 @@ function initMap() {
                 }
             });
         }
-
+      
         if($('#datailTravel').hasClass('elem-hidden') == false) {
 
             //Detalle
@@ -232,6 +231,7 @@ function initMap() {
             });
         }
     }
+  
     function error(error){
         switch(error.code) {
             case error.PERMISSION_DENIED:
@@ -274,9 +274,7 @@ function routeDetail() {
     var requestDetail = {
         origin: '10.48394044581661,-66.86893584714358',
         destination: '10.491282969640187,-66.85743453488772',
-        travelMode: google.maps.DirectionsTravelMode.DRIVING,
-        // unitSystem: google.maps.DirectionsUnitSystem.METRIC,
-        // provideRouteAlternatives: true
+        travelMode: google.maps.DirectionsTravelMode.DRIVING
     };
 
     directionsService.route(requestDetail, function (response, status) {
@@ -296,28 +294,25 @@ function notiSystemMap ( title, init = 1, Mensaje ) {
 			"<p>"+Mensaje+"</p>";
 
 	$( "#msg" ).html(htmlMsg);
-
+  
     $( "#msj-map").dialog({
         title : title,
         modal: 'true',
         width: '210px',
-        // closeOnEscape: false,
         draggable: false,
         rezise: false,
         open: function(event, ui) {
-
             $('.ui-dialog-titlebar-close', ui.dialog).hide();
         }
     });
 
     $('button#accept-info').click(function () {
-
         $('#resume, #clear-form, #travelAdd').addClass('elem-hidden');
         $('#travelAdd, #clear-form').attr('step', 'third');
         $('#pointStart, #get-route, #clear-form, #travelAdd').removeClass('elem-hidden');
         $( "#msj-map" ).dialog('close');
 
-		if(init == 1){	initMap(); }
+		    if(init == 1){	initMap(); }
 
         $('#clear-form').text(lang.TAG_RETURN);
         $('#travelAdd').text(lang.TAG_FOLLOW);
