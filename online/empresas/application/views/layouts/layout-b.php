@@ -14,12 +14,12 @@
 			<div class="aviso elem-hidden">
 				<div id="widget-info" style="width: 200px;">
 					<span data-icon="&#xe09d;" class="icon" aria-hidden="true" style="font-size: 30px; padding-right: 25px;"></span>
-					AVISO IMPORTANTE                                 
+					AVISO IMPORTANTE
 					<!-- <img src="https://cdn.novopayment.dev/empresas/Ve/media/img/alerta.png" style="margin: -10px 34px"> -->
 
 				</div>
-				<div id="widget-info-2">					
-					A partir del 14 de julio de 2017 se ajustará a Bs 10.000 el cobro mínimo mensual a aquellas facturas cuyo Servicio Administrativo sea inferior a esa cantidad y la tarifa mensual por concepto de Servicios Operativos y de Logística será de Bs. 7.500 quedando exceptuadas aquellas facturas con Servicio Administrativo Mínimo.
+				<div id="widget-info-2">
+					A partir del 16 de octubre de 2017 se ajustará a Bs 15.000 el cobro mínimo mensual a aquellas facturas cuyo Servicio Administrativo sea inferior a esa cantidad y la tarifa mensual por concepto de Servicios Operativos y de Logística será de Bs. 12.000 quedando exceptuadas aquellas facturas con Servicio Administrativo Mínimo.
 				</div>
 			</div>
 			<?php } ?>

@@ -37,10 +37,11 @@ $lang['BREADCRUMB_TITL_BUSCAR'] = 'Buscar texto';
 //MENU OPCIONES
 $lang['MENU_INICIO']= "Inicio";
 $lang['GESLOT']= "Lotes";  // perfil
-$lang['CONSUL']= "Consulta";  //perfil 
+$lang['CONSUL']= "Consulta";  //perfil
 $lang['SERVIC']= "Servicios"; // perfil
 $lang['GESREP']= "Reportes";  // perfil
 $lang['TEBCAR']= "Carga de Lotes"; // modulo
+$lang['COMBUS']= "Trayectos"; // perfil
 
 $lang['TICARG']= "Solicitud"; // modulo
 $lang['TIINVN']= "Inventario"; // modulo
@@ -72,6 +73,12 @@ $lang['REPREP']= "Reposiciones";
 $lang['REPLOT']= "Estatus de lotes";
 $lang['TEBTHA']= "Tarjetahabientes";
 $lang['TEBACT']= "Actualización de datos"; // funcion no activa, es una mejora de tebpol
+
+//Combustible
+$lang['CMBCON'] = 'Conductores';
+$lang['CMBVHI'] = 'Vehículos';
+$lang['CMBCTA'] = 'Cuentas';
+$lang['CMBVJE'] = 'Viajes';
 
 $lang['LOAD'] = 'Más empresas';
 $lang['DASH150'] = 'El usuario no tiene empresas asociadas';
