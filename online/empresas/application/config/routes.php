@@ -102,6 +102,7 @@ $route['api/v1/(:any)/lotes/reproceso/buscar'] = "lotes/buscarListaBeneficiarios
 $route['api/v1/(:any)/lotes/reproceso/modificar'] = "lotes/modificarBeneficiario/$1";
 $route['api/v1/(:any)/lotes/reproceso/eliminar'] = "lotes/eliminarBeneficiario/$1";
 $route['api/v1/(:any)/lotes/reproceso/reprocesar'] = "lotes/reprocesar/$1";
+$route['api/v1/(:any)/lotes/reproceso/reprocesarMasivo'] = "lotes/reprocesarMasivo/$1";
 $route['api/v1/(:any)/lotes/eliminar'] = "lotes/eliminarLotes/$1";
 $route['api/v1/(:any)/lotes/detalle'] = "lotes/verDetalleBandeja/$1";
 $route['api/v1/(:any)/lotes/lista/pendientes'] = "lotes/getLotesPorConfirmarJSON/$1";
@@ -161,6 +162,8 @@ $route['(:any)/reportes/actividad-por-usuario'] = "reportes/actividadporusuario/
 $route['(:any)/reportes/estados-de-cuenta'] = "reportes/estadosdecuenta/$1";
 $route['(:any)/reportes/gastos-por-categorias'] = "reportes/gastosporcategorias/$1";
 $route['(:any)/reportes/tarjetahabientes'] = "reportes/tarjetahabientes/$1";
+$route['(:any)/reportes/guarderia'] = "reportes/guarderia/$1";
+$route['(:any)/reportes/GuarderiaResult'] = "reportes/getGuarderiaResult/";
 //CONSULTAS
 $route['(:any)/consulta/ordenes-de-servicio'] = "consultas/ordenesServicio/$1";
 $route['(:any)/consulta/tarjetahabientes'] = "consultas/tarjetahabientes/$1";

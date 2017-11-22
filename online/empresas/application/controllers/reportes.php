@@ -4380,7 +4380,191 @@ class Reportes extends CI_Controller {
         }
     }
 
+		//------------------------------- Reporte Guarderia  -------------------------------------------
 
+    /**
+     * Pantalla para la consulta de Guardería Electrónica.
+     *
+     * @param  string $urlCountry
+     */
+    public function guarderia($urlCountry)
+    {
+        //VALIDATE COUNTRY
+        np_hoplite_countryCheck($urlCountry);
 
+        $this->lang->load('reportes');
+        $this->lang->load('dashboard');
+        $this->lang->load('users');
+        $this->load->library('parser');
+        $this->lang->load('erroreseol');
 
+        $logged_in = $this->session->userdata('logged_in');
+
+        $paisS = $this->session->userdata('pais');
+
+        $menuP =$this->session->userdata('menuArrayPorProducto');
+        $moduloAct = np_hoplite_existeLink($menuP,"TEBTHA");
+
+        if($paisS==$urlCountry && $logged_in && $moduloAct!==false){
+
+            $nombreCompleto = $this->session->userdata('nombreCompleto');
+            $lastSessionD = $this->session->userdata('lastSession');
+
+            $FooterCustomInsertJS=["jquery-1.10.2.min.js","jquery-ui-1.10.3.custom.min.js",
+							"header.js","jquery.balloon.min.js","jquery.dataTables.min.js",
+							"reportes/guarderia.js"];
+
+            $FooterCustomJS="";
+            $titlePage="Conexión Empresas Online - Reportes";
+
+            $menuHeader = $this->parser->parse('widgets/widget-menuHeader',array(),TRUE);
+            $menuFooter = $this->parser->parse('widgets/widget-menuFooter',array(),TRUE);
+
+            $header = $this->parser->parse('layouts/layout-header',
+							array('bodyclass'=>'','menuHeaderActive'=>TRUE,'menuHeaderMainActive'=>TRUE,
+							'menuHeader'=>$menuHeader,'titlePage'=>$titlePage),TRUE);
+
+            $footer = $this->parser->parse('layouts/layout-footer',
+							array('menuFooterActive'=>TRUE,'menuFooter'=>$menuFooter,
+									'FooterCustomInsertJSActive'=>TRUE,'FooterCustomInsertJS'=>$FooterCustomInsertJS,
+									'FooterCustomJSActive'=>TRUE,'FooterCustomJS'=>$FooterCustomJS),TRUE);
+
+            $content = $this->parser->parse('reportes/content-guarderia',array(
+                'titulo'=>$nombreCompleto,
+                'breadcrum'=>'',
+                'lastSession'=>$lastSessionD,
+            ),TRUE);
+
+            $sidebarLotes= $this->parser->parse('widgets/widget-publi-4',
+																	array('sidebarActive'=>TRUE),TRUE);
+
+            $datos = array(
+                'header'=>$header,
+                'content'=>$content,
+                'footer'=>$footer,
+                'sidebar'=>$sidebarLotes,
+            );
+
+            $this->parser->parse('layouts/layout-b', $datos);
+        }else{
+            redirect($urlCountry.'/login/');
+        }
+    }
+
+		/**
+     * Método para obtener los datos para el reporte de los tarjetas Habientes
+     *
+     * @param  string $urlCountry
+     * @return JSON
+     */
+    public function getGuarderiaResult($urlCountry){
+
+log_message('info', 'getGuarderiaResult 1 ==================>>>>' );
+        np_hoplite_countryCheck($urlCountry);
+
+        $logged_in = $this->session->userdata('logged_in');
+log_message('info', 'Login  ==================>>>>'.json_encode($logged_in) );
+        $paisS = $this->session->userdata('pais');
+log_message('info', 'Login  ==================>>>>'.json_encode($paisS) );
+log_message('info', 'Login  ==================>>>>'.json_encode($logged_in) );
+log_message('info', 'Login  ==================>>>>'.json_encode($moduloAct) );
+
+        $menuP =$this->session->userdata('menuArrayPorProducto');
+        $moduloAct = np_hoplite_existeLink($menuP,"TEBTHA");
+
+        if($paisS==$urlCountry && $logged_in && $moduloAct!==false){
+											log_message('info', 'getGuarderiaResult 2==================>>>>' );
+            //Validate Request For Ajax
+            if($this->input->is_ajax_request()){
+											log_message('info', 'getGuarderiaResult 3==================>>>>' );
+                if ($this->form_validation->run() == FALSE)
+                {
+                    echo "FORM NO VALIDO";
+                }
+                else
+                {
+
+										$Fechaini = $this->input->post('Fechaini');
+										$Fechafin = $this->input->post('Fechafin');
+
+                    $acrif = $this->input->post('acrif');
+                    $username = $this->session->userdata('userName');
+                    $token = $this->session->userdata('token');
+                    $pruebaTabla = $this->callWSGuarderia( $urlCountry, $token, $username, $acrif, $Fechaini, $Fechafin );
+
+                    $this->output->set_content_type('application/json')->set_output(json_encode($pruebaTabla));
+                }
+            }
+        }else{
+							log_message('info', 'getGuarderiaResult 4 ==================>>>>' );
+            $this->session->sess_destroy();
+            $this->session->unset_userdata($this->session->all_userdata());
+            $this->output->set_content_type('application/json')->set_output(json_encode( array('ERROR' => lang('ERROR_(-29)'), "rc"=> "-29")));
+        }
+
+    }
+		function callWSGuarderia( $urlCountry, $token, $username, $acrif, $Fechaini, $Fechafin ){
+
+				$this->lang->load('erroreseol');//HOJA DE ERRORES;
+				$canal = "ceo";
+				$modulo="Reporte por Producto";
+				$function="Consultar Guarderia";
+				$operation="reporteGuarderiaElectronica";
+
+				$className="com.novo.objects.TOs.RegistrosLoteGuarderiaTO";
+				$timeLog= date("m/d/Y H:i");
+				$ip= $this->input->ip_address();
+				$sessionId = $this->session->userdata('sessionId');
+				$logAcceso = np_hoplite_log($sessionId,$username,$canal,$modulo,$function,$operacion,0,$ip,$timeLog);
+
+				$data = array(
+						"idOperation" => $operation,
+						"className" => $className,
+						"Id_ext_emp"=> $acrif,
+						"Fechaini" => $Fechaini,
+						"Fechafin" => $Fechafin,
+						"logAccesoObject"=>$logAcceso,
+						"token"=>$token,
+						"pais"=>$urlCountry
+				);
+
+				$data = json_encode( $data, JSON_UNESCAPED_UNICODE);
+				$dataEncry = np_Hoplite_Encryption( $data);
+				$data = array( 'bean' => $dataEncry, 'pais' =>$urlCountry );
+				$data = json_encode($data);
+				$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+				$jsonResponse = np_Hoplite_Decrypt($response);
+				$response =  json_decode(utf8_encode($jsonResponse));
+				$data1 = json_encode($response);
+				//log_message('info','SALIDA desencriptada callWSEstatusTarjetasHabientes '.$data1);
+				log_message('info','SALIDA desencriptada callWSGuarderia '.$data1);
+				if($response){
+						log_message('info','Estatus Lotes '.$response->rc."/".$response->msg);
+						if($response->rc==0){
+								return $response;
+						}else{
+
+										if($response->rc==-61 || $response->rc==-29){
+												$codigoError = array('mensaje' => lang('ERROR_(-29)'), "rc"=> "-29");
+												$this->session->unset_userdata($this->session->all_userdata());
+												$this->session->sess_destroy();
+												return $codigoError;
+
+										}else{
+												$codigoError = lang('ERROR_('.$response->rc.')');
+												if(strpos($codigoError, 'Error')!==false){
+														$codigoError = array('mensaje' => lang('ERROR_GENERICO_USER'), "rc"=> $response->rc);
+												}else{
+														$codigoError = array('mensaje' => lang('ERROR_('.$response->rc.')'), "rc"=> $response->rc);
+												}
+
+												return $codigoError;
+										}
+						}
+
+				}else{
+						log_message('info','Estatus Lotes NO WS ');
+						return $codigoError = array('mensaje' => lang('ERROR_GENERICO_USER'));
+				}
+		}
 } // FIN DE LA CLASE Reportes
