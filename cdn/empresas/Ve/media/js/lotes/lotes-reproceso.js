@@ -45,7 +45,7 @@ $(function(){ // Document ready
 
 
 	$('#btnCrearBenf').on('click', function(){
-		
+
 		$('#monto').keyup();
 		$('#nroCuentaGuard').keyup();
 
@@ -69,21 +69,41 @@ $(function(){ // Document ready
 		datosPost.paginar = true;
 		datosPost.pgActual = 1;
 		datosPost.tamPg = tamPg;
-		
+
 		WSbeneficiario('crear', datosPost, pass, 'Crear beneficiario',$(".crear"), $("#btnCrearBenf"));
 
 
 	});
 
+function WS(funcion, datosPost, titulo, pass){
+	console.log(pass);
+	console.log(datosPost);
+	datosPost.pass='d41d8cd98f00b204e9800998ecf8427e';
+	$.post(baseURL+api+isoPais+'/lotes/reproceso/'+funcion, datosPost).done(function(data){
+		console.log(data);
+		//$("#loading").dialog("destroy");
+		if(!data.ERROR){
+			$(".ui-dialog-content").dialog("destroy");
+			notificacion(titulo,'Proceso exitoso');
+			$('.campos-reproceso input').val('');
+			$(".buscar").addClass('elem-hidden');
+			funcion=='modificar' ? $("."+datosPost.pgActual).remove():$("#lista-reproceso tbody").empty();
+			pintar(data);
+		}else{
+			if(data.ERROR=='-29'){
+				alert('Usuario actualmente desconectado'); location.reload();
+			}else{
+				notificacion(titulo, data.ERROR);
+			}
+		}
+	});
+}
 	function WSbeneficiario(funcion, datosPost,pass, titulo, $contenedor, $btn){
 
 		tipoLote = datosPost.tipo.toUpperCase();
-
-
-	    $contenedor.find(".error").removeClass("error");
+	  $contenedor.find(".error").removeClass("error");
 
 		if( verificar(datosPost, datosPost.tipo, $contenedor) ){
-
 			if( pass=='' ){
 				notificacion(titulo, "Debe ingresar su contraseña.");
 				$("#pass"+funcion).addClass("error");
@@ -92,7 +112,7 @@ $(function(){ // Document ready
 				datosPost.pass=hex_md5(pass);
 
 				$("#loading").dialog({title:titulo,modal:true,resizable:false,close: function(){$(this).dialog("destroy");}})
-				$btn.hide(); 
+				$btn.hide();
 				datosPost.monto = datosPost.monto.replace(',','.');
 				$.post(baseURL+api+isoPais+'/lotes/reproceso/'+funcion, datosPost).done(function(data){
 					$("#loading").dialog("destroy");
@@ -100,28 +120,23 @@ $(function(){ // Document ready
 					if(!data.ERROR){
 						$(".ui-dialog-content").dialog("destroy");
 						notificacion(titulo,'Proceso exitoso');
-						$('.campos-reproceso input').val('');		
-						
+						$('.campos-reproceso input').val('');
 						$(".buscar").addClass('elem-hidden');
 						funcion=='modificar' ? $("."+datosPost.pgActual).remove():$("#lista-reproceso tbody").empty();
-						
-						pintar(data);	
+						pintar(data);
 					}else{
 						if(data.ERROR=='-29'){
 							alert('Usuario actualmente desconectado'); location.reload();
 						}else{
-							notificacion(titulo, data.ERROR);                            
+							notificacion(titulo, data.ERROR);
 						}
 					}
-
 				});
 			}
 		}else{
 			notificacion(titulo, "Formulario inválido, verifique los datos suministrados.");
 		}
 	}
-
-
 
 	function verificar(datosPost, tipo, $contenedor){
 		emailRegex = /^([^]+[\w-\.]+@([\w-]+\.)+[\w-]{2,4})+$/;
@@ -133,56 +148,56 @@ $(function(){ // Document ready
 		montoRegex = /^-?[0-9]+([\,][0-9]{0,2})?$/;
 
 		validez=true;
-		
+
 		if(tipo=="E"){
-			if( !emailRegex.test(datosPost.emailEmpl) || datosPost.emailEmpl=='' ){	
-				$contenedor.find("#emailEmpl").addClass('error');				
+			if( !emailRegex.test(datosPost.emailEmpl) || datosPost.emailEmpl=='' ){
+				$contenedor.find("#emailEmpl").addClass('error');
 				validez= false;
 			}
-			if( !emailRegex.test(datosPost.emailGuard) || datosPost.emailGuard=='' ){	
-				$contenedor.find("#emailGuard").addClass('error');				
+			if( !emailRegex.test(datosPost.emailGuard) || datosPost.emailGuard=='' ){
+				$contenedor.find("#emailGuard").addClass('error');
 				validez= false;
 			}
-			if( !rifRegex.test(datosPost.idfiscalGuard) || datosPost.idfiscalGuard=='' ){			
-				$contenedor.find("#idfiscalGuard").addClass('error');			
+			if( !rifRegex.test(datosPost.idfiscalGuard) || datosPost.idfiscalGuard=='' ){
+				$contenedor.find("#idfiscalGuard").addClass('error');
 				validez= false;
 			}
-			if( !nroctaRegex.test(datosPost.nroCuentaGuard) || datosPost.nroCuentaGuard=='' ){		
-				$contenedor.find("#nroCuentaGuard").addClass('error');			
+			if( !nroctaRegex.test(datosPost.nroCuentaGuard) || datosPost.nroCuentaGuard=='' ){
+				$contenedor.find("#nroCuentaGuard").addClass('error');
 				validez= false;
 			}
 		}
 
 		if( ! ciRegex.test(datosPost.idPersona) || datosPost.idPersona=='' ){
-			$contenedor.find("#idPersona").addClass('error');			
+			$contenedor.find("#idPersona").addClass('error');
 			validez= false;
 		}
 		if( ! alfaRegex.test(datosPost.apellEmpl) || datosPost.apellEmpl=='' ){
-			$contenedor.find("#apellEmpl").addClass('error');			
+			$contenedor.find("#apellEmpl").addClass('error');
 			validez= false;
 		}
 		if( ! alfaRegex.test(datosPost.nombEmpl) || datosPost.nombEmpl=='' ){
-			$contenedor.find("#nombEmpl").addClass('error');			
+			$contenedor.find("#nombEmpl").addClass('error');
 			validez= false;
 		}
 		if( ! alfaRegex.test(datosPost.apellInfant) || datosPost.apellInfant=='' ){
-			$contenedor.find("#apellInfant").addClass('error');			
+			$contenedor.find("#apellInfant").addClass('error');
 			validez= false;
 		}
 		if( ! alfaRegex.test(datosPost.nombInfant) || datosPost.nombInfant=='' ){
-			$contenedor.find("#nombInfant").addClass('error');			
+			$contenedor.find("#nombInfant").addClass('error');
 			validez= false;
 		}
 		if( ! alfanumericRegex.test(datosPost.nombGuard) || datosPost.nombGuard=='' ){
-			$contenedor.find("#nombGuard").addClass('error');			
+			$contenedor.find("#nombGuard").addClass('error');
 			validez= false;
 		}
 		if( ! alfanumericRegex.test(datosPost.concepto) || datosPost.concepto=='' ){
-			$contenedor.find("#concepto").addClass('error');			
+			$contenedor.find("#concepto").addClass('error');
 			validez= false;
 		}
 		if( ! montoRegex.test(datosPost.monto) || datosPost.monto=='' ){
-			$contenedor.find("#monto").addClass('error');			
+			$contenedor.find("#monto").addClass('error');
 			validez= false;
 		}
 
@@ -195,36 +210,36 @@ $(function(){ // Document ready
 	});
 
 	$("#userfile").fileupload({
-		type: 'post',  
-		replaceFileInput:false,       
-		url:baseURL+api+isoPais+"/lotes/reproceso/cargarMasivo", 
+		type: 'post',
+		replaceFileInput:false,
+		url:baseURL+api+isoPais+"/lotes/reproceso/cargarMasivo",
 
 		add: function (e, data) {
-			f=$('#userfile').val();  
+			f=$('#userfile').val();
 			$('#archivo').val($('#userfile').val());
 			dat = data;
 
 			var ext = $('#userfile').val().substr( $('#userfile').val().lastIndexOf(".") +1 ).toLowerCase();
 			if( ext == "txt"|| ext == "xls" || ext=="xlsx" ){
-				data.context = $('#cargarXLS').click(function () {  
+				data.context = $('#cargarXLS').click(function () {
 
-					$("#cargarXLS").replaceWith('<h3 id="cargando_archivo">Cargando...</h3>');  
-				    dat.formData = {'data-tipoLote':$("#tipoCheque").val()};               
+					$("#cargarXLS").replaceWith('<h3 id="cargando_archivo">Cargando...</h3>');
+				    dat.formData = {'data-tipoLote':$("#tipoCheque").val()};
 				    dat.submit().success( function (result, textStatus, jqXHR){
 
 				        if(!result.ERROR){
 				            mostrarError(result);
-				           
+
 				        }else{
 				            if(result.ERROR=='-29'||result.ERROR=='-61'){
 				                alert('Usuario actualmente desconectado'); location.reload();
 				            }else{
 				                notificacion("Cargar archivo masivo beneficiarios",result.ERROR);}
-				            }                        
+				            }
 
 				            $('#userfile').val("");
 				            $('#archivo').val("");
-				    }); 
+				    });
 
 	            });
 			}else{
@@ -245,31 +260,31 @@ $(function(){ // Document ready
 	});
 
 function mostrarError(result){
-      
+
   if(result.rc!="0"){
 
     var canvas = "<h4>ENCABEZADO</h4>";
     $.each(result.mensajes.erroresEncabezado.errores,function(k,v){
-      canvas += "<h6>"+v+"</h6>"; 
-    });    
-  
+      canvas += "<h6>"+v+"</h6>";
+    });
+
     canvas += "<h4>REGISTRO</h4>";
     $.each(result.mensajes.erroresRegistros, function(k,vv){
         canvas += "<h5>"+vv.nombre+"</h5>";
-        $.each(result.mensajes.erroresRegistros[k].errores, function(i,v){          
+        $.each(result.mensajes.erroresRegistros[k].errores, function(i,v){
             canvas += "<h6>"+v+"<h6/>";
         });
 
     });
     notificacion(result.msg, canvas);
-  
+
   }else{
     notificacion("Cargando archivo", "Archivo cargado con éxito.\n"+result.msg);
      tipoLote = $("#tipoCheque").val().toUpperCase();
      $("#lista-reproceso tbody").empty();
 	 pintar(result);
   }
- 
+
 }
 
 
@@ -308,13 +323,261 @@ function buscar(pgActual){
 		}
 	});
 }
+var ReprocesoMasivo = {
+
+	countTotal : 0,
+	countAproved :0,
+	dataPreparada : [],
+	msjStatusHtml : function(){
+		return " <br> "+"Cantidad Procesada : "+this.countAproved+" <br> "+
+				   " Cantidad Seleccionada : "+this.countTotal+" <br> ";
+	},
+	createTh : function ( texto ){
+		var th = document.createElement( "th" );
+		th.appendChild( document.createTextNode(texto) );
+		return th;
+	},
+	createTh_ : function (nodo){
+		var th = document.createElement( "th" );
+		th.appendChild(nodo);
+		return th;
+	},
+	createInput : function( type, id, value, clase ){
+		var input  = document.createElement("input");
+		input.setAttribute( "type", type );
+		input.setAttribute( "id", id );
+		input.setAttribute( "class", clase);
+		input.setAttribute( "value", value );
+		input.onchange = function(){updateInput(this)};
+		return input;
+	},
+	run : function ( camposReprocesoMasivo ){
+
+		this.hide('TablaMasiva');
+		this.hide('camposReprocesoMasivo');
+		var dataBuild = this.inputsCaptured( "checkboxSelected" );
+
+		buildHtml( dataBuild,this );
+
+		this.countTotal = dataBuild.length;
+
+		if( this.countTotal != 0 ){
+
+			this.addHtml('Estadistica',this.msjStatusHtml());
+			this.show( 'TablaMasiva' );
+			this.show( 'camposReprocesoMasivo' );
+
+			camposReprocesoMasivo.dialog({
+				title: "Gestión de Reproceso Masivo de Datos",
+				modal: true,
+				width:515,
+				height: 400,
+				resizable: false,
+				close:function(){
+					ReprocesoMasivo.hide('TablaMasiva');
+
+					$( this ).dialog( "destroy" );
+					ReprocesoMasivo.addHtml( 'TablaMasiva', '');
+					ReprocesoMasivo.hide( 'camposReprocesoMasivo' );
+				},
+				buttons: {
+					Modificar: function(){
+						$( this ).dialog( "destroy" );
+						ReprocesoMasivo.hide('TablaMasiva');
+						ReprocesoMasivo.addHtml('TablaMasiva', '' );
+						ReprocesoMasivo.hide( 'camposReprocesoMasivo' );
+						console.log($("#passmodificar2").val());
+						ReprocesoMasivo.sendData($("#passmodificar2").val());
+					}
+				},
+			 create: function(ev, ui){
+/*				 var input  = document.createElement("input");
+		 		input.setAttribute( "type", type );
+		 		input.setAttribute( "id", id );
+		 		input.setAttribute( "class", clase);
+		 		input.setAttribute( "value", value );
+		 		input.onchange = function(){updateInput(this)};*/
+					$('.ui-dialog-buttonpane .ui-dialog-buttonset button').before("<input type='password' id='passmodificar2' placeholder='Ingrese su contraseña' style='margin-right:10px' >");
+
+				}
+			});
+			console.log($("#passmodificar2").val());
+		}else{
+			notificacion('Mensaje', 'Por favor seleccione uno o mas registros en el checkbox ubicado en la columna izquierda.');
+		}
+	},
+	inputsCaptured : function( className ){
+
+		var listaInputs = [];
+
+		$.each($(":checkbox"),function(k,v){
+
+			if (this.checked && $(this).attr("id")!="selectAll") {
+				var datos = JSON.parse($(this).parents('tr').attr('datos'));
+
+				listaInputs.push(datos);
+			}
+		});
+		return listaInputs;
+	},
+	sendData : function (pass){
+		console.log(pass);
+		console.log( this.dataPreparada );
+		var dataBuild = this.dataPreparada;
+
+		for( i = 0; i < dataBuild.length; i++ ) {
+
+			datosPost = {};
+			datosPost.tipo = tipoLote;
+			datosPost.idPersona = dataBuild[i].id_per;
+			datosPost.apellEmpl = dataBuild[i].apellido;
+			datosPost.nombEmpl = dataBuild[i].nombre;
+			datosPost.emailEmpl = dataBuild[i].email_empleado;
+			datosPost.apellInfant = dataBuild[i].apellido_infante;
+			datosPost.nombInfant = dataBuild[i].nombre_infante;
+			datosPost.idfiscalGuard = dataBuild[i].rif_guarderia;
+			datosPost.nroCuentaGuard = dataBuild[i].nro_cuenta;
+			datosPost.emailGuard = dataBuild[i].email_guarderia;
+			datosPost.monto =  dataBuild[i].monto_total;
+			datosPost.concepto = dataBuild[i].concepto;
+			datosPost.id_registro = dataBuild[i].id_registro;
+			datosPost.paginar = true;
+			datosPost.pgActual = 1;
+			datosPost.tamPg = tamPg;
+			pass = 1234;
+			console.log(hex_md5(pass));
+				WS('reprocesarMasivo', datosPost,'Modificar beneficiarios',pass);
+			//WSbeneficiario('modificar', datosPost, $("#passmodificar2").val(),
+			//				'Modificar beneficiario',$("#TablaMasiva"),$(".ui-button"));
+		}
+
+	},
+	addHtml : function( id, html){
+		var tr = document.getElementById(id);
+		tr.innerHTML = html;
+	},
+	show:function( element ) {
+        var ElementId = document.getElementById( element );
+        if( ElementId ){
+            ElementId.style.display = 'block';
+        }//fin del if
+  },
+  hide : function( element ) {
+      var ElementId = document.getElementById( element );
+      if( ElementId ){
+           ElementId.style.display = 'none';
+      }//fin del if
+  },
+	styleTableClass : function( element ) {
+      var ElementClass = document.getElementsByClassName( element );
+      if( ElementClass ){
+				ElementClass.style.border = '1px solid black';
+      }//fin del if
+  },
+
+};
+
+function updateInput( e ){
+
+	var str = e.id;
+
+	var res = ( e.className == 'conceptoRPM' )?
+							str.split( "conceptoRPM" ):str.split( "montoRPM" );
+
+	var dataBuild =( ReprocesoMasivo.dataPreparada.length == 0 )?
+			ReprocesoMasivo.inputsCaptured( "checkboxSelected" ):
+				ReprocesoMasivo.dataPreparada;
+
+	for( i = 0; i < dataBuild.length; i++ ) {
+			if( dataBuild[ i ].id_registro == res[ 1 ] ){
+					if( e.className == 'conceptoRPM' ){
+							dataBuild[ i ].concepto = e.value;
+					}else{
+							dataBuild[ i ].monto_total = e.value;
+					}
+			}
+	}
+
+	ReprocesoMasivo.dataPreparada = dataBuild;
+
+}
+
+function buildHtml( data, ReprocesoMasivo ){
+
+	var style = "border : 1px solid #A4A4A4;background: none repeat scroll 0 0 #54c2d0;color: white;font-size: 13px;";
+	var style2 = "border : 1px solid #A4A4A4;padding-right:5px;"+
+						 "padding-left: 5px;font-weight: initial;";
+
+		var tr = document.createElement( "tr" );
+
+		tr.style.border = "1px solid black" ;
+		var th1 = ReprocesoMasivo.createTh('Cédula');
+
+		th1.style.border = '1px solid #A4A4A4';
+		th1.style.background = 'none repeat scroll 0 0 #54c2d0';
+		th1.style.color = 'white';
+		th1.style.fontSize =  '13px';
+
+		var th2 = ReprocesoMasivo.createTh('Empleado');
+		th2.style.border = '1px solid #A4A4A4';
+		th2.style.background = 'none repeat scroll 0 0 #54c2d0';
+		th2.style.color = 'white';
+		th2.style.fontSize =  '13px';
+
+		var th3 =  ReprocesoMasivo.createTh('Concepto');
+		th3.style.border = '1px solid #A4A4A4';
+		th3.style.background = 'none repeat scroll 0 0 #54c2d0';
+		th3.style.color = 'white';
+		th3.style.fontSize =  '13px';
+		var th4 =  ReprocesoMasivo.createTh('Monto Total');
+		th4.style.border = '1px solid #A4A4A4';
+		th4.style.background = 'none repeat scroll 0 0 #54c2d0';
+		th4.style.color = 'white';
+		th4.style.fontSize =  '13px';
+
+		tr.appendChild( th1 );
+		tr.appendChild( th2 );
+		tr.appendChild( th3 );
+		tr.appendChild( th4 );
+
+		var TablaMasiva = document.getElementById( 'TablaMasiva' );
+		TablaMasiva.appendChild( tr );
+
+		for( i = 0; i < data.length; i++ ) {
+
+			var tr2 = document.createElement( "tr" );
+			var th2_1 = ReprocesoMasivo.createTh( data[ i ].id_per );
+			var th2_2 = ReprocesoMasivo.createTh( data[ i ].nombre+' '+data[ i ].apellido );
+
+			var inputMontoRPM = ReprocesoMasivo.createInput( "input",
+				'montoRPM'+data[i].id_registro, data[i].monto_total, 'montoRPM');
+
+			var inputConceptoRPM =	ReprocesoMasivo.createInput( "input",
+					'conceptoRPM'+data[ i ].id_registro, data[ i ].concepto,'conceptoRPM' );
+
+			var th2_3 =  ReprocesoMasivo.createTh_( inputConceptoRPM );
+			var th2_4 = ReprocesoMasivo.createTh_( inputMontoRPM );
+
+			tr2.appendChild( th2_1 );
+			tr2.appendChild( th2_2 );
+			tr2.appendChild( th2_3 );
+			tr2.appendChild( th2_4 );
+
+			TablaMasiva.appendChild( tr2 );
+			$('.ui-dialog-buttonpane .ui-dialog-buttonset button').before("<input type='password' id='passmodificar2' placeholder='Ingrese su contraseña' style='margin-right:10px' >");
+
+		}//fin del for
+}
+$("#modificacionMasiva").on('click', function(){
+		ReprocesoMasivo.run( $("#camposReprocesoMasivo"));
+});
 
 var totalRegistros;
 function pintar(data){
 	$('.crear').addClass('elem-hidden');
 	$('.cargar').addClass('elem-hidden');
 	$('.buscar').removeClass('elem-hidden');
-	
+
 	totalRegistros = data.totalRegistros;
 
 	if(tipoLote=='G'){
@@ -331,10 +594,10 @@ function pintar(data){
 		checked = null;
 	}
 
-	$.each(data.lista, function(k,v){		
+	$.each(data.lista, function(k,v){
 		datos = JSON.stringify(v);
 		tr = "<tr class='"+data.paginaActual+"' datos='"+datos+"' all="+allAll+">";
-		tr += "<td class='checkbox-select'><input id='select' type='checkbox' "+checked+" /></td>";
+		tr += "<td class='checkbox-select'><input id='select' class='checkboxSelected' type='checkbox' "+checked+" /></td>";
 		if(tipoLote=='E'){
 			$("#th-empleado").addClass("td-medio");
 			tr += "<td class='td-medio'>"+v.id_per+"</td><td class='td-medio'>"+v.nombre.toLowerCase()+" "+v.apellido.toLowerCase()+"</td><td >"+v.beneficiario.toLowerCase()+"</td><td id='td-nombre-2'>"+v.nro_cuenta+"</td><td class='td-medio'>"+v.monto_total+"</td>";
@@ -349,7 +612,6 @@ function pintar(data){
 
 	paginar(data);
 }
-
 $("#lista-reproceso").on("click","#iconModificar", function(){
 
 	$("#camposBenef").find(".error").removeClass('error');
@@ -371,10 +633,9 @@ $("#lista-reproceso").on("click","#iconModificar", function(){
 	$("#camposBenef #emailGuard").val(datos.email_guarderia);
 	$("#camposBenef #monto").val(datos.monto_total.replace('.',''));
 	$("#camposBenef #concepto").val(datos.concepto);
-
 	$("#camposBenef").dialog({
 		title: 'Modificar beneficiario',
-		modal:true, 
+		modal:true,
 		width:660,
 		buttons:{
 			Modificar: function(){
@@ -397,7 +658,8 @@ $("#lista-reproceso").on("click","#iconModificar", function(){
 				datosPost.pgActual = pg;
 				datosPost.tamPg = tamPg;
 
-				WSbeneficiario('modificar', datosPost, $("#passmodificar").val(), 'Modificar beneficiario',$("#camposBenef"),$(".ui-button"));
+				WSbeneficiario('modificar', datosPost, $("#passmodificar").val(),
+						'Modificar beneficiario',$("#camposBenef"),$(".ui-button"));
 				$("#passmodificar").val("");
 			}
 		},
@@ -414,9 +676,9 @@ $("#lista-reproceso").on("click","#iconEliminar", function(){
 	datos = JSON.parse($(this).parents('tr').attr('datos'));
 
 	var canvas = "<div id='dialog-confirm'>";
-	canvas +="<p>Empleado: "+datos.nombre+' '+datos.apellido+"</p>";          
+	canvas +="<p>Empleado: "+datos.nombre+' '+datos.apellido+"</p>";
 	canvas += "<fieldset><input type='password' id='pass' placeholder='Ingrese su contraseña' class='text ui-widget-content ui-corner-all'/>";
-	canvas += "<h5 id='msg'></h5></fieldset></div>";  
+	canvas += "<h5 id='msg'></h5></fieldset></div>";
 
 	var pass;
 
@@ -434,7 +696,7 @@ $("#lista-reproceso").on("click","#iconEliminar", function(){
 					pass = hex_md5( pass );
 					$('#pass').val( '' );
 					$(this).dialog('destroy');
-					
+
 					eliminarBeneficiario(pass,[datos.id_registro]);
 
 				}else{
@@ -446,7 +708,6 @@ $("#lista-reproceso").on("click","#iconEliminar", function(){
 	});
 });
 
-
 $("#reprocesar").on('click', function(){
 
 	pass = $("#passreprocesar").val();
@@ -457,20 +718,20 @@ $("#reprocesar").on('click', function(){
 		$aux = $('#loading').dialog({title:'Generando Orden de Servicio',close: function(){$(this).dialog('close');}, modal: true, resizable:false});
 
 		$.post(baseURL+api+isoPais+"/lotes/reproceso/reprocesar", {"data-lista":listarItems(),"data-tipoLote":tipoLote,"data-pass":hex_md5(pass)} )
-		.done(function(data) { 
+		.done(function(data) {
 			$aux.dialog('destroy');
 			if(data.indexOf("ERROR")==-1){
 				$("<div><h3>Proceso exitoso</h3><h5>Redireccionando...</h5></div>").dialog({title:"Reprocesar lotes", modal:true, resizable:false,close:function(){$(this).dialog('destroy');}});
 
 				$("#data-OS").attr('value',data);
-				$("form#toOS").submit(); 
+				$("form#toOS").submit();
 
 			}else{
 				var jsonData = $.parseJSON(data);
 				if(jsonData.ERROR=='-29'){
 					alert('Usuario actualmente desconectado'); location.reload();
 				}
-				notificacion("Reprocesar lotes",jsonData.ERROR);	 			
+				notificacion("Reprocesar lotes",jsonData.ERROR);
 			}
 
 		});
@@ -506,34 +767,35 @@ function listarItems () {
 	}else{
 		$.each($(":checkbox"),function(k,v){
 		if (this.checked && $(this).attr("id")!="selectAll") {
-			datos = JSON.parse($(this).parents('tr').attr('datos'));			
+			datos = JSON.parse($(this).parents('tr').attr('datos'));
 			lista.push(datos.id_registro);
 		}
-		
-		});	
+
+		});
 	}
-	
+
 	return lista;
 }
 
 function eliminarBeneficiario (pass, items) {
-	var $aux = $('#loading').dialog({title:"Eliminando beneficiario",modal: true, resizable:false, close:function(){$aux.dialog('close');}}); 
-	$.post(baseURL+api+isoPais+"/lotes/reproceso/eliminar", 
+	var $aux = $('#loading').dialog({title:"Eliminando beneficiario",
+	modal: true, resizable:false, close:function(){$aux.dialog('close');}});
+	$.post(baseURL+api+isoPais+"/lotes/reproceso/eliminar",
 		{'data-tipoLote':tipoLote, 'data-lista':items,'data-pass':pass, 'data-paginar':true,'data-pgActual':1,'data-tamPg':tamPg})
 	.done(
 		function(data){
 
 			$aux.dialog('destroy');
 
-			if(!data.ERROR){                  
+			if(!data.ERROR){
 				notificacion("Eliminando beneficiario",'Proceso exitoso');
 				$("#lista-reproceso tbody").empty();
 				pintar(data);
 
-			}else{           
+			}else{
 				if(data.ERROR=='-29'){
 					alert('Usuario actualmente desconectado');  location.reload();
-				}else{     
+				}else{
 					if(data.rc=='-150'){
 						$('.buscar').addClass('elem-hidden');
 					}
@@ -550,10 +812,10 @@ $("#selectAll").on("click", function () {
 	if($(this).is(':checked')){
 		if(!allAll && tamPg<=parseInt(totalRegistros)){
 			alert = "<div class='not-info'><p>Ha seleccionado esta página ("+tamPg+" items) <a id='allAll'>seleccionar todas las páginas ("+totalRegistros+" items)</a></p></div>";
-			$("#lista-reproceso").prepend(alert);			
-		}		
+			$("#lista-reproceso").prepend(alert);
+		}
 		$("."+selPgActual).attr("all",1);
-		$.each($("."+selPgActual+" :checkbox"),function(k,v){			
+		$.each($("."+selPgActual+" :checkbox"),function(k,v){
 			this.checked=true;
 		});
 	}else{
@@ -561,15 +823,15 @@ $("#selectAll").on("click", function () {
 			resett();
 			$("tbody tr").attr("all",0);
 		}else{
-			$(".not-info").remove();		
+			$(".not-info").remove();
 			allAll=false;
 			$("."+selPgActual).attr("all",0);
 			$.each($("."+selPgActual+" :checkbox"),function(k,v){
 				this.checked=false;
 			});
-		}		
+		}
 	}
-	
+
 });
 
 var allAll;
@@ -589,17 +851,17 @@ function resett () {
 }
 
 function paginar(datos){
-	$('#paginado').paginate({ 
+	$('#paginado').paginate({
 		count: datos.totalPaginas,
 		display: datos.tamanoPagina,
 		start: datos.paginaActual,
 		border: false,
 		text_color: '#79B5E3',
-		background_color: 'none', 
+		background_color: 'none',
 		text_hover_color: '#2573AF',
-		background_hover_color: 'none', 
+		background_hover_color: 'none',
 		images: false,
-		onChange: function(page){     
+		onChange: function(page){
 			$(".not-info").hide();
 			selPgActual=page;
 			if (  $("."+page).attr("all")==1 || allAll ) {
@@ -607,11 +869,11 @@ function paginar(datos){
 			}else{
 				$("#selectAll")[0].checked=false;
 			}
-			
+
 			if( !$('#lista-reproceso').find($('.'+page)).hasClass(page) ){
-				
-				buscar(page);               
-			} 
+
+				buscar(page);
+			}
 			$('#lista-reproceso tbody tr').hide();
 			$('#lista-reproceso .'+page).show();
 		}

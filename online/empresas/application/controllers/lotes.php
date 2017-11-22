@@ -2916,6 +2916,7 @@ class Lotes extends CI_Controller {
 					);
 
 				$response = $this->callWSmodificarBeneficiario($urlCountry, utf8_decode(json_encode($dataPost,JSON_UNESCAPED_UNICODE)));
+				log_message('info','Response '.json_encode($response));
 			}else{
 				$response = array("ERROR"=>lang('SIN_FUNCION'));
 			}
@@ -3004,7 +3005,7 @@ class Lotes extends CI_Controller {
 			);
 
 		$data = json_encode($data,JSON_UNESCAPED_UNICODE);
-
+			log_message('info','callWSmodificarBeneficiario =======> '.$data);
 		$dataEncry = np_Hoplite_Encryption($data);
 		$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
 		$data = json_encode($data);
@@ -3221,7 +3222,115 @@ class Lotes extends CI_Controller {
 
 	}
 
+	public function reprocesarMasivo($urlCountry) {
 
+        np_hoplite_countryCheck($urlCountry);
+
+        $this->lang->load('erroreseol');
+
+        $menuP = $this->session->userdata('menuArrayPorProducto');
+        $moduloAct = np_hoplite_existeLink($menuP, "TEBGUR");
+
+        $logged_in = $this->session->userdata('logged_in');
+        $paisS = $this->session->userdata('pais');
+
+        if ($paisS == $urlCountry && $logged_in) {
+
+            if ($moduloAct !== false) {
+
+                $pass = $this->input->post("pass");
+                $monto = $this->input->post("monto");
+                $concepto = $this->input->post("concepto");
+
+                $response = $this->callWSreprocesarMasivo($urlCountry, $concepto, $monto, $pass);
+            } else {
+                $response = json_encode(array("ERROR" => lang('SIN_FUNCION')));
+            }
+			log_message('info', 'callWSreprocesarMasivo Encrypt ====>> ' . json_encode($response));
+
+            $this->output->set_content_type('')->set_output($response);
+        } elseif ($paisS != $urlCountry && $paisS != '') {
+            $this->session->sess_destroy();
+            $this->session->unset_userdata($this->session->all_userdata());
+            redirect($urlCountry . '/login');
+        } elseif ($this->input->is_ajax_request()) {
+            $this->output->set_content_type('application/json')->set_output(json_encode(array('ERROR' => '-29')));
+        } else {
+            redirect($urlCountry . '/login');
+        }
+    }
+
+    private function callWSreprocesarMasivo($urlCountry, $concepto, $monto, $pass) {
+
+        $this->lang->load('erroreseol');
+        $username = $this->session->userdata('userName');
+        $token = $this->session->userdata('token');
+        $idEmpresa = $this->session->userdata('acrifS');
+        $idProductoS = $this->session->userdata('idProductoS');
+        $acodcia = $this->session->userdata('accodciaS');
+        $acgrupo = $this->session->userdata('accodgrupoeS');
+
+        $canal = "ceo";
+        $modulo = "Reprocesar Lotes";
+        $function = "Reprocesar Guarderia";
+        $operation = "actualizarDataMasivaBeneficiario";
+        $ip = $this->input->ip_address();
+        $timeLog = date("m/d/Y H:i");
+        $className = "com.novo.objects.TOs.RegistrosLoteGuarderiaTO";
+
+        $sessionId = $this->session->userdata('sessionId');
+
+        $logAcceso = np_hoplite_log($sessionId, $username, $canal,
+		 					$modulo, $function, $operation, 0, $ip, $timeLog);
+        $usuario = array(
+            "userName" => $username,
+            "password" => $pass
+        );
+
+        $data = array(
+            "idOperation" => $operation,
+            "className" => $className,
+            'id_ext_emp' => $idEmpresa,
+            'concepto' => $concepto,
+            'monto_total' => $monto,
+            "logAccesoObject" => $logAcceso,
+            "token" => $token,
+            "pais" => $urlCountry
+        );
+
+        $data = json_encode($data, JSON_UNESCAPED_UNICODE);
+        log_message('info', 'callWSreprocesarMasivo ====>> ' . $data);
+        $dataEncry = np_Hoplite_Encryption($data);
+        $data = array('bean' => $dataEncry, 'pais' => $urlCountry);
+        $data = json_encode($data);
+        log_message('info', 'callWSreprocesarMasivo Encrypt ====>> ' . $data);
+        $response = np_Hoplite_GetWS('eolwebInterfaceWS', $data);
+        $jsonResponse = np_Hoplite_Decrypt($response);
+        $response = json_decode(utf8_encode($jsonResponse));
+        //log_message('info', 'Response ' . $response);
+        if ($response) {
+            log_message('info', 'REPROCESAR ' . $response->rc . '/' . $response->msg);
+            if ($response->rc == 0) {
+                return serialize($response);
+            } else {
+                if ($response->rc == -61 || $response->rc == -29) {
+                    $this->session->sess_destroy();
+                    $this->session->unset_userdata($this->session->all_userdata());
+                    $codigoError = array('ERROR' => '-29');
+                } else {
+                    $codigoError = lang('ERROR_(' . $response->rc . ')');
+
+					$codigoError = (strpos($codigoError, 'Error') !== false)?
+							array('ERROR' => lang('ERROR_GENERICO_USER')):
+								array('ERROR' => lang('ERROR_(' . $response->rc . ')'));
+                }
+                return json_encode($codigoError);
+            }
+        } else {
+            log_message('info', 'REPROCESAR No WS');
+            return json_encode(array('ERROR' => lang('ERROR_GENERICO_USER')));
+        }
+    }
 	/**
 	* Método que realiza petición al WS para reprocesar el listado de beneficiarios
 	* @param  string $urlCountry

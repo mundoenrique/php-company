@@ -12,7 +12,7 @@ $urlBase = $urlBaseA.$pais;
 			<h2 class="title-marca">
 				<?php echo ucwords(mb_strtolower($programa));?>
 			</h2>
-			
+
 			<ol class="breadcrumb">
 				<li>
 					<a href="<?php echo $urlBase; ?>/dashboard" rel="start">
@@ -37,30 +37,30 @@ $urlBase = $urlBaseA.$pais;
 							</a>
 						</li>
 				</ol>
-			
-			
-			
+
+
+
 	<div id="lotes-general">
 
 
 		<div id="top-batchs">
 			<span aria-hidden="true" class="icon" data-icon="&#xe02c;"></span> Selección
 		</div>
-		<div id="lotes-contenedor">	
+		<div id="lotes-contenedor">
 
 			<div class='select-tipo-guarderia'>
-				Tipo de lote: 
+				Tipo de lote:
 				<select id="tipoCheque">
-					<?   
+					<?
 					if(array_key_exists("ERROR", $selectTiposLotes[0])){
 						if($selectTiposLotes[0]["ERROR"]=='-29'){
 							redirect($urlBase.'/login');
 						}else{
 							echo "<option value=''>".$selectTiposLotes[0]["ERROR"]."</option>";
 						}
-						
+
 					}else{
-						foreach ($selectTiposLotes[0]->lista as $tipol) {									
+						foreach ($selectTiposLotes[0]->lista as $tipol) {
 							$tipoLS = ucfirst(mb_strtolower($tipol->tipoLote));
 							echo "<option value='$tipol->idTipoLote'>$tipoLS</option>";
 						}
@@ -68,10 +68,10 @@ $urlBase = $urlBaseA.$pais;
 					?>
 				</select>
 			</div>
-		
+
 			<button id='crear'>Crear beneficiario</button>
-			<button id="cargar" >Cargar archivo</button>	
-			<button id='buscar'>Buscar beneficiarios</button>			
+			<button id="cargar" >Cargar archivo</button>
+			<button id='buscar'>Buscar beneficiarios</button>
 
 		</div>
 
@@ -80,12 +80,12 @@ $urlBase = $urlBaseA.$pais;
 		<div id="top-batchs" class='crear elem-hidden'>
 			<span aria-hidden="true" class="icon" data-icon="&#xe08a;"></span> <?php echo lang('TITULO_CREAR_BENEFICIARIO') ?>
 		</div>
-		<div id="lotes-contenedor" class='crear elem-hidden'>	
-				
+		<div id="lotes-contenedor" class='crear elem-hidden'>
+
 
 				<div class="campos-reproceso">
 					<p>Cédula empleado: *</p><input type="text" id='idPersona' class='nro' maxlength='8'/>
-				</div>	
+				</div>
 				<div class="campos-reproceso">
 					<p>Apellido empleado: *</p><input type="text" id='apellEmpl'/>
 				</div>
@@ -112,40 +112,37 @@ $urlBase = $urlBaseA.$pais;
 				</div>
 				<div class="campos-reproceso chq-elect">
 					<p>Email guardería: *</p><input type="text" id='emailGuard'/>
-				</div>					
+				</div>
 				<div class="campos-reproceso">
 					<p>Monto cheque: *</p><input type="text" id='monto' />
 				</div>
 				<div class="campos-reproceso">
-					<p>Concepto pago: *</p><input type="text" id='concepto'/>	
+					<p>Concepto pago: *</p><input type="text" id='concepto'/>
 				</div>
-			
+
 
 		</div>
 		<div id="batchs-last" class='crear elem-hidden'>
 			<button id='btnCrearBenf'>Crear</button>
 			<input id="passcrear" class="input-pass-reproceso" placeholder="Ingrese su contraseña" type='password'/>
-			
+
 		</div>
 
 		<div id="top-batchs" class='cargar elem-hidden'>
 			<span aria-hidden="true" class="icon" data-icon="&#xe08a;"></span> <?php echo lang('TITULO_MASIVO_BENEFICIARIO') ?>
 		</div>
-		<div id="lotes-contenedor" class='cargar elem-hidden'>	
-			<input type="file" name="userfile" id="userfile" class='elem-hidden'/>	
+		<div id="lotes-contenedor" class='cargar elem-hidden'>
+			<input type="file" name="userfile" id="userfile" class='elem-hidden'/>
 			<input id='archivo' placeholder='Click aquí para archivo seleccionar archivo.' readonly="readonly" size='70'/>
-			<button id="cargarXLS" ><?php echo "Cargar" ?></button>			
+			<button id="cargarXLS" ><?php echo "Cargar" ?></button>
 		</div>
 
 
 		<div id="top-batchs" class='buscar elem-hidden'>
 			<span aria-hidden="true" class="icon" data-icon="&#xe046;"></span> <?php echo lang('TITULO_LISTA_BENEFICIARIOS') ?>
 		</div>
-		
-		<div id="lotes-contenedor" class='buscar elem-hidden'>	
 
-				
-			
+		<div id="lotes-contenedor" class='buscar elem-hidden'>
 			<table id='lista-reproceso' class="tabla-reportes" >
 				<thead>
 					<tr id="datos-principales">
@@ -154,31 +151,37 @@ $urlBase = $urlBaseA.$pais;
 						<th id="th-empleado">Empleado</th>
 						<th class='td-elect'>Beneficiario</th>
 						<th id='td-nombre-2'>Cuenta beneficiario</th>
-						<th class='td-medio'>Monto</th>	
+						<th class='td-medio'>Monto</th>
 						<th class='td-corto'>Opción</th>
 					</tr>
 				</thead>
 				<tbody class="tbody-reportes">
-					
+
 				</tbody>
 			</table>
 			<div id='paginado'></div>
 
 		</div>
-		
+
 		<div id="batchs-last" class='elem-hidden buscar'>
 			<button id='btn-eliminar-benf'>Eliminar</button>
+			<button id='modificacionMasiva'>Modificar y Reprocesar</button>
 			<button id='reprocesar'>Reprocesar</button>
-			<input id="passreprocesar" class="input-pass-reproceso" placeholder="Ingrese su contraseña" type='password'/>			
+			<input id="passreprocesar" class="input-pass-reproceso" placeholder="Ingrese su contraseña" type='password'/>
 		</div>
 
 	</div>
 
+	<div id="camposReprocesoMasivo">
+		<div id="Estadistica"></div><br>
+		<table id="TablaMasiva">
+		</table>
+	</div>
 
 	<div id="camposBenef">
 		<div class="campos-reproceso">
 			<p>Cédula empleado: *</p><input type="text" id='idPersona' class='nro' maxlength='8' disabled/>
-		</div>	
+		</div>
 		<div class="campos-reproceso">
 			<p>Apellido empleado: *</p><input type="text" id='apellEmpl' disabled/>
 		</div>
@@ -205,12 +208,12 @@ $urlBase = $urlBaseA.$pais;
 		</div>
 		<div class="campos-reproceso chq-elect">
 			<p>Email guardería: *</p><input type="text" id='emailGuard'/>
-		</div>					
+		</div>
 		<div class="campos-reproceso">
 			<p>Monto cheque: *</p><input type="text" id='monto' />
 		</div>
 		<div class="campos-reproceso">
-			<p>Concepto pago: *</p><input type="text" id='concepto'/>	
+			<p>Concepto pago: *</p><input type="text" id='concepto'/>
 		</div>
 	</div>
 
