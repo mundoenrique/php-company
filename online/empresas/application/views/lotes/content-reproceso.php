@@ -173,9 +173,9 @@ $urlBase = $urlBaseA.$pais;
 	</div>
 
 	<div id="camposReprocesoMasivo">
-		<div id="Estadistica"></div><br>
-		<table id="TablaMasiva">
-		</table>
+		<br>
+		<div id="MensajeRegistros"></div><br>
+		<table id="Estadistica"></table>
 	</div>
 
 	<div id="camposBenef">

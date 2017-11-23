@@ -3241,8 +3241,9 @@ class Lotes extends CI_Controller {
                 $pass = $this->input->post("pass");
                 $monto = $this->input->post("monto");
                 $concepto = $this->input->post("concepto");
+				$id_registro = $this->input->post("id_registro");
 
-                $response = $this->callWSreprocesarMasivo($urlCountry, $concepto, $monto, $pass);
+                $response = $this->callWSreprocesarMasivo( $urlCountry, $concepto, $monto, $pass, $id_registro );
             } else {
                 $response = json_encode(array("ERROR" => lang('SIN_FUNCION')));
             }
@@ -3260,7 +3261,7 @@ class Lotes extends CI_Controller {
         }
     }
 
-    private function callWSreprocesarMasivo($urlCountry, $concepto, $monto, $pass) {
+    private function callWSreprocesarMasivo( $urlCountry, $concepto, $monto, $pass, $id_registro ) {
 
         $this->lang->load('erroreseol');
         $username = $this->session->userdata('userName');
@@ -3293,6 +3294,7 @@ class Lotes extends CI_Controller {
             'id_ext_emp' => $idEmpresa,
             'concepto' => $concepto,
             'monto_total' => $monto,
+			'id_registro' => $id_registro,
             "logAccesoObject" => $logAcceso,
             "token" => $token,
             "pais" => $urlCountry

@@ -1914,6 +1914,108 @@ class Reportes extends CI_Controller {
         }
 
     }
+		/**
+		 * Método para exportar en formato Excel el reporte de tarjetasHabientes.
+		 *
+		 * @param  string $urlCountry
+		 * @return JSON
+		 */
+		public function guarderiaExpXLS($urlCountry){
+				np_hoplite_countryCheck($urlCountry);
+				$this->lang->load('erroreseol');//HOJA DE ERRORES;
+				$canal = "ceo";
+				$modulo    ="Reportes";
+				$function  ="Reportes Tarjetahabiente";
+				$operation ="generarArchivoXlsGuarderiaElectronica";
+				$className ="com.novo.objects.TOs.RegistrosLoteGuarderiaTO";
+				$operacion="Descargar Excel";
+				$timeLog   = date("m/d/Y H:i");
+				$ip= $this->input->ip_address();
+				$sessionId = $this->session->userdata('sessionId');
+				$username = $this->session->userdata('userName');
+				$token = $this->session->userdata('token');
+				$logAcceso = np_hoplite_log($sessionId,$username,$canal,$modulo,$function,$operacion,0,$ip,$timeLog);
+
+				$logged_in = $this->session->userdata('logged_in');
+
+				$paisS = $this->session->userdata('pais');
+
+				$menuP =$this->session->userdata('menuArrayPorProducto');
+				$moduloAct = np_hoplite_existeLink($menuP,"TEBTHA");
+
+				if($paisS==$urlCountry && $logged_in && $moduloAct!==false){
+
+						$acrif = $this->input->post('acrif');
+						$Fechaini = $this->input->post('Fechaini');
+						$Fechafin = $this->input->post('Fechafin');
+
+						$data = array(
+								"idOperation" => $operation,
+								"className" => $className,
+								"paginaActual"=> 1,
+								"tamanoPagina"=> 10,
+								"paginar"=> false,
+								"rifEmpresa"=> $acrif,
+								"nombreEmpresa"=>$nomEmpresa,
+								"idProducto"=>$loteproducto,
+								"nombreProducto"=>$nombreProducto,
+								"logAccesoObject"=>$logAcceso,
+								"token"=>$token,
+								"pais"=>$urlCountry
+								);
+
+						$data = json_encode($data,JSON_UNESCAPED_UNICODE);
+						$dataEncry = np_Hoplite_Encryption($data);
+						$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
+						$data = json_encode($data);
+						$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+						$jsonResponse = np_Hoplite_Decrypt($response);
+
+						$response =  json_decode(utf8_encode($jsonResponse));
+
+						if($response){
+								log_message('info', 'tarjetasHabientes xls '.$response->rc);
+
+								if($response->rc==0){
+										np_hoplite_byteArrayToFile($response->archivo,"xls","tarjetasHabientes");
+								}else{
+
+										if($response->rc==-61 || $response->rc==-29){
+												$this->session->sess_destroy();
+												$this->session->unset_userdata($this->session->all_userdata());
+												echo "<script>alert('usuario actualmente desconectado');
+												window.history.back(-1);</script>";
+
+										}else{
+												$codigoError = lang('ERROR_('.$response->rc.')');
+												if(strpos($codigoError, 'Error')!==false){
+														$codigoError = array('mensaje' => lang('ERROR_GENERICO_USER'), "rc"=> $response->rc);
+												}else{
+														$codigoError = array('mensaje' => lang('ERROR_('.$response->rc.')'), "rc"=> $response->rc);
+												}
+												echo '<script languaje=\"javascript\">alert("'.$codigoError["mensaje"].'"); history.back();</script>';
+												return $codigoError;
+										}
+								}
+
+						}else{
+								log_message('info', 'tarjetasHabientes xls NO WS');
+								echo "
+								<script>
+								alert('".lang('ERROR_GENERICO_USER')."');
+								window.history.back(-1);
+								</script>";
+						}
+
+				}elseif($paisS!=$urlCountry && $paisS!=""){
+						$this->session->sess_destroy();
+						$this->session->unset_userdata($this->session->all_userdata());
+						redirect($urlCountry.'/login');
+				}else{
+						redirect($urlCountry.'/login');
+				}
+
+		}
 
     /**
      * Método para exportar en formato Excel el reporte de tarjetasHabientes.
@@ -4459,41 +4561,29 @@ class Reportes extends CI_Controller {
      */
     public function getGuarderiaResult($urlCountry){
 
-log_message('info', 'getGuarderiaResult 1 ==================>>>>' );
-        np_hoplite_countryCheck($urlCountry);
+			$urlCountry= $this->input->post('pais');
 
+        np_hoplite_countryCheck($urlCountry);
         $logged_in = $this->session->userdata('logged_in');
-log_message('info', 'Login  ==================>>>>'.json_encode($logged_in) );
         $paisS = $this->session->userdata('pais');
-log_message('info', 'Login  ==================>>>>'.json_encode($paisS) );
-log_message('info', 'Login  ==================>>>>'.json_encode($logged_in) );
-log_message('info', 'Login  ==================>>>>'.json_encode($moduloAct) );
 
         $menuP =$this->session->userdata('menuArrayPorProducto');
         $moduloAct = np_hoplite_existeLink($menuP,"TEBTHA");
-
         if($paisS==$urlCountry && $logged_in && $moduloAct!==false){
-											log_message('info', 'getGuarderiaResult 2==================>>>>' );
-            //Validate Request For Ajax
+
+					log_message('info', 'getGuarderiaResult 1 ==================>>>>'.json_encode($this->input->is_ajax_request()) );
+
+						//Validate Request For Ajax
             if($this->input->is_ajax_request()){
-											log_message('info', 'getGuarderiaResult 3==================>>>>' );
-                if ($this->form_validation->run() == FALSE)
-                {
-                    echo "FORM NO VALIDO";
-                }
-                else
-                {
 
-										$Fechaini = $this->input->post('Fechaini');
-										$Fechafin = $this->input->post('Fechafin');
+									$Fechaini = $this->input->post('Fechaini');
+									$Fechafin = $this->input->post('Fechafin');
+                  $acrif = $this->input->post('acrif');
+                  $username = $this->session->userdata('userName');
+                  $token = $this->session->userdata('token');
+                  $pruebaTabla = $this->callWSGuarderia( $urlCountry, $token, $username, $acrif, $Fechaini, $Fechafin );
 
-                    $acrif = $this->input->post('acrif');
-                    $username = $this->session->userdata('userName');
-                    $token = $this->session->userdata('token');
-                    $pruebaTabla = $this->callWSGuarderia( $urlCountry, $token, $username, $acrif, $Fechaini, $Fechafin );
-
-                    $this->output->set_content_type('application/json')->set_output(json_encode($pruebaTabla));
-                }
+                  $this->output->set_content_type('application/json')->set_output(json_encode($pruebaTabla));
             }
         }else{
 							log_message('info', 'getGuarderiaResult 4 ==================>>>>' );
@@ -4515,7 +4605,8 @@ log_message('info', 'Login  ==================>>>>'.json_encode($moduloAct) );
 				$timeLog= date("m/d/Y H:i");
 				$ip= $this->input->ip_address();
 				$sessionId = $this->session->userdata('sessionId');
-				$logAcceso = np_hoplite_log($sessionId,$username,$canal,$modulo,$function,$operacion,0,$ip,$timeLog);
+				$logAcceso = np_hoplite_log($sessionId,$username,$canal,
+				$modulo,$function,$operation,0,$ip,$timeLog);
 
 				$data = array(
 						"idOperation" => $operation,

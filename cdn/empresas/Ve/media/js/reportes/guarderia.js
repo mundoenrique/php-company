@@ -32,7 +32,7 @@ $(document).ready(function () {
 		function buscarGuarderia(paginaActual) {
 
 				var $consulta;
-
+				filtro_busq.pais = pais;
 			 filtro_busq.Fechaini =  $("#Guarderia-fecha-in").val();
 			 filtro_busq.Fechafin = $("#Guarderia-fecha-fin").val();
 				filtro_busq.paginaActual = paginaActual;

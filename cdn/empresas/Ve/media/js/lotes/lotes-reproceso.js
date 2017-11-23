@@ -75,20 +75,17 @@ $(function(){ // Document ready
 
 	});
 
-function WS(funcion, datosPost, titulo, pass){
-	console.log(pass);
-	console.log(datosPost);
-	datosPost.pass='d41d8cd98f00b204e9800998ecf8427e';
+function WS(funcion, datosPost, titulo){
+
 	$.post(baseURL+api+isoPais+'/lotes/reproceso/'+funcion, datosPost).done(function(data){
-		console.log(data);
-		//$("#loading").dialog("destroy");
+
 		if(!data.ERROR){
 			$(".ui-dialog-content").dialog("destroy");
 			notificacion(titulo,'Proceso exitoso');
 			$('.campos-reproceso input').val('');
 			$(".buscar").addClass('elem-hidden');
 			funcion=='modificar' ? $("."+datosPost.pgActual).remove():$("#lista-reproceso tbody").empty();
-			pintar(data);
+			buscar(1);
 		}else{
 			if(data.ERROR=='-29'){
 				alert('Usuario actualmente desconectado'); location.reload();
@@ -310,6 +307,8 @@ function buscar(pgActual){
 		$("#buscar").removeAttr('disabled');
 		$("#loading").dialog("destroy");
 
+		ReprocesoMasivo.countTotal = data.totalRegistros;
+
 		if(!data.ERROR){
 
 			pintar(data);
@@ -324,13 +323,13 @@ function buscar(pgActual){
 	});
 }
 var ReprocesoMasivo = {
-
+	monto : 0,
+	concepto : "",
 	countTotal : 0,
 	countAproved :0,
 	dataPreparada : [],
 	msjStatusHtml : function(){
-		return " <br> "+"Cantidad Procesada : "+this.countAproved+" <br> "+
-				   " Cantidad Seleccionada : "+this.countTotal+" <br> ";
+		return " La modificación aplica a <strong>"+this.countTotal+"</strong> registros<br><br>";
 	},
 	createTh : function ( texto ){
 		var th = document.createElement( "th" );
@@ -353,58 +352,38 @@ var ReprocesoMasivo = {
 	},
 	run : function ( camposReprocesoMasivo ){
 
-		this.hide('TablaMasiva');
+		this.hide('Estadistica');
 		this.hide('camposReprocesoMasivo');
-		var dataBuild = this.inputsCaptured( "checkboxSelected" );
+		var dataBuild = "";
 
-		buildHtml( dataBuild,this );
+		buildHtml( dataBuild, this );
 
-		this.countTotal = dataBuild.length;
-
-		if( this.countTotal != 0 ){
-
-			this.addHtml('Estadistica',this.msjStatusHtml());
-			this.show( 'TablaMasiva' );
+			this.addHtml( 'MensajeRegistros', this.msjStatusHtml() );
+			this.show( 'Estadistica' );
 			this.show( 'camposReprocesoMasivo' );
 
 			camposReprocesoMasivo.dialog({
 				title: "Gestión de Reproceso Masivo de Datos",
 				modal: true,
-				width:515,
-				height: 400,
+				width:480,
+				height: 230,
 				resizable: false,
 				close:function(){
-					ReprocesoMasivo.hide('TablaMasiva');
-
+					ReprocesoMasivo.hide('Estadistica');
 					$( this ).dialog( "destroy" );
-					ReprocesoMasivo.addHtml( 'TablaMasiva', '');
+					ReprocesoMasivo.addHtml( 'Estadistica', '');
 					ReprocesoMasivo.hide( 'camposReprocesoMasivo' );
 				},
 				buttons: {
 					Modificar: function(){
 						$( this ).dialog( "destroy" );
-						ReprocesoMasivo.hide('TablaMasiva');
-						ReprocesoMasivo.addHtml('TablaMasiva', '' );
+						ReprocesoMasivo.hide('Estadistica');
+						ReprocesoMasivo.addHtml('Estadistica', '' );
 						ReprocesoMasivo.hide( 'camposReprocesoMasivo' );
-						console.log($("#passmodificar2").val());
-						ReprocesoMasivo.sendData($("#passmodificar2").val());
+						ReprocesoMasivo.sendData();
 					}
-				},
-			 create: function(ev, ui){
-/*				 var input  = document.createElement("input");
-		 		input.setAttribute( "type", type );
-		 		input.setAttribute( "id", id );
-		 		input.setAttribute( "class", clase);
-		 		input.setAttribute( "value", value );
-		 		input.onchange = function(){updateInput(this)};*/
-					$('.ui-dialog-buttonpane .ui-dialog-buttonset button').before("<input type='password' id='passmodificar2' placeholder='Ingrese su contraseña' style='margin-right:10px' >");
-
 				}
 			});
-			console.log($("#passmodificar2").val());
-		}else{
-			notificacion('Mensaje', 'Por favor seleccione uno o mas registros en el checkbox ubicado en la columna izquierda.');
-		}
 	},
 	inputsCaptured : function( className ){
 
@@ -420,37 +399,12 @@ var ReprocesoMasivo = {
 		});
 		return listaInputs;
 	},
-	sendData : function (pass){
-		console.log(pass);
-		console.log( this.dataPreparada );
-		var dataBuild = this.dataPreparada;
+	sendData : function (){
+		datosPost = {};
+		datosPost.monto =  this.monto;
+		datosPost.concepto = this.concepto;
 
-		for( i = 0; i < dataBuild.length; i++ ) {
-
-			datosPost = {};
-			datosPost.tipo = tipoLote;
-			datosPost.idPersona = dataBuild[i].id_per;
-			datosPost.apellEmpl = dataBuild[i].apellido;
-			datosPost.nombEmpl = dataBuild[i].nombre;
-			datosPost.emailEmpl = dataBuild[i].email_empleado;
-			datosPost.apellInfant = dataBuild[i].apellido_infante;
-			datosPost.nombInfant = dataBuild[i].nombre_infante;
-			datosPost.idfiscalGuard = dataBuild[i].rif_guarderia;
-			datosPost.nroCuentaGuard = dataBuild[i].nro_cuenta;
-			datosPost.emailGuard = dataBuild[i].email_guarderia;
-			datosPost.monto =  dataBuild[i].monto_total;
-			datosPost.concepto = dataBuild[i].concepto;
-			datosPost.id_registro = dataBuild[i].id_registro;
-			datosPost.paginar = true;
-			datosPost.pgActual = 1;
-			datosPost.tamPg = tamPg;
-			pass = 1234;
-			console.log(hex_md5(pass));
-				WS('reprocesarMasivo', datosPost,'Modificar beneficiarios',pass);
-			//WSbeneficiario('modificar', datosPost, $("#passmodificar2").val(),
-			//				'Modificar beneficiario',$("#TablaMasiva"),$(".ui-button"));
-		}
-
+		WS( 'reprocesarMasivo', datosPost, 'Gestión de Reproceso Masivo de Datos');
 	},
 	addHtml : function( id, html){
 		var tr = document.getElementById(id);
@@ -473,33 +427,18 @@ var ReprocesoMasivo = {
       if( ElementClass ){
 				ElementClass.style.border = '1px solid black';
       }//fin del if
-  },
-
+  }
 };
 
 function updateInput( e ){
-
 	var str = e.id;
-
 	var res = ( e.className == 'conceptoRPM' )?
 							str.split( "conceptoRPM" ):str.split( "montoRPM" );
-
-	var dataBuild =( ReprocesoMasivo.dataPreparada.length == 0 )?
-			ReprocesoMasivo.inputsCaptured( "checkboxSelected" ):
-				ReprocesoMasivo.dataPreparada;
-
-	for( i = 0; i < dataBuild.length; i++ ) {
-			if( dataBuild[ i ].id_registro == res[ 1 ] ){
-					if( e.className == 'conceptoRPM' ){
-							dataBuild[ i ].concepto = e.value;
-					}else{
-							dataBuild[ i ].monto_total = e.value;
-					}
-			}
+	if( e.className == 'conceptoRPM' ){
+			ReprocesoMasivo.concepto = e.value;
+	}else{
+			ReprocesoMasivo.monto = e.value;
 	}
-
-	ReprocesoMasivo.dataPreparada = dataBuild;
-
 }
 
 function buildHtml( data, ReprocesoMasivo ){
@@ -509,20 +448,6 @@ function buildHtml( data, ReprocesoMasivo ){
 						 "padding-left: 5px;font-weight: initial;";
 
 		var tr = document.createElement( "tr" );
-
-		tr.style.border = "1px solid black" ;
-		var th1 = ReprocesoMasivo.createTh('Cédula');
-
-		th1.style.border = '1px solid #A4A4A4';
-		th1.style.background = 'none repeat scroll 0 0 #54c2d0';
-		th1.style.color = 'white';
-		th1.style.fontSize =  '13px';
-
-		var th2 = ReprocesoMasivo.createTh('Empleado');
-		th2.style.border = '1px solid #A4A4A4';
-		th2.style.background = 'none repeat scroll 0 0 #54c2d0';
-		th2.style.color = 'white';
-		th2.style.fontSize =  '13px';
 
 		var th3 =  ReprocesoMasivo.createTh('Concepto');
 		th3.style.border = '1px solid #A4A4A4';
@@ -535,38 +460,30 @@ function buildHtml( data, ReprocesoMasivo ){
 		th4.style.color = 'white';
 		th4.style.fontSize =  '13px';
 
-		tr.appendChild( th1 );
-		tr.appendChild( th2 );
 		tr.appendChild( th3 );
 		tr.appendChild( th4 );
 
-		var TablaMasiva = document.getElementById( 'TablaMasiva' );
+		var TablaMasiva = document.getElementById( 'Estadistica' );
 		TablaMasiva.appendChild( tr );
 
-		for( i = 0; i < data.length; i++ ) {
-
 			var tr2 = document.createElement( "tr" );
-			var th2_1 = ReprocesoMasivo.createTh( data[ i ].id_per );
-			var th2_2 = ReprocesoMasivo.createTh( data[ i ].nombre+' '+data[ i ].apellido );
 
 			var inputMontoRPM = ReprocesoMasivo.createInput( "input",
-				'montoRPM'+data[i].id_registro, data[i].monto_total, 'montoRPM');
+				'montoRPM', "", 'montoRPM');
 
 			var inputConceptoRPM =	ReprocesoMasivo.createInput( "input",
-					'conceptoRPM'+data[ i ].id_registro, data[ i ].concepto,'conceptoRPM' );
+					'conceptoRPM', "",'conceptoRPM' );
 
-			var th2_3 =  ReprocesoMasivo.createTh_( inputConceptoRPM );
+			inputConceptoRPM.setAttribute( "size", 35 );
+
+			var th2_3 = ReprocesoMasivo.createTh_( inputConceptoRPM );
 			var th2_4 = ReprocesoMasivo.createTh_( inputMontoRPM );
 
-			tr2.appendChild( th2_1 );
-			tr2.appendChild( th2_2 );
 			tr2.appendChild( th2_3 );
 			tr2.appendChild( th2_4 );
 
 			TablaMasiva.appendChild( tr2 );
-			$('.ui-dialog-buttonpane .ui-dialog-buttonset button').before("<input type='password' id='passmodificar2' placeholder='Ingrese su contraseña' style='margin-right:10px' >");
 
-		}//fin del for
 }
 $("#modificacionMasiva").on('click', function(){
 		ReprocesoMasivo.run( $("#camposReprocesoMasivo"));
