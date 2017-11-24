@@ -404,7 +404,12 @@ var ReprocesoMasivo = {
 		datosPost.monto =  this.monto;
 		datosPost.concepto = this.concepto;
 
-		WS( 'reprocesarMasivo', datosPost, 'Gestión de Reproceso Masivo de Datos');
+		var patron1 = /[0-9]+|[0-9]+([,][0-9]+)|[0-9]+([.][0-9]+)|[0-9]+([.][0-9]+)+([,][0-9]+)|[0-9]+([,][0-9]+)+([.][0-9]+)/;//Numeros
+		if( patron1.test(datosPost.monto) ){
+				WS( 'reprocesarMasivo', datosPost, 'Gestión de Reproceso Masivo de Datos');
+		}else{
+				notificacion('Gestión de Reproceso Masivo de Datos','Debe ingresar un valor numerico');
+		}
 	},
 	addHtml : function( id, html){
 		var tr = document.getElementById(id);
