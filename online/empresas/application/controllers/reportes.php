@@ -4554,7 +4554,7 @@ class Reportes extends CI_Controller {
     }
 
 		/**
-     * Método para obtener los datos para el reporte de los tarjetas Habientes
+     * Método para obtener los datos para el reporte de las guarderias
      *
      * @param  string $urlCountry
      * @return JSON
@@ -4573,12 +4573,11 @@ class Reportes extends CI_Controller {
 
 					log_message('info', 'getGuarderiaResult 1 ==================>>>>'.json_encode($this->input->is_ajax_request()) );
 
-						//Validate Request For Ajax
             if($this->input->is_ajax_request()){
 
 									$Fechaini = $this->input->post('Fechaini');
 									$Fechafin = $this->input->post('Fechafin');
-                  $acrif = $this->input->post('acrif');
+                  $acrif = $this->session->userdata('acrifS');
                   $username = $this->session->userdata('userName');
                   $token = $this->session->userdata('token');
                   $pruebaTabla = $this->callWSGuarderia( $urlCountry, $token, $username, $acrif, $Fechaini, $Fechafin );
@@ -4586,7 +4585,6 @@ class Reportes extends CI_Controller {
                   $this->output->set_content_type('application/json')->set_output(json_encode($pruebaTabla));
             }
         }else{
-							log_message('info', 'getGuarderiaResult 4 ==================>>>>' );
             $this->session->sess_destroy();
             $this->session->unset_userdata($this->session->all_userdata());
             $this->output->set_content_type('application/json')->set_output(json_encode( array('ERROR' => lang('ERROR_(-29)'), "rc"=> "-29")));
@@ -4612,14 +4610,15 @@ class Reportes extends CI_Controller {
 						"idOperation" => $operation,
 						"className" => $className,
 						"Id_ext_emp"=> $acrif,
-						"Fechaini" => $Fechaini,
-						"Fechafin" => $Fechafin,
+						"fechaini" => $Fechaini,
+						"fechafin" => $Fechafin,
 						"logAccesoObject"=>$logAcceso,
 						"token"=>$token,
 						"pais"=>$urlCountry
 				);
 
 				$data = json_encode( $data, JSON_UNESCAPED_UNICODE);
+				log_message('info','SALIDA callWSGuarderia '.$data);
 				$dataEncry = np_Hoplite_Encryption( $data);
 				$data = array( 'bean' => $dataEncry, 'pais' =>$urlCountry );
 				$data = json_encode($data);
@@ -4627,27 +4626,26 @@ class Reportes extends CI_Controller {
 				$jsonResponse = np_Hoplite_Decrypt($response);
 				$response =  json_decode(utf8_encode($jsonResponse));
 				$data1 = json_encode($response);
-				//log_message('info','SALIDA desencriptada callWSEstatusTarjetasHabientes '.$data1);
 				log_message('info','SALIDA desencriptada callWSGuarderia '.$data1);
 				if($response){
 						log_message('info','Estatus Lotes '.$response->rc."/".$response->msg);
 						if($response->rc==0){
 								return $response;
 						}else{
-
 										if($response->rc==-61 || $response->rc==-29){
+
 												$codigoError = array('mensaje' => lang('ERROR_(-29)'), "rc"=> "-29");
 												$this->session->unset_userdata($this->session->all_userdata());
 												$this->session->sess_destroy();
 												return $codigoError;
 
 										}else{
+
 												$codigoError = lang('ERROR_('.$response->rc.')');
-												if(strpos($codigoError, 'Error')!==false){
-														$codigoError = array('mensaje' => lang('ERROR_GENERICO_USER'), "rc"=> $response->rc);
-												}else{
-														$codigoError = array('mensaje' => lang('ERROR_('.$response->rc.')'), "rc"=> $response->rc);
-												}
+
+												$codigoError = (strpos($codigoError, 'Error')!==false)?
+													array('mensaje' => lang('ERROR_GENERICO_USER'), "rc"=> $response->rc):
+														array('mensaje' => lang('ERROR_('.$response->rc.')'), "rc"=> $response->rc);
 
 												return $codigoError;
 										}
