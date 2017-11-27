@@ -243,6 +243,9 @@
 							case 'REPEDO':
 								$ruta=$urlBase."/reportes/estados-de-cuenta";
 								break;
+							case 'REPPGE':
+								$ruta=$urlBase."/reportes/guarderia";
+								break;
 
 						}
 						if($submenu->idModulo == "TICARG"||$submenu->idModulo == "TIINVN"){
