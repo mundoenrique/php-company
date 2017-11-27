@@ -323,7 +323,7 @@ function buscar(pgActual){
 	});
 }
 var ReprocesoMasivo = {
-	monto : 0,
+	monto : "",
 	concepto : "",
 	countTotal : 0,
 	countAproved :0,
@@ -405,10 +405,12 @@ var ReprocesoMasivo = {
 		datosPost.concepto = this.concepto;
 
 		var patron1 = /[0-9]+|[0-9]+([,][0-9]+)|[0-9]+([.][0-9]+)|[0-9]+([.][0-9]+)+([,][0-9]+)|[0-9]+([,][0-9]+)+([.][0-9]+)/;//Numeros
-		if( patron1.test(datosPost.monto) ){
+		if(	datosPost.concepto !=  "" || datosPost.monto == "" || datosPost.monto == " " ||  patron1.test(datosPost.monto) ){
 				WS( 'reprocesarMasivo', datosPost, 'Gestión de Reproceso Masivo de Datos');
+				 this.monto = "";
+				 this.concepto = "";
 		}else{
-				notificacion('Gestión de Reproceso Masivo de Datos','Debe ingresar un valor numerico');
+				notificacion('Gestión de Reproceso Masivo de Datos','Operación fallida, datos incompletos.');
 		}
 	},
 	addHtml : function( id, html){
