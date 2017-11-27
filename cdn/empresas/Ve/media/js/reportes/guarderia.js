@@ -60,7 +60,7 @@ $(document).ready(function () {
 								contenedor = $("#div_tablaDetalle");
 								var tr;
 								var td;
-
+								var countRow = data.lista.length;
 								/****** DE TRAER RESULTADOS LA CONSULTA SE GENERA LA TABLA CON LA DATA... *******/
 								/****** DE LO CONTRARIO SE GENERA UN MENSAJE "No existe Data relacionada con su filtro de busqueda" ******/
 
@@ -68,7 +68,8 @@ $(document).ready(function () {
 										$('.tbody-statuslotes').dataTable().fnClearTable();
 										$('.tbody-statuslotes').dataTable().fnDestroy();
 								}
-								if (data.rc == "0") {
+
+								if (data.rc == "0" && countRow != 0) {
 										$("#view-results").attr("style", "display:block");
 										$("#tabla-estatus-lotes").fadeIn("fast");
 										$("#contend-pagination").show();
