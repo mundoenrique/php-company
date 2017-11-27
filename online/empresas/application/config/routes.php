@@ -150,6 +150,8 @@ $route['api/v1/(:any)/reportes/estatuslotesExpPDF'] = "reportes/expEstatusLotesP
 $route['api/v1/(:any)/reportes/saldosamanecidosExpXLS'] = "reportes/expSaldosAmanecidosXLS/$1";
 $route['api/v1/(:any)/reportes/downPDFactividadUsuario'] = "reportes/downPDFactividadUsuario/$1";
 $route['api/v1/(:any)/reportes/downXLSactividadUsuario'] = "reportes/downXLSactividadUsuario/$1";
+$route['api/v1/(:any)/reportes/guarderiaExpPDF'] = "reportes/guarderiaExpPDF/$1";
+$route['api/v1/(:any)/reportes/guarderiaExpXLS'] = "reportes/guarderiaExpXLS/$1";
 
 //REPORTES
 $route['(:any)/reportes/cuenta-concentradora'] = "reportes/cuentaConcentradora/$1";
@@ -164,6 +166,7 @@ $route['(:any)/reportes/gastos-por-categorias'] = "reportes/gastosporcategorias/
 $route['(:any)/reportes/tarjetahabientes'] = "reportes/tarjetahabientes/$1";
 $route['(:any)/reportes/guarderia'] = "reportes/guarderia/$1";
 $route['(:any)/reportes/GuarderiaResult'] = "reportes/getGuarderiaResult/";
+
 //CONSULTAS
 $route['(:any)/consulta/ordenes-de-servicio'] = "consultas/ordenesServicio/$1";
 $route['(:any)/consulta/tarjetahabientes'] = "consultas/tarjetahabientes/$1";
