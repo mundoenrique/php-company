@@ -33,8 +33,8 @@ $(document).ready(function () {
 
 				var $consulta;
 				filtro_busq.pais = pais;
-			 filtro_busq.Fechaini =  $("#Guarderia-fecha-in").val();
-			 filtro_busq.Fechafin = $("#Guarderia-fecha-fin").val();
+			  filtro_busq.Fechaini =  $("#Guarderia-fecha-in").val();
+			  filtro_busq.Fechafin = $("#Guarderia-fecha-fin").val();
 				filtro_busq.paginaActual = paginaActual;
 
 				if (validar_filtro_busqueda("lotes-2")) {
@@ -47,7 +47,6 @@ $(document).ready(function () {
 						$consulta = $.post(base + api + pais + "/reportes/GuarderiaResult", filtro_busq);
 						/******* DE SER EXITOSA LA COMUNICACION CON EL SERVICIO SE EJECUTA EL SIGUIENTE METODO "DONE" *******/
 						$consulta.done(function (data) {
-								console.log(data);
 								$("#mensaje").remove();
 								$('#cargando').fadeOut("slow");
 								$("#EstatusLotes-btnBuscar").show();
@@ -73,17 +72,22 @@ $(document).ready(function () {
 										$("#view-results").attr("style", "display:block");
 										$("#tabla-estatus-lotes").fadeIn("fast");
 										$("#contend-pagination").show();
-										$.each(data.listadoTarjetaHabientes, function (posLista, itemLista) {
+										$.each(data.lista, function (posLista, itemLista) {
 												tr = $(document.createElement("tr")).appendTo(tbody);
 												td = $(document.createElement("td")).appendTo(tr);
-												td.attr("style", "max-width: 319px !important; min-width: 319px !important;");
-												td.html(itemLista.idExtPer);
-
+												td.html(itemLista.dttimestamp);
 												td = $(document.createElement("td")).appendTo(tr);
-												td.attr("style", "max-width: 319px !important; min-width: 319px !important;");
-												td.html(itemLista.Tarjetahabiente);
+												td.html(itemLista.numlote);
+												td = $(document.createElement("td")).appendTo(tr);
+												td.attr("style", "max-width: 180px !important; min-width: 180px !important;");
+												td.html(itemLista.beneficiario);
+												td = $(document.createElement("td")).appendTo(tr);
+												td.html(itemLista.nombre+ " " + itemLista.apellido);
+												td = $(document.createElement("td")).appendTo(tr);
+												td.html(itemLista.monto_total);
+												td = $(document.createElement("td")).appendTo(tr);
+												td.html((itemLista.status)?'Aceptado':'Rechazado');
 										});
-
 										paginacion(data.totalPaginas, data.paginaActual);
 
 								} else {
@@ -186,11 +190,11 @@ $(document).ready(function () {
 						$("#mensajeError").fadeIn("fast");
 						return true;
 				}
-				if (months < 3) {
+				if (months < 6) {
 						$("#mensajeError").fadeOut("fast");
 						return false;
 				} else {
-						$("#mensajeError").html("El rango de fecha no debe ser mayor a 3 meses");
+						$("#mensajeError").html("El rango de fecha no debe ser mayor a 6 meses");
 						$("#mensajeError").fadeIn("fast");
 				}
 
@@ -293,8 +297,8 @@ $(document).ready(function () {
 		}
 		/***********************Paginacion fin***********************/
 
-		calendario("EstatusLotes-fecha-in");
-		calendario("EstatusLotes-fecha-fin");
+		calendario("Guarderia-fecha-in");
+		calendario("Guarderia-fecha-fin");
 
 		function calendario(input) {
 				$("#" + input).datepicker({
@@ -305,15 +309,15 @@ $(document).ready(function () {
 						dateFormat: "dd/mm/yy",
 						maxDate: "+0D",
 						onClose: function (selectedate) {
-								if (input == 'EstatusLotes-fecha-in' && selectedate) {
-										$("#EstatusLotes-fecha-fin").datepicker('option', 'minDate', selectedate);
-								} else if (input == 'EstatusLotes-fecha-in') {
-										$("#EstatusLotes-fecha-fin").datepicker('option', 'minDate', "");
+								if (input == 'Guarderia-fecha-in' && selectedate) {
+										$("#Guarderia-fecha-fin").datepicker('option', 'minDate', selectedate);
+								} else if (input == 'Guarderia-fecha-in') {
+										$("#Guarderia-fecha-fin").datepicker('option', 'minDate', "");
 								}
-								if (input == 'EstatusLotes-fecha-fin' && selectedate) {
-										$("#EstatusLotes-fecha-in").datepicker('option', 'maxDate', selectedate);
-								} else if (input == 'EstatusLotes-fecha-fin') {
-										$("#EstatusLotes-fecha-in").datepicker('option', 'maxDate', "+0D");
+								if (input == 'Guarderia-fecha-fin' && selectedate) {
+										$("#Guarderia-fecha-in").datepicker('option', 'maxDate', selectedate);
+								} else if (input == 'Guarderia-fecha-fin') {
+										$("#Guarderia-fecha-in").datepicker('option', 'maxDate', "+0D");
 								}
 						}
 				});
@@ -326,9 +330,8 @@ $(document).ready(function () {
 						}, resizable: false});
 
 				$('form#formulario').empty();
-				$('form#formulario').append('<input type="hidden" name="nombreEmpresa" value="' + filtro_busq.nombreEmpresa + '" />');
-				$('form#formulario').append('<input type="hidden" name="nombreProducto" value="' + filtro_busq.nombreProducto + '" />');
-				$('form#formulario').append('<input type="hidden" name="lotes_producto" value="' + filtro_busq.lotes_producto + '" />');
+				$('form#formulario').append('<input type="hidden" name="fechaini" value="' + filtro_busq.Fechaini + '" />');
+				$('form#formulario').append('<input type="hidden" name="fechafin" value="' + filtro_busq.Fechafin + '" />');
 				$('form#formulario').append('<input type="hidden" name="acrif" value="' + filtro_busq.acrif + '" />');
 				$('form#formulario').attr('action', url);
 				$('form#formulario').submit();
