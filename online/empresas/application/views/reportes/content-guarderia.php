@@ -84,12 +84,12 @@ $urlCdn = get_cdn();
             <table id="tabla-estatus-lotes" class = "tabla-reportes tbody-statuslotes">
                 <thead>
                     <tr id="datos-principales">
-                        <th style="max-width: 330px !important; min-width: 319px !important;">Fecha de emisión OS</th>
-                        <th style="max-width: 330px !important; min-width: 319px !important;">Número OS</th>
-												<th style="max-width: 330px !important; min-width: 319px !important;">Beneficiario</th>
-												<th style="max-width: 330px !important; min-width: 319px !important;">Nombre del empleado</th>
-												<th style="max-width: 330px !important; min-width: 319px !important;">Monto</th>
-												<th style="max-width: 330px !important; min-width: 319px !important;">Estatus (aceptado o rechazado)</th>
+                        <th >Fecha de emisión OS</th>
+                        <th >Número OS</th>
+												<th style="max-width: 180px !important; min-width: 180px !important;">Beneficiario</th>
+												<th >Nombre del empleado</th>
+												<th >Monto</th>
+												<th >Estatus (aceptado o rechazado)</th>
                     </tr>
                 </thead>
                 <tbody id="tbody-datos-general" class = "tbody-reportes">
