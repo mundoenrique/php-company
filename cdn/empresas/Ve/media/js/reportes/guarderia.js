@@ -11,8 +11,26 @@ $(".fecha").keypress(function (e) {
 });
 
 $(document).ready(function () {
+				var	guarderia_riff = $("#Guarderia-riff").val();
+	$.getJSON(base + api + pais + '/empresas/consulta-empresa-usuario').always(function( data ) {
 
-		$("#cargando_empresa").fadeIn("slow");
+		if(!(data.ERROR)){
+			$.each( data.lista, function( k, v ){
+				if( v.acrif == guarderia_riff ){
+					$("#Empresa-nombre").val(v.acnomcia);
+				}else{
+					;
+				}
+			});
+		}else{
+			if(data.ERROR.indexOf('-29') !=-1){
+				 alert("Usuario actualmente desconectado");
+				 $(location).attr('href',base+'/'+pais+'/login');
+			 }else{
+					return false;
+			 }
+		}
+	});
 
 		$("#export_excel").click(function () {
 				descargarArchivo(filtro_busq, base + api + pais +
@@ -32,84 +50,96 @@ $(document).ready(function () {
 		function buscarGuarderia(paginaActual) {
 
 				var $consulta;
-				filtro_busq.pais = pais;
-			  filtro_busq.Fechaini =  $("#Guarderia-fecha-in").val();
-			  filtro_busq.Fechafin = $("#Guarderia-fecha-fin").val();
-				filtro_busq.paginaActual = paginaActual;
+				var nombreEmpresa = $("#Empresa-nombre").val();
 
-				if (validar_filtro_busqueda("lotes-2")) {
+				var success = 0;
 
-						$('#cargando').fadeIn("slow");
-						$("#EstatusLotes-btnBuscar").hide();
-						$('#div_tablaDetalle').fadeOut("fast");
+					filtro_busq.nombreEmpresa = $("#Empresa-nombre").val();
+					filtro_busq.paginaActual = paginaActual;
+					filtro_busq.pais = pais;
+				  filtro_busq.Fechaini =  $("#Guarderia-fecha-in").val();
+				  filtro_busq.Fechafin = $("#Guarderia-fecha-fin").val();
+					if( CalculateDateDiff( filtro_busq.Fechaini, filtro_busq.Fechafin ) ){
+						if ( validar_filtro_busqueda("lotes-2") ) {
 
-						/******* SE REALIZA LA INVOCACION AJAX *******/
-						$consulta = $.post(base + api + pais + "/reportes/GuarderiaResult", filtro_busq);
-						/******* DE SER EXITOSA LA COMUNICACION CON EL SERVICIO SE EJECUTA EL SIGUIENTE METODO "DONE" *******/
-						$consulta.done(function (data) {
-								$("#mensaje").remove();
-								$('#cargando').fadeOut("slow");
-								$("#EstatusLotes-btnBuscar").show();
-								$("#div_tablaDetalle").fadeIn("slow");
+								$('#cargando').fadeIn("slow");
+								$("#EstatusLotes-btnBuscar").hide();
+								$('#div_tablaDetalle').fadeOut("fast");
 
-								var tbody = $("#tbody-datos-general");
-								if (evBuscar) {
-										tbody.empty();
-								}
+								/******* SE REALIZA LA INVOCACION AJAX *******/
+								$consulta = $.post(base + api + pais + "/reportes/GuarderiaResult", filtro_busq);
+								/******* DE SER EXITOSA LA COMUNICACION CON EL SERVICIO SE EJECUTA EL SIGUIENTE METODO "DONE" *******/
+								$consulta.done(function (data) {
+										$("#mensaje").remove();
+										$('#cargando').fadeOut("slow");
+										$("#EstatusLotes-btnBuscar").show();
+										$("#div_tablaDetalle").fadeIn("slow");
 
-								contenedor = $("#div_tablaDetalle");
-								var tr;
-								var td;
-								var countRow = data.lista.length;
-								/****** DE TRAER RESULTADOS LA CONSULTA SE GENERA LA TABLA CON LA DATA... *******/
-								/****** DE LO CONTRARIO SE GENERA UN MENSAJE "No existe Data relacionada con su filtro de busqueda" ******/
-
-								if ($(".tbody-statuslotes").hasClass('dataTable')) {
-										$('.tbody-statuslotes').dataTable().fnClearTable();
-										$('.tbody-statuslotes').dataTable().fnDestroy();
-								}
-
-								if (data.rc == "0" && countRow != 0) {
-										$("#view-results").attr("style", "display:block");
-										$("#tabla-estatus-lotes").fadeIn("fast");
-										$("#contend-pagination").show();
-										$.each(data.lista, function (posLista, itemLista) {
-												tr = $(document.createElement("tr")).appendTo(tbody);
-												td = $(document.createElement("td")).appendTo(tr);
-												td.html(itemLista.dttimestamp);
-												td = $(document.createElement("td")).appendTo(tr);
-												td.html(itemLista.numlote);
-												td = $(document.createElement("td")).appendTo(tr);
-												td.attr("style", "max-width: 180px !important; min-width: 180px !important;");
-												td.html(itemLista.beneficiario);
-												td = $(document.createElement("td")).appendTo(tr);
-												td.html(itemLista.nombre+ " " + itemLista.apellido);
-												td = $(document.createElement("td")).appendTo(tr);
-												td.html(itemLista.monto_total);
-												td = $(document.createElement("td")).appendTo(tr);
-												td.html((itemLista.status)?'Aceptado':'Rechazado');
-										});
-										paginacion(data.totalPaginas, data.paginaActual);
-
-								} else {
-										if (data.rc == "-29") {
-												alert(data.mensaje);
-												$(location).attr('href', base + '/' + pais + '/login');
-										} else {
-												$("#mensaje").remove();
-												$("#tabla-estatus-lotes").fadeOut("fast");
-												$("#view-results").attr("style", "display:none");
-												$("#contend-pagination").hide();
-												var div = $(document.createElement("div")).appendTo(contenedor);
-												div.attr("id", "mensaje");
-												div.attr("style", "background-color:rgb(252,199,199); margin-top:45px;");
-												var p = $(document.createElement("p")).appendTo(div);
-												p.html("No posee registros");
-												p.attr("style", "text-align:center;padding:10px;font-size:14px");
+										var tbody = $("#tbody-datos-general");
+										if (evBuscar) {
+												tbody.empty();
 										}
-								}
-						});
-				}
+
+										contenedor = $("#div_tablaDetalle");
+										var tr;
+										var td;
+										var countRow = data.lista.length;
+										/****** DE TRAER RESULTADOS LA CONSULTA SE GENERA LA TABLA CON LA DATA... *******/
+										/****** DE LO CONTRARIO SE GENERA UN MENSAJE "No existe Data relacionada con su filtro de busqueda" ******/
+
+										if ($(".tbody-statuslotes").hasClass('dataTable')) {
+												$('.tbody-statuslotes').dataTable().fnClearTable();
+												$('.tbody-statuslotes').dataTable().fnDestroy();
+										}
+
+										if (data.rc == "0" && countRow != 0) {
+
+												$("#view-results").attr("style", "display:block");
+												$("#tabla-estatus-lotes").fadeIn("fast");
+												$("#contend-pagination").show();
+
+												$.each(data.lista, function (posLista, itemLista) {
+
+														tr = $(document.createElement("tr")).appendTo(tbody);
+														td = $(document.createElement("td")).appendTo(tr);
+														td.html(itemLista.dttimestamp);
+														td = $(document.createElement("td")).appendTo(tr);
+														td.html(itemLista.numlote);
+														td = $(document.createElement("td")).appendTo(tr);
+														td.attr("style", "max-width: 180px !important; min-width: 180px !important;");
+														td.html(itemLista.beneficiario);
+														td = $(document.createElement("td")).appendTo(tr);
+														td.html(itemLista.nombre+ " " + itemLista.apellido);
+														td = $(document.createElement("td")).appendTo(tr);
+														td.html(itemLista.monto_total);
+														td = $(document.createElement("td")).appendTo(tr);
+														td.html((itemLista.status)?'Aceptado':'Rechazado');
+
+												});
+
+												//paginacion(totalPaginas, 1);
+
+										} else {
+												if (data.rc == "-29") {
+														alert(data.mensaje);
+														$(location).attr('href', base + '/' + pais + '/login');
+												} else {
+														$("#mensaje").remove();
+														$("#tabla-estatus-lotes").fadeOut("fast");
+														$("#view-results").attr("style", "display:none");
+														$("#contend-pagination").hide();
+														var div = $(document.createElement("div")).appendTo(contenedor);
+														div.attr("id", "mensaje");
+														div.attr("style", "background-color:rgb(252,199,199); margin-top:45px;");
+														var p = $(document.createElement("p")).appendTo(div);
+														p.html("No posee registros");
+														p.attr("style", "text-align:center;padding:10px;font-size:14px");
+												}
+										}
+								});
+						}
+					}
+
 		}; //Fin Funcion  buscarStatusTarjetasHambientes
 
 		function validar_filtro_busqueda(div) {
@@ -186,17 +216,12 @@ $(document).ready(function () {
 						dif += months + ' meses';
 				}
 
-				if (years > 0) {
-						$("#mensajeError").html("El rango de fecha no debe ser mayor a 3 meses");
-						$("#mensajeError").fadeIn("fast");
-						return true;
-				}
-				if (months < 6) {
-						$("#mensajeError").fadeOut("fast");
-						return false;
-				} else {
+				if (months > 6) {
 						$("#mensajeError").html("El rango de fecha no debe ser mayor a 6 meses");
 						$("#mensajeError").fadeIn("fast");
+						return false;
+				} else {
+						return true;
 				}
 
 				return true;
@@ -232,7 +257,7 @@ $(document).ready(function () {
 				$(".num-pagina").click(function () {
 						var id = this.id;
 						id = id.split("_");
-						buscarStatusTarjetasHambientes(id[1]);
+						buscarGuarderia(id[1]);
 				});
 
 				$("#anterior-1").unbind("mouseover");
@@ -288,12 +313,12 @@ $(document).ready(function () {
 
 				$("#anterior-22").unbind("click");
 				$("#anterior-22").click(function () {
-						buscarStatusTarjetasHambientes(1);
+						buscarGuarderia(1);
 				});
 
 				$("#siguiente-22").unbind("click");
 				$("#siguiente-22").click(function () {
-						buscarStatusTarjetasHambientes(total);
+						buscarGuarderia(total);
 				});
 		}
 		/***********************Paginacion fin***********************/
@@ -331,6 +356,7 @@ $(document).ready(function () {
 						}, resizable: false});
 
 				$('form#formulario').empty();
+				$('form#formulario').append('<input type="hidden" name="nombreEmpresa" value="' + filtro_busq.nombreEmpresa + '" />');
 				$('form#formulario').append('<input type="hidden" name="fechaini" value="' + filtro_busq.Fechaini + '" />');
 				$('form#formulario').append('<input type="hidden" name="fechafin" value="' + filtro_busq.Fechafin + '" />');
 				$('form#formulario').append('<input type="hidden" name="acrif" value="' + filtro_busq.acrif + '" />');
