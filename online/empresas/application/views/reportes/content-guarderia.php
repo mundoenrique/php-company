@@ -40,6 +40,8 @@ $urlCdn = get_cdn();
         <div id="lotes-contenedor">
             <div id="lotes-2">
                 <div id="search-1">
+									<input id="Guarderia-riff" type="hidden" value="<?php echo $riffGuarderia;?>" />
+									<input id="Empresa-nombre" type="hidden" value="" />
                     <h5><?php echo lang('TITULO_REPORTES_RANGO'); ?></h5>
                     <span>
                         <p><?php echo lang('TITULO_REPORTES_FECHAINI'); ?></p>
@@ -95,6 +97,7 @@ $urlCdn = get_cdn();
                 <tbody id="tbody-datos-general" class = "tbody-reportes">
                 </tbody>
             </table>
+						<!---
             <div id="contend-pagination">
                 <nav id="nav_left">
                     <a href="#" id="anterior-22">Primera</a>
@@ -112,6 +115,7 @@ $urlCdn = get_cdn();
                     <a href="#" id="siguiente-22">&Uacute;ltima</a>
                 </nav>
             </div>
+					-->
         </div>
         <form id='formulario' method='post'></form>
     </div>
