@@ -4436,6 +4436,7 @@ class Reportes extends CI_Controller {
                 'titulo'=>$nombreCompleto,
                 'breadcrum'=>'',
                 'lastSession'=>$lastSessionD,
+								'riffGuarderia' =>$this->session->userdata('acrifS')
             ),TRUE);
 
             $sidebarLotes= $this->parser->parse('widgets/widget-publi-4',
@@ -4589,6 +4590,7 @@ class Reportes extends CI_Controller {
 					 $Fechaini = $this->input->post('fechaini');
  					 $Fechafin = $this->input->post('fechafin');
  					 $acrif = $this->session->userdata('acrifS');
+					 $nombreEmpresa = $this->input->post('nombreEmpresa');
 
 					 $data = array(
 							 "pais" => $urlCountry,
@@ -4597,11 +4599,11 @@ class Reportes extends CI_Controller {
 							 "id_ext_emp"=> $acrif,
 							 "fechaini"=> $Fechaini,
 							 "fechafin"=> $Fechafin,
+							 "nombreEmpresa"=> $nombreEmpresa,
 							 "logAccesoObject" => $logAcceso,
 							 "token"=> $token,
 							 );
 					 $data = json_encode($data,JSON_UNESCAPED_UNICODE);
-
 					 $dataEncry = np_Hoplite_Encryption($data);
 					 $data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
 					 $data = json_encode($data);
@@ -4686,6 +4688,7 @@ class Reportes extends CI_Controller {
 				 $Fechaini = $this->input->post('fechaini');
 				 $Fechafin = $this->input->post('fechafin');
 				 $acrif = $this->session->userdata('acrifS');
+				$nombreEmpresa = $this->input->post('nombreEmpresa');
 
 				 $data = array(
 						 "pais" => $urlCountry,
@@ -4694,6 +4697,7 @@ class Reportes extends CI_Controller {
 						 "id_ext_emp"=> $acrif,
 						 "fechaini"=> $Fechaini,
 						 "fechafin"=> $Fechafin,
+							 "nombreEmpresa"=> $nombreEmpresa,
 						 "logAccesoObject" => $logAcceso,
 						 "token"=> $token,
 						 );
@@ -4708,8 +4712,6 @@ class Reportes extends CI_Controller {
 					 $response =  json_decode(utf8_encode($jsonResponse));
 
 					 if($response){
-
-							log_message('info','guardería pdf '.$response->rc."/".$response->msg);
 
 							if($response->rc==0){
 									 np_hoplite_byteArrayToFile($response->archivo,"pdf","PDFGuarderiaElectronica");
