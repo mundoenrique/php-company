@@ -6610,7 +6610,9 @@ margin-left: 250px;
 }
 
 .select-tipo-guarderia {
-  float: left;
+//  float: left;
+	text-align: center;
+	margin-bottom: 10px;
 }
 
 .conceptDinam-h5 {

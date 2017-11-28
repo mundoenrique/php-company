@@ -58,7 +58,7 @@ $urlBase = $urlBaseA.$pais;
 			</div>
 			<button id='crear'>Crear beneficiario</button>
 			<button id="cargar" >Cargar archivo</button>
-			<button id='buscar' class="margtop10">Buscar beneficiarios</button>
+			<button id='buscar'>Buscar beneficiarios</button>
 		</div>
 		<div id="top-batchs" class='crear elem-hidden'>
 			<span aria-hidden="true" class="icon" data-icon="&#xe08a;"></span> <?php echo lang('TITULO_CREAR_BENEFICIARIO') ?>
