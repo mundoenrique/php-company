@@ -1,18 +1,13 @@
-
 <?php
 $pais = $this->uri->segment(1);
 $urlBaseA = $this->config->item('base_url');
 $urlBase = $urlBaseA.$pais;
-
 ?>
-
 <div id="content-products">
 			<h1>{titulo}</h1>
-
 			<h2 class="title-marca">
 				<?php echo ucwords(mb_strtolower($programa));?>
 			</h2>
-
 			<ol class="breadcrumb">
 				<li>
 					<a href="<?php echo $urlBase; ?>/dashboard" rel="start">
@@ -30,24 +25,17 @@ $urlBase = $urlBaseA.$pais;
 							<?php echo lang('BREADCRUMB_PRODUCTOS'); ?></a>
 						</li>
 						/
-
 						<li class="breadcrumb-item-current">
 							<a href="<?php echo $urlBase; ?>/lotes/reproceso" rel="section">
 								<?php echo lang('BREADCRUMB_REPROCESO'); ?>
 							</a>
 						</li>
 				</ol>
-
-
-
 	<div id="lotes-general">
-
-
 		<div id="top-batchs">
 			<span aria-hidden="true" class="icon" data-icon="&#xe02c;"></span> Selección
 		</div>
 		<div id="lotes-contenedor">
-
 			<div class='select-tipo-guarderia'>
 				Tipo de lote:
 				<select id="tipoCheque">
@@ -68,21 +56,14 @@ $urlBase = $urlBaseA.$pais;
 					?>
 				</select>
 			</div>
-
 			<button id='crear'>Crear beneficiario</button>
 			<button id="cargar" >Cargar archivo</button>
-			<button id='buscar'>Buscar beneficiarios</button>
-
+			<button id='buscar' class="margtop10">Buscar beneficiarios</button>
 		</div>
-
-
-
 		<div id="top-batchs" class='crear elem-hidden'>
 			<span aria-hidden="true" class="icon" data-icon="&#xe08a;"></span> <?php echo lang('TITULO_CREAR_BENEFICIARIO') ?>
 		</div>
 		<div id="lotes-contenedor" class='crear elem-hidden'>
-
-
 				<div class="campos-reproceso">
 					<p>Cédula empleado: *</p><input type="text" id='idPersona' class='nro' maxlength='8'/>
 				</div>
@@ -119,15 +100,11 @@ $urlBase = $urlBaseA.$pais;
 				<div class="campos-reproceso">
 					<p>Concepto pago: *</p><input type="text" id='concepto'/>
 				</div>
-
-
 		</div>
 		<div id="batchs-last" class='crear elem-hidden'>
 			<button id='btnCrearBenf'>Crear</button>
 			<input id="passcrear" class="input-pass-reproceso" placeholder="Ingrese su contraseña" type='password'/>
-
 		</div>
-
 		<div id="top-batchs" class='cargar elem-hidden'>
 			<span aria-hidden="true" class="icon" data-icon="&#xe08a;"></span> <?php echo lang('TITULO_MASIVO_BENEFICIARIO') ?>
 		</div>
@@ -136,12 +113,9 @@ $urlBase = $urlBaseA.$pais;
 			<input id='archivo' placeholder='Click aquí para archivo seleccionar archivo.' readonly="readonly" size='70'/>
 			<button id="cargarXLS" ><?php echo "Cargar" ?></button>
 		</div>
-
-
 		<div id="top-batchs" class='buscar elem-hidden'>
 			<span aria-hidden="true" class="icon" data-icon="&#xe046;"></span> <?php echo lang('TITULO_LISTA_BENEFICIARIOS') ?>
 		</div>
-
 		<div id="lotes-contenedor" class='buscar elem-hidden'>
 			<table id='lista-reproceso' class="tabla-reportes" >
 				<thead>
@@ -155,29 +129,22 @@ $urlBase = $urlBaseA.$pais;
 						<th class='td-corto'>Opción</th>
 					</tr>
 				</thead>
-				<tbody class="tbody-reportes">
-
-				</tbody>
+				<tbody class="tbody-reportes"></tbody>
 			</table>
 			<div id='paginado'></div>
-
 		</div>
-
 		<div id="batchs-last" class='elem-hidden buscar'>
 			<button id='btn-eliminar-benf'>Eliminar</button>
 			<button id='modificacionMasiva'>Modificar y Reprocesar</button>
 			<button id='reprocesar'>Reprocesar</button>
 			<input id="passreprocesar" class="input-pass-reproceso" placeholder="Ingrese su contraseña" type='password'/>
 		</div>
-
 	</div>
-
 	<div id="camposReprocesoMasivo">
 		<br>
 		<div id="MensajeRegistros"></div><br>
 		<table id="Estadistica"></table>
 	</div>
-
 	<div id="camposBenef">
 		<div class="campos-reproceso">
 			<p>Cédula empleado: *</p><input type="text" id='idPersona' class='nro' maxlength='8' disabled/>
@@ -216,12 +183,8 @@ $urlBase = $urlBaseA.$pais;
 			<p>Concepto pago: *</p><input type="text" id='concepto'/>
 		</div>
 	</div>
-
-
 </div>
-
 <div id='loading' style='text-align:center' class='elem-hidden'><?php echo insert_image_cdn("loading.gif"); ?></div>
-
 <form id='toOS' action="<?php echo $urlBase ?>/consulta/ordenes-de-servicio " method="post">
 	<input type="hidden" name="data-OS" value="" id="data-OS" />
 </form>

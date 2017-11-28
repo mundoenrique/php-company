@@ -3493,7 +3493,9 @@ padding:10px 5px 10px 5px;
   /*padding:30px 0;*/
   text-align: justify;
 }
-
+.margtop10{
+    margin-top: 10px;
+}
 .text-general-privacidad-1 {
   width: 600px;
   height: auto;
