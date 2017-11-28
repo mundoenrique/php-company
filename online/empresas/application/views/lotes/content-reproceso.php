@@ -57,7 +57,6 @@ $urlBase = $urlBaseA.$pais;
 				</select>
 			</div>
 			<button id='crear'>Crear beneficiario</button>
-			<button id="cargar" >Cargar archivo</button>
 			<button id='buscar'>Buscar beneficiarios</button>
 		</div>
 		<div id="top-batchs" class='crear elem-hidden'>
