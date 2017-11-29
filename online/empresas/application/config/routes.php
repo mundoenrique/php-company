@@ -29,6 +29,7 @@ $route['api/v1/(:any)/usuario/config/cargarSucursales'] = "users/cargarSucursale
 $route['(:any)/empresas/config'] = "users/configEmpresa/$1";
 $route['(:any)/empresas/configsuc'] = "users/configSucursal/$1";
 $route['(:any)/empresas/configdesc'] = "users/configDescargas/$1";
+$route['(:any)/empresas/confignoti'] = "users/configNotificaciones/$1";
 
 $route['(:any)/beneficios'] = "footer/pantallaBeneficios/$1";
 $route['(:any)/condiciones'] = "footer/pantallaCondiciones/$1";
