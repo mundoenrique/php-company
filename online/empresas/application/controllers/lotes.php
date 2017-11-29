@@ -2386,7 +2386,7 @@ class Lotes extends CI_Controller {
 	* @param string urlCountry
 	*/
 	public function pantallaReproceso($urlCountry){
-
+		log_message('info','Acceso a =====>>> pantallaReproceso ');
 		np_hoplite_countryCheck($urlCountry);
 		$this->lang->load('lotes');
 		$this->lang->load('dashboard');
