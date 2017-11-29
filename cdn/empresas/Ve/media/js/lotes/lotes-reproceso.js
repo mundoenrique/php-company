@@ -299,7 +299,7 @@ function buscar(pgActual){
 	$("#tipoCheque").attr('disabled',true);
 	$("#buscar").attr('disabled',true);
 
-	$("#loading").dialog({title:"Buscar beneficiarios",modal:true,resizable:false,close: function(){$(this).dialog("destroy");}})
+	$("#loading").dialog({title:"Buscar Guarderias",modal:true,resizable:false,close: function(){$(this).dialog("destroy");}})
 
 	$.post(baseURL+api+isoPais+'/lotes/reproceso/buscar',{'data-tipo':tipoLote,'data-paginar':true,'data-pgActual':pgActual,'data-tamPg':tamPg})
 	.done(function(data){
@@ -318,7 +318,7 @@ function buscar(pgActual){
 			location.reload();
 		}else{
 			$('.buscar').addClass('elem-hidden');
-			notificacion('Buscar beneficiarios', data.ERROR);
+			notificacion('Buscar Guarderías', data.ERROR);
 		}
 	});
 }
@@ -558,7 +558,7 @@ $("#lista-reproceso").on("click","#iconModificar", function(){
 	$("#camposBenef #monto").val(datos.monto_total.replace('.',''));
 	$("#camposBenef #concepto").val(datos.concepto);
 	$("#camposBenef").dialog({
-		title: 'Modificar beneficiario',
+		title: 'Modificar Guarderia',
 		modal:true,
 		width:660,
 		buttons:{
@@ -583,7 +583,7 @@ $("#lista-reproceso").on("click","#iconModificar", function(){
 				datosPost.tamPg = tamPg;
 
 				WSbeneficiario('modificar', datosPost, $("#passmodificar").val(),
-						'Modificar beneficiario',$("#camposBenef"),$(".ui-button"));
+						'Modificar Guardería',$("#camposBenef"),$(".ui-button"));
 				$("#passmodificar").val("");
 			}
 		},

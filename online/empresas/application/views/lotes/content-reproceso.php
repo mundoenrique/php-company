@@ -56,8 +56,8 @@ $urlBase = $urlBaseA.$pais;
 					?>
 				</select>
 			</div>
-			<button id='crear'>Crear beneficiario</button>
-			<button id='buscar'>Buscar beneficiarios</button>
+			<button id='crear'>Crear Guardería</button>
+			<button id='buscar'>Buscar Guardería</button>
 		</div>
 		<div id="top-batchs" class='crear elem-hidden'>
 			<span aria-hidden="true" class="icon" data-icon="&#xe08a;"></span> <?php echo lang('TITULO_CREAR_BENEFICIARIO') ?>
@@ -122,8 +122,8 @@ $urlBase = $urlBaseA.$pais;
 						<th class='checkbox-select'><input id="selectAll" type='checkbox' title="seleccionar todos"/> </th>
 						<th class='td-medio'><?echo lang('ID_PERSONA');?></th>
 						<th id="th-empleado">Empleado</th>
-						<th class='td-elect'>Beneficiario</th>
-						<th id='td-nombre-2'>Cuenta beneficiario</th>
+						<th class='td-elect'>Guardería</th>
+						<th id='td-nombre-2'>Cuenta Guardería</th>
 						<th class='td-medio'>Monto</th>
 						<th class='td-corto'>Opción</th>
 					</tr>
