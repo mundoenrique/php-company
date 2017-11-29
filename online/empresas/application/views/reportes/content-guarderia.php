@@ -88,7 +88,7 @@ $urlCdn = get_cdn();
                     <tr id="datos-principales">
                         <th >Fecha de emisión OS</th>
                         <th >Número OS</th>
-												<th style="max-width: 180px !important; min-width: 180px !important;">Beneficiario</th>
+												<th style="max-width: 180px !important; min-width: 180px !important;">Guardería</th>
 												<th >Nombre del empleado</th>
 												<th >Monto</th>
 												<th >Estatus (aceptado o rechazado)</th>
