@@ -1024,6 +1024,44 @@ class Users extends CI_Controller {
         }
     }
 
+	/**
+	 * Pantalla del módulo de configuración.
+	 * Muestra los links de descargas de los gestores archivos y manuales.
+	 *
+	 * @param  string $urlCountry
+	 *
+	 */
+	public function configNotificaciones($urlCountry){
+
+			//cargar archivo de configuración del país
+			np_hoplite_countryCheck($urlCountry);
+
+			$this->lang->load('dashboard');
+			$this->load->library('parser');
+			$this->lang->load('users');
+			$this->lang->load('erroreseol');
+			$logged_in = $this->session->userdata('logged_in');
+
+			$paisS = $this->session->userdata('pais');
+
+			if($paisS==$urlCountry && $logged_in){
+
+					$content = $this->parser->parse('users/content-notificacionesconfig',array(),TRUE);
+
+					$datos = array(
+							'content'=>$content
+					);
+
+					$this->parser->parse('layouts/layout-b', $datos);
+
+			}elseif($paisS!=$urlCountry && $paisS!=""){
+					$this->session->sess_destroy();
+					$this->session->unset_userdata($this->session->all_userdata());
+					echo 'Usuario Desconectado';
+			}else{
+					echo 'Usuario Desconectado';
+			}
+	}
     /**
      * Método que solicita al WS el listado de empresas resumido.
      *
