@@ -22,6 +22,9 @@ $urlCdn = get_cdn();
         <li>
             <a id='descargas'  href="<?php echo $urlBase.'/empresas/configdesc' ?>"><?php echo lang('SUBMENU_DESCARGAS'); ?></a>
         </li>
+				<li>
+            <a id='notificaciones'  href="<?php echo $urlBase.'/empresas/confignoti' ?>"><?php echo lang('SUBMENU_NOTIFICACIONES'); ?></a>
+        </li>
     </ul>
 
     <div id="config-user">
