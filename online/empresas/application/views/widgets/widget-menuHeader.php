@@ -44,6 +44,12 @@ $urlBase = $urlBaseA.$pais;
 					</a>
 				</li>
 				<li class="menu-item signout">
+					<span aria-hidden="true" class="icon" data-icon="&#xe06e;" ></span>
+					<a id='subm-desc' rel="subsection" href="<?php echo $urlBase.'/usuario/config?tab=4' ?>">
+						<?php echo lang('SUBMENU_NOTIFICACIONES') ?>
+					</a>
+				</li>
+				<li class="menu-item signout">
 					<span aria-hidden="true" class="icon" data-icon="&#xe03e;" ></span>
 					<a href="<?php echo $urlBase.'/logout' ?>" rel="subsection">
 						<?php echo lang('SUBMENU_LOGOUT') ?>
