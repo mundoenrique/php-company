@@ -11,13 +11,17 @@ $(".fecha").keypress(function (e) {
 });
 
 $(document).ready(function () {
-				var	guarderia_riff = $("#Guarderia-riff").val();
+ hide( 'lotes-2' );
+ hide( 'batchs-last' );
+	var	guarderia_riff = $("#Guarderia-riff").val();
 	$.getJSON(base + api + pais + '/empresas/consulta-empresa-usuario').always(function( data ) {
 
 		if(!(data.ERROR)){
 			$.each( data.lista, function( k, v ){
 				if( v.acrif == guarderia_riff ){
 					$("#Empresa-nombre").val(v.acnomcia);
+					 show( 'lotes-2' );
+					 hide( 'MensajeLoading' );
 				}else{
 					;
 				}
@@ -31,6 +35,19 @@ $(document).ready(function () {
 			 }
 		}
 	});
+
+	function show( element ) {
+	         var ElementId = document.getElementById( element );
+	         if( ElementId ){
+	             ElementId.style.display = 'block';
+	         }//fin del if
+	   }
+	    function hide( element ) {
+	       var ElementId = document.getElementById( element );
+	       if( ElementId ){
+	            ElementId.style.display = 'none';
+	       }//fin del if
+	   }
 
 		$("#export_excel").click(function () {
 				descargarArchivo(filtro_busq, base + api + pais +

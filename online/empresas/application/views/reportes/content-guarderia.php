@@ -38,7 +38,8 @@ $urlCdn = get_cdn();
         	</span><?php echo lang('CRITERIOS_BUSQUEDA'); ?>
         </div>
         <div id="lotes-contenedor">
-            <div id="lotes-2">
+						<div id="MensajeLoading"><h4>Cargando...</h4></div>
+            <div id="lotes-2" style="display:none">
                 <div id="search-1">
 									<input id="Guarderia-riff" type="hidden" value="<?php echo $riffGuarderia;?>" />
 									<input id="Empresa-nombre" type="hidden" value="" />
@@ -56,7 +57,7 @@ $urlCdn = get_cdn();
                 </div>
             </div>
         </div>
-        <div id="batchs-last">
+        <div id="batchs-last" style="display:none">
             <span id="mensajeError" style="float:left; display:none; color:red;">
 								<?php echo lang('REPORTE_MENSAJE_ERROR'); ?></span>
             <button id= "EstatusLotes-btnBuscar" type="submit">
