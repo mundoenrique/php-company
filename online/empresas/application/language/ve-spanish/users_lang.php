@@ -85,6 +85,8 @@ $lang['SUC_BTN_NEW_MASV'] = 'Subir archivo';
 $lang['SUC_TITLE_NEW_SUC'] = 'Gestión de Sucursal';
 $lang['SUC_BTN_UPFILE'] = 'Subir archivo de nuevas sucursales';
 
+// TAB Notificaciones
+$lang['NOTI_TITLE_CONFIG'] = 'Notificaciones';
 
 // PAGINA LOGOUT
 $lang['LOGOUT_TITULO'] = 'Gracias por usar nuestros servicios';
