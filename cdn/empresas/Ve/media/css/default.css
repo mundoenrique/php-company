@@ -6921,7 +6921,9 @@ button.green:hover {
 #ui-tabs-3 #wrapper {
   padding: 0 !important;
 }
-
+#ui-tabs-4 #wrapper {
+  padding: 0 !important;
+}
 #email_user {
   width: 210px;
 }
@@ -7335,3 +7337,14 @@ button.green:hover {
       top: 0px;
   }
 /* Fin Menu-Head New*/
+
+.pad10 {
+    padding-top: 10px;
+}
+
+
+.checkNotiAdj{
+    padding-top: 20px;
+    margin-top: 12px;
+    margin-left: 120px;
+}
