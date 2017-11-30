@@ -848,7 +848,9 @@ class Users extends CI_Controller {
             $token = $this->session->userdata('token');
             $nombreCompleto = $this->session->userdata('nombreCompleto');
             $lastSessionD = $this->session->userdata('lastSession');
-            $FooterCustomInsertJS=["jquery-1.10.2.min.js","jquery-ui-1.10.3.custom.min.js","jquery.balloon.min.js","jquery-md5.js","jquery.paginate.js","users/configuracion.js","header.js","jquery.fileupload.js","jquery.iframe-transport.js"];
+            $FooterCustomInsertJS=["jquery-1.10.2.min.js","jquery-ui-1.10.3.custom.min.js",
+						"jquery.balloon.min.js","jquery-md5.js","jquery.paginate.js",
+						"users/configuracion.js","header.js","jquery.fileupload.js","jquery.iframe-transport.js"];
             $FooterCustomJS="";
             $titlePage="Conexión Empresas Online-Configuración";
             $title="Configuración";
@@ -858,7 +860,13 @@ class Users extends CI_Controller {
             $menuHeader = $this->parser->parse('widgets/widget-menuHeader',array(),TRUE);
             $menuFooter = $this->parser->parse('widgets/widget-menuFooter',array(),TRUE);
             $header = $this->parser->parse('layouts/layout-header',array('bodyclass'=>'','menuHeaderActive'=>TRUE,'menuHeaderMainActive'=>TRUE,'menuHeader'=>$menuHeader,'titlePage'=>$titlePage),TRUE);
-            $footer = $this->parser->parse('layouts/layout-footer',array('menuFooterActive'=>TRUE,'menuFooter'=>$menuFooter,'FooterCustomInsertJSActive'=>TRUE,'FooterCustomInsertJS'=>$FooterCustomInsertJS,'FooterCustomJSActive'=>TRUE,'FooterCustomJS'=>$FooterCustomJS),TRUE);
+
+            $footer = $this->parser->parse('layouts/layout-footer',
+						array('menuFooterActive'=>TRUE,'menuFooter'=>$menuFooter,
+								'FooterCustomInsertJSActive'=>TRUE,
+								'FooterCustomInsertJS'=>$FooterCustomInsertJS,
+								'FooterCustomJSActive'=>TRUE,
+								'FooterCustomJS'=>$FooterCustomJS),TRUE);
 
             $content = $this->parser->parse('users/content-userconfig',array(
                 'titulo'=> $title,
@@ -1049,19 +1057,19 @@ class Users extends CI_Controller {
 					$lista[] = $this->callWSListaEmpresas($urlCountry);
 					$content = $this->parser->parse('users/content-notificacionesconfig',
 																				array('listaEmpr' => $lista),TRUE);
-					$datos = array(
-							'content'=>$content
-					);
+						$datos = array(
+								'content'=>$content,
+						);
 
-					$this->parser->parse('layouts/layout-b', $datos);
+						$this->parser->parse('layouts/layout-b', $datos);
 
-			}elseif($paisS!=$urlCountry && $paisS!=""){
-					$this->session->sess_destroy();
-					$this->session->unset_userdata($this->session->all_userdata());
-					echo 'Usuario Desconectado';
-			}else{
-					echo 'Usuario Desconectado';
-			}
+				}elseif($paisS!=$urlCountry && $paisS!=""){
+						$this->session->sess_destroy();
+						$this->session->unset_userdata($this->session->all_userdata());
+						echo 'Usuario Desconectado';
+				}else{
+						echo 'Usuario Desconectado';
+				}
 	}
     /**
      * Método que solicita al WS el listado de empresas resumido.
@@ -2654,4 +2662,44 @@ class Users extends CI_Controller {
     }
 
 
+			public function Notificaciones($urlCountry) {
+
+		        np_hoplite_countryCheck($urlCountry);
+
+		        $this->lang->load('erroreseol');
+
+		        $menuP = $this->session->userdata('menuArrayPorProducto');
+
+		        $logged_in = $this->session->userdata('logged_in');
+		        $paisS = $this->session->userdata('pais');
+
+		        if ($paisS == $urlCountry && $logged_in) {
+
+		            if ($moduloAct !== false) {
+
+		                $correo = $this->input->post("pass");
+		                $checkValue = $this->input->post("monto");
+		                $empresa = $this->input->post("concepto");
+
+
+		                $response = $this->callWSNotificaciones( $urlCountry, $correo, $checkValue, $empresa );
+
+							  } else {
+		                $response = json_encode(array("ERROR" => lang('SIN_FUNCION')));
+		            }
+
+								log_message('info', 'callWSreprocesarMasivo Encrypt ====>> ' . json_encode($response));
+
+		            $this->output->set_content_type('')->set_output($response);
+
+		        } elseif ($paisS != $urlCountry && $paisS != '') {
+		            $this->session->sess_destroy();
+		            $this->session->unset_userdata($this->session->all_userdata());
+		            redirect($urlCountry . '/login');
+		        } elseif ($this->input->is_ajax_request()) {
+		            $this->output->set_content_type('application/json')->set_output(json_encode(array('ERROR' => '-29')));
+		        } else {
+		            redirect($urlCountry . '/login');
+		        }
+		    }
 } // FIN DE LA CLASE Users
