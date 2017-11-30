@@ -158,10 +158,10 @@ $urlBase = $urlBaseA.$pais;
 			<p>Email empleado: *</p><input type="text" id='emailEmpl' />
 		</div>
 		<div class="campos-reproceso">
-			<p>Apellido infante: *</p><input type="text" id='apellInfant'disabled/>
+			<p>Apellido niño(a): *</p><input type="text" id='apellInfant'disabled/>
 		</div>
 		<div class="campos-reproceso">
-			<p>Nombre infante: *</p><input type="text" id='nombInfant' disabled/>
+			<p>Nombre niño(a): *</p><input type="text" id='nombInfant' disabled/>
 		</div>
 		<div class="campos-reproceso">
 			<p>Nombre guardería: *</p><input type="text" id='nombGuard' />
@@ -176,7 +176,7 @@ $urlBase = $urlBaseA.$pais;
 			<p>Email guardería: *</p><input type="text" id='emailGuard'/>
 		</div>
 		<div class="campos-reproceso">
-			<p>Monto cheque: *</p><input type="text" id='monto' />
+			<p>Monto: *</p><input type="text" id='monto' />
 		</div>
 		<div class="campos-reproceso">
 			<p>Concepto pago: *</p><input type="text" id='concepto'/>
