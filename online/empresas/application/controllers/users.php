@@ -1046,8 +1046,9 @@ class Users extends CI_Controller {
 
 			if($paisS==$urlCountry && $logged_in){
 
-					$content = $this->parser->parse('users/content-notificacionesconfig',array(),TRUE);
-
+					$lista[] = $this->callWSListaEmpresas($urlCountry);
+					$content = $this->parser->parse('users/content-notificacionesconfig',
+																				array('listaEmpr' => $lista),TRUE);
 					$datos = array(
 							'content'=>$content
 					);
