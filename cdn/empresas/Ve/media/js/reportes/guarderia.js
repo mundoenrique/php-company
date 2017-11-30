@@ -59,7 +59,10 @@ $(document).ready(function () {
 					filtro_busq.pais = pais;
 				  filtro_busq.Fechaini =  $("#Guarderia-fecha-in").val();
 				  filtro_busq.Fechafin = $("#Guarderia-fecha-fin").val();
-					if( CalculateDateDiff( filtro_busq.Fechaini, filtro_busq.Fechafin ) ){
+
+
+					if( calcularDiffMeses(filtro_busq.Fechaini, filtro_busq.Fechafin) ){
+				//	if( CalculateDateDiff(filtro_busq.Fechaini, filtro_busq.Fechafin) ){
 						if ( validar_filtro_busqueda("lotes-2") ) {
 
 								$('#cargando').fadeIn("slow");
@@ -192,6 +195,31 @@ $(document).ready(function () {
 				}
 
 				return valido;
+		}
+
+		function calcularDiffMeses(f1, f2){
+
+				aF1 = f1.split( "/" );
+				aF1 = aF1[ 2 ]+"/"+aF1[ 1 ]+"/"+aF1[ 0 ];
+				aF1 = aF1.split( "/" );
+
+				aF2 = f2.split( "/" );
+				aF2 = aF2[ 2 ]+"/"+aF2[ 1 ]+"/"+aF2[ 0 ];
+				aF2 = aF2.split( "/" );
+
+				numMeses = parseInt(aF2[0])*12 + parseInt(aF2[1]) -
+				 						(parseInt(aF1[0])*12 + parseInt(aF1[1]));
+				if ( parseInt(aF2[2])<parseInt(aF1[2]) ){
+					numMeses = numMeses - 1;
+				}
+				if ( numMeses > 6 ) {
+						$("#mensajeError").html("El rango de fecha no debe ser mayor a 6 meses");
+						$("#mensajeError").fadeIn("fast");
+						return false;
+				} else {
+						return true;
+				}
+
 		}
 
 		function CalculateDateDiff(dateFrom, dateTo) {
