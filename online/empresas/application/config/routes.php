@@ -25,11 +25,13 @@ $route['api/v1/(:any)/usuario/config/consultarSucursales'] = "users/getConsultar
 $route['api/v1/(:any)/usuario/config/agregarSucursales'] = "users/getAgregarSucursales/$1";
 $route['api/v1/(:any)/usuario/config/actualizarSucursales'] = "users/getActualizarSucursales/$1";
 $route['api/v1/(:any)/usuario/config/cargarSucursales'] = "users/cargarSucursales/$1";
+$route['api/v1/(:any)/usuario/notificaciones/buscar'] = "users/Notificaciones/$1";
 
 $route['(:any)/empresas/config'] = "users/configEmpresa/$1";
 $route['(:any)/empresas/configsuc'] = "users/configSucursal/$1";
 $route['(:any)/empresas/configdesc'] = "users/configDescargas/$1";
 $route['(:any)/empresas/confignoti'] = "users/configNotificaciones/$1";
+//$route['(:any)/usuario/notificaciones/buscar'] = "users/Notificaciones/$1";
 
 $route['(:any)/beneficios'] = "footer/pantallaBeneficios/$1";
 $route['(:any)/condiciones'] = "footer/pantallaCondiciones/$1";
