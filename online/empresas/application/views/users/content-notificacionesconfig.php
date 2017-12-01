@@ -3,7 +3,7 @@
 	$pais = $this->uri->segment(1);
 	$urlCdn = get_cdn();
 ?>
-<div id="config-empresas">
+<div id="config-empresas" style="width: 670px;">
 	<div id = "cargando" style = "display:none">
 		<h2 style="text-align:center">
 		<?php echo lang('CARGANDO'); ?></h2>
@@ -11,8 +11,8 @@
 		 		src="<?php echo $urlCdn."media/img/loading.gif"?>"/>
 	</div>
 	<h1><?php echo lang('NOTI_TITLE_CONFIG'); ?></h1>
-	<div id="campos-1" class="pad10">
-		<select class="select-empresa" id="listaEmpresas" name="batch">
+
+		<select class="selectorNotificacion" id="listaEmpresas" name="batch"  onchange="selectorEmpresa()">
 			<?php
 				if(array_key_exists('ERROR', $listaEmpr[0])){
 						if($listaEmpr[0]['ERROR']=='-29'){
@@ -27,11 +27,10 @@
 				}
 			?>
 		</select>
-		<br>
-		<label  class="checkNotiAdj">Desea Aceptar Notificaciones?</label>
-<input type="checkbox" id="checkNoti"name="checkNoti" value="" >
-	</div>
-	<div id="campos-1" class="input-email">
+		<!-- <label  class="checkNotiAdj">Desea Aceptar Notificaciones?</label>
+		<input type="checkbox" id="checkNoti"name="checkNoti" value="" > -->
+
+	<!--<div id="campos-1" class="input-email">
 		<span class="input-email">
 			<p id="first"><?php echo lang('INFO_USER_EMAIL'); ?></p>
 			<input id="email_user_noti" type="text" value="" style="float:left;" maxlength='45'/>
@@ -39,7 +38,9 @@
 	</div>
 	<div id="opciones-btn">
 			<button id='btn-modificar-noti' type="submit">Guardar</button>
-	</div>
+	</div> -->
+	<br>
+	<div id="notificacionesRequest" style="margin-left: 10px;"></div>
 </div>
 <script type="text/javascript">
 
@@ -47,10 +48,24 @@
 		var check = document.getElementById( 'checkNoti' );
 		var email_user_noti = document.getElementById( 'email_user_noti' );
 		var btn_modificar_noti = document.getElementById( 'btn-modificar-noti' );
+		var listaEmpresas =  document.getElementById( 'listaEmpresas' );
+		var Notificaciones = {};
+		function selectorEmpresa(){
+
+			var datosPost = {};
+			var myselect = document.getElementById("listaEmpresas");
+			datosPost.acrif =
+			selector = myselect.options[ myselect.selectedIndex ];
+			datosPost.acrif = selector.getAttribute( 'data-rif' );
+		 	var titulo = "Selector Empresa";
+			WS( 'buscar', datosPost, titulo );
+
+		}
+
 
 		showHideClass('.input-email', 'none');
 
-		check.addEventListener( "click", function( event ) {
+		/*check.addEventListener( "click", function( event ) {
 				showHideClass( '.input-email', (check.checked)?'block':'none' );
 	  });
 
@@ -63,9 +78,9 @@
 					 alert("Notificaciones Desactivadas");
 				 }
 		});
-
-	 	 email_user_noti.addEventListener( "onchange", captureEventCorreo);
-		 email_user_noti.addEventListener( "blur", captureEventCorreo);
+*/
+	 	// email_user_noti.addEventListener( "onchange", captureEventCorreo);
+		// email_user_noti.addEventListener( "blur", captureEventCorreo);
 
 		 function captureEventCorreo( event ) {
 				var email = document.getElementById( event.target.id );
@@ -90,7 +105,7 @@
 				});
 		}
 
-		function notificacion(titulo, mensaje){
+		function notificacion( titulo, mensaje ){
 
         var canvas = "<div>"+mensaje+"</div>";
 
@@ -110,10 +125,20 @@
 
 		function WS(funcion, datosPost, titulo){
 
-			$.post(baseURL+api+isoPais+'/lotes/reproceso/'+funcion, datosPost).done(function(data){
+			var path = window.location.href.split( '/' );
+			var baseURL = path[0]+ "//" +path[2]+'/'+path[3];
+			var isoPais = path[4];
+			var api ="/api/v1/";
+			var tamPg = 10;
+			var selPgActual=1;
+			var tipoLote;
+
+			$.post(baseURL+api+isoPais+'/usuario/notificaciones/'+funcion, datosPost).done(function(data){
 				if(!data.ERROR){
 					$(".ui-dialog-content").dialog("destroy");
 					notificacion(titulo,'Proceso exitoso');
+					Notificaciones = data;
+					pintar(data);
 				}else{
 					if(data.ERROR=='-29'){
 						alert('Usuario actualmente desconectado'); location.reload();
@@ -122,6 +147,31 @@
 					}
 				}
 			});
+
+		}
+
+		function pintar( data ){
+
+			var types = JSON.parse(data);
+			var notificaciones = types.notificaciones;
+			var html = '';
+			var notificacionesRequest = document.getElementById("notificacionesRequest");
+			console.log(notificaciones);
+
+			for( x = 0; x < notificaciones.length; x++ ) {
+
+				var checkedTmp = (notificaciones[x].notificacionAct==1)?'checked':'';
+
+				html += '<br><input type="checkbox" id="checkNoti'+notificaciones[x].codOperacion+
+								'" name="checkNoti'+notificaciones[x].codOperacion+'" '+
+								' value="'+notificaciones[x].codOperacion+'" '+checkedTmp+'> '+notificaciones[x].descripcion +
+								'<br> <br>Correo : <input type="text" name="correo'+notificaciones[x].codOperacion+
+										'" id="'+notificaciones[x].codOperacion+'"><br><hr class="classHrNoti"><br><br>';
+
+			}
+
+			html += '<br><div id="opciones-btn"><button id="btn-modificar-noti" type="submit">Guardar</button></div>';
+			notificacionesRequest.innerHTML = html;
 
 		}
 </script>
