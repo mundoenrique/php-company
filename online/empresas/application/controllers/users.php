@@ -1040,6 +1040,7 @@ class Users extends CI_Controller {
 	 *
 	 */
 	public function configNotificaciones($urlCountry){
+		log_message('info', ' ==============>>>>>>>>>>>>>> configNotificaciones');
 
 			//cargar archivo de configuración del país
 			np_hoplite_countryCheck($urlCountry);
@@ -1071,6 +1072,7 @@ class Users extends CI_Controller {
 						echo 'Usuario Desconectado';
 				}
 	}
+
     /**
      * Método que solicita al WS el listado de empresas resumido.
      *
@@ -2667,7 +2669,7 @@ class Users extends CI_Controller {
 		        np_hoplite_countryCheck($urlCountry);
 
 		        $this->lang->load('erroreseol');
-
+		        $this->lang->load('users');
 		        $menuP = $this->session->userdata('menuArrayPorProducto');
 
 		        $logged_in = $this->session->userdata('logged_in');
@@ -2675,22 +2677,12 @@ class Users extends CI_Controller {
 
 		        if ($paisS == $urlCountry && $logged_in) {
 
-		            if ($moduloAct !== false) {
+		                $acrif = $this->input->post("acrif");
+		                $response = $this->callWSNotificaciones( $urlCountry,$acrif );
 
-		                $correo = $this->input->post("pass");
-		                $checkValue = $this->input->post("monto");
-		                $empresa = $this->input->post("concepto");
+								log_message('info', ' ====>> ' . json_encode($response));
 
-
-		                $response = $this->callWSNotificaciones( $urlCountry, $correo, $checkValue, $empresa );
-
-							  } else {
-		                $response = json_encode(array("ERROR" => lang('SIN_FUNCION')));
-		            }
-
-								log_message('info', 'callWSreprocesarMasivo Encrypt ====>> ' . json_encode($response));
-
-		            $this->output->set_content_type('')->set_output($response);
+		            $this->output->set_content_type('')->set_output(json_encode($response));
 
 		        } elseif ($paisS != $urlCountry && $paisS != '') {
 		            $this->session->sess_destroy();
@@ -2702,4 +2694,72 @@ class Users extends CI_Controller {
 		            redirect($urlCountry . '/login');
 		        }
 		    }
+
+				function callWSNotificaciones( $urlCountry, $acrif ){
+
+						$this->lang->load('erroreseol');
+						$canal = "ceo";
+						$modulo="Reporte por Producto";
+						$function="Notificaciones Usuario";
+						$operation="buscarNotificacionesCeo";
+
+						$className="com.novo.objects.TOs.ContactoTO";
+						$timeLog= date("m/d/Y H:i");
+						$ip= $this->input->ip_address();
+						$sessionId = $this->session->userdata('sessionId');
+						$username = $this->session->userdata('userName');
+						$logAcceso = np_hoplite_log($sessionId,$username,$canal,
+						$modulo,$function,$operation,0,$ip,$timeLog);
+						$token = $this->session->userdata('token');
+
+						$data = array(
+								"idOperation" => $operation,
+								"className" => $className,
+								"accodusuario" => $username,
+								"acrif"=> $acrif,
+								"logAccesoObject"=>$logAcceso,
+								"token"=>$token,
+								"pais"=>$urlCountry
+						);
+
+						$data = json_encode( $data, JSON_UNESCAPED_UNICODE);
+						log_message('info','Estatus Notificacion : '.$data);
+
+						$dataEncry = np_Hoplite_Encryption( $data);
+						$data = array( 'bean' => $dataEncry, 'pais' =>$urlCountry );
+						$data = json_encode($data);
+						$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+						$jsonResponse = np_Hoplite_Decrypt($response);
+						$response =  json_decode(utf8_encode($jsonResponse));
+						$data1 = json_encode($response);
+
+						if($response){
+								log_message('info','Estatus Notificacion : '.$response->rc."/".$response->msg);
+								if($response->rc==0){
+										return $response;
+								}else{
+												if($response->rc==-61 || $response->rc==-29){
+
+														$codigoError = array('mensaje' => lang('ERROR_(-29)'), "rc"=> "-29");
+														$this->session->unset_userdata($this->session->all_userdata());
+														$this->session->sess_destroy();
+														return $codigoError;
+
+												}else{
+
+														$codigoError = lang('ERROR_('.$response->rc.')');
+
+														$codigoError = (strpos($codigoError, 'Error')!==false)?
+															array('mensaje' => lang('ERROR_GENERICO_USER'), "rc"=> $response->rc):
+																array('mensaje' => lang('ERROR_('.$response->rc.')'), "rc"=> $response->rc);
+
+														return $codigoError;
+												}
+								}
+
+						}else{
+								log_message('info','Estatus Notificacion NO WS ');
+								return $codigoError = array('mensaje' => lang('ERROR_GENERICO_USER'));
+						}
+				}
 } // FIN DE LA CLASE Users
