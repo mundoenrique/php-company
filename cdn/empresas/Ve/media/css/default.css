@@ -21,6 +21,17 @@ section {
   display: block;
 }
 
+.selectorNotificacion{
+  width: 500px;
+  margin-left: 5px;
+  background: none;
+  border: 1px solid #D5D5D5;
+  color: #0072c0;
+}
+.classHrNoti{
+	width: 512px;
+  float: left;
+}
 audio,
 canvas,
 video {
