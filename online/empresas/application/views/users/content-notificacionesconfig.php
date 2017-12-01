@@ -50,15 +50,21 @@
 		var btn_modificar_noti = document.getElementById( 'btn-modificar-noti' );
 		var listaEmpresas =  document.getElementById( 'listaEmpresas' );
 		var Notificaciones = {};
+
 		function selectorEmpresa(){
 
 			var datosPost = {};
 			var myselect = document.getElementById("listaEmpresas");
-			datosPost.acrif =
-			selector = myselect.options[ myselect.selectedIndex ];
+			var selector = myselect.options[ myselect.selectedIndex ];
+			var titulo = "Selector Empresa";
+
 			datosPost.acrif = selector.getAttribute( 'data-rif' );
-		 	var titulo = "Selector Empresa";
-			WS( 'buscar', datosPost, titulo );
+
+			response = WS( 'buscar', datosPost, titulo );
+
+			if( response.status ){
+ 					HtmlRows( reponse.data );
+			}
 
 		}
 
@@ -125,38 +131,45 @@
 
 		function WS(funcion, datosPost, titulo){
 
-			var path = window.location.href.split( '/' );
-			var baseURL = path[0]+ "//" +path[2]+'/'+path[3];
-			var isoPais = path[4];
-			var api ="/api/v1/";
-			var tamPg = 10;
-			var selPgActual=1;
-			var tipoLote;
+				var path = window.location.href.split( '/' );
+				var baseURL = path[0]+ "//" +path[2]+'/'+path[3];
+				var isoPais = path[4];
+				var api ="/api/v1/";
+				var tamPg = 10;
+				var selPgActual=1;
+				var tipoLote;
+				var arrayResponse = {
+					status : false,
+					data : ''
+				};
+				$.post( baseURL+api+isoPais+'/usuario/notificaciones/'+funcion, datosPost ).done(function(data){
 
-			$.post(baseURL+api+isoPais+'/usuario/notificaciones/'+funcion, datosPost).done(function(data){
-				if(!data.ERROR){
-					$(".ui-dialog-content").dialog("destroy");
-					notificacion(titulo,'Proceso exitoso');
-					Notificaciones = data;
-					pintar(data);
-				}else{
-					if(data.ERROR=='-29'){
-						alert('Usuario actualmente desconectado'); location.reload();
-					}else{
-						notificacion(titulo, data.ERROR);
-					}
-				}
-			});
+					var data = JSON.parse(data);
+
+						if( data.rc == '0' ){
+							$(".ui-dialog-content").dialog("destroy");
+							notificacion(titulo,'Proceso exitoso');
+
+							arrayResponse.status = true;
+							arrayResponse.data = data;
+
+						}
+						else{
+								notificacion( titulo, data.mensaje );
+								arrayResponse.status = false;
+								arrayResponse.data = '';
+						}
+				});
+
+				return arrayResponse;
 
 		}
 
-		function pintar( data ){
+		function HtmlRows( data ){
 
-			var types = JSON.parse(data);
-			var notificaciones = types.notificaciones;
+			var notificaciones = data.notificaciones;
 			var html = '';
 			var notificacionesRequest = document.getElementById("notificacionesRequest");
-			console.log(notificaciones);
 
 			for( x = 0; x < notificaciones.length; x++ ) {
 
@@ -167,7 +180,6 @@
 								' value="'+notificaciones[x].codOperacion+'" '+checkedTmp+'> '+notificaciones[x].descripcion +
 								'<br> <br>Correo : <input type="text" name="correo'+notificaciones[x].codOperacion+
 										'" id="'+notificaciones[x].codOperacion+'"><br><hr class="classHrNoti"><br><br>';
-
 			}
 
 			html += '<br><div id="opciones-btn"><button id="btn-modificar-noti" type="submit">Guardar</button></div>';
