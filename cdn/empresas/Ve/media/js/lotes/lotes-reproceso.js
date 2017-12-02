@@ -79,6 +79,7 @@ function WS(funcion, datosPost, titulo){
 
 	$.post(baseURL+api+isoPais+'/lotes/reproceso/'+funcion, datosPost).done(function(data){
 
+		console.log(JSON.parse(data));
 		if(!data.ERROR){
 			$(".ui-dialog-content").dialog("destroy");
 			notificacion(titulo,'Proceso exitoso');
@@ -308,12 +309,10 @@ function buscar(pgActual){
 		$("#loading").dialog("destroy");
 
 		ReprocesoMasivo.countTotal = data.totalRegistros;
-
-		if(!data.ERROR){
-
+		console.log(data);
+		if(data.rc == 0){
 			pintar(data);
-
-		}else if(data.ERROR=='-29'||data.ERROR=='-61'){
+		}else if(data.rc=='-29'||data.rc=='-61'){
 			alert('Usuario actualmente desconectado');
 			location.reload();
 		}else{
