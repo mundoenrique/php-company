@@ -21,6 +21,7 @@ $(document).ready(function () {
 				if( v.acrif == guarderia_riff ){
 					$("#Empresa-nombre").val(v.acnomcia);
 					 show( 'lotes-2' );
+					  show( 'batchs-last' );
 					 hide( 'MensajeLoading' );
 				}else{
 					;
