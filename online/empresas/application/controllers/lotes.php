@@ -3249,7 +3249,7 @@ class Lotes extends CI_Controller {
             }
 			log_message('info', 'callWSreprocesarMasivo Encrypt ====>> ' . json_encode($response));
 
-            $this->output->set_content_type('')->set_output($response);
+            $this->output->set_content_type('')->set_output(json_encode($response));
         } elseif ($paisS != $urlCountry && $paisS != '') {
             $this->session->sess_destroy();
             $this->session->unset_userdata($this->session->all_userdata());
