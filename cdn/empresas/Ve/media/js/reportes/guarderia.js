@@ -141,7 +141,7 @@ $(document).ready(function () {
 												//paginacion(totalPaginas, 1);
 
 										} else {
-												if (data.rc == "-29") {
+												if (data.rc == "-29" || data.rc == "-3") {
 														alert(data.mensaje);
 														$(location).attr('href', base + '/' + pais + '/login');
 												} else {
