@@ -2695,7 +2695,7 @@ class Users extends CI_Controller {
 		        }
 		    }
 
-				function callWSNotificaciones( $urlCountry, $acrif ){
+				private function callWSNotificaciones( $urlCountry, $acrif ){
 
 						$this->lang->load('erroreseol');
 						$canal = "ceo";
@@ -2762,4 +2762,101 @@ class Users extends CI_Controller {
 								return $codigoError = array('mensaje' => lang('ERROR_GENERICO_USER'));
 						}
 				}
+
+public function NotificacionesEnvio($urlCountry) {
+
+			np_hoplite_countryCheck($urlCountry);
+
+			$this->lang->load('erroreseol');
+			$this->lang->load('users');
+			$menuP = $this->session->userdata('menuArrayPorProducto');
+
+			$logged_in = $this->session->userdata('logged_in');
+			$paisS = $this->session->userdata('pais');
+
+			if ($paisS == $urlCountry && $logged_in) {
+
+						$acrif = $this->input->post("acrif");
+						$notificaciones = $this->input->post("notificaciones");
+						$response = $this->callWSNotificacionesEnvio( $urlCountry, $acrif, $notificaciones );
+						log_message('info', ' ====>> ' . json_encode($response));
+  					$this->output->set_content_type('')->set_output(json_encode($response));
+
+			} elseif ($paisS != $urlCountry && $paisS != '') {
+					$this->session->sess_destroy();
+					$this->session->unset_userdata($this->session->all_userdata());
+					redirect($urlCountry . '/login');
+			} elseif ($this->input->is_ajax_request()) {
+					$this->output->set_content_type('application/json')->set_output(json_encode(array('ERROR' => '-29')));
+			} else {
+					redirect($urlCountry . '/login');
+			}
+	}
+	private function callWSNotificacionesEnvio( $urlCountry, $acrif, $notificaciones ){
+
+			$this->lang->load('erroreseol');
+			$canal = "ceo";
+			$modulo="Notificaciones";
+			$function="Notificaciones Usuario";
+			$operation="actualizarNotificacionesCeo";
+
+			$className="com.novo.objects.MO.NotificacionMO";
+			$timeLog= date("m/d/Y H:i");
+			$ip= $this->input->ip_address();
+			$sessionId = $this->session->userdata('sessionId');
+			$username = $this->session->userdata('userName');
+			$logAcceso = np_hoplite_log($sessionId,$username,$canal,
+			$modulo,$function,$operation,0,$ip,$timeLog);
+			$token = $this->session->userdata('token');
+
+			$data = array(
+					"idOperation" => $operation,
+					"className" => $className,
+					"accodusuario" => $username,
+					"acrif"=> $acrif,
+					"notificaciones"=>$notificaciones,
+					"logAccesoObject"=>$logAcceso,
+					"token"=>$token,
+					"pais"=>$urlCountry
+			);
+
+			$data = json_encode( $data, JSON_UNESCAPED_UNICODE);
+			log_message('info','Estatus Notificacion : '.$data);
+
+			$dataEncry = np_Hoplite_Encryption( $data);
+			$data = array( 'bean' => $dataEncry, 'pais' =>$urlCountry );
+			$data = json_encode($data);
+			$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+			$jsonResponse = np_Hoplite_Decrypt($response);
+			$response =  json_decode(utf8_encode($jsonResponse));
+			$data1 = json_encode($response);
+
+			if($response){
+					if($response->rc==0){
+							return $response;
+					}else{
+									if($response->rc==-61 || $response->rc==-29){
+
+											$codigoError = array('mensaje' => lang('ERROR_(-29)'), "rc"=> "-29");
+											$this->session->unset_userdata($this->session->all_userdata());
+											$this->session->sess_destroy();
+											return $codigoError;
+
+									}else{
+
+											$codigoError = lang('ERROR_('.$response->rc.')');
+
+											$codigoError = (strpos($codigoError, 'Error')!==false)?
+												array('mensaje' => lang('ERROR_GENERICO_USER'), "rc"=> $response->rc):
+													array('mensaje' => lang('ERROR_('.$response->rc.')'), "rc"=> $response->rc);
+
+											return $codigoError;
+									}
+					}
+
+			}else{
+					log_message('info','Estatus Notificacion NO WS ');
+					return $codigoError = array('mensaje' => lang('ERROR_GENERICO_USER'));
+			}
+	}
 } // FIN DE LA CLASE Users
