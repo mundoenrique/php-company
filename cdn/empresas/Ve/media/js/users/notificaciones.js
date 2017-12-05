@@ -55,7 +55,7 @@
 													Notificaciones.notificaciones[ a ].contacto.email = correo;
 													Notificaciones.notificaciones[ a ].contacto.estatus = "A";
 											}else{
-													var msj ='Por favor introdusca un correo a la casilla : '+
+													var msj ='Por favor introdusca un correo en la entrada : '+
 																			Notificaciones.notificaciones[ a ].descripcion;
 													notificacion('Notificacion', msj);
 												  ErrorCount += 1;
