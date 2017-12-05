@@ -80,10 +80,10 @@
 					var data = JSON.parse( data );
 						if( data.rc == 0 ){
 								$( ".ui-dialog-content" ).dialog( "destroy" );
-								notificacion( 'Notificacion', 'Notificaciones Almacenadas' );
+								notificacion( 'Notificacion', 'Almacenamiento Exitoso.' );
 						}
 						else{
-								notificacion( 'Notificacion', data.mensaje );
+								notificacion( 'Notificacion',"No se pudo actualizar las notificaiones del Usuario.", );
 						}
 				});
 			}
