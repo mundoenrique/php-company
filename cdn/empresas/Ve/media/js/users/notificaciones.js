@@ -47,13 +47,16 @@
 					id = id[1];
 
 					for( a = 0; a <= Notificaciones.notificaciones.length -1; a++ ){
+
+						Notificaciones.notificaciones[ a ].contacto.estatus = "A";
+						Notificaciones.notificaciones[ a ].contacto.acrif = getRif();
+
 							if( Notificaciones.notificaciones[ a ].codOperacion == id ){
 									if ( this.checked ) {
 											var correo = document.getElementById(id).value;
 											if(correo != ""){
 													Notificaciones.notificaciones[ a ].notificacionAct = 1;
 													Notificaciones.notificaciones[ a ].contacto.email = correo;
-													Notificaciones.notificaciones[ a ].contacto.estatus = "A";
 											}else{
 													var msj ='Por favor introdusca un correo en la entrada : <strong>'+
 																			Notificaciones.notificaciones[ a ].descripcion+'</strong>';
@@ -63,16 +66,15 @@
 									}
 							}
 					}
-			});
 
+			});
+					console.log( Notificaciones);
 			if( ErrorCount == 0 ){
 
 				var path = window.location.href.split( '/' );
 				var baseURL = path[ 0 ]+ "//" +path[ 2 ]+'/'+path[ 3];
 				var isoPais = path[4];
 				var api ="/api/v1/";
-
-				Notificaciones.acrif = getRif();
 
 				$.post( baseURL+api+isoPais+'/usuario/notificaciones/envio', Notificaciones ).done(function(data){
 
@@ -168,12 +170,12 @@
 									' value="'+notificaciones[x].codOperacion+'" '+checkedTmp+'> '+notificaciones[x].descripcion +
 									'<br> <br><div id="div'+notificaciones[x].codOperacion+'" style="'+style+'">'+
 									'Correo : <input type="text" name="correo'+notificaciones[x].codOperacion+
-											'" id="'+notificaciones[x].codOperacion+'" value="" '+notificaciones[x].contacto.email+
-											' onchange="captureEventCorreo(this)">'+
+											'" id="'+notificaciones[x].codOperacion+'" value="'+notificaciones[x].contacto.email+
+											'"  onchange="captureEventCorreo(this)">'+
 											'<br><hr class="classHrNoti"></div><br><br>';
-				}
-				html += '<br><div id="opciones-btn"><button id="btn-modificar-noti" '+
-										'type="submit" onclick="envioDatos()">Guardar</button></div>';
-				notificacionesRequest.innerHTML = html;
+			}
+			html += '<br><div id="opciones-btn"><button id="btn-modificar-noti" '+
+									'type="submit" onclick="envioDatos()">Guardar</button></div>';
+			notificacionesRequest.innerHTML = html;
 
 		}
