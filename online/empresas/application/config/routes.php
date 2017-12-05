@@ -26,6 +26,7 @@ $route['api/v1/(:any)/usuario/config/agregarSucursales'] = "users/getAgregarSucu
 $route['api/v1/(:any)/usuario/config/actualizarSucursales'] = "users/getActualizarSucursales/$1";
 $route['api/v1/(:any)/usuario/config/cargarSucursales'] = "users/cargarSucursales/$1";
 $route['api/v1/(:any)/usuario/notificaciones/buscar'] = "users/Notificaciones/$1";
+$route['api/v1/(:any)/usuario/notificaciones/envio'] = "users/NotificacionesEnvio/$1";
 
 $route['(:any)/empresas/config'] = "users/configEmpresa/$1";
 $route['(:any)/empresas/configsuc'] = "users/configSucursal/$1";
