@@ -2776,10 +2776,10 @@ public function NotificacionesEnvio($urlCountry) {
 
 			if ($paisS == $urlCountry && $logged_in) {
 
-						$acrif = $this->input->post("acrif");
 						$notificaciones = $this->input->post("notificaciones");
-						$response = $this->callWSNotificacionesEnvio( $urlCountry, $acrif, $notificaciones );
-						log_message('info', ' ====>> ' . json_encode($response));
+            log_message('info', ' notificaciones ====>> ' . json_encode($notificaciones));
+						$response = $this->callWSNotificacionesEnvio( $urlCountry, $notificaciones );
+						log_message('info', 'response ====>> ' . json_encode($response));
   					$this->output->set_content_type('')->set_output(json_encode($response));
 
 			} elseif ($paisS != $urlCountry && $paisS != '') {
@@ -2792,7 +2792,7 @@ public function NotificacionesEnvio($urlCountry) {
 					redirect($urlCountry . '/login');
 			}
 	}
-	private function callWSNotificacionesEnvio( $urlCountry, $acrif, $notificaciones ){
+	private function callWSNotificacionesEnvio( $urlCountry, $notificaciones ){
 
 			$this->lang->load('erroreseol');
 			$canal = "ceo";
@@ -2813,7 +2813,6 @@ public function NotificacionesEnvio($urlCountry) {
 					"idOperation" => $operation,
 					"className" => $className,
 					"accodusuario" => $username,
-					"acrif"=> $acrif,
 					"notificaciones"=>$notificaciones,
 					"logAccesoObject"=>$logAcceso,
 					"token"=>$token,
