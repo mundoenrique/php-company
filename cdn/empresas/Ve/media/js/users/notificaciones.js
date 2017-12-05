@@ -5,19 +5,24 @@
 		var btn_modificar_noti = document.getElementById( 'btn-modificar-noti' );
 		var listaEmpresas =  document.getElementById( 'listaEmpresas' );
 		var Notificaciones;
+		var datosPost = {
+			acrif : ''
+		};
 
 		function selectorEmpresa(){
 
 			var datosPost = {};
-			var myselect = document.getElementById("listaEmpresas");
-			var selector = myselect.options[ myselect.selectedIndex ];
 			var titulo = "Selector Empresa";
 
-			datosPost.acrif = selector.getAttribute( 'data-rif' );
+			datosPost.acrif = getRif();
 			ConsultaNotificaciones( 'buscar', datosPost, titulo );
 
 		}
-
+		function getRif(){
+			var myselect = document.getElementById("listaEmpresas");
+			var selector = myselect.options[ myselect.selectedIndex ];
+			return selector.getAttribute( 'data-rif' );
+		}
 		showHideClass('.input-email', 'none');
 
 		function capturaCheck( e ){
@@ -31,61 +36,59 @@
 
 		}
 
-		/*check.addEventListener( "click", function( event ) {
-				showHideClass( '.input-email', (check.checked)?'block':'none' );
-	  });
-
-		btn_modificar_noti.addEventListener( "click", function( event ) {
-				 if( check.checked ){
-					 	if( validacionCorreo( email_user_noti.value ) ){
-							alert("Notificaciones Activas");
-						}
-				 }else{
-					 alert("Notificaciones Desactivadas");
-				 }
-		});
-*/
-	 	// email_user_noti.addEventListener( "onchange", captureEventCorreo);
-		// email_user_noti.addEventListener( "blur", captureEventCorreo);
 		function envioDatos(){
 
-			var listaInputs = [];
+  		var ErrorCount = 0;
 
 			$.each($(":checkbox"),function(k,v){
 
-				if (this.checked) {
-					var datos = JSON.parse($(this).attr('id'));
+					var id = $( this ).attr( 'id' );
+				  id = id.split( "checkNoti" );
+					id = id[1];
 
-					listaInputs.push(datos);
-				}
+					for( a = 0; a <= Notificaciones.notificaciones.length -1; a++ ){
+							if( Notificaciones.notificaciones[ a ].codOperacion == id ){
+									if ( this.checked ) {
+											var correo = document.getElementById(id).value;
+											if(correo != ""){
+													Notificaciones.notificaciones[ a ].notificacionAct = 1;
+													Notificaciones.notificaciones[ a ].contacto.email = correo;
+													Notificaciones.notificaciones[ a ].contacto.estatus = "A";
+											}else{
+													var msj ='Por favor introdusca un correo a la casilla : '+
+																			Notificaciones.notificaciones[ a ].descripcion;
+													notificacion('Notificacion', msj);
+												  ErrorCount += 1;
+											}
+									}
+							}
+					}
 			});
 
-			console.log(listaInputs);
+			if( ErrorCount == 0 ){
 
-			var path = window.location.href.split( '/' );
-			var baseURL = path[ 0 ]+ "//" +path[ 2 ]+'/'+path[ 3];
-			var isoPais = path[4];
-			var api ="/api/v1/";
-/*
-			$.post( baseURL+api+isoPais+'/usuario/notificaciones/envio', datosPost ).done(function(data){
+				var path = window.location.href.split( '/' );
+				var baseURL = path[ 0 ]+ "//" +path[ 2 ]+'/'+path[ 3];
+				var isoPais = path[4];
+				var api ="/api/v1/";
 
-				var data = JSON.parse( data );
+				Notificaciones.acrif = getRif();
 
-					if( data.rc == 0 ){
-							$( ".ui-dialog-content" ).dialog( "destroy" );
-							notificacion( titulo, data.mensaje );
-					}
-					else{
-							notificacion( titulo, data.mensaje );
-					}
+				$.post( baseURL+api+isoPais+'/usuario/notificaciones/envio', Notificaciones ).done(function(data){
 
-			});*/
-
+					var data = JSON.parse( data );
+						if( data.rc == 0 ){
+								$( ".ui-dialog-content" ).dialog( "destroy" );
+								notificacion( 'Notificacion', data.mensaje );
+						}
+						else{
+								notificacion( 'Notificacion', data.mensaje );
+						}
+				});
+			}
 		}
 		 function captureEventCorreo( e ) {
-			  console.log(e);
 				var value = e.value;
-				console.log(value);
 				validacionCorreo (value);
 	   }
 		function validacionCorreo (value){
@@ -122,7 +125,6 @@
                 }
             }
         });
-
     }
 
 		function ConsultaNotificaciones( funcion, datosPost, titulo ){
@@ -137,7 +139,6 @@
 				var arrayResponse = [];
 
 				$.post( baseURL+api+isoPais+'/usuario/notificaciones/'+funcion, datosPost ).done(function(data){
-
 					var data = JSON.parse( data );
 						Notificaciones = data;
 						if( data.rc == 0 ){
@@ -148,7 +149,6 @@
 								notificacion( titulo, data.mensaje );
 						}
 				});
-
 		}
 
 		function HtmlRows( data ){
@@ -163,7 +163,6 @@
 
 					var style	= (notificaciones[x].notificacionAct==1)?
 								'display: block;':'display: none;';
-								console.log(notificaciones[x].contacto);
 					html += '<br><input type="checkbox" id="checkNoti'+notificaciones[x].codOperacion+
 									'" name="checkNoti'+notificaciones[x].codOperacion+'" onchange="capturaCheck(this)" '+
 									' value="'+notificaciones[x].codOperacion+'" '+checkedTmp+'> '+notificaciones[x].descripcion +
@@ -173,7 +172,6 @@
 											' onchange="captureEventCorreo(this)">'+
 											'<br><hr class="classHrNoti"></div><br><br>';
 				}
-
 				html += '<br><div id="opciones-btn"><button id="btn-modificar-noti" '+
 										'type="submit" onclick="envioDatos()">Guardar</button></div>';
 				notificacionesRequest.innerHTML = html;
