@@ -77,11 +77,10 @@
 				var api ="/api/v1/";
 
 				$.post( baseURL+api+isoPais+'/usuario/notificaciones/envio', Notificaciones ).done(function(data){
-
 					var data = JSON.parse( data );
 						if( data.rc == 0 ){
 								$( ".ui-dialog-content" ).dialog( "destroy" );
-								notificacion( 'Notificacion', data.mensaje );
+								notificacion( 'Notificacion', 'Notificaciones Almacenadas' );
 						}
 						else{
 								notificacion( 'Notificacion', data.mensaje );
@@ -173,9 +172,9 @@
 											'" id="'+notificaciones[x].codOperacion+'" value="'+notificaciones[x].contacto.email+
 											'"  onchange="captureEventCorreo(this)">'+
 											'<br><hr class="classHrNoti"></div><br><br>';
-			}
-			html += '<br><div id="opciones-btn"><button id="btn-modificar-noti" '+
-									'type="submit" onclick="envioDatos()">Guardar</button></div>';
-			notificacionesRequest.innerHTML = html;
+				}
+				html += '<br><div id="opciones-btn"><button id="btn-modificar-noti" '+
+										'type="submit" onclick="envioDatos()">Guardar</button></div>';
+				notificacionesRequest.innerHTML = html;
 
 		}
