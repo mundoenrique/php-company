@@ -85,7 +85,7 @@
 								notificacion( 'Notificacion', 'Almacenamiento Exitoso.' );
 						}
 						else{
-								notificacion( 'Notificacion',"No se pudo actualizar las notificaiones del Usuario.", );
+								notificacion( 'Notificacion',"No se pudo actualizar las notificaciones del Usuario.", );
 						}
 				});
 			}
