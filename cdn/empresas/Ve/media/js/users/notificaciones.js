@@ -63,6 +63,8 @@
 													notificacion('Notificacion', msj);
 												  ErrorCount += 1;
 											}
+									}else{
+										Notificaciones.notificaciones[ a ].notificacionAct = 0;
 									}
 							}
 					}
