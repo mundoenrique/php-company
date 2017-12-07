@@ -26,7 +26,14 @@ if ( ! function_exists('insert_js_cdn'))
 	{
 		$CI =& get_instance();
 		$url_cdn = $CI->config->item('base_url_cdn');
-		$js='<script src="'.$url_cdn.'media/js/'.$filename.'?20171101" type="text/javascript"></script>';
+		$path_cdn = $CI->config->item('CDN');
+		$filepath = $path_cdn . 'media/js/' . $filename;
+		$version = '';
+		if (file_exists($filepath)) {
+			$version = '?v=' . date('Ymd-B', filemtime($filepath));
+		}
+		$js='<script src="' . $url_cdn.'media/js/' . $filename . $version . '" type="text/javascript"></script>';
+		echo "\n";
 		return $js;
 	}
 }
@@ -43,7 +50,14 @@ if ( ! function_exists('insert_css_cdn'))
 	{
 		$CI =& get_instance();
 		$url_cdn = $CI->config->item('base_url_cdn');
-		$css='<link rel="stylesheet" type="text/css" href="'.$url_cdn.'media/css/'.$filename.'?20171101"/>';
+		$path_cdn = $CI->config->item('CDN');
+		$filepath = $path_cdn . 'media/css/' . $filename;
+		$version = '';
+		if (file_exists($filepath)) {
+			$version = '?v=' . date('Ymd-B', filemtime($filepath));
+		}
+		$css='<link rel="stylesheet" type="text/css" href="' . $url_cdn . 'media/css/' . $filename . $version . '"/>';
+		echo "\n";
 		return $css;
 	}
 }
@@ -59,8 +73,14 @@ if ( ! function_exists('insert_image_cdn'))
 	{
 		$CI =& get_instance();
 		$url_cdn = $CI->config->item('base_url_cdn');
-		$css='<img src="'.$url_cdn.'media/img/'.$filename.'?20170701">';
-		return $css;
+		$path_cdn = $CI->config->item('CDN');
+		$filepath = $path_cdn . 'media/img/' . $filename;
+		$version = '';
+		if (file_exists($filepath)) {
+			$version = '?v=' . date('Ymd-B', filemtime($filepath));
+		}
+		$img='<img src="' . $url_cdn . 'media/img/' . $filename . $version . '">';
+		return $img;
 	}
 }
 
