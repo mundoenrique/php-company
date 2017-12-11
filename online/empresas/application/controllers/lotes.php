@@ -1371,7 +1371,7 @@ class Lotes extends CI_Controller {
 		$response = json_decode(utf8_encode($jsonResponse));
 
 		if($response){
-			log_message('info','consultarTipoLote '.$response->rc."/".$response->msg);
+
 			if($response->rc==0){
 				return $response;
 			}else{
