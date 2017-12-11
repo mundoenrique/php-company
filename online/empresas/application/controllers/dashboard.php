@@ -10,23 +10,23 @@
  * @author     Carla García <neiryerit@gmail.com>
  */
 class Dashboard extends CI_Controller {
-	
+
 	/**
 	 * Pantalla que muestra el listado de empresas asociadas al usuario (pantalla siguiente al login)
 	 * @param  string $urlCountry
 	 */
 	public function index($urlCountry){
-		
+
 		//VALIDATE COUNTRY
 		np_hoplite_countryCheck($urlCountry);
 		$this->lang->load('dashboard');
 		$this->lang->load('sectorfinanciero');
 		$this->lang->load('users');
 		$this->lang->load('erroreseol');
-		
+
 		$this->load->library('parser');
 		$logged_in = $this->session->userdata('logged_in');
-		
+
 		$menu = array(
 			'menuArrayPorProducto' => NULL,
 			'acrifS' => NULL,
@@ -41,18 +41,18 @@ class Dashboard extends CI_Controller {
 			'mesesVencimiento' => NULL
 		);
 		$this->session->unset_userdata($menu);
-		
+
 		if($this->session->userdata('cl_addr') != np_Hoplite_Encryption($_SERVER["REMOTE_ADDR"]) ){
 			$this->session->sess_destroy();
 			redirect($urlCountry.'/login');
 		}
-		
+
 		$paisS = $this->session->userdata('pais');
-		
+
 		if($paisS==$urlCountry && $logged_in){
 			$nombreCompleto = $this->session->userdata('nombreCompleto');
 			$lastSessionD = $this->session->userdata('lastSession');
-			
+
 			$titlePage= "Conexión Empresas Online - Dashboard";
 			$FooterCustomJS="";
 			//INSTANCIA MENU HEADER
@@ -62,9 +62,9 @@ class Dashboard extends CI_Controller {
 			$header = $this->parser->parse('layouts/layout-header',array('bodyclass'=>'full-width','menuHeaderActive'=>TRUE,'menuHeaderMainActive'=>TRUE,'menuHeader'=>$menuHeader,'titlePage'=>$titlePage),TRUE);
 			$FooterCustomInsertJS=["jquery-1.10.2.min.js","jquery-ui-1.10.3.custom.min.js","jquery.balloon.min.js","jquery.paginate.js","jquery.isotope.min.js","dashboard/dashboard.js","header.js"];
 			$footer = $this->parser->parse('layouts/layout-footer',array('menuFooterActive'=>TRUE,'menuFooter'=>$menuFooter,'FooterCustomInsertJSActive'=>TRUE,'FooterCustomInsertJS'=>$FooterCustomInsertJS,'FooterCustomJSActive'=>TRUE,'FooterCustomJS'=>$FooterCustomJS),TRUE);
-			
+
 			$content = $this->parser->parse('dashboard/content-dashboard',array('titulo'=>$nombreCompleto,'lastSession'=>$lastSessionD),TRUE);
-			
+
 			$datos = array(
 				'header'=>$header,
 				'content'=>$content,
@@ -75,7 +75,7 @@ class Dashboard extends CI_Controller {
 				'password' => 'CONTRASEÑA',
 				'loginBtn' => 'ENTRAR',
 			);
-			
+
 			$this->parser->parse('layouts/layout-a', $datos);
 		}elseif($paisS!=$urlCountry && $paisS!=""){
 			$this->session->sess_destroy();
@@ -85,8 +85,8 @@ class Dashboard extends CI_Controller {
 			redirect($urlCountry.'/login');
 		}
 	}
-	
-	
+
+
 	/**
 	 * Método para obtener el listado de empresas asociadas a un usuario
 	 * @param  string $urlCountry
@@ -98,25 +98,25 @@ class Dashboard extends CI_Controller {
 		$paisS = $this->session->userdata('pais');
 		//VALIDAR QUE USUARIO ESTE LOGGEDIN
 		if($paisS==$urlCountry && $logged_in){
-			
+
 			if($this->input->post()){
 				$paginar= $this->input->post('data-paginar');
 				$tamanoPagina= $this->input->post('data-tamanoPagina');
 				$paginaActual= $this->input->post('data-paginaActual');
 				$filtroEmpresas= $this->input->post('data-filtroEmpresas');
 				$rTest = $this->callWSListaEmpresasUsuario($paginar,$paginaActual,$tamanoPagina,$urlCountry); // solicitud sin paginar (obtiene todas las empresas), el filtrado se realiza desde js
-				
+
 				//$rTest = $this->callWSListaEmpresasPaginar($paginar,$tamanoPagina,$paginaActual,$filtroEmpresas,$urlCountry); // solicitud paginada y con filtro de búsqueda
-				
+
 				$lista=$rTest;
-				
+
 			}else{
 				$paginar=FALSE;
 				$lista = $this->callWSListaEmpresasPaginar($paginar,$tamanoPagina=null,$paginaActual=null,$filtroEmpresas=null,$urlCountry);
 			}
-			
+
 			$this->output->set_content_type('application/json')->set_output(json_encode($lista,JSON_UNESCAPED_UNICODE));
-			
+
 		}elseif($paisS!=$urlCountry && $paisS!=""){
 			$this->session->sess_destroy();
 			$this->session->unset_userdata($this->session->all_userdata());
@@ -129,8 +129,8 @@ class Dashboard extends CI_Controller {
 			redirect($urlCountry.'/login');
 		}
 	}
-	
-	
+
+
 	/**
 	 * Método que realiza petición al WS para obtener el listado de empresas por usuario
 	 * @param  string $paginar
@@ -153,7 +153,7 @@ class Dashboard extends CI_Controller {
 		$username = "TEBCART";//$this->session->userdata('userName');
 		$token = $this->session->userdata('token');
 		$logAcceso = np_hoplite_log($sessionId,$username,$canal,$modulo,$function,$operation,0,$ip,$timeLog);
-		
+
 		$data = array(
 			"idOperation" => $operation,
 			"className" => $className,
@@ -166,7 +166,7 @@ class Dashboard extends CI_Controller {
 			"token"=>$token,
 			"pais"=>$pais
 		);
-		
+
 		$data = json_encode($data,JSON_UNESCAPED_UNICODE);
 		$dataEncry = np_Hoplite_Encryption($data);
 		$data = array('bean' => $dataEncry, 'pais' =>$pais );
@@ -174,23 +174,23 @@ class Dashboard extends CI_Controller {
 		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
 		$jsonResponse = np_Hoplite_Decrypt($response);
 		$response = json_decode(utf8_encode($jsonResponse));
-		
+
 		if($response){
 			log_message('info','dashb_empr '.$response->rc);
 			if($response->rc==0){
 				return $response;
 			}else{
-				
+
 				if($response->rc==-61 || $response->rc==-29){
 					$this->session->sess_destroy();
 					$this->session->unset_userdata($this->session->all_userdata());
 					return array('ERROR' => '-29' );
-					
+
 				}elseif ($response->rc==-150) {
 					$codigoError = array('ERROR' => lang('DASH150') );
-					
+
 				}else{
-					
+
 					$codigoError = lang('ERROR_('.$response->rc.')');
 					if(strpos($codigoError, 'Error')!==false){
 						$codigoError = array('ERROR' => lang('ERROR_GENERICO_USER') );
@@ -204,12 +204,12 @@ class Dashboard extends CI_Controller {
 			log_message('info','dashb_empr NO WS');
 			return $codigoError = array('ERROR' => lang('ERROR_GENERICO_USER') );
 		}
-		
+
 	}
-	
-	
-	
-	
+
+
+
+
 	/**
 	 * Método para obtener el listado de empresas asociadas a un usuario
 	 * @param  string $urlCountry
@@ -219,28 +219,28 @@ class Dashboard extends CI_Controller {
 		np_hoplite_countryCheck($urlCountry);
 		$logged_in = $this->session->userdata('logged_in');
 		$paisS = $this->session->userdata('pais');
-		
+
 		//VALIDAR QUE USUARIO ESTE LOGGEDIN
 		if($paisS==$urlCountry && $logged_in){
-			
+
 			if($this->input->post()){
 				$paginar= $this->input->post('data-paginar');
 				$tamanoPagina= $this->input->post('data-tamanoPagina');
 				$paginaActual= $this->input->post('data-paginaActual');
 				$filtroEmpresas= $this->input->post('data-filtroEmpresas');
 				$rTest = $this->callWSListaEmpresas($paginar,$paginaActual,$tamanoPagina,$urlCountry); // solicitud sin paginar (obtiene todas las empresas), el filtrado se realiza desde js
-				
+
 				//$rTest = $this->callWSListaEmpresasPaginar($paginar,$tamanoPagina,$paginaActual,$filtroEmpresas,$urlCountry); // solicitud paginada y con filtro de búsqueda
-				
+
 				$lista=$rTest;
-				
+
 			}else{
 				$paginar=FALSE;
 				$lista = $this->callWSListaEmpresasPaginar($paginar,$tamanoPagina=null,$paginaActual=null,$filtroEmpresas=null,$urlCountry);
 			}
-			
+
 			$this->output->set_content_type('application/json')->set_output(json_encode($lista,JSON_UNESCAPED_UNICODE));
-			
+
 		}elseif($paisS!=$urlCountry && $paisS!=""){
 			$this->session->sess_destroy();
 			$this->session->unset_userdata($this->session->all_userdata());
@@ -259,16 +259,16 @@ class Dashboard extends CI_Controller {
 	 * @return json
 	 */
 	public function getListaProductosJSON($urlCountry){
-		
+
 		np_hoplite_countryCheck($urlCountry);
 		$logged_in = $this->session->userdata('logged_in');
 		//VALIDAR QUE USUARIO ESTE LOGGEDIN
 		$paisS = $this->session->userdata('pais');
-		
+
 		if($paisS==$urlCountry && $logged_in){
 			if($this->input->post()){
 				$acrifPost = $this->input->post('acrif');
-				
+
 				$responseMenuEmpresas =$this->callWSMenuEmpresa($acrifPost,$urlCountry,$ctipo='false');
 				if(array_key_exists('ERROR', $responseMenuEmpresas)){
 					$productos = $responseMenuEmpresas;
@@ -279,7 +279,7 @@ class Dashboard extends CI_Controller {
 			}else{
 				$productos=null;
 			}
-			
+
 			$this->output->set_content_type('application/json')->set_output(json_encode($productos,JSON_UNESCAPED_UNICODE));
 		}elseif($paisS!=$urlCountry && $paisS!=''){
 			$this->session->sess_destroy();
@@ -292,24 +292,24 @@ class Dashboard extends CI_Controller {
 			redirect($urlCountry.'/login');
 		}
 	}
-	
-	
+
+
 	/**
 	 * Método para Consulta de Productos por Empresa para el Combo de Productos (Tarjeta Hambiente)
 	 * @param  string $urlCountry
 	 * @return json
 	 */
 	public function callWSListaProductosUsuarioJSON($urlCountry){
-		
+
 		np_hoplite_countryCheck($urlCountry);
 		$logged_in = $this->session->userdata('logged_in');
 		//VALIDAR QUE USUARIO ESTE LOGGEDIN
 		$paisS = $this->session->userdata('pais');
-		
+
 		if($paisS==$urlCountry && $logged_in){
 			if($this->input->post()){
 				$acrifPost = $this->input->post('acrif');
-				
+
 				$responseMenuEmpresas =$this->callWSMenuEmpresaTarjetaHambiente($acrifPost,$urlCountry,$ctipo='false');
 				if(array_key_exists('ERROR', $responseMenuEmpresas)){
 					$productos = $responseMenuEmpresas;
@@ -320,7 +320,7 @@ class Dashboard extends CI_Controller {
 			}else{
 				$productos=null;
 			}
-			
+
 			$this->output->set_content_type('application/json')->set_output(json_encode($productos,JSON_UNESCAPED_UNICODE));
 		}elseif($paisS!=$urlCountry && $paisS!=''){
 			$this->session->sess_destroy();
@@ -333,7 +333,7 @@ class Dashboard extends CI_Controller {
 			redirect($urlCountry.'/login');
 		}
 	}
-	
+
 	/**
 	 * Método para cambiar los valores de las variables almacenadas en sesión
 	 * cuando el usuario decide cambiar de empresa o producto desde el sidebar
@@ -341,17 +341,17 @@ class Dashboard extends CI_Controller {
 	 * @return array
 	 */
 	public function postCambiarEmpresaProducto($urlCountry){
-		
+
 		np_hoplite_countryCheck($urlCountry);
 		$logged_in = $this->session->userdata('logged_in');
-		
+
 		$paisS = $this->session->userdata('pais');
-		
+
 		if($paisS==$urlCountry && $logged_in){
 			//VALIDAMOS QUE RECIBA EL POST
 			if($this->input->is_ajax_request()){
 				$llamada = $this->input->post('llamada');
-				
+
 				if($llamada=='soloEmpresa'){
 					$acrifPost = $this->input->post('data-acrif');
 					$acnomciaPost = $this->input->post('data-acnomcia');
@@ -359,7 +359,7 @@ class Dashboard extends CI_Controller {
 					$acdescPost = $this->input->post('data-acdesc');
 					$accodciaPost = $this->input->post('data-accodcia');
 					$accodgrupoe = $this->input->post('data-accodgrupoe');
-					
+
 					$this->form_validation->set_rules('data-acrif', 'acrif',  'required');
 					$this->form_validation->set_rules('data-acnomcia', 'acnomcia',  'required');
 					$this->form_validation->set_rules('data-acrazonsocial', 'acrazonsocial',  'required');
@@ -382,10 +382,10 @@ class Dashboard extends CI_Controller {
 							'marcaProductoS' =>" "
 						);
 						$this->session->set_userdata($newdata);
-						
+
 						$respuesta=1;
 					}
-					
+
 				}elseif($llamada=='productos'){
 					$acrifPost = $this->input->post('data-acrif');
 					$acnomciaPost = $this->input->post('data-acnomcia');
@@ -396,13 +396,13 @@ class Dashboard extends CI_Controller {
 					$idProductoPost = $this->input->post('data-idproducto');
 					$nomProduc = $this->input->post('data-nomProd');
 					$marcProduc = $this->input->post('data-marcProd');
-					
+
 					$this->form_validation->set_rules('data-acrif', 'acrif',  'required');
 					$this->form_validation->set_rules('data-acnomcia', 'acnomcia',  'required');
 					$this->form_validation->set_rules('data-acrazonsocial', 'acrazonsocial',  'required');
 					$this->form_validation->set_rules('data-accodcia', 'accodcia',  'required');
 					$this->form_validation->set_rules('data-idproducto', 'idproducto',  'required');
-					
+
 					if ($this->form_validation->run() == FALSE)
 					{
 						$respuesta=0;
@@ -427,7 +427,7 @@ class Dashboard extends CI_Controller {
 			}else{
 				$respuesta=0;
 			}
-			
+
 			$this->output->set_content_type('application/json')->set_output(json_encode($respuesta,JSON_UNESCAPED_UNICODE));
 		}elseif($paisS!=$urlCountry && $paisS!=""){
 			$this->session->sess_destroy();
@@ -437,14 +437,14 @@ class Dashboard extends CI_Controller {
 			redirect($urlCountry.'/login');
 		}
 	}
-	
-	
+
+
 	/**
 	 * Pantalla que muestra listado de productos asociados para la relación empresa-usuario
 	 * @param  string $urlCountry
 	 */
 	public function dashboardProductos($urlCountry){
-		
+
 		//VALIDATE COUNTRY
 		np_hoplite_countryCheck($urlCountry);
 		$this->lang->load('dashboard');
@@ -452,33 +452,23 @@ class Dashboard extends CI_Controller {
 		$this->load->library('parser');
 		$this->lang->load('erroreseol');
 		$logged_in = $this->session->userdata('logged_in');
-		
+
 		$menu = array(
 			'menuArrayPorProducto' => NULL,
-			'acrifS' => NULL,
-			'acnomciaS' => NULL,
-			'acrazonsocialS' => NULL,
-			'acdescS' => NULL,
-			'accodciaS' => NULL,
-			'accodgrupoeS'=> NULL,
-			'idProductoS'=> NULL,
-			'nombreProductoS' => NULL,
-			'marcaProductoS' => NULL,
-			'mesesVencimiento' => NULL
 		);
 		$this->session->unset_userdata($menu);
-		
+
 		$paisS = $this->session->userdata('pais');
-		
+
 		if($paisS==$urlCountry && $logged_in){
 			$acdescPost = $this->input->post('data-acdesc');
 			if($this->input->post()){
-				
+
 				$acrifPost = $this->input->post('data-acrif');
 				$acnomciaPost = $this->input->post('data-acnomcia');
 				$acrazonsocialPost = $this->input->post('data-acrazonsocial');
 				$acdescPost = $this->input->post('data-acdesc');
-				
+
 				$accodciaPost = $this->input->post('data-accodcia');
 				$accodgrupoePost = $this->input->post('data-accodgrupoe');
 				$newdata = array(
@@ -491,15 +481,15 @@ class Dashboard extends CI_Controller {
 				);
 				$this->session->set_userdata($newdata);
 			}
-			
+
 			$acrifS = $this->session->userdata('acrifS');
-			
+
 			if($acrifS){
-				
+
 				$responseMenuEmpresas =$this->callWSMenuEmpresa($acrifS,$urlCountry,$ctipo='A');
 				$listaCat = null;
 				$listaMarc = null;
-				
+
 				if( array_key_exists('productos',$responseMenuEmpresas ) ){
 					$productos = $responseMenuEmpresas->productos;
 					$listaCat = $responseMenuEmpresas->listaCategorias;
@@ -507,7 +497,7 @@ class Dashboard extends CI_Controller {
 				}else{
 					$productos = $responseMenuEmpresas;
 				}
-				
+
 				$titulo = "Selección del Producto";
 				$lastSessionD = $this->session->userdata('lastSession');
 				$titlePage= "Conexión Empresas Online - Productos";
@@ -517,7 +507,7 @@ class Dashboard extends CI_Controller {
 				$menuHeader = $this->parser->parse('widgets/widget-menuHeader',array(),TRUE);
 				//INSTANCIA MENU FOOTER
 				$menuFooter = $this->parser->parse('widgets/widget-menuFooter',array(),TRUE);
-				
+
 				$header = $this->parser->parse('layouts/layout-header',array('bodyclass'=>'','menuHeaderActive'=>TRUE,'menuHeaderMainActive'=>TRUE,'menuHeader'=>$menuHeader,'titlePage'=>$titlePage),TRUE);
 				$FooterCustomInsertJS=["jquery-1.10.2.min.js","jquery-ui-1.10.3.custom.min.js","jquery.isotope.min.js","jquery.balloon.min.js","dashboard/productos.js","header.js"];
 				$footer = $this->parser->parse('layouts/layout-footer',array('menuFooterActive'=>TRUE,'menuFooter'=>$menuFooter,'FooterCustomInsertJSActive'=>TRUE,'FooterCustomInsertJS'=>$FooterCustomInsertJS,'FooterCustomJSActive'=>TRUE,'FooterCustomJS'=>$FooterCustomJS),TRUE);
@@ -529,9 +519,9 @@ class Dashboard extends CI_Controller {
 					'listaMarcas' => $listaMarc,
 					'lastSession'=>$lastSessionD
 				),TRUE);
-				
+
 				$sidebarEmpresa= $this->parser->parse('dashboard/widget-empresa',array('sidebarActive'=>TRUE),TRUE);
-				
+
 				$datos = array(
 					'header'=>$header,
 					'content'=>$content,
@@ -543,7 +533,7 @@ class Dashboard extends CI_Controller {
 					'password' => 'CONTRASEÑA',
 					'loginBtn' => 'ENTRAR',
 				);
-				
+
 				$this->parser->parse('layouts/layout-b', $datos);
 			}else{
 				redirect($urlCountry.'/login');
@@ -556,7 +546,7 @@ class Dashboard extends CI_Controller {
 			redirect($urlCountry.'/login');
 		}
 	}
-	
+
 	/**
 	 * Pantalla que muestra los estadiscos del producto seleccionado y el menú con las funciones del usuario
 	 * @param  string $urlCountry
@@ -570,25 +560,25 @@ class Dashboard extends CI_Controller {
 		$this->load->library('parser');
 		$logged_in = $this->session->userdata('logged_in');
 		$acrifS = $this->session->userdata('acrifS');
-		
+
 		//SE VALIDA SI EL USUARIO ESTA LOGGEDIN
 		$paisS = $this->session->userdata('pais');
-		
+
 		if($paisS==$urlCountry && $logged_in){
 			//SE OBTIENEN LAS VARIABLES DE SESSION QUE QUIERO USAR
 			$nombreCompleto = $this->session->userdata('nombreCompleto');
 			$lastSessionD = $this->session->userdata('lastSession');
-			
+
 			$FooterCustomInsertJS="";
 			$FooterCustomJS="";
-			
+
 			//SE VALIDA SI VIENE LA CONSULTA POR POST
 			if($this->input->post()){
 				//SE OBTIENEN VARIABLES DE POST
 				$idProductoPost = $this->input->post('data-idproducto');
 				$nombreProductoPost = $this->input->post('data-nombreProducto');
 				$marcaProductoPost = $this->input->post('data-marcaProducto');
-				
+
 				$newdata = array(
 					'idProductoS'=>$idProductoPost,
 					'nombreProductoS'=>$nombreProductoPost,
@@ -597,27 +587,27 @@ class Dashboard extends CI_Controller {
 				//SE INSERTAN LAS VARIABLES EN LA SESSION
 				$this->session->set_userdata($newdata);
 			}
-			
+
 			//SE OBTIENEN VARIABLES DE POST
 			$idProducto = $this->session->userdata('idProductoS');
 			$cid = $this->session->userdata('acrifS');
 			$accodcia = $this->session->userdata('accodciaS');
 			$codgrupoe = $this->session->userdata("accodgrupoeS");
-			
+
 			$responseMenuPorProducto =$this->callWSMenuPorProducto($idProducto,$cid,$accodcia,$codgrupoe, $urlCountry);
-			
+
 			if( !array_key_exists('ERROR', $responseMenuPorProducto) ){
 				//PERMISOS Y OPCIONES DE MENU DISPONIBLES DE ACUERDO AL USUARIO Y PRODUCTO SERIALIZADO
 				$OpcionesMenu = serialize($responseMenuPorProducto->lista);
-				
+
 				$menu = array(
 					'menuArrayPorProducto'=>$OpcionesMenu
 				);
 				$this->session->set_userdata($menu);
-				
+
 				$estadisticas[]=$responseMenuPorProducto->estadistica;
 				$nombreEmpresaT = $responseMenuPorProducto->estadistica->producto->descripcion;
-				
+
 				if (isset($responseMenuPorProducto->estadistica->producto->mesesVencimiento)) {
 					$mesesVencimiento = $responseMenuPorProducto->estadistica->producto->mesesVencimiento;
 					$actualDate = date('Y-m');
@@ -628,8 +618,8 @@ class Dashboard extends CI_Controller {
 					);
 					$this->session->set_userdata($mesesVencimiento);
 				}
-				
-				
+
+
 				$responseMenuPorProducto->estadistica->producto->descripcion;
 				$titlePage = "Conexión Empresas Online - ".$nombreEmpresaT;
 				$msgError=FALSE;
@@ -639,13 +629,13 @@ class Dashboard extends CI_Controller {
 					'menuArrayPorProducto'=>null
 				);
 				$this->session->set_userdata($menu);
-				
+
 				$estadisticas=FALSE;
-				
+
 				$msgError = $responseMenuPorProducto['ERROR'];
 				$titlePage="Conexión Empresas Online - Productos Detalle";
 			}
-			
+
 			$FooterCustomInsertJS=["jquery-1.10.2.min.js","jquery-ui-1.10.3.custom.min.js","jquery.balloon.min.js","dashboard/widget-empresa.js","header.js"];
 			//INSTANCIA MENU HEADER
 			$menuHeader = $this->parser->parse('widgets/widget-menuHeader',array(),TRUE);
@@ -653,22 +643,22 @@ class Dashboard extends CI_Controller {
 			$menuFooter = $this->parser->parse('widgets/widget-menuFooter',array(),TRUE);
 			$header = $this->parser->parse('layouts/layout-header',array('bodyclass'=>'','menuHeaderActive'=>TRUE,'menuHeaderMainActive'=>TRUE,'menuHeader'=>$menuHeader,'titlePage'=>$titlePage),TRUE);
 			$footer = $this->parser->parse('layouts/layout-footer',array('menuFooterActive'=>TRUE,'menuFooter'=>$menuFooter,'FooterCustomInsertJSActive'=>TRUE,'FooterCustomInsertJS'=>$FooterCustomInsertJS,'FooterCustomJSActive'=>TRUE,'FooterCustomJS'=>$FooterCustomJS),TRUE);
-			
+
 			$content = $this->parser->parse('dashboard/content-detalleProducto',array(
 				'lastSession'=>$lastSessionD,
 				'producto'=>$estadisticas,
 				'msgError'=>$msgError
 			),TRUE);
-			
+
 			$sidebarEmpresa= $this->parser->parse('dashboard/widget-empresa',array('sidebarActive'=>TRUE),TRUE);
-			
+
 			$datos = array(
 				'header'=>$header,
 				'content'=>$content,
 				'footer'=>$footer,
 				'sidebar'=>$sidebarEmpresa
 			);
-			
+
 			$this->parser->parse('layouts/layout-b', $datos);
 		}elseif($paisS!=$urlCountry && $paisS!=""){
 			$this->session->sess_destroy();
@@ -678,7 +668,7 @@ class Dashboard extends CI_Controller {
 			redirect($urlCountry.'/login');
 		}
 	}
-	
+
 	/**
 	 * Método que realiza petición al WS para obtener el listado de empresas sin filtrado
 	 * @param  string $paginar
@@ -701,7 +691,7 @@ class Dashboard extends CI_Controller {
 		$username = $this->session->userdata('userName');
 		$token = $this->session->userdata('token');
 		$logAcceso = np_hoplite_log($sessionId,$username,$canal,$modulo,$function,$operation,0,$ip,$timeLog);
-		
+
 		$data = array(
 			"idOperation" => $operation,
 			"className" => $className,
@@ -713,33 +703,33 @@ class Dashboard extends CI_Controller {
 			"token"=>$token,
 			"pais"=>$pais
 		);
-		
+
 		$data = json_encode($data,JSON_UNESCAPED_UNICODE);
-		
+
 		$dataEncry = np_Hoplite_Encryption($data);
 		$data = array('bean' => $dataEncry, 'pais' =>$pais );
 		$data = json_encode($data);
 		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
 		$jsonResponse = np_Hoplite_Decrypt($response);
 		$response = json_decode(utf8_encode($jsonResponse));
-		
-		
+
+
 		if($response){
 			log_message('info','dashb_empr '.$response->rc);
 			if($response->rc==0){
 				return $response;
 			}else{
-				
+
 				if($response->rc==-61 || $response->rc==-29){
 					$this->session->sess_destroy();
 					$this->session->unset_userdata($this->session->all_userdata());
 					return array('ERROR' => '-29' );
-					
+
 				}elseif ($response->rc==-150) {
 					$codigoError = array('ERROR' => lang('DASH150') );
-					
+
 				}else{
-					
+
 					$codigoError = lang('ERROR_('.$response->rc.')');
 					if(strpos($codigoError, 'Error')!==false){
 						$codigoError = array('ERROR' => lang('ERROR_GENERICO_USER') );
@@ -753,9 +743,9 @@ class Dashboard extends CI_Controller {
 			log_message('info','dashb_empr NO WS');
 			return $codigoError = array('ERROR' => lang('ERROR_GENERICO_USER') );
 		}
-		
+
 	}
-	
+
 	/**
 	 * Método que realiza petición al WS para obtener el listado de empresas filtrado segun parámetro de busqueda
 	 * @param  string $paginar
@@ -777,9 +767,9 @@ class Dashboard extends CI_Controller {
 		$sessionId = $this->session->userdata('sessionId');
 		$username = $this->session->userdata('userName');
 		$token = $this->session->userdata('token');
-		
+
 		$logAcceso = np_hoplite_log($sessionId,$username,$canal,$modulo,$function,"getPaginar",0,$ip,$timeLog);
-		
+
 		$data = array(
 			"idOperation" => $operation,
 			"className" => $className,
@@ -792,17 +782,17 @@ class Dashboard extends CI_Controller {
 			"token"=>$token,
 			"pais"=>$pais
 		);
-		
+
 		$data = json_encode($data,JSON_UNESCAPED_UNICODE);
-		
+
 		$dataEncry = np_Hoplite_Encryption($data);
 		$data = array('bean' => $dataEncry, 'pais' =>$pais );
 		$data = json_encode($data);
 		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
 		$jsonResponse = np_Hoplite_Decrypt($response);
-		
+
 		$response = json_decode(utf8_encode($jsonResponse));
-		
+
 		if($response){
 			log_message('info', 'dash_empr_filt '.$response->rc);
 			if($response->rc==0){
@@ -819,7 +809,7 @@ class Dashboard extends CI_Controller {
 					}else{
 						$codigoError = array('ERROR' => lang('ERROR_('.$response->rc.')') );
 					}
-					
+
 					return $codigoError;
 				}
 			}
@@ -827,7 +817,7 @@ class Dashboard extends CI_Controller {
 			log_message('info', 'dash_empr_filt NO WS');
 			return $codigoError = array('ERROR' => lang('ERROR_GENERICO_USER') );
 		}
-		
+
 	}
 	/**
 	 * Método que realiza petición al WS para obtener la lista de productos asociados a una empresa-usuario
@@ -849,7 +839,7 @@ class Dashboard extends CI_Controller {
 		$username = $this->session->userdata('userName');
 		$token = $this->session->userdata('token');
 		$logAcceso = np_hoplite_log($sessionId,$username,$canal,$modulo,$function,$operation,0,$ip,$timeLog);
-		
+
 		$data = array(
 			"idOperation" => $operation,
 			"className" => $className,
@@ -860,20 +850,20 @@ class Dashboard extends CI_Controller {
 			"token"=>$token,
 			"pais"=>$pais
 		);
-		
+
 		$data = json_encode($data,JSON_UNESCAPED_UNICODE);
-		
+
 		$dataEncry = np_Hoplite_Encryption($data);
 		$data = array('bean' => $dataEncry, 'pais' =>$pais );
 		$data = json_encode($data);
 		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
 		$jsonResponse = np_Hoplite_Decrypt($response);
 		$response = json_decode(utf8_encode($jsonResponse));
-		
+
 		if($response){
 			log_message("info","productos ".$response->rc.'/'.$response->msg);
 			log_message("info","productos ".json_encode($response));
-			
+
 			if($response->rc==0){
 				return $response;
 			}else{
@@ -886,7 +876,7 @@ class Dashboard extends CI_Controller {
 				}
 				else{
 					$codigoError = lang('ERROR_('.$response->rc.')');
-					
+
 					if(strpos($codigoError, 'Error')!==false){
 						$codigoError = array('ERROR' => lang('ERROR_GENERICO_USER') );
 					}else{
@@ -900,7 +890,7 @@ class Dashboard extends CI_Controller {
 			return $codigoError = array('ERROR' => lang('ERROR_GENERICO_USER') );
 		}
 	}
-	
+
 	/**
 	 * Método que realiza petición al WS para obtener la lista de productos asociados a una empresa-usuario (reporte Tarjeta Hambiente)
 	 * @param  string $rif
@@ -921,7 +911,7 @@ class Dashboard extends CI_Controller {
 		$username = $this->session->userdata('userName');
 		$token = $this->session->userdata('token');
 		$logAcceso = np_hoplite_log($sessionId,$username,$canal,$modulo,$function,$operation,0,$ip,$timeLog);
-		
+
 		$data = array(
 			"idOperation" => $operation,
 			"className" => $className,
@@ -932,7 +922,7 @@ class Dashboard extends CI_Controller {
 			"token"=>$token,
 			"pais"=>$pais
 		);
-		
+
 		$data = json_encode($data,JSON_UNESCAPED_UNICODE);
 		$dataEncry = np_Hoplite_Encryption($data);
 		$data = array('bean' => $dataEncry, 'pais' =>$pais );
@@ -940,10 +930,10 @@ class Dashboard extends CI_Controller {
 		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
 		$jsonResponse = np_Hoplite_Decrypt($response);
 		$response = json_decode(utf8_encode($jsonResponse));
-		
+
 		if($response){
 			log_message("info","productos ".$response->rc.'/'.$response->msg);
-			
+
 			if($response->rc==0){
 				return $response;
 			}else{
@@ -956,7 +946,7 @@ class Dashboard extends CI_Controller {
 				}
 				else{
 					$codigoError = lang('ERROR_('.$response->rc.')');
-					
+
 					if(strpos($codigoError, 'Error')!==false){
 						$codigoError = array('ERROR' => lang('ERROR_GENERICO_USER') );
 					}else{
@@ -970,8 +960,8 @@ class Dashboard extends CI_Controller {
 			return $codigoError = array('ERROR' => lang('ERROR_GENERICO_USER') );
 		}
 	}
-	
-	
+
+
 	/**
 	 * Método que realiza petición al WS para obtener el menú del usuario y sus funciones asociadas
 	 * y los estadisticos del producto para la empresa seleccionada.
@@ -995,7 +985,7 @@ class Dashboard extends CI_Controller {
 		$username = $this->session->userdata('userName');
 		$token = $this->session->userdata('token');
 		$logAcceso = np_hoplite_log($sessionId,$username,$canal,$modulo,$function,$operation,0,$ip,$timeLog);
-		
+
 		$menus = array(array(
 			               "app" => "EOL",
 			               "prod" => "$prefijo",
@@ -1010,7 +1000,7 @@ class Dashboard extends CI_Controller {
 				"acCodGrupo" => "$codgrupoe"
 			)
 		);
-		
+
 		$data = array(
 			"idOperation" => $operation,
 			"className" => $className,
@@ -1021,22 +1011,22 @@ class Dashboard extends CI_Controller {
 			"pais"=>$pais
 		);
 		$data = json_encode($data,JSON_UNESCAPED_UNICODE);
-		
+
 		$dataEncry = np_Hoplite_Encryption($data);
-		
+
 		$data = array('bean' => $dataEncry, 'pais' =>$pais );
 		$data = json_encode($data);
 		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
 		$jsonResponse = np_Hoplite_Decrypt($response);
 		$response = json_decode(utf8_encode($jsonResponse));
-		
+
 		if($response){
 			log_message('info','detalle produc '.$response->rc."/".$response->msg);
 			if($response->rc==0){
-				
+
 				return $response;
 			}else{
-				
+
 				if($response->rc==-61 || $response->rc==-29){
 					$this->session->sess_destroy();
 					$this->session->unset_userdata($this->session->all_userdata());
@@ -1055,13 +1045,13 @@ class Dashboard extends CI_Controller {
 			return $codigoError = array('ERROR' => lang('ERROR_GENERICO_USER') );
 		}
 	}
-	
+
 	/**
 	 * Pantalla que muestra los programas disponibles para determinado país
 	 * @param  string $urlCountry
 	 */
 	public function programas($urlCountry){
-		
+
 		//VALIDATE COUNTRY
 		np_hoplite_countryCheck($urlCountry);
 		$this->lang->load('dashboard');
@@ -1069,14 +1059,14 @@ class Dashboard extends CI_Controller {
 		$this->lang->load('users');
 		$this->load->library('parser');
 		$logged_in = $this->session->userdata('logged_in');
-		
+
 		//SE VALIDA SI EL USUARIO ESTA LOGGEDIN
 		$paisS = $this->session->userdata('pais');
-		
+
 		if($paisS==$urlCountry && $logged_in){
-			
+
 			$FooterCustomJS="";
-			
+
 			$titlePage= "Otros programas";
 			$FooterCustomInsertJS=["jquery-1.10.2.min.js","jquery-ui-1.10.3.custom.min.js","jquery.balloon.min.js","dashboard/widget-empresa.js","dashboard/other-products.js","header.js"];
 			//INSTANCIA MENU HEADER
@@ -1085,20 +1075,20 @@ class Dashboard extends CI_Controller {
 			$menuFooter = $this->parser->parse('widgets/widget-menuFooter',array(),TRUE);
 			$header = $this->parser->parse('layouts/layout-header',array('bodyclass'=>'','menuHeaderActive'=>TRUE,'menuHeaderMainActive'=>TRUE,'menuHeader'=>$menuHeader,'titlePage'=>$titlePage),TRUE);
 			$footer = $this->parser->parse('layouts/layout-footer',array('menuFooterActive'=>TRUE,'menuFooter'=>$menuFooter,'FooterCustomInsertJSActive'=>TRUE,'FooterCustomInsertJS'=>$FooterCustomInsertJS,'FooterCustomJSActive'=>TRUE,'FooterCustomJS'=>$FooterCustomJS),TRUE);
-			
+
 			$content = $this->parser->parse('dashboard/dashboard-other-products-'.$urlCountry,array(
 				'titulo' => $titlePage
 			),TRUE);
-			
+
 			$sidebarEmpresa= $this->parser->parse('widgets/widget-publi-2',array('sidebarActive'=>TRUE),TRUE);
-			
+
 			$datos = array(
 				'header'=>$header,
 				'content'=>$content,
 				'footer'=>$footer,
 				'sidebar'=>$sidebarEmpresa
 			);
-			
+
 			$this->parser->parse('layouts/layout-b', $datos);
 		}elseif($paisS!=$urlCountry && $paisS!=""){
 			$this->session->sess_destroy();
@@ -1108,5 +1098,5 @@ class Dashboard extends CI_Controller {
 			redirect($urlCountry.'/login');
 		}
 	}
-	
+
 } // FIN CLASE Dashboard
