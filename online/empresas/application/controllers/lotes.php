@@ -3204,8 +3204,8 @@ class Lotes extends CI_Controller {
 				$tipo_lote = $this->input->post('data-tipoLote');
 				$pass = $this->input->post('data-pass');
 				$lista = $this->input->post("data-lista");
-
-				$response = $this->callWSreprocesar($urlCountry, $lista, $tipo_lote, $pass);
+				$medioPago = $this->input->post("data-medio-pago");
+				$response = $this->callWSreprocesar($urlCountry, $lista, $tipo_lote, $pass, $medioPago);
 			}else{
 				$response = json_encode(array("ERROR"=>lang('SIN_FUNCION')));
 			}
@@ -3341,7 +3341,7 @@ class Lotes extends CI_Controller {
 	* @param  string $pass
 	* @return array
 	*/
-	private function callWSreprocesar($urlCountry, $lista, $tipo_lote, $pass){
+	private function callWSreprocesar($urlCountry, $lista, $tipo_lote, $pass, $medio_pago){
 		$this->lang->load('erroreseol');
 
 		$username = $this->session->userdata('userName');
@@ -3388,6 +3388,7 @@ class Lotes extends CI_Controller {
 			"paginar" => false,
 			"tipo_lote"=> $tipo_lote,
 			"formato"=> "00",
+			"medioPago"=>$medio_pago,
 			"logAccesoObject"=>$logAcceso,
 			"token"=>$token,
 			"pais"=>$urlCountry
