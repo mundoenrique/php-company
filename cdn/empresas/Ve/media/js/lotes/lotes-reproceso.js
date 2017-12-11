@@ -634,30 +634,69 @@ $("#lista-reproceso").on("click","#iconEliminar", function(){
 $("#reprocesar").on('click', function(){
 
 	pass = $("#passreprocesar").val();
-	$("#passreprocesar").val('')
+	$("#passreprocesar").val('');
 
 	if (pass!='') {
-		$("#passreprocesar").removeClass('error');
-		$aux = $('#loading').dialog({title:'Generando Orden de Servicio',close: function(){$(this).dialog('close');}, modal: true, resizable:false});
+	//Util.show('modal_modalidad_pago');
+			$("#modal_modalidad_pago").dialog({
+					title: 'Seleccione modalidad de pago',
+					modal: true,
+					resizable: false,
+					width: 320,
+					buttons: {
+							OK: function(){
 
-		$.post(baseURL+api+isoPais+"/lotes/reproceso/reprocesar", {"data-lista":listarItems(),"data-tipoLote":tipoLote,"data-pass":hex_md5(pass)} )
-		.done(function(data) {
-			$aux.dialog('destroy');
-			if(data.indexOf("ERROR")==-1){
-				$("<div><h3>Proceso exitoso</h3><h5>Redireccionando...</h5></div>").dialog({title:"Reprocesar lotes", modal:true, resizable:false,close:function(){$(this).dialog('destroy');}});
+											$(this).dialog('destroy');
 
-				$("#data-OS").attr('value',data);
-				$("form#toOS").submit();
+											idModalidad =  $("input[name=methodChoice]:checked");
+											idModalidad= idModalidad.val();
+											if(idModalidad != null){
 
-			}else{
-				var jsonData = $.parseJSON(data);
-				if(jsonData.ERROR=='-29'){
-					alert('Usuario actualmente desconectado'); location.reload();
-				}
-				notificacion("Reprocesar lotes",jsonData.ERROR);
-			}
+													if(pass!="" ){
 
-		});
+														idModalidad = idModalidad.split("methodChoice");
+
+														medioPago = {
+																 "idPago" : idModalidad[1],
+																 "descripcion" : idModalidad[0]
+														},
+
+														$("#passreprocesar").removeClass('error');
+
+														$.post( baseURL+api+isoPais+"/lotes/reproceso/reprocesar",
+															{"data-lista":listarItems(),
+																"data-tipoLote":tipoLote,
+																"data-pass":hex_md5(pass),
+																"data-medio-pago":medioPago} ).done(function(data) {
+
+															//$aux.dialog('destroy');
+															if(data.indexOf("ERROR")==-1){
+																$("<div><h3>Proceso exitoso</h3><h5>Redireccionando...</h5></div>").dialog({title:"Reprocesar lotes", modal:true, resizable:false,close:function(){$(this).dialog('destroy');}});
+
+																$("#data-OS").attr('value',data);
+																$("form#toOS").submit();
+
+															}else{
+																var jsonData = $.parseJSON(data);
+																if(jsonData.ERROR=='-29'){
+																	alert('Usuario actualmente desconectado'); location.reload();
+																}
+																notificacion("Reprocesar lotes",jsonData.ERROR);
+															}
+
+														});
+
+													}else{
+															notificacion("Autorizando lotes",
+															"<h2>Verifique que: </h2><h3>1. Ha seleccionado al menos un lote</h3><h3>2. Ha ingresado su contraseña</h4><h3>3. Ha seleccionado el tipo orden de servicio</h3>");
+													}
+											}else{
+												notificacion( "Autorizando lotes", "Por favor escoja una modalidad de pago." );
+
+											}
+							}
+					}
+	});
 	}else{
 		notificacion('Reprocesar lotes','Debe ingresar su contraseña');
 		$("#passreprocesar").addClass('error');
