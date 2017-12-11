@@ -62,6 +62,7 @@ $urlBase = $urlBaseA.$pais;
 		<div id="top-batchs" class='crear elem-hidden'>
 			<span aria-hidden="true" class="icon" data-icon="&#xe08a;"></span> <?php echo lang('TITULO_CREAR_BENEFICIARIO') ?>
 		</div>
+
 		<div id="lotes-contenedor" class='crear elem-hidden'>
 				<div class="campos-reproceso">
 					<p>Cédula empleado: *</p><input type="text" id='idPersona' class='nro' maxlength='8'/>
@@ -139,11 +140,13 @@ $urlBase = $urlBaseA.$pais;
 			<input id="passreprocesar" class="input-pass-reproceso" placeholder="Ingrese su contraseña" type='password'/>
 		</div>
 	</div>
+
 	<div id="camposReprocesoMasivo">
 		<br>
 		<div id="MensajeRegistros"></div><br>
 		<table id="Estadistica"></table>
 	</div>
+
 	<div id="camposBenef">
 		<div class="campos-reproceso">
 			<p>Cédula empleado: *</p><input type="text" id='idPersona' class='nro' maxlength='8' disabled/>
@@ -182,6 +185,18 @@ $urlBase = $urlBaseA.$pais;
 			<p>Concepto pago: *</p><input type="text" id='concepto'/>
 		</div>
 	</div>
+
+</div>
+<div id="modal_modalidad_pago"  class='elem-hidden'>
+	<?php
+	  $html = '';
+		foreach ($selectTiposLotes[0]->mediosPago as $medio) {
+			echo '<input type="radio" id="methodChoice'.$medio->idPago.'"
+									name="methodChoice" value="'.$medio->descripcion.$medio->idPago.'">
+									<label for="methodChoice'.$medio->idPago.'">'.$medio->descripcion.'</label><br>';
+
+		}
+	?>
 </div>
 <div id='loading' style='text-align:center' class='elem-hidden'><?php echo insert_image_cdn("loading.gif"); ?></div>
 <form id='toOS' action="<?php echo $urlBase ?>/consulta/ordenes-de-servicio " method="post">
