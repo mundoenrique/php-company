@@ -142,11 +142,15 @@
 				var arrayResponse = [];
 
 				$.post( baseURL+api+isoPais+'/usuario/notificaciones/'+funcion, datosPost ).done(function(data){
-					var data = JSON.parse( data );
+						var data = JSON.parse( data );
 						Notificaciones = data;
 						if( data.rc == 0 ){
-								$( ".ui-dialog-content" ).dialog( "destroy" );
-								HtmlRows( data );
+								if(data.notificaciones.length != 0){
+									$( ".ui-dialog-content" ).dialog( "destroy" );
+									HtmlRows( data );
+								}else{
+									notificacion( titulo, 'En estos momentos no podemos procesar su solicitud' );
+								}
 						}
 						else{
 								notificacion( titulo, data.mensaje );
@@ -175,7 +179,7 @@
 											'"  onchange="captureEventCorreo(this)">'+
 											'<br><hr class="classHrNoti"></div><br><br>';
 				}
-				html += '<br><div id="opciones-btn"><button id="btn-modificar-noti" '+
+				html += '<br><div id="opciones-btn"><button id="btn-modificar-noti"  style="'+style+'"'+
 										'type="submit" onclick="envioDatos()">Guardar</button></div>';
 				notificacionesRequest.innerHTML = html;
 
