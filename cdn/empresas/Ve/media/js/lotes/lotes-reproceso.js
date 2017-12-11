@@ -79,7 +79,6 @@ function WS(funcion, datosPost, titulo){
 
 	$.post(baseURL+api+isoPais+'/lotes/reproceso/'+funcion, datosPost).done(function(data){
 
-		console.log(JSON.parse(data));
 		if(!data.ERROR){
 			$(".ui-dialog-content").dialog("destroy");
 			notificacion(titulo,'Proceso exitoso');
@@ -364,7 +363,7 @@ var ReprocesoMasivo = {
 			camposReprocesoMasivo.dialog({
 				title: "Gestión de Reproceso Masivo de Datos",
 				modal: true,
-				width:480,
+				width:510,
 				height: 230,
 				resizable: false,
 				close:function(){
