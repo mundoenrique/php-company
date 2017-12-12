@@ -12,7 +12,7 @@
 		function selectorEmpresa(){
 
 			var datosPost = {};
-			var titulo = "Selector Empresa";
+			var titulo = "Notificaciones";
 
 			datosPost.acrif = getRif();
 			ConsultaNotificaciones( 'buscar', datosPost, titulo );
