@@ -192,7 +192,7 @@ $urlBase = $urlBaseA.$pais;
 	  $html = '';
 		foreach ($selectTiposLotes[0]->mediosPago as $medio) {
 			echo '<input type="radio" id="methodChoice'.$medio->idPago.'"
-									name="methodChoice" value="'.$medio->descripcion.$medio->idPago.'">
+									name="methodChoice" value="'.$medio->descripcion.'">
 									<label for="methodChoice'.$medio->idPago.'">'.$medio->descripcion.'</label><br>';
 
 		}

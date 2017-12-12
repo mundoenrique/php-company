@@ -647,19 +647,21 @@ $("#reprocesar").on('click', function(){
 
 											$(this).dialog('destroy');
 
-											idModalidad =  $("input[name=methodChoice]:checked");
-											idModalidad= idModalidad.val();
+											idModalidad =  $("input[name=methodChoice]:checked").attr('id');
+											descripcion = $("input[name=methodChoice]:checked").val();
+											console.log(descripcion);
+
 											if(idModalidad != null){
 
 													if(pass!="" ){
 
 														idModalidad = idModalidad.split("methodChoice");
-
+														console.log(idModalidad);
 														medioPago = {
 																 "idPago" : idModalidad[1],
-																 "descripcion" : idModalidad[0]
+																 "descripcion" : descripcion
 														},
-
+														console.log(medioPago);
 														$("#passreprocesar").removeClass('error');
 
 														$.post( baseURL+api+isoPais+"/lotes/reproceso/reprocesar",
