@@ -308,7 +308,7 @@ function buscar(pgActual){
 		$("#loading").dialog("destroy");
 
 		ReprocesoMasivo.countTotal = data.totalRegistros;
-		console.log(data);
+
 		if(data.rc == 0){
 			pintar(data);
 		}else if(data.rc=='-29'||data.rc=='-61'){
@@ -636,7 +636,7 @@ $("#reprocesar").on('click', function(){
 	$("#passreprocesar").val('');
 
 	if (pass!='') {
-	//Util.show('modal_modalidad_pago');
+
 			$("#modal_modalidad_pago").dialog({
 					title: 'Seleccione modalidad de pago',
 					modal: true,
@@ -649,19 +649,17 @@ $("#reprocesar").on('click', function(){
 
 											idModalidad =  $("input[name=methodChoice]:checked").attr('id');
 											descripcion = $("input[name=methodChoice]:checked").val();
-											console.log(descripcion);
 
 											if(idModalidad != null){
 
 													if(pass!="" ){
 
 														idModalidad = idModalidad.split("methodChoice");
-														console.log(idModalidad);
+
 														medioPago = {
 																 "idPago" : idModalidad[1],
 																 "descripcion" : descripcion
 														},
-														console.log(medioPago);
 														$("#passreprocesar").removeClass('error');
 
 														$.post( baseURL+api+isoPais+"/lotes/reproceso/reprocesar",
