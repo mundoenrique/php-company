@@ -189,11 +189,19 @@ $urlBase = $urlBaseA.$pais;
 </div>
 <div id="modal_modalidad_pago"  class='elem-hidden'>
 	<?php
-	  $html = '';
+
+		$html = '';
+		$count = 1;
+
 		foreach ($selectTiposLotes[0]->mediosPago as $medio) {
-			echo '<input type="radio" id="methodChoice'.$medio->idPago.'"
-									name="methodChoice" value="'.$medio->descripcion.'">
-									<label for="methodChoice'.$medio->idPago.'">'.$medio->descripcion.'</label><br>';
+
+			$check = ($count == 1)?'checked':'';
+
+				echo '<input type="radio" id="methodChoice'.$medio->idPago.'"
+										name="methodChoice" value="'.$medio->descripcion.'" '.$check.'>
+										<label for="methodChoice'.$medio->idPago.'">'.$medio->descripcion.'</label><br>';
+
+			$count += 1;
 
 		}
 	?>
