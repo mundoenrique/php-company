@@ -56,11 +56,12 @@ $urlBase = $urlBaseA.$pais;
 					?>
 				</select>
 			</div>
-			<button id='crear'>Crear Guardería</button>
-			<button id='buscar'>Buscar Guardería</button>
+			<button id='crear'>Registrar Datos</button>
+			<button id='buscar'>Buscar Datos</button>
 		</div>
 		<div id="top-batchs" class='crear elem-hidden'>
-			<span aria-hidden="true" class="icon" data-icon="&#xe08a;"></span> <?php echo lang('TITULO_CREAR_BENEFICIARIO') ?>
+			<span aria-hidden="true" class="icon" data-icon="&#xe08a;"></span>
+			Registrar datos
 		</div>
 
 		<div id="lotes-contenedor" class='crear elem-hidden'>
@@ -102,7 +103,7 @@ $urlBase = $urlBaseA.$pais;
 				</div>
 		</div>
 		<div id="batchs-last" class='crear elem-hidden'>
-			<button id='btnCrearBenf'>Crear</button>
+			<button id='btnCrearBenf'>Registrar</button>
 			<input id="passcrear" class="input-pass-reproceso" placeholder="Ingrese su contraseña" type='password'/>
 		</div>
 		<div id="top-batchs" class='cargar elem-hidden'>
@@ -135,7 +136,7 @@ $urlBase = $urlBaseA.$pais;
 		</div>
 		<div id="batchs-last" class='elem-hidden buscar'>
 			<button id='btn-eliminar-benf'>Eliminar</button>
-			<button id='modificacionMasiva'>Modificar y Reprocesar</button>
+			<button id='modificacionMasiva'>Modificar Conceptos y Pagos</button>
 			<button id='reprocesar'>Reprocesar</button>
 			<input id="passreprocesar" class="input-pass-reproceso" placeholder="Ingrese su contraseña" type='password'/>
 		</div>
