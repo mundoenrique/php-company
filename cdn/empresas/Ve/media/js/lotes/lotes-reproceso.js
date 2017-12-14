@@ -670,7 +670,7 @@ $("#reprocesar").on('click', function(){
 
 															//$aux.dialog('destroy');
 															if(data.indexOf("ERROR")==-1){
-																$("<div><h3>Proceso exitoso</h3><h5>Redireccionando...</h5></div>").dialog({title:"Reprocesar lotes", modal:true, resizable:false,close:function(){$(this).dialog('destroy');}});
+																$("<div><h3>Proceso exitoso</h3><h5>Redireccionando...</h5></div>").dialog({title:"Reprocesar Datos", modal:true, resizable:false,close:function(){$(this).dialog('destroy');}});
 
 																$("#data-OS").attr('value',data);
 																$("form#toOS").submit();
@@ -680,7 +680,7 @@ $("#reprocesar").on('click', function(){
 																if(jsonData.ERROR=='-29'){
 																	alert('Usuario actualmente desconectado'); location.reload();
 																}
-																notificacion("Reprocesar lotes",jsonData.ERROR);
+																notificacion("Reprocesar Datos",jsonData.ERROR);
 															}
 
 														});
@@ -697,7 +697,7 @@ $("#reprocesar").on('click', function(){
 					}
 	});
 	}else{
-		notificacion('Reprocesar lotes','Debe ingresar su contraseña');
+		notificacion('Reprocesar Datos','Debe ingresar su contraseña');
 		$("#passreprocesar").addClass('error');
 	}
 
