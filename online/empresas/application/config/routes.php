@@ -25,10 +25,14 @@ $route['api/v1/(:any)/usuario/config/consultarSucursales'] = "users/getConsultar
 $route['api/v1/(:any)/usuario/config/agregarSucursales'] = "users/getAgregarSucursales/$1";
 $route['api/v1/(:any)/usuario/config/actualizarSucursales'] = "users/getActualizarSucursales/$1";
 $route['api/v1/(:any)/usuario/config/cargarSucursales'] = "users/cargarSucursales/$1";
+$route['api/v1/(:any)/usuario/notificaciones/buscar'] = "users/Notificaciones/$1";
+$route['api/v1/(:any)/usuario/notificaciones/envio'] = "users/NotificacionesEnvio/$1";
 
 $route['(:any)/empresas/config'] = "users/configEmpresa/$1";
 $route['(:any)/empresas/configsuc'] = "users/configSucursal/$1";
 $route['(:any)/empresas/configdesc'] = "users/configDescargas/$1";
+$route['(:any)/empresas/confignoti'] = "users/configNotificaciones/$1";
+//$route['(:any)/usuario/notificaciones/buscar'] = "users/Notificaciones/$1";
 
 $route['(:any)/beneficios'] = "footer/pantallaBeneficios/$1";
 $route['(:any)/condiciones'] = "footer/pantallaCondiciones/$1";
@@ -102,6 +106,7 @@ $route['api/v1/(:any)/lotes/reproceso/buscar'] = "lotes/buscarListaBeneficiarios
 $route['api/v1/(:any)/lotes/reproceso/modificar'] = "lotes/modificarBeneficiario/$1";
 $route['api/v1/(:any)/lotes/reproceso/eliminar'] = "lotes/eliminarBeneficiario/$1";
 $route['api/v1/(:any)/lotes/reproceso/reprocesar'] = "lotes/reprocesar/$1";
+$route['api/v1/(:any)/lotes/reproceso/reprocesarMasivo'] = "lotes/reprocesarMasivo/$1";
 $route['api/v1/(:any)/lotes/eliminar'] = "lotes/eliminarLotes/$1";
 $route['api/v1/(:any)/lotes/detalle'] = "lotes/verDetalleBandeja/$1";
 $route['api/v1/(:any)/lotes/lista/pendientes'] = "lotes/getLotesPorConfirmarJSON/$1";
@@ -149,6 +154,8 @@ $route['api/v1/(:any)/reportes/estatuslotesExpPDF'] = "reportes/expEstatusLotesP
 $route['api/v1/(:any)/reportes/saldosamanecidosExpXLS'] = "reportes/expSaldosAmanecidosXLS/$1";
 $route['api/v1/(:any)/reportes/downPDFactividadUsuario'] = "reportes/downPDFactividadUsuario/$1";
 $route['api/v1/(:any)/reportes/downXLSactividadUsuario'] = "reportes/downXLSactividadUsuario/$1";
+$route['api/v1/(:any)/reportes/guarderiaExpPDF'] = "reportes/guarderiaExpPDF/$1";
+$route['api/v1/(:any)/reportes/guarderiaExpXLS'] = "reportes/guarderiaExpXLS/$1";
 
 //REPORTES
 $route['(:any)/reportes/cuenta-concentradora'] = "reportes/cuentaConcentradora/$1";
@@ -161,6 +168,9 @@ $route['(:any)/reportes/actividad-por-usuario'] = "reportes/actividadporusuario/
 $route['(:any)/reportes/estados-de-cuenta'] = "reportes/estadosdecuenta/$1";
 $route['(:any)/reportes/gastos-por-categorias'] = "reportes/gastosporcategorias/$1";
 $route['(:any)/reportes/tarjetahabientes'] = "reportes/tarjetahabientes/$1";
+$route['(:any)/reportes/guarderia'] = "reportes/guarderia/$1";
+$route['(:any)/reportes/GuarderiaResult'] = "reportes/getGuarderiaResult/";
+
 //CONSULTAS
 $route['(:any)/consulta/ordenes-de-servicio'] = "consultas/ordenesServicio/$1";
 $route['(:any)/consulta/tarjetahabientes'] = "consultas/tarjetahabientes/$1";
@@ -206,6 +216,14 @@ $route['(:any)/trayectos/detalleCuentas'] = "combustible/accountsDetails/$1";
 //travels
 $route['(:any)/trayectos/viajes'] = "combustible/travels/$1";
 $route['(:any)/trayectos/viajes/detalles'] = "combustible/travelAddEdit/$1";
+
+//controles de pago visa
+$route['(:any)/controles/visa'] = "visa/index/$1";
+$route['(:any)/card-list'] = "visa/callWsCardList/$1";
+$route['(:any)/visa'] = "visa/callWSVisaModel/$1";
+$route['(:any)/controles/visa/configurar'] = "visa/setup/$1";
+$route['(:any)/pagos'] = "payment/payments/$1";
+$route['(:any)/payments'] = "payment/callAPImodel/$1";
 
 $route['404_override'] = '';
 
