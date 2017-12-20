@@ -179,7 +179,7 @@
 											'"  onchange="captureEventCorreo(this)">'+
 											'<br><hr class="classHrNoti"></div><br><br>';
 				}
-				html += '<br><div id="opciones-btn"><button id="btn-modificar-noti"  style="'+style+'"'+
+				html += '<br><div id="opciones-btn"><button id="btn-modificar-noti"  '+
 										'type="submit" onclick="envioDatos()">Guardar</button></div>';
 				notificacionesRequest.innerHTML = html;
 
