@@ -4,9 +4,9 @@
 
 	<div id="wrapper">
 		<!-- Begin: Content Area -->
-		
+
 					{content}
-		
+
 		<!-- End: Content Area -->
 		<?php if(isset($sidebarActive) && $sidebarActive){?>
 
@@ -19,11 +19,11 @@
 
 				</div>
 				<div id="widget-info-2">
-					A partir del 16 de octubre de 2017 se ajustará a Bs 15.000 el cobro mínimo mensual a aquellas facturas cuyo Servicio Administrativo sea inferior a esa cantidad y la tarifa mensual por concepto de Servicios Operativos y de Logística será de Bs. 12.000 quedando exceptuadas aquellas facturas con Servicio Administrativo Mínimo.
+					A partir del <strong>15 de diciembre del 2017</strong> se ajustará a Bs. <strong>25.000,00</strong> el cobro mínimo mensual a aquellas facturas cuyo Servicio Administrativo sea inferior a esa cantidad y la tarifa mensual por concepto de Servicios Operativos y de Logística será de Bs. <strong>20.000,00</strong> quedando exceptuadas aquellas facturas con Servicio Administrativo Mínimo.
 				</div>
 			</div>
 			<?php } ?>
-			
+
 			<!-- Begin: Sidebar -->
 			<div id="sidebar-products">
 				{sidebar}
@@ -32,7 +32,7 @@
 			<!-- End: Sidebar -->
 
 
-		
+
 
 		<?php };?>
 	</div>

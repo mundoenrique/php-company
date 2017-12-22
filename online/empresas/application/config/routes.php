@@ -217,6 +217,14 @@ $route['(:any)/trayectos/detalleCuentas'] = "combustible/accountsDetails/$1";
 $route['(:any)/trayectos/viajes'] = "combustible/travels/$1";
 $route['(:any)/trayectos/viajes/detalles'] = "combustible/travelAddEdit/$1";
 
+//controles de pago visa
+$route['(:any)/controles/visa'] = "visa/index/$1";
+$route['(:any)/card-list'] = "visa/callWsCardList/$1";
+$route['(:any)/visa'] = "visa/callWSVisaModel/$1";
+$route['(:any)/controles/visa/configurar'] = "visa/setup/$1";
+$route['(:any)/pagos'] = "payment/payments/$1";
+$route['(:any)/payments'] = "payment/callAPImodel/$1";
+
 $route['404_override'] = '';
 
 /* End of file routes.php */

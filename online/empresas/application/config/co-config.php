@@ -2,7 +2,7 @@
 
 ini_set('memory_limit', '200M');
 
-//País 
+//País
 $config['country']='Co';
 
 $config['system_name']='empresas';
@@ -14,8 +14,14 @@ $config['keyNovo']= base64_decode('dGVzdDEyMzQ=');
 
 //URL Servicio Web WebLogic
 $config['urlWS']= 'http://172.24.6.148:8005/NovoEolWebInterfaceWS/webresources/';
-//URL Servicio API
+//URL API Trayectos
 $config['urlAPI']= 'http://172.24.6.148:8005/ceo-fuel/1.0/';
+//URL Servicio
+$config['urlServ']= 'http://172.24.6.148:8008/';
+//CLIENT ID OAUTH
+$config['client_id'] = 'b08e4d54638385d6987af8989a01f30e';
+//CLIENT SECRET OAUTH
+$config['client_secret'] = 'f2ca416fb52cdf4f21406a5d9ca6b16f';
 
 /*
 |--------------------------------------------------------------------------

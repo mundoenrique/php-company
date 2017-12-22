@@ -1,3 +1,4 @@
+
 <?php
 $lang['SYSTEM_NAME']= "Empresas Online Perú";
 $lang['LAST_SESSION']="Última sesión";
@@ -54,6 +55,8 @@ $lang['TEBORS']= "Órdenes de Servicio"; // modulo
 $lang['TEBANU']= "Anular orden de servicio";
 $lang["TEBCOS"]= "Consultar orden se servicio";
 $lang['TRAMAE']= "Transferencia maestra"; // modulo
+$lang['CONVIS']= "Controles de pago"; // modulo
+$lang['PAGPRO']= "Pago a Proveedores"; // modulo
 $lang['TRACAR']= "Cargos a tarjetas";
 $lang['TRAABO']= "Abonos a tarjetas";
 $lang['TRASAL']= "Consulta a tarjetas";

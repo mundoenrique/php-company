@@ -201,6 +201,12 @@
 							case 'TRAMAE':
 								$ruta=$urlBase."/servicios/transferencia-maestra";
 								break;
+							case 'CONVIS':
+								$ruta=$urlBase."/controles/visa";
+								break;
+							case 'PAGPRO':
+								$ruta=$urlBase."/pagos";
+								break;
 							case 'TEBPOL':
 								$ruta=$urlBase."/servicios/actualizar-datos";
 								break;
