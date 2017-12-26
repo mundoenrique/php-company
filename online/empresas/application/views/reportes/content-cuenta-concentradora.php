@@ -57,13 +57,15 @@ $urlCdn = get_cdn();
 					</span>
 				</div>
 				<div id="search-2">
-					
 
-					
+
+
 					<table>
 						<tr>
-							<td>
+						
+							<td style="vertical-align: top; width: 152px;">
 								<h5 style="width:85px "><?php echo lang('TITULO_REPORTES_RESULTADOS'); ?></h5>
+							<?php if($pais !== 'Co'): ?>
 								<span>
 									<input id = "trimestre" type="radio" name = "radio" value = "3" class="radio"/>
 									<p><?php echo lang('REPORTES_RADIO_TRIMESTRE'); ?></p>
@@ -72,13 +74,13 @@ $urlCdn = get_cdn();
 									<input id = "semestre" type="radio" name = "radio" value = "6" class="radio"/>
 									<p><?php echo lang('REPORTES_RADIO_SEMESTRE'); ?></p>
 								</span>
+							<?php endif; ?>
 								<span>
 									<input id = "rango" type="radio" class="radio" name = "radio" value = "0" checked ="true"/>
 									<p><?php echo lang('TITULO_REPORTES_RANGO'); ?></p>
 								</span>
-
-							</td>	
-							<td style="vertical-align: top">
+							</td>
+							<td style="vertical-align: top; width: 152px;">
 								<h5 style="width:95px "><?php echo lang('TITULO_REPORTES_PROCEDIMIENTO'); ?></h5>
 
 								<span>
@@ -148,7 +150,7 @@ $urlCdn = get_cdn();
 				</table>
 				<!--
 					<div class="Jpaginate">
-						<div id="paginacion">               
+						<div id="paginacion">
 						</div>
 					</div>
 				-->
@@ -186,4 +188,3 @@ $urlCdn = get_cdn();
 	</div>
 
 <div id='loading' style='text-align:center' class='elem-hidden'><?php echo insert_image_cdn("loading.gif"); ?></div>
-	
