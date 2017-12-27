@@ -299,7 +299,7 @@ function buscar(pgActual){
 	$("#tipoCheque").attr('disabled',true);
 	$("#buscar").attr('disabled',true);
 
-	$("#loading").dialog({title:"Buscar Guarderias",modal:true,resizable:false,close: function(){$(this).dialog("destroy");}})
+	$("#loading").dialog({title:"Buscar Datos",modal:true,resizable:false,close: function(){$(this).dialog("destroy");}})
 
 	$.post(baseURL+api+isoPais+'/lotes/reproceso/buscar',{'data-tipo':tipoLote,'data-paginar':true,'data-pgActual':pgActual,'data-tamPg':tamPg})
 	.done(function(data){
@@ -316,7 +316,7 @@ function buscar(pgActual){
 			location.reload();
 		}else{
 			$('.buscar').addClass('elem-hidden');
-			notificacion('Buscar Guarderías', data.ERROR);
+			notificacion('Buscar Datos', data.ERROR);
 		}
 	});
 }
