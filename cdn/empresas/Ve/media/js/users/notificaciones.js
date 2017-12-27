@@ -50,8 +50,10 @@
 
 						Notificaciones.notificaciones[ a ].contacto.estatus = "A";
 						Notificaciones.notificaciones[ a ].contacto.acrif = getRif();
-
 							if( Notificaciones.notificaciones[ a ].codOperacion == id ){
+									if(Notificaciones.notificaciones[ a ].contacto.tipoContacto == ""){
+										Notificaciones.notificaciones[ a ].contacto.tipoContacto = "G";
+									}
 									if ( this.checked ) {
 											var correo = document.getElementById(id).value;
 											if(correo != ""){
