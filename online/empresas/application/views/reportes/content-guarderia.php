@@ -5,7 +5,7 @@ $urlBase = $urlBaseA . $pais;
 $urlCdn = get_cdn();
 ?>
 <div id="content-products">
-    <h1><?php echo lang('TITULO_GUARDERIA'); ?></h1>
+    <h1><?php echo lang('REPPGE'); ?></h1>
     <ol class="breadcrumb">
         <li>
             <a href="<?php echo $urlBase; ?>/dashboard" rel="start">
@@ -29,7 +29,7 @@ $urlCdn = get_cdn();
         </li>
         <li class="breadcrumb-item-current">
             <a href="" rel="section">
-                <?php echo lang('BREADCRUMB_REPORTES_GUARDERIA'); ?>
+                <?php echo lang('REPPGE'); ?>
             </a>
         </li>
     </ol>
