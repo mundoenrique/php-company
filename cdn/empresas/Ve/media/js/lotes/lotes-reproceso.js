@@ -556,7 +556,7 @@ $("#lista-reproceso").on("click","#iconModificar", function(){
 	$("#camposBenef #monto").val(datos.monto_total.replace('.',''));
 	$("#camposBenef #concepto").val(datos.concepto);
 	$("#camposBenef").dialog({
-		title: 'Modificar Guarderia',
+		title: 'Modificar Datos',
 		modal:true,
 		width:660,
 		buttons:{
@@ -581,7 +581,7 @@ $("#lista-reproceso").on("click","#iconModificar", function(){
 				datosPost.tamPg = tamPg;
 
 				WSbeneficiario('modificar', datosPost, $("#passmodificar").val(),
-						'Modificar Guardería',$("#camposBenef"),$(".ui-button"));
+						'Modificar Datos',$("#camposBenef"),$(".ui-button"));
 				$("#passmodificar").val("");
 			}
 		},
