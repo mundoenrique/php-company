@@ -563,12 +563,12 @@ $("#lista-reproceso").on("click","#iconModificar", function(){
 			Modificar: function(){
 				datosPost = {};
 				datosPost.tipo = tipoLote;
-				datosPost.idPersona = datos.id_per;
-				datosPost.apellEmpl = datos.apellido;
-				datosPost.nombEmpl = datos.nombre;
+				datosPost.idPersona = 	$("#camposBenef #idPersona").val();
+				datosPost.apellEmpl = $("#camposBenef #apellEmpl").val();
+				datosPost.nombEmpl = 	$("#camposBenef #nombEmpl").val();
 				datosPost.emailEmpl = $("#camposBenef #emailEmpl").val();
-				datosPost.apellInfant = datos.apellido_infante;
-				datosPost.nombInfant = datos.nombre_infante;
+				datosPost.apellInfant =	$("#camposBenef #apellInfant").val();
+				datosPost.nombInfant =	$("#camposBenef #nombInfant").val();
 				datosPost.nombGuard = $("#camposBenef #nombGuard").val();
 				datosPost.idfiscalGuard = $("#camposBenef #idfiscalGuard").val();
 				datosPost.nroCuentaGuard = $("#camposBenef #nroCuentaGuard").val();

@@ -150,22 +150,22 @@ $urlBase = $urlBaseA.$pais;
 
 	<div id="camposBenef">
 		<div class="campos-reproceso">
-			<p>Cédula empleado: *</p><input type="text" id='idPersona' class='nro' maxlength='8' disabled/>
+			<p>Cédula empleado: *</p><input type="text" id='idPersona' class='nro' maxlength='8' />
 		</div>
 		<div class="campos-reproceso">
-			<p>Apellido empleado: *</p><input type="text" id='apellEmpl' disabled/>
+			<p>Apellido empleado: *</p><input type="text" id='apellEmpl'/>
 		</div>
 		<div class="campos-reproceso">
-			<p>Nombre empleado: *</p><input type="text" id='nombEmpl' disabled/>
+			<p>Nombre empleado: *</p><input type="text" id='nombEmpl'/>
 		</div>
 		<div class="campos-reproceso chq-elect">
 			<p>Email empleado: *</p><input type="text" id='emailEmpl' />
 		</div>
 		<div class="campos-reproceso">
-			<p>Apellido niño(a): *</p><input type="text" id='apellInfant'disabled/>
+			<p>Apellido niño(a): *</p><input type="text" id='apellInfant'/>
 		</div>
 		<div class="campos-reproceso">
-			<p>Nombre niño(a): *</p><input type="text" id='nombInfant' disabled/>
+			<p>Nombre niño(a): *</p><input type="text" id='nombInfant' />
 		</div>
 		<div class="campos-reproceso">
 			<p>Nombre guardería: *</p><input type="text" id='nombGuard' />
