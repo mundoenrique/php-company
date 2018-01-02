@@ -193,18 +193,20 @@ $urlBase = $urlBaseA.$pais;
 
 		$html = '';
 		$count = 1;
+if(!is_null (  $selectTiposLotes[0]->mediosPago)){
+	foreach ($selectTiposLotes[0]->mediosPago as $medio) {
 
-		foreach ($selectTiposLotes[0]->mediosPago as $medio) {
+		$check = ($count == 1)?'checked':'';
 
-			$check = ($count == 1)?'checked':'';
+			echo '<input type="radio" id="methodChoice'.$medio->idPago.'"
+									name="methodChoice" value="'.$medio->descripcion.'" '.$check.'>
+									<label for="methodChoice'.$medio->idPago.'">'.$medio->descripcion.'</label><br>';
 
-				echo '<input type="radio" id="methodChoice'.$medio->idPago.'"
-										name="methodChoice" value="'.$medio->descripcion.'" '.$check.'>
-										<label for="methodChoice'.$medio->idPago.'">'.$medio->descripcion.'</label><br>';
+		$count += 1;
 
-			$count += 1;
+	}
+}
 
-		}
 	?>
 </div>
 <div id='loading' style='text-align:center' class='elem-hidden'><?php echo insert_image_cdn("loading.gif"); ?></div>
