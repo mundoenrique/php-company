@@ -65,8 +65,12 @@ class Consultas extends CI_Controller {
             $idProductoS = $this->session->userdata('idProductoS');
             $idEmpresa = $this->session->userdata('acrifS');
 
-            $programa = $this->session->userdata('nombreProductoS').' / '. $this->session->userdata('marcaProductoS') ;
-
+            if($this->session->userdata('nombreProductoS') ==='PLATA GUARDERÍA' &&
+       		  		$this->session->userdata('marcaProductoS') === 'Cheque'){
+       						$programa = $this->session->userdata('nombreProductoS');
+       		 }else{
+       			 $programa = $this->session->userdata('nombreProductoS').' / '.ucwords( $this->session->userdata('marcaProductoS'));
+       		 }
             $tipoStatusOS[] = $this->callWStatusLotesOS($urlCountry);
             $menuP =$this->session->userdata('menuArrayPorProducto');
             $funciones = np_hoplite_modFunciones($menuP);

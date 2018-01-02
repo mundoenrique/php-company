@@ -47,7 +47,12 @@ class Lotes extends CI_Controller {
 			$FooterCustomJS="";
 			$titlePage="Conexión Empresas Online - Lotes";
 
-			$programa = $this->session->userdata('nombreProductoS').' / '. $this->session->userdata('marcaProductoS') ;
+		 if($this->session->userdata('nombreProductoS') ==='PLATA GUARDERÍA' &&
+		  		$this->session->userdata('marcaProductoS') === 'Cheque'){
+						$programa = $this->session->userdata('nombreProductoS');
+		 }else{
+			 $programa = $this->session->userdata('nombreProductoS').' / '.ucwords( $this->session->userdata('marcaProductoS'));
+		 }
 
 			$tiposLotesLista[] = $this->callWSconsultarTipoLote($urlCountry,$idProductoS);
 
@@ -274,8 +279,12 @@ class Lotes extends CI_Controller {
 			$FooterCustomJS="";
 			$titlePage="Conexión Empresas Online - Lotes";
 
-			$programa = $this->session->userdata('nombreProductoS').' / '. $this->session->userdata('marcaProductoS') ;
-
+			if($this->session->userdata('nombreProductoS') ==='PLATA GUARDERÍA' &&
+ 		  		$this->session->userdata('marcaProductoS') === 'Cheque'){
+ 						$programa = $this->session->userdata('nombreProductoS');
+	 		 }else{
+	 			 $programa = $this->session->userdata('nombreProductoS').' / '.ucwords( $this->session->userdata('marcaProductoS'));
+			 }
 			$lista = $this->input->post('tempIdOrdenL');
 
 			/*si está entrando a está página desde el módulo de calculo OS, solicitar eliminación de lotes temporales,
@@ -2405,11 +2414,14 @@ class Lotes extends CI_Controller {
 			$FooterCustomJS="";
 			$titlePage="Reproceso de Datos";
 
-			$programa = $this->session->userdata('nombreProductoS').' / '. $this->session->userdata('marcaProductoS') ;
-
+			if($this->session->userdata('nombreProductoS') ==='PLATA GUARDERÍA' &&
+ 		  		$this->session->userdata('marcaProductoS') === 'Cheque'){
+ 						$programa = $this->session->userdata('nombreProductoS');
+ 		 }else{
+ 			 $programa = $this->session->userdata('nombreProductoS').' / '.ucwords( $this->session->userdata('marcaProductoS'));
+}
 			$idProductoS = $this->session->userdata('idProductoS');
 			$tiposLotesLista[] = $this->callWSconsultarTipoLote($urlCountry,$idProductoS);
-
 			$menuHeader = $this->parser->parse('widgets/widget-menuHeader',array(),TRUE);
 			$menuFooter = $this->parser->parse('widgets/widget-menuFooter',array(),TRUE);
 

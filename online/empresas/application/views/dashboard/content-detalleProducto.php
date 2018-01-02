@@ -57,7 +57,7 @@ function to_ascii($word){
 		</li>
 	</ol>
 
-	<?php 
+	<?php
 	if(isset($producto) && $producto!=FALSE){
 
 		$nombreTarjeta = url_title(to_ascii(mb_strtolower($producto[0]->producto->descripcion)) );
@@ -67,7 +67,7 @@ function to_ascii($word){
 		if (isset($producto[0]->listadoTarjeta->numeroTarjetas)) {
 			$tarjetas['total'] = $producto[0]->listadoTarjeta->numeroTarjetas;
 			$tarjetas['activas'] = $producto[0]->listadoTarjeta->numTarjetasActivas;
-			$tarjetas['inactivas'] = $producto[0]->listadoTarjeta->numTarjetasInactivas;	
+			$tarjetas['inactivas'] = $producto[0]->listadoTarjeta->numTarjetasInactivas;
 		}
 		//Lotes
 		$lotes['total'] = $producto[0]->lote->total;
@@ -131,10 +131,12 @@ function to_ascii($word){
 			<?php
 			$menuP =$this->session->userdata('menuArrayPorProducto');
 
-			echo'
-			<div id="text-product-detail">
-			<h2>Producto</h2>
-			<p>'.$nombreProducto.' - '.ucwords($marcaProducto).'</p>';
+		$mproducto = (preg_match("/Plata Guardería/",  $nombreProducto ))?
+									'':' - '.ucwords($marcaProducto);
+
+		echo' <div id="text-product-detail">
+					<h2>Producto</h2>
+					<p>'.$nombreProducto.$mproducto.'</p>';
 
 			$moduloAct = np_hoplite_existeLink($menuP,"TEBCAR");
 			if($moduloAct!==false){
@@ -148,9 +150,9 @@ function to_ascii($word){
 			$moduloAct = np_hoplite_existeLink($menuP,"TEBAUT");
 			if ($moduloAct!==false) {
 				if ($moduloAct!==false) {
-					echo '<p><a href="'.$urlBase.'/lotes/autorizacion">';				
+					echo '<p><a href="'.$urlBase.'/lotes/autorizacion">';
 				}else{
-					echo '<p> <a title="'.lang('SIN_FUNCION').'">';	
+					echo '<p> <a title="'.lang('SIN_FUNCION').'">';
 				}
 
 				echo '
@@ -181,9 +183,9 @@ function to_ascii($word){
 			$moduloAct = np_hoplite_existeLink($menuP,"TRAMAE");
 			if (isset($tarjetas)) {
 				/*if ($moduloAct!==false) {
-					echo '<p> <a >';				
+					echo '<p> <a >';
 				}else{
-					echo '<p> <a title="'.lang('SIN_FUNCION').'">';	
+					echo '<p> <a title="'.lang('SIN_FUNCION').'">';
 				}
 				echo'<span aria-hidden="true" class="icon" data-icon="&#xe027;"></span>
 				Tarjetas:
@@ -195,8 +197,8 @@ function to_ascii($word){
 				Tarjetas:
 				<span class="num-product-detail">'.$tarjetas['total'].'</span>
 				'.$tarjetas['activas'].' Activas / '.$tarjetas['inactivas'].' Inactivas
-				</a><p>';		
-			}				
+				</a><p>';
+			}
 
 			echo '
 			</div>
