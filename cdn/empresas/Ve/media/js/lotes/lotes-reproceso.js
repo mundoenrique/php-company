@@ -139,6 +139,7 @@ function WS(funcion, datosPost, titulo){
 		emailRegex = /^([^]+[\w-\.]+@([\w-]+\.)+[\w-]{2,4})+$/;
 		rifRegex = /^[gjvepEPVGJ]{1}[-]{1}[0-9]{8}[-]{1}[0-9]{1}$/;
 		alfanumericRegex = /^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\s]*$/;
+		conceptoRegex = /^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\s]{1,20}$/;
 		alfaRegex = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]*$/;
 		ciRegex = /^[0-9]{8}$/;
 		nroctaRegex = /^[0-9]{20}$/;
@@ -189,7 +190,7 @@ function WS(funcion, datosPost, titulo){
 			$contenedor.find("#nombGuard").addClass('error');
 			validez= false;
 		}
-		if( ! alfanumericRegex.test(datosPost.concepto) || datosPost.concepto=='' ){
+		if( ! conceptoRegex.test(datosPost.concepto) || datosPost.concepto=='' ){
 			$contenedor.find("#concepto").addClass('error');
 			validez= false;
 		}
@@ -636,9 +637,9 @@ $("#reprocesar").on('click', function(){
 	$("#passreprocesar").val('');
 
 	if (pass!='') {
-
+		var tituloModal = 'Seleccione modalidad de pago';
 			$("#modal_modalidad_pago").dialog({
-					title: 'Seleccione modalidad de pago',
+					title: tituloModal,
 					modal: true,
 					resizable: false,
 					width: 320,
@@ -661,13 +662,15 @@ $("#reprocesar").on('click', function(){
 																 "descripcion" : descripcion
 														},
 														$("#passreprocesar").removeClass('error');
-
+														$("#loading").dialog({title:tituloModal,modal:true,resizable:false,
+																			close: function(){$(this).dialog("destroy");}});
 														$.post( baseURL+api+isoPais+"/lotes/reproceso/reprocesar",
 															{"data-lista":listarItems(),
 																"data-tipoLote":tipoLote,
 																"data-pass":hex_md5(pass),
 																"data-medio-pago":medioPago} ).done(function(data) {
 
+															$("#loading").dialog("destroy");
 															//$aux.dialog('destroy');
 															if(data.indexOf("ERROR")==-1){
 																$("<div><h3>Proceso exitoso</h3><h5>Redireccionando...</h5></div>").dialog({title:"Reprocesar Datos", modal:true, resizable:false,close:function(){$(this).dialog('destroy');}});
@@ -690,6 +693,7 @@ $("#reprocesar").on('click', function(){
 															"<h2>Verifique que: </h2><h3>1. Ha seleccionado al menos un lote</h3><h3>2. Ha ingresado su contraseña</h4><h3>3. Ha seleccionado el tipo orden de servicio</h3>");
 													}
 											}else{
+
 												notificacion( "Autorizando lotes", "Por favor escoja una modalidad de pago." );
 
 											}
