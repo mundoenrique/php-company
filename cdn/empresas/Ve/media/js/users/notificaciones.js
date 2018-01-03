@@ -170,6 +170,8 @@
 
 					var checkedTmp = (notificaciones[x].notificacionAct==1)?'checked':'';
 
+					var ContactoEmail = (notificaciones[x].contacto.email != " ")?notificaciones[x].contacto.email:"";
+
 					var style	= (notificaciones[x].notificacionAct==1)?
 								'display: block;':'display: none;';
 					html += '<br><input type="checkbox" id="checkNoti'+notificaciones[x].codOperacion+
@@ -177,7 +179,7 @@
 									' value="'+notificaciones[x].codOperacion+'" '+checkedTmp+'> '+notificaciones[x].descripcion +
 									'<br> <br><div id="div'+notificaciones[x].codOperacion+'" style="'+style+'">'+
 									'Correo : <input type="text" name="correo'+notificaciones[x].codOperacion+
-											'" id="'+notificaciones[x].codOperacion+'" value="'+notificaciones[x].contacto.email+
+											'" id="'+notificaciones[x].codOperacion+'" value="'+ContactoEmail+
 											'"  onchange="captureEventCorreo(this)">'+
 											'<br><hr class="classHrNoti"></div><br><br>';
 				}
