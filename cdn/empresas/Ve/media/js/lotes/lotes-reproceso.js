@@ -141,7 +141,7 @@ function WS(funcion, datosPost, titulo){
 		alfanumericRegex = /^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\s]*$/;
 		conceptoRegex = /^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\s]{1,20}$/;
 		alfaRegex = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]*$/;
-		ciRegex = /^[0-9]{8}$/;
+		ciRegex = /^[0-9]{6,8}$/;
 		nroctaRegex = /^[0-9]{20}$/;
 		montoRegex = /^-?[0-9]+([\,][0-9]{0,2})?$/;
 
