@@ -172,6 +172,10 @@ function WS(funcion, datosPost, titulo){
 		validadorRegEx.validadorRegEx( alfanumericRegex, datosPost.nombGuard, '#nombGuard', $contenedor );
 		validadorRegEx.validadorRegEx( conceptoRegex, datosPost.concepto, '#concepto', $contenedor );
 		validadorRegEx.validadorRegEx( montoRegex, datosPost.monto, '#monto', $contenedor );
+		if(datosPost.monto.length >=20){
+				$contenedor.find("#monto").addClass('error');
+				validadorRegEx.validez = false;
+		}
 
 		return validadorRegEx.validez;
 
@@ -613,8 +617,9 @@ $("#reprocesar").on('click', function(){
 	if (pass!='') {
 
 		var tituloModal = 'Seleccione modalidad de pago';
-		var nuevoIva = true;
-		if( nuevoIva ){
+		var nuevoIva = document.getElementById('nuevoIva');
+
+		if( nuevoIva.value == 1 ){
 
 			var idModalidad =  $("input[name=methodChoice]:checked").attr('id');
 			var descripcion = $("input[name=methodChoice]:checked").val();
@@ -637,7 +642,7 @@ $("#reprocesar").on('click', function(){
 												medioPago = {
 														 "idPago" : idModalidad[1],
 														 "descripcion" : descripcion };
-											  sendReproceso( pass, medioPago, tituloModal, tipoLote );
+											  sendReproceso( pass, medioPago, tituloModal, tipoLote, nuevoIva.value );
 								}else{
 									notificacion( "Autorizando lotes", "Por favor escoja una modalidad de pago." );
 								}
@@ -646,7 +651,7 @@ $("#reprocesar").on('click', function(){
 					}
 			});
 		}else{
-  		sendReproceso( pass, "", tituloModal, tipoLote );
+  		sendReproceso( pass, "", tituloModal, tipoLote, nuevoIva.value );
 		}
 	}else{
 		notificacion('Reprocesar Datos','Debe ingresar su contraseña');
@@ -655,7 +660,7 @@ $("#reprocesar").on('click', function(){
 
 });
 
-function sendReproceso( pass, medioPago, tituloModal, tipoLote ){
+function sendReproceso( pass, medioPago, tituloModal, tipoLote, nuevoIva ){
 
 	if(pass!="" ){
 
@@ -669,9 +674,9 @@ function sendReproceso( pass, medioPago, tituloModal, tipoLote ){
 			"data-lista":listarItems(),
 			"data-tipoLote":tipoLote,
 			"data-pass":hex_md5(pass),
-			"data-medio-pago":medioPago
+			"data-medio-pago":medioPago,
+			"data-nuevo-iva" :nuevoIva
 		};
-
 		$.post( url, SendData ).done(function(data) {
 
 			$( "#loading" ).dialog( "destroy" );
