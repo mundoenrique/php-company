@@ -188,6 +188,12 @@ $urlBase = $urlBaseA.$pais;
 	</div>
 
 </div>
+
+<?php
+
+?>
+<input type="hidden" name="nuevoIva" id="nuevoIva"
+			value="<?php echo ($selectTiposLotes[0]->nuevoIva==true)?1:0; ?>">
 <div id="modal_modalidad_pago"  class='elem-hidden'>
 	<?php
 

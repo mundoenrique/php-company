@@ -3217,7 +3217,10 @@ class Lotes extends CI_Controller {
 				$pass = $this->input->post('data-pass');
 				$lista = $this->input->post("data-lista");
 				$medioPago = $this->input->post("data-medio-pago");
-				$response = $this->callWSreprocesar($urlCountry, $lista, $tipo_lote, $pass, $medioPago);
+
+				$nuevoIva = $this->input->post("data-nuevo-iva");
+
+				$response = $this->callWSreprocesar($urlCountry, $lista, $tipo_lote, $pass, $medioPago, $nuevoIva);
 			}else{
 				$response = json_encode(array("ERROR"=>lang('SIN_FUNCION')));
 			}
@@ -3353,7 +3356,7 @@ class Lotes extends CI_Controller {
 	* @param  string $pass
 	* @return array
 	*/
-	private function callWSreprocesar($urlCountry, $lista, $tipo_lote, $pass, $medio_pago){
+	private function callWSreprocesar($urlCountry, $lista, $tipo_lote, $pass, $medio_pago, $nuevoIva){
 		$this->lang->load('erroreseol');
 
 		$username = $this->session->userdata('userName');
@@ -3400,12 +3403,13 @@ class Lotes extends CI_Controller {
 			"paginar" => false,
 			"tipo_lote"=> $tipo_lote,
 			"formato"=> "00",
-			"medioPago"=>$medio_pago,
 			"logAccesoObject"=>$logAcceso,
 			"token"=>$token,
 			"pais"=>$urlCountry
 			);
-
+ 		if($nuevoIva==1){
+				$data["medioPago"] = $medio_pago;
+		}
 		$data = json_encode($data,JSON_UNESCAPED_UNICODE);
 
 		$dataEncry = np_Hoplite_Encryption($data);
