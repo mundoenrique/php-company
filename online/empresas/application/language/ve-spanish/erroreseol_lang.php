@@ -248,7 +248,11 @@ $lang['ERROR_(-297)'] = 'La cuenta no está registrada';
 $lang['ERROR_(-298)'] = 'El concepto de la cuenta principal es inválido';
 $lang['ERROR_(-299)'] = 'El concepto de la cuenta principal no existe';
 $lang['ERROR_(-301)'] = 'EL código de seguridad es inválido,<br> verifique e intente de nuevo';
+$lang['ERROR_(-340)'] = 'Número de Cuenta Invalido. Longitud de número de Cuenta invalida.';
 $lang['ERROR_(-341)'] = 'Nro de Cuenta Inválido. Código de Banco Inválido.';
+$lang['ERROR_(-342)'] = 'Número de Cuenta Invalido.';
+$lang['ERROR_(-373)'] = 'Número de RIF Invalido.';
+
 //recuperar contraseña
 $lang["TITULO_ERROR"] = 'No ha sido posible procesar su solicitud.';
 $lang["ERROR_RIF"] = 'Por favor verifique el No. de RIF de la empresa.';
