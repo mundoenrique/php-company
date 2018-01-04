@@ -26,7 +26,6 @@ $(function(){ // Document ready
 		resett();
 	});
 
-
 	$("#tipoCheque").on('change', function(){
 
 		tipo = $(this).val();
@@ -136,6 +135,7 @@ function WS(funcion, datosPost, titulo){
 	}
 
 	function verificar(datosPost, tipo, $contenedor){
+
 		emailRegex = /^([^]+[\w-\.]+@([\w-]+\.)+[\w-]{2,4})+$/;
 		rifRegex = /^[gjvepEPVGJ]{1}[-]{1}[0-9]{8}[-]{1}[0-9]{1}$/;
 		alfanumericRegex = /^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\s]*$/;
@@ -145,61 +145,35 @@ function WS(funcion, datosPost, titulo){
 		nroctaRegex = /^[0-9]{20}$/;
 		montoRegex = /^-?[0-9]+([\,][0-9]{0,2})?$/;
 
-		validez=true;
-
-		if(tipo=="E"){
-			if( !emailRegex.test(datosPost.emailEmpl) || datosPost.emailEmpl=='' ){
-				$contenedor.find("#emailEmpl").addClass('error');
-				validez= false;
-			}
-			if( !emailRegex.test(datosPost.emailGuard) || datosPost.emailGuard=='' ){
-				$contenedor.find("#emailGuard").addClass('error');
-				validez= false;
-			}
-			if( !rifRegex.test(datosPost.idfiscalGuard) || datosPost.idfiscalGuard=='' ){
-				$contenedor.find("#idfiscalGuard").addClass('error');
-				validez= false;
-			}
-			if( !nroctaRegex.test(datosPost.nroCuentaGuard) || datosPost.nroCuentaGuard=='' ){
-				$contenedor.find("#nroCuentaGuard").addClass('error');
-				validez= false;
+		var validadorRegEx = {
+			validez : true,
+			validadorRegEx : function( varRegex, value, id, contenedor ){
+				if( !varRegex.test( value ) || value=='' ){
+					contenedor.find( id ).addClass( 'error' );
+					this.validez = false;
+				}
 			}
 		}
 
-		if( ! ciRegex.test(datosPost.idPersona) || datosPost.idPersona=='' ){
-			$contenedor.find("#idPersona").addClass('error');
-			validez= false;
-		}
-		if( ! alfaRegex.test(datosPost.apellEmpl) || datosPost.apellEmpl=='' ){
-			$contenedor.find("#apellEmpl").addClass('error');
-			validez= false;
-		}
-		if( ! alfaRegex.test(datosPost.nombEmpl) || datosPost.nombEmpl=='' ){
-			$contenedor.find("#nombEmpl").addClass('error');
-			validez= false;
-		}
-		if( ! alfaRegex.test(datosPost.apellInfant) || datosPost.apellInfant=='' ){
-			$contenedor.find("#apellInfant").addClass('error');
-			validez= false;
-		}
-		if( ! alfaRegex.test(datosPost.nombInfant) || datosPost.nombInfant=='' ){
-			$contenedor.find("#nombInfant").addClass('error');
-			validez= false;
-		}
-		if( ! alfanumericRegex.test(datosPost.nombGuard) || datosPost.nombGuard=='' ){
-			$contenedor.find("#nombGuard").addClass('error');
-			validez= false;
-		}
-		if( ! conceptoRegex.test(datosPost.concepto) || datosPost.concepto=='' ){
-			$contenedor.find("#concepto").addClass('error');
-			validez= false;
-		}
-		if( ! montoRegex.test(datosPost.monto) || datosPost.monto=='' ){
-			$contenedor.find("#monto").addClass('error');
-			validez= false;
+		validadorRegEx.validez = true;
+
+		if( tipo == "E" ){
+			validadorRegEx.validadorRegEx( emailRegex, datosPost.emailEmpl, '#emailEmpl', $contenedor );
+			validadorRegEx.validadorRegEx( emailRegex, datosPost.emailGuard, '#emailGuard', $contenedor );
+			validadorRegEx.validadorRegEx( rifRegex, datosPost.idfiscalGuard, '#idfiscalGuard', $contenedor );
+			validadorRegEx.validadorRegEx( nroctaRegex, datosPost.nroCuentaGuard, '#nroCuentaGuard', $contenedor );
 		}
 
-		return validez;
+	  validadorRegEx.validadorRegEx( ciRegex, datosPost.idPersona, '#idPersona', $contenedor );
+		validadorRegEx.validadorRegEx( alfaRegex, datosPost.apellEmpl, '#apellEmpl', $contenedor );
+		validadorRegEx.validadorRegEx( alfaRegex, datosPost.nombEmpl, '#nombEmpl', $contenedor );
+		validadorRegEx.validadorRegEx( alfaRegex, datosPost.apellInfant, '#apellInfant', $contenedor );
+		validadorRegEx.validadorRegEx( alfaRegex, datosPost.nombInfant, '#nombInfant', $contenedor );
+		validadorRegEx.validadorRegEx( alfanumericRegex, datosPost.nombGuard, '#nombGuard', $contenedor );
+		validadorRegEx.validadorRegEx( conceptoRegex, datosPost.concepto, '#concepto', $contenedor );
+		validadorRegEx.validadorRegEx( montoRegex, datosPost.monto, '#monto', $contenedor );
+
+		return validadorRegEx.validez;
 
 	}
 
@@ -637,7 +611,14 @@ $("#reprocesar").on('click', function(){
 	$("#passreprocesar").val('');
 
 	if (pass!='') {
+
 		var tituloModal = 'Seleccione modalidad de pago';
+		var nuevoIva = true;
+		if( nuevoIva ){
+
+			var idModalidad =  $("input[name=methodChoice]:checked").attr('id');
+			var descripcion = $("input[name=methodChoice]:checked").val();
+
 			$("#modal_modalidad_pago").dialog({
 					title: tituloModal,
 					modal: true,
@@ -646,66 +627,83 @@ $("#reprocesar").on('click', function(){
 					buttons: {
 							OK: function(){
 
-											$(this).dialog('destroy');
+								$(this).dialog('destroy');
 
-											idModalidad =  $("input[name=methodChoice]:checked").attr('id');
-											descripcion = $("input[name=methodChoice]:checked").val();
+								idModalidad =  $("input[name=methodChoice]:checked").attr('id');
+								descripcion = $("input[name=methodChoice]:checked").val();
 
-											if(idModalidad != null){
+								if(idModalidad != null){
+												idModalidad = idModalidad.split("methodChoice");
+												medioPago = {
+														 "idPago" : idModalidad[1],
+														 "descripcion" : descripcion };
+											  sendReproceso( pass, medioPago, tituloModal, tipoLote );
+								}else{
+									notificacion( "Autorizando lotes", "Por favor escoja una modalidad de pago." );
+								}
 
-													if(pass!="" ){
-
-														idModalidad = idModalidad.split("methodChoice");
-
-														medioPago = {
-																 "idPago" : idModalidad[1],
-																 "descripcion" : descripcion
-														},
-														$("#passreprocesar").removeClass('error');
-														$("#loading").dialog({title:tituloModal,modal:true,resizable:false,
-																			close: function(){$(this).dialog("destroy");}});
-														$.post( baseURL+api+isoPais+"/lotes/reproceso/reprocesar",
-															{"data-lista":listarItems(),
-																"data-tipoLote":tipoLote,
-																"data-pass":hex_md5(pass),
-																"data-medio-pago":medioPago} ).done(function(data) {
-
-															$("#loading").dialog("destroy");
-															//$aux.dialog('destroy');
-															if(data.indexOf("ERROR")==-1){
-																$("<div><h3>Proceso exitoso</h3><h5>Redireccionando...</h5></div>").dialog({title:"Reprocesar Datos", modal:true, resizable:false,close:function(){$(this).dialog('destroy');}});
-
-																$("#data-OS").attr('value',data);
-																$("form#toOS").submit();
-
-															}else{
-																var jsonData = $.parseJSON(data);
-																if(jsonData.ERROR=='-29'){
-																	alert('Usuario actualmente desconectado'); location.reload();
-																}
-																notificacion("Reprocesar Datos",jsonData.ERROR);
-															}
-
-														});
-
-													}else{
-															notificacion("Autorizando lotes",
-															"<h2>Verifique que: </h2><h3>1. Ha seleccionado al menos un lote</h3><h3>2. Ha ingresado su contraseña</h4><h3>3. Ha seleccionado el tipo orden de servicio</h3>");
-													}
-											}else{
-
-												notificacion( "Autorizando lotes", "Por favor escoja una modalidad de pago." );
-
-											}
 							}
 					}
-	});
+			});
+		}else{
+  		sendReproceso( pass, "", tituloModal, tipoLote );
+		}
 	}else{
 		notificacion('Reprocesar Datos','Debe ingresar su contraseña');
 		$("#passreprocesar").addClass('error');
 	}
 
 });
+
+function sendReproceso( pass, medioPago, tituloModal, tipoLote ){
+
+	if(pass!="" ){
+
+		$("#passreprocesar").removeClass('error');
+		$("#loading").dialog({title:tituloModal,modal:true,resizable:false,
+							close: function(){$(this).dialog("destroy");}});
+
+		var url = baseURL+api+isoPais+"/lotes/reproceso/reprocesar";
+
+		var SendData = {
+			"data-lista":listarItems(),
+			"data-tipoLote":tipoLote,
+			"data-pass":hex_md5(pass),
+			"data-medio-pago":medioPago
+		};
+
+		$.post( url, SendData ).done(function(data) {
+
+			$( "#loading" ).dialog( "destroy" );
+
+			if( data.indexOf("ERROR")==-1 ){
+
+				var htmlSuccess = "<div><h3>Proceso exitoso</h3><h5>Redireccionando...</h5></div>";
+
+				$( htmlSuccess ).dialog(
+						{ title:"Reprocesar Datos", modal:true, resizable:false,
+								close:function(){$(this).dialog('destroy');}} );
+
+				$( "#data-OS" ).attr( 'value', data );
+				$( "form#toOS" ).submit();
+
+			}else{
+
+				var jsonData = $.parseJSON( data );
+
+				if( jsonData.ERROR == '-29' ){
+					alert( 'Usuario actualmente desconectado' ); location.reload();
+				}
+
+				notificacion( "Reprocesar Datos", jsonData.ERROR );
+
+			}
+		});
+	}else{
+			notificacion("Autorizando lotes",
+			"<h2>Verifique que: </h2><h3>1. Ha seleccionado al menos un lote</h3><h3>2. Ha ingresado su contraseña</h4><h3>3. Ha seleccionado el tipo orden de servicio</h3>");
+	}
+}
 
 $("#btn-eliminar-benf").on("click",function() {
 
