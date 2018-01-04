@@ -69,7 +69,7 @@ $(function(){ // Document ready
 		datosPost.pgActual = 1;
 		datosPost.tamPg = tamPg;
 
-		WSbeneficiario('crear', datosPost, pass, 'Crear beneficiario',$(".crear"), $("#btnCrearBenf"));
+		WSbeneficiario('crear', datosPost, pass, 'Registrar Datos',$(".crear"), $("#btnCrearBenf"));
 
 
 	});
