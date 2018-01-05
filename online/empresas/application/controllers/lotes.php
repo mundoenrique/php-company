@@ -3262,6 +3262,7 @@ class Lotes extends CI_Controller {
             } else {
                 $response = json_encode(array("ERROR" => lang('SIN_FUNCION')));
             }
+
 			log_message('info', 'callWSreprocesarMasivo Encrypt ====>> ' . json_encode($response));
 
             $this->output->set_content_type('')->set_output(json_encode($response));
@@ -3328,7 +3329,7 @@ class Lotes extends CI_Controller {
         if ($response) {
             log_message('info', 'REPROCESAR ' . $response->rc . '/' . $response->msg);
             if ($response->rc == 0) {
-                return serialize($response);
+                return json_encode($response);
             } else {
                 if ($response->rc == -61 || $response->rc == -29) {
                     $this->session->sess_destroy();

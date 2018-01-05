@@ -78,6 +78,9 @@ function WS(funcion, datosPost, titulo){
 
 	$.post(baseURL+api+isoPais+'/lotes/reproceso/'+funcion, datosPost).done(function(data){
 
+			data = JSON.parse(data);
+		 	data = JSON.parse(data);
+
 		if(!data.ERROR){
 			$(".ui-dialog-content").dialog("destroy");
 			notificacion(titulo,'Proceso exitoso');
