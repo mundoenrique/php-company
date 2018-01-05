@@ -383,9 +383,13 @@ var ReprocesoMasivo = {
 
 		var patron1 = /[0-9]+|[0-9]+([,][0-9]+)|[0-9]+([.][0-9]+)|[0-9]+([.][0-9]+)+([,][0-9]+)|[0-9]+([,][0-9]+)+([.][0-9]+)/;//Numeros
 		if(	datosPost.concepto !=  "" || datosPost.monto == "" || datosPost.monto == " " ||  patron1.test(datosPost.monto) ){
+			if(datosPost.concepto.length <= 20 ){
 				WS( 'reprocesarMasivo', datosPost, 'Gestión de Reproceso Masivo de Datos');
 				 this.monto = "";
 				 this.concepto = "";
+			}else{
+					notificacion('Gestión de Reproceso Masivo de Datos','El concepto no debe ser mayor a 20 caracteres.');
+			}
 		}else{
 				notificacion('Gestión de Reproceso Masivo de Datos','Operación fallida, datos incompletos.');
 		}
