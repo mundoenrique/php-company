@@ -242,22 +242,7 @@
       		}
 
 			?>
-
-		<?php
-			if ($pais == 'Ve') {
-		?>
-		<div class="info">
-			<h2>¡Información importante!</h2>
-			<p>Mediante el Decreto Nº 3.085, publicado en Gaceta Oficial Nº 41.239 de fecha 19-09-2017, se estableció la rebaja de la alícuota impositiva del Impuesto al Valor Agregado (IVA), para operaciones de pago realizadas a través de medios electrónicos como se indica a continuación:</p>
-			<ul>
-				<li>Si su empresa realiza el pago mediante <b>Transferencia electrónica</b>, obtendrá una rebaja de la alícuota impositiva del IVA de acuerdo al monto de la operación:</li>
-				<dd>Base imponible inferior  a   Bs. 2.000.000,00 <b>=></b> El IVA queda en 9%  (rebaja del 3%)</dd>
-				<dd>Base imponible superior a  Bs. 2.000.000,00 <b>=></b> El IVA queda en 7% (rebaja del 5%)</dd>
-			  	<li>Los pagos realizados a través de medios no electrónicos <b>(Depósito en cheque y/o efectivo)</b> o con modalidad mixta (Depósito en cheque y/o efectivo y Transferencia electrónica), <b>no gozarán de ningún tipo de rebaja</b>, por lo cual se aplicará la alícuota general impositiva del 12%.</li>
-			</ul>
-		</div>
-		<?php }?>
-
+			
 		</div>
 		<?php }else{
 
