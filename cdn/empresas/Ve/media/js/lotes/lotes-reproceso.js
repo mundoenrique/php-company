@@ -658,6 +658,7 @@ $("#reprocesar").on('click', function(){
 					}
 			});
 		}else{
+			tituloModal = 'Reproceso de datos';
   		sendReproceso( pass, "", tituloModal, tipoLote, nuevoIva.value );
 		}
 	}else{
