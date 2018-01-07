@@ -47,9 +47,10 @@ class Lotes extends CI_Controller {
 			$FooterCustomJS="";
 			$titlePage="Conexión Empresas Online - Lotes";
 
-		 if($this->session->userdata('nombreProductoS') ==='PLATA GUARDERÍA' &&
-		  		$this->session->userdata('marcaProductoS') === 'Cheque'){
-						$programa = $this->session->userdata('nombreProductoS');
+		 if(($this->session->userdata('nombreProductoS') ==='PLATA GUARDERÍA' ||
+		 				$this->session->userdata('nombreProductoS') ==='PLATA GUARDERIA' ) &&
+		  				$this->session->userdata('marcaProductoS') === 'Cheque'){
+								$programa = $this->session->userdata('nombreProductoS');
 		 }else{
 			 $programa = $this->session->userdata('nombreProductoS').' / '.ucwords( $this->session->userdata('marcaProductoS'));
 		 }
@@ -279,9 +280,10 @@ class Lotes extends CI_Controller {
 			$FooterCustomJS="";
 			$titlePage="Conexión Empresas Online - Lotes";
 
-			if($this->session->userdata('nombreProductoS') ==='PLATA GUARDERÍA' &&
- 		  		$this->session->userdata('marcaProductoS') === 'Cheque'){
- 						$programa = $this->session->userdata('nombreProductoS');
+			if(($this->session->userdata('nombreProductoS') ==='PLATA GUARDERÍA' ||
+						$this->session->userdata('nombreProductoS') ==='PLATA GUARDERIA' ) &&
+ 		  				$this->session->userdata('marcaProductoS') === 'Cheque'){
+ 								$programa = $this->session->userdata('nombreProductoS');
 	 		 }else{
 	 			 $programa = $this->session->userdata('nombreProductoS').' / '.ucwords( $this->session->userdata('marcaProductoS'));
 			 }
@@ -2417,8 +2419,9 @@ class Lotes extends CI_Controller {
 			$FooterCustomJS="";
 			$titlePage="Reproceso de Datos";
 
-			if($this->session->userdata('nombreProductoS') ==='PLATA GUARDERÍA' &&
- 		  		$this->session->userdata('marcaProductoS') === 'Cheque'){
+			if(($this->session->userdata('nombreProductoS') ==='PLATA GUARDERÍA' ||
+						$this->session->userdata('nombreProductoS') ==='PLATA GUARDERIA' ) &&
+ 		  				$this->session->userdata('marcaProductoS') === 'Cheque'){
  						$programa = $this->session->userdata('nombreProductoS');
  		 }else{
  			 $programa = $this->session->userdata('nombreProductoS').' / '.ucwords( $this->session->userdata('marcaProductoS'));

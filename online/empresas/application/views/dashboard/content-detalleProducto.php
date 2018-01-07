@@ -130,9 +130,12 @@ function to_ascii($word){
 
 			<?php
 			$menuP =$this->session->userdata('menuArrayPorProducto');
-
-		$mproducto = (preg_match("/Plata Guardería/",  $nombreProducto ))?
-									'':' - '.ucwords($marcaProducto);
+			if($nombreProducto === 'Plata Guardería' ||
+					$nombreProducto === 'Plata Guarderia' ){
+							$mproducto =  '';
+			}else{
+				$mproducto = ' - '.ucwords($marcaProducto);
+			}
 
 		echo' <div id="text-product-detail">
 					<h2>Producto</h2>
