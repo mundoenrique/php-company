@@ -121,80 +121,107 @@ $('#lotes-2').on('click','#select-allA', function() {
 
 
   });
+	$('#lotes-2').on('click', '#button-autorizar', function() {
 
- $('#lotes-2').on('click','#button-autorizar', function(){
+	    var pass = $('#claveAuth').val();
+	    var osTipo = $('#selec_tipo_lote').val();
 
-    var pass = $('#claveAuth').val();
-    var osTipo = $('#selec_tipo_lote').val();
+	    var select_modal = $("#select-modal").val(),
+	        nuevo_iva = $("#nuevo-iva").val();
 
-	var select_modal = $("#select-modal").val(),
-		nuevo_iva = $("#nuevo-iva").val();
+			if( nuevo_iva == 1){
+				if ( select_modal == "" ) {
+						$("#modal-lote").dialog({
+								title: 'Seleccione modalidad de pago',
+								modal: true,
+								resizable: false,
+								width: 320,
+								close: function(evt, ui) {
+										$('input[name="modalidad"]').prop('checked', false);
+										$('input[name="modalidad"]').first().prop('checked', true);
+								},
+								buttons: {
+										OK: function() {
 
-	if (select_modal == "") {
-		$("#modal-lote").dialog({
-			title: 'Seleccione modalidad de pago',
-			modal: true,
-			resizable: false,
-			width: 320,
-			close: function(evt, ui) {
-				$('input[name="modalidad"]').prop('checked', false);
-				$('input[name="modalidad"]').first().prop('checked', true);
-				//$('#select-modal').val('');
-			},
-			buttons: {
-	            OK: function(){
-					//var modalidad = $('input[name="modalidad"]:checked').val();
-					var select_modal = $('input[name="modalidad"]:checked').val(),
-						nuevo_iva = $("#nuevo-iva").val();
+												var select_modal = $('input[name="modalidad"]:checked').val(),
+														nuevo_iva = $("#nuevo-iva").val();
 
-					$(this).dialog('destroy');
-					if(pass!="" && js_var.loteA!="" && osTipo!=""){
+												$(this).dialog('destroy');
+												envioAjaxAutorizar( baseURL, isoPais, js_var,
+																					pass, osTipo, select_modal, nuevo_iva );
+										}
+								}
+						});
+				}
+			}else{
+				envioAjaxAutorizar( baseURL, isoPais, js_var,
+													pass, osTipo, select_modal, nuevo_iva );
+			}
+	});
 
-				      pass = hex_md5( pass );
-				      $('#claveAuth').val('');
+function envioAjaxAutorizar( baseURL, isoPais, js_var, pass, osTipo, select_modal, nuevo_iva ){
 
-				      $('#loading').dialog({title:'Autorizando lotes...', modal:true, resizable:false, dialogClass: 'hide-close', close:function(){$(this).dialog('destroy')}});
+	if (pass != "" && js_var.loteA != "" && osTipo != "") {
 
-				      $.post(baseURL+'/'+isoPais+'/lotes/preliminar',{'data-lotes':js_var.loteA, 'data-pass':pass, 'data-tipoOS':osTipo, 'data-medio':select_modal, 'data-iva':nuevo_iva})
-				      .done(function(data){
-				        $('#loading').dialog('destroy');
+			pass = hex_md5(pass);
+			$('#claveAuth').val('');
 
-				      if(data.indexOf("ERROR")==-1){
-				        $("#data-COS").attr('value',data);
-				        $("<div><h3>Proceso exitoso</h3><h5>Ha generado el cálculo de la orden de servicio.</h5></div>").dialog({
-				        title:"Autorizando lotes",
-				        modal:true,
-				        resizable:false,
-				        close: function(){
-				          $(this).dialog('destroy')
-				          $('#autorizacion').submit();
-				          }
-				          ,
-				        buttons:{
-				          siguiente: function () {
-				            $('#autorizacion').submit();
-				        }
+			$('#loading').dialog({
+					title: 'Autorizando lotes...',
+					modal: true,
+					resizable: false,
+					dialogClass: 'hide-close',
+					close: function() {
+							$(this).dialog('destroy')
+					}
+			});
 
-				        }
-				          });
-				      }else{
-				        var jsonData = $.parseJSON(data);
-				        if(jsonData.ERROR=='-29'){
-				          alert('Usuario actualmente desconectado'); location.reload();
-				        }
-				        notificacion("Autorizando lotes",jsonData.ERROR);
-				      }
+			$.post(baseURL + '/' + isoPais + '/lotes/preliminar', {
+							'data-lotes': js_var.loteA,
+							'data-pass': pass,
+							'data-tipoOS': osTipo,
+							'data-medio': select_modal,
+							'data-iva': nuevo_iva
+					})
+					.done(function(data) {
+							$('#loading').dialog('destroy');
 
-				    });
-				    }else{
-				        notificacion("Autorizando lotes","<h2>Verifique que: </h2><h3>1. Ha seleccionado al menos un lote</h3><h3>2. Ha ingresado su contraseña</h4><h3>3. Ha seleccionado el tipo orden de servicio</h3>");
-				    }
-	            }
-	        }
-		});
-	}
-  });
+							if (data.indexOf("ERROR") == -1) {
+									$("#data-COS").attr('value', data);
+									var idJqxtemp = "<div><h3>Proceso exitoso</h3>"+
+																		"<h5>Ha generado el cálculo de la orden de servicio.</h5>"+
+																	"</div>";
+									$(idJqxtemp).dialog({
+											title: "Autorizando lotes",
+											modal: true,
+											resizable: false,
+											close: function() {
+													$(this).dialog('destroy')
+													$('#autorizacion').submit();
+											},
+											buttons: {
+													siguiente: function() {
+															$('#autorizacion').submit();
+													}
+											}
+									});
+							} else {
+									var jsonData = $.parseJSON(data);
+									if (jsonData.ERROR == '-29') {
+											alert('Usuario actualmente desconectado');
+											location.reload();
+									}
+									notificacion("Autorizando lotes", jsonData.ERROR);
+							}
+					});
+		} else {
+				var mensajeNoti = "<h2>Verifique que: </h2><h3>1. Ha seleccionado al menos un lote</h3>"+
+					"<h3>2. Ha ingresado su contraseña</h4>"+
+					"<h3>3. Ha seleccionado el tipo orden de servicio</h3>";
+				notificacion( "Autorizando lotes", mensajeNoti );
+		}
 
+}
 
  $('#lotes-2').on('click','#button-eliminar', function(){ //eliminar en autorizar
 

@@ -2069,41 +2069,44 @@ class Lotes extends CI_Controller {
 	 * @param  string $urlCountry
 	 * @return JSON
 	 */
-	public function preliminarOS($urlCountry){
-		np_hoplite_countryCheck($urlCountry);
+	 public function preliminarOS($urlCountry){
 
-		$logged_in = $this->session->userdata('logged_in');
-		$token = $this->session->userdata('token');
-		$username = $this->session->userdata('userName');
-		$idProductoS = $this->session->userdata('idProductoS');
-		$paisS = $this->session->userdata('pais');
+	    np_hoplite_countryCheck($urlCountry);
 
-		if($paisS==$urlCountry && $logged_in){
+	    $logged_in = $this->session->userdata('logged_in');
+	    $token = $this->session->userdata('token');
+	    $username = $this->session->userdata('userName');
+	    $idProductoS = $this->session->userdata('idProductoS');
+	    $paisS = $this->session->userdata('pais');
 
-			$pass = $this->input->post('data-pass') ;
-			$tipoOrdeServicio = $this->input->post('data-tipoOS');
-			$lotes = explode(',',$this->input->post('data-lotes'));
-			$medio = $this->input->post('data-medio');
-			$ivanuevo = $this->input->post('data-iva');
+	    if ($paisS == $urlCountry && $logged_in) {
+	        $pass = $this->input->post('data-pass');
+	        $tipoOrdeServicio = $this->input->post('data-tipoOS');
+	        $lotes = explode(',', $this->input->post('data-lotes'));
+	        $medio = $this->input->post('data-medio');
+	        $ivanuevo = ($this->input->post('data-iva') == 1) ? true : false;
+	        array_pop($lotes);
+	        log_message('info', "Prueba para la toma del país --->>> " . $paisS);
+	        $calculoOsLotesW = $this->callWScalcularOS($urlCountry, $token, $username,
+											  				$pass, $lotes, $tipoOrdeServicio, $medio, $ivanuevo);
+	        $this->output->set_content_type('')->set_output($calculoOsLotesW);
+	    }
+	    elseif ($paisS != $urlCountry && $paisS != '') {
+	        $this->session->sess_destroy();
+	        $this->session->unset_userdata($this->session->all_userdata());
+	        redirect($urlCountry . '/login');
+	    }
+	    elseif ($this->input->is_ajax_request()) {
+	        $this->output->set_content_type('')->set_output(json_encode(array(
+	            'ERROR' => '-29'
+	        )));
+	    }
+	    else {
+	        redirect($urlCountry . '/login');
+	    }
+}
 
-			array_pop($lotes);
 
-			log_message('info',"Prueba para la toma del país --->>> ".$paisS);
-
-			$calculoOsLotesW = $this->callWScalcularOS($urlCountry,$token,$username,$pass,$lotes,$tipoOrdeServicio,$medio,$ivanuevo);
-
-			$this->output->set_content_type('')->set_output($calculoOsLotesW);
-
-		}elseif($paisS!=$urlCountry&& $paisS!=''){
-			$this->session->sess_destroy();
-			$this->session->unset_userdata($this->session->all_userdata());
-			redirect($urlCountry.'/login');
-		}elseif($this->input->is_ajax_request()){
-			$this->output->set_content_type('')->set_output(json_encode( array('ERROR' => '-29' )));
-		}else{
-			redirect($urlCountry.'/login');
-		}
-	}
 
 	/**
 	 * Método que realiza petición al WS para generar el cálculo de la orden de servicio antes de ser autorizada.
