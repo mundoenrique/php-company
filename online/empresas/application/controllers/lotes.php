@@ -311,7 +311,6 @@ class Lotes extends CI_Controller {
 				'programa'=>$programa,
 				'data' => $rTest,
 				'funciones' => $funciones
-
 				),TRUE);
 
 			/*Prueba de hz para ver el json que se envía a la vista*/
@@ -329,6 +328,7 @@ class Lotes extends CI_Controller {
 				'login' => 'LOGIN USUARIO',
 				'password' => 'CONTRASEÑA',
 				'loginBtn' => 'ENTRAR',
+				'aviso' =>TRUE,
 				'pais' => $urlCountry
 				);
 
