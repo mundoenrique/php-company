@@ -248,12 +248,15 @@
 		?>
 		<div class="info">
 			<h2>¡Información importante!</h2>
-			<p>Mediante el Decreto Nº 3.085, publicado en Gaceta Oficial Nº 41.239 de fecha 19-09-2017, se estableció la rebaja de la alícuota impositiva del Impuesto al Valor Agregado (IVA), para operaciones de pago realizadas a través de medios electrónicos como se indica a continuación:</p>
+			<h3><b>Tarifas vigentes desde el 08-01-2018</b></h3>
 			<ul>
-				<li>Si su empresa realiza el pago mediante <b>Transferencia electrónica</b>, obtendrá una rebaja de la alícuota impositiva del IVA de acuerdo al monto de la operación:</li>
-				<dd>Base imponible inferior  a   Bs. 2.000.000,00 <b>=></b> El IVA queda en 9%  (rebaja del 3%)</dd>
-				<dd>Base imponible superior a  Bs. 2.000.000,00 <b>=></b> El IVA queda en 7% (rebaja del 5%)</dd>
-			  	<li>Los pagos realizados a través de medios no electrónicos <b>(Depósito en cheque y/o efectivo)</b> o con modalidad mixta (Depósito en cheque y/o efectivo y Transferencia electrónica), <b>no gozarán de ningún tipo de rebaja</b>, por lo cual se aplicará la alícuota general impositiva del 12%.</li>
+				<li>Servicio Administrativo Mínimo: <b>Bs. 50.000</b></li>
+				(Aplica a facturas cuyo servicio administrativo sea inferior a <b>Bs. 50.000</b>)
+				<li>Servicios Operativos y de Logística: <b>Bs. 30.000.</b> Cobro único mensual</li>
+				(Quedan exceptuadas facturas con Servicio Administrativo Mínimo)
+			  	<li>Emisión de tarjetas: <b>Bs. 20.000</b> (c/u)</li>
+				<li>Reposición/renovación de tarjetas: <b>Bs.25.000</b> (c/u)</li>
+				<li>Reposición y entrega de claves: <b>Bs.12.500</b> (c/u)</li>
 			</ul>
 		</div>
 		<?php }?>
