@@ -44,7 +44,7 @@
 
 ?>
 
-<div id="content-products">
+<div id="content-products" style="width:720px;padding:20px 2px;float:left;">
 
 <h1>
 	<?php echo lang('TITULO_LOTES_AUTORIZACION'); ?>
@@ -277,12 +277,20 @@
 <?php
 	if ($pais == 'Ve'):
 
-		$iva = $info->{'nuevoIva'};
-		if ($iva=='true') {
-			$iva = '1';
+		if(isset($info->{'nuevoIva'})){
+
+			$iva = $info->{'nuevoIva'};
+
+				if ($iva=='true') {
+					$iva = '1';
+				}else{
+					$iva = '0';
+				}
+
 		}else{
 			$iva = '0';
 		}
+
 ?>
 <input type="hidden" id="nuevo-iva" style="display:none;" value="<?php echo $iva; ?>">
 <div class="modal-lote" id="modal-lote" style="display:none; overflow: hidden; text-overflow: ellipsis;">

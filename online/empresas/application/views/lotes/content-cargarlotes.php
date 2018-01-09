@@ -4,7 +4,7 @@ $urlBaseA = $this->config->item('base_url');
 $urlBase = $urlBaseA.$pais;
 ?>
 
-<div id="content-products">
+<div id="content-products" style="    width: 720px;padding: 20px 2px;float: left;">
 
 	<h1><?php echo lang('TITULO_LOTES_CARGA'); ?></h1>
 
