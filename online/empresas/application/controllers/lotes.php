@@ -83,7 +83,7 @@ class Lotes extends CI_Controller {
 				'pais' => $urlCountry
 				);
 
-			$this->parser->parse('layouts/layout-b', $datos);
+			$this->parser->parse('layouts/layout-c', $datos);
 		}elseif($logged_in) {
 			echo "
 			<script>
@@ -332,7 +332,7 @@ class Lotes extends CI_Controller {
 				'pais' => $urlCountry
 				);
 
-			$this->parser->parse('layouts/layout-b', $datos);
+			$this->parser->parse('layouts/layout-c', $datos);
 		}else if($linkAut===false && $linkCarg!==false){
 			echo "
 			<script>
