@@ -15,7 +15,7 @@
 			$breadcrumb_back = $urlBase."/lotes/autorizacion";
 		}
 ?>
-			
+
 <div id="content-products">
 
 	<h1><?php echo lang('TITULO_LOTES_DETALLE'); ?></h1>
@@ -41,8 +41,8 @@
 			<a href="<?php echo $breadcrumb_back; ?>" rel="section"><?php echo lang($bread); ?></a>
 		</li>
 	</ol>
-			
-	
+
+
 <div id="lotes-general">
 
 	<?php
@@ -50,7 +50,7 @@
 	?>
 
 	<div id="top-batchs">
-		<span aria-hidden="true" class="icon" data-icon="&#xe03c;"></span> 
+		<span aria-hidden="true" class="icon" data-icon="&#xe03c;"></span>
 		<?php echo lang('TITULO_LOTES_DETALLE'); ?>
 	</div>
 
@@ -64,7 +64,7 @@
 				<p><?php echo $data[0]->acrif ?></p>
 			</div>
 			<div id="detalleLote-1-nombre">
-				<h5><?php echo lang('TABLA_LOTESPA_NOMBREEMPRESA') ?>:</h5> 
+				<h5><?php echo lang('TABLA_LOTESPA_NOMBREEMPRESA') ?>:</h5>
 				<p><?php echo $data[0]->acnomcia ?></p>
 			</div>
 			<div id="detalleLote-1-short">
@@ -72,7 +72,7 @@
 				<p><?php echo $data[0]->acnombre ?></p>
 			</div>
 		</div>
-						
+
 		<div id="detalleLote-2">
 			<div id="detalleLote-2-tipo">
 				<h5><?php echo lang('TABLA_LOTESPA_NROLOTE') ?></h5>
@@ -93,7 +93,7 @@
 				<h5><?php echo lang('TABLA_LOTESP_FECHACARGA') ?></h5>
 				<p><?php echo $data[0]->dtfechorcarga ?></p>
 			</div>
-			<div id="detalleLote-3-fecha"> 
+			<div id="detalleLote-3-fecha">
 				<h5><?php echo lang('TABLA_LOTESP_ESTATUS') ?></h5>
 				<p><?php echo $data[0]->status ?></p>
 			</div>
@@ -102,7 +102,7 @@
 				<p><?php echo amount_format($data[0]->nmonto) ?></p>
 			</div>
 		</div>
-						
+
 		</div>
 
 	</div>
@@ -129,7 +129,7 @@
 							<th id="td-nombre-2">'.lang('TABLA_REG_EMISION_NOMB').'</th>
 							<th id="td-nombre-2">'.lang('TABLA_REG_EMISION_APELL').'</th>
 							<th id="td-nombre-2">'.lang('TABLA_REG_EMISION_UBIC').'</th>
-						</thead>					
+						</thead>
 						<tbody>';
 				foreach ($data[0]->registrosLoteEmision as $registros) {
 					echo '
@@ -138,10 +138,10 @@
 							<td id="td-nombre-2">'.$registros->nombres.'</td>
 							<td id="td-nombre-2">'.$registros->apellidos.'</td>
 							<td id="td-nombre-2">'.$registros->ubicacion.'</td>
-						</tr>						
+						</tr>
 					';
-				}		
-				echo '</table></tbody>';								
+				}
+				echo '</table></tbody>';
 			}elseif ($data[0]->ctipolote=='1') {
 				echo "<h2>".lang('TABLA_REG_MSJ')."</h2>";
 			}
@@ -155,7 +155,7 @@
 							<th id="td-nombre-2">'.lang('TABLA_REG_RECARGA_CTA').'</th>
 							<th >'.lang('TABLA_REG_RECARGA_MONTO').'</th>
 							<th '.(($data[0]->ctipolote=='2') ? 'style="display:none"' : '').'>'.lang('TABLA_REG_RECARGA_STATUS').'</th>
-						</thead>					
+						</thead>
 						<tbody>';
 				foreach ($data[0]->registrosLoteRecarga as $registros) {
 
@@ -171,14 +171,14 @@
 							<td id="td-nombre-2">'.substr_replace($registros->nro_cuenta,'*************',0,-4).'</td>
 							<td >'.$registros->monto.'</td>
 							<td '.(($data[0]->ctipolote=='2') ? 'style="display:none"' : '').'>'.@$estatus.'</td>
-						</tr>						
+						</tr>
 					';
 				}
 				echo '</table></tbody>';
 			}elseif ($data[0]->ctipolote=='2' || $data[0]->ctipolote=='5' || $data[0]->ctipolote=='L') {
 				echo "<h2>".lang('TABLA_REG_MSJ')."</h2>";
 			}
-			
+
 			if( ($data[0]->ctipolote=='E' || $data[0]->ctipolote=='G') && count($data[0]->registrosLoteGuarderia) > 0 ){ //LOTES DE GUARDERIA  lang('TABLA_REG_GUARDERIA_NOMB') lang('TABLA_REG_GUARDERIA_APEL') lang('TABLA_REG_GUARDERIA_UBIC')
 				echo $html_view_results;
 				echo '
@@ -190,9 +190,9 @@
 							';
 							if($data[0]->ctipolote=='E'){
 								echo '<th id="td-nombre-2">'.lang('TABLA_REG_GUARDERIA_CTA').' beneficiario</th>';
-							}							
-							echo '<th >Monto cheque</th>
-						</thead>					
+							}
+							echo '<th >Monto</th>
+						</thead>
 						<tbody>';
 				foreach ($data[0]->registrosLoteGuarderia as $registros) {
 					echo '
@@ -202,18 +202,18 @@
 							<td id="td-nombre-2">'.$registros->beneficiario.'</td>';
 							if($data[0]->ctipolote=='E'){
 								echo '<td id="td-nombre-2">'.$registros->nro_cuenta.'</td>';
-							}						
+							}
 							echo '
 							<td >'.$registros->monto_total.'</td>
-						</tr>						
+						</tr>
 					';
-				}		
-				echo '</table></tbody>';								
+				}
+				echo '</table></tbody>';
 			}elseif ($data[0]->ctipolote=='E' || $data[0]->ctipolote=='G') {
 				echo "<h2>".lang('TABLA_REG_MSJ')."</h2>";
 			}
 
-			
+
 			if( ($data[0]->ctipolote=='R'||$data[0]->ctipolote=='C')  && count($data[0]->registrosLoteReposicion) > 0 ){ //LOTES DE REPOSICION
 				echo $html_view_results;
 				echo '
@@ -221,7 +221,7 @@
 						<thead>
 							<th id="td-full">'.lang('ID_PERSONA').'</th>
 							<th id="td-full">'.lang('TABLA_REG_REPOS_CTA').'</th>
-						</thead>					
+						</thead>
 						<tbody>';
 				foreach ($data[0]->registrosLoteReposicion as $registros) {
 					echo '
@@ -234,11 +234,11 @@
 							<td id="td-full">'.substr_replace($registros->nocuenta,'*************',0,-4).'</td>';
 						}
 						echo '</tr>';
-				}		
-				echo '</table></tbody>';								
+				}
+				echo '</table></tbody>';
 			}elseif ( $data[0]->ctipolote=='R'||$data[0]->ctipolote=='C' ) {
 				echo "<h2>".lang('TABLA_REG_MSJ')."</h2>";
-			}	
+			}
 
 			if( $data[0]->ctipolote=='3' && count($data[0]->registrosLoteEmision) > 0 ){ //LOTES INNOMINADA
 				echo $html_view_results;
@@ -249,7 +249,7 @@
 							<th id="td-nombre-2">'.lang('TITULO_TARJETA').'</th>
 							<th id="td-nombre-2">'.lang('TABLA_REG_EMISION_NOMB').'</th>
 							<th id="td-nombre-2">'.lang('TABLA_REG_EMISION_APELL').'</th>
-						</thead>					
+						</thead>
 						<tbody>';
 				foreach ($data[0]->registrosLoteEmision as $registros) {
 					echo '
@@ -258,10 +258,10 @@
 							<td id="td-nombre-2">'.$registros->nroTarjeta.'</td>
 							<td id="td-nombre-2">'.$registros->nombres.'</td>
 							<td id="td-nombre-2">'.$registros->apellidos.'</td>
-						</tr>						
+						</tr>
 					';
-				}		
-				echo '</table></tbody>';								
+				}
+				echo '</table></tbody>';
 			}elseif ($data[0]->ctipolote=='3') {
 				echo "<h2>".lang('TABLA_REG_MSJ')."</h2>";
 			}
@@ -275,7 +275,7 @@
 							<th id="td-nombre-2">'.lang('TITULO_TARJETA').'</th>
 							<th id="td-nombre-2">'.lang('TABLA_REG_EMISION_NOMB').'</th>
 							<th id="td-nombre-2">'.lang('TABLA_REG_EMISION_APELL').'</th>
-						</thead>					
+						</thead>
 						<tbody>';
 				foreach ($data[0]->registrosLoteEmision as $registros) {
 					echo '
@@ -284,18 +284,18 @@
 							<td id="td-nombre-2">'.$registros->nroTarjeta.'</td>
 							<td id="td-nombre-2">'.$registros->nombres.'</td>
 							<td id="td-nombre-2">'.$registros->apellidos.'</td>
-						</tr>						
+						</tr>
 					';
-				}		
-				echo '</table></tbody>';								
+				}
+				echo '</table></tbody>';
 			}elseif ($data[0]->ctipolote=='A' || $data[0]->ctipolote=='6') {
 				echo "<h2>".lang('TABLA_REG_MSJ')."</h2>";
 			}
 		?>
-	</div>	
-					
 	</div>
-	
+
+	</div>
+
 	<div id="batchs-last">
 		<?php
 	if($dataCOS!=''){
@@ -311,14 +311,14 @@
 
 		echo '<button>'.lang("DETALLE_LOTES_VOLVER").'</button> </form>';
 		?>
-		
+
 </div>
 
 <?php
 	}else{
 		if($data[0]["ERROR"]=='-29'){
                           echo "<script>alert('Usuario actualmente desconectado');  location.reload();</script>";
-                          } 
+                          }
 		echo '
 				<div id="products-general" style="margin-top: 10px;">
 				<h2 style="text-align:center">'.$data[0]['ERROR'].'</h2>

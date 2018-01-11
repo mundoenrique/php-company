@@ -33,9 +33,9 @@ $lang['TABLA_LOTESPA_LINEAEMBOZO1']="Embozo 1";
 $lang['TABLA_LOTESPA_LINEAEMBOZO2']="Embozo 2";
 $lang['BOTON_LOTES_CONFIRMAR']="Confirmar";
 $lang['BOTON_LOTES_CANCELAR']="Cancelar";
-$lang['TITULO_LISTA_BENEFICIARIOS'] = 'Listado de beneficiarios';
-$lang['TITULO_MASIVO_BENEFICIARIO'] = 'Cargar archivo masivo de beneficiarios';
-$lang['TITULO_CREAR_BENEFICIARIO'] = 'Crear beneficiario';
+$lang['TITULO_LISTA_BENEFICIARIOS'] = 'Listado de Guarderias';
+$lang['TITULO_MASIVO_BENEFICIARIO'] = 'Cargar archivo masivo de guarderias';
+$lang['TITULO_CREAR_BENEFICIARIO'] = 'Crear Guardería';
 
 //DETALLE DE LOTES
 $lang['TITULO_LOTES_DETALLE']= "Lotes detalle";

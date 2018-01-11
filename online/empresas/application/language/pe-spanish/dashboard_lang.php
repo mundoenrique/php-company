@@ -1,3 +1,4 @@
+
 <?php
 $lang['SYSTEM_NAME']= "Empresas Online Perú";
 $lang['LAST_SESSION']="Última sesión";
@@ -18,7 +19,7 @@ $lang['BREADCRUMB_BENEFICIOS']= "Beneficios";
 $lang['BREADCRUMB_CONDICIONES']= "Condiciones de uso";
 $lang['BREADCRUMB_PRIVACIDAD']= "Privacidad";
 $lang['BREADCRUMB_LOTES']= "Lotes";
-$lang['BREADCRUMB_REPROCESO']= "Reproceso de lotes";
+$lang['BREADCRUMB_REPROCESO']= "Reproceso de Datos";
 $lang['BREADCRUMB_CARGA']= "Carga";
 $lang['BREADCRUMB_EMPRESAS']= "Empresas";
 $lang['BREADCRUMB_PRODUCTOS']= "Productos";
@@ -49,7 +50,7 @@ $lang['TEBCON']= "Confirmación de Lote";
 $lang['TEBELC']= "Eliminación de lote por confirmar";
 $lang['TEBAUT']= "Autorización de Lotes"; // modulo
 $lang['TEBELI']= "Eliminación de lote por autorizar";
-$lang['TEBGUR']= 'Reproceso de lotes'; // modulo guardería
+$lang['TEBGUR']= 'Reproceso de Datos'; // modulo guardería
 $lang['TEBORS']= "Órdenes de Servicio"; // modulo
 $lang['TEBANU']= "Anular orden de servicio";
 $lang["TEBCOS"]= "Consultar orden se servicio";

@@ -31,6 +31,7 @@ class Reportes extends CI_Controller {
         $paisS = $this->session->userdata('pais');
 
         $menuP =$this->session->userdata('menuArrayPorProducto');
+
         $moduloAct = np_hoplite_existeLink($menuP,"REPCON");
 
         if($paisS==$urlCountry && $logged_in && $moduloAct!==false){
@@ -1914,6 +1915,7 @@ class Reportes extends CI_Controller {
         }
 
     }
+
 
     /**
      * Método para exportar en formato Excel el reporte de tarjetasHabientes.
@@ -4380,7 +4382,370 @@ class Reportes extends CI_Controller {
         }
     }
 
+		//------------------------------- Reporte Guarderia  -------------------------------------------
 
+    /**
+     * Pantalla para la consulta de Guardería Electrónica.
+     *
+     * @param  string $urlCountry
+     */
+    public function guarderia($urlCountry)
+    {
 
+        //VALIDATE COUNTRY
+        np_hoplite_countryCheck($urlCountry);
 
+        $this->lang->load('reportes');
+        $this->lang->load('dashboard');
+        $this->lang->load('users');
+        $this->load->library('parser');
+        $this->lang->load('erroreseol');
+
+        $logged_in = $this->session->userdata('logged_in');
+
+        $paisS = $this->session->userdata('pais');
+
+        $menuP =$this->session->userdata('menuArrayPorProducto');
+        $moduloAct = np_hoplite_existeLink($menuP,"REPPGE");
+
+        if($paisS==$urlCountry && $logged_in && $moduloAct!==false){
+
+            $nombreCompleto = $this->session->userdata('nombreCompleto');
+            $lastSessionD = $this->session->userdata('lastSession');
+
+            $FooterCustomInsertJS=["jquery-1.10.2.min.js","jquery-ui-1.10.3.custom.min.js",
+							"header.js","jquery.balloon.min.js","jquery.dataTables.min.js",
+							"reportes/guarderia.js"];
+
+            $FooterCustomJS="";
+            $titlePage="Conexión Empresas Online - Reportes";
+
+            $menuHeader = $this->parser->parse('widgets/widget-menuHeader',array(),TRUE);
+            $menuFooter = $this->parser->parse('widgets/widget-menuFooter',array(),TRUE);
+
+            $header = $this->parser->parse('layouts/layout-header',
+							array('bodyclass'=>'','menuHeaderActive'=>TRUE,'menuHeaderMainActive'=>TRUE,
+							'menuHeader'=>$menuHeader,'titlePage'=>$titlePage),TRUE);
+
+            $footer = $this->parser->parse('layouts/layout-footer',
+							array('menuFooterActive'=>TRUE,'menuFooter'=>$menuFooter,
+									'FooterCustomInsertJSActive'=>TRUE,'FooterCustomInsertJS'=>$FooterCustomInsertJS,
+									'FooterCustomJSActive'=>TRUE,'FooterCustomJS'=>$FooterCustomJS),TRUE);
+
+            $content = $this->parser->parse('reportes/content-guarderia',array(
+                'titulo'=>$nombreCompleto,
+                'breadcrum'=>'',
+                'lastSession'=>$lastSessionD,
+								'riffGuarderia' =>$this->session->userdata('acrifS')
+            ),TRUE);
+
+            $sidebarLotes= $this->parser->parse('widgets/widget-publi-4',
+																	array('sidebarActive'=>TRUE),TRUE);
+
+            $datos = array(
+                'header'=>$header,
+                'content'=>$content,
+                'footer'=>$footer,
+                'sidebar'=>$sidebarLotes,
+            );
+
+            $this->parser->parse('layouts/layout-b', $datos);
+        }else{
+            redirect($urlCountry.'/login/');
+        }
+    }
+
+		/**
+     * Método para obtener los datos para el reporte de las guarderias
+     *
+     * @param  string $urlCountry
+     * @return JSON
+     */
+    public function getGuarderiaResult($urlCountry){
+
+			$urlCountry= $this->input->post('pais');
+
+        np_hoplite_countryCheck($urlCountry);
+        $logged_in = $this->session->userdata('logged_in');
+        $paisS = $this->session->userdata('pais');
+
+        $menuP =$this->session->userdata('menuArrayPorProducto');
+				$moduloAct = np_hoplite_existeLink($menuP,"REPPGE");
+
+        if($paisS==$urlCountry && $logged_in && $moduloAct!==false){
+
+            if($this->input->is_ajax_request()){
+
+									$Fechaini = $this->input->post('Fechaini');
+									$Fechafin = $this->input->post('Fechafin');
+                  $acrif = $this->session->userdata('acrifS');
+                  $username = $this->session->userdata('userName');
+                  $token = $this->session->userdata('token');
+                  $pruebaTabla = $this->callWSGuarderia( $urlCountry, $token, $username, $acrif, $Fechaini, $Fechafin );
+
+                  $this->output->set_content_type('application/json')->set_output(json_encode($pruebaTabla));
+            }
+        }else{
+            $this->session->sess_destroy();
+            $this->session->unset_userdata($this->session->all_userdata());
+            $this->output->set_content_type('application/json')->set_output(json_encode( array('ERROR' => lang('ERROR_(-29)'), "rc"=> "-29")));
+        }
+
+    }
+		function callWSGuarderia( $urlCountry, $token, $username, $acrif, $Fechaini, $Fechafin ){
+
+				$this->lang->load('erroreseol');//HOJA DE ERRORES;
+				$canal = "ceo";
+				$modulo="Reporte por Producto";
+				$function="Consultar Guarderia";
+				$operation="reporteGuarderiaElectronica";
+
+				$className="com.novo.objects.TOs.RegistrosLoteGuarderiaTO";
+				$timeLog= date("m/d/Y H:i");
+				$ip= $this->input->ip_address();
+				$sessionId = $this->session->userdata('sessionId');
+				$logAcceso = np_hoplite_log($sessionId,$username,$canal,
+				$modulo,$function,$operation,0,$ip,$timeLog);
+
+				$data = array(
+						"idOperation" => $operation,
+						"className" => $className,
+						"id_ext_emp"=> $acrif,
+						"fechaini" => $Fechaini,
+						"fechafin" => $Fechafin,
+						"logAccesoObject"=>$logAcceso,
+						"token"=>$token,
+						"pais"=>$urlCountry
+				);
+
+				$data = json_encode( $data, JSON_UNESCAPED_UNICODE);
+				$dataEncry = np_Hoplite_Encryption( $data);
+				$data = array( 'bean' => $dataEncry, 'pais' =>$urlCountry );
+				$data = json_encode($data);
+				$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+				$jsonResponse = np_Hoplite_Decrypt($response);
+				$response =  json_decode(utf8_encode($jsonResponse));
+				$data1 = json_encode($response);
+
+				if($response){
+						log_message('info','Estatus Lotes '.$response->rc."/".$response->msg);
+						if($response->rc==0){
+								return $response;
+						}else{
+										if($response->rc==-61 || $response->rc==-29){
+
+												$codigoError = array('mensaje' => lang('ERROR_(-29)'), "rc"=> "-29");
+												$this->session->unset_userdata($this->session->all_userdata());
+												$this->session->sess_destroy();
+												return $codigoError;
+
+										}else{
+
+												$codigoError = lang('ERROR_('.$response->rc.')');
+
+												$codigoError = (strpos($codigoError, 'Error')!==false)?
+													array('mensaje' => lang('ERROR_GENERICO_USER'), "rc"=> $response->rc):
+														array('mensaje' => lang('ERROR_('.$response->rc.')'), "rc"=> $response->rc);
+
+												return $codigoError;
+										}
+						}
+
+				}else{
+						log_message('info','Estatus Lotes NO WS ');
+						return $codigoError = array('mensaje' => lang('ERROR_GENERICO_USER'));
+				}
+		}
+
+		/**
+		* Método para exportar en formato Excel el reporte completo de Guarderia.
+		*
+		* @param  string $urlCountry
+		* @return JSON
+		*/
+	 public function guarderiaExpXLS($urlCountry){
+			 np_hoplite_countryCheck($urlCountry);
+			 $this->lang->load('erroreseol');//HOJA DE ERRORES;
+			 $canal = "ceo";
+			 $modulo    ="reportes";
+			 $function  ="Consultar Guarderia";
+			 $operation ="generarArchivoXlsGuarderiaElectronica";
+			 $className ="com.novo.objects.TOs.RegistrosLoteGuarderiaTO";
+			 $timeLog   = date("m/d/Y H:i");
+			 $ip= $this->input->ip_address();
+			 $sessionId = $this->session->userdata('sessionId');
+			 $username = $this->session->userdata('userName');
+			 $token = $this->session->userdata('token');
+			 $logAcceso = np_hoplite_log($sessionId,$username,$canal,
+			 								   $modulo,$function,$operation,0,$ip,$timeLog);
+
+			 $logged_in = $this->session->userdata('logged_in');
+
+			 $paisS = $this->session->userdata('pais');
+			 $menuP =$this->session->userdata('menuArrayPorProducto');
+			 $moduloAct = np_hoplite_existeLink($menuP,"REPPGE");
+
+			 if($paisS==$urlCountry && $logged_in && $moduloAct!==false){
+
+					 $Fechaini = $this->input->post('fechaini');
+ 					 $Fechafin = $this->input->post('fechafin');
+ 					 $acrif = $this->session->userdata('acrifS');
+					 $nombreEmpresa = $this->input->post('nombreEmpresa');
+
+					 $data = array(
+							 "pais" => $urlCountry,
+							 "idOperation"=>$operation,
+							 "className"=> $className,
+							 "id_ext_emp"=> $acrif,
+							 "fechaini"=> $Fechaini,
+							 "fechafin"=> $Fechafin,
+							 "nombreEmpresa"=> $nombreEmpresa,
+							 "logAccesoObject" => $logAcceso,
+							 "token"=> $token,
+							 );
+					 $data = json_encode($data,JSON_UNESCAPED_UNICODE);
+					 $dataEncry = np_Hoplite_Encryption($data);
+					 $data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
+					 $data = json_encode($data);
+					 $response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+					 $jsonResponse = np_Hoplite_Decrypt($response);
+
+					 $response =  json_decode(utf8_encode($jsonResponse));
+
+					 if($response){
+							 log_message('info','guarderia xls '.$response->rc."/".$response->msg);
+							 if($response->rc==0){
+									 np_hoplite_byteArrayToFile($response->archivo,"xls","XlsGuarderiaElectronica");
+							 }else{
+
+									 if($response->rc==-61 || $response->rc==-29){
+											 $this->session->sess_destroy();
+											 $this->session->unset_userdata($this->session->all_userdata());
+											 echo "<script>alert('usuario actualmente desconectado');
+											 window.history.back(-1);</script>";
+
+									 }else{
+											 $codigoError = lang('ERROR_('.$response->rc.')');
+
+											 $codigoError = (strpos($codigoError, 'Error')!==false)?
+											 array('mensaje' => lang('ERROR_GENERICO_USER'), "rc"=> $response->rc):
+											 		array('mensaje' => lang('ERROR_('.$response->rc.')'), "rc"=> $response->rc);
+
+											 echo '<script languaje=\"javascript\">'.
+											 		'alert("'.$codigoError["mensaje"].'"); history.back();</script>';
+											 return $codigoError;
+									 }
+							 }
+
+					 }else{
+							log_message('info','Guarderia xls no ws');
+							echo "
+							<script>
+							alert('".lang('ERROR_GENERICO_USER')."');
+							window.history.back(-1);
+							</script>";
+					}
+			}elseif($paisS!=$urlCountry && $paisS!=""){
+					 $this->session->sess_destroy();
+					 $this->session->unset_userdata($this->session->all_userdata());
+					 redirect($urlCountry.'/login');
+			 }else{
+					 redirect($urlCountry.'/login');
+			 }
+
+	 }
+
+		/**
+		* Método para exportar en formato PDF el reporte de Guardería.
+		*
+		* @param  string $urlCountry
+		* @return JSON
+		*/
+	 public function guarderiaExpPDF($urlCountry){
+			 np_hoplite_countryCheck($urlCountry);
+			 $this->lang->load('erroreseol');//HOJA DE ERRORES;
+			 $canal = "ceo";
+			 $modulo    ="reportes";
+			 $function  ="Consultar Guarderia";
+			 $operation ="generarArchivoPDFGuarderiaElectronica";
+			 $className ="com.novo.objects.MOs.PlantillaGuarderiaMO";
+			 $timeLog   = date("m/d/Y H:i");
+			 $ip= $this->input->ip_address();
+			 $sessionId = $this->session->userdata('sessionId');
+			 $username = $this->session->userdata('userName');
+			 $token = $this->session->userdata('token');
+			 $logAcceso = np_hoplite_log($sessionId,$username,
+			 						$canal,$modulo,$function,$operation,0,$ip,$timeLog);
+
+			 $logged_in = $this->session->userdata('logged_in');
+
+			 $paisS = $this->session->userdata('pais');
+			 $menuP =$this->session->userdata('menuArrayPorProducto');
+			 $moduloAct = np_hoplite_existeLink($menuP,"REPPGE");
+
+			 if($paisS==$urlCountry && $logged_in && $moduloAct!==false){
+
+				 $Fechaini = $this->input->post('fechaini');
+				 $Fechafin = $this->input->post('fechafin');
+				 $acrif = $this->session->userdata('acrifS');
+				$nombreEmpresa = $this->input->post('nombreEmpresa');
+
+				 $data = array(
+						 "pais" => $urlCountry,
+						 "idOperation"=>$operation,
+						 "className"=> $className,
+						 "id_ext_emp"=> $acrif,
+						 "fechaini"=> $Fechaini,
+						 "fechafin"=> $Fechafin,
+							 "nombreEmpresa"=> $nombreEmpresa,
+						 "logAccesoObject" => $logAcceso,
+						 "token"=> $token,
+						 );
+
+					 $data = json_encode($data,JSON_UNESCAPED_UNICODE);
+					 $dataEncry = np_Hoplite_Encryption($data);
+					 $data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
+					 $data = json_encode($data);
+					 $response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+					 $jsonResponse = np_Hoplite_Decrypt($response);
+
+					 $response =  json_decode(utf8_encode($jsonResponse));
+
+					 if($response){
+
+							if($response->rc==0){
+									 np_hoplite_byteArrayToFile($response->archivo,"pdf","PDFGuarderiaElectronica");
+							 }else{
+
+									 if($response->rc==-61 || $response->rc==-29){
+											 $this->session->sess_destroy();
+											 $this->session->unset_userdata($this->session->all_userdata());
+											 echo "<script>alert('usuario actualmente desconectado');
+											 window.history.back(-1);</script>";
+									 }else{
+											 $codigoError = lang('ERROR_('.$response->rc.')');
+											 $codigoError = (strpos($codigoError, 'Error')!==false)?
+											 		array('mensaje' => lang('ERROR_GENERICO_USER'), "rc"=> $response->rc):
+														array('mensaje' => lang('ERROR_('.$response->rc.')'), "rc"=> $response->rc);
+											 		echo '<script languaje=\"javascript\">'.
+														'alert("'.$codigoError["mensaje"].'"); history.back();</script>';
+											 return $codigoError;
+									 }
+							 }
+					 }else{
+							log_message('info','guarderia pdf no ws');
+							echo "
+							<script>
+							alert('".lang('ERROR_GENERICO_USER')."');
+							window.history.back(-1);
+							</script>";
+					 }
+			 }elseif($paisS!=$urlCountry && $paisS!=""){
+					 $this->session->sess_destroy();
+					 $this->session->unset_userdata($this->session->all_userdata());
+					 redirect($urlCountry.'/login');
+			 }else{
+					 redirect($urlCountry.'/login');
+			 }
+	 }
 } // FIN DE LA CLASE Reportes

@@ -4,6 +4,7 @@
 		<!-- Begin: Content Area -->
 					{content}
 		<!-- End: Content Area -->
+		<div style="width: 230px;float: left;margin-top: 160px;">
 		<?php
 			if (isset($sidebarActive) && $sidebarActive) {
 					if (isset($aviso) && $aviso && $pais == 'Ve') {
@@ -36,6 +37,7 @@
 					<!-- End: Sidebar -->
 				<?php
 			}; ?>
+		</div>
 	</div>
 	<?php
 if (isset($footer)) { ?> {footer} <?php } ?>

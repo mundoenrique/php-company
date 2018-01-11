@@ -21,6 +21,17 @@ section {
   display: block;
 }
 
+.selectorNotificacion{
+  width: 500px;
+  margin-left: 5px;
+  background: none;
+  border: 1px solid #D5D5D5;
+  color: #0072c0;
+}
+.classHrNoti{
+	width: 512px;
+  float: left;
+}
 audio,
 canvas,
 video {
@@ -3493,7 +3504,9 @@ padding:10px 5px 10px 5px;
   /*padding:30px 0;*/
   text-align: justify;
 }
-
+.margtop10{
+    margin-top: 10px;
+}
 .text-general-privacidad-1 {
   width: 600px;
   height: auto;
@@ -6609,6 +6622,8 @@ margin-left: 250px;
 
 .select-tipo-guarderia {
   float: left;
+	//text-align: center;
+	margin-bottom: 10px;
 }
 
 .conceptDinam-h5 {
@@ -6917,7 +6932,9 @@ button.green:hover {
 #ui-tabs-3 #wrapper {
   padding: 0 !important;
 }
-
+#ui-tabs-4 #wrapper {
+  padding: 0 !important;
+}
 #email_user {
   width: 210px;
 }
@@ -7331,3 +7348,14 @@ button.green:hover {
       top: 0px;
   }
 /* Fin Menu-Head New*/
+
+.pad10 {
+    padding-top: 10px;
+}
+
+
+.checkNotiAdj{
+    padding-top: 20px;
+    margin-top: 12px;
+    margin-left: 70px;
+}

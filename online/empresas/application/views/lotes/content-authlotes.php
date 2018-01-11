@@ -44,7 +44,7 @@
 
 ?>
 
-<div id="content-products">
+<div id="content-products" style="width:720px;padding:20px 2px;float:left;">
 
 <h1>
 	<?php echo lang('TITULO_LOTES_AUTORIZACION'); ?>
@@ -247,17 +247,6 @@
 			if ($pais == 'Ve') {
 		?>
 		<div class="info">
-			<h2>¡Información importante!</h2>
-			<h3><b>Tarifas vigentes desde el 08-01-2018</b></h3>
-			<ul>
-				<li>Servicio Administrativo Mínimo: <b>Bs. 50.000</b></li>
-				(Aplica a facturas cuyo servicio administrativo sea inferior a <b>Bs. 50.000</b>)
-				<li>Servicios Operativos y de Logística: <b>Bs. 30.000.</b> Cobro único mensual</li>
-				(Quedan exceptuadas facturas con Servicio Administrativo Mínimo)
-			  	<li>Emisión de tarjetas: <b>Bs. 20.000</b> (c/u)</li>
-				<li>Reposición/renovación de tarjetas: <b>Bs.25.000</b> (c/u)</li>
-				<li>Reposición y entrega de claves: <b>Bs.12.500</b> (c/u)</li>
-			</ul>
 		</div>
 		<?php }?>
 
@@ -288,14 +277,22 @@
 <?php
 	if ($pais == 'Ve'):
 
-		$iva = $info->{'nuevoIva'};
-		if ($iva=='true') {
-			$iva = '1';
+		if(isset($info->{'nuevoIva'})){
+
+			$iva = $info->{'nuevoIva'};
+
+				if ($iva=='true') {
+					$iva = '1';
+				}else{
+					$iva = '0';
+				}
+
 		}else{
 			$iva = '0';
 		}
+
 ?>
-<input type="hidden" id="nuevo-iva" style="display:none;" value="<?php print $info->{'nuevoIva'}; ?>">
+<input type="hidden" id="nuevo-iva" style="display:none;" value="<?php echo $iva; ?>">
 <div class="modal-lote" id="modal-lote" style="display:none; overflow: hidden; text-overflow: ellipsis;">
 	<style type="text/css">
 		.modal-table {

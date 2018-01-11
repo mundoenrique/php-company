@@ -24,6 +24,7 @@ $lang['SUBMENU_EMPRESAS'] = 'Empresas';
 $lang['SUBMENU_SUCURSALES'] = 'Sucursales';
 $lang['SUBMENU_USUARIO'] = 'Usuario';
 $lang['SUBMENU_DESCARGAS'] = 'Descargas';
+$lang['SUBMENU_NOTIFICACIONES'] = 'Notificaciones';
 $lang['SUBMENU_LOGOUT'] = 'Salir';
 $lang['CONFIG_USER'] = 'Configuración de usuario';
 $lang['CONFIG_EMPR'] = 'Configuración de empresa';
@@ -84,6 +85,8 @@ $lang['SUC_BTN_NEW_MASV'] = 'Subir archivo';
 $lang['SUC_TITLE_NEW_SUC'] = 'Gestión de Sucursal';
 $lang['SUC_BTN_UPFILE'] = 'Subir archivo de nuevas sucursales';
 
+// TAB Notificaciones
+$lang['NOTI_TITLE_CONFIG'] = 'Notificaciones';
 
 // PAGINA LOGOUT
 $lang['LOGOUT_TITULO'] = 'Gracias por usar nuestros servicios';

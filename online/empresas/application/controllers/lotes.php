@@ -47,7 +47,13 @@ class Lotes extends CI_Controller {
 			$FooterCustomJS="";
 			$titlePage="Conexión Empresas Online - Lotes";
 
-			$programa = $this->session->userdata('nombreProductoS').' / '. $this->session->userdata('marcaProductoS') ;
+		 if(($this->session->userdata('nombreProductoS') ==='PLATA GUARDERÍA' ||
+		 				$this->session->userdata('nombreProductoS') ==='PLATA GUARDERIA' ) &&
+		  				$this->session->userdata('marcaProductoS') === 'Cheque'){
+								$programa = $this->session->userdata('nombreProductoS');
+		 }else{
+			 $programa = $this->session->userdata('nombreProductoS').' / '.ucwords( $this->session->userdata('marcaProductoS'));
+		 }
 
 			$tiposLotesLista[] = $this->callWSconsultarTipoLote($urlCountry,$idProductoS);
 
@@ -77,7 +83,7 @@ class Lotes extends CI_Controller {
 				'pais' => $urlCountry
 				);
 
-			$this->parser->parse('layouts/layout-b', $datos);
+			$this->parser->parse('layouts/layout-c', $datos);
 		}elseif($logged_in) {
 			echo "
 			<script>
@@ -274,8 +280,13 @@ class Lotes extends CI_Controller {
 			$FooterCustomJS="";
 			$titlePage="Conexión Empresas Online - Lotes";
 
-			$programa = $this->session->userdata('nombreProductoS').' / '. $this->session->userdata('marcaProductoS') ;
-
+			if(($this->session->userdata('nombreProductoS') ==='PLATA GUARDERÍA' ||
+						$this->session->userdata('nombreProductoS') ==='PLATA GUARDERIA' ) &&
+ 		  				$this->session->userdata('marcaProductoS') === 'Cheque'){
+ 								$programa = $this->session->userdata('nombreProductoS');
+	 		 }else{
+	 			 $programa = $this->session->userdata('nombreProductoS').' / '.ucwords( $this->session->userdata('marcaProductoS'));
+			 }
 			$lista = $this->input->post('tempIdOrdenL');
 
 			/*si está entrando a está página desde el módulo de calculo OS, solicitar eliminación de lotes temporales,
@@ -300,7 +311,6 @@ class Lotes extends CI_Controller {
 				'programa'=>$programa,
 				'data' => $rTest,
 				'funciones' => $funciones
-
 				),TRUE);
 
 			/*Prueba de hz para ver el json que se envía a la vista*/
@@ -318,10 +328,11 @@ class Lotes extends CI_Controller {
 				'login' => 'LOGIN USUARIO',
 				'password' => 'CONTRASEÑA',
 				'loginBtn' => 'ENTRAR',
+				'aviso' =>TRUE,
 				'pais' => $urlCountry
 				);
 
-			$this->parser->parse('layouts/layout-b', $datos);
+			$this->parser->parse('layouts/layout-c', $datos);
 		}else if($linkAut===false && $linkCarg!==false){
 			echo "
 			<script>
@@ -1371,7 +1382,7 @@ class Lotes extends CI_Controller {
 		$response = json_decode(utf8_encode($jsonResponse));
 
 		if($response){
-			log_message('info','consultarTipoLote '.$response->rc."/".$response->msg);
+
 			if($response->rc==0){
 				return $response;
 			}else{
@@ -2060,41 +2071,44 @@ class Lotes extends CI_Controller {
 	 * @param  string $urlCountry
 	 * @return JSON
 	 */
-	public function preliminarOS($urlCountry){
-		np_hoplite_countryCheck($urlCountry);
+	 public function preliminarOS($urlCountry){
 
-		$logged_in = $this->session->userdata('logged_in');
-		$token = $this->session->userdata('token');
-		$username = $this->session->userdata('userName');
-		$idProductoS = $this->session->userdata('idProductoS');
-		$paisS = $this->session->userdata('pais');
+	    np_hoplite_countryCheck($urlCountry);
 
-		if($paisS==$urlCountry && $logged_in){
+	    $logged_in = $this->session->userdata('logged_in');
+	    $token = $this->session->userdata('token');
+	    $username = $this->session->userdata('userName');
+	    $idProductoS = $this->session->userdata('idProductoS');
+	    $paisS = $this->session->userdata('pais');
 
-			$pass = $this->input->post('data-pass') ;
-			$tipoOrdeServicio = $this->input->post('data-tipoOS');
-			$lotes = explode(',',$this->input->post('data-lotes'));
-			$medio = $this->input->post('data-medio');
-			$ivanuevo = $this->input->post('data-iva');
+	    if ($paisS == $urlCountry && $logged_in) {
+	        $pass = $this->input->post('data-pass');
+	        $tipoOrdeServicio = $this->input->post('data-tipoOS');
+	        $lotes = explode(',', $this->input->post('data-lotes'));
+	        $medio = $this->input->post('data-medio');
+	        $ivanuevo = ($this->input->post('data-iva') == 1) ? true : false;
+	        array_pop($lotes);
+	        log_message('info', "Prueba para la toma del país --->>> " . $paisS);
+	        $calculoOsLotesW = $this->callWScalcularOS($urlCountry, $token, $username,
+											  				$pass, $lotes, $tipoOrdeServicio, $medio, $ivanuevo);
+	        $this->output->set_content_type('')->set_output($calculoOsLotesW);
+	    }
+	    elseif ($paisS != $urlCountry && $paisS != '') {
+	        $this->session->sess_destroy();
+	        $this->session->unset_userdata($this->session->all_userdata());
+	        redirect($urlCountry . '/login');
+	    }
+	    elseif ($this->input->is_ajax_request()) {
+	        $this->output->set_content_type('')->set_output(json_encode(array(
+	            'ERROR' => '-29'
+	        )));
+	    }
+	    else {
+	        redirect($urlCountry . '/login');
+	    }
+}
 
-			array_pop($lotes);
 
-			log_message('info',"Prueba para la toma del país --->>> ".$paisS);
-
-			$calculoOsLotesW = $this->callWScalcularOS($urlCountry,$token,$username,$pass,$lotes,$tipoOrdeServicio,$medio,$ivanuevo);
-
-			$this->output->set_content_type('')->set_output($calculoOsLotesW);
-
-		}elseif($paisS!=$urlCountry&& $paisS!=''){
-			$this->session->sess_destroy();
-			$this->session->unset_userdata($this->session->all_userdata());
-			redirect($urlCountry.'/login');
-		}elseif($this->input->is_ajax_request()){
-			$this->output->set_content_type('')->set_output(json_encode( array('ERROR' => '-29' )));
-		}else{
-			redirect($urlCountry.'/login');
-		}
-	}
 
 	/**
 	 * Método que realiza petición al WS para generar el cálculo de la orden de servicio antes de ser autorizada.
@@ -2386,7 +2400,7 @@ class Lotes extends CI_Controller {
 	* @param string urlCountry
 	*/
 	public function pantallaReproceso($urlCountry){
-
+		log_message('info','Acceso a =====>>> pantallaReproceso ');
 		np_hoplite_countryCheck($urlCountry);
 		$this->lang->load('lotes');
 		$this->lang->load('dashboard');
@@ -2403,13 +2417,17 @@ class Lotes extends CI_Controller {
 		if($paisS==$urlCountry && $logged_in && $moduloAct!==false){
 			$FooterCustomInsertJS=["jquery-1.10.2.min.js","jquery-ui-1.10.3.custom.min.js","jquery.balloon.min.js","jquery.paginate.js","header.js","dashboard/widget-empresa.js","jquery.fileupload.js","jquery.iframe-transport.js","jquery-md5.js","lotes/lotes-reproceso.js"];
 			$FooterCustomJS="";
-			$titlePage="Reproceso de lotes";
+			$titlePage="Reproceso de Datos";
 
-			$programa = $this->session->userdata('nombreProductoS').' / '. $this->session->userdata('marcaProductoS') ;
-
+			if(($this->session->userdata('nombreProductoS') ==='PLATA GUARDERÍA' ||
+						$this->session->userdata('nombreProductoS') ==='PLATA GUARDERIA' ) &&
+ 		  				$this->session->userdata('marcaProductoS') === 'Cheque'){
+ 						$programa = $this->session->userdata('nombreProductoS');
+ 		 }else{
+ 			 $programa = $this->session->userdata('nombreProductoS').' / '.ucwords( $this->session->userdata('marcaProductoS'));
+}
 			$idProductoS = $this->session->userdata('idProductoS');
 			$tiposLotesLista[] = $this->callWSconsultarTipoLote($urlCountry,$idProductoS);
-
 			$menuHeader = $this->parser->parse('widgets/widget-menuHeader',array(),TRUE);
 			$menuFooter = $this->parser->parse('widgets/widget-menuFooter',array(),TRUE);
 
@@ -2916,6 +2934,7 @@ class Lotes extends CI_Controller {
 					);
 
 				$response = $this->callWSmodificarBeneficiario($urlCountry, utf8_decode(json_encode($dataPost,JSON_UNESCAPED_UNICODE)));
+				log_message('info','Response '.json_encode($response));
 			}else{
 				$response = array("ERROR"=>lang('SIN_FUNCION'));
 			}
@@ -3004,7 +3023,7 @@ class Lotes extends CI_Controller {
 			);
 
 		$data = json_encode($data,JSON_UNESCAPED_UNICODE);
-
+			log_message('info','callWSmodificarBeneficiario =======> '.$data);
 		$dataEncry = np_Hoplite_Encryption($data);
 		$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
 		$data = json_encode($data);
@@ -3203,8 +3222,11 @@ class Lotes extends CI_Controller {
 				$tipo_lote = $this->input->post('data-tipoLote');
 				$pass = $this->input->post('data-pass');
 				$lista = $this->input->post("data-lista");
+				$medioPago = $this->input->post("data-medio-pago");
 
-				$response = $this->callWSreprocesar($urlCountry, $lista, $tipo_lote, $pass);
+				$nuevoIva = $this->input->post("data-nuevo-iva");
+
+				$response = $this->callWSreprocesar($urlCountry, $lista, $tipo_lote, $pass, $medioPago, $nuevoIva);
 			}else{
 				$response = json_encode(array("ERROR"=>lang('SIN_FUNCION')));
 			}
@@ -3221,7 +3243,118 @@ class Lotes extends CI_Controller {
 
 	}
 
+	public function reprocesarMasivo($urlCountry) {
 
+        np_hoplite_countryCheck($urlCountry);
+
+        $this->lang->load('erroreseol');
+
+        $menuP = $this->session->userdata('menuArrayPorProducto');
+        $moduloAct = np_hoplite_existeLink($menuP, "TEBGUR");
+
+        $logged_in = $this->session->userdata('logged_in');
+        $paisS = $this->session->userdata('pais');
+
+        if ($paisS == $urlCountry && $logged_in) {
+
+            if ($moduloAct !== false) {
+
+                $pass = $this->input->post("pass");
+                $monto = $this->input->post("monto");
+                $concepto = $this->input->post("concepto");
+				$id_registro = $this->input->post("id_registro");
+
+                $response = $this->callWSreprocesarMasivo( $urlCountry, $concepto, $monto, $pass, $id_registro );
+            } else {
+                $response = json_encode(array("ERROR" => lang('SIN_FUNCION')));
+            }
+
+			log_message('info', 'callWSreprocesarMasivo Encrypt ====>> ' . json_encode($response));
+
+            $this->output->set_content_type('')->set_output(json_encode($response));
+        } elseif ($paisS != $urlCountry && $paisS != '') {
+            $this->session->sess_destroy();
+            $this->session->unset_userdata($this->session->all_userdata());
+            redirect($urlCountry . '/login');
+        } elseif ($this->input->is_ajax_request()) {
+            $this->output->set_content_type('application/json')->set_output(json_encode(array('ERROR' => '-29')));
+        } else {
+            redirect($urlCountry . '/login');
+        }
+    }
+
+    private function callWSreprocesarMasivo( $urlCountry, $concepto, $monto, $pass, $id_registro ) {
+
+        $this->lang->load('erroreseol');
+        $username = $this->session->userdata('userName');
+        $token = $this->session->userdata('token');
+        $idEmpresa = $this->session->userdata('acrifS');
+        $idProductoS = $this->session->userdata('idProductoS');
+        $acodcia = $this->session->userdata('accodciaS');
+        $acgrupo = $this->session->userdata('accodgrupoeS');
+
+        $canal = "ceo";
+        $modulo = "Reprocesar Lotes";
+        $function = "Reprocesar Guarderia";
+        $operation = "actualizarDataMasivaBeneficiario";
+        $ip = $this->input->ip_address();
+        $timeLog = date("m/d/Y H:i");
+        $className = "com.novo.objects.TOs.RegistrosLoteGuarderiaTO";
+
+        $sessionId = $this->session->userdata('sessionId');
+
+        $logAcceso = np_hoplite_log($sessionId, $username, $canal,
+		 					$modulo, $function, $operation, 0, $ip, $timeLog);
+        $usuario = array(
+            "userName" => $username,
+            "password" => $pass
+        );
+
+        $data = array(
+            "idOperation" => $operation,
+            "className" => $className,
+            'id_ext_emp' => $idEmpresa,
+            'concepto' => $concepto,
+            'monto_total' => $monto,
+			'id_registro' => $id_registro,
+            "logAccesoObject" => $logAcceso,
+            "token" => $token,
+            "pais" => $urlCountry
+        );
+
+        $data = json_encode($data, JSON_UNESCAPED_UNICODE);
+        log_message('info', 'callWSreprocesarMasivo ====>> ' . $data);
+        $dataEncry = np_Hoplite_Encryption($data);
+        $data = array('bean' => $dataEncry, 'pais' => $urlCountry);
+        $data = json_encode($data);
+        log_message('info', 'callWSreprocesarMasivo Encrypt ====>> ' . $data);
+        $response = np_Hoplite_GetWS('eolwebInterfaceWS', $data);
+        $jsonResponse = np_Hoplite_Decrypt($response);
+        $response = json_decode(utf8_encode($jsonResponse));
+        //log_message('info', 'Response ' . $response);
+        if ($response) {
+            log_message('info', 'REPROCESAR ' . $response->rc . '/' . $response->msg);
+            if ($response->rc == 0) {
+                return json_encode($response);
+            } else {
+                if ($response->rc == -61 || $response->rc == -29) {
+                    $this->session->sess_destroy();
+                    $this->session->unset_userdata($this->session->all_userdata());
+                    $codigoError = array('ERROR' => '-29');
+                } else {
+                    $codigoError = lang('ERROR_(' . $response->rc . ')');
+
+					$codigoError = (strpos($codigoError, 'Error') !== false)?
+							array('ERROR' => lang('ERROR_GENERICO_USER')):
+								array('ERROR' => lang('ERROR_(' . $response->rc . ')'));
+                }
+                return json_encode($codigoError);
+            }
+        } else {
+            log_message('info', 'REPROCESAR No WS');
+            return json_encode(array('ERROR' => lang('ERROR_GENERICO_USER')));
+        }
+    }
 	/**
 	* Método que realiza petición al WS para reprocesar el listado de beneficiarios
 	* @param  string $urlCountry
@@ -3230,7 +3363,7 @@ class Lotes extends CI_Controller {
 	* @param  string $pass
 	* @return array
 	*/
-	private function callWSreprocesar($urlCountry, $lista, $tipo_lote, $pass){
+	private function callWSreprocesar($urlCountry, $lista, $tipo_lote, $pass, $medio_pago, $nuevoIva){
 		$this->lang->load('erroreseol');
 
 		$username = $this->session->userdata('userName');
@@ -3281,7 +3414,9 @@ class Lotes extends CI_Controller {
 			"token"=>$token,
 			"pais"=>$urlCountry
 			);
-
+ 		if($nuevoIva==1){
+				$data["medioPago"] = $medio_pago;
+		}
 		$data = json_encode($data,JSON_UNESCAPED_UNICODE);
 
 		$dataEncry = np_Hoplite_Encryption($data);

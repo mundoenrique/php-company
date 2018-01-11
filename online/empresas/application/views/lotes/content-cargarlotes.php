@@ -4,7 +4,7 @@ $urlBaseA = $this->config->item('base_url');
 $urlBase = $urlBaseA.$pais;
 ?>
 
-<div id="content-products">
+<div id="content-products" style="    width: 720px;padding: 20px 2px;float: left;">
 
 	<h1><?php echo lang('TITULO_LOTES_CARGA'); ?></h1>
 
@@ -53,20 +53,20 @@ $urlBase = $urlBaseA.$pais;
 							<?php
 								foreach ($selectTiposLotes[0]->lista as $tipol) {
 									$tipoLS = ucfirst(mb_strtolower($tipol->tipoLote));
-									echo "<option value='$tipol->idTipoLote' rel='$tipol->formato'>$tipoLS</option>"; 
+									echo "<option value='$tipol->idTipoLote' rel='$tipol->formato'>$tipoLS</option>";
 								}
 								?>
 							</select>
 						</div>
 						<div id="selection-2">
 							<h5>&nbsp;</h5>
-							<input type="file" name="userfile" id="userfile" class='elem-hidden' />	
+							<input type="file" name="userfile" id="userfile" class='elem-hidden' />
 							<input id='archivo' placeholder='Click aquí para seleccionar archivo de lotes.' readonly="readonly" style='margin-left:0;width:459px'/>
-						</div>					
+						</div>
 
 					</div>
 					<div id="batchs-last">
-							<button id="cargaLote" ><?php echo lang('TITULO_LOTES_BTNCARGAR'); ?></button>							
+							<button id="cargaLote" ><?php echo lang('TITULO_LOTES_BTNCARGAR'); ?></button>
 						</div>
 
 					<div id="lotes-2">
@@ -83,11 +83,11 @@ $urlBase = $urlBaseA.$pais;
 										<th><?php echo lang('TABLA_LOTESP_FECHACARGA'); ?></th>
 										<th><?php echo lang('TABLA_LOTESP_ESTATUS'); ?></th>
 										<th><?php echo lang('TABLA_LOTESP_OPCIONES'); ?></th>
-									
+
 								</thead>
 								<tbody>
-									
-									<h3 id='actualizador' style='display:none'><?echo lang('CARGANDO')?></h3>
+									<h3 id='actualizador' style='display:none'>
+										<br><br><?echo lang('CARGANDO')?><br><br><br><br></h3>
 								</tbody>
 							</table>
 						</div>
@@ -98,7 +98,7 @@ $urlBase = $urlBaseA.$pais;
 
 				</div>
 			</div>
-	
+
 	</div>
 </div>
 

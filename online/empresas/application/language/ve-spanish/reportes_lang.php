@@ -19,7 +19,7 @@ $lang['REPORTES_RADIO_ABONO']= "Abono";
 $lang['REPORTES_RADIO_CARGO']= "Cargo";
 $lang['TITULO_REPORTES_PROCEDIMIENTO']= "Procedimiento";
 $lang['TITULO_TARJETA_HABIENTE']= "Tarjetahabiente";
-
+$lang['TITULO_GUARDERIA']= "Guardería";
 
 //GRAFICO TARJETAS EMITIDAS
 $lang['CATEGORIA_UNO']= "Principal";
@@ -76,12 +76,12 @@ $lang['BREADCRUMB_REPORTES_REPOSICIONES']= "Reposiciones de tarjetas y claves";
 $lang['BREADCRUMB_REPORTES_SALDOS']= "Saldos al Cierre";
 $lang['BREADCRUMB_REPORTES_TARJETAS']= "Tarjetas emitidas";
 $lang['BREADCRUMB_REPORTES_TARJETA_HABIENTE']= "Tarjetahabiente";
-
+$lang['BREADCRUMB_REPORTES_GUARDERIA']= "Guardería";
 // PLACE HOLDERS REPORTES
 $lang['PLACEHOLDER_TARJETA']= "Ingrese Tarjeta";
 
 //DIV CARGANDO
-$lang['CARGANDO'] = "Cargando Reporte"; 
+$lang['CARGANDO'] = "Cargando Reporte";
 
 
 //DATOS TABLA SALDOS AMANECIDOS

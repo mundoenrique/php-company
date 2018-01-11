@@ -76,7 +76,7 @@ $lang['REPLOT']= "Estatus de lotes";
 $lang['REPPGE']= "Pagos de Guardería";
 $lang['TEBTHA']= "Tarjetahabientes";
 $lang['TEBACT']= "Actualización de datos"; // funcion no activa, es una mejora de tebpol
-
+$lang['REPPGE']= "Pagos de Guardería";
 //Combustible
 $lang['CMBCON'] = 'Conductores';
 $lang['CMBVHI'] = 'Vehículos';

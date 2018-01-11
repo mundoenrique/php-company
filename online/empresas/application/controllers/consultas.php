@@ -65,8 +65,13 @@ class Consultas extends CI_Controller {
             $idProductoS = $this->session->userdata('idProductoS');
             $idEmpresa = $this->session->userdata('acrifS');
 
-            $programa = $this->session->userdata('nombreProductoS').' / '. $this->session->userdata('marcaProductoS') ;
-
+            if(($this->session->userdata('nombreProductoS') ==='PLATA GUARDERÍA' ||
+                 $this->session->userdata('nombreProductoS') ==='PLATA GUARDERIA' ) &&
+           		  		$this->session->userdata('marcaProductoS') === 'Cheque'){
+           						$programa = $this->session->userdata('nombreProductoS');
+       		 }else{
+       			 $programa = $this->session->userdata('nombreProductoS').' / '.ucwords( $this->session->userdata('marcaProductoS'));
+       		 }
             $tipoStatusOS[] = $this->callWStatusLotesOS($urlCountry);
             $menuP =$this->session->userdata('menuArrayPorProducto');
             $funciones = np_hoplite_modFunciones($menuP);
@@ -379,8 +384,8 @@ class Consultas extends CI_Controller {
             log_message("INFO",'PDF OS '.$response->rc.'/'.$response->msg);
 
             if($response->rc==0){
-                np_hoplite_byteArrayToFile($response->archivo,"pdf","OrdenServicio".date("d/m/Y H:i"));
-
+                np_hoplite_byteArrayToFile($response->archivo,"pdf",
+											str_replace(' ', '_', 'OrdenServicio'.date("d/m/Y H:i")));
             }else{
 
                 if($response->rc==-61 || $response->rc==-29){
@@ -398,7 +403,7 @@ class Consultas extends CI_Controller {
                     echo "<form id='formu' method='post' ><input type='hidden' name='data-OS' value='$OS'/></form>
                     <script>
                     alert('".$codigoError["mensaje"]."');
-                    document.getElementById('formu').action='".$this->config->item('base_url')."$urlCountry/consulta/ordenes-de-servicio';                   
+                    document.getElementById('formu').action='".$this->config->item('base_url')."$urlCountry/consulta/ordenes-de-servicio';
                     document.getElementById('formu').submit();
                     </script>";
                 }
@@ -406,8 +411,8 @@ class Consultas extends CI_Controller {
         }else{
             echo "<form id='formu' method='post'><input type='hidden' name='data-OS' value='$OS'/></form>
             <script>
-            alert('Error al descargar archivo.');      
-            document.getElementById('formu').action='".$this->config->item('base_url')."$urlCountry/consulta/ordenes-de-servicio';                   
+            alert('Error al descargar archivo.');
+            document.getElementById('formu').action='".$this->config->item('base_url')."$urlCountry/consulta/ordenes-de-servicio';
             document.getElementById('formu').submit();
             </script>";
         }
@@ -467,28 +472,29 @@ class Consultas extends CI_Controller {
                 $nombre = explode(".", $response->nombre);
                 $nombre = $nombre[0];
 
-                np_hoplite_byteArrayToFile($response->archivo,"pdf",$nombre, date("d/m/Y H:i"));
+                np_hoplite_byteArrayToFile($response->archivo,"pdf",
+									str_replace(' ', '_', $nombre.date("d/m/Y H:i")));
 
             } elseif ($response->rc==-109) {
                 echo "<form id='formu' method='post'><input type='hidden' name='data-OS' value='$OS'/></form>
                 <script>
-                    alert('La factura aún no está digitalizada.');      
-                    document.getElementById('formu').action='".$this->config->item('base_url')."$urlCountry/consulta/ordenes-de-servicio';                   
+                    alert('La factura aún no está digitalizada.');
+                    document.getElementById('formu').action='".$this->config->item('base_url')."$urlCountry/consulta/ordenes-de-servicio';
                     document.getElementById('formu').submit();
                 </script>";
             } else{
                 echo "<form id='formu' method='post'><input type='hidden' name='data-OS' value='$OS'/></form>
                 <script>
-                    alert('En estos momentos no podemos atender su solicitud por favor intente más tarde.');      
-                    document.getElementById('formu').action='".$this->config->item('base_url')."$urlCountry/consulta/ordenes-de-servicio';                   
+                    alert('En estos momentos no podemos atender su solicitud por favor intente más tarde.');
+                    document.getElementById('formu').action='".$this->config->item('base_url')."$urlCountry/consulta/ordenes-de-servicio';
                     document.getElementById('formu').submit();
                 </script>";
             }
         }else{
             echo "<form id='formu' method='post'><input type='hidden' name='data-OS' value='$OS'/></form>
             <script>
-            alert('En estos momentos no podemos atender su solicitud por favor intente más tarde.');      
-            document.getElementById('formu').action='".$this->config->item('base_url')."$urlCountry/consulta/ordenes-de-servicio';                   
+            alert('En estos momentos no podemos atender su solicitud por favor intente más tarde.');
+            document.getElementById('formu').action='".$this->config->item('base_url')."$urlCountry/consulta/ordenes-de-servicio';
             document.getElementById('formu').submit();
             </script>";
         }
@@ -673,7 +679,9 @@ class Consultas extends CI_Controller {
             log_message("INFO",'FACTURA OS '.$response->rc/*.'/'.$response->msg*/);
 
             if($response->rc==0){
-                np_hoplite_byteArrayToFile($response->archivo,"pdf","FacturaOS".date("d/m/Y H:i"));
+
+                np_hoplite_byteArrayToFile($response->archivo,"pdf",
+									str_replace(' ', '_', "FacturaOS".date("d/m/Y H:i")));
 
             }else{
 
@@ -692,7 +700,7 @@ class Consultas extends CI_Controller {
                     echo "<form id='formu' method='post' ><input type='hidden' name='data-OS' value='$OS'/></form>
                     <script>
                     alert('".$codigoError["mensaje"]."');
-                    document.getElementById('formu').action='".$this->config->item('base_url')."$urlCountry/consulta/ordenes-de-servicio';                   
+                    document.getElementById('formu').action='".$this->config->item('base_url')."$urlCountry/consulta/ordenes-de-servicio';
                     document.getElementById('formu').submit();
                     </script>";
                 }
@@ -700,8 +708,8 @@ class Consultas extends CI_Controller {
         }else{
             echo "<form id='formu' method='post'><input type='hidden' name='data-OS' value='$OS'/></form>
             <script>
-            alert('Error al descargar archivo.');      
-            document.getElementById('formu').action='".$this->config->item('base_url')."$urlCountry/consulta/ordenes-de-servicio';                   
+            alert('Error al descargar archivo.');
+            document.getElementById('formu').action='".$this->config->item('base_url')."$urlCountry/consulta/ordenes-de-servicio';
             document.getElementById('formu').submit();
             </script>";
         }
@@ -974,5 +982,3 @@ class Consultas extends CI_Controller {
 
 
 } // FIN DE LA CLASE Consultas
-
-

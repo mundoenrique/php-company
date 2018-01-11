@@ -848,7 +848,9 @@ class Users extends CI_Controller {
             $token = $this->session->userdata('token');
             $nombreCompleto = $this->session->userdata('nombreCompleto');
             $lastSessionD = $this->session->userdata('lastSession');
-            $FooterCustomInsertJS=["jquery-1.10.2.min.js","jquery-ui-1.10.3.custom.min.js","jquery.balloon.min.js","jquery-md5.js","jquery.paginate.js","users/configuracion.js","header.js","jquery.fileupload.js","jquery.iframe-transport.js"];
+            $FooterCustomInsertJS=["jquery-1.10.2.min.js","jquery-ui-1.10.3.custom.min.js",
+						"jquery.balloon.min.js","jquery-md5.js","jquery.paginate.js",
+						"users/configuracion.js","users/notificaciones.js","header.js","jquery.fileupload.js","jquery.iframe-transport.js"];
             $FooterCustomJS="";
             $titlePage="Conexión Empresas Online-Configuración";
             $title="Configuración";
@@ -858,7 +860,13 @@ class Users extends CI_Controller {
             $menuHeader = $this->parser->parse('widgets/widget-menuHeader',array(),TRUE);
             $menuFooter = $this->parser->parse('widgets/widget-menuFooter',array(),TRUE);
             $header = $this->parser->parse('layouts/layout-header',array('bodyclass'=>'','menuHeaderActive'=>TRUE,'menuHeaderMainActive'=>TRUE,'menuHeader'=>$menuHeader,'titlePage'=>$titlePage),TRUE);
-            $footer = $this->parser->parse('layouts/layout-footer',array('menuFooterActive'=>TRUE,'menuFooter'=>$menuFooter,'FooterCustomInsertJSActive'=>TRUE,'FooterCustomInsertJS'=>$FooterCustomInsertJS,'FooterCustomJSActive'=>TRUE,'FooterCustomJS'=>$FooterCustomJS),TRUE);
+
+            $footer = $this->parser->parse('layouts/layout-footer',
+						array('menuFooterActive'=>TRUE,'menuFooter'=>$menuFooter,
+								'FooterCustomInsertJSActive'=>TRUE,
+								'FooterCustomInsertJS'=>$FooterCustomInsertJS,
+								'FooterCustomJSActive'=>TRUE,
+								'FooterCustomJS'=>$FooterCustomJS),TRUE);
 
             $content = $this->parser->parse('users/content-userconfig',array(
                 'titulo'=> $title,
@@ -1023,6 +1031,47 @@ class Users extends CI_Controller {
             echo 'Usuario Desconectado';
         }
     }
+
+	/**
+	 * Pantalla del módulo de configuración.
+	 * Muestra los links de descargas de los gestores archivos y manuales.
+	 *
+	 * @param  string $urlCountry
+	 *
+	 */
+	public function configNotificaciones($urlCountry){
+		log_message('info', ' ==============>>>>>>>>>>>>>> configNotificaciones');
+
+			//cargar archivo de configuración del país
+			np_hoplite_countryCheck($urlCountry);
+
+			$this->lang->load('dashboard');
+			$this->load->library('parser');
+			$this->lang->load('users');
+			$this->lang->load('erroreseol');
+			$logged_in = $this->session->userdata('logged_in');
+
+			$paisS = $this->session->userdata('pais');
+
+			if($paisS==$urlCountry && $logged_in){
+
+					$lista[] = $this->callWSListaEmpresas($urlCountry);
+					$content = $this->parser->parse('users/content-notificacionesconfig',
+																				array('listaEmpr' => $lista),TRUE);
+						$datos = array(
+								'content'=>$content,
+						);
+
+						$this->parser->parse('layouts/layout-b', $datos);
+
+				}elseif($paisS!=$urlCountry && $paisS!=""){
+						$this->session->sess_destroy();
+						$this->session->unset_userdata($this->session->all_userdata());
+						echo 'Usuario Desconectado';
+				}else{
+						echo 'Usuario Desconectado';
+				}
+	}
 
     /**
      * Método que solicita al WS el listado de empresas resumido.
@@ -2615,4 +2664,198 @@ class Users extends CI_Controller {
     }
 
 
+			public function Notificaciones($urlCountry) {
+
+		        np_hoplite_countryCheck($urlCountry);
+
+		        $this->lang->load('erroreseol');
+		        $this->lang->load('users');
+		        $menuP = $this->session->userdata('menuArrayPorProducto');
+
+		        $logged_in = $this->session->userdata('logged_in');
+		        $paisS = $this->session->userdata('pais');
+
+		        if ($paisS == $urlCountry && $logged_in) {
+
+		                $acrif = $this->input->post("acrif");
+		                $response = $this->callWSNotificaciones( $urlCountry,$acrif );
+
+								log_message('info', ' ====>> ' . json_encode($response));
+
+		            $this->output->set_content_type('')->set_output(json_encode($response));
+
+		        } elseif ($paisS != $urlCountry && $paisS != '') {
+		            $this->session->sess_destroy();
+		            $this->session->unset_userdata($this->session->all_userdata());
+		            redirect($urlCountry . '/login');
+		        } elseif ($this->input->is_ajax_request()) {
+		            $this->output->set_content_type('application/json')->set_output(json_encode(array('ERROR' => '-29')));
+		        } else {
+		            redirect($urlCountry . '/login');
+		        }
+		    }
+
+				private function callWSNotificaciones( $urlCountry, $acrif ){
+
+						$this->lang->load('erroreseol');
+						$canal = "ceo";
+						$modulo="Reporte por Producto";
+						$function="Notificaciones Usuario";
+						$operation="buscarNotificacionesCeo";
+
+						$className="com.novo.objects.TOs.ContactoTO";
+						$timeLog= date("m/d/Y H:i");
+						$ip= $this->input->ip_address();
+						$sessionId = $this->session->userdata('sessionId');
+						$username = $this->session->userdata('userName');
+						$logAcceso = np_hoplite_log($sessionId,$username,$canal,
+						$modulo,$function,$operation,0,$ip,$timeLog);
+						$token = $this->session->userdata('token');
+
+						$data = array(
+								"idOperation" => $operation,
+								"className" => $className,
+								"accodusuario" => $username,
+								"acrif"=> $acrif,
+								"logAccesoObject"=>$logAcceso,
+								"token"=>$token,
+								"pais"=>$urlCountry
+						);
+
+						$data = json_encode( $data, JSON_UNESCAPED_UNICODE);
+						log_message('info','Estatus Notificacion : '.$data);
+
+						$dataEncry = np_Hoplite_Encryption( $data);
+						$data = array( 'bean' => $dataEncry, 'pais' =>$urlCountry );
+						$data = json_encode($data);
+						$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+						$jsonResponse = np_Hoplite_Decrypt($response);
+						$response =  json_decode(utf8_encode($jsonResponse));
+						$data1 = json_encode($response);
+
+						if($response){
+								log_message('info','Estatus Notificacion : '.$response->rc."/".$response->msg);
+								if($response->rc==0){
+										return $response;
+								}else{
+												if($response->rc==-61 || $response->rc==-29){
+
+														$codigoError = array('mensaje' => lang('ERROR_(-29)'), "rc"=> "-29");
+														$this->session->unset_userdata($this->session->all_userdata());
+														$this->session->sess_destroy();
+														return $codigoError;
+
+												}else{
+
+														$codigoError = lang('ERROR_('.$response->rc.')');
+
+														$codigoError = (strpos($codigoError, 'Error')!==false)?
+															array('mensaje' => lang('ERROR_GENERICO_USER'), "rc"=> $response->rc):
+																array('mensaje' => lang('ERROR_('.$response->rc.')'), "rc"=> $response->rc);
+
+														return $codigoError;
+												}
+								}
+
+						}else{
+								log_message('info','Estatus Notificacion NO WS ');
+								return $codigoError = array('mensaje' => lang('ERROR_GENERICO_USER'));
+						}
+				}
+
+public function NotificacionesEnvio($urlCountry) {
+
+			np_hoplite_countryCheck($urlCountry);
+
+			$this->lang->load('erroreseol');
+			$this->lang->load('users');
+			$menuP = $this->session->userdata('menuArrayPorProducto');
+
+			$logged_in = $this->session->userdata('logged_in');
+			$paisS = $this->session->userdata('pais');
+
+			if ($paisS == $urlCountry && $logged_in) {
+
+						$notificaciones = $this->input->post("notificaciones");
+            log_message('info', ' notificaciones ====>> ' . json_encode($notificaciones));
+						$response = $this->callWSNotificacionesEnvio( $urlCountry, $notificaciones );
+						log_message('info', 'response ====>> ' . json_encode($response));
+  					$this->output->set_content_type('')->set_output(json_encode($response));
+
+			} elseif ($paisS != $urlCountry && $paisS != '') {
+					$this->session->sess_destroy();
+					$this->session->unset_userdata($this->session->all_userdata());
+					redirect($urlCountry . '/login');
+			} elseif ($this->input->is_ajax_request()) {
+					$this->output->set_content_type('application/json')->set_output(json_encode(array('ERROR' => '-29')));
+			} else {
+					redirect($urlCountry . '/login');
+			}
+	}
+	private function callWSNotificacionesEnvio( $urlCountry, $notificaciones ){
+
+			$this->lang->load('erroreseol');
+			$canal = "ceo";
+			$modulo="Notificaciones";
+			$function="Notificaciones Usuario";
+			$operation="actualizarNotificacionesCeo";
+
+			$className="com.novo.objects.MO.NotificacionMO";
+			$timeLog= date("m/d/Y H:i");
+			$ip= $this->input->ip_address();
+			$sessionId = $this->session->userdata('sessionId');
+			$username = $this->session->userdata('userName');
+			$logAcceso = np_hoplite_log($sessionId,$username,$canal,
+			$modulo,$function,$operation,0,$ip,$timeLog);
+			$token = $this->session->userdata('token');
+
+			$data = array(
+					"idOperation" => $operation,
+					"className" => $className,
+					"accodusuario" => $username,
+					"notificaciones"=>$notificaciones,
+					"logAccesoObject"=>$logAcceso,
+					"token"=>$token,
+					"pais"=>$urlCountry
+			);
+
+			$data = json_encode( $data, JSON_UNESCAPED_UNICODE);
+			log_message('info','Estatus Notificacion : '.$data);
+
+			$dataEncry = np_Hoplite_Encryption( $data);
+			$data = array( 'bean' => $dataEncry, 'pais' =>$urlCountry );
+			$data = json_encode($data);
+			$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+			$jsonResponse = np_Hoplite_Decrypt($response);
+			$response =  json_decode(utf8_encode($jsonResponse));
+			$data1 = json_encode($response);
+
+			if($response){
+					if($response->rc==0){
+							return $response;
+					}else{
+									if($response->rc==-61 || $response->rc==-29){
+
+											$codigoError = array('mensaje' => lang('ERROR_(-29)'), "rc"=> "-29");
+											$this->session->unset_userdata($this->session->all_userdata());
+											$this->session->sess_destroy();
+											return $codigoError;
+
+									}else{
+
+											$codigoError = lang('ERROR_('.$response->rc.')');
+
+											$codigoError = (strpos($codigoError, 'Error')!==false)?
+												array('mensaje' => lang('ERROR_GENERICO_USER'), "rc"=> $response->rc):
+													array('mensaje' => lang('ERROR_('.$response->rc.')'), "rc"=> $response->rc);
+
+											return $codigoError;
+									}
+					}
+
+			}else{
+					log_message('info','Estatus Notificacion NO WS ');
+					return $codigoError = array('mensaje' => lang('ERROR_GENERICO_USER'));
+			}
+	}
 } // FIN DE LA CLASE Users
