@@ -20,7 +20,9 @@ nav,
 section {
   display: block;
 }
-
+.corporateBlue {
+  color: #0072c0;
+}
 .selectorNotificacion{
   width: 500px;
   margin-left: 5px;
