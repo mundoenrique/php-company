@@ -84,7 +84,7 @@
 					var data = JSON.parse( data );
 						if( data.rc == 0 ){
 								$( ".ui-dialog-content" ).dialog( "destroy" );
-								notificacion( 'Notificacion', 'Almacenamiento Exitoso.' );
+								notificacion( 'Notificacion', 'El correo electrónico fue registrado exitosamente. Ahora recibirá notificaciones del producto y/o servicio seleccionado.' );
 						}
 						else{
 								notificacion( 'Notificacion',"No se pudo actualizar las notificaciones del Usuario.", );
