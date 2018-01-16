@@ -11,7 +11,7 @@
 		 		src="<?php echo $urlCdn."media/img/loading.gif"?>"/>
 	</div>
 	<h1><?php echo lang('NOTI_TITLE_CONFIG'); ?></h1>
-
+		<p>En esta sección Ud. puede agregar correos electrónicos para notificaciones de sus productos y servicios</p>
 		<select class="selectorNotificacion" id="listaEmpresas" name="batch"  onchange="selectorEmpresa()">
 			<?php
 				if(array_key_exists('ERROR', $listaEmpr[0])){
