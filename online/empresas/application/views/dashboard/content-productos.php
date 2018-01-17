@@ -89,10 +89,12 @@ function to_ascii($word){
 
         foreach ($productos as $producto) {
 
-            //$tarjeta = explode(" ",$producto->descripcion);
-            $nombreTarjeta = url_title(to_ascii(mb_strtolower($producto->descripcion)));
+						$nombreMarca  =  url_title(to_ascii(mb_strtolower($producto->marca)));
 
-            $nombreMarca  =  url_title(to_ascii(mb_strtolower($producto->marca)));
+						$nombreTarjeta = url_title(to_ascii(mb_strtolower($producto->descripcion)));
+						if ($nombreMarca === 'cheque') {
+							$nombreTarjeta = 'plata-guarderia';
+						}
 
             $tipoCategoria = url_title(to_ascii(mb_strtolower($producto->categoria)));
 
