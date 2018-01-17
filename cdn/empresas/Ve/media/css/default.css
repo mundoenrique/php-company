@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 /*
 Project @project.name@ (Codename @project.codename@)
 Version @project.version@
@@ -21,30 +21,7 @@ nav,
 section {
   display: block;
 }
-=======
-/*
-Project @project.name@ (Codename @project.codename@)
-Version @project.version@
-Build @project.build.number@ - @project.build.date@
-@project.release@ release
 
-Default skin.
-
-@project.copyright@
-*/
-article,
-aside,
-details,
-figcaption,
-figure,
-footer,
-header,
-hgroup,
-nav,
-section {
-  display: block;
-}
->>>>>>> 663ced9d208dba49c28c5878d6950a5f26edd07a
 .corporateBlue {
   color: #0072c0;
 }
