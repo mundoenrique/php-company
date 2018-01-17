@@ -3617,7 +3617,8 @@ padding:10px 5px 10px 5px;
 .info-producto-1 {
   color: #0072c0;
   font-size: 14px;
-  padding-top: 26px;
+	margin-bottom: 3px;
+  padding-top: 20px;
   font-weight: bold;
   width: 300px;
   float: left;
