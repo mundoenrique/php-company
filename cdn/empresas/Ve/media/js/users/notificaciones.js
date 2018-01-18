@@ -155,7 +155,12 @@
 								}
 						}
 						else{
+							if(data.rc == '-378'){
+									$('#mensaje').html('<br><strong>'+data.mensaje+'</strong>')
+														   .css({"text-align": "center", "font-size": "18px"});
+							}else{
 								notificacion( titulo, data.mensaje );
+								}
 						}
 				});
 		}

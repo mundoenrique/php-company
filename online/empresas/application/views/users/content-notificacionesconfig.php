@@ -28,6 +28,8 @@
 				}
 			?>
 		</select>
+
+		<div id="mensaje"></div>
 		<!-- <label  class="checkNotiAdj">Desea Aceptar Notificaciones?</label>
 		<input type="checkbox" id="checkNoti"name="checkNoti" value="" > -->
 
