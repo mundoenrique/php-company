@@ -252,6 +252,7 @@ $lang['ERROR_(-340)'] = 'Número de Cuenta Inválido. Longitud de número de Cue
 $lang['ERROR_(-341)'] = 'Nro de Cuenta Inválido. Código de Banco Inválido.';
 $lang['ERROR_(-342)'] = 'Número de Cuenta Inválido.';
 $lang['ERROR_(-373)'] = 'Número de RIF Inválido.';
+$lang['ERROR_(-378)'] = 'La empresa seleccionada no posee productos y/o servicios que realicen notificaciones';
 
 //recuperar contraseña
 $lang["TITULO_ERROR"] = 'No ha sido posible procesar su solicitud.';
