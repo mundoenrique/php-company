@@ -156,6 +156,7 @@
 						}
 						else{
 							if(data.rc == '-378'){
+								  $('#notificacionesRequest').html("");
 									$('#mensaje').html('<br><strong>'+data.mensaje+'</strong>')
 														   .css({"text-align": "center", "font-size": "18px"});
 							}else{
