@@ -158,8 +158,8 @@
 						else{
 							if(data.rc == '-378'){
 								  $('#notificacionesRequest').html("");
-									$('#mensaje').html('<br><strong>'+data.mensaje+'</strong>')
-														   .css({"text-align": "center", "font-size": "18px"});
+									$('#mensaje').html('<br>'+data.mensaje)
+														   .css({"text-align": "left", "font-size": "16px"});
 							}else{
 								notificacion( titulo, data.mensaje );
 								}
