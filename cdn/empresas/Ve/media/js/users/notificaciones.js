@@ -149,6 +149,7 @@
 						if( data.rc == 0 ){
 								if(data.notificaciones.length != 0){
 									$( ".ui-dialog-content" ).dialog( "destroy" );
+									$('#mensaje').html("");
 									HtmlRows( data );
 								}else{
 									notificacion( titulo, 'En estos momentos no podemos procesar su solicitud' );
