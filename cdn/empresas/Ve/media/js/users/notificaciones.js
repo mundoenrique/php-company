@@ -60,9 +60,9 @@
 													Notificaciones.notificaciones[ a ].notificacionAct = 1;
 													Notificaciones.notificaciones[ a ].contacto.email = correo;
 											}else{
-													var msj ='Por favor introdusca un correo en la entrada : <strong>'+
+													var msj ='Por favor introduzca un correo en la entrada : <strong>'+
 																			Notificaciones.notificaciones[ a ].descripcion+'</strong>';
-													notificacion('Notificacion', msj);
+													notificacion('Notificación', msj);
 												  ErrorCount += 1;
 											}
 									}else{
@@ -84,10 +84,10 @@
 					var data = JSON.parse( data );
 						if( data.rc == 0 ){
 								$( ".ui-dialog-content" ).dialog( "destroy" );
-								notificacion( 'Notificacion', 'El correo electrónico fue registrado exitosamente. Ahora recibirá notificaciones del producto y/o servicio seleccionado.' );
+								notificacion( 'Notificación', 'El correo electrónico fue registrado exitosamente. Ahora recibirá notificaciones del producto y/o servicio seleccionado.' );
 						}
 						else{
-								notificacion( 'Notificacion',"No se pudo actualizar las notificaciones del Usuario.", );
+								notificacion( 'Notificación',"No se pudo actualizar las notificaciones del Usuario.", );
 						}
 				});
 			}
@@ -104,7 +104,7 @@
 						return true;
 				}else{
 						var msj ='Por favor introdusca un formato valido de correo Electrónico';
-						notificacion('Notificacion', msj);
+						notificacion('Notificación', msj);
 						return false;
 				}
 
