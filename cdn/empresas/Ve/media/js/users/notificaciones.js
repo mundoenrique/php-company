@@ -39,8 +39,8 @@
 		function envioDatos(){
 
   		var ErrorCount = 0;
-
-			$.each($(":checkbox"),function(k,v){
+	var msj ='Por favor introduzca un correo en la entrada : \n';
+			$.each($(":checkbox "),function(k,v){
 
 					var id = $( this ).attr( 'id' );
 				  id = id.split( "checkNoti" );
@@ -50,6 +50,7 @@
 
 						Notificaciones.notificaciones[ a ].contacto.estatus = "A";
 						Notificaciones.notificaciones[ a ].contacto.acrif = getRif();
+
 							if( Notificaciones.notificaciones[ a ].codOperacion == id ){
 									if(Notificaciones.notificaciones[ a ].contacto.tipoContacto == ""){
 										Notificaciones.notificaciones[ a ].contacto.tipoContacto = "G";
@@ -60,9 +61,7 @@
 													Notificaciones.notificaciones[ a ].notificacionAct = 1;
 													Notificaciones.notificaciones[ a ].contacto.email = correo;
 											}else{
-													var msj ='Por favor introduzca un correo en la entrada : <strong>'+
-																			Notificaciones.notificaciones[ a ].descripcion+'</strong>';
-													notificacion('Notificación', msj);
+													msj += '<strong>'+Notificaciones.notificaciones[ a ].descripcion+'</strong><br>';
 												  ErrorCount += 1;
 											}
 									}else{
@@ -72,6 +71,9 @@
 					}
 
 			});
+			if( ErrorCount > 0 ){
+						notificacion('Notificación', msj);
+			}
 					console.log( Notificaciones);
 			if( ErrorCount == 0 ){
 
