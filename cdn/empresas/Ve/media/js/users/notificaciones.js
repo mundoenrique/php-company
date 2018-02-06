@@ -18,11 +18,13 @@
 			ConsultaNotificaciones( 'buscar', datosPost, titulo );
 
 		}
+
 		function getRif(){
 			var myselect = document.getElementById("listaEmpresas");
 			var selector = myselect.options[ myselect.selectedIndex ];
 			return selector.getAttribute( 'data-rif' );
 		}
+
 		showHideClass('.input-email', 'none');
 
 		function capturaCheck( e ){
@@ -31,15 +33,17 @@
 			var idSelect = str.split("checkNoti");
 
 			var element = document.getElementById('div'+idSelect[1]);
-
 			element.style.display = ( e.checked )?'block':'none';
-
+			if( !e.checked ){
+				document.getElementById( idSelect[1] ).value = "";
+			}
 		}
 
 		function envioDatos(){
 
   		var ErrorCount = 0;
-	var msj ='Por favor introduzca un correo en la entrada : \n';
+			var msj ='Por favor introduzca un correo en la entrada : \n';
+
 			$.each($(":checkbox "),function(k,v){
 
 					var id = $( this ).attr( 'id' );
@@ -66,6 +70,7 @@
 											}
 									}else{
 										Notificaciones.notificaciones[ a ].notificacionAct = 0;
+										Notificaciones.notificaciones[ a ].contacto.email = "";
 									}
 							}
 					}
@@ -74,7 +79,6 @@
 			if( ErrorCount > 0 ){
 						notificacion('Notificación', msj);
 			}
-					console.log( Notificaciones);
 			if( ErrorCount == 0 ){
 
 				var path = window.location.href.split( '/' );
