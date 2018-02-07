@@ -42,7 +42,10 @@
 		function envioDatos(){
 
   		var ErrorCount = 0;
+			var NotiCheckCount = 0;
+			var NotiUnCheckCount = 0;
 			var msj ='Por favor introduzca un correo en la entrada : \n';
+			var msjExito = '';
 
 			$.each($(":checkbox "),function(k,v){
 
@@ -64,6 +67,7 @@
 											if(correo != ""){
 													Notificaciones.notificaciones[ a ].notificacionAct = 1;
 													Notificaciones.notificaciones[ a ].contacto.email = correo;
+													NotiCheckCount += 1;
 											}else{
 													msj += '<strong>'+Notificaciones.notificaciones[ a ].descripcion+'</strong><br>';
 												  ErrorCount += 1;
@@ -71,11 +75,13 @@
 									}else{
 										Notificaciones.notificaciones[ a ].notificacionAct = 0;
 										Notificaciones.notificaciones[ a ].contacto.email = "";
+										NotiUnCheckCount +=1;
 									}
 							}
 					}
 
 			});
+
 			if( ErrorCount > 0 ){
 						notificacion('Notificación', msj);
 			}
@@ -90,7 +96,21 @@
 					var data = JSON.parse( data );
 						if( data.rc == 0 ){
 								$( ".ui-dialog-content" ).dialog( "destroy" );
-								notificacion( 'Notificación', 'El correo electrónico fue registrado exitosamente. Ahora recibirá notificaciones del producto y/o servicio seleccionado.' );
+								if( NotiCheckCount == 1 ){
+									msjExito = 'El correo electrónico fue registrado exitosamente. '+
+											' Ahora recibirá notificaciones del producto y/o servicio seleccionado.';
+								}
+								if( NotiCheckCount > 1){
+									msjExito = 'Los correos electrónicos fueron registrados exitosamente. '+
+									'Ahora recibirá notificaciones de los productos y/o servicios seleccionados.';
+								}
+								if(NotiCheckCount == 0 && NotiUnCheckCount == 1){
+									msjExito = 'Notificación Actualizada';
+								}
+								if(NotiCheckCount == 0 && NotiUnCheckCount > 1){
+									msjExito = 'Notificaciones Actualizadas';
+								}
+								notificacion( 'Notificación', msjExito );
 						}
 						else{
 								notificacion( 'Notificación',"No se pudo actualizar las notificaciones del Usuario.", );
