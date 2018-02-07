@@ -44,7 +44,7 @@
   		var ErrorCount = 0;
 			var NotiCheckCount = 0;
 			var NotiUnCheckCount = 0;
-			var msj ='Por favor introduzca un correo en la entrada : \n';
+			var msjPt1 ='', msjPt2 =' \n';
 			var msjExito = '';
 
 			$.each($(":checkbox "),function(k,v){
@@ -69,7 +69,7 @@
 													Notificaciones.notificaciones[ a ].contacto.email = correo;
 													NotiCheckCount += 1;
 											}else{
-													msj += '<strong>'+Notificaciones.notificaciones[ a ].descripcion+'</strong><br>';
+													msjPt2 += '<br><strong>'+Notificaciones.notificaciones[ a ].descripcion+'</strong><br>';
 												  ErrorCount += 1;
 											}
 									}else{
@@ -83,7 +83,12 @@
 			});
 
 			if( ErrorCount > 0 ){
-						notificacion('Notificación', msj);
+				if(ErrorCount==1){
+					msjPt1 = 'Por favor introduzca un correo en la notificación :';
+				}else if(ErrorCount > 1){
+					msjPt1 = 'Por favor introduzca un correo en las notificaciones :';
+				}
+				notificacion('Notificación', msjPt1+msjPt2);
 			}
 			if( ErrorCount == 0 ){
 
