@@ -134,7 +134,7 @@
 				if(re.test(value)){
 						return true;
 				}else{
-						var msj ='Por favor introdusca un formato valido de correo Electrónico';
+						var msj ='Por favor introduzca un formato válido de correo electrónico.';
 						notificacion('Notificación', msj);
 						return false;
 				}
