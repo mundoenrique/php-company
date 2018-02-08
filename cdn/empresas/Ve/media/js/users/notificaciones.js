@@ -208,7 +208,8 @@
 
 					var checkedTmp = (notificaciones[x].notificacionAct==1)?'checked':'';
 
-					var ContactoEmail = (notificaciones[x].contacto.email != " ")?notificaciones[x].contacto.email:"";
+					var ContactoEmail = ( notificaciones[x].contacto.hasOwnProperty('email') &&
+								notificaciones[x].contacto.email != " " )?notificaciones[x].contacto.email:"";
 
 					var style	= (notificaciones[x].notificacionAct==1)?
 								'display: block;':'display: none;';
