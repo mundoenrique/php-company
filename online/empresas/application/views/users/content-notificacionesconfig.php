@@ -11,7 +11,8 @@
 		 		src="<?php echo $urlCdn."media/img/loading.gif"?>"/>
 	</div>
 	<h1><?php echo lang('NOTI_TITLE_CONFIG'); ?></h1>
-
+		<p class="corporateBlue">
+			En esta sección Ud. puede agregar correos electrónicos para notificaciones de sus productos y servicios</p>
 		<select class="selectorNotificacion" id="listaEmpresas" name="batch"  onchange="selectorEmpresa()">
 			<?php
 				if(array_key_exists('ERROR', $listaEmpr[0])){
@@ -27,6 +28,8 @@
 				}
 			?>
 		</select>
+
+		<div id="mensaje"></div>
 		<!-- <label  class="checkNotiAdj">Desea Aceptar Notificaciones?</label>
 		<input type="checkbox" id="checkNoti"name="checkNoti" value="" > -->
 

@@ -70,7 +70,7 @@ $pais = $this->uri->segment(1);
         <div id="datos-1"><p id="user-name">Archivos para emisión de Lotes</p>
         </div>
         <div id="campos-descarga">
-            <a href="<?php echo get_cdn() ?>downloads/Plata_Guarderia_Electronica.xls">
+            <a href="<?php echo get_cdn() ?>downloads/Archivo_Lote_Guarderia.xls">
                 <span>
                     <p id="first">Archivo Plata Guardería / Transferencia (.xls 42kb)</p>
                 </span>

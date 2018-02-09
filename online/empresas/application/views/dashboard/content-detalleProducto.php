@@ -60,8 +60,12 @@ function to_ascii($word){
 	<?php
 	if(isset($producto) && $producto!=FALSE){
 
-		$nombreTarjeta = url_title(to_ascii(mb_strtolower($producto[0]->producto->descripcion)) );
 		$marcaProducto = mb_strtolower($producto[0]->producto->marca);
+
+		$nombreTarjeta = url_title(to_ascii(mb_strtolower($producto[0]->producto->descripcion)));
+		if ($marcaProducto === 'cheque') {
+			$nombreTarjeta = 'plata-guarderia';
+		}
 
 		//Tarjetas
 		if (isset($producto[0]->listadoTarjeta->numeroTarjetas)) {
@@ -130,16 +134,15 @@ function to_ascii($word){
 
 			<?php
 			$menuP =$this->session->userdata('menuArrayPorProducto');
-			if($nombreProducto === 'Plata Guardería' ||
-					$nombreProducto === 'Plata Guarderia' ){
-							$mproducto =  '';
-			}else{
-				$mproducto = ' - '.ucwords($marcaProducto);
+
+			$nombreMarca = ' - '.ucwords($marcaProducto);
+			if ($marcaProducto === 'cheque') {
+				$nombreMarca = '';
 			}
 
-		echo' <div id="text-product-detail">
+			echo' <div id="text-product-detail">
 					<h2>Producto</h2>
-					<p>'.$nombreProducto.$mproducto.'</p>';
+					<p>'.$nombreProducto.$nombreMarca.'</p>';
 
 			$moduloAct = np_hoplite_existeLink($menuP,"TEBCAR");
 			if($moduloAct!==false){
@@ -185,17 +188,6 @@ function to_ascii($word){
 
 			$moduloAct = np_hoplite_existeLink($menuP,"TRAMAE");
 			if (isset($tarjetas)) {
-				/*if ($moduloAct!==false) {
-					echo '<p> <a >';
-				}else{
-					echo '<p> <a title="'.lang('SIN_FUNCION').'">';
-				}
-				echo'<span aria-hidden="true" class="icon" data-icon="&#xe027;"></span>
-				Tarjetas:
-				<span class="num-product-detail">'.$tarjetas['total'].'</span>
-				'.$tarjetas['activas'].' Activas / '.$tarjetas['inactivas'].' Inactivas
-				</a>
-				</p>';*/
 				echo'<p> <a style="cursor:default"><span aria-hidden="true" class="icon" data-icon="&#xe027;"></span>
 				Tarjetas:
 				<span class="num-product-detail">'.$tarjetas['total'].'</span>

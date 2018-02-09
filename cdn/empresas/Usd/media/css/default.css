@@ -3617,7 +3617,8 @@ padding:10px 5px 10px 5px;
 .info-producto-1 {
   color: #0072c0;
   font-size: 14px;
-  padding-top: 26px;
+	margin-bottom: 3px;
+  padding-top: 20px;
   font-weight: bold;
   width: 300px;
   float: left;
@@ -3849,7 +3850,6 @@ padding:10px 5px 10px 5px;
 }
 
 #img-product {
-  background: url('../img/bg-products.png?1377005880') no-repeat;
   width: 700px;
   height: 154px;
   float: left;
