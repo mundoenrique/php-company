@@ -3,7 +3,7 @@ $data = json_decode($dataResponse);
 $balance = '';
 if($data->code === 0) {
 	$balance = $data->data;
-	
+
 }
 ?>
 
@@ -51,18 +51,32 @@ if($data->code === 0) {
     <div class="container-body">
 	    <div id='loading' style='text-align:center'><?php echo insert_image_cdn("loading.gif"); ?></div>
 	    <form id="data-payment" style="display: none;">
-		    <div class="filters">
-			    <label class="label-input" for="balance">Saldo disponible</label>
-			    <input id="balance" name="balance" class="nonValidate balance" value="<?php echo $balance; ?>" readonly>
-		    </div>
-		    <div class="filters">
-			    <label class="label-input" for="code">Código del proveedor</label>
-			    <input id="code" name="code" placeholder="Indique Código del proveedor">
-		    </div>
-		    <div class="filters">
-			    <label class="label-input" for="amount">Monto</label>
-			    <input id="amount" name="amount" placeholder="Indique el monto">
-		    </div>
+				<section class="line">
+					<div class="filters">
+						<label class="label-input" for="balance">Saldo disponible</label>
+						<input id="balance" name="balance" class="nonValidate balance" value="<?php echo $balance; ?>" readonly>
+					</div>
+					<div class="filters">
+						<label class="label-input" for="code">Código del proveedor</label>
+						<input id="code" name="code" placeholder="Indique código del proveedor">
+					</div>
+				</section>
+				<section class="line">
+					<div class="filters">
+						<label class="label-input" for="reference">Referencia</label>
+						<input id="reference" name="reference" placeholder="Indique la referencia">
+					</div>
+					<div class="filters">
+						<label class="label-input" for="desc">Descripción</label>
+						<input id="desc" name="desc" placeholder="Indique la descripción" maxlength="20">
+					</div>
+				</section>
+				<section class="line">
+					<div class="filters">
+						<label class="label-input" for="amount">Monto</label>
+						<input id="amount" name="amount" placeholder="Indique el monto">
+					</div>
+				</section>
 	    </form>
 	    <div id="validate-list"></div>
     </div>

@@ -22,7 +22,7 @@ class payments_model extends CI_Model
 	protected $msg;
 	protected $data;
 	protected $response = [];
-	
+
 	/**
 	 * Constructor de clase
 	 */
@@ -44,7 +44,7 @@ class payments_model extends CI_Model
 		$this->lang->load('visa');
 	}
 	//----------------------------------------------------------------------------------------------
-	
+
 	/**
 	 * @Method: callWsConsultaSaldo
 	 * @access public
@@ -61,10 +61,10 @@ class payments_model extends CI_Model
 		$operacion = 'SaldoCuentaM';
 		$idOperation = 'saldoCuentaMaestraTM';
 		$className = 'com.novo.objects.TOs.TarjetaTO';
-		
+
 		$logAcceso = np_hoplite_log($this->sessionId, $this->userName, $canal, $modulo,
 		                            $function, $operacion, $this->rc, $this->ip, $this->timeLog);
-		
+
 		$data = json_encode([
             'idOperation' => $idOperation,
             'className' => $className,
@@ -73,11 +73,11 @@ class payments_model extends CI_Model
             'token' => $this->token,
             'pais' => $urlCountry
         ]);
-		
+
 		log_message('INFO',
 		                '[' . $this->userName . '] REQUEST -- callWsConsultaSaldo --> '.
 		                $data);
-		
+
 		$dataEncrypt = np_Hoplite_Encryption($data);
 		$request = json_encode([
            'bean' => $dataEncrypt,
@@ -86,17 +86,17 @@ class payments_model extends CI_Model
 		$responseWs = np_Hoplite_GetWS('eolwebInterfaceWS', $request);
 		$responseJson = np_Hoplite_Decrypt($responseWs);
 		$responseWs = json_decode(utf8_encode($responseJson));
-		
+
 		log_message('INFO', '[' . $this->userName . '] RESPONSE -- ' .
                     'callWsConsultaSaldo --> ' . json_encode($responseWs));
-				
+
 		if($responseWs) {
 			switch ($responseWs->rc) {
 				case 0:
 					$this->code = 0;
 					$this->data = lang('MONEDA') . ' ' .
 					              trim($responseWs->maestroDeposito->saldoDisponible);
-					
+
 					break;
 				case -29:
 				case -61:
@@ -111,13 +111,13 @@ class payments_model extends CI_Model
 					$this->title = lang('SYSTEM_NAME');
 					$this->msg = lang('ERROR_GENERICO_USER');
 					break;
-				
+
 				case -233:
 					$this->code = 2;
 					$this->title = lang('BREADCRUMB_PAYMENTS');
 					$this->msg = lang('VISA_NON_BALANCE');
 					break;
-				
+
 				default:
 					$this->code = 2;
 					$this->title = lang('BREADCRUMB_PAYMENTS');
@@ -129,7 +129,7 @@ class payments_model extends CI_Model
 			$this->title = lang('SYSTEM_NAME');
 			$this->msg = lang('ERROR_GENERICO_USER');
 		}
-		
+
 		$this->response = [
 			'code' => $this->code,
 			'title' => $this->title,
@@ -139,12 +139,12 @@ class payments_model extends CI_Model
 		if($this->code === 3) {
 			$this->session->sess_destroy();
 		}
-		
+
 		return json_encode($this->response);
-		
+
 	}
 	//----------------------------------------------------------------------------------------------
-	
+
 	/**
 	 * @Method: callCeoApiPaymentSuppliers
 	 * @access public
@@ -156,50 +156,56 @@ class payments_model extends CI_Model
 	 */
 	public function callCeoApiPaymentSuppliers($urlCountry, $dataRequest)
 	{
+		log_message('INFO', '[' . $this->userName . '] '.
+		                    'Datos para request===============> ' . $dataRequest);
 		$dataPayment = json_decode($dataRequest);
-		
+
 		$amount = $dataPayment->amount;
 		$code = $dataPayment->code;
-		
+		$reference = $dataPayment->reference;
+		$desc = $dataPayment->desc;
+
 		$responseOath = GettokenOauth();
-		
+
 		$httpCode = $responseOath->httpCode;
 		$resAPI = json_decode($responseOath->resAPI);
-		
+
 		$token = $httpCode === 200 ? trim($resAPI->access_token) : '';
-		
+
 		log_message('INFO', '[' . $this->userName . '] '.
 		                    'RESPONSE OATH access_token===============> ' . $token);
-		
+
 		//cabecera del REQUEST al API
 		$header = [
 			'x-country: ' . $urlCountry,
 			'Authorization: Bearer ' . $token
 		];
-		
+
 		$body = [
 			'amount' => $amount,
-		    'id_ext_emp' => $this->rif,
-		    'prefix' => $this->idProductoS
+			'refence' => $reference,
+			'description' => $desc,
+		  'id_ext_emp' => $this->rif,
+		  'prefix' => $this->idProductoS
 		];
-		
+
 		$urlAPI = 'supplier/' . $code . '/payments?trxid=123';
 		$headerAPI = $header;
 		$bodyAPI = json_encode($body);
 		$method = 'POST';
-		
+
 		log_message('INFO', '[' . $this->userName . '] REQUEST PaymentSuppliers'.
 		                    json_encode($headerAPI) . " " . json_encode($bodyAPI));
-		
+
 		$responseCeoApi = GetCeoApi($urlAPI, $headerAPI, $bodyAPI, $method);
-		
+
 		$httpCode = $responseCeoApi->httpCode;
 		$resAPI = $responseCeoApi->resAPI;
-		
+
 		log_message('INFO', '[' . $this->userName . '] '.
 		                    'RESPONSE PaymentSuppliers====>> httpCode: ' . $httpCode .
 		                    " resAPI: " . $resAPI);
-		
+
 		$dataResponse = json_decode($resAPI);
 		$this->title = lang('BREADCRUMB_PAYMENTS');
 		switch($httpCode) {
@@ -207,11 +213,15 @@ class payments_model extends CI_Model
 				$this->code = 0;
 				$this->msg = 'El pago fue realizado exitosamente';
 				break;
+			case 404:
+				$this->code = 2;
+				$this->msg = 'En este momento no podemos atender tu solicitud, intanta más tarde';
+				break;
 			default:
 				$this->code = 2;
 				$this->msg = $dataResponse->msg;
 		}
-		
+
 		$this->response = [
 			'code' => $this->code,
 			'title' => $this->title,
@@ -221,8 +231,8 @@ class payments_model extends CI_Model
 		if($this->code === 3) {
 			$this->session->sess_destroy();
 		}
-		
+
 		return json_encode($this->response);
-		
+
 	}
 }
