@@ -183,7 +183,7 @@ class payments_model extends CI_Model
 
 		$body = [
 			'amount' => $amount,
-			'refence' => $reference,
+			'reference' => $reference,
 			'description' => $desc,
 		  'id_ext_emp' => $this->rif,
 		  'prefix' => $this->idProductoS
