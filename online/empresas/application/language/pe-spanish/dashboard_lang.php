@@ -1,4 +1,3 @@
-
 <?php
 $lang['SYSTEM_NAME']= "Empresas Online Perú";
 $lang['LAST_SESSION']="Última sesión";
@@ -44,7 +43,7 @@ $lang['COMBUS']= "Trayectos"; // perfil
 
 $lang['TEBCAR']= "Carga de Lotes"; // modulo
 $lang['TICARG']= "Solicitud"; // modulo
-$lang['TIINVN']= "Inventario"; // modulo
+$lang['TIINVN']= "Afiliación"; // modulo
 
 $lang['TEBCON']= "Confirmación de Lote";
 $lang['TEBELC']= "Eliminación de lote por confirmar";

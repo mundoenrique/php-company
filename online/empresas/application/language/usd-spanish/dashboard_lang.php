@@ -44,7 +44,7 @@ $lang['TEBCAR']= "Carga de Lotes"; // modulo
 $lang['COMBUS']= "Trayectos"; // perfil
 
 $lang['TICARG']= "Solicitud"; // modulo
-$lang['TIINVN']= "Inventario"; // modulo
+$lang['TIINVN']= "Afiliación"; // modulo
 
 $lang['TEBCON']= "Confirmación de Lote";
 $lang['TEBELC']= "Eliminación de lote por confirmar";
