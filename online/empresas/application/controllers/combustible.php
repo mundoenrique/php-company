@@ -20,20 +20,8 @@ class Combustible extends CI_Controller
     protected $pais;
     protected $menu;
     protected $moduloAct;
-    protected $addCss = [
-        'combustible/combustibleMaster.css'
-    ];
-    protected $addJs = [
-        "jquery-1.10.2.min.js",
-        "jquery-ui-1.10.3.custom.min.js",
-        "jquery-md5.js",
-        "jquery.balloon.min.js",
-        "jquery.iframe-transport.js",
-        "header.js",
-        "dashboard/widget-empresa.js",
-        'combustible/jquery.dataTables.js',
-        "combustible/routes.js"
-    ];
+    protected $addCss = [];
+    protected $addJs = [];
     protected $titlePage;
     protected $contentView;
     protected $loadHelpers = [];
@@ -43,7 +31,22 @@ class Combustible extends CI_Controller
     //Método constructor
     public function __construct()
     {
-        parent:: __construct();
+				parent:: __construct();
+				//Attribute initialization
+				$this->addCss = [
+					'combustible/combustibleMaster.css'
+				];
+				$this->addJs = [
+					"jquery-1.10.2.min.js",
+					"jquery-ui-1.10.3.custom.min.js",
+					"jquery-md5.js",
+					"jquery.balloon.min.js",
+					"jquery.iframe-transport.js",
+					"header.js",
+					"dashboard/widget-empresa.js",
+					'combustible/jquery.dataTables.js',
+					"combustible/routes.js"
+				];
         //Add languages
         $this->lang->load('dashboard');
         $this->lang->load('combustible');
@@ -54,17 +57,36 @@ class Combustible extends CI_Controller
         //Optener login, producto and pais
         $this->logged_in = $this->session->userdata('logged_in');
         $this->idProductoS = $this->session->userdata('idProductoS');
-        $this->pais = $this->session->userdata('pais');
+				$this->pais = $this->session->userdata('pais');
+				//obtener el pais de la url
+				$this->urlCountry = $this->uri->segment(1, 0);
         //Optener las opciones del menú
-        $this->menu = $this->session->userdata('menuArrayPorProducto');
+				$this->menu = $this->session->userdata('menuArrayPorProducto');
+				$this->userCheck();
     }
-    /*---Fin método constructor---------------------------------------------------------------------------------------*/
+		/*---Fin método constructor-------------------------------------------------------------------*/
+
+		/**
+		 * @Method: userCheck
+		 * @access private
+		 * @params: strting $urlCountry
+		 * @info: Método verificar los persmisos de acceso del usuario
+		 * @autor: Enrique Peñaloza
+		 * @date:  21/03/2017
+		*/
+		private function userCheck()
+		{
+			//Verificar país
+			np_hoplite_countryCheck($this->urlCountry);
+			if($this->pais != $this->urlCountry || !$this->logged_in || !$this->idProductoS) {
+				$this->withoutAccess();
+			}
+		}
+
 
     //Método que proporciona las opciones de trabajo para combustible
     public function home($urlCountry)
     {
-        //Optener País
-        $this->urlCountry = $urlCountry;
         //Agregar estilos
         array_push(
             $this->addCss,
@@ -82,11 +104,9 @@ class Combustible extends CI_Controller
     //Método para obtener el listado de conductores
     public function drivers($urlCountry)
     {
-        //Optener País
-        $this->urlCountry = $urlCountry;
         //Verificar las opciones del menú
-        $this->moduloAct = np_hoplite_existeLink($this->menu, "CMBCON");
-
+				$this->moduloAct = np_hoplite_existeLink($this->menu, "CMBCON");
+				$this->moduloAct == false ? $this->withoutAccess() : '';
         //Agregar estilos
         array_push(
             $this->addCss,
@@ -112,10 +132,9 @@ class Combustible extends CI_Controller
     //Método para registrar o editar conductor
     public function driversAddEdit($urlCountry)
     {
-        //Optener País
-        $this->urlCountry = $urlCountry;
         //Verificar las opciones del menú
-        $this->moduloAct = np_hoplite_existeLink($this->menu, "CMBCON");
+				$this->moduloAct = np_hoplite_existeLink($this->menu, "CMBCON");
+				$this->moduloAct == false ? $this->withoutAccess() : '';
         //Agregar javascript
         array_push(
             $this->addJs,
@@ -186,10 +205,10 @@ class Combustible extends CI_Controller
     // método para listar los grupos de vehículos
     public function vehicleGroups($urlCountry)
     {
-        //Optener País
-        $this->urlCountry = $urlCountry;
+
         //Verificar las opciones del menú
-        $this->moduloAct = np_hoplite_existeLink($this->menu, "CMBVHI");
+				$this->moduloAct = np_hoplite_existeLink($this->menu, "CMBVHI");
+				$this->moduloAct == false ? $this->withoutAccess() : '';
         //agregar hoja de estilos
         array_push(
             $this->addCss,
@@ -221,10 +240,9 @@ class Combustible extends CI_Controller
     /*---Métodos para vehículos-----------------------------------------------*/
     public function vehicles($urlCountry)
     {
-        //optener páis
-        $this->urlCountry = $urlCountry;
         //Verificar las opciones del menú
-        $this->moduloAct = np_hoplite_existeLink($this->menu, "CMBVHI");
+				$this->moduloAct = np_hoplite_existeLink($this->menu, "CMBVHI");
+				$this->moduloAct == false ? $this->withoutAccess() : '';
         //agregar hoja de estilos
         array_push(
             $this->addCss,
@@ -274,11 +292,9 @@ class Combustible extends CI_Controller
     // métodos para cuentas
     public function accounts($urlCountry)
     {
-        //Optener País
-        $this->urlCountry = $urlCountry;
         //Verificar las opciones del menú
-        $this->moduloAct = np_hoplite_existeLink($this->menu, "CMBCTA");
-
+				$this->moduloAct = np_hoplite_existeLink($this->menu, "CMBCTA");
+				$this->moduloAct == false ? $this->withoutAccess() : '';
         //Agregar estilos
         array_push(
             $this->addCss,
@@ -311,10 +327,9 @@ class Combustible extends CI_Controller
     // métodos para cuentas
     public function accountsDetails($urlCountry)
     {
-        //Optener País
-        $this->urlCountry = $urlCountry;
         //Verificar las opciones del menú
-        $this->moduloAct = np_hoplite_existeLink($this->menu, "CMBCTA");
+				$this->moduloAct = np_hoplite_existeLink($this->menu, "CMBCTA");
+				$this->moduloAct == false ? $this->withoutAccess() : '';
 
         //Agregar estilos
         array_push(
@@ -355,11 +370,9 @@ class Combustible extends CI_Controller
     /*---Métodos para viajes-----------------------------------------------*/
     public function travels($urlCountry)
     {
-        //Optener País
-        $this->urlCountry = $urlCountry;
         //Verificar las opciones del menú
-        $this->moduloAct = np_hoplite_existeLink($this->menu, "CMBVJE");
-
+				$this->moduloAct = np_hoplite_existeLink($this->menu, "CMBVJE");
+				$this->moduloAct == false ? $this->withoutAccess() : '';
         //Agregar estilos
         array_push(
             $this->addCss,
@@ -388,10 +401,9 @@ class Combustible extends CI_Controller
 
     public function travelAddEdit ($urlCountry)
     {
-        //Optener País
-        $this->urlCountry = $urlCountry;
         //Verificar las opciones del menú
-        $this->moduloAct = np_hoplite_existeLink($this->menu, "CMBVJE");
+				$this->moduloAct = np_hoplite_existeLink($this->menu, "CMBVJE");
+				$this->moduloAct == false ? $this->withoutAccess() : '';
         //Agregar estilos
         array_push(
             $this->addCss,
@@ -452,112 +464,102 @@ class Combustible extends CI_Controller
     //Método para visualización de la vista
     private function loadView()
     {
-        //Verificar país
-        np_hoplite_countryCheck($this->urlCountry);
-        //Verificar País, sesión, producto y módulo activo
-        if($this->pais == $this->urlCountry && $this->logged_in && $this->idProductoS && $this->moduloAct !== false) {
-            //Cargar helpers
-            if (count($this->loadHelpers > 0)) {
-                foreach ($this->loadHelpers as $item) {
-                    $item = trim($item);
-                    $this->load->helper($item);
-                }
-            }
-            //Optener el nombre del usuario
-            $user = $this->session->userdata('nombreCompleto');
-            //Nombre del producto
-            $programa = $this->session->userdata('nombreProductoS').' / '. $this->session->userdata('marcaProductoS');
-            //Menú del header
-            $menuHeader = $this->parser->parse('widgets/widget-menuHeader', array(), true);
-            //Agregar el header
-            $header = $this->parser->parse('layouts/layout-header', array(
-                'bodyclass' => '',
-                'menuHeaderActive' => TRUE,
-                'menuHeaderMainActive' => TRUE,
-                'menuHeader' => $menuHeader,
-                'FooterCustomJSActive' => FALSE,
-                'titlePage' => $this->titlePage,
-                'css' => $this->addCss
-            ), TRUE);
-            //Agregar contenido
-            $content = $this->parser->parse('combustible/' . 'content-' . $this->contentView, array(
-                'programa' => $programa,
-                'pais' => $this->urlCountry,
-                'user' => $user,
-                'dataResponse' => $this->dataResponse,
-                'action' => $this->action
-            ), TRUE);
-            //Agregar widget-empresa
-            $sidebarLotes= $this->parser->parse('dashboard/widget-empresa', array('sidebarActive' => TRUE), TRUE);
-            //Menú del footer
-            $menuFooter = $this->parser->parse('widgets/widget-menuFooter', array(), true);
-            //Agregar footer
-            $footer = $this->parser->parse('layouts/layout-footer', array(
-                'menuFooterActive' => TRUE,
-                'menuFooter' => $menuFooter,
-                'FooterCustomInsertJSActive' => TRUE,
-                'FooterCustomInsertJS' => $this->addJs,
-            ), TRUE);
-            //Agregar datos para la página
-            $datos = array(
-                'header' => $header,
-                'content' => $content,
-                'footer' => $footer,
-                'sidebar' => $sidebarLotes,
-                'pais' => $this->urlCountry
-            );
-            //Cargar pagina
-            $this->parser->parse('layouts/layout-b', $datos);
-
-        } else {
-            $this->whitAccess();
-        }
+			//Cargar helpers
+			if (count($this->loadHelpers > 0)) {
+					foreach ($this->loadHelpers as $item) {
+							$item = trim($item);
+							$this->load->helper($item);
+					}
+			}
+			//Optener el nombre del usuario
+			$user = $this->session->userdata('nombreCompleto');
+			//Nombre del producto
+			$programa = $this->session->userdata('nombreProductoS').' / '. $this->session->userdata('marcaProductoS');
+			//Menú del header
+			$menuHeader = $this->parser->parse('widgets/widget-menuHeader', array(), true);
+			//Agregar el header
+			$header = $this->parser->parse('layouts/layout-header', array(
+				'bodyclass' => '',
+				'menuHeaderActive' => TRUE,
+				'menuHeaderMainActive' => TRUE,
+				'menuHeader' => $menuHeader,
+				'FooterCustomJSActive' => FALSE,
+				'titlePage' => $this->titlePage,
+				'css' => $this->addCss
+			), TRUE);
+			//Agregar contenido
+			$content = $this->parser->parse('combustible/' . 'content-' . $this->contentView, array(
+					'programa' => $programa,
+					'pais' => $this->urlCountry,
+					'user' => $user,
+					'dataResponse' => $this->dataResponse,
+					'action' => $this->action
+			), TRUE);
+			//Agregar widget-empresa
+			$sidebarLotes= $this->parser->parse('dashboard/widget-empresa', array('sidebarActive' => TRUE), TRUE);
+			//Menú del footer
+			$menuFooter = $this->parser->parse('widgets/widget-menuFooter', array(), true);
+			//Agregar footer
+			$footer = $this->parser->parse('layouts/layout-footer', array(
+					'menuFooterActive' => TRUE,
+					'menuFooter' => $menuFooter,
+					'FooterCustomInsertJSActive' => TRUE,
+					'FooterCustomInsertJS' => $this->addJs,
+			), TRUE);
+			//Agregar datos para la página
+			$datos = array(
+					'header' => $header,
+					'content' => $content,
+					'footer' => $footer,
+					'sidebar' => $sidebarLotes,
+					'pais' => $this->urlCountry
+			);
+			//Cargar pagina
+			$this->parser->parse('layouts/layout-b', $datos);
     }
     /*---Fin método para visuazación de la vista----------------------------------------------------------------------*/
 
     //llamado del modelo
     public function callAPImodel($urlCountry)
     {
-        //Optener País
-        $this->urlCountry = $urlCountry;
-        //Verificar el país
-        np_hoplite_countryCheck($this->urlCountry);
-        //Optener el modelo
-        $model = $this->input->post('modelo');
-        //Optener el Método
-        $method = 'callAPI'.$this->input->post('model');
-        //Cargar el modelo
-        $this->load->model($model . '_Model', 'combustible');
-        //Optener datos para el request
-        $dataRequest = $this->input->post('data');
-        if($this->pais == $this->urlCountry && $this->logged_in && $this->idProductoS && $this->moduloAct !== false) {
-            //Obtener respuesta del API
-            $dataResponse = $this->combustible->$method($urlCountry, $dataRequest);
-            //Enviar respuesta
-            $this->output->set_content_type('application/json')->set_output(json_encode($dataResponse));
-        }
-        else {
-            $this->whitAccess();
-        }
+			//Optener el modelo
+			$model = $this->input->post('modelo');
+			//Optener el Método
+			$method = 'callAPI'.$this->input->post('model');
+			//Cargar el modelo
+			$this->load->model($model . '_Model', 'combustible');
+			//Optener datos para el request
+			$dataRequest = $this->input->post('data');
+			//Obtener respuesta del API
+			$dataResponse = $this->combustible->$method($urlCountry, $dataRequest);
+			//Enviar respuesta
+			$this->output->set_content_type('application/json')->set_output(json_encode($dataResponse));
     }
     /*---Fin método para llamado al modelo----------------------------------------------------------------------------*/
 
     //Método para intento de ingreso no autorizado
-    private function whitAccess()
+    private function withoutAccess()
     {
-        if ($this->logged_in) {
-            echo "
-			<script>
-                alert('" .lang('SIN_FUNCION') . "');
-                location.href = '" . $this->config->item('base_url') . "$this->urlCountry/dashboard/';
-            </script>
-			";
-        } else {
-            $this->session->sess_destroy();
-            $this->session->unset_userdata($this->session->all_userdata());
-            redirect($this->urlCountry . '/login');
-        }
+			if ($this->logged_in && !$this->idProductoS) {
+				echo "
+				<script>
+					alert('Seleccione un producto');
+					location.href = '" . $this->config->item('base_url') . "$this->urlCountry/dashboard/';
+				</script>
+				";
+			} elseif ($this->logged_in && $this->idProductoS && $this->moduloAct == FALSE) {
+				echo "
+				<script>
+					alert('" .lang('SIN_FUNCION') . "');
+					location.href = '" . $this->config->item('base_url') . "$this->urlCountry/dashboard/';
+				</script>
+				";
+			}   else {
+				$this->session->sess_destroy();
+				$this->session->unset_userdata($this->session->all_userdata());
+				redirect($this->urlCountry . '/login');
+			}
     }
-    /*---Fin método intento de ingreso no autorizado------------------------------------------------------------------*/
+    /*---Fin método intento de ingreso no autorizado----------------------------------------------*/
 
 }
