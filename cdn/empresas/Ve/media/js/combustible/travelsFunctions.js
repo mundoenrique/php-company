@@ -1,7 +1,7 @@
 function lisTravels(typeList)
 {
     dataRequest = JSON.stringify(typeList);
-    $.post(baseURL + '/' + isoPais + '/trayectos/modelo', {model: 'travels', modelo: 'travels', data: dataRequest})
+    $.post(baseURL + '/' + isoPais + '/trayectos/modelo', {way: 'travels', modelo: 'travels', data: dataRequest})
     .done( function(response) {
         lang = response.lang;
         switch (response.code) {
@@ -127,7 +127,7 @@ function prepareList(dataRequest)
                 $('#plate')
                     .hide()
                     .prop('disabled', true);
-                $.post(baseURL + '/' + isoPais + '/trayectos/modelo', {model: 'getList', modelo: 'travels', data: dataRequest})
+                $.post(baseURL + '/' + isoPais + '/trayectos/modelo', {way: 'getList', modelo: 'travels', data: dataRequest})
                     .done(function(response){
                         switch (response.code) {
                             case 0:

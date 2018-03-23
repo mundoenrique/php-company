@@ -68,7 +68,7 @@ $(function() {
 
 var jsonData = [];
 function getDataAccount(type) {
-    $.post(baseURL + '/' + isoPais + '/trayectos/modelo', {model: 'accounts', modelo: 'account',data:type})
+    $.post(baseURL + '/' + isoPais + '/trayectos/modelo', {way: 'accounts', modelo: 'account',data:type})
         .done(function(data) {
             if(data.code == undefined && JSON.parse(data).lista != undefined && JSON.parse(data).lista != []){
                 dataAccount = JSON.parse(data);
@@ -211,7 +211,7 @@ function ChangeDataAccount(type) {
     table.dataTable().fnDestroy();
     table.empty();
 
-    $.post(baseURL + '/' + isoPais + '/trayectos/modelo', {model: 'accounts', modelo: 'account',data:type})
+    $.post(baseURL + '/' + isoPais + '/trayectos/modelo', {way: 'accounts', modelo: 'account',data:type})
         .done(function(data) {
             // console.log(data);
             if(data.code == undefined && JSON.parse(data).lista != undefined && JSON.parse(data).lista != []){

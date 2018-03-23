@@ -1,6 +1,6 @@
 var language;
 $(function() {
-    $.post(baseURL + '/' + isoPais + '/trayectos/modelo', {'model': 'drivers', 'modelo': 'driver'})
+    $.post(baseURL + '/' + isoPais + '/trayectos/modelo', {'way': 'drivers', 'modelo': 'driver'})
         .done( function(data) {
             language = data.language;
             switch (data.code) {
@@ -104,8 +104,8 @@ $('#send-info').on('click', function(){
         validaOnlyNum = onlynum.test(dniAction[0].user),
         validaTamano = tamano.test(dniAction[0].user),
         validaZeroInit = zeroInit.test(dniAction[0].user),
-        dniValido = false;        
-    
+        dniValido = false;
+
         if(!validaOnlyNum) {
             $('#msg').text('DNI: sólo números');
         } else if(validaZeroInit) {
@@ -121,7 +121,7 @@ $('#send-info').on('click', function(){
         $.ajax({
             url: baseURL + '/' + isoPais + '/trayectos/modelo',
             type: 'POST',
-            data: {model: 'checkUSER', data: dniAction, modelo: 'driver'},
+            data: {way: 'checkUSER', data: dniAction, modelo: 'driver'},
             datatype:'json',
             beforeSend: function(data){
                 $('#send-info, #close-info').text('');

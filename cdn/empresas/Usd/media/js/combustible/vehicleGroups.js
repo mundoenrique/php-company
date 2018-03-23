@@ -1,7 +1,7 @@
 var lang,
     action;
 $(function() {
-    $.post(baseURL + '/' + isoPais + '/trayectos/modelo', {model: 'vehicleGroups', modelo: 'vehicleGroups'})
+    $.post(baseURL + '/' + isoPais + '/trayectos/modelo', {way: 'vehicleGroups', modelo: 'vehicleGroups'})
         .done( function(data) {
             lang = data.lang;
             switch (data.code) {
@@ -103,7 +103,7 @@ $(function() {
 
             var formAddEdit = $('#formAddEdit').serialize();
 
-            $.post(baseURL + "/"+isoPais + '/trayectos/modelo',{model: 'addEditGroups', data: formAddEdit, modelo: 'vehicleGroups'})
+            $.post(baseURL + "/"+isoPais + '/trayectos/modelo',{way: 'addEditGroups', data: formAddEdit, modelo: 'vehicleGroups'})
                 .done(function (response) {
                     $('#msg-info').empty();
                     switch (response.code) {

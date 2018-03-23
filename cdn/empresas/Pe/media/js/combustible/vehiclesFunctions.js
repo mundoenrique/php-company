@@ -1,6 +1,6 @@
 //llamado a la lista de vehiculos o al detalle de un vehículo
 function listVehicle (data) {
-    $.post(baseURL + '/' + isoPais + '/trayectos/modelo', {model: 'vehicles', modelo: 'vehicles', data: data})
+    $.post(baseURL + '/' + isoPais + '/trayectos/modelo', {way: 'vehicles', modelo: 'vehicles', data: data})
             .done(function(response) {
             lang = response.lang;
             $('#msg-info').empty();
@@ -149,7 +149,7 @@ function changeStatus (status) {
         'status': status
     }];
 
-    $.post(baseURL + '/' + isoPais + '/trayectos/modelo', {model: 'changeStatus', modelo: 'vehicles', data: data})
+    $.post(baseURL + '/' + isoPais + '/trayectos/modelo', {way: 'changeStatus', modelo: 'vehicles', data: data})
         .done(function(response){
             var langs = response.lang;
             $('#msg-info').empty();
@@ -183,7 +183,7 @@ function changeStatus (status) {
 
 //Ediatar o registrar un vehículo
 function addEditVehicle (formAddEdit) {
-    $.post(baseURL + '/' + isoPais + '/trayectos/modelo', {model: 'addEditVehicles', modelo: 'vehicles', data: formAddEdit})
+    $.post(baseURL + '/' + isoPais + '/trayectos/modelo', {way: 'addEditVehicles', modelo: 'vehicles', data: formAddEdit})
         .done(function(response){
             $('#msg-info').empty();
             var langReg = response.lang;

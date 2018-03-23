@@ -525,7 +525,7 @@ class Combustible extends CI_Controller
 			//Optener el modelo
 			$model = $this->input->post('modelo');
 			//Optener el Método
-			$method = 'callAPI'.$this->input->post('model');
+			$method = 'callAPI'.$this->input->post('way');
 			//Cargar el modelo
 			$this->load->model($model . '_Model', 'combustible');
 			//Optener datos para el request
