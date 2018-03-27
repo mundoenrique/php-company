@@ -7,8 +7,8 @@ function lisTravels(typeList)
         switch (response.code) {
             case 1:
             case 0:
-                var travelsList = response.msg;
-                displayTable(travelsList);
+								var travelsList = response.msg;
+                displayTable(travelsList, typeList);
                 break;
             case 2:
                 $('#msg-info').append('<p class="agrups">'+ response.msg +'</p>');
@@ -34,15 +34,28 @@ function lisTravels(typeList)
 }
 
 // despliegue del listado de viajes
-function displayTable(travelsList)
+function displayTable(travelsList, typeList)
 {
     $('#novo-table').DataTable({
+			"drawCallback": function(data) {
+				if(travelsList.length > 0) {
+					typeList.type === 'statusId' || typeList.type === 'date' ? $('#novo-table_wrapper > div.dt-buttons > a.down-report').css('display', 'inline') : '';
+				}
+			},
         select: false,
         dom: 'Bfrtip',
         "lengthChange": false,
         "pagingType": "full_numbers",
         "pageLength": 5, //Cantidad de registros por pagina
-        "language": {"url": baseCDN + '/media/js/combustible/Spanish.json'}, //Lenguaje: español //cdn.datatables.net/plug-ins/1.10.12/i18n/Spanish.json
+				"language": {"url": baseCDN + '/media/js/combustible/Spanish.json'}, //Lenguaje: español //cdn.datatables.net/plug-ins/1.10.12/i18n/Spanish.json
+				//icono pdf   &#xe02e
+				buttons: [
+          {
+						text: '<span id="down-excel" aria-hidden="true" class="icon" data-icon="&#xe05a" type="' + typeList.type + '" beginDate="' + typeList.beginDate + '" finalDate="' + typeList.finalDate + '" status="' + typeList.option + '"></span>',
+						className: 'down-report',
+						titleAttr: lang.TAG_DWN_EXCEL
+          }
+        ],
         data: travelsList, //Arreglo con los  valores del objeto
         columns: [
             {
@@ -78,7 +91,7 @@ function displayTable(travelsList)
                 }
             }
         ]
-    });
+		});
 }
 
 function prepareList(dataRequest)

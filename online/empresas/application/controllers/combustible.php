@@ -37,15 +37,16 @@ class Combustible extends CI_Controller
 					'combustible/combustibleMaster.css'
 				];
 				$this->addJs = [
-					"jquery-1.10.2.min.js",
-					"jquery-ui-1.10.3.custom.min.js",
-					"jquery-md5.js",
-					"jquery.balloon.min.js",
-					"jquery.iframe-transport.js",
-					"header.js",
-					"dashboard/widget-empresa.js",
+					'jquery-1.10.2.min.js',
+					'jquery-ui-1.10.3.custom.min.js',
+					'jquery-md5.js',
+					'jquery.balloon.min.js',
+					'jquery.iframe-transport.js',
+					'header.js',
+					'dashboard/widget-empresa.js',
 					'combustible/jquery.dataTables.js',
-					"combustible/routes.js"
+					'combustible/dataTables.buttons.min.js',
+					'combustible/routes.js'
 				];
         //Add languages
         $this->lang->load('dashboard');
@@ -155,8 +156,6 @@ class Combustible extends CI_Controller
             'action' => lang('TAG_SEND'),
             'function' => $action
         ];
-        //Verificar el país
-        np_hoplite_countryCheck($this->urlCountry);
         //Evalua el username del conductor
         switch ($action) {
             case 'update':
@@ -266,8 +265,6 @@ class Combustible extends CI_Controller
         //Obtiene el nombre del grupo de vehículos
         $groupName = $this->input->post('data-name');
         if ($groupID > 0) {
-            //Verificar el país
-            np_hoplite_countryCheck($this->urlCountry);
             //Cargar modelo
             $this->load->model('vehicles_model', 'vehicles');
             //Obtener respuesta del API
@@ -349,7 +346,6 @@ class Combustible extends CI_Controller
         $dataCard = $this->input->post('data-id');
 
         if($dataCard != ''){
-            np_hoplite_countryCheck($this->urlCountry);
             //Cargar el modelo
             $this->load->model('account_model', 'account');
             //Obtener respuesta del API

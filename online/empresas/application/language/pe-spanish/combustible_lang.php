@@ -197,10 +197,16 @@ $lang['TAG_CLEAR_FORM'] = "Limpiar formulario";
 $lang['TAG_FOLLOW'] = "Siguiente";
 $lang['TAG_END'] = "Finalizar";
 $lang['TAG_RETURN'] = "Regresar";
-
+$lang['TAG_DWN_EXCEL'] = "Descargar reporte EXCEL";
+$lang['TAG_DWN_PDF'] = "Descargar reporte PDF";
+$lang['TAG_REPORTE_DRIVERS'] = "Reporte de Conductores";
+$lang['TAG_REPORTE_	ACCOUNTS'] = "Reporte de Cuentas";
+$lang['TAG_REPORTE_VEHICLES'] = "Reporte de Vehículos";
+$lang['TAG_REPORTE_TRAVELS'] = "Reporte de Viajes";
 
 //errores
 $lang['ERROR_SYSTEM'] = "El sistema no responde";
 $lang['ERROR_SYSTEM_MSG'] = "La aplicación se cerrará";
 $lang['ERROR_NON_FOUND'] = "El registro no existe";
 $lang['ERROR_NON_ACCESS'] = "Debe indicar un usuario válido para ejecutar esta acción";
+$lang['ERROR_REPORT'] = "No fue posible obtener el reporte, por favor intenta más tarde";
