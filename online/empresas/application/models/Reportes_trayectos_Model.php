@@ -53,6 +53,13 @@ class reportes_trayectos_Model extends CI_Model {
 	 */
 	public function callAPIVehiculosExcel($urlCountry, $dataRquest)
 	{
+		log_message('INFO', '['.$this->username.'] DATAREQUEST descarga EXCEL Vehiculos --->>> '.$datarequest);
+		//cabecera del REQUEST al API
+		$header = [
+			'x-country: ' . $this->pais,
+			'x-token: ' . $this->token,
+			'x-company: ' . $this->company
+		];
 	}
 	/**
 	 * @Method:
