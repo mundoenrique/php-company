@@ -48,7 +48,6 @@ function displayTable(travelsList, typeList)
         "pagingType": "full_numbers",
         "pageLength": 5, //Cantidad de registros por pagina
 				"language": {"url": baseCDN + '/media/js/combustible/Spanish.json'}, //Lenguaje: español //cdn.datatables.net/plug-ins/1.10.12/i18n/Spanish.json
-				//icono pdf   &#xe02e
 				buttons: [
           {
 						text: '<span id="down-excel" aria-hidden="true" class="icon" data-icon="&#xe05a" type="' + typeList.type + '" beginDate="' + typeList.beginDate + '" finalDate="' + typeList.finalDate + '" status="' + typeList.option + '"></span>',

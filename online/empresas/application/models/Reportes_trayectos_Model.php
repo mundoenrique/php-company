@@ -39,7 +39,7 @@ class reportes_trayectos_Model extends CI_Model {
 	 * @autor:
 	 * @date:
 	 */
-	public function callAPIConductoresExcel($urlCountry, $dataRquest)
+	public function callAPIConductoresExcel($urlCountry, $dataRequest)
 	{
 		log_message('INFO', '[' . $this->userName . '] DATAREQUEST DESCARGA EXCEL CONDUCTORES===============>>>>>>>>'. $dataRequest);
 	}
@@ -52,7 +52,7 @@ class reportes_trayectos_Model extends CI_Model {
 	 * @autor: Edinson Cabello
 	 * @date: 27/03/2018
 	 */
-	public function callAPIVehiculosExcel($urlCountry, $dataRquest)
+	public function callAPIVehiculosExcel($urlCountry, $dataRequest)
 	{
 		log_message('INFO', '['.$this->username.'] DATAREQUEST descarga EXCEL Vehiculos --->>> '.$datarequest);
 		//cabecera del REQUEST al API
@@ -71,7 +71,7 @@ class reportes_trayectos_Model extends CI_Model {
 	 * @autor:
 	 * @date:
 	 */
-	public function callAPICuentasExcel($urlCountry, $dataRquest)
+	public function callAPICuentasExcel($urlCountry, $dataRequest)
 	{
 	}
 	/**
@@ -167,14 +167,21 @@ class reportes_trayectos_Model extends CI_Model {
 	 * @Method: callAPIViajesPdf
 	 * @access public
 	 * @params: string $urlCountry
-	 * @params: array $dataRquest = ['type', 'status', 'beginDate', 'finalDate']
+	 * @params: array $dataRquest = ['travelId']
 	 * @info: Método para obtener el reporte del detalle de una viaje
 	 * @autor: J. Enrique Peñaloza
-	 * @date: 26/03/2018
+	 * @date: 28/03/2018
 	 */
-	public function callAPIViajesPdf($urlCountry, $dataRquest)
+	public function callAPIViajesPdf($urlCountry, $dataRequest)
 	{
-		log_message('INFO', '[' . $this->userName . '] DATAREQUEST DESCARGA PDF VIAES===============>>>>>>>>'. $dataRequest);
+		log_message('INFO', '[' . $this->userName . '] DATAREQUEST DESCARGA PDF VIAES>>'. $dataRequest);
+
+		if($dataRequest === 'file') {
+			$filename = 'detalleViaje' . date('Ymd-B');date('Ymd-B');
+			$file = $this->session->flashdata('file');
+			np_hoplite_byteArrayToFile($file, 'pdf', $filename, FALSE);
+			exit();
+		}
 		//cabecera del REQUEST al API
 		$header = [
 			'x-country: ' . $this->pais,
@@ -183,9 +190,48 @@ class reportes_trayectos_Model extends CI_Model {
 			'x-product: ' .$this->idProducto
 		];
 
+		$travelDetail = json_decode($dataRequest);
+		$travelId = $travelDetail->travelId;
 		//url API
-		$urlAPI = '';
-		log_message('INFO', 'REQUEST ViajesReport======>>>>>' . $dataRquest);
-		return 'Recibido';
+		$urlAPI = $urlAPI = 'travel/' . $travelId . '/report/pdf';
+
+		$headerAPI = $header;
+		$bodyAPI = '';
+		$method = 'GET';
+
+		log_message('INFO', '[' . $this->userName . '] REQUEST ViajesReport======>>>>>' . $urlAPI . '--' . $this->token);
+
+		$jsonResponse = GetAPIServ($urlAPI, $headerAPI, $bodyAPI, $method);
+
+		$httpCode = $jsonResponse->httpCode;
+		$resAPILog = $httpCode != 200 ? $jsonResponse->resAPI : '';
+		$resAPI = $jsonResponse->resAPI;
+
+		log_message('INFO',  '[' . $this->userName . '] RESPONSE ViajesReport: ==>> httpCode: ' . $httpCode . ' $resAPI: ' . $resAPILog);
+
+		//$httpCode = 400;
+		if($httpCode === 200) {
+			$this->session->set_flashdata('file', $resAPI);
+		}
+
+		$code = '';
+		$title = '';
+		$msg = '';
+
+		switch($httpCode) {
+			case 200:
+				$code = 0;
+				break;
+			default:
+				$code = 1;
+				$title = lang('TAG_REPORTE_TRAVELS');
+				$msg = lang('ERROR_REPORT');
+		}
+
+		return $response = [
+			'code' => $code,
+			'title' => $title,
+			'msg' => $msg
+		];
 	}
 }

@@ -98,13 +98,7 @@ function routeTravel (listDriver, listVehi)
 
 function putTravel(travelDetail)
 {
-    console.log(travelDetail);
     var status;
-    // $('#start-date').val(travelDetail.beginDate);
-    // $('#final-date').val(travelDetail.finalDate);
-    // $('#driverD').val(travelDetail.driver);
-    // $('#vehicleD').val(travelDetail.vehicle);
-    // $('#origin').val(travelDetail.origin);
     $('#coordStart').val(travelDetail.orgL);
     // $('#destination').val(travelDetail.destination);
     $('#coordEnd').val(travelDetail.desL);
