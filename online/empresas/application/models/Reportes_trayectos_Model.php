@@ -166,6 +166,7 @@ class reportes_trayectos_Model extends CI_Model {
 	 */
 	public function callAPIViajesPdf($urlCountry, $dataRquest)
 	{
+		log_message('INFO', '[' . $this->userName . '] DATAREQUEST DESCARGA PDF VIAES===============>>>>>>>>'. $dataRequest);
 		//cabecera del REQUEST al API
 		$header = [
 			'x-country: ' . $this->pais,
