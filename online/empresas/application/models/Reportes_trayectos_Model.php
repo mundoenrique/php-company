@@ -100,6 +100,7 @@ class reportes_trayectos_Model extends CI_Model {
 		//url API
 		$urlAPI = 'travel/report/excel?from=' . $beginDate . '&to=' . $finalDAte;
 		if($type === 'statusId') {
+
 			$status = $dataReport->status;
 			$statusId = [
 				'PRECREATED' => 0,
@@ -110,13 +111,16 @@ class reportes_trayectos_Model extends CI_Model {
 			];
 
 			$urlAPI.= '&status=' . $statusId[$status];
+		} elseif($type === 'count') {
+
+			$urlAPI = '?quantity=30';
 		}
 
 		$headerAPI = $header;
 		$bodyAPI = '';
 		$method = 'GET';
 
-		log_message('INFO', '[' . $this->userName . '] REQUEST ViajesReport======>>>>>' . $urlAPI. '-----' . $this->userName);
+		log_message('INFO', '[' . $this->userName . '] REQUEST ViajesReport======>>>>>' . $urlAPI);
 
 		$jsonResponse = GetAPIServ($urlAPI, $headerAPI, $bodyAPI, $method);
 

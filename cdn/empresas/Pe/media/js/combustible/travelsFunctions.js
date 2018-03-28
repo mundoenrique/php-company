@@ -39,7 +39,7 @@ function displayTable(travelsList, typeList)
     $('#novo-table').DataTable({
 			"drawCallback": function(data) {
 				if(travelsList.length > 0) {
-					typeList.type !== 'statusId' && typeList.type !== 'date' ? $('#novo-table_wrapper > div.dt-buttons > a.down-report').css('display', 'none') : '';
+					typeList.type === 'drivers' || typeList.type === 'vehicles' ? $('#novo-table_wrapper > div.dt-buttons > a.down-report').css('display', 'none') : '';
 				}
 			},
         select: false,
