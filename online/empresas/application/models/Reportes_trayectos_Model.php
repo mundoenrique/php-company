@@ -7,7 +7,7 @@
  * Date: 22/03/2017
  * Time: 12:50 pm
  */
-class reportes_trayectos_Model extends CI_Model {
+class reportes_trayectos_model extends CI_Model {
 	//Atributos de clase
 	protected $pais;
 	protected $token;
@@ -63,24 +63,83 @@ class reportes_trayectos_Model extends CI_Model {
 		];
 	}
 	/**
-	 * @Method:
+	 * @Method: callAPICuentasExcel
 	 * @access public
-	 * @params: string $urlCountry
-	 * @params: array $dataRquest = []
-	 * @info:
-	 * @autor:
-	 * @date:
+	 * @param string $urlCountry
+	 * @param array $dataRquest = ['status']
+	 * @info Método para obtener el reporte de las cuentas de una empresa
+	 * @author J. Enrique Peñaloza P.
+	 * @date 02/04/2018
 	 */
 	public function callAPICuentasExcel($urlCountry, $dataRequest)
 	{
+		log_message('INFO', '[' . $this->userName .'] DATAREQUEST Descarga EXCEL cuentas ==>>' . $dataRequest);
+
+		if($dataRequest === 'file') {
+			$filename = 'cuentas' . date('Ymd-B');
+			$file = $this->session->flashdata('file');
+			np_hoplite_byteArrayToFile($file, 'xls', $filename, FALSE);
+			exit();
+		}
+
+		//cabecera del REQUEST al API
+		$header = [
+			'x-country: ' . $this->pais,
+			'x-token: ' . $this->token,
+			'x-company: ' . $this->company
+		];
+
+		$dataReport = json_decode($dataRequest);
+		$status = $dataReport->status;
+		//url API
+		$urlAPI = 'account/report/excel?status=' . $status;
+
+		$headerAPI = $header;
+		$bodyAPI = '';
+		$method = 'GET';
+
+		log_message('INFO', '[' . $this->userName . '] REQUEST CuentasReport======>>>>>' . $urlAPI);
+
+		$jsonResponse = GetAPIServ($urlAPI, $headerAPI, $bodyAPI, $method);
+
+		$httpCode = $jsonResponse->httpCode;
+		$resAPILog = $httpCode != 200 ? $jsonResponse->resAPI : '';
+		$resAPI = $jsonResponse->resAPI;
+
+		log_message('INFO',  '[' . $this->userName . '] RESPONSE CuentasReport: ==>> httpCode: ' . $httpCode . ' $resAPI: ' . $resAPILog);
+
+		//$httpCode = 400;
+		if($httpCode === 200) {
+			$this->session->set_flashdata('file', $resAPI);
+		}
+
+		$code = '';
+		$title = '';
+		$msg = '';
+
+		switch($httpCode) {
+			case 200:
+				$code = 0;
+				break;
+			default:
+				$code = 1;
+				$title = lang('TAG_REPORTE_	ACCOUNTS');
+				$msg = lang('ERROR_REPORT');
+		}
+
+		return $response = [
+			'code' => $code,
+			'title' => $title,
+			'msg' => $msg
+		];
 	}
 	/**
 	 * @Method: callAPIViajesReport
 	 * @access public
-	 * @params: string $urlCountry
-	 * @params: array $dataRquest = ['type', 'status', 'beginDate', 'finalDate']
-	 * @info: Método para obtener el reporte de los viajes de una empresa
-	 * @autor: J. Enrique Peñaloza
+	 * @param string $urlCountry
+	 * @param array $dataRquest = ['type', 'status', 'beginDate', 'finalDate']
+	 * @info Método para obtener el reporte de los viajes de una empresa
+	 * @author J. Enrique Peñaloza P.
 	 * @date: 26/03/2018
 	 */
 	public function callAPIViajesExcel($urlCountry, $dataRequest)
@@ -88,7 +147,7 @@ class reportes_trayectos_Model extends CI_Model {
 		log_message('INFO', '[' . $this->userName . '] DATAREQUEST DESCARGA EXCEL VIAES===============>>>>>>>>'. $dataRequest);
 
 		if($dataRequest === 'file') {
-			$filename = 'viajes' . date('Ymd-B');date('Ymd-B');
+			$filename = 'viajes' . date('Ymd-B');
 			$file = $this->session->flashdata('file');
 			np_hoplite_byteArrayToFile($file, 'xls', $filename, FALSE);
 			exit();

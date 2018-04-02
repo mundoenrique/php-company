@@ -61,3 +61,5 @@
 <!--      <button id="close-info" class="buttons-action2">--><?php //echo lang('TAG_CANCEL') ?><!--</button>-->
     </div>
 </div>
+
+<form id='formulario' method='post'></form>
