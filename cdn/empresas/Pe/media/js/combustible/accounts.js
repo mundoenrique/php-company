@@ -73,9 +73,6 @@ function getDataAccount(type) {
             if(data.code == undefined && JSON.parse(data).lista != undefined && JSON.parse(data).lista != []){
                 dataAccount = JSON.parse(data);
               jsonData = dataAccount.lista;
-              // jsonData = [];
-              //   $('#filter-title').show();
-              //   $('#filter').show();
                 createTable(jsonData);
             }else{
                 catchErrorCode(data.code,data.msg,data.language.TAG_ACCEPT);
@@ -187,9 +184,11 @@ function createTable(datajson) {
                 }
             }
         ]
-    }
+		}
 
-
+		if(datajson.length > 0) {
+			$('#novo-table_wrapper > div.dt-buttons > a.down-report').css('display', 'none');
+		}
     var dataTable = table.DataTable({
         // select: false,
         // retrieve: true,
@@ -197,7 +196,14 @@ function createTable(datajson) {
         "lengthChange": false,
         "pagingType": "full_numbers",
         "pageLength": 5, //Cantidad de registros por pagina
-        "language": { "url": baseCDN + '/media/js/combustible/Spanish.json'}, //Lenguaje: español //cdn.datatables.net/plug-ins/1.10.12/i18n/Spanish.json
+				"language": { "url": baseCDN + '/media/js/combustible/Spanish.json'}, //Lenguaje: español //cdn.datatables.net/plug-ins/1.10.12/i18n/Spanish.json
+				buttons:[
+					{
+						text: '<span id="down-excel" aria-hidden="true" class="icon" data-icon="&#xe05a" status="' + dataResponseCondition + '"></span>',
+						className: 'down-report',
+						titleAttr: 'Descargar reporte EXCEL'
+          }
+				],
         data: dataResponse, //Arreglo con los  valores del objeto
         columns: dataColumns
     });
@@ -277,6 +283,14 @@ $('#filter-selected').on('click', '#accountAvailable, #accountAllocated', functi
         }
     }
 
+});
+
+$('#novo-container-body').on('click', '#down-excel', function(e) {
+	e.preventDefault();
+	var dataReport = {
+		status: $('#down-excel').attr('status')
+	}
+	downReports('CuentasExcel', 'reportes_trayectos', dataReport);
 });
 
 
