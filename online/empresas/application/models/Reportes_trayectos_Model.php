@@ -55,12 +55,22 @@ class reportes_trayectos_model extends CI_Model {
 	public function callAPIVehiculosExcel($urlCountry, $dataRequest)
 	{
 		log_message('INFO', '['.$this->username.'] DATAREQUEST descarga EXCEL Vehiculos --->>> '.$datarequest);
+
+		if($dataRequest === 'file') {
+			$filename = 'vehiculos';
+			$file = $this->session->flashdata('file');
+			np_hoplite_byteArrayToFile($file, 'xls', $filename, FALSE);
+			exit();
+		}
+
 		//cabecera del REQUEST al API
 		$header = [
 			'x-country: ' . $this->pais,
 			'x-token: ' . $this->token,
 			'x-company: ' . $this->company
 		];
+
+
 	}
 	/**
 	 * @Method: callAPICuentasExcel
