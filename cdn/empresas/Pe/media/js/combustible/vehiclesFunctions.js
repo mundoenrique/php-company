@@ -35,41 +35,58 @@ function listVehicle (data) {
 // despliegue del listado de veículos
 function displayTable (vehiclesList) {
     $('#novo-table').DataTable({
-        select: false,
-        dom: 'Bfrtip',
-        "lengthChange": false,
-        "pagingType": "full_numbers",
-        "pageLength": 5, //Cantidad de registros por pagina
-        "language": { "url": baseCDN + '/media/js/combustible/Spanish.json'}, //Lenguaje: español //cdn.datatables.net/plug-ins/1.10.12/i18n/Spanish.json
-        data: vehiclesList, //Arreglo con los  valores del objeto
-        columns: [
-            {
-                title: lang.VEHI_PLATE,
-                data: 'plate'
-            },
-            {
-                title: lang.VEHI_BRAND,
-                data: 'brand'
-            },
-            {
-                title: lang.VEHI_MODEL,
-                data: 'model'
-            },
-            {
-                title: lang.VEHI_YEAR,
-                data: 'year'
-            },
-            {
-              title: lang.TAG_STATUS,
-                data: 'status'
-            },
-            {
-                title: lang.TAG_ACTION,
-                data: function (list) {
-                    return '<a id="editar" id-vehi="' + list.idVehicle + '" title="'+ lang.TAG_EDIT +'"><span aria-hidden="true" class="icon icon-list" data-icon="&#xe08f;"></span></a>'
-                }
-            }
-        ]
+			"drawCallback": function(data) {
+				if(data.length === 0 && data.code !== 0) {
+					// data.type === 'drivers' || data.type === 'vehicles' ? $('#novo-table_wrapper > div.dt-buttons > a.down-report').css('display', 'none') : '';
+					$('#down-report').css('display', 'none');
+				}else{
+					$('#down-report').css('display', '');
+				}
+			},
+      select: false,
+      dom: 'Bfrtip',
+      "lengthChange": false,
+      "pagingType": "full_numbers",
+      "pageLength": 5, //Cantidad de registros por pagina
+      "language": { "url": baseCDN + '/media/js/combustible/Spanish.json'}, //Lenguaje: español //cdn.datatables.net/plug-ins/1.10.12/i18n/Spanish.json
+			buttons: [
+				{
+					// text: '<span id="down-excel" aria-hidden="true" class="icon" data-icon="&#xe05a" type="' + data.type + '" status="' + data.option + '"></span>',
+					// text: '<span id="down-excel" aria-hidden="true" class="icon" data-icon="&#xe05a"></span>' + '<p class="novo-campo-name"><?= lang('TAG_STATUS') ?>:</p><select name="status" id="status"><?php foreach ($dataResponse as $status):?><option value="<?php echo $status->id ?>"><?php echo $status->value ?></option><?php endforeach;?></select>',
+					text: '<span id="down-excel" aria-hidden="true" class="icon" data-icon="&#xe05a"></span>   <select id="status" class="novo-campo"><option value="0">Todos</option><option value="1">segunda opcion</option></select>',
+					className: 'down-report',
+					titleAttr: lang.TAG_DWN_EXCEL
+				}
+			],
+      data: vehiclesList, //Arreglo con los  valores del objeto
+      columns: [
+          {
+              title: lang.VEHI_PLATE,
+              data: 'plate'
+          },
+          {
+              title: lang.VEHI_BRAND,
+              data: 'brand'
+          },
+          {
+              title: lang.VEHI_MODEL,
+              data: 'model'
+          },
+          {
+              title: lang.VEHI_YEAR,
+              data: 'year'
+          },
+          {
+            title: lang.TAG_STATUS,
+              data: 'status'
+          },
+          {
+              title: lang.TAG_ACTION,
+              data: function (list) {
+                  return '<a id="editar" id-vehi="' + list.idVehicle + '" title="'+ lang.TAG_EDIT +'"><span aria-hidden="true" class="icon icon-list" data-icon="&#xe08f;"></span></a>'
+              }
+          }
+      ]
     });
 }
 
