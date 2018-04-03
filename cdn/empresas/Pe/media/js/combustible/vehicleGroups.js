@@ -15,6 +15,7 @@ $(function() {
                         "pagingType": "full_numbers",
                         "pageLength": 5, //Cantidad de registros por pagina
                         "language": { "url": baseCDN + '/media/js/combustible/Spanish.json'}, //Lenguaje: español //cdn.datatables.net/plug-ins/1.10.12/i18n/Spanish.json
+												buttons: [],
                         data: jsonData, //Arreglo con los  valores del objeto
                         columns: [
                             {
