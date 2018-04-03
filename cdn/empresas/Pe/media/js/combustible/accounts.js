@@ -185,13 +185,12 @@ function createTable(datajson) {
             }
         ]
 		}
-
-		if(datajson.length > 0) {
-			$('#novo-table_wrapper > div.dt-buttons > a.down-report').css('display', 'none');
-		}
     var dataTable = table.DataTable({
-        // select: false,
-        // retrieve: true,
+				"drawCallback": function(data) {
+					if(datajson.length == 0) {
+						$('#down-excel').css('display', 'none');
+					}
+				},
         dom: 'Bfrtip',
         "lengthChange": false,
         "pagingType": "full_numbers",
