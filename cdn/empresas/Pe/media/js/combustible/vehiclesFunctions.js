@@ -34,10 +34,10 @@ function listVehicle (data) {
 }
 // despliegue del listado de veículos
 function displayTable (vehiclesList) {
+	console.log(selectStatus);
     $('#novo-table').DataTable({
 			"drawCallback": function(data) {
 				if(data.length === 0 && data.code !== 0) {
-					// data.type === 'drivers' || data.type === 'vehicles' ? $('#novo-table_wrapper > div.dt-buttons > a.down-report').css('display', 'none') : '';
 					$('#down-report').css('display', 'none');
 				}else{
 					$('#down-report').css('display', '');
@@ -51,9 +51,7 @@ function displayTable (vehiclesList) {
       "language": { "url": baseCDN + '/media/js/combustible/Spanish.json'}, //Lenguaje: español //cdn.datatables.net/plug-ins/1.10.12/i18n/Spanish.json
 			buttons: [
 				{
-					// text: '<span id="down-excel" aria-hidden="true" class="icon" data-icon="&#xe05a" type="' + data.type + '" status="' + data.option + '"></span>',
-					// text: '<span id="down-excel" aria-hidden="true" class="icon" data-icon="&#xe05a"></span>' + '<p class="novo-campo-name"><?= lang('TAG_STATUS') ?>:</p><select name="status" id="status"><?php foreach ($dataResponse as $status):?><option value="<?php echo $status->id ?>"><?php echo $status->value ?></option><?php endforeach;?></select>',
-					text: '<span id="down-excel" aria-hidden="true" class="icon" data-icon="&#xe05a"></span>   <select id="status" class="novo-campo"><option value="0">Todos</option><option value="1">segunda opcion</option></select>',
+					text: '<span id="down-excel" aria-hidden="true" class="icon" data-icon="&#xe05a"></span> <select class="select" id="vehicles-sel"><option value="">Todos</option>'+selectStatus+'</select>',
 					className: 'down-report',
 					titleAttr: lang.TAG_DWN_EXCEL
 				}
@@ -104,6 +102,7 @@ function modalAddEdit (idVehicle, vehiclesList) {
         $('#year').val(vehiclesList.year);
         $('#capacity').val(vehiclesList.capacity);
         $('#odometer').val(vehiclesList.odometer);
+				$('#status > option[value="BUSY"]').hide();
         $('#status > option[value="' + vehiclesList.status + '"]').prop('selected', true);
         $("#send-save").text(lang.TAG_WITHOUT_CHANGES);
         notiSystem('groups', title, '505px');
