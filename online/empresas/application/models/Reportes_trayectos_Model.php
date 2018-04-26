@@ -69,6 +69,7 @@ class reportes_trayectos_model extends CI_Model {
 			'x-token: ' . $this->token,
 			'x-company: ' . $this->company
 		];
+		log_message('INFO', 'El header es --->>> '.json_encode($header));
 
 		$dataReport = json_decode($dataRequest);
 		$status = $dataReport->status;
@@ -79,10 +80,10 @@ class reportes_trayectos_model extends CI_Model {
 		$urlAPI = 'fleet/report/excel';
 		if ($status !== '') {
 			$statusId = [
-				''=>1,
-				''=>2,
-				''=>3,
-				''=>5,
+				'ACTIVE'=>1,
+				'BUSY'=>2,
+				'GARAGE'=>3,
+				'DISASSOCIATE'=>5,
 			];
 			$urlAPI.='?status='.$statusId[$status];
 		}
