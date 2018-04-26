@@ -41,16 +41,76 @@ class reportes_trayectos_model extends CI_Model {
 	 */
 	public function callAPIConductoresExcel($urlCountry, $dataRequest)
 	{
-		log_message('INFO', '[' . $this->userName . '] DATAREQUEST DESCARGA EXCEL CONDUCTORES===============>>>>>>>>'. $dataRequest);
+		log_message('INFO', '[' . $this->userName . '] DATAREQUEST descarga EXCEL Conductores===============>>>>>>>>'. $dataRequest);
+
+		//cabecera del REQUEST al API
+		$header = [
+			'x-country: ' . $this->pais,
+			'x-token: ' . $this->token,
+			'x-company: ' . $this->company
+		];
+
+		$dataReport = json_decode($dataRequest);
+		$status = $dataReport->status;
+
+		//url API
+		$urlAPI = 'driver/report/excel?status=' . $status;
+		if ($status !== '') {
+			$statusId = [
+				'TODOS'=>0,
+				'ACTIVE'=>1,
+				'INACTIVE'=>2,
+			];
+			$urlAPI.='?status='.$statusId[$status];
+		}
+
+		$headerAPI = $header;
+		$bodyAPI = '';
+		$method = 'GET';
+
+		log_message('INFO', '[' . $this->userName . '] REQUEST ConductoresReport======>>>>>' . $urlAPI);
+
+		$jsonResponse = GetAPIServ($urlAPI, $headerAPI, $bodyAPI, $method);
+
+		$httpCode = $jsonResponse->httpCode;
+		$resAPILog = $httpCode != 200 ? $jsonResponse->resAPI : '';
+		$resAPI = $jsonResponse->resAPI;
+
+		log_message('INFO',  '[' . $this->userName . '] RESPONSE ConductoresReport: ==>> httpCode: ' . $httpCode . ' $resAPI: ' . $resAPILog);
+
+		//$httpCode = 400;
+		if($httpCode === 200) {
+			$this->session->set_flashdata('ConductoresExcel', $resAPI);
+		}
+
+		$code = '';
+		$title = '';
+		$msg = '';
+
+		switch($httpCode) {
+			case 200:
+				$code = 0;
+				break;
+			default:
+				$code = 1;
+				$title = lang('TAG_REPORTE_DRIVERS');
+				$msg = lang('ERROR_REPORT');
+		}
+
+		return $response = [
+			'code' => $code,
+			'title' => $title,
+			'msg' => $msg
+		];
 	}
 	/**
 	 * @Method: callAPIConductoresExcel
 	 * @access public
 	 * @params: string $urlCountry
-	 * @params: array $dataRquest = []
-	 * @info: Método para obtener el reporte del detalle de los vehículos
-	 * @autor: Humberto Zapata
-	 * @date: 04/04/2018
+	 * @params: array $dataRequest = ['status']
+	 * @info: Método para obtener el reporte del detalle de los conductores
+	 * @autor: Edinson Cabello
+	 * @date: 27/03/2018
 	 */
 	public function callAPIVehiculosExcel($urlCountry, $dataRequest)
 	{
