@@ -373,10 +373,26 @@ label.field-error {
 }
 
 .down-report {
-	font-size: 20px;
+	font-size: 22px;
 	color: #994596;
 	padding: 5px 3px 5px 3px;
 	float: left;
-	margin-left: 10px;
-	margin-top: 5px;
+  margin: 5px 0px 0px 10px;
+}
+
+span#down-excel {
+    font-size: 22px;
+    padding: 0;
+    float: left;
+    margin: 3px 0 0 0;
+}
+
+select.select {
+		height: 24px;
+    width: 80px;
+    margin: 0 0 0 10px;
+    padding: 0;
+    font-size: 12px;
+    border-color: #54c2d0;
+    color: #555555;
 }

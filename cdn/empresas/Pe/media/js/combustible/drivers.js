@@ -1,20 +1,36 @@
 var language;
+var selectStatusDriver;
 $(function() {
-    $.post(baseURL + '/' + isoPais + '/trayectos/modelo', {'way': 'drivers', 'modelo': 'driver'})
+    $.post(baseURL + '/' + isoPais + '/trayectos/modelo', {way: 'drivers', modelo: 'drivers', data: dataRequest})
         .done( function(data) {
             language = data.language;
             switch (data.code) {
                 case 0:
                 case 1:
                     var jsonData = data.msg;
-                    var table = $('#novo-table').DataTable({
+										console.log(selectStatusDriver);
+										var table = $('#novo-table').DataTable({
+											"drawCallback": function (data) {
+												if (data.length === 0 && data.code !== 0) {
+													$('#down-report').css('display', 'none');
+												} else {
+													$('#down-report').css('display', '');
+												}
+											},
                         select: false,
                         dom: 'Bfrtip',
                         "lengthChange": false,
                         "pagingType": "full_numbers",
                         "pageLength": 5, //Cantidad de registros por pagina
                         "language": { "url":  baseCDN + '/media/js/combustible/Spanish.json'}, //Lenguaje: español //cdn.datatables.net/plug-ins/1.10.12/i18n/Spanish.json
-                        data: jsonData, //Arreglo con los  valores del objeto
+												buttons: [
+													{
+														text: '<span id="down-excel" aria-hidden="true" class="icon" data-icon="&#xe05a"></span><select class="select" id="select-drivers"><option value="">Todos</option>'+selectStatusDriver+'</select>',
+														className: 'down-report',
+														titleAttr: lang.TAG_DWN_EXCEL
+													}
+												],
+												data: jsonData, //Arreglo con los  valores del objeto
                         columns: [
                             {
                                 title: "Identificación",
@@ -35,7 +51,7 @@ $(function() {
                                     var status;
                                     $.each(jsonData, function(index, gruopObject){
                                         if (userName == gruopObject.userName) {
-                                            status = gruopObject.estatus;
+                                            status = gruopObject.status;
                                         }
                                     });
                                     return status == 1 ? 'activo' : 'inactivo';
@@ -242,7 +258,6 @@ function notiSystem (title, size, type, message) {
     });
 }
 
-
 function addEdit(userName, func) {
     $('form#formulario').empty();
     $('form#formulario').append('<input type="hidden" name="modelo" value="driver" />');
@@ -259,3 +274,15 @@ function clearInput()
         .removeClass('field-error')
         .text('');
 }
+
+//Descargar reporte en EXCEL
+$('#table-drivers').on('click', '#down-excel', function (e) {
+	e.preventDefault();
+	var dataReport = {
+		status: $('#down-excel').attr('status')
+	}
+	downReports('ConductoresExcel', 'reportes_trayectos', dataReport, 'conductores-xls');
+
+});
+
+
