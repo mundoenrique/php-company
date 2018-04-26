@@ -402,13 +402,13 @@ class reportes_trayectos_model extends CI_Model {
 	 */
 	public function callAPIdownloadFile($urlCountry, $dataRequest)
 	{
-		log_message('INFO',  '[' . $this->userName . '] REQUEST download file' . $dataRequest);
+		log_message('INFO',  '[' . $this->userName . '] REQUEST download file:---- ' . $dataRequest);
 		$dataFile = explode(',', $dataRequest);
 		$flashData = $dataFile[0];
 		$dataFile = explode('-', $dataFile[1]);
 		$filename = $dataFile[0] . date('Ymd-B');
 		$ext = $dataFile[1];
-		log_message('INFO',  '[' . $this->userName . '] download file Nombre: ' . $filename . ' Extensión: ' . $ext);
+		log_message('INFO',  '[' . $this->userName . '] download file Nombre:----- ' . $filename . ' Extensión:----- ' . $ext);
 		$file = $this->session->flashdata($flashData);
 		np_hoplite_byteArrayToFile($file, $ext, $filename, FALSE);
 
