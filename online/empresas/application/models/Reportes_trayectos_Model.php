@@ -238,7 +238,7 @@ class reportes_trayectos_model extends CI_Model {
 			$urlAPI.= '&status=' . $statusId[$status];
 		} elseif($type === 'count') {
 
-			$urlAPI = '?quantity=30';
+			$urlAPI .= '?quantity=30';
 		}
 
 		$headerAPI = $header;
@@ -348,7 +348,7 @@ class reportes_trayectos_model extends CI_Model {
 	 * @Method: callAPIdwonloadFile
 	 * @access public
 	 * @params: string $urlCountry
-	 * @params: array $dataRquest = ['tempFile', 'FileName']
+	 * @params: string $dataRquest
 	 * @info: Método para la descarga de los archivos de reporte
 	 * @autor: J. Enrique Peñaloza
 	 * @date: 25/04/2018
