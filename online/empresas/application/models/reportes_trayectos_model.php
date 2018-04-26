@@ -122,12 +122,9 @@ class reportes_trayectos_model extends CI_Model {
 			'x-token: ' . $this->token,
 			'x-company: ' . $this->company
 		];
-		log_message('INFO', 'El header es --->>> '.json_encode($header));
 
 		$dataReport = json_decode($dataRequest);
 		$status = $dataReport->status;
-		log_message('INFO', 'El TOKEN es -->> '.$this->token);
-		log_message('INFO', 'El estatus es -->> '.$status);
 
 		//URL API
 		$urlAPI = 'fleet/report/excel';
@@ -157,7 +154,7 @@ class reportes_trayectos_model extends CI_Model {
 
 		//$httpCode = 400;
 		if($httpCode === 200) {
-			$this->session->set_flashdata('file', $resAPI);
+			$this->session->set_flashdata('VehiculosExcel', $resAPI);
 		}
 
 		$code = '';
