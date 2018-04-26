@@ -34,7 +34,7 @@ function listVehicle (data) {
 }
 // despliegue del listado de veículos
 function displayTable (vehiclesList) {
-	console.log(selectStatus);
+	console.log("Estatus de los vehiculos "+selectStatus);
     $('#novo-table').DataTable({
 			"drawCallback": function(data) {
 				if(data.length === 0 && data.code !== 0) {
