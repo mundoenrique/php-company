@@ -31,13 +31,13 @@ class reportes_trayectos_model extends CI_Model {
 		$this->lang->load('erroreseol');
 	}
 	/**
-	 * @Method:
+	 * @Method: callAPIConductoresExcel
 	 * @access public
 	 * @params: string $urlCountry
-	 * @params: array $dataRquest = []
-	 * @info:
-	 * @autor:
-	 * @date:
+	 * @params: array $dataRequest = ['status']
+	 * @info: Método para obtener el reporte del detalle de los conductores
+	 * @autor: Edinson Cabello
+	 * @date: 27/03/2018
 	 */
 	public function callAPIConductoresExcel($urlCountry, $dataRequest)
 	{
@@ -108,9 +108,9 @@ class reportes_trayectos_model extends CI_Model {
 	 * @access public
 	 * @params: string $urlCountry
 	 * @params: array $dataRequest = ['status']
-	 * @info: Método para obtener el reporte del detalle de los conductores
-	 * @autor: Edinson Cabello
-	 * @date: 27/03/2018
+	 * @info: Método para obtener el reporte del estatus de los vehiculos
+	 * @autor: Humberto Zapata
+	 * @date: 26/04/2018
 	 */
 	public function callAPIVehiculosExcel($urlCountry, $dataRequest)
 	{
