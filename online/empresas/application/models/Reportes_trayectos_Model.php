@@ -211,13 +211,6 @@ class reportes_trayectos_model extends CI_Model {
 	{
 		log_message('INFO', '[' . $this->userName . '] DATAREQUEST DESCARGA EXCEL VIAES===============>>>>>>>>'. $dataRequest);
 
-		if($dataRequest === 'file') {
-			$filename = 'viajes' . date('Ymd-B');
-			$file = $this->session->flashdata('file');
-			np_hoplite_byteArrayToFile($file, 'xls', $filename, FALSE);
-			exit();
-		}
-
 		//cabecera del REQUEST al API
 		$header = [
 			'x-country: ' . $this->pais,
@@ -264,7 +257,7 @@ class reportes_trayectos_model extends CI_Model {
 
 		//$httpCode = 400;
 		if($httpCode === 200) {
-			$this->session->set_flashdata('file', $resAPI);
+			$this->session->set_flashdata('ViajesExcel', $resAPI);
 		}
 
 		$code = '';
@@ -299,13 +292,6 @@ class reportes_trayectos_model extends CI_Model {
 	public function callAPIViajesPdf($urlCountry, $dataRequest)
 	{
 		log_message('INFO', '[' . $this->userName . '] DATAREQUEST DESCARGA PDF VIAES>>'. $dataRequest);
-
-		if($dataRequest === 'file') {
-			$filename = 'detalleViaje' . date('Ymd-B');date('Ymd-B');
-			$file = $this->session->flashdata('file');
-			np_hoplite_byteArrayToFile($file, 'pdf', $filename, FALSE);
-			exit();
-		}
 		//cabecera del REQUEST al API
 		$header = [
 			'x-country: ' . $this->pais,
@@ -335,7 +321,7 @@ class reportes_trayectos_model extends CI_Model {
 
 		//$httpCode = 400;
 		if($httpCode === 200) {
-			$this->session->set_flashdata('file', $resAPI);
+			$this->session->set_flashdata('ViajesPdf', $resAPI);
 		}
 
 		$code = '';
@@ -358,4 +344,25 @@ class reportes_trayectos_model extends CI_Model {
 			'msg' => $msg
 		];
 	}
+	/**
+	 * @Method: callAPIdwonloadFile
+	 * @access public
+	 * @params: string $urlCountry
+	 * @params: array $dataRquest = ['tempFile', 'FileName']
+	 * @info: Método para la descarga de los archivos de reporte
+	 * @autor: J. Enrique Peñaloza
+	 * @date: 25/04/2018
+	 */
+	public function callAPIdownloadFile($urlCountry, $dataRequest)
+	{
+		log_message('INFO', 'REQUEST download file' . $dataRequest);
+		$dataFile = explode(',', $dataRequest);
+		$flashData = $dataFile[0];
+		$filename = substr($dataFile[1], 0, -4) . date('Ymd-B');
+		$ext = substr($dataFile[1], -3);
+		$file = $this->session->flashdata($flashData);
+		np_hoplite_byteArrayToFile($file, $ext, $filename, FALSE);
+
+	}
+
 }
