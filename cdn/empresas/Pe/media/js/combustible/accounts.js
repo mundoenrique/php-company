@@ -289,7 +289,7 @@ $('#novo-container-body').on('click', '#down-excel', function(e) {
 	var dataReport = {
 		status: $('#down-excel').attr('status')
 	}
-	downReports('CuentasExcel', 'reportes_trayectos', dataReport);
+	downReports('CuentasExcel', 'reportes_trayectos', dataReport, 'cuentas-xls');
 });
 
 
