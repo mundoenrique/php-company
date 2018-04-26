@@ -116,13 +116,6 @@ class reportes_trayectos_model extends CI_Model {
 	{
 		log_message('INFO', '['.$this->userName.'] DATAREQUEST descarga EXCEL Vehiculos --->>> '.$dataRequest);
 
-		if($dataRequest === 'file') {
-			$filename = 'vehiculos';
-			$file = $this->session->flashdata('file');
-			np_hoplite_byteArrayToFile($file, 'xls', $filename, FALSE);
-			exit();
-		}
-
 		//cabecera del REQUEST al API
 		$header = [
 			'x-country: ' . $this->pais,
