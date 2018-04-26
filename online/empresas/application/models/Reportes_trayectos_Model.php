@@ -21,7 +21,7 @@ class reportes_trayectos_model extends CI_Model {
 		//Inicializa atributos de clase
 		$this->pais = $this->session->userdata('pais');
 		$this->token = $this->session->userdata('token');
-		$this->company = '000000000' . $this->session->userdata('acrifS');
+		$this->company = $this->session->userdata('acrifS');
 		$this->idProducto = $this->session->userdata('idProductoS');
 		$this->userName = $this->session->userdata('userName');
 		//Agrega lenguajes
@@ -201,13 +201,6 @@ class reportes_trayectos_model extends CI_Model {
 	{
 		log_message('INFO', '[' . $this->userName .'] DATAREQUEST Descarga EXCEL cuentas ==>>' . $dataRequest);
 
-		if($dataRequest === 'file') {
-			$filename = 'cuentas' . date('Ymd-B');
-			$file = $this->session->flashdata('file');
-			np_hoplite_byteArrayToFile($file, 'xls', $filename, FALSE);
-			exit();
-		}
-
 		//cabecera del REQUEST al API
 		$header = [
 			'x-country: ' . $this->pais,
@@ -299,7 +292,7 @@ class reportes_trayectos_model extends CI_Model {
 			$urlAPI.= '&status=' . $statusId[$status];
 		} elseif($type === 'count') {
 
-			$urlAPI .= '?quantity=30';
+			$urlAPI = 'travel/report/excel?quantity=30';
 		}
 
 		$headerAPI = $header;
@@ -416,11 +409,13 @@ class reportes_trayectos_model extends CI_Model {
 	 */
 	public function callAPIdownloadFile($urlCountry, $dataRequest)
 	{
-		log_message('INFO', 'REQUEST download file' . $dataRequest);
+		log_message('INFO',  '[' . $this->userName . '] REQUEST download file' . $dataRequest);
 		$dataFile = explode(',', $dataRequest);
 		$flashData = $dataFile[0];
-		$filename = substr($dataFile[1], 0, -4) . date('Ymd-B');
-		$ext = substr($dataFile[1], -3);
+		$dataFile = explode('-', $dataFile[1]);
+		$filename = $dataFile[0] . date('Ymd-B');
+		$ext = $dataFile[1];
+		log_message('INFO',  '[' . $this->userName . '] download file Nombre: ' . $filename . ' Extensión: ' . $ext);
 		$file = $this->session->flashdata($flashData);
 		np_hoplite_byteArrayToFile($file, $ext, $filename, FALSE);
 
