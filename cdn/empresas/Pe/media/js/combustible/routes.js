@@ -6,9 +6,9 @@ var baseCDN = path[0]+ "//" +cdn+'/'+path[3]+'/'+path[4];
 var api = "/api/v1/";
 
 //Descarga de reportes
-function downReports(way, modelo, data)
+function downReports(way, modelo, data, file)
 {
-	dataRequest = JSON.stringify(data);
+	var dataRequest = JSON.stringify(data);
 	$.ajax({
 		url: baseURL + '/' + isoPais + '/trayectos/modelo',
 		type: 'POST',
@@ -18,11 +18,12 @@ function downReports(way, modelo, data)
 		var code = response.code, title = response.title, msg = response.msg;
 		switch(code) {
 			case 0:
+			dataRequest = way + ',' + file;
 				$('form#formulario').empty();
 				$('form#formulario').attr('action', baseURL + '/' + isoPais + '/trayectos/modelo');
-				$('form#formulario').append('<input type="hidden" name="way" value="' + way + '" />');
+				$('form#formulario').append('<input type="hidden" name="way" value="downloadFile" />');
 				$('form#formulario').append('<input type="hidden" name="modelo" value="' + modelo + '" />');
-				$('form#formulario').append('<input type="hidden" name="data" value="file" />');
+				$('form#formulario').append('<input type="hidden" name="data" value="' + dataRequest + '" />');
 				$('form#formulario').submit();
 				break;
 			default:

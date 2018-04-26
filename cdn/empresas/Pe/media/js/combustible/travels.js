@@ -106,6 +106,6 @@ $(function() {
 				beginDate: $('#down-excel').attr('beginDate'),
 				finalDate: $('#down-excel').attr('finalDate')
 			}
-			downReports('ViajesExcel', 'reportes_trayectos', dataReport);
+			downReports('ViajesExcel', 'reportes_trayectos', dataReport, 'viajes-xls');
 		})
 });
