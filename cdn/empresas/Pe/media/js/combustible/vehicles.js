@@ -111,7 +111,7 @@ $(function() {
 				status: $('#vehicles-sel').val()
 			}
 			console.log("Estatus para el reporte -->> "+JSON.stringify(dataReport));
-			downReports('VehiculosExcel', 'reportes_trayectos', dataReport);
+			downReports('VehiculosExcel', 'reportes_trayectos', dataReport, 'vehiculos-xls');
 		});
 
 
