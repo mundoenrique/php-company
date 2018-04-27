@@ -52,16 +52,13 @@ class reportes_trayectos_model extends CI_Model {
 
 		$dataReport = json_decode($dataRequest);
 		$status = $dataReport->status;
+		log_message('INFO', 'ESTATUS DEL CONDUCTOR ---------------> ' . $status);
 
 		//url API
-		$urlAPI = 'driver/report/excel?status=' . $status;
+		$urlAPI = 'driver/report/excel';
 		if ($status !== '') {
-			$statusId = [
-				'TODOS'=>0,
-				'ACTIVE'=>1,
-				'INACTIVE'=>2,
-			];
-			$urlAPI.='?status='.$statusId[$status];
+
+			$urlAPI.='?status='.$status;
 		}
 
 		$headerAPI = $header;

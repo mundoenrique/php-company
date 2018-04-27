@@ -64,6 +64,7 @@ class driver_model extends CI_Model {
                             'DRIVER_SEARCH_DNI' => lang('DRIVER_SEARCH_DNI'),
                             'TAG_ACCEPT' => lang('TAG_ACCEPT'),
                             'TAG_SEND' => lang('TAG_SEND'),
+														'TAG_DWN_EXCEL' => lang('TAG_DWN_EXCEL'),
                             'TAG_ADD' => lang('MENU_ADD'),
                             'TAG_CANCEL' => lang('TAG_CANCEL'),
                             'DRIVER_INCLUDE' => lang('DRIVER_INCLUDE')

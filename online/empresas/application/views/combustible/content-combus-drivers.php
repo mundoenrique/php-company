@@ -37,7 +37,7 @@
     </div>
 </div>
 
-<form id='formularioDriver' method='post'></form>
+<form id='formulario' method='post'></form>
 <input type="hidden" id="logUrl" value="<?php echo  base_url().$pais; ?>">
 
 <div id="msg-system" style='display:none'>
