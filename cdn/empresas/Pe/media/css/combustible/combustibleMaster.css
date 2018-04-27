@@ -383,14 +383,14 @@ label.field-error {
 span#down-excel {
     font-size: 22px;
     padding: 0;
-    float: left;
+    float: right;
     margin: 3px 0 0 0;
 }
 
 select.select {
 		height: 24px;
     width: 80px;
-    margin: 0 0 0 10px;
+    margin: 0 10px 0 0;
     padding: 0;
     font-size: 12px;
     border-color: #54c2d0;
