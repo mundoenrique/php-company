@@ -24,7 +24,7 @@ $(function () {
                         "language": { "url":  baseCDN + '/media/js/combustible/Spanish.json'}, //Lenguaje: español //cdn.datatables.net/plug-ins/1.10.12/i18n/Spanish.json
 												buttons: [
 													{
-														text: '<span id="down-excel" aria-hidden="true" class="icon" data-icon="&#xe05a"></span><select class="select" id="select-drivers"><option value="">Todos</option><option value="0">Activo</option><option value="1">Inactivo</option></select>',
+														text: '<span id="down-excel" aria-hidden="true" class="icon" data-icon="&#xe05a"></span><select class="select" id="select-drivers"><option value="">Todos</option><option value="1">Activo</option><option value="0">Inactivo</option></select>',
 														className: 'down-report',
 														titleAttr: lang.TAG_DWN_EXCEL
 													}

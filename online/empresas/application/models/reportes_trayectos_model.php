@@ -57,11 +57,8 @@ class reportes_trayectos_model extends CI_Model {
 		//url API
 		$urlAPI = 'driver/report/excel';
 		if ($status !== '') {
-			$statusId = [
-				'0'=>0,
-				'1'=>1
-			];
-			$urlAPI.='?status='.$statusId[$status];
+
+			$urlAPI.='?status='.$status;
 		}
 
 		$headerAPI = $header;
