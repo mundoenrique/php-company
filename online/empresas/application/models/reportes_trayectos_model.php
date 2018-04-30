@@ -24,7 +24,7 @@ class reportes_trayectos_model extends CI_Model {
 		$this->company = $this->session->userdata('acrifS');
 		$this->idProducto = $this->session->userdata('idProductoS');
 		$this->userName = $this->session->userdata('userName');
-		//Agrega lenguajes
+		log_message('INFO', 'TOKEN------------------------------' . $this->token);		//Agrega lenguajes
 		$this->lang->load('dashboard');
 		$this->lang->load('combustible');
 		$this->lang->load('users');
@@ -216,7 +216,7 @@ class reportes_trayectos_model extends CI_Model {
 
 		//$httpCode = 400;
 		if($httpCode === 200) {
-			$this->session->set_flashdata('file', $resAPI);
+			$this->session->set_flashdata('CuentasExcel', $resAPI);
 		}
 
 		$code = '';
