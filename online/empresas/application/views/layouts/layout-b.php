@@ -15,14 +15,14 @@
 									AVISO IMPORTANTE
 								</div>
 								<div id="widget-info-2">
-									<b>Tarifas vigentes desde el 01-03-2018</b>
+								<b>Tarifas vigentes desde el 01-05-2018</b>
 									<ul style="padding-left: 15px;">
-										<li>Servicio Administrativo Mínimo:<br><b>Bs. 150.000</b></li>
-										(Aplica a facturas cuyo servicio administrativo sea inferior a<br><b>Bs. 150.000</b>)
-										<li>Servicios Operativos y de Logística: <b>Bs. 120.000.</b> Cobro único mensual</li>
+										<li>Servicio Administrativo Mínimo:<br><b>Bs. 600.000 | Bs.S 600</b></li>
+										(Aplica a facturas cuyo servicio administrativo sea inferior a <br><b>Bs. 600.000 | Bs.S 600</b>)
+										<li>Servicios Operativos y de Logística: <b>Bs. 600.000 | Bs.S 600</b> Cobro único mensual</li>
 										(Quedan exceptuadas facturas con Servicio Administrativo Mínimo)
-										<li>Emisión, reposición/renovación de tarjetas: <b>Bs. 45.000</b> (c/u)</li>
-										<li>Reposición y entrega de claves: <b>Bs.12.500</b> (c/u)</li>
+										<li>Emisión, reposición/renovación de tarjetas: <b>Bs. 45.000  | Bs.S 45</b> (c/u)</li>
+										<li>Reposición y entrega de claves: <b>Bs. 30.000 | Bs.S 30</b> (c/u)</li>
 									</ul>
 								</div>
 							</div>
