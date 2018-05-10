@@ -15,7 +15,7 @@
 											      style="font-size: 30px; padding-right: 25px;"></span>
 									AVISO IMPORTANTE
 								</div>
-								<div id="widget-info-2">
+								<div id="widget-info-2"  style="height: 305px; overflow-y: auto; text-align: justify">
 										<b>Tarifas vigentes desde el 01-05-2018</b>
 									<ul style="padding-left: 15px;">
 										<li>Servicio Administrativo Mínimo:<br><b>Bs. 600.000 | Bs.S 600</b></li>
@@ -25,6 +25,7 @@
 										<li>Emisión, reposición/renovación de tarjetas: <b>Bs. 45.000  | Bs.S 45</b> (c/u)</li>
 										<li>Reposición y entrega de claves: <b>Bs. 30.000 | Bs.S 30</b> (c/u)</li>
 									</ul>
+									<p style="text-align: justify">Estas Tarifas se encuentran reexpresadas a fines referenciales, acorde con lo establecido en el Decreto N° 3.332, publicado en la Gaceta Oficial N° 41.366 del 22/3/2018,  dictado por la Presidencia de la República en el Marco del Estado de Excepción y de Emergencia Económica, mediante el cual se decretó la Reconversión Monetaria.</p>
 								</div>
 							</div>
 							<?php
