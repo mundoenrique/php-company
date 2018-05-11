@@ -261,10 +261,14 @@ class reportes_trayectos_model extends CI_Model {
 
 		$dataReport = json_decode($dataRequest);
 		$type = $dataReport->type;
-		$beginDate = $dataReport->beginDate;
-		$finalDAte = $dataReport->finalDate;
+		$date = explode('/', $dataReport->beginDate);
+		$beginDate = $date[0] . '-' . $date[1] . '-' . $date[2];
+		$date = explode('/', $dataReport->finalDate);
+		$finalDate = $date[0] . '-' . $date[1] . '-' . $date[2];
+		
 		//url API
-		$urlAPI = 'travel/report/excel?from=' . $beginDate . '&to=' . $finalDAte;
+		$urlAPI = 'travel/report/excel?from=' . $beginDate . '&to=' . $finalDate;
+
 		if($type === 'statusId') {
 
 			$status = $dataReport->status;
@@ -400,7 +404,7 @@ class reportes_trayectos_model extends CI_Model {
 		$dataFile = explode(',', $dataRequest);
 		$flashData = $dataFile[0];
 		$dataFile = explode('-', $dataFile[1]);
-		$filename = $dataFile[0] . date('Ymd-B');
+		$filename = $dataFile[0] . date('dmY-B');
 		$ext = $dataFile[1];
 		log_message('INFO',  '[' . $this->userName . '] download file Nombre:----- ' . $filename . ' Extensión:----- ' . $ext);
 		$file = $this->session->flashdata($flashData);
