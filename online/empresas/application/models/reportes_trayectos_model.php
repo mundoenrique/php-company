@@ -88,6 +88,15 @@ class reportes_trayectos_model extends CI_Model {
 			case 200:
 				$code = 0;
 				break;
+			case 404:
+				$code = 1;
+				$title = lang('TAG_REPORTE_DRIVERS');
+				$statusId = [
+					'1'=>lang('VEHI_ACTIVE'),
+					'0'=>lang('VEHI_INACTIVE'),
+				];
+				$msg = lang('ERROR_DRIVERS').' '.$statusId[$status];
+				break;
 			default:
 				$code = 1;
 				$title = lang('TAG_REPORTE_DRIVERS');
