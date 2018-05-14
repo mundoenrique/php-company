@@ -212,10 +212,9 @@ class reportes_trayectos_model extends CI_Model {
 		$header = [
 			'x-country: ' . $this->pais,
 			'x-token: ' . $this->token,
-			'x-company: ' . $this->company
+			'x-company: ' . $this->company,
+			'x-prefix: ' . $this->session->userdata('idProductoS')
 		];
-
-		log_message('INFO', 'La cabecera es --->>>> '.$header);
 
 		$dataReport = json_decode($dataRequest);
 		$status = $dataReport->status;
