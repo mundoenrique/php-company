@@ -175,10 +175,10 @@ class reportes_trayectos_model extends CI_Model {
 				$code = 1;
 				$title = lang('TAG_REPORTE_VEHICLES');
 				$statusId = [
-					'ACTIVE'=>'Disponibles',
-					'BUSY'=>'Ocupados',
-					'GARAGE'=>'En Garage',
-					'DISASSOCIATE'=>'Desincorporados',
+					'ACTIVE'=>lang('ACTIVE'),
+					'BUSY'=>lang('BUSY'),
+					'GARAGE'=>lang('GARAGE'),
+					'DISASSOCIATE'=>lang('DISASSOCIATE'),
 				];
 				$msg = lang('ERROR_VEHICLES').' '.$statusId[$status];
 				break;

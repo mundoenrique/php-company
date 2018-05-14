@@ -110,7 +110,10 @@ $lang['VEHI_REGISTER_FAIL'] = "No fue posible registrar el vehículo, Verifique 
 $lang['VEHI_DETAIL_OK'] = "Los datos del vehículo fueron actualizados";
 $lang['VEHI_DETAIL_FAIL'] = "No fue posible actualizar los datos del vehículo";
 $lang['VEHI_PLATE_EXIST'] = "Matricula registrada con otro vehículo, verifique e intente de nuevo";
-
+$lang['ACTIVE']= "Disponibles";
+$lang['BUSY']= "Ocupados";
+$lang['GARAGE']= "En Garage";
+$lang['DISASSOCIATE']= "Desincorporados";
 
 //Cuentas
 $lang['MENU_ADMIN_ACCOUNTS'] = "Administrar cuentas";
