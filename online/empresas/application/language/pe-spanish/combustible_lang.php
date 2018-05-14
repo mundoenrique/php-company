@@ -210,3 +210,4 @@ $lang['ERROR_SYSTEM_MSG'] = "La aplicación se cerrará";
 $lang['ERROR_NON_FOUND'] = "El registro no existe";
 $lang['ERROR_NON_ACCESS'] = "Debe indicar un usuario válido para ejecutar esta acción";
 $lang['ERROR_REPORT'] = "No fue posible obtener el reporte, por favor intenta más tarde";
+$lang['ERROR_VEHICLES'] = "No existen datos de vehiculos";
