@@ -170,6 +170,7 @@ $route['(:any)/reportes/gastos-por-categorias'] = "reportes/gastosporcategorias/
 $route['(:any)/reportes/tarjetahabientes'] = "reportes/tarjetahabientes/$1";
 $route['(:any)/reportes/guarderia'] = "reportes/guarderia/$1";
 $route['(:any)/reportes/GuarderiaResult'] = "reportes/getGuarderiaResult/";
+$route['(:any)/reportes/comisiones'] = "reports_additional/ReportRecharWithComm/";
 
 //CONSULTAS
 $route['(:any)/consulta/ordenes-de-servicio'] = "consultas/ordenesServicio/$1";
