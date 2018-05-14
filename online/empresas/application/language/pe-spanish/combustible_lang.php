@@ -108,6 +108,8 @@ $lang['VEHI_REGISTER_FAIL'] = "No fue posible registrar el vehículo, Verifique 
 $lang['VEHI_DETAIL_OK'] = "Los datos del vehículo fueron actualizados";
 $lang['VEHI_DETAIL_FAIL'] = "No fue posible actualizar los datos del vehículo";
 $lang['VEHI_PLATE_EXIST'] = "Matricula registrada con otro vehículo, verifique e intente de nuevo";
+$lang['VEHI_ACTIVE'] = "Activos";
+$lang['VEHI_INACTIVE'] = "Inactivos";
 
 //Cuentas
 $lang['MENU_ADMIN_ACCOUNTS'] = "Administrar cuentas";
@@ -211,3 +213,4 @@ $lang['ERROR_NON_FOUND'] = "El registro no existe";
 $lang['ERROR_NON_ACCESS'] = "Debe indicar un usuario válido para ejecutar esta acción";
 $lang['ERROR_REPORT'] = "No fue posible obtener el reporte, por favor intenta más tarde";
 $lang['ERROR_VEHICLES'] = "No existen datos de vehiculos";
+$lang['ERROR_DRIVERS'] = "No existen datos de conductores";
