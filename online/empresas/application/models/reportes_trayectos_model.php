@@ -218,7 +218,7 @@ class reportes_trayectos_model extends CI_Model {
 
 		$dataReport = json_decode($dataRequest);
 		$status = $dataReport->status;
-		
+
 		//url API
 		$urlAPI = 'account/report/excel?status=' . $status;
 
@@ -249,9 +249,18 @@ class reportes_trayectos_model extends CI_Model {
 			case 200:
 				$code = 0;
 				break;
+			case 404:
+				$code = 1;
+				$title = lang('TAG_REPORTE_ACCOUNTS');
+				$statusId = [
+					'1'=>lang('ACCOUNTS_ASIGNED'),
+					'0'=>lang('ACCOUNTS_AVALIABLE'),
+				];
+				$msg = lang('ERROR_ACCOUNTS').' '.$statusId[$status];
+				break;
 			default:
 				$code = 1;
-				$title = lang('TAG_REPORTE_	ACCOUNTS');
+				$title = lang('TAG_REPORTE_ACCOUNTS');
 				$msg = lang('ERROR_REPORT');
 		}
 
@@ -261,6 +270,7 @@ class reportes_trayectos_model extends CI_Model {
 			'msg' => $msg
 		];
 	}
+
 	/**
 	 * @Method: callAPIViajesReport
 	 * @access public

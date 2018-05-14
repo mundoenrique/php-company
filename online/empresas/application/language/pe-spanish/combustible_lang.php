@@ -120,6 +120,8 @@ $lang['MENU_ADMIN_ACCOUNTS'] = "Administrar cuentas";
 $lang['MENU_ACCOUNTS'] = "Conductor";
 $lang['MENU_ACCOUNTS_DETAILS'] = "Datos de la cuenta";
 $lang['TITLE_ACCOUNT_ADMIN'] = "Administrar cuentas";
+$lang['ACCOUNTS_ASIGNED'] = "Cuentas asignadas";
+$lang['ACCOUNTS_AVALIABLE'] = "Cuentas disponibles";
 //$lang['ACCOUNTS_DEALLOCATE'] = "Será devuelta la cuenta y se cancelaran los viajes asociados";
 
 
@@ -206,7 +208,7 @@ $lang['TAG_RETURN'] = "Regresar";
 $lang['TAG_DWN_EXCEL'] = "Descargar reporte EXCEL";
 $lang['TAG_DWN_PDF'] = "Descargar reporte PDF";
 $lang['TAG_REPORTE_DRIVERS'] = "Reporte de Conductores";
-$lang['TAG_REPORTE_	ACCOUNTS'] = "Reporte de Cuentas";
+$lang['TAG_REPORTE_ACCOUNTS'] = "Reporte de Cuentas";
 $lang['TAG_REPORTE_VEHICLES'] = "Reporte de Vehículos";
 $lang['TAG_REPORTE_TRAVELS'] = "Reporte de Viajes";
 
@@ -219,3 +221,4 @@ $lang['ERROR_REPORT'] = "No fue posible obtener el reporte, por favor intenta m�
 $lang['ERROR_VEHICLES'] = "No existen datos de vehiculos";
 $lang['ERROR_DRIVERS'] = "No existen datos de conductores";
 $lang['ERROR_TRAVELS'] = "No existen viajes";
+$lang['ERROR_ACCOUNTS'] = "No existen cuentas";

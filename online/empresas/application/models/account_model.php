@@ -1,6 +1,5 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-
 class account_model extends CI_Model {
 
     //Método constructor
@@ -13,8 +12,6 @@ class account_model extends CI_Model {
         $this->lang->load('erroreseol');
     }
     /*---Fin método constructor---------------------------------------------------------------------------------------*/
-
-
 
     public function callAPIaccounts($urlCountry, $dataRequest) {
 
@@ -122,11 +119,8 @@ class account_model extends CI_Model {
                     ]
                 ];
         }
-
         return $response;
-
     }
-
 
     public function callAPIdeallocateAccounts($urlCountry, $dataRequest) {
 
@@ -206,11 +200,8 @@ class account_model extends CI_Model {
                         'TAG_ACCEPT' => lang('TAG_ACCEPT')
                     ]
                 ];
-
         }
-
         return $response;
-
     }
 
     public function callAPIavailableDrivers($urlCountry, $dataRequest) {
@@ -298,7 +289,6 @@ class account_model extends CI_Model {
         return $response;
     }
 
-
     public function callAPIallocatingDriver($urlCountry, $dataRequest) {
         $ruc = $this->session->userdata('acrifS');
         $token = $this->session->userdata('token');
@@ -384,15 +374,8 @@ class account_model extends CI_Model {
 //                    'msg' => lang('ERROR_GENERICO_USER')
 //                ];
         }
-
         return $response;
-
     }
 
-
-
-
-
     /*---Fin métodos para conductores---------------------------------------------------------------------------------*/
-
 }
