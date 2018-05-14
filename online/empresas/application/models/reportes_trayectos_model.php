@@ -162,6 +162,17 @@ class reportes_trayectos_model extends CI_Model {
 			case 200:
 				$code = 0;
 				break;
+			case 404:
+				$code = 1;
+				$title = lang('TAG_REPORTE_VEHICLES');
+				$statusId = [
+					'ACTIVE'=>'Disponibles',
+					'BUSY'=>'Ocupados',
+					'GARAGE'=>'En Garage',
+					'DISASSOCIATE'=>'Desincorporados',
+				];
+				$msg = lang('ERROR_VEHICLES').' '.$statusId[$status];
+				break;
 			default:
 				$code = 1;
 				$title = lang('TAG_REPORTE_VEHICLES');
@@ -265,7 +276,7 @@ class reportes_trayectos_model extends CI_Model {
 		$beginDate = $date[0] . '-' . $date[1] . '-' . $date[2];
 		$date = explode('/', $dataReport->finalDate);
 		$finalDate = $date[0] . '-' . $date[1] . '-' . $date[2];
-		
+
 		//url API
 		$urlAPI = 'travel/report/excel?from=' . $beginDate . '&to=' . $finalDate;
 
