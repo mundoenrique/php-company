@@ -68,6 +68,8 @@ $lang['DRIVER_REGISTER_OK'] = "ha sido incluido en la lista de conductores";
 $lang['DRIVER_REGISTER_FAIL'] = "No fue posible registrar al conductor, Verifique e intente nuevamente";
 $lang['DRIVER_PERFIL_OK'] = "El perfil del conductor fue actualizado";
 $lang['DRIVER_PERFIL_FAIL'] = "No fue posible actualizar el perfil del conductor";
+$lang['DRIVER_ACTIVE'] = "Activos";
+$lang['DRIVER_INACTIVE'] = "Inactivos";
 
 //Vehicles groups
 $lang['TITLE_GROUP_ADMIN'] = "Administrar grupos de vehículos";
@@ -108,8 +110,7 @@ $lang['VEHI_REGISTER_FAIL'] = "No fue posible registrar el vehículo, Verifique 
 $lang['VEHI_DETAIL_OK'] = "Los datos del vehículo fueron actualizados";
 $lang['VEHI_DETAIL_FAIL'] = "No fue posible actualizar los datos del vehículo";
 $lang['VEHI_PLATE_EXIST'] = "Matricula registrada con otro vehículo, verifique e intente de nuevo";
-$lang['VEHI_ACTIVE'] = "Activos";
-$lang['VEHI_INACTIVE'] = "Inactivos";
+
 
 //Cuentas
 $lang['MENU_ADMIN_ACCOUNTS'] = "Administrar cuentas";

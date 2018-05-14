@@ -92,8 +92,8 @@ class reportes_trayectos_model extends CI_Model {
 				$code = 1;
 				$title = lang('TAG_REPORTE_DRIVERS');
 				$statusId = [
-					'1'=>lang('VEHI_ACTIVE'),
-					'0'=>lang('VEHI_INACTIVE'),
+					'1'=>lang('DRIVER_ACTIVE'),
+					'0'=>lang('DRIVER_INACTIVE'),
 				];
 				$msg = lang('ERROR_DRIVERS').' '.$statusId[$status];
 				break;
