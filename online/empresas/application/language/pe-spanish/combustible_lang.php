@@ -218,3 +218,4 @@ $lang['ERROR_NON_ACCESS'] = "Debe indicar un usuario válido para ejecutar esta 
 $lang['ERROR_REPORT'] = "No fue posible obtener el reporte, por favor intenta más tarde";
 $lang['ERROR_VEHICLES'] = "No existen datos de vehiculos";
 $lang['ERROR_DRIVERS'] = "No existen datos de conductores";
+$lang['ERROR_TRAVELS'] = "No existen viajes";
