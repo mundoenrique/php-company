@@ -218,6 +218,7 @@ class reportes_trayectos_model extends CI_Model {
 
 		$dataReport = json_decode($dataRequest);
 		$status = $dataReport->status;
+		
 		//url API
 		$urlAPI = 'account/report/excel?status=' . $status;
 
