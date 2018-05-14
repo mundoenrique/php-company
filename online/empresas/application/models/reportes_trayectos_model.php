@@ -215,6 +215,8 @@ class reportes_trayectos_model extends CI_Model {
 			'x-company: ' . $this->company
 		];
 
+		log_message('INFO', 'La cabecera es --->>>> '.$header);
+
 		$dataReport = json_decode($dataRequest);
 		$status = $dataReport->status;
 		//url API
@@ -332,6 +334,11 @@ class reportes_trayectos_model extends CI_Model {
 		switch($httpCode) {
 			case 200:
 				$code = 0;
+				break;
+			case 404:
+				$code = 1;
+				$title = lang('TAG_REPORTE_TRAVELS');
+				$msg = lang('ERROR_TRAVELS');
 				break;
 			default:
 				$code = 1;
