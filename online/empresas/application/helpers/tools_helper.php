@@ -110,12 +110,12 @@
 
 			if($bytes) {
 				foreach ($file as $chr) {
-				echo chr($chr);
-			}
+					echo chr($chr);
+				}
 			} else {
 				echo $file;
+			}
 		}
-	}
 	}
 
 	if ( ! function_exists('np_hoplite_jsontoiconsector')) {
@@ -255,6 +255,9 @@
 								break;
 							case 'REPPGE':
 								$ruta=$urlBase."/reportes/guarderia";
+								break;
+							case 'REPRTH':
+								$ruta= $urlBase . "/reportes/comisiones";
 								break;
 
 						}
