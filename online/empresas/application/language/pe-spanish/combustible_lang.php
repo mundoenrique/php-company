@@ -120,8 +120,6 @@ $lang['MENU_ADMIN_ACCOUNTS'] = "Administrar cuentas";
 $lang['MENU_ACCOUNTS'] = "Conductor";
 $lang['MENU_ACCOUNTS_DETAILS'] = "Datos de la cuenta";
 $lang['TITLE_ACCOUNT_ADMIN'] = "Administrar cuentas";
-$lang['ACCOUNTS_ASIGNED'] = "Cuentas asignadas";
-$lang['ACCOUNTS_AVALIABLE'] = "Cuentas disponibles";
 //$lang['ACCOUNTS_DEALLOCATE'] = "Será devuelta la cuenta y se cancelaran los viajes asociados";
 
 

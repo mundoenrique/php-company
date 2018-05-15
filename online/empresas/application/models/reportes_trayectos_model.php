@@ -252,10 +252,6 @@ class reportes_trayectos_model extends CI_Model {
 			case 404:
 				$code = 1;
 				$title = lang('TAG_REPORTE_ACCOUNTS');
-				$statusId = [
-					'1'=>lang('ACCOUNTS_ASIGNED'),
-					'0'=>lang('ACCOUNTS_AVALIABLE'),
-				];
 				$msg = lang('ERROR_ACCOUNTS').' '.$statusId[$status];
 				break;
 			default:
