@@ -70,8 +70,9 @@ var jsonData = [];
 function getDataAccount(type) {
     $.post(baseURL + '/' + isoPais + '/trayectos/modelo', {way: 'accounts', modelo: 'account',data:type})
         .done(function(data) {
-            if(data.code == undefined && JSON.parse(data).lista != undefined && JSON.parse(data).lista != []){
-                dataAccount = JSON.parse(data);
+					if (data.code == undefined && JSON.parse(data.resp).lista != undefined && JSON.parse(data.resp).lista != []){
+							dataAccount = JSON.parse(data.resp);
+							lang = data.lang
               jsonData = dataAccount.lista;
                 createTable(jsonData);
             }else{
@@ -219,8 +220,9 @@ function ChangeDataAccount(type) {
     $.post(baseURL + '/' + isoPais + '/trayectos/modelo', {way: 'accounts', modelo: 'account',data:type})
         .done(function(data) {
             // console.log(data);
-            if(data.code == undefined && JSON.parse(data).lista != undefined && JSON.parse(data).lista != []){
-                dataAccount = JSON.parse(data);
+            if(data.code == undefined && JSON.parse(data.resp).lista != undefined && JSON.parse(data.resp).lista != []){
+								dataAccount = JSON.parse(data.resp);
+								lang = data.lang;
                 jsonData = dataAccount.lista;
                 // jsonData = [];
                 createTable(jsonData);
