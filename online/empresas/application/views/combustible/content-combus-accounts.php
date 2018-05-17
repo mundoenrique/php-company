@@ -50,15 +50,14 @@
 
 </div>
 
-
 <form id='formularioAccount' method='post' name="form1"></form>
 <input type="hidden" id="logUrl" value="<?php echo  base_url().$pais; ?>">
 
-<div id="msg-system" style='display:none' >
+		<div id="msg-system" style='display:none' >
     <div id="msg-info" class="comb-content"></div>
     <div id="actions" class="comb-content actions-buttons">
-<!--      <button id="send-info" class="buttons-action2">--><?php //echo lang('TAG_ACCEPT') ?><!--</button>-->
-<!--      <button id="close-info" class="buttons-action2">--><?php //echo lang('TAG_CANCEL') ?><!--</button>-->
+			<button id="close-info" class="buttons-action"><?php echo lang('TAG_ACCEPT') ?></button>
+			<!--<button id="send-info" class="buttons-action"><?php //echo lang('TAG_CANCEL') ?></button>-->
     </div>
 </div>
 
