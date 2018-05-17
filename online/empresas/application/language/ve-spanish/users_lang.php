@@ -26,6 +26,7 @@ $lang['SUBMENU_USUARIO'] = 'Usuario';
 $lang['SUBMENU_DESCARGAS'] = 'Descargas';
 $lang['SUBMENU_NOTIFICACIONES'] = 'Notificaciones';
 $lang['SUBMENU_LOGOUT'] = 'Salir';
+$lang['SUBMENU_TARIFAS'] = 'tarifas';
 $lang['CONFIG_USER'] = 'Configuración de usuario';
 $lang['CONFIG_EMPR'] = 'Configuración de empresa';
 $lang['CONFIG_SUCU'] = 'Configuración de sucursal';

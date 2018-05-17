@@ -4,6 +4,7 @@ $urlBaseA = $this->config->item('base_url');
 
 $urlBase = $urlBaseA.$pais;
 $logged_in = $this->session->userdata('logged_in');
+$pais=$this->session->userdata('pais');
 ?>
 <footer id="foot">
 		<div id="foot-wrapper">
@@ -52,12 +53,21 @@ $logged_in = $this->session->userdata('logged_in');
 					<?php
 					if($logged_in){
 					?>
+						<?php
+							if($pais=='Ve'){
+						?>
+							<li class="menu-item privacy">
+								<a id='tarifas' href="<?php echo $urlBase; ?>/tarifas" rel="section">
+									<? echo lang('SUBMENU_TARIFAS'); ?>
+								</a>
+							</li>
+						<?php } ?>
 
-					<li class="menu-item privacy">
-						<a id='exit' href="<?php echo $urlBase; ?>/logout" rel="section">
-							<? echo lang('SUBMENU_LOGOUT'); ?>
-						</a>
-					</li>
+						<li class="menu-item privacy">
+							<a id='exit' href="<?php echo $urlBase; ?>/logout" rel="section">
+								<? echo lang('SUBMENU_LOGOUT'); ?>
+							</a>
+						</li>
 					<?php } ?>
 				</ul>
 			</nav>
