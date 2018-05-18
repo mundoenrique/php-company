@@ -50,7 +50,7 @@ class account_model extends CI_Model {
         $resAPI = $jsonResponse->resAPI;
 
         log_message("INFO", "RESPONSE CUENTAS" .": ==>> httpCode: " . $httpCode . " resAPI: " . $resAPI);
-
+				$httpCode = 400;
         $response = [];
         $dataResponse = $resAPI;
 				$response = $resAPI;
@@ -74,22 +74,19 @@ class account_model extends CI_Model {
                 $title = lang( 'BREADCRUMB_COMBUSTIBLE' );
                 $msg = lang( 'ERROR_(-39)' );
 
-                if( $resAPI != "Bad Request" ){
-									$rc = $dataResponse->rc;
-                  $codeError = [ -197 ];
-                  if( in_array( $rc, $codeError ) ) {
-                    $code = 0;
-                    $title = '';
-                    $msg = lang('ERROR_('.$rc.')');
-                  }
+								$rc = $dataResponse->{'rc'};
+								log_message('INFO', 'El RC es --->>> '.$rc);
+
+                if( $rc == -238 || $rc == -241){
+                  $msg = lang('ERROR_('.$rc.')');
                 }
 
                 $response = [
                   'code' => $code,
                   'title' => $title,
                   'msg' => $msg,
-                  'back' => '',
-                  'lang' => [
+                  // 'back' => '',
+                  'language' => [
                     'TAG_ACCEPT' => lang('TAG_ACCEPT')
                   ]
                 ];
@@ -107,7 +104,7 @@ class account_model extends CI_Model {
             case 404:
                 $response = [
                     'code' => 1,
-                    'msg' => [],
+                    'msg' => lang('ERROR_ACCOUNTS'),
                     'language' => [
                         'TAG_ACCEPT' => lang('TAG_ACCEPT')
                     ]
@@ -117,7 +114,7 @@ class account_model extends CI_Model {
                 $response = [
                     'code' => 3,
                     'title' => lang('SYSTEM_NAME'),
-                    'msg' => lang('GENERICO_USER'),
+                    'msg' => lang('ERROR_GENERICO_USER'),
                     'language' => [
                         'TAG_ACCEPT' => lang('TAG_ACCEPT')
                     ]
@@ -148,7 +145,7 @@ class account_model extends CI_Model {
         $resAPI = $jsonResponse->resAPI;
 
         log_message("INFO", "RESPONSE DEVOLVER CUENTAS" .": ==>> httpCode: " . $httpCode . " resAPI: " . $resAPI);
-
+				$httpCode = 400;
         $response = [];
         $dataResponse = $resAPI;
         $response = $resAPI;
@@ -189,7 +186,7 @@ class account_model extends CI_Model {
             case 404:
                 $response = [
                     'code' => 1,
-                    'msg' => [],
+                    'msg' => lang('ERROR_ACCOUNTS'),
                     'language' => [
                         'TAG_ACCEPT' => lang('TAG_ACCEPT')
                     ]

@@ -40,7 +40,9 @@ function notiSystem (title,msg,accept,code) {
                 text: accept,
                 click: function() {
                     if(codeMsg == 3){location.href = $('#logUrl').val() + '/logout';};
-                    if(codeMsg == 2){ $( "#msg-system" ).dialog( "close" );};
+                    if(codeMsg == 2){
+											$( "#msg-system" ).dialog( "close" );
+										};
 
 
                 }
@@ -74,12 +76,19 @@ function getDataAccount(type) {
 							dataAccount = JSON.parse(data.resp);
 							lang = data.lang
               jsonData = dataAccount.lista;
-                createTable(jsonData);
-            }else{
-                catchErrorCode(data.code,data.msg,data.language.TAG_ACCEPT);
-                jsonData = [];
-                createTable(jsonData);
-             }
+              createTable(jsonData);
+
+							console.log("Estoy en obtención de data --->>> "+data.code);
+          }else{
+						$('#loading').hide();
+						console.log("Estoy en ELSE de la obtención de data --->>> " + data.code);
+
+            catchErrorCode(data.code,data.msg,data.language.TAG_ACCEPT);
+
+						jsonData = [];
+						createTable(jsonData);
+
+           }
         });
 }
 
@@ -226,7 +235,12 @@ function ChangeDataAccount(type) {
                 jsonData = dataAccount.lista;
                 // jsonData = [];
                 createTable(jsonData);
+
+								console.log("Estoy en obtención de data --->>> "+data.code);
             }else{
+							$('#loading').hide();
+							console.log("Estoy en ELSE de la obtención de data --->>> " + data.code);
+
                 catchErrorCode(data.code,data.msg,data.language.TAG_ACCEPT);
                 jsonData = [];
                 createTable(jsonData);
@@ -293,6 +307,3 @@ $('#novo-container-body').on('click', '#down-excel', function(e) {
 	}
 	downReports('CuentasExcel', 'reportes_trayectos', dataReport, 'cuentas-xls');
 });
-
-
-
