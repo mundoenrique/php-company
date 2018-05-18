@@ -78,10 +78,8 @@ function getDataAccount(type) {
               jsonData = dataAccount.lista;
               createTable(jsonData);
 
-							console.log("Estoy en obtención de data --->>> "+data.code);
           }else{
 						$('#loading').hide();
-						console.log("Estoy en ELSE de la obtención de data --->>> " + data.code);
 
             catchErrorCode(data.code,data.msg,data.language.TAG_ACCEPT);
 
@@ -236,10 +234,8 @@ function ChangeDataAccount(type) {
                 // jsonData = [];
                 createTable(jsonData);
 
-								console.log("Estoy en obtención de data --->>> "+data.code);
             }else{
 							$('#loading').hide();
-							console.log("Estoy en ELSE de la obtención de data --->>> " + data.code);
 
                 catchErrorCode(data.code,data.msg,data.language.TAG_ACCEPT);
                 jsonData = [];
