@@ -50,7 +50,7 @@ class account_model extends CI_Model {
         $resAPI = $jsonResponse->resAPI;
 
         log_message("INFO", "RESPONSE CUENTAS" .": ==>> httpCode: " . $httpCode . " resAPI: " . $resAPI);
-				$httpCode = 400;
+
         $response = [];
         $dataResponse = $resAPI;
 				$response = $resAPI;
@@ -75,9 +75,30 @@ class account_model extends CI_Model {
                 $msg = lang( 'ERROR_(-39)' );
 
 								$rc = $dataResponse->{'rc'};
-								log_message('INFO', 'El RC es --->>> '.$rc);
 
                 if( $rc == -238 || $rc == -241){
+                  $msg = lang('ERROR_('.$rc.')');
+                }
+
+                $response = [
+                  'code' => $code,
+                  'title' => $title,
+                  'msg' => $msg,
+                  // 'back' => '',
+                  'language' => [
+                    'TAG_ACCEPT' => lang('TAG_ACCEPT')
+                  ]
+								];
+								break;
+            case 403:
+                $code = 2;
+                $title = lang( 'BREADCRUMB_COMBUSTIBLE' );
+                $msg = lang( 'ERROR_(-900)' );
+
+								$rc = $dataResponse->{'rc'};
+								log_message('INFO', 'El RC es --->>> '.$rc);
+
+                if( $rc == -197 || $rc == 8 || $rc == -307 || $rc == -900){
                   $msg = lang('ERROR_('.$rc.')');
                 }
 
@@ -145,7 +166,7 @@ class account_model extends CI_Model {
         $resAPI = $jsonResponse->resAPI;
 
         log_message("INFO", "RESPONSE DEVOLVER CUENTAS" .": ==>> httpCode: " . $httpCode . " resAPI: " . $resAPI);
-				$httpCode = 400;
+
         $response = [];
         $dataResponse = $resAPI;
         $response = $resAPI;
@@ -162,13 +183,46 @@ class account_model extends CI_Model {
                 }
                 break;
             case 400:
+                $code = 2;
+                $title = lang( 'BREADCRUMB_COMBUSTIBLE' );
+                $msg = lang( 'ERROR_(-39)' );
+
+								$rc = $dataResponse->{'rc'};
+
+                if( $rc == -238 || $rc == -241){
+                  $msg = lang('ERROR_('.$rc.')');
+                }
+
                 $response = [
-                    'code' => 2,
-                    'title' => lang('BREADCRUMB_COMBUSTIBLE'),
-                    'msg' => lang('ERROR_(-39)'),
-                    'language' => [
-                        'TAG_ACCEPT' => lang('TAG_ACCEPT')
-                    ]
+                  'code' => $code,
+                  'title' => $title,
+                  'msg' => $msg,
+                  // 'back' => '',
+                  'language' => [
+                    'TAG_ACCEPT' => lang('TAG_ACCEPT')
+                  ]
+								];
+								break;
+							case 403:
+                $code = 2;
+                $title = lang( 'BREADCRUMB_COMBUSTIBLE' );
+                $msg = lang( 'ERROR_(-900)' );
+
+								$rc = $dataResponse->{'rc'};
+								log_message('INFO', 'El RC es --->>> '.$rc);
+
+                if( $rc == -197 || $rc == 8 || $rc == -307 || $rc == -900){
+                  $msg = lang('ERROR_('.$rc.')');
+                }
+
+                $response = [
+                  'code' => $code,
+                  'title' => $title,
+                  'msg' => $msg,
+                  // 'back' => '',
+                  'language' => [
+                    'TAG_ACCEPT' => lang('TAG_ACCEPT')
+                  ]
                 ];
                 break;
             case 401:
