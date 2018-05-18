@@ -53,10 +53,14 @@ class account_model extends CI_Model {
 
         $response = [];
         $dataResponse = $resAPI;
-        $response = $resAPI;
+				$response = $resAPI;
+				$dataResponse = json_decode($resAPI);
         switch ($httpCode) {
             case 200:
-                $dataResponse = json_decode($resAPI);
+								$response = [
+									'resp' => $resAPI,
+									'lang' => lang('TAG_ACCEPT')
+								];
                 if (empty($dataRequest)) {
                     $data = [];
                     $response = [
@@ -71,7 +75,7 @@ class account_model extends CI_Model {
                 $msg = lang( 'ERROR_(-39)' );
 
                 if( $resAPI != "Bad Request" ){
-                  $rc = $dataResponse->rc;
+									$rc = $dataResponse->rc;
                   $codeError = [ -197 ];
                   if( in_array( $rc, $codeError ) ) {
                     $code = 0;
@@ -113,7 +117,7 @@ class account_model extends CI_Model {
                 $response = [
                     'code' => 3,
                     'title' => lang('SYSTEM_NAME'),
-                    'msg' => lang('ERROR_GENERICO_USER'),
+                    'msg' => lang('GENERICO_USER'),
                     'language' => [
                         'TAG_ACCEPT' => lang('TAG_ACCEPT')
                     ]
