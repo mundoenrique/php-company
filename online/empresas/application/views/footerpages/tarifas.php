@@ -7,7 +7,8 @@
 	<div class="content-beneficios">
 
 		<div class="content-tarifas">
-			<img src="<?php echo $urlCdn."/media/img/tarifas.png"?>" alt="">
+			<?php echo insert_image_cdn('tarifas.png'); ?>
+
 		</div>
 
 	</div>
