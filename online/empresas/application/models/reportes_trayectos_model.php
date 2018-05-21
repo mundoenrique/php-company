@@ -23,8 +23,7 @@ class reportes_trayectos_model extends CI_Model {
 		$this->token = $this->session->userdata('token');
 		$this->company = $this->session->userdata('acrifS');
 		$this->idProducto = $this->session->userdata('idProductoS');
-		$this->userName = $this->session->userdata('userName');
-		log_message('INFO', 'TOKEN------------------------------' . $this->token);		//Agrega lenguajes
+		$this->userName = $this->session->userdata('userName'); //Agrega lenguajes
 		$this->lang->load('dashboard');
 		$this->lang->load('combustible');
 		$this->lang->load('users');
@@ -52,7 +51,6 @@ class reportes_trayectos_model extends CI_Model {
 
 		$dataReport = json_decode($dataRequest);
 		$status = $dataReport->status;
-		log_message('INFO', 'ESTATUS DEL CONDUCTOR ---------------> ' . $status);
 
 		//url API
 		$urlAPI = 'driver/report/excel';
