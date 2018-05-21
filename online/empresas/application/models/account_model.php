@@ -77,7 +77,7 @@ class account_model extends CI_Model {
 								$rc = $dataResponse->{'rc'};
 
                 if( $rc == -238 || $rc == -241){
-                  $msg = lang('ERROR_('.$rc.')');
+									$msg = lang('ERROR_(-39)');
                 }
 
                 $response = [
@@ -190,7 +190,7 @@ class account_model extends CI_Model {
 								$rc = $dataResponse->{'rc'};
 
                 if( $rc == -238 || $rc == -241){
-                  $msg = lang('ERROR_('.$rc.')');
+                  $msg = lang('ERROR_(-39)');
                 }
 
                 $response = [
