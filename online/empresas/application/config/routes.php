@@ -36,6 +36,7 @@ $route['(:any)/empresas/confignoti'] = "users/configNotificaciones/$1";
 
 $route['(:any)/beneficios'] = "footer/pantallaBeneficios/$1";
 $route['(:any)/condiciones'] = "footer/pantallaCondiciones/$1";
+$route['(:any)/tarifas'] = "footer/pantallaTarifas/$1";
 
 $route['(:any)/clave'] = "users/changePassNewUser/$1";
 $route['(:any)/changePassNewUserAuth'] = "users/changePassNewUserAuth/$1";
