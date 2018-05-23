@@ -1,7 +1,7 @@
 <?php
 $dataResponse = json_decode($dataResponse);
 //print_r($dataResponse);
-$dataAccount = json_decode($dataResponse,true);
+$dataAccount = json_decode($dataResponse->resp,true);
 
 $card = $dataAccount['tarjeta'];
 $saldo = (isset($dataAccount['saldos']))?$dataAccount['saldos']:'';
