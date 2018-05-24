@@ -1,4 +1,3 @@
-
 <?php
 $lang['SYSTEM_NAME']= "Empresas Online Perú";
 $lang['LAST_SESSION']="Última sesión";
