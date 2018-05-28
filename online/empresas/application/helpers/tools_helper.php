@@ -81,7 +81,7 @@
 		 * @param  byte $bytes
 		 * @return document
 		 */
-		function np_hoplite_byteArrayToFile($file, $typeFile, $filename, $bytes = TRUE)
+		function np_hoplite_byteArrayToFile($bytes,$typeFile,$filename)
 		{
 			$CI =& get_instance();
 
@@ -108,12 +108,8 @@
 					break;
 			}
 
-			if($bytes) {
-				foreach ($file as $chr) {
-					echo chr($chr);
-				}
-			} else {
-				echo $file;
+			foreach ($bytes as $chr) {
+				echo chr($chr);
 			}
 		}
 	}
@@ -194,7 +190,7 @@
 								$ruta=$urlBase."/lotes/innominada";
 								break;
 							case 'TIINVN':
-								$ruta=$urlBase."/lotes/innominada/afiliacion";
+								$ruta=$urlBase."/lotes/innominada/inventario";
 								break;
 							case 'TEBTHA':
 								$ruta=$urlBase."/reportes/tarjetahabientes";
