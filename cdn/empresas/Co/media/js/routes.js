@@ -11,7 +11,3 @@ function formatterDate(date) {
 
 	return new Date(dateStr);
 }
-
-function downloadReport() {
-
-}
