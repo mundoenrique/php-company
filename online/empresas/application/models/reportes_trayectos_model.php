@@ -287,13 +287,15 @@ class reportes_trayectos_model extends CI_Model {
 
 		$dataReport = json_decode($dataRequest);
 		$type = $dataReport->type;
-		$date = explode('/', $dataReport->beginDate);
-		$beginDate = $date[0] . '-' . $date[1] . '-' . $date[2];
-		$date = explode('/', $dataReport->finalDate);
-		$finalDate = $date[0] . '-' . $date[1] . '-' . $date[2];
+		if($type !== 'count') {
+			$date = explode('/', $dataReport->beginDate);
+			$beginDate = $date[0] . '-' . $date[1] . '-' . $date[2];
+			$date = explode('/', $dataReport->finalDate);
+			$finalDate = $date[0] . '-' . $date[1] . '-' . $date[2];
+			//url API
+			$urlAPI = 'travel/report/excel?from=' . $beginDate . '&to=' . $finalDate;
+		}
 
-		//url API
-		$urlAPI = 'travel/report/excel?from=' . $beginDate . '&to=' . $finalDate;
 
 		if($type === 'statusId') {
 
