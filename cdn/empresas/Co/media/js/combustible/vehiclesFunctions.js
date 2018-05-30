@@ -35,13 +35,27 @@ function listVehicle (data) {
 // despliegue del listado de veículos
 function displayTable (vehiclesList) {
     $('#novo-table').DataTable({
+			"drawCallback": function (data) {
+				if (data.length === 0 && data.code !== 0) {
+					$('#down-report').css('display', 'none');
+				} else {
+					$('#down-report').css('display', '');
+				}
+			},
         select: false,
         dom: 'Bfrtip',
         "lengthChange": false,
         "pagingType": "full_numbers",
         "pageLength": 5, //Cantidad de registros por pagina
         "language": { "url": baseCDN + '/media/js/combustible/Spanish.json'}, //Lenguaje: español //cdn.datatables.net/plug-ins/1.10.12/i18n/Spanish.json
-        data: vehiclesList, //Arreglo con los  valores del objeto
+			buttons: [
+				{
+					text: '<span id="down-excel" aria-hidden="true" class="icon" data-icon="&#xe05a"></span> <select class="select" id="vehicles-sel"><option value="">Todos</option>' + selectStatus + '</select>',
+					className: 'down-report',
+					titleAttr: lang.TAG_DWN_EXCEL
+				}
+			],
+				data: vehiclesList, //Arreglo con los  valores del objeto
         columns: [
             {
                 title: lang.VEHI_PLATE,
@@ -86,7 +100,8 @@ function modalAddEdit (idVehicle, vehiclesList) {
         $('#model').val(vehiclesList.model);
         $('#year').val(vehiclesList.year);
         $('#capacity').val(vehiclesList.capacity);
-        $('#odometer').val(vehiclesList.odometer);
+				$('#odometer').val(vehiclesList.odometer);
+				$('#status > option[value="BUSY"]').hide();
         $('#status > option[value="' + vehiclesList.status + '"]').prop('selected', true);
         $("#send-save").text(lang.TAG_WITHOUT_CHANGES);
         notiSystem('groups', title, '505px');
