@@ -37,13 +37,25 @@ function lisTravels(typeList)
 function displayTable(travelsList)
 {
     $('#novo-table').DataTable({
+			"drawCallback": function (data) {
+				if (travelsList.length == 0 || typeList.type === 'drivers' || typeList.type === 'vehicles') {
+					$('#down-excel').css('display', 'none');
+				}
+			},
         select: false,
         dom: 'Bfrtip',
         "lengthChange": false,
         "pagingType": "full_numbers",
         "pageLength": 5, //Cantidad de registros por pagina
         "language": {"url": baseCDN + '/media/js/combustible/Spanish.json'}, //Lenguaje: español //cdn.datatables.net/plug-ins/1.10.12/i18n/Spanish.json
-        data: travelsList, //Arreglo con los  valores del objeto
+				buttons: [
+					{
+						text: '<span id="down-excel" aria-hidden="true" class="icon" data-icon="&#xe05a" type="' + typeList.type + '" beginDate="' + typeList.beginDate + '" finalDate="' + typeList.finalDate + '" status="' + typeList.option + '"></span>',
+						className: 'down-report',
+						titleAttr: lang.TAG_DWN_EXCEL
+					}
+				],
+				data: travelsList, //Arreglo con los  valores del objeto
         columns: [
             {
                 title: lang.TRAVEL_START_DATE,
