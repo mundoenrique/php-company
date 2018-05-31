@@ -194,7 +194,7 @@
 								$ruta=$urlBase."/lotes/innominada";
 								break;
 							case 'TIINVN':
-								$ruta=$urlBase."/lotes/innominada/afiliacion";
+								$ruta=$urlBase."/lotes/innominada/inventario";
 								break;
 							case 'TEBTHA':
 								$ruta=$urlBase."/reportes/tarjetahabientes";
