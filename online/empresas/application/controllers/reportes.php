@@ -3277,7 +3277,7 @@ class Reportes extends CI_Controller {
                     $username = $this->session->userdata('userName');
                     $token = $this->session->userdata('token');
 
-                    $pruebaTabla = $this->callWSGastosPorCategorias($urlCountry,$token,$username,$empresa,$tarjeta,$cedula,$empresa,$fechaIni,$fechaFin,$producto,$tipoConsulta);
+                    $pruebaTabla = $this->callWSGastosPorCategorias($urlCountry,$token,$username,$empresa,$tarjeta,$cedula,$fechaIni,$fechaFin,$producto,$tipoConsulta);
                     $this->output->set_content_type('application/json')->set_output(json_encode($pruebaTabla));
 
                 }
@@ -3297,7 +3297,7 @@ class Reportes extends CI_Controller {
      * @param  string $token,$username,$empresa,$tarjeta,$cedula,$empresa,$fechaIni,$fechaFin,$producto,$tipoConsulta
      * @return JSON
      */
-    private function callWSGastosPorCategorias($urlCountry,$token,$username,$empresa,$tarjeta,$cedula,$empresa,$fechaIni,$fechaFin,$producto,$tipoConsulta){
+    private function callWSGastosPorCategorias($urlCountry,$token,$username,$empresa,$tarjeta,$cedula,$fechaIni,$fechaFin,$producto,$tipoConsulta){
         $this->lang->load('erroreseol');//HOJA DE ERRORES;
         $canal = "ceo";
         $modulo="reportes";
