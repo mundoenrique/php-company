@@ -256,6 +256,9 @@
 							case 'REPPGE':
 								$ruta=$urlBase."/reportes/guarderia";
 								break;
+							case 'REPRTH':
+								$ruta= $urlBase . "/reportes/comisiones";
+								break;
 
 						}
 						if($submenu->idModulo == "TICARG"||$submenu->idModulo == "TIINVN"){

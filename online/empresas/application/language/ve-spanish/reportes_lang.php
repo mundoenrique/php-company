@@ -77,6 +77,7 @@ $lang['BREADCRUMB_REPORTES_SALDOS']= "Saldos al Cierre";
 $lang['BREADCRUMB_REPORTES_TARJETAS']= "Tarjetas emitidas";
 $lang['BREADCRUMB_REPORTES_TARJETA_HABIENTE']= "Tarjetahabiente";
 $lang['BREADCRUMB_REPORTES_GUARDERIA']= "Guardería";
+$lang['BREADCRUMB_REPORTES_COMISION']= "Comisiones por recarga";
 // PLACE HOLDERS REPORTES
 $lang['PLACEHOLDER_TARJETA']= "Ingrese Tarjeta";
 
@@ -140,3 +141,4 @@ $lang['REPORTE_FECHA_EXP'] = "Id Lote";
 
 $lang['DWL_PDF'] ="Exportar a PDF";
 $lang['DWL_XLS'] ="Exportar a excel";
+$lang['TAG_ACCEPT'] = "Aceptar";
