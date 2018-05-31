@@ -3,6 +3,7 @@ $lang['ERROR_GENERICO_USER']= "Error en Sistema, por favor intente nuevamente.";
 $lang['ERROR_CAMBIO_CLAVE']= "Error en el formulario.";
 $lang['ERROR_NO_DATA'] = "No se encontraron datos";
 $lang['SIN_FUNCION'] = 'No tiene permisos para realizar esta operación';//'Operación no asignada';
+$lang['ERROR_(8)']= "El conductor ya posee una cuenta activa asociada a la empresa";
 $lang['ERROR_(0)']= "Proceso OK";
 $lang['ERROR_(-1)']= "Usuario o contraseña inválido";
 $lang['ERROR_(-2)']= "Usuario ingresando en la aplicación por primera vez";
@@ -235,6 +236,8 @@ $lang['ERROR_(-228)']= "En estos momentos no podemos procesar su solicitud";
 $lang['ERROR_(-229)']= "En estos momentos no podemos procesar su solicitud";
 $lang['ERROR_(-230)']= "En estos momentos no podemos procesar su solicitud";
 $lang['ERROR_(-233)']= "La empresa no posee saldo disponible para el servicio";
+$lang['ERROR_(-238)']= "El registro no existe";
+$lang['ERROR_(-241)']= "Error parámetros inválidos";
 $lang['ERROR_(-256)']= "Tipo de Lote Invalido";
 $lang['ERROR_(-280)'] = 'Tipo de archivo no permitido.';
 $lang['ERROR_(-281)'] = 'Los datos de la cuenta son inválidos.';
@@ -247,6 +250,9 @@ $lang['ERROR_(-297)'] = 'La cuenta no está registrada';
 $lang['ERROR_(-298)'] = 'El concepto de la cuenta principal es inválido';
 $lang['ERROR_(-299)'] = 'El concepto de la cuenta principal no existe';
 $lang['ERROR_(-301)'] = 'EL código de seguridad es inválido,<br> verifique e intente de nuevo';
+$lang['ERROR_(-307)'] = 'La tarjeta se encuentra bloqueada permanentemente';
+$lang['ERROR_(-900)'] = 'Error general';
+
 
 //recuperar contraseña
 $lang["TITULO_ERROR"] = 'No ha sido posible procesar su solicitud.';
