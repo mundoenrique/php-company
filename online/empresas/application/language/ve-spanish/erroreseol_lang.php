@@ -1,5 +1,6 @@
 <?php
 $lang['ERROR_GENERICO_USER']= "Error en Sistema, por favor intente nuevamente."; // cuando ocurre algun error que el usuario no deberia ver (los sgts con el prefix "Error")
+$lang['ERROR_GENERAL']= "En estos momentos no podemos atender tu solicitud, por favor intenta más tarde";
 $lang['ERROR_CAMBIO_CLAVE']= "Error en el formulario.";
 $lang['ERROR_NO_DATA'] = "No se encontraron datos";
 $lang['SIN_FUNCION'] = 'No tiene permisos para realizar esta operación';//'Operación no asignada';
@@ -253,6 +254,9 @@ $lang['ERROR_(-341)'] = 'Nro de Cuenta Inválido. Código de Banco Inválido.';
 $lang['ERROR_(-342)'] = 'Número de Cuenta Inválido.';
 $lang['ERROR_(-373)'] = 'Número de RIF Inválido.';
 $lang['ERROR_(-378)'] = 'La empresa seleccionada no posee productos y/o servicios que realicen notificaciones';
+$lang['ERROR_EMPRESAS'] = 'No fue posible obtener la lista de empresas, por favor intenta más tarde';
+$lang['ERROR_RECARGAS'] = 'No fue posible obtener la lista de recargas, por favor intenta más tarde';
+$lang['ERROR_DESCARGA'] = 'No fue posible descargar el archivo, por favor intenta más tarde';
 
 //recuperar contraseña
 $lang["TITULO_ERROR"] = 'No ha sido posible procesar su solicitud.';
@@ -263,3 +267,4 @@ $lang["ERROR_SUPPORT"] = 'Por favor envíe un correo a <strong>soporteempresas@t
 
 //Botón de pago
 $lang['PAG_OS_E_CORREO'] = 'No fue posible enviar el correo,<br> intente más tarde';
+$lang['NO_EMPRESAS_LIST'] = 'No fue posible obtener la lista de empresas';
