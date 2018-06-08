@@ -32,11 +32,11 @@ $info;
 			</li>
 			/
 			<li class="breadcrumb-item-current">
-				<a href="<?php echo $urlBase; ?>/lotes/innominada/inventario"><?php echo lang('POSITION_INNO'); ?></a>
+				<a href="<?php echo $urlBase; ?>/lotes/innominada/afiliacion"><?php echo lang('POSITION_INNO'); ?></a>
 			</li>
 			/
 			<li class="breadcrumb-item-current">
-				<a ><?php echo "Detalle Lote";//echo lang('POSITION_INVENINNO'); ?></a>
+				<a><?php echo "Detalle Lote";//echo lang('POSITION_INVENINNO'); ?></a>
 			</li>
 		</ol>
 
