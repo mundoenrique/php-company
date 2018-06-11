@@ -1,7 +1,7 @@
 var path =window.location.href.split( '/' );
 var baseURL = path[0]+ "//" +path[2]+'/'+path[3],
 	isoPais = path[4],
-	numlote  = "", 
+	numlote  = "",
 	fecha_inicial = "",
 	fecha_final = "",
 	calendario = function(input){
@@ -53,8 +53,8 @@ var baseURL = path[0]+ "//" +path[2]+'/'+path[3],
 		var canvas = "<div>"+msj+"</div>";
 			$(canvas).dialog({
 				title : titu,
-				modal:true, 
-				close: function(){$(this).dialog('destroy')}, 
+				modal:true,
+				close: function(){$(this).dialog('destroy')},
 				resizable:false,
 				buttons:{
 					OK: function(){
@@ -68,7 +68,7 @@ var baseURL = path[0]+ "//" +path[2]+'/'+path[3],
 		$('form#formulario').append('<input type="hidden" name="data-numlote" value="' + getNumlote() + '" />');
 		$('form#formulario').append('<input type="hidden" name="data-fecha_inicial" value="' + getFecha_inicial() + '" />');
 		$('form#formulario').append('<input type="hidden" name="data-fecha_final" value="' + getFecha_final() + '" />');
-		$('form#formulario').attr('action',baseURL+'/'+isoPais+"/lotes/innominada/inventario");
+		$('form#formulario').attr('action',baseURL+'/'+isoPais+"/lotes/innominada/afiliacion");
 		$('form#formulario').submit();
 	},
 	setNumlote = function(){
@@ -98,7 +98,7 @@ var baseURL = path[0]+ "//" +path[2]+'/'+path[3],
 		return fecha_final;
 	},
 	toDataTable = function($table){
-		var dt = $table.dataTable({ 
+		var dt = $table.dataTable({
 		      "iDisplayLength": 10,
 		      'bRetrieve': true,
 		      "sPaginationType": "full_numbers",
