@@ -61,6 +61,12 @@ $urlBase = $urlBaseA.$pais;
 			</ul>
 
 		</li>
+		<li class="menu-item profile">
+			<a href="<?php echo $urlBase.'/guias' ?>" rel="section" title="Ayuda">
+				<span aria-hidden="true" class="icon" data-icon="&#xe04b;"></span>
+				<?php echo lang('AYUDA') ?>
+			</a>
+		</li>
 	</ul>
 </nav>
 

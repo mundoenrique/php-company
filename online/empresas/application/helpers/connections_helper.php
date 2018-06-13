@@ -42,7 +42,7 @@ if ( ! function_exists('np_Hoplite_GetWS')) {
 		}else{
 			return $response;
 		}
-		
+
 	}
 }
 
@@ -60,32 +60,32 @@ if ( ! function_exists('GetAPIServ')) {
 		$header = [
 			'Content-Type: application/json',
 		];
-		
+
 		foreach ($headerAPI as $item) {
 			$item = trim($item);
 			array_push($header, $item);
 		}
-		
+
 		$urlcurlAPI = $CI->config->item('urlAPI') . $urlAPI;
 		log_message("INFO", "URL API: " . $urlcurlAPI);
-		
+
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, $urlcurlAPI);
 		curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $method);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $bodyAPI);
 		curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
-		
+
 		$responseAPI = curl_exec($ch);
 		$httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 		curl_close($ch);
-		
+
 		$response = new stdClass();
 		$response->httpCode = $httpCode;
 		$response->resAPI = $responseAPI;
-		
+
 		return $response;
-		
+
 	}
 }
 //--------------------------------------------------------------------------------------------------
@@ -109,36 +109,88 @@ if ( ! function_exists('GetCeoApi')) {
 			'channel: API',
 			'accept: application/json'
 		];
-		
+
 		foreach ($headerAPI as $item) {
 			$item = trim($item);
 			array_push($header, $item);
 		}
-		
+
 		$urlcurlAPI = $CI->config->item('urlServ') . 'ceoapi/1.0/' . $urlAPI;
 		log_message("INFO", "URL API: " . $urlcurlAPI);
-		
+
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, $urlcurlAPI);
 		curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $method);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $bodyAPI);
 		curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
-		
-		
+
+
 		$responseAPI = curl_exec($ch);
 		$httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 		curl_close($ch);
-		
+
 		$response = new stdClass();
 		$response->httpCode = $httpCode;
 		$response->resAPI = $responseAPI;
-		
+
 		return $response;
-		
+
 	}
 }
 //--------------------------------------------------------------------------------------------------
+
+if ( ! function_exists('GetHelpApi')) {
+	/**
+	 * Realiza el llamado al api help_ceo
+	 * @param  string $urlAPI
+	 * @param  string $headerAPI
+	 * @param  string $bodyAPI
+	 * @param  string $method
+	 * @return object
+	 */
+	function GetApiContent($urlAPI, $headerAPI, $bodyAPI, $method, $message)
+	//function GetHelpApi($urlAPI, $headerAPI, $bodyAPI, $method)
+	{
+		//set params
+		$CI = &get_instance();
+		log_message("INFO", "INICIANDO LLAMADO API-CONTENT POR EL METODO:===>>> " . $method);
+		$header = [
+			'Content-Type: application/json',
+			'language: es',
+			'channel: API',
+			'accept: application/json'
+		];
+
+		foreach ($headerAPI as $item) {
+			$item = trim($item);
+			array_push($header, $item);
+		}
+
+		$urlcurlAPI = 'http://api-dev.novopayment.net/' . $urlAPI;
+		//$urlcurlAPI = $CI->config->item('urlAPIHelp') . 'api/functionality/' . $urlAPI;
+
+		// create curl resource
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, 'https://jsonplaceholder.typicode.com/posts/1');
+		curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $method);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $bodyAPI);
+		curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
+
+		$responseAPI = curl_exec($ch);
+		$httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+		curl_close($ch);
+
+		//echo var_dump($responseAPI);
+
+		$response = new stdClass();
+		$response->httpCode = $httpCode;
+		$response->resAPI = $responseAPI;
+
+		return $message . ' 3.- Helper';
+	}
+}
 
 if ( ! function_exists('GettokenOauth')) {
 	/**
@@ -155,35 +207,35 @@ if ( ! function_exists('GettokenOauth')) {
 			'channel: web',
 			'accept: application/json; charset=utf-8'
 		];
-		
+
 		$bodyAPI = [
 			'grant_type' => 'client_credentials',
 			'client_id' => $CI->config->item('client_id'),
 			'client_secret' => $CI->config->item('client_secret')
 		];
-		
+
 		$urlcurlAPI = $CI->config->item('urlServ') . 'auth2/1.0/token';
 		log_message("INFO", "AUTENTICACIÓN oauth: " . $urlcurlAPI . ' client_id: ' .
 		                    $CI->config->item('client_id') . ' client_secret: ' .
 		                    $CI->config->item('client_secret'));
-		
+
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, $urlcurlAPI);
 		curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
 		curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($bodyAPI));
 		curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
-		
-		
+
+
 		$responseAPI = curl_exec($ch);
 		$httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 		curl_close($ch);
-		
+
 		$response = new stdClass();
 		$response->httpCode = $httpCode;
 		$response->resAPI = $responseAPI;
 		return $response;
-		
+
 	}
 }
 //--------------------------------------------------------------------------------------------------

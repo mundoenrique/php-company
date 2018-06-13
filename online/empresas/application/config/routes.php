@@ -217,6 +217,10 @@ $route['(:any)/trayectos/detalleCuentas'] = "combustible/accountsDetails/$1";
 $route['(:any)/trayectos/viajes'] = "combustible/travels/$1";
 $route['(:any)/trayectos/viajes/detalles'] = "combustible/travelAddEdit/$1";
 
+//guides
+$route['(:any)/guias'] = "help/functionalities/$1";
+$route['(:any)/guias/detalle'] = "help/functionality_detail/$1";
+
 //controles de pago visa
 $route['(:any)/controles/visa'] = "visa/index/$1";
 $route['(:any)/card-list'] = "visa/callWsCardList/$1";
