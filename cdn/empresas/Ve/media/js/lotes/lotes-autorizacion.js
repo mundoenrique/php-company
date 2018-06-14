@@ -184,35 +184,27 @@ function envioAjaxAutorizar( baseURL, isoPais, js_var, pass, osTipo, select_moda
 							'data-iva': nuevo_iva
 					})
 					.done(function(data) {
-							$('#loading').dialog('destroy');
-
-							if (data.indexOf("ERROR") == -1) {
-									$("#data-COS").attr('value', data);
-									var idJqxtemp = "<div><h3>Proceso exitoso</h3>"+
-																		"<h5>Ha generado el cálculo de la orden de servicio.</h5>"+
-																	"</div>";
-									$(idJqxtemp).dialog({
-											title: "Autorizando lotes",
-											modal: true,
-											resizable: false,
-											close: function() {
-													$(this).dialog('destroy')
-													$('#autorizacion').submit();
-											},
-											buttons: {
-													siguiente: function() {
-															$('#autorizacion').submit();
-													}
-											}
-									});
-							} else {
-									var jsonData = $.parseJSON(data);
-									if (jsonData.ERROR == '-29') {
-											alert('Usuario actualmente desconectado');
-											location.reload();
+						var code = data.code, title = data.title, msg = data.msg, dataCalc = data.data;
+						$('#loading').dialog('destroy');
+						if(code === 0) {
+							$("#data-COS").attr('value', dataCalc);
+							$("<div><h3>Proceso exitoso</h3><h5>Ha generado el cálculo de la orden de servicio.</h5></div>").dialog({
+								title:"Autorizando lotes",
+								modal: true,
+								resizable: false,
+								draggable: false,
+								open: function(event, ui) {
+									$('.ui-dialog-titlebar-close', ui.dialog).hide();
+								},
+								buttons: {
+									siguiente: function () {
+										$('#autorizacion').submit();
 									}
-									notificacion("Autorizando lotes", jsonData.ERROR);
-							}
+								}
+							});
+						} else {
+							notificacion(title, msg, code);
+						}
 					});
 		} else {
 				var mensajeNoti = "<h2>Verifique que: </h2><h3>1. Ha seleccionado al menos un lote</h3>"+
@@ -386,8 +378,8 @@ $('#lotes-2').on('click','#detalle', function(){ // autorizacion/detalleAuth
 });
 
 
-function notificacion(titulo, mensaje){
-
+function notificacion(titulo, mensaje, code) {
+	code = code !== undefined ? code : '';
   var canvas = "<div>"+mensaje+"</div>";
 
   $(canvas).dialog({
@@ -395,12 +387,18 @@ function notificacion(titulo, mensaje){
     modal: true,
     maxWidth: 700,
     maxHeight: 300,
-    bgiframe: true,
-    close: function(){ $(this).dialog('destroy'); },
+		bgiframe: true,
+		draggable: false,
+		open: function(event, ui) {
+			$('.ui-dialog-titlebar-close', ui.dialog).hide();
+		},
     buttons: {
       OK: function(){
-            $(this).dialog("close");
-          }
+				$(this).dialog("close");
+				if(code === 3) {
+					$(location).attr('href', baseURL+'/'+isoPais+'/login');
+				}
+			}
     }
   });
 }
