@@ -81,7 +81,7 @@
 		 * @param  byte $bytes
 		 * @return document
 		 */
-		function np_hoplite_byteArrayToFile($bytes,$typeFile,$filename)
+		function np_hoplite_byteArrayToFile($file, $typeFile, $filename, $bytes = TRUE)
 		{
 			$CI =& get_instance();
 
@@ -108,8 +108,12 @@
 					break;
 			}
 
-			foreach ($bytes as $chr) {
-				echo chr($chr);
+			if($bytes) {
+				foreach ($file as $chr) {
+					echo chr($chr);
+				}
+			} else {
+				echo $file;
 			}
 		}
 	}

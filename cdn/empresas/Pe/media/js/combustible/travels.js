@@ -1,7 +1,8 @@
 var viewControl = 'count',
     firstDate = 0,
     lastDate = 0,
-    lang;
+		lang,
+		activeValidate = false
 $(function() {
     var typeList = new Object();
     typeList.type = 'count';
@@ -13,10 +14,11 @@ $(function() {
         var container = $('#filter-selected'),
             thisId = e.target.id,
             parentId = e.target.parentNode.id,
-            filterList;
+						filterList;
 
+				activeValidate ? $('#form-filter').validate().resetForm() : '';
         $('#load').text(lang.TRAVELS_LOAD);
-        $('#search-option').find('option').not('#load').remove();
+				$('#search-option').find('option').not('#load').remove();
 
         filterList = (thisId) ? thisId : parentId;
 
@@ -45,7 +47,7 @@ $(function() {
             prepareList(filterList);
         }
 
-        viewControl = filterList;
+				viewControl = filterList;
 
     });
 
@@ -69,7 +71,9 @@ $(function() {
 
             clearTable ();
             lisTravels(typeList);
-        }
+        } else {
+					activeValidate = true;
+				}
 
 
     });
@@ -95,5 +99,17 @@ $(function() {
         var idTravel = $(this).attr('id-travel'),
             func = 'update';
         addEdit(idTravel, func)
-    });
+		});
+
+		//Descargar reporte en EXCEL
+		$('#table-travels').on('click', '#down-excel', function(e) {
+			e.preventDefault();
+			var dataReport = {
+				type: $('#down-excel').attr('type'),
+				status: $('#down-excel').attr('status'),
+				beginDate: $('#down-excel').attr('beginDate'),
+				finalDate: $('#down-excel').attr('finalDate')
+			}
+			downReports('ViajesExcel', 'reportes_trayectos', dataReport, 'viajes-xls');
+		})
 });

@@ -36,7 +36,7 @@ $dataResponse = json_decode($dataResponse);
         <span aria-hidden="true" class="icon icon-list" data-icon="&#xe0a4;"></span>
         <?php echo lang("BREADCRUMB_VEHICLES").' '.lang("VEHI_MEMBERS").' '.$action['groupName']; ?>
     </div>
-    <div class="container-body">
+    <div class="container-body" id="table-drivers">
         <div id='loading' style='text-align:center'><?php echo insert_image_cdn("loading.gif"); ?></div>
         <table id="novo-table" class="hover cell-border" width="620px"></table>
     </div>

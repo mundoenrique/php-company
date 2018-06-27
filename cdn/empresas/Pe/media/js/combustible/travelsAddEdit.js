@@ -104,13 +104,10 @@ $(function() {
                 break;
             case 'five':
                 $('#resume, #clear-form, #travelAdd').addClass('elem-hidden');
-                // $('#travel').addClass('elem-hidden');
-                // $('#loading').removeClass('elem-hidden');
                 method = 'addTravel';
                 sendData (modelo, method, travel);
                 break;
             case 'six':
-                // $('#get-route, #v-Ruta, #travelAdd').addClass('elem-hidden');
                 method = 'cancelTravel';
                 sendData(modelo, method, travelID);
                 break;
@@ -161,26 +158,18 @@ $(function() {
                 $('#travelAdd, #clear-form').attr('step', 'fourth');
                 $('#travel').removeClass('elem-hidden');
                 $('#pointEnd, #get-route').removeClass('elem-hidden');
-                // $('#get-route, #cRuta, #v-Ruta, #routes-alter').addClass('elem-hidden');
                 $('#resume').addClass('elem-hidden');
                 initMap();
                 break;
-
-            // case 'six':
-            //     $('#travelAdd, #clear-form').attr('step', 'third');
-            //     $('#resume').addClass('elem-hidden');
-            //     $('#travelAdd').text(lang.TAG_FOLLOW);
-            //     $('#clear-form').text(lang.TAG_RETURN);
-            //     $('#get-route, #v-Ruta, #cRuta').removeClass('elem-hidden');
-            //     $('#v-Ruta')
-            //         .attr('see', 'show')
-            //         .text(lang.TRAVELS_VIEW_INFO);
-            //     $('html, body').animate({
-            //         scrollTop: $('.breadcrumb-item-current').offset().top
-            //     }, 0);
-            //     break;
-
         }
-    });
+		});
+
+		$('#down-pdf').on('click', function(e){
+			e.preventDefault();
+			var dataReport = {
+				travelId: $('#travel').attr('id-travel')
+			};
+			downReports('ViajesPdf', 'reportes_trayectos', dataReport, 'viajes-pdf');
+		})
 
 });

@@ -96,4 +96,16 @@ $(function() {
             func = 'update';
         addEdit(idTravel, func)
     });
+
+	//Descargar reporte en EXCEL
+	$('#table-travels').on('click', '#down-excel', function (e) {
+		e.preventDefault();
+		var dataReport = {
+			type: $('#down-excel').attr('type'),
+			status: $('#down-excel').attr('status'),
+			beginDate: $('#down-excel').attr('beginDate'),
+			finalDate: $('#down-excel').attr('finalDate')
+		}
+		downReports('ViajesExcel', 'reportes_trayectos', dataReport, 'viajes-xls');
+	})
 });

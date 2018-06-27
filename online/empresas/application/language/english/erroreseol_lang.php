@@ -1,6 +1,7 @@
 <?php
 $lang['ERROR_GENERICO_USER']= "Error en Sistema, por favor intente nuevamente.";
 $lang['ERROR_CAMBIO_CLAVE']= "Error en el formulario.";
+$lang['ERROR_(8)']= "El conductor ya posee una cuenta activa asociada a la empresa";
 $lang['ERROR_(0)']= "Proceso OK";
 $lang['ERROR_(-1)']= "Login o clave invalido";
 $lang['ERROR_(-2)']= "Usuario ingresando en la aplicacion por primera vez";
@@ -73,3 +74,8 @@ $lang['ERROR_(-100)']= "Error consultando saldo";
 
 
 $lang['ERROR_(-127)']= "Error en el sistema confirmando lote";
+
+$lang['ERROR_(-238)']= "El registro no existe";
+
+$lang['ERROR_(-307)'] = 'La tarjeta se encuentra bloqueada permanentemente';
+$lang['ERROR_(-900)'] = 'Error general';
