@@ -3,3 +3,12 @@
 	height: auto;
 
 }
+.back-home{
+	margin-top:25px;
+	text-align: center;
+}
+
+.back-home button{
+	float: none;
+}
+
