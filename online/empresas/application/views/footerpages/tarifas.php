@@ -8,7 +8,7 @@
 
 		<div class="content-tarifas">
 			<?php echo insert_image_cdn('tarifas.png'); ?>
-			<div class="back-home"><a href="<?php echo $_SERVER['HTTP_REFERER'];?>"><button>Volver atras</button></a> </div>
+			<div class="back-home"><a href="<?php echo $_SERVER['HTTP_REFERER'];?>"><button>Volver atrás</button></a> </div>
 		</div>
 	</div>
 
