@@ -86,6 +86,9 @@ $lang['SUC_BTN_NEW_MASV'] = 'Subir archivo';
 $lang['SUC_TITLE_NEW_SUC'] = 'Gestión de Sucursal';
 $lang['SUC_BTN_UPFILE'] = 'Subir archivo de nuevas sucursales';
 
+//TAB DESCARGAS
+$lang['DWL_MANUAL'] = "TV-MUS-002-conexion-empresas-online-V13.pdf";
+
 // TAB Notificaciones
 $lang['NOTI_TITLE_CONFIG'] = 'Notificaciones';
 

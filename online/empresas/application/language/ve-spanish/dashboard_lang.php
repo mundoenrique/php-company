@@ -44,7 +44,7 @@ $lang['TEBCAR']= "Carga de Lotes"; // modulo
 $lang['COMBUS']= "Trayectos"; // perfil
 
 $lang['TICARG']= "Solicitud"; // modulo
-$lang['TIINVN']= "Inventario"; // modulo
+$lang['TIINVN']= "Afiliación"; // modulo
 
 $lang['TEBCON']= "Confirmación de Lote";
 $lang['TEBELC']= "Eliminación de lote por confirmar";
@@ -73,6 +73,7 @@ $lang['REPSAL']= "Saldos al cierre";
 $lang['REPCON']= "Cuenta concentradora";
 $lang['REPREP']= "Reposiciones";
 $lang['REPLOT']= "Estatus de lotes";
+$lang['REPRTH']= "Comisión por recargas";
 $lang['REPPGE']= "Pagos de Guardería";
 $lang['TEBTHA']= "Tarjetahabientes";
 $lang['TEBACT']= "Actualización de datos"; // funcion no activa, es una mejora de tebpol

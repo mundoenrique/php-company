@@ -100,6 +100,7 @@ class travels_Model extends CI_Model {
             'TAG_EDIT' => lang('TAG_EDIT'),
             'TAG_ACCEPT' => lang('TAG_ACCEPT'),
             'TAG_CANCEL' => lang('TAG_CANCEL'),
+            'TAG_DWN_EXCEL' => lang('TAG_DWN_EXCEL'),
             'TRAVELS_VIEW' => lang('TRAVELS_VIEW'),
             'TAG_SEND' => lang('TAG_SEND'),
             'TAG_SAVE_CHANGES' => lang('TAG_SAVE_CHANGES'),

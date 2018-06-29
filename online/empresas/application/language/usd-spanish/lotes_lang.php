@@ -48,7 +48,7 @@ $lang['POSITION_DETAIL'] = 'Detalle';
 $lang['POSITION_CONFIRM'] = 'Confirmación';
 $lang['POSITION_AUTH'] = 'Autorización';
 $lang['POSITION_INNO'] = 'Innominada';
-$lang['POSITION_INVENINNO'] = 'Inventario';
+$lang['POSITION_INVENINNO'] = 'Afiliación';
 $lang['TITULO_TARJETA'] = 'Nro. Tarjeta';
 
 
