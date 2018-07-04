@@ -135,12 +135,11 @@ if ( ! function_exists('GetCeoApi')) {
 		$response->resAPI = $responseAPI;
 
 		return $response;
-
 	}
 }
 //--------------------------------------------------------------------------------------------------
 
-if ( ! function_exists('GetHelpApi')) {
+if ( ! function_exists('GetApiContent')) {
 	/**
 	 * Realiza el llamado al api help_ceo
 	 * @param  string $urlAPI
@@ -149,8 +148,7 @@ if ( ! function_exists('GetHelpApi')) {
 	 * @param  string $method
 	 * @return object
 	 */
-	function GetApiContent($urlAPI, $headerAPI, $bodyAPI, $method, $message)
-	//function GetHelpApi($urlAPI, $headerAPI, $bodyAPI, $method)
+	function GetApiContent($urlAPI, $headerAPI, $bodyAPI, $method)
 	{
 		//set params
 		$CI = &get_instance();
@@ -167,12 +165,11 @@ if ( ! function_exists('GetHelpApi')) {
 			array_push($header, $item);
 		}
 
-		$urlcurlAPI = 'http://api-dev.novopayment.net/' . $urlAPI;
-		//$urlcurlAPI = $CI->config->item('urlAPIHelp') . 'api/functionality/' . $urlAPI;
+		$urlcurlAPI = $CI->config->item('urlAPIContent') . $urlAPI;
 
 		// create curl resource
 		$ch = curl_init();
-		curl_setopt($ch, CURLOPT_URL, 'https://jsonplaceholder.typicode.com/posts/1');
+		curl_setopt($ch, CURLOPT_URL, $urlcurlAPI);
 		curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $method);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $bodyAPI);
@@ -182,13 +179,11 @@ if ( ! function_exists('GetHelpApi')) {
 		$httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 		curl_close($ch);
 
-		//echo var_dump($responseAPI);
-
 		$response = new stdClass();
 		$response->httpCode = $httpCode;
 		$response->resAPI = $responseAPI;
 
-		return $message . ' 3.- Helper';
+		return $response;
 	}
 }
 
