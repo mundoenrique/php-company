@@ -22,6 +22,8 @@ $config['urlServ']= 'http://172.24.6.148:8008/';
 $config['client_id'] = 'b08e4d54638385d6987af8989a01f30e';
 //CLIENT SECRET OAUTH
 $config['client_secret'] = 'f2ca416fb52cdf4f21406a5d9ca6b16f';
+//URL API Content
+$config['urlAPIContent'] = '172.24.6.123:3000/';
 
 /*
 |--------------------------------------------------------------------------

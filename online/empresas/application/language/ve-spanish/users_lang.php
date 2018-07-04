@@ -31,6 +31,11 @@ $lang['CONFIG_EMPR'] = 'Configuración de empresa';
 $lang['CONFIG_SUCU'] = 'Configuración de sucursal';
 $lang['TITLE_MODIFICAR'] = 'Modificar';
 $lang['AYUDA'] = 'Ayuda';
+$lang['get-started'] = 'Ingreso y Configuración';
+$lang['batches'] = 'Gestión de Lotes';
+$lang['billing'] = 'Órdenes y Facturas';
+$lang['downloads'] = 'Descargas';
+$lang['management-reports'] = 'Reportes de Gestión';
 
 
 // TAB USUARIO
