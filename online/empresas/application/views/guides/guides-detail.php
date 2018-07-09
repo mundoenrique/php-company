@@ -38,7 +38,14 @@ $size = sizeof($items);
 	<div class="navprueba">
 		<?php
 			echo '<div id="subtitle">' .  $info->subtitle . '</div><br>' .
-					'<div><p>' .  $info->description . '</p></div>';
+					'<div>';
+						foreach($info->description as $item) {
+							echo '<p>' .  $item . '</p>';
+						}
+						if ($item != end($info->description)) {
+							echo '<br>';
+						}
+					echo '</div>';
 		?>
 	</div>
 	<br>
@@ -64,8 +71,13 @@ $size = sizeof($items);
 					<div class="circle" id="' . $info->category . '-circle' . '">' .
 						$i
 					. '</div></center><br>';
-						echo '<strong>Paso ' . $i . '</strong>' .
-									'<p>' . $items[$i-1]->caption . '</p>';
+						echo '<strong>Paso ' . $i . '</strong>';
+									foreach($items[$i-1]->caption as $item2){
+										echo '<p>' . $item2 . '</p>';
+									}
+									if ($item2 != end($items[$i-1]->caption)) {
+										echo '<br>';
+									}
 									if (isset($items[$i-1]->list)) {
 										echo '<ul>';
 										foreach($items[$i-1]->list as $element){

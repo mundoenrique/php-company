@@ -31,7 +31,14 @@ $size = sizeof($items);
 	<div class="navprueba">
 		<?php
 			echo '<div class="description" id="subtitle">' .  $info->subtitle . '</div><br>' .
-					'<div class="description"><p align="justify">' .  $info->description . '</p></div>';
+						'<div class="description">';
+						foreach($info->description as $item) {
+							echo '<p align="justify">' .  $item . '</p>';
+						}
+						if ($item != end($info->description)) {
+							echo '<br>';
+						}
+					echo '</div>';
 		?>
 	</div>
 	<br>
@@ -70,8 +77,13 @@ $size = sizeof($items);
 			echo
 				'<div class="mySlides fade">
 					<div id="ppal_right">
-						<strong>' . $info->title . '</strong>
-						<p>' . $items[$i-1]->caption . '</p>';
+						<strong>' . $info->title . '</strong>';
+						foreach($items[$i-1]->caption as $item2){
+							echo '<p>' . $item2 . '</p>';
+						}
+						if ($item2 != end($items[$i-1]->caption)) {
+							echo '<br>';
+						}
 								$imageUrl = 'guides/' . $items[$i-1]->image;
 							echo insert_image_cdn($imageUrl);
 						if (sizeof($items[$i-1]->tip->list) != 0 or isset($items[$i-1]->tip->text)) {
