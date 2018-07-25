@@ -36,6 +36,7 @@ $route['(:any)/empresas/confignoti'] = "users/configNotificaciones/$1";
 
 $route['(:any)/beneficios'] = "footer/pantallaBeneficios/$1";
 $route['(:any)/condiciones'] = "footer/pantallaCondiciones/$1";
+$route['(:any)/tarifas'] = "footer/pantallaTarifas/$1";
 
 $route['(:any)/clave'] = "users/changePassNewUser/$1";
 $route['(:any)/changePassNewUserAuth'] = "users/changePassNewUserAuth/$1";
@@ -169,6 +170,7 @@ $route['(:any)/reportes/estados-de-cuenta'] = "reportes/estadosdecuenta/$1";
 $route['(:any)/reportes/gastos-por-categorias'] = "reportes/gastosporcategorias/$1";
 $route['(:any)/reportes/tarjetahabientes'] = "reportes/tarjetahabientes/$1";
 $route['(:any)/reportes/guarderia'] = "reportes/guarderia/$1";
+$route['(:any)/reportes/comisiones'] = "reports_additional/ReportRecharWithComm/";
 $route['(:any)/reportes/GuarderiaResult'] = "reportes/getGuarderiaResult/";
 $route['(:any)/reportes/comisiones'] = "reports_additional/ReportRecharWithComm/$1";
 $route['(:any)/reportes/comisiones-recarga'] = "reports_additional/callSystem/$1";
