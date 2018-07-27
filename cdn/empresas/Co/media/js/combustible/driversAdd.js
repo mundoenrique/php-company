@@ -23,8 +23,8 @@ $(function() {
         $('#send-info, #close-info').text('');
         $('#msg-info').empty();
         $('#msg-info').append('<div id="loading" class="agrups"><img src=" ' + baseCDN + '/media/img/loading.gif' + '"></div>');
-        notiSystem(title);        
-        
+        notiSystem(title);
+
         var user   = $('#user').val(),
             status = $('#disabled').data('status');
 
@@ -33,7 +33,7 @@ $(function() {
             'status':status
         }];
 
-        $.post(baseURL + "/" + isoPais + '/trayectos/modelo', {model: 'disabledDriver', modelo: 'driver', data: disabledUser})
+        $.post(baseURL + "/" + isoPais + '/trayectos/modelo', {way: 'disabledDriver', modelo: 'driver', data: disabledUser})
             .done(function (response) {
                 $('#msg-info').empty();
                 var lang = response.lang;
@@ -102,7 +102,7 @@ $(function() {
             $('#msg-info').empty();
             $('#msg-info').append('<div id="loading" class="agrups"><img src=" ' + baseCDN + '/media/img/loading.gif' + '"></div>');
             notiSystem(title);
-            $.post(baseURL + '/' + isoPais + '/trayectos/modelo', {model: 'addEditDriver', modelo: 'driver', data: formAddEdit})
+            $.post(baseURL + '/' + isoPais + '/trayectos/modelo', {way: 'addEditDriver', modelo: 'driver', data: formAddEdit})
                 .done(function (response) {
                     $('#msg-info').empty();
                     var lang = response.lang;
@@ -273,7 +273,7 @@ function notiSystem(title) {
                 $('form#formulario').append('<input type="hidden" name="function" value="update"/>');
                 $('form#formulario').append('<input type="hidden" name="data-id" value="' + $('#user').val() + '" />');
                 $('form#formulario').attr('action', baseURL + '/' + isoPais + '/trayectos/conductores/perfil');
-                $('form#formulario').submit();                                
+                $('form#formulario').submit();
                 break;
             case 'b':
                 window.location.replace(baseURL + '/' + isoPais + '/trayectos/conductores');

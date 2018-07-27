@@ -183,4 +183,12 @@ $(function() {
         }
     });
 
+	$('#down-pdf').on('click', function (e) {
+		e.preventDefault();
+		var dataReport = {
+			travelId: $('#travel').attr('id-travel')
+		};
+		downReports('ViajesPdf', 'reportes_trayectos', dataReport, 'viajes-pdf');
+	})
+
 });

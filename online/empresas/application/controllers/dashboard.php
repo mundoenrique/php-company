@@ -711,8 +711,8 @@ class Dashboard extends CI_Controller {
 		$data = json_encode($data);
 		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
 		$jsonResponse = np_Hoplite_Decrypt($response);
+		log_message('INFO', 'RESPONSE LISTA DE EMPRESAS===>>>>'. $jsonResponse);
 		$response = json_decode(utf8_encode($jsonResponse));
-
 
 		if($response){
 			log_message('info','dashb_empr '.$response->rc);

@@ -45,12 +45,12 @@ $urlBase = $urlBaseA.$pais;
 				</li>
 
 					<?php if ($pais == 'Ve'): ?>
-					<li class="menu-item signout">
+					<!--<li class="menu-item signout">
 						<span aria-hidden="true" class="icon" data-icon="&#xe037;" ></span>
 						<a id='subm-desc' rel="subsection" href="<?php echo $urlBase.'/usuario/config?tab=4' ?>">
 							<?php echo lang('SUBMENU_NOTIFICACIONES') ?>
 						</a>
-					</li>
+					</li>-->
 				<?php endif; ?>
 				<li class="menu-item signout">
 					<span aria-hidden="true" class="icon" data-icon="&#xe03e;" ></span>

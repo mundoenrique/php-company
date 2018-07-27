@@ -1,4 +1,10 @@
 <?php
+	$pais = $this->uri->segment(1);
+	$urlBaseA = $this->config->item('base_url');
+
+	$urlBase = $urlBaseA.$pais;
+?>
+<?php
 	if (isset($header)) { ?> {header} <?php } ?>
 	<div id="wrapper">
 		<!-- Begin: Content Area -->
@@ -15,16 +21,15 @@
 											      style="font-size: 30px; padding-right: 25px;"></span>
 									AVISO IMPORTANTE
 								</div>
-								<div id="widget-info-2">
-									<b>Tarifas vigentes desde el 01-03-2018</b>
-									<ul style="padding-left: 15px;">
-										<li>Servicio Administrativo Mínimo:<br><b>Bs. 150.000</b></li>
-										(Aplica a facturas cuyo servicio administrativo sea inferior a<br><b>Bs. 150.000</b>)
-										<li>Servicios Operativos y de Logística: <b>Bs. 120.000.</b> Cobro único mensual</li>
-										(Quedan exceptuadas facturas con Servicio Administrativo Mínimo)
-										<li>Emisión, reposición/renovación de tarjetas: <b>Bs. 45.000</b> (c/u)</li>
-										<li>Reposición y entrega de claves: <b>Bs.12.500</b> (c/u)</li>
-									</ul>
+								<div id="widget-info-2"  style="height: 123px; overflow-y: auto; text-align: justify">
+
+											Con la autorización del Lote, se confirma la  aceptación de las
+											"<a href="<? echo $urlBase.'/'.'condiciones'?>">Condiciones generales</a>,
+												<a href="<?php echo $urlBase; ?>/tarifas">	tarifas</a>,
+											<a href="<? echo $urlBase.'/'.'condiciones'?>">términos de uso y confidencialidad</a>"
+											de la plataforma Conexión Empresas Online y  de nuestros
+											productos y servicios.
+
 								</div>
 							</div>
 							<?php

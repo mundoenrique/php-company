@@ -32,18 +32,18 @@ $info;
 			</li>
 			/
 			<li class="breadcrumb-item-current">
-				<a href="<?php echo $urlBase; ?>/lotes/innominada/inventario"><?php echo lang('POSITION_INNO'); ?></a>
+				<a href="<?php echo $urlBase; ?>/lotes/innominada/afiliacion"><?php echo lang('POSITION_INNO'); ?></a>
 			</li>
 			/
 			<li class="breadcrumb-item-current">
-				<a ><?php echo "Detalle Lote";//echo lang('POSITION_INVENINNO'); ?></a>
+				<a><?php echo "Detalle Lote";//echo lang('POSITION_INVENINNO'); ?></a>
 			</li>
 		</ol>
 
-		<div style="display: block;" id="lotes-general" class="elem-hidden">	
+		<div style="display: block;" id="lotes-general" class="elem-hidden">
 
 		<div id="top-batchs">
-			<span aria-hidden="true" class="icon" data-icon="&#xe03c;"></span> 
+			<span aria-hidden="true" class="icon" data-icon="&#xe03c;"></span>
 			<?php echo "Detalle Lote";//echo lang('TITULO_LOTES_DETALLE'); ?>
 		</div>
 
@@ -57,7 +57,7 @@ $info;
 					<p><?php echo $numLote;//echo $data[0]->acrif ?></p>
 				</div>
 				<div id="detalleLote-1-nombre">
-					<h5><?php echo "NIT";//echo lang('TABLA_LOTESPA_NOMBREEMPRESA') ?>:</h5> 
+					<h5><?php echo "NIT";//echo lang('TABLA_LOTESPA_NOMBREEMPRESA') ?>:</h5>
 					<p><?php echo $acrif;//echo $data[0]->acnomcia ?></p>
 				</div>
 				<div id="detalleLote-1-short">
@@ -65,7 +65,7 @@ $info;
 					<p><?php echo $acnomcia;//echo $data[0]->acnombre ?></p>
 				</div>
 			</div>
-							
+
 			<div id="detalleLote-2">
 				<div id="detalleLote-2-tipo">
 					<h5><?php echo "Fecha de carga";//echo lang('TABLA_LOTESPA_NROLOTE') ?></h5>
@@ -85,7 +85,7 @@ $info;
 </div>
 			<div id="top-batchs" class="listado_2">
 				<span aria-hidden="true" class="icon" data-icon=""></span>
-				Lista de Tarjetas			
+				Lista de Tarjetas
 			</div>
 
 			<div id="lotes-contenedor">
@@ -93,7 +93,7 @@ $info;
 					<a id='downXLS'>
 						<span aria-hidden="true" class="icon" data-icon="&#xe05a;" title='<?php echo lang('DWL_XLS')?>'></span>
 					</a>
-				</div>	
+				</div>
 				<div id="table-text-lotes_wrapper" class="dataTables_wrapper" role="grid">
 					<table id="table-text-lotes-inventario" class="table-bandeja">
 						<thead>
@@ -143,11 +143,11 @@ $info;
 				</div>
 			</div>
 			<div id="batchs-last">
-				<form method='post' action="<?php echo $urlBase ?>/lotes/innominada/inventario">
+				<form method='post' action="<?php echo $urlBase ?>/lotes/innominada/afiliacion">
 					<button type="submit">Volver</button>
 				</form>
 			</div>
 </div>
 <form id='formulario' method='post'>
-<input type="hidden" name="data-numlote" value="<?php echo $numLote?>" />	
+<input type="hidden" name="data-numlote" value="<?php echo $numLote?>" />
 </form>

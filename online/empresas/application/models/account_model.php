@@ -1,6 +1,5 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-
 class account_model extends CI_Model {
 
     //Método constructor
@@ -13,8 +12,6 @@ class account_model extends CI_Model {
         $this->lang->load('erroreseol');
     }
     /*---Fin método constructor---------------------------------------------------------------------------------------*/
-
-
 
     public function callAPIaccounts($urlCountry, $dataRequest) {
 
@@ -56,10 +53,14 @@ class account_model extends CI_Model {
 
         $response = [];
         $dataResponse = $resAPI;
-        $response = $resAPI;
+				$response = $resAPI;
+				$dataResponse = json_decode($resAPI);
         switch ($httpCode) {
             case 200:
-                $dataResponse = json_decode($resAPI);
+								$response = [
+									'resp' => $resAPI,
+									'lang' => lang('TAG_ACCEPT')
+								];
                 if (empty($dataRequest)) {
                     $data = [];
                     $response = [
@@ -73,22 +74,40 @@ class account_model extends CI_Model {
                 $title = lang( 'BREADCRUMB_COMBUSTIBLE' );
                 $msg = lang( 'ERROR_(-39)' );
 
-                if( $resAPI != "Bad Request" ){
-                  $rc = $dataResponse->rc;
-                  $codeError = [ -197 ];
-                  if( in_array( $rc, $codeError ) ) {
-                    $code = 0;
-                    $title = '';
-                    $msg = lang('ERROR_('.$rc.')');
-                  }
+								$rc = $dataResponse->{'rc'};
+
+                if( $rc == -238 || $rc == -241){
+									$msg = lang('ERROR_(-39)');
                 }
 
                 $response = [
                   'code' => $code,
                   'title' => $title,
                   'msg' => $msg,
-                  'back' => '',
-                  'lang' => [
+                  // 'back' => '',
+                  'language' => [
+                    'TAG_ACCEPT' => lang('TAG_ACCEPT')
+                  ]
+								];
+								break;
+            case 403:
+                $code = 2;
+                $title = lang( 'BREADCRUMB_COMBUSTIBLE' );
+                $msg = lang( 'ERROR_(-900)' );
+
+								$rc = $dataResponse->{'rc'};
+								log_message('INFO', 'El RC es --->>> '.$rc);
+
+                if( $rc == -197 || $rc == 8 || $rc == -307 || $rc == -900){
+                  $msg = lang('ERROR_('.$rc.')');
+                }
+
+                $response = [
+                  'code' => $code,
+                  'title' => $title,
+                  'msg' => $msg,
+                  // 'back' => '',
+                  'language' => [
                     'TAG_ACCEPT' => lang('TAG_ACCEPT')
                   ]
                 ];
@@ -106,7 +125,7 @@ class account_model extends CI_Model {
             case 404:
                 $response = [
                     'code' => 1,
-                    'msg' => [],
+                    'msg' => lang('ERROR_ACCOUNTS'),
                     'language' => [
                         'TAG_ACCEPT' => lang('TAG_ACCEPT')
                     ]
@@ -122,11 +141,8 @@ class account_model extends CI_Model {
                     ]
                 ];
         }
-
         return $response;
-
     }
-
 
     public function callAPIdeallocateAccounts($urlCountry, $dataRequest) {
 
@@ -167,13 +183,46 @@ class account_model extends CI_Model {
                 }
                 break;
             case 400:
+                $code = 2;
+                $title = lang( 'BREADCRUMB_COMBUSTIBLE' );
+                $msg = lang( 'ERROR_(-39)' );
+
+								$rc = $dataResponse->{'rc'};
+
+                if( $rc == -238 || $rc == -241){
+                  $msg = lang('ERROR_(-39)');
+                }
+
                 $response = [
-                    'code' => 2,
-                    'title' => lang('BREADCRUMB_COMBUSTIBLE'),
-                    'msg' => lang('ERROR_(-39)'),
-                    'language' => [
-                        'TAG_ACCEPT' => lang('TAG_ACCEPT')
-                    ]
+                  'code' => $code,
+                  'title' => $title,
+                  'msg' => $msg,
+                  // 'back' => '',
+                  'language' => [
+                    'TAG_ACCEPT' => lang('TAG_ACCEPT')
+                  ]
+								];
+								break;
+							case 403:
+                $code = 2;
+                $title = lang( 'BREADCRUMB_COMBUSTIBLE' );
+                $msg = lang( 'ERROR_(-900)' );
+
+								$rc = $dataResponse->{'rc'};
+								log_message('INFO', 'El RC es --->>> '.$rc);
+
+                if( $rc == -197 || $rc == 8 || $rc == -307 || $rc == -900){
+                  $msg = lang('ERROR_('.$rc.')');
+                }
+
+                $response = [
+                  'code' => $code,
+                  'title' => $title,
+                  'msg' => $msg,
+                  // 'back' => '',
+                  'language' => [
+                    'TAG_ACCEPT' => lang('TAG_ACCEPT')
+                  ]
                 ];
                 break;
             case 401:
@@ -191,7 +240,7 @@ class account_model extends CI_Model {
             case 404:
                 $response = [
                     'code' => 1,
-                    'msg' => [],
+                    'msg' => lang('ERROR_ACCOUNTS'),
                     'language' => [
                         'TAG_ACCEPT' => lang('TAG_ACCEPT')
                     ]
@@ -206,11 +255,8 @@ class account_model extends CI_Model {
                         'TAG_ACCEPT' => lang('TAG_ACCEPT')
                     ]
                 ];
-
         }
-
         return $response;
-
     }
 
     public function callAPIavailableDrivers($urlCountry, $dataRequest) {
@@ -298,7 +344,6 @@ class account_model extends CI_Model {
         return $response;
     }
 
-
     public function callAPIallocatingDriver($urlCountry, $dataRequest) {
         $ruc = $this->session->userdata('acrifS');
         $token = $this->session->userdata('token');
@@ -384,15 +429,8 @@ class account_model extends CI_Model {
 //                    'msg' => lang('ERROR_GENERICO_USER')
 //                ];
         }
-
         return $response;
-
     }
 
-
-
-
-
     /*---Fin métodos para conductores---------------------------------------------------------------------------------*/
-
 }

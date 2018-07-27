@@ -36,6 +36,7 @@ $route['(:any)/empresas/confignoti'] = "users/configNotificaciones/$1";
 
 $route['(:any)/beneficios'] = "footer/pantallaBeneficios/$1";
 $route['(:any)/condiciones'] = "footer/pantallaCondiciones/$1";
+$route['(:any)/tarifas'] = "footer/pantallaTarifas/$1";
 
 $route['(:any)/clave'] = "users/changePassNewUser/$1";
 $route['(:any)/changePassNewUserAuth'] = "users/changePassNewUserAuth/$1";
@@ -54,7 +55,7 @@ $route['(:any)/lotes/autorizacion'] = "lotes/pantallaAutorizacion/$1";
 $route['(:any)/lotes/reproceso'] = "lotes/pantallaReproceso/$1";
 $route['(:any)/lotes/upload'] = "lotes/cargarLotes/$1";
 $route['(:any)/lotes/innominada'] = "lotes_innominada/pantallaInno/$1";
-$route['(:any)/lotes/innominada/inventario'] = "lotes_innominada/pantallaInnoInven/$1";
+$route['(:any)/lotes/innominada/afiliacion'] = "lotes_innominada/pantallaInnoInven/$1";
 $route['(:any)/lotes/innominada/createCuentasInnominadas'] = "lotes_innominada/createCuentasInnominadas/$1";
 $route['(:any)/lotes/innominada/listaCuentasInnominadas'] = "lotes_innominada/listaCuentasInnominadas/$1";
 $route['(:any)/lotes/innominada/listaSucursalesInnominadas'] = "lotes_innominada/listaSucursalesInnominadas/$1";
@@ -169,7 +170,10 @@ $route['(:any)/reportes/estados-de-cuenta'] = "reportes/estadosdecuenta/$1";
 $route['(:any)/reportes/gastos-por-categorias'] = "reportes/gastosporcategorias/$1";
 $route['(:any)/reportes/tarjetahabientes'] = "reportes/tarjetahabientes/$1";
 $route['(:any)/reportes/guarderia'] = "reportes/guarderia/$1";
+$route['(:any)/reportes/comisiones'] = "reports_additional/ReportRecharWithComm/";
 $route['(:any)/reportes/GuarderiaResult'] = "reportes/getGuarderiaResult/";
+$route['(:any)/reportes/comisiones'] = "reports_additional/ReportRecharWithComm/$1";
+$route['(:any)/reportes/comisiones-recarga'] = "reports_additional/callSystem/$1";
 
 //CONSULTAS
 $route['(:any)/consulta/ordenes-de-servicio'] = "consultas/ordenesServicio/$1";
