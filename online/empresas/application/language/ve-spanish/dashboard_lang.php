@@ -52,6 +52,7 @@ $lang['TEBAUT']= "Autorización de Lotes"; // modulo
 $lang['TEBELI']= "Eliminación de lote por autorizar";
 $lang['TEBGUR']= 'Reproceso de Datos'; // modulo guardería
 $lang['TEBORS']= "Órdenes de Servicio"; // modulo
+$lang['LOTFAC']= "Lotes por Facturar"; // modulo
 $lang['TEBANU']= "Anular orden de servicio";
 $lang["TEBCOS"]= "Consultar orden se servicio";
 $lang['TRAMAE']= "Transferencia maestra"; // modulo
