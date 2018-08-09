@@ -32,6 +32,8 @@ $lang['BREADCRUMB_TRANSMAESTRA'] = "Transferencia Maestra";
 $lang['BREADCRUMB_OTROS_PROGRAMS'] = 'Otros programas';
 $lang['BREADCRUMB_PH_BUSCAR'] = 'Buscar...';
 $lang['BREADCRUMB_TITL_BUSCAR'] = 'Buscar texto';
+$lang['BREADCRUMB_CONSULTAS'] = 'Consultas';
+$lang['BREADCRUMB_LOTES_POR_FACTURAR'] = 'Lotes por facturar';
 
 
 //MENU OPCIONES
