@@ -223,6 +223,18 @@ table {
   font-style: normal;
 }
 
+@font-face {
+  font-family: "fontello";
+  src: url('../fonts/fontello.eot?4932291');
+  src: url('../fonts/fontello.eot?4932291#iefix') format('embedded-opentype'),
+       url('../fonts/fontello.woff2?4932291') format('woff2'),
+       url('../fonts/fontello.woff?4932291') format('woff'),
+       url('../fonts/fontello.ttf?4932291') format('truetype'),
+       url('../fonts/fontello.svg?4932291#fontello') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
 ::selection {
   background: #0072c0;
   color: white;
@@ -342,7 +354,7 @@ nav ul.menu li.menu-item a {
 
 span.icon:before {
   content: attr(data-icon);
-  font-family: "novoglyphs";
+  font-family: "novoglyphs", "fontello";
   -webkit-font-smoothing: antialiased;
   font-weight: normal;
   speak: none;
@@ -543,7 +555,9 @@ ol.breadcrumb li {
 }
 ol.breadcrumb li a {
   color: #888888;
-  /*font-weight: normal;*/
+}
+.cursor-default{
+	cursor: default;
 }
 
 #sidebar {
