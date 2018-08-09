@@ -1,39 +1,22 @@
-<?php
-	if (isset($header)) { ?> {header} <?php } ?>
-	<div id="wrapper">
-		<!-- Begin: Content Area -->
-					{content}
-		<!-- End: Content Area -->
-		<?php
-			if (isset($sidebarActive) && $sidebarActive) {
-					if (isset($aviso) && $aviso && $pais == 'Ve') {
-		?>
-							<div class="aviso">
-								<div id="widget-info" style="width: 200px;">
-									<span data-icon="&#xe09d;" class="icon" aria-hidden="true"
-											      style="font-size: 30px; padding-right: 25px;"></span>
-									AVISO IMPORTANTE
-								</div>
-								<div id="widget-info-2"  style="height: 123px; overflow-y: auto; text-align: justify">
+<?php if (!defined('BASEPATH')) exit('No direct script access allowed'); ?>
 
-											Con la autorización del Lote, se confirma la  aceptación de las
-											"<a href="<? echo $urlBase.'/'.'condiciones'?>">Condiciones generales</a>,
-												<a href="<?php echo $urlBase; ?>/tarifas">	tarifas</a>,
-											<a href="<? echo $urlBase.'/'.'condiciones'?>">términos de uso y confidencialidad</a>"
-											de la plataforma Conexión Empresas Online y  de nuestros
-											productos y servicios.
+<?php if(isset($header)): ?>
+	{header}
+<?php endif; ?>
 
-								</div>
-							</div>
-							<?php
-					} ?>
-					<!-- Begin: Sidebar -->
-					<div id="sidebar-products">
-						{sidebar}
-					</div>
-					<!-- End: Sidebar -->
-				<?php
-			}; ?>
-	</div>
-	<?php
-if (isset($footer)) { ?> {footer} <?php } ?>
+<div id="wrapper">
+	{content}
+
+	<?php if(isset($aviso) && $aviso && $pais == 'Ve'): ?>
+		{aviso}
+	<?php endif; ?>
+
+	<?php if(isset($sidebarActive) && $sidebarActive): ?>
+		{sidebar}
+	<?php endif; ?>
+</div>
+
+<?php if(isset($footer)): ?>
+	{footer}
+<?php endif; ?>
+
