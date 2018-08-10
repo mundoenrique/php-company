@@ -12,7 +12,9 @@
 	<?php endif; ?>
 
 	<?php if(isset($sidebarActive) && $sidebarActive): ?>
-		{sidebar}
+		<div id="sidebar-products">
+			{sidebar}
+		</div>
 	<?php endif; ?>
 </div>
 

@@ -56,8 +56,8 @@
 			<table id="novo-table" class="hover cell-border" style="width: 635px;">
 				<thead>
 					<tr>
-						<th class="thead" style="width: 86px;">Tipo de lote</th>
-						<th class="thead" style="width: 60px;">Cantidad de lotes</th>
+						<th class="thead" style="width: 86px;">Tipo de Lote</th>
+						<th class="thead" style="width: 60px;">Cantidad de Lotes</th>
 						<th class="thead" style="width: 60px;">Total de registros</th>
 						<th class="thead" style="width: 84px;">Precio unitario Bs.</th>
 						<th class="thead" style="width: 89px;">Total Bs.</th>
@@ -124,12 +124,12 @@
 								<span class="show-table" style="display: none">
 									<div class="table">
 										<div class="heading">
-											<div class="cell"><span>Nro de lote</span></div>
-											<div class="cell"><span>Fecha</span></div>
-											<div class="cell"><span>Cant</span></div>
+											<div class="cell"><span>Nro de Lote</span></div>
+											<div class="cell"><span>Fecha de autorización</span></div>
+											<div class="cell"><span>Cant.</span></div>
 											<div class="cell"><span>Estatus</span></div>
-											<div class="cell"><span>Monto de comisión</span></div>
-											<div class="cell"><span>Monto total</span></div>
+											<div class="cell"><span>Monto de Comisión Bs.</span></div>
+											<div class="cell"><span>Monto Total</span></div>
 										</div>
 										<?php foreach($lotes->lista AS $pos => $detail): ?>
 											<?php $date = new DateTime($detail->dtfechorcarga); ?>
@@ -141,7 +141,7 @@
 														</a>
 													</span>
 												</div>
-												<div class="cell"><span><?= $date->format('Y-m-d'); ?></span></div>
+												<div class="cell"><span><?= $date->format('d-m-Y'); ?></span></div>
 												<div class="cell"><span><?= $detail->ncantregs; ?></span></div>
 												<div class="cell">
 													<span><?= ucfirst(strtolower($detail->status)); ?></span>

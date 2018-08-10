@@ -131,7 +131,7 @@ class additional_inquiries extends CI_Controller
 		], TRUE);
 		//Agregar aviso
 		$aviso = $this->parser->parse('widgets/widget-aviso', [
-			'msg' => 'Los lotes acumulados, pendientes por facturar, serán fraccionados de acuerdo a su antiguaedad y aparecerán reflejados en la Órdenes de Servicio/Facturas de las recargas que ordene su empresa'
+			'msg' => 'Los lotes acumulados, pendientes por facturar, serán fraccionados de acuerdo a su antiguaedad y aparecerán reflejados en la Órdenes de Servicio/Facturas de las recargas que ordene su empresa.'
 		], TRUE);
 		//Agregar footer
 		$menuFooter = $this->parser->parse('widgets/widget-menuFooter', [], true);
