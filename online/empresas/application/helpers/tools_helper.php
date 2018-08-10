@@ -149,7 +149,7 @@
 			$urlBase = $urlBaseA.$pais;
 
 			$menuP = unserialize($menuP);
-			log_message("INFO", "<<<<<==FUNCIONES Y PERMISOS DEL USUARIO==>>>>>: ".json_encode($menuP));
+			//log_message("INFO", "<<<<<==FUNCIONES Y PERMISOS DEL USUARIO==>>>>>: ".json_encode($menuP));
 			$seeLotFact = FALSE;
 
 			$menuH="";

@@ -1,6 +1,6 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 /**
- * @info Controlador para gestionar lotes
+ * @info Controlador para gestionar las conultas adicionales
  * @date 2018/08/02
  * @author J. Enrique Peñaloza P
  * @package controllers
@@ -81,6 +81,24 @@ class additional_inquiries extends CI_Controller
 		$this->action = lang('TITULO_LOTES_POR_FACTURAR');
 		$this->contentView = 'batches-invoice';
 
+		$this->load->model('additional_inquiries_model', 'list');
+		$responseList = $this->list->callWsGetBatchesByInvoice();
+
+		$code = $responseList['code'];
+		$title = $responseList['title'];
+		$msg = $responseList['msg'];
+
+		$this->dataResponse = $responseList['data'];
+
+
+		$this->titlePage = 'Consultas';
+		$this->pageInfo = [
+			'title' => lang('BREADCRUMB_REPORTES_COMISION'),
+			'code' => $code,
+			'title-modal' => $title,
+			'msg' => $msg,
+		];
+
 		$this->loadView();
 
 	}
@@ -104,7 +122,8 @@ class additional_inquiries extends CI_Controller
 			'pais' => $this->urlCountry,
 			'user' => $this->userName,
 			'dataResponse' => $this->dataResponse,
-			'action' => $this->action
+			'action' => $this->action,
+			'pageInfo' => $this->pageInfo
 		], TRUE);
 		//Agregar sideBar-empresa
 		$sidebar = $this->parser->parse('dashboard/widget-empresa', [

@@ -1030,6 +1030,8 @@ class Lotes extends CI_Controller {
 
 		$data = json_encode($data,JSON_UNESCAPED_UNICODE);
 
+		log_message('DEBUG', 'REQUEST DETALLE DEL LOTE: '.$data);
+
 		$dataEncry = np_Hoplite_Encryption($data);
 		$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
 		$data = json_encode($data);

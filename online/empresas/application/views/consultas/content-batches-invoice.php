@@ -1,5 +1,5 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed'); ?>
-
+<div id="response-serv" class="content-products" code="<?= $pageInfo['code']; ?>" title="<?= $pageInfo['title-modal'] ?>" msg="<?= $pageInfo['msg']; ?>"></div>
 <div id="content-products">
 
 	<h1><?php echo $action; ?></h1>
@@ -43,14 +43,13 @@
 </div>
 
 <div class="container">
-
 	<div class="container-header">
 		<span aria-hidden="true" class="icon icon-list" data-icon="&#xe046;"></span>
 		<?= lang('TITULO_LOTES_POR_FACTURAR'); ?>
 	</div>
 
 	<div class="container-body">
-		<div id="loading" style="text-align:center; margin-top: 90px;">
+		<div id="loading" style="text-align:center; margin-top: 90px">
 			<?= insert_image_cdn("loading.gif"); ?>
 		</div>
 		<div id="display-table"style="display:none">
@@ -66,171 +65,111 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td class="item-td">Emisión</td>
-						<td>2</td>
-						<td>10</td>
-						<td>45.000,00</td>
-						<td>450.000,00</td>
-						<td class="os-info-show">
-							<a>
-								<span aria-hidden="true" class="icon icon-list"></span>
-							</a>
-							<span class="show-table" style="display: none">
-								<div class="table">
-									<div class="heading">
-										<div class="cell"><span>Nro de lote</span></div>
-										<div class="cell"><span>Fecha</span></div>
-										<div class="cell"><span>Cant</span></div>
-										<div class="cell"><span>Estatus</span></div>
-										<div class="cell"><span>Monto de comisión</span></div>
-										<div class="cell"><span>Monto total</span></div>
+					<?php foreach($dataResponse AS $key => $lotes): ?>
+					<?php
+							switch($lotes->ctipolote) {
+								case '1':
+									$tipoLot = 'Emisión';
+									break;
+								case '2':
+									$tipoLot = 'Recarga';
+									break;
+								case '3':
+									$tipoLot = 'Emisión innominada';
+									break;
+								case '5':
+									$tipoLot = ' Recarga innominada';
+									break;
+								case '5':
+									$tipoLot = 'Emision EDC';
+									break;
+								case '6':
+									$tipoLot = 'Desafiliación';
+									break;
+								case 'A':
+									$tipoLot = 'Afiliación PN';
+									break;
+								case 'G':
+									$tipoLot = 'Cheque Guardería';
+									break;
+								case 'M':
+									$tipoLot = 'Monetario';
+									break;
+								case 'R':
+									$tipoLot = 'Reposición de tarjeta';
+									break;
+								case 'C':
+									$tipoLot = 'Reposición de clave';
+									break;
+								case 'N':
+									$tipoLot = 'Renovación';
+									break;
+								case 'E':
+									$tipoLot = 'Guardería electrónica';
+									break;
+								default:
+									$tipoLot = '';
+							}
+						?>
+						<tr>
+							<td><?= $tipoLot; ?></td>
+							<td><?= count($lotes->lista); ?></td>
+							<td><?= $lotes->ncantregs; ?></td>
+							<td><?= $lotes->montoComision; ?></td>
+							<td><?= $lotes->montoNeto; ?></td>
+							<td class="os-info-show">
+								<a>
+									<span aria-hidden="true" class="icon icon-list"></span>
+								</a>
+								<span class="show-table" style="display: none">
+									<div class="table">
+										<div class="heading">
+											<div class="cell"><span>Nro de lote</span></div>
+											<div class="cell"><span>Fecha</span></div>
+											<div class="cell"><span>Cant</span></div>
+											<div class="cell"><span>Estatus</span></div>
+											<div class="cell"><span>Monto de comisión</span></div>
+											<div class="cell"><span>Monto total</span></div>
+										</div>
+										<?php foreach($lotes->lista AS $pos => $detail): ?>
+											<?php $date = new DateTime($detail->dtfechorcarga); ?>
+											<div class="row">
+												<div class="cell">
+													<span>
+														<a id="<?= $detail->acnumlote; ?>" class="batch-detail">
+															<?= $detail->acnumlote; ?>
+														</a>
+													</span>
+												</div>
+												<div class="cell"><span><?= $date->format('Y-m-d'); ?></span></div>
+												<div class="cell"><span><?= $detail->ncantregs; ?></span></div>
+												<div class="cell">
+													<span><?= ucfirst(strtolower($detail->status)); ?></span>
+												</div>
+												<div class="cell"><span><?= $detail->montoComision; ?></span></div>
+												<div class="cell"><span><?= $detail->montoNeto; ?></span></div>
+											</div>
+										<?php endforeach; ?>
 									</div>
-									<div class="row">
-										<div class="cell"><span><a href="">12011199</a></span></div>
-										<div class="cell"><span>28/02/2018</span></div>
-										<div class="cell"><span>1</span></div>
-										<div class="cell"><span>Procesado</span></div>
-										<div class="cell"><span>45000</span></div>
-										<div class="cell"><span>4500000</span></div>
-									</div>
-									<div class="row">
-										<div class="cell"><span><a href="">12011199</a></span></div>
-										<div class="cell"><span>28/02/2018</span></div>
-										<div class="cell"><span>1</span></div>
-										<div class="cell"><span>Procesado</span></div>
-										<div class="cell"><span>45000</span></div>
-										<div class="cell"><span>4500000</span></div>
-									</div>
-								</div>
-							</span>
-						</td>
-					</tr>
-					<tr>
-					<td class="item-td">Reposición de clave</td>
-						<td>2</td>
-						<td>10</td>
-						<td>45.000,00</td>
-						<td>450.000,00</td>
-						<td class="os-info-show">
-							<a>
-								<span aria-hidden="true" class="icon icon-list"></span>
-							</a>
-							<span class="show-table" style="display: none">
-								<div class="table">
-									<div class="heading">
-										<div class="cell"><span>Nro de lote</span></div>
-										<div class="cell"><span>Fecha</span></div>
-										<div class="cell"><span>Cant</span></div>
-										<div class="cell"><span>Estatus</span></div>
-										<div class="cell"><span>Monto de comisión</span></div>
-										<div class="cell"><span>Monto total</span></div>
-									</div>
-									<div class="row">
-										<div class="cell"><span><a href="">12011199</a></span></div>
-										<div class="cell"><span>28/02/2018</span></div>
-										<div class="cell"><span>1</span></div>
-										<div class="cell"><span>Procesado</span></div>
-										<div class="cell"><span>45000</span></div>
-										<div class="cell"><span>4500000</span></div>
-									</div>
-									<div class="row">
-										<div class="cell"><span><a href="">12011199</a></span></div>
-										<div class="cell"><span>28/02/2018</span></div>
-										<div class="cell"><span>1</span></div>
-										<div class="cell"><span>Procesado</span></div>
-										<div class="cell"><span>45000</span></div>
-										<div class="cell"><span>4500000</span></div>
-									</div>
-								</div>
-							</span>
-						</td>
-					</tr>
-					<tr>
-					<td class="item-td">Reposición de tarjeta</td>
-						<td>2</td>
-						<td>10</td>
-						<td>45.000,00</td>
-						<td>450.000,00</td>
-						<td class="os-info-show">
-							<a>
-								<span aria-hidden="true" class="icon icon-list"></span>
-							</a>
-							<span class="show-table" style="display: none">
-								<div class="table">
-									<div class="heading">
-										<div class="cell"><span>Nro de lote</span></div>
-										<div class="cell"><span>Fecha</span></div>
-										<div class="cell"><span>Cant</span></div>
-										<div class="cell"><span>Estatus</span></div>
-										<div class="cell"><span>Monto de comisión</span></div>
-										<div class="cell"><span>Monto total</span></div>
-									</div>
-									<div class="row">
-										<div class="cell"><span><a href="">12011199</a></span></div>
-										<div class="cell"><span>28/02/2018</span></div>
-										<div class="cell"><span>1</span></div>
-										<div class="cell"><span>Procesado</span></div>
-										<div class="cell"><span>45000</span></div>
-										<div class="cell"><span>4500000</span></div>
-									</div>
-									<div class="row">
-										<div class="cell"><span><a href="">12011199</a></span></div>
-										<div class="cell"><span>28/02/2018</span></div>
-										<div class="cell"><span>1</span></div>
-										<div class="cell"><span>Procesado</span></div>
-										<div class="cell"><span>45000</span></div>
-										<div class="cell"><span>4500000</span></div>
-									</div>
-								</div>
-							</span>
-						</td>
-					</tr>
-					<tr>
-					<td class="item-td">Renovación</td>
-						<td>2</td>
-						<td>10</td>
-						<td>45.000,00</td>
-						<td>450.000,00</td>
-						<td class="os-info-show">
-							<a>
-								<span aria-hidden="true" class="icon icon-list"></span>
-							</a>
-							<span class="show-table" style="display: none">
-								<div class="table">
-									<div class="heading">
-										<div class="cell"><span>Nro de lote</span></div>
-										<div class="cell"><span>Fecha</span></div>
-										<div class="cell"><span>Cant</span></div>
-										<div class="cell"><span>Estatus</span></div>
-										<div class="cell"><span>Monto de comisión</span></div>
-										<div class="cell"><span>Monto total</span></div>
-									</div>
-									<div class="row">
-										<div class="cell"><span><a href="">12011199</a></span></div>
-										<div class="cell"><span>28/02/2018</span></div>
-										<div class="cell"><span>1</span></div>
-										<div class="cell"><span>Procesado</span></div>
-										<div class="cell"><span>45000</span></div>
-										<div class="cell"><span>4500000</span></div>
-									</div>
-									<div class="row">
-										<div class="cell"><span><a href="">12011199</a></span></div>
-										<div class="cell"><span>28/02/2018</span></div>
-										<div class="cell"><span>1</span></div>
-										<div class="cell"><span>Procesado</span></div>
-										<div class="cell"><span>45000</span></div>
-										<div class="cell"><span>4500000</span></div>
-									</div>
-								</div>
-							</span>
-						</td>
-					</tr>
+								</span>
+							</td>
+						</tr>
+					<?php endforeach; ?>
 				</tbody>
 			</table>
 		</div>
 	</div>
 
 	<div class="contanier-footer">
+	</div>
+</div>
+
+<form id='detalle_lote' method='post' action="<?= base_url($pais.'/lotes/autorizacion/detalle'); ?>/">
+</form>
+
+<div id="msg-system-report" style="display:none">
+	<div id="msg-info" class="comb-content"></div>
+	<div id="actions" class="comb-content actions-buttons">
+		<button id="close-info" class="buttons-action"><?= lang('TAG_ACCEPT') ?></button>
 	</div>
 </div>

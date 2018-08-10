@@ -94,3 +94,4 @@ $lang['PRODUCTOS-138'] = 'Usuario sin productos asociados para la empresa ';
 $lang['FILTER_TODAS'] = 'TODAS';
 $lang['FILTER_SEL_CAT'] = 'Buscar por categoría';
 $lang['FILTER_SEL_MARC'] = 'Buscar por marca';
+$lang['TAG_ACCEPT'] = "Aceptar";
