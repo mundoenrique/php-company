@@ -960,6 +960,7 @@ class Lotes extends CI_Controller {
 
 			$dataOS = $this->input->post('data-OS');
 			$dataCOS = $this->input->post('data-COS');
+			$dataLF = $this->input->post('data-LF');
 
 			$menuHeader = $this->parser->parse('widgets/widget-menuHeader',array(),TRUE);
 			$menuFooter = $this->parser->parse('widgets/widget-menuFooter',array(),TRUE);
@@ -971,7 +972,8 @@ class Lotes extends CI_Controller {
 				'lastSession'=>$lastSessionD,
 				'data' => $rtest,
 				'dataOS' => $dataOS,
-				'dataCOS' => $dataCOS
+				'dataCOS' => $dataCOS,
+				'dataLF' => $dataLF
 				),TRUE);
 			$sidebarLotes= $this->parser->parse('dashboard/widget-empresa',array('sidebarActive'=>TRUE),TRUE);
 

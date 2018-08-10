@@ -1,5 +1,5 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed'); ?>
-<div id="response-serv" class="content-products" code="<?= $pageInfo['code']; ?>" title="<?= $pageInfo['title-modal'] ?>" msg="<?= $pageInfo['msg']; ?>"></div>
+<div id="response-serv" code="<?= $pageInfo['code']; ?>" title="<?= $pageInfo['title-modal'] ?>" msg="<?= $pageInfo['msg']; ?>"></div>
 <div id="content-products">
 
 	<h1><?php echo $action; ?></h1>
@@ -136,7 +136,7 @@
 											<div class="row">
 												<div class="cell">
 													<span>
-														<a id="<?= $detail->acnumlote; ?>" class="batch-detail">
+														<a id="<?= $detail->acidlote; ?>" class="batch-detail">
 															<?= $detail->acnumlote; ?>
 														</a>
 													</span>
@@ -165,6 +165,7 @@
 </div>
 
 <form id='detalle_lote' method='post' action="<?= base_url($pais.'/lotes/autorizacion/detalle'); ?>/">
+	<input type='hidden' id='data-LF' name='data-LF' value='LF' />
 </form>
 
 <div id="msg-system-report" style="display:none">
