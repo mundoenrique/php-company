@@ -115,8 +115,8 @@
 							<td><?= $tipoLot; ?></td>
 							<td><?= count($lotes->lista); ?></td>
 							<td><?= $lotes->ncantregs; ?></td>
-							<td><?= $lotes->montoComision; ?></td>
-							<td><?= $lotes->montoNeto; ?></td>
+							<td><?= number_format($lotes->montoComision, 2, ',', '.'); ?></td>
+							<td><?= number_format($lotes->montoNeto, 2, ',', '.'); ?></td>
 							<td class="os-info-show">
 								<a>
 									<span aria-hidden="true" class="icon icon-list"></span>
@@ -129,7 +129,7 @@
 											<div class="cell"><span>Cant.</span></div>
 											<div class="cell"><span>Estatus</span></div>
 											<div class="cell"><span>Monto de Comisión Bs.</span></div>
-											<div class="cell"><span>Monto Total</span></div>
+											<div class="cell"><span>Monto Total Bs.</span></div>
 										</div>
 										<?php foreach($lotes->lista AS $pos => $detail): ?>
 											<?php $date = new DateTime($detail->dtfechorcarga); ?>
@@ -146,8 +146,13 @@
 												<div class="cell">
 													<span><?= ucfirst(strtolower($detail->status)); ?></span>
 												</div>
-												<div class="cell"><span><?= $detail->montoComision; ?></span></div>
-												<div class="cell"><span><?= $detail->montoNeto; ?></span></div>
+												<?php setlocale(LC_MONETARY, 'en_US'); ?>
+												<div class="cell">
+													<span><?= number_format($detail->montoComision, 2, ',', '.'); ?></span>
+												</div>
+												<div class="cell">
+													<span><?= number_format($detail->montoNeto, 2, ',', '.'); ?></span>
+												</div>
 											</div>
 										<?php endforeach; ?>
 									</div>
