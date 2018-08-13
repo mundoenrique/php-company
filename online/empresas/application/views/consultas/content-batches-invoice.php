@@ -124,12 +124,12 @@
 								<span class="show-table" style="display: none">
 									<div class="table">
 										<div class="heading">
-											<div class="cell"><span>Nro de Lote</span></div>
+											<div class="cell"><span>Lote</span></div>
 											<div class="cell"><span>Fecha de autorización</span></div>
 											<div class="cell"><span>Cant.</span></div>
 											<div class="cell"><span>Estatus</span></div>
-											<div class="cell"><span>Monto de Comisión Bs.</span></div>
-											<div class="cell"><span>Monto Total Bs.</span></div>
+											<div class="cell"><span>Comisión Bs.</span></div>
+											<div class="cell"><span>Total Bs.</span></div>
 										</div>
 										<?php foreach($lotes->lista AS $pos => $detail): ?>
 											<?php $date = new DateTime($detail->dtfechorcarga); ?>
@@ -146,7 +146,6 @@
 												<div class="cell">
 													<span><?= ucfirst(strtolower($detail->status)); ?></span>
 												</div>
-												<?php setlocale(LC_MONETARY, 'en_US'); ?>
 												<div class="cell">
 													<span><?= number_format($detail->montoComision, 2, ',', '.'); ?></span>
 												</div>
