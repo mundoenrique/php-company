@@ -174,10 +174,12 @@ $route['(:any)/reportes/comisiones'] = "reports_additional/ReportRecharWithComm/
 $route['(:any)/reportes/GuarderiaResult'] = "reportes/getGuarderiaResult/";
 $route['(:any)/reportes/comisiones'] = "reports_additional/ReportRecharWithComm/$1";
 $route['(:any)/reportes/comisiones-recarga'] = "reports_additional/callSystem/$1";
+$route['(:any)/reportes/eliminar'] = "reports_additional/deleteReport/$1";
 
 //CONSULTAS
 $route['(:any)/consulta/ordenes-de-servicio'] = "consultas/ordenesServicio/$1";
 $route['(:any)/consulta/lotes-por-facturar'] = "additional_inquiries/batchesByInvoice/$1";
+$route['(:any)/consulta/servicio'] = "additional_inquiries/callWebService/$1";
 $route['(:any)/consulta/tarjetahabientes'] = "consultas/tarjetahabientes/$1";
 $route['api/v1/(:any)/consulta/tarjetaH'] = "consultas/getTarjetaHabiente/$1";
 $route['api/v1/(:any)/consulta/downloadOS'] = "consultas/downloadOS/$1";

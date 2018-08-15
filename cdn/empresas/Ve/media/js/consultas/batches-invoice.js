@@ -14,7 +14,6 @@ $(function() {
 		"pagingType": "full_numbers",
 		"pageLength": 10, //Cantidad de registros por pagina
 		language: { "url":  baseCDN + '/media/js/combustible/Spanish.json'},
-		/*
 		buttons: [
 			{
 				text: '<span id="down-excel" aria-hidden="true" class="icon" data-icon="&#xe05a"></span>',
@@ -22,16 +21,21 @@ $(function() {
 				titleAttr: "Descargar reporte excel"
 			}
 		],
-		*/
 	});
 
 	table.on('draw', function(){
+		var tableEmty = $('#novo-table > tbody > tr > td:first-child').hasClass( "dataTables_empty" );
+		if(tableEmty) {
+			$('#down-excel')
+			.addClass('disabled')
+			.attr('title', 'No hay datos para descargar');
+		}
 		$('#loading').hide();
 		$('#display-table').fadeIn(1000);
 	});
 
 	$('td.os-info-show').on('click', function() {
-		console.log(table.row)
+
 		var tr = $(this).closest('tr');
 		var row = table.row(tr);
 		var trAct = $(this).closest('tbody').find('tr.shown');
@@ -59,7 +63,49 @@ $(function() {
 		$("#detalle_lote").submit();
 
 	});
+
+	$('#display-table').on('click', '#down-excel', function() {
+		var noData = $(this).hasClass('disabled');
+
+		if(!noData) {
+			var uri = '/consulta/servicio', method = 'GET', action = 'GetBatchesByInvoice';
+			var preload = $('#loading').html();
+			$('.down-report').hide();
+			$('.dt-buttons')
+			.append('<div id="load-report" class="loading">'+preload+'</div>')
+			.fadeIn('1000');
+			callService(uri, method, action, function(response) {
+				if(response.code === 0) {
+					uri = '/reportes/eliminar', method = 'POST', action = response.msg.file;
+
+					window.location.href = response.msg.url + response.msg.file;
+
+					callService(uri, method, action, function(response) {
+					});
+
+				} else {
+					msgSystemrepor(response.code, response.title, response.msg);
+				}
+				$('#load-report').remove();
+				$('.down-report').fadeIn('1000');
+
+			});
+		}
+
+	});
+
 });
+
+function callService(uri,method, action, _response_) {
+	$.ajax({
+		url: baseURL+isoPais+uri,
+		type: method,
+		data: {way: action},
+		datatype: 'JSON',
+	}).done(function(response) {
+		_response_(response);
+	});
+}
 
 function msgSystemrepor(code, title, msg) {
 	var msgSystem = $('#msg-system-report');

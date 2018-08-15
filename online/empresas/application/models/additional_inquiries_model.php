@@ -21,7 +21,6 @@ class additional_inquiries_model extends CI_Model {
 
 	public function __construct()
 	{
-		parent:: __construct();
 		$this->country = $this->session->userdata('pais');
 		$this->token = $this->session->userdata('token');
 		$this->company = $this->session->userdata('acrifS');
@@ -44,7 +43,7 @@ class additional_inquiries_model extends CI_Model {
 	 * @date 2018/08/09
 	 * @author J. Enrique Peñaloza P.
 	 */
-	public function callWsGetBatchesByInvoice()
+	public function callWsGetBatchesByInvoice($report = NULL)
 	{
 		//Construye log de acceso
 		$modulo = 'Reportes';
@@ -56,7 +55,7 @@ class additional_inquiries_model extends CI_Model {
 		$logAcceso = np_hoplite_log($this->sessionId, $this->userName, $this->canal, $modulo, $function, $operation, $rc, $this->ip, $this->timeLog);
 
 		$dataRequest = [
-			"idOperation" => "lotesPorFacturar",
+			"idOperation" => !$report ? "lotesPorFacturar" : "lotesPorFacturarXLS",
 			"className" => $className,
 			"acprefix" => $this->prefix,
 			"datosEmpresa" => [
@@ -76,7 +75,7 @@ class additional_inquiries_model extends CI_Model {
 		$response = np_Hoplite_GetWS('eolwebInterfaceWS', $dataRequest);
 		$jsonResponse = np_Hoplite_Decrypt($response);
 
-		log_message('INFO', '--[' . $this->userName . '] RESPONSE recarga/comision: ' . $jsonResponse);
+		log_message('INFO', '--[' . $this->userName . '] RESPONSE LOTES POR FACTURAR: ' . $jsonResponse);
 
 		$responseServ = json_decode(utf8_encode($jsonResponse));
 
@@ -86,7 +85,14 @@ class additional_inquiries_model extends CI_Model {
 			switch($responseServ->rc) {
 				case 0:
 					$code = 0;
-					$data = (array)$responseServ->listaLotes;
+					if(!$report) {
+						$data = (array)$responseServ->listaLotes;
+					} else {
+						$msg = [
+							'url' => $this->config->item('base_url_cdn').'downloads/reports/',
+							'file' => $responseServ->nombre
+						];
+					}
 					break;
 				case -150:
 					$code = 0;
@@ -97,9 +103,9 @@ class additional_inquiries_model extends CI_Model {
 					$msg = lang('ERROR_(-29)');
 					break;
 				default:
-					$code = 1;
+					$code = !$report ? 1 : 3;
 					$title = lang('TITULO_LOTES_POR_FACTURAR');
-					$msg = lang('ERROR_GET_LIST');
+					$msg = !$report ? lang('ERROR_GET_LIST') : lang('ERROR_(-137)');
 
 			}
 		} else {

@@ -66,53 +66,8 @@
 				</thead>
 				<tbody>
 					<?php foreach($dataResponse AS $key => $lotes): ?>
-					<?php
-							switch($lotes->ctipolote) {
-								case '1':
-									$tipoLot = 'Emisión';
-									break;
-								case '2':
-									$tipoLot = 'Recarga';
-									break;
-								case '3':
-									$tipoLot = 'Emisión innominada';
-									break;
-								case '5':
-									$tipoLot = ' Recarga innominada';
-									break;
-								case '5':
-									$tipoLot = 'Emision EDC';
-									break;
-								case '6':
-									$tipoLot = 'Desafiliación';
-									break;
-								case 'A':
-									$tipoLot = 'Afiliación PN';
-									break;
-								case 'G':
-									$tipoLot = 'Cheque Guardería';
-									break;
-								case 'M':
-									$tipoLot = 'Monetario';
-									break;
-								case 'R':
-									$tipoLot = 'Reposición de tarjeta';
-									break;
-								case 'C':
-									$tipoLot = 'Reposición de clave';
-									break;
-								case 'N':
-									$tipoLot = 'Renovación';
-									break;
-								case 'E':
-									$tipoLot = 'Guardería electrónica';
-									break;
-								default:
-									$tipoLot = '';
-							}
-						?>
 						<tr>
-							<td><?= $tipoLot; ?></td>
+							<td><?= $lotes->descripcionpro; ?></td>
 							<td><?= count($lotes->lista); ?></td>
 							<td><?= $lotes->ncantregs; ?></td>
 							<td><?= number_format($lotes->montoComision, 2, ',', '.'); ?></td>
@@ -170,6 +125,8 @@
 
 <form id='detalle_lote' method='post' action="<?= base_url($pais.'/lotes/autorizacion/detalle'); ?>/">
 	<input type='hidden' id='data-LF' name='data-LF' value='LF' />
+</form>
+<form id="down-report" action="<?= base_url($pais . '/reportes/comisiones-recarga') ?>" method="post">
 </form>
 
 <div id="msg-system-report" style="display:none">

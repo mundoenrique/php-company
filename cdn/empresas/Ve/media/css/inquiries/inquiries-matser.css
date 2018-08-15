@@ -84,3 +84,21 @@ div.row > div:last-child {
 div.heading > div:last-child {
 	border-radius: 0px 10px 0px 0px;
 }
+
+.disabled, .disabled:hover {
+	color: #888888;
+}
+
+.dt-buttons  {
+	min-height: 37px;
+}
+
+.loading > img {
+	height: 25px;
+}
+
+.loading {
+	padding: 5px 3px 5px 3px;
+	float: left;
+	margin: 5px 0px 0px 10px;
+}

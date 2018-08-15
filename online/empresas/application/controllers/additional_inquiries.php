@@ -38,7 +38,7 @@ class additional_inquiries extends CI_Controller
 			'header.js',
 			'dashboard/widget-empresa.js',
 			'combustible/jquery.dataTables.js',
-			//'combustible/dataTables.buttons.min.js',
+			'combustible/dataTables.buttons.min.js',
 			'routes.js'
 		];
 		//Add libraries
@@ -131,7 +131,7 @@ class additional_inquiries extends CI_Controller
 		], TRUE);
 		//Agregar aviso
 		$aviso = $this->parser->parse('widgets/widget-aviso', [
-			'msg' => 'Los lotes acumulados, pendientes por facturar, serán fraccionados de acuerdo a su antiguaedad y aparecerán reflejados en la Órdenes de Servicio/Facturas de las recargas que ordene su empresa.'
+			'msg' => 'Los lotes acumulados, pendientes por facturar, serán fraccionados de acuerdo a su antigüedad y aparecerán reflejados en la Órdenes de Servicio/Facturas de las recargas que ordene su empresa.'
 		], TRUE);
 		//Agregar footer
 		$menuFooter = $this->parser->parse('widgets/widget-menuFooter', [], true);
@@ -152,6 +152,14 @@ class additional_inquiries extends CI_Controller
 		];
 		//Cargar pagina
 		$this->parser->parse('layouts/layout-b', $datos);
+	}
+
+	public function callWebService()
+	{
+		$method = 'callWs'.$this->input->get('way');
+		$this->load->model('additional_inquiries_model', 'report');
+		$response = $this->report->callWsGetBatchesByInvoice('report');
+		$this->output->set_content_type('application/json')->set_output(json_encode($response));
 	}
 
 	private function withoutAccess()
