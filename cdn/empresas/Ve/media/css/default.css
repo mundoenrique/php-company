@@ -3590,7 +3590,22 @@ padding:10px 5px 10px 5px;
   overflow: hidden;
 }
 
+.important-notice {
+	background-color: #f3f3f3;
+  float: left;
+  border-top: 1px solid #dddddd;
+  border-bottom: 1px solid #f3f3f3;
+  padding: 10px;
+  color: #0054a9;
+  width: 200px;
+  overflow: hidden;
+}
+
 #widget-info-2 button {
+  margin: 10px 25px;
+}
+
+.important-notice button {
   margin: 10px 25px;
 }
 

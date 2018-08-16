@@ -3,7 +3,7 @@
 		<span data-icon="&#xe09d;" class="icon" aria-hidden="true" style="font-size: 30px; padding-right: 25px;"></span>
 		AVISO IMPORTANTE
 	</div>
-	<div id="widget-info-2"  style="height: 123px; overflow-y: auto; text-align: justify">
+	<div class="important-notice" style="height: 123px; overflow-y: auto; text-align: justify">
 		<?php if(isset($msg)): ?>
 			<?= $msg; ?>
 		<?php else: ?>
