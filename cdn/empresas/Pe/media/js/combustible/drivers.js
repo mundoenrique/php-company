@@ -1,20 +1,35 @@
-var language;
-$(function() {
-    $.post(baseURL + '/' + isoPais + '/trayectos/modelo', {'model': 'drivers', 'modelo': 'driver'})
+var lang;
+var selectStatusDriver;
+$(function () {
+	$.post(baseURL + '/' + isoPais + '/trayectos/modelo', {way: 'drivers', modelo: 'driver'})
         .done( function(data) {
-            language = data.language;
+						lang = data.language;
             switch (data.code) {
                 case 0:
                 case 1:
                     var jsonData = data.msg;
-                    var table = $('#novo-table').DataTable({
+										var table = $('#novo-table').DataTable({
+											"drawCallback": function (data) {
+												if (data.length === 0 && data.code !== 0) {
+													$('#down-report').css('display', 'none');
+												} else {
+													$('#down-report').css('display', '');
+												}
+											},
                         select: false,
                         dom: 'Bfrtip',
                         "lengthChange": false,
                         "pagingType": "full_numbers",
                         "pageLength": 5, //Cantidad de registros por pagina
                         "language": { "url":  baseCDN + '/media/js/combustible/Spanish.json'}, //Lenguaje: español //cdn.datatables.net/plug-ins/1.10.12/i18n/Spanish.json
-                        data: jsonData, //Arreglo con los  valores del objeto
+												buttons: [
+													{
+														text: '<span id="down-excel" aria-hidden="true" class="icon" data-icon="&#xe05a"></span><select class="select" id="select-drivers"><option value="">Todos</option><option value="1">Activo</option><option value="0">Inactivo</option></select>',
+														className: 'down-report',
+														titleAttr: lang.TAG_DWN_EXCEL
+													}
+												],
+												data: jsonData, //Arreglo con los  valores del objeto
                         columns: [
                             {
                                 title: "Identificación",
@@ -56,7 +71,7 @@ $(function() {
                     $('#close-info')
                         .removeClass('button-cancel')
                         .attr('finish', 'y')
-                        .text(language.TAG_ACCEPT);
+                        .text(lang.TAG_ACCEPT);
                     notiSystem(data.title);
                     break;
                 case 3:
@@ -64,7 +79,7 @@ $(function() {
                     $('#close-info')
                         .removeClass('button-cancel')
                         .attr('finish', 'c')
-                        .text(language.TAG_ACCEPT);
+                        .text(lang.TAG_ACCEPT);
                     notiSystem(data.title);
                     break;
             }
@@ -75,11 +90,11 @@ $(function() {
     $('#add').on('click', function () {
 
         $('#msg-info').append('<input type="text" id="userID" maxlength="9">');
-        $('#send-info').text(language.TAG_SEND);
+        $('#send-info').text(lang.TAG_SEND);
         $('#close-info')
         .addClass('button-cancel')
-        .text(language.TAG_CANCEL);
-        notiSystem(language.DRIVER_SEARCH_DNI);
+        .text(lang.TAG_CANCEL);
+        notiSystem(lang.DRIVER_SEARCH_DNI);
     });
 
 });
@@ -104,8 +119,8 @@ $('#send-info').on('click', function(){
         validaOnlyNum = onlynum.test(dniAction[0].user),
         validaTamano = tamano.test(dniAction[0].user),
         validaZeroInit = zeroInit.test(dniAction[0].user),
-        dniValido = false;        
-    
+        dniValido = false;
+
         if(!validaOnlyNum) {
             $('#msg').text('DNI: sólo números');
         } else if(validaZeroInit) {
@@ -121,7 +136,7 @@ $('#send-info').on('click', function(){
         $.ajax({
             url: baseURL + '/' + isoPais + '/trayectos/modelo',
             type: 'POST',
-            data: {model: 'checkUSER', data: dniAction, modelo: 'driver'},
+            data: {way: 'checkUSER', data: dniAction, modelo: 'driver'},
             datatype:'json',
             beforeSend: function(data){
                 $('#send-info, #close-info').text('');
@@ -132,9 +147,10 @@ $('#send-info').on('click', function(){
 
                 $('#msg-info').empty();
                 $('#send-info, #close-info').text('');
-                var lang = data.language,
-                    user = data.msg,
+                var user = data.msg,
                     message;
+
+										lang = data.language;
 
                 switch (data.code) {
                     case 0:
@@ -147,11 +163,11 @@ $('#send-info').on('click', function(){
                         $('#msg-info').append(message);
                         $('#send-info')
                             .attr('func', 'register')
-                            .text(language.TAG_ACCEPT);
+                            .text(lang.TAG_ACCEPT);
                         $('#close-info')
                         .addClass('button-cancel')
-                        .text(language.TAG_CANCEL);
-                        notiSystem(language.DRIVER_INCLUDE);
+                        .text(lang.TAG_CANCEL);
+                        notiSystem(lang.DRIVER_INCLUDE);
                         break;
                     case 1:
                         message =
@@ -160,8 +176,8 @@ $('#send-info').on('click', function(){
                         $('#msg-info').append(message);
                         $('#close-info')
                         .removeClass('button-cancel')
-                        .text(language.TAG_ACCEPT);
-                        notiSystem(language.DRIVER_INCLUDE);
+                        .text(lang.TAG_ACCEPT);
+                        notiSystem(lang.DRIVER_INCLUDE);
                         break;
                     case 2:
                         message =
@@ -172,8 +188,8 @@ $('#send-info').on('click', function(){
                         $('#close-info')
                             .removeClass('button-cancel')
                             .attr('finish', 'y')
-                            .text(language.TAG_ACCEPT);
-                        notiSystem(language.DRIVER_INCLUDE);
+                            .text(lang.TAG_ACCEPT);
+                        notiSystem(lang.DRIVER_INCLUDE);
                         break;
                     case 3:
                         $('#msg-system').dialog('close');
@@ -186,7 +202,7 @@ $('#send-info').on('click', function(){
                         $('#close-info')
                             .removeClass('button-cancel')
                             .attr('finish', 'y')
-                            .text(language.TAG_ACCEPT);
+                            .text(lang.TAG_ACCEPT);
                         notiSystem(data.title);
                         break;
                     case 5:
@@ -194,7 +210,7 @@ $('#send-info').on('click', function(){
                         $('#close-info')
                             .removeClass('button-cancel')
                             .attr('finish', 'c')
-                            .text(language.TAG_ACCEPT);
+                            .text(lang.TAG_ACCEPT);
                         notiSystem(data.title);
                         break;
                 }
@@ -242,7 +258,6 @@ function notiSystem (title, size, type, message) {
     });
 }
 
-
 function addEdit(userName, func) {
     $('form#formulario').empty();
     $('form#formulario').append('<input type="hidden" name="modelo" value="driver" />');
@@ -259,3 +274,14 @@ function clearInput()
         .removeClass('field-error')
         .text('');
 }
+
+//Descargar reporte en EXCEL
+$('#table-drivers').on('click', '#down-excel', function(e) {
+	e.preventDefault();
+	var dataReport = {
+		status: $('#select-drivers').val()
+	}
+	downReports('ConductoresExcel', 'reportes_trayectos', dataReport, 'conductores-xls');
+
+});
+

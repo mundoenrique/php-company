@@ -58,6 +58,7 @@ class Lotes extends CI_Controller {
 			$menuHeader = $this->parser->parse('widgets/widget-menuHeader',array(),TRUE);
 			$menuFooter = $this->parser->parse('widgets/widget-menuFooter',array(),TRUE);
 			$header = $this->parser->parse('layouts/layout-header',array('bodyclass'=>'','menuHeaderActive'=>TRUE,'menuHeaderMainActive'=>TRUE,'menuHeader'=>$menuHeader,'titlePage'=>$titlePage),TRUE);
+			$aviso = $this->parser->parse('widgets/widget-aviso', ['pais' => $urlCountry], TRUE);
 			$footer = $this->parser->parse('layouts/layout-footer',array('menuFooterActive'=>TRUE,'menuFooter'=>$menuFooter,'FooterCustomInsertJSActive'=>TRUE,'FooterCustomInsertJS'=>$FooterCustomInsertJS,'FooterCustomJSActive'=>TRUE,'FooterCustomJS'=>$FooterCustomJS),TRUE);
 			$content = $this->parser->parse('lotes/content-cargarlotes',array(
 				'titulo'=>$nombreCompleto,
@@ -73,7 +74,7 @@ class Lotes extends CI_Controller {
 				'content'=>$content,
 				'footer'=>$footer,
 				'sidebar'=>$sidebarLotes,
-				'aviso' =>TRUE,
+				'aviso' =>$aviso,
 				'titleHeading' => 'TITULO ACA',
 				'login' => 'LOGIN USUARIO',
 				'password' => 'CONTRASEÑA',
@@ -299,6 +300,7 @@ class Lotes extends CI_Controller {
 			$menuHeader = $this->parser->parse('widgets/widget-menuHeader',array(),TRUE);
 			$menuFooter = $this->parser->parse('widgets/widget-menuFooter',array(),TRUE);
 			$header = $this->parser->parse('layouts/layout-header',array('bodyclass'=>'','menuHeaderActive'=>TRUE,'menuHeaderMainActive'=>TRUE,'menuHeader'=>$menuHeader,'titlePage'=>$titlePage),TRUE);
+			$aviso = $this->parser->parse('widgets/widget-aviso', ['pais' => $urlCountry], TRUE);
 			$footer = $this->parser->parse('layouts/layout-footer',array('menuFooterActive'=>TRUE,'menuFooter'=>$menuFooter,'FooterCustomInsertJSActive'=>TRUE,'FooterCustomInsertJS'=>$FooterCustomInsertJS,'FooterCustomJSActive'=>TRUE,'FooterCustomJS'=>$FooterCustomJS),TRUE);
 			$content = $this->parser->parse('lotes/content-authlotes',array(
 				'titulo'=>$nombreCompleto,
@@ -324,7 +326,7 @@ class Lotes extends CI_Controller {
 				'login' => 'LOGIN USUARIO',
 				'password' => 'CONTRASEÑA',
 				'loginBtn' => 'ENTRAR',
-				'aviso' =>TRUE,
+				'aviso' =>$aviso,
 				'pais' => $urlCountry
 				);
 
@@ -960,6 +962,7 @@ class Lotes extends CI_Controller {
 
 			$dataOS = $this->input->post('data-OS');
 			$dataCOS = $this->input->post('data-COS');
+			$dataLF = $this->input->post('data-LF');
 
 			$menuHeader = $this->parser->parse('widgets/widget-menuHeader',array(),TRUE);
 			$menuFooter = $this->parser->parse('widgets/widget-menuFooter',array(),TRUE);
@@ -971,7 +974,8 @@ class Lotes extends CI_Controller {
 				'lastSession'=>$lastSessionD,
 				'data' => $rtest,
 				'dataOS' => $dataOS,
-				'dataCOS' => $dataCOS
+				'dataCOS' => $dataCOS,
+				'dataLF' => $dataLF
 				),TRUE);
 			$sidebarLotes= $this->parser->parse('dashboard/widget-empresa',array('sidebarActive'=>TRUE),TRUE);
 
@@ -1029,6 +1033,8 @@ class Lotes extends CI_Controller {
 			);
 
 		$data = json_encode($data,JSON_UNESCAPED_UNICODE);
+
+		log_message('DEBUG', 'REQUEST DETALLE DEL LOTE: '.$data);
 
 		$dataEncry = np_Hoplite_Encryption($data);
 		$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
@@ -2087,7 +2093,7 @@ class Lotes extends CI_Controller {
 	        log_message('info', "Prueba para la toma del país --->>> " . $paisS);
 	        $calculoOsLotesW = $this->callWScalcularOS($urlCountry, $token, $username,
 											  				$pass, $lotes, $tipoOrdeServicio, $medio, $ivanuevo);
-	        $this->output->set_content_type('')->set_output($calculoOsLotesW);
+	        $this->output->set_content_type('application/json')->set_output($calculoOsLotesW);
 	    }
 	    elseif ($paisS != $urlCountry && $paisS != '') {
 	        $this->session->sess_destroy();
@@ -2095,8 +2101,8 @@ class Lotes extends CI_Controller {
 	        redirect($urlCountry . '/login');
 	    }
 	    elseif ($this->input->is_ajax_request()) {
-	        $this->output->set_content_type('')->set_output(json_encode(array(
-	            'ERROR' => '-29'
+	        $this->output->set_content_type('application/json')->set_output(json_encode(array(
+	            'ERROR' => lang('ERROR_(-29)')
 	        )));
 	    }
 	    else {
@@ -2118,6 +2124,8 @@ class Lotes extends CI_Controller {
 	 */
 	private function callWScalcularOS($urlCountry,$token,$username,$pass,$lotes,$tipoOrdeServicio,$medio,$ivanuevo){
 		$this->lang->load('erroreseol');
+		$this->lang->load('dashboard');
+		$this->lang->load('lotes');
 		$operacion = "calcularOS";
 		$classname = "com.novo.objects.TOs.OrdenServicioTO";
 		$timeLog= date("m/d/Y H:i");
@@ -2138,9 +2146,6 @@ class Lotes extends CI_Controller {
 			'idPago'=>$medio,
 			'descripcion'=>$descripcion
 		);
-
-		// $arraymediopago = json_encode($arraymediopago,JSON_UNESCAPED_UNICODE);
-		// log_message("info","Array de medios de pago -->> ".$arraymediopago);
 
 		if ($ivanuevo == 1) {
 			$ivanuevo = 'true';
@@ -2198,43 +2203,55 @@ class Lotes extends CI_Controller {
 		$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
 		$data = json_encode($data);
 		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
-		$jsonResponse = np_Hoplite_Decrypt($response);
-		$response = json_decode(utf8_encode($jsonResponse));
+		$jsonResponse = utf8_encode(np_Hoplite_Decrypt($response));
+		$response = json_decode($jsonResponse);
 
-		if($response){
-			log_message("info","Calculo OS ".$response->rc);
-			if($response->rc==0){
-				return serialize($response);
-			}else{
-				if($response->rc==-61 || $response->rc==-29){
-					$this->session->sess_destroy();
-					$this->session->unset_userdata($this->session->all_userdata());
-					$codigoError= array('ERROR' => '-29' );
+		log_message("DEBUG","RESPONSE Calculo OS: ".$jsonResponse);
+		if(isset($response->rc)) {
+			$title = lang('TITULO_LOTES_AUTORIZACION');
+			switch($response->rc) {
+				case 0:
+					$code = 0;
+					$data = serialize($response);
+					break;
+				case -51:
+					$code = 2;
+					$msgVE = 'No fue posible obtener los datos de la empresa para la Orden de Servicio. ';
+					$msgVE .= 'Por favor envíe esta pantalla y su usuario al correo ';
+					$msgVE .= '<strong>soporteempresas@tebca.com</strong>';
+					$msg = $urlCountry =="Ve" ? $msgVE : $response.msg;
+				case -29:
+				case -61:
+					$code = 3;
+					$title = lang('SYSTEM_NAME');
+					$msg = lang('ERROR_(-29)');
+					break;
+				default:
+					$code = 2;
+					$msg = lang('ERROR_('.$response->rc.')');
 				}
-				else if($response->rc==-51){
-				    if ($urlCountry =="Ve"){
-						log_message("info","Mensaje error -->> ".$response->msg);
-                        $codigoError = array('ERROR' => 'Error obteniendo los datos de la empresa para la Orden de Servicio. Por favor envíe esta pantalla y su usuario al correo <strong>soporteempresas@tebca.com</strong>' );
-                    }else {
-                        $codigoError = array('ERROR' => $response->msg );
-                    }
-				}
-				else{
-					$codigoError = lang('ERROR_('.$response->rc.')');
-					if(strpos($codigoError, 'Error')!==false){
-						$codigoError = array('ERROR' => lang('ERROR_GENERICO_USER') );
-					}else{
-						$codigoError = array('ERROR' => lang('ERROR_('.$response->rc.')') );
-					}
-				}
-				return json_encode($codigoError);
+		} else {
+			$code = 3;
+			$title = lang('SYSTEM_NAME');
+			$msg = lang('ERROR_GENERICO_USER');
 			}
-		}else{
-			log_message("info","Calculo OS NO WS");
-			$codigoError = array('ERROR' => lang('ERROR_GENERICO_USER') );
-			return json_encode($codigoError);
+
+		if($code === 3) {
+			$this->session->sess_destroy();
 		}
 
+		$response = [
+			'code' => $code,
+			'title' => $title,
+			'msg' => isset($msg) ? $msg : '',
+			'data' => isset($data) ? $data : ''
+		];
+
+		$response = json_encode($response);
+
+		log_message('DEBUG', 'SENT TO THE VIEW: '.$response);
+
+		return $response;
 	}
 
 

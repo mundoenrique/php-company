@@ -40,7 +40,9 @@ function notiSystem (title,msg,accept,code) {
                 text: accept,
                 click: function() {
                     if(codeMsg == 3){location.href = $('#logUrl').val() + '/logout';};
-                    if(codeMsg == 2){ $( "#msg-system" ).dialog( "close" );};
+										if(codeMsg == 2){
+											$( "#msg-system" ).dialog( "close" );
+									};
 
 
                 }
@@ -68,21 +70,24 @@ $(function() {
 
 var jsonData = [];
 function getDataAccount(type) {
-    $.post(baseURL + '/' + isoPais + '/trayectos/modelo', {model: 'accounts', modelo: 'account',data:type})
+    $.post(baseURL + '/' + isoPais + '/trayectos/modelo', {way: 'accounts', modelo: 'account',data:type})
         .done(function(data) {
-            if(data.code == undefined && JSON.parse(data).lista != undefined && JSON.parse(data).lista != []){
-                dataAccount = JSON.parse(data);
-              jsonData = dataAccount.lista;
-              // jsonData = [];
-              //   $('#filter-title').show();
-              //   $('#filter').show();
-                createTable(jsonData);
-            }else{
-                catchErrorCode(data.code,data.msg,data.language.TAG_ACCEPT);
-                jsonData = [];
-                createTable(jsonData);
-             }
-        });
+			if (data.code == undefined && JSON.parse(data.resp).lista != undefined && JSON.parse(data.resp).lista != []) {
+				dataAccount = JSON.parse(data.resp);
+				lang = data.lang
+				jsonData = dataAccount.lista;
+				createTable(jsonData);
+
+			} else {
+				$('#loading').hide();
+
+				catchErrorCode(data.code, data.msg, data.language.TAG_ACCEPT);
+
+				jsonData = [];
+				createTable(jsonData);
+
+			}
+		});
 }
 
 
@@ -188,19 +193,27 @@ function createTable(datajson) {
             }
         ]
     }
-
-
     var dataTable = table.DataTable({
-        // select: false,
-        // retrieve: true,
+			"drawCallback": function (data) {
+				if (datajson.length == 0) {
+					$('#down-excel').css('display', 'none');
+				}
+			},
         dom: 'Bfrtip',
         "lengthChange": false,
         "pagingType": "full_numbers",
         "pageLength": 5, //Cantidad de registros por pagina
         "language": { "url": baseCDN + '/media/js/combustible/Spanish.json'}, //Lenguaje: español //cdn.datatables.net/plug-ins/1.10.12/i18n/Spanish.json
-        data: dataResponse, //Arreglo con los  valores del objeto
-        columns: dataColumns
-    });
+		buttons: [
+			{
+				text: '<span id="down-excel" aria-hidden="true" class="icon" data-icon="&#xe05a" status="' + dataResponseCondition + '"></span>',
+				className: 'down-report',
+				titleAttr: 'Descargar reporte EXCEL'
+			}
+		],
+		data: dataResponse, //Arreglo con los  valores del objeto
+		columns: dataColumns
+	});
 }
 
 //Funcion para recargar datatable con datos segun el estatus de la cuenta
@@ -211,21 +224,25 @@ function ChangeDataAccount(type) {
     table.dataTable().fnDestroy();
     table.empty();
 
-    $.post(baseURL + '/' + isoPais + '/trayectos/modelo', {model: 'accounts', modelo: 'account',data:type})
+    $.post(baseURL + '/' + isoPais + '/trayectos/modelo', {way: 'accounts', modelo: 'account',data:type})
         .done(function(data) {
             // console.log(data);
-            if(data.code == undefined && JSON.parse(data).lista != undefined && JSON.parse(data).lista != []){
-                dataAccount = JSON.parse(data);
-                jsonData = dataAccount.lista;
-                // jsonData = [];
-                createTable(jsonData);
-            }else{
-                catchErrorCode(data.code,data.msg,data.language.TAG_ACCEPT);
-                jsonData = [];
-                createTable(jsonData);
-            }
+			if (data.code == undefined && JSON.parse(data.resp).lista != undefined && JSON.parse(data.resp).lista != []) {
+				dataAccount = JSON.parse(data.resp);
+				lang = data.lang;
+				jsonData = dataAccount.lista;
+				// jsonData = [];
+				createTable(jsonData);
 
-        });
+			} else {
+				$('#loading').hide();
+
+				catchErrorCode(data.code, data.msg, data.language.TAG_ACCEPT);
+				jsonData = [];
+				createTable(jsonData);
+			}
+
+		});
 }
 
 
@@ -279,5 +296,10 @@ $('#filter-selected').on('click', '#accountAvailable, #accountAllocated', functi
 
 });
 
-
-
+$('#novo-container-body').on('click', '#down-excel', function (e) {
+	e.preventDefault();
+	var dataReport = {
+		status: $('#down-excel').attr('status')
+	}
+	downReports('CuentasExcel', 'reportes_trayectos', dataReport, 'cuentas-xls');
+});

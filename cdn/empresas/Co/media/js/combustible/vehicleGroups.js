@@ -1,7 +1,7 @@
 var lang,
     action;
 $(function() {
-    $.post(baseURL + '/' + isoPais + '/trayectos/modelo', {model: 'vehicleGroups', modelo: 'vehicleGroups'})
+    $.post(baseURL + '/' + isoPais + '/trayectos/modelo', {way: 'vehicleGroups', modelo: 'vehicleGroups'})
         .done( function(data) {
             lang = data.lang;
             switch (data.code) {
@@ -15,7 +15,8 @@ $(function() {
                         "pagingType": "full_numbers",
                         "pageLength": 5, //Cantidad de registros por pagina
                         "language": { "url": baseCDN + '/media/js/combustible/Spanish.json'}, //Lenguaje: español //cdn.datatables.net/plug-ins/1.10.12/i18n/Spanish.json
-                        data: jsonData, //Arreglo con los  valores del objeto
+											buttons: [],
+												data: jsonData, //Arreglo con los  valores del objeto
                         columns: [
                             {
                                 title: lang.TAG_NAME,
@@ -103,7 +104,7 @@ $(function() {
 
             var formAddEdit = $('#formAddEdit').serialize();
 
-            $.post(baseURL + "/"+isoPais + '/trayectos/modelo',{model: 'addEditGroups', data: formAddEdit, modelo: 'vehicleGroups'})
+            $.post(baseURL + "/"+isoPais + '/trayectos/modelo',{way: 'addEditGroups', data: formAddEdit, modelo: 'vehicleGroups'})
                 .done(function (response) {
                     $('#msg-info').empty();
                     switch (response.code) {

@@ -1,14 +1,15 @@
 function lisTravels(typeList)
 {
     dataRequest = JSON.stringify(typeList);
-    $.post(baseURL + '/' + isoPais + '/trayectos/modelo', {model: 'travels', modelo: 'travels', data: dataRequest})
+    $.post(baseURL + '/' + isoPais + '/trayectos/modelo', {way: 'travels', modelo: 'travels', data: dataRequest})
     .done( function(response) {
-        lang = response.lang;
+
+			lang = response.lang;
         switch (response.code) {
             case 1:
             case 0:
-                var travelsList = response.msg;
-                displayTable(travelsList);
+								var travelsList = response.msg;
+                displayTable(travelsList, typeList);
                 break;
             case 2:
                 $('#msg-info').append('<p class="agrups">'+ response.msg +'</p>');
@@ -34,15 +35,27 @@ function lisTravels(typeList)
 }
 
 // despliegue del listado de viajes
-function displayTable(travelsList)
+function displayTable(travelsList, typeList)
 {
     $('#novo-table').DataTable({
+			"drawCallback": function(data) {
+				if(travelsList.length == 0 || typeList.type === 'drivers' || typeList.type === 'vehicles') {
+					 $('#down-excel').css('display', 'none');
+				}
+			},
         select: false,
         dom: 'Bfrtip',
         "lengthChange": false,
         "pagingType": "full_numbers",
         "pageLength": 5, //Cantidad de registros por pagina
-        "language": {"url": baseCDN + '/media/js/combustible/Spanish.json'}, //Lenguaje: español //cdn.datatables.net/plug-ins/1.10.12/i18n/Spanish.json
+				"language": {"url": baseCDN + '/media/js/combustible/Spanish.json'}, //Lenguaje: español //cdn.datatables.net/plug-ins/1.10.12/i18n/Spanish.json
+				buttons: [
+          {
+						text: '<span id="down-excel" aria-hidden="true" class="icon" data-icon="&#xe05a" type="' + typeList.type + '" beginDate="' + typeList.beginDate + '" finalDate="' + typeList.finalDate + '" status="' + typeList.option + '"></span>',
+						className: 'down-report',
+						titleAttr: lang.TAG_DWN_EXCEL
+          }
+        ],
         data: travelsList, //Arreglo con los  valores del objeto
         columns: [
             {
@@ -78,7 +91,7 @@ function displayTable(travelsList)
                 }
             }
         ]
-    });
+		});
 }
 
 function prepareList(dataRequest)
@@ -123,14 +136,15 @@ function prepareList(dataRequest)
                 $('#filter-option').show();
                 $('#search-option')
                     .show()
-                    .prop('disabled', false);
+                    .prop('disabled', true);
                 $('#plate')
                     .hide()
                     .prop('disabled', true);
-                $.post(baseURL + '/' + isoPais + '/trayectos/modelo', {model: 'getList', modelo: 'travels', data: dataRequest})
+                $.post(baseURL + '/' + isoPais + '/trayectos/modelo', {way: 'getList', modelo: 'travels', data: dataRequest})
                     .done(function(response){
                         switch (response.code) {
-                            case 0:
+														case 0:
+																$('#search-option').prop('disabled', false);
                                 buildSelect(response.msg);
                                 break;
                             case 2:

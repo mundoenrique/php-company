@@ -81,7 +81,7 @@
 		 * @param  byte $bytes
 		 * @return document
 		 */
-		function np_hoplite_byteArrayToFile($bytes,$typeFile,$filename)
+		function np_hoplite_byteArrayToFile($file, $typeFile, $filename, $bytes = TRUE)
 		{
 			$CI =& get_instance();
 
@@ -108,8 +108,12 @@
 					break;
 			}
 
-			foreach ($bytes as $chr) {
-				echo chr($chr);
+			if($bytes) {
+				foreach ($file as $chr) {
+					echo chr($chr);
+				}
+			} else {
+				echo $file;
 			}
 		}
 	}
@@ -145,7 +149,8 @@
 			$urlBase = $urlBaseA.$pais;
 
 			$menuP = unserialize($menuP);
-			log_message("DEBUG" ,json_encode($menuP));
+			//log_message("INFO", "<<<<<==FUNCIONES Y PERMISOS DEL USUARIO==>>>>>: ".json_encode($menuP));
+			$seeLotFact = FALSE;
 
 			$menuH="";
 			$menuInno="";
@@ -182,6 +187,7 @@
 								break;
 							case 'TEBAUT':
 								$ruta=$urlBase."/lotes/autorizacion";
+								$seeLotFact = TRUE;
 								break;
 							case 'TEBGUR':
 								$ruta=$urlBase."/lotes/reproceso";
@@ -190,13 +196,18 @@
 								$ruta=$urlBase."/lotes/innominada";
 								break;
 							case 'TIINVN':
-								$ruta=$urlBase."/lotes/innominada/inventario";
+								$ruta=$urlBase."/lotes/innominada/afiliacion";
 								break;
 							case 'TEBTHA':
 								$ruta=$urlBase."/reportes/tarjetahabientes";
 								break;
 							case 'TEBORS':
 								$ruta=$urlBase."/consulta/ordenes-de-servicio";
+								break;
+							case 'LOTFAC':
+								if($seeLotFact) {
+									$ruta=$urlBase."/consulta/lotes-por-facturar";
+								}
 								break;
 							case 'TRAMAE':
 								$ruta=$urlBase."/servicios/transferencia-maestra";
@@ -252,6 +263,9 @@
 							case 'REPPGE':
 								$ruta=$urlBase."/reportes/guarderia";
 								break;
+							case 'REPRTH':
+								$ruta= $urlBase . "/reportes/comisiones";
+								break;
 
 						}
 						if($submenu->idModulo == "TICARG"||$submenu->idModulo == "TIINVN"){
@@ -266,6 +280,7 @@
 											<a href='".$ruta."'>". lang($submenu->idModulo)."</a>
 										</li>";
 						} else {
+							if($submenu->idModulo == 'LOTFAC' && !$seeLotFact) continue;
 							$opMenuSubmenu.= "<li>
 												<a href='".$ruta."'>". lang($submenu->idModulo)."</a>
 											</li>";
@@ -320,7 +335,6 @@
 		 */
 		function np_hoplite_existeLink($menuP, $link)
 		{
-
 			$arrayMenu = unserialize($menuP);
 			$modulos = "";
 
@@ -331,6 +345,7 @@
 						$modulos.= strtolower($modulo->idModulo).",";
 					}
 				}
+
 				return strrpos($modulos, strtolower($link));
 
 			}else{
