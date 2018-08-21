@@ -58,6 +58,7 @@ class Lotes extends CI_Controller {
 			$menuHeader = $this->parser->parse('widgets/widget-menuHeader',array(),TRUE);
 			$menuFooter = $this->parser->parse('widgets/widget-menuFooter',array(),TRUE);
 			$header = $this->parser->parse('layouts/layout-header',array('bodyclass'=>'','menuHeaderActive'=>TRUE,'menuHeaderMainActive'=>TRUE,'menuHeader'=>$menuHeader,'titlePage'=>$titlePage),TRUE);
+			$aviso = $this->parser->parse('widgets/widget-aviso', ['pais' => $urlCountry], TRUE);
 			$footer = $this->parser->parse('layouts/layout-footer',array('menuFooterActive'=>TRUE,'menuFooter'=>$menuFooter,'FooterCustomInsertJSActive'=>TRUE,'FooterCustomInsertJS'=>$FooterCustomInsertJS,'FooterCustomJSActive'=>TRUE,'FooterCustomJS'=>$FooterCustomJS),TRUE);
 			$content = $this->parser->parse('lotes/content-cargarlotes',array(
 				'titulo'=>$nombreCompleto,
@@ -73,7 +74,7 @@ class Lotes extends CI_Controller {
 				'content'=>$content,
 				'footer'=>$footer,
 				'sidebar'=>$sidebarLotes,
-				'aviso' =>TRUE,
+				'aviso' =>$aviso,
 				'titleHeading' => 'TITULO ACA',
 				'login' => 'LOGIN USUARIO',
 				'password' => 'CONTRASEÑA',
@@ -299,6 +300,7 @@ class Lotes extends CI_Controller {
 			$menuHeader = $this->parser->parse('widgets/widget-menuHeader',array(),TRUE);
 			$menuFooter = $this->parser->parse('widgets/widget-menuFooter',array(),TRUE);
 			$header = $this->parser->parse('layouts/layout-header',array('bodyclass'=>'','menuHeaderActive'=>TRUE,'menuHeaderMainActive'=>TRUE,'menuHeader'=>$menuHeader,'titlePage'=>$titlePage),TRUE);
+			$aviso = $this->parser->parse('widgets/widget-aviso', ['pais' => $urlCountry], TRUE);
 			$footer = $this->parser->parse('layouts/layout-footer',array('menuFooterActive'=>TRUE,'menuFooter'=>$menuFooter,'FooterCustomInsertJSActive'=>TRUE,'FooterCustomInsertJS'=>$FooterCustomInsertJS,'FooterCustomJSActive'=>TRUE,'FooterCustomJS'=>$FooterCustomJS),TRUE);
 			$content = $this->parser->parse('lotes/content-authlotes',array(
 				'titulo'=>$nombreCompleto,
@@ -324,7 +326,7 @@ class Lotes extends CI_Controller {
 				'login' => 'LOGIN USUARIO',
 				'password' => 'CONTRASEÑA',
 				'loginBtn' => 'ENTRAR',
-				'aviso' =>TRUE,
+				'aviso' =>$aviso,
 				'pais' => $urlCountry
 				);
 
@@ -960,6 +962,7 @@ class Lotes extends CI_Controller {
 
 			$dataOS = $this->input->post('data-OS');
 			$dataCOS = $this->input->post('data-COS');
+			$dataLF = $this->input->post('data-LF');
 
 			$menuHeader = $this->parser->parse('widgets/widget-menuHeader',array(),TRUE);
 			$menuFooter = $this->parser->parse('widgets/widget-menuFooter',array(),TRUE);
@@ -971,7 +974,8 @@ class Lotes extends CI_Controller {
 				'lastSession'=>$lastSessionD,
 				'data' => $rtest,
 				'dataOS' => $dataOS,
-				'dataCOS' => $dataCOS
+				'dataCOS' => $dataCOS,
+				'dataLF' => $dataLF
 				),TRUE);
 			$sidebarLotes= $this->parser->parse('dashboard/widget-empresa',array('sidebarActive'=>TRUE),TRUE);
 
@@ -1029,6 +1033,8 @@ class Lotes extends CI_Controller {
 			);
 
 		$data = json_encode($data,JSON_UNESCAPED_UNICODE);
+
+		log_message('DEBUG', 'REQUEST DETALLE DEL LOTE: '.$data);
 
 		$dataEncry = np_Hoplite_Encryption($data);
 		$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );

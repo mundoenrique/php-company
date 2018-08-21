@@ -149,7 +149,8 @@
 			$urlBase = $urlBaseA.$pais;
 
 			$menuP = unserialize($menuP);
-			log_message("DEBUG" ,json_encode($menuP));
+			//log_message("INFO", "<<<<<==FUNCIONES Y PERMISOS DEL USUARIO==>>>>>: ".json_encode($menuP));
+			$seeLotFact = FALSE;
 
 			$menuH="";
 			$menuInno="";
@@ -186,6 +187,7 @@
 								break;
 							case 'TEBAUT':
 								$ruta=$urlBase."/lotes/autorizacion";
+								$seeLotFact = TRUE;
 								break;
 							case 'TEBGUR':
 								$ruta=$urlBase."/lotes/reproceso";
@@ -201,6 +203,11 @@
 								break;
 							case 'TEBORS':
 								$ruta=$urlBase."/consulta/ordenes-de-servicio";
+								break;
+							case 'LOTFAC':
+								if($seeLotFact) {
+									$ruta=$urlBase."/consulta/lotes-por-facturar";
+								}
 								break;
 							case 'TRAMAE':
 								$ruta=$urlBase."/servicios/transferencia-maestra";
@@ -273,6 +280,7 @@
 											<a href='".$ruta."'>". lang($submenu->idModulo)."</a>
 										</li>";
 						} else {
+							if($submenu->idModulo == 'LOTFAC' && !$seeLotFact) continue;
 							$opMenuSubmenu.= "<li>
 												<a href='".$ruta."'>". lang($submenu->idModulo)."</a>
 											</li>";
@@ -327,7 +335,6 @@
 		 */
 		function np_hoplite_existeLink($menuP, $link)
 		{
-
 			$arrayMenu = unserialize($menuP);
 			$modulos = "";
 
@@ -338,6 +345,7 @@
 						$modulos.= strtolower($modulo->idModulo).",";
 					}
 				}
+
 				return strrpos($modulos, strtolower($link));
 
 			}else{

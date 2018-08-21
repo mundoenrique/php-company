@@ -216,6 +216,18 @@ class reports_additional extends CI_Controller {
 		$this->output->set_content_type('application/json')->set_output(json_encode($dataResponse));
 	}
 	/**
+	 * @info		método para eliminar archivos de reportes descargados por el usuario
+	 * @date		2018/08/14
+	 * @author	J. Enrique Peñaloza
+	 */
+	public function deleteReport($urlCountry)
+	{
+		$file = $this->input->post('way');
+		$path = $this->config->item('CDN');
+		unlink($path.'downloads/reports/'.$file);
+		$this->output->set_content_type('application/json')->set_output(json_encode('ok'));
+	}
+	/**
 	 * @info		método para el acceso no autorizado de los usuarios
 	 * @date		2018/05/11
 	 * @author	J. Enrique Peñaloza

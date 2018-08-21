@@ -4,16 +4,19 @@
 	$urlBaseA = $this->config->item('base_url');
 	$urlBase = $urlBaseA.$pais;
 
-		if($dataCOS!=''){
+		if($dataCOS!='') {
 			$bread = "BREADCRUMB_CALCULO_ORDEN_SERVICIO";
 			$breadcrumb_back = $urlBase."/lotes/calculo";
-		}else if($dataOS!=''){
+		} else if($dataOS!='') {
 			$bread = "BREADCRUMB_ORDEN_SERVICIO";
 			$breadcrumb_back = $urlBase."/consulta/ordenes-de-servicio";
-		}else{
+		} else if($dataLF != '') {
+			$bread = 'BREADCRUMB_LOTES_POR_FACTURAR';
+		} else {
 			$bread = "BREADCRUMB_AUTORIZACION";
 			$breadcrumb_back = $urlBase."/lotes/autorizacion";
 		}
+		$breadcrumb_back = $_SERVER['HTTP_REFERER'];
 ?>
 
 <div id="content-products">
@@ -329,7 +332,7 @@
 			echo "<form action='".$urlBase."/consulta/ordenes-de-servicio' method='post'>
 								<input type='hidden' name='data-OS' value='".$dataOS."' />";
 		}else{
-			echo '<form action="'.$urlBase.'/lotes/autorizacion" method="post">';
+			echo '<form action="'.$breadcrumb_back.'" method="post">';
 		}
 
 		echo '<button>'.lang("DETALLE_LOTES_VOLVER").'</button> </form>';

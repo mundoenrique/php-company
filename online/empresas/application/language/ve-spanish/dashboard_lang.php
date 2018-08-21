@@ -32,6 +32,8 @@ $lang['BREADCRUMB_TRANSMAESTRA'] = "Transferencia Maestra";
 $lang['BREADCRUMB_OTROS_PROGRAMS'] = 'Otros programas';
 $lang['BREADCRUMB_PH_BUSCAR'] = 'Buscar...';
 $lang['BREADCRUMB_TITL_BUSCAR'] = 'Buscar texto';
+$lang['BREADCRUMB_CONSULTAS'] = 'Consultas';
+$lang['BREADCRUMB_LOTES_POR_FACTURAR'] = 'Lotes por facturar';
 
 
 //MENU OPCIONES
@@ -52,6 +54,7 @@ $lang['TEBAUT']= "Autorización de Lotes"; // modulo
 $lang['TEBELI']= "Eliminación de lote por autorizar";
 $lang['TEBGUR']= 'Reproceso de Datos'; // modulo guardería
 $lang['TEBORS']= "Órdenes de Servicio"; // modulo
+$lang['LOTFAC']= "Lotes por facturar"; // modulo
 $lang['TEBANU']= "Anular orden de servicio";
 $lang["TEBCOS"]= "Consultar orden se servicio";
 $lang['TRAMAE']= "Transferencia maestra"; // modulo
@@ -91,3 +94,4 @@ $lang['PRODUCTOS-138'] = 'Usuario sin productos asociados para la empresa ';
 $lang['FILTER_TODAS'] = 'TODAS';
 $lang['FILTER_SEL_CAT'] = 'Buscar por categoría';
 $lang['FILTER_SEL_MARC'] = 'Buscar por marca';
+$lang['TAG_ACCEPT'] = "Aceptar";

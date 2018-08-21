@@ -261,6 +261,7 @@ $lang['ERROR_(-307)'] = 'La tarjeta se encuentra bloqueada permanentemente';
 $lang['ERROR_(-900)'] = 'Error general';
 $lang['ERROR_EMPRESAS'] = 'No fue posible obtener la lista de empresas, por favor intenta más tarde';
 $lang['ERROR_RECARGAS'] = 'No fue posible obtener la lista de recargas, por favor intenta más tarde';
+$lang['ERROR_GET_LIST'] = "No fue posible obtener la lista, por favor intenta más tarde";
 $lang['ERROR_DESCARGA'] = 'No fue posible descargar el archivo, por favor intenta más tarde';
 
 //recuperar contraseña
