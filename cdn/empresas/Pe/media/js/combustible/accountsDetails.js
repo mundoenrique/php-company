@@ -22,7 +22,7 @@ $(function() {
 
     if(asignation == 'No disponible'){
         $('#assignContainer').show();
-        $.post(baseURL + '/' + isoPais + '/trayectos/modelo', {model: 'availableDrivers', modelo: 'account'})
+        $.post(baseURL + '/' + isoPais + '/trayectos/modelo', {way: 'availableDrivers', modelo: 'account'})
             .done(function (response) {
                 if(response != ''){
                     $('#driverAvailable').show();
@@ -68,7 +68,7 @@ $(function() {
 
         $('button#send-info').click(function () {
             // console.log('Se asiganara cuenta');
-            $.post(baseURL + '/' + isoPais + '/trayectos/modelo', {model: 'allocatingDriver', modelo: 'account', data: assingData})
+            $.post(baseURL + '/' + isoPais + '/trayectos/modelo', {way: 'allocatingDriver', modelo: 'account', data: assingData})
                 .done(function (response) {
                     // console.log(response.code);
 
@@ -110,7 +110,7 @@ $(function() {
         });
 
         $('button#send-info').click(function () {
-            $.post(baseURL + '/' + isoPais + '/trayectos/modelo', {model: 'deallocateAccounts', modelo: 'account', data: id})
+            $.post(baseURL + '/' + isoPais + '/trayectos/modelo', {way: 'deallocateAccounts', modelo: 'account', data: id})
                 .done(function (response) {
                     $('#msg-system').text('Cuenta devuelta');
                     var jsonResponse = JSON.parse(response);

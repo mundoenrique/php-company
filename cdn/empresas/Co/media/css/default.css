@@ -742,7 +742,7 @@ ol.breadcrumb li a {
 }
 #account-nav ul {
   float: right;
-  width: auto; !important;
+  width: auto !important;
   margin-top: 18px;
 
 }
@@ -3241,8 +3241,9 @@ span#more-info a p b {
   line-height: 12px;
   font-size: 12px;
   height: 12px;
-  /*overflow:hidden;*/
-  /*color:$color-base-foreground;*/
+  text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
 }
 
 #text-companies-2 {

@@ -4,7 +4,7 @@ function sendData (modelo, method, travel)
     $.ajax({
         url: baseURL + '/' + isoPais + '/trayectos/modelo',
         type: 'POST',
-        data: {modelo: modelo, model: method, data: dataRequest},
+        data: {modelo: modelo, way: method, data: dataRequest},
         datatype: 'json',
         beforeSend: function(xrh, status) {
             $('#loading').removeClass('elem-hidden');
@@ -98,13 +98,7 @@ function routeTravel (listDriver, listVehi)
 
 function putTravel(travelDetail)
 {
-    console.log(travelDetail);
     var status;
-    // $('#start-date').val(travelDetail.beginDate);
-    // $('#final-date').val(travelDetail.finalDate);
-    // $('#driverD').val(travelDetail.driver);
-    // $('#vehicleD').val(travelDetail.vehicle);
-    // $('#origin').val(travelDetail.origin);
     $('#coordStart').val(travelDetail.orgL);
     // $('#destination').val(travelDetail.destination);
     $('#coordEnd').val(travelDetail.desL);
@@ -232,15 +226,15 @@ function validar_campos()
 
         return valid;
     });
-    
+
     jQuery.validator.addMethod('mayor', function(value) {
         var valid = true,
             firstDate = formater($('#first-date').val() + ' ' + $('#first-hour').val() + ':' + $('#first-minute').val() + ':00');
-            lastDate = formater($('#last-date').val() + ' ' + $('#last-hour').val() + ':' + $('#last-minute').val() + ':00');                        
+            lastDate = formater($('#last-date').val() + ' ' + $('#last-hour').val() + ':' + $('#last-minute').val() + ':00');
         if($('#first-date').val() == $('#last-date').val()) {
             valid = lastDate <= firstDate ? false : true;
         }
-        
+
         return valid;
     });
 

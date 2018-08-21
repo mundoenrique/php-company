@@ -4,6 +4,7 @@ $lang['TITULO_CONSULTA_OS']="Órdenes de Servicio";
 $lang['TITULO_CRITERIOSBUSQ']="Criterio de búsqueda";
 $lang['TITULO_CONSULTA_OSE']="Órdenes de Servicio";
 $lang['TITULO_CONSULTA_OS_LOTESNF']="Lotes no facturables";
+$lang['TITULO_LOTES_POR_FACTURAR']="Lotes por facturar";
 
 $lang['TABLA_COS_ID_ORDEN']='Id Orden';
 $lang['TABLA_COS_FECHA']='Fecha';

@@ -182,6 +182,11 @@
         </div>
 
         <div id="datailTravel" class="elem-hidden">
+						<div class="field-set border-zero">
+							<a class="down-report" title="<?php echo lang('TAG_DWN_PDF'); ?>">
+								<span id="down-pdf" aria-hidden="true" class="icon" data-icon="&#xe02e"></span>
+							</a>
+						</div>
             <div class="field-set">
                 <span class="field-area">
                     <label for="start" class="label"><?php echo lang('TRAVEL_START_DATE'); ?></label>
@@ -253,6 +258,8 @@
         <button id="accept-info" class="buttons-action ">Aceptar</button>
     </div>
 </div>
+
+<form id="formulario" method="post"></form>
 
 <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDc-lvekbTTsJpJbbU7P1rfkIw0cRQ_bt8&libraries=places,visualization">

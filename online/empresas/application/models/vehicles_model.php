@@ -14,7 +14,7 @@ class vehicles_Model extends CI_Model {
     }
     /*---Fin método constructor---------------------------------------------------------------------------------------*/
 
-    
+
     /*---Métodos para vehículos---------------------------------------------------------------------------------------*/
     //Método para obtener la lista de vehículos o el detallle de un vehículo
     public function callAPIvehicles($urlCountry, $dataRequest)
@@ -334,8 +334,6 @@ class vehicles_Model extends CI_Model {
             $dataResponse = json_decode($resAPI);
             $data = [];
             foreach ($dataResponse->status as $status => $row){
-                if ($row->nombre === 'BUSY')
-                    continue;
                 $data[$status]['id'] = $row->nombre;
                 $data[$status]['value'] = lang('VEHI_'.$row->nombre);
             }

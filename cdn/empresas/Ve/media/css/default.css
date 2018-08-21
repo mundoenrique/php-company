@@ -223,6 +223,18 @@ table {
   font-style: normal;
 }
 
+@font-face {
+  font-family: "fontello";
+  src: url('../fonts/fontello.eot?4932291');
+  src: url('../fonts/fontello.eot?4932291#iefix') format('embedded-opentype'),
+       url('../fonts/fontello.woff2?4932291') format('woff2'),
+       url('../fonts/fontello.woff?4932291') format('woff'),
+       url('../fonts/fontello.ttf?4932291') format('truetype'),
+       url('../fonts/fontello.svg?4932291#fontello') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
 ::selection {
   background: #0072c0;
   color: white;
@@ -342,7 +354,7 @@ nav ul.menu li.menu-item a {
 
 span.icon:before {
   content: attr(data-icon);
-  font-family: "novoglyphs";
+  font-family: "novoglyphs", "fontello";
   -webkit-font-smoothing: antialiased;
   font-weight: normal;
   speak: none;
@@ -543,7 +555,9 @@ ol.breadcrumb li {
 }
 ol.breadcrumb li a {
   color: #888888;
-  /*font-weight: normal;*/
+}
+.cursor-default{
+	cursor: default;
 }
 
 #sidebar {
@@ -757,7 +771,7 @@ ol.breadcrumb li a {
 }
 #account-nav ul {
   float: right;
-  width: auto; !important;
+  width: auto !important;
   margin-top: 18px;
 
 }
@@ -3256,8 +3270,9 @@ span#more-info a p b {
   line-height: 12px;
   font-size: 12px;
   height: 12px;
-  /*overflow:hidden;*/
-  /*color:$color-base-foreground;*/
+  text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
 }
 
 #text-companies-2 {
@@ -3575,7 +3590,22 @@ padding:10px 5px 10px 5px;
   overflow: hidden;
 }
 
+.important-notice {
+	background-color: #f3f3f3;
+  float: left;
+  border-top: 1px solid #dddddd;
+  border-bottom: 1px solid #f3f3f3;
+  padding: 10px;
+  color: #0054a9;
+  width: 200px;
+  overflow: hidden;
+}
+
 #widget-info-2 button {
+  margin: 10px 25px;
+}
+
+.important-notice button {
   margin: 10px 25px;
 }
 
@@ -6626,7 +6656,6 @@ margin-left: 250px;
 
 .select-tipo-guarderia {
   float: left;
-	//text-align: center;
 	margin-bottom: 10px;
 }
 

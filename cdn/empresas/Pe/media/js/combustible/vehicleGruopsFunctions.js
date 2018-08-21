@@ -6,7 +6,7 @@ function addEdit(id) {
         $('#msg-info').empty();
         $('#msg-info').append('<div id="loading" class="agrups"><img src=" ' + baseCDN + '/media/img/loading.gif' + '"></div>');
         notiSystem('msg', title);
-        $.post(baseURL + '/' + isoPais + '/trayectos/modelo', {model: 'vehicleGroups', modelo: 'vehicleGroups', data: id})
+        $.post(baseURL + '/' + isoPais + '/trayectos/modelo', {way: 'vehicleGroups', modelo: 'vehicleGroups', data: id})
             .done( function(response) {
                 $('#msg-info').empty();
                 switch (response.code) {
