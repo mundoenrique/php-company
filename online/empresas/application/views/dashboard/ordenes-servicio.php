@@ -4,13 +4,13 @@
 					<div id="top-batchs"><span aria-hidden="true" class="icon" data-icon="&#xe035;"></span> Ordenes de Servicio
 					</div>
 				<div id="lotes-contenedor">
-					
+
 					<span class="info-OD">
-						<h5>Fecha inicial</h5>
+						<h5>Fecha Inicial</h5>
 						<input  class="required login" type="password" name="Ingrese clave de confirmación" placeholder="DD/MM/AA" value="" />
 					</span>
 					<span class="info-OD">
-						<h5>Fecha final</h5>
+						<h5>Fecha Final</h5>
 						<input  class="required login" type="password" name="Ingrese clave de confirmación" placeholder="DD/MM/AA" value="" />
 					</span>
 					<div class="info-OD">
@@ -19,24 +19,24 @@
 							<option value="" selected="selected">Selecciona</option>
 							<option value="emision">En proceso</option>
 							<option value="emision">Procesados</option>
-							<option value="emision">autorizados</option>
-							
+							<option value="emision">Autorizados</option>
+
 						</select>
 					</div>
 
-					
+
 				</div>
 				<div id="batchs-last">
 						<button type="submit">Buscar
 						</button>
 				</div>
-				
-				
-					
+
+
+
 				</div>
 				</div>
-				
-	
+
+
 			<div id="sidebar-products">
 				<div id="widget-info">
 					Servicio de Tranferencia
@@ -57,4 +57,4 @@
 				</div>
 			</div>
 
-		
+

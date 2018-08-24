@@ -15,7 +15,7 @@ var api = "/api/v1/";
 
 	COS_var = {
 		fecha_inicio: "",
-		fecha_fin: "", 
+		fecha_fin: "",
 		loteTipo: "",
 		fecIsend :"",
 		fecfsend :"",
@@ -24,42 +24,45 @@ var api = "/api/v1/";
 	}
 
 	$("#tabla-datos-general").find(".OSinfo").hide(); // ocultar lotes de os
-	 
+
 	 // MOSTRAR/OCULTAR LOTES SEGUN OS
 	$("#tabla-datos-general").on("click","#ver_lotes", function(){
 
 		var OS = $(this).parents("tr").attr('id');
 		var $lotes = $("#tabla-datos-general").find("."+OS);
 
-		$lotes.is(":visible") ? $lotes.fadeOut("slow") : $lotes.fadeIn("slow");		
-		$('.OSinfo').not("."+OS).hide();	
+		$lotes.is(":visible") ? $lotes.fadeOut("slow") : $lotes.fadeIn("slow");
+		$('.OSinfo').not("."+OS).hide();
 
 	});
 
 
 	// EVENTO BUSCAR OS SEGUN FILTRO
-	$("#buscarOS").on("click", function(){
-
+	$("#buscarOS").on("click", function() {
 		var statuLote = $("#status_lote").val();
 
+		if(statuLote!=='' && COS_var.fecha_inicio!=='' && COS_var.fecha_fin!=='' ) {
+			if(Date.parse(COS_var.fecha_fin) >= Date.parse(COS_var.fecha_inicio) ) {
+				$aux = $("#loading").dialog({
+					title:'Buscando Orden de Servicio',
+					modal: true,
+					resizable: false,
+					draggable: false,
+					open: function(event, ui) {
+						$('.ui-dialog-titlebar-close', ui.dialog).hide()
+					}
+				});
 
-		if( statuLote!=='' && COS_var.fecha_inicio!=='' && COS_var.fecha_fin!=='' ){
-
-			if( Date.parse(COS_var.fecha_fin) >= Date.parse(COS_var.fecha_inicio) ){
-
-		$aux = $("#loading").dialog({title:'Buscando Orden de Servicio',modal:true, close:function(){$(this).dialog('destroy')}, resizable:false });
-
-			$('form#formulario').empty();
+				$('form#formulario').empty();
     		$('form#formulario').append('<input type="hidden" name="data-fechIn" value="'+COS_var.fecIsend+'" />');
     		$('form#formulario').append('<input type="hidden" name="data-fechFin" value="'+COS_var.fecfsend+'" />');
     		$('form#formulario').append('<input type="hidden" name="data-status" value="'+statuLote+'" />');
     		$('form#formulario').attr('action',baseURL+'/'+isoPais+"/consulta/ordenes-de-servicio");
-    		$('form#formulario').submit(); 
-
-			}else{
-				notificacion("Buscar Orden de Servicio","Rango de fecha Incoherente");		
+    		$('form#formulario').submit();
+			} else {
+				notificacion("Buscar Orden de Servicio", "Rango de fecha Incoherente");
 			}
-		}else{
+		} else {
 			notificacion("Buscar Orden de Servicio","<h2>Verifique que:</h2><h6>1. Ha seleccionado un rango de fechas</h6><h6>2. Ha seleccionado un estatus de lote</h6>")
 		}
 	});
@@ -78,13 +81,13 @@ var api = "/api/v1/";
 
 	$("#tabla-datos-general").on("click","#dwnPDF", function(){ // descargar orden de servicio
 
-		var OS = $(this).parents("tr").attr('id');	
+		var OS = $(this).parents("tr").attr('id');
 			$aux = $("#loading").dialog({title:'Descargando archivo PDF',modal:true, close:function(){$(this).dialog('close')}, resizable:false });
 			$('form#formulario').empty();
     		$('form#formulario').append('<input type="hidden" name="data-idOS" value="'+OS+'" />');
     		$('form#formulario').append($('#data-OS'));
     		$('form#formulario').attr('action',baseURL+api+isoPais+"/consulta/downloadOS");
-    		$('form#formulario').submit(); 
+    		$('form#formulario').submit();
     		setTimeout(function(){$aux.dialog('destroy')},8000);
 
 	});
@@ -97,7 +100,7 @@ var api = "/api/v1/";
 		$('form#formulario').append('<input type="hidden" name="data-idOS" value="'+OS+'" />');
 		$('form#formulario').append($('#data-OS'));
     	$('form#formulario').attr('action',baseURL+"/"+isoPais+"/consulta/registro-pago");
-    	$('form#formulario').submit(); 
+    	$('form#formulario').submit();
 
 	});
 
@@ -123,23 +126,6 @@ var api = "/api/v1/";
 	calendario( "fecha_inicial" );
 	calendario( "fecha_final");
 
-
-	function notificacion(titu, msj){
-		var canvas = "<div>"+msj+"</div>";
-			$(canvas).dialog({
-				title : titu,
-				modal:true, 
-				close: function(){$(this).dialog('destroy')}, 
-				resizable:false,
-				buttons:{
-					OK: function(){
-						$(this).dialog('destroy');
-					}
-				}
-			});
-	}
-
-
 	function calendario(input){
 
 		$("#"+input).datepicker({
@@ -154,29 +140,29 @@ var api = "/api/v1/";
 					$("#fecha_final").datepicker('option','minDate',selectedate);
 				}else if(input=='fecha_inicial'){
 					$("#fecha_final").datepicker('option','minDate',"");
-				} 
+				}
 				if(input=='fecha_final' && selectedate){
 					$("#fecha_inicial").datepicker('option','maxDate',selectedate);
 				}else if(input=='fecha_inicial'){
 					$("#fecha_inicial").datepicker('option','maxDate',"+0D");
-				} 
+				}
 				if($("#fecha_inicial").val()!=''&&$("#fecha_final").val()!=''){
 					$.each($(":radio"),function(){this.checked=0;});
 					var aux = $("#fecha_inicial").val().split('/');
 					COS_var.fecha_inicio = aux[1]+"/"+aux[0]+"/"+aux[2];
 					COS_var.fecIsend = $("#fecha_inicial").val();
-					
+
 					aux = $("#fecha_final").val().split('/');
 					COS_var.fecha_fin = aux[1]+"/"+aux[0]+"/"+aux[2];
-					COS_var.fecfsend = $("#fecha_final").val();					
+					COS_var.fecfsend = $("#fecha_final").val();
 				}
 			}
-		});    
+		});
 	}
 
 
 	var paginar = function($tabla){
-		var tabla = $tabla.dataTable( { 
+		var tabla = $tabla.dataTable( {
           "iDisplayLength": 10,
           'bDestroy':true,
           "sPaginationType": "full_numbers",
@@ -217,8 +203,8 @@ function showOptions(){
 	$('#tabla-datos-general tr').hover(
 		function(){
 
-			if( !$(this).hasClass('OSinfo') ){				
-				$(this).find('.OS-icon').show(); 			
+			if( !$(this).hasClass('OSinfo') ){
+				$(this).find('.OS-icon').show();
 				$(this).css('margin-left',0);
 			}
 		},
@@ -228,72 +214,76 @@ function showOptions(){
 			var $lotes = $("#tabla-datos-general").find("."+OS);
 
 			if( !$(this).hasClass('OSinfo') && !$lotes.is(":visible") ){
-				$(this).find('.OS-icon').hide();			
+				$(this).find('.OS-icon').hide();
 				$(this).css('margin-left',31);
 			}
 		}
 	);
-}	
+}
 
 
-$('#tabla-datos-general').on('click','#anular', function(){
- 
- 	var btnAnular = this;
-	$item = $(this).parents('tr');
-	var idOS = $(this).parents('tr').attr('id');
-	
+$('#tabla-datos-general').on('click','#anular', function() {
+	var
+	btnAnular = this,
+	idOS = $(this).parents('tr').attr('id'),
+	aplicaCostD = $(this).parents('tr').attr('aplica-costo'),
+	pass,
+	canvas = '<div id="dialog-confirm">';
+  canvas+= 	'<p>Id Orden: '+idOS+'</p>';
+	canvas+= 	'<fieldset>';
+	canvas+= 		'<input type="password" id="pass" size=30 placeholder="Ingrese su contraseña" ';
+	canvas+= 		'class="text ui-widget-content ui-corner-all"/>';
+	canvas+= 		'<h5 id="msg"></h5>';
+	canvas+= 	'</fieldset>';
+	canvas+= '</div>';
 
-	var canvas = "<div id='dialog-confirm'>";
-      canvas +="<p>Id Orden: "+idOS+"</p>";          
-      canvas += "<fieldset><input type='password' id='pass' size=30 placeholder='Ingrese su contraseña' class='text ui-widget-content ui-corner-all'/>";
-      canvas += "<h5 id='msg'></h5></fieldset></div>"; 
-
-      var pass;
-
-      $(canvas).dialog({
-        title: 'Anular Orden de Servicio',
-        modal: true,
-        resizable: false,
-        close: function(){$(this).dialog("destroy");},
-        buttons: {
-          Anular: function(){
-            pass = $(this).find('#pass').val();
-            
-            if( pass!==""){
-
-              pass = hex_md5( pass );
-              $('#pass').val( '' );
-              $(this).dialog('destroy');
-              var $aux = $('#loading').dialog({title:'Anulando Orden de Servicio' ,modal: true, resizable:false, close:function(){$aux.dialog('close');}}); 
-              $.post(baseURL+api+isoPais+'/consulta/anularos',{'data-idOS':idOS, 'data-pass':pass})
-			   .done(function(data){
-            $aux.dialog('destroy');
-                
-                if(!data.ERROR){                  
-                  notificacion("Anulando Orden de Servicio",'Anulación exitosa');
-                                 
-                 COS_var.tablaOS.fnDeleteRow( COS_var.tablaOS.fnGetPosition(btnAnular.parentNode.parentNode) );
-                 
-                }else{     
-                	if(data.ERROR=='-29'){
-                		
-	 				alert('Usuario actualmente desconectado'); location.reload();
-	 				}    else{         
-                  notificacion("Anulando Orden de Servicio",data.ERROR);   }                
-                }
-                
-              });
-              
-            }else{
-              $(this).find( $('#msg') ).text('Debe ingresar su contraseña');
-            }
-           
-          }
-        }
-      });
-
-
+  $(canvas).dialog({
+    title: 'Anular Orden de Servicio',
+    modal: true,
+		resizable: false,
+		draggable: false,
+    close: function() {
+			$(this).dialog("destroy");
+		},
+    buttons: {
+			Anular: function() {
+				pass = $(this).find('#pass').val();
+				if( pass!=="") {
+					pass = hex_md5(pass);
+          $('#pass').val('');
+					$(this).dialog('destroy');
+          var $aux = $('#loading').dialog({
+						title:'Anulando Orden de Servicio',
+						modal: true,
+						resizable: false,
+						draggable: false,
+						open: function(event, ui) {
+							$('.ui-dialog-titlebar-close', ui.dialog).hide();
+						}
+					});
+					$.post(baseURL+api+isoPais+'/consulta/anularos', {'data-idOS':idOS, 'data-pass':pass})
+					.done(function(data) {
+						$aux.dialog('destroy');
+						if(!data.ERROR) {
+							var message = 'La OS ha sido anulada exitosamente.';
+							message+= aplicaCostD === 'D' ? ' La tarifa por <b>Servicios operativos y de logística</b>, será incluida en la siguiente orden' : '';
+							notificacion("Orden de Servicio anulada", message);
+							COS_var.tablaOS.fnDeleteRow(COS_var.tablaOS.fnGetPosition(btnAnular.parentNode.parentNode));
+						} else {
+							if(data.ERROR=='-29') {
+								alert('Usuario actualmente desconectado'); location.reload();
+	 						} else {
+							 notificacion("Anulando Orden de Servicio",data.ERROR);
+							}
+						}
+					});
+				} else {
+					$(this).find($('#msg')).text('Debe ingresar su contraseña');
+				}
+			}
+		}
 	});
+});
 
 
 $("#tabla-datos-general").on("click","#factura", function(){
@@ -313,7 +303,7 @@ $("#tabla-datos-general").on("click","#factura", function(){
     	$('form#formulario').append('<input type="hidden" name="data-idOS" value="'+orden+'" />');
     	$('form#formulario').append($('#data-OS'));
     	$('form#formulario').attr('action',baseURL+api+isoPais+"/consulta/facturar");
-    	$('form#formulario').submit(); 
+    	$('form#formulario').submit();
     	setTimeout(function(){$aux.dialog('destroy')},8000);
 	}
 
@@ -321,15 +311,33 @@ $("#tabla-datos-general").on("click","#factura", function(){
 
 $("#tabla-datos-general").on("click","#facturaOS", function(){ // descargar factura orden de servicio
 
-		var OS = $(this).parents("tr").attr('id');	
+		var OS = $(this).parents("tr").attr('id');
 			$aux = $("#loading").dialog({title:'Descargando archivo Facturacion',modal:true, close:function(){$(this).dialog('close')}, resizable:false });
 			$('form#formulario').empty();
     		$('form#formulario').append('<input type="hidden" name="data-idOS" value="'+OS+'" />');
     		$('form#formulario').append($('#data-OS'));
     		$('form#formulario').attr('action',baseURL+api+isoPais+"/consulta/downloadFacturacionOS");
-    		$('form#formulario').submit(); 
+    		$('form#formulario').submit();
     		setTimeout(function(){$aux.dialog('destroy')},8000);
 
 	});
 
 }); // fin document ready
+
+function notificacion(titu, msg) {
+	var canvas = "<div>"+msg+"</div>";
+	$(canvas).dialog({
+		title : titu,
+		modal: true,
+		resizable: false,
+		draggable: false,
+		open: function(event, ui) {
+			$('.ui-dialog-titlebar-close', ui.dialog).hide();
+		},
+		buttons:{
+			aceptar: function(){
+				$(this).dialog('destroy');
+			}
+		}
+	});
+}
