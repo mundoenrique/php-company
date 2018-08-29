@@ -168,7 +168,7 @@
 					<input id="select-allA" type="'.$disableA.'"  />
 				</div>';
 
-					echo '<table class="table-text-aut" id="table-auth">';
+					echo '<table id="table-auth" class="table-text-aut" order-payable="'.$info->ordenXPagar.'">';
 					echo	'<thead>';
 					echo		'<tr>';
 					echo			'<th class="checkbox-select">'; if($disableA=='checkbox'){echo '<span aria-hidden="true" class="icon" data-icon="&#xe083;"></span></th>';}else{echo '<span aria-hidden="true" class="icon" data-icon="&#xe06f;"></span></th>';};

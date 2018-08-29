@@ -6,13 +6,15 @@ $(function(){
 			title:"Retenciones",
 			modal:true,
 			resizable:false,
+			draggable: false,
+			dialogClass: 'hide-close',
 			close: function(){
 				$(this).dialog('destroy');
 				$('#confirmarPreOSL').show();
 				$('#cancelar-OS').show();
 			},
 			buttons:{
-				continuar: function () {
+				Continuar: function () {
 					$(this).dialog('destroy');
 					$('#confirmarPreOSL').show();
 					$('#cancelar-OS').show();
@@ -41,30 +43,56 @@ $(function(){
 		var l = $("#tempIdOrdenL").val();
 		var lnf = $("#tempIdOrdenLNF").val();
 
-		$aux = $('#loading').dialog({title:'Confirmar cálculo orden de servicio',close: function(){$(this).dialog('close');}, modal: true, resizable:false});
+		$aux = $('#loading').dialog({
+			title:'Confirmar cálculo orden de servicio',
+			modal: true,
+			resizable:false,
+			draggable: false,
+			dialogClass: 'hide-close'
+		});
 		$.post(baseURL+api+isoPais+"/lotes/confirmarPreOSL", { "tempIdOrdenL": l, "tempIdOrdenLNF": lnf })
 			.done(function(data) {
 				$aux.dialog('destroy');
+				var title, message, site = null, code ='';
 
-				if(!data.ERROR){
+				if(!data.ERROR) {
+					title = 'Orden de Servicio emitida';
+					message = '<div>';
+					message+= 	'La orden de Servicio ha sido generada con éxito';
+					if(data.costoLog) {
+						message+=	' y deberá ser pagada en los <b>próximos '+data.daysPay+' días</b> de lo contrario ';
+						message+= 'el sistema no le permitirá autorizar nuevos lotes';
+					}
+					message+= 	'.';
+					message+= '</div>';
 					if(data.moduloOS){
+						site = 'form#toOS';
 						$("#data-confirm").attr('value',data.ordenes);
-						notificacion("Confirmar cálculo orden de servicio","<h3>Proceso exitoso</h3>","form#toOS");
-					}else{
-						notificacion("Confirmar cálculo orden de servicio","<h3>Proceso exitoso</h3><h5>No tiene permitido gestionar ordenes de servicio.</h5>","#viewAutorizar");
+
+					} else {
+						message+= '<h5>No tiene permitido gestionar ordenes de servicio.</h5>';
+						site = '#viewAutorizar';
+
 					}
 
-				}else{
+				} else {
 
-					if(data.ERROR=='-29'){
-						alert('Usuario actualmente desconectado'); location.reload();
-					}else if(data.ERROR=='-56'){
-						notificacion("Error de facturación",data.msg,null);
-					}else{
-						notificacion("Confirmar cálculo orden de servicio",data.ERROR,null);
+					if(data.ERROR == '-29') {
+						code = 3;
+						title = data.title;
+						message = data.msg;
+					} else if(data.ERROR == '-56') {
+						title = 'Error de facturación';
+						message = data.msg
+
+					} else {
+						title = 'Confirmar cálculo orden de servicio';
+						message = data.ERROR;
+
 					}
-					//notificacion("Confirmar cálculo orden de servicio",data.ERROR,null);
+
 				}
+				notificacion(title, message, site, code);
 
 			});
 
@@ -92,7 +120,7 @@ $(function(){
 	});
 
 
-	function notificacion(titulo, mensaje, sitio){
+	function notificacion(titulo, mensaje, sitio, code){
 
 		var canvas = "<div>"+mensaje+"</div>";
 
@@ -102,17 +130,17 @@ $(function(){
 			maxWidth: 700,
 			maxHeight: 300,
 			bgiframe: true,
-			close: function(){
-				$(this).dialog("destroy");
-				if(sitio){
-					$(sitio).submit();
-				}
-			},
+			resizable: false,
+			draggable: false,
+			dialogClass: 'hide-close',
 			buttons: {
-				OK: function(){
+				Aceptar: function(){
 					$(this).dialog("destroy");
 					if(sitio){
 						$(sitio).submit();
+					}
+					if(code === 3) {
+						$(location).attr('href', baseURL + '/' + isoPais + '/login');
 					}
 				}
 			}
