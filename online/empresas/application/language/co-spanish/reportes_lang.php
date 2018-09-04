@@ -73,13 +73,14 @@ $lang['BREADCRUMB_REPORTES_RECARGAS']= "Recargas realizadas";
 $lang['BREADCRUMB_REPORTES_REPOSICIONES']= "Reposiciones de tarjetas y claves";
 $lang['BREADCRUMB_REPORTES_SALDOS']= "Saldos al Cierre";
 $lang['BREADCRUMB_REPORTES_TARJETAS']= "Tarjetas emitidas";
+$lang['BREADCRUMB_REPORTES_COMISION']= "Comisiones por recarga";
 
 
 // PLACE HOLDERS REPORTES
 $lang['PLACEHOLDER_TARJETA']= "Ingrese Tarjeta";
 
 //DIV CARGANDO
-$lang['CARGANDO'] = "Cargando Reporte"; 
+$lang['CARGANDO'] = "Cargando Reporte";
 
 
 //DATOS TABLA SALDOS AMANECIDOS
@@ -138,3 +139,4 @@ $lang['REPORTE_FECHA_EXP'] = "Fecha Emisión";
 
 $lang['DWL_PDF'] ="Exportar a PDF";
 $lang['DWL_XLS'] ="Exportar a excel";
+$lang['TAG_ACCEPT'] = "Aceptar";

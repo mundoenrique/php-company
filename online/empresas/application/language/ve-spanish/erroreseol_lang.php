@@ -3,6 +3,8 @@ $lang['ERROR_GENERICO_USER']= "Error en Sistema, por favor intente nuevamente.";
 $lang['ERROR_CAMBIO_CLAVE']= "Error en el formulario.";
 $lang['ERROR_NO_DATA'] = "No se encontraron datos";
 $lang['SIN_FUNCION'] = 'No tiene permisos para realizar esta operación';//'Operación no asignada';
+$lang['ERROR_(8)']= "El conductor ya posee una cuenta activa asociada a la empresa";
+$lang['ERROR_GENERAL']= "En estos momentos no podemos atender tu solicitud, por favor intenta más tarde";
 $lang['ERROR_(0)']= "Proceso OK";
 $lang['ERROR_(-1)']= "Usuario o contraseña inválido";
 $lang['ERROR_(-2)']= "Usuario ingresando en la aplicación por primera vez";
@@ -236,6 +238,8 @@ $lang['ERROR_(-229)']= "En estos momentos no podemos procesar su solicitud";
 $lang['ERROR_(-230)']= "En estos momentos no podemos procesar su solicitud";
 $lang['ERROR_(-233)']= "La empresa no posee saldo disponible para el servicio";
 $lang['ERROR_(-235)']= "En estos momentos no podemos procesar su solicitud";
+$lang['ERROR_(-238)']= "El registro no existe";
+$lang['ERROR_(-241)']= "Parámetros inválidos";
 $lang['ERROR_(-256)']= "Tipo de Lote Inválido";
 $lang['ERROR_(-280)'] = 'Tipo de archivo no permitido.';
 $lang['ERROR_(-281)'] = 'Los datos de la cuenta son inválidos.';
@@ -253,6 +257,12 @@ $lang['ERROR_(-341)'] = 'Nro de Cuenta Inválido. Código de Banco Inválido.';
 $lang['ERROR_(-342)'] = 'Número de Cuenta Inválido.';
 $lang['ERROR_(-373)'] = 'Número de RIF Inválido.';
 $lang['ERROR_(-378)'] = 'La empresa seleccionada no posee productos y/o servicios que realicen notificaciones';
+$lang['ERROR_(-307)'] = 'La tarjeta se encuentra bloqueada permanentemente';
+$lang['ERROR_(-900)'] = 'Error general';
+$lang['ERROR_EMPRESAS'] = 'No fue posible obtener la lista de empresas, por favor intenta más tarde';
+$lang['ERROR_RECARGAS'] = 'No fue posible obtener la lista de recargas, por favor intenta más tarde';
+$lang['ERROR_GET_LIST'] = "No fue posible obtener la lista, por favor intenta más tarde";
+$lang['ERROR_DESCARGA'] = 'No fue posible descargar el archivo, por favor intenta más tarde';
 
 //recuperar contraseña
 $lang["TITULO_ERROR"] = 'No ha sido posible procesar su solicitud.';
@@ -263,3 +273,4 @@ $lang["ERROR_SUPPORT"] = 'Por favor envíe un correo a <strong>soporteempresas@t
 
 //Botón de pago
 $lang['PAG_OS_E_CORREO'] = 'No fue posible enviar el correo,<br> intente más tarde';
+$lang['NO_EMPRESAS_LIST'] = 'No fue posible obtener la lista de empresas';

@@ -1,10 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
+class driver_model extends CI_Model {
 
-class driver_model extends CI_Model
-{
-
-    //Método constructor
     public function __construct()
     {
         parent::__construct();
@@ -17,11 +14,9 @@ class driver_model extends CI_Model
     /*---Fin método constructor---------------------------------------------------------------------------------------*/
 
     /*---Métodos para conductores constructor-------------------------------------------------------------------------*/
-
     //Método para obtener la lista de conductores o el perfil de un conductor
     public function callAPIdrivers($urlCountry, $dataRequest='')
     {
-
         $ruc = $this->session->userdata('acrifS');
         $token = $this->session->userdata('token');
 
@@ -37,7 +32,7 @@ class driver_model extends CI_Model
         $bodyAPI = '';
         $method = 'GET';
 
-        $info = empty($dataRequest) ? "LISTA DE CONDUCTORES" : "PERIL DEL CONDUCTOR";
+        $info = empty($dataRequest) ? "LISTA DE CONDUCTORES" : "PERFIL DEL CONDUCTOR";
         log_message("INFO", "REQUEST " . $info . ": ===>>" . json_encode($headerAPI));
 
         //llamado al API
@@ -69,6 +64,7 @@ class driver_model extends CI_Model
                             'DRIVER_SEARCH_DNI' => lang('DRIVER_SEARCH_DNI'),
                             'TAG_ACCEPT' => lang('TAG_ACCEPT'),
                             'TAG_SEND' => lang('TAG_SEND'),
+														'TAG_DWN_EXCEL' => lang('TAG_DWN_EXCEL'),
                             'TAG_ADD' => lang('MENU_ADD'),
                             'TAG_CANCEL' => lang('TAG_CANCEL'),
                             'DRIVER_INCLUDE' => lang('DRIVER_INCLUDE')
@@ -541,6 +537,7 @@ class driver_model extends CI_Model
         return $response;
 
     }
+
     /*---Fin métodos para conductores---------------------------------------------------------------------------------*/
 
 }

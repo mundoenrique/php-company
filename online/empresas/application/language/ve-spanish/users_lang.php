@@ -26,6 +26,7 @@ $lang['SUBMENU_USUARIO'] = 'Usuario';
 $lang['SUBMENU_DESCARGAS'] = 'Descargas';
 $lang['SUBMENU_NOTIFICACIONES'] = 'Notificaciones';
 $lang['SUBMENU_LOGOUT'] = 'Salir';
+$lang['SUBMENU_TARIFAS'] = 'Tarifas';
 $lang['CONFIG_USER'] = 'Configuración de usuario';
 $lang['CONFIG_EMPR'] = 'Configuración de empresa';
 $lang['CONFIG_SUCU'] = 'Configuración de sucursal';
@@ -36,7 +37,6 @@ $lang['batches'] = 'Gestión de Lotes';
 $lang['billing'] = 'Órdenes y Facturas';
 $lang['downloads'] = 'Descargas';
 $lang['management-reports'] = 'Reportes de Gestión';
-
 
 // TAB USUARIO
 $lang['INFO_USER_NAME'] = 'Nombre: ';
@@ -90,6 +90,9 @@ $lang['SUC_BTN_NEW_SUC'] = 'Nueva sucursal';
 $lang['SUC_BTN_NEW_MASV'] = 'Subir archivo';
 $lang['SUC_TITLE_NEW_SUC'] = 'Gestión de Sucursal';
 $lang['SUC_BTN_UPFILE'] = 'Subir archivo de nuevas sucursales';
+
+//TAB DESCARGAS
+$lang['DWL_MANUAL'] = "TV-MUS-002-conexion-empresas-online-V13.pdf";
 
 // TAB Notificaciones
 $lang['NOTI_TITLE_CONFIG'] = 'Notificaciones';

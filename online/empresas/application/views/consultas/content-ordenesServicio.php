@@ -181,7 +181,7 @@ if($osConfirmV){
 									<tr id='$value->idOrden'>
 									<td class='OS-icon'>
 									<a id='ver_lotes' title='Ver lotes'>
-									<span aria-hidden='true' class='icon' data-icon='&#xe003;'></span> 
+									<span aria-hidden='true' class='icon' data-icon='&#xe003;'></span>
 									</a>
 									<a id='dwnPDF' title='Descargar como PDF'>
 									<span aria-hidden='true' class='icon' data-icon='&#xe02e;'></span>
@@ -202,7 +202,7 @@ if($osConfirmV){
                                     }
 
                                 }
-                                if(in_array('tebanu', $funciones) && $value->estatus == '0'){
+                                if(in_array('tebanu', $funciones) && $value->estatus == '0' && ($value->nofactura==''&&$value->fechafactura=='')) {
                                     echo "
 									<a id='anular' title='Anular Orden'>
 									<span aria-hidden='true' class='icon' data-icon='&#xe06f;'></span>
@@ -218,7 +218,7 @@ if($osConfirmV){
                                     $thEmpresa = "<td class='th-empresa'>".ucwords(mb_strtolower($acnomciaS))."</td>";
                                     $idFiscal = "<td>$acrifS</td>";
                                 }
-                                echo "								
+                                echo "
 								</td>
 								<td>$value->idOrden</td>
 								<td>$value->fechaGeneracion</td>".
