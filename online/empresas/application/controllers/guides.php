@@ -20,7 +20,8 @@ class Guides extends CI_Controller
 				//Add model
 				$this->load->model('guides_model', 'guides');
 				//Add languages
-        $this->lang->load('users');
+				$this->lang->load('users');
+				$this->lang->load('dashboard');
         $this->lang->load('erroreseol');
         //Add libraries
 				$this->load->library('parser');
@@ -150,7 +151,7 @@ class Guides extends CI_Controller
 					$categories = $info->categories;
 					$category_guides = $info->category_guides;
 					$title_info = $info->title_info;
-						if (sizeof($category_guides) < 4) {
+						if (sizeof($category_guides) <= 4) {
 						$content = $this->parser->parse('guides/guides-detail',array(
 							'categories'=>$categories,
 							'category_guides'=>$category_guides,

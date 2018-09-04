@@ -44,7 +44,8 @@ class guides_model extends CI_Model
 			$headerAPI = [];
 			$projection = [
 				'title' => 1,
-				'category' => 1
+				'category' => 1,
+				'icon' => 1
 			];
 			$body = [
 				'projection' => $projection
@@ -70,7 +71,8 @@ class guides_model extends CI_Model
 			];
 			$projection = [
 				'title' => 1,
-				'category' => 1
+				'category' => 1,
+				'icon' => 1
 			];
 			$body = [
 				'filter' => $filter,
