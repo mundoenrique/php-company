@@ -18,7 +18,7 @@ if($data->code === 0) {
 ?>
 <div id="content-products" code="<?php echo $data->code; ?>" <?php echo $data->code !== 0 ?
 	'title="' . $data->title . '" msg="' . $data->msg . '"' : ""; ?>>
-	
+
 	<h1><?php echo lang('TITLE_VISA_DETALLE'); ?></h1>
 	<h2 class="title-marca">
 		<?php echo ucwords(mb_strtolower($programa)); ?>
@@ -95,7 +95,7 @@ if($data->code === 0) {
 		<div id='loading' style='text-align:center'><?php echo insert_image_cdn("loading.gif"); ?></div>
 		<div id="controls-list" style="display: none">
 			<?php foreach($controllersList AS $pos => $controllers): ?>
-				<?php $idControl =  $controllers->rule_code === 'not fuel' ? 'not_fuel' : $controllers->rule_code; ?>
+				<?php $idControl = $controllers->rule_code; ?>
 				<div class="visa-controls">
 					<div class="control-check">
 						<input type="checkbox" id="<?php echo $idControl; ?>" <?php echo $controllers->status_descripcion === 'active' ? 'checked' : ''; ?> plus="<?php echo $controllers->override === 'y' ? 'y' : 'n'; ?>" status="<?php echo $controllers->status_descripcion === 'active' ? 'a' : 'i'; ?>">

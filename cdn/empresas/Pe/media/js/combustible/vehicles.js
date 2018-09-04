@@ -2,7 +2,8 @@ var idflota = $('#vehicle-gruop').attr('group-id'),
     nameFlota = $('#vehicle-gruop').attr('group-name'),
     idVehi,
     lang,
-    action;
+    action,
+		selectStatus;
 $('#idFlota').val(idflota);
 
 $(function() {
@@ -14,6 +15,7 @@ $(function() {
     }];
 
     listVehicle (data);
+
     //llamado a la función para registrar grupos de vehículos
     $('#add').on('click', function (){
 
@@ -56,7 +58,6 @@ $(function() {
                 .text(lang.TAG_SAVE_CHANGES)
         }
     });
-
 
     //Cambiar el estado de un vehículo
     $('#status').on('change', function(){
@@ -103,5 +104,16 @@ $(function() {
         }
     });
 
+		//Impresión reporte EXCEL de vehículos
+		$('#table-drivers').on('click', '#down-excel', function(e) {
+			e.preventDefault();
+			var dataReport = {
+				status: $('#vehicles-sel').val()
+			}
+			downReports('VehiculosExcel', 'reportes_trayectos', dataReport, 'vehiculos-xls');
+		});
+
 
 });
+
+selectStatus = $("#status").html();

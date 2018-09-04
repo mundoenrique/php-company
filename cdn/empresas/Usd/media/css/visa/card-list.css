@@ -29,3 +29,9 @@ input {
 .balance {
 	border-color: #FFF;
 }
+
+.line {
+	margin-left: 120px;
+	margin-right: 120px;
+	min-height: 70px;
+}

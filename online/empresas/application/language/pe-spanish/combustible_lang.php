@@ -68,6 +68,8 @@ $lang['DRIVER_REGISTER_OK'] = "ha sido incluido en la lista de conductores";
 $lang['DRIVER_REGISTER_FAIL'] = "No fue posible registrar al conductor, Verifique e intente nuevamente";
 $lang['DRIVER_PERFIL_OK'] = "El perfil del conductor fue actualizado";
 $lang['DRIVER_PERFIL_FAIL'] = "No fue posible actualizar el perfil del conductor";
+$lang['DRIVER_ACTIVE'] = "Activos";
+$lang['DRIVER_INACTIVE'] = "Inactivos";
 
 //Vehicles groups
 $lang['TITLE_GROUP_ADMIN'] = "Administrar grupos de vehículos";
@@ -108,6 +110,10 @@ $lang['VEHI_REGISTER_FAIL'] = "No fue posible registrar el vehículo, Verifique 
 $lang['VEHI_DETAIL_OK'] = "Los datos del vehículo fueron actualizados";
 $lang['VEHI_DETAIL_FAIL'] = "No fue posible actualizar los datos del vehículo";
 $lang['VEHI_PLATE_EXIST'] = "Matricula registrada con otro vehículo, verifique e intente de nuevo";
+$lang['ACTIVE']= "Disponibles";
+$lang['BUSY']= "Ocupados";
+$lang['GARAGE']= "En Garage";
+$lang['DISASSOCIATE']= "Desincorporados";
 
 //Cuentas
 $lang['MENU_ADMIN_ACCOUNTS'] = "Administrar cuentas";
@@ -197,10 +203,20 @@ $lang['TAG_CLEAR_FORM'] = "Limpiar formulario";
 $lang['TAG_FOLLOW'] = "Siguiente";
 $lang['TAG_END'] = "Finalizar";
 $lang['TAG_RETURN'] = "Regresar";
-
+$lang['TAG_DWN_EXCEL'] = "Descargar reporte EXCEL";
+$lang['TAG_DWN_PDF'] = "Descargar reporte PDF";
+$lang['TAG_REPORTE_DRIVERS'] = "Reporte de Conductores";
+$lang['TAG_REPORTE_ACCOUNTS'] = "Reporte de Cuentas";
+$lang['TAG_REPORTE_VEHICLES'] = "Reporte de Vehículos";
+$lang['TAG_REPORTE_TRAVELS'] = "Reporte de Viajes";
 
 //errores
 $lang['ERROR_SYSTEM'] = "El sistema no responde";
 $lang['ERROR_SYSTEM_MSG'] = "La aplicación se cerrará";
 $lang['ERROR_NON_FOUND'] = "El registro no existe";
 $lang['ERROR_NON_ACCESS'] = "Debe indicar un usuario válido para ejecutar esta acción";
+$lang['ERROR_REPORT'] = "No fue posible obtener el reporte, por favor intenta más tarde";
+$lang['ERROR_VEHICLES'] = "No existen datos de vehiculos";
+$lang['ERROR_DRIVERS'] = "No existen datos de conductores";
+$lang['ERROR_TRAVELS'] = "No existen viajes";
+$lang['ERROR_ACCOUNTS'] = "No existen cuentas";
