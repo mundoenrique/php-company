@@ -171,7 +171,11 @@
 	color:#555555;
 }
 .nav2-active{
-	background-color: white;
+	background-color: #f5921e;
+
+}
+.nav2-active a{
+	color: #f2f2f2 !important;
 }
 .help-nav2{
 	padding-right: 20px;
@@ -253,9 +257,27 @@
 	border-bottom: 18px solid transparent;
 
 }
-.item-active{
+.item-active-get-started{
+	color: #54c2d0 !important;
 	font-weight: bold !important;
 }
+.item-active-batches {
+	color: #50c592 !important;
+	font-weight: bold !important;
+}
+.item-active-billing {
+	color: #2b569f !important;
+	font-weight: bold !important;
+}
+.item-active-downloads {
+	color: #994596 !important;
+	font-weight: bold !important;
+}
+.item-active-management-reports {
+	color: #f5921e !important;
+	font-weight: bold !important;
+}
+
 .icon-facturas img{
 	width: 12px;
 	height: 15px;

@@ -34,7 +34,7 @@ $size = sizeof($items);
 				<div class="triangulo" id="<? echo $category_guides[0]->category.'-border'?>"></div>
 
 			</div>
-			<div class="nav-first" ><a class="item-active" href="#">Reportes disponibles</a></div>
+			<div class="nav-first" ><a class="item-active-management-reports" href="#">Reportes disponibles</a></div>
 
 		</div>
 

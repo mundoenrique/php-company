@@ -36,11 +36,12 @@ $size = sizeof($items);
 			</div>
 
 			<?php
+					$active='item-active-'.$category_guides[0]->category;
 					foreach($category_guides as $i=>$guide){
 						if($i==0){
 
 							if($guide->title==$info->title){
-								echo	'<div class="nav-first" ><a class="item-active" href="' . $urlBase . '/guias-detalle/' . $guide->_id . '">' . $guide->title . '</a></div>';
+								echo	'<div class="nav-first" ><a class="'.$active.'" href="' . $urlBase . '/guias-detalle/' . $guide->_id . '">' . $guide->title . '</a></div>';
 							}else{
 								echo	'<div class="nav-first" ><a href="' . $urlBase . '/guias-detalle/' . $guide->_id . '">' . $guide->title . '</a></div>';
 
@@ -51,7 +52,7 @@ $size = sizeof($items);
 								echo	'
 								<div class="nav-child" >
 									<span class="nav-arrow">&#10093;</span>
-									<a class="item-active" href="' . $urlBase . '/guias-detalle/' . $guide->_id . '">' . $guide->title . '</a>
+									<a class="'.$active.'" href="' . $urlBase . '/guias-detalle/' . $guide->_id . '">' . $guide->title . '</a>
 								</div>';
 							}else{
 								echo	'
