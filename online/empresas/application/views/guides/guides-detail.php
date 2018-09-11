@@ -134,7 +134,7 @@ $size = sizeof($items);
 
 						echo '
 						<div class="help-tip">';
-							echo insert_image_cdn('guides/tip-ceo.svg');
+							echo insert_image_cdn('guides/tip-ceo.png');
 							if (isset($items[$i-1]->tip->text)) {
 								echo $items[$i-1]->tip->text;
 							}

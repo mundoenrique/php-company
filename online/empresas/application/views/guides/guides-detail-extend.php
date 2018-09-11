@@ -106,7 +106,7 @@ $size = sizeof($items);
 						if (sizeof($items[$i-1]->tip->list) != 0 or isset($items[$i-1]->tip->text)) {
 							echo '
 							<div class="help-tip">';
-								echo insert_image_cdn('guides/tip-ceo.svg');
+								echo insert_image_cdn('guides/tip-ceo.png');
 								if (isset($items[$i-1]->tip->text)) {
 									echo '<strong>' . $items[$i-1]->tip->text . '</strong>';
 								}
