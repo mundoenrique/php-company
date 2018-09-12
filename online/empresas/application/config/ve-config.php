@@ -13,16 +13,21 @@ $config['routes_base']=$config['system_name'].'/'.$config['country'].'/';
 $config['keyNovo']= base64_decode('dGVzdDEyMzQ=');
 
 //URL Servicio Web WebLogic
-$config['urlWS']= 'http://172.24.6.148:8005/NovoEolWebInterfaceWS/webresources/';
-//URL API Trayectos
-$config['urlAPI']= 'http://172.24.6.148:8005/ceo-fuel/1.0/';
+$config['urlWS']= 'http://172.24.6.101:8005/NovoEolWebInterfaceWS/webresources/';
+
+//URL Servicio API
+$config['urlAPI']= 'http://172.24.6.101:8005/ceo-fuel/1.0/';
+
 //URL Servicio
-$config['urlServ']= 'http://172.24.6.148:8008/';
+$config['urlServ']= 'http://172.24.6.101:8008/';
+
 //CLIENT ID OAUTH
-$config['client_id'] = 'b08e4d54638385d6987af8989a01f30e';
+$config['client_id'] = '1923eba01b1d3667535cd2e186fea727';
+
 //CLIENT SECRET OAUTH
-$config['client_secret'] = 'f2ca416fb52cdf4f21406a5d9ca6b16f';
-//URL API Content
+$config['client_secret'] = 'c3aad9624f45bcd0f10bacafe026271c';
+
+//URL API CONTENT
 $config['urlAPIContent'] = '172.24.6.123:3000/';
 
 /*
@@ -32,16 +37,16 @@ $config['urlAPIContent'] = '172.24.6.123:3000/';
 */
 
 //RUTA BASE PARA ARCHIVOS CDN  Ejemplo: https://cdn.novopayment.dev/empresas/Ve/
-$config['base_url_cdn'] = 'https://cdn.novopayment.dev/'.$config['routes_base'];
+$config['base_url_cdn'] = 'https://cdn.novopayment.net/'.$config['routes_base'];
 
 //USUARIO Y PASSWORD PARA SFTP PASO DE LOTES
-$config['LOTES_USERPASS'] = 'phpcarga:phpC4rg4';
+$config['LOTES_USERPASS'] = 'npdaemon:#.3Nv!!';
 
 //URL PARA CONECTAR POR SFTP A SERVIDOR
-$config['URL_TEMPLOTES'] = 'sftp://172.24.6.102:22/u01/app/data/lotes/temp/'.$config['country'].'/';
+$config['URL_TEMPLOTES'] = 'sftp://172.24.6.130:22/home/npdaemon/'.$config['country'].'/';
 
 //PATCH CARPETA DONDE SE SUBEN LOS LOTES Ejemplo: '/opt/httpd-2.4.4/vhost/cdn/empresas/Ve/bash/''
-$config['FOLDER_UPLOAD_LOTES'] = '/opt/httpd-2.4.4/vhost/cdn/'.$config['routes_base'].'bash/';
+$config['FOLDER_UPLOAD_LOTES'] = '/opt/httpd-2.4.4/vhost/cdn/'.$config['system_name'].'/'.$config['country'].'/bash/';
 
 //PATH CARPETA BASE CDN DEL PAÍS
 $config['CDN'] = '/opt/httpd-2.4.4/vhost/cdn/'.$config['routes_base'];
@@ -54,7 +59,7 @@ $config['CDN'] = '/opt/httpd-2.4.4/vhost/cdn/'.$config['routes_base'];
 */
 
 //DOMINIO PRINCIPAL DEL SISTEMA
-$config['base_url']	= 'https://online.novopayment.dev/'.$config['system_name'].'/';
+$config['base_url']	= 'https://online.novopayment.net/'.$config['system_name'].'/';
 
 //CEO VERSIÓN ANTERIOR
 $config['oldEOL_url'] = 'https://online.plata.com.ve/eolweb/loginContent.jsp';
