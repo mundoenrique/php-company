@@ -224,6 +224,11 @@ $route['(:any)/trayectos/detalleCuentas'] = "combustible/accountsDetails/$1";
 $route['(:any)/trayectos/viajes'] = "combustible/travels/$1";
 $route['(:any)/trayectos/viajes/detalles'] = "combustible/travelAddEdit/$1";
 
+//guides
+$route['(:any)/guias'] = "guides/all_guides/$1";
+$route['(:any)/guias/(:any)'] = "guides/category_guides/$1/$2";
+$route['(:any)/guias-detalle/(:any)'] = "guides/guides_detail/$1/$2";
+
 //controles de pago visa
 $route['(:any)/controles/visa'] = "visa/index/$1";
 $route['(:any)/card-list'] = "visa/callWsCardList/$1";

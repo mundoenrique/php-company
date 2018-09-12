@@ -61,6 +61,15 @@ $urlBase = $urlBaseA.$pais;
 			</ul>
 
 		</li>
+		<?php if ($pais == 'Ve') {
+			echo '<li class="menu-item profile">
+				<a href="' . $urlBase . '/guias' . '" rel="section" title="Ayuda">
+					<span aria-hidden="true" class="icon" data-icon="&#xe04b;"></span>' .
+						 lang('AYUDA') .
+				'</a>
+			</li>';
+		}
+		?>
 	</ul>
 </nav>
 
