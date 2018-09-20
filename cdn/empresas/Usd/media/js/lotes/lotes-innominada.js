@@ -47,7 +47,7 @@ var datatable;
           }
         }
       });
-
+     
     }
 
     function solicitud_exitosa(){
@@ -69,7 +69,7 @@ var datatable;
           }
         }
       });
-
+     
     }
 
     function action_eliminar_lote(idlote, numlote, pass){
@@ -80,13 +80,13 @@ var datatable;
 					notificacion("Lote eliminado","<p>El nro. de lote <b>" + numlote + "</b> ha sido eliminado correctamente</p>");
 					location.reload();
 
-				}else{
+				}else{           
 					if(data.ERROR=='-29'){
 						alert('Usuario actualmente desconectado');
 						location.reload();
 
-					}else{
-						notificacion('Eliminando lote', data.ERROR);
+					}else{ 	
+						notificacion('Eliminando lote', data.ERROR);      
 					}
 				}
 		});
@@ -94,13 +94,9 @@ var datatable;
   //--Fin Eliminar lote
 
 	function validate(){
-		var
-		contenido = "",
-		count = 0,
-		valid = false,
-		cantTartjetas = $('#cant_tarjetas').val(),
-		maxTarjetas = parseInt($('#cant_tarjetas').attr('max-tjta'));
-
+		var contenido = "";
+		var count = 0;
+		var valid = false;
 		if($("#sucursal").val()==""){
 			++count;
 			contenido+= "<h6>" + count + ". Ha seleccionado una sucursal</h6>";
@@ -122,20 +118,16 @@ var datatable;
 			contenido+= "<h6>" + count + ". Ha ingresado una Linea Embozo 2</h6>";
 		}
 		if(!/[^a-zA-Z0-9]/.test($("#embozo_2").val())){
-
+			
 		}else {
 			++count;
 			contenido+= "<h6>" + count + ". No haya ingresado caracteres especiales en Linea Embozo 2</h6>";
 		}
 		if(!/[^a-zA-Z0-9]/.test($("#embozo_1").val())){
-
+			
 		}else {
 			++count;
 			contenido+= "<h6>" + count + ". No haya ingresado caracteres especiales en Linea Embozo 1</h6>";
-		}
-		if(maxTarjetas !== 0 && cantTartjetas > maxTarjetas) {
-			++count;
-			contenido+= "<h6>"+count+". La cantidad de tarjetas no sea superior a "+maxTarjetas+"</h6>";
 		}
 		if(count > 0){
 			notificacion("Solicitud de Innominadas","<h2>Verifique que:</h2>" + contenido);
@@ -148,8 +140,8 @@ var datatable;
 		var canvas = "<div>"+msj+"</div>";
 			$(canvas).dialog({
 				title : titu,
-				modal:true,
-				close: function(){$(this).dialog('destroy')},
+				modal:true, 
+				close: function(){$(this).dialog('destroy')}, 
 				resizable:false,
 				buttons:{
 					OK: function(){
@@ -183,12 +175,12 @@ $(function(){
 				if(!data.ERROR){
 					solicitud_exitosa();
 	          		window.location.href = baseURL+"/"+isoPais+"/lotes/autorizacion";
-				}else{
+				}else{           
 					if(data.ERROR=='-29'){
 						alert('Usuario actualmente desconectado');
 						location.reload();
 
-					}else{
+					}else{ 	
 						notificacion("Imposible procesar solicitud",data.ERROR);
 					}
 				}
