@@ -61,10 +61,7 @@ class Lotes_innominada extends CI_Controller {
                 'acodcia'=>$acodcia,
                 'titulo'=>$nombreCompleto,
                 'lastSession'=>$lastSessionD,
-								'programa'=>$programa,
-								'pais' => $urlCountry,
-								'mesesVencimiento' => $this->session->userdata('mesesVencimiento'),
-								'maxTarjetas' => $this->session->userdata('maxTarjetas')
+                'programa'=>$programa
                 //'data' => $rtest
             ),TRUE);
             $sidebarLotes= $this->parser->parse('dashboard/widget-empresa',array('sidebarActive'=>TRUE),TRUE);
