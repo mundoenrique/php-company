@@ -1,13 +1,3 @@
-<?php
-
-$pais = $this->uri->segment(1);
-$urlBaseA = $this->config->item('base_url');
-$urlBase = $urlBaseA.$pais;
-$mesesVencimiento = $this->session->userdata('mesesVencimiento');
-
-$info;
-
-?>
 <div id="content-products">
 	<h1><?php echo lang('TITULO_CUENTAS_INNO');?></h1>
 
@@ -17,28 +7,27 @@ $info;
 
 	<ol class="breadcrumb">
 		<li>
-			<a href="<?php echo $urlBase; ?>/dashboard" rel="start"><?php echo lang('BREADCRUMB_INICIO'); ?></a>
+			<a href="<?= base_url($pais.'/dashboard'); ?>" rel="start"><?= lang('BREADCRUMB_INICIO'); ?></a>
 		</li>
 		/
 		<li>
-			<a href="<?php echo $urlBase; ?>/dashboard" rel="section"><?php echo lang('BREADCRUMB_EMPRESAS'); ?></a>
+			<a href="<?= base_url($pais.'/dashboard'); ?>" rel="section"><?= lang('BREADCRUMB_EMPRESAS'); ?></a>
 		</li>
 		/
 		<li>
-			<a href="<?php echo $urlBase; ?>/dashboard/productos" rel="section">
-				<?php echo lang('BREADCRUMB_PRODUCTOS'); ?></a>
+			<a href="<?= base_url($pais.'/dashboard/productos'); ?>" rel="section"><?= lang('BREADCRUMB_PRODUCTOS'); ?></a>
 			</li>
 			/
 			<li>
-				<a href="<?php echo $urlBase; ?>/lotes" rel="section"><?php echo lang('BREADCRUMB_LOTES'); ?></a>
+				<a href="<?= base_url($pais.'/lotes'); ?>" rel="section"><?= lang('BREADCRUMB_LOTES'); ?></a>
 			</li>
 			/
 			<li class="breadcrumb-item-current">
-				<a ><?php echo lang('POSITION_INNO'); ?></a>
+				<a><?= lang('POSITION_INNO'); ?></a>
 			</li>
 		</ol>
 
-		<div style="display: block;" id="lotes-general" class="elem-hidden">				
+		<div style="display: block;" id="lotes-general" class="elem-hidden">
 
 			<div id="filtroOS">
 
@@ -57,7 +46,8 @@ $info;
 					</span>
 					<div class="info-OD">
 						<h5>Cantidad Tarjetas</h5>
-						<input id="cant_tarjetas" class="required input4 nro" value="" maxLength="5"><!-- onfocus="javascript:this.value=''" -->
+						<input id="cant_tarjetas" class="required input4 nro" max-tjta="<?= $maxTarjetas ?>">
+						<!-- onfocus="javascript:this.value=''" -->
 					</div>
 					<span class="info-OD">
 						<h5>Fecha Expiraci&oacute;n</h5>
@@ -72,7 +62,7 @@ $info;
 						<input id="embozo_2" class="required input4" value=""><!-- onfocus="javascript:this.value=''" -->
 					</div>
 				</div>
-				
+
 				<div id="batchs-last">
 					<button id="procesar">Procesar</button>
 				</div>
