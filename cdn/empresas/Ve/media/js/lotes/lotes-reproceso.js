@@ -140,7 +140,7 @@ function WS(funcion, datosPost, titulo){
 	function verificar(datosPost, tipo, $contenedor){
 
 		emailRegex = /^([^]+[\w-\.]+@([\w-]+\.)+[\w-]{2,4})+$/;
-		rifRegex = /^([gjvepEPVGJ]{1}([-]{1})?[0-9]{8}[-]{1}[0-9]{1})|(([gjvepEPVGJ]{1})?([-]{1})?[0-9]{8})$/;
+		rifRegex = /^[gjvepEPVGJ]{1}[-]{1}[0-9]{8}[-]{1}[0-9]{1}$/;
 		alfanumericRegex = /^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\s]*$/;
 		conceptoRegex = /^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\s]{1,20}$/;
 		alfaRegex = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]*$/;

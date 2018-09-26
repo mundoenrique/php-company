@@ -2214,12 +2214,17 @@ class Lotes extends CI_Controller {
 					$code = 0;
 					$data = serialize($response);
 					break;
+				case -1:
+					$code = 2;
+					$msg = 'Por favor verifica tu contraseña e intentalo de nuevo';
+					break;
 				case -51:
 					$code = 2;
 					$msgVE = 'No fue posible obtener los datos de la empresa para la Orden de Servicio. ';
 					$msgVE .= 'Por favor envíe esta pantalla y su usuario al correo ';
 					$msgVE .= '<strong>soporteempresas@tebca.com</strong>';
-					$msg = $urlCountry =="Ve" ? $msgVE : $response.msg;
+					$msg = $urlCountry =="Ve" ? $msgVE : $response->msg;
+					break;
 				case -29:
 				case -61:
 					$code = 3;
@@ -2267,6 +2272,7 @@ class Lotes extends CI_Controller {
 	 */
 	private function callWSgenerarOS($urlCountry,$token,$username,$listaTemp,$tempIdOrdenLNF,$acrifS,$moduloOS){
 		$this->lang->load('erroreseol');
+		$this->lang->load('dashboard');
 		$operacion = "generarOS";
 		$classname = "com.novo.objects.MO.ListadoOrdenServicioMO";
 		$timeLog= date("m/d/Y H:i");
@@ -2334,35 +2340,48 @@ class Lotes extends CI_Controller {
 		$jsonResponse = np_Hoplite_Decrypt($response);
 		$response = json_decode(utf8_encode($jsonResponse));
 
-		if($response){
-
-			log_message("info","generarOS =====>>>>>>".$response->rc);
-			if($response->rc==0 || $response->rc==-88){
-				$response = array("moduloOS"=>$moduloOS, "ordenes"=>serialize($response));
-
-				return json_encode($response);
-			}else{
-				if($response->rc==-61 || $response->rc==-29){
-					$this->session->sess_destroy();
-					$this->session->unset_userdata($this->session->all_userdata());
-					$codigoError= array('ERROR' => '-29' );
-				}else if($response->rc==-56){
-					$codigoError = array('ERROR' => $response->rc, "msg"=> lang('ERROR_(-56)'));
-				}else{
-					$codigoError = lang('ERROR_('.$response->rc.')');
-					if(strpos($codigoError, 'Error')!==false){
-						$codigoError = array('ERROR' => lang('ERROR_GENERICO_USER') );
-					}else{
-						$codigoError = array('ERROR' => lang('ERROR_('.$response->rc.')') );
-					}
-				}
-				return json_encode($codigoError);
+		log_message("DEBUG", "generarOS =====>>>>>> ".json_encode($response));
+		if(isset($response->rc)) {
+			switch($response->rc) {
+				case 0:
+				case -88:
+					$response = [
+						"moduloOS"=>$moduloOS,
+						"daysPay" => isset($response->dias) ? $response->dias : '',
+						"costoLog" => ($response->lista[0]->aplicaCostD === 'D'),
+						"ordenes"=>serialize($response)
+					];
+					break;
+					case -29:
+					case -61:
+						$this->session->sess_destroy();
+						$this->session->unset_userdata($this->session->all_userdata());
+						$response = [
+							'ERROR' => '-29',
+							"title"=> Lang('SYSTEM_NAME'),
+							"msg" => lang('ERROR_(-29)')
+						];
+						break;
+					case -56:
+						$response = [
+							'ERROR' => $response->rc,
+							'msg' => lang('ERROR_(-56)')
+						];
+						break;
+					default:
+						$response = [
+							'ERROR' => lang('ERROR_('.$response->rc.')')
+						];
 			}
-		}else{
-			log_message("info","generarOS NO WS");
-			$codigoError = array('ERROR' => lang('ERROR_GENERICO_USER') );
-			return json_encode($codigoError);
+
+		} else {
+			$response = [
+				'ERROR' => lang('ERROR_GENERICO_USER')
+			];
+
 		}
+
+		return json_encode($response);
 	}
 
 	/**

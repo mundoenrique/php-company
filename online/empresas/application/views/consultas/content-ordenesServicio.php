@@ -178,7 +178,7 @@ if($osConfirmV){
 										</tr>";
                                 }
                                 echo "
-									<tr id='$value->idOrden'>
+									<tr id='$value->idOrden' aplica-costo='$value->aplicaCostD'>
 									<td class='OS-icon'>
 									<a id='ver_lotes' title='Ver lotes'>
 									<span aria-hidden='true' class='icon' data-icon='&#xe003;'></span>
@@ -302,4 +302,4 @@ if($osConfirmV){
     <input type='hidden' id='data-OS' name='data-OS' value='<?php echo serialize($datos) ?>' />
 </form>
 
-<div id='loading' style='text-align:center' class='elem-hidden'><?php echo insert_image_cdn("loading.gif"); ?></div>
+<div id='loading' style='text-align:center; padding-top:30px;' class='elem-hidden'><?php echo insert_image_cdn("loading.gif"); ?></div>
