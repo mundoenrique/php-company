@@ -3719,7 +3719,7 @@ class Reportes extends CI_Controller {
             );
 
         $data = json_encode($data,JSON_UNESCAPED_UNICODE);
-
+				log_message('debug','RequestEstadosDeCuenta '.$data);
         $dataEncry = np_Hoplite_Encryption($data);
         $data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
         $data = json_encode($data);
@@ -3729,7 +3729,7 @@ class Reportes extends CI_Controller {
         $response =  json_decode(utf8_encode($jsonResponse));
 
         if($response){
-            log_message('info','EstadosDeCuenta '.$response->rc."/".$response->msg);
+            log_message('debug','ResponseEstadosDeCuenta '.$response->rc."/".$response->msg);
             if($response->rc==0){
                 return $response;
             }else{
