@@ -181,6 +181,31 @@ $(document).ready(function() {
 		return valido;
 	}
 
+	function msgSystemrepor(code, title, msg) {
+		var msgSystem = $('#msg-general');
+		msgSystem.dialog({
+			title: title,
+			modal: 'true',
+			width: '210px',
+			draggable: false,
+			rezise: false,
+			open: function(event, ui) {
+				$('.ui-dialog-titlebar-close', ui.dialog).hide();
+				$('#msg-info').append('<p>' + msg + '</p>');
+			}
+		});
+		$('#close-info').on('click', function(){
+			$(msgSystem).dialog('close');
+			switch(code) {
+				case 1:
+					window.location.replace(baseURL + isoPais + '/dashboard/productos/detalle');
+					break;
+				case 2:
+					window.location.replace(baseURL + isoPais + '/logout');
+					break;
+			}
+		});
+	}
 
 
 //---------------------------------------------------------
@@ -308,20 +333,34 @@ if(buscarReporte){
 			}
 			descargarArchivo(datos, base+api+pais+"/reportes/EstadosdeCuentaXLS", "Exportar a EXCEL" );*/
 
-			$('form#formulario').empty();
-    				$('form#formulario').append('<input type="hidden" name="empresa" value="'+filtro_busq.empresa+'" />');
-    				$('form#formulario').append('<input type="hidden" name="fechaInicial" value="'+filtro_busq.fechaInicial+'" />');
-    				$('form#formulario').append('<input type="hidden" name="fechaFin" value="'+filtro_busq.fechaFin+'" />');
-    				$('form#formulario').append('<input type="hidden" name="cedula" value="'+filtro_busq.cedula.replace(/ /g,'')+'" />');
-    				$('form#formulario').append('<input type="hidden" name="paginaActual" value="'+1+'" />');
-    				$('form#formulario').append('<input type="hidden" name="producto" value="'+filtro_busq.producto+'" />');
-    				$('form#formulario').append('<input type="hidden" name="tipoConsulta" value="'+filtro_busq.tipoConsulta+'" />');
-    				$('form#formulario').append('<input type="hidden" name="nomEmpresa" value="'+filtro_busq.acnomcia.replace(","," ")+'" />');
-    				$('form#formulario').append('<input type="hidden" name="descProducto" value="'+filtro_busq.productoDesc+'" />');
-    				$('form#formulario').attr('action',base+api+pais+"/reportes/EstadosdeCuentaXLS");
-    				$('form#formulario').submit()
+			var uri = base+'/'+pais+'/consulta/servicio', method = 'GET', action = 'GetStatesAccount',
+			scheme = 'reports_additional';
+			var data = {
+				empresa:filtro_busq.empresa,
+				fechaInicial: filtro_busq.fechaInicial,
+				fechaFin: filtro_busq.fechaFin,
+				cedula: filtro_busq.cedula.replace(/ /g,''),
+				paginaActual: 1,
+				producto: filtro_busq.producto,
+				tipoConsulta: filtro_busq.tipoConsulta,
+				nomEmpresa: filtro_busq.acnomcia.replace(","," "),
+				descProducto: filtro_busq.productoDesc,
+				operacion:'generaArchivoXlsEdoCta'
+			};
+			callServiceReports(uri, method, action, scheme, data, function(response){
+				if(response.code === 0) {
+					uri = base+'/'+pais+'/reportes/eliminar', method = 'POST', action = response.msg.file;
 
+					window.location.href = response.msg.url + response.msg.file;
 
+					callServiceReports(uri, method, action, scheme, data, function(response) {
+					});
+
+				} else {
+
+					msgSystemrepor(response.code, response.title, response.msg);
+				}
+			})
 
 		});
 
@@ -336,7 +375,9 @@ if(buscarReporte){
 		span.click(function(){
 
 
-			/*datos={
+			var uri = base+'/'+pais+'/consulta/servicio', method = 'GET', action = 'GetStatesAccount',
+			scheme = 'reports_additional';
+			var data ={
 				empresa:filtro_busq.empresa,
 				fechaInicial: filtro_busq.fechaInicial,
 				fechaFin: filtro_busq.fechaFin,
@@ -345,21 +386,37 @@ if(buscarReporte){
 				producto: filtro_busq.producto,
 				tipoConsulta: filtro_busq.tipoConsulta,
 				nomEmpresa: filtro_busq.acnomcia.replace(","," "),
-				descProducto: filtro_busq.productoDesc
+				descProducto: filtro_busq.productoDesc,
+				operacion:'generaArchivoPDF'
 			}
-			descargarArchivo(datos, base+api+pais+"/reportes/EstadosdeCuentaPDF", "Exportar a PDF" );*/
-			$('form#formulario').empty();
-    				$('form#formulario').append('<input type="hidden" name="empresa" value="'+filtro_busq.empresa+'" />');
-    				$('form#formulario').append('<input type="hidden" name="fechaInicial" value="'+filtro_busq.fechaInicial+'" />');
-    				$('form#formulario').append('<input type="hidden" name="fechaFin" value="'+filtro_busq.fechaFin+'" />');
-    				$('form#formulario').append('<input type="hidden" name="cedula" value="'+filtro_busq.cedula.replace(/ /g,'')+'" />');
-    				$('form#formulario').append('<input type="hidden" name="paginaActual" value="'+1+'" />');
-    				$('form#formulario').append('<input type="hidden" name="producto" value="'+filtro_busq.producto+'" />');
-    				$('form#formulario').append('<input type="hidden" name="tipoConsulta" value="'+filtro_busq.tipoConsulta+'" />');
-    				$('form#formulario').append('<input type="hidden" name="nomEmpresa" value="'+filtro_busq.acnomcia.replace(","," ")+'" />');
-    				$('form#formulario').append('<input type="hidden" name="descProducto" value="'+filtro_busq.productoDesc+'" />');
-    				$('form#formulario').attr('action',base+api+pais+"/reportes/EstadosdeCuentaPDF");
-    				$('form#formulario').submit()
+			callServiceReports(uri, method, action, scheme, data, function(response){
+				if(response.code === 0) {
+					uri = base+'/'+pais+'/reportes/eliminar', method = 'POST', action = response.msg.file;
+
+					window.location.href = response.msg.url + response.msg.file;
+
+					callServiceReports(uri, method, action, scheme, data, function(response) {
+					});
+
+				} else {
+
+					msgSystemrepor(response.code, response.title, response.msg);
+				}
+			})
+
+			// console.log(filtro_busq.tipoConsulta);
+			// $('form#formulario').empty();
+    	// 			$('form#formulario').append('<input type="hidden" name="empresa" value="'+filtro_busq.empresa+'" />');
+    	// 			$('form#formulario').append('<input type="hidden" name="fechaInicial" value="'+filtro_busq.fechaInicial+'" />');
+    	// 			$('form#formulario').append('<input type="hidden" name="fechaFin" value="'+filtro_busq.fechaFin+'" />');
+    	// 			$('form#formulario').append('<input type="hidden" name="cedula" value="'+filtro_busq.cedula.replace(/ /g,'')+'" />');
+    	// 			$('form#formulario').append('<input type="hidden" name="paginaActual" value="'+1+'" />');
+    	// 			$('form#formulario').append('<input type="hidden" name="producto" value="'+filtro_busq.producto+'" />');
+    	// 			$('form#formulario').append('<input type="hidden" name="tipoConsulta" value="'+filtro_busq.tipoConsulta+'" />');
+    	// 			$('form#formulario').append('<input type="hidden" name="nomEmpresa" value="'+filtro_busq.acnomcia.replace(","," ")+'" />');
+    	// 			$('form#formulario').append('<input type="hidden" name="descProducto" value="'+filtro_busq.productoDesc+'" />');
+    	// 			$('form#formulario').attr('action',base+api+pais+"/reportes/EstadosdeCuentaPDF");
+    	// 			$('form#formulario').submit()
 
 		});
 

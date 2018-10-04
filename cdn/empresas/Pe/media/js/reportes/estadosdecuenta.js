@@ -33,7 +33,7 @@ $(document).ready(function() {
 		$.getJSON(base + api + pais + '/empresas/lista').always(function( data ) {
 			$("#cargando_empresa").fadeOut("slow");
 			if(!(data.ERROR)){
-				
+
 				$.each(data.lista, function(k,v){
 
 					$("#repEstadosDeCuenta_empresa").append('<option accodcia="'+v.accodcia+'" acnomcia="'+v.acnomcia+'" acrazonsocial="'+v.acrazonsocial+'" acdesc="'+v.acdesc+'" value="'+v.acrif+'">'+v.acnomcia+'</option>');
@@ -60,13 +60,13 @@ $(document).ready(function() {
 			$.post(base + api + pais + "/producto/lista", { 'acrif': acrif }, function(data){
 				$("#cargando_producto").fadeOut("slow");
 				$("#repEstadosDeCuenta_empresa").removeAttr('disabled');
-				if(!data.ERROR){	
-					$.each(data, function(k,v){  		
+				if(!data.ERROR){
+					$.each(data, function(k,v){
 						if(v.descripcion.toLowerCase().indexOf("bonus")==-1 && v.descripcion.toLowerCase().indexOf("provis")==-1 && v.descripcion.toLowerCase().indexOf("alimentacion")==-1 && v.descripcion.toLowerCase().indexOf("alimentación")==-1){
-							$("#repEstadosDeCuenta_producto").append('<option value="'+v.idProducto+'" des="'+v.descripcion+"/" +v.marca.toUpperCase()+'" >'+v.descripcion+" / "+v.marca.toUpperCase()+'</option>');	
-						}	
-						
-					}); 
+							$("#repEstadosDeCuenta_producto").append('<option value="'+v.idProducto+'" des="'+v.descripcion+"/" +v.marca.toUpperCase()+'" >'+v.descripcion+" / "+v.marca.toUpperCase()+'</option>');
+						}
+
+					});
 				}else{
 					if(data.ERROR.indexOf('-29') !=-1){
 		             alert("Usuario actualmente desconectado");
@@ -74,7 +74,7 @@ $(document).ready(function() {
 		         }else{
 					$("#repEstadosDeCuenta_producto").append('<option value="">'+data.ERROR+'</option>');
 				}
-				} 
+				}
 			});
 		}
 		});
@@ -111,7 +111,7 @@ $(document).ready(function() {
 						$( "#repEstadosDeCuenta_dni" ).attr("disabled","true");
 						$( "#repEstadosDeCuenta_dni" ).val("");
 					}else{
-						$( "#repEstadosDeCuenta_dni" ).removeAttr("disabled");	
+						$( "#repEstadosDeCuenta_dni" ).removeAttr("disabled");
 					}
 				}
 			});
@@ -124,11 +124,11 @@ $(document).ready(function() {
 
 
 //---------------------------------------------------------
-//FUNCION PARA VALIDAR CADA UNO DE LOS TIPOS DE INPUT 
+//FUNCION PARA VALIDAR CADA UNO DE LOS TIPOS DE INPUT
 //---------------------------------------------------------
 	function validar_filtro_busqueda(div){
 		var valido=true;
-		//VALIDA INPUT:TEXT QUE SEAN REQUERIDOS NO SE ENCUENTREN VACIOS 
+		//VALIDA INPUT:TEXT QUE SEAN REQUERIDOS NO SE ENCUENTREN VACIOS
 		 $.each($("#"+div+" input[type='text'].required"),function(posItem,item){
 		       var $elem=$(item);
 		       if(!$elem.hasClass("bloqued")){
@@ -139,10 +139,10 @@ $(document).ready(function() {
 			                $elem.attr("style","");
 			        }
 		       }
-		        
+
 		  });
 
-		//VALIDA SELECT QUE SEAN REQUERIDOS NO SE ENCUENTREN VACIOS 
+		//VALIDA SELECT QUE SEAN REQUERIDOS NO SE ENCUENTREN VACIOS
 		$.each($("#"+div+" select.required"),function(posItem,item){
 			var $elem=$(item);
 			if($elem.val()==""){
@@ -151,14 +151,14 @@ $(document).ready(function() {
 			}else{
 				$elem.attr("style","");
 			}
-		});  
+		});
 
 
 		//VALIDA INPUT:CHECKBOX  y INPUT:RADIO QUE SEAN REQUERIDOS NO SE ENCUENTREN VACIOS
 		var check = $("#"+div+" input[type='checkbox'].required:checked").length;
 		var radio = $("#"+div+" input[type='radio'].required:checked ").length;
 		if((check == "")&&($("#"+div+" input[type='checkbox'].required").length!="")){
-			valido=false;   	
+			valido=false;
 			$("#"+div+" input[type='checkbox'].required").next().attr("style","color:red");
 		}else{
 			$("#"+div+" input[type='checkbox'].required").next().attr("style","");
@@ -169,7 +169,7 @@ $(document).ready(function() {
 			$("#"+div+" input[type='radio'].required").next().attr("style","color:red");
 		}else{
 			$("#"+div+" input[type='radio'].required").next().attr("style","");
-		} 
+		}
 
 
 		if(!valido){
@@ -182,7 +182,31 @@ $(document).ready(function() {
 
 		return valido;
 	}
-
+	function msgSystemrepor(code, title, msg) {
+		var msgSystem = $('#msg-general');
+		msgSystem.dialog({
+			title: title,
+			modal: 'true',
+			width: '210px',
+			draggable: false,
+			rezise: false,
+			open: function(event, ui) {
+				$('.ui-dialog-titlebar-close', ui.dialog).hide();
+				$('#msg-info').append('<p>' + msg + '</p>');
+			}
+		});
+		$('#close-info').on('click', function(){
+			$(msgSystem).dialog('close');
+			switch(code) {
+				case 1:
+					window.location.replace(baseURL + isoPais + '/dashboard/productos/detalle');
+					break;
+				case 2:
+					window.location.replace(baseURL + isoPais + '/logout');
+					break;
+			}
+		});
+	}
 
 
 //---------------------------------------------------------
@@ -190,7 +214,7 @@ $(document).ready(function() {
 //---------------------------------------------------------
 var filtro_busq={};
 function BuscarEstadosdeCuenta(paginaActual){
-	
+
 	var $consulta;
 	var valid=false;
 
@@ -215,18 +239,18 @@ function BuscarEstadosdeCuenta(paginaActual){
 	}else{
 		valid=true;
 	}
-	
-//SE MUESTRA EL GIF DE CARGANDO DEBAJO DEL FORMULARIO EN CASO DE QUE EL FORMULARIO SEA VALIDO	
-		
+
+//SE MUESTRA EL GIF DE CARGANDO DEBAJO DEL FORMULARIO EN CASO DE QUE EL FORMULARIO SEA VALIDO
+
 	if(valid){
 
-//SE MUESTRA EL GIF DE CARGANDO DEBAJO DEL FORMULARIO EN CASO DE QUE EL FORMULARIO SEA VALIDO	
+//SE MUESTRA EL GIF DE CARGANDO DEBAJO DEL FORMULARIO EN CASO DE QUE EL FORMULARIO SEA VALIDO
 		$('#cargando').fadeIn("slow");
 		$("#repEstadosDeCuenta_btnBuscar").hide();
 			$('#div_tablaDetalle').fadeOut("fast");
 
 		filtro_busq.paginaActual=paginaActual;
-		
+
 		$consulta = $.post(base + api + pais + "/reportes/estadosdecuenta",filtro_busq );
 //DE SER EXITOSA LA COMUNICACION CON EL SERVICIO SE EJECUTA EL SIGUIENTE METODO "DONE"
 
@@ -239,14 +263,14 @@ function BuscarEstadosdeCuenta(paginaActual){
 		$('#cargando').fadeOut("slow");
 		$("#repEstadosDeCuenta_btnBuscar").show();
 
-// SE INICIALIZAN LAS VARIABLES NECESARIAS PARA ARMAR LA TABLA 				
+// SE INICIALIZAN LAS VARIABLES NECESARIAS PARA ARMAR LA TABLA
 		var tbody=$("#tbody-datos-general");
 		var contenedor = $("#div_tablaDetalle");
-		
+
 		if(buscarReporte){
 		contenedor.empty();
-		
-		
+
+
 		}
 
 		var tr;
@@ -265,11 +289,11 @@ function BuscarEstadosdeCuenta(paginaActual){
 		 	$('#contend-pagination').show();
 		 if(buscarReporte){
 		contenedor.empty();
-		
-		}		
+
+		}
 
 //CARGA DE VARABLE CON LOS CODIGOS DE CARGOS Y ABONOS DEVUELTOS POR EL SERVICIOS, NECESARIOS
-//PARA VERIFICAR EN QUE COLUMNA IRAN LOS MONTOS			
+//PARA VERIFICAR EN QUE COLUMNA IRAN LOS MONTOS
 		 var abonos = data.codAbonos.split("|");
 		 var cargos = data.codCargos.split("|");
 
@@ -296,7 +320,6 @@ if(buscarReporte){
 		span.attr("title","Exportar a EXCEL");
 		span.click(function(){
 
-
 			/*datos={
 				empresa:filtro_busq.empresa,
 				fechaInicial: filtro_busq.fechaInicial,
@@ -306,24 +329,38 @@ if(buscarReporte){
 				producto: filtro_busq.producto,
 				tipoConsulta: filtro_busq.tipoConsulta,
 				nomEmpresa: filtro_busq.acnomcia.replace(","," "),
-				descProducto: filtro_busq.productoDesc				
+				descProducto: filtro_busq.productoDesc
 			}
 			descargarArchivo(datos, base+api+pais+"/reportes/EstadosdeCuentaXLS", "Exportar a EXCEL" );*/
 
-			$('form#formulario').empty();
-    				$('form#formulario').append('<input type="hidden" name="empresa" value="'+filtro_busq.empresa+'" />');    		
-    				$('form#formulario').append('<input type="hidden" name="fechaInicial" value="'+filtro_busq.fechaInicial+'" />');  
-    				$('form#formulario').append('<input type="hidden" name="fechaFin" value="'+filtro_busq.fechaFin+'" />');  
-    				$('form#formulario').append('<input type="hidden" name="cedula" value="'+filtro_busq.cedula.replace(/ /g,'')+'" />');  
-    				$('form#formulario').append('<input type="hidden" name="paginaActual" value="'+1+'" />');  
-    				$('form#formulario').append('<input type="hidden" name="producto" value="'+filtro_busq.producto+'" />');  
-    				$('form#formulario').append('<input type="hidden" name="tipoConsulta" value="'+filtro_busq.tipoConsulta+'" />');  
-    				$('form#formulario').append('<input type="hidden" name="nomEmpresa" value="'+filtro_busq.acnomcia.replace(","," ")+'" />');  
-    				$('form#formulario').append('<input type="hidden" name="descProducto" value="'+filtro_busq.productoDesc+'" />'); 
-    				$('form#formulario').attr('action',base+api+pais+"/reportes/EstadosdeCuentaXLS");
-    				$('form#formulario').submit()
+			var uri = base+'/'+pais+'/consulta/servicio', method = 'GET', action = 'GetStatesAccount',
+			scheme = 'reports_additional';
+			var data = {
+				empresa:filtro_busq.empresa,
+				fechaInicial: filtro_busq.fechaInicial,
+				fechaFin: filtro_busq.fechaFin,
+				cedula: filtro_busq.cedula.replace(/ /g,''),
+				paginaActual: 1,
+				producto: filtro_busq.producto,
+				tipoConsulta: filtro_busq.tipoConsulta,
+				nomEmpresa: filtro_busq.acnomcia.replace(","," "),
+				descProducto: filtro_busq.productoDesc,
+				operacion:'generaArchivoXlsEdoCta'
+			};
+			callServiceReports(uri, method, action, scheme, data, function(response){
+				if(response.code === 0) {
+					uri = base+'/'+pais+'/reportes/eliminar', method = 'POST', action = response.msg.file;
 
+					window.location.href = response.msg.url + response.msg.file;
 
+					callServiceReports(uri, method, action, scheme, data, function(response) {
+					});
+
+				} else {
+
+					msgSystemrepor(response.code, response.title, response.msg);
+				}
+			})
 
 		});
 
@@ -338,7 +375,9 @@ if(buscarReporte){
 		span.click(function(){
 
 
-			/*datos={
+			var uri = base+'/'+pais+'/consulta/servicio', method = 'GET', action = 'GetStatesAccount',
+			scheme = 'reports_additional';
+			var data ={
 				empresa:filtro_busq.empresa,
 				fechaInicial: filtro_busq.fechaInicial,
 				fechaFin: filtro_busq.fechaFin,
@@ -347,21 +386,37 @@ if(buscarReporte){
 				producto: filtro_busq.producto,
 				tipoConsulta: filtro_busq.tipoConsulta,
 				nomEmpresa: filtro_busq.acnomcia.replace(","," "),
-				descProducto: filtro_busq.productoDesc				
+				descProducto: filtro_busq.productoDesc,
+				operacion:'generaArchivoPDF'
 			}
-			descargarArchivo(datos, base+api+pais+"/reportes/EstadosdeCuentaPDF", "Exportar a PDF" );*/
-			$('form#formulario').empty();
-    				$('form#formulario').append('<input type="hidden" name="empresa" value="'+filtro_busq.empresa+'" />');    		
-    				$('form#formulario').append('<input type="hidden" name="fechaInicial" value="'+filtro_busq.fechaInicial+'" />');  
-    				$('form#formulario').append('<input type="hidden" name="fechaFin" value="'+filtro_busq.fechaFin+'" />');  
-    				$('form#formulario').append('<input type="hidden" name="cedula" value="'+filtro_busq.cedula.replace(/ /g,'')+'" />');  
-    				$('form#formulario').append('<input type="hidden" name="paginaActual" value="'+1+'" />');  
-    				$('form#formulario').append('<input type="hidden" name="producto" value="'+filtro_busq.producto+'" />');  
-    				$('form#formulario').append('<input type="hidden" name="tipoConsulta" value="'+filtro_busq.tipoConsulta+'" />');  
-    				$('form#formulario').append('<input type="hidden" name="nomEmpresa" value="'+filtro_busq.acnomcia.replace(","," ")+'" />');  
-    				$('form#formulario').append('<input type="hidden" name="descProducto" value="'+filtro_busq.productoDesc+'" />'); 
-    				$('form#formulario').attr('action',base+api+pais+"/reportes/EstadosdeCuentaPDF");
-    				$('form#formulario').submit()
+			callServiceReports(uri, method, action, scheme, data, function(response){
+				if(response.code === 0) {
+					uri = base+'/'+pais+'/reportes/eliminar', method = 'POST', action = response.msg.file;
+
+					window.location.href = response.msg.url + response.msg.file;
+
+					callServiceReports(uri, method, action, scheme, data, function(response) {
+					});
+
+				} else {
+
+					msgSystemrepor(response.code, response.title, response.msg);
+				}
+			})
+
+			// console.log(filtro_busq.tipoConsulta);
+			// $('form#formulario').empty();
+    	// 			$('form#formulario').append('<input type="hidden" name="empresa" value="'+filtro_busq.empresa+'" />');
+    	// 			$('form#formulario').append('<input type="hidden" name="fechaInicial" value="'+filtro_busq.fechaInicial+'" />');
+    	// 			$('form#formulario').append('<input type="hidden" name="fechaFin" value="'+filtro_busq.fechaFin+'" />');
+    	// 			$('form#formulario').append('<input type="hidden" name="cedula" value="'+filtro_busq.cedula.replace(/ /g,'')+'" />');
+    	// 			$('form#formulario').append('<input type="hidden" name="paginaActual" value="'+1+'" />');
+    	// 			$('form#formulario').append('<input type="hidden" name="producto" value="'+filtro_busq.producto+'" />');
+    	// 			$('form#formulario').append('<input type="hidden" name="tipoConsulta" value="'+filtro_busq.tipoConsulta+'" />');
+    	// 			$('form#formulario').append('<input type="hidden" name="nomEmpresa" value="'+filtro_busq.acnomcia.replace(","," ")+'" />');
+    	// 			$('form#formulario').append('<input type="hidden" name="descProducto" value="'+filtro_busq.productoDesc+'" />');
+    	// 			$('form#formulario').attr('action',base+api+pais+"/reportes/EstadosdeCuentaPDF");
+    	// 			$('form#formulario').submit()
 
 		});
 
@@ -373,7 +428,7 @@ if(buscarReporte){
 		moneda = $("#moneda").attr("data");
 
 		a=$(document.createElement("a")).appendTo(div);
-		span=$(a).append("<span data-icon ='&#xe050' aria-hidden = 'true' class = 'icon'></span>");		
+		span=$(a).append("<span data-icon ='&#xe050' aria-hidden = 'true' class = 'icon'></span>");
 		span.attr("aria-hidden","true");
 		span.attr("class","icon");
 		span.attr("data-icon",'&#xe050;');
@@ -382,7 +437,7 @@ if(buscarReporte){
 
 //SE EJECUTA LA CONSULTA PARA EL GRAFICO
 				$consulta = $.post(base + api + pais + "/reportes/EstadosdeCuentaGrafico",filtro_busq );
-// APARECE LA VENTANA DE CARGANDO MIENTRAS SE REALIZA LA CONSULTA	
+// APARECE LA VENTANA DE CARGANDO MIENTRAS SE REALIZA LA CONSULTA
 				$( "#cargando" ).dialog({title:"Ver Gráfica Estados de cuenta",modal:true, width: 200, height: 170});
 //DE SER EXITOSA LA COMUNICACION CON EL SERVICIO SE EJECUTA EL SIGUIENTE METODO "DONE"
 		 		$consulta.done(function(data){
@@ -396,7 +451,7 @@ if(buscarReporte){
 
 					var jsonChart={
 						title:{
-							text:titulografico + " " + produc 	
+							text:titulografico + " " + produc
 						},
 						seriesDefaults: {
 					         labels: {
@@ -468,7 +523,7 @@ if(buscarReporte){
 						}
 					}
 
-					});				
+					});
 
 		 		});
 
@@ -477,7 +532,7 @@ if(buscarReporte){
 		a=$(document.createElement("a")).appendTo(div);
 		a.attr("id","export_mosivo_a");
 		span=$(a).append("<span id = 'export_mosivo' title='Exportar Masivo' data-icon ='&#xe009;' aria-hidden = 'true' class = 'icon'></span>").css("display","none");
-		
+
 		span.attr("aria-hidden","true");
 		span.attr("class","icon");
 		span.attr("data-icon",'&#xe009;;');
@@ -494,19 +549,19 @@ if(buscarReporte){
 				producto: filtro_busq.producto,
 				tipoConsulta: filtro_busq.tipoConsulta,
 				nomEmpresa: filtro_busq.acnomcia.replace(","," "),
-				descProducto: filtro_busq.productoDesc				
+				descProducto: filtro_busq.productoDesc
 			}
 			descargarArchivo(datos, base+api+pais+"/reportes/EstadosdeCuentaMasivo", "Generar Comprobante Masivo" );*/
 			$('form#formulario').empty();
-    				$('form#formulario').append('<input type="hidden" name="empresa" value="'+filtro_busq.empresa+'" />');    		
-    				$('form#formulario').append('<input type="hidden" name="fechaInicial" value="'+filtro_busq.fechaInicial+'" />');  
-    				$('form#formulario').append('<input type="hidden" name="fechaFin" value="'+filtro_busq.fechaFin+'" />');  
-    				$('form#formulario').append('<input type="hidden" name="cedula" value="'+filtro_busq.cedula.replace(/ /g,'')+'" />');  
-    				$('form#formulario').append('<input type="hidden" name="paginaActual" value="'+1+'" />');  
-    				$('form#formulario').append('<input type="hidden" name="producto" value="'+filtro_busq.producto+'" />');  
-    				$('form#formulario').append('<input type="hidden" name="tipoConsulta" value="'+filtro_busq.tipoConsulta+'" />');  
-    				$('form#formulario').append('<input type="hidden" name="nomEmpresa" value="'+filtro_busq.acnomcia.replace(","," ")+'" />');  
-    				$('form#formulario').append('<input type="hidden" name="descProducto" value="'+filtro_busq.productoDesc+'" />'); 
+    				$('form#formulario').append('<input type="hidden" name="empresa" value="'+filtro_busq.empresa+'" />');
+    				$('form#formulario').append('<input type="hidden" name="fechaInicial" value="'+filtro_busq.fechaInicial+'" />');
+    				$('form#formulario').append('<input type="hidden" name="fechaFin" value="'+filtro_busq.fechaFin+'" />');
+    				$('form#formulario').append('<input type="hidden" name="cedula" value="'+filtro_busq.cedula.replace(/ /g,'')+'" />');
+    				$('form#formulario').append('<input type="hidden" name="paginaActual" value="'+1+'" />');
+    				$('form#formulario').append('<input type="hidden" name="producto" value="'+filtro_busq.producto+'" />');
+    				$('form#formulario').append('<input type="hidden" name="tipoConsulta" value="'+filtro_busq.tipoConsulta+'" />');
+    				$('form#formulario').append('<input type="hidden" name="nomEmpresa" value="'+filtro_busq.acnomcia.replace(","," ")+'" />');
+    				$('form#formulario').append('<input type="hidden" name="descProducto" value="'+filtro_busq.productoDesc+'" />');
     				$('form#formulario').attr('action',base+api+pais+"/reportes/EstadosdeCuentaMasivo");
     				$('form#formulario').submit()
 
@@ -515,8 +570,8 @@ if(buscarReporte){
 
 }
 		if( !$('.EC-container').hasClass('rpg'+paginaActual) ){
-	
-		 $.each(data.listadoEstadosCuentas,function(posLista,dataitem){	
+
+		 $.each(data.listadoEstadosCuentas,function(posLista,dataitem){
 		 		div=$(document.createElement("div")).appendTo(contenedor);
 		 		div.attr("class","EC-container rpg"+paginaActual);
 		 		div.attr("style","width:650px;margin-top:100px");
@@ -558,8 +613,8 @@ if(buscarReporte){
  				th=$(document.createElement("th")).appendTo(tr);
  				th.html($("#cargo").attr("data"));
  				th.attr("id", "Datos2-short");
-	 			
-	 			tbody=$(document.createElement("tbody")).appendTo(tabla);	
+
+	 			tbody=$(document.createElement("tbody")).appendTo(tabla);
 	 			$.each(dataitem.listaMovimientos,function(posLista,item){
 
 					tr=$(document.createElement("tr")).appendTo(tbody);
@@ -586,9 +641,9 @@ if(buscarReporte){
            						a.attr("fecha",item.fecha);
            						a.attr("referencia",item.referencia);
            						a.attr("descripcion",item.descripcion);
-            					a.attr("monto",item.monto);            			
+            					a.attr("monto",item.monto);
            						a.attr("cliente",item.cliente);
-							
+
 			 				a.attr("title","Generar comprobante de abono");
 			 				a.html(item.monto);
 			 				td.attr("id", "Datos2-short");
@@ -599,7 +654,7 @@ if(buscarReporte){
 	 				});
 
 	 				$("table a").on('click',function(){
-	 					
+
 	 					/*datos = {
 	 						empresa:filtro_busq.empresa,
 	 						fechaInicial:filtro_busq.fechaInicial,
@@ -619,24 +674,24 @@ if(buscarReporte){
 
 	 					descargarArchivo(datos, base+api+pais+"/reportes/EstadosdeCuentaComp", "Generar Comprobante de pago" );*/
 	 					$('form#formulario').empty();
-    				$('form#formulario').append('<input type="hidden" name="empresa" value="'+filtro_busq.empresa+'" />');    		
-    				$('form#formulario').append('<input type="hidden" name="fechaInicial" value="'+filtro_busq.fechaInicial+'" />');  
-    				$('form#formulario').append('<input type="hidden" name="fechaFin" value="'+filtro_busq.fechaFin+'" />');  
-    				$('form#formulario').append('<input type="hidden" name="cedula" value="'+filtro_busq.cedula.replace(/ /g,'')+'" />');  
-    				$('form#formulario').append('<input type="hidden" name="paginaActual" value="'+1+'" />');  
-    				$('form#formulario').append('<input type="hidden" name="producto" value="'+filtro_busq.producto+'" />');  
-    				$('form#formulario').append('<input type="hidden" name="tarjeta" value="'+$(this).attr("tarjeta")+'" />');  
-    				$('form#formulario').append('<input type="hidden" name="fecha" value="'+$(this).attr("fecha")+'" />');  
-    				$('form#formulario').append('<input type="hidden" name="referencia" value="'+$(this).attr("referencia")+'" />');  
-    				$('form#formulario').append('<input type="hidden" name="descripcion" value="'+$(this).attr("descripcion")+'" />'); 
+    				$('form#formulario').append('<input type="hidden" name="empresa" value="'+filtro_busq.empresa+'" />');
+    				$('form#formulario').append('<input type="hidden" name="fechaInicial" value="'+filtro_busq.fechaInicial+'" />');
+    				$('form#formulario').append('<input type="hidden" name="fechaFin" value="'+filtro_busq.fechaFin+'" />');
+    				$('form#formulario').append('<input type="hidden" name="cedula" value="'+filtro_busq.cedula.replace(/ /g,'')+'" />');
+    				$('form#formulario').append('<input type="hidden" name="paginaActual" value="'+1+'" />');
+    				$('form#formulario').append('<input type="hidden" name="producto" value="'+filtro_busq.producto+'" />');
+    				$('form#formulario').append('<input type="hidden" name="tarjeta" value="'+$(this).attr("tarjeta")+'" />');
+    				$('form#formulario').append('<input type="hidden" name="fecha" value="'+$(this).attr("fecha")+'" />');
+    				$('form#formulario').append('<input type="hidden" name="referencia" value="'+$(this).attr("referencia")+'" />');
+    				$('form#formulario').append('<input type="hidden" name="descripcion" value="'+$(this).attr("descripcion")+'" />');
     				$('form#formulario').append('<input type="hidden" name="tipoConsulta" value="'+filtro_busq.tipoConsulta+'" />');
     				$('form#formulario').append('<input type="hidden" name="monto" value="'+$(this).attr("monto")+'" />');
-    				$('form#formulario').append('<input type="hidden" name="nomEmpresa" value="'+filtro_busq.acnomcia.replace(","," ")+'" />');  
-    				$('form#formulario').append('<input type="hidden" name="cliente" value="'+$(this).attr("cliente")+'" />'); 
+    				$('form#formulario').append('<input type="hidden" name="nomEmpresa" value="'+filtro_busq.acnomcia.replace(","," ")+'" />');
+    				$('form#formulario').append('<input type="hidden" name="cliente" value="'+$(this).attr("cliente")+'" />');
     				$('form#formulario').attr('action',base+api+pais+"/reportes/EstadosdeCuentaMasivo");
     				$('form#formulario').submit()
 
-	 					
+
 	 				})
 
 
@@ -651,7 +706,7 @@ if(buscarReporte){
 			 				td.attr("id", "Datos2-short");
 		 				}
 	 				});
-	
+
 
 	 	});
 
@@ -673,15 +728,15 @@ if(buscarReporte){
  				td=$(document.createElement("td")).appendTo(tr);
  				td.html(dataitem.totalCargos);
  				td.attr("id", "Datos3-short");
-			 			
+
 			 	});
 
-			
-			$('#tabla-datos-general tbody tr:even').addClass('even ');  
+
+			$('#tabla-datos-general tbody tr:even').addClass('even ');
 
 			/*
 			if(buscarReporte){
-				
+
 			   paginar(data.totalPaginas, data.pagActual);
 			   buscarReporte=false;
 			}
@@ -689,7 +744,7 @@ if(buscarReporte){
 
 			paginacion(data.totalPaginas, data.pagActual);
 
-			$('#div_tablaDetalle .trpg'+paginaActual).dataTable( { 
+			$('#div_tablaDetalle .trpg'+paginaActual).dataTable( {
 		         "iDisplayLength": 5,
 		         'bDestroy':true,
 		         "bFilter": false,
@@ -737,7 +792,7 @@ if(buscarReporte){
 		 			p.attr("style","text-align:center;padding:10px;font-size:14px");
 		 		}
 			}
-	
+
 
 		});
 }
@@ -752,9 +807,9 @@ function paginar(totalPaginas, paginaActual) {
 				display     : 10,
 				border					: false,
 				text_color  			: '#79B5E3',
-				background_color    	: 'none',	
+				background_color    	: 'none',
 				text_hover_color  		: '#2573AF',
-				background_hover_color	: 'none', 
+				background_hover_color	: 'none',
 				images		: false,
 				mouse		: 'press',
 				onChange     			: function(page){
@@ -765,7 +820,7 @@ function paginar(totalPaginas, paginaActual) {
 											}
 											$('#div_tablaDetalle .EC-container').hide();
 												$('#div_tablaDetalle .rpg'+page).show();
-											
+
 										  }
 			});
 			}
@@ -796,7 +851,7 @@ function paginar(totalPaginas, paginaActual) {
 				id = id.split("_");
 			BuscarEstadosdeCuenta(id[1]);
 		});
-		
+
 		$("#anterior-1").unbind("mouseover");
 		$("#anterior-1").unbind("mouseout");
 		$("#anterior-1").mouseover(function(){
@@ -871,9 +926,9 @@ function descargarArchivo(datos, url, titulo){
     			$aux.dialog('destroy')
     			if(!data.ERROR){
     				$('form#formulario').empty();
-    				$('form#formulario').append('<input type="hidden" name="bytes" value="'+JSON.stringify(data.bytes)+'" />');    		
-    				$('form#formulario').append('<input type="hidden" name="ext" value="'+data.ext+'" />');  
-    				$('form#formulario').append('<input type="hidden" name="nombreArchivo" value="'+data.nombreArchivo+'" />');  
+    				$('form#formulario').append('<input type="hidden" name="bytes" value="'+JSON.stringify(data.bytes)+'" />');
+    				$('form#formulario').append('<input type="hidden" name="ext" value="'+data.ext+'" />');
+    				$('form#formulario').append('<input type="hidden" name="nombreArchivo" value="'+data.nombreArchivo+'" />');
     				$('form#formulario').attr('action',base+'/'+pais+"/file");
     				$('form#formulario').submit()
     			}else{
@@ -881,9 +936,9 @@ function descargarArchivo(datos, url, titulo){
     					alert('Usuario actualmente desconectado');
 						location.reload();
     				}else{
-    					notificacion(titulo,data.ERROR)	
+    					notificacion(titulo,data.ERROR)
     				}
-    				
+
     			}
     		})
 

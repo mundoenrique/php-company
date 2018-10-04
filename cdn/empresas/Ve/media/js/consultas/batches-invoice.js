@@ -68,19 +68,20 @@ $(function() {
 		var noData = $(this).hasClass('disabled');
 
 		if(!noData) {
-			var uri = '/consulta/servicio', method = 'GET', action = 'GetBatchesByInvoice';
+			var uri = '/consulta/servicio', method = 'GET', action = 'GetBatchesByInvoice',
+			scheme = 'additional_inquiries', data = 'report';
 			var preload = $('#loading').html();
 			$('.down-report').hide();
 			$('.dt-buttons')
 			.append('<div id="load-report" class="loading">'+preload+'</div>')
 			.fadeIn('1000');
-			callService(uri, method, action, function(response) {
+			callService(uri, method, action, scheme, data, function(response) {
 				if(response.code === 0) {
 					uri = '/reportes/eliminar', method = 'POST', action = response.msg.file;
 
 					window.location.href = response.msg.url + response.msg.file;
 
-					callService(uri, method, action, function(response) {
+					callService(uri, method, action, scheme, data, function(response) {
 					});
 
 				} else {
@@ -96,11 +97,11 @@ $(function() {
 
 });
 
-function callService(uri,method, action, _response_) {
+function callService(uri, method, action, scheme, data, _response_) {
 	$.ajax({
 		url: baseURL+isoPais+uri,
 		type: method,
-		data: {way: action},
+		data: {way: action, class: scheme, data:data},
 		datatype: 'JSON',
 	}).done(function(response) {
 		_response_(response);
