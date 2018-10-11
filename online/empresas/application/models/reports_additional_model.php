@@ -283,7 +283,7 @@ class reports_additional_model extends CI_Model {
 			$jsonResponse = np_Hoplite_Decrypt($response);
 			$responseServ =  json_decode(utf8_encode($jsonResponse));
 
-			log_message('INFO', '--[' . $this->userName . '] RESPONSEE Descarga archivo: ' . json_encode($responseServ));
+			log_message('INFO', '--[' . $this->userName . '] RESPONSE Descarga archivo: ' . json_encode($responseServ));
 
 			$title = lang('SYSTEM_NAME');
 			switch($responseServ->rc) {
@@ -300,11 +300,11 @@ class reports_additional_model extends CI_Model {
 				case -29:
 				case -61:
 					$code = 2;
-					$msg = lang('ERROR_(-29)');
+					$msg = lang('ERROR_GENERICO_USER');
 					break;
 				default:
 					$code =  3;
-					$msg = lang('ERROR_(-29)');
+					$msg = lang('ERROR_GENERICO_USER');
 			}
 
 

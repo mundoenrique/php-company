@@ -156,7 +156,6 @@ class additional_inquiries extends CI_Controller
 
 	public function callWebService()
 	{
-		log_message('info','Llegooooo a callWebServiceeeeeeeeee');
 		$method = 'callWs'.$this->input->get('way');
 		$model = $this->input->get('class').'_model';
 		$dataRequest = $this->input->get('data');
