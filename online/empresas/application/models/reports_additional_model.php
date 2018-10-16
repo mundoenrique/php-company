@@ -295,7 +295,8 @@ class reports_additional_model extends CI_Model {
 					];
 					break;
 				case -150:
-					$code = 0;
+					$code = 4;
+					$msg = lang('ERROR_(-150)');
 					break;
 				case -29:
 				case -61:

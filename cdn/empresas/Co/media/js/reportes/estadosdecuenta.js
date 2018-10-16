@@ -3,6 +3,7 @@
 //---------------------------------------------------------
 var path =window.location.href.split( '/' );
 var base = path[0]+ "//" +path[2]+'/'+path[3];
+var baseCDN=base.replace(/online.novopayment.net/g, 'cdn.novopayment.net');
 var pais = path[4];
 var api = "/api/v1/";
 var scroll_interval;
@@ -191,7 +192,7 @@ $( "#fecha_ini" ).datepicker({
 			rezise: false,
 			open: function(event, ui) {
 				$('.ui-dialog-titlebar-close', ui.dialog).hide();
-				$('#msg-info').append('<p>' + msg + '</p>');
+				$('#msg-info').html('<p>' + msg + '</p>');
 			}
 		});
 		$('#close-info').on('click', function(){
@@ -202,6 +203,8 @@ $( "#fecha_ini" ).datepicker({
 					break;
 				case 2:
 					window.location.replace(base+'/'+pais+ '/logout');
+					break;
+				default:
 					break;
 			}
 		});
@@ -221,6 +224,8 @@ $( "#fecha_ini" ).datepicker({
 				descProducto: filtro_busq.productoDesc,
 				operacion: operation
 			};
+			$("#view-results").css( "display", "none" );
+			$("#download-file").fadeIn("slow");
 			callServiceReports(uri, method, action, scheme, data, function(response){
 				if(response.code === 0) {
 					uri = base+'/'+pais+'/reportes/eliminar', method = 'POST', action = response.msg.file;
@@ -231,9 +236,13 @@ $( "#fecha_ini" ).datepicker({
 					}
 
 					callServiceReports(uri, method, action, scheme, data, function(response) {
+						$("#download-file").css( "display", "none" );
+						$("#view-results").css( "display", "block" );
 					});
 
 				} else {
+					$("#download-file").css( "display", "none" );
+					$("#view-results").css( "display", "block" );
 					msgSystemrepor(response.code, response.title, response.msg);
 				}
 			})
@@ -487,14 +496,14 @@ if(buscarReporte){
 		span.click(function(){
 			downloadReport('generarComprobante');
 		});
-
+		$("#view-results").after('<img id="download-file" style="display:none;width: 25px; margin-left:10px" src="'+baseCDN+'/'+pais+'/media/img/loading.gif"/>')
 }
 		if( !$('.EC-container').hasClass('rpg'+paginaActual) ){
 
 		 $.each(data.listadoEstadosCuentas,function(posLista,dataitem){
 		 		div=$(document.createElement("div")).appendTo(contenedor);
 		 		div.attr("class","EC-container rpg"+paginaActual);
-		 		div.attr("style","width:650px;margin-top:100px");
+		 		div.attr("style","width:650px");
  				tabla=$(document.createElement("table")).appendTo(div);
  				tabla.attr("id","tabla-datos-general");
  				tabla.attr("class","tabla-reportes trpg"+paginaActual);

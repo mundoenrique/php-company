@@ -3,6 +3,7 @@
 //---------------------------------------------------------
 var path =window.location.href.split( '/' );
 var base = path[0]+ "//" +path[2]+'/'+path[3];
+var baseCDN=base.replace(/online.novopayment.net/g, 'cdn.novopayment.net');
 var pais = path[4];
 var api = "/api/v1/";
 var scroll_interval;
@@ -191,7 +192,7 @@ $(document).ready(function() {
 			rezise: false,
 			open: function(event, ui) {
 				$('.ui-dialog-titlebar-close', ui.dialog).hide();
-				$('#msg-info').append('<p>' + msg + '</p>');
+				$('#msg-info').html('<p>' + msg + '</p>');
 			}
 		});
 		$('#close-info').on('click', function(){
@@ -203,6 +204,8 @@ $(document).ready(function() {
 					break;
 				case 2:
 					window.location.replace(base+'/'+pais+'/logout');
+					break;
+				default:
 					break;
 			}
 		});
@@ -223,7 +226,10 @@ $(document).ready(function() {
 				descProducto: filtro_busq.productoDesc,
 				operacion: operation
 			};
+			$("#view-results").css( "display", "none" );
+			$("#download-file").fadeIn("slow");
 			callServiceReports(uri, method, action, scheme, data, function(response){
+
 				if(response.code === 0) {
 					uri = base+'/'+pais+'/reportes/eliminar', method = 'POST', action = response.msg.file;
 					if(response.msg.file.slice(-3)==='xls'){
@@ -233,10 +239,14 @@ $(document).ready(function() {
 					}
 
 					callServiceReports(uri, method, action, scheme, data, function(response) {
+						$("#download-file").css( "display", "none" );
+						$("#view-results").css( "display", "block" );
 					});
 
 				} else {
-					response.code=2;
+					$("#download-file").css( "display", "none" );
+					$("#view-results").css( "display", "block" );
+
 					msgSystemrepor(response.code, response.title, response.msg);
 				}
 			})
@@ -358,11 +368,11 @@ if(buscarReporte){
 		a=$(document.createElement("a")).appendTo(div);
 		a.attr("id","export_pdf_a");
 		span=$(a).append("<span id = 'export_pdf' title='Exportar a PDF' data-icon ='&#xe02e;' aria-hidden = 'true' class = 'icon'></span>");
-
 		span.attr("aria-hidden","true");
 		span.attr("class","icon");
 		span.attr("data-icon",'&#xe02e;');
 		span.attr("title","Exportar a PDF");
+
 		span.click(function(){
 			downloadReport('generaArchivoPDF');
 		});
@@ -488,14 +498,14 @@ if(buscarReporte){
 		span.click(function(){
 			downloadReport('generarComprobante');
 		});
-
+		$("#view-results").after('<img id="download-file" style="display:none;width: 25px; margin-left:10px" src="'+baseCDN+'/'+pais+'/media/img/loading.gif"/>')
 }
 		if( !$('.EC-container').hasClass('rpg'+paginaActual) ){
 
 		 $.each(data.listadoEstadosCuentas,function(posLista,dataitem){
 		 		div=$(document.createElement("div")).appendTo(contenedor);
 		 		div.attr("class","EC-container rpg"+paginaActual);
-		 		div.attr("style","width:650px;margin-top:100px");
+		 		div.attr("style","width:650px;");
  				tabla=$(document.createElement("table")).appendTo(div);
  				tabla.attr("id","tabla-datos-general");
  				tabla.attr("class","tabla-reportes trpg"+paginaActual);
