@@ -4889,6 +4889,10 @@ border-right:2px solid $color-base2!important;
   background: #f5921e;
 }
 
+.icon-batchs-purple{
+	background: #673ab7;
+}
+
 #text-batchs {
   float: left;
   height: auto;
@@ -5434,6 +5438,12 @@ li#select-empresa select {
   border-right: 1px dotted #bbb;
   margin-right: 5px;
 }
+
+#lotesConfirmacion-3>div{
+	width: 100% !important;
+	border:none !important;
+}
+
 #lotesConfirmacion-long h5 {
   font-weight: bold;
 }

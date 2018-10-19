@@ -31,10 +31,10 @@ log_message('info',json_encode($data));
 			<a rel="section"><?php echo lang('POSITION_CONFIRM') ?></a>
 		</li>
 	</ol>
-	
 
 
-	
+
+
 	<div id="lotes-general">
 
 
@@ -48,7 +48,7 @@ log_message('info',json_encode($data));
 				<?php echo lang('TITULO_LOTES_CONFIRMACIONT'); ?>
 			</div>
 			<div id="lotes-contenedor">
-				
+
 				<div id="lotesConfirmacion-1">
 					<div id="lotesConfirmacion-long">
 						<h5><?php echo lang('ID_FISCAL') ?></h5>
@@ -81,70 +81,70 @@ log_message('info',json_encode($data));
 				<div id="lotesConfirmacion-3">
 					<div id="lotesConfirmacion-long">
 						<h5><?php echo lang('TABLA_LOTESPA_OBSERVACIONES') ?></h5>
-						<?php 
+						<?php
 							if( count($info->mensajes) > 0 ){
-								foreach ($info->mensajes as $msj) {
-									echo "<p>Lote nro: $msj->detalle</p>";
-									echo "<p>$msj->linea, $msj->mensaje</p>";									
-								}								
+								foreach ($info->mensajes as $errores) {
+									echo "<p>Linea: $errores->linea, $errores->mensaje ($errores->detalle)</p>";
+								}
 							}else{
 								echo "<p>".$data[0]->msg."</p>";
 							}
-						?>						
+						?>
+
 					</div>
 					<?
 					if( count($info->conceptosDinamicos) > 0 ){
 					?>
-					
-						<h5 class="conceptDinam-h5"><?php echo "Concepto dinámico: " ?></h5>					
+
+						<h5 class="conceptDinam-h5"><?php echo "Concepto dinámico: " ?></h5>
 						<select id="conceptoDinamico" name="conceptoDinamico">
-							
+
 							<?php
 								foreach ($info->conceptosDinamicos as $conceptos) {
-									echo "<option value='$conceptos->idConcepto'>$conceptos->concepto</option>"; 
+									echo "<option value='$conceptos->idConcepto'>$conceptos->concepto</option>";
 								}
 							?>
 
 						</select>
-				
+
 					<?php } ?>
 
 				</div>
-				<?php 
+				<?php
 						if( count($info->lineasEmbozo1) > 0 ){
 					?>
 				<div id="lotesConfirmacion-1">
 
-									
+
 
 					<div >
 						<h5><?php echo lang('TABLA_LOTESPA_LINEAEMBOZO1') ?></h5>
 						<select id="embozo1" name="embozo1">
-							
+
 							<?php
 								foreach ($info->lineasEmbozo1 as $embozo1) {
-									echo "<option value='$embozo1->idEmbozo'>".ucwords(mb_strtolower($embozo1->textoEmbozo))."</option>"; 
+									echo "<option value='$embozo1->idEmbozo'>".ucwords(mb_strtolower($embozo1->textoEmbozo))."</option>";
 								}
 							?>
 
 						</select>
 					</div>
 					<div id="lotesConfirmacion-short">
-						<h5><?php echo lang('TABLA_LOTESPA_LINEAEMBOZO2') ?></h5>					
+						<h5><?php echo lang('TABLA_LOTESPA_LINEAEMBOZO2') ?></h5>
 						<select id="embozo2" name="embozo2">
-							
+
 							<?php
 								foreach ($info->lineasEmbozo2 as $embozo2) {
-									echo "<option value='$embozo2->idEmbozo'>".ucwords(mb_strtolower($embozo2->textoEmbozo))."</option>"; 
+									echo "<option value='$embozo2->idEmbozo'>".ucwords(mb_strtolower($embozo2->textoEmbozo))."</option>";
 								}
 							?>
 
 						</select>
-					</div>					
-					
-					
+					</div>
+
+
 				</div>
-				<?php			
+				<?php
 						}
 					?>
 			</div>
@@ -159,10 +159,10 @@ log_message('info',json_encode($data));
 
 				<input id="idTipoLote" type="hidden" name="idTipoLote" value='<?php echo $info->idTipoLote ?>'/>
 
-				
+
 			</div>
 
-			<?php 
+			<?php
 				}else{
 					if($data[0]['ERROR']=='-29'){
 						echo "<script>alert('Usuario actualmente desconectado'); location.reload();</script>";
@@ -172,7 +172,7 @@ log_message('info',json_encode($data));
 				<h2 style="text-align:center">'.$data[0]['ERROR'].'</h2>
 				</div>';
 				}
-			?>			
+			?>
 
 	</div>
 
