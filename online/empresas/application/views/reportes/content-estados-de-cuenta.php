@@ -49,7 +49,7 @@ $urlCdn = get_cdn();
 						<h5><?php echo lang('DEPOSITOS_FECHA'); ?></h5>
 						<span>
 
-						<input id = "fecha_ini" class="required login fecha" type="text" placeholder="Dia/Mes/Año" value="" onFocus="javascript:this.value=''"/>
+						<input id = "fecha_ini" class="required login fecha" type="text" placeholder="Mes/Año" value="" onFocus="javascript:this.value=''"/>
 						<input id = "repEstadosDeCuenta_fecha_ini" class="required login fecha" type="hidden" placeholder="Mes/Año" value="" onFocus="javascript:this.value=''"/>
 						</span>
 						<span>

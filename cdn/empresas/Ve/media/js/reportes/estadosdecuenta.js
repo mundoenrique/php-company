@@ -89,12 +89,13 @@ $(document).ready(function() {
 			defaultDate: "+1w",
 			changeMonth: true,
 			changeYear: true,
-			dateFormat:"dd/mm/yy",
+			dateFormat:"mm/yy",
 			numberOfMonths: 1,
 			maxDate: "+0D",
 			onSelect: function( selectedDate,ins ) {
-				$( "#repEstadosDeCuenta_fecha_fin" ).val(selectedDate);
-				$( "#repEstadosDeCuenta_fecha_ini" ).val(selectedDate);
+				fin = new Date(ins.selectedYear, ins.selectedMonth+1, 0);
+				$( "#repEstadosDeCuenta_fecha_fin" ).val(fin.getDate()+'/'+(fin.getMonth()+1)+'/'+fin.getFullYear());
+				$( "#repEstadosDeCuenta_fecha_ini" ).val('01/'+(fin.getMonth()+1)+'/'+fin.getFullYear());
 			}
 		});
 
