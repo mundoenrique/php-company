@@ -305,7 +305,7 @@ class reports_additional_model extends CI_Model {
 					break;
 				default:
 					$code =  3;
-					$msg = lang('ERROR_GENERICO_USER');
+					$msg = lang('ERROR_('.$responseServ->rc.')');
 			}
 
 
