@@ -48,7 +48,7 @@ $urlCdn = get_cdn();
 					<div id="search-1">
 						<h5><?php echo lang('DEPOSITOS_FECHA'); ?></h5>
 						<span>
-						<?php  if($pais=='Ve' || $pais=='Pe'){?>
+						<?php  if($pais=='Ve' || $pais=='Pe' || $pais=='Usd'){?>
 							<input id = "fecha_ini" class="required login fecha" type="text" placeholder="Mes/Año" value="" onFocus="javascript:this.value=''"/>
 							<input id = "repEstadosDeCuenta_fecha_ini" class="required login fecha" type="hidden" placeholder="Mes/Año" value="" onFocus="javascript:this.value=''"/>
 						<?php }else{?>
