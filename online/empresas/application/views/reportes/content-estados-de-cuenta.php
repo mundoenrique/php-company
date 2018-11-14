@@ -31,10 +31,10 @@ $urlCdn = get_cdn();
 					</a>
 				</li>
 			</ol>
-	
-			
+
+
 	<div id="lotes-general">
-				
+
 				<div id="top-batchs"><span aria-hidden="true" class="icon" data-icon="&#xe07a;"></span><?php echo lang('CRITERIOS_BUSQUEDA'); ?>
 					</div>
 				<div id="lotes-contenedor">
@@ -48,9 +48,13 @@ $urlCdn = get_cdn();
 					<div id="search-1">
 						<h5><?php echo lang('DEPOSITOS_FECHA'); ?></h5>
 						<span>
-						<p><?php echo lang('REPORTES_SELECCION_MESAÑO'); ?></p>
-						<input id = "fecha_ini" class="required login fecha" type="text" placeholder="Mes/Año" value="" onFocus="javascript:this.value=''"/>
-						<input id = "repEstadosDeCuenta_fecha_ini" class="required login fecha" type="hidden" placeholder="Mes/Año" value="" onFocus="javascript:this.value=''"/>
+						<?php  if($pais=='Ve' || $pais=='Pe' || $pais=='Usd'){?>
+							<input id = "fecha_ini" class="required login fecha" type="text" placeholder="Mes/Año" value="" onFocus="javascript:this.value=''"/>
+							<input id = "repEstadosDeCuenta_fecha_ini" class="required login fecha" type="hidden" placeholder="Mes/Año" value="" onFocus="javascript:this.value=''"/>
+						<?php }else{?>
+							<input id = "fecha_ini" class="required login fecha" type="text" placeholder="Dia/Mes/Año" value="" onFocus="javascript:this.value=''"/>
+							<input id = "repEstadosDeCuenta_fecha_ini" class="required login fecha" type="hidden" placeholder="Dia/Mes/Año" value="" onFocus="javascript:this.value=''"/>
+						<?php }?>
 						</span>
 						<span>
 						<!-- <p><?php echo lang('TITULO_REPORTES_FECHAFIN'); ?></p> -->
@@ -75,9 +79,9 @@ $urlCdn = get_cdn();
 							<input disabled id = "repEstadosDeCuenta_dni" class="bloqued cedula required nro" type="text" name="Ingrese ID" >
 						</span>
 					</div>
-					
 
-					
+
+
 				</div>
 				</div>
 				<div id="batchs-last">
@@ -85,11 +89,11 @@ $urlCdn = get_cdn();
 						<button id = "repEstadosDeCuenta_btnBuscar" type="submit"><?php echo lang('REPORTE_BOTON_BUSCAR'); ?>
 						</button>
 				</div>
-			 
+
 			<div id = "cargando" style = "display:none"><h2 style="text-align:center"><?php echo lang('CARGANDO'); ?></h2><img style="display:block; margin-left:auto; margin-right:auto" src="<?php echo $urlCdn."media/img/loading.gif"?>"/></div>
-			<input id="titulografico" type='hidden' data='<?php echo lang('TITULO_ESTADOS_DE_CUENTA'); ?>'/> 
-			<input id="modeda" type='hidden' data='<?php echo lang('MONEDA'); ?>'/> 
-			<input id="abono" type='hidden' data='<?php echo lang('ABONO'); ?>'/> 
+			<input id="titulografico" type='hidden' data='<?php echo lang('TITULO_ESTADOS_DE_CUENTA'); ?>'/>
+			<input id="modeda" type='hidden' data='<?php echo lang('MONEDA'); ?>'/>
+			<input id="abono" type='hidden' data='<?php echo lang('ABONO'); ?>'/>
 			<input id="cargo" type='hidden' data='<?php echo lang('CARGO'); ?>'/>
 			<div id = "chart" style="display:none"></div>
 
@@ -126,9 +130,9 @@ $urlCdn = get_cdn();
                 </nav>
             </div>
 
-			<input id="titulografico" type='hidden' data='<?php echo lang('TITULO_GRAFICO_EC'); ?>'/> 
-			<input id="moneda" type='hidden' data='<?php echo lang('MONEDA'); ?>'/> 
-			<input id="abono" type='hidden' data='<?php echo lang('ABONO'); ?>'/> 
+			<input id="titulografico" type='hidden' data='<?php echo lang('TITULO_GRAFICO_EC'); ?>'/>
+			<input id="moneda" type='hidden' data='<?php echo lang('MONEDA'); ?>'/>
+			<input id="abono" type='hidden' data='<?php echo lang('ABONO'); ?>'/>
 			<input id="cargo" type='hidden' data='<?php echo lang('CARGO'); ?>'/>
 			<input id="cedula" type='hidden' data='<?php echo lang('ID_PERSONA'); ?>: '/>
 			<input id="cuenta" type='hidden' data='<?php echo lang('CUENTA_ESTADOS_DE_CUENTA'); ?>'/>

@@ -245,4 +245,80 @@ class reports_additional_model extends CI_Model {
 			'msg' => isset($msg) ? $msg : '',
 		];
 	}
+
+	public function callWsGetStatesAccount($payload){
+		$modulo    ="reportes";
+		$function  =$payload['operacion'];
+		$operation =$payload['operacion'];
+		$className ="com.novo.objects.MO.EstadoCuentaMO";
+		$token = $this->session->userdata('token');
+
+		$logAcceso = np_hoplite_log($this->sessionId,$this->userName,$this->canal,$modulo,$function,$operation,0,$this->ip,$this->timeLog);
+		$load = json_encode($payload,JSON_UNESCAPED_UNICODE);
+		log_message('INFO', '--[' . $this->userName . '] Datos a se enviados: ' . $load);
+		$data= array(
+			"pais"=> $this->pais, //falta
+			"idOperation"=> $operation,
+			"className"=> $className,
+			"idExtEmp"=> $payload['empresa'],
+			"idExtPer"=> $payload['cedula'],
+			"fechaIni"=> $payload['fechaInicial'],
+			"fechaFin"=> $payload['fechaFin'],
+			"tamanoPagina"=> "5",
+			"pagActual"=> $payload['paginaActual'],
+			"prefix"=> $payload['producto'],
+			"tipoConsulta"=> $payload['tipoConsulta'],
+			"paginar"=> "false",
+			"nombreEmpresa"=>$payload['nomEmpresa'],
+			"descProducto" => $payload['descProducto'],
+			"logAccesoObject"=>$logAcceso,
+			"token"=>$token
+			);
+
+			$data = json_encode($data,JSON_UNESCAPED_UNICODE);
+			log_message('INFO', '--[' . $this->userName . '] REEQUEST Descarga archivo: ' . $data);
+			$dataEncry = np_Hoplite_Encryption($data);
+			$data = json_encode(['bean' => $dataEncry, 'pais' => $this->pais] );
+			$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+			$jsonResponse = np_Hoplite_Decrypt($response);
+			$responseServ =  json_decode(utf8_encode($jsonResponse));
+
+			log_message('INFO', '--[' . $this->userName . '] RESPONSE Descarga archivo: ' . json_encode($responseServ));
+
+			$title = lang('SYSTEM_NAME');
+			switch($responseServ->rc) {
+				case 0:
+					$code = 0;
+					$msg = [
+						'url' => $this->config->item('base_url_cdn').'downloads/reports/',
+						'file' => $responseServ->nombre
+					];
+					break;
+				case -150:
+					$code = 4;
+					$msg = lang('ERROR_(-150)');
+					break;
+				case -29:
+				case -61:
+					$code = 2;
+					$msg = lang('ERROR_GENERICO_USER');
+					break;
+				default:
+					$code =  3;
+					$msg = lang('ERROR_('.$responseServ->rc.')');
+			}
+
+
+			if($code === 2) {
+				$this->session->sess_destroy();
+				$this->session->unset_userdata($this->session->all_userdata());
+			}
+
+			return $response = [
+				'code' => $code,
+				'title' => $title,
+				'msg' => isset($msg) ? $msg : '',
+			];
+
+	}
 }

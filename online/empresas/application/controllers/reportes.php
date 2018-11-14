@@ -3596,7 +3596,7 @@ class Reportes extends CI_Controller {
         if($paisS==$urlCountry && $logged_in && $moduloAct!==false){
             $nombreCompleto = $this->session->userdata('nombreCompleto');
             $lastSessionD = $this->session->userdata('lastSession');
-            $FooterCustomInsertJS=["jquery-1.10.2.min.js","jquery-ui-1.10.3.custom.min.js","reportes/estadosdecuenta.js","kendo.dataviz.min.js","jquery.paginate.js","header.js","jquery.balloon.min.js","jquery.dataTables.min.js"];
+            $FooterCustomInsertJS=["jquery-1.10.2.min.js","jquery-ui-1.10.3.custom.min.js","reportes/download-reports.js","reportes/estadosdecuenta.js","kendo.dataviz.min.js","jquery.paginate.js","header.js","jquery.balloon.min.js","jquery.dataTables.min.js"];
             $FooterCustomJS="";
             $titlePage="Conexión Empresas Online - Reportes";
 
@@ -3719,7 +3719,7 @@ class Reportes extends CI_Controller {
             );
 
         $data = json_encode($data,JSON_UNESCAPED_UNICODE);
-
+				log_message('debug','RequestEstadosDeCuenta '.$data);
         $dataEncry = np_Hoplite_Encryption($data);
         $data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
         $data = json_encode($data);
@@ -3729,7 +3729,7 @@ class Reportes extends CI_Controller {
         $response =  json_decode(utf8_encode($jsonResponse));
 
         if($response){
-            log_message('info','EstadosDeCuenta '.$response->rc."/".$response->msg);
+            log_message('debug','ResponseEstadosDeCuenta '.$response->rc."/".$response->msg);
             if($response->rc==0){
                 return $response;
             }else{
