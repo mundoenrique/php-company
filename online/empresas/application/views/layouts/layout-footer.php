@@ -79,12 +79,6 @@ $pais=$this->session->userdata('pais');
 			</div>
 		</div>
 	</footer>
-	<div id="msg-general" style="display:none">
-		<div id="msg-info" class="comb-content"></div>
-		<div id="actions" class="comb-content actions-buttons">
-			<button id="close-info" class="buttons-action"><?= lang('TAG_ACCEPT') ?></button>
-		</div>
-	</div>
 <?php if($FooterCustomInsertJSActive){?>
 	<?php
 	foreach ($FooterCustomInsertJS as $key) {

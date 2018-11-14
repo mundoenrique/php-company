@@ -157,10 +157,8 @@ class additional_inquiries extends CI_Controller
 	public function callWebService()
 	{
 		$method = 'callWs'.$this->input->get('way');
-		$model = $this->input->get('class').'_model';
-		$dataRequest = $this->input->get('data');
-		$this->load->model($model, 'report');
-		$response = $this->report->$method($dataRequest);
+		$this->load->model('additional_inquiries_model', 'report');
+		$response = $this->report->callWsGetBatchesByInvoice('report');
 		$this->output->set_content_type('application/json')->set_output(json_encode($response));
 	}
 
