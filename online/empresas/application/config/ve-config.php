@@ -37,7 +37,7 @@ $config['urlAPIContent'] = '172.24.6.123:3000/';
 */
 
 //RUTA BASE PARA ARCHIVOS CDN  Ejemplo: https://cdn.novopayment.dev/empresas/Ve/
-$config['base_url_cdn'] = 'https://cdn.novopayment.net/'.$config['routes_base'];
+$config['base_url_cdn'] = BASE_CDN_URL.$config['routes_base'];
 
 //USUARIO Y PASSWORD PARA SFTP PASO DE LOTES
 $config['LOTES_USERPASS'] = 'npdaemon:#.3Nv!!';
@@ -49,7 +49,7 @@ $config['URL_TEMPLOTES'] = 'sftp://172.24.6.130:22/home/npdaemon/'.$config['coun
 $config['FOLDER_UPLOAD_LOTES'] = '/opt/httpd-2.4.4/vhost/cdn/'.$config['system_name'].'/'.$config['country'].'/bash/';
 
 //PATH CARPETA BASE CDN DEL PAÍS
-$config['CDN'] = '/opt/httpd-2.4.4/vhost/cdn/'.$config['routes_base'];
+$config['CDN'] = BASE_CDN_PATH.$config['routes_base'];
 
 
 /*
@@ -59,7 +59,7 @@ $config['CDN'] = '/opt/httpd-2.4.4/vhost/cdn/'.$config['routes_base'];
 */
 
 //DOMINIO PRINCIPAL DEL SISTEMA
-$config['base_url']	= 'https://online.novopayment.net/'.$config['system_name'].'/';
+$config['base_url']	= BASE_URL.$config['system_name'].'/';
 
 //CEO VERSIÓN ANTERIOR
 $config['oldEOL_url'] = 'https://online.plata.com.ve/eolweb/loginContent.jsp';

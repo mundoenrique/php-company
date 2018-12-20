@@ -41,6 +41,18 @@ define('URL_TEMPLOTES', 'sftp://180.180.159.26:22/u01/app/data/lotes/temp/');
 
 define('MAX_FIELD_LENGTH', 15);
 
+/*
+|--------------------------------------------------------------------------
+| Environment variables
+|--------------------------------------------------------------------------
+|
+| Constants expected as environment variables on the instance to be used
+| as part of global configuration settings.
+|
+*/
+define('BASE_URL', $_SERVER['BASE_URL']);
+define('BASE_CDN_URL', $_SERVER['BASE_CDN_URL']);
+define('BASE_CDN_PATH', $_SERVER['BASE_CDN_PATH']);
 
 /* End of file constants.php */
 /* Location: ./application/config/constants.php */

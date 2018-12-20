@@ -30,7 +30,7 @@ $config['client_secret'] = 'f2ca416fb52cdf4f21406a5d9ca6b16f';
 */
 
 //RUTA BASE PARA ARCHIVOS CDN  Ejemplo: https://cdn.novopayment.dev/empresas/Usd/
-$config['base_url_cdn'] = 'https://cdn.novopayment.dev/'.$config['routes_base'];
+$config['base_url_cdn'] = BASE_CDN_URL.$config['routes_base'];
 
 //USUARIO Y PASSWORD PARA SFTP PASO DE LOTES
 $config['LOTES_USERPASS'] = 'phpcarga:phpC4rg4';
@@ -42,7 +42,7 @@ $config['URL_TEMPLOTES'] = 'sftp://172.24.6.102:22/u01/app/data/lotes/temp/'.$co
 $config['FOLDER_UPLOAD_LOTES'] = '/opt/httpd-2.4.4/vhost/cdn/'.$config['routes_base'].'bash/';
 
 //PATH CARPETA BASE CDN DEL PAÍS
-$config['CDN'] = '/opt/httpd-2.4.4/vhost/cdn/'.$config['routes_base'];
+$config['CDN'] = BASE_CDN_PATH.$config['routes_base'];
 
 
 /*
@@ -52,7 +52,7 @@ $config['CDN'] = '/opt/httpd-2.4.4/vhost/cdn/'.$config['routes_base'];
 */
 
 //DOMINIO PRINCIPAL DEL SISTEMA
-$config['base_url']	= 'https://online.novopayment.dev/'.$config['system_name'].'/';
+$config['base_url']	= BASE_URL.$config['system_name'].'/';
 
 //CEO VERSIÓN ANTERIOR
 $config['oldEOL_url'] = 'https://online.miplata.com.pe/eolwebUSD/loginContent.jsp';
