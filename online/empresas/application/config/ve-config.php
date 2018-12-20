@@ -7,7 +7,7 @@ $config['country']='Ve';
 
 $config['system_name']='empresas';
 
-$config['routes_base']=$config['country'].'/';
+$config['routes_base']=$config['system_name'].'/'.$config['country'].'/';
 
 //KeyNovo - Llave para Encriptar y Desencriptar
 $config['keyNovo']= base64_decode('dGVzdDEyMzQ=');
@@ -37,7 +37,7 @@ $config['urlAPIContent'] = '172.24.6.123:3000/';
 */
 
 //RUTA BASE PARA ARCHIVOS CDN  Ejemplo: https://cdn.novopayment.dev/empresas/Ve/
-$config['base_url_cdn'] = BASE_CDN_URL.$config['routes_base'];
+$config['base_url_cdn'] =  BASE_CDN_URL.$config['routes_base'];
 
 //USUARIO Y PASSWORD PARA SFTP PASO DE LOTES
 $config['LOTES_USERPASS'] = 'npdaemon:#.3Nv!!';
@@ -59,7 +59,7 @@ $config['CDN'] = BASE_CDN_PATH.$config['routes_base'];
 */
 
 //DOMINIO PRINCIPAL DEL SISTEMA
-$config['base_url']	= BASE_URL.$config['system_name'].'/';
+$config['base_url']	= BASE_URL;
 
 //CEO VERSIÓN ANTERIOR
 $config['oldEOL_url'] = 'https://online.plata.com.ve/eolweb/loginContent.jsp';

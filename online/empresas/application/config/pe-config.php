@@ -7,7 +7,7 @@ $config['country']='Pe';
 
 $config['system_name']='empresas';
 
-$config['routes_base']=$config['country'].'/';
+$config['routes_base']=$config['system_name'].'/'.$config['country'].'/';
 
 //KeyNovo - Llave para Encriptar y Desencriptar
 $config['keyNovo']= base64_decode('dGVzdDEyMzQ=');
@@ -52,7 +52,7 @@ $config['CDN'] = BASE_CDN_PATH.$config['routes_base'];
 */
 
 //DOMINIO PRINCIPAL DEL SISTEMA
-$config['base_url']	= BASE_URL.$config['system_name'].'/';
+$config['base_url']	= BASE_URL;
 
 //CEO VERSIÓN ANTERIOR
 $config['oldEOL_url'] = ' https://online.miplata.com.pe/eolweb/loginContent.jsp';

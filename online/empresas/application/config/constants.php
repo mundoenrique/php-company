@@ -54,5 +54,6 @@ define('BASE_URL', $_SERVER['BASE_URL']);
 define('BASE_CDN_URL', $_SERVER['BASE_CDN_URL']);
 define('BASE_CDN_PATH', $_SERVER['BASE_CDN_PATH']);
 
+
 /* End of file constants.php */
 /* Location: ./application/config/constants.php */
