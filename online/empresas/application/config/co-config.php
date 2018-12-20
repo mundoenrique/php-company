@@ -7,7 +7,7 @@ $config['country']='Co';
 
 $config['system_name']='empresas';
 
-$config['routes_base']=$config['system_name'].'/'.$config['country'].'/';
+$config['routes_base']=$config['country'].'/';
 
 //KeyNovo - Llave para Encriptar y Desencriptar
 $config['keyNovo']= base64_decode('dGVzdDEyMzQ=');

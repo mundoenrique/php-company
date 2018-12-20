@@ -16,7 +16,7 @@
 |
 */
 $config['keyNovo']= base64_decode('dGVzdDEyMzQ=');
-$config['base_url']	= 'https://online.novopayment.dev/empresas';
+$config['base_url']	= BASE_URL;
 
 /*
 |--------------------------------------------------------------------------
