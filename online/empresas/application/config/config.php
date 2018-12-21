@@ -257,7 +257,7 @@ $config['cache_path'] = '';
 | MUST set an encryption key.  See the user guide for info.
 |
 */
-$config['encryption_key'] = 'test1234';
+$config['encryption_key'] = 'N0V02013';
 
 /*
 |--------------------------------------------------------------------------
@@ -278,7 +278,7 @@ $config['encryption_key'] = 'test1234';
 |
 */
 $config['sess_cookie_name']		= 'eol_session';
-$config['sess_expiration']		= 0;
+$config['sess_expiration']		= 7200;
 $config['sess_expire_on_close']	= TRUE;
 $config['sess_encrypt_cookie']	= TRUE;
 $config['sess_use_database']	= FALSE;
@@ -348,7 +348,7 @@ $config['csrf_expire'] = 7200;
 | by the output class.  Do not 'echo' any values with compression enabled.
 |
 */
-$config['compress_output'] = FALSE;
+$config['compress_output'] = TRUE;
 
 /*
 |--------------------------------------------------------------------------
@@ -361,7 +361,7 @@ $config['compress_output'] = FALSE;
 | regarding date handling.
 |
 */
-$config['time_reference'] = 'gmt';
+$config['time_reference'] = 'local';
 
 
 /*
@@ -376,7 +376,6 @@ $config['time_reference'] = 'gmt';
 */
 $config['rewrite_short_tags'] = FALSE;
 
-
 /*
 |--------------------------------------------------------------------------
 | Reverse Proxy IPs
@@ -390,6 +389,7 @@ $config['rewrite_short_tags'] = FALSE;
 */
 $config['proxy_ips'] = '';
 
-
+$config['format_date'] = 'j/m/Y'; //29/04/2013
+$config['format_time'] = 'g:i A'; //2:26 PM
 /* End of file config.php */
 /* Location: ./application/config/config.php */
