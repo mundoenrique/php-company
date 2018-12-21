@@ -1,5 +1,36 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
+ini_set('memory_limit', '200M');
+
+//KeyNovo - Llave para Encriptar y Desencriptar
+$config['keyNovo']= base64_decode('dGVzdDEyMzQ=');
+
+//URL Servicio Web WebLogic
+$config['urlWS']= 'http://172.24.6.148:8005/NovoEolWebInterfaceWS/webresources/';
+//URL API Trayectos
+$config['urlAPI']= 'http://172.24.6.148:8005/ceo-fuel/1.0/';
+//URL Servicio
+$config['urlServ']= 'http://172.24.6.148:8008/';
+//CLIENT ID OAUTH
+$config['client_id'] = 'b08e4d54638385d6987af8989a01f30e';
+//CLIENT SECRET OAUTH
+$config['client_secret'] = 'f2ca416fb52cdf4f21406a5d9ca6b16f';
+//USUARIO Y PASSWORD PARA SFTP PASO DE LOTES
+$config['LOTES_USERPASS'] = 'phpcarga:phpC4rg4';
+
+/*
+|--------------------------------------------------------------------------
+| Modules locations
+|--------------------------------------------------------------------------
+|
+| These are the folders where your modules are located. You may define an
+| absolute path to the location or a relative path starting from the root
+| directory.
+|
+*/
+
+$config['modules_locations'] = array(APPPATH . 'modules/');
+
 
 /*
 |--------------------------------------------------------------------------
@@ -108,7 +139,7 @@ $config['enable_hooks'] = FALSE;
 | http://codeigniter.com/user_guide/general/creating_libraries.html
 |
 */
-$config['subclass_prefix'] = 'MY_';
+$config['subclass_prefix'] = 'NOVOPAYMENT_';
 
 
 /*
