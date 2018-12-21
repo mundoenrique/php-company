@@ -27,8 +27,8 @@ $config['LOTES_USERPASS'] = 'npdaemon:#.3Nv!!';
 //URL PARA CONECTAR POR SFTP A SERVIDOR
 $config['URL_TEMPLOTES'] = 'sftp://172.24.6.130:22/home/npdaemon/'.$config['country'].'/';
 
-//PATCH CARPETA DONDE SE SUBEN LOS LOTES Ejemplo: '/opt/httpd-2.4.4/vhost/cdn/empresas/Ve/bash/''
-$config['FOLDER_UPLOAD_LOTES'] = '/opt/httpd-2.4.4/vhost/cdn/empresas/'.$config['system_name'].'/'.$config['country'].'/'.'bash/';
+//PATCH CARPETA DONDE SE SUBEN LOS LOTES Ejemplo: '/opt/httpd-2.4.4/vhost/cdn/empresas/Pe/bash/''
+$config['FOLDER_UPLOAD_LOTES'] = '/opt/httpd-2.4.4/vhost/cdn/empresas/'.$config['country'].'/'.'bash/';
 
 //PATH CARPETA BASE CDN DEL PAÍS
 $config['CDN'] = BASE_CDN_PATH.$config['country'].'/';
