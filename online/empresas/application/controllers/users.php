@@ -107,8 +107,10 @@ class Users extends CI_Controller {
             $username = $this->input->post('user_login');
             $password = $this->input->post('user_pass');
             $useractive = $this->input->post('user_active');
-            $responseLoginFull = $this->callWSLoginFull($username,$password,$urlCountry,$useractive);
-
+						$responseLoginFull = $this->callWSLoginFull($username,$password,$urlCountry,$useractive);
+						log_message('INFO','adasdasdasdasdas');
+						log_message('INFO',$username);
+						log_message('INFO',$password);
             echo $responseLoginFull;
         }
 
@@ -122,143 +124,142 @@ class Users extends CI_Controller {
      * @param  string $pais
      * @return string
      */
-    private function callWSLoginFull($username,$password,$pais,$useractive){
+    private function callWSLoginFull($username,$password,$pais,$useractive) {
 
-        $this->lang->load('erroreseol'); // CARGAR PLANTILLA DE LENGUAJE DE ERRORES
-        $this->lang->load('users');		 // CARGAR PLANTILLA DE LENGUAJE USUARIO
+			$this->lang->load('erroreseol'); // CARGAR PLANTILLA DE LENGUAJE DE ERRORES
+			$this->lang->load('users');		 // CARGAR PLANTILLA DE LENGUAJE USUARIO
 
-        $canal = "ceo";
-        $modulo='login';
-        $function='login';
-        $operation='loginFull';
-        $className='com.novo.objects.TOs.UsuarioTO';
-        $timeLog= date('m/d/Y H:i');
-        $ip= $this->input->ip_address();
-        $logAcceso = np_hoplite_log('',$username,$canal,$modulo,$function,$operation,0,$ip,$timeLog);
+			$canal = "ceo";
+			$modulo='login';
+			$function='login';
+			$operation='loginFull';
+			$className='com.novo.objects.TOs.UsuarioTO';
+			$timeLog= date('m/d/Y H:i');
+			$ip= $this->input->ip_address();
+			$logAcceso = np_hoplite_log('',$username,$canal,$modulo,$function,$operation,0,$ip,$timeLog);
 
-        $data = array(
-            'idOperation' => $operation,
-            'className' => $className,
-            'userName'=>$username,
-            'password'=>$password,
-            'logAccesoObject'=>$logAcceso,
-            'token'=>'',
-            'pais'=>$pais,
-            'ctipo'=>$useractive
-        );
+			$data = array(
+					'idOperation' => $operation,
+					'className' => $className,
+					'userName'=>$username,
+					'password'=>$password,
+					'logAccesoObject'=>$logAcceso,
+					'token'=>'',
+					'pais'=>$pais,
+					'ctipo'=>$useractive
+			);
 
-        $data = json_encode($data,JSON_UNESCAPED_UNICODE);
+			$data = json_encode($data,JSON_UNESCAPED_UNICODE);
 
-        $dataEncry = np_Hoplite_Encryption($data);
-        $data = array('bean' => $dataEncry, 'pais' =>$pais );
-        $data = json_encode($data);
-        $response = np_Hoplite_GetWS('eolwebInterfaceWS',$data); // ENVÍA LA PETICIÓN Y ALMACENA LA RESPUESTA EN $response
-        $jsonResponse = np_Hoplite_Decrypt($response);
+			$dataEncry = np_Hoplite_Encryption($data);
+			$data = array('bean' => $dataEncry, 'pais' =>$pais );
+			$data = json_encode($data);
+			$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data); // ENVÍA LA PETICIÓN Y ALMACENA LA RESPUESTA EN $response
+			$jsonResponse = np_Hoplite_Decrypt($response);
 
-        $response = json_decode(utf8_encode($jsonResponse));
+			$response = json_decode(utf8_encode($jsonResponse));
 
 
-        if(isset($response)){
-            log_message('info','response login '.$response->rc.'/'.$response->msg);
+			if(isset($response)) {
+				log_message('info','response login '.$response->rc.'/'.$response->msg);
 
-            if($response->rc==-229){
-                return 'userold'; // EL USUARIO TIENE BANDERA EN 1
+				if($response->rc==-229) {
+						return 'userold'; // EL USUARIO TIENE BANDERA EN 1
 
-            }elseif($response->rc==-262){
-                return 'desconocido'; // EL USUARIO NO HA SIDO INCORPORADO PARA USAR CEO
+				} elseif($response->rc==-262) {
+					return 'desconocido'; // EL USUARIO NO HA SIDO INCORPORADO PARA USAR CEO
 
-            }elseif($response->rc==-28){
-                return 'conectado'; // EL USUARIO YA SE ENCUENTRA CONECTADO (ha cerrado incorrectamente su sesión)
+				} elseif($response->rc==-28) {
+						return 'conectado'; // EL USUARIO YA SE ENCUENTRA CONECTADO (ha cerrado incorrectamente su sesión)
 
-            }elseif($response->rc==0 || $response->rc==-2 || $response->rc==-185){ // solo para los casos donde el usuario establece conexión
-                $datos['userName'] = $response->usuario->userName;
-                $datos['idUsuario']=$response->usuario->idUsuario;
-                $datos['Nombre'] = $response->usuario->primerNombre;
-                $datos['Apellido'] = $response->usuario->primerApellido;
-                $datos['codigoGrupo'] = $response->usuario->codigoGrupo;
-                $datos['sessionId'] = $response->logAccesoObject->sessionId;
+				} elseif($response->rc==0 || $response->rc==-2 || $response->rc==-185) { // solo para los casos donde el usuario establece conexión
+					$datos['userName'] = $response->usuario->userName;
+					$datos['idUsuario']=$response->usuario->idUsuario;
+					$datos['Nombre'] = $response->usuario->primerNombre;
+					$datos['Apellido'] = $response->usuario->primerApellido;
+					$datos['codigoGrupo'] = $response->usuario->codigoGrupo;
+					$datos['sessionId'] = $response->logAccesoObject->sessionId;
 
-                $CI =& get_instance();
-                $format_date=$CI->config->item('format_date');
-                $format_time=$CI->config->item('format_time');
+					$CI =& get_instance();
+					$format_date=$CI->config->item('format_date');
+					$format_time=$CI->config->item('format_time');
 
-                $datos['lastSession'] = date("$format_date $format_time",strtotime(str_replace('/', '-', $response->usuario->fechaUltimaConexion) ) );
-                $datos['token'] = $response->token;
+					$datos['lastSession'] = date("$format_date $format_time",strtotime(str_replace('/', '-', $response->usuario->fechaUltimaConexion) ) );
+					$datos['token'] = $response->token;
 
-                $newdata = array(
-                    'idUsuario'=>$datos['idUsuario'],
-                    'userName'=>$datos['userName'],
-                    'nombreCompleto'  => mb_strtolower($datos['Nombre']) .' '.mb_strtolower($datos['Apellido']),
-                    'codigoGrupo' => $datos['codigoGrupo'],
-                    'lastSession'=> $datos['lastSession'],
-                    'token' => $datos['token'],
-                    'sessionId' => $datos['sessionId'],
-                    'cl_addr' => np_Hoplite_Encryption($_SERVER['REMOTE_ADDR']),
-                    'pais' => $pais
-                );
+					$newdata = array(
+						'idUsuario'=>$datos['idUsuario'],
+						'userName'=>$datos['userName'],
+						'nombreCompleto'  => mb_strtolower($datos['Nombre']) .' '.mb_strtolower($datos['Apellido']),
+						'codigoGrupo' => $datos['codigoGrupo'],
+						'lastSession'=> $datos['lastSession'],
+						'token' => $datos['token'],
+						'sessionId' => $datos['sessionId'],
+						'cl_addr' => np_Hoplite_Encryption($_SERVER['REMOTE_ADDR']),
+						'pais' => $pais
+					);
 
-                $this->session->set_userdata($newdata); // ALMACENAR DATOS EN SESIÓN
-            }elseif($response->rc==-8 && $pais=="Ve"){
+					$this->session->set_userdata($newdata); // ALMACENAR DATOS EN SESIÓN
+				} elseif ($response->rc==-8 && $pais=="Ve") {
 
-                return 'bloqueado'; // EL USUARIO esta bloqueado
+						return 'bloqueado'; // EL USUARIO esta bloqueado
 
-            }
-        }
+				}
+			}
 
-        if(isset($response) && $response->rc==0){
+			if(isset($response) && $response->rc==0){
 
-            $this->session->set_userdata('logged_in',TRUE);
+				$this->session->set_userdata('logged_in',TRUE);
 
-            return 'validated'; // EL USUARIO SE HA LOGUEADO CON ÉXITO
+				return 'validated'; // EL USUARIO SE HA LOGUEADO CON ÉXITO
 
-        }else{
+			} else {
+				if(isset($response) && $response->rc==-2) {
 
-            if(isset($response) && $response->rc==-2){
+					$this->session->set_userdata('logged_in',TRUE);
+					$this->session->set_userdata('newuser_in',TRUE);
 
-                $this->session->set_userdata('logged_in',TRUE);
-                $this->session->set_userdata('newuser_in',TRUE);
+					return 'newuser'; // NUEVO USUARIO
 
-                return 'newuser'; // NUEVO USUARIO
+				} elseif (isset($response) && $response->rc==-185) {
 
-            }elseif(isset($response) && $response->rc==-185){
+					$this->session->set_userdata('logged_in',TRUE);
+					$this->session->set_userdata('newuser_in',FALSE);
+					$this->session->set_userdata('caducoPass',TRUE);
 
-                $this->session->set_userdata('logged_in',TRUE);
-                $this->session->set_userdata('newuser_in',FALSE);
-                $this->session->set_userdata('caducoPass',TRUE);
+					//log_message('info','Resultado Login -> '.json_encode($response));
 
-                //log_message('info','Resultado Login -> '.json_encode($response));
+					if(isset($response->usuario->ctipo)&&$response->usuario->ctipo==1)
+						$this->session->set_userdata('userold',TRUE);
+					else
+						$this->session->set_userdata('userold',FALSE);
 
-                if(isset($response->usuario->ctipo)&&$response->usuario->ctipo==1)
-                    $this->session->set_userdata('userold',TRUE);
-                else
-                    $this->session->set_userdata('userold',FALSE);
+					return 'caducoPass'; // contraseña vencida y debe cambiarla
 
-                return 'caducoPass'; // contraseña vencida y debe cambiarla
+				} elseif (isset($response) && $response->rc==-1 ) {
 
-            }elseif (isset($response) && $response->rc==-1 ) {
+						$codigoError = lang('ERROR_('.$response->rc.')');
 
-                $codigoError = lang('ERROR_('.$response->rc.')');
+				} elseif (isset($response) && $response->rc==-263) {
 
-            }elseif (isset($response) && $response->rc==-263){
+					$codigoError = lang('MSG_BLOQUEAR_USER');
 
-                $codigoError = lang('MSG_BLOQUEAR_USER');
+				} elseif(isset($response)) {
 
-            }elseif(isset($response)){
+					$codigoError = lang('ERROR_('.$response->rc.')'); // OBTENER LA DESCRIPCION DEL ERROR (DE LA PLANTILLA DE LENGUAJE)
+					if(strpos($codigoError, 'Error')!==false) {        // VERIFICAR SI ES UN ERROR QUE SE PUEDE MOSTRAR
+						$codigoError = lang('ERROR_GENERICO_USER'); // ERROR GENERICO
+					} else {
+							$codigoError = lang('ERROR_('.$response->rc.')');
+					}
 
-                $codigoError = lang('ERROR_('.$response->rc.')'); // OBTENER LA DESCRIPCION DEL ERROR (DE LA PLANTILLA DE LENGUAJE)
-                if(strpos($codigoError, 'Error')!==false){        // VERIFICAR SI ES UN ERROR QUE SE PUEDE MOSTRAR
-                    $codigoError = lang('ERROR_GENERICO_USER'); // ERROR GENERICO
-                }else{
-                    $codigoError = lang('ERROR_('.$response->rc.')');
-                }
+				} else {
+					log_message('info','response login NO WS');
+					$codigoError = lang('ERROR_GENERICO_USER') ;
+				}
 
-            }else{
-                log_message('info','response login NO WS');
-                $codigoError = lang('ERROR_GENERICO_USER') ;
-            }
-
-            return $codigoError;
-        }
+				return $codigoError;
+			}
     }
 
     /**

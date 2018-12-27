@@ -1,8 +1,9 @@
 <?php
-$pais = $this->uri->segment(1);
-$urlBaseA = $this->config->item('base_url');
-$urlBase = $urlBaseA.$pais;
-$urlCdn = get_cdn();
+$CI =& get_instance();
+$pais = $CI->config->item('country');
+$urlBase= $CI->config->item('base_url');
+$urlBaseCDN = $CI->config->item('base_url_cdn');
+$nombreCompleto = $this->session->userdata('nombreCompleto');
 ?>
 <h1 class="first-title">{titulo}</h1>
 

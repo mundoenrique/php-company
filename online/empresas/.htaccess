@@ -1,3 +1,8 @@
+SetEnv CI_ENV development
+SetEnv BASE_URL http://localhost:8090/site-conexionempresas/online/empresas/
+SetEnv BASE_CDN_URL http://localhost:8090/site-conexionempresas/cdn/empresas/
+SetEnv BASE_CDN_PATH C:/Users/anavarro/Documents/GitHub/site-conexionempresas/cdn/empresas/
+
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteCond %{REQUEST_FILENAME} !-f

@@ -1,9 +1,12 @@
 <?php
-$pais = $this->uri->segment(1);
-$urlBaseA = $this->config->item('base_url');
-$urlBase = $urlBaseA.$pais;
+$CI =& get_instance();
+$pais = $CI->config->item('country');
+$urlBase= $CI->config->item('base_url');
+$urlBaseCDN = $CI->config->item('base_url_cdn');
+$nombreCompleto = $this->session->userdata('nombreCompleto');
 ?>
 <h1><?= lang('BREADCRUMB_WELCOME'); ?> <span class='first-title'>{titulo}</span></h1>
+
 <ol class="breadcrumb">
 	<li>
 		<a href="<?php echo $urlBase; ?>/dashboard" rel="start">
@@ -12,7 +15,7 @@ $urlBase = $urlBaseA.$pais;
 	</li>
 	/
 	<li>
-		<a href=""<?php echo $urlBase; ?>/dashboard"" rel="section">
+		<a href="<?php echo $urlBase; ?>/dashboard" rel="section">
 		<?php echo lang('BREADCRUMB_EMPRESAS'); ?>
 		</a>
 	</li>

@@ -1,13 +1,14 @@
 <?php
+$CI =& get_instance();
+$pais = $CI->config->item('country');
+$urlBase= $CI->config->item('base_url').$pais.'/';
+$urlBaseCDN = $CI->config->item('base_url_cdn');
 $nombreCompleto = $this->session->userdata('nombreCompleto');
-$pais = $this->uri->segment(1);
-$urlBaseA = $this->config->item('base_url');
-$urlBase = $urlBaseA.$pais;
 ?>
 <nav id="account-nav">
 	<ul class="menu">
 		<li class="menu-item profile">
-			<a href="<?php echo $urlBase.'/usuario/config?tab=0' ?>" rel="section" title="Mi Perfil">
+			<a href="<?php echo $urlBase.'usuario/config?tab=0' ?>" rel="section" title="Mi Perfil">
 				<span aria-hidden="true" class="icon" data-icon="&#xe090;"></span>
 				<?php echo $nombreCompleto; ?>
 			</a>
@@ -21,25 +22,25 @@ $urlBase = $urlBaseA.$pais;
 			<ul class="submenu" >
 				<li class="menu-item account">
 					<span aria-hidden="true" class="icon" data-icon="&#xe090;" ></span>
-					<a id='subm-user'  rel="subsection" href="<?php echo $urlBase.'/usuario/config?tab=0' ?>">
+					<a id='subm-user'  rel="subsection" href="<?php echo $urlBase.'usuario/config?tab=0' ?>">
 						<?php echo lang('SUBMENU_USUARIO') ?>
 					</a>
 				</li>
 				<li class="menu-item privacy">
 					<span aria-hidden="true" class="icon" data-icon="&#xe064;" ></span>
-					<a id='subm-emp' rel="subsection" href="<?php echo $urlBase.'/usuario/config?tab=1' ?>">
+					<a id='subm-emp' rel="subsection" href="<?php echo $urlBase.'usuario/config?tab=1' ?>">
 						<?php echo lang('SUBMENU_EMPRESAS'); ?>
 					</a>
 				</li>
 				<li class="menu-item security">
 					<span aria-hidden="true" class="icon" data-icon="&#xe013;" ></span>
-					<a id='subm-suc' rel="subsection" href="<?php echo $urlBase.'/usuario/config?tab=2' ?>">
+					<a id='subm-suc' rel="subsection" href="<?php echo $urlBase.'usuario/config?tab=2' ?>">
 						<?php echo lang('SUBMENU_SUCURSALES') ?>
 					</a>
 				</li>
 				<li class="menu-item signout">
 					<span aria-hidden="true" class="icon" data-icon="&#xe06e;" ></span>
-					<a id='subm-desc' rel="subsection" href="<?php echo $urlBase.'/usuario/config?tab=3' ?>">
+					<a id='subm-desc' rel="subsection" href="<?php echo $urlBase.'usuario/config?tab=3' ?>">
 						<?php echo lang('SUBMENU_DESCARGAS') ?>
 					</a>
 				</li>
@@ -47,14 +48,14 @@ $urlBase = $urlBaseA.$pais;
 					<?php if ($pais == 'Ve'): ?>
 					<!--<li class="menu-item signout">
 						<span aria-hidden="true" class="icon" data-icon="&#xe037;" ></span>
-						<a id='subm-desc' rel="subsection" href="<?php echo $urlBase.'/usuario/config?tab=4' ?>">
+						<a id='subm-desc' rel="subsection" href="<?php echo $urlBase.'usuario/config?tab=4' ?>">
 							<?php echo lang('SUBMENU_NOTIFICACIONES') ?>
 						</a>
 					</li>-->
 				<?php endif; ?>
 				<li class="menu-item signout">
 					<span aria-hidden="true" class="icon" data-icon="&#xe03e;" ></span>
-					<a href="<?php echo $urlBase.'/logout' ?>" rel="subsection">
+					<a href="<?php echo $urlBase.'logout' ?>" rel="subsection">
 						<?php echo lang('SUBMENU_LOGOUT') ?>
 					</a>
 				</li>
