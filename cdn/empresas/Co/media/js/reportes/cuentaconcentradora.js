@@ -1,8 +1,7 @@
 $(document).ready(function() {
-	var path =window.location.href.split( '/' );
-	var base = path[0]+ "//" +path[2]+'/'+path[3];
-	var pais = path[4];
-	var api = "/api/v1/";
+	var baseURL = $('body').attr('data-app-base');
+	var isoPais = $('body').attr('data-country');
+	var api = "api/v1/";
 	var scroll_interval;
 	var ancho=0;
 
@@ -36,7 +35,7 @@ $(document).ready(function() {
 
 
 	$("#cargando_empresa").fadeIn("slow");
-	$.getJSON(base + api + pais + '/empresas/lista').always(function( data ) {
+	$.getJSON(baseURL + api + isoPais + '/empresas/lista').always(function( data ) {
 		$("#cargando_empresa").fadeOut("slow");
 		if(!(data.ERROR)){
 
@@ -47,7 +46,7 @@ $(document).ready(function() {
 		}else{
 			if(data.ERROR.indexOf('-29') !=-1){
 				alert("Usuario actualmente desconectado");
-				$(location).attr('href',base+'/'+pais+'/login');
+				$(location).attr('href',baseURL+isoPais+'/login');
 			}else{
 				$("#repUsuario_empresa").append('<option value="">'+data.ERROR+'</option>');
 			}
@@ -87,7 +86,7 @@ $(document).ready(function() {
 		$('form#formulario').append('<input type="hidden" name="fechaFin" value="'+filtro_busq.fechaFin+'" />');
 		$('form#formulario').append('<input type="hidden" name="filtroFecha" value="'+filtro_busq.filtroFecha+'" />');
 		$('form#formulario').append('<input type="hidden" name="nomEmpresa" value="'+filtro_busq.acnomcia+'" />');
-		$('form#formulario').attr('action',base+api+pais+"/reportes/cuentaConcentradoraExpXLS");
+		$('form#formulario').attr('action',baseURL+api+isoPais+"/reportes/cuentaConcentradoraExpXLS");
 		$('form#formulario').submit();
 
 	});
@@ -104,7 +103,7 @@ $(document).ready(function() {
 		 descProd: filtro_busq.productoDES +"/"+filtro_busq.marca
 		 }
 
-		 descargarArchivo(datos, base+api+pais+"/reportes/cuentaConcentradoraExpPDF", "Exportar PDF" );
+		 descargarArchivo(datos, baseURL+api+isoPais+"/reportes/cuentaConcentradoraExpPDF", "Exportar PDF" );
 		 */
 		$('form#formulario').empty();
 		$('form#formulario').append('<input type="hidden" name="empresa" value="'+filtro_busq.empresa+'" />');
@@ -112,7 +111,7 @@ $(document).ready(function() {
 		$('form#formulario').append('<input type="hidden" name="fechaFin" value="'+filtro_busq.fechaFin+'" />');
 		$('form#formulario').append('<input type="hidden" name="filtroFecha" value="'+filtro_busq.filtroFecha+'" />');
 		$('form#formulario').append('<input type="hidden" name="nomEmpresa" value="'+filtro_busq.acnomcia+'" />');
-		$('form#formulario').attr('action',base+api+pais+"/reportes/cuentaConcentradoraExpPDF");
+		$('form#formulario').attr('action',baseURL+api+isoPais+"/reportes/cuentaConcentradoraExpPDF");
 		$('form#formulario').submit();
 
 	});
@@ -146,7 +145,7 @@ $(document).ready(function() {
 					 anio: $("option:selected","#anio").val()
 					 }
 
-					 descargarArchivo(datos, base+api+pais+"/reportes/cuentaConcentradoraConsolidadoExp"+formato, "Exportar "+formato );
+					 descargarArchivo(datos, baseURL+api+isoPais+"/reportes/cuentaConcentradoraConsolidadoExp"+formato, "Exportar "+formato );
 					 */
 					$('form#formulario').empty();
 					$('form#formulario').append('<input type="hidden" name="empresa" value="'+filtro_busq.empresa+'" />');
@@ -155,7 +154,7 @@ $(document).ready(function() {
 					$('form#formulario').append('<input type="hidden" name="filtroFecha" value="'+filtro_busq.filtroFecha+'" />');
 					$('form#formulario').append('<input type="hidden" name="nomEmpresa" value="'+filtro_busq.acnomcia+'" />');
 					$('form#formulario').append('<input type="hidden" name="anio" value="'+$("option:selected","#anio").val()+'" />');
-					$('form#formulario').attr('action',base+api+pais+"/reportes/cuentaConcentradoraConsolidadoExp"+formato);
+					$('form#formulario').attr('action',baseURL+api+isoPais+"/reportes/cuentaConcentradoraConsolidadoExp"+formato);
 					$('form#formulario').submit();
 				}
 			}
@@ -171,7 +170,7 @@ $(document).ready(function() {
 		$('#cargando').dialog({ modal: true,maxWidth: 700,maxHeight: 300,dialogClass: 'hide-close' });
 
 
-		$consulta = $.post(base + api + pais + "/reportes/graficoCuentaConcentradora",filtro_busq );
+		$consulta = $.post(baseURL + api + isoPais + "/reportes/graficoCuentaConcentradora",filtro_busq );
 		$consulta.done(function(data){
 			$(".ui-dialog-content").dialog().dialog("close");
 			if(data.rc==0){
@@ -352,7 +351,7 @@ $(document).ready(function() {
 		$("#repUsuario_btnBuscar").hide();
 		$('#div_tablaDetalle').hide();
 		//SE REALIZA LA INVOCACION AJAX
-		$consulta = $.post(base + api + pais + "/reportes/cuentaConcentradora",filtro_busq );
+		$consulta = $.post(baseURL + api + isoPais + "/reportes/cuentaConcentradora",filtro_busq );
 		//DE SER EXITOSA LA COMUNICACION CON EL SERVICIO SE EJECUTA EL SIGUIENTE METODO "DONE"
 		$consulta.done(function(data){
 			$("#mensaje").remove();
@@ -420,7 +419,7 @@ $(document).ready(function() {
 			}else{
 				if(data.rc =="-29"){
 					alert("Usuario actualmente desconectado");
-					$(location).attr('href',base+'/'+pais+'/login');
+					$(location).attr('href',baseURL+isoPais+'/login');
 				}else{
 					//$("#paginacion").hide();
 					$("#contend-pagination").hide();
@@ -568,7 +567,7 @@ $(document).ready(function() {
 				$('form#formulario').append('<input type="hidden" name="bytes" value="'+JSON.stringify(data.bytes)+'" />');
 				$('form#formulario').append('<input type="hidden" name="ext" value="'+data.ext+'" />');
 				$('form#formulario').append('<input type="hidden" name="nombreArchivo" value="'+data.nombreArchivo+'" />');
-				$('form#formulario').attr('action',base+'/'+pais+"/file");
+				$('form#formulario').attr('action',baseURL+isoPais+"/file");
 				$('form#formulario').submit()
 			}else{
 				if(data.ERROR=="-29"){
