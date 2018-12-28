@@ -9,13 +9,13 @@ $nombreCompleto = $this->session->userdata('nombreCompleto');
 
 <ol class="breadcrumb">
 	<li>
-		<a href="<?php echo $urlBase; ?>/dashboard" rel="start">
+		<a href="<?php echo $urlBase; ?>dashboard" rel="start">
 			<?php echo lang('BREADCRUMB_INICIO'); ?>
 		</a>
 	</li>
 	/
 	<li>
-		<a href="<?php echo $urlBase; ?>/dashboard" rel="section">
+		<a href="<?php echo $urlBase; ?>dashboard" rel="section">
 		<?php echo lang('BREADCRUMB_EMPRESAS'); ?>
 		</a>
 	</li>
