@@ -1,6 +1,6 @@
-var path = window.location.href.split('/'),
-    baseURL = path[0] + "//" + path[2] + '/' + path[3],
-    isoPais = path[4],
+var baseURL = $('body').attr('data-app-base'),
+		isoPais = $('body').attr('data-country'),
+
     ingresar_ = function() {
         var user = $("#user_login").val();
 
@@ -42,7 +42,7 @@ var path = window.location.href.split('/'),
 
             $(".ju-sliderbutton .ju-sliderbutton-slider .ui-slider-handle").hide();
 
-            $consulta = $.post(baseURL + '/' + isoPais + "/validation", {
+            $consulta = $.post(baseURL + isoPais + "/validation", {
                 user_login: user,
                 user_pass: pass,
                 user_active: active
@@ -64,15 +64,15 @@ var path = window.location.href.split('/'),
 
                 } else if (data == "validated") {
 
-                    $(location).attr('href', baseURL + '/' + isoPais + "/dashboard");
+                    $(location).attr('href', baseURL + isoPais + "/dashboard");
 
                 } else if (data == "newuser") {
 
-                    $(location).attr('href', baseURL + '/' + isoPais + "/terminos");
+                    $(location).attr('href', baseURL + isoPais + "/terminos");
 
                 } else if (data == "caducoPass") {
 
-                    $(location).attr('href', baseURL + '/' + isoPais + '/clave');
+                    $(location).attr('href', baseURL + isoPais + '/clave');
 
                 } else if (data == 'conectado') {
                     $('<div><h6>Su última sesión se cerró de manera incorrecta. Tenga en cuenta que para salir de la aplicación debe seleccionar <strong>"Salir"</strong>. <h4>Pulse "Aceptar" para continuar.<h4></h6></div>')
@@ -88,7 +88,7 @@ var path = window.location.href.split('/'),
                             },
                             buttons: {
                                 Aceptar: function() {
-                                    $.post(baseURL + '/' + isoPais + "/logout", {
+                                    $.post(baseURL + isoPais + "/logout", {
                                         'data-user': user
                                     });
                                     $(this).dialog("destroy");
@@ -156,7 +156,7 @@ var path = window.location.href.split('/'),
         $("#user_login").showBalloon({
             position: "left",
             contents: msj
-        }); //mostrar tooltip           
+        }); //mostrar tooltip
         $('#sliderbutton-login').sliderbutton("disable");
         setTimeout(function() {
             $("#user_login").hideBalloon({
