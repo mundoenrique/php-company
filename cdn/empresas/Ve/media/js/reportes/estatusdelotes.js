@@ -1,7 +1,7 @@
-var path =window.location.href.split( '/' );
-var base = path[0]+ "//" +path[2]+'/'+path[3];
-var pais = path[4];
-var api = "/api/v1/";
+
+var baseURL = $('body').attr('data-app-base');
+var isoPais = $('body').attr('data-country');
+var api = "api/v1/";
 
 $(".fecha").keypress(function(e){
 	if(e.keycode != 8 || e.keycode != 46){
@@ -12,7 +12,7 @@ $(".fecha").keypress(function(e){
 $(document).ready(function() {
 
 		$("#cargando_empresa").fadeIn("slow");
-		$.getJSON(base + api + pais + '/empresas/lista').always(function( data ) {
+		$.getJSON(baseURL + api + isoPais + '/empresas/lista').always(function( data ) {
 			$("#cargando_empresa").fadeOut("slow");
 			if(!(data.ERROR)){
 				
@@ -23,7 +23,7 @@ $(document).ready(function() {
 			}else{
 				if(data.ERROR.indexOf('-29') !=-1){
 		             alert("Usuario actualmente desconectado");
-		             $(location).attr('href',base+'/'+pais+'/login');
+		             $(location).attr('href',baseURL+isoPais+'/login');
 		         }else{
 		         	$("#EstatusLotes-empresa").append('<option value="" >'+data.ERROR+'</option>');
 		         }
@@ -40,7 +40,7 @@ $(document).ready(function() {
 
 			$("#cargando_producto").fadeIn("slow");
 			$(this).attr('disabled',true);
-			$.post(base + api + pais + "/producto/lista", { 'acrif': acrif }, function(data){
+			$.post(baseURL + api + isoPais + "/producto/lista", { 'acrif': acrif }, function(data){
 				$("#cargando_producto").fadeOut("slow");
 				$("#EstatusLotes-empresa").removeAttr('disabled');
 				if(!data.ERROR){	
@@ -50,7 +50,7 @@ $(document).ready(function() {
 				}else{
 					if(data.ERROR.indexOf('-29') !=-1){
 		             alert("Usuario actualmente desconectado");
-		             $(location).attr('href',base+'/'+pais+'/login');
+		             $(location).attr('href',baseURL+isoPais+'/login');
 		         }else{
 					$("#EstatusLotes-producto").append('<option value="">Empresa sin productos</option>');
 				}
@@ -71,7 +71,7 @@ $(document).ready(function() {
 				lotes_producto: filtro_busq.lotes_producto,
 				paginaActual: 1
 			}
-			descargarArchivo(datos, base+api+pais+"/reportes/estatuslotesExpXLS", "Exportar Excel" );	
+			descargarArchivo(datos, baseURL+api+isoPais+"/reportes/estatuslotesExpXLS", "Exportar Excel" );	
 */
 			$('form#formulario').empty();
 	$('form#formulario').append('<input type="hidden" name="empresa" value="'+filtro_busq.empresa+'" />');
@@ -79,7 +79,7 @@ $(document).ready(function() {
 	$('form#formulario').append('<input type="hidden" name="fechaFin" value="'+filtro_busq.fechaFin+'" />');
 	$('form#formulario').append('<input type="hidden" name="lotes_producto" value="'+filtro_busq.lotes_producto+'" />');
 	$('form#formulario').append('<input type="hidden" name="paginaActual" value="'+1+'" />');
-	$('form#formulario').attr('action',base+api+pais+"/reportes/estatuslotesExpXLS");
+	$('form#formulario').attr('action',baseURL+api+isoPais+"/reportes/estatuslotesExpXLS");
 	$('form#formulario').submit(); 
 		});
 
@@ -92,7 +92,7 @@ $("#export_pdf").click(function(){
 		lotes_producto: filtro_busq.lotes_producto,
 		paginaActual: 1
 	}
-	descargarArchivo(datos, base+api+pais+"/reportes/estatuslotesExpPDF", "Exportar PDF" );
+	descargarArchivo(datos, baseURL+api+isoPais+"/reportes/estatuslotesExpPDF", "Exportar PDF" );
 */
 $('form#formulario').empty();
 	$('form#formulario').append('<input type="hidden" name="empresa" value="'+filtro_busq.empresa+'" />');
@@ -100,7 +100,7 @@ $('form#formulario').empty();
 	$('form#formulario').append('<input type="hidden" name="fechaFin" value="'+filtro_busq.fechaFin+'" />');
 	$('form#formulario').append('<input type="hidden" name="lotes_producto" value="'+filtro_busq.lotes_producto+'" />');
 	$('form#formulario').append('<input type="hidden" name="paginaActual" value="'+1+'" />');
-	$('form#formulario').attr('action',base+api+pais+"/reportes/estatuslotesExpPDF");
+	$('form#formulario').attr('action',baseURL+api+isoPais+"/reportes/estatuslotesExpPDF");
 	$('form#formulario').submit(); 
 });	    
 
@@ -119,7 +119,7 @@ var filtro_busq={};
 			$("#EstatusLotes-btnBuscar").hide();
 	    	$('#div_tablaDetalle').fadeOut("fast");
 	
-			$consulta = $.post(base + api + pais + "/reportes/estatuslotes",filtro_busq );
+			$consulta = $.post(baseURL + api + isoPais + "/reportes/estatuslotes",filtro_busq );
 			$consulta.done(function(data){
 				$("#mensaje").remove();
 				$('#cargando').fadeOut("slow");
@@ -167,7 +167,7 @@ var filtro_busq={};
 				}else{
 					if(data.rc =="-29"){
 			             alert(data.mensaje);
-			             $(location).attr('href',base+'/'+pais+'/login');
+			             $(location).attr('href',baseURL+isoPais+'/login');
 			         }else{
 		 				$("#mensaje").remove();
 		 				var contenedor=$("#div_tablaDetalle");
@@ -355,7 +355,7 @@ $(".tbody-statuslotes").dataTable( {
 				$('form#formulario').append('<input type="hidden" name="bytes" value="'+JSON.stringify(data.bytes)+'" />');       
 				$('form#formulario').append('<input type="hidden" name="ext" value="'+data.ext+'" />');  
 				$('form#formulario').append('<input type="hidden" name="nombreArchivo" value="'+data.nombreArchivo+'" />');  
-				$('form#formulario').attr('action',base+'/'+pais+"/file");
+				$('form#formulario').attr('action',baseURL+isoPais+"/file");
 				$('form#formulario').submit()
 			}else{
 				if(data.ERROR=="-29"){
