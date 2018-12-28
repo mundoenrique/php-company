@@ -61,7 +61,7 @@ $style_css = $this->uri->segment(3);
 	</div>
 <?php };?>
 
-<input type="hidden" id="path_JScdn" value="<? echo $this->config->item('base_url_cdn')?>media/js/">
+<input type="hidden" id="path_JScdn" value="<? echo $urlBaseCDN;?>media/js/">
 
 </body>
 </html>
