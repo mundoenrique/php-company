@@ -1,6 +1,5 @@
 $(function() {
 
-    //var path =window.location.href.split( '/' );
     var baseURL = $('body').attr('data-app-base');
     var isoPais = $('body').attr('data-country');
     var api = "api/v1/";
@@ -83,7 +82,7 @@ $(function() {
                         newC = hex_md5(newC);
                         cNewC = hex_md5(cNewC);
 
-                        $.post(baseURL+'/'+isoPais+"/changePassNewUserAuth", {'userpwdOld':old,'userpwd':newC,'userpwdConfirm':cNewC},
+                        $.post(baseURL+isoPais+"/changePassNewUserAuth", {'userpwdOld':old,'userpwd':newC,'userpwdConfirm':cNewC},
                             function(data){
                                 data = $.parseJSON(data)
                                 if(data.rc == 0){
@@ -92,7 +91,7 @@ $(function() {
                                 } else {
                                     if (data.rc == -29) {
                                         alert("Usuario actualmente desconectado");
-                                        $(location).attr('href',baseURL+'/'+isoPais+'/login');
+                                        $(location).attr('href',baseURL+isoPais+'/login');
                                     } else {
                                         $dialogo.dialog("destroy");
                                         notificacion('Cambiar contraseña', data.msg);
