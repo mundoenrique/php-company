@@ -1,10 +1,9 @@
 //---------------------------------------------------------
 //SE ARMA LA URL PARA TRABAJARLA DENTRO DE TODO EL .JS
 //---------------------------------------------------------
-var path =window.location.href.split( '/' );
-var base = path[0]+ "//" +path[2]+'/'+path[3];
-var pais = path[4];
-var api = "/api/v1/";
+var base = $('body').attr('data-app-base');
+var pais = $('body').attr('data-country');
+var api = "api/v1/";
 
 $(".fecha").keypress(function(e){
 	if(e.keycode != 8 || e.keycode != 46){
@@ -59,7 +58,7 @@ $("#repGastosPorCategoria_dni").attr("maxlength","12");
 	}else{
 		if(data.ERROR.indexOf('-29') !=-1){
              alert("Usuario actualmente desconectado");
-             $(location).attr('href',base+'/'+pais+'/login');
+             $(location).attr('href',base+pais+'/login');
          }else{
          	$("#repGastosPorCategoria_empresa").append('<option value="">'+data.ERROR+'</option>');
          }
@@ -87,7 +86,7 @@ $("#repGastosPorCategoria_dni").attr("maxlength","12");
 			}else{
 				if(data.ERROR.indexOf('-29') !=-1){
              alert("Usuario actualmente desconectado");
-             $(location).attr('href',base+'/'+pais+'/login');
+             $(location).attr('href',base+pais+'/login');
          }else{
 				$("#repGastosPorCategoria_producto").append('<option value="">'+data.ERROR+'</option>');
 			}
@@ -621,7 +620,7 @@ var filtro_busq={};
 				}else{
 					if(data.rc =="-29"){
 			             alert("Usuario actualmente desconectado");
-			             $(location).attr('href',base+'/'+pais+'/login');
+			             $(location).attr('href',base+pais+'/login');
 			         }else{
 
 						$("#mensaje").remove();
@@ -729,7 +728,7 @@ var filtro_busq={};
             $('form#formulario').append('<input type="hidden" name="bytes" value="'+JSON.stringify(data.bytes)+'" />');       
             $('form#formulario').append('<input type="hidden" name="ext" value="'+data.ext+'" />');  
             $('form#formulario').append('<input type="hidden" name="nombreArchivo" value="'+data.nombreArchivo+'" />');  
-            $('form#formulario').attr('action',base+'/'+pais+"/file");
+            $('form#formulario').attr('action',base+pais+"/file");
             $('form#formulario').submit()
           }else{
             if(data.ERROR=="-29"){
