@@ -8,10 +8,9 @@ if($("#msg").val()){
 	notificacion("ADVERTENCIA", $("#msg").val());
 }
 
-	var path =window.location.href.split( '/' );
-var baseURL = path[0]+ "//" +path[2]+'/'+path[3];
-var isoPais = path[4];
-var api = "/api/v1/";
+var baseURL = $('body').attr('data-app-base');
+var isoPais = $('body').attr('data-country');
+var api = "api/v1/";
 
 	COS_var = {
 		fecha_inicio: "",
@@ -57,7 +56,7 @@ var api = "/api/v1/";
     		$('form#formulario').append('<input type="hidden" name="data-fechIn" value="'+COS_var.fecIsend+'" />');
     		$('form#formulario').append('<input type="hidden" name="data-fechFin" value="'+COS_var.fecfsend+'" />');
     		$('form#formulario').append('<input type="hidden" name="data-status" value="'+statuLote+'" />');
-    		$('form#formulario').attr('action',baseURL+'/'+isoPais+"/consulta/ordenes-de-servicio");
+    		$('form#formulario').attr('action',baseURL+isoPais+"/consulta/ordenes-de-servicio");
     		$('form#formulario').submit();
 			} else {
 				notificacion("Buscar Orden de Servicio", "Rango de fecha Incoherente");
@@ -99,7 +98,7 @@ var api = "/api/v1/";
 		$('form#formulario').empty();
 		$('form#formulario').append('<input type="hidden" name="data-idOS" value="'+OS+'" />');
 		$('form#formulario').append($('#data-OS'));
-    	$('form#formulario').attr('action',baseURL+"/"+isoPais+"/consulta/registro-pago");
+    	$('form#formulario').attr('action',baseURL+isoPais+"/consulta/registro-pago");
     	$('form#formulario').submit();
 
 	});
