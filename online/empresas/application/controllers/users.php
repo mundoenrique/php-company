@@ -851,7 +851,7 @@ class Users extends CI_Controller {
             $lastSessionD = $this->session->userdata('lastSession');
             $FooterCustomInsertJS=["jquery-1.10.2.min.js","jquery-ui-1.10.3.custom.min.js",
 						"jquery.balloon.min.js","jquery-md5.js","jquery.paginate.js",
-						"users/configuracion.js","users/notificaciones.js","header.js","jquery.fileupload.js","jquery.iframe-transport.js"];
+						"users/configuracion.js","header.js","jquery.fileupload.js","jquery.iframe-transport.js"];
             $FooterCustomJS="";
             $titlePage="Conexión Empresas Online-Configuración";
             $title="Configuración";
@@ -1890,9 +1890,11 @@ class Users extends CI_Controller {
     public function getPerfilUser($urlCountry){
 
         np_hoplite_countryCheck($urlCountry);
-
+        
         $logged_in = $this->session->userdata('logged_in');
         $paisS = $this->session->userdata('pais');
+        print_r($paisS);
+       
 
         if($paisS==$urlCountry &&$logged_in){
 
