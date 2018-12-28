@@ -1,13 +1,12 @@
-var path =window.location.href.split( '/' );
-var baseURL = path[0]+ "//" +path[2]+'/'+path[3],
-	isoPais = path[4],
-	numlote  = "",
-	notificacion = function(titu, msj){
+var baseURL = $('body').attr('data-app-base');
+var isoPais = $('body').attr('data-country');
+var numlote  = "";
+var	notificacion = function(titu, msj){
 		var canvas = "<div>"+msj+"</div>";
 			$(canvas).dialog({
 				title : titu,
-				modal:true, 
-				close: function(){$(this).dialog('destroy')}, 
+				modal:true,
+				close: function(){$(this).dialog('destroy')},
 				resizable:false,
 				buttons:{
 					OK: function(){
@@ -17,7 +16,7 @@ var baseURL = path[0]+ "//" +path[2]+'/'+path[3],
 			});
 	},
 	getReporteTarjetas = function(){
-		$('form#formulario').attr('action',baseURL+'/'+isoPais+"/lotes/innominada/generarReporteTarjetasInnominadas");
+		$('form#formulario').attr('action',baseURL+isoPais+"/lotes/innominada/generarReporteTarjetasInnominadas");
 		$('form#formulario').submit();
 	},
 	setNumlote = function(){
@@ -27,7 +26,7 @@ var baseURL = path[0]+ "//" +path[2]+'/'+path[3],
 		return numlote;
 	},
 	toDataTable = function($table){
-		var dt = $table.dataTable({ 
+		var dt = $table.dataTable({
 		      "iDisplayLength": 10,
 		      'bRetrieve': true,
 		      "sPaginationType": "full_numbers",
@@ -56,15 +55,15 @@ var baseURL = path[0]+ "//" +path[2]+'/'+path[3],
 	};
 
 $(function(){
-	
+
 	toDataTable($('#table-text-lotes-inventario'));
 
 	$("#downXLS").on("click", function(){
 		getReporteTarjetas();
 	});
 
-	/*$.post(baseURL+"/"+isoPais+'/lotes/innominada/generarReporteTarjetasInnominadas').done( function(data){
-		
+	/*$.post(baseURL+isoPais+'/lotes/innominada/generarReporteTarjetasInnominadas').done( function(data){
+
 	});*/
 
 })

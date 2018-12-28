@@ -1,17 +1,16 @@
-var path =window.location.href.split( '/' );
-var base = path[0]+ "//" +path[2]+'/'+path[3];
-var pais = path[4];
-var api = "/api/v1/";
+var baseURL = $('body').attr('data-app-base');
+var isoPais = $('body').attr('data-country');
+var api = "api/v1/";
 
 $(function() {
 
 var params={};
 
     $("#cargando_empresa").fadeIn("slow");
-    $.getJSON(base + api + pais + '/empresas/lista').always(function( data ) {
+    $.getJSON(baseURL + api + isoPais + '/empresas/lista').always(function( data ) {
     $("#cargando_empresa").fadeOut("slow");
       if(!data.ERROR){
-          $.each(data.lista, function(k,v){         
+          $.each(data.lista, function(k,v){
           $("#empresa").append('<option value="'+v.accodcia+'" acrif="'+v.acrif+'">'+v.acnomcia+'</option>');
         });
         }else{
@@ -21,9 +20,9 @@ var params={};
             $("#empresa").append('<option value="" >'+data.ERROR+'</option>');
           }
         }
-          
+
       });
-  
+
      selIn=false; selFi=false;
 
 $( "#fecha_ini" ).datepicker({
@@ -50,7 +49,7 @@ $( "#fecha_ini" ).datepicker({
          $( "#fecha_fin" ).datepicker( 'option', 'maxDate', sumaMes);
       },
       onSelect: function(){
-        selIn=true;         
+        selIn=true;
       }
     });
 
@@ -59,10 +58,10 @@ $( "#fecha_ini" ).datepicker({
         changeMonth: true,
         changeYear: true,
         dateFormat:"dd/mm/yy",
-        numberOfMonths: 1, 
+        numberOfMonths: 1,
       maxDate:"+0D",
       onClose: function( selectedDate ) {
-  
+
         if(selFi){
         restaMes = new Date($('#fecha_fin').datepicker('getDate').getTime()-30*24*60*60*1000);
         selFi=false;
@@ -75,7 +74,7 @@ $( "#fecha_ini" ).datepicker({
         $( "#fecha_ini" ).datepicker( 'option', 'maxDate', selectedDate );
       },
       onSelect: function(){
-        selFi=true;         
+        selFi=true;
       }
     });
 
@@ -86,10 +85,10 @@ $("#empresa").on('change', function(){
 
 
     $("#btnBuscar").click(function(){
-    
+
         if(validar_filtro_busqueda("lotes-2")){
           // mostrar reporte
-          
+
         $('#cargando').show();
         $(this).hide();
         $('.resultadosAU').hide();
@@ -98,13 +97,13 @@ $("#empresa").on('change', function(){
         params.fecha_fin = $("#fecha_fin").val();
         params.acodcia = $("#empresa").val();
 
-          $.post(base + api + pais + "/reportes/actividadporusuario", {"data-fechaIni": $("#fecha_ini").val(),"data-fechaFin": $("#fecha_fin").val(), "data-acodcia":$("#empresa").val()})
+          $.post(baseURL + api + isoPais + "/reportes/actividadporusuario", {"data-fechaIni": $("#fecha_ini").val(),"data-fechaFin": $("#fecha_fin").val(), "data-acodcia":$("#empresa").val()})
           .always(function(data){
             $('#cargando').hide();
             $("#btnBuscar").show();
             $('.resultadosAU').show();
             if(!data.ERROR){
-                            
+
               if($("#table-activ-user").hasClass('dataTable')){
                 $('#table-activ-user').dataTable().fnClearTable();
                 $('#table-activ-user').dataTable().fnDestroy();
@@ -115,45 +114,45 @@ $("#empresa").on('change', function(){
               $("#view-results").show();
               $('thead').show();
 
-   
+
               $thFunciones = "<thead><tr class='OShead-2'><td style='text-align: center'>FUNCIONES</td></tr></thead>";
               $thActividades = "<thead><tr class='OShead-2 OSinfo'><td>Módulo</td><td>Función</td><td>Fecha</td></tr></thead>";
               $verF = "<a class='vF' title='Ver funciones'><span aria-hidden='true' class='icon' data-icon='&#xe003;'></span></a>";
               $verA = "<a class='vA' title='Ver actividades'><span aria-hidden='true' class='icon' data-icon='&#xe003;'></span></a>";
 
               $tr="";
-              $.each(data.lista, function(k,v){                
-                $tr += "<tr id='"+v.userName+"'><td>"+v.userName+"</td>"; 
-                $tr += "<td>"+v.estatus+"</td>"; 
-                $tr += "<td>"+v.fechaUltimaConexion+"</td>"; 
+              $.each(data.lista, function(k,v){
+                $tr += "<tr id='"+v.userName+"'><td>"+v.userName+"</td>";
+                $tr += "<td>"+v.estatus+"</td>";
+                $tr += "<td>"+v.fechaUltimaConexion+"</td>";
                 $tr += "<td >"+$verA+$verF+"</td>";
-                                           
-                                  
+
+
                 if(data.lista[k].actividades.lista.length==0){
                   $tr += "<td class='activ A"+v.userName+" elem-hidden'><table class='activities-AU'><tbody>";
-                    $tr+= "<tr class='cell-AU'><td></td><td>Sin actividades</td><td></td></tr>"; 
+                    $tr+= "<tr class='cell-AU'><td></td><td>Sin actividades</td><td></td></tr>";
                   }else{
                     $tr += "<td class='activ A"+v.userName+" elem-hidden'><table class='activities-AU'>"+$thActividades+"<tbody>";
                      $.each(data.lista[k].actividades.lista, function(key,val){
-                     $tr+= "<tr class='cell-AU'><td>"+val.modulo+"</td>"; 
-                     $tr+= "<td>"+val.funcion+"</td>"; 
-                     $tr+= "<td>"+val.dttimesstamp+"</td></tr>"; 
+                     $tr+= "<tr class='cell-AU'><td>"+val.modulo+"</td>";
+                     $tr+= "<td>"+val.funcion+"</td>";
+                     $tr+= "<td>"+val.dttimesstamp+"</td></tr>";
                   });
                   }
                 $tr += "</tbody></table></td> </tr>";
 
-                
+
                 $funcs = "<table class='functions-AU F"+v.userName+"'>"+$thFunciones+"<tbody>";
                   $.each(data.lista[k].funciones.lista, function(key, val){
-                     $funcs+= "<tr><td>"+val.acnomfuncion.toLowerCase().replace(/(^| )(\w)/g, function(x){return x.toUpperCase();} )+"</td></tr>"; 
+                     $funcs+= "<tr><td>"+val.acnomfuncion.toLowerCase().replace(/(^| )(\w)/g, function(x){return x.toUpperCase();} )+"</td></tr>";
                   })
                   if(data.lista[k].funciones.lista.length==0){
                     $funcs+= "<tr><td>Sin funciones</td></tr>";
-                  }  
+                  }
                 $funcs += "</tbody></table>";
         $('#funciones-user').append($funcs);
 
-                
+
               });
               $('#table-activ-user tbody').append($tr);
 
@@ -162,12 +161,12 @@ $("#empresa").on('change', function(){
                 user = $(this).parents('tr').attr('id');
 
                 $(this).balloon({contents: $('.F'+user), position: 'right', classname:'tooltip-funcionesAU'});
-               
+
               });
 
 
 
-              $('#table-activ-user').dataTable( { 
+              $('#table-activ-user').dataTable( {
           "iDisplayLength": 10,
           'bDestroy':true,
           "sPaginationType": "full_numbers",
@@ -204,32 +203,32 @@ $("#empresa").on('change', function(){
               $('#view-results').hide();
               if(data.ERROR=='-29'){
               alert('Usuario actualmente desconectado'); location.reload();
-              }else{                
+              }else{
                 $(".dataTables_filter").hide(); $(".dataTables_info").hide(); $(".dataTables_paginate").hide();
                 $('tbody').html("<h2 style='text-align:center'>"+data.ERROR+"</h2>");
             }
             }
 
           });
-            
+
           }
       });
 
 
 function validar_filtro_busqueda(div){
-  
+
   valido =true;
 
-//VALIDA INPUT:TEXT QUE SEAN REQUERIDOS NO SE ENCUENTREN VACIOS 
+//VALIDA INPUT:TEXT QUE SEAN REQUERIDOS NO SE ENCUENTREN VACIOS
   $.each($("#"+div+" input[type='text'].required"),function(posItem,item){
 
-      marcarojo($(item));        
+      marcarojo($(item));
   });
-  
-//VALIDA SELECT QUE SEAN REQUERIDOS NO SE ENCUENTREN VACIOS 
+
+//VALIDA SELECT QUE SEAN REQUERIDOS NO SE ENCUENTREN VACIOS
   $.each($("#"+div+" select.required"),function(posItem,item){
-       marcarojo($(item));  
-  });  
+       marcarojo($(item));
+  });
 
     if(!valido){
       $(".div_tabla_detalle").fadeOut("fast");
@@ -238,11 +237,11 @@ function validar_filtro_busqueda(div){
     $("#mensajeError").fadeOut("fast");
     }
 
-  
+
   return valido;
 }
 
-   
+
   function marcarojo($elem){
     if($elem.val()==""){
                 valido=false;
@@ -252,7 +251,7 @@ function validar_filtro_busqueda(div){
         }
   }
 
- 
+
 $('#table-activ-user').on('click', '.vA', function(){
    user = $(this).parents('tr').attr('id');
     $('#table-activ-user .A'+user).is(':visible') ? $('#table-activ-user .A'+user).fadeOut():$('.A'+user).fadeIn();
@@ -260,7 +259,7 @@ $('#table-activ-user').on('click', '.vA', function(){
  });
 
 
- 
+
   $('#downPDF').on('click', function(){
 
    /*datos = {
@@ -270,14 +269,14 @@ $('#table-activ-user').on('click', '.vA', function(){
      acrif:params.acrif
    }
 
-   descargarArchivo(datos, base + api + pais + "/reportes/downPDFactividadUsuario", "Descargando archivo PDF" );
+   descargarArchivo(datos, baseURL + api + isoPais + "/reportes/downPDFactividadUsuario", "Descargando archivo PDF" );
 */
-$('#exportTo').attr('action', base + api + pais + "/reportes/downPDFactividadUsuario");
+$('#exportTo').attr('action', baseURL + api + isoPais + "/reportes/downPDFactividadUsuario");
     $('#data-fechaIni').val(params.fecha_ini);
     $('#data-fechaFin').val(params.fecha_fin);
     $('#data-acodcia').val(params.acodcia);
     $('#data-acrif').val(params.acrif);
-    $('#exportTo').submit();  
+    $('#exportTo').submit();
 
   });
 
@@ -290,16 +289,16 @@ $('#exportTo').attr('action', base + api + pais + "/reportes/downPDFactividadUsu
      acrif:params.acrif
    }
 
-   descargarArchivo(datos, base + api + pais + "/reportes/downXLSactividadUsuario", "Descargando archivo excel" );
+   descargarArchivo(datos, baseURL + api + isoPais + "/reportes/downXLSactividadUsuario", "Descargando archivo excel" );
 */
 
-  $('#exportTo').attr('action', base + api + pais + "/reportes/downXLSactividadUsuario");
+  $('#exportTo').attr('action', baseURL + api + isoPais + "/reportes/downXLSactividadUsuario");
     $('#data-fechaIni').val(params.fecha_ini);
     $('#data-fechaFin').val(params.fecha_fin);
     $('#data-acodcia').val(params.acodcia);
     $('#data-acrif').val(params.acrif);
     $('#exportTo').submit();
-    
+
   });
 
 
@@ -311,19 +310,19 @@ $('#exportTo').attr('action', base + api + pais + "/reportes/downPDFactividadUsu
           $aux.dialog('destroy')
           if(!data.ERROR){
             $('#exportTo').empty();
-            $('#exportTo').append('<input type="hidden" name="bytes" value="'+JSON.stringify(data.bytes)+'" />');       
-            $('#exportTo').append('<input type="hidden" name="ext" value="'+data.ext+'" />');  
-            $('#exportTo').append('<input type="hidden" name="nombreArchivo" value="'+data.nombreArchivo+'" />');  
-            $('#exportTo').attr('action',base+'/'+pais+"/file");
+            $('#exportTo').append('<input type="hidden" name="bytes" value="'+JSON.stringify(data.bytes)+'" />');
+            $('#exportTo').append('<input type="hidden" name="ext" value="'+data.ext+'" />');
+            $('#exportTo').append('<input type="hidden" name="nombreArchivo" value="'+data.nombreArchivo+'" />');
+            $('#exportTo').attr('action',base+'/'+isoPais+"/file");
             $('#exportTo').submit()
           }else{
             if(data.ERROR=="-29"){
               alert('Usuario actualmente desconectado');
             location.reload();
             }else{
-              notificacion(titulo,data.ERROR) 
+              notificacion(titulo,data.ERROR)
             }
-            
+
           }
         })
 

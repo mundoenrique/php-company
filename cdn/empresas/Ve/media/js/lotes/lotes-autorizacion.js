@@ -10,10 +10,9 @@ $(function () {
 		$(".listaxAuth .checkbox-select").remove();
 	}
 
-	var path = window.location.href.split('/');
-	var baseURL = path[0] + "//" + path[2] + '/' + path[3];
-	var isoPais = path[4];
-	var api = "/api/v1/";
+	var baseURL = $('body').attr('data-app-base');
+	var isoPais = $('body').attr('data-country');
+	var api = "api/v1/";
 
 	var js_var = {
 		loteF: "",
@@ -68,7 +67,7 @@ $(function () {
 				bgiframe: true,
 				dialogClass: 'hide-close'
 			});
-			$.post(baseURL + "/" + isoPais + '/lotes/autorizacion/firmar', {
+			$.post(baseURL + isoPais + '/lotes/autorizacion/firmar', {
 				'data-lotes': js_var.loteF,
 				'data-pass': pass
 			}).done(function (data) {
@@ -215,7 +214,7 @@ $(function () {
 							modal: true,
 							bgiframe: true
 						});
-						$.post(baseURL + "/" + isoPais + '/lotes/autorizacion/desasociar', {
+						$.post(baseURL + isoPais + '/lotes/autorizacion/desasociar', {
 							'data-lotes': idlote,
 							'data-pass': pass
 						}).done(function (data) {
@@ -476,7 +475,7 @@ $(function () {
 			bgiframe: true,
 			dialogClass: 'hide-close'
 		});
-		$.post(baseURL + "/" + isoPais + '/lotes/autorizacion/eliminarAuth', {
+		$.post(baseURL + isoPais + '/lotes/autorizacion/eliminarAuth', {
 				'data-lotes': idlote,
 				'data-acnumlote': acnumlote,
 				'data-ctipolote': ctipolote,
@@ -551,7 +550,7 @@ function envioAjaxAutorizar(baseURL, isoPais, js_var, pass, osTipo, select_modal
 				}
 			});
 
-			$.post(baseURL + '/' + isoPais + '/lotes/preliminar', {
+			$.post(baseURL + isoPais + '/lotes/preliminar', {
 					'data-lotes': js_var.loteA,
 					'data-pass': pass,
 					'data-tipoOS': osTipo,
@@ -616,7 +615,7 @@ function notificacion(titulo, mensaje, code) {
 			Aceptar: function () {
 				$(this).dialog("close");
 				if (code === 3) {
-					$(location).attr('href', baseURL + '/' + isoPais + '/login');
+					$(location).attr('href', baseURL + isoPais + '/login');
 				}
 			}
 		}
