@@ -26,10 +26,9 @@ $(function(){
 
 	$('#lotes-general').show();
 
-	var path =window.location.href.split( '/' );
-	var baseURL = path[0]+ "//" +path[2]+'/'+path[3];
-	var isoPais = path[4];
-	var api ="/api/v1/";
+	var baseURL = $('body').attr('data-app-base');
+	var isoPais = $('body').attr('data-country');
+	var api ="api/v1/";
 
 
 	//$("#tabla-datos-general").find(".OSinfo").hide(); // ocultar lotes de os
