@@ -1,8 +1,7 @@
 $(function(){
 
-var path =window.location.href.split( '/' );
-var baseURL = path[0]+ "//" +path[2]+'/'+path[3];
-var isoPais = path[4];
+var baseURL = $('body').attr('data-app-base');
+var isoPais = $('body').attr('data-country');
 var api = "/api/v1/";
 
 
@@ -20,17 +19,17 @@ $("#cambioClave").on("click",function(event){
 
 		var alerta;
 
-	if( passActual ==='' || pass ==='' || passC ==='' ){ 
+	if( passActual ==='' || pass ==='' || passC ==='' ){
 		alerta = "Todos los campos son obligatorios (*)";
 		notificacion(alerta);
 	}else if( pass!==passC  ){
 		alerta = "Contraseñas no coinciden";
 		notificacion(alerta);
-		
+
 	}else if ( pass.length > 15 ) {
 		alerta = "Máximo 15 caracteres";
 		notificacion(alerta);
-	}else if ( !($('#length').hasClass("valid") && $('#letter').hasClass("valid") && $('#capital').hasClass("valid") && $('#number').hasClass("valid") && $('#consecutivo').hasClass("valid") && $('#especial').hasClass("valid"))){	
+	}else if ( !($('#length').hasClass("valid") && $('#letter').hasClass("valid") && $('#capital').hasClass("valid") && $('#number').hasClass("valid") && $('#consecutivo').hasClass("valid") && $('#especial').hasClass("valid"))){
 		alerta = "Verifique el formato de la contraseña";
 		notificacion(alerta);
 	}else{
@@ -50,8 +49,8 @@ function notificacion(mensaje){
 
 	$('<h3>'+mensaje+'</h3>').dialog({
 		title: 'Cambiar contraseña',
-		modal: true, 
-		resizable:false, 
+		modal: true,
+		resizable:false,
 		close:function(){$(this).dialog('destroy');},
 		buttons: {OK: function(){$(this).dialog('destroy');}}
 	});
@@ -61,17 +60,17 @@ function notificacion(mensaje){
 function changePassNewUser(passOld,pass,passC){
 
 	$aux = $('#loading').dialog({title:"Cambiando contraseña", modal: true, resizable:false, close:function(){$aux.dialog('close');}});
-	$consulta = $.post(baseURL+'/'+isoPais+"/changePassNewUserAuth", { userpwdOld: passOld, userpwd: pass, userpwdConfirm: passC } );
+	$consulta = $.post(baseURL+isoPais+"/changePassNewUserAuth", { userpwdOld: passOld, userpwd: pass, userpwdConfirm: passC } );
 	$consulta.done(function(data){
 		$aux.dialog('destroy');
 		data = $.parseJSON(data);
 		if(data.rc == 0) {
 			$("<div><h3>" + data.msg + "</h3><h5>" + data.redirect + "</h5></div>").dialog({title:"Cambiar contraseña", modal:true, resizable:false,close:function(){$(this).dialog('destroy');}});
 			notificacion(data.msg);
-			$(location).attr('href',baseURL+'/'+isoPais+"/dashboard");
+			$(location).attr('href',baseURL+isoPais+"/dashboard");
 		} else if (data.rc == '-29') {
 			alert(data.msg);
-			$(location).attr('href',baseURL+'/'+isoPais+"/logout");
+			$(location).attr('href',baseURL+isoPais+"/logout");
 		} else {
 			notificacion(data.msg);
 		}
@@ -104,33 +103,33 @@ function changePassNewUser(passOld,pass,passC){
         }
 
         //validate number
-      
+
       if (!pswd.match(/((\w|[!@#$%])*\d(\w|[!@#$%])*\d(\w|[!@#$%])*\d(\w|[!@#\$%])*\d(\w|[!@#$%])*(\d)*)/) && pswd.match(/\d{1}/) ) {
             $('#number').removeClass('invalid').addClass('valid');
         } else {
             $('#number').removeClass('valid').addClass('invalid');
         }
-      
+
       	if (! pswd.match(/(.)\1{2,}/) ) {
             $('#consecutivo').removeClass('invalid').addClass('valid');
         } else {
             $('#consecutivo').removeClass('valid').addClass('invalid');
         }
-      
+
       	if ( pswd.match(/([!@\*\-\?¡¿+\/.,_#])/ )) {
             $('#especial').removeClass('invalid').addClass('valid');
         } else {
             $('#especial').removeClass('valid').addClass('invalid');
         }
- 
-    
+
+
     }).focus(function() {
-		    	
+
         $("#userpwd").showBalloon({position: "right", contents: $('#psw_info')});
         $('#psw_info').show();
 
     }).blur(function() {
-    	
+
         $("#userpwd").hideBalloon({position: "right", contents: $('#psw_info')});
 
     });

@@ -87,17 +87,17 @@ $(function(){
 function changePassNewUser(passOld,pass,passC){
 
 	$aux = $('#loading').dialog({title:"Cambiando contraseña", modal: true, resizable:false, close:function(){$aux.dialog('close');}});
-	$consulta = $.post(baseURL+'/'+isoPais+"/changePassNewUserAuth", { userpwdOld: passOld, userpwd: pass, userpwdConfirm: passC } );
+	$consulta = $.post(baseURL+isoPais+"/changePassNewUserAuth", { userpwdOld: passOld, userpwd: pass, userpwdConfirm: passC } );
 	$consulta.done(function(data){
 		$aux.dialog('destroy');
 		data = $.parseJSON(data);
 		if(data.rc == 0) {
 			$("<div><h3>" + data.msg + "</h3><h5>" + data.redirect + "</h5></div>").dialog({title:"Cambiar contraseña", modal:true, resizable:false,close:function(){$(this).dialog('destroy');}});
 			notificacion(data.msg);
-			$(location).attr('href',baseURL+'/'+isoPais+"/dashboard");
+			$(location).attr('href',baseURL+isoPais+"/dashboard");
 		} else if (data.rc == '-29') {
 			alert(data.msg);
-			$(location).attr('href',baseURL+'/'+isoPais+"/logout");
+			$(location).attr('href',baseURL+isoPais+"/logout");
 		} else {
 			notificacion(data.msg);
 		}
