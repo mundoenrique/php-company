@@ -1,7 +1,7 @@
-var path =window.location.href.split( '/' );
-var base = path[0]+ "//" +path[2]+'/'+path[3];
-var pais = path[4];
-var api = "/api/v1/";
+
+var baseURL = $('body').attr('data-app-base');
+var isoPais = $('body').attr('data-country');
+var api = "api/v1/";
 var filtro_busq={};
 
 $(".fecha").keypress(function(e){
@@ -13,7 +13,7 @@ $(".fecha").keypress(function(e){
 $(document).ready(function() {
 
 		$("#cargando_empresa").fadeIn("slow");
-		$.getJSON(base + api + pais + '/empresas/consulta-empresa-usuario').always(function( data ) {
+		$.getJSON(baseURL + api + isoPais + '/empresas/consulta-empresa-usuario').always(function( data ) {
             // var prueba= JSON.stringify(data);
 			// console.log(prueba);
 			$("#cargando_empresa").fadeOut("slow");
@@ -26,7 +26,7 @@ $(document).ready(function() {
 			}else{
 				if(data.ERROR.indexOf('-29') !=-1){
 		             alert("Usuario actualmente desconectado");
-		             $(location).attr('href',base+'/'+pais+'/login');
+		             $(location).attr('href',baseURL+isoPais+'/login');
 		         }else{
 		         	$("#Reporte-tarjeta-hambiente").append('<option value="" >'+data.ERROR+'</option>');
 		         }
@@ -44,7 +44,7 @@ $(document).ready(function() {
 
 			$("#cargando_producto").fadeIn("slow");
 			$(this).attr('disabled',true);
-			$.post(base + api + pais + "/reportes/consulta-producto-empresa", { 'acrif': acrif }, function(data){
+			$.post(baseURL + api + isoPais + "/reportes/consulta-producto-empresa", { 'acrif': acrif }, function(data){
 
 				$("#cargando_producto").fadeOut("slow");
 				$("#Reporte-tarjeta-hambiente").removeAttr('disabled');
@@ -55,7 +55,7 @@ $(document).ready(function() {
 				}else{
 					if(data.ERROR.indexOf('-29') !=-1){
 		             alert("Usuario actualmente desconectado");
-		             $(location).attr('href',base+'/'+pais+'/login');
+		             $(location).attr('href',baseURL+isoPais+'/login');
 		         }else{
 					$("#EstatusLotes-producto").append('<option value="">Empresa sin productos</option>');
 				}
@@ -68,13 +68,13 @@ $(document).ready(function() {
 
 	$("#export_excel").click(function(){
 
-	descargarArchivo(filtro_busq, base+api+pais+"/reportes/estatustarjetashabientesExpXLS", "Exportar XLS" );
+	descargarArchivo(filtro_busq, baseURL+api+isoPais+"/reportes/estatustarjetashabientesExpXLS", "Exportar XLS" );
 		
 	});
 
     $("#export_pdf").click(function(){
 
-	descargarArchivo(filtro_busq, base+api+pais+"/reportes/estatustarjetashabientesExpPDF", "Exportar PDF" );
+	descargarArchivo(filtro_busq, baseURL+api+isoPais+"/reportes/estatustarjetashabientesExpPDF", "Exportar PDF" );
 
     });
 
@@ -103,7 +103,7 @@ function buscarStatusTarjetasHambientes(paginaActual){
 	    	$('#div_tablaDetalle').fadeOut("fast");
 
 	    	/******* SE REALIZA LA INVOCACION AJAX *******/
-			$consulta = $.post(base + api + pais + "/reportes/estatusTarjetashabientes",filtro_busq );
+			$consulta = $.post(baseURL + api + isoPais + "/reportes/estatusTarjetashabientes",filtro_busq );
 			/******* DE SER EXITOSA LA COMUNICACION CON EL SERVICIO SE EJECUTA EL SIGUIENTE METODO "DONE" *******/
 			$consulta.done(function(data){
 
@@ -151,7 +151,7 @@ function buscarStatusTarjetasHambientes(paginaActual){
 				}else{
 					if(data.rc =="-29"){
 			             alert(data.mensaje);
-			             $(location).attr('href',base+'/'+pais+'/login');
+			             $(location).attr('href',baseURL+isoPais+'/login');
 			         }else{
 		 				$("#mensaje").remove();
 		 				//var contenedor=$("#div_tablaDetalle");

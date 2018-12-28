@@ -1,7 +1,7 @@
-var path =window.location.href.split( '/' );
-var base = path[0]+ "//" +path[2]+'/'+path[3];
-var pais = path[4];
-var api = "/api/v1/";
+
+var baseURL = $('body').attr('data-app-base');
+var isoPais = $('body').attr('data-country');
+var api = "api/v1/";
 var colores = ["#54C2D0","#50C592","#2B569F","#994596","#F5921E","#298C9A","#2C855F","#1A325B","#522551","#B46607"];
 
 $(".fecha").keypress(function(e){
@@ -16,7 +16,7 @@ $(document).ready(function() {
 
 	$("#cargando_empresa").fadeIn("fast");
 
-	$.getJSON(base + api + pais +'/empresas/lista').always(function( data ) {
+	$.getJSON(baseURL + api + isoPais +'/empresas/lista').always(function( data ) {
 		$("#cargando_empresa").fadeOut("fast");
 		if(!(data.ERROR)){
 						
@@ -26,7 +26,7 @@ $(document).ready(function() {
 		}else{
 			if(data.ERROR.indexOf('-29') !=-1){
 	             alert("Usuario actualmente desconectado");
-	             $(location).attr('href',base+'/'+pais+'/login');
+	             $(location).attr('href',baseURL+isoPais+'/login');
 	         }else{
 	         	$("#repTarjetasEmitidas_empresa").append('<option value="" >'+data.ERROR+'</option>');
 	         }
@@ -95,7 +95,7 @@ $(document).ready(function() {
 			filtro_busq.acnomcia = $("option:selected","#repTarjetasEmitidas_empresa").attr("acnomcia");
 
 			//SE REALIZA LA INVOCACION AJAX
-			$consulta = $.post(base+ api+ pais +"/reportes/tarjetasemitidas",filtro_busq );
+			$consulta = $.post(baseURL+ api+ isoPais +"/reportes/tarjetasemitidas",filtro_busq );
 			//DE SER EXITOSA LA COMUNICACION CON EL SERVICIO SE EJECUTA EL SIGUIENTE METODO "DONE"
 
 			$consulta.done(function(data){
@@ -140,7 +140,7 @@ $(document).ready(function() {
 										radioGeneral: filtro_busq.radioGeneral
 									}
 
-									descargarArchivo(datos, base+api+pais+"/reportes/tarjetasEmitidasExpXLS", "Exportar Excel" );*/
+									descargarArchivo(datos, baseURL+api+isoPais+"/reportes/tarjetasEmitidasExpXLS", "Exportar Excel" );*/
 									$('form#formulario').empty();
 									$('form#formulario').append('<input type="hidden" name="idEmpresa" value="'+filtro_busq.acrif+'" />');
 									$('form#formulario').append('<input type="hidden" name="nomEmpresa" value="'+filtro_busq.acnomcia+'" />');
@@ -148,7 +148,7 @@ $(document).ready(function() {
 									$('form#formulario').append('<input type="hidden" name="fechaInicial" value="'+filtro_busq.fechaInicial+'" />');
 									$('form#formulario').append('<input type="hidden" name="fechaFin" value="'+filtro_busq.fechaFin+'" />');
 									$('form#formulario').append('<input type="hidden" name="radioGeneral" value="'+filtro_busq.radioGeneral+'" />');
-									$('form#formulario').attr('action',base+api+pais+"/reportes/tarjetasEmitidasExpXLS");
+									$('form#formulario').attr('action',baseURL+api+isoPais+"/reportes/tarjetasEmitidasExpXLS");
 									$('form#formulario').submit(); 
 							    });
 
@@ -167,7 +167,7 @@ $(document).ready(function() {
 										radioGeneral: filtro_busq.radioGeneral
 									}
 									
-									descargarArchivo(datos, base+api+pais+"/reportes/tarjetasEmitidasExpPDF", "Exportar PDF" );*/
+									descargarArchivo(datos, baseURL+api+isoPais+"/reportes/tarjetasEmitidasExpPDF", "Exportar PDF" );*/
 									$('form#formulario').empty();
 									$('form#formulario').append('<input type="hidden" name="idEmpresa" value="'+filtro_busq.acrif+'" />');
 									$('form#formulario').append('<input type="hidden" name="nomEmpresa" value="'+filtro_busq.acnomcia+'" />');
@@ -175,7 +175,7 @@ $(document).ready(function() {
 									$('form#formulario').append('<input type="hidden" name="fechaInicial" value="'+filtro_busq.fechaInicial+'" />');
 									$('form#formulario').append('<input type="hidden" name="fechaFin" value="'+filtro_busq.fechaFin+'" />');
 									$('form#formulario').append('<input type="hidden" name="radioGeneral" value="'+filtro_busq.radioGeneral+'" />');
-									$('form#formulario').attr('action',base+api+pais+"/reportes/tarjetasEmitidasExpPDF");
+									$('form#formulario').attr('action',baseURL+api+isoPais+"/reportes/tarjetasEmitidasExpPDF");
 									$('form#formulario').submit();
 							    });
  						
@@ -453,7 +453,7 @@ $(document).ready(function() {
 		}else{
 				if(data.rc =="-29"){
 		             alert("Usuario actualmente desconectado");
-		             $(location).attr('href',base+'/'+pais+'/login');
+		             $(location).attr('href',baseURL+isoPais+'/login');
 		         }else{
 		 			$("#mensaje").remove();
 		 			var contenedor = $("#div_tablaDetalle");
@@ -547,7 +547,7 @@ return valido;
             $('form#formulario').append('<input type="hidden" name="bytes" value="'+JSON.stringify(data.bytes)+'" />');       
             $('form#formulario').append('<input type="hidden" name="ext" value="'+data.ext+'" />');  
             $('form#formulario').append('<input type="hidden" name="nombreArchivo" value="'+data.nombreArchivo+'" />');  
-            $('form#formulario').attr('action',base+'/'+pais+"/file");
+            $('form#formulario').attr('action',baseURL+isoPais+"/file");
             $('form#formulario').submit()
           }else{
             if(data.ERROR=="-29"){
