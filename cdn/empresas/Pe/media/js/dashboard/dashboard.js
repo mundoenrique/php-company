@@ -473,7 +473,7 @@ function paginar(){
 
             if(data.ERROR =="-29"){
               alert("Usuario actualmente desconectado");
-              $(location).attr('href',baseURL+'/'+isoPais+'/login');
+              $(location).attr('href',baseURL+isoPais+'/login');
             }else{
               $('.resultSet2 h2').text(data.ERROR);
             }
