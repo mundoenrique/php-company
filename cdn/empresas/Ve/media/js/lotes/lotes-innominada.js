@@ -1,7 +1,6 @@
-var path =window.location.href.split( '/' );
-var baseURL = path[0]+ "//" +path[2]+'/'+path[3];
-var isoPais = path[4];
-var api = "/api/v1/";
+var baseURL = $('body').attr('data-app-base');
+var isoPais = $('body').attr('data-country');
+var api = "api/v1/";
 var datatable;
 
 	function calendario(input){
@@ -74,7 +73,7 @@ var datatable;
 
     function action_eliminar_lote(idlote, numlote, pass){
 		$aux = $("#loading").dialog({title:'Eliminando lote ' + numlote,modal:true, close:function(){$(this).dialog('close')}, resizable:false });
-		$.post(baseURL+"/"+isoPais+'/lotes/innominada/eliminarLotesInnominadas', { "data-pass": pass, "data-idlote": idlote, "data-numlote": numlote }).done( function(data){
+		$.post(baseURL+isoPais+'/lotes/innominada/eliminarLotesInnominadas', { "data-pass": pass, "data-idlote": idlote, "data-numlote": numlote }).done( function(data){
 			$aux.dialog('destroy');
 				if(!data.ERROR){
 					notificacion("Lote eliminado","<p>El nro. de lote <b>" + numlote + "</b> ha sido eliminado correctamente</p>");
@@ -178,11 +177,11 @@ $(function(){
 				'data-fechaexp' : fecha_expira
 			};
 
-			$.post(baseURL+"/"+isoPais+'/lotes/innominada/createCuentasInnominadas', arrData).done( function(data){
+			$.post(baseURL+isoPais+'/lotes/innominada/createCuentasInnominadas', arrData).done( function(data){
 				$aux.dialog('destroy');
 				if(!data.ERROR){
 					solicitud_exitosa();
-	          		window.location.href = baseURL+"/"+isoPais+"/lotes/autorizacion";
+	          		window.location.href = baseURL+isoPais+"/lotes/autorizacion";
 				}else{
 					if(data.ERROR=='-29'){
 						alert('Usuario actualmente desconectado');
@@ -196,7 +195,7 @@ $(function(){
 		}
 	});
 
-	$.post(baseURL+"/"+isoPais+'/lotes/innominada/listaSucursalesInnominadas').done( function(data){
+	$.post(baseURL+isoPais+'/lotes/innominada/listaSucursalesInnominadas').done( function(data){
 		$('#cargando').hide();
 		$('#sucursal').prop('disabled', false);
 		var html = "";
