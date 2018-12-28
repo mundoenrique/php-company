@@ -1,10 +1,9 @@
-var path =window.location.href.split( '/' );
-var baseURL = path[0]+ "//" +path[2]+'/'+path[3],
-	isoPais = path[4],
-	numlote  = "",
-	fecha_inicial = "",
-	fecha_final = "",
-	calendario = function(input){
+var baseURL = $('body').attr('data-app-base');
+var isoPais = $('body').attr('data-country');
+var	numlote  = "";
+var	fecha_inicial = "";
+var	fecha_final = "";
+var	calendario = function(input){
 		//,minDate: "+0D"
 		$("#"+input).datepicker({
 			defaultDate: "+1w",
@@ -21,7 +20,7 @@ var baseURL = path[0]+ "//" +path[2]+'/'+path[3],
 		$('form#formulario').append('<input type="hidden" name="data-acnomcia" value="' + acnomcia + '" />');
 		$('form#formulario').append('<input type="hidden" name="data-dtfechorcarga" value="' + dtfechorcarga + '" />');
 		$('form#formulario').append('<input type="hidden" name="data-nmonto" value="' + nmonto + '" />');
-		$('form#formulario').attr('action',baseURL+'/'+isoPais+"/lotes/innominada/detalle");
+		$('form#formulario').attr('action',baseURL+isoPais+"/lotes/innominada/detalle");
 		$('form#formulario').submit();
 	},
 	validate = function(){
@@ -68,7 +67,7 @@ var baseURL = path[0]+ "//" +path[2]+'/'+path[3],
 		$('form#formulario').append('<input type="hidden" name="data-numlote" value="' + getNumlote() + '" />');
 		$('form#formulario').append('<input type="hidden" name="data-fecha_inicial" value="' + getFecha_inicial() + '" />');
 		$('form#formulario').append('<input type="hidden" name="data-fecha_final" value="' + getFecha_final() + '" />');
-		$('form#formulario').attr('action',baseURL+'/'+isoPais+"/lotes/innominada/afiliacion");
+		$('form#formulario').attr('action',baseURL+isoPais+"/lotes/innominada/afiliacion");
 		$('form#formulario').submit();
 	},
 	setNumlote = function(){
