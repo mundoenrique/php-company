@@ -1,7 +1,6 @@
-var path =window.location.href.split( '/' );
-var base = path[0]+ "//" +path[2]+'/'+path[3];
-var pais = path[4];
-	var api = "/api/v1/";
+	var baseURL = $('body').attr('data-app-base');
+	var isoPais = $('body').attr('data-country');
+	var api = "api/v1/";
 	var colores = ["#54C2D0","#50C592","#2B569F","#994596","#F5921E","#298C9A","#2C855F","#1A325B","#522551","#B46607"];
 
 
@@ -15,18 +14,18 @@ $(document).ready(function() {
 
 
 		$("#cargando_empresa").fadeIn("slow");
-		$.getJSON(base + api + pais + '/empresas/lista').always(function( data ) {
+		$.getJSON(baseURL + api + isoPais + '/empresas/lista').always(function( data ) {
 			$("#cargando_empresa").fadeOut("slow");
 			if(!(data.ERROR)){
-				
+
 	  			$.each(data.lista, function(k,v){
-	  				
+
 					$("#RecargasRealizadas-Empresa").append('<option value="'+v.accodcia+'">'+v.acnomcia+'</option>');
 				});
 			}else{
 				if(data.ERROR.indexOf('-29') !=-1){
 		             alert("Usuario actualmente desconectado");
-		             $(location).attr('href',base+'/'+pais+'/login');
+		             $(location).attr('href',baseURL+isoPais+'/login');
 		         }else{
 		         	$("#RecargasRealizadas-Empresa").append('<option value="">'+data.ERROR+'</option>');
 		         }
@@ -48,42 +47,42 @@ $(document).ready(function() {
 		$('form#formulario').append('<input type="hidden" name="empresa" value="'+filtro_busq.empresa+'" />');
 		$('form#formulario').append('<input type="hidden" name="anio" value="'+filtro_busq.anio+'" />');
 		$('form#formulario').append('<input type="hidden" name="mes" value="'+filtro_busq.mes+'" />');
-		$('form#formulario').attr('action',base+api+pais+"/reportes/recargasRealizadasXLS");
-		$('form#formulario').submit(); 
-		
+		$('form#formulario').attr('action',baseURL+api+isoPais+"/reportes/recargasRealizadasXLS");
+		$('form#formulario').submit();
+
 		/*datos = {
 			empresa:filtro_busq.empresa,
 			anio:filtro_busq.anio,
 			mes:filtro_busq.mes
 		}
 
-		descargarArchivo(datos, base+api+pais+"/reportes/recargasRealizadasXLS", "Exportar Excel" );
+		descargarArchivo(datos, baseURL+api+isoPais+"/reportes/recargasRealizadasXLS", "Exportar Excel" );
 */
 
 	});
 
 	$("#export_pdf").click(function(){
-		
+
 		/*datos = {
 			empresa:filtro_busq.empresa,
 			anio:filtro_busq.anio,
 			mes:filtro_busq.mes
 		}
 
-		descargarArchivo(datos, base+api+pais+"/reportes/recargasRealizadasPDF", "Exportar PDF" );
-		  	*/ 
+		descargarArchivo(datos, baseURL+api+isoPais+"/reportes/recargasRealizadasPDF", "Exportar PDF" );
+		  	*/
 		$('form#formulario').empty();
 		$('form#formulario').append('<input type="hidden" name="empresa" value="'+filtro_busq.empresa+'" />');
 		$('form#formulario').append('<input type="hidden" name="anio" value="'+filtro_busq.anio+'" />');
 		$('form#formulario').append('<input type="hidden" name="mes" value="'+filtro_busq.mes+'" />');
-		$('form#formulario').attr('action',base+api+pais+"/reportes/recargasRealizadasPDF");
-		$('form#formulario').submit(); 
+		$('form#formulario').attr('action',baseURL+api+isoPais+"/reportes/recargasRealizadasPDF");
+		$('form#formulario').submit();
 
 	});
-//METODO PARA REALIZAR LA BUSQUEDA 
+//METODO PARA REALIZAR LA BUSQUEDA
 var filtro_busq={};
 	    $("#repRecargasRealizadas_btnBuscar").click(function(){
-	    	
+
 	    	var $consulta;
 	    	filtro_busq.empresa=$("#RecargasRealizadas-Empresa").val();
 	    	filtro_busq.anio=$("#repRecargasRealizadas_anio").val().split("/")[1];
@@ -94,7 +93,7 @@ var filtro_busq={};
 	    	$(this).hide();
 	    	$('#div_tablaDetalle').fadeOut("fast");
 //SE REALIZA LA INVOCACION AJAX
-		    	$consulta = $.post(base + api + pais + "/reportes/recargasrealizadas",filtro_busq );
+		    	$consulta = $.post(baseURL + api + isoPais + "/reportes/recargasrealizadas",filtro_busq );
 //DE SER EXITOSA LA COMUNICACION CON EL SERVICIO SE EJECUTA EL SIGUIENTE METODO "DONE"
 		 		$consulta.done(function(data){
 		 				$("#mensaje").remove();
@@ -126,8 +125,8 @@ var filtro_busq={};
 						month[9]="Octubre";
 						month[10]="Noviembre";
 						month[11]="Diciembre";
-						
-	//DE TRAER RESULTADOS LA CONSULTA SE GENERA LA TABLA CON LA DATA... 
+
+	//DE TRAER RESULTADOS LA CONSULTA SE GENERA LA TABLA CON LA DATA...
 	//DE LO CONTRARIO SE GENERA UN MENSAJE "No existe Data relacionada con su filtro de busqueda"
 					th=$(document.createElement("th")).appendTo(thead);
 			 		th.html("Producto");
@@ -148,15 +147,15 @@ var filtro_busq={};
 			 				td.html(itemLista.producto);
 			 				td=$(document.createElement("td")).appendTo(tr);
 			 				if(itemLista.montoRecarga1!=null){td.html(itemLista.montoRecarga1)}
-			 				else{td.html("0,00")}			 				
+			 				else{td.html("0,00")}
 			 				td.attr("style","text-align: center");
 			 				td=$(document.createElement("td")).appendTo(tr);
 			 				if(itemLista.montoRecarga2!=null){td.html(itemLista.montoRecarga2)}
-			 				else{td.html("0,00")}	
+			 				else{td.html("0,00")}
 			 				td.attr("style","text-align: center");
 			 				td=$(document.createElement("td")).appendTo(tr);
 			 				if(itemLista.montoRecarga3!=null){td.html(itemLista.montoRecarga3)}
-			 				else{td.html("0,00")}	
+			 				else{td.html("0,00")}
 			 				td.attr("style","text-align: center")
 			 				td=$(document.createElement("td")).appendTo(tr);
 			 				if(itemLista.totalProducto!=null){td.html(itemLista.totalProducto)}
@@ -191,7 +190,7 @@ var filtro_busq={};
 			    	var _axis="Bolivares";
 					var jsonChart={
 						title:{
-							text:"Recargas realizadas"	
+							text:"Recargas realizadas"
 						},
 						legend:{
 							position:"top"
@@ -209,7 +208,7 @@ var filtro_busq={};
 
 					}
 
-// SE OBTIENE LAS CATEGORIAS									
+// SE OBTIENE LAS CATEGORIAS
 					$.each(data.listaGrafico[0].categorias,function(posLista,itemLista){
 						jsonChart.categoryAxis.categories.push(itemLista.nombreCategoria);
 					});
@@ -232,15 +231,15 @@ var filtro_busq={};
 					});
 // GRAFICA
 					$("#chart").kendoChart(jsonChart);
-					
+
 
 
 			  	    });
-					$('#tabla-datos-general tbody tr:even').addClass('even ');  
+					$('#tabla-datos-general tbody tr:even').addClass('even ');
 		 			}else{
 						if(data.rc =="-29"){
 				             alert("Usuario actualmente desconectado");
-				             $(location).attr('href',base+'/'+pais+'/login');
+				             $(location).attr('href',baseURL+isoPais+'/login');
 				         }else{
 				 			$("#mensaje").remove();
 				 			var contenedor = $("#div_tablaDetalle");
@@ -268,7 +267,7 @@ var filtro_busq={};
 
 function validar_filtro_busqueda(div){
   var valido=true;
-//VALIDA INPUT:TEXT QUE SEAN REQUERIDOS NO SE ENCUENTREN VACIOS 
+//VALIDA INPUT:TEXT QUE SEAN REQUERIDOS NO SE ENCUENTREN VACIOS
   $.each($("#"+div+" input[type='text'].required"),function(posItem,item){
        var $elem=$(item);
         if($elem.val()==""){
@@ -278,8 +277,8 @@ function validar_filtro_busqueda(div){
                 $elem.attr("style","");
         }
   });
-  
-//VALIDA SELECT QUE SEAN REQUERIDOS NO SE ENCUENTREN VACIOS 
+
+//VALIDA SELECT QUE SEAN REQUERIDOS NO SE ENCUENTREN VACIOS
   $.each($("#"+div+" select.required"),function(posItem,item){
        var $elem=$(item);
       if($elem.val()==""){
@@ -288,25 +287,25 @@ function validar_filtro_busqueda(div){
       }else{
               $elem.attr("style","");
       }
-  });  
+  });
 
-  
+
 //VALIDA INPUT:CHECKBOX  y INPUT:RADIO QUE SEAN REQUERIDOS NO SE ENCUENTREN VACIOS
   var check = $("#"+div+" input[type='checkbox'].required:checked").length;
   var radio = $("#"+div+" input[type='radio'].required:checked ").length;
    if((check == "")&&($("#"+div+" input[type='checkbox'].required").length!="")){
-        valido=false;   	
+        valido=false;
      	$("#"+div+" input[type='checkbox'].required").next().attr("style","color:red");
    }else{
    		$("#"+div+" input[type='checkbox'].required").next().attr("style","");
    }
-  
+
     if((radio == "")&&($("#"+div+" input[type='radio'].required").length!="")){
         valido=false;
       	$("#"+div+" input[type='radio'].required").next().attr("style","color:red");
     }else{
 		$("#"+div+" input[type='radio'].required").next().attr("style","");
-    } 
+    }
 
 
     if(!valido){
@@ -316,7 +315,7 @@ function validar_filtro_busqueda(div){
 		$("#mensajeError").fadeOut("fast");
     }
 
-  
+
   return valido;
 }
 
@@ -329,19 +328,19 @@ function validar_filtro_busqueda(div){
           $aux.dialog('destroy')
           if(!data.ERROR){
             $('form#formulario').empty();
-            $('form#formulario').append('<input type="hidden" name="bytes" value="'+JSON.stringify(data.bytes)+'" />');       
-            $('form#formulario').append('<input type="hidden" name="ext" value="'+data.ext+'" />');  
-            $('form#formulario').append('<input type="hidden" name="nombreArchivo" value="'+data.nombreArchivo+'" />');  
-            $('form#formulario').attr('action',base+'/'+pais+"/file");
+            $('form#formulario').append('<input type="hidden" name="bytes" value="'+JSON.stringify(data.bytes)+'" />');
+            $('form#formulario').append('<input type="hidden" name="ext" value="'+data.ext+'" />');
+            $('form#formulario').append('<input type="hidden" name="nombreArchivo" value="'+data.nombreArchivo+'" />');
+            $('form#formulario').attr('action',baseURL+isoPais+"/file");
             $('form#formulario').submit()
           }else{
             if(data.ERROR=="-29"){
               alert('Usuario actualmente desconectado');
             location.reload();
             }else{
-              notificacion(titulo,data.ERROR) 
+              notificacion(titulo,data.ERROR)
             }
-            
+
           }
         })
 
