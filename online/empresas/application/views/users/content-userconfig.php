@@ -1,7 +1,7 @@
 <?php
 $CI =& get_instance();
 $pais = $CI->config->item('country');
-$urlBase= $CI->config->item('base_url');
+$urlBase= $CI->config->item('base_url').$pais.'/';
 $urlBaseCDN = $CI->config->item('base_url_cdn');
 $nombreCompleto = $this->session->userdata('nombreCompleto');
 ?>
@@ -15,13 +15,13 @@ $nombreCompleto = $this->session->userdata('nombreCompleto');
             <a id='usuario' href="#config-user"><?php echo lang('SUBMENU_USUARIO'); ?></a>
         </li>
         <li>
-            <a id='empresas' href="<?php echo $urlBase.'/empresas/config' ?>"><?php echo lang('SUBMENU_EMPRESAS'); ?></a>
+            <a id='empresas' href="<?php echo $urlBase.'empresas/config' ?>"><?php echo lang('SUBMENU_EMPRESAS'); ?></a>
         </li>
         <li>
-            <a id='sucursales' href="<?php echo $urlBase.'/empresas/configsuc' ?>"><?php echo lang('SUBMENU_SUCURSALES'); ?></a>
+            <a id='sucursales' href="<?php echo $urlBase.'empresas/configsuc' ?>"><?php echo lang('SUBMENU_SUCURSALES'); ?></a>
         </li>
         <li>
-            <a id='descargas'  href="<?php echo $urlBase.'/empresas/configdesc' ?>"><?php echo lang('SUBMENU_DESCARGAS'); ?></a>
+            <a id='descargas'  href="<?php echo $urlBase.'empresas/configdesc' ?>"><?php echo lang('SUBMENU_DESCARGAS'); ?></a>
         </li>
     </ul>
 
