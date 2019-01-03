@@ -53,6 +53,14 @@ define('MAX_FIELD_LENGTH', 15);
 define('BASE_URL', $_SERVER['BASE_URL']);
 define('BASE_CDN_URL', $_SERVER['BASE_CDN_URL']);
 define('BASE_CDN_PATH', $_SERVER['BASE_CDN_PATH']);
+define('WS_URL', $_SERVER['WS_URL']);
+define('WS_KEY', $_SERVER['WS_KEY']);
+define('ENCRYPTION_KEY', $_SERVER['ENCRYPTION_KEY']);
+define('SESS_COOKIE_NAME', $_SERVER['SESS_COOKIE_NAME']);
+define('SESS_EXPIRATION', $_SERVER['SESS_EXPIRATION']);
+define('COOKIE_PREFIX', $_SERVER['COOKIE_PREFIX']);
+define('COOKIE_PATH', $_SERVER['COOKIE_PATH']);
+define('COOKIE_SECURE', $_SERVER['COOKIE_SECURE']);
 
 
 /* End of file constants.php */

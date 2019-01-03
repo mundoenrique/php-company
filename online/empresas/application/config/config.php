@@ -3,10 +3,10 @@
 ini_set('memory_limit', '200M');
 
 //KeyNovo - Llave para Encriptar y Desencriptar
-$config['keyNovo']= base64_decode('dGVzdDEyMzQ=');
+$config['keyNovo']= base64_decode(WS_KEY);
 
 //URL Servicio Web WebLogic
-$config['urlWS']= 'http://172.24.6.148:8005/NovoEolWebInterfaceWS/webresources/';
+$config['urlWS']= WS_URL;
 //URL API Trayectos
 $config['urlAPI']= 'http://172.24.6.148:8005/ceo-fuel/1.0/';
 //URL Servicio
@@ -46,7 +46,7 @@ $config['modules_locations'] = array(APPPATH . 'modules/');
 | path to your installation.
 |
 */
-$config['keyNovo']= base64_decode('dGVzdDEyMzQ=');
+
 $config['base_url']	= BASE_URL;
 
 /*
@@ -257,7 +257,7 @@ $config['cache_path'] = '';
 | MUST set an encryption key.  See the user guide for info.
 |
 */
-$config['encryption_key'] = 'N0V02013';
+$config['encryption_key'] = ENCRYPTION_KEY;
 
 /*
 |--------------------------------------------------------------------------
@@ -278,7 +278,7 @@ $config['encryption_key'] = 'N0V02013';
 |
 */
 $config['sess_cookie_name']		= 'eol_session';
-$config['sess_expiration']		= 7200;
+$config['sess_expiration']		= SESS_EXPIRATION;
 $config['sess_expire_on_close']	= TRUE;
 $config['sess_encrypt_cookie']	= TRUE;
 $config['sess_use_database']	= FALSE;
@@ -298,10 +298,10 @@ $config['sess_time_to_update']	= 300;
 | 'cookie_secure' =  Cookies will only be set if a secure HTTPS connection exists.
 |
 */
-$config['cookie_prefix']	= "";
+$config['cookie_prefix']	= COOKIE_PREFIX;
 $config['cookie_domain']	= $config['base_url'];
-$config['cookie_path']		= "/";
-$config['cookie_secure']	= TRUE;
+$config['cookie_path']		= COOKIE_PATH;
+$config['cookie_secure']	= COOKIE_SECURE;
 
 /*
 |--------------------------------------------------------------------------
