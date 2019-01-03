@@ -106,7 +106,7 @@ var widget_var = {
 
 		if( widget_var.idproducto !== undefined ){
 
-			$.post( baseURL+"/api/v1/"+isoPais+"/empresas/cambiar",
+			$.post( baseURL+"api/v1/"+isoPais+"/empresas/cambiar",
 				{ 'data-accodgrupoe':widget_var.accodgrupoe, 'data-acrif':widget_var.acrif, 'data-acnomcia':widget_var.acnomcia, 'data-acrazonsocial':widget_var.acrazonsocial, 'data-acdesc':widget_var.acdesc, 'data-accodcia':widget_var.accodcia, 'data-idproducto':widget_var.idproducto, 'data-nomProd':widget_var.nombprod, 'data-marcProd':widget_var.marcprod, 'llamada':'productos' },
 				 function(data){
 
