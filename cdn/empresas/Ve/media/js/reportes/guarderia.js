@@ -1,7 +1,6 @@
-var path = window.location.href.split('/');
-var base = path[0] + "//" + path[2] + '/' + path[3];
-var pais = path[4];
-var api = "/api/v1/";
+var baseURL = $('body').attr('data-app-base');
+var isoPais = $('body').attr('data-country');
+var api = "api/v1/";
 var filtro_busq = {};
 
 $(".fecha").keypress(function (e) {
@@ -14,7 +13,7 @@ $(document).ready(function () {
  hide( 'lotes-2' );
  hide( 'batchs-last' );
 	var	guarderia_riff = $("#Guarderia-riff").val();
-	$.getJSON(base + api + pais + '/empresas/consulta-empresa-usuario').always(function( data ) {
+	$.getJSON(baseURL + api + isoPais + '/empresas/consulta-empresa-usuario').always(function( data ) {
 
 		if(!(data.ERROR)){
 			$.each( data.lista, function( k, v ){
@@ -30,7 +29,7 @@ $(document).ready(function () {
 		}else{
 			if(data.ERROR.indexOf('-29') !=-1){
 				 alert("Usuario actualmente desconectado");
-				 $(location).attr('href',base+'/'+pais+'/login');
+				 $(location).attr('href',baseURL+isoPais+'/login');
 			 }else{
 					return false;
 			 }
@@ -51,12 +50,12 @@ $(document).ready(function () {
 	   }
 
 		$("#export_excel").click(function () {
-				descargarArchivo(filtro_busq, base + api + pais +
+				descargarArchivo(filtro_busq, baseURL + api + isoPais +
 					 "/reportes/guarderiaExpXLS", "Exportar XLS");
 		});
 
 		$("#export_pdf").click(function () {
-				descargarArchivo(filtro_busq, base + api + pais +
+				descargarArchivo(filtro_busq, baseURL + api + isoPais +
 					"/reportes/guarderiaExpPDF", "Exportar PDF");
 		});
 
@@ -74,7 +73,7 @@ $(document).ready(function () {
 
 					filtro_busq.nombreEmpresa = $("#Empresa-nombre").val();
 					filtro_busq.paginaActual = paginaActual;
-					filtro_busq.pais = pais;
+					filtro_busq.isoPais = isoPais;
 				  filtro_busq.Fechaini =  $("#Guarderia-fecha-in").val();
 				  filtro_busq.Fechafin = $("#Guarderia-fecha-fin").val();
 
@@ -88,7 +87,7 @@ $(document).ready(function () {
 								$('#div_tablaDetalle').fadeOut("fast");
 
 								/******* SE REALIZA LA INVOCACION AJAX *******/
-								$consulta = $.post(base + api + pais + "/reportes/GuarderiaResult", filtro_busq);
+								$consulta = $.post(baseURL + api + isoPais + "/reportes/GuarderiaResult", filtro_busq);
 								/******* DE SER EXITOSA LA COMUNICACION CON EL SERVICIO SE EJECUTA EL SIGUIENTE METODO "DONE" *******/
 								$consulta.done(function (data) {
 										$("#mensaje").remove();
@@ -143,7 +142,7 @@ $(document).ready(function () {
 										} else {
 												if (data.rc == "-29") {
 														alert(data.mensaje);
-														$(location).attr('href', base + '/' + pais + '/login');
+														$(location).attr('href', baseURL + isoPais + '/login');
 												} else {
 														$("#mensaje").remove();
 														$("#tabla-estatus-lotes").fadeOut("fast");
