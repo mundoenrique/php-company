@@ -1,6 +1,3 @@
-	var baseURL = $('body').attr('data-app-base');
-	var isoPais = $('body').attr('data-country');
-	var api = "api/v1/";
 	var colores = ["#54C2D0","#50C592","#2B569F","#994596","#F5921E","#298C9A","#2C855F","#1A325B","#522551","#B46607"];
 
 

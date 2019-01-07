@@ -5,8 +5,6 @@ var mensaje1 = null;
 var mensaje2 = null;
 $(function(){
 
-		var baseURL = $('body').attr('data-app-base');
-		var isoPais = $('body').attr('data-country');
 
     $("fieldset > :input").on("click focus keyup", function(){
 

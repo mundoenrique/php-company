@@ -1,7 +1,4 @@
 $(document).ready(function() {
-	var baseURL = $('body').attr('data-app-base');
-	var isoPais = $('body').attr('data-country');
-	var api = "api/v1/";
 	var scroll_interval;
 	var ancho=0;
 

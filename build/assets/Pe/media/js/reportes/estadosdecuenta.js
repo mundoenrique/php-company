@@ -1,9 +1,7 @@
 //---------------------------------------------------------
 //SE ARMA LA URL PARA TRABAJARLA DENTRO DE TODO EL .JS
 //---------------------------------------------------------
-var baseURL = $('body').attr('data-app-base');
-var isoPais = $('body').attr('data-country');
-var api = "api/v1/";
+
 var scroll_interval;
 var ancho=0;
 var icon_abono=0;

@@ -10,10 +10,6 @@ $(function () {
 		$(".listaxAuth .checkbox-select").remove();
 	}
 
-	var baseURL = $('body').attr('data-app-base');
-	var isoPais = $('body').attr('data-country');
-	var api = "api/v1/";
-
 	var js_var = {
 		loteF: "",
 		numloteF: "",

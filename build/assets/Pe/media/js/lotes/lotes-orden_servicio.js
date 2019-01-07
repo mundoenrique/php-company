@@ -36,11 +36,6 @@ $(function(){
 
 	$('#lotes-general').show();
 
-	var baseURL = $('body').attr('data-app-base');
-	var isoPais = $('body').attr('data-country');
-	var api ="api/v1/";
-
-
 	//$("#tabla-datos-general").find(".OSinfo").hide(); // ocultar lotes de os
 
 

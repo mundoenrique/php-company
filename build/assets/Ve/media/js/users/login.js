@@ -1,7 +1,4 @@
-var baseURL = $('body').attr('data-app-base'),
-		isoPais = $('body').attr('data-country'),
-
-    ingresar_ = function() {
+var ingresar_ = function() {
         var user = $("#user_login").val();
 
         var pass = $("#user_pass").val();

@@ -1,7 +1,4 @@
 // VARIABLES GLOBALES PARA URL
-var baseURL = $('body').attr('data-app-base');
-var isoPais = $('body').attr('data-country');
-var api = "api/v1/";
 $(function() {
 
     $('#filtroOS').show();

@@ -1,8 +1,5 @@
 $( document ).ready(function() {
 
-var baseURL = $('body').attr('data-app-base');
-var isoPais = $('body').attr('data-country');
-
   $("#enviarTerminos").on("click",function(){
   		
   		if($("#aceptoTerminos").is(':checked')==true){

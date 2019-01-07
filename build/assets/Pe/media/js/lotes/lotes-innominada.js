@@ -1,6 +1,3 @@
-var baseURL = $('body').attr('data-app-base');
-var isoPais = $('body').attr('data-country');
-var api = "api/v1/";
 var datatable;
 
 	function calendario(input){

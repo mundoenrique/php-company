@@ -1,8 +1,4 @@
 $(function(){ // Document ready
-
-	var baseURL = $('body').attr('data-app-base');
-	var isoPais = $('body').attr('data-country');
-	var api ="api/v1/";
 	var tamPg = 10;
 	var selPgActual=1;
 	var tipoLote;

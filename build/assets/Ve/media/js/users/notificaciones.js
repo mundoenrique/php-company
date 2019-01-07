@@ -92,10 +92,6 @@
 			}
 			if( ErrorCount == 0 ){
 
-				var baseURL = $('body').attr('data-app-base');
-				var isoPais = $('body').attr('data-country');
-				var api ="api/v1/";
-
 				$.post( baseURL+api+isoPais+'/usuario/notificaciones/envio', Notificaciones ).done(function(data){
 					var data = JSON.parse( data );
 						if( data.rc == 0 ){
@@ -163,10 +159,6 @@
     }
 
 		function ConsultaNotificaciones( funcion, datosPost, titulo ){
-
-				var baseURL = $('body').attr('data-app-base');
-				var isoPais = $('body').attr('data-country');
-				var api ="api/v1/";
 				var tamPg = 10;
 				var selPgActual=1;
 				var tipoLote;

@@ -1,9 +1,5 @@
 $(function(){ // Document ready
 
-	
-	var baseURL =  $('body').attr('data-app-base');
-	var isoPais = $('body').attr('data-country');
-	var api ="api/v1/";
 
 	$("#archivo").on('click',function () {
     	$("#userfile").trigger('click');

@@ -1,10 +1,6 @@
 
 $(function() { // Document ready
 
-var baseURL = $('body').attr('data-app-base');
-var isoPais = $('body').attr('data-country');
-var api = "api/v1/";
-
 var f, dir, forma;
 
 

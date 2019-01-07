@@ -7,11 +7,6 @@ $('#lotes-general').show();
 if($("#msg").val()){
 	notificacion("ADVERTENCIA", $("#msg").val());
 }
-
-var baseURL = $('body').attr('data-app-base');
-var isoPais = $('body').attr('data-country');
-var api = "api/v1/";
-
 	COS_var = {
 		fecha_inicio: "",
 		fecha_fin: "",

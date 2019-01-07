@@ -1,5 +1,3 @@
-var baseURL = $('body').attr('data-app-base');
-var isoPais = $('body').attr('data-country');
 var numlote  = "";
 var	notificacion = function(titu, msj){
 		var canvas = "<div>"+msj+"</div>";

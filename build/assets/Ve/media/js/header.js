@@ -1,8 +1,5 @@
 $(function(){ //document ready
 
-	var baseURL = $('body').attr('data-app-base');
-	var isoPais = $('body').attr('data-country');
-
   head_var = {
     idleTimer : null,
     out : null

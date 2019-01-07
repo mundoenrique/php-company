@@ -1,10 +1,5 @@
 $(function() {
 
-var baseURL = $('body').attr('data-app-base');
-var isoPais = $('body').attr('data-country');
-var api = "api/v1/";
-
-
 // Datos a enviar
 
 var widget_var = {
@@ -19,9 +14,6 @@ var widget_var = {
 }
 
 // -- fin datos a enviar
-
-
-
 // Cambiar empresa
 
 

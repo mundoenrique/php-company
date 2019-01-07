@@ -1,5 +1,3 @@
-var baseURL = $('body').attr('data-app-base');
-var isoPais = $('body').attr('data-country');
 var	numlote  = "";
 var	fecha_inicial = "";
 var	fecha_final = "";
