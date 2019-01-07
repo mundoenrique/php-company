@@ -62,7 +62,7 @@ class Users extends CI_Controller {
             //INSTANCIA DEL CONTENIDO PARA EL HEADER, INCLUYE MENU
             $header = $this->parser->parse('layouts/layout-header',array('menuHeaderActive'=>FALSE,'menuHeaderMainActive'=>FALSE,'menuHeader'=>$menuHeader,'titlePage'=>$titlePage,'is_login'=>true),TRUE);
             //JAVASCRIPTS A CARGAR
-            $FooterCustomInsertJS=["jquery-1.10.2.min.js","jquery-ui-1.10.3.custom.min.js","jquery-md5.js","jquery.kwicks.js","jquery.ui.sliderbutton.js","jquery.balloon.min.js","users/login.js"];
+            $FooterCustomInsertJS=["jquery-1.10.2.min.js","jquery-ui-1.10.3.custom.min.js","jquery-md5.js","jquery.kwicks.js","jquery.ui.sliderbutton.js","jquery.balloon.min.js","users/login.js","routes.js"];
             //INSTANCIA DE CÓDIGO JS A AGREGAR
             $FooterCustomJS = "";
             //INSTANCIA PARA EL FOOTER
@@ -417,7 +417,7 @@ class Users extends CI_Controller {
         //INSTANCIA DEL CONTENIDO PARA EL HEADER, INCLUYE MENU
         $header = $this->parser->parse('layouts/layout-header',array('menuHeaderActive'=>FALSE,'menuHeaderMainActive'=>FALSE,'menuHeader'=>$menuHeader,'titlePage'=>$titlePage),TRUE);
         //JAVASCRIPTS A CARGAR
-        $FooterCustomInsertJS=["jquery-1.10.2.min.js","jquery-ui-1.10.3.custom.min.js","jquery-md5.js","jquery.kwicks.js","jquery.ui.sliderbutton.js","jquery.balloon.min.js","users/pass-recovery.js"];
+        $FooterCustomInsertJS=["jquery-1.10.2.min.js","jquery-ui-1.10.3.custom.min.js","jquery-md5.js","jquery.kwicks.js","jquery.ui.sliderbutton.js","jquery.balloon.min.js","users/pass-recovery.js","routes.js"];
         //INSTANCIA DEL FOOTER
         $footer = $this->parser->parse('layouts/layout-footer',array('menuFooterActive'=>TRUE,'menuFooter'=>$menuFooter,'FooterCustomInsertJSActive'=>TRUE,'FooterCustomInsertJS'=>$FooterCustomInsertJS,'FooterCustomJSActive'=>FALSE),TRUE);
         //INSTANCIA DE PARTE DE CUERPO
@@ -596,7 +596,7 @@ class Users extends CI_Controller {
             //INSTANCIA DEL CONTENIDO PARA EL HEADER , INCLUYE MENU
             $header = $this->parser->parse('layouts/layout-header',array('bodyclass'=>'full-width','menuHeaderActive'=>FALSE,'menuHeaderMainActive'=>FALSE,'menuHeader'=>$menuHeader,'titlePage'=>$titlePage),TRUE);
             //JAVASCRIPTS A CARGAR.
-            $FooterCustomInsertJS=["jquery-1.10.2.min.js","jquery-ui-1.10.3.custom.min.js","jquery.balloon.min.js","users/terminos.js"];
+            $FooterCustomInsertJS=["jquery-1.10.2.min.js","jquery-ui-1.10.3.custom.min.js","jquery.balloon.min.js","users/terminos.js","routes.js"];
             $footer = $this->parser->parse('layouts/layout-footer',array('menuFooterActive'=>TRUE,'menuFooter'=>$menuFooter,'FooterCustomInsertJSActive'=>TRUE,'FooterCustomInsertJS'=>$FooterCustomInsertJS,'FooterCustomJSActive'=>FALSE),TRUE);
             $content = $this->parser->parse('users/content-condiciones',array(),TRUE);
             $sidebarlogin= $this->parser->parse('users/widget-signin',array('sidebarActive'=>FALSE),TRUE);
@@ -660,7 +660,7 @@ class Users extends CI_Controller {
             //INSTANCIA DEL CONTENIDO PARA EL HEADER , INCLUYE MENU
             $header = $this->parser->parse('layouts/layout-header',array('bodyclass'=>'full-width','menuHeaderActive'=>FALSE,'menuHeaderMainActive'=>FALSE,'menuHeader'=>$menuHeader,'titlePage'=>$titlePage),TRUE);
             //JAVASCRIPTS A CARGAR.
-            $FooterCustomInsertJS=["jquery-1.10.2.min.js","jquery-ui-1.10.3.custom.min.js","jquery.balloon.min.js","jquery-md5.js","users/clave.js","header.js"];
+            $FooterCustomInsertJS=["jquery-1.10.2.min.js","jquery-ui-1.10.3.custom.min.js","jquery.balloon.min.js","jquery-md5.js","users/clave.js","header.js","routes.js"];
             $footer = $this->parser->parse('layouts/layout-footer',array('menuFooterActive'=>TRUE,'menuFooter'=>$menuFooter,'FooterCustomInsertJSActive'=>TRUE,'FooterCustomInsertJS'=>$FooterCustomInsertJS,'FooterCustomJSActive'=>FALSE),TRUE);
             $content = $this->parser->parse('users/content-changePassNewUser',array(
                 'titulo'=>$nombreCompleto,
@@ -851,7 +851,7 @@ class Users extends CI_Controller {
             $lastSessionD = $this->session->userdata('lastSession');
             $FooterCustomInsertJS=["jquery-1.10.2.min.js","jquery-ui-1.10.3.custom.min.js",
 						"jquery.balloon.min.js","jquery-md5.js","jquery.paginate.js",
-						"users/configuracion.js","header.js","jquery.fileupload.js","jquery.iframe-transport.js"];
+						"users/configuracion.js","header.js","jquery.fileupload.js","jquery.iframe-transport.js","routes.js"];
             $FooterCustomJS="";
             $titlePage="Conexión Empresas Online-Configuración";
             $title="Configuración";
@@ -1890,11 +1890,11 @@ class Users extends CI_Controller {
     public function getPerfilUser($urlCountry){
 
         np_hoplite_countryCheck($urlCountry);
-        
+
         $logged_in = $this->session->userdata('logged_in');
         $paisS = $this->session->userdata('pais');
         print_r($paisS);
-       
+
 
         if($paisS==$urlCountry &&$logged_in){
 

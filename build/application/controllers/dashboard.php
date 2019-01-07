@@ -60,7 +60,7 @@ class Dashboard extends CI_Controller {
 			//INSTANCIA MENU FOOTER
 			$menuFooter = $this->parser->parse('widgets/widget-menuFooter',array(),TRUE);
 			$header = $this->parser->parse('layouts/layout-header',array('bodyclass'=>'full-width','menuHeaderActive'=>TRUE,'menuHeaderMainActive'=>TRUE,'menuHeader'=>$menuHeader,'titlePage'=>$titlePage),TRUE);
-			$FooterCustomInsertJS=["jquery-1.10.2.min.js","jquery-ui-1.10.3.custom.min.js","jquery.balloon.min.js","jquery.paginate.js","jquery.isotope.min.js","dashboard/dashboard.js","header.js"];
+			$FooterCustomInsertJS=["jquery-1.10.2.min.js","jquery-ui-1.10.3.custom.min.js","jquery.balloon.min.js","jquery.paginate.js","jquery.isotope.min.js","dashboard/dashboard.js","header.js","routes.js"];
 			$footer = $this->parser->parse('layouts/layout-footer',array('menuFooterActive'=>TRUE,'menuFooter'=>$menuFooter,'FooterCustomInsertJSActive'=>TRUE,'FooterCustomInsertJS'=>$FooterCustomInsertJS,'FooterCustomJSActive'=>TRUE,'FooterCustomJS'=>$FooterCustomJS),TRUE);
 
 			$content = $this->parser->parse('dashboard/content-dashboard',array('titulo'=>$nombreCompleto,'lastSession'=>$lastSessionD),TRUE);
@@ -509,7 +509,7 @@ class Dashboard extends CI_Controller {
 				$menuFooter = $this->parser->parse('widgets/widget-menuFooter',array(),TRUE);
 
 				$header = $this->parser->parse('layouts/layout-header',array('bodyclass'=>'','menuHeaderActive'=>TRUE,'menuHeaderMainActive'=>TRUE,'menuHeader'=>$menuHeader,'titlePage'=>$titlePage),TRUE);
-				$FooterCustomInsertJS=["jquery-1.10.2.min.js","jquery-ui-1.10.3.custom.min.js","jquery.isotope.min.js","jquery.balloon.min.js","dashboard/productos.js","header.js"];
+				$FooterCustomInsertJS=["jquery-1.10.2.min.js","jquery-ui-1.10.3.custom.min.js","jquery.isotope.min.js","jquery.balloon.min.js","dashboard/productos.js","header.js","routes.js"];
 				$footer = $this->parser->parse('layouts/layout-footer',array('menuFooterActive'=>TRUE,'menuFooter'=>$menuFooter,'FooterCustomInsertJSActive'=>TRUE,'FooterCustomInsertJS'=>$FooterCustomInsertJS,'FooterCustomJSActive'=>TRUE,'FooterCustomJS'=>$FooterCustomJS),TRUE);
 				$content = $this->parser->parse('dashboard/content-productos',array(
 					'titulo'=>$titulo,
@@ -640,7 +640,7 @@ class Dashboard extends CI_Controller {
 				$titlePage="Conexión Empresas Online - Productos Detalle";
 			}
 
-			$FooterCustomInsertJS=["jquery-1.10.2.min.js","jquery-ui-1.10.3.custom.min.js","jquery.balloon.min.js","dashboard/widget-empresa.js","header.js"];
+			$FooterCustomInsertJS=["jquery-1.10.2.min.js","jquery-ui-1.10.3.custom.min.js","jquery.balloon.min.js","dashboard/widget-empresa.js","header.js","routes.js"];
 			//INSTANCIA MENU HEADER
 			$menuHeader = $this->parser->parse('widgets/widget-menuHeader',array(),TRUE);
 			//INSTANCIA MENU FOOTER
@@ -1072,7 +1072,7 @@ class Dashboard extends CI_Controller {
 			$FooterCustomJS="";
 
 			$titlePage= "Otros programas";
-			$FooterCustomInsertJS=["jquery-1.10.2.min.js","jquery-ui-1.10.3.custom.min.js","jquery.balloon.min.js","dashboard/widget-empresa.js","dashboard/other-products.js","header.js"];
+			$FooterCustomInsertJS=["jquery-1.10.2.min.js","jquery-ui-1.10.3.custom.min.js","jquery.balloon.min.js","dashboard/widget-empresa.js","dashboard/other-products.js","header.js","routes.js"];
 			//INSTANCIA MENU HEADER
 			$menuHeader = $this->parser->parse('widgets/widget-menuHeader',array(),TRUE);
 			//INSTANCIA MENU FOOTER

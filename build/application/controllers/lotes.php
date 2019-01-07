@@ -43,7 +43,7 @@ class Lotes extends CI_Controller {
 			$token = $this->session->userdata('token');
 			$nombreCompleto = $this->session->userdata('nombreCompleto');
 			$lastSessionD = $this->session->userdata('lastSession');
-			$FooterCustomInsertJS=["jquery-1.10.2.min.js","jquery-ui-1.10.3.custom.min.js","jquery-md5.js","jquery.balloon.min.js","jquery.fileupload.js","jquery.iframe-transport.js","dashboard/widget-empresa.js","lotes/lotes.js","jquery.dataTables.min.js","header.js"];
+			$FooterCustomInsertJS=["jquery-1.10.2.min.js","jquery-ui-1.10.3.custom.min.js","jquery-md5.js","jquery.balloon.min.js","jquery.fileupload.js","jquery.iframe-transport.js","dashboard/widget-empresa.js","lotes/lotes.js","jquery.dataTables.min.js","header.js","routes.js"];
 			$FooterCustomJS="";
 			$titlePage="Conexión Empresas Online - Lotes";
 
@@ -131,7 +131,7 @@ class Lotes extends CI_Controller {
 
 			$nombreCompleto = $this->session->userdata('nombreCompleto');
 			$lastSessionD = $this->session->userdata('lastSession');
-			$FooterCustomInsertJS=["jquery-1.10.2.min.js","jquery-ui-1.10.3.custom.min.js","jquery.balloon.min.js","dashboard/widget-empresa.js","header.js"];
+			$FooterCustomInsertJS=["jquery-1.10.2.min.js","jquery-ui-1.10.3.custom.min.js","jquery.balloon.min.js","dashboard/widget-empresa.js","header.js","routes.js"];
 			$FooterCustomJS="";
 			$titlePage="Conexión Empresas Online - Lotes";
 			$idProductoS = $this->session->userdata('idProductoS');
@@ -202,7 +202,7 @@ class Lotes extends CI_Controller {
 			$token = $this->session->userdata('token');
 			$nombreCompleto = $this->session->userdata('nombreCompleto');
 			$lastSessionD = $this->session->userdata('lastSession');
-			$FooterCustomInsertJS=["jquery-1.10.2.min.js","jquery-ui-1.10.3.custom.min.js","jquery.balloon.min.js","jquery-md5.js","dashboard/widget-empresa.js","lotes/lotes-confirmacion.js","header.js"];
+			$FooterCustomInsertJS=["jquery-1.10.2.min.js","jquery-ui-1.10.3.custom.min.js","jquery.balloon.min.js","jquery-md5.js","dashboard/widget-empresa.js","lotes/lotes-confirmacion.js","header.js","routes.js"];
 			$FooterCustomJS="";
 			$titlePage="Conexión Empresas Online - Lotes";
 			$idProductoS = $this->session->userdata('idProductoS');
@@ -275,7 +275,7 @@ class Lotes extends CI_Controller {
 			$token = $this->session->userdata('token');
 			$nombreCompleto = $this->session->userdata('nombreCompleto');
 			$lastSessionD = $this->session->userdata('lastSession');
-			$FooterCustomInsertJS=["jquery-1.10.2.min.js","jquery-ui-1.10.3.custom.min.js","jquery.balloon.min.js","jquery-md5.js","dashboard/widget-empresa.js","lotes/lotes-autorizacion.js","jquery.dataTables.min.js","header.js"];
+			$FooterCustomInsertJS=["jquery-1.10.2.min.js","jquery-ui-1.10.3.custom.min.js","jquery.balloon.min.js","jquery-md5.js","dashboard/widget-empresa.js","lotes/lotes-autorizacion.js","jquery.dataTables.min.js","header.js","routes.js"];
 			$FooterCustomJS="";
 			$titlePage="Conexión Empresas Online - Lotes";
 
@@ -948,7 +948,7 @@ class Lotes extends CI_Controller {
 
 			$nombreCompleto = $this->session->userdata('nombreCompleto');
 			$lastSessionD = $this->session->userdata('lastSession');
-			$FooterCustomInsertJS=["jquery-1.10.2.min.js","jquery-ui-1.10.3.custom.min.js","jquery.balloon.min.js","dashboard/widget-empresa.js","lotes/lotes-autorizacion.js","jquery.dataTables.min.js","header.js"];
+			$FooterCustomInsertJS=["jquery-1.10.2.min.js","jquery-ui-1.10.3.custom.min.js","jquery.balloon.min.js","dashboard/widget-empresa.js","lotes/lotes-autorizacion.js","jquery.dataTables.min.js","header.js","routes.js"];
 			$FooterCustomJS="";
 			$titlePage="Conexión Empresas Online - Lotes";
 			$programa = $this->session->userdata('nombreProductoS').' / '. $this->session->userdata('marcaProductoS') ;
@@ -2027,7 +2027,7 @@ class Lotes extends CI_Controller {
 
 			$nombreCompleto = $this->session->userdata('nombreCompleto');
 			$lastSessionD = $this->session->userdata('lastSession');
-			$FooterCustomInsertJS=["jquery-1.10.2.min.js","jquery-ui-1.10.3.custom.min.js","jquery.balloon.min.js","dashboard/widget-empresa.js","header.js","jquery.dataTables.min.js" ,"lotes/lotes-orden_servicio.js"];
+			$FooterCustomInsertJS=["jquery-1.10.2.min.js","jquery-ui-1.10.3.custom.min.js","jquery.balloon.min.js","dashboard/widget-empresa.js","header.js","jquery.dataTables.min.js" ,"lotes/lotes-orden_servicio.js","routes.js"];
 			$FooterCustomJS="";
 			$titlePage="Conexión Empresas Online - Lotes";
 
@@ -2447,7 +2447,7 @@ class Lotes extends CI_Controller {
 		$paisS = $this->session->userdata('pais');
 
 		if($paisS==$urlCountry && $logged_in && $moduloAct!==false){
-			$FooterCustomInsertJS=["jquery-1.10.2.min.js","jquery-ui-1.10.3.custom.min.js","jquery.balloon.min.js","jquery.paginate.js","header.js","dashboard/widget-empresa.js","jquery.fileupload.js","jquery.iframe-transport.js","jquery-md5.js","lotes/lotes-reproceso.js"];
+			$FooterCustomInsertJS=["jquery-1.10.2.min.js","jquery-ui-1.10.3.custom.min.js","jquery.balloon.min.js","jquery.paginate.js","header.js","dashboard/widget-empresa.js","jquery.fileupload.js","jquery.iframe-transport.js","jquery-md5.js","lotes/lotes-reproceso.js","routes.js"];
 			$FooterCustomJS="";
 			$titlePage="Reproceso de Datos";
 

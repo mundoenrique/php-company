@@ -46,6 +46,7 @@ class Combustible extends CI_Controller
 					'dashboard/widget-empresa.js',
 					'combustible/jquery.dataTables.js',
 					'combustible/dataTables.buttons.min.js',
+					'routes.js',
 					'combustible/routes.js'
 				];
         //Add languages

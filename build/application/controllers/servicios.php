@@ -35,7 +35,7 @@ class Servicios extends CI_Controller {
 
         if($paisS==$urlCountry && $logged_in && $moduloAct!==false){
 
-            $FooterCustomInsertJS=["jquery-1.10.2.min.js","jquery-ui-1.10.3.custom.min.js","jquery.balloon.min.js","jquery-md5.js","jquery.paginate.js","header.js","dashboard/widget-empresa.js","servicios/transferencia-maestra.js"];
+            $FooterCustomInsertJS=["jquery-1.10.2.min.js","jquery-ui-1.10.3.custom.min.js","jquery.balloon.min.js","jquery-md5.js","jquery.paginate.js","header.js","dashboard/widget-empresa.js","servicios/transferencia-maestra.js","routes.js"];
             $FooterCustomJS="";
 
             $titlePage="Transferencia maestra";
@@ -717,7 +717,7 @@ class Servicios extends CI_Controller {
 
         if($paisS==$urlCountry && $logged_in && $moduloAct!==false){
 
-            $FooterCustomInsertJS=["jquery-1.10.2.min.js","jquery-ui-1.10.3.custom.min.js","jquery.balloon.min.js","jquery.dataTables.min.js","header.js","dashboard/widget-empresa.js","jquery.fileupload.js","jquery.iframe-transport.js","servicios/actualizar-datos.js"];
+            $FooterCustomInsertJS=["jquery-1.10.2.min.js","jquery-ui-1.10.3.custom.min.js","jquery.balloon.min.js","jquery.dataTables.min.js","header.js","dashboard/widget-empresa.js","jquery.fileupload.js","jquery.iframe-transport.js","servicios/actualizar-datos.js","routes.js"];
             $FooterCustomJS="";
             $titlePage="Actualizar datos";
 

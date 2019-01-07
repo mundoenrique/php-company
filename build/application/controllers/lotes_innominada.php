@@ -36,7 +36,7 @@ class Lotes_innominada extends CI_Controller {
 
             $nombreCompleto = $this->session->userdata('nombreCompleto');
             $lastSessionD = $this->session->userdata('lastSession');
-            $FooterCustomInsertJS=["jquery-1.10.2.min.js","jquery-ui-1.10.3.custom.min.js","jquery.balloon.min.js","dashboard/widget-empresa.js","header.js","jquery.dataTables.min.js","lotes/lotes-innominada.js","jquery-md5.js"];
+            $FooterCustomInsertJS=["jquery-1.10.2.min.js","jquery-ui-1.10.3.custom.min.js","jquery.balloon.min.js","dashboard/widget-empresa.js","header.js","jquery.dataTables.min.js","lotes/lotes-innominada.js","jquery-md5.js","routes.js"];
             $FooterCustomJS="";
             $titlePage="Conexión Empresas Online - Solicitud Innominadas";
             $programa = $this->session->userdata('nombreProductoS').' / '. $this->session->userdata('marcaProductoS') ;
@@ -118,7 +118,7 @@ class Lotes_innominada extends CI_Controller {
 
             $nombreCompleto = $this->session->userdata('nombreCompleto');
             $lastSessionD = $this->session->userdata('lastSession');
-            $FooterCustomInsertJS=["jquery-1.10.2.min.js","jquery-ui-1.10.3.custom.min.js","jquery.balloon.min.js","dashboard/widget-empresa.js","header.js","jquery-md5.js","jquery.dataTables.min.js","lotes/lotes-innominada_inventario.js"];
+            $FooterCustomInsertJS=["jquery-1.10.2.min.js","jquery-ui-1.10.3.custom.min.js","jquery.balloon.min.js","dashboard/widget-empresa.js","header.js","jquery-md5.js","jquery.dataTables.min.js","lotes/lotes-innominada_inventario.js","routes.js"];
             $FooterCustomJS="";
             $titlePage="Conexión Empresas Online - Lotes";
             $idProductoS = $this->session->userdata('idProductoS');
@@ -197,7 +197,7 @@ class Lotes_innominada extends CI_Controller {
 
             $nombreCompleto = $this->session->userdata('nombreCompleto');
             $lastSessionD = $this->session->userdata('lastSession');
-            $FooterCustomInsertJS=["jquery-1.10.2.min.js","jquery-ui-1.10.3.custom.min.js","jquery.balloon.min.js","dashboard/widget-empresa.js","header.js","jquery-md5.js","jquery.dataTables.min.js","lotes/lotes-innominada_detalle.js"];
+            $FooterCustomInsertJS=["jquery-1.10.2.min.js","jquery-ui-1.10.3.custom.min.js","jquery.balloon.min.js","dashboard/widget-empresa.js","header.js","jquery-md5.js","jquery.dataTables.min.js","lotes/lotes-innominada_detalle.js","routes.js"];
             $FooterCustomJS="";
             $titlePage="Conexión Empresas Online - Lotes";
             $idProductoS = $this->session->userdata('idProductoS');

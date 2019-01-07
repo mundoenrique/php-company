@@ -112,7 +112,8 @@ class Guides extends CI_Controller
 						"jquery.balloon.min.js",
 						"jquery.paginate.js",
 						"jquery.isotope.min.js",
-						"header.js"
+						"header.js",
+						"routes.js"
 					];
 					$footer = $this->parser->parse('layouts/layout-footer',array(
 						'menuFooterActive' => TRUE,
@@ -138,7 +139,8 @@ class Guides extends CI_Controller
 						"jquery.paginate.js",
 						"jquery.isotope.min.js",
 						"header.js",
-						"guides/guides.js"
+						"guides/guides.js",
+						"routes.js"
 					];
 					$footer = $this->parser->parse('layouts/layout-footer',array(
 						'menuFooterActive' => TRUE,
