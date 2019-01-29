@@ -263,7 +263,7 @@ $lang["TITULO_ERROR"] = 'No ha sido posible procesar su solicitud.';
 $lang["ERROR_RIF"] = 'Por favor verifique el No. de RIF de la empresa.';
 $lang["ERROR_USER"] = 'El Usuario no está registrado en el sistema.';
 $lang["ERROR_MAIL"] = 'El correo indicado no corresponde, por favor verifíquelo e inténtelo de nuevo.';
-$lang["ERROR_SUPPORT"] = 'Por favor envíe un correo a <strong>soporteempresas@tebca.com</strong> o contacte a nuestros Ejecutivos en los teléfonos: ...';
+$lang["ERROR_SUPPORT"] = 'Por favor envíe un correo a <strong>soporteempresas@pichincha.com</strong> o contacte a nuestros Ejecutivos en los teléfonos: ...';
 
 //Botón de pago
 $lang['PAG_OS_E_CORREO'] = 'No fue posible enviar el correo,<br> intente más tarde';
