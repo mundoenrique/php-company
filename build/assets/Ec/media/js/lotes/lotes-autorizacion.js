@@ -11,11 +11,6 @@ if( !$("#loteXdesa").val()&& !$('#lotesxAuth').val() ){
   $(".listaxAuth .checkbox-select").remove();
 }
 
-var path =window.location.href.split( '/' );
-var baseURL = path[0]+ "//" +path[2]+'/'+path[3];
-var isoPais = path[4];
-var api = "/api/v1/";
-
 
   var js_var ={
     loteF:"", numloteF:"", tipoloteF:"",
@@ -69,7 +64,7 @@ var api = "/api/v1/";
         js_var.loteF = js_var.loteF.split(',');
       }*/
       var $aux = $('#loading').dialog({title:"Firmando lote",modal: true, bgiframe: true, dialogClass: 'hide-close'});
-      $.post(baseURL+"/"+isoPais+'/lotes/autorizacion/firmar',{'data-lotes': js_var.loteF,'data-pass':pass}).done(function(data){
+      $.post(baseURL+isoPais+'/lotes/autorizacion/firmar',{'data-lotes': js_var.loteF,'data-pass':pass}).done(function(data){
          $aux.dialog('destroy');
         if(!data.ERROR){
 
@@ -138,7 +133,7 @@ $('#lotes-2').on('click','#select-allA', function() {
 
       $('#loading').dialog({title:'Autorizando lotes', modal:true, resizable:false, dialogClass: 'hide-close', close:function(){$(this).dialog('destroy')}});
 
-      $.post(baseURL+'/'+isoPais+'/lotes/preliminar',{'data-lotes':js_var.loteA, 'data-pass':pass,'data-tipoOS':osTipo})
+      $.post(baseURL+isoPais+'/lotes/preliminar',{'data-lotes':js_var.loteA, 'data-pass':pass,'data-tipoOS':osTipo})
       .done(function(data){
         var code = data.code, title = data.title, msg = data.msg, dataCalc = data.data;
 				$('#loading').dialog('destroy');
@@ -228,7 +223,7 @@ $item = $(this);
             $('#pass').val( '' );
             $(this).dialog('destroy');
            var $aux = $('#loading').dialog({title:"Desasociar firma de lote", modal: true,bgiframe: true});
-            $.post(baseURL+"/"+isoPais+'/lotes/autorizacion/desasociar',{'data-lotes': idlote,'data-pass':pass}).done( function(data){
+            $.post(baseURL+isoPais+'/lotes/autorizacion/desasociar',{'data-lotes': idlote,'data-pass':pass}).done( function(data){
               $aux.dialog('destroy');
                if(!data.ERROR){
 
@@ -376,7 +371,7 @@ function notificacion(titulo, mensaje, code) {
       OK: function(){
 				$(this).dialog("close");
 				if(code === 3) {
-					$(location).attr('href', baseURL+'/'+isoPais+'/login');
+					$(location).attr('href', baseURL+isoPais+'/login');
 				}
 			}
     }
@@ -512,7 +507,7 @@ $.each( $('.icon-desa'), function(){
 function eliminarLotes(idlote,acnumlote,ctipolote,pass){
 
   var $aux = $('#loading').dialog({title:"Eliminando lote",modal: true, bgiframe: true, dialogClass: 'hide-close' });
-         $.post(baseURL+"/"+isoPais+'/lotes/autorizacion/eliminarAuth',
+         $.post(baseURL+isoPais+'/lotes/autorizacion/eliminarAuth',
           {'data-lotes': idlote,'data-acnumlote':acnumlote,'data-ctipolote':ctipolote,'data-pass':pass})
           .done(function(data){
       $aux.dialog('destroy');

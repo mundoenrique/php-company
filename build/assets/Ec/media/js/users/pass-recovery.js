@@ -5,10 +5,6 @@ var mensaje1 = null;
 var mensaje2 = null;
 $(function(){
 
-    var path = window.location.href.split('/'),
-        baseURL = path[0] + "//" + path[2] + '/' + path[3],
-        isoPais = path[4];
-
     $("fieldset > :input").on("click focus keyup", function(){
 
         var id = $(this).attr("id");
@@ -48,7 +44,7 @@ $(function(){
             close: function(){$(this).dialog('destroy')},
             resizable:false });
 
-        $.post(baseURL +'/'+ isoPais+'/users/recuperar-pass', jsonData )
+        $.post(baseURL + isoPais+'/users/recuperar-pass', jsonData )
             .done(function( data ) {
             if (data == "validate") {
                 $aux.dialog('destroy');
@@ -153,7 +149,7 @@ $(function(){
                 $(this).dialog("destroy");
                 if (sitio){
                     $('form')[0].reset();
-                    window.location.href= baseURL +'/'+ isoPais + '/login';
+                    window.location.href= baseURL + isoPais + '/login';
 
                 }
 
@@ -163,7 +159,7 @@ $(function(){
                     $(this).dialog("destroy");
                     if (sitio){
                         $('form')[0].reset();
-                        window.location.href= baseURL +'/'+ isoPais + '/login';
+                        window.location.href= baseURL + isoPais + '/login';
 
                     }
                 }

@@ -2,11 +2,6 @@
 
 $(function(){
 
-var path =window.location.href.split( '/' );
-var baseURL = path[0]+ "//" +path[2]+'/'+path[3];
-var isoPais = path[4];
-var api = "/api/v1/";
-
  // Busqueda button
 
       var $container = $('#products-list');
@@ -22,27 +17,27 @@ var api = "/api/v1/";
         layoutMode : 'fitRows'
         },
         onLayout: function( $elems, instance ){
-           $('#products-list').height($('#products-list').height()+30);        
+           $('#products-list').height($('#products-list').height()+30);
         }
       });
-      
-      
+
+
       var $optionSets = $('.filter'),
           $optionLinks = $optionSets.find('a');
 
       $optionLinks.click(function(){
-   
+
         var $optionSet = $(this).parents('.filter-ul');
         $optionSet.find('.selected').removeClass('selected');
         $(this).addClass('selected');
-  
-            value = $(this).attr('data-option-value');           
 
-          $container.isotope( {filter:value,resizesContainer:true} );             
+            value = $(this).attr('data-option-value');
+
+          $container.isotope( {filter:value,resizesContainer:true} );
         $('select.categories-products').val('*');
-       
+
        resultNull();
-        
+
       });
 
 
@@ -54,16 +49,16 @@ var api = "/api/v1/";
         resultNull();
 
         $(this).hasClass('area')? $('.tarjeta').val('*'):$('.area').val('*');
- 
+
       });
-      
+
 
 
       //-- Fin busqueda button
 
 // Busqueda campo de texto
 
-var items = []; 
+var items = [];
 $('li.product-description').each(function(){
     var tmp = {};
     tmp.id = $(this).attr('id');
@@ -78,42 +73,42 @@ $('#search-filter').bind('keyup', function() {
 function isotopeSearch(kwd)
 {
 
-  
+
   var matches = []; // arreglo que contiene las coincidencias
 
   if ( (kwd != '')  ) { // min 2 chars to execute query:
 
 
     for (var i = 0; i < items.length; i++) {
-      if( items[i].name.indexOf(kwd) !==-1 ){        
+      if( items[i].name.indexOf(kwd) !==-1 ){
         matches.push( $('#'+items[i].id)[0] );
       }
     }
-        
 
-    $container.isotope({ filter: $(matches),resizesContainer:true }); 
-  
+
+    $container.isotope({ filter: $(matches),resizesContainer:true });
+
   } else {
-    
+
     $container.isotope({ filter: '.product-description',resizesContainer:true });
   }
 
 
   resultNull();
 $('select.categories-products').val('*');
-} 
+}
 
 //-- Fin busqueda campo de texto
 
 
 // Mostrar/ocultar campo de texto
 
-      $("#buscar").click( 
-        function () { 
-                
-          $("#search-filter").fadeToggle('fast');                 
-            
-        } 
+      $("#buscar").click(
+        function () {
+
+          $("#search-filter").fadeToggle('fast');
+
+        }
       );
 //-- Fin mostrar/ocultar campo de texto
 
@@ -121,7 +116,7 @@ $('select.categories-products').val('*');
 // mostrar resultados nulos
 function resultNull(){
   $container.isotope({onLayout: function( $elems, instance ){
-           $('#products-list').height($('#products-list').height()+30);        
+           $('#products-list').height($('#products-list').height()+30);
         },resizesContainer:false});
 
   if ( !$container.data('isotope').$filteredAtoms.length ) {
@@ -135,9 +130,9 @@ function resultNull(){
 
 
   $('button#sProducto').on('click', function(){
-    var idproducto = $(this).attr("data-idproducto"); 
-    var nombreProducto = $(this).attr("data-nombreProducto"); 
-    var marcaProducto = $(this).attr("data-marcaProducto"); 
+    var idproducto = $(this).attr("data-idproducto");
+    var nombreProducto = $(this).attr("data-nombreProducto");
+    var marcaProducto = $(this).attr("data-marcaProducto");
     $('form#productos').append('<input type="hidden" name="data-idproducto" value="'+idproducto+'" />');
     $('form#productos').append('<input type="hidden" name="data-nombreProducto" value="'+nombreProducto+'" />');
     $('form#productos').append('<input type="hidden" name="data-marcaProducto" value="'+marcaProducto+'" />');
@@ -169,13 +164,13 @@ var accodgrupoe;
 
     $.getJSON(baseURL+api+isoPais+'/empresas/lista').always(function( data ) {
 
-      $("#widget-info-2").find($('#cargando')).remove();      
- 
+      $("#widget-info-2").find($('#cargando')).remove();
+
       $('#sEmpresaS').show();
       $('#productosS').hide();
 
         if(!data.ERROR){
-          $.each(data.lista, function(k,v){         
+          $.each(data.lista, function(k,v){
           $("#empresasS").append('<option value="'+v.acrif+'" acnomcia="'+v.acnomcia+'" acrazonsocial="'+v.acrazonsocial+'" acdesc="'+v.acdesc+'" accodcia="'+v.accodcia+'" accodgrupoe='+v.accodgrupoe+'>'+v.acnomcia+'</option>');
         });
         }else{
@@ -183,9 +178,9 @@ var accodgrupoe;
           alert('Usuario actualmente desconectado'); location.reload();
           }
         }
-        
+
       });
-    
+
   });
 
 
@@ -207,18 +202,18 @@ var accodgrupoe;
 
 
 //  Enviar todo
-  
+
   $('#aplicar').on('click',function(){
 
 
-    if( acrif !== undefined ){      
+    if( acrif !== undefined ){
 
-      $.post( baseURL+api+isoPais+"/empresas/cambiar", 
+      $.post( baseURL+api+isoPais+"/empresas/cambiar",
         { 'data-accodgrupoe':accodgrupoe, 'data-acrif':acrif, 'data-acnomcia':acnomcia, 'data-acrazonsocial':acrazonsocial, 'data-acdesc':acdesc, 'data-accodcia':accodcia, 'llamada':'soloEmpresa' },
-         function(data){      
+         function(data){
 
           if(data === 1){
-            $(location).attr('href',baseURL+"/"+isoPais+"/dashboard/productos/");
+            $(location).attr('href',baseURL+isoPais+"/dashboard/productos/");
           }else{
             MarcarError('Intente de nuevo');
           }
@@ -232,13 +227,13 @@ var accodgrupoe;
   });
 
 $('#sPrograms').on('click',function(){
-  $(location).attr('href',baseURL+"/"+isoPais+"/dashboard/programas");
+  $(location).attr('href',baseURL+isoPais+"/dashboard/programas");
  });
 
 function MarcarError(msj){
   $.balloon.defaults.classname = "error-login-2";
   $.balloon.defaults.css = null;
-  $("#aplicar").showBalloon({position: "left", contents: msj});  //mostrar tooltip    
+  $("#aplicar").showBalloon({position: "left", contents: msj});  //mostrar tooltip
   setTimeout( function(){ $("#aplicar").hideBalloon({position: "left", contents: msj}); }, 2500 );  // ocultar tooltip
 }
 
@@ -249,16 +244,16 @@ function MarcarError(msj){
 
 var top = ($('#sidebar-products').offset().top-170) - parseFloat($('#sidebar-products').css('marginTop').replace(/auto/, 0));
        $(window).scroll(function (event) {
-   
+
          var y = $(this).scrollTop();
-  
+
           if (y >= top) {
-      
+
             $('#sidebar-products').addClass('sub-widget');
             $('#sidebar-products').css('top',160);
 
         } else {
-      
+
             $('#sidebar-products').removeClass('sub-widget');
          }
      });

@@ -1,7 +1,3 @@
-var path =window.location.href.split( '/' );
-var base = path[0]+ "//" +path[2]+'/'+path[3];
-var pais = path[4];
-var api = "/api/v1/";
 var scroll_interval;
 var ancho=0;
 
@@ -14,7 +10,7 @@ $(document).ready(function() {
 	$("#SaldosAmanecidos-TH").attr('maxlength','8');		
 
 		$("#cargando_empresa").fadeIn("slow");
-		$.getJSON(base + api + pais + '/empresas/lista').always(function( data ) {
+		$.getJSON(baseURL + api + isoPais + '/empresas/lista').always(function( data ) {
 			$("#cargando_empresa").fadeOut("slow");
 			if(!(data.ERROR)){
 				
@@ -25,7 +21,7 @@ $(document).ready(function() {
 			}else{
 				if(data.ERROR=="-29"){
 		             alert("Usuario actualmente desconectado");
-		             $(location).attr('href',base+'/'+pais+'/login');
+		             $(location).attr('href',baseURL+isoPais+'/login');
 		         }else{
 		         	$("#SaldosAmanecidos-empresa").append('<option value="">'+data.ERROR+'</option>');
 		         }
@@ -43,7 +39,7 @@ $(document).ready(function() {
 
 			$("#cargando_producto").fadeIn("slow");
 			$(this).attr('disabled',true);
-			$.post(base + api + pais + "/producto/lista", { 'acrif': acrif }, function(data){
+			$.post(baseURL + api + isoPais + "/producto/lista", { 'acrif': acrif }, function(data){
 				$("#cargando_producto").fadeOut("slow");
 				$("#SaldosAmanecidos-empresa").removeAttr('disabled');
 				if(!data.ERROR){	
@@ -251,7 +247,7 @@ $(document).ready(function() {
 						
 				    	
 			//SE REALIZA LA INVOCACION AJAX
-				    	$consulta = $.post(base + api + pais + "/reportes/saldosamanecidos",filtro_busq );
+				    	$consulta = $.post(baseURL + api + isoPais + "/reportes/saldosamanecidos",filtro_busq );
 			//DE SER EXITOSA LA COMUNICACION CON EL SERVICIO SE EJECUTA EL SIGUIENTE METODO "DONE"
 				 		$consulta.done(function(data){
 				 			$("#mensaje").remove();
@@ -338,7 +334,7 @@ $("#export_excel").click(function(){
 			$('form#formulario').append('<input type="hidden" name="nomEmpresa" value="'+filtro_busq.nomEmpresa+'" />');
 			$('form#formulario').append('<input type="hidden" name="descProd" value="'+filtro_busq.descProd+'" />');
 			$('form#formulario').append('<input type="hidden" name="paginaActual" value="'+1+'" />');
-			$('form#formulario').attr('action',base+api+pais+"/reportes/saldosamanecidosExpXLS");
+			$('form#formulario').attr('action',baseURL+api+isoPais+"/reportes/saldosamanecidosExpXLS");
 			$('form#formulario').submit(); 
 
 			/*datos={
@@ -352,14 +348,14 @@ $("#export_excel").click(function(){
 
 			$aux = $("#cargando").dialog({title:"Exportar Excel",modal:true, close:function(){$(this).dialog('close')}, resizable:false });
 
-			$.post(base+api+pais+"/reportes/saldosamanecidosExpXLS",datos).done(function(data){
+			$.post(baseURL+api+isoPais+"/reportes/saldosamanecidosExpXLS",datos).done(function(data){
     			$aux.dialog('destroy')
     			if(!data.ERROR){
     				$('form#formulario').empty();
     				$('form#formulario').append('<input type="hidden" name="bytes" value="'+JSON.stringify(data.bytes)+'" />');    		
     				$('form#formulario').append('<input type="hidden" name="ext" value="'+data.ext+'" />');  
     				$('form#formulario').append('<input type="hidden" name="nombreArchivo" value="'+data.nombreArchivo+'" />');  
-    				$('form#formulario').attr('action',base+'/'+pais+"/file");
+    				$('form#formulario').attr('action',baseURL+'/'+isoPais+"/file");
     				$('form#formulario').submit()
     			}else{
     				if(data.ERROR=="-29"){

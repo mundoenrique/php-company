@@ -1,10 +1,6 @@
 //---------------------------------------------------------
 //SE ARMA LA URL PARA TRABAJARLA DENTRO DE TODO EL .JS
 //---------------------------------------------------------
-var path =window.location.href.split( '/' );
-var base = path[0]+ "//" +path[2]+'/'+path[3];
-var pais = path[4];
-var api = "/api/v1/";
 
 $(".fecha").keypress(function(e){
 	if(e.keycode != 8 || e.keycode != 46){
@@ -48,7 +44,7 @@ $("#repGastosPorCategoria_dni").attr("maxlength","12");
 //LLENA EL COMBO DE EMPRESA
 //--------------------------
 	$("#cargando_empresa").fadeIn("slow");
-	$.getJSON(base + api + pais + '/empresas/lista').always(function( data ) {
+	$.getJSON(baseURL + api + isoPais + '/empresas/lista').always(function( data ) {
 		$("#cargando_empresa").fadeOut("slow");
 	if(!(data.ERROR)){
 		
@@ -58,7 +54,7 @@ $("#repGastosPorCategoria_dni").attr("maxlength","12");
 	}else{
 		if(data.ERROR.indexOf('-29') !=-1){
              alert("Usuario actualmente desconectado");
-             $(location).attr('href',base+'/'+pais+'/login');
+             $(location).attr('href',baseURL+isoPais+'/login');
          }else{
          	$("#repGastosPorCategoria_empresa").append('<option value="">'+data.ERROR+'</option>');
          }
@@ -74,7 +70,7 @@ $("#repGastosPorCategoria_dni").attr("maxlength","12");
 
 		$("#cargando_producto").fadeIn("slow");
 		$(this).attr('disabled',true);
-		$.post(base + api + pais + "/producto/lista", { 'acrif': acrif }, function(data){
+		$.post(baseURL + api + isoPais + "/producto/lista", { 'acrif': acrif }, function(data){
 			$("#cargando_producto").fadeOut("slow");
 			$("#repGastosPorCategoria_empresa").removeAttr('disabled');
 			if(!data.ERROR){	
@@ -86,7 +82,7 @@ $("#repGastosPorCategoria_dni").attr("maxlength","12");
 			}else{
 				if(data.ERROR.indexOf('-29') !=-1){
              alert("Usuario actualmente desconectado");
-             $(location).attr('href',base+'/'+pais+'/login');
+             $(location).attr('href',baseURL+isoPais+'/login');
          }else{
 				$("#repGastosPorCategoria_producto").append('<option value="">'+data.ERROR+'</option>');
 			}
@@ -190,7 +186,7 @@ $( "#repGastosPorCategoria_fecha_ini" ).datepicker({
 				tipoConsulta: filtro_busq.tipoConsulta
 			}
 			
-			descargarArchivo(datos, base+api+pais+"/reportes/gastosporcategoriasExpPDF", "Exportar PDF" );
+			descargarArchivo(datos, baseURL+api+isoPais+"/reportes/gastosporcategoriasExpPDF", "Exportar PDF" );
 */
 			$('form#formulario').empty();
 			$('form#formulario').append('<input type="hidden" name="empresa" value="'+filtro_busq.empresa+'" />');
@@ -200,7 +196,7 @@ $( "#repGastosPorCategoria_fecha_ini" ).datepicker({
 			$('form#formulario').append('<input type="hidden" name="tarjeta" value="'+filtro_busq.tarjeta.replace(/ /g,'')+'" />');
 			$('form#formulario').append('<input type="hidden" name="cedula" value="'+filtro_busq.cedula.replace(/ /g,'')+'" />');
 			$('form#formulario').append('<input type="hidden" name="tipoConsulta" value="'+filtro_busq.tipoConsulta+'" />');
-			$('form#formulario').attr('action',base+api+pais+"/reportes/gastosporcategoriasExpPDF");
+			$('form#formulario').attr('action',baseURL+api+isoPais+"/reportes/gastosporcategoriasExpPDF");
 			$('form#formulario').submit();
 
 		});	  
@@ -220,7 +216,7 @@ $( "#repGastosPorCategoria_fecha_ini" ).datepicker({
 		// 		tipoConsulta: filtro_busq.tipoConsulta
 		// 	}
 
-		// 	descargarArchivo(datos, base+api+pais+"/reportes/gastosporcategoriasExpXLS", "Exportar Excel" );
+		// 	descargarArchivo(datos, baseURL+api+isoPais+"/reportes/gastosporcategoriasExpXLS", "Exportar Excel" );
 		
 		$('form#formulario').empty();
 			$('form#formulario').append('<input type="hidden" name="empresa" value="'+filtro_busq.empresa+'" />');
@@ -230,7 +226,7 @@ $( "#repGastosPorCategoria_fecha_ini" ).datepicker({
 			$('form#formulario').append('<input type="hidden" name="tarjeta" value="'+filtro_busq.tarjeta.replace(/ /g,'')+'" />');
 			$('form#formulario').append('<input type="hidden" name="cedula" value="'+filtro_busq.cedula.replace(/ /g,'')+'" />');
 			$('form#formulario').append('<input type="hidden" name="tipoConsulta" value="'+filtro_busq.tipoConsulta+'" />');
-			$('form#formulario').attr('action',base+api+pais+"/reportes/gastosporcategoriasExpXLS");
+			$('form#formulario').attr('action',baseURL+api+isoPais+"/reportes/gastosporcategoriasExpXLS");
 			$('form#formulario').submit(); 
 	});	        
 
@@ -269,7 +265,7 @@ var filtro_busq={};
 			filtro_busq.tipoConsulta=$("input[name='radio']:checked").val();
 
 //SE REALIZA LA PETICION AL SERVICIO DE GASTOS POR CATEGORIA
-			$consulta = $.post(base + api + pais + "/reportes/gastosporcategorias",filtro_busq );
+			$consulta = $.post(baseURL + api + isoPais + "/reportes/gastosporcategorias",filtro_busq );
 
 //SI LA CONSULTA ES SATISFACTORIA SE PROCEDE A LLENAR LA TABLA
 			$consulta.done(function(data){				
@@ -619,7 +615,7 @@ var filtro_busq={};
 				}else{
 					if(data.rc =="-29"){
 			             alert("Usuario actualmente desconectado");
-			             $(location).attr('href',base+'/'+pais+'/login');
+			             $(location).attr('href',baseURL+isoPais+'/login');
 			         }else{
 
 						$("#mensaje").remove();
@@ -727,7 +723,7 @@ var filtro_busq={};
             $('form#formulario').append('<input type="hidden" name="bytes" value="'+JSON.stringify(data.bytes)+'" />');       
             $('form#formulario').append('<input type="hidden" name="ext" value="'+data.ext+'" />');  
             $('form#formulario').append('<input type="hidden" name="nombreArchivo" value="'+data.nombreArchivo+'" />');  
-            $('form#formulario').attr('action',base+'/'+pais+"/file");
+            $('form#formulario').attr('action',baseURL+isoPais+"/file");
             $('form#formulario').submit()
           }else{
             if(data.ERROR=="-29"){

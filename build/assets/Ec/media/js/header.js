@@ -1,9 +1,5 @@
 $(function(){ //document ready
 
-var path =window.location.href.split( '/' );
-var baseURL = path[0]+ "//" +path[2];
-var isoPais = path[3];
-	
   head_var = {
     idleTimer : null,
     out : null
@@ -15,15 +11,15 @@ if( $('.filter').length > 0 ){
 
 var top = ($('.filter').offset().top-100) - parseFloat($('.filter').css('marginTop').replace(/auto/, 0));
        $(window).scroll(function (event) {
-   
+
          var y = $(this).scrollTop();
-  
+
           if (y >= top) {
-      
+
             $('.filter').addClass('sub');
 
           } else {
-      
+
             $('.filter').removeClass('sub');
          }
      });
@@ -39,7 +35,7 @@ var top = ($('.filter').offset().top-100) - parseFloat($('.filter').css('marginT
     head_var.idleTimer = setTimeout(function(){whenUserIdle()},900000); // 15 minutos de inactividad
 
   }
-  $(document.body).bind('mousemove',resetTimer); 
+  $(document.body).bind('mousemove',resetTimer);
   $(document.body).bind('keydown',resetTimer);
   $(document.body).bind('click',resetTimer);
 
@@ -48,7 +44,7 @@ var top = ($('.filter').offset().top-100) - parseFloat($('.filter').css('marginT
 
 function whenUserIdle(){
   notificacion('Desconexión automática','<p>No se ha detectado actividad en la página.</p><p>Sesión próxima a expirar.</p>');
-  head_var.out = setTimeout( function(){ $('#logout').submit(); }, 3000 ); 
+  head_var.out = setTimeout( function(){ $('#logout').submit(); }, 3000 );
 }
 
 function notificacion(title, msj){
@@ -61,10 +57,10 @@ function notificacion(title, msj){
     maxWidth: 700,
     maxHeight: 300,
     resizable: false,
-    buttons: {  
+    buttons: {
       salir: function(){
         $('#logout').submit();
-      },   
+      },
       "Mantener sesion": function(){
         $(this).dialog("destroy");
         clearTimeout(head_var.out);
@@ -105,7 +101,7 @@ $(':input').on('click', function(){$('#ui-datepicker-div').css('top',$(this).pos
 
 
  document.cookie = 'cookie';
- pru = document.cookie; 
+ pru = document.cookie;
 if (pru=='' || !navigator.cookieEnabled) {
   $('<div><h5>La funcionalidad de cookies de su navegador se encuentra desactivada.</h5><h4>Por favor vuelva activarla.</h4></div>').dialog({
     title: "Conexion empresas Online",
@@ -114,7 +110,7 @@ if (pru=='' || !navigator.cookieEnabled) {
     maxHeight: 300,
     resizable: false,
     close: function(){$(this).dialog("destroy");},
-    buttons: {  
+    buttons: {
       Aceptar: function(){
         $(this).dialog("destroy");
       }
@@ -133,7 +129,7 @@ $.each( $('.menuHeader ul'), function(k,v){
     $(this).addClass('ulScroll');
 
       $(this).find('#scrollup').show();
-     $(this).find('#scrolldown').show(); 
+     $(this).find('#scrolldown').show();
      $(this).find('.ui-icon').css('background-image','url('+$('#ruta-cdn').val()+'media/css/images/ui-icons_ef8c08_256x240.png)');
 
      $(this).find('li').css('left','0');

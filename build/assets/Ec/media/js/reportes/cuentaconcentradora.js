@@ -1,9 +1,6 @@
 
 $(document).ready(function() {
-	var path =window.location.href.split( '/' );
-	var base = path[0]+ "//" +path[2]+'/'+path[3];
-	var pais = path[4];
-	var api = "/api/v1/";
+
 	var scroll_interval;
 	var ancho=0;
 
@@ -37,7 +34,7 @@ $(document).ready(function() {
 
 
 	$("#cargando_empresa").fadeIn("slow");
-	$.getJSON(base + api + pais + '/empresas/lista').always(function( data ) {
+	$.getJSON(baseURL + api + isoPais + '/empresas/lista').always(function( data ) {
 		$("#cargando_empresa").fadeOut("slow");
 		if(!(data.ERROR)){
 
@@ -48,7 +45,7 @@ $(document).ready(function() {
 		}else{
 			if(data.ERROR.indexOf('-29') !=-1){
 				alert("Usuario actualmente desconectado");
-				$(location).attr('href',base+'/'+pais+'/login');
+				$(location).attr('href',baseURL+isoPais+'/login');
 			}else{
 				$("#repUsuario_empresa").append('<option value="">'+data.ERROR+'</option>');
 			}
@@ -67,15 +64,15 @@ $(document).ready(function() {
 					$( "#repUsuario_fechaFinal" ).attr("disabled","true");
 				}else{
 					$( "#repUsuario_fechaInicial" ).removeAttr("disabled");
-					$( "#repUsuario_fechaFinal" ).removeAttr("disabled");			
+					$( "#repUsuario_fechaFinal" ).removeAttr("disabled");
 				}
 			}
 		});
 	});
 
-	
 
-//SE USA EL DATEPICKER PARA FACILITAR EL CONTROL DE LA SELECCION DE FECHA, 
+
+//SE USA EL DATEPICKER PARA FACILITAR EL CONTROL DE LA SELECCION DE FECHA,
 //YA VALIDA QUE UNA FECHA INICIO NO SEA MAYOR QUE LA FECHA FIN
 $( "#repUsuario_fechaInicial" ).datepicker({
 	defaultDate: "+1w",
@@ -90,7 +87,7 @@ $( "#repUsuario_fechaInicial" ).datepicker({
 		}else{
 			$( "#repUsuario_fechaFinal" ).datepicker( "option", "minDate", '' );
 		}
-		
+
 	}
 });
 
@@ -114,7 +111,7 @@ $( "#repUsuario_fechaFinal" ).datepicker({
 
 $("#exportXLS_a").click(function(){
 
-	
+
 		/*datos={
 			empresa: filtro_busq.empresa,
 			fechaInicial: filtro_busq.fechaInicial,
@@ -123,9 +120,9 @@ $("#exportXLS_a").click(function(){
 			producto: filtro_busq.producto,
 			nomEmpresa: filtro_busq.acnomcia,
 			descProd: filtro_busq.productoDES +"/"+filtro_busq.marca
-		}	 	 
+		}
 
-		descargarArchivo(datos, base+api+pais+"/reportes/cuentaConcentradoraExpXLS", "Exportar Excel" );
+		descargarArchivo(datos, baseURL+api+isoPais+"/reportes/cuentaConcentradoraExpXLS", "Exportar Excel" );
 */
 
 		$('form#formulario').empty();
@@ -134,13 +131,13 @@ $("#exportXLS_a").click(function(){
 		$('form#formulario').append('<input type="hidden" name="fechaFin" value="'+filtro_busq.fechaFin+'" />');
 		$('form#formulario').append('<input type="hidden" name="filtroFecha" value="'+filtro_busq.filtroFecha+'" />');
 		$('form#formulario').append('<input type="hidden" name="nomEmpresa" value="'+filtro_busq.acnomcia+'" />');
-		$('form#formulario').attr('action',base+api+pais+"/reportes/cuentaConcentradoraExpXLS");
-		$('form#formulario').submit(); 
+		$('form#formulario').attr('action',baseURL+api+isoPais+"/reportes/cuentaConcentradoraExpXLS");
+		$('form#formulario').submit();
 
 	});
 
 $("#exportPDF_a").click(function(){
-			
+
 		/*datos={
 			empresa: filtro_busq.empresa,
 			fechaInicial: filtro_busq.fechaInicial,
@@ -149,17 +146,17 @@ $("#exportPDF_a").click(function(){
 			producto: filtro_busq.producto,
 			nomEmpresa: filtro_busq.acnomcia,
 			descProd: filtro_busq.productoDES +"/"+filtro_busq.marca
-		}	 	 
+		}
 
-		descargarArchivo(datos, base+api+pais+"/reportes/cuentaConcentradoraExpPDF", "Exportar PDF" );
-*/		
+		descargarArchivo(datos, baseURL+api+isoPais+"/reportes/cuentaConcentradoraExpPDF", "Exportar PDF" );
+*/
 $('form#formulario').empty();
 		$('form#formulario').append('<input type="hidden" name="empresa" value="'+filtro_busq.empresa+'" />');
 		$('form#formulario').append('<input type="hidden" name="fechaInicial" value="'+filtro_busq.fechaInicial+'" />');
 		$('form#formulario').append('<input type="hidden" name="fechaFin" value="'+filtro_busq.fechaFin+'" />');
 		$('form#formulario').append('<input type="hidden" name="filtroFecha" value="'+filtro_busq.filtroFecha+'" />');
 		$('form#formulario').append('<input type="hidden" name="nomEmpresa" value="'+filtro_busq.acnomcia+'" />');
-		$('form#formulario').attr('action',base+api+pais+"/reportes/cuentaConcentradoraExpPDF");
+		$('form#formulario').attr('action',baseURL+api+isoPais+"/reportes/cuentaConcentradoraExpPDF");
 		$('form#formulario').submit();
 
 	});
@@ -173,14 +170,14 @@ $(".consolidado").click(function(){
 	}
 
 	$("#consolid").dialog({
-		modal:true, 
+		modal:true,
 		resizable: true,
 		title:"Selección de Año",
 		width:"180px",
 		maxheight:"250px",
 		buttons:{
 			OK:function(){
-				
+
 				$(".ui-dialog-content").dialog().dialog("close");
 				/*datos={
 					empresa: filtro_busq.empresa,
@@ -191,9 +188,9 @@ $(".consolidado").click(function(){
 					nomEmpresa: filtro_busq.acnomcia,
 					descProd: filtro_busq.productoDES +"/"+filtro_busq.marca,
 					anio: $("option:selected","#anio").val()
-				}	 	 
+				}
 
-				descargarArchivo(datos, base+api+pais+"/reportes/cuentaConcentradoraConsolidadoExp"+formato, "Exportar "+formato );
+				descargarArchivo(datos, baseURL+api+isoPais+"/reportes/cuentaConcentradoraConsolidadoExp"+formato, "Exportar "+formato );
 			*/
 			$('form#formulario').empty();
 					$('form#formulario').append('<input type="hidden" name="empresa" value="'+filtro_busq.empresa+'" />');
@@ -202,8 +199,8 @@ $(".consolidado").click(function(){
 					$('form#formulario').append('<input type="hidden" name="filtroFecha" value="'+filtro_busq.filtroFecha+'" />');
 					$('form#formulario').append('<input type="hidden" name="nomEmpresa" value="'+filtro_busq.acnomcia+'" />');
 					$('form#formulario').append('<input type="hidden" name="anio" value="'+$("option:selected","#anio").val()+'" />');
-					$('form#formulario').attr('action',base+api+pais+"/reportes/cuentaConcentradoraConsolidadoExp"+formato);
-					$('form#formulario').submit(); 
+					$('form#formulario').attr('action',baseURL+api+isoPais+"/reportes/cuentaConcentradoraConsolidadoExp"+formato);
+					$('form#formulario').submit();
 			}
 		}
 	});
@@ -218,12 +215,12 @@ var $consulta;
 $('#cargando').dialog({ modal: true,maxWidth: 700,maxHeight: 300,dialogClass: 'hide-close' });
 
 
-		$consulta = $.post(base + api + pais + "/reportes/graficoCuentaConcentradora",filtro_busq );
+		$consulta = $.post(baseURL + api + isoPais + "/reportes/graficoCuentaConcentradora",filtro_busq );
 		$consulta.done(function(data){
 			$(".ui-dialog-content").dialog().dialog("close");
 			if(data.rc==0){
 
-				
+
 				$('#grafica').highcharts({
 					chart: {
 						plotBackgroundColor: null,
@@ -233,7 +230,7 @@ $('#cargando').dialog({ modal: true,maxWidth: 700,maxHeight: 300,dialogClass: 'h
 					title: {
 						text: $('option:selected',"#repUsuario_empresa").attr("acnomcia")
 					},
-					
+
 					plotOptions: {
 						pie: {
 							allowPointSelect: true,
@@ -268,7 +265,7 @@ $('#cargando').dialog({ modal: true,maxWidth: 700,maxHeight: 300,dialogClass: 'h
 });
 
 
-//METODO PARA REALIZAR LA BUSQUEDA 
+//METODO PARA REALIZAR LA BUSQUEDA
 $("#repUsuario_btnBuscar").click(function(){ evBuscar=true; BuscarDepositos(0)});
 
 
@@ -277,7 +274,7 @@ $("#repUsuario_btnBuscar").click(function(){ evBuscar=true; BuscarDepositos(0)})
 
 function validar_filtro_busqueda(div){
 	var valido=true;
-//VALIDA INPUT:TEXT QUE SEAN REQUERIDOS NO SE ENCUENTREN VACIOS 
+//VALIDA INPUT:TEXT QUE SEAN REQUERIDOS NO SE ENCUENTREN VACIOS
 $.each($("#"+div+" input[type='text'].required"),function(posItem,item){
 	var $elem=$(item);
 	if(!$elem.hasClass("bloqued")){
@@ -291,7 +288,7 @@ $.each($("#"+div+" input[type='text'].required"),function(posItem,item){
 
 });
 
-//VALIDA SELECT QUE SEAN REQUERIDOS NO SE ENCUENTREN VACIOS 
+//VALIDA SELECT QUE SEAN REQUERIDOS NO SE ENCUENTREN VACIOS
 $.each($("#"+div+" select.required"),function(posItem,item){
 	var $elem=$(item);
 	if($elem.val()==""){
@@ -300,7 +297,7 @@ $.each($("#"+div+" select.required"),function(posItem,item){
 	}else{
 		$elem.attr("style","");
 	}
-});  
+});
 
 
 //VALIDA INPUT:CHECKBOX  y INPUT:RADIO QUE SEAN REQUERIDOS NO SE ENCUENTREN VACIOS
@@ -311,7 +308,7 @@ if((radio == "")&&($("#"+div+" input[type='radio'].required").length!="")){
 	$("#"+div+" input[type='radio'].required").next().attr("style","color:red");
 }else{
 	$("#"+div+" input[type='radio'].required").next().attr("style","");
-} 
+}
 
 
 if(!valido){
@@ -353,7 +350,7 @@ function BuscarDepositos(paginaActual) {
 	var dat1 = new Date(d1[2], parseFloat(d1[1])-1, parseFloat(d1[0]));
 	var d2 = $('#repUsuario_fechaFinal').val().split("/");
 	var dat2 = new Date(d2[2], parseFloat(d2[1])-1, parseFloat(d2[0]));
-	
+
 	var $consulta;
 	var fecha = new Date();
 
@@ -369,9 +366,9 @@ function BuscarDepositos(paginaActual) {
 
 			filtro_busq.empresa=$("#repUsuario_empresa").val();
 			filtro_busq.fechaInicial=$("#repUsuario_fechaInicial").val();
-			filtro_busq.fechaFin=$("#repUsuario_fechaFinal").val();		
+			filtro_busq.fechaFin=$("#repUsuario_fechaFinal").val();
 			filtro_busq.filtroFecha=$("input[name='radio']:checked").val();
-			
+
 			filtro_busq.tipoNota="";
 			if($("#cargo").is(":checked"))
 				{filtro_busq.tipoNota=$("#cargo").val()}
@@ -388,7 +385,7 @@ function BuscarDepositos(paginaActual) {
 			WS(filtro_busq);
 		}
 
-	}else{	    		
+	}else{
 		WS(filtro_busq);
 	}
 }
@@ -399,12 +396,12 @@ function WS(filtro_busq){
 	$("#repUsuario_btnBuscar").hide();
 	$('#div_tablaDetalle').hide();
 			//SE REALIZA LA INVOCACION AJAX
-			$consulta = $.post(base + api + pais + "/reportes/cuentaConcentradora",filtro_busq );
+			$consulta = $.post(baseURL + api + isoPais + "/reportes/cuentaConcentradora",filtro_busq );
 			//DE SER EXITOSA LA COMUNICACION CON EL SERVICIO SE EJECUTA EL SIGUIENTE METODO "DONE"
 			$consulta.done(function(data){
 				$("#mensaje").remove();
 				$("#div_tablaDetalle").fadeIn("slow");
-				
+
 				//$("#paginacion").show();
 				$("#contend-pagination").show();
 				$('#cargando').fadeOut("slow");
@@ -417,10 +414,10 @@ function WS(filtro_busq){
 				}
 				var tr;
 				var td;
-				
-			//DE TRAER RESULTADOS LA CONSULTA SE GENERA LA TABLA CON LA DATA... 
+
+			//DE TRAER RESULTADOS LA CONSULTA SE GENERA LA TABLA CON LA DATA...
 			//DE LO CONTRARIO SE GENERA UN MENSAJE "No existe Data relacionada con su filtro de busqueda"
-			if(data.rc == "0"){ 
+			if(data.rc == "0"){
 				$("#tabla-datos-general").fadeIn("slow");
 				$("#view-results").attr("style","");
 
@@ -435,13 +432,13 @@ function WS(filtro_busq){
 					td.html(itemLista.referencia);
 					if(itemLista.tipoNota=="D"){
 						td=$(document.createElement("td")).appendTo(tr);
-						td.html(" - "+itemLista.montoDeposito);	
+						td.html(" - "+itemLista.montoDeposito);
 						td.attr("style","text-align: center");
 						td=$(document.createElement("td")).appendTo(tr);
 						td.html("");
 					}else if(itemLista.tipoNota=="C"){
 						td=$(document.createElement("td")).appendTo(tr);
-						td.html("");	
+						td.html("");
 						td=$(document.createElement("td")).appendTo(tr);
 						td.html(" + " + itemLista.montoDeposito);
 						td.attr("style","text-align: center");
@@ -461,12 +458,12 @@ function WS(filtro_busq){
 		}
 		*/
 
-		$('#tabla-datos-general tbody tr:even').addClass('even ');  
+		$('#tabla-datos-general tbody tr:even').addClass('even ');
 
 	}else{
 		if(data.rc =="-29"){
 			alert("Usuario actualmente desconectado");
-			$(location).attr('href',base+'/'+pais+'/login');
+			$(location).attr('href',baseURL+isoPais+'/login');
 		}else{
 			//$("#paginacion").hide();
 			$("#contend-pagination").hide();
@@ -494,9 +491,9 @@ function paginar(totalPaginas, paginaActual) {
 		display     : 10,
 		border					: false,
 		text_color  			: '#79B5E3',
-		background_color    	: 'none',	
+		background_color    	: 'none',
 		text_hover_color  		: '#2573AF',
-		background_hover_color	: 'none', 
+		background_hover_color	: 'none',
 		images		: false,
 		mouse		: 'press',
 		onChange     			: function(page){
@@ -611,17 +608,17 @@ function descargarArchivo(datos, url, titulo){
 		$aux.dialog('destroy')
 		if(!data.ERROR){
 			$('form#formulario').empty();
-			$('form#formulario').append('<input type="hidden" name="bytes" value="'+JSON.stringify(data.bytes)+'" />');       
-			$('form#formulario').append('<input type="hidden" name="ext" value="'+data.ext+'" />');  
-			$('form#formulario').append('<input type="hidden" name="nombreArchivo" value="'+data.nombreArchivo+'" />');  
-			$('form#formulario').attr('action',base+'/'+pais+"/file");
+			$('form#formulario').append('<input type="hidden" name="bytes" value="'+JSON.stringify(data.bytes)+'" />');
+			$('form#formulario').append('<input type="hidden" name="ext" value="'+data.ext+'" />');
+			$('form#formulario').append('<input type="hidden" name="nombreArchivo" value="'+data.nombreArchivo+'" />');
+			$('form#formulario').attr('action',baseURL+isoPais+"/file");
 			$('form#formulario').submit()
 		}else{
 			if(data.ERROR=="-29"){
 				alert('Usuario actualmente desconectado');
 				location.reload();
 			}else{
-				notificacion(titulo,data.ERROR) 
+				notificacion(titulo,data.ERROR)
 			}
 
 		}
