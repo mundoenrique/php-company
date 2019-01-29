@@ -1,7 +1,7 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 //País
-$config['country']='Ec';
+$config['country']='Co';
 
 /*
 |--------------------------------------------------------------------------
@@ -31,7 +31,7 @@ $config['CDN'] = BASE_CDN_PATH.$config['country'].'/';
 | than english.
 |
 */
-$config['language']	= 'usd-spanish';
+$config['language']	= 'ec-spanish';
 
 /* End of file config.php */
 /* Location: ./application/config/config.php */
