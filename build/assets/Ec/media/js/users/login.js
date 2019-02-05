@@ -184,56 +184,50 @@ $(function() {
         spacing: 5,
         behavior: 'menu'
     });
-
-
+    /*Inicializar Button*/
+    var button = '<button id="button-login" name="login">Login</button>';
+    $('#sliderbutton-login').addClass('stl-button').append(button);
     /*Inicializar sliderbutton*/
 
-    $('#sliderbutton-login').sliderbutton({
-        text: "Deslice para ingresar",
-        activate: function() {
-            ingresar_();
-        }
-    });
-
-    $('#button-login').on('click', function() {
-        $('.verifica_sesion').show();
+  $('#button-login').on('click', function() {      
+        console.log("click");
         ingresar_();
-    });
+     });
 
-    $('.ui-slider-handle').append('<p class="flecha"> >> </p>');
+    // $('.ui-slider-handle').append('<p class="flecha"> >> </p>');
 
-    $('#user_login').on('keyup', function(ev) {
+    // $('#user_login').on('keyup', function(ev) {
 
-        if ($("#user_login").val().length < maxchars) {
-            limit = false;
-        }
-        if (limit) {
-            marcarError("Máximo " + maxchars + " caracteres");
-        }
+    //     if ($("#user_login").val().length < maxchars) {
+    //         limit = false;
+    //     }
+    //     if (limit) {
+    //         marcarError("Máximo " + maxchars + " caracteres");
+    //     }
 
-        if ($("#user_login").val().length == maxchars) {
-            limit = true;
-            $("#user_login").attr('maxlength', maxchars);
-        }
+    //     if ($("#user_login").val().length == maxchars) {
+    //         limit = true;
+    //         $("#user_login").attr('maxlength', maxchars);
+    //     }
 
 
-        if ($(this) != '') {
-            $(this).removeClass('error-login');
-        }
+    //     if ($(this) != '') {
+    //         $(this).removeClass('error-login');
+    //     }
 
-        if (validarAlfanumerico($("#user_login"))) {
-            $('#sliderbutton-login').sliderbutton("enable");
-        } else if ($(this).val() != '' && $(this).val() != undefined) {
-            marcarError("Caracter no permitido");
-        }
+    //     if (validarAlfanumerico($("#user_login"))) {
+    //         $('#sliderbutton-login').sliderbutton("enable");
+    //     } else if ($(this).val() != '' && $(this).val() != undefined) {
+    //         marcarError("Caracter no permitido");
+    //     }
 
-    });
+    // });
 
-    $('#user_pass').on('keyup', function() {
-        if ($(this) != '') {
-            $(this).removeClass('error-login');
-        }
-    });
+    // $('#user_pass').on('keyup', function() {
+    //     if ($(this) != '') {
+    //         $(this).removeClass('error-login');
+    //     }
+    // });
 
     //--Fin validar caracteres alfanumericos usuario
 
@@ -245,5 +239,6 @@ $(function() {
         $('#sliderbutton-login').hide();
         $('#login-mobile').show();
     }
-
+    var content = '<div id="content"><h1>Welcomen message</h1><p>Introduccion text</p></div>'
+    $("#content").replaceWith(content)
 });
