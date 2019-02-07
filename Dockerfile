@@ -13,6 +13,5 @@ RUN apt-get update -y \
 	&& a2enmod headers rewrite \
 	&& a2ensite 000-default.conf \
 	&& mkdir -p assets/Co/bash assets/Pe/bash assets/Usd/bash assets/Ve/bash \
-	&& chmod 0700 assets/Co/bash assets/Pe/bash assets/Usd/bash assets/Ve/bash \
-	&& chown -R www-data:www-data assets/Co/bash assets/Pe/bash assets/Usd/bash assets/Ve/bash \
+	&& chmod 0755 assets/Co/bash assets/Pe/bash assets/Usd/bash assets/Ve/bash \
 	&& apachectl restart
