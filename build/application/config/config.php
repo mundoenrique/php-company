@@ -8,15 +8,17 @@ $config['keyNovo']= base64_decode(WS_KEY);
 //URL Servicio Web WebLogic
 $config['urlWS']= WS_URL;
 //URL API Trayectos
-$config['urlAPI']= 'http://172.24.6.148:8005/ceo-fuel/1.0/';
+$config['urlAPI']= API_URL;
 //URL Servicio
-$config['urlServ']= 'http://172.24.6.148:8008/';
+$config['urlServ']= SERV_URL;
 //CLIENT ID OAUTH
-$config['client_id'] = 'b08e4d54638385d6987af8989a01f30e';
+$config['client_id'] = CLIENT_ID;
 //CLIENT SECRET OAUTH
-$config['client_secret'] = 'f2ca416fb52cdf4f21406a5d9ca6b16f';
+$config['client_secret'] = CLIENT_SECRET;
 //USUARIO Y PASSWORD PARA SFTP PASO DE LOTES
-$config['LOTES_USERPASS'] = 'phpcarga:phpC4rg4';
+$config['LOTES_USERPASS'] = LOTES_USERPASS;
+//URL API CONTENT
+$config['urlAPIContent'] = API_CONTENT;
 
 /*
 |--------------------------------------------------------------------------
@@ -277,7 +279,7 @@ $config['encryption_key'] = ENCRYPTION_KEY;
 | 'sess_time_to_update'		= how many seconds between CI refreshing Session Information
 |
 */
-$config['sess_cookie_name']		= 'eol_session';
+$config['sess_cookie_name']		= SESS_COOKIE_NAME;
 $config['sess_expiration']		= SESS_EXPIRATION;
 $config['sess_expire_on_close']	= TRUE;
 $config['sess_encrypt_cookie']	= TRUE;
@@ -299,7 +301,7 @@ $config['sess_time_to_update']	= 300;
 |
 */
 $config['cookie_prefix']	= COOKIE_PREFIX;
-$config['cookie_domain']	= $config['base_url'];
+$config['cookie_domain']	= BASE_URL;
 $config['cookie_path']		= COOKIE_PATH;
 $config['cookie_secure']	= COOKIE_SECURE;
 

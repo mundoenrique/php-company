@@ -13,10 +13,10 @@ $config['country']='Pe';
 $config['base_url_cdn'] = BASE_CDN_URL.$config['country'].'/';
 
 //URL PARA CONECTAR POR SFTP A SERVIDOR
-$config['URL_TEMPLOTES'] = 'sftp://172.24.6.148:22/u01/app/data/lotes/temp/'.$config['country'].'/';
+$config['URL_TEMPLOTES'] = URL_TEMPLOTES.$config['country'].'/';
 
 //PATCH CARPETA DONDE SE SUBEN LOS LOTES Ejemplo: '/opt/httpd-2.4.4/vhost/cdn/empresas/Pe/bash/''
-$config['FOLDER_UPLOAD_LOTES'] = '/opt/httpd-2.4.4/vhost/cdn/empresas/'.$config['country'].'/'.'bash/';
+$config['FOLDER_UPLOAD_LOTES'] = FOLDER_UPLOAD_LOTES.$config['country'].'/'.'bash/';
 
 //PATH CARPETA BASE CDN DEL PAÍS
 $config['CDN'] = BASE_CDN_PATH.$config['country'].'/';

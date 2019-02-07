@@ -35,9 +35,6 @@ define('FOPEN_WRITE_CREATE',					'ab');
 define('FOPEN_READ_WRITE_CREATE',				'a+b');
 define('FOPEN_WRITE_CREATE_STRICT',				'xb');
 define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
-define('CDN_PATH', '/opt/httpd-2.4.4/vhost/cdn/');
-//define('URL_TEMPLOTES', 'sftp://180.180.159.22:22/opt/tomcat/TempLotes/');
-define('URL_TEMPLOTES', 'sftp://180.180.159.26:22/u01/app/data/lotes/temp/');
 
 define('MAX_FIELD_LENGTH', 15);
 
@@ -51,16 +48,40 @@ define('MAX_FIELD_LENGTH', 15);
 |
 */
 define('BASE_URL', $_SERVER['BASE_URL']);
+
+define('API_URL', $_SERVER['API_URL']);
+define('SERV_URL', $_SERVER['SERV_URL']);
+define('CLIENT_ID', $_SERVER['CLIENT_ID']);
+define('CLIENT_SECRET', $_SERVER['CLIENT_SECRET']);
+define('LOTES_USERPASS', $_SERVER['LOTES_USERPASS']);
+define('URL_TEMPLOTES', $_SERVER['URL_TEMPLOTES']);
+define('FOLDER_UPLOAD_LOTES', $_SERVER['FOLDER_UPLOAD_LOTES']);
+define('API_CONTENT', $_SERVER['API_CONTENT']);
+
 define('BASE_CDN_URL', $_SERVER['BASE_CDN_URL']);
 define('BASE_CDN_PATH', $_SERVER['BASE_CDN_PATH']);
 define('WS_URL', $_SERVER['WS_URL']);
 define('WS_KEY', $_SERVER['WS_KEY']);
-define('ENCRYPTION_KEY', $_SERVER['ENCRYPTION_KEY']);
-define('SESS_COOKIE_NAME', $_SERVER['SESS_COOKIE_NAME']);
-define('SESS_EXPIRATION', $_SERVER['SESS_EXPIRATION']);
-define('COOKIE_PREFIX', $_SERVER['COOKIE_PREFIX']);
-define('COOKIE_PATH', $_SERVER['COOKIE_PATH']);
-define('COOKIE_SECURE', $_SERVER['COOKIE_SECURE']);
+define('ENCRYPTION_KEY', isset($_SERVER['ENCRYPTION_KEY']) ?
+	$_SERVER['ENCRYPTION_KEY'] : 'n0v0p4ym3nt'
+);
+define('SESS_COOKIE_NAME', isset($_SERVER['SESS_COOKIE_NAME']) ?
+	$_SERVER['SESS_COOKIE_NAME'] : 'ceo_session'
+);
+define('SESS_EXPIRATION', isset($_SERVER['SESS_EXPIRATION'])
+&& filter_var($_SERVER['SESS_EXPIRATION'], FILTER_VALIDATE_INT) ?
+	intval($_SERVER['SESS_EXPIRATION']) : 7200
+);
+define('COOKIE_PREFIX', isset($_SERVER['COOKIE_PREFIX']) ?
+	$_SERVER['COOKIE_PREFIX'] : 'ceo_'
+);
+define('COOKIE_PATH', isset($_SERVER['COOKIE_PATH']) ?
+	$_SERVER['COOKIE_PATH'] : '/'
+);
+define('COOKIE_SECURE', isset($_SERVER['COOKIE_SECURE'])
+&& filter_var($_SERVER['COOKIE_SECURE'], FILTER_VALIDATE_BOOLEAN) ?
+	boolval($_SERVER['COOKIE_SECURE']) : FALSE
+);
 
 
 /* End of file constants.php */
