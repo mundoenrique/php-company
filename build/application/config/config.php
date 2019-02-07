@@ -301,7 +301,7 @@ $config['sess_time_to_update']	= 300;
 |
 */
 $config['cookie_prefix']	= COOKIE_PREFIX;
-$config['cookie_domain']	= BASE_URL;
+$config['cookie_domain']	= COOKIE_DOMAIN;
 $config['cookie_path']		= COOKIE_PATH;
 $config['cookie_secure']	= COOKIE_SECURE;
 

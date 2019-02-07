@@ -83,6 +83,10 @@ define('COOKIE_SECURE', isset($_SERVER['COOKIE_SECURE'])
 	boolval($_SERVER['COOKIE_SECURE']) : FALSE
 );
 
+define('COOKIE_DOMAIN', isset($_SERVER['COOKIE_DOMAIN']) ?
+	$_SERVER['COOKIE_DOMAIN'] : ''
+);
+
 
 /* End of file constants.php */
 /* Location: ./application/config/constants.php */
