@@ -2,23 +2,21 @@
 
 ini_set('memory_limit', '200M');
 
-//KeyNovo - Llave para Encriptar y Desencriptar
-$config['keyNovo']= base64_decode(WS_KEY);
+// Main web service access
+$config['urlWS'] = WS_URL;
+$config['keyNovo'] = base64_decode(WS_KEY);
 
-//URL Servicio Web WebLogic
-$config['urlWS']= WS_URL;
-//URL API Trayectos
-$config['urlAPI']= API_URL;
-//URL Servicio
-$config['urlServ']= SERV_URL;
-//CLIENT ID OAUTH
-$config['client_id'] = CLIENT_ID;
-//CLIENT SECRET OAUTH
-$config['client_secret'] = CLIENT_SECRET;
-//USUARIO Y PASSWORD PARA SFTP PASO DE LOTES
-$config['LOTES_USERPASS'] = LOTES_USERPASS;
-//URL API CONTENT
-$config['urlAPIContent'] = API_CONTENT;
+// APIs access
+$config['urlAPI'] = API_URL;
+$config['urlAPIContent'] = API_CONTENT_URL;
+
+// Next-gen service access
+$config['urlServ'] = SERVICE_URL;
+$config['client_id'] = SERVICE_CLIENT_ID;
+$config['client_secret'] = SERVICE_CLIENT_SECRET;
+
+// Bulk upload management
+$config['LOTES_USERPASS'] = BULK_FTP_USERNAME.':'.BULK_FTP_PASSWORD;
 
 /*
 |--------------------------------------------------------------------------
