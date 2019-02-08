@@ -14,4 +14,5 @@ RUN apt-get update -y \
 	&& a2ensite 000-default.conf \
 	&& mkdir -p assets/Co/bash assets/Pe/bash assets/Usd/bash assets/Ve/bash \
 	&& chmod 0755 assets/Co/bash assets/Pe/bash assets/Usd/bash assets/Ve/bash \
+	&& chown -R www-data:www-data . \
 	&& apachectl restart
