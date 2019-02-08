@@ -1,25 +1,3 @@
-SetEnv CI_ENV development
-SetEnv BASE_URL http://localhost:8090/site-conexionempresas/build/
-SetEnv BASE_CDN_URL http://localhost:8090/site-conexionempresas/build/assets/
-SetEnv BASE_CDN_PATH C:/Users/anavarro/Documents/GitHub/site-conexionempresas/build/assets/
-SetEnv WS_URL http://172.24.6.148:8005/NovoEolWebInterfaceWS/webresources/
-SetEnv API_URL http://172.24.6.148:8005/ceo-fuel/1.0/
-SetEnv SERV_URL http://172.24.6.148:8008/
-SetEnv WS_KEY dGVzdDEyMzQ=
-SetEnv ENCRYPTION_KEY N0V02013
-SetEnv SESS_COOKIE_NAME eol_session
-SetEnv SESS_EXPIRATION 7200
-SetEnv COOKIE_PREFIX ''
-SetEnv COOKIE_PATH /
-SetEnv COOKIE_SECURE FALSE
-SetEnv COOKIE_DOMAIN localhost:8090/site-conexionempresas/build/
-SetEnv CLIENT_ID b08e4d54638385d6987af8989a01f30e
-SetEnv CLIENT_SECRET f2ca416fb52cdf4f21406a5d9ca6b16f
-SetEnv LOTES_USERPASS phpcarga:phpC4rg4
-SetEnv URL_TEMPLOTES sftp://172.24.6.148:22/u01/app/data/lotes/temp/
-SetEnv FOLDER_UPLOAD_LOTES /opt/httpd-2.4.4/vhost/cdn/empresas/
-SetEnv API_CONTENT 172.24.6.123:3000/
-
 <IfModule mod_rewrite.c>
 	RewriteEngine On
 	RewriteCond %{REQUEST_FILENAME} !-f
