@@ -1,0 +1,1106 @@
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+
+/**
+ * Clase Dashboard
+ *
+ * Esta clase realiza las operaciónes relacionadas a listado de empresas y empresa-producto
+ *
+ * @package    controllers
+ * @author     Wilmer Rojas <rojaswilmer@gmail.com>
+ * @author     Carla García <neiryerit@gmail.com>
+ */
+class Dashboard extends CI_Controller {
+
+	/**
+	 * Pantalla que muestra el listado de empresas asociadas al usuario (pantalla siguiente al login)
+	 * @param  string $urlCountry
+	 */
+	public function index($urlCountry){
+
+		//VALIDATE COUNTRY
+		np_hoplite_countryCheck($urlCountry);
+		$this->lang->load('dashboard');
+		$this->lang->load('sectorfinanciero');
+		$this->lang->load('users');
+		$this->lang->load('erroreseol');
+
+		$this->load->library('parser');
+		$logged_in = $this->session->userdata('logged_in');
+
+		$menu = array(
+			'menuArrayPorProducto' => NULL,
+			'acrifS' => NULL,
+			'acnomciaS' => NULL,
+			'acrazonsocialS' => NULL,
+			'acdescS' => NULL,
+			'accodciaS' => NULL,
+			'accodgrupoeS'=> NULL,
+			'idProductoS'=> NULL,
+			'nombreProductoS' => NULL,
+			'marcaProductoS' => NULL,
+			'mesesVencimiento' => NULL
+		);
+		$this->session->unset_userdata($menu);
+
+		if($this->session->userdata('cl_addr') != np_Hoplite_Encryption($_SERVER["REMOTE_ADDR"]) ){
+			$this->session->sess_destroy();
+			redirect($urlCountry.'/login');
+		}
+
+		$paisS = $this->session->userdata('pais');
+
+		if($paisS==$urlCountry && $logged_in){
+			$nombreCompleto = $this->session->userdata('nombreCompleto');
+			$lastSessionD = $this->session->userdata('lastSession');
+
+			$titlePage= "Conexión Empresas Online - Dashboard";
+			$FooterCustomJS="";
+			//INSTANCIA MENU HEADER
+			$menuHeader = $this->parser->parse('widgets/widget-menuHeader',array(),TRUE);
+			//INSTANCIA MENU FOOTER
+			$menuFooter = $this->parser->parse('widgets/widget-menuFooter',array(),TRUE);
+			$header = $this->parser->parse('layouts/layout-header',array('bodyclass'=>'full-width','menuHeaderActive'=>TRUE,'menuHeaderMainActive'=>TRUE,'menuHeader'=>$menuHeader,'titlePage'=>$titlePage),TRUE);
+			$FooterCustomInsertJS=["jquery-1.10.2.min.js","jquery-ui-1.10.3.custom.min.js","jquery.balloon.min.js","jquery.paginate.js","jquery.isotope.min.js","dashboard/dashboard.js","header.js","routes.js"];
+			$footer = $this->parser->parse('layouts/layout-footer',array('menuFooterActive'=>TRUE,'menuFooter'=>$menuFooter,'FooterCustomInsertJSActive'=>TRUE,'FooterCustomInsertJS'=>$FooterCustomInsertJS,'FooterCustomJSActive'=>TRUE,'FooterCustomJS'=>$FooterCustomJS),TRUE);
+
+			$content = $this->parser->parse('dashboard/content-dashboard',array('titulo'=>$nombreCompleto,'lastSession'=>$lastSessionD),TRUE);
+
+			$datos = array(
+				'header'=>$header,
+				'content'=>$content,
+				'footer'=>$footer,
+				'sidebarActive'=>FALSE,
+				'titleHeading' => 'TITULO ACA',
+				'login' => 'LOGIN USUARIO',
+				'password' => 'CONTRASEÑA',
+				'loginBtn' => 'ENTRAR',
+			);
+
+			$this->parser->parse('layouts/layout-a', $datos);
+		}elseif($paisS!=$urlCountry && $paisS!=""){
+			$this->session->sess_destroy();
+			$this->session->unset_userdata($this->session->all_userdata());
+			redirect($urlCountry.'/login');
+		}else{
+			redirect($urlCountry.'/login');
+		}
+	}
+
+
+	/**
+	 * Método para obtener el listado de empresas asociadas a un usuario
+	 * @param  string $urlCountry
+	 * @return json
+	 */
+	public function getListaEmpresasUsuariosJSON($urlCountry){
+		np_hoplite_countryCheck($urlCountry);
+		$logged_in = $this->session->userdata('logged_in');
+		$paisS = $this->session->userdata('pais');
+		//VALIDAR QUE USUARIO ESTE LOGGEDIN
+		if($paisS==$urlCountry && $logged_in){
+
+			if($this->input->post()){
+				$paginar= $this->input->post('data-paginar');
+				$tamanoPagina= $this->input->post('data-tamanoPagina');
+				$paginaActual= $this->input->post('data-paginaActual');
+				$filtroEmpresas= $this->input->post('data-filtroEmpresas');
+				$rTest = $this->callWSListaEmpresasUsuario($paginar,$paginaActual,$tamanoPagina,$urlCountry); // solicitud sin paginar (obtiene todas las empresas), el filtrado se realiza desde js
+
+				//$rTest = $this->callWSListaEmpresasPaginar($paginar,$tamanoPagina,$paginaActual,$filtroEmpresas,$urlCountry); // solicitud paginada y con filtro de búsqueda
+
+				$lista=$rTest;
+
+			}else{
+				$paginar=FALSE;
+				$lista = $this->callWSListaEmpresasPaginar($paginar,$tamanoPagina=null,$paginaActual=null,$filtroEmpresas=null,$urlCountry);
+			}
+
+			$this->output->set_content_type('application/json')->set_output(json_encode($lista,JSON_UNESCAPED_UNICODE));
+
+		}elseif($paisS!=$urlCountry && $paisS!=""){
+			$this->session->sess_destroy();
+			$this->session->unset_userdata($this->session->all_userdata());
+			redirect($urlCountry.'/login');
+		}elseif($this->input->is_ajax_request()){
+			log_message('info','ajax call');
+			$this->output->set_content_type('application/json')->set_output(json_encode(array('ERROR' => '-29' )));
+		}
+		else{
+			redirect($urlCountry.'/login');
+		}
+	}
+
+
+	/**
+	 * Método que realiza petición al WS para obtener el listado de empresas por usuario
+	 * @param  string $paginar
+	 * @param  string $paginaActual
+	 * @param  string $tamanoPagina
+	 * @param  string $pais
+	 * @return array
+	 */
+	private function callWSListaEmpresasUsuario($paginar,$paginaActual,$tamanoPagina,$pais){
+		$this->lang->load('erroreseol');
+		$this->lang->load('dashboard');
+		$canal = "ceo";
+		$modulo="login";
+		$function="login";
+		$operation="getPaginar";
+		$className="com.novo.objects.MO.ListadoEmpresasMO";
+		$timeLog= date("m/d/Y H:i");
+		$ip= $this->input->ip_address();
+		$sessionId = $this->session->userdata('sessionId');
+		$username = "TEBCART";//$this->session->userdata('userName');
+		$token = $this->session->userdata('token');
+		$logAcceso = np_hoplite_log($sessionId,$username,$canal,$modulo,$function,$operation,0,$ip,$timeLog);
+
+		$data = array(
+			"idOperation" => $operation,
+			"className" => $className,
+			"accodusuario"=>$username,
+			"paginaActual"=> $paginaActual,
+			"paginar"=>$paginar,
+			"tamanoPagina"=>$tamanoPagina,
+			"filtroEmpresas"=>null,
+			"logAccesoObject"=>$logAcceso,
+			"token"=>$token,
+			"pais"=>$pais
+		);
+
+		$data = json_encode($data,JSON_UNESCAPED_UNICODE);
+		$dataEncry = np_Hoplite_Encryption($data);
+		$data = array('bean' => $dataEncry, 'pais' =>$pais );
+		$data = json_encode($data);
+		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+		$jsonResponse = np_Hoplite_Decrypt($response);
+		$response = json_decode(utf8_encode($jsonResponse));
+
+		if($response){
+			log_message('info','dashb_empr '.$response->rc);
+			if($response->rc==0){
+				return $response;
+			}else{
+
+				if($response->rc==-61 || $response->rc==-29){
+					$this->session->sess_destroy();
+					$this->session->unset_userdata($this->session->all_userdata());
+					return array('ERROR' => '-29' );
+
+				}elseif ($response->rc==-150) {
+					$codigoError = array('ERROR' => lang('DASH150') );
+
+				}else{
+
+					$codigoError = lang('ERROR_('.$response->rc.')');
+					if(strpos($codigoError, 'Error')!==false){
+						$codigoError = array('ERROR' => lang('ERROR_GENERICO_USER') );
+					}else{
+						$codigoError = array('ERROR' => lang('ERROR_('.$response->rc.')') );
+					}
+				}
+				return $codigoError;
+			}
+		}else{
+			log_message('info','dashb_empr NO WS');
+			return $codigoError = array('ERROR' => lang('ERROR_GENERICO_USER') );
+		}
+
+	}
+
+
+
+
+	/**
+	 * Método para obtener el listado de empresas asociadas a un usuario
+	 * @param  string $urlCountry
+	 * @return json
+	 */
+	public function getListaEmpresasJSON($urlCountry){
+		np_hoplite_countryCheck($urlCountry);
+		$logged_in = $this->session->userdata('logged_in');
+		$paisS = $this->session->userdata('pais');
+
+		//VALIDAR QUE USUARIO ESTE LOGGEDIN
+		if($paisS==$urlCountry && $logged_in){
+
+			if($this->input->post()){
+				$paginar= $this->input->post('data-paginar');
+				$tamanoPagina= $this->input->post('data-tamanoPagina');
+				$paginaActual= $this->input->post('data-paginaActual');
+				$filtroEmpresas= $this->input->post('data-filtroEmpresas');
+				$rTest = $this->callWSListaEmpresas($paginar,$paginaActual,$tamanoPagina,$urlCountry); // solicitud sin paginar (obtiene todas las empresas), el filtrado se realiza desde js
+
+				//$rTest = $this->callWSListaEmpresasPaginar($paginar,$tamanoPagina,$paginaActual,$filtroEmpresas,$urlCountry); // solicitud paginada y con filtro de búsqueda
+
+				$lista=$rTest;
+
+			}else{
+				$paginar=FALSE;
+				$lista = $this->callWSListaEmpresasPaginar($paginar,$tamanoPagina=null,$paginaActual=null,$filtroEmpresas=null,$urlCountry);
+			}
+
+			$this->output->set_content_type('application/json')->set_output(json_encode($lista,JSON_UNESCAPED_UNICODE));
+
+		}elseif($paisS!=$urlCountry && $paisS!=""){
+			$this->session->sess_destroy();
+			$this->session->unset_userdata($this->session->all_userdata());
+			redirect($urlCountry.'/login');
+		}elseif($this->input->is_ajax_request()){
+			log_message('info','ajax call');
+			$this->output->set_content_type('application/json')->set_output(json_encode(array('ERROR' => '-29' )));
+		}
+		else{
+			redirect($urlCountry.'/login');
+		}
+	}
+	/**
+	 * Método para obtener los productos asociados a determinada empresa para un usuario dado
+	 * @param  string $urlCountry
+	 * @return json
+	 */
+	public function getListaProductosJSON($urlCountry){
+
+		np_hoplite_countryCheck($urlCountry);
+		$logged_in = $this->session->userdata('logged_in');
+		//VALIDAR QUE USUARIO ESTE LOGGEDIN
+		$paisS = $this->session->userdata('pais');
+
+		if($paisS==$urlCountry && $logged_in){
+			if($this->input->post()){
+				$acrifPost = $this->input->post('acrif');
+
+				$responseMenuEmpresas =$this->callWSMenuEmpresa($acrifPost,$urlCountry,$ctipo='false');
+				if(array_key_exists('ERROR', $responseMenuEmpresas)){
+					$productos = $responseMenuEmpresas;
+				}
+				else{
+					$productos = $responseMenuEmpresas->productos;
+				}
+			}else{
+				$productos=null;
+			}
+
+			$this->output->set_content_type('application/json')->set_output(json_encode($productos,JSON_UNESCAPED_UNICODE));
+		}elseif($paisS!=$urlCountry && $paisS!=''){
+			$this->session->sess_destroy();
+			$this->session->unset_userdata($this->session->all_userdata());
+			redirect($urlCountry.'/login');
+		}elseif($this->input->is_ajax_request()){
+			log_message('info','ajax call');
+			$this->output->set_content_type('application/json')->set_output(json_encode(array('ERROR' => '-29' )));
+		}else{
+			redirect($urlCountry.'/login');
+		}
+	}
+
+
+	/**
+	 * Método para Consulta de Productos por Empresa para el Combo de Productos (Tarjeta Hambiente)
+	 * @param  string $urlCountry
+	 * @return json
+	 */
+	public function callWSListaProductosUsuarioJSON($urlCountry){
+
+		np_hoplite_countryCheck($urlCountry);
+		$logged_in = $this->session->userdata('logged_in');
+		//VALIDAR QUE USUARIO ESTE LOGGEDIN
+		$paisS = $this->session->userdata('pais');
+
+		if($paisS==$urlCountry && $logged_in){
+			if($this->input->post()){
+				$acrifPost = $this->input->post('acrif');
+
+				$responseMenuEmpresas =$this->callWSMenuEmpresaTarjetaHambiente($acrifPost,$urlCountry,$ctipo='false');
+				if(array_key_exists('ERROR', $responseMenuEmpresas)){
+					$productos = $responseMenuEmpresas;
+				}
+				else{
+					$productos = $responseMenuEmpresas->productos;
+				}
+			}else{
+				$productos=null;
+			}
+
+			$this->output->set_content_type('application/json')->set_output(json_encode($productos,JSON_UNESCAPED_UNICODE));
+		}elseif($paisS!=$urlCountry && $paisS!=''){
+			$this->session->sess_destroy();
+			$this->session->unset_userdata($this->session->all_userdata());
+			redirect($urlCountry.'/login');
+		}elseif($this->input->is_ajax_request()){
+			log_message('info','ajax call');
+			$this->output->set_content_type('application/json')->set_output(json_encode(array('ERROR' => '-29' )));
+		}else{
+			redirect($urlCountry.'/login');
+		}
+	}
+
+	/**
+	 * Método para cambiar los valores de las variables almacenadas en sesión
+	 * cuando el usuario decide cambiar de empresa o producto desde el sidebar
+	 * @param  string $urlCountry
+	 * @return array
+	 */
+	public function postCambiarEmpresaProducto($urlCountry){
+
+		np_hoplite_countryCheck($urlCountry);
+		$logged_in = $this->session->userdata('logged_in');
+
+		$paisS = $this->session->userdata('pais');
+
+		if($paisS==$urlCountry && $logged_in){
+			//VALIDAMOS QUE RECIBA EL POST
+			if($this->input->is_ajax_request()){
+				$llamada = $this->input->post('llamada');
+
+				if($llamada=='soloEmpresa'){
+					$acrifPost = $this->input->post('data-acrif');
+					$acnomciaPost = $this->input->post('data-acnomcia');
+					$acrazonsocialPost = $this->input->post('data-acrazonsocial');
+					$acdescPost = $this->input->post('data-acdesc');
+					$accodciaPost = $this->input->post('data-accodcia');
+					$accodgrupoe = $this->input->post('data-accodgrupoe');
+
+					$this->form_validation->set_rules('data-acrif', 'acrif',  'required');
+					$this->form_validation->set_rules('data-acnomcia', 'acnomcia',  'required');
+					$this->form_validation->set_rules('data-acrazonsocial', 'acrazonsocial',  'required');
+					$this->form_validation->set_rules('data-accodcia', 'accodcia',  'required');
+					if ($this->form_validation->run() == FALSE)
+					{
+						$respuesta=0;
+					}
+					else
+					{
+						$newdata = array(
+							'acrifS'=>$acrifPost,
+							'acnomciaS'=>$acnomciaPost,
+							'acrazonsocialS'=>$acrazonsocialPost,
+							'acdescS'=>$acdescPost,
+							'accodciaS'=>$accodciaPost,
+							'accodgrupoeS'=> $accodgrupoe,
+							'idProductoS'=>" ",
+							'nombreProductoS' =>" ",
+							'marcaProductoS' =>" "
+						);
+						$this->session->set_userdata($newdata);
+
+						$respuesta=1;
+					}
+
+				}elseif($llamada=='productos'){
+					$acrifPost = $this->input->post('data-acrif');
+					$acnomciaPost = $this->input->post('data-acnomcia');
+					$acrazonsocialPost = $this->input->post('data-acrazonsocial');
+					$acdescPost = $this->input->post('data-acdesc');
+					$accodciaPost = $this->input->post('data-accodcia');
+					$accodgrupoe = $this->input->post('data-accodgrupoe');
+					$idProductoPost = $this->input->post('data-idproducto');
+					$nomProduc = $this->input->post('data-nomProd');
+					$marcProduc = $this->input->post('data-marcProd');
+
+					$this->form_validation->set_rules('data-acrif', 'acrif',  'required');
+					$this->form_validation->set_rules('data-acnomcia', 'acnomcia',  'required');
+					$this->form_validation->set_rules('data-acrazonsocial', 'acrazonsocial',  'required');
+					$this->form_validation->set_rules('data-accodcia', 'accodcia',  'required');
+					$this->form_validation->set_rules('data-idproducto', 'idproducto',  'required');
+
+					if ($this->form_validation->run() == FALSE)
+					{
+						$respuesta=0;
+					}
+					else
+					{
+						$newdata = array(
+							'acrifS'=>$acrifPost,
+							'acnomciaS'=>$acnomciaPost,
+							'acrazonsocialS'=>$acrazonsocialPost,
+							'acdescS'=>$acdescPost,
+							'accodciaS'=>$accodciaPost,
+							'accodgrupoeS'=> $accodgrupoe,
+							'idProductoS'=>$idProductoPost,
+							'nombreProductoS' =>$nomProduc,
+							'marcaProductoS' =>$marcProduc
+						);
+						$this->session->set_userdata($newdata);
+						$respuesta=1;
+					}
+				}
+			}else{
+				$respuesta=0;
+			}
+
+			$this->output->set_content_type('application/json')->set_output(json_encode($respuesta,JSON_UNESCAPED_UNICODE));
+		}elseif($paisS!=$urlCountry && $paisS!=""){
+			$this->session->sess_destroy();
+			$this->session->unset_userdata($this->session->all_userdata());
+			redirect($urlCountry.'/login');
+		}else{
+			redirect($urlCountry.'/login');
+		}
+	}
+
+
+	/**
+	 * Pantalla que muestra listado de productos asociados para la relación empresa-usuario
+	 * @param  string $urlCountry
+	 */
+	public function dashboardProductos($urlCountry){
+
+		//VALIDATE COUNTRY
+		np_hoplite_countryCheck($urlCountry);
+		$this->lang->load('dashboard');
+		$this->lang->load('users');
+		$this->load->library('parser');
+		$this->lang->load('erroreseol');
+		$logged_in = $this->session->userdata('logged_in');
+
+		$menu = array(
+			'menuArrayPorProducto' => NULL,
+		);
+		$this->session->unset_userdata($menu);
+
+		$paisS = $this->session->userdata('pais');
+
+		if($paisS==$urlCountry && $logged_in){
+			$acdescPost = $this->input->post('data-acdesc');
+			if($this->input->post()){
+
+				$acrifPost = $this->input->post('data-acrif');
+				$acnomciaPost = $this->input->post('data-acnomcia');
+				$acrazonsocialPost = $this->input->post('data-acrazonsocial');
+				$acdescPost = $this->input->post('data-acdesc');
+
+				$accodciaPost = $this->input->post('data-accodcia');
+				$accodgrupoePost = $this->input->post('data-accodgrupoe');
+				$newdata = array(
+					'acrifS'=>$acrifPost,
+					'acnomciaS'=>$acnomciaPost,
+					'acrazonsocialS'=>$acrazonsocialPost,
+					'acdescS'=>$acdescPost,
+					'accodciaS'=>$accodciaPost,
+					'accodgrupoeS'=>$accodgrupoePost
+				);
+				$this->session->set_userdata($newdata);
+			}
+
+			$acrifS = $this->session->userdata('acrifS');
+
+			if($acrifS){
+
+				$responseMenuEmpresas =$this->callWSMenuEmpresa($acrifS,$urlCountry,$ctipo='A');
+				$listaCat = null;
+				$listaMarc = null;
+
+				if( array_key_exists('productos',$responseMenuEmpresas ) ){
+					$productos = $responseMenuEmpresas->productos;
+					$listaCat = $responseMenuEmpresas->listaCategorias;
+					$listaMarc = $responseMenuEmpresas->listaMarcas;
+				}else{
+					$productos = $responseMenuEmpresas;
+				}
+
+				$titulo = "Selección del Producto";
+				$lastSessionD = $this->session->userdata('lastSession');
+				$titlePage= "Conexión Empresas Online - Productos";
+				$FooterCustomInsertJS=[];
+				$FooterCustomJS="";
+				//INSTANCIA MENU HEADER
+				$menuHeader = $this->parser->parse('widgets/widget-menuHeader',array(),TRUE);
+				//INSTANCIA MENU FOOTER
+				$menuFooter = $this->parser->parse('widgets/widget-menuFooter',array(),TRUE);
+
+				$header = $this->parser->parse('layouts/layout-header',array('bodyclass'=>'','menuHeaderActive'=>TRUE,'menuHeaderMainActive'=>TRUE,'menuHeader'=>$menuHeader,'titlePage'=>$titlePage),TRUE);
+				$FooterCustomInsertJS=["jquery-1.10.2.min.js","jquery-ui-1.10.3.custom.min.js","jquery.isotope.min.js","jquery.balloon.min.js","dashboard/productos.js","header.js","routes.js"];
+				$footer = $this->parser->parse('layouts/layout-footer',array('menuFooterActive'=>TRUE,'menuFooter'=>$menuFooter,'FooterCustomInsertJSActive'=>TRUE,'FooterCustomInsertJS'=>$FooterCustomInsertJS,'FooterCustomJSActive'=>TRUE,'FooterCustomJS'=>$FooterCustomJS),TRUE);
+				$content = $this->parser->parse('dashboard/content-productos',array(
+					'titulo'=>$titulo,
+					'breadcrum'=>'',
+					'productos'=>$productos,
+					'listaCategorias' => $listaCat,
+					'listaMarcas' => $listaMarc,
+					'lastSession'=>$lastSessionD
+				),TRUE);
+
+				$sidebarEmpresa= $this->parser->parse('dashboard/widget-empresa',array('sidebarActive'=>TRUE),TRUE);
+
+				$datos = array(
+					'header'=>$header,
+					'content'=>$content,
+					'footer'=>$footer,
+					'sidebar'=>$sidebarEmpresa,
+					'content'=>$content,
+					'titleHeading' => 'TITULO ACA',
+					'login' => 'LOGIN USUARIO',
+					'password' => 'CONTRASEÑA',
+					'loginBtn' => 'ENTRAR',
+				);
+
+				$this->parser->parse('layouts/layout-b', $datos);
+			}else{
+				redirect($urlCountry.'/login');
+			}
+		}elseif($paisS!=$urlCountry && $paisS!=""){
+			$this->session->sess_destroy();
+			$this->session->unset_userdata($this->session->all_userdata());
+			redirect($urlCountry.'/login');
+		}else{
+			redirect($urlCountry.'/login');
+		}
+	}
+
+	/**
+	 * Pantalla que muestra los estadiscos del producto seleccionado y el menú con las funciones del usuario
+	 * @param  string $urlCountry
+	 */
+	public function dashboardProductosDetalle($urlCountry){
+		//VALIDATE COUNTRY
+		np_hoplite_countryCheck($urlCountry);
+		$this->lang->load('dashboard');
+		$this->lang->load('erroreseol');
+		$this->lang->load('users');
+		$this->load->library('parser');
+		$logged_in = $this->session->userdata('logged_in');
+		$acrifS = $this->session->userdata('acrifS');
+
+		//SE VALIDA SI EL USUARIO ESTA LOGGEDIN
+		$paisS = $this->session->userdata('pais');
+
+		if($paisS==$urlCountry && $logged_in){
+			//SE OBTIENEN LAS VARIABLES DE SESSION QUE QUIERO USAR
+			$nombreCompleto = $this->session->userdata('nombreCompleto');
+			$lastSessionD = $this->session->userdata('lastSession');
+
+			$FooterCustomInsertJS="";
+			$FooterCustomJS="";
+
+			//SE VALIDA SI VIENE LA CONSULTA POR POST
+			if($this->input->post()){
+				//SE OBTIENEN VARIABLES DE POST
+				$idProductoPost = $this->input->post('data-idproducto');
+				$nombreProductoPost = $this->input->post('data-nombreProducto');
+				$marcaProductoPost = $this->input->post('data-marcaProducto');
+
+				$newdata = array(
+					'idProductoS'=>$idProductoPost,
+					'nombreProductoS'=>$nombreProductoPost,
+					'marcaProductoS'=>$marcaProductoPost
+				);
+				//SE INSERTAN LAS VARIABLES EN LA SESSION
+				$this->session->set_userdata($newdata);
+			}
+
+			//SE OBTIENEN VARIABLES DE POST
+			$idProducto = $this->session->userdata('idProductoS');
+			$cid = $this->session->userdata('acrifS');
+			$accodcia = $this->session->userdata('accodciaS');
+			$codgrupoe = $this->session->userdata("accodgrupoeS");
+
+			$responseMenuPorProducto =$this->callWSMenuPorProducto($idProducto,$cid,$accodcia,$codgrupoe, $urlCountry);
+
+			if( !array_key_exists('ERROR', $responseMenuPorProducto) ){
+				//PERMISOS Y OPCIONES DE MENU DISPONIBLES DE ACUERDO AL USUARIO Y PRODUCTO SERIALIZADO
+				$OpcionesMenu = serialize($responseMenuPorProducto->lista);
+
+				$menu = [
+					'menuArrayPorProducto'=>$OpcionesMenu
+				];
+				$this->session->set_userdata($menu);
+
+				$estadisticas[]=$responseMenuPorProducto->estadistica;
+				$nombreEmpresaT = $responseMenuPorProducto->estadistica->producto->descripcion;
+				$mesesVencimiento = $responseMenuPorProducto->estadistica->producto->mesesVencimiento;
+				$actualDate = date('Y-m');
+				$newDate = strtotime ('+'.$mesesVencimiento.' month' , strtotime ( $actualDate ));
+				$expireDate = date ('m/Y' , $newDate);
+
+				$maxTarjetas = $responseMenuPorProducto->estadistica->producto->maxTarjetas;
+
+				$expMax = [
+					'mesesVencimiento'=>$expireDate,
+					'maxTarjetas'=>$maxTarjetas
+				];
+				$this->session->set_userdata($expMax);
+
+
+
+
+
+				$responseMenuPorProducto->estadistica->producto->descripcion;
+				$titlePage = "Conexión Empresas Online - ".$nombreEmpresaT;
+				$msgError=FALSE;
+			}else{
+				/*	VACIAR MENU 	 */
+				$menu = array(
+					'menuArrayPorProducto'=>null
+				);
+				$this->session->set_userdata($menu);
+
+				$estadisticas=FALSE;
+
+				$msgError = $responseMenuPorProducto['ERROR'];
+				$titlePage="Conexión Empresas Online - Productos Detalle";
+			}
+
+			$FooterCustomInsertJS=["jquery-1.10.2.min.js","jquery-ui-1.10.3.custom.min.js","jquery.balloon.min.js","dashboard/widget-empresa.js","header.js","routes.js"];
+			//INSTANCIA MENU HEADER
+			$menuHeader = $this->parser->parse('widgets/widget-menuHeader',array(),TRUE);
+			//INSTANCIA MENU FOOTER
+			$menuFooter = $this->parser->parse('widgets/widget-menuFooter',array(),TRUE);
+			$header = $this->parser->parse('layouts/layout-header',array('bodyclass'=>'','menuHeaderActive'=>TRUE,'menuHeaderMainActive'=>TRUE,'menuHeader'=>$menuHeader,'titlePage'=>$titlePage),TRUE);
+			$footer = $this->parser->parse('layouts/layout-footer',array('menuFooterActive'=>TRUE,'menuFooter'=>$menuFooter,'FooterCustomInsertJSActive'=>TRUE,'FooterCustomInsertJS'=>$FooterCustomInsertJS,'FooterCustomJSActive'=>TRUE,'FooterCustomJS'=>$FooterCustomJS),TRUE);
+
+			$content = $this->parser->parse('dashboard/content-detalleProducto',array(
+				'lastSession'=>$lastSessionD,
+				'producto'=>$estadisticas,
+				'msgError'=>$msgError
+			),TRUE);
+
+			$sidebarEmpresa= $this->parser->parse('dashboard/widget-empresa',array('sidebarActive'=>TRUE),TRUE);
+
+			$datos = array(
+				'header'=>$header,
+				'content'=>$content,
+				'footer'=>$footer,
+				'sidebar'=>$sidebarEmpresa
+			);
+
+			$this->parser->parse('layouts/layout-b', $datos);
+		}elseif($paisS!=$urlCountry && $paisS!=""){
+			$this->session->sess_destroy();
+			$this->session->unset_userdata($this->session->all_userdata());
+			redirect($urlCountry.'/login');
+		}else{
+			redirect($urlCountry.'/login');
+		}
+	}
+
+	/**
+	 * Método que realiza petición al WS para obtener el listado de empresas sin filtrado
+	 * @param  string $paginar
+	 * @param  string $paginaActual
+	 * @param  string $tamanoPagina
+	 * @param  string $pais
+	 * @return array
+	 */
+	private function callWSListaEmpresas($paginar,$paginaActual,$tamanoPagina,$pais){
+		$this->lang->load('erroreseol');
+		$this->lang->load('dashboard');
+		$canal = "ceo";
+		$modulo="login";
+		$function="login";
+		$operation="listaEmpresas";
+		$className="com.novo.objects.MO.ListadoEmpresasMO";
+		$timeLog= date("m/d/Y H:i");
+		$ip= $this->input->ip_address();
+		$sessionId = $this->session->userdata('sessionId');
+		$username = $this->session->userdata('userName');
+		$token = $this->session->userdata('token');
+		$logAcceso = np_hoplite_log($sessionId,$username,$canal,$modulo,$function,$operation,0,$ip,$timeLog);
+
+		$data = array(
+			"idOperation" => $operation,
+			"className" => $className,
+			"accodusuario"=>$username,
+			"paginaActual"=>$paginaActual,
+			"paginar"=>$paginar,
+			"tamanoPagina"=>$tamanoPagina,
+			"logAccesoObject"=>$logAcceso,
+			"token"=>$token,
+			"pais"=>$pais
+		);
+
+		$data = json_encode($data,JSON_UNESCAPED_UNICODE);
+
+		$dataEncry = np_Hoplite_Encryption($data);
+		$data = array('bean' => $dataEncry, 'pais' =>$pais );
+		$data = json_encode($data);
+		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+		$jsonResponse = np_Hoplite_Decrypt($response);
+		log_message('INFO', 'RESPONSE LISTA DE EMPRESAS===>>>>'. $jsonResponse);
+		$response = json_decode(utf8_encode($jsonResponse));
+
+		if($response){
+			log_message('info','dashb_empr '.$response->rc);
+			if($response->rc==0){
+				return $response;
+			}else{
+
+				if($response->rc==-61 || $response->rc==-29){
+					$this->session->sess_destroy();
+					$this->session->unset_userdata($this->session->all_userdata());
+					return array('ERROR' => '-29' );
+
+				}elseif ($response->rc==-150) {
+					$codigoError = array('ERROR' => lang('DASH150') );
+
+				}else{
+
+					$codigoError = lang('ERROR_('.$response->rc.')');
+					if(strpos($codigoError, 'Error')!==false){
+						$codigoError = array('ERROR' => lang('ERROR_GENERICO_USER') );
+					}else{
+						$codigoError = array('ERROR' => lang('ERROR_('.$response->rc.')') );
+					}
+				}
+				return $codigoError;
+			}
+		}else{
+			log_message('info','dashb_empr NO WS');
+			return $codigoError = array('ERROR' => lang('ERROR_GENERICO_USER') );
+		}
+
+	}
+
+	/**
+	 * Método que realiza petición al WS para obtener el listado de empresas filtrado segun parámetro de busqueda
+	 * @param  string $paginar
+	 * @param  string $tamanoPagina
+	 * @param  string $paginaActual
+	 * @param  string $filtroEmpresas
+	 * @param  string $pais
+	 * @return array
+	 */
+	private function callWSListaEmpresasPaginar($paginar,$tamanoPagina,$paginaActual,$filtroEmpresas,$pais){
+		$this->lang->load('erroreseol');
+		$canal = "ceo";
+		$modulo="listaEmpresas";
+		$function="listarEmpreas";
+		$operation="getPaginar";
+		$className="com.novo.objects.MO.ListadoEmpresasMO";
+		$timeLog= date("m/d/Y H:i");
+		$ip= $this->input->ip_address();
+		$sessionId = $this->session->userdata('sessionId');
+		$username = $this->session->userdata('userName');
+		$token = $this->session->userdata('token');
+
+		$logAcceso = np_hoplite_log($sessionId,$username,$canal,$modulo,$function,"getPaginar",0,$ip,$timeLog);
+
+		$data = array(
+			"idOperation" => $operation,
+			"className" => $className,
+			"accodusuario"=>$username,
+			"paginaActual"=>$paginaActual,
+			"tamanoPagina"=>$tamanoPagina,
+			"paginar"=>$paginar,
+			"filtroEmpresas"=>$filtroEmpresas,
+			"logAccesoObject"=>$logAcceso,
+			"token"=>$token,
+			"pais"=>$pais
+		);
+
+		$data = json_encode($data,JSON_UNESCAPED_UNICODE);
+
+		$dataEncry = np_Hoplite_Encryption($data);
+		$data = array('bean' => $dataEncry, 'pais' =>$pais );
+		$data = json_encode($data);
+		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+		$jsonResponse = np_Hoplite_Decrypt($response);
+
+		$response = json_decode(utf8_encode($jsonResponse));
+
+		if($response){
+			log_message('info', 'dash_empr_filt '.$response->rc);
+			if($response->rc==0){
+				return $response;
+			}else{
+				if($response->rc==-61 || $response->rc==-29){
+					$this->session->sess_destroy();
+					$this->session->unset_userdata($this->session->all_userdata());
+					return array('ERROR' => '-29' );
+				}else{
+					$codigoError = lang('ERROR_('.$response->rc.')');
+					if(strpos($codigoError, 'Error')!==false){
+						$codigoError = array('ERROR' => lang('ERROR_GENERICO_USER') );
+					}else{
+						$codigoError = array('ERROR' => lang('ERROR_('.$response->rc.')') );
+					}
+
+					return $codigoError;
+				}
+			}
+		}else{
+			log_message('info', 'dash_empr_filt NO WS');
+			return $codigoError = array('ERROR' => lang('ERROR_GENERICO_USER') );
+		}
+
+	}
+	/**
+	 * Método que realiza petición al WS para obtener la lista de productos asociados a una empresa-usuario
+	 * @param  string $rif
+	 * @param  string $pais
+	 * @return array
+	 */
+	private function callWSMenuEmpresa($rif,$pais, $ctipo){
+		$this->lang->load('erroreseol');
+		$this->lang->load('dashboard');
+		$canal = "ceo";
+		$modulo="login";
+		$function="login";
+		$operation="menuEmpresa";
+		$className="com.novo.objects.TOs.UsuarioTO";
+		$timeLog= date("m/d/Y H:i");
+		$ip= $this->input->ip_address();
+		$sessionId = $this->session->userdata('sessionId');
+		$username = $this->session->userdata('userName');
+		$token = $this->session->userdata('token');
+		$logAcceso = np_hoplite_log($sessionId,$username,$canal,$modulo,$function,$operation,0,$ip,$timeLog);
+
+		$data = array(
+			"idOperation" => $operation,
+			"className" => $className,
+			"userName"=>$username,
+			"ctipo" => $ctipo,
+			"idEmpresa"=>$rif,
+			"logAccesoObject"=>$logAcceso,
+			"token"=>$token,
+			"pais"=>$pais
+		);
+
+		$data = json_encode($data,JSON_UNESCAPED_UNICODE);
+
+		$dataEncry = np_Hoplite_Encryption($data);
+		$data = array('bean' => $dataEncry, 'pais' =>$pais );
+		$data = json_encode($data);
+		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+		$jsonResponse = np_Hoplite_Decrypt($response);
+		$response = json_decode(utf8_encode($jsonResponse));
+
+		if($response){
+			log_message("info","productos ".$response->rc.'/'.$response->msg);
+			log_message("info","productos ".json_encode($response));
+
+			if($response->rc==0){
+				return $response;
+			}else{
+				if($response->rc==-61 || $response->rc==-29){
+					$this->session->sess_destroy();
+					$this->session->unset_userdata($this->session->all_userdata());
+					return array('ERROR' => '-29' );
+				}elseif($response->rc==-138){
+					$codigoError = array('ERROR' => lang('PRODUCTOS-138').ucwords( mb_strtolower($this->session->userdata('acnomciaS')) ));
+				}
+				else{
+					$codigoError = lang('ERROR_('.$response->rc.')');
+
+					if(strpos($codigoError, 'Error')!==false){
+						$codigoError = array('ERROR' => lang('ERROR_GENERICO_USER') );
+					}else{
+						$codigoError = array('ERROR' => lang('ERROR_('.$response->rc.')') );
+					}
+				}
+				return $codigoError;
+			}
+		}else{
+			log_message("info","productos NO WS");
+			return $codigoError = array('ERROR' => lang('ERROR_GENERICO_USER') );
+		}
+	}
+
+	/**
+	 * Método que realiza petición al WS para obtener la lista de productos asociados a una empresa-usuario (reporte Tarjeta Hambiente)
+	 * @param  string $rif
+	 * @param  string $pais
+	 * @return array
+	 */
+	private function callWSMenuEmpresaTarjetaHambiente($rif,$pais, $ctipo){
+		$this->lang->load('erroreseol');
+		$this->lang->load('dashboard');
+		$canal = "ceo";
+		$modulo="login";
+		$function="login";
+		$operation="menuEmpresa";
+		$className="com.novo.objects.TOs.UsuarioTO";
+		$timeLog= date("m/d/Y H:i");
+		$ip= $this->input->ip_address();
+		$sessionId = $this->session->userdata('sessionId');
+		$username = $this->session->userdata('userName');
+		$token = $this->session->userdata('token');
+		$logAcceso = np_hoplite_log($sessionId,$username,$canal,$modulo,$function,$operation,0,$ip,$timeLog);
+
+		$data = array(
+			"idOperation" => $operation,
+			"className" => $className,
+			"userName"=>$username,
+			"ctipo" =>  $ctipo,
+			"idEmpresa"=>$rif,
+			"logAccesoObject"=>$logAcceso,
+			"token"=>$token,
+			"pais"=>$pais
+		);
+
+		$data = json_encode($data,JSON_UNESCAPED_UNICODE);
+		$dataEncry = np_Hoplite_Encryption($data);
+		$data = array('bean' => $dataEncry, 'pais' =>$pais );
+		$data = json_encode($data);
+		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+		$jsonResponse = np_Hoplite_Decrypt($response);
+		$response = json_decode(utf8_encode($jsonResponse));
+
+		if($response){
+			log_message("info","productos ".$response->rc.'/'.$response->msg);
+
+			if($response->rc==0){
+				return $response;
+			}else{
+				if($response->rc==-61 || $response->rc==-29){
+					$this->session->sess_destroy();
+					$this->session->unset_userdata($this->session->all_userdata());
+					return array('ERROR' => '-29' );
+				}elseif($response->rc==-138){
+					$codigoError = array('ERROR' => lang('PRODUCTOS-138').ucwords( mb_strtolower($this->session->userdata('acnomciaS')) ));
+				}
+				else{
+					$codigoError = lang('ERROR_('.$response->rc.')');
+
+					if(strpos($codigoError, 'Error')!==false){
+						$codigoError = array('ERROR' => lang('ERROR_GENERICO_USER') );
+					}else{
+						$codigoError = array('ERROR' => lang('ERROR_('.$response->rc.')') );
+					}
+				}
+				return $codigoError;
+			}
+		}else{
+			log_message("info","productos NO WS");
+			return $codigoError = array('ERROR' => lang('ERROR_GENERICO_USER') );
+		}
+	}
+
+
+	/**
+	 * Método que realiza petición al WS para obtener el menú del usuario y sus funciones asociadas
+	 * y los estadisticos del producto para la empresa seleccionada.
+	 *
+	 * @param  string $prefijo
+	 * @param  string $rif
+	 * @param  string $acCodCia
+	 * @param  string $pais
+	 * @return array
+	 */
+	private function callWSMenuPorProducto($prefijo,$rif,$acCodCia,$codgrupoe,$pais){
+		$this->lang->load('erroreseol');
+		$canal = "ceo";
+		$modulo="login";
+		$function="login";
+		$operation="menuPorProducto";
+		$className="com.novo.objects.MO.ListadoMenuMO";
+		$timeLog= date("m/d/Y H:i");
+		$ip= $this->input->ip_address();
+		$sessionId = $this->session->userdata('sessionId');
+		$username = $this->session->userdata('userName');
+		$token = $this->session->userdata('token');
+		$logAcceso = np_hoplite_log($sessionId,$username,$canal,$modulo,$function,$operation,0,$ip,$timeLog);
+
+		$menus = array(array(
+			               "app" => "EOL",
+			               "prod" => "$prefijo",
+			               "idUsuario"=>"$username",
+			               "idEmpresa"=>"$rif"
+		               ));
+		$estadistica = array(
+			"producto" => array(
+				"prefijo"=>"$prefijo",
+				"rifEmpresa"=>"$rif",
+				"acCodCia"=>"$acCodCia",
+				"acCodGrupo" => "$codgrupoe"
+			)
+		);
+
+		$data = array(
+			"idOperation" => $operation,
+			"className" => $className,
+			"menus"=>$menus,
+			"estadistica"=>$estadistica,
+			"logAccesoObject"=>$logAcceso,
+			"token"=>$token,
+			"pais"=>$pais
+		);
+		$data = json_encode($data,JSON_UNESCAPED_UNICODE);
+
+		$dataEncry = np_Hoplite_Encryption($data);
+
+		$data = array('bean' => $dataEncry, 'pais' =>$pais );
+		$data = json_encode($data);
+		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+		$jsonResponse = np_Hoplite_Decrypt($response);
+		$response = json_decode(utf8_encode($jsonResponse));
+
+		if($response){
+			log_message('info','detalle produc '.$response->rc."/".$response->msg);
+			if($response->rc==0){
+
+				return $response;
+			}else{
+
+				if($response->rc==-61 || $response->rc==-29){
+					$this->session->sess_destroy();
+					$this->session->unset_userdata($this->session->all_userdata());
+					return $codigoError = array('ERROR' => '-29' );
+				}else{
+					$codigoError = lang('ERROR_('.$response->rc.')');
+					if(strpos($codigoError, 'Error')!==false){
+						$codigoError = array('ERROR' => lang('ERROR_GENERICO_USER') );
+					}else{
+						$codigoError = array('ERROR' => lang('ERROR_('.$response->rc.')') );
+					}
+					return $codigoError;}
+			}
+		}else{
+			log_message('info','detalle produc NO WS');
+			return $codigoError = array('ERROR' => lang('ERROR_GENERICO_USER') );
+		}
+	}
+
+	/**
+	 * Pantalla que muestra los programas disponibles para determinado país
+	 * @param  string $urlCountry
+	 */
+	public function programas($urlCountry){
+
+		//VALIDATE COUNTRY
+		np_hoplite_countryCheck($urlCountry);
+		$this->lang->load('dashboard');
+		$this->lang->load('erroreseol');
+		$this->lang->load('users');
+		$this->load->library('parser');
+		$logged_in = $this->session->userdata('logged_in');
+
+		//SE VALIDA SI EL USUARIO ESTA LOGGEDIN
+		$paisS = $this->session->userdata('pais');
+
+		if($paisS==$urlCountry && $logged_in){
+
+			$FooterCustomJS="";
+
+			$titlePage= "Otros programas";
+			$FooterCustomInsertJS=["jquery-1.10.2.min.js","jquery-ui-1.10.3.custom.min.js","jquery.balloon.min.js","dashboard/widget-empresa.js","dashboard/other-products.js","header.js","routes.js"];
+			//INSTANCIA MENU HEADER
+			$menuHeader = $this->parser->parse('widgets/widget-menuHeader',array(),TRUE);
+			//INSTANCIA MENU FOOTER
+			$menuFooter = $this->parser->parse('widgets/widget-menuFooter',array(),TRUE);
+			$header = $this->parser->parse('layouts/layout-header',array('bodyclass'=>'','menuHeaderActive'=>TRUE,'menuHeaderMainActive'=>TRUE,'menuHeader'=>$menuHeader,'titlePage'=>$titlePage),TRUE);
+			$footer = $this->parser->parse('layouts/layout-footer',array('menuFooterActive'=>TRUE,'menuFooter'=>$menuFooter,'FooterCustomInsertJSActive'=>TRUE,'FooterCustomInsertJS'=>$FooterCustomInsertJS,'FooterCustomJSActive'=>TRUE,'FooterCustomJS'=>$FooterCustomJS),TRUE);
+
+			$content = $this->parser->parse('dashboard/dashboard-other-products-'.$urlCountry,array(
+				'titulo' => $titlePage
+			),TRUE);
+
+			$sidebarEmpresa= $this->parser->parse('widgets/widget-publi-2',array('sidebarActive'=>TRUE),TRUE);
+
+			$datos = array(
+				'header'=>$header,
+				'content'=>$content,
+				'footer'=>$footer,
+				'sidebar'=>$sidebarEmpresa
+			);
+
+			$this->parser->parse('layouts/layout-b', $datos);
+		}elseif($paisS!=$urlCountry && $paisS!=""){
+			$this->session->sess_destroy();
+			$this->session->unset_userdata($this->session->all_userdata());
+			redirect($urlCountry.'/login');
+		}else{
+			redirect($urlCountry.'/login');
+		}
+	}
+
+} // FIN CLASE Dashboard
