@@ -61,8 +61,12 @@ class Users extends CI_Controller {
             $menuFooter = $this->parser->parse('widgets/widget-menuFooter',array(),TRUE);
             //INSTANCIA DEL CONTENIDO PARA EL HEADER, INCLUYE MENU
             $header = $this->parser->parse('layouts/layout-header',array('menuHeaderActive'=>FALSE,'menuHeaderMainActive'=>FALSE,'menuHeader'=>$menuHeader,'titlePage'=>$titlePage,'is_login'=>true),TRUE);
-            //JAVASCRIPTS A CARGAR
-            $FooterCustomInsertJS=["jquery-1.10.2.min.js","jquery-ui-1.10.3.custom.min.js","jquery-md5.js","jquery.kwicks.js","jquery.ui.sliderbutton.js","jquery.balloon.min.js","users/login.js","routes.js"];
+						//JAVASCRIPTS A CARGAR
+						if($urlCountry == 'Ec'){
+							$FooterCustomInsertJS=["jquery-1.10.2.min.js","jquery-ui-1.10.3.custom.min.js","jquery-md5.js","jquery.ui.sliderbutton.js","jquery.balloon.min.js","users/login.js","routes.js"];
+						}else{
+							$FooterCustomInsertJS=["jquery-1.10.2.min.js","jquery-ui-1.10.3.custom.min.js","jquery-md5.js","jquery.kwicks.js","jquery.ui.sliderbutton.js","jquery.balloon.min.js","users/login.js","routes.js"];
+						}
             //INSTANCIA DE CÓDIGO JS A AGREGAR
             $FooterCustomJS = "";
             //INSTANCIA PARA EL FOOTER
