@@ -1,10 +1,8 @@
 <?php
-$pais = $this->uri->segment(1);
 $urlBaseA = $this->config->item('base_url');
-
+$pais = $this->uri->segment(1);
 $urlBase = $urlBaseA.$pais;
 $logged_in = $this->session->userdata('logged_in');
-$pais=$this->session->userdata('pais');
 ?>
 <footer id="foot">
 		<div id="foot-wrapper">
@@ -25,11 +23,13 @@ $pais=$this->session->userdata('pais');
 							Afiliación
 						</a>
 					</li>-->
+					<?
+					if($pais != "Ec"){?>
 					<li class="menu-item benefits">
 						<a href="<? echo $urlBase.'/'.'beneficios'?>" rel="section">
 							<? echo lang('BREADCRUMB_BENEFICIOS');?>
 						</a>
-					</li></li>
+					</li><?	} ?>
 					<!--<li class="menu-item mobile">
 						<a href="#" rel="section">
 							Móvil

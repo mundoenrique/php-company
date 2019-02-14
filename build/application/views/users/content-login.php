@@ -4,9 +4,10 @@ $pais = $this->uri->segment(1);
 ?>
 
 <div id="content">
+	<?php if($pais!="Ec"){?>
 	<h1>Bienvenido a Conexión Empresas Online</h1>
 	<p>Con este sistema las gestiones de pago de su empresa son más eficientes, seguras y rápidas. Empiece a disfrutar de todas las ventajas que le ofrece Conexión Empresas Online.</p>
-
+	<?php }?>
 
 
 	<ul class='acordion kwicks kwicks-horizontal' >
@@ -49,7 +50,7 @@ $pais = $this->uri->segment(1);
 			<p>Afíliese  a cualquiera de nuestros Programas de Gestión de Efectivo y disfrute de todas las ventajas que le ofrece nuestra  plataforma  Conexión Empresas Online
 			</p>
 		</div> -->
-		
+
 		<div class="text-der" style="padding-left: 380px;">
 			<p class="subtitulos-login">¿Necesita ayuda?</p>
 			<p >Nuestros Ejecutivos del Centro de Soporte a  Empresas están a su orden para ofrecerle mayor información o aclararle cualquier duda.</p>
@@ -59,7 +60,7 @@ $pais = $this->uri->segment(1);
 			<p><?php if ($pais != "Co") { echo lang('INFO-3'); }  ?></p>
 
 		</div>
-		
+
 	</div>
 
 </div>

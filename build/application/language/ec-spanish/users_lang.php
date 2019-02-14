@@ -1,5 +1,5 @@
 <?php
-$lang['WIDGET_LOGIN_TITLE']="Cliente afiliado Ecuador";
+$lang['WIDGET_LOGIN_TITLE']="Cliente afiliado";
 $lang['WIDGET_ADDCLIENT_TITLE']="Nuevo Cliente";
 
 $lang['LOGIN_INFO']='Ventas e información a empresas';

@@ -178,19 +178,12 @@ var ingresar_ = function() {
 
 $(function() {
 
-    $('.kwicks').kwicks({
-        size: 135,
-        maxSize: 250,
-        spacing: 5,
-        behavior: 'menu'
-    });
     /*Inicializar Button*/
     var button = '<button id="button-login" name="login">Login</button>';
     $('#sliderbutton-login').addClass('stl-button').append(button);
     /*Inicializar sliderbutton*/
 
-  $('#button-login').on('click', function() {      
-        console.log("click");
+  $('#button-login').on('click', function() {
         ingresar_();
      });
 
@@ -238,7 +231,6 @@ $(function() {
     if (isMobile) {
         $('#sliderbutton-login').hide();
         $('#login-mobile').show();
-    }
-    var content = '<div id="content"><h1>Welcomen message</h1><p>Introduccion text</p></div>'
-    $("#content").replaceWith(content)
+		}
+		document.getElementById("content").innerHTML = "<h1>Welcome message</h1><p>Introduction text</p>";
 });
