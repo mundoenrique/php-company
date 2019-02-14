@@ -247,21 +247,18 @@ table {
 }
 
 ::selection {
-  background: #ffdd00;
+  background: #0F265C;
   color: white;
-  text-shadow: 1px 1px 0 #ffdd00;
 }
 
 ::-moz-selection {
-  background: #ffdd00;
+  background: #0F265C;
   color: white;
-  text-shadow: 1px 1px 0 #ffdd00;
 }
 
 ::-webkit-selection {
-  background: #ffdd00;
+  background: #0F265C;
   color: white;
-  text-shadow: 1px 1px 0 #ffdd00;
 }
 
 body {
