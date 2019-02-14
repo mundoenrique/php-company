@@ -780,8 +780,6 @@ ol.breadcrumb li a {
 #account-nav ul {
   float: right;
   width: auto !important;
-  margin-top: 18px;
-
 }
 
 #account-nav ul li {
@@ -790,14 +788,15 @@ ol.breadcrumb li a {
   /*clear: both;*/
   margin-bottom: 5px;
   text-transform: capitalize;
-  margin-left: 20px;
+	margin-left: 20px;
 }
 #account-nav ul li a {
   color: white;
   float: left;
   /*clear: both;*/
   font-size: 12px;
-  font-weight: bold;
+	font-weight: bold;
+	color: #0f265c !important;
 }
 #account-nav ul li a span.icon {
   font-size: 16px;
@@ -835,17 +834,9 @@ ol.breadcrumb li a {
 
 .config-menuH {
   min-width: 20px;
-  padding: 5px;
-  border-radius: 6px 6px 6px 6px;
-  border: none !important;
-  box-shadow: 4px 4px 4px #555555;
-  color: #666666;
-  background: #ffdd00;
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffdd00), color-stop(100%, #004574));
-  background-image: -webkit-linear-gradient(#ffdd00, #004574);
-  background-image: -moz-linear-gradient(#ffdd00, #004574);
-  background-image: -o-linear-gradient(#ffdd00, #004574);
-  background-image: linear-gradient(#ffdd00, #004574);
+	padding: 5px;
+	background-color: white !important;
+  color: #0F265C;
   opacity: 1.00 !important;
   z-index: 32767;
   text-align: left;
@@ -853,14 +844,12 @@ ol.breadcrumb li a {
   position: absolute;
   top: 41px;
   left: 939.5px;
-  display: none;
+	display: none;
+	box-shadow:none !important;
+	border-radius: 0 0 0 0 !important;
+	border:1px solid #d5d5d5 !important;
 }
-.config-menuH span {
-  color: white !important;
-}
-.config-menuH div {
-  border-color: transparent transparent #ffdd00 !important;
-}
+
 .config-menuH ul {
   float: left;
   padding-left: -50px;
@@ -881,10 +870,14 @@ ol.breadcrumb li a {
   float: left;
 }
 .submenu a {
-  color: white !important;
+	color: #0F265C !important;
+	font-weight: normal;
+	padding-left:10px;
+	height: 10px;
 }
 .submenu a:hover {
-  color: #54c2d0 !important;
+	font-weight: bold;
+	border-left: 3px solid #FFDD00;
 }
 
 #text-general{
