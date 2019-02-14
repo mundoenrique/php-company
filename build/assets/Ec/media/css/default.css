@@ -7105,10 +7105,6 @@ button.green:hover {
   height: 38px;
 }
 
-#table-text-lotes-inventario-2 td:last-child {
-  /*border-left:0px;*/
-}
-
 .prueba_fuego{
   position: absolute;
   background-color: green;
@@ -7119,14 +7115,7 @@ button.green:hover {
   /*step 1*/
   #nav-bar2 {
     height: 40px;
-    background: #dddddd;
-    background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #dddddd), color-stop(100%, #f3f3f3));
-    background-image: -webkit-linear-gradient(#dddddd, #f3f3f3);
-    background-image: -moz-linear-gradient(#dddddd, #f3f3f3);
-    background-image: -o-linear-gradient(#dddddd, #f3f3f3);
-    background-image: linear-gradient(#dddddd, #f3f3f3);
-    -webkit-box-shadow: rgba(51, 51, 51, 0.5) 0 1px 2px;
-    -moz-box-shadow: rgba(51, 51, 51, 0.5) 0 1px 2px;
+    background: #FFFFFF;
     box-shadow: rgba(51, 51, 51, 0.5) 0 1px 2px;
     left: 0;
     /*overflow: hidden;*/
@@ -7142,6 +7131,7 @@ button.green:hover {
       width: 960px;
   }
   #nav2 ul {
+			background-color: white;
       list-style: none;
       text-align: left;
       padding-left: 0px;
@@ -7158,27 +7148,16 @@ button.green:hover {
   #nav2 ul li a {
       display: block;
       text-decoration: none;
-      border-left: 1px solid #dddddd;
-      border-right: 1px solid #f3f3f3;
-      color: #555555;
       font-weight: normal;
       font-family: "sourcesanspro-regular", "Helvetica Neue", Helvetica, Arial, sans-serif;
       font-size: 16px;
       line-height: 40px;
-      padding: 0 10px;
-      text-shadow: 1px 1px 0 #f3f3f3;
+			padding: 0 10px;
+			color: #0f265c !important;
   }
   #nav2 ul li a:hover {
-    background: #ffdd00;
-    background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffdd00), color-stop(100%, #004574));
-    background-image: -webkit-linear-gradient(#ffdd00, #004574);
-    background-image: -moz-linear-gradient(#ffdd00, #004574);
-    background-image: -o-linear-gradient(#ffdd00, #004574);
-    background-image: linear-gradient(#ffdd00, #004574);
-    border-left: 1px solid #004574;
-    border-right: 1px solid #004574;
-    color: white;
-    text-shadow: 1px 1px 0 #ffdd00;
+		font-weight: bold;
+		text-decoration: underline;
   }
   /*step 4*/
   #nav2 ul li ul {
@@ -7187,14 +7166,17 @@ button.green:hover {
       position: absolute;
       min-width: 160px;
       z-index: -1;
-      padding-left: 2px;
+			padding-left: 2px;
+			padding-top: 10px;
       margin-top: -2px !important;
       /* margin-left: -44px; */
       -webkit-transform: translateY(-50px);
       -moz-transform: translateY(-50px);
       -o-transform: translateY(-50px);
       -ms-transform: translateY(-50px);
-      transform: translateY(-50px);
+			transform: translateY(-50px);
+			border: 1px solid #d5d5d5;
+			border-bottom-left-radius:15px;
   }
   /*step 5*/
   #nav2 ul li:hover > ul {
@@ -7210,19 +7192,19 @@ button.green:hover {
   }
   /*step 6*/
   #nav2 ul li ul li {
-      color: #545454;
-      background: #f3f3f3;
-      border-bottom: 1px solid #D3D3D3;
-      border-top: 1px solid white;
+      background: white;
       list-style: none;
       position: relative;
-      margin-left: -2px !important;
+			margin-left: 10px !important;
+			overflow: hidden;
+			border-bottom-left-radius:15px;
+	}
 
-  }
-  #nav-bar2 nav ul li ul li ul {
-      right: -162px;
-      top: 0px;
-  }
+	#nav2 ul li ul li a:hover{
+		border-left: 3px solid #FFDD00;
+		text-decoration: none;
+	}
+
 /* Fin Menu-Head New*/
 .kwicks{
 	display: none;
