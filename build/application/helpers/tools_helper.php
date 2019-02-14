@@ -53,6 +53,8 @@
 		{
 			$CI =& get_instance();
 
+			$countryISO="Ec"; //Esta linea debe ser borrada al finalizar el branch feature-docker-ecuador
+
 			switch ($countryISO) {
 				case 'Ve':
 					$CI->config->load('ve-config');
