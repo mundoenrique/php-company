@@ -4999,7 +4999,7 @@ li#select-empresa select {
 
 #datos-principales {
 	font-size: 15px;
-	background: none repeat scroll 0 0 #54c2d0;
+	background: none repeat scroll 0 0 #40476c;
 	-webkit-border-radius: 10px 10px 0 0;
 	-moz-border-radius: 10px 10px 0 0;
 	-ms-border-radius: 10px 10px 0 0;
@@ -5699,7 +5699,7 @@ padding:5px 0px;
 	-ms-border-radius: 3px;
 	-o-border-radius: 3px;
 	border-radius: 3px;
-	border-left: 3px solid #54c2d0;
+	border-left: 3px solid #40476c;
 }
 
 .tbody-sucursales tr td {
@@ -5976,6 +5976,7 @@ span.jPag-current {
 	padding: 2px 5px;
 	margin: 2px;
 	float: left;
+	color: #40476C !important;
 }
 
 ul.jPag-pages li span.jPag-previous,
@@ -6176,9 +6177,36 @@ margin-left: 250px;
 	font-weight: bold;
 }
 
-#btn-new-suc {
+#btn-modificar,
+#btn-cambioC,
+#btn-new-mas,
+#btn-new-suc,
+#modif,
+#mostrarContact,
+#agregarContact {
 	float: right !important;
-	/*margin-right:-150px!important;*/
+	background: white;
+	border: solid 1px #FFDD00;
+	margin-top: 0px !important;
+}
+#btn-modificar:hover,
+#btn-cambioC:hover,
+#btn-new-mas:hover,
+#btn-new-suc:hover,
+#modif:hover,
+#mostrarContact:hover,
+#agregarContact:hover {
+	background-color: #fcf6d1;
+}
+
+#btn-modificar:active,
+#btn-cambioC:active,
+#btn-new-mas:active,
+#btn-new-suc:active,
+#modif:active,
+#mostrarContact:active,
+#agregarContact:active {
+	background-color: #fff08e;
 }
 
 #archivo {
@@ -6525,7 +6553,7 @@ margin-left: 250px;
 
 #datos-principales-AU {
 	font-size: 15px;
-	background: none repeat scroll 0 0 #54c2d0;
+	background: none repeat scroll 0 0 #40476c;
 	-webkit-border-radius: 10px 10px 0 0;
 	-moz-border-radius: 10px 10px 0 0;
 	-ms-border-radius: 10px 10px 0 0;
@@ -6938,7 +6966,7 @@ button.green:hover {
 }
 
 #campos-dir span {
-	border-left: 3px solid #ffdd00;
+	border-left: 3px solid #0F265C;
 	width: 500px;
 	float: left;
 }
@@ -7001,7 +7029,7 @@ button.green:hover {
 	margin-left: 5px;
 	background: none;
 	border: 1px solid #D5D5D5;
-	color: #ffdd00;
+	color: #0F265C;
 }
 
 .config-empresas {
