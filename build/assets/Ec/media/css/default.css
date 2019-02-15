@@ -441,7 +441,7 @@ button {
 	margin: 15px auto;
 	font-weight: bold;
 	outline: none;
-	font-size: 16px;
+	font-size: 13px;
 	text-align: center;
 }
 
@@ -3346,14 +3346,6 @@ ul.filter-2 li a:hover {
 li.filter-3 a {
 	height: 15px;
 	background: #6D6D6D;
-	background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #6d6d6d), color-stop(100%, #4c4c4c));
-	background-image: -webkit-linear-gradient(#6d6d6d, #4c4c4c);
-	background-image: -moz-linear-gradient(#6d6d6d, #4c4c4c);
-	background-image: -o-linear-gradient(#6d6d6d, #4c4c4c);
-	background-image: linear-gradient(#6d6d6d, #4c4c4c);
-	-webkit-box-shadow: rgba(51, 51, 51, 0.5) 0 1px 2px;
-	-moz-box-shadow: rgba(51, 51, 51, 0.5) 0 1px 2px;
-	box-shadow: rgba(51, 51, 51, 0.5) 0 1px 2px;
 	color: white !important;
 	padding: 10px 5px 10px 5px;
 	-webkit-border-radius: 2px;
@@ -3366,14 +3358,6 @@ li.filter-3 a {
 
 li.filter-1 a {
 	background: #6D6D6D;
-	background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #6d6d6d), color-stop(100%, #4c4c4c));
-	background-image: -webkit-linear-gradient(#6d6d6d, #4c4c4c);
-	background-image: -moz-linear-gradient(#6d6d6d, #4c4c4c);
-	background-image: -o-linear-gradient(#6d6d6d, #4c4c4c);
-	background-image: linear-gradient(#6d6d6d, #4c4c4c);
-	-webkit-box-shadow: rgba(51, 51, 51, 0.5) 0 1px 2px;
-	-moz-box-shadow: rgba(51, 51, 51, 0.5) 0 1px 2px;
-	box-shadow: rgba(51, 51, 51, 0.5) 0 1px 2px;
 	color: white !important;
 	padding: 10px 5px 10px 5px;
 	-webkit-border-radius: 2px;
@@ -3425,18 +3409,9 @@ padding:10px 5px 10px 5px;
 
 #widget-info {
 	background: #dddddd;
-	background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #dddddd), color-stop(100%, #b7b7b7));
-	background-image: -webkit-linear-gradient(#dddddd, #b7b7b7);
-	background-image: -moz-linear-gradient(#dddddd, #b7b7b7);
-	background-image: -o-linear-gradient(#dddddd, #b7b7b7);
-	background-image: linear-gradient(#dddddd, #b7b7b7);
-	-webkit-box-shadow: rgba(51, 51, 51, 0.5) 0 1px 2px;
-	-moz-box-shadow: rgba(51, 51, 51, 0.5) 0 1px 2px;
-	box-shadow: rgba(51, 51, 51, 0.5) 0 1px 2px;
 	padding: 10px;
-	color: #0054a9;
+	color: #0F265C;
 	float: left;
-	border-top: 1px solid #bbbbbb;
 	border-bottom: 1px solid #f3f3f3;
 	text-shadow: 0px 1px 0 #F3F3F3;
 	font-weight: bold;
@@ -3537,7 +3512,7 @@ padding:10px 5px 10px 5px;
 }
 
 #widget-info-2 button {
-	margin: 10px 25px;
+	margin: 10px 22px;
 }
 
 #products-general {
@@ -3583,7 +3558,7 @@ padding:10px 5px 10px 5px;
 
 #products-list li button {
 	float: right;
-	margin-top: 20px;
+	margin-top: 20px !important;
 	margin-right: 15px;
 }
 
@@ -3598,7 +3573,7 @@ padding:10px 5px 10px 5px;
 }
 
 .info-producto-1 {
-	color: #ffdd00;
+	color: #0F265C;
 	font-size: 14px;
 	margin-bottom: 3px;
 	padding-top: 20px;
@@ -6183,7 +6158,8 @@ margin-left: 250px;
 #btn-new-suc,
 #modif,
 #mostrarContact,
-#agregarContact {
+#agregarContact,
+#sProducto {
 	float: right !important;
 	background: white;
 	border: solid 1px #FFDD00;
@@ -6195,7 +6171,8 @@ margin-left: 250px;
 #btn-new-suc:hover,
 #modif:hover,
 #mostrarContact:hover,
-#agregarContact:hover {
+#agregarContact:hover,
+#sProducto:hover {
 	background-color: #fcf6d1;
 }
 
@@ -6205,7 +6182,8 @@ margin-left: 250px;
 #btn-new-suc:active,
 #modif:active,
 #mostrarContact:active,
-#agregarContact:active {
+#agregarContact:active,
+#sProducto:active {
 	background-color: #fff08e;
 }
 
@@ -7372,7 +7350,7 @@ button.green:hover {
 #nav-bar2 {
 	height: 40px;
 	background: #FFFFFF;
-	box-shadow: rgba(51, 51, 51, 0.5) 0 1px 2px;
+	box-shadow: rgba(51, 51, 51, 0.2) 0 1px 2px;
 	left: 0;
 	/*overflow: hidden;*/
 	position: fixed;
