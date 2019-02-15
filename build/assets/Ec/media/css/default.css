@@ -438,11 +438,11 @@ button {
 	color: #10133f;
 	float: none;
 	line-height: 35px;
-	padding: 0 77px;
 	margin: 15px auto;
 	font-weight: bold;
 	outline: none;
 	font-size: 16px;
+	text-align: center;
 }
 
 button:hover {
@@ -487,38 +487,12 @@ button:active {
 	background-image: linear-gradient(#ffdd00, #0081da);
 }
 
-/* #sliderbutton-login {
-  background: #dddddd;
-  /*@include background-image(linear-gradient($color-button-normal-background, darken($color-button-normal-background, 15%)));
-  border: 0;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  -ms-border-radius: 3px;
-  -o-border-radius: 3px;
-  border-radius: 3px;
-  -webkit-box-shadow: rgba(51, 51, 51, 0.35) 0 1px 2px;
-  -moz-box-shadow: rgba(51, 51, 51, 0.35) 0 1px 2px;
-  box-shadow: rgba(51, 51, 51, 0.35) 0 1px 2px;
-  color: white;
-  float: right;
-  line-height: 35px;
-  /*padding: 0 10px;
-  width: 100%;
-  text-shadow: 1px 1px 0 #004574, 1px 1px 0 false #004574;
-  text-shadow: 1px 1px 0 false #004574, 1px 1px 0 false #004574;
-} */
+#button-login{
+	padding: 0px 77px;
+}
 
 #head {
 	background: #ffdd00;
-	/* background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffdd00), color-stop(100%, #0054a9));
-  background-image: -webkit-linear-gradient(#ffdd00, #0054a9);
-  background-image: -moz-linear-gradient(#ffdd00, #0054a9);
-  background-image: -o-linear-gradient(#ffdd00, #0054a9);
-  background-image: linear-gradient(#ffdd00, #0054a9);
-  border-bottom: 5px solid #ffdd00; */
-	/* -webkit-box-shadow: rgba(51, 51, 51, 0.5) 0 1px 2px;
-  -moz-box-shadow: rgba(51, 51, 51, 0.5) 0 1px 2px;
-  box-shadow: rgba(51, 51, 51, 0.5) 0 1px 2px; */
 	height: 60px;
 	left: 0;
 	overflow: hidden;
@@ -2155,8 +2129,8 @@ body .ui-tooltip {
 
 /*.ui-widget-content a{color:#333}*/
 .ui-widget-header {
-	border: 1px solid #ffdd00;
-	background: #ffdd00;
+	border: 1px solid #0f265c;
+	background: #0f265c;
 	color: #fff;
 	font-weight: bold;
 }
@@ -2189,11 +2163,7 @@ body .ui-tooltip {
 .ui-widget-header .ui-state-focus {
 	/*border:1px solid #D5D5D5; */
 	/*background:$color-base1; */
-	background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffdd00), color-stop(100%, #0081da));
-	background-image: -webkit-linear-gradient(#ffdd00, #0081da);
-	background-image: -moz-linear-gradient(#ffdd00, #0081da);
-	background-image: -o-linear-gradient(#ffdd00, #0081da);
-	background-image: linear-gradient(#ffdd00, #0081da);
+
 	font-weight: bold;
 	color: #FFF;
 }
@@ -6931,7 +6901,7 @@ button.green:hover {
 }
 
 #campos-1 span {
-	border-left: 3px solid #ffdd00;
+	border-left: 3px solid #0F265C;
 	width: 245px;
 	float: left;
 }
@@ -6987,8 +6957,9 @@ button.green:hover {
 }
 
 #first {
-	color: #ffdd00 !important;
+	color: #0F265C !important;
 	font-size: 15px;
+	font-weight: normal;
 }
 
 .lapiz-mod {
@@ -7000,7 +6971,7 @@ button.green:hover {
 
 #user-name {
 	font-size: 15px;
-	color: #ffdd00;
+	color: #0f265c;
 	font-weight: bold;
 }
 
