@@ -337,7 +337,7 @@ h4 {
 }
 
 h5 {
-	color: #ffdd00;
+	color: #004574;
 	font-size: 13px;
 	line-height: 18px;
 }
@@ -890,7 +890,6 @@ ol.breadcrumb li a {
 .menu-item {
 	list-style: none !important;
 	padding: 0px;
-	color: red;
 }
 
 .submenu {
@@ -3522,16 +3521,6 @@ padding:10px 5px 10px 5px;
 	margin: 10px 22px;
 }
 
-#products-general {
-	width: 690px;
-	background: none;
-	float: left;
-	padding: 10px;
-	-webkit-box-shadow: rgba(51, 51, 51, 0.5) 0 1px 2px;
-	-moz-box-shadow: rgba(51, 51, 51, 0.5) 0 1px 2px;
-	box-shadow: rgba(51, 51, 51, 0.5) 0 1px 2px;
-	border: solid 1px white;
-}
 
 #products-list {
 	width: auto;
@@ -3898,7 +3887,7 @@ ul#brands li p img {
 #text-product-detail p span {
 	padding-right: 5px;
 	font-size: 24px;
-	color: #54c2d0;
+	color: #40476C;
 }
 
 /*end-ProductDetail*/
@@ -3913,11 +3902,10 @@ ul#brands li p img {
 
 #lotes-contenedor {
 	background: white;
+	border-right: solid 1px #cfcfcf;
+	border-left: solid 1px #cfcfcf;
 	float: left;
 	width: 640px;
-	-webkit-box-shadow: rgba(51, 51, 51, 0.5) 0 1px 1px;
-	-moz-box-shadow: rgba(51, 51, 51, 0.5) 0 1px 1px;
-	box-shadow: rgba(51, 51, 51, 0.5) 0 1px 1px;
 	padding: 10px;
 }
 
@@ -3951,19 +3939,17 @@ ul#brands li p img {
 	border: solid 1px #f3f3f3;
 }
 
-#lotes-contenedor-2 {
+#products-general, #lotes-contenedor-2 {
 	background: white;
 	float: left;
-	width: 640px;
-	-webkit-box-shadow: rgba(51, 51, 51, 0.5) 0 1px 1px;
-	-moz-box-shadow: rgba(51, 51, 51, 0.5) 0 1px 1px;
-	box-shadow: rgba(51, 51, 51, 0.5) 0 1px 1px;
+	width: 641px;
 	padding: 10px;
-	-webkit-border-radius: 0px 0px 5px 5px;
-	-moz-border-radius: 0px 0px 5px 5px;
-	-ms-border-radius: 0px 0px 5px 5px;
-	-o-border-radius: 0px 0px 5px 5px;
-	border-radius: 0px 0px 5px 5px;
+	-webkit-border-radius: 0px 0px 0px 15px;
+	-moz-border-radius: 0px 0px 0px 15px;
+	-ms-border-radius: 0px 0px 0px 15px;
+	-o-border-radius: 0px 0px 0px 15px;
+	border-radius: 0px 0px 0px 15px;
+	border: solid 1px #cfcfcf;
 }
 
 #lotes-contenedor-2-auth {
@@ -4741,17 +4727,13 @@ border-right:2px solid $color-base2!important;
 
 #batchs-last {
 	width: 640px;
-	-webkit-border-radius: 0px 0px 10px 10px;
-	-moz-border-radius: 0px 0px 10px 10px;
-	-ms-border-radius: 0px 0px 10px 10px;
-	-o-border-radius: 0px 0px 10px 10px;
-	border-radius: 0px 0px 10px 10px;
 	background: #F2F2F2;
 	float: left;
 	padding: 10px;
-	-webkit-box-shadow: rgba(51, 51, 51, 0.5) 0 1px 1px;
-	-moz-box-shadow: rgba(51, 51, 51, 0.5) 0 1px 1px;
-	box-shadow: rgba(51, 51, 51, 0.5) 0 1px 1px;
+	border-right: solid 1px #cfcfcf;
+	border-left: solid 1px #cfcfcf;
+	border-bottom: solid 1px #cfcfcf;
+	border-bottom-left-radius: 15px;
 }
 
 #batchs-last input {
@@ -4784,21 +4766,11 @@ border-right:2px solid $color-base2!important;
 }
 
 #top-batchs {
-	width: 640px;
+	width: 641px;
 	height: 30px;
 	padding: 10px;
-	background: #ffdd00;
-	background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffdd00), color-stop(100%, #004574));
-	background-image: -webkit-linear-gradient(#ffdd00, #004574);
-	background-image: -moz-linear-gradient(#ffdd00, #004574);
-	background-image: -o-linear-gradient(#ffdd00, #004574);
-	background-image: linear-gradient(#ffdd00, #004574);
+	background: #004574;
 	float: left;
-	-webkit-border-radius: 10px 10px 0px 0px;
-	-moz-border-radius: 10px 10px 0px 0px;
-	-ms-border-radius: 10px 10px 0px 0px;
-	-o-border-radius: 10px 10px 0px 0px;
-	border-radius: 10px 10px 0px 0px;
 	color: white;
 	font-size: 18px;
 	margin-top: 10px;
@@ -7027,7 +6999,6 @@ button.green:hover {
 
 .content-user {
 	float: left;
-	color: #ffdd00;
 	font-size: 20px;
 	width: 600px;
 }
