@@ -6159,7 +6159,8 @@ margin-left: 250px;
 #modif,
 #mostrarContact,
 #agregarContact,
-#sProducto {
+#sProducto,
+#btn-modif-suc {
 	float: right !important;
 	background: white;
 	border: solid 1px #FFDD00;
@@ -6172,7 +6173,8 @@ margin-left: 250px;
 #modif:hover,
 #mostrarContact:hover,
 #agregarContact:hover,
-#sProducto:hover {
+#sProducto:hover,
+#btn-modif-suc:hover {
 	background-color: #fcf6d1;
 }
 
@@ -6183,7 +6185,8 @@ margin-left: 250px;
 #modif:active,
 #mostrarContact:active,
 #agregarContact:active,
-#sProducto:active {
+#sProducto:active,
+#btn-modif-suc:active {
 	background-color: #fff08e;
 }
 
@@ -7354,7 +7357,7 @@ button.green:hover {
 	left: 0;
 	/*overflow: hidden;*/
 	position: fixed;
-	top: 65px;
+	top: 60px;
 	width: 100%;
 	z-index: 999;
 }
