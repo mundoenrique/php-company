@@ -249,6 +249,13 @@ table {
 	font-weight: normal;
 	font-style: normal;
 }
+@font-face {
+  font-family: "novoglyphs";
+  src: url('../fonts/novoglyphs-webfont.eot');
+  src: url('../fonts/novoglyphs-webfont.eot?#iefix') format('eot'), url('../fonts/novoglyphs-webfont.woff') format('woff'), url('../fonts/novoglyphs-webfont.ttf') format('truetype'), url('../fonts/novoglyphs-webfont.svg') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
 
 ::selection {
 	background: #0F265C;
@@ -383,7 +390,7 @@ nav ul.menu li.menu-item a {
 }
 
 span.icon:before {
-	/* content: attr(data-icon); */
+	content: attr(data-icon);
 	font-family: "novoglyphs";
 	-webkit-font-smoothing: antialiased;
 	font-weight: normal;
