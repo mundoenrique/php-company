@@ -311,7 +311,7 @@ h1 {
 }
 
 h2 {
-	color: #ffdd00;
+	color: #0F265C;
 	font-size: 18px;
 	line-height: 40px;
 	margin: 0 0 10px;
@@ -888,7 +888,7 @@ ol.breadcrumb li a {
   left: 939.5px;
 	display: none;
 	box-shadow:none !important;
-	border-radius: 0 0 0 0 !important;
+	border-radius: 0 0 0 15px !important;
 	border:1px solid #d5d5d5 !important;
 }
 
@@ -900,6 +900,10 @@ ol.breadcrumb li a {
 .config-menuH li {
 	list-style: none;
 	padding: 5px !important;
+}
+
+.config-menuH div{
+	display: none;
 }
 
 .menu-item {
@@ -3178,7 +3182,7 @@ transition: all 100ms ease-in;
 	height: 140px;
 	background: #e5e5e5;
 	list-style: none;
-	/*margin-left:10px;*/
+	margin-top: 3px;
 	position: absolute;
 	color: white;
 	display: none;
@@ -3370,6 +3374,7 @@ ul.filter-2 li a:hover {
 }
 
 li.filter-3 a {
+	height: 15px;
 	background: #6D6D6D;
 	background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #6d6d6d), color-stop(100%, #4c4c4c));
 	background-image: -webkit-linear-gradient(#6d6d6d, #4c4c4c);
