@@ -52,7 +52,7 @@ $(document).ready(function() {
 			$("#repEstadosDeCuenta_producto").children( 'option:not(:first)' ).remove();
 			$("#cargando_producto").fadeIn("slow");
 			$(this).attr('disabled',true);
-			$.post(api + isoPais + "/producto/lista", { 'acrif': acrif }, function(data){
+			$.post(baseURL + api + isoPais + "/producto/lista", { 'acrif': acrif }, function(data){
 				$("#cargando_producto").fadeOut("slow");
 				$("#repEstadosDeCuenta_empresa").removeAttr('disabled');
 				if(!data.ERROR){
