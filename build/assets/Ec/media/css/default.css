@@ -337,7 +337,7 @@ h4 {
 }
 
 h5 {
-	color: #004574;
+	color: #10133f;
 	font-size: 13px;
 	line-height: 18px;
 }
@@ -815,6 +815,7 @@ ol.breadcrumb li a {
   font-size: 12px;
 	font-weight: bold;
 	color: #0f265c !important;
+	display: flex;
 }
 
 #account-nav ul li a span.icon {
@@ -2151,7 +2152,7 @@ body .ui-tooltip {
 	border: 1px solid #ccc;
 	background: #f6f6f6;
 	font-weight: bold;
-	color: #1c94c4;
+	color: #10133f;
 }
 
 .ui-state-default a,
@@ -2171,7 +2172,7 @@ body .ui-tooltip {
 	/*background:$color-base1; */
 
 	font-weight: bold;
-	color: #FFF;
+	color: #10133f;
 }
 
 .ui-state-hover a,
@@ -3379,15 +3380,9 @@ li.filter-1 a {
 	width: 220px;
 	float: right;
 	margin-right: 10px;
-	-webkit-box-shadow: rgba(51, 51, 51, 0.5) 0 1px 2px;
-	-moz-box-shadow: rgba(51, 51, 51, 0.5) 0 1px 2px;
-	box-shadow: rgba(51, 51, 51, 0.5) 0 1px 2px;
-	font-family: "sourcesanspro-regular";
-	-webkit-border-radius: 5px 5px 0px 0px;
-	-moz-border-radius: 5px 5px 0px 0px;
-	-ms-border-radius: 5px 5px 0px 0px;
-	-o-border-radius: 5px 5px 0px 0px;
-	border-radius: 5px 5px 0px 0px;
+	font-family: "prelo";
+	background-color: #DDDDDD;
+	border-radius: 15px;
 }
 
 /*li.categoryRRHH a{
@@ -3418,9 +3413,10 @@ padding:10px 5px 10px 5px;
 	padding: 10px;
 	color: #0F265C;
 	float: left;
-	border-bottom: 1px solid #f3f3f3;
 	text-shadow: 0px 1px 0 #F3F3F3;
 	font-weight: bold;
+	text-align: center;
+
 }
 
 #content-products {
@@ -3487,7 +3483,6 @@ padding:10px 5px 10px 5px;
 #widget-info-1 {
 	background-color: #f3f3f3;
 	float: left;
-	border-top: 1px solid #dddddd;
 	border-bottom: 1px solid #f3f3f3;
 	padding: 10px;
 	width: 200px;
@@ -3507,12 +3502,12 @@ padding:10px 5px 10px 5px;
 }
 
 #widget-info-2 {
-	background-color: #f3f3f3;
+	background-color: #dddddd;
 	float: left;
 	border-top: 1px solid #dddddd;
-	border-bottom: 1px solid #f3f3f3;
+	border-bottom-left-radius: 15px;
 	padding: 10px;
-	color: #0054a9;
+	color: #10133f;
 	width: 200px;
 	overflow: hidden;
 }
@@ -4010,13 +4005,13 @@ ul#brands li p img {
 }
 
 #table-text-lotes_length {
-	color: #ffdd00;
+	color: #10133f;
 	float: left;
 	margin-left: 45px;
 }
 
 #table-text-lotes_filter {
-	color: #ffdd00;
+	color: #10133f;
 	float: right;
 	margin-right: 25px;
 }
@@ -4024,7 +4019,7 @@ ul#brands li p img {
 #table-text-lotes_info {
 	float: left;
 	margin: 5px;
-	color: #54c2d0;
+	color: #10133f;
 }
 
 #table-text-lotes_paginate {
@@ -4078,7 +4073,7 @@ ul#brands li p img {
 
 .paginate_active {
 	font-weight: bold;
-	color: #54c2d0 !important;
+	color: #10133f !important;
 }
 
 #table-text-lotes thead tr {
@@ -6145,6 +6140,7 @@ margin-left: 250px;
 	border: solid 1px #FFDD00;
 	margin-top: 0px !important;
 }
+
 #btn-modificar:hover,
 #btn-cambioC:hover,
 #btn-new-mas:hover,
@@ -6167,6 +6163,22 @@ margin-left: 250px;
 #sProducto:active,
 #btn-modif-suc:active {
 	background-color: #fff08e;
+}
+
+#sEmpresa,
+#sPrograms{
+	background: white;
+	color: #10133f;
+}
+
+#sEmpresa:hover,
+#sPrograms:hover{
+	background: #F3F4F8;
+}
+
+#sEmpresa:active,
+#sPrograms:active{
+	background: #E8E9EE;
 }
 
 #archivo {
@@ -6866,7 +6878,7 @@ button.green:hover {
 
 #campos-descarga span p {
 	float: left;
-	padding: 5px;
+	padding: 22px;
 	vertical-align: middle;
 }
 
@@ -7366,7 +7378,7 @@ button.green:hover {
 }
 
 #nav2 ul li a {
-	display: block;
+	/* display: block; */
 	text-decoration: none;
 	font-weight: normal;
 	font-family: "sourcesanspro-regular", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -7432,4 +7444,16 @@ button.green:hover {
 /* Fin Menu-Head New*/
 .kwicks {
 	display: none;
+}
+
+#manual_usuario, #javaJRE, #archivos-xls{
+	background: none;
+}
+
+a.style-companies-item > span.icon:before,
+#nav2 ul li a > span.icon:before,
+.menu-item.profile a > span.icon:before,
+.menu-item.settings a > span.icon:before,
+#widget-info > span.icon:before{
+	content: attr(none);
 }
