@@ -72,7 +72,7 @@ em {
 }
 
 strong {
-	font-weight: bold;
+	font-weight: 700;
 }
 
 del {
@@ -195,60 +195,48 @@ table {
 	border-spacing: 0;
 	word-wrap: break-word;
 }
-/*
 @font-face {
-	font-family: "sourcesanspro-regular";
-	src: url('../fonts/sourcesanspro-regular-webfont.eot');
-	src: url('../fonts/sourcesanspro-regular-webfont.eot?#iefix') format('eot'), url('../fonts/sourcesanspro-regular-webfont.woff') format('woff'), url('../fonts/sourcesanspro-regular-webfont.ttf') format('truetype'), url('../fonts/sourcesanspro-regular-webfont.svg') format('svg');
-	font-weight: normal;
-	font-style: normal;
-} */
+  font-family: "prelo";
+  font-style: normal;
+	font-weight: 500;
+	src: url('../fonts/prelo-medium-webfont.eot');
+	src: url('../fonts/prelo-medium-webfont.eot?#iefix') format('embedded-opentype'),
+				url('../fonts/prelo-medium-webfont.woff2') format('woff2'),
+				url('../fonts/prelo-medium-webfont.woff') format('woff'),
+				url('../fonts/prelo-medium-webfont.ttf') format('truetype');
+}
+@font-face {
+  font-family: "prelo";
+  font-style: normal;
+	font-weight: 700;
+	src: url('../fonts/prelo-semibold-webfont.eot');
+	src: url('../fonts/prelo-semibold-webfont.eot?#iefix') format('embedded-opentype'),
+			 url('../fonts/prelo-semibold-webfont.woff2') format('woff2'),
+			 url('../fonts/prelo-semibold-webfont.woff') format('woff'),
+			 url('../fonts/prelo-semibold-webfont.ttf') format('truetype');
+}
 
 @font-face {
-	font-family: "prelo";
-	src: url('../fonts/Prelo-Black.otf');
-	src: url('../fonts/Prelo-Black.otf?#iefix') format('eot');
-	src: url('../fonts/Prelo-Bold.otf');
-	src: url('../fonts/Prelo-Bold.otf') format('eot');
-	src: url('../fonts/Prelo-Book.otf');
-	src: url('../fonts/Prelo-Book.otf') format('eot');
-	src: url('../fonts/Prelo-Exbd.otf');
-	src: url('../fonts/Prelo-Exbd.otf') format('eot');
-	src: url('../fonts/Prelo-ExtraLight.otf');
-	src: url('../fonts/Prelo-ExtraLight.otf') format('eot');
-	src: url('../fonts/Prelo-Light.otf');
-	src: url('../fonts/Prelo-Light.otf') format('eot');
-	src: url('../fonts/Prelo-Medium.otf');
-	src: url('../fonts/Prelo-Medium.otf') format('eot');
-	src: url('../fonts/Prelo-SemiBold.otf');
-	src: url('../fonts/Prelo-SemiBold.otf') format('eot');
-	font-weight: normal;
-	font-style: normal;
+  font-family: "preloslap";
+  font-style: normal;
+	font-weight: 500;
+	src: url('../fonts/preloslab-book-webfont.eot');
+	src: url('../fonts/preloslab-book-webfont.eot?#iefix') format('embedded-opentype'),
+			 url('../fonts/preloslab-book-webfont.woff2') format('woff2'),
+			 url('../fonts/preloslab-book-webfont.woff') format('woff'),
+			 url('../fonts/preloslab-book-webfont.ttf') format('truetype');
 }
-/*
 @font-face {
-	font-family: "novoglyphs";
-	src: url('../fonts/novoglyphs-webfont.eot');
-	src: url('../fonts/novoglyphs-webfont.eot?#iefix') format('eot'), url('../fonts/novoglyphs-webfont.woff') format('woff'), url('../fonts/novoglyphs-webfont.ttf') format('truetype'), url('../fonts/novoglyphs-webfont.svg') format('svg');
-	font-weight: normal;
-	font-style: normal;
-} */
+  font-family: "preloslap";
+  font-style: normal;
+	font-weight: 700;
+	src: url('../fonts/preloslab-semibold-webfont.eot');
+	src: url('../fonts/preloslab-semibold-webfont.eot?#iefix') format('embedded-opentype'),
+			 url('../fonts/preloslab-semibold-webfont.woff2') format('woff2'),
+			 url('../fonts/preloslab-semibold-webfont.woff') format('woff'),
+			 url('../fonts/preloslab-semibold-webfont.ttf') format('truetype');
+}
 
-@font-face {
-	font-family: "preloslab";
-	src: url('../fonts/PreloSlab-Bold.otf');
-	src: url('../fonts/PreloSlab-Bold.otf') format('eot');
-	src: url('../fonts/PreloSlab-Book.otf');
-	src: url('../fonts/PreloSlab-Book.otf') format('eot');
-	src: url('../fonts/PreloSlab-ExBd.otf');
-	src: url('../fonts/PreloSlab-ExBd.otf') format('eot');
-	src: url('../fonts/PreloSlab-Light.otf');
-	src: url('../fonts/PreloSlab-Light.otf') format('eot');
-	src: url('../fonts/PreloSlab-SemiBold.otf');
-	src: url('../fonts/PreloSlab-SemiBold.otf') format('eot');
-	font-weight: normal;
-	font-style: normal;
-}
 @font-face {
   font-family: "novoglyphs";
   src: url('../fonts/novoglyphs-webfont.eot');
@@ -293,7 +281,7 @@ body {
 	font-family: "prelo", sans-serif;
 	font-size: 12px;
 	line-height: 17px;
-	font-weight: bold;
+	font-weight: 700;
 }
 
 h1,
@@ -351,7 +339,7 @@ h6 {
 a {
 	color: #10133f;
 	cursor: pointer;
-	font-weight: bold;
+	font-weight: 700;
 	text-decoration: none;
 }
 
@@ -446,7 +434,7 @@ button {
 	float: none;
 	line-height: 35px;
 	margin: 15px auto;
-	font-weight: bold;
+	font-weight: 700;
 	outline: none;
 	font-size: 13px;
 	text-align: center;
@@ -669,7 +657,7 @@ ol.breadcrumb li a {
 	color: #bbbbbb !important;
 	border-left: 1px solid #dddddd;
 	border-right: 1px solid #f3f3f3;
-	font-family: "sourcesanspro-regular", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-family: "prelo", "Helvetica Neue", Helvetica, Arial, sans-serif;
 	font-size: 16px;
 	line-height: 40px;
 	padding: 0 10px;
@@ -680,7 +668,7 @@ ol.breadcrumb li a {
 	color: #bbbbbb !important;
 	border-left: 1px solid #dddddd;
 	border-right: 1px solid #f3f3f3;
-	font-family: "sourcesanspro-regular", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-family: "prelo", "Helvetica Neue", Helvetica, Arial, sans-serif;
 	font-size: 16px;
 	line-height: 40px;
 	padding: 0 10px;
@@ -729,7 +717,7 @@ ol.breadcrumb li a {
 	border-left: 1px solid #dddddd;
 	border-right: 1px solid #f3f3f3;
 	color: #555555;
-	font-family: "sourcesanspro-regular", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-family: "prelo", "Helvetica Neue", Helvetica, Arial, sans-serif;
 	font-size: 16px;
 	line-height: 40px;
 	padding: 0 10px;
@@ -813,7 +801,7 @@ ol.breadcrumb li a {
   float: left;
   /*clear: both;*/
   font-size: 12px;
-	font-weight: bold;
+	font-weight: 700;
 	color: #0f265c !important;
 	display: flex;
 }
@@ -853,7 +841,7 @@ ol.breadcrumb li a {
 
 #extra-nav ul.menu li.menu-item a {
 	font-size: 11px;
-	font-weight: bold;
+	font-weight: 700;
 }
 
 .config-menuH {
@@ -906,7 +894,7 @@ ol.breadcrumb li a {
 }
 
 .submenu a:hover {
-	font-weight: bold;
+	font-weight: 700;
 	border-left: 3px solid #FFDD00;
 }
 
@@ -917,14 +905,14 @@ ol.breadcrumb li a {
 p#text-general {
 	color: #555555;
 	width: 690px;
-	font-family: "sourcesanspro-regular", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-family: "prelo", "Helvetica Neue", Helvetica, Arial, sans-serif;
 	font-size: 12px;
 }
 
 p#text-general-condiciones {
 	color: #555555;
 	width: 100%;
-	font-family: "sourcesanspro-regular", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-family: "prelo", "Helvetica Neue", Helvetica, Arial, sans-serif;
 	font-size: 12px;
 }
 
@@ -935,7 +923,7 @@ select.categories-products {
 	margin: 6px 0 5px;
 	padding: 10px;
 	color: #545454;
-	font-weight: bold;
+	font-weight: 700;
 }
 
 /*.texto-login{
@@ -1020,7 +1008,7 @@ p.subtitulos-login {
 	font-size: 17px;
 	color: red;
 	line-height: 19px;
-	font-weight: bold;
+	font-weight: 700;
 	padding: 70px 3px 0 3px !important;
 }
 
@@ -2139,7 +2127,7 @@ body .ui-tooltip {
 	border: 1px solid #0f265c;
 	background: #0f265c;
 	color: #fff;
-	font-weight: bold;
+	font-weight: 700;
 }
 
 .ui-widget-header a {
@@ -2151,7 +2139,7 @@ body .ui-tooltip {
 .ui-widget-header .ui-state-default {
 	border: 1px solid #ccc;
 	background: #f6f6f6;
-	font-weight: bold;
+	font-weight: 700;
 	color: #10133f;
 }
 
@@ -2171,7 +2159,7 @@ body .ui-tooltip {
 	/*border:1px solid #D5D5D5; */
 	/*background:$color-base1; */
 
-	font-weight: bold;
+	font-weight: 700;
 	color: #10133f;
 }
 
@@ -2188,7 +2176,7 @@ body .ui-tooltip {
 .ui-widget-header .ui-state-active {
 	/*border:1px solid $color-base2;*/
 	background: white;
-	font-weight: bold;
+	font-weight: 700;
 	color: #ffdd00;
 }
 
@@ -2236,7 +2224,7 @@ body .ui-tooltip {
 .ui-priority-primary,
 .ui-widget-content .ui-priority-primary,
 .ui-widget-header .ui-priority-primary {
-	font-weight: bold;
+	font-weight: 700;
 }
 
 .ui-priority-secondary,
@@ -3039,24 +3027,12 @@ body .ui-tooltip {
 	border-radius: 5px;
 }
 
-.content-endSession h1 {
-	text-align: center;
-}
 
-.content-endSession h2 {
-	text-align: center;
-}
-
-.content-endSession button {
-	margin: auto 450px auto auto;
-}
-
-.content-endSession p {
-	color: #ffdd00;
-	font-size: 111px;
-	margin: 2px 0 10px;
-	padding: 40px;
-	text-align: center;
+.content-endSession {
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	align-items: center;
 }
 
 .content-404 h1 {
@@ -3196,7 +3172,7 @@ span#more-info a {
 
 span#more-info a p {
 	color: #10133f;
-	font-weight: bold;
+	font-weight: 700;
 	font-size: 12px;
 }
 
@@ -3274,7 +3250,7 @@ span#more-info a p b {
 	clear: both;
 	margin-right: 10px;
 	padding-bottom: 20px;
-	font-weight: bold;
+	font-weight: 700;
 }
 
 div.filter li {
@@ -3414,7 +3390,7 @@ padding:10px 5px 10px 5px;
 	color: #0F265C;
 	float: left;
 	text-shadow: 0px 1px 0 #F3F3F3;
-	font-weight: bold;
+	font-weight: 700;
 	text-align: center;
 
 }
@@ -3496,7 +3472,7 @@ padding:10px 5px 10px 5px;
 }
 
 #widget-info-1 p {
-	font-weight: bold;
+	font-weight: 700;
 	color: #ffdd00;
 	float: left;
 }
@@ -3513,7 +3489,7 @@ padding:10px 5px 10px 5px;
 }
 
 #widget-info-2 button {
-	margin: 10px 22px;
+	margin: 10px 21px;
 }
 
 
@@ -3568,7 +3544,7 @@ padding:10px 5px 10px 5px;
 	font-size: 14px;
 	margin-bottom: 3px;
 	padding-top: 20px;
-	font-weight: bold;
+	font-weight: 700;
 	width: 300px;
 	float: left;
 }
@@ -3580,7 +3556,7 @@ padding:10px 5px 10px 5px;
 	color: #bbbbbb;
 	width: 325px;
 	float: left;
-	font-weight: bold;
+	font-weight: 700;
 }
 
 .color-product-rrhh {
@@ -3705,7 +3681,7 @@ padding:10px 5px 10px 5px;
 	background-color: #f5921e;
 	padding: 10px;
 	color: white;
-	font-weight: bold;
+	font-weight: 700;
 	font-size: 14px;
 	list-style: none;
 }
@@ -3736,7 +3712,7 @@ padding:10px 5px 10px 5px;
 	background-color: #50c592;
 	padding: 10px;
 	color: white;
-	font-weight: bold;
+	font-weight: 700;
 	font-size: 14px;
 	list-style: none;
 }
@@ -3767,7 +3743,7 @@ padding:10px 5px 10px 5px;
 	background-color: #994596;
 	padding: 10px;
 	color: white;
-	font-weight: bold;
+	font-weight: 700;
 	font-size: 14px;
 	list-style: none;
 }
@@ -3782,7 +3758,7 @@ padding:10px 5px 10px 5px;
 	width: 200px;
 	list-style: none;
 	/*font-style:$font-style-italic;*/
-	font-weight: bold;
+	font-weight: 700;
 	font-size: 12px;
 }
 
@@ -3872,7 +3848,7 @@ ul#brands li p img {
 }
 
 #text-product-detail h2 {
-	font-weight: bold;
+	font-weight: 700;
 }
 
 #text-product-detail p {
@@ -3905,7 +3881,7 @@ ul#brands li p img {
 }
 
 #lotes-contenedor h5 {
-	font-weight: bold;
+	font-weight: 700;
 }
 
 #lotes-contenedor table {
@@ -4072,7 +4048,7 @@ ul#brands li p img {
 }
 
 .paginate_active {
-	font-weight: bold;
+	font-weight: 700;
 	color: #10133f !important;
 }
 
@@ -4217,7 +4193,7 @@ ul#brands li p img {
 #check-all {
 	color: #ffdd00;
 	float: left;
-	font-weight: bold;
+	font-weight: 700;
 	height: 30px;
 	margin: 10px 0 10px 15px;
 }
@@ -4656,7 +4632,7 @@ border-right:2px solid $color-base2!important;
 	width: 100px;
 	height: 20px;
 	font-size: 14px;
-	font-weight: bold;
+	font-weight: 700;
 	color: #888888;
 	padding: 5px;
 	float: left;
@@ -4689,7 +4665,7 @@ border-right:2px solid $color-base2!important;
 .info-lotes-b {
 	width: 270px;
 	float: left;
-	font-weight: bold;
+	font-weight: 700;
 	padding-left: 20px;
 }
 
@@ -4697,7 +4673,7 @@ border-right:2px solid $color-base2!important;
 .info-lotes-a h5,
 #selection-1 h5,
 #selection-2 h5 {
-	font-weight: bold;
+	font-weight: 700;
 	padding-bottom: 5px;
 }
 
@@ -4935,7 +4911,7 @@ li#select-empresa select {
 
 .num-product-detail {
 	font-size: 18px;
-	font-weight: bold;
+	font-weight: 700;
 }
 
 /*end-LOTES*/
@@ -5049,7 +5025,7 @@ li#select-empresa select {
 }
 
 .info-OD h5 {
-	font-weight: bold;
+	font-weight: 700;
 	padding-bottom: 5px;
 }
 
@@ -5068,7 +5044,7 @@ li#select-empresa select {
 
 .tipo-lote li:hover {
 	color: #555;
-	font-weight: bold;
+	font-weight: 700;
 }
 
 #lotes-2 {
@@ -5166,7 +5142,7 @@ li#select-empresa select {
 	color: #FFF;
 	width: 660px;
 	float: left;
-	font-weight: bold;
+	font-weight: 700;
 	margin-top: 20px;
 	-webkit-border-radius: 10px 10px 0 0;
 	-moz-border-radius: 10px 10px 0 0;
@@ -5438,7 +5414,7 @@ li#select-empresa select {
 }
 
 #lotesConfirmacion-long h5 {
-	font-weight: bold;
+	font-weight: 700;
 }
 
 #lotesConfirmacion-short {
@@ -5446,12 +5422,12 @@ li#select-empresa select {
 }
 
 #lotesConfirmacion-short h5 {
-	font-weight: bold;
+	font-weight: 700;
 }
 
 #type-1 {
 	color: #aa78c2;
-	font-weight: bold;
+	font-weight: 700;
 }
 
 #embozo1,
@@ -5946,7 +5922,7 @@ ul.jPag-pages li span.jPag-previous,
 ul.jPag-pages li span.jPag-previous-img {
 	margin: 2px 0px 2px 2px;
 	font-size: 12px;
-	font-weight: bold;
+	font-weight: 700;
 	width: 10px;
 }
 
@@ -5954,7 +5930,7 @@ ul.jPag-pages li span.jPag-next,
 ul.jPag-pages li span.jPag-next-img {
 	margin: 2px 2px 2px 0px;
 	font-size: 12px;
-	font-weight: bold;
+	font-weight: 700;
 	width: 10px;
 }
 
@@ -6031,7 +6007,7 @@ span.jPag-snext-img {
 	color: #FFF;
 	width: 660px;
 	float: left;
-	font-weight: bold;
+	font-weight: 700;
 	margin-top: 20px;
 	-webkit-border-radius: 10px 10px 0 0;
 	-moz-border-radius: 10px 10px 0 0;
@@ -6065,7 +6041,7 @@ span.jPag-snext-img {
 	text-align: center;
 	border-right: 1px dotted #bbbbbb;
 	line-height: 21px;
-	font-weight: bold;
+	font-weight: 700;
 	color: #54c2d0 !important;
 }
 
@@ -6105,7 +6081,7 @@ span.jPag-snext-img {
 .montos-TM p {
 	float: right;
 	margin: 10px;
-	font-weight: bold;
+	font-weight: 700;
 }
 
 .OSinfo {
@@ -6123,7 +6099,7 @@ span.jPag-snext-img {
 margin-left: 250px;
 }*/
 .OShead-2 {
-	font-weight: bold;
+	font-weight: 700;
 }
 
 #btn-modificar,
@@ -6133,7 +6109,7 @@ margin-left: 250px;
 #modif,
 #mostrarContact,
 #agregarContact,
-#sProducto,
+/* #sProducto, */
 #btn-modif-suc {
 	float: right !important;
 	background: white;
@@ -6148,7 +6124,7 @@ margin-left: 250px;
 #modif:hover,
 #mostrarContact:hover,
 #agregarContact:hover,
-#sProducto:hover,
+/* #sProducto:hover, */
 #btn-modif-suc:hover {
 	background-color: #fcf6d1;
 }
@@ -6160,7 +6136,7 @@ margin-left: 250px;
 #modif:active,
 #mostrarContact:active,
 #agregarContact:active,
-#sProducto:active,
+/* #sProducto:active, */
 #btn-modif-suc:active {
 	background-color: #fff08e;
 }
@@ -6168,7 +6144,7 @@ margin-left: 250px;
 #sEmpresa,
 #sPrograms{
 	background: white;
-	color: #10133f;
+	color: #0F265C;
 }
 
 #sEmpresa:hover,
@@ -6263,7 +6239,7 @@ margin-left: 250px;
 	color: #ffdd00;
 	font-size: 16px !important;
 	line-height: 18px !important;
-	font-weight: bold !important;
+	font-weight: 700 !important;
 	padding: 5px;
 }
 
@@ -6306,7 +6282,7 @@ margin-left: 250px;
 	float: left;
 	padding: 15px;
 	color: #0f265c;
-	font-weight: bold;
+	font-weight: 700;
 }
 
 .ccf {
@@ -6341,7 +6317,7 @@ margin-left: 250px;
 
 .ben-icon {
 	font-size: 32px;
-	font-weight: bold;
+	font-weight: 700;
 	color: #FFFFFF;
 	margin-right: 10px;
 	float: left;
@@ -6352,7 +6328,7 @@ margin-left: 250px;
 
 .ben-title {
 	font-size: 24px !important;
-	font-weight: bold;
+	font-weight: 700;
 	color: #FFF;
 	/*margin-right: 10px; */
 	line-height: 32px;
@@ -6545,7 +6521,7 @@ margin-left: 250px;
 	max-width: 150px !important;
 	min-width: 150px !important;
 	text-align: center;
-	font-weight: bold;
+	font-weight: 700;
 }
 
 .resultadosAU {
@@ -6766,7 +6742,7 @@ div.not-info {
 
 div.not-info a {
 	color: #ae8500;
-	font-weight: bold;
+	font-weight: 700;
 	text-decoration: underline;
 }
 
@@ -6972,7 +6948,7 @@ button.green:hover {
 #user-name {
 	font-size: 15px;
 	color: #0f265c;
-	font-weight: bold;
+	font-weight: 700;
 }
 
 #datos-1 {
@@ -7022,7 +6998,7 @@ button.green:hover {
 
 .content-user p {
 	float: left;
-	font-weight: bold;
+	font-weight: 700;
 }
 
 #ui-tabs-3 #wrapper {
@@ -7381,7 +7357,7 @@ button.green:hover {
 	/* display: block; */
 	text-decoration: none;
 	font-weight: normal;
-	font-family: "sourcesanspro-regular", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-family: "prelo", "Helvetica Neue", Helvetica, Arial, sans-serif;
 	font-size: 16px;
 	line-height: 40px;
 	padding: 0 10px;
@@ -7389,7 +7365,7 @@ button.green:hover {
 }
 
 #nav2 ul li a:hover {
-	font-weight: bold;
+	font-weight: 700;
 	text-decoration: underline;
 }
 
