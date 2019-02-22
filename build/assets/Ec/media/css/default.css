@@ -350,6 +350,7 @@ a:hover {
 p {
 	margin: 2px 0 10px;
 	text-align: left;
+	font-size: 14px;
 }
 
 code,
@@ -397,6 +398,7 @@ form {
 	margin: 0;
 	overflow: hidden;
 	padding: 0;
+	font-size: 16px;
 }
 
 fieldset {
