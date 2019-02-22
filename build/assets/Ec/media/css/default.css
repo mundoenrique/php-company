@@ -506,6 +506,7 @@ button:active {
 	margin: 0 auto;
 	overflow: hidden;
 	width: 960px;
+	font-size: 14px;
 }
 
 #head-wrapper {
@@ -1775,6 +1776,7 @@ button.ui-button::-moz-focus-inner {
 	padding: .5em 1em;
 	background: 0;
 	overflow: auto;
+	font-size: 14px;
 }
 
 .ui-dialog .ui-dialog-buttonpane {
@@ -1783,6 +1785,7 @@ button.ui-button::-moz-focus-inner {
 	background-image: none;
 	margin-top: .5em;
 	padding: .3em 1em .5em .4em;
+	font-size: 14px;
 }
 
 .ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset {
@@ -2137,6 +2140,7 @@ body .ui-tooltip {
 	background: #0f265c;
 	color: #fff;
 	font-weight: 700;
+	font-size: 14px;
 }
 
 .ui-widget-header a {
@@ -6130,6 +6134,7 @@ margin-left: 250px;
 	background: white;
 	border: solid 1px #FFDD00;
 	margin-top: 0px !important;
+	font-size: 14px;
 }
 
 #btn-modificar:hover,
