@@ -1892,9 +1892,7 @@ class Users extends CI_Controller {
         np_hoplite_countryCheck($urlCountry);
 
         $logged_in = $this->session->userdata('logged_in');
-        $paisS = $this->session->userdata('pais');
-        print_r($paisS);
-
+				$paisS = $this->session->userdata('pais');
 
         if($paisS==$urlCountry &&$logged_in){
 
