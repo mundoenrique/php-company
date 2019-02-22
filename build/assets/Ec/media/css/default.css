@@ -278,8 +278,8 @@ body {
 	/* ie6-9 */
 	color: #10133f;
 	direction: ltr;
-	font-family: "prelo", sans-serif;
-	font-size: 12px;
+	font-family: "preloslap", sans-serif;
+	font-size: 42pt;
 	line-height: 17px;
 	font-weight: 700;
 }
@@ -290,7 +290,7 @@ h3,
 h4,
 h5,
 h6 {
-	font-family: "prelo", sans-serif;
+	font-family: "preloslap", sans-serif;
 	-webkit-font-smoothing: antialiased;
 	font-weight: normal;
 	margin: 0;
@@ -307,7 +307,7 @@ h1 {
 
 h2 {
 	color: #0F265C;
-	font-size: 18px;
+	font-size: 16px;
 	line-height: 40px;
 	margin: 0 0 10px;
 }
@@ -420,6 +420,7 @@ textarea {
 	box-shadow: rgba(51, 51, 51, 0.2) 0 2px 2px false inset;
 	margin: 0 0 5px;
 	padding: 10px;
+	font-size: 14px;
 }
 
 button {
@@ -542,6 +543,7 @@ button:active {
 	width: auto;
 	padding: 0;
 	margin-top: 10px;
+	font-size: 18px;
 }
 
 ol.breadcrumb li {
@@ -626,12 +628,15 @@ ol.breadcrumb li a {
 	overflow: hidden;
 	padding: 0 10px;
 	width: 700px;
+
+
 }
 
 #credits p {
 	font-size: 10px;
 	line-height: 50px;
 	margin: 0;
+	font-size: 10px;
 }
 
 #nav-bar {
@@ -800,7 +805,7 @@ ol.breadcrumb li a {
   color: white;
   float: left;
   /*clear: both;*/
-  font-size: 12px;
+  font-size: 14px;
 	font-weight: 700;
 	color: #0f265c !important;
 	display: flex;
@@ -865,6 +870,8 @@ ol.breadcrumb li a {
 .config-menuH ul {
 	float: left;
 	padding-left: -50px;
+	font-size: 14px;
+
 }
 
 .config-menuH li {
@@ -3200,7 +3207,7 @@ span#more-info a p b {
 	width: 190px;
 	padding-left: 10px;
 	line-height: 12px;
-	font-size: 12px;
+	font-size: 14px;
 	height: 12px;
 	text-overflow: ellipsis;
 	white-space: nowrap;
@@ -3287,6 +3294,8 @@ div.filter li a:hover {
 	position: absolute;
 	right: 10px;
 	overflow: hidden;
+	font-family: "preloslap";
+	font-size: 14px;
 }
 
 #txt-full-view {
@@ -3392,6 +3401,8 @@ padding:10px 5px 10px 5px;
 	text-shadow: 0px 1px 0 #F3F3F3;
 	font-weight: 700;
 	text-align: center;
+	font-family: "prelo";
+	font-size: 14px;
 
 }
 
@@ -3486,6 +3497,7 @@ padding:10px 5px 10px 5px;
 	color: #10133f;
 	width: 200px;
 	overflow: hidden;
+	font-size: 16px;
 }
 
 #widget-info-2 button {
@@ -4684,6 +4696,7 @@ border-right:2px solid $color-base2!important;
 
 #selection-1 select {
 	width: 150px;
+	font-size: 15px;
 }
 
 #selection-2 {
@@ -6160,6 +6173,7 @@ margin-left: 250px;
 #archivo {
 	margin-left: 5px;
 	cursor: pointer;
+	font-size: 15px;
 }
 
 .suc em {
@@ -6283,6 +6297,7 @@ margin-left: 250px;
 	padding: 15px;
 	color: #0f265c;
 	font-weight: 700;
+	font-size: 18px;
 }
 
 .ccf {
@@ -7350,7 +7365,7 @@ button.green:hover {
 }
 
 #nav2 ul li>ul li a {
-	font-size: 12px !important;
+	font-size: 13px !important;
 }
 
 #nav2 ul li a {
