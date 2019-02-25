@@ -122,7 +122,7 @@ button,
 input,
 select,
 textarea {
-	font-family: inherit;
+	font-family: "prelo";
 	font-size: 100%;
 }
 
@@ -546,7 +546,8 @@ button:active {
 	width: auto;
 	padding: 0;
 	margin-top: 10px;
-	font-size: 18px;
+	font-family: "prelo";
+	font-size: 13px;
 }
 
 ol.breadcrumb li {
@@ -587,7 +588,10 @@ ol.breadcrumb li a {
 	line-height: 50px;
 	margin: 0;
 	border-radius: 6px 6px 0px 0px;
-	text-align: center;
+}
+h2.widget-title{
+	padding-left: 17px;
+	font-size: 18px;
 }
 
 #widget-area .widget h2.widget-title span.icon:before {
@@ -631,7 +635,7 @@ ol.breadcrumb li a {
 	overflow: hidden;
 	padding: 0 10px;
 	width: 700px;
-
+	font-family: "prelo";
 
 }
 
@@ -840,6 +844,7 @@ ol.breadcrumb li a {
 #extra-nav ul.menu {
 	float: left;
 	height: 50px;
+	font-family: "prelo";
 }
 
 #extra-nav ul.menu li.menu-item {
@@ -848,7 +853,7 @@ ol.breadcrumb li a {
 }
 
 #extra-nav ul.menu li.menu-item a {
-	font-size: 11px;
+	font-size: 12px;
 	font-weight: 700;
 }
 
@@ -894,6 +899,7 @@ ol.breadcrumb li a {
 .submenu {
 	margin-left: -37px !important;
 	float: left;
+	font-family: "prelo";
 }
 
 .submenu a {
@@ -3195,6 +3201,11 @@ span#more-info a p b {
 	padding-left: 5px;
 }
 
+#text-companies,
+#text-companies-2 {
+	font-family: "prelo";
+}
+
 #text-companies-T {
 	float: right;
 	padding-right: 10px;
@@ -3205,6 +3216,7 @@ span#more-info a p b {
 	font-size: 14px;
 	height: 14px;
 	overflow: hidden;
+
 }
 
 #text-companies {
@@ -3240,6 +3252,7 @@ span#more-info a p b {
 	z-index: 1;
 	position: relative;
 	padding-right: 10px;
+	font-family: "prelo";
 }
 
 .filter-2 {
@@ -3264,6 +3277,7 @@ span#more-info a p b {
 	margin-right: 10px;
 	padding-bottom: 20px;
 	font-weight: 700;
+	font-family: "prelo";
 }
 
 div.filter li {
@@ -3300,8 +3314,7 @@ div.filter li a:hover {
 	position: absolute;
 	right: 10px;
 	overflow: hidden;
-	font-family: "preloslap";
-	font-size: 14px;
+	font-size: 12px;
 }
 
 #txt-full-view {
@@ -3404,7 +3417,6 @@ padding:10px 5px 10px 5px;
 	padding: 10px;
 	color: #0F265C;
 	float: left;
-	text-shadow: 0px 1px 0 #F3F3F3;
 	font-weight: 700;
 	text-align: center;
 	font-family: "prelo";
@@ -3525,11 +3537,11 @@ padding:10px 5px 10px 5px;
 	width: 680px;
 	background: white;
 	border: 1px solid #DCDCDC;
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	-ms-border-radius: 5px;
-	-o-border-radius: 5px;
-	border-radius: 5px;
+	-webkit-border-radius:0 0 0 15px;
+	-moz-border-radius:0 0 0 15px;
+	-ms-border-radius:0 0 0 15px;
+	-o-border-radius:0 0 0 15px;
+	border-radius:0 0 0 15px;
 	margin-bottom: 5px;
 }
 
@@ -3570,15 +3582,13 @@ padding:10px 5px 10px 5px;
 .text-category {
 	/*padding-top:10px;*/
 	font-size: 12px;
-	font-style: italic;
 	color: #bbbbbb;
 	width: 325px;
 	float: left;
-	font-weight: 700;
+	font-weight: normal !important;
 }
 
 .color-product-rrhh {
-	background: #f5921e;
 	-webkit-border-radius: 5px 0px 0px 5px;
 	-moz-border-radius: 5px 0px 0px 5px;
 	-ms-border-radius: 5px 0px 0px 5px;
@@ -3597,7 +3607,6 @@ padding:10px 5px 10px 5px;
 }
 
 .color-product-admon {
-	background: #50c592;
 	-webkit-border-radius: 5px 0px 0px 5px;
 	-moz-border-radius: 5px 0px 0px 5px;
 	-ms-border-radius: 5px 0px 0px 5px;
@@ -3616,7 +3625,6 @@ padding:10px 5px 10px 5px;
 }
 
 .color-product-mercadeo {
-	background: #994596;
 	-webkit-border-radius: 5px 0px 0px 5px;
 	-moz-border-radius: 5px 0px 0px 5px;
 	-ms-border-radius: 5px 0px 0px 5px;
@@ -3635,7 +3643,6 @@ padding:10px 5px 10px 5px;
 }
 
 .color-product-default {
-	background: #2b569f;
 	-webkit-border-radius: 5px 0px 0px 5px;
 	-moz-border-radius: 5px 0px 0px 5px;
 	-ms-border-radius: 5px 0px 0px 5px;
@@ -3663,7 +3670,15 @@ padding:10px 5px 10px 5px;
 	width: 80px;
 	height: 80px;
 	float: left;
-	/*margin-right:10px;*/
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-left: 6px;
+}
+#img-1 img{
+	border: 1px solid #E5E5E5;
+	border-radius: 5px;
+	box-shadow: rgba(51, 51, 51, 0.2) 0 1px 2px;
 }
 
 #img-2 {
@@ -3815,6 +3830,9 @@ padding:10px 5px 10px 5px;
 	height: auto;
 	position: relative;
 	left: 200px;
+	box-shadow: rgba(51, 51, 51, 0.5) 0 1px 1px;
+	border-radius: 5px;
+	border:1px solid #E5E5E5;
 }
 
 ul#brands {
@@ -3855,8 +3873,9 @@ ul#brands li p img {
 #text-product-detail {
 	width: 620px;
 	float: left;
-	padding: 20px 20px 10px 50px;
+	padding: 20px 20px 10px 0px;
 	font-size: 15px;
+	font-family: "prelo";
 }
 
 #text-product-detail button {
@@ -3866,7 +3885,9 @@ ul#brands li p img {
 }
 
 #text-product-detail h2 {
+	font-size: 30px;
 	font-weight: 700;
+	font-family: "preloslap";
 }
 
 #text-product-detail p {
@@ -6304,7 +6325,7 @@ margin-left: 250px;
 	padding: 15px;
 	color: #0f265c;
 	font-weight: 700;
-	font-size: 18px;
+	font-size: 14px;
 }
 
 .ccf {
@@ -6317,26 +6338,13 @@ margin-left: 250px;
 	min-width: 125px !important;
 }
 
-#ben-1 {
-	margin: 10px 10px 10px 0px;
-	width: 400px;
-	background: #54c2d0;
-	-webkit-border-radius: 3px 3px 3px 3px;
-	-moz-border-radius: 3px 3px 3px 3px;
-	-ms-border-radius: 3px 3px 3px 3px;
-	-o-border-radius: 3px 3px 3px 3px;
-	border-radius: 3px 3px 3px 3px;
-	-webkit-box-shadow: rgba(51, 51, 51, 0.5) 0 1px 1px;
-	-moz-box-shadow: rgba(51, 51, 51, 0.5) 0 1px 1px;
-	box-shadow: rgba(51, 51, 51, 0.5) 0 1px 1px;
-	height: auto;
-	float: left;
+.content-beneficios {
+	width: 80%;
+	display: flex;
+	flex-wrap: wrap;
 }
 
-#ben-1:hover {
-	background: #298c9a;
-}
-
+/*
 .ben-icon {
 	font-size: 32px;
 	font-weight: 700;
@@ -6352,7 +6360,6 @@ margin-left: 250px;
 	font-size: 24px !important;
 	font-weight: 700;
 	color: #FFF;
-	/*margin-right: 10px; */
 	line-height: 32px;
 	float: left;
 	width: 300px;
@@ -6362,111 +6369,69 @@ margin-left: 250px;
 .ben-txt {
 	font-size: 16px;
 	color: #FFFFFF;
-	/*float:left;*/
 	width: 380px;
 	padding: 10px;
 	line-height: 22px;
+} */
+#ben-1, #ben-2, #ben-3, #ben-4, #ben-5, #ben-6 {
+	width: 200px;
+	height: 250px;
+	padding: 10px;
+	border: 1px solid #D5D5D5;
+	border-radius:0 0 0 15px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+p.ben-icon {
+	font-size: 60px;
+	color:#FFDD00;
+}
+
+p.ben-title {
+	margin-top:24px;
+	font-weight: 700;
+	font-size: 17px;
+}
+
+p.ben-txt {
+ color: #74777b;
+}
+
+#ben-1 {
+	margin: 10px 10px 10px 0px;
+
 }
 
 #ben-2 {
 	margin: 10px 10px 10px 0px;
-	width: 400px;
-	background: #50c592;
-	-webkit-border-radius: 3px 3px 3px 3px;
-	-moz-border-radius: 3px 3px 3px 3px;
-	-ms-border-radius: 3px 3px 3px 3px;
-	-o-border-radius: 3px 3px 3px 3px;
-	border-radius: 3px 3px 3px 3px;
-	-webkit-box-shadow: rgba(51, 51, 51, 0.5) 0 1px 1px;
-	-moz-box-shadow: rgba(51, 51, 51, 0.5) 0 1px 1px;
-	box-shadow: rgba(51, 51, 51, 0.5) 0 1px 1px;
-	height: auto;
-	float: left;
-}
 
-#ben-2:hover {
-	background: #2c855f;
 }
 
 #ben-3 {
 	margin: 10px 10px 10px 0px;
-	width: 400px;
-	background: #2b569f;
-	-webkit-border-radius: 3px 3px 3px 3px;
-	-moz-border-radius: 3px 3px 3px 3px;
-	-ms-border-radius: 3px 3px 3px 3px;
-	-o-border-radius: 3px 3px 3px 3px;
-	border-radius: 3px 3px 3px 3px;
-	-webkit-box-shadow: rgba(51, 51, 51, 0.5) 0 1px 1px;
-	-moz-box-shadow: rgba(51, 51, 51, 0.5) 0 1px 1px;
-	box-shadow: rgba(51, 51, 51, 0.5) 0 1px 1px;
-	height: auto;
-	float: left;
+
 }
 
-#ben-3:hover {
-	background: #1a325b;
-}
 
 #ben-4 {
 	margin: 10px 10px 10px 0px;
-	width: 400px;
-	background: #994596;
-	-webkit-border-radius: 3px 3px 3px 3px;
-	-moz-border-radius: 3px 3px 3px 3px;
-	-ms-border-radius: 3px 3px 3px 3px;
-	-o-border-radius: 3px 3px 3px 3px;
-	border-radius: 3px 3px 3px 3px;
-	-webkit-box-shadow: rgba(51, 51, 51, 0.5) 0 1px 1px;
-	-moz-box-shadow: rgba(51, 51, 51, 0.5) 0 1px 1px;
-	box-shadow: rgba(51, 51, 51, 0.5) 0 1px 1px;
-	height: auto;
-	float: left;
-}
 
-#ben-4:hover {
-	background: #522551;
 }
 
 #ben-5 {
 	margin: 10px 10px 10px 0px;
-	width: 400px;
-	background: #f5921e;
-	-webkit-border-radius: 3px 3px 3px 3px;
-	-moz-border-radius: 3px 3px 3px 3px;
-	-ms-border-radius: 3px 3px 3px 3px;
-	-o-border-radius: 3px 3px 3px 3px;
-	border-radius: 3px 3px 3px 3px;
-	-webkit-box-shadow: rgba(51, 51, 51, 0.5) 0 1px 1px;
-	-moz-box-shadow: rgba(51, 51, 51, 0.5) 0 1px 1px;
-	box-shadow: rgba(51, 51, 51, 0.5) 0 1px 1px;
-	height: auto;
-	float: left;
+
 }
 
-#ben-5:hover {
-	background: #333333;
-}
 
 #ben-6 {
 	margin: 10px 10px 10px 0px;
-	width: 400px;
-	background: #298c9a;
-	-webkit-border-radius: 3px 3px 3px 3px;
-	-moz-border-radius: 3px 3px 3px 3px;
-	-ms-border-radius: 3px 3px 3px 3px;
-	-o-border-radius: 3px 3px 3px 3px;
-	border-radius: 3px 3px 3px 3px;
-	-webkit-box-shadow: rgba(51, 51, 51, 0.5) 0 1px 1px;
-	-moz-box-shadow: rgba(51, 51, 51, 0.5) 0 1px 1px;
-	box-shadow: rgba(51, 51, 51, 0.5) 0 1px 1px;
-	height: auto;
-	float: left;
+
 }
 
-#ben-6:hover {
-	background: #333333;
-}
 
 .paginacion-dash {
 	float: right;

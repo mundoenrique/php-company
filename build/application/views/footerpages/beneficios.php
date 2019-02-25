@@ -1,5 +1,5 @@
 
-<div id="content-beneficios">
+<div id="content-beneficioss">
 			<h1>Beneficios</h1>
 
 			<div class="content-beneficios">
@@ -51,6 +51,6 @@
 					<p class="ben-txt">Conexión con el sistema administrativo de la empresa (ERP) para facilitar los procesos operativos y contables.</p>
 				</div>
 			</div>
-		
-			
+
+
 	</div>

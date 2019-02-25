@@ -1,7 +1,7 @@
 <?php
 	$urlCdn = get_cdn();
 ?>
-<div id="content-beneficios">
+<div id="content-beneficioss">
 	<h1>Tarifas</h1>
 
 	<div class="content-beneficios">
