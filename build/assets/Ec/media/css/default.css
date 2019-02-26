@@ -7435,3 +7435,18 @@ a.style-companies-item > span.icon:before,
   top: 446px!important;
 	font-family: "prelo";
 }
+
+#ui-datepicker-div .ui-datepicker-header{
+		background: white;
+		border:none;
+}
+#ui-datepicker-div .ui-datepicker-calendar tbody tr .ui-state-default{
+	border:none;
+	background: white;
+}
+#ui-datepicker-div .ui-datepicker-calendar tbody tr .ui-state-default.ui-state-highlight{
+	background: #c5c5c5;
+	border-radius: 10px;
+	color:grey;
+	border:none;
+}
