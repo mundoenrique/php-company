@@ -3421,12 +3421,12 @@ padding:10px 5px 10px 5px;
 
 #widget-info {
 	background: #dddddd;
-	padding: 10px;
+	padding: 10px 0px 10px 0px;
 	color: #0F265C;
 	float: left;
 	font-weight: 700;
 	text-align: center;
-	font-family: "prelo";
+	font-family: "preloslap";
 	font-size: 14px;
 
 }
@@ -3522,7 +3522,9 @@ padding:10px 5px 10px 5px;
 	color: #10133f;
 	width: 200px;
 	overflow: hidden;
-	font-size: 16px;
+	font-size: 14px;
+	font-family: "preloslap";
+	font-weight: 500;
 }
 
 #widget-info-2 button {
