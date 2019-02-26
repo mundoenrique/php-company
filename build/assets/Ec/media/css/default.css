@@ -1743,7 +1743,6 @@ button.ui-button::-moz-focus-inner {
 	position: absolute;
 	top: 0;
 	left: 0;
-	padding: .2em;
 	outline: 0;
 }
 
@@ -2135,7 +2134,6 @@ body .ui-tooltip {
 }
 
 .ui-widget-content {
-	/*border:1px solid #ddd;*/
 	background: #fff !important;
 	color: #333;
 }
@@ -5664,7 +5662,7 @@ padding:5px 0px;
 	-ms-border-radius: 3px;
 	-o-border-radius: 3px;
 	border-radius: 3px;
-	border-left: 3px solid #40476c;
+ margin-left: 3px;
 }
 
 .tbody-sucursales tr td {
@@ -6142,11 +6140,6 @@ margin-left: 250px;
 	font-weight: 700;
 }
 
-#btn-new-mas,
-#btn-new-suc,
-#modif,
-#mostrarContact,
-#agregarContact,
 /* #sProducto, */
 #btn-modif-suc {
 	float: right !important;
@@ -6901,7 +6894,7 @@ button.green:hover {
 }
 
 #campos-dir span {
-	border-left: 3px solid #0F265C;
+	margin-left:3px;
 	width: 500px;
 	float: left;
 }
@@ -6949,7 +6942,7 @@ button.green:hover {
 
 #opciones-btn {
 	float: left;
-	width: 512px;
+
 	height: 50px;
 }
 
@@ -7421,3 +7414,7 @@ a.style-companies-item > span.icon:before,
 	content: attr(none);
 }
 
+#btn-new-suc,
+#btn-new-mas{
+	margin-top: 0!important;
+}
