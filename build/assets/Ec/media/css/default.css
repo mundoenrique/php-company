@@ -7308,12 +7308,12 @@ button.green:hover {
 
 /* Inicio Menu-Head New*/
 /*step 1*/
+
 #nav-bar2 {
 	height: 40px;
 	background: #FFFFFF;
 	box-shadow: rgba(51, 51, 51, 0.2) 0 1px 2px;
 	left: 0;
-	/*overflow: hidden;*/
 	position: fixed;
 	top: 60px;
 	width: 100%;
@@ -7334,19 +7334,22 @@ button.green:hover {
 	padding-left: 0px;
 }
 
-/*step 2
-  * Luego definiremos la apariencia que tendrá nuestro menú.
-  */
-#nav2>ul>li {
+
+/* step 2
+	*	Luego definiremos la apariencia que tendrá nuestro menú.
+*/
+
+#nav2 > ul > li {
 	float: left;
 }
 
-#nav2 ul li>ul li a {
+
+#nav2 ul li > ul li a {
 	font-size: 13px !important;
 }
 
+
 #nav2 ul li a {
-	/* display: block; */
 	text-decoration: none;
 	font-weight: normal;
 	font-family: "prelo", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -7362,6 +7365,7 @@ button.green:hover {
 }
 
 /*step 4*/
+
 #nav2 ul li ul {
 	opacity: 0;
 	visibility: hidden;
@@ -7369,9 +7373,8 @@ button.green:hover {
 	min-width: 160px;
 	z-index: -1;
 	padding-left: 2px;
-	padding-top: 10px;
+	padding-top: 5px;
 	margin-top: -2px !important;
-	/* margin-left: -44px; */
 	-webkit-transform: translateY(-50px);
 	-moz-transform: translateY(-50px);
 	-o-transform: translateY(-50px);
@@ -7382,7 +7385,8 @@ button.green:hover {
 }
 
 /*step 5*/
-#nav2 ul li:hover>ul {
+
+#nav2 ul li:hover > ul {
 	visibility: visible;
 	opacity: 1;
 	margin-top: -2px !important;
@@ -7391,16 +7395,15 @@ button.green:hover {
 	-o-transform: translateY(0px);
 	-ms-transform: translateY(0px);
 	transform: translateY(0px);
-	/* display: inline; */
 }
 
 /*step 6*/
+
 #nav2 ul li ul li {
 	background: white;
 	list-style: none;
 	position: relative;
 	margin-left: 10px !important;
-	overflow: hidden;
 	border-bottom-left-radius: 15px;
 }
 
@@ -7409,7 +7412,12 @@ button.green:hover {
 	text-decoration: none;
 }
 
+#nav-bar2 nav ul li ul li ul {
+	right: -162px;
+	top: 0px;
+}
 /* Fin Menu-Head New*/
+
 .kwicks {
 	display: none;
 }
