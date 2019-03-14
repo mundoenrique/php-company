@@ -20,8 +20,13 @@ if ( ! function_exists('np_hoplite_Encryption'))
 	 */
 	function np_Hoplite_Encryption($data)
 	{
+		$data = json_decode($data);
+		if(isset($data->pais) && $data->pais === 'Ec') {
+			$data->pais = 'Co';
+		}
+		$data = json_encode($data);
+
 		$CI =& get_instance();
-		
 		$dataB = base64_encode($data);
 		$iv = "\0\0\0\0\0\0\0\0";
 		while( (strlen($dataB)%8) != 0) {

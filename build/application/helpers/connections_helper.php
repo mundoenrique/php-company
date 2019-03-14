@@ -20,6 +20,12 @@ if ( ! function_exists('np_Hoplite_GetWS')) {
 	 */
 	function np_Hoplite_GetWS($nameWS,$cryptDataBase64)
 	{
+		$cryptDataBase64 = json_decode($cryptDataBase64);
+		if($cryptDataBase64->pais === 'Ec') {
+			$cryptDataBase64->pais = 'Co';
+		}
+		$cryptDataBase64 = json_encode($cryptDataBase64);
+
 		log_message("DEBUG","INICIANDO LLAMADO WS: ".$nameWS);
 		$CI =& get_instance();
 		$urlcurlWS=$CI->config->item('urlWS').$nameWS;

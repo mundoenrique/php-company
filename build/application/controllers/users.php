@@ -112,9 +112,6 @@ class Users extends CI_Controller {
             $password = $this->input->post('user_pass');
             $useractive = $this->input->post('user_active');
 						$responseLoginFull = $this->callWSLoginFull($username,$password,$urlCountry,$useractive);
-						log_message('INFO','adasdasdasdasdas');
-						log_message('INFO',$username);
-						log_message('INFO',$password);
             echo $responseLoginFull;
         }
 
@@ -155,6 +152,8 @@ class Users extends CI_Controller {
 
 			$data = json_encode($data,JSON_UNESCAPED_UNICODE);
 
+			log_message('DEBUG', 'REQUEST callWSLoginFull: ' . $data);
+
 			$dataEncry = np_Hoplite_Encryption($data);
 			$data = array('bean' => $dataEncry, 'pais' =>$pais );
 			$data = json_encode($data);
@@ -162,10 +161,9 @@ class Users extends CI_Controller {
 			$jsonResponse = np_Hoplite_Decrypt($response);
 
 			$response = json_decode(utf8_encode($jsonResponse));
-
+			log_message('DEBUG', 'RESPONSE callWSLoginFull: ' . json_encode($response));
 
 			if(isset($response)) {
-				log_message('info','response login '.$response->rc.'/'.$response->msg);
 
 				if($response->rc==-229) {
 						return 'userold'; // EL USUARIO TIENE BANDERA EN 1
@@ -320,13 +318,17 @@ class Users extends CI_Controller {
                 'token' => $token
             );
 
-            $data = json_encode($data,JSON_UNESCAPED_UNICODE);
+						$data = json_encode($data,JSON_UNESCAPED_UNICODE);
+
+						log_message('DEBUG', 'REQUEST LOGOUT:' . $data);
 
             $dataEncry = np_Hoplite_Encryption($data);
             $data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
             $data = json_encode($data);
             $response = np_Hoplite_GetWS('eolwebInterfaceWS',$data); // ENVÍA LA PETICIÓN Y ALMACENA LA RESPUESTA EN $response
-            $jsonResponse = np_Hoplite_Decrypt($response);
+						$jsonResponse = np_Hoplite_Decrypt($response);
+
+						log_message('DEBUG', 'RESPONSE LOGOUT:' . $jsonResponse);
 
             $response = json_decode(utf8_encode($jsonResponse));
 
