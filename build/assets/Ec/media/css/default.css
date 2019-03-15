@@ -484,7 +484,9 @@ button:active {
 	background-image: -o-linear-gradient(#ffdd00, #0081da);
 	background-image: linear-gradient(#ffdd00, #0081da);
 }
-
+#manual_GL, #gestor_lotes{
+	background: white;
+}
 #button-login{
 	padding: 0px 77px;
 }
@@ -559,7 +561,9 @@ ol.breadcrumb li a {
 	color: #888888;
 	/*font-weight: normal;*/
 }
-
+#cargando{
+	color:#10133f!important;
+}
 #sidebar {
 	float: right;
 	width: 220px;
@@ -7114,13 +7118,13 @@ button.green:hover {
 }
 
 #table-text-lotes-inventario_length {
-	color: #ffdd00;
+	color: #10133f;
 	float: right;
 	margin-left: 45px;
 }
 
 #table-text-lotes-inventario_filter {
-	color: #ffdd00;
+	color: #10133f;
 	float: right;
 	margin-right: 25px;
 }
@@ -7128,7 +7132,7 @@ button.green:hover {
 #table-text-lotes-inventario_info {
 	float: left;
 	margin: 5px;
-	color: #54c2d0;
+	color: #10133f;
 }
 
 #table-text-lotes-inventario_paginate {
@@ -7142,7 +7146,7 @@ button.green:hover {
 
 
 #table-text-lotes-inventario thead tr {
-	background: none repeat scroll 0 0 #54c2d0;
+	background: none repeat scroll 0 0 #004574;
 	-webkit-border-radius: 10px 10px 0 0;
 	-moz-border-radius: 10px 10px 0 0;
 	-ms-border-radius: 10px 10px 0 0;
@@ -7453,3 +7457,4 @@ a.style-companies-item > span.icon:before,
 	color:grey;
 	border:none;
 }
+
