@@ -909,7 +909,11 @@ h2.widget-title{
 	height: 10px;
 }
 
-.submenu a:hover {
+/* .submenu a:hover {
+	font-weight: 700;
+	border-left: 3px solid #FFDD00;
+} */
+.submenu .menu-item:hover {
 	font-weight: 700;
 	border-left: 3px solid #FFDD00;
 }
