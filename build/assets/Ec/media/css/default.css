@@ -2126,7 +2126,7 @@ body .ui-tooltip {
 
 .ui-widget {
 	font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif;
-	font-size: 1.1em;
+	font-size: 5.1em;
 }
 
 .ui-widget .ui-widget {
@@ -5138,7 +5138,7 @@ li#select-empresa select {
 #search-2 {
 	float: left;
 	width: 270px;
-	margin-top: -60px;
+	margin-top: -65px;
 }
 
 #search-2 span {
@@ -7440,7 +7440,7 @@ a.style-companies-item > span.icon:before,
 }
 
 #ui-datepicker-div{
-  top: 446px!important;
+  /*top: 446px!important;*/
 	font-family: "prelo";
 }
 

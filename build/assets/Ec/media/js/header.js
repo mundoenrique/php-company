@@ -97,7 +97,7 @@ $('#config').balloon({contents: $('.submenu'), position: 'bottom', classname: 'c
 
 
 
-$(':input').on('click', function(){$('#ui-datepicker-div').css('top',$(this).position().top-100); $('#ui-datepicker-div').css('left',$(this).position().left);});
+$(':input').on('click', function(){$('#ui-datepicker-div'); $('#ui-datepicker-div').css('left',$(this).position().left);});
 
 
  document.cookie = 'cookie';
