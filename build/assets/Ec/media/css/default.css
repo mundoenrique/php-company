@@ -1541,6 +1541,7 @@ button.ui-button::-moz-focus-inner {
 	width: 3.3em;
 	padding: .2em .2em 0;
 	display: none;
+	font-size: 5.1em;
 }
 
 .ui-datepicker .ui-datepicker-header {
@@ -2126,7 +2127,6 @@ body .ui-tooltip {
 
 .ui-widget {
 	font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif;
-	font-size: 5.1em;
 }
 
 .ui-widget .ui-widget {
