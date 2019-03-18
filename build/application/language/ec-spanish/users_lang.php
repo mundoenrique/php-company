@@ -1,4 +1,7 @@
 <?php
+$lang['WELCOME_TITLE']='Bienvenido a Conexión Empresas Online';
+$lang['WELCOME_MESSAGE']='Las gestiones de los programas prepago de su empresa son más eficientes, seguras y rápidas en Conexión Empresas Online.';
+
 $lang['WIDGET_LOGIN_TITLE']="Cliente afiliado";
 $lang['WIDGET_ADDCLIENT_TITLE']="Nuevo Cliente";
 

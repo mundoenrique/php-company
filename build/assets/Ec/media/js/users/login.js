@@ -232,5 +232,4 @@ $(function() {
         $('#sliderbutton-login').hide();
         $('#login-mobile').show();
 		}
-		document.getElementById("content").innerHTML = "<h1>Welcome message</h1><p>Introduction text</p>";
 });

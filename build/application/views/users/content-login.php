@@ -4,11 +4,8 @@ $pais = $this->uri->segment(1);
 ?>
 
 <div id="content">
-	<?php if($pais!="Ec"){?>
-	<h1>Bienvenido a Conexión Empresas Online</h1>
-	<p>Con este sistema las gestiones de pago de su empresa son más eficientes, seguras y rápidas. Empiece a disfrutar de todas las ventajas que le ofrece Conexión Empresas Online.</p>
-	<?php }?>
-
+	<h1><?= lang('WELCOME_TITLE'); ?></h1>
+	<p><?= lang('WELCOME_MESSAGE') ?></p>
 
 	<ul class='acordion kwicks kwicks-horizontal' >
 		<li class="acordion-item" id="panel-1">
