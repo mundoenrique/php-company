@@ -66,8 +66,8 @@
 				case 'Usd':
 					$CI->config->load('usd-config');
 					break;
-				case 'Ec':
-					$CI->config->load('ec-config');
+				case 'Ec-bp':
+					$CI->config->load('ec-bp-config');
 					break;
 				default:
 					redirect('/Pe/login');
