@@ -6188,6 +6188,7 @@ margin-left: 250px;
 #sPrograms{
 	background: white;
 	color: #0F265C;
+	white-space: nowrap;
 }
 
 #sEmpresa:hover,
