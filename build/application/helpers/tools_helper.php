@@ -69,6 +69,9 @@
 				case 'Ec-bp':
 					$CI->config->load('ec-bp-config');
 					break;
+				case 'Ec':
+					$CI->config->load('ec-config');
+					break;
 				default:
 					redirect('/Pe/login');
 					break;

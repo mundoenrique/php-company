@@ -4,6 +4,7 @@ ini_set('memory_limit', '200M');
 
 // Main web service access
 $config['urlWS'] = WS_URL;
+$config['urlWS'] = 'http://172.24.6.78:10003/NovoEolWebInterfaceWS/webresources/';
 $config['keyNovo'] = base64_decode(WS_KEY);
 
 // APIs access
