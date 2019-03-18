@@ -1,7 +1,7 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 //País
-$config['country']='Ec';
+$config['country']='Ec-bp';
 
 /*
 |--------------------------------------------------------------------------
