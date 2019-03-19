@@ -6891,7 +6891,7 @@ button.green:hover {
 }
 
 #campos-1 span p {
-	float: left;
+	/* float: left; */
 	padding: 5px;
 	vertical-align: middle;
 	font-size: 13px;
@@ -7475,3 +7475,13 @@ a.style-companies-item > span.icon:before,
 	border:none;
 }
 
+select.ui-datepicker-month, select.ui-datepicker-year {
+	overflow: hidden;
+	background: #fff url("http://www.csslab.cl/ejemplos/select/arrowdown.gif") no-repeat 90% center !important;
+}
+
+select.ui-datepicker-month, select.ui-datepicker-year {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+}
