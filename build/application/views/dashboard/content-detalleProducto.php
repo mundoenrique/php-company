@@ -179,7 +179,7 @@ function to_ascii($word){
 				}
 				echo '
 				<span aria-hidden="true" class="icon" data-icon="&#xe035;"></span>
-				Órdenes de Servicio:
+				Órdenes de servicio:
 				<span class="num-product-detail">'.$ordenesS['total'].'</span>
 				'.$ordenesS['pendientes'].' No conciliadas / '.$ordenesS['conciliadas'].' Conciliadas
 				</a>

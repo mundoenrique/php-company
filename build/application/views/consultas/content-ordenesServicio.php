@@ -74,11 +74,11 @@ if($osConfirmV){
 					<input  class="required login" type="radio" name="dias" value="10" />
 				</span>
                 <span class="info-OD">
-					<h5>Fecha Inicial</h5>
+					<h5>Fecha inicial</h5>
 					<input id='fecha_inicial' class="required login" placeholder="DD/MM/AA" value="" onfocus="javascript:this.value=''"/>
 				</span>
                 <span class="info-OD">
-					<h5>Fecha Final</h5>
+					<h5>Fecha final</h5>
 					<input id='fecha_final' class="required login" placeholder="DD/MM/AA" value="" onfocus="javascript:this.value=''"/>
 				</span>
                 <div class="info-OD">
@@ -92,7 +92,7 @@ if($osConfirmV){
                                 echo "<option value='' selected='selected'>No disponible</option>";
                             }
                         }else{
-                            echo '<option value="" selected="selected">Seleccion</option>';
+                            echo '<option value="" selected="selected">Selección</option>';
                             foreach ($tipoStatus[0]->lista as $tipos) {
                                 echo '<option value="'.$tipos->codEstatus.'">'.ucfirst(mb_strtolower($tipos->descEstatus)).'</option>';
                             }

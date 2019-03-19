@@ -28,11 +28,11 @@ $lang['GRAFICO_TITULO_TEXT_TARJETAS']= "Tarjetas Emitidas";
 
 
 // CONTENEDOR DE CONSULTA - GENERAL DE TODOS LOS REPORTES
-$lang['REPORTES_SELECCION_EMPRESA']= "Selección de Empresa";
+$lang['REPORTES_SELECCION_EMPRESA']= "Selección de empresa";
 $lang['TITULO_REPORTES_RANGO']= "Rango";
 $lang['TITULO_REPORTES_FECHAINI']= "Fecha inicial";
 $lang['TITULO_REPORTES_FECHAFIN']= "Fecha final";
-$lang['CRITERIOS_BUSQUEDA']= "Criterios de Búsqueda";
+$lang['CRITERIOS_BUSQUEDA']= "Criterio de búsqueda";
 $lang['TITULO_REPORTES_RESULTADOS']= "Resultados";
 $lang['REPORTES_SELECCION_PRODUCTO']= "Producto";
 $lang['REPORTES_RADIO_TODOS']= "Todos";
@@ -135,7 +135,7 @@ $lang['DESCRIPCION_ESTADO_DE_CUENTA'] = "Descripción";
 //MONEDA PARA LOS REPORTES
 $lang['MONEDA'] = "$/";
 $lang['REPORTE_TARJETAHABIENTE'] = "Tarjetahabiente";
-$lang['REPORTE_FECHA_EXP'] = "Fecha Emisión";
+$lang['REPORTE_FECHA_EXP'] = "Fecha emisión";
 
 $lang['DWL_PDF'] ="Exportar a PDF";
 $lang['DWL_XLS'] ="Exportar a excel";

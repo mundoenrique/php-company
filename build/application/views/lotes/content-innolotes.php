@@ -41,24 +41,24 @@
 						<h5>Sucursal</h5>
 						<span id="cargando" style="color:#0072C0">Cargando...</span>
 						<select id="sucursal" name="batch" class="select_sucursales" disabled="disabled">
-							<option value="">Selecciona</option>
+							<option value="">Seleccione</option>
 						</select>
 					</span>
 					<div class="info-OD">
-						<h5>Cantidad Tarjetas</h5>
+						<h5>Cantidad de tarjetas</h5>
 						<input id="cant_tarjetas" class="required input4 nro" max-tjta="<?= $maxTarjetas ?>">
 						<!-- onfocus="javascript:this.value=''" -->
 					</div>
 					<span class="info-OD">
-						<h5>Fecha Expiraci&oacute;n</h5>
+						<h5>Fecha de expiraci&oacute;n</h5>
 						<input id="fecha_expira" class="required input4" placeholder="MM/AA" value="<?php echo $mesesVencimiento; ?>" <?php if($pais=="Co"){echo"disabled";} ?> ><!-- onfocus="javascript:this.value=''" -->
 					</span>
 					<div class="info-OD">
-						<h5>L&iacute;nea Embozo 1</h5>
+						<h5>L&iacute;nea de embozo 1</h5>
 						<input id="embozo_1" class="required input4" value=""><!--  onfocus="javascript:this.value=''" -->
 					</div>
 					<div class="info-OD">
-						<h5>L&iacute;nea Embozo 2</h5>
+						<h5>L&iacute;nea de embozo 2</h5>
 						<input id="embozo_2" class="required input4" value=""><!-- onfocus="javascript:this.value=''" -->
 					</div>
 				</div>

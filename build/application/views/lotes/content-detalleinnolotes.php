@@ -36,7 +36,7 @@ $info;
 			</li>
 			/
 			<li class="breadcrumb-item-current">
-				<a><?php echo "Detalle Lote";//echo lang('POSITION_INVENINNO'); ?></a>
+				<a><?php echo "Detalle del Lote";//echo lang('POSITION_INVENINNO'); ?></a>
 			</li>
 		</ol>
 
@@ -44,7 +44,7 @@ $info;
 
 		<div id="top-batchs">
 			<span aria-hidden="true" class="icon" data-icon="&#xe03c;"></span>
-			<?php echo "Detalle Lote";//echo lang('TITULO_LOTES_DETALLE'); ?>
+			<?php echo "Detalle del Lote";//echo lang('TITULO_LOTES_DETALLE'); ?>
 		</div>
 
 		<div id="lotes-contenedor">
@@ -53,7 +53,7 @@ $info;
 
 			<div id="detalleLote-1">
 				<div id="detalleLote-1-RUC">
-					<h5><?php echo "Nro. de Lote";//echo lang('ID_FISCAL') ?></h5>
+					<h5><?php echo "Lote Nro.";//echo lang('ID_FISCAL') ?></h5>
 					<p><?php echo $numLote;//echo $data[0]->acrif ?></p>
 				</div>
 				<div id="detalleLote-1-nombre">
@@ -61,7 +61,7 @@ $info;
 					<p><?php echo $acrif;//echo $data[0]->acnomcia ?></p>
 				</div>
 				<div id="detalleLote-1-short">
-					<h5><?php echo "Nombre Empresa";//echo lang('TABLA_LOTESPA_TIPOLOTE') ?></h5>
+					<h5><?php echo "Nombre de la empresa";//echo lang('TABLA_LOTESPA_TIPOLOTE') ?></h5>
 					<p><?php echo $acnomcia;//echo $data[0]->acnombre ?></p>
 				</div>
 			</div>
@@ -85,7 +85,7 @@ $info;
 </div>
 			<div id="top-batchs" class="listado_2">
 				<span aria-hidden="true" class="icon" data-icon=""></span>
-				Lista de Tarjetas
+				Lista de tarjetas
 			</div>
 
 			<div id="lotes-contenedor">
@@ -102,16 +102,16 @@ $info;
 
 								</th>
 								<th class="nro_cuenta">
-									Nro. de Tarjeta
+									Nro. de tarjeta
 								</th>
 								<th class="ci">
-									CI
+									C.I.
 								</th>
 								<th class="nombre-persona">
 									Nombre
 								</th>
 								<th class="fecha-carga">
-									Fecha Emisión
+									Fecha emisión
 								</th>
 								<th class="estatus-lote">
 									Estatus

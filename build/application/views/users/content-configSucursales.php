@@ -8,7 +8,7 @@
 				echo "<script>alert('".$listaEmpr[0]['msg']."'); location.reload();</script>";
 			}
 		}else{
-			echo "<option value=''>Selecciona una Empresa</option>";
+			echo "<option value=''>Seleccione una empresa</option>";
 			foreach ($listaEmpr[0]->lista as $listado) {
 				echo "<option data-rif='$listado->acrif' data-nombre='$listado->acnomcia' data-accodcia='$listado->accodcia'>$listado->acnomcia</option>";
 			}
@@ -54,34 +54,34 @@
 
 					<span>
 						<p id="first"><?php echo lang('SUC_NOMB'); ?>*</p>
-						<input type = "text" id ="suc_nom" placeholder ="Introduzca nombre de la empresa" maxlength='150'>
+						<input type = "text" id ="suc_nom" placeholder ="Introduzca el nombre de la empresa" maxlength='150'>
 					</span>
 				</div>
 				<div id="campos-dir">
 					<span>
 						<p id="first"><?php echo lang('SUC_ZONA'); ?>*</p>
-						<input type = "text" id = "suc_zona" placeholder = "Zona" maxlength='100'>
+						<input type = "text" id = "suc_zona" placeholder = "Punto de referencia" maxlength='100'>
 					</span>
 
 				</div>
 				<div id="campos-dir">
 					<span>
 						<p id="first"><?php echo lang('SUC_DIRECCION_1'); ?>*</p>
-						<input type = "text" id ="suc_dir1" placeholder = "Direccion Principal" maxlength='250'>
+						<input type = "text" id ="suc_dir1" placeholder = "Dirección principal" maxlength='250'>
 					</span>
 
 				</div>
 				<div id="campos-dir">
 					<span>
 						<p id="first"><?php echo lang('SUC_DIRECCION_2'); ?></p>
-						<input type = "text" id ="suc_dir2" placeholder = "Direccion Alternativa" maxlength='250' >
+						<input type = "text" id ="suc_dir2" placeholder = "Dirección alternativa" maxlength='250' >
 					</span>
 
 				</div>
 				<div id="campos-dir">
 					<span>
 						<p id="first"><?php echo lang('SUC_DIRECCION_3'); ?></p>
-						<input type = "text" id ="suc_dir3" placeholder = "Direccion Alternativa" maxlength='250'>
+						<input type = "text" id ="suc_dir3" placeholder = "Dirección alternativa" maxlength='250'>
 					</span>
 
 				</div>
@@ -111,7 +111,7 @@
 				<div id="campos-1">
 					<span>
 						<p id="first"><?php echo lang('SUC_AREA'); ?></p>
-						<input type="text" id="suc_area" class='nro' placeholder= "Código de Área">
+						<input type="text" id="suc_area" class='nro' placeholder= "Código de área">
 					</span>
 					<span>
 						<p id="first"><?php echo lang('SUC_TELEFONO'); ?></p>
@@ -122,11 +122,11 @@
 				<div id="campos-1">
 					<span>
 						<p id="first"><?php echo lang('SUC_CONTACTO'); ?></p>
-						<input type="text" id="suc_contacto" placeholder= "Nombre del Contacto" size="26" maxlength='100'>
+						<input type="text" id="suc_contacto" placeholder= "Nombre del contacto" size="26" maxlength='100'>
 					</span>
 					<span>
 						<p id="first"><?php echo lang('SUC_CODIGO'); ?>*</p>
-						<input type = "text" disabled="disabled" id="suc_cod" placeholder ="Código" maxlength='15'>
+						<input type = "text" disabled="disabled" id="suc_cod" placeholder ="Código de la sucursal" maxlength='15'>
 					</span>
 
 				</div>
@@ -135,7 +135,7 @@
 				<div id="opciones-btn" style='margin-top:20px'>
 					<button id='agregarSuc'><?php echo lang('EMP_BTN_ADD_CONTACT'); ?></button>
 					<button id='btn-modif-suc'><?php echo lang('SUC_BTN_MODIFICAR'); ?></button>
-					<input id="pass_suc" type="password" class="pass" style="margin-left:96px" placeholder="Ingrese su Contraseña">
+					<input id="pass_suc" type="password" class="pass" style="margin-left:96px" placeholder="Ingrese su contraseña">
 
 			</div>
 		</div>

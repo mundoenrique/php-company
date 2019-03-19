@@ -34,11 +34,11 @@ var	calendario = function(input){
 			valid = true;
 			if($("#fecha_inicial").val()==""){
 				++count;
-				contenido+= "<h6>" + count + ". Ha seleccionado una fecha inicial</h6>";
+				contenido+= "<h6>" + count + ". Ha seleccionado una Fecha inicial</h6>";
 			}
 			if($("#fecha_final").val()==""){
 				++count;
-				contenido+= "<h6>" + count + ". Ha seleccionado una fecha final</h6>";
+				contenido+= "<h6>" + count + ". Ha seleccionado una Fecha final</h6>";
 			}
 		}
 		if(valid){

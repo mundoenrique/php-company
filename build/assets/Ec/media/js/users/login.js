@@ -72,7 +72,7 @@ var ingresar_ = function() {
                     $(location).attr('href', baseURL + isoPais + '/clave');
 
                 } else if (data == 'conectado') {
-                    $('<div><h6>Su última sesión se cerró de manera incorrecta. Tenga en cuenta que para salir de la aplicación debe seleccionar <strong>"Salir"</strong>. <h4>Pulse "Aceptar" para continuar.<h4></h6></div>')
+                    $('<div><h6>Su última sesión se cerró de manera incorrecta. Tenga en cuenta que para salir de la aplicación debe seleccionar <strong>"Salir"</strong>.<br><strong>Pulse "Aceptar" para continuar.</strong></h6></div>')
                         .dialog({
                             title: "Conexión Empresas Online",
                             modal: true,
