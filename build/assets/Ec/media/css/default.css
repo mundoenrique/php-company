@@ -6875,7 +6875,7 @@ button.green:hover {
 }
 
 #campos-1 span p {
-	float: left;
+	/* float: left; */
 	padding: 5px;
 	vertical-align: middle;
 	font-size: 13px;
