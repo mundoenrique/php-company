@@ -4086,7 +4086,7 @@ ul#brands li p img {
 
 .dataTables_filter {
 	float: right;
-	color: #ffdd00;
+	color: #10133f;
 	margin-right: 20px;
 }
 
@@ -4982,7 +4982,7 @@ li#select-empresa select {
 
 #datos-principales {
 	font-size: 15px;
-	background: none repeat scroll 0 0 #40476c;
+	background: none repeat scroll 0 0 #004574;
 	-webkit-border-radius: 10px 10px 0 0;
 	-moz-border-radius: 10px 10px 0 0;
 	-ms-border-radius: 10px 10px 0 0;
@@ -4993,7 +4993,7 @@ li#select-empresa select {
 	width: auto;
 	border: solid 1px;
 	float: left;
-	margin-left: 2px;
+
 }
 
 #datos-principales td {
@@ -5225,7 +5225,7 @@ li#select-empresa select {
 	width: 660px;
 	background: white;
 	border-bottom: 1px dotted #bbbbbb;
-	border-left: 3px solid #54c2d0;
+	border-left: 1px dotted #bbbbbb;
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
 	-ms-border-radius: 3px;
@@ -5262,7 +5262,7 @@ li#select-empresa select {
 }
 
 #Datos3 {
-	background: #54c2d0;
+	background: #004574;
 	float: left;
 	width: 660px;
 	color: white;
@@ -5512,14 +5512,14 @@ li#select-empresa select {
 
 #view-results span {
 	font-size: 20px;
-	color: #994596;
+	color: #10133f;
 	padding: 5px 3px 5px 3px;
 	float: left;
 }
 
-#view-results span:hover {
+/* #view-results span:hover {
 	color: #f5921e;
-}
+} */
 
 #select-small {
 	width: 70px !important;
@@ -5577,14 +5577,14 @@ padding:5px 0px;
 	-ms-border-radius: 3px;
 	-o-border-radius: 3px;
 	border-radius: 3px;
-	border-left: 3px solid #54c2d0;
+	border-left: 1px dotted #dddddd;
 }
 
 .tbody-reportes tr td {
 	text-align: center;
 	border: 1px dotted #dddddd;
 	padding: 5px;
-	color: #555;
+	color: #10133F;
 	max-width: 115px;
 	min-width: 115px;
 }
@@ -6052,7 +6052,7 @@ span.jPag-snext-img {
 }
 
 .thead-edc #Datos1 {
-	background: #54c2d0;
+	background: #004574;
 	color: #FFF;
 	width: 660px;
 	float: left;
@@ -6073,7 +6073,7 @@ span.jPag-snext-img {
 	width: 660px;
 	background: white;
 	border-bottom: 1px dotted #bbbbbb;
-	border-left: 3px solid #54c2d0;
+	border-left: 0;
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
 	-ms-border-radius: 3px;
@@ -6082,7 +6082,7 @@ span.jPag-snext-img {
 	-webkit-box-shadow: rgba(51, 51, 51, 0.09) 0 1px 1px;
 	-moz-box-shadow: rgba(51, 51, 51, 0.09) 0 1px 1px;
 	box-shadow: rgba(51, 51, 51, 0.09) 0 1px 1px;
-	color: #54c2d0 !important;
+	color: #10133f !important;
 }
 
 .thead-edc #Datos2 td {
@@ -6491,7 +6491,7 @@ p.ben-txt {
 
 #datos-principales-AU {
 	font-size: 15px;
-	background: none repeat scroll 0 0 #40476c;
+	background: none repeat scroll 0 0 #004574;
 	-webkit-border-radius: 10px 10px 0 0;
 	-moz-border-radius: 10px 10px 0 0;
 	-ms-border-radius: 10px 10px 0 0;
@@ -6502,7 +6502,7 @@ p.ben-txt {
 	width: auto;
 	border: solid 1px;
 	float: left;
-	margin-left: 2px;
+
 }
 
 #datos-principales-AU td {
@@ -6598,14 +6598,14 @@ p.ben-txt {
 	-ms-border-radius: 3px;
 	-o-border-radius: 3px;
 	border-radius: 3px;
-	border-left: 3px solid #54c2d0;
+	border-left: 1px dotted #dddddd;
 }
 
 .tbody-reportes-AU tr td {
 	text-align: center;
 	border: 1px dotted #dddddd;
 	padding: 5px;
-	color: #555;
+	color: #10133f;
 }
 
 .cell-AU td {
