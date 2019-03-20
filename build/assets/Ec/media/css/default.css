@@ -7486,3 +7486,15 @@ select.ui-datepicker-month, select.ui-datepicker-year {
 	-moz-appearance: none;
 	appearance: none;
 }
+
+#btn-new-mas, #btn-new-suc {
+	height: 39px;
+}
+
+#pass_suc {
+	margin-top: 5px;
+}
+
+#agregarSuc {
+	height: 38px;
+}
