@@ -5344,7 +5344,7 @@ li#select-empresa select {
 	float: left;
 	padding: 3px;
 	margin-bottom: 5px;
-
+	border: 1px solid #bbbbbb;
 
 }
 
@@ -5368,12 +5368,9 @@ li#select-empresa select {
 	float: left;
 	padding: 3px;
 	margin-bottom: 5px;
-	background: #f3f3f3;
+	background: #fff;
 	border: 1px solid #bbbbbb;
-	border-left: 5px solid #ffdd00;
-	-webkit-box-shadow: rgba(51, 51, 51, 0.5) 0 1px 1px;
-	-moz-box-shadow: rgba(51, 51, 51, 0.5) 0 1px 1px;
-	box-shadow: rgba(51, 51, 51, 0.5) 0 1px 1px;
+
 }
 
 #detalleLote-3 {
@@ -6535,12 +6532,13 @@ p.ben-txt {
 }
 
 .tooltip-funcionesAU {
-	color: white !important;
-	background: linear-gradient(#ffdd00, #004574) repeat scroll 0 0 #ffdd00;
-	border: medium none !important;
-	border-radius: 6px 6px 6px 6px;
-	/*box-shadow: 4px 4px 4px #555555;*/
-	color: #FFF;
+
+	/* background: linear-gradient(#ffdd00, #004574) repeat scroll 0 0 #ffdd00; */
+	background-color: white!important;
+	border: 1px solid #ddd !important;
+	border-radius: 0px 0px 0px 17px!important;
+	box-shadow: none!important;
+	color: #10133f!important;
 	min-width: 20px;
 	opacity: 1 !important;
 	padding: 5px;
@@ -6630,7 +6628,7 @@ p.ben-txt {
 
 .cell-AU {
 	margin-left: 31px;
-	background: none repeat scroll 0 0 #EAFFFF !important;
+	background: none repeat scroll 0 0 #10133f !important;
 }
 
 /*.tbody-CC td, .table-text-aut td, .tbody-reportes td{
