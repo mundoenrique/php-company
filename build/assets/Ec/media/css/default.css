@@ -201,9 +201,9 @@ table {
 	font-weight: 500;
 	src: url('../fonts/prelo-medium-webfont.eot');
 	src: url('../fonts/prelo-medium-webfont.eot?#iefix') format('embedded-opentype'),
-				url('../fonts/prelo-medium-webfont.woff2') format('woff2'),
-				url('../fonts/prelo-medium-webfont.woff') format('woff'),
-				url('../fonts/prelo-medium-webfont.ttf') format('truetype');
+			 url('../fonts/prelo-medium-webfont.woff2') format('woff2'),
+			 url('../fonts/prelo-medium-webfont.woff') format('woff'),
+			 url('../fonts/prelo-medium-webfont.ttf') format('truetype');
 }
 @font-face {
   font-family: "prelo";
@@ -362,7 +362,7 @@ samp {
 
 .img-back {
 	height: 100px;
-	background-image: url(../img/BannersCEOBancoPichincha.svg);
+	background-image: url('../img/banner-pichincha.svg');
 	background-size: 100%;
 	background-repeat:no-repeat;
 	margin-bottom: 25px;
