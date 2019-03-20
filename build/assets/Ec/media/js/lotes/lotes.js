@@ -159,7 +159,7 @@ $('#actualizador').show();
 
         batch = "<tr><td id='icon-batchs' class="+color+"><span aria-hidden='true' class='icon' data-icon=''></span></td>";
         batch += "<td>"+v.numLote+"</td><td id='td-nombre'>"+v.nombreArchivo+"</td><td class='field-date'>"+v.fechaCarga+"</td><td>"+v.descripcion+"</td>";
-        batch += "<td id='icons-options'><a "+elimina+" id='borrar' title='Eliminar lote' data-idTicket="+v.idTicket+" data-idLote='"+v.idLote+"' data-arch='"+v.nombreArchivo+"'><span aria-hidden='true' class='icon' data-icon='&#xe067;'></span></a>";
+        batch += "<td id='icons-options'><a "+elimina+" id='borrar' title='Eliminar Lote' data-idTicket="+v.idTicket+" data-idLote='"+v.idLote+"' data-arch='"+v.nombreArchivo+"'><span aria-hidden='true' class='icon' data-icon='&#xe067;'></span></a>";
         batch += "<a "+confirma+" id='detalle' title='"+title+"' data-idTicket="+v.idTicket+" data-edo="+v.estatus+" data-forma="+forma+"><span aria-hidden='true' class='icon' data-icon="+icon+"></span></a></td></tr>";
 
         $("#actualizador").hide();
@@ -227,7 +227,7 @@ $("#table-text-lotes").on("click","#borrar",
     var lote = $(this).attr("data-idLote");
     var arch = $(this).attr("data-arch");
 
-    confirmar( $(this).parents('tr'), ticket, lote, arch, "Eliminar lote" );
+    confirmar( $(this).parents('tr'), ticket, lote, arch, "Eliminar Lote" );
 
   }
 );

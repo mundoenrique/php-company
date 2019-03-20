@@ -498,7 +498,7 @@ class Dashboard extends CI_Controller {
 					$productos = $responseMenuEmpresas;
 				}
 
-				$titulo = "Selección del Producto";
+				$titulo = "Selección del producto";
 				$lastSessionD = $this->session->userdata('lastSession');
 				$titlePage= "Conexión Empresas Online - Productos";
 				$FooterCustomInsertJS=[];

@@ -55,11 +55,11 @@
 		<div class="campo">
 			<label for="date" class="item"><?= lang('TITULO_REPORTES_RANGO'); ?></label>
 			<span class="range">
-				<label class="item date-range">Fecha Inicial</label>
+				<label class="item date-range">Fecha inicial</label>
 				<input type="text" id="first-date" class="date-rep" placeholder="DD/MM/AA" disabled required>
 			</span>
 			<span  class="range">
-				<label class="item date-range">Fecha Final</label>
+				<label class="item date-range">Fecha final</label>
 				<input type="text" id="last-date" class="date-rep" placeholder="DD/MM/AA" disabled required>
 			</span>
 		</div>

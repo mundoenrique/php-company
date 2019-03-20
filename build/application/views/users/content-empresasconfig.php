@@ -16,8 +16,8 @@ $urlCdn = get_cdn();
 				echo "<script>alert('".$listaEmpr[0]['msg']."'); location.reload();</script>";
 			}
 		}else{
-			echo "<option value=''>Selecciona una Empresa</option>";
-			foreach ($listaEmpr[0]->lista as $listado) {				
+			echo "<option value=''>Seleccione una empresa</option>";
+			foreach ($listaEmpr[0]->lista as $listado) {
 				echo "<option data-rif='$listado->acrif' data-nombre='$listado->acnomcia' data-accodcia='$listado->accodcia'>$listado->acnomcia</option>";
 			}
 		}
@@ -96,13 +96,13 @@ $urlCdn = get_cdn();
 			<button id='agregarContact' class='agregar-contact' ><?php echo lang('EMP_BTN_AGREGAR_CONTACT_EMPRESA'); ?></button>
 		</div>
 		<div id='contactos'>
-		
+
 	<div id="datos-1">
 		<p id="user-name">Listado de contactos asociados</p>
 	</div>
 	<div id ="contenedor_contacts">
-	 
-	</div>		
+
+	</div>
 	<div id="contact-paginacion"></div>
 	<div id="opciones-btn">
 		<button id='eliminar_contact'><?php echo lang('EMP_BTN_ELIM_CONTACT'); ?></button>
@@ -150,10 +150,10 @@ $urlCdn = get_cdn();
 					<option value="" selected="selected">Seleccionar tipo</option>
 				</select>
 			</span>
-			
+
 
 		</div>
-	
+
 	<div id="opciones-btn">
 		<button id='agregar' type"submit"><?php echo lang('EMP_BTN_ADD_CONTACT'); ?></button>
 		<button id='limpiar'><?php echo lang('EMP_BTN_LIMPIAR_CONTACT'); ?></button>

@@ -201,9 +201,9 @@ table {
 	font-weight: 500;
 	src: url('../fonts/prelo-medium-webfont.eot');
 	src: url('../fonts/prelo-medium-webfont.eot?#iefix') format('embedded-opentype'),
-				url('../fonts/prelo-medium-webfont.woff2') format('woff2'),
-				url('../fonts/prelo-medium-webfont.woff') format('woff'),
-				url('../fonts/prelo-medium-webfont.ttf') format('truetype');
+			 url('../fonts/prelo-medium-webfont.woff2') format('woff2'),
+			 url('../fonts/prelo-medium-webfont.woff') format('woff'),
+			 url('../fonts/prelo-medium-webfont.ttf') format('truetype');
 }
 @font-face {
   font-family: "prelo";
@@ -281,7 +281,7 @@ body {
 	font-family: "preloslap", sans-serif;
 	font-size: 12px;
 	line-height: 17px;
-	font-weight: 700;
+	font-weight: 500;
 }
 
 h1,
@@ -360,6 +360,19 @@ samp {
 	font-family: Consolas, monaco, monospace, serif;
 }
 
+.img-back {
+	height: 100px;
+	background-image: url('../img/banner-pichincha.svg');
+	background-size: 100%;
+	background-repeat:no-repeat;
+	margin-bottom: 25px;
+	padding-top: 40px;
+	padding-left: 30px;
+}
+.welcome-title {
+	line-height: 30px;
+}
+
 nav ul.menu {
 	margin: 0;
 	overflow: hidden;
@@ -406,6 +419,10 @@ fieldset {
 	margin: 0;
 	overflow: hidden;
 	padding: 0;
+}
+
+option:hover {
+	box-shadow: #ffd000 !important;
 }
 
 input,
@@ -6188,7 +6205,6 @@ margin-left: 250px;
 #sPrograms{
 	background: white;
 	color: #0F265C;
-	white-space: nowrap;
 }
 
 #sEmpresa:hover,

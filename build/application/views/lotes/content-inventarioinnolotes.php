@@ -40,7 +40,7 @@ $info;
 			</li>
 		</ol>
 
-		<div style="display: block;" id="lotes-general" class="elem-hidden">	
+		<div style="display: block;" id="lotes-general" class="elem-hidden">
 
 		<div id='filtroOS' >
 
@@ -51,19 +51,19 @@ $info;
 			<form action="/innominada/inventario"></form>
 			<div id="lotes-contenedor" >
 				<span class="info-OD">
-					<h5>Nro. Lote</h5>
+					<h5>Lote Nro.</h5>
 					<input id='nro_lote' class="required login" placeholder="" value="" onfocus="javascript:this.value=''"/>
 				</span>
 				<span class="info-OD">
-					<h5>Fecha Inicial</h5>
+					<h5>Fecha inicial</h5>
 					<input id='fecha_inicial' class="required login" placeholder="DD/MM/AA" value="" onfocus="javascript:this.value=''"/>
 				</span>
 				<span class="info-OD">
-					<h5>Fecha Final</h5>
+					<h5>Fecha final</h5>
 					<input id='fecha_final' class="required login" placeholder="DD/MM/AA" value="" onfocus="javascript:this.value=''"/>
 				</span>
 			</div>
-			
+
 			<div id="batchs-last">
 				<button id='buscarOS'>Buscar</button>
 			</div>
@@ -72,7 +72,7 @@ $info;
 
 			<div id="top-batchs">
 				<span aria-hidden="true" class="icon" data-icon=""></span>
-				Lotes Procesados				
+				Lotes procesados
 			</div>
 			<div id="lotes-contenedor-2">
 				<div id="table-text-lotes_wrapper" class="dataTables_wrapper" role="grid">
@@ -83,13 +83,13 @@ $info;
 
 								</th>
 								<th>
-									Nro. Lote
+									Lote Nro.
 								</th>
 								<th id="td-nombre">
-									Cant. Tarjetas
+									Cant. de tarjetas
 								</th>
 								<th>
-									Fecha Emisi&oacute;n
+									Fecha emisi&oacute;n
 								</th>
 								<th>
 									Estatus
@@ -131,7 +131,7 @@ $info;
 
 			<div id="top-batchs" class="listado_2" style="display:none">
 				<span aria-hidden="true" class="icon" data-icon=""></span>
-				Tarjetas			
+				Tarjetas
 			</div>
 			<div id="lotes-contenedor-2" class="listado_2" style="display:none">
 				<div>
@@ -142,7 +142,7 @@ $info;
 
 								</th>
 								<th class="fecha-carga">
-									Nro. Lote
+									Lote Nro.
 								</th>
 								<th id="td-nombre">
 									Nro. Tarjeta

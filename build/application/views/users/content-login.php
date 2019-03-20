@@ -4,7 +4,9 @@ $pais = $this->uri->segment(1);
 ?>
 
 <div id="content">
-	<h1><?= lang('WELCOME_TITLE'); ?></h1>
+	<div class="img-back">
+		<h1 class="welcome-title"><?= lang('WELCOME_TITLE'); ?></h1>
+	</div>
 	<p><?= lang('WELCOME_MESSAGE') ?></p>
 
 	<ul class='acordion kwicks kwicks-horizontal' >

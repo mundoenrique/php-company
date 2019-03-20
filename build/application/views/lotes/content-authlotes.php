@@ -86,7 +86,7 @@
 	if($entrar){
 
 		if(count($info->listaPorFirmar)==0 && count($info->listaPorAutorizar)==0){
-			echo "<div id='products-general' style='margin-top:10px'><h2 >No hay lotes por autorizar</h2></div>";
+			echo "<div id='products-general' style='margin-top:10px'><h2 >No hay Lotes por autorizar</h2></div>";
 		}
 
 	if( count($info->listaPorFirmar)>0 ){

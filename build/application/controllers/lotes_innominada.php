@@ -100,6 +100,7 @@ class Lotes_innominada extends CI_Controller {
         //VALIDATE COUNTRY
         np_hoplite_countryCheck($urlCountry);
         $this->lang->load('dashboard');
+        $this->lang->load('consultas');
         $this->lang->load('lotes');
         $this->lang->load('users');
         $this->load->library('parser');

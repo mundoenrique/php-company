@@ -1,6 +1,6 @@
 <?php
-$lang['WELCOME_TITLE']='Bienvenido a Conexión Empresas Online';
-$lang['WELCOME_MESSAGE']='Las gestiones de los programas prepago de su empresa son más eficientes, seguras y rápidas en Conexión Empresas Online.';
+$lang['WELCOME_TITLE']='Bienvenido a<br> Conexión Empresas';
+$lang['WELCOME_MESSAGE']='Las gestiones de los programas prepago de su empresa son más eficientes, seguras y rápidas en <br>Conexión Empresas Online.';
 
 $lang['WIDGET_LOGIN_TITLE']="Cliente afiliado";
 $lang['WIDGET_ADDCLIENT_TITLE']="Nuevo Cliente";
@@ -44,14 +44,14 @@ $lang['BOTON_MOD_USER'] = 'Modificar datos de usuario';
 $lang['BOTON_CAMBIO_CLAVE'] = 'Cambiar contraseña';
 
 // TAB EMPRESA
-$lang['EMP_TITLE_CONFIG'] = 'Configuración de empresa';
+$lang['EMP_TITLE_CONFIG'] = 'Configuración de la empresa';
 $lang['EMP_CARGANDO'] = 'Cargando...';
-$lang['EMP_IDENTIFICADOR'] = 'Identificador empresa';
+$lang['EMP_IDENTIFICADOR'] = 'Nro. identificador:';
 $lang['EMP_NOMBRE'] = 'Nombre: ';
 $lang['EMP_RAZON_SOCIAL'] = 'Razón social: ';
 $lang['EMP_CONTACTO'] = 'Contacto: ';
-$lang['EMP_DIR_UBICACION'] = 'Direccion ubicación: ';
-$lang['EMP_DIR_FACTURACION'] = 'Direccion facturación: ';
+$lang['EMP_DIR_UBICACION'] = 'Dirección: ';
+$lang['EMP_DIR_FACTURACION'] = 'Dirección de facturación: ';
 $lang['TITLE_TELEFONO1'] = 'Teléfono 1: ';
 $lang['TITLE_TELEFONO2'] = 'Teléfono 2: ';
 $lang['TITLE_TELEFONO3'] = 'Teléfono 3: ';
@@ -61,7 +61,7 @@ $lang['EMP_BTN_ADD_CONTACT'] = 'Agregar';
 $lang['EMP_BTN_ELIM_CONTACT'] = 'Eliminar';
 $lang['EMP_BTN_MODIF_CONTACT'] = 'Modificar';
 $lang['EMP_BTN_AGREGAR_CONTACT'] = 'Añadir';
-$lang['EMP_BTN_AGREGAR_CONTACT_EMPRESA'] = 'Agregar Contacto';
+$lang['EMP_BTN_AGREGAR_CONTACT_EMPRESA'] = 'Agregar contacto';
 $lang['EMP_BTN_LIMPIAR_CONTACT'] = 'Limpiar';
 $lang['EMP_ID'] = 'ID';
 $lang['EMP_CONTACT_TIPO'] = 'Tipo';
@@ -79,12 +79,12 @@ $lang['SUC_ESTADO'] = 'Departamento: ';
 $lang['SUC_CIUDAD'] = 'Provincia: ';
 $lang['SUC_TELEFONO'] = 'Teléfono: ';
 $lang['SUC_CONTACTO'] = 'Contacto: ';
-$lang['SUC_AREA'] = 'Código de Área: ';
-$lang['SUC_CODIGO'] = 'Sucursal Cod.: ';
+$lang['SUC_AREA'] = 'Código de área: ';
+$lang['SUC_CODIGO'] = 'Cód. de sucursal: ';
 $lang['SUC_BTN_MODIFICAR'] = 'Modificar';
 $lang['SUC_BTN_NEW_SUC'] = 'Nueva sucursal';
 $lang['SUC_BTN_NEW_MASV'] = 'Subir archivo';
-$lang['SUC_TITLE_NEW_SUC'] = 'Gestión de Sucursal';
+$lang['SUC_TITLE_NEW_SUC'] = 'Gestión de sucursal';
 $lang['SUC_BTN_UPFILE'] = 'Subir archivo de nuevas sucursales';
 
 //TAB DESCARGAS

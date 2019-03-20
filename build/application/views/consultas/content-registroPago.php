@@ -15,7 +15,7 @@ $urlCdn = base_cdn();
 			</li>
 			<li>
 				<a href="$urlBase/consulta/ordenes-de-servicio" rel="section">
-					Ordenes de Servicio /
+					Órdenes de servicio /
 				</a>
 			</li>
 			<li class="breadcrumb-item-current">
@@ -32,7 +32,7 @@ $urlCdn = base_cdn();
 			<div id="top-batchs"><span aria-hidden="true" class="icon" data-icon="&#xe035;"></span><?php echo lang('ORDENES_DE_SERVICIO'); ?>
 			</div>
 			<div id="lotes-contenedor">
-				
+
 				<table id="tabla-datos-general" class="tabla-reportes-consulta">
 					<thead>
 						<tr id="datos-principales">
@@ -107,13 +107,13 @@ $urlCdn = base_cdn();
 						</tbody>
 					</table>
 				</div>
-				
+
 			</div>
 			<form  id='lotes-contenedor' method='post' action="<?php echo $urlBase ?>/consulta/ordenes-de-servicio">
 				<input type='hidden' id='data-OS' name='data-OS' value='<?php echo $_POST['data-OS'] ?>'/>
 				<button id="regresar" type="submit">Regresar</button>
 			</form>
-			
+
 		</div>
 	</div>
 

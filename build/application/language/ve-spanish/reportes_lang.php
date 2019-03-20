@@ -30,7 +30,7 @@ $lang['GRAFICO_TITULO_TEXT_TARJETAS']= "Tarjetas Emitidas";
 
 
 // CONTENEDOR DE CONSULTA - GENERAL DE TODOS LOS REPORTES
-$lang['REPORTES_SELECCION_EMPRESA']= "Selección de Empresa";
+$lang['REPORTES_SELECCION_EMPRESA']= "Selección de empresa";
 $lang['TITULO_REPORTES_RANGO']= "Rango";
 $lang['TITULO_REPORTES_FECHAINI']= "Fecha inicial";
 $lang['TITULO_REPORTES_FECHAFIN']= "Fecha final";

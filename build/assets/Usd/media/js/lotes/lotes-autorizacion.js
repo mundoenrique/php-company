@@ -201,7 +201,7 @@ $item = $(this);
       var acnumlote = [$(this).attr('numlote')];
 
       var canvas = "<div id='dialog-confirm'>";
-          canvas +="<p>Nro. Lote: "+acnumlote+"</p>";
+          canvas +="<p>Lote Nro.: "+acnumlote+"</p>";
           canvas +="<fieldset><input type='password' id='pass' placeholder='Ingrese su contraseña' size=30/>";
           canvas += "</fieldset><h5 id='msg'></h5></div>";
 
@@ -295,7 +295,7 @@ $('#lotes-2').on('click','#borrar', function(){
       var ctipolote = $(this).attr('ctipolote')+",";
 
       var canvas = "<div id='dialog-confirm'>";
-      canvas +="<p>Nro. Lote: "+acnumlote+"</p>";
+      canvas +="<p>Lote Nro.: "+acnumlote+"</p>";
       canvas += "<fieldset><input type='password' id='pass' size=30 placeholder='Ingrese su contraseña' class='text ui-widget-content ui-corner-all'/>";
       canvas += "<h5 id='msg'></h5></fieldset></div>";
       tabla = $(this).parents('table').attr('id');
@@ -303,7 +303,7 @@ $('#lotes-2').on('click','#borrar', function(){
       if( (!$('#clave').val()&&tabla=='table-firmar') || (!$('#claveAuth').val()&&tabla=='table-auth') ){
 
       $(canvas).dialog({
-        title: "Eliminar lote",
+        title: "Eliminar Lote",
         modal: true,
         position: { my: "center top", at: "center 500" },
         bgiframe: true,

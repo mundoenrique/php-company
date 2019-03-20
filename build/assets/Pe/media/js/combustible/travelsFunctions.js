@@ -226,7 +226,7 @@ function validar_campos()
                 dateConfirm: 'La consulta no puede ser mayor a un mes'
             },
             'last-date': {
-                required: 'Indique la fecha final',
+                required: 'Indique la Fecha final',
                 dateConfirm: 'La consulta no puede ser mayor a un mes'
             }
         }

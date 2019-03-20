@@ -11,7 +11,7 @@ var datatable;
 		});
 	}
 
-  //Eliminar lote
+  //Eliminar Lote
 
     function eliminar_lote(idlote, numlote){
 
@@ -87,7 +87,7 @@ var datatable;
 				}
 		});
     }
-  //--Fin Eliminar lote
+  //--Fin Eliminar Lote
 
 	function validate(){
 		var

@@ -261,7 +261,7 @@ function validar_campos()
             'first-hour': 'La hora de inicio debe estar en formato 24h',
             'first-minute': 'Minutos de inicio debe estar entre 00 y 59',
             'last-date': {
-                required: 'Indique la fecha final',
+                required: 'Indique la Fecha final',
                 dateConfirm: 'La fecha de fin no puede ser anterior a la fecha inicio'
             },
             'last-hour': 'La hora de final debe estar en formato 24h',
