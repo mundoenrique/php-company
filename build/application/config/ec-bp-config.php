@@ -2,7 +2,7 @@
 
 //País
 $config['country']='Ec-bp';
-
+$config['urlWS'] = 'http://172.24.6.78:10003/NovoEolWebInterfaceWS/webresources/';
 /*
 |--------------------------------------------------------------------------
 | Base CDN URL
@@ -10,20 +10,16 @@ $config['country']='Ec-bp';
 */
 
 //RUTA BASE PARA ARCHIVOS CDN  Ejemplo: https://cdn.novopayment.dev/empresas/Usd/
-//$config['base_url_cdn'] =  BASE_CDN_URL.$config['country'].'/';
-$config['base_url_cdn'] =  BASE_CDN_URL.'Ec/';
+$config['base_url_cdn'] =  BASE_CDN_URL.$config['country'].'/';
 
 //URL PARA CONECTAR POR SFTP A SERVIDOR
-//$config['URL_TEMPLOTES'] = 'sftp://172.24.6.102:22/u01/app/data/lotes/temp/'.$config['country'].'/';
-$config['URL_TEMPLOTES'] = 'sftp://172.24.6.102:22/u01/app/data/lotes/temp/'.'Ec/';
+$config['URL_TEMPLOTES'] = BULK_FTP_URL.$config['country'].'/';
 
 //PATCH CARPETA DONDE SE SUBEN LOS LOTES Ejemplo: '/opt/httpd-2.4.4/vhost/cdn/empresas/Usd/bash/''
-// $config['FOLDER_UPLOAD_LOTES'] = '/opt/httpd-2.4.4/vhost/cdn/empresas/'.$config['country'].'/'.'bash/';
-$config['FOLDER_UPLOAD_LOTES'] = '/opt/httpd-2.4.4/vhost/cdn/empresas/'.'Ec/'.'bash/';
+$config['FOLDER_UPLOAD_LOTES'] = BULK_LOCAL_PATH.$config['country'].'/'.'bash/';
 
 //PATH CARPETA BASE CDN DEL PAÍS
-// $config['CDN'] = BASE_CDN_PATH.$config['country'].'/';
-$config['CDN'] = BASE_CDN_PATH.'Ec/';
+$config['CDN'] = BASE_CDN_PATH.$config['country'].'/';
 
 /*
 |--------------------------------------------------------------------------

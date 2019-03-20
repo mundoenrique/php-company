@@ -1,0 +1,37 @@
+.filters {
+	display: block;
+	float:left;
+	padding-left: 10px;
+	padding-right:10px;
+	width: 170px;
+	margin: 5px;
+	min-height: 60px;
+}
+
+.label-input {
+	color: #0072c0;
+	float: left;
+	text-align: left;
+	width: 100%;
+}
+
+input {
+	border: 1px solid #dddddd;
+	float: left;
+	width: 160px;
+}
+
+.search {
+	margin-top: 20px;
+	float: right;
+}
+
+.balance {
+	border-color: #FFF;
+}
+
+.line {
+	margin-left: 120px;
+	margin-right: 120px;
+	min-height: 70px;
+}
