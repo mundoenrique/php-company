@@ -277,7 +277,7 @@
 						if($submenu->idModulo == "TICARG"||$submenu->idModulo == "TIINVN"){
 							if($menuBoolean == false) {
 								$opMenuSubmenu.= "<li>
-													<a href='#'>Innominadas</a>
+													<a href='#'>Cuentas Innominadas</a>
 													SUBMENU-INNO
 												</li>";
 								$menuBoolean = true;
