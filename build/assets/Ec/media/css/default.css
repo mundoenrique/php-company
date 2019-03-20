@@ -7478,7 +7478,7 @@ a.style-companies-item > span.icon:before,
 
 select.ui-datepicker-month, select.ui-datepicker-year {
 	overflow: hidden;
-	background: #fff url("http://www.csslab.cl/ejemplos/select/arrowdown.gif") no-repeat 90% center !important;
+	background: #fff url("/site-conexionempresas/build/assets/Ec/media/img/arrowdown.gif") no-repeat 90% center !important;
 }
 
 select.ui-datepicker-month, select.ui-datepicker-year {
