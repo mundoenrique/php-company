@@ -18,13 +18,15 @@ if ( ! function_exists('np_hoplite_Encryption'))
 	 * @param  string $data
 	 * @return string
 	 */
-	function np_Hoplite_Encryption($data)
+	function np_Hoplite_Encryption($data, $service = '')
 	{
 		$data = json_decode($data);
 		if(isset($data->pais) && $data->pais === 'Ec') {
 			$data->pais = 'Co';
 		}
 		$data = json_encode($data);
+
+		log_message('DEBUG', 'REQUEST ' . $service . ': ' . $data);
 
 		$CI =& get_instance();
 		$dataB = base64_encode($data);

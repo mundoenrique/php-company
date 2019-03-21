@@ -45,16 +45,16 @@
                 </div>
             </div>
             <div id="psw_info" style="display: none;">
-                <h5>Requerimientos de contraseña:</h5>
-                <ul style="list-style-type: none; padding: 0px; margin: 0px; font-size: 11px;">
-                    <li id="letter" class="invalid">Debe tener al menos <strong>una letra</strong></li>
-                    <li id="capital" class="invalid">Debe tener al menos una <strong>letra mayúscula</strong></li>
-                    <li id="number" class="invalid">Debe tener de <strong>1 a 3 números</strong></li>
-                    <li id="length" class="invalid">Debe tener <strong>mínimo 8 y máximo 15 caracteres</strong></li>
-                    <li id="consecutivo" class="invalid">No puede tener más de <strong>3 caracteres</strong> iguales consecutivos</li>
-                    <li id="especial" class="invalid">Tener al menos <strong>un caracter especial</strong> (ej: ! @ ? + - . , #)</li>
-                </ul>
-            </div>
+    					<h5>Requerimientos para configurar la contraseña. La clave debe tener</h5>
+    					<ul style="list-style-type: none; padding: 0px; margin: 0px; font-size: 11px;">
+								<li id="letter" class="invalid">De 8 a 15 <strong>Caracteres</strong></li>
+								<li id="capital" class="invalid">Al menos una <strong>letra</strong></li>
+								<li id="number" class="invalid">Al menos una <strong>letra mayúscula</strong></li>
+								<li id="length" class="invalid">Debe 1 a 3 <strong>números</strong></li>
+								<li id="especial" class="invalid">Al menos un<strong>caracter especial</strong> (ej: * & $ # . ?)</li>
+								<li id="consecutivo" class="invalid">No debe tener más de 2 <strong>caracteres</strong> iguales consecutivos</li>
+    				</ul>
+</div>
         </div>
     </div>
 </div>

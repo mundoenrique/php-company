@@ -6153,8 +6153,9 @@ margin-left: 250px;
 	float: right !important;
 	background: white;
 	border: solid 1px #FFDD00;
-	margin-top: 0px !important;
+	margin-top: 5px;
 	font-size: 14px;
+	height: 38px;
 }
 
 #btn-modificar:hover,
@@ -7466,4 +7467,20 @@ select.ui-datepicker-month, select.ui-datepicker-year {
 	-webkit-appearance: none;
 	-moz-appearance: none;
 	appearance: none;
+}
+
+#btn-new-mas, #btn-new-suc {
+	height: 39px;
+}
+
+#pass_suc {
+	margin-top: 5px;
+}
+
+#agregarSuc {
+	height: 38px;
+}
+
+#btn-modif-suc {
+	margin-top: 5px;
 }
