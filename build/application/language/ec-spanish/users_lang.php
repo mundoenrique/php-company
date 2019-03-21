@@ -1,7 +1,7 @@
 <?php
 $lang['WELCOME_TITLE']='Bienvenido a<br> Conexión Empresas';
 $lang['WELCOME_MESSAGE']='Con este sistema las gestiones de pago de su empresa son más eficientes, seguras y rápidas. Empiece a disfrutar de todas las ventajas que le ofrece Conexión Empresas Online.';
-$lang['WIDGET_LOGIN_TITLE']="Cliente afiliado Colombia";
+$lang['WIDGET_LOGIN_TITLE']="Cliente afiliado Pichincha";
 $lang['WIDGET_ADDCLIENT_TITLE']="Nuevo Cliente";
 
 $lang['LOGIN_INFO']='Ventas e información a empresas';
