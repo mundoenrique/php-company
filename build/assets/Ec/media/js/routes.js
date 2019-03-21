@@ -9,3 +9,9 @@ function formatterDate(date) {
 
 	return new Date(dateStr);
 }
+
+
+function picker(){
+	$('input[type=text]').attr('autocomplete','off');
+}
+picker();
