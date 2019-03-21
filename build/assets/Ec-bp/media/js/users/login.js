@@ -179,50 +179,13 @@ var ingresar_ = function() {
 $(function() {
 
     /*Inicializar Button*/
-    var button = '<button id="button-login" name="login">Login</button>';
+    var button = '<button id="button-login" name="login">Ingresar</button>';
     $('#sliderbutton-login').addClass('stl-button').append(button);
     /*Inicializar sliderbutton*/
 
   $('#button-login').on('click', function() {
         ingresar_();
      });
-
-    // $('.ui-slider-handle').append('<p class="flecha"> >> </p>');
-
-    // $('#user_login').on('keyup', function(ev) {
-
-    //     if ($("#user_login").val().length < maxchars) {
-    //         limit = false;
-    //     }
-    //     if (limit) {
-    //         marcarError("Máximo " + maxchars + " caracteres");
-    //     }
-
-    //     if ($("#user_login").val().length == maxchars) {
-    //         limit = true;
-    //         $("#user_login").attr('maxlength', maxchars);
-    //     }
-
-
-    //     if ($(this) != '') {
-    //         $(this).removeClass('error-login');
-    //     }
-
-    //     if (validarAlfanumerico($("#user_login"))) {
-    //         $('#sliderbutton-login').sliderbutton("enable");
-    //     } else if ($(this).val() != '' && $(this).val() != undefined) {
-    //         marcarError("Caracter no permitido");
-    //     }
-
-    // });
-
-    // $('#user_pass').on('keyup', function() {
-    //     if ($(this) != '') {
-    //         $(this).removeClass('error-login');
-    //     }
-    // });
-
-    //--Fin validar caracteres alfanumericos usuario
 
     var isMobile = false; //initiate as false
     // device detection

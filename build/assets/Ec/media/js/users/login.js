@@ -179,7 +179,7 @@ var ingresar_ = function() {
 $(function() {
 
     /*Inicializar Button*/
-    var button = '<button id="button-login" name="login">Login</button>';
+    var button = '<button id="button-login" name="login">Ingresar</button>';
     $('#sliderbutton-login').addClass('stl-button').append(button);
     /*Inicializar sliderbutton*/
 
