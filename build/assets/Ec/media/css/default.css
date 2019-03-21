@@ -6132,11 +6132,11 @@ span.jPag-snext-img {
 
 .OSinfo {
 	margin-left: 31px;
-	background: none repeat scroll 0 0 #EAFFFF !important;
+	background: none repeat scroll 0 0 #004574 !important;
 }
 
 .OSinfo td {
-	color: #54c2d0 !important;
+	color: #fff !important;
 	max-width: 65px !important;
 	min-width: 65px !important;
 }
@@ -6608,12 +6608,12 @@ p.ben-txt {
 }
 
 .cell-AU td {
-	color: #54c2d0 !important;
+	color: #101375 !important;
 }
 
 .cell-AU {
 	margin-left: 31px;
-	background: none repeat scroll 0 0 #10133f !important;
+	background: none repeat scroll 0 0 #fff !important;
 }
 
 /*.tbody-CC td, .table-text-aut td, .tbody-reportes td{
