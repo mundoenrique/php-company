@@ -7,6 +7,7 @@ $lang['TITULO_LOTES_PROGRAMA']= "Programa";
 $lang['TITULO_LOTES_TIPOLOTES']= "Tipo de Lote";
 $lang['TITULO_LOTES_ARCHIVO']= "Archivo";
 $lang['TITULO_LOTES_BTNCARGAR']= "Cargar Lote";
+$lang['TITULO_CRITERIOSBUSQ']="Criterio de búsqueda";
 
 $lang['ENLACE_NO_PERMITIDO'] = 'Enlace no permitido';
 
@@ -40,6 +41,7 @@ $lang['TITULO_CREAR_BENEFICIARIO'] = 'Crear beneficiario';
 $lang['TITULO_LOTES_DETALLE']= "Detalles del Lote";
 $lang['TITULO_CUENTAS_INNO']= "Cuentas innominadas";
 $lang['TITULO_CUENTAS_INVINNO']= "Inventario de cuentas innominadas";
+$lang['DWL_XLS'] = 'Descargar Reporte';
 $lang['BREADCRUMB_AUTH']= "Autorizacion";
 $lang['BREADCRUMB_INICIO']= "Inicio";
 $lang['BREADCRUMB_LOTES']= "Lotes";

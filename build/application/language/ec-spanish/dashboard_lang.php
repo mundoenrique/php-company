@@ -1,9 +1,9 @@
 <?php
-$lang['SYSTEM_NAME']= "Empresas Online Ecuador";
+$lang['SYSTEM_NAME']= "Empresas Online Colombia";
 $lang['LAST_SESSION']="Última sesión";
-$lang['ID_FISCAL']= "RUC.";
-$lang['ID_PERSONA']= "DNI.";
-$lang['ID_IMPUESTO'] = 'IGV';
+$lang['ID_FISCAL']= "NIT.";
+$lang['ID_PERSONA']= "Cédula de identidad";
+$lang['ID_IMPUESTO'] = 'IVA';
 $lang['FOOTER'] ='Todos los derechos reservados.';
 //WIDGET EMPRESAS
 $lang['WIDGET_EMPRESAS_BTNSELECCIONAR']= "Seleccionar otra empresa";
@@ -28,7 +28,7 @@ $lang['BREADCRUMB_ORDEN_SERVICIO']= "Órdenes de servicio";
 $lang['BREADCRUMB_CALCULO_ORDEN_SERVICIO']= "Preliminar orden de servicio";
 $lang['BREADCRUMB_TARJETAHABIENTES'] = "Tarjetahabientes";
 $lang['BREADCRUMB_SERVICIOS'] = "Servicios";
-$lang['BREADCRUMB_TRANSMAESTRA'] = "Transferencia Maestra";
+$lang['BREADCRUMB_TRANSMAESTRA'] = "Transferencia maestra";
 $lang['BREADCRUMB_OTROS_PROGRAMS'] = 'Otros programas';
 $lang['BREADCRUMB_PH_BUSCAR'] = 'Buscar...';
 $lang['BREADCRUMB_TITL_BUSCAR'] = 'Buscar texto';
@@ -64,7 +64,7 @@ $lang['TEBPOL']= 'Actualización de datos'; // modulo emisión de poliza
 $lang['TEBDPG']= "Depósitos en garantía";
 $lang['SALDAM']= "Saldos amanecidos";
 $lang['TEBCOD']= "Generar consolidado";
-$lang['REPEDO']= "Estados de cuenta";
+$lang['REPEDO']= "Estado de cuenta";
 $lang['REPUSU']= "Actividad por usuario";
 $lang['REPPRO']= "Recargas realizadas";
 $lang['REPTAR']= "Tarjetas emitidas";

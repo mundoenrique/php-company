@@ -77,13 +77,13 @@ $nombreCompleto = $this->session->userdata('nombreCompleto');
 </div>
 
 <div id="psw_info" style="display: none;">
-    <h5>Requerimientos para configurar la contraseña. La clave debe tener</h5>
+    <h5>Requerimientos para configurar la contraseña. La clave debe tener:</h5>
     <ul style="list-style-type: none; padding: 0px; margin: 0px; font-size: 11px;">
-        <li id="letter" class="invalid">De 8 a 15 <strong>Caracteres</strong></li>
+        <li id="letter" class="invalid">De 8 a 15 <strong>caracteres</strong></li>
         <li id="capital" class="invalid">Al menos una <strong>letra</strong></li>
         <li id="number" class="invalid">Al menos una <strong>letra mayúscula</strong></li>
-        <li id="length" class="invalid">Debe 1 a 3 <strong>números</strong></li>
-        <li id="especial" class="invalid">Al menos un<strong>caracter especial</strong> (ej: * & $ # . ?)</li>
+        <li id="length" class="invalid">De 1 a 3 <strong>números</strong></li>
+        <li id="especial" class="invalid">Al menos un <strong>caracter especial</strong> (ej: * & $ # . ?)</li>
         <li id="consecutivo" class="invalid">No debe tener más de 2 <strong>caracteres</strong> iguales consecutivos</li>
     </ul>
 </div>
