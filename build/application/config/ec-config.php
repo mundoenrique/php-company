@@ -13,10 +13,10 @@ $config['country']='Ec';
 $config['base_url_cdn'] =  BASE_CDN_URL.$config['country'].'/';
 
 //URL PARA CONECTAR POR SFTP A SERVIDOR
-$config['URL_TEMPLOTES'] = BULK_FTP_URL.$config['country'].'/';
+$config['URL_TEMPLOTES'] = BULK_FTP_URL.'Co/';
 
 //PATCH CARPETA DONDE SE SUBEN LOS LOTES Ejemplo: '/opt/httpd-2.4.4/vhost/cdn/empresas/Usd/bash/''
-$config['FOLDER_UPLOAD_LOTES'] = BULK_LOCAL_PATH.$config['country'].'/'.'bash/';
+$config['FOLDER_UPLOAD_LOTES'] = BULK_LOCAL_PATH.'Co/bash/';
 
 //PATH CARPETA BASE CDN DEL PAÍS
 $config['CDN'] = BASE_CDN_PATH.$config['country'].'/';
