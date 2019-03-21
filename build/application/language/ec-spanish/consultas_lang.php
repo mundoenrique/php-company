@@ -1,4 +1,5 @@
 <?php
+$lang['TITULO_CEO']="Conexión empresas";
 $lang['TITULO_TARJETAHABIENTES']="Tarjetahabientes";
 $lang['TITULO_CONSULTA_OS']="Órdenes de servicio";
 $lang['TITULO_CRITERIOSBUSQ']="Criterio de búsqueda";
@@ -52,3 +53,9 @@ $lang['PLACEHOLDER_FECHA']='DD/MM/AA';
 $lang['PLACEHOLDER_REFERENCIA']='Referencia';
 $lang['PLACEHOLDER_MONTO']='Monto 100.50';
 $lang['PLACEHOLDER_CLAVE']='Ingrese clave';
+
+//Botón de pago
+
+$lang['PAG_OS_TITLE'] = 'Pagar Orden de servicio';
+$lang['PAG_OS_ENV_OK'] = 'Envío exitoso';
+$lang['PAG_OS_OK'] = 'El pago fue realizado de forma exitosa';

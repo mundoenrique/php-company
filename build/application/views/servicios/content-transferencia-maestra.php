@@ -56,14 +56,14 @@ $show_cl = (in_array("trapgo", $funciones)) ? '' : 'display:none';
                     <br>
                     <h5 style="float:left;"><?php echo "Monto" ?></h5>
                     <span>
-					<input id="amount" placeholder="Ingrese <?php echo "ingrese Monto" ?>" disabled/>
+					<input id="amount" placeholder="Ingrese monto" disabled/>
                 </span>
                 </div>
 
                 <div id="search-3" style="padding-top: 18px">
                     <h5><?php echo "Descripción" ?></h5>
                     <span>
-					<input id="description" placeholder="<?php echo "Ingrese la Descripción" ?>" maxlength=16 disabled/>
+					<input id="description" placeholder="Ingrese descripción" maxlength=16 disabled/>
 				</span>
                 </div>
             </div>
@@ -82,7 +82,7 @@ $show_cl = (in_array("trapgo", $funciones)) ? '' : 'display:none';
             <div id="search-1">
                 <h5><?php echo lang('ID_PERSONA'); ?></h5>
                 <span>
-						<input id="dni" placeholder="Ingrese <?php echo lang('ID_PERSONA'); ?>"/><!-- class='nro' onPaste="return false"-->
+						<input id="dni" placeholder="<?php echo lang('ID_PERSONA'); ?>"/><!-- class='nro' onPaste="return false"-->
 						</span>
 
             </div>

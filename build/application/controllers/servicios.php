@@ -72,7 +72,7 @@ class Servicios extends CI_Controller {
     }
 
     /**
-     * Método para solicitar las tarjetas en Transferencia Maestra
+     * Método para solicitar las tarjetas en Transferencia maestra
      *
      * @param  string $urlCountry
      * @return json
