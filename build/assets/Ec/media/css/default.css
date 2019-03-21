@@ -4181,18 +4181,9 @@ ul#brands li p img {
 
 .table-text-aut tbody tr {
 	margin-bottom: 10px;
-	background: #F3F3F3;
-	-webkit-box-shadow: rgba(51, 51, 51, 0.5) 0 1px 1px;
-	-moz-box-shadow: rgba(51, 51, 51, 0.5) 0 1px 1px;
-	box-shadow: rgba(51, 51, 51, 0.5) 0 1px 1px;
 	background: #F2F2F2;
 	float: left;
-	margin: 0px 5px;
-	-webkit-border-radius: 3px 3px 3px 3px;
-	-moz-border-radius: 3px 3px 3px 3px;
-	-ms-border-radius: 3px 3px 3px 3px;
-	-o-border-radius: 3px 3px 3px 3px;
-	border-radius: 3px 3px 3px 3px;
+	margin: 0px 7px;
 	/*width: 618px;*/
 	border: 1px solid #dddddd;
 	line-height: 35px;
@@ -4360,21 +4351,11 @@ ul#brands li p img {
 #table-lote-detail tbody tr {
 	margin-bottom: 10px;
 	background: #F3F3F3;
-	-webkit-box-shadow: rgba(51, 51, 51, 0.5) 0 1px 1px;
-	-moz-box-shadow: rgba(51, 51, 51, 0.5) 0 1px 1px;
-	box-shadow: rgba(51, 51, 51, 0.5) 0 1px 1px;
-	background: #F2F2F2;
 	float: left;
-	margin: 0px 5px;
-	-webkit-border-radius: 3px 3px 3px 3px;
-	-moz-border-radius: 3px 3px 3px 3px;
-	-ms-border-radius: 3px 3px 3px 3px;
-	-o-border-radius: 3px 3px 3px 3px;
-	border-radius: 3px 3px 3px 3px;
+	margin: 0px 10px;
 	/*width: 618px;*/
-	border: 1px solid #dddddd;
 	line-height: 20px;
-	border-left: 5px solid #54c2d0;
+
 }
 
 #table-lote-detail tbody tr:hover {
@@ -4382,7 +4363,7 @@ ul#brands li p img {
 }
 
 #table-lote-detail thead tr {
-	background: none repeat scroll 0 0 #54c2d0;
+	background: none repeat scroll 0 0 #004574;
 	-webkit-border-radius: 10px 10px 0 0;
 	-moz-border-radius: 10px 10px 0 0;
 	-ms-border-radius: 10px 10px 0 0;
@@ -4788,9 +4769,11 @@ border-right:2px solid $color-base2!important;
 }
 
 #batchs-last select {
-	color: #ffdd00;
 	margin-top: 0px;
 	float: left;
+}
+#batchs-last #selec_tipo_lote{
+	margin: 12px 10px 0px 0px;
 }
 
 #batchs-last h3 {
@@ -4798,8 +4781,8 @@ border-right:2px solid $color-base2!important;
 	color: #ffdd00;
 }
 
-#batchs-last button {
-	/*margin-left: 10px;*/
+#batchs-last #button-eliminar {
+	margin: 10px;
 }
 
 #userfile {
