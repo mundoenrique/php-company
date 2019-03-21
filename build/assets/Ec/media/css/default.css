@@ -7484,3 +7484,14 @@ select.ui-datepicker-month, select.ui-datepicker-year {
 #btn-modif-suc {
 	margin-top: 5px;
 }
+
+/*
+	Oculta opción de Sucursales en:
+	- Menú de Configuración
+	- Módulo de Configuración
+*/
+li.menu-item.security:nth-child(3),
+li.ui-state-default.ui-corner-top:nth-child(3)
+{
+	display: none;
+}
