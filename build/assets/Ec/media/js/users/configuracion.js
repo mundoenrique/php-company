@@ -275,6 +275,11 @@ $(function(){
                 $.each(data.listaContacto, function(k,v){
                     $("#tipo_contact").append('<option value="'+v.idTipoContacto+'" >'+v.nombre+'</option>');
                 });
+
+								// OCULTA BOTONES DE AGREGAR CONTACTO, MOSTRAR CONTACTOS EMPRESA
+								$('#agregarContact').css('visibility','hidden');
+								$('#mostrarContact').css('visibility','hidden');
+								$('#modif').css('float','left');
             }else{
                 if(data.ERROR=='-29'){
                     alert('Usuario actualmente desconectado'); location.reload();
