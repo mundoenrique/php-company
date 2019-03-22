@@ -374,7 +374,7 @@ if(buscarReporte){
 		span.attr("aria-hidden","true");
 		span.attr("class","icon");
 		span.attr("data-icon",'&#xe050;');
-		span.attr("title","Generar Gráfica");
+		span.attr("title","Generar gráfica");
 		span.click(function(){
 
 //SE EJECUTA LA CONSULTA PARA EL GRAFICO
