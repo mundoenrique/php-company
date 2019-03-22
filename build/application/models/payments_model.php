@@ -85,7 +85,7 @@ class payments_model extends CI_Model
        ]);
 		$responseWs = np_Hoplite_GetWS('eolwebInterfaceWS', $request);
 		$responseJson = np_Hoplite_Decrypt($responseWs);
-		$responseWs = json_decode($responseJson);
+		$responseWs = json_decode(utf8_encode($responseJson));
 
 		log_message('INFO', '[' . $this->userName . '] RESPONSE -- ' .
                     'callWsConsultaSaldo --> ' . json_encode($responseWs));

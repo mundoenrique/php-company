@@ -166,7 +166,7 @@ class Reportes extends CI_Controller {
         $response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
         $jsonResponse = np_Hoplite_Decrypt($response);
 
-        $response =  json_decode($jsonResponse);
+        $response =  json_decode(utf8_encode($jsonResponse));
 
         if($response){
             log_message('info','CuentaConcentradora '.$response->rc."/".$response->msg);
@@ -265,7 +265,7 @@ class Reportes extends CI_Controller {
             $response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
             $jsonResponse = np_Hoplite_Decrypt($response);
 
-            $response =  json_decode($jsonResponse);
+            $response =  json_decode(utf8_encode($jsonResponse));
 
             if($response){
                 log_message('info','depositosdegarantias XLS '.$response->rc."/".$response->msg);
@@ -382,7 +382,7 @@ class Reportes extends CI_Controller {
             $response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
             $jsonResponse = np_Hoplite_Decrypt($response);
 
-            $response =  json_decode($jsonResponse);
+            $response =  json_decode(utf8_encode($jsonResponse));
 
             if($response){
                 log_message('info','depositosdegarantias PDF '.$response->rc."/".$response->msg);
@@ -497,7 +497,7 @@ class Reportes extends CI_Controller {
             $response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
             $jsonResponse = np_Hoplite_Decrypt($response);
 
-            $response = json_decode($jsonResponse);
+            $response = json_decode(utf8_encode($jsonResponse));
 
             if($response){
                 log_message('info','CuentaConcentradora GRAFICO '.$response->rc."/".$response->msg);
@@ -599,7 +599,7 @@ class Reportes extends CI_Controller {
             $response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
             $jsonResponse = np_Hoplite_Decrypt($response);
 
-            $response =  json_decode($jsonResponse);
+            $response =  json_decode(utf8_encode($jsonResponse));
 
             if($response){
                 log_message('info','depositosdegarantias CONSOLIDADO XLS '.$response->rc."/".$response->msg);
@@ -710,7 +710,7 @@ class Reportes extends CI_Controller {
             $response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
             $jsonResponse = np_Hoplite_Decrypt($response);
 
-            $response =  json_decode($jsonResponse);
+            $response =  json_decode(utf8_encode($jsonResponse));
 
             if($response){
                 log_message('info','depositosdegarantias CONSOLIDADO PDF '.$response->rc."/".$response->msg);
@@ -904,7 +904,7 @@ class Reportes extends CI_Controller {
         $data = json_encode($data);
         $response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
         $jsonResponse = np_Hoplite_Decrypt($response);
-        $response =  json_decode($jsonResponse);
+        $response =  json_decode(utf8_encode($jsonResponse));
 
         if($response){
             log_message('info','tarjetasemitidas '.$response->rc."/".$response->msg);
@@ -996,7 +996,7 @@ class Reportes extends CI_Controller {
             $response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
             $jsonResponse = np_Hoplite_Decrypt($response);
 
-            $response =  json_decode($jsonResponse);
+            $response =  json_decode(utf8_encode($jsonResponse));
 
             if($response){
                 log_message('info','tarjetasemitidas xls '.$response->rc."/".$response->msg);
@@ -1097,7 +1097,7 @@ class Reportes extends CI_Controller {
             $response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
             $jsonResponse = np_Hoplite_Decrypt($response);
 
-            $response =  json_decode($jsonResponse);
+            $response =  json_decode(utf8_encode($jsonResponse));
 
             if($response){
 
@@ -1291,7 +1291,7 @@ class Reportes extends CI_Controller {
         $response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
         $jsonResponse = np_Hoplite_Decrypt($response);
 
-        $response =  json_decode($jsonResponse);
+        $response =  json_decode(utf8_encode($jsonResponse));
 
         if($response){
            log_message('info','saldosamanecidos '.$response->rc);
@@ -1382,7 +1382,7 @@ class Reportes extends CI_Controller {
             $response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
             $jsonResponse = np_Hoplite_Decrypt($response);
 
-            $response =  json_decode($jsonResponse);
+            $response =  json_decode(utf8_encode($jsonResponse));
 
             if($response){
                 log_message('info','saldosamanecidos XLS '.$response->rc);
@@ -1566,7 +1566,7 @@ class Reportes extends CI_Controller {
         $data = json_encode($data);
         $response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
         $jsonResponse = np_Hoplite_Decrypt($response);
-        $response =  json_decode($jsonResponse);
+        $response =  json_decode(utf8_encode($jsonResponse));
         $data1 = json_encode($response);
         log_message('info','SALIDA desencriptada callWSEstatusTarjetasHabientes '.$data1);
         if($response){
@@ -1687,7 +1687,7 @@ class Reportes extends CI_Controller {
         $response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
         $jsonResponse = np_Hoplite_Decrypt($response);
 
-        $response =  json_decode($jsonResponse);
+        $response =  json_decode(utf8_encode($jsonResponse));
 
         if($response){
             log_message('info','Estatus Lotes '.$response->rc."/".$response->msg);
@@ -1773,7 +1773,7 @@ class Reportes extends CI_Controller {
             $response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
             $jsonResponse = np_Hoplite_Decrypt($response);
 
-            $response =  json_decode($jsonResponse);
+            $response =  json_decode(utf8_encode($jsonResponse));
 
             if($response){
                 log_message('info','Estatus Lotes PDF '.$response->rc."/".$response->msg);
@@ -1870,7 +1870,7 @@ class Reportes extends CI_Controller {
             $response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
             $jsonResponse = np_Hoplite_Decrypt($response);
 
-            $response =  json_decode($jsonResponse);
+            $response =  json_decode(utf8_encode($jsonResponse));
 
             if($response){
                 log_message('info', 'estatusdelotes xls '.$response->rc);
@@ -1975,7 +1975,7 @@ class Reportes extends CI_Controller {
             $response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
             $jsonResponse = np_Hoplite_Decrypt($response);
 
-            $response =  json_decode($jsonResponse);
+            $response =  json_decode(utf8_encode($jsonResponse));
 
             if($response){
                 log_message('info', 'tarjetasHabientes xls '.$response->rc);
@@ -2080,7 +2080,7 @@ class Reportes extends CI_Controller {
             $response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
             $jsonResponse = np_Hoplite_Decrypt($response);
 
-            $response =  json_decode($jsonResponse);
+            $response =  json_decode(utf8_encode($jsonResponse));
 
             if($response){
                 log_message('info', 'tarjetasHabientes PDF '.$response->rc);
@@ -2270,7 +2270,7 @@ class Reportes extends CI_Controller {
         $response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
         $jsonResponse = np_Hoplite_Decrypt($response);
 
-        $response =  json_decode($jsonResponse);
+        $response =  json_decode(utf8_encode($jsonResponse));
 
         if($response){
             log_message('info','Reposiciones '.$response->rc."/".$response->msg);
@@ -2368,7 +2368,7 @@ class Reportes extends CI_Controller {
            $response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
            $jsonResponse = np_Hoplite_Decrypt($response);
 
-           $response =  json_decode($jsonResponse);
+           $response =  json_decode(utf8_encode($jsonResponse));
 
            if($response){
                 log_message('info','Reposiciones XLS '.$response->rc."/".$response->msg);
@@ -2560,7 +2560,7 @@ class Reportes extends CI_Controller {
         $response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
         $jsonResponse = np_Hoplite_Decrypt($response);
 
-        $response =  json_decode($jsonResponse);
+        $response =  json_decode(utf8_encode($jsonResponse));
 
         if($response){
             log_message('info','RecargasRealizadas '.$response->rc."/".$response->msg);
@@ -2649,7 +2649,7 @@ class Reportes extends CI_Controller {
             $response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
             $jsonResponse = np_Hoplite_Decrypt($response);
 
-            $response =  json_decode($jsonResponse);
+            $response =  json_decode(utf8_encode($jsonResponse));
 
             if($response){
                 log_message('info','RecargasRealizadas XLS '.$response->rc."/".$response->msg);
@@ -2748,7 +2748,7 @@ class Reportes extends CI_Controller {
             $response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
             $jsonResponse = np_Hoplite_Decrypt($response);
 
-            $response =  json_decode($jsonResponse);
+            $response =  json_decode(utf8_encode($jsonResponse));
 
             if($response){
                 log_message('info','RecargasRealizadas PDF '.$response->rc."/".$response->msg);
@@ -2937,7 +2937,7 @@ class Reportes extends CI_Controller {
         $response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
         $jsonResponse = np_Hoplite_Decrypt($response);
 
-        $response =  json_decode($jsonResponse);
+        $response =  json_decode(utf8_encode($jsonResponse));
 
         if($response){
             log_message('info','actividadporusuario '.$response->rc."/".$response->msg);
@@ -3028,7 +3028,7 @@ class Reportes extends CI_Controller {
             $response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
             $jsonResponse = np_Hoplite_Decrypt($response);
 
-            $response =  json_decode($jsonResponse);
+            $response =  json_decode(utf8_encode($jsonResponse));
 
             if($response){
                 log_message("INFO",'PDF actividadporusuario '.$response->rc.'/'.$response->msg);
@@ -3129,7 +3129,7 @@ class Reportes extends CI_Controller {
             $response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
             $jsonResponse = np_Hoplite_Decrypt($response);
 
-            $response =  json_decode($jsonResponse);
+            $response =  json_decode(utf8_encode($jsonResponse));
 
             if($response){
                 log_message("INFO",'XLS actividadporusuario '.$response->rc.'/'.$response->msg);
@@ -3331,7 +3331,7 @@ class Reportes extends CI_Controller {
         $data = json_encode($data);
         $response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
         $jsonResponse = np_Hoplite_Decrypt($response);
-        $response =  json_decode($jsonResponse);
+        $response =  json_decode(utf8_encode($jsonResponse));
 
         if($response){
             log_message('info','GastosPorCategorias '.$response->rc."/".$response->msg);
@@ -3423,7 +3423,7 @@ class Reportes extends CI_Controller {
             $data = json_encode($data);
             $response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
             $jsonResponse = np_Hoplite_Decrypt($response);
-            $response =  json_decode($jsonResponse);
+            $response =  json_decode(utf8_encode($jsonResponse));
 
             if($response){
                 log_message('info','GastosPorCategorias PDF '.$response->rc."/".$response->msg);
@@ -3525,7 +3525,7 @@ class Reportes extends CI_Controller {
             $response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
             $jsonResponse = np_Hoplite_Decrypt($response);
 
-            $response =  json_decode($jsonResponse);
+            $response =  json_decode(utf8_encode($jsonResponse));
 
             if($response){
                 log_message('info','GastosPorCategorias XLS '.$response->rc."/".$response->msg);
@@ -3726,7 +3726,7 @@ class Reportes extends CI_Controller {
         $response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
         $jsonResponse = np_Hoplite_Decrypt($response);
 
-        $response =  json_decode($jsonResponse);
+        $response =  json_decode(utf8_encode($jsonResponse));
 
         if($response){
             log_message('info','EstadosDeCuenta '.$response->rc."/".$response->msg);
@@ -3823,7 +3823,7 @@ class Reportes extends CI_Controller {
             $data = json_encode($data);
             $response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
             $jsonResponse = np_Hoplite_Decrypt($response);
-            $response =  json_decode($jsonResponse);
+            $response =  json_decode(utf8_encode($jsonResponse));
 
             if($response){
                 log_message('info','EstadosDeCuenta PDF '.$response->rc."/".$response->msg);
@@ -3932,7 +3932,7 @@ class Reportes extends CI_Controller {
             $data = json_encode($data);
             $response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
             $jsonResponse = np_Hoplite_Decrypt($response);
-            $response =  json_decode($jsonResponse);
+            $response =  json_decode(utf8_encode($jsonResponse));
 
             if($response){
                 log_message('info','EstadosDeCuenta XLS '.$response->rc."/".$response->msg);
@@ -4056,7 +4056,7 @@ class Reportes extends CI_Controller {
             $response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
             $jsonResponse = np_Hoplite_Decrypt($response);
 
-            $response =  json_decode($jsonResponse);
+            $response =  json_decode(utf8_encode($jsonResponse));
 
             if($response){
                 log_message('info','EstadosdeCuentaComprobante '.$response->rc."/".$response->msg);
@@ -4167,7 +4167,7 @@ class Reportes extends CI_Controller {
             $response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
             $jsonResponse = np_Hoplite_Decrypt($response);
 
-            $response =  json_decode($jsonResponse);
+            $response =  json_decode(utf8_encode($jsonResponse));
 
             if($response){
                 log_message('info','EstadosdeCuentaComprobante MASIVO '.$response->rc."/".$response->msg);
@@ -4296,7 +4296,7 @@ class Reportes extends CI_Controller {
         $data = json_encode($data);
         $response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
         $jsonResponse = np_Hoplite_Decrypt($response);
-        $response = json_decode($jsonResponse);
+        $response = json_decode(utf8_encode($jsonResponse));
 
         if($response){
             log_message('info','GraficoEstadosdeCuenta '.$response->rc."/".$response->msg);
@@ -4524,7 +4524,7 @@ class Reportes extends CI_Controller {
 				$data = json_encode($data);
 				$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
 				$jsonResponse = np_Hoplite_Decrypt($response);
-				$response =  json_decode($jsonResponse);
+				$response =  json_decode(utf8_encode($jsonResponse));
 				$data1 = json_encode($response);
 
 				if($response){
@@ -4610,7 +4610,7 @@ class Reportes extends CI_Controller {
 					 $response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
 					 $jsonResponse = np_Hoplite_Decrypt($response);
 
-					 $response =  json_decode($jsonResponse);
+					 $response =  json_decode(utf8_encode($jsonResponse));
 
 					 if($response){
 							 log_message('info','guarderia xls '.$response->rc."/".$response->msg);
@@ -4709,7 +4709,7 @@ class Reportes extends CI_Controller {
 					 $response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
 					 $jsonResponse = np_Hoplite_Decrypt($response);
 
-					 $response =  json_decode($jsonResponse);
+					 $response =  json_decode(utf8_encode($jsonResponse));
 
 					 if($response){
 

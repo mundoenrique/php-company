@@ -187,7 +187,7 @@ class Servicios extends CI_Controller {
         $data = json_encode($data);
         $response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
         $jsonResponse = np_Hoplite_Decrypt($response);
-        $response = json_decode($jsonResponse);
+        $response = json_decode(utf8_encode($jsonResponse));
 
         if($response){
 
@@ -341,7 +341,7 @@ class Servicios extends CI_Controller {
         $data = json_encode($data);
         $response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
         $jsonResponse = np_Hoplite_Decrypt($response);
-        $response = json_decode($jsonResponse);
+        $response = json_decode(utf8_encode($jsonResponse));
 
         if($response){
 
@@ -496,7 +496,7 @@ class Servicios extends CI_Controller {
         $data = json_encode($data);
         $response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
         $jsonResponse = np_Hoplite_Decrypt($response);
-        $response = json_decode($jsonResponse);
+        $response = json_decode(utf8_encode($jsonResponse));
 
         if($response){
 
@@ -657,7 +657,7 @@ class Servicios extends CI_Controller {
         $data = json_encode($data);
         $response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
         $jsonResponse = np_Hoplite_Decrypt($response);
-        $response = json_decode($jsonResponse);
+        $response = json_decode(utf8_encode($jsonResponse));
 
         if($response){
             log_message('info','cargo TM '.$response->rc.'/'.$response->msg);
@@ -799,7 +799,7 @@ class Servicios extends CI_Controller {
         $data = json_encode($data);
         $response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
         $jsonResponse = np_Hoplite_Decrypt($response);
-        $response = json_decode($jsonResponse);
+        $response = json_decode(utf8_encode($jsonResponse));
 
         if($response){
 
@@ -961,7 +961,7 @@ class Servicios extends CI_Controller {
         $data = json_encode($data);
         $response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
         $jsonResponse = np_Hoplite_Decrypt($response);
-        $response = json_decode($jsonResponse);
+        $response = json_decode(utf8_encode($jsonResponse));
 
         if($response){
 
@@ -1088,7 +1088,7 @@ class Servicios extends CI_Controller {
         $data = json_encode($data);
         $response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
         $jsonResponse = np_Hoplite_Decrypt($response);
-        $response = json_decode($jsonResponse);
+        $response = json_decode(utf8_encode($jsonResponse));
 
         if($response){
             log_message('info',"BUSCAR actualizarDatos ".$response->rc.'/'.$response->msg);
@@ -1180,7 +1180,7 @@ class Servicios extends CI_Controller {
             $response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
             $jsonResponse = np_Hoplite_Decrypt($response);
 
-            $response =  json_decode($jsonResponse);
+            $response =  json_decode(utf8_encode($jsonResponse));
 
             if($response){
                 log_message("INFO",'descargar xls actializacion datos '.$response->rc.'/'.$response->msg);
@@ -1390,7 +1390,7 @@ class Servicios extends CI_Controller {
          $data = json_encode($data);
          $response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
          $jsonResponse = np_Hoplite_Decrypt($response);
-         $response =  json_decode($jsonResponse);
+         $response =  json_decode(utf8_encode($jsonResponse));
 
          log_message("info","Response solicitud de token------------------->>>>" . json_encode($response));
 
@@ -1529,7 +1529,7 @@ class Servicios extends CI_Controller {
         $data = json_encode($data);
         $response = np_Hoplite_GetWS('eolwebInterfaceWS', $data);
         $jsonResponse = np_Hoplite_Decrypt($response);
-        $response = json_decode($jsonResponse);
+        $response = json_decode(utf8_encode($jsonResponse));
 
         log_message("info","RESPONSE Recarga Cta Concentradora===>>>>------------------->>>>      " . json_encode($response));
 
