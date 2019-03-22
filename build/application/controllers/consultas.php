@@ -154,7 +154,7 @@ class Consultas extends CI_Controller {
         $response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
         $jsonResponse = np_Hoplite_Decrypt($response);
 
-        $response = json_decode($jsonResponse);
+        $response = json_decode(utf8_encode($jsonResponse));
 
         if($response){
             log_message('info', 'tipoStatusOS '.$response->rc);
@@ -234,7 +234,7 @@ class Consultas extends CI_Controller {
         $response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
         $jsonResponse = np_Hoplite_Decrypt($response);
 
-        $response = json_decode($jsonResponse);
+        $response = json_decode(utf8_encode($jsonResponse));
         $prueba = json_encode($response);
 
         if($response){
@@ -375,7 +375,7 @@ class Consultas extends CI_Controller {
         $response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
         $jsonResponse = np_Hoplite_Decrypt($response);
 
-        $response = json_decode($jsonResponse);
+        $response = json_decode(utf8_encode($jsonResponse));
 
         log_message("INFO",'Respuesta del response rc: '.$response->rc.'/'.$response->formatoArchivo);
         if($response){
@@ -458,7 +458,7 @@ class Consultas extends CI_Controller {
         $data1 = json_encode($response);
         //log_message("INFO",'Respuesta del response callWSdownloadFacturaOS===>>>>> '.$data1);
         $jsonResponse = np_Hoplite_Decrypt($response);
-        $response = json_decode($jsonResponse);
+        $response = json_decode(utf8_encode($jsonResponse));
 
         //log_message("INFO",'Respuesta del response ===>>>>>>>>>>>  '.$jsonResponse);
 
@@ -573,7 +573,7 @@ class Consultas extends CI_Controller {
         $response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
         $jsonResponse = np_Hoplite_Decrypt($response);
 
-        $response = json_decode($jsonResponse);
+        $response = json_decode(utf8_encode($jsonResponse));
 
         if($response){
             log_message('info', 'response anularOS '.$response->rc.'/'.$response->msg);
@@ -671,7 +671,7 @@ class Consultas extends CI_Controller {
         $response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
         $jsonResponse = np_Hoplite_Decrypt($response);
 
-        $response = json_decode($jsonResponse);
+        $response = json_decode(utf8_encode($jsonResponse));
 
         if($response){
             log_message("INFO",'FACTURA OS '.$response->rc/*.'/'.$response->msg*/);
@@ -783,7 +783,7 @@ class Consultas extends CI_Controller {
         $data = json_encode($data);
         $response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
         $jsonResponse = np_Hoplite_Decrypt($response);
-        $response =  json_decode($jsonResponse);
+        $response =  json_decode(utf8_encode($jsonResponse));
 
         log_message("info","enviar TOKEN ------------------->>>>" . json_encode($response));
 
@@ -919,7 +919,7 @@ class Consultas extends CI_Controller {
         $data = json_encode($data);
         $response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
         $jsonResponse = np_Hoplite_Decrypt($response);
-        $response = json_decode($jsonResponse);
+        $response = json_decode(utf8_encode($jsonResponse));
 
         log_message("info","RESPONSE Pagar Orden de servicio ------------------->>>>      " . json_encode($response));
 

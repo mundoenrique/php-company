@@ -402,7 +402,7 @@ class Lotes extends CI_Controller {
 		$data = json_encode($data);
 		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
 		$jsonResponse = np_Hoplite_Decrypt($response);
-		$response = json_decode($jsonResponse);
+		$response = json_decode(utf8_encode($jsonResponse));
 
 		if($response){
 			log_message('info','lotes aut '.$response->rc);
@@ -491,7 +491,7 @@ class Lotes extends CI_Controller {
 		$data = json_encode($data);
 		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
 		$jsonResponse = np_Hoplite_Decrypt($response);
-		$response = json_decode($jsonResponse);
+		$response = json_decode(utf8_encode($jsonResponse));
 
 		if($response){
 			log_message('info','lotes cancelarOS '.$response->rc);
@@ -633,7 +633,7 @@ class Lotes extends CI_Controller {
 		$data = json_encode($data);
 		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
 		$jsonResponse = np_Hoplite_Decrypt($response);
-		$response = json_decode($jsonResponse);
+		$response = json_decode(utf8_encode($jsonResponse));
 
 		if($response){
 			log_message('info','firma lote '.$response->rc)	;
@@ -757,7 +757,7 @@ class Lotes extends CI_Controller {
 		$data = json_encode($data);
 		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
 		$jsonResponse = np_Hoplite_Decrypt($response);
-		$response = json_decode($jsonResponse);
+		$response = json_decode(utf8_encode($jsonResponse));
 
 		if($response){
 			log_message('info','desasociar '.$response->rc)	;
@@ -894,7 +894,7 @@ class Lotes extends CI_Controller {
 		$data = json_encode($data);
 		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
 		$jsonResponse = np_Hoplite_Decrypt($response);
-		$response = json_decode($jsonResponse);
+		$response = json_decode(utf8_encode($jsonResponse));
 
 
 		if($response){
@@ -1044,7 +1044,7 @@ class Lotes extends CI_Controller {
 
 		log_message('info','detalle loteAuth '.$jsonResponse);
 
-		$response = json_decode($jsonResponse);
+		$response = json_decode(utf8_encode($jsonResponse));
 
 
 		if($response){
@@ -1118,7 +1118,7 @@ class Lotes extends CI_Controller {
             $response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
             $jsonResponse = np_Hoplite_Decrypt($response);
 
-            $response =  json_decode($jsonResponse);
+            $response =  json_decode(utf8_encode($jsonResponse));
 
             if($response){
                 log_message('info','detalleLoteAuth XLS '.$response->rc."/".$response->msg);
@@ -1211,7 +1211,7 @@ class Lotes extends CI_Controller {
             $response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
             $jsonResponse = np_Hoplite_Decrypt($response);
 
-            $response =  json_decode($jsonResponse);
+            $response =  json_decode(utf8_encode($jsonResponse));
 
             if($response){
                 log_message('info','detalleLoteAuth PDF '.$response->rc."/".$response->msg);
@@ -1302,7 +1302,7 @@ class Lotes extends CI_Controller {
 		$data = json_encode($data);
 		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
 		$jsonResponse = np_Hoplite_Decrypt($response);
-		$response = json_decode($jsonResponse);
+		$response = json_decode(utf8_encode($jsonResponse));
 
 		if($response){
 			log_message('info','bandeja '.$response->rc."/".$response->msg);
@@ -1381,7 +1381,7 @@ class Lotes extends CI_Controller {
 		$data = json_encode($data);
 		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
 		$jsonResponse = np_Hoplite_Decrypt($response);
-		$response = json_decode($jsonResponse);
+		$response = json_decode(utf8_encode($jsonResponse));
 
 		if($response){
 
@@ -1474,7 +1474,7 @@ class Lotes extends CI_Controller {
 		$data = json_encode($data);
 		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
 		$jsonResponse = np_Hoplite_Decrypt($response);
-		$response = json_decode($jsonResponse);
+		$response = json_decode(utf8_encode($jsonResponse));
 		log_message('info',"cargaLote ".$jsonResponse);
 		if($response){
 
@@ -1551,7 +1551,7 @@ class Lotes extends CI_Controller {
 		$data = json_encode($data);
 		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
 		$jsonResponse = np_Hoplite_Decrypt($response);
-		$response = json_decode($jsonResponse);
+		$response = json_decode(utf8_encode($jsonResponse));
 
 		if($response){
 			log_message('info','borrar lote sin conf '.$response->rc.'/'.$response->msg);
@@ -1801,7 +1801,7 @@ class Lotes extends CI_Controller {
 			$data = json_encode($data);
 			$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
 			$jsonResponse = np_Hoplite_Decrypt($response);
-			$response = json_decode($jsonResponse);
+			$response = json_decode(utf8_encode($jsonResponse));
 
 			if($response){
 
@@ -1951,7 +1951,7 @@ class Lotes extends CI_Controller {
 		$data = json_encode($data);
 		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
 		$jsonResponse = np_Hoplite_Decrypt($response);
-		$response = json_decode($jsonResponse);
+		$response = json_decode(utf8_encode($jsonResponse));
 
 		log_message('info',"confirmarlote ".$jsonResponse);
 
@@ -2203,7 +2203,7 @@ class Lotes extends CI_Controller {
 		$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
 		$data = json_encode($data);
 		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
-		$jsonResponse = np_Hoplite_Decrypt($response);
+		$jsonResponse = utf8_encode(np_Hoplite_Decrypt($response));
 		$response = json_decode($jsonResponse);
 
 		log_message("DEBUG","RESPONSE Calculo OS: ".$jsonResponse);
@@ -2338,7 +2338,7 @@ class Lotes extends CI_Controller {
 		$data = json_encode($data);
 		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
 		$jsonResponse = np_Hoplite_Decrypt($response);
-		$response = json_decode($jsonResponse);
+		$response = json_decode(utf8_encode($jsonResponse));
 
 		log_message("DEBUG", "generarOS =====>>>>>> ".json_encode($response));
 		if(isset($response->rc)) {
@@ -2570,7 +2570,7 @@ class Lotes extends CI_Controller {
 
 		$logAcceso = np_hoplite_log($sessionId,$username,$canal,$modulo,$function,$operation,0,$ip,$timeLog);
 
-		$dataPost = json_decode($dataPost);
+		$dataPost = json_decode(utf8_encode($dataPost));
 
 		$usuario = array(
 			'userName' => $username,
@@ -2619,7 +2619,7 @@ class Lotes extends CI_Controller {
 		$data = json_encode($data);
 		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
 		$jsonResponse = np_Hoplite_Decrypt($response);
-		$response = json_decode($jsonResponse);
+		$response = json_decode(utf8_encode($jsonResponse));
 
 		if($response){
 			log_message('info','REPROCESO crear beneficiario '.$response->rc.'/'.$response->msg);
@@ -2773,7 +2773,7 @@ class Lotes extends CI_Controller {
 		$data = json_encode($data);
 		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
 		$jsonResponse = np_Hoplite_Decrypt($response);
-		$response = json_decode($jsonResponse);
+		$response = json_decode(utf8_encode($jsonResponse));
 
 		if($response){
 
@@ -2891,7 +2891,7 @@ class Lotes extends CI_Controller {
 		$data = json_encode($data);
 		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
 		$jsonResponse = np_Hoplite_Decrypt($response);
-		$response = json_decode($jsonResponse);
+		$response = json_decode(utf8_encode($jsonResponse));
 
 		if($response){
 			log_message('info','REPROCESO buscar lotes '.$response->rc.'/'.$response->msg);
@@ -3010,7 +3010,7 @@ class Lotes extends CI_Controller {
 
 		$logAcceso = np_hoplite_log($sessionId,$username,$canal,$modulo,$function,$operation,0,$ip,$timeLog);
 
-		$dataPost = json_decode($dataPost);
+		$dataPost = json_decode(utf8_encode($dataPost));
 
 		$usuario = array(
 			'userName' => $username,
@@ -3059,7 +3059,7 @@ class Lotes extends CI_Controller {
 		$data = json_encode($data);
 		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
 		$jsonResponse = np_Hoplite_Decrypt($response);
-		$response = json_decode($jsonResponse);
+		$response = json_decode(utf8_encode($jsonResponse));
 
 		if($response){
 			log_message('info','modificar beneficiario '.$response->rc.'/'.$response->msg);
@@ -3202,7 +3202,7 @@ class Lotes extends CI_Controller {
 		$data = json_encode($data);
 		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
 		$jsonResponse = np_Hoplite_Decrypt($response);
-		$response = json_decode($jsonResponse);
+		$response = json_decode(utf8_encode($jsonResponse));
 
 		if($response){
 			log_message('info','eliminar beneficiario '.$response->rc.'/'.$response->msg);
@@ -3360,7 +3360,7 @@ class Lotes extends CI_Controller {
         log_message('info', 'callWSreprocesarMasivo Encrypt ====>> ' . $data);
         $response = np_Hoplite_GetWS('eolwebInterfaceWS', $data);
         $jsonResponse = np_Hoplite_Decrypt($response);
-        $response = json_decode($jsonResponse);
+        $response = json_decode(utf8_encode($jsonResponse));
         //log_message('info', 'Response ' . $response);
         if ($response) {
             log_message('info', 'REPROCESAR ' . $response->rc . '/' . $response->msg);
@@ -3454,7 +3454,7 @@ class Lotes extends CI_Controller {
 		$data = json_encode($data);
 		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
 		$jsonResponse = np_Hoplite_Decrypt($response);
-		$response = json_decode($jsonResponse);
+		$response = json_decode(utf8_encode($jsonResponse));
 
 		if($response){
 			log_message('info','REPROCESAR '.$response->rc.'/'.$response->msg);

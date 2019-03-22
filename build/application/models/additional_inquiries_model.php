@@ -77,7 +77,7 @@ class additional_inquiries_model extends CI_Model {
 
 		log_message('INFO', '--[' . $this->userName . '] RESPONSE LOTES POR FACTURAR: ' . $jsonResponse);
 
-		$responseServ = json_decode($jsonResponse);
+		$responseServ = json_decode(utf8_encode($jsonResponse));
 
 		$title = lang('SYSTEM_NAME');
 		$data = [];
