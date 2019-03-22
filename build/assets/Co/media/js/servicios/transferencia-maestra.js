@@ -884,7 +884,7 @@ $(function() {
             var canvas = "<div id='validar'>";
             (valAmount == false) ? $(this).find($('#amount').css('border-color', '#cd0a0a')) : '';
             (valdescript == false) ? $(this).find($('#description').css('border-color', '#cd0a0a')) : '';
-            canvas += (valAmount == false) ? "<p>* El Monto debe ser númerico</p>" : '';
+            canvas += (valAmount == false) ? "<p>* El monto debe ser numérico</p>" : '';
             canvas += (valdescript == false) ? "<p>* La descripción es necesaria</p>" : '';
             canvas += "</div>";
 
@@ -922,7 +922,7 @@ $(function() {
                         case 0:
                             var canvas = "<div id='dialog-confirm'>";
                             canvas +="<p>Código recibido: </p>";
-                            canvas += "<fieldset><input type='text' id='token-code' size=30 placeholder='Ingrese Código recibido' class='text ui-widget-content ui-corner-all'/>";
+                            canvas += "<fieldset><input type='text' id='token-code' size=30 placeholder='Ingrese código recibido' class='text ui-widget-content ui-corner-all'/>";
                             canvas += "<h5 id='msg'></h5></fieldset></div>";
                             $(canvas).dialog({
                                 title: data.title,
