@@ -18,7 +18,7 @@ class Innominadas_Model extends CI_Model {
 		$idempresa = $this->session->userdata('acrifS');
 		$accodciaS = $this->session->userdata('accodciaS');
 		$idProductoS = $this->session->userdata('idProductoS');
-		
+
 		$token = $this->session->userdata('token');
 
 		$idOperation = "createCuentasInnominadas";
@@ -31,7 +31,7 @@ class Innominadas_Model extends CI_Model {
 		$ip= $this->input->ip_address();
 		$timeLog= date("m/d/Y H:i");
 
-		$sessionId = $this->session->userdata('sessionId');			
+		$sessionId = $this->session->userdata('sessionId');
 		$logAcceso = np_hoplite_log($sessionId,$username,$canal,$modulo,$funcion,$operation,0,$ip,$timeLog);
 
 		$cantReg = (!empty($cantReg)) ? $cantReg : '';
@@ -76,14 +76,14 @@ class Innominadas_Model extends CI_Model {
 		log_message('info','solicitud inno data request => '.$data);
 
 		$dataEncry = np_Hoplite_Encryption($data);
-		$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );		
+		$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
 		$data = json_encode($data);
 		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
 		$jsonResponse = np_Hoplite_Decrypt($response);
 
 		log_message('info','solicitud data response => '.$jsonResponse);
 
-		$response = json_decode(utf8_encode($jsonResponse));
+		$response = json_decode($jsonResponse);
 
 		if($response){
 			if($response->rc==0){
@@ -97,7 +97,7 @@ class Innominadas_Model extends CI_Model {
 					$this->session->unset_userdata($this->session->all_userdata());
 					$codigoError = array('ERROR' => lang('ERROR_(-29)'), "rc"=> $response->rc);
 				}else if($response->rc==-150){
-					$codigoError = array('ERROR' => lang('ERROR_(-150)'), "rc"=> $response->rc, 'paisTo'=>$response->paisTo);	
+					$codigoError = array('ERROR' => lang('ERROR_(-150)'), "rc"=> $response->rc, 'paisTo'=>$response->paisTo);
 				}
 				else{
 					$codigoError = lang('ERROR_('.$response->rc.')');
@@ -106,10 +106,10 @@ class Innominadas_Model extends CI_Model {
 					}else{
 						$codigoError = array('ERROR' => lang('ERROR_('.$response->rc.')'), "rc"=> $response->rc);
 					}
-				}	
+				}
 				return $codigoError;
 
-			}		
+			}
 
 		}else{
 			log_message('info','solicitud => ' + $response);
@@ -121,7 +121,7 @@ class Innominadas_Model extends CI_Model {
 	public function callWSReporteInnominadas($urlCountry, $numlote){
 
 		$this->lang->load('erroreseol');
-		
+
 		$token = $this->session->userdata('token');
 		$idProductoS = $this->session->userdata('idProductoS');
 		$idempresa = $this->session->userdata('acrifS');
@@ -138,7 +138,7 @@ class Innominadas_Model extends CI_Model {
         $timeLog   = date("m/d/Y H:i");
         $ip= $this->input->ip_address();
 
-		$sessionId = $this->session->userdata('sessionId');			
+		$sessionId = $this->session->userdata('sessionId');
 		$logAcceso = np_hoplite_log($sessionId,$userName,$canal,$modulo,$funcion,$operation,0,$ip,$timeLog);
 
 		$data = array(
@@ -162,20 +162,20 @@ class Innominadas_Model extends CI_Model {
 		log_message('info','inno_report_xls data request=>'.$data);
 
 		$dataEncry = np_Hoplite_Encryption($data);
-		$data = array('bean'=>$dataEncry, 'pais' =>$urlCountry );		
+		$data = array('bean'=>$dataEncry, 'pais' =>$urlCountry );
 
 		log_message('info','inno_report_xls 2 data request=>'.json_encode($data,JSON_UNESCAPED_UNICODE));
 
 		$data = json_encode($data);
 		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
 		$jsonResponse = np_Hoplite_Decrypt($response);
-		$response = json_decode(utf8_encode($jsonResponse));
+		$response = json_decode($jsonResponse);
 
 		if($response){
 			//log_message('info','inno_report_xls data response=>'.$response);
 
 			if($response->rc==0){
-				$response = json_decode(utf8_encode($response->bean));
+				$response = json_decode($response->bean);
 				return $response;
 			} else {
 
@@ -186,7 +186,7 @@ class Innominadas_Model extends CI_Model {
 					$this->session->unset_userdata($this->session->all_userdata());
 					$codigoError = array('ERROR' => lang('ERROR_(-29)'), "rc"=> $response->rc);
 				} else if($response->rc==-150) {
-					$codigoError = array('ERROR' => lang('ERROR_(-150)'), "rc"=> $response->rc, 'paisTo'=>$response->paisTo);	
+					$codigoError = array('ERROR' => lang('ERROR_(-150)'), "rc"=> $response->rc, 'paisTo'=>$response->paisTo);
 				}else if($response->rc==-137) {
                     $codigoError = array('ERROR' => lang('ERROR_(-137)'), "rc"=> $response->rc);
                 } else {
@@ -196,7 +196,7 @@ class Innominadas_Model extends CI_Model {
 					}else{
 						$codigoError = array('ERROR' => lang('ERROR_('.$response->rc.')'), "rc"=> $response->rc);
 					}
-				}	
+				}
             }
         } else {
 			log_message('info','inno_report_xls => ' + $response);
@@ -209,7 +209,7 @@ class Innominadas_Model extends CI_Model {
 	public function callWSListaInnominadasEnProc($urlCountry, $cestatus, $exoboolean, $acnumlote, $dtfechorcargaIni, $dtfechorcargaFin){
 
 		$this->lang->load('erroreseol');
-		
+
 		$token = $this->session->userdata('token');
 
 		$idOperation = "getListadoLotes";
@@ -231,7 +231,7 @@ class Innominadas_Model extends CI_Model {
         $timeLog   = date("m/d/Y H:i");
         $ip= $this->input->ip_address();
 
-		$sessionId = $this->session->userdata('sessionId');			
+		$sessionId = $this->session->userdata('sessionId');
 		$logAcceso = np_hoplite_log($sessionId,$userName,$canal,$modulo,$funcion,$operation,0,$ip,$timeLog);
 
 		$data = array(
@@ -260,7 +260,7 @@ class Innominadas_Model extends CI_Model {
 		log_message('info','lista inno_en_proceso 2 data request=>'.$data);
 
 		$dataEncry = np_Hoplite_Encryption($data);
-		$data = array('bean'=>$dataEncry, 'pais' =>$urlCountry );		
+		$data = array('bean'=>$dataEncry, 'pais' =>$urlCountry );
 
 		log_message('info','lista inno_en_proceso 2 data request=>'.json_encode($data,JSON_UNESCAPED_UNICODE));
 
@@ -270,11 +270,11 @@ class Innominadas_Model extends CI_Model {
 
 		log_message('info','lista inno_en_proceso data response=>'.$jsonResponse);
 
-		$response = json_decode(utf8_encode($jsonResponse));
+		$response = json_decode($jsonResponse);
 
 		if($response){
 			if($response->rc==0){
-				$response = json_decode(utf8_encode($response->bean));
+				$response = json_decode($response->bean);
 				return $response;
 			}else{
 
@@ -285,7 +285,7 @@ class Innominadas_Model extends CI_Model {
 					$this->session->unset_userdata($this->session->all_userdata());
 					$codigoError = array('ERROR' => lang('ERROR_(-29)'), "rc"=> $response->rc);
 				}else if($response->rc==-150){
-					$codigoError = array('ERROR' => lang('ERROR_(-150)'), "rc"=> $response->rc, 'paisTo'=>$response->paisTo);	
+					$codigoError = array('ERROR' => lang('ERROR_(-150)'), "rc"=> $response->rc, 'paisTo'=>$response->paisTo);
 				}
 				else{
 					$codigoError = lang('ERROR_('.$response->rc.')');
@@ -294,10 +294,10 @@ class Innominadas_Model extends CI_Model {
 					}else{
 						$codigoError = array('ERROR' => lang('ERROR_('.$response->rc.')'), "rc"=> $response->rc);
 					}
-				}	
+				}
 				return $codigoError;
 
-			}		
+			}
 
 		}else{
 			log_message('info','lista inno_en_proceso => ' + $response);
@@ -309,7 +309,7 @@ class Innominadas_Model extends CI_Model {
 	public function callWSListaTarjetasInnominadas($urlCountry, $numLote){
 
 		$this->lang->load('erroreseol');
-		
+
 		$token = $this->session->userdata('token');
 
 		$idOperation = "getListadoTarjetasInnominadas";
@@ -327,7 +327,7 @@ class Innominadas_Model extends CI_Model {
         $timeLog   = date("m/d/Y H:i");
         $ip= $this->input->ip_address();
 
-		$sessionId = $this->session->userdata('sessionId');			
+		$sessionId = $this->session->userdata('sessionId');
 		$logAcceso = np_hoplite_log($sessionId,$userName,$canal,$modulo,$funcion,$operation,0,$ip,$timeLog);
 
 		$data = array(
@@ -351,7 +351,7 @@ class Innominadas_Model extends CI_Model {
 		log_message('info','lista tarjetas_innominada data request=>'.$data);
 
 		$dataEncry = np_Hoplite_Encryption($data);
-		$data = array('bean'=>$dataEncry, 'pais' =>$urlCountry );		
+		$data = array('bean'=>$dataEncry, 'pais' =>$urlCountry );
 
 		$data = json_encode($data);
 		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
@@ -359,11 +359,11 @@ class Innominadas_Model extends CI_Model {
 
 		log_message('info','lista tarjetas_innominada data response=>'.$jsonResponse);
 
-		$response = json_decode(utf8_encode($jsonResponse));
+		$response = json_decode($jsonResponse);
 
 		if($response){
 			if($response->rc==0){
-				$response = json_decode(utf8_encode($response->bean));
+				$response = json_decode($response->bean);
 				return $response;
 			}else{
 				return "";
@@ -383,10 +383,10 @@ class Innominadas_Model extends CI_Model {
 					}else{
 						$codigoError = array('ERROR' => lang('ERROR_('.$response->rc.')'), "rc"=> $response->rc);
 					}
-				}	
+				}
 				return $codigoError;*/
 
-			}		
+			}
 
 		}else{
 			log_message('info','lista inno_en_proceso => ' + $response);
@@ -398,7 +398,7 @@ class Innominadas_Model extends CI_Model {
 	public function callWSEliminarInnominadas($urlCountry, $pass, $idlote, $numlote){
 
 		$this->lang->load('erroreseol');
-		
+
 		$token = $this->session->userdata('token');
 
 		$idOperation = "eliminarLotesPorAutorizar";
@@ -416,7 +416,7 @@ class Innominadas_Model extends CI_Model {
         $timeLog   = date("m/d/Y H:i");
         $ip= $this->input->ip_address();
 
-		$sessionId = $this->session->userdata('sessionId');			
+		$sessionId = $this->session->userdata('sessionId');
 		$logAcceso = np_hoplite_log($sessionId,$userName,$canal,$modulo,$funcion,$operation,0,$ip,$timeLog);
 
 		$data = array(
@@ -440,7 +440,7 @@ class Innominadas_Model extends CI_Model {
 		log_message('info','eliminar_lote data request=>'.$data);
 
 		$dataEncry = np_Hoplite_Encryption($data);
-		$data = array('bean'=>$dataEncry, 'pais' =>$urlCountry );		
+		$data = array('bean'=>$dataEncry, 'pais' =>$urlCountry );
 
 		$data = json_encode($data);
 		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
@@ -448,7 +448,7 @@ class Innominadas_Model extends CI_Model {
 
 		log_message('info','eliminar_lote data response=>'.$jsonResponse);
 
-		$response = json_decode(utf8_encode($jsonResponse));
+		$response = json_decode($jsonResponse);
 
 		if($response){
 			if($response->rc==0){
@@ -462,7 +462,7 @@ class Innominadas_Model extends CI_Model {
 					$this->session->unset_userdata($this->session->all_userdata());
 					$codigoError = array('ERROR' => lang('ERROR_(-29)'), "rc"=> $response->rc);
 				}else if($response->rc==-150){
-					$codigoError = array('ERROR' => lang('ERROR_(-150)'), "rc"=> $response->rc, 'paisTo'=>$response->paisTo);	
+					$codigoError = array('ERROR' => lang('ERROR_(-150)'), "rc"=> $response->rc, 'paisTo'=>$response->paisTo);
 				}
 				else{
 					$codigoError = lang('ERROR_('.$response->rc.')');
@@ -471,10 +471,10 @@ class Innominadas_Model extends CI_Model {
 					}else{
 						$codigoError = array('ERROR' => lang('ERROR_('.$response->rc.')'), "rc"=> $response->rc);
 					}
-				}	
+				}
 				return $codigoError;
 
-			}		
+			}
 
 		}else{
 			log_message('info','eliminar_lote => ' + $response);

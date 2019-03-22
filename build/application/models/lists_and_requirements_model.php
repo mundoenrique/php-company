@@ -70,7 +70,7 @@ class lists_and_requirements_model extends CI_Model {
 		$response = np_Hoplite_GetWS('eolwebInterfaceWS', $dataRequest);
 		$jsonResponse = np_Hoplite_Decrypt($response);
 		log_message('INFO', '--[' . $this->userName . '] RESPONSE Lista de empresas: '. $jsonResponse);
-		$responseSerV = json_decode(utf8_encode($jsonResponse));
+		$responseSerV = json_decode($jsonResponse);
 
 		$title = lang('SYSTEM_NAME');
 
