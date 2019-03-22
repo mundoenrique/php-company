@@ -180,7 +180,7 @@ $(document).ready(function() {
 							
 
 								a=$(document.createElement("a")).appendTo(div);
-								span=$(a).append("<span title='Ver Gráfico' data-icon ='&#xe050' aria-hidden = 'true' class = 'icon'></span>");
+								span=$(a).append("<span title='Ver gráfico' data-icon ='&#xe050' aria-hidden = 'true' class = 'icon'></span>");
 								span.attr("aria-hidden","true");
 								span.attr("class","icon");
 								span.attr("data-icon",'&#xe050;');
@@ -298,7 +298,7 @@ $(document).ready(function() {
 										   
 
 								a=$(document.createElement("a")).appendTo(div);
-								span=$(a).append("<span title = 'Ver Gráfico' data-icon ='&#xe050' aria-hidden = 'true' class = 'icon'></span>");
+								span=$(a).append("<span title = 'Ver gráfico' data-icon ='&#xe050' aria-hidden = 'true' class = 'icon'></span>");
 							
 
 								span.click(function(){

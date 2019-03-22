@@ -125,7 +125,7 @@ $urlCdn = get_cdn();
 				<span id="export_pdf" title = "Exportar PDF" aria-hidden="true" class="icon" data-icon="&#xe02e;"></span>
 			</a>
 			<a id = "grafica_a">
-				<span id="grafic" title = "Ver Gráfico" aria-hidden="true" class="icon" data-icon="&#xe050;"></span>
+				<span id="grafic" title = "Ver gráfico" aria-hidden="true" class="icon" data-icon="&#xe050;"></span>
 			</a>
 			<a id = "exportCon_XLS_a">
 				<span id="export_excel" title = "Exportar Excel de Consolidado" aria-hidden="true" class="icon consolidado xls" data-icon="&#xe05a;"></span>
