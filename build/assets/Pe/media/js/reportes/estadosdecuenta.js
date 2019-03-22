@@ -473,7 +473,7 @@ if(buscarReporte){
 
 		a=$(document.createElement("a")).appendTo(div);
 		a.attr("id","export_mosivo_a");
-		span=$(a).append("<span id = 'export_mosivo' title='Exportar Masivo' data-icon ='&#xe009;' aria-hidden = 'true' class = 'icon'></span>").css("display","none");
+		span=$(a).append("<span id = 'export_mosivo' title='Exportar masivo' data-icon ='&#xe009;' aria-hidden = 'true' class = 'icon'></span>").css("display","none");
 
 		span.attr("aria-hidden","true");
 		span.attr("class","icon");
