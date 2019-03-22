@@ -118,7 +118,7 @@ function validaCampos(_response_) {
 	});
 	if(!valid) {
 		$('#mensajeError')
-		.text('Por favor introduzca los campos que se le indican en color rojo')
+		.text('Por favor, complete los campos que se le indican en color rojo')
 		.fadeIn();
 	} else {
 		valid = daysDifference();
