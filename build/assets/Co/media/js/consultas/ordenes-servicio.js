@@ -203,7 +203,7 @@ $(function(){
 
 
         var canvas = "<div id='dialog-confirm'>";
-        canvas +="<p>Id Orden: "+idOS+"</p>";
+        canvas +="<p>Orden Nro.: "+idOS+"</p>";
         canvas += "<fieldset><input type='password' id='pass' size=30 placeholder='Ingrese su contraseña' class='text ui-widget-content ui-corner-all'/>";
         canvas += "<h5 id='msg'></h5></fieldset></div>";
 
@@ -269,7 +269,7 @@ $(function(){
                 switch (data.code) {
                     case 0:
                         var canvas = "<div id='dialog-confirm'>";
-                        canvas += "<p>Id Orden: " + idOS + "</p>";
+                        canvas += "<p>Orden Nro.: " + idOS + "</p>";
                         canvas += "<fieldset><input type='text' id='token-code' size=30 placeholder='Ingrese el código' class='text ui-widget-content ui-corner-all'/>";
                         canvas += "<h5 id='msg'></h5></fieldset></div>";
 

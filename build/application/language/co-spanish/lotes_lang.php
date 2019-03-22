@@ -99,7 +99,7 @@ $lang['TITLE_REG_LOTES'] = 'Registro de Lotes';
 //ORDEN DE SERVICIO
 $lang['TITULO_PRELIMINAR'] = 'Preliminar Orden de Servicio';
 $lang['TITULO_ORDEN_SERVICIO'] = 'Órdenes de servicio';
-$lang['TABLA_OS_IDORDEN'] = 'Id orden';
+$lang['TABLA_OS_IDORDEN'] = 'Orden Nro.';
 $lang['TABLA_OS'] = 'Monto OS';
 $lang['TABLA_OS_MONTO']='Monto comisión';
 $lang['TABLA_OS_MONTO_RECARGA']='Monto Recarga';

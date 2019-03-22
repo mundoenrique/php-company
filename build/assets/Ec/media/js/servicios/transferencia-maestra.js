@@ -98,9 +98,9 @@ $(function() {
 				switch (data.code) {
 					case 0:
 						var canvas = "<div id='dialog-confirm'>";
-								canvas +="<p>Codigo Recibido: </p>";
+								canvas +="<p>Código recibido: </p>";
 								canvas += "<fieldset><input type='text' id='token-code' size=30 ";
-								canvas += "placeholder='Ingrese codigo recibido' class='text ui-widget-content ui-corner-all'/>";
+								canvas += "placeholder='Ingrese Código recibido' class='text ui-widget-content ui-corner-all'/>";
 								canvas += "<h5 id='msg'></h5></fieldset></div>";
 
 						$(canvas).dialog({

@@ -223,7 +223,7 @@ $('#tabla-datos-general').on('click','#anular', function() {
 	aplicaCostD = $(this).parents('tr').attr('aplica-costo'),
 	pass,
 	canvas = '<div id="dialog-confirm">';
-  canvas+= 	'<p>Id Orden: '+idOS+'</p>';
+  canvas+= 	'<p>Orden Nro.: '+idOS+'</p>';
 	canvas+= 	'<fieldset>';
 	canvas+= 		'<input type="password" id="pass" size=30 placeholder="Ingrese su contraseña" ';
 	canvas+= 		'class="text ui-widget-content ui-corner-all"/>';
