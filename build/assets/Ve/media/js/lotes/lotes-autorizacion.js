@@ -518,7 +518,8 @@ $(function () {
 
 function envioAjaxAutorizar(baseURL, isoPais, js_var, pass, osTipo, select_modal, nuevo_iva) {
 	var
-	orderPayable = parseInt($('#table-auth').attr('order-payable'));
+	orderPayable = parseInt($('#table-auth').attr('order-payable'))+'a';
+	//se concatena la letra "a" para evitar de forma temporal la validación de la comisión de la orden de servicio
 
 	if (js_var.tipoloteA.indexOf('2') !== -1 && Number.isInteger(orderPayable)) {
 		var
