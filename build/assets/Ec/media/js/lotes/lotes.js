@@ -3,6 +3,7 @@ $(function() { // Document ready
 
 var f, dir, forma;
 
+
  // $('thead').hide();
  $('#lotes-2').show();
  $(".aviso").removeClass("elem-hidden");
@@ -59,7 +60,7 @@ var f, dir, forma;
                   }
                 });
             }else{
-              notificacion("Cargando archivo","Tipo de archivo no permitido. <h5>Formato requerido: txt</h5>");
+              notificacion("Cargando archivo","Tipo de archivo no permitido. <h5>Formato requerido: txt o xls</h5>");
               $('#userfile').val("");
               $('#archivo').val("");
             }

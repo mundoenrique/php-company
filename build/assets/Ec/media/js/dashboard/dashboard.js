@@ -76,8 +76,8 @@ var sectores = '{';
     sectores += '}';
     sectores += '}';
 
-
 var objson = $.parseJSON(sectores);
+
 var scroll_interval;
 var ancho=0;
 
@@ -426,8 +426,6 @@ function paginar(){
               if(!dataIcon){
                 dataIcon = "&#xe033;";
               }
-
-
               var canvas = '<li class="space-companies '+cat+' '+pg+' '+pgf+'" id='+v.accodcia+' data-category='+cat+'>';
                   canvas+= '<a class=style-companies-item data-accodcia="'+v.accodcia+'" data-acrif="'+v.acrif+'" data-acnomcia="'+v.acnomcia+'" data-acrazonsocial="'+v.acrazonsocial+'" data-acdesc="'+v.acdesc+'" data-accodgrupoe="'+v.accodgrupoe+'"><span aria-hidden=true class=icon data-icon='+dataIcon+'></span>';
                   canvas+= '<p id=text-companies-T>'+charset(v.acnomcia, 'empresa asociada')+'</p> ';
@@ -460,8 +458,8 @@ function paginar(){
             $('#contend-pagination-p').show();
           }else{
             $('.resultSet2').show();
-           $('.resultSet2 h2').text("Usuario sin empresa asignada");
-           $('#contend-pagination-p').hide();
+            $('.resultSet2 h2').text("Usuario sin empresa asignada");
+            $('#contend-pagination-p').hide();
           }
 
           } else{
@@ -520,127 +518,131 @@ function paginado(paginas, filtro){
 
 }
 */
-/***********************Paginacion inicio***********************/
-  function paginacion(total, filtro){
-    var texHtml="";
-    $("#list_pagination").html("");
-      for(var i=1;i<=total;++i) {
-          texHtml+='<span class="cajonNum"><a href="javascript:" id="page_'+ i +'" class="num-pagina">'+ i +'</a></span>';
-      }
-    $("#list_pagination").html(texHtml);
-
-    $("#list_pagination").scrollLeft(0);
-
-    ancho = $("#page_"+ dash_var.pgActual).position().left - 4;
-
-    $("#list_pagination").animate({
-          scrollLeft: ancho
-      }, 200);
-
-    $(".num-pagina").css('text-decoration','none');
-    $("#page_"+ dash_var.pgActual).css('text-decoration','underline');
-
-    $(".num-pagina").unbind("click");
-    $(".num-pagina").click(function(){
-      var id = this.id;
-        id = id.split("_");
-      //buscarReposiciones(id[1]);
-      $('#listCompanies').find('.style-companies-item-activa').removeClass('style-companies-item-activa');
-      $("span#more-info").fadeOut("fast");
-      $(".isotope-item").css('z-index','2');
-
-      $container.isotope( { filter: filtro+id[1] } );
-      $(".isotope-hidden").hide();
-
-      $(".num-pagina").css('text-decoration','none');
-      $("#page_"+ id[1]).css('text-decoration','underline');
-
-    });
-
-    $("#anterior-1").unbind("mouseover");
-    $("#anterior-1").unbind("mouseout");
-    $("#anterior-1").mouseover(function(){
-      scroll_interval = setInterval(
-      function() {
-        if($("#list_pagination").scrollLeft()>0){
-          ancho = $("#list_pagination").scrollLeft() - 1
-          $("#list_pagination").scrollLeft(ancho);
+    /***********************Paginacion inicio***********************/
+    function paginacion(total, filtro){
+        var texHtml="";
+        $("#list_pagination").html("");
+        for(var i=1;i<=total;++i) {
+            texHtml+='<span class="cajonNum"><a href="javascript:" id="page_'+ i +'" class="num-pagina">'+ i +'</a></span>';
         }
-      }, 20);
-    }).mouseout(function() {
-        clearInterval(scroll_interval);
-    });
-    $("#anterior-2").unbind("mouseover");
-    $("#anterior-2").unbind("mouseout");
-    $("#anterior-2").mouseover(function(){
-      scroll_interval = setInterval(
-      function() {
-        if($("#list_pagination").scrollLeft()>0){
-          ancho = $("#list_pagination").scrollLeft() - 1
-          $("#list_pagination").scrollLeft(ancho);
-        }
-      }, 1);
-    }).mouseout(function() {
-        clearInterval(scroll_interval);
-    });
-    $("#siguiente-1").unbind("mouseover");
-    $("#siguiente-1").unbind("mouseout");
-    $("#siguiente-1").mouseover(function(){
-      scroll_interval = setInterval(
-          function() {
-            ancho = $("#list_pagination").scrollLeft() + 1
-            $("#list_pagination").scrollLeft(ancho);
-          },
-          20
-          );
-    }).mouseout(function() {
-        clearInterval(scroll_interval);
-    });
-    $("#siguiente-2").unbind("mouseover");
-    $("#siguiente-2").unbind("mouseout");
-    $("#siguiente-2").mouseover(function(){
-      scroll_interval = setInterval(
-          function() {
-            ancho = $("#list_pagination").scrollLeft() + 1
-            $("#list_pagination").scrollLeft(ancho);
-          },
-          1
-          );
-    }).mouseout(function() {
-        clearInterval(scroll_interval);
-    });
+        $("#list_pagination").html(texHtml);
 
-    $("#anterior-22").unbind("click");
-    $("#anterior-22").click(function(){
-      //buscarReposiciones(1);
-      $('#listCompanies').find('.style-companies-item-activa').removeClass('style-companies-item-activa');
-      $("span#more-info").fadeOut("fast");
-      $(".isotope-item").css('z-index','2');
+        $("#list_pagination").scrollLeft(0);
 
-      $container.isotope( { filter: filtro+1 } );
-      $(".isotope-hidden").hide();
+        ancho = $("#page_"+ dash_var.pgActual).position().left - 4;
 
-      $(".num-pagina").css('text-decoration','none');
-      $("#page_1").css('text-decoration','underline');
+        $("#list_pagination").animate({
+            scrollLeft: ancho
+        }, 200);
 
-    });
+        $(".num-pagina").css('text-decoration','none');
+        $("#page_"+ dash_var.pgActual).css('text-decoration','underline');
 
-    $("#siguiente-22").unbind("click");
-    $("#siguiente-22").click(function(){
-      //buscarReposiciones(total);
-      $('#listCompanies').find('.style-companies-item-activa').removeClass('style-companies-item-activa');
-      $("span#more-info").fadeOut("fast");
-      $(".isotope-item").css('z-index','2');
+        $(".num-pagina").unbind("click");
+        $(".num-pagina").click(function(){
+            var id = this.id;
+            id = id.split("_");
+            //buscarReposiciones(id[1]);
+            $(".isotope-item").show();
+            $('#listCompanies').find('.style-companies-item-activa').removeClass('style-companies-item-activa');
+            $("span#more-info").fadeOut("fast");
+            $(".isotope-item").css('z-index','2');
 
-      $container.isotope( { filter: filtro+total } );
-      $(".isotope-hidden").hide();
+            $container.isotope( { filter: filtro+id[1] } );
+            $(".isotope-hidden").hide();
 
-      $(".num-pagina").css('text-decoration','none');
-      $("#page_1").css('text-decoration','underline');
-    });
+            $(".num-pagina").css('text-decoration','none');
+            $("#page_"+ id[1]).css('text-decoration','underline');
 
-  }
-/***********************Paginacion fin***********************/
+        });
+
+        $("#anterior-1").unbind("mouseover");
+        $("#anterior-1").unbind("mouseout");
+        $("#anterior-1").mouseover(function(){
+            scroll_interval = setInterval(
+                function() {
+                    if($("#list_pagination").scrollLeft()>0){
+                        ancho = $("#list_pagination").scrollLeft() - 1
+                        $("#list_pagination").scrollLeft(ancho);
+                    }
+                }, 20);
+        }).mouseout(function() {
+            clearInterval(scroll_interval);
+        });
+        $("#anterior-2").unbind("mouseover");
+        $("#anterior-2").unbind("mouseout");
+        $("#anterior-2").mouseover(function(){
+            scroll_interval = setInterval(
+                function() {
+                    if($("#list_pagination").scrollLeft()>0){
+                        ancho = $("#list_pagination").scrollLeft() - 1
+                        $("#list_pagination").scrollLeft(ancho);
+                    }
+                }, 1);
+        }).mouseout(function() {
+            clearInterval(scroll_interval);
+        });
+        $("#siguiente-1").unbind("mouseover");
+        $("#siguiente-1").unbind("mouseout");
+        $("#siguiente-1").mouseover(function(){
+            scroll_interval = setInterval(
+                function() {
+                    ancho = $("#list_pagination").scrollLeft() + 1
+                    $("#list_pagination").scrollLeft(ancho);
+                },
+                20
+            );
+        }).mouseout(function() {
+            clearInterval(scroll_interval);
+        });
+        $("#siguiente-2").unbind("mouseover");
+        $("#siguiente-2").unbind("mouseout");
+        $("#siguiente-2").mouseover(function(){
+            scroll_interval = setInterval(
+                function() {
+                    ancho = $("#list_pagination").scrollLeft() + 1
+                    $("#list_pagination").scrollLeft(ancho);
+                },
+                1
+            );
+        }).mouseout(function() {
+            clearInterval(scroll_interval);
+        });
+
+        $("#anterior-22").unbind("click");
+        $("#anterior-22").click(function(){
+            //buscarReposiciones(1);
+            $(".isotope-item").show();
+            $('#listCompanies').find('.style-companies-item-activa').removeClass('style-companies-item-activa');
+            $("span#more-info").fadeOut("fast");
+            $(".isotope-item").css('z-index','2');
+
+            $container.isotope( { filter: filtro+1 } );
+            $(".isotope-hidden").hide();
+
+            $(".num-pagina").css('text-decoration','none');
+            $("#page_1").css('text-decoration','underline');
+
+        });
+
+        $("#siguiente-22").unbind("click");
+        $("#siguiente-22").click(function(){
+            //buscarReposiciones(total);
+            $(".isotope-item").show();
+            $('#listCompanies').find('.style-companies-item-activa').removeClass('style-companies-item-activa');
+            $("span#more-info").fadeOut("fast");
+            $(".isotope-item").css('z-index','2');
+
+            $container.isotope( { filter: filtro+total } );
+            $(".isotope-hidden").hide();
+
+            $(".num-pagina").css('text-decoration','none');
+            $("#page_" + total).css('text-decoration','underline');
+        });
+
+    }
+    /***********************Paginacion fin***********************/
+
 
 function charset(texto,item){
 

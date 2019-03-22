@@ -26,6 +26,7 @@ $(function(){
 
 	$('#lotes-general').show();
 
+
 	//$("#tabla-datos-general").find(".OSinfo").hide(); // ocultar lotes de os
 
 

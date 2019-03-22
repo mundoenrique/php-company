@@ -3,7 +3,7 @@ var selectStatusDriver;
 $(function() {
 	$.post(baseURL + '/' + isoPais + '/trayectos/modelo', { way: 'drivers', modelo: 'driver' })
         .done( function(data) {
-					lang = data.language;
+            lang = data.language;
             switch (data.code) {
                 case 0:
                 case 1:
@@ -284,3 +284,4 @@ $('#table-drivers').on('click', '#down-excel', function (e) {
 	downReports('ConductoresExcel', 'reportes_trayectos', dataReport, 'conductores-xls');
 
 });
+

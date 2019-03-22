@@ -6,11 +6,9 @@ function validaForm()
 	});
 
 	var dni = /^(\d{6,10})$/,
-			card = /^(\d{16})$/,
-			amount = /^-?[\d]+([.][\d]{1,2})?$/,
-			code = /^([\w ]{2,20})$/,
-			ref = /^(\d{4,10})$/,
-			desc = /^([\w ]{2,20})$/;
+		card = /^(\d{16})$/,
+		amount = /^-?[\d]+([.][\d]{1,2})?$/,
+		code = /^([\w ]{2,20})$/;
 
 	//Validar solicitud de DNI y tarjeta------------------------------------------------------------
 	$('#data-card').validate({
@@ -65,9 +63,7 @@ function validaForm()
 
 		rules:{
 			'code': {required: true, pattern: code},
-			'amount': {required: true, pattern: amount, amountValid: true},
-			'reference': {required: true, pattern: ref},
-			'desc': {required: true, pattern: desc}
+			'amount': {required: true, pattern: amount, amountValid: true}
 		},
 
 		messages: {
@@ -76,9 +72,7 @@ function validaForm()
 				required: 'Indique un monto válido (x.xx "Solo números").',
 				pattern: 'Indique un monto válido (x.xx "Solo números").',
 				amountValid: 'El monto a pagar es superior al saldo disponible.'
-			},
-			'reference': 'Indique una refencia válida (max 10, solo números)',
-			'desc': 'Indique una descripción válida (max 20)'
+			}
 		}
 	});
 	//----------------------------------------------------------------------------------------------
@@ -102,7 +96,7 @@ function validaForm()
 
 	jQuery.validator.addMethod('amountValid', function(value, element, regex){
 		var response,
-			balance = parseFloat($('#balance').val().substr(2)),
+			balance = parseFloat($('#balance').val().substr(3)),
 			payAmount = parseFloat(value);
 
 		response = (balance >= payAmount);

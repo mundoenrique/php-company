@@ -297,6 +297,7 @@ $('#exportTo').attr('action', baseURL + api + isoPais + "/reportes/downPDFactivi
 
   });
 
+
   function descargarArchivo(datos, url, titulo){
 
   $aux = $("#loadImg").dialog({title:titulo,modal:true, close:function(){$(this).dialog('close')}, resizable:false });

@@ -115,14 +115,18 @@ $('select.categories-products').val('*');
 
 // mostrar resultados nulos
 function resultNull(){
-  $container.isotope({onLayout: function( $elems, instance ){
-           $('#products-list').height($('#products-list').height()+30);
-        },resizesContainer:false});
+
 
   if ( !$container.data('isotope').$filteredAtoms.length ) {
     $('.results').fadeIn('slow');
+    $container.isotope({onLayout: function( $elems, instance ){
+           $('#products-list').height($('#products-list').height()-60);
+        },resizesContainer:false});
   } else {
     $('.results').fadeOut('fast');
+     $container.isotope({onLayout: function( $elems, instance ){
+           $('#products-list').height($('#products-list').height()+30);
+        },resizesContainer:false});
   }
 }
 // fin mostrar resultados nulos

@@ -95,7 +95,7 @@ $(function() {
         var idTravel = $(this).attr('id-travel'),
             func = 'update';
         addEdit(idTravel, func)
-    });
+		});
 
 	//Descargar reporte en EXCEL
 	$('#table-travels').on('click', '#down-excel', function (e) {

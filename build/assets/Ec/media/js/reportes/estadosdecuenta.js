@@ -670,7 +670,6 @@ if(buscarReporte){
 
 			/*
 			if(buscarReporte){
-
 			   paginar(data.totalPaginas, data.pagActual);
 			   buscarReporte=false;
 			}
@@ -732,32 +731,33 @@ if(buscarReporte){
 }
 
 }
-/*
-function paginar(totalPaginas, paginaActual) {
-			$("#paginacion").paginate({
-				count 		: totalPaginas,
-				start 		: paginaActual,
-				display     : 10,
-				border					: false,
-				text_color  			: '#79B5E3',
-				background_color    	: 'none',
-				text_hover_color  		: '#2573AF',
-				background_hover_color	: 'none',
-				images		: false,
-				mouse		: 'press',
-				onChange     			: function(page){
 
-											if( !$('.EC-container').hasClass('rpg'+page) ){
-												$('#paginacion').hide();
-												BuscarEstadosdeCuenta(page);
-											}
-											$('#div_tablaDetalle .EC-container').hide();
-												$('#div_tablaDetalle .rpg'+page).show();
+	/*
+	function paginar(totalPaginas, paginaActual) {
+		$("#paginacion").paginate({
+			count 		: totalPaginas,
+			start 		: paginaActual,
+			display     : 10,
+			border					: false,
+			text_color  			: '#79B5E3',
+			background_color    	: 'none',
+			text_hover_color  		: '#2573AF',
+			background_hover_color	: 'none',
+			images		: false,
+			mouse		: 'press',
+			onChange     			: function(page){
 
-										  }
-			});
-			}
-*/
+										if( !$('.EC-container').hasClass('rpg'+page) ){
+											$('#paginacion').hide();
+											BuscarEstadosdeCuenta(page);
+										}
+										$('#div_tablaDetalle .EC-container').hide();
+											$('#div_tablaDetalle .rpg'+page).show();
+
+									  }
+		});
+	}
+	*/
 /***********************Paginacion inicio***********************/
 	function paginacion(total, inicial){
 		var texHtml="";

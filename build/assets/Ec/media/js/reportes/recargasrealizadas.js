@@ -1,4 +1,4 @@
-	var colores = ["#54C2D0","#50C592","#2B569F","#994596","#F5921E","#298C9A","#2C855F","#1A325B","#522551","#B46607"];
+var colores = ["#54C2D0","#50C592","#2B569F","#994596","#F5921E","#298C9A","#2C855F","#1A325B","#522551","#B46607"];
 
 
 $(".fecha").keypress(function(e){
@@ -76,6 +76,7 @@ $(document).ready(function() {
 		$('form#formulario').submit();
 
 	});
+
 //METODO PARA REALIZAR LA BUSQUEDA
 var filtro_busq={};
 	    $("#repRecargasRealizadas_btnBuscar").click(function(){
