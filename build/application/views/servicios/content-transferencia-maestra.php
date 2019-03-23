@@ -56,16 +56,32 @@ $show_cl = (in_array("trapgo", $funciones)) ? '' : 'display:none';
                     <br>
                     <h5 style="float:left;"><?php echo "Monto" ?></h5>
                     <span>
-					<input id="amount" placeholder="Ingrese monto" disabled/>
-                </span>
+											<input id="amount" placeholder="Ingrese monto" disabled/>
+                		</span>
                 </div>
 
                 <div id="search-3" style="padding-top: 18px">
                     <h5><?php echo "Descripción" ?></h5>
                     <span>
-					<input id="description" placeholder="Ingrese descripción" maxlength=16 disabled/>
-				</span>
-                </div>
+											<input id="description" placeholder="Ingrese descripción" maxlength=16 disabled/>
+										</span>
+								</div>
+								<div id="search-4">
+									<span>
+										<input class="radio" type="radio" name="radio" value="0">
+										<p>cargo</p>
+									</span>
+									<span>
+										<input class="radio" type="radio" name="radio" value="1">
+										<p>abono</p>
+									</span>
+								</div>
+								<div id="search-5">
+								<select id="cuentas">
+									<option value="1">CORRIENTE</option>
+									<option value="2">AHORRO</option>
+								</select>
+								</div>
             </div>
 
             <div id="batchs-last">
