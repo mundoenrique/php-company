@@ -49,8 +49,8 @@ class visa_model extends CI_Model
     {
 	    log_message('INFO', '[' . $this->userName . '] DataRequest--->: ' .
 	                        $dataRequest);
-	
-	
+
+
 	    $paginar = TRUE;
 	    $dataVisa = json_decode($dataRequest);
 	    $draw = $dataVisa->draw;
@@ -61,7 +61,7 @@ class visa_model extends CI_Model
 		    ((int)$dataVisa->start / (int)$tamanoPagina) + 1 ;
 	    $dni = $dataVisa->dni;
 	    $tarjetaNro = $dataVisa->card;
-	
+
 	    $canal = 'ceo';
 		$modulo = 'TM';
 		$function = 'buscarTransferenciaM';
@@ -97,11 +97,11 @@ class visa_model extends CI_Model
 		]);
 		$responseWs = np_Hoplite_GetWS('eolwebInterfaceWS', $request);
 		$responseJson = np_Hoplite_Decrypt($responseWs);
-		$responseWs = json_decode(utf8_encode($responseJson));
+		$responseWs = json_decode($responseJson);
 
 		log_message('INFO', '[' . $this->userName . '] RESPONSE visa -- ' .
 		                    'callWsCardList --> ' . json_encode($responseWs));
-	
+
 	    /*$responseWs = json_decode('{"rc":-150,"msg":"PROCESO OK"}');*/
 		$this->data = $cardList = [];
 		if($responseWs) {
@@ -119,26 +119,26 @@ class visa_model extends CI_Model
 					$recordsFiltered = $responseWs->numeroTarjetas;
 					$this->data = $cardList;
 					break;
-					
+
 				case -29:
 				case -61:
 					$this->code = 3;
 					$this->title = lang('SYSTEM_NAME');
 					$this->msg = lang('ERROR_(-29)');
 					break;
-					
+
 				case -3:
 					$this->code = 3;
 					$this->title = lang('SYSTEM_NAME');
 					$this->msg = lang('ERROR_GENERICO_USER');
 					break;
-					
+
 				case -150:
 					$this->code = 2;
 					$this->title = lang('CONVIS');
 					$this->msg = lang('VISA_NON_RESULT');
 					break;
-				
+
 				case -235:
 					$this->code = 2;
 					$this->title = lang('CONVIS');
@@ -169,7 +169,7 @@ class visa_model extends CI_Model
 		if($this->code === 3) {
 			$this->session->sess_destroy();
 		}
-		
+
 		return json_encode($this->response);
     }
 	//----------------------------------------------------------------------------------------------
@@ -215,7 +215,7 @@ class visa_model extends CI_Model
 		]);
 		$responseWs = np_Hoplite_GetWS('eolwebInterfaceWS', $request);
 		$responseJson = np_Hoplite_Decrypt($responseWs);
-		$responseWs = json_decode(utf8_encode($responseJson));
+		$responseWs = json_decode($responseJson);
 
 		log_message('INFO', '[' . $this->userName . '] RESPONSE visa -- callWsCardControls --> {"rc":' .
 		                    json_encode($responseWs->rc) . ',"msg":' . json_encode($responseWs->msg) . '}');
@@ -224,7 +224,7 @@ class visa_model extends CI_Model
 			log_message('INFO', '[' . $this->userName . '] RESPONSE BEAN -- callWsCardControls --> ' .
 			                    $responseWs->bean);
 		}
-	
+
 	    /*$responseWs = json_decode('{"rc":-3,"msg":"PROCESO OK"}');*/
 	    $this->data = $controlList = [];
 	    if($responseWs) {
@@ -235,33 +235,33 @@ class visa_model extends CI_Model
 				    $this->data->dni = $dni;
 				    $this->data->card = $card;
 				    break;
-				    
+
 			    case -150:
 				    $this->code = 2;
 				    $this->title = lang('CONVIS');
 				    $this->msg = lang('VISA_NON_RESULT');
 				    break;
-			
+
 			    case -345:
 			    case -346:
 				    $this->code = 2;
 				    $this->title = lang('CONVIS');
 				    $this->msg = lang('VISA_COUNT_NO_FOUND');
 				    break;
-			
+
 			    case -347:
 				    $this->code = 2;
 				    $this->title = lang('CONVIS');
 				    $this->msg = lang('VISA_ERROR_CONTROLS');
 				    break;
-				    
+
 			    case -29:
 			    case -61:
 				    $this->code = 3;
 				    $this->title = lang('SYSTEM_NAME');
 				    $this->msg = lang('ERROR_(-29)');
 				    break;
-				    
+
 			    case -3:
 			    case -20:
 			    case -33:
@@ -269,7 +269,7 @@ class visa_model extends CI_Model
 				    $this->title = lang('SYSTEM_NAME');
 				    $this->msg = lang('ERROR_GENERICO_USER');
 				    break;
-			
+
 			    default:
 				    $this->code = 2;
 				    $this->title = lang('CONVIS');
@@ -281,7 +281,7 @@ class visa_model extends CI_Model
 		    $this->title = lang('SYSTEM_NAME');
 		    $this->msg = lang('ERROR_GENERICO_USER');
 	    }
-	
+
 	    $this->response = [
 		    'code' => $this->code,
 		    'title' => $this->title,
@@ -291,12 +291,12 @@ class visa_model extends CI_Model
 	    if($this->code === 3) {
 		    $this->session->sess_destroy();
 	    }
-	
+
 	    return json_encode($this->response);
-		
+
 	}
 	//----------------------------------------------------------------------------------------------
-	
+
 	//Método para obtener la actualizar los controles
 	public function callWsUpdateControls($urlCountry, $dataRequest)
 	{
@@ -325,12 +325,12 @@ class visa_model extends CI_Model
 			'action' => 'D',
 			'rules' => []
 		];
-		
+
 		$logAcceso = np_hoplite_log(
 			$this->sessionId, $this->userName, $canal, $modulo, $function, $operacion, $this->rc,
 			$this->ip, $this->timeLog
 		);
-		
+
 		foreach($controls AS $ruleCode => $overRides) {
 			$coderule = $ruleCode === 'not_fuel' ? 'not fuel' : $ruleCode;
 			switch($overRides->action) {
@@ -339,7 +339,7 @@ class visa_model extends CI_Model
 						'ruleCode' => $coderule,
 						'overrides' => [],
 					];
-					
+
 					if(isset($overRides->overrides)) {
 						foreach($overRides->overrides AS $override) {
 							$code = $override->code;
@@ -354,7 +354,7 @@ class visa_model extends CI_Model
 								$overrides
 							);
 						}
-						
+
 					}
 					array_push(
 						$create['rules'],
@@ -366,7 +366,7 @@ class visa_model extends CI_Model
 						'ruleCode' => $coderule,
 						'overrides' => [],
 					];
-					
+
 					if(isset($overRides->overrides)) {
 						foreach($overRides->overrides AS $override) {
 							$code = $override->code;
@@ -381,7 +381,7 @@ class visa_model extends CI_Model
 								$overrides
 							);
 						}
-						
+
 					}
 					array_push(
 						$update['rules'],
@@ -393,7 +393,7 @@ class visa_model extends CI_Model
 						'ruleCode' => $coderule,
 						'overrides' => [],
 					];
-					
+
 					if(isset($overRides->overrides)) {
 						foreach($overRides->overrides AS $override) {
 							$code = $override->code;
@@ -408,7 +408,7 @@ class visa_model extends CI_Model
 								$overrides
 							);
 						}
-						
+
 					}
 					array_push(
 						$delete['rules'],
@@ -417,14 +417,14 @@ class visa_model extends CI_Model
 					break;
 			}
 		}
-		
+
 		$controlsList = [
 			'startDate' => $firstDate,
 		    'endDate' => $lastDate,
 		    'timeZone' => 'UTC-6',
 			'rulesSet' => [$create, $update, $delete],
 		];
-		
+
 		$data = json_encode([
             'idOperation' => $idOperation,
             'className' => $className,
@@ -436,10 +436,10 @@ class visa_model extends CI_Model
             'token' => $this->token,
             'pais' => $urlCountry
 		 ]);
-		
+
 		log_message('INFO', '[' . $this->userName . '] REQUEST visa -- ' .
 		                    'callWsCardControls --> ' . $data);
-		
+
 		$dataEncrypt = np_Hoplite_Encryption($data);
 		$request = json_encode([
 			'bean' => $dataEncrypt,
@@ -447,11 +447,11 @@ class visa_model extends CI_Model
 		 ]);
 		$responseWs = np_Hoplite_GetWS('eolwebInterfaceWS', $request);
 		$responseJson = np_Hoplite_Decrypt($responseWs);
-		$responseWs = json_decode(utf8_encode($responseJson));
-		
+		$responseWs = json_decode($responseJson);
+
 		log_message('INFO', '[' . $this->userName . '] RESPONSE visa -- ' .
 		                    'callWsCardList --> ' . json_encode($responseWs));
-				
+
 		if($responseWs) {
 			switch ($responseWs->rc) {
 				case 0:
@@ -459,7 +459,7 @@ class visa_model extends CI_Model
 					$this->data = $responseWs;
 					$this->title = lang('CONVIS');
 					$this->msg = lang('VISA_UPDATE_SUCCESS');
-					
+
 					break;
 				case -29:
 				case -61:
@@ -478,7 +478,7 @@ class visa_model extends CI_Model
 					$this->title = lang('CONVIS');
 					$this->msg = lang('VISA_NON_RESULT');
 					break;
-				
+
 				default:
 					$this->code = 2;
 					$this->title = lang('CONVIS');
@@ -490,7 +490,7 @@ class visa_model extends CI_Model
 			$this->title = lang('SYSTEM_NAME');
 			$this->msg = lang('ERROR_GENERICO_USER');
 		}
-		
+
 		$this->response = [
 			'code' => $this->code,
 			'title' => $this->title,
@@ -500,8 +500,8 @@ class visa_model extends CI_Model
 		if($this->code === 3) {
 			$this->session->sess_destroy();
 		}
-		
+
 		return json_encode($this->response);
-		
+
 	}
 }

@@ -89,7 +89,7 @@ class reports_additional_model extends CI_Model {
 
 		log_message('INFO', '--[' . $this->userName . '] RESPONSE recarga/comision: ' . $jsonResponse);
 
-		$responseServ = json_decode(utf8_encode($jsonResponse));
+		$responseServ = json_decode($jsonResponse);
 
 		$title = lang('SYSTEM_NAME');
 		$data = [];
@@ -198,7 +198,7 @@ class reports_additional_model extends CI_Model {
 		$dataRequest = json_encode(['bean' => $dataEncry, 'pais' => $this->pais]);
 		$response = np_Hoplite_GetWS('eolwebInterfaceWS', $dataRequest);
 		$jsonResponse = np_Hoplite_Decrypt($response);
-		$responseServ = json_decode(utf8_encode($jsonResponse));
+		$responseServ = json_decode($jsonResponse);
 
 		if($responseServ->rc === 0 && $responseServ->archivo != '') {
 			$file = $responseServ->archivo;
