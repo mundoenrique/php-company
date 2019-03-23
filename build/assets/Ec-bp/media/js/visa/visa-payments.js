@@ -25,15 +25,17 @@ $(function() {
 		}
 
 	});
+
+
+
+
 });
 
 function sendPayment(code, amount)
 {
 	var dataRequest = JSON.stringify({
 		code: $('#code').val(),
-		amount: $('#amount').val(),
-		reference: $('#reference').val(),
-		desc: $('#desc').val()
+		amount: $('#amount').val()
 	});
 
 	$.ajax({
@@ -53,8 +55,6 @@ function sendPayment(code, amount)
 				type = '';
 				$('#code').val('');
 				$('#amount').val('');
-				$('#reference').val('');
-				$('#desc').val('');
 				break;
 			case 2:
 				type = 'serv';

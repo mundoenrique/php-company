@@ -3,6 +3,7 @@ $(function(){
   //LOTES CONFIRMACION (CHECK)
 
   $('#batchs-last').on('click','#confirma', function(){
+
       var pass = $("#clave").val();
       var embozo1 = $("#embozo1").val();
       var embozo2 = $("#embozo2").val();
@@ -35,9 +36,10 @@ $(function(){
           $.post(baseURL+isoPais+'/lotes/confirmacion/confirmar',
             {'pass':pass, 'embozo1':embozo1, 'embozo2':embozo2, 'conceptoDim':conceptoDim, 'info':info, 'idTipoLote':idTipoLote})
           .done( function(data){
+
               if(!data.ERROR){
                 if (data.linkAut) {
-                    notificacion('Confirmación','Proceso exitoso.<h5>Ha confirmado el Lote Nro: '+$('#numLote').text()+'</h5>', baseURL+isoPais+'/lotes/autorizacion');
+                  notificacion('Confirmación','Proceso exitoso.<h5>Ha confirmado el Lote Nro: '+$('#numLote').text()+'</h5>', baseURL+isoPais+'/lotes/autorizacion')
                 }else if(data.ordenes){
                     $("#data-confirm").attr('value',data.ordenes);
                     notificacion('Confirmación', '<h3>Proceso exitoso</h3>','form#toOS');

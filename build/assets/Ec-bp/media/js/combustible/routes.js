@@ -3,9 +3,9 @@ var isoPais = $('body').attr('data-country');
 var baseCDN = $('body').attr('data-app-base-cdn');
 var api = "api/v1/";
 
-
 //Descarga de reportes
-function downReports(way, modelo, data, file) {
+function downReports(way, modelo, data, file)
+{
 	var dataRequest = JSON.stringify(data);
 	$.ajax({
 		url: baseURL + isoPais + '/trayectos/modelo',

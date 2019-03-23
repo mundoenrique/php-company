@@ -11,13 +11,10 @@ if( !$("#loteXdesa").val()&& !$('#lotesxAuth').val() ){
   $(".listaxAuth .checkbox-select").remove();
 }
 
-
   var js_var ={
     loteF:"", numloteF:"", tipoloteF:"",
     loteA:"", numloteA:"", tipoloteA:""
   }
-
-
 
   //   LOTE POR FIRMAR
 
@@ -67,7 +64,7 @@ if( !$("#loteXdesa").val()&& !$('#lotesxAuth').val() ){
       $.post(baseURL+isoPais+'/lotes/autorizacion/firmar',{'data-lotes': js_var.loteF,'data-pass':pass}).done(function(data){
          $aux.dialog('destroy');
         if(!data.ERROR){
-
+          $('<div>Proceso exitoso.<h5>Listando lotes</h5></div>').dialog({title:"Firmando lote",modal: true, bgiframe: true});
          location.reload();
         }else{
            if(data.ERROR=='-29'){
@@ -129,7 +126,7 @@ $('#lotes-2').on('click','#select-allA', function() {
     if(pass!="" && js_var.loteA!="" && osTipo!=""){
 
       pass = hex_md5( pass );
-      $('#claveAuth').val( '' );
+			$('#claveAuth').val( '' );
 
       $('#loading').dialog({title:'Autorizando lotes', modal:true, resizable:false, dialogClass: 'hide-close', close:function(){$(this).dialog('destroy')}});
 
@@ -531,20 +528,9 @@ function eliminarLotes(idlote,acnumlote,ctipolote,pass){
 
 }
 
-function getCookie(cname) {
-    var name = cname + "=";
-    var ca = document.cookie.split(';');
-    for(var i=0; i<ca.length; i++) {
-        var c = ca[i];
-        while (c.charAt(0)==' ') c = c.substring(1);
-        if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
-    }
-    return "";
-}
-
   $('#downPDF').on('click', function(){
 
-    $('#exportTo').attr('action', baseURL + api + isoPais + "/reportes/detalleLoteAuthExpPDF");
+  $('#exportTo').attr('action', baseURL + api + isoPais + "/reportes/detalleLoteAuthExpPDF");
     $('#data-lote').val($("#data-lote").val());
     $('#exportTo').submit();
 
@@ -552,7 +538,7 @@ function getCookie(cname) {
 
   $('#downXLS').on('click', function(){
 
-    $('#exportTo').attr('action', baseURL + api + isoPais + "/reportes/detalleLoteAuthExpXLS");
+  $('#exportTo').attr('action', baseURL + api + isoPais + "/reportes/detalleLoteAuthExpXLS");
     $('#data-lote').val($("#data-lote").val());
     $('#exportTo').submit();
 

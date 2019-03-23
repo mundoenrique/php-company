@@ -1,21 +1,20 @@
 var scroll_interval;
 var ancho=0;
 
-
 var tamPg = 20;
 
 $(document).ready(function() {
-		
 
-	$("#SaldosAmanecidos-TH").attr('maxlength','8');		
+
+		$("#SaldosAmanecidos-TH").attr('maxlength','10');
 
 		$("#cargando_empresa").fadeIn("slow");
 		$.getJSON(baseURL + api + isoPais + '/empresas/lista').always(function( data ) {
 			$("#cargando_empresa").fadeOut("slow");
 			if(!(data.ERROR)){
-				
+
 	  			$.each(data.lista, function(k,v){
-	  				
+
 					$("#SaldosAmanecidos-empresa").append('<option value="'+v.acrif+'" acnomcia="'+v.acnomcia+'" acrazonsocial="'+v.acrazonsocial+'" acdesc="'+v.acdesc+'" accodcia="'+v.accodcia+'">'+v.acnomcia+'</option>');
 				});
 			}else{
@@ -42,15 +41,15 @@ $(document).ready(function() {
 			$.post(baseURL + api + isoPais + "/producto/lista", { 'acrif': acrif }, function(data){
 				$("#cargando_producto").fadeOut("slow");
 				$("#SaldosAmanecidos-empresa").removeAttr('disabled');
-				if(!data.ERROR){	
-					$.each(data, function(k,v){  				
+				if(!data.ERROR){
+					$.each(data, function(k,v){
 						if(v.descripcion.toLowerCase().indexOf("bonus")==-1 && v.descripcion.toLowerCase().indexOf("provis")==-1 && v.descripcion.toLowerCase().indexOf("alimentacion")==-1 && v.descripcion.toLowerCase().indexOf("alimentación")==-1){
-							$("#SaldosAmanecidos-producto").append('<option value="'+v.idProducto+'" des = "'+v.descripcion+'" marca = "'+v.marca.toUpperCase()+'" >'+v.descripcion+" / "+v.marca.toUpperCase()+'</option>');	
+							$("#SaldosAmanecidos-producto").append('<option value="'+v.idProducto+'" des = "'+v.descripcion+'" marca = "'+v.marca.toUpperCase()+'" >'+v.descripcion+" / "+v.marca.toUpperCase()+'</option>');
 						}
-					}); 
+					});
 				}else{
 					$("#SaldosAmanecidos-producto").append('<option value="">'+data.ERROR+'</option>');
-				} 
+				}
 
 			});
 		}
@@ -58,36 +57,37 @@ $(document).ready(function() {
 
 
 
-//METODO PARA REALIZAR LA BUSQUEDA 
+//METODO PARA REALIZAR LA BUSQUEDA
 	    $("#SaldosAmanecidos-btnBuscar").click(function(){
 	    	buscarSaldos(1);
 	    	evBuscar=true;
 		});
 
-/*
- 		function paginar(totalPaginas, paginaActual) {
-			$("#paginacion").paginate({
-				count 		: totalPaginas,
-				start 		: paginaActual,
-				display     : 20,
-				border					: false,
-				text_color  			: '#79B5E3',
-				background_color    	: 'none',	
-				text_hover_color  		: '#2573AF',
-				background_hover_color	: 'none', 
-				images		: false,
-				mouse		: 'press',
-				onChange     			: function(page){
+	/*
+		function paginar(totalPaginas, paginaActual) {
+		$("#paginacion").paginate({
+			count 		: totalPaginas,
+			start 		: paginaActual,
+			display     : 20,
+			border					: false,
+			text_color  			: '#79B5E3',
+			background_color    	: 'none',
+			text_hover_color  		: '#2573AF',
+			background_hover_color	: 'none',
+			images		: false,
+			mouse		: 'press',
+			onChange     			: function(page){
 
-											if( !$('tbody tr').hasClass('pg'+page) ){
-												buscarSaldos(page);
-											}
-											$('tbody tr').hide();
-											$('tbody .pg'+page).show();
-										  }
-			});
-			}
-*/
+										if( !$('tbody tr').hasClass('pg'+page) ){
+											buscarSaldos(page);
+										}
+										$('tbody tr').hide();
+										$('tbody .pg'+page).show();
+									  }
+		});
+		}
+		*/
+
 /***********************Paginacion inicio***********************/
 	function paginacion(total, inicial){
 		var texHtml="";
@@ -114,7 +114,7 @@ $(document).ready(function() {
 				id = id.split("_");
 			buscarSaldos(id[1]);
 		});
-		
+
 		$("#anterior-1").unbind("mouseover");
 		$("#anterior-1").unbind("mouseout");
 		$("#anterior-1").mouseover(function(){
@@ -179,12 +179,12 @@ $(document).ready(function() {
 		});
 
 	}
-/***********************Paginacion fin***********************/			
+/***********************Paginacion fin***********************/
 
 			function validar_filtro_busqueda(div){
 				var valido=true;
 
-				//VALIDA SELECT QUE SEAN REQUERIDOS NO SE ENCUENTREN VACIOS 
+				//VALIDA SELECT QUE SEAN REQUERIDOS NO SE ENCUENTREN VACIOS
 				$.each($("#"+div+" select.required"),function(posItem,item){
 					var $elem=$(item);
 					if($elem.val()=="" && !($elem==$("select-small"))){
@@ -193,14 +193,14 @@ $(document).ready(function() {
 					}else{
 						$elem.attr("style","");
 					}
-				});  
+				});
 
 
 				//VALIDA INPUT:CHECKBOX  y INPUT:RADIO QUE SEAN REQUERIDOS NO SE ENCUENTREN VACIOS
 				var check = $("#"+div+" input[type='checkbox'].required:checked").length;
 				var radio = $("#"+div+" input[type='radio'].required:checked ").length;
 				if((check == "")&&($("#"+div+" input[type='checkbox'].required").length!="")){
-					valido=false;   	
+					valido=false;
 					$("#"+div+" input[type='checkbox'].required").next().attr("style","color:red");
 				}else{
 					$("#"+div+" input[type='checkbox'].required").next().attr("style","");
@@ -211,7 +211,7 @@ $(document).ready(function() {
 					$("#"+div+" input[type='radio'].required").next().attr("style","color:red");
 				}else{
 					$("#"+div+" input[type='radio'].required").next().attr("style","");
-				} 
+				}
 
 
 				if(!valido){
@@ -224,11 +224,8 @@ $(document).ready(function() {
 
 				return valido;
 			}
-					var filtro_busq={};
-
-
-	  			function buscarSaldos(paginaActual){
-				
+var filtro_busq={};
+			function buscarSaldos(paginaActual){
 			    	var $consulta;
 
 			    	if(validar_filtro_busqueda("lotes-2")){
@@ -240,12 +237,12 @@ $(document).ready(function() {
 				    	filtro_busq.producto=$("#SaldosAmanecidos-producto").val();
 				    	filtro_busq.nomEmpresa=$('option:selected', "#SaldosAmanecidos-empresa").attr("acnomcia");
 				    	filtro_busq.descProd=$('option:selected', "#SaldosAmanecidos-producto").attr("des");
-				    	filtro_busq.paginaActual=paginaActual;				    	
+				    	filtro_busq.paginaActual=paginaActual;
 				    	filtro_busq.paginar=true;
 				    	filtro_busq.tamPg=tamPg;
 
-						
-				    	
+
+
 			//SE REALIZA LA INVOCACION AJAX
 				    	$consulta = $.post(baseURL + api + isoPais + "/reportes/saldosamanecidos",filtro_busq );
 			//DE SER EXITOSA LA COMUNICACION CON EL SERVICIO SE EJECUTA EL SIGUIENTE METODO "DONE"
@@ -261,7 +258,7 @@ $(document).ready(function() {
 					 			}
 					 			var tr;
 					 			var td;
-			//DE TRAER RESULTADOS LA CONSULTA SE GENERA LA TABLA CON LA DATA... 
+			//DE TRAER RESULTADOS LA CONSULTA SE GENERA LA TABLA CON LA DATA...
 			//DE LO CONTRARIO SE GENERA UN MENSAJE "No existe Data relacionada con su filtro de busqueda"
 
 				 			if(data.rc == "0"){
@@ -278,7 +275,7 @@ $(document).ready(function() {
 					 				td.attr("style","text-align: center");
 					 				td=$(document.createElement("td")).appendTo(tr);
 					 				td.html(itemLista.tarjeta);
-					 				td.attr("style","text-align: center");					 				
+					 				td.attr("style","text-align: center");
 					 				td=$(document.createElement("td")).appendTo(tr);
 					 				td.html(itemLista.saldo);
 					 				td.attr("style","text-align: center");
@@ -287,16 +284,17 @@ $(document).ready(function() {
 					 				td.addClass("td-medio");
 					 				td.attr("style","text-align: center");
 					 			});
+
 					 			/*
 					 			if (evBuscar) {
 					 				$('#paginacion').show();
-					 			paginar(data.totalPaginas, data.paginaActual);
-					 			evBuscar=false;
+					 				paginar(data.totalPaginas, data.paginaActual);
+					 				evBuscar=false;
 					 			}
-					 			*/
+								*/
 
 								paginacion(data.totalPaginas, data.paginaActual);
-					 			
+
 					 			$('#tabla-datos-general tbody tr:even').addClass('even ');
 
 				 			}else{
@@ -335,7 +333,7 @@ $("#export_excel").click(function(){
 			$('form#formulario').append('<input type="hidden" name="descProd" value="'+filtro_busq.descProd+'" />');
 			$('form#formulario').append('<input type="hidden" name="paginaActual" value="'+1+'" />');
 			$('form#formulario').attr('action',baseURL+api+isoPais+"/reportes/saldosamanecidosExpXLS");
-			$('form#formulario').submit(); 
+			$('form#formulario').submit();
 
 			/*datos={
 				empresa:filtro_busq.empresa,
@@ -352,9 +350,9 @@ $("#export_excel").click(function(){
     			$aux.dialog('destroy')
     			if(!data.ERROR){
     				$('form#formulario').empty();
-    				$('form#formulario').append('<input type="hidden" name="bytes" value="'+JSON.stringify(data.bytes)+'" />');    		
-    				$('form#formulario').append('<input type="hidden" name="ext" value="'+data.ext+'" />');  
-    				$('form#formulario').append('<input type="hidden" name="nombreArchivo" value="'+data.nombreArchivo+'" />');  
+    				$('form#formulario').append('<input type="hidden" name="bytes" value="'+JSON.stringify(data.bytes)+'" />');
+    				$('form#formulario').append('<input type="hidden" name="ext" value="'+data.ext+'" />');
+    				$('form#formulario').append('<input type="hidden" name="nombreArchivo" value="'+data.nombreArchivo+'" />');
     				$('form#formulario').attr('action',baseURL+'/'+isoPais+"/file");
     				$('form#formulario').submit()
     			}else{
@@ -362,9 +360,9 @@ $("#export_excel").click(function(){
     					alert('Usuario actualmente desconectado');
 						location.reload();
     				}else{
-    					notificacion("Exportar Excel",data.ERROR)	
+    					notificacion("Exportar Excel",data.ERROR)
     				}
-    				
+
     			}
     		})*/
 
