@@ -4181,18 +4181,9 @@ ul#brands li p img {
 
 .table-text-aut tbody tr {
 	margin-bottom: 10px;
-	background: #F3F3F3;
-	-webkit-box-shadow: rgba(51, 51, 51, 0.5) 0 1px 1px;
-	-moz-box-shadow: rgba(51, 51, 51, 0.5) 0 1px 1px;
-	box-shadow: rgba(51, 51, 51, 0.5) 0 1px 1px;
 	background: #F2F2F2;
 	float: left;
-	margin: 0px 5px;
-	-webkit-border-radius: 3px 3px 3px 3px;
-	-moz-border-radius: 3px 3px 3px 3px;
-	-ms-border-radius: 3px 3px 3px 3px;
-	-o-border-radius: 3px 3px 3px 3px;
-	border-radius: 3px 3px 3px 3px;
+	margin: 0px 7px;
 	/*width: 618px;*/
 	border: 1px solid #dddddd;
 	line-height: 35px;
@@ -4360,21 +4351,11 @@ ul#brands li p img {
 #table-lote-detail tbody tr {
 	margin-bottom: 10px;
 	background: #F3F3F3;
-	-webkit-box-shadow: rgba(51, 51, 51, 0.5) 0 1px 1px;
-	-moz-box-shadow: rgba(51, 51, 51, 0.5) 0 1px 1px;
-	box-shadow: rgba(51, 51, 51, 0.5) 0 1px 1px;
-	background: #F2F2F2;
 	float: left;
-	margin: 0px 5px;
-	-webkit-border-radius: 3px 3px 3px 3px;
-	-moz-border-radius: 3px 3px 3px 3px;
-	-ms-border-radius: 3px 3px 3px 3px;
-	-o-border-radius: 3px 3px 3px 3px;
-	border-radius: 3px 3px 3px 3px;
+	margin: 0px 10px;
 	/*width: 618px;*/
-	border: 1px solid #dddddd;
 	line-height: 20px;
-	border-left: 5px solid #54c2d0;
+
 }
 
 #table-lote-detail tbody tr:hover {
@@ -4382,7 +4363,7 @@ ul#brands li p img {
 }
 
 #table-lote-detail thead tr {
-	background: none repeat scroll 0 0 #54c2d0;
+	background: none repeat scroll 0 0 #004574;
 	-webkit-border-radius: 10px 10px 0 0;
 	-moz-border-radius: 10px 10px 0 0;
 	-ms-border-radius: 10px 10px 0 0;
@@ -4788,9 +4769,11 @@ border-right:2px solid $color-base2!important;
 }
 
 #batchs-last select {
-	color: #ffdd00;
 	margin-top: 0px;
 	float: left;
+}
+#batchs-last #selec_tipo_lote{
+	margin: 12px 10px 0px 0px;
 }
 
 #batchs-last h3 {
@@ -4798,8 +4781,8 @@ border-right:2px solid $color-base2!important;
 	color: #ffdd00;
 }
 
-#batchs-last button {
-	/*margin-left: 10px;*/
+#batchs-last #button-eliminar {
+	margin: 10px;
 }
 
 #userfile {
@@ -5022,7 +5005,7 @@ li#select-empresa select {
 
 #datos-principales-OS {
 	font-size: 15px;
-	background: none repeat scroll 0 0 #54c2d0;
+	background: none repeat scroll 0 0 #004574;
 	-webkit-border-radius: 10px 10px 0 0;
 	-moz-border-radius: 10px 10px 0 0;
 	-ms-border-radius: 10px 10px 0 0;
@@ -5344,7 +5327,7 @@ li#select-empresa select {
 	float: left;
 	padding: 3px;
 	margin-bottom: 5px;
-
+	border: 1px solid #bbbbbb;
 
 }
 
@@ -5368,12 +5351,9 @@ li#select-empresa select {
 	float: left;
 	padding: 3px;
 	margin-bottom: 5px;
-	background: #f3f3f3;
+	background: #fff;
 	border: 1px solid #bbbbbb;
-	border-left: 5px solid #ffdd00;
-	-webkit-box-shadow: rgba(51, 51, 51, 0.5) 0 1px 1px;
-	-moz-box-shadow: rgba(51, 51, 51, 0.5) 0 1px 1px;
-	box-shadow: rgba(51, 51, 51, 0.5) 0 1px 1px;
+
 }
 
 #detalleLote-3 {
@@ -5833,7 +5813,7 @@ padding:5px 0px;
 	-ms-border-radius: 3px;
 	-o-border-radius: 3px;
 	border-radius: 3px;
-	border-left: 3px solid #54c2d0;
+	border-left: 3px solid #ddd;
 }
 
 .tbody-reportes-OS tr td {
@@ -6152,11 +6132,11 @@ span.jPag-snext-img {
 
 .OSinfo {
 	margin-left: 31px;
-	background: none repeat scroll 0 0 #EAFFFF !important;
+	background: none repeat scroll 0 0 #004574 !important;
 }
 
 .OSinfo td {
-	color: #54c2d0 !important;
+	color: #fff !important;
 	max-width: 65px !important;
 	min-width: 65px !important;
 }
@@ -6173,8 +6153,9 @@ margin-left: 250px;
 	float: right !important;
 	background: white;
 	border: solid 1px #FFDD00;
-	margin-top: 0px !important;
+	margin-top: 5px;
 	font-size: 14px;
+	height: 38px;
 }
 
 #btn-modificar:hover,
@@ -6326,6 +6307,22 @@ margin-left: 250px;
 
 #search-3 {
 	float: left;
+}
+#search-4{
+	width:400px;
+}
+#search-4 span{
+	float: left;
+	width: 130px;
+}
+#search-4 input{
+	float: left;
+    margin-top: 5px;
+    margin-right: 5px;
+}
+#search-5 select{
+	width: 190px;
+	margin-left: 100px;
 }
 
 .tr-os-aut {
@@ -6536,12 +6533,13 @@ p.ben-txt {
 }
 
 .tooltip-funcionesAU {
-	color: white !important;
-	background: linear-gradient(#ffdd00, #004574) repeat scroll 0 0 #ffdd00;
-	border: medium none !important;
-	border-radius: 6px 6px 6px 6px;
-	/*box-shadow: 4px 4px 4px #555555;*/
-	color: #FFF;
+
+	/* background: linear-gradient(#ffdd00, #004574) repeat scroll 0 0 #ffdd00; */
+	background-color: white!important;
+	border: 1px solid #ddd !important;
+	border-radius: 0px 0px 0px 17px!important;
+	box-shadow: none!important;
+	color: #10133f!important;
 	min-width: 20px;
 	opacity: 1 !important;
 	padding: 5px;
@@ -6626,12 +6624,12 @@ p.ben-txt {
 }
 
 .cell-AU td {
-	color: #54c2d0 !important;
+	color: #101375 !important;
 }
 
 .cell-AU {
 	margin-left: 31px;
-	background: none repeat scroll 0 0 #EAFFFF !important;
+	background: none repeat scroll 0 0 #fff !important;
 }
 
 /*.tbody-CC td, .table-text-aut td, .tbody-reportes td{
@@ -7485,4 +7483,31 @@ select.ui-datepicker-month, select.ui-datepicker-year {
 	-webkit-appearance: none;
 	-moz-appearance: none;
 	appearance: none;
+}
+
+#btn-new-mas, #btn-new-suc {
+	height: 39px;
+}
+
+#pass_suc {
+	margin-top: 5px;
+}
+
+#agregarSuc {
+	height: 38px;
+}
+
+#btn-modif-suc {
+	margin-top: 5px;
+}
+
+/*
+	Oculta opción de Sucursales en:
+	- Menú de Configuración
+	- Módulo de Configuración
+*/
+li.menu-item.security:nth-child(3),
+li.ui-state-default.ui-corner-top:nth-child(3)
+{
+	display: none;
 }

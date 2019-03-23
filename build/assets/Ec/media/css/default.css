@@ -5005,7 +5005,7 @@ li#select-empresa select {
 
 #datos-principales-OS {
 	font-size: 15px;
-	background: none repeat scroll 0 0 #54c2d0;
+	background: none repeat scroll 0 0 #004574;
 	-webkit-border-radius: 10px 10px 0 0;
 	-moz-border-radius: 10px 10px 0 0;
 	-ms-border-radius: 10px 10px 0 0;
@@ -5813,7 +5813,7 @@ padding:5px 0px;
 	-ms-border-radius: 3px;
 	-o-border-radius: 3px;
 	border-radius: 3px;
-	border-left: 3px solid #54c2d0;
+	border-left: 3px solid #ddd;
 }
 
 .tbody-reportes-OS tr td {
@@ -6307,6 +6307,22 @@ margin-left: 250px;
 
 #search-3 {
 	float: left;
+}
+#search-4{
+	width:400px;
+}
+#search-4 span{
+	float: left;
+	width: 130px;
+}
+#search-4 input{
+	float: left;
+    margin-top: 5px;
+    margin-right: 5px;
+}
+#search-5 select{
+	width: 190px;
+	margin-left: 100px;
 }
 
 .tr-os-aut {
