@@ -228,8 +228,7 @@ if((radio == "")&&($("#"+div+" input[type='radio'].required").length!="")){
 
 if(!valido){
 	$(".div_tabla_detalle").fadeOut("fast");
-	$("#mensajeError").html("Por favor rellene los campos marcados en color rojo");
-	$("#mensajeError").fadeIn("fast");
+	showErrMsg("Por favor rellene los campos marcados en color rojo");
 }else{
 	$("#mensajeError").fadeOut("fast");
 }
@@ -258,16 +257,14 @@ function CalculateDateDiff(dateFrom, dateTo) {
 	}
 
 	if(years> 0){
-		$("#mensajeError").html("El rango de fecha no debe ser mayor a 3 meses");
-		$("#mensajeError").fadeIn("fast");
+		showErrMsg("El rango de fecha no debe ser mayor a 3 meses")
 		return true;
 	}
 	if(months<3){
 		$("#mensajeError").fadeOut("fast");
 		return false;
 	}else{
-		$("#mensajeError").html("El rango de fecha no debe ser mayor a 3 meses");
-		$("#mensajeError").fadeIn("fast");
+		showErrMsg("El rango de fecha no debe ser mayor a 3 meses")
 	}
 
 

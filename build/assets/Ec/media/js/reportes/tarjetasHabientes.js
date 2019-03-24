@@ -66,7 +66,7 @@ $(document).ready(function() {
 	$("#export_excel").click(function(){
 
 	descargarArchivo(filtro_busq, baseURL+api+isoPais+"/reportes/estatustarjetashabientesExpXLS", "Exportar XLS" );
-		
+
 	});
 
     $("#export_pdf").click(function(){
@@ -85,15 +85,15 @@ $("#EstatusLotes-btnBuscar").click(function(){
 
 function buscarStatusTarjetasHambientes(paginaActual){
 		var $consulta;
-		filtro_busq.nombreEmpresa = $('option:selected',"#Reporte-tarjeta-hambiente").attr("acnomcia");	
-		filtro_busq.lotes_producto = $("#EstatusLotes-producto").val();	
+		filtro_busq.nombreEmpresa = $('option:selected',"#Reporte-tarjeta-hambiente").attr("acnomcia");
+		filtro_busq.lotes_producto = $("#EstatusLotes-producto").val();
 		filtro_busq.acrif = $('option:selected', "#Reporte-tarjeta-hambiente").attr("acrif");
 
 		filtro_busq.paginaActual = paginaActual;
 		EstatusLotes_producto= $('option:selected', "#EstatusLotes-producto").text();
 		nombreProducto = EstatusLotes_producto.split("/");
 		filtro_busq.nombreProducto = nombreProducto[0].trim();
-			
+
 		if(validar_filtro_busqueda("lotes-2")){
 			$('#cargando').fadeIn("slow");
 			$("#EstatusLotes-btnBuscar").hide();
@@ -118,7 +118,7 @@ function buscarStatusTarjetasHambientes(paginaActual){
 				var tr;
 				var td;
 
-			/****** DE TRAER RESULTADOS LA CONSULTA SE GENERA LA TABLA CON LA DATA... *******/ 
+			/****** DE TRAER RESULTADOS LA CONSULTA SE GENERA LA TABLA CON LA DATA... *******/
 	        /****** DE LO CONTRARIO SE GENERA UN MENSAJE "No existe Data relacionada con su filtro de busqueda" ******/
 
 				if($(".tbody-statuslotes").hasClass('dataTable')){
@@ -143,7 +143,7 @@ function buscarStatusTarjetasHambientes(paginaActual){
 				//$('#tabla-estatus-lotes tbody tr:even').addClass('even');
 
 				paginacion(data.totalPaginas, data.paginaActual);
-				
+
 
 				}else{
 					if(data.rc =="-29"){
@@ -215,8 +215,7 @@ if((radio == "")&&($("#"+div+" input[type='radio'].required").length!="")){
 
 if(!valido){
 	$(".div_tabla_detalle").fadeOut("fast");
-	$("#mensajeError").html("Por favor rellene los campos marcados en color rojo");
-	$("#mensajeError").fadeIn("fast");
+	showErrMsg("Por favor rellene los campos marcados en color rojo");
 }else{
 	$("#mensajeError").fadeOut("fast");
 }
@@ -245,16 +244,14 @@ function CalculateDateDiff(dateFrom, dateTo) {
 	}
 
 	if(years> 0){
-		$("#mensajeError").html("El rango de fecha no debe ser mayor a 3 meses");
-		$("#mensajeError").fadeIn("fast");
+		showErrMsg("El rango de fecha no debe ser mayor a 3 meses");
 		return true;
 	}
 	if(months<3){
 		$("#mensajeError").fadeOut("fast");
 		return false;
 	}else{
-		$("#mensajeError").html("El rango de fecha no debe ser mayor a 3 meses");
-		$("#mensajeError").fadeIn("fast");
+		showErrMsg("El rango de fecha no debe ser mayor a 3 meses");
 	}
 
 
@@ -292,7 +289,7 @@ function paginacion(total, inicial){
 				id = id.split("_");
 			buscarStatusTarjetasHambientes(id[1]);
 		});
-		
+
 		$("#anterior-1").unbind("mouseover");
 		$("#anterior-1").unbind("mouseout");
 		$("#anterior-1").mouseover(function(){
@@ -398,7 +395,7 @@ function paginacion(total, inicial){
 				$('form#formulario').append('<input type="hidden" name="lotes_producto" value="'+filtro_busq.lotes_producto+'" />');
 				$('form#formulario').append('<input type="hidden" name="acrif" value="'+filtro_busq.acrif+'" />');
 				$('form#formulario').attr('action',url);
-				$('form#formulario').submit(); 
+				$('form#formulario').submit();
     		   setTimeout(function(){$aux.dialog('destroy')},8000);
 	}
 
