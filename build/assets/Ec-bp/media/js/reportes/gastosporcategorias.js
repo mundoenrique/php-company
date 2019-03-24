@@ -703,7 +703,7 @@ var filtro_busq={};
 
 		if(!valido){
 			$(".div_tabla_detalle").fadeOut("fast");
-			$("#mensajeError").fadeIn("fast");
+			showErrMsg();
 		}else{
 			$("#mensajeError").fadeOut("fast");
 		}
