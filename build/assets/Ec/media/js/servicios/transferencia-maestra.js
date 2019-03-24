@@ -341,6 +341,7 @@ function validar_filtro_busqueda(div) {
 	marcarojo($("#nroTjta"));
 
 	if (!valido) {
+		$(".div_tabla_detalle").fadeOut("fast");
 		showErrMsg("Debe ingresar datos numéricos");
 	} else {
 			$("#mensajeError").fadeOut("fast");

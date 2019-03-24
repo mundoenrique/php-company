@@ -227,6 +227,7 @@ function validar_filtro_busqueda(div){
   });
 
     if(!valido){
+      $(".div_tabla_detalle").fadeOut("fast");
       showErrMsg();
     }else{
     $("#mensajeError").fadeOut("fast");
