@@ -32,15 +32,15 @@ $(function() {
 		if (data.rc == 0) {
 			dataAmount = data.maestroDeposito.saldoDisponible;
 			Amountmsg = dataAmount;
-			$("#amount, #description, #recargar").prop( "disabled", false );
+			$("#amount, #description, #account, #charge, #credit, #recargar").prop( "disabled", false );
 		} else if (data.rc == -233) {
 			Amountmsg = "<strong> La empresa no posee saldo.</strong>";
-			$("#amount, #description, #recargar").prop( "disabled", false );
+			$("#amount, #description, #account, #charge, #credit, #recargar").prop( "disabled", false );
 		} else if (data.rc == -61) {
 			window.location.replace(baseURL+api+isoPais+'/finsesion');
 		} else {
 			Amountmsg = " - ";
-			$("#amount, #description, #recargar").prop( "disabled", true );
+			$("#amount, #description, #account #charge, #credit, #recargar").prop( "disabled", true );
 		}
 		$("#saldoEmpresa").text('Saldo disponible: ' + toFormatShow(Amountmsg));
 	});
@@ -49,15 +49,54 @@ $(function() {
 		e.preventDefault();
 		$(this).find($('#amount').removeAttr('style'));
 		$(this).find($('#description').removeAttr('style'));
-		var RE = /^\d*\.?\d*$/;
-		var amount = $('#amount').val(),
-				descrip = $('#description').val(),
-				valAmount,
-				valdescript;
-		valAmount = (amount == ''  || !RE.test(amount)) ? false : true;
-		valdescript = (descrip == '') ?  false : true;
+		var RE = /^\d*\.?\d*$/,
+				camposValid = '<div id="validar">',
+				validInput = true,
+				amount = $('#amount'),
+				descrip = $('#description'),
+				account = $('#account'),
+				type = $('input:radio[name=type]:checked'),
+				valAmount = (amount == ''  || !RE.test(amount)) ? false : true,
+				valdescript = (descrip == '') ?  false : true,
+				valAccount = (account == '') ? false : true,
+				valtype = (type == undefined) ? false : true;
 
-		if (valAmount == false || valdescript == false) {
+		if(amount.val() === ''|| !RE.test(amount.val())) {
+			camposValid += '<p>* El monto debe ser numérico</p>';
+			validInput = false;
+			amount.css('border-color', '#cd0a0a')
+		} else {
+			amount.removeAttr('style');
+		}
+
+		if(descrip.val() === '') {
+			camposValid += '<p>* La descripción es necesaria</p>';
+			validInput = false;
+			descrip.css('border-color', '#cd0a0a')
+		} else {
+			descrip.removeAttr('style');
+		}
+
+		if(account.val() === '') {
+			camposValid += '<p>* Seleccione una cuenta</p>';
+			validInput = false;
+			account.css('border-color', '#cd0a0a')
+		} else {
+			account.removeAttr('style');
+		}
+
+
+		if(type.val() === undefined) {
+			console.log(type.val())
+			camposValid += '<p>* Seleccione cargo o  abono</p>';
+			validInput = false;
+			$('#charge-or-credit').css('border', '1px solid #cd0a0a');
+		} else {
+			$('#charge-or-credit').removeAttr('style');
+		}
+		camposValid += '</div>';
+
+		/*if (valAmount == false || valdescript == false) {
 			var canvas = "<div id='validar'>";
 			(valAmount == false) ? $(this).find($('#amount').css('border-color', '#cd0a0a')) : '';
 			(valdescript == false) ? $(this).find($('#description').css('border-color', '#cd0a0a')) : '';
@@ -80,6 +119,22 @@ $(function() {
 				}
 			});
 
+		}*/
+		if(!validInput) {
+			$(camposValid).dialog ({
+				title: 'Campos inválidos',
+				modal: true,
+				resizable:false,
+				draggable: false,
+				open: function(event, ui) {
+					$('.ui-dialog-titlebar-close', ui.dialog).hide();
+				},
+				buttons: {
+					ok: function () {
+						$(this).dialog("destroy");
+					}
+				}
+			});
 		} else {
 			$('#amount').val('');
 			$('#description').val('');
@@ -330,7 +385,7 @@ function toFormatShow (valor) {
 	}
 	if (isoPais == 'Ve' || isoPais == 'Co' || isoPais == 'Ec') {
 		valor = toFormat(valor);
-		return (isoPais == 'Co' ? '$ ' : 'Bs. ') + formatoNumero(valor, 2, ",", ".");
+		return (isoPais == 'Co' || isoPais == 'Ec' ? '$ ' : 'Bs. ') + formatoNumero(valor, 2, ",", ".");
 	}
 }
 

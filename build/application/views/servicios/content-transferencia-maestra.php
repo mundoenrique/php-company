@@ -50,38 +50,45 @@ $show_cl = (in_array("trapgo", $funciones)) ? '' : 'display:none';
             </div>
 
             <div id="lotes-contenedor">
-                <div id="search-1">
-                    <h5><span id="saldoEmpresa"></span></h5>
-                    <!--<p id='saldoDisponible'></p>-->
-                    <br>
-                    <h5 style="float:left;"><?php echo "Monto" ?></h5>
-                    <span>
-											<input id="amount" placeholder="Ingrese monto" disabled/>
-                		</span>
-                </div>
+							<div id="search-1">
+								<h5><span id="saldoEmpresa"></span></h5>
+								<br>
+								<h5 style="float:left;"><?php echo "Monto" ?></h5>
+								<span>
+									<input id="amount" placeholder="Ingrese monto" disabled/>
+								</span>
+							</div>
 
-                <div id="search-3" style="padding-top: 18px">
-                    <h5><?php echo "Descripción" ?></h5>
-                    <span>
-											<input id="description" placeholder="Ingrese descripción" maxlength=16 disabled/>
-										</span>
-								</div>
-								<div id="search-4">
-									<span>
-										<input class="radio" type="radio" name="radio" value="0">
-										<p>cargo</p>
-									</span>
-									<span>
-										<input class="radio" type="radio" name="radio" value="1">
-										<p>abono</p>
-									</span>
-								</div>
-								<div id="search-5">
-								<select id="cuentas">
-									<option value="1">CORRIENTE</option>
-									<option value="2">AHORRO</option>
-								</select>
-								</div>
+							<div id="search-3" style="padding-top: 18px">
+								<h5><?php echo "Descripción" ?></h5>
+								<span>
+									<input id="description" placeholder="Ingrese descripción" maxlength=16 disabled/>
+								</span>
+							</div>
+							<?php if($pais == 'Ec' || $pais == 'Ec-bp'): ?>
+							<div id="search-1">
+								<br>
+								<h5 style="float:left;"><?php echo "Cuenta" ?></h5>
+								<span>
+									<select id="account" disabled>
+										<option value="">Seleccione una cuenta</option>
+										<option value="1">CORRIENTE</option>
+										<option value="2">AHORRO</option>
+									</select>
+								</span>
+							</div>
+
+							<div id="charge-or-credit" class="panel-right">
+								<span class="selected-option">
+									<input type="radio" id="charge" class="control-radio" class="radio" name="type" value="cargo" disabled>
+									<label for="charge">cargo</label>
+								</span>
+								<span class="selected-option">
+									<input type="radio" id="credit" class="control-radio" class="radio" name="type" value="abono"  disabled>
+									<label for="credit">abono</label>
+								</span>
+							</div>
+							<?php endif; ?>
             </div>
 
             <div id="batchs-last">
