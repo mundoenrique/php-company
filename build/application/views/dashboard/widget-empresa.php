@@ -3,6 +3,7 @@ $acnomciaS = $this->session->userdata('acnomciaS');
 $acdescS = $this->session->userdata('acdescS');
 $acrifS = $this->session->userdata('acrifS');
 $acrazonsocialS = $this->session->userdata('acrazonsocialS');
+$pais = $this->uri->segment(1);
 ?>
 
 <div id="widget-info">
@@ -21,8 +22,10 @@ $acrazonsocialS = $this->session->userdata('acrazonsocialS');
 		<button id='aplicar'><?php echo lang('WIDGET_EMPRESAS_BTNAPLICAR') ?></button>
 	</div>
 </div>
+<?php if ($pais !== 'Ec' && $pais !== 'Ec-bp'): ?>
 <div id="widget-info-2">
 		<button id="sPrograms" ><?php echo lang('WIDGET_EMPRESAS_BTNOTROSPROGRAMAS') ?></button>
 </div>
+<?php endif; ?>
 <input type='hidden' id='cdn' value=<?php echo get_cdn(); ?> />
 
