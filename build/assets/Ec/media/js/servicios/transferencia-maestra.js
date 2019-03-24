@@ -397,8 +397,7 @@ function validar_filtro_busqueda(div) {
 
 	if (!valido) {
 		$(".div_tabla_detalle").fadeOut("fast");
-		$("#mensajeError").html("Debe ingresar datos numéricos");
-		$("#mensajeError").fadeIn("fast");
+		showErrMsg("Debe ingresar datos numéricos");
 	} else {
 			$("#mensajeError").fadeOut("fast");
 	}

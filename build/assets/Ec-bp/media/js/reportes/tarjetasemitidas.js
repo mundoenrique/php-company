@@ -522,7 +522,7 @@ if((radio == "")&&($("#"+div+" input[type='radio'].required").length!="")){
 
 if(!valido){
 	$(".div_tabla_detalle").fadeOut("fast");
-	$("#mensajeError").fadeIn("fast");
+	showErrMsg();
 }else{
 	$("#mensajeError").fadeOut("fast");
 }

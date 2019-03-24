@@ -14,3 +14,12 @@ function picker(){
 	$('input[type=text]').attr('autocomplete','off');
 }
 picker();
+
+function showErrMsg(errMsg) {
+	var errElem = $("#mensajeError");
+	if (errMsg)
+		errElem.html(errMsg);
+	errElem.fadeIn("fast");
+	errElem.css("float","none");
+	errElem.css("display","block");
+}
