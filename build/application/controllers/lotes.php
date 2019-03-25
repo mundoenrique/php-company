@@ -1661,6 +1661,8 @@ class Lotes extends CI_Controller {
 				$URL_TEMPLOTES = $this->config->item('URL_TEMPLOTES');
 				$LOTES_USERPASS = $this->config->item('LOTES_USERPASS');
 
+				log_message('DEBUG', 'SFTP USER: ' . $LOTES_USERPASS . ' ROUTE: ' . $URL_TEMPLOTES);
+
 				curl_setopt($ch, CURLOPT_URL, $URL_TEMPLOTES.$nombreArchivoNuevo);
 				curl_setopt($ch, CURLOPT_USERPWD, $LOTES_USERPASS);
 				curl_setopt($ch, CURLOPT_UPLOAD, 1);
