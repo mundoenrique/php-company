@@ -33,7 +33,7 @@ $recoverPwdLink = $this->config->item('base_url') .$pais. '/users/pass_recovery'
 
         <?=form_close();?>
         <div id="sliderbutton-login"></div>
-						<p class="align-center" style="<?php echo $pais=="Ec"?"font-size: 12px; text-align: center;":"font-size: 12px; margin-top: 50px; text-align: center;" ?>">
+						<p class="align-center" style="<?php echo $pais=="Ec-bp"?"font-size: 12px; text-align: center;":"font-size: 12px; margin-top: 50px; text-align: center;" ?>">
 						Restablecer contraseña
                 <br>
                 <a href="<?php echo $recoverPwdLink;?>" rel="section">¿Olvidó o bloqueó su<br> clave de acceso?</a>

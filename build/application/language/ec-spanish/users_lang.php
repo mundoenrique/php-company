@@ -120,5 +120,5 @@ $lang['MAIL']= "Correo electrónico";
 $lang['INFO_CHANGE_PASS']= "Cambio de contraseña";
 $lang['INFO_REDIRECT']= "Redireccionando...";
 $lang['CHANGE_OK']= "Proceso exitoso";
-$lang['PLACE_HOLDER_NIT'] = "0000000000";
+$lang['PLACE_HOLDER_NIT'] = "0000000000000";
 $lang['PLACE_HOLDER_MAIL'] = "usuario@ejemplo.com";
