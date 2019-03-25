@@ -118,7 +118,6 @@ function actualizarLote(){
 if(!$("#table-text-lotes").hasClass('dataTable')){
 $('#actualizador').show();
 }
-	/*
   $.get(baseURL+api+isoPais+"/lotes/lista/pendientes",
     function(data){
 
@@ -215,7 +214,6 @@ $('#actualizador').show();
 
 
   });
-	*/
 }//Fin function refrescar()
 
 
