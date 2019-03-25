@@ -18,17 +18,19 @@ if ( ! function_exists('np_hoplite_Encryption'))
 	 * @param  string $data
 	 * @return string
 	 */
-	function np_Hoplite_Encryption($data, $service = '')
+	function np_Hoplite_Encryption($data, $service = false)
 	{
 		$data = json_decode($data);
 		if(isset($data->pais) && $data->pais === 'Ec') {
 			$data->pais = 'Co';
 		}
-		$data = json_encode($data);
-
-		log_message('DEBUG', 'REQUEST ' . $service . ': ' . $data);
-
 		$CI =& get_instance();
+		$data = json_encode($data);
+		if($service) {
+			$userName = $CI->session->userdata('userName') != '' ? $CI->session->userdata('userName') : 'NO USERNAME';
+			log_message('DEBUG', '['. $userName .'] REQUEST ' . $service . ': ' . $data);
+		}
+
 		$dataB = base64_encode($data);
 		$iv = "\0\0\0\0\0\0\0\0";
 		while( (strlen($dataB)%8) != 0) {
@@ -48,7 +50,7 @@ if ( ! function_exists('np_hoplite_Decrypt'))
 	 * @param  string $cryptDataBase64
 	 * @return string
 	 */
-	function np_Hoplite_Decrypt($cryptDataBase64)
+	function np_Hoplite_Decrypt($cryptDataBase64, $service = false)
 	{
 		$CI =& get_instance();
 		$data = base64_decode($cryptDataBase64);
@@ -56,7 +58,13 @@ if ( ! function_exists('np_hoplite_Decrypt'))
 		$descryptData = mcrypt_decrypt(
 			MCRYPT_DES, $CI->config->item('keyNovo'), $data, MCRYPT_MODE_CBC, $iv
 		);
-		$decryptData = trim($descryptData);
-		return base64_decode($decryptData);
+		$decryptData = base64_decode(trim($descryptData));
+		$response = json_decode($decryptData);
+
+		if($service && isset($response->rc) && isset($response->msg)) {
+			$userName = $CI->session->userdata('userName') != '' ? $CI->session->userdata('userName') : 'NO USERNAME';
+			log_message('DEBUG', '['.$userName.'] RESPONSE: '.$service.' RC:'.$response->rc.' MSG: '.$response->msg);
+		}
+		return $decryptData;
 	}
 }

@@ -152,29 +152,28 @@ class Users extends CI_Controller {
 
 			$data = json_encode($data,JSON_UNESCAPED_UNICODE);
 
-			log_message('DEBUG', 'REQUEST callWSLoginFull: ' . $data);
-
-			$dataEncry = np_Hoplite_Encryption($data);
+			$dataEncry = np_Hoplite_Encryption($data, 'callWSLoginFull');
 			$data = array('bean' => $dataEncry, 'pais' =>$pais );
 			$data = json_encode($data);
 			$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data); // ENVÍA LA PETICIÓN Y ALMACENA LA RESPUESTA EN $response
-			$jsonResponse = np_Hoplite_Decrypt($response);
+			$jsonResponse = np_Hoplite_Decrypt($response, 'callWSLoginFull');
 
 			$response = json_decode(utf8_encode($jsonResponse));
-			log_message('DEBUG', 'RESPONSE callWSLoginFull: ' . json_encode($response));
 
 			if(isset($response)) {
 
 				if($response->rc==-229) {
-						return 'userold'; // EL USUARIO TIENE BANDERA EN 1
+					return 'userold'; // EL USUARIO TIENE BANDERA EN 1
 
 				} elseif($response->rc==-262) {
 					return 'desconocido'; // EL USUARIO NO HA SIDO INCORPORADO PARA USAR CEO
 
 				} elseif($response->rc==-28) {
-						return 'conectado'; // EL USUARIO YA SE ENCUENTRA CONECTADO (ha cerrado incorrectamente su sesión)
+					return 'conectado'; // EL USUARIO YA SE ENCUENTRA CONECTADO (ha cerrado incorrectamente su sesión)
 
 				} elseif($response->rc==0 || $response->rc==-2 || $response->rc==-185) { // solo para los casos donde el usuario establece conexión
+					log_message('DEBUG', 'RESPONSE DATAUSER: ' . json_encode($response->usuario));
+
 					$datos['userName'] = $response->usuario->userName;
 					$datos['idUsuario']=$response->usuario->idUsuario;
 					$datos['Nombre'] = $response->usuario->primerNombre;
