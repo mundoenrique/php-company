@@ -31,41 +31,72 @@ $(function() {
 		var data = JSON.parse(data), dataAmount, Amountmsg
 		if (data.rc == 0) {
 			dataAmount = data.maestroDeposito.saldoDisponible;
-			Amountmsg = dataAmount;
-			$("#amount, #description, #recargar").prop( "disabled", false );
+			Amountmsg = toFormatShow(dataAmount);
+			$("#amount, #description, #account, #charge, #credit, #recargar").prop( "disabled", false );
 		} else if (data.rc == -233) {
-			Amountmsg = "<strong> La empresa no posee saldo.</strong>";
-			$("#amount, #description, #recargar").prop( "disabled", false );
+			Amountmsg = "La empresa no posee saldo.";
+			$("#amount, #description, #account, #charge, #credit, #recargar").prop( "disabled", false );
 		} else if (data.rc == -61) {
 			window.location.replace(baseURL+api+isoPais+'/finsesion');
 		} else {
 			Amountmsg = " - ";
-			$("#amount, #description, #recargar").prop( "disabled", true );
+			$("#amount, #description, #account #charge, #credit, #recargar").prop( "disabled", true );
 		}
-		$("#saldoEmpresa").text('Saldo disponible: ' + toFormatShow(Amountmsg));
+		$("#saldoEmpresa").text('Saldo disponible: ' + Amountmsg);
 	});
 
 	$('#recarga_concetradora').on('click','#recargar', function(e) {
 		e.preventDefault();
 		$(this).find($('#amount').removeAttr('style'));
 		$(this).find($('#description').removeAttr('style'));
-		var RE = /^\d*\.?\d*$/;
-		var amount = $('#amount').val(),
-				descrip = $('#description').val(),
-				valAmount,
-				valdescript;
-		valAmount = (amount == ''  || !RE.test(amount)) ? false : true;
-		valdescript = (descrip == '') ?  false : true;
+		var RE = /^\d*\.?\d*$/,
+				camposValid = '<div id="validar">',
+				validInput = true,
+				amount = $('#amount'),
+				descrip = $('#description'),
+				account = $('#account'),
+				type = $('input:radio[name=type]:checked'),
+				valAmount = (amount == ''  || !RE.test(amount)) ? false : true,
+				valdescript = (descrip == '') ?  false : true,
+				valAccount = (account == '') ? false : true,
+				valtype = (type == undefined) ? false : true;
 
-		if (valAmount == false || valdescript == false) {
-			var canvas = "<div id='validar'>";
-			(valAmount == false) ? $(this).find($('#amount').css('border-color', '#cd0a0a')) : '';
-			(valdescript == false) ? $(this).find($('#description').css('border-color', '#cd0a0a')) : '';
-			canvas += (valAmount == false) ? "<p>* El monto debe ser numérico</p>" : '';
-			canvas += (valdescript == false) ? "<p>* La descripción es necesaria</p>" : '';
-			canvas += "</div>";
+		if(amount.val() === ''|| !RE.test(amount.val())) {
+			camposValid += '<p>* El monto debe ser numérico</p>';
+			validInput = false;
+			amount.css('border-color', '#cd0a0a')
+		} else {
+			amount.removeAttr('style');
+		}
 
-			$(canvas).dialog ({
+		if(descrip.val() === '') {
+			camposValid += '<p>* La descripción es necesaria</p>';
+			validInput = false;
+			descrip.css('border-color', '#cd0a0a')
+		} else {
+			descrip.removeAttr('style');
+		}
+
+		if(account.val() === '') {
+			camposValid += '<p>* Seleccione una cuenta</p>';
+			validInput = false;
+			account.css('border-color', '#cd0a0a')
+		} else {
+			account.removeAttr('style');
+		}
+
+
+		if(type.val() === undefined) {
+			console.log(type.val())
+			camposValid += '<p>* Seleccione cargo o  abono</p>';
+			validInput = false;
+			$('#charge-or-credit').css('border', '1px solid #cd0a0a');
+		} else {
+			$('#charge-or-credit').removeAttr('style');
+		}
+		camposValid += '</div>';
+		if(!validInput) {
+			$(camposValid).dialog ({
 				title: 'Campos inválidos',
 				modal: true,
 				resizable:false,
@@ -79,10 +110,18 @@ $(function() {
 					}
 				}
 			});
-
 		} else {
-			$('#amount').val('');
-			$('#description').val('');
+			dataSend = {
+				"amount": amount.val(),
+				"descript": descrip.val(),
+				"account": account.val(),
+				"type": type.val()
+			};
+			amount.val('');
+			descrip.val('');
+			account.val('0');
+			type.prop('checked', false);
+
 			var $aux = $('#loading').dialog({
 					title:'Enviando código de seguridad',
 					modal: true,
@@ -114,6 +153,7 @@ $(function() {
 							buttons: {
 								Procesar: function () {
 									var codeToken = $("#token-code").val();
+									dataSend.codeToken = codeToken;
 									if (codeToken != '') {
 										$("#token-code").val('');
 										$(this).dialog('destroy');
@@ -126,11 +166,7 @@ $(function() {
 													$('.ui-dialog-titlebar-close', ui.dialog).hide();
 												}
 										});
-										$.post(baseURL + api + isoPais + '/servicios/transferencia-maestra/RegargaTMProcede', {
-											"amount":amount,
-											"descript": descrip,
-											"codeToken": codeToken
-										})
+										$.post(baseURL + api + isoPais + '/servicios/transferencia-maestra/RegargaTMProcede', dataSend)
 										.done(function (data) {
 											$aux.dialog('destroy');
 											switch (data.code) {
@@ -325,7 +361,7 @@ $(function() {
 
 function toFormatShow (valor) {
 	valor = valor.toString();
-	if (isoPais == 'Pe' || isoPais == 'Usd' || isoPais == 'Ec-bp') {
+	if (isoPais == 'Pe' || isoPais == 'Usd'  || isoPais == 'Ec-bp') {
 		return valor;
 	}
 	if (isoPais == 'Ve' || isoPais == 'Co') {
@@ -341,6 +377,7 @@ function validar_filtro_busqueda(div) {
 	marcarojo($("#nroTjta"));
 
 	if (!valido) {
+		$(".div_tabla_detalle").fadeOut("fast");
 		showErrMsg("Debe ingresar datos numéricos");
 	} else {
 			$("#mensajeError").fadeOut("fast");

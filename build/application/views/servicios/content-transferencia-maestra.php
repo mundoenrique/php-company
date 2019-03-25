@@ -72,8 +72,8 @@ $show_cl = (in_array("trapgo", $funciones)) ? '' : 'display:none';
 								<span>
 									<select id="account" disabled>
 										<option value="0">Seleccione una cuenta</option>
-										<option value="1">CORRIENTE</option>
-										<option value="2">AHORRO</option>
+										<option value="AH">****5411256 - Ahorro</option>
+										<option value="CC">****752177 - Corriente</option>
 									</select>
 								</span>
 							</div>

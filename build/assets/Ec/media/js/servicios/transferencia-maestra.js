@@ -153,6 +153,7 @@ $(function() {
 							buttons: {
 								Procesar: function () {
 									var codeToken = $("#token-code").val();
+									dataSend.codeToken = codeToken;
 									if (codeToken != '') {
 										$("#token-code").val('');
 										$(this).dialog('destroy');
@@ -165,9 +166,7 @@ $(function() {
 													$('.ui-dialog-titlebar-close', ui.dialog).hide();
 												}
 										});
-										$.post(baseURL + api + isoPais + '/servicios/transferencia-maestra/RegargaTMProcede', {
-											dataSend
-										})
+										$.post(baseURL + api + isoPais + '/servicios/transferencia-maestra/RegargaTMProcede', dataSend)
 										.done(function (data) {
 											$aux.dialog('destroy');
 											switch (data.code) {

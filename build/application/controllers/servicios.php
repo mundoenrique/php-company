@@ -1446,6 +1446,8 @@ class Servicios extends CI_Controller {
 
         $amount = $this->input->post('amount');
         $descript = $this->input->post('descript');
+        $account = $this->input->post('account');
+        $type = $this->input->post('type');
         $codeToken = $this->input->post('codeToken');
 
         $this->lang->load('erroreseol');
@@ -1458,7 +1460,7 @@ class Servicios extends CI_Controller {
             $funcAct = in_array("trasal", np_hoplite_modFunciones($menuP));
 
             if($funcAct){
-                $result = $this->callWsRecargaTMProcede($urlCountry, $amount, $descript, $codeToken);
+                $result = $this->callWsRecargaTMProcede($urlCountry, $amount, $descript, $account, $type, $codeToken);
             }else{
                 $result = array("ERROR"=>lang('SIN_FUNCION'));
             }
@@ -1476,7 +1478,7 @@ class Servicios extends CI_Controller {
     }
 
 
-    private function callWsRecargaTMProcede($urlCountry, $amount,  $descript, $codeToken){  /// recarga transferencia maestra
+    private function callWsRecargaTMProcede($urlCountry, $amount, $descript, $account, $type, $codeToken){  /// recarga transferencia maestra
 
         np_hoplite_countryCheck($urlCountry);
         $this->lang->load('erroreseol');
@@ -1506,7 +1508,9 @@ class Servicios extends CI_Controller {
         $maestroDeposito = array(
             "idExtEmp"=>$idEmpresa,
             "saldo"=> round($amount,2),
-            "descrip"=> $descript,
+						"descrip"=> $descript,
+						"account"=> $account,
+						"type"=> $type,
             "tokenCliente"=> $codeToken,
             "authToken"=> $bean,
             "idProducto"=> $idProducto

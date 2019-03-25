@@ -5154,7 +5154,7 @@ li#select-empresa select {
 }
 
 .selected-option label {
-	padding: 5px 15px 5px 45px;
+	padding: 5px 15px 5px 30px;
 	display: inline-block;
 	position: relative;
 	cursor: pointer;
@@ -5165,15 +5165,15 @@ li#select-empresa select {
 
 .selected-option label:before {
 	content: "";
-	width: 15px;
-	height: 15px;
+	width: 10px;
+	height: 10px;
 	display: inline-block;
 	background: none;
 	border: 3px solid #004574;
 	border-radius: 50%;
 	position: absolute;
-	left: 15px;
-	top: 2px
+	left: 10px;
+	top: 5px
 }
 
 .selected-option input[type="radio"]:checked + label {
