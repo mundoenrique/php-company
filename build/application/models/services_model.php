@@ -70,12 +70,8 @@ class services_model extends CI_model {
 		$responseJson = np_Hoplite_Decrypt($responseWs);
 		$responseWs = json_decode($responseJson);
 
-		log_message('DEBUG', '[' . $this->userName . '] RESPONSE visa -- callWsCardControls --> {"rc":' .
-		                    json_encode($responseWs->rc) . ',"msg":' . json_encode($responseWs->msg) . '}');
-
 		if($responseWs->rc === '0') {
-			log_message('INFO', '[' . $this->userName . '] RESPONSE BEAN -- callWsCardControls --> ' .
-			                    $responseWs->bean);
+			log_message('INFO', '[' . $this->userName . ']');
 		}
 	}
 }

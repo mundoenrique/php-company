@@ -107,27 +107,27 @@ $(function(){
 
     function validar(json){
 
-        emailRegex = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})+$/;
-        charRegex = /^([a-zA-ZñÑáéíóúÁÉÍÓÚ]+\s*){1,100}$/;
-        rifRegex = /^(10|15|16|17|20)[\d]{8}[\d]{1}$/;
-        alfanumericRegex = /^([a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ]+\s*){1,100}$/;
-        validez=true;
+			emailRegex = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})+$/;
+			charRegex = /^([a-zA-ZñÑáéíóúÁÉÍÓÚ]+\s*){1,100}$/;
+			rifRegex = /^(00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23|24)+(6|9)[\d]{5,6}[\d]{3,4}$/;
+			alfanumericRegex = /^([a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ]+\s*){1,100}$/;
+			validez=true;
 
-        if( !emailRegex.test(json.email) || json.email == '' ){
-            $("#email").addClass("error-login");
-            validez=false;
-        }
-        if( !alfanumericRegex.test(json.userName) || json.userName == "" ){
-            $("#userName").addClass("error-login");
-            validez=false;
-        }
+			if( !emailRegex.test(json.email) || json.email == '' ){
+					$("#email").addClass("error-login");
+					validez=false;
+			}
+			if( !alfanumericRegex.test(json.userName) || json.userName == "" ){
+					$("#userName").addClass("error-login");
+					validez=false;
+			}
 
-        if( !rifRegex.test(json.idEmpresa) || json.idEmpresa == "" ){
-            $("#idEmpresa").addClass("error-login");
-            validez=false;
-        }
+			if( !rifRegex.test(json.idEmpresa) || json.idEmpresa == "" ){
+					$("#idEmpresa").addClass("error-login");
+					validez=false;
+			}
 
-        return validez;
+			return validez;
     }
 
     var notificacion= function(sitio, modal, titulo, mensaje, mensaje2){
