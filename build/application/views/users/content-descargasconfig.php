@@ -15,8 +15,8 @@ $pais = $this->uri->segment(1);
 		</a>
 	</div>
 	<?php
-	if($pais != 'Ve'):
-		if($pais != 'Co' && $pais != 'Usd'):
+	if($pais != 'Ve' && $pais != 'Ec' && $pais != 'Ec-bp'):
+		if($pais != 'Co' && $pais != 'Usd' && $pais != 'Ec' && $pais != 'Ec-bp'):
 	?>
 			<div id="campos-descarga">
 				<a href="<?php echo get_cdn() ?>downloads/TP-MUS-002_gestor_lotes_V_1.pdf" target="_blank">
@@ -33,7 +33,7 @@ $pais = $this->uri->segment(1);
 	?>
 		<div id="datos-1"><p id="user-name">Aplicaciones</p></div>
 	<?php
-		if ($pais != 'Co' && $pais != 'Usd'):
+		if ($pais != 'Co' && $pais != 'Usd'  && $pais != 'Ec' && $pais != 'Ec-bp'):
 	?>
 			<div id="campos-descarga">
 				<a href="<?php echo get_cdn() ?>downloads/Gestor.rar">
@@ -57,7 +57,7 @@ $pais = $this->uri->segment(1);
 		</div>
 	<?php
 	endif;
-	if ($pais == 'Co' || $pais == 'Pe'):
+	if ($pais == 'Co' || $pais == 'Pe' || $pais == 'Ec' || $pais == 'Ec-bp'):
 	?>
     <div id="datos-1">
 			<p id="user-name">Archivos de gestión Conexión Empresas Online</p>
