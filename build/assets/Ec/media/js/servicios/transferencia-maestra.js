@@ -95,31 +95,6 @@ $(function() {
 			$('#charge-or-credit').removeAttr('style');
 		}
 		camposValid += '</div>';
-
-		/*if (valAmount == false || valdescript == false) {
-			var canvas = "<div id='validar'>";
-			(valAmount == false) ? $(this).find($('#amount').css('border-color', '#cd0a0a')) : '';
-			(valdescript == false) ? $(this).find($('#description').css('border-color', '#cd0a0a')) : '';
-			canvas += (valAmount == false) ? "<p>* El monto debe ser numérico</p>" : '';
-			canvas += (valdescript == false) ? "<p>* La descripción es necesaria</p>" : '';
-			canvas += "</div>";
-
-			$(canvas).dialog ({
-				title: 'Campos inválidos',
-				modal: true,
-				resizable:false,
-				draggable: false,
-				open: function(event, ui) {
-					$('.ui-dialog-titlebar-close', ui.dialog).hide();
-				},
-				buttons: {
-					ok: function () {
-						$(this).dialog("destroy");
-					}
-				}
-			});
-
-		}*/
 		if(!validInput) {
 			$(camposValid).dialog ({
 				title: 'Campos inválidos',
@@ -136,8 +111,17 @@ $(function() {
 				}
 			});
 		} else {
-			$('#amount').val('');
-			$('#description').val('');
+			dataSend = {
+				"amount": amount.val(),
+				"descript": descrip.val(),
+				"account": account.val(),
+				"type": type.val()
+			};
+			amount.val('');
+			descrip.val('');
+			account.val('0');
+			type.prop('checked', false);
+
 			var $aux = $('#loading').dialog({
 					title:'Enviando código de seguridad',
 					modal: true,
@@ -182,9 +166,7 @@ $(function() {
 												}
 										});
 										$.post(baseURL + api + isoPais + '/servicios/transferencia-maestra/RegargaTMProcede', {
-											"amount":amount,
-											"descript": descrip,
-											"codeToken": codeToken
+											dataSend
 										})
 										.done(function (data) {
 											$aux.dialog('destroy');
