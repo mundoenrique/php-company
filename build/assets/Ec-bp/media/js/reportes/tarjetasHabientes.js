@@ -244,16 +244,14 @@ function CalculateDateDiff(dateFrom, dateTo) {
 	}
 
 	if(years> 0){
-		$("#mensajeError").html("El rango de fecha no debe ser mayor a 3 meses");
-		$("#mensajeError").fadeIn("fast");
+		showErrMsg("El rango de fecha no debe ser mayor a 3 meses");
 		return true;
 	}
 	if(months<3){
 		$("#mensajeError").fadeOut("fast");
 		return false;
 	}else{
-		$("#mensajeError").html("El rango de fecha no debe ser mayor a 3 meses");
-		$("#mensajeError").fadeIn("fast");
+		showErrMsg("El rango de fecha no debe ser mayor a 3 meses");
 	}
 
 
