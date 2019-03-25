@@ -158,7 +158,7 @@ class Users extends CI_Controller {
 			$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data); // ENVÍA LA PETICIÓN Y ALMACENA LA RESPUESTA EN $response
 			$jsonResponse = np_Hoplite_Decrypt($response, 'callWSLoginFull');
 
-			$response = json_decode(utf8_encode($jsonResponse));
+			$response = json_decode($jsonResponse);
 
 			if(isset($response)) {
 
@@ -329,7 +329,7 @@ class Users extends CI_Controller {
 
 						log_message('DEBUG', 'RESPONSE LOGOUT:' . $jsonResponse);
 
-            $response = json_decode(utf8_encode($jsonResponse));
+            $response = json_decode($jsonResponse);
 
             $finsesion = $this->input->post('data-caducada');
             $this->session->sess_destroy();
@@ -513,7 +513,7 @@ class Users extends CI_Controller {
         $response = np_Hoplite_GetWS('eolwebInterfaceWS',$data); // ENVÍA LA PETICIÓN Y ALMACENA LA RESPUESTA EN $response
         $jsonResponse = np_Hoplite_Decrypt($response);
 
-        $response = json_decode(utf8_encode($jsonResponse));
+        $response = json_decode($jsonResponse);
         $dataResponse = json_encode($response);
         log_message('info','Response recovery pass ' . $dataResponse);
 
@@ -793,7 +793,7 @@ class Users extends CI_Controller {
         $response = np_Hoplite_GetWS('eolwebInterfaceWS',$data); // ENVÍA LA PETICIÓN Y ALMACENA LA RESPUESTA EN $response
         $jsonResponse = np_Hoplite_Decrypt($response);
 
-        $response = json_decode(utf8_encode($jsonResponse));
+        $response = json_decode($jsonResponse);
 
         log_message('info', 'cambioClave: '. $jsonResponse);
 
@@ -1121,7 +1121,7 @@ class Users extends CI_Controller {
         $data = json_encode($data);
         $response = np_Hoplite_GetWS('eolwebInterfaceWS',$data); // ENVÍA LA PETICIÓN Y ALMACENA LA RESPUESTA EN $response
         $jsonResponse = np_Hoplite_Decrypt($response);
-        $response = json_decode(utf8_encode($jsonResponse));
+        $response = json_decode($jsonResponse);
 
         if($response){
 
@@ -1235,7 +1235,7 @@ class Users extends CI_Controller {
         $data = json_encode($data);
         $response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);	// ENVÍA LA PETICIÓN Y ALMACENA LA RESPUESTA EN $response
         $jsonResponse = np_Hoplite_Decrypt($response);
-        $response = json_decode(utf8_encode($jsonResponse));
+        $response = json_decode($jsonResponse);
 
         if($response){
             log_message('info', 'info empr user '.$response->rc);
@@ -1354,7 +1354,7 @@ class Users extends CI_Controller {
         $data = json_encode($data);
         $response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
         $jsonResponse = np_Hoplite_Decrypt($response);
-        $response = json_decode(utf8_encode($jsonResponse));
+        $response = json_decode($jsonResponse);
 
         if($response){
 
@@ -1475,7 +1475,7 @@ class Users extends CI_Controller {
         $data = json_encode($data);
         $response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
         $jsonResponse = np_Hoplite_Decrypt($response);
-        $response = json_decode(utf8_encode($jsonResponse));
+        $response = json_decode($jsonResponse);
 
         if($response){
             log_message('info', ' getActualizarTLFEmpresa '.$response->rc.'/'.$response->msg);
@@ -1609,7 +1609,7 @@ class Users extends CI_Controller {
         $data = json_encode($data);
         $response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
         $jsonResponse = np_Hoplite_Decrypt($response);
-        $response = json_decode(utf8_encode($jsonResponse));
+        $response = json_decode($jsonResponse);
 
         if($response){
             log_message('info', 'add contact '.$response->rc);
@@ -1727,7 +1727,7 @@ class Users extends CI_Controller {
         $data = json_encode($data);
         $response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
         $jsonResponse = np_Hoplite_Decrypt($response);
-        $response = json_decode(utf8_encode($jsonResponse));
+        $response = json_decode($jsonResponse);
 
         if($response){
             log_message('info', ' eliminarContactoEmpresa '.$response->rc.'/'.$response->msg);
@@ -1855,7 +1855,7 @@ class Users extends CI_Controller {
         $data = json_encode($data);
         $response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
         $jsonResponse = np_Hoplite_Decrypt($response);
-        $response = json_decode(utf8_encode($jsonResponse));
+        $response = json_decode($jsonResponse);
 
         if($response){
             log_message('info', ' ActualizarContactoEmpresa '.$response->rc.'/'.$response->msg);
@@ -1964,7 +1964,7 @@ class Users extends CI_Controller {
         $data = json_encode($data);
         $response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
         $jsonResponse = np_Hoplite_Decrypt($response);
-        $response = json_decode(utf8_encode($jsonResponse));
+        $response = json_decode($jsonResponse);
 
         if($response){
             log_message('info', ' PERFIL USER '.$response->rc.'/'.$response->msg);
@@ -2074,7 +2074,7 @@ class Users extends CI_Controller {
         $data = json_encode($data);
         $response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
         $jsonResponse = np_Hoplite_Decrypt($response);
-        $response = json_decode(utf8_encode($jsonResponse));
+        $response = json_decode($jsonResponse);
 
         if($response){
             log_message('info', ' ACTUALIZAR PERFIL user '.$response->rc.'/'.$response->msg);
@@ -2192,7 +2192,7 @@ class Users extends CI_Controller {
         $data = json_encode($data);
         $response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
         $jsonResponse = np_Hoplite_Decrypt($response);
-        $response = json_decode(utf8_encode($jsonResponse));
+        $response = json_decode($jsonResponse);
 
         if($response){
             log_message('info','sucursales '.$response->rc.'/'.$response->msg);
@@ -2333,7 +2333,7 @@ class Users extends CI_Controller {
         $data = json_encode($data);
         $response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
         $jsonResponse = np_Hoplite_Decrypt($response);
-        $response = json_decode(utf8_encode($jsonResponse));
+        $response = json_decode($jsonResponse);
 
         if($response){
             log_message('info','AGREGAR sucursales '.$response->rc.'/'.$response->msg);
@@ -2468,7 +2468,7 @@ class Users extends CI_Controller {
         $data = json_encode($data);
         $response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
         $jsonResponse = np_Hoplite_Decrypt($response);
-        $response = json_decode(utf8_encode($jsonResponse));
+        $response = json_decode($jsonResponse);
 
         if($response){
             log_message('info','ACTUALIZAR sucursales '.$response->rc);
@@ -2634,7 +2634,7 @@ class Users extends CI_Controller {
         $data = json_encode($data);
         $response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
         $jsonResponse = np_Hoplite_Decrypt($response);
-        $response = json_decode(utf8_encode($jsonResponse));
+        $response = json_decode($jsonResponse);
 
         if($response){
             log_message('info','CARGAR MASIVO sucursales '.$response->rc.'/'.$response->msg);
@@ -2736,7 +2736,7 @@ class Users extends CI_Controller {
 						$data = json_encode($data);
 						$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
 						$jsonResponse = np_Hoplite_Decrypt($response);
-						$response =  json_decode(utf8_encode($jsonResponse));
+						$response =  json_decode($jsonResponse);
 						$data1 = json_encode($response);
 
 						if($response){
@@ -2833,7 +2833,7 @@ public function NotificacionesEnvio($urlCountry) {
 			$data = json_encode($data);
 			$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
 			$jsonResponse = np_Hoplite_Decrypt($response);
-			$response =  json_decode(utf8_encode($jsonResponse));
+			$response =  json_decode($jsonResponse);
 			$data1 = json_encode($response);
 
 			if($response){
