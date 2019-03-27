@@ -13,7 +13,7 @@ $marginLeft='78px';
 if($producto!=FALSE){
 
 	$nombreProducto = ucwords(mb_strtolower($producto[0]->producto->descripcion));
-	if($pais=='Pe' || $pais=='Usd' || $pais=='Co'){
+	if($pais=='Pe' || $pais=='Usd' || $pais=='Co' || $pais=='Ec-bp'){
 		$showMaestro='none';
 		$marginLeft='156px';
 	}
@@ -58,7 +58,7 @@ function to_ascii($word){
 	</ol>
 
 	<?php
-	if(isset($producto) && $producto!=FALSE){
+	if(isset($producto) && $producto != FALSE){
 
 		$marcaProducto = mb_strtolower($producto[0]->producto->marca);
 
