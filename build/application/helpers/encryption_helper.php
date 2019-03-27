@@ -61,9 +61,13 @@ if ( ! function_exists('np_hoplite_Decrypt'))
 		$decryptData = base64_decode(trim($descryptData));
 		$response = json_decode($decryptData);
 
-		if($service && isset($response->rc) && isset($response->msg)) {
+		if($service) {
+			$rc = isset($response->rc) ? ' RC: '.$response->rc : '';
+			$msg = isset($response->msg) ? ' MSG: '.$response->msg : '';
+			$country = isset($response->pais) ? ' COUNTRY: '.$response->pais : '';
 			$userName = $CI->session->userdata('userName') != '' ? $CI->session->userdata('userName') : 'NO USERNAME';
-			log_message('DEBUG', '['.$userName.'] RESPONSE: '.$service.' RC:'.$response->rc.' MSG: '.$response->msg);
+
+			log_message('DEBUG', '['.$userName.'] RESPONSE: '. $service . $rc . $msg . $country);
 		}
 		return $decryptData;
 	}

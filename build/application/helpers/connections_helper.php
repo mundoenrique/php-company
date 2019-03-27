@@ -30,7 +30,9 @@ if ( ! function_exists('np_Hoplite_GetWS')) {
 
 		$CI =& get_instance();
 		$urlcurlWS=$CI->config->item('urlWS').$nameWS;
-		log_message('DEBUG', 'WEBSERVICE URL '.$urlcurlWS.' COUNTRY: ' . $pais);
+
+		log_message('DEBUG', 'BY COUNTRY: ' .$pais. ', AND WEBSERVICE URL: '.$urlcurlWS);
+
 		$ch = curl_init();
 		$dataPost = $cryptDataBase64;
 		curl_setopt($ch, CURLOPT_URL, $urlcurlWS);
@@ -44,9 +46,9 @@ if ( ! function_exists('np_Hoplite_GetWS')) {
 		$response = curl_exec($ch);
 		$httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 		log_message("DEBUG","CURL HTTP CODE: " . $httpCode);
-		if($httpCode == 404) {
+		if(!$httpCode || $httpCode == 404) {
 			return FALSE;
-		}else{
+		} else {
 			return $response;
 		}
 
@@ -74,7 +76,7 @@ if ( ! function_exists('GetAPIServ')) {
 		}
 
 		$urlcurlAPI = $CI->config->item('urlAPI') . $urlAPI;
-		log_message("INFO", "URL API: " . $urlcurlAPI);
+		log_message("DEBUG", "URL API: " . $urlcurlAPI);
 
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, $urlcurlAPI);
