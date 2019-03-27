@@ -57,7 +57,7 @@ $info;
 					<p><?php echo $numLote;//echo $data[0]->acrif ?></p>
 				</div>
 				<div id="detalleLote-1-nombre">
-					<h5><?php echo "NIT";//echo lang('TABLA_LOTESPA_NOMBREEMPRESA') ?>:</h5>
+					<h5><?php echo lang('ID_FISCAL'); ?>:</h5>
 					<p><?php echo $acrif;//echo $data[0]->acnomcia ?></p>
 				</div>
 				<div id="detalleLote-1-short">

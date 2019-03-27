@@ -4,7 +4,7 @@ class services_model extends CI_model {
 	//Atributos de Clase
 	protected $sessionId;
 	protected $userName;
-	protected $rc = 0;
+	protected $rc;
 	protected $rif;
 	protected $idProductoS;
 	protected $token;
@@ -22,6 +22,7 @@ class services_model extends CI_model {
 		parent:: __construct();
 		$this->sessionId = $this->session->userdata('sessionId');
 		$this->userName = $this->session->userdata('userName');
+		$this->rc = 0;
 		$this->rif = $this->session->userdata('acrifS');
 		$this->idProductoS = $this->session->userdata('idProductoS');
 		$this->token = $this->session->userdata('token');
@@ -70,8 +71,33 @@ class services_model extends CI_model {
 		$responseJson = np_Hoplite_Decrypt($responseWs);
 		$responseWs = json_decode($responseJson);
 
-		if($responseWs->rc === '0') {
-			log_message('INFO', '[' . $this->userName . ']');
+		if($responseWs) {
+			switch($responseWs->rc){
+				case 0:
+					if($responseWs->rc == 0) {
+						log_message('INFO', '[' . $this->userName . ']');
+					}
+					break;
+			}
+
+
+		} else {
+			$this->code = 2;
+			$this->title = lang('SYSTEM_NAME');
+			$this->msg = lang('ERROR_GENERICO_USER');
 		}
+
+		$this->response = [
+			'code' => $this->code,
+			'title' => $this->title,
+			'msg' => $this->msg,
+			'data' => $this->data
+		];
+
+		if($this->code === 3) {
+			$this->session->sess_destroy();
+		}
+
+		return json_encode($this->response);
 	}
 }
