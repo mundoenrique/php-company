@@ -17,39 +17,16 @@ $logged_in = $this->session->userdata('logged_in');
 							</a>
 						</li>
 					<?	} ?>
-
-					<!--<li class="menu-item signup">
-						<a href="#" rel="section">
-							Afiliación
-						</a>
-					</li>-->
-					<?
-					if($pais != "Ec"){?>
 					<li class="menu-item benefits">
 						<a href="<? echo $urlBase.'/'.'beneficios'?>" rel="section">
 							<? echo lang('BREADCRUMB_BENEFICIOS');?>
 						</a>
-					</li><?	} ?>
-					<!--<li class="menu-item mobile">
-						<a href="#" rel="section">
-							Móvil
-						</a>
 					</li>
-					<li class="menu-item support">
-						<a href="#" rel="section">
-							Soporte
-						</a>
-					</li>-->
 					<li class="menu-item terms">
 						<a href="<? echo $urlBase.'/'.'condiciones'?>" rel="section">
 							<? echo lang('BREADCRUMB_CONDICIONES');?>
 						</a>
 					</li>
-					<!-- <li class="menu-item privacy">
-						<a href="<? //echo $urlBase.'/'.'privacidad'?>" rel="section">
-							<? //echo lang('BREADCRUMB_PRIVACIDAD');?>
-						</a>
-					</li> -->
 					<?php
 					if($logged_in){
 					?>

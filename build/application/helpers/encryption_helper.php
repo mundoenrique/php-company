@@ -20,12 +20,7 @@ if ( ! function_exists('np_hoplite_Encryption'))
 	 */
 	function np_Hoplite_Encryption($data, $service = false)
 	{
-		$data = json_decode($data);
-		if(isset($data->pais) && $data->pais === 'Ec') {
-			$data->pais = 'Co';
-		}
 		$CI =& get_instance();
-		$data = json_encode($data);
 		if($service) {
 			$userName = $CI->session->userdata('userName') != '' ? $CI->session->userdata('userName') : 'NO USERNAME';
 			log_message('DEBUG', '['. $userName .'] REQUEST ' . $service . ': ' . $data);

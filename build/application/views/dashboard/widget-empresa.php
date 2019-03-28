@@ -22,7 +22,7 @@ $pais = $this->uri->segment(1);
 		<button id='aplicar'><?php echo lang('WIDGET_EMPRESAS_BTNAPLICAR') ?></button>
 	</div>
 </div>
-<?php if ($pais !== 'Ec' && $pais !== 'Ec-bp'): ?>
+<?php if ($pais !== 'Ec-bp'): ?>
 <div id="widget-info-2">
 		<button id="sPrograms" ><?php echo lang('WIDGET_EMPRESAS_BTNOTROSPROGRAMAS') ?></button>
 </div>

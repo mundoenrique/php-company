@@ -31,7 +31,7 @@ $config['CDN'] = BASE_CDN_PATH.$config['country'].'/';
 | than english.
 |
 */
-$config['language']	= 'ec-spanish';
+$config['language']	= 'ec-bp-spanish';
 
 /* End of file config.php */
 /* Location: ./application/config/config.php */

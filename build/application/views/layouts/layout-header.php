@@ -7,7 +7,6 @@ $nombreCompleto = $this->session->userdata('nombreCompleto');
 $ext = "png";
 
 switch($pais) {
-	case 'Ec':
 	case 'Ec-bp':
 		$ext = "ico";
 		break;

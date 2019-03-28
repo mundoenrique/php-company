@@ -362,7 +362,7 @@ samp {
 
 .img-back {
 	height: 100px;
-	background-image: url('../img/banner-pichincha.svg');
+	background-image: url('../img/banner-pichincha-ceo.svg');
 	background-size: 100%;
 	background-repeat:no-repeat;
 	margin-bottom: 25px;
@@ -529,7 +529,7 @@ button:active {
 }
 
 #head-wrapper {
-	background: transparent url('../img/BpEmpresasazul.svg') scroll no-repeat 0px 2px;
+	background: transparent url('../img/logo-pichincha-azul.svg') scroll no-repeat 0px 2px;
 	height: 29px;
 	margin: 12px auto;
 	overflow: hidden;
@@ -7529,7 +7529,7 @@ a.style-companies-item > span.icon:before,
 
 select.ui-datepicker-month, select.ui-datepicker-year {
 	overflow: hidden;
-	background: #fff url("/site-conexionempresas/build/assets/Ec/media/img/arrowdown.gif") no-repeat 90% center !important;
+	background: #fff url(".../img/arrowdown.gif") no-repeat 90% center !important;
 }
 
 select.ui-datepicker-month, select.ui-datepicker-year {
