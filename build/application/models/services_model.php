@@ -77,12 +77,12 @@ class services_model extends CI_model {
 					$this->data = [
 						[
 							'descrip'=> '****5411256',
-							'value'=> 'ah',
+							'value'=> '01341258789525411256',
 							'saldo'=> '5,000.00'
 						],
 						[
 							'descrip'=> '****752177',
-							'value'=> 'co',
+							'value'=> '01341258845699752177',
 							'saldo'=> '6,000.00'
 						]
 					];
