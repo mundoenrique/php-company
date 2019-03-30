@@ -15,7 +15,7 @@ $pais = $this->uri->segment(1);
 		</a>
 	</div>
 	<?php
-	if($pais != 'Ve' && $pais != 'Ec' && $pais != 'Ec-bp'):
+	if($pais != 'Ve' && $pais != 'Ec-bp'):
 		if($pais != 'Co' && $pais != 'Usd' && $pais != 'Ec' && $pais != 'Ec-bp'):
 	?>
 			<div id="campos-descarga">
@@ -57,7 +57,7 @@ $pais = $this->uri->segment(1);
 		</div>
 	<?php
 	endif;
-	if ($pais == 'Co' || $pais == 'Pe' || $pais == 'Ec' || $pais == 'Ec-bp'):
+	if ($pais == 'Co' || $pais == 'Pe' || $pais == 'Ec-bp'):
 	?>
     <div id="datos-1">
 			<p id="user-name">Archivos de gestión Conexión Empresas Online</p>
