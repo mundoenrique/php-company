@@ -76,13 +76,13 @@ class services_model extends CI_model {
 					$this->code = 0;
 					$this->data = [
 						[
-							'descrip'=> '****5411256',
-							'value'=> '01341258789525411256',
+							'descrip'=> '****6690',
+							'value'=> '2100076690',
 							'saldo'=> '5,000.00'
 						],
 						[
-							'descrip'=> '****752177',
-							'value'=> '01341258845699752177',
+							'descrip'=> '****1404',
+							'value'=> '3349401404',
 							'saldo'=> '6,000.00'
 						]
 					];
