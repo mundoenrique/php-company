@@ -37,7 +37,7 @@ $(function() {
 			Amountmsg = "La empresa no posee saldo.";
 			$("#amount, #description, #account, #charge, #credit, #recargar").prop( "disabled", false );
 		} else if (data.rc == -61) {
-			window.location.replace(baseURL+api+isoPais+'/finsesion');
+			window.location.replace(baseURL+isoPais+'/finsesion');
 		} else {
 			Amountmsg = " - ";
 			$("#amount, #description, #account #charge, #credit, #recargar").prop( "disabled", true );
@@ -77,7 +77,7 @@ $(function() {
 			descrip.removeAttr('style');
 		}
 
-		if(account.val() === '') {
+		if(account.val() === '0') {
 			camposValid += '<p>* Seleccione una cuenta</p>';
 			validInput = false;
 			account.css('border-color', '#cd0a0a')
@@ -119,7 +119,7 @@ $(function() {
 			};
 			amount.val('');
 			descrip.val('');
-			account.val('0');
+			account.val('0').prop('selected', true);
 			type.prop('checked', false);
 
 			var $aux = $('#loading').dialog({

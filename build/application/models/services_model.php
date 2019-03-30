@@ -54,32 +54,40 @@ class services_model extends CI_model {
 		$requestData = json_encode([
 			'idOperation' => $idOperation,
 			'className' => $className,
-			'id_ext_per' => $dni,
 			'id_ext_emp' => $this->rif,
 			'idprograma' => $this->idProductoS,
 			'logAccesoObject' => $logAcceso,
 			'token' => $this->token,
 			'pais' => $this->country
 		]);
-
+		/*
 		$dataEncrypt = np_Hoplite_Encryption($requestData, 'getBanckAccountlist');
-		$request = json_encode([
-			'bean' => $dataEncrypt,
-			'pais' => $urlCountry
-		]);
+		$request = json_encode(['bean' => $dataEncrypt, 'pais' => $urlCountry]);
 		$responseWs = np_Hoplite_GetWS('eolwebInterfaceWS', $request);
-		$responseJson = np_Hoplite_Decrypt($responseWs);
+		$responseJson = np_Hoplite_Decrypt($responseWs, 'getBanckAccountlist');
 		$responseWs = json_decode($responseJson);
-
+		*/
+		$responseWs = new stdClass();
+		$responseWs->rc = 0;
 		if($responseWs) {
-			switch($responseWs->rc){
+			switch($responseWs->rc) {
 				case 0:
-					if($responseWs->rc == 0) {
-						log_message('INFO', '[' . $this->userName . ']');
-					}
+					log_message('INFO', '[' . $this->userName . ']');
+					$this->code = 0;
+					$this->data = [
+						[
+							'descrip'=> '****5411256',
+							'value'=> 'ah',
+							'saldo'=> '5,000.00'
+						],
+						[
+							'descrip'=> '****752177',
+							'value'=> 'co',
+							'saldo'=> '6,000.00'
+						]
+					];
 					break;
 			}
-
 
 		} else {
 			$this->code = 2;
@@ -98,6 +106,6 @@ class services_model extends CI_model {
 			$this->session->sess_destroy();
 		}
 
-		return json_encode($this->response);
+		return $this->response;
 	}
 }

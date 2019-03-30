@@ -45,9 +45,15 @@ class Servicios extends CI_Controller {
 			$footer = $this->parser->parse('layouts/layout-footer', array('menuFooterActive'=>TRUE,
 			'menuFooter'=>$menuFooter, 'FooterCustomInsertJSActive'=>TRUE, 'FooterCustomInsertJS'=>$FooterCustomInsertJS,
 			'FooterCustomJSActive'=>TRUE, 'FooterCustomJS'=> $FooterCustomJS), TRUE);
+			$ctas = '';
+			if($urlCountry == 'Ec-bp') {
+				$this->load->model('services_model', 'servicios');
+				$ctas = $this->servicios->getBanckAccountlist();
+			}
 			$content = $this->parser->parse('servicios/content-transferencia-maestra', array(
 				'programa'=>$programa,
-				'funciones' => $funciones
+				'funciones' => $funciones,
+				'dataCtas'=> $ctas
 			),TRUE);
 			$sidebarLotes= $this->parser->parse('dashboard/widget-empresa', array('sidebarActive'=>TRUE), TRUE);
 			$datos = array(
@@ -1444,7 +1450,7 @@ class Servicios extends CI_Controller {
 			"idExtEmp"=>$idEmpresa,
 			"saldo"=> round($amount,2),
 			"descrip"=> $descript,
-			"account"=> $account,
+			"cuentaCliente"=> $account,
 			"type"=> $type,
 			"tokenCliente"=> $codeToken,
 			"authToken"=> $bean,

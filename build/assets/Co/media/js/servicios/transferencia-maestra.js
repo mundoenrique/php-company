@@ -997,7 +997,7 @@ $(function() {
             var Amountmsg = "<strong> La empresa no posee saldo.</strong>";
             $("#amount, #description, #recargar").prop( "disabled", false );
         }else if (data.rc == -61) {
-            window.location.replace( baseURL+api+isoPais+'/finsesion');
+            window.location.replace( baseURL+isoPais+'/finsesion');
         }else {
             var Amountmsg = " - ";
             $("#amount, #description, #recargar").prop( "disabled", true );
