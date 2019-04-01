@@ -1,5 +1,5 @@
 <?php
-$lang['SYSTEM_NAME']= "Empresas Online Colombia";
+$lang['SYSTEM_NAME']= "Conexión Empresas";
 $lang['LAST_SESSION']="Última sesión";
 $lang['ID_FISCAL']= "RUC.";
 $lang['ID_PERSONA']= "Cédula de identidad";
