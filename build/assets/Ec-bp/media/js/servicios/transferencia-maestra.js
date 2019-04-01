@@ -19,9 +19,13 @@ var serv_var = {
 	montoMin: 0,
 	fallidas: 0
 }
+var codeCtas, titleCtas, msgCtas
 $(function() {
 	// VARIABLES GLOBALES
 	var valido = true;
+	codeCtas = $('#account').attr('code');
+	titleCtas = $('#account').attr('title');
+	msgCtas = $('#account').attr('msg');
 
 	$('#filtroOS').show();
 	$("#dni").attr("maxlength", "12");
@@ -32,17 +36,32 @@ $(function() {
 		if (data.rc == 0) {
 			dataAmount = data.maestroDeposito.saldoDisponible;
 			Amountmsg = toFormatShow(dataAmount);
-			$("#amount, #description, #account, #charge, #credit, #recargar").prop( "disabled", false );
+			$("#amount, #description, #account, #charge, #credit, #recargar").prop("disabled", false);
+
 		} else if (data.rc == -233) {
 			Amountmsg = "La empresa no posee saldo.";
-			$("#amount, #description, #account, #charge, #credit, #recargar").prop( "disabled", false );
+			$("#amount, #description, #account, #charge, #credit, #recargar").prop("disabled", false);
+			if(codeCtas != '0') {
+				$('#account').prop('disabled', true);
+			}
 		} else if (data.rc == -61) {
 			window.location.replace(baseURL+isoPais+'/finsesion');
 		} else {
 			Amountmsg = " - ";
-			$("#amount, #description, #account #charge, #credit, #recargar").prop( "disabled", true );
+			$("#amount, #description, #account, #charge, #credit, #recargar").prop("disabled", true);
 		}
 		$("#saldoEmpresa").text('Saldo disponible: ' + Amountmsg);
+
+		switch(codeCtas) {
+			case '0':
+			case '-150':
+				break;
+			case '3':
+				notiPagOS(titleCtas, msgCtas, 'close');
+				break;
+			default:
+				notiPagOS(titleCtas, msgCtas, 'error');
+		}
 	});
 
 	$('#recarga_concetradora').on('click','#recargar', function(e) {
@@ -87,7 +106,6 @@ $(function() {
 
 
 		if(type.val() === undefined) {
-			console.log(type.val())
 			camposValid += '<p>* Seleccione cargo o  abono</p>';
 			validInput = false;
 			$('#charge-or-credit').css('border', '1px solid #cd0a0a');

@@ -68,11 +68,12 @@
 					<br>
 					<h5 style="float:left;"><?= "Cuenta" ?></h5>
 					<span>
-						<select id="account" code="<?= $dataCtas['code'] ?>" title="<?= $dataCtas['msg'] ?>" msg="<?= $dataCtas['msg'] ?>"
+						<select id="account" code="<?= $dataCtas['code'] ?>" title="<?= $dataCtas['title'] ?>" msg="<?= $dataCtas['msg'] ?>"
 							disabled>
-							<option value="0" selected>Seleccione una cuenta</option>
+							<option value="0" selected>
+								<?= $dataCtas['code'] == 0 ? 'Seleccione una Cuenta' : $dataCtas['data'] ?>
+							</option>
 							<?php if($dataCtas['code'] == 0): foreach($ctas as $pos => $cta): ?>
-
 							<option value="<?= $cta['value'] ?>"><?= $cta['descrip'].'   --Saldo: '.$cta['saldo'] ?></option>
 							<?php endforeach; endif; ?>
 						</select>

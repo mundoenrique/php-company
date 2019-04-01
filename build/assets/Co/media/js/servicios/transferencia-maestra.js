@@ -949,7 +949,8 @@ $(function() {
                                             });
                                             $.post(baseURL + api + isoPais + '/servicios/transferencia-maestra/RegargaTMProcede', {
                                                 "amount":amount,
-                                                "descript": descrip,
+																								"descript": descrip,
+																								"type": 'abono',
                                                 "codeToken": codeToken
                                             })
                                                 .done(function (data) {
