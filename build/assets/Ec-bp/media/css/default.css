@@ -1,13 +1,3 @@
-/*
-Project @project.name@ (Codename @project.codename@)
-Version @project.version@
-Build @project.build.number@ - @project.build.date@
-@project.release@ release
-
-Default skin.
-
-@project.copyright@
-*/
 article,
 aside,
 details,
@@ -576,7 +566,6 @@ ol.breadcrumb li {
 
 ol.breadcrumb li a {
 	color: #888888;
-	/*font-weight: normal;*/
 }
 #cargando{
 	color:#10133f!important;
@@ -786,7 +775,6 @@ h2.widget-title{
 	-moz-transition: visibility 400ms ease-in-out 0s;
 	-o-transition: visibility 400ms ease-in-out 0s;
 	transition: visibility 400ms ease-in-out 0s;
-	/*@include box-shadow(rgba($color-shadow-base, 0.5) 0 1px 2px);*/
 }
 
 .menu li>ul:hover {
@@ -798,7 +786,6 @@ h2.widget-title{
 	background: #f3f3f3;
 	border-bottom: 1px solid #D3D3D3;
 	border-top: 1px solid white;
-	/*@include background-image(linear-gradient($color-main-nav-background-top, $color-main-nav-background-bottom));*/
 	list-style: none;
 }
 
@@ -811,8 +798,6 @@ h2.widget-title{
 #account-nav {
 	color: white;
 	margin-top: 10px;
-	/*margin-right:100px;*/
-	/*display:block;*/
 }
 
 #account-nav ul {
@@ -823,7 +808,6 @@ h2.widget-title{
 #account-nav ul li {
 
   height: 20px;
-  /*clear: both;*/
   margin-bottom: 5px;
   text-transform: capitalize;
 	margin-left: 20px;
@@ -832,7 +816,6 @@ h2.widget-title{
 #account-nav ul li a {
   color: white;
   float: left;
-  /*clear: both;*/
   font-size: 14px;
 	font-weight: 700;
 	color: #0f265c !important;
@@ -930,10 +913,6 @@ h2.widget-title{
 	height: 10px;
 }
 
-/* .submenu a:hover {
-	font-weight: 700;
-	border-left: 3px solid #FFDD00;
-} */
 .submenu .menu-item:hover {
 	font-weight: 700;
 	border-left: 3px solid #FFDD00;
@@ -967,16 +946,6 @@ select.categories-products {
 	font-weight: 700;
 }
 
-/*.texto-login{
-	float:left;
-	width:700px;
-	& p{
-		width:320px;
-		margin: 10px;
-		float:left;
-
-	}
-}*/
 .text-izq {
 	float: left;
 	width: 320px;
@@ -1023,21 +992,6 @@ p.subtitulos-login {
 	padding: 20px;
 }
 
-/*#text-alerta{
-	color:red;
-}
-.text-login-hide{
-	display:none;
-}
-.text-login-hide:hover{
-	display:block;
-}
-.titulo-login-desc-2{
-	display:block;
-}
-.titulo-login-desc-2:hover{
-	display:none;
-}*/
 .flecha {
 	color: white;
 	font-size: 15px;
@@ -1076,19 +1030,8 @@ p.subtitulos-login {
  */
 .ju-sliderbutton {
 	background-color: #dddddd;
-	/*background-color: #000000;*/
 	border: 1px solid #babdb6;
 	height: 34px;
-	/*
-  	background: #45484d;
-  	background: -moz-linear-gradient(top,  #45484d 0%, #000000 100%);
-  	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#45484d), color-stop(100%,#000000));
-  	background: -webkit-linear-gradient(top,  #45484d 0%,#000000 100%);
-  	background: -o-linear-gradient(top,  #45484d 0%,#000000 100%);
-  	background: -ms-linear-gradient(top,  #45484d 0%,#000000 100%);
-  	background: linear-gradient(to bottom,  #45484d 0%,#000000 100%);
-  	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#45484d', endColorstr='#000000',GradientType=0 );
-  */
 	border-radius: 0px;
 	text-align: right;
 }
@@ -1127,13 +1070,6 @@ p.subtitulos-login {
 }
 
 .ju-sliderbutton .ju-sliderbutton-slider .ui-slider-handle {
-	/*background-color: #babdb6;
-  background-image: url("./images/sliderbutton-handle.svg");
-  background-position: center;
-  -webkit-background-size: 100%;
-     -moz-background-size: 100%;
-          background-size: 100%;
-  background-repeat: no-repeat;*/
 	background: #ffdd00;
 	background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffdd00), color-stop(100%, #004574));
 	background-image: -webkit-linear-gradient(#ffdd00, #004574);
@@ -1174,7 +1110,6 @@ html {
 	-webkit-font-smoothing: antialiased;
 }
 
-/* This is the default Tooltipster theme (feel free to modify or duplicate and create multiple themes!): */
 .tooltipster-default {
 	border-radius: 5px;
 	border: 2px solid #000;
@@ -1182,7 +1117,6 @@ html {
 	color: #fff;
 }
 
-/* Use this next selector to style things like font-size and line-height: */
 .tooltipster-default .tooltipster-content {
 	font-family: Arial, sans-serif;
 	font-size: 14px;
@@ -1191,12 +1125,6 @@ html {
 	overflow: hidden;
 }
 
-/* This next selector defines the color of the border on the outside of the arrow. This will automatically match the color and size of the border set on the main tooltip styles. Set display: none; if you would like a border around the tooltip but no border around the arrow */
-.tooltipster-default .tooltipster-arrow .tooltipster-arrow-border {
-	/* border-color: ... !important; */
-}
-
-/* If you're using the icon option, use this next selector to style them */
 .tooltipster-icon {
 	cursor: help;
 	margin-left: 4px;
@@ -1245,11 +1173,6 @@ html {
 	padding: 20px;
 }
 
-/*! jQuery UI - v1.10.3 - 2013-05-09
-* http://jqueryui.com
-* Includes: jquery.ui.core.css, jquery.ui.resizable.css, jquery.ui.selectable.css, jquery.ui.accordion.css, jquery.ui.autocomplete.css, jquery.ui.button.css, jquery.ui.datepicker.css, jquery.ui.dialog.css, jquery.ui.menu.css, jquery.ui.progressbar.css, jquery.ui.slider.css, jquery.ui.spinner.css, jquery.ui.tabs.css, jquery.ui.tooltip.css
-* To view and modify this theme, visit http://jqueryui.com/themeroller/?ffDefault=Trebuchet%20MS%2CTahoma%2CVerdana%2CArial%2Csans-serif&fwDefault=bold&fsDefault=1.1em&cornerRadius=4px&bgColorHeader=f6a828&bgTextureHeader=gloss_wave&bgImgOpacityHeader=35&borderColorHeader=e78f08&fcHeader=ffffff&iconColorHeader=ffffff&bgColorContent=eeeeee&bgTextureContent=highlight_soft&bgImgOpacityContent=100&borderColorContent=dddddd&fcContent=333333&iconColorContent=222222&bgColorDefault=f6f6f6&bgTextureDefault=glass&bgImgOpacityDefault=100&borderColorDefault=cccccc&fcDefault=1c94c4&iconColorDefault=ef8c08&bgColorHover=fdf5ce&bgTextureHover=glass&bgImgOpacityHover=100&borderColorHover=fbcb09&fcHover=c77405&iconColorHover=ef8c08&bgColorActive=ffffff&bgTextureActive=glass&bgImgOpacityActive=65&borderColorActive=fbd850&fcActive=eb8f00&iconColorActive=ef8c08&bgColorHighlight=ffe45c&bgTextureHighlight=highlight_soft&bgImgOpacityHighlight=75&borderColorHighlight=fed22f&fcHighlight=363636&iconColorHighlight=228ef1&bgColorError=b81900&bgTextureError=diagonals_thick&bgImgOpacityError=18&borderColorError=cd0a0a&fcError=ffffff&iconColorError=ffd27a&bgColorOverlay=666666&bgTextureOverlay=diagonals_thick&bgImgOpacityOverlay=20&opacityOverlay=50&bgColorShadow=000000&bgTextureShadow=flat&bgImgOpacityShadow=10&opacityShadow=20&thicknessShadow=5px&offsetTopShadow=-5px&offsetLeftShadow=-5px&cornerRadiusShadow=5px
-* Copyright 2013 jQuery Foundation and other contributors Licensed MIT */
 .ui-helper-hidden {
 	display: none;
 }
@@ -1257,7 +1180,7 @@ html {
 .ui-helper-hidden-accessible {
 	border: 0;
 	clip: rect(0 0 0 0);
-	eight: 1px;
+	height: 1px;
 	margin: -1px;
 	overflow: hidden;
 	padding: 0;
@@ -1632,6 +1555,7 @@ button.ui-button::-moz-focus-inner {
 .ui-datepicker select.ui-datepicker-year {
 	width: 45%;
 }
+
 select.ui-datepicker-month,
 select.ui-datepicker-year{
 	border:none;
@@ -1674,9 +1598,11 @@ select.ui-datepicker-year{
 	border-right: 0;
 	border-bottom: 0;
 }
+
 .ui-datepicker-calendar{
 	color:#929292;
 }
+
 .ui-datepicker .ui-datepicker-buttonpane button {
 	float: right;
 	margin: .5em .2em .4em;
@@ -2173,7 +2099,6 @@ body .ui-tooltip {
 	border:1px solid #cfcfcf;
 }
 
-/*.ui-widget-content a{color:#333}*/
 .ui-widget-header {
 	border: 1px solid #0f265c;
 	background: #0f265c;
@@ -2189,7 +2114,7 @@ body .ui-tooltip {
 .ui-state-default,
 .ui-widget-content .ui-state-default,
 .ui-widget-header .ui-state-default {
-	 border: 1px solid #ccc;
+	border: 1px solid #ccc;
 	background: #f6f6f6;
 	font-weight: 700;
 	color: #10133f;
@@ -2208,9 +2133,6 @@ body .ui-tooltip {
 .ui-state-focus,
 .ui-widget-content .ui-state-focus,
 .ui-widget-header .ui-state-focus {
-	/*border:1px solid #D5D5D5; */
-	/*background:$color-base1; */
-
 	font-weight: 700;
 	color: #10133f;
 }
@@ -2226,7 +2148,6 @@ body .ui-tooltip {
 .ui-state-active,
 .ui-widget-content .ui-state-active,
 .ui-widget-header .ui-state-active {
-	/*border:1px solid $color-base2;*/
 	background: white;
 	font-weight: 700;
 	color: #ffdd00;
@@ -3065,7 +2986,6 @@ body .ui-tooltip {
 
 .ui-widget-overlay {
 	background: #666666;
-	/*url(images/ui-bg_diagonals-thick_20_666666_40x40.png) 50% 50% repeat;*/
 	opacity: .5;
 	filter: Alpha(Opacity=50);
 }
@@ -3118,7 +3038,6 @@ ul.dashboard-companies {
 	width: 960px;
 	display: inline;
 	padding-top: 20px;
-	/*background-color:white;*/
 	margin: 0px;
 	z-index: 0;
 }
@@ -3166,8 +3085,6 @@ transition: all 100ms ease-in;
 	background-image: -o-linear-gradient(#ffdd00, #004574) !important;
 	background-image: linear-gradient(#ffdd00, #004574) !important;
 	color: white;
-	/*width:260px;*/
-	/*height:100px;*/
 	display: block;
 }
 
@@ -3192,7 +3109,6 @@ transition: all 100ms ease-in;
 	color: white;
 	display: none;
 	z-index: 3;
-
 }
 
 #more-info span {
@@ -3315,7 +3231,6 @@ span#more-info a p b {
 
 div.filter li {
 	list-style: none;
-	/*@include box-shadow(rgba($color-shadow-base, 0.5) 0 1px 1px);*/
 	background: #eeeeee;
 	background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(100%, #f2f2f2));
 	background-image: -webkit-linear-gradient(#ffffff, #f2f2f2);
@@ -3411,7 +3326,6 @@ li.filter-1 a {
 	border-radius: 2px;
 }
 
-/*begin-Dashboard-Products*/
 #sidebar-products,
 .aviso {
 	width: 220px;
@@ -3450,7 +3364,6 @@ li.filter-1 a {
 }
 
 #content-condiciones p {
-	/*padding:30px 0;*/
 	text-align: justify;
 }
 
@@ -3461,7 +3374,6 @@ li.filter-1 a {
 }
 
 #content-privacidad p {
-	/*padding:30px 0;*/
 	text-align: justify;
 }
 
@@ -3547,7 +3459,6 @@ li.filter-1 a {
 
 #products-list li {
 	float: left;
-	/*padding:10px;*/
 	margin-left: -35px;
 	height: 80px;
 	list-style: none;
@@ -3578,7 +3489,6 @@ li.filter-1 a {
 
 #products-list li img {
 	margin: 0px;
-	/*padding:10px;*/
 	float: left;
 }
 
@@ -3597,7 +3507,6 @@ li.filter-1 a {
 }
 
 .text-category {
-	/*padding-top:10px;*/
 	font-size: 12px;
 	color: #bbbbbb;
 	width: 325px;
@@ -3697,12 +3606,10 @@ li.filter-1 a {
 	width: 90px;
 	height: 80px;
 	float: left;
-	/*margin-right:10px;*/
 }
 
 #rrhh {
 	width: 210px;
-	/*background-color:$color-field-normal-background;*/
 	float: left;
 	margin: 5px 8px;
 	-webkit-box-shadow: rgba(51, 51, 51, 0.5) 0 1px 2px;
@@ -3733,7 +3640,6 @@ li.filter-1 a {
 
 #admon {
 	width: 210px;
-	/*background-color:$color-field-normal-background;*/
 	float: left;
 	margin: 5px 8px;
 	-webkit-box-shadow: rgba(51, 51, 51, 0.5) 0 1px 2px;
@@ -3764,7 +3670,6 @@ li.filter-1 a {
 
 #mercadeo {
 	width: 210px;
-	/*background-color:$color-field-normal-background;*/
 	float: left;
 	margin: 5px 8px;
 	-webkit-box-shadow: rgba(51, 51, 51, 0.5) 0 1px 2px;
@@ -3795,21 +3700,18 @@ li.filter-1 a {
 
 .info-programa {
 	float: left;
-	/*height:40px;*/
 	background-color: #dddddd;
 	border-top: 1px solid #dddddd;
 	border-bottom: 1px solid #f3f3f3;
 	padding: 10px 5px 10px 5px;
 	width: 200px;
 	list-style: none;
-	/*font-style:$font-style-italic;*/
 	font-weight: 700;
 	font-size: 12px;
 }
 
 .info-programa p {
 	width: 120px;
-	/*padding:10px;*/
 	float: left;
 }
 
@@ -3817,8 +3719,6 @@ li.filter-1 a {
 	float: left;
 }
 
-/*end-Dashboard-Products*/
-/*begin-ProductDetail*/
 #content-product-detail {
 	width: 690px;
 	float: left;
@@ -3875,7 +3775,6 @@ ul#brands li p {
 }
 
 ul#brands li p img {
-	/*padding:18px;*/
 	float: left;
 }
 
@@ -3909,8 +3808,6 @@ ul#brands li p img {
 	color: #40476C;
 }
 
-/*end-ProductDetail*/
-/*begin-LOTES*/
 #lotes-general {
 	background: none repeat scroll 0 0 transparent;
 	float: left;
@@ -3949,10 +3846,8 @@ ul#brands li p img {
 }
 
 #lotes-contenedor-consulta {
-	/*background:white;*/
 	float: left;
 	width: 680px;
-	/*@include box-shadow(rgba($color-shadow-base, 0.5) 0 1px 1px);*/
 	padding: 5px;
 	margin: 5px;
 	border: solid 1px #f3f3f3;
@@ -3991,15 +3886,11 @@ ul#brands li p img {
 }
 
 #lotes-contenedor-2 table tr {
-	/*background:$color-status-default-border;*/
 	margin-left: 38px;
 	float: left;
-	/*width: 539px;*/
 }
 
 #lotes-contenedor-2 table td {
-	/*max-width: 60px;
-  min-width: 60px;*/
 	overflow: hidden;
 	text-align: center;
 }
@@ -4116,7 +4007,6 @@ ul#brands li p img {
 }
 
 #table-text-lotes thead th {
-	/*padding: 5px;*/
 	border-right: solid 1px;
 	max-width: 100px;
 	min-width: 100px;
@@ -4147,10 +4037,6 @@ ul#brands li p img {
 	min-width: 100px;
 	float: left;
 	height: 38px;
-}
-
-#table-text-lotes td:last-child {
-	/*border-left:0px;*/
 }
 
 .table-text-aut tbody tr {
@@ -4190,7 +4076,6 @@ ul#brands li p img {
 }
 
 .table-text-aut thead th {
-	/*padding: 5px;*/
 	border-right: solid 1px;
 	max-width: 60px;
 	min-width: 60px;
@@ -4242,7 +4127,6 @@ ul#brands li p img {
 }
 
 #table-text-TM {
-	/*margin-left:25px;*/
 	width: 660px;
 	background: #FFF;
 	overflow: hidden;
@@ -4286,7 +4170,6 @@ ul#brands li p img {
 }
 
 #table-text-TM thead th {
-	/*padding: 5px;*/
 	border-right: solid 1px;
 	max-width: 60px;
 	min-width: 60px;
@@ -4351,7 +4234,6 @@ ul#brands li p img {
 }
 
 #table-lote-detail thead th {
-	/*padding: 5px;*/
 	border-right: solid 1px;
 	max-width: 70px;
 	min-width: 70px;
@@ -4430,10 +4312,8 @@ ul#brands li p img {
 
 .table-GC thead tr {
 	background: #54c2d0;
-	/*@include border-radius(10px 10px 0 0);*/
 	color: #FFF;
 	font-size: 13px;
-	/*border: solid 1px;*/
 	margin-left: 12px;
 	float: left;
 	width: 875px;
@@ -4458,14 +4338,11 @@ tr.GC-first th {
 }
 
 .table-GC thead th {
-	/*padding: 5px;*/
-	/*border-right: solid 1px #fff;*/
 	max-width: 60px;
 	min-width: 60px;
 	padding: 10px 3px;
 	text-align: center;
 	font-size: 12px;
-	/*background:$color-base-var-1;*/
 	float: left;
 }
 
@@ -4477,9 +4354,6 @@ tr.GC-first th {
 	border: none;
 }
 
-/*.table-GC thead th:first-child{
-border-right:2px solid $color-base2!important;
-}*/
 .table-GC tbody td#icon-batchs {
 	font-size: 32px;
 	width: 35px;
@@ -4513,7 +4387,6 @@ border-right:2px solid $color-base2!important;
 	border-radius: 0 0 10px 10px;
 	color: #FFF;
 	font-size: 13px;
-	/*border: solid 1px;*/
 	margin-left: 10px;
 	float: left;
 	width: 875px;
@@ -4521,7 +4394,6 @@ border-right:2px solid $color-base2!important;
 }
 
 .table-GC tfoot th {
-	/*padding: 5px;*/
 	border-right: solid 1px #fff;
 	max-width: 60px;
 	min-width: 60px;
@@ -4624,7 +4496,6 @@ border-right:2px solid $color-base2!important;
 
 #icon-batchs span {
 	margin: 0px;
-	/*margin-top: 12px;*/
 }
 
 #td-nombre-2 {
@@ -4673,13 +4544,9 @@ border-right:2px solid $color-base2!important;
 
 .tabs-contenedor {
 	width: 670px;
-	/*background:white;*/
-	/*@include box-shadow(rgba($color-shadow-base, 0.5) 0 1px 1px);*/
 	float: left;
-	/*@include border-radius(10px 10px 10px 10px);*/
 	height: auto;
 	padding: 10px;
-	/*border: 1px solid #ccc;*/
 }
 
 .info-lotes-a {
@@ -4761,7 +4628,6 @@ border-right:2px solid $color-base2!important;
 
 #userfile {
 	margin: 0px !important;
-	/*width:auto!important;*/
 }
 
 .input-TM {
@@ -4827,7 +4693,6 @@ border-right:2px solid $color-base2!important;
 }
 
 #icon-batchs {
-	/*background:$color-vivid-item5;*/
 	-webkit-border-radius: 3px 0px 0px 3px;
 	-moz-border-radius: 3px 0px 0px 3px;
 	-ms-border-radius: 3px 0px 0px 3px;
@@ -4851,7 +4716,6 @@ border-right:2px solid $color-base2!important;
 #icon-batchs span {
 	padding: 0;
 	float: left;
-	/*margin-top: 12px;*/
 }
 
 .icon-batchs-red {
@@ -4887,7 +4751,6 @@ border-right:2px solid $color-base2!important;
 	float: right;
 	height: 45px;
 	width: auto;
-	/*padding:10px;*/
 	border-left: 1px solid white;
 	border-right: 1px solid #dddddd;
 }
@@ -4946,12 +4809,8 @@ li#select-empresa select {
 	font-weight: 700;
 }
 
-/*end-LOTES*/
-/*estilos tablas*/
 #tabla-datos-general {
 	width: 660px;
-	/*background:#f6f6f6;*/
-	/*border:solid 1px;*/
 }
 
 #datos-principales {
@@ -5001,7 +4860,6 @@ li#select-empresa select {
 }
 
 .tabla-lotesNF {
-	/*background: none repeat scroll 0 0 $color-base-var-1;*/
 	-webkit-border-radius: 10px 10px 0 0;
 	-moz-border-radius: 10px 10px 0 0;
 	-ms-border-radius: 10px 10px 0 0;
@@ -5038,12 +4896,10 @@ li#select-empresa select {
 	width: 100%;
 	height: 20px;
 	padding: 10px 0;
-	/*background:#f3f3f3;*/
 	color: #555555;
 	-webkit-box-shadow: rgba(51, 51, 51, 0.09) 0 1px 1px;
 	-moz-box-shadow: rgba(51, 51, 51, 0.09) 0 1px 1px;
 	box-shadow: rgba(51, 51, 51, 0.09) 0 1px 1px;
-	/*@include border-radius(10px 10px 0 0);*/
 	font-size: 18px;
 	border-bottom: 1px solid #ddd;
 	margin-bottom: 10px;
@@ -5085,8 +4941,6 @@ li#select-empresa select {
 	float: left;
 }
 
-/*estilos tablas*/
-/*estdos de cuenta*/
 #search-1 {
 	float: left;
 	width: 360px;
@@ -5321,12 +5175,7 @@ li#select-empresa select {
 	text-align: center !important;
 }
 
-/*estdos de cuenta*/
-/*detalle-lote*/
 #detalleLote-content {
-	/*background: none repeat scroll 0 0 white;
-  border: 1px solid #F3F3F3;
-  box-shadow: 0 1px 1px rgba(51, 51, 51, 0.5);*/
 	float: left;
 	margin: 5px;
 	padding: 5px;
@@ -5445,8 +5294,6 @@ li#select-empresa select {
 	border-right: 1px dotted #BBB;
 }
 
-/*detalle-lote*/
-/*Confirmacion-lote*/
 #lotesConfirmacion-1,
 #lotesConfirmacion-2,
 #lotesConfirmacion-3 {
@@ -5466,7 +5313,6 @@ li#select-empresa select {
 #lotesConfirmacion-2 div,
 #lotesConfirmacion-3 div {
 	float: left;
-	/*border-bottom:1px dotted $color-base2;*/
 }
 
 #lotesConfirmacion-4 {
@@ -5505,9 +5351,6 @@ li#select-empresa select {
 
 #embozo1,
 #embozo2 {
-	/*float:left;
-  color:$color-base-var-1;
-  padding-right:10px;*/
 	width: 300px;
 }
 
@@ -5526,8 +5369,6 @@ li#select-empresa select {
 	box-shadow: rgba(51, 51, 51, 0.5) 0 1px 1px;
 }
 
-/*Confirmacion-lote*/
-/*reportes*/
 #view-results {
 	float: left;
 	clear: both;
@@ -5541,10 +5382,6 @@ li#select-empresa select {
 	float: left;
 }
 
-/* #view-results span:hover {
-	color: #f5921e;
-} */
-
 #select-small {
 	width: 70px !important;
 	float: left;
@@ -5556,12 +5393,7 @@ li#select-empresa select {
 	float: left;
 }
 
-/*
-#thead-datos-principales th{
-padding:5px 0px;
-}*/
 #tbody-datos-general {
-	/*background:$color-main-nav-background-bottom;*/
 	border: none;
 }
 
@@ -5571,7 +5403,6 @@ padding:5px 0px;
 }
 
 .tabla-reportes thead {
-	/*background:$color-base-var-1;*/
 	color: white;
 	float: left;
 }
@@ -5619,7 +5450,6 @@ padding:5px 0px;
 }
 
 .tabla-TH thead {
-	/*background:$color-base-var-1;*/
 	color: white;
 	float: left;
 }
@@ -5667,7 +5497,6 @@ padding:5px 0px;
 }
 
 .tabla-sucursales thead {
-	/*background:$color-base-var-1;*/
 	color: white;
 	float: left;
 }
@@ -5750,7 +5579,6 @@ padding:5px 0px;
 }
 
 .tabla-reportes-consulta thead {
-	/*background:$color-base-var-1;*/
 	color: white;
 	float: left;
 }
@@ -5801,15 +5629,12 @@ padding:5px 0px;
 	min-width: 140px !important;
 }
 
-/*reportes*/
-/*ordenes de servicio*/
 .tabla-reportes-OS {
 	width: 660px;
 	border: none;
 }
 
 .tabla-reportes-OS thead {
-	/*background:$color-base-var-1;*/
 	color: white;
 	float: left;
 }
@@ -5873,7 +5698,6 @@ padding:5px 0px;
 	padding: 3px 0 3px 0;
 }
 
-/*ordenes de servicio*/
 #notice {
 	width: auto;
 	height: auto;
@@ -6142,10 +5966,6 @@ span.jPag-snext-img {
 	background: #f3f3f3;
 }
 
-.ui-widget-content {
-	/*background:#fff;*/
-}
-
 .montos-TM {
 	float: right;
 	color: #10133f;
@@ -6168,14 +5988,10 @@ span.jPag-snext-img {
 	min-width: 65px !important;
 }
 
-/*#saldoDisponible {
-margin-left: 250px;
-}*/
 .OShead-2 {
 	font-weight: 700;
 }
 
-/* #sProducto, */
 #btn-modif-suc {
 	float: right !important;
 	background: white;
@@ -6192,7 +6008,6 @@ margin-left: 250px;
 #modif:hover,
 #mostrarContact:hover,
 #agregarContact:hover,
-/* #sProducto:hover, */
 #btn-modif-suc:hover {
 	background-color: #fcf6d1;
 }
@@ -6204,7 +6019,6 @@ margin-left: 250px;
 #modif:active,
 #mostrarContact:active,
 #agregarContact:active,
-/* #sProducto:active, */
 #btn-modif-suc:active {
 	background-color: #fff08e;
 }
@@ -6390,35 +6204,6 @@ margin-left: 250px;
 	flex-wrap: wrap;
 }
 
-/*
-.ben-icon {
-	font-size: 32px;
-	font-weight: 700;
-	color: #FFFFFF;
-	margin-right: 10px;
-	float: left;
-	width: 20px;
-	padding: 20px 10px 10px 10px;
-	height: auto;
-}
-
-.ben-title {
-	font-size: 24px !important;
-	font-weight: 700;
-	color: #FFF;
-	line-height: 32px;
-	float: left;
-	width: 300px;
-	padding: 20px 10px 10px 10px;
-}
-
-.ben-txt {
-	font-size: 16px;
-	color: #FFFFFF;
-	width: 380px;
-	padding: 10px;
-	line-height: 22px;
-} */
 #ben-1, #ben-2, #ben-3, #ben-4, #ben-5, #ben-6 {
 	width: 200px;
 	height: 250px;
@@ -6448,34 +6233,28 @@ p.ben-txt {
 
 #ben-1 {
 	margin: 10px 10px 10px 0px;
-
 }
 
 #ben-2 {
 	margin: 10px 10px 10px 0px;
-
 }
 
 #ben-3 {
 	margin: 10px 10px 10px 0px;
-
 }
 
 
 #ben-4 {
 	margin: 10px 10px 10px 0px;
-
 }
 
 #ben-5 {
 	margin: 10px 10px 10px 0px;
-
 }
 
 
 #ben-6 {
 	margin: 10px 10px 10px 0px;
-
 }
 
 
@@ -6514,19 +6293,6 @@ p.ben-txt {
 	min-width: 150px;
 }
 
-/*.functions-AU{
-	color:#FFF;
-	background: linear-gradient(#ffdd00, #004574) repeat scroll 0 0 #ffdd00;
-    border: medium none !important;
-    border-radius: 6px 6px 6px 6px;
-    /*box-shadow: 4px 4px 4px #555555;
-    color: #FFF;
-    min-width: 20px;
-    opacity: 1 !important;
-    padding: 5px;
-    text-align: left;
-
-}*/
 .options-ActUsr {
 	min-width: 60px !important;
 	max-width: 60px !important;
@@ -6545,7 +6311,6 @@ p.ben-txt {
 	width: auto;
 	border: solid 1px;
 	float: left;
-
 }
 
 #datos-principales-AU td {
@@ -6562,8 +6327,6 @@ p.ben-txt {
 }
 
 .tooltip-funcionesAU {
-
-	/* background: linear-gradient(#ffdd00, #004574) repeat scroll 0 0 #ffdd00; */
 	background-color: white!important;
 	border: 1px solid #ddd !important;
 	border-radius: 0px 0px 0px 17px!important;
@@ -6618,7 +6381,6 @@ p.ben-txt {
 
 .ui-icon-triangle-1-s {
 	margin-left: 113px;
-	/*margin-top: -158px;*/
 	top: 100px !important;
 }
 
@@ -6661,9 +6423,6 @@ p.ben-txt {
 	background: none repeat scroll 0 0 #fff !important;
 }
 
-/*.tbody-CC td, .table-text-aut td, .tbody-reportes td{
-  word-wrap: break-word;
-}*/
 .input-email {
 	width: 300px;
 }
@@ -6677,12 +6436,10 @@ p.ben-txt {
 	margin-top: -40px;
 }
 
-/*sevicios*/
 .op-AD>#downXLS {
 	font-size: 20px;
 }
 
-/*lotes*/
 #lista-reproceso span {
 	font-size: 17px;
 }
@@ -6747,7 +6504,6 @@ p.ben-txt {
 	font-weight: normal;
 }
 
-/*dashboard*/
 .acordion-program div {
 	float: left;
 	width: 191px;
@@ -6858,9 +6614,6 @@ button.green:hover {
 	height: auto;
 	float: left;
 	background: none;
-	/*@include box-shadow(rgba($color-shadow-base, 0.5) 0 1px 1px);
-  @include border-radius(5px);
-  background:#fff;*/
 	padding: 10px;
 }
 
@@ -6868,7 +6621,6 @@ button.green:hover {
 	width: 510px;
 	height: auto;
 	float: left;
-	/*background:$color-field-normal-background-2;*/
 	margin-bottom: 10px;
 }
 
@@ -6893,7 +6645,6 @@ button.green:hover {
 }
 
 #campos-1 {
-
 	background: none;
 	font-size: 12px;
 	color: #555555;
@@ -6905,7 +6656,6 @@ button.green:hover {
 
 #campos-1 select {
 	width: 200px;
-	/*border: none;*/
 	float: left;
 	clear: both;
 }
@@ -6919,7 +6669,6 @@ button.green:hover {
 }
 
 #campos-1 span p {
-	/* float: left; */
 	padding: 5px;
 	vertical-align: middle;
 	font-size: 13px;
@@ -7206,7 +6955,6 @@ button.green:hover {
 }
 
 #table-text-lotes-inventario thead th {
-	/*padding: 5px;*/
 	border-right: solid 1px;
 	max-width: 100px;
 	min-width: 100px;
@@ -7237,10 +6985,6 @@ button.green:hover {
 	min-width: 100px;
 	float: left;
 	height: 38px;
-}
-
-#table-text-lotes-inventario td:last-child {
-	/*border-left:0px;*/
 }
 
 #table-text-lotes-inventario-2 tbody tr {
@@ -7311,7 +7055,6 @@ button.green:hover {
 }
 
 #table-text-lotes-inventario-2 thead th {
-	/*padding: 5px;*/
 	border-right: solid 1px;
 	max-width: 100px;
 	min-width: 100px;
@@ -7350,9 +7093,6 @@ button.green:hover {
 	color: black;
 }
 
-/* Inicio Menu-Head New*/
-/*step 1*/
-
 #nav-bar2 {
 	height: 40px;
 	background: #FFFFFF;
@@ -7378,20 +7118,13 @@ button.green:hover {
 	padding-left: 0px;
 }
 
-
-/* step 2
-	*	Luego definiremos la apariencia que tendrá nuestro menú.
-*/
-
 #nav2 > ul > li {
 	float: left;
 }
 
-
 #nav2 ul li > ul li a {
 	font-size: 13px !important;
 }
-
 
 #nav2 ul li a {
 	text-decoration: none;
@@ -7407,8 +7140,6 @@ button.green:hover {
 	font-weight: 700;
 	text-decoration: underline;
 }
-
-/*step 4*/
 
 #nav2 ul li ul {
 	opacity: 0;
@@ -7428,8 +7159,6 @@ button.green:hover {
 	border-bottom-left-radius: 15px;
 }
 
-/*step 5*/
-
 #nav2 ul li:hover > ul {
 	visibility: visible;
 	opacity: 1;
@@ -7440,8 +7169,6 @@ button.green:hover {
 	-ms-transform: translateY(0px);
 	transform: translateY(0px);
 }
-
-/*step 6*/
 
 #nav2 ul li ul li {
 	background: white;
@@ -7460,7 +7187,6 @@ button.green:hover {
 	right: -162px;
 	top: 0px;
 }
-/* Fin Menu-Head New*/
 
 .kwicks {
 	display: none;
@@ -7484,18 +7210,18 @@ a.style-companies-item > span.icon:before,
 }
 
 #ui-datepicker-div{
-  /*top: 446px!important;*/
 	font-family: "prelo";
 }
 
 #ui-datepicker-div .ui-datepicker-header{
-		background: white;
-		border:none;
+	background: white;
+	border:none;
 }
 #ui-datepicker-div .ui-datepicker-calendar tbody tr .ui-state-default{
 	border:none;
 	background: white;
 }
+
 #ui-datepicker-div .ui-datepicker-calendar tbody tr .ui-state-default.ui-state-highlight{
 	background: #c5c5c5;
 	border-radius: 10px;
@@ -7530,11 +7256,6 @@ select.ui-datepicker-month, select.ui-datepicker-year {
 	margin-top: 5px;
 }
 
-/*
-	Oculta opción de Sucursales en:
-	- Menú de Configuración
-	- Módulo de Configuración
-*/
 li.menu-item.security:nth-child(3),
 li.ui-state-default.ui-corner-top:nth-child(3)
 {
