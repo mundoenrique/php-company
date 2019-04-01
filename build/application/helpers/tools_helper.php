@@ -408,3 +408,12 @@
 			// return $CI->session->userdata('pais');
 		}
 	}
+
+	if (! function_exists('mask_account')) {
+
+		function mask_account($account, $start = 1, $end = 1){
+			$CI = &get_instance();
+			$len = strlen($account);
+    	return substr($account, 0, $start) . str_repeat('*', $len - ($start + $end)) . substr($account, $len - $end, $end);
+		}
+	}

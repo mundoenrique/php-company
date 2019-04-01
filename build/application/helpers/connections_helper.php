@@ -41,7 +41,7 @@ if ( ! function_exists('np_Hoplite_GetWS')) {
 		$response = curl_exec($ch);
 		$httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 		log_message("DEBUG","CURL HTTP CODE: " . $httpCode);
-		if(!$httpCode || $httpCode == 404) {
+		if(!$httpCode || $httpCode != 200) {
 			return FALSE;
 		} else {
 			return $response;
