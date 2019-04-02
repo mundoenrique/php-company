@@ -351,16 +351,17 @@ samp {
 }
 
 .img-back {
-	height: 100px;
+	height: 120px;
+	width: 660px;
 	background-image: url('../img/pichincha-home-ceo.jpg?v=0.1');
 	background-size: 100%;
 	background-repeat:no-repeat;
-	margin-bottom: 25px;
-	padding-top: 40px;
+	padding-top: 42px;
 	padding-left: 30px;
 }
 .welcome-title {
 	line-height: 30px;
+	color: #033572;
 }
 
 nav ul.menu {
