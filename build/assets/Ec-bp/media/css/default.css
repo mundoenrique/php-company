@@ -3970,6 +3970,7 @@ ul#brands li p img {
 	float: right;
 	color: #10133f;
 	margin-right: 20px;
+	margin-top: 2px;
 }
 
 .dataTables_paginate {
@@ -6060,6 +6061,11 @@ span.jPag-snext-img {
 }
 #mensaje{
 	background-color: #FAFBFD!important;
+	margin-top: 43px!important;
+	border-left: 1px solid #cfcfcf;
+	border-right: 1px solid #cfcfcf;
+	border-bottom: 1px solid #cfcfcf;
+	border-bottom-left-radius: 15px;
 }
 #pswd_info {
 	position: absolute;
