@@ -11,8 +11,8 @@
 }
 
 .container-header {
-  background: #0072c0;
-  background-image: linear-gradient(#0072c0, #004574);
+  background: #004574;
+
   border-radius: 10px 10px 0px 0px;
   color: white;
   float: left;
@@ -103,14 +103,17 @@
 }
 
 .contanier-footer {
-  background: #F2F2F2;
-  border-radius: 0px 0px 10px 10px;
-  box-shadow: rgba(51, 51, 51, 0.5) 0 1px 1px;
-  height: 30px;
-  float: left;
-  padding: 10px;
-  width: 640px;
-  margin-bottom: 30px;
+	background: #F2F2F2;
+	box-shadow: rgba(51, 51, 51, 0.5) 0 1px 1px;
+	height: 65px;
+	float: left;
+	padding: 10px;
+	width: 640px;
+	margin-bottom: 30px;
+	margin-left: -1px;
+	border-right: solid 1px #cfcfcf;
+	border-left: solid 1px #cfcfcf;
+	border-bottom-left-radius: 15px;
 }
 
 /*****cuentas******/
@@ -264,7 +267,7 @@ thead > tr {
 }
 
 #novo-table th {
-  background-color:#54c2d0;
+  background-color:#004574;
   border-bottom:none;
   color:#fff;
   padding:15px;
@@ -320,7 +323,7 @@ table tbody tr:hover {
 }
 
 .dataTables_wrapper .dataTables_paginate .paginate_button{
-  color: #0072c0 !important;
+  color: #10133f !important;
 }
 
 .dataTables_wrapper .dataTables_paginate .paginate_button:hover{
@@ -333,7 +336,7 @@ table tbody tr:hover {
 .dataTables_wrapper .dataTables_paginate .paginate_button.disabled,
 .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:hover,
 .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:active{
-  color: #0072c0 !important;
+  color: #10133f !important;
 }
 
 .dataTables_wrapper .dataTables_paginate .paginate_button.current {
