@@ -4,7 +4,7 @@
 	$urlBase = $urlBaseA.$pais;
 	$monto = $this->input->get('monto');
 	$show_cl = (in_array("trapgo", $funciones)) ? '' : 'display:none';
-	$ctas = $dataCtas['data'];
+	$ctas = $pais == 'Ec-bp' ? $dataCtas['data'] : $dataCtas;
 ?>
 
 <div id="content-products">
