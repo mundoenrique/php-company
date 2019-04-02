@@ -35,9 +35,7 @@ var ingresar_ = function() {
             $('#user_login').attr('disabled', 'true');
             $('#user_pass').attr('disabled', 'true');
 
-            $(".ju-sliderbutton-text").html("Verificando...");
-
-            $(".ju-sliderbutton .ju-sliderbutton-slider .ui-slider-handle").hide();
+            mostrarProcesando();
 
             $consulta = $.post(baseURL + isoPais + "/validation", {
                 user_login: user,
@@ -117,6 +115,7 @@ var ingresar_ = function() {
                 }
                 $("#user_pass").val('');
 
+								ocultarProcesando();
             })
 
         } else {
@@ -175,6 +174,30 @@ var ingresar_ = function() {
     },
     maxchars = 15,
     limit = false;
+
+var mostrarProcesando = function () {
+	var buttonLogin = $("#button-login");
+	buttonLogin.attr('disabled', 'true');
+	buttonLogin.html('<img src="../assets/Ec-bp/media/img/loading.gif" alt="Verificando...">');
+	buttonLogin.css({
+		'position': 'relative',
+		'height': '35px',
+		'width': '100%'
+	});
+	buttonLogin.children(0).css({
+		'position': 'absolute',
+		'top': '50%',
+		'left': '50%',
+		'transform': 'translate(-50%, -50%)',
+		'height': '25px'
+	});
+};
+
+var ocultarProcesando = function () {
+	var buttonLogin = $("#button-login");
+	buttonLogin.html('Ingresar');
+	buttonLogin.prop("disabled", false);
+}
 
 $(function() {
 
