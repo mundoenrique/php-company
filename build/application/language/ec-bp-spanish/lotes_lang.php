@@ -71,7 +71,7 @@ $lang['MSJ_NO_TEBELI']="El usuario no tiene permiso para eliminar lotes";
 $lang['SELECT_OPTION_TIPOLOTE'] = 'Seleccione tipo Orden de servicio';
 $lang['SELECT_OPTION_XLOTE'] = 'Procesar por lote';
 $lang['SELECT_OPTION_XTIPO_lOTE'] = 'Procesar por tipo de lote';
-$lang['MSG_INGRESE_CLAVE'] = "Ingrese su contraseña";
+$lang['MSG_INGRESE_CLAVE'] = "Ingrese su clave";
 $lang['MSG_2DA_FIRMA'] = 'La primera firma ha sido ingresada correctamente, se requiere segunda firma  para autorizar el lote';
 
 

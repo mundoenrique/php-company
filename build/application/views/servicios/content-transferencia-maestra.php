@@ -100,18 +100,20 @@
 			<span aria-hidden="true" class="icon" data-icon="&#xe07a;"></span> <?= lang('CRITERIOS_BUSQUEDA') ?>
 		</div>
 		<div id="lotes-contenedor">
-			<div id="search-1">
-				<h5><?= lang('ID_PERSONA'); ?></h5>
+			<form name="trasn-master">
+				<div id="search-1">
+					<h5><?= lang('ID_PERSONA'); ?></h5>
+						<span>
+							<input type="text" id="dni" placeholder="<?= lang('ID_PERSONA'); ?>"/>
+					</span>
+				</div>
+				<div id="search-3">
+					<h5><?= lang('NRO_TARJETA'); ?></h5>
 					<span>
-						<input id="dni" placeholder="<?= lang('ID_PERSONA'); ?>"/>
-				</span>
-			</div>
-			<div id="search-3">
-				<h5><?= lang('NRO_TARJETA'); ?></h5>
-				<span>
-					<input id="nroTjta" placeholder="<?= lang('INGRESE_NOTARJETA') ?>" maxlength=16/>
-				</span>
-			</div>
+						<input type="text" id="nroTjta" placeholder="<?= lang('INGRESE_NOTARJETA') ?>" maxlength="16"/>
+					</span>
+				</div>
+			</form>
 		</div>
 		<div id="batchs-last">
 			<span id="mensajeError" style="float:left; display:none; color:red;"></span>
@@ -148,10 +150,12 @@
 				</div>
 			</div>
 			<div id="batchs-last">
-				<input id='clave' class='input-TM' type='password' placeholder="<?= lang('PLACEHOLDER_PASS'); ?>"/>
-				<button id='cargo-tjta' class='elem-hidden'><?= lang('CARGO'); ?></button>
-				<button id='abonar-tjta' class='elem-hidden'><?= lang('ABONO'); ?></button>
-				<button id='consultar-tjta' class='elem-hidden'><?= lang('CONSULTA'); ?></button>
+				<form name="no-form" onsubmit="return false">
+					<input id='clave' class='input-TM' type='password' placeholder="<?= lang('PLACEHOLDER_PASS'); ?>"/>
+					<button id='cargo-tjta' class='elem-hidden'><?= lang('CARGO'); ?></button>
+					<button id='abonar-tjta' class='elem-hidden'><?= lang('ABONO'); ?></button>
+					<button id='consultar-tjta' class='elem-hidden'><?= lang('CONSULTA'); ?></button>
+				</form>
 			</div>
 		</div>
 	</div>

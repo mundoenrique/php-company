@@ -375,10 +375,13 @@ $(function() {
     // CONFIRMAR OPERACION
 
     function confirmar(titulo, url, operacion, mensaje) {
-        var canvas = "<div id='dialog-confirm'>";
-        canvas += "<p>Tarjeta: " + serv_var.noTarjetas + "</p>";
-        canvas += "<fieldset><input type='password' id='pass' placeholder='Ingrese su contraseña' size=30/>";
-        canvas += "</fieldset><h5 id='msg'></h5></div>";
+			var canvas = "<div id='dialog-confirm'>";
+			canvas += "<form name='no-form' onsubmit='return false'>";
+			canvas += "<p>Tarjeta: " + serv_var.noTarjetas + "</p>";
+			canvas += "<fieldset><input type='password' name='pass' id='pass' placeholder='Ingrese su contraseña' size='28'>";
+			canvas += "</fieldset><h5 id='msg'></h5>";
+			canvas += "</form>"
+			canvas += "</div>"
 
         $(canvas).dialog({
             title: titulo,
