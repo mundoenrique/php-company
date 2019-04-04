@@ -17,7 +17,10 @@ if($producto!=FALSE){
 		$showMaestro='none';
 		$marginLeft='156px';
 	}
-}else{
+	if($pais == 'Ec-bp') {
+		$showMaster = 'none';
+	}
+} else {
 	$nombreProducto="";
 	if($msgError=='-29'){
 		echo "<script>alert('Usuario actualmente desconectado'); location.href = '$urlBase/login';</script>";
