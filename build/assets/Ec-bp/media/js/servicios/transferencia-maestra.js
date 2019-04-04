@@ -375,6 +375,10 @@ $(function() {
 			});
 		}
 	});
+
+	// Elimina elemento que ocasiona conflictos en el despliegue de
+	// errores del widget de "Criterio de búsqueda"
+	$('#recarga_concetradora > #batchs-last > #mensajeError').remove()
 }); //FIN DOCUMENT READY
 
 function toFormatShow (valor) {
