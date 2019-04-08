@@ -34,11 +34,11 @@ var	calendario = function(input){
 			valid = true;
 			if($("#fecha_inicial").val()==""){
 				++count;
-				contenido+= "<h6>" + count + ". Ha seleccionado una fecha inicial</h6>";
+				contenido+= "<h6>" + count + ". Ha seleccionado una Fecha inicial</h6>";
 			}
 			if($("#fecha_final").val()==""){
 				++count;
-				contenido+= "<h6>" + count + ". Ha seleccionado una fecha final</h6>";
+				contenido+= "<h6>" + count + ". Ha seleccionado una Fecha final</h6>";
 			}
 		}
 		if(valid){
@@ -104,8 +104,8 @@ var	calendario = function(input){
 		        "sLengthMenu":     "Mostrar _MENU_ registros",
 		        "sZeroRecords":    "No se encontraron resultados",
 		        "sEmptyTable":     "Ningún dato disponible en esta tabla",
-		        "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-		        "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+		        "sInfo":           "Mostrando registros del _START_ al _END_, de un total de _TOTAL_ registros",
+		        "sInfoEmpty":      "Mostrando registros del 0 al 0, de un total de 0 registros",
 		        "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
 		        "sInfoPostFix":    "",
 		        "sSearch":         "Buscar:",

@@ -1,10 +1,10 @@
 <?php
-$lang['TITULO_TRANSMAESTRA']="Transferencia Maestra";
+$lang['TITULO_TRANSMAESTRA']="Transferencia maestra";
 
-$lang['CRITERIOS_BUSQUEDA'] = 'Criterios de Búsqueda';
-$lang['SEL_EMPRESA'] = 'Selección de empresa';
+$lang['CRITERIOS_BUSQUEDA'] = 'Criterio de búsqueda';
+$lang['SEL_EMPRESA'] = 'Empresa';
 $lang['SEL_OPTION_EMP'] = 'Seleccione una empresa';
-$lang['NRO_TARJETA'] = 'Número de Tarjeta';
+$lang['NRO_TARJETA'] = 'Número de tarjeta';
 $lang['BUSCAR'] = 'Buscar';
 $lang['RESULTADOS'] = 'Resultados';
 $lang['CARGO'] = 'Cargo';

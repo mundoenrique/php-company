@@ -1,10 +1,8 @@
 <?php
-$pais = $this->uri->segment(1);
 $urlBaseA = $this->config->item('base_url');
-
+$pais = $this->uri->segment(1);
 $urlBase = $urlBaseA.$pais;
 $logged_in = $this->session->userdata('logged_in');
-$pais=$this->session->userdata('pais');
 ?>
 <footer id="foot">
 		<div id="foot-wrapper">
@@ -19,37 +17,16 @@ $pais=$this->session->userdata('pais');
 							</a>
 						</li>
 					<?	} ?>
-
-					<!--<li class="menu-item signup">
-						<a href="#" rel="section">
-							Afiliación
-						</a>
-					</li>-->
 					<li class="menu-item benefits">
 						<a href="<? echo $urlBase.'/'.'beneficios'?>" rel="section">
 							<? echo lang('BREADCRUMB_BENEFICIOS');?>
 						</a>
-					</li></li>
-					<!--<li class="menu-item mobile">
-						<a href="#" rel="section">
-							Móvil
-						</a>
 					</li>
-					<li class="menu-item support">
-						<a href="#" rel="section">
-							Soporte
-						</a>
-					</li>-->
 					<li class="menu-item terms">
 						<a href="<? echo $urlBase.'/'.'condiciones'?>" rel="section">
 							<? echo lang('BREADCRUMB_CONDICIONES');?>
 						</a>
 					</li>
-					<!-- <li class="menu-item privacy">
-						<a href="<? //echo $urlBase.'/'.'privacidad'?>" rel="section">
-							<? //echo lang('BREADCRUMB_PRIVACIDAD');?>
-						</a>
-					</li> -->
 					<?php
 					if($logged_in){
 					?>

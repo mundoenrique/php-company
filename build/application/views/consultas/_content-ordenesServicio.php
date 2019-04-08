@@ -43,7 +43,7 @@ if($osConfirmV){
 		</li>
 	</ol>
 
-	<div id="lotes-general" class='elem-hidden'>				
+	<div id="lotes-general" class='elem-hidden'>
 
 		<div id='filtroOS' >
 
@@ -60,7 +60,7 @@ if($osConfirmV){
 				<span class="info-OD">
 					<h5>10 días</h5>
 					<input  class="required login" type="radio" name="dias" value="10" />
-				</span>	
+				</span>
 				<span class="info-OD">
 					<h5>Fecha inicial</h5>
 					<input id='fecha_inicial' class="required login" placeholder="DD/MM/AA" value="" onfocus="javascript:this.value=''"/>
@@ -88,18 +88,18 @@ if($osConfirmV){
 					</select>
 				</div>
 			</div>
-			
+
 			<div id="batchs-last">
 				<button id='buscarOS'>Buscar</button>
 			</div>
 
 		</div>
-		
-		<?php 
+
+		<?php
 		if(isset($datos) && $datos!=false){
 
 			if( array_key_exists("ERROR", $datos) ) {
-				
+
 				if($datos['ERROR']=='-29'){
 					echo "<script>alert('Usuario actualmente desconectado'); location.reload();</script>";
 				}
@@ -113,7 +113,7 @@ if($osConfirmV){
 				</div>
 	<?php	}
 
-			if(array_key_exists('lista',$datos) ) { 
+			if(array_key_exists('lista',$datos) ) {
 				if(count($datos->lista)>0){
 	?>
 					<div id="top-batchs" class='top-listOS'>
@@ -136,7 +136,7 @@ if($osConfirmV){
 								</tr>
 							</thead>
 							<tbody id="tbody-datos-general" class="tbody-reportes-OS jslista">
-								<?php 
+								<?php
 								$lc=0;
 								$tempidOrdenLotes=array();
 
@@ -165,16 +165,16 @@ if($osConfirmV){
 										<td>$l->montoComision</td>
 										<td>$l->montoNeto</td>
 										</tr>";
-									} 
+									}
 									echo "
 									<tr id='$value->idOrden'>
 									<td class='OS-icon' style='display:none;'>
 									<a id='ver_lotes' title='Ver lotes'>
-									<span aria-hidden='true' class='icon' data-icon='&#xe003;'></span> 
+									<span aria-hidden='true' class='icon' data-icon='&#xe003;'></span>
 									</a>
 									<a id='dwnPDF' title='Descargar como PDF'>
 									<span aria-hidden='true' class='icon' data-icon='&#xe02e;'></span>
-									</a>"; 
+									</a>";
 									//if( ($pais=='Ve' && $value->nofactura!='' && $value->fechafactura!='') || ($pais=="Co" && $value->estatus=='1') ){
 									if(($value->nofactura!=''&&$value->fechafactura!='')&&($pais=='Ve'||$pais=="Co")){
 										echo "<a id='factura' title='Ver factura' data-dw='$datos->facturacion' >
@@ -193,7 +193,7 @@ if($osConfirmV){
 									</a>
 									";
 								}
-								echo "								
+								echo "
 								</td>
 								<td>$value->idOrden</td>
 								<td>$value->fechaGeneracion</td>
@@ -208,17 +208,17 @@ if($osConfirmV){
 
 								}
 								$tempIdOrdenL=serialize($tempidOrdenLotes);
-								
-								echo "<input type='hidden' id='tempIdOrdenL' name='tempIdOrdenL' value='$tempIdOrdenL' />";							
-								
-								?>					
+
+								echo "<input type='hidden' id='tempIdOrdenL' name='tempIdOrdenL' value='$tempIdOrdenL' />";
+
+								?>
 							</tbody>
-						</table>					
+						</table>
 					</div>
-		  <?php } 
+		  <?php }
 			}
 
-			if(array_key_exists('lotesNF',$datos) ){ 
+			if(array_key_exists('lotesNF',$datos) ){
 				if(count($datos->lotesNF)>0){
 					?>
 					<div id="top-batchs" >
@@ -270,7 +270,7 @@ if($osConfirmV){
 		} ?>
 
 	</div>
-				
+
 </div>
 
 <form id='formulario' method='post'></form>

@@ -7,12 +7,12 @@ $lang['TITULO_LOTES_PROGRAMA']= "Programa";
 $lang['TITULO_LOTES_TIPOLOTES']= "Tipo de Lote";
 $lang['TITULO_LOTES_ARCHIVO']= "Archivo";
 $lang['TITULO_LOTES_BTNCARGAR']= "Cargar Lote";
-$lang['TITULO_CRITERIOSBUSQ']="Criterios de Búsqueda";
+$lang['TITULO_CRITERIOSBUSQ']="Criterio de búsqueda";
 
 $lang['ENLACE_NO_PERMITIDO'] = 'Enlace no permitido';
 
 //TABLA TITULO_LOTES_PENDIENTES
-$lang['TABLA_LOTESP_NROLOTE']="Nro. Lote";
+$lang['TABLA_LOTESP_NROLOTE']="Lote Nro.";
 $lang['TABLA_LOTESP_NOMBRE']="Nombre";
 $lang['TABLA_LOTESP_FECHACARGA']="Fecha de carga";
 $lang['TABLA_LOTESP_ESTATUS']="Estatus";
@@ -23,11 +23,11 @@ $lang['TITULO_LOTES_CONFIRMACION']= "Confirmación de Lotes";
 $lang['TITULO_LOTES_CONFIRMACIONT']= "Confirmación";
 $lang['TITULO_LOTES_CONFIRMAR']= "Confirmar";
 $lang['TABLA_LOTESPA_FECHACARGA']="Fecha carga";
-$lang['TABLA_LOTESPA_NOMBREEMPRESA']="Nombre de la Empresa";
+$lang['TABLA_LOTESPA_NOMBREEMPRESA']="Nombre de la empresa";
 $lang['TABLA_LOTESPA_TIPOLOTE']="Tipo de Lote";
 $lang['TABLA_LOTESPA_CANTIDADREGISTROS']="Cantidad de registros";
 $lang['TABLA_LOTESPA_MONTOTOTAL']="Monto total";
-$lang['TABLA_LOTESPA_NROLOTE']="Nro. Lote";
+$lang['TABLA_LOTESPA_NROLOTE']="Lote Nro.";
 $lang['TABLA_LOTESPA_OBSERVACIONES']="Observaciones";
 $lang['TABLA_LOTESPA_LINEAEMBOZO1']="Embozo 1";
 $lang['TABLA_LOTESPA_LINEAEMBOZO2']="Embozo 2";
@@ -38,9 +38,9 @@ $lang['TITULO_MASIVO_BENEFICIARIO'] = 'Cargar archivo masivo de beneficiarios';
 $lang['TITULO_CREAR_BENEFICIARIO'] = 'Crear beneficiario';
 
 //DETALLE DE LOTES
-$lang['TITULO_LOTES_DETALLE']= "Lotes detalle";
-$lang['TITULO_CUENTAS_INNO']= "Cuentas Innominadas";
-$lang['TITULO_CUENTAS_INVINNO']= "Inventario de Cuentas Innominadas";
+$lang['TITULO_LOTES_DETALLE']= "Detalles del Lote";
+$lang['TITULO_CUENTAS_INNO']= "Cuentas innominadas";
+$lang['TITULO_CUENTAS_INVINNO']= "Inventario de cuentas innominadas";
 $lang['DWL_XLS'] = 'Descargar Reporte';
 $lang['BREADCRUMB_AUTH']= "Autorizacion";
 $lang['BREADCRUMB_INICIO']= "Inicio";
@@ -49,7 +49,7 @@ $lang['BREADCRUMB_LOTES_CARGA']= "Carga";
 $lang['POSITION_DETAIL'] = 'Detalle';
 $lang['POSITION_CONFIRM'] = 'Confirmación';
 $lang['POSITION_AUTH'] = 'Autorización';
-$lang['POSITION_INNO'] = 'Innominada';
+$lang['POSITION_INNO'] = 'Innominadas';
 $lang['POSITION_INVENINNO'] = 'Afiliación';
 $lang['TITULO_TARJETA'] = 'Nro. Tarjeta';
 
@@ -77,7 +77,7 @@ $lang['MSG_2DA_FIRMA'] = 'La primera firma ha sido ingresada correctamente, se r
 
 //DETALLE LOTE AUTORIZACION
 $lang['TITULO_LOTES_DETALLE_AUTH']="Detalle de Lotes Autorización";
-$lang['ORDEN_SERVICIO']="Ordenes de servicio";
+$lang['ORDEN_SERVICIO']="Órdenes de servicio";
 $lang['USUARIO_CARGA']="Usuario carga";
 $lang['FECHA_PROCESO']="Fecha proceso";
 $lang['MONTO']="Monto";
@@ -98,8 +98,8 @@ $lang['TITLE_REG_LOTES'] = 'Registro de Lotes';
 
 //ORDEN DE SERVICIO
 $lang['TITULO_PRELIMINAR'] = 'Preliminar Orden de Servicio';
-$lang['TITULO_ORDEN_SERVICIO'] = 'Órdenes de Servicio';
-$lang['TABLA_OS_IDORDEN'] = 'Id orden';
+$lang['TITULO_ORDEN_SERVICIO'] = 'Órdenes de servicio';
+$lang['TABLA_OS_IDORDEN'] = 'Orden Nro.';
 $lang['TABLA_OS'] = 'Monto OS';
 $lang['TABLA_OS_MONTO']='Monto comisión';
 $lang['TABLA_OS_MONTO_RECARGA']='Monto Recarga';
@@ -107,7 +107,7 @@ $lang['TABLA_OS_MONTO_COMISION'] = 'Monto Comisión';
 $lang['TABLA_OS_MONTO_IVA'] = 'Monto '.lang('ID_IMPUESTO');
 $lang['TABLA_OS_MONTO_TOTAL']='Monto total';
 $lang['TABLA_OS_MONTO_DEPOSITO']='Monto Depósito';
-$lang['TABLA_OS_NROLOTE']='Nro. Lote';
+$lang['TABLA_OS_NROLOTE']='Lote Nro.';
 $lang['TABLA_OS_FECHA']='Fecha';
 $lang['TABLA_OS_TIPO']='Tipo';
 $lang['TABLA_OS_CANT']='Cant.';

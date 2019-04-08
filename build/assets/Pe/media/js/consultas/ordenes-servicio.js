@@ -164,8 +164,8 @@ if($("#msg").val()){
             "sLengthMenu":     "Mostrar _MENU_ registros",
             "sZeroRecords":    "No se encontraron resultados",
             "sEmptyTable":     "Ningún dato disponible en esta tabla",
-            "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-            "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+            "sInfo":           "Mostrando registros del _START_ al _END_, de un total de _TOTAL_ registros",
+            "sInfoEmpty":      "Mostrando registros del 0 al 0, de un total de 0 registros",
             "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
             "sInfoPostFix":    "",
             "sSearch":         "Buscar:",
@@ -222,7 +222,7 @@ $('#tabla-datos-general').on('click','#anular', function(){
 
 
 	var canvas = "<div id='dialog-confirm'>";
-      canvas +="<p>Id Orden: "+idOS+"</p>";
+      canvas +="<p>Orden Nro.: "+idOS+"</p>";
       canvas += "<fieldset><input type='password' id='pass' size=30 placeholder='Ingrese su contraseña' class='text ui-widget-content ui-corner-all'/>";
       canvas += "<h5 id='msg'></h5></fieldset></div>";
 

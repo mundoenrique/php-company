@@ -1,7 +1,7 @@
 <?php
 $CI =& get_instance();
 $pais = $CI->config->item('country');
-$urlBase= $CI->config->item('base_url');
+$urlBase= $CI->config->item('base_url').$pais.'/';
 $urlBaseCDN = $CI->config->item('base_url_cdn');
 $nombreCompleto = $this->session->userdata('nombreCompleto');
 ?>

@@ -86,7 +86,7 @@
 	if($entrar){
 
 		if(count($info->listaPorFirmar)==0 && count($info->listaPorAutorizar)==0){
-			echo "<div id='products-general' style='margin-top:10px'><h2 >No hay lotes por autorizar</h2></div>";
+			echo "<div id='products-general' style='margin-top:10px'><h2 >No hay Lotes por autorizar</h2></div>";
 		}
 
 	if( count($info->listaPorFirmar)>0 ){
@@ -217,6 +217,7 @@
       		echo '</div>';
       		if( ($orden=='0' || $orden=='2' || $orden=='') && $lotesxAuth ){
 			echo '<div id="batchs-last">
+							<form name="no-form" onsubmit="return false">
       				<input id="claveAuth" type="password" placeholder="'.lang("MSG_INGRESE_CLAVE").'" value="" #batchs-last input style="margin-left: 10px;"/>';
 			echo 	'<button '.$borrar.' id="button-eliminar" type="submit" >'.lang('TITULO_LOTESBTN_ELIMINAR').'</button>';
 			echo 	'<button id="button-autorizar" type="submit">'.lang('TITULO_LOTESBTN_AUTORIZAR').'</button>';
@@ -226,7 +227,8 @@
 				<option value="1" selected>'.lang('SELECT_OPTION_XTIPO_lOTE').'</option>
 			</select>';
 			echo $selectTipoLote;
-			echo '</div>';
+			echo '</form>
+					</div>';
       			}elseif ( ($orden=='0' || $orden=='2' || $orden=='') && !$lotesxAuth ) {
       				echo '<div id="batchs-last">
       					<h3>'.lang('MSJ_NO_LOTESXAUTH').'</h3>

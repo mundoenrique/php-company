@@ -13,11 +13,14 @@ $marginLeft='78px';
 if($producto!=FALSE){
 
 	$nombreProducto = ucwords(mb_strtolower($producto[0]->producto->descripcion));
-	if($pais=='Pe' || $pais=='Usd' || $pais=='Co'){
+	if($pais=='Pe' || $pais=='Usd' || $pais=='Co' || $pais=='Ec-bp'){
 		$showMaestro='none';
 		$marginLeft='156px';
 	}
-}else{
+	if($pais == 'Ec-bp') {
+		$showMaster = 'none';
+	}
+} else {
 	$nombreProducto="";
 	if($msgError=='-29'){
 		echo "<script>alert('Usuario actualmente desconectado'); location.href = '$urlBase/login';</script>";
@@ -58,7 +61,7 @@ function to_ascii($word){
 	</ol>
 
 	<?php
-	if(isset($producto) && $producto!=FALSE){
+	if(isset($producto) && $producto != FALSE){
 
 		$marcaProducto = mb_strtolower($producto[0]->producto->marca);
 
@@ -179,7 +182,7 @@ function to_ascii($word){
 				}
 				echo '
 				<span aria-hidden="true" class="icon" data-icon="&#xe035;"></span>
-				Órdenes de Servicio:
+				Órdenes de servicio:
 				<span class="num-product-detail">'.$ordenesS['total'].'</span>
 				'.$ordenesS['pendientes'].' No conciliadas / '.$ordenesS['conciliadas'].' Conciliadas
 				</a>

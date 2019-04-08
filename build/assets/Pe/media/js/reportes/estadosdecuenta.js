@@ -183,7 +183,7 @@ $(document).ready(function() {
 
 
 //---------------------------------------------------------
-//FUNCION QUE INICIA LA BUSQUEDA DE Estados de cuenta
+//FUNCION QUE INICIA LA BUSQUEDA DE Estado de cuenta
 //---------------------------------------------------------
 var filtro_busq={};
 function BuscarEstadosdeCuenta(paginaActual){
@@ -278,7 +278,7 @@ if(buscarReporte){
 
 
 //CREA LA CABECERA DE LA TABLA JUNTO CON LOS ICONOS
-		contenedor.html('<div id="top-batchs"><span aria-hidden="true" class="icon" data-icon="&#xe05c;"></span> Resultados Estados de cuenta </div>');
+		contenedor.html('<div id="top-batchs"><span aria-hidden="true" class="icon" data-icon="&#xe05c;"></span> Resultados Estado de cuenta </div>');
 		div=$(document.createElement("div")).appendTo(contenedor);
 		div.attr("id","view-results");
 		div.attr("style","padding-right:20px;");
@@ -374,13 +374,13 @@ if(buscarReporte){
 		span.attr("aria-hidden","true");
 		span.attr("class","icon");
 		span.attr("data-icon",'&#xe050;');
-		span.attr("title","Generar Gráfica");
+		span.attr("title","Generar gráfica");
 		span.click(function(){
 
 //SE EJECUTA LA CONSULTA PARA EL GRAFICO
 				$consulta = $.post(baseURL + api + isoPais + "/reportes/EstadosdeCuentaGrafico",filtro_busq );
 // APARECE LA VENTANA DE CARGANDO MIENTRAS SE REALIZA LA CONSULTA
-				$( "#cargando" ).dialog({title:"Ver Gráfica Estados de cuenta",modal:true, width: 200, height: 170});
+				$( "#cargando" ).dialog({title:"Ver Gráfica Estado de cuenta",modal:true, width: 200, height: 170});
 //DE SER EXITOSA LA COMUNICACION CON EL SERVICIO SE EJECUTA EL SIGUIENTE METODO "DONE"
 		 		$consulta.done(function(data){
 
@@ -461,7 +461,7 @@ if(buscarReporte){
 						if(data.rc=='-29'||data.rc=='-61'){
 							alert("Usuario actualmente desconectado"); location.reload();
 						}else{
-							notificacion("Ver Gráfica Estados de cuenta",data.mensaje);
+							notificacion("Ver Gráfica Estado de cuenta",data.mensaje);
 						}
 					}
 
@@ -473,7 +473,7 @@ if(buscarReporte){
 
 		a=$(document.createElement("a")).appendTo(div);
 		a.attr("id","export_mosivo_a");
-		span=$(a).append("<span id = 'export_mosivo' title='Exportar Masivo' data-icon ='&#xe009;' aria-hidden = 'true' class = 'icon'></span>").css("display","none");
+		span=$(a).append("<span id = 'export_mosivo' title='Exportar masivo' data-icon ='&#xe009;' aria-hidden = 'true' class = 'icon'></span>").css("display","none");
 
 		span.attr("aria-hidden","true");
 		span.attr("class","icon");
@@ -697,8 +697,8 @@ if(buscarReporte){
 		           "sLengthMenu":     "Mostrar _MENU_ registros",
 		           "sZeroRecords":    "No se encontraron resultados",
 		           "sEmptyTable":     "Ningún dato disponible en esta tabla",
-		           "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-		           "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+		           "sInfo":           "Mostrando registros del _START_ al _END_, de un total de _TOTAL_ registros",
+		           "sInfoEmpty":      "Mostrando registros del 0 al 0, de un total de 0 registros",
 		           "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
 		           "sInfoPostFix":    "",
 		           "sSearch":         "Buscar:",
@@ -723,7 +723,7 @@ if(buscarReporte){
 		         }else{
 
 		 			$("#mensaje").remove();
-		 			contenedor.html('<div id="top-batchs"><span aria-hidden="true" class="icon" data-icon="&#xe05c;"></span>Estados de cuenta </div>');
+		 			contenedor.html('<div id="top-batchs"><span aria-hidden="true" class="icon" data-icon="&#xe05c;"></span>Estado de cuenta </div>');
 		 			$("#tabla-datos-general").fadeOut("fast");
 		 			$("#view-results").attr("style","display:none");
 		 			var div =$(document.createElement("div")).appendTo(contenedor);

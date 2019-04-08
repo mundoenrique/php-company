@@ -12,7 +12,7 @@ RUN apt-get update -y \
 	&& docker-php-ext-enable ssh2 \
 	&& a2enmod headers rewrite \
 	&& a2ensite 000-default.conf \
-	&& mkdir -p assets/Co/bash assets/Pe/bash assets/Usd/bash assets/Ve/bash \
-	&& chmod 0755 assets/Co/bash assets/Pe/bash assets/Usd/bash assets/Ve/bash \
+	&& mkdir -p assets/Co/bash assets/Pe/bash assets/Usd/bash assets/Ve/bash assets/Ec-bp/bash \
+	&& chmod 0755 assets/Co/bash assets/Pe/bash assets/Usd/bash assets/Ve/bash assets/Ec-bp/bash \
 	&& chown -R www-data:www-data . \
 	&& apachectl restart

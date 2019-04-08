@@ -8,24 +8,24 @@ $(function(){ // Document ready
 	$("#userfile").on("click",function(){
 
 		$(this).fileupload({
-		    type: 'post',  
-		    replaceFileInput:false,       
-		    url:baseURL+api+isoPais+"/servicios/actualizar-datos/cargarArchivo", 
-		        
+		    type: 'post',
+		    replaceFileInput:false,
+		    url:baseURL+api+isoPais+"/servicios/actualizar-datos/cargarArchivo",
+
 		        add: function (e, data) {
-		          f=$('#userfile').val();  
+		          f=$('#userfile').val();
 		          $('#archivo').val($('#userfile').val());
 		            dat = data;
 
 		            var ext = $('#userfile').val().substr( $('#userfile').val().lastIndexOf(".") +1 ).toLowerCase();
 		            if( ext === "xls" || ext === "xlsx" ){
-			            data.context = $('#cargarXLS').click(function () {  
-			           			
-			                    $("#cargarXLS").replaceWith('<h3 id="cargando_archivo">Cargando...</h3>');  
-			                   // dat.formData = {'data-rif':$("option:selected","#listaEmpresasSuc").attr("data-rif")};               
+			            data.context = $('#cargarXLS').click(function () {
+
+			                    $("#cargarXLS").replaceWith('<h3 id="cargando_archivo">Cargando...</h3>');
+			                   // dat.formData = {'data-rif':$("option:selected","#listaEmpresasSuc").attr("data-rif")};
 			                    dat.submit().success( function (result, textStatus, jqXHR){
 			                     result = $.parseJSON(result);
-			                      if(result){                        
+			                      if(result){
 			                        if(!result.ERROR){
 			                          mostrarError(result);
 			                        }else{
@@ -33,13 +33,13 @@ $(function(){ // Document ready
 											alert('Usuario actualmente desconectado'); location.reload();
 										}else{
 			                          notificacion("Cargar archivo: actualizar datos",result.ERROR);}
-			                        }                        
+			                        }
 			                      }
-			                         	                                       
+
 			                      $('#userfile').val("");
 			                      $('#archivo').val("");
-			                    }); 
-			                                          
+			                    });
+
 			            });
 		            }else{
 		              notificacion("Cargar archivo: actualizar datos","Tipo de archivo no permitido. <h5>Formato requerido: excel (.xls ó .xlsx)</h5>");
@@ -48,7 +48,7 @@ $(function(){ // Document ready
 		            }
 		        },
 		        done: function (e, data) {
-		           
+
 		            $('#userfile').val(""); $('#archivo').val("");
 		            $('#cargando_archivo').replaceWith( '<button id="cargarXLS" >Cargar archivo</button>' );
 		        },
@@ -62,30 +62,30 @@ $(function(){ // Document ready
 
 
 	function mostrarError(result){
-      
+
 		  if(result.rc!="0"){
 
 		    var canvas = "<h4>ENCABEZADO</h4>";
 		    $.each(result.erroresFormato.erroresEncabezado.errores,function(k,v){
-		      canvas += "<h6>"+v+"</h6>"; 
-		    });    
-		  
+		      canvas += "<h6>"+v+"</h6>";
+		    });
+
 		    canvas += "<h4>REGISTRO</h4>";
 		    $.each(result.erroresFormato.erroresRegistros, function(k,vv){
 		        canvas += "<h5>"+vv.nombre+"</h5>";
-		        $.each(result.erroresFormato.erroresRegistros[k].errores, function(i,v){          
+		        $.each(result.erroresFormato.erroresRegistros[k].errores, function(i,v){
 		            canvas += "<h6>"+v+"<h6/>";
 		        });
 
 		    });
 		    notificacion(result.msg, canvas);
-		  
+
 		  }else{
 		    notificacion("Cargando archivo", "Archivo cargado con éxito.\n"+result.msg);
 		    $("#estatus").val("2");
 		    $("#buscar-datos").click();
 		  }
- 
+
 	}
 
 
@@ -103,7 +103,7 @@ $(function(){ // Document ready
 				$("#buscar-datos").show();
 				if(!data.ERROR){
 					$('#resultado-busqueda').removeClass('elem-hidden');
-					
+
 					if($("#tabla-act-datos").hasClass('dataTable')){
 						$('#tabla-act-datos').dataTable().fnClearTable();
 						$('#tabla-act-datos').dataTable().fnDestroy();
@@ -113,10 +113,10 @@ $(function(){ // Document ready
 					if($(".op-AD").length==0 && descargable){
 						$("#datos-principales").append("<th class='op-AD td-corto'>Opción</th>");
 					}else if(!descargable){
-						$(".op-AD").remove();	
+						$(".op-AD").remove();
 					}
 
-										
+
 					$.each(data.lista,function(k,v){
 						var d= v.fechaRegistro;
 						d= $.datepicker.formatDate('dd/mm/yy', new Date(d.substr(0,4)+'/'+d.substr(4,2)+'/'+d.substr(6,7)));
@@ -125,7 +125,7 @@ $(function(){ // Document ready
 							$(".op-AD").show();
 							$('.ampliar').removeAttr('id');
 							fila+="<td class='op-AD td-corto'><a id='downXLS'><span aria-hidden='true' class='icon' data-icon=&#xe05a; title='Descargar'></span></a></td></tr>";
-							
+
 
 						}else{
 							$(".op-AD").hide();
@@ -134,11 +134,11 @@ $(function(){ // Document ready
 						}
 
 						$('#tabla-act-datos tbody').append(fila);
-						
+
 					});
 
 					dataTable();
-					
+
 				}else{
 					if(data.ERROR=="-29"){
 						alert('Usuario actualmente desconectado');
@@ -154,15 +154,15 @@ $(function(){ // Document ready
 
 	$('#tabla-act-datos').on('click','#downXLS', function(){
 
-		/*var nomb = $(this).parents("tr").attr('nomb');	
-		var fecha = $(this).parents("tr").attr('fecha');*/	
+		/*var nomb = $(this).parents("tr").attr('nomb');
+		var fecha = $(this).parents("tr").attr('fecha');*/
 
 		$('form#formulario').empty();
-    				$('form#formulario').append('<input type="hidden" name="data-fecha" value="'+$(this).parents("tr").attr('fecha')+'" />');    		
-    				$('form#formulario').append('<input type="hidden" name="data-nomb" value="'+$(this).parents("tr").attr('nomb')+'" />');    
+    				$('form#formulario').append('<input type="hidden" name="data-fecha" value="'+$(this).parents("tr").attr('fecha')+'" />');
+    				$('form#formulario').append('<input type="hidden" name="data-nomb" value="'+$(this).parents("tr").attr('nomb')+'" />');
     				$('form#formulario').attr('action',baseURL+api+isoPais+"/servicios/actualizar-datos/downXLS");
     				$('form#formulario').submit()
-		
+
 			/*$aux = $("#loading").dialog({title:'Descargando archivo de datos',modal:true, close:function(){$(this).dialog('close')}, resizable:false });
 
 
@@ -170,9 +170,9 @@ $(function(){ // Document ready
     			$aux.dialog('destroy')
     			if(!data.ERROR){
     				$('form#formulario').empty();
-    				$('form#formulario').append('<input type="hidden" name="bytes" value="'+JSON.stringify(data.bytes)+'" />');    		
-    				$('form#formulario').append('<input type="hidden" name="ext" value="'+data.ext+'" />');  
-    				$('form#formulario').append('<input type="hidden" name="nombreArchivo" value="'+data.nombreArchivo+'" />');  
+    				$('form#formulario').append('<input type="hidden" name="bytes" value="'+JSON.stringify(data.bytes)+'" />');
+    				$('form#formulario').append('<input type="hidden" name="ext" value="'+data.ext+'" />');
+    				$('form#formulario').append('<input type="hidden" name="nombreArchivo" value="'+data.nombreArchivo+'" />');
     				$('form#formulario').attr('action',baseURL+'/'+isoPais+"/file");
     				$('form#formulario').submit()
     			}else{
@@ -180,9 +180,9 @@ $(function(){ // Document ready
     					alert('Usuario actualmente desconectado');
 						location.reload();
     				}else{
-    					notificacion('Descargando archivo de datos',data.ERROR)	
+    					notificacion('Descargando archivo de datos',data.ERROR)
     				}
-    				
+
     			}
     		})*/
 	});
@@ -215,7 +215,7 @@ $(function(){ // Document ready
 	function dataTable(){
 
 
-		$("#tabla-act-datos").dataTable( { 
+		$("#tabla-act-datos").dataTable( {
           "iDisplayLength": 10,
           'bRetrieve': true,
           "sPaginationType": "full_numbers",
@@ -224,8 +224,8 @@ $(function(){ // Document ready
             "sLengthMenu":     "Mostrar _MENU_ registros",
             "sZeroRecords":    "No se encontraron resultados",
             "sEmptyTable":     "Ningún dato disponible en esta tabla",
-            "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-            "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+            "sInfo":           "Mostrando registros del _START_ al _END_, de un total de _TOTAL_ registros",
+            "sInfoEmpty":      "Mostrando registros del 0 al 0, de un total de 0 registros",
             "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
             "sInfoPostFix":    "",
             "sSearch":         "Buscar:",

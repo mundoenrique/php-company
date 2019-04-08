@@ -375,10 +375,13 @@ $(function() {
     // CONFIRMAR OPERACION
 
     function confirmar(titulo, url, operacion, mensaje) {
-        var canvas = "<div id='dialog-confirm'>";
-        canvas += "<p>Tarjeta: " + serv_var.noTarjetas + "</p>";
-        canvas += "<fieldset><input type='password' id='pass' placeholder='Ingrese su contraseña' size=30/>";
-        canvas += "</fieldset><h5 id='msg'></h5></div>";
+			var canvas = "<div id='dialog-confirm'>";
+			canvas += "<form name='no-form' onsubmit='return false'>";
+			canvas += "<p>Tarjeta: " + serv_var.noTarjetas + "</p>";
+			canvas += "<fieldset><input type='password' name='pass' id='pass' placeholder='Ingrese su contraseña' size='28'>";
+			canvas += "</fieldset><h5 id='msg'></h5>";
+			canvas += "</form>"
+			canvas += "</div>"
 
         $(canvas).dialog({
             title: titulo,
@@ -884,7 +887,7 @@ $(function() {
             var canvas = "<div id='validar'>";
             (valAmount == false) ? $(this).find($('#amount').css('border-color', '#cd0a0a')) : '';
             (valdescript == false) ? $(this).find($('#description').css('border-color', '#cd0a0a')) : '';
-            canvas += (valAmount == false) ? "<p>* El Monto debe ser númerico</p>" : '';
+            canvas += (valAmount == false) ? "<p>* El monto debe ser numérico</p>" : '';
             canvas += (valdescript == false) ? "<p>* La descripción es necesaria</p>" : '';
             canvas += "</div>";
 
@@ -921,8 +924,8 @@ $(function() {
                     switch (data.code) {
                         case 0:
                             var canvas = "<div id='dialog-confirm'>";
-                            canvas +="<p>Codigo Recibido: </p>";
-                            canvas += "<fieldset><input type='text' id='token-code' size=30 placeholder='Ingrese codigo recibido' class='text ui-widget-content ui-corner-all'/>";
+                            canvas +="<p>Código recibido: </p>";
+                            canvas += "<fieldset><input type='text' id='token-code' size=30 placeholder='Ingrese código recibido' class='text ui-widget-content ui-corner-all'/>";
                             canvas += "<h5 id='msg'></h5></fieldset></div>";
                             $(canvas).dialog({
                                 title: data.title,
@@ -949,7 +952,8 @@ $(function() {
                                             });
                                             $.post(baseURL + api + isoPais + '/servicios/transferencia-maestra/RegargaTMProcede', {
                                                 "amount":amount,
-                                                "descript": descrip,
+																								"descript": descrip,
+																								"type": 'abono',
                                                 "codeToken": codeToken
                                             })
                                                 .done(function (data) {
@@ -997,7 +1001,7 @@ $(function() {
             var Amountmsg = "<strong> La empresa no posee saldo.</strong>";
             $("#amount, #description, #recargar").prop( "disabled", false );
         }else if (data.rc == -61) {
-            window.location.replace( baseURL+api+isoPais+'/finsesion');
+            window.location.replace( baseURL+isoPais+'/finsesion');
         }else {
             var Amountmsg = " - ";
             $("#amount, #description, #recargar").prop( "disabled", true );

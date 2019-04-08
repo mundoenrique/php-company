@@ -61,8 +61,12 @@ class Users extends CI_Controller {
             $menuFooter = $this->parser->parse('widgets/widget-menuFooter',array(),TRUE);
             //INSTANCIA DEL CONTENIDO PARA EL HEADER, INCLUYE MENU
             $header = $this->parser->parse('layouts/layout-header',array('menuHeaderActive'=>FALSE,'menuHeaderMainActive'=>FALSE,'menuHeader'=>$menuHeader,'titlePage'=>$titlePage,'is_login'=>true),TRUE);
-            //JAVASCRIPTS A CARGAR
-            $FooterCustomInsertJS=["jquery-1.10.2.min.js","jquery-ui-1.10.3.custom.min.js","jquery-md5.js","jquery.kwicks.js","jquery.ui.sliderbutton.js","jquery.balloon.min.js","users/login.js","routes.js"];
+						//JAVASCRIPTS A CARGAR
+						if($urlCountry == 'Ec-bp') {
+							$FooterCustomInsertJS=["jquery-1.10.2.min.js","jquery-ui-1.10.3.custom.min.js","jquery-md5.js","jquery.ui.sliderbutton.js","jquery.balloon.min.js","users/login.js","routes.js"];
+						} else {
+							$FooterCustomInsertJS=["jquery-1.10.2.min.js","jquery-ui-1.10.3.custom.min.js","jquery-md5.js","jquery.kwicks.js","jquery.ui.sliderbutton.js","jquery.balloon.min.js","users/login.js","routes.js"];
+						}
             //INSTANCIA DE CÓDIGO JS A AGREGAR
             $FooterCustomJS = "";
             //INSTANCIA PARA EL FOOTER
@@ -108,9 +112,6 @@ class Users extends CI_Controller {
             $password = $this->input->post('user_pass');
             $useractive = $this->input->post('user_active');
 						$responseLoginFull = $this->callWSLoginFull($username,$password,$urlCountry,$useractive);
-						log_message('INFO','adasdasdasdasdas');
-						log_message('INFO',$username);
-						log_message('INFO',$password);
             echo $responseLoginFull;
         }
 
@@ -151,28 +152,28 @@ class Users extends CI_Controller {
 
 			$data = json_encode($data,JSON_UNESCAPED_UNICODE);
 
-			$dataEncry = np_Hoplite_Encryption($data);
+			$dataEncry = np_Hoplite_Encryption($data, 'callWSLoginFull');
 			$data = array('bean' => $dataEncry, 'pais' =>$pais );
 			$data = json_encode($data);
 			$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data); // ENVÍA LA PETICIÓN Y ALMACENA LA RESPUESTA EN $response
-			$jsonResponse = np_Hoplite_Decrypt($response);
+			$jsonResponse = np_Hoplite_Decrypt($response, 'callWSLoginFull');
 
 			$response = json_decode($jsonResponse);
 
-
 			if(isset($response)) {
-				log_message('info','response login '.$response->rc.'/'.$response->msg);
 
 				if($response->rc==-229) {
-						return 'userold'; // EL USUARIO TIENE BANDERA EN 1
+					return 'userold'; // EL USUARIO TIENE BANDERA EN 1
 
 				} elseif($response->rc==-262) {
 					return 'desconocido'; // EL USUARIO NO HA SIDO INCORPORADO PARA USAR CEO
 
 				} elseif($response->rc==-28) {
-						return 'conectado'; // EL USUARIO YA SE ENCUENTRA CONECTADO (ha cerrado incorrectamente su sesión)
+					return 'conectado'; // EL USUARIO YA SE ENCUENTRA CONECTADO (ha cerrado incorrectamente su sesión)
 
 				} elseif($response->rc==0 || $response->rc==-2 || $response->rc==-185) { // solo para los casos donde el usuario establece conexión
+					log_message('DEBUG', 'RESPONSE DATAUSER: ' . json_encode($response->usuario));
+
 					$datos['userName'] = $response->usuario->userName;
 					$datos['idUsuario']=$response->usuario->idUsuario;
 					$datos['Nombre'] = $response->usuario->primerNombre;
@@ -316,13 +317,17 @@ class Users extends CI_Controller {
                 'token' => $token
             );
 
-            $data = json_encode($data,JSON_UNESCAPED_UNICODE);
+						$data = json_encode($data,JSON_UNESCAPED_UNICODE);
+
+						log_message('DEBUG', 'REQUEST LOGOUT:' . $data);
 
             $dataEncry = np_Hoplite_Encryption($data);
             $data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
             $data = json_encode($data);
             $response = np_Hoplite_GetWS('eolwebInterfaceWS',$data); // ENVÍA LA PETICIÓN Y ALMACENA LA RESPUESTA EN $response
-            $jsonResponse = np_Hoplite_Decrypt($response);
+						$jsonResponse = np_Hoplite_Decrypt($response);
+
+						log_message('DEBUG', 'RESPONSE LOGOUT:' . $jsonResponse);
 
             $response = json_decode($jsonResponse);
 

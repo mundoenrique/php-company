@@ -49,7 +49,7 @@ $urlBase = $urlBaseA.$pais;
 						<div id="selection-1">
 							<h5><?php echo lang('TITULO_LOTES_TIPOLOTES'); ?></h5>
 							<select id="tipoLote" name="batch">
-								<option value="">Selecciona</option>
+								<option value="">Seleccione</option>
 							<?php
 								foreach ($selectTiposLotes[0]->lista as $tipol) {
 									$tipoLS = ucfirst(mb_strtolower($tipol->tipoLote));
@@ -61,7 +61,7 @@ $urlBase = $urlBaseA.$pais;
 						<div id="selection-2">
 							<h5>&nbsp;</h5>
 							<input type="file" name="userfile" id="userfile" class='elem-hidden' />
-							<input id='archivo' placeholder='Click aquí para seleccionar archivo de lotes.' readonly="readonly" style='margin-left:0;width:459px'/>
+							<input id='archivo' placeholder='Click aquí para seleccionar archivo de Lote.' readonly="readonly" style='margin-left:0;width:459px'/>
 						</div>
 
 					</div>

@@ -66,9 +66,11 @@
 				case 'Usd':
 					$CI->config->load('usd-config');
 					break;
+				case 'Ec-bp':
+					$CI->config->load('ec-bp-config');
+					break;
 				default:
 					redirect('/Pe/login');
-					break;
 			}
 		}
 	}
@@ -271,7 +273,7 @@
 						if($submenu->idModulo == "TICARG"||$submenu->idModulo == "TIINVN"){
 							if($menuBoolean == false) {
 								$opMenuSubmenu.= "<li>
-													<a href='#'>Innominadas</a>
+													<a href='#'>Cuentas innominadas</a>
 													SUBMENU-INNO
 												</li>";
 								$menuBoolean = true;
@@ -404,5 +406,14 @@
 			}
 
 			// return $CI->session->userdata('pais');
+		}
+	}
+
+	if (! function_exists('mask_account')) {
+
+		function mask_account($account, $start = 1, $end = 1){
+			$CI = &get_instance();
+			$len = strlen($account);
+    	return substr($account, 0, $start) . str_repeat('*', $len - ($start + $end)) . substr($account, $len - $end, $end);
 		}
 	}

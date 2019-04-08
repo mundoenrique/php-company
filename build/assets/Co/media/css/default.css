@@ -457,7 +457,6 @@ button:hover {
   text-shadow: 1px 1px 0 #004574, 1px 1px 0 false #004574;
   text-shadow: 1px 1px 0 false #004574, 1px 1px 0 false #004574;
 }
-
 #head {
   background: #0072c0;
   background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #0072c0), color-stop(100%, #0054a9));

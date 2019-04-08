@@ -1639,6 +1639,7 @@ class Lotes extends CI_Controller {
 			$this->load->library('parser');
 			//$config['FOLDER_UPLOAD_LOTES']
 			$config['upload_path'] = $this->config->item('FOLDER_UPLOAD_LOTES');
+			log_message('DEBUG', 'upload_path: ' . $config['upload_path']);
 			$config['allowed_types'] = '*';
 			$this->load->library('upload', $config);
 			//VERIFICAR SI NO SUBIO ARCHIVO
@@ -1660,6 +1661,8 @@ class Lotes extends CI_Controller {
 				$nombreArchivoNuevo = date("YmdHis").$nombreArchivo.$extensionArchivo;
 				$URL_TEMPLOTES = $this->config->item('URL_TEMPLOTES');
 				$LOTES_USERPASS = $this->config->item('LOTES_USERPASS');
+
+				log_message('DEBUG', ' ROUTE: ' . $URL_TEMPLOTES);
 
 				curl_setopt($ch, CURLOPT_URL, $URL_TEMPLOTES.$nombreArchivoNuevo);
 				curl_setopt($ch, CURLOPT_USERPWD, $LOTES_USERPASS);
