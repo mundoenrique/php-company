@@ -1,4 +1,3 @@
-
 $(function() { // Document ready
 
 var f, dir, forma;
@@ -109,7 +108,7 @@ function mostrarError(result){
 
 // Refrescar lote cada 10 segundos
 
-self.setInterval(function(){actualizarLote()},10000);
+self.setInterval(function(){actualizarLote()},100000000);
 var datatable;
 
 function actualizarLote(){
@@ -153,7 +152,11 @@ $('#actualizador').show();
             icon = "&#xe00a;";
             color = "icon-batchs-orange";
             title = "Validando lote";
-          }
+          } else if(v.estatus == 6){ //ok pero con errores
+						icon="&#xe083;";
+						color="icon-batchs-purple";
+						title = "Confirmar lote";
+					}
 
           (v.numLote==="") ? v.numLote = '-' : v.numLote;
           (v.nombre==="") ? v.nombre='-' : v.nombre;
@@ -161,7 +164,8 @@ $('#actualizador').show();
         batch = "<tr><td id='icon-batchs' class="+color+"><span aria-hidden='true' class='icon' data-icon=''></span></td>";
         batch += "<td>"+v.numLote+"</td><td id='td-nombre'>"+v.nombreArchivo+"</td><td class='field-date'>"+v.fechaCarga+"</td><td>"+v.descripcion+"</td>";
         batch += "<td id='icons-options'><a "+elimina+" id='borrar' title='Eliminar Lote' data-idTicket="+v.idTicket+" data-idLote='"+v.idLote+"' data-arch='"+v.nombreArchivo+"'><span aria-hidden='true' class='icon' data-icon='&#xe067;'></span></a>";
-        batch += "<a "+confirma+" id='detalle' title='"+title+"' data-idTicket="+v.idTicket+" data-edo="+v.estatus+" data-forma="+forma+"><span aria-hidden='true' class='icon' data-icon="+icon+"></span></a></td></tr>";
+				batch += v.estatus == 6 ? "<a "+confirma+" class='detalle' title='Ver lote' data-idTicket="+v.idTicket+" data-edo="+v.estatus+" data-forma="+forma+" data-opc='verLote'><span aria-hidden='true' class='icon' data-icon='&#xe003;'></span></a>" : "";
+				batch += "<a "+confirma+" class='detalle' title='"+title+"' data-idTicket="+v.idTicket+" data-edo="+v.estatus+" data-forma="+forma+" ><span aria-hidden='true' class='icon' data-icon="+icon+"></span></a></td></tr>";
 
         $("#actualizador").hide();
         $("#table-text-lotes tbody").append(batch);
@@ -295,16 +299,17 @@ $("#table-text-lotes").on("click","#borrar",
 
 
 // Ver Lote
-$("#table-text-lotes").on("click", "#detalle",
+$("#table-text-lotes").on("click", ".detalle",
   function(){
     var estado = $(this).attr("data-edo");
-    var ticket = $(this).attr("data-idTicket");
+		var ticket = $(this).attr("data-idTicket");
+		var opc = $(this).attr("data-opc");
 
-    if(estado=="1"){
+    if(estado=="1" || (estado=="6" && !opc ) ) {
       $("form#confirmar").append('<input type="hidden" name="data-estado" value="'+estado+'" />');
       $("form#confirmar").append('<input type="hidden" name="data-idTicket" value="'+ticket+'" />');
       $("form#confirmar").submit();
-    }else if(estado=="5") {
+    }else if(estado=="5" || estado=="6") {
       $("form#detalle").append('<input type="hidden" name="data-estado" value="'+estado+'" />');
       $("form#detalle").append('<input type="hidden" name="data-idTicket" value="'+ticket+'" />');
       $("form#detalle").submit();
