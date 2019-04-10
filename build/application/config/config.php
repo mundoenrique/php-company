@@ -48,6 +48,9 @@ $config['modules_locations'] = array(APPPATH . 'modules/');
 */
 
 $config['base_url']	= BASE_URL;
+$config['asset_url'] = BASE_CDN_URL;
+$config['asset_path'] = BASE_CDN_PATH;
+$config['favicon'] = 'favicon-novo';
 
 /*
 |--------------------------------------------------------------------------
@@ -139,7 +142,7 @@ $config['enable_hooks'] = FALSE;
 | http://codeigniter.com/user_guide/general/creating_libraries.html
 |
 */
-$config['subclass_prefix'] = 'NOVOPAYMENT_';
+$config['subclass_prefix'] = 'NOVO_';
 
 
 /*

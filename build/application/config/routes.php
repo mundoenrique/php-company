@@ -1,7 +1,10 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-$route['default_controller'] = "users/login/$1";
+$route['default_controller'] = "user";
+$route['(:any)/home'] = "user/index";
+$route['(:any)/home/(:any)'] = "user/index";
 
+//old routes
 $route['(:any)/login'] = "users/login/$1";
 
 $route['(:any)/validation'] = "users/validationAuth/$1";
