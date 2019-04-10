@@ -1,15 +1,80 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-	/**
-	 * CodeIgniter XML Helpers
-	 *
-	 * @package		CodeIgniter
-	 * @subpackage	Helpers
-	 * @category	Helpers
-	 * @author		ExpressionEngine Dev Team
-	 * @link		http://codeigniter.com/user_guide/helpers/xml_helper.html
-	 */
+/**
+ * CodeIgniter XML Helpers
+ *
+ * @package		CodeIgniter
+ * @subpackage	Helpers
+ * @category	Helpers
+ * @author		ExpressionEngine Dev Team
+ * @link		http://codeigniter.com/user_guide/helpers/xml_helper.html
+ */
+if(!function_exists('assetPath')) {
+	function assetPath($route = '') {
+		return get_instance()->config->item('asset_path').$route;
+	}
+}
 
-	// ------------------------------------------------------------------------
+if(!function_exists('assetUrl')) {
+	function assetUrl($route = '') {
+		return get_instance()->config->item('asset_url').$route;
+	}
+}
+
+if(!function_exists('countryCheck')) {
+	function countryCheck($country) {
+		$CI = &get_instance();
+
+		switch ($country) {
+			case 'bp':
+				$CI->config->load('config-bp');
+				break;
+			case 'co':
+				$CI->config->load('config-co');
+				break;
+			case 'pe':
+				$CI->config->load('config-pe');
+				break;
+			case 'us':
+				$CI->config->load('config-us');
+				break;
+			case 've':
+				$CI->config->load('config-ve');
+				break;
+			default:
+				redirect('/pe/home');
+		}
+		$CI->session->set_userdata(['countryConf'=> $CI->config->item('country')]);
+	}
+}
+
+if(!function_exists('setFavicon')) {
+	function setFavicon() {
+		$CI = &get_instance();
+		$favicon = $CI->config->item('favicon');
+		switch($CI->config->item('country')) {
+			case 'Ec-bp':
+				$ext = 'ico';
+				break;
+			default:
+				$ext = 'png';
+		}
+
+		$faviconData = new stdClass();
+		$faviconData->favicon = $favicon;
+		$faviconData->ext = $ext;
+
+		return $faviconData;
+	}
+}
+
+if (!function_exists('mask_account')) {
+	function mask_account($account, $start = 1, $end = 1){
+		$CI = &get_instance();
+		$len = strlen($account);
+		return substr($account, 0, $start).str_repeat('*', $len - ($start + $end)).substr($account, $len - $end, $end);
+	}
+}
+
 	if ( ! function_exists('np_hoplite_log')) {
 		/**
 		 * Helper que lanza la descarga de un documento que arma el objeto logAccesoObject y lo retorna
@@ -406,14 +471,5 @@
 			}
 
 			// return $CI->session->userdata('pais');
-		}
-	}
-
-	if (! function_exists('mask_account')) {
-
-		function mask_account($account, $start = 1, $end = 1){
-			$CI = &get_instance();
-			$len = strlen($account);
-    	return substr($account, 0, $start) . str_repeat('*', $len - ($start + $end)) . substr($account, $len - $end, $end);
 		}
 	}
