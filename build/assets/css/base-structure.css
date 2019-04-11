@@ -43,13 +43,16 @@ audio:not([controls]) {
 }
 
 hr {
+	-moz-box-sizing: content-box;
   box-sizing: content-box;
   height: 0;
 }
 
 sub,
 sup {
-  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
 }
 
 sup {
@@ -114,7 +117,6 @@ h2 {
 
 p {
   margin: 2px 0 10px;
-  text-align: left;
 }
 
 nav ul.menu li.menu-item {
@@ -126,7 +128,6 @@ nav ul.menu li.menu-item {
 
 nav ul.menu li.menu-item a {
   display: block;
-  font-weight: normal;
 }
 
 .separator {
@@ -162,7 +163,9 @@ button {
 }
 
 .file-field {
-  float: right;
+	float: right;
+  line-height: 35px;
+  padding: 0 10px;
 }
 
 .btn-sidebar {
@@ -240,6 +243,7 @@ ol.breadcrumb li {
 #widget-area .widget h2.widget-title {
   margin: 0;
   padding: 0 10px;
+  line-height: 50px;
 }
 
 #widget-area .widget h2.widget-title span.icon:before {
@@ -268,8 +272,6 @@ ol.breadcrumb li {
   height: 25px;
   margin: 12px 10px 13px;
   overflow: hidden;
-  text-align: right;
-  text-indent: 100%;
   white-space: nowrap;
   width: 160px;
 }
@@ -284,9 +286,11 @@ ol.breadcrumb li {
 
 #credits p {
   margin: 0;
+  line-height: 50px;
 }
 
 #nav-bar {
+  height: 40px;
   left: 0;
   overflow: hidden;
   position: fixed;
@@ -301,6 +305,7 @@ ol.breadcrumb li {
 
 #status-disable:hover {
   padding: 0 10px;
+  line-height: 40px;
 }
 
 #main-nav li:hover > ul {
@@ -335,6 +340,11 @@ ol.breadcrumb li {
 
 #main-nav ul.menu li.menu-item a {
   padding: 0 10px;
+  line-height: 40px;
+}
+
+#main-nav ul.menu li.menu-item a span.icon:before {
+  padding-right: 5px;
 }
 
 .menu li > ul {
@@ -479,6 +489,7 @@ ul.acordion li:last-child {
 }
 
 ul.acordion li p {
+  line-height: 17px;
   padding: 0px 3px;
 }
 
@@ -522,10 +533,12 @@ p.subtitulos-login {
 
 .titulo-login-desc {
   padding: 70px 3px 0 3px !important;
+  line-height: 19px;
 }
 
 .desc-func {
   display: none;
+  line-height: 16px !important;
 }
 
 .kwicks-selected .titulo-login-desc, .kwicks-expanded .titulo-login-desc {
@@ -534,7 +547,6 @@ p.subtitulos-login {
 
 .error-login-2:after,
 .error-login-2:before {
-  content: '';
   height: 0;
   position: absolute;
   width: 0;
@@ -584,6 +596,7 @@ p.subtitulos-login {
 .ju-sliderbutton .ju-sliderbutton-text {
   margin-right: 5px;
   width: 200px;
+  line-height: 35px;
 }
 
 .ju-sliderbutton-left .ju-sliderbutton-text {
@@ -712,7 +725,6 @@ a.style-companies-item span {
 
 #more-info:after,
 #more-info:before {
-  content: '';
   height: 0;
   position: absolute;
   width: 0;
@@ -745,7 +757,6 @@ span#more-info a p b {
   margin-top: 10px;
   padding-left: 10px;
   line-height: 14px;
-  font-size: 14px;
   height: 14px;
   overflow: hidden;
 }
@@ -755,8 +766,8 @@ span#more-info a p b {
   padding-right: 10px;
   width: 190px;
   padding-left: 10px;
+  line-height: 12px;
   height: 12px;
-  text-overflow: ellipsis;
 	white-space: nowrap;
 	overflow: hidden;
 }
@@ -836,10 +847,6 @@ ul.filter-2 li a {
   padding: 10px 5px 10px 5px;
   width: auto;
   float: right;
-}
-
-ul.filter-2 li a:hover {
-  color: #197abc;
 }
 
 li.filter-3 a {
@@ -1407,10 +1414,6 @@ ul#brands li p img {
   margin: 5px;
   width: 586px;
   line-height: 42px;
-}
-
-#table-text-TM tbody tr:hover {
-  background: #FFF;
 }
 
 #table-text-TM thead tr {
@@ -2577,7 +2580,6 @@ span.jPag-snext-img {
 }
 
 #pswd_info::before {
-  content: "\25B2";
   position: absolute;
   top: -12px;
   left: 45%;

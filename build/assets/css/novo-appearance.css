@@ -235,8 +235,13 @@ a {
   font-weight: bold;
   text-decoration: none;
 }
+
 a:hover {
   color: #0054a9;
+}
+
+p {
+  text-align: left;
 }
 
 code,
@@ -244,6 +249,10 @@ kbd,
 pre,
 samp {
   font-family: Consolas, monaco, monospace, serif;
+}
+
+nav ul.menu li.menu-item a {
+  font-weight: normal;
 }
 
 span.icon:before {
@@ -321,8 +330,6 @@ button:hover {
   -moz-box-shadow: rgba(51, 51, 51, 0.35) 0 1px 2px;
   box-shadow: rgba(51, 51, 51, 0.35) 0 1px 2px;
   color: white;
-  line-height: 35px;
-  padding: 0 10px;
   text-shadow: 1px 1px 0 #004574, 1px 1px 0 false #004574;
   text-shadow: 1px 1px 0 false #004574, 1px 1px 0 false #004574;
 }
@@ -390,20 +397,19 @@ ol.breadcrumb li a {
 #widget-area .widget h2.widget-title {
   background: #dddddd;
   color: #333333;
-  line-height: 50px;
 }
 
 #ownership {
-  background: transparent url('../images/sprite-branding.png?20160709') scroll no-repeat 0 -145px;
+	background: transparent url('../images/sprite-branding.png?20160709') scroll no-repeat 0 -145px;
+  text-align: right;
+  text-indent: 100%;
 }
 
 #credits p {
   font-size: 10px;
-  line-height: 50px;
 }
 
 #nav-bar {
-  height: 40px;
   background: #dddddd;
   background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #dddddd), color-stop(100%, #f3f3f3));
   background-image: -webkit-linear-gradient(#dddddd, #f3f3f3);
@@ -431,7 +437,6 @@ ol.breadcrumb li a {
   border-right: 1px solid #f3f3f3;
   font-family: "sourcesanspro-regular", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 16px;
-  line-height: 40px;
   text-shadow: 1px 1px 0 #f3f3f3;
 }
 
@@ -449,7 +454,6 @@ ol.breadcrumb li a {
   color: #555555;
   font-family: "sourcesanspro-regular", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 16px;
-  line-height: 40px;
   text-shadow: 1px 1px 0 #f3f3f3;
 }
 
@@ -464,10 +468,6 @@ ol.breadcrumb li a {
   border-right: 1px solid #004574;
   color: white;
   text-shadow: 1px 1px 0 #0072c0;
-}
-
-#main-nav ul.menu li.menu-item a span.icon:before {
-  padding-right: 5px;
 }
 
 .menu li > ul {
@@ -629,8 +629,6 @@ ul.acordion li div {
 ul.acordion li p {
   font-size: 12px;
   color: white;
-  line-height: 17px;
-  padding: 0px 3px;
 }
 
 select.categories-products {
@@ -675,13 +673,16 @@ p.subtitulos-login {
 .titulo-login-desc {
   font-size: 17px;
   color: red;
-  line-height: 19px;
   font-weight: bold;
 }
 
 .desc-func {
   font-size: 11px !important;
-  line-height: 16px !important;
+}
+
+.error-login-2:after,
+.error-login-2:before {
+  content: '';
 }
 
 .ju-sliderbutton {
@@ -697,7 +698,6 @@ p.subtitulos-login {
 
 .ju-sliderbutton .ju-sliderbutton-text {
   color: #555555;
-  line-height: 35px;
   font-size: 12px;
   font-family: "Helvetica", "Arial", sans-serif;
   font-style: italic;
@@ -860,7 +860,6 @@ a.style-companies-item:hover {
   background-image: -o-linear-gradient(#0072c0, #004574) !important;
   background-image: linear-gradient(#0072c0, #004574) !important;
   color: white;
-  display: block;
 }
 
 .style-companies-item-activa span {
@@ -882,6 +881,11 @@ a.style-companies-item:hover {
   background-image: -moz-linear-gradient(#259fd8, #1a6f97);
   background-image: -o-linear-gradient(#259fd8, #1a6f97);
   background-image: linear-gradient(#259fd8, #1a6f97);
+}
+
+#more-info:after,
+#more-info:before {
+  content: '';
 }
 
 #more-info:after {
@@ -909,13 +913,12 @@ span#more-info a p b {
 }
 
 #text-companies-T {
-  line-height: 14px;
+  font-size: 14px;
 }
 
 #text-companies {
-  line-height: 12px;
   font-size: 12px;
-  height: 12px;
+  text-overflow: ellipsis;
 }
 
 #text-companies-2 {
@@ -990,6 +993,10 @@ ul.filter-2 li {
 ul.filter-2 li a {
   color: #545454;
   text-transform: uppercase;
+}
+
+ul.filter-2 li a:hover {
+  color: #197abc;
 }
 
 li.filter-3 a {
@@ -1126,10 +1133,6 @@ li.filter-1 a {
   border: solid 1px white;
 }
 
-#products-list {
-  width: auto;
-  height: auto;
-}
 #products-list li {
   background: white;
   border: 1px solid #DCDCDC;
@@ -1155,8 +1158,10 @@ li.filter-1 a {
 }
 
 .text-category {
-  width: 325px;
-  float: left;
+  font-size: 12px;
+  font-style: italic;
+  color: #bbbbbb;
+  font-weight: bold;
 }
 
 .color-product-rrhh {
@@ -1183,8 +1188,8 @@ li.filter-1 a {
 }
 
 .color-product-admon span {
-  padding-top: 20px;
-  float: left;
+  color: white;
+  font-size: 24px;
 }
 
 .color-product-mercadeo {
@@ -1219,7 +1224,6 @@ li.filter-1 a {
   -webkit-box-shadow: rgba(51, 51, 51, 0.5) 0 1px 2px;
   -moz-box-shadow: rgba(51, 51, 51, 0.5) 0 1px 2px;
   box-shadow: rgba(51, 51, 51, 0.5) 0 1px 2px;
-  padding: 0px;
   -webkit-border-radius: 5px 5px 0px 0px;
   -moz-border-radius: 5px 5px 0px 0px;
   -ms-border-radius: 5px 5px 0px 0px;
@@ -1570,11 +1574,6 @@ ul#brands li p {
   text-align: center;
 }
 
-#table-lote-detail {
-  float: left;
-  width: 650px;
-}
-
 #table-lote-detail tbody tr {
   background: #F3F3F3;
   -webkit-box-shadow: rgba(51, 51, 51, 0.5) 0 1px 1px;
@@ -1895,8 +1894,8 @@ tr.GC-first th {
 }
 
 #icon-batchs input {
-  margin: 17px 0 5px 10px;
-  padding: 10px;
+  border: 1px solid #DDDDDD;
+  border-radius: 3px 3px 3px 3px;
 }
 
 .icon-batchs-red {
@@ -2585,6 +2584,7 @@ span.jPag-snext-img {
 }
 
 #pswd_info::before {
+  content: "\25B2";
   font-size: 14px;
   color: #ddd;
   text-shadow: none;
