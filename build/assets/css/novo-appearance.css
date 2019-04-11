@@ -9,6 +9,8 @@
 }
 
 html {
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
 }
 
@@ -69,11 +71,6 @@ textarea {
 
 legend {
   border: 0;
-}
-
-button,
-input {
-  line-height: normal;
 }
 
 button,
@@ -178,7 +175,6 @@ body {
   direction: ltr;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 12px;
-  line-height: 17px;
 }
 
 h1,
@@ -196,37 +192,31 @@ h6 {
 h1 {
   color: #0054a9;
   font-size: 32px;
-  line-height: 50px;
 }
 
 h2 {
   color: #0072c0;
   font-size: 18px;
-  line-height: 40px;
 }
 
 h3 {
   color: #333333;
   font-size: 15px;
-  line-height: 20px;
 }
 
 h4 {
   color: #39b54a;
   font-size: 14px;
-  line-height: 20px;
 }
 
 h5 {
   color: #0072c0;
   font-size: 13px;
-  line-height: 18px;
 }
 
 h6 {
   color: #333333;
   font-size: 13px;
-  line-height: 18px;
 }
 
 a {
@@ -268,6 +258,10 @@ span.icon:before {
   background: #DDD;
 }
 
+fieldset {
+  border: 0;
+}
+
 input,
 select,
 textarea {
@@ -299,7 +293,6 @@ button {
   -moz-box-shadow: rgba(51, 51, 51, 0.35) 0 1px 2px;
   box-shadow: rgba(51, 51, 51, 0.35) 0 1px 2px;
   color: white;
-  line-height: 35px;
   text-shadow: 1px 1px 0 #004574, 1px 1px 0 false #004574;
   text-shadow: 1px 1px 0 false #004574, 1px 1px 0 false #004574;
 }
@@ -360,18 +353,10 @@ button:hover {
   -webkit-box-shadow: rgba(51, 51, 51, 0.5) 0 1px 2px;
   -moz-box-shadow: rgba(51, 51, 51, 0.5) 0 1px 2px;
   box-shadow: rgba(51, 51, 51, 0.5) 0 1px 2px;
-  overflow: hidden;
-}
-
-#head-wrapper,
-#wrapper,
-#foot-wrapper {
-  overflow: hidden;
 }
 
 #head-wrapper {
   background: transparent url('../images/sprite-branding.png?20160709') scroll no-repeat 0px -35px;
-  overflow: hidden;
 }
 
 ol.breadcrumb li a {
@@ -403,6 +388,7 @@ ol.breadcrumb li a {
 	background: transparent url('../images/sprite-branding.png?20160709') scroll no-repeat 0 -145px;
   text-align: right;
   text-indent: 100%;
+  white-space: nowrap;
 }
 
 #credits p {
@@ -427,7 +413,6 @@ ol.breadcrumb li a {
   border-right: 1px solid #f3f3f3;
   font-family: "sourcesanspro-regular", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 16px;
-  line-height: 40px;
   text-shadow: 1px 1px 0 #f3f3f3;
 }
 
@@ -472,7 +457,6 @@ ol.breadcrumb li a {
 
 .menu li > ul {
   font-size: 18px;
-  line-height: 25px;
   -webkit-transition: visibility 400ms ease-in-out;
   -webkit-transition-delay: 0s;
   -moz-transition: visibility 400ms ease-in-out 0s;
@@ -511,10 +495,6 @@ ol.breadcrumb li a {
 
 .menu-item .settings {
   border-left: 1px solid;
-}
-
-#extra-nav ul.menu li.menu-item {
-  line-height: 50px;
 }
 
 #extra-nav ul.menu li.menu-item a {
@@ -578,7 +558,8 @@ ul.acordion li div {
   -moz-border-radius: 2px;
   -ms-border-radius: 2px;
   -o-border-radius: 2px;
-  border-radius: 2px;
+	border-radius: 2px;
+  cursor: pointer;
 }
 
 .acordion span.icon:before {
@@ -714,6 +695,7 @@ p.subtitulos-login {
 }
 
 .ju-sliderbutton .ju-sliderbutton-slider .ui-slider-handle {
+  border: none;
 	background: #0072c0;
   background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #0072c0), color-stop(100%, #004574));
   background-image: -webkit-linear-gradient(#0072c0, #004574);
@@ -760,7 +742,6 @@ html {
 .tooltipster-default .tooltipster-content {
   font-family: Arial, sans-serif;
   font-size: 14px;
-  line-height: 16px;
 }
 
 .tooltipster-icon {
@@ -919,6 +900,7 @@ span#more-info a p b {
 #text-companies {
   font-size: 12px;
   text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 #text-companies-2 {
@@ -947,7 +929,6 @@ span#more-info a p b {
 .filter-2 {
   color: #FFFFFF;
   background: none;
-  clear: both;
 }
 
 .lastsession {
@@ -974,6 +955,10 @@ div.filter li a {
 
 div.filter li a:hover {
   color: #197abc;
+}
+
+#txt-full-view {
+  font-size: 20px !important;
 }
 
 ul.filter-2 li {
@@ -1103,7 +1088,8 @@ li.filter-1 a {
 }
 
 #widget-info-1 p {
-  float: left;
+  font-weight: bold;
+  color: #0072c0;
 }
 
 #widget-info-2 {
@@ -1111,7 +1097,6 @@ li.filter-1 a {
   border-top: 1px solid #dddddd;
   border-bottom: 1px solid #f3f3f3;
   color: #0054a9;
-  width: 200px;
 }
 
 .important-notice {
@@ -1119,10 +1104,6 @@ li.filter-1 a {
   border-top: 1px solid #dddddd;
   border-bottom: 1px solid #f3f3f3;
   color: #0054a9;
-}
-
-.important-notice button {
-  margin: 10px 25px;
 }
 
 #products-general {
@@ -1316,6 +1297,10 @@ ul#brands li p {
   font-size: 15px;
 }
 
+#text-product-detail h2 {
+  font-weight: bold;
+}
+
 #text-product-detail p span {
   font-size: 24px;
   color: #54c2d0;
@@ -1387,7 +1372,6 @@ ul#brands li p {
   -ms-border-radius: 3px 3px 3px 3px;
   -o-border-radius: 3px 3px 3px 3px;
   border-radius: 3px 3px 3px 3px;
-  line-height: 38px;
   border: 1px solid #dddddd;
 }
 
@@ -1962,6 +1946,7 @@ li#select-empresa select {
 }
 
 #datos-principales {
+  border: solid 1px;
   font-size: 15px;
   background: none repeat scroll 0 0 #54c2d0;
   -webkit-border-radius: 10px 10px 0 0;
@@ -1973,7 +1958,12 @@ li#select-empresa select {
   font-size: 13px;
 }
 
+#datos-principales td {
+	border: solid 1px;
+}
+
 #datos-principales-OS {
+  border: solid 1px;
   font-size: 15px;
   background: none repeat scroll 0 0 #54c2d0;
   -webkit-border-radius: 10px 10px 0 0;
@@ -1990,13 +1980,18 @@ li#select-empresa select {
 }
 
 .tabla-lotesNF {
-  -webkit-border-radius: 10px 10px 0 0;
+	-webkit-border-radius: 10px 10px 0 0;
   -moz-border-radius: 10px 10px 0 0;
   -ms-border-radius: 10px 10px 0 0;
   -o-border-radius: 10px 10px 0 0;
   border-radius: 10px 10px 0 0;
   color: white;
   font-size: 13px;
+  border: solid 1px;
+}
+
+.tabla-lotesNF th {
+  border: solid 1px;
 }
 
 #datos-empresa {
@@ -2076,8 +2071,8 @@ li#select-empresa select {
 }
 
 #Datos2 td {
-  padding: 5px;
-  line-height: 20px;
+  text-align: center;
+  border-right: 1px dotted #bbbbbb;
 }
 
 #Datos3 {
@@ -2091,6 +2086,10 @@ li#select-empresa select {
   -webkit-box-shadow: rgba(51, 51, 51, 0.09) 0 1px 1px;
   -moz-box-shadow: rgba(51, 51, 51, 0.09) 0 1px 1px;
   box-shadow: rgba(51, 51, 51, 0.09) 0 1px 1px;
+}
+
+#Datos3 td {
+  text-align: right;
 }
 
 #Datos3-short {
@@ -2168,6 +2167,10 @@ li#select-empresa select {
   -webkit-box-shadow: rgba(51, 51, 51, 0.5) 0 1px 1px;
   -moz-box-shadow: rgba(51, 51, 51, 0.5) 0 1px 1px;
   box-shadow: rgba(51, 51, 51, 0.5) 0 1px 1px;
+}
+
+#lotesConfirmacion-4 div {
+  border: none;
 }
 
 #lotesConfirmacion-long {
@@ -2500,7 +2503,6 @@ span.jPag-snext-img {
   background: #54c2d0;
   color: #FFF;
   font-weight: bold;
-  margin-top: 20px;
   -webkit-border-radius: 10px 10px 0 0;
   -moz-border-radius: 10px 10px 0 0;
   -ms-border-radius: 10px 10px 0 0;
@@ -2738,7 +2740,6 @@ span.jPag-snext-img {
 }
 
 #datos-principales-AU {
-  font-size: 15px;
   background: none repeat scroll 0 0 #54c2d0;
   -webkit-border-radius: 10px 10px 0 0;
   -moz-border-radius: 10px 10px 0 0;
@@ -2746,7 +2747,8 @@ span.jPag-snext-img {
   -o-border-radius: 10px 10px 0 0;
   border-radius: 10px 10px 0 0;
   color: white;
-  font-size: 13px;
+	font-size: 13px;
+  border: solid 1px;
 }
 
 #datos-principales-AU td {
@@ -2761,6 +2763,7 @@ span.jPag-snext-img {
   border: medium none !important;
   border-radius: 6px 6px 6px 6px;
   color: #FFF;
+  opacity: 1 !important;
   text-align: left;
 }
 
@@ -2783,7 +2786,9 @@ span.jPag-snext-img {
 }
 
 .tbody-reportes-AU tr td {
-  padding: 5px;
+  text-align: center;
+  border: 1px dotted #dddddd;
+  color: #555;
 }
 
 .cell-AU td {
@@ -2791,7 +2796,7 @@ span.jPag-snext-img {
 }
 
 .cell-AU {
-  margin-left: 31px;
+  background: none repeat scroll 0 0 #EAFFFF !important;
 }
 
 .op-AD > #downXLS {
@@ -2912,6 +2917,10 @@ button.green:hover {
   border-left: 3px solid #0072c0;
 }
 
+#campos-1 span p {
+  font-size: 13px;
+}
+
 #campos-1 span input {
   background: none;
   border: none;
@@ -2947,6 +2956,10 @@ button.green:hover {
   font-size: 15px;
 }
 
+.lapiz-mod {
+  border: none !important;
+}
+
 #user-name {
   font-size: 15px;
   color: #0072c0;
@@ -2959,7 +2972,6 @@ button.green:hover {
 }
 
 .select-empresa {
-  float: left;
   background: none;
   border: 1px solid #D5D5D5;
   color: #0072c0;
@@ -2985,6 +2997,11 @@ button.green:hover {
 
 #contend-pagination nav {
   font-size: 16px;
+}
+
+#contend-pagination #list_pagination {
+  white-space: nowrap;
+  font-size: 14px;
 }
 
 .fecha-carga {
@@ -3171,12 +3188,21 @@ button.green:hover {
 #nav2 ul li:hover > ul {
 	visibility: visible;
 	opacity: 1;
-	margin-top: -2px !important;
 	-webkit-transform: translateY(0px);
 	-moz-transform: translateY(0px);
 	-o-transform: translateY(0px);
 	-ms-transform: translateY(0px);
 	transform: translateY(0px);
+}
+
+#nav2 ul li ul {
+	opacity: 0;
+	visibility: hidden;
+	-webkit-transform: translateY(-50px);
+	-moz-transform: translateY(-50px);
+	-o-transform: translateY(-50px);
+	-ms-transform: translateY(-50px);
+	transform: translateY(-50px);
 }
 
 #nav2 ul li ul li {

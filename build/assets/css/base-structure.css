@@ -67,6 +67,11 @@ legend {
   padding: 0;
 }
 
+button,
+input {
+  line-height: normal;
+}
+
 input[type="checkbox"],
 input[type="radio"] {
   box-sizing: border-box;
@@ -97,6 +102,10 @@ figure {
   margin: 0;
 }
 
+body {
+  line-height: 17px;
+}
+
 h1,
 h2,
 h3,
@@ -108,15 +117,30 @@ h6 {
 }
 
 h1 {
-  margin: 0 0 10px;
+	margin: 0 0 10px;
+  line-height: 50px;
 }
 
 h2 {
   margin: 0 0 10px;
+  line-height: 40px;
+}
+
+h4 {
+  line-height: 20px;
+}
+
+h5 {
+  line-height: 18px;
+}
+
+h6 {
+  line-height: 18px;
 }
 
 p {
   margin: 2px 0 10px;
+  line-height: 20px;
 }
 
 nav ul.menu li.menu-item {
@@ -143,7 +167,6 @@ form {
 }
 
 fieldset {
-  border: 0;
   margin: 0;
   overflow: hidden;
   padding: 0;
@@ -157,7 +180,8 @@ textarea {
 }
 
 button {
-  float: right;
+	float: right;
+  line-height: 35px;
   padding: 0 10px;
   margin-left: 10px;
 }
@@ -175,7 +199,8 @@ button {
 
 #head {
   height: 60px;
-  left: 0;
+	left: 0;
+  overflow: hidden;
   position: fixed;
   top: 0;
   width: 100%;
@@ -185,13 +210,15 @@ button {
 #head-wrapper,
 #wrapper,
 #foot-wrapper {
-  margin: 0 auto;
+	margin: 0 auto;
+	overflow: hidden;
   width: 1000px;
 }
 
 #head-wrapper {
   height: 60px;
   margin: 0 auto;
+  overflow: hidden;
   width: 940px;
 }
 
@@ -272,7 +299,6 @@ ol.breadcrumb li {
   height: 25px;
   margin: 12px 10px 13px;
   overflow: hidden;
-  white-space: nowrap;
   width: 160px;
 }
 
@@ -300,6 +326,7 @@ ol.breadcrumb li {
 }
 
 #status-disable {
+  line-height: 40px;
   padding: 0 10px;
 }
 
@@ -350,6 +377,7 @@ ol.breadcrumb li {
 .menu li > ul {
   display: none;
   position: fixed;
+  line-height: 25px;
   z-index: 999;
   top: 104px;
 }
@@ -365,10 +393,6 @@ ol.breadcrumb li {
 .menu li > ul li a {
   display: block;
   margin: auto;
-}
-
-#account-nav {
-  color: white;
 }
 
 #account-nav ul {
@@ -412,6 +436,7 @@ ol.breadcrumb li {
 }
 
 #extra-nav ul.menu li.menu-item {
+  line-height: 50px;
   padding-right: 15px;
 }
 
@@ -445,10 +470,6 @@ ol.breadcrumb li {
   float: left;
 }
 
-.submenu a:hover {
-  color: #54c2d0 !important;
-}
-
 p#text-general {
 	width: 690px;
 }
@@ -475,7 +496,6 @@ ul.acordion li {
 ul.acordion li div {
   display: block;
   height: 120px;
-  cursor: pointer;
 }
 
 ul.acordion li div span {
@@ -509,11 +529,6 @@ select.categories-products {
   float: left;
   width: 320px;
   margin: 10px;
-}
-
-p.subtitulos-login {
-  color: #0072c0;
-  font-size: 18px;
 }
 
 .error-login-2 {
@@ -589,10 +604,6 @@ p.subtitulos-login {
   height: 34px;
 }
 
-.ju-sliderbutton-left {
-  text-align: left;
-}
-
 .ju-sliderbutton .ju-sliderbutton-text {
   margin-right: 5px;
   width: 200px;
@@ -613,13 +624,13 @@ p.subtitulos-login {
 
 .ju-sliderbutton .ju-sliderbutton-slider .ui-slider-handle {
   height: 28px;
-  border: none;
   top: 19px;
   width: 38px;
   margin-left: -8px;
 }
 
 .tooltipster-default .tooltipster-content {
+  line-height: 16px;
   padding: 8px 10px;
   overflow: hidden;
 }
@@ -768,7 +779,6 @@ span#more-info a p b {
   padding-left: 10px;
   line-height: 12px;
   height: 12px;
-	white-space: nowrap;
 	overflow: hidden;
 }
 
@@ -833,7 +843,6 @@ div.filter li a {
   float: right;
   position: relative;
   top: -60px;
-  font-size: 20px !important;
 }
 
 ul.filter-2 li {
@@ -1076,8 +1085,6 @@ li.filter-1 a {
 
 .widget-rrhh {
   padding: 10px;
-  color: white;
-  font-weight: bold;
   list-style: none;
 }
 
@@ -1183,10 +1190,6 @@ ul#brands li p img {
   margin-top: 10px;
 }
 
-#text-product-detail h2 {
-  font-weight: bold;
-}
-
 #text-product-detail p {
   padding: 0;
 }
@@ -1249,7 +1252,6 @@ ul#brands li p img {
 
 #lotes-contenedor-2 table td {
   overflow: hidden;
-  text-align: center;
 }
 
 #table-text-lotes tbody tr {
@@ -1792,21 +1794,18 @@ li#select-empresa select {
 
 #datos-principales {
   width: auto;
-  border: solid 1px;
   float: left;
   margin-left: 2px;
 }
 
 #datos-principales td {
   padding: 5px;
-  border: solid 1px;
   max-width: 115px !important;
   min-width: 115px !important;
 }
 
 #datos-principales-OS {
   width: auto;
-  border: solid 1px;
   float: left;
   margin-left: 33px;
 }
@@ -1819,13 +1818,11 @@ li#select-empresa select {
 
 .tabla-lotesNF {
   width: auto;
-  border: solid 1px;
   float: left;
 }
 
 .tabla-lotesNF th {
   padding: 5px;
-  border: solid 1px;
   max-width: 80px;
   min-width: 80px;
 }
@@ -1987,7 +1984,6 @@ li#select-empresa select {
 }
 
 #Datos3 td {
-  text-align: right;
   padding: 5px;
 }
 
@@ -2121,7 +2117,6 @@ li#select-empresa select {
 
 #lotesConfirmacion-4 div {
   float: left;
-  border: none;
 }
 
 #lotesConfirmacion-long {
@@ -2345,7 +2340,6 @@ li#select-empresa select {
 .OS-icon {
   max-width: 20px !important;
   min-width: 20px !important;
-  font-size: 18px;
 }
 
 .OS-icon span {
@@ -2501,7 +2495,8 @@ span.jPag-snext-img {
 
 .thead-edc #Datos1 {
   width: 660px;
-  float: left;
+	float: left;
+  margin-top: 20px;
 }
 
 .thead-edc #Datos2 {
@@ -2755,7 +2750,6 @@ span.jPag-snext-img {
 
 #datos-principales-AU {
   width: auto;
-  border: solid 1px;
   float: left;
   margin-left: 2px;
 }
@@ -2772,7 +2766,6 @@ span.jPag-snext-img {
 
 .tooltip-funcionesAU {
   min-width: 20px;
-  opacity: 1 !important;
   padding: 5px;
 }
 
@@ -2996,7 +2989,6 @@ button.green {
   float: left;
   padding: 5px;
   vertical-align: middle;
-  font-size: 13px;
 }
 
 #campos-1 span input {
@@ -3033,7 +3025,6 @@ button.green {
 .lapiz-mod {
   float: left !important;
   width: 17px !important;
-  border: none !important;
   line-height: 3;
 }
 
@@ -3110,9 +3101,7 @@ button.green {
   position: relative;
   overflow: hidden;
   max-width: 200px;
-  white-space: nowrap;
   padding-top: 3px;
-  font-size: 14px;
 }
 
 #contend-pagination .cajonNum {
@@ -3348,11 +3337,10 @@ button.green {
 	z-index: -1;
 	padding-left: 2px;
 	margin-top: -2px !important;
-	-webkit-transform: translateY(-50px);
-	-moz-transform: translateY(-50px);
-	-o-transform: translateY(-50px);
-	-ms-transform: translateY(-50px);
-	transform: translateY(-50px);
+}
+
+#nav2 ul li:hover > ul {
+	margin-top: -2px !important;
 }
 
 #nav2 ul li ul li {
