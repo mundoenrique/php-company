@@ -11,6 +11,7 @@
 class NOVO_Controller extends CI_Controller {
 	protected $includeAssets;
 	protected $countryUri;
+	protected $skin;
 	protected $views;
 	protected $render;
 	public $accessControl;
@@ -23,15 +24,6 @@ class NOVO_Controller extends CI_Controller {
 		$this->includeAssets = new stdClass();
 		$this->countryUri = $this->uri->segment(1, 0);
 		$this->render = new stdClass();
-
-		$this->includeAssets->cssFiles = [
-			"general"
-		];
-		$this->includeAssets->jsFiles = [
-			"third_party/jquery-3.3.1",
-			"third_party/jquery-ui-1.12.1",
-			"third_party/html5"
-		];
 		$this->optionsCheck();
 	}
 
@@ -46,6 +38,23 @@ class NOVO_Controller extends CI_Controller {
 		$this->render->favicon = $faviconData->favicon;
 		$this->render->ext = $faviconData->ext;
 		$this->render->countryUri = $this->countryUri;
+		switch($this->countryUri) {
+			case 'bp':
+				$this->skin = 'pichincha';
+				break;
+			default:
+				$this->skin = 'novo';
+		}
+		$this->includeAssets->cssFiles = [
+			"general-structure",
+			"$this->skin-appearance",
+			"general"
+		];
+		$this->includeAssets->jsFiles = [
+			"third_party/html5",
+			"third_party/jquery-3.4.0",
+			"third_party/jquery-ui-1.12.1"
+		];
 		$this->lang->load('erroreseol');
 		$this->lang->load('dashboard');
 	}

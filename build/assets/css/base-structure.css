@@ -1,0 +1,3375 @@
+html, body {
+	margin: 0;
+	min-height: 100%;
+  position: relative;
+}
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+nav,
+section {
+  display: block;
+}
+
+.selectorNotificacion{
+  width: 500px;
+  margin-left: 5px;
+}
+
+.classHrNoti{
+	width: 512px;
+  float: left;
+}
+
+audio,
+canvas,
+video {
+  display: inline-block;
+}
+
+audio:not([controls]) {
+  display: none;
+  height: 0;
+}
+
+[hidden] {
+  display: none;
+}
+
+hr {
+  box-sizing: content-box;
+  height: 0;
+}
+
+sub,
+sup {
+  font-size: 75%;
+}
+
+sup {
+  top: -0.5em;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+legend {
+  padding: 0;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+  box-sizing: border-box;
+  padding: 0;
+}
+
+input[type="search"] {
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+}
+
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+  padding: 0;
+}
+
+textarea {
+  overflow: auto;
+  vertical-align: top;
+}
+
+svg:not(:root) {
+  overflow: hidden;
+}
+
+figure {
+  margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  margin: 0 0 10px;
+}
+
+h2 {
+  margin: 0 0 10px;
+}
+
+p {
+  margin: 2px 0 10px;
+  text-align: left;
+}
+
+nav ul.menu li.menu-item {
+  float: left;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav ul.menu li.menu-item a {
+  display: block;
+  font-weight: normal;
+}
+
+.separator {
+  clear: both;
+  height: 1px;
+  overflow: hidden;
+}
+
+form {
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+}
+
+fieldset {
+  border: 0;
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+}
+
+input,
+select,
+textarea {
+  margin: 0 0 5px;
+  padding: 10px;
+}
+
+button {
+  float: right;
+  padding: 0 10px;
+  margin-left: 10px;
+}
+
+.file-field {
+  float: right;
+}
+
+.btn-sidebar {
+	padding: 0px 92px;
+	margin: 15px auto;
+}
+
+#head {
+  height: 60px;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 999;
+}
+
+#head-wrapper,
+#wrapper,
+#foot-wrapper {
+  margin: 0 auto;
+  width: 1000px;
+}
+
+#head-wrapper {
+  height: 60px;
+  margin: 0 auto;
+  width: 940px;
+}
+
+#wrapper {
+  clear: both;
+  padding: 105px 0 110px;
+}
+
+.no-main-nav #wrapper {
+  padding-top: 65px;
+}
+
+#content,
+#sidebar {
+  padding: 20px 10px;
+}
+
+#content {
+  float: left;
+  width: 700px;
+}
+
+.full-width #content {
+  float: none;
+  width: 100%;
+}
+
+.breadcrumb {
+  width: auto;
+  padding: 0;
+  margin-top: 10px;
+}
+
+ol.breadcrumb li {
+  display: inline;
+  padding: 0;
+}
+
+#sidebar {
+  float: right;
+  width: 250px;
+}
+
+#sidebar-cambioclave {
+  float: left;
+  width: 220px;
+}
+
+#widget-area .widget h2.widget-title {
+  margin: 0;
+  padding: 0 10px;
+}
+
+#widget-area .widget h2.widget-title span.icon:before {
+  padding-right: 5px;
+}
+
+#widget-area .widget .widget-content {
+  overflow: hidden;
+  padding: 10px;
+}
+
+#widget-area .widget .widget-content input, #widget-area .widget .widget-content select, #widget-area .widget .widget-content textarea {
+  width: 208px;
+}
+
+.foot {
+  clear: both;
+  height: 110px;
+  margin-top: 10px;
+  overflow: hidden;
+}
+
+#ownership {
+  display: block;
+	float: right;
+  height: 25px;
+  margin: 12px 10px 13px;
+  overflow: hidden;
+  text-align: right;
+  text-indent: 100%;
+  white-space: nowrap;
+  width: 160px;
+}
+
+#credits {
+  float: left;
+  height: 50px;
+  overflow: hidden;
+  padding: 0 10px;
+  width: 700px;
+}
+
+#credits p {
+  margin: 0;
+}
+
+#nav-bar {
+  left: 0;
+  overflow: hidden;
+  position: fixed;
+  top: 65px;
+  width: 100%;
+  z-index: 999;
+}
+
+#status-disable {
+  padding: 0 10px;
+}
+
+#status-disable:hover {
+  padding: 0 10px;
+}
+
+#main-nav li:hover > ul {
+  display: block;
+}
+
+#main-nav li ul li {
+  position: relative;
+  left: -40px;
+  margin: 0;
+  padding: 0;
+  display: block;
+}
+
+#main-nav {
+  height: 40px;
+  margin: 0 auto;
+  overflow: hidden;
+  width: 960px;
+}
+
+#main-nav ul.menu {
+  float: left;
+  width: 960px;
+  overflow: hidden;
+}
+
+#main-nav ul.menu li.menu-item {
+  height: 40px;
+  float: left;
+}
+
+#main-nav ul.menu li.menu-item a {
+  padding: 0 10px;
+}
+
+.menu li > ul {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  top: 104px;
+}
+
+.menu li > ul:hover {
+  display: inline;
+}
+
+.menu li > ul li {
+  list-style: none;
+}
+
+.menu li > ul li a {
+  display: block;
+  margin: auto;
+}
+
+#account-nav {
+  color: white;
+}
+
+#account-nav ul {
+  float: right;
+  width: auto !important;
+  margin-top: 18px;
+
+}
+
+#account-nav ul li {
+  height: 20px;
+  margin-bottom: 5px;
+  margin-left: 20px;
+}
+
+#account-nav ul li a {
+  float: left;
+}
+
+.menu-item .settings {
+  float: right;
+}
+
+.menu-item .settings span {
+  float: right;
+}
+
+.menu-item .account {
+  float: left;
+}
+
+#extra-nav {
+  float: left;
+  overflow: hidden;
+  padding: 0 10px;
+}
+
+#extra-nav ul.menu {
+  float: left;
+  height: 50px;
+}
+
+#extra-nav ul.menu li.menu-item {
+  padding-right: 15px;
+}
+
+.config-menuH {
+  min-width: 20px;
+  padding: 5px;
+  z-index: 32767;
+  position: absolute;
+  top: 41px;
+  left: 939.5px;
+  display: none;
+}
+
+.config-menuH ul {
+  float: left;
+  padding-left: -50px;
+}
+
+.config-menuH li {
+  list-style: none;
+  padding: 5px !important;
+}
+
+.menu-item {
+  list-style: none !important;
+  padding: 0px;
+}
+
+.submenu {
+  margin-left: -37px !important;
+  float: left;
+}
+
+.submenu a:hover {
+  color: #54c2d0 !important;
+}
+
+p#text-general {
+	width: 690px;
+}
+
+p#text-general-condiciones {
+  width: 100%;
+}
+
+ul.acordion {
+  width: 100%;
+  overflow: hidden;
+  padding: 0;
+}
+
+ul.acordion li {
+  list-style: none;
+  height: 120px;
+  width: 135px;
+  display: inline;
+  float: left;
+  padding-right: 5px;
+}
+
+ul.acordion li div {
+  display: block;
+  height: 120px;
+  cursor: pointer;
+}
+
+ul.acordion li div span {
+  padding-top: 35px;
+  padding-right: 5px;
+  float: right;
+}
+
+ul.acordion li:last-child {
+  padding: 0;
+}
+
+ul.acordion li p {
+  padding: 0px 3px;
+}
+
+select.categories-products {
+  float: left;
+  margin: 6px 0 5px;
+  padding: 10px;
+}
+
+.text-izq {
+  float: left;
+  width: 320px;
+  margin: 10px;
+}
+
+.text-der {
+  float: left;
+  width: 320px;
+  margin: 10px;
+}
+
+p.subtitulos-login {
+  color: #0072c0;
+  font-size: 18px;
+}
+
+.error-login-2 {
+  width: auto;
+  height: auto;
+  float: left;
+  padding: 5px;
+}
+
+.error-login-2 p {
+  padding: 20px;
+}
+
+.flecha {
+  margin: -5px 0 7px 10px;
+}
+
+.titulo-login-desc {
+  padding: 70px 3px 0 3px !important;
+}
+
+.desc-func {
+  display: none;
+}
+
+.kwicks-selected .titulo-login-desc, .kwicks-expanded .titulo-login-desc {
+  padding: 3px 3px 0 3px !important;
+}
+
+.error-login-2:after,
+.error-login-2:before {
+  content: '';
+  height: 0;
+  position: absolute;
+  width: 0;
+}
+
+.kwicks {
+  display: block;
+  list-style-type: none;
+  list-style: none;
+  position: relative;
+  margin: 0;
+  padding: 0;
+}
+
+.kwicks > * {
+  display: block;
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
+}
+
+.kwicks.kwicks-processed > * {
+  margin: 0;
+  position: absolute;
+}
+
+.kwicks-horizontal > * {
+  float: left;
+}
+
+.kwicks-horizontal > :first-child {
+  margin-left: 0;
+}
+
+.kwicks-vertical > :first-child {
+  margin-top: 0;
+}
+
+.ju-sliderbutton {
+  height: 34px;
+}
+
+.ju-sliderbutton-left {
+  text-align: left;
+}
+
+.ju-sliderbutton .ju-sliderbutton-text {
+  margin-right: 5px;
+  width: 200px;
+}
+
+.ju-sliderbutton-left .ju-sliderbutton-text {
+  margin-right: 0px;
+  margin-left: 1em;
+}
+
+.ju-sliderbutton .ju-sliderbutton-slider {
+  height: 0px;
+  margin-top: -50px;
+  margin-left: 12px;
+  margin-right: 35px;
+}
+
+.ju-sliderbutton .ju-sliderbutton-slider .ui-slider-handle {
+  height: 28px;
+  border: none;
+  top: 19px;
+  width: 38px;
+  margin-left: -8px;
+}
+
+.tooltipster-default .tooltipster-content {
+  padding: 8px 10px;
+  overflow: hidden;
+}
+
+.tooltipster-icon {
+  margin-left: 4px;
+}
+
+.login-inactive {
+  float: left;
+  padding: 5px;
+}
+
+.login-inactive p {
+  padding: 20px;
+}
+
+.login-available {
+  float: left;
+  padding: 5px;
+}
+
+.login-available p {
+  padding: 20px;
+}
+
+.content-endSession button {
+  margin: auto 450px auto auto;
+}
+
+.content-endSession p {
+  margin: 2px 0 10px;
+  padding: 40px;
+}
+
+.content-404 button {
+  margin: auto 433px auto auto;
+}
+
+.content-404 p {
+  margin: 2px 0 10px;
+  padding: 40px;
+}
+
+#search-filter {
+  margin: 0;
+  display: none;
+}
+
+ul.dashboard-companies {
+  float: left;
+  overflow: hidden;
+  width: 960px;
+  display: inline;
+  padding-top: 20px;
+  margin: 0px;
+  z-index: 0;
+}
+
+li.space-companies {
+  width: 280px;
+  padding-right: 10px;
+  padding-left: 10px;
+  list-style: none;
+  float: left;
+  padding-bottom: 20px;
+}
+
+a.style-companies-item {
+  width: 260px;
+  height: 120px;
+  display: block;
+}
+
+a.style-companies-item span {
+  float: left;
+  padding-left: 10px;
+  padding-top: 40px;
+}
+
+.style-companies-item-activa {
+  display: block;
+}
+
+.style-companies-item-activa span {
+  float: left;
+  padding-left: 10px;
+  padding-top: 40px;
+}
+
+#more-info {
+  width: 260px;
+  height: 140px;
+  list-style: none;
+  position: absolute;
+  display: none;
+  z-index: 3;
+}
+
+#more-info span {
+  padding-right: 10px;
+}
+
+#more-info:after,
+#more-info:before {
+  content: '';
+  height: 0;
+  position: absolute;
+  width: 0;
+}
+
+#more-info:after {
+  top: -9px;
+  z-index: 10;
+  left: 0;
+}
+
+#more-info:before {
+  top: -10px;
+  z-index: 8;
+}
+
+span#more-info a {
+  padding: 5px;
+}
+
+span#more-info a p b {
+  padding-right: 5px;
+  padding-left: 5px;
+}
+
+#text-companies-T {
+  float: right;
+  padding-right: 10px;
+  width: 190px;
+  margin-top: 10px;
+  padding-left: 10px;
+  line-height: 14px;
+  font-size: 14px;
+  height: 14px;
+  overflow: hidden;
+}
+
+#text-companies {
+  float: right;
+  padding-right: 10px;
+  width: 190px;
+  padding-left: 10px;
+  height: 12px;
+  text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+#text-companies-2 {
+  float: right;
+  width: 200px;
+  margin-right: 10px;
+}
+
+.filter {
+  width: 940px;
+  height: 51px;
+  float: left;
+  clear: both;
+  margin-bottom: 10px;
+  z-index: 1;
+  position: relative;
+  padding-right: 10px;
+}
+
+.filter-2 {
+  width: 898px;
+  height: 51px;
+  float: left;
+  clear: both;
+  margin: 0px;
+  z-index: 1;
+  position: relative;
+  padding-right: 10px;
+}
+
+.lastsession {
+  float: right;
+  width: auto;
+  clear: both;
+  margin-right: 10px;
+  padding-bottom: 20px;
+}
+
+div.filter li {
+  list-style: none;
+  width: auto;
+  float: left;
+  margin-top: 7px;
+}
+
+div.filter li a {
+  padding: 10px 5px 10px 5px;
+  width: auto !important;
+  display: block;
+}
+
+.filter-ul {
+  float: right;
+  margin-top: 0;
+  position: absolute;
+  right: 10px;
+  overflow: hidden;
+}
+
+#txt-full-view {
+  float: right;
+  position: relative;
+  top: -60px;
+  font-size: 20px !important;
+}
+
+ul.filter-2 li {
+  list-style: none;
+  width: auto;
+  float: left;
+  margin-top: 7px;
+}
+
+ul.filter-2 li a {
+  padding: 10px 5px 10px 5px;
+  width: auto;
+  float: right;
+}
+
+ul.filter-2 li a:hover {
+  color: #197abc;
+}
+
+li.filter-3 a {
+  padding: 10px 5px 10px 5px;
+  display: block;
+}
+
+li.filter-1 a {
+  padding: 10px 5px 10px 5px;
+}
+
+#sidebar-products, .aviso {
+  width: 220px;
+  float: right;
+  margin-right: 10px;
+}
+
+#widget-info {
+  padding: 10px;
+  float: left;
+}
+
+#content-products {
+  width: 960px;
+  padding: 20px 2px;
+}
+
+#content-condiciones {
+  width: 940px;
+  padding: 20px 10px;
+}
+
+#content-privacidad {
+  width: 940px;
+  padding: 20px 10px;
+  float: left;
+}
+
+.margtop10{
+	margin-top: 10px;
+}
+
+.text-general-privacidad-1 {
+  width: 600px;
+  height: auto;
+  float: left;
+  margin: 5px;
+}
+
+.text-general-privacidad-1 p {
+  margin: 10px;
+  float: left;
+}
+
+.text-general-privacidad-2 {
+  width: 600px;
+  height: auto;
+  float: left;
+  margin: 5px;
+}
+
+.text-general-privacidad-2 p {
+  margin: 10px;
+  float: left;
+}
+
+.last-privacidad {
+  clear: both;
+  float: left;
+  width: 800px;
+  height: auto;
+}
+
+#widget-info-1 {
+  float: left;
+  padding: 10px;
+  width: 200px;
+  overflow: hidden;
+}
+
+#widget-info-1 span {
+  float: left;
+  margin-right: 5px;
+}
+
+#widget-info-1 p {
+  float: left;
+}
+
+#widget-info-2 {
+  float: left;
+  padding: 10px;
+  width: 200px;
+  overflow: hidden;
+}
+
+.important-notice {
+  float: left;
+  padding: 10px;
+  width: 200px;
+  overflow: hidden;
+}
+
+#widget-info-2 button {
+  margin: 10px 25px;
+}
+
+.important-notice button {
+  margin: 10px 25px;
+}
+
+#products-general {
+  width: 690px;
+  float: left;
+  padding: 10px;
+}
+
+#products-list {
+  width: auto;
+  height: auto;
+}
+
+#products-list li {
+  float: left;
+  margin-left: -35px;
+  height: 80px;
+  list-style: none;
+  width: 680px;
+  margin-bottom: 5px;
+}
+
+#products-list li span.icon {
+  float: right;
+}
+
+#products-list li button {
+  float: right;
+  margin-top: 20px;
+  margin-right: 15px;
+}
+
+#products-list li img {
+  margin: 0px;
+  float: left;
+}
+
+.info-producto-1 {
+	margin-bottom: 3px;
+  padding-top: 20px;
+  width: 300px;
+  float: left;
+}
+
+.text-category {
+  width: 325px;
+  float: left;
+}
+
+.color-product-rrhh {
+  float: left;
+  height: 60px;
+  padding: 10px;
+}
+
+.color-product-rrhh span {
+  padding-top: 20px;
+  float: left;
+}
+
+.color-product-admon {
+  float: left;
+  height: 60px;
+  padding: 10px;
+}
+
+.color-product-admon span {
+  padding-top: 20px;
+  float: left;
+}
+
+.color-product-mercadeo {
+  float: left;
+  height: 60px;
+  padding: 10px;
+}
+
+.color-product-mercadeo span {
+  padding-top: 20px;
+  float: left;
+}
+
+.color-product-default {
+  float: left;
+  height: 60px;
+  padding: 10px;
+}
+
+.color-product-default span {
+  padding-top: 20px;
+  float: left;
+}
+
+#text-desc {
+  width: 300px;
+  height: 80px;
+  float: left;
+}
+
+#img-1 {
+  width: 80px;
+  height: 80px;
+  float: left;
+}
+
+#img-2 {
+  width: 90px;
+  height: 80px;
+  float: left;
+}
+
+#rrhh {
+  width: 210px;
+  float: left;
+  margin: 5px 8px;
+  padding: 0px;
+}
+
+.widget-rrhh {
+  padding: 10px;
+  color: white;
+  font-weight: bold;
+  list-style: none;
+}
+
+#admon {
+  width: 210px;
+  float: left;
+  margin: 5px 8px;
+  padding: 0px;
+}
+
+.widget-admon {
+  padding: 10px;
+  list-style: none;
+}
+
+#mercadeo {
+  width: 210px;
+  float: left;
+  margin: 5px 8px;
+  padding: 0px;
+}
+
+.widget-mercadeo {
+  padding: 10px;
+  list-style: none;
+}
+
+.info-programa {
+  float: left;
+  padding: 10px 5px 10px 5px;
+  width: 200px;
+  list-style: none;
+}
+
+.info-programa p {
+  width: 120px;
+  float: left;
+}
+
+.info-programa span {
+  float: left;
+}
+
+#content-product-detail {
+  width: 690px;
+  float: left;
+  padding: 10px;
+}
+
+#img-product {
+  width: 700px;
+  height: 154px;
+  float: left;
+  display: block;
+}
+
+#img-product p {
+  display: block;
+}
+
+#img-product p img {
+  float: left;
+  width: auto;
+  height: auto;
+  position: relative;
+  left: 200px;
+}
+
+ul#brands {
+  padding: 10;
+  float: left;
+}
+
+ul#brands li {
+  width: 100px;
+  height: 70px;
+  padding: 10px;
+  list-style: none;
+  display: inline;
+  float: left;
+  padding-right: 49px;
+}
+
+ul#brands li p {
+  width: 100px;
+  height: 70px;
+  display: block;
+}
+
+ul#brands li p img {
+  float: left;
+}
+
+#text-product-detail {
+  width: 620px;
+  float: left;
+  padding: 20px 20px 10px 50px;
+}
+
+#text-product-detail button {
+  float: left;
+  margin-right: 10px;
+  margin-top: 10px;
+}
+
+#text-product-detail h2 {
+  font-weight: bold;
+}
+
+#text-product-detail p {
+  padding: 0;
+}
+
+#text-product-detail p span {
+  padding-right: 5px;
+}
+
+#lotes-general {
+  float: left;
+  padding: 10px;
+  width: 690px;
+  margin-left: -10px;
+}
+
+#lotes-contenedor {
+  float: left;
+  width: 640px;
+  padding: 10px;
+}
+
+#lotes-contenedor table {
+  float: left;
+}
+
+#lotes-contenedor-autorizacion {
+  float: left;
+  width: 640px;
+  padding: 5px;
+  margin: 5px;
+}
+
+#lotes-contenedor-consulta {
+  float: left;
+  width: 680px;
+  padding: 5px;
+  margin: 5px;
+}
+
+#lotes-contenedor-2 {
+  float: left;
+  width: 640px;
+  padding: 10px;
+}
+
+#lotes-contenedor-2-auth {
+  float: left;
+  width: 640px;
+  padding: 10px;
+}
+
+#lotes-contenedor-2 table {
+  float: left;
+}
+
+#lotes-contenedor-2 table tr {
+  margin-left: 38px;
+  float: left;
+}
+
+#lotes-contenedor-2 table td {
+  overflow: hidden;
+  text-align: center;
+}
+
+#table-text-lotes tbody tr {
+  margin-bottom: 10px;
+  float: left;
+  margin: 0px 5px;
+  width: 610px;
+  line-height: 38px;
+  height: 38px;
+}
+
+#table-text-lotes_length {
+  float: left;
+  margin-left: 45px;
+}
+
+#table-text-lotes_filter {
+  float: right;
+  margin-right: 25px;
+}
+
+#table-text-lotes_info {
+  float: left;
+  margin: 5px;
+}
+
+#table-text-lotes_paginate {
+  float: right;
+  margin: 5px 18px 0 0;
+}
+
+#table-text-lotes_paginate a {
+  margin: 5px;
+}
+
+.more-empr {
+  float: right;
+  margin-right: 420px;
+  padding-bottom: 10px;
+}
+
+.dataTables_length {
+  float: right;
+  margin-right: 20px;
+}
+
+.dataTables_filter {
+  float: right;
+  margin-right: 20px;
+}
+
+.dataTables_paginate {
+  float: right;
+  margin: 10px;
+}
+
+.dataTables_paginate a {
+  margin: 5px;
+}
+
+.dataTables_info {
+  float: left;
+  margin: 10px;
+}
+
+#table-text-lotes thead tr {
+  margin-left: 42px;
+  float: left;
+  height: 27px;
+}
+
+#table-text-lotes thead th {
+  max-width: 100px;
+  min-width: 100px;
+}
+
+#table-text-lotes thead th:last-child {
+  padding: 5px;
+}
+
+#table-text-lotes tbody td#icon-batchs {
+  width: 35px;
+  min-width: 35px;
+  max-width: 35px;
+}
+
+#table-text-lotes #icons-options {
+  max-width: 100px;
+  min-width: 100px;
+  float: left;
+}
+
+#table-text-lotes td {
+  max-width: 100px;
+  min-width: 100px;
+  float: left;
+  height: 38px;
+}
+
+.table-text-aut tbody tr {
+  margin-bottom: 10px;
+  float: left;
+  margin: 0px 5px;
+  line-height: 35px;
+}
+
+.table-text-aut thead tr {
+  margin-left: 6px;
+  float: left;
+}
+
+.table-text-aut thead th {
+  max-width: 60px;
+  min-width: 60px;
+  padding: 3px;
+}
+
+.table-text-aut tbody td#icon-batchs {
+  width: 35px;
+  min-width: 35px;
+  max-width: 35px;
+}
+
+.table-text-aut #icons-options {
+  max-width: 58px;
+  min-width: 58px;
+  float: left;
+}
+
+.table-text-aut td {
+  max-width: 60px;
+  min-width: 60px;
+  float: left;
+  padding: 3px;
+  height: 35px;
+  line-height: 18px;
+}
+
+.table-text-aut #td-nombre-2 {
+  max-width: 120px !important;
+  min-width: 120px !important;
+}
+
+#check-all {
+  float: left;
+  height: 30px;
+  margin: 10px 0 10px 15px;
+}
+
+#check-all em {
+  margin-left: 10px;
+}
+
+#table-text-TM {
+  width: 660px;
+  overflow: hidden;
+}
+
+#table-text-TM tbody tr {
+  margin-bottom: 10px;
+  float: left;
+  margin: 5px;
+  width: 586px;
+  line-height: 42px;
+}
+
+#table-text-TM tbody tr:hover {
+  background: #FFF;
+}
+
+#table-text-TM thead tr {
+  margin-left: 33px;
+  float: left;
+}
+
+#table-text-TM thead th {
+  max-width: 60px;
+  min-width: 60px;
+  padding: 3px;
+}
+
+#table-text-TM tbody td#icon-batchs {
+  width: 35px;
+  min-width: 35px;
+  max-width: 35px;
+}
+
+#table-text-TM #icons-options {
+  max-width: 40px;
+  min-width: 40px;
+  float: left;
+}
+
+#table-text-TM td {
+  max-width: 60px;
+  min-width: 60px;
+  float: left;
+  padding: 3px;
+}
+
+#table-lote-detail {
+  float: left;
+  width: 650px;
+}
+
+#table-lote-detail tbody tr {
+  margin-bottom: 10px;
+  float: left;
+  margin: 0px 5px;
+  line-height: 20px;
+}
+
+#table-lote-detail thead tr {
+  margin-left: 10px;
+  float: left;
+}
+
+#table-lote-detail thead th {
+  max-width: 70px;
+  min-width: 70px;
+  padding: 3px;
+}
+
+#table-lote-detail tbody td#icon-batchs {
+  width: 35px;
+  min-width: 35px;
+  max-width: 35px;
+}
+
+#table-lote-detail #icons-options {
+  max-width: 20px;
+  min-width: 20px;
+  float: left;
+}
+
+#table-lote-detail td {
+  max-width: 70px;
+  min-width: 70px;
+  float: left;
+  padding: 3px;
+}
+
+#table-lote-detail > #td-nombre-2 {
+  max-width: 150px !important;
+  min-width: 150px !important;
+}
+
+#td-full {
+  max-width: 300px !important;
+  min-width: 300px !important;
+  float: left;
+}
+
+.full-width {
+  float: none;
+  width: 100%;
+}
+
+.table-GC {
+  float: left;
+}
+
+.table-GC tbody tr {
+  margin-bottom: 10px;
+  float: left;
+  margin: 0 5px;
+  width: 875px;
+  line-height: 22px;
+}
+
+.table-GC thead tr {
+  margin-left: 12px;
+  float: left;
+  width: 875px;
+}
+
+tr.GC-first {
+  float: left;
+}
+
+tr.GC-first th {
+  float: left;
+  max-width: 283px !important;
+  min-width: 283px !important;
+}
+
+.table-GC thead th {
+  max-width: 60px;
+  min-width: 60px;
+  padding: 10px 3px;
+  float: left;
+}
+
+.table-GC tbody td#icon-batchs {
+  width: 35px;
+  min-width: 35px;
+  max-width: 35px;
+}
+
+.table-GC #icons-options {
+  max-width: 20px;
+  min-width: 20px;
+  float: left;
+}
+
+.table-GC td {
+  max-width: 60px;
+  min-width: 60px;
+  float: left;
+  padding: 3px;
+}
+
+.table-GC tfoot tr {
+  margin-left: 10px;
+  float: left;
+  width: 875px;
+  line-height: 10px;
+}
+
+.table-GC tfoot th {
+  max-width: 60px;
+  min-width: 60px;
+  padding: 10px 3px;
+  float: left;
+}
+
+.GC-long {
+  max-width: 100px !important;
+  min-width: 100px !important;
+}
+
+.GC-Medium {
+  max-width: 90px !important;
+  min-width: 90px !important;
+}
+
+.checkbox-select {
+  max-width: 20px !important;
+  min-width: 20px !important;
+  padding: 3px;
+}
+
+#icon-batchs span {
+  margin: 0px;
+}
+
+#td-nombre-2 {
+  max-width: 150px !important;
+  min-width: 150px !important;
+}
+
+#td-nombre {
+  max-width: 150px !important;
+  min-width: 150px !important;
+}
+
+#td-empresa {
+  width: 100px;
+  max-width: 100px !important;
+  min-width: 100px !important;
+}
+
+#tabs {
+  float: left;
+}
+
+#tabs-lotes {
+  float: left;
+}
+
+.tabs-lotes {
+  width: 100px;
+  height: 20px;
+  padding: 5px;
+  float: left;
+  margin-right: 2px;
+}
+
+.tabs-contenedor {
+  width: 670px;
+  float: left;
+  height: auto;
+  padding: 10px;
+}
+
+.info-lotes-a {
+  width: 90px;
+  float: left;
+  padding: 5px;
+}
+
+.info-lotes-b {
+  width: 270px;
+  float: left;
+  padding-left: 20px;
+}
+
+.info-lotes-b h5, .info-lotes-a h5, #selection-1 h5, #selection-2 h5 {
+  padding-bottom: 5px;
+}
+
+#selection-1 {
+  width: 150px;
+  float: left;
+}
+
+#selection-1 select{
+  width: 150px;
+}
+
+#selection-2 {
+  width: 100px;
+  float: left;
+  margin-left: 10px;
+}
+
+#selection-2 button {
+  float: left;
+}
+
+#batchs-last {
+  width: 640px;
+  float: left;
+  padding: 10px;
+}
+
+#batchs-last input {
+  margin-left: 70px;
+  width: 125px;
+}
+
+#batchs-last select {
+  margin-top: 0px;
+  float: left;
+}
+
+#userfile {
+  margin: 0px !important;
+}
+
+.input-TM {
+  margin-left: 270px !important;
+}
+
+#top-batchs {
+  width: 640px;
+  height: 30px;
+  padding: 10px;
+  float: left;
+  margin-top: 10px;
+}
+
+#top-batchs span {
+  margin-right: 5px;
+}
+
+#top-batchs-CG {
+  width: 870px;
+  height: 30px;
+  padding: 10px;
+  float: left;
+  margin-top: 10px;
+}
+
+#top-batchs-CG span {
+  margin-right: 5px;
+}
+
+#batch-detail {
+  width: 630px;
+  height: 45px;
+  padding: 0px;
+  float: left;
+  margin: 5px;
+  overflow: hidden;
+}
+
+#icon-batchs {
+  width: 35px;
+  height: 45px;
+  padding: 0px;
+  float: left;
+}
+
+#icon-batchs input {
+  margin: 17px 0 5px 10px;
+  padding: 10px;
+}
+
+#icon-batchs span {
+  padding: 0;
+  float: left;
+}
+
+#text-batchs {
+  float: left;
+  height: auto;
+  width: 487px;
+  padding: 10px;
+}
+
+#text-batchs p {
+  float: left;
+  margin-left: 15px;
+}
+
+#options-batchs {
+  float: right;
+  height: 45px;
+  width: auto;
+}
+
+#options-batchs div {
+  float: left;
+  height: 45px;
+  width: 10px;
+  padding: 8px;
+}
+
+li#select-empresa select {
+  margin: 0px;
+}
+
+#select-all {
+  width: 35px;
+  height: 30px;
+  float: left;
+  margin-left: 5px;
+  margin-bottom: 5px;
+}
+
+#select-all input {
+  margin-left: 10px;
+  margin-top: 10px;
+}
+
+#button-autorize {
+  margin-right: 10px;
+}
+
+#tabla-datos-general {
+  width: 660px;
+}
+
+#datos-principales {
+  width: auto;
+  border: solid 1px;
+  float: left;
+  margin-left: 2px;
+}
+
+#datos-principales td {
+  padding: 5px;
+  border: solid 1px;
+  max-width: 115px !important;
+  min-width: 115px !important;
+}
+
+#datos-principales-OS {
+  width: auto;
+  border: solid 1px;
+  float: left;
+  margin-left: 33px;
+}
+
+#datos-principales-OS td {
+  padding: 5px;
+  max-width: 115px !important;
+  min-width: 115px !important;
+}
+
+.tabla-lotesNF {
+  width: auto;
+  border: solid 1px;
+  float: left;
+}
+
+.tabla-lotesNF th {
+  padding: 5px;
+  border: solid 1px;
+  max-width: 80px;
+  min-width: 80px;
+}
+
+#datos-empresa {
+  width: 100px;
+}
+
+#datos-empresa td {
+  padding: 5px;
+}
+
+#head-autorizacion {
+  width: 100%;
+  height: 20px;
+  padding: 10px 0;
+  margin-bottom: 10px;
+}
+
+.info-OD {
+  float: left;
+  padding: 5px;
+  width: auto;
+  margin: 5px;
+}
+
+.info-OD h5 {
+  padding-bottom: 5px;
+}
+
+.info-OD p {
+  float: left;
+}
+
+.info-OD input {
+  float: left;
+}
+
+#lotes-2 {
+  width: auto;
+  height: auto;
+  float: left;
+}
+
+#search-1 {
+  float: left;
+  width: 360px;
+}
+
+#search-1 span {
+  float: left;
+  padding: 0 10px 0 0;
+}
+
+#search-1 p {
+  vertical-align: middle;
+}
+
+#search-1 h5 {
+  width: 300px;
+}
+
+#search-1 select {
+  width: 310px;
+}
+
+#search-1 input {
+  vertical-align: middle;
+}
+
+#search-2 {
+  float: left;
+  width: 270px;
+  margin-top: -60px;
+}
+
+#search-2 span {
+  float: left;
+  width: 150px;
+}
+
+#search-2 input {
+  float: left;
+  margin-top: 5px;
+  margin-right: 5px;
+}
+
+#search-2 p {
+  float: left;
+}
+
+#search-2 h5 {
+  float: left;
+  width: 300px;
+}
+
+#search-2 select {
+  max-width: 256px;
+}
+
+#table-estadosdeCuenta {
+  width: 660px;
+  float: left;
+}
+
+#head-estadosdeCuenta {
+  height: 50px;
+  float: left;
+}
+
+#head-estadosdeCuenta td {
+  float: left;
+  padding: 10px 5px 0 5px;
+}
+
+#Datos1 {
+  width: 660px;
+  float: left;
+}
+
+#Datos1-long {
+  width: 210px !important;
+  min-width: 210px !important;
+  max-width: 210px !important;
+  height: 50px;
+}
+
+#Datos2 {
+  float: left;
+  width: 660px;
+}
+
+#Datos2 td {
+  padding: 5px;
+  line-height: 20px;
+}
+
+#Datos2-long {
+  width: 147px;
+  max-width: 147px;
+  min-width: 147px;
+}
+
+#Datos2-med {
+  width: 90px;
+  max-width: 90px;
+  min-width: 90px;
+}
+
+#Datos2-short {
+  width: 60px;
+  max-width: 60px;
+  min-width: 60px;
+}
+
+#Datos3 {
+  float: left;
+  width: 660px;
+}
+
+#Datos3 td {
+  text-align: right;
+  padding: 5px;
+}
+
+#Datos3-long {
+  width: 510px;
+  max-width: 510px;
+  min-width: 510px;
+}
+
+#Datos3-short {
+  width: 60px;
+  max-width: 60px;
+  min-width: 60px;
+}
+
+#detalleLote-content {
+  float: left;
+  margin: 5px;
+  padding: 5px;
+  width: 680px;
+}
+
+#fecha-carga {
+  clear: both;
+  float: right;;
+}
+
+#fecha-carga p {
+  float: left;
+  margin: 0 0 10px;
+}
+#fecha-carga h5 {
+  float: left;
+}
+
+#detalleLote-1 {
+  width: 630px;
+  height: auto;
+  float: left;
+  padding: 3px;
+  margin-bottom: 5px;
+}
+
+#detalleLote-1-nombre {
+  width: 160px;
+  float: left;
+  margin-right: 5px;
+}
+
+#detalleLote-1-RUC {
+  width: 220px;
+  float: left;
+  margin-right: 5px;
+}
+
+#detalleLote-2 {
+  width: 630px;
+  height: auto;
+  float: left;
+  padding: 3px;
+  margin-bottom: 5px;
+}
+
+#detalleLote-3 {
+  width: 630px;
+  height: auto;
+  float: left;
+  padding: 3px;
+  margin-bottom: 5px;
+}
+
+#detalleLote-4 {
+  width: 630px;
+  height: auto;
+  float: left;
+  padding: 3px;
+  margin-bottom: 5px;
+}
+
+#detalleLote-3-fecha {
+  width: 160px;
+  float: left;
+  margin-right: 5px;
+}
+
+#detalleLote-3-asu {
+  width: 220px;
+  float: left;
+  margin-right: 5px;
+}
+
+#detalleLote-2-ord {
+  width: 220px;
+  float: left;
+}
+
+#detalleLote-1-short {
+  width: 220px;
+  float: left;
+  height: auto;
+}
+
+#detalleLote-2-tipo {
+  width: 220px;
+  float: left;
+  margin-right: 5px;
+}
+
+#detalleLote-2-nro {
+  width: 160px;
+  float: left;
+  margin-right: 5px;
+}
+
+#lotesConfirmacion-1, #lotesConfirmacion-2, #lotesConfirmacion-3 {
+  float: left;
+  margin-bottom: 8px;
+  padding: 10px;
+  width: 600px;
+}
+
+#lotesConfirmacion-1 div, #lotesConfirmacion-2 div, #lotesConfirmacion-3 div {
+  float: left;
+}
+
+#lotesConfirmacion-4 {
+  width: 660px;
+  padding: 10px;
+  float: left;
+}
+
+#lotesConfirmacion-4 div {
+  float: left;
+  border: none;
+}
+
+#lotesConfirmacion-long {
+  width: 210px;
+  margin-right: 5px;
+}
+
+#lotesConfirmacion-short {
+  width: 160px;
+}
+
+#embozo1, #embozo2 {
+  width: 300px;
+}
+
+#embozo1 select, #embozo2 select {
+  width: 250px;
+}
+
+#view-results {
+  float: left;
+  clear: both;
+  margin-left: 10px;
+}
+
+#view-results span {
+  padding: 5px 3px 5px 3px;
+  float: left;
+}
+
+#select-small {
+  width: 70px !important;
+  float: left;
+}
+
+#div_tablaDetalle {
+  width: auto;
+  height: auto;
+  float: left;
+}
+
+.tabla-reportes {
+  width: 660px;
+}
+
+.tabla-reportes thead {
+  float: left;
+}
+
+.tabla-reportes thead th {
+  padding: 5px;
+  min-width: 115px;
+  max-width: 115px;
+}
+
+.tbody-reportes tr {
+  float: left;
+}
+
+.tbody-reportes tr td {
+  padding: 5px;
+  max-width: 115px;
+  min-width: 115px;
+}
+
+.tabla-TH {
+  width: 660px;
+}
+
+.tabla-TH thead {
+  float: left;
+}
+
+.tabla-TH thead th {
+  padding: 5px;
+  min-width: 300px !important;
+  max-width: 300px !important;
+}
+
+.tbody-TH tr {
+  float: left;
+}
+
+.tbody-TH tr td {
+  padding: 5px;
+  max-width: 300px !important;
+  min-width: 300px !important;
+}
+
+.tabla-sucursales {
+  width: 660px;
+}
+
+.tabla-sucursales thead {
+  float: left;
+}
+
+.tabla-sucursales thead th {
+  padding: 5px;
+  min-width: 150px;
+  max-width: 150px;
+}
+
+.tbody-sucursales tr {
+  float: left;
+}
+
+.tbody-sucursales tr td {
+  padding: 5px;
+  max-width: 150px;
+  min-width: 150px;
+}
+
+.tbody-sucursales tr:last-child {
+  max-width: 20px;
+  min-width: 20px;
+}
+
+.tbody-CC td {
+  max-width: 100px !important;
+  min-width: 100px !important;
+}
+
+.tbody-CC th {
+  max-width: 100px !important;
+  min-width: 100px !important;
+}
+
+.tbody-SC td {
+  max-width: 150px !important;
+  min-width: 150px !important;
+}
+
+.tbody-SC th {
+  max-width: 150px !important;
+  min-width: 150px !important;
+}
+
+.tbody-statuslotes td {
+  max-width: 83px !important;
+  min-width: 83px !important;
+}
+
+.tbody-statuslotes th {
+  max-width: 83px !important;
+  min-width: 83px !important;
+}
+
+.tabla-reportes-consulta {
+  width: 660px;
+}
+
+.tabla-reportes-consulta thead {
+  float: left;
+}
+
+.tabla-reportes-consulta thead th {
+  padding: 5px;
+  min-width: 80px !important;
+  max-width: 80px !important;
+}
+
+.tbody-reportes-consulta tr {
+  float: left;
+}
+
+.tbody-reportes-consulta tr td {
+  padding: 5px;
+  max-width: 80px !important;
+  min-width: 80px !important;
+}
+
+.input-PAGO {
+  margin-left: 360px !important;
+}
+
+.th-empresa {
+  max-width: 140px !important;
+  min-width: 140px !important;
+}
+
+.tabla-reportes-OS {
+  width: 660px;
+}
+
+.tabla-reportes-OS thead {
+  float: left;
+}
+
+.tabla-reportes-OS thead tr {
+  margin-left: 33px !important;
+}
+
+.tabla-reportes-OS thead th {
+  padding: 5px;
+  min-width: 80px;
+  max-width: 80px;
+}
+
+.tbody-reportes-OS tr {
+  float: left;
+}
+
+.tbody-reportes-OS tr td {
+  padding: 5px;
+  max-width: 80px;
+  min-width: 80px;
+}
+
+.botones-OS {
+  float: right;
+  width: 430px;
+  margin-top: 10px;
+}
+
+.botones-OS button {
+  float: left;
+  margin: 5px;
+}
+
+.OS-icon {
+  max-width: 20px !important;
+  min-width: 20px !important;
+  font-size: 18px;
+}
+
+.OS-icon span {
+  padding: 3px 0 3px 0;
+}
+
+#notice {
+  width: auto;
+  height: auto;
+  padding: 10px;
+  float: left;
+}
+
+#notice h1 {
+  line-height: 32px;
+}
+
+.isotope-hidden.isotope-item {
+  z-index: 1;
+}
+
+.sub-widget {
+  position: fixed;
+  top: 105px;
+  margin-left: 730px;
+  width: 230px;
+}
+
+#ui-tabs-1 #wrapper {
+  padding: 0px !important;
+}
+
+#ui-tabs-2 #wrapper {
+  padding: 0px !important;
+}
+
+.jPaginate {
+  height: 34px;
+  position: relative;
+  width: 100%;
+  float: left;
+}
+
+.jPaginate a {
+  line-height: 15px;
+  height: 18px;
+  padding: 2px 5px;
+  margin: 2px;
+  float: left;
+}
+
+.jPag-control-back {
+  position: absolute;
+  left: 0px;
+}
+
+.jPag-control-front {
+  position: absolute;
+  top: 0px;
+}
+
+ul.jPag-pages {
+  float: left;
+  list-style-type: none;
+  margin: 0px 0px 0px 0px;
+  padding: 0px;
+}
+
+ul.jPag-pages li {
+  display: inline;
+  float: left;
+  padding: 0px;
+  margin: 0px;
+}
+
+ul.jPag-pages li a {
+  float: left;
+  padding: 2px 5px;
+}
+
+span.jPag-current {
+  line-height: 15px;
+  height: 18px;
+  padding: 2px 5px;
+  margin: 2px;
+  float: left;
+}
+
+ul.jPag-pages li span.jPag-previous,
+ul.jPag-pages li span.jPag-next,
+span.jPag-sprevious,
+span.jPag-snext,
+ul.jPag-pages li span.jPag-previous-img,
+ul.jPag-pages li span.jPag-next-img,
+span.jPag-sprevious-img,
+span.jPag-snext-img {
+  height: 22px;
+  margin: 2px;
+  float: left;
+  line-height: 18px;
+}
+
+ul.jPag-pages li span.jPag-previous,
+ul.jPag-pages li span.jPag-previous-img {
+  margin: 2px 0px 2px 2px;
+  width: 10px;
+}
+
+ul.jPag-pages li span.jPag-next,
+ul.jPag-pages li span.jPag-next-img {
+  margin: 2px 2px 2px 0px;
+  width: 10px;
+}
+
+span.jPag-sprevious,
+span.jPag-sprevious-img {
+  margin: 2px 0px 2px 2px;
+  width: 15px;
+}
+
+span.jPag-snext,
+span.jPag-snext-img {
+  margin: 2px 2px 2px 0px;
+  width: 15px;
+}
+
+.sub {
+  position: fixed;
+  top: 105px;
+}
+
+.input-clave {
+  margin-left: 300px !important;
+}
+
+.input-claveLotes {
+  margin: 0px;
+}
+
+.dataTables_empty {
+  min-width: 600px !important;
+  max-width: 600px !important;
+}
+
+.load-widget {
+  margin-left: 70px;
+}
+
+.td-mensaje {
+  min-width: 600px !important;
+  max-width: 600px !important;
+}
+
+.thead-edc #Datos1 {
+  width: 660px;
+  float: left;
+}
+
+.thead-edc #Datos2 {
+  float: left;
+  width: 660px;
+}
+
+.thead-edc #Datos2 td {
+  padding: 5px;
+  line-height: 21px;
+}
+
+.thead-edc #Datos2-long {
+  width: 147px !important;
+  max-width: 147px !important;
+  min-width: 147px !important;
+}
+
+.thead-edc #Datos2-med {
+  width: 90px !important;
+  max-width: 90px !important;
+  min-width: 90px !important;
+}
+
+.thead-edc #Datos2-short {
+  width: 60px !important;
+  max-width: 60px !important;
+  min-width: 60px !important;
+}
+
+.montos-TM {
+  float: right;
+}
+
+.montos-TM p {
+  float: right;
+  margin: 10px;
+}
+
+.OSinfo {
+  margin-left: 31px;
+}
+
+.OSinfo td {
+  max-width: 65px !important;
+  min-width: 65px !important;
+}
+
+#btn-new-suc {
+  float: right !important;
+}
+
+#archivo {
+  margin-left: 5px;
+}
+
+.OS-margin-left {
+  margin-left: 31px;
+}
+
+.mensajes {
+  display: none;
+}
+
+#pswd_info {
+  position: absolute;
+  top: 230px;
+  right: 25px;
+  width: 320px;
+  padding: 15px;
+}
+
+#pswd_info h4 {
+  margin: 0 0 10px 0;
+  padding: 0;
+}
+
+#pswd_info::before {
+  content: "\25B2";
+  position: absolute;
+  top: -12px;
+  left: 45%;
+  line-height: 14px;
+  display: block;
+}
+
+.invalid {
+  padding-left: 22px;
+  line-height: 24px;
+}
+
+.valid {
+  padding-left: 22px;
+  line-height: 24px;
+  list-style: none;
+}
+
+#pswd_info {
+  display: none;
+}
+
+#pswd_info ul li {
+  list-style: disc;
+  padding: 0px;
+  margin: 0px;
+}
+
+#pswd_info h4 {
+  padding: 5px;
+}
+
+#pswd_info h5 {
+  line-height: 18px !important;
+  padding: 5px;
+}
+
+.r-filtro {
+  width: 150px;
+  float: left;
+  margin: 0px;
+  padding: 0px;
+}
+
+.r-filtro input {
+  float: left;
+}
+
+.r-filtro p {
+  float: left;
+}
+
+.jslista tr {
+  margin-left: 31px;
+}
+
+#search-3 {
+  float: left;
+}
+
+.tr-os-aut {
+  margin-left: 31px;
+}
+
+.table-bandeja tr {
+  height: 42px;
+}
+
+.field-date {
+  line-height: 18px;
+}
+
+.total-empr-dash {
+  float: left;
+  padding: 15px;
+}
+
+.ccf {
+  max-width: 75px !important;
+  min-width: 75px !important;
+}
+
+.ccR {
+  max-width: 125px !important;
+  min-width: 125px !important;
+}
+
+#ben-1 {
+  margin: 10px 10px 10px 0px;
+  width: 400px;
+  height: auto;
+  float: left;
+}
+
+.ben-icon {
+  margin-right: 10px;
+  float: left;
+  width: 20px;
+  padding: 20px 10px 10px 10px;
+  height: auto;
+}
+
+.ben-title {
+  line-height: 32px;
+  float: left;
+  width: 300px;
+  padding: 20px 10px 10px 10px;
+}
+
+.ben-txt {
+  width: 380px;
+  padding: 10px;
+  line-height: 22px;
+}
+
+#ben-2 {
+  margin: 10px 10px 10px 0px;
+  width: 400px;
+  height: auto;
+  float: left;
+}
+
+#ben-3 {
+  margin: 10px 10px 10px 0px;
+  width: 400px;
+  height: auto;
+  float: left;
+}
+
+#ben-4 {
+  margin: 10px 10px 10px 0px;
+  width: 400px;
+  height: auto;
+  float: left;
+}
+
+#ben-6 {
+  margin: 10px 10px 10px 0px;
+  width: 400px;
+  height: auto;
+  float: left;
+}
+
+.paginacion-dash {
+  float: right;
+  margin-right: 240px;
+  width: 320px;
+}
+
+.contacto-dash {
+  float: left;
+}
+
+.table-activ-user {
+  float: left;
+  width: 600px !important;
+}
+
+.table-activ-user thead tr td {
+  max-width: 150px !important;
+  min-width: 150px !important;
+}
+
+.table-activ-user td {
+  max-width: 150px;
+  min-width: 150px;
+}
+
+.options-ActUsr {
+  min-width: 60px !important;
+  max-width: 60px !important;
+}
+
+#datos-principales-AU {
+  width: auto;
+  border: solid 1px;
+  float: left;
+  margin-left: 2px;
+}
+
+#datos-principales-AU td {
+  padding: 5px;
+  max-width: 150px !important;
+  min-width: 150px !important;
+}
+
+.resultadosAU {
+  width: 680px !important;
+}
+
+.tooltip-funcionesAU {
+  min-width: 20px;
+  opacity: 1 !important;
+  padding: 5px;
+}
+
+.elem-hidden {
+  display: none;
+}
+
+#funciones-user table {
+  display: none;
+}
+
+.ui-icon-triangle-1-s {
+  margin-left: 115px;
+  margin-top: 95px;
+}
+
+.ui-icon-triangle-1-n {
+  margin-left: 115px;
+}
+
+.ulScroll {
+  overflow: hidden;
+  height: 168px;
+  padding: 20px 0;
+}
+
+.ui-menu-divider {
+  top: 15px;
+}
+
+.ui-icon-triangle-1-s {
+  top: 100px;
+}
+
+.ui-menu .ui-menu-divider {
+  position: fixed;
+  z-index: 999;
+  margin: 87px 0px 0px 2px;
+}
+
+.ui-icon-triangle-1-s {
+  margin-left: 113px;
+  top: 100px !important;
+}
+
+.activities-AU {
+  float: left;
+}
+
+.activ {
+  float: left;
+}
+
+.tbody-reportes-AU tr {
+  float: left;
+}
+
+.tbody-reportes-AU tr td {
+  padding: 5px;
+}
+
+.cell-AU {
+  margin-left: 31px;
+}
+
+.input-email {
+  width: 300px;
+}
+
+#tabla-estatus-lotes_wrapper {
+  margin-top: 90px;
+  width: 680px;
+}
+
+#tabla-estatus-lotes_filter {
+  margin-top: -40px;
+}
+
+.campos-reproceso {
+  float: left;
+  width: 190px;
+  padding: 10px;
+}
+
+.campos-reproceso input {
+  width: 160px;
+}
+
+.input-pass-reproceso {
+  float: right;
+}
+
+.div-buscar-reproceso {
+  float: right;
+  width: 310px;
+}
+
+.td-corto {
+  min-width: 57px !important;
+  max-width: 57px !important;
+}
+
+.td-medio {
+  min-width: 70px !important;
+  max-width: 70px !important;
+}
+
+.td-largo {
+  min-width: 190px !important;
+  max-width: 190px !important;
+}
+
+.aviso {
+  margin-bottom: 10px;
+}
+
+.select-tipo-guarderia {
+  float: left;
+	margin-bottom: 10px;
+}
+
+.conceptDinam-h5 {
+  float: left;
+  width: 130px;
+  margin-top: 10px;
+}
+
+.condiciones-check {
+  margin-top: 40px;
+}
+
+.condiciones-check input {
+  margin-right: 10px;
+}
+
+.acordion-program div {
+  float: left;
+  width: 191px;
+}
+
+#content-products > #camposBenef {
+  display: none;
+}
+
+div.not-info {
+  width: auto;
+  height: auto;
+  float: left;
+  padding: 5px 5px 0px 5px;
+}
+
+button.red {
+  float: right;
+  line-height: 35px;
+  padding: 0 10px;
+}
+
+button.green {
+  float: right;
+  line-height: 35px;
+  padding: 0 10px;
+}
+
+#campos-config {
+  width: 700px;
+  height: auto;
+  float: left;
+}
+
+#campos-config-descarga {
+  width: 500px;
+  height: auto;
+  float: left;
+  padding: 10px;
+}
+
+#campos-config-2 {
+  width: 510px;
+  height: auto;
+  float: left;
+  margin-bottom: 10px;
+}
+
+#campos-descarga {
+  width: auto;
+  height: auto;
+  float: left;
+  padding: 5px;
+}
+
+#campos-descarga span {
+  width: auto;
+  float: right;
+}
+
+#campos-descarga span p {
+  float: left;
+  padding: 5px;
+  vertical-align: middle;
+}
+
+#campos-1 {
+  width: 500px;
+  height: auto;
+  margin: 5px;
+  float: left;
+}
+
+#campos-1 select {
+  width: 200px;
+  float: left;
+  clear: both;
+}
+
+#campos-1 span {
+  width: 245px;
+  float: left;
+}
+
+#campos-1 span p {
+  float: left;
+  padding: 5px;
+  vertical-align: middle;
+  font-size: 13px;
+}
+
+#campos-1 span input {
+  float: left;
+  padding: 5px;
+}
+
+#suc_cuidad {
+  width: 130px;
+}
+
+#campos-dir {
+  width: 500px;
+  height: auto;
+  margin: 5px;
+  float: left;
+}
+
+#campos-dir span {
+  width: 500px;
+  float: left;
+}
+
+#campos-dir span p {
+  float: left;
+  padding: 5px;
+  vertical-align: middle;
+}
+
+#campos-dir span input {
+  width: 390px;
+}
+
+.lapiz-mod {
+  float: left !important;
+  width: 17px !important;
+  border: none !important;
+  line-height: 3;
+}
+
+#datos-1 {
+  float: left;
+  width: 500px;
+  height: 35px;
+  margin: 5px;
+}
+
+#opciones-btn {
+  float: left;
+  width: 512px;
+  height: 50px;
+}
+
+#opciones-btn button {
+  float: right;
+  margin: 5px;
+}
+
+.select-empresa {
+  float: left;
+  width: 500px;
+  margin-left: 5px;
+}
+
+.content-user {
+  float: left;
+  width: 600px;
+}
+
+.content-user span {
+  float: left;
+  margin-right: 5px;
+}
+
+.content-user p {
+  float: left;
+}
+
+#ui-tabs-3 #wrapper {
+  padding: 0 !important;
+}
+
+#ui-tabs-4 #wrapper {
+  padding: 0 !important;
+}
+
+#email_user {
+  width: 210px;
+}
+
+.title-marca {
+  margin-top:-20px;
+}
+
+#contend-pagination{
+  float: left;
+  position: relative;
+  margin-top: 5px;
+}
+
+#contend-pagination nav {
+  position: relative;
+  float: left;
+  padding: 2px;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+#contend-pagination #list_pagination {
+  float: left;
+  position: relative;
+  overflow: hidden;
+  max-width: 200px;
+  white-space: nowrap;
+  padding-top: 3px;
+  font-size: 14px;
+}
+
+#contend-pagination .cajonNum {
+  padding: 4px;
+}
+
+.input4 {
+  width: 116px;
+  padding: 11px;
+}
+
+.select_sucursales {
+  width: 622px;
+}
+
+.options_yesno {
+  float:left;
+  margin-right: 5px;
+}
+
+.ci {
+  max-width: 110px !important;
+  min-width: 110px !important;
+}
+
+.nro_cuenta {
+  max-width: 110px !important;
+  min-width: 110px !important;
+}
+
+.nombre-empresa {
+  max-width: 155px !important;
+  min-width: 155px !important;
+}
+
+.nombre-persona {
+  max-width: 120px !important;
+  min-width: 120px !important;
+}
+
+.fecha-carga {
+  max-width: 125px !important;
+  min-width: 125px !important;
+}
+
+.nro-lote {
+  max-width: 100px !important;
+  min-width: 100px !important;
+}
+
+.estatus-lote {
+  max-width: 88px !important;
+  min-width: 88px !important;
+}
+
+.estatus-lote-td {
+  max-width: 88px !important;
+  min-width: 88px !important;
+}
+
+#table-text-lotes-inventario tbody tr {
+  margin-bottom: 10px;
+  float: left;
+  margin: 0px 5px;
+  width: 610px;
+  line-height: 38px;
+  height: 38px;
+}
+
+#table-text-lotes-inventario_length {
+  float: right;
+  margin-left: 45px;
+}
+
+#table-text-lotes-inventario_filter {
+  float: right;
+  margin-right: 25px;
+}
+
+#table-text-lotes-inventario_info {
+  float: left;
+  margin: 5px;
+}
+
+#table-text-lotes-inventario_paginate {
+  float: right;
+  margin: 5px 18px 0 0;
+}
+
+#table-text-lotes_paginate a {
+  margin: 5px;
+}
+
+#table-text-lotes-inventario thead tr {
+  margin-left: 42px;
+  float: left;
+  height: 27px;
+}
+
+#table-text-lotes-inventario thead th {
+  max-width: 100px;
+  min-width: 100px;
+}
+
+#table-text-lotes-inventario thead th:last-child {
+  padding: 5px;
+}
+
+#table-text-lotes-inventario tbody td#icon-batchs {
+  width: 35px;
+  min-width: 35px;
+  max-width: 35px;
+}
+
+#table-text-lotes-inventario #icons-options {
+  max-width: 100px;
+  min-width: 100px;
+  float: left;
+}
+
+#table-text-lotes-inventario td {
+  max-width: 100px;
+  min-width: 100px;
+  float: left;
+  height: 38px;
+}
+
+#table-text-lotes-inventario-2 tbody tr {
+  margin-bottom: 10px;
+  float: left;
+  margin: 0px 5px;
+  width: 610px;
+  line-height: 38px;
+  height: 38px;
+}
+
+#table-text-lotes-inventario-2_length {
+  float: left;
+  margin-left: 45px;
+}
+
+#table-text-lotes-inventario-2_filter {
+  float: right;
+  margin-right: 25px;
+}
+
+#table-text-lotes-inventario-2_info {
+  float: left;
+  margin: 5px;
+}
+
+#table-text-lotes-inventario-2_paginate {
+  float: right;
+  margin: 5px 18px 0 0;
+}
+
+#table-text-lotes-inventario-2_paginate a {
+  margin: 5px;
+}
+
+#table-text-lotes-inventario-2 thead tr {
+  margin-left: 42px;
+  float: left;
+  height: 27px;
+}
+
+#table-text-lotes-inventario-2 thead th {
+  max-width: 100px;
+  min-width: 100px;
+}
+
+#table-text-lotes-inventario-2 thead th:last-child {
+  padding: 5px;
+}
+
+#table-text-lotes-inventario-2 tbody td#icon-batchs {
+  width: 35px;
+  min-width: 35px;
+  max-width: 35px;
+}
+
+#table-text-lotes-inventario-2 #icons-options {
+  max-width: 100px;
+  min-width: 100px;
+  float: left;
+}
+
+#table-text-lotes-inventario-2 td {
+  max-width: 100px;
+  min-width: 100px;
+  float: left;
+  height: 38px;
+}
+
+.prueba_fuego{
+  position: absolute;
+}
+
+#nav-bar2 {
+	height: 40px;
+	left: 0;
+	position: fixed;
+	top: 65px;
+	width: 100%;
+	z-index: 999;
+}
+
+#nav2 {
+	height: 40px;
+	margin: 0 auto;
+	overflow: hidden;
+	width: 960px;
+}
+
+#nav2 ul {
+	list-style: none;
+	padding-left: 0px;
+}
+
+#nav2 > ul > li {
+	float: left;
+}
+
+#nav2 ul li a {
+	display: block;
+	line-height: 40px;
+	padding: 0 10px;
+}
+
+#nav2 ul li ul {
+	position: absolute;
+	min-width: 160px;
+	z-index: -1;
+	padding-left: 2px;
+	margin-top: -2px !important;
+	-webkit-transform: translateY(-50px);
+	-moz-transform: translateY(-50px);
+	-o-transform: translateY(-50px);
+	-ms-transform: translateY(-50px);
+	transform: translateY(-50px);
+}
+
+#nav2 ul li ul li {
+	list-style: none;
+	position: relative;
+	margin-left: -2px !important;
+}
+
+#nav-bar2 nav ul li ul li ul {
+	right: -162px;
+	top: 0px;
+}
+
+.pad10 {
+	padding-top: 10px;
+}
+
+.checkNotiAdj{
+	padding-top: 20px;
+	margin-top: 12px;
+	margin-left: 70px;
+}
