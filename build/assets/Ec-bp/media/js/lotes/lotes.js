@@ -108,7 +108,7 @@ function mostrarError(result){
 
 // Refrescar lote cada 10 segundos
 
-self.setInterval(function(){actualizarLote()},100000000);
+self.setInterval(function(){actualizarLote()},10000);
 var datatable;
 
 function actualizarLote(){
