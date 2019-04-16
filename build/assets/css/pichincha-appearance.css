@@ -153,50 +153,50 @@ table {
 	font-family: "prelo";
   font-style: normal;
   font-weight: 500;
-  src: url('../fonts/prelo-medium-webfont.eot');
-  src: url('../fonts/prelo-medium-webfont.eot?#iefix') format('embedded-opentype'),
-			 url('../fonts/prelo-medium-webfont.woff2') format('woff2'),
-			 url('../fonts/prelo-medium-webfont.woff') format('woff'),
-			 url('../fonts/prelo-medium-webfont.ttf') format('truetype');
+  src: url('../fonts/bp/prelo-medium-webfont.eot');
+  src: url('../fonts/bp/prelo-medium-webfont.eot?#iefix') format('embedded-opentype'),
+			 url('../fonts/bp/prelo-medium-webfont.woff2') format('woff2'),
+			 url('../fonts/bp/prelo-medium-webfont.woff') format('woff'),
+			 url('../fonts/bp/prelo-medium-webfont.ttf') format('truetype');
 }
 
 @font-face {
 	font-family: "prelo";
   font-style: normal;
   font-weight: 700;
-  src: url('../fonts/prelo-semibold-webfont.eot');
-  src: url('../fonts/prelo-semibold-webfont.eot?#iefix') format('embedded-opentype'),
-			 url('../fonts/prelo-semibold-webfont.woff2') format('woff2'),
-			 url('../fonts/prelo-semibold-webfont.woff') format('woff'),
-			 url('../fonts/prelo-semibold-webfont.ttf') format('truetype');
+  src: url('../fonts/bp/prelo-semibold-webfont.eot');
+  src: url('../fonts/bp/prelo-semibold-webfont.eot?#iefix') format('embedded-opentype'),
+			 url('../fonts/bp/prelo-semibold-webfont.woff2') format('woff2'),
+			 url('../fonts/bp/prelo-semibold-webfont.woff') format('woff'),
+			 url('../fonts/bp/prelo-semibold-webfont.ttf') format('truetype');
 }
 
 @font-face {
 	font-family: "preloslap";
   font-style: normal;
   font-weight: 500;
-  src: url('../fonts/preloslab-book-webfont.eot');
-  src: url('../fonts/preloslab-book-webfont.eot?#iefix') format('embedded-opentype'),
-			 url('../fonts/preloslab-book-webfont.woff2') format('woff2'),
-			 url('../fonts/preloslab-book-webfont.woff') format('woff'),
-			 url('../fonts/preloslab-book-webfont.ttf') format('truetype');
+  src: url('../fonts/bp/preloslab-book-webfont.eot');
+  src: url('../fonts/bp/preloslab-book-webfont.eot?#iefix') format('embedded-opentype'),
+			 url('../fonts/bp/preloslab-book-webfont.woff2') format('woff2'),
+			 url('../fonts/bp/preloslab-book-webfont.woff') format('woff'),
+			 url('../fonts/bp/preloslab-book-webfont.ttf') format('truetype');
 }
 
 @font-face {
 	font-family: "preloslap";
   font-style: normal;
   font-weight: 700;
-  src: url('../fonts/preloslab-semibold-webfont.eot');
-  src: url('../fonts/preloslab-semibold-webfont.eot?#iefix') format('embedded-opentype'),
-			 url('../fonts/preloslab-semibold-webfont.woff2') format('woff2'),
-			 url('../fonts/preloslab-semibold-webfont.woff') format('woff'),
-			 url('../fonts/preloslab-semibold-webfont.ttf') format('truetype');
+  src: url('../fonts/bp/preloslab-semibold-webfont.eot');
+  src: url('../fonts/bp/preloslab-semibold-webfont.eot?#iefix') format('embedded-opentype'),
+			 url('../fonts/bp/preloslab-semibold-webfont.woff2') format('woff2'),
+			 url('../fonts/bp/preloslab-semibold-webfont.woff') format('woff'),
+			 url('../fonts/bp/preloslab-semibold-webfont.ttf') format('truetype');
 }
 
 @font-face {
 	font-family: "novoglyphs";
-  src: url('../fonts/novoglyphs-webfont.eot');
-  src: url('../fonts/novoglyphs-webfont.eot?#iefix') format('eot'), url('../fonts/novoglyphs-webfont.woff') format('woff'), url('../fonts/novoglyphs-webfont.ttf') format('truetype'), url('../fonts/novoglyphs-webfont.svg') format('svg');
+  src: url('../fonts/bp/novoglyphs-webfont.eot');
+  src: url('../fonts/bp/novoglyphs-webfont.eot?#iefix') format('eot'), url('../fonts/bp/novoglyphs-webfont.woff') format('woff'), url('../fonts/bp/novoglyphs-webfont.ttf') format('truetype'), url('../fonts/bp/novoglyphs-webfont.svg') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -303,7 +303,7 @@ samp {
 }
 
 .img-back {
-	background-image: url('../img/pichincha-home-ceo.jpg?v=0.1');
+	background-image: url('../images/pichincha-home-ceo.jpg?v=0.1');
 	background-size: 100%;
 	background-repeat: no-repeat;
 }
@@ -370,7 +370,7 @@ textarea {
 }
 
 button {
-	background: url('../img/BackgroundButton.png') left center no-repeat #ffdd00;
+	background: url('../images/BackgroundButton.png') left center no-repeat #ffdd00;
 	border: 0;
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
@@ -386,7 +386,7 @@ button {
 }
 
 button:hover {
-	background: url('../img/BackgroundButtonHover.png') left center no-repeat #ffdd00;
+	background: url('../images/BackgroundButtonHover.png') left center no-repeat #ffdd00;
 }
 
 button:active {
@@ -443,7 +443,7 @@ button:active {
 }
 
 #head-wrapper {
-	background: transparent url('../img/logo-pichincha-azul.svg') scroll no-repeat 0px 2px;
+	background: transparent url('../images/logo-pichincha-azul.svg') scroll no-repeat 0px 2px;
 	overflow: hidden;
 }
 
@@ -496,7 +496,7 @@ h2.widget-title {
 }
 
 #ownership {
-	background: transparent url('../img/Logo.svg') scroll no-repeat 0 0px;
+	background: transparent url('../images/Logo.svg') scroll no-repeat 0 0px;
 	display: block;
 	overflow: hidden;
 	text-align: right;
@@ -4712,7 +4712,7 @@ a.style-companies-item > span.icon:before,
 select.ui-datepicker-month,
 select.ui-datepicker-year {
 	overflow: hidden;
-	background: #fff url("../img/arrowdown.gif") no-repeat 90% center !important;
+	background: #fff url("../images/arrowdown.gif") no-repeat 90% center !important;
 	-webkit-appearance: none;
 	-moz-appearance: none;
 	appearance: none;

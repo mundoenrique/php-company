@@ -1,3 +1,20 @@
+html,
+body {
+	margin: 0px;
+	min-height: 100%;
+	position: relative;
+}
+
+.selectorNotificacion {
+	width: 500px;
+	margin-left: 5px;
+}
+
+.classHrNoti {
+	width: 512px;
+	float: left;
+}
+
 audio:not([controls]) {
 	height: 0;
 }
@@ -77,13 +94,6 @@ p {
 	margin: 2px 0 10px;
 }
 
-.img-back {
-	height: 120px;
-	width: 660px;
-	padding-top: 42px;
-	padding-left: 30px;
-}
-
 nav ul.menu {
 	margin: 0;
 	padding: 0;
@@ -118,8 +128,9 @@ textarea {
 }
 
 button {
-	float: none;
-	margin: 15px auto;
+	float: right;
+	padding: 0 10px;
+	margin-left: 10px;
 }
 
 .file-field {
@@ -127,14 +138,9 @@ button {
 	padding: 0 10px;
 }
 
-#login-btn {
-	padding: 0px 77px;
-}
-
-.align-center,
-.align-center p {
-	font-size: 12px;
-	text-align: center;
+.btn-sidebar {
+	padding: 0px 92px;
+	margin: 15px auto;
 }
 
 #head {
@@ -150,12 +156,12 @@ button {
 #wrapper,
 #foot-wrapper {
 	margin: 0 auto;
-	width: 960px;
+	width: 1000px;
 }
 
 #head-wrapper {
-	height: 29px;
-	margin: 12px auto;
+	height: 60px;
+	margin: 0 auto;
 	width: 940px;
 }
 
@@ -195,7 +201,7 @@ ol.breadcrumb li {
 
 #sidebar {
 	float: right;
-	width: 220px;
+	width: 250px;
 }
 
 #sidebar-cambioclave {
@@ -205,10 +211,7 @@ ol.breadcrumb li {
 
 #widget-area .widget h2.widget-title {
 	margin: 0;
-}
-
-h2.widget-title {
-	padding-left: 17px;
+	padding: 0 10px;
 }
 
 #widget-area .widget h2.widget-title span.icon:before {
@@ -222,10 +225,10 @@ h2.widget-title {
 #widget-area .widget .widget-content input,
 #widget-area .widget .widget-content select,
 #widget-area .widget .widget-content textarea {
-	width: 178px;
+	width: 208px;
 }
 
-#foot {
+.foot {
 	clear: both;
 	height: 110px;
 	margin-top: 10px;
@@ -297,13 +300,13 @@ h2.widget-title {
 	padding-right: 5px;
 }
 
-.menu li>ul {
+.menu li > ul {
 	position: fixed;
 	z-index: 999;
 	top: 104px;
 }
 
-.menu li>ul li a {
+.menu li > ul li a {
 	margin: auto;
 }
 
@@ -314,6 +317,7 @@ h2.widget-title {
 #account-nav ul {
 	float: right;
 	width: auto !important;
+	margin-top: 18px;
 }
 
 #account-nav ul li {
@@ -379,17 +383,42 @@ h2.widget-title {
 	float: left;
 }
 
-.submenu a {
-	padding-left: 10px;
-	height: 10px;
-}
-
 p#text-general {
 	width: 690px;
 }
 
 p#text-general-condiciones {
 	width: 100%;
+}
+
+ul.acordion {
+	width: 100%;
+	padding: 0;
+}
+
+ul.acordion li {
+	height: 120px;
+	width: 135px;
+	float: left;
+	padding-right: 5px;
+}
+
+ul.acordion li div {
+	height: 120px;
+}
+
+ul.acordion li div span {
+	padding-top: 35px;
+	padding-right: 5px;
+	float: right;
+}
+
+ul.acordion li:last-child {
+	padding: 0;
+}
+
+ul.acordion li p {
+	padding: 0px 3px;
 }
 
 select.categories-products {
@@ -429,11 +458,44 @@ select.categories-products {
 	padding: 70px 3px 0 3px !important;
 }
 
+.kwicks-selected .titulo-login-desc,
+.kwicks-expanded .titulo-login-desc {
+	padding: 3px 3px 0 3px !important;
+}
+
 .error-login-2:after,
 .error-login-2:before {
 	height: 0;
 	position: absolute;
 	width: 0;
+}
+
+.kwicks {
+	position: relative;
+	margin: 0;
+	padding: 0;
+}
+
+.kwicks > * {
+	padding: 0;
+	margin: 0;
+}
+
+.kwicks.kwicks-processed > * {
+	margin: 0;
+	position: absolute;
+}
+
+.kwicks-horizontal > * {
+	float: left;
+}
+
+.kwicks-horizontal > :first-child {
+	margin-left: 0;
+}
+
+.kwicks-vertical > :first-child {
+	margin-top: 0;
 }
 
 .ju-sliderbutton {
@@ -729,7 +791,7 @@ button.ui-button::-moz-focus-inner {
 }
 
 .ui-datepicker {
-	width: 3.3em;
+	width: 17em;
 	padding: .2em .2em 0;
 }
 
@@ -741,18 +803,18 @@ button.ui-button::-moz-focus-inner {
 .ui-datepicker .ui-datepicker-prev,
 .ui-datepicker .ui-datepicker-next {
 	position: absolute;
-	top: 5px;
+	top: 2px;
 	width: 1.8em;
 	height: 1.8em;
 }
 
 .ui-datepicker .ui-datepicker-prev-hover,
 .ui-datepicker .ui-datepicker-next-hover {
-	top: 5px;
+	top: 1px;
 }
 
 .ui-datepicker .ui-datepicker-prev {
-	left: 5px;
+	left: 2px;
 }
 
 .ui-datepicker .ui-datepicker-next {
@@ -760,7 +822,7 @@ button.ui-button::-moz-focus-inner {
 }
 
 .ui-datepicker .ui-datepicker-prev-hover {
-	left: 5px;
+	left: 1px;
 }
 
 .ui-datepicker .ui-datepicker-next-hover {
@@ -777,7 +839,7 @@ button.ui-button::-moz-focus-inner {
 }
 
 .ui-datepicker .ui-datepicker-title {
-	margin: 0 1.6em;
+	margin: 0 2.3em;
 }
 
 .ui-datepicker .ui-datepicker-title select {
@@ -790,11 +852,11 @@ button.ui-button::-moz-focus-inner {
 
 .ui-datepicker select.ui-datepicker-month,
 .ui-datepicker select.ui-datepicker-year {
-	width: 45%;
+	width: 49%;
 }
 
 .ui-datepicker table {
-	width: 64%;
+	width: 100%;
 	margin: 0 0 .4em;
 }
 
@@ -808,7 +870,7 @@ button.ui-button::-moz-focus-inner {
 
 .ui-datepicker td span,
 .ui-datepicker td a {
-	padding: .3em;
+	padding: .2em;
 }
 
 .ui-datepicker .ui-datepicker-buttonpane {
@@ -898,6 +960,7 @@ button.ui-button::-moz-focus-inner {
 	position: absolute;
 	top: 0;
 	left: 0;
+	padding: .2em;
 }
 
 .ui-dialog .ui-dialog-titlebar {
@@ -1167,6 +1230,15 @@ button.ui-button::-moz-focus-inner {
 	padding: 5px;
 }
 
+.content-endSession button {
+	margin: auto 450px auto auto;
+}
+
+.content-endSession p {
+	margin: 2px 0 10px;
+	padding: 40px;
+}
+
 .content-404 button {
 	margin: auto 433px auto auto;
 }
@@ -1216,13 +1288,19 @@ a.style-companies-item span {
 #more-info {
 	width: 260px;
 	height: 140px;
-	margin-top: 3px;
 	position: absolute;
 	z-index: 3;
 }
 
 #more-info span {
 	padding-right: 10px;
+}
+
+#more-info:after,
+#more-info:before {
+	height: 0;
+	position: absolute;
+	width: 0;
 }
 
 #more-info:after {
@@ -1335,7 +1413,6 @@ ul.filter-2 li a {
 }
 
 li.filter-3 a {
-	height: 15px;
 	padding: 10px 5px 10px 5px;
 }
 
@@ -1351,7 +1428,7 @@ li.filter-1 a {
 }
 
 #widget-info {
-	padding: 10px 0px 10px 0px;
+	padding: 10px;
 	float: left;
 }
 
@@ -1369,6 +1446,20 @@ li.filter-1 a {
 	width: 940px;
 	padding: 20px 10px;
 	float: left;
+}
+
+.content-tarifas img {
+	width: 100%;
+	height: auto;
+
+}
+
+.back-home button {
+	float: none;
+}
+
+.margtop10 {
+	margin-top: 10px;
 }
 
 .text-general-privacidad-1 {
@@ -1423,8 +1514,24 @@ li.filter-1 a {
 	width: 200px;
 }
 
+.important-notice {
+	float: left;
+	padding: 10px;
+	width: 200px;
+}
+
 #widget-info-2 button {
-	margin: 10px 21px;
+	margin: 10px 25px;
+}
+
+.important-notice button {
+	margin: 10px 25px;
+}
+
+#products-general {
+	width: 690px;
+	float: left;
+	padding: 10px;
 }
 
 #products-list {
@@ -1446,7 +1553,7 @@ li.filter-1 a {
 
 #products-list li button {
 	float: right;
-	margin-top: 20px !important;
+	margin-top: 20px;
 	margin-right: 15px;
 }
 
@@ -1518,10 +1625,9 @@ li.filter-1 a {
 }
 
 #img-1 {
-	width: 100px;
+	width: 80px;
 	height: 80px;
 	float: left;
-	margin-left: 6px;
 }
 
 #img-2 {
@@ -1623,7 +1729,7 @@ ul#brands li p img {
 #text-product-detail {
 	width: 620px;
 	float: left;
-	padding: 20px 20px 10px 0px;
+	padding: 20px 20px 10px 50px;
 }
 
 #text-product-detail button {
@@ -1671,10 +1777,9 @@ ul#brands li p img {
 	margin: 5px;
 }
 
-#products-general,
 #lotes-contenedor-2 {
 	float: left;
-	width: 641px;
+	width: 640px;
 	padding: 10px;
 }
 
@@ -1739,7 +1844,6 @@ ul#brands li p img {
 .dataTables_filter {
 	float: right;
 	margin-right: 20px;
-	margin-top: 2px;
 }
 
 .dataTables_paginate {
@@ -1793,7 +1897,7 @@ ul#brands li p img {
 .table-text-aut tbody tr {
 	margin-bottom: 10px;
 	float: left;
-	margin: 0px 7px;
+	margin: 0px 5px;
 }
 
 .table-text-aut thead tr {
@@ -1891,7 +1995,7 @@ ul#brands li p img {
 #table-lote-detail tbody tr {
 	margin-bottom: 10px;
 	float: left;
-	margin: 0px 10px;
+	margin: 0px 5px;
 }
 
 #table-lote-detail thead tr {
@@ -1924,7 +2028,7 @@ ul#brands li p img {
 	padding: 3px;
 }
 
-#table-lote-detail>#td-nombre-2 {
+#table-lote-detail > #td-nombre-2 {
 	max-width: 150px !important;
 	min-width: 150px !important;
 }
@@ -2119,14 +2223,6 @@ tr.GC-first th {
 	float: left;
 }
 
-#batchs-last #selec_tipo_lote {
-	margin: 12px 10px 0px 0px;
-}
-
-#batchs-last #button-eliminar {
-	margin: 10px;
-}
-
 #userfile {
 	margin: 0px !important;
 }
@@ -2136,7 +2232,7 @@ tr.GC-first th {
 }
 
 #top-batchs {
-	width: 641px;
+	width: 640px;
 	height: 30px;
 	padding: 10px;
 	float: left;
@@ -2237,6 +2333,7 @@ li#select-empresa select {
 #datos-principales {
 	width: auto;
 	float: left;
+	margin-left: 2px;
 }
 
 #datos-principales td {
@@ -2334,41 +2431,10 @@ li#select-empresa select {
 	vertical-align: middle;
 }
 
-.panel-right {
-	float: left;
-	margin-top: 40px;
-	width: 200px;
-}
-
-.control-radio {
-	margin-right: 5px;
-}
-
-.selected-option label {
-	padding: 5px 15px 5px 30px;
-	position: relative;
-}
-
-.selected-option label:before {
-	width: 10px;
-	height: 10px;
-	position: absolute;
-	left: 10px;
-	top: 5px;
-}
-
-.selected-option input[type="radio"]:checked + label {
-	padding: 5px 15px;
-}
-
-.selected-option input[type="radio"]:checked + label:before {
-	padding: 5px 15px;
-}
-
 #search-2 {
 	float: left;
 	width: 270px;
-	margin-top: -65px;
+	margin-top: -60px;
 }
 
 #search-2 span {
@@ -2701,7 +2767,6 @@ li#select-empresa select {
 
 .tbody-sucursales tr {
 	float: left;
-	margin-left: 3px;
 }
 
 .tbody-sucursales tr td {
@@ -3015,10 +3080,8 @@ span.jPag-snext-img {
 	min-width: 65px !important;
 }
 
-#btn-modif-suc {
+#btn-new-suc {
 	float: right !important;
-	margin-top: 5px;
-	height: 38px;
 }
 
 #archivo {
@@ -3027,10 +3090,6 @@ span.jPag-snext-img {
 
 .OS-margin-left {
 	margin-left: 31px;
-}
-
-#mensaje {
-	margin-top: 43px!important;
 }
 
 #pswd_info {
@@ -3096,26 +3155,6 @@ span.jPag-snext-img {
 	float: left;
 }
 
-#search-4 {
-	width: 400px;
-}
-
-#search-4 span {
-	float: left;
-	width: 130px;
-}
-
-#search-4 input {
-	float: left;
-	margin-top: 5px;
-	margin-right: 5px;
-}
-
-#search-5 select {
-	width: 190px;
-	margin-left: 100px;
-}
-
 .tr-os-aut {
 	margin-left: 31px;
 }
@@ -3139,47 +3178,65 @@ span.jPag-snext-img {
 	min-width: 125px !important;
 }
 
-.content-beneficios {
-	width: 80%;
-}
-
-#ben-1,
-#ben-2,
-#ben-3,
-#ben-4,
-#ben-5,
-#ben-6 {
-	width: 200px;
-	height: 250px;
-	padding: 10px;
-}
-
-p.ben-title {
-	margin-top: 24px;
-}
-
 #ben-1 {
 	margin: 10px 10px 10px 0px;
+	width: 400px;
+	height: auto;
+	float: left;
+}
+
+.ben-icon {
+	margin-right: 10px;
+	float: left;
+	width: 20px;
+	padding: 20px 10px 10px 10px;
+	height: auto;
+}
+
+.ben-title {
+	float: left;
+	width: 300px;
+	padding: 20px 10px 10px 10px;
+}
+
+.ben-txt {
+	width: 380px;
+	padding: 10px;
 }
 
 #ben-2 {
 	margin: 10px 10px 10px 0px;
+	width: 400px;
+	height: auto;
+	float: left;
 }
 
 #ben-3 {
 	margin: 10px 10px 10px 0px;
+	width: 400px;
+	height: auto;
+	float: left;
 }
 
 #ben-4 {
 	margin: 10px 10px 10px 0px;
+	width: 400px;
+	height: auto;
+	float: left;
 }
 
 #ben-5 {
 	margin: 10px 10px 10px 0px;
+	width: 400px;
+	height: auto;
+	float: left;
 }
 
 #ben-6 {
 	margin: 10px 10px 10px 0px;
+	width: 400px;
+	height: auto;
+	float: left;
 }
 
 .paginacion-dash {
@@ -3215,6 +3272,7 @@ p.ben-title {
 #datos-principales-AU {
 	width: auto;
 	float: left;
+	margin-left: 2px;
 }
 
 #datos-principales-AU td {
@@ -3338,6 +3396,7 @@ p.ben-title {
 
 .select-tipo-guarderia {
 	float: left;
+	margin-bottom: 10px;
 }
 
 .conceptDinam-h5 {
@@ -3410,7 +3469,7 @@ button.green {
 
 #campos-descarga span p {
 	float: left;
-	padding: 22px;
+	padding: 5px;
 	vertical-align: middle;
 }
 
@@ -3430,10 +3489,10 @@ button.green {
 #campos-1 span {
 	width: 245px;
 	float: left;
-	margin-left: 3px;
 }
 
 #campos-1 span p {
+	float: left;
 	padding: 5px;
 	vertical-align: middle;
 }
@@ -3455,7 +3514,6 @@ button.green {
 }
 
 #campos-dir span {
-	margin-left: 3px;
 	width: 500px;
 	float: left;
 }
@@ -3484,6 +3542,7 @@ button.green {
 
 #opciones-btn {
 	float: left;
+	width: 512px;
 	height: 50px;
 }
 
@@ -3513,6 +3572,10 @@ button.green {
 }
 
 #ui-tabs-3 #wrapper {
+	padding: 0 !important;
+}
+
+#ui-tabs-4 #wrapper {
 	padding: 0 !important;
 }
 
@@ -3743,7 +3806,7 @@ button.green {
 	height: 40px;
 	left: 0;
 	position: fixed;
-	top: 60px;
+	top: 65px;
 	width: 100%;
 	z-index: 999;
 }
@@ -3771,7 +3834,6 @@ button.green {
 	min-width: 160px;
 	z-index: -1;
 	padding-left: 2px;
-	padding-top: 5px;
 	margin-top: -2px !important;
 }
 
@@ -3781,7 +3843,7 @@ button.green {
 
 #nav2 ul li ul li {
 	position: relative;
-	margin-left: 10px !important;
+	margin-left: -2px !important;
 }
 
 #nav-bar2 nav ul li ul li ul {
@@ -3789,24 +3851,12 @@ button.green {
 	top: 0px;
 }
 
-#btn-new-suc,
-#btn-new-mas {
-	margin-top: 0!important;
+.pad10 {
+	padding-top: 10px;
 }
 
-#btn-new-mas,
-#btn-new-suc {
-	height: 39px;
-}
-
-#pass_suc {
-	margin-top: 5px;
-}
-
-#agregarSuc {
-	height: 38px;
-}
-
-#btn-modif-suc {
-	margin-top: 5px;
+.checkNotiAdj {
+	padding-top: 20px;
+	margin-top: 12px;
+	margin-left: 70px;
 }
