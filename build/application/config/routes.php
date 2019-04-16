@@ -3,6 +3,9 @@
 $route['default_controller'] = "user";
 $route['(:any)/home'] = "user/index";
 $route['(:any)/home/(:any)'] = "user/index";
+$route['(:any)/inf-beneficios'] = "information/benefits";
+$route['(:any)/inf-condiciones'] = "information/terms";
+$route['(:any)/inf-tarifas'] = "information/rates";
 
 //old routes
 $route['(:any)/login'] = "users/login/$1";

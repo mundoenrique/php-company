@@ -13,7 +13,8 @@
 	<?= $this->asset->insertCss(); ?>
 	<title><?= $titlePage; ?> - CEO</title>
 </head>
-<body base-url="<?= base_url(); ?>" asset-url="<?= assetUrl(); ?>" country="<?= $countryUri; ?>">
+<body base-url="<?= base_url(); ?>" asset-url="<?= assetUrl(); ?>" country="<?= $countryUri; ?>"
+	pais="<?= $this->session->userdata('countryConf') ?>">
 	<header id="head">
 		<div id="head-wrapper">
 			<a id="branding" rel="start"></a>
@@ -40,18 +41,18 @@
 					</li>
 					<?php endif; ?>
 					<li class="menu-item benefits">
-						<a href="<?= base_url('beneficios') ?>" rel="section">
+						<a href="<?= base_url('inf-beneficios') ?>" rel="section">
 							<?= lang('BREADCRUMB_BENEFICIOS') ?>
 						</a>
 					</li>
 					<li class="menu-item terms">
-						<a href="<?= base_url('condiciones'); ?>" rel="section">
+						<a href="<?= base_url('inf-condiciones'); ?>" rel="section">
 							<?= lang('BREADCRUMB_CONDICIONES') ?>
 						</a>
 					</li>
-					<?php if($logged && $countryUri == 've'): ?>
+					<?php if(!$logged && $countryUri == 've'): ?>
 					<li class="menu-item privacy">
-						<a id='tarifas' href="<?= base_url('tarifas'); ?>" rel="section">
+						<a id='tarifas' href="<?= base_url('inf-tarifas'); ?>" rel="section">
 							<? echo lang('SUBMENU_TARIFAS'); ?>
 						</a>
 					</li>
@@ -70,7 +71,7 @@
 			</a>
 			<div class="separator"></div>
 			<div id="credits">
-				<p>© <?php echo date('Y'); ?> NovoPayment Inc. All rights reserved.</p>
+				<p>© <?= date('Y'); ?> NovoPayment Inc. All rights reserved.</p>
 			</div>
 		</div>
 	</footer>
