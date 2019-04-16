@@ -167,7 +167,8 @@ button {
 
 #wrapper {
 	clear: both;
-	padding: 105px 0 110px;
+	padding-top: 105px;
+	min-height: calc(100vh - 225px);
 }
 
 .no-main-nav #wrapper {
