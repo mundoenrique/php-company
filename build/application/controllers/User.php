@@ -26,7 +26,7 @@ class User extends NOVO_Controller {
 			$this->includeAssets->jsFiles,
 			"third_party/jquery.kwicks",
 			"third_party/jquery.md5",
-			"login",
+			"user/login",
 			"$this->countryUri/clave"
 
 		);

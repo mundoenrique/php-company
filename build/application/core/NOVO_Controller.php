@@ -13,6 +13,7 @@ class NOVO_Controller extends CI_Controller {
 	protected $countryUri;
 	protected $skin;
 	protected $views;
+	protected $idProducto;
 	protected $render;
 	public $accessControl;
 
@@ -24,7 +25,15 @@ class NOVO_Controller extends CI_Controller {
 		$this->includeAssets = new stdClass();
 		$this->countryUri = $this->uri->segment(1, 0);
 		$this->render = new stdClass();
+		$this->render->logged = $this->session->userdata('logged');
+		$this->render->countryConf = $this->session->userdata('countryConf');
+		$this->render->countryServ = $this->session->userdata('countryServ');
+		$this->idProductos = $this->session->userdata('idProductos');
+
 		$this->optionsCheck();
+
+		$this->lang->load('erroreseol');
+		$this->lang->load('dashboard');
 	}
 
 	private function optionsCheck()
@@ -46,23 +55,26 @@ class NOVO_Controller extends CI_Controller {
 				$this->skin = 'novo';
 		}
 		$this->includeAssets->cssFiles = [
-			"general-structure",
-			"$this->skin-appearance",
-			"general"
+			"$this->skin-structure",
+			"$this->skin-appearance"
 		];
 		$this->includeAssets->jsFiles = [
 			"third_party/html5",
 			"third_party/jquery-3.4.0",
 			"third_party/jquery-ui-1.12.1"
 		];
-		$this->lang->load('erroreseol');
-		$this->lang->load('dashboard');
 	}
 
 	protected function loadView($module)
 	{
 		log_message('INFO', 'NOVO loadView Method Initialized Module loaded: '.$module);
-		$this->render->logged = $this->session->userdata('logged');
+		$auth = FALSE;
+		switch($module) {
+			case 'login':
+				$auth = TRUE;
+				break;
+		}
+
 		$this->render->module = $module;
 		$this->render->viewPage = $this->views;
 		$this->asset->initialize($this->includeAssets);

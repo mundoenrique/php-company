@@ -50,7 +50,7 @@
 							<?= lang('BREADCRUMB_CONDICIONES') ?>
 						</a>
 					</li>
-					<?php if(!$logged && $countryUri == 've'): ?>
+					<?php if($logged && $countryUri == 've'): ?>
 					<li class="menu-item privacy">
 						<a id='tarifas' href="<?= base_url('inf-tarifas'); ?>" rel="section">
 							<? echo lang('SUBMENU_TARIFAS'); ?>
