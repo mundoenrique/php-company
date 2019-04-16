@@ -1,7 +1,4 @@
-<?php
-$pais = $this->uri->segment(1);
-$recoverPwdLink = $this->config->item('base_url') .$pais. '/users/pass_recovery';
-?>
+<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 <div id="sidebar">
 	<div id="widget-area">
 		<div class="widget tooltip" id="widget-signin">
@@ -21,7 +18,7 @@ $recoverPwdLink = $this->config->item('base_url') .$pais. '/users/pass_recovery'
 				</form>
 				<div class="align-center">
 					<p>Restablecer contraseña</p>
-					<a href="<?= base_url('pass_recovery') ?>" rel="section">
+					<a href="<?= base_url('recuperar-clave') ?>" rel="section">
 						¿Olvidó o bloqueó su<br> clave de acceso?
 					</a>
 				</div>

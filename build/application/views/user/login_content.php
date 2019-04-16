@@ -1,9 +1,4 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
-<?php
-$pais = $this->uri->segment(1);
-
-?>
-
 <div id="content">
 	<div class="img-back">
 		<h1 class="welcome-title"><?= lang('WELCOME_TITLE'); ?></h1>
@@ -73,11 +68,11 @@ $pais = $this->uri->segment(1);
 				Nuestros Ejecutivos del Centro de Soporte a  Empresas están a su orden para ofrecerle mayor información o aclararle cualquier duda.
 			</p>
 			<p class="subtitulos-login">
-				<?php if($pais != "co") {echo  lang('LOGIN_INFO');} ?>
+				<?php if($countryUri != "co") {echo  lang('LOGIN_INFO');} ?>
 			</p>
 			<p><?php echo lang('INFO-1'); ?></p>
-			<p><?php if ($pais == "co") {echo "infocolombia@novopayment.com";} else { echo lang('INFO-2'); }?></p>
-			<p><?php if ($pais != "co") { echo lang('INFO-3'); }  ?></p>
+			<p><?php if ($countryUri == "co") {echo "infocolombia@novopayment.com";} else { echo lang('INFO-2'); }?></p>
+			<p><?php if ($countryUri != "co") { echo lang('INFO-3'); }  ?></p>
 		</div>
 	</div>
 
