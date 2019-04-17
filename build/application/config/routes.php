@@ -3,6 +3,8 @@
 $route['default_controller'] = "user";
 $route['(:any)/home'] = "user/index";
 $route['(:any)/home/(:any)'] = "user/index";
+$route['(:any)/recuperar-clave'] = "user/passwordRecovery";
+
 $route['(:any)/inf-beneficios'] = "information/benefits";
 $route['(:any)/inf-condiciones'] = "information/terms";
 $route['(:any)/inf-tarifas'] = "information/rates";

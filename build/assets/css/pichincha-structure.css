@@ -131,12 +131,6 @@ button {
 	padding: 0px 77px;
 }
 
-.align-center,
-.align-center p {
-	font-size: 12px;
-	text-align: center;
-}
-
 #head {
 	height: 60px;
 	left: 0;
@@ -150,7 +144,7 @@ button {
 #wrapper,
 #foot-wrapper {
 	margin: 0 auto;
-	width: 960px;
+	width: 1000px;
 }
 
 #head-wrapper {
@@ -1354,6 +1348,59 @@ li.filter-1 a {
 #widget-info {
 	padding: 10px 0px 10px 0px;
 	float: left;
+}
+
+.container {
+	margin: 5px;
+	width: 985px;
+	padding: 20px 2px;
+}
+
+.padding-left-right {
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+.paragraph {
+	padding: 0;
+}
+
+.column-center {
+	padding: 15px 280px 25px;
+}
+
+.line-field {
+	margin-bottom: 5px;
+}
+
+.input-field {
+	height: 20px;
+	padding: 6px 9px 7px;
+	margin: 0 0 10px;
+}
+
+.field-medium {
+	width: 150px;
+}
+
+.field-large {
+	width: 250px;
+}
+
+.form-actions {
+	clear: both;
+	padding: 15px 15px 0;
+}
+
+button.r-button {
+	float: right;
+	margin: 0;
+}
+
+.come-back {
+	padding: 0 10px 0 0;
+	float: right;
+	margin-left: 15px;
 }
 
 #content-products {

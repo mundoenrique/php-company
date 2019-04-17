@@ -1433,6 +1433,54 @@ li.filter-1 a {
 	float: left;
 }
 
+.container {
+	margin: 5px;
+	width: 985px;
+	padding: 20px 2px;
+}
+
+.padding-left-right {
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+.paragraph {
+	padding: 0;
+}
+
+.column-center {
+	padding: 15px 280px 25px;
+}
+
+.line-field {
+	margin-bottom: 5px;
+}
+
+.input-field {
+	height: 20px;
+	padding: 6px 9px 7px;
+	margin: 0 0 10px;
+}
+
+.field-medium {
+	width: 150px;
+}
+
+.field-large {
+	width: 250px;
+}
+
+.form-actions {
+	clear: both;
+	padding: 15px 15px 0;
+}
+
+.come-back {
+	padding: 0 10px 0 0;
+	float: right;
+	margin-left: 15px;
+}
+
 #content-products {
 	width: 960px;
 	padding: 20px 2px;
@@ -1452,10 +1500,10 @@ li.filter-1 a {
 .content-tarifas img {
 	width: 100%;
 	height: auto;
-
 }
 
 .back-home button {
+	margin-top: 25px;
 	float: none;
 }
 
