@@ -13,25 +13,24 @@ class Encrypt_Connect {
 	public function __construct()
 	{
 		log_message('INFO', 'NOVO Encrypt_Connect Library Class Initialized');
-		$this->CI = get_instance();
+		$this->CI = &get_instance();
 		$this->userName = $this->CI->session->userdata('userName') ?
 		$this->CI->session->userdata('userName') : 'No username';
-		$this->countryConf = $this->CI->session->userdata('countryConf');
 		$this->keyNovo = $this->CI->config->item('keyNovo');
 		$this->iv = "\0\0\0\0\0\0\0\0";
 	}
 
 	public function encode($data, $model = '') {
 		log_message('INFO', 'NOVO Encrypt_Connect: encode Method Initialized');
-		$data->pais = $this->countryConf;
 
 		$data = json_encode($data, JSON_UNESCAPED_UNICODE);
 		log_message('DEBUG', 'NOVO ['.$this->userName.'] REQUEST '.$model.': '.$data);
 
 		$dataB = base64_encode($data);
-		while( (strlen($dataB)%8) != 0) {
+		while((strlen($dataB)%8) != 0) {
 			$dataB .= " ";
 		}
+
 		$cryptData = mcrypt_encrypt(
 			MCRYPT_DES, $this->keyNovo, $dataB, MCRYPT_MODE_CBC, $this->iv
 		);
@@ -59,18 +58,15 @@ class Encrypt_Connect {
 
 	}
 
-	public function connectWs($encryptData)
+	public function connectWs($request)
 	{
 		log_message('INFO', 'NOVO Encrypt_Connect: connectWs Method Initialized');
 
-		$request = json_encode([
-			'bean'=> $encryptData,
-			'pais' => $this->countryConf
-		]);
-
 		$urlWS = $this->CI->config->item('urlWS').'eolwebInterfaceWS';
 
-		log_message('DEBUG', 'BY COUNTRY: '.$this->countryConf.', AND WEBSERVICE URL: '.$urlWS);
+		log_message('DEBUG', 'BY COUNTRY: '.$request['pais'].', AND WEBSERVICE URL: '.$urlWS);
+
+		$request = json_encode($request);
 
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, $urlWS);

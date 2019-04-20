@@ -22,11 +22,13 @@ class Information extends NOVO_Controller {
 	public function terms()
 	{
 		log_message('INFO', 'NOVO Information: terms Method Initialized');
+		$newUser = $this->session->flashdata('newUser');
 		$this->views = ['information/terms'];
 		$this->render->titlePage = 'Condiciones';
 		$this->render->referer = $this->input->server('HTTP_REFERER');
 		$baseReferer = substr($this->render->referer, 0, strlen(base_url()));
-		$this->render->goBack = $baseReferer === base_url();
+		$this->render->newUser = $newUser;
+		$this->render->goBack = ($baseReferer === base_url()) && !$newUser;
 		$this->lang->load('users');
 		$this->loadView('terms');
 	}
@@ -40,6 +42,6 @@ class Information extends NOVO_Controller {
 		$baseReferer = substr($this->render->referer, 0, strlen(base_url()));
 		$this->render->goBack = $baseReferer === base_url();
 		$this->lang->load('users');
-		$this->loadView('terms');
+		$this->loadView('rates');
 	}
 }

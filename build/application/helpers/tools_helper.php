@@ -43,9 +43,6 @@ if(!function_exists('countryCheck')) {
 			default:
 				redirect('/pe/home');
 		}
-		$CI->session->set_userdata([
-			'countryConf'=> $CI->config->item('country')
-		]);
 	}
 }
 

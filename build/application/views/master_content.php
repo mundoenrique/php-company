@@ -14,7 +14,7 @@
 	<title><?= $titlePage; ?> - CEO</title>
 </head>
 <body base-url="<?= base_url(); ?>" asset-url="<?= assetUrl(); ?>" country="<?= $countryUri; ?>"
-	pais="<?= $this->session->userdata('countryConf') ?>">
+	pais="<?= $countryConf; ?>">
 	<header id="head">
 		<div id="head-wrapper">
 			<a id="branding" rel="start"></a>
@@ -40,17 +40,21 @@
 						</a>
 					</li>
 					<?php endif; ?>
+					<?php if($module !== 'benefits'): ?>
 					<li class="menu-item benefits">
 						<a href="<?= base_url('inf-beneficios') ?>" rel="section">
 							<?= lang('BREADCRUMB_BENEFICIOS') ?>
 						</a>
 					</li>
+					<?php endif; ?>
+					<?php if($module !== 'terms'): ?>
 					<li class="menu-item terms">
 						<a href="<?= base_url('inf-condiciones'); ?>" rel="section">
 							<?= lang('BREADCRUMB_CONDICIONES') ?>
 						</a>
 					</li>
-					<?php if($logged && $countryUri == 've'): ?>
+					<?php endif; ?>
+					<?php if($logged && $countryUri == 've' && $module !== 'rates'): ?>
 					<li class="menu-item privacy">
 						<a id='tarifas' href="<?= base_url('inf-tarifas'); ?>" rel="section">
 							<? echo lang('SUBMENU_TARIFAS'); ?>

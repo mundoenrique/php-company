@@ -27,8 +27,6 @@ class NOVO_Controller extends CI_Controller {
 		$this->countryUri = $this->uri->segment(1, 0);
 		$this->render = new stdClass();
 		$this->render->logged = $this->session->userdata('logged');
-		$this->render->countryConf = $this->session->userdata('countryConf');
-		$this->render->countrySess = $this->session->userdata('countrySess');
 		$this->idProductos = $this->session->userdata('idProductos');
 
 		$this->optionsCheck();
@@ -50,6 +48,7 @@ class NOVO_Controller extends CI_Controller {
 		$this->render->favicon = $faviconData->favicon;
 		$this->render->ext = $faviconData->ext;
 		$this->render->lang = $this->config->item('app_lang');
+		$this->render->countryConf = $this->config->item('country');
 		$this->render->countryUri = $this->countryUri;
 		switch($this->countryUri) {
 			case 'bp':

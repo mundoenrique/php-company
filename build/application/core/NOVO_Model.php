@@ -5,6 +5,7 @@ class NOVO_Model extends CI_Model {
 	protected $className;
 	protected $accessLog;
 	protected $token;
+	protected $countryConf;
 	protected $dataRequest;
 	protected $response;
 	protected $isResponseRc;
@@ -16,6 +17,7 @@ class NOVO_Model extends CI_Model {
 		$this->dataAccessLog = new stdClass();
 		$this->dataRequest = new stdClass();
 		$this->response = new stdClass();
+		$this->countryConf = $this->config->item('country');
 		$this->isResponseRc = 'No web service';
 		$this->token = $this->session->userdata('token') ? $this->session->userdata('token') : '';
 		$this->lang->load('erroreseol');
@@ -32,9 +34,11 @@ class NOVO_Model extends CI_Model {
 		$this->dataRequest->className = $this->className;
 		$this->dataRequest->logAccesoObject = $this->accessLog;
 		$this->dataRequest->token = $this->token;
+		$this->dataRequest->pais = $this->countryConf;
 
 		$encryptData = $this->encrypt_connect->encode($this->dataRequest, $model);
-		$response = $this->encrypt_connect->connectWs($encryptData);
+		$request = ['bean'=> $encryptData, 'pais'=> $this->countryConf];
+		$response = $this->encrypt_connect->connectWs($request);
 		$responseDecript = $this->encrypt_connect->decode($response, $model);
 		$this->response->title = lang('SYSTEM_NAME');
 
@@ -43,16 +47,19 @@ class NOVO_Model extends CI_Model {
 			switch($this->isResponseRc) {
 				case -29:
 				case -61:
-					$this->response->code = 302;
+					$this->response->code = 301;
 					$this->response->msg = lang('ERROR_(-29)');
+					$this->response->data = base_url('home');
 					break;
 				default:
 					$this->response->code = 301;
 					$this->response->msg = lang('ERROR_GENERAL');
+					$this->response->data = base_url('dashboard');
 			}
 		} else {
 			$this->response->code = 301;
 			$this->response->msg = lang('ERROR_GENERAL');
+			$this->response->data = base_url('dashboard');
 		}
 
 		return $responseDecript;
