@@ -1,3 +1,8 @@
+input:focus,
+textarea:focus {
+	border: 1px solid #033572;
+}
+
 article,
 aside,
 details,
@@ -331,7 +336,6 @@ span.icon:before {
 	font-family: "novoglyphs";
 	-webkit-font-smoothing: antialiased;
 	font-weight: normal;
-	speak: none;
 }
 
 .separator {
@@ -605,8 +609,7 @@ h2.widget-title {
 	display: none;
 	font-size: 18px;
 	line-height: 25px;
-	-webkit-transition: visibility 400ms ease-in-out;
-	-webkit-transition-delay: 0s;
+	-webkit-transition: visibility 400ms ease-in-out 0s;
 	-moz-transition: visibility 400ms ease-in-out 0s;
 	-o-transition: visibility 400ms ease-in-out 0s;
 	transition: visibility 400ms ease-in-out 0s;

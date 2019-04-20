@@ -3858,3 +3858,11 @@ button.green {
 #btn-modif-suc {
 	margin-top: 5px;
 }
+
+input,
+textarea,
+select,
+button,
+a {
+	outline: none;
+}
