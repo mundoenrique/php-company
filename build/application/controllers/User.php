@@ -24,12 +24,18 @@ class User extends NOVO_Controller {
 		);
 		array_push(
 			$this->includeAssets->jsFiles,
-			"third_party/jquery.kwicks",
 			"third_party/jquery.md5",
 			"user/login",
 			"$this->countryUri/clave"
 
 		);
+		if($this->countryUri !== 'bp') {
+			array_push(
+				$this->includeAssets->jsFiles,
+				"third_party/jquery.kwicks",
+				"user/kwicks"
+			);
+		}
 		$this->views = ['user/login', 'user/signin'];
 		$this->render->titlePage = lang('SYSTEM_NAME');
 		$this->loadView('login');
