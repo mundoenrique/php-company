@@ -59,7 +59,7 @@ class NOVO_Controller extends CI_Controller {
 				$this->skin = 'novo';
 		}
 		$this->includeAssets->cssFiles = [
-			"third_party/validate",
+			"validate",
 			"$this->skin-structure",
 			"$this->skin-appearance"
 		];

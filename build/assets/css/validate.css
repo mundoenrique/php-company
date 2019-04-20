@@ -1,0 +1,26 @@
+input.validate-error, select.validate-error {
+	background: rgba(247, 120, 111, 0.2);
+	color: #f04848 !important;
+}
+
+.validate-error:hover, .validate-error:focus {
+	border: 1px solid #fb483a;
+	transition:300ms;
+}
+
+label.validate-error:hover, label.validate-error:focus {
+	border-top: none;
+}
+
+label.validate-error {
+	cursor: pointer;
+	display: block;
+	font-size: 10px !important;
+	line-height: 25px;
+	margin-bottom: 5px;
+	overflow: hidden;
+	text-align: center;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.16), 0 2px 10px rgba(0, 0, 0, 0.12);
+	border-radius:2px;
+	color: #fb483a !important;
+}
