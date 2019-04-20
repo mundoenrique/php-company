@@ -90,6 +90,13 @@ define('COOKIE_SECURE', isset($_SERVER['COOKIE_SECURE'])
 	boolval($_SERVER['COOKIE_SECURE']) : FALSE
 );
 
+$arrayUri = explode('/', $_SERVER['REQUEST_URI']);
+$lang = end($arrayUri);
+
+define('LANGUAGE', $lang === 'en' ? 'en' : 'es');
+
+unset($arrayUri, $lang);
+
 
 /* End of file constants.php */
 /* Location: ./application/config/constants.php */

@@ -13,8 +13,9 @@ class NOVO_Controller extends CI_Controller {
 	protected $countryUri;
 	protected $skin;
 	protected $views;
-	protected $idProducto;
 	protected $render;
+	protected $dataRequest;
+	protected $idProductos;
 	public $accessControl;
 
 	public function __construct()
@@ -27,7 +28,7 @@ class NOVO_Controller extends CI_Controller {
 		$this->render = new stdClass();
 		$this->render->logged = $this->session->userdata('logged');
 		$this->render->countryConf = $this->session->userdata('countryConf');
-		$this->render->countryServ = $this->session->userdata('countryServ');
+		$this->render->countrySess = $this->session->userdata('countrySess');
 		$this->idProductos = $this->session->userdata('idProductos');
 
 		$this->optionsCheck();
@@ -40,12 +41,15 @@ class NOVO_Controller extends CI_Controller {
 	{
 		log_message('INFO', 'NOVO optionsCheck Method Initialized');
 		countryCheck($this->countryUri);
-		$arrayUri = explode('/', $this->uri->uri_string());
-		$lang = end($arrayUri);
-		$this->render->lang = $lang === 'en' ? 'en' : 'es';
+		if($this->input->is_ajax_request()) {
+			$this->dataRequest = json_decode(
+				$this->security->xss_clean(strip_tags(base64_decode($this->input->get_post('request'))))
+			);
+		}
 		$faviconData = setFavicon();
 		$this->render->favicon = $faviconData->favicon;
 		$this->render->ext = $faviconData->ext;
+		$this->render->lang = $this->config->item('app_lang');
 		$this->render->countryUri = $this->countryUri;
 		switch($this->countryUri) {
 			case 'bp':
@@ -55,13 +59,15 @@ class NOVO_Controller extends CI_Controller {
 				$this->skin = 'novo';
 		}
 		$this->includeAssets->cssFiles = [
+			"third_party/validate",
 			"$this->skin-structure",
 			"$this->skin-appearance"
 		];
 		$this->includeAssets->jsFiles = [
 			"third_party/html5",
 			"third_party/jquery-3.4.0",
-			"third_party/jquery-ui-1.12.1"
+			"third_party/jquery-ui-1.12.1",
+			"helper"
 		];
 	}
 
