@@ -1,5 +1,4 @@
-<?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * @info Libreria para la inccorporación y versionamiento de los archivos css, js e imágenes
  * @author J. Enrique Peñaloza Piñero
