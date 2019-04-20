@@ -1,4 +1,4 @@
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php defined('BASEPATH') or exit('No direct script access allowed');
 /**
  * CodeIgniter XML Helpers
  *
@@ -43,7 +43,9 @@ if(!function_exists('countryCheck')) {
 			default:
 				redirect('/pe/home');
 		}
-		$CI->session->set_userdata(['countryConf'=> $CI->config->item('country')]);
+		$CI->session->set_userdata([
+			'countryConf'=> $CI->config->item('country')
+		]);
 	}
 }
 
@@ -67,13 +69,26 @@ if(!function_exists('setFavicon')) {
 	}
 }
 
-if (!function_exists('mask_account')) {
-	function mask_account($account, $start = 1, $end = 1){
+if(!function_exists('accessLog')) {
+	function accessLog($dataAccessLog) {
 		$CI = &get_instance();
-		$len = strlen($account);
-		return substr($account, 0, $start).str_repeat('*', $len - ($start + $end)).substr($account, $len - $end, $end);
+		$sessionId = $CI->session->userdata('sessionId') ? $CI->session->userdata('sessionId') : '';
+		$userName = $CI->session->userdata('userName') ? $CI->session->userdata('userName') : $dataAccessLog->userName;
+		return $accessLog = [
+			"sessionId"=> $sessionId,
+			"userName" => $userName,
+			"canal" => $CI->config->item('channel'),
+			"modulo"=> $dataAccessLog->modulo,
+			"function"=> $dataAccessLog->function,
+			"operacion"=> $dataAccessLog->operation,
+			"RC"=> 0,
+			"IP"=> $CI->input->ip_address(),
+			"dttimesstamp"=> date('m/d/Y H:i'),
+			"lenguaje"=> $CI->config->item('app_lang')
+		];
 	}
 }
+
 
 	if ( ! function_exists('np_hoplite_log')) {
 		/**
@@ -471,5 +486,13 @@ if (!function_exists('mask_account')) {
 			}
 
 			// return $CI->session->userdata('pais');
+		}
+	}
+
+	if(!function_exists('mask_account')) {
+		function mask_account($account, $start = 1, $end = 1){
+			$CI = &get_instance();
+			$len = strlen($account);
+			return substr($account, 0, $start).str_repeat('*', $len - ($start + $end)).substr($account, $len - $end, $end);
 		}
 	}

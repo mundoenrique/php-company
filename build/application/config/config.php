@@ -51,6 +51,8 @@ $config['base_url']	= BASE_URL;
 $config['asset_url'] = BASE_CDN_URL;
 $config['asset_path'] = BASE_CDN_PATH;
 $config['favicon'] = 'favicon-novo';
+$config['channel'] = 'ceo';
+$config['app_lang'] = strtoupper(LANGUAGE);
 
 /*
 |--------------------------------------------------------------------------
@@ -330,8 +332,8 @@ $config['global_xss_filtering'] = TRUE;
 | 'csrf_expire' = The number in seconds the token should expire.
 */
 $config['csrf_protection'] = FALSE;
-$config['csrf_token_name'] = 'csrf_test_name';
-$config['csrf_cookie_name'] = 'csrf_cookie_name';
+$config['csrf_token_name'] = 'novo_name';
+$config['csrf_cookie_name'] = 'novo_cook';
 $config['csrf_expire'] = 7200;
 
 /*
