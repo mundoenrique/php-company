@@ -41,7 +41,9 @@ class NOVO_Controller extends CI_Controller {
 		countryCheck($this->countryUri);
 		if($this->input->is_ajax_request()) {
 			$this->dataRequest = json_decode(
-				$this->security->xss_clean(strip_tags(base64_decode($this->input->get_post('request'))))
+				$this->security->xss_clean(
+					strip_tags(utf8_encode(base64_decode($this->input->get_post('request'))))
+				)
 			);
 		} else {
 			$faviconLoader = getFaviconLoader();
