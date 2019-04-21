@@ -40,6 +40,7 @@ class NOVO_Model extends CI_Model {
 		$request = ['bean'=> $encryptData, 'pais'=> $this->countryConf];
 		$response = $this->encrypt_connect->connectWs($request);
 		$responseDecript = $this->encrypt_connect->decode($response, $model);
+		$this->isResponseRc = FALSE;
 		$this->response->title = lang('SYSTEM_NAME');
 
 		if(isset($responseDecript->rc)) {

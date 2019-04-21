@@ -49,12 +49,14 @@ class Encrypt_Connect {
 		);
 		$decryptData = base64_decode(trim($descryptData));
 		$response = json_decode($decryptData);
+		$response = $response == '' ? ' unanswered' : $response;
 
 		$rc = isset($response->rc) ? ' RC: '.$response->rc : '';
 		$msg = isset($response->msg) ? ' MSG: '.$response->msg : '';
 		$country = isset($response->pais) ? ' COUNTRY: '.$response->pais : '';
+		$unAnswered = $response === ' unanswered' ? $response : '';
 
-		log_message('DEBUG', '['.$this->userName.'] RESPONSE: '. $model . $rc . $msg . $country);
+		log_message('DEBUG', '['.$this->userName.'] RESPONSE '.$model . '=' . $rc . $msg . $country . $unAnswered);
 
 		return $response;
 
