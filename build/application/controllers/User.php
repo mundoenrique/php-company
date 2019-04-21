@@ -46,7 +46,10 @@ class User extends NOVO_Controller {
 		log_message('INFO', 'NOVO User: passwordRecovery Method Initialized');
 		array_push(
 			$this->includeAssets->jsFiles,
-			"user/pass-recovery"
+			"user/pass-recovery",
+			"third_party/jquery.validate",
+			"validate-forms",
+			"third_party/additional-methods"
 		);
 		$this->views = ['user/pass-recovery'];
 		$this->render->titlePage = "Recuperar contraseña";

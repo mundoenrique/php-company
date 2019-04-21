@@ -67,7 +67,8 @@ class Novo_User_Model extends NOVO_Model {
 			case -35:
 				$this->response->code = 1;
 				$this->response->title = 'Usuario suspendido';
-				$this->response->msg = lang('ERROR_(-35)');
+				$this->response->className = 'login-inactive';
+				$this->response->msg = lang('ERROR_(-8)');
 				break;
 			case -2:
 				$this->response->code = 0;
