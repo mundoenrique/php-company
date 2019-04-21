@@ -5,8 +5,6 @@ country = $('body').attr('country'),
 pais = $('body').attr('pais'),
 verb = 'POST',
 who, where, data;
-
-console.log(baseURL, baseAssets, country)
 //iconos
 var iconSuccess;
 var iconInfo;
@@ -30,7 +28,7 @@ var generalMsg ;
 function callNovoCore (verb, who, where, data, _response_) {
 	var title = generalTitle;
 	var msg = generalMsg;
-	console.log('Model: ', who, 'Method: ', where, 'Request: ', data);
+	console.log('Model:', who, 'Method:', where, 'Request:', data);
 	var dataRequest = JSON.stringify({
 		who: who,
 		where: where,
@@ -43,7 +41,6 @@ function callNovoCore (verb, who, where, data, _response_) {
 		context: document.body,
 		dataType: 'json',
 	}).done(function(response, status) {
-		console.log('done', response, status);
 		switch(response.code) {
 			case 302:
 
