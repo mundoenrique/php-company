@@ -17,6 +17,11 @@ class User extends NOVO_Controller {
 	 */
 	public function index()
 	{
+		if($this->session->userdata('logged')) {
+			$urlRedirect = str_replace($this->countryUri, $this->config->item('country'), base_url('dashboard'));
+			redirect($urlRedirect, 'location');
+			exit();
+		}
 		log_message('INFO', 'NOVO User: index Method Initialized');
 		array_push(
 			$this->includeAssets->cssFiles,
