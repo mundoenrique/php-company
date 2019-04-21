@@ -240,6 +240,7 @@ $lang['ERROR_(-233)']= "La empresa no posee saldo disponible para el servicio";
 $lang['ERROR_(-238)']= "El registro no existe";
 $lang['ERROR_(-241)']= "Error parámetros inválidos";
 $lang['ERROR_(-256)']= "Tipo de Lote Invalido";
+$lang['ERROR_(-263)']= "El usuario será bloqueado al próximo intento fallido";
 $lang['ERROR_(-280)'] = 'Tipo de archivo no permitido.';
 $lang['ERROR_(-281)'] = 'Los datos de la cuenta son inválidos.';
 $lang['ERROR_(-285)'] = 'La cuenta está inactiva.';

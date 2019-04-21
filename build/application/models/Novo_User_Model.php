@@ -47,15 +47,41 @@ class Novo_User_Model extends NOVO_Model {
 				];
 
 				$this->session->set_userdata($userData);
-				$this->response->code = 200;
+				$this->response->code = 0;
 				$this->response->msg = 'Ingreso exitoso';
+				$this->response->data = base_url('dashboard');
+				break;
+			case -1:
+				$this->response->code = 1;
+				$this->response->title = 'Usuario incorrecto';
+				$this->response->className = 'error-login-2';
+				$this->response->msg = lang('ERROR_(-1)');
+				break;
+			case -263:
+				$this->response->code = 1;
+				$this->response->title = 'El usuario será suspendido';
+				$this->response->className = 'login-inactive';
+				$this->response->msg = lang('ERROR_(-263)');
+				break;
+			case -8:
+			case -35:
+				$this->response->code = 1;
+				$this->response->title = 'Usuario suspendido';
+				$this->response->msg = lang('ERROR_(-35)');
 				break;
 			case -2:
-				$this->response->code = 301;
-				$this->response->title = 'Aceptar términos de uso';
-				$this->response->msg = 'Usuario nuevo';
+				$this->response->code = 0;
+				$this->response->title = 'Usuario nuevo';
+				$this->response->msg = 'Debe aceptar los términos de uso';
 				$this->response->data = base_url('inf-condiciones');
 				$this->session->set_flashdata('newUser', TRUE);
+				break;
+			case -185:
+				$this->response->code = 0;
+				$this->response->title = 'Clave vencida';
+				$this->response->msg = 'Debe cambiar la clave';
+				$this->response->data = base_url('cambiar-clave');
+				$this->session->set_flashdata('passOld', TRUE);
 				break;
 		}
 

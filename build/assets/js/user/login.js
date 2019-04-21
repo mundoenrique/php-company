@@ -1,5 +1,7 @@
 'use strict'
 $(function() {
+	$.balloon.defaults.css = null;
+
 	$('#login-btn').on('click', function(e) {
 		e.preventDefault();
 		var
@@ -19,11 +21,16 @@ $(function() {
 			.addClass('validate-error')
 			.attr('placeholder', 'Campo obligatorio');
 		} else {
+			var loader = $('#loader').html();
+			var text = $(this).text()
 			user = {
 				user: user.val(),
 				pass: $.md5(pass.val())
 			}
-			ingresar(user);
+			$('#login-form input, #login-form button').attr('disabled', true);
+			$(this).html(loader);
+			$(this).children(0).css({'height': '34px'})
+			ingresar(user, text);
 		}
 	});
 	$('#user_login, #user_pass').on('focus keypress', function() {
@@ -31,20 +38,31 @@ $(function() {
 	});
 })
 
-function ingresar(user) {
+function ingresar(user, text) {
 	verb = "GET"; who = 'User'; where = 'Login'; data = user;
 	callNovoCore (verb, who, where, data, function(response) {
+		var dataResponse = response.data
 		switch(response.code) {
-			case 200:
-				//$(location).attr('href', baseUrl+'notificaciones/')
+			case 0:
+				dataResponse.indexOf(country) != -1 ? dataResponse = dataResponse.replace(country, pais) : '';
+				$(location).attr('href', dataResponse)
 				break;
-			case 206:
-				//$(location).attr('href', baseUrl+'cambiodeclave')
+			case 1:
+			$('#user_login').showBalloon({
+				html: true,
+				classname: response.className,
+				position: "left",
+				contents: response.msg
+			});
 				break;
 			default:
-				title = response.title;
-				msg = response.msg;
-				messagesUser(title, iconWarning, ClassWarning, msg, dirCenter);
+
 		}
+		setTimeout(function() {
+			$("#user_login").hideBalloon();
+			$('#login-form input, #login-form button').attr('disabled', false);
+			$('#login-btn').html(text);
+			$('#user_pass').val('');
+		}, 2000);
 	})
 }

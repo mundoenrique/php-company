@@ -241,6 +241,7 @@ $lang['ERROR_(-235)']= "En estos momentos no podemos procesar su solicitud";
 $lang['ERROR_(-238)']= "El registro no existe";
 $lang['ERROR_(-241)']= "Parámetros inválidos";
 $lang['ERROR_(-256)']= "Tipo de Lote Inválido";
+$lang['ERROR_(-263)']= "El usuario será bloqueado al próximo intento fallido";
 $lang['ERROR_(-280)'] = 'Tipo de archivo no permitido.';
 $lang['ERROR_(-281)'] = 'Los datos de la cuenta son inválidos.';
 $lang['ERROR_(-285)'] = 'La cuenta está inactiva.';

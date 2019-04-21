@@ -1,7 +1,7 @@
 'use strict'
 var baseURL = $('body').attr('base-url'),
 baseAssets = $('body').attr('asset-url'),
-country = $('#body').attr('country'),
+country = $('body').attr('country'),
 pais = $('body').attr('pais'),
 verb = 'POST',
 who, where, data;
