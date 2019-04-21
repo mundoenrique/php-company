@@ -23,7 +23,9 @@ class Encrypt_Connect {
 	public function encode($data, $model = '') {
 		log_message('INFO', 'NOVO Encrypt_Connect: encode Method Initialized');
 
-		$data = json_encode($data, JSON_UNESCAPED_UNICODE);
+		if($model != '') {
+			$data = json_encode($data, JSON_UNESCAPED_UNICODE);
+		}
 		log_message('DEBUG', 'NOVO ['.$this->userName.'] REQUEST '.$model.': '.$data);
 
 		$dataB = base64_encode($data);

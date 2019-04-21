@@ -43,32 +43,33 @@ class NOVO_Controller extends CI_Controller {
 			$this->dataRequest = json_decode(
 				$this->security->xss_clean(strip_tags(base64_decode($this->input->get_post('request'))))
 			);
+		} else {
+			$faviconLoader = getFaviconLoader();
+			$this->render->favicon = $faviconLoader->favicon;
+			$this->render->ext = $faviconLoader->ext;
+			$this->render->loader = $faviconLoader->loader;
+			$this->render->lang = $this->config->item('app_lang');
+			$this->render->countryConf = $this->config->item('country');
+			$this->render->countryUri = $this->countryUri;
+			switch($this->countryUri) {
+				case 'bp':
+					$this->skin = 'pichincha';
+					break;
+				default:
+					$this->skin = 'novo';
+			}
+			$this->includeAssets->cssFiles = [
+				"validate",
+				"$this->skin-structure",
+				"$this->skin-appearance"
+			];
+			$this->includeAssets->jsFiles = [
+				"third_party/html5",
+				"third_party/jquery-3.4.0",
+				"third_party/jquery-ui-1.12.1",
+				"helper"
+			];
 		}
-		$faviconLoader = getFaviconLoader();
-		$this->render->favicon = $faviconLoader->favicon;
-		$this->render->ext = $faviconLoader->ext;
-		$this->render->loader = $faviconLoader->loader;
-		$this->render->lang = $this->config->item('app_lang');
-		$this->render->countryConf = $this->config->item('country');
-		$this->render->countryUri = $this->countryUri;
-		switch($this->countryUri) {
-			case 'bp':
-				$this->skin = 'pichincha';
-				break;
-			default:
-				$this->skin = 'novo';
-		}
-		$this->includeAssets->cssFiles = [
-			"validate",
-			"$this->skin-structure",
-			"$this->skin-appearance"
-		];
-		$this->includeAssets->jsFiles = [
-			"third_party/html5",
-			"third_party/jquery-3.4.0",
-			"third_party/jquery-ui-1.12.1",
-			"helper"
-		];
 	}
 
 	protected function loadView($module)

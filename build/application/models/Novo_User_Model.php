@@ -27,7 +27,7 @@ class Novo_User_Model extends NOVO_Model {
 		switch($this->isResponseRc) {
 			case 0:
 				$nameUser = mb_strtolower($response->usuario->primerNombre).' ';
-				$nameUser+= mb_strtolower($response->usuario->primerApellido);
+				$nameUser.= mb_strtolower($response->usuario->primerApellido);
 				$formatDate = $this->config->item('format_date');
 				$formatTime = $this->config->item('format_time');
 				$lastSession = date("$formatDate $formatTime", strtotime(str_replace('/', '-', $response->usuario->fechaUltimaConexion)));
@@ -41,8 +41,8 @@ class Novo_User_Model extends NOVO_Model {
 					'lastSession' => $lastSession,
 					'token' => $response->token,
 					'cl_addr' => $this->encrypt_connect->encode($_SERVER['REMOTE_ADDR']),
-					'countrySess' => $this->session->userdata('countryConf'),
-					'pais' => $this->session->userdata('countryConf'),
+					'countrySess' => $this->config->item('country'),
+					'pais' => $this->config->item('country'),
 					'logged_in' => TRUE
 				];
 
