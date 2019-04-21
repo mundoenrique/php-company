@@ -12,7 +12,7 @@
 						<label for="user_login">Usuario</label>
 						<input type="text" id="user_login" name="user_login" placeholder="Usuario">
 						<label for="user_pass">Contraseña</label>
-						<input type="text" id="user_pass" name="user_pass" placeholder="Contraseña">
+						<input type="password" id="user_pass" name="user_pass" placeholder="Contraseña">
 					</fieldset>
 					<button id="login-btn" name="login-btn" class="btn-sidebar">Ingresar</button>
 				</form>

@@ -46,23 +46,27 @@ if(!function_exists('countryCheck')) {
 	}
 }
 
-if(!function_exists('setFavicon')) {
-	function setFavicon() {
+if(!function_exists('getFaviconLoader')) {
+	function getFaviconLoader() {
 		$CI = &get_instance();
 		$favicon = $CI->config->item('favicon');
+		$loader = 'loading-';
 		switch($CI->config->item('country')) {
 			case 'Ec-bp':
 				$ext = 'ico';
+				$loader.= 'bp.gif';
 				break;
 			default:
 				$ext = 'png';
+				$loader.= 'novo.gif';
 		}
 
-		$faviconData = new stdClass();
-		$faviconData->favicon = $favicon;
-		$faviconData->ext = $ext;
+		$faviconLoader = new stdClass();
+		$faviconLoader->favicon = $favicon;
+		$faviconLoader->ext = $ext;
+		$faviconLoader->loader = $loader;
 
-		return $faviconData;
+		return $faviconLoader;
 	}
 }
 

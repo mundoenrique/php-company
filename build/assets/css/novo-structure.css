@@ -141,6 +141,9 @@ button {
 .btn-sidebar {
 	padding: 0px 92px;
 	margin: 15px auto;
+	position: relative;
+	height: 35px;
+	width: 100%;
 }
 
 #head {

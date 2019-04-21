@@ -44,9 +44,10 @@ class NOVO_Controller extends CI_Controller {
 				$this->security->xss_clean(strip_tags(base64_decode($this->input->get_post('request'))))
 			);
 		}
-		$faviconData = setFavicon();
-		$this->render->favicon = $faviconData->favicon;
-		$this->render->ext = $faviconData->ext;
+		$faviconLoader = getFaviconLoader();
+		$this->render->favicon = $faviconLoader->favicon;
+		$this->render->ext = $faviconLoader->ext;
+		$this->render->loader = $faviconLoader->loader;
 		$this->render->lang = $this->config->item('app_lang');
 		$this->render->countryConf = $this->config->item('country');
 		$this->render->countryUri = $this->countryUri;

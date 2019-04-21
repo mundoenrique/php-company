@@ -79,6 +79,9 @@
 			</div>
 		</div>
 	</footer>
+	<div id="loader" class="hidden">
+		<img src="<?= $this->asset->insertFile($loader, 'images/loading-gif') ?>" alt="Verificando...">
+	</div>
 	<?= $this->asset->insertJs(); ?>
 </body>
 </html>
