@@ -47,17 +47,19 @@ class NOVO_Model extends CI_Model {
 			switch($this->isResponseRc) {
 				case -29:
 				case -61:
-					$this->response->code = 301;
+					$this->response->code = 3;
 					$this->response->msg = lang('ERROR_(-29)');
 					$this->response->data = base_url('home');
+					$this->session->sess_destroy();
 					break;
 				default:
-					$this->response->code = 301;
+					$view = $model !== 'login' ? 'dashboard' : 'home';
+					$this->response->code = 3;
 					$this->response->msg = lang('ERROR_GENERAL');
-					$this->response->data = base_url('dashboard');
+					$this->response->data = base_url($view);
 			}
 		} else {
-			$this->response->code = 301;
+			$this->response->code = 3;
 			$this->response->msg = lang('ERROR_GENERAL');
 			$this->response->data = base_url('dashboard');
 		}

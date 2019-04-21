@@ -25,9 +25,9 @@ class User extends NOVO_Controller {
 		array_push(
 			$this->includeAssets->jsFiles,
 			"third_party/jquery.md5",
+			"third_party/jquery.balloon",
 			"user/login",
 			"$this->countryUri/clave"
-
 		);
 		if($this->countryUri !== 'bp') {
 			array_push(
