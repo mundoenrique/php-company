@@ -7,10 +7,10 @@ pais = $('body').attr('pais'),
 verb = 'POST',
 who, where, data;
 //iconos
-var iconSuccess;
-var iconInfo;
-var iconWarning;
-var iconDanger;
+var iconSuccess = 'ui-icon-circle-check';
+var iconInfo = 'ui-icon-info';
+var iconWarning = 'ui-icon-alert';
+var iconDanger = 'ui-icon-closethick';
 
 //color de fondo
 var ClassSuccess;
@@ -69,16 +69,19 @@ function formatterDate(date) {
 	return new Date(dateStr);
 }
 
-function notiSystem(title, size, type, message) {
-	$( "#msg-system" ).dialog({
+function notiSystem(title, message, type, data) {
+	$('#system-info').dialog({
 		title: title,
 		modal: 'true',
-		minWidth: '210px',
-		minHeight: '300px',
+		minHeight: 100,
 		draggable: false,
 		resizable: false,
+		closeOnEscape: false,
 		open: function(event, ui) {
-			//$('.ui-dialog-titlebar-close', ui.dialog).hide();
+			$('.ui-dialog-titlebar-close', ui.dialog).hide();
+			$('#system-type').addClass(type)
+			$('#system-msg').html(message);
+			$('#accept').text(data.btn1.text)
 		}
 	});
 }

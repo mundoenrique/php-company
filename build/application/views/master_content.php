@@ -82,12 +82,17 @@
 	<div id="loader" class="hidden">
 		<img src="<?= $this->asset->insertFile($loader, 'images/loading-gif') ?>" alt="Verificando...">
 	</div>
-	<div id="msg-system" class="hidden">
-    <div id="msg-info" class="comb-content"></div>
-    <div id="actions" class="comb-content actions-buttons">
-        <button id="close-info" class="buttons-action"></button>
-        <button id="send-info" class="buttons-action"></button>
-    </div>
+	<div id="system-info" class="hidden">
+		<p>
+			<span id="system-type" class="ui-icon" style="float:left; margin:0 7px 50px 0;"></span>
+			<span id="system-msg"></span>
+		</p>
+		<div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+			<div class="ui-dialog-buttonset">
+				<button type="button" id="cancel" class="ui-button ui-corner-all ui-widget"></button>
+				<button type="button" id="accept" class=""></button>
+			</div>
+		</div>
 	</div>
 	<?= $this->asset->insertJs(); ?>
 </body>

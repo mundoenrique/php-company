@@ -61,7 +61,7 @@ function ingresar(user, text) {
 				ingresar(user, text);
 				break;
 			case 3:
-				notiSystem(response.title)
+				notiSystem(response.title, response.msg, response.type, response.data)
 				break;
 			default:
 

@@ -90,7 +90,16 @@ class Novo_User_Model extends NOVO_Model {
 					break;
 				case -262:
 					$this->response->code = 3;
-					$this->response->msg = "Estimado usuario usted no tiene permisos para la aplicación, por favor comuníquese con el administrador";
+					$this->response->msg = 'Estimado usuario usted no tiene permisos para la aplicación, por favor comuníquese ';
+					$this->response->msg.= 'con el administrador';
+					$this->response->type = 'ui-icon-info';
+					$this->response->data = [
+						'btn1'=> [
+							'text'=> 'Aceptar',
+							'link'=> FALSE,
+							'action'=> 'close'
+						]
+					];
 					break;
 			}
 		}

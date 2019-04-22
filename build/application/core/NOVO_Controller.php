@@ -62,6 +62,7 @@ class NOVO_Controller extends CI_Controller {
 			}
 			$this->includeAssets->cssFiles = [
 				"validate",
+				"third_party/jquery-ui",
 				"$this->skin-structure",
 				"$this->skin-appearance"
 			];
