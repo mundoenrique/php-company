@@ -1483,11 +1483,11 @@ body .ui-tooltip {
 
 .ui-icon,
 .ui-widget-content .ui-icon {
-	background-image: url(images/ui-icons_222222_256x240.png);
+	background-image: url(../images/ui-icons_222222_256x240.png);
 }
 
 .ui-widget-header .ui-icon {
-	background-image: url(images/ui-icons_ffffff_256x240.png);
+	background-image: url(../images/ui-icons_ffffff_256x240.png);
 }
 
 .ui-state-default .ui-icon {
@@ -1496,7 +1496,7 @@ body .ui-tooltip {
 
 .ui-state-hover .ui-icon,
 .ui-state-focus .ui-icon {
-	background-image: url(images/ui-icons_ef8c08_256x240.png);
+	background-image: url(../images/ui-icons_ef8c08_256x240.png);
 }
 
 .ui-state-active .ui-icon {
@@ -1504,12 +1504,12 @@ body .ui-tooltip {
 }
 
 .ui-state-highlight .ui-icon {
-	background-image: url(images/ui-icons_228ef1_256x240.png);
+	background-image: url(../images/ui-icons_228ef1_256x240.png);
 }
 
 .ui-state-error .ui-icon,
 .ui-state-error-text .ui-icon {
-	background-image: url(images/ui-icons_ffd27a_256x240.png);
+	background-image: url(../images/ui-icons_ffd27a_256x240.png);
 }
 
 .ui-icon-blank {
@@ -2247,7 +2247,7 @@ body .ui-tooltip {
 }
 
 .ui-widget-shadow {
-	background: black url(images/ui-bg_flat_10_000000_40x100.png) 50% 50% repeat-x;
+	background: black url(../images/ui-bg_flat_10_000000_40x100.png) 50% 50% repeat-x;
 	opacity: .2;
 	filter: Alpha(Opacity=20);
 	border-radius: 5px;

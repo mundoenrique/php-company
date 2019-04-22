@@ -1,5 +1,6 @@
 'use strict'
-var baseURL = $('body').attr('base-url'),
+var
+baseURL = $('body').attr('base-url'),
 baseAssets = $('body').attr('asset-url'),
 country = $('body').attr('country'),
 pais = $('body').attr('pais'),
@@ -42,8 +43,8 @@ function callNovoCore (verb, who, where, data, _response_) {
 		dataType: 'json',
 	}).done(function(response, status) {
 		switch(response.code) {
-			case 302:
-
+			case 303:
+				$(location).attr('href', response.data)
 				break;
 			case 500:
 
@@ -66,4 +67,18 @@ function formatterDate(date) {
 	dateStr = dateArray[1] + '/' + dateArray[0] + '/' + dateArray[2];
 
 	return new Date(dateStr);
+}
+
+function notiSystem(title, size, type, message) {
+	$( "#msg-system" ).dialog({
+		title: title,
+		modal: 'true',
+		minWidth: '210px',
+		minHeight: '300px',
+		draggable: false,
+		resizable: false,
+		open: function(event, ui) {
+			//$('.ui-dialog-titlebar-close', ui.dialog).hide();
+		}
+	});
 }

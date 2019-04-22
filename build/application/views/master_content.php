@@ -82,6 +82,13 @@
 	<div id="loader" class="hidden">
 		<img src="<?= $this->asset->insertFile($loader, 'images/loading-gif') ?>" alt="Verificando...">
 	</div>
+	<div id="msg-system" class="hidden">
+    <div id="msg-info" class="comb-content"></div>
+    <div id="actions" class="comb-content actions-buttons">
+        <button id="close-info" class="buttons-action"></button>
+        <button id="send-info" class="buttons-action"></button>
+    </div>
+	</div>
 	<?= $this->asset->insertJs(); ?>
 </body>
 </html>

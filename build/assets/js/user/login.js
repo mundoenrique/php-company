@@ -25,7 +25,8 @@ $(function() {
 			var text = $(this).text()
 			user = {
 				user: user.val(),
-				pass: $.md5(pass.val())
+				pass: $.md5(pass.val()),
+				active: ''
 			}
 			$('#login-form input, #login-form button').attr('disabled', true);
 			$(this).html(loader);
@@ -44,25 +45,34 @@ function ingresar(user, text) {
 		var dataResponse = response.data
 		switch(response.code) {
 			case 0:
-				dataResponse.indexOf(country) != -1 ? dataResponse = dataResponse.replace(country, pais) : '';
+				dataResponse.indexOf('dashboard') != -1 ? dataResponse = dataResponse.replace(country, pais) : '';
 				$(location).attr('href', dataResponse)
 				break;
 			case 1:
-			$('#user_login').showBalloon({
-				html: true,
-				classname: response.className,
-				position: "left",
-				contents: response.msg
-			});
+				$('#user_login').showBalloon({
+					html: true,
+					classname: response.className,
+					position: "left",
+					contents: response.msg
+				});
+				break;
+			case 2:
+				user.active = 1;
+				ingresar(user, text);
+				break;
+			case 3:
+				notiSystem(response.title)
 				break;
 			default:
 
 		}
-		setTimeout(function() {
-			$("#user_login").hideBalloon();
-			$('#login-form input, #login-form button').attr('disabled', false);
-			$('#login-btn').html(text);
-			$('#user_pass').val('');
-		}, 2000);
+		if(response.code !== 2) {
+			setTimeout(function() {
+				$("#user_login").hideBalloon();
+				$('#login-form input, #login-form button').attr('disabled', false);
+				$('#login-btn').html(text);
+				$('#user_pass').val('');
+			}, 2000);
+		}
 	})
 }
