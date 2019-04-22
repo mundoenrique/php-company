@@ -190,7 +190,7 @@ ol.breadcrumb li {
 
 #sidebar {
 	float: right;
-	width: 220px;
+	width: 250px;
 }
 
 #sidebar-cambioclave {
@@ -214,10 +214,16 @@ h2.widget-title {
 	padding: 10px;
 }
 
-#widget-area .widget .widget-content input,
-#widget-area .widget .widget-content select,
-#widget-area .widget .widget-content textarea {
-	width: 178px;
+#login-btn {
+	width: 100%;
+}
+
+#user_pass,
+#user_login {
+	width: calc(100% - 22px);
+	width: stretch;
+	width: -webkit-fill-available;
+	width: -moz-available;
 }
 
 #foot {

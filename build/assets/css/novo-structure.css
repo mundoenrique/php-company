@@ -226,10 +226,16 @@ ol.breadcrumb li {
 	padding: 10px;
 }
 
-#widget-area .widget .widget-content input,
-#widget-area .widget .widget-content select,
-#widget-area .widget .widget-content textarea {
-	width: 208px;
+#login-btn {
+	width: 100%;
+}
+
+#user_pass,
+#user_login {
+	width: calc(100% - 22px);
+	width: stretch;
+	width: -webkit-fill-available;
+	width: -moz-available;
 }
 
 .foot {
