@@ -19,7 +19,10 @@ class Encrypt_Connect {
 		$this->keyNovo = $this->CI->config->item('keyNovo');
 		$this->iv = "\0\0\0\0\0\0\0\0";
 	}
-
+	/**
+	 * @info método para cifrar las petiones al servicio
+	 * @author J. Enrique Peñaloza Piñero
+	 */
 	public function encode($data, $model = '') {
 		log_message('INFO', 'NOVO Encrypt_Connect: encode Method Initialized');
 
@@ -39,7 +42,10 @@ class Encrypt_Connect {
 
 		return base64_encode($cryptData);
 	}
-
+	/**
+	 * @info método para descifrar las respuesta al servicio
+	 * @author J. Enrique Peñaloza Piñero
+	 */
 	public function decode($cryptData, $model = '')
 	{
 		log_message('INFO', 'NOVO Encrypt_Connect: decode Method Initialized');
@@ -61,7 +67,10 @@ class Encrypt_Connect {
 		return $response;
 
 	}
-
+	/**
+	 * @info método para realizar la petición al servicio
+	 * @author J. Enrique Peñaloza Piñero
+	 */
 	public function connectWs($request)
 	{
 		log_message('INFO', 'NOVO Encrypt_Connect: connectWs Method Initialized');
