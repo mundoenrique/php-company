@@ -4793,3 +4793,11 @@ li.menu-item.security:nth-child(3),
 li.ui-state-default.ui-corner-top:nth-child(3) {
 	display: none;
 }
+
+#system-info .ui-dialog-buttonpane {
+	border: none;
+}
+
+#system-info #cancel {
+	display: none;
+}
