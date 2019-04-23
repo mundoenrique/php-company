@@ -101,6 +101,18 @@ class Novo_User_Model extends NOVO_Model {
 						]
 					];
 					break;
+				case -28:
+					$this->response->code = 3;
+					$this->response->msg = lang('ERROR_(-28)');
+					$this->response->type = 'ui-icon-alert';
+					$this->response->data = [
+						'btn1'=> [
+							'text'=> 'Aceptar',
+							'link'=> base_url('logout'),
+							'action'=> 'logout'
+						]
+					];
+					break;
 			}
 		}
 

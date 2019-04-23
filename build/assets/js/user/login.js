@@ -62,6 +62,12 @@ function ingresar(user, text) {
 				break;
 			case 3:
 				notiSystem(response.title, response.msg, response.type, response.data)
+				var btn = response.data.btn1;
+				if(btn.action == 'logout') {
+					$('#accept').on('click', function(){
+						finishSession(user, btn.link)
+					});
+				}
 				break;
 			default:
 
@@ -75,4 +81,11 @@ function ingresar(user, text) {
 			}, 2000);
 		}
 	})
+}
+
+function finishSession(user, url) {
+	console.log(url)
+	$.post(url, {
+		'data-user': user
+});
 }
