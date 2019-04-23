@@ -51,7 +51,7 @@ class NOVO_Model extends CI_Model {
 					$this->response->code = 303;
 					$this->response->msg = lang('ERROR_(-29)');
 					$this->response->data = base_url('inicio');
-					$this->response->type = 'ui-icon-alert';
+					$this->response->icon = 'ui-icon-alert';
 					$this->response->data = [
 						'btn1'=> [
 							'text'=> 'Aceptar',
@@ -64,7 +64,7 @@ class NOVO_Model extends CI_Model {
 				default:
 					$this->response->code = 303;
 					$this->response->msg = lang('ERROR_GENERAL');
-					$this->response->type = 'ui-icon-alert';
+					$this->response->icon = 'ui-icon-alert';
 					$this->response->data = [
 						'btn1'=> [
 							'text'=> 'Aceptar',
@@ -76,7 +76,7 @@ class NOVO_Model extends CI_Model {
 		} else {
 			$this->response->code = 303;
 			$this->response->msg = lang('ERROR_GENERAL');
-			$this->response->type = 'ui-icon-alert';
+			$this->response->icon = 'ui-icon-alert';
 			$this->response->data = [
 				'btn1'=> [
 					'text'=> 'Aceptar',
