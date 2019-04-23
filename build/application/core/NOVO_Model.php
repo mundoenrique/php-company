@@ -50,18 +50,40 @@ class NOVO_Model extends CI_Model {
 				case -61:
 					$this->response->code = 303;
 					$this->response->msg = lang('ERROR_(-29)');
-					$this->response->data = base_url('home');
+					$this->response->data = base_url('inicio');
+					$this->response->type = 'ui-icon-alert';
+					$this->response->data = [
+						'btn1'=> [
+							'text'=> 'Aceptar',
+							'link'=> base_url('inicio'),
+							'action'=> 'redirect'
+						]
+					];
 					$this->session->sess_destroy();
 					break;
 				default:
 					$this->response->code = 303;
 					$this->response->msg = lang('ERROR_GENERAL');
-					$this->response->data = base_url('dashboard');
+					$this->response->type = 'ui-icon-alert';
+					$this->response->data = [
+						'btn1'=> [
+							'text'=> 'Aceptar',
+							'link'=> base_url('dashboard'),
+							'action'=> 'redirect'
+						]
+					];
 			}
 		} else {
 			$this->response->code = 303;
 			$this->response->msg = lang('ERROR_GENERAL');
-			$this->response->data = base_url('dashboard');
+			$this->response->type = 'ui-icon-alert';
+			$this->response->data = [
+				'btn1'=> [
+					'text'=> 'Aceptar',
+					'link'=> base_url('dashboard'),
+					'action'=> 'redirect'
+				]
+			];
 		}
 
 		return $responseDecript;
