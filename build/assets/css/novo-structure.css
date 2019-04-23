@@ -1457,8 +1457,19 @@ li.filter-1 a {
 	padding: 0;
 }
 
-.column-center {
-	padding: 15px 280px 25px;
+.recuperar-clave-fieldset {
+	padding-top: 15px;
+	padding-bottom: 25px;
+}
+
+.field-wrapper {
+	margin: 0 auto;
+	width: 270px;
+	margin-bottom: 10px;
+}
+
+.field-wrapper > input[type=text] {
+	margin-bottom: 0;
 }
 
 .line-field {
