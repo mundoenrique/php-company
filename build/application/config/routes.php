@@ -3,8 +3,8 @@
 $route['default_controller'] = "user";
 $route['(:any)/async-call'] = "callModels";
 
-$route['(:any)/home'] = "user/index";
-$route['(:any)/home/(:any)'] = "user/index";
+$route['(:any)/inicio'] = "user/index";
+$route['(:any)/inicio/(:any)'] = "user/index";
 $route['(:any)/recuperar-clave'] = "user/passwordRecovery";
 
 $route['(:any)/inf-beneficios'] = "information/benefits";

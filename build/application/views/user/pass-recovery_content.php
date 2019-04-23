@@ -15,7 +15,7 @@
 				<input type="text" id="email" name="email" class="input-field  field-large" maxlength="64" placeholder="<?= lang('PLACE_HOLDER_MAIL') ?>">
 			</fieldset>
 			<div class="form-actions">
-				<a class="come-back" href="<?= base_url('home') ?>">Cancelar</a>
+				<a class="come-back" href="<?= base_url('inicio') ?>">Cancelar</a>
 				<button id="continuar" class="r-button">Continuar</button>
 			</div>
 		</form>
