@@ -41,7 +41,7 @@ $(function() {
 
 function ingresar(user, text) {
 	verb = "GET"; who = 'User'; where = 'Login'; data = user;
-	callNovoCore (verb, who, where, data, function(response) {
+	callNovoCore(verb, who, where, data, function(response) {
 		var dataResponse = response.data
 		switch(response.code) {
 			case 0:
@@ -61,11 +61,12 @@ function ingresar(user, text) {
 				ingresar(user, text);
 				break;
 			case 3:
-				notiSystem(response.title, response.msg, response.type, response.data)
+				notiSystem(response.title, response.msg, response.type, response.data);
 				var btn = response.data.btn1;
 				if(btn.action == 'logout') {
 					$('#accept').on('click', function(){
-						finishSession(user, btn.link)
+						verb = 'POST'; who = url.who; where = url.where; data = user;
+						callNovoCore (verb, who, where, data)
 					});
 				}
 				break;
@@ -81,11 +82,4 @@ function ingresar(user, text) {
 			}, 2000);
 		}
 	})
-}
-
-function finishSession(user, url) {
-	console.log(url)
-	$.post(url, {
-		'data-user': user
-});
 }

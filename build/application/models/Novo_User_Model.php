@@ -30,7 +30,11 @@ class Novo_User_Model extends NOVO_Model {
 					$nameUser.= mb_strtolower($response->usuario->primerApellido);
 					$formatDate = $this->config->item('format_date');
 					$formatTime = $this->config->item('format_time');
-					$lastSession = date("$formatDate $formatTime", strtotime(str_replace('/', '-', $response->usuario->fechaUltimaConexion)));
+					$lastSession = date(
+						"$formatDate $formatTime", strtotime(
+							str_replace('/', '-', $response->usuario->fechaUltimaConexion)
+						)
+					);
 					$userData = [
 						'sessionId' => $response->logAccesoObject->sessionId,
 						'logged' => TRUE,
@@ -108,7 +112,10 @@ class Novo_User_Model extends NOVO_Model {
 					$this->response->data = [
 						'btn1'=> [
 							'text'=> 'Aceptar',
-							'link'=> base_url('logout'),
+							'link'=> [
+								'who'=> 'User',
+								'where'=> 'finishSession'
+							],
 							'action'=> 'logout'
 						]
 					];
@@ -117,5 +124,23 @@ class Novo_User_Model extends NOVO_Model {
 		}
 
 		return $this->response;
+	}
+
+	public function callWs_finishSession_User($dataRequest = FALSE)
+	{
+		log_message('INFO', 'NOVO User Model: Login method Initialized');
+		$user = $dataRequest ? $dataRequest->user : $this->session->userdata('userName');
+		$this->className = 'com.novo.objects.TOs.UsuarioTO';
+
+		$this->dataAccessLog->userName = $user;
+		$this->dataAccessLog->modulo = 'logout';
+		$this->dataAccessLog->function = 'logout';
+		$this->dataAccessLog->operation = 'desconectarUsuario';
+
+		$this->dataRequest->idUsuario = $user;
+		$this->dataRequest->codigoGrupo = $this->session->userdata('codigoGrupo');
+
+		$response = $this->sendToService('finishSession');
+
 	}
 }

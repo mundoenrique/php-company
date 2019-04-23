@@ -44,10 +44,7 @@ function callNovoCore (verb, who, where, data, _response_) {
 	}).done(function(response, status) {
 		switch(response.code) {
 			case 303:
-				$(location).attr('href', response.data)
-				break;
-			case 500:
-
+				notiSystem(response.title, response.msg, response.type, response.data);
 				break;
 			default:
 				_response_(response);
@@ -70,7 +67,9 @@ function formatterDate(date) {
 }
 
 function notiSystem(title, message, type, data) {
-	$('#system-info').dialog({
+	var btn1 = data.btn1;
+	var dialogMoldal = $('#system-info');
+	dialogMoldal.dialog({
 		title: title,
 		modal: 'true',
 		minHeight: 100,
@@ -79,9 +78,16 @@ function notiSystem(title, message, type, data) {
 		closeOnEscape: false,
 		open: function(event, ui) {
 			$('.ui-dialog-titlebar-close', ui.dialog).hide();
-			$('#system-type').addClass(type)
+			$('#system-type').addClass(type);
 			$('#system-msg').html(message);
-			$('#accept').text(data.btn1.text)
+			$('#accept')
+			.text(btn1.text)
+			.on('click', function(e) {
+				dialogMoldal.dialog('destroy');
+				if(btn1.actio === 'redirect') {
+					$(location).attr('href', btn1.link);
+				}
+			})
 		}
 	});
 }
