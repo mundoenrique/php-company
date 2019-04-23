@@ -6,13 +6,19 @@
 	<article class="padding-left-right">
 		<p class="paragraph"><?= lang('FORGOT_PASS'); ?></p>
 		<form id="pass-recovery" name="pass-recovery" accept-charset="utf-8">
-			<fieldset class="column-center">
-				<label for="card-holder-id" class="line-field"><?= lang('USER_USER'); ?></label>
-				<input  type="text" id="user-name" name="user-name" class="input-field field-medium" maxlength="15">
-				<label for="card-holder-id" class="line-field"><?= lang('RIF_NIT'); ?></label>
-				<input type="text" id="id-company" name="id-company" class="input-field field-medium" maxlength="17" placeholder="<?= lang('PLACE_HOLDER_NIT'); ?>">
-				<label for="email" class="line-field"><?= lang('MAIL'); ?></label>
-				<input type="text" id="email" name="email" class="input-field  field-large" maxlength="64" placeholder="<?= lang('PLACE_HOLDER_MAIL') ?>">
+			<fieldset class="recuperar-clave-fieldset">
+				<div class="field-wrapper">
+					<label for="card-holder-id" class="line-field"><?= lang('USER_USER'); ?></label>
+					<input type="text" id="user-name" name="user-name" class="input-field field-large" maxlength="15">
+				</div>
+				<div class="field-wrapper">
+					<label for="card-holder-id" class="line-field"><?= lang('RIF_NIT'); ?></label>
+					<input type="text" id="id-company" name="id-company" class="input-field field-large" maxlength="17" placeholder="<?= lang('PLACE_HOLDER_NIT'); ?>">
+				</div>
+				<div class="field-wrapper">
+					<label for="email" class="line-field"><?= lang('MAIL'); ?></label>
+					<input type="text" id="email" name="email" class="input-field  field-large" maxlength="64" placeholder="<?= lang('PLACE_HOLDER_MAIL') ?>">
+				</div>
 			</fieldset>
 			<div class="form-actions">
 				<a class="come-back" href="<?= base_url('home') ?>">Cancelar</a>

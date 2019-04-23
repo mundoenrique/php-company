@@ -4295,8 +4295,8 @@ p.ben-txt {
 	line-height: 18px;
 }
 
-.column-center {
-	border-bottom: 1px solid #dddddd;
+.form-actions {
+	border-top: 1px solid #dddddd;
 }
 
 .line-field {
