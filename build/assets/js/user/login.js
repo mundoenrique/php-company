@@ -6,7 +6,8 @@ $(function() {
 		e.preventDefault();
 		var
 		user = $('#user_login'),
-		pass = $('#user_pass');
+		pass = $('#user_pass'),
+		loginBtn = $(this);
 
 		if(!user.val() && !pass.val()) {
 			$('#user_login, #user_pass')
@@ -22,20 +23,20 @@ $(function() {
 			.attr('placeholder', 'Campo obligatorio');
 		} else {
 			var loader = $('#loader').html();
-			var text = $(this).text()
+			var text = loginBtn.text()
 			user = {
 				user: user.val(),
 				pass: $.md5(pass.val()),
 				active: ''
 			}
 			$('#login-form input, #login-form button').attr('disabled', true);
-			$(this).html(loader);
-			$(this).children(0).css({'height': '34px'})
+			loginBtn.html(loader);
+			loginBtn.children(0).css({'height': '34px'})
 			ingresar(user, text);
 		}
 	});
 	$('#user_login, #user_pass').on('focus keypress', function() {
-		$(this).removeClass('validate-error');
+		loginBtn.removeClass('validate-error');
 	});
 })
 
