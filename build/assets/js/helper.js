@@ -51,7 +51,19 @@ function callNovoCore (verb, who, where, data, _response_) {
 
 	}).fail(function(xrh, status, response) {
 		console.log('fail', response, status, xrh);
-
+		var title = 'Empresas Online Venezuela';
+		var msg = 'En estos momentos no podemos atender su solicitud, por favor intente en unos minutos';
+		var icon = 'ui-icon-info';
+		var data = {
+			btn1: {
+				text: 'Aceptar',
+				link: false,
+				action: 'close'
+			}
+		};
+		notiSystem(title, msg, icon, data);
+		response.code = 'unanswered';
+		_response_(response);
 	});
 }
 
