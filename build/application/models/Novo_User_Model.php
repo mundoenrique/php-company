@@ -26,6 +26,7 @@ class Novo_User_Model extends NOVO_Model {
 		if($this->isResponseRc !== FALSE) {
 			switch($this->isResponseRc) {
 				case 0:
+					log_message('DEBUG', 'NOVO ['.$dataRequest->user.'] RESPONSE: Login: ' . json_encode($response->usuario));
 					$nameUser = mb_strtolower($response->usuario->primerNombre).' ';
 					$nameUser.= mb_strtolower($response->usuario->primerApellido);
 					$formatDate = $this->config->item('format_date');
@@ -44,7 +45,7 @@ class Novo_User_Model extends NOVO_Model {
 						'codigoGrupo' => $response->usuario->codigoGrupo,
 						'lastSession' => $lastSession,
 						'token' => $response->token,
-						'cl_addr' => $this->encrypt_connect->encode($_SERVER['REMOTE_ADDR']),
+						'cl_addr' => $this->encrypt_connect->encode($_SERVER['REMOTE_ADDR'], $dataRequest->user, 'REMOTE_ADDR'),
 						'countrySess' => $this->config->item('country'),
 						'pais' => $this->config->item('country'),
 						'logged_in' => TRUE
@@ -96,7 +97,7 @@ class Novo_User_Model extends NOVO_Model {
 					$this->response->code = 3;
 					$this->response->msg = 'Estimado usuario usted no tiene permisos para la aplicación, por favor comuníquese ';
 					$this->response->msg.= 'con el administrador';
-					$this->response->type = 'ui-icon-info';
+					$this->response->icon = 'ui-icon-info';
 					$this->response->data = [
 						'btn1'=> [
 							'text'=> 'Aceptar',
@@ -108,7 +109,7 @@ class Novo_User_Model extends NOVO_Model {
 				case -28:
 					$this->response->code = 3;
 					$this->response->msg = lang('ERROR_(-28)');
-					$this->response->type = 'ui-icon-alert';
+					$this->response->icon = 'ui-icon-alert';
 					$this->response->data = [
 						'btn1'=> [
 							'text'=> 'Aceptar',
@@ -142,5 +143,16 @@ class Novo_User_Model extends NOVO_Model {
 
 		$response = $this->sendToService('finishSession');
 
+		if($this->isResponseRc !== FALSE) {
+			switch($this->isResponseRc) {
+				case 0:
+					$this->response->code = 0;
+					$this->response->msg = 'Sessión finalizada exitosamente';
+					$this->session->sess_destroy();
+					break;
+			}
+		}
+
+		return $this->response;
 	}
 }

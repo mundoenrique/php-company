@@ -9,6 +9,7 @@ class NOVO_Model extends CI_Model {
 	protected $dataRequest;
 	protected $response;
 	protected $isResponseRc;
+	protected $userName;
 
 	public function __construct()
 	{
@@ -20,6 +21,7 @@ class NOVO_Model extends CI_Model {
 		$this->countryConf = $this->config->item('country');
 		$this->isResponseRc = 'No web service';
 		$this->token = $this->session->userdata('token') ? $this->session->userdata('token') : '';
+		$this->userName = $this->session->userdata('userName');
 		$this->lang->load('erroreseol');
 		$this->lang->load('dashboard');
 	}
@@ -29,6 +31,7 @@ class NOVO_Model extends CI_Model {
 		log_message('INFO', 'NOVO sendToService Method Initialized');
 
 		$this->accessLog = accessLog($this->dataAccessLog);
+		$this->userName = $this->userName ? $this->userName : $this->dataAccessLog->userName;
 
 		$this->dataRequest->idOperation = $this->dataAccessLog->operation;
 		$this->dataRequest->className = $this->className;
@@ -36,10 +39,10 @@ class NOVO_Model extends CI_Model {
 		$this->dataRequest->token = $this->token;
 		$this->dataRequest->pais = $this->countryConf;
 
-		$encryptData = $this->encrypt_connect->encode($this->dataRequest, $model);
+		$encryptData = $this->encrypt_connect->encode($this->dataRequest, $this->userName, $model);
 		$request = ['bean'=> $encryptData, 'pais'=> $this->countryConf];
-		$response = $this->encrypt_connect->connectWs($request);
-		$responseDecript = $this->encrypt_connect->decode($response, $model);
+		$response = $this->encrypt_connect->connectWs($request, $this->userName);
+		$responseDecript = $this->encrypt_connect->decode($response, $this->userName, $model);
 		$this->isResponseRc = FALSE;
 		$this->response->title = lang('SYSTEM_NAME');
 
@@ -88,4 +91,39 @@ class NOVO_Model extends CI_Model {
 
 		return $responseDecript;
 	}
+
+	/*
+	public function callWs_Xxxx_User($dataRequest)
+	{
+		log_message('INFO', 'NOVO User Model: Xxxx method Initialized');
+		$this->className = '';
+
+		$this->dataAccessLog->modulo = '';
+		$this->dataAccessLog->function = '';
+		$this->dataAccessLog->operation = '';
+
+		$this->dataRequest->userName = $dataRequest->user;
+
+		$response = $this->sendToService('Xxxx');
+
+		if($this->isResponseRc !== FALSE) {
+			switch($this->isResponseRc) {
+				case 0:
+					$this->response->code = 0;
+					$this->response->title = '';
+					$this->response->msg = 'Debe cambiar la clave';
+					$this->response->data = '';
+					break;
+				case -xxx:
+					$this->response->code = 0;
+					$this->response->title = '';
+					$this->response->msg = '';
+					$this->response->data = '';
+					break;
+			}
+		}
+
+		return $this->response;
+	}
+	*/
 }
