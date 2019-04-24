@@ -148,6 +148,7 @@ class Novo_User_Model extends NOVO_Model {
 				case 0:
 					$this->response->code = 0;
 					$this->response->msg = 'Sessión finalizada exitosamente';
+					$this->response->data = 'finishSession';
 					$this->session->sess_destroy();
 					break;
 			}

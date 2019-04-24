@@ -47,7 +47,9 @@ function callNovoCore (verb, who, where, data, _response_) {
 				notiSystem(response.title, response.msg, response.icon, response.data);
 				break;
 			default:
-				_response_(response);
+				if(response.data !== 'finishSession') {
+					_response_(response);
+				}
 		}
 
 	}).fail(function(xrh, status, response) {

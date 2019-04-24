@@ -64,7 +64,6 @@ function ingresar(user, text) {
 				notiSystem(response.title, response.msg, response.icon, response.data);
 				var btn = response.data.btn1;
 				if(btn.action == 'logout') {
-					console.log(btn.action);
 					$('#accept').on('click', function(){
 						verb = 'POST'; who = btn.link.who; where = btn.link.where; data = user;
 						callNovoCore (verb, who, where, data)
