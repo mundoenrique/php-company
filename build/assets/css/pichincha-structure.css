@@ -3883,3 +3883,16 @@ button,
 a {
 	outline: none;
 }
+
+#system-info button {
+	margin-right: 0;
+	margin-left: 0.4em;
+}
+
+#system-info .ui-dialog-buttonpane {
+	padding-right: 0;
+}
+
+.ui-dialog-titlebar {
+	margin-bottom: 15px;
+}

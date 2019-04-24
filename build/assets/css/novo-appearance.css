@@ -4898,3 +4898,11 @@ button.green:hover {
 	border-top: 1px solid white;
 	list-style: none;
 }
+
+#system-info .ui-dialog-buttonpane {
+	border: none;
+}
+
+#system-info #cancel {
+	display: none;
+}
