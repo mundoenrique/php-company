@@ -18,11 +18,6 @@ var ClassinFo;
 var ClassWarning;
 var ClassDanger;
 
-//posición
-var dirLeft;
-var dirCenter;
-var dirRight;
-
 //fallos del sistema
 var generalTitle ;
 var generalMsg ;
