@@ -35,7 +35,7 @@ $(function() {
 		}
 	});
 	$('#user_login, #user_pass').on('focus keypress', function() {
-		loginBtn.removeClass('validate-error');
+		$(this).removeClass('validate-error');
 	});
 })
 
@@ -69,6 +69,9 @@ function ingresar(user, text) {
 						callNovoCore (verb, who, where, data);
 					});
 				}
+				break;
+			case 'unanswered':
+				$('#login-btn').html(text);
 				break;
 			default:
 

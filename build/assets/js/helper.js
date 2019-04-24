@@ -45,6 +45,8 @@ function callNovoCore (verb, who, where, data, _response_) {
 		switch(response.code) {
 			case 303:
 				notiSystem(response.title, response.msg, response.icon, response.data);
+				response.code = 'unanswered';
+				_response_(response);
 				break;
 			default:
 				if(response.data !== 'finishSession') {
