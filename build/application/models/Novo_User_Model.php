@@ -57,18 +57,35 @@ class Novo_User_Model extends NOVO_Model {
 					$this->response->data = base_url('dashboard');
 					break;
 				case -2:
+				case -185:
+					$nameUser = mb_strtolower($response->usuario->primerNombre).' ';
+					$nameUser.= mb_strtolower($response->usuario->primerApellido);
+					$userData = [
+						'sessionId' => $response->logAccesoObject->sessionId,
+						'idUsuario' => $response->usuario->idUsuario,
+						'userName' => $response->usuario->userName,
+						'nombreCompleto' => $nameUser,
+						'token' => $response->token,
+						'cl_addr' => $this->encrypt_connect->encode($_SERVER['REMOTE_ADDR'], $dataRequest->user, 'REMOTE_ADDR'),
+						'countrySess' => $this->config->item('country'),
+					];
+
+					$this->session->set_userdata($userData);
+
 					$this->response->code = 0;
 					$this->response->title = 'Usuario nuevo';
 					$this->response->msg = 'Debe aceptar los términos de uso';
 					$this->response->data = base_url('inf-condiciones');
-					$this->session->set_flashdata('newUser', TRUE);
-					break;
-				case -185:
-					$this->response->code = 0;
-					$this->response->title = 'Clave vencida';
-					$this->response->msg = 'Debe cambiar la clave';
-					$this->response->data = base_url('cambiar-clave');
-					$this->session->set_flashdata('passOld', TRUE);
+					$this->session->set_flashdata('changePassword', 'newUser');
+
+					if($this->isResponseRc === -185) {
+						$this->response->code = 0;
+						$this->response->title = 'Clave vencida';
+						$this->response->msg = 'Debe cambiar la clave';
+						$this->response->data = base_url('cambiar-clave');
+						$this->session->set_flashdata('changePassword', 'expiredPass');
+						break;
+					}
 					break;
 				case -1:
 					$this->response->code = 1;

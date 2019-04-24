@@ -66,7 +66,7 @@ function ingresar(user, text) {
 				if(btn.action == 'logout') {
 					$('#accept').on('click', function(){
 						verb = 'POST'; who = btn.link.who; where = btn.link.where; data = user;
-						callNovoCore (verb, who, where, data)
+						callNovoCore (verb, who, where, data);
 					});
 				}
 				break;

@@ -15,10 +15,12 @@ class NOVO_Model extends CI_Model {
 	{
 		parent:: __construct();
 		log_message('INFO', 'NOVO_Model  Class Initialized');
+
 		$this->dataAccessLog = new stdClass();
 		$this->dataRequest = new stdClass();
 		$this->response = new stdClass();
-		$this->countryConf = $this->config->item('country');
+		$this->country = $this->session->userdata('countrySess') ? $this->session->userdata('countrySess')
+			: $this->config->item('country');
 		$this->isResponseRc = 'No web service';
 		$this->token = $this->session->userdata('token') ? $this->session->userdata('token') : '';
 		$this->userName = $this->session->userdata('userName');
@@ -37,10 +39,10 @@ class NOVO_Model extends CI_Model {
 		$this->dataRequest->className = $this->className;
 		$this->dataRequest->logAccesoObject = $this->accessLog;
 		$this->dataRequest->token = $this->token;
-		$this->dataRequest->pais = $this->countryConf;
+		$this->dataRequest->pais = $this->country;
 
 		$encryptData = $this->encrypt_connect->encode($this->dataRequest, $this->userName, $model);
-		$request = ['bean'=> $encryptData, 'pais'=> $this->countryConf];
+		$request = ['bean'=> $encryptData, 'pais'=> $this->country];
 		$response = $this->encrypt_connect->connectWs($request, $this->userName);
 		$responseDecript = $this->encrypt_connect->decode($response, $this->userName, $model);
 		$this->isResponseRc = FALSE;

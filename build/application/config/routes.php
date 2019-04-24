@@ -7,6 +7,7 @@ $route['(:any)/inicio'] = "user/index";
 $route['(:any)/inicio/(:any)'] = "user/index";
 $route['(:any)/recuperar-clave'] = "user/passwordRecovery";
 $route['(:any)/cerrar-sesion'] = "user/finishSession";
+$route['(:any)/cambiar-clave'] = "user/changePassword";
 
 $route['(:any)/inf-beneficios'] = "information/benefits";
 $route['(:any)/inf-condiciones'] = "information/terms";

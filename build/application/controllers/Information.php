@@ -22,7 +22,11 @@ class Information extends NOVO_Controller {
 	public function terms()
 	{
 		log_message('INFO', 'NOVO Information: terms Method Initialized');
-		$newUser = $this->session->flashdata('newUser');
+		$newUser = FALSE;
+		if($this->session->flashdata('changePassword')) {
+			$newUser = TRUE;
+			$this->session->set_flashdata('changePassword', 'newUser');
+		}
 		$this->views = ['information/terms'];
 		$this->render->titlePage = 'Condiciones';
 		$this->render->referer = $this->input->server('HTTP_REFERER');
