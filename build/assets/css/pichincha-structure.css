@@ -129,6 +129,7 @@ button {
 
 #login-btn {
 	padding: 0px 77px;
+	position: relative;
 }
 
 #head {
