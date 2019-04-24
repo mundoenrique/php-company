@@ -461,6 +461,10 @@ ol.breadcrumb li a {
 	line-height: 50px;
 }
 
+#login-btn .requesting {
+	transform: translate(-50%, -50%);
+}
+
 #widget-area .widget .widget-content {
 	overflow: hidden;
 }

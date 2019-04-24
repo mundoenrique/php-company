@@ -501,6 +501,10 @@ h2.widget-title {
 	font-size: 18px;
 }
 
+#login-btn .requesting {
+	transform: translate(-50%, -50%);
+}
+
 #widget-area .widget .widget-content {
 	overflow: hidden;
 }

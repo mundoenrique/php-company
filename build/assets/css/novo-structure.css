@@ -138,14 +138,6 @@ button {
 	padding: 0 10px;
 }
 
-.btn-sidebar {
-	padding: 0px 92px;
-	margin: 15px auto;
-	position: relative;
-	height: 35px;
-	width: 100%;
-}
-
 #head {
 	height: 60px;
 	left: 0;
@@ -228,6 +220,20 @@ ol.breadcrumb li {
 
 #login-btn {
 	width: 100%;
+	height: 35px;
+	position: relative;
+}
+
+#login-btn .requesting {
+	height: 25px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+}
+
+.btn-sidebar {
+	margin-top: 15px;
+	margin-bottom: 15px;
 }
 
 #user_pass,

@@ -80,7 +80,7 @@
 		</div>
 	</footer>
 	<div id="loader" class="hidden">
-		<img src="<?= $this->asset->insertFile($loader, 'images/loading-gif') ?>" alt="Verificando...">
+		<img src="<?= $this->asset->insertFile($loader, 'images/loading-gif') ?>" class="requesting" alt="Verificando...">
 	</div>
 	<div id="system-info" class="hidden">
 		<p>

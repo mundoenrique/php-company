@@ -127,11 +127,6 @@ button {
 	padding: 0 10px;
 }
 
-#login-btn {
-	padding: 0px 77px;
-	position: relative;
-}
-
 #head {
 	height: 60px;
 	left: 0;
@@ -217,6 +212,15 @@ h2.widget-title {
 
 #login-btn {
 	width: 100%;
+	height: 35px;
+	position: relative;
+}
+
+#login-btn .requesting {
+	height: 25px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
 }
 
 #user_pass,

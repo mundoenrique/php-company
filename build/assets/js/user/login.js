@@ -30,16 +30,7 @@ $(function() {
 				active: ''
 			}
 			$('#login-form input, #login-form button').attr('disabled', true);
-			var buttonHeight = loginBtn.height() + 'px';
-			loginBtn.css({'height': buttonHeight});
 			loginBtn.html(loader);
-			loginBtn.children(0).css({
-				'height': '25px',
-				'position': 'absolute',
-				'top': '50%',
-				'left': '50%',
-				'transform': 'translate(-50%, -50%)'
-			})
 			ingresar(user, text);
 		}
 	});
