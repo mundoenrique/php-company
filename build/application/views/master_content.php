@@ -89,7 +89,7 @@
 		</p>
 		<div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
 			<div class="ui-dialog-buttonset">
-				<button type="button" id="cancel" class=""></button>
+				<button type="button" id="cancel" class="cancel-button"></button>
 				<button type="button" id="accept" class=""></button>
 			</div>
 		</div>
