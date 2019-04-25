@@ -1425,6 +1425,11 @@ button.r-button {
 	margin-left: 15px;
 }
 
+.cancel-button {
+	float: right;
+	margin-left: 15px;
+}
+
 #content-products {
 	width: 960px;
 	padding: 20px 2px;

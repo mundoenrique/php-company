@@ -4347,6 +4347,26 @@ a.come-back:hover {
 	color: #f04848 !important;
 }
 
+.cancel-button {
+	background: transparent;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+	font-family: 'prelo' !important;
+	font-weight: normal;
+	color: #10133f;
+}
+
+.cancel-button:hover {
+	background: transparent;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+	font-family: 'prelo';
+	font-weight: normal;
+	color: #f04848;
+}
+
 #content-products>#camposBenef {
 	display: none;
 }
