@@ -4662,7 +4662,7 @@ button.green:hover {
 	line-height: 3;
 }
 
-#user-name {
+p#user-name {
 	font-size: 15px;
 	color: #0072c0;
 	font-weight: bold;
