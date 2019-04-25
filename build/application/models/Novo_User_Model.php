@@ -67,7 +67,7 @@ class Novo_User_Model extends NOVO_Model {
 						'nombreCompleto' => $nameUser,
 						'token' => $response->token,
 						'cl_addr' => $this->encrypt_connect->encode($_SERVER['REMOTE_ADDR'], $dataRequest->user, 'REMOTE_ADDR'),
-						'countrySess' => $this->config->item('country'),
+						'countrySess' => $this->config->item('country')
 					];
 
 					$this->session->set_userdata($userData);

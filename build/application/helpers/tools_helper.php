@@ -41,7 +41,7 @@ if(!function_exists('countryCheck')) {
 				$CI->config->load('config-ve');
 				break;
 			default:
-				redirect('/pe/home');
+				redirect('/pe/inicio');
 		}
 	}
 }
