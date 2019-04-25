@@ -21,7 +21,7 @@
 				</div>
 			</fieldset>
 			<div class="form-actions">
-				<a class="come-back" href="<?= base_url('inicio') ?>">Cancelar</a>
+				<a class="cancel-anchor" href="<?= base_url('inicio') ?>">Cancelar</a>
 				<button id="continuar" class="r-button">Continuar</button>
 			</div>
 		</form>

@@ -4473,14 +4473,14 @@ span.jPag-snext-img {
 	overflow: hidden;
 }
 
-.come-back {
+.cancel-anchor {
 	color: #555;
 	line-height: 35px;
 	text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.35);
 	font-weight: normal;
 }
 
-.come-back:hover {
+.cancel-anchor:hover {
 	background: transparent;
 	-webkit-box-shadow: none;
 	-moz-box-shadow: none;

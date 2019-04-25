@@ -4334,12 +4334,12 @@ p.ben-txt {
 	overflow: hidden;
 }
 
-.come-back {
+.cancel-anchor {
 	line-height: 35px;
 	font-weight: normal;
 }
 
-a.come-back:hover {
+a.cancel-anchor:hover {
 	background: transparent;
 	-webkit-box-shadow: none;
 	-moz-box-shadow: none;
