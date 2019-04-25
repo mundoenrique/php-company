@@ -17,7 +17,6 @@ label.validate-error {
 	display: block;
 	font-size: 10px !important;
 	line-height: 25px;
-	margin-bottom: 5px;
 	overflow: hidden;
 	text-align: center;
 	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.16), 0 2px 10px rgba(0, 0, 0, 0.12);
