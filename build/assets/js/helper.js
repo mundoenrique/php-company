@@ -95,7 +95,7 @@ function notiSystem(title, message, icon, data) {
 			.text(btn1.text)
 			.on('click', function(e) {
 				dialogMoldal.dialog('close');
-				if(btn1.actio === 'redirect') {
+				if(btn1.action === 'redirect') {
 					$(location).attr('href', btn1.link);
 				}
 				$(this).off('click');
