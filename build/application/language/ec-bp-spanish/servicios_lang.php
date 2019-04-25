@@ -19,4 +19,4 @@ $lang['MONTO'] = 'Monto';
 $lang['OPCIONES'] = 'Opciones';
 $lang['SEL_ALL'] = 'Seleccionar todo';
 $lang['REG_CTA_CONCEN'] = 'Recarga cuenta/tarjeta concentradora';
-$lang['REG_CTA_OK'] = 'La recarga fue realizada de forma exitosa';
+$lang['REG_CTA_OK'] = 'Proceso realizado exitosamente';
