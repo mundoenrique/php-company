@@ -79,6 +79,7 @@ function formatterDate(date) {
 
 function notiSystem(title, message, icon, data) {
 	var btn1 = data.btn1;
+	var btn2 = data.btn2;
 	var dialogMoldal = $('#system-info');
 	dialogMoldal.dialog({
 		title: title,
@@ -100,6 +101,19 @@ function notiSystem(title, message, icon, data) {
 				}
 				$(this).off('click');
 			});
+			$('#cancel').hide();
+			if (btn2) {
+				$('#cancel')
+				.text(btn2.text)
+				.on('click', function(e) {
+					dialogMoldal.dialog('close');
+					if(btn2.action === 'redirect') {
+						$(location).attr('href', btn2.link);
+					}
+					$(this).off('click');
+				})
+				.show();
+			}
 		}
 	});
 }
