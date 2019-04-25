@@ -77,6 +77,7 @@ class Novo_User_Model extends NOVO_Model {
 					$this->response->msg = 'Debe aceptar los términos de uso';
 					$this->response->data = base_url('inf-condiciones');
 					$this->session->set_flashdata('changePassword', 'newUser');
+					$this->session->set_flashdata('userActive', $response->usuario->ctipo);
 
 					if($this->isResponseRc === -185) {
 						$this->response->code = 0;
