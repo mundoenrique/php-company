@@ -3,7 +3,8 @@ function validateForms(form) {
 	jQuery.validator.setDefaults({
 		debug: true,
 		errorClass: "validate-error",
-		success: "valid",
+		validClass: "success",
+		success: " ",
 		ignore: ".ignore",
 		errorElement: 'label',
 	});
@@ -62,7 +63,7 @@ function validateForms(form) {
 		},
 		messages: {
 			"user-name": "Debe indicar su nombre de usuario",
-			"id-company": `El ${fiscalRegMsg[country]} no es válido`,
+			"id-company": 'El '+fiscalRegMsg[country]+' no es válido',
 			"email": "Indique un correo válido (xxx@xxx.xxx)",
 			"identity-card": "Admite solo números min 6, max 8",
 			"name": "Admite solo letras",
