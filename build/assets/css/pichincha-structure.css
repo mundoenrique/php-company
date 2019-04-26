@@ -2415,6 +2415,7 @@ li#select-empresa select {
 	width: 200px;
 }
 
+.control-checkbox,
 .control-radio {
 	margin-right: 5px;
 }
@@ -2433,10 +2434,6 @@ li#select-empresa select {
 }
 
 .selected-option input[type="radio"]:checked + label {
-	padding: 5px 15px;
-}
-
-.selected-option input[type="radio"]:checked + label:before {
 	padding: 5px 15px;
 }
 

@@ -3576,6 +3576,62 @@ li#select-empresa select {
 	font-weight: bold;
 }
 
+.selected-option input[type="radio"],
+.selected-option input[type="checkbox"] {
+	display: none;
+}
+
+.selected-option label {
+	display: inline-block;
+	border-radius: 3px;
+	cursor: pointer;
+	-moz-transition: all 0.7s ease;
+	-webkit-transition: all 0.7s ease;
+	-o-transition: all 0.7s ease;
+	transition: all 0.7s ease;
+}
+
+.selected-option .control-checkbox + label:before,
+.selected-option .control-radio + label:before {
+	content: "";
+	display: inline-block;
+	background: none;
+	border: 3px solid #0072c0;
+	border-radius: 50%;
+}
+
+.selected-option .control-checkbox + label:before {
+	border-radius: 3px;
+}
+
+.selected-option input[type="checkbox"]:checked + label,
+.selected-option input[type="radio"]:checked + label {
+	border-radius: 2px;
+}
+
+.selected-option input[type="radio"]:checked + label {
+	background: #0072c0;
+	color: #FFF;
+}
+
+.selected-option input[type="radio"]:checked + label:before {
+	display: none;
+}
+
+.selected-option input[type="checkbox"]:checked + label:before {
+	background: #0072c0;
+}
+
+.selected-option input[type="checkbox"]:disabled + label,
+.selected-option input[type="radio"]:disabled + label {
+	cursor: default;
+}
+
+.selected-option input[type="checkbox"]:disabled + label:before,
+.selected-option input[type="radio"]:disabled + label:before {
+	background: #DDD;
+}
+
 #head-estadosdeCuenta {
 	background: #0072c0;
 	-webkit-border-radius: 10px 10px 0 0;
@@ -4923,6 +4979,14 @@ p#user-name {
 	border-bottom: 1px solid #D3D3D3;
 	border-top: 1px solid white;
 	list-style: none;
+}
+
+input,
+textarea,
+select,
+button,
+a {
+	outline: none;
 }
 
 #system-info .ui-dialog-buttonpane {

@@ -2511,6 +2511,34 @@ li#select-empresa select {
 	vertical-align: middle;
 }
 
+.panel-right {
+	float: left;
+	margin-top: 40px;
+	width: 200px;
+}
+
+.control-checkbox,
+.control-radio {
+	margin-right: 5px;
+}
+
+.selected-option label {
+	padding: 5px 15px 5px 30px;
+	position: relative;
+}
+
+.selected-option label:before {
+	width: 10px;
+	height: 10px;
+	position: absolute;
+	left: 10px;
+	top: 5px;
+}
+
+.selected-option input[type="radio"]:checked + label {
+	padding: 5px 15px;
+}
+
 #search-2 {
 	float: left;
 	width: 270px;
@@ -3939,14 +3967,6 @@ button.green {
 	padding-top: 20px;
 	margin-top: 12px;
 	margin-left: 70px;
-}
-
-input,
-textarea,
-select,
-button,
-a {
-	outline: none;
 }
 
 #system-info button {

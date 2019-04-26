@@ -3444,19 +3444,23 @@ li#select-empresa select {
 	font-weight: 700;
 }
 
-.selected-option input[type="radio"] {
+.selected-option input[type="radio"],
+.selected-option input[type="checkbox"] {
 	display: none;
 }
 
 .selected-option label {
 	display: inline-block;
+	border-radius: 3px;
 	cursor: pointer;
+	-moz-transition: all 0.7s ease;
 	-webkit-transition: all 0.7s ease;
 	-o-transition: all 0.7s ease;
 	transition: all 0.7s ease;
 }
 
-.selected-option label:before {
+.selected-option .control-checkbox + label:before,
+.selected-option .control-radio + label:before {
 	content: "";
 	display: inline-block;
 	background: none;
@@ -3464,9 +3468,17 @@ li#select-empresa select {
 	border-radius: 50%;
 }
 
+.selected-option .control-checkbox + label:before {
+	border-radius: 3px;
+}
+
+.selected-option input[type="checkbox"]:checked + label,
+.selected-option input[type="radio"]:checked + label {
+	border-radius: 2px;
+}
+
 .selected-option input[type="radio"]:checked + label {
 	background: #004574;
-	border-radius: 2px;
 	color: #FFF;
 }
 
@@ -3474,10 +3486,16 @@ li#select-empresa select {
 	display: none;
 }
 
+.selected-option input[type="checkbox"]:checked + label:before {
+	background: #004574;
+}
+
+.selected-option input[type="checkbox"]:disabled + label,
 .selected-option input[type="radio"]:disabled + label {
 	cursor: default;
 }
 
+.selected-option input[type="checkbox"]:disabled + label:before,
 .selected-option input[type="radio"]:disabled + label:before {
 	background: #DDD;
 }
