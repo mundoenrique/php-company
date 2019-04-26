@@ -4337,6 +4337,9 @@ p.ben-txt {
 .cancel-anchor {
 	line-height: 35px;
 	font-weight: normal;
+	font-family: 'prelo';
+	font-size: 13px;
+	font-weight: bold;
 }
 
 a.cancel-anchor:hover {
