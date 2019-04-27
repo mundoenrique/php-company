@@ -1,29 +1,42 @@
 'use strict'
-var
-baseURL = $('body').attr('base-url'),
-baseAssets = $('body').attr('asset-url'),
-country = $('body').attr('country'),
-pais = $('body').attr('pais'),
-verb = 'POST',
-who, where, data;
-//iconos
+//icons
 var iconSuccess = 'ui-icon-circle-check';
 var iconInfo = 'ui-icon-info';
 var iconWarning = 'ui-icon-alert';
 var iconDanger = 'ui-icon-closethick';
+//app
+var baseURL = $('body').attr('base-url');
+var baseAssets = $('body').attr('asset-url');
+var country = $('body').attr('country');
+var pais = $('body').attr('pais');
+var verb;
+var who;
+var where;
+var data;
+var title;
+var msg;
+var icon;
+var data;
+var strCountry;
+var prefixCountry = 'Empresas Online ';
+switch(country) {
+	case 'bp':
+		strCountry = 'Conexión Empresas';
+		prefixCountry = '';
+		break;
+	case 'co':
+		strCountry = 'Colombia';
+		break;
+	case 'pe':
+	case 'us':
+		strCountry = 'Perú';
+		break;
+	case 've':
+		strCountry = 'Venezuela';
+		break;
+}
 
-//color de fondo
-var ClassSuccess;
-var ClassinFo;
-var ClassWarning;
-var ClassDanger;
-
-//fallos del sistema
-var generalTitle ;
-var generalMsg ;
 function callNovoCore (verb, who, where, data, _response_) {
-	var title = generalTitle;
-	var msg = generalMsg;
 	console.log('Model:', who, 'Method:', where, 'Request:', data);
 	var dataRequest = JSON.stringify({
 		who: who,
@@ -51,10 +64,10 @@ function callNovoCore (verb, who, where, data, _response_) {
 
 	}).fail(function(xrh, status, response) {
 		console.log('fail', response, status, xrh);
-		var title = 'Empresas Online Venezuela';
-		var msg = 'En estos momentos no podemos atender su solicitud, por favor intente en unos minutos';
-		var icon = 'ui-icon-info';
-		var data = {
+		title = prefixCountry + strCountry;
+		msg = 'En estos momentos no podemos atender su solicitud, por favor intente en unos minutos';
+		icon = iconWarning;
+		data = {
 			btn1: {
 				text: 'Aceptar',
 				link: false,
@@ -70,9 +83,8 @@ function callNovoCore (verb, who, where, data, _response_) {
 $('input[type=text]').attr('autocomplete','off');
 
 function formatterDate(date) {
-	var
-	dateArray = date.split('/'),
-	dateStr = dateArray[1] + '/' + dateArray[0] + '/' + dateArray[2];
+	var	dateArray = date.split('/');
+	var dateStr = dateArray[1] + '/' + dateArray[0] + '/' + dateArray[2];
 
 	return new Date(dateStr);
 }

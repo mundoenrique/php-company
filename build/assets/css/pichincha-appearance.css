@@ -497,6 +497,10 @@ ol.breadcrumb li a {
 	text-align: center;
 }
 
+.align-text-center {
+	text-align: center;
+}
+
 h2.widget-title {
 	font-size: 18px;
 }

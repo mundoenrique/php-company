@@ -24,10 +24,15 @@ class Information extends NOVO_Controller {
 		log_message('INFO', 'NOVO Information: terms Method Initialized');
 		$newUser = FALSE;
 		if($this->session->flashdata('changePassword')) {
+			array_push(
+				$this->includeAssets->jsFiles,
+				"user/terms"
+			);
 			$newUser = TRUE;
 			$this->session->set_flashdata('changePassword', 'newUser');
 			$useractive = $this->session->flashdata('userActive') === '0' ? 1 : 0;
 			$this->session->set_flashdata('userActive', $useractive);
+			$this->render->message = "Estimado usuario debe leer y aceptar los términos de uso y confidencialidad para comenzar a usar nuestra plataforma";
 		}
 		$this->render->titlePage = 'Condiciones';
 		$this->render->referer = $this->input->server('HTTP_REFERER');
