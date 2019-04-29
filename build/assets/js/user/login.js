@@ -22,7 +22,6 @@ $(function() {
 			.addClass('validate-error')
 			.attr('placeholder', 'Campo obligatorio');
 		} else {
-			var loader = $('#loader').html();
 			var text = loginBtn.text()
 			user = {
 				user: user.val(),
