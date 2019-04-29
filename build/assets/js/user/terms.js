@@ -12,8 +12,8 @@ $(function() {
 			},
 			btn2: {
 				text: 'Cancelar',
-				link: false,
-				action: 'close'
+				link: baseURL + 'inicio',
+				action: 'redirect'
 			}
 		};
 		$('#cancel').on('click', function(e) {
@@ -21,5 +21,10 @@ $(function() {
 		})
 		notiSystem(title, msg, icon, data);
 
+	});
+
+	$('#cancel').on('click', function() {
+		verb = 'POST'; who = 'User'; where = 'finishSession'; data = '';
+			callNovoCore (verb, who, where, data);
 	});
 })

@@ -38,12 +38,14 @@ function validateForms(form) {
 			"user-name": {required: true, minlength: 6},
 			"id-company": {fiscalRegistry: true},
 			"email": {required: true, pattern: emailValid},
+			"new-pass": {differs: "#current-pass", validatePass: true},
+			"confirm-pass": {equalTo: "#new-pass"},
+
+
 			"identity-card": {pattern: onlyNumber},
 			"name": {pattern: namesValid, minlength: 2},
 			"last_name": {pattern: namesValid, minlength: 2},
 			"nickname": {rangelength: [4, 12], pattern: validNickName},
-			"pass": {minlength: 6, differs: "#current-pass"},
-			"pass-confirm": {equalTo: "#pass"},
 			"specialties_checked": {specialties: true},
 			"num_school_medi": {pattern: regNumberValid},
 			"num_school_salud": {pattern: regNumberValid},
@@ -65,6 +67,18 @@ function validateForms(form) {
 			"user-name": "Debe indicar su nombre de usuario",
 			"id-company": 'El '+fiscalRegMsg[country]+' no es válido',
 			"email": "Indique un correo válido (xxx@xxx.xxx)",
+			"current-pass": "Indique su contraseña actual",
+			"new-pass": {
+				required: "Indique su nueva contraseña",
+				differs: "La nueva contraseña debe ser diferente a la actual",
+				validatePass: "La contraseña debe cumplir los requerimientos"
+			},
+			"confirm-pass": {
+				required: "Confirme su nueva contraseña",
+				equalTo: 'Debe ser igual a su nueva contraseña'
+			},
+
+
 			"identity-card": "Admite solo números min 6, max 8",
 			"name": "Admite solo letras",
 			"last_name": "Admite solo letras",
@@ -72,16 +86,6 @@ function validateForms(form) {
 				required: "Permite alfabeto americano, números y \'_\' min 4, max 12",
 				rangelength: "Permite alfabeto americano, números y \'_\' min 4, max 12",
 				pattern: "Debe iniciar con al menos dos letras no admite \'ñ\' ni vocales acentuadas",
-			},
-			"current-pass": "Debe indicar la contraseña actual",
-			"pass": {
-				required: "Debe contener al menos 6 caracteres",
-				minlength: "Debe contener al menos 6 caracteres",
-				differs: "La nueva contraseña debe ser diferente a la actual"
-			},
-			"pass-confirm": {
-				required: "Confirma la contraseña",
-				equalTo: 'La contraseñas deben ser iguales'
 			},
 			"tyc": "Debe aceptar los términos y condiciones",
 			"specialties_checked": "Debe seleccionar al menos una especialidad",
@@ -108,6 +112,10 @@ function validateForms(form) {
 
 	$.validator.methods.fiscalRegistry = function(value, element, param) {
 		return fiscalReg[country].test(value);
+	}
+
+	$.validator.methods.validatePass	= function(value, element, param) {
+		return passStrength(value);
 	}
 
 	$.validator.methods.specialties = function(value, element) {

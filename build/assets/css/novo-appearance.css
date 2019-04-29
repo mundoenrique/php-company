@@ -469,6 +469,30 @@ ol.breadcrumb li a {
 	transform: translate(-50%, -50%);
 }
 
+.pass-config {
+	border-radius: 6px;
+	border: 1px solid rgb(119, 119, 119);
+	box-shadow: rgb(85, 85, 85) 4px 4px 4px;
+	color: rgb(102, 102, 102);
+	background-color: rgb(239, 239, 239);
+	opacity: 0.85;
+	text-align: left;
+	font-size: 11px;
+}
+
+.pass-config ul {
+	list-style: none;
+}
+
+.field-input {
+	margin: 0 auto;
+	margin-bottom: 12px;
+}
+
+.field-input > input {
+	margin-bottom: 0;
+}
+
 #widget-area .widget .widget-content {
 	overflow: hidden;
 }
@@ -4235,13 +4259,11 @@ span.jPag-snext-img {
 }
 
 .invalid {
-	background: url(cancel.png) no-repeat 0 50%;
 	line-height: 24px;
 	color: #ec3f41;
 }
 
 .valid {
-	background: url(accept.png) no-repeat 0 50%;
 	line-height: 24px;
 	color: #3a7d34;
 	list-style: none;

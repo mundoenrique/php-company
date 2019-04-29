@@ -70,18 +70,14 @@ function ingresar(user, text) {
 					});
 				}
 				break;
-			case 'unanswered':
-				$('#login-btn').html(text);
-				break;
-			default:
-
 		}
 		if(response.code !== 2) {
+			$('#login-form input, #login-form button').attr('disabled', false);
+			$('#login-btn').html(text);
+			$('#user_pass').val('');
+
 			setTimeout(function() {
 				$("#user_login").hideBalloon();
-				$('#login-form input, #login-form button').attr('disabled', false);
-				$('#login-btn').html(text);
-				$('#user_pass').val('');
 			}, 2000);
 		}
 	})

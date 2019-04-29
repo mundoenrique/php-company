@@ -7,7 +7,10 @@ class Novo_User_Model extends NOVO_Model {
 		parent:: __construct();
 		log_message('INFO', 'NOVO User Model Class Initialized');
 	}
-
+	/**
+	 * @info Método para el inicio de sesión
+	 * @author J. Enrique Peñaloza Piñero
+	 */
 	public function callWs_Login_User($dataRequest)
 	{
 		log_message('INFO', 'NOVO User Model: Login method Initialized');
@@ -27,8 +30,8 @@ class Novo_User_Model extends NOVO_Model {
 			switch($this->isResponseRc) {
 				case 0:
 					log_message('DEBUG', 'NOVO ['.$dataRequest->user.'] RESPONSE: Login: ' . json_encode($response->usuario));
-					$nameUser = mb_strtolower($response->usuario->primerNombre).' ';
-					$nameUser.= mb_strtolower($response->usuario->primerApellido);
+					$fullName = mb_strtolower($response->usuario->primerNombre).' ';
+					$fullName.= mb_strtolower($response->usuario->primerApellido);
 					$formatDate = $this->config->item('format_date');
 					$formatTime = $this->config->item('format_time');
 					$lastSession = date(
@@ -41,13 +44,14 @@ class Novo_User_Model extends NOVO_Model {
 						'logged' => TRUE,
 						'idUsuario' => $response->usuario->idUsuario,
 						'userName' => $response->usuario->userName,
-						'nombreCompleto' => $nameUser,
+						'fullName' => $fullName,
 						'codigoGrupo' => $response->usuario->codigoGrupo,
 						'lastSession' => $lastSession,
 						'token' => $response->token,
 						'cl_addr' => $this->encrypt_connect->encode($_SERVER['REMOTE_ADDR'], $dataRequest->user, 'REMOTE_ADDR'),
 						'countrySess' => $this->config->item('country'),
 						'pais' => $this->config->item('country'),
+						'nombreCompleto' => $fullName,
 						'logged_in' => TRUE
 					];
 
@@ -58,13 +62,13 @@ class Novo_User_Model extends NOVO_Model {
 					break;
 				case -2:
 				case -185:
-					$nameUser = mb_strtolower($response->usuario->primerNombre).' ';
-					$nameUser.= mb_strtolower($response->usuario->primerApellido);
+					$fullName = mb_strtolower($response->usuario->primerNombre).' ';
+					$fullName.= mb_strtolower($response->usuario->primerApellido);
 					$userData = [
 						'sessionId' => $response->logAccesoObject->sessionId,
 						'idUsuario' => $response->usuario->idUsuario,
 						'userName' => $response->usuario->userName,
-						'nombreCompleto' => $nameUser,
+						'fullName' => $fullName,
 						'token' => $response->token,
 						'cl_addr' => $this->encrypt_connect->encode($_SERVER['REMOTE_ADDR'], $dataRequest->user, 'REMOTE_ADDR'),
 						'countrySess' => $this->config->item('country')
@@ -77,7 +81,7 @@ class Novo_User_Model extends NOVO_Model {
 					$this->response->msg = 'Debe aceptar los términos de uso';
 					$this->response->data = base_url('inf-condiciones');
 					$this->session->set_flashdata('changePassword', 'newUser');
-					$this->session->set_flashdata('userActive', $response->usuario->ctipo);
+					$this->session->set_flashdata('userType', $response->usuario->ctipo);
 
 					if($this->isResponseRc === -185) {
 						$this->response->code = 0;
@@ -144,10 +148,13 @@ class Novo_User_Model extends NOVO_Model {
 
 		return $this->response;
 	}
-
+	/**
+	 * @info Me'todo para el cierre de sesión
+	 * @author J. Enrique Peñaloza Piñero
+	 */
 	public function callWs_finishSession_User($dataRequest = FALSE)
 	{
-		log_message('INFO', 'NOVO User Model: Login method Initialized');
+		log_message('INFO', 'NOVO User Model: finishSession method Initialized');
 		$user = $dataRequest ? $dataRequest->user : $this->session->userdata('userName');
 		$this->className = 'com.novo.objects.TOs.UsuarioTO';
 
@@ -168,6 +175,70 @@ class Novo_User_Model extends NOVO_Model {
 					$this->response->msg = 'Sessión finalizada exitosamente';
 					$this->response->data = 'finishSession';
 					$this->session->sess_destroy();
+					break;
+			}
+		}
+
+		return $this->response;
+	}
+	/**
+	 * @info Método para el cambio de Contraseña
+	 * @author J. Enrique Peñaloza Piñero
+	 */
+	public function CallWs_ChangePassword_User($dataRequest)
+	{
+		log_message('INFO', 'NOVO User Model: ChangePassword Method Initialized');
+		$this->className = 'com.novo.objects.TOs.UsuarioTO';
+
+		$this->dataAccessLog->modulo = 'login';
+		$this->dataAccessLog->function = 'login';
+		$this->dataAccessLog->operation = 'cambioClave';
+
+		$this->dataRequest->userName = $this->session->userdata('userName');
+		$this->dataRequest->passwordOld = $dataRequest->currentPass;
+		$this->dataRequest->password = $dataRequest->newPass;
+
+		$changePassType = $this->session->flashdata('changePassword');
+
+		$response = $this->sendToService('ChangePassword');
+
+		if($this->isResponseRc !== FALSE) {
+			switch($this->isResponseRc) {
+				case 0:
+					$this->callWs_finishSession_User();
+					$this->response->code = 0;
+					$this->response->msg = 'La contraseña fue cambiada exitosamente.<br>Por motivos de seguridad es necesario que inicie sesión nuevamente.';
+					$this->response->icon = 'ui-icon-circle-check';
+					$this->response->data = [
+						'btn1'=> [
+							'text'=> 'Continuar',
+							'link'=> base_url('inicio'),
+							'action'=> 'redirect'
+						]
+					];
+					break;
+				case -4:
+				case -22:
+					$this->response->code = 1;
+					$this->response->icon = 'ui-icon-alert';
+					$this->response->msg = lang('ERROR_('.$this->isResponseRc.')');
+					$this->response->data = [
+						'btn1'=> [
+							'text'=> 'Continuar',
+							'link'=> FALSE,
+							'action'=> 'close'
+						]
+					];
+					switch($changePassType && $this->isResponseRc == -22) {
+						case 'expiredPass':
+							$this->response->msg.= 'Por favor indique la contraseña temporal enviada a su correo.';
+							break;
+						case 'newUser':
+							$this->response->msg.= 'Por verifíquela e intente de nuevo.';
+							break;
+					}
+					$this->session->set_flashdata('changePassword', $changePassType);
+					$this->session->set_flashdata('userType', $this->session->flashdata('userType'));
 					break;
 			}
 		}

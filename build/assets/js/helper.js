@@ -36,6 +36,8 @@ switch(country) {
 		break;
 }
 
+$('input[type=text]').attr('autocomplete','off');
+
 function callNovoCore (verb, who, where, data, _response_) {
 	console.log('Model:', who, 'Method:', where, 'Request:', data);
 	var dataRequest = JSON.stringify({
@@ -79,8 +81,6 @@ function callNovoCore (verb, who, where, data, _response_) {
 		_response_(response);
 	});
 }
-
-$('input[type=text]').attr('autocomplete','off');
 
 function formatterDate(date) {
 	var	dateArray = date.split('/');
