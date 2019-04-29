@@ -27,9 +27,6 @@ class CallModels extends Novo_Controller {
 		$this->load->model($this->model, 'modelLoad');
 		$method = $this->method;
 		$dataResponse = $this->modelLoad->$method($this->dataRequest->data);
-		if($dataResponse->code !== 303 && $dataResponse->code !== 3) {
-			unset($dataResponse->icon);
-		}
 		$this->output->set_content_type('application/json')->set_output(json_encode($dataResponse));
 	}
 }
