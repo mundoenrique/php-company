@@ -1918,7 +1918,7 @@ class Lotes extends CI_Controller {
 	 */
 	private function callWSconfirmarLote($urlCountry,$token,$username,$pass,$info, $linkAut, $idTipoLote){
 		$this->lang->load('erroreseol');
-		$operacion = ($idTipoLote=='L') ? 'reprocesarLoteGeneral' : 'confirmarLote';
+		$operacion = ($idTipoLote=='L' && $urlCountry!='Ec-bp') ? 'reprocesarLoteGeneral' : 'confirmarLote';
 		$classname = "com.novo.objects.MO.ConfirmarLoteMO";
 		$timeLog= date("m/d/Y H:i");
 		$ip= $this->input->ip_address();
