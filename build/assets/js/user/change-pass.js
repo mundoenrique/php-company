@@ -24,12 +24,14 @@ $(function() {
 	$('#btn-change-pass').on('click', function(e) {
 		e.preventDefault();
 		var form = $('#form-change-pass');
+		var ChangeBtn = $(this);
 		validateForms(form);
 		if(form.valid()) {
 			var userType = $('#user-type').val();
 			var currentPass = $('#current-pass').val();
 			var newPass = $('#new-pass').val();
 			var confirmPass = $('#confirm-pass').val();
+			var textBtn = ChangeBtn.text();
 
 			if(userType == '1') {
 				currentPass = currentPass.toUpperCase();
@@ -40,11 +42,11 @@ $(function() {
 				newPass: $.md5(newPass),
 				confirmPass: $.md5(confirmPass)
 			}
-			changePassword(passData);
+			$('#form-change-pass input, #form-change-pass button').attr('disabled', true);
+			ChangeBtn.html(loader);
+			changePassword(passData, textBtn);
 		}
 	});
-
-
 });
 
 function passStrength(pswd) {
@@ -102,7 +104,7 @@ function passStrength(pswd) {
 	return valid;
 }
 
-function changePassword(passData) {
+function changePassword(passData, textBtn) {
 	verb = "POST"; who = 'User'; where = 'ChangePassword'; data = passData;
 	callNovoCore(verb, who, where, data, function(response) {
 		var dataResponse = response.data
@@ -112,7 +114,9 @@ function changePassword(passData) {
 				notiSystem(response.title, response.msg, response.icon, response.data)
 				break;
 		}
-
+		$('#form-change-pass')[0].reset();
+		$('#form-change-pass input, #form-change-pass button').attr('disabled', false);
+		$('#btn-change-pass').html(textBtn)
 	})
 }
 

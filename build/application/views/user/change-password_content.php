@@ -16,17 +16,17 @@
 						<input type="hidden" id="status-user" name="user-type" value="<?= $userType ?>">
 						<fieldset>
 							<div class="field-input">
-								<label for="user_login">Contraseña actual *</label>
+								<label for="current-pass">Contraseña actual *</label>
 								<input type="password" id="current-pass" name="current-pass" class="input-middle"
 									placeholder="Contraseña actual" required>
 							</div>
 							<div class="field-input">
-								<label for="user_pass">Contraseña nueva *</label>
+								<label for="new-pass">Contraseña nueva *</label>
 								<input type="password" id="new-pass" name="new-pass" class="input-middle"
 									placeholder="Contraseña nueva" required>
 							</div>
 							<div class="field-input">
-								<label for="user_pass">Confirme la nueva contraseña *</label>
+								<label for="confirm-pass">Confirme la nueva contraseña *</label>
 								<input type="password" id="confirm-pass" name="confirm-pass" class="input-middle"
 									placeholder="Confirmar contraseña" required>
 							</div>

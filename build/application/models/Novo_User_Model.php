@@ -224,19 +224,11 @@ class Novo_User_Model extends NOVO_Model {
 					$this->response->msg = lang('ERROR_('.$this->isResponseRc.')');
 					$this->response->data = [
 						'btn1'=> [
-							'text'=> 'Continuar',
+							'text'=> 'Aceptar',
 							'link'=> FALSE,
 							'action'=> 'close'
 						]
 					];
-					switch($changePassType && $this->isResponseRc == -22) {
-						case 'expiredPass':
-							$this->response->msg.= 'Por favor indique la contraseña temporal enviada a su correo.';
-							break;
-						case 'newUser':
-							$this->response->msg.= 'Por verifíquela e intente de nuevo.';
-							break;
-					}
 					$this->session->set_flashdata('changePassword', $changePassType);
 					$this->session->set_flashdata('userType', $this->session->flashdata('userType'));
 					break;
