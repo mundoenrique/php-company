@@ -217,7 +217,7 @@ h2.widget-title {
 	position: relative;
 }
 
-#login-btn .requesting {
+button .requesting {
 	height: 25px;
 	position: absolute;
 	top: 50%;

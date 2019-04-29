@@ -505,7 +505,7 @@ h2.widget-title {
 	font-size: 18px;
 }
 
-#login-btn .requesting {
+button .requesting {
 	transform: translate(-50%, -50%);
 }
 

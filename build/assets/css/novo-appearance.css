@@ -465,7 +465,7 @@ ol.breadcrumb li a {
 	line-height: 50px;
 }
 
-#login-btn .requesting {
+button .requesting {
 	transform: translate(-50%, -50%);
 }
 

@@ -225,7 +225,7 @@ ol.breadcrumb li {
 	position: relative;
 }
 
-#login-btn .requesting {
+button .requesting {
 	height: 25px;
 	position: absolute;
 	top: 50%;
