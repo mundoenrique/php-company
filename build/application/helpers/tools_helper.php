@@ -90,6 +90,13 @@ if(!function_exists('accessLog')) {
 	}
 }
 
+if(!function_exists('maskString')) {
+	function maskString($string, $start = 1, $end = 1) {
+		$length = strlen($string);
+		return substr($string, 0, $start).str_repeat('*', 3).'@'.str_repeat('*', 3).substr($string, $length - $end, $end);
+	}
+}
+
 
 	if ( ! function_exists('np_hoplite_log')) {
 		/**
