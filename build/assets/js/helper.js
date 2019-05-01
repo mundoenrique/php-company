@@ -18,6 +18,7 @@ var title;
 var msg;
 var icon;
 var data;
+var dataResponse;
 var strCountry;
 var prefixCountry = 'Empresas Online ';
 switch(country) {

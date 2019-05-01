@@ -35,9 +35,9 @@ function validateForms(form) {
 
 	form.validate({
 		rules: {
-			"user-name": {required: true, minlength: 6},
+			"user-name": {minlength: 6},
 			"id-company": {fiscalRegistry: true},
-			"email": {required: true, pattern: emailValid},
+			"email": {pattern: emailValid},
 			"new-pass": {differs: "#current-pass", validatePass: true},
 			"confirm-pass": {equalTo: "#new-pass"},
 

@@ -42,6 +42,7 @@ $(function() {
 				newPass: $.md5(newPass),
 				confirmPass: $.md5(confirmPass)
 			}
+
 			$('#form-change-pass input, #form-change-pass button').attr('disabled', true);
 			ChangeBtn.html(loader);
 			changePassword(passData, textBtn);
@@ -107,7 +108,7 @@ function passStrength(pswd) {
 function changePassword(passData, textBtn) {
 	verb = "POST"; who = 'User'; where = 'ChangePassword'; data = passData;
 	callNovoCore(verb, who, where, data, function(response) {
-		var dataResponse = response.data
+		dataResponse = response.data
 		switch(response.code) {
 			case 0:
 			case 1:

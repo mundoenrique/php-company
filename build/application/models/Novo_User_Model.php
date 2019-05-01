@@ -149,7 +149,7 @@ class Novo_User_Model extends NOVO_Model {
 		return $this->response;
 	}
 	/**
-	 * @info Me'todo para el cierre de sesión
+	 * @info Método para el cierre de sesión
 	 * @author J. Enrique Peñaloza Piñero
 	 */
 	public function callWs_finishSession_User($dataRequest = FALSE)
@@ -232,6 +232,78 @@ class Novo_User_Model extends NOVO_Model {
 					$this->session->set_flashdata('changePassword', $changePassType);
 					$this->session->set_flashdata('userType', $this->session->flashdata('userType'));
 					break;
+			}
+		}
+
+		return $this->response;
+	}
+	/**
+	 * @info Método para recuperar contraseña
+	 * @author J. Enrique Peñaloza Piñero
+	 */
+	public function callWs_RecoveryPass_User($dataRequest)
+	{
+		log_message('INFO', 'NOVO User Model: RecoveryPass method Initialized');
+		$this->className = 'com.novo.objects.TO.UsuarioTO';
+
+		$this->dataAccessLog->modulo = 'clave';
+		$this->dataAccessLog->function = 'recuperarClave';
+		$this->dataAccessLog->operation = 'olvidoClave';
+		$this->dataAccessLog->userName = $dataRequest->userName;
+
+		$this->dataRequest->userName = strtoupper($dataRequest->userName);
+		$this->dataRequest->idEmpresa = $dataRequest->idEmpresa;
+		$this->dataRequest->email = $dataRequest->email;
+
+		$response = $this->sendToService('RecoveryPass');
+
+		if($this->isResponseRc !== FALSE) {
+			$this->response->title = 'Reestablecer contraseña';
+			switch($this->isResponseRc) {
+				case 0:
+					$maskMail = maskString($dataRequest->email, 4, $end = 6);
+					$this->response->code = 0;
+					$this->response->msg = 'Proceso exitoso, se ha enviado un correo a '.$maskMail. ' con la contraseña temporal';
+					$this->response->icon = 'ui-icon-circle-check';
+					$this->response->data = [
+						'btn1'=> [
+							'text'=> 'Continuar',
+							'link'=> base_url('inicio'),
+							'action'=> 'redirect'
+						]
+					];
+					break;
+				case -6:
+					$msg = 'El usuario indicado no posee empresa asignada.';
+					break;
+				case -150:
+					$msg = lang('ERROR_RIF');
+					break;
+				case -159:
+					$msg = lang('ERROR_MAIL');
+					break;
+				case -173:
+					$msg = 'No fue posible enviar el correo.<br>Verifíquelo e intente nuevamente.';
+					break;
+				case -205:
+					$msg = lang('ERROR_USER');
+					if($this->countryUri == 've') {
+						$msg.= '<br>'.lang('ERROR_SUPPORT');
+					}
+					break;
+			}
+
+			if($this->isResponseRc != 0) {
+				$this->response->code = 1;
+				$this->response->msg = $msg;
+				$this->response->icon = 'ui-icon-info';
+				$this->response->data = [
+					'btn1'=> [
+						'text'=> 'Aceptar',
+						'link'=> FALSE,
+						'action'=> 'close'
+					]
+				];
 			}
 		}
 
