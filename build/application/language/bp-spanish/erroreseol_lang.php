@@ -260,7 +260,7 @@ $lang['ERROR_DESCARGA'] = 'No fue posible descargar el archivo, por favor intent
 
 //recuperar contraseña
 $lang["TITULO_ERROR"] = 'No ha sido posible procesar su solicitud.';
-$lang["ERROR_RIF"] = 'Por favor verifique el No. de RIF de la empresa.';
+$lang["ERROR_RIF"] = 'Por favor verifique el No. de RUC de la empresa.';
 $lang["ERROR_USER"] = 'El Usuario no está registrado en el sistema.';
 $lang["ERROR_MAIL"] = 'El correo indicado no corresponde, por favor verifíquelo e inténtelo de nuevo.';
 $lang["ERROR_SUPPORT"] = 'Por favor envíe un correo a <strong>soporteempresas@tebca.com</strong> o contacte a nuestros Ejecutivos en los teléfonos: ...';
