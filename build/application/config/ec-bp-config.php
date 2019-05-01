@@ -2,7 +2,7 @@
 
 //País
 $config['country']='Ec-bp';
-$config['countryUri']='ec';
+$config['countryUri']='bp';
 $config['urlWS'] = 'http://172.24.6.78:10003/NovoEolWebInterfaceWS/webresources/';
 /*
 |--------------------------------------------------------------------------
