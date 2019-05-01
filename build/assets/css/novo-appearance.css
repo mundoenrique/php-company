@@ -5022,3 +5022,7 @@ a {
 #system-info #cancel {
 	display: none;
 }
+
+.system-msg {
+	text-align: justify;
+}

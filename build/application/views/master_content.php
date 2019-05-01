@@ -84,8 +84,8 @@
 	</div>
 	<div id="system-info" class="hidden">
 		<p>
-			<span id="system-type" class="ui-icon" style="float:left; margin:0 7px 50px 0;"></span>
-			<span id="system-msg"></span>
+			<span id="system-type" class="system-type ui-icon"></span>
+			<span id="system-msg" class="system-msg"></span>
 		</p>
 		<div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
 			<div class="ui-dialog-buttonset">

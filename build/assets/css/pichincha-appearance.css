@@ -4863,3 +4863,7 @@ li.ui-state-default.ui-corner-top:nth-child(3) {
 #system-info #cancel {
 	display: none;
 }
+
+.system-msg {
+	text-align: justify;
+}

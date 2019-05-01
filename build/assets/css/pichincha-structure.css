@@ -120,6 +120,9 @@ textarea {
 button {
 	float: none;
 	margin: 15px auto;
+	width: 67px;
+	height: 35px;
+	position: relative;
 }
 
 .file-field {
@@ -3922,4 +3925,13 @@ a {
 
 .ui-dialog-titlebar {
 	margin-bottom: 15px;
+}
+
+.system-type {
+	float:left;
+	margin:0 7px 85px 0;
+}
+
+.system-msg {
+	width: 100%;
 }
