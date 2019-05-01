@@ -5,7 +5,8 @@ class NOVO_Model extends CI_Model {
 	protected $className;
 	protected $accessLog;
 	protected $token;
-	protected $countryConf;
+	protected $country;
+	protected $countryUri;
 	protected $dataRequest;
 	protected $response;
 	protected $isResponseRc;
@@ -21,6 +22,7 @@ class NOVO_Model extends CI_Model {
 		$this->response = new stdClass();
 		$this->country = $this->session->userdata('countrySess') ? $this->session->userdata('countrySess')
 			: $this->config->item('country');
+		$this->countryUri = $this->session->userdata('countryUri');
 		$this->isResponseRc = 'No web service';
 		$this->token = $this->session->userdata('token') ? $this->session->userdata('token') : '';
 		$this->userName = $this->session->userdata('userName');
@@ -94,6 +96,10 @@ class NOVO_Model extends CI_Model {
 		return $responseDecript;
 	}
 
+	/**
+	 * @info Método para
+	 * @author J. Enrique Peñaloza Piñero
+	 */
 	/*
 	public function callWs_Xxxx_User($dataRequest)
 	{
@@ -113,13 +119,15 @@ class NOVO_Model extends CI_Model {
 				case 0:
 					$this->response->code = 0;
 					$this->response->title = '';
-					$this->response->msg = 'Debe cambiar la clave';
+					$this->response->msg = '';
+					$this->response->icon = '';
 					$this->response->data = '';
 					break;
-				case -xxx:
-					$this->response->code = 0;
+				case -5000:
+					$this->response->code = 1;
 					$this->response->title = '';
 					$this->response->msg = '';
+					$this->response->icon = '';
 					$this->response->data = '';
 					break;
 			}

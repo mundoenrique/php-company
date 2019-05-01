@@ -53,6 +53,7 @@ class NOVO_Controller extends CI_Controller {
 			$this->render->lang = $this->config->item('app_lang');
 			$this->render->countryConf = $this->config->item('country');
 			$this->render->countryUri = $this->countryUri;
+			$this->session->set_userdata('countryUri', $this->countryUri);
 			switch($this->countryUri) {
 				case 'bp':
 					$this->skin = 'pichincha';
