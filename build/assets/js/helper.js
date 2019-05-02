@@ -131,3 +131,8 @@ function notiSystem(title, message, icon, data) {
 		}
 	});
 }
+
+$('#signup').on('click', function() {
+	verb = 'POST'; who = 'User'; where = 'finishSession'; data = '';
+		callNovoCore (verb, who, where, data);
+});

@@ -35,7 +35,7 @@
 				<ul class="menu">
 					<?php if(!$logged && $module !== 'login'): ?>
 					<li class="menu-item signup">
-						<a href="<?= base_url('inicio'); ?>" rel="section">
+						<a id="signup" href="<?= base_url('inicio'); ?>" rel="section">
 							<?= lang('BREADCRUMB_INICIO'); ?>
 						</a>
 					</li>
