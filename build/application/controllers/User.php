@@ -23,6 +23,20 @@ class User extends NOVO_Controller {
 			redirect($urlRedirect, 'location');
 			exit();
 		}
+		$userData = [
+			'sessionId' => NULL,
+			'idUsuario' => NULL,
+			'userName' => NULL,
+			'fullName' => NULL,
+			'codigoGrupo' => NULL,
+			'lastSession' => NULL,
+			'token' => NULL,
+			'cl_addr' => NULL,
+			'countrySess' => NULL,
+			'pais' => NULL,
+			'nombreCompleto' => NULL
+		];
+		$this->session->unset_userdata($userData);
 		array_push(
 			$this->includeAssets->cssFiles,
 			"$this->countryUri/default"
