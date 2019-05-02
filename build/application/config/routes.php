@@ -3,15 +3,15 @@
 $route['default_controller'] = "user";
 $route['(:any)/async-call'] = "callModels";
 
-$route['(:any)/inicio'] = "user/index";
-$route['(:any)/inicio/(:any)'] = "user/index";
-$route['(:any)/recuperar-clave'] = "user/passwordRecovery";
-$route['(:any)/cerrar-sesion'] = "user/finishSession";
-$route['(:any)/cambiar-clave'] = "user/changePassword";
+$route['(:any)/inicio'] = "User/index";
+$route['(:any)/inicio/(:any)'] = "User/index";
+$route['(:any)/recuperar-clave'] = "User/passwordRecovery";
+$route['(:any)/cerrar-sesion'] = "User/finishSession";
+$route['(:any)/cambiar-clave'] = "User/changePassword";
 
-$route['(:any)/inf-beneficios'] = "information/benefits";
-$route['(:any)/inf-condiciones'] = "information/terms";
-$route['(:any)/inf-tarifas'] = "information/rates";
+$route['(:any)/inf-beneficios'] = "Information/benefits";
+$route['(:any)/inf-condiciones'] = "Information/terms";
+$route['(:any)/inf-tarifas'] = "Information/rates";
 
 //old routes
 $route['(:any)/login'] = "users/login/$1";
