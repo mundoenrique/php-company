@@ -1,7 +1,7 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 $route['default_controller'] = "user";
-$route['(:any)/async-call'] = "callModels";
+$route['(:any)/async-call'] = "CallModels";
 
 $route['(:any)/inicio'] = "User/index";
 $route['(:any)/inicio/(:any)'] = "User/index";

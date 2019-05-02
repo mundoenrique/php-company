@@ -79,8 +79,10 @@ function callNovoCore (verb, who, where, data, _response_) {
 			}
 		};
 		notiSystem(title, msg, icon, data);
-		response.code = 'unanswered';
-		_response_(response);
+		var resp = {
+			code: 'unanswered'
+		}
+		_response_(resp);
 	});
 }
 
