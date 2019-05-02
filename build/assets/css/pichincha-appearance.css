@@ -4365,6 +4365,10 @@ p.ben-txt {
 	font-weight: normal;
 }
 
+.input-field:disabled {
+	background-color: rgb(235, 235, 228);
+}
+
 .form-actions {
 	overflow: hidden;
 }
