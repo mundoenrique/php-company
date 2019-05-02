@@ -75,7 +75,7 @@ class Asset {
 		$version = '';
 		$thirdParty = strpos($fileName, 'third_party');
 		if($thirdParty === FALSE && file_exists($file)) {
-			$version = '?V'.date('Ymd-B', fileatime($file));
+			$version = '?V'.date('Ymd-B', filemtime($file));
 			//$ext = (ENVIRONMENT === 'testing' || ENVIRONMENT === 'production') ? '.min'.$ext : $ext;
 		} else {
 			$ext = '.min'.$ext;
