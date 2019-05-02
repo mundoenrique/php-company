@@ -37,6 +37,21 @@ class User extends NOVO_Controller {
 			'nombreCompleto' => NULL
 		];
 		$this->session->unset_userdata($userData);
+
+		$this->load->library('user_agent');
+
+		$browser = strtolower($this->agent->browser());
+		$version = (float) $this->agent->version();
+		$noBrowser = "internet explorer";
+		$sliderbar = true;
+		$contentpage = 'users/content-login';
+
+
+		$views = ['user/login', 'user/signin'];
+		if($browser == $noBrowser && $version < 8.0){
+			$sliderbar = false;
+			$views = ['staticpages/content-browser'];
+		}
 		array_push(
 			$this->includeAssets->cssFiles,
 			"$this->countryUri/default"
@@ -55,7 +70,7 @@ class User extends NOVO_Controller {
 				"user/kwicks"
 			);
 		}
-		$this->views = ['user/login', 'user/signin'];
+		$this->views = $views;
 		$this->render->titlePage = lang('SYSTEM_NAME');
 		$this->loadView('login');
 	}
