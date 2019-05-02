@@ -3,7 +3,7 @@
 //País
 $config['country']='Ec-bp';
 $config['countryUri']='bp';
-$config['urlWS'] = 'http://172.24.6.78:10003/NovoEolWebInterfaceWS/webresources/';
+$config['urlWS'] = 'http://172.24.6.77:9005/NovoEolWebInterfaceWS/webresources/';
 /*
 |--------------------------------------------------------------------------
 | Base CDN URL
