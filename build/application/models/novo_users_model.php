@@ -1,6 +1,6 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed');
 
-class Novo_User_Model extends NOVO_Model {
+class novo_user_model extends NOVO_Model {
 
 	public function __construct()
 	{
