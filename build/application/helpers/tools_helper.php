@@ -143,18 +143,23 @@ if(!function_exists('maskString')) {
 
 			switch ($countryISO) {
 				case 'Ve':
+				case 've':
 					$CI->config->load('ve-config');
 					break;
 				case 'Co':
+				case 'co':
 					$CI->config->load('co-config');
 					break;
 				case 'Pe':
+				case 'pe':
 					$CI->config->load('pe-config');
 					break;
 				case 'Usd':
+				case 'us':
 					$CI->config->load('usd-config');
 					break;
 				case 'Ec-bp':
+				case 'bp':
 					$CI->config->load('ec-bp-config');
 					break;
 				default:
