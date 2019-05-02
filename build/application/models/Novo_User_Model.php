@@ -258,7 +258,7 @@ class Novo_User_Model extends NOVO_Model {
 		$response = $this->sendToService('RecoveryPass');
 
 		if($this->isResponseRc !== FALSE) {
-			$this->response->title = 'Reestablecer contraseña';
+			$this->response->title = 'Restablecer contraseña';
 			switch($this->isResponseRc) {
 				case 0:
 					$maskMail = maskString($dataRequest->email, 4, $end = 6);
