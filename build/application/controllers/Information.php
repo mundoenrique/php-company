@@ -24,6 +24,10 @@ class Information extends NOVO_Controller {
 		log_message('INFO', 'NOVO Information: terms Method Initialized');
 		$newUser = FALSE;
 		if($this->session->flashdata('changePassword')) {
+			if($this->config->item('country') !== ($this->session->userdata('countrySess'))) {
+				$urlRedirect = urlReplace($this->countryUri, $this->session->userdata('countrySess'), base_url('inicio'));
+				redirect($urlRedirect, 'location');
+			}
 			array_push(
 				$this->includeAssets->jsFiles,
 				"user/terms"

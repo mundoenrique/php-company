@@ -82,8 +82,11 @@ class NOVO_Controller extends CI_Controller {
 		$auth = FALSE;
 		switch($module) {
 			case 'login':
+			case 'benefits':
+			case 'terms':
 				$auth = TRUE;
 				break;
+
 		}
 
 		$this->render->module = $module;
