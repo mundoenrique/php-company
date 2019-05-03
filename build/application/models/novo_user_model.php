@@ -21,7 +21,7 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataAccessLog->operation = 'loginFull';
 		$this->dataAccessLog->userName = $dataRequest->user;
 
-		$this->dataRequest->userName = $dataRequest->user;
+		$this->dataRequest->userName = mb_strtoupper($dataRequest->user);
 		$this->dataRequest->password = $dataRequest->pass;
 		$this->dataRequest->ctipo = $dataRequest->active;
 
@@ -69,6 +69,7 @@ class Novo_User_Model extends NOVO_Model {
 						'idUsuario' => $response->usuario->idUsuario,
 						'userName' => $response->usuario->userName,
 						'fullName' => $fullName,
+						'codigoGrupo' => $response->usuario->codigoGrupo,
 						'token' => $response->token,
 						'cl_addr' => $this->encrypt_connect->encode($_SERVER['REMOTE_ADDR'], $dataRequest->user, 'REMOTE_ADDR'),
 						'countrySess' => $this->config->item('country')
@@ -155,7 +156,7 @@ class Novo_User_Model extends NOVO_Model {
 	public function callWs_finishSession_User($dataRequest = FALSE)
 	{
 		log_message('INFO', 'NOVO User Model: finishSession method Initialized');
-		$user = $dataRequest ? $dataRequest->user : $this->session->userdata('userName');
+		$user = $dataRequest ? mb_strtoupper($dataRequest->user) : $this->session->userdata('userName');
 		$this->className = 'com.novo.objects.TOs.UsuarioTO';
 
 		$this->dataAccessLog->userName = $user;
@@ -251,7 +252,7 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataAccessLog->operation = 'olvidoClave';
 		$this->dataAccessLog->userName = $dataRequest->userName;
 
-		$this->dataRequest->userName = strtoupper($dataRequest->userName);
+		$this->dataRequest->userName = mb_strtoupper($dataRequest->userName);
 		$this->dataRequest->idEmpresa = $dataRequest->idEmpresa;
 		$this->dataRequest->email = $dataRequest->email;
 

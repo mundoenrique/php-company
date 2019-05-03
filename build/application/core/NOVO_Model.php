@@ -35,7 +35,7 @@ class NOVO_Model extends CI_Model {
 		log_message('INFO', 'NOVO sendToService Method Initialized');
 
 		$this->accessLog = accessLog($this->dataAccessLog);
-		$this->userName = $this->userName ? $this->userName : $this->dataAccessLog->userName;
+		$this->userName = $this->userName ? $this->userName : mb_strtoupper($this->dataAccessLog->userName);
 
 		$this->dataRequest->idOperation = $this->dataAccessLog->operation;
 		$this->dataRequest->className = $this->className;
