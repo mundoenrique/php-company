@@ -15,7 +15,7 @@ class User extends NOVO_Controller {
 	 * @info Método que renderiza la vista de login
 	 * @author J. Enrique Peñaloza P.
 	 */
-	public function index()
+	public function home()
 	{
 		log_message('INFO', 'NOVO User: index Method Initialized');
 		if($this->session->userdata('logged')) {
