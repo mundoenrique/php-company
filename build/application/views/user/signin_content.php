@@ -8,6 +8,7 @@
 			</h2>
 			<div class="widget-content">
 				<form id="login-form" name="login-form" accept-charset="utf-8">
+					<input type="hidden" id="<?= $novoName; ?>" value="<?= $novoCook; ?>">
 					<fieldset>
 						<label for="user_login">Usuario</label>
 						<input type="text" id="user_login" name="user_login" placeholder="Usuario">

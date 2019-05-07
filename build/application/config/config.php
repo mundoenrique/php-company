@@ -52,7 +52,7 @@ $config['asset_url'] = BASE_CDN_URL;
 $config['asset_path'] = BASE_CDN_PATH;
 $config['favicon'] = 'favicon-novo';
 $config['channel'] = 'ceo';
-$config['app_lang'] = strtoupper(LANGUAGE);
+$config['app_lang'] = LANGUAGE;
 
 /*
 |--------------------------------------------------------------------------

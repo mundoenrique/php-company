@@ -50,9 +50,10 @@ class NOVO_Controller extends CI_Controller {
 			$this->render->favicon = $faviconLoader->favicon;
 			$this->render->ext = $faviconLoader->ext;
 			$this->render->loader = $faviconLoader->loader;
-			$this->render->lang = $this->config->item('app_lang');
 			$this->render->countryConf = $this->config->item('country');
 			$this->render->countryUri = $this->countryUri;
+			$this->render->novoName = $this->security->get_csrf_token_name();
+			$this->render->novoCook = $this->security->get_csrf_hash();
 			$this->session->set_userdata('countryUri', $this->countryUri);
 			switch($this->countryUri) {
 				case 'bp':

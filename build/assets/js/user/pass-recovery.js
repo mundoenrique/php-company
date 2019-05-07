@@ -20,7 +20,7 @@ $(function() {
 })
 
 function passRecover(recoverData, textBtn) {
-	verb = 'GET'; who = 'User'; where = 'RecoveryPass'; data = recoverData;
+	verb = 'POST'; who = 'User'; where = 'RecoveryPass'; data = recoverData;
 	callNovoCore(verb, who, where, data, function(response){
 		dataResponse = response.data
 		switch(response.code) {

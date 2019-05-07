@@ -85,7 +85,7 @@ if(!function_exists('accessLog')) {
 			"RC"=> 0,
 			"IP"=> $CI->input->ip_address(),
 			"dttimesstamp"=> date('m/d/Y H:i'),
-			"lenguaje"=> $CI->config->item('app_lang')
+			"lenguaje"=> strtoupper(LANGUAGE)
 		];
 	}
 }
