@@ -243,7 +243,7 @@ $("#table-text-lotes").on("click","#borrar",
 
 
       var canvas = "<div id='dialog-confirm'>";
-      canvas +="<p>Nombre: "+arch+"</p>";
+      canvas +="<p>Nombre: "+arch+"</p>  <p><strong>Ingrese su contraseña</strong></p>";
       canvas += "<fieldset><input type='password' id='pass' size=30 placeholder='Ingrese su contraseña' class='text ui-widget-content ui-corner-all'/>";
       canvas += "<h5 id='msg'></h5></fieldset></div>";
 
