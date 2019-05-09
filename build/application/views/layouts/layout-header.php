@@ -64,7 +64,7 @@ $style_css = $this->uri->segment(3);
 	?>
 
 	<div id="nav-bar2">
-		<?php echo np_hoplite_crearMenu($menuP,$pais,$urlBase);?>
+		<?php echo createMenu($menuP,$pais);?>
 	</div>
 <?php };?>
 
