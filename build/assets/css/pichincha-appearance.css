@@ -1,167 +1,5 @@
-input:focus,
-textarea:focus {
-	border: 1px solid #033572;
-}
-
-article,
-aside,
-details,
-figcaption,
-figure,
-footer,
-header,
-hgroup,
-nav,
-section {
-	display: block;
-}
-
-audio,
-canvas,
-video {
-	display: inline-block;
-}
-
-audio:not([controls]) {
-	display: none;
-}
-
-[hidden] {
-	display: none;
-}
-
-.hidden {
-	display: none;
-}
-
-html {
-	-ms-text-size-adjust: 100%;
-	-webkit-text-size-adjust: 100%;
-}
-
-a {
-	color: #10133f !important;
-}
-
-a:focus {
-	outline: thin dotted;
-}
-
-a:active,
-a:hover {
-	outline: 0;
-}
-
-a img {
-	border: 0;
-}
-
-abbr[title] {
-	border-bottom: 1px dotted;
-}
-
-dfn,
-em {
-	font-style: italic;
-}
-
-strong {
-	font-weight: 700;
-}
-
-del {
-	text-decoration: line-through;
-}
-
-ins {
-	text-decoration: underline;
-}
-
-pre {
-	white-space: pre-wrap;
-}
-
-q {
-	quotes: "\201C""\201D""\2018""\2019";
-}
-
-sub,
-sup {
-	font-size: 75%;
-	line-height: 0;
-}
-
-legend {
-	border: 0;
-}
-
-button,
-input,
-select,
-textarea {
-	font-family: "prelo";
-	font-size: 100%;
-}
-
-button,
-input {
-	line-height: normal;
-}
-
-button,
-select {
-	text-transform: none;
-}
-
-button,
-html input[type="button"],
-input[type="reset"],
-input[type="submit"] {
-	-webkit-appearance: button;
-	cursor: pointer;
-}
-
-button[disabled],
-html input[disabled] {
-	cursor: default;
-}
-
-input[type="search"] {
-	-webkit-appearance: textfield;
-}
-
-input[type="search"]::-webkit-search-cancel-button,
-input[type="search"]::-webkit-search-decoration {
-	-webkit-appearance: none;
-}
-
-button::-moz-focus-inner,
-input::-moz-focus-inner {
-	border: 0;
-}
-
-textarea {
-	overflow: auto;
-}
-
-img {
-	border: 0;
-}
-
-svg:not(:root) {
-	overflow: hidden;
-}
-
-table {
-	border-collapse: collapse;
-	border-spacing: 0;
-	word-wrap: break-word;
-}
-
 @font-face {
-	font-family: "prelo";
-  font-style: normal;
-  font-weight: 500;
+	font-family: "Prelo Medium";
   src: url('../fonts/bp/prelo-medium-webfont.eot');
   src: url('../fonts/bp/prelo-medium-webfont.eot?#iefix') format('embedded-opentype'),
 			 url('../fonts/bp/prelo-medium-webfont.woff2') format('woff2'),
@@ -170,9 +8,7 @@ table {
 }
 
 @font-face {
-	font-family: "prelo";
-  font-style: normal;
-  font-weight: 700;
+	font-family: "Prelo Semibold";
   src: url('../fonts/bp/prelo-semibold-webfont.eot');
   src: url('../fonts/bp/prelo-semibold-webfont.eot?#iefix') format('embedded-opentype'),
 			 url('../fonts/bp/prelo-semibold-webfont.woff2') format('woff2'),
@@ -181,9 +17,7 @@ table {
 }
 
 @font-face {
-	font-family: "preloslap";
-  font-style: normal;
-  font-weight: 500;
+	font-family: "Prelo Slab Book";
   src: url('../fonts/bp/preloslab-book-webfont.eot');
   src: url('../fonts/bp/preloslab-book-webfont.eot?#iefix') format('embedded-opentype'),
 			 url('../fonts/bp/preloslab-book-webfont.woff2') format('woff2'),
@@ -192,9 +26,7 @@ table {
 }
 
 @font-face {
-	font-family: "preloslap";
-  font-style: normal;
-  font-weight: 700;
+	font-family: "Prelo Slab Semibold";
   src: url('../fonts/bp/preloslab-semibold-webfont.eot');
   src: url('../fonts/bp/preloslab-semibold-webfont.eot?#iefix') format('embedded-opentype'),
 			 url('../fonts/bp/preloslab-semibold-webfont.woff2') format('woff2'),
@@ -210,21 +42,6 @@ table {
   font-style: normal;
 }
 
-::selection {
-	background: #0F265C;
-	color: white;
-}
-
-::-moz-selection {
-	background: #0F265C;
-	color: white;
-}
-
-::-webkit-selection {
-	background: #0F265C;
-	color: white;
-}
-
 body {
 	background: -moz-linear-gradient(55deg, rgba(250, 251, 253, 1) 0%, rgba(250, 251, 253, 1) 69%, rgba(243, 244, 248, 1) 70%, rgba(243, 244, 248, 1) 100%) no-repeat;
 	background: -webkit-gradient(linear, left bottom, right top, color-stop(0%, rgba(250, 251, 253, 1)), color-stop(69%, rgba(250, 251, 253, 1)), color-stop(70%, rgba(243, 244, 248, 1)), color-stop(100%, rgba(243, 244, 248, 1))) no-repeat;
@@ -235,10 +52,32 @@ body {
 	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#F3F4F8', endColorstr='#FAFBFD', GradientType=0);
 	color: #10133f;
 	direction: ltr;
-	font-family: "preloslap", sans-serif;
-	font-size: 12px;
-	line-height: 17px;
-	font-weight: 500;
+	font-family: "Prelo Medium", sans-serif;
+	font-weight: normal;
+	font-size: 14px;
+}
+
+html {
+	-ms-text-size-adjust: 100%;
+	-webkit-text-size-adjust: 100%;
+}
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+nav,
+section {
+	display: block;
+}
+
+address, caption, cite, code, dfn, em, h1, h2, h3, h4, h5, h6, strong, th, var {
+	font-weight: normal;
+	font-style: normal;
 }
 
 h1,
@@ -247,9 +86,8 @@ h3,
 h4,
 h5,
 h6 {
-	font-family: "preloslap", sans-serif;
+	font-family: "Prelo Slab Book", sans-serif;
 	-webkit-font-smoothing: antialiased;
-	font-weight: normal;
 }
 
 h1 {
@@ -289,9 +127,9 @@ h6 {
 }
 
 a {
-	color: #10133f;
+	color: #10133f !important;
 	cursor: pointer;
-	font-weight: 700;
+	font-family: "Prelo Semibold";
 	text-decoration: none;
 }
 
@@ -299,9 +137,21 @@ a:hover {
 	color: #10133f;
 }
 
+a:focus {
+	outline: thin dotted;
+}
+
+a:active,
+a:hover {
+	outline: 0;
+}
+
+a img {
+	border: 0;
+}
+
 p {
 	text-align: left;
-	font-size: 14px;
 }
 
 code,
@@ -309,6 +159,166 @@ kbd,
 pre,
 samp {
 	font-family: Consolas, monaco, monospace, serif;
+}
+
+audio,
+canvas,
+video {
+	display: inline-block;
+}
+
+audio:not([controls]) {
+	display: none;
+}
+
+[hidden] {
+	display: none;
+}
+
+.hidden {
+	display: none;
+}
+
+abbr[title] {
+	border-bottom: 1px dotted;
+}
+
+dfn,
+em {
+	font-style: italic;
+}
+
+del {
+	text-decoration: line-through;
+}
+
+ins {
+	text-decoration: underline;
+}
+
+pre {
+	white-space: pre-wrap;
+}
+
+q {
+	quotes: "\201C""\201D""\2018""\2019";
+}
+
+sub,
+sup {
+	font-size: 75%;
+	line-height: 0;
+}
+
+legend {
+	border: 0;
+}
+
+input:focus,
+textarea:focus {
+	border: 1px solid #616161;
+}
+
+button,
+input,
+select,
+textarea {
+	font-size: 100%;
+}
+
+button,
+input {
+	line-height: normal;
+}
+
+button,
+select {
+	text-transform: none;
+}
+
+button,
+html input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+	-webkit-appearance: button;
+	cursor: pointer;
+}
+
+button[disabled],
+html input[disabled] {
+	cursor: default;
+}
+
+button {
+	background: url('../images/BackgroundButton.png') left center no-repeat #ffdd00;
+	border: 0;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	-ms-border-radius: 3px;
+	-o-border-radius: 3px;
+	border-radius: 3px;
+	color: #10133f;
+	line-height: 35px;
+	outline: none;
+	font-family: "Prelo Semibold";
+	font-size: 13px;
+	text-align: center;
+}
+
+button:hover {
+	background: url('../images/BackgroundButtonHover.png') left center no-repeat #ffdd00;
+}
+
+button:active {
+	background: none;
+	background-color: #ffd000;
+}
+
+input[type="search"] {
+	-webkit-appearance: textfield;
+}
+
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration {
+	-webkit-appearance: none;
+}
+
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+	border: 0;
+}
+
+textarea {
+	overflow: auto;
+}
+
+img {
+	border: 0;
+}
+
+svg:not(:root) {
+	overflow: hidden;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+	word-wrap: break-word;
+}
+
+::selection {
+	background: #0F265C;
+	color: white;
+}
+
+::-moz-selection {
+	background: #0F265C;
+	color: white;
+}
+
+::-webkit-selection {
+	background: #0F265C;
+	color: white;
 }
 
 .img-back {
@@ -374,32 +384,6 @@ textarea {
 	-webkit-box-shadow: rgba(51, 51, 51, 0.2) 0 2px 2px false inset;
 	-moz-box-shadow: rgba(51, 51, 51, 0.2) 0 2px 2px false inset;
 	box-shadow: rgba(51, 51, 51, 0.2) 0 2px 2px false inset;
-	font-size: 14px;
-}
-
-button {
-	background: url('../images/BackgroundButton.png') left center no-repeat #ffdd00;
-	border: 0;
-	-webkit-border-radius: 3px;
-	-moz-border-radius: 3px;
-	-ms-border-radius: 3px;
-	-o-border-radius: 3px;
-	border-radius: 3px;
-	color: #10133f;
-	line-height: 35px;
-	font-weight: 700;
-	outline: none;
-	font-size: 13px;
-	text-align: center;
-}
-
-button:hover {
-	background: url('../images/BackgroundButtonHover.png') left center no-repeat #ffdd00;
-}
-
-button:active {
-	background: none;
-	background-color: #ffd000;
 }
 
 .file-field {
@@ -447,7 +431,6 @@ button:active {
 #wrapper,
 #foot-wrapper {
 	overflow: hidden;
-	font-size: 14px;
 }
 
 #head-wrapper {
@@ -456,7 +439,6 @@ button:active {
 }
 
 .breadcrumb {
-	font-family: "prelo";
 	font-size: 13px;
 }
 
@@ -543,7 +525,6 @@ button .requesting {
 
 #credits {
 	overflow: hidden;
-	font-family: "prelo";
 }
 
 #credits p {
@@ -569,7 +550,6 @@ button .requesting {
 	color: #bbbbbb !important;
 	border-left: 1px solid #dddddd;
 	border-right: 1px solid #f3f3f3;
-	font-family: "prelo", "Helvetica Neue", Helvetica, Arial, sans-serif;
 	font-size: 16px;
 	line-height: 40px;
 	text-shadow: 1px 1px 0 #f3f3f3;
@@ -579,7 +559,6 @@ button .requesting {
 	color: #bbbbbb !important;
 	border-left: 1px solid #dddddd;
 	border-right: 1px solid #f3f3f3;
-	font-family: "prelo", "Helvetica Neue", Helvetica, Arial, sans-serif;
 	font-size: 16px;
 	line-height: 40px;
 	text-shadow: 1px 1px 0 #f3f3f3;
@@ -613,7 +592,6 @@ button .requesting {
 	border-left: 1px solid #dddddd;
 	border-right: 1px solid #f3f3f3;
 	color: #555555;
-	font-family: "prelo", "Helvetica Neue", Helvetica, Arial, sans-serif;
 	font-size: 16px;
 	line-height: 40px;
 	text-shadow: 1px 1px 0 #f3f3f3;
@@ -669,8 +647,6 @@ button .requesting {
 
 #account-nav ul li a {
 	color: white;
-	font-size: 14px;
-	font-weight: 700;
 	color: #0f265c !important;
 	display: flex;
 }
@@ -687,17 +663,13 @@ button .requesting {
 	overflow: hidden;
 }
 
-#extra-nav ul.menu {
-	font-family: "prelo";
-}
-
 #extra-nav ul.menu li.menu-item {
 	line-height: 50px;
 }
 
 #extra-nav ul.menu li.menu-item a {
+	font-family: Prelo Semibold;
 	font-size: 12px;
-	font-weight: 700;
 }
 
 .config-menuH {
@@ -712,10 +684,6 @@ button .requesting {
 	border: 1px solid #d5d5d5 !important;
 }
 
-.config-menuH ul {
-	font-size: 14px;
-}
-
 .config-menuH li {
 	list-style: none;
 }
@@ -728,17 +696,12 @@ button .requesting {
 	list-style: none !important;
 }
 
-.submenu {
-	font-family: "prelo";
-}
-
 .submenu a {
 	color: #0F265C !important;
 	font-weight: normal;
 }
 
 .submenu .menu-item:hover {
-	font-weight: 700;
 	border-left: 3px solid #FFDD00;
 }
 
@@ -748,13 +711,11 @@ button .requesting {
 
 p#text-general {
 	color: #555555;
-	font-family: "prelo", "Helvetica Neue", Helvetica, Arial, sans-serif;
 	font-size: 12px;
 }
 
 p#text-general-condiciones {
 	color: #555555;
-	font-family: "prelo", "Helvetica Neue", Helvetica, Arial, sans-serif;
 	font-size: 12px;
 }
 
@@ -762,7 +723,6 @@ select.categories-products {
 	border: 1px solid #DDDDDD;
 	border-radius: 3px 3px 3px 3px;
 	color: #545454;
-	font-weight: 700;
 }
 
 p.subtitulos-login {
@@ -801,7 +761,6 @@ p.subtitulos-login {
 	font-size: 17px;
 	color: red;
 	line-height: 19px;
-	font-weight: 700;
 }
 
 .desc-func {
@@ -890,7 +849,6 @@ html {
 
 .tooltipster-default .tooltipster-content {
 	font-family: Arial, sans-serif;
-	font-size: 14px;
 	line-height: 16px;
 	overflow: hidden;
 }
@@ -1095,7 +1053,6 @@ select.ui-datepicker-year {
 
 .ui-datepicker th {
 	text-align: center;
-	font-weight: 700;
 	border: 0;
 }
 
@@ -1168,14 +1125,12 @@ select.ui-datepicker-year {
 	border: 0;
 	background: 0;
 	overflow: auto;
-	font-size: 14px;
 }
 
 .ui-dialog .ui-dialog-buttonpane {
 	text-align: left;
 	border-width: 1px 0 0;
 	background-image: none;
-	font-size: 14px;
 }
 
 .ui-dialog .ui-dialog-buttonpane button {
@@ -1335,7 +1290,7 @@ body .ui-tooltip {
 }
 
 .ui-widget {
-	font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif;
+	font-family: "Prelo Semibold", sans-serif;
 }
 
 .ui-widget .ui-widget {
@@ -1346,7 +1301,7 @@ body .ui-tooltip {
 .ui-widget select,
 .ui-widget textarea,
 .ui-widget button {
-	font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif;
+	font-family: "Prelo Semibold", sans-serif;
 	font-size: 1em;
 	outline: none;
 }
@@ -1361,8 +1316,6 @@ body .ui-tooltip {
 	border: 1px solid #0f265c;
 	background: #0f265c;
 	color: #fff;
-	font-weight: 700;
-	font-size: 14px;
 }
 
 .ui-widget-header a {
@@ -1374,7 +1327,6 @@ body .ui-tooltip {
 .ui-widget-header .ui-state-default {
 	border: 1px solid #ccc;
 	background: #f6f6f6;
-	font-weight: 700;
 	color: #10133f;
 }
 
@@ -1391,7 +1343,6 @@ body .ui-tooltip {
 .ui-state-focus,
 .ui-widget-content .ui-state-focus,
 .ui-widget-header .ui-state-focus {
-	font-weight: 700;
 	color: #10133f;
 }
 
@@ -1407,7 +1358,6 @@ body .ui-tooltip {
 .ui-widget-content .ui-state-active,
 .ui-widget-header .ui-state-active {
 	background: white;
-	font-weight: 700;
 	color: #ffdd00;
 }
 
@@ -1450,12 +1400,6 @@ body .ui-tooltip {
 .ui-widget-content .ui-state-error-text,
 .ui-widget-header .ui-state-error-text {
 	color: #fff;
-}
-
-.ui-priority-primary,
-.ui-widget-content .ui-priority-primary,
-.ui-widget-header .ui-priority-primary {
-	font-weight: 700;
 }
 
 .ui-priority-secondary,
@@ -2347,7 +2291,7 @@ a.style-companies-item:hover {
 
 span#more-info a p {
 	color: #10133f;
-	font-weight: 700;
+	font-family: "Prelo Semibold";
 	font-size: 12px;
 }
 
@@ -2355,20 +2299,14 @@ span#more-info a p b {
 	font-size: 18px;
 }
 
-#text-companies,
-#text-companies-2 {
-	font-family: "prelo";
-}
-
 #text-companies-T {
 	line-height: 14px;
-	font-size: 14px;
 	overflow: hidden;
+	font-family: "Prelo Semibold";
 }
 
 #text-companies {
 	line-height: 12px;
-	font-size: 14px;
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	overflow: hidden;
@@ -2377,13 +2315,13 @@ span#more-info a p b {
 
 #text-companies-2 {
 	color: #545454;
-	font-weight: regular;
+	font-weight: normal;
 }
 
 .filter {
 	color: #FFFFFF;
 	background: #e5e5e5;
-	font-family: "prelo";
+	font-family: "Prelo Semibold";
 }
 
 .filter-2 {
@@ -2394,8 +2332,7 @@ span#more-info a p b {
 .lastsession {
 	color: #888888;
 	font-size: 12px;
-	font-weight: 700;
-	font-family: "prelo";
+	font-family: "Prelo Semibold";
 }
 
 div.filter li {
@@ -2476,7 +2413,6 @@ li.filter-1 a {
 
 #sidebar-products,
 .aviso {
-	font-family: "prelo";
 	background-color: #DDDDDD;
 	border-radius: 15px;
 }
@@ -2489,10 +2425,8 @@ li.filter-1 a {
 #widget-info {
 	background: #dddddd;
 	color: #0F265C;
-	font-weight: 700;
 	text-align: center;
-	font-family: "preloslap";
-	font-size: 14px;
+	font-family: "Prelo Slab Book";
 }
 
 #content-condiciones p {
@@ -2530,7 +2464,6 @@ li.filter-1 a {
 }
 
 #widget-info-1 p {
-	font-weight: 700;
 	color: #ffdd00;
 }
 
@@ -2540,9 +2473,7 @@ li.filter-1 a {
 	border-bottom-left-radius: 15px;
 	color: #10133f;
 	overflow: hidden;
-	font-size: 14px;
-	font-family: "preloslap";
-	font-weight: 500;
+	font-family: "Prelo Slab Book";
 }
 
 #products-list li {
@@ -2566,8 +2497,6 @@ li.filter-1 a {
 
 .info-producto-1 {
 	color: #0F265C;
-	font-size: 14px;
-	font-weight: 700;
 }
 
 .text-category {
@@ -2654,8 +2583,6 @@ li.filter-1 a {
 	border-radius: 5px 5px 0px 0px;
 	background-color: #f5921e;
 	color: white;
-	font-weight: 700;
-	font-size: 14px;
 	list-style: none;
 }
 
@@ -2679,8 +2606,6 @@ li.filter-1 a {
 	border-radius: 5px 5px 0px 0px;
 	background-color: #50c592;
 	color: white;
-	font-weight: 700;
-	font-size: 14px;
 	list-style: none;
 }
 
@@ -2704,8 +2629,6 @@ li.filter-1 a {
 	border-radius: 5px 5px 0px 0px;
 	background-color: #994596;
 	color: white;
-	font-weight: 700;
-	font-size: 14px;
 	list-style: none;
 }
 
@@ -2714,7 +2637,6 @@ li.filter-1 a {
 	border-top: 1px solid #dddddd;
 	border-bottom: 1px solid #f3f3f3;
 	list-style: none;
-	font-weight: 700;
 	font-size: 12px;
 }
 
@@ -2746,13 +2668,10 @@ ul#brands li p {
 
 #text-product-detail {
 	font-size: 15px;
-	font-family: "prelo";
 }
 
 #text-product-detail h2 {
 	font-size: 30px;
-	font-weight: 700;
-	font-family: "preloslap";
 }
 
 #text-product-detail p span {
@@ -2768,10 +2687,6 @@ ul#brands li p {
 	background: white;
 	border-right: solid 1px #cfcfcf;
 	border-left: solid 1px #cfcfcf;
-}
-
-#lotes-contenedor h5 {
-	font-weight: 700;
 }
 
 #lotes-contenedor-autorizacion {
@@ -2862,7 +2777,6 @@ ul#brands li p {
 }
 
 .paginate_active {
-	font-weight: 700;
 	color: #10133f !important;
 }
 
@@ -2950,7 +2864,6 @@ ul#brands li p {
 
 #check-all {
 	color: #10133f;
-	font-weight: 700;
 }
 
 #table-text-TM {
@@ -3221,8 +3134,6 @@ tr.GC-first th {
 	-ms-border-radius: 5px 5px 0px 0px;
 	-o-border-radius: 5px 5px 0px 0px;
 	border-radius: 5px 5px 0px 0px;
-	font-size: 14px;
-	font-weight: 700;
 	color: #888888;
 	-webkit-box-shadow: rgba(51, 51, 51, 0.5) 0 1px 1px;
 	-moz-box-shadow: rgba(51, 51, 51, 0.5) 0 1px 1px;
@@ -3233,17 +3144,6 @@ tr.GC-first th {
 	font-weight: regular;
 	border-left: 1px solid #dddddd;
 	border-right: 1px solid #f3f3f3;
-}
-
-.info-lotes-b {
-	font-weight: 700;
-}
-
-.info-lotes-b h5,
-.info-lotes-a h5,
-#selection-1 h5,
-#selection-2 h5 {
-	font-weight: 700;
 }
 
 #selection-1 select {
@@ -3377,7 +3277,6 @@ li#select-empresa select {
 
 .num-product-detail {
 	font-size: 18px;
-	font-weight: 700;
 }
 
 #datos-principales {
@@ -3449,10 +3348,6 @@ li#select-empresa select {
 	border-bottom: 1px solid #ddd;
 }
 
-.info-OD h5 {
-	font-weight: 700;
-}
-
 .tipo-lote {
 	background: none !important;
 	border: none !important;
@@ -3460,7 +3355,6 @@ li#select-empresa select {
 
 .tipo-lote li:hover {
 	color: #555;
-	font-weight: 700;
 }
 
 .selected-option input[type="radio"],
@@ -3532,7 +3426,6 @@ li#select-empresa select {
 #Datos1 {
 	background: #54c2d0;
 	color: #FFF;
-	font-weight: 700;
 	-webkit-border-radius: 10px 10px 0 0;
 	-moz-border-radius: 10px 10px 0 0;
 	-ms-border-radius: 10px 10px 0 0;
@@ -3657,17 +3550,8 @@ li#select-empresa select {
 	border-right: 1px dotted #bbb;
 }
 
-#lotesConfirmacion-long h5 {
-	font-weight: 700;
-}
-
-#lotesConfirmacion-short h5 {
-	font-weight: 700;
-}
-
 #type-1 {
 	color: #aa78c2;
-	font-weight: 700;
 }
 
 #embozo1 select,
@@ -3950,13 +3834,11 @@ span.jPag-snext-img {
 ul.jPag-pages li span.jPag-previous,
 ul.jPag-pages li span.jPag-previous-img {
 	font-size: 12px;
-	font-weight: 700;
 }
 
 ul.jPag-pages li span.jPag-next,
 ul.jPag-pages li span.jPag-next-img {
 	font-size: 12px;
-	font-weight: 700;
 }
 
 span.jPag-sprevious,
@@ -4005,7 +3887,6 @@ span.jPag-snext-img {
 .thead-edc #Datos1 {
 	background: #004574;
 	color: #FFF;
-	font-weight: 700;
 	-webkit-border-radius: 10px 10px 0 0;
 	-moz-border-radius: 10px 10px 0 0;
 	-ms-border-radius: 10px 10px 0 0;
@@ -4035,7 +3916,6 @@ span.jPag-snext-img {
 	text-align: center;
 	border-right: 1px dotted #bbbbbb;
 	line-height: 21px;
-	font-weight: 700;
 	color: #54c2d0 !important;
 }
 
@@ -4049,10 +3929,6 @@ span.jPag-snext-img {
 	color: #10133f;
 }
 
-.montos-TM p {
-	font-weight: 700;
-}
-
 .OSinfo {
 	background: none repeat scroll 0 0 #004574 !important;
 }
@@ -4061,14 +3937,9 @@ span.jPag-snext-img {
 	color: #fff !important;
 }
 
-.OShead-2 {
-	font-weight: 700;
-}
-
 #btn-modif-suc {
 	background: white;
 	border: solid 1px #FFDD00;
-	font-size: 14px;
 }
 
 #btn-modificar:hover,
@@ -4146,7 +4017,6 @@ span.jPag-snext-img {
 
 #pswd_info::before {
 	content: "\25B2";
-	font-size: 14px;
 	line-height: 14px;
 	color: #ddd;
 	text-shadow: none;
@@ -4176,7 +4046,6 @@ span.jPag-snext-img {
 	color: #ffdd00;
 	font-size: 16px !important;
 	line-height: 18px !important;
-	font-weight: 700 !important;
 }
 
 .field-date {
@@ -4185,8 +4054,6 @@ span.jPag-snext-img {
 
 .total-empr-dash {
 	color: #0f265c;
-	font-weight: 700;
-	font-size: 14px;
 }
 
 .content-beneficios {
@@ -4213,7 +4080,7 @@ p.ben-icon {
 }
 
 p.ben-title {
-	font-weight: 700;
+	font-family: "Prelo Semibold";
 	font-size: 17px;
 }
 
@@ -4250,7 +4117,6 @@ p.ben-txt {
 #datos-principales-AU td {
 	border: solid 1px;
 	text-align: center;
-	font-weight: 700;
 }
 
 .tooltip-funcionesAU {
@@ -4338,17 +4204,15 @@ p.ben-txt {
 }
 
 .line-field {
-	color: #333333;
+	color: #10265c;
 	display: block;
-	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-	font-size: 14px;
 	line-height: 25px;
 }
 
 .input-field {
 	line-height: 20px;
 	background: white;
-	border: 1px solid #bbbbbb;
+	border: 1px solid #d5d5d5;
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
 	-ms-border-radius: 4px;
@@ -4357,7 +4221,7 @@ p.ben-txt {
 	-webkit-box-shadow: 0 2px 0 rgba(51, 51, 51, 0.05);
 	-moz-box-shadow: 0 2px 0 rgba(51, 51, 51, 0.05);
 	box-shadow: 0 2px 0 rgba(51, 51, 51, 0.05);
-	color: #888888;
+	color: #616161;
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 	font-size: 12px;
 	font-style: normal;
@@ -4368,16 +4232,26 @@ p.ben-txt {
 	background-color: rgb(235, 235, 228);
 }
 
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: #989898;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color: #989898;
+}
+:-ms-input-placeholder { /* IE 10+ */
+  color: #989898;
+}
+:-moz-placeholder { /* Firefox 18- */
+  color: #989898;
+}
+
 .form-actions {
 	overflow: hidden;
 }
 
 .cancel-anchor {
 	line-height: 35px;
-	font-weight: normal;
-	font-family: 'prelo';
 	font-size: 13px;
-	font-weight: bold;
 }
 
 a.cancel-anchor:hover {
@@ -4393,7 +4267,6 @@ a.cancel-anchor:hover {
 	-webkit-box-shadow: none;
 	-moz-box-shadow: none;
 	box-shadow: none;
-	font-family: 'prelo' !important;
 	font-weight: normal;
 	color: #10133f;
 }
@@ -4403,7 +4276,6 @@ a.cancel-anchor:hover {
 	-webkit-box-shadow: none;
 	-moz-box-shadow: none;
 	box-shadow: none;
-	font-family: 'prelo';
 	font-weight: normal;
 	color: #f04848;
 }
@@ -4418,12 +4290,10 @@ div.not-info {
 	border-radius: 5px;
 	color: #ae8500;
 	font-family: inherit;
-	font-size: 14px;
 }
 
 div.not-info a {
 	color: #ae8500;
-	font-weight: 700;
 	text-decoration: underline;
 }
 
@@ -4560,7 +4430,7 @@ button.green:hover {
 p#user-name {
 	font-size: 15px;
 	color: #0f265c;
-	font-weight: 700;
+	font-family: "Prelo Semibold";
 }
 
 #datos-1 {
@@ -4583,10 +4453,6 @@ p#user-name {
 	font-size: 20px;
 }
 
-.content-user p {
-	font-weight: 700;
-}
-
 #contend-pagination a {
 	text-decoration: none;
 }
@@ -4598,7 +4464,6 @@ p#user-name {
 #contend-pagination #list_pagination {
 	overflow: hidden;
 	white-space: nowrap;
-	font-size: 14px;
 }
 
 .fecha-carga {
@@ -4761,15 +4626,13 @@ p#user-name {
 
 #nav2 ul li a {
 	text-decoration: none;
-	font-weight: normal;
-	font-family: "prelo", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-family: "Prelo Semibold";
 	font-size: 16px;
 	line-height: 40px;
 	color: #0f265c !important;
 }
 
 #nav2 ul li a:hover {
-	font-weight: 700;
 	text-decoration: underline;
 }
 
@@ -4825,7 +4688,7 @@ a.style-companies-item > span.icon:before,
 }
 
 #ui-datepicker-div {
-	font-family: "prelo";
+	font-family: "Prelo Medium";
 }
 
 #ui-datepicker-div .ui-datepicker-header {
