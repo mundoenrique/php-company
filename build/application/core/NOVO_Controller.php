@@ -58,14 +58,19 @@ class NOVO_Controller extends CI_Controller {
 			switch($this->countryUri) {
 				case 'bp':
 					$this->skin = 'pichincha';
+					$structure = 'pichincha';
 					break;
 				default:
 					$this->skin = 'novo';
+					$structure = 'novo';
+			}
+			if($this->skin !== 'pichincha') {
+				$structure = 'novo';
 			}
 			$this->includeAssets->cssFiles = [
 				"$this->skin-validate",
 				"third_party/jquery-ui",
-				"$this->skin-structure",
+				"$structure-structure",
 				"$this->skin-appearance"
 			];
 			$this->includeAssets->jsFiles = [
