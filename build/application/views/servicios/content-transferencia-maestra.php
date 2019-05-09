@@ -138,7 +138,9 @@
 						<th id='td-nombre-2'><?= lang('NOMBRE') ?></th>
 						<th><?= lang('ID_PERSONA'); ?></th>
 						<th><?= lang('SALDO'); ?></th>
+						<?php if($pais != 'Ec-bp'): ?>
 						<th><?= lang('MONTO'); ?></th>
+						<?php endif; ?>
 						<th><?= lang('OPCIONES'); ?></th>
 					</thead>
 					<tbody></tbody>

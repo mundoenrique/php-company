@@ -519,18 +519,19 @@ function cargarResultado(data) {
 		serv_var.TotalTjts += data.result.listadoTarjetas.lista.length;
 		$('#textS').empty();
 		$('#textS').append('<em>Seleccionar todo (' + serv_var.TotalTjts + ' de ' + data.result.listaTarjetas[0].totalRegistros + ')</em>');
+		$('.table-text-aut thead th').css('min-width', '75px');
+		$('.table-text-aut tbody td').css('min-width', '75px');
 
 		$.each(data.result.listadoTarjetas.lista, function(k, v) {
 			tr = '<tr class="' + data.result.listaTarjetas[0].paginaActual + '" tjta="' + v.noTarjetaConMascara + '" id_ext_per="' + v.id_ext_per + '"><td class="checkbox-select"><input id="check-oneTM" type="checkbox" value=""/></td>';
-			tr += '<td id="td-nombre-2">' + v.noTarjetaConMascara + '</td>';
-			tr += '<td id="estatus' + v.noTarjetaConMascara.replace(/[*]/g, "") + '">-</td>'; //estatus
-			tr += '<td id="td-nombre-2">' + v.NombreCliente.toLowerCase().replace(/(^| )(\w)/g, function(x) {
+			tr += '<td id="td-nombre-2" class="bp-min-width">' + v.noTarjetaConMascara + '</td>';
+			tr += '<td id="estatus' + v.noTarjetaConMascara.replace(/[*]/g, "") + '" class="bp-min-width">-</td>'; //estatus
+			tr += '<td id="td-nombre-2" class="bp-min-width">' + v.NombreCliente.toLowerCase().replace(/(^| )(\w)/g, function(x) {
 							return x.toUpperCase();
 					}) + '</td>';
-			tr += '<td>' + v.id_ext_per + '</td>';
-			tr += '<td id="saldo' + v.noTarjetaConMascara.replace(/[*]/g, "") + '">-</td>'; //saldo
-			tr += '<td><input class="monto" style="width: 68%;"></td>'; //monto  onPaste="return false"
-			tr += '<td><a id="consulta_saldo" title="consulta saldo" ' + serv_var.consulta + '><span class="icon" data-icon="&#xe072;"></span></a>';
+			tr += '<td class="bp-min-width">' + v.id_ext_per + '</td>';
+			tr += '<td id="saldo' + v.noTarjetaConMascara.replace(/[*]/g, "") + '" class="bp-min-width">-</td>'; //saldo
+			tr += '<td class="bp-min-width"><a id="consulta_saldo" title="consulta saldo" ' + serv_var.consulta + '><span class="icon" data-icon="&#xe072;"></span></a>';
 			tr += '<a id="abono_tarjeta" title="abono tarjeta" ' + serv_var.abono + '><span class="icon" data-icon="&#xe031;"></span></a>';
 			tr += '<a id="cargo_tarjeta" title="cargo tarjeta" ' + serv_var.cargo + '><span class="icon" data-icon="&#xe08d;"></span></a>';
 			tr += '</td></tr>';
@@ -542,7 +543,7 @@ function cargarResultado(data) {
 
 	} else {
 		$('#resultado-tarjetas').hide();
-		notificacion("Consulta tarjetas transferencia maestro", "<h2>Empresa sin tarjetas asociadas</h2><h6>Saldo disponible: " + serv_var.saldoDispon + "</h6>") //$('.table-text-aut tbody').append('<h2>Sin resultados</h2>');
+		notificacion("Consulta tarjetas transferencia maestra", "<h2>Empresa sin tarjetas asociadas</h2><h6>Saldo disponible: " + serv_var.saldoDispon + "</h6>") //$('.table-text-aut tbody').append('<h2>Sin resultados</h2>');
 	}
 }
 
