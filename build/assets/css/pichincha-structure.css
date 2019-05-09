@@ -3247,34 +3247,13 @@ span.jPag-snext-img {
 	width: 200px;
 	height: 250px;
 	padding: 10px;
-}
-
-p.ben-title {
-	margin-top: 24px;
-}
-
-#ben-1 {
 	margin: 10px 10px 10px 0px;
 }
 
-#ben-2 {
-	margin: 10px 10px 10px 0px;
-}
-
-#ben-3 {
-	margin: 10px 10px 10px 0px;
-}
-
-#ben-4 {
-	margin: 10px 10px 10px 0px;
-}
-
-#ben-5 {
-	margin: 10px 10px 10px 0px;
-}
-
-#ben-6 {
-	margin: 10px 10px 10px 0px;
+p.ben-icon {
+	font-size: 60px;
+	color: #FFDD00;
+	margin-bottom: 0px;
 }
 
 .paginacion-dash {
