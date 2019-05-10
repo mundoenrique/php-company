@@ -38,7 +38,7 @@ switch(country) {
 		break;
 }
 
-$('input[type=text]').attr('autocomplete','off');
+$('input[type=text], input[type=password], input[type=textarea]').attr('autocomplete','off');
 
 function callNovoCore (verb, who, where, data, _response_) {
 	console.log('Model:', who, 'Method:', where, 'Request:', data);
