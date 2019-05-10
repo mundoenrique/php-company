@@ -122,99 +122,48 @@ if(!function_exists('maskString')) {
 }
 
 if(!function_exists('createMenu')) {
-	function createMenu($menuP,$pais) {
-		$menuTpl = '
-			<nav id="nav2">
-				<ul style="margin:0">
-					<li>
-						<a href="'.base_url($pais.'/dashboard').'" rel="start" >
-							<span aria-hidden="true" class="icon" data-icon="&#xe097;"></span>
-							'.lang('MENU_INICIO').'
-						</a>
-					</li>
-					{ levelOneOptions }
-					<li>
-						<a href="'.base_url($pais.'/logout').'" rel="subsection">
-							<span aria-hidden="true" class="icon" data-icon="&#xe03e;"></span>
-							'.lang("SUBMENU_LOGOUT").'
-						</a>
-					</li>
-				</ul>
-			</nav>
-		';
-		$submenuOptionTpl = '
-			<li>
-				<a href="{ route }">
-					{ module }
-				</a>
-			</li>
-		';
-		$levelOneOptionTpl = '
-			<li>
-				<a rel="section">
-					<span aria-hidden="true" class="icon" data-icon="{ icon }"></span>
-					{ function }
-				</a>
-				<ul>
-					<div id="scrollup" style="display:none">
-						<span class="ui-icon ui-icon-triangle-1-n"></span>
-					</div>
-					{ levelTwoOptions }
-					<div id="scrolldown" style="display:none">
-						<span class="ui-icon ui-icon-triangle-1-s"></span>
-					</div>
-				</ul>
-			</li>
-		';
-		$levelThreeMenuTpl = '
-			<li>
-				<a href="#">
-					Cuentas innominadas
-				</a>
-				<ul>
-					{ levelThreeOptions }
-				</ul>
-			</li>
-		';
+	function createMenu($menuP,$country) {
 		$menuData = unserialize($menuP);
-		$levelOneOptions = '';
-		if ($menuData==NULL || !isset($menuData)) {
-			$menu = str_replace('{ levelOneOptions }', $levelOneOptions, $menuTpl);
-			return $menu;
-		}
-		foreach ($menuData as $mainOption) {
-			$levelTwoOptions = '';
-			$levelThreeOptions = '';
+		$levelOneOpts = [];
+		if($menuData==NULL||!isset($menuData))
+			return $levelOneOpts;
+		foreach($menuData as $function) {
+			$levelTwoOpts = [];
+			$levelThreeOpts = [];
 			$seeLotFact = FALSE;
-			foreach ($mainOption->modulos as $submenu) {
-				if ($submenu->idModulo==='TEBAUT')
+			foreach($function->modulos as $module) {
+				if($module->idModulo==='TEBAUT')
 					$seeLotFact = TRUE;
-				if($submenu->idModulo==='LOTFAC' && !$seeLotFact)
+				if($module->idModulo==='LOTFAC'&&!$seeLotFact)
 					continue;
-				$submenuOption = str_replace('{ route }', menuRoute($submenu->idModulo, $seeLotFact, $pais), $submenuOptionTpl);
-				$submenuOption = str_replace('{ module }', lang($submenu->idModulo), $submenuOption);
-				if ($submenu->idModulo==='TICARG'||$submenu->idModulo==='TIINVN')
-					$levelThreeOptions .= $submenuOption;
+				$moduleOpt = Array(
+					'route' => menuRoute($module->idModulo, $seeLotFact, $country),
+					'text' => lang($module->idModulo)
+				);
+				if($module->idModulo==='TICARG'||$module->idModulo==='TIINVN')
+					$levelThreeOpts[] = $moduleOpt;
 				else
-					$levelTwoOptions .= $submenuOption;
+					$levelTwoOpts[] = $moduleOpt;
 			}
-			if ($levelThreeOptions!='') {
-				$levelThreeMenu = str_replace('{ levelThreeOptions }', $levelThreeOptions, $levelThreeMenuTpl);
-				$levelTwoOptions .= $levelThreeMenu;
-			}
-			$levelOneOption = str_replace('{ icon }', menuIcon($mainOption->idPerfil), $levelOneOptionTpl);
-			$levelOneOption = str_replace('{ function }', lang($mainOption->idPerfil), $levelOneOption);
-			$levelOneOption = str_replace('{ levelTwoOptions }', $levelTwoOptions, $levelOneOption);
-			$levelOneOptions .= $levelOneOption;
+			if(!empty($levelThreeOpts))
+				$levelTwoOpts[] = Array(
+					'route' => '#',
+					'text' => 'Cuentas innominadas',
+					'suboptions' => $levelThreeOpts
+				);
+			$levelOneOpts[] = Array(
+				'icon' => menuIcon($function->idPerfil),
+				'text' => lang($function->idPerfil),
+				'suboptions' => $levelTwoOpts
+			);
 		}
-		$menu = str_replace('{ levelOneOptions }', $levelOneOptions, $menuTpl);
-		return $menu;
+		return $levelOneOpts;
 	}
 }
 
 if(!function_exists('menuIcon')) {
-	function menuIcon($idPerfil) {
-		switch ($idPerfil) {
+	function menuIcon($functionId) {
+		switch ($functionId) {
 			case 'CONSUL': return "&#xe072;";
 			case 'GESLOT': return "&#xe03c;";
 			case 'SERVIC': return "&#xe019;";
@@ -226,35 +175,35 @@ if(!function_exists('menuIcon')) {
 }
 
 if(!function_exists('menuRoute')) {
-	function menuRoute($idFunction, $seeLotFact, $pais) {
-		switch ($idFunction) {
-			case 'TEBCAR': return base_url($pais."/lotes/carga");
-			case 'TEBAUT': return base_url($pais."/lotes/autorizacion");
-			case 'TEBGUR': return base_url($pais."/lotes/reproceso");
-			case 'TICARG': return base_url($pais."/lotes/innominada");
-			case 'TIINVN': return base_url($pais."/lotes/innominada/afiliacion");
-			case 'TEBTHA': return base_url($pais."/reportes/tarjetahabientes");
-			case 'TEBORS': return base_url($pais."/consulta/ordenes-de-servicio");
-			case 'TRAMAE': return base_url($pais."/servicios/transferencia-maestra");
-			case 'CONVIS': return base_url($pais."/controles/visa");
-			case 'PAGPRO': return base_url($pais."/pagos");
-			case 'TEBPOL': return base_url($pais."/servicios/actualizar-datos");
-			case 'CMBCON': return base_url($pais."/trayectos/conductores");
-			case 'CMBVHI': return base_url($pais."/trayectos/gruposVehiculos");
-			case 'CMBCTA': return base_url($pais."/trayectos/cuentas");
-			case 'CMBVJE': return base_url($pais."/trayectos/viajes");
-			case 'REPTAR': return base_url($pais."/reportes/tarjetas-emitidas");
-			case 'REPPRO': return base_url($pais."/reportes/recargas-realizadas");
-			case 'REPLOT': return base_url($pais."/reportes/estatus-lotes");
-			case 'REPUSU': return base_url($pais."/reportes/actividad-por-usuario");
-			case 'REPCON': return base_url($pais."/reportes/cuenta-concentradora");
-			case 'REPSAL': return base_url($pais."/reportes/saldos-al-cierre");
-			case 'REPREP': return base_url($pais."/reportes/reposiciones");
-			case 'REPCAT': return base_url($pais."/reportes/gastos-por-categorias");
-			case 'REPEDO': return base_url($pais."/reportes/estados-de-cuenta");
-			case 'REPPGE': return base_url($pais."/reportes/guarderia");
-			case 'REPRTH': return base_url($pais."/reportes/comisiones");
-			case 'LOTFAC': if ($seeLotFact) return base_url($pais."/consulta/lotes-por-facturar");
+	function menuRoute($functionId, $seeLotFact, $country) {
+		switch ($functionId) {
+			case 'TEBCAR': return base_url($country."/lotes/carga");
+			case 'TEBAUT': return base_url($country."/lotes/autorizacion");
+			case 'TEBGUR': return base_url($country."/lotes/reproceso");
+			case 'TICARG': return base_url($country."/lotes/innominada");
+			case 'TIINVN': return base_url($country."/lotes/innominada/afiliacion");
+			case 'TEBTHA': return base_url($country."/reportes/tarjetahabientes");
+			case 'TEBORS': return base_url($country."/consulta/ordenes-de-servicio");
+			case 'TRAMAE': return base_url($country."/servicios/transferencia-maestra");
+			case 'CONVIS': return base_url($country."/controles/visa");
+			case 'PAGPRO': return base_url($country."/pagos");
+			case 'TEBPOL': return base_url($country."/servicios/actualizar-datos");
+			case 'CMBCON': return base_url($country."/trayectos/conductores");
+			case 'CMBVHI': return base_url($country."/trayectos/gruposVehiculos");
+			case 'CMBCTA': return base_url($country."/trayectos/cuentas");
+			case 'CMBVJE': return base_url($country."/trayectos/viajes");
+			case 'REPTAR': return base_url($country."/reportes/tarjetas-emitidas");
+			case 'REPPRO': return base_url($country."/reportes/recargas-realizadas");
+			case 'REPLOT': return base_url($country."/reportes/estatus-lotes");
+			case 'REPUSU': return base_url($country."/reportes/actividad-por-usuario");
+			case 'REPCON': return base_url($country."/reportes/cuenta-concentradora");
+			case 'REPSAL': return base_url($country."/reportes/saldos-al-cierre");
+			case 'REPREP': return base_url($country."/reportes/reposiciones");
+			case 'REPCAT': return base_url($country."/reportes/gastos-por-categorias");
+			case 'REPEDO': return base_url($country."/reportes/estados-de-cuenta");
+			case 'REPPGE': return base_url($country."/reportes/guarderia");
+			case 'REPRTH': return base_url($country."/reportes/comisiones");
+			case 'LOTFAC': if ($seeLotFact) return base_url($country."/consulta/lotes-por-facturar");
 		}
 		return '#';
 	}
