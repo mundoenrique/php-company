@@ -1,5 +1,5 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * Clase Guides
  *
@@ -8,9 +8,7 @@
  * @package     controllers
  * @author
  */
-
-class Guides extends CI_Controller
-{
+class Guides extends CI_Controller {
 		//Método constructor
 		public function __construct()
     {
@@ -192,6 +190,4 @@ class Guides extends CI_Controller
 				redirect($this->urlCountry . '/login');
 			}
 		}
-		/*---Fin método intento de ingreso no autorizado----------------------------------------------*/
-
 }

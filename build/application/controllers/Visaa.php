@@ -1,5 +1,5 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * @Class:  Visa
  * @package controllers
@@ -8,9 +8,7 @@
  * Date: 29/08/2017
  * Time: 10:00 am
  */
-class Visa extends CI_Controller
-{
-
+class Visa extends CI_Controller {
     //Atributos de la clase
     protected $urlCountry;
     protected $logged_in;
@@ -60,7 +58,7 @@ class Visa extends CI_Controller
 		$this->countrycheck();
     }
     //----------------------------------------------------------------------------------------------
-	
+
 	/**
 	 * @Method: countrycheck
 	 * @access public
@@ -91,7 +89,7 @@ class Visa extends CI_Controller
 		}
 	}
 	//----------------------------------------------------------------------------------------------
-	
+
 	/**
 	 * @Method: index
 	 * @access public
@@ -123,7 +121,7 @@ class Visa extends CI_Controller
 		$this->loadView();
 	}
 	//----------------------------------------------------------------------------------------------
-	
+
 	/**
 	 * @Method: setup
 	 * @access public
@@ -154,12 +152,12 @@ class Visa extends CI_Controller
 			$this->urlCountry,
 			json_encode($this->input->post())
 		);
-		
+
 		//Cargar vista
 		$this->loadView();
 	}
 	//----------------------------------------------------------------------------------------------
-	
+
 	/**
 	 * @Method: loadView
 	 * @access private
@@ -235,7 +233,7 @@ class Visa extends CI_Controller
 		$this->parser->parse('layouts/layout-b', $datos);
 	}
 	//----------------------------------------------------------------------------------------------
-	
+
 	/**
 	 * @Method: callVisaModel
 	 * @access public
@@ -258,7 +256,7 @@ class Visa extends CI_Controller
 		);
 	}
 	//----------------------------------------------------------------------------------------------
-	
+
 	/**
 	 * @Method: callWsCardList
 	 * @access public
@@ -281,7 +279,7 @@ class Visa extends CI_Controller
 		);
 	}
 	//----------------------------------------------------------------------------------------------
-	
+
 	/**
 	 * @Method: withoutAccess
 	 * @access public
@@ -312,8 +310,4 @@ class Visa extends CI_Controller
 			redirect($this->urlCountry . '/login');
 		}
 	}
-	//----------------------------------------------------------------------------------------------
 }
-
-
-

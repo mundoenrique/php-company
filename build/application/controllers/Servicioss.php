@@ -1,5 +1,5 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * Clase para todas las operaciones a realizar dentro del módulo de servicios
  * incluyendo transferencia maestra y actualización de datos (sólo Ve)
@@ -8,9 +8,7 @@
  * @author     Wilmer Rojas <rojaswilmer@gmail.com>
  * @author     Carla García <neiryerit@gmail.com>
  */
-
 class Servicios extends CI_Controller {
-
 	/**
 	 * Pantalla para transferencia maestra.
 	 *
@@ -1517,4 +1515,4 @@ class Servicios extends CI_Controller {
 		}
 		return $response;
 	}
-} // FIN DE LA CLASE Servicios
+}

@@ -1,5 +1,5 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * @Class:  Visa
  * @package controllers
@@ -8,9 +8,7 @@
  * Date: 29/08/2017
  * Time: 10:00 am
  */
-class Payment extends CI_Controller
-{
-
+class Payment extends CI_Controller {
     //Atributos de la clase
     protected $urlCountry;
     protected $logged_in;
@@ -60,7 +58,7 @@ class Payment extends CI_Controller
 		$this->countrycheck();
     }
     //----------------------------------------------------------------------------------------------
-	
+
 	/**
 	 * @Method: countrycheck
 	 * @access public
@@ -89,7 +87,7 @@ class Payment extends CI_Controller
 		}
 	}
 	//----------------------------------------------------------------------------------------------
-	
+
 	/**
 	 * @Method: payments
 	 * @access public
@@ -123,7 +121,7 @@ class Payment extends CI_Controller
 		$this->loadView();
 	}
 	//----------------------------------------------------------------------------------------------
-	
+
 	/**
 	 * @Method: loadView
 	 * @access private
@@ -199,7 +197,7 @@ class Payment extends CI_Controller
 		$this->parser->parse('layouts/layout-b', $datos);
 	}
 	//----------------------------------------------------------------------------------------------
-	
+
 	/**
 	 * @Method: callVisaModel
 	 * @access public
@@ -226,7 +224,7 @@ class Payment extends CI_Controller
 		);
 	}
 	//----------------------------------------------------------------------------------------------
-	
+
 	/**
 	 * @Method: withoutAccess
 	 * @access public
@@ -257,8 +255,4 @@ class Payment extends CI_Controller
 			redirect($this->urlCountry . '/login');
 		}
 	}
-	//----------------------------------------------------------------------------------------------
 }
-
-
-

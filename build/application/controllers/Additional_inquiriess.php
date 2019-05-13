@@ -1,12 +1,13 @@
-<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * @info Controlador para gestionar las conultas adicionales
  * @date 2018/08/02
  * @author J. Enrique Peñaloza P
  * @package controllers
  */
-class additional_inquiries extends CI_Controller
-{
+class Additional_inquiries extends CI_Controller {
+
 	//Atributos de clase
 	protected $urlCountry;
 	protected $logged_in;

@@ -1,11 +1,12 @@
-<?php if(!defined('BASEPATH')) exit('No direct script access allowed');
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * @info		Controlador para obtener reportes adicionales
  * @date		2018/05/15
  * @author	J. Enrique Peñaloza P.
 */
-class reports_additional extends CI_Controller {
-	//Atributos de la clase
+class Reports_additional extends CI_Controller {
+//Atributos de la clase
 	protected $urlCountry;
 	protected $logged_in;
 	protected $idProductoS;

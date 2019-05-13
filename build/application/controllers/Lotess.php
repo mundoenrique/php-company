@@ -1,5 +1,5 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * Clase Lotes
  *
@@ -10,9 +10,7 @@
  * @author     Wilmer Rojas <rojaswilmer@gmail.com>
  * @author     Carla García <neiryerit@gmail.com>
 */
-
 class Lotes extends CI_Controller {
-
 	/**
 	 * Patalla que muestra el módulo de carga de lotes y lotes por confirmar.
 	 *
@@ -3485,5 +3483,4 @@ class Lotes extends CI_Controller {
 		}
 
 	}
-
 }

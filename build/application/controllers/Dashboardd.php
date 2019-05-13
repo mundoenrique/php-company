@@ -1,5 +1,5 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * Clase Dashboard
  *
@@ -10,8 +10,7 @@
  * @author     Carla García <neiryerit@gmail.com>
  */
 class Dashboard extends CI_Controller {
-
-	/**
+/**
 	 * Pantalla que muestra el listado de empresas asociadas al usuario (pantalla siguiente al login)
 	 * @param  string $urlCountry
 	 */
@@ -1102,5 +1101,4 @@ class Dashboard extends CI_Controller {
 			redirect($urlCountry.'/login');
 		}
 	}
-
-} // FIN CLASE Dashboard
+}

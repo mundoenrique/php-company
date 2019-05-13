@@ -1,5 +1,5 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * Clase Users
  *
@@ -11,7 +11,6 @@
  * @author     Carla García <neiryerit@gmail.com>
  */
 class Users extends CI_Controller {
-
     /**
      * Método que carga la pantalla principal del aplicativo
      *
@@ -53,6 +52,7 @@ class Users extends CI_Controller {
         if($logged_in && !$newuser && !$caducoPass){
             redirect($urlCountry.'/dashboard');
         }else{
+						redirect(base_url($this->config->item('countryUri').'/inicio'), 'location');
             //INSTANCIA PARA TITULO DE PAGINA
             $titlePage="Conexión Empresas Online";
             //INSTANCIA GENERAR  HEADER
@@ -507,11 +507,11 @@ class Users extends CI_Controller {
         );
 
         $data = json_encode($data,JSON_UNESCAPED_UNICODE);
-        $dataEncry = np_Hoplite_Encryption($data);
+        $dataEncry = np_Hoplite_Encryption($data, 'callWSPassRecovery');
         $data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
         $data = json_encode($data);
         $response = np_Hoplite_GetWS('eolwebInterfaceWS',$data); // ENVÍA LA PETICIÓN Y ALMACENA LA RESPUESTA EN $response
-        $jsonResponse = np_Hoplite_Decrypt($response);
+        $jsonResponse = np_Hoplite_Decrypt($response, 'callWSPassRecovery');
 
         $response = json_decode($jsonResponse);
         $dataResponse = json_encode($response);
@@ -2864,4 +2864,4 @@ public function NotificacionesEnvio($urlCountry) {
 					return $codigoError = array('mensaje' => lang('ERROR_GENERICO_USER'));
 			}
 	}
-} // FIN DE LA CLASE Users
+}

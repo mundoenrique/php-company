@@ -1,5 +1,5 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * Clase Footer
  *
@@ -171,5 +171,4 @@ class Footer extends CI_Controller {
 		$this->parser->parse('layouts/layout-b', $datos);
 
 	}
-
-} // FIN DE LA CLASE Footer
+}
