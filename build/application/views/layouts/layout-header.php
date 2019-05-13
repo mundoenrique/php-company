@@ -59,7 +59,7 @@ $style_css = $this->uri->segment(3);
 </header>
 
 <?php
-	if($menuHeaderMainActive){
+	if($menuHeaderMainActive):
 		$menuP =$this->session->userdata('menuArrayPorProducto');
 		$menu = createMenu($menuP,$pais);
 ?>
@@ -72,7 +72,7 @@ $style_css = $this->uri->segment(3);
 						<?=lang('MENU_INICIO')?>
 					</a>
 				</li>
-				<?php foreach ($menu as $lvlOneOpt) { ?>
+				<?php foreach ($menu as $lvlOneOpt): ?>
 					<li>
 						<a rel="section">
 							<span aria-hidden="true" class="icon" data-icon="<?php echo $lvlOneOpt['icon']?>"></span>
@@ -82,15 +82,15 @@ $style_css = $this->uri->segment(3);
 							<div id="scrollup" style="display:none">
 								<span class="ui-icon ui-icon-triangle-1-n"></span>
 							</div>
-							<?php foreach ($lvlOneOpt['suboptions'] as $lvlTwoOpt) { ?>
+							<?php foreach ($lvlOneOpt['suboptions'] as $lvlTwoOpt): ?>
 								<li>
 									<a href="<?=$lvlTwoOpt['route']?>">
 										<?=$lvlTwoOpt['text']?>
 									</a>
 									<ul>
 										<?php
-										if (isset($lvlTwoOpt['suboptions'])) {
-											foreach ($lvlTwoOpt['suboptions'] as $lvlThreeOpt) {
+										if (isset($lvlTwoOpt['suboptions'])):
+											foreach ($lvlTwoOpt['suboptions'] as $lvlThreeOpt):
 										?>
 												<li>
 													<a href="<?=$lvlThreeOpt['route']?>">
@@ -98,18 +98,18 @@ $style_css = $this->uri->segment(3);
 													</a>
 												</li>
 										<?php
-											}
-										}
+											endforeach;
+										endif;
 										?>
 									</ul>
 								</li>
-							<?php } ?>
+							<?php endforeach; ?>
 							<div id="scrolldown" style="display:none">
 								<span class="ui-icon ui-icon-triangle-1-s"></span>
 							</div>
 						</ul>
 					</li>
-				<?php } ?>
+				<?php endforeach; ?>
 				<li>
 					<a href="<?=base_url($pais.'/logout')?>" rel="subsection">
 						<span aria-hidden="true" class="icon" data-icon="&#xe03e;"></span>
@@ -120,7 +120,7 @@ $style_css = $this->uri->segment(3);
 		</nav>
 	</div>
 <?php
-	}
+	endif;
 ?>
 
 <input type="hidden" id="path_JScdn" value="<? echo $urlBaseCDN;?>media/js/">
