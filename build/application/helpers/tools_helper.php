@@ -136,14 +136,14 @@ if(!function_exists('createMenu')) {
 					$seeLotFact = TRUE;
 				if($module->idModulo==='LOTFAC'&&!$seeLotFact)
 					continue;
-				$moduleOpt = [
+				$submenuOpt = [
 					'route' => menuRoute($module->idModulo, $seeLotFact, $country),
 					'text' => lang($module->idModulo)
 				];
 				if($module->idModulo==='TICARG'||$module->idModulo==='TIINVN')
-					$levelThreeOpts[] = $moduleOpt;
+					$levelThreeOpts[] = $submenuOpt;
 				else
-					$levelTwoOpts[] = $moduleOpt;
+					$levelTwoOpts[] = $submenuOpt;
 			}
 			if(!empty($levelThreeOpts))
 				$levelTwoOpts[] = [
