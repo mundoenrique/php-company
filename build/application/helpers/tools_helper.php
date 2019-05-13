@@ -136,26 +136,26 @@ if(!function_exists('createMenu')) {
 					$seeLotFact = TRUE;
 				if($module->idModulo==='LOTFAC'&&!$seeLotFact)
 					continue;
-				$moduleOpt = Array(
+				$moduleOpt = [
 					'route' => menuRoute($module->idModulo, $seeLotFact, $country),
 					'text' => lang($module->idModulo)
-				);
+				];
 				if($module->idModulo==='TICARG'||$module->idModulo==='TIINVN')
 					$levelThreeOpts[] = $moduleOpt;
 				else
 					$levelTwoOpts[] = $moduleOpt;
 			}
 			if(!empty($levelThreeOpts))
-				$levelTwoOpts[] = Array(
+				$levelTwoOpts[] = [
 					'route' => '#',
 					'text' => 'Cuentas innominadas',
 					'suboptions' => $levelThreeOpts
-				);
-			$levelOneOpts[] = Array(
+				];
+			$levelOneOpts[] = [
 				'icon' => menuIcon($function->idPerfil),
 				'text' => lang($function->idPerfil),
 				'suboptions' => $levelTwoOpts
-			);
+			];
 		}
 		return $levelOneOpts;
 	}
