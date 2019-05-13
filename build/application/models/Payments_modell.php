@@ -1,4 +1,5 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * @Class:  payment_model
  * @package models
@@ -7,8 +8,7 @@
  * Date: 27/10/2017
  * Time: 9:30 am
  */
-class payments_model extends CI_Model
-{
+class Payments_model extends CI_Model {
 	//Atributos de Clase
 	protected $sessionId;
 	protected $userName;
@@ -23,12 +23,9 @@ class payments_model extends CI_Model
 	protected $data;
 	protected $response = [];
 
-	/**
-	 * Constructor de clase
-	 */
 	public function __construct()
 	{
-		parent::__construct();
+		log_message('INFO', 'NOVO Payments Model Class Initialized');
 		//Inicializar Atributos de clase
 		$this->sessionId = $this->session->userdata('sessionId');
 		$this->userName = $this->session->userdata('userName');
@@ -43,8 +40,6 @@ class payments_model extends CI_Model
 		$this->lang->load('reportes');
 		$this->lang->load('visa');
 	}
-	//----------------------------------------------------------------------------------------------
-
 	/**
 	 * @Method: callWsConsultaSaldo
 	 * @access public
@@ -234,5 +229,5 @@ class payments_model extends CI_Model
 
 		return json_encode($this->response);
 
-	}
+	}	
 }

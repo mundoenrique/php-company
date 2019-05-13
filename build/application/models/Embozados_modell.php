@@ -1,6 +1,7 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
 
-class embozados_model extends CI_Model {
+class Embozados_model extends CI_Model {
 
 	protected $pais;
 	protected $canal;
@@ -10,9 +11,10 @@ class embozados_model extends CI_Model {
 	protected $sessionId;
 	protected $userName;
 	protected $token;
+
 	public function __construct()
 	{
-		parent::__construct();
+		log_message('INFO', 'NOVO Plantilla Model Class Initialized');
 	}
 
 	public function cambioStatus($nlote,$tipoStatus='TIPO_B'){

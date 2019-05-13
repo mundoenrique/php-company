@@ -1,6 +1,7 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
 
-class services_model extends CI_model {
+class Services_model extends CI_Model {
 	//Atributos de Clase
 	protected $sessionId;
 	protected $userName;
@@ -17,9 +18,9 @@ class services_model extends CI_model {
 	protected $data;
 	protected $response = [];
 
-	public function __construct ()
+	public function __construct()
 	{
-		parent:: __construct();
+		log_message('INFO', 'NOVO Services Model Class Initialized');
 		$this->sessionId = $this->session->userdata('sessionId');
 		$this->userName = $this->session->userdata('userName');
 		$this->rc = 0;
@@ -34,7 +35,7 @@ class services_model extends CI_model {
 		$this->lang->load('servicios');
 		$this->lang->load('users');
 		$this->lang->load('erroreseol');
-		$this->lang->load('dashboard');
+		$this->lang->load('dashboard');		
 	}
 
 	public function getBanckAccountlist() {
@@ -121,5 +122,5 @@ class services_model extends CI_model {
 		];
 
 		return $this->response;
-	}
+	}	
 }

@@ -1,4 +1,5 @@
-<?php if(!defined('BASEPATH')) exit('No direct script access allowed');
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * @Class:  visa_model
  * @package models
@@ -7,8 +8,7 @@
  * Date: 29/08/2017
  * Time: 10:30 am
  */
-class visa_model extends CI_Model
-{
+class Visa_model extends CI_Model {
 	//Atributos de Clase
 	protected $sessionId;
 	protected $userName;
@@ -23,10 +23,9 @@ class visa_model extends CI_Model
 	protected $data;
 	protected $response = [];
 
-    //Método constructor
-    public function __construct()
-    {
-        parent::__construct();
+	public function __construct()
+	{
+		log_message('INFO', 'NOVO Visa Model Class Initialized');
 		//Inicializar Atributos de clase
 		$this->sessionId = $this->session->userdata('sessionId');
 		$this->userName = $this->session->userdata('userName');
@@ -37,13 +36,11 @@ class visa_model extends CI_Model
 		$this->timeLog = date("m/d/Y H:i");
         //Incorporar languages
 		$this->lang->load('servicios');
-        $this->lang->load('dashboard');
-        $this->lang->load('users');
-        $this->lang->load('erroreseol');
-        $this->lang->load('visa');
-    }
-    //----------------------------------------------------------------------------------------------
-
+		$this->lang->load('dashboard');
+		$this->lang->load('users');
+		$this->lang->load('erroreseol');
+		$this->lang->load('visa');
+	}
     //Método para obtener la lista tarjetas asociadas
     public function callWsCardList($urlCountry, $dataRequest = NULL)
     {
@@ -503,5 +500,5 @@ class visa_model extends CI_Model
 
 		return json_encode($this->response);
 
-	}
+	}	
 }

@@ -1,14 +1,13 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-
-
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Users_Model extends CI_Model {
 
 	public function __construct()
 	{
-		parent::__construct();
+		log_message('INFO', 'NOVO Users Model Class Initialized');
 	}
-
+	
 	public function callWSConsultarSucursales($urlCountry ,$rif, $paginaActual, $cantItems, $paginar){
 
 		$this->lang->load('erroreseol');
@@ -88,6 +87,5 @@ class Users_Model extends CI_Model {
 			return $codigoError = array('ERROR' => lang('ERROR_GENERICO_USER'));
 		}
 
-	}
-
+	}	
 }

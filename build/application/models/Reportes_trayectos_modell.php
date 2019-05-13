@@ -1,4 +1,5 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * @Class:  Reporte_trayectos_Model
  * @package models
@@ -7,7 +8,7 @@
  * Date: 22/03/2017
  * Time: 12:50 pm
  */
-class reportes_trayectos_model extends CI_Model {
+class Reportes_trayectos_model extends CI_Model {
 	//Atributos de clase
 	protected $pais;
 	protected $token;
@@ -17,7 +18,7 @@ class reportes_trayectos_model extends CI_Model {
 
 	public function __construct()
 	{
-		parent::__construct();
+		log_message('INFO', 'NOVO Reportes_trayectos Model Class Initialized');
 		//Inicializa atributos de clase
 		$this->pais = $this->session->userdata('pais');
 		$this->token = $this->session->userdata('token');
@@ -27,7 +28,7 @@ class reportes_trayectos_model extends CI_Model {
 		$this->lang->load('dashboard');
 		$this->lang->load('combustible');
 		$this->lang->load('users');
-		$this->lang->load('erroreseol');
+		$this->lang->load('erroreseol');		
 	}
 	/**
 	 * @Method: callAPIConductoresExcel
@@ -443,6 +444,5 @@ class reportes_trayectos_model extends CI_Model {
 		$file = $this->session->flashdata($flashData);
 		np_hoplite_byteArrayToFile($file, $ext, $filename, FALSE);
 
-	}
-
+	}		
 }

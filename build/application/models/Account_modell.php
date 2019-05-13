@@ -1,19 +1,22 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+/**
+ * @info Libreria para la inccorporación y versionamiento de los archivos css, js e imágenes
+ * @author J. Enrique Peñaloza Piñero
+ *
+ */
+class Account_model extends NOVO_Model {
 
-class account_model extends CI_Model {
-
-    //Método constructor
-    public function __construct() {
-        parent::__construct();
-        //Add languages
-        $this->lang->load('dashboard');
-        $this->lang->load('combustible');
-        $this->lang->load('users');
-        $this->lang->load('erroreseol');
-    }
-    /*---Fin método constructor---------------------------------------------------------------------------------------*/
-
-    public function callAPIaccounts($urlCountry, $dataRequest) {
+	public function __construct()
+	{
+		parent:: __construct();
+		log_message('INFO', 'NOVO Account_model Model Class Initialized');
+		$this->lang->load('dashboard');
+		$this->lang->load('combustible');
+		$this->lang->load('users');
+		$this->lang->load('erroreseol');
+	}
+	public function callAPIaccounts($urlCountry, $dataRequest) {
 
         $ruc = $this->session->userdata('acrifS');
         $token = $this->session->userdata('token');
@@ -431,6 +434,4 @@ class account_model extends CI_Model {
         }
         return $response;
     }
-
-    /*---Fin métodos para conductores---------------------------------------------------------------------------------*/
 }

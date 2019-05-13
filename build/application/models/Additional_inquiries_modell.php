@@ -1,11 +1,12 @@
-<?php if(!defined('BASEPATH')) exit('No direct script access allowed');
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * @info Modelo para comunicacón con el servicio de cunsultas adicionales
  * @date 2018/08/09
  * @author J. Enrique Peñaloza P.
  * @package models
  */
-class additional_inquiries_model extends CI_Model {
+class Additional_inquiries_model extends NOVO_Model {
 	//Atributos de clase
 	protected $country;
 	protected $token;
@@ -21,6 +22,7 @@ class additional_inquiries_model extends CI_Model {
 
 	public function __construct()
 	{
+		log_message('INFO', 'NOVO Additional_inquiries_model Model Class Initialized');
 		$this->country = $this->session->userdata('pais');
 		$this->token = $this->session->userdata('token');
 		$this->company = $this->session->userdata('acrifS');
@@ -37,6 +39,7 @@ class additional_inquiries_model extends CI_Model {
 		$this->lang->load('users');
 		$this->lang->load('consultas');
 		$this->lang->load('erroreseol');
+
 	}
 	/**
 	 * @info Metodo para la conección con el servicio de lotes por facturar

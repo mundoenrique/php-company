@@ -1,10 +1,11 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * @info		Módelo obtener reportes adicionales
  * @date		2018/05/15
  * @author	J. Enrique Peñaloza P.
 */
-class reports_additional_model extends CI_Model {
+class Reports_additional_model extends CI_Model {
 	protected $pais;
 	protected $canal;
 	protected $timeLog;
@@ -17,8 +18,7 @@ class reports_additional_model extends CI_Model {
 
 	public function __construct()
 	{
-		log_message('INFO', 'reports_additional Model initialized');
-		parent::__construct();
+		log_message('INFO', 'NOVO Reports_additional Model Class Initialized');
 		$this->sessionId = $this->session->userdata('sessionId');
 		$this->userName = $this->session->userdata('userName');
 		$this->canal = "ceo";
@@ -29,7 +29,7 @@ class reports_additional_model extends CI_Model {
 		$this->prefix = $this->session->userdata('idProductoS');
 		$this->companyCod = $this->session->userdata('accodciaS');
 		//Agrega lenguajes a utilizar
-		$this->lang->load('erroreseol');
+		$this->lang->load('erroreseol');		
 	}
 	/**
 	 * @info		Método para obtener el listado recargas con comisión
@@ -244,5 +244,5 @@ class reports_additional_model extends CI_Model {
 			'title' => $title,
 			'msg' => isset($msg) ? $msg : '',
 		];
-	}
+	}		
 }

@@ -1,14 +1,12 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-
-
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Innominadas_Model extends CI_Model {
 
 	public function __construct()
 	{
-		parent::__construct();
+		log_message('INFO', 'NOVO Plantilla Model Class Initialized');
 	}
-
 	public function callWSCreateInnominadas($urlCountry, $cantReg, $monto,  $lembozo1, $lembozo2, $codSucursal, $fechaExp){
 
 		$this->lang->load('erroreseol');

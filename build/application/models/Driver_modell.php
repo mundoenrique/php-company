@@ -1,18 +1,17 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
 
-class driver_model extends CI_Model {
+class Driver_model extends CI_Model {
 
-    public function __construct()
-    {
-        parent::__construct();
-        //Add languages
-        $this->lang->load('dashboard');
-        $this->lang->load('combustible');
-        $this->lang->load('users');
-        $this->lang->load('erroreseol');
-    }
-    /*---Fin método constructor---------------------------------------------------------------------------------------*/
-
+	public function __construct()
+	{
+		log_message('INFO', 'NOVO Admin_Model Model Class Initialized');
+		//Add languages
+		$this->lang->load('dashboard');
+		$this->lang->load('combustible');
+		$this->lang->load('users');
+		$this->lang->load('erroreseol');
+	}
     /*---Métodos para conductores constructor-------------------------------------------------------------------------*/
     //Método para obtener la lista de conductores o el perfil de un conductor
     public function callAPIdrivers($urlCountry, $dataRequest='')
@@ -539,5 +538,5 @@ class driver_model extends CI_Model {
     }
 
     /*---Fin métodos para conductores---------------------------------------------------------------------------------*/
-
+	
 }

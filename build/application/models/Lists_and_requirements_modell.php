@@ -1,10 +1,11 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * @info		Módelo obtener los listados y otros requerimientos comunes
  * @date		2018/05/15
  * @author	J. Enrique Peñaloza P.
 */
-class lists_and_requirements_model extends CI_Model {
+class Lists_and_requirements_model extends CI_Model {
 	protected $pais;
 	protected $canal;
 	protected $timeLog;
@@ -15,8 +16,7 @@ class lists_and_requirements_model extends CI_Model {
 
 	public function __construct()
 	{
-		parent::__construct();
-		log_message('INFO', 'lists_and_requirements Model initialized');
+		log_message('INFO', 'NOVO Lists_and_requirements Model Class Initialized');
 		$this->sessionId = $this->session->userdata('sessionId');
 		$this->userName = $this->session->userdata('userName');
 		$this->canal = "ceo";
@@ -28,6 +28,7 @@ class lists_and_requirements_model extends CI_Model {
 		$this->lang->load('dashboard');
 		$this->lang->load('reportes');
 		$this->lang->load('erroreseol');
+
 	}
 	/**
 	 * @info		Método que obtiene el listado de empresas filtrado segun parámetro de busqueda
@@ -133,5 +134,5 @@ class lists_and_requirements_model extends CI_Model {
 		log_message('INFO', '--[' . $this->userName . '] FileName: ' . $filename . ' FileExt: ' . $ext);
 		$file = $this->session->flashdata($flashdataName);
 		np_hoplite_byteArrayToFile($file, $ext, $filename, TRUE);
-	}
+	}	
 }
