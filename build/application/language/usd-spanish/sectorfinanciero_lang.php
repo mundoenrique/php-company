@@ -1,4 +1,5 @@
 <?php
+defined('BASEPATH') OR exit('No direct script access allowed');
 $lang['SECTORFINANCIERO_(1)']= "AGRICULTURA";
 $lang['SECTORFINANCIERO_(2)']= "ALIMENTACION Y BEBIDAS";
 $lang['SECTORFINANCIERO_(3)']= "BANCA";

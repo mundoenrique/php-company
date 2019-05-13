@@ -1,15 +1,16 @@
-<?php
+<?php 
+defined('BASEPATH') OR exit('No direct script access allowed');
 $lang['ERROR_GENERICO_USER']= "Error en Sistema, por favor intente nuevamente."; // cuando ocurre algun error que el usuario no deberia ver (los sgts con el prefix "Error")
 $lang['ERROR_CAMBIO_CLAVE']= "Error en el formulario.";
 $lang['ERROR_NO_DATA'] = "No se encontraron datos";
 $lang['SIN_FUNCION'] = 'No tiene permisos para realizar esta operación';//'Operación no asignada';
 $lang['ERROR_(8)']= "El conductor ya posee una cuenta activa asociada a la empresa";
-$lang['ERROR_GENERAL']= "En estos momentos no podemos atender tu solicitud, por favor intenta más tarde";
+$lang['ERROR_GENERAL']= "En estos momentos no podemos atender su solicitud, por favor intente en unos minutos";
 $lang['ERROR_(0)']= "Proceso OK";
 $lang['ERROR_(-1)']= "Usuario o contraseña inválido";
 $lang['ERROR_(-2)']= "Usuario ingresando en la aplicación por primera vez";
 $lang['ERROR_(-3)']= "Error No hay respuesta del web service";
-$lang['ERROR_(-4)']= "La nueva contraseña ya fue utilizada";
+$lang['ERROR_(-4)']= "La nueva contraseña no debe coincidir <strong>con las últimas cinco utilizadas</strong>.";
 $lang['ERROR_(-5)']= "Operación fallida, datos incompletos.";
 $lang['ERROR_(-6)']= "Usuario sin empresa asignada";
 $lang['ERROR_(-7)']= "Error Ocurrio un error al registrar en NOVO_LOG_ACCESO";
@@ -27,14 +28,14 @@ $lang['ERROR_(-18)']= "Lote no conseguido";
 $lang['ERROR_(-19)']= "Lote sin detalle";
 $lang['ERROR_(-20)']= "Error de acceso a base de datos";
 $lang['ERROR_(-21)']= "Ocurrio un error de conexión con el servicio";
-$lang['ERROR_(-22)']= "La contraseña actual es incorrecta";
+$lang['ERROR_(-22)']= "La contraseña actual es incorrecta.<br>Por favor verifíquela en intente de nuevo. ";
 $lang['ERROR_(-23)']= "Error cantidad maxima mensuales TR";
 $lang['ERROR_(-24)']= "Error cantidad maxima diarias TR";
 $lang['ERROR_(-25)']= "Error monto maximo diario TR";
 $lang['ERROR_(-26)']= "Error obteniendo datos del ticket";
 $lang['ERROR_(-27)']= "No se encontraron perfiles asociados";
-$lang['ERROR_(-28)']= "Usuario actualmente conectado";
-$lang['ERROR_(-29)']= "Usuario actualmente desconectado";
+$lang['ERROR_(-28)']= "<div><h6>Su última sesión se cerró de manera incorrecta. Tenga en cuenta que para salir de la aplicación debe seleccionar <strong>\"Salir\"</strong>. <h4>Pulse \"Aceptar\" para continuar.<h4></h6></div>";
+$lang['ERROR_(-29)']= "Su sesión ha sido abierta en otra ubicación, si no ha sido usted comuníquese con el administrador";
 $lang['ERROR_(-30)']= "No existen registros";
 $lang['ERROR_(-31)']= "Error insertando registros";
 $lang['ERROR_(-32)']= "Error eliminando reverso ejecutado";
@@ -240,6 +241,7 @@ $lang['ERROR_(-233)']= "La empresa no posee saldo disponible para el servicio";
 $lang['ERROR_(-238)']= "El registro no existe";
 $lang['ERROR_(-241)']= "Parámetros inválidos";
 $lang['ERROR_(-256)']= "Tipo de Lote Invalido";
+$lang['ERROR_(-263)']= "El usuario será bloqueado al próximo intento fallido";
 $lang['ERROR_(-280)'] = 'Tipo de archivo no permitido.';
 $lang['ERROR_(-281)'] = 'Los datos de la cuenta son inválidos.';
 $lang['ERROR_(-285)'] = 'La cuenta está inactiva.';
@@ -259,7 +261,7 @@ $lang['ERROR_DESCARGA'] = 'No fue posible descargar el archivo, por favor intent
 
 //recuperar contraseña
 $lang["TITULO_ERROR"] = 'No ha sido posible procesar su solicitud.';
-$lang["ERROR_RIF"] = 'Por favor verifique el No. de RIF de la empresa.';
+$lang["ERROR_RIF"] = 'Por favor verifique el No. de NIT de la empresa.';
 $lang["ERROR_USER"] = 'El Usuario no está registrado en el sistema.';
 $lang["ERROR_MAIL"] = 'El correo indicado no corresponde, por favor verifíquelo e inténtelo de nuevo.';
 $lang["ERROR_SUPPORT"] = 'Por favor envíe un correo a <strong>soporteempresas@tebca.com</strong> o contacte a nuestros Ejecutivos en los teléfonos: ...';

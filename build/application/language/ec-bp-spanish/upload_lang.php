@@ -1,4 +1,5 @@
 <?php
+defined('BASEPATH') OR exit('No direct script access allowed');
 
 $lang['upload_userfile_not_set'] = "Unable to find a post variable called userfile.";
 $lang['upload_file_exceeds_limit'] = "The uploaded file exceeds the maximum allowed size in your PHP configuration file.";
@@ -19,14 +20,14 @@ $lang['upload_not_writable'] = "The upload destination folder does not appear to
 
 // SFTP ERRORS
 
-$lang['SFTP(0)'] = 'OK'; 
-$lang['SFTP(1)'] = 'CURLE_UNSUPPORTED_PROTOCOL'; 
-$lang['SFTP(2)'] = 'CURLE_FAILED_INIT'; 
-$lang['SFTP(3)'] = 'CURLE_URL_MALFORMAT'; 
-$lang['SFTP(4)'] = 'CURLE_URL_MALFORMAT_USER'; 
-$lang['SFTP(5)'] = 'CURLE_COULDNT_RESOLVE_PROXY'; 
-$lang['SFTP(6)'] = 'CURLE_COULDNT_RESOLVE_HOST'; 
-$lang['SFTP(7)'] = 'CURLE_COULDNT_CONNECT'; 
+$lang['SFTP(0)'] = 'OK';
+$lang['SFTP(1)'] = 'CURLE_UNSUPPORTED_PROTOCOL';
+$lang['SFTP(2)'] = 'CURLE_FAILED_INIT';
+$lang['SFTP(3)'] = 'CURLE_URL_MALFORMAT';
+$lang['SFTP(4)'] = 'CURLE_URL_MALFORMAT_USER';
+$lang['SFTP(5)'] = 'CURLE_COULDNT_RESOLVE_PROXY';
+$lang['SFTP(6)'] = 'CURLE_COULDNT_RESOLVE_HOST';
+$lang['SFTP(7)'] = 'CURLE_COULDNT_CONNECT';
 $lang['SFTP(8)'] = 'CURLE_FTP_WEIRD_SERVER_REPLY';
 $lang['SFTP(9)'] = 'CURLE_REMOTE_ACCESS_DENIED';
 $lang['SFTP(11)'] = 'CURLE_FTP_WEIRD_PASS_REPLY';

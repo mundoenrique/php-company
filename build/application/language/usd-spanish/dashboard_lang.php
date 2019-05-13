@@ -1,5 +1,6 @@
 <?php
-$lang['SYSTEM_NAME']= "Empresas Online Perú";
+defined('BASEPATH') OR exit('No direct script access allowed');
+$lang['SYSTEM_NAME']= "Conexión Empresas Online Perú";
 $lang['LAST_SESSION']="Última sesión";
 $lang['ID_FISCAL']= "RUC.";
 $lang['ID_PERSONA']= "DNI.";

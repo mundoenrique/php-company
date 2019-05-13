@@ -1,4 +1,5 @@
-<?php
+<?php 
+defined('BASEPATH') OR exit('No direct script access allowed');
 //Page title
 $lang['TITLE_COMBUSTIBLE'] = "Administración y Control de trayectos";
 
