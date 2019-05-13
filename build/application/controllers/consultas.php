@@ -262,6 +262,20 @@ class Consultas extends CI_Controller {
             return $codigoError = array('ERROR' => lang('ERROR_GENERICO_USER') );
         }
     }
+ 		/**
+     * Método para cambio de estatus de lote por tarjetas
+     * @param  string $urlCountry
+     *
+     */
+		public function embozado($urlCountry){
+			np_hoplite_countryCheck($urlCountry);
+			$nlote = $this->input->post('nlote',true);
+			$this->load->model('embozados_model');
+			$dataResponse = $this->embozados_model->cambioStatus($nlote);
+			$this->output->set_content_type('application/json')->set_output(json_encode($dataResponse));
+		}
+
+
 
     /**
      * Método para descargar en formato PDF la orden de servicio seleccionada
