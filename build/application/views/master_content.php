@@ -18,9 +18,20 @@
 	<header id="head">
 		<div id="head-wrapper">
 			<a id="branding" rel="start"></a>
+			<?php
+				if($logged) {
+					$this->load->view('widget/widget_menu-user_content');
+				}
+			?>
 		</div>
 	</header>
-
+	<?php
+		if($logged) {
+			$menuP =$this->session->userdata('menuArrayPorProducto');
+			$menu = createMenu($menuP, $countryConf);
+			$this->load->view('widget/widget_menu-business_content', $menu);
+		}
+	?>
 	<div id="wrapper">
 	<?php
 		foreach($viewPage as $views) {
@@ -35,7 +46,7 @@
 				<ul class="menu">
 					<?php if(!$logged && $module !== 'login'): ?>
 					<li class="menu-item signup">
-						<a id="signup" href="<?= base_url('inicio'); ?>" rel="section">
+						<a id="signup" href="<?= base_url($goOut); ?>" rel="section">
 							<?= lang('BREADCRUMB_INICIO'); ?>
 						</a>
 					</li>
@@ -47,7 +58,7 @@
 						</a>
 					</li>
 					<?php endif; ?>
-					<?php if($module !== 'terms'): ?>
+					<?php if($logged && $module !== 'terms'): ?>
 					<li class="menu-item terms">
 						<a href="<?= base_url('inf-condiciones'); ?>" rel="section">
 							<?= lang('BREADCRUMB_CONDICIONES') ?>
@@ -63,7 +74,7 @@
 					<?php endif; ?>
 					<?php if($logged):	?>
 					<li class="menu-item privacy">
-						<a id='exit' href="<?= base_url('logout'); ?>" rel="section">
+						<a id='exit' href="<?= base_url('cerrar-sesion'); ?>" rel="section">
 							<? echo lang('SUBMENU_LOGOUT'); ?>
 						</a>
 					</li>

@@ -52,7 +52,7 @@ class Users extends CI_Controller {
         if($logged_in && !$newuser && !$caducoPass){
             redirect($urlCountry.'/dashboard');
         }else{
-						//redirect(base_url($this->config->item('countryUri').'/inicio'), 'location');
+						redirect(base_url($this->config->item('countryUri').'/inicio'), 'location');
             //INSTANCIA PARA TITULO DE PAGINA
             $titlePage="Conexión Empresas Online";
             //INSTANCIA GENERAR  HEADER

@@ -1,4 +1,5 @@
-<?php defined('BASEPATH') or exit('No direct script access allowed');
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * @info Controlador para la vista principal de la aplicación
  * @author J. Enrique Peñaloza P
@@ -9,18 +10,20 @@ class User extends NOVO_Controller {
 	{
 		parent:: __construct();
 		log_message('INFO', 'NOVO User Controller class Initialized');
-		$this->lang->load('users');
 	}
 	/**
 	 * @info Método que renderiza la vista de login
 	 * @author J. Enrique Peñaloza P.
 	 */
-	public function home()
+	public function login()
 	{
 		log_message('INFO', 'NOVO User: index Method Initialized');
 		if($this->session->userdata('logged')) {
-			$urlRedirect = str_replace($this->countryUri, $this->config->item('country'), base_url('dashboard'));
-			redirect($urlRedirect, 'location');
+			/**
+			 * $urlRedirect = str_replace($this->countryUri, $this->config->item('country'), base_url('dashboard'));
+			 * redirect($urlRedirect, 'location');
+			 */
+			redirect(base_url('empresas'), 'location');
 			exit();
 		}
 		$userData = [
@@ -74,8 +77,11 @@ class User extends NOVO_Controller {
 		$this->render->titlePage = lang('SYSTEM_NAME');
 		$this->loadView('login');
 	}
-
-	public function passwordRecovery()
+	/**
+	 * @info Método que renderiza la vista para recuperar la contraseña
+	 * @author J. Enrique Peñaloza P.
+	 */
+	public function recoveryPass()
 	{
 		log_message('INFO', 'NOVO User: passwordRecovery Method Initialized');
 		array_push(
@@ -89,7 +95,10 @@ class User extends NOVO_Controller {
 		$this->render->titlePage = "Recuperar contraseña";
 		$this->loadView('pass-recovery');
 	}
-
+	/**
+	 * @info Método que renderiza la vista para cambiar la contraseña
+	 * @author J. Enrique Peñaloza P.
+	 */
 	public function changePassword()
 	{
 		log_message('INFO', 'NOVO User: changePassword Method Initialized');
@@ -123,6 +132,20 @@ class User extends NOVO_Controller {
 		$this->session->set_flashdata('changePassword', $this->session->flashdata('changePassword'));
 		$this->session->set_flashdata('userType', $this->session->flashdata('userType'));
 
-		$this->loadView('pass-recovery');
+		$this->loadView('change-password');
 	}
+	/**
+	 * @info Método para el cierre de sesión
+	 * @author J. Enrique Peñaloza P.
+	 */
+	public function finishSession()
+	{
+		log_message('INFO', 'NOVO User: finishSession Method Initialized');
+		if($this->render->logged) {
+			$this->load->model('Novo_User_Model', 'finishSession');
+			$this->finishSession->callWs_FinishSession_User();
+		}
+		redirect(base_url('inicio'), 'location');
+	}
+
 }

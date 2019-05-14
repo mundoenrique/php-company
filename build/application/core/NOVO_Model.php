@@ -1,16 +1,17 @@
-<?php defined('BASEPATH') or exit('No direct script access allowed');
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
 
 class NOVO_Model extends CI_Model {
-	protected $dataAccessLog;
-	protected $className;
-	protected $accessLog;
-	protected $token;
-	protected $country;
-	protected $countryUri;
-	protected $dataRequest;
-	protected $response;
-	protected $isResponseRc;
-	protected $userName;
+	public $dataAccessLog;
+	public $className;
+	public $accessLog;
+	public $token;
+	public $country;
+	public $countryUri;
+	public $dataRequest;
+	public $response;
+	public $isResponseRc;
+	public $userName;
 
 	public function __construct()
 	{
@@ -46,12 +47,12 @@ class NOVO_Model extends CI_Model {
 		$encryptData = $this->encrypt_connect->encode($this->dataRequest, $this->userName, $model);
 		$request = ['bean'=> $encryptData, 'pais'=> $this->country];
 		$response = $this->encrypt_connect->connectWs($request, $this->userName);
-		$responseDecript = $this->encrypt_connect->decode($response, $this->userName, $model);
+		$responseDecrypt = $this->encrypt_connect->decode($response, $this->userName, $model);
 		$this->isResponseRc = FALSE;
 		$this->response->title = lang('SYSTEM_NAME');
 
-		if(isset($responseDecript->rc)) {
-			$this->isResponseRc = $responseDecript->rc;
+		if(isset($responseDecrypt->rc)) {
+			$this->isResponseRc = $responseDecrypt->rc;
 			switch($this->isResponseRc) {
 				case -29:
 				case -61:
@@ -93,47 +94,6 @@ class NOVO_Model extends CI_Model {
 			];
 		}
 
-		return $responseDecript;
+		return $responseDecrypt;
 	}
-
-	/**
-	 * @info Método para
-	 * @author J. Enrique Peñaloza Piñero
-	 */
-	/*
-	public function callWs_Xxxx_User($dataRequest)
-	{
-		log_message('INFO', 'NOVO User Model: Xxxx method Initialized');
-		$this->className = '';
-
-		$this->dataAccessLog->modulo = '';
-		$this->dataAccessLog->function = '';
-		$this->dataAccessLog->operation = '';
-
-		$this->dataRequest->userName = $dataRequest->user;
-
-		$response = $this->sendToService('Xxxx');
-
-		if($this->isResponseRc !== FALSE) {
-			switch($this->isResponseRc) {
-				case 0:
-					$this->response->code = 0;
-					$this->response->title = '';
-					$this->response->msg = '';
-					$this->response->icon = '';
-					$this->response->data = '';
-					break;
-				case -5000:
-					$this->response->code = 1;
-					$this->response->title = '';
-					$this->response->msg = '';
-					$this->response->icon = '';
-					$this->response->data = '';
-					break;
-			}
-		}
-
-		return $this->response;
-	}
-	*/
 }

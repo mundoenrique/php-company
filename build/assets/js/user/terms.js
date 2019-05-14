@@ -23,8 +23,8 @@ $(function() {
 
 	});
 
-	$('#cancel').on('click', function() {
-		verb = 'POST'; who = 'User'; where = 'finishSession'; data = '';
+	$('#cancel, #signup').on('click', function() {
+		verb = 'POST'; who = 'User'; where = 'FinishSession'; data = '';
 			callNovoCore (verb, who, where, data);
 	});
-})
+});

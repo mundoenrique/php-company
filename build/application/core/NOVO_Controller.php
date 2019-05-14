@@ -1,4 +1,5 @@
-<?php defined('BASEPATH') or exit('No direct script access allowed');
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * Clase contralador de Conexión Empresas Online (CEO)
  *
@@ -24,21 +25,21 @@ class NOVO_Controller extends CI_Controller {
 		log_message('INFO', 'NOVO_Controller Class Initialized');
 
 		$this->includeAssets = new stdClass();
-		$this->countryUri = $this->uri->segment(1, 0);
+		$this->countryUri = $this->uri->segment(1, 0) ? $this->uri->segment(1, 0) : 'pe';
 		$this->render = new stdClass();
 		$this->render->logged = $this->session->userdata('logged');
+		$this->render->fullName = $this->session->userdata('fullName');
 		$this->idProductos = $this->session->userdata('idProductos');
-
 		$this->optionsCheck();
-
-		$this->lang->load('erroreseol');
-		$this->lang->load('dashboard');
 	}
 
 	private function optionsCheck()
 	{
 		log_message('INFO', 'NOVO optionsCheck Method Initialized');
 		countryCheck($this->countryUri);
+		$this->lang->load('erroreseol');
+		$this->lang->load('dashboard');
+		$this->lang->load('users');
 		if($this->input->is_ajax_request()) {
 			$this->dataRequest = json_decode(
 				$this->security->xss_clean(
@@ -79,6 +80,13 @@ class NOVO_Controller extends CI_Controller {
 				"third_party/jquery-ui-1.12.1",
 				"helper"
 			];
+			if($this->render->logged) {
+				array_push(
+					$this->includeAssets->jsFiles,
+					"third_party/jquery.balloon",
+					"menu-datepicker"
+				);
+			}
 		}
 	}
 
@@ -89,16 +97,25 @@ class NOVO_Controller extends CI_Controller {
 		switch($module) {
 			case 'login':
 			case 'benefits':
-			case 'terms':
+			case 'pass-recovery':
 				$auth = TRUE;
 				break;
+			case 'terms':
+			case 'companies':
+				$auth = ($this->render->logged);
+				break;
+			default:
 
 		}
-
-		$this->render->module = $module;
-		$this->render->viewPage = $this->views;
-		$this->asset->initialize($this->includeAssets);
-		$this->load->view('master_content', $this->render);
+		$this->render->goOut = ($this->render->logged) ? 'cerrar-sesion' : 'inicio';
+		if($auth) {
+			$this->render->module = $module;
+			$this->render->viewPage = $this->views;
+			$this->asset->initialize($this->includeAssets);
+			$this->load->view('master_content', $this->render);
+		} else {
+			redirect(base_url('inicio'), 'location');
+		}
 	}
 }
 

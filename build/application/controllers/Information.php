@@ -1,4 +1,5 @@
-<?php defined('BASEPATH') or exit('No direct script access allowed');
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * @info Controlador para la vistas de información general alusuario
  * @author J. Enrique Peñaloza P.
@@ -26,7 +27,10 @@ class Information extends NOVO_Controller {
 		if($this->session->flashdata('changePassword')) {
 			if($this->config->item('country') !== ($this->session->userdata('countrySess'))) {
 				$urlRedirect = urlReplace($this->countryUri, $this->session->userdata('countrySess'), base_url('inicio'));
+				$this->load->model('Novo_User_Model', 'finishSession');
+				$this->finishSession->callWs_FinishSession_User();
 				redirect($urlRedirect, 'location');
+				exit();
 			}
 			array_push(
 				$this->includeAssets->jsFiles,
