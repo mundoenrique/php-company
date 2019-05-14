@@ -130,7 +130,6 @@ class Driver_model extends CI_Model {
                     ]
                 ];
                 $this->session->sess_destroy();
-                $this->session->unset_userdata($this->session->all_userdata());
                 break;
             default:
                 $response = [
@@ -142,7 +141,6 @@ class Driver_model extends CI_Model {
                     ]
                 ];
                 $this->session->sess_destroy();
-                $this->session->unset_userdata($this->session->all_userdata());
         }
 
         return $response;
@@ -259,7 +257,6 @@ class Driver_model extends CI_Model {
 
         if($response['code'] == 5) {
             $this->session->sess_destroy();
-            $this->session->unset_userdata($this->session->all_userdata());
         }
 
         return $response;
@@ -400,7 +397,6 @@ class Driver_model extends CI_Model {
                     ]
                 ];
                 $this->session->sess_destroy();
-                $this->session->unset_userdata($this->session->all_userdata());
                 break;
             default:
                 $response = [
@@ -412,7 +408,6 @@ class Driver_model extends CI_Model {
                     ]
                 ];
                 $this->session->sess_destroy();
-                $this->session->unset_userdata($this->session->all_userdata());
         }
 
         return $response;
@@ -518,7 +513,6 @@ class Driver_model extends CI_Model {
                     ]
                 ];
                 $this->session->sess_destroy();
-                $this->session->unset_userdata($this->session->all_userdata());
                 break;
             default:
                 $response = [
@@ -530,7 +524,6 @@ class Driver_model extends CI_Model {
                     ]
                 ];
                 $this->session->sess_destroy();
-                $this->session->unset_userdata($this->session->all_userdata());
         }
 
         return $response;
@@ -538,5 +531,5 @@ class Driver_model extends CI_Model {
     }
 
     /*---Fin métodos para conductores---------------------------------------------------------------------------------*/
-	
+
 }

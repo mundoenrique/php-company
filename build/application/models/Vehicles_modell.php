@@ -121,7 +121,6 @@ class Vehicles_Model extends CI_Model {
 
 			if ($code === 3){
 					$this->session->sess_destroy();
-					$this->session->unset_userdata($this->session->all_userdata());
 			}
 
 			return $response = [
@@ -194,7 +193,6 @@ class Vehicles_Model extends CI_Model {
 
 			if ($code === 3){
 					$this->session->sess_destroy();
-					$this->session->unset_userdata($this->session->all_userdata());
 			}
 
 			return $response = [
@@ -290,7 +288,6 @@ class Vehicles_Model extends CI_Model {
 
 				if ($code === 3){
 						$this->session->sess_destroy();
-						$this->session->unset_userdata($this->session->all_userdata());
 				}
 
 				return $response = [

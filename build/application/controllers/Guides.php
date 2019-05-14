@@ -186,7 +186,6 @@ class Guides extends CI_Controller {
 		{
 			if (!$this->logged_in) {
 				$this->session->sess_destroy();
-				$this->session->unset_userdata($this->session->all_userdata());
 				redirect($this->urlCountry . '/login');
 			}
 		}

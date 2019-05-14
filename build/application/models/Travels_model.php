@@ -9,7 +9,7 @@ class travels_Model extends CI_Model {
 		//Add languages
 		$this->lang->load('dashboard');
 		$this->lang->load('combustible');
-		$this->lang->load('erroreseol');		
+		$this->lang->load('erroreseol');
 	}
 	/*---Métodos para viajes--------------------------------------------------*/
 	//Método para obtener la lista de viajes
@@ -163,7 +163,6 @@ class travels_Model extends CI_Model {
 
 			if ($code === 3){
 					$this->session->sess_destroy();
-					$this->session->unset_userdata($this->session->all_userdata());
 			}
 
 			return $response = [
@@ -249,7 +248,6 @@ class travels_Model extends CI_Model {
 
 			if ($code === 3){
 					$this->session->sess_destroy();
-					$this->session->unset_userdata($this->session->all_userdata());
 			}
 
 			return $response = [
@@ -516,7 +514,6 @@ class travels_Model extends CI_Model {
 
 			if ($code === 3){
 					$this->session->sess_destroy();
-					$this->session->unset_userdata($this->session->all_userdata());
 			}
 
 			return $response = [
@@ -626,7 +623,6 @@ class travels_Model extends CI_Model {
 
 			if ($code === 3){
 					$this->session->sess_destroy();
-					$this->session->unset_userdata($this->session->all_userdata());
 			}
 
 			return $response = [
@@ -699,7 +695,6 @@ class travels_Model extends CI_Model {
 
 			if ($code === 3) {
 					$this->session->sess_destroy();
-					$this->session->unset_userdata($this->session->all_userdata());
 			}
 
 			return $response = [
@@ -708,5 +703,5 @@ class travels_Model extends CI_Model {
 					'msg' => $data,
 					'lang' => $lang,
 			];
-	}	
+	}
 }

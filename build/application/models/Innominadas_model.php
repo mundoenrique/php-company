@@ -92,7 +92,6 @@ class Innominadas_Model extends CI_Model {
 
 				if($response->rc==-61 || $response->rc==-29){
 					$this->session->sess_destroy();
-					$this->session->unset_userdata($this->session->all_userdata());
 					$codigoError = array('ERROR' => lang('ERROR_(-29)'), "rc"=> $response->rc);
 				}else if($response->rc==-150){
 					$codigoError = array('ERROR' => lang('ERROR_(-150)'), "rc"=> $response->rc, 'paisTo'=>$response->paisTo);
@@ -181,7 +180,6 @@ class Innominadas_Model extends CI_Model {
 
 				if ($response->rc==-61 || $response->rc==-29) {
 					$this->session->sess_destroy();
-					$this->session->unset_userdata($this->session->all_userdata());
 					$codigoError = array('ERROR' => lang('ERROR_(-29)'), "rc"=> $response->rc);
 				} else if($response->rc==-150) {
 					$codigoError = array('ERROR' => lang('ERROR_(-150)'), "rc"=> $response->rc, 'paisTo'=>$response->paisTo);
@@ -280,7 +278,6 @@ class Innominadas_Model extends CI_Model {
 
 				if($response->rc==-61 || $response->rc==-29){
 					$this->session->sess_destroy();
-					$this->session->unset_userdata($this->session->all_userdata());
 					$codigoError = array('ERROR' => lang('ERROR_(-29)'), "rc"=> $response->rc);
 				}else if($response->rc==-150){
 					$codigoError = array('ERROR' => lang('ERROR_(-150)'), "rc"=> $response->rc, 'paisTo'=>$response->paisTo);
@@ -365,25 +362,6 @@ class Innominadas_Model extends CI_Model {
 				return $response;
 			}else{
 				return "";
-				/*log_message('info','lista tarjetas_innominada data response => '.json_encode($response,JSON_UNESCAPED_UNICODE));
-
-				if($response->rc==-61 || $response->rc==-29){
-					$this->session->sess_destroy();
-					$this->session->unset_userdata($this->session->all_userdata());
-					$codigoError = array('ERROR' => lang('ERROR_(-29)'), "rc"=> $response->rc);
-				}else if($response->rc==-150){
-					$codigoError = array('ERROR' => lang('ERROR_(-150)'), "rc"=> $response->rc); //, 'paisTo'=>$response->paisTo
-				}
-				else{
-					$codigoError = lang('ERROR_('.$response->rc.')');
-					if(strpos($codigoError, 'Error')!==false){
-						$codigoError = array('ERROR' => lang('ERROR_GENERICO_USER'), "rc"=> $response->rc);
-					}else{
-						$codigoError = array('ERROR' => lang('ERROR_('.$response->rc.')'), "rc"=> $response->rc);
-					}
-				}
-				return $codigoError;*/
-
 			}
 
 		}else{
@@ -457,7 +435,6 @@ class Innominadas_Model extends CI_Model {
 
 				if($response->rc==-61 || $response->rc==-29){
 					$this->session->sess_destroy();
-					$this->session->unset_userdata($this->session->all_userdata());
 					$codigoError = array('ERROR' => lang('ERROR_(-29)'), "rc"=> $response->rc);
 				}else if($response->rc==-150){
 					$codigoError = array('ERROR' => lang('ERROR_(-150)'), "rc"=> $response->rc, 'paisTo'=>$response->paisTo);

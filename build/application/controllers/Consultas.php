@@ -101,7 +101,6 @@ class Consultas extends CI_Controller {
 
 			}elseif($paisS!=$urlCountry && $paisS!=""){
 					$this->session->sess_destroy();
-					$this->session->unset_userdata($this->session->all_userdata());
 					redirect($urlCountry.'/login');
 			}elseif ($moduloActAuth!=false) {
 					redirect($urlCountry.'/lotes/autorizacion');
@@ -163,7 +162,6 @@ class Consultas extends CI_Controller {
 					}else{
 							if($response->rc==-61 || $response->rc==-29){
 									$this->session->sess_destroy();
-									$this->session->unset_userdata($this->session->all_userdata());
 									$codigoError = array('ERROR' => '-29' );
 							}
 							else{
@@ -244,7 +242,6 @@ class Consultas extends CI_Controller {
 					}else{
 							if($response->rc==-61 || $response->rc==-29){
 									$this->session->sess_destroy();
-									$this->session->unset_userdata($this->session->all_userdata());
 									$codigoError = array('ERROR' => '-29' );
 							}
 							else{
@@ -298,7 +295,6 @@ class Consultas extends CI_Controller {
 
 			}elseif($paisS!=$urlCountry && $paisS!=""){
 					$this->session->sess_destroy();
-					$this->session->unset_userdata($this->session->all_userdata());
 					redirect($urlCountry.'/login');
 			}else{
 					redirect($urlCountry.'/login');
@@ -330,7 +326,6 @@ class Consultas extends CI_Controller {
 
 			}elseif($paisS!=$urlCountry && $paisS!=""){
 					$this->session->sess_destroy();
-					$this->session->unset_userdata($this->session->all_userdata());
 					redirect($urlCountry.'/login');
 			}else{
 					redirect($urlCountry.'/login');
@@ -399,7 +394,6 @@ class Consultas extends CI_Controller {
 
 							if($response->rc==-61 || $response->rc==-29){
 									$this->session->sess_destroy();
-									$this->session->unset_userdata($this->session->all_userdata());
 									echo "<script>alert('usuario actualmente desconectado');
 									location.href='".$this->config->item('base_url')."$urlCountry/login';</script>";
 							}else{
@@ -593,7 +587,6 @@ class Consultas extends CI_Controller {
 					}else{
 							if($response->rc==-61 || $response->rc==-29){
 									$this->session->sess_destroy();
-									$this->session->unset_userdata($this->session->all_userdata());
 									$codigoError = array('ERROR' => '-29');
 							}else{
 									$codigoError = lang('ERROR_('.$response->rc.')');
@@ -634,7 +627,6 @@ class Consultas extends CI_Controller {
 
 			}elseif($paisS!=$urlCountry && $paisS!=""){
 					$this->session->sess_destroy();
-					$this->session->unset_userdata($this->session->all_userdata());
 					redirect($urlCountry.'/login');
 			}else{
 					redirect($urlCountry.'/login');
@@ -696,7 +688,6 @@ class Consultas extends CI_Controller {
 
 							if($response->rc==-61 || $response->rc==-29){
 									$this->session->sess_destroy();
-									$this->session->unset_userdata($this->session->all_userdata());
 									echo "<script>alert('usuario actualmente desconectado');
 									location.href='".$this->config->item('base_url')."$urlCountry/login';</script>";
 							}else{
@@ -749,7 +740,6 @@ class Consultas extends CI_Controller {
 
 			}elseif($paisS!=$urlCountry && $paisS!=''){
 					$this->session->sess_destroy();
-					$this->session->unset_userdata($this->session->all_userdata());
 					redirect($urlCountry.'/login');
 			}elseif($this->input->is_ajax_request()){
 					$this->output->set_content_type('application/json')->set_output(json_encode( array('ERROR' => '-29' )));
@@ -872,7 +862,6 @@ class Consultas extends CI_Controller {
 
 			}elseif($paisS!=$urlCountry && $paisS!=''){
 					$this->session->sess_destroy();
-					$this->session->unset_userdata($this->session->all_userdata());
 					redirect($urlCountry.'/login');
 			}elseif($this->input->is_ajax_request()){
 					$this->output->set_content_type('application/json')->set_output(json_encode( array('ERROR' => '-29' )));

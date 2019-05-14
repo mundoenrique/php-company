@@ -90,7 +90,6 @@ class Lotes extends CI_Controller {
 			";
 		}else if($paisS!=$urlCountry && $paisS!=""){
 			$this->session->sess_destroy();
-			$this->session->unset_userdata($this->session->all_userdata());
 			echo "
 			<script> location.href = '".$this->config->item('base_url')."$urlCountry/login';</script>
 			";
@@ -164,7 +163,6 @@ class Lotes extends CI_Controller {
 			$this->parser->parse('layouts/layout-b', $datos);
 		}elseif($paisS!=$urlCountry && $paisS!=""){
 			$this->session->sess_destroy();
-			$this->session->unset_userdata($this->session->all_userdata());
 			redirect($urlCountry.'/login');
 		}else{
 			echo "
@@ -235,7 +233,6 @@ class Lotes extends CI_Controller {
 			$this->parser->parse('layouts/layout-b', $datos);
 		}elseif($paisS!=$urlCountry && $paisS!=""){
 			$this->session->sess_destroy();
-			$this->session->unset_userdata($this->session->all_userdata());
 			redirect($urlCountry.'/login');
 		}else{
 			echo "
@@ -341,7 +338,6 @@ class Lotes extends CI_Controller {
 			";
 		}elseif($paisS!=$urlCountry && $paisS!=""){
 			$this->session->sess_destroy();
-			$this->session->unset_userdata($this->session->all_userdata());
 			redirect($urlCountry.'/login');
 		}else{
 
@@ -409,7 +405,6 @@ class Lotes extends CI_Controller {
 			}else{
 				if($response->rc==-61 || $response->rc==-29){
 					$this->session->sess_destroy();
-					$this->session->unset_userdata($this->session->all_userdata());
 					return array('ERROR' => '-29' );
 				}
 				else{
@@ -498,7 +493,6 @@ class Lotes extends CI_Controller {
 			}else{
 				if($response->rc==-61 || $response->rc==-29){
 					$this->session->sess_destroy();
-					$this->session->unset_userdata($this->session->all_userdata());
 					return array('ERROR' => '-29' );
 				}
 				else{
@@ -552,7 +546,6 @@ class Lotes extends CI_Controller {
 
 		}elseif($paisS!=$urlCountry && $paisS!=""){
 			$this->session->sess_destroy();
-			$this->session->unset_userdata($this->session->all_userdata());
 			redirect($urlCountry.'/login');
 		}elseif ($ordenS!=''||$ordenS!='0'||$ordenS!='1') {
 			$codigoError = array('ERROR' => lang('MSJ_NO_FIRMA') );
@@ -640,7 +633,6 @@ class Lotes extends CI_Controller {
 			}else{
 				if($response->rc==-61 || $response->rc==-29){
 					$this->session->sess_destroy();
-					$this->session->unset_userdata($this->session->all_userdata());
 					return array('ERROR' => '-29' );
 				}
 				else{
@@ -684,7 +676,6 @@ class Lotes extends CI_Controller {
 
 		}elseif($paisS!=$urlCountry && $paisS!=''){
 			$this->session->sess_destroy();
-			$this->session->unset_userdata($this->session->all_userdata());
 			redirect($urlCountry.'/login');
 		}elseif($this->input->is_ajax_request()){
 			$this->output->set_content_type('application/json')->set_output(json_encode( array('ERROR' => '-29' )));
@@ -764,7 +755,6 @@ class Lotes extends CI_Controller {
 			}else{
 				if($response->rc==-61 || $response->rc==-29){
 					$this->session->sess_destroy();
-					$this->session->unset_userdata($this->session->all_userdata());
 					return array('ERROR' => '-29' );
 				}
 				else{
@@ -815,7 +805,6 @@ class Lotes extends CI_Controller {
 
 		}elseif($paisS!=$urlCountry && $paisS!=""){
 			$this->session->sess_destroy();
-			$this->session->unset_userdata($this->session->all_userdata());
 			redirect($urlCountry.'/login');
 		}elseif ($paisS==$urlCountry && $logged_in && $funcActiv==false) {
 			$codigoError = array('ERROR' => lang('MSJ_NO_TEBELI') );
@@ -902,7 +891,6 @@ class Lotes extends CI_Controller {
 			}else{
 				if($response->rc==-61 || $response->rc==-29){
 					$this->session->sess_destroy();
-					$this->session->unset_userdata($this->session->all_userdata());
 					return array('ERROR' => '-29' );
 				}
 				else{
@@ -991,7 +979,6 @@ class Lotes extends CI_Controller {
 			$this->parser->parse('layouts/layout-b', $datos);
 		}elseif($paisS!=$urlCountry && $paisS!=""){
 			$this->session->sess_destroy();
-			$this->session->unset_userdata($this->session->all_userdata());
 			redirect($urlCountry.'/login');
 		}else{
 			redirect($urlCountry.'/login');
@@ -1052,7 +1039,6 @@ class Lotes extends CI_Controller {
 			}else{
 				if($response->rc==-61 || $response->rc==-29){
 					$this->session->sess_destroy();
-					$this->session->unset_userdata($this->session->all_userdata());
 					return array('ERROR' => '-29' );
 				}
 				else{
@@ -1126,7 +1112,6 @@ class Lotes extends CI_Controller {
 
                     if($response->rc==-61 || $response->rc==-29){
                         $this->session->sess_destroy();
-                        $this->session->unset_userdata($this->session->all_userdata());
                         echo "<script>alert('usuario actualmente desconectado');
                         window.history.back(-1);</script>";
 
@@ -1153,7 +1138,6 @@ class Lotes extends CI_Controller {
 
         }elseif($paisS!=$urlCountry && $paisS!=""){
             $this->session->sess_destroy();
-            $this->session->unset_userdata($this->session->all_userdata());
             redirect($urlCountry.'/login');
         }else{
             redirect($urlCountry.'/login');
@@ -1219,7 +1203,6 @@ class Lotes extends CI_Controller {
 
                     if($response->rc==-61 || $response->rc==-29){
                         $this->session->sess_destroy();
-                        $this->session->unset_userdata($this->session->all_userdata());
                         echo "<script>alert('usuario actualmente desconectado');
                         window.history.back(-1);</script>";
 
@@ -1246,7 +1229,6 @@ class Lotes extends CI_Controller {
 
         }elseif($paisS!=$urlCountry && $paisS!=""){
             $this->session->sess_destroy();
-            $this->session->unset_userdata($this->session->all_userdata());
             redirect($urlCountry.'/login');
         }else{
             redirect($urlCountry.'/login');
@@ -1310,7 +1292,6 @@ class Lotes extends CI_Controller {
 			}else{
 				if($response->rc==-61 || $response->rc==-29){
 					$this->session->sess_destroy();
-					$this->session->unset_userdata($this->session->all_userdata());
 					return array('ERROR' => '-29' );
 				}
 				else{
@@ -1388,7 +1369,6 @@ class Lotes extends CI_Controller {
 			}else{
 				if($response->rc==-61 || $response->rc==-29){
 					$this->session->sess_destroy();
-					$this->session->unset_userdata($this->session->all_userdata());
 					return array('ERROR' => '-29' );
 				}
 				else{
@@ -1481,7 +1461,6 @@ class Lotes extends CI_Controller {
 			}else{
 				if($response->rc==-61 || $response->rc==-29){
 					$this->session->sess_destroy();
-					$this->session->unset_userdata($this->session->all_userdata());
 					return array('ERROR' => '-29' );
 				}
 				else{
@@ -1558,7 +1537,6 @@ class Lotes extends CI_Controller {
 			}else{
 				if($response->rc==-61 || $response->rc==-29){
 					$this->session->sess_destroy();
-					$this->session->unset_userdata($this->session->all_userdata());
 					return array('ERROR' => '-29');
 				}
 				else{
@@ -1606,7 +1584,6 @@ class Lotes extends CI_Controller {
 
 		}elseif($paisS!=$urlCountry && $paisS!=''){
 			$this->session->sess_destroy();
-			$this->session->unset_userdata($this->session->all_userdata());
 			redirect($urlCountry.'/login');
 		}elseif($this->input->is_ajax_request()){
 			$this->output->set_content_type('application/json')->set_output(json_encode( array('ERROR' => '-29')));
@@ -1692,7 +1669,6 @@ class Lotes extends CI_Controller {
 			}
 		}elseif($paisS!=$urlCountry && $paisS!=''){
 			$this->session->sess_destroy();
-			$this->session->unset_userdata($this->session->all_userdata());
 			redirect($urlCountry.'/login');
 		}elseif($this->input->is_ajax_request()){
 			$this->output->set_content_type('application/json')->set_output(json_encode( array('ERROR' => '-29' )));
@@ -1814,7 +1790,6 @@ class Lotes extends CI_Controller {
 				}else{
 					if($response->rc==-61 || $response->rc==-29){
 						$this->session->sess_destroy();
-						$this->session->unset_userdata($this->session->all_userdata());
 						return array('ERROR' => '-29' );
 					}
 					else{
@@ -1893,7 +1868,6 @@ class Lotes extends CI_Controller {
 			$this->output->set_content_type('application/json')->set_output(json_encode($test));
 		}elseif($paisS!=$urlCountry&& $paisS!=''){
 			$this->session->sess_destroy();
-			$this->session->unset_userdata($this->session->all_userdata());
 			redirect($urlCountry.'/login');
 		}elseif($this->input->is_ajax_request()){
 			$this->output->set_content_type('application/json')->set_output(json_encode( array('ERROR' => '-29' )));
@@ -1970,7 +1944,6 @@ class Lotes extends CI_Controller {
 			}else{
 				if($response->rc==-61 || $response->rc==-29){
 					$this->session->sess_destroy();
-					$this->session->unset_userdata($this->session->all_userdata());
 					return array('ERROR' => '-29' );
 				}
 				else if($response->rc==-142){
@@ -2058,7 +2031,6 @@ class Lotes extends CI_Controller {
 			";
 		}elseif($paisS!=$urlCountry && $paisS!=""){
 			$this->session->sess_destroy();
-			$this->session->unset_userdata($this->session->all_userdata());
 			redirect($urlCountry.'/login');
 		}else{
 			echo "
@@ -2098,7 +2070,6 @@ class Lotes extends CI_Controller {
 	    }
 	    elseif ($paisS != $urlCountry && $paisS != '') {
 	        $this->session->sess_destroy();
-	        $this->session->unset_userdata($this->session->all_userdata());
 	        redirect($urlCountry . '/login');
 	    }
 	    elseif ($this->input->is_ajax_request()) {
@@ -2356,7 +2327,6 @@ class Lotes extends CI_Controller {
 					case -29:
 					case -61:
 						$this->session->sess_destroy();
-						$this->session->unset_userdata($this->session->all_userdata());
 						$response = [
 							'ERROR' => '-29',
 							"title"=> Lang('SYSTEM_NAME'),
@@ -2417,7 +2387,6 @@ class Lotes extends CI_Controller {
 			$this->output->set_content_type('application/json')->set_output($t);
 		}elseif($paisS!=$urlCountry&& $paisS!=''){
 			$this->session->sess_destroy();
-			$this->session->unset_userdata($this->session->all_userdata());
 			redirect($urlCountry.'/login');
 		}elseif($this->input->is_ajax_request()){
 			$this->output->set_content_type('')->set_output(json_encode( array('ERROR' => '-29' )));
@@ -2481,7 +2450,6 @@ class Lotes extends CI_Controller {
 			$this->parser->parse('layouts/layout-b', $datos);
 		}elseif($paisS!=$urlCountry){
 			$this->session->sess_destroy();
-			$this->session->unset_userdata($this->session->all_userdata());
 			redirect($urlCountry.'/login');
 		}else{
 			redirect($urlCountry.'/login');
@@ -2535,7 +2503,6 @@ class Lotes extends CI_Controller {
 			$this->output->set_content_type('application/json')->set_output(json_encode($response,JSON_UNESCAPED_UNICODE));
 		}elseif($paisS!=$urlCountry&& $paisS!=''){
 			$this->session->sess_destroy();
-			$this->session->unset_userdata($this->session->all_userdata());
 			redirect($urlCountry.'/login');
 		}elseif($this->input->is_ajax_request()){
 			$this->output->set_content_type('application/json')->set_output(json_encode( array('ERROR' => '-29' )));
@@ -2629,7 +2596,6 @@ class Lotes extends CI_Controller {
 			}else{
 				if($response->rc==-61 || $response->rc==-29){
 					$this->session->sess_destroy();
-					$this->session->unset_userdata($this->session->all_userdata());
 					return array('ERROR' => '-29' );
 				}
 				else{
@@ -2717,7 +2683,6 @@ class Lotes extends CI_Controller {
 			}
 		}elseif($paisS!=$urlCountry && $paisS!=''){
 			$this->session->sess_destroy();
-			$this->session->unset_userdata($this->session->all_userdata());
 			redirect($urlCountry.'/login');
 		}elseif($this->input->is_ajax_request()){
 			$this->output->set_content_type('application/json')->set_output(json_encode( array('ERROR' => '-29' )));
@@ -2785,7 +2750,6 @@ class Lotes extends CI_Controller {
 			}else{
 				if($response->rc==-61 || $response->rc==-29){
 					$this->session->sess_destroy();
-					$this->session->unset_userdata($this->session->all_userdata());
 					return array('ERROR' => '-29' );
 				}
 				else{
@@ -2836,7 +2800,6 @@ class Lotes extends CI_Controller {
 
 		}elseif($paisS!=$urlCountry&& $paisS!=''){
 			$this->session->sess_destroy();
-			$this->session->unset_userdata($this->session->all_userdata());
 			redirect($urlCountry.'/login');
 		}elseif($this->input->is_ajax_request()){
 			$this->output->set_content_type('application/json')->set_output(json_encode( array('ERROR' => '-29' )));
@@ -2901,7 +2864,6 @@ class Lotes extends CI_Controller {
 			}else{
 				if($response->rc==-61 || $response->rc==-29){
 					$this->session->sess_destroy();
-					$this->session->unset_userdata($this->session->all_userdata());
 					return array('ERROR' => '-29' );
 				}
 				else{
@@ -2972,7 +2934,6 @@ class Lotes extends CI_Controller {
 			$this->output->set_content_type('application/json')->set_output(json_encode($response,JSON_UNESCAPED_UNICODE));
 		}elseif($paisS!=$urlCountry&& $paisS!=''){
 			$this->session->sess_destroy();
-			$this->session->unset_userdata($this->session->all_userdata());
 			redirect($urlCountry.'/login');
 		}elseif($this->input->is_ajax_request()){
 			$this->output->set_content_type('application/json')->set_output(json_encode( array('ERROR' => '-29' )));
@@ -3069,7 +3030,6 @@ class Lotes extends CI_Controller {
 			}else{
 				if($response->rc==-61 || $response->rc==-29){
 					$this->session->sess_destroy();
-					$this->session->unset_userdata($this->session->all_userdata());
 					return array('ERROR' => '-29' );
 				}
 				else{
@@ -3123,7 +3083,6 @@ class Lotes extends CI_Controller {
 			$this->output->set_content_type('application/json')->set_output(json_encode($response));
 		}elseif($paisS!=$urlCountry&& $paisS!=''){
 			$this->session->sess_destroy();
-			$this->session->unset_userdata($this->session->all_userdata());
 			redirect($urlCountry.'/login');
 		}elseif($this->input->is_ajax_request()){
 			$this->output->set_content_type('application/json')->set_output(json_encode( array('ERROR' => '-29' )));
@@ -3212,7 +3171,6 @@ class Lotes extends CI_Controller {
 			}else{
 				if($response->rc==-61 || $response->rc==-29){
 					$this->session->sess_destroy();
-					$this->session->unset_userdata($this->session->all_userdata());
 					return array('ERROR' => '-29', 'rc'=>$response->rc);
 				}
 				else{
@@ -3264,7 +3222,6 @@ class Lotes extends CI_Controller {
 			$this->output->set_content_type('')->set_output($response);
 		}elseif($paisS!=$urlCountry&& $paisS!=''){
 			$this->session->sess_destroy();
-			$this->session->unset_userdata($this->session->all_userdata());
 			redirect($urlCountry.'/login');
 		}elseif($this->input->is_ajax_request()){
 			$this->output->set_content_type('application/json')->set_output(json_encode( array('ERROR' => '-29' )));
@@ -3305,7 +3262,6 @@ class Lotes extends CI_Controller {
             $this->output->set_content_type('')->set_output(json_encode($response));
         } elseif ($paisS != $urlCountry && $paisS != '') {
             $this->session->sess_destroy();
-            $this->session->unset_userdata($this->session->all_userdata());
             redirect($urlCountry . '/login');
         } elseif ($this->input->is_ajax_request()) {
             $this->output->set_content_type('application/json')->set_output(json_encode(array('ERROR' => '-29')));
@@ -3370,7 +3326,6 @@ class Lotes extends CI_Controller {
             } else {
                 if ($response->rc == -61 || $response->rc == -29) {
                     $this->session->sess_destroy();
-                    $this->session->unset_userdata($this->session->all_userdata());
                     $codigoError = array('ERROR' => '-29');
                 } else {
                     $codigoError = lang('ERROR_(' . $response->rc . ')');
@@ -3464,7 +3419,6 @@ class Lotes extends CI_Controller {
 			}else{
 				if($response->rc==-61 || $response->rc==-29){
 					$this->session->sess_destroy();
-					$this->session->unset_userdata($this->session->all_userdata());
 					$codigoError = array('ERROR' => '-29' );
 				}
 				else{

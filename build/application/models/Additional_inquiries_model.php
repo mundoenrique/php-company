@@ -118,7 +118,6 @@ class Additional_inquiries_model extends NOVO_Model {
 
 		if($code === 2) {
 			$this->session->sess_destroy();
-			$this->session->unset_userdata($this->session->all_userdata());
 		}
 
 		return $response = [

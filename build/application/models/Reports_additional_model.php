@@ -29,7 +29,7 @@ class Reports_additional_model extends CI_Model {
 		$this->prefix = $this->session->userdata('idProductoS');
 		$this->companyCod = $this->session->userdata('accodciaS');
 		//Agrega lenguajes a utilizar
-		$this->lang->load('erroreseol');		
+		$this->lang->load('erroreseol');
 	}
 	/**
 	 * @info		Método para obtener el listado recargas con comisión
@@ -129,7 +129,6 @@ class Reports_additional_model extends CI_Model {
 
 		if($code === 2) {
 			$this->session->sess_destroy();
-			$this->session->unset_userdata($this->session->all_userdata());
 		}
 
 
@@ -235,7 +234,6 @@ class Reports_additional_model extends CI_Model {
 
 		if($code === 2) {
 			$this->session->sess_destroy();
-			$this->session->unset_userdata($this->session->all_userdata());
 		}
 
 
@@ -244,5 +242,5 @@ class Reports_additional_model extends CI_Model {
 			'title' => $title,
 			'msg' => isset($msg) ? $msg : '',
 		];
-	}		
+	}
 }

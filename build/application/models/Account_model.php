@@ -237,8 +237,6 @@ class Account_model extends NOVO_Model {
                         'TAG_ACCEPT' => lang('TAG_ACCEPT')
                     ]
                 ];
-//                $this->session->sess_destroy();
-//                $this->session->unset_userdata($this->session->all_userdata());
                 break;
             case 404:
                 $response = [

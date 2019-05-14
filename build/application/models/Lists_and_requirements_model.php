@@ -106,7 +106,6 @@ class Lists_and_requirements_model extends CI_Model {
 
 		if($code === 2) {
 			$this->session->sess_destroy();
-			$this->session->unset_userdata($this->session->all_userdata());
 		}
 
 		return $response = [
@@ -134,5 +133,5 @@ class Lists_and_requirements_model extends CI_Model {
 		log_message('INFO', '--[' . $this->userName . '] FileName: ' . $filename . ' FileExt: ' . $ext);
 		$file = $this->session->flashdata($flashdataName);
 		np_hoplite_byteArrayToFile($file, $ext, $filename, TRUE);
-	}	
+	}
 }

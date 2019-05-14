@@ -52,7 +52,7 @@ class Users extends CI_Controller {
         if($logged_in && !$newuser && !$caducoPass){
             redirect($urlCountry.'/dashboard');
         }else{
-						redirect(base_url($this->config->item('countryUri').'/inicio'), 'location');
+						//redirect(base_url($this->config->item('countryUri').'/inicio'), 'location');
             //INSTANCIA PARA TITULO DE PAGINA
             $titlePage="Conexión Empresas Online";
             //INSTANCIA GENERAR  HEADER
@@ -333,7 +333,6 @@ class Users extends CI_Controller {
 
             $finsesion = $this->input->post('data-caducada');
             $this->session->sess_destroy();
-            $this->session->unset_userdata($this->session->all_userdata());
 
             if($finsesion){
                 $finsesion = $urlCountry.'/finsesion'; // pantalla de sesión caducada
@@ -351,7 +350,6 @@ class Users extends CI_Controller {
             }
         }else{
             $this->session->sess_destroy();
-            $this->session->unset_userdata($this->session->all_userdata());
             redirect($urlCountry.'/login');
         }
     }
@@ -619,7 +617,6 @@ class Users extends CI_Controller {
             $this->parser->parse('layouts/layout-a', $data);
         }else{
             $this->session->sess_destroy();
-            $this->session->unset_userdata($this->session->all_userdata());
             redirect($urlCountry.'/login');
         }
 
@@ -689,7 +686,6 @@ class Users extends CI_Controller {
 
         }elseif($paisS!=$urlCountry  && $paisS!=""){
             $this->session->sess_destroy();
-            $this->session->unset_userdata($this->session->all_userdata());
             redirect($urlCountry.'/login');
         }else{
             redirect($urlCountry.'/login');
@@ -734,7 +730,6 @@ class Users extends CI_Controller {
             }
         } elseif ($paisS!=$urlCountry && $paisS!=''){
             $this->session->sess_destroy();
-            $this->session->unset_userdata($this->session->all_userdata());
             redirect($urlCountry.'/login');
         } elseif ($this->input->is_ajax_request()){
             $responseCambioClave = json_encode(
@@ -892,7 +887,6 @@ class Users extends CI_Controller {
 
         }elseif($paisS!=$urlCountry && $paisS!=""){
             $this->session->sess_destroy();
-            $this->session->unset_userdata($this->session->all_userdata());
             redirect($urlCountry.'/login');
         }else{
             redirect($urlCountry.'/login');
@@ -940,7 +934,6 @@ class Users extends CI_Controller {
 
         }elseif($paisS!=$urlCountry && $paisS!=''){
             $this->session->sess_destroy();
-            $this->session->unset_userdata($this->session->all_userdata());
             echo 'Usuario Desconectado';
         }else{
             echo 'Usuario Desconectado';
@@ -992,7 +985,6 @@ class Users extends CI_Controller {
 
         }elseif($paisS!=$urlCountry && $paisS!=""){
             $this->session->sess_destroy();
-            $this->session->unset_userdata($this->session->all_userdata());
             echo 'Usuario Desconectado';
         }else{
             echo 'Usuario Desconectado';
@@ -1031,7 +1023,6 @@ class Users extends CI_Controller {
 
         }elseif($paisS!=$urlCountry && $paisS!=""){
             $this->session->sess_destroy();
-            $this->session->unset_userdata($this->session->all_userdata());
             echo 'Usuario Desconectado';
         }else{
             echo 'Usuario Desconectado';
@@ -1072,7 +1063,6 @@ class Users extends CI_Controller {
 
 				}elseif($paisS!=$urlCountry && $paisS!=""){
 						$this->session->sess_destroy();
-						$this->session->unset_userdata($this->session->all_userdata());
 						echo 'Usuario Desconectado';
 				}else{
 						echo 'Usuario Desconectado';
@@ -1133,7 +1123,6 @@ class Users extends CI_Controller {
 
                 if($response->rc==-61 || $response->rc==-29){
                     $this->session->sess_destroy();
-                    $this->session->unset_userdata($this->session->all_userdata());
                     $codigoError = array('ERROR' => '-29','msg'=>lang('ERROR_(-29)') );
                 }
                 else{
@@ -1179,7 +1168,6 @@ class Users extends CI_Controller {
         }elseif($paisS!=$urlCountry && $paisS!=''){
 
             $this->session->sess_destroy();
-            $this->session->unset_userdata($this->session->all_userdata());
             redirect($urlCountry.'/login');
 
         }elseif($this->input->is_ajax_request()){
@@ -1244,7 +1232,6 @@ class Users extends CI_Controller {
             }else{
                 if($response->rc==-61 || $response->rc==-29){
                     $this->session->sess_destroy();
-                    $this->session->unset_userdata($this->session->all_userdata());
                     $codigoError = array('ERROR' => '-29' );
                 }
                 else{
@@ -1293,7 +1280,6 @@ class Users extends CI_Controller {
         }elseif($paisS!=$urlCountry && $paisS!=''){
 
             $this->session->sess_destroy();
-            $this->session->unset_userdata($this->session->all_userdata());
             redirect($urlCountry.'/login');
 
         }elseif($this->input->is_ajax_request()){
@@ -1365,7 +1351,6 @@ class Users extends CI_Controller {
 
                 if($response->rc==-61 || $response->rc==-29){
                     $this->session->sess_destroy();
-                    $this->session->unset_userdata($this->session->all_userdata());
                     $codigoError = array('ERROR' => lang('ERROR_(-29)'), "rc"=> $response->rc );
                 }
                 else{
@@ -1414,7 +1399,6 @@ class Users extends CI_Controller {
         }elseif($paisS!=$urlCountry && $paisS!=''){
 
             $this->session->sess_destroy();
-            $this->session->unset_userdata($this->session->all_userdata());
             redirect($urlCountry.'/login');
 
         }elseif($this->input->is_ajax_request()){
@@ -1484,7 +1468,6 @@ class Users extends CI_Controller {
             }else{
                 if($response->rc==-61 || $response->rc==-29){
                     $this->session->sess_destroy();
-                    $this->session->unset_userdata($this->session->all_userdata());
                     $codigoError = array('ERROR' => lang('ERROR_(-29)'), "rc"=> $response->rc);
                 }
                 else{
@@ -1537,7 +1520,6 @@ class Users extends CI_Controller {
         }elseif($paisS!=$urlCountry && $paisS!=''){
 
             $this->session->sess_destroy();
-            $this->session->unset_userdata($this->session->all_userdata());
             redirect($urlCountry.'/login');
 
         }elseif($this->input->is_ajax_request()){
@@ -1618,7 +1600,6 @@ class Users extends CI_Controller {
             }else{
                 if($response->rc==-61 || $response->rc==-29){
                     $this->session->sess_destroy();
-                    $this->session->unset_userdata($this->session->all_userdata());
                     $codigoError = array('ERROR' => lang('ERROR_(-29)'), "rc"=> $response->rc);
                 }
                 else{
@@ -1666,7 +1647,6 @@ class Users extends CI_Controller {
 
         }elseif($paisS!=$urlCountry && $paisS!=''){
             $this->session->sess_destroy();
-            $this->session->unset_userdata($this->session->all_userdata());
             redirect($urlCountry.'/login');
         }elseif($this->input->is_ajax_request()){
             $this->output->set_content_type('application/json')->set_output(json_encode( array('ERROR' => lang('ERROR_(-29)'), "rc"=> '-29' )));
@@ -1736,7 +1716,6 @@ class Users extends CI_Controller {
             }else{
                 if($response->rc==-61 || $response->rc==-29){
                     $this->session->sess_destroy();
-                    $this->session->unset_userdata($this->session->all_userdata());
                     $codigoError = array('ERROR' => lang('ERROR_(-29)'), "rc"=> $response->rc);
                 }
                 else{
@@ -1788,7 +1767,6 @@ class Users extends CI_Controller {
 
         }elseif($paisS!=$urlCountry && $paisS!=''){
             $this->session->sess_destroy();
-            $this->session->unset_userdata($this->session->all_userdata());
             redirect($urlCountry.'/login');
         }elseif($this->input->is_ajax_request()){
             $this->output->set_content_type('application/json')->set_output(json_encode( array('ERROR' => lang('ERROR_(-29)'), "rc"=> '-29' )));
@@ -1864,7 +1842,6 @@ class Users extends CI_Controller {
             }else{
                 if($response->rc==-61 || $response->rc==-29){
                     $this->session->sess_destroy();
-                    $this->session->unset_userdata($this->session->all_userdata());
                     $codigoError = array('ERROR' => lang('ERROR_(-29)'), "rc"=> $response->rc);
                 }
                 else{
@@ -1907,7 +1884,6 @@ class Users extends CI_Controller {
 
         }elseif($paisS!=$urlCountry && $paisS!=''){
             $this->session->sess_destroy();
-            $this->session->unset_userdata($this->session->all_userdata());
             redirect($urlCountry.'/login');
         }elseif($this->input->is_ajax_request()){
             $this->output->set_content_type('application/json')->set_output(json_encode( array('ERROR' => lang('ERROR_(-29)'), "rc"=> '-29' )));
@@ -1973,7 +1949,6 @@ class Users extends CI_Controller {
             }else{
                 if($response->rc==-61 || $response->rc==-29){
                     $this->session->sess_destroy();
-                    $this->session->unset_userdata($this->session->all_userdata());
                     $codigoError = array('ERROR' => lang('ERROR_(-29)'), "rc"=> $response->rc);
                 }
                 else{
@@ -2017,7 +1992,6 @@ class Users extends CI_Controller {
 
         }elseif($paisS!=$urlCountry && $paisS!=''){
             $this->session->sess_destroy();
-            $this->session->unset_userdata($this->session->all_userdata());
             redirect($urlCountry.'/login');
 
         }elseif($this->input->is_ajax_request()){
@@ -2083,7 +2057,6 @@ class Users extends CI_Controller {
             }else{
                 if($response->rc==-61 || $response->rc==-29){
                     $this->session->sess_destroy();
-                    $this->session->unset_userdata($this->session->all_userdata());
                     $codigoError = array('ERROR' => lang('ERROR_(-29)'), "rc"=> $response->rc);
                 }
                 else{
@@ -2130,7 +2103,6 @@ class Users extends CI_Controller {
             $this->output->set_content_type('application/json')->set_output(json_encode($lista));
         }elseif($paisS!=$urlCountry && $paisS!=''){
             $this->session->sess_destroy();
-            $this->session->unset_userdata($this->session->all_userdata());
             redirect($urlCountry.'/login');
         }elseif($this->input->is_ajax_request()){
             $this->output->set_content_type('application/json')->set_output(json_encode( array('ERROR' => lang('ERROR_(-29)'), "rc"=> '-29' )));
@@ -2202,7 +2174,6 @@ class Users extends CI_Controller {
             }else{
                 if($response->rc==-61 || $response->rc==-29){
                     $this->session->sess_destroy();
-                    $this->session->unset_userdata($this->session->all_userdata());
                     $codigoError = array('ERROR' => lang('ERROR_(-29)'), "rc"=> $response->rc);
                 }else if($response->rc==-150){
                     $codigoError = array('ERROR' => lang('ERROR_(-150)'), "rc"=> $response->rc, 'paisTo'=>$response->paisTo);
@@ -2261,7 +2232,6 @@ class Users extends CI_Controller {
             $this->output->set_content_type('application/json')->set_output(json_encode($lista));
         }elseif($paisS!=$urlCountry && $paisS!=''){
             $this->session->sess_destroy();
-            $this->session->unset_userdata($this->session->all_userdata());
             redirect($urlCountry.'/login');
         }elseif($this->input->is_ajax_request()){
             $this->output->set_content_type('application/json')->set_output(json_encode( array('ERROR' => lang('ERROR_(-29)'), "rc"=> '-29' )));
@@ -2342,7 +2312,6 @@ class Users extends CI_Controller {
             }else{
                 if($response->rc==-61 || $response->rc==-29){
                     $this->session->sess_destroy();
-                    $this->session->unset_userdata($this->session->all_userdata());
                     $codigoError = array('ERROR' => lang('ERROR_(-29)'), "rc"=> $response->rc);
                 }
                 else{
@@ -2400,7 +2369,6 @@ class Users extends CI_Controller {
 
         }elseif($paisS!=$urlCountry && $paisS!=''){
             $this->session->sess_destroy();
-            $this->session->unset_userdata($this->session->all_userdata());
             redirect($urlCountry.'/login');
         }elseif($this->input->is_ajax_request()){
             $this->output->set_content_type('application/json')->set_output(json_encode( array('ERROR' => lang('ERROR_(-29)'), "rc"=> '-29' )));
@@ -2477,7 +2445,6 @@ class Users extends CI_Controller {
             }else{
                 if($response->rc==-61 || $response->rc==-29){
                     $this->session->sess_destroy();
-                    $this->session->unset_userdata($this->session->all_userdata());
                     $codigoError = array('ERROR' => lang('ERROR_(-29)'), "rc"=> $response->rc);
                 }
                 else{
@@ -2574,7 +2541,6 @@ class Users extends CI_Controller {
 
         }elseif($paisS!=$urlCountry && $paisS!=''){
             $this->session->sess_destroy();
-            $this->session->unset_userdata($this->session->all_userdata());
             redirect($urlCountry.'/login');
         }elseif($this->input->is_ajax_request()){
             $this->output->set_content_type('application/json')->set_output(json_encode( array('ERROR' => lang('ERROR_(-29)'), "rc"=> '-29' )));
@@ -2644,7 +2610,6 @@ class Users extends CI_Controller {
             }else{
                 if($response->rc==-61 || $response->rc==-29){
                     $this->session->sess_destroy();
-                    $this->session->unset_userdata($this->session->all_userdata());
                     $codigoError = array('ERROR' => lang('ERROR_(-29)'), "rc"=> $response->rc);
                 }
                 elseif ($response->rc==-167) {
@@ -2692,7 +2657,6 @@ class Users extends CI_Controller {
 
 		        } elseif ($paisS != $urlCountry && $paisS != '') {
 		            $this->session->sess_destroy();
-		            $this->session->unset_userdata($this->session->all_userdata());
 		            redirect($urlCountry . '/login');
 		        } elseif ($this->input->is_ajax_request()) {
 		            $this->output->set_content_type('application/json')->set_output(json_encode(array('ERROR' => '-29')));
@@ -2747,7 +2711,6 @@ class Users extends CI_Controller {
 												if($response->rc==-61 || $response->rc==-29){
 
 														$codigoError = array('mensaje' => lang('ERROR_(-29)'), "rc"=> "-29");
-														$this->session->unset_userdata($this->session->all_userdata());
 														$this->session->sess_destroy();
 														return $codigoError;
 
@@ -2790,7 +2753,6 @@ public function NotificacionesEnvio($urlCountry) {
 
 			} elseif ($paisS != $urlCountry && $paisS != '') {
 					$this->session->sess_destroy();
-					$this->session->unset_userdata($this->session->all_userdata());
 					redirect($urlCountry . '/login');
 			} elseif ($this->input->is_ajax_request()) {
 					$this->output->set_content_type('application/json')->set_output(json_encode(array('ERROR' => '-29')));
@@ -2843,7 +2805,6 @@ public function NotificacionesEnvio($urlCountry) {
 									if($response->rc==-61 || $response->rc==-29){
 
 											$codigoError = array('mensaje' => lang('ERROR_(-29)'), "rc"=> "-29");
-											$this->session->unset_userdata($this->session->all_userdata());
 											$this->session->sess_destroy();
 											return $codigoError;
 

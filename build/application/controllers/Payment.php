@@ -251,7 +251,6 @@ class Payment extends CI_Controller {
 			";
 		}   else {
 			$this->session->sess_destroy();
-			$this->session->unset_userdata($this->session->all_userdata());
 			redirect($this->urlCountry . '/login');
 		}
 	}

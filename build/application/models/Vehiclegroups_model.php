@@ -126,7 +126,6 @@ class VehicleGroups_Model extends CI_Model {
 									]
 							];
 							$this->session->sess_destroy();
-							$this->session->unset_userdata($this->session->all_userdata());
 							break;
 					default:
 							$response = [
@@ -138,7 +137,6 @@ class VehicleGroups_Model extends CI_Model {
 									]
 							];
 							$this->session->sess_destroy();
-							$this->session->unset_userdata($this->session->all_userdata());
 			}
 
 			return $response;
@@ -228,7 +226,6 @@ class VehicleGroups_Model extends CI_Model {
 									'msg' => lang('ERROR_(-29)')
 							];
 							$this->session->sess_destroy();
-							$this->session->unset_userdata($this->session->all_userdata());
 							break;
 					default:
 							$response = [
@@ -237,7 +234,6 @@ class VehicleGroups_Model extends CI_Model {
 									'msg' => lang('ERROR_GENERICO_USER')
 							];
 							$this->session->sess_destroy();
-							$this->session->unset_userdata($this->session->all_userdata());
 			}
 
 			return $response;

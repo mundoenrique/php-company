@@ -7,7 +7,7 @@ class Users_Model extends CI_Model {
 	{
 		log_message('INFO', 'NOVO Users Model Class Initialized');
 	}
-	
+
 	public function callWSConsultarSucursales($urlCountry ,$rif, $paginaActual, $cantItems, $paginar){
 
 		$this->lang->load('erroreseol');
@@ -65,7 +65,6 @@ class Users_Model extends CI_Model {
 			}else{
 				if($response->rc==-61 || $response->rc==-29){
 					$this->session->sess_destroy();
-					$this->session->unset_userdata($this->session->all_userdata());
 					$codigoError = array('ERROR' => lang('ERROR_(-29)'), "rc"=> $response->rc);
 				}else if($response->rc==-150){
 					$codigoError = array('ERROR' => lang('ERROR_(-150)'), "rc"=> $response->rc, 'paisTo'=>$response->paisTo);
@@ -87,5 +86,5 @@ class Users_Model extends CI_Model {
 			return $codigoError = array('ERROR' => lang('ERROR_GENERICO_USER'));
 		}
 
-	}	
+	}
 }

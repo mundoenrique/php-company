@@ -26,19 +26,19 @@ class Dashboard extends CI_Controller {
 		$this->load->library('parser');
 		$logged_in = $this->session->userdata('logged_in');
 
-		$menu = array(
-			'menuArrayPorProducto' => NULL,
-			'acrifS' => NULL,
-			'acnomciaS' => NULL,
-			'acrazonsocialS' => NULL,
-			'acdescS' => NULL,
-			'accodciaS' => NULL,
-			'accodgrupoeS'=> NULL,
-			'idProductoS'=> NULL,
-			'nombreProductoS' => NULL,
-			'marcaProductoS' => NULL,
-			'mesesVencimiento' => NULL
-		);
+		$menu = [
+			'menuArrayPorProducto',
+			'acrifS',
+			'acnomciaS',
+			'acrazonsocialS',
+			'acdescS',
+			'accodciaS',
+			'accodgrupoeS',
+			'idProductoS',
+			'nombreProductoS',
+			'marcaProductoS',
+			'mesesVencimiento'
+		];
 		$this->session->unset_userdata($menu);
 
 		if($this->session->userdata('cl_addr') != np_Hoplite_Encryption($_SERVER["REMOTE_ADDR"]) ){
@@ -78,7 +78,6 @@ class Dashboard extends CI_Controller {
 			$this->parser->parse('layouts/layout-a', $datos);
 		}elseif($paisS!=$urlCountry && $paisS!=""){
 			$this->session->sess_destroy();
-			$this->session->unset_userdata($this->session->all_userdata());
 			redirect($urlCountry.'/login');
 		}else{
 			redirect($urlCountry.'/login');
@@ -118,7 +117,6 @@ class Dashboard extends CI_Controller {
 
 		}elseif($paisS!=$urlCountry && $paisS!=""){
 			$this->session->sess_destroy();
-			$this->session->unset_userdata($this->session->all_userdata());
 			redirect($urlCountry.'/login');
 		}elseif($this->input->is_ajax_request()){
 			log_message('info','ajax call');
@@ -182,7 +180,6 @@ class Dashboard extends CI_Controller {
 
 				if($response->rc==-61 || $response->rc==-29){
 					$this->session->sess_destroy();
-					$this->session->unset_userdata($this->session->all_userdata());
 					return array('ERROR' => '-29' );
 
 				}elseif ($response->rc==-150) {
@@ -242,7 +239,6 @@ class Dashboard extends CI_Controller {
 
 		}elseif($paisS!=$urlCountry && $paisS!=""){
 			$this->session->sess_destroy();
-			$this->session->unset_userdata($this->session->all_userdata());
 			redirect($urlCountry.'/login');
 		}elseif($this->input->is_ajax_request()){
 			log_message('info','ajax call');
@@ -282,7 +278,6 @@ class Dashboard extends CI_Controller {
 			$this->output->set_content_type('application/json')->set_output(json_encode($productos,JSON_UNESCAPED_UNICODE));
 		}elseif($paisS!=$urlCountry && $paisS!=''){
 			$this->session->sess_destroy();
-			$this->session->unset_userdata($this->session->all_userdata());
 			redirect($urlCountry.'/login');
 		}elseif($this->input->is_ajax_request()){
 			log_message('info','ajax call');
@@ -323,7 +318,6 @@ class Dashboard extends CI_Controller {
 			$this->output->set_content_type('application/json')->set_output(json_encode($productos,JSON_UNESCAPED_UNICODE));
 		}elseif($paisS!=$urlCountry && $paisS!=''){
 			$this->session->sess_destroy();
-			$this->session->unset_userdata($this->session->all_userdata());
 			redirect($urlCountry.'/login');
 		}elseif($this->input->is_ajax_request()){
 			log_message('info','ajax call');
@@ -430,7 +424,6 @@ class Dashboard extends CI_Controller {
 			$this->output->set_content_type('application/json')->set_output(json_encode($respuesta,JSON_UNESCAPED_UNICODE));
 		}elseif($paisS!=$urlCountry && $paisS!=""){
 			$this->session->sess_destroy();
-			$this->session->unset_userdata($this->session->all_userdata());
 			redirect($urlCountry.'/login');
 		}else{
 			redirect($urlCountry.'/login');
@@ -452,9 +445,7 @@ class Dashboard extends CI_Controller {
 		$this->lang->load('erroreseol');
 		$logged_in = $this->session->userdata('logged_in');
 
-		$menu = array(
-			'menuArrayPorProducto' => NULL,
-		);
+		$menu = ['menuArrayPorProducto'];
 		$this->session->unset_userdata($menu);
 
 		$paisS = $this->session->userdata('pais');
@@ -539,7 +530,6 @@ class Dashboard extends CI_Controller {
 			}
 		}elseif($paisS!=$urlCountry && $paisS!=""){
 			$this->session->sess_destroy();
-			$this->session->unset_userdata($this->session->all_userdata());
 			redirect($urlCountry.'/login');
 		}else{
 			redirect($urlCountry.'/login');
@@ -665,7 +655,6 @@ class Dashboard extends CI_Controller {
 			$this->parser->parse('layouts/layout-b', $datos);
 		}elseif($paisS!=$urlCountry && $paisS!=""){
 			$this->session->sess_destroy();
-			$this->session->unset_userdata($this->session->all_userdata());
 			redirect($urlCountry.'/login');
 		}else{
 			redirect($urlCountry.'/login');
@@ -725,7 +714,6 @@ class Dashboard extends CI_Controller {
 
 				if($response->rc==-61 || $response->rc==-29){
 					$this->session->sess_destroy();
-					$this->session->unset_userdata($this->session->all_userdata());
 					return array('ERROR' => '-29' );
 
 				}elseif ($response->rc==-150) {
@@ -803,7 +791,6 @@ class Dashboard extends CI_Controller {
 			}else{
 				if($response->rc==-61 || $response->rc==-29){
 					$this->session->sess_destroy();
-					$this->session->unset_userdata($this->session->all_userdata());
 					return array('ERROR' => '-29' );
 				}else{
 					$codigoError = lang('ERROR_('.$response->rc.')');
@@ -872,7 +859,6 @@ class Dashboard extends CI_Controller {
 			}else{
 				if($response->rc==-61 || $response->rc==-29){
 					$this->session->sess_destroy();
-					$this->session->unset_userdata($this->session->all_userdata());
 					return array('ERROR' => '-29' );
 				}elseif($response->rc==-138){
 					$codigoError = array('ERROR' => lang('PRODUCTOS-138').ucwords( mb_strtolower($this->session->userdata('acnomciaS')) ));
@@ -942,7 +928,6 @@ class Dashboard extends CI_Controller {
 			}else{
 				if($response->rc==-61 || $response->rc==-29){
 					$this->session->sess_destroy();
-					$this->session->unset_userdata($this->session->all_userdata());
 					return array('ERROR' => '-29' );
 				}elseif($response->rc==-138){
 					$codigoError = array('ERROR' => lang('PRODUCTOS-138').ucwords( mb_strtolower($this->session->userdata('acnomciaS')) ));
@@ -1032,7 +1017,6 @@ class Dashboard extends CI_Controller {
 
 				if($response->rc==-61 || $response->rc==-29){
 					$this->session->sess_destroy();
-					$this->session->unset_userdata($this->session->all_userdata());
 					return $codigoError = array('ERROR' => '-29' );
 				}else{
 					$codigoError = lang('ERROR_('.$response->rc.')');
@@ -1095,7 +1079,6 @@ class Dashboard extends CI_Controller {
 			$this->parser->parse('layouts/layout-b', $datos);
 		}elseif($paisS!=$urlCountry && $paisS!=""){
 			$this->session->sess_destroy();
-			$this->session->unset_userdata($this->session->all_userdata());
 			redirect($urlCountry.'/login');
 		}else{
 			redirect($urlCountry.'/login');
