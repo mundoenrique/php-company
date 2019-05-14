@@ -1,4 +1,5 @@
 <?php
+defined('BASEPATH') OR exit('No direct script access allowed');
 //CARGA DE LOTES
 $lang['TITULO_LOTES_CARGA']= "Carga de Lotes";
 $lang['TITULO_NUEVOS_LOTES']= "Nuevos Lotes";

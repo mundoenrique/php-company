@@ -1,4 +1,5 @@
-<?php
+<?php 
+defined('BASEPATH') OR exit('No direct script access allowed'); 
 
 $lang['required']			= "The %s field is required.";
 $lang['isset']				= "The %s field must have a value.";

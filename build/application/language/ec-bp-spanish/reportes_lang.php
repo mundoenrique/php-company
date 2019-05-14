@@ -1,4 +1,5 @@
-<?
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
 
 //TITULOS REPORTES
 $lang['TITULO_ACTIVIDAD_USUARIO']= "Actividad por Usuario";

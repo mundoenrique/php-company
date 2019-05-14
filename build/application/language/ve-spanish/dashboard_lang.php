@@ -1,5 +1,6 @@
 <?php
-$lang['SYSTEM_NAME']= "Empresas Online Venezuela";
+defined('BASEPATH') OR exit('No direct script access allowed');
+$lang['SYSTEM_NAME']= "Conexión Empresas Online Venezuela";
 $lang['LAST_SESSION']="Última sesión";
 $lang['ID_FISCAL']= "RIF.";
 $lang['ID_PERSONA']= "Cédula";

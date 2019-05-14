@@ -1,4 +1,5 @@
-<?php
+<?php 
+defined('BASEPATH') OR exit('No direct script access allowed');
 // Page title
 $lang['TITLE_VISA'] = "Controles de Pago";
 $lang['TITLE_VISA_DETALLE'] = "Detalle - Controles de Pago";
