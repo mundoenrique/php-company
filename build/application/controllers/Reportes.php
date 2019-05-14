@@ -10,6 +10,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 * @author     Carla García <neiryerit@gmail.com>
 */
 class Reportes extends CI_Controller {
+
+	public function __construct()
+	{
+		parent:: __construct();
+		$this->load->helper('security');
+	}
 	/**
 	 * Pantalla para el reporte de cuenta concentradora.
 	 *
