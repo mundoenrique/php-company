@@ -1,5 +1,10 @@
-<?php defined('BASEPATH') or exit('No direct script access allowed');
-
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+/**
+ * @info Módelo para la información del usuario
+ * @author J. Enrique Peñaloza Piñero
+ *
+ */
 class Novo_User_Model extends NOVO_Model {
 
 	public function __construct()
@@ -58,7 +63,7 @@ class Novo_User_Model extends NOVO_Model {
 					$this->session->set_userdata($userData);
 					$this->response->code = 0;
 					$this->response->msg = 'Ingreso exitoso';
-					$this->response->data = base_url('dashboard');
+					$this->response->data = base_url('empresas');
 					break;
 				case -2:
 				case -185:
@@ -138,100 +143,11 @@ class Novo_User_Model extends NOVO_Model {
 							'text'=> 'Aceptar',
 							'link'=> [
 								'who'=> 'User',
-								'where'=> 'finishSession'
+								'where'=> 'FinishSession'
 							],
 							'action'=> 'logout'
 						]
 					];
-					break;
-			}
-		}
-
-		return $this->response;
-	}
-	/**
-	 * @info Método para el cierre de sesión
-	 * @author J. Enrique Peñaloza Piñero
-	 */
-	public function callWs_finishSession_User($dataRequest = FALSE)
-	{
-		log_message('INFO', 'NOVO User Model: finishSession method Initialized');
-		$user = $dataRequest ? mb_strtoupper($dataRequest->user) : $this->session->userdata('userName');
-		$this->className = 'com.novo.objects.TOs.UsuarioTO';
-
-		$this->dataAccessLog->userName = $user;
-		$this->dataAccessLog->modulo = 'logout';
-		$this->dataAccessLog->function = 'logout';
-		$this->dataAccessLog->operation = 'desconectarUsuario';
-
-		$this->dataRequest->idUsuario = $user;
-		$this->dataRequest->codigoGrupo = $this->session->userdata('codigoGrupo');
-
-		$response = $this->sendToService('finishSession');
-
-		if($this->isResponseRc !== FALSE) {
-			switch($this->isResponseRc) {
-				case 0:
-					$this->response->code = 0;
-					$this->response->msg = 'Sessión finalizada exitosamente';
-					$this->response->data = 'finishSession';
-					break;
-				}
-			}
-
-		$this->session->sess_destroy();
-		return $this->response;
-	}
-	/**
-	 * @info Método para el cambio de Contraseña
-	 * @author J. Enrique Peñaloza Piñero
-	 */
-	public function CallWs_ChangePassword_User($dataRequest)
-	{
-		log_message('INFO', 'NOVO User Model: ChangePassword Method Initialized');
-		$this->className = 'com.novo.objects.TOs.UsuarioTO';
-
-		$this->dataAccessLog->modulo = 'login';
-		$this->dataAccessLog->function = 'login';
-		$this->dataAccessLog->operation = 'cambioClave';
-
-		$this->dataRequest->userName = $this->session->userdata('userName');
-		$this->dataRequest->passwordOld = $dataRequest->currentPass;
-		$this->dataRequest->password = $dataRequest->newPass;
-
-		$changePassType = $this->session->flashdata('changePassword');
-
-		$response = $this->sendToService('ChangePassword');
-
-		if($this->isResponseRc !== FALSE) {
-			switch($this->isResponseRc) {
-				case 0:
-					$this->callWs_finishSession_User();
-					$this->response->code = 0;
-					$this->response->msg = 'La contraseña fue cambiada exitosamente.<br>Por motivos de seguridad es necesario que inicie sesión nuevamente.';
-					$this->response->icon = 'ui-icon-circle-check';
-					$this->response->data = [
-						'btn1'=> [
-							'text'=> 'Continuar',
-							'link'=> base_url('inicio'),
-							'action'=> 'redirect'
-						]
-					];
-					break;
-				case -4:
-				case -22:
-					$this->response->code = 1;
-					$this->response->icon = 'ui-icon-alert';
-					$this->response->msg = lang('ERROR_('.$this->isResponseRc.')');
-					$this->response->data = [
-						'btn1'=> [
-							'text'=> 'Aceptar',
-							'link'=> FALSE,
-							'action'=> 'close'
-						]
-					];
-					$this->session->set_flashdata('changePassword', $changePassType);
-					$this->session->set_flashdata('userType', $this->session->flashdata('userType'));
 					break;
 			}
 		}
@@ -310,4 +226,94 @@ class Novo_User_Model extends NOVO_Model {
 
 		return $this->response;
 	}
+	/**
+	 * @info Método para el cambio de Contraseña
+	 * @author J. Enrique Peñaloza Piñero
+	 */
+	public function CallWs_ChangePassword_User($dataRequest)
+	{
+		log_message('INFO', 'NOVO User Model: ChangePassword Method Initialized');
+		$this->className = 'com.novo.objects.TOs.UsuarioTO';
+
+		$this->dataAccessLog->modulo = 'login';
+		$this->dataAccessLog->function = 'login';
+		$this->dataAccessLog->operation = 'cambioClave';
+
+		$this->dataRequest->userName = $this->session->userdata('userName');
+		$this->dataRequest->passwordOld = $dataRequest->currentPass;
+		$this->dataRequest->password = $dataRequest->newPass;
+
+		$changePassType = $this->session->flashdata('changePassword');
+
+		$response = $this->sendToService('ChangePassword');
+
+		if($this->isResponseRc !== FALSE) {
+			switch($this->isResponseRc) {
+				case 0:
+					$this->callWs_FinishSession_User();
+					$this->response->code = 0;
+					$this->response->msg = 'La contraseña fue cambiada exitosamente.<br>Por motivos de seguridad es necesario que inicie sesión nuevamente.';
+					$this->response->icon = 'ui-icon-circle-check';
+					$this->response->data = [
+						'btn1'=> [
+							'text'=> 'Continuar',
+							'link'=> base_url('inicio'),
+							'action'=> 'redirect'
+						]
+					];
+					break;
+				case -4:
+				case -22:
+					$this->response->code = 1;
+					$this->response->icon = 'ui-icon-alert';
+					$this->response->msg = lang('ERROR_('.$this->isResponseRc.')');
+					$this->response->data = [
+						'btn1'=> [
+							'text'=> 'Aceptar',
+							'link'=> FALSE,
+							'action'=> 'close'
+						]
+					];
+					$this->session->set_flashdata('changePassword', $changePassType);
+					$this->session->set_flashdata('userType', $this->session->flashdata('userType'));
+					break;
+			}
+		}
+
+		return $this->response;
+	}
+	/**
+	 * @info Método para el cierre de sesión
+	 * @author J. Enrique Peñaloza Piñero
+	 */
+	public function callWs_FinishSession_User($dataRequest = FALSE)
+	{
+		log_message('INFO', 'NOVO User Model: FinishSession method Initialized');
+		$user = $dataRequest ? mb_strtoupper($dataRequest->user) : $this->session->userdata('userName');
+		$this->className = 'com.novo.objects.TOs.UsuarioTO';
+
+		$this->dataAccessLog->userName = $user;
+		$this->dataAccessLog->modulo = 'logout';
+		$this->dataAccessLog->function = 'logout';
+		$this->dataAccessLog->operation = 'desconectarUsuario';
+
+		$this->dataRequest->idUsuario = $user;
+		$this->dataRequest->codigoGrupo = $this->session->userdata('codigoGrupo');
+
+		$response = $this->sendToService('FinishSession');
+
+		if($this->isResponseRc !== FALSE) {
+			switch($this->isResponseRc) {
+				case 0:
+					$this->response->code = 0;
+					$this->response->msg = 'Sessión finalizada exitosamente';
+					$this->response->data = 'finishSession';
+					break;
+				}
+			}
+
+		$this->session->sess_destroy();
+		return $this->response;
+	}
+
 }
