@@ -1,4 +1,5 @@
-<?php defined('BASEPATH') or exit('No direct script access allowed');
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * CodeIgniter XML Helpers
  *
@@ -122,7 +123,7 @@ if(!function_exists('maskString')) {
 }
 
 if(!function_exists('createMenu')) {
-	function createMenu($menuP,$country) {
+	function createMenu($menuP) {
 		$menuData = unserialize($menuP);
 		$levelOneOpts = [];
 		if($menuData==NULL||!isset($menuData))
@@ -136,14 +137,14 @@ if(!function_exists('createMenu')) {
 					$seeLotFact = TRUE;
 				if($module->idModulo==='LOTFAC'&&!$seeLotFact)
 					continue;
-				$submenuOpt = [
-					'route' => menuRoute($module->idModulo, $seeLotFact, $country),
+				$moduleOpt = [
+					'route' => menuRoute($module->idModulo, $seeLotFact),
 					'text' => lang($module->idModulo)
 				];
 				if($module->idModulo==='TICARG'||$module->idModulo==='TIINVN')
-					$levelThreeOpts[] = $submenuOpt;
+					$levelThreeOpts[] = $moduleOpt;
 				else
-					$levelTwoOpts[] = $submenuOpt;
+					$levelTwoOpts[] = $moduleOpt;
 			}
 			if(!empty($levelThreeOpts))
 				$levelTwoOpts[] = [
@@ -175,7 +176,10 @@ if(!function_exists('menuIcon')) {
 }
 
 if(!function_exists('menuRoute')) {
-	function menuRoute($functionId, $seeLotFact, $country) {
+	function menuRoute($functionId, $seeLotFact) {
+		$CI = &get_instance();
+		$country = $CI->config->item('country');
+		$countryUri = $CI->config->item('countryUri');
 		switch ($functionId) {
 			case 'TEBCAR': return base_url($country."/lotes/carga");
 			case 'TEBAUT': return base_url($country."/lotes/autorizacion");

@@ -1,4 +1,5 @@
-<?php
+<?php 
+defined('BASEPATH') OR exit('No direct script access allowed');
 $lang['ERROR_GENERICO_USER']= "Error en Sistema, por favor intente nuevamente."; // cuando ocurre algun error que el usuario no deberia ver (los sgts con el prefix "Error")
 $lang['ERROR_CAMBIO_CLAVE']= "Error en el formulario.";
 $lang['ERROR_NO_DATA'] = "No se encontraron datos";

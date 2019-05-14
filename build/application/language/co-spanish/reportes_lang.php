@@ -1,5 +1,5 @@
-<?
-
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
 //TITULOS REPORTES
 $lang['TITULO_ACTIVIDAD_USUARIO']= "Actividad por Usuario";
 $lang['TITULO_DEPOSITOS_GARANTIA']= "Cuenta Concentradora";

@@ -1,4 +1,5 @@
 <?php
+defined('BASEPATH') OR exit('No direct script access allowed');
 $lang['TITULO_TARJETAHABIENTES']="Tarjetahabientes";
 $lang['TITULO_CONSULTA_OS']="Órdenes de servicio";
 $lang['TITULO_CRITERIOSBUSQ']="Criterio de búsqueda";

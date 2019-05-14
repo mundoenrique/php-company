@@ -1,4 +1,5 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed');
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * @info Libreria para el cifrtado y descifrado de datos
  * @author J. Enrique Peñaloza Piñero

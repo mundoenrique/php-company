@@ -4516,6 +4516,10 @@ tr.GC-first th {
 	min-width: 100px !important;
 }
 
+.table-text-aut td.bp-min-width {
+	min-width: 75px;
+}
+
 #tabs {
 	float: left;
 }

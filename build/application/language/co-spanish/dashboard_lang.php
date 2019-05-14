@@ -1,4 +1,5 @@
 <?php
+defined('BASEPATH') OR exit('No direct script access allowed');
 $lang['SYSTEM_NAME']= "Conexión Empresas Online Colombia";
 $lang['LAST_SESSION']="Última sesión";
 $lang['ID_FISCAL']= "NIT.";
