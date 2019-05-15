@@ -1,19 +1,19 @@
-$(function(){
+$(function () {
 
 	var empty = $('#empty').val()
 	if (empty != 'nonEmpty') {
 		$("<div><h3>Existe uno más lotes sin retenciones asociadas</h3><h5>" + empty + "</h5></div>").dialog({
-			title:"Retenciones",
-			modal:true,
-			resizable:false,
+			title: "Retenciones",
+			modal: true,
+			resizable: false,
 			draggable: false,
 			dialogClass: 'hide-close',
-			close: function(){
+			close: function () {
 				$(this).dialog('destroy');
 				$('#confirmarPreOSL').show();
 				$('#cancelar-OS').show();
 			},
-			buttons:{
+			buttons: {
 				Continuar: function () {
 					$(this).dialog('destroy');
 					$('#confirmarPreOSL').show();
@@ -21,7 +21,7 @@ $(function(){
 				}
 			}
 		});
-	} else{
+	} else {
 		$('#confirmarPreOSL').show();
 		$('#cancelar-OS').show();
 	}
@@ -33,49 +33,56 @@ $(function(){
 
 	// BOTON CONFIRMAR -- LLAMA ORDEN DE SERVICIO
 
-	$("#confirmarPreOSL").on("click",function(){
+	$("#confirmarPreOSL").on("click", function () {
 		var l = $("#tempIdOrdenL").val();
 		var lnf = $("#tempIdOrdenLNF").val();
-
+		var ceo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
 		$aux = $('#loading').dialog({
-			title:'Confirmar cálculo orden de servicio',
+			title: 'Confirmar cálculo orden de servicio',
 			modal: true,
-			resizable:false,
+			resizable: false,
 			draggable: false,
 			dialogClass: 'hide-close'
 		});
-		$.post(baseURL+api+isoPais+"/lotes/confirmarPreOSL", { "tempIdOrdenL": l, "tempIdOrdenLNF": lnf })
-			.done(function(data) {
+		$.post(baseURL + api + isoPais + "/lotes/confirmarPreOSL", {
+				"tempIdOrdenL": l,
+				"tempIdOrdenLNF": lnf,
+				ceo_name: ceo_cook
+			})
+			.done(function (data) {
 				$aux.dialog('destroy');
-				var title, message, site = null, code ='';
+				var title, message, site = null,
+					code = '';
 
-				if(!data.ERROR) {
+				if (!data.ERROR) {
 					title = 'Orden de Servicio emitida';
 					message = '<div>';
-					message+= 	'La orden de Servicio ha sido generada con éxito';
-					if(data.costoLog) {
-						message+=	' y deberá ser pagada en los <b>próximos '+data.daysPay+' días</b> de lo contrario ';
-						message+= 'el sistema no le permitirá autorizar nuevos lotes';
+					message += 'La orden de Servicio ha sido generada con éxito';
+					if (data.costoLog) {
+						message += ' y deberá ser pagada en los <b>próximos ' + data.daysPay + ' días</b> de lo contrario ';
+						message += 'el sistema no le permitirá autorizar nuevos lotes';
 					}
-					message+= 	'.';
-					message+= '</div>';
-					if(data.moduloOS){
+					message += '.';
+					message += '</div>';
+					if (data.moduloOS) {
 						site = 'form#toOS';
-						$("#data-confirm").attr('value',data.ordenes);
+						$("#data-confirm").attr('value', data.ordenes);
 
 					} else {
-						message+= '<h5>No tiene permitido gestionar ordenes de servicio.</h5>';
+						message += '<h5>No tiene permitido gestionar ordenes de servicio.</h5>';
 						site = '#viewAutorizar';
 
 					}
 
 				} else {
 
-					if(data.ERROR == '-29') {
+					if (data.ERROR == '-29') {
 						code = 3;
 						title = data.title;
 						message = data.msg;
-					} else if(data.ERROR == '-56') {
+					} else if (data.ERROR == '-56') {
 						title = 'Error de facturación';
 						message = data.msg
 
@@ -95,28 +102,28 @@ $(function(){
 
 	// MOSTRAR/OCULTAR LOTES SEGUN OS
 
-	$("#tabla-datos-general").on("click","#ver_lotes", function(){
+	$("#tabla-datos-general").on("click", "#ver_lotes", function () {
 
 		var OS = $(this).parents("tr").attr('id');
-		var $lotes = $("#tabla-datos-general").find("."+OS);
+		var $lotes = $("#tabla-datos-general").find("." + OS);
 
 		$lotes.is(":visible") ? $lotes.fadeOut("slow") : $lotes.fadeIn("slow");
-		$('.OSinfo').not("."+OS).hide();
+		$('.OSinfo').not("." + OS).hide();
 	});
 
-	$("#tabla-datos-general").on("click",".viewLo", function(){
+	$("#tabla-datos-general").on("click", ".viewLo", function () {
 
 		var idLote = $(this).attr('id');
 
-		$('form#detalle_lote').append('<input type="hidden" name="data-lote" value="'+idLote+'" />');
+		$('form#detalle_lote').append('<input type="hidden" name="data-lote" value="' + idLote + '" />');
 		$("#detalle_lote").submit();
 
 	});
 
 
-	function notificacion(titulo, mensaje, sitio, code){
+	function notificacion(titulo, mensaje, sitio, code) {
 
-		var canvas = "<div>"+mensaje+"</div>";
+		var canvas = "<div>" + mensaje + "</div>";
 
 		$(canvas).dialog({
 			title: titulo,
@@ -128,12 +135,12 @@ $(function(){
 			draggable: false,
 			dialogClass: 'hide-close',
 			buttons: {
-				Aceptar: function(){
+				Aceptar: function () {
 					$(this).dialog("destroy");
-					if(sitio){
+					if (sitio) {
 						$(sitio).submit();
 					}
-					if(code === 3) {
+					if (code === 3) {
 						$(location).attr('href', baseURL + isoPais + '/login');
 					}
 				}
@@ -141,43 +148,11 @@ $(function(){
 		});
 	}
 
-	$('#cancelar-OS').on('click', function() {
+	$('#cancelar-OS').on('click', function () {
 		$('form#viewAutorizar').append($('#tempIdOrdenL'));
 		$("#viewAutorizar").submit();
 
 	});
-
-	// var paginar = function($tabla){
-	// 	var tabla = $tabla.dataTable( {
-	//          "iDisplayLength": 10,
-	//          'bDestroy':true,
-	//          "sPaginationType": "full_numbers",
-	//          "oLanguage": {
-	//            "sProcessing":     "Procesando...",
-	//            "sLengthMenu":     "Mostrar _MENU_ registros",
-	//            "sZeroRecords":    "No se encontraron resultados",
-	//            "sEmptyTable":     "Ningún dato disponible en esta tabla",
-	//            "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-	//            "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
-	//            "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
-	//            "sInfoPostFix":    "",
-	//            "sSearch":         "Buscar:",
-	//            "sUrl":            "",
-	//            "sInfoThousands":  ",",
-	//            "sLoadingRecords": "Cargando...",
-	//            "oPaginate": {
-	//                "sFirst":    "<<",
-	//                "sLast":     ">>",
-	//                "sNext":     ">",
-	//                "sPrevious": "<"
-	//            }
-	//          }
-	//         } );
-	// 	return tabla;
-	// }
-
-//	paginar($('#tabla-datos-general'));
-//	paginar($('#tablelotesNF'));
 
 
 }); // fin document ready

@@ -60,8 +60,4 @@ $(function(){
 		getReporteTarjetas();
 	});
 
-	/*$.post(baseURL+isoPais+'/lotes/innominada/generarReporteTarjetasInnominadas').done( function(data){
-
-	});*/
-
 })
