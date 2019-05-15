@@ -346,9 +346,11 @@ function paginar(){
 
  $('#loading').show();
  $('#more').hide();
-
+	var ceo_cook = decodeURIComponent(
+		document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+	);
   $.post(baseURL+api+isoPais+"/empresas/lista",
- { 'data-filtroEmpresas':dash_var.filtro,'data-paginar':dash_var.paginar, 'data-tamanoPagina':dash_var.cantEmp, 'data-paginaActual':dash_var.pgActual},
+ { 'data-filtroEmpresas':dash_var.filtro,'data-paginar':dash_var.paginar, 'data-tamanoPagina':dash_var.cantEmp, 'data-paginaActual':dash_var.pgActual, ceo_name: ceo_cook},
           function(data){
 
           if(!data.ERROR){
