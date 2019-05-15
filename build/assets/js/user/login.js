@@ -39,7 +39,7 @@ $(function() {
 })
 
 function ingresar(user, text) {
-	verb = "GET"; who = 'User'; where = 'Login'; data = user;
+	verb = "POST"; who = 'User'; where = 'Login'; data = user;
 	callNovoCore(verb, who, where, data, function(response) {
 		var dataResponse = response.data
 		switch(response.code) {

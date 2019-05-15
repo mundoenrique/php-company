@@ -42,6 +42,9 @@ $('input[type=text], input[type=password], input[type=textarea]').attr('autocomp
 
 function callNovoCore (verb, who, where, data, _response_) {
 	console.log('Model:', who, 'Method:', where, 'Request:', data);
+	var ceo_cook = decodeURIComponent(
+		document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+	);
 	var dataRequest = JSON.stringify({
 		who: who,
 		where: where,
@@ -50,7 +53,7 @@ function callNovoCore (verb, who, where, data, _response_) {
 	$.ajax({
 		method: verb,
 		url: baseURL + 'async-call',
-		data: {request: btoa(dataRequest), novo_name: $('#novo_name').val()},
+		data: {request: btoa(dataRequest), ceo_name: ceo_cook},
 		context: document.body,
 		dataType: 'json',
 	}).done(function(response, status) {
