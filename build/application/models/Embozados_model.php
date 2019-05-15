@@ -60,7 +60,7 @@ class Embozados_model extends CI_Model {
 
 		if(isset($jsonResponse->rc)) {
 			$data = '';
-			 $jsonResponse->rc = -58;
+
 			switch($jsonResponse->rc) {
 
 				case 0:
@@ -95,25 +95,7 @@ class Embozados_model extends CI_Model {
 			'msg' => isset($msg) ? $msg : '',
 			'data' => isset($data) ? $data : ''
 		];
-
-
-
 		return $response;
-		// if($prueba){
-		// 	log_message('info','aprobado '.$prueba->rc."/".$prueba->msg);
-		// 	if($prueba->rc==0){
-		// 			return $prueba;
-		// 	}
-		// }
-		// log_message('INFO', '[' . $this->userName . '] RESPONSE  --  --> {"rc":' .
-		// 	json_encode($responseSerV->rc) . ',"msg":' . json_encode($responseWs->msg) . '}');
-
-		// if($responseSerV->rc === '0') {
-		// log_message('INFO', '[' . $this->userName . '] RESPONSE BEAN -- callWsCardControls --> ' .
-		// 				$responseSerV->bean);
-		// }
-
-		//return $nlote;
 
 	}
 }
