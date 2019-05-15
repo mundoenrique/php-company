@@ -41,11 +41,16 @@ $(function(){
 
 
     var enviar = function(jsonData){
+			var ceo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+				);
+				jsonData.ceo_name = ceo_cook;
         $aux = $("#loading").dialog({
             title:'Procesando solicitud',
             modal:true,
             close: function(){$(this).dialog('destroy')},
-            resizable:false });
+						resizable:false });
+
         $.post(baseURL + isoPais+'/users/recuperar-pass', jsonData ).done(function( data ) {
             if (data == "validate") {
                 $aux.dialog('destroy');
