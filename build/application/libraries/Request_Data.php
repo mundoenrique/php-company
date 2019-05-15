@@ -5,7 +5,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @author J. Enrique Peñaloza Piñero
  *
  */
-class Request {
+
+class Request_Data {
 	private $CI;
 	private $NOVO_Model;
 
@@ -13,7 +14,6 @@ class Request {
 	{
 		log_message('INFO', 'NOVO Request Library Class Initialized');
 		$this->CI = &get_instance();
-		$this->NOVO_Model = new NOVO_Model();
 	}
 	/**
 	 * @info Método para obtener la lista de empresas asociadas al usuario
@@ -21,6 +21,7 @@ class Request {
 	 */
 	public function getEnterprises($dataRequest)
 	{
+		$this->NOVO_Model = new NOVO_Model();
 		$this->NOVO_Model->className = "";
 	}
 }
