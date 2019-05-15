@@ -149,7 +149,7 @@ button {
 #head-wrapper {
 	height: 29px;
 	margin: 12px auto;
-	width: 940px;
+	width: 1000px;
 }
 
 #wrapper {
@@ -1298,7 +1298,7 @@ span#more-info a p b {
 }
 
 .filter {
-	width: 940px;
+	width: 1000px;
 	height: 51px;
 	float: left;
 	clear: both;
@@ -1459,12 +1459,12 @@ button.r-button {
 }
 
 #content-condiciones {
-	width: 940px;
+	width: 1000px;
 	padding: 20px 10px;
 }
 
 #content-privacidad {
-	width: 940px;
+	width: 1000px;
 	padding: 20px 10px;
 	float: left;
 }
