@@ -103,8 +103,9 @@ $(function () {
 	//	Enviar todo
 
 	$('#aplicar').on('click', function () {
-
-
+		var ceo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
 		if (widget_var.idproducto !== undefined) {
 
 			$.post(baseURL + "api/v1/" + isoPais + "/empresas/cambiar", {
@@ -117,7 +118,8 @@ $(function () {
 					'data-idproducto': widget_var.idproducto,
 					'data-nomProd': widget_var.nombprod,
 					'data-marcProd': widget_var.marcprod,
-					'llamada': 'productos'
+					'llamada': 'productos',
+					ceo_name: ceo_cook
 				},
 				function (data) {
 
