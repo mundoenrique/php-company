@@ -1,10 +1,9 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-$lang['SYSTEM_NAME']= "Conexión Empresas Online Colombia";
+$lang['SYSTEM_NAME']= "Conexión Empresas Online Perú";
 $lang['LAST_SESSION']="Última sesión";
-$lang['ID_FISCAL']= "NIT.";
-$lang['ID_PERSONA']= "CC.";
-$lang['ID_IMPUESTO'] = 'IVA';
+$lang['ID_FISCAL']= "RUC.";
+$lang['ID_PERSONA']= "DNI.";
+$lang['ID_IMPUESTO'] = 'IGV';
 $lang['FOOTER'] ='Todos los derechos reservados.';
 //WIDGET EMPRESAS
 $lang['WIDGET_EMPRESAS_BTNSELECCIONAR']= "Seleccionar otra empresa";

@@ -1,0 +1,15 @@
+input.validate-error, select.validate-error {
+	border: 1px solid #e8446c;
+}
+
+.validate-error:focus {
+	border: 1px solid #616161;
+}
+
+label.validate-error {
+	color: #e8446c !important;
+	cursor: text;
+	display: block;
+	font-size: 12px !important;
+	margin-top: 4px;
+}
