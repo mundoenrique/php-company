@@ -6,7 +6,10 @@ function addEdit(id) {
         $('#msg-info').empty();
         $('#msg-info').append('<div id="loading" class="agrups"><img src=" ' + baseCDN + '/media/img/loading.gif' + '"></div>');
         notiSystem('msg', title);
-        $.post(baseURL + '/' + isoPais + '/trayectos/modelo', {way: 'vehicleGroups', modelo: 'vehicleGroups', data: id})
+				var ceo_cook = decodeURIComponent(
+					document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+				);
+        $.post(baseURL + '/' + isoPais + '/trayectos/modelo', {way: 'vehicleGroups', modelo: 'vehicleGroups', data: id, ceo_name: ceo_cook})
             .done( function(response) {
                 $('#msg-info').empty();
                 switch (response.code) {
