@@ -52,7 +52,12 @@ $(document).ready(function() {
 			$("#repEstadosDeCuenta_producto").children( 'option:not(:first)' ).remove();
 			$("#cargando_producto").fadeIn("slow");
 			$(this).attr('disabled',true);
-			$.post(baseURL + api + isoPais + "/producto/lista", { 'acrif': acrif }, function(data){
+
+			var ceo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+				);
+
+			$.post(baseURL + api + isoPais + "/producto/lista", { 'acrif': acrif, ceo_name: ceo_cook }, function(data){
 				$("#cargando_producto").fadeOut("slow");
 				$("#repEstadosDeCuenta_empresa").removeAttr('disabled');
 				if(!data.ERROR){
@@ -222,6 +227,12 @@ function BuscarEstadosdeCuenta(paginaActual){
 
 		filtro_busq.paginaActual=paginaActual;
 
+		var ceo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
+
+		filtro_busq.ceo_name = ceo_cook
+
 		$consulta = $.post(baseURL + api + isoPais + "/reportes/estadosdecuenta",filtro_busq );
 //DE SER EXITOSA LA COMUNICACION CON EL SERVICIO SE EJECUTA EL SIGUIENTE METODO "DONE"
 
@@ -376,6 +387,12 @@ if(buscarReporte){
 		span.click(function(){
 
 //SE EJECUTA LA CONSULTA PARA EL GRAFICO
+				var ceo_cook = decodeURIComponent(
+					document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+					);
+
+				filtro_busq.ceo_name = ceo_cook
+
 				$consulta = $.post(baseURL + api + isoPais + "/reportes/EstadosdeCuentaGrafico",filtro_busq );
 // APARECE LA VENTANA DE CARGANDO MIENTRAS SE REALIZA LA CONSULTA
 				$( "#cargando" ).dialog({title:"Ver Gráfica Estado de cuenta",modal:true, width: 200, height: 170});
@@ -854,6 +871,12 @@ if(buscarReporte){
 function descargarArchivo(datos, url, titulo){
 
 	$aux = $("#cargando").dialog({title:titulo,modal:true, close:function(){$(this).dialog('close')}, resizable:false });
+
+			var ceo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+				);
+
+			datos.ceo_name = ceo_cook
 
 			$.post(url,datos).done(function(data){
     			$aux.dialog('destroy')
