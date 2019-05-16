@@ -2,6 +2,8 @@
 	$pais = $this->uri->segment(1);
 	$urlBaseA = $this->config->item('base_url');
 	$urlBase = $urlBaseA.$pais;
+	$ceo_name = $this->security->get_csrf_token_name();
+	$ceo_cook = $this->security->get_csrf_hash();
 
 	$entrar;
 	$orden="";
@@ -270,12 +272,17 @@
 <input type='hidden' id='lotesxAuth' value='<?php echo $lotesxAuth ?>'/>
 <div class='elem-hidden'> <h3 id='msg_2dafirma'> <?php echo lang('MSG_2DA_FIRMA') ?> </h3> </div>
 
-<form id='autorizacion' method='post' action="<?php echo $urlBase ?>/lotes/calculo">
+<?php
+echo "<form id='autorizacion' method='post' action='$urlBase/lotes/calculo'>
+	<input type='hidden' name='$ceo_name' value='$ceo_cook'>
 	<input type='hidden' name='data-COS' value='' id='data-COS'/>
-</form>
+</form>"
 
-<form id='detalleAuth' method='post' action="<?php echo $urlBase ?>/lotes/autorizacion/detalle"></form>
 
+echo "<form id='detalleAuth' method='post' action= '$urlBase/lotes/autorizacion/detalle'>
+	<input type='hidden' name='$ceo_name' value='$ceo_cook'>
+</form>"
+?>
 <?php
 	if ($pais == 'Ve'):
 

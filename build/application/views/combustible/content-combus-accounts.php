@@ -1,4 +1,7 @@
-
+<?php
+$ceo_name = $this->security->get_csrf_token_name();
+$ceo_cook = $this->security->get_csrf_hash();
+?>
 <!--<div id="errorDriver" code="--><?php //echo  $code ?><!--" title="--><?php //echo $title ?><!--" msg="--><?php //echo $msg ?><!--"></div>-->
 <div class="content-products">
     <h1><?= $action['title']; ?></h1>
@@ -50,7 +53,9 @@
 
 </div>
 
-<form id='formularioAccount' method='post' name="form1"></form>
+<form id='formularioAccount' method='post' name="form1">
+	<input type='hidden' name='<?php echo $ceo_name ?>' value='<?php echo $ceo_cook ?>'>
+</form>
 <input type="hidden" id="logUrl" value="<?php echo  base_url().$pais; ?>">
 
 <div id="msg-system" style='display:none' >
