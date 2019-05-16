@@ -80,12 +80,15 @@ $(document).ready(function() {
 //METODO PARA REALIZAR LA BUSQUEDA
 var filtro_busq={};
 	    $("#repRecargasRealizadas_btnBuscar").click(function(){
-
+				var ceo_cook = decodeURIComponent(
+					document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+				);
 	    	var $consulta;
 	    	filtro_busq.empresa=$("#RecargasRealizadas-Empresa").val();
 	    	filtro_busq.anio=$("#repRecargasRealizadas_anio").val().split("/")[1];
 	    	filtro_busq.mes=$("#repRecargasRealizadas_anio").val().split("/")[0];
-	    	filtro_busq.paginaActual=1;
+				filtro_busq.paginaActual=1;
+				filtro_busq.ceo_name = ceo_cook;
 	    	if(validar_filtro_busqueda("lotes-2")){
 	    	$('#cargando').fadeIn("slow");
 	    	$(this).hide();
@@ -321,7 +324,10 @@ function validar_filtro_busqueda(div){
   function descargarArchivo(datos, url, titulo){
 
   $aux = $("#cargando").dialog({title:titulo,modal:true, close:function(){$(this).dialog('close')}, resizable:false });
-
+	var ceo_cook = decodeURIComponent(
+		document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+	);
+	datos.ceo_name = ceo_cook;
       $.post(url,datos).done(function(data){
           $aux.dialog('destroy')
           if(!data.ERROR){
