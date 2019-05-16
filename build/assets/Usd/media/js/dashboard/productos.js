@@ -208,8 +208,12 @@ var accodgrupoe;
 
     if( acrif !== undefined ){
 
+			var ceo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
+
       $.post( baseURL+api+isoPais+"/empresas/cambiar",
-        { 'data-accodgrupoe':accodgrupoe, 'data-acrif':acrif, 'data-acnomcia':acnomcia, 'data-acrazonsocial':acrazonsocial, 'data-acdesc':acdesc, 'data-accodcia':accodcia, 'llamada':'soloEmpresa' },
+        { 'data-accodgrupoe':accodgrupoe, 'data-acrif':acrif, 'data-acnomcia':acnomcia, 'data-acrazonsocial':acrazonsocial, 'data-acdesc':acdesc, 'data-accodcia':accodcia, 'llamada':'soloEmpresa', ceo_name: ceo_cook},
          function(data){
 
           if(data === 1){
