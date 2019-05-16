@@ -30,13 +30,40 @@ $(function() {
 			}
 			$('#login-form input, #login-form button').attr('disabled', true);
 			loginBtn.html(loader);
-			ingresar(user, text);
+			
+			grecaptcha.ready(function() {
+                grecaptcha.execute('6Lejt6MUAAAAANd7KndpsZ2mRSQXuYHncIxFJDYf', {action: 'login'}).then(function(token) {
+                    validateCaptcha(token,user,text);        
+                });;
+            });
 		}
 	});
 	$('#user_login, #user_pass').on('focus keypress', function() {
 		$(this).removeClass('validate-error');
 	});
 })
+
+function validateCaptcha(token,user,text)
+{
+	data = {
+		user: user.user,
+		token: token
+	}
+    verb = "POST"; who = 'User'; where = 'validateCaptcha';
+    callNovoCore(verb, who, where, data, function(response) {
+        switch(response.code) {
+            case 0:
+                ingresar(user,text);
+                break;
+            case 1:
+				notiSystem(response.title, response.msg, response.icon, response.data);
+				$('#login-form input, #login-form button').attr('disabled', false);
+				$('#login-btn').html(text);
+                break;
+        }
+                
+    })
+}
 
 function ingresar(user, text) {
 	verb = "POST"; who = 'User'; where = 'Login'; data = user;
