@@ -334,6 +334,9 @@ $(document).ready(function() {
 
 $("#export_excel").click(function(){
 
+			var ceo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
 			$('form#formulario').empty();
 			$('form#formulario').append('<input type="hidden" name="empresa" value="'+filtro_busq.empresa+'" />');
 			$('form#formulario').append('<input type="hidden" name="cedula" value="'+filtro_busq.cedula+'" />');
@@ -342,6 +345,7 @@ $("#export_excel").click(function(){
 			$('form#formulario').append('<input type="hidden" name="descProd" value="'+filtro_busq.descProd+'" />');
 			$('form#formulario').append('<input type="hidden" name="paginaActual" value="'+1+'" />');
 			$('form#formulario').attr('action',baseURL+api+isoPais+"/reportes/saldosamanecidosExpXLS");
+			$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'" />');
 			$('form#formulario').submit(); 
 
 			/*datos={
