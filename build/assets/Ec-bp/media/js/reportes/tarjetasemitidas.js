@@ -72,6 +72,10 @@ $(document).ready(function() {
 
 		var filtro_busq={};
 		var $consulta;
+		var ceo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
+
 		if(validar_filtro_busqueda("lotes-2")){
 
 			$('#cargando').fadeIn("slow");
@@ -90,6 +94,7 @@ $(document).ready(function() {
 
 			filtro_busq.acrif = $("option:selected","#repTarjetasEmitidas_empresa").attr("acrif");
 			filtro_busq.acnomcia = $("option:selected","#repTarjetasEmitidas_empresa").attr("acnomcia");
+			filtro_busq.ceo_name = ceo_cook;
 
 			//SE REALIZA LA INVOCACION AJAX
 			$consulta = $.post(baseURL+ api+ isoPais +"/reportes/tarjetasemitidas",filtro_busq );
@@ -536,7 +541,10 @@ return valido;
   function descargarArchivo(datos, url, titulo){
 
   $aux = $("#cargando").dialog({title:titulo,modal:true, close:function(){$(this).dialog('close')}, resizable:false });
-
+	var ceo_cook = decodeURIComponent(
+		document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+	);
+	datos.ceo_name = ceo_cook;
       $.post(url,datos).done(function(data){
           $aux.dialog('destroy')
           if(!data.ERROR){
