@@ -242,8 +242,12 @@ function validar_campos()
 function addEdit(id, func)
 {
     $('#formulario').empty();
+		var ceo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
     $('#formulario').attr('action', baseURL + '/' + isoPais + '/trayectos/viajes/detalles');
     $('#formulario').append('<input type="hidden" name="data-id" value="' + id + '" />');
     $('#formulario').append('<input type="hidden" name="function" value="' + func + '" />');
+		$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'" />');
     $('#formulario').submit();
 }
