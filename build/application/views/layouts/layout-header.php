@@ -24,7 +24,8 @@ $style_css = $this->uri->segment(3);
 	<meta name="description" content="" />
 	<meta name="viewport" content="width=device-width" />
 	<meta http-equiv="cleartype" content="on" />
-	<meta http-equiv="pragma" content="no-cache" />
+	<meta name="googlebot" content="none" />
+	<meta name="robots" content="noindex, nofollow" />
 	<link rel="profile" href="http://gmpg.org/xfn/11" />
 	<link rel="icon" type="image/<?= $ext ?>" href="<?php echo get_cdn(); ?>media/img/favicon.<?= $ext ?>" />
 	<?php
