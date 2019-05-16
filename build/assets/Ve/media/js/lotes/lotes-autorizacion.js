@@ -336,13 +336,11 @@ $(function () {
 
 	$('#lotes-2').on('click', '#detalle', function () { // autorizacion/detalleAuth
 		var lote = $(this).attr('idlote');
-		var ceo_cook = decodeURIComponent(
-			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-		);
+
 		$(':checkbox').each(function () {
 			this.checked = 0;
 		});
-		$('#detalle_lote').append('<input type="hidden" name="ceo_name" value="'+ ceo_cook +'"/>');
+
 		$("form#detalleAuth").append('<input type="hidden" name="data-lote" value="' + lote + '" />');
 		$("form#detalleAuth").submit();
 	});

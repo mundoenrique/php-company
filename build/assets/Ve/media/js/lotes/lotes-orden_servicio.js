@@ -114,10 +114,7 @@ $(function () {
 	$("#tabla-datos-general").on("click", ".viewLo", function () {
 
 		var idLote = $(this).attr('id');
-		var ceo_cook = decodeURIComponent(
-			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-		);
-		$('form#detalle_lote').append('<input type="hidden" name="ceo_name" value="'+ ceo_cook +'"/>');
+
 		$('form#detalle_lote').append('<input type="hidden" name="data-lote" value="' + idLote + '" />');
 		$("#detalle_lote").submit();
 
@@ -152,11 +149,8 @@ $(function () {
 	}
 
 	$('#cancelar-OS').on('click', function () {
-		var ceo_cook = decodeURIComponent(
-			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-		);
+
 		$('form#viewAutorizar').append($('#tempIdOrdenL'));
-		$('form#viewAutorizar').append('<input type="hidden" name="ceo_name" value="'+ ceo_cook +'"/>');
 		$("#viewAutorizar").submit();
 
 	});

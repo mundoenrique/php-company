@@ -58,11 +58,6 @@ $(function () {
 	$("tbody").on("click", ".batch-detail", function (e) {
 		e.preventDefault();
 		var idLote = $(this).attr('id');
-
-		var ceo_cook = decodeURIComponent(
-			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-		);
-		$('#detalle_lote').append('<input type="hidden" name="ceo_name" value="'+ ceo_cook +'"/>');
 		$("#detalle_lote").append('<input type="hidden" name="data-lote" value="' + idLote + '" />');
 		$("#detalle_lote").submit();
 

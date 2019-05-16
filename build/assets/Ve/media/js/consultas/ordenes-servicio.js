@@ -69,11 +69,7 @@ $(function () {
 	$("tbody").on("click", ".viewLo", function () { // ver detalle de lote
 
 		var idLote = $(this).attr('id');
-		var ceo_cook = decodeURIComponent(
-			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-		);
 		$('form#detalle_lote').append('<input type="hidden" name="data-lote" value="' + idLote + '" />');
-		$('form#detalle_lote').append('<input type="hidden" name="ceo_name" value="'+ ceo_cook +'"/>');
 		$("#detalle_lote").submit();
 
 	});

@@ -142,13 +142,9 @@ $(function () {
 
 
 	$('button#sProducto').on('click', function () {
-		var ceo_cook = decodeURIComponent(
-			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-		);
 		var idproducto = $(this).attr("data-idproducto");
 		var nombreProducto = $(this).attr("data-nombreProducto");
 		var marcaProducto = $(this).attr("data-marcaProducto");
-		$('form#productos').append('<input type="hidden" name="ceo_name" value="'+ ceo_cook +'"/>');
 		$('form#productos').append('<input type="hidden" name="data-idproducto" value="' + idproducto + '" />');
 		$('form#productos').append('<input type="hidden" name="data-nombreProducto" value="' + nombreProducto + '" />');
 		$('form#productos').append('<input type="hidden" name="data-marcaProducto" value="' + marcaProducto + '" />');
