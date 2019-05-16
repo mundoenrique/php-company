@@ -222,7 +222,12 @@ $(function(){
                         $('#pass').val( '' );
                         $(this).dialog('destroy');
                         var $aux = $('#loading').dialog({title:'Anulando Orden de Servicio' ,modal: true, resizable:false, close:function(){$aux.dialog('close');}});
-                        $.post(baseURL+api+isoPais+'/consulta/anularos',{'data-idOS':idOS, 'data-pass':pass})
+
+												var ceo_cook = decodeURIComponent(
+													document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+													);
+
+												$.post(baseURL+api+isoPais+'/consulta/anularos',{'data-idOS':idOS, 'data-pass':pass, ceo_name: ceo_cook})
                             .done(function(data){
                                 $aux.dialog('destroy');
                                 if(!data.ERROR){
@@ -295,12 +300,18 @@ $(function(){
                                             open: function (event, ui) {
                                                 $('.ui-dialog-titlebar-close', ui.dialog).hide();
                                             }
-                                        });
+																				});
+
+																				var ceo_cook = decodeURIComponent(
+																					document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+																					);
+
                                         $.post(baseURL + api + isoPais + '/consulta/PagoOSProcede', {
                                             "idOS": idOS,
                                             "codeToken": codeToken,
                                             "totalamount": totalamount,
-                                            "factura": factura
+																						"factura": factura,
+																						ceo_name: ceo_cook
                                         })
                                             .done(function (data) {
                                                 $aux.dialog('destroy');
