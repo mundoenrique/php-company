@@ -21,7 +21,11 @@ function downReports(way, modelo, data, file) {
 		switch (code) {
 			case 0:
 				dataRequest = way + ',' + file;
+				var ceo_cook = decodeURIComponent(
+					document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+				);
 				$('form#formulario').empty();
+				$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'">');
 				$('form#formulario').attr('action', baseURL + isoPais + '/trayectos/modelo');
 				$('form#formulario').append('<input type="hidden" name="way" value="downloadFile" />');
 				$('form#formulario').append('<input type="hidden" name="modelo" value="' + modelo + '" />');

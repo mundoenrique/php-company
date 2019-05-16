@@ -559,7 +559,10 @@ function getCookie(cname) {
 }
 
   $('#downPDF').on('click', function(){
-
+		var ceo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
+		$('#exportTo').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'">');
     $('#exportTo').attr('action', baseURL + api + isoPais + "/reportes/detalleLoteAuthExpPDF");
     $('#data-lote').val($("#data-lote").val());
     $('#exportTo').submit();
@@ -567,7 +570,10 @@ function getCookie(cname) {
   });
 
   $('#downXLS').on('click', function(){
-
+		var ceo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
+		$('#exportTo').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'">');
     $('#exportTo').attr('action', baseURL + api + isoPais + "/reportes/detalleLoteAuthExpXLS");
     $('#data-lote').val($("#data-lote").val());
     $('#exportTo').submit();
