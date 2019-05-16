@@ -2,7 +2,8 @@
 $pais = $this->uri->segment(1);
 $urlBaseA = $this->config->item('base_url');
 $urlBase = $urlBaseA.$pais;
-
+$ceo_name = $this->security->get_csrf_token_name();
+$ceo_cook = $this->security->get_csrf_hash();
 
 $info;
 log_message('info',json_encode($data));
@@ -179,5 +180,6 @@ log_message('info',json_encode($data));
 </div>
 
 <form id='toOS' action="<?php echo $urlBase ?>/consulta/ordenes-de-servicio " method="post">
+	<input type='hidden' name='<?php echo $ceo_name ?>' value='<?php echo $ceo_cook ?>'>
 	<input type="hidden" name="data-confirm" value="" id="data-confirm" />
 </form>

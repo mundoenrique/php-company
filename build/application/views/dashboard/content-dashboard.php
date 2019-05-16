@@ -4,6 +4,8 @@ $pais = $CI->config->item('country');
 $urlBase= $CI->config->item('base_url').$pais.'/';
 $urlBaseCDN = $CI->config->item('base_url_cdn');
 $nombreCompleto = $this->session->userdata('nombreCompleto');
+$ceo_name = $this->security->get_csrf_token_name();
+$ceo_cook = $this->security->get_csrf_hash();
 ?>
 <h1><?= lang('BREADCRUMB_WELCOME'); ?> <span class='first-title'>{titulo}</span></h1>
 
@@ -38,6 +40,7 @@ $nombreCompleto = $this->session->userdata('nombreCompleto');
 </div>
 
 <form id="empresas" method="post" action="<?php echo site_url($pais.'/dashboard/productos/'); ?> ">
+	<input type='hidden' name='<?php echo $ceo_name ?>' value='<?php echo $ceo_cook ?>'>
 </form>
 
 

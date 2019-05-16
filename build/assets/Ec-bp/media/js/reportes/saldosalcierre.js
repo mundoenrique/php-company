@@ -38,7 +38,10 @@ $(document).ready(function() {
 
 			$("#cargando_producto").fadeIn("slow");
 			$(this).attr('disabled',true);
-			$.post(baseURL + api + isoPais + "/producto/lista", { 'acrif': acrif }, function(data){
+			var ceo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
+			$.post(baseURL + api + isoPais + "/producto/lista", { 'acrif': acrif, ceo_name: ceo_cook }, function(data){
 				$("#cargando_producto").fadeOut("slow");
 				$("#SaldosAmanecidos-empresa").removeAttr('disabled');
 				if(!data.ERROR){
@@ -227,7 +230,9 @@ $(document).ready(function() {
 var filtro_busq={};
 			function buscarSaldos(paginaActual){
 			    	var $consulta;
-
+						var ceo_cook = decodeURIComponent(
+							document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+						);
 			    	if(validar_filtro_busqueda("lotes-2")){
 			    		$('#cargando').fadeIn("slow");
 			    		$("#SaldosAmanecidos-btnBuscar").hide();
@@ -239,9 +244,8 @@ var filtro_busq={};
 				    	filtro_busq.descProd=$('option:selected', "#SaldosAmanecidos-producto").attr("des");
 				    	filtro_busq.paginaActual=paginaActual;
 				    	filtro_busq.paginar=true;
-				    	filtro_busq.tamPg=tamPg;
-
-
+							filtro_busq.tamPg=tamPg;
+							filtro_busq.ceo_name=ceo_cook;
 
 			//SE REALIZA LA INVOCACION AJAX
 				    	$consulta = $.post(baseURL + api + isoPais + "/reportes/saldosamanecidos",filtro_busq );
@@ -324,8 +328,11 @@ var filtro_busq={};
 
 
 $("#export_excel").click(function(){
-
+	var ceo_cook = decodeURIComponent(
+		document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+	);
 			$('form#formulario').empty();
+			$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'">');
 			$('form#formulario').append('<input type="hidden" name="empresa" value="'+filtro_busq.empresa+'" />');
 			$('form#formulario').append('<input type="hidden" name="cedula" value="'+filtro_busq.cedula+'" />');
 			$('form#formulario').append('<input type="hidden" name="producto" value="'+filtro_busq.producto+'" />');

@@ -2,6 +2,8 @@
 $pais = $this->uri->segment(1);
 $urlBaseA = $this->config->item('base_url');
 $urlBase = $urlBaseA.$pais;
+$ceo_name = $this->security->get_csrf_token_name();
+$ceo_cook = $this->security->get_csrf_hash();
 ?>
 <div id="content-products">
 			<h1>{titulo}</h1>
@@ -217,5 +219,6 @@ if(!is_null (  $selectTiposLotes[0]->mediosPago)){
 </div>
 <div id='loading' style='text-align:center' class='elem-hidden'><?php echo insert_image_cdn("loading.gif"); ?></div>
 <form id='toOS' action="<?php echo $urlBase ?>/consulta/ordenes-de-servicio " method="post">
+	<input type='hidden' name='<?php echo $ceo_name ?>' value='<?php echo $ceo_cook ?>'>
 	<input type="hidden" name="data-OS" value="" id="data-OS" />
 </form>

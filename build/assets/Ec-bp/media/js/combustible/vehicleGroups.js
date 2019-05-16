@@ -1,7 +1,10 @@
 var lang,
     action;
 $(function() {
-    $.post(baseURL + '/' + isoPais + '/trayectos/modelo', {way: 'vehicleGroups', modelo: 'vehicleGroups'})
+	var ceo_cook = decodeURIComponent(
+		document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
+    $.post(baseURL + '/' + isoPais + '/trayectos/modelo', {way: 'vehicleGroups', modelo: 'vehicleGroups', ceo_name: ceo_cook})
         .done( function(data) {
             lang = data.lang;
             switch (data.code) {
@@ -103,8 +106,10 @@ $(function() {
             notiSystem('msg', title);
 
             var formAddEdit = $('#formAddEdit').serialize();
-
-            $.post(baseURL + "/"+isoPais + '/trayectos/modelo',{way: 'addEditGroups', data: formAddEdit, modelo: 'vehicleGroups'})
+					  var ceo_cook = decodeURIComponent(
+							document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+						);
+            $.post(baseURL + "/"+isoPais + '/trayectos/modelo',{way: 'addEditGroups', data: formAddEdit, modelo: 'vehicleGroups', ceo_name: ceo_cook})
                 .done(function (response) {
                     $('#msg-info').empty();
                     switch (response.code) {
