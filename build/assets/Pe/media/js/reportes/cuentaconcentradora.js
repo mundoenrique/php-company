@@ -124,6 +124,9 @@ $("#exportXLS_a").click(function(){
 		descargarArchivo(datos, baseURL+api+isoPais+"/reportes/cuentaConcentradoraExpXLS", "Exportar Excel" );
 */
 
+		var ceo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
 		$('form#formulario').empty();
 		$('form#formulario').append('<input type="hidden" name="empresa" value="'+filtro_busq.empresa+'" />');
 		$('form#formulario').append('<input type="hidden" name="fechaInicial" value="'+filtro_busq.fechaInicial+'" />');
@@ -131,6 +134,7 @@ $("#exportXLS_a").click(function(){
 		$('form#formulario').append('<input type="hidden" name="filtroFecha" value="'+filtro_busq.filtroFecha+'" />');
 		$('form#formulario').append('<input type="hidden" name="nomEmpresa" value="'+filtro_busq.acnomcia+'" />');
 		$('form#formulario').attr('action',baseURL+api+isoPais+"/reportes/cuentaConcentradoraExpXLS");
+		$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'" />');
 		$('form#formulario').submit();
 
 	});
@@ -149,6 +153,9 @@ $("#exportPDF_a").click(function(){
 
 		descargarArchivo(datos, baseURL+api+isoPais+"/reportes/cuentaConcentradoraExpPDF", "Exportar PDF" );
 */
+		var ceo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
 $('form#formulario').empty();
 		$('form#formulario').append('<input type="hidden" name="empresa" value="'+filtro_busq.empresa+'" />');
 		$('form#formulario').append('<input type="hidden" name="fechaInicial" value="'+filtro_busq.fechaInicial+'" />');
@@ -156,6 +163,7 @@ $('form#formulario').empty();
 		$('form#formulario').append('<input type="hidden" name="filtroFecha" value="'+filtro_busq.filtroFecha+'" />');
 		$('form#formulario').append('<input type="hidden" name="nomEmpresa" value="'+filtro_busq.acnomcia+'" />');
 		$('form#formulario').attr('action',baseURL+api+isoPais+"/reportes/cuentaConcentradoraExpPDF");
+		$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'" />');
 		$('form#formulario').submit();
 
 	});
@@ -191,6 +199,9 @@ $(".consolidado").click(function(){
 
 				descargarArchivo(datos, baseURL+api+isoPais+"/reportes/cuentaConcentradoraConsolidadoExp"+formato, "Exportar "+formato );
 			*/
+					var ceo_cook = decodeURIComponent(
+						document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+					);
 			$('form#formulario').empty();
 					$('form#formulario').append('<input type="hidden" name="empresa" value="'+filtro_busq.empresa+'" />');
 					$('form#formulario').append('<input type="hidden" name="fechaInicial" value="'+filtro_busq.fechaInicial+'" />');
@@ -199,6 +210,7 @@ $(".consolidado").click(function(){
 					$('form#formulario').append('<input type="hidden" name="nomEmpresa" value="'+filtro_busq.acnomcia+'" />');
 					$('form#formulario').append('<input type="hidden" name="anio" value="'+$("option:selected","#anio").val()+'" />');
 					$('form#formulario').attr('action',baseURL+api+isoPais+"/reportes/cuentaConcentradoraConsolidadoExp"+formato);
+					$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'" />');
 					$('form#formulario').submit();
 			}
 		}
@@ -617,11 +629,15 @@ function descargarArchivo(datos, url, titulo){
 	$.post(url,datos).done(function(data){
 		$aux.dialog('destroy')
 		if(!data.ERROR){
+			var ceo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
 			$('form#formulario').empty();
 			$('form#formulario').append('<input type="hidden" name="bytes" value="'+JSON.stringify(data.bytes)+'" />');
 			$('form#formulario').append('<input type="hidden" name="ext" value="'+data.ext+'" />');
 			$('form#formulario').append('<input type="hidden" name="nombreArchivo" value="'+data.nombreArchivo+'" />');
 			$('form#formulario').attr('action',baseURL+isoPais+"/file");
+			$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'" />');
 			$('form#formulario').submit()
 		}else{
 			if(data.ERROR=="-29"){
