@@ -32,11 +32,13 @@ $(function(){
 
 	$("#tabla-datos-general").on("click","#res",function(code) {
 		var nlote = $(this).attr('data-id')
-
+		var ceo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
 		$.ajax({
 			type: 'POST',
 			url: baseURL+isoPais+'/consulta/embozado',
-			data: { 'nlote': nlote },
+			data: { 'nlote': nlote, ceo_name: ceo_cook },
 			beforeSend: function() {
 				$("#loading").dialog({
 					title: 'Enviando notificación',
@@ -268,8 +270,11 @@ $(function(){
                         pass = hex_md5( pass );
                         $('#pass').val( '' );
                         $(this).dialog('destroy');
-                        var $aux = $('#loading').dialog({title:'Anulando Orden de Servicio' ,modal: true, resizable:false, close:function(){$aux.dialog('close');}});
-                        $.post(baseURL+api+isoPais+'/consulta/anularos',{'data-idOS':idOS, 'data-pass':pass})
+												var $aux = $('#loading').dialog({title:'Anulando Orden de Servicio' ,modal: true, resizable:false, close:function(){$aux.dialog('close');}});
+												var ceo_cook = decodeURIComponent(
+													document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+												);
+                        $.post(baseURL+api+isoPais+'/consulta/anularos',{'data-idOS':idOS, 'data-pass':pass, ceo_name: ceo_cook})
                             .done(function(data){
                                 $aux.dialog('destroy');
                                 if(!data.ERROR){
@@ -330,7 +335,7 @@ $(function(){
                             },
                             buttons: {
                                 Procesar: function () {
-                                    var codeToken = $("#token-code").val();
+																		var codeToken = $("#token-code").val();
                                     if (codeToken != '') {
                                         $("#token-code").val('');
                                         $(this).dialog('destroy');
@@ -342,12 +347,16 @@ $(function(){
                                             open: function (event, ui) {
                                                 $('.ui-dialog-titlebar-close', ui.dialog).hide();
                                             }
-                                        });
+																				});
+																				var ceo_cook = decodeURIComponent(
+																					document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+																				);
                                         $.post(baseURL + api + isoPais + '/consulta/PagoOSProcede', {
                                             "idOS": idOS,
                                             "codeToken": codeToken,
                                             "totalamount": totalamount,
-                                            "factura": factura
+																						"factura": factura,
+																						ceo_name: ceo_cook
                                         })
                                             .done(function (data) {
                                                 $aux.dialog('destroy');
