@@ -1,7 +1,12 @@
 var language;
 var selectStatusDriver;
 $(function() {
-	$.post(baseURL + '/' + isoPais + '/trayectos/modelo', { way: 'drivers', modelo: 'driver' })
+
+	var ceo_cook = decodeURIComponent(
+		document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
+
+	$.post(baseURL + '/' + isoPais + '/trayectos/modelo', { way: 'drivers', modelo: 'driver', ceo_name: ceo_cook })
         .done( function(data) {
             lang = data.language;
             switch (data.code) {
@@ -132,11 +137,16 @@ $('#send-info').on('click', function(){
         }
 
     if(dniValido || func == 'register') {
-        clearInput();
+				clearInput();
+
+				var ceo_cook = decodeURIComponent(
+					document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+					);
+
         $.ajax({
             url: baseURL + '/' + isoPais + '/trayectos/modelo',
             type: 'POST',
-            data: {way: 'checkUSER', data: dniAction, modelo: 'driver'},
+            data: {way: 'checkUSER', data: dniAction, modelo: 'driver', ceo_name: ceo_cook},
             datatype:'json',
             beforeSend: function(data){
                 $('#send-info, #close-info').text('');
