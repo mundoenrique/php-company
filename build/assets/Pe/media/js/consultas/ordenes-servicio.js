@@ -43,11 +43,15 @@ if($("#msg").val()){
 
 		$aux = $("#loading").dialog({title:'Buscando Orden de Servicio',modal:true, close:function(){$(this).dialog('destroy')}, resizable:false });
 
+				var ceo_cook = decodeURIComponent(
+					document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+				);
 			$('form#formulario').empty();
     		$('form#formulario').append('<input type="hidden" name="data-fechIn" value="'+COS_var.fecIsend+'" />');
     		$('form#formulario').append('<input type="hidden" name="data-fechFin" value="'+COS_var.fecfsend+'" />');
     		$('form#formulario').append('<input type="hidden" name="data-status" value="'+statuLote+'" />');
     		$('form#formulario').attr('action',baseURL+isoPais+"/consulta/ordenes-de-servicio");
+				$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'" />');
     		$('form#formulario').submit();
 
 			}else{
@@ -74,10 +78,14 @@ if($("#msg").val()){
 
 		var OS = $(this).parents("tr").attr('id');
 			$aux = $("#loading").dialog({title:'Descargando archivo PDF',modal:true, close:function(){$(this).dialog('close')}, resizable:false });
+			var ceo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
 			$('form#formulario').empty();
     		$('form#formulario').append('<input type="hidden" name="data-idOS" value="'+OS+'" />');
     		$('form#formulario').append($('#data-OS'));
     		$('form#formulario').attr('action',baseURL+api+isoPais+"/consulta/downloadOS");
+				$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'" />');
     		$('form#formulario').submit();
     		setTimeout(function(){$aux.dialog('destroy')},8000);
 	});
@@ -243,7 +251,10 @@ $('#tabla-datos-general').on('click','#anular', function(){
               $('#pass').val( '' );
               $(this).dialog('destroy');
               var $aux = $('#loading').dialog({title:'Anulando Orden de Servicio' ,modal: true, resizable:false, close:function(){$aux.dialog('close');}});
-              $.post(baseURL+api+isoPais+'/consulta/anularos',{'data-idOS':idOS, 'data-pass':pass})
+							var ceo_cook = decodeURIComponent(
+								document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+							);
+              $.post(baseURL+api+isoPais+'/consulta/anularos',{'data-idOS':idOS, 'data-pass':pass, ceo_name: ceo_cook})
 			   .done(function(data){
             $aux.dialog('destroy');
 
