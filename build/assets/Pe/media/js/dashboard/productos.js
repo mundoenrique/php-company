@@ -133,9 +133,13 @@ function resultNull(){
     var idproducto = $(this).attr("data-idproducto");
     var nombreProducto = $(this).attr("data-nombreProducto");
     var marcaProducto = $(this).attr("data-marcaProducto");
+		var ceo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
     $('form#productos').append('<input type="hidden" name="data-idproducto" value="'+idproducto+'" />');
     $('form#productos').append('<input type="hidden" name="data-nombreProducto" value="'+nombreProducto+'" />');
     $('form#productos').append('<input type="hidden" name="data-marcaProducto" value="'+marcaProducto+'" />');
+		$('form#productos').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'" />');
     $('form#productos').submit();
   });
 //
