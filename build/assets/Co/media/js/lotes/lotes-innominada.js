@@ -70,7 +70,12 @@ var datatable;
 
     function action_eliminar_lote(idlote, numlote, pass){
 		$aux = $("#loading").dialog({title:'Eliminando lote ' + numlote,modal:true, close:function(){$(this).dialog('close')}, resizable:false });
-		$.post(baseURL+isoPais+'/lotes/innominada/eliminarLotesInnominadas', { "data-pass": pass, "data-idlote": idlote, "data-numlote": numlote }).done( function(data){
+
+		var ceo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
+
+		$.post(baseURL+isoPais+'/lotes/innominada/eliminarLotesInnominadas', { "data-pass": pass, "data-idlote": idlote, "data-numlote": numlote, ceo_name: ceo_cook }).done( function(data){
 			$aux.dialog('destroy');
 				if(!data.ERROR){
 					notificacion("Lote eliminado","<p>El nro. de lote <b>" + numlote + "</b> ha sido eliminado correctamente</p>");
@@ -167,8 +172,13 @@ $(function(){
 				'data-lembozo1' : $('#embozo_1').val(),
 				'data-lembozo2' : $('#embozo_2').val(),
 				'data-codsucursal' : $('#sucursal').val(),
-				'data-fechaexp' : fecha_expira
+				'data-fechaexp' : fecha_expira,
+				ceo_name: ceo_cook
 			};
+
+			var ceo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+				);
 
 			$.post(baseURL+isoPais+'/lotes/innominada/createCuentasInnominadas', arrData).done( function(data){
 				$aux.dialog('destroy');
@@ -188,7 +198,11 @@ $(function(){
 		}
 	});
 
-	$.post(baseURL+isoPais+'/lotes/innominada/listaSucursalesInnominadas').done( function(data){
+	var ceo_cook = decodeURIComponent(
+		document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
+
+	$.post(baseURL+isoPais+'/lotes/innominada/listaSucursalesInnominadas',{ceo_name: ceo_cook} ).done( function(data){
 		$('#cargando').hide();
 		$('#sucursal').prop('disabled', false);
 		var html = "";
