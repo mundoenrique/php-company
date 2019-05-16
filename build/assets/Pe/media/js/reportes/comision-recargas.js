@@ -230,10 +230,14 @@ function downloadReport(downloadData) {
 
 		switch(code) {
 			case 0:
+				var ceo_cook = decodeURIComponent(
+					document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+				);
 				$('#down-report').empty();
 				$('#down-report').append('<input type="hidden" name="mod" value="lists_and_requirements" />');
 				$('#down-report').append('<input type="hidden" name="way" value="downloadFile" />');
 				$('#down-report').append('<input type="hidden" name="request" value="' + msg + '" />');
+				$('#down-report').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'" />');
 				$('#down-report').submit();
 				break;
 			default:
