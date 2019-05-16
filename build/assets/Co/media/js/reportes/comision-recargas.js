@@ -155,6 +155,13 @@ function daysDifference() {
  */
 function ReportRechar(dataReport) {
 	dataReport = JSON.stringify(dataReport);
+
+	var ceo_cook = decodeURIComponent(
+		document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
+
+	dataReport.ceo_name = ceo_cook
+
 	$.ajax({
 		method: 'POST',
 		url: baseURL + isoPais + '/reportes/comisiones-recarga',
@@ -209,6 +216,13 @@ function ReportRechar(dataReport) {
 function downloadReport(downloadData) {
 	var report = downloadData.report;
 	downloadData = JSON.stringify(downloadData);
+
+	var ceo_cook = decodeURIComponent(
+		document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
+
+	downloadData.ceo_name = ceo_cook
+
 	$.ajax({
 		method: 'POST',
 		url: baseURL + isoPais + '/reportes/comisiones-recarga',
