@@ -33,7 +33,10 @@ $(function() {
             'status':status
         }];
 
-        $.post(baseURL + "/" + isoPais + '/trayectos/modelo', {way: 'disabledDriver', modelo: 'driver', data: disabledUser})
+				var ceo_cook = decodeURIComponent(
+					document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+				);
+        $.post(baseURL + "/" + isoPais + '/trayectos/modelo', {way: 'disabledDriver', modelo: 'driver', data: disabledUser, ceo_name: ceo_cook})
             .done(function (response) {
                 $('#msg-info').empty();
                 var lang = response.lang;
@@ -101,8 +104,11 @@ $(function() {
             $('#send-info, #close-info').text('');
             $('#msg-info').empty();
             $('#msg-info').append('<div id="loading" class="agrups"><img src=" ' + baseCDN + '/media/img/loading.gif' + '"></div>');
-            notiSystem(title);
-            $.post(baseURL + '/' + isoPais + '/trayectos/modelo', {way: 'addEditDriver', modelo: 'driver', data: formAddEdit})
+						notiSystem(title);
+						var ceo_cook = decodeURIComponent(
+							document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+						);
+            $.post(baseURL + '/' + isoPais + '/trayectos/modelo', {way: 'addEditDriver', modelo: 'driver', data: formAddEdit, ceo_name: ceo_cook})
                 .done(function (response) {
                     $('#msg-info').empty();
                     var lang = response.lang;
