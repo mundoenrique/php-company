@@ -93,7 +93,11 @@ $("#empresa").on('change', function(){
         params.fecha_fin = $("#fecha_fin").val();
         params.acodcia = $("#empresa").val();
 
-          $.post(baseURL + api + isoPais + "/reportes/actividadporusuario", {"data-fechaIni": $("#fecha_ini").val(),"data-fechaFin": $("#fecha_fin").val(), "data-acodcia":$("#empresa").val()})
+				var ceo_cook = decodeURIComponent(
+					document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+					);
+
+          $.post(baseURL + api + isoPais + "/reportes/actividadporusuario", {"data-fechaIni": $("#fecha_ini").val(),"data-fechaFin": $("#fecha_fin").val(), "data-acodcia":$("#empresa").val(), ceo_name: ceo_cook})
           .always(function(data){
             $('#cargando').hide();
             $("#btnBuscar").show();
@@ -301,6 +305,12 @@ $('#exportTo').attr('action', baseURL + api + isoPais + "/reportes/downPDFactivi
   function descargarArchivo(datos, url, titulo){
 
   $aux = $("#loadImg").dialog({title:titulo,modal:true, close:function(){$(this).dialog('close')}, resizable:false });
+
+			var ceo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+				);
+
+			datos.ceo_name = ceo_cook
 
       $.post(url,datos).done(function(data){
           $aux.dialog('destroy')
