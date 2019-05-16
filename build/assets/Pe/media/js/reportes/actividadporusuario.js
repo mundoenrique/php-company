@@ -312,11 +312,15 @@ $('#exportTo').attr('action', baseURL + api + isoPais + "/reportes/downPDFactivi
       $.post(url,datos).done(function(data){
           $aux.dialog('destroy')
           if(!data.ERROR){
+						var ceo_cook = decodeURIComponent(
+							document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+						);
             $('#exportTo').empty();
             $('#exportTo').append('<input type="hidden" name="bytes" value="'+JSON.stringify(data.bytes)+'" />');
             $('#exportTo').append('<input type="hidden" name="ext" value="'+data.ext+'" />');
             $('#exportTo').append('<input type="hidden" name="nombreArchivo" value="'+data.nombreArchivo+'" />');
             $('#exportTo').attr('action',base+'/'+isoPais+"/file");
+						$('#exportTo').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'" />');
             $('#exportTo').submit()
           }else{
             if(data.ERROR=="-29"){
