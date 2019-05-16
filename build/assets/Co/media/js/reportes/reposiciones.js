@@ -39,7 +39,12 @@ $(document).ready(function() {
 			$("#repReposiciones_producto").children( 'option:not(:first)' ).remove();
 			$("#cargando_producto").fadeIn("slow");
 			$("#repReposiciones_empresa").attr('disabled',true);
-			$.post(baseURL + api + isoPais + "/producto/lista", { 'acrif': acrif }, function(data){
+
+			var ceo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+				);
+
+			$.post(baseURL + api + isoPais + "/producto/lista", { 'acrif': acrif, ceo_name: ceo_cook }, function(data){
 				$("#cargando_producto").fadeOut("slow");
 				$("#repReposiciones_empresa").removeAttr('disabled');
 				if(!data.ERROR){
@@ -201,6 +206,12 @@ function buscarReposiciones(paginaActual){
 		    	filtro_busq.des = $("option:selected","#repReposiciones_producto").attr("des");
 
 	//SE REALIZA LA INVOCACION AJAX
+					var ceo_cook = decodeURIComponent(
+						document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+						);
+
+					filtro_busq.ceo_name = ceo_cook
+
 		    	$consulta = $.post(baseURL + api + isoPais + "/reportes/reposiciones",filtro_busq );
 	//DE SER EXITOSA LA COMUNICACION CON EL SERVICIO SE EJECUTA EL SIGUIENTE METODO "DONE"
 		 		$consulta.done(function(data){
