@@ -39,7 +39,10 @@ $(document).ready(function() {
 			$("#repReposiciones_producto").children( 'option:not(:first)' ).remove();
 			$("#cargando_producto").fadeIn("slow");
 			$("#repReposiciones_empresa").attr('disabled',true);
-			$.post(baseURL + api + isoPais + "/producto/lista", { 'acrif': acrif }, function(data){
+			var ceo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
+			$.post(baseURL + api + isoPais + "/producto/lista", { 'acrif': acrif, ceo_name: ceo_cook }, function(data){
 				$("#cargando_producto").fadeOut("slow");
 				$("#repReposiciones_empresa").removeAttr('disabled');
 				if(!data.ERROR){
@@ -181,12 +184,15 @@ $("#repReposiciones_btnBuscar").click(function(){
 var filtro_busq={};
 function buscarReposiciones(paginaActual){
 
-	    	var $consulta;
+				var $consulta;
+				var ceo_cook = decodeURIComponent(
+					document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+				);
 	    //	pag=paginaActual;
 	    	if(validar_filtro_busqueda("lotes-2")){
 	    		$('#cargando').fadeIn("slow");
 	    		$("#repReposiciones_btnBuscar").hide();
-	    		$('#div_tablaDetalle').fadeOut("fast");
+					$('#div_tablaDetalle').fadeOut("fast");
 		    	filtro_busq.empresa=$("#repReposiciones_empresa").val();
 		    	filtro_busq.fechaInicial=$("#repReposiciones_fechaInicial").val();
 		    	filtro_busq.fechaFin=$("#repReposiciones_fechaFinal").val();
@@ -196,9 +202,9 @@ function buscarReposiciones(paginaActual){
 		    	filtro_busq.paginaActual=paginaActual;
 		    	filtro_busq.tamPg = tamPg;
 		    	filtro_busq.paginar = true;
-
 		    	filtro_busq.acnomcia = $("option:selected","#repReposiciones_empresa").attr("acnomcia");
-		    	filtro_busq.des = $("option:selected","#repReposiciones_producto").attr("des");
+					filtro_busq.des = $("option:selected","#repReposiciones_producto").attr("des");
+					filtro_busq.ceo_name = ceo_cook;
 
 	//SE REALIZA LA INVOCACION AJAX
 		    	$consulta = $.post(baseURL + api + isoPais + "/reportes/reposiciones",filtro_busq );
