@@ -60,7 +60,10 @@ var widget_var = {
 		$('#productosS').empty();
 		$("#productosS").append('<option>Cargando...</option>');
 		$(this).attr('disabled',true);
-		$.post(baseURL+api+isoPais+"/producto/lista", { 'acrif': widget_var.acrif }, function(data){
+		var ceo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
+		$.post(baseURL+api+isoPais+"/producto/lista", { 'acrif': widget_var.acrif, ceo_name: ceo_cook }, function(data){
 			$("#empresasS").removeAttr('disabled');
 			$('#productosS').empty();
 			$("#productosS").append('<option>Seleccione un producto</option>');
@@ -100,9 +103,11 @@ var widget_var = {
 
 
 		if( widget_var.idproducto !== undefined ){
-
+			var ceo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
 			$.post( baseURL+"api/v1/"+isoPais+"/empresas/cambiar",
-				{ 'data-accodgrupoe':widget_var.accodgrupoe, 'data-acrif':widget_var.acrif, 'data-acnomcia':widget_var.acnomcia, 'data-acrazonsocial':widget_var.acrazonsocial, 'data-acdesc':widget_var.acdesc, 'data-accodcia':widget_var.accodcia, 'data-idproducto':widget_var.idproducto, 'data-nomProd':widget_var.nombprod, 'data-marcProd':widget_var.marcprod, 'llamada':'productos' },
+				{ 'data-accodgrupoe':widget_var.accodgrupoe, 'data-acrif':widget_var.acrif, 'data-acnomcia':widget_var.acnomcia, 'data-acrazonsocial':widget_var.acrazonsocial, 'data-acdesc':widget_var.acdesc, 'data-accodcia':widget_var.accodcia, 'data-idproducto':widget_var.idproducto, 'data-nomProd':widget_var.nombprod, 'data-marcProd':widget_var.marcprod, 'llamada':'productos', ceo_name: ceo_cook},
 				 function(data){
 
           			if(data === 1){
