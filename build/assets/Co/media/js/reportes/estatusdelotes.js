@@ -34,8 +34,13 @@ $(document).ready(function() {
 			$("#EstatusLotes-producto").children( 'option:not(:first)' ).remove();
 
 			$("#cargando_producto").fadeIn("slow");
-			$(this).attr('disabled',true);
-			$.post(baseURL + api + isoPais + "/producto/lista", { 'acrif': acrif }, function(data){
+			$(this).attr('disabled',true);}
+
+			var ceo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+				);
+
+			$.post(baseURL + api + isoPais + "/producto/lista", { 'acrif': acrif, ceo_name: ceo_cook }, function(data){
 				$("#cargando_producto").fadeOut("slow");
 				$("#EstatusLotes-empresa").removeAttr('disabled');
 				if(!data.ERROR){
@@ -114,6 +119,12 @@ var filtro_busq={};
 			$('#cargando').fadeIn("slow");
 			$("#EstatusLotes-btnBuscar").hide();
 	    	$('#div_tablaDetalle').fadeOut("fast");
+
+				var ceo_cook = decodeURIComponent(
+					document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+					);
+
+				filtro_busq.ceo_name = ceo_cook
 
 			$consulta = $.post(baseURL + api + isoPais + "/reportes/estatuslotes",filtro_busq );
 			$consulta.done(function(data){
@@ -344,7 +355,13 @@ $(".tbody-statuslotes").dataTable( {
 
 		$aux = $("#cargando").dialog({title:titulo,modal:true, close:function(){$(this).dialog('close')}, resizable:false });
 
-		$.post(url,datos).done(function(data){
+		var ceo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
+
+			datos.ceo_name = ceo_cook
+
+			$.post(url,datos).done(function(data){
 			$aux.dialog('destroy')
 			if(!data.ERROR){
 				$('form#formulario').empty();
