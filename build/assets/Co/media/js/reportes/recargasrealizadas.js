@@ -91,6 +91,11 @@ var filtro_busq={};
 	    	$(this).hide();
 	    	$('#div_tablaDetalle').fadeOut("fast");
 //SE REALIZA LA INVOCACION AJAX
+					var ceo_cook = decodeURIComponent(
+						document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+						);
+					filtro_busq.ceo_name = ceo_cook
+
 		    	$consulta = $.post(baseURL + api + isoPais + "/reportes/recargasrealizadas",filtro_busq );
 //DE SER EXITOSA LA COMUNICACION CON EL SERVICIO SE EJECUTA EL SIGUIENTE METODO "DONE"
 		 		$consulta.done(function(data){
@@ -321,6 +326,11 @@ function validar_filtro_busqueda(div){
   function descargarArchivo(datos, url, titulo){
 
   $aux = $("#cargando").dialog({title:titulo,modal:true, close:function(){$(this).dialog('close')}, resizable:false });
+	var ceo_cook = decodeURIComponent(
+		document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
+
+		datos.ceo_name = ceo_cook
 
       $.post(url,datos).done(function(data){
           $aux.dialog('destroy')
