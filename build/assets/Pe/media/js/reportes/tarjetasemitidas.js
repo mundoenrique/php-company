@@ -141,6 +141,9 @@ $(document).ready(function() {
 									}
 
 									descargarArchivo(datos, baseURL+api+isoPais+"/reportes/tarjetasEmitidasExpXLS", "Exportar Excel" );*/
+									var ceo_cook = decodeURIComponent(
+										document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+									);
 									$('form#formulario').empty();
 									$('form#formulario').append('<input type="hidden" name="idEmpresa" value="'+filtro_busq.acrif+'" />');
 									$('form#formulario').append('<input type="hidden" name="nomEmpresa" value="'+filtro_busq.acnomcia+'" />');
@@ -149,6 +152,7 @@ $(document).ready(function() {
 									$('form#formulario').append('<input type="hidden" name="fechaFin" value="'+filtro_busq.fechaFin+'" />');
 									$('form#formulario').append('<input type="hidden" name="radioGeneral" value="'+filtro_busq.radioGeneral+'" />');
 									$('form#formulario').attr('action',baseURL+api+isoPais+"/reportes/tarjetasEmitidasExpXLS");
+									$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'" />');
 									$('form#formulario').submit();
 								});
 
@@ -168,6 +172,9 @@ $(document).ready(function() {
 									}
 
 									descargarArchivo(datos, baseURL+api+isoPais+"/reportes/tarjetasEmitidasExpPDF", "Exportar PDF" );*/
+									var ceo_cook = decodeURIComponent(
+										document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+									);
 									$('form#formulario').empty();
 									$('form#formulario').append('<input type="hidden" name="idEmpresa" value="'+filtro_busq.acrif+'" />');
 									$('form#formulario').append('<input type="hidden" name="nomEmpresa" value="'+filtro_busq.acnomcia+'" />');
@@ -176,6 +183,7 @@ $(document).ready(function() {
 									$('form#formulario').append('<input type="hidden" name="fechaFin" value="'+filtro_busq.fechaFin+'" />');
 									$('form#formulario').append('<input type="hidden" name="radioGeneral" value="'+filtro_busq.radioGeneral+'" />');
 									$('form#formulario').attr('action',baseURL+api+isoPais+"/reportes/tarjetasEmitidasExpPDF");
+									$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'" />');
 									$('form#formulario').submit();
 							    });
 
@@ -548,10 +556,14 @@ return valido;
           $aux.dialog('destroy')
           if(!data.ERROR){
             $('form#formulario').empty();
+						var ceo_cook = decodeURIComponent(
+							document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+						);
             $('form#formulario').append('<input type="hidden" name="bytes" value="'+JSON.stringify(data.bytes)+'" />');
             $('form#formulario').append('<input type="hidden" name="ext" value="'+data.ext+'" />');
             $('form#formulario').append('<input type="hidden" name="nombreArchivo" value="'+data.nombreArchivo+'" />');
             $('form#formulario').attr('action',baseURL+isoPais+"/file");
+						$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'" />');
             $('form#formulario').submit()
           }else{
             if(data.ERROR=="-29"){
