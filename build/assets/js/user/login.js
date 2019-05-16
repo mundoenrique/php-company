@@ -44,7 +44,7 @@ function ingresar(user, text) {
 		var dataResponse = response.data
 		switch(response.code) {
 			case 0:
-				dataResponse.indexOf('dashboard') != -1 ? dataResponse = dataResponse.replace(country, pais) : '';
+				dataResponse.indexOf('dashboard') != -1 ? dataResponse = dataResponse.replace(country+'/', pais+'/') : '';
 				$(location).attr('href', dataResponse)
 				break;
 			case 1:

@@ -61,12 +61,17 @@ $(function() {
             }
         });
 
+				var ceo_cook = decodeURIComponent(
+					document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+					);
+
         $.post(baseURL + api + isoPais + '/servicios/transferencia-maestra/buscar', {
             'data-dni': $('#dni').val(),
             'data-tjta': $('#nroTjta').val(),
             'data-pg': pgSgt,
             'data-paginas': serv_var.paginas,
-            'data-paginar': serv_var.paginar
+						'data-paginar': serv_var.paginar,
+						'ceo_name': ceo_cook
         })
             .done(function(data) {
 
@@ -326,6 +331,10 @@ $(function() {
         pass = hex_md5(pass);
         $('#clave').val("");
 
+				var ceo_cook = decodeURIComponent(
+					document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+					);
+
         $.post(url, {
             'data-tarjeta': serv_var.noTarjetas,
             'data-id_ext_per': serv_var.dni_tarjetas,
@@ -333,7 +342,8 @@ $(function() {
             'data-monto': serv_var.monto,
             'data-pg': 1,
             'data-paginas': 1,
-            'data-paginar': false
+						'data-paginar': false,
+						'ceo_name': ceo_cook
         })
             .done(function(data) {
 
@@ -949,12 +959,17 @@ $(function() {
                                                 open: function (event, ui) {
                                                     $('.ui-dialog-titlebar-close', ui.dialog).hide();
                                                 }
-                                            });
+																						});
+																						var ceo_cook = decodeURIComponent(
+																							document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+																							);
+
                                             $.post(baseURL + api + isoPais + '/servicios/transferencia-maestra/RegargaTMProcede', {
                                                 "amount":amount,
 																								"descript": descrip,
 																								"type": 'abono',
-                                                "codeToken": codeToken
+																								"codeToken": codeToken,
+																								'ceo_name': ceo_cook
                                             })
                                                 .done(function (data) {
                                                     $aux.dialog('destroy');
