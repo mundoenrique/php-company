@@ -38,7 +38,12 @@ $(document).ready(function() {
 
 			$("#cargando_producto").fadeIn("slow");
 			$(this).attr('disabled',true);
-			$.post(baseURL + api + isoPais + "/producto/lista", { 'acrif': acrif }, function(data){
+
+			var ceo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+				);
+
+			$.post(baseURL + api + isoPais + "/producto/lista", { 'acrif': acrif, ceo_name: ceo_cook }, function(data){
 				$("#cargando_producto").fadeOut("slow");
 				$("#SaldosAmanecidos-empresa").removeAttr('disabled');
 				if(!data.ERROR){
@@ -242,7 +247,10 @@ var filtro_busq={};
 				    	filtro_busq.tamPg=tamPg;
 
 
-
+							var ceo_cook = decodeURIComponent(
+								document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+								);
+							filtro_busq.ceo_name = ceo_cook
 			//SE REALIZA LA INVOCACION AJAX
 				    	$consulta = $.post(baseURL + api + isoPais + "/reportes/saldosamanecidos",filtro_busq );
 			//DE SER EXITOSA LA COMUNICACION CON EL SERVICIO SE EJECUTA EL SIGUIENTE METODO "DONE"
