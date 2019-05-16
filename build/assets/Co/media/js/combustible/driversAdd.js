@@ -274,10 +274,16 @@ function notiSystem(title) {
         e.preventDefault();
         $(msgSystem).dialog('close');
         $('#msg-info').empty();
-        var finish = $(this).attr('finish');
+				var finish = $(this).attr('finish');
+
+				var ceo_cook = decodeURIComponent(
+					document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+					);
+
         switch (finish) {
             case 'u':
-                $('form#formulario').empty();
+								$('form#formulario').empty();
+								$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'">');
                 $('form#formulario').append('<input type="hidden" name="modelo" value="driver"/>');
                 $('form#formulario').append('<input type="hidden" name="function" value="update"/>');
                 $('form#formulario').append('<input type="hidden" name="data-id" value="' + $('#user').val() + '" />');

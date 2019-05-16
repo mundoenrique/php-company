@@ -332,8 +332,11 @@ var filtro_busq={};
 
 
 $("#export_excel").click(function(){
-
+	var ceo_cook = decodeURIComponent(
+		document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
 			$('form#formulario').empty();
+			$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'">');
 			$('form#formulario').append('<input type="hidden" name="empresa" value="'+filtro_busq.empresa+'" />');
 			$('form#formulario').append('<input type="hidden" name="cedula" value="'+filtro_busq.cedula+'" />');
 			$('form#formulario').append('<input type="hidden" name="producto" value="'+filtro_busq.producto+'" />');

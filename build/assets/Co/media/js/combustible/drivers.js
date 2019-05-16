@@ -1,12 +1,10 @@
 var language;
 var selectStatusDriver;
 $(function() {
-
 	var ceo_cook = decodeURIComponent(
 		document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 		);
-
-	$.post(baseURL + '/' + isoPais + '/trayectos/modelo', { way: 'drivers', modelo: 'driver', ceo_name: ceo_cook })
+	$.post(baseURL + '/' + isoPais + '/trayectos/modelo', { way: 'drivers', modelo: 'driver', ceo_name: ceo_cook})
         .done( function(data) {
             lang = data.language;
             switch (data.code) {
@@ -138,11 +136,9 @@ $('#send-info').on('click', function(){
 
     if(dniValido || func == 'register') {
 				clearInput();
-
 				var ceo_cook = decodeURIComponent(
 					document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-					);
-
+				);
         $.ajax({
             url: baseURL + '/' + isoPais + '/trayectos/modelo',
             type: 'POST',
@@ -269,8 +265,12 @@ function notiSystem (title, size, type, message) {
 }
 
 function addEdit(userName, func) {
-    $('form#formulario').empty();
-    $('form#formulario').append('<input type="hidden" name="modelo" value="driver" />');
+	var ceo_cook = decodeURIComponent(
+		document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+	);
+		$('form#formulario').empty();
+		$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'" />');
+		$('form#formulario').append('<input type="hidden" name="modelo" value="driver" />');
     $('form#formulario').append('<input type="hidden" name="function" value="' + func + '" />');
     $('form#formulario').append('<input type="hidden" name="data-id" value="' + userName + '" />');
     $('form#formulario').attr('action',baseURL+'/'+isoPais+'/trayectos/conductores/perfil');

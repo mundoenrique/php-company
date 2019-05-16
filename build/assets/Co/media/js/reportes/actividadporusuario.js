@@ -271,8 +271,13 @@ $('#table-activ-user').on('click', '.vA', function(){
 
    descargarArchivo(datos, baseURL + api + isoPais + "/reportes/downPDFactividadUsuario", "Descargando archivo PDF" );
 */
+var ceo_cook = decodeURIComponent(
+	document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+	);
 $('#exportTo').attr('action', baseURL + api + isoPais + "/reportes/downPDFactividadUsuario");
-    $('#data-fechaIni').val(params.fecha_ini);
+
+		$('#exportTo').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'">');
+		$('#data-fechaIni').val(params.fecha_ini);
     $('#data-fechaFin').val(params.fecha_fin);
     $('#data-acodcia').val(params.acodcia);
     $('#data-acrif').val(params.acrif);
@@ -292,8 +297,13 @@ $('#exportTo').attr('action', baseURL + api + isoPais + "/reportes/downPDFactivi
    descargarArchivo(datos, baseURL + api + isoPais + "/reportes/downXLSactividadUsuario", "Descargando archivo excel" );
 */
 
+		var ceo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
+
   $('#exportTo').attr('action', baseURL + api + isoPais + "/reportes/downXLSactividadUsuario");
-    $('#data-fechaIni').val(params.fecha_ini);
+	$('#exportTo').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'">');
+	$('#data-fechaIni').val(params.fecha_ini);
     $('#data-fechaFin').val(params.fecha_fin);
     $('#data-acodcia').val(params.acodcia);
     $('#data-acrif').val(params.acrif);
@@ -313,9 +323,13 @@ $('#exportTo').attr('action', baseURL + api + isoPais + "/reportes/downPDFactivi
 			datos.ceo_name = ceo_cook
 
       $.post(url,datos).done(function(data){
-          $aux.dialog('destroy')
+					$aux.dialog('destroy')
+					var ceo_cook = decodeURIComponent(
+						document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+						);
           if(!data.ERROR){
-            $('#exportTo').empty();
+						$('#exportTo').empty();
+						$('#exportTo').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'">');
             $('#exportTo').append('<input type="hidden" name="bytes" value="'+JSON.stringify(data.bytes)+'" />');
             $('#exportTo').append('<input type="hidden" name="ext" value="'+data.ext+'" />');
             $('#exportTo').append('<input type="hidden" name="nombreArchivo" value="'+data.nombreArchivo+'" />');

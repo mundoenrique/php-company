@@ -14,7 +14,12 @@ var	notificacion = function(titu, msj){
 			});
 	},
 	getReporteTarjetas = function(){
+		var ceo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
+
 		$('form#formulario').attr('action',baseURL+isoPais+"/lotes/innominada/generarReporteTarjetasInnominadas");
+		$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'">');
 		$('form#formulario').submit();
 	},
 	setNumlote = function(){

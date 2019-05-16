@@ -41,7 +41,12 @@ $(function(){
 
                 $aux = $("#loading").dialog({title:'Buscando Orden de Servicio',modal:true, close:function(){$(this).dialog('destroy')}, resizable:false });
 
-                $('form#formulario').empty();
+								var ceo_cook = decodeURIComponent(
+									document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+									);
+
+								$('form#formulario').empty();
+								$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'">');
                 $('form#formulario').append('<input type="hidden" name="data-fechIn" value="'+COS_var.fecIsend+'" />');
                 $('form#formulario').append('<input type="hidden" name="data-fechFin" value="'+COS_var.fecfsend+'" />');
                 $('form#formulario').append('<input type="hidden" name="data-status" value="'+statuLote+'" />');
@@ -70,7 +75,13 @@ $(function(){
 
         var OS = $(this).parents("tr").attr('id');
         $aux = $("#loading").dialog({title:'Descargando archivo PDF',modal:true, close:function(){$(this).dialog('close')}, resizable:false });
-        $('form#formulario').empty();
+
+				var ceo_cook = decodeURIComponent(
+					document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+					);
+
+				$('form#formulario').empty();
+				$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'">');
         $('form#formulario').append('<input type="hidden" name="data-idOS" value="'+OS+'" />');
         $('form#formulario').append($('#data-OS'));
         $('form#formulario').attr('action',baseURL+api+isoPais+"/consulta/downloadOS");
@@ -354,7 +365,11 @@ $(function(){
         $(this).removeAttr("href");
         $(this).removeAttr('target');
         $aux = $("#loading").dialog({title:'Descargando factura',modal:true, close:function(){$(this).dialog('close')}, resizable:false });
-        $('form#formulario').empty();
+				var ceo_cook = decodeURIComponent(
+					document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+					);
+				$('form#formulario').empty();
+				$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'">');
         $('form#formulario').append('<input type="hidden" name="data-idOS" value="'+orden+'" />');
         $('form#formulario').append($('#data-OS'));
         $('form#formulario').attr('action',baseURL+api+isoPais+"/consulta/facturar");
