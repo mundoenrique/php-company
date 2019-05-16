@@ -96,8 +96,10 @@ $(function(){ // Document ready
 			$('#nombre').removeAttr('style');
 			$("#buscar-datos").hide();
 			$("#loading").dialog({title: "Buscando datos", modal:true});
-
-			$.post(baseURL+api+isoPais+'/servicios/actualizar-datos/buscar-datos').done(function(data){
+			var ceo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
+			$.post(baseURL+api+isoPais+'/servicios/actualizar-datos/buscar-datos', {ceo_name: ceo_cook}).done(function(data){
 
 				if(!data.ERROR){
 
