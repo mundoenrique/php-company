@@ -100,7 +100,12 @@ function validar_campos() {
 
 //llamado a la lista de vehículos de un grupo
 function vehicles(id, name) {
+	var ceo_cook = decodeURIComponent(
+		document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+	);
+
 	$('form#formulario').empty();
+	$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ ceo_cook +'"/>');
 	$('form#formulario').append('<input type="hidden" name="data-id" value="' + id + '" />');
 	$('form#formulario').append('<input type="hidden" name="data-name" value="' + name + '" />');
 	$('form#formulario').append('<input type="hidden" name="modelo" value="vehicles" />');

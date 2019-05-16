@@ -109,21 +109,12 @@ $(document).ready(function () {
 
 	$("#exportXLS_a").click(function () {
 
-
-		/*datos={
-			empresa: filtro_busq.empresa,
-			fechaInicial: filtro_busq.fechaInicial,
-			fechaFin: filtro_busq.fechaFin,
-			filtroFecha: filtro_busq.filtroFecha,
-			producto: filtro_busq.producto,
-			nomEmpresa: filtro_busq.acnomcia,
-			descProd: filtro_busq.productoDES +"/"+filtro_busq.marca
-		}
-
-		descargarArchivo(datos, baseURL+api+isoPais+"/reportes/cuentaConcentradoraExpXLS", "Exportar Excel" );
-*/
+		var ceo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
 
 		$('form#formulario').empty();
+		$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ ceo_cook +'"/>');
 		$('form#formulario').append('<input type="hidden" name="empresa" value="' + filtro_busq.empresa + '" />');
 		$('form#formulario').append('<input type="hidden" name="fechaInicial" value="' + filtro_busq.fechaInicial + '" />');
 		$('form#formulario').append('<input type="hidden" name="fechaFin" value="' + filtro_busq.fechaFin + '" />');
@@ -136,7 +127,9 @@ $(document).ready(function () {
 
 
 	$("#export_excel").on("click", function () { // descargar orden de servicio
-
+		var ceo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
 		$aux = $("#loading").dialog({
 			title: 'Descargando archivo Excel',
 			modal: true,
@@ -146,6 +139,7 @@ $(document).ready(function () {
 			resizable: false
 		});
 		$('form#formulario').empty();
+		$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ ceo_cook +'"/>');
 		$('form#formulario').append('<input type="hidden" name="empresa" value="' + filtro_busq.empresa + '" />');
 		$('form#formulario').append('<input type="hidden" name="fechaInicial" value="' + filtro_busq.fechaInicial + '" />');
 		$('form#formulario').append('<input type="hidden" name="fechaFin" value="' + filtro_busq.fechaFin + '" />');
@@ -162,7 +156,9 @@ $(document).ready(function () {
 
 
 	$("#exportPDF_a").on("click", function () { // descargar orden de servicio
-
+		var ceo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
 		$aux = $("#loading").dialog({
 			title: 'Descargando archivo Excel',
 			modal: true,
@@ -171,6 +167,7 @@ $(document).ready(function () {
 			},
 			resizable: false
 		});
+		$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ ceo_cook +'"/>');
 		$('form#formulario').append('<input type="hidden" name="empresa" value="' + filtro_busq.empresa + '" />');
 		$('form#formulario').append('<input type="hidden" name="fechaInicial" value="' + filtro_busq.fechaInicial + '" />');
 		$('form#formulario').append('<input type="hidden" name="fechaFin" value="' + filtro_busq.fechaFin + '" />');
@@ -199,10 +196,13 @@ $(document).ready(function () {
 			maxheight: "250px",
 			buttons: {
 				OK: function () {
-
+					var ceo_cook = decodeURIComponent(
+						document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+					);
 					$(".ui-dialog-content").dialog().dialog("close");
 
 					$('form#formulario').empty();
+					$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ ceo_cook +'"/>');
 					$('form#formulario').append('<input type="hidden" name="empresa" value="' + filtro_busq.empresa + '" />');
 					$('form#formulario').append('<input type="hidden" name="fechaInicial" value="' + filtro_busq.fechaInicial + '" />');
 					$('form#formulario').append('<input type="hidden" name="fechaFin" value="' + filtro_busq.fechaFin + '" />');
@@ -337,16 +337,12 @@ $(document).ready(function () {
 		} else {
 			$("#" + div + " input[type='radio'].required").next().attr("style", "");
 		}
-
-
 		if (!valido) {
 			$(".div_tabla_detalle").fadeOut("fast");
 			$("#mensajeError").fadeIn("fast");
 		} else {
 			$("#mensajeError").fadeOut("fast");
 		}
-
-
 		return valido;
 	}
 

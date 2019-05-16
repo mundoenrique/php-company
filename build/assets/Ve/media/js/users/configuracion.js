@@ -45,8 +45,10 @@ $(function () {
 
 	//cambio de clave
 	$('#btn-cambioC').on('click', function () {
-
-		var canvas = "<form id='formu'><input type=password id='old' placeholder='Contraseña actual' size=26/>";
+		var ceo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
+		var canvas = "<form id='formu'><input type='hidden' name='ceo_name' value="+ceo_cook+"/><input type=password id='old' placeholder='Contraseña actual' size=26/>";
 		canvas += "<input type=password id='new' placeholder='Contraseña nueva' maxlength=" + max + " size=26/>";
 		canvas += "<input type=password id='confNew' placeholder='Confirme contraseña nueva' maxlength=" + max + " size=26/><h5 id='vacio'></h5></form>";
 
@@ -1058,8 +1060,13 @@ $(function () {
 							if ($("option:selected", "#listaEmpresasSuc").attr("data-rif") != "") {
 								$("#form-new-suc").fadeOut("fast");
 								$("#btn-new-mas").replaceWith('<h3 id="cargando_masivo">Cargando...</h3>');
+								var ceo_cook = decodeURIComponent(
+									document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+									);
+
 								dat.formData = {
-									'data-rif': $("option:selected", "#listaEmpresasSuc").attr("data-rif")
+									'data-rif': $("option:selected", "#listaEmpresasSuc").attr("data-rif"),
+									ceo_name: ceo_cook
 								};
 								dat.submit().success(function (result, textStatus, jqXHR) {
 

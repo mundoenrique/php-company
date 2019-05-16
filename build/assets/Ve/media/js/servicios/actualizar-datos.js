@@ -16,7 +16,10 @@ $(function () { // Document ready
 				f = $('#userfile').val();
 				$('#archivo').val($('#userfile').val());
 				dat = data;
-
+				var ceo_cook = decodeURIComponent(
+					document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+					);
+				dat.ceo_name = ceo_cook
 				var ext = $('#userfile').val().substr($('#userfile').val().lastIndexOf(".") + 1).toLowerCase();
 				if (ext === "xls" || ext === "xlsx") {
 					data.context = $('#cargarXLS').click(function () {

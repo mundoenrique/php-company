@@ -339,13 +339,16 @@ $(function () {
 		var desc = $(this).attr("data-acdesc");
 		var accodcia = $(this).attr("data-accodcia");
 		var accodgrupoe = $(this).attr("data-accodgrupoe");
-
+		var ceo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
 		$('form#empresas').append('<input type="hidden" name="data-acrif" value="' + rif + '" />');
 		$('form#empresas').append('<input type="hidden" name="data-acnomcia" value="' + activ + '" />');
 		$('form#empresas').append('<input type="hidden" name="data-acrazonsocial" value="' + razon + '" />');
 		$('form#empresas').append('<input type="hidden" name="data-acdesc" value="' + desc + '" />');
 		$('form#empresas').append('<input type="hidden" name="data-accodcia" value="' + accodcia + '" />');
 		$('form#empresas').append('<input type="hidden" name="data-accodgrupoe" value="' + accodgrupoe + '" />');
+		$('form#empresas').append('<input type="hidden" name="ceo_name" value="'+ ceo_cook +'"/>');
 		$('form#empresas').submit();
 	});
 

@@ -383,8 +383,12 @@ $(function () {
 	// CONFIRMAR OPERACION
 
 	function confirmar(titulo, url, operacion, mensaje) {
+		var ceo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
 		var canvas = "<div id='dialog-confirm'>";
 		canvas += "<form name='no-form' onsubmit='return false'>";
+		canvas += "<input type='hidden' name='ceo_name' value="+ceo_cook+"/>";
 		canvas += "<p>Tarjeta: " + serv_var.noTarjetas + "</p>";
 		canvas += "<fieldset><input type='password' name='pass' id='pass' placeholder='Ingrese su contraseña' size='28'>";
 		canvas += "</fieldset><h5 id='msg'></h5>";
