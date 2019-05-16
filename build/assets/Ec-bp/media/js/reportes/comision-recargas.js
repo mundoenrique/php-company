@@ -227,10 +227,13 @@ function downloadReport(downloadData) {
 		$('#search').removeAttr('disabled');
 		$('#loading-report').hide();
 		$('#comisiones-xls, #comisiones-pdf').fadeIn();
-
+		var ceo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
 		switch(code) {
 			case 0:
 				$('#down-report').empty();
+				$('#down-report').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'">');
 				$('#down-report').append('<input type="hidden" name="mod" value="lists_and_requirements" />');
 				$('#down-report').append('<input type="hidden" name="way" value="downloadFile" />');
 				$('#down-report').append('<input type="hidden" name="request" value="' + msg + '" />');

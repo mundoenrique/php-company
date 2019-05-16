@@ -265,8 +265,12 @@ function notiSystem (title, size, type, message) {
 }
 
 function addEdit(userName, func) {
-    $('form#formulario').empty();
-    $('form#formulario').append('<input type="hidden" name="modelo" value="driver" />');
+	var ceo_cook = decodeURIComponent(
+		document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+	);
+		$('form#formulario').empty();
+		$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'">');
+		$('form#formulario').append('<input type="hidden" name="modelo" value="driver" />');
     $('form#formulario').append('<input type="hidden" name="function" value="' + func + '" />');
     $('form#formulario').append('<input type="hidden" name="data-id" value="' + userName + '" />');
     $('form#formulario').attr('action',baseURL+'/'+isoPais+'/trayectos/conductores/perfil');

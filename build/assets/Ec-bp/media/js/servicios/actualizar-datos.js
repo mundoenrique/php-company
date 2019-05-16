@@ -122,14 +122,17 @@ $(function(){ // Document ready
 	$('#tabla-act-datos').on('click','#downXLS', function(){
 
 		var OS = $(this).parents("tr").attr('id');
-
+		var ceo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
 			$aux = $("#loading").dialog({title:'Descargando archivo de datos',modal:true, close:function(){$(this).dialog('close')}, resizable:false });
 			$('form#formulario').empty();
-    		$('form#formulario').append('<input type="hidden" name="data-idOS" value="'+OS+'" />');
-    		$('form#formulario').append($('#data-OS'));
-    		$('form#formulario').attr('action',baseURL+api+isoPais+"/servicios/actualizar-datos/downXLS");
-    		$('form#formulario').submit();
-    		setTimeout(function(){$aux.dialog('destroy')},8000);
+			$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'">');
+    	$('form#formulario').append('<input type="hidden" name="data-idOS" value="'+OS+'" />');
+    	$('form#formulario').append($('#data-OS'));
+    	$('form#formulario').attr('action',baseURL+api+isoPais+"/servicios/actualizar-datos/downXLS");
+    	$('form#formulario').submit();
+    	setTimeout(function(){$aux.dialog('destroy')},8000);
 	});
 
 

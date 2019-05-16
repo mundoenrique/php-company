@@ -82,7 +82,10 @@ $(function(){
     // EVENTO BUSCAR OS SEGUN FILTRO
     $("#buscarOS").on("click", function(){
 
-        var statuLote = $("#status_lote").val();
+				var statuLote = $("#status_lote").val();
+				var ceo_cook = decodeURIComponent(
+					document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+				);
 
         if( statuLote!=='' && COS_var.fecha_inicio!=='' && COS_var.fecha_fin!=='' ){
 
@@ -90,7 +93,8 @@ $(function(){
 
                 $aux = $("#loading").dialog({title:'Buscando Orden de Servicio',modal:true, close:function(){$(this).dialog('destroy')}, resizable:false });
 
-                $('form#formulario').empty();
+								$('form#formulario').empty();
+								$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'">');
                 $('form#formulario').append('<input type="hidden" name="data-fechIn" value="'+COS_var.fecIsend+'" />');
                 $('form#formulario').append('<input type="hidden" name="data-fechFin" value="'+COS_var.fecfsend+'" />');
                 $('form#formulario').append('<input type="hidden" name="data-status" value="'+statuLote+'" />');
@@ -117,9 +121,13 @@ $(function(){
 
     $("#tabla-datos-general").on("click","#dwnPDF", function(){ // descargar orden de servicio
 
-        var OS = $(this).parents("tr").attr('id');
+				var OS = $(this).parents("tr").attr('id');
+				var ceo_cook = decodeURIComponent(
+					document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+				);
         $aux = $("#loading").dialog({title:'Descargando archivo PDF',modal:true, close:function(){$(this).dialog('close')}, resizable:false });
-        $('form#formulario').empty();
+				$('form#formulario').empty();
+				$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'">');
         $('form#formulario').append('<input type="hidden" name="data-idOS" value="'+OS+'" />');
         $('form#formulario').append($('#data-OS'));
         $('form#formulario').attr('action',baseURL+api+isoPais+"/consulta/downloadOS");
@@ -398,8 +406,12 @@ $(function(){
         orden = $(this).parents("tr").attr("id");
         $(this).removeAttr("href");
         $(this).removeAttr('target');
-        $aux = $("#loading").dialog({title:'Descargando factura',modal:true, close:function(){$(this).dialog('close')}, resizable:false });
-        $('form#formulario').empty();
+				$aux = $("#loading").dialog({title:'Descargando factura',modal:true, close:function(){$(this).dialog('close')}, resizable:false });
+				var ceo_cook = decodeURIComponent(
+					document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+				);
+				$('form#formulario').empty();
+				$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'">');
         $('form#formulario').append('<input type="hidden" name="data-idOS" value="'+orden+'" />');
         $('form#formulario').append($('#data-OS'));
         $('form#formulario').attr('action',baseURL+api+isoPais+"/consulta/facturar");
