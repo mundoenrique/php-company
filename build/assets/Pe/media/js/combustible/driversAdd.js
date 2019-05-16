@@ -274,11 +274,15 @@ function notiSystem(title) {
         var finish = $(this).attr('finish');
         switch (finish) {
             case 'u':
+								var ceo_cook = decodeURIComponent(
+									document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+								);
                 $('form#formulario').empty();
                 $('form#formulario').append('<input type="hidden" name="modelo" value="driver"/>');
                 $('form#formulario').append('<input type="hidden" name="function" value="update"/>');
                 $('form#formulario').append('<input type="hidden" name="data-id" value="' + $('#user').val() + '" />');
                 $('form#formulario').attr('action', baseURL + '/' + isoPais + '/trayectos/conductores/perfil');
+								$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'" />');
                 $('form#formulario').submit();
                 break;
             case 'b':
