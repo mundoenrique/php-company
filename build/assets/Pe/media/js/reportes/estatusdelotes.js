@@ -72,6 +72,9 @@ $(document).ready(function() {
 			}
 			descargarArchivo(datos, baseURL+api+isoPais+"/reportes/estatuslotesExpXLS", "Exportar Excel" );
 */
+	var ceo_cook = decodeURIComponent(
+		document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+	);
 			$('form#formulario').empty();
 	$('form#formulario').append('<input type="hidden" name="empresa" value="'+filtro_busq.empresa+'" />');
 	$('form#formulario').append('<input type="hidden" name="fechaInicial" value="'+filtro_busq.fechaInicial+'" />');
@@ -79,6 +82,7 @@ $(document).ready(function() {
 	$('form#formulario').append('<input type="hidden" name="lotes_producto" value="'+filtro_busq.lotes_producto+'" />');
 	$('form#formulario').append('<input type="hidden" name="paginaActual" value="'+1+'" />');
 	$('form#formulario').attr('action',baseURL+api+isoPais+"/reportes/estatuslotesExpXLS");
+	$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'" />');
 	$('form#formulario').submit();
 		});
 
@@ -93,6 +97,9 @@ $("#export_pdf").click(function(){
 	}
 	descargarArchivo(datos, baseURL+api+isoPais+"/reportes/estatuslotesExpPDF", "Exportar PDF" );
 */
+	var ceo_cook = decodeURIComponent(
+		document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+	);
 $('form#formulario').empty();
 	$('form#formulario').append('<input type="hidden" name="empresa" value="'+filtro_busq.empresa+'" />');
 	$('form#formulario').append('<input type="hidden" name="fechaInicial" value="'+filtro_busq.fechaInicial+'" />');
@@ -100,6 +107,7 @@ $('form#formulario').empty();
 	$('form#formulario').append('<input type="hidden" name="lotes_producto" value="'+filtro_busq.lotes_producto+'" />');
 	$('form#formulario').append('<input type="hidden" name="paginaActual" value="'+1+'" />');
 	$('form#formulario').attr('action',baseURL+api+isoPais+"/reportes/estatuslotesExpPDF");
+	$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'" />');
 	$('form#formulario').submit();
 });
 
@@ -357,11 +365,15 @@ $(".tbody-statuslotes").dataTable( {
 		$.post(url,datos).done(function(data){
 			$aux.dialog('destroy')
 			if(!data.ERROR){
+				var ceo_cook = decodeURIComponent(
+					document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+				);
 				$('form#formulario').empty();
 				$('form#formulario').append('<input type="hidden" name="bytes" value="'+JSON.stringify(data.bytes)+'" />');
 				$('form#formulario').append('<input type="hidden" name="ext" value="'+data.ext+'" />');
 				$('form#formulario').append('<input type="hidden" name="nombreArchivo" value="'+data.nombreArchivo+'" />');
 				$('form#formulario').attr('action',baseURL+isoPais+"/file");
+				$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'" />');
 				$('form#formulario').submit()
 			}else{
 				if(data.ERROR=="-29"){
