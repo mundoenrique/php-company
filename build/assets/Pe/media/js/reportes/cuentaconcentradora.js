@@ -213,7 +213,10 @@ var $consulta;
 
 $('#cargando').dialog({ modal: true,maxWidth: 700,maxHeight: 300,dialogClass: 'hide-close' });
 
-
+		var ceo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
+		filtro_busq.ceo_name = ceo_cook;
 		$consulta = $.post(baseURL + api + isoPais + "/reportes/graficoCuentaConcentradora",filtro_busq );
 		$consulta.done(function(data){
 			$(".ui-dialog-content").dialog().dialog("close");
@@ -395,6 +398,10 @@ function WS(filtro_busq){
 	$("#repUsuario_btnBuscar").hide();
 	$('#div_tablaDetalle').hide();
 			//SE REALIZA LA INVOCACION AJAX
+			var ceo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
+			filtro_busq.ceo_name = ceo_cook;
 			$consulta = $.post(baseURL + api + isoPais + "/reportes/cuentaConcentradora",filtro_busq );
 			//DE SER EXITOSA LA COMUNICACION CON EL SERVICIO SE EJECUTA EL SIGUIENTE METODO "DONE"
 			$consulta.done(function(data){
@@ -603,7 +610,10 @@ function paginar(totalPaginas, paginaActual) {
 function descargarArchivo(datos, url, titulo){
 
 	$aux = $("#cargando").dialog({title:titulo,modal:true, close:function(){$(this).dialog('close')}, resizable:false });
-
+	var ceo_cook = decodeURIComponent(
+		document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+	);
+	datos.ceo_name = ceo_cook;
 	$.post(url,datos).done(function(data){
 		$aux.dialog('destroy')
 		if(!data.ERROR){
