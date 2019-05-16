@@ -128,8 +128,11 @@ $(document).ready(function() {
 
 
 	    $("#export_excel").click(function(){
-
-	    	$('form#formulario').empty();
+				var ceo_cook = decodeURIComponent(
+					document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+				);
+				$('form#formulario').empty();
+				$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ ceo_cook +'"/>');
 			$('form#formulario').append('<input type="hidden" name="empresa" value="'+filtro_busq.empresa+'" />');
 			$('form#formulario').append('<input type="hidden" name="fechaInicial" value="'+filtro_busq.fechaInicial+'" />');
 			$('form#formulario').append('<input type="hidden" name="fechaFin" value="'+filtro_busq.fechaFin+'" />');
@@ -141,39 +144,6 @@ $(document).ready(function() {
 			$('form#formulario').append('<input type="hidden" name="paginaActual" value="1" />');
 			$('form#formulario').attr('action',baseURL+api+isoPais+"/reportes/reposicionesExpXLS");
 			$('form#formulario').submit();
-
-
-			/*datos={
-				empresa:filtro_busq.empresa,
-				fechaInicial: filtro_busq.fechaInicial,
-				fechaFin: filtro_busq.fechaFin,
-				idTarjetaHabiente: filtro_busq.idTarjetaHabiente,
-				tipoReposicion: filtro_busq.tipoReposicion,
-				producto: filtro_busq.producto,
-				nomEmpresa: filtro_busq.acnomcia,
-				nomProducto: filtro_busq.des,
-				paginaActual:1
-			}
-	    	$aux = $("#cargando").dialog({title:'Descargando archivo de datos',modal:true, close:function(){$(this).dialog('close')}, resizable:false });
-			$.post(baseURL+api+isoPais+"/reportes/reposicionesExpXLS",datos).done(function(data){
-    			$aux.dialog('destroy')
-    			if(!data.ERROR){
-    				$('form#formulario').empty();
-    				$('form#formulario').append('<input type="hidden" name="bytes" value="'+JSON.stringify(data.bytes)+'" />');
-    				$('form#formulario').append('<input type="hidden" name="ext" value="'+data.ext+'" />');
-    				$('form#formulario').append('<input type="hidden" name="nombreArchivo" value="'+data.nombreArchivo+'" />');
-    				$('form#formulario').attr('action',baseURL+'/'+isoPais+"/file");
-    				$('form#formulario').submit()
-    			}else{
-    				if(data.ERROR=="-29"){
-    					alert('Usuario actualmente desconectado');
-						location.reload();
-    				}else{
-    					notificacion('Descargando archivo de datos',data.ERROR)
-    				}
-
-    			}
-    		})*/
 
 	    });
 

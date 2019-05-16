@@ -398,7 +398,9 @@ $(document).ready(function () {
 	}
 
 	function descargarArchivo(filtro_busq, url, titulo) {
-
+		var ceo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
 		$aux = $("#cargando").dialog({
 			title: titulo,
 			modal: true,
@@ -409,6 +411,7 @@ $(document).ready(function () {
 		});
 
 		$('form#formulario').empty();
+		$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ ceo_cook +'"/>');
 		$('form#formulario').append('<input type="hidden" name="nombreEmpresa" value="' + filtro_busq.nombreEmpresa + '" />');
 		$('form#formulario').append('<input type="hidden" name="fechaini" value="' + filtro_busq.Fechaini + '" />');
 		$('form#formulario').append('<input type="hidden" name="fechafin" value="' + filtro_busq.Fechafin + '" />');
