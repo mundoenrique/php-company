@@ -105,7 +105,11 @@ function getDataAccount(type) {
 
 
 function account(card) {
+	var ceo_cook = decodeURIComponent(
+		document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+	);
 	$('form#formularioAccount').append('<input type="hidden" name="data-id" value="' + card + '" />');
+	$('form#formularioAccount').append('<input type="hidden" name="ceo_name" value="'+ ceo_cook +'"/>');
 	$('form#formularioAccount').attr('action', baseURL + '/' + isoPais + '/trayectos/detalleCuentas');
 	$('form#formularioAccount').submit();
 	// console.log('tarjeta enviada: '+ card)
