@@ -331,12 +331,16 @@ $(function () { // Document ready
 		function () {
 			var estado = $(this).attr("data-edo");
 			var ticket = $(this).attr("data-idTicket");
-
+			var ceo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
 			if (estado == "1") {
+				$('form#confirmar').append('<input type="hidden" name="ceo_name" value="'+ ceo_cook +'"/>');
 				$("form#confirmar").append('<input type="hidden" name="data-estado" value="' + estado + '" />');
 				$("form#confirmar").append('<input type="hidden" name="data-idTicket" value="' + ticket + '" />');
 				$("form#confirmar").submit();
 			} else if (estado == "5") {
+				$('form#detalle').append('<input type="hidden" name="ceo_name" value="'+ ceo_cook +'"/>');
 				$("form#detalle").append('<input type="hidden" name="data-estado" value="' + estado + '" />');
 				$("form#detalle").append('<input type="hidden" name="data-idTicket" value="' + ticket + '" />');
 				$("form#detalle").submit();

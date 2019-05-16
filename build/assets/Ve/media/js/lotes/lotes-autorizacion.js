@@ -336,9 +336,13 @@ $(function () {
 
 	$('#lotes-2').on('click', '#detalle', function () { // autorizacion/detalleAuth
 		var lote = $(this).attr('idlote');
+		var ceo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
 		$(':checkbox').each(function () {
 			this.checked = 0;
 		});
+		$('#detalle_lote').append('<input type="hidden" name="ceo_name" value="'+ ceo_cook +'"/>');
 		$("form#detalleAuth").append('<input type="hidden" name="data-lote" value="' + lote + '" />');
 		$("form#detalleAuth").submit();
 	});
@@ -511,6 +515,10 @@ $(function () {
 
 	$('#downPDF').on('click', function () {
 
+		var ceo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
+		$('#exportTo').append('<input type="hidden" name="ceo_name" value="'+ ceo_cook +'"/>');
 		$('#exportTo').attr('action', baseURL + api + isoPais + "/reportes/detalleLoteAuthExpPDF");
 		$('#data-lote').val($("#data-lote").val());
 		$('#exportTo').submit();
@@ -519,6 +527,10 @@ $(function () {
 
 	$('#downXLS').on('click', function () {
 
+		var ceo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
+		$('#exportTo').append('<input type="hidden" name="ceo_name" value="'+ ceo_cook +'"/>');
 		$('#exportTo').attr('action', baseURL + api + isoPais + "/reportes/detalleLoteAuthExpXLS");
 		$('#data-lote').val($("#data-lote").val());
 		$('#exportTo').submit();

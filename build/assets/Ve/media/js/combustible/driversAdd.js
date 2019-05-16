@@ -34,7 +34,7 @@ $(function () {
 		}];
 		var ceo_cook = decodeURIComponent(
 			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-			);
+		);
 
 		$.post(baseURL + "/" + isoPais + '/trayectos/modelo', {
 				way: 'disabledDriver',
@@ -105,7 +105,7 @@ $(function () {
 		validar_campos();
 		var ceo_cook = decodeURIComponent(
 			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-			);
+		);
 
 		if (formAddEdit.valid() == true) {
 			formAddEdit = formAddEdit.serialize();
@@ -317,7 +317,7 @@ function notiSystem(title) {
 		switch (finish) {
 			case 'u':
 				$('form#formulario').empty();
-				$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ ceo_cook +'"/>');
+				$('form#formulario').append('<input type="hidden" name="ceo_name" value="' + ceo_cook + '"/>');
 				$('form#formulario').append('<input type="hidden" name="modelo" value="driver"/>');
 				$('form#formulario').append('<input type="hidden" name="function" value="update"/>');
 				$('form#formulario').append('<input type="hidden" name="data-id" value="' + $('#user').val() + '" />');
