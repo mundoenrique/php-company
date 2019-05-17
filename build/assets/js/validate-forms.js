@@ -1,13 +1,24 @@
-function validateForms(form) {
+function validateForms(form, options) {
 
-	jQuery.validator.setDefaults({
+	var defaults = {
 		debug: true,
 		errorClass: "validate-error",
 		validClass: "success",
 		success: " ",
 		ignore: ".ignore",
-		errorElement: 'label',
-	});
+		errorElement: 'label'
+	};
+	if(options && options.errorMsg) {
+		defaults.onfocusout = false;
+		defaults.onkeyup = function() {};
+		defaults.errorPlacement = function(error, element) {
+			errorMsg = $(".general-form-msg")
+			errorMsg.html('');
+			if (error.html())
+				errorMsg.val(options.errorMsg);
+		}
+	}
+	jQuery.validator.setDefaults(defaults);
 
 	var
 	onlyNumber = /^[0-9]{6,8}$/,
@@ -18,6 +29,8 @@ function validateForms(form) {
 	middlePhrase = /^['a-z0-9ñáéíóú ().']{15,45}$/i,
 	longPhrase = /^['a-z0-9ñáéíóú ().']{10,70}$/i;
 	emailValid = /^([a-zA-Z]+[0-9_.+-]*)+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/,
+	alphanumunder = /^[\wñ]+$/,
+	userPassword = /([\w!@\*\-\?¡¿+\/.,#])/,
 	fiscalReg = {
 		'bp': /^(00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23|24)+(6|9)[\d]{5,6}[\d]{3,4}$/,
 		'co': /^([0-9]{9,17})/,
@@ -35,11 +48,13 @@ function validateForms(form) {
 
 	form.validate({
 		rules: {
-			"user-name": {minlength: 6},
+			"user-name": {minlength: 4, pattern: alphanumunder},
 			"id-company": {fiscalRegistry: true},
 			"email": {pattern: emailValid},
 			"new-pass": {differs: "#current-pass", validatePass: true},
 			"confirm-pass": {equalTo: "#new-pass"},
+			"user_login": {minlength: 4, pattern: alphanumunder},
+			"user_pass": {pattern: userPassword},
 
 
 			"identity-card": {pattern: onlyNumber},
@@ -76,6 +91,10 @@ function validateForms(form) {
 			"confirm-pass": {
 				required: "Confirme su nueva contraseña",
 				equalTo: 'Debe ser igual a su nueva contraseña'
+			},
+			"user_login": {
+				pattern: "Debe contener al menos 4 caracteres alfanuméricos",
+				minlength: "Debe tener 4 caracteres como mínimo"
 			},
 
 
