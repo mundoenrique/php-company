@@ -25,7 +25,8 @@ class User extends NOVO_Controller {
 			 */
 			redirect(base_url('empresas'), 'location');
 			exit();
-		}
+		}		
+
 		$userData = [
 			'sessionId' => NULL,
 			'idUsuario' => NULL,
@@ -39,17 +40,21 @@ class User extends NOVO_Controller {
 			'pais' => NULL,
 			'nombreCompleto' => NULL
 		];
-		$this->session->unset_userdata($userData);
 
+		$this->session->unset_userdata($userData);		
+		
 		$this->load->library('user_agent');
+		$this->load->library('recaptcha');
+
+		$this->render->scriptCaptcha = $this->recaptcha->getScriptTag();
+		log_message('DEBUG', 'NOVO RESPONSE: recaptcha: ' . $this->recaptcha->getScriptTag());
 
 		$browser = strtolower($this->agent->browser());
 		$version = (float) $this->agent->version();
 		$noBrowser = "internet explorer";
 		$sliderbar = true;
-		$contentpage = 'users/content-login';
-
-
+		$contentpage = 'users/content-login';       
+    
 		$views = ['user/login', 'user/signin'];
 		if($browser == $noBrowser && $version < 8.0){
 			$sliderbar = false;
@@ -148,4 +153,5 @@ class User extends NOVO_Controller {
 		redirect(base_url('inicio'), 'location');
 	}
 
+	
 }
