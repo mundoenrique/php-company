@@ -97,13 +97,16 @@ class NOVO_Controller extends CI_Controller {
 		switch($module) {
 			case 'login':
 			case 'benefits':
+			case 'terms':
 			case 'pass-recovery':
 				$auth = TRUE;
 				break;
-			case 'terms':
-			case 'companies':
-				$auth = ($this->render->logged);
+			case 'change-password':
+				$auth = ($this->session->flashdata('changePassword'));
 				break;
+			case 'companies':
+			$auth = ($this->render->logged);
+			break;
 			default:
 
 		}
