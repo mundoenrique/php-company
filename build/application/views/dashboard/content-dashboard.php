@@ -40,7 +40,7 @@ $ceo_cook = $this->security->get_csrf_hash();
 </div>
 
 <form id="empresas" method="post" action="<?php echo site_url($pais.'/dashboard/productos/'); ?> ">
-	<input type='hidden' name='<?php echo $ceo_name ?>' value='<?php echo $ceo_cook ?>'>
+
 </form>
 
 

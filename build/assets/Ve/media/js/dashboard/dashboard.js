@@ -332,6 +332,9 @@ $(function () {
 
 
 	$("#listCompanies").on("click", '.style-companies-item', function () {
+		var ceo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
 
 		var rif = $(this).attr("data-acrif");
 		var activ = $(this).attr("data-acnomcia");
@@ -339,6 +342,7 @@ $(function () {
 		var desc = $(this).attr("data-acdesc");
 		var accodcia = $(this).attr("data-accodcia");
 		var accodgrupoe = $(this).attr("data-accodgrupoe");
+		$('form#empresas').append('<input type="hidden" name="ceo_name" value="'+ ceo_cook +'"/>');
 		$('form#empresas').append('<input type="hidden" name="data-acrif" value="' + rif + '" />');
 		$('form#empresas').append('<input type="hidden" name="data-acnomcia" value="' + activ + '" />');
 		$('form#empresas').append('<input type="hidden" name="data-acrazonsocial" value="' + razon + '" />');

@@ -5,7 +5,7 @@ $(function () {
 	var ceo_cook = decodeURIComponent(
 		document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 	);
-	$.post(baseURL + '/' + isoPais + '/trayectos/modelo', {
+	$.post(baseURL +isoPais + '/trayectos/modelo', {
 			way: 'drivers',
 			modelo: 'driver',
 			ceo_name: ceo_cook

@@ -76,7 +76,7 @@ $ceoCook = $this->security->get_csrf_hash();
 	</ul>
 </nav>
 
-<form id='logout' action="<?php echo $urlBase ?>/logout" method='post' >
+<form id='logout' action="<?php echo $urlBase ?>logout" method='post' >
 	<input type='hidden' name='data-caducada' value='true'>
 	<input type='hidden' name='<?= $ceoName ?>' value='<?= $ceoCook ?>'>
 </form>
