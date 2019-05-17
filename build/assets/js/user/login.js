@@ -35,6 +35,8 @@ $(function() {
 				empty = true;
 			if (empty)
 				$(".general-form-msg").html('Todos los campos son requeridos');
+			else
+				$(".general-form-msg").html('Combinación incorrecta de usuario y contraseña');
 		}
 	});
 
