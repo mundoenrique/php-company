@@ -276,12 +276,12 @@
 echo "<form id='autorizacion' method='post' action='$urlBase/lotes/calculo'>
 	<input type='hidden' name='$ceo_name' value='$ceo_cook'>
 	<input type='hidden' name='data-COS' value='' id='data-COS'/>
-</form>"
+</form>";
 
 
 echo "<form id='detalleAuth' method='post' action= '$urlBase/lotes/autorizacion/detalle'>
 	<input type='hidden' name='$ceo_name' value='$ceo_cook'>
-</form>"
+</form>";
 ?>
 <?php
 	if ($pais == 'Ve'):
