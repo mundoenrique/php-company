@@ -1,6 +1,7 @@
 'use strict'
 function validateForms(form, options) {
-
+	if(isoPais!==undefined)
+		var country = isoPais;
 	var defaults = {
 		debug: true,
 		errorClass: "validate-error",
@@ -9,14 +10,20 @@ function validateForms(form, options) {
 		ignore: ".ignore",
 		errorElement: 'label'
 	};
-	if(options && options.errorMsg) {
-		defaults.onfocusout = false;
-		defaults.onkeyup = function() {};
-		defaults.errorPlacement = function(error, element) {
-			errorMsg = $(".general-form-msg")
-			errorMsg.html('');
-			if (error.html())
-				errorMsg.val(options.errorMsg);
+	if(options!=undefined) {
+		if (options.handleMsg===false) {
+			defaults.onfocusout = false;
+			defaults.onkeyup = function() {};
+			defaults.errorPlacement = function(error, element) {};
+		} else if (options.errorMsg) {
+			defaults.onfocusout = false;
+			defaults.onkeyup = function() {};
+			defaults.errorPlacement = function(error, element) {
+				var errorElem = $(".general-form-msg");
+				errorElem.html('');
+				if (error.html())
+					errorElem.val(options.errorMsg);
+			}
 		}
 	}
 	jQuery.validator.setDefaults(defaults);
@@ -56,6 +63,7 @@ function validateForms(form, options) {
 			"confirm-pass": {equalTo: "#new-pass"},
 			"user_login": {minlength: 4, pattern: alphanumunder},
 			"user_pass": {pattern: userPassword},
+			"claveAuth": {pattern: userPassword},
 
 
 			"identity-card": {pattern: onlyNumber},

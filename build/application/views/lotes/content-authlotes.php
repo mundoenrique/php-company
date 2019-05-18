@@ -218,11 +218,11 @@
       		if( ($orden=='0' || $orden=='2' || $orden=='') && $lotesxAuth ){
 			echo '<div id="batchs-last">
 							<form name="no-form" onsubmit="return false">
-      				<input id="claveAuth" type="password" placeholder="'.lang("MSG_INGRESE_CLAVE").'" value="" #batchs-last input style="margin-left: 10px;"/>';
+      				<input id="claveAuth" type="password" name="claveAuth" placeholder="'.lang("MSG_INGRESE_CLAVE").'" value="" #batchs-last input style="margin-left: 10px;"/>';
 			echo 	'<button '.$borrar.' id="button-eliminar" type="submit" >'.lang('TITULO_LOTESBTN_ELIMINAR').'</button>';
 			echo 	'<button id="button-autorizar" type="submit">'.lang('TITULO_LOTESBTN_AUTORIZAR').'</button>';
 			$selectTipoLote = $pais == 'Ve' ? '<input type="hidden" id="selec_tipo_lote" value="1">' :
-			'<select id="selec_tipo_lote">
+			'<select id="selec_tipo_lote" name="selec_tipo_lote">
 				<option value="0">'.lang('SELECT_OPTION_XLOTE').'</option>
 				<option value="1" selected>'.lang('SELECT_OPTION_XTIPO_lOTE').'</option>
 			</select>';
