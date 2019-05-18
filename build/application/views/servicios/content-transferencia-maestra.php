@@ -153,7 +153,7 @@
 			</div>
 			<div id="batchs-last">
 				<form name="no-form" onsubmit="return false">
-					<input id='clave' class='input-TM' type='password' placeholder="<?= lang('PLACEHOLDER_PASS'); ?>"/>
+					<input id='clave' class='input-TM' type='password' name='user_pass' placeholder="<?= lang('PLACEHOLDER_PASS'); ?>"/>
 					<button id='cargo-tjta' class='elem-hidden'><?= lang('CARGO'); ?></button>
 					<button id='abonar-tjta' class='elem-hidden'><?= lang('ABONO'); ?></button>
 					<button id='consultar-tjta' class='elem-hidden'><?= lang('CONSULTA'); ?></button>

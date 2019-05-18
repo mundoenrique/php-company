@@ -69,6 +69,7 @@ $(function() {
 		$(this).find($('#amount').removeAttr('style'));
 		$(this).find($('#description').removeAttr('style'));
 		var RE = /^\d*\.?\d*$/,
+				descRegExp = /^[a-záéíóúü .,():0-9]+$/i,
 				camposValid = '<div id="validar">',
 				validInput = true,
 				amount = $('#amount'),
@@ -92,6 +93,10 @@ $(function() {
 			camposValid += '<p>* La descripción es necesaria</p>';
 			validInput = false;
 			descrip.css('border-color', '#cd0a0a')
+		} else if ( !descRegExp.test(descrip.val()) ) {
+			camposValid += '<p>* No se admiten caracteres especiales en la descripción</p>';
+			validInput = false;
+			descrip.css('border-color', '#cd0a0a');
 		} else {
 			descrip.removeAttr('style');
 		}
@@ -156,9 +161,9 @@ $(function() {
 					case 0:
 						var canvas = "<div id='dialog-confirm'>";
 								canvas +="<p>Código recibido: </p>";
-								canvas += "<fieldset><input type='text' id='token-code' size=30 ";
+								canvas += "<form onsubmit='return false'><fieldset><input type='text' id='token-code' name='token-code' size=24 ";
 								canvas += "placeholder='Ingrese código recibido' class='text ui-widget-content ui-corner-all'/>";
-								canvas += "<h5 id='msg'></h5></fieldset></div>";
+								canvas += "<h5 id='msg'></h5></fieldset></form></div>";
 
 						$(canvas).dialog({
 							title: data.title,
@@ -173,32 +178,39 @@ $(function() {
 									var codeToken = $("#token-code").val();
 									dataSend.codeToken = codeToken;
 									if (codeToken != '') {
-										$("#token-code").val('');
-										$(this).dialog('destroy');
-										$aux = $('#loading').dialog({
-												title: 'Procesando',
-												modal: true,
-												resizable: false,
-												draggable: false,
-												open: function (event, ui) {
-													$('.ui-dialog-titlebar-close', ui.dialog).hide();
+										var form = $(this).find('form');
+										validateForms(form, {handleMsg: false});
+										if(form.valid()) {
+											$("#token-code").val('');
+											$(this).dialog('destroy');
+											$aux = $('#loading').dialog({
+													title: 'Procesando',
+													modal: true,
+													resizable: false,
+													draggable: false,
+													open: function (event, ui) {
+														$('.ui-dialog-titlebar-close', ui.dialog).hide();
+													}
+											});
+											$.post(baseURL + api + isoPais + '/servicios/transferencia-maestra/RegargaTMProcede', dataSend)
+											.done(function (data) {
+												$aux.dialog('destroy');
+												switch (data.code) {
+													case 0:
+														notiPagOS(data.title, data.msg, 'ok');
+														break;
+													case 1:
+														notiPagOS(data.title, data.msg, 'error');
+														break;
+													case 2:
+													default:
+														notiPagOS(data.title, data.msg, 'close');
 												}
-										});
-										$.post(baseURL + api + isoPais + '/servicios/transferencia-maestra/RegargaTMProcede', dataSend)
-										.done(function (data) {
-											$aux.dialog('destroy');
-											switch (data.code) {
-												case 0:
-													notiPagOS(data.title, data.msg, 'ok');
-													break;
-												case 1:
-													notiPagOS(data.title, data.msg, 'error');
-													break;
-												case 2:
-												default:
-													notiPagOS(data.title, data.msg, 'close');
-											}
-										})
+											})
+										} else {
+											$(this).find($('#token-code').css('border-color', '#cd0a0a'));
+											$(this).find($('#msg')).text('Código inválido');
+										}
 									} else {
 										$(this).find($('#token-code').css('border-color', '#cd0a0a'));
 										$(this).find($('#msg')).text('Debe ingresar el código de seguridad enviado a su correo');
@@ -320,9 +332,14 @@ $(function() {
 		}
 
 		if ($('#clave').val() != '' && serv_var.noTarjetas != "") {
-			if (calcularConsulta()) {
-				llamarWS($('#clave').val(), baseURL + api + isoPais + '/servicios/transferencia-maestra/consultar', '30', 'Consultando...');
-			}
+			var form = $(this).closest('form');
+			validateForms(form, {handleMsg: false});
+			if (form.valid()) {
+				if (calcularConsulta()) {
+					llamarWS($('#clave').val(), baseURL + api + isoPais + '/servicios/transferencia-maestra/consultar', '30', 'Consultando...');
+				}
+			} else
+				notificacion('Cargo a tarjeta', 'Contraseña inválida');
 		} else {
 			notificacion('Consulta a tarjeta', '<h2>Verifique que: </h2><h3>1. Ha seleccionado al menos una tarjeta</h3><h3>2. Ha ingresado su contraseña</h3>');
 		}
@@ -331,7 +348,12 @@ $(function() {
 	//ACCION EVENTO BOTON->ABONAR A TARJETA
 	$('#abonar-tjta').on('click', function() {
 		if ($('#clave').val() != '' && calcularTrans('20')) {
-			llamarWS($('#clave').val(), baseURL + api + isoPais + '/servicios/transferencia-maestra/abonar', '20', 'Abonando...');
+			var form = $(this).closest('form');
+			validateForms(form, {handleMsg: false});
+			if (form.valid())
+				llamarWS($('#clave').val(), baseURL + api + isoPais + '/servicios/transferencia-maestra/abonar', '20', 'Abonando...');
+			else
+				notificacion('Cargo a tarjeta', 'Contraseña inválida');
 		} else if ($('#clave').val() == '') {
 			notificacion('Abono a tarjeta', '<h2>Verifique que: </h2><h3>1. Ha ingresado el monto a abonar</h3><h3>2. Ha ingresado su contraseña</h3>');
 		}
@@ -340,7 +362,12 @@ $(function() {
 	//ACCION EVENTO BOTON->CARGAR A TARJETA
 	$('#cargo-tjta').on('click', function() {
 		if ($('#clave').val() != '' && calcularTrans('40')) {
-			llamarWS($('#clave').val(), baseURL + api + isoPais + '/servicios/transferencia-maestra/cargar', '40', 'Cargando...');
+			var form = $(this).closest('form');
+			validateForms(form, {handleMsg: false});
+			if (form.valid())
+				llamarWS($('#clave').val(), baseURL + api + isoPais + '/servicios/transferencia-maestra/cargar', '40', 'Cargando...');
+			else
+				notificacion('Cargo a tarjeta', 'Contraseña inválida');
 		} else if ($('#clave').val() == '') {
 			notificacion('Cargo a tarjeta', '<h2>Verifique que: </h2><h3>1. Ha ingresado el monto a cargar</h3><h3>2. Ha ingresado su contraseña</h3>');
 		}

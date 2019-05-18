@@ -39,6 +39,7 @@ function validateForms(form, options) {
 	emailValid = /^([a-zA-Z]+[0-9_.+-]*)+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/,
 	alphanumunder = /^[\wñ]+$/,
 	userPassword = /^[\w!@\*\-\?¡¿+\/.,#]+$/,
+	alphanum = /^[a-z\d]+$/i,
 	fiscalReg = {
 		'bp': /^(00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23|24)+(6|9)[\d]{5,6}[\d]{3,4}$/,
 		'co': /^([0-9]{9,17})/,
@@ -64,7 +65,7 @@ function validateForms(form, options) {
 			"user_login": {minlength: 4, pattern: alphanumunder},
 			"user_pass": {pattern: userPassword},
 			"claveAuth": {pattern: userPassword},
-
+			"token-code": {pattern: alphanum},
 
 			"identity-card": {pattern: onlyNumber},
 			"name": {pattern: namesValid, minlength: 2},
