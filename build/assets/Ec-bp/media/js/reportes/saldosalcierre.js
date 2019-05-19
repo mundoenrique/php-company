@@ -229,6 +229,8 @@ var filtro_busq={};
 			    	var $consulta;
 
 			    	if(validar_filtro_busqueda("lotes-2")){
+							var idPersona = $('#SaldosAmanecidos-TH').val();
+							if(/^[0-9]*$/.test(idPersona)) {
 			    		$('#cargando').fadeIn("slow");
 			    		$("#SaldosAmanecidos-btnBuscar").hide();
 			    		$('#div_tablaDetalle').fadeOut("fast");
@@ -318,6 +320,10 @@ var filtro_busq={};
 				 			}
 
 				 		});
+							} else {
+								$('#SaldosAmanecidos-TH').attr("style","border-color:red");
+								showErrMsg('Cédula de identidad inválida');
+							}
 					}
 
 			}
