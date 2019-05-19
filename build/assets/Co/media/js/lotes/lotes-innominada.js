@@ -165,6 +165,9 @@ $(function(){
 			$aux = $("#loading").dialog({title:'Procesando solicitud',modal:true, close:function(){$(this).dialog('close')}, resizable:false });
 			var fecha_expira = $('#fecha_expira').val().split('/');
 				fecha_expira = fecha_expira[0] + fecha_expira[1].substr(2);
+			var ceo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
 
 			var arrData = {
 				'data-cant' : $('#cant_tarjetas').val(),
@@ -173,12 +176,8 @@ $(function(){
 				'data-lembozo2' : $('#embozo_2').val(),
 				'data-codsucursal' : $('#sucursal').val(),
 				'data-fechaexp' : fecha_expira,
-				ceo_name: ceo_cook
+				 ceo_name: ceo_cook
 			};
-
-			var ceo_cook = decodeURIComponent(
-				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-				);
 
 			$.post(baseURL+isoPais+'/lotes/innominada/createCuentasInnominadas', arrData).done( function(data){
 				$aux.dialog('destroy');

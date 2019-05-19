@@ -189,19 +189,20 @@ $(function () {
 			});
 			var fecha_expira = $('#fecha_expira').val().split('/');
 			fecha_expira = fecha_expira[0] + fecha_expira[1].substr(2);
-
+			var ceo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
 			var arrData = {
 				'data-cant': $('#cant_tarjetas').val(),
 				'data-monto': $('#monto').val(),
 				'data-lembozo1': $('#embozo_1').val(),
 				'data-lembozo2': $('#embozo_2').val(),
 				'data-codsucursal': $('#sucursal').val(),
-				'data-fechaexp': fecha_expira
+				'data-fechaexp': fecha_expira,
+				'ceo_name': ceo_cook
 			};
 
-			var ceo_cook = decodeURIComponent(
-				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-			);
+
 			arrData.ceo_name = ceo_cook;
 			$.post(baseURL + isoPais + '/lotes/innominada/createCuentasInnominadas', arrData).done(function (data) {
 				$aux.dialog('destroy');
