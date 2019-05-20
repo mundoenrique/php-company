@@ -30,7 +30,7 @@ class Servicios extends CI_Controller {
 		$paisS = $this->session->userdata('pais');
 
 		if($paisS==$urlCountry && $logged_in && $moduloAct!==false) {
-			$FooterCustomInsertJS = ["jquery-1.10.2.min.js","jquery-ui-1.10.3.custom.min.js","jquery.balloon.min.js",
+			$FooterCustomInsertJS = ["jquery-3.4.0.min.js", "jquery-ui-1.12.1.min.js","jquery.balloon.min.js",
 			"jquery-md5.js","jquery.paginate.js","header.js","dashboard/widget-empresa.js",
 			"servicios/transferencia-maestra.js","routes.js"];
 			$FooterCustomJS = "";
