@@ -39,13 +39,16 @@ $(document).ready(function() {
 	    });
 
 	   $("#export_excel").click(function(){
-
-	    	$('form#formulario').empty();
-		$('form#formulario').append('<input type="hidden" name="empresa" value="'+filtro_busq.empresa+'" />');
-		$('form#formulario').append('<input type="hidden" name="anio" value="'+filtro_busq.anio+'" />');
-		$('form#formulario').append('<input type="hidden" name="mes" value="'+filtro_busq.mes+'" />');
-		$('form#formulario').attr('action',baseURL+api+isoPais+"/reportes/recargasRealizadasXLS");
-		$('form#formulario').submit();
+			var ceo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
+			$('form#formulario').empty();
+			$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'">');
+			$('form#formulario').append('<input type="hidden" name="empresa" value="'+filtro_busq.empresa+'" />');
+			$('form#formulario').append('<input type="hidden" name="anio" value="'+filtro_busq.anio+'" />');
+			$('form#formulario').append('<input type="hidden" name="mes" value="'+filtro_busq.mes+'" />');
+			$('form#formulario').attr('action',baseURL+api+isoPais+"/reportes/recargasRealizadasXLS");
+			$('form#formulario').submit();
 
 		/*datos = {
 			empresa:filtro_busq.empresa,
@@ -67,8 +70,12 @@ $(document).ready(function() {
 		}
 
 		descargarArchivo(datos, baseURL+api+isoPais+"/reportes/recargasRealizadasPDF", "Exportar PDF" );
-		  	*/
+				*/
+		var ceo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
 		$('form#formulario').empty();
+		$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'">');
 		$('form#formulario').append('<input type="hidden" name="empresa" value="'+filtro_busq.empresa+'" />');
 		$('form#formulario').append('<input type="hidden" name="anio" value="'+filtro_busq.anio+'" />');
 		$('form#formulario').append('<input type="hidden" name="mes" value="'+filtro_busq.mes+'" />');
@@ -80,12 +87,15 @@ $(document).ready(function() {
 //METODO PARA REALIZAR LA BUSQUEDA
 var filtro_busq={};
 	    $("#repRecargasRealizadas_btnBuscar").click(function(){
-
+				var ceo_cook = decodeURIComponent(
+					document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+				);
 	    	var $consulta;
 	    	filtro_busq.empresa=$("#RecargasRealizadas-Empresa").val();
 	    	filtro_busq.anio=$("#repRecargasRealizadas_anio").val().split("/")[1];
 	    	filtro_busq.mes=$("#repRecargasRealizadas_anio").val().split("/")[0];
-	    	filtro_busq.paginaActual=1;
+				filtro_busq.paginaActual=1;
+				filtro_busq.ceo_name = ceo_cook;
 	    	if(validar_filtro_busqueda("lotes-2")){
 	    	$('#cargando').fadeIn("slow");
 	    	$(this).hide();
@@ -321,11 +331,15 @@ function validar_filtro_busqueda(div){
   function descargarArchivo(datos, url, titulo){
 
   $aux = $("#cargando").dialog({title:titulo,modal:true, close:function(){$(this).dialog('close')}, resizable:false });
-
+	var ceo_cook = decodeURIComponent(
+		document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+	);
+	datos.ceo_name = ceo_cook;
       $.post(url,datos).done(function(data){
           $aux.dialog('destroy')
           if(!data.ERROR){
-            $('form#formulario').empty();
+						$('form#formulario').empty();
+						$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'">');
             $('form#formulario').append('<input type="hidden" name="bytes" value="'+JSON.stringify(data.bytes)+'" />');
             $('form#formulario').append('<input type="hidden" name="ext" value="'+data.ext+'" />');
             $('form#formulario').append('<input type="hidden" name="nombreArchivo" value="'+data.nombreArchivo+'" />');

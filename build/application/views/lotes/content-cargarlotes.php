@@ -2,6 +2,8 @@
 	$pais = $this->uri->segment(1);
 $urlBaseA = $this->config->item('base_url');
 $urlBase = $urlBaseA.$pais;
+$ceo_name = $this->security->get_csrf_token_name();
+$ceo_cook = $this->security->get_csrf_hash();
 ?>
 
 <div id="content-products" style="    width: 720px;padding: 20px 2px;float: left;">
@@ -92,8 +94,12 @@ $urlBase = $urlBaseA.$pais;
 							</table>
 						</div>
 						<input  type='hidden' id='boton' value='<?php echo lang('TITULO_LOTES_BTNCARGAR'); ?>'/>
-						<form id='confirmar' method='post' action="<?php echo $urlBase ?>/lotes/confirmacion"></form>
-						<form id='detalle' method='post' action="<?php echo $urlBase ?>/lotes/detalle"></form>
+						<form id='confirmar' method='post' action="<?php echo $urlBase ?>/lotes/confirmacion">
+						<input type='hidden' name='<?php echo $ceo_name ?>' value='<?php echo $ceo_cook ?>'>
+						</form>
+						<form id='detalle' method='post' action="<?php echo $urlBase ?>/lotes/detalle">
+						<input type='hidden' name='<?php echo $ceo_name ?>' value='<?php echo $ceo_cook ?>'>
+						</form>
 					</div>
 
 				</div>

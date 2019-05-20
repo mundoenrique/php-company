@@ -321,14 +321,16 @@ function noResults(){
 
 
 $("#listCompanies").on("click",'.style-companies-item',function(){
-
+	var ceo_cook = decodeURIComponent(
+		document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+	);
     var rif = $(this).attr("data-acrif");
     var activ = $(this).attr("data-acnomcia");
     var razon = $(this).attr("data-acrazonsocial");
     var desc = $(this).attr("data-acdesc");
     var accodcia = $(this).attr("data-accodcia");
     var accodgrupoe = $(this).attr("data-accodgrupoe");
-
+		$('form#empresas').append('<input type="hidden" name="ceo_name" value="'+ ceo_cook +'"/>');
     $('form#empresas').append('<input type="hidden" name="data-acrif" value="'+rif+'" />');
     $('form#empresas').append('<input type="hidden" name="data-acnomcia" value="'+activ+'" />');
     $('form#empresas').append('<input type="hidden" name="data-acrazonsocial" value="'+razon+'" />');
@@ -347,8 +349,12 @@ function paginar(){
  $('#loading').show();
  $('#more').hide();
 
+	var ceo_cook = decodeURIComponent(
+		document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+	);
+
   $.post(baseURL+api+isoPais+"/empresas/lista",
- { 'data-filtroEmpresas':dash_var.filtro,'data-paginar':dash_var.paginar, 'data-tamanoPagina':dash_var.cantEmp, 'data-paginaActual':dash_var.pgActual},
+ { 'data-filtroEmpresas':dash_var.filtro,'data-paginar':dash_var.paginar, 'data-tamanoPagina':dash_var.cantEmp, 'data-paginaActual':dash_var.pgActual, ceo_name: ceo_cook},
           function(data){
 
           if(!data.ERROR){

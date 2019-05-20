@@ -21,11 +21,15 @@ function notiSystem (action, title, size = '320px') {
                     location.reload(true);
                     break;
                 case 'up':                    
+										var ceo_cook = decodeURIComponent(
+											document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+										);
                     $('form#formulario').empty();
                     $('form#formulario').append('<input type="hidden" name="data-id" value="' + idflota + '" />');
                     $('form#formulario').append('<input type="hidden" name="data-name" value="' + nameFlota + '" />');
                     $('form#formulario').append('<input type="hidden" name="modelo" value="vehicles" />');
                     $('form#formulario').attr('action', baseURL + '/' + isoPais + '/trayectos/vehiculos');
+										$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'" />');
                     $('form#formulario').submit();
                     break;
                 case 'g':

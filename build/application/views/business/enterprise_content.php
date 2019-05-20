@@ -1,4 +1,8 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
+<?php
+$ceo_name = $this->security->get_csrf_token_name();
+$ceo_cook = $this->security->get_csrf_hash();
+?>
 <h1><?= lang('BREADCRUMB_WELCOME'); ?>(a) <span class='first-title'><?= $fullName; ?></span></h1>
 <ol class="breadcrumb">
 	<li>
@@ -30,7 +34,9 @@
 	</ul>
 </div>
 
-<form id="empresas" method="post" action="<?= site_url($pais.'/dashboard/productos/'); ?>"></form>
+<form id="empresas" method="post" action="<?= site_url($pais.'/dashboard/productos/'); ?>">
+	<input type='hidden' name='<?php echo $ceo_name ?>' value='<?php echo $ceo_cook ?>'>
+</form>
 
 
 <ul id="listCompanies" class="dashboard-companies"></ul>

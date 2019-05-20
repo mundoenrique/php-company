@@ -15,13 +15,17 @@ function notiSystem (action, title, size = '320px') {
             e.preventDefault();
             $('#msg-system').dialog('close');
             $('#msg-info').empty();
-            var finish = $(this).attr('finish');
+						var finish = $(this).attr('finish');
             switch (finish) {
-                case 'u':                    
+                case 'u':
                     location.reload(true);
                     break;
-                case 'up':                    
-                    $('form#formulario').empty();
+								case 'up':
+								var ceo_cook = decodeURIComponent(
+									document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+								);
+										$('form#formulario').empty();
+										$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'">');
                     $('form#formulario').append('<input type="hidden" name="data-id" value="' + idflota + '" />');
                     $('form#formulario').append('<input type="hidden" name="data-name" value="' + nameFlota + '" />');
                     $('form#formulario').append('<input type="hidden" name="modelo" value="vehicles" />');

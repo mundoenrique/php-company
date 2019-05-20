@@ -32,8 +32,12 @@ $(function(){
 
           $("#confirma").replaceWith('<h3 id="confirm">confirmando...</h3>');
 
+					var ceo_cook = decodeURIComponent(
+						document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+					);
+
           $.post(baseURL+isoPais+'/lotes/confirmacion/confirmar',
-            {'pass':pass, 'embozo1':embozo1, 'embozo2':embozo2, 'conceptoDim':conceptoDim, 'info':info, 'idTipoLote':idTipoLote})
+            {'pass':pass, 'embozo1':embozo1, 'embozo2':embozo2, 'conceptoDim':conceptoDim, 'info':info, 'idTipoLote':idTipoLote, ceo_name: ceo_cook})
           .done( function(data){
               if(!data.ERROR){
                 if (data.linkAut) {

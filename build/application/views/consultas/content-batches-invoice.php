@@ -1,3 +1,7 @@
+<?php
+$ceo_name = $this->security->get_csrf_token_name();
+$ceo_cook = $this->security->get_csrf_hash();
+?>
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed'); ?>
 <div id="response-serv" code="<?= $pageInfo['code']; ?>" title="<?= $pageInfo['title-modal'] ?>" msg="<?= $pageInfo['msg']; ?>"></div>
 <div id="content-products">
@@ -124,6 +128,7 @@
 </div>
 
 <form id='detalle_lote' method='post' action="<?= base_url($pais.'/lotes/autorizacion/detalle'); ?>/">
+	<input type='hidden' name='<?php echo $ceo_name ?>' value='<?php echo $ceo_cook ?>'>
 	<input type='hidden' id='data-LF' name='data-LF' value='LF' />
 </form>
 <form id="down-report" action="<?= base_url($pais . '/reportes/comisiones-recarga') ?>" method="post">

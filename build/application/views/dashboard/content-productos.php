@@ -2,6 +2,8 @@
 $pais = $this->uri->segment(1);
 $urlBaseA = $this->config->item('base_url');
 $urlBase = $urlBaseA.$pais;
+$ceo_name = $this->security->get_csrf_token_name();
+$ceo_cook = $this->security->get_csrf_hash();
 
 function to_ascii($word){
     $word=str_replace("á", 'a', $word);
@@ -79,7 +81,9 @@ function to_ascii($word){
 
     </div>
 
-    <form id="productos" method="post" action="<?php echo site_url($pais.'/dashboard/productos/detalle'); ?>"></form>
+    <form id="productos" method="post" action="<?php echo site_url($pais.'/dashboard/productos/detalle'); ?>">
+			<input type='hidden' name='<?php echo $ceo_name ?>' value='<?php echo $ceo_cook ?>'>
+		</form>
 
     <?php
 

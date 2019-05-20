@@ -58,7 +58,7 @@
 						</a>
 					</li>
 					<?php endif; ?>
-					<?php if($logged && $module !== 'terms'): ?>
+					<?php if($module !== 'terms'): ?>
 					<li class="menu-item terms">
 						<a href="<?= base_url('inf-condiciones'); ?>" rel="section">
 							<?= lang('BREADCRUMB_CONDICIONES') ?>

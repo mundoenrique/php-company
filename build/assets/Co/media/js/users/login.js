@@ -40,10 +40,16 @@ var ingresar_ = function() {
 
             $(".ju-sliderbutton .ju-sliderbutton-slider .ui-slider-handle").hide();
 
+						var ceo_cook = decodeURIComponent(
+							document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+							);
+
+
             $consulta = $.post(baseURL + isoPais + "/validation", {
                 user_login: user,
                 user_pass: pass,
-                user_active: active
+								user_active: active,
+								ceo_name: ceo_cook
             });
 
             $consulta.done(function(data) {
@@ -86,8 +92,13 @@ var ingresar_ = function() {
                             },
                             buttons: {
                                 Aceptar: function() {
+																	var ceo_cook = decodeURIComponent(
+																		document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+																		);
+
                                     $.post(baseURL + isoPais + "/logout", {
-                                        'data-user': user
+																				'data-user': user,
+																				'ceo_name': ceo_cook
                                     });
                                     $(this).dialog("destroy");
                                     habilitar();

@@ -10,7 +10,4 @@ function formatterDate(date) {
 	return new Date(dateStr);
 }
 
-function picker(){
-	$('input[type=text]').attr('autocomplete','off');
-}
-picker();
+$('input[type=text], input[type=password], input[type=textarea]').attr('autocomplete','off');
