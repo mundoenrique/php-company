@@ -43,6 +43,7 @@ $config['client_secret'] = SERVICE_CLIENT_SECRET;
 $config['LOTES_USERPASS'] = BULK_FTP_USERNAME.':'.BULK_FTP_PASSWORD;
 $config['format_date'] = 'j/m/Y';
 $config['format_time'] = 'g:i A';
+$config['cypher_base'] = CYPHER_BASE;
 
 /*
 |--------------------------------------------------------------------------

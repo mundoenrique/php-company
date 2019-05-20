@@ -43,7 +43,12 @@ class NOVO_Controller extends CI_Controller {
 		if($this->input->is_ajax_request()) {
 			$this->dataRequest = json_decode(
 				$this->security->xss_clean(
-					strip_tags(utf8_encode(base64_decode($this->input->get_post('request'))))
+					strip_tags(
+						$this->cryptography->decrypt(
+							base64_decode($this->input->get_post('plot')),
+							utf8_encode($this->input->get_post('request'))
+						)
+					)
 				)
 			);
 		} else {
@@ -78,6 +83,8 @@ class NOVO_Controller extends CI_Controller {
 				"third_party/html5",
 				"third_party/jquery-3.4.0",
 				"third_party/jquery-ui-1.12.1",
+				"third_party/aes",
+				"third_party/aes-json-format",
 				"helper"
 			];
 			if($this->render->logged) {
