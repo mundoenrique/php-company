@@ -43,6 +43,7 @@ $config['client_secret'] = SERVICE_CLIENT_SECRET;
 $config['LOTES_USERPASS'] = BULK_FTP_USERNAME.':'.BULK_FTP_PASSWORD;
 $config['format_date'] = 'j/m/Y';
 $config['format_time'] = 'g:i A';
+$config['cypher_base'] = CYPHER_BASE;
 
 /*
 |--------------------------------------------------------------------------
@@ -467,7 +468,7 @@ $config['global_xss_filtering'] = TRUE;
 | 'csrf_regenerate' = Regenerate token on every submission
 | 'csrf_exclude_uris' = Array of URIs which ignore CSRF checks
 */
-$config['csrf_protection'] = FALSE;
+$config['csrf_protection'] = TRUE;
 $config['csrf_token_name'] = 'ceo_name';
 $config['csrf_cookie_name'] = 'cook';
 $config['csrf_expire'] = 7200;

@@ -36,7 +36,11 @@ $(function(){
 		var lnf = $("#tempIdOrdenLNF").val();
 
 		$aux = $('#loading').dialog({title:'Confirmar cálculo orden de servicio',close: function(){$(this).dialog('close');}, modal: true, resizable:false});
-		$.post(baseURL+api+isoPais+"/lotes/confirmarPreOSL", { "tempIdOrdenL": l, "tempIdOrdenLNF": lnf })
+		var ceo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
+
+		$.post(baseURL+api+isoPais+"/lotes/confirmarPreOSL", { "tempIdOrdenL": l, "tempIdOrdenLNF": lnf, ceo_name: ceo_cook })
 			.done(function(data) {
 				$aux.dialog('destroy');
 

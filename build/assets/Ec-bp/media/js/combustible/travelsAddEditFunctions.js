@@ -1,10 +1,13 @@
 function sendData (modelo, method, travel)
 {
-    dataRequest = JSON.stringify(travel);
+		dataRequest = JSON.stringify(travel);
+		var ceo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
     $.ajax({
         url: baseURL + '/' + isoPais + '/trayectos/modelo',
         type: 'POST',
-        data: {modelo: modelo, way: method, data: dataRequest},
+        data: {modelo: modelo, way: method, data: dataRequest, ceo_name: ceo_cook},
         datatype: 'json',
         beforeSend: function(xrh, status) {
             $('#loading').removeClass('elem-hidden');

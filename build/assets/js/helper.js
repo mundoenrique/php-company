@@ -45,18 +45,23 @@ function callNovoCore (verb, who, where, data, _response_) {
 	var ceo_cook = decodeURIComponent(
 		document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 	);
+	var ceo_plot = decodeURIComponent(
+		document.cookie.replace(/(?:(?:^|.*;\s*)ceo_plot\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+	);
 	var dataRequest = JSON.stringify({
 		who: who,
 		where: where,
 		data: data
 	});
+	var dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
 	$.ajax({
 		method: verb,
 		url: baseURL + 'async-call',
-		data: {request: btoa(dataRequest), ceo_name: ceo_cook},
+		data: {request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)},
 		context: document.body,
 		dataType: 'json',
 	}).done(function(response, status) {
+		response = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 		switch(response.code) {
 			case 303:
 				notiSystem(response.title, response.msg, response.icon, response.data);

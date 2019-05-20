@@ -1,6 +1,9 @@
 //llamado a la lista de vehiculos o al detalle de un vehículo
 function listVehicle (data) {
-    $.post(baseURL + '/' + isoPais + '/trayectos/modelo', {way: 'vehicles', modelo: 'vehicles', data: data})
+	var ceo_cook = decodeURIComponent(
+		document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+	);
+    $.post(baseURL + '/' + isoPais + '/trayectos/modelo', {way: 'vehicles', modelo: 'vehicles', data: data, ceo_name: ceo_cook})
             .done(function(response) {
             lang = response.lang;
             $('#msg-info').empty();
@@ -163,8 +166,10 @@ function changeStatus (status) {
         'idVehicle': idVehi,
         'status': status
     }];
-
-    $.post(baseURL + '/' + isoPais + '/trayectos/modelo', {way: 'changeStatus', modelo: 'vehicles', data: data})
+		var ceo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
+    $.post(baseURL + '/' + isoPais + '/trayectos/modelo', {way: 'changeStatus', modelo: 'vehicles', data: data, ceo_name: ceo_cook})
         .done(function(response){
             var langs = response.lang;
             $('#msg-info').empty();
@@ -198,7 +203,10 @@ function changeStatus (status) {
 
 //Ediatar o registrar un vehículo
 function addEditVehicle (formAddEdit) {
-    $.post(baseURL + '/' + isoPais + '/trayectos/modelo', {way: 'addEditVehicles', modelo: 'vehicles', data: formAddEdit})
+	var ceo_cook = decodeURIComponent(
+		document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+	);
+    $.post(baseURL + '/' + isoPais + '/trayectos/modelo', {way: 'addEditVehicles', modelo: 'vehicles', data: formAddEdit, ceo_name: ceo_cook})
         .done(function(response){
             $('#msg-info').empty();
             var langReg = response.lang;

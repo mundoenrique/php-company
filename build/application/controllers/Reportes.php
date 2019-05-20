@@ -289,8 +289,11 @@ class Reportes extends CI_Controller {
 											}else{
 													$codigoError = array('mensaje' => lang('ERROR_('.$response->rc.')'), "rc"=> $response->rc);
 											}
+											$ceo_name = $this->security->get_csrf_token_name();
+											$ceo_cook = $this->security->get_csrf_hash();
 												echo "<form id='formu' method='post' >
-															<input type='hidden'/>
+															<input type='hidden'>
+															<input type='hidden' name='$ceo_name' value='$ceo_cook'>
 															</form>
 													<script> alert('La descarga del archivo presenta inconvenientes en estos momentos.');
 													document.getElementById('formu').action='".$this->config->item('base_url')."$urlCountry/reportes/cuenta-concentradora';
@@ -302,8 +305,11 @@ class Reportes extends CI_Controller {
 
 					}else{
 					log_message('info','depositosdegarantias XLS NO WS');
+					$ceo_name = $this->security->get_csrf_token_name();
+					$ceo_cook = $this->security->get_csrf_hash();
 					echo "<form id='formu' method='post' >
-									<input type='hidden'/>
+									<input type='hidden'>
+									<input type='hidden' name='$ceo_name' value='$ceo_cook'>
 								</form>
 								<script> alert('La descarga del archivo presenta inconvenientes en estos momentos.');          document.getElementById('formu').action='".$this->config->item('base_url')."$urlCountry/reportes/cuenta-concentradora';
 										document.getElementById('formu').submit();
@@ -402,8 +408,11 @@ class Reportes extends CI_Controller {
 											}else{
 													$codigoError = array('mensaje' => lang('ERROR_('.$response->rc.')'), "rc"=> $response->rc);
 											}
+											$ceo_name = $this->security->get_csrf_token_name();
+											$ceo_cook = $this->security->get_csrf_hash();
 											echo "<form id='formu' method='post' >
-														<input type='hidden'/>
+														<input type='hidden'>
+														<input type='hidden' name='$ceo_name' value='$ceo_cook'>
 														</form>
 									<script>
 									alert('".$codigoError["mensaje"]."');
@@ -416,8 +425,11 @@ class Reportes extends CI_Controller {
 
 					}else{
 							log_message('info','depositosdegarantias PDF NO WS ');
+							$ceo_name = $this->security->get_csrf_token_name();
+							$ceo_cook = $this->security->get_csrf_hash();
 							echo "<form id='formu' method='post' >
-														<input type='hidden'/>
+														<input type='hidden'>
+														<input type='hidden' name='$ceo_name' value='$ceo_cook'>
 														</form>
 									<script>
 									alert('".$codigoError["mensaje"]."');

@@ -56,16 +56,20 @@ $(function () {
 		if (pass != "" && js_var.loteF != "") {
 			pass = hex_md5(pass);
 			$('#clave').val('');
-
+			var ceo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
 			var $aux = $('#loading').dialog({
 				title: "Firmando lote",
 				modal: true,
 				bgiframe: true,
 				dialogClass: 'hide-close'
 			});
+
 			$.post(baseURL + isoPais + '/lotes/autorizacion/firmar', {
 				'data-lotes': js_var.loteF,
-				'data-pass': pass
+				'data-pass': pass,
+				ceo_name: ceo_cook
 			}).done(function (data) {
 				$aux.dialog('destroy');
 				if (!data.ERROR) {
@@ -124,10 +128,10 @@ $(function () {
 
 	$('#lotes-2').on('click', '#button-autorizar', function () {
 		var
-		pass = $('#claveAuth').val(),
-		osTipo = $('#selec_tipo_lote').val(),
-		select_modal = $("#select-modal").val(),
-		nuevo_iva = $("#nuevo-iva").val();
+			pass = $('#claveAuth').val(),
+			osTipo = $('#selec_tipo_lote').val(),
+			select_modal = $("#select-modal").val(),
+			nuevo_iva = $("#nuevo-iva").val();
 
 		if (nuevo_iva == 1) {
 			if (select_modal == "") {
@@ -210,9 +214,13 @@ $(function () {
 							modal: true,
 							bgiframe: true
 						});
+						var ceo_cook = decodeURIComponent(
+							document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+						);
 						$.post(baseURL + isoPais + '/lotes/autorizacion/desasociar', {
 							'data-lotes': idlote,
-							'data-pass': pass
+							'data-pass': pass,
+							ceo_name: ceo_cook
 						}).done(function (data) {
 							$aux.dialog('destroy');
 							if (!data.ERROR) {
@@ -328,9 +336,11 @@ $(function () {
 
 	$('#lotes-2').on('click', '#detalle', function () { // autorizacion/detalleAuth
 		var lote = $(this).attr('idlote');
+
 		$(':checkbox').each(function () {
 			this.checked = 0;
 		});
+
 		$("form#detalleAuth").append('<input type="hidden" name="data-lote" value="' + lote + '" />');
 		$("form#detalleAuth").submit();
 	});
@@ -464,7 +474,9 @@ $(function () {
 
 
 	function eliminarLotes(idlote, acnumlote, ctipolote, pass) {
-
+		var ceo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
 		var $aux = $('#loading').dialog({
 			title: "Eliminando lote",
 			modal: true,
@@ -475,7 +487,8 @@ $(function () {
 				'data-lotes': idlote,
 				'data-acnumlote': acnumlote,
 				'data-ctipolote': ctipolote,
-				'data-pass': pass
+				'data-pass': pass,
+				ceo_name: ceo_cook
 			})
 			.done(function (data) {
 				$aux.dialog('destroy');
@@ -500,6 +513,10 @@ $(function () {
 
 	$('#downPDF').on('click', function () {
 
+		var ceo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
+		$('#exportTo').append('<input type="hidden" name="ceo_name" value="'+ ceo_cook +'"/>');
 		$('#exportTo').attr('action', baseURL + api + isoPais + "/reportes/detalleLoteAuthExpPDF");
 		$('#data-lote').val($("#data-lote").val());
 		$('#exportTo').submit();
@@ -508,6 +525,10 @@ $(function () {
 
 	$('#downXLS').on('click', function () {
 
+		var ceo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
+		$('#exportTo').append('<input type="hidden" name="ceo_name" value="'+ ceo_cook +'"/>');
 		$('#exportTo').attr('action', baseURL + api + isoPais + "/reportes/detalleLoteAuthExpXLS");
 		$('#data-lote').val($("#data-lote").val());
 		$('#exportTo').submit();
@@ -518,13 +539,13 @@ $(function () {
 
 function envioAjaxAutorizar(baseURL, isoPais, js_var, pass, osTipo, select_modal, nuevo_iva) {
 	var
-	orderPayable = parseInt($('#table-auth').attr('order-payable'))+'a';
+		orderPayable = parseInt($('#table-auth').attr('order-payable')) + 'a';
 	//se concatena la letra "a" para evitar de forma temporal la validación de la comisión de la orden de servicio
 
 	if (js_var.tipoloteA.indexOf('2') !== -1 && Number.isInteger(orderPayable)) {
 		var
-		title = 'Orden de Servicio pendiente',
-		msg = 'Antes de autorizar una nueva Orden, es indispensable que la OS Nº ' + orderPayable + ' ';
+			title = 'Orden de Servicio pendiente',
+			msg = 'Antes de autorizar una nueva Orden, es indispensable que la OS Nº ' + orderPayable + ' ';
 		msg += 'pendiente sea anulada o pagada<br><br>';
 		msg += 'En caso de anulación, la tarifa por <b>Servicios Operativos y de logística</b> ';
 		msg += 'será incluida en la siguiente Orden';
@@ -546,28 +567,31 @@ function envioAjaxAutorizar(baseURL, isoPais, js_var, pass, osTipo, select_modal
 					$(this).dialog('destroy')
 				}
 			});
-
+			var ceo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+				);
 			$.post(baseURL + isoPais + '/lotes/preliminar', {
 					'data-lotes': js_var.loteA,
 					'data-pass': pass,
 					'data-tipoOS': osTipo,
 					'data-medio': select_modal,
-					'data-iva': nuevo_iva
+					'data-iva': nuevo_iva,
+					ceo_name: ceo_cook
 				})
 				.done(function (data) {
 					var
-					code = data.code,
-					title = data.title,
-					msg = data.msg,
-					dataCalc = data.data;
+						code = data.code,
+						title = data.title,
+						msg = data.msg,
+						dataCalc = data.data;
 					$('#loading').dialog('destroy');
 					if (code === 0) {
 						$("#data-COS").attr('value', dataCalc);
 						var
-						modalMsg = '<div>';
-						modalMsg+= 	'<h3>Proceso exitoso</h3>';
-						modalMsg+= 	'<h5>Ha generado el cálculo de la orden de servicio.</h5>';
-						modalMsg+= '</div>';
+							modalMsg = '<div>';
+						modalMsg += '<h3>Proceso exitoso</h3>';
+						modalMsg += '<h5>Ha generado el cálculo de la orden de servicio.</h5>';
+						modalMsg += '</div>';
 						$(modalMsg).dialog({
 							title: "Autorizando lotes",
 							modal: true,
@@ -586,10 +610,10 @@ function envioAjaxAutorizar(baseURL, isoPais, js_var, pass, osTipo, select_modal
 				});
 		} else {
 			var
-			mensajeNoti = '<h2>Verifique que:</h2>';
-			mensajeNoti+= '<h3>1. Ha seleccionado al menos un lote</h3>';
-			mensajeNoti+= '<h3>2. Ha ingresado su contraseña</h3>';
-			mensajeNoti+= '<h3>3. Ha seleccionado el tipo orden de servicio</h3>';
+				mensajeNoti = '<h2>Verifique que:</h2>';
+			mensajeNoti += '<h3>1. Ha seleccionado al menos un lote</h3>';
+			mensajeNoti += '<h3>2. Ha ingresado su contraseña</h3>';
+			mensajeNoti += '<h3>3. Ha seleccionado el tipo orden de servicio</h3>';
 
 			notificacion("Autorizando lotes", mensajeNoti);
 		}

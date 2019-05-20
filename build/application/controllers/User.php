@@ -19,37 +19,42 @@ class User extends NOVO_Controller {
 	{
 		log_message('INFO', 'NOVO User: index Method Initialized');
 		if($this->session->userdata('logged')) {
-			/**
-			 * $urlRedirect = str_replace($this->countryUri, $this->config->item('country'), base_url('dashboard'));
-			 * redirect($urlRedirect, 'location');
-			 */
-			redirect(base_url('empresas'), 'location');
-			exit();
-		}
-		$userData = [
-			'sessionId' => NULL,
-			'idUsuario' => NULL,
-			'userName' => NULL,
-			'fullName' => NULL,
-			'codigoGrupo' => NULL,
-			'lastSession' => NULL,
-			'token' => NULL,
-			'cl_addr' => NULL,
-			'countrySess' => NULL,
-			'pais' => NULL,
-			'nombreCompleto' => NULL
-		];
-		$this->session->unset_userdata($userData);
 
+			$urlRedirect = str_replace($this->countryUri.'/', $this->config->item('country').'/', base_url('dashboard'));
+			redirect($urlRedirect, 'location');
+
+			//redirect(base_url('empresas'), 'location');
+			exit();
+		}		
+
+		$userData = [
+			'sessionId',
+			'idUsuario',
+			'userName',
+			'fullName',
+			'codigoGrupo',
+			'lastSession',
+			'token',
+			'cl_addr',
+			'countrySess',
+			'pais',
+			'nombreCompleto'
+		];
+
+		$this->session->unset_userdata($userData);		
+		
 		$this->load->library('user_agent');
+		$this->load->library('recaptcha');
+
+		$this->render->scriptCaptcha = $this->recaptcha->getScriptTag();
+		log_message('DEBUG', 'NOVO RESPONSE: recaptcha: ' . $this->recaptcha->getScriptTag());
 
 		$browser = strtolower($this->agent->browser());
 		$version = (float) $this->agent->version();
 		$noBrowser = "internet explorer";
 		$sliderbar = true;
-		$contentpage = 'users/content-login';
-
-
+		$contentpage = 'users/content-login';       
+    
 		$views = ['user/login', 'user/signin'];
 		if($browser == $noBrowser && $version < 8.0){
 			$sliderbar = false;
@@ -148,4 +153,5 @@ class User extends NOVO_Controller {
 		redirect(base_url('inicio'), 'location');
 	}
 
+	
 }

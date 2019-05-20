@@ -2,8 +2,11 @@
 $pais = $this->uri->segment(1);
 $urlBaseA = $this->config->item('base_url');
 $urlBase = $urlBaseA.$pais;
+$ceo_name = $this->security->get_csrf_token_name();
+$ceo_cook = $this->security->get_csrf_hash();
 $statusAth = '';
 $datos=null;
+
 
 if($osConfirmV){
 
@@ -306,6 +309,7 @@ if($osConfirmV){
 <form id='formulario' method='post'></form>
 
 <form id='detalle_lote' method='post' action="<?php echo $urlBase ?>/lotes/autorizacion/detalle">
+		<input type='hidden' name='<?php echo $ceo_name ?>' value='<?php echo $ceo_cook ?>'>
     <input type='hidden' id='data-OS' name='data-OS' value='<?php echo serialize($datos) ?>' />
 </form>
 

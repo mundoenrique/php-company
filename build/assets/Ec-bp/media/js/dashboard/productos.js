@@ -134,9 +134,13 @@ function resultNull(){
 
 
   $('button#sProducto').on('click', function(){
+		var ceo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
     var idproducto = $(this).attr("data-idproducto");
     var nombreProducto = $(this).attr("data-nombreProducto");
-    var marcaProducto = $(this).attr("data-marcaProducto");
+		var marcaProducto = $(this).attr("data-marcaProducto");
+		$('form#productos').append('<input type="hidden" name="ceo_name" value="'+ ceo_cook +'"/>');
     $('form#productos').append('<input type="hidden" name="data-idproducto" value="'+idproducto+'" />');
     $('form#productos').append('<input type="hidden" name="data-nombreProducto" value="'+nombreProducto+'" />');
     $('form#productos').append('<input type="hidden" name="data-marcaProducto" value="'+marcaProducto+'" />');
@@ -211,9 +215,11 @@ var accodgrupoe;
 
 
     if( acrif !== undefined ){
-
+			var ceo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
       $.post( baseURL+api+isoPais+"/empresas/cambiar",
-        { 'data-accodgrupoe':accodgrupoe, 'data-acrif':acrif, 'data-acnomcia':acnomcia, 'data-acrazonsocial':acrazonsocial, 'data-acdesc':acdesc, 'data-accodcia':accodcia, 'llamada':'soloEmpresa' },
+        { 'data-accodgrupoe':accodgrupoe, 'data-acrif':acrif, 'data-acnomcia':acnomcia, 'data-acrazonsocial':acrazonsocial, 'data-acdesc':acdesc, 'data-accodcia':accodcia, 'llamada':'soloEmpresa', ceo_name: ceo_cook },
          function(data){
 
           if(data === 1){

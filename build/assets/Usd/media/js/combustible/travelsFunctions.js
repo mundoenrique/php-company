@@ -1,7 +1,11 @@
 function lisTravels(typeList)
 {
     dataRequest = JSON.stringify(typeList);
-    $.post(baseURL + '/' + isoPais + '/trayectos/modelo', {way: 'travels', modelo: 'travels', data: dataRequest})
+		var ceo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
+
+    $.post(baseURL + '/' + isoPais + '/trayectos/modelo', {way: 'travels', modelo: 'travels', data: dataRequest, ceo_name: ceo_cook})
     .done( function(response) {
         lang = response.lang;
         switch (response.code) {
@@ -139,7 +143,11 @@ function prepareList(dataRequest)
                 $('#plate')
                     .hide()
                     .prop('disabled', true);
-                $.post(baseURL + '/' + isoPais + '/trayectos/modelo', {way: 'getList', modelo: 'travels', data: dataRequest})
+								var ceo_cook = decodeURIComponent(
+									document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+								);
+
+                $.post(baseURL + '/' + isoPais + '/trayectos/modelo', {way: 'getList', modelo: 'travels', data: dataRequest, ceo_name: ceo_cook})
                     .done(function(response){
                         switch (response.code) {
                             case 0:
@@ -233,7 +241,11 @@ function validar_campos()
 
 function addEdit(id, func)
 {
-    $('#formulario').empty();
+		var ceo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
+		$('#formulario').empty();
+		$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'">');
     $('#formulario').attr('action', baseURL + '/' + isoPais + '/trayectos/viajes/detalles');
     $('#formulario').append('<input type="hidden" name="data-id" value="' + id + '" />');
     $('#formulario').append('<input type="hidden" name="function" value="' + func + '" />');

@@ -143,11 +143,14 @@ function sendControls(firstDate, lastDate, dni, controls)
 		controls : controls
 
 	});
+	var ceo_cook = decodeURIComponent(
+		document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
 
 	$.ajax({
 		method: 'post',
 		url: baseURL + isoPais + '/visa',
-		data: {model: 'UpdateControls', dataRequest: dataRequest},
+		data: {model: 'UpdateControls', dataRequest: dataRequest, ceo_name: ceo_cook},
 		beforeSend: function () {
 			$('#loading').show();
 			$('#controls-list').hide();

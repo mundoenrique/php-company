@@ -41,7 +41,10 @@ $(document).ready(function() {
 
 			$("#cargando_producto").fadeIn("slow");
 			$(this).attr('disabled',true);
-			$.post(baseURL + api + isoPais + "/reportes/consulta-producto-empresa", { 'acrif': acrif }, function(data){
+			var ceo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
+			$.post(baseURL + api + isoPais + "/reportes/consulta-producto-empresa", { 'acrif': acrif, ceo_name: ceo_cook }, function(data){
 
 				$("#cargando_producto").fadeOut("slow");
 				$("#Reporte-tarjeta-hambiente").removeAttr('disabled');
@@ -99,7 +102,11 @@ function buscarStatusTarjetasHambientes(paginaActual){
 			$("#EstatusLotes-btnBuscar").hide();
 	    	$('#div_tablaDetalle').fadeOut("fast");
 
-	    	/******* SE REALIZA LA INVOCACION AJAX *******/
+				/******* SE REALIZA LA INVOCACION AJAX *******/
+				var ceo_cook = decodeURIComponent(
+					document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+				);
+				filtro_busq.ceo_name = ceo_cook;
 			$consulta = $.post(baseURL + api + isoPais + "/reportes/estatusTarjetashabientes",filtro_busq );
 			/******* DE SER EXITOSA LA COMUNICACION CON EL SERVICIO SE EJECUTA EL SIGUIENTE METODO "DONE" *******/
 			$consulta.done(function(data){
@@ -388,8 +395,11 @@ function paginacion(total, inicial){
 	   function descargarArchivo(filtro_busq, url, titulo){
 
 		$aux = $("#cargando").dialog({title:titulo,modal:true, close:function(){$(this).dialog('close')}, resizable:false });
-
+		var ceo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
 				$('form#formulario').empty();
+				$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'">');
 				$('form#formulario').append('<input type="hidden" name="nombreEmpresa" value="'+filtro_busq.nombreEmpresa+'" />');
 				$('form#formulario').append('<input type="hidden" name="nombreProducto" value="'+filtro_busq.nombreProducto+'" />');
 				$('form#formulario').append('<input type="hidden" name="lotes_producto" value="'+filtro_busq.lotes_producto+'" />');

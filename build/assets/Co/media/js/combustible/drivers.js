@@ -1,7 +1,10 @@
 var language;
 var selectStatusDriver;
 $(function() {
-	$.post(baseURL + '/' + isoPais + '/trayectos/modelo', { way: 'drivers', modelo: 'driver' })
+	var ceo_cook = decodeURIComponent(
+		document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
+	$.post(baseURL + '/' + isoPais + '/trayectos/modelo', { way: 'drivers', modelo: 'driver', ceo_name: ceo_cook})
         .done( function(data) {
             lang = data.language;
             switch (data.code) {
@@ -132,11 +135,14 @@ $('#send-info').on('click', function(){
         }
 
     if(dniValido || func == 'register') {
-        clearInput();
+				clearInput();
+				var ceo_cook = decodeURIComponent(
+					document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+				);
         $.ajax({
             url: baseURL + '/' + isoPais + '/trayectos/modelo',
             type: 'POST',
-            data: {way: 'checkUSER', data: dniAction, modelo: 'driver'},
+            data: {way: 'checkUSER', data: dniAction, modelo: 'driver', ceo_name: ceo_cook},
             datatype:'json',
             beforeSend: function(data){
                 $('#send-info, #close-info').text('');
@@ -259,8 +265,12 @@ function notiSystem (title, size, type, message) {
 }
 
 function addEdit(userName, func) {
-    $('form#formulario').empty();
-    $('form#formulario').append('<input type="hidden" name="modelo" value="driver" />');
+	var ceo_cook = decodeURIComponent(
+		document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+	);
+		$('form#formulario').empty();
+		$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'" />');
+		$('form#formulario').append('<input type="hidden" name="modelo" value="driver" />');
     $('form#formulario').append('<input type="hidden" name="function" value="' + func + '" />');
     $('form#formulario').append('<input type="hidden" name="data-id" value="' + userName + '" />');
     $('form#formulario').attr('action',baseURL+'/'+isoPais+'/trayectos/conductores/perfil');

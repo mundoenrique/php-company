@@ -99,28 +99,6 @@ $('#config').balloon({contents: $('.submenu'), position: 'bottom', classname: 'c
 
 $(':input').on('click', function(){$('#ui-datepicker-div'); $('#ui-datepicker-div').css('left',$(this).position().left);});
 
-
- document.cookie = 'cookie';
- pru = document.cookie;
-if (pru=='' || !navigator.cookieEnabled) {
-  $('<div><h5>La funcionalidad de cookies de su navegador se encuentra desactivada.</h5><h4>Por favor vuelva activarla.</h4></div>').dialog({
-    title: "Conexion empresas Online",
-    modal: true,
-    maxWidth: 700,
-    maxHeight: 300,
-    resizable: false,
-    close: function(){$(this).dialog("destroy");},
-    buttons: {
-      Aceptar: function(){
-        $(this).dialog("destroy");
-      }
-    }
-  });
-
-  $(location).attr('href','logout');
-}
-
-
 // scroll para el menu-
 $.each( $('.menuHeader ul'), function(k,v){
 

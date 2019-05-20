@@ -80,7 +80,11 @@ $(function(){
                         newC = hex_md5(newC);
                         cNewC = hex_md5(cNewC);
 
-                        $.post(baseURL+'/'+isoPais+"/changePassNewUserAuth", {'userpwdOld':old,'userpwd':newC,'userpwdConfirm':cNewC},
+												var ceo_cook = decodeURIComponent(
+													document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+													);
+
+                        $.post(baseURL+'/'+isoPais+"/changePassNewUserAuth", {'userpwdOld':old,'userpwd':newC,'userpwdConfirm':cNewC, 'ceo_name':ceo_cook},
                             function(data){
                                 data = $.parseJSON(data);
                                 if(data.rc == 0){
@@ -168,7 +172,12 @@ $(function(){
 
     function CargarPerfilUser(){
         $('#loading').dialog({title:"Perfil de usuario",modal: true,maxWidth: 700,maxHeight: 300,close:function(){$(this).dialog('destroy');} });
-        $.post(baseURL+api+isoPais+'/usuario/config/perfilUsuario').done(function( data ) {
+
+				var ceo_cook = decodeURIComponent(
+					document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+					);
+
+				$.post(baseURL+api+isoPais+'/usuario/config/perfilUsuario',{ceo_name: ceo_cook}).done(function( data ) {
             if(!data.ERROR){
                 $(".ui-dialog-content").dialog("destroy");
 
@@ -195,7 +204,11 @@ $(function(){
 
 
         if (emailRegex.test( $("#email_user").val())) {
-            $.post(baseURL+api+isoPais+'/usuario/config/ActualizarPerfilUsuario', {'email':email}).done(function( data ) {
+					var ceo_cook = decodeURIComponent(
+						document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+						);
+
+            $.post(baseURL+api+isoPais+'/usuario/config/ActualizarPerfilUsuario', {'email':email, ceo_name: ceo_cook}).done(function( data ) {
                 $(".ui-dialog-content").dialog().dialog("destroy");
                 if(data.rc=='0'){
                     notificacion("Modificar usuario","Proceso exitoso.");
@@ -242,8 +255,11 @@ $(function(){
         rif = $('option:selected', this).attr('data-rif');
         nombre = $('option:selected', this).attr('data-nombre');
         accodcia = $('option:selected', this).attr('data-accodcia');
+				var ceo_cook = decodeURIComponent(
+					document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+					);
 
-        $.post(baseURL+api+isoPais+'/usuario/config/infoEmpresa', {'data-accodcia':accodcia}).done(function( data ) {
+        $.post(baseURL+api+isoPais+'/usuario/config/infoEmpresa', {'data-accodcia':accodcia, ceo_name: ceo_cook}).done(function( data ) {
             $(".ui-dialog-content").dialog().dialog("destroy");
             $('#ui-tabs-1 #listaEmpresas').removeAttr('disabled');
             if(!data.ERROR){
@@ -303,6 +319,11 @@ $(function(){
         if( validar(json, $("#agregarContacto"), "agregar") && $("#passAgregar").val()!=="" ){
             resetPass();
             if(!rif==""){
+
+							var ceo_cook = decodeURIComponent(
+								document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+								);
+													json.ceo_name = ceo_cook
 
                 $carg = $('#loading').dialog({title:"Agregar contacto",modal: true,maxWidth: 700,maxHeight: 300,dialogClass: 'hide-close' });
                 $.post(baseURL+api+isoPais+'/usuario/config/agregarContacto', json).done(function( data ) {
@@ -389,7 +410,12 @@ $(function(){
 
         if(tlfRegex.test($("#tlf1").val()) && (tlfRegex.test($("#tlf2").val())||$("#tlf2").val()=="") && (tlfRegex.test($("#tlf3").val())||$("#tlf3").val()=="")){
             $('#loading').dialog({title:"Modificar empresa",modal: true,maxWidth: 700,maxHeight: 300,dialogClass: 'hide-close' });
-            $.post(baseURL+api+isoPais+'/usuario/config/ActualizarTlfEmpresa', json).done(function( data ) {
+						var ceo_cook = decodeURIComponent(
+							document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+							);
+						json.ceo_name = ceo_cook
+
+						$.post(baseURL+api+isoPais+'/usuario/config/ActualizarTlfEmpresa', json).done(function( data ) {
                 $(".ui-dialog-content").dialog().dialog("destroy");
 
                 if(data.rc=="0"){
@@ -416,6 +442,10 @@ $(function(){
             json.pass = hex_md5($("#pass").val());
             resetPass();
             $('#loading').dialog({title:"Eliminar contacto", modal: true,maxWidth: 700,maxHeight: 300,dialogClass: 'hide-close' });
+						var ceo_cook = decodeURIComponent(
+							document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+							);
+						json.ceo_name = ceo_cook
 
             $.post(baseURL+api+isoPais+'/usuario/config/eliminarContacto', json).done(function( data ) {
                 $(".ui-dialog-content").dialog().dialog("destroy");
@@ -457,7 +487,10 @@ $(function(){
                 $("#pass").val("");
                 resetPass();
                 $('#loading').dialog({title:"Actualizar contacto",modal: true,maxWidth: 700,maxHeight: 300,dialogClass: 'hide-close' });
-
+								var ceo_cook = decodeURIComponent(
+									document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+									);
+								json.ceo_name = ceo_cook
                 $.post(baseURL+api+isoPais+'/usuario/config/ActualizarContacto', json).done(function( data ) {
                     $(".ui-dialog-content").dialog().dialog("destroy");
                     if(data.rc=="0"){
@@ -617,7 +650,12 @@ $(function(){
             resetPass();
 
             $('#loading').dialog({ title:"Agregar sucursal",modal: true,maxWidth: 700,maxHeight: 300,dialogClass: 'hide-close' });
-            $.post(baseURL+api+isoPais+'/usuario/config/agregarSucursales', json ).done(function( data ) {
+						var ceo_cook = decodeURIComponent(
+							document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+							);
+						json.ceo_name = ceo_cook
+
+						$.post(baseURL+api+isoPais+'/usuario/config/agregarSucursales', json ).done(function( data ) {
                 $(".ui-dialog-content").dialog().dialog("destroy");
                 if(data.rc == "0"){
                     $("#lotes-general #form-new-suc").hide();
@@ -722,8 +760,13 @@ $(function(){
             json.tlf = $("#suc_tlf").val();
             json.pass = hex_md5($("#pass_suc").val());
             resetPass();
+						var ceo_cook = decodeURIComponent(
+							document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+							);
 
-            $.post(baseURL+api+isoPais+'/usuario/config/actualizarSucursales', json ).done(function( data ) {
+						json.ceo_name = ceo_cook
+
+						$.post(baseURL+api+isoPais+'/usuario/config/actualizarSucursales', json ).done(function( data ) {
                 $(".ui-dialog-content").dialog().dialog("destroy");
 
                 if(data.rc == "0"){
@@ -774,8 +817,12 @@ $(function(){
 
         pagina=false;
         cantItems=10;
-        pgitem=1, pgs=1;
-        $.post(baseURL+api+isoPais+'/usuario/config/consultarSucursales', {'rif':rif,"paginaActual":paginaActual, 'data-paginar':pagina, 'data-cantItems':cantItems} ).done(function( data ) {
+				pgitem=1, pgs=1;
+				var ceo_cook = decodeURIComponent(
+					document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+					);
+
+        $.post(baseURL+api+isoPais+'/usuario/config/consultarSucursales', {'rif':rif,"paginaActual":paginaActual, 'data-paginar':pagina, 'data-cantItems':cantItems, 'ceo_name': ceo_cook} ).done(function( data ) {
             $(".ui-dialog-content").dialog().dialog("destroy");
             $('#listaEmpresasSuc').removeAttr('disabled');
             datos = data;
@@ -1043,8 +1090,12 @@ $(function(){
             if( !$("#lotes-general #agregarContacto").is(':visible') ){
                 $('#loading').dialog({title:"Contactos",modal: true,maxWidth: 700,maxHeight: 300,dialogClass: 'hide-close' });
             }
-            $("#lotes-general #contactos").fadeOut("slow");
-            $.post(baseURL+api+isoPais+'/usuario/config/InfoContactoEmpresa', {'data-rif':rif, "paginaActual":paginaActual, 'data-paginar':pagina, 'data-cantItems':cantItems }).done(function( data ) {
+						$("#lotes-general #contactos").fadeOut("slow");
+						var ceo_cook = decodeURIComponent(
+							document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+							);
+
+            $.post(baseURL+api+isoPais+'/usuario/config/InfoContactoEmpresa', {'data-rif':rif, "paginaActual":paginaActual, 'data-paginar':pagina, 'data-cantItems':cantItems, ceo_name: ceo_cook }).done(function( data ) {
 
                 $("#agregarContact").show();
                 $("#lotes-general #agregarContacto").fadeOut();

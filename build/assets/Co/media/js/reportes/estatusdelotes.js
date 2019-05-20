@@ -34,8 +34,13 @@ $(document).ready(function() {
 			$("#EstatusLotes-producto").children( 'option:not(:first)' ).remove();
 
 			$("#cargando_producto").fadeIn("slow");
-			$(this).attr('disabled',true);
-			$.post(baseURL + api + isoPais + "/producto/lista", { 'acrif': acrif }, function(data){
+			$(this).attr('disabled',true);}
+
+			var ceo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+				);
+
+			$.post(baseURL + api + isoPais + "/producto/lista", { 'acrif': acrif, ceo_name: ceo_cook }, function(data){
 				$("#cargando_producto").fadeOut("slow");
 				$("#EstatusLotes-empresa").removeAttr('disabled');
 				if(!data.ERROR){
@@ -69,7 +74,11 @@ $(document).ready(function() {
 			}
 			descargarArchivo(datos, baseURL+api+isoPais+"/reportes/estatuslotesExpXLS", "Exportar Excel" );
 */
+var ceo_cook = decodeURIComponent(
+	document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+	);
 			$('form#formulario').empty();
+	$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'">');
 	$('form#formulario').append('<input type="hidden" name="empresa" value="'+filtro_busq.empresa+'" />');
 	$('form#formulario').append('<input type="hidden" name="fechaInicial" value="'+filtro_busq.fechaInicial+'" />');
 	$('form#formulario').append('<input type="hidden" name="fechaFin" value="'+filtro_busq.fechaFin+'" />');
@@ -90,7 +99,11 @@ $("#export_pdf").click(function(){
 	}
 	descargarArchivo(datos, baseURL+api+isoPais+"/reportes/estatuslotesExpPDF", "Exportar PDF" );
 */
+var ceo_cook = decodeURIComponent(
+	document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+	);
 $('form#formulario').empty();
+$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'">');
 	$('form#formulario').append('<input type="hidden" name="empresa" value="'+filtro_busq.empresa+'" />');
 	$('form#formulario').append('<input type="hidden" name="fechaInicial" value="'+filtro_busq.fechaInicial+'" />');
 	$('form#formulario').append('<input type="hidden" name="fechaFin" value="'+filtro_busq.fechaFin+'" />');
@@ -114,6 +127,12 @@ var filtro_busq={};
 			$('#cargando').fadeIn("slow");
 			$("#EstatusLotes-btnBuscar").hide();
 	    	$('#div_tablaDetalle').fadeOut("fast");
+
+				var ceo_cook = decodeURIComponent(
+					document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+					);
+
+				filtro_busq.ceo_name = ceo_cook
 
 			$consulta = $.post(baseURL + api + isoPais + "/reportes/estatuslotes",filtro_busq );
 			$consulta.done(function(data){
@@ -344,10 +363,20 @@ $(".tbody-statuslotes").dataTable( {
 
 		$aux = $("#cargando").dialog({title:titulo,modal:true, close:function(){$(this).dialog('close')}, resizable:false });
 
-		$.post(url,datos).done(function(data){
+		var ceo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
+
+			datos.ceo_name = ceo_cook
+
+			$.post(url,datos).done(function(data){
 			$aux.dialog('destroy')
 			if(!data.ERROR){
+				var ceo_cook = decodeURIComponent(
+					document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+					);
 				$('form#formulario').empty();
+				$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'">');
 				$('form#formulario').append('<input type="hidden" name="bytes" value="'+JSON.stringify(data.bytes)+'" />');
 				$('form#formulario').append('<input type="hidden" name="ext" value="'+data.ext+'" />');
 				$('form#formulario').append('<input type="hidden" name="nombreArchivo" value="'+data.nombreArchivo+'" />');
