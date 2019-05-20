@@ -41,16 +41,11 @@ class NOVO_Controller extends CI_Controller {
 		$this->lang->load('dashboard');
 		$this->lang->load('users');
 		if($this->input->is_ajax_request()) {
-			/* $dataRequest = json_decode(
-				$this->security->xss_clean(
-					strip_tags(utf8_encode(base64_decode($this->input->get_post('request'))))
-				)
-			); */
 			$this->dataRequest = json_decode(
 				$this->security->xss_clean(
 					strip_tags(
 						$this->cryptography->decrypt(
-							$this->input->get_post('plot'),
+							base64_decode($this->input->get_post('plot')),
 							utf8_encode($this->input->get_post('request'))
 						)
 					)

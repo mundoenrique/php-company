@@ -57,7 +57,7 @@ function callNovoCore (verb, who, where, data, _response_) {
 	$.ajax({
 		method: verb,
 		url: baseURL + 'async-call',
-		data: {request: dataRequest, ceo_name: ceo_cook, plot: ceo_cook},
+		data: {request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)},
 		context: document.body,
 		dataType: 'json',
 	}).done(function(response, status) {
