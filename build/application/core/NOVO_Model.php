@@ -96,4 +96,10 @@ class NOVO_Model extends CI_Model {
 
 		return $responseDecrypt;
 	}
+
+	public function cypherData() {
+		log_message('INFO', 'NOVO cypherData Method Initialized');
+
+		return $this->cryptography->encrypt($this->response);
+	}
 }
