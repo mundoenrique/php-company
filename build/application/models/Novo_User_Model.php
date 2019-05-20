@@ -323,7 +323,7 @@ class Novo_User_Model extends NOVO_Model {
 		log_message('DEBUG', 'NOVO ['.$dataRequest->user.'] RESPONSE: recaptcha: País: "' .$this->config->item('country'). '", Score: "' . $result["score"] .'", Hostname: "'. $result["hostname"].'"');
 		$this->response->title = lang('SYSTEM_NAME');
 		if($result["score"] <= 0.5) {
-            
+
                 $this->response->code = 1;
                 $this->response->icon = 'ui-icon-closethick';
                 $this->response->msg = 'Error al validar recaptcha';
@@ -333,13 +333,13 @@ class Novo_User_Model extends NOVO_Model {
 						'link'=> base_url('inicio'),
 						'action'=> 'close'
 					]
-				];				
+				];
 			}
             else {
                 $this->response->code = 0;
-				$this->response->data = 'Ok';				
-			}  			
-			return $this->response;
-			
+				$this->response->data = 'Ok';
+			}
+			return $this->cypherData();
+
     }
 }
