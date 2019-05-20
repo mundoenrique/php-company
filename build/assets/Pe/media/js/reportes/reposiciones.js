@@ -39,7 +39,10 @@ $(document).ready(function() {
 			$("#repReposiciones_producto").children( 'option:not(:first)' ).remove();
 			$("#cargando_producto").fadeIn("slow");
 			$("#repReposiciones_empresa").attr('disabled',true);
-			$.post(baseURL + api + isoPais + "/producto/lista", { 'acrif': acrif }, function(data){
+			var ceo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
+			$.post(baseURL + api + isoPais + "/producto/lista", { 'acrif': acrif, ceo_name: ceo_cook }, function(data){
 				$("#cargando_producto").fadeOut("slow");
 				$("#repReposiciones_empresa").removeAttr('disabled');
 				if(!data.ERROR){	
@@ -123,7 +126,9 @@ $(document).ready(function() {
 
 
 	    $("#export_excel").click(function(){
-
+			var ceo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
 			$('form#formulario').empty();
 			$('form#formulario').append('<input type="hidden" name="empresa" value="'+filtro_busq.empresa+'" />');
 			$('form#formulario').append('<input type="hidden" name="fechaInicial" value="'+filtro_busq.fechaInicial+'" />');
@@ -135,6 +140,7 @@ $(document).ready(function() {
 			$('form#formulario').append('<input type="hidden" name="nomProducto" value="'+filtro_busq.des+'" />');
 			$('form#formulario').append('<input type="hidden" name="paginaActual" value="1" />');
 			$('form#formulario').attr('action',baseURL+api+isoPais+"/reportes/reposicionesExpXLS");
+			$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'" />');
 			$('form#formulario').submit(); 
 
 
@@ -201,6 +207,10 @@ function buscarReposiciones(paginaActual){
 		    	filtro_busq.des = $("option:selected","#repReposiciones_producto").attr("des");
 		    	
 	//SE REALIZA LA INVOCACION AJAX
+		    	var ceo_cook = decodeURIComponent(
+		    		document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+	    		);
+					filtro_busq.ceo_name = ceo_cook;
 		    	$consulta = $.post(baseURL + api + isoPais + "/reportes/reposiciones",filtro_busq );
 	//DE SER EXITOSA LA COMUNICACION CON EL SERVICIO SE EJECUTA EL SIGUIENTE METODO "DONE"
 		 		$consulta.done(function(data){

@@ -54,7 +54,10 @@ $(document).ready(function() {
 			$("#repEstadosDeCuenta_producto").children( 'option:not(:first)' ).remove();
 			$("#cargando_producto").fadeIn("slow");
 			$(this).attr('disabled',true);
-			$.post(baseURL + api + isoPais + "/producto/lista", { 'acrif': acrif }, function(data){
+			var ceo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
+			$.post(baseURL + api + isoPais + "/producto/lista", { 'acrif': acrif, ceo_name: ceo_cook }, function(data){
 				$("#cargando_producto").fadeOut("slow");
 				$("#repEstadosDeCuenta_empresa").removeAttr('disabled');
 				if(!data.ERROR){
@@ -224,6 +227,10 @@ function BuscarEstadosdeCuenta(paginaActual){
 
 		filtro_busq.paginaActual=paginaActual;
 
+		var ceo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
+		filtro_busq.ceo_name = ceo_cook;
 		$consulta = $.post(baseURL + api + isoPais + "/reportes/estadosdecuenta",filtro_busq );
 //DE SER EXITOSA LA COMUNICACION CON EL SERVICIO SE EJECUTA EL SIGUIENTE METODO "DONE"
 
@@ -307,6 +314,9 @@ if(buscarReporte){
 			}
 			descargarArchivo(datos, baseURL+api+isoPais+"/reportes/EstadosdeCuentaXLS", "Exportar a EXCEL" );*/
 
+						var ceo_cook = decodeURIComponent(
+							document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+						);
 			$('form#formulario').empty();
     				$('form#formulario').append('<input type="hidden" name="empresa" value="'+filtro_busq.empresa+'" />');
     				$('form#formulario').append('<input type="hidden" name="fechaInicial" value="'+filtro_busq.fechaInicial+'" />');
@@ -318,6 +328,7 @@ if(buscarReporte){
     				$('form#formulario').append('<input type="hidden" name="nomEmpresa" value="'+filtro_busq.acnomcia.replace(","," ")+'" />');
     				$('form#formulario').append('<input type="hidden" name="descProducto" value="'+filtro_busq.productoDesc+'" />');
     				$('form#formulario').attr('action',baseURL+api+isoPais+"/reportes/EstadosdeCuentaXLS");
+						$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'" />');
     				$('form#formulario').submit()
 
 
@@ -347,6 +358,9 @@ if(buscarReporte){
 				descProducto: filtro_busq.productoDesc
 			}
 			descargarArchivo(datos, baseURL+api+isoPais+"/reportes/EstadosdeCuentaPDF", "Exportar a PDF" );*/
+						var ceo_cook = decodeURIComponent(
+							document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+						);
 			$('form#formulario').empty();
     				$('form#formulario').append('<input type="hidden" name="empresa" value="'+filtro_busq.empresa+'" />');
     				$('form#formulario').append('<input type="hidden" name="fechaInicial" value="'+filtro_busq.fechaInicial+'" />');
@@ -358,6 +372,7 @@ if(buscarReporte){
     				$('form#formulario').append('<input type="hidden" name="nomEmpresa" value="'+filtro_busq.acnomcia.replace(","," ")+'" />');
     				$('form#formulario').append('<input type="hidden" name="descProducto" value="'+filtro_busq.productoDesc+'" />');
     				$('form#formulario').attr('action',baseURL+api+isoPais+"/reportes/EstadosdeCuentaPDF");
+						$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'" />');
     				$('form#formulario').submit()
 
 		});
@@ -378,6 +393,10 @@ if(buscarReporte){
 		span.click(function(){
 
 //SE EJECUTA LA CONSULTA PARA EL GRAFICO
+				var ceo_cook = decodeURIComponent(
+					document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+				);
+				filtro_busq.ceo_name = ceo_cook;
 				$consulta = $.post(baseURL + api + isoPais + "/reportes/EstadosdeCuentaGrafico",filtro_busq );
 // APARECE LA VENTANA DE CARGANDO MIENTRAS SE REALIZA LA CONSULTA
 				$( "#cargando" ).dialog({title:"Ver Gráfica Estado de cuenta",modal:true, width: 200, height: 170});
@@ -494,6 +513,9 @@ if(buscarReporte){
 				descProducto: filtro_busq.productoDesc
 			}
 			descargarArchivo(datos, baseURL+api+isoPais+"/reportes/EstadosdeCuentaMasivo", "Generar Comprobante Masivo" );*/
+						var ceo_cook = decodeURIComponent(
+							document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+						);
 			$('form#formulario').empty();
     				$('form#formulario').append('<input type="hidden" name="empresa" value="'+filtro_busq.empresa+'" />');
     				$('form#formulario').append('<input type="hidden" name="fechaInicial" value="'+filtro_busq.fechaInicial+'" />');
@@ -505,6 +527,7 @@ if(buscarReporte){
     				$('form#formulario').append('<input type="hidden" name="nomEmpresa" value="'+filtro_busq.acnomcia.replace(","," ")+'" />');
     				$('form#formulario').append('<input type="hidden" name="descProducto" value="'+filtro_busq.productoDesc+'" />');
     				$('form#formulario').attr('action',baseURL+api+isoPais+"/reportes/EstadosdeCuentaMasivo");
+						$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'" />');
     				$('form#formulario').submit()
 
 
@@ -615,6 +638,9 @@ if(buscarReporte){
 	 					}
 
 	 					descargarArchivo(datos, baseURL+api+isoPais+"/reportes/EstadosdeCuentaComp", "Generar Comprobante de pago" );*/
+						var ceo_cook = decodeURIComponent(
+							document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+						);
 	 					$('form#formulario').empty();
     				$('form#formulario').append('<input type="hidden" name="empresa" value="'+filtro_busq.empresa+'" />');
     				$('form#formulario').append('<input type="hidden" name="fechaInicial" value="'+filtro_busq.fechaInicial+'" />');
@@ -631,6 +657,7 @@ if(buscarReporte){
     				$('form#formulario').append('<input type="hidden" name="nomEmpresa" value="'+filtro_busq.acnomcia.replace(","," ")+'" />');
     				$('form#formulario').append('<input type="hidden" name="cliente" value="'+$(this).attr("cliente")+'" />');
     				$('form#formulario').attr('action',baseURL+api+isoPais+"/reportes/EstadosdeCuentaMasivo");
+						$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'" />');
     				$('form#formulario').submit()
 
 
@@ -864,14 +891,22 @@ function descargarArchivo(datos, url, titulo){
 
 	$aux = $("#cargando").dialog({title:titulo,modal:true, close:function(){$(this).dialog('close')}, resizable:false });
 
+			var ceo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
+			datos.ceo_name = ceo_cook;
 			$.post(url,datos).done(function(data){
     			$aux.dialog('destroy')
     			if(!data.ERROR){
+						var ceo_cook = decodeURIComponent(
+							document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+						);
     				$('form#formulario').empty();
     				$('form#formulario').append('<input type="hidden" name="bytes" value="'+JSON.stringify(data.bytes)+'" />');
     				$('form#formulario').append('<input type="hidden" name="ext" value="'+data.ext+'" />');
     				$('form#formulario').append('<input type="hidden" name="nombreArchivo" value="'+data.nombreArchivo+'" />');
     				$('form#formulario').attr('action',baseURL+isoPais+"/file");
+						$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'" />');
     				$('form#formulario').submit()
     			}else{
     				if(data.ERROR=="-29"){

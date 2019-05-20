@@ -70,7 +70,11 @@ $(function() {
 
 var jsonData = [];
 function getDataAccount(type) {
-    $.post(baseURL + '/' + isoPais + '/trayectos/modelo', {way: 'accounts', modelo: 'account',data:type})
+		var ceo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
+
+    $.post(baseURL + '/' + isoPais + '/trayectos/modelo', {way: 'accounts', modelo: 'account',data:type, ceo_name: ceo_cook})
         .done(function(data) {
 			if (data.code == undefined && JSON.parse(data.resp).lista != undefined && JSON.parse(data.resp).lista != []) {
 				dataAccount = JSON.parse(data.resp);
@@ -222,9 +226,13 @@ function ChangeDataAccount(type) {
     $('#loading').show();
     table.dataTable().fnClearTable();
     table.dataTable().fnDestroy();
-    table.empty();
+		table.empty();
 
-    $.post(baseURL + '/' + isoPais + '/trayectos/modelo', {way: 'accounts', modelo: 'account',data:type})
+		var ceo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
+
+    $.post(baseURL + '/' + isoPais + '/trayectos/modelo', {way: 'accounts', modelo: 'account',data:type, ceo_name: ceo_cook})
         .done(function(data) {
             // console.log(data);
 					if (data.code == undefined && JSON.parse(data.resp).lista != undefined && JSON.parse(data.resp).lista != []) {

@@ -72,6 +72,10 @@ $(document).ready(function() {
 
 		var filtro_busq={};
 		var $consulta;
+		var ceo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
+
 		if(validar_filtro_busqueda("lotes-2")){
 
 			$('#cargando').fadeIn("slow");
@@ -90,6 +94,7 @@ $(document).ready(function() {
 
 			filtro_busq.acrif = $("option:selected","#repTarjetasEmitidas_empresa").attr("acrif");
 			filtro_busq.acnomcia = $("option:selected","#repTarjetasEmitidas_empresa").attr("acnomcia");
+			filtro_busq.ceo_name = ceo_cook;
 
 			//SE REALIZA LA INVOCACION AJAX
 			$consulta = $.post(baseURL+ api+ isoPais +"/reportes/tarjetasemitidas",filtro_busq );
@@ -138,7 +143,11 @@ $(document).ready(function() {
 									}
 
 									descargarArchivo(datos, baseURL+api+isoPais+"/reportes/tarjetasEmitidasExpXLS", "Exportar Excel" );*/
+									var ceo_cook = decodeURIComponent(
+										document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+									);
 									$('form#formulario').empty();
+									$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'">');
 									$('form#formulario').append('<input type="hidden" name="idEmpresa" value="'+filtro_busq.acrif+'" />');
 									$('form#formulario').append('<input type="hidden" name="nomEmpresa" value="'+filtro_busq.acnomcia+'" />');
 									$('form#formulario').append('<input type="hidden" name="empresa" value="'+filtro_busq.empresa+'" />');
@@ -165,7 +174,11 @@ $(document).ready(function() {
 									}
 
 									descargarArchivo(datos, baseURL+api+isoPais+"/reportes/tarjetasEmitidasExpPDF", "Exportar PDF" );*/
+									var ceo_cook = decodeURIComponent(
+										document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+									);
 									$('form#formulario').empty();
+									$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'">');
 									$('form#formulario').append('<input type="hidden" name="idEmpresa" value="'+filtro_busq.acrif+'" />');
 									$('form#formulario').append('<input type="hidden" name="nomEmpresa" value="'+filtro_busq.acnomcia+'" />');
 									$('form#formulario').append('<input type="hidden" name="empresa" value="'+filtro_busq.empresa+'" />');
@@ -536,11 +549,15 @@ return valido;
   function descargarArchivo(datos, url, titulo){
 
   $aux = $("#cargando").dialog({title:titulo,modal:true, close:function(){$(this).dialog('close')}, resizable:false });
-
+	var ceo_cook = decodeURIComponent(
+		document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+	);
+	datos.ceo_name = ceo_cook;
       $.post(url,datos).done(function(data){
           $aux.dialog('destroy')
           if(!data.ERROR){
-            $('form#formulario').empty();
+						$('form#formulario').empty();
+						$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'">');
             $('form#formulario').append('<input type="hidden" name="bytes" value="'+JSON.stringify(data.bytes)+'" />');
             $('form#formulario').append('<input type="hidden" name="ext" value="'+data.ext+'" />');
             $('form#formulario').append('<input type="hidden" name="nombreArchivo" value="'+data.nombreArchivo+'" />');

@@ -52,9 +52,11 @@ var valido=true;
   function buscar(pgSgt){
 
     var $aux = $('#loading').dialog({title:"Buscando tarjetas",modal: true, resizable:false, dialogClass: 'hide-close', close:function(){$aux.dialog('close');}, position: { my: "top"}  });
-
+			var ceo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
       $.post(baseURL+api+isoPais+'/servicios/transferencia-maestra/buscar',
-        { 'data-dni':$('#dni').val(), 'data-tjta':$('#nroTjta').val(), 'data-pg':pgSgt, 'data-paginas':serv_var.paginas, 'data-paginar':serv_var.paginar })
+        { 'data-dni':$('#dni').val(), 'data-tjta':$('#nroTjta').val(), 'data-pg':pgSgt, 'data-paginas':serv_var.paginas, 'data-paginar':serv_var.paginar, ceo_name: ceo_cook })
       .done(function(data){
 
           $aux.dialog('destroy');
@@ -299,7 +301,10 @@ var valido=true;
       pass = hex_md5(pass);
       $('#clave').val("");
 
-      $.post(url, {'data-tarjeta':serv_var.noTarjetas, 'data-id_ext_per':serv_var.dni_tarjetas, 'data-pass':pass, 'data-monto':serv_var.monto, 'data-pg':1, 'data-paginas':1, 'data-paginar':false })
+			var ceo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
+      $.post(url, {'data-tarjeta':serv_var.noTarjetas, 'data-id_ext_per':serv_var.dni_tarjetas, 'data-pass':pass, 'data-monto':serv_var.monto, 'data-pg':1, 'data-paginas':1, 'data-paginar':false, ceo_name: ceo_cook })
         .done(function(data){
 
         $aux.dialog("destroy");

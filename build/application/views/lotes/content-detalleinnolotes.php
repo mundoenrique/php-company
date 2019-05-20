@@ -4,6 +4,9 @@ $pais = $this->uri->segment(1);
 $urlBaseA = $this->config->item('base_url');
 $urlBase = $urlBaseA.$pais;
 
+$ceo_name = $this->security->get_csrf_token_name();
+$ceo_cook = $this->security->get_csrf_hash();
+
 $info;
 ?>
 
@@ -144,6 +147,7 @@ $info;
 			</div>
 			<div id="batchs-last">
 				<form method='post' action="<?php echo $urlBase ?>/lotes/innominada/afiliacion">
+				<input type="hidden" name="<?php echo $ceo_name ?>" class="ignore" value="<?php echo $ceo_cook ?>">
 					<button type="submit">Volver</button>
 				</form>
 			</div>

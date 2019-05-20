@@ -155,10 +155,13 @@ function daysDifference() {
  */
 function ReportRechar(dataReport) {
 	dataReport = JSON.stringify(dataReport);
+	var ceo_cook = decodeURIComponent(
+		document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+	);
 	$.ajax({
 		method: 'POST',
 		url: baseURL + isoPais + '/reportes/comisiones-recarga',
-		data: {mod: 'reports_additional', way: 'ReportRecharWithComm', request: dataReport},
+		data: {mod: 'reports_additional', way: 'ReportRecharWithComm', request: dataReport, ceo_name: ceo_cook},
 		beforeSend: function() {
 			$('#detail-report').hide();
 			$('#loading').fadeIn();
@@ -209,10 +212,13 @@ function ReportRechar(dataReport) {
 function downloadReport(downloadData) {
 	var report = downloadData.report;
 	downloadData = JSON.stringify(downloadData);
+	var ceo_cook = decodeURIComponent(
+		document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+	);
 	$.ajax({
 		method: 'POST',
 		url: baseURL + isoPais + '/reportes/comisiones-recarga',
-		data: {mod: 'reports_additional', way: 'DownloadReport', request: downloadData},
+		data: {mod: 'reports_additional', way: 'DownloadReport', request: downloadData, ceo_name: ceo_cook},
 		beforeSend: function() {
 			$('#search').attr('disabled', true);
 		}
@@ -224,10 +230,14 @@ function downloadReport(downloadData) {
 
 		switch(code) {
 			case 0:
+				var ceo_cook = decodeURIComponent(
+					document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+				);
 				$('#down-report').empty();
 				$('#down-report').append('<input type="hidden" name="mod" value="lists_and_requirements" />');
 				$('#down-report').append('<input type="hidden" name="way" value="downloadFile" />');
 				$('#down-report').append('<input type="hidden" name="request" value="' + msg + '" />');
+				$('#down-report').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'" />');
 				$('#down-report').submit();
 				break;
 			default:

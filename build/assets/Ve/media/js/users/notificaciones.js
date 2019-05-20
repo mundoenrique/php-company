@@ -91,7 +91,10 @@
 				notificacion('Notificación', msjPt1+msjPt2);
 			}
 			if( ErrorCount == 0 ){
-
+				var ceo_cook = decodeURIComponent(
+					document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+				);
+				Notificaciones.ceo_name = ceo_cook;
 				$.post( baseURL+api+isoPais+'/usuario/notificaciones/envio', Notificaciones ).done(function(data){
 					var data = JSON.parse( data );
 						if( data.rc == 0 ){
@@ -163,7 +166,10 @@
 				var selPgActual=1;
 				var tipoLote;
 				var arrayResponse = [];
-
+				var ceo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+				);
+				datosPost.ceo_name = ceo_cook;
 				$.post( baseURL+api+isoPais+'/usuario/notificaciones/'+funcion, datosPost ).done(function(data){
 						var data = JSON.parse( data );
 						Notificaciones = data;

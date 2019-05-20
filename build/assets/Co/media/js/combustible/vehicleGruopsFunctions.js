@@ -5,8 +5,13 @@ function addEdit(id) {
         $('#send-info, #close-info').text('');
         $('#msg-info').empty();
         $('#msg-info').append('<div id="loading" class="agrups"><img src=" ' + baseCDN + '/media/img/loading.gif' + '"></div>');
-        notiSystem('msg', title);
-        $.post(baseURL + '/' + isoPais + '/trayectos/modelo', {way: 'vehicleGroups', modelo: 'vehicleGroups', data: id})
+				notiSystem('msg', title);
+
+				var ceo_cook = decodeURIComponent(
+					document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+					);
+
+        $.post(baseURL + '/' + isoPais + '/trayectos/modelo', {way: 'vehicleGroups', modelo: 'vehicleGroups', data: id, ceo_name: ceo_cook})
             .done( function(response) {
                 $('#msg-info').empty();
                 switch (response.code) {
@@ -84,7 +89,13 @@ function validar_campos() {
 
 //llamado a la lista de vehículos de un grupo
 function vehicles (id, name) {
-    $('form#formulario').empty();
+
+	var ceo_cook = decodeURIComponent(
+		document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
+
+		$('form#formulario').empty();
+		$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'">');
     $('form#formulario').append('<input type="hidden" name="data-id" value="'+id+'" />');
     $('form#formulario').append('<input type="hidden" name="data-name" value="'+name+'" />');
     $('form#formulario').append('<input type="hidden" name="modelo" value="vehicles" />');

@@ -70,7 +70,10 @@ $("#repGastosPorCategoria_dni").attr("maxlength","12");
 
 		$("#cargando_producto").fadeIn("slow");
 		$(this).attr('disabled',true);
-		$.post(baseURL + api + isoPais + "/producto/lista", { 'acrif': acrif }, function(data){
+		var ceo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
+		$.post(baseURL + api + isoPais + "/producto/lista", { 'acrif': acrif, ceo_name: ceo_cook }, function(data){
 			$("#cargando_producto").fadeOut("slow");
 			$("#repGastosPorCategoria_empresa").removeAttr('disabled');
 			if(!data.ERROR){
@@ -189,6 +192,9 @@ $( "#repGastosPorCategoria_fecha_ini" ).datepicker({
 
 			descargarArchivo(datos, baseURL+api+isoPais+"/reportes/gastosporcategoriasExpPDF", "Exportar PDF" );
 */
+			var ceo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
 			$('form#formulario').empty();
 			$('form#formulario').append('<input type="hidden" name="empresa" value="'+filtro_busq.empresa+'" />');
 			$('form#formulario').append('<input type="hidden" name="fechaIni" value="'+filtro_busq.fechaInicial+'" />');
@@ -198,6 +204,7 @@ $( "#repGastosPorCategoria_fecha_ini" ).datepicker({
 			$('form#formulario').append('<input type="hidden" name="cedula" value="'+filtro_busq.cedula.replace(/ /g,'')+'" />');
 			$('form#formulario').append('<input type="hidden" name="tipoConsulta" value="'+filtro_busq.tipoConsulta+'" />');
 			$('form#formulario').attr('action',baseURL+api+isoPais+"/reportes/gastosporcategoriasExpPDF");
+			$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'" />');
 			$('form#formulario').submit();
 
 		});
@@ -219,6 +226,9 @@ $( "#repGastosPorCategoria_fecha_ini" ).datepicker({
 
 		// 	descargarArchivo(datos, baseURL+api+isoPais+"/reportes/gastosporcategoriasExpXLS", "Exportar Excel" );
 
+		var ceo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
 		$('form#formulario').empty();
 			$('form#formulario').append('<input type="hidden" name="empresa" value="'+filtro_busq.empresa+'" />');
 			$('form#formulario').append('<input type="hidden" name="fechaIni" value="'+filtro_busq.fechaInicial+'" />');
@@ -228,6 +238,7 @@ $( "#repGastosPorCategoria_fecha_ini" ).datepicker({
 			$('form#formulario').append('<input type="hidden" name="cedula" value="'+filtro_busq.cedula.replace(/ /g,'')+'" />');
 			$('form#formulario').append('<input type="hidden" name="tipoConsulta" value="'+filtro_busq.tipoConsulta+'" />');
 			$('form#formulario').attr('action',baseURL+api+isoPais+"/reportes/gastosporcategoriasExpXLS");
+			$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'" />');
 			$('form#formulario').submit();
 	});
 
@@ -266,6 +277,10 @@ var filtro_busq={};
 			filtro_busq.tipoConsulta=$("input[name='radio']:checked").val();
 
 //SE REALIZA LA PETICION AL SERVICIO DE GASTOS POR CATEGORIA
+			var ceo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
+			filtro_busq.ceo_name = ceo_cook;
 			$consulta = $.post(baseURL + api + isoPais + "/reportes/gastosporcategorias",filtro_busq );
 
 //SI LA CONSULTA ES SATISFACTORIA SE PROCEDE A LLENAR LA TABLA
@@ -717,14 +732,22 @@ var filtro_busq={};
 
   $aux = $("#cargando").dialog({title:titulo,modal:true, close:function(){$(this).dialog('close')}, resizable:false });
 
+			var ceo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
+			datos.ceo_name = ceo_cook;
       $.post(url,datos).done(function(data){
           $aux.dialog('destroy')
           if(!data.ERROR){
+						var ceo_cook = decodeURIComponent(
+							document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+						);
             $('form#formulario').empty();
             $('form#formulario').append('<input type="hidden" name="bytes" value="'+JSON.stringify(data.bytes)+'" />');
             $('form#formulario').append('<input type="hidden" name="ext" value="'+data.ext+'" />');
             $('form#formulario').append('<input type="hidden" name="nombreArchivo" value="'+data.nombreArchivo+'" />');
             $('form#formulario').attr('action',baseURL+isoPais+"/file");
+						$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'" />');
             $('form#formulario').submit()
           }else{
             if(data.ERROR=="-29"){

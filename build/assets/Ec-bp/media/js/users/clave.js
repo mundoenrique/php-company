@@ -55,7 +55,10 @@ function notificacion(mensaje){
 function changePassNewUser(passOld,pass,passC){
 
 	$aux = $('#loading').dialog({title:"Cambiando contraseña", modal: true, resizable:false, close:function(){$aux.dialog('close');}});
-	$consulta = $.post(baseURL+isoPais+"/changePassNewUserAuth", { userpwdOld: passOld, userpwd: pass, userpwdConfirm: passC } );
+	var ceo_cook = decodeURIComponent(
+		document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+	);
+	$consulta = $.post(baseURL+isoPais+"/changePassNewUserAuth", { userpwdOld: passOld, userpwd: pass, userpwdConfirm: passC, ceo_name: ceo_cook} );
 	$consulta.done(function(data){
 		$aux.dialog('destroy');
 		data = $.parseJSON(data);

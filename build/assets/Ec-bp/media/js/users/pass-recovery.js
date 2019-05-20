@@ -43,7 +43,10 @@ $(function(){
             modal:true,
             close: function(){$(this).dialog('destroy')},
             resizable:false });
-
+				var ceo_cook = decodeURIComponent(
+					document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+				);
+				jsonData.ceo_name = ceo_cook;
         $.post(baseURL + isoPais+'/users/recuperar-pass', jsonData )
             .done(function( data ) {
             if (data == "validate") {

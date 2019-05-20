@@ -124,8 +124,11 @@ $("#exportXLS_a").click(function(){
 
 		descargarArchivo(datos, baseURL+api+isoPais+"/reportes/cuentaConcentradoraExpXLS", "Exportar Excel" );
 */
-
+		var ceo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
 		$('form#formulario').empty();
+		$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'">');
 		$('form#formulario').append('<input type="hidden" name="empresa" value="'+filtro_busq.empresa+'" />');
 		$('form#formulario').append('<input type="hidden" name="fechaInicial" value="'+filtro_busq.fechaInicial+'" />');
 		$('form#formulario').append('<input type="hidden" name="fechaFin" value="'+filtro_busq.fechaFin+'" />');
@@ -150,7 +153,11 @@ $("#exportPDF_a").click(function(){
 
 		descargarArchivo(datos, baseURL+api+isoPais+"/reportes/cuentaConcentradoraExpPDF", "Exportar PDF" );
 */
-$('form#formulario').empty();
+		var ceo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
+		$('form#formulario').empty();
+		$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'">');
 		$('form#formulario').append('<input type="hidden" name="empresa" value="'+filtro_busq.empresa+'" />');
 		$('form#formulario').append('<input type="hidden" name="fechaInicial" value="'+filtro_busq.fechaInicial+'" />');
 		$('form#formulario').append('<input type="hidden" name="fechaFin" value="'+filtro_busq.fechaFin+'" />');
@@ -192,7 +199,11 @@ $(".consolidado").click(function(){
 
 				descargarArchivo(datos, baseURL+api+isoPais+"/reportes/cuentaConcentradoraConsolidadoExp"+formato, "Exportar "+formato );
 			*/
-			$('form#formulario').empty();
+					var ceo_cook = decodeURIComponent(
+						document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+					);
+					$('form#formulario').empty();
+					$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'">');
 					$('form#formulario').append('<input type="hidden" name="empresa" value="'+filtro_busq.empresa+'" />');
 					$('form#formulario').append('<input type="hidden" name="fechaInicial" value="'+filtro_busq.fechaInicial+'" />');
 					$('form#formulario').append('<input type="hidden" name="fechaFin" value="'+filtro_busq.fechaFin+'" />');
@@ -213,7 +224,11 @@ var $consulta;
 
 
 $('#cargando').dialog({ modal: true,maxWidth: 700,maxHeight: 300,dialogClass: 'hide-close' });
+		var ceo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
 
+		filtro_busq.ceo_name = ceo_cook;
 
 		$consulta = $.post(baseURL + api + isoPais + "/reportes/graficoCuentaConcentradora",filtro_busq );
 		$consulta.done(function(data){
@@ -395,6 +410,11 @@ function WS(filtro_busq){
 	$('#cargando').fadeIn("slow");
 	$("#repUsuario_btnBuscar").hide();
 	$('#div_tablaDetalle').hide();
+	var ceo_cook = decodeURIComponent(
+		document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+	);
+
+	filtro_busq.ceo_name = ceo_cook;
 			//SE REALIZA LA INVOCACION AJAX
 			$consulta = $.post(baseURL + api + isoPais + "/reportes/cuentaConcentradora",filtro_busq );
 			//DE SER EXITOSA LA COMUNICACION CON EL SERVICIO SE EJECUTA EL SIGUIENTE METODO "DONE"
@@ -603,11 +623,20 @@ function paginar(totalPaginas, paginaActual) {
 function descargarArchivo(datos, url, titulo){
 
 	$aux = $("#cargando").dialog({title:titulo,modal:true, close:function(){$(this).dialog('close')}, resizable:false });
+	var ceo_cook = decodeURIComponent(
+		document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+	);
+
+	datos.ceo_name = ceo_cook;
 
 	$.post(url,datos).done(function(data){
 		$aux.dialog('destroy')
 		if(!data.ERROR){
+			var ceo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
 			$('form#formulario').empty();
+			$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'">');
 			$('form#formulario').append('<input type="hidden" name="bytes" value="'+JSON.stringify(data.bytes)+'" />');
 			$('form#formulario').append('<input type="hidden" name="ext" value="'+data.ext+'" />');
 			$('form#formulario').append('<input type="hidden" name="nombreArchivo" value="'+data.nombreArchivo+'" />');
