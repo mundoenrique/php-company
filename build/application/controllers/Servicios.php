@@ -32,7 +32,7 @@ class Servicios extends CI_Controller {
 		if($paisS==$urlCountry && $logged_in && $moduloAct!==false) {
 			$FooterCustomInsertJS = ["jquery-3.4.0.min.js", "jquery-ui-1.12.1.min.js","jquery.balloon.min.js",
 			"jquery-md5.js","jquery.paginate.js","header.js","dashboard/widget-empresa.js",
-			"servicios/transferencia-maestra.js","routes.js"];
+			"servicios/transferencia-maestra.js","aes.min.js","aes-json-format.min.js","routes.js"];
 			$FooterCustomJS = "";
 			$titlePage = "Transferencia maestra";
 			$programa = $this->session->userdata('nombreProductoS').' / '. $this->session->userdata('marcaProductoS');
@@ -93,7 +93,8 @@ class Servicios extends CI_Controller {
 				$r["result"] = $result;
 				$r["funciones"] = $funciones;
 
-				$this->output->set_content_type('application/json')->set_output(json_encode($r));
+				$response = $this->cryptography->encrypt($r);
+				$this->output->set_content_type('application/json')->set_output(json_encode($response));
 
 		} elseif($paisS != $urlCountry && $paisS != '') {
 			$this->session->sess_destroy();
@@ -123,11 +124,24 @@ class Servicios extends CI_Controller {
 		$token = $this->session->userdata('token');
 		$idEmpresa = $this->session->userdata('acrifS');
 		$idProductoS = $this->session->userdata('idProductoS');
-		$tarjeta = $this->input->post('data-tjta');
-		$dni = $this->input->post('data-dni');
-		$pg = $this->input->post('data-pg');
-		$paginas = $this->input->post('data-paginas');
-		$paginar = $this->input->post('data-paginar');
+		$dataRequest = json_decode(
+			$this->security->xss_clean(
+					strip_tags(
+							$this->cryptography->decrypt(
+									base64_decode($this->input->get_post('plot')),
+									utf8_encode($this->input->get_post('request'))
+							)
+					)
+			)
+	);
+		$tarjeta = $dataRequest->data_tjta;
+		$dni = $dataRequest->data_dni;
+		$pg = $dataRequest->data_pg;
+		$paginas = $dataRequest->data_paginas;
+		$paginar = $dataRequest->data_paginar;
+
+
+
 		$acodcia = $this->session->userdata('accodciaS');
 		$acgrupo = $this->session->userdata('accodgrupoeS');
 		$sessionId = $this->session->userdata('sessionId');
