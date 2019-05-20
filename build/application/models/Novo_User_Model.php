@@ -152,7 +152,7 @@ class Novo_User_Model extends NOVO_Model {
 			}
 		}
 
-		return $this->response;
+		return $this->cypherData();
 	}
 	/**
 	 * @info Método para recuperar contraseña
@@ -224,7 +224,7 @@ class Novo_User_Model extends NOVO_Model {
 			}
 		}
 
-		return $this->response;
+		return $this->cypherData();
 	}
 	/**
 	 * @info Método para el cambio de Contraseña
@@ -280,7 +280,7 @@ class Novo_User_Model extends NOVO_Model {
 			}
 		}
 
-		return $this->response;
+		return $this->cypherData();
 	}
 	/**
 	 * @info Método para el cierre de sesión
@@ -313,7 +313,7 @@ class Novo_User_Model extends NOVO_Model {
 			}
 
 		$this->session->sess_destroy();
-		return $this->response;
+		return $this->cypherData();
 	}
 
 }
