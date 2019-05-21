@@ -261,8 +261,20 @@ class Dashboard extends CI_Controller {
 		$paisS = $this->session->userdata('pais');
 
 		if($paisS==$urlCountry && $logged_in){
-			if($this->input->post()){
-				$acrifPost = $this->input->post('acrif');
+				$dataRequest = json_decode(
+				$this->security->xss_clean(
+					strip_tags(
+						$this->cryptography->decrypt(
+							base64_decode($this->input->get_post('plot')),
+							utf8_encode($this->input->get_post('request'))
+						)
+					)
+				)
+			);
+			$acrifPost = $dataRequest->acrif;
+			if($acrifPost){
+
+				//$acrifPost = $this->input->post('acrif');
 
 				$responseMenuEmpresas =$this->callWSMenuEmpresa($acrifPost,$urlCountry,$ctipo='false');
 				if(array_key_exists('ERROR', $responseMenuEmpresas)){
@@ -274,7 +286,7 @@ class Dashboard extends CI_Controller {
 			}else{
 				$productos=null;
 			}
-
+			$productos = $this->cryptography->encrypt($productos);
 			$this->output->set_content_type('application/json')->set_output(json_encode($productos,JSON_UNESCAPED_UNICODE));
 		}elseif($paisS!=$urlCountry && $paisS!=''){
 			$this->session->sess_destroy();
@@ -609,10 +621,6 @@ class Dashboard extends CI_Controller {
 				];
 				$this->session->set_userdata($expMax);
 
-
-
-
-
 				$responseMenuPorProducto->estadistica->producto->descripcion;
 				$titlePage = "Conexión Empresas Online - ".$nombreEmpresaT;
 				$msgError=FALSE;
@@ -787,7 +795,7 @@ class Dashboard extends CI_Controller {
 		if($response){
 			log_message('info', 'dash_empr_filt '.$response->rc);
 			if($response->rc==0){
-				return $response;
+				return $this->cryptography->encrypt($response);
 			}else{
 				if($response->rc==-61 || $response->rc==-29){
 					$this->session->sess_destroy();
