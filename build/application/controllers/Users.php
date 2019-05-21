@@ -721,12 +721,24 @@ class Users extends CI_Controller {
                 //obtiene el token de seguridad
                 $token = $this->session->userdata('token');
                 //recibe la clave actual y la nueva
-                $password = $this->input->post('userpwd');
-                $passwordOld = $this->input->post('userpwdOld');
+								$dataRequest = json_decode(
+									$this->security->xss_clean(
+										strip_tags(
+											$this->cryptography->decrypt(
+												base64_decode($this->input->get_post('plot')),
+												utf8_encode($this->input->get_post('request'))
+											)
+										)
+									)
+								);
+								$password = $dataRequest->userpwd;
+								$passwordOld = $dataRequest->userpwdOld;
                 //obtiene la respuesta del modelo
                 $responseCambioClave = $this->callWScambioClave($username,$password,$passwordOld,$token,$urlCountry);
-                //Devuelve la respuesta del modelo
-                $this->output->set_content_type('')->set_output($responseCambioClave);
+								//Devuelve la respuesta del modelo
+								$response = json_decode($responseCambioClave);
+								$response = $this->cryptography->encrypt($response);
+                $this->output->set_content_type('application/json')->set_output(json_encode($response));
             }
         } elseif ($paisS!=$urlCountry && $paisS!=''){
             $this->session->sess_destroy();
@@ -737,8 +749,9 @@ class Users extends CI_Controller {
                     'rc' => '-29',
                     'msg' => lang('ERROR_(-29)')
                 ]
-            );
-            $this->output->set_content_type('')->set_output($responseCambioClave);
+						);
+						$response = $this->cryptography->encrypt($responseCambioClave);
+            $this->output->set_content_type('')->set_output($response);
         } else {
             redirect($urlCountry.'/login');
         }
@@ -851,7 +864,7 @@ class Users extends CI_Controller {
             $lastSessionD = $this->session->userdata('lastSession');
             $FooterCustomInsertJS=["jquery-1.10.2.min.js","jquery-ui-1.10.3.custom.min.js",
 						"jquery.balloon.min.js","jquery-md5.js","jquery.paginate.js",
-						"users/configuracion.js","header.js","jquery.fileupload.js","jquery.iframe-transport.js","routes.js"];
+						"users/configuracion.js","header.js","jquery.fileupload.js","jquery.iframe-transport.js","aes.min.js","aes-json-format.min.js","aes.min.js","aes-json-format.min.js","routes.js"];
             $FooterCustomJS="";
             $titlePage="Conexión Empresas Online-Configuración";
             $title="Configuración";
@@ -1159,12 +1172,20 @@ class Users extends CI_Controller {
         $paisS = $this->session->userdata('pais');
 
         if($paisS==$urlCountry && $logged_in){
-
-            $acodcia = $this->input->post('data-accodcia');
+						$dataRequest = json_decode(
+							$this->security->xss_clean(
+								strip_tags(
+									$this->cryptography->decrypt(
+										base64_decode($this->input->get_post('plot')),
+										utf8_encode($this->input->get_post('request'))
+									)
+								)
+							)
+						);
+						$acodcia = $dataRequest->data_accodcia;
             $lista = $this->callWSInfoEmpresa($urlCountry, $acodcia);
-
-            $this->output->set_content_type('application/json')->set_output(json_encode($lista));
-
+						$response = $this->cryptography->encrypt($lista);
+            $this->output->set_content_type('application/json')->set_output(json_encode($response));
         }elseif($paisS!=$urlCountry && $paisS!=''){
 
             $this->session->sess_destroy();
@@ -1390,11 +1411,25 @@ class Users extends CI_Controller {
             $acrif = $this->input->post('rif');
             $tlf = $this->input->post('tlf');
             $tlf2 = $this->input->post('tlf2');
-            $tlf3 = $this->input->post('tlf3');
+						$tlf3 = $this->input->post('tlf3');
 
+						$dataRequest = json_decode(
+							$this->security->xss_clean(
+								strip_tags(
+									$this->cryptography->decrypt(
+										base64_decode($this->input->get_post('plot')),
+										utf8_encode($this->input->get_post('request'))
+									)
+								)
+							)
+						);
+						$acrif = $dataRequest->rif;
+						$tlf = $dataRequest->tlf;
+						$tlf2 = $dataRequest->tlf2;
+						$tlf3 = $dataRequest->tlf3;
             $lista = $this->callWSActualizarTlfEmpresa($urlCountry, $acrif, $tlf, $tlf2, $tlf3);
-
-            $this->output->set_content_type('application/json')->set_output(json_encode($lista));
+						$response = $this->cryptography->encrypt($lista);
+            $this->output->set_content_type('application/json')->set_output(json_encode($response));
 
         }elseif($paisS!=$urlCountry && $paisS!=''){
 
@@ -1879,14 +1914,15 @@ class Users extends CI_Controller {
         if($paisS==$urlCountry &&$logged_in){
 
             $lista = $this->callWSPerfilUser($urlCountry);
-
-            $this->output->set_content_type('application/json')->set_output(json_encode($lista));
+						$response = $this->cryptography->encrypt($lista);
+            $this->output->set_content_type('application/json')->set_output(json_encode($response));
 
         }elseif($paisS!=$urlCountry && $paisS!=''){
             $this->session->sess_destroy();
             redirect($urlCountry.'/login');
         }elseif($this->input->is_ajax_request()){
-            $this->output->set_content_type('application/json')->set_output(json_encode( array('ERROR' => lang('ERROR_(-29)'), "rc"=> '-29' )));
+						$response = $this->cryptography->encrypt(array('ERROR' => lang('ERROR_(-29)'), "rc"=> '-29' ));
+            $this->output->set_content_type('application/json')->set_output(json_encode($response));
         }else{
             redirect($urlCountry.'/login');
         }
@@ -1985,17 +2021,28 @@ class Users extends CI_Controller {
 
         if($paisS==$urlCountry &&$logged_in){
 
-            $email = $this->input->post("email");
-            $lista = $this->callWSActualizarPerfilUser($urlCountry, $email);
-
-            $this->output->set_content_type('application/json')->set_output(json_encode($lista));
+						$dataRequest = json_decode(
+							$this->security->xss_clean(
+								strip_tags(
+									$this->cryptography->decrypt(
+										base64_decode($this->input->get_post('plot')),
+										utf8_encode($this->input->get_post('request'))
+									)
+								)
+							)
+						);
+						$email = $dataRequest->email;
+						$lista = $this->callWSActualizarPerfilUser($urlCountry, $email);
+						$response = $this->cryptography->encrypt($lista);
+            $this->output->set_content_type('application/json')->set_output(json_encode($response));
 
         }elseif($paisS!=$urlCountry && $paisS!=''){
             $this->session->sess_destroy();
             redirect($urlCountry.'/login');
 
         }elseif($this->input->is_ajax_request()){
-            $this->output->set_content_type('application/json')->set_output(json_encode( array('ERROR' => lang('ERROR_(-29)'), "rc"=> '-29' )));
+						$response = $this->cryptography->encrypt(array('ERROR' => lang('ERROR_(-29)'), "rc"=> '-29' ));
+            $this->output->set_content_type('application/json')->set_output(json_encode($response));
         }else{
             redirect($urlCountry.'/login');
         }
