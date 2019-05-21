@@ -97,6 +97,9 @@ var filtro_busq={};
 				filtro_busq.paginaActual=1;
 				filtro_busq.ceo_name = ceo_cook;
 	    	if(validar_filtro_busqueda("lotes-2")){
+				var form = $('#form-criterio-busqueda');
+				validateForms(form, {handleMsg: true});
+				if (form.valid()) {
 	    	$('#cargando').fadeIn("slow");
 	    	$(this).hide();
 	    	$('#div_tablaDetalle').fadeOut("fast");
@@ -195,7 +198,7 @@ var filtro_busq={};
 
 
 			 		$("#grafica").click(function(){
-			    	
+
 // SE OBTIENE LAS SERIES
 					var arrayseries = []
 					$.each(data.listaGrafico[0].series,function(posSeries,itemSeries){
@@ -249,8 +252,8 @@ var filtro_busq={};
 						}
 					}]
 			});
-			
-			$("#chart").dialog({modal:true, width: 700, height: 400});					
+
+			$("#chart").dialog({modal:true, width: 700, height: 400});
 			$("#chart").height(400);
 			$("#chart svg").height(385);
 
@@ -274,7 +277,10 @@ var filtro_busq={};
 				 		}
 		 			}
 
-		 		});
+				 });
+				} else {
+					showErrMsg('Verifique los datos ingresados e intente nuevamente');
+				}
 			}
 
 	    });
