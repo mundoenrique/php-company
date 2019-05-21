@@ -4,9 +4,10 @@ $(function() {
 
 	$('#login-btn').on('click', function(e) {
 		e.preventDefault();
+		$(".general-form-msg").html('');
 		var form = $('#login-form');
 		var loginBtn = $(this);
-		validateForms(form, {errorMsg: 'Combinación incorrecta de usuario y contraseña'});
+		validateForms(form, {handleMsg: false});
 		if(form.valid()) {
 			var text = loginBtn.text();
 			var user = {

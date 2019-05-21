@@ -222,7 +222,7 @@
 			echo 	'<button '.$borrar.' id="button-eliminar" type="submit" >'.lang('TITULO_LOTESBTN_ELIMINAR').'</button>';
 			echo 	'<button id="button-autorizar" type="submit">'.lang('TITULO_LOTESBTN_AUTORIZAR').'</button>';
 			$selectTipoLote = $pais == 'Ve' ? '<input type="hidden" id="selec_tipo_lote" value="1">' :
-			'<select id="selec_tipo_lote" name="selec_tipo_lote">
+			'<select id="selec_tipo_lote" name="tipo_lote_select">
 				<option value="0">'.lang('SELECT_OPTION_XLOTE').'</option>
 				<option value="1" selected>'.lang('SELECT_OPTION_XTIPO_lOTE').'</option>
 			</select>';

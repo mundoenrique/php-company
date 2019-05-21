@@ -126,7 +126,7 @@ $('#lotes-2').on('click','#select-allA', function() {
     if(pass!="" && js_var.loteA!="" && osTipo!=""){
 
 			var form = $('#lotes-2').find('form');
-			validateForms(form, {handleMsg: false});
+			validateForms(form);
 			if(form.valid()) {
 
 				pass = hex_md5( pass );
@@ -160,7 +160,7 @@ $('#lotes-2').on('click','#select-allA', function() {
 				});
 			// resetValuesAuth();
 			} else {
-				notificacion('Autorización de Lotes', 'Contraseña inválida');
+				notificacion('Autorización de Lotes', 'Verifique los datos ingresados e intente nuevamente');
 			}
     }else{
         notificacion("Autorizando lotes","<h2>Verifique que: </h2><h3>1. Ha seleccionado al menos un lote</h3><h3>2. Ha ingresado su contraseña</h4><h3>3. Ha seleccionado el tipo orden de servicio</h3>");
@@ -176,7 +176,7 @@ $('#lotes-2').on('click','#select-allA', function() {
     if(pass!="" && js_var.loteA!=""){
 
 			var form = $('#lotes-2').find('form');
-			validateForms(form, {handleMsg: false});
+			validateForms(form);
 			if(form.valid()) {
 
 				pass = hex_md5( pass );
@@ -195,7 +195,7 @@ $('#lotes-2').on('click','#select-allA', function() {
 			// resetValuesAuth();
 
 			} else {
-				notificacion('Autorización de Lotes', 'Contraseña inválida');
+				notificacion('Autorización de Lotes', 'Verifique los datos ingresados e intente nuevamente');
 			}
     }else{
       notificacion("Autorizando lotes","Seleccione al menos un lote e ingrese su contraseña");
@@ -267,7 +267,6 @@ $item = $(this);
 
 
  $('#lotes-2').on('click','#eliminarF', function(){ // boton eliminar en firma
-
     var pass = $('#clave').val();
 
     if(pass!="" && js_var.loteF!=""){
@@ -307,7 +306,7 @@ $('#lotes-2').on('click','#borrar', function(){
 
       var canvas = "<div id='dialog-confirm'>";
       canvas +="<p>Lote Nro.: "+acnumlote+"</p>";
-      canvas += "<form onsubmit='return false'><fieldset><input type='password' id='pass' name='claveAuth' size=24 placeholder='Ingrese su contraseña' class='text ui-widget-content ui-corner-all'/>";
+      canvas += "<form onsubmit='return false'><fieldset><input type='password' id='pass' name='user-password' size=24 placeholder='Ingrese su contraseña' class='text ui-widget-content ui-corner-all'/>";
       canvas += "<h5 id='msg'></h5></fieldset></form></div>";
 			tabla = $(this).parents('table').attr('id');
 
@@ -328,7 +327,7 @@ $('#lotes-2').on('click','#borrar', function(){
            if(pass!==""){
 
 						var form = $(this).find('form');
-						validateForms(form, {handleMsg: false});
+						validateForms(form);
 						if(form.valid()) {
               pass = hex_md5( pass );
               $('#pass').val( '' );
@@ -353,12 +352,12 @@ $('#lotes-2').on('click','#borrar', function(){
         	eliminarLotes(idlote,acnumlote,ctipolote,pass);
         }else if($('#claveAuth').val()!=''&&tabla=='table-auth'){
 					var form = $('#lotes-2').find('form');
-					validateForms(form, {handleMsg: false});
+					validateForms(form);
 					if(form.valid()) {
 						pass = hex_md5($('#claveAuth').val());
 						eliminarLotes(idlote,acnumlote,ctipolote,pass);
 					} else
-						notificacion('Autorización de Lotes', 'Contraseña inválida');
+						notificacion('Autorización de Lotes', 'Verifique los datos ingresados e intente nuevamente');
         }
 
 

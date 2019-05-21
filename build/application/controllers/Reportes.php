@@ -1155,7 +1155,9 @@ class Reportes extends CI_Controller {
 			if($paisS==$urlCountry && $logged_in && $moduloAct!==false){
 					$nombreCompleto = $this->session->userdata('nombreCompleto');
 					$lastSessionD = $this->session->userdata('lastSession');
-					$FooterCustomInsertJS=["jquery-1.10.2.min.js","jquery-ui-1.10.3.custom.min.js","jquery.paginate.js","reportes/saldosalcierre.js","header.js","jquery.balloon.min.js","routes.js"];
+					$jsRte = '../../../js/';
+					$thirdsJsRte = '../../../js/third_party/';
+					$FooterCustomInsertJS=["jquery-1.10.2.min.js","jquery-ui-1.10.3.custom.min.js","jquery.paginate.js","reportes/saldosalcierre.js","header.js","jquery.balloon.min.js","routes.js",$thirdsJsRte."jquery.validate.min.js",$jsRte."validate-forms.js",$thirdsJsRte."additional-methods.min.js"];
 					$FooterCustomJS="";
 					$titlePage="Conexión Empresas Online - Reportes";
 
@@ -3538,7 +3540,9 @@ class Reportes extends CI_Controller {
 			if($paisS==$urlCountry && $logged_in && $moduloAct!==false){
 					$nombreCompleto = $this->session->userdata('nombreCompleto');
 					$lastSessionD = $this->session->userdata('lastSession');
-					$FooterCustomInsertJS=["jquery-1.10.2.min.js","jquery-ui-1.10.3.custom.min.js","reportes/estadosdecuenta.js","kendo.dataviz.min.js","jquery.paginate.js","header.js","jquery.balloon.min.js","jquery.dataTables.min.js","routes.js"];
+					$jsRte = '../../../js/';
+					$thirdsJsRte = '../../../js/third_party/';
+					$FooterCustomInsertJS=["jquery-1.10.2.min.js","jquery-ui-1.10.3.custom.min.js","reportes/estadosdecuenta.js","kendo.dataviz.min.js","jquery.paginate.js","header.js","jquery.balloon.min.js","jquery.dataTables.min.js","routes.js",$thirdsJsRte."jquery.validate.min.js",$jsRte."validate-forms.js",$thirdsJsRte."additional-methods.min.js"];
 					$FooterCustomJS="";
 					$titlePage="Conexión Empresas Online - Reportes";
 

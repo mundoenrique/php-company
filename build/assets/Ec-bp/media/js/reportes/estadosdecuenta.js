@@ -214,8 +214,9 @@ function BuscarEstadosdeCuenta(paginaActual){
 //SE MUESTRA EL GIF DE CARGANDO DEBAJO DEL FORMULARIO EN CASO DE QUE EL FORMULARIO SEA VALIDO
 
 	if(valid){
-		var idPersona = $('#repEstadosDeCuenta_dni').val();
-		if(/^[0-9]*$/.test(idPersona)) {
+		var form = $('#form-criterio-busqueda');
+		validateForms(form);
+		if(form.valid()) {
 
 //SE MUESTRA EL GIF DE CARGANDO DEBAJO DEL FORMULARIO EN CASO DE QUE EL FORMULARIO SEA VALIDO
 		$('#cargando').fadeIn("slow");
@@ -731,8 +732,7 @@ if(buscarReporte){
 
 		});
 		} else {
-			$('#repEstadosDeCuenta_dni').attr("style","border-color:red");
-			showErrMsg('Cédula de identidad inválida');
+			showErrMsg('Verifique los datos ingresados e intente nuevamente');
 		}
 }
 
