@@ -30,6 +30,11 @@ $style_css = $this->uri->segment(3);
 	<link rel="icon" type="image/<?= $ext ?>" href="<?php echo get_cdn(); ?>media/img/favicon.<?= $ext ?>" />
 	<?php
 
+	if($pais == 'Ec-bp')
+	{
+		echo insert_css_cdn("jquery-ui.min.css");
+	}
+	
 	echo insert_css_cdn("default.css");
 
 	if ($style_css==="pass_recovery") {
