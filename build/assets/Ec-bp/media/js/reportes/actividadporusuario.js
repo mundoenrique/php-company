@@ -84,130 +84,134 @@ $("#empresa").on('change', function(){
 
         if(validar_filtro_busqueda("lotes-2")){
           // mostrar reporte
+					var form = $('#form-criterio-busqueda');
+					validateForms(form);
+					if (form.valid()) {
+						$('#cargando').show();
+						$(this).hide();
+						$('.resultadosAU').hide();
 
-        $('#cargando').show();
-        $(this).hide();
-        $('.resultadosAU').hide();
+						params.fecha_ini = $("#fecha_ini").val();
+						params.fecha_fin = $("#fecha_fin").val();
+						params.acodcia = $("#empresa").val();
 
-        params.fecha_ini = $("#fecha_ini").val();
-        params.fecha_fin = $("#fecha_fin").val();
-        params.acodcia = $("#empresa").val();
+						$.post(baseURL + api + isoPais + "/reportes/actividadporusuario", {"data-fechaIni": $("#fecha_ini").val(),"data-fechaFin": $("#fecha_fin").val(), "data-acodcia":$("#empresa").val()})
+						.always(function(data){
+							$('#cargando').hide();
+							$("#btnBuscar").show();
+							$('.resultadosAU').show();
+							if(!data.ERROR){
 
-          $.post(baseURL + api + isoPais + "/reportes/actividadporusuario", {"data-fechaIni": $("#fecha_ini").val(),"data-fechaFin": $("#fecha_fin").val(), "data-acodcia":$("#empresa").val()})
-          .always(function(data){
-            $('#cargando').hide();
-            $("#btnBuscar").show();
-            $('.resultadosAU').show();
-            if(!data.ERROR){
-
-              if($("#table-activ-user").hasClass('dataTable')){
-                $('#table-activ-user').dataTable().fnClearTable();
-                $('#table-activ-user').dataTable().fnDestroy();
-              }
-              $('#table-activ-user tbody').empty();
-              $('.activities-AU').empty();
-              $('.functions-AU').empty();
-              $("#view-results").show();
-              $('thead').show();
-
-
-              $thFunciones = "<thead><tr class='OShead-2'><td style='text-align: center'>FUNCIONES</td></tr></thead>";
-              $thActividades = "<thead><tr class='OShead-2 OSinfo'><td>Módulo</td><td>Función</td><td>Fecha</td></tr></thead>";
-              $verF = "<a class='vF' title='Ver funciones'><span aria-hidden='true' class='icon' data-icon='&#xe003;'></span></a>";
-              $verA = "<a class='vA' title='Ver actividades'><span aria-hidden='true' class='icon' data-icon='&#xe003;'></span></a>";
-
-              $tr="";
-              $.each(data.lista, function(k,v){
-                $tr += "<tr id='"+v.userName+"'><td>"+v.userName+"</td>";
-                $tr += "<td>"+v.estatus+"</td>";
-                $tr += "<td>"+v.fechaUltimaConexion+"</td>";
-                $tr += "<td >"+$verA+$verF+"</td>";
+								if($("#table-activ-user").hasClass('dataTable')){
+									$('#table-activ-user').dataTable().fnClearTable();
+									$('#table-activ-user').dataTable().fnDestroy();
+								}
+								$('#table-activ-user tbody').empty();
+								$('.activities-AU').empty();
+								$('.functions-AU').empty();
+								$("#view-results").show();
+								$('thead').show();
 
 
-                if(data.lista[k].actividades.lista.length==0){
-                  $tr += "<td class='activ A"+v.userName+" elem-hidden'><table class='activities-AU'><tbody>";
-                    $tr+= "<tr class='cell-AU'><td></td><td>Sin actividades</td><td></td></tr>";
-                  }else{
-                    $tr += "<td class='activ A"+v.userName+" elem-hidden'><table class='activities-AU'>"+$thActividades+"<tbody>";
-                     $.each(data.lista[k].actividades.lista, function(key,val){
-                     $tr+= "<tr class='cell-AU'><td>"+val.modulo+"</td>";
-                     $tr+= "<td>"+val.funcion+"</td>";
-                     $tr+= "<td>"+val.dttimesstamp+"</td></tr>";
-                  });
-                  }
-                $tr += "</tbody></table></td> </tr>";
+								$thFunciones = "<thead><tr class='OShead-2'><td style='text-align: center'>FUNCIONES</td></tr></thead>";
+								$thActividades = "<thead><tr class='OShead-2 OSinfo'><td>Módulo</td><td>Función</td><td>Fecha</td></tr></thead>";
+								$verF = "<a class='vF' title='Ver funciones'><span aria-hidden='true' class='icon' data-icon='&#xe003;'></span></a>";
+								$verA = "<a class='vA' title='Ver actividades'><span aria-hidden='true' class='icon' data-icon='&#xe003;'></span></a>";
+
+								$tr="";
+								$.each(data.lista, function(k,v){
+									$tr += "<tr id='"+v.userName+"'><td>"+v.userName+"</td>";
+									$tr += "<td>"+v.estatus+"</td>";
+									$tr += "<td>"+v.fechaUltimaConexion+"</td>";
+									$tr += "<td >"+$verA+$verF+"</td>";
 
 
-                $funcs = "<table class='functions-AU F"+v.userName+"'>"+$thFunciones+"<tbody>";
-                  $.each(data.lista[k].funciones.lista, function(key, val){
-                     $funcs+= "<tr><td>"+val.acnomfuncion.toLowerCase().replace(/(^| )(\w)/g, function(x){return x.toUpperCase();} )+"</td></tr>";
-                  })
-                  if(data.lista[k].funciones.lista.length==0){
-                    $funcs+= "<tr><td>Sin funciones</td></tr>";
-                  }
-                $funcs += "</tbody></table>";
-        $('#funciones-user').append($funcs);
+									if(data.lista[k].actividades.lista.length==0){
+										$tr += "<td class='activ A"+v.userName+" elem-hidden'><table class='activities-AU'><tbody>";
+											$tr+= "<tr class='cell-AU'><td></td><td>Sin actividades</td><td></td></tr>";
+										}else{
+											$tr += "<td class='activ A"+v.userName+" elem-hidden'><table class='activities-AU'>"+$thActividades+"<tbody>";
+											$.each(data.lista[k].actividades.lista, function(key,val){
+											$tr+= "<tr class='cell-AU'><td>"+val.modulo+"</td>";
+											$tr+= "<td>"+val.funcion+"</td>";
+											$tr+= "<td>"+val.dttimesstamp+"</td></tr>";
+										});
+										}
+									$tr += "</tbody></table></td> </tr>";
 
 
-              });
-              $('#table-activ-user tbody').append($tr);
+									$funcs = "<table class='functions-AU F"+v.userName+"'>"+$thFunciones+"<tbody>";
+										$.each(data.lista[k].funciones.lista, function(key, val){
+											$funcs+= "<tr><td>"+val.acnomfuncion.toLowerCase().replace(/(^| )(\w)/g, function(x){return x.toUpperCase();} )+"</td></tr>";
+										})
+										if(data.lista[k].funciones.lista.length==0){
+											$funcs+= "<tr><td>Sin funciones</td></tr>";
+										}
+									$funcs += "</tbody></table>";
+					$('#funciones-user').append($funcs);
 
 
-            $.each($('.vF'),function(){
-                user = $(this).parents('tr').attr('id');
-
-                $(this).balloon({contents: $('.F'+user), position: 'right', classname:'tooltip-funcionesAU'});
-
-              });
+								});
+								$('#table-activ-user tbody').append($tr);
 
 
+							$.each($('.vF'),function(){
+									user = $(this).parents('tr').attr('id');
 
-              $('#table-activ-user').dataTable( {
-          "iDisplayLength": 10,
-          'bDestroy':true,
-          "sPaginationType": "full_numbers",
-          "bLengthChange": false,
-          "oLanguage": {
-            "sProcessing":     "Procesando...",
-            "sLengthMenu":     "Mostrar _MENU_ registros",
-            "sZeroRecords":    "No se encontraron resultados",
-            "sEmptyTable":     "Ningún dato disponible en esta tabla",
-            "sInfo":           "Mostrando registros del _START_ al _END_, de un total de _TOTAL_ registros",
-            "sInfoEmpty":      "Mostrando registros del 0 al 0, de un total de 0 registros",
-            "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
-            "sInfoPostFix":    "",
-            "sSearch":         "Buscar:",
-            "sUrl":            "",
-            "sInfoThousands":  ",",
-            "sLoadingRecords": "Cargando...",
-            "oPaginate": {
-                "sFirst":    "<<",
-                "sLast":     ">>",
-                "sNext":     ">",
-                "sPrevious": "<"
-            }
-          }
-         } );
+									$(this).balloon({contents: $('.F'+user), position: 'right', classname:'tooltip-funcionesAU'});
 
-            $('.dataTable').css('width','0');
+								});
 
 
 
+								$('#table-activ-user').dataTable( {
+						"iDisplayLength": 10,
+						'bDestroy':true,
+						"sPaginationType": "full_numbers",
+						"bLengthChange": false,
+						"oLanguage": {
+							"sProcessing":     "Procesando...",
+							"sLengthMenu":     "Mostrar _MENU_ registros",
+							"sZeroRecords":    "No se encontraron resultados",
+							"sEmptyTable":     "Ningún dato disponible en esta tabla",
+							"sInfo":           "Mostrando registros del _START_ al _END_, de un total de _TOTAL_ registros",
+							"sInfoEmpty":      "Mostrando registros del 0 al 0, de un total de 0 registros",
+							"sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+							"sInfoPostFix":    "",
+							"sSearch":         "Buscar:",
+							"sUrl":            "",
+							"sInfoThousands":  ",",
+							"sLoadingRecords": "Cargando...",
+							"oPaginate": {
+									"sFirst":    "<<",
+									"sLast":     ">>",
+									"sNext":     ">",
+									"sPrevious": "<"
+							}
+						}
+					} );
 
-            }else{
-              $('thead').hide();
-              $('#view-results').hide();
-              if(data.ERROR=='-29'){
-              alert('Usuario actualmente desconectado'); location.reload();
-              }else{
-                $(".dataTables_filter").hide(); $(".dataTables_info").hide(); $(".dataTables_paginate").hide();
-                $('tbody').html("<h2 style='text-align:center'>"+data.ERROR+"</h2>");
-            }
-            }
+							$('.dataTable').css('width','0');
 
-          });
 
-          }
+
+
+							}else{
+								$('thead').hide();
+								$('#view-results').hide();
+								if(data.ERROR=='-29'){
+								alert('Usuario actualmente desconectado'); location.reload();
+								}else{
+									$(".dataTables_filter").hide(); $(".dataTables_info").hide(); $(".dataTables_paginate").hide();
+									$('tbody').html("<h2 style='text-align:center'>"+data.ERROR+"</h2>");
+							}
+							}
+
+						});
+					} else {
+						showErrMsg('Verifique los datos ingresados e intente nuevamente');
+					}
+        }
       });
 
 
