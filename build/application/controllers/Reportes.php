@@ -43,7 +43,7 @@ class Reportes extends CI_Controller {
 
 					$nombreCompleto = $this->session->userdata('nombreCompleto');
 					$lastSessionD = $this->session->userdata('lastSession');
-					$FooterCustomInsertJS=["jquery-3.4.0.min.js", "jquery-ui-1.12.1.min.js","reportes/cuentaconcentradora.js","jquery.paginate.js","header.js","jquery.balloon.min.js","highcharts.js","exporting.js","routes.js"];
+					$FooterCustomInsertJS=["jquery-3.4.0.min.js", "jquery-ui-1.12.1.min.js","reportes/cuentaconcentradora.js","jquery.paginate.js","header.js","jquery.balloon.min.js","highcharts.js","exporting.js","aes.min.js","aes-json-format.min.js","routes.js"];
 					$FooterCustomJS="";
 					$titlePage="Conexión Empresas Online - Reportes";
 
@@ -790,7 +790,7 @@ class Reportes extends CI_Controller {
 			if($paisS==$urlCountry && $logged_in && $moduloAct!==false){
 					$nombreCompleto = $this->session->userdata('nombreCompleto');
 					$lastSessionD = $this->session->userdata('lastSession');
-					$FooterCustomInsertJS=["jquery-3.4.0.min.js", "jquery-ui-1.12.1.min.js","jquery.dataTables.min.js","reportes/tarjetasemitidas.js","kendo.dataviz.min.js","header.js","jquery.balloon.min.js","routes.js"];
+					$FooterCustomInsertJS=["jquery-3.4.0.min.js", "jquery-ui-1.12.1.min.js","jquery.dataTables.min.js","reportes/tarjetasemitidas.js","kendo.dataviz.min.js","header.js","jquery.balloon.min.js","aes.min.js","aes-json-format.min.js","routes.js"];
 					$FooterCustomJS="";
 					$titlePage="Conexión Empresas Online - Reportes";
 
@@ -852,20 +852,35 @@ class Reportes extends CI_Controller {
 							}
 							else
 							{
-									$empresa = $this->input->post('empresa');
-									$fechaInicial = $this->input->post('fechaInicial');
-									$fechaFin = $this->input->post('fechaFin');
-									$tipoConsulta = $this->input->post('radioGeneral');
-									$username = $this->session->userdata('userName');
-									$token = $this->session->userdata('token');
+								$dataRequest = json_decode(
+									$this->security->xss_clean(
+										strip_tags(
+											strip_tags(
+												$this->cryptography->decrypt(
+													base64_decode($this->input->get_post('plot')),
+													utf8_encode($this->input->get_post('request'))
+												)
+											)
+										)
+									)
+								);
+								$empresa = $dataRequest->filtro_busq->empresa;
+								$fechaInicial = $dataRequest->filtro_busq->fechaInicial;
+								$fechaFin = $dataRequest->filtro_busq->fechaFin;
+								$tipoConsulta = $dataRequest->filtro_busq->radioGeneral;
+								$username = $this->session->userdata('userName');
+								$token = $this->session->userdata('token');
 
 									$pruebaTabla = $this->callWSTarjetasEmitidas($urlCountry,$token,$username,$empresa,$fechaInicial,$fechaFin,$tipoConsulta);
+									$pruebaTabla = $this->cryptography->encrypt($pruebaTabla);
 									$this->output->set_content_type('application/json')->set_output(json_encode($pruebaTabla));
 							}
 					}
 			}else{
 					$this->session->sess_destroy();
-					$this->output->set_content_type('application/json')->set_output(json_encode( array('ERROR' => lang('ERROR_(-29)'), "rc"=> "-29")));
+					$responseError = ['ERROR' => lang('ERROR_(-29)'), "rc"=> "-29"];
+					$responseError = $this->cryptography->encrypt($responseError);
+					$this->output->set_content_type('application/json')->set_output(json_encode($responseError));
 			}
 
 	}
@@ -1444,7 +1459,7 @@ class Reportes extends CI_Controller {
 			if($paisS==$urlCountry && $logged_in && $moduloAct!==false){
 					$nombreCompleto = $this->session->userdata('nombreCompleto');
 					$lastSessionD = $this->session->userdata('lastSession');
-					$FooterCustomInsertJS=["jquery-3.4.0.min.js", "jquery-ui-1.12.1.min.js","header.js","jquery.balloon.min.js","jquery.dataTables.min.js","reportes/estatusdelotes.js","routes.js"];
+					$FooterCustomInsertJS=["jquery-3.4.0.min.js", "jquery-ui-1.12.1.min.js","header.js","jquery.balloon.min.js","jquery.dataTables.min.js","reportes/estatusdelotes.js","aes.min.js","aes-json-format.min.js","routes.js"];
 					$FooterCustomJS="";
 					$titlePage="Conexión Empresas Online - Reportes";
 
@@ -1619,21 +1634,34 @@ class Reportes extends CI_Controller {
 							}
 							else
 							{
-									$paginaActual=$this->input->post('paginaActual');
-									$empresa = $this->input->post('empresa');
-									$fechaInicial = $this->input->post('fechaInicial');
-									$fechaFin = $this->input->post('fechaFin');
-									$loteproducto = $this->input->post('lotes_producto');
-									$username = $this->session->userdata('userName');
-									$token = $this->session->userdata('token');
-									$pruebaTabla = $this->callWSEstatusLotes($urlCountry,$token,$username,$empresa,$fechaInicial,$fechaFin,$loteproducto);
+								$dataRequest = json_decode(
+								$this->security->xss_clean(
+									strip_tags(
+										$this->cryptography->decrypt(
+											base64_decode($this->input->get_post('plot')),
+											utf8_encode($this->input->get_post('request'))
+										)
+									)
+								)
+							);
+							$paginaActual = $dataRequest->filtro_busq->paginaActual;
+							$empresa = $dataRequest->filtro_busq->empresa;
+							$fechaInicial = $dataRequest->filtro_busq->fechaInicial;
+							$fechaFin = $dataRequest->filtro_busq->fechaFin;
+							$loteproducto = $dataRequest->filtro_busq->lotes_producto;
+							$username = $this->session->userdata('userName');
+							$token = $this->session->userdata('token');
 
+									$pruebaTabla = $this->callWSEstatusLotes($urlCountry,$token,$username,$empresa,$fechaInicial,$fechaFin,$loteproducto);
+									$pruebaTabla = $this->cryptography->encrypt($pruebaTabla);
 									$this->output->set_content_type('application/json')->set_output(json_encode($pruebaTabla));
 							}
 					}
 			}else{
 					$this->session->sess_destroy();
-					$this->output->set_content_type('application/json')->set_output(json_encode( array('ERROR' => lang('ERROR_(-29)'), "rc"=> "-29")));
+					$responseError = ['ERROR' => lang('ERROR_(-29)'), "rc"=> "-29"];
+					$responseError = $this->cryptography->encrypt($responseError);
+					$this->output->set_content_type('application/json')->set_output(json_encode($responseError));
 			}
 
 	}
@@ -2198,7 +2226,9 @@ class Reportes extends CI_Controller {
 
 			}else{
 					$this->session->sess_destroy();
-					$this->output->set_content_type('application/json')->set_output(json_encode( array('ERROR' => lang('ERROR_(-29)'), "rc"=> "-29")));
+					$responseError = ['ERROR' => lang('ERROR_(-29)'), "rc"=> "-29"];
+					$responseError = $this->cryptography->encrypt($responseError);
+					$this->output->set_content_type('application/json')->set_output(json_encode($responseError));
 			}
 
 	}
@@ -2412,7 +2442,7 @@ class Reportes extends CI_Controller {
 			if($paisS==$urlCountry && $logged_in && $moduloAct!==false){
 					$nombreCompleto = $this->session->userdata('nombreCompleto');
 					$lastSessionD = $this->session->userdata('lastSession');
-					$FooterCustomInsertJS=["jquery-3.4.0.min.js", "jquery-ui-1.12.1.min.js","reportes/recargasrealizadas.js","kendo.dataviz.min.js","header.js","highcharts.js","exporting.js","jquery.balloon.min.js","routes.js"];
+					$FooterCustomInsertJS=["jquery-3.4.0.min.js", "jquery-ui-1.12.1.min.js","reportes/recargasrealizadas.js","kendo.dataviz.min.js","header.js","highcharts.js","exporting.js","jquery.balloon.min.js","aes.min.js","aes-json-format.min.js","routes.js"];
 					$FooterCustomJS="";
 					$titlePage="Conexión Empresas Online - Reportes";
 
@@ -2465,7 +2495,6 @@ class Reportes extends CI_Controller {
 			$moduloAct = np_hoplite_existeLink($menuP,"REPPRO");
 
 			if($paisS==$urlCountry && $logged_in && $moduloAct!==false){
-
 							//Validate Request For Ajax
 					if($this->input->is_ajax_request()){
 							if ($this->form_validation->run() == FALSE)
@@ -2474,20 +2503,34 @@ class Reportes extends CI_Controller {
 							}
 							else
 							{
-									$paginaActual=$this->input->post('paginaActual');
-									$empresa = $this->input->post('empresa');
-									$anio = $this->input->post('anio');
-									$mes = $this->input->post('mes');
+							$dataRequest = json_decode(
+								$this->security->xss_clean(
+									strip_tags(
+										$this->cryptography->decrypt(
+											base64_decode($this->input->get_post('plot')),
+											utf8_encode($this->input->get_post('request'))
+										)
+									)
+								)
+							);
+							$paginaActual = $dataRequest->filtro_busq->paginaActual;
+							$empresa = $dataRequest->filtro_busq->empresa;
+							$anio = $dataRequest->filtro_busq->anio;
+							$mes = $dataRequest->filtro_busq->mes;
+
 									$username = $this->session->userdata('userName');
 									$token = $this->session->userdata('token');
 
 									$pruebaTabla = $this->callWSRecargasRealizadas($urlCountry,$token,$username,$empresa,$mes,$anio,$paginaActual);
+									$pruebaTabla = $this->cryptography->encrypt($pruebaTabla);
 									$this->output->set_content_type('application/json')->set_output(json_encode($pruebaTabla));
 							}
 					}
 			}else{
 					$this->session->sess_destroy();
-					$this->output->set_content_type('application/json')->set_output(json_encode( array('ERROR' => lang('ERROR_(-29)'), "rc"=> "-29")));
+					$responseError = ['ERROR' => lang('ERROR_(-29)'), "rc"=> "-29"];
+					$responseError = $this->cryptography->encrypt($responseError);
+					$this->output->set_content_type('application/json')->set_output(json_encode($responseError));
 			}
 	}
 
@@ -3244,7 +3287,9 @@ class Reportes extends CI_Controller {
 					}
 			}else{
 					$this->session->sess_destroy();
-					$this->output->set_content_type('application/json')->set_output(json_encode( array('ERROR' => lang('ERROR_(-29)'), "rc"=> "-29")));
+					$responseError = ['ERROR' => lang('ERROR_(-29)'), "rc"=> "-29"];
+					$responseError = $this->cryptography->encrypt($responseError);
+					$this->output->set_content_type('application/json')->set_output(json_encode($responseError));
 			}
 
 	}
@@ -3550,7 +3595,7 @@ class Reportes extends CI_Controller {
 			if($paisS==$urlCountry && $logged_in && $moduloAct!==false){
 					$nombreCompleto = $this->session->userdata('nombreCompleto');
 					$lastSessionD = $this->session->userdata('lastSession');
-					$FooterCustomInsertJS=["jquery-3.4.0.min.js", "jquery-ui-1.12.1.min.js","reportes/estadosdecuenta.js","kendo.dataviz.min.js","jquery.paginate.js","header.js","jquery.balloon.min.js","jquery.dataTables.min.js","routes.js"];
+					$FooterCustomInsertJS=["jquery-3.4.0.min.js", "jquery-ui-1.12.1.min.js","reportes/estadosdecuenta.js","kendo.dataviz.min.js","jquery.paginate.js","header.js","jquery.balloon.min.js","jquery.dataTables.min.js","aes.min.js","aes-json-format.min.js","routes.js"];
 					$FooterCustomJS="";
 					$titlePage="Conexión Empresas Online - Reportes";
 
@@ -3612,23 +3657,41 @@ class Reportes extends CI_Controller {
 							}
 							else
 							{
-									$paginaActual=$this->input->post('paginaActual');
-									$empresa = $this->input->post('empresa');
-									$fechaIni = $this->input->post('fechaInicial');
-									$fechaFin = $this->input->post('fechaFin');
-									$producto = $this->input->post('producto');
-									$tipoConsulta = $this->input->post('tipoConsulta');
-									$cedula = $this->input->post('cedula');
+								$dataRequest = json_decode(
+									$this->security->xss_clean(
+										strip_tags(
+											$this->cryptography->decrypt(
+												base64_decode($this->input->get_post('plot')),
+												utf8_encode($this->input->get_post('request'))
+											)
+										)
+									)
+								);
+
+									$empresa = $dataRequest->filtro_busq->empresa;
+									$fechaIni = $dataRequest->filtro_busq->fechaInicial;
+									$fechaFin = $dataRequest->filtro_busq->fechaFin;
+									$cedula = $dataRequest->filtro_busq->cedula;
+									$producto = $dataRequest->filtro_busq->producto;
+									$tipoConsulta = $dataRequest->filtro_busq->tipoConsulta;
+									$acrif = $dataRequest->filtro_busq->acrif;
+									$acnomcia = $dataRequest->filtro_busq->acnomcia;
+									$productoDesc = $dataRequest->filtro_busq->productoDesc;
+									$paginaActual = $dataRequest->filtro_busq->paginaActual;
 									$username = $this->session->userdata('userName');
 									$token = $this->session->userdata('token');
 
 									$pruebaTabla = $this->callWSEstadosDeCuenta($urlCountry,$token,$username,$empresa,$fechaIni,$fechaFin,$paginaActual,$producto,$cedula,$tipoConsulta);
+									$pruebaTabla = $this->cryptography->encrypt($pruebaTabla);
 									$this->output->set_content_type('application/json')->set_output(json_encode($pruebaTabla));
 							}
 					}
 			}else{
 					$this->session->sess_destroy();
-					$this->output->set_content_type('application/json')->set_output(json_encode( array('mensaje' => lang('ERROR_(-29)'), "rc"=> "-29")));
+					$responseError = ['ERROR' => lang('ERROR_(-29)'), "rc"=> "-29"];
+					$responseError = $this->cryptography->encrypt($responseError);
+					$this->output->set_content_type('application/json')->set_output(json_encode($responseError));
+					//$this->output->set_content_type('application/json')->set_output(json_encode();
 			}
 
 	}
@@ -4171,16 +4234,34 @@ class Reportes extends CI_Controller {
 			$moduloAct = np_hoplite_existeLink($menuP,"REPEDO");
 
 			if($paisS==$urlCountry && $logged_in && $moduloAct!==false){
+				$dataRequest = json_decode(
+					$this->security->xss_clean(
+						strip_tags(
+							$this->cryptography->decrypt(
+								base64_decode($this->input->get_post('plot')),
+								utf8_encode($this->input->get_post('request'))
+							)
+						)
+					)
+				);
 
-					$empresa = $this->input->post('empresa');
-					$fechaInicial = $this->input->post('fechaInicial');
-					$fechaFin = $this->input->post('fechaFin');
-					$producto = $this->input->post('producto');
-					$cedula = $this->input->post('cedula');
-					$paginaActual = $this->input->post('paginaActual');
-					$tipoConsulta =$this->input->post('tipoConsulta');
+				$empresa = $dataRequest->filtro_busq->empresa;
+				$fechaInicial = $dataRequest->filtro_busq->fechaInicial;
+				$fechaFin = $dataRequest->filtro_busq->fechaFin;
+				$producto = $dataRequest->filtro_busq->producto;
+				$cedula = $dataRequest->filtro_busq->cedula;
+				$paginaActual = $dataRequest->filtro_busq->paginaActual;
+				$tipoConsulta = $dataRequest->filtro_busq->tipoConsulta;
+					// $empresa = $this->input->post('empresa');
+					// $fechaInicial = $this->input->post('fechaInicial');
+					// $fechaFin = $this->input->post('fechaFin');
+					// $producto = $this->input->post('producto');
+					// $cedula = $this->input->post('cedula');
+					// $paginaActual = $this->input->post('paginaActual');
+					// $tipoConsulta =$this->input->post('tipoConsulta');
 
 					$response = $this->callWSGraficoEstadosdeCuenta($urlCountry,$empresa,$fechaInicial,$fechaFin,$producto,$cedula,$paginaActual,$tipoConsulta);
+					$response = $this->cryptography->encrypt($response);
 					$this->output->set_content_type("application/json")->set_output(json_encode($response));
 
 			}elseif($paisS!=$urlCountry && $paisS!=""){
@@ -4428,7 +4509,8 @@ class Reportes extends CI_Controller {
 					}
 			}else{
 					$this->session->sess_destroy();
-					$this->output->set_content_type('application/json')->set_output(json_encode( array('ERROR' => lang('ERROR_(-29)'), "rc"=> "-29")));
+
+					$this->output->set_content_type('application/json')->set_output(json_encode( ));
 			}
 
 	}
