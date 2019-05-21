@@ -13,7 +13,8 @@ $(document).ready(function() {
 
 	$("#cargando_empresa").fadeIn("fast");
 
-	$.getJSON(baseURL + api + isoPais +'/empresas/lista').always(function( data ) {
+	$.getJSON(baseURL + api + isoPais +'/empresas/lista').always(function( response ) {
+		data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 		$("#cargando_empresa").fadeOut("fast");
 		if(!(data.ERROR)){
 
@@ -90,17 +91,26 @@ $(document).ready(function() {
 			}else{
 				filtro_busq.radioGeneral= $("#radio-producto").val();
 			}
-			filtro_busq.paginaActual=1;
+
 
 			filtro_busq.acrif = $("option:selected","#repTarjetasEmitidas_empresa").attr("acrif");
 			filtro_busq.acnomcia = $("option:selected","#repTarjetasEmitidas_empresa").attr("acnomcia");
-			filtro_busq.ceo_name = ceo_cook;
+			//filtro_busq.ceo_name = ceo_cook;
+			filtro_busq.paginaActual = 1;
+			var dataRequest = JSON.stringify({
+				filtro_busq: filtro_busq
+
+			})
 
 			//SE REALIZA LA INVOCACION AJAX
-			$consulta = $.post(baseURL+ api+ isoPais +"/reportes/tarjetasemitidas",filtro_busq );
+			dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {
+				format: CryptoJSAesJson
+			}).toString();
+			$consulta = $.post(baseURL+ api+ isoPais +"/reportes/tarjetasemitidas",{request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook) } );
 			//DE SER EXITOSA LA COMUNICACION CON EL SERVICIO SE EJECUTA EL SIGUIENTE METODO "DONE"
 
-			$consulta.done(function(data){
+			$consulta.done(function(response){
+				data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 				$("#mensaje").remove();
 				$("#view-results").attr("style","");
 				$('#cargando').fadeOut("slow");

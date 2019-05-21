@@ -367,6 +367,7 @@ $(document).ready(function() {
 		);
 		filtro_busq.ceo_name = ceo_cook;
 		$consulta = $.post(baseURL + api + isoPais + "/reportes/cuentaConcentradora",filtro_busq );
+		data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 		//DE SER EXITOSA LA COMUNICACION CON EL SERVICIO SE EJECUTA EL SIGUIENTE METODO "DONE"
 		$consulta.done(function(data){
 			$("#mensaje").remove();
