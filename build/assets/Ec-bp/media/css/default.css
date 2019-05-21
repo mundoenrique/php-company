@@ -1384,6 +1384,8 @@ html {
 	vertical-align: middle;
 	text-align: center;
 	overflow: visible;
+	background-color: #ffdd00 !important;
+	border-color: #ffdd00 !important;
 }
 
 .ui-button,
@@ -1730,6 +1732,8 @@ select.ui-datepicker-year{
 	padding: 1px;
 	height: 20px;
 	display: block;
+	background-color: #ffdd00;
+	border-color: #ffdd00;
 }
 
 .hide-close .ui-dialog-titlebar-close {
@@ -2228,11 +2232,11 @@ body .ui-tooltip {
 
 .ui-icon,
 .ui-widget-content .ui-icon {
-	background-image: url(images/ui-icons_222222_256x240.png);
+	background-image: url(../css/images/ui-icons_222222_256x240.png);
 }
 
 .ui-widget-header .ui-icon {
-	background-image: url(images/ui-icons_ffffff_256x240.png);
+	background-image: url(../css/images/ui-icons_555555_256x240.png);
 }
 
 .ui-state-default .ui-icon {
