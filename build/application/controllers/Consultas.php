@@ -58,7 +58,9 @@ class Consultas extends CI_Controller {
 					$token = $this->session->userdata('token');
 					$nombreCompleto = $this->session->userdata('nombreCompleto');
 					$lastSessionD = $this->session->userdata('lastSession');
-					$FooterCustomInsertJS=["jquery-3.4.0.min.js", "jquery-ui-1.12.1.min.js","jquery.balloon.min.js","consultas/ordenes-servicio.js","dashboard/widget-empresa.js","header.js","jquery.dataTables.min.js","jquery-md5.js","routes.js"];
+					$jsRte = '../../../js/';
+					$thirdsJsRte = '../../../js/third_party/';
+					$FooterCustomInsertJS=["jquery-3.4.0.min.js", "jquery-ui-1.12.1.min.js","jquery.balloon.min.js","consultas/ordenes-servicio.js","dashboard/widget-empresa.js","header.js","jquery.dataTables.min.js","jquery-md5.js","routes.js",$thirdsJsRte."jquery.validate.min.js",$jsRte."validate-forms.js",$thirdsJsRte."additional-methods.min.js"];
 
 					$FooterCustomJS="";
 					$titlePage="Conexión Empresas Online - Consultas";

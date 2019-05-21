@@ -86,6 +86,8 @@ function validateForms(form, options) {
 			"radio": {pattern: alphanum},
 			"Ingrese ID": {pattern: numeric},
 			"token-code": {pattern: alphanum},
+			"dias": {pattern: numeric},
+			"batch": {pattern: numeric}
 		},
 		messages: {
 			"user-name": "Debe indicar su nombre de usuario",
