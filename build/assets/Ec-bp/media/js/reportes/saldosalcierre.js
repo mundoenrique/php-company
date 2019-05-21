@@ -38,7 +38,10 @@ $(document).ready(function() {
 
 			$("#cargando_producto").fadeIn("slow");
 			$(this).attr('disabled',true);
-			$.post(baseURL + api + isoPais + "/producto/lista", { 'acrif': acrif }, function(data){
+			var ceo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
+			$.post(baseURL + api + isoPais + "/producto/lista", { 'acrif': acrif, ceo_name: ceo_cook }, function(data){
 				$("#cargando_producto").fadeOut("slow");
 				$("#SaldosAmanecidos-empresa").removeAttr('disabled');
 				if(!data.ERROR){
@@ -224,115 +227,118 @@ $(document).ready(function() {
 
 				return valido;
 			}
-var filtro_busq={};
+
+			var filtro_busq={};
 			function buscarSaldos(paginaActual){
-			    	var $consulta;
+				var $consulta;
+				var ceo_cook = decodeURIComponent(
+					document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+				);
+				if(validar_filtro_busqueda("lotes-2")){
+					var form = $('#form-criterio-busqueda');
+					validateForms(form);
+					if (form.valid()) {
+						$('#cargando').fadeIn("slow");
+						$("#SaldosAmanecidos-btnBuscar").hide();
+						$('#div_tablaDetalle').fadeOut("fast");
+						filtro_busq.empresa=$("#SaldosAmanecidos-empresa").val();
+						filtro_busq.cedula=$("#SaldosAmanecidos-TH").val().replace(/ /g,'');
+						filtro_busq.producto=$("#SaldosAmanecidos-producto").val();
+						filtro_busq.nomEmpresa=$('option:selected', "#SaldosAmanecidos-empresa").attr("acnomcia");
+						filtro_busq.descProd=$('option:selected', "#SaldosAmanecidos-producto").attr("des");
+						filtro_busq.paginaActual=paginaActual;
+						filtro_busq.paginar=true;
+						filtro_busq.tamPg=tamPg;
+						filtro_busq.ceo_name=ceo_cook;
 
-			    	if(validar_filtro_busqueda("lotes-2")){
-							var form = $('#form-criterio-busqueda');
-							validateForms(form);
-							if (form.valid()) {
-								$('#cargando').fadeIn("slow");
-								$("#SaldosAmanecidos-btnBuscar").hide();
-								$('#div_tablaDetalle').fadeOut("fast");
-								filtro_busq.empresa=$("#SaldosAmanecidos-empresa").val();
-								filtro_busq.cedula=$("#SaldosAmanecidos-TH").val().replace(/ /g,'');
-								filtro_busq.producto=$("#SaldosAmanecidos-producto").val();
-								filtro_busq.nomEmpresa=$('option:selected', "#SaldosAmanecidos-empresa").attr("acnomcia");
-								filtro_busq.descProd=$('option:selected', "#SaldosAmanecidos-producto").attr("des");
-								filtro_busq.paginaActual=paginaActual;
-								filtro_busq.paginar=true;
-								filtro_busq.tamPg=tamPg;
+						//SE REALIZA LA INVOCACION AJAX
+						$consulta = $.post(baseURL + api + isoPais + "/reportes/saldosamanecidos",filtro_busq );
+						//DE SER EXITOSA LA COMUNICACION CON EL SERVICIO SE EJECUTA EL SIGUIENTE METODO "DONE"
+						$consulta.done(function(data){
+							$("#mensaje").remove();
+							$('#cargando').fadeOut("slow");
+							$("#SaldosAmanecidos-btnBuscar").show();
+							$("#div_tablaDetalle").fadeIn("slow");
+							$("#view-results").attr("style","");
+							var tbody=$("#tbody-datos-general");
+							if (evBuscar) {
+								tbody.empty();
+							}
+							var tr;
+							var td;
+							//DE TRAER RESULTADOS LA CONSULTA SE GENERA LA TABLA CON LA DATA...
+							//DE LO CONTRARIO SE GENERA UN MENSAJE "No existe Data relacionada con su filtro de busqueda"
 
-
-
-				//SE REALIZA LA INVOCACION AJAX
-								$consulta = $.post(baseURL + api + isoPais + "/reportes/saldosamanecidos",filtro_busq );
-				//DE SER EXITOSA LA COMUNICACION CON EL SERVICIO SE EJECUTA EL SIGUIENTE METODO "DONE"
-							$consulta.done(function(data){
-								$("#mensaje").remove();
-								$('#cargando').fadeOut("slow");
-								$("#SaldosAmanecidos-btnBuscar").show();
-								$("#div_tablaDetalle").fadeIn("slow");
-								$("#view-results").attr("style","");
-									var tbody=$("#tbody-datos-general");
-									if (evBuscar) {
-									tbody.empty();
-									}
-									var tr;
-									var td;
-				//DE TRAER RESULTADOS LA CONSULTA SE GENERA LA TABLA CON LA DATA...
-				//DE LO CONTRARIO SE GENERA UN MENSAJE "No existe Data relacionada con su filtro de busqueda"
-
-								if(data.rc == "0"){
+							if(data.rc == "0"){
 								$("#tabla-datos-general").fadeIn("fast");
-									$.each(data.saldo.lista,function(posLista,itemLista){
-										tr=$(document.createElement("tr")).appendTo(tbody);
-										tr.addClass('pg'+data.paginaActual);
-										td=$(document.createElement("td")).appendTo(tr);
-										td.html(itemLista.nombre);
-										td.attr("style","text-align: center");
-										td.addClass("td-largo");
-										td=$(document.createElement("td")).appendTo(tr);
-										td.html(itemLista.idExtPer);
-										td.attr("style","text-align: center");
-										td=$(document.createElement("td")).appendTo(tr);
-										td.html(itemLista.tarjeta);
-										td.attr("style","text-align: center");
-										td=$(document.createElement("td")).appendTo(tr);
-										td.html(itemLista.saldo);
-										td.attr("style","text-align: center");
-										td=$(document.createElement("td")).appendTo(tr);
-										td.html(itemLista.fechaUltAct);
-										td.addClass("td-medio");
-										td.attr("style","text-align: center");
-									});
+								$.each(data.saldo.lista,function(posLista,itemLista){
+									tr=$(document.createElement("tr")).appendTo(tbody);
+									tr.addClass('pg'+data.paginaActual);
+									td=$(document.createElement("td")).appendTo(tr);
+									td.html(itemLista.nombre);
+									td.attr("style","text-align: center");
+									td.addClass("td-largo");
+									td=$(document.createElement("td")).appendTo(tr);
+									td.html(itemLista.idExtPer);
+									td.attr("style","text-align: center");
+									td=$(document.createElement("td")).appendTo(tr);
+									td.html(itemLista.tarjeta);
+									td.attr("style","text-align: center");
+									td=$(document.createElement("td")).appendTo(tr);
+									td.html(itemLista.saldo);
+									td.attr("style","text-align: center");
+									td=$(document.createElement("td")).appendTo(tr);
+									td.html(itemLista.fechaUltAct);
+									td.addClass("td-medio");
+									td.attr("style","text-align: center");
+								});
 
-									/*
-									if (evBuscar) {
-										$('#paginacion').show();
-										paginar(data.totalPaginas, data.paginaActual);
-										evBuscar=false;
-									}
-									*/
-
-									paginacion(data.totalPaginas, data.paginaActual);
-
-									$('#tabla-datos-general tbody tr:even').addClass('even ');
-
-								}else{
-									if(data.rc =="-29"){
-														alert("Usuario actualmente desconectado");
-													location.reload();
-											}else{
-												//$('#paginacion').hide();
-												$('#contend-pagination').hide();
-										$("#mensaje").remove();
-										var contenedor = $("#div_tablaDetalle");
-										$("#tabla-datos-general").fadeOut("fast");
-										$("#view-results").attr("style","display:none");
-										var div =$(document.createElement("div")).appendTo(contenedor);
-										div.attr("id","mensaje");
-										div.attr("style","background-color:rgb(252,199,199); margin-top:43px;");
-										var p = $(document.createElement("p")).appendTo(div);
-										p.html(data.mensaje);
-										p.attr("style","text-align:center;padding:10px;font-size:14px");
-									}
+								/*
+								if (evBuscar) {
+									$('#paginacion').show();
+									paginar(data.totalPaginas, data.paginaActual);
+									evBuscar=false;
 								}
+								*/
 
-							});
+								paginacion(data.totalPaginas, data.paginaActual);
 
-						}	else{
-							showErrMsg('Verifique los datos ingresados e intente nuevamente');
-						}
+								$('#tabla-datos-general tbody tr:even').addClass('even ');
+
+							}else{
+								if(data.rc =="-29"){
+									alert("Usuario actualmente desconectado");
+									location.reload();
+								}else{
+									//$('#paginacion').hide();
+									$('#contend-pagination').hide();
+									$("#mensaje").remove();
+									var contenedor = $("#div_tablaDetalle");
+									$("#tabla-datos-general").fadeOut("fast");
+									$("#view-results").attr("style","display:none");
+									var div =$(document.createElement("div")).appendTo(contenedor);
+									div.attr("id","mensaje");
+									div.attr("style","background-color:rgb(252,199,199); margin-top:43px;");
+									var p = $(document.createElement("p")).appendTo(div);
+									p.html(data.mensaje);
+									p.attr("style","text-align:center;padding:10px;font-size:14px");
+								}
+							}
+						});
+					} else {
+						showErrMsg('Verifique los datos ingresados e intente nuevamente');
 					}
+				}
 
 			}
 
 
 $("#export_excel").click(function(){
-
+	var ceo_cook = decodeURIComponent(
+		document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+	);
 			$('form#formulario').empty();
+			$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'">');
 			$('form#formulario').append('<input type="hidden" name="empresa" value="'+filtro_busq.empresa+'" />');
 			$('form#formulario').append('<input type="hidden" name="cedula" value="'+filtro_busq.cedula+'" />');
 			$('form#formulario').append('<input type="hidden" name="producto" value="'+filtro_busq.producto+'" />');

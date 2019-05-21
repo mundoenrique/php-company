@@ -33,7 +33,10 @@ $(function() {
             'status':status
         }];
 
-        $.post(baseURL + "/" + isoPais + '/trayectos/modelo', {way: 'disabledDriver', modelo: 'driver', data: disabledUser})
+				var ceo_cook = decodeURIComponent(
+					document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+				);
+        $.post(baseURL + "/" + isoPais + '/trayectos/modelo', {way: 'disabledDriver', modelo: 'driver', data: disabledUser, ceo_name: ceo_cook})
             .done(function (response) {
                 $('#msg-info').empty();
                 var lang = response.lang;
@@ -101,8 +104,11 @@ $(function() {
             $('#send-info, #close-info').text('');
             $('#msg-info').empty();
             $('#msg-info').append('<div id="loading" class="agrups"><img src=" ' + baseCDN + '/media/img/loading.gif' + '"></div>');
-            notiSystem(title);
-            $.post(baseURL + '/' + isoPais + '/trayectos/modelo', {way: 'addEditDriver', modelo: 'driver', data: formAddEdit})
+						notiSystem(title);
+						var ceo_cook = decodeURIComponent(
+							document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+						);
+            $.post(baseURL + '/' + isoPais + '/trayectos/modelo', {way: 'addEditDriver', modelo: 'driver', data: formAddEdit, ceo_name: ceo_cook})
                 .done(function (response) {
                     $('#msg-info').empty();
                     var lang = response.lang;
@@ -265,10 +271,14 @@ function notiSystem(title) {
         e.preventDefault();
         $(msgSystem).dialog('close');
         $('#msg-info').empty();
-        var finish = $(this).attr('finish');
+				var finish = $(this).attr('finish');
+				var ceo_cook = decodeURIComponent(
+					document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+				);
         switch (finish) {
             case 'u':
-                $('form#formulario').empty();
+								$('form#formulario').empty();
+								$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'">');
                 $('form#formulario').append('<input type="hidden" name="modelo" value="driver"/>');
                 $('form#formulario').append('<input type="hidden" name="function" value="update"/>');
                 $('form#formulario').append('<input type="hidden" name="data-id" value="' + $('#user').val() + '" />');

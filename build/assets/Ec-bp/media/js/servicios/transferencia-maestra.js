@@ -206,14 +206,30 @@ $(function() {
 													default:
 														notiPagOS(data.title, data.msg, 'close');
 												}
-											})
-										} else {
-											$(this).find($('#token-code').css('border-color', '#cd0a0a'));
-											$(this).find($('#msg')).text('Código inválido');
-										}
+										});
+										var ceo_cook = decodeURIComponent(
+											document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+										);
+										dataSend.ceo_name = ceo_cook;
+										$.post(baseURL + api + isoPais + '/servicios/transferencia-maestra/RegargaTMProcede', dataSend)
+										.done(function (data) {
+											$aux.dialog('destroy');
+											switch (data.code) {
+												case 0:
+													notiPagOS(data.title, data.msg, 'ok');
+													break;
+												case 1:
+													notiPagOS(data.title, data.msg, 'error');
+													break;
+												case 2:
+												default:
+													notiPagOS(data.title, data.msg, 'close');
+											}
+										})
 									} else {
 										$(this).find($('#token-code').css('border-color', '#cd0a0a'));
 										$(this).find($('#msg')).text('Debe ingresar el código de seguridad enviado a su correo');
+									}
 									}
 								}
 							}
@@ -486,13 +502,16 @@ function buscar(pgSgt) {
 			my: "top"
 		}
 	});
-
+	var ceo_cook = decodeURIComponent(
+		document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+	);
 	$.post(baseURL + api + isoPais + '/servicios/transferencia-maestra/buscar', {
 		'data-dni': $('#dni').val(),
 		'data-tjta': $('#nroTjta').val(),
 		'data-pg': pgSgt,
 		'data-paginas': serv_var.paginas,
-		'data-paginar': serv_var.paginar
+		'data-paginar': serv_var.paginar,
+		ceo_name: ceo_cook
 	})
 	.done(function(data) {
 
@@ -735,7 +754,9 @@ function llamarWS(pass, url, operacion, mensaje) {
 
 	pass = hex_md5(pass);
 	$('#clave').val("");
-
+	var ceo_cook = decodeURIComponent(
+		document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+	);
 	$.post(url, {
 		'data-tarjeta': serv_var.noTarjetas,
 		'data-id_ext_per': serv_var.dni_tarjetas,
@@ -743,7 +764,8 @@ function llamarWS(pass, url, operacion, mensaje) {
 		'data-monto': serv_var.monto,
 		'data-pg': 1,
 		'data-paginas': 1,
-		'data-paginar': false
+		'data-paginar': false,
+		ceo_name: ceo_cook
 	})
 	.done(function(data) {
 

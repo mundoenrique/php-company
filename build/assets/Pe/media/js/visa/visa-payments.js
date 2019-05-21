@@ -38,10 +38,13 @@ function sendPayment(code, amount)
 		amount: $('#amount').val()
 	});
 
+	var ceo_cook = decodeURIComponent(
+		document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+	);
 	$.ajax({
 		method: 'post',
 		url: baseURL + isoPais + '/payments',
-		data: {method: 'PaymentSuppliers', model:'payments', dataRequest: dataRequest},
+		data: {method: 'PaymentSuppliers', model:'payments', dataRequest: dataRequest, ceo_name: ceo_cook},
 		beforeSend: function () {
 			$('#data-payment').hide();
 			$('#loading').show();

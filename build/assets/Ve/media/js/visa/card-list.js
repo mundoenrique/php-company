@@ -54,6 +54,7 @@ function getCardList(dni, card)
 			}
 			$('#loading').hide();
 			$('#novo-table').show();
+
 		},
 		"language": { "url": baseCDN + '/media/js/combustible/Spanish.json'},
 		"pageLength": 10,
@@ -66,9 +67,13 @@ function getCardList(dni, card)
 		"ajax": {
 			url: baseURL + isoPais + '/card-list',
 			data: function (d) {
+				var ceo_cook = decodeURIComponent(
+					document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+				);
 				d.model = 'CardList';
 				d.dni = dni;
 				d.card = card;
+				d.ceo_name: ceo_cook
 			}
 		},
 		"columns": [
@@ -98,7 +103,11 @@ function getCardList(dni, card)
 
 
 function addEdit(id, card) {
+	var ceo_cook = decodeURIComponent(
+		document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+	);
 	$('form#formulario').empty();
+	$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ ceo_cook +'"/>');
 	$('form#formulario').append('<input type="hidden" name="dni" value="' + id + '" />');
 	$('form#formulario').append('<input type="hidden" name="card" value="' + card + '" />');
 	$('form#formulario').attr('action', baseURL + isoPais + '/controles/visa/configurar');

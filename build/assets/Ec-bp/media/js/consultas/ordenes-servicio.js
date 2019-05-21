@@ -32,11 +32,13 @@ $(function(){
 
 	$("#tabla-datos-general").on("click","#res",function(code) {
 		var nlote = $(this).attr('data-id')
-
+		var ceo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
 		$.ajax({
 			type: 'POST',
 			url: baseURL+isoPais+'/consulta/embozado',
-			data: { 'nlote': nlote },
+			data: { 'nlote': nlote, ceo_name: ceo_cook },
 			beforeSend: function() {
 				$("#loading").dialog({
 					title: 'Enviando notificación',
@@ -80,7 +82,10 @@ $(function(){
     // EVENTO BUSCAR OS SEGUN FILTRO
     $("#buscarOS").on("click", function(){
 
-        var statuLote = $("#status_lote").val();
+				var statuLote = $("#status_lote").val();
+				var ceo_cook = decodeURIComponent(
+					document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+				);
 
         if( statuLote!=='' && COS_var.fecha_inicio!=='' && COS_var.fecha_fin!=='' ){
 
@@ -88,7 +93,8 @@ $(function(){
 
                 $aux = $("#loading").dialog({title:'Buscando Orden de Servicio',modal:true, close:function(){$(this).dialog('destroy')}, resizable:false });
 
-                $('form#formulario').empty();
+								$('form#formulario').empty();
+								$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'">');
                 $('form#formulario').append('<input type="hidden" name="data-fechIn" value="'+COS_var.fecIsend+'" />');
                 $('form#formulario').append('<input type="hidden" name="data-fechFin" value="'+COS_var.fecfsend+'" />');
                 $('form#formulario').append('<input type="hidden" name="data-status" value="'+statuLote+'" />');
@@ -115,9 +121,13 @@ $(function(){
 
     $("#tabla-datos-general").on("click","#dwnPDF", function(){ // descargar orden de servicio
 
-        var OS = $(this).parents("tr").attr('id');
+				var OS = $(this).parents("tr").attr('id');
+				var ceo_cook = decodeURIComponent(
+					document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+				);
         $aux = $("#loading").dialog({title:'Descargando archivo PDF',modal:true, close:function(){$(this).dialog('close')}, resizable:false });
-        $('form#formulario').empty();
+				$('form#formulario').empty();
+				$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'">');
         $('form#formulario').append('<input type="hidden" name="data-idOS" value="'+OS+'" />');
         $('form#formulario').append($('#data-OS'));
         $('form#formulario').attr('action',baseURL+api+isoPais+"/consulta/downloadOS");
@@ -268,8 +278,11 @@ $(function(){
                         pass = hex_md5( pass );
                         $('#pass').val( '' );
                         $(this).dialog('destroy');
-                        var $aux = $('#loading').dialog({title:'Anulando Orden de Servicio' ,modal: true, resizable:false, close:function(){$aux.dialog('close');}});
-                        $.post(baseURL+api+isoPais+'/consulta/anularos',{'data-idOS':idOS, 'data-pass':pass})
+												var $aux = $('#loading').dialog({title:'Anulando Orden de Servicio' ,modal: true, resizable:false, close:function(){$aux.dialog('close');}});
+												var ceo_cook = decodeURIComponent(
+													document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+												);
+                        $.post(baseURL+api+isoPais+'/consulta/anularos',{'data-idOS':idOS, 'data-pass':pass, ceo_name: ceo_cook})
                             .done(function(data){
                                 $aux.dialog('destroy');
                                 if(!data.ERROR){
@@ -330,7 +343,7 @@ $(function(){
                             },
                             buttons: {
                                 Procesar: function () {
-                                    var codeToken = $("#token-code").val();
+																		var codeToken = $("#token-code").val();
                                     if (codeToken != '') {
                                         $("#token-code").val('');
                                         $(this).dialog('destroy');
@@ -342,12 +355,16 @@ $(function(){
                                             open: function (event, ui) {
                                                 $('.ui-dialog-titlebar-close', ui.dialog).hide();
                                             }
-                                        });
+																				});
+																				var ceo_cook = decodeURIComponent(
+																					document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+																				);
                                         $.post(baseURL + api + isoPais + '/consulta/PagoOSProcede', {
                                             "idOS": idOS,
                                             "codeToken": codeToken,
                                             "totalamount": totalamount,
-                                            "factura": factura
+																						"factura": factura,
+																						ceo_name: ceo_cook
                                         })
                                             .done(function (data) {
                                                 $aux.dialog('destroy');
@@ -389,8 +406,12 @@ $(function(){
         orden = $(this).parents("tr").attr("id");
         $(this).removeAttr("href");
         $(this).removeAttr('target');
-        $aux = $("#loading").dialog({title:'Descargando factura',modal:true, close:function(){$(this).dialog('close')}, resizable:false });
-        $('form#formulario').empty();
+				$aux = $("#loading").dialog({title:'Descargando factura',modal:true, close:function(){$(this).dialog('close')}, resizable:false });
+				var ceo_cook = decodeURIComponent(
+					document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+				);
+				$('form#formulario').empty();
+				$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'">');
         $('form#formulario').append('<input type="hidden" name="data-idOS" value="'+orden+'" />');
         $('form#formulario').append($('#data-OS'));
         $('form#formulario').attr('action',baseURL+api+isoPais+"/consulta/facturar");

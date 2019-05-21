@@ -3,6 +3,8 @@
 	$pais = $this->uri->segment(1);
 	$urlBaseA = $this->config->item('base_url');
 	$urlBase = $urlBaseA.$pais;
+	$ceo_name = $this->security->get_csrf_token_name();
+	$ceo_cook = $this->security->get_csrf_hash();
 
 		if($dataCOS!='') {
 			$bread = "BREADCRUMB_CALCULO_ORDEN_SERVICIO";
@@ -326,13 +328,16 @@
 		<?php
 	if($dataCOS!=''){
 			echo "<form action='".$urlBase."/lotes/calculo' method='post'>
+								<input type='hidden' name='$ceo_name' value='$ceo_cook'>
 								<input type='hidden' name='data-COS' value='".$dataCOS."' />";
 
 		}else if($dataOS!=''){
 			echo "<form action='".$urlBase."/consulta/ordenes-de-servicio' method='post'>
+								<input type='hidden' name='$ceo_name' value='$ceo_cook'>
 								<input type='hidden' name='data-OS' value='".$dataOS."' />";
 		}else{
-			echo '<form action="'.$breadcrumb_back.'" method="post">';
+			echo "<form action='$breadcrumb_back' method='post'>
+								<input type='hidden' name='$ceo_name' value='$ceo_cook'>";
 		}
 
 		echo '<button>'.lang("DETALLE_LOTES_VOLVER").'</button> </form>';

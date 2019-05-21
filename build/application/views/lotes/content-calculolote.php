@@ -2,6 +2,8 @@
 $pais = $this->uri->segment(1);
 $urlBaseA = $this->config->item('base_url');
 $urlBase = $urlBaseA.$pais;
+$ceo_name = $this->security->get_csrf_token_name();
+$ceo_cook = $this->security->get_csrf_hash();
 
 $data = unserialize($data);
 
@@ -229,14 +231,16 @@ $reten = ($reten == NULL) ? "nonEmpty" : trim($reten, ', ');
 </div>
 
 <form id='toOS' action="<?php echo $urlBase ?>/consulta/ordenes-de-servicio " method="post">
+	<input type='hidden' name='<?php echo $ceo_name ?>' value='<?php echo $ceo_cook ?>'>
 	<input type="hidden" name="data-confirm" value="" id="data-confirm" />
 </form>
 
 <form id='detalle_lote' method='post' action="<?php echo $urlBase ?>/lotes/autorizacion/detalle">
+	<input type='hidden' name='<?php echo $ceo_name ?>' value='<?php echo $ceo_cook ?>'>
 	<input type='hidden' name='data-COS' value='<?php echo serialize($data) ?>'/>
 </form>
 <form id='viewAutorizar' action="<?php echo $urlBase ?>/lotes/autorizacion " method="post">
-
+	<input type='hidden' name='<?php echo $ceo_name ?>' value='<?php echo $ceo_cook ?>'>
 </form>
 <div id='loading' style='text-align:center' class='elem-hidden'><?php echo insert_image_cdn("loading.gif"); ?></div>
 <input type='hidden' id='empty' value='<?= $reten ?>'/>

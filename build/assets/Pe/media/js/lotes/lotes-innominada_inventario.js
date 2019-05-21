@@ -12,6 +12,9 @@ var	calendario = function(input){
 		});
 	},
 	getTarjetas = function(numlote, acrif, acnomcia, dtfechorcarga, nmonto){
+		var ceo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
 		$('form#formulario').empty();
 		$('form#formulario').append('<input type="hidden" name="data-numlote" value="' + numlote + '" />');
 		$('form#formulario').append('<input type="hidden" name="data-acrif" value="' + acrif + '" />');
@@ -19,6 +22,7 @@ var	calendario = function(input){
 		$('form#formulario').append('<input type="hidden" name="data-dtfechorcarga" value="' + dtfechorcarga + '" />');
 		$('form#formulario').append('<input type="hidden" name="data-nmonto" value="' + nmonto + '" />');
 		$('form#formulario').attr('action',baseURL+isoPais+"/lotes/innominada/detalle");
+		$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'" />');
 		$('form#formulario').submit();
 	},
 	validate = function(){
@@ -61,11 +65,15 @@ var	calendario = function(input){
 			});
 	},
 	listaInnominadas = function(){
+		var ceo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
 		$('form#formulario').empty();
 		$('form#formulario').append('<input type="hidden" name="data-numlote" value="' + getNumlote() + '" />');
 		$('form#formulario').append('<input type="hidden" name="data-fecha_inicial" value="' + getFecha_inicial() + '" />');
 		$('form#formulario').append('<input type="hidden" name="data-fecha_final" value="' + getFecha_final() + '" />');
 		$('form#formulario').attr('action',baseURL+isoPais+"/lotes/innominada/afiliacion");
+		$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'" />');
 		$('form#formulario').submit();
 	},
 	setNumlote = function(){

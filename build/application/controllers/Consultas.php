@@ -58,7 +58,7 @@ class Consultas extends CI_Controller {
 					$token = $this->session->userdata('token');
 					$nombreCompleto = $this->session->userdata('nombreCompleto');
 					$lastSessionD = $this->session->userdata('lastSession');
-					$FooterCustomInsertJS=["jquery-1.10.2.min.js","jquery-ui-1.10.3.custom.min.js","jquery.balloon.min.js","consultas/ordenes-servicio.js","dashboard/widget-empresa.js","header.js","jquery.dataTables.min.js","jquery-md5.js","routes.js"];
+					$FooterCustomInsertJS=["jquery-3.4.0.min.js", "jquery-ui-1.12.1.min.js","jquery.balloon.min.js","consultas/ordenes-servicio.js","dashboard/widget-empresa.js","header.js","jquery.dataTables.min.js","jquery-md5.js","routes.js"];
 
 					$FooterCustomJS="";
 					$titlePage="Conexión Empresas Online - Consultas";
@@ -403,7 +403,11 @@ class Consultas extends CI_Controller {
 									}else{
 											$codigoError = array('mensaje' => lang('ERROR_('.$response->rc.')'), "rc"=> $response->rc);
 									}
-									echo "<form id='formu' method='post' ><input type='hidden' name='data-OS' value='$OS'/></form>
+									$ceo_name = $this->security->get_csrf_token_name();
+									$ceo_cook = $this->security->get_csrf_hash();
+									echo "<form id='formu' method='post'><input type='hidden' name='data-OS' value='$OS'>
+																												<input type='hidden' name='$ceo_name' value='$ceo_cook'></form>
+
 									<script>
 									alert('".$codigoError["mensaje"]."');
 									document.getElementById('formu').action='".$this->config->item('base_url')."$urlCountry/consulta/ordenes-de-servicio';
@@ -412,7 +416,10 @@ class Consultas extends CI_Controller {
 							}
 					}
 			}else{
-					echo "<form id='formu' method='post'><input type='hidden' name='data-OS' value='$OS'/></form>
+					$ceo_name = $this->security->get_csrf_token_name();
+					$ceo_cook = $this->security->get_csrf_hash();
+					echo "<form id='formu' method='post'><input type='hidden' name='data-OS' value='$OS'>
+																							 <input type='hidden' name='$ceo_name' value='$ceo_cook'></form>
 					<script>
 					alert('Error al descargar archivo.');
 					document.getElementById('formu').action='".$this->config->item('base_url')."$urlCountry/consulta/ordenes-de-servicio';
@@ -479,14 +486,20 @@ class Consultas extends CI_Controller {
 								str_replace(' ', '_', $nombre.date("d/m/Y H:i")));
 
 					} elseif ($response->rc==-109) {
-							echo "<form id='formu' method='post'><input type='hidden' name='data-OS' value='$OS'/></form>
+							$ceo_name = $this->security->get_csrf_token_name();
+							$ceo_cook = $this->security->get_csrf_hash();
+							echo "<form id='formu' method='post'><input type='hidden' name='data-OS' value='$OS'>
+																									 <input type='hidden' name='$ceo_name' value='$ceo_cook'></form>
 							<script>
 									alert('La factura aún no está digitalizada.');
 									document.getElementById('formu').action='".$this->config->item('base_url')."$urlCountry/consulta/ordenes-de-servicio';
 									document.getElementById('formu').submit();
 							</script>";
 					} else{
-							echo "<form id='formu' method='post'><input type='hidden' name='data-OS' value='$OS'/></form>
+							$ceo_name = $this->security->get_csrf_token_name();
+							$ceo_cook = $this->security->get_csrf_hash();
+							echo "<form id='formu' method='post'><input type='hidden' name='data-OS' value='$OS'>
+							<input type='hidden' name='$ceo_name' value='$ceo_cook'></form>
 							<script>
 									alert('En estos momentos no podemos atender su solicitud por favor intente más tarde.');
 									document.getElementById('formu').action='".$this->config->item('base_url')."$urlCountry/consulta/ordenes-de-servicio';
@@ -494,7 +507,10 @@ class Consultas extends CI_Controller {
 							</script>";
 					}
 			}else{
-					echo "<form id='formu' method='post'><input type='hidden' name='data-OS' value='$OS'/></form>
+					$ceo_name = $this->security->get_csrf_token_name();
+					$ceo_cook = $this->security->get_csrf_hash();
+					echo "<form id='formu' method='post'><input type='hidden' name='data-OS' value='$OS'>
+					<input type='hidden' name='$ceo_name' value='$ceo_cook'></form>
 					<script>
 					alert('En estos momentos no podemos atender su solicitud por favor intente más tarde.');
 					document.getElementById('formu').action='".$this->config->item('base_url')."$urlCountry/consulta/ordenes-de-servicio';
@@ -697,7 +713,10 @@ class Consultas extends CI_Controller {
 									}else{
 											$codigoError = array('mensaje' => lang('ERROR_('.$response->rc.')'), "rc"=> $response->rc);
 									}
-									echo "<form id='formu' method='post' ><input type='hidden' name='data-OS' value='$OS'/></form>
+									$ceo_name = $this->security->get_csrf_token_name();
+									$ceo_cook = $this->security->get_csrf_hash();
+									echo "<form id='formu' method='post' ><input type='hidden' name='data-OS' value='$OS'>
+									<input type='hidden' name='$ceo_name' value='$ceo_cook'></form>
 									<script>
 									alert('".$codigoError["mensaje"]."');
 									document.getElementById('formu').action='".$this->config->item('base_url')."$urlCountry/consulta/ordenes-de-servicio';
@@ -706,7 +725,10 @@ class Consultas extends CI_Controller {
 							}
 					}
 			}else{
-					echo "<form id='formu' method='post'><input type='hidden' name='data-OS' value='$OS'/></form>
+					$ceo_name = $this->security->get_csrf_token_name();
+					$ceo_cook = $this->security->get_csrf_hash();
+					echo "<form id='formu' method='post'><input type='hidden' name='data-OS' value='$OS'>
+					<input type='hidden' name='$ceo_name' value='$ceo_cook'></form>
 					<script>
 					alert('Error al descargar archivo.');
 					document.getElementById('formu').action='".$this->config->item('base_url')."$urlCountry/consulta/ordenes-de-servicio';

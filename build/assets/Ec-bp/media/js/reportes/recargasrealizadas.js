@@ -39,13 +39,16 @@ $(document).ready(function() {
 	    });
 
 	   $("#export_excel").click(function(){
-
-	    	$('form#formulario').empty();
-		$('form#formulario').append('<input type="hidden" name="empresa" value="'+filtro_busq.empresa+'" />');
-		$('form#formulario').append('<input type="hidden" name="anio" value="'+filtro_busq.anio+'" />');
-		$('form#formulario').append('<input type="hidden" name="mes" value="'+filtro_busq.mes+'" />');
-		$('form#formulario').attr('action',baseURL+api+isoPais+"/reportes/recargasRealizadasXLS");
-		$('form#formulario').submit();
+			var ceo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
+			$('form#formulario').empty();
+			$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'">');
+			$('form#formulario').append('<input type="hidden" name="empresa" value="'+filtro_busq.empresa+'" />');
+			$('form#formulario').append('<input type="hidden" name="anio" value="'+filtro_busq.anio+'" />');
+			$('form#formulario').append('<input type="hidden" name="mes" value="'+filtro_busq.mes+'" />');
+			$('form#formulario').attr('action',baseURL+api+isoPais+"/reportes/recargasRealizadasXLS");
+			$('form#formulario').submit();
 
 		/*datos = {
 			empresa:filtro_busq.empresa,
@@ -67,8 +70,12 @@ $(document).ready(function() {
 		}
 
 		descargarArchivo(datos, baseURL+api+isoPais+"/reportes/recargasRealizadasPDF", "Exportar PDF" );
-		  	*/
+				*/
+		var ceo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
 		$('form#formulario').empty();
+		$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'">');
 		$('form#formulario').append('<input type="hidden" name="empresa" value="'+filtro_busq.empresa+'" />');
 		$('form#formulario').append('<input type="hidden" name="anio" value="'+filtro_busq.anio+'" />');
 		$('form#formulario').append('<input type="hidden" name="mes" value="'+filtro_busq.mes+'" />');
@@ -80,12 +87,15 @@ $(document).ready(function() {
 //METODO PARA REALIZAR LA BUSQUEDA
 var filtro_busq={};
 	    $("#repRecargasRealizadas_btnBuscar").click(function(){
-
+				var ceo_cook = decodeURIComponent(
+					document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+				);
 	    	var $consulta;
 	    	filtro_busq.empresa=$("#RecargasRealizadas-Empresa").val();
 	    	filtro_busq.anio=$("#repRecargasRealizadas_anio").val().split("/")[1];
 	    	filtro_busq.mes=$("#repRecargasRealizadas_anio").val().split("/")[0];
-	    	filtro_busq.paginaActual=1;
+				filtro_busq.paginaActual=1;
+				filtro_busq.ceo_name = ceo_cook;
 	    	if(validar_filtro_busqueda("lotes-2")){
 	    	$('#cargando').fadeIn("slow");
 	    	$(this).hide();
@@ -185,54 +195,66 @@ var filtro_busq={};
 
 
 			 		$("#grafica").click(function(){
-			    	var _axis="Bolivares";
-					var jsonChart={
-						title:{
-							text:"Recargas realizadas"
-						},
-						legend:{
-							position:"top"
-						},
-						series:[],
-						categoryAxis:{
-							categories:[]
-						},
-						valueAxis:{
-							name:_axis,
-							title:{
-								text:""
-							}
-						}
-
-					}
-
-// SE OBTIENE LAS CATEGORIAS
-					$.each(data.listaGrafico[0].categorias,function(posLista,itemLista){
-						jsonChart.categoryAxis.categories.push(itemLista.nombreCategoria);
-					});
-					var width_categoria=300;
-					width_categoria=(parseInt(width_categoria)*parseInt(data.listaGrafico[0].categorias.length));
-					$( "#chart" ).dialog({modal:true, width: 800, height: 400});
-
+			    	
 // SE OBTIENE LAS SERIES
+					var arrayseries = []
 					$.each(data.listaGrafico[0].series,function(posSeries,itemSeries){
 						var serie={};
-						serie.name=itemSeries.nombreSerie;
-						serie.data=itemSeries.valores;
-						serie.color = colores[posSeries];
-						$.each(serie.data[0],function(pos,item){
-							replaceAll(item,",","");
-							replaceAll(item,".","");
-						});
-						serie.axis= _axis;
-						jsonChart.series.push(serie);
+						let nuevo = [itemSeries.nombreSerie, itemSeries.valores[0]];
+						arrayseries.push(nuevo);
 					});
 // GRAFICA
-					$("#chart").kendoChart(jsonChart);
+			$('#chart').highcharts({
+				chart: {
+					type: 'column',
+					plotBackgroundColor: null,
+				  plotBorderWidth: null,
+					plotShadow: false
+				},
+				plotOptions: {
+					series: { colorByPoint: true }
+				},
+				title: {
+					text: data.recargas[0].producto
+				},
+				xAxis: {
+					type: 'category'
+				},
+				yAxis: {
+					min: 0,
+					title: {
+						text: 'Recargas realizadas'
+					}
+				},
+				legend: {
+					enabled: false
+				},
+				tooltip: {
+					pointFormat: 'Recargas: <b>{point.y}</b>'
+				},
+				series: [
+					{
+						name: 'Population',
+						data: arrayseries,
+						dataLabels: {
+							enabled: true,
+							rotation: 0,
+							color: '#000000',
+							align: 'center',
+							format: '{point.y}',
+							y: 2,
+							style: {
+								fontSize: '13px'
+							}
+						}
+					}]
+			});
+			
+			$("#chart").dialog({modal:true, width: 700, height: 400});					
+			$("#chart").height(400);
+			$("#chart svg").height(385);
 
-
-
-			  	    });
+			  });
 					$('#tabla-datos-general tbody tr:even').addClass('even ');
 		 			}else{
 						if(data.rc =="-29"){
@@ -321,11 +343,15 @@ function validar_filtro_busqueda(div){
   function descargarArchivo(datos, url, titulo){
 
   $aux = $("#cargando").dialog({title:titulo,modal:true, close:function(){$(this).dialog('close')}, resizable:false });
-
+	var ceo_cook = decodeURIComponent(
+		document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+	);
+	datos.ceo_name = ceo_cook;
       $.post(url,datos).done(function(data){
           $aux.dialog('destroy')
           if(!data.ERROR){
-            $('form#formulario').empty();
+						$('form#formulario').empty();
+						$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'">');
             $('form#formulario').append('<input type="hidden" name="bytes" value="'+JSON.stringify(data.bytes)+'" />');
             $('form#formulario').append('<input type="hidden" name="ext" value="'+data.ext+'" />');
             $('form#formulario').append('<input type="hidden" name="nombreArchivo" value="'+data.nombreArchivo+'" />');

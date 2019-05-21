@@ -60,8 +60,11 @@ if( !$("#loteXdesa").val()&& !$('#lotesxAuth').val() ){
         js_var.loteF = js_var.loteF.substr(0,js_var.loteF.lastIndexOf(','));
         js_var.loteF = js_var.loteF.split(',');
       }*/
-      var $aux = $('#loading').dialog({title:"Firmando lote",modal: true, bgiframe: true, dialogClass: 'hide-close'});
-      $.post(baseURL+isoPais+'/lotes/autorizacion/firmar',{'data-lotes': js_var.loteF,'data-pass':pass}).done(function(data){
+			var $aux = $('#loading').dialog({title:"Firmando lote",modal: true, bgiframe: true, dialogClass: 'hide-close'});
+			var ceo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
+      $.post(baseURL+isoPais+'/lotes/autorizacion/firmar',{'data-lotes': js_var.loteF,'data-pass':pass, ceo_name: ceo_cook}).done(function(data){
          $aux.dialog('destroy');
         if(!data.ERROR){
           $('<div>Proceso exitoso.<h5>Listando lotes</h5></div>').dialog({title:"Firmando lote",modal: true, bgiframe: true});
@@ -124,17 +127,17 @@ $('#lotes-2').on('click','#select-allA', function() {
     var osTipo = $('#selec_tipo_lote').val();
 
     if(pass!="" && js_var.loteA!="" && osTipo!=""){
-
 			var form = $('#lotes-2').find('form');
 			validateForms(form);
 			if(form.valid()) {
-
 				pass = hex_md5( pass );
 				$('#claveAuth').val( '' );
 
 				$('#loading').dialog({title:'Autorizando lotes', modal:true, resizable:false, dialogClass: 'hide-close', close:function(){$(this).dialog('destroy')}});
-
-				$.post(baseURL+isoPais+'/lotes/preliminar',{'data-lotes':js_var.loteA, 'data-pass':pass,'data-tipoOS':osTipo})
+				var ceo_cook = decodeURIComponent(
+					document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+				);
+				$.post(baseURL+isoPais+'/lotes/preliminar',{'data-lotes':js_var.loteA, 'data-pass':pass,'data-tipoOS':osTipo, ceo_name: ceo_cook})
 				.done(function(data){
 					var code = data.code, title = data.title, msg = data.msg, dataCalc = data.data;
 					$('#loading').dialog('destroy');
@@ -158,7 +161,7 @@ $('#lotes-2').on('click','#select-allA', function() {
 						notificacion(title, msg, code);
 					}
 				});
-			// resetValuesAuth();
+				// resetValuesAuth();
 			} else {
 				notificacion('Autorización de Lotes', 'Verifique los datos ingresados e intente nuevamente');
 			}
@@ -233,8 +236,11 @@ $item = $(this);
             pass = hex_md5( pass );
             $('#pass').val( '' );
             $(this).dialog('destroy');
-           var $aux = $('#loading').dialog({title:"Desasociar firma de lote", modal: true,bgiframe: true});
-            $.post(baseURL+isoPais+'/lotes/autorizacion/desasociar',{'data-lotes': idlote,'data-pass':pass}).done( function(data){
+					 var $aux = $('#loading').dialog({title:"Desasociar firma de lote", modal: true,bgiframe: true});
+					 var ceo_cook = decodeURIComponent(
+						document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+						);
+            $.post(baseURL+isoPais+'/lotes/autorizacion/desasociar',{'data-lotes': idlote,'data-pass':pass, ceo_name: ceo_cook}).done( function(data){
               $aux.dialog('destroy');
                if(!data.ERROR){
 
@@ -527,9 +533,12 @@ $.each( $('.icon-desa'), function(){
 
 function eliminarLotes(idlote,acnumlote,ctipolote,pass){
 
-  var $aux = $('#loading').dialog({title:"Eliminando lote",modal: true, bgiframe: true, dialogClass: 'hide-close' });
+	var $aux = $('#loading').dialog({title:"Eliminando lote",modal: true, bgiframe: true, dialogClass: 'hide-close' });
+	var ceo_cook = decodeURIComponent(
+		document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+	);
          $.post(baseURL+isoPais+'/lotes/autorizacion/eliminarAuth',
-          {'data-lotes': idlote,'data-acnumlote':acnumlote,'data-ctipolote':ctipolote,'data-pass':pass})
+          {'data-lotes': idlote,'data-acnumlote':acnumlote,'data-ctipolote':ctipolote,'data-pass':pass, ceo_name: ceo_cook})
           .done(function(data){
       $aux.dialog('destroy');
                if(!data.ERROR){
@@ -553,16 +562,22 @@ function eliminarLotes(idlote,acnumlote,ctipolote,pass){
 }
 
   $('#downPDF').on('click', function(){
-
-  $('#exportTo').attr('action', baseURL + api + isoPais + "/reportes/detalleLoteAuthExpPDF");
+		var ceo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
+  	$('#exportTo').attr('action', baseURL + api + isoPais + "/reportes/detalleLoteAuthExpPDF");
+		$('#exportTo').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'">');
     $('#data-lote').val($("#data-lote").val());
     $('#exportTo').submit();
 
   });
 
   $('#downXLS').on('click', function(){
-
-  $('#exportTo').attr('action', baseURL + api + isoPais + "/reportes/detalleLoteAuthExpXLS");
+		var ceo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
+  	$('#exportTo').attr('action', baseURL + api + isoPais + "/reportes/detalleLoteAuthExpXLS");
+		$('#exportTo').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'">');
     $('#data-lote').val($("#data-lote").val());
     $('#exportTo').submit();
 
