@@ -19,6 +19,7 @@ class Cryptography {
 	public function encrypt($object)
 	{
 		log_message('INFO', 'NOVO Cryptography: Encrypt Method Initialized');
+		log_message('DEBUG', 'NOVO DATA TO ENCRYPT: '.json_encode($object));
 		$keyStr = $this->generateKey();
 		$salt = openssl_random_pseudo_bytes(8);
     $salted = '';
@@ -62,7 +63,7 @@ class Cryptography {
     }
     $key = substr($result, 0, 32);
 		$data = openssl_decrypt($ct, 'aes-256-cbc', $key, true, $iv);
-		log_message('INFO', 'NOVO decrip---------------------------------------------'.$data);
+		log_message('DEBUG', 'NOVO DECRYPT DATA: '.$data);
     return $data;
 	}
 
