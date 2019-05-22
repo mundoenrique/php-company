@@ -29,56 +29,56 @@ $(function(){
 
     });
 
+//RECEPCION DE TARJETAS
+	// $("#tabla-datos-general").on("click","#res",function(code) {
+	// 	var nlote = $(this).attr('data-id')
+	// 	var ceo_cook = decodeURIComponent(
+	// 		document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+	// 	);
+	// 	$.ajax({
+	// 		type: 'POST',
+	// 		url: baseURL+isoPais+'/consulta/embozado',
+	// 		data: { 'nlote': nlote, ceo_name: ceo_cook },
+	// 		beforeSend: function() {
+	// 			$("#loading").dialog({
+	// 				title: 'Enviando notificación',
+	// 				modal: true,
+	// 				draggable: false,
+	// 				rezise: false,
+	// 				open: function(event, ui) {
+	// 					$('.ui-dialog-titlebar-close', ui.dialog).hide();
+	// 				}
+	// 			});
+	// 		},
+	// 		success: function (res) {
 
-	$("#tabla-datos-general").on("click","#res",function(code) {
-		var nlote = $(this).attr('data-id')
-		var ceo_cook = decodeURIComponent(
-			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-		);
-		$.ajax({
-			type: 'POST',
-			url: baseURL+isoPais+'/consulta/embozado',
-			data: { 'nlote': nlote, ceo_name: ceo_cook },
-			beforeSend: function() {
-				$("#loading").dialog({
-					title: 'Enviando notificación',
-					modal: true,
-					draggable: false,
-					rezise: false,
-					open: function(event, ui) {
-						$('.ui-dialog-titlebar-close', ui.dialog).hide();
-					}
-				});
-			},
-			success: function (res) {
+	// 			$("#loading").dialog('destroy');
+	// 			$('#msg-certificate-notifi').dialog({
+	// 				title: 'Notificación enviada',
+	// 				modal: true,
+	// 				draggable: false,
+	// 				rezise: false,
+	// 				open: function(event, ui) {
+	// 					$('.ui-dialog-titlebar-close', ui.dialog).hide();
 
-				$("#loading").dialog('destroy');
-				$('#msg-certificate-notifi').dialog({
-					title: 'Notificación enviada',
-					modal: true,
-					draggable: false,
-					rezise: false,
-					open: function(event, ui) {
-						$('.ui-dialog-titlebar-close', ui.dialog).hide();
+	// 					$('#msg-info').html('<p>' + res.msg + '</p>')
+	// 				}
 
-						$('#msg-info').html('<p>' + res.msg + '</p>')
-					}
-
-				})
-				$('#close-info').on('click', function(){
-					$('#msg-certificate-notifi').dialog('close');
-					switch(res.code) {
-						case 0:
-							window.location.reload();
-							break;
-						case 3:
-							window.location.href = baseURL+isoPais+'/logout'
-							break;
-					}
-				});
-			}
-		});
-	});
+	// 			})
+	// 			$('#close-info').on('click', function(){
+	// 				$('#msg-certificate-notifi').dialog('close');
+	// 				switch(res.code) {
+	// 					case 0:
+	// 						window.location.reload();
+	// 						break;
+	// 					case 3:
+	// 						window.location.href = baseURL+isoPais+'/logout'
+	// 						break;
+	// 				}
+	// 			});
+	// 		}
+	// 	});
+	// });
     // EVENTO BUSCAR OS SEGUN FILTRO
     $("#buscarOS").on("click", function(){
 
