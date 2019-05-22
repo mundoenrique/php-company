@@ -502,7 +502,7 @@ function buscar(pgSgt) {
 // CARGAR-MOSTRAR TARJETAS OBTENIDAS DE LA PETICION DE BÚSQUEDA
 
 function cargarResultado(data) {
-	console.log(data)
+
 
 	if (serv_var.busk) {
 		serv_var.busk = false;
@@ -589,7 +589,7 @@ function paginar() {
 
 // SUMAR LOS MONTOS INGRESADOS Y VALIDAR MONTO MAX. Y MIN.
 function calcularTrans(operacion) {
-	console.log(operacion)
+
 	var sum = 0,
 		comision = 0,
 		trans;

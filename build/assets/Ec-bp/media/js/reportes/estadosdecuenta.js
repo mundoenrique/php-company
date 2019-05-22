@@ -238,9 +238,6 @@ function BuscarEstadosdeCuenta(paginaActual){
 			filtro_busq: filtro_busq
 
 		})
-		console.log(dataRequest);
-		// filtro_busq.paginaActual=paginaActual;
-		// filtro_busq.ceo_name = ceo_cook;
 		dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
 		$consulta = $.post(baseURL + api + isoPais + "/reportes/estadosdecuenta",{request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook) } );
 	//DE SER EXITOSA LA COMUNICACION CON EL SERVICIO SE EJECUTA EL SIGUIENTE METODO "DONE"
