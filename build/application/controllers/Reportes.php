@@ -855,11 +855,9 @@ class Reportes extends CI_Controller {
 								$dataRequest = json_decode(
 									$this->security->xss_clean(
 										strip_tags(
-											strip_tags(
-												$this->cryptography->decrypt(
-													base64_decode($this->input->get_post('plot')),
-													utf8_encode($this->input->get_post('request'))
-												)
+											$this->cryptography->decrypt(
+												base64_decode($this->input->get_post('plot')),
+												utf8_encode($this->input->get_post('request'))
 											)
 										)
 									)
