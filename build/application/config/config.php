@@ -23,7 +23,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = BASE_URL;
+$config['base_url'] = BASE_URL.'/';
 $config['asset_url'] = BASE_CDN_URL;
 $config['asset_path'] = BASE_CDN_PATH;
 $config['favicon'] = 'favicon-novo';
@@ -472,7 +472,14 @@ $config['csrf_token_name'] = 'ceo_name';
 $config['csrf_cookie_name'] = 'cook';
 $config['csrf_expire'] = 7200;
 $config['csrf_regenerate'] = TRUE;
-$config['csrf_exclude_uris'] = array();
+$config['csrf_exclude_uris'] = array(
+	'[\w\-]+/dashboard/productos',
+	'[\w\-]+/dashboard/productos/detalle',
+	'[\w\-]+/consulta/ordenes-de-servicio',
+	'[\w\-]+/lotes/autorizacion/detalle',
+	'[\w\-]+/lotes/confirmacion',
+	'[\w\-]+/lotes/calculo',
+);
 
 /*
 |--------------------------------------------------------------------------
