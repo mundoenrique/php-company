@@ -245,14 +245,16 @@ class Servicios extends CI_Controller {
 			} else {
 				$result = array("ERROR"=>lang('SIN_FUNCION'));
 			}
-			$this->output->set_content_type('application/json')->set_output(json_encode($result));
+			$response = $this->cryptography->encrypt($result);
+			$this->output->set_content_type('application/json')->set_output(json_encode($response));
 
 		} elseif($paisS!=$urlCountry && $paisS!='') {
 			$this->session->sess_destroy();
 			redirect($urlCountry.'/login');
 
 		} elseif($this->input->is_ajax_request()) {
-			$this->output->set_content_type('application/json')->set_output(json_encode( array('ERROR' => '-29' )));
+			$response = $this->cryptography->encrypt(array('ERROR' => '-29' ));
+			$this->output->set_content_type('application/json')->set_output(json_encode($response));
 		} else {
 			redirect($urlCountry.'/login');
 		}
@@ -290,11 +292,20 @@ class Servicios extends CI_Controller {
 		];
 
 		$listaTarjetas = array($listaTarjetas);
-
-		$tarjetas = $this->input->post('data-tarjeta');
-		$dnis = $this->input->post('data-id_ext_per');
-		$pass = $this->input->post('data-pass');
-		$lista;
+		$dataRequest = json_decode(
+			$this->security->xss_clean(
+					strip_tags(
+							$this->cryptography->decrypt(
+									base64_decode($this->input->get_post('plot')),
+									utf8_encode($this->input->get_post('request'))
+							)
+					)
+			)
+	);
+	$tarjetas = $dataRequest->data_tarjeta;
+	$dnis = $dataRequest->data_id_ext_per;
+	$pass = $dataRequest->data_pass;
+	$lista;
 
 		foreach ($tarjetas as $key => $value) {
 			$tjs = ["noTarjeta" => $value, "id_ext_per" => $dnis[$key]];
@@ -691,7 +702,8 @@ class Servicios extends CI_Controller {
 
 		if($paisS == $urlCountry && $logged_in && $moduloAct !==false ) {
 			$FooterCustomInsertJS = ["jquery-1.10.2.min.js", "jquery-ui-1.10.3.custom.min.js", "jquery.balloon.min.js",
-			"jquery.dataTables.min.js", "header.js", "dashboard/widget-empresa.js", "jquery.fileupload.js", "jquery.iframe-transport.js", "servicios/actualizar-datos.js", "routes.js"];
+			"aes.min.js","aes-json-format.min.js","jquery.dataTables.min.js", "header.js", "dashboard/widget-empresa.js",
+			"jquery.fileupload.js", "jquery.iframe-transport.js", "servicios/actualizar-datos.js", "routes.js"];
 			$FooterCustomJS = "";
 			$titlePage = "Actualizar datos";
 			$programa = $this->session->userdata('nombreProductoS').' / '. $this->session->userdata('marcaProductoS');
@@ -1200,14 +1212,16 @@ class Servicios extends CI_Controller {
 			} else {
 				$result = array("ERROR"=>lang('SIN_FUNCION'));
 			}
-			$this->output->set_content_type('application/json')->set_output(json_encode($result));
+			$response = $this->cryptography->encrypt($result);
+			$this->output->set_content_type('application/json')->set_output(json_encode($response));
 
 		} elseif($paisS!=$urlCountry && $paisS!='') {
 			$this->session->sess_destroy();
 			redirect($urlCountry.'/login');
 
 		} elseif($this->input->is_ajax_request()) {
-			$this->output->set_content_type('application/json')->set_output(json_encode( array('ERROR' => '-29' )));
+			$response = $this->cryptography->encrypt(array('ERROR' => '-29' ));
+			$this->output->set_content_type('application/json')->set_output(json_encode($response));
 		} else {
 			redirect($urlCountry.'/login');
 		}

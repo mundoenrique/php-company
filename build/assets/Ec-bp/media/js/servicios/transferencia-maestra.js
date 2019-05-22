@@ -31,8 +31,10 @@ $(function() {
 	$("#dni").attr("maxlength", "12");
 
 	$.get( baseURL + api + isoPais + '/servicios/transferencia-maestra/consultarSaldo',
-	function(data) {
-		var data = JSON.parse(data), dataAmount, Amountmsg
+	function(response) {
+		data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
+		console.log(data);
+		var data = data, dataAmount, Amountmsg
 		if (data.rc == 0) {
 			dataAmount = data.maestroDeposito.saldoDisponible;
 			Amountmsg = toFormatShow(dataAmount);
@@ -721,17 +723,20 @@ function llamarWS(pass, url, operacion, mensaje) {
 	var ceo_cook = decodeURIComponent(
 		document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 	);
-	$.post(url, {
-		'data-tarjeta': serv_var.noTarjetas,
-		'data-id_ext_per': serv_var.dni_tarjetas,
-		'data-pass': pass,
-		'data-monto': serv_var.monto,
-		'data-pg': 1,
-		'data-paginas': 1,
-		'data-paginar': false,
-		ceo_name: ceo_cook
-	})
-	.done(function(data) {
+
+	var dataRequest = JSON.stringify ({
+		data_tarjeta: serv_var.noTarjetas,
+		data_id_ext_per: serv_var.dni_tarjetas,
+		data_pass: pass,
+		data_monto: serv_var.monto,
+		data_pg: 1,
+		data_paginas: 1,
+		data_paginar: false
+		})
+		dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
+		$.post(url, {request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)} )
+		.done(function(response){
+			data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 
 		$aux.dialog("destroy");
 
