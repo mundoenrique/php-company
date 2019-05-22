@@ -83,15 +83,17 @@ $(function(){
     $("#buscarOS").on("click", function(){
 
 				var statuLote = $("#status_lote").val();
-				var ceo_cook = decodeURIComponent(
-					document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-				);
+
 
         if( statuLote!=='' && COS_var.fecha_inicio!=='' && COS_var.fecha_fin!=='' ){
 
             if( Date.parse(COS_var.fecha_fin) >= Date.parse(COS_var.fecha_inicio) ){
 
                 $aux = $("#loading").dialog({title:'Buscando Orden de Servicio',modal:true, close:function(){$(this).dialog('destroy')}, resizable:false });
+
+								var ceo_cook = decodeURIComponent(
+									document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+								);
 
 								$('form#formulario').empty();
 								$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'">');
