@@ -27,6 +27,7 @@ class CallModels extends Novo_Controller {
 		$this->load->model($this->model, 'modelLoad');
 		$method = $this->method;
 		$dataResponse = $this->modelLoad->$method($this->dataRequest->data);
+		$dataResponse = $this->cryptography->encrypt($dataResponse);
 		$this->output->set_content_type('application/json')->set_output(json_encode($dataResponse));
 	}
 }

@@ -152,7 +152,7 @@ class Novo_User_Model extends NOVO_Model {
 			}
 		}
 
-		return $this->cypherData();
+		return $this->response;
 	}
 	/**
 	 * @info Método para recuperar contraseña
@@ -224,7 +224,7 @@ class Novo_User_Model extends NOVO_Model {
 			}
 		}
 
-		return $this->cypherData();
+		return $this->response;
 	}
 	/**
 	 * @info Método para el cambio de Contraseña
@@ -280,7 +280,7 @@ class Novo_User_Model extends NOVO_Model {
 			}
 		}
 
-		return $this->cypherData();
+		return $this->response;
 	}
 	/**
 	 * @info Método para el cierre de sesión
@@ -313,7 +313,7 @@ class Novo_User_Model extends NOVO_Model {
 			}
 
 		$this->session->sess_destroy();
-		return $this->cypherData();
+		return $this->response;
 	}
 
 	public function callWs_validateCaptcha_User($dataRequest)
@@ -339,7 +339,7 @@ class Novo_User_Model extends NOVO_Model {
                 $this->response->code = 0;
 				$this->response->data = 'Ok';
 			}
-			return $this->cypherData();
+			return $this->response;
 
     }
 }
