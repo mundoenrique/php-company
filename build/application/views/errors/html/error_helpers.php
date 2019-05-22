@@ -42,15 +42,11 @@ function insert_favicon($country) {
 
 
 function get_country() {
-	if (isset($_COOKIE['pais'])) {
-		$uri_country = $_COOKIE['pais'];
+	if (isset($_SERVER['REQUEST_URI'])) {
+		$uri_segments = explode('/', parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
+		$uri_country = $uri_segments[1];
 	} else {
-		if (isset($_SERVER['REQUEST_URI'])) {
-			$uri_segments = explode('/', parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
-			$uri_country = $uri_segments[1];
-		} else {
-			$uri_country = 'Pe';
-		}
+		$uri_country = 'Pe';
 	}
 
 	switch (strtolower($uri_country)) {
