@@ -59,7 +59,7 @@ class Dashboard extends CI_Controller {
 			//INSTANCIA MENU FOOTER
 			$menuFooter = $this->parser->parse('widgets/widget-menuFooter',array(),TRUE);
 			$header = $this->parser->parse('layouts/layout-header',array('bodyclass'=>'full-width','menuHeaderActive'=>TRUE,'menuHeaderMainActive'=>TRUE,'menuHeader'=>$menuHeader,'titlePage'=>$titlePage),TRUE);
-			$FooterCustomInsertJS=["jquery-1.10.2.min.js","jquery-ui-1.10.3.custom.min.js","jquery.balloon.min.js","jquery.paginate.js","jquery.isotope.min.js","dashboard/dashboard.js","header.js","routes.js"];
+			$FooterCustomInsertJS=["jquery-3.4.0.min.js", "jquery-ui-1.12.1.min.js","jquery.balloon.min.js","jquery.paginate.js","jquery.isotope.min.js","dashboard/dashboard.js","header.js","aes.min.js","aes-json-format.min.js","routes.js"];
 			$footer = $this->parser->parse('layouts/layout-footer',array('menuFooterActive'=>TRUE,'menuFooter'=>$menuFooter,'FooterCustomInsertJSActive'=>TRUE,'FooterCustomInsertJS'=>$FooterCustomInsertJS,'FooterCustomJSActive'=>TRUE,'FooterCustomJS'=>$FooterCustomJS),TRUE);
 
 			$content = $this->parser->parse('dashboard/content-dashboard',array('titulo'=>$nombreCompleto,'lastSession'=>$lastSessionD),TRUE);
@@ -219,7 +219,7 @@ class Dashboard extends CI_Controller {
 		//VALIDAR QUE USUARIO ESTE LOGGEDIN
 		if($paisS==$urlCountry && $logged_in){
 
-			if($this->input->post()){
+			if($this->input->post('request')){
 				$paginar= $this->input->post('data-paginar');
 				$tamanoPagina= $this->input->post('data-tamanoPagina');
 				$paginaActual= $this->input->post('data-paginaActual');
@@ -499,7 +499,7 @@ class Dashboard extends CI_Controller {
 				$menuFooter = $this->parser->parse('widgets/widget-menuFooter',array(),TRUE);
 
 				$header = $this->parser->parse('layouts/layout-header',array('bodyclass'=>'','menuHeaderActive'=>TRUE,'menuHeaderMainActive'=>TRUE,'menuHeader'=>$menuHeader,'titlePage'=>$titlePage),TRUE);
-				$FooterCustomInsertJS=["jquery-1.10.2.min.js","jquery-ui-1.10.3.custom.min.js","jquery.isotope.min.js","jquery.balloon.min.js","dashboard/productos.js","header.js","routes.js"];
+				$FooterCustomInsertJS=["jquery-3.4.0.min.js", "jquery-ui-1.12.1.min.js","jquery.isotope.min.js","jquery.balloon.min.js","dashboard/productos.js","header.js","aes.min.js","aes-json-format.min.js","routes.js"];
 				$footer = $this->parser->parse('layouts/layout-footer',array('menuFooterActive'=>TRUE,'menuFooter'=>$menuFooter,'FooterCustomInsertJSActive'=>TRUE,'FooterCustomInsertJS'=>$FooterCustomInsertJS,'FooterCustomJSActive'=>TRUE,'FooterCustomJS'=>$FooterCustomJS),TRUE);
 				$content = $this->parser->parse('dashboard/content-productos',array(
 					'titulo'=>$titulo,
@@ -629,7 +629,7 @@ class Dashboard extends CI_Controller {
 				$titlePage="Conexión Empresas Online - Productos Detalle";
 			}
 
-			$FooterCustomInsertJS=["jquery-1.10.2.min.js","jquery-ui-1.10.3.custom.min.js","jquery.balloon.min.js","dashboard/widget-empresa.js","header.js","routes.js"];
+			$FooterCustomInsertJS=["jquery-3.4.0.min.js", "jquery-ui-1.12.1.min.js","jquery.balloon.min.js","dashboard/widget-empresa.js","header.js","routes.js"];
 			//INSTANCIA MENU HEADER
 			$menuHeader = $this->parser->parse('widgets/widget-menuHeader',array(),TRUE);
 			//INSTANCIA MENU FOOTER
@@ -709,7 +709,7 @@ class Dashboard extends CI_Controller {
 		if($response){
 			log_message('info','dashb_empr '.$response->rc);
 			if($response->rc==0){
-				return $response;
+				return $this->cryptography->encrypt($response);
 			}else{
 
 				if($response->rc==-61 || $response->rc==-29){
@@ -1055,7 +1055,7 @@ class Dashboard extends CI_Controller {
 			$FooterCustomJS="";
 
 			$titlePage= "Otros programas";
-			$FooterCustomInsertJS=["jquery-1.10.2.min.js","jquery-ui-1.10.3.custom.min.js","jquery.balloon.min.js","dashboard/widget-empresa.js","dashboard/other-products.js","header.js","routes.js"];
+			$FooterCustomInsertJS=["jquery-3.4.0.min.js", "jquery-ui-1.12.1.min.js","jquery.balloon.min.js","dashboard/widget-empresa.js","dashboard/other-products.js","header.js","routes.js"];
 			//INSTANCIA MENU HEADER
 			$menuHeader = $this->parser->parse('widgets/widget-menuHeader',array(),TRUE);
 			//INSTANCIA MENU FOOTER

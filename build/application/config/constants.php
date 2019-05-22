@@ -152,3 +152,7 @@ unset($arrayUri, $lang);
 
 define('THRESHOLD', $_SERVER['CI_ENV'] === 'development' ? 4 : 2);
 
+define('CYPHER_BASE', isset($_SERVER['CYPHER_BASE']) ?
+	$_SERVER['CYPHER_BASE'] : ''
+);
+
