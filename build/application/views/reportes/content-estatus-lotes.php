@@ -37,34 +37,35 @@ $urlCdn = get_cdn();
 				</div>
 				<div id="lotes-contenedor">
 				<div id="lotes-2">
-					<div id="search-1">
-						<h5><?php echo lang('REPORTES_SELECCION_EMPRESA'); ?><img id ="cargando_empresa" style="display:none;width: 25px; margin-left:10px" src="<?php echo $urlCdn."media/img/loading.gif"?>"/></h5>
-						<select  id= "EstatusLotes-empresa" class="required">
-							<option value="" selected="selected"><?php echo lang('REPORTES_SELECCIONE_EMPRESA'); ?></option>
-						</select>
-					</div>
-					<div id="search-1">
-						<h5><?php echo lang('TITULO_REPORTES_RANGO'); ?></h5>
-						<span>
-						<p><?php echo lang('TITULO_REPORTES_FECHAINI'); ?></p>
-						<input  id = "EstatusLotes-fecha-in" class="required login fecha" type="text" placeholder="DD/MM/AA" value="" onFocus="javascript:this.value=''"/>
-						</span>
-						<span>
-						<p><?php echo lang('TITULO_REPORTES_FECHAFIN'); ?></p>
-						<input  id = "EstatusLotes-fecha-fin" class="required login fecha" type="text" placeholder="DD/MM/AA" value="" onFocus="javascript:this.value=''"/>
-						</span>
-					</div>
-					<div id="search-2">
-						<h5><?php echo lang('REPORTES_SELECCION_PRODUCTO'); ?><img id ="cargando_producto" style="display:none;width: 25px; margin-left:10px" src="<?php echo $urlCdn."media/img/loading.gif"?>"/></h5>
-						<span>
-							<select  class="required" id="EstatusLotes-producto">
-								<option value="" selected="selected"><?php echo lang('REPORTES_SELECCIONE_PRODUCTO'); ?></option>
+					<form id="form-criterio-busqueda" onsubmit="return false">
+						<div id="search-1">
+							<h5><?php echo lang('REPORTES_SELECCION_EMPRESA'); ?><img id ="cargando_empresa" style="display:none;width: 25px; margin-left:10px" src="<?php echo $urlCdn."media/img/loading.gif"?>"/></h5>
+							<select  id= "EstatusLotes-empresa" name="empresa-select" class="required">
+								<option value="" selected="selected"><?php echo lang('REPORTES_SELECCIONE_EMPRESA'); ?></option>
 							</select>
-						</span>
-					</div>
-					
+						</div>
+						<div id="search-1">
+							<h5><?php echo lang('TITULO_REPORTES_RANGO'); ?></h5>
+							<span>
+							<p><?php echo lang('TITULO_REPORTES_FECHAINI'); ?></p>
+							<input  id = "EstatusLotes-fecha-in" class="required login fecha" type="text" name="start-dmy-date" placeholder="DD/MM/AA" value="" onFocus="javascript:this.value=''"/>
+							</span>
+							<span>
+							<p><?php echo lang('TITULO_REPORTES_FECHAFIN'); ?></p>
+							<input  id = "EstatusLotes-fecha-fin" class="required login fecha" type="text" name="end-dmy-date" placeholder="DD/MM/AA" value="" onFocus="javascript:this.value=''"/>
+							</span>
+						</div>
+						<div id="search-2">
+							<h5><?php echo lang('REPORTES_SELECCION_PRODUCTO'); ?><img id ="cargando_producto" style="display:none;width: 25px; margin-left:10px" src="<?php echo $urlCdn."media/img/loading.gif"?>"/></h5>
+							<span>
+								<select  class="required" id="EstatusLotes-producto" name="producto-select">
+									<option value="" selected="selected"><?php echo lang('REPORTES_SELECCIONE_PRODUCTO'); ?></option>
+								</select>
+							</span>
+						</div>
+						
 
-					
+					</form>
 				</div>
 				</div>
 				<div id="batchs-last">
