@@ -49,47 +49,49 @@
 				<span aria-hidden="true" class="icon" data-icon="&#xe07a;"></span> <?= lang('REG_CTA_CONCEN'); ?>
 			</div>
 			<div id="lotes-contenedor">
-				<div id="search-1">
-					<h5><span id="saldoEmpresa"></span></h5>
+				<form id="form-criterio-busqueda" onsubmit="return false">
+					<div id="search-1">
+						<h5><span id="saldoEmpresa"></span></h5>
+							<br>
+						<h5 style="float:left;"><?= "Monto" ?></h5>
+						<span>
+							<input id="amount" name="amount" placeholder="Ingrese monto" disabled/>
+						</span>
+					</div>
+					<div id="search-3" style="padding-top: 18px">
+						<h5><?= "Descripción" ?></h5>
+						<span>
+							<input id="description" name="text" placeholder="Ingrese descripción" maxlength=16 disabled/>
+						</span>
+					</div>
+					<?php if($pais == 'Ec-bp'): ?>
+					<div id="search-1">
 						<br>
-					<h5 style="float:left;"><?= "Monto" ?></h5>
-					<span>
-						<input id="amount" placeholder="Ingrese monto" disabled/>
-					</span>
-				</div>
-				<div id="search-3" style="padding-top: 18px">
-					<h5><?= "Descripción" ?></h5>
-					<span>
-						<input id="description" placeholder="Ingrese descripción" maxlength=16 disabled/>
-					</span>
-				</div>
-				<?php if($pais == 'Ec-bp'): ?>
-				<div id="search-1">
-					<br>
-					<h5 style="float:left;"><?= "Cuenta" ?></h5>
-					<span>
-						<select id="account" code="<?= $dataCtas['code'] ?>" title="<?= $dataCtas['title'] ?>" msg="<?= $dataCtas['msg'] ?>"
-							disabled>
-							<option value="0" selected>
-								<?= $dataCtas['code'] == 0 ? 'Seleccione una Cuenta' : $dataCtas['data'] ?>
-							</option>
-							<?php if($dataCtas['code'] == 0): foreach($ctas as $pos => $cta): ?>
-							<option value="<?= $cta['value'] ?>"><?= $cta['descrip'].'   --Saldo: '.$cta['saldo'] ?></option>
-							<?php endforeach; endif; ?>
-						</select>
-					</span>
-				</div>
-				<div id="charge-or-credit" class="panel-right">
-					<span class="selected-option">
-						<input type="radio" id="charge" class="control-radio" class="radio" name="type" value="cargo" disabled>
-						<label for="charge">cargo</label>
-					</span>
-					<span class="selected-option">
-						<input type="radio" id="credit" class="control-radio" class="radio" name="type" value="abono"  disabled>
-						<label for="credit">abono</label>
-					</span>
-				</div>
-				<?php endif; ?>
+						<h5 style="float:left;"><?= "Cuenta" ?></h5>
+						<span>
+							<select id="account" name="account" code="<?= $dataCtas['code'] ?>" title="<?= $dataCtas['title'] ?>" msg="<?= $dataCtas['msg'] ?>"
+								disabled>
+								<option value="0" selected>
+									<?= $dataCtas['code'] == 0 ? 'Seleccione una Cuenta' : $dataCtas['data'] ?>
+								</option>
+								<?php if($dataCtas['code'] == 0): foreach($ctas as $pos => $cta): ?>
+								<option value="<?= $cta['value'] ?>"><?= $cta['descrip'].'   --Saldo: '.$cta['saldo'] ?></option>
+								<?php endforeach; endif; ?>
+							</select>
+						</span>
+					</div>
+					<div id="charge-or-credit" class="panel-right">
+						<span class="selected-option">
+							<input type="radio" id="charge" class="control-radio" class="radio" name="type" value="cargo" disabled>
+							<label for="charge">cargo</label>
+						</span>
+						<span class="selected-option">
+							<input type="radio" id="credit" class="control-radio" class="radio" name="type" value="abono"  disabled>
+							<label for="credit">abono</label>
+						</span>
+					</div>
+					<?php endif; ?>
+				</form>
 			</div>
 			<div id="batchs-last">
 				<span id="mensajeError" style="float:left; display:none; color:red;"></span>

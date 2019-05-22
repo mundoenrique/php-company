@@ -134,64 +134,89 @@ $(function() {
 				}
 			});
 		} else {
-			dataSend = {
-				"amount": amount.val(),
-				"descript": descrip.val(),
-				"account": account.val(),
-				"type": type.val()
-			};
-			amount.val('');
-			descrip.val('');
-			account.val('0').prop('selected', true);
-			type.prop('checked', false);
+			var form = $('#form-criterio-busqueda');
+			validateForms(form);
+			if (form.valid()) {
 
-			var $aux = $('#loading').dialog({
-					title:'Enviando código de seguridad',
-					modal: true,
-					resizable:false,
-					draggable: false,
-					open: function(event, ui) {
-						$('.ui-dialog-titlebar-close', ui.dialog).hide();
-					}
-			});
-			$.get(baseURL + api + isoPais + '/servicios/transferencia-maestra/pagoTM')
-			.done(function (data) {
-				$aux.dialog('destroy');
-				switch (data.code) {
-					case 0:
-						var canvas = "<div id='dialog-confirm'>";
-								canvas +="<p>Código recibido: </p>";
-								canvas += "<form onsubmit='return false'><fieldset><input type='text' id='token-code' name='token-code' size=24 ";
-								canvas += "placeholder='Ingrese código recibido' class='text ui-widget-content ui-corner-all'/>";
-								canvas += "<h5 id='msg'></h5></fieldset></form></div>";
 
-						$(canvas).dialog({
-							title: data.title,
-							modal: true,
-							resizable: false,
-							draggable: false,
-							close: function () {
-								$(this).dialog("destroy");
-							},
-							buttons: {
-								Procesar: function () {
-									var codeToken = $("#token-code").val();
-									dataSend.codeToken = codeToken;
-									if (codeToken != '') {
-										var form = $(this).find('form');
-										validateForms(form, {handleMsg: false});
-										if(form.valid()) {
-											$("#token-code").val('');
-											$(this).dialog('destroy');
-											$aux = $('#loading').dialog({
-													title: 'Procesando',
-													modal: true,
-													resizable: false,
-													draggable: false,
-													open: function (event, ui) {
-														$('.ui-dialog-titlebar-close', ui.dialog).hide();
+				dataSend = {
+					"amount": amount.val(),
+					"descript": descrip.val(),
+					"account": account.val(),
+					"type": type.val()
+				};
+				amount.val('');
+				descrip.val('');
+				account.val('0').prop('selected', true);
+				type.prop('checked', false);
+
+				var $aux = $('#loading').dialog({
+						title:'Enviando código de seguridad',
+						modal: true,
+						resizable:false,
+						draggable: false,
+						open: function(event, ui) {
+							$('.ui-dialog-titlebar-close', ui.dialog).hide();
+						}
+				});
+				$.get(baseURL + api + isoPais + '/servicios/transferencia-maestra/pagoTM')
+				.done(function (data) {
+					$aux.dialog('destroy');
+					switch (data.code) {
+						case 0:
+							var canvas = "<div id='dialog-confirm'>";
+									canvas +="<p>Código recibido: </p>";
+									canvas += "<form onsubmit='return false'><fieldset><input type='text' id='token-code' name='token-code' size=24 ";
+									canvas += "placeholder='Ingrese código recibido' class='text ui-widget-content ui-corner-all'/>";
+									canvas += "<h5 id='msg'></h5></fieldset></form></div>";
+
+							$(canvas).dialog({
+								title: data.title,
+								modal: true,
+								resizable: false,
+								draggable: false,
+								close: function () {
+									$(this).dialog("destroy");
+								},
+								buttons: {
+									Procesar: function () {
+										var codeToken = $("#token-code").val();
+										dataSend.codeToken = codeToken;
+										if (codeToken != '') {
+											var form = $(this).find('form');
+											validateForms(form, {handleMsg: true});
+											console.log(form);
+											if(form.valid()) {
+												$("#token-code").val('');
+												$(this).dialog('destroy');
+												$aux = $('#loading').dialog({
+														title: 'Procesando',
+														modal: true,
+														resizable: false,
+														draggable: false,
+														open: function (event, ui) {
+															$('.ui-dialog-titlebar-close', ui.dialog).hide();
+														}
+												});
+												$.post(baseURL + api + isoPais + '/servicios/transferencia-maestra/RegargaTMProcede', dataSend)
+												.done(function (data) {
+													$aux.dialog('destroy');
+													switch (data.code) {
+														case 0:
+															notiPagOS(data.title, data.msg, 'ok');
+															break;
+														case 1:
+															notiPagOS(data.title, data.msg, 'error');
+															break;
+														case 2:
+														default:
+															notiPagOS(data.title, data.msg, 'close');
 													}
 											});
+											var ceo_cook = decodeURIComponent(
+												document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+											);
+											dataSend.ceo_name = ceo_cook;
 											$.post(baseURL + api + isoPais + '/servicios/transferencia-maestra/RegargaTMProcede', dataSend)
 											.done(function (data) {
 												$aux.dialog('destroy');
@@ -206,43 +231,41 @@ $(function() {
 													default:
 														notiPagOS(data.title, data.msg, 'close');
 												}
-										});
-										var ceo_cook = decodeURIComponent(
-											document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-										);
-										dataSend.ceo_name = ceo_cook;
-										$.post(baseURL + api + isoPais + '/servicios/transferencia-maestra/RegargaTMProcede', dataSend)
-										.done(function (data) {
-											$aux.dialog('destroy');
-											switch (data.code) {
-												case 0:
-													notiPagOS(data.title, data.msg, 'ok');
-													break;
-												case 1:
-													notiPagOS(data.title, data.msg, 'error');
-													break;
-												case 2:
-												default:
-													notiPagOS(data.title, data.msg, 'close');
-											}
-										})
-									} else {
-										$(this).find($('#token-code').css('border-color', '#cd0a0a'));
-										$(this).find($('#msg')).text('Debe ingresar el código de seguridad enviado a su correo');
-									}
+											})
+										} else {
+											console.log('código inválido');
+											$(this).find($('#token-code').css('border-color', '#cd0a0a'));
+											$(this).find($('#msg')).text('Debe ingresar el código de seguridad enviado a su correo');
+										}
+										}
 									}
 								}
-							}
-						});
-						break;
-					case 1:
-						notiPagOS(data.title, data.msg, 'error');
-						break;
-					case 2:
-					default:
-						notiPagOS(data.title, data.msg, 'close');
-				}
-			});
+							});
+							break;
+						case 1:
+							notiPagOS(data.title, data.msg, 'error');
+							break;
+						case 2:
+						default:
+							notiPagOS(data.title, data.msg, 'close');
+					}
+				});
+			} else {
+				$('<div><p>Verifique los datos ingresados e intente nuevamente</p></div>').dialog({
+					title: 'Campos inválidos',
+					modal: true,
+					resizable:false,
+					draggable: false,
+					open: function(event, ui) {
+						$('.ui-dialog-titlebar-close', ui.dialog).hide();
+					},
+					buttons: {
+						ok: function () {
+							$(this).dialog("destroy");
+						}
+					}
+				});
+			}
 		}
 	});
 

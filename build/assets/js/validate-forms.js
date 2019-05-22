@@ -13,7 +13,9 @@ function validateForms(form, options) {
 	var alphanum = /^[a-z0-9]+$/i;
 	var userPassword = /^[\w!@\*\-\?¡¿+\/.,#]+$/;
 	var numeric = /^[0-9]+$/;
-	var alphabetical = /^[a-z]$/i;
+	var alphabetical = /^[a-z]+$/i;
+	var text = /^['a-z0-9ñáéíóú ,.:()']+$/i;
+	var usdAmount = /^[0-9]+(\.[0-9]*)?$/;
 	var fiscalReg = {
 		'bp': /^(00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23|24)+(6|9)[\d]{5,6}[\d]{3,4}$/,
 		'co': /^([0-9]{9,17})/,
@@ -24,6 +26,10 @@ function validateForms(form, options) {
 	var date = {
 		dmy: /^(0?[1-9]|[12][0-9]|3[01])\/(0?[1-9]|1[012])\/[0-9]{4}$/,
 		my: /^(0?[1-9]|1[012])\/[0-9]{4}$/,
+	};
+	var amount = {
+		'Ec-bp': usdAmount,
+		'bp': usdAmount
 	};
 	var fiscalRegMsg = {
 		'bp': 'RUC',
@@ -89,7 +95,11 @@ function validateForms(form, options) {
 			"token-code": {pattern: alphanum},
 			"dias": {pattern: numeric},
 			"batch": {pattern: numeric},
-			"ca": {pattern: alphabetical}
+			"ca": {pattern: alphabetical},
+			"amount": {pattern: amount[validCountry]},
+			"text": {pattern: text},
+			"type": {pattern: alphabetical},
+			"account": {pattern: numeric}
 		},
 		messages: {
 			"user-name": "Debe indicar su nombre de usuario",
