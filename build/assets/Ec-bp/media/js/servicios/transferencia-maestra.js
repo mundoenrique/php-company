@@ -69,7 +69,7 @@ $(function() {
 		$(this).find($('#amount').removeAttr('style'));
 		$(this).find($('#description').removeAttr('style'));
 		var RE = /^\d*\.?\d*$/,
-				descRegExp = /^[a-záéíóúü .,():0-9]+$/i,
+				descRegExp = /^['a-z0-9ñáéíóú ,.:()']+$/i,
 				camposValid = '<div id="validar">',
 				validInput = true,
 				amount = $('#amount'),
@@ -184,8 +184,7 @@ $(function() {
 										dataSend.codeToken = codeToken;
 										if (codeToken != '') {
 											var form = $(this).find('form');
-											validateForms(form, {handleMsg: true});
-											console.log(form);
+											validateForms(form);
 											if(form.valid()) {
 												$("#token-code").val('');
 												$(this).dialog('destroy');
@@ -233,7 +232,6 @@ $(function() {
 												}
 											})
 										} else {
-											console.log('código inválido');
 											$(this).find($('#token-code').css('border-color', '#cd0a0a'));
 											$(this).find($('#msg')).text('Debe ingresar el código de seguridad enviado a su correo');
 										}
@@ -372,7 +370,7 @@ $(function() {
 
 		if ($('#clave').val() != '' && serv_var.noTarjetas != "") {
 			var form = $(this).closest('form');
-			validateForms(form, {handleMsg: false});
+			validateForms(form);
 			if (form.valid()) {
 				if (calcularConsulta()) {
 					llamarWS($('#clave').val(), baseURL + api + isoPais + '/servicios/transferencia-maestra/consultar', '30', 'Consultando...');
@@ -388,7 +386,7 @@ $(function() {
 	$('#abonar-tjta').on('click', function() {
 		if ($('#clave').val() != '' && calcularTrans('20')) {
 			var form = $(this).closest('form');
-			validateForms(form, {handleMsg: false});
+			validateForms(form);
 			if (form.valid())
 				llamarWS($('#clave').val(), baseURL + api + isoPais + '/servicios/transferencia-maestra/abonar', '20', 'Abonando...');
 			else
@@ -402,7 +400,7 @@ $(function() {
 	$('#cargo-tjta').on('click', function() {
 		if ($('#clave').val() != '' && calcularTrans('40')) {
 			var form = $(this).closest('form');
-			validateForms(form, {handleMsg: false});
+			validateForms(form);
 			if (form.valid())
 				llamarWS($('#clave').val(), baseURL + api + isoPais + '/servicios/transferencia-maestra/cargar', '40', 'Cargando...');
 			else
@@ -564,7 +562,6 @@ function buscar(pgSgt) {
 // CARGAR-MOSTRAR TARJETAS OBTENIDAS DE LA PETICION DE BÚSQUEDA
 
 function cargarResultado(data) {
-	console.log(data)
 
 	if (serv_var.busk) {
 		serv_var.busk = false;
@@ -651,7 +648,6 @@ function paginar() {
 
 // SUMAR LOS MONTOS INGRESADOS Y VALIDAR MONTO MAX. Y MIN.
 function calcularTrans(operacion) {
-	console.log(operacion)
 	var sum = 0,
 		comision = 0,
 		trans;
