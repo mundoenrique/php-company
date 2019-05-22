@@ -33,19 +33,24 @@ $(function () { // Document ready
 
 						if ($("#tipoLote").val() != "") {
 							$("#cargaLote").replaceWith('<h3 id="cargando">Cargando...</h3>');
-
 							var ceo_cook = decodeURIComponent(
 								document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 							);
-
-							dat.formData = {
-								'data-tipoLote': $("#tipoLote").val(),
-								'data-formatolote': $("#tipoLote option:selected").attr('rel'),
-								ceo_name: ceo_cook
+							var paquete = {
+								data_tipoLote: $("#tipoLote").val(),
+								data_formatolote: $("#tipoLote option:selected").attr('rel')
 							};
-							dat.submit(function (result, textStatus, jqXHR) {
-
+							var dataRequest = JSON.stringify(paquete)
+							dataRequest  = CryptoJS.AES.encrypt(dataRequest , ceo_cook, {format: CryptoJSAesJson}).toString();
+							dat.formData = {
+								request: dataRequest,
+								ceo_name: ceo_cook,
+								plot: btoa(ceo_cook)
+							}
+							dat.submit(function (response, textStatus, jqXHR) {
+								result = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 								if (result) {
+
 									result = $.parseJSON(result);
 
 									if (!result.ERROR) {
@@ -119,9 +124,9 @@ $(function () { // Document ready
 
 	// Refrescar lote cada 10 segundos
 
-	self.setInterval(function () {
+	/*self.setInterval(function () {
 		actualizarLote()
-	}, 10000);
+	}, 10000);*/
 	var datatable;
 
 	function actualizarLote() {
@@ -291,8 +296,8 @@ $(function () { // Document ready
 							}
 						});
 						var ceo_cook = decodeURIComponent(
+							);
 							document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-						);
 						var dataRequest = JSON.stringify ({
 							data_idTicket: ticket,
 							data_idLote: lote,

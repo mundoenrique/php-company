@@ -43,7 +43,7 @@ $(function(){
 					info: info,
 					idTipoLote: idTipoLote
 					})
-					console.log(dataRequest)
+
 					dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
           $.post(baseURL+isoPais+'/lotes/confirmacion/confirmar',
 					{request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook) })

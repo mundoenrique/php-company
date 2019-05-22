@@ -1,17 +1,17 @@
-$(function(){
+$(function () {
 
 	var empty = $('#empty').val()
 	if (empty != 'nonEmpty') {
 		$("<div><h3>Existe uno más lotes sin retenciones asociadas</h3><h5>" + empty + "</h5></div>").dialog({
-			title:"Retenciones",
-			modal:true,
-			resizable:false,
-			close: function(){
+			title: "Retenciones",
+			modal: true,
+			resizable: false,
+			close: function () {
 				$(this).dialog('destroy');
 				$('#confirmarPreOSL').show();
 				$('#cancelar-OS').show();
 			},
-			buttons:{
+			buttons: {
 				continuar: function () {
 					$(this).dialog('destroy');
 					$('#confirmarPreOSL').show();
@@ -19,7 +19,7 @@ $(function(){
 				}
 			}
 		});
-	} else{
+	} else {
 		$('#confirmarPreOSL').show();
 		$('#cancelar-OS').show();
 	}
@@ -32,34 +32,49 @@ $(function(){
 
 	// BOTON CONFIRMAR -- LLAMA ORDEN DE SERVICIO
 
-	$("#confirmarPreOSL").on("click",function(){
+	$("#confirmarPreOSL").on("click", function () {
 		var l = $("#tempIdOrdenL").val();
 		var lnf = $("#tempIdOrdenLNF").val();
 
-		$aux = $('#loading').dialog({title:'Confirmar cálculo orden de servicio',close: function(){$(this).dialog('close');}, modal: true, resizable:false});
+		$aux = $('#loading').dialog({
+			title: 'Confirmar cálculo orden de servicio',
+			close: function () {
+				$(this).dialog('close');
+			},
+			modal: true,
+			resizable: false
+		});
 		var ceo_cook = decodeURIComponent(
 			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 		);
-		$.post(baseURL+api+isoPais+"/lotes/confirmarPreOSL", { "tempIdOrdenL": l, "tempIdOrdenLNF": lnf, ceo_name: ceo_cook})
-			.done(function(data) {
+		var dataRequest = JSON.stringify({
+			tempIdOrdenL: l,
+			tempIdOrdenLNF: lnf
+		})
+		$.post(baseURL + api + isoPais + "/lotes/confirmarPreOSL", {
+			request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)
+			})
+			.done(function (response) {
+				data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 				$aux.dialog('destroy');
 
-				if(!data.ERROR){
-					if(data.moduloOS){
-						$("#data-confirm").attr('value',data.ordenes);
-						notificacion("Confirmar cálculo orden de servicio","<h3>Proceso exitoso</h3>","form#toOS");
-					}else{
-						notificacion("Confirmar cálculo orden de servicio","<h3>Proceso exitoso</h3><h5>No tiene permitido gestionar ordenes de servicio.</h5>","#viewAutorizar");
+				if (!data.ERROR) {
+					if (data.moduloOS) {
+						$("#data-confirm").attr('value', data.ordenes);
+						notificacion("Confirmar cálculo orden de servicio", "<h3>Proceso exitoso</h3>", "form#toOS");
+					} else {
+						notificacion("Confirmar cálculo orden de servicio", "<h3>Proceso exitoso</h3><h5>No tiene permitido gestionar ordenes de servicio.</h5>", "#viewAutorizar");
 					}
 
-				}else{
+				} else {
 
-					if(data.ERROR=='-29'){
-						alert('Usuario actualmente desconectado'); location.reload();
-					}else if(data.ERROR=='-56'){
-						notificacion("Error de facturación",data.msg,null);
-					}else{
-						notificacion("Confirmar cálculo orden de servicio",data.ERROR,null);
+					if (data.ERROR == '-29') {
+						alert('Usuario actualmente desconectado');
+						location.reload();
+					} else if (data.ERROR == '-56') {
+						notificacion("Error de facturación", data.msg, null);
+					} else {
+						notificacion("Confirmar cálculo orden de servicio", data.ERROR, null);
 					}
 					//notificacion("Confirmar cálculo orden de servicio",data.ERROR,null);
 				}
@@ -71,28 +86,28 @@ $(function(){
 
 	// MOSTRAR/OCULTAR LOTES SEGUN OS
 
-	$("#tabla-datos-general").on("click","#ver_lotes", function(){
+	$("#tabla-datos-general").on("click", "#ver_lotes", function () {
 
 		var OS = $(this).parents("tr").attr('id');
-		var $lotes = $("#tabla-datos-general").find("."+OS);
+		var $lotes = $("#tabla-datos-general").find("." + OS);
 
 		$lotes.is(":visible") ? $lotes.fadeOut("slow") : $lotes.fadeIn("slow");
-		$('.OSinfo').not("."+OS).hide();
+		$('.OSinfo').not("." + OS).hide();
 	});
 
-	$("#tabla-datos-general").on("click",".viewLo", function(){
+	$("#tabla-datos-general").on("click", ".viewLo", function () {
 
 		var idLote = $(this).attr('id');
 
-		$('form#detalle_lote').append('<input type="hidden" name="data-lote" value="'+idLote+'" />');
+		$('form#detalle_lote').append('<input type="hidden" name="data-lote" value="' + idLote + '" />');
 		$("#detalle_lote").submit();
 
 	});
 
 
-	function notificacion(titulo, mensaje, sitio){
+	function notificacion(titulo, mensaje, sitio) {
 
-		var canvas = "<div>"+mensaje+"</div>";
+		var canvas = "<div>" + mensaje + "</div>";
 
 		$(canvas).dialog({
 			title: titulo,
@@ -100,16 +115,16 @@ $(function(){
 			maxWidth: 700,
 			maxHeight: 300,
 			bgiframe: true,
-			close: function(){
+			close: function () {
 				$(this).dialog("destroy");
-				if(sitio){
+				if (sitio) {
 					$(sitio).submit();
 				}
 			},
 			buttons: {
-				OK: function(){
+				OK: function () {
 					$(this).dialog("destroy");
-					if(sitio){
+					if (sitio) {
 						$(sitio).submit();
 					}
 				}
@@ -117,7 +132,7 @@ $(function(){
 		});
 	}
 
-	$('#cancelar-OS').on('click', function() {
+	$('#cancelar-OS').on('click', function () {
 		$('form#viewAutorizar').append($('#tempIdOrdenL'));
 		$("#viewAutorizar").submit();
 
@@ -152,8 +167,8 @@ $(function(){
 	// 	return tabla;
 	// }
 
-//	paginar($('#tabla-datos-general'));
-//	paginar($('#tablelotesNF'));
+	//	paginar($('#tabla-datos-general'));
+	//	paginar($('#tablelotesNF'));
 
 
 }); // fin document ready
