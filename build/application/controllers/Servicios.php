@@ -31,8 +31,8 @@ class Servicios extends CI_Controller {
 
 		if($paisS==$urlCountry && $logged_in && $moduloAct!==false) {
 			$FooterCustomInsertJS = ["jquery-3.4.0.min.js", "jquery-ui-1.12.1.min.js","jquery.balloon.min.js",
-			"jquery-md5.js","jquery.paginate.js","header.js","dashboard/widget-empresa.js",
-			"servicios/transferencia-maestra.js","aes.min.js","aes-json-format.min.js","routes.js"];
+			"jquery-md5.js","jquery.paginate.js","aes.min.js","aes-json-format.min.js","header.js","dashboard/widget-empresa.js",
+			"servicios/transferencia-maestra.js","routes.js"];
 			$FooterCustomJS = "";
 			$titlePage = "Transferencia maestra";
 			$programa = $this->session->userdata('nombreProductoS').' / '. $this->session->userdata('marcaProductoS');
