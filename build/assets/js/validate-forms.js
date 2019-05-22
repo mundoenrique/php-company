@@ -13,6 +13,7 @@ function validateForms(form, options) {
 	var alphanum = /^[a-z0-9]+$/i;
 	var userPassword = /^[\w!@\*\-\?¡¿+\/.,#]+$/;
 	var numeric = /^[0-9]+$/;
+	var alphabetical = /^[a-z]$/i;
 	var fiscalReg = {
 		'bp': /^(00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23|24)+(6|9)[\d]{5,6}[\d]{3,4}$/,
 		'co': /^([0-9]{9,17})/,
@@ -87,7 +88,8 @@ function validateForms(form, options) {
 			"Ingrese ID": {pattern: numeric},
 			"token-code": {pattern: alphanum},
 			"dias": {pattern: numeric},
-			"batch": {pattern: numeric}
+			"batch": {pattern: numeric},
+			"ca": {pattern: alphabetical}
 		},
 		messages: {
 			"user-name": "Debe indicar su nombre de usuario",

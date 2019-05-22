@@ -43,7 +43,9 @@ class Reportes extends CI_Controller {
 
 					$nombreCompleto = $this->session->userdata('nombreCompleto');
 					$lastSessionD = $this->session->userdata('lastSession');
-					$FooterCustomInsertJS=["jquery-3.4.0.min.js", "jquery-ui-1.12.1.min.js","reportes/cuentaconcentradora.js","jquery.paginate.js","header.js","jquery.balloon.min.js","highcharts.js","exporting.js","routes.js"];
+					$jsRte = '../../../js/';
+					$thirdsJsRte = '../../../js/third_party/';
+					$FooterCustomInsertJS=["jquery-3.4.0.min.js", "jquery-ui-1.12.1.min.js","reportes/cuentaconcentradora.js","jquery.paginate.js","header.js","jquery.balloon.min.js","highcharts.js","exporting.js","routes.js",$thirdsJsRte."jquery.validate.min.js",$jsRte."validate-forms.js",$thirdsJsRte."additional-methods.min.js"];
 					$FooterCustomJS="";
 					$titlePage="Conexión Empresas Online - Reportes";
 
