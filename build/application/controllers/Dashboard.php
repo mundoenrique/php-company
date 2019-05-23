@@ -816,7 +816,7 @@ class Dashboard extends CI_Controller {
 		if($response){
 			log_message('info', 'dash_empr_filt '.$response->rc);
 			if($response->rc==0){
-				return $this->cryptography->encrypt($response);
+				return $response;
 			}else{
 				if($response->rc==-61 || $response->rc==-29){
 					$this->session->sess_destroy();
