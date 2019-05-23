@@ -107,23 +107,37 @@ class Reportes extends CI_Controller {
 							}
 							else
 							{
-									$paginaActual=$this->input->post('paginaActual');
-									$empresa = $this->input->post('empresa');
-									$fechaInicial = $this->input->post('fechaInicial');
-									$fechaFin = $this->input->post('fechaFin');
+								$dataRequest = json_decode(
+									$this->security->xss_clean(
+										strip_tags(
+											$this->cryptography->decrypt(
+												base64_decode($this->input->get_post('plot')),
+												utf8_encode($this->input->get_post('request'))
+										)
+									)
+								)
+							);
+							$paginaActual = $dataRequest->filtro_busq->paginaActual;
+							$empresa = $dataRequest->filtro_busq->empresa;
+							$fechaInicial = $dataRequest->filtro_busq->fechaInicial;
+							$fechaFin = $dataRequest->filtro_busq->fechaFin;
+							$filtroFecha = $dataRequest->filtro_busq->filtroFecha;
+							$tipoNota = $dataRequest->filtro_busq->tipoNota;
+
 									$username = $this->session->userdata('userName');
 									$token = $this->session->userdata('token');
-									$filtroFecha = $this->input->post('filtroFecha');
-
 									$tipoNota = $this->input->post('tipoNota');
 
 									$pruebaTabla = $this->callWSCuentaConcentradora($urlCountry,$token,$username,$empresa,$fechaInicial,$fechaFin,$paginaActual,$filtroFecha,$tipoNota);
+									$pruebaTabla = $this->cryptography->encrypt($pruebaTabla);
 									$this->output->set_content_type('application/json')->set_output(json_encode($pruebaTabla));
 							}
 					}
 			}else{
 					$this->session->sess_destroy();
-					$this->output->set_content_type('application/json')->set_output(json_encode( array('mensaje' => lang('ERROR_(-29)'), "rc"=> "-29")));
+					$responseError = ['ERROR' => lang('ERROR_(-29)'), "rc"=> "-29"];
+					$responseError = $this->cryptography->encrypt($responseError);
+					$this->output->set_content_type('application/json')->set_output(json_encode($responseError));
 			}
 	}
 
@@ -480,12 +494,28 @@ class Reportes extends CI_Controller {
 			$moduloAct = np_hoplite_existeLink($menuP,"REPCON");
 
 			if($paisS==$urlCountry && $logged_in && $moduloAct!==false){
-					$paginaActual=$this->input->post('paginaActual');
-					$empresa = $this->input->post('empresa');
-					$fechaInicial = $this->input->post('fechaInicial');
-					$fechaFin = $this->input->post('fechaFin');
-					$filtroFecha = $this->input->post('filtroFecha');
-					$nomEmpresa = $this->input->post('nomEmpresa');
+				$dataRequest = json_decode(
+						$this->security->xss_clean(
+							strip_tags(
+								$this->cryptography->decrypt(
+							base64_decode($this->input->get_post('plot')),
+							utf8_encode($this->input->get_post('request'))
+						)
+					)
+				)
+			);
+			$paginaActual = $dataRequest->filtro_busq->paginaActual;
+			$empresa = $dataRequest->filtro_busq->empresa;
+			$fechaInicial = $dataRequest->filtro_busq->fechaInicial;
+			$fechaFin = $dataRequest->filtro_busq->fechaFin;
+			$filtroFecha = $dataRequest->filtro_busq->filtroFecha;
+			$nomEmpresa = isset($dataRequest->filtro_busq->nomEmpresa)?$dataRequest->filtro_busq->nomEmpresa :'';
+					// $paginaActual=$this->input->post('paginaActual');
+					// $empresa = $this->input->post('empresa');
+					// $fechaInicial = $this->input->post('fechaInicial');
+					// $fechaFin = $this->input->post('fechaFin');
+					// $filtroFecha = $this->input->post('filtroFecha');
+					// $nomEmpresa = $this->input->post('nomEmpresa');
 
 					$data = array(
 							"pais"=>$urlCountry,
@@ -509,12 +539,16 @@ class Reportes extends CI_Controller {
 					$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
 					$jsonResponse = np_Hoplite_Decrypt($response, 'graficoCuentaConcentradora');
 
+					//$this->cryptography->encrypt($response);
 					$response = json_decode($jsonResponse);
+					// $pruebaTabla = $this->cryptography->encrypt($pruebaTabla);
+					//$response = $this->cryptography->encrypt($jsonResponse);
 
 					if($response){
 							log_message('info','CuentaConcentradora GRAFICO '.$response->rc."/".$response->msg);
 							if($response->rc==0){
-									$this->output->set_content_type('application/json')->set_output(json_encode($response));
+								$response = $this->cryptography->encrypt($response);
+								$this->output->set_content_type('application/json')->set_output(json_encode($response));
 							}else{
 
 									if($response->rc==-61  || $response->rc==-29){
@@ -792,11 +826,12 @@ class Reportes extends CI_Controller {
 			if($paisS==$urlCountry && $logged_in && $moduloAct!==false){
 					$nombreCompleto = $this->session->userdata('nombreCompleto');
 					$lastSessionD = $this->session->userdata('lastSession');
-					$FooterCustomInsertJS=["jquery-3.4.0.min.js", "jquery-ui-1.12.1.min.js","jquery.dataTables.min.js","aes.min.js","aes-json-format.min.js","reportes/tarjetasemitidas.js","kendo.dataviz.min.js","aes.min.js","aes-json-format.min.js","header.js","jquery.balloon.min.js","routes.js"];
 					$jsRte = '../../../js/';
+					$thirdsJsRte = '../../../js/third_party/';
+					$FooterCustomInsertJS=["jquery-3.4.0.min.js", "jquery-ui-1.12.1.min.js","jquery.dataTables.min.js","aes.min.js","aes-json-format.min.js","reportes/tarjetasemitidas.js","kendo.dataviz.min.js","header.js","jquery.balloon.min.js","routes.js",$thirdsJsRte."jquery.validate.min.js",$jsRte."validate-forms.js",$thirdsJsRte."additional-methods.min.js"];
 					$FooterCustomJS="";
 					$titlePage="Conexión Empresas Online - Reportes";
-
+					$menuHeader = $this->parser->parse('widgets/widget-menuHeader',array(),TRUE);
 					$menuFooter = $this->parser->parse('widgets/widget-menuFooter',array(),TRUE);
 					$header = $this->parser->parse('layouts/layout-header',array('bodyclass'=>'','menuHeaderActive'=>TRUE,'menuHeaderMainActive'=>TRUE,'menuHeader'=>$menuHeader,'titlePage'=>$titlePage),TRUE);
 					$footer = $this->parser->parse('layouts/layout-footer',array('menuFooterActive'=>TRUE,'menuFooter'=>$menuFooter,'FooterCustomInsertJSActive'=>TRUE,'FooterCustomInsertJS'=>$FooterCustomInsertJS,'FooterCustomJSActive'=>TRUE,'FooterCustomJS'=>$FooterCustomJS),TRUE);
