@@ -3,7 +3,7 @@ $(function() {
 		e.preventDefault();
 		var form = $('#form-pass-recovery');
 		var recoverBtn = $(this);
-		validateForms(form);
+		validateForms(form, {handleMsg: true});
 		if(form.valid()) {
 			var textBtn = recoverBtn.text();
 			var recoverData = {

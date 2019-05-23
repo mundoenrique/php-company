@@ -5030,3 +5030,9 @@ a {
 .system-msg {
 	text-align: justify;
 }
+
+.general-form-msg {
+	text-align: center;
+	color: #e8446c;
+	font-size: 12px;
+}
