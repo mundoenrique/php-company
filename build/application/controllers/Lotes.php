@@ -2061,7 +2061,7 @@ class Lotes extends CI_Controller {
 
 			$nombreCompleto = $this->session->userdata('nombreCompleto');
 			$lastSessionD = $this->session->userdata('lastSession');
-			$FooterCustomInsertJS=["jquery-3.4.0.min.js", "jquery-ui-1.12.1.min.js","jquery.balloon.min.js","dashboard/widget-empresa.js","header.js","jquery.dataTables.min.js" ,"lotes/lotes-orden_servicio.js","routes.js"];
+			$FooterCustomInsertJS=["jquery-3.4.0.min.js", "jquery-ui-1.12.1.min.js","jquery.balloon.min.js","dashboard/widget-empresa.js","aes.min.js","aes-json-format.min.js","header.js","jquery.dataTables.min.js" ,"lotes/lotes-orden_servicio.js","routes.js"];
 			$FooterCustomJS="";
 			$titlePage="Conexión Empresas Online - Lotes";
 
@@ -2387,7 +2387,7 @@ class Lotes extends CI_Controller {
 		$jsonResponse = np_Hoplite_Decrypt($response);
 		$response = json_decode($jsonResponse);
 
-		log_message("DEBUG", "generarOS =====>>>>>> ".json_encode($response));
+		//log_message("DEBUG", "generarOS =====>>>>>> ".json_encode($response));
 		if(isset($response->rc)) {
 			switch($response->rc) {
 				case 0:
@@ -2450,7 +2450,7 @@ class Lotes extends CI_Controller {
 			)
 		);
 		$tempIdOrdenL = $dataRequest->tempIdOrdenL;
-		$tempIdOrdenLNF = $dataRequest->tempIdOrdenLNF;
+		$tempIdOrdenLNF = isset($dataRequest->tempIdOrdenLNF) ? $dataRequest->tempIdOrdenLNF : '';
 
 		$token = $this->session->userdata('token');
 		$username = $this->session->userdata('userName');
@@ -2470,12 +2470,14 @@ class Lotes extends CI_Controller {
 				$t = json_encode(array("ERROR"=>lang('SIN_FUNCION')));
 			}
 			$t = $this->cryptography->encrypt($t);
-			$this->output->set_content_type('application/json')->set_output($t);
+			$this->output->set_content_type('application/json')->set_output(json_encode($t));
 		}elseif($paisS!=$urlCountry&& $paisS!=''){
 			$this->session->sess_destroy();
 			redirect($urlCountry.'/login');
 		}elseif($this->input->is_ajax_request()){
-			$this->output->set_content_type('')->set_output(json_encode( array('ERROR' => '-29' )));
+			$responseError = ['ERROR' => lang('ERROR_(-29)'), "rc"=> "-29"];
+			$responseError = $this->cryptography->encrypt($responseError);
+			$this->output->set_content_type('')->set_output(json_encode($responseError));
 		}else{
 			redirect($urlCountry.'/login');
 		}
