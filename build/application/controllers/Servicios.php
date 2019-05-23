@@ -30,9 +30,12 @@ class Servicios extends CI_Controller {
 		$paisS = $this->session->userdata('pais');
 
 		if($paisS==$urlCountry && $logged_in && $moduloAct!==false) {
+			$jsRte = '../../../js/';
+			$thirdsJsRte = '../../../js/third_party/';
 			$FooterCustomInsertJS = ["jquery-3.4.0.min.js", "jquery-ui-1.12.1.min.js","jquery.balloon.min.js",
 			"jquery-md5.js","jquery.paginate.js","header.js","dashboard/widget-empresa.js",
-			"servicios/transferencia-maestra.js","routes.js"];
+			"servicios/transferencia-maestra.js","routes.js",$thirdsJsRte."jquery.validate.min.js",$jsRte."validate-forms.js",
+			$thirdsJsRte."additional-methods.min.js"];
 			$FooterCustomJS = "";
 			$titlePage = "Transferencia maestra";
 			$programa = $this->session->userdata('nombreProductoS').' / '. $this->session->userdata('marcaProductoS');
@@ -906,11 +909,11 @@ class Servicios extends CI_Controller {
 		);
 		$data = json_encode($data,JSON_UNESCAPED_UNICODE);
 		log_message('info',"carga actualizarDatos ".$data);
-		$dataEncry = np_Hoplite_Encryption($data);
+		$dataEncry = np_Hoplite_Encryption($data, 'callWScargarArchivo');
 		$data = array('bean'=> $dataEncry, 'pais'=> $urlCountry );
 		$data = json_encode($data);
 		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
-		$jsonResponse = np_Hoplite_Decrypt($response);
+		$jsonResponse = np_Hoplite_Decrypt($response, 'callWScargarArchivo');
 		$response = json_decode($jsonResponse);
 
 		if($response) {
@@ -1024,11 +1027,11 @@ class Servicios extends CI_Controller {
 			"pais" => $urlCountry
 		);
 		$data = json_encode($data, JSON_UNESCAPED_UNICODE);
-		$dataEncry = np_Hoplite_Encryption($data);
+		$dataEncry = np_Hoplite_Encryption($data, 'callWSbuscarDatos');
 		$data = array('bean'=> $dataEncry, 'pais'=> $urlCountry );
 		$data = json_encode($data);
 		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
-		$jsonResponse = np_Hoplite_Decrypt($response);
+		$jsonResponse = np_Hoplite_Decrypt($response, 'callWSbuscarDatos');
 		$response = json_decode($jsonResponse);
 
 		if($response) {
@@ -1109,11 +1112,11 @@ class Servicios extends CI_Controller {
 				"token"=> $token
 			);
 			$data = json_encode($data);
-			$dataEncry = np_Hoplite_Encryption($data);
+			$dataEncry = np_Hoplite_Encryption($data, 'downXLS_AD');
 			$data = array('bean'=> $dataEncry, 'pais'=> $urlCountry);
 			$data = json_encode($data);
 			$response = np_Hoplite_GetWS('eolwebInterfaceWS', $data);
-			$jsonResponse = np_Hoplite_Decrypt($response);
+			$jsonResponse = np_Hoplite_Decrypt($response, 'downXLS_AD');
 			$response =  json_decode($jsonResponse);
 
 			if($response) {
@@ -1308,12 +1311,12 @@ class Servicios extends CI_Controller {
 		];
 
 		$request = json_encode($data, JSON_UNESCAPED_UNICODE);
-		$dataEncry = np_Hoplite_Encryption($request, 'callWsRecargaTM solicitar TOKEN');
+		$dataEncry = np_Hoplite_Encryption($request, 'callWsRecargaTM');
 		$data = ['bean' => $dataEncry, 'pais' =>$urlCountry];
 
 		$request = json_encode($data);
 		$encrypResponse = np_Hoplite_GetWS('eolwebInterfaceWS', $request);
-		$jsonResponse = np_Hoplite_Decrypt($encrypResponse, 'callWsRecargaTM solicitar TOKEN');
+		$jsonResponse = np_Hoplite_Decrypt($encrypResponse, 'callWsRecargaTM');
 		$response =  json_decode($jsonResponse);
 
 		//simula respuesta de WS

@@ -58,11 +58,12 @@ $(document).ready(function() {
 		$(item).click(function(){
 			if($(this).is(":checked")){
 				if($(this).val()!="0"){
-					$( "#repUsuario_fechaInicial" ).attr("disabled","true");
-					$( "#repUsuario_fechaFinal" ).attr("disabled","true");
+					$( "#repUsuario_fechaInicial" ).attr("disabled","true").addClass('ignore');
+					$( "#repUsuario_fechaFinal" ).attr("disabled","true").addClass('ignore');
+					$(this).removeClass('ignore');
 				}else{
-					$( "#repUsuario_fechaInicial" ).removeAttr("disabled");
-					$( "#repUsuario_fechaFinal" ).removeAttr("disabled");
+					$( "#repUsuario_fechaInicial" ).removeAttr("disabled").removeClass('ignore');
+					$( "#repUsuario_fechaFinal" ).removeAttr("disabled").removeClass('ignore');
 				}
 			}
 		});
@@ -330,25 +331,31 @@ $(document).ready(function() {
 		if(evBuscar){
 			if(validar_filtro_busqueda("lotes-2")){
 
-				filtro_busq.empresa=$("#repUsuario_empresa").val();
-				filtro_busq.fechaInicial=$("#repUsuario_fechaInicial").val();
-				filtro_busq.fechaFin=$("#repUsuario_fechaFinal").val();
-				filtro_busq.filtroFecha=$("input[name='radio']:checked").val();
+				var form = $('#form-criterio-busqueda');
+				validateForms(form);
+				if (form.valid()) {
+					filtro_busq.empresa=$("#repUsuario_empresa").val();
+					filtro_busq.fechaInicial=$("#repUsuario_fechaInicial").val();
+					filtro_busq.fechaFin=$("#repUsuario_fechaFinal").val();
+					filtro_busq.filtroFecha=$("input[name='radio']:checked").val();
 
-				filtro_busq.tipoNota="";
-				if($("#cargo").is(":checked"))
-				{filtro_busq.tipoNota=$("#cargo").val()}
-				else if($("#abono").is(":checked"))
-				{filtro_busq.tipoNota=$("#abono").val()}
-				if($("#abono").is(":checked") && $("#cargo").is(":checked"))
-				{filtro_busq.tipoNota=""}
+					filtro_busq.tipoNota="";
+					if($("#cargo").is(":checked"))
+					{filtro_busq.tipoNota=$("#cargo").val()}
+					else if($("#abono").is(":checked"))
+					{filtro_busq.tipoNota=$("#abono").val()}
+					if($("#abono").is(":checked") && $("#cargo").is(":checked"))
+					{filtro_busq.tipoNota=""}
 
 
 
-				filtro_busq.acnomcia = $('option:selected', "#repUsuario_empresa").attr("acnomcia");
-				filtro_busq.acrif = $('option:selected', "#repUsuario_empresa").attr("value");
+					filtro_busq.acnomcia = $('option:selected', "#repUsuario_empresa").attr("acnomcia");
+					filtro_busq.acrif = $('option:selected', "#repUsuario_empresa").attr("value");
 
-				WS(filtro_busq);
+					WS(filtro_busq);
+				} else {
+					showErrMsg('Verifique los datos ingresados e intente nuevamente');
+				}
 			}
 
 		}else{

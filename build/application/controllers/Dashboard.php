@@ -59,7 +59,7 @@ class Dashboard extends CI_Controller {
 			//INSTANCIA MENU FOOTER
 			$menuFooter = $this->parser->parse('widgets/widget-menuFooter',array(),TRUE);
 			$header = $this->parser->parse('layouts/layout-header',array('bodyclass'=>'full-width','menuHeaderActive'=>TRUE,'menuHeaderMainActive'=>TRUE,'menuHeader'=>$menuHeader,'titlePage'=>$titlePage),TRUE);
-			$FooterCustomInsertJS=["jquery-3.4.0.min.js", "jquery-ui-1.12.1.min.js","jquery.balloon.min.js","jquery.paginate.js","jquery.isotope.min.js","dashboard/dashboard.js","header.js","aes.min.js","aes-json-format.min.js","routes.js"];
+			$FooterCustomInsertJS=["jquery-3.4.0.min.js", "jquery-ui-1.12.1.min.js","jquery.balloon.min.js","jquery.paginate.js","jquery.isotope.min.js","aes.min.js","aes-json-format.min.js","dashboard/dashboard.js","header.js","routes.js"];
 			$footer = $this->parser->parse('layouts/layout-footer',array('menuFooterActive'=>TRUE,'menuFooter'=>$menuFooter,'FooterCustomInsertJSActive'=>TRUE,'FooterCustomInsertJS'=>$FooterCustomInsertJS,'FooterCustomJSActive'=>TRUE,'FooterCustomJS'=>$FooterCustomJS),TRUE);
 
 			$content = $this->parser->parse('dashboard/content-dashboard',array('titulo'=>$nombreCompleto,'lastSession'=>$lastSessionD),TRUE);
@@ -165,11 +165,11 @@ class Dashboard extends CI_Controller {
 		);
 
 		$data = json_encode($data,JSON_UNESCAPED_UNICODE);
-		$dataEncry = np_Hoplite_Encryption($data);
+		$dataEncry = np_Hoplite_Encryption($data, 'callWSListaEmpresasUsuario');
 		$data = array('bean' => $dataEncry, 'pais' =>$pais );
 		$data = json_encode($data);
 		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
-		$jsonResponse = np_Hoplite_Decrypt($response);
+		$jsonResponse = np_Hoplite_Decrypt($response, 'callWSListaEmpresasUsuario');
 		$response = json_decode($jsonResponse);
 
 		if($response){
@@ -220,22 +220,30 @@ class Dashboard extends CI_Controller {
 		if($paisS==$urlCountry && $logged_in){
 
 			if($this->input->post('request')){
-				$paginar= $this->input->post('data-paginar');
-				$tamanoPagina= $this->input->post('data-tamanoPagina');
-				$paginaActual= $this->input->post('data-paginaActual');
-				$filtroEmpresas= $this->input->post('data-filtroEmpresas');
-				$rTest = $this->callWSListaEmpresas($paginar,$paginaActual,$tamanoPagina,$urlCountry); // solicitud sin paginar (obtiene todas las empresas), el filtrado se realiza desde js
 
-				//$rTest = $this->callWSListaEmpresasPaginar($paginar,$tamanoPagina,$paginaActual,$filtroEmpresas,$urlCountry); // solicitud paginada y con filtro de búsqueda
-
-				$lista=$rTest;
+				$dataRequest = json_decode(
+					$this->security->xss_clean(
+						strip_tags(
+							$this->cryptography->decrypt(
+								base64_decode($this->input->get_post('plot')),
+								utf8_encode($this->input->get_post('request'))
+							)
+						)
+					)
+				);
+				$paginar = $dataRequest->data_paginar;
+				$tamanoPagina = $dataRequest->data_tamanoPagina;
+				$paginaActual = $dataRequest->data_paginaActual;
+				$filtroEmpresas = $dataRequest->data_filtroEmpresas;
+				$lista = $this->callWSListaEmpresas($paginar,$paginaActual,$tamanoPagina,$urlCountry);
 
 			}else{
+				log_message('DEBUG', 'SIN PAGINAR-------------------------------');
 				$paginar=FALSE;
 				$lista = $this->callWSListaEmpresasPaginar($paginar,$tamanoPagina=null,$paginaActual=null,$filtroEmpresas=null,$urlCountry);
 			}
-
-			$this->output->set_content_type('application/json')->set_output(json_encode($lista,JSON_UNESCAPED_UNICODE));
+			$response = $this->cryptography->encrypt($lista);
+			$this->output->set_content_type('application/json')->set_output(json_encode($response,JSON_UNESCAPED_UNICODE));
 
 		}elseif($paisS!=$urlCountry && $paisS!=""){
 			$this->session->sess_destroy();
@@ -276,6 +284,17 @@ class Dashboard extends CI_Controller {
 
 				//$acrifPost = $this->input->post('acrif');
 
+				$dataRequest = json_decode(
+					$this->security->xss_clean(
+						strip_tags(
+							$this->cryptography->decrypt(
+								base64_decode($this->input->get_post('plot')),
+								utf8_encode($this->input->get_post('request'))
+							)
+						)
+					)
+				);
+				$acrifPost = $dataRequest->acrif;
 				$responseMenuEmpresas =$this->callWSMenuEmpresa($acrifPost,$urlCountry,$ctipo='false');
 				if(array_key_exists('ERROR', $responseMenuEmpresas)){
 					$productos = $responseMenuEmpresas;
@@ -355,20 +374,31 @@ class Dashboard extends CI_Controller {
 		if($paisS==$urlCountry && $logged_in){
 			//VALIDAMOS QUE RECIBA EL POST
 			if($this->input->is_ajax_request()){
-				$llamada = $this->input->post('llamada');
+				$dataRequest = json_decode(
+					$this->security->xss_clean(
+						strip_tags(
+							$this->cryptography->decrypt(
+								base64_decode($this->input->get_post('plot')),
+								utf8_encode($this->input->get_post('request'))
+							)
+						)
+					)
+				);
+				$llamada = $dataRequest->llamada;
+				$acrifPost = $dataRequest->data_acrif;
+				$acnomciaPost = $dataRequest->data_acnomcia;
+				$acrazonsocialPost = $dataRequest->data_acrazonsocial;
+				$acdescPost = $dataRequest->data_acdesc;
+				$accodciaPost = $dataRequest->data_accodcia;
+				$accodgrupoe = $dataRequest->data_accodgrupoe;
+
+				$_POST['data-acrif'] = $acrifPost;
+				$_POST['data-acnomcia'] = $acnomciaPost;
+				$_POST['data-acrazonsocial'] =$acrazonsocialPost;
+				$_POST['data-accodcia'] = $acdescPost;
 
 				if($llamada=='soloEmpresa'){
-					$acrifPost = $this->input->post('data-acrif');
-					$acnomciaPost = $this->input->post('data-acnomcia');
-					$acrazonsocialPost = $this->input->post('data-acrazonsocial');
-					$acdescPost = $this->input->post('data-acdesc');
-					$accodciaPost = $this->input->post('data-accodcia');
-					$accodgrupoe = $this->input->post('data-accodgrupoe');
 
-					$this->form_validation->set_rules('data-acrif', 'acrif',  'required');
-					$this->form_validation->set_rules('data-acnomcia', 'acnomcia',  'required');
-					$this->form_validation->set_rules('data-acrazonsocial', 'acrazonsocial',  'required');
-					$this->form_validation->set_rules('data-accodcia', 'accodcia',  'required');
 					if ($this->form_validation->run() == FALSE)
 					{
 						$respuesta=0;
@@ -392,21 +422,12 @@ class Dashboard extends CI_Controller {
 					}
 
 				}elseif($llamada=='productos'){
-					$acrifPost = $this->input->post('data-acrif');
-					$acnomciaPost = $this->input->post('data-acnomcia');
-					$acrazonsocialPost = $this->input->post('data-acrazonsocial');
-					$acdescPost = $this->input->post('data-acdesc');
-					$accodciaPost = $this->input->post('data-accodcia');
-					$accodgrupoe = $this->input->post('data-accodgrupoe');
-					$idProductoPost = $this->input->post('data-idproducto');
-					$nomProduc = $this->input->post('data-nomProd');
-					$marcProduc = $this->input->post('data-marcProd');
+					$idProductoPost = $dataRequest->data_idproducto;
+					$nomProduc = $dataRequest->data_nomProd;
+					$marcProduc = $dataRequest->data_marcProd;
 
-					$this->form_validation->set_rules('data-acrif', 'acrif',  'required');
-					$this->form_validation->set_rules('data-acnomcia', 'acnomcia',  'required');
-					$this->form_validation->set_rules('data-acrazonsocial', 'acrazonsocial',  'required');
-					$this->form_validation->set_rules('data-accodcia', 'accodcia',  'required');
-					$this->form_validation->set_rules('data-idproducto', 'idproducto',  'required');
+					$_POST['data-idproducto'] = $idProductoPost;
+					//$this->form_validation->set_rules('data-idproducto', 'idproducto',  'required');
 
 					if ($this->form_validation->run() == FALSE)
 					{
@@ -432,8 +453,8 @@ class Dashboard extends CI_Controller {
 			}else{
 				$respuesta=0;
 			}
-
-			$this->output->set_content_type('application/json')->set_output(json_encode($respuesta,JSON_UNESCAPED_UNICODE));
+			$response = $this->cryptography->encrypt($respuesta);
+			$this->output->set_content_type('application/json')->set_output(json_encode($response,JSON_UNESCAPED_UNICODE));
 		}elseif($paisS!=$urlCountry && $paisS!=""){
 			$this->session->sess_destroy();
 			redirect($urlCountry.'/login');
@@ -511,7 +532,7 @@ class Dashboard extends CI_Controller {
 				$menuFooter = $this->parser->parse('widgets/widget-menuFooter',array(),TRUE);
 
 				$header = $this->parser->parse('layouts/layout-header',array('bodyclass'=>'','menuHeaderActive'=>TRUE,'menuHeaderMainActive'=>TRUE,'menuHeader'=>$menuHeader,'titlePage'=>$titlePage),TRUE);
-				$FooterCustomInsertJS=["jquery-3.4.0.min.js", "jquery-ui-1.12.1.min.js","jquery.isotope.min.js","jquery.balloon.min.js","dashboard/productos.js","header.js","aes.min.js","aes-json-format.min.js","routes.js"];
+				$FooterCustomInsertJS=["jquery-3.4.0.min.js", "jquery-ui-1.12.1.min.js","jquery.isotope.min.js","jquery.balloon.min.js","aes.min.js","aes-json-format.min.js","dashboard/productos.js","header.js","routes.js"];
 				$footer = $this->parser->parse('layouts/layout-footer',array('menuFooterActive'=>TRUE,'menuFooter'=>$menuFooter,'FooterCustomInsertJSActive'=>TRUE,'FooterCustomInsertJS'=>$FooterCustomInsertJS,'FooterCustomJSActive'=>TRUE,'FooterCustomJS'=>$FooterCustomJS),TRUE);
 				$content = $this->parser->parse('dashboard/content-productos',array(
 					'titulo'=>$titulo,
@@ -637,7 +658,7 @@ class Dashboard extends CI_Controller {
 				$titlePage="Conexión Empresas Online - Productos Detalle";
 			}
 
-			$FooterCustomInsertJS=["jquery-3.4.0.min.js", "jquery-ui-1.12.1.min.js","jquery.balloon.min.js","dashboard/widget-empresa.js","header.js","routes.js"];
+			$FooterCustomInsertJS=["jquery-3.4.0.min.js", "jquery-ui-1.12.1.min.js","jquery.balloon.min.js","aes.min.js","aes-json-format.min.js","dashboard/widget-empresa.js","header.js","routes.js"];
 			//INSTANCIA MENU HEADER
 			$menuHeader = $this->parser->parse('widgets/widget-menuHeader',array(),TRUE);
 			//INSTANCIA MENU FOOTER
@@ -706,18 +727,18 @@ class Dashboard extends CI_Controller {
 
 		$data = json_encode($data,JSON_UNESCAPED_UNICODE);
 
-		$dataEncry = np_Hoplite_Encryption($data);
+		$dataEncry = np_Hoplite_Encryption($data, 'callWSListaEmpresas');
 		$data = array('bean' => $dataEncry, 'pais' =>$pais );
 		$data = json_encode($data);
 		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
-		$jsonResponse = np_Hoplite_Decrypt($response);
+		$jsonResponse = np_Hoplite_Decrypt($response, 'callWSListaEmpresas');
 		log_message('INFO', 'RESPONSE LISTA DE EMPRESAS===>>>>'. $jsonResponse);
 		$response = json_decode($jsonResponse);
 
 		if($response){
 			log_message('info','dashb_empr '.$response->rc);
 			if($response->rc==0){
-				return $this->cryptography->encrypt($response);
+				return $response;
 			}else{
 
 				if($response->rc==-61 || $response->rc==-29){
@@ -784,11 +805,11 @@ class Dashboard extends CI_Controller {
 
 		$data = json_encode($data,JSON_UNESCAPED_UNICODE);
 
-		$dataEncry = np_Hoplite_Encryption($data);
+		$dataEncry = np_Hoplite_Encryption($data, 'callWSListaEmpresasPaginar');
 		$data = array('bean' => $dataEncry, 'pais' =>$pais );
 		$data = json_encode($data);
 		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
-		$jsonResponse = np_Hoplite_Decrypt($response);
+		$jsonResponse = np_Hoplite_Decrypt($response, 'callWSListaEmpresasPaginar');
 
 		$response = json_decode($jsonResponse);
 
@@ -851,11 +872,11 @@ class Dashboard extends CI_Controller {
 
 		$data = json_encode($data,JSON_UNESCAPED_UNICODE);
 
-		$dataEncry = np_Hoplite_Encryption($data);
+		$dataEncry = np_Hoplite_Encryption($data, 'callWSMenuEmpresa');
 		$data = array('bean' => $dataEncry, 'pais' =>$pais );
 		$data = json_encode($data);
 		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
-		$jsonResponse = np_Hoplite_Decrypt($response);
+		$jsonResponse = np_Hoplite_Decrypt($response, 'callWSMenuEmpresa');
 		$response = json_decode($jsonResponse);
 
 		if($response){
@@ -921,11 +942,11 @@ class Dashboard extends CI_Controller {
 		);
 
 		$data = json_encode($data,JSON_UNESCAPED_UNICODE);
-		$dataEncry = np_Hoplite_Encryption($data);
+		$dataEncry = np_Hoplite_Encryption($data, 'callWSMenuEmpresaTarjetaHambiente');
 		$data = array('bean' => $dataEncry, 'pais' =>$pais );
 		$data = json_encode($data);
 		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
-		$jsonResponse = np_Hoplite_Decrypt($response);
+		$jsonResponse = np_Hoplite_Decrypt($response, 'callWSMenuEmpresaTarjetaHambiente');
 		$response = json_decode($jsonResponse);
 
 		if($response){
@@ -1008,12 +1029,12 @@ class Dashboard extends CI_Controller {
 		);
 		$data = json_encode($data,JSON_UNESCAPED_UNICODE);
 
-		$dataEncry = np_Hoplite_Encryption($data);
+		$dataEncry = np_Hoplite_Encryption($data, 'callWSMenuPorProducto');
 
 		$data = array('bean' => $dataEncry, 'pais' =>$pais );
 		$data = json_encode($data);
 		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
-		$jsonResponse = np_Hoplite_Decrypt($response);
+		$jsonResponse = np_Hoplite_Decrypt($response, 'callWSMenuPorProducto');
 		$response = json_decode($jsonResponse);
 
 		if($response){
@@ -1063,7 +1084,7 @@ class Dashboard extends CI_Controller {
 			$FooterCustomJS="";
 
 			$titlePage= "Otros programas";
-			$FooterCustomInsertJS=["jquery-3.4.0.min.js", "jquery-ui-1.12.1.min.js","jquery.balloon.min.js","dashboard/widget-empresa.js","dashboard/other-products.js","header.js","routes.js"];
+			$FooterCustomInsertJS=["jquery-3.4.0.min.js", "jquery-ui-1.12.1.min.js","jquery.balloon.min.js","aes.min.js","aes-json-format.min.js","dashboard/widget-empresa.js","dashboard/other-products.js","header.js","routes.js"];
 			//INSTANCIA MENU HEADER
 			$menuHeader = $this->parser->parse('widgets/widget-menuHeader',array(),TRUE);
 			//INSTANCIA MENU FOOTER

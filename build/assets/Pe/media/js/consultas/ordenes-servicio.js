@@ -47,11 +47,11 @@ if($("#msg").val()){
 					document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 				);
 			$('form#formulario').empty();
+				$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'" />');
     		$('form#formulario').append('<input type="hidden" name="data-fechIn" value="'+COS_var.fecIsend+'" />');
     		$('form#formulario').append('<input type="hidden" name="data-fechFin" value="'+COS_var.fecfsend+'" />');
     		$('form#formulario').append('<input type="hidden" name="data-status" value="'+statuLote+'" />');
     		$('form#formulario').attr('action',baseURL+isoPais+"/consulta/ordenes-de-servicio");
-				$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'" />');
     		$('form#formulario').submit();
 
 			}else{

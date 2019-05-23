@@ -44,7 +44,13 @@ var top = ($('.filter').offset().top-100) - parseFloat($('.filter').css('marginT
 
 function whenUserIdle(){
   notificacion('Desconexión automática','<p>No se ha detectado actividad en la página.</p><p>Sesión próxima a expirar.</p>');
-  head_var.out = setTimeout( function(){ $('#logout').submit(); }, 3000 );
+  head_var.out = setTimeout(function(){
+		var ceo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
+		$('#logout').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'">');
+		$('#logout').submit();
+	}, 3000 );
 }
 
 function notificacion(title, msj){
@@ -59,6 +65,10 @@ function notificacion(title, msj){
     resizable: false,
     buttons: {
       salir: function(){
+				var ceo_cook = decodeURIComponent(
+					document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+				);
+				$('#logout').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'">');
         $('#logout').submit();
       },
       "Mantener sesion": function(){
@@ -98,6 +108,25 @@ $('#config').balloon({contents: $('.submenu'), position: 'bottom', classname: 'c
 
 
 $(':input').on('click', function(){$('#ui-datepicker-div'); $('#ui-datepicker-div').css('left',$(this).position().left);});
+
+if (!navigator.cookieEnabled) {
+	$('<div><h5>La funcionalidad de cookies de su navegador se encuentra desactivada.</h5><h4>Por favor vuelva activarla.</h4></div>').dialog({
+		title: "Conexion empresas Online",
+		modal: true,
+		maxWidth: 700,
+		maxHeight: 300,
+		resizable: false,
+		close: function(){$(this).dialog("destroy");},
+		buttons: {
+			Aceptar: function(){
+				$(this).dialog("destroy");
+			}
+		}
+	});
+
+	$(location).attr('href','logout');
+}
+
 
 // scroll para el menu-
 $.each( $('.menuHeader ul'), function(k,v){

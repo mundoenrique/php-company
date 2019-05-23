@@ -37,39 +37,40 @@ $urlCdn = get_cdn();
 		</div>
 		<div id="lotes-contenedor">
 			<div id="lotes-2">
-				<div id="search-1">
-					<h5><?php echo lang('REPORTES_SELECCION_EMPRESA'); ?><img id ="cargando_empresa" style="display:none;width: 25px; margin-left:10px" src="<?php echo $urlCdn."media/img/loading.gif"?>"/>
-					</h5>
+				<form id="form-criterio-busqueda" onsubmit="return false">
+					<div id="search-1">
+						<h5><?php echo lang('REPORTES_SELECCION_EMPRESA'); ?><img id ="cargando_empresa" style="display:none;width: 25px; margin-left:10px" src="<?php echo $urlCdn."media/img/loading.gif"?>"/>
+						</h5>
 
-					<select id="repTarjetasEmitidas_empresa" class="required">
-						<option value="" selected="selected"><?php echo lang('REPORTES_SELECCIONE_EMPRESA'); ?></option>
-					</select>
-				</div>
-				<div id="search-1">
-					<h5><?php echo lang('TITULO_REPORTES_RANGO'); ?></h5>
-					<span>
-						<p><?php echo lang('TITULO_REPORTES_FECHAINI'); ?></p>
-						<input id = "repTarjetasEmitidas_fecha_in"  class="required login fecha" type="text" placeholder="DD/MM/AA" value="" onFocus="javascript:this.value=''"/>
-					</span>
-					<span>
-						<p><?php echo lang('TITULO_REPORTES_FECHAFIN'); ?></p>
-						<input id = "repTarjetasEmitidas_fecha_fin" class="required login fecha" type="text" placeholder="DD/MM/AA" value="" onFocus="javascript:this.value=''"/>
-					</span>
-				</div>
-				<div id="search-2">
-					<h5><?php echo lang('TITULO_REPORTES_RESULTADOS'); ?></h5>
-					<span>
-						<input type="radio" name="radio" id='radio-general' class="required" value = "0"/>
-						<p><?php echo lang('REPORTES_RADIO_GENERAL'); ?></p>
-					</span>
-					<span>
-						<input type="radio" name="radio" id='radio-producto' class="required" value = "1"/>
-						<p><?php echo lang('REPORTES_RADIO_PRODUCTO'); ?></p>
-					</span>
-				</div>
-				
+						<select id="repTarjetasEmitidas_empresa" name="empresa-select" class="required">
+							<option value="" selected="selected"><?php echo lang('REPORTES_SELECCIONE_EMPRESA'); ?></option>
+						</select>
+					</div>
+					<div id="search-1">
+						<h5><?php echo lang('TITULO_REPORTES_RANGO'); ?></h5>
+						<span>
+							<p><?php echo lang('TITULO_REPORTES_FECHAINI'); ?></p>
+							<input id = "repTarjetasEmitidas_fecha_in"  class="required login fecha" type="text" name="start-dmy-date" placeholder="DD/MM/AA" value="" onFocus="javascript:this.value=''"/>
+						</span>
+						<span>
+							<p><?php echo lang('TITULO_REPORTES_FECHAFIN'); ?></p>
+							<input id = "repTarjetasEmitidas_fecha_fin" class="required login fecha" type="text" name="end-dmy-date" placeholder="DD/MM/AA" value="" onFocus="javascript:this.value=''"/>
+						</span>
+					</div>
+					<div id="search-2">
+						<h5><?php echo lang('TITULO_REPORTES_RESULTADOS'); ?></h5>
+						<span>
+							<input type="radio" name="radio" id='radio-general' class="required" value = "0"/>
+							<p><?php echo lang('REPORTES_RADIO_GENERAL'); ?></p>
+						</span>
+						<span>
+							<input type="radio" name="radio" id='radio-producto' class="required" value = "1"/>
+							<p><?php echo lang('REPORTES_RADIO_PRODUCTO'); ?></p>
+						</span>
+					</div>
+					
 
-				
+				</form>
 			</div>
 		</div>
 		<div id="batchs-last">

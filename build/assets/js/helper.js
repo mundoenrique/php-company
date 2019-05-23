@@ -9,6 +9,7 @@ var baseURL = $('body').attr('base-url');
 var baseAssets = $('body').attr('asset-url');
 var country = $('body').attr('country');
 var pais = $('body').attr('pais');
+var isoPais = pais;
 var loader = $('#loader').html();
 var verb;
 var who;
@@ -45,15 +46,12 @@ function callNovoCore (verb, who, where, data, _response_) {
 	var ceo_cook = decodeURIComponent(
 		document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 	);
-	var ceo_plot = decodeURIComponent(
-		document.cookie.replace(/(?:(?:^|.*;\s*)ceo_plot\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-	);
 	var dataRequest = JSON.stringify({
 		who: who,
 		where: where,
 		data: data
 	});
-	var dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
+	dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
 	$.ajax({
 		method: verb,
 		url: baseURL + 'async-call',

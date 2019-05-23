@@ -4,8 +4,6 @@ $pais = $CI->config->item('country');
 $urlBase= $CI->config->item('base_url').$pais.'/';
 $urlBaseCDN = $CI->config->item('base_url_cdn');
 $nombreCompleto = $this->session->userdata('nombreCompleto');
-$ceoName = $this->security->get_csrf_token_name();
-$ceoCook = $this->security->get_csrf_hash();
 ?>
 <nav id="account-nav">
 	<ul class="menu">
@@ -78,7 +76,6 @@ $ceoCook = $this->security->get_csrf_hash();
 
 <form id='logout' action="<?php echo $urlBase ?>logout" method='post' >
 	<input type='hidden' name='data-caducada' value='true'>
-	<input type='hidden' name='<?= $ceoName ?>' value='<?= $ceoCook ?>'>
 </form>
 
 <input type='hidden' id='ruta-cdn' value='<?php echo $this->config->item('base_url_cdn') ?>'/>

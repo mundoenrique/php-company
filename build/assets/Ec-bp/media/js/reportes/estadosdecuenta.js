@@ -13,9 +13,6 @@ $(".fecha").keypress(function(e){
 	}
 });
 
-
-
-
 // INICIO DEL DOCUMENTO
 $(document).ready(function() {
 
@@ -224,6 +221,9 @@ function BuscarEstadosdeCuenta(paginaActual){
 //SE MUESTRA EL GIF DE CARGANDO DEBAJO DEL FORMULARIO EN CASO DE QUE EL FORMULARIO SEA VALIDO
 
 	if(valid){
+		var form = $('#form-criterio-busqueda');
+		validateForms(form);
+		if(form.valid()) {
 
 //SE MUESTRA EL GIF DE CARGANDO DEBAJO DEL FORMULARIO EN CASO DE QUE EL FORMULARIO SEA VALIDO
 		$('#cargando').fadeIn("slow");
@@ -770,6 +770,9 @@ if(buscarReporte){
 
 
 		});
+		} else {
+			showErrMsg('Verifique los datos ingresados e intente nuevamente');
+		}
 }
 
 }
