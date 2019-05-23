@@ -47,22 +47,33 @@ $(function () {
 		var ceo_cook = decodeURIComponent(
 			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 		);
+
+
 		var dataRequest = JSON.stringify({
 			tempIdOrdenL: l,
 			tempIdOrdenLNF: lnf
 		})
+
+		dataRequest  = CryptoJS.AES.encrypt(dataRequest , ceo_cook, {format: CryptoJSAesJson}).toString();
+
 		$.post(baseURL + api + isoPais + "/lotes/confirmarPreOSL", {
-			request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)
+				request: dataRequest,
+				ceo_name: ceo_cook,
+				plot: btoa(ceo_cook)
 			})
 			.done(function (response) {
-				data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
+				data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {
+					format: CryptoJSAesJson
+				}).toString(CryptoJS.enc.Utf8))
 				$aux.dialog('destroy');
 
 				if (!data.ERROR) {
 					if (data.moduloOS) {
 						$("#data-confirm").attr('value', data.ordenes);
+						$('#toOS').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'" />');
 						notificacion("Confirmar cálculo orden de servicio", "<h3>Proceso exitoso</h3>", "form#toOS");
 					} else {
+						$('#viewAutorizar').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'" />');
 						notificacion("Confirmar cálculo orden de servicio", "<h3>Proceso exitoso</h3><h5>No tiene permitido gestionar ordenes de servicio.</h5>", "#viewAutorizar");
 					}
 
