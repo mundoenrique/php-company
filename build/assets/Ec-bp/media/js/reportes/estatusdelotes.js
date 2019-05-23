@@ -7,7 +7,8 @@ $(".fecha").keypress(function(e){
 $(document).ready(function() {
 
 		$("#cargando_empresa").fadeIn("slow");
-		$.getJSON(baseURL + api + isoPais + '/empresas/lista').always(function( data ) {
+		$.getJSON(baseURL + api + isoPais + '/empresas/lista').always(function(response) {
+			data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 			$("#cargando_empresa").fadeOut("slow");
 			if(!(data.ERROR)){
 
@@ -38,7 +39,12 @@ $(document).ready(function() {
 			var ceo_cook = decodeURIComponent(
 				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 			);
-			$.post(baseURL + api + isoPais + "/producto/lista", { 'acrif': acrif, ceo_name: ceo_cook }, function(data){
+			var dataRequest = JSON.stringify ({
+				acrif: acrif
+			})
+			dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
+			$.post(baseURL + api + isoPais + "/producto/lista", {request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook) }, function(response){
+				data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 				$("#cargando_producto").fadeOut("slow");
 				$("#EstatusLotes-empresa").removeAttr('disabled');
 				if(!data.ERROR){
@@ -122,82 +128,84 @@ var filtro_busq={};
 		filtro_busq.lotes_producto=$("#EstatusLotes-producto").val();
 		filtro_busq.paginaActual=1;
 		if(validar_filtro_busqueda("lotes-2")){
-			var form = $('#form-criterio-busqueda');
-			validateForms(form);
-			if (form.valid()) {
-				$('#cargando').fadeIn("slow");
-				$("#EstatusLotes-btnBuscar").hide();
-				$('#div_tablaDetalle').fadeOut("fast");
-				var ceo_cook = decodeURIComponent(
-					document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-				);
-				filtro_busq.ceo_name = ceo_cook;
-				$consulta = $.post(baseURL + api + isoPais + "/reportes/estatuslotes",filtro_busq );
-				$consulta.done(function(data){
-					$("#mensaje").remove();
-					$('#cargando').fadeOut("slow");
-					$("#EstatusLotes-btnBuscar").show();
-					$("#div_tablaDetalle").fadeIn("slow");
-					var tbody=$("#tbody-datos-general");
-					tbody.empty();
-					var tr;
-					var td;
+			$('#cargando').fadeIn("slow");
+			$("#EstatusLotes-btnBuscar").hide();
+	    $('#div_tablaDetalle').fadeOut("fast");
+			var ceo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
+			var dataRequest = JSON.stringify({
+				filtro_busq: filtro_busq
 
-					if($(".tbody-statuslotes").hasClass('dataTable')){
-									$('.tbody-statuslotes').dataTable().fnClearTable();
-									$('.tbody-statuslotes').dataTable().fnDestroy();
-							}
-					if(data.rc == "0"){
-						$("#view-results").attr("style","");
-						$("#tabla-estatus-lotes").fadeIn("fast");
-						$.each(data.lista,function(posLista,itemLista){
-							tr=$(document.createElement("tr")).appendTo(tbody);
-							td=$(document.createElement("td")).appendTo(tr);
-							td.html(itemLista.acnombre);
-							td.attr("style","text-align: center");
-							td=$(document.createElement("td")).appendTo(tr);
-							td.html(itemLista.acnumlote);
-							td.attr("style","text-align: center");
-							td=$(document.createElement("td")).appendTo(tr);
-							td.html(itemLista.status);
-							td.attr("style","text-align: center");
-							td=$(document.createElement("td")).appendTo(tr);
-							td.html(itemLista.dtfechorcarga);
-							td.attr("style","text-align: center");
-							td=$(document.createElement("td")).appendTo(tr);
-							td.html(itemLista.dtfechorvalor);
-							td.attr("style","text-align: center");
-							td=$(document.createElement("td")).appendTo(tr);
-							td.html(itemLista.ncantregs);
-							td.attr("style","text-align: center");
-							td=$(document.createElement("td")).appendTo(tr);
-							td.html(itemLista.nmonto);
-							td.attr("style","text-align: center");
-						});
-					$('#tabla-estatus-lotes tbody tr:even').addClass('even ');
+			})
+			dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {
+				format: CryptoJSAesJson
+			}).toString();
+			$consulta = $.post(baseURL + api + isoPais + "/reportes/estatuslotes",{request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook) }  );
+			$consulta.done(function(response){
+				data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
+				$("#mensaje").remove();
+				$('#cargando').fadeOut("slow");
+				$("#EstatusLotes-btnBuscar").show();
+				$("#div_tablaDetalle").fadeIn("slow");
+				var tbody=$("#tbody-datos-general");
+				tbody.empty();
+				var tr;
+				var td;
 
-					paginar();
-					}else{
-						if(data.rc =="-29"){
-										alert(data.mensaje);
-										$(location).attr('href',baseURL+isoPais+'/login');
-								}else{
-							$("#mensaje").remove();
-							var contenedor=$("#div_tablaDetalle");
-							$("#tabla-estatus-lotes").fadeOut("fast");
-							$("#view-results").attr("style","display:none");
-							var div =$(document.createElement("div")).appendTo(contenedor);
-							div.attr("id","mensaje");
-							div.attr("style","background-color:rgb(252,199,199); margin-top:45px;");
-							var p = $(document.createElement("p")).appendTo(div);
-							p.html(data.mensaje);
-							p.attr("style","text-align:center;padding:10px;font-size:14px");
-						}
-					}
-				});
-			} else {
-				showErrMsg('Verifique los datos ingresados e intente nuevamente');
-			}
+				if($(".tbody-statuslotes").hasClass('dataTable')){
+          			$('.tbody-statuslotes').dataTable().fnClearTable();
+          			$('.tbody-statuslotes').dataTable().fnDestroy();
+        		}
+				if(data.rc == "0"){
+					$("#view-results").attr("style","");
+					$("#tabla-estatus-lotes").fadeIn("fast");
+					$.each(data.lista,function(posLista,itemLista){
+						tr=$(document.createElement("tr")).appendTo(tbody);
+						td=$(document.createElement("td")).appendTo(tr);
+						td.html(itemLista.acnombre);
+						td.attr("style","text-align: center");
+						td=$(document.createElement("td")).appendTo(tr);
+						td.html(itemLista.acnumlote);
+						td.attr("style","text-align: center");
+						td=$(document.createElement("td")).appendTo(tr);
+						td.html(itemLista.status);
+						td.attr("style","text-align: center");
+						td=$(document.createElement("td")).appendTo(tr);
+						td.html(itemLista.dtfechorcarga);
+						td.attr("style","text-align: center");
+						td=$(document.createElement("td")).appendTo(tr);
+						td.html(itemLista.dtfechorvalor);
+						td.attr("style","text-align: center");
+						td=$(document.createElement("td")).appendTo(tr);
+						td.html(itemLista.ncantregs);
+						td.attr("style","text-align: center");
+						td=$(document.createElement("td")).appendTo(tr);
+						td.html(itemLista.nmonto);
+						td.attr("style","text-align: center");
+					});
+				$('#tabla-estatus-lotes tbody tr:even').addClass('even ');
+
+				paginar();
+				}else{
+					if(data.rc =="-29"){
+			             alert(data.mensaje);
+			             $(location).attr('href',baseURL+isoPais+'/login');
+			         }else{
+		 				$("#mensaje").remove();
+		 				var contenedor=$("#div_tablaDetalle");
+		 				$("#tabla-estatus-lotes").fadeOut("fast");
+			 			$("#view-results").attr("style","display:none");
+			 			var div =$(document.createElement("div")).appendTo(contenedor);
+			 			div.attr("id","mensaje");
+			 			div.attr("style","background-color:rgb(252,199,199); margin-top:45px;");
+			 			var p = $(document.createElement("p")).appendTo(div);
+			 			p.html(data.mensaje);
+			 			p.attr("style","text-align:center;padding:10px;font-size:14px");
+			 		}
+				}
+			});
+
 }
 });
 

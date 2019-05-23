@@ -268,7 +268,20 @@ class Dashboard extends CI_Controller {
 		$paisS = $this->session->userdata('pais');
 
 		if($paisS==$urlCountry && $logged_in){
-			if($this->input->post()){
+				$dataRequest = json_decode(
+				$this->security->xss_clean(
+					strip_tags(
+						$this->cryptography->decrypt(
+							base64_decode($this->input->get_post('plot')),
+							utf8_encode($this->input->get_post('request'))
+						)
+					)
+				)
+			);
+			$acrifPost = $dataRequest->acrif;
+			if($acrifPost){
+
+				//$acrifPost = $this->input->post('acrif');
 
 				$dataRequest = json_decode(
 					$this->security->xss_clean(
@@ -291,8 +304,8 @@ class Dashboard extends CI_Controller {
 			}else{
 				$productos=null;
 			}
-			$response = $this->cryptography->encrypt($productos);
-			$this->output->set_content_type('application/json')->set_output(json_encode($response,JSON_UNESCAPED_UNICODE));
+			$productos = $this->cryptography->encrypt($productos);
+			$this->output->set_content_type('application/json')->set_output(json_encode($productos,JSON_UNESCAPED_UNICODE));
 		}elseif($paisS!=$urlCountry && $paisS!=''){
 			$this->session->sess_destroy();
 			redirect($urlCountry.'/login');
@@ -627,10 +640,6 @@ class Dashboard extends CI_Controller {
 					'maxTarjetas'=>$maxTarjetas
 				];
 				$this->session->set_userdata($expMax);
-
-
-
-
 
 				$responseMenuPorProducto->estadistica->producto->descripcion;
 				$titlePage = "Conexión Empresas Online - ".$nombreEmpresaT;
