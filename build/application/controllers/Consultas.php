@@ -58,7 +58,7 @@ class Consultas extends CI_Controller {
 					$token = $this->session->userdata('token');
 					$nombreCompleto = $this->session->userdata('nombreCompleto');
 					$lastSessionD = $this->session->userdata('lastSession');
-					$FooterCustomInsertJS=["jquery-3.4.0.min.js", "jquery-ui-1.12.1.min.js","jquery.balloon.min.js","consultas/ordenes-servicio.js","dashboard/widget-empresa.js","header.js","jquery.dataTables.min.js","jquery-md5.js","routes.js"];
+					$FooterCustomInsertJS=["jquery-3.4.0.min.js", "jquery-ui-1.12.1.min.js","jquery.balloon.min.js","aes.min.js","aes-json-format.min.js","consultas/ordenes-servicio.js","dashboard/widget-empresa.js","header.js","jquery.dataTables.min.js","jquery-md5.js","routes.js"];
 
 					$FooterCustomJS="";
 					$titlePage="Conexión Empresas Online - Consultas";
@@ -535,11 +535,22 @@ class Consultas extends CI_Controller {
 			$paisS = $this->session->userdata('pais');
 
 			if($paisS==$urlCountry && $logged_in && $moduloAct!==false){
-					$idOS = $this->input->post("data-idOS");
-					$pass = $this->input->post("data-pass");
-					$result = $this->callWSanularOS($urlCountry, $idOS, $pass);
+					$dataRequest = json_decode(
+						$this->security->xss_clean(
+							strip_tags(
+								$this->cryptography->decrypt(
+									base64_decode($this->input->get_post('plot')),
+									utf8_encode($this->input->get_post('request'))
+								)
+							)
+						)
+					);
+					$idOS = $dataRequest->data_idOS;
+					$pass = $dataRequest->data_pass;
 
-					$this->output->set_content_type('application/json')->set_output(json_encode($result));
+					$result = $this->callWSanularOS($urlCountry, $idOS, $pass);
+					$response = $this->cryptography->encrypt($result);
+					$this->output->set_content_type('application/json')->set_output(json_encode($response));
 
 			}else{
 					redirect($urlCountry.'/login');
