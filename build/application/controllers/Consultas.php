@@ -147,11 +147,11 @@ class Consultas extends CI_Controller {
 
 			$data = json_encode($data,JSON_UNESCAPED_UNICODE);
 
-			$dataEncry = np_Hoplite_Encryption($data);
+			$dataEncry = np_Hoplite_Encryption($data, 'callWStatusLotesOS');
 			$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
 			$data = json_encode($data);
 			$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
-			$jsonResponse = np_Hoplite_Decrypt($response);
+			$jsonResponse = np_Hoplite_Decrypt($response, 'callWStatusLotesOS');
 
 			$response = json_decode($jsonResponse);
 
@@ -226,11 +226,11 @@ class Consultas extends CI_Controller {
 
 			$data = json_encode($data,JSON_UNESCAPED_UNICODE);
 
-			$dataEncry = np_Hoplite_Encryption($data);
+			$dataEncry = np_Hoplite_Encryption($data, 'callWSbuscarOS');
 			$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
 			$data = json_encode($data);
 			$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
-			$jsonResponse = np_Hoplite_Decrypt($response);
+			$jsonResponse = np_Hoplite_Decrypt($response, 'callWSbuscarOS');
 
 			$response = json_decode($jsonResponse);
 			$prueba = json_encode($response);
@@ -375,11 +375,11 @@ class Consultas extends CI_Controller {
 			);
 
 			$data = json_encode($data,JSON_UNESCAPED_UNICODE);
-			$dataEncry = np_Hoplite_Encryption($data);
+			$dataEncry = np_Hoplite_Encryption($data, 'callWSdownloadOS');
 			$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
 			$data = json_encode($data);
 			$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
-			$jsonResponse = np_Hoplite_Decrypt($response);
+			$jsonResponse = np_Hoplite_Decrypt($response, 'callWSdownloadOS');
 
 			$response = json_decode($jsonResponse);
 
@@ -464,12 +464,12 @@ class Consultas extends CI_Controller {
 			);
 			$data = json_encode($data,JSON_UNESCAPED_UNICODE);
 			//log_message('info', 'request callWSdownloadFacturaOS '.$data);
-			$dataEncry = np_Hoplite_Encryption($data);
+			$dataEncry = np_Hoplite_Encryption($data, 'callWSdownloadFacturaOS');
 			$data = json_encode(array('bean' => $dataEncry, 'pais' =>$urlCountry ));
 			$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
 			$data1 = json_encode($response);
 			//log_message("INFO",'Respuesta del response callWSdownloadFacturaOS===>>>>> '.$data1);
-			$jsonResponse = np_Hoplite_Decrypt($response);
+			$jsonResponse = np_Hoplite_Decrypt($response, 'callWSdownloadFacturaOS');
 			$response = json_decode($jsonResponse);
 
 			//log_message("INFO",'Respuesta del response ===>>>>>>>>>>>  '.$jsonResponse);
@@ -599,11 +599,11 @@ class Consultas extends CI_Controller {
 
 			$data = json_encode($data,JSON_UNESCAPED_UNICODE);
 
-			$dataEncry = np_Hoplite_Encryption($data);
+			$dataEncry = np_Hoplite_Encryption($data, 'callWSanularOS');
 			$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
 			$data = json_encode($data);
 			$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
-			$jsonResponse = np_Hoplite_Decrypt($response);
+			$jsonResponse = np_Hoplite_Decrypt($response, 'callWSanularOS');
 
 			$response = json_decode($jsonResponse);
 
@@ -695,11 +695,11 @@ class Consultas extends CI_Controller {
 
 			$data = json_encode($data,JSON_UNESCAPED_UNICODE);
 
-			$dataEncry = np_Hoplite_Encryption($data);
+			$dataEncry = np_Hoplite_Encryption($data, 'callWSfacturar');
 			$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
 			$data = json_encode($data);
 			$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
-			$jsonResponse = np_Hoplite_Decrypt($response);
+			$jsonResponse = np_Hoplite_Decrypt($response, 'callWSfacturar');
 
 			$response = json_decode($jsonResponse);
 
@@ -811,12 +811,12 @@ class Consultas extends CI_Controller {
 
 			$data = json_encode($data, JSON_UNESCAPED_UNICODE);
 			log_message("info","DATA array before encrypt  " . $data );
-			$dataEncry = np_Hoplite_Encryption($data);
+			$dataEncry = np_Hoplite_Encryption($data, 'callWsPagoOS');
 			$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
 
 			$data = json_encode($data);
 			$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
-			$jsonResponse = np_Hoplite_Decrypt($response);
+			$jsonResponse = np_Hoplite_Decrypt($response, 'callWsPagoOS');
 			$response =  json_decode($jsonResponse);
 
 			log_message("info","enviar TOKEN ------------------->>>>" . json_encode($response));
@@ -946,12 +946,12 @@ class Consultas extends CI_Controller {
 
 			$data = json_encode($data,JSON_UNESCAPED_UNICODE);
 			log_message("info","Request botón de pago  " . $data );
-			$dataEncry = np_Hoplite_Encryption($data);
+			$dataEncry = np_Hoplite_Encryption($data, 'callWsPagoOSProcede');
 			$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
 			//log_message("info","DATA array after encrypt  " . $data );
 			$data = json_encode($data);
 			$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
-			$jsonResponse = np_Hoplite_Decrypt($response);
+			$jsonResponse = np_Hoplite_Decrypt($response, 'callWsPagoOSProcede');
 			$response = json_decode($jsonResponse);
 
 			log_message("info","RESPONSE Pagar Orden de servicio ------------------->>>>      " . json_encode($response));
