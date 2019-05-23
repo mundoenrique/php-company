@@ -83,9 +83,6 @@ $(function(){
     $("#buscarOS").on("click", function(){
 
 				var statuLote = $("#status_lote").val();
-				var ceo_cook = decodeURIComponent(
-					document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-				);
         if( statuLote!=='' && COS_var.fecha_inicio!=='' && COS_var.fecha_fin!=='' ){
 					var form = $('#form-criterio-busqueda');
 					validateForms(form);
@@ -93,6 +90,10 @@ $(function(){
             if( Date.parse(COS_var.fecha_fin) >= Date.parse(COS_var.fecha_inicio) ){
 
                 $aux = $("#loading").dialog({title:'Buscando Orden de Servicio',modal:true, close:function(){$(this).dialog('destroy')}, resizable:false });
+
+								var ceo_cook = decodeURIComponent(
+									document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+								);
 
 								$('form#formulario').empty();
 								$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'">');
@@ -292,8 +293,14 @@ $(function(){
 												var ceo_cook = decodeURIComponent(
 													document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 												);
-                        $.post(baseURL+api+isoPais+'/consulta/anularos',{'data-idOS':idOS, 'data-pass':pass, ceo_name: ceo_cook})
-                            .done(function(data){
+												var dataRequest = JSON.stringify ({
+													data_idOS:idOS,
+													data_pass:pass
+												})
+												dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
+												$consulta = $.post(baseURL+api+isoPais+"/consulta/anularos", {request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)} );
+												$consulta.done(function(response){
+													data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
                                 $aux.dialog('destroy');
                                 if(!data.ERROR){
                                     notificacion("Anulando Orden de Servicio",'Anulación exitosa');

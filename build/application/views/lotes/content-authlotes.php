@@ -274,7 +274,6 @@
 
 <?php
 echo "<form id='autorizacion' method='post' action='$urlBase/lotes/calculo'>
-	<input type='hidden' name='$ceo_name' value='$ceo_cook'>
 	<input type='hidden' name='data-COS' value='' id='data-COS'/>
 </form>";
 

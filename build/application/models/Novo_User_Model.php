@@ -152,7 +152,7 @@ class Novo_User_Model extends NOVO_Model {
 			}
 		}
 
-		return $this->cypherData();
+		return $this->response;
 	}
 	/**
 	 * @info Método para recuperar contraseña
@@ -224,7 +224,7 @@ class Novo_User_Model extends NOVO_Model {
 			}
 		}
 
-		return $this->cypherData();
+		return $this->response;
 	}
 	/**
 	 * @info Método para el cambio de Contraseña
@@ -280,7 +280,7 @@ class Novo_User_Model extends NOVO_Model {
 			}
 		}
 
-		return $this->cypherData();
+		return $this->response;
 	}
 	/**
 	 * @info Método para el cierre de sesión
@@ -313,33 +313,36 @@ class Novo_User_Model extends NOVO_Model {
 			}
 
 		$this->session->sess_destroy();
-		return $this->cypherData();
+		return $this->response;
 	}
 
 	public function callWs_validateCaptcha_User($dataRequest)
-    {
+	{
 		$this->load->library('recaptcha');
 		$result = $this->recaptcha->verifyResponse($dataRequest->token);
-		log_message('DEBUG', 'NOVO ['.$dataRequest->user.'] RESPONSE: recaptcha: País: "' .$this->config->item('country'). '", Score: "' . $result["score"] .'", Hostname: "'. $result["hostname"].'"');
+
+		$logMessage = 'NOVO ['.$dataRequest->user.'] RESPONSE: recaptcha: País: "' .$this->config->item('country');
+		$logMessage.= '", Score: "' . $result["score"] .'", Hostname: "'. $result["hostname"].'"';
+		log_message('DEBUG', $logMessage);
+
 		$this->response->title = lang('SYSTEM_NAME');
 		if($result["score"] <= 0.5) {
 
-                $this->response->code = 1;
-                $this->response->icon = 'ui-icon-closethick';
-                $this->response->msg = 'Error al validar recaptcha';
-                $this->response->data = [
-					'btn1'=> [
-						'text'=> 'Aceptar',
-						'link'=> base_url('inicio'),
-						'action'=> 'close'
-					]
-				];
-			}
-            else {
-                $this->response->code = 0;
-				$this->response->data = 'Ok';
-			}
-			return $this->cypherData();
+			$this->response->code = 1;
+			$this->response->icon = 'ui-icon-closethick';
+			$this->response->msg = 'El sistema ha dectetado una actividad no autorizada, por favor intente nuevamente';
+			$this->response->data = [
+				'btn1'=> [
+					'text'=> 'Aceptar',
+					'link'=> base_url('inicio'),
+					'action'=> 'close'
+				]
+			];
+		} else {
+			$this->response->code = 0;
+			$this->response->data = 'Ok';
+		}
+		return $this->response;
 
-    }
+	}
 }
