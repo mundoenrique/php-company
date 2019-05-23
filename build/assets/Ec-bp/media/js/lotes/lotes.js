@@ -124,9 +124,9 @@ $(function () { // Document ready
 
 	// Refrescar lote cada 10 segundos
 
-	/*self.setInterval(function () {
+	self.setInterval(function () {
 		actualizarLote()
-	}, 10000);*/
+	}, 10000);
 	var datatable;
 
 	function actualizarLote() {
