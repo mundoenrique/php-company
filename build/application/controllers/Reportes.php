@@ -538,12 +538,7 @@ class Reportes extends CI_Controller {
 					$data = json_encode($data);
 					$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
 					$jsonResponse = np_Hoplite_Decrypt($response, 'graficoCuentaConcentradora');
-
-					//$this->cryptography->encrypt($response);
 					$response = json_decode($jsonResponse);
-					// $pruebaTabla = $this->cryptography->encrypt($pruebaTabla);
-					//$response = $this->cryptography->encrypt($jsonResponse);
-
 					if($response){
 							log_message('info','CuentaConcentradora GRAFICO '.$response->rc."/".$response->msg);
 							if($response->rc==0){
@@ -552,12 +547,15 @@ class Reportes extends CI_Controller {
 							}else{
 
 									if($response->rc==-61  || $response->rc==-29){
-											$codigoError = array('mensaje' => lang('ERROR_(-29)'), "rc"=> "-29");
+											$responseError = ['mensaje' => lang('ERROR_(-29)'), "rc"=> "-29"];
+											$responseError = $this->cryptography->encrypt($responseError);
+											$this->output->set_content_type('application/json')->set_output(json_encode($responseError));
 											$this->session->sess_destroy();
 
 									}else{
 											$codigoError = lang('ERROR_('.$response->rc.')');
 											if(strpos($codigoError, 'Error')!==false){
+
 													$codigoError = array('mensaje' => lang('ERROR_GENERICO_USER'), "rc"=> $response->rc);
 											}else{
 													$codigoError = array('mensaje' => lang('ERROR_('.$response->rc.')'), "rc"=> $response->rc);
@@ -574,6 +572,8 @@ class Reportes extends CI_Controller {
 
 			}else{
 					$this->session->sess_destroy();
+					$responseError = ['mensaje' => lang('ERROR_(-29)'), "rc"=> "-29"];
+											$responseError = $this->cryptography->encrypt($responseError);
 					$this->output->set_content_type('application/json')->set_output(json_encode( array('ERROR' => lang('ERROR_(-29)'), "rc"=> "-29")));
 			}
 
