@@ -11,8 +11,7 @@ $(document).ready(function() {
 
 		$("#cargando_empresa").fadeIn("slow");
 		$.getJSON(baseURL + api + isoPais + '/empresas/consulta-empresa-usuario').always(function( data ) {
-            // var prueba= JSON.stringify(data);
-			// console.log(prueba);
+
 			$("#cargando_empresa").fadeOut("slow");
 			if(!(data.ERROR)){
 
