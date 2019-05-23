@@ -83,10 +83,10 @@ $(function(){
     $("#buscarOS").on("click", function(){
 
 				var statuLote = $("#status_lote").val();
-
-
         if( statuLote!=='' && COS_var.fecha_inicio!=='' && COS_var.fecha_fin!=='' ){
-
+					var form = $('#form-criterio-busqueda');
+					validateForms(form);
+					if (form.valid()) {
             if( Date.parse(COS_var.fecha_fin) >= Date.parse(COS_var.fecha_inicio) ){
 
                 $aux = $("#loading").dialog({title:'Buscando Orden de Servicio',modal:true, close:function(){$(this).dialog('destroy')}, resizable:false });
@@ -104,8 +104,11 @@ $(function(){
                 $('form#formulario').submit();
 
             }else{
-                notificacion("Buscar Orden de Servicio","Rango de fecha Incoherente");
-            }
+                notificacion('Buscar Orden de Servicio','Rango de fecha Incoherente');
+						}
+					} else {
+						notificacion("Buscar Orden de Servicio", "Verifique los datos ingresados e intente nuevamente");
+					}
         }else{
             notificacion("Buscar Orden de Servicio","<h2>Verifique que:</h2><h6>1. Ha seleccionado un rango de fechas</h6><h6>2. Ha seleccionado un estatus de lote</h6>")
         }
@@ -139,8 +142,9 @@ $(function(){
     });
 
     $(":radio").on("change", function(){
-        $("#fecha_inicial").val('');
-        $("#fecha_final").val('');
+        $("#fecha_inicial").val('').addClass('ignore', true);
+				$("#fecha_final").val('').addClass('ignore', true);
+				$(this).removeClass('ignore');
         var dias = $(this).val();
 
         var hoy = new Date();
@@ -197,14 +201,19 @@ $(function(){
                     $("#fecha_inicial").datepicker('option','maxDate',"+0D");
                 }
                 if($("#fecha_inicial").val()!=''&&$("#fecha_final").val()!=''){
-                    $.each($(":radio"),function(){this.checked=0;});
+                    $.each($(":radio"),function(){
+											this.checked=0;
+											$(this).addClass('ignore');
+										});
                     var aux = $("#fecha_inicial").val().split('/');
                     COS_var.fecha_inicio = aux[1]+"/"+aux[0]+"/"+aux[2];
                     COS_var.fecIsend = $("#fecha_inicial").val();
 
                     aux = $("#fecha_final").val().split('/');
                     COS_var.fecha_fin = aux[1]+"/"+aux[0]+"/"+aux[2];
-                    COS_var.fecfsend = $("#fecha_final").val();
+										COS_var.fecfsend = $("#fecha_final").val();
+										$("#fecha_inicial").removeClass('ignore');
+										$("#fecha_final").removeClass('ignore');
                 }
             }
         });
@@ -284,8 +293,14 @@ $(function(){
 												var ceo_cook = decodeURIComponent(
 													document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 												);
-                        $.post(baseURL+api+isoPais+'/consulta/anularos',{'data-idOS':idOS, 'data-pass':pass, ceo_name: ceo_cook})
-                            .done(function(data){
+												var dataRequest = JSON.stringify ({
+													data_idOS:idOS,
+													data_pass:pass
+												})
+												dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
+												$consulta = $.post(baseURL+api+isoPais+"/consulta/anularos", {request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)} );
+												$consulta.done(function(response){
+													data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
                                 $aux.dialog('destroy');
                                 if(!data.ERROR){
                                     notificacion("Anulando Orden de Servicio",'Anulación exitosa');

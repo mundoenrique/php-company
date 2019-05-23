@@ -38,10 +38,11 @@ $urlCdn = get_cdn();
 				<div id="top-batchs"><span aria-hidden="true" class="icon" data-icon="&#xe07a;"></span><?php echo lang('CRITERIOS_BUSQUEDA'); ?>
 					</div>
 				<div id="lotes-contenedor">
+				<form id="form-criterio-busqueda" onsubmit="return false">
 				<div id="lotes-2">
 					<div id="search-1">
 						<h5><?php echo lang('REPORTES_SELECCION_EMPRESA'); ?><img id ="cargando_empresa" style="display:none;width: 25px; margin-left:10px" src="<?php echo $urlCdn."media/img/loading.gif"?>"/></h5>
-						<select id = "repEstadosDeCuenta_empresa" class = "required ">
+						<select id = "repEstadosDeCuenta_empresa" name="empresa-select" class = "required ">
 							<option value = "" selected="selected"><?php echo lang('REPORTES_SELECCIONE_EMPRESA'); ?></option>
 						</select>
 					</div>
@@ -49,18 +50,18 @@ $urlCdn = get_cdn();
 						<h5><?php echo lang('DEPOSITOS_FECHA'); ?></h5>
 						<span>
 						<p><?php echo lang('REPORTES_SELECCION_MESAÑO'); ?></p>
-						<input id = "fecha_ini" class="required login fecha" type="text" placeholder="MM/AAAA" value="" onFocus="javascript:this.value=''"/>
-						<input id = "repEstadosDeCuenta_fecha_ini" class="required login fecha" type="hidden" placeholder="MM/AAAA" value="" onFocus="javascript:this.value=''"/>
+						<input id = "fecha_ini" class="required login fecha" type="text" name="my-date" placeholder="MM/AAAA" value="" onFocus="javascript:this.value=''"/>
+						<input id = "repEstadosDeCuenta_fecha_ini" class="required login fecha" type="hidden" name="start-dmy-date" placeholder="MM/AAAA" value="" onFocus="javascript:this.value=''"/>
 						</span>
 						<span>
 						<!-- <p><?php echo lang('TITULO_REPORTES_FECHAFIN'); ?></p> -->
-						<input id = "repEstadosDeCuenta_fecha_fin" class="required login fecha" type="hidden" placeholder="DD/MM/AA" value="" onFocus="javascript:this.value=''"/>
+						<input id = "repEstadosDeCuenta_fecha_fin" class="required login fecha" type="hidden" name="end-dmy-date" placeholder="DD/MM/AA" value="" onFocus="javascript:this.value=''"/>
 						</span>
 					</div>
 					<div id="search-2">
 						<h5><?php echo lang('REPORTES_SELECCION_PRODUCTO'); ?><img id ="cargando_producto" style="display:none;width: 25px; margin-left:10px" src="<?php echo $urlCdn."media/img/loading.gif"?>"/></h5>
 						<span>
-							<select  class="required" id="repEstadosDeCuenta_producto">
+							<select  class="required" id="repEstadosDeCuenta_producto" name="select-producto">
 								<option value="" selected="selected"><?php echo lang('REPORTES_SELECCIONE_PRODUCTO'); ?></option>
 							</select>
 						</span>
@@ -77,7 +78,7 @@ $urlCdn = get_cdn();
 					</div>
 
 
-
+				</form>
 				</div>
 				</div>
 				<div id="batchs-last">

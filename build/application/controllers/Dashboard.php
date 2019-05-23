@@ -59,7 +59,7 @@ class Dashboard extends CI_Controller {
 			//INSTANCIA MENU FOOTER
 			$menuFooter = $this->parser->parse('widgets/widget-menuFooter',array(),TRUE);
 			$header = $this->parser->parse('layouts/layout-header',array('bodyclass'=>'full-width','menuHeaderActive'=>TRUE,'menuHeaderMainActive'=>TRUE,'menuHeader'=>$menuHeader,'titlePage'=>$titlePage),TRUE);
-			$FooterCustomInsertJS=["jquery-3.4.0.min.js", "jquery-ui-1.12.1.min.js","jquery.balloon.min.js","jquery.paginate.js","jquery.isotope.min.js","dashboard/dashboard.js","header.js","aes.min.js","aes-json-format.min.js","routes.js"];
+			$FooterCustomInsertJS=["jquery-3.4.0.min.js", "jquery-ui-1.12.1.min.js","jquery.balloon.min.js","jquery.paginate.js","jquery.isotope.min.js","aes.min.js","aes-json-format.min.js","dashboard/dashboard.js","header.js","routes.js"];
 			$footer = $this->parser->parse('layouts/layout-footer',array('menuFooterActive'=>TRUE,'menuFooter'=>$menuFooter,'FooterCustomInsertJSActive'=>TRUE,'FooterCustomInsertJS'=>$FooterCustomInsertJS,'FooterCustomJSActive'=>TRUE,'FooterCustomJS'=>$FooterCustomJS),TRUE);
 
 			$content = $this->parser->parse('dashboard/content-dashboard',array('titulo'=>$nombreCompleto,'lastSession'=>$lastSessionD),TRUE);
@@ -165,11 +165,11 @@ class Dashboard extends CI_Controller {
 		);
 
 		$data = json_encode($data,JSON_UNESCAPED_UNICODE);
-		$dataEncry = np_Hoplite_Encryption($data);
+		$dataEncry = np_Hoplite_Encryption($data, 'callWSListaEmpresasUsuario');
 		$data = array('bean' => $dataEncry, 'pais' =>$pais );
 		$data = json_encode($data);
 		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
-		$jsonResponse = np_Hoplite_Decrypt($response);
+		$jsonResponse = np_Hoplite_Decrypt($response, 'callWSListaEmpresasUsuario');
 		$response = json_decode($jsonResponse);
 
 		if($response){
@@ -269,7 +269,20 @@ class Dashboard extends CI_Controller {
 		$paisS = $this->session->userdata('pais');
 
 		if($paisS==$urlCountry && $logged_in){
-			if($this->input->post()){
+				$dataRequest = json_decode(
+				$this->security->xss_clean(
+					strip_tags(
+						$this->cryptography->decrypt(
+							base64_decode($this->input->get_post('plot')),
+							utf8_encode($this->input->get_post('request'))
+						)
+					)
+				)
+			);
+			$acrifPost = $dataRequest->acrif;
+			if($acrifPost){
+
+				//$acrifPost = $this->input->post('acrif');
 
 				$dataRequest = json_decode(
 					$this->security->xss_clean(
@@ -292,8 +305,8 @@ class Dashboard extends CI_Controller {
 			}else{
 				$productos=null;
 			}
-			$response = $this->cryptography->encrypt($productos);
-			$this->output->set_content_type('application/json')->set_output(json_encode($response,JSON_UNESCAPED_UNICODE));
+			$productos = $this->cryptography->encrypt($productos);
+			$this->output->set_content_type('application/json')->set_output(json_encode($productos,JSON_UNESCAPED_UNICODE));
 		}elseif($paisS!=$urlCountry && $paisS!=''){
 			$this->session->sess_destroy();
 			redirect($urlCountry.'/login');
@@ -519,7 +532,7 @@ class Dashboard extends CI_Controller {
 				$menuFooter = $this->parser->parse('widgets/widget-menuFooter',array(),TRUE);
 
 				$header = $this->parser->parse('layouts/layout-header',array('bodyclass'=>'','menuHeaderActive'=>TRUE,'menuHeaderMainActive'=>TRUE,'menuHeader'=>$menuHeader,'titlePage'=>$titlePage),TRUE);
-				$FooterCustomInsertJS=["jquery-3.4.0.min.js", "jquery-ui-1.12.1.min.js","jquery.isotope.min.js","jquery.balloon.min.js","dashboard/productos.js","header.js","aes.min.js","aes-json-format.min.js","routes.js"];
+				$FooterCustomInsertJS=["jquery-3.4.0.min.js", "jquery-ui-1.12.1.min.js","jquery.isotope.min.js","jquery.balloon.min.js","aes.min.js","aes-json-format.min.js","dashboard/productos.js","header.js","routes.js"];
 				$footer = $this->parser->parse('layouts/layout-footer',array('menuFooterActive'=>TRUE,'menuFooter'=>$menuFooter,'FooterCustomInsertJSActive'=>TRUE,'FooterCustomInsertJS'=>$FooterCustomInsertJS,'FooterCustomJSActive'=>TRUE,'FooterCustomJS'=>$FooterCustomJS),TRUE);
 				$content = $this->parser->parse('dashboard/content-productos',array(
 					'titulo'=>$titulo,
@@ -629,10 +642,6 @@ class Dashboard extends CI_Controller {
 				];
 				$this->session->set_userdata($expMax);
 
-
-
-
-
 				$responseMenuPorProducto->estadistica->producto->descripcion;
 				$titlePage = "Conexión Empresas Online - ".$nombreEmpresaT;
 				$msgError=FALSE;
@@ -718,11 +727,11 @@ class Dashboard extends CI_Controller {
 
 		$data = json_encode($data,JSON_UNESCAPED_UNICODE);
 
-		$dataEncry = np_Hoplite_Encryption($data);
+		$dataEncry = np_Hoplite_Encryption($data, 'callWSListaEmpresas');
 		$data = array('bean' => $dataEncry, 'pais' =>$pais );
 		$data = json_encode($data);
 		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
-		$jsonResponse = np_Hoplite_Decrypt($response);
+		$jsonResponse = np_Hoplite_Decrypt($response, 'callWSListaEmpresas');
 		log_message('INFO', 'RESPONSE LISTA DE EMPRESAS===>>>>'. $jsonResponse);
 		$response = json_decode($jsonResponse);
 
@@ -796,11 +805,11 @@ class Dashboard extends CI_Controller {
 
 		$data = json_encode($data,JSON_UNESCAPED_UNICODE);
 
-		$dataEncry = np_Hoplite_Encryption($data);
+		$dataEncry = np_Hoplite_Encryption($data, 'callWSListaEmpresasPaginar');
 		$data = array('bean' => $dataEncry, 'pais' =>$pais );
 		$data = json_encode($data);
 		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
-		$jsonResponse = np_Hoplite_Decrypt($response);
+		$jsonResponse = np_Hoplite_Decrypt($response, 'callWSListaEmpresasPaginar');
 
 		$response = json_decode($jsonResponse);
 
@@ -863,11 +872,11 @@ class Dashboard extends CI_Controller {
 
 		$data = json_encode($data,JSON_UNESCAPED_UNICODE);
 
-		$dataEncry = np_Hoplite_Encryption($data);
+		$dataEncry = np_Hoplite_Encryption($data, 'callWSMenuEmpresa');
 		$data = array('bean' => $dataEncry, 'pais' =>$pais );
 		$data = json_encode($data);
 		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
-		$jsonResponse = np_Hoplite_Decrypt($response);
+		$jsonResponse = np_Hoplite_Decrypt($response, 'callWSMenuEmpresa');
 		$response = json_decode($jsonResponse);
 
 		if($response){
@@ -933,11 +942,11 @@ class Dashboard extends CI_Controller {
 		);
 
 		$data = json_encode($data,JSON_UNESCAPED_UNICODE);
-		$dataEncry = np_Hoplite_Encryption($data);
+		$dataEncry = np_Hoplite_Encryption($data, 'callWSMenuEmpresaTarjetaHambiente');
 		$data = array('bean' => $dataEncry, 'pais' =>$pais );
 		$data = json_encode($data);
 		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
-		$jsonResponse = np_Hoplite_Decrypt($response);
+		$jsonResponse = np_Hoplite_Decrypt($response, 'callWSMenuEmpresaTarjetaHambiente');
 		$response = json_decode($jsonResponse);
 
 		if($response){
@@ -1020,12 +1029,12 @@ class Dashboard extends CI_Controller {
 		);
 		$data = json_encode($data,JSON_UNESCAPED_UNICODE);
 
-		$dataEncry = np_Hoplite_Encryption($data);
+		$dataEncry = np_Hoplite_Encryption($data, 'callWSMenuPorProducto');
 
 		$data = array('bean' => $dataEncry, 'pais' =>$pais );
 		$data = json_encode($data);
 		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
-		$jsonResponse = np_Hoplite_Decrypt($response);
+		$jsonResponse = np_Hoplite_Decrypt($response, 'callWSMenuPorProducto');
 		$response = json_decode($jsonResponse);
 
 		if($response){

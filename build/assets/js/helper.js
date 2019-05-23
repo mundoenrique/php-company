@@ -9,6 +9,7 @@ var baseURL = $('body').attr('base-url');
 var baseAssets = $('body').attr('asset-url');
 var country = $('body').attr('country');
 var pais = $('body').attr('pais');
+var isoPais = pais;
 var loader = $('#loader').html();
 var verb;
 var who;

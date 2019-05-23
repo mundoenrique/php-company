@@ -59,11 +59,6 @@ $(function () {
 
 			pass = hex_md5(pass);
 			$('#clave').val('');
-
-			/*if( !(js_var.loteF instanceof Array) ){
-			  js_var.loteF = js_var.loteF.substr(0,js_var.loteF.lastIndexOf(','));
-			  js_var.loteF = js_var.loteF.split(',');
-			}*/
 			var $aux = $('#loading').dialog({
 				title: "Firmando lote",
 				modal: true,
@@ -73,11 +68,16 @@ $(function () {
 			var ceo_cook = decodeURIComponent(
 				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 			);
+			var dataRequest = JSON.stringify ({
+				data_lotes: js_var.loteA,
+				data_pass: pass,
+				data_tipoOS: osTipo,
+			})
+			dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
 			$.post(baseURL + isoPais + '/lotes/autorizacion/firmar', {
-				'data-lotes': js_var.loteF,
-				'data-pass': pass,
-				ceo_name: ceo_cook
-			}).done(function (data) {
+				request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)
+				}).done(function (response) {
+				data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 				$aux.dialog('destroy');
 				if (!data.ERROR) {
 					$('<div>Proceso exitoso.<h5>Listando lotes</h5></div>').dialog({
@@ -144,52 +144,38 @@ $(function () {
 		var pass = $('#claveAuth').val();
 		var osTipo = $('#selec_tipo_lote').val();
 
-		if (pass != "" && js_var.loteA != "" && osTipo != "") {
+    if(pass!="" && js_var.loteA!="" && osTipo!=""){
+			var form = $('#lotes-2').find('form');
+			validateForms(form);
+			if(form.valid()) {
+				pass = hex_md5( pass );
+				$('#claveAuth').val( '' );
 
-			pass = hex_md5(pass);
-			$('#claveAuth').val('');
-
-			$('#loading').dialog({
-				title: 'Autorizando lotes',
-				modal: true,
-				resizable: false,
-				dialogClass: 'hide-close',
-				close: function () {
-					$(this).dialog('destroy')
-				}
-			});
-			var ceo_cook = decodeURIComponent(
-				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-			);
-
-			var dataRequest = JSON.stringify ({
-				data_lotes: js_var.loteA,
-				data_pass: pass,
-				data_tipoOS: osTipo,
-			})
-			dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
-			$.post(baseURL + isoPais + '/lotes/preliminar', {
-					// 'data-lotes': js_var.loteA,
-					// 'data-pass': pass,
-					// 'data-tipoOS': osTipo,
-					// ceo_name: ceo_cook
-					request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)
+				$('#loading').dialog({title:'Autorizando lotes', modal:true, resizable:false, dialogClass: 'hide-close', close:function(){$(this).dialog('destroy')}});
+				var ceo_cook = decodeURIComponent(
+					document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+				);
+				var dataRequest = JSON.stringify ({
+					data_lotes: js_var.loteA,
+					data_pass: pass,
+					data_tipoOS: osTipo,
 				})
-				.done(function (response) {
+				dataRequest  = CryptoJS.AES.encrypt(dataRequest , ceo_cook, {format: CryptoJSAesJson}).toString();
+				$.post(baseURL+isoPais+'/lotes/preliminar',{
+					request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)
+					})
+				.done(function(response){
 					data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
-					var code = data.code,
-						title = data.title,
-						msg = data.msg,
-						dataCalc = data.data;
+					var code = data.code, title = data.title, msg = data.msg, dataCalc = data.data;
 					$('#loading').dialog('destroy');
-					if (code === 0) {
+					if(code === 0) {
 						$("#data-COS").attr('value', dataCalc);
 						$("<div><h3>Proceso exitoso</h3><h5>Ha generado el cálculo de la orden de servicio.</h5></div>").dialog({
-							title: "Autorizando lotes",
+							title:"Autorizando lotes",
 							modal: true,
 							resizable: false,
 							draggable: false,
-							open: function (event, ui) {
+							open: function(event, ui) {
 								$('.ui-dialog-titlebar-close', ui.dialog).hide();
 							},
 							buttons: {
@@ -206,10 +192,13 @@ $(function () {
 						notificacion(title, msg, code);
 					}
 				});
-			// resetValuesAuth();
-		} else {
-			notificacion("Autorizando lotes", "<h2>Verifique que: </h2><h3>1. Ha seleccionado al menos un lote</h3><h3>2. Ha ingresado su contraseña</h4><h3>3. Ha seleccionado el tipo orden de servicio</h3>");
-		}
+				// resetValuesAuth();
+			} else {
+				notificacion('Autorización de Lotes', 'Verifique los datos ingresados e intente nuevamente');
+			}
+    }else{
+        notificacion("Autorizando lotes","<h2>Verifique que: </h2><h3>1. Ha seleccionado al menos un lote</h3><h3>2. Ha ingresado su contraseña</h4><h3>3. Ha seleccionado el tipo orden de servicio</h3>");
+    }
 
 	});
 
@@ -220,24 +209,21 @@ $(function () {
 
 		if (pass != "" && js_var.loteA != "") {
 
-			pass = hex_md5(pass);
-			$('#claveAuth').val('');
+			var form = $('#lotes-2').find('form');
+			validateForms(form);
+			if(form.valid()) {
 
-			/*if( !(js_var.loteA instanceof Array) ){
-			js_var.loteA = js_var.loteA.substr(0,js_var.loteA.lastIndexOf(','));
-			js_var.loteA = js_var.loteA.split(',');
-			js_var.numloteA = js_var.numloteA.substr(0,js_var.numloteA.lastIndexOf(','));
-			js_var.numloteA = js_var.numloteA.split(',');
-			js_var.tipoloteA = js_var.tipoloteA.substr(0,js_var.tipoloteA.lastIndexOf(','));
-			js_var.tipoloteA = js_var.tipoloteA.split(',');
-			}*/
-
-			eliminarLotes(js_var.loteA, js_var.numloteA, js_var.tipoloteA, pass);
+				pass = hex_md5( pass );
+				$('#claveAuth').val( '' );
+				eliminarLotes(js_var.loteA, js_var.numloteA, js_var.tipoloteA,pass);
 			// resetValuesAuth();
 
-		} else {
-			notificacion("Autorizando lotes", "Seleccione al menos un lote e ingrese su contraseña");
-		}
+			} else {
+				notificacion('Autorización de Lotes', 'Verifique los datos ingresados e intente nuevamente');
+			}
+    }else{
+      notificacion("Autorizando lotes","Seleccione al menos un lote e ingrese su contraseña");
+    }
 
 	});
 
@@ -318,23 +304,13 @@ $(function () {
 	});
 
 
-	$('#lotes-2').on('click', '#eliminarF', function () { // boton eliminar en firma
-
-		var pass = $('#clave').val();
+ $('#lotes-2').on('click','#eliminarF', function(){ // boton eliminar en firma
+    var pass = $('#clave').val();
 
 		if (pass != "" && js_var.loteF != "") {
 
 			pass = hex_md5(pass);
 			$('#clave').val('');
-
-			/*if( !(js_var.loteF instanceof Array) ){
-			js_var.loteF = js_var.loteF.substr(0,js_var.loteF.lastIndexOf(','));
-			js_var.loteF = js_var.loteF.split(',');
-			js_var.numloteF = js_var.numloteF.substr(0,js_var.numloteF.lastIndexOf(','));
-			js_var.numloteF = js_var.numloteF.split(',');
-			js_var.tipoloteF = js_var.tipoloteF.substr(0,js_var.tipoloteF.lastIndexOf(','));
-			js_var.tipoloteF = js_var.tipoloteF.split(',');
-			}*/
 
 			eliminarLotes(js_var.loteF, js_var.numloteF, js_var.tipoloteF, pass)
 			//resetValuesFirm();
@@ -357,11 +333,11 @@ $(function () {
 		var acnumlote = $(this).attr('numlote') + ",";
 		var ctipolote = $(this).attr('ctipolote') + ",";
 
-		var canvas = "<div id='dialog-confirm'>";
-		canvas += "<p>Lote Nro.: " + acnumlote + "</p>";
-		canvas += "<fieldset><input type='password' id='pass' size=30 placeholder='Ingrese su contraseña' class='text ui-widget-content ui-corner-all'/>";
-		canvas += "<h5 id='msg'></h5></fieldset></div>";
-		tabla = $(this).parents('table').attr('id');
+      var canvas = "<div id='dialog-confirm'>";
+      canvas +="<p>Lote Nro.: "+acnumlote+"</p>";
+      canvas += "<form onsubmit='return false'><fieldset><input type='password' id='pass' name='user-password' size=24 placeholder='Ingrese su contraseña' class='text ui-widget-content ui-corner-all'/>";
+      canvas += "<h5 id='msg'></h5></fieldset></form></div>";
+			tabla = $(this).parents('table').attr('id');
 
 		if ((!$('#clave').val() && tabla == 'table-firmar') || (!$('#claveAuth').val() && tabla == 'table-auth')) {
 
@@ -384,15 +360,20 @@ $(function () {
 
 						if (pass !== "") {
 
-							pass = hex_md5(pass);
-							$('#pass').val('');
-							$(this).dialog('destroy');
+						var form = $(this).find('form');
+						validateForms(form);
+						if(form.valid()) {
+              pass = hex_md5( pass );
+              $('#pass').val( '' );
+              $(this).dialog('destroy');
 
-							eliminarLotes(idlote, acnumlote, ctipolote, pass);
-
-						} else {
-							$(this).find($('#msg')).text("Debe ingresar su contraseña");
-						}
+              eliminarLotes(idlote,acnumlote,ctipolote,pass);
+            } else {
+              $(this).find($('#msg')).text("Contraseña inválida");
+            }
+          }else{
+            $(this).find( $('#msg')).text("Debe ingresar su contraseña");
+          }
 
 					}
 				}
@@ -400,13 +381,19 @@ $(function () {
 
 		} else {
 
-			if ($('#clave').val() != '' && tabla == 'table-firmar') {
-				pass = hex_md5($('#clave').val());
-			} else if ($('#claveAuth').val() != '' && tabla == 'table-auth') {
-				pass = hex_md5($('#claveAuth').val());
-			}
+        if($('#clave').val()!=''&&tabla=='table-firmar'){
+          pass = hex_md5($('#clave').val());
+        	eliminarLotes(idlote,acnumlote,ctipolote,pass);
+        }else if($('#claveAuth').val()!=''&&tabla=='table-auth'){
+					var form = $('#lotes-2').find('form');
+					validateForms(form);
+					if(form.valid()) {
+						pass = hex_md5($('#claveAuth').val());
+						eliminarLotes(idlote,acnumlote,ctipolote,pass);
+					} else
+						notificacion('Autorización de Lotes', 'Verifique los datos ingresados e intente nuevamente');
+        }
 
-			eliminarLotes(idlote, acnumlote, ctipolote, pass);
 
 		}
 

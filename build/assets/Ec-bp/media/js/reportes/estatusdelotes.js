@@ -7,7 +7,8 @@ $(".fecha").keypress(function(e){
 $(document).ready(function() {
 
 		$("#cargando_empresa").fadeIn("slow");
-		$.getJSON(baseURL + api + isoPais + '/empresas/lista').always(function( data ) {
+		$.getJSON(baseURL + api + isoPais + '/empresas/lista').always(function(response) {
+			data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 			$("#cargando_empresa").fadeOut("slow");
 			if(!(data.ERROR)){
 
@@ -38,7 +39,12 @@ $(document).ready(function() {
 			var ceo_cook = decodeURIComponent(
 				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 			);
-			$.post(baseURL + api + isoPais + "/producto/lista", { 'acrif': acrif, ceo_name: ceo_cook }, function(data){
+			var dataRequest = JSON.stringify ({
+				acrif: acrif
+			})
+			dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
+			$.post(baseURL + api + isoPais + "/producto/lista", {request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook) }, function(response){
+				data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 				$("#cargando_producto").fadeOut("slow");
 				$("#EstatusLotes-empresa").removeAttr('disabled');
 				if(!data.ERROR){
@@ -128,9 +134,16 @@ var filtro_busq={};
 			var ceo_cook = decodeURIComponent(
 				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 			);
-			filtro_busq.ceo_name = ceo_cook;
-			$consulta = $.post(baseURL + api + isoPais + "/reportes/estatuslotes",filtro_busq );
-			$consulta.done(function(data){
+			var dataRequest = JSON.stringify({
+				filtro_busq: filtro_busq
+
+			})
+			dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {
+				format: CryptoJSAesJson
+			}).toString();
+			$consulta = $.post(baseURL + api + isoPais + "/reportes/estatuslotes",{request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook) }  );
+			$consulta.done(function(response){
+				data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 				$("#mensaje").remove();
 				$('#cargando').fadeOut("slow");
 				$("#EstatusLotes-btnBuscar").show();

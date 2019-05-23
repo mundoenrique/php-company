@@ -38,19 +38,21 @@ $urlCdn = get_cdn();
 					</div>
 			<div id="lotes-contenedor">
 				<div id="lotes-2">
-					<div id="search-1">
-						<h5><?php echo lang('REPORTES_SELECCION_EMPRESA'); ?><img id ="cargando_empresa" style="display:none;width: 25px; margin-left:10px" src="<?php echo $urlCdn."media/img/loading.gif"?>"/></h5>
-						<select id = "RecargasRealizadas-Empresa" class="required">
-							<option value="" selected="selected"><?php echo lang('REPORTES_SELECCIONE_EMPRESA'); ?></option>
-						</select>
-					</div>
-					<div id="search-1">
-						<!--<h5>Rango</h5>-->
-						<span>
-						<h5><?php echo lang('REPORTES_SELECCION_MESAÑO'); ?></h5>
+					<form id="form-criterio-busqueda" onsubmit="return false">
+						<div id="search-1">
+							<h5><?php echo lang('REPORTES_SELECCION_EMPRESA'); ?><img id ="cargando_empresa" style="display:none;width: 25px; margin-left:10px" src="<?php echo $urlCdn."media/img/loading.gif"?>"/></h5>
+							<select id = "RecargasRealizadas-Empresa" name="empresa-select" class="required">
+								<option value="" selected="selected"><?php echo lang('REPORTES_SELECCIONE_EMPRESA'); ?></option>
+							</select>
+						</div>
+						<div id="search-1">
+							<!--<h5>Rango</h5>-->
+							<span>
+							<h5><?php echo lang('REPORTES_SELECCION_MESAÑO'); ?></h5>
 
-						<input id="repRecargasRealizadas_anio" type="text" placeholder="MM-YYYY" class="required"/>
-					</div>	
+							<input id="repRecargasRealizadas_anio" type="text" name="my-date" placeholder="MM-YYYY" class="required"/>
+						</div>	
+					</form>
 				</div>	
 			</div>	
 					

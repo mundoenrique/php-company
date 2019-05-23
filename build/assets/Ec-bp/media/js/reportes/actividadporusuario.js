@@ -84,17 +84,19 @@ $("#empresa").on('change', function(){
 
         if(validar_filtro_busqueda("lotes-2")){
           // mostrar reporte
+				var form = $('#form-criterio-busqueda');
+				validateForms(form);
+				if (form.valid()) {
+					$('#cargando').show();
+					$(this).hide();
+					$('.resultadosAU').hide();
 
-        $('#cargando').show();
-        $(this).hide();
-        $('.resultadosAU').hide();
-
-        params.fecha_ini = $("#fecha_ini").val();
-        params.fecha_fin = $("#fecha_fin").val();
-        params.acodcia = $("#empresa").val();
-				var ceo_cook = decodeURIComponent(
-					document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-				);
+					params.fecha_ini = $("#fecha_ini").val();
+					params.fecha_fin = $("#fecha_fin").val();
+					params.acodcia = $("#empresa").val();
+					var ceo_cook = decodeURIComponent(
+						document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+					);
           $.post(baseURL + api + isoPais + "/reportes/actividadporusuario", {"data-fechaIni": $("#fecha_ini").val(),"data-fechaFin": $("#fecha_fin").val(), "data-acodcia":$("#empresa").val(), ceo_name: ceo_cook})
           .always(function(data){
             $('#cargando').hide();
@@ -208,7 +210,9 @@ $("#empresa").on('change', function(){
             }
 
           });
-
+				} else {
+					showErrMsg('Verifique los datos ingresados e intente nuevamente');
+				}
           }
       });
 

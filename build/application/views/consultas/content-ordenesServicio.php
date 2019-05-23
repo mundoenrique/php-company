@@ -70,6 +70,7 @@ if($osConfirmV){
             </div>
 
             <div id="lotes-contenedor">
+							<form id="form-criterio-busqueda" onsubmit="return false">
                 <span class="info-OD">
                     <h5>5 días</h5>
                     <input class="required login" type="radio" name="dias" value="5" />
@@ -80,17 +81,17 @@ if($osConfirmV){
                 </span>
                 <span class="info-OD">
                     <h5>Fecha inicial</h5>
-                    <input id='fecha_inicial' class="required login" placeholder="DD/MM/AA" value=""
+                    <input id='fecha_inicial' name="start-dmy-date" class="required login" placeholder="DD/MM/AA" value=""
                         onfocus="javascript:this.value=''" />
                 </span>
                 <span class="info-OD">
                     <h5>Fecha final</h5>
-                    <input id='fecha_final' class="required login" placeholder="DD/MM/AA" value=""
+                    <input id='fecha_final' name="end-dmy-date" class="required login" placeholder="DD/MM/AA" value=""
                         onfocus="javascript:this.value=''" />
                 </span>
                 <div class="info-OD">
                     <h5>Estatus de Lote</h5>
-                    <select id="status_lote" name="batch">
+                    <select id="status_lote" name="batch" class="required">
                         <?
                         if( array_key_exists("ERROR", $tipoStatus[0]) ){
                             if($tipoStatus['ERROR']=='-29'){
@@ -106,6 +107,7 @@ if($osConfirmV){
                         }?>
                     </select>
                 </div>
+							</form>
             </div>
 
             <div id="batchs-last">

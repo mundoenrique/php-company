@@ -270,7 +270,9 @@ class Lotes extends CI_Controller {
 			$token = $this->session->userdata('token');
 			$nombreCompleto = $this->session->userdata('nombreCompleto');
 			$lastSessionD = $this->session->userdata('lastSession');
-			$FooterCustomInsertJS=["jquery-3.4.0.min.js", "jquery-ui-1.12.1.min.js","jquery.balloon.min.js","jquery-md5.js","dashboard/widget-empresa.js","aes.min.js","aes-json-format.min.js","lotes/lotes-autorizacion.js","jquery.dataTables.min.js","header.js","routes.js"];
+			$jsRte = '../../../js/';
+			$thirdsJsRte = '../../../js/third_party/';
+			$FooterCustomInsertJS=["jquery-3.4.0.min.js", "jquery-ui-1.12.1.min.js","jquery.balloon.min.js","jquery-md5.js","aes.min.js","aes-json-format.min.js","dashboard/widget-empresa.js","lotes/lotes-autorizacion.js","jquery.dataTables.min.js","header.js","routes.js",$thirdsJsRte."jquery.validate.min.js",$jsRte."validate-forms.js",$thirdsJsRte."additional-methods.min.js"];
 			$FooterCustomJS="";
 			$titlePage="Conexión Empresas Online - Lotes";
 
@@ -391,11 +393,11 @@ class Lotes extends CI_Controller {
 
 		$data = json_encode($data,JSON_UNESCAPED_UNICODE);
 
-		$dataEncry = np_Hoplite_Encryption($data);
+		$dataEncry = np_Hoplite_Encryption($data, 'callWSbuscarLotesAutorizar');
 		$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
 		$data = json_encode($data);
 		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
-		$jsonResponse = np_Hoplite_Decrypt($response);
+		$jsonResponse = np_Hoplite_Decrypt($response, 'callWSbuscarLotesAutorizar');
 		$response = json_decode($jsonResponse);
 
 		if($response){
@@ -479,11 +481,11 @@ class Lotes extends CI_Controller {
 
 		$data = json_encode($data,JSON_UNESCAPED_UNICODE);
 		log_message('info','lotes cancelarOS '.$data);
-		$dataEncry = np_Hoplite_Encryption($data);
+		$dataEncry = np_Hoplite_Encryption($data, 'callWScancelarCalculoOS');
 		$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
 		$data = json_encode($data);
 		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
-		$jsonResponse = np_Hoplite_Decrypt($response);
+		$jsonResponse = np_Hoplite_Decrypt($response, 'callWScancelarCalculoOS');
 		$response = json_decode($jsonResponse);
 
 		if($response){
@@ -619,11 +621,11 @@ class Lotes extends CI_Controller {
 
 		$data = json_encode($data,JSON_UNESCAPED_UNICODE);
 
-		$dataEncry = np_Hoplite_Encryption($data);
+		$dataEncry = np_Hoplite_Encryption($data, 'callWSfirmarLote');
 		$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
 		$data = json_encode($data);
 		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
-		$jsonResponse = np_Hoplite_Decrypt($response);
+		$jsonResponse = np_Hoplite_Decrypt($response, 'callWSfirmarLote');
 		$response = json_decode($jsonResponse);
 
 		if($response){
@@ -741,11 +743,11 @@ class Lotes extends CI_Controller {
 
 		$data = json_encode($data,JSON_UNESCAPED_UNICODE);
 
-		$dataEncry = np_Hoplite_Encryption($data);
+		$dataEncry = np_Hoplite_Encryption($data, 'callWSdesasociarFirma');
 		$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
 		$data = json_encode($data);
 		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
-		$jsonResponse = np_Hoplite_Decrypt($response);
+		$jsonResponse = np_Hoplite_Decrypt($response, 'callWSdesasociarFirma');
 		$response = json_decode($jsonResponse);
 
 		if($response){
@@ -876,11 +878,11 @@ class Lotes extends CI_Controller {
 
 		$data = json_encode($data,JSON_UNESCAPED_UNICODE);
 
-		$dataEncry = np_Hoplite_Encryption($data);
+		$dataEncry = np_Hoplite_Encryption($data, 'callWSeliminarLotesPorAutorizar');
 		$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
 		$data = json_encode($data);
 		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
-		$jsonResponse = np_Hoplite_Decrypt($response);
+		$jsonResponse = np_Hoplite_Decrypt($response, 'callWSeliminarLotesPorAutorizar');
 		$response = json_decode($jsonResponse);
 
 
@@ -1021,11 +1023,11 @@ class Lotes extends CI_Controller {
 
 		log_message('DEBUG', 'REQUEST DETALLE DEL LOTE: '.$data);
 
-		$dataEncry = np_Hoplite_Encryption($data);
+		$dataEncry = np_Hoplite_Encryption($data, 'callWSdetalleLoteAutorizar');
 		$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
 		$data = json_encode($data);
 		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
-		$jsonResponse = np_Hoplite_Decrypt($response);
+		$jsonResponse = np_Hoplite_Decrypt($response, 'callWSdetalleLoteAutorizar');
 
 		log_message('info','detalle loteAuth '.$jsonResponse);
 
@@ -1096,11 +1098,11 @@ class Lotes extends CI_Controller {
 
             $data = json_encode($data,JSON_UNESCAPED_UNICODE);
 
-            $dataEncry = np_Hoplite_Encryption($data);
+            $dataEncry = np_Hoplite_Encryption($data, 'expdetalleLoteAuthXLS');
             $data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
             $data = json_encode($data);
             $response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
-            $jsonResponse = np_Hoplite_Decrypt($response);
+            $jsonResponse = np_Hoplite_Decrypt($response, 'expdetalleLoteAuthXLS');
 
             $response =  json_decode($jsonResponse);
 
@@ -1187,11 +1189,11 @@ class Lotes extends CI_Controller {
 
             $data = json_encode($data,JSON_UNESCAPED_UNICODE);
 
-            $dataEncry = np_Hoplite_Encryption($data);
+            $dataEncry = np_Hoplite_Encryption($data,'expdetalleLoteAuthPDF');
             $data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
             $data = json_encode($data);
             $response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
-            $jsonResponse = np_Hoplite_Decrypt($response);
+            $jsonResponse = np_Hoplite_Decrypt($response,'expdetalleLoteAuthPDF');
 
             $response =  json_decode($jsonResponse);
 
@@ -1277,11 +1279,11 @@ class Lotes extends CI_Controller {
 			);
 
 		$data = json_encode($data,JSON_UNESCAPED_UNICODE);
-		$dataEncry = np_Hoplite_Encryption($data);
+		$dataEncry = np_Hoplite_Encryption($data,'callWSbuscarLotesPorConfirmar');
 		$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
 		$data = json_encode($data);
 		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
-		$jsonResponse = np_Hoplite_Decrypt($response);
+		$jsonResponse = np_Hoplite_Decrypt($response,'callWSbuscarLotesPorConfirmar');
 		$response = json_decode($jsonResponse);
 
 		if($response){
@@ -1355,11 +1357,11 @@ class Lotes extends CI_Controller {
 
 		log_message('info','request consultarTipoLote ' . $data);
 
-		$dataEncry = np_Hoplite_Encryption($data);
+		$dataEncry = np_Hoplite_Encryption($data,'callWSconsultarTipoLote');
 		$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
 		$data = json_encode($data);
 		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
-		$jsonResponse = np_Hoplite_Decrypt($response);
+		$jsonResponse = np_Hoplite_Decrypt($response,'callWSconsultarTipoLote');
 		$response = json_decode($jsonResponse);
 
 		if($response){
@@ -1444,18 +1446,16 @@ class Lotes extends CI_Controller {
 
 		$data = json_encode($data,JSON_UNESCAPED_UNICODE);
 
-		$dataEncry = np_Hoplite_Encryption($data);
+		$dataEncry = np_Hoplite_Encryption($data, 'callWScargarArchivo');
 
 		log_message('info',"cargaLote ".$data);
 
 		$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
 		$data = json_encode($data);
 		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
-		$jsonResponse = np_Hoplite_Decrypt($response);
-		//$response = $this->cryptography->encrypt($jsonResponse);
-		//$response = json_decode($jsonResponse);
-			return $response;
-		//log_message('info',"cargaLote ".$jsonResponse);
+		$jsonResponse = np_Hoplite_Decrypt($response, 'callWScargarArchivo');
+		$response = json_decode($jsonResponse);
+		log_message('info',"cargaLote ".$jsonResponse);
 		if($response){
 
 			if($response->rc==0 || $response->rc==-128){
@@ -1525,11 +1525,11 @@ class Lotes extends CI_Controller {
 			);
 
 		$data = json_encode($data,JSON_UNESCAPED_UNICODE);
-		$dataEncry = np_Hoplite_Encryption($data);
+		$dataEncry = np_Hoplite_Encryption($data, 'callWSeliminarLoteNoConfirmado');
 		$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
 		$data = json_encode($data);
 		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
-		$jsonResponse = np_Hoplite_Decrypt($response);
+		$jsonResponse = np_Hoplite_Decrypt($response, 'callWSeliminarLoteNoConfirmado');
 		$response = json_decode($jsonResponse);
 
 		if($response){
@@ -1813,11 +1813,11 @@ class Lotes extends CI_Controller {
 
 			$data = json_encode($data,JSON_UNESCAPED_UNICODE);
 
-			$dataEncry = np_Hoplite_Encryption($data);
+			$dataEncry = np_Hoplite_Encryption($data, 'callWSverDetalleBandeja');
 			$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
 			$data = json_encode($data);
 			$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
-			$jsonResponse = np_Hoplite_Decrypt($response);
+			$jsonResponse = np_Hoplite_Decrypt($response, 'callWSverDetalleBandeja');
 			$response = json_decode($jsonResponse);
 
 			if($response){
@@ -1981,11 +1981,11 @@ class Lotes extends CI_Controller {
 
 		log_message('info',"Request  confirmarlote======>>>>>>" . $data);
 
-		$dataEncry = np_Hoplite_Encryption($data);
+		$dataEncry = np_Hoplite_Encryption($data, 'callWSconfirmarLote');
 		$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
 		$data = json_encode($data);
 		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
-		$jsonResponse = np_Hoplite_Decrypt($response);
+		$jsonResponse = np_Hoplite_Decrypt($response, 'callWSconfirmarLote');
 		$response = json_decode($jsonResponse);
 
 		log_message('info',"confirmarlote ".$jsonResponse);
@@ -2133,10 +2133,6 @@ class Lotes extends CI_Controller {
 					$medio = isset($dataRequest->data_medio) ? $dataRequest->data_medio : '';
 					$ivanuevo = isset($dataRequest->data_iva) ? (($dataRequest->data_iva==1)?true:false) : '';
 
-	        //$pass = $this->input->post('data-pass');
-	        //$tipoOrdeServicio = $this->input->post('data-tipoOS');
-	        //$lotes = explode(',', $this->input->post('data-lotes'));
-
 	        array_pop($lotes);
 	        log_message('info', "Prueba para la toma del país --->>> " . $paisS);
 	        $calculoOsLotesW = $this->callWScalcularOS($urlCountry, $token, $username,
@@ -2247,11 +2243,11 @@ class Lotes extends CI_Controller {
 
 		log_message("info","Array de medios de pago -->> ".$data);
 
-		$dataEncry = np_Hoplite_Encryption($data);
+		$dataEncry = np_Hoplite_Encryption($data, 'callWScalcularOS');
 		$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
 		$data = json_encode($data);
 		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
-		$jsonResponse = np_Hoplite_Decrypt($response);
+		$jsonResponse = np_Hoplite_Decrypt($response, 'callWScalcularOS');
 		$response = json_decode($jsonResponse);
 
 		log_message("DEBUG","RESPONSE Calculo OS: ".$jsonResponse);
@@ -2380,11 +2376,11 @@ class Lotes extends CI_Controller {
 
 		$data = json_encode($data,JSON_UNESCAPED_UNICODE);
 
-		$dataEncry = np_Hoplite_Encryption($data);
+		$dataEncry = np_Hoplite_Encryption($data, 'callWSgenerarOS');
 		$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
 		$data = json_encode($data);
 		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
-		$jsonResponse = np_Hoplite_Decrypt($response);
+		$jsonResponse = np_Hoplite_Decrypt($response, 'callWSgenerarOS');
 		$response = json_decode($jsonResponse);
 
 		//log_message("DEBUG", "generarOS =====>>>>>> ".json_encode($response));
@@ -2670,11 +2666,11 @@ class Lotes extends CI_Controller {
 
 		$data = json_encode($data,JSON_UNESCAPED_UNICODE);
 
-		$dataEncry = np_Hoplite_Encryption($data);
+		$dataEncry = np_Hoplite_Encryption($data, 'callWScrearBeneficiario');
 		$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
 		$data = json_encode($data);
 		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
-		$jsonResponse = np_Hoplite_Decrypt($response);
+		$jsonResponse = np_Hoplite_Decrypt($response, 'callWScrearBeneficiario');
 		$response = json_decode($jsonResponse);
 
 		if($response){
@@ -2822,11 +2818,11 @@ class Lotes extends CI_Controller {
 
 		$data = json_encode($data,JSON_UNESCAPED_UNICODE);
 
-		$dataEncry = np_Hoplite_Encryption($data);
+		$dataEncry = np_Hoplite_Encryption($data, 'callWScargarArchivoReproceso');
 		$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
 		$data = json_encode($data);
 		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
-		$jsonResponse = np_Hoplite_Decrypt($response);
+		$jsonResponse = np_Hoplite_Decrypt($response, 'callWScargarArchivoReproceso');
 		$response = json_decode($jsonResponse);
 
 		if($response){
@@ -2938,11 +2934,11 @@ class Lotes extends CI_Controller {
 
 		$data = json_encode($data,JSON_UNESCAPED_UNICODE);
 
-		$dataEncry = np_Hoplite_Encryption($data);
+		$dataEncry = np_Hoplite_Encryption($data, 'callWSListaBeneficiarios');
 		$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
 		$data = json_encode($data);
 		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
-		$jsonResponse = np_Hoplite_Decrypt($response);
+		$jsonResponse = np_Hoplite_Decrypt($response, 'callWSListaBeneficiarios');
 		$response = json_decode($jsonResponse);
 
 		if($response){
@@ -3104,11 +3100,11 @@ class Lotes extends CI_Controller {
 
 		$data = json_encode($data,JSON_UNESCAPED_UNICODE);
 			log_message('info','callWSmodificarBeneficiario =======> '.$data);
-		$dataEncry = np_Hoplite_Encryption($data);
+		$dataEncry = np_Hoplite_Encryption($data, 'callWSmodificarBeneficiario');
 		$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
 		$data = json_encode($data);
 		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
-		$jsonResponse = np_Hoplite_Decrypt($response);
+		$jsonResponse = np_Hoplite_Decrypt($response, 'callWSmodificarBeneficiario');
 		$response = json_decode($jsonResponse);
 
 		if($response){
@@ -3245,11 +3241,11 @@ class Lotes extends CI_Controller {
 
 		$data = json_encode($data,JSON_UNESCAPED_UNICODE);
 
-		$dataEncry = np_Hoplite_Encryption($data);
+		$dataEncry = np_Hoplite_Encryption($data, 'callWSeliminarBeneficiario');
 		$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
 		$data = json_encode($data);
 		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
-		$jsonResponse = np_Hoplite_Decrypt($response);
+		$jsonResponse = np_Hoplite_Decrypt($response, 'callWSeliminarBeneficiario');
 		$response = json_decode($jsonResponse);
 
 		if($response){
@@ -3399,12 +3395,12 @@ class Lotes extends CI_Controller {
 
         $data = json_encode($data, JSON_UNESCAPED_UNICODE);
         log_message('info', 'callWSreprocesarMasivo ====>> ' . $data);
-        $dataEncry = np_Hoplite_Encryption($data);
+        $dataEncry = np_Hoplite_Encryption($data, 'callWSreprocesarMasivo');
         $data = array('bean' => $dataEncry, 'pais' => $urlCountry);
         $data = json_encode($data);
         log_message('info', 'callWSreprocesarMasivo Encrypt ====>> ' . $data);
         $response = np_Hoplite_GetWS('eolwebInterfaceWS', $data);
-        $jsonResponse = np_Hoplite_Decrypt($response);
+        $jsonResponse = np_Hoplite_Decrypt($response, 'callWSreprocesarMasivo');
         $response = json_decode($jsonResponse);
         //log_message('info', 'Response ' . $response);
         if ($response) {
@@ -3493,11 +3489,11 @@ class Lotes extends CI_Controller {
 		}
 		$data = json_encode($data,JSON_UNESCAPED_UNICODE);
 
-		$dataEncry = np_Hoplite_Encryption($data);
+		$dataEncry = np_Hoplite_Encryption($data, 'callWSreprocesar');
 		$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
 		$data = json_encode($data);
 		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
-		$jsonResponse = np_Hoplite_Decrypt($response);
+		$jsonResponse = np_Hoplite_Decrypt($response, 'callWSreprocesar');
 		$response = json_decode($jsonResponse);
 
 		if($response){

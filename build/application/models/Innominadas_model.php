@@ -73,11 +73,11 @@ class Innominadas_Model extends CI_Model {
 
 		log_message('info','solicitud inno data request => '.$data);
 
-		$dataEncry = np_Hoplite_Encryption($data);
+		$dataEncry = np_Hoplite_Encryption($data, 'callWSCreateInnominadas');
 		$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
 		$data = json_encode($data);
 		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
-		$jsonResponse = np_Hoplite_Decrypt($response);
+		$jsonResponse = np_Hoplite_Decrypt($response, 'callWSCreateInnominadas');
 
 		log_message('info','solicitud data response => '.$jsonResponse);
 
@@ -158,14 +158,14 @@ class Innominadas_Model extends CI_Model {
 		//log_message('info','lista inno_en_proceso 1 data request=>'.$prueba);
 		log_message('info','inno_report_xls data request=>'.$data);
 
-		$dataEncry = np_Hoplite_Encryption($data);
+		$dataEncry = np_Hoplite_Encryption($data, 'callWSReporteInnominadas');
 		$data = array('bean'=>$dataEncry, 'pais' =>$urlCountry );
 
 		log_message('info','inno_report_xls 2 data request=>'.json_encode($data,JSON_UNESCAPED_UNICODE));
 
 		$data = json_encode($data);
 		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
-		$jsonResponse = np_Hoplite_Decrypt($response);
+		$jsonResponse = np_Hoplite_Decrypt($response, 'callWSReporteInnominadas');
 		$response = json_decode($jsonResponse);
 
 		if($response){
@@ -255,14 +255,14 @@ class Innominadas_Model extends CI_Model {
 
 		log_message('info','lista inno_en_proceso 2 data request=>'.$data);
 
-		$dataEncry = np_Hoplite_Encryption($data);
+		$dataEncry = np_Hoplite_Encryption($data, 'callWSListaInnominadasEnProc');
 		$data = array('bean'=>$dataEncry, 'pais' =>$urlCountry );
 
 		log_message('info','lista inno_en_proceso 2 data request=>'.json_encode($data,JSON_UNESCAPED_UNICODE));
 
 		$data = json_encode($data);
 		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
-		$jsonResponse = np_Hoplite_Decrypt($response);
+		$jsonResponse = np_Hoplite_Decrypt($response, 'callWSListaInnominadasEnProc');
 
 		log_message('info','lista inno_en_proceso data response=>'.$jsonResponse);
 
@@ -345,12 +345,12 @@ class Innominadas_Model extends CI_Model {
 		//log_message('info','lista inno_en_proceso 1 data request=>'.$prueba);
 		log_message('info','lista tarjetas_innominada data request=>'.$data);
 
-		$dataEncry = np_Hoplite_Encryption($data);
+		$dataEncry = np_Hoplite_Encryption($data, 'callWSListaTarjetasInnominadas');
 		$data = array('bean'=>$dataEncry, 'pais' =>$urlCountry );
 
 		$data = json_encode($data);
 		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
-		$jsonResponse = np_Hoplite_Decrypt($response);
+		$jsonResponse = np_Hoplite_Decrypt($response, 'callWSListaTarjetasInnominadas');
 
 		log_message('info','lista tarjetas_innominada data response=>'.$jsonResponse);
 
@@ -415,12 +415,12 @@ class Innominadas_Model extends CI_Model {
 		//log_message('info','lista inno_en_proceso 1 data request=>'.$prueba);
 		log_message('info','eliminar_lote data request=>'.$data);
 
-		$dataEncry = np_Hoplite_Encryption($data);
+		$dataEncry = np_Hoplite_Encryption($data, 'callWSEliminarInnominadas');
 		$data = array('bean'=>$dataEncry, 'pais' =>$urlCountry );
 
 		$data = json_encode($data);
 		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
-		$jsonResponse = np_Hoplite_Decrypt($response);
+		$jsonResponse = np_Hoplite_Decrypt($response, 'callWSEliminarInnominadas');
 
 		log_message('info','eliminar_lote data response=>'.$jsonResponse);
 
