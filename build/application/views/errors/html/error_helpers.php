@@ -43,7 +43,8 @@ function insert_favicon($country) {
 
 function get_country() {
 	if (isset($_SERVER['REQUEST_URI'])) {
-		$uri_segments = explode('/', parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
+		$uri = str_replace(BASE_URL, '/', $_SERVER['REQUEST_URI']);
+		$uri_segments = explode('/', $uri);
 		$uri_country = $uri_segments[1];
 	} else {
 		$uri_country = 'Pe';
