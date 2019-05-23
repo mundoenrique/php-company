@@ -238,7 +238,6 @@ class Dashboard extends CI_Controller {
 				$lista = $this->callWSListaEmpresas($paginar,$paginaActual,$tamanoPagina,$urlCountry);
 
 			}else{
-				log_message('DEBUG', 'SIN PAGINAR-------------------------------');
 				$paginar=FALSE;
 				$lista = $this->callWSListaEmpresasPaginar($paginar,$tamanoPagina=null,$paginaActual=null,$filtroEmpresas=null,$urlCountry);
 			}

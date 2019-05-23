@@ -33,7 +33,6 @@ $(function() {
 	$.get( baseURL + api + isoPais + '/servicios/transferencia-maestra/consultarSaldo',
 	function(response) {
 		data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
-		console.log(data);
 		var data = data, dataAmount, Amountmsg
 		if (data.rc == 0) {
 			dataAmount = data.maestroDeposito.saldoDisponible;
