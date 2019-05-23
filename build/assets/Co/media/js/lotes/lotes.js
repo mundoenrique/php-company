@@ -40,7 +40,7 @@ var f, dir, forma;
 											);
 
 										dat.formData = {'data-tipoLote':$("#tipoLote").val(), 'data-formatolote':$("#tipoLote option:selected").attr('rel'), ceo_name: ceo_cook };
-                    dat.submit().success( function (result, textStatus, jqXHR){
+                    dat.submit(function (result, textStatus, jqXHR){
 
                       if(result){
                         result = $.parseJSON(result);
