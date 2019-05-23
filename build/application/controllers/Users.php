@@ -321,11 +321,11 @@ class Users extends CI_Controller {
 
 						log_message('DEBUG', 'REQUEST LOGOUT:' . $data);
 
-            $dataEncry = np_Hoplite_Encryption($data);
+            $dataEncry = np_Hoplite_Encryption($data, 'logout');
             $data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
             $data = json_encode($data);
             $response = np_Hoplite_GetWS('eolwebInterfaceWS',$data); // ENVÍA LA PETICIÓN Y ALMACENA LA RESPUESTA EN $response
-						$jsonResponse = np_Hoplite_Decrypt($response);
+						$jsonResponse = np_Hoplite_Decrypt($response, 'logout');
 
 						log_message('DEBUG', 'RESPONSE LOGOUT:' . $jsonResponse);
 
@@ -795,11 +795,11 @@ class Users extends CI_Controller {
 
         $data = json_encode($data,JSON_UNESCAPED_UNICODE);
 
-        $dataEncry = np_Hoplite_Encryption($data);
+        $dataEncry = np_Hoplite_Encryption($data, 'callWScambioClave');
         $data = array('bean' => $dataEncry, 'pais' =>$pais );
         $data = json_encode($data);
         $response = np_Hoplite_GetWS('eolwebInterfaceWS',$data); // ENVÍA LA PETICIÓN Y ALMACENA LA RESPUESTA EN $response
-        $jsonResponse = np_Hoplite_Decrypt($response);
+        $jsonResponse = np_Hoplite_Decrypt($response, 'callWScambioClave');
 
         $response = json_decode($jsonResponse);
 
@@ -1119,11 +1119,11 @@ class Users extends CI_Controller {
 
         $data = json_encode($data,JSON_UNESCAPED_UNICODE);
 
-        $dataEncry = np_Hoplite_Encryption($data);
+        $dataEncry = np_Hoplite_Encryption($data, 'callWSListaEmpresas');
         $data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
         $data = json_encode($data);
         $response = np_Hoplite_GetWS('eolwebInterfaceWS',$data); // ENVÍA LA PETICIÓN Y ALMACENA LA RESPUESTA EN $response
-        $jsonResponse = np_Hoplite_Decrypt($response);
+        $jsonResponse = np_Hoplite_Decrypt($response, 'callWSListaEmpresas');
         $response = json_decode($jsonResponse);
 
         if($response){
@@ -1239,11 +1239,11 @@ class Users extends CI_Controller {
 
         $data = json_encode($data,JSON_UNESCAPED_UNICODE);
 
-        $dataEncry = np_Hoplite_Encryption($data);
+        $dataEncry = np_Hoplite_Encryption($data, 'callWSInfoEmpresa');
         $data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
         $data = json_encode($data);
         $response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);	// ENVÍA LA PETICIÓN Y ALMACENA LA RESPUESTA EN $response
-        $jsonResponse = np_Hoplite_Decrypt($response);
+        $jsonResponse = np_Hoplite_Decrypt($response, 'callWSInfoEmpresa');
         $response = json_decode($jsonResponse);
 
         if($response){
@@ -1356,11 +1356,11 @@ class Users extends CI_Controller {
 
         $data = json_encode($data,JSON_UNESCAPED_UNICODE);
 
-        $dataEncry = np_Hoplite_Encryption($data);
+        $dataEncry = np_Hoplite_Encryption($data, 'callWSContactoEmpresa');
         $data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
         $data = json_encode($data);
         $response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
-        $jsonResponse = np_Hoplite_Decrypt($response);
+        $jsonResponse = np_Hoplite_Decrypt($response, 'callWSContactoEmpresa');
         $response = json_decode($jsonResponse);
 
         if($response){
@@ -1489,11 +1489,11 @@ class Users extends CI_Controller {
 
         $data = json_encode($data,JSON_UNESCAPED_UNICODE);
 
-        $dataEncry = np_Hoplite_Encryption($data);
+        $dataEncry = np_Hoplite_Encryption($data, 'callWSActualizarTlfEmpresa');
         $data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
         $data = json_encode($data);
         $response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
-        $jsonResponse = np_Hoplite_Decrypt($response);
+        $jsonResponse = np_Hoplite_Decrypt($response, 'callWSActualizarTlfEmpresa');
         $response = json_decode($jsonResponse);
 
         if($response){
@@ -1621,11 +1621,11 @@ class Users extends CI_Controller {
 
         $data = json_encode($data,JSON_UNESCAPED_UNICODE);
 
-        $dataEncry = np_Hoplite_Encryption($data);
+        $dataEncry = np_Hoplite_Encryption($data, 'callWSAgregarContactoEmpresa');
         $data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
         $data = json_encode($data);
         $response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
-        $jsonResponse = np_Hoplite_Decrypt($response);
+        $jsonResponse = np_Hoplite_Decrypt($response, 'callWSAgregarContactoEmpresa');
         $response = json_decode($jsonResponse);
 
         if($response){
@@ -1737,11 +1737,11 @@ class Users extends CI_Controller {
 
         $data = json_encode($data,JSON_UNESCAPED_UNICODE);
 
-        $dataEncry = np_Hoplite_Encryption($data);
+        $dataEncry = np_Hoplite_Encryption($data, 'callWSEliminarContactoEmpresa');
         $data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
         $data = json_encode($data);
         $response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
-        $jsonResponse = np_Hoplite_Decrypt($response);
+        $jsonResponse = np_Hoplite_Decrypt($response, 'callWSEliminarContactoEmpresa');
         $response = json_decode($jsonResponse);
 
         if($response){
@@ -1863,11 +1863,11 @@ class Users extends CI_Controller {
 
         $data = json_encode($data,JSON_UNESCAPED_UNICODE);
 
-        $dataEncry = np_Hoplite_Encryption($data);
+        $dataEncry = np_Hoplite_Encryption($data, 'callWSActualizarContactoEmpresa');
         $data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
         $data = json_encode($data);
         $response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
-        $jsonResponse = np_Hoplite_Decrypt($response);
+        $jsonResponse = np_Hoplite_Decrypt($response, 'callWSActualizarContactoEmpresa');
         $response = json_decode($jsonResponse);
 
         if($response){
@@ -1971,11 +1971,11 @@ class Users extends CI_Controller {
 
         $data = json_encode($data,JSON_UNESCAPED_UNICODE);
 
-        $dataEncry = np_Hoplite_Encryption($data);
+        $dataEncry = np_Hoplite_Encryption($data, 'callWSPerfilUser');
         $data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
         $data = json_encode($data);
         $response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
-        $jsonResponse = np_Hoplite_Decrypt($response);
+        $jsonResponse = np_Hoplite_Decrypt($response, 'callWSPerfilUser');
         $response = json_decode($jsonResponse);
 
         if($response){
@@ -2090,11 +2090,11 @@ class Users extends CI_Controller {
 
         $data = json_encode($data,JSON_UNESCAPED_UNICODE);
 
-        $dataEncry = np_Hoplite_Encryption($data);
+        $dataEncry = np_Hoplite_Encryption($data, 'callWSActualizarPerfilUser');
         $data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
         $data = json_encode($data);
         $response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
-        $jsonResponse = np_Hoplite_Decrypt($response);
+        $jsonResponse = np_Hoplite_Decrypt($response, 'callWSActualizarPerfilUser');
         $response = json_decode($jsonResponse);
 
         if($response){
@@ -2206,11 +2206,11 @@ class Users extends CI_Controller {
 
         $data = json_encode($data,JSON_UNESCAPED_UNICODE);
 
-        $dataEncry = np_Hoplite_Encryption($data);
+        $dataEncry = np_Hoplite_Encryption($data, 'callWSConsultarSucursales');
         $data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
         $data = json_encode($data);
         $response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
-        $jsonResponse = np_Hoplite_Decrypt($response);
+        $jsonResponse = np_Hoplite_Decrypt($response, 'callWSConsultarSucursales');
         $response = json_decode($jsonResponse);
 
         if($response){
@@ -2345,11 +2345,11 @@ class Users extends CI_Controller {
 
         $data = json_encode($data,JSON_UNESCAPED_UNICODE);
 
-        $dataEncry = np_Hoplite_Encryption($data);
+        $dataEncry = np_Hoplite_Encryption($data, 'callWSAgregarSucursales');
         $data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
         $data = json_encode($data);
         $response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
-        $jsonResponse = np_Hoplite_Decrypt($response);
+        $jsonResponse = np_Hoplite_Decrypt($response, 'callWSAgregarSucursales');
         $response = json_decode($jsonResponse);
 
         if($response){
@@ -2478,11 +2478,11 @@ class Users extends CI_Controller {
 
         $data = json_encode($data,JSON_UNESCAPED_UNICODE);
 
-        $dataEncry = np_Hoplite_Encryption($data);
+        $dataEncry = np_Hoplite_Encryption($data, 'callWSActualizarSucursales');
         $data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
         $data = json_encode($data);
         $response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
-        $jsonResponse = np_Hoplite_Decrypt($response);
+        $jsonResponse = np_Hoplite_Decrypt($response, 'callWSActualizarSucursales');
         $response = json_decode($jsonResponse);
 
         if($response){
@@ -2642,11 +2642,11 @@ class Users extends CI_Controller {
 
         $data = json_encode($data,JSON_UNESCAPED_UNICODE);
 
-        $dataEncry = np_Hoplite_Encryption($data);
+        $dataEncry = np_Hoplite_Encryption($data, 'callWScargarSucursales');
         $data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
         $data = json_encode($data);
         $response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
-        $jsonResponse = np_Hoplite_Decrypt($response);
+        $jsonResponse = np_Hoplite_Decrypt($response, 'callWScargarSucursales');
         $response = json_decode($jsonResponse);
 
         if($response){
@@ -2742,11 +2742,11 @@ class Users extends CI_Controller {
 						$data = json_encode( $data, JSON_UNESCAPED_UNICODE);
 						log_message('info','Estatus Notificacion : '.$data);
 
-						$dataEncry = np_Hoplite_Encryption( $data);
+						$dataEncry = np_Hoplite_Encryption($data, 'callWSNotificaciones');
 						$data = array( 'bean' => $dataEncry, 'pais' =>$urlCountry );
 						$data = json_encode($data);
 						$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
-						$jsonResponse = np_Hoplite_Decrypt($response);
+						$jsonResponse = np_Hoplite_Decrypt($response, 'callWSNotificaciones');
 						$response =  json_decode($jsonResponse);
 						$data1 = json_encode($response);
 
@@ -2837,11 +2837,11 @@ public function NotificacionesEnvio($urlCountry) {
 			$data = json_encode( $data, JSON_UNESCAPED_UNICODE);
 			log_message('info','Estatus Notificacion : '.$data);
 
-			$dataEncry = np_Hoplite_Encryption( $data);
+			$dataEncry = np_Hoplite_Encryption($data, 'callWSNotificacionesEnvio');
 			$data = array( 'bean' => $dataEncry, 'pais' =>$urlCountry );
 			$data = json_encode($data);
 			$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
-			$jsonResponse = np_Hoplite_Decrypt($response);
+			$jsonResponse = np_Hoplite_Decrypt($response, 'callWSNotificacionesEnvio');
 			$response =  json_decode($jsonResponse);
 			$data1 = json_encode($response);
 

@@ -4,40 +4,43 @@ $(function() {
 
 	$('#login-btn').on('click', function(e) {
 		e.preventDefault();
-		var
-		user = $('#user_login'),
-		pass = $('#user_pass'),
-		loginBtn = $(this);
-
-		if(!user.val() && !pass.val()) {
-			$('#user_login, #user_pass')
-			.addClass('validate-error')
-			.attr('placeholder', 'Campo obligatorio');
-		} else if(!user.val()) {
-			user
-			.addClass('validate-error')
-			.attr('placeholder', 'Campo obligatorio');
-		} else if(!pass.val()) {
-			pass
-			.addClass('validate-error')
-			.attr('placeholder', 'Campo obligatorio');
-		} else {
-			var text = loginBtn.text()
-			user = {
-				user: user.val(),
-				pass: $.md5(pass.val()),
+		$(".general-form-msg").html('');
+		var form = $('#login-form');
+		var loginBtn = $(this);
+		validateForms(form, {handleMsg: false});
+		if(form.valid()) {
+			var text = loginBtn.text();
+			var user = {
+				user: $('#user_login').val(),
+				pass: $.md5($('#user_pass').val()),
 				active: ''
-			}
+			};
 			$('#login-form input, #login-form button').attr('disabled', true);
 			loginBtn.html(loader);
-			
 			grecaptcha.ready(function() {
-                grecaptcha.execute('6Lejt6MUAAAAANd7KndpsZ2mRSQXuYHncIxFJDYf', {action: 'login'}).then(function(token) {
-                    validateCaptcha(token,user,text);        
-                });;
-            });
+				grecaptcha
+				.execute('6Lejt6MUAAAAANd7KndpsZ2mRSQXuYHncIxFJDYf', {action: 'login'})
+				.then(function(token) {
+					validateCaptcha(token,user,text);
+				});
+			});
+		} else {
+			var username = $('#user_login');
+			var passValue = $('#user_pass').val();
+			var empty = false;
+			if (username.val().trim()==='') {
+				empty = true;
+				username.val('');
+			}
+			if (passValue==='')
+				empty = true;
+			if (empty)
+				$(".general-form-msg").html('Todos los campos son requeridos');
+			else
+				$(".general-form-msg").html('Combinación incorrecta de usuario y contraseña');
 		}
 	});
+
 	$('#user_login, #user_pass').on('focus keypress', function() {
 		$(this).removeClass('validate-error');
 	});
@@ -61,7 +64,7 @@ function validateCaptcha(token,user,text)
 				$('#login-btn').html(text);
                 break;
         }
-                
+
     })
 }
 

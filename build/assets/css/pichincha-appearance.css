@@ -43,18 +43,28 @@
 }
 
 body {
-	background: -moz-linear-gradient(55deg, rgba(250, 251, 253, 1) 0%, rgba(250, 251, 253, 1) 69%, rgba(243, 244, 248, 1) 70%, rgba(243, 244, 248, 1) 100%) no-repeat;
-	background: -webkit-gradient(linear, left bottom, right top, color-stop(0%, rgba(250, 251, 253, 1)), color-stop(69%, rgba(250, 251, 253, 1)), color-stop(70%, rgba(243, 244, 248, 1)), color-stop(100%, rgba(243, 244, 248, 1))) no-repeat;
-	background: -webkit-linear-gradient(55deg, rgba(250, 251, 253, 1) 0%, rgba(250, 251, 253, 1) 69%, rgba(243, 244, 248, 1) 70%, rgba(243, 244, 248, 1) 100%) no-repeat;
-	background: -o-linear-gradient(55deg, rgba(250, 251, 253, 1) 0%, rgba(250, 251, 253, 1) 69%, rgba(243, 244, 248, 1) 70%, rgba(243, 244, 248, 1) 100%) no-repeat;
-	background: -ms-linear-gradient(55deg, rgba(250, 251, 253, 1) 0%, rgba(250, 251, 253, 1) 69%, rgba(243, 244, 248, 1) 70%, rgba(243, 244, 248, 1) 100%) no-repeat;
-	background: linear-gradient(35deg, rgba(250, 251, 253, 1) 0%, rgba(250, 251, 253, 1) 69%, rgba(243, 244, 248, 1) 70%, rgba(243, 244, 248, 1) 100%) no-repeat;
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#F3F4F8', endColorstr='#FAFBFD', GradientType=0);
-	color: #10133f;
+	background: #fff;
+	color: #555;
 	direction: ltr;
 	font-family: "Prelo Medium", sans-serif;
-	font-weight: normal;
 	font-size: 14px;
+	font-weight: normal;
+	line-height: 17px;
+}
+
+body::before {
+	border-bottom: 300px solid transparent;
+	border-left: 280px solid transparent;
+	border-right: 413px solid #f3f4f8;
+	border-top: 190px solid #f3f4f8;
+	content: '';
+	display: block;
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 0;
+	height: 0;
+	z-index: -1;
 }
 
 html {
@@ -4732,4 +4742,10 @@ li.ui-state-default.ui-corner-top:nth-child(3) {
 
 .system-msg {
 	text-align: justify;
+}
+
+.general-form-msg {
+	text-align: center;
+	color: #e8446c;
+	font-size: 12px;
 }
