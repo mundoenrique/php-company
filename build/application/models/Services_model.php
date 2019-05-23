@@ -35,7 +35,7 @@ class Services_model extends CI_Model {
 		$this->lang->load('servicios');
 		$this->lang->load('users');
 		$this->lang->load('erroreseol');
-		$this->lang->load('dashboard');		
+		$this->lang->load('dashboard');
 	}
 
 	public function getBanckAccountlist() {
@@ -122,5 +122,5 @@ class Services_model extends CI_Model {
 		];
 
 		return $this->response;
-	}	
+	}
 }

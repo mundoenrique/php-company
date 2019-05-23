@@ -104,7 +104,8 @@ class Servicios extends CI_Controller {
 			redirect($urlCountry.'/login');
 
 		} elseif ($this->input->is_ajax_request()) {
-			$this->output->set_content_type('application/json')->set_output(json_encode( array('ERROR' => '-29' )));
+			$response = $this->cryptography->encrypt(array('ERROR' => '-29' ));
+			$this->output->set_content_type('application/json')->set_output(json_encode($response));
 
 		}else{
 			redirect($urlCountry.'/login');
@@ -397,15 +398,16 @@ class Servicios extends CI_Controller {
 			}else{
 				$result = ["ERROR"=>lang('SIN_FUNCION')];
 			}
-
-			$this->output->set_content_type('application/json')->set_output(json_encode($result));
+			$response = $this->cryptography->encrypt($result);
+			$this->output->set_content_type('application/json')->set_output(json_encode($response));
 
 		} elseif ($paisS!=$urlCountry && $paisS!=''){
 			$this->session->sess_destroy();
 			redirect($urlCountry.'/login');
 
 		} elseif ($this->input->is_ajax_request()){
-			$this->output->set_content_type('application/json')->set_output(json_encode( array('ERROR' => '-29' )));
+			$response = $this->cryptography->encrypt(array('ERROR' => '-29' ));
+			$this->output->set_content_type('application/json')->set_output(json_encode($response));
 
 		} else {
 			redirect($urlCountry.'/login');
@@ -1223,7 +1225,7 @@ class Servicios extends CI_Controller {
 			redirect($urlCountry.'/login');
 
 		} elseif($this->input->is_ajax_request()) {
-			$response = $this->cryptography->encrypt(array('ERROR' => '-29' ));
+			$response = $this->cryptography->encrypt(array('ERROR' => '-29'));
 			$this->output->set_content_type('application/json')->set_output(json_encode($response));
 		} else {
 			redirect($urlCountry.'/login');
@@ -1273,7 +1275,7 @@ class Servicios extends CI_Controller {
 			log_message("DEBUG", "RESULTS : " . json_encode($response->maestroDeposito, JSON_UNESCAPED_UNICODE));
 
 		}
-		return $jsonResponse;
+		return $response;
 	}
 
 	public function RegargaTM($urlCountry)
@@ -1296,14 +1298,16 @@ class Servicios extends CI_Controller {
 				$result = array("ERROR"=>lang('SIN_FUNCION'));
 
 			}
-			$this->output->set_content_type('application/json')->set_output(json_encode($result));
+			$response = $this->cryptography->encrypt($result);
+			$this->output->set_content_type('application/json')->set_output(json_encode($response));
 
 		} elseif($paisS!=$urlCountry && $paisS!='') {
 			$this->session->sess_destroy();
 			redirect($urlCountry.'/login');
 
 		} elseif($this->input->is_ajax_request()) {
-			$this->output->set_content_type('application/json')->set_output(json_encode( array('ERROR' => '-29' )));
+			$response = $this->cryptography->encrypt(array('ERROR' => '-29' ));
+			$this->output->set_content_type('application/json')->set_output(json_encode($response));
 		} else {
 			redirect($urlCountry.'/login');
 		}
@@ -1394,11 +1398,22 @@ class Servicios extends CI_Controller {
 	{
 		np_hoplite_countryCheck($urlCountry);
 
-		$amount = $this->input->post('amount');
-		$descript = $this->input->post('descript');
-		$account = $this->input->post('account');
-		$type = $this->input->post('type');
-		$codeToken = $this->input->post('codeToken');
+
+		$dataRequest = json_decode(
+			$this->security->xss_clean(
+				strip_tags(
+					$this->cryptography->decrypt(
+						base64_decode($this->input->get_post('plot')),
+						utf8_encode($this->input->get_post('request'))
+					)
+				)
+			)
+		);
+		$amount = $dataRequest->amount;
+		$descript = $dataRequest->descript;
+		$account = $dataRequest->account;
+		$type = $dataRequest->type;
+		$codeToken = $dataRequest->codeToken;
 
 		$this->lang->load('erroreseol');
 
@@ -1414,13 +1429,15 @@ class Servicios extends CI_Controller {
 			}else{
 				$result = array("ERROR"=>lang('SIN_FUNCION'));
 			}
-			$this->output->set_content_type('application/json')->set_output(json_encode($result));
+			$response = $this->cryptography->encrypt($result);
+			$this->output->set_content_type('application/json')->set_output(json_encode($response));
 
 		} elseif($paisS!=$urlCountry && $paisS!='') {
 			$this->session->sess_destroy();
 			redirect($urlCountry.'/login');
 		} elseif($this->input->is_ajax_request()) {
-			$this->output->set_content_type('application/json')->set_output(json_encode( array('ERROR' => '-29' )));
+			$response = $this->cryptography->encrypt(array('ERROR' => '-29' ));
+			$this->output->set_content_type('application/json')->set_output(json_encode($response));
 		} else {
 			redirect($urlCountry.'/login');
 		}

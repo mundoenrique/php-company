@@ -32,8 +32,8 @@ $(function() {
 
 	$.get( baseURL + api + isoPais + '/servicios/transferencia-maestra/consultarSaldo',
 	function(response) {
-		data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
-		var data = data, dataAmount, Amountmsg
+		var data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
+		var dataAmount, Amountmsg
 		if (data.rc == 0) {
 			dataAmount = data.maestroDeposito.saldoDisponible;
 			Amountmsg = toFormatShow(dataAmount);
@@ -161,7 +161,8 @@ $(function() {
 						}
 				});
 				$.get(baseURL + api + isoPais + '/servicios/transferencia-maestra/pagoTM')
-				.done(function (data) {
+				.done(function (response) {
+					data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 					$aux.dialog('destroy');
 					switch (data.code) {
 						case 0:
@@ -198,8 +199,15 @@ $(function() {
 															$('.ui-dialog-titlebar-close', ui.dialog).hide();
 														}
 												});
-												$.post(baseURL + api + isoPais + '/servicios/transferencia-maestra/RegargaTMProcede', dataSend)
-												.done(function (data) {
+												var ceo_cook = decodeURIComponent(
+													document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+												);
+												var dataRequest = JSON.stringify (dataSend)
+													dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
+													$.post(baseURL + api + isoPais + '/servicios/transferencia-maestra/RegargaTMProcede', {request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)} )
+													.done(function(response){
+														data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
+
 													$aux.dialog('destroy');
 													switch (data.code) {
 														case 0:
@@ -217,8 +225,11 @@ $(function() {
 												document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 											);
 											dataSend.ceo_name = ceo_cook;
-											$.post(baseURL + api + isoPais + '/servicios/transferencia-maestra/RegargaTMProcede', dataSend)
-											.done(function (data) {
+											var dataRequest = JSON.stringify (dataSend)
+												dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
+												$.post(baseURL + api + isoPais + '/servicios/transferencia-maestra/RegargaTMProcede', {request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)})
+												.done(function(response){
+													data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 												$aux.dialog('destroy');
 												switch (data.code) {
 													case 0:
