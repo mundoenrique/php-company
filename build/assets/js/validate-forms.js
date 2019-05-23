@@ -100,7 +100,8 @@ function validateForms(form, options) {
 			"text": {pattern: text},
 			"type": {pattern: alphabetical},
 			"account": {pattern: numeric},
-			"pass": {pattern: userPassword}
+			"pass": {pattern: userPassword},
+			"idTipoLote": {pattern: numeric}
 		},
 		messages: {
 			"user-name": "Debe indicar su nombre de usuario",

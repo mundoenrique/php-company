@@ -150,17 +150,18 @@ log_message('info',json_encode($data));
 					?>
 			</div>
 			<div id="batchs-last">
-				<input id="clave" class="input-clave" type="password" placeholder="<?php echo lang('MSG_INGRESE_CLAVE'); ?>" value="">
-				<button onclick="location.href='<?php echo $urlBase; ?>/lotes'"><?php echo lang('BOTON_LOTES_CANCELAR') ?></button>
-				<button id="confirma" ><?php echo lang('BOTON_LOTES_CONFIRMAR') ?></button>
+				<form id="form-confirmacion" onsubmit="return false">
+					<input id="clave" class="input-clave" type="password" name="user-password" placeholder="<?php echo lang('MSG_INGRESE_CLAVE'); ?>" value="">
+					<button onclick="location.href='<?php echo $urlBase; ?>/lotes'"><?php echo lang('BOTON_LOTES_CANCELAR') ?></button>
+					<button id="confirma" ><?php echo lang('BOTON_LOTES_CONFIRMAR') ?></button>
 
-				<input id="tipo" type='hidden' data-tipo='<?php echo $info->tipoLote ?>'/>
+					<input id="tipo" type='hidden' class="ignore" data-tipo='<?php echo $info->tipoLote ?>'/>
 
-				<input id="info" type='hidden' name='info' value='<?php echo serialize($info) ?>'/>
+					<input id="info" type='hidden' name='info' class="ignore" value='<?php echo serialize($info) ?>'/>
 
-				<input id="idTipoLote" type="hidden" name="idTipoLote" value='<?php echo $info->idTipoLote ?>'/>
+					<input id="idTipoLote" type="hidden" name="idTipoLote" value='<?php echo $info->idTipoLote ?>'/>
 
-
+				</form>
 			</div>
 
 			<?php
