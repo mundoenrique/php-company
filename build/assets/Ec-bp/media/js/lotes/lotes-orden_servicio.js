@@ -70,9 +70,15 @@ $(function () {
 				if (!data.ERROR) {
 					if (data.moduloOS) {
 						$("#data-confirm").attr('value', data.ordenes);
+						ceo_cook = decodeURIComponent(
+							document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+						);
 						$('#toOS').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'" />');
 						notificacion("Confirmar cálculo orden de servicio", "<h3>Proceso exitoso</h3>", "form#toOS");
 					} else {
+						ceo_cook = decodeURIComponent(
+							document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+						);
 						$('#viewAutorizar').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'" />');
 						notificacion("Confirmar cálculo orden de servicio", "<h3>Proceso exitoso</h3><h5>No tiene permitido gestionar ordenes de servicio.</h5>", "#viewAutorizar");
 					}
