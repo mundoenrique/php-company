@@ -4743,3 +4743,9 @@ li.ui-state-default.ui-corner-top:nth-child(3) {
 .system-msg {
 	text-align: justify;
 }
+
+.general-form-msg {
+	text-align: center;
+	color: #e8446c;
+	font-size: 12px;
+}

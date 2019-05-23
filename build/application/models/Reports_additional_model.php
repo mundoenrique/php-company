@@ -82,10 +82,10 @@ class Reports_additional_model extends CI_Model {
 
 		log_message('INFO', '--[' . $this->userName . '] REQUEST recarga/comision: ' . $dataRequest);
 
-		$dataEncry = np_Hoplite_Encryption($dataRequest);
+		$dataEncry = np_Hoplite_Encryption($dataRequest, 'callWSReportRecharWithComm');
 		$dataRequest = json_encode(['bean' => $dataEncry, 'pais' => $this->pais]);
 		$response = np_Hoplite_GetWS('eolwebInterfaceWS', $dataRequest);
-		$jsonResponse = np_Hoplite_Decrypt($response);
+		$jsonResponse = np_Hoplite_Decrypt($response, 'callWSReportRecharWithComm');
 
 		log_message('INFO', '--[' . $this->userName . '] RESPONSE recarga/comision: ' . $jsonResponse);
 
@@ -193,10 +193,10 @@ class Reports_additional_model extends CI_Model {
 
 		log_message('INFO', '--[' . $this->userName . '] REQUEST Descarga archivo: ' . $dataRequest);
 
-		$dataEncry = np_Hoplite_Encryption($dataRequest);
+		$dataEncry = np_Hoplite_Encryption($dataRequest, 'callWSDownloadReport');
 		$dataRequest = json_encode(['bean' => $dataEncry, 'pais' => $this->pais]);
 		$response = np_Hoplite_GetWS('eolwebInterfaceWS', $dataRequest);
-		$jsonResponse = np_Hoplite_Decrypt($response);
+		$jsonResponse = np_Hoplite_Decrypt($response, 'callWSDownloadReport');
 		$responseServ = json_decode($jsonResponse);
 
 		if($responseServ->rc === 0 && $responseServ->archivo != '') {

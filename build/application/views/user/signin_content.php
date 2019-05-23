@@ -8,13 +8,14 @@
 			</h2>
 			<div class="widget-content">
 				<form id="login-form" name="login-form" accept-charset="utf-8">
-					<input type="hidden" id="<?= $novoName; ?>" value="<?= $novoCook; ?>">
+					<input type="hidden" id="<?= $novoName; ?>" class="ignore" value="<?= $novoCook; ?>">
 					<fieldset>
 						<label for="user_login">Usuario</label>
-						<input type="text" id="user_login" name="user_login" placeholder="Usuario">
+						<input type="text" id="user_login" name="user_login" placeholder="Usuario" required>
 						<label for="user_pass">Contraseña</label>
-						<input type="password" id="user_pass" name="user_pass" placeholder="Contraseña">
+						<input type="password" id="user_pass" name="user_pass" placeholder="Contraseña" required>
 					</fieldset>
+					<div class="general-form-msg"></div>
 					<button id="login-btn" name="login-btn" class="btn-sidebar">Ingresar</button>
 				</form>
 				<div class="align-center">
