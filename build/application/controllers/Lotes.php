@@ -198,7 +198,7 @@ class Lotes extends CI_Controller {
 			$token = $this->session->userdata('token');
 			$nombreCompleto = $this->session->userdata('nombreCompleto');
 			$lastSessionD = $this->session->userdata('lastSession');
-			$FooterCustomInsertJS=["jquery-3.4.0.min.js", "jquery-ui-1.12.1.min.js","jquery.balloon.min.js","jquery-md5.js","dashboard/widget-empresa.js","lotes/lotes-confirmacion.js","header.js","routes.js"];
+			$FooterCustomInsertJS=["jquery-3.4.0.min.js", "jquery-ui-1.12.1.min.js","jquery.balloon.min.js","jquery-md5.js","dashboard/widget-empresa.js","lotes/lotes-confirmacion.js","header.js","aes.min.js","aes-json-format.min.js","routes.js"];
 			$FooterCustomJS="";
 			$titlePage="Conexión Empresas Online - Lotes";
 			$idProductoS = $this->session->userdata('idProductoS');
@@ -272,7 +272,7 @@ class Lotes extends CI_Controller {
 			$lastSessionD = $this->session->userdata('lastSession');
 			$jsRte = '../../../js/';
 			$thirdsJsRte = '../../../js/third_party/';
-			$FooterCustomInsertJS=["jquery-3.4.0.min.js", "jquery-ui-1.12.1.min.js","jquery.balloon.min.js","jquery-md5.js","dashboard/widget-empresa.js","lotes/lotes-autorizacion.js","jquery.dataTables.min.js","header.js","routes.js",$thirdsJsRte."jquery.validate.min.js",$jsRte."validate-forms.js",$thirdsJsRte."additional-methods.min.js"];
+			$FooterCustomInsertJS=["jquery-3.4.0.min.js", "jquery-ui-1.12.1.min.js","jquery.balloon.min.js","jquery-md5.js","aes.min.js","aes-json-format.min.js","dashboard/widget-empresa.js","lotes/lotes-autorizacion.js","jquery.dataTables.min.js","header.js","routes.js",$thirdsJsRte."jquery.validate.min.js",$jsRte."validate-forms.js",$thirdsJsRte."additional-methods.min.js"];
 			$FooterCustomJS="";
 			$titlePage="Conexión Empresas Online - Lotes";
 
@@ -1624,16 +1624,29 @@ class Lotes extends CI_Controller {
 			//VERIFICAR SI NO SUBIO ARCHIVO
 
 			if ( ! $this->upload->do_upload()){
-				$error = array('ERROR' => 'No se puede cargar el archivo. Verifiquelo e intente de nuevo');// $this->upload->display_errors());
-				echo json_encode($error);
+					$responseError = ['ERROR' => 'No se puede cargar el archivo. Verifiquelo e intente de nuevo'];
+					$responseError = $this->cryptography->encrypt($responseError);
+					$this->output->set_content_type('application/json')->set_output(json_encode($responseError));
+				//$error = array('ERROR' => 'No se puede cargar el archivo. Verifiquelo e intente de nuevo');// $this->upload->display_errors());
+				//echo json_encode($error);
 			}else{
 				//VALIDO
 				$data = array('upload_data' => $this->upload->data());
 				$nombreArchivo = $data["upload_data"]["raw_name"];//NOMBRE ARCHIVO SIN EXTENSION
 				$rutaArchivo = $data["upload_data"]["file_path"];
 				$extensionArchivo = $data["upload_data"]["file_ext"];
-				$tipoLote= $this->input->post('data-tipoLote');
-				$formatolote= $this->input->post('data-formatolote');
+				$dataRequest = json_decode(
+					$this->security->xss_clean(
+						strip_tags(
+							$this->cryptography->decrypt(
+								base64_decode($this->input->get_post('plot')),
+								utf8_encode($this->input->get_post('request'))
+							)
+						)
+					)
+				);
+				$tipoLote = $dataRequest->data_tipoLote;
+				$formatolote = $dataRequest->data_formatolote;
 				$ch = curl_init();
 				$localfile = $config['upload_path'].$nombreArchivo.$extensionArchivo;
 				$fp = fopen($localfile, 'r');
@@ -1663,19 +1676,24 @@ class Lotes extends CI_Controller {
 					$idProductoS = $this->session->userdata('idProductoS');
 					$idEmpresa = $this->session->userdata('acrifS');
 					$cargaLote = $this->callWScargarArchivo($urlCountry,$idProductoS,$formatoArchivo,$nombreArchivo,$nombreArchivoNuevo,$idEmpresa,$tipoLote,$formatolote);
-
-					echo json_encode($cargaLote);
+					$cargaLote = $this->cryptography->encrypt($cargaLote);
+					$this->output->set_content_type('application/json')->set_output(json_encode($cargaLote));
+					 //echo json_encode($cargaLote);
 
 				} else {
-					$error = array('ERROR' => 'Falla Al mover archivo.');
-					echo json_encode($error);
+					$responseError = ['ERROR' =>'Falla Al mover archivo.'];
+					$responseError = $this->cryptography->encrypt($responseError);
+					$this->output->set_content_type('application/json')->set_output(json_encode($responseError));
+
 				}
 			}
 		}elseif($paisS!=$urlCountry && $paisS!=''){
 			$this->session->sess_destroy();
 			redirect($urlCountry.'/login');
 		}elseif($this->input->is_ajax_request()){
-			$this->output->set_content_type('application/json')->set_output(json_encode( array('ERROR' => '-29' )));
+			$responseError = ['ERROR' =>'Falla Al mover archivo.'];
+			$responseError = $this->cryptography->encrypt($responseError);
+			$this->output->set_content_type('application/json')->set_output(json_encode($responseError));
 		}else{
 			redirect($urlCountry.'/login');
 		}
@@ -1700,36 +1718,54 @@ class Lotes extends CI_Controller {
 		$logged_in = $this->session->userdata('logged_in');
 
 		if($this->input->is_ajax_request()){
-
+			$dataRequest = json_decode(
+				$this->security->xss_clean(
+					strip_tags(
+						$this->cryptography->decrypt(
+							base64_decode($this->input->get_post('plot')),
+							utf8_encode($this->input->get_post('request'))
+						)
+					)
+				)
+			);
+			$_POST['data-idTicket'] = $dataRequest->data_idTicket;
+			$_POST['data-pass'] = $dataRequest->data_pass;
 			$this->form_validation->set_rules('data-idTicket', 'idTicket',  'required');
 			$this->form_validation->set_rules('data-pass', 'pass',  'required');
 
 			if ($this->form_validation->run() == FALSE)
 			{
-				echo -1;
+				$responseError = ['ERROR' => lang('ERROR_(-1)'), "rc"=> "-1"];
+				$responseError = $this->cryptography->encrypt($responseError);
+				$this->output->set_content_type('application/json')->set_output(json_encode($responseError));
 				//FALLO VALIDACION
 			}else{
 				if($paisS==$urlCountry && $logged_in ){
 
+					$idTicket = $dataRequest->data_idTicket;
+					$password = $dataRequest->data_pass;
+					$idLote = $dataRequest->data_idLote;
 					$username = $this->session->userdata('userName');
 					$token = $this->session->userdata('token');
-
-					$idTicket=$this->input->post('data-idTicket');
-					$idLote=$this->input->post('data-idLote');
-					$password= $this->input->post('data-pass');
+					unset($_POST['data-idTicket'], $_POST['data-pass']);
 
 					if($funcAct){
 						$eliminarLotes = $this->callWSeliminarLoteNoConfirmado($urlCountry,$idTicket,$idLote,$username,$password,$token);
 					}else{
-						$eliminarLotes = array("ERROR"=>lang('SIN_FUNCION'));
+						$responseError = ["ERROR"=>lang('SIN_FUNCION')];
+						$responseError = $this->cryptography->encrypt($responseError);
+						$eliminarLotes = $this->output->set_content_type('application/json')->set_output(json_encode($responseError));
 					}
 				}elseif($this->input->is_ajax_request()){
-					$this->output->set_content_type('application/json')->set_output(json_encode( array('ERROR' =>'-29' )));
+					$responseError = ['ERROR' => lang('ERROR_(-29)'), "rc"=> "-29"];
+					$responseError = $this->cryptography->encrypt($responseError);
+					$this->output->set_content_type('application/json')->set_output(json_encode($responseError));
 				}else{
 					redirect($urlCountry.'login');
 				}
 			}
 		}
+		$eliminarLotes = $this->cryptography->encrypt($eliminarLotes);
 		$this->output->set_content_type('application/json')->set_output(json_encode($eliminarLotes));
 	}
 
@@ -1838,15 +1874,33 @@ class Lotes extends CI_Controller {
 		$paisS = $this->session->userdata('pais');
 
 		if($paisS==$urlCountry && $logged_in){
+			$dataRequest = json_decode(
+				$this->security->xss_clean(
+						strip_tags(
+							$this->cryptography->decrypt(
+									base64_decode($this->input->get_post('plot')),
+									utf8_encode($this->input->get_post('request'))
+							)
+					)
+				)
+			);
+			$pass = $dataRequest->pass;
+			$embozo1 = isset($dataRequest->embozo1) ? $dataRequest->embozo1 : '';
+			$embozo2 = isset($dataRequest->embozo2) ? $dataRequest->embozo2 : '';
+			$conceptoAbono = isset($dataRequest->conceptoAbono) ? $dataRequest->conceptoAbono : '';
+			$info = isset($dataRequest->info) ? $dataRequest->info : '';
+			$idTipoLote = isset($dataRequest->idTipoLote) ? $dataRequest->idTipoLote : '' ;
+
 			$username = $this->session->userdata('userName');
 			$token = $this->session->userdata('token');
 
-			$pass = $this->input->post('pass') ;
-			$embozo1 = $this->input->post('embozo1');
-			$embozo2 = $this->input->post('embozo2');
-			$conceptoAbono = $this->input->post('conceptoDim');
-			$info = $this->input->post('info');
-			$idTipoLote = $this->input->post('idTipoLote');
+			// $pass = $this->input->post('pass') ;
+			// $embozo1 = $this->input->post('embozo1');
+			// $embozo2 = $this->input->post('embozo2');
+			// $conceptoAbono = $this->input->post('conceptoDim');
+			// $info = $this->input->post('info');
+			// $idTipoLote = $this->input->post('idTipoLote');
+
 			$info = unserialize( stripslashes($info) );
 			$info->lineaEmbozo1 = $embozo1;
 			$info->lineaEmbozo2 = $embozo2;
@@ -1868,13 +1922,15 @@ class Lotes extends CI_Controller {
 			}else{
 				$test = array("ERROR"=>lang('SIN_FUNCION'));
 			}
-
+			$test = $this->cryptography->encrypt($test);
 			$this->output->set_content_type('application/json')->set_output(json_encode($test));
 		}elseif($paisS!=$urlCountry&& $paisS!=''){
 			$this->session->sess_destroy();
 			redirect($urlCountry.'/login');
 		}elseif($this->input->is_ajax_request()){
-			$this->output->set_content_type('application/json')->set_output(json_encode( array('ERROR' => '-29' )));
+			$responseError = ['ERROR' => lang('ERROR_(-29)'), "rc"=> "-29"];
+			$responseError = $this->cryptography->encrypt($responseError);
+			$this->output->set_content_type('application/json')->set_output(json_encode($responseError));
 		}else{
 			redirect($urlCountry.'/login');
 		}
@@ -2005,7 +2061,7 @@ class Lotes extends CI_Controller {
 
 			$nombreCompleto = $this->session->userdata('nombreCompleto');
 			$lastSessionD = $this->session->userdata('lastSession');
-			$FooterCustomInsertJS=["jquery-3.4.0.min.js", "jquery-ui-1.12.1.min.js","jquery.balloon.min.js","dashboard/widget-empresa.js","header.js","jquery.dataTables.min.js" ,"lotes/lotes-orden_servicio.js","routes.js"];
+			$FooterCustomInsertJS=["jquery-3.4.0.min.js", "jquery-ui-1.12.1.min.js","jquery.balloon.min.js","dashboard/widget-empresa.js","aes.min.js","aes-json-format.min.js","header.js","jquery.dataTables.min.js" ,"lotes/lotes-orden_servicio.js","routes.js"];
 			$FooterCustomJS="";
 			$titlePage="Conexión Empresas Online - Lotes";
 
@@ -2061,25 +2117,37 @@ class Lotes extends CI_Controller {
 	    $paisS = $this->session->userdata('pais');
 
 	    if ($paisS == $urlCountry && $logged_in) {
-	        $pass = $this->input->post('data-pass');
-	        $tipoOrdeServicio = $this->input->post('data-tipoOS');
-	        $lotes = explode(',', $this->input->post('data-lotes'));
-	        $medio = $this->input->post('data-medio');
-	        $ivanuevo = ($this->input->post('data-iva') == 1) ? true : false;
+				$dataRequest = json_decode(
+					$this->security->xss_clean(
+						strip_tags(
+							$this->cryptography->decrypt(
+								base64_decode($this->input->get_post('plot')),
+								utf8_encode($this->input->get_post('request'))
+								)
+							)
+						)
+					);
+					$lotes = explode(',', $dataRequest->data_lotes);
+					$pass = $dataRequest->data_pass;
+					$tipoOrdeServicio = $dataRequest->data_tipoOS;
+					$medio = isset($dataRequest->data_medio) ? $dataRequest->data_medio : '';
+					$ivanuevo = isset($dataRequest->data_iva) ? (($dataRequest->data_iva==1)?true:false) : '';
+
 	        array_pop($lotes);
 	        log_message('info', "Prueba para la toma del país --->>> " . $paisS);
 	        $calculoOsLotesW = $this->callWScalcularOS($urlCountry, $token, $username,
-											  				$pass, $lotes, $tipoOrdeServicio, $medio, $ivanuevo);
-	        $this->output->set_content_type('application/json')->set_output($calculoOsLotesW);
+																$pass, $lotes, $tipoOrdeServicio, $medio, $ivanuevo);
+					$calculoOsLotesW = $this->cryptography->encrypt($calculoOsLotesW);
+	        $this->output->set_content_type('application/json')->set_output(json_encode($calculoOsLotesW));
 	    }
 	    elseif ($paisS != $urlCountry && $paisS != '') {
 	        $this->session->sess_destroy();
 	        redirect($urlCountry . '/login');
 	    }
 	    elseif ($this->input->is_ajax_request()) {
-	        $this->output->set_content_type('application/json')->set_output(json_encode(array(
-	            'ERROR' => lang('ERROR_(-29)')
-	        )));
+				$responseError = ['ERROR' => lang('ERROR_(-29)'), "rc"=> "-29"];
+					$responseError = $this->cryptography->encrypt($responseError);
+	        $this->output->set_content_type('application/json')->set_output(json_encode($responseError));
 	    }
 	    else {
 	        redirect($urlCountry . '/login');
@@ -2228,9 +2296,8 @@ class Lotes extends CI_Controller {
 			'data' => isset($data) ? $data : ''
 		];
 
-		$response = json_encode($response);
 
-		log_message('DEBUG', 'SENT TO THE VIEW: '.$response);
+		//log_message('DEBUG', 'SENT TO THE VIEW: '.$response);
 
 		return $response;
 	}
@@ -2316,7 +2383,7 @@ class Lotes extends CI_Controller {
 		$jsonResponse = np_Hoplite_Decrypt($response, 'callWSgenerarOS');
 		$response = json_decode($jsonResponse);
 
-		log_message("DEBUG", "generarOS =====>>>>>> ".json_encode($response));
+		//log_message("DEBUG", "generarOS =====>>>>>> ".json_encode($response));
 		if(isset($response->rc)) {
 			switch($response->rc) {
 				case 0:
@@ -2368,8 +2435,18 @@ class Lotes extends CI_Controller {
 		np_hoplite_countryCheck($urlCountry);
 		$this->lang->load('erroreseol');
 
-		$tempIdOrdenL = $this->input->post("tempIdOrdenL");
-		$tempIdOrdenLNF = $this->input->post("tempIdOrdenLNF");
+			$dataRequest = json_decode(
+				$this->security->xss_clean(
+				strip_tags(
+				$this->cryptography->decrypt(
+						base64_decode($this->input->get_post('plot')),
+						utf8_encode($this->input->get_post('request'))
+					)
+				)
+			)
+		);
+		$tempIdOrdenL = $dataRequest->tempIdOrdenL;
+		$tempIdOrdenLNF = isset($dataRequest->tempIdOrdenLNF) ? $dataRequest->tempIdOrdenLNF : '';
 
 		$token = $this->session->userdata('token');
 		$username = $this->session->userdata('userName');
@@ -2388,12 +2465,15 @@ class Lotes extends CI_Controller {
 			}else{
 				$t = json_encode(array("ERROR"=>lang('SIN_FUNCION')));
 			}
-			$this->output->set_content_type('application/json')->set_output($t);
+			$t = $this->cryptography->encrypt($t);
+			$this->output->set_content_type('application/json')->set_output(json_encode($t));
 		}elseif($paisS!=$urlCountry&& $paisS!=''){
 			$this->session->sess_destroy();
 			redirect($urlCountry.'/login');
 		}elseif($this->input->is_ajax_request()){
-			$this->output->set_content_type('')->set_output(json_encode( array('ERROR' => '-29' )));
+			$responseError = ['ERROR' => lang('ERROR_(-29)'), "rc"=> "-29"];
+			$responseError = $this->cryptography->encrypt($responseError);
+			$this->output->set_content_type('')->set_output(json_encode($responseError));
 		}else{
 			redirect($urlCountry.'/login');
 		}

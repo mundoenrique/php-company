@@ -181,7 +181,8 @@ if($osConfirmV){
 																		$ltr.="<tr class='OSinfo $value->idOrden'>";
 																		$ltr.="<td><a id='$l->acidlote' class='viewLo' title='Detalle lote'>$l->acnumlote</a></td>";
 																		$ltr.="<td>$l->dtfechorcarga</td>";
-																		$ltr.=($pais === 'Ec-bp'  && $l->ctipolote === '1'  && $l->cestatus === '4' )?"<td><a id='res' data-id='$value->idOrden' title='Recepcion de tarjeta'>".ucfirst(mb_strtolower($l->acnombre))."</a></td>":"<td>".ucfirst(mb_strtolower($l->acnombre))."</td>";
+																		$ltr.=($pais === 'Ec-bp'  && $l->ctipolote === '1'  && $l->cestatus === '4' )?"<td id='res' data-id='$value->idOrden' title='Recepcion de tarjeta'>".ucfirst(mb_strtolower($l->acnombre))."</td>":"<td>".ucfirst(mb_strtolower($l->acnombre))."</td>";
+																		//$ltr.=($pais === 'Ec-bp'  && $l->ctipolote === '1'  && $l->cestatus === '4' )?"<td><a id='res' data-id='$value->idOrden' title='Recepcion de tarjeta'>".ucfirst(mb_strtolower($l->acnombre))."</a></td>":"<td>".ucfirst(mb_strtolower($l->acnombre))."</td>";
 																		$ltr.="<td>$l->ncantregs</td>
 																		<td>".ucfirst(mb_strtolower($l->status))."</td>
 																		<td>$l->montoRecarga</td>
