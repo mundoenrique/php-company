@@ -134,7 +134,7 @@ $(function() {
 				}
 			});
 		} else {
-			var form = $('#form-criterio-busqueda');
+			var form = $('#form-recarga-cuenta');
 			validateForms(form);
 			if (form.valid()) {
 
@@ -287,9 +287,15 @@ $(function() {
 		var op = '30';
 		verif = calcularConsulta();
 		if (verif && $('#clave').val() !== '') {
-			llamarWS(
-				$('#clave').val(), baseURL + api + isoPais + '/servicios/transferencia-maestra/consultar', op, 'Consultando...'
-			);
+			var form= $('#clave').closest('form');
+			validateForms(form);
+			if (form.valid()){
+				llamarWS(
+					$('#clave').val(), baseURL + api + isoPais + '/servicios/transferencia-maestra/consultar', op, 'Consultando...'
+				);
+			} else {
+				notificacion ('Consultando...','Usuario o contraseña inválido');
+			}
 		} else if (verif) {
 			confirmar(
 				'Consultar saldo de tarjeta', baseURL + api + isoPais + '/servicios/transferencia-maestra/consultar', op, 'Consultando...'
@@ -848,9 +854,17 @@ function confirmar(titulo, url, operacion, mensaje) {
 				pass = $(this).find('#pass').val();
 
 				if (pass !== '') {
-					llamarWS(pass, url, operacion, mensaje);
-					$(this).find('#pass').val('');
-					$(this).dialog("destroy");
+					var form= $(this).find('form');
+					validateForms(form);
+					console.log('853: '+(form.valid()?'Válido':'Inválido'));
+					if (form.valid()) {
+						llamarWS(pass, url, operacion, mensaje);
+						$(this).find('#pass').val('');
+						$(this).dialog("destroy");
+					} else {
+						$(this).find('#msg').empty();
+						$(this).find('#msg').append("Contraseña inválida");
+					}
 				} else {
 					$(this).find('#msg').empty();
 					$(this).find('#msg').append("Debe ingresar la contraseña");

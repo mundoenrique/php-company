@@ -99,7 +99,8 @@ function validateForms(form, options) {
 			"amount": {pattern: amount[validCountry]},
 			"text": {pattern: text},
 			"type": {pattern: alphabetical},
-			"account": {pattern: numeric}
+			"account": {pattern: numeric},
+			"pass": {pattern: userPassword}
 		},
 		messages: {
 			"user-name": "Debe indicar su nombre de usuario",
