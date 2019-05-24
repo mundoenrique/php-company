@@ -307,7 +307,7 @@ class Reportes extends CI_Controller {
 											}
 											$ceo_name = $this->security->get_csrf_token_name();
 											$ceo_cook = $this->security->get_csrf_hash();
-												echo "<form id='formu' method='post' >
+												echo "<form id='formu' method='post'>
 															<input type='hidden'>
 															<input type='hidden' name='$ceo_name' value='$ceo_cook'>
 															</form>

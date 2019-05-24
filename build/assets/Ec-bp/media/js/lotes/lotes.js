@@ -47,11 +47,11 @@ $(function () { // Document ready
 								ceo_name: ceo_cook,
 								plot: btoa(ceo_cook)
 							}
-							dat.submit(function (response, textStatus, jqXHR) {
+							dat.submit().success(function (response, textStatus, jqXHR) {
 								result = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 								if (result) {
 
-									result = $.parseJSON(result);
+									//result = $.parseJSON(result);
 
 									if (!result.ERROR) {
 										mostrarError(result);
