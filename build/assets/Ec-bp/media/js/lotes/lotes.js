@@ -47,7 +47,7 @@ $(function () { // Document ready
 								ceo_name: ceo_cook,
 								plot: btoa(ceo_cook)
 							}
-							dat.submit(function (response, textStatus, jqXHR) {
+							dat.submit().success(function (response, textStatus, jqXHR) {
 								result = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 								if (result) {
 
@@ -124,9 +124,9 @@ $(function () { // Document ready
 
 	// Refrescar lote cada 10 segundos
 
-	self.setInterval(function () {
+	/* self.setInterval(function () {
 		actualizarLote()
-	}, 10000);
+	}, 10000); */
 	var datatable;
 
 	function actualizarLote() {
