@@ -51,7 +51,7 @@ $(function () { // Document ready
 								result = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 								if (result) {
 
-									result = $.parseJSON(result);
+									//result = $.parseJSON(result);
 
 									if (!result.ERROR) {
 										mostrarError(result);
@@ -124,9 +124,9 @@ $(function () { // Document ready
 
 	// Refrescar lote cada 10 segundos
 
-	/* self.setInterval(function () {
+	self.setInterval(function () {
 		actualizarLote()
-	}, 10000); */
+	}, 10000);
 	var datatable;
 
 	function actualizarLote() {
