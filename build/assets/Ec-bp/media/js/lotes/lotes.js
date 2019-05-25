@@ -47,8 +47,8 @@ $(function () { // Document ready
 								ceo_name: ceo_cook,
 								plot: btoa(ceo_cook)
 							}
-							dat.submit().success(function (response, textStatus, jqXHR) {
-								result = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
+							dat.submit().done(function (response, textStatus, jqXHR) {
+								result = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
 								if (result) {
 
 									//result = $.parseJSON(result);
