@@ -862,9 +862,12 @@ class Users extends CI_Controller {
             $token = $this->session->userdata('token');
             $nombreCompleto = $this->session->userdata('nombreCompleto');
             $lastSessionD = $this->session->userdata('lastSession');
+						$jsRte = '../../../js/';
+						$thirdsJsRte = '../../../js/third_party/';
             $FooterCustomInsertJS=["jquery-1.10.2.min.js","jquery-ui-1.10.3.custom.min.js",
-						"jquery.balloon.min.js","jquery-md5.js","jquery.paginate.js",
-						"users/configuracion.js","header.js","jquery.fileupload.js","jquery.iframe-transport.js","aes.min.js","aes-json-format.min.js","aes.min.js","aes-json-format.min.js","routes.js"];
+							"jquery.balloon.min.js","jquery-md5.js","jquery.paginate.js",
+							"users/configuracion.js","header.js","jquery.fileupload.js","jquery.iframe-transport.js","aes.min.js","aes-json-format.min.js","aes.min.js","aes-json-format.min.js","routes.js",
+							$thirdsJsRte."jquery.validate.min.js",$jsRte."validate-forms.js",$thirdsJsRte."additional-methods.min.js"];
             $FooterCustomJS="";
             $titlePage="Conexión Empresas Online-Configuración";
             $title="Configuración";
