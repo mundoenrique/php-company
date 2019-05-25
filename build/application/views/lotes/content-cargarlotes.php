@@ -95,10 +95,9 @@ $ceo_cook = $this->security->get_csrf_hash();
 						</div>
 						<input  type='hidden' id='boton' value='<?php echo lang('TITULO_LOTES_BTNCARGAR'); ?>'/>
 						<form id='confirmar' method='post' action="<?php echo $urlBase ?>/lotes/confirmacion">
-						<input type='hidden' name='<?php echo $ceo_name ?>' value='<?php echo $ceo_cook ?>'>
 						</form>
 						<form id='detalle' method='post' action="<?php echo $urlBase ?>/lotes/detalle">
-						<input type='hidden' name='<?php echo $ceo_name ?>' value='<?php echo $ceo_cook ?>'>
+						<input type='hidden' id="ceo_detalle" name='<?php echo $ceo_name ?>' value='<?php echo $ceo_cook ?>'>
 						</form>
 					</div>
 
