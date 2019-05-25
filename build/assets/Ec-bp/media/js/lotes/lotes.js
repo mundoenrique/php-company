@@ -1,9 +1,7 @@
 $(function () { // Document ready
 
 	var f, dir, forma;
-
-
-	// $('thead').hide();
+	var ceo_cook;
 	$('#lotes-2').show();
 	$(".aviso").removeClass("elem-hidden");
 	actualizarLote();
@@ -33,7 +31,7 @@ $(function () { // Document ready
 
 						if ($("#tipoLote").val() != "") {
 							$("#cargaLote").replaceWith('<h3 id="cargando">Cargando...</h3>');
-							var ceo_cook = decodeURIComponent(
+							ceo_cook = decodeURIComponent(
 								document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 							);
 							var paquete = {
@@ -47,11 +45,9 @@ $(function () { // Document ready
 								ceo_name: ceo_cook,
 								plot: btoa(ceo_cook)
 							}
-							dat.submit(function (response, textStatus, jqXHR) {
-								result = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
+							dat.submit().done(function (response, textStatus, jqXHR) {
+								result = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
 								if (result) {
-
-									result = $.parseJSON(result);
 
 									if (!result.ERROR) {
 										mostrarError(result);
@@ -295,9 +291,9 @@ $(function () { // Document ready
 								$aux.dialog('close');
 							}
 						});
-						var ceo_cook = decodeURIComponent(
-							);
+						ceo_cook = decodeURIComponent(
 							document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+						);
 						var dataRequest = JSON.stringify ({
 							data_idTicket: ticket,
 							data_idLote: lote,
@@ -346,12 +342,17 @@ $(function () { // Document ready
 			var estado = $(this).attr("data-edo");
 			var ticket = $(this).attr("data-idTicket");
 			var opc = $(this).attr("data-opc");
+			ceo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
 
 			if (estado == "1" || (estado == "6" && !opc)) {
+				$("form#confirmar").append('<input type="hidden" name="ceo_name" value="' + ceo_cook + '" />');
 				$("form#confirmar").append('<input type="hidden" name="data-estado" value="' + estado + '" />');
 				$("form#confirmar").append('<input type="hidden" name="data-idTicket" value="' + ticket + '" />');
 				$("form#confirmar").submit();
 			} else if (estado == "5" || estado == "6") {
+				$("form#detalle").append('<input type="hidden" name="ceo_name" value="' + ceo_cook + '" />');
 				$("form#detalle").append('<input type="hidden" name="data-estado" value="' + estado + '" />');
 				$("form#detalle").append('<input type="hidden" name="data-idTicket" value="' + ticket + '" />');
 				$("form#detalle").submit();

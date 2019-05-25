@@ -1691,7 +1691,7 @@ class Lotes extends CI_Controller {
 			$this->session->sess_destroy();
 			redirect($urlCountry.'/login');
 		}elseif($this->input->is_ajax_request()){
-			$responseError = ['ERROR' =>'Falla Al mover archivo.'];
+			$responseError = ['ERROR' =>'-29'];
 			$responseError = $this->cryptography->encrypt($responseError);
 			$this->output->set_content_type('application/json')->set_output(json_encode($responseError));
 		}else{
