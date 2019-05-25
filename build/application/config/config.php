@@ -479,6 +479,7 @@ $config['csrf_exclude_uris'] = array(
 	'[\w\-]+/consulta/ordenes-de-servicio',
 	'[\w\-]+/lotes/autorizacion/detalle',
 	'[\w\-]+/lotes/confirmacion',
+	'[\w\-]+/lotes/detalle',
 	'[\w\-]+/lotes/calculo',
 );
 
