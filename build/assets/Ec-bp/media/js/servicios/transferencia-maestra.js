@@ -33,7 +33,7 @@ $(function() {
 	$.get( baseURL + api + isoPais + '/servicios/transferencia-maestra/consultarSaldo',
 	function(response) {
 		var data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
-		var dataAmount, Amountmsg
+		var dataAmount, Amountmsg = " - ";
 		if (data.rc == 0) {
 			dataAmount = data.maestroDeposito.saldoDisponible;
 			Amountmsg = toFormatShow(dataAmount);
@@ -47,8 +47,10 @@ $(function() {
 			}
 		} else if (data.rc == -61) {
 			window.location.replace(baseURL+isoPais+'/finsesion');
+		}else if(data.rc == -251){
+			codeCtas = 'deft';
+			msgCtas = "No existen parámetros definidos para ésta empresa sobre éste producto.";
 		} else {
-			Amountmsg = " - ";
 			$("#amount, #description, #account, #charge, #credit, #recargar").prop("disabled", true);
 		}
 		$("#saldoEmpresa").text('Saldo disponible: ' + Amountmsg);

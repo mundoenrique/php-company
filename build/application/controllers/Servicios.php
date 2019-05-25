@@ -1260,7 +1260,8 @@ class Servicios extends CI_Controller {
 			"token"=>$token,
 			"className" => $className,
 			"rifEmpresa"=> $idEmpresa,
-			"logAccesoObject"=>$logAcceso,
+			"idProducto"=> $idProductoS,
+			"logAccesoObject"=> $logAcceso,
 			"pais" => $urlCountry
 		];
 		$data = json_encode($data, JSON_UNESCAPED_UNICODE);
