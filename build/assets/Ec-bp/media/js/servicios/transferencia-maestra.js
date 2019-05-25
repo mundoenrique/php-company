@@ -856,7 +856,6 @@ function confirmar(titulo, url, operacion, mensaje) {
 				if (pass !== '') {
 					var form= $(this).find('form');
 					validateForms(form);
-					console.log('853: '+(form.valid()?'Válido':'Inválido'));
 					if (form.valid()) {
 						llamarWS(pass, url, operacion, mensaje);
 						$(this).find('#pass').val('');
