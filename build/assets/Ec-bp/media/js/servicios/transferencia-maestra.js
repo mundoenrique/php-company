@@ -53,7 +53,7 @@ $(function() {
 			window.location.replace(baseURL+isoPais+'/finsesion');
 		}else if(data.rc == -251){
 			codeCtas = 'deft';
-			msgCtas = "No existen parámetros definidos para ésta empresa sobre éste producto.";
+			msgCtas = "No existen parámetros definidos para esta empresa sobre este producto.";
 		} else {
 			$("#amount, #description, #account, #charge, #credit, #recargar").prop("disabled", true);
 		}
