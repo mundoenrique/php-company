@@ -96,6 +96,11 @@ class Services_model extends CI_Model {
 					$this->msg = 'La empresa no tiene cuentas asociadas';
 					$this->data = 'La empresa no tiene cuentas asociadas';
 					break;
+				case -400:
+					$this->code = 1;
+					$this->msg = 'No fue posible obtener las cuentas de la empresa';
+					$this->data = 'No fue posible obtener las cuentas de la empresa';
+					break;
 				case -29:
 				case -61:
 					$this->code = 3;
