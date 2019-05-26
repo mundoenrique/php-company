@@ -166,7 +166,7 @@ $(function() {
 					});
 					$.get(baseURL + api + isoPais + '/servicios/transferencia-maestra/pagoTM')
 					.done(function (response) {
-						data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
+						var data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
 						$aux.dialog('destroy');
 						switch (data.code) {
 							case 0:
@@ -206,12 +206,11 @@ $(function() {
 													var ceo_cook = decodeURIComponent(
 														document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 													);
-													var dataRequest = JSON.stringify (dataSend)
-														dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
-														$.post(baseURL + api + isoPais + '/servicios/transferencia-maestra/RegargaTMProcede', {request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)} )
-														.done(function(response){
-															data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
-
+													var dataRequest = JSON.stringify(dataSend);
+													dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
+													$.post(baseURL + api + isoPais + '/servicios/transferencia-maestra/RegargaTMProcede', {request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)})
+													.done(function (response) {
+														var data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
 														$aux.dialog('destroy');
 														switch (data.code) {
 															case 0:
@@ -224,33 +223,14 @@ $(function() {
 															default:
 																notiPagOS(data.title, data.msg, 'close');
 														}
-												});
-												var ceo_cook = decodeURIComponent(
-													document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-												);
-												dataSend.ceo_name = ceo_cook;
-												var dataRequest = JSON.stringify (dataSend)
-													dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
-													$.post(baseURL + api + isoPais + '/servicios/transferencia-maestra/RegargaTMProcede', {request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)})
-													.done(function(response){
-														data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
-													$aux.dialog('destroy');
-													switch (data.code) {
-														case 0:
-															notiPagOS(data.title, data.msg, 'ok');
-															break;
-														case 1:
-															notiPagOS(data.title, data.msg, 'error');
-															break;
-														case 2:
-														default:
-															notiPagOS(data.title, data.msg, 'close');
-													}
-												})
+													})
+												} else {
+													$(this).find($('#token-code').css('border-color', '#cd0a0a'));
+													$(this).find($('#msg')).text('Código inválido');
+												}
 											} else {
 												$(this).find($('#token-code').css('border-color', '#cd0a0a'));
 												$(this).find($('#msg')).text('Debe ingresar el código de seguridad enviado a su correo');
-											}
 											}
 										}
 									}
@@ -266,20 +246,7 @@ $(function() {
 					});
 				}
 			} else {
-				$('<div><p>Verifique los datos ingresados e intente nuevamente</p></div>').dialog({
-					title: 'Campos inválidos',
-					modal: true,
-					resizable:false,
-					draggable: false,
-					open: function(event, ui) {
-						$('.ui-dialog-titlebar-close', ui.dialog).hide();
-					},
-					buttons: {
-						ok: function () {
-							$(this).dialog("destroy");
-						}
-					}
-				});
+				notiPagOS('Campos inválidos', 'Verifique los datos ingresados e intente nuevamente');
 			}
 		}
 	});
