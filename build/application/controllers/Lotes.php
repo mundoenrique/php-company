@@ -41,7 +41,7 @@ class Lotes extends CI_Controller {
 			$token = $this->session->userdata('token');
 			$nombreCompleto = $this->session->userdata('nombreCompleto');
 			$lastSessionD = $this->session->userdata('lastSession');
-			$FooterCustomInsertJS=["jquery-1.10.2.min.js", "jquery-ui-1.12.1.min.js","jquery-md5.js","jquery.balloon.min.js","aes.min.js","aes-json-format.min.js","jquery.fileupload.js","jquery.iframe-transport.js","dashboard/widget-empresa.js","lotes/lotes.js","jquery.dataTables.min.js","header.js","routes.js"];
+			$FooterCustomInsertJS=["jquery-3.4.0.min.js", "jquery-ui-1.12.1.min.js","jquery-md5.js","jquery.balloon.min.js","aes.min.js","aes-json-format.min.js","jquery.fileupload.js","jquery.iframe-transport.js","dashboard/widget-empresa.js","lotes/lotes.js","jquery.dataTables.min.js","header.js","routes.js"];
 			$FooterCustomJS="";
 			$titlePage="Conexión Empresas Online - Lotes";
 
@@ -1682,9 +1682,8 @@ class Lotes extends CI_Controller {
 
 				} else {
 					$responseError = ['ERROR' =>'Falla Al mover archivo.'];
-					//$responseError = $this->cryptography->encrypt($responseError);
-					//$this->output->set_content_type('application/json')->set_output(json_encode($responseError));
-					echo json_encode($responseError);
+					$responseError = $this->cryptography->encrypt($responseError);
+					$this->output->set_content_type('application/json')->set_output(json_encode($responseError));
 
 				}
 			}
@@ -1693,9 +1692,8 @@ class Lotes extends CI_Controller {
 			redirect($urlCountry.'/login');
 		}elseif($this->input->is_ajax_request()){
 			$responseError = ['ERROR' =>'-29'];
-			//$responseError = $this->cryptography->encrypt($responseError);
-			//$this->output->set_content_type('application/json')->set_output(json_encode($responseError));
-			echo json_encode($responseError);
+			$responseError = $this->cryptography->encrypt($responseError);
+			$this->output->set_content_type('application/json')->set_output(json_encode($responseError));
 		}else{
 			redirect($urlCountry.'/login');
 		}

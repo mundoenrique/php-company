@@ -4,11 +4,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 //País
 $config['country']='Ec-bp';
 $config['countryUri']='bp';
-$urlWs = 'http://172.24.6.78:10003/NovoEolWebInterfaceWS/webresources/';
-if(ENVIRONMENT == 'development') {
-	$urlWs = 'http://172.24.6.78:10003/NovoEolWebInterfaceWS/webresources/';
-}
-$config['urlWS'] = $urlWs;
 /*
 |--------------------------------------------------------------------------
 | Base CDN URL
