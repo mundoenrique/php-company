@@ -42,7 +42,6 @@ switch(country) {
 $('input[type=text], input[type=password], input[type=textarea]').attr('autocomplete','off');
 
 function callNovoCore (verb, who, where, data, _response_) {
-	console.log('Model:', who, 'Method:', where, 'Request:', data);
 	var ceo_cook = decodeURIComponent(
 		document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 	);
@@ -73,7 +72,6 @@ function callNovoCore (verb, who, where, data, _response_) {
 		}
 
 	}).fail(function(xrh, status, response) {
-		console.log('fail', response, status, xrh);
 		title = prefixCountry + strCountry;
 		msg = 'En estos momentos no podemos atender su solicitud, por favor intente en unos minutos';
 		icon = iconWarning;
