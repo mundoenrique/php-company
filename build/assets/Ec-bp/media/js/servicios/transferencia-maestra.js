@@ -256,7 +256,7 @@ function paramsValidate(){
 		var montoMinTransDia = parametrosRecarga.montoMinTransDia;
 		var montoMaxTransaccion = parametrosRecarga.montoMaxTransaccion;
 		var valid = true;
-		var montoATransferir = $('#amount').val();
+		var montoATransferir = parseFloat($('#amount').val());
 
 		if(montoATransferir > serv_var.saldoDispon){
 			valid = false;
