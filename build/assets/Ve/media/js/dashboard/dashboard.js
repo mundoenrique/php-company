@@ -362,17 +362,17 @@ $(function () {
 		$('#more').hide();
 		var ceo_cook = decodeURIComponent(
 			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-			);
-
-		$.post(baseURL + api + isoPais + "/empresas/lista", {
-				'data-filtroEmpresas': dash_var.filtro,
-				'data-paginar': dash_var.paginar,
-				'data-tamanoPagina': dash_var.cantEmp,
-				'data-paginaActual': dash_var.pgActual,
-				ceo_name: ceo_cook
-			},
-			function (data) {
-
+		);
+		var dataRequest = JSON.stringify({
+			data_filtroEmpresas:dash_var.filtro,
+			data_paginar:dash_var.paginar,
+			data_tamanoPagina:dash_var.cantEmp,
+			data_paginaActual:dash_var.pgActual
+		});
+		var dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
+		$.post(baseURL + api + isoPais + "/empresas/lista",{request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)},
+			function (response) {
+				data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 				if (!data.ERROR) {
 					var item = 1,
 						pg = 1,
