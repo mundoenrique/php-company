@@ -38,8 +38,8 @@ if ($country === 'Ec-bp') {
 		</header>
 		<div id="wrapper">
 			<div id="content">
-				<h1><?php echo $heading; ?></h1>
-				<?php echo $message; ?>
+				<h1>Error General</h1>
+				<p>Ha ocurrido un problema técnico inesperado. Regrese a la página anterior e intente nuevamente.</p>
 				<a class="button" href="#" id="history-back">Regresar</a>
 			</div>
 		</div>
