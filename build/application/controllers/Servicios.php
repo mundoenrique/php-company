@@ -33,7 +33,7 @@ class Servicios extends CI_Controller {
 			$jsRte = '../../../js/';
 			$thirdsJsRte = '../../../js/third_party/';
 			$FooterCustomInsertJS = ["jquery-3.4.0.min.js", "jquery-ui-1.12.1.min.js","jquery.balloon.min.js",
-			"jquery-md5.js","jquery.paginate.js","header.js","dashboard/widget-empresa.js",
+			"jquery-md5.js","jquery.paginate.js","aes.min.js","aes-json-format.min.js","header.js","dashboard/widget-empresa.js",
 			"servicios/transferencia-maestra.js","routes.js",$thirdsJsRte."jquery.validate.min.js",$jsRte."validate-forms.js",
 			$thirdsJsRte."additional-methods.min.js"];
 			$FooterCustomJS = "";
@@ -96,14 +96,16 @@ class Servicios extends CI_Controller {
 				$r["result"] = $result;
 				$r["funciones"] = $funciones;
 
-				$this->output->set_content_type('application/json')->set_output(json_encode($r));
+				$response = $this->cryptography->encrypt($r);
+				$this->output->set_content_type('application/json')->set_output(json_encode($response));
 
 		} elseif($paisS != $urlCountry && $paisS != '') {
 			$this->session->sess_destroy();
 			redirect($urlCountry.'/login');
 
 		} elseif ($this->input->is_ajax_request()) {
-			$this->output->set_content_type('application/json')->set_output(json_encode( array('ERROR' => '-29' )));
+			$response = $this->cryptography->encrypt(array('ERROR' => '-29' ));
+			$this->output->set_content_type('application/json')->set_output(json_encode($response));
 
 		}else{
 			redirect($urlCountry.'/login');
@@ -126,11 +128,24 @@ class Servicios extends CI_Controller {
 		$token = $this->session->userdata('token');
 		$idEmpresa = $this->session->userdata('acrifS');
 		$idProductoS = $this->session->userdata('idProductoS');
-		$tarjeta = $this->input->post('data-tjta');
-		$dni = $this->input->post('data-dni');
-		$pg = $this->input->post('data-pg');
-		$paginas = $this->input->post('data-paginas');
-		$paginar = $this->input->post('data-paginar');
+		$dataRequest = json_decode(
+			$this->security->xss_clean(
+					strip_tags(
+							$this->cryptography->decrypt(
+									base64_decode($this->input->get_post('plot')),
+									utf8_encode($this->input->get_post('request'))
+							)
+					)
+			)
+	);
+		$tarjeta = $dataRequest->data_tjta;
+		$dni = $dataRequest->data_dni;
+		$pg = $dataRequest->data_pg;
+		$paginas = $dataRequest->data_paginas;
+		$paginar = $dataRequest->data_paginar;
+
+
+
 		$acodcia = $this->session->userdata('accodciaS');
 		$acgrupo = $this->session->userdata('accodgrupoeS');
 		$sessionId = $this->session->userdata('sessionId');
@@ -234,14 +249,16 @@ class Servicios extends CI_Controller {
 			} else {
 				$result = array("ERROR"=>lang('SIN_FUNCION'));
 			}
-			$this->output->set_content_type('application/json')->set_output(json_encode($result));
+			$response = $this->cryptography->encrypt($result);
+			$this->output->set_content_type('application/json')->set_output(json_encode($response));
 
 		} elseif($paisS!=$urlCountry && $paisS!='') {
 			$this->session->sess_destroy();
 			redirect($urlCountry.'/login');
 
 		} elseif($this->input->is_ajax_request()) {
-			$this->output->set_content_type('application/json')->set_output(json_encode( array('ERROR' => '-29' )));
+			$response = $this->cryptography->encrypt(array('ERROR' => '-29' ));
+			$this->output->set_content_type('application/json')->set_output(json_encode($response));
 		} else {
 			redirect($urlCountry.'/login');
 		}
@@ -279,11 +296,20 @@ class Servicios extends CI_Controller {
 		];
 
 		$listaTarjetas = array($listaTarjetas);
-
-		$tarjetas = $this->input->post('data-tarjeta');
-		$dnis = $this->input->post('data-id_ext_per');
-		$pass = $this->input->post('data-pass');
-		$lista;
+		$dataRequest = json_decode(
+			$this->security->xss_clean(
+					strip_tags(
+							$this->cryptography->decrypt(
+									base64_decode($this->input->get_post('plot')),
+									utf8_encode($this->input->get_post('request'))
+							)
+					)
+			)
+	);
+	$tarjetas = $dataRequest->data_tarjeta;
+	$dnis = $dataRequest->data_id_ext_per;
+	$pass = $dataRequest->data_pass;
+	$lista;
 
 		foreach ($tarjetas as $key => $value) {
 			$tjs = ["noTarjeta" => $value, "id_ext_per" => $dnis[$key]];
@@ -372,15 +398,16 @@ class Servicios extends CI_Controller {
 			}else{
 				$result = ["ERROR"=>lang('SIN_FUNCION')];
 			}
-
-			$this->output->set_content_type('application/json')->set_output(json_encode($result));
+			$response = $this->cryptography->encrypt($result);
+			$this->output->set_content_type('application/json')->set_output(json_encode($response));
 
 		} elseif ($paisS!=$urlCountry && $paisS!=''){
 			$this->session->sess_destroy();
 			redirect($urlCountry.'/login');
 
 		} elseif ($this->input->is_ajax_request()){
-			$this->output->set_content_type('application/json')->set_output(json_encode( array('ERROR' => '-29' )));
+			$response = $this->cryptography->encrypt(array('ERROR' => '-29' ));
+			$this->output->set_content_type('application/json')->set_output(json_encode($response));
 
 		} else {
 			redirect($urlCountry.'/login');
@@ -680,7 +707,8 @@ class Servicios extends CI_Controller {
 
 		if($paisS == $urlCountry && $logged_in && $moduloAct !==false ) {
 			$FooterCustomInsertJS = ["jquery-1.10.2.min.js", "jquery-ui-1.10.3.custom.min.js", "jquery.balloon.min.js",
-			"jquery.dataTables.min.js", "header.js", "dashboard/widget-empresa.js", "jquery.fileupload.js", "jquery.iframe-transport.js", "servicios/actualizar-datos.js", "routes.js"];
+			"aes.min.js","aes-json-format.min.js","jquery.dataTables.min.js", "header.js", "dashboard/widget-empresa.js",
+			"jquery.fileupload.js", "jquery.iframe-transport.js", "servicios/actualizar-datos.js", "routes.js"];
 			$FooterCustomJS = "";
 			$titlePage = "Actualizar datos";
 			$programa = $this->session->userdata('nombreProductoS').' / '. $this->session->userdata('marcaProductoS');
@@ -1189,14 +1217,16 @@ class Servicios extends CI_Controller {
 			} else {
 				$result = array("ERROR"=>lang('SIN_FUNCION'));
 			}
-			$this->output->set_content_type('application/json')->set_output(json_encode($result));
+			$response = $this->cryptography->encrypt($result);
+			$this->output->set_content_type('application/json')->set_output(json_encode($response));
 
 		} elseif($paisS!=$urlCountry && $paisS!='') {
 			$this->session->sess_destroy();
 			redirect($urlCountry.'/login');
 
 		} elseif($this->input->is_ajax_request()) {
-			$this->output->set_content_type('application/json')->set_output(json_encode( array('ERROR' => '-29' )));
+			$response = $this->cryptography->encrypt(array('ERROR' => '-29'));
+			$this->output->set_content_type('application/json')->set_output(json_encode($response));
 		} else {
 			redirect($urlCountry.'/login');
 		}
@@ -1230,7 +1260,8 @@ class Servicios extends CI_Controller {
 			"token"=>$token,
 			"className" => $className,
 			"rifEmpresa"=> $idEmpresa,
-			"logAccesoObject"=>$logAcceso,
+			"idProducto"=> $idProductoS,
+			"logAccesoObject"=> $logAcceso,
 			"pais" => $urlCountry
 		];
 		$data = json_encode($data, JSON_UNESCAPED_UNICODE);
@@ -1245,7 +1276,7 @@ class Servicios extends CI_Controller {
 			log_message("DEBUG", "RESULTS : " . json_encode($response->maestroDeposito, JSON_UNESCAPED_UNICODE));
 
 		}
-		return $jsonResponse;
+		return $response;
 	}
 
 	public function RegargaTM($urlCountry)
@@ -1268,14 +1299,16 @@ class Servicios extends CI_Controller {
 				$result = array("ERROR"=>lang('SIN_FUNCION'));
 
 			}
-			$this->output->set_content_type('application/json')->set_output(json_encode($result));
+			$response = $this->cryptography->encrypt($result);
+			$this->output->set_content_type('application/json')->set_output(json_encode($response));
 
 		} elseif($paisS!=$urlCountry && $paisS!='') {
 			$this->session->sess_destroy();
 			redirect($urlCountry.'/login');
 
 		} elseif($this->input->is_ajax_request()) {
-			$this->output->set_content_type('application/json')->set_output(json_encode( array('ERROR' => '-29' )));
+			$response = $this->cryptography->encrypt(array('ERROR' => '-29' ));
+			$this->output->set_content_type('application/json')->set_output(json_encode($response));
 		} else {
 			redirect($urlCountry.'/login');
 		}
@@ -1366,11 +1399,22 @@ class Servicios extends CI_Controller {
 	{
 		np_hoplite_countryCheck($urlCountry);
 
-		$amount = $this->input->post('amount');
-		$descript = $this->input->post('descript');
-		$account = $this->input->post('account');
-		$type = $this->input->post('type');
-		$codeToken = $this->input->post('codeToken');
+
+		$dataRequest = json_decode(
+			$this->security->xss_clean(
+				strip_tags(
+					$this->cryptography->decrypt(
+						base64_decode($this->input->get_post('plot')),
+						utf8_encode($this->input->get_post('request'))
+					)
+				)
+			)
+		);
+		$amount = $dataRequest->amount;
+		$descript = $dataRequest->descript;
+		$account = $dataRequest->account;
+		$type = $dataRequest->type;
+		$codeToken = $dataRequest->codeToken;
 
 		$this->lang->load('erroreseol');
 
@@ -1386,13 +1430,15 @@ class Servicios extends CI_Controller {
 			}else{
 				$result = array("ERROR"=>lang('SIN_FUNCION'));
 			}
-			$this->output->set_content_type('application/json')->set_output(json_encode($result));
+			$response = $this->cryptography->encrypt($result);
+			$this->output->set_content_type('application/json')->set_output(json_encode($response));
 
 		} elseif($paisS!=$urlCountry && $paisS!='') {
 			$this->session->sess_destroy();
 			redirect($urlCountry.'/login');
 		} elseif($this->input->is_ajax_request()) {
-			$this->output->set_content_type('application/json')->set_output(json_encode( array('ERROR' => '-29' )));
+			$response = $this->cryptography->encrypt(array('ERROR' => '-29' ));
+			$this->output->set_content_type('application/json')->set_output(json_encode($response));
 		} else {
 			redirect($urlCountry.'/login');
 		}

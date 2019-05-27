@@ -35,7 +35,7 @@ class Services_model extends CI_Model {
 		$this->lang->load('servicios');
 		$this->lang->load('users');
 		$this->lang->load('erroreseol');
-		$this->lang->load('dashboard');		
+		$this->lang->load('dashboard');
 	}
 
 	public function getBanckAccountlist() {
@@ -73,6 +73,7 @@ class Services_model extends CI_Model {
 		*/
 		if($responseWs) {
 			$this->data = 'No fue posible obtener las cuentas';
+			$this->title = lang('REG_CTA_CONCEN');
 			switch($responseWs->rc) {
 				case 0:
 					log_message('INFO', '[' . $this->userName . '] ctasClientes: '.$responseWs->bean);
@@ -92,9 +93,13 @@ class Services_model extends CI_Model {
 					break;
 				case -150:
 					$this->code = 1;
-					$this->title = lang('REG_CTA_CONCEN');
 					$this->msg = 'La empresa no tiene cuentas asociadas';
 					$this->data = 'La empresa no tiene cuentas asociadas';
+					break;
+				case -400:
+					$this->code = 1;
+					$this->msg = 'No fue posible obtener las cuentas de la empresa';
+					$this->data = 'No fue posible obtener las cuentas de la empresa';
 					break;
 				case -29:
 				case -61:
@@ -122,5 +127,5 @@ class Services_model extends CI_Model {
 		];
 
 		return $this->response;
-	}	
+	}
 }

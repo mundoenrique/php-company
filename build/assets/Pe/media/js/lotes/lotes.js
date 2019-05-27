@@ -1,9 +1,7 @@
 $(function() { // Document ready
 
-  var f, dir, forma;
-
-
- // $('thead').hide();
+	var f, dir, forma;
+	var ceo_cook;
  $('#lotes-2').show();
  $(".aviso").removeClass("elem-hidden");
   actualizarLote();
@@ -33,11 +31,11 @@ $(function() { // Document ready
 
                   if( $("#tipoLote").val() != ""  ){
                     $("#cargaLote").replaceWith('<h3 id="cargando">Cargando...</h3>');
-										var ceo_cook = decodeURIComponent(
+										ceo_cook = decodeURIComponent(
 											document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 										);
                     dat.formData = {'data-tipoLote':$("#tipoLote").val(), 'data-formatolote':$("#tipoLote option:selected").attr('rel'), ceo_name: ceo_cook };
-                    dat.submit().success( function (result, textStatus, jqXHR){
+                    dat.submit(function (result, textStatus, jqXHR){
 
                       if(result){
                         result = $.parseJSON(result);
@@ -268,7 +266,7 @@ $("#table-text-lotes").on("click","#borrar",
               $('#pass').val( '' );
               $(this).dialog('destroy');
               var $aux = $('#loading').dialog({title:"Eliminando lote",modal: true, resizable:false, close:function(){$aux.dialog('close');}});
-							var ceo_cook = decodeURIComponent(
+							ceo_cook = decodeURIComponent(
 								document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 							);
               $.post(baseURL+api+isoPais+"/lotes/eliminar", {'data-idTicket':ticket, 'data-idLote':lote, 'data-pass':pass, ceo_name: ceo_cook}).done(
@@ -311,16 +309,21 @@ $("#table-text-lotes").on("click", ".detalle",
     var estado = $(this).attr("data-edo");
     var ticket = $(this).attr("data-idTicket");
 		var opc=$(this).attr("data-opc");
+		ceo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
 
-    if(estado=="1" || (estado=="6" && !opc ) ){
-      $("form#confirmar").append('<input type="hidden" name="data-estado" value="'+estado+'" />');
-      $("form#confirmar").append('<input type="hidden" name="data-idTicket" value="'+ticket+'" />');
-      $("form#confirmar").submit();
-    }else if(estado=="5" || estado=="6") {
-      $("form#detalle").append('<input type="hidden" name="data-estado" value="'+estado+'" />');
-      $("form#detalle").append('<input type="hidden" name="data-idTicket" value="'+ticket+'" />');
-      $("form#detalle").submit();
-    }
+		if (estado == "1" || (estado == "6" && !opc)) {
+			$("form#confirmar").append('<input type="hidden" name="ceo_name" value="' + ceo_cook + '" />');
+			$("form#confirmar").append('<input type="hidden" name="data-estado" value="' + estado + '" />');
+			$("form#confirmar").append('<input type="hidden" name="data-idTicket" value="' + ticket + '" />');
+			$("form#confirmar").submit();
+		} else if (estado == "5" || estado == "6") {
+			$("form#detalle").append('<input type="hidden" name="ceo_name" value="' + ceo_cook + '" />');
+			$("form#detalle").append('<input type="hidden" name="data-estado" value="' + estado + '" />');
+			$("form#detalle").append('<input type="hidden" name="data-idTicket" value="' + ticket + '" />');
+			$("form#detalle").submit();
+		}
 
 });
 
