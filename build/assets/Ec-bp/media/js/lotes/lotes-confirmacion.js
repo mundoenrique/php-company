@@ -29,6 +29,7 @@ $(function(){
         if(pass!=""){
 					var form = $('#form-confirmacion');
 					validateForms(form);
+					console.log(form.valid());
 					if (form.valid()) {
 						pass = hex_md5( pass );
 						$('#clave').val( '' );

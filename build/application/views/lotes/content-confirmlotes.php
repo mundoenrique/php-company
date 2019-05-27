@@ -155,11 +155,11 @@ log_message('info',json_encode($data));
 					<button onclick="location.href='<?php echo $urlBase; ?>/lotes'"><?php echo lang('BOTON_LOTES_CANCELAR') ?></button>
 					<button id="confirma" ><?php echo lang('BOTON_LOTES_CONFIRMAR') ?></button>
 
-					<input id="tipo" type='hidden' class="ignore" data-tipo='<?php echo $info->tipoLote ?>'/>
+					<input type="hidden" id="tipo" name="tipo" class="ignore" data-tipo='<?php echo $info->tipoLote ?>'/>
 
-					<input id="info" type='hidden' name='info' class="ignore" value='<?php echo serialize($info) ?>'/>
+					<input type="hidden" id="info" name='info' class="ignore" value='<?php echo serialize($info) ?>'/>
 
-					<input id="idTipoLote" type="hidden" name="idTipoLote" value='<?php echo $info->idTipoLote ?>'/>
+					<input type="hidden" id="idTipoLote" name="idTipoLote" class="ignore" value='<?php echo $info->idTipoLote ?>'/>
 
 				</form>
 			</div>
