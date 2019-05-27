@@ -3245,7 +3245,7 @@ class Reportes extends CI_Controller {
 			if($paisS==$urlCountry && $logged_in && $moduloAct!==false){
 					$nombreCompleto = $this->session->userdata('nombreCompleto');
 					$lastSessionD = $this->session->userdata('lastSession');
-					$FooterCustomInsertJS=["jquery-3.4.0.min.js", "jquery-ui-1.12.1.min.js","reportes/gastosporcategorias.js","kendo.dataviz.min.js","jquery.paginate.js","header.js","jquery.balloon.min.js","routes.js"];
+					$FooterCustomInsertJS=["jquery-3.4.0.min.js", "jquery-ui-1.12.1.min.js","aes.min.js","aes-json-format.min.js","reportes/gastosporcategorias.js","kendo.dataviz.min.js","jquery.paginate.js","header.js","jquery.balloon.min.js","routes.js"];
 					$FooterCustomJS="";
 					$titlePage="Conexión Empresas Online - Reportes";
 
@@ -3309,18 +3309,30 @@ class Reportes extends CI_Controller {
 							}
 							else
 							{
-									$producto=$this->input->post('producto');
-									$empresa = $this->input->post('empresa');
-									$fechaIni = $this->input->post('fechaInicial');
-									$fechaFin = $this->input->post('fechaFin');
-									$tipoConsulta = $this->input->post('tipoConsulta');
-									$cedula = $this->input->post('cedula');
-									$tarjeta= $this->input->post('tarjeta');
+								$dataRequest = json_decode(
+									$this->security->xss_clean(
+										strip_tags(
+											$this->cryptography->decrypt(
+												base64_decode($this->input->get_post('plot')),
+												utf8_encode($this->input->get_post('request'))
+											)
+										)
+									)
+								);
+
+									$producto=$dataRequest->producto;
+									$empresa = $dataRequest->empresa;
+									$fechaIni = $dataRequest->fechaInicial;
+									$fechaFin = $dataRequest->fechaFin;
+									$tipoConsulta = $dataRequest->tipoConsulta;
+									$cedula = $dataRequest->cedula;
+									$tarjeta= $dataRequest->tarjeta;
 									$username = $this->session->userdata('userName');
 									$token = $this->session->userdata('token');
 
 									$pruebaTabla = $this->callWSGastosPorCategorias($urlCountry,$token,$username,$empresa,$tarjeta,$cedula,$fechaIni,$fechaFin,$producto,$tipoConsulta);
-									$this->output->set_content_type('application/json')->set_output(json_encode($pruebaTabla));
+								$response = $this->cryptography->encrypt($pruebaTabla);
+								$this->output->set_content_type('application/json')->set_output(json_encode($response,JSON_UNESCAPED_UNICODE));
 
 							}
 					}
