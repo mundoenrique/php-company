@@ -49,7 +49,7 @@
 				<span aria-hidden="true" class="icon" data-icon="&#xe07a;"></span> <?= lang('REG_CTA_CONCEN'); ?>
 			</div>
 			<div id="lotes-contenedor">
-				<form id="form-criterio-busqueda" onsubmit="return false">
+				<form id="form-recarga-cuenta" onsubmit="return false">
 					<div id="search-1">
 						<h5><span id="saldoEmpresa"></span></h5>
 							<br>

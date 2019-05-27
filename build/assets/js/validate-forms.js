@@ -79,6 +79,8 @@ function validateForms(form, options) {
 			"user_pass": {pattern: userPassword},
 			"tipo_lote_select": {pattern: numeric},
 			"user-password": {pattern: userPassword},
+			"user-password-1": {pattern: userPassword},
+			"user-password-2": {pattern: userPassword},
 			"id-persona": {pattern: numeric},
 			"start-dmy-date": {pattern: date.dmy},
 			"end-dmy-date": {pattern: date.dmy},
@@ -99,7 +101,9 @@ function validateForms(form, options) {
 			"amount": {pattern: amount[validCountry]},
 			"text": {pattern: text},
 			"type": {pattern: alphabetical},
-			"account": {pattern: numeric}
+			"account": {pattern: numeric},
+			"pass": {pattern: userPassword},
+			"idTipoLote": {pattern: numeric}
 		},
 		messages: {
 			"user-name": "Debe indicar su nombre de usuario",

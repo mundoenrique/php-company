@@ -42,9 +42,9 @@ $(function(){
     //cambio de clave
     $('#btn-cambioC').on('click', function(){
 
-        var canvas= "<form id='formu'><input type=password id='old' placeholder='Contraseña actual' size=26/>";
-        canvas+= "<input type=password id='new' placeholder='Contraseña nueva' maxlength="+max+" size=26/>";
-        canvas+= "<input type=password id='confNew' placeholder='Confirme contraseña nueva' maxlength="+max+" size=26/><h5 id='vacio'></h5></form>";
+        var canvas= "<form id='formu'><input type=password id='old' name='user-password' placeholder='Contraseña actual' size=26/>";
+        canvas+= "<input type=password id='new' name='user-password-1' placeholder='Contraseña nueva' maxlength="+max+" size=26/>";
+        canvas+= "<input type=password id='confNew' name='user-password-2' placeholder='Confirme contraseña nueva' maxlength="+max+" size=26/><h5 id='vacio'></h5></form>";
 
         $(canvas).dialog({
             title: "Cambiar contraseña",
@@ -86,27 +86,33 @@ $(function(){
 													userpwd:newC,
 													userpwdConfirm:cNewC,
 													})
-													dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
-													$.post(baseURL+'/'+isoPais+"/changePassNewUserAuth", {request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)} )
-													.done(function(response){
-														data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
-																//data = $.parseJSON(data)
-																console.log(data);
+													var form = $(this).closest('form');
+													validateForms(form);
+													if (form.valid()) {
 
-                                if(data.rc == 0){
-                                    $dialogo.dialog("destroy");
-                                    notificacion('Cambiar contraseña','Proceso exitoso.');
-                                } else {
-                                    if (data.rc == -29) {
-                                        alert("Usuario actualmente desconectado");
-                                        $(location).attr('href',baseURL+'/'+isoPais+'/login');
-                                    } else {
-                                        $dialogo.dialog("destroy");
-                                        notificacion('Cambiar contraseña', data.msg);
-                                    }
-                                }
-                            });
+														dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
+														$.post(baseURL+'/'+isoPais+"/changePassNewUserAuth", {request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)} )
+														.done(function(response){
+															data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
+																	//data = $.parseJSON(data)
 
+																	if(data.rc == 0){
+																			$dialogo.dialog("destroy");
+																			notificacion('Cambiar contraseña','Proceso exitoso.');
+																	} else {
+																			if (data.rc == -29) {
+																					alert("Usuario actualmente desconectado");
+																					$(location).attr('href',baseURL+'/'+isoPais+'/login');
+																			} else {
+																					$dialogo.dialog("destroy");
+																					notificacion('Cambiar contraseña', data.msg);
+																			}
+																	}
+															});
+
+													} else {
+														$(this).find($('#vacio')).text('Verifique los datos ingresados e intente nuevamente')
+													}
                     }
                     $(this).find($('#old')).val('');
                     $(this).find($('#new')).val('');
