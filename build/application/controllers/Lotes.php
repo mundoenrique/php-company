@@ -536,15 +536,28 @@ class Lotes extends CI_Controller {
 
 		if($paisS==$urlCountry && $logged_in && ($ordenS==''||$ordenS=='0'||$ordenS=='1') && $linkAut!==false){
 
-			$pass = $this->input->post('data-pass');
-			$halp1 = var_export($this->input->post('data-lotes'), true);
-			$lotes = explode(',',$this->input->post('data-lotes'));
+			$dataRequest = json_decode(
+				$this->security->xss_clean(
+					strip_tags(
+						$this->cryptography->decrypt(
+							base64_decode($this->input->get_post('plot')),
+							utf8_encode($this->input->get_post('request'))
+						)
+					)
+				)
+			);
+
+			$pass = $dataRequest->data_pass;
+			$halp1 = var_export($dataRequest->data_lotes, true);
+			$lotes = explode(',',$dataRequest->data_lotes);
 			$halp2 = var_export($lotes, true);
 			array_pop($lotes);
 
 			$rTest = $this->callWSfirmarLote($urlCountry,$pass,$lotes);
 
-			$this->output->set_content_type('application/json')->set_output(json_encode($rTest));
+			$response = $this->cryptography->encrypt($rTest);
+
+			$this->output->set_content_type('application/json')->set_output(json_encode($response));
 
 		}elseif($paisS!=$urlCountry && $paisS!=""){
 			$this->session->sess_destroy();
@@ -792,18 +805,31 @@ class Lotes extends CI_Controller {
 
 		if($paisS==$urlCountry && $logged_in && $funcActiv!=false){
 
-			$lotes = explode(',', $this->input->post('data-lotes'));
-			$acnumlote = explode(',', $this->input->post('data-acnumlote'));
-			$actipolote = explode(',', $this->input->post('data-ctipolote'));
+			$dataRequest = json_decode(
+				$this->security->xss_clean(
+					strip_tags(
+						$this->cryptography->decrypt(
+							base64_decode($this->input->get_post('plot')),
+							utf8_encode($this->input->get_post('request'))
+						)
+					)
+				)
+			);
+
+			$lotes = explode(',', $dataRequest->data_lotes);
+			$acnumlote = explode(',', $dataRequest->data_acnumlote);
+			$actipolote = explode(',', $dataRequest->data_ctipolote);
 			array_pop($lotes);
 			array_pop($acnumlote);
 			array_pop($actipolote);
 
-			$pass = $this->input->post('data-pass') ;
+			$pass = $dataRequest->data_pass ;
+
 
 			$rTest = $this->callWSeliminarLotesPorAutorizar($urlCountry,$lotes,$acnumlote,$actipolote,$pass);
+			$response = $this->cryptography->encrypt($rTest);
 
-			$this->output->set_content_type('application/json')->set_output(json_encode($rTest));
+			$this->output->set_content_type('application/json')->set_output(json_encode($response));
 
 		}elseif($paisS!=$urlCountry && $paisS!=""){
 			$this->session->sess_destroy();
