@@ -313,6 +313,7 @@ class Novo_User_Model extends NOVO_Model {
 
 	public function callWs_validateCaptcha_User($dataRequest)
 	{
+
 		$this->load->library('recaptcha');
 		$result = $this->recaptcha->verifyResponse($dataRequest->token);
 
