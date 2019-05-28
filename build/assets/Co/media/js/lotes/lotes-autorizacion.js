@@ -64,10 +64,17 @@ if( !$("#loteXdesa").val()&& !$('#lotesxAuth').val() ){
 
 			var ceo_cook = decodeURIComponent(
 				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-				);
-
-			$.post(baseURL+isoPais+'/lotes/autorizacion/firmar',{'data-lotes': js_var.loteF,'data-pass':pass, ceo_name: ceo_cook}).done(function(data){
-         $aux.dialog('destroy');
+			);
+			var dataRequest = JSON.stringify ({
+				data_lotes: js_var.loteF,
+				data_pass: pass,
+			})
+			dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
+			$.post(baseURL + isoPais + '/lotes/autorizacion/firmar', {
+				request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)
+			}).done(function (response) {
+				data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
+        $aux.dialog('destroy');
         if(!data.ERROR){
           $('<div>Proceso exitoso.<h5>Listando lotes</h5></div>').dialog({title:"Firmando lote",modal: true, bgiframe: true});
          location.reload();
@@ -137,10 +144,18 @@ $('#lotes-2').on('click','#select-allA', function() {
 
 			var ceo_cook = decodeURIComponent(
 				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-				);
-
-      $.post(baseURL+isoPais+'/lotes/preliminar',{'data-lotes':js_var.loteA, 'data-pass':pass,'data-tipoOS':osTipo, ceo_name: ceo_cook})
-      .done(function(data){
+			);
+			var dataRequest = JSON.stringify ({
+				data_lotes: js_var.loteA,
+				data_pass: pass,
+				data_tipoOS: osTipo,
+			})
+			dataRequest  = CryptoJS.AES.encrypt(dataRequest , ceo_cook, {format: CryptoJSAesJson}).toString();
+			$.post(baseURL+isoPais+'/lotes/preliminar',{
+				request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)
+				})
+			.done(function(response){
+				data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
         var code = data.code, title = data.title, msg = data.msg, dataCalc = data.data;
 				$('#loading').dialog('destroy');
 				if(code === 0) {
@@ -527,31 +542,37 @@ function eliminarLotes(idlote,acnumlote,ctipolote,pass){
 
   var $aux = $('#loading').dialog({title:"Eliminando lote",modal: true, bgiframe: true, dialogClass: 'hide-close' });
 
-					var ceo_cook = decodeURIComponent(
-						document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-						);
-
-					$.post(baseURL+isoPais+'/lotes/autorizacion/eliminarAuth',
-          {'data-lotes': idlote,'data-acnumlote':acnumlote,'data-ctipolote':ctipolote,'data-pass':pass, ceo_name: ceo_cook})
-          .done(function(data){
-      $aux.dialog('destroy');
-               if(!data.ERROR){
+	var ceo_cook = decodeURIComponent(
+		document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+	);
+	dataRequest = JSON.stringify({
+		'data_lotes': idlote,
+		'data_acnumlote': acnumlote,
+		'data_ctipolote': ctipolote,
+		'data_pass': pass,
+	});
+	dataRequest  = CryptoJS.AES.encrypt(dataRequest , ceo_cook, {format: CryptoJSAesJson}).toString();
+	$.post(baseURL + isoPais + '/lotes/autorizacion/eliminarAuth', {
+			request: dataRequest,
+			ceo_name: ceo_cook,
+			plot: btoa(ceo_cook)
+		})
+		.done(function (response) {
+		data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
+  	$aux.dialog('destroy');
+      if(!data.ERROR){
 
                  //$item.parents('tr').fadeOut("slow");
-
-                 notificacion('Eliminando lote', 'Eliminación exitosa');
-
-                 location.reload();
-              }else{
-               if(data.ERROR=='-29'){
-                alert('Usuario actualmente desconectado'); location.reload();
-                }else{
-
-                notificacion('Eliminando lote', data.ERROR);
-                }
-              }
-
-            });
+        notificacion('Eliminando lote', 'Eliminación exitosa');
+        location.reload();
+      }else{
+       	if(data.ERROR=='-29'){
+        alert('Usuario actualmente desconectado'); location.reload();
+        }else{
+        notificacion('Eliminando lote', data.ERROR);
+        }
+      }
+    });
 
 }
 

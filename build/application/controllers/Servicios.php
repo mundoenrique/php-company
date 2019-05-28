@@ -1296,7 +1296,8 @@ class Servicios extends CI_Controller {
 				$result = $this->callWsRecargaTM($urlCountry);
 
 			}else{
-				$result = array("ERROR"=>lang('SIN_FUNCION'));
+
+				$result = ["ERROR"=>lang('SIN_FUNCION')];
 
 			}
 			$response = $this->cryptography->encrypt($result);
@@ -1412,7 +1413,8 @@ class Servicios extends CI_Controller {
 		);
 		$amount = $dataRequest->amount;
 		$descript = $dataRequest->descript;
-		$account = $dataRequest->account;
+		//$account = $dataRequest->account;
+		$account = (isset($dataRequest->account))? $dataRequest->account : "";
 		$type = $dataRequest->type;
 		$codeToken = $dataRequest->codeToken;
 
@@ -1428,7 +1430,7 @@ class Servicios extends CI_Controller {
 			if($funcAct) {
 				$result = $this->callWsRecargaTMProcede($urlCountry, $amount, $descript, $account, $type, $codeToken);
 			}else{
-				$result = array("ERROR"=>lang('SIN_FUNCION'));
+				$result = ["ERROR"=>lang('SIN_FUNCION')];
 			}
 			$response = $this->cryptography->encrypt($result);
 			$this->output->set_content_type('application/json')->set_output(json_encode($response));

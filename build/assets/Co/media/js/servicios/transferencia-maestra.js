@@ -39,7 +39,6 @@ $(function() {
 
         serv_var.busk = true;
         serv_var.TotalTjts = 0;
-
         buscar(1);
     });
 
@@ -63,17 +62,19 @@ $(function() {
 
 				var ceo_cook = decodeURIComponent(
 					document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-					);
+				);
 
-        $.post(baseURL + api + isoPais + '/servicios/transferencia-maestra/buscar', {
-            'data-dni': $('#dni').val(),
-            'data-tjta': $('#nroTjta').val(),
-            'data-pg': pgSgt,
-            'data-paginas': serv_var.paginas,
-						'data-paginar': serv_var.paginar,
-						'ceo_name': ceo_cook
-        })
-            .done(function(data) {
+        var dataRequest = JSON.stringify ({
+					data_dni: $('#dni').val(),
+					data_tjta: $('#nroTjta').val(),
+					data_pg: pgSgt,
+					data_paginas: serv_var.paginas,
+					data_paginar: serv_var.paginar
+				})
+					dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
+					$.post(baseURL + api + isoPais + "/servicios/transferencia-maestra/buscar", {request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)} )
+					.done(function(response){
+						data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 
                 $aux.dialog('destroy');
 
@@ -333,19 +334,21 @@ $(function() {
 
 				var ceo_cook = decodeURIComponent(
 					document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-					);
+				);
 
-        $.post(url, {
-            'data-tarjeta': serv_var.noTarjetas,
-            'data-id_ext_per': serv_var.dni_tarjetas,
-            'data-pass': pass,
-            'data-monto': serv_var.monto,
-            'data-pg': 1,
-            'data-paginas': 1,
-						'data-paginar': false,
-						'ceo_name': ceo_cook
-        })
-            .done(function(data) {
+        var dataRequest = JSON.stringify ({
+					data_tarjeta: serv_var.noTarjetas,
+					data_id_ext_per: serv_var.dni_tarjetas,
+					data_pass: pass,
+					data_monto: serv_var.monto,
+					data_pg: 1,
+					data_paginas: 1,
+					data_paginar: false
+				})
+					dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
+					$.post(url, {request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)} )
+					.done(function(response){
+						data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 
                 $aux.dialog("destroy");
 
@@ -929,7 +932,8 @@ $(function() {
                 }
             });
             $.get(baseURL + api + isoPais + '/servicios/transferencia-maestra/pagoTM')
-                .done(function (data) {
+						.done(function (response) {
+							var data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
                     $aux.dialog('destroy');
                     switch (data.code) {
                         case 0:
@@ -962,16 +966,17 @@ $(function() {
 																						});
 																						var ceo_cook = decodeURIComponent(
 																							document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-																							);
-
-                                            $.post(baseURL + api + isoPais + '/servicios/transferencia-maestra/RegargaTMProcede', {
-                                                "amount":amount,
-																								"descript": descrip,
-																								"type": 'abono',
-																								"codeToken": codeToken,
-																								'ceo_name': ceo_cook
-                                            })
-                                                .done(function (data) {
+																						);
+																						var dataRequest = JSON.stringify ({
+																							amount: amount,
+																							descript: descrip,
+																							type: 'abono',
+																							codeToken: codeToken
+																						})
+																							dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
+																							$.post(baseURL + api + isoPais + '/servicios/transferencia-maestra/RegargaTMProcede', {request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)})
+																							.done(function(response){
+																								data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
                                                     $aux.dialog('destroy');
                                                     switch (data.code) {
                                                         case 0:

@@ -39,10 +39,19 @@ var ceo_cook;
 										ceo_cook = decodeURIComponent(
 											document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 										);
-
-										dat.formData = {'data-tipoLote':$("#tipoLote").val(), 'data-formatolote':$("#tipoLote option:selected").attr('rel'), ceo_name: ceo_cook };
-                    dat.submit(function (result, textStatus, jqXHR){
-
+										var paquete = {
+											data_tipoLote: $("#tipoLote").val(),
+											data_formatolote: $("#tipoLote option:selected").attr('rel')
+										};
+										var dataRequest = JSON.stringify(paquete)
+										dataRequest  = CryptoJS.AES.encrypt(dataRequest , ceo_cook, {format: CryptoJSAesJson}).toString();
+										dat.formData = {
+											request: dataRequest,
+											ceo_name: ceo_cook,
+											plot: btoa(ceo_cook)
+										}
+										dat.submit().done(function (response, textStatus, jqXHR) {
+											result = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
                       if(result){
                         result = $.parseJSON(result);
 
@@ -125,7 +134,10 @@ if(!$("#table-text-lotes").hasClass('dataTable')){
 $('#actualizador').show();
 }
   $.get(baseURL+api+isoPais+"/lotes/lista/pendientes",
-    function(data){
+	function (response) {
+		data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {
+			format: CryptoJSAesJson
+		}).toString(CryptoJS.enc.Utf8))
 
 
       var icon, batch, color, title;
@@ -270,10 +282,15 @@ $("#table-text-lotes").on("click","#borrar",
 							ceo_cook = decodeURIComponent(
 								document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 							);
-
-							$.post(baseURL+api+isoPais+"/lotes/eliminar", {'data-idTicket':ticket, 'data-idLote':lote, 'data-pass':pass, ceo_name: ceo_cook}).done(
-                function(data){
-
+							var dataRequest = JSON.stringify ({
+								data_idTicket: ticket,
+								data_idLote: lote,
+								data_pass: pass,
+							})
+							dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
+							$.post(baseURL + api + isoPais + "/lotes/eliminar",  {request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)}).done(
+							function (response) {
+								data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
                 $aux.dialog('destroy');
 
                 if(!data.ERROR){
