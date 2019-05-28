@@ -2443,24 +2443,35 @@ class Users extends CI_Controller {
 
         if($paisS==$urlCountry &&$logged_in){
 
-            $rif = $this->input->post("rif");
-            $nombre = $this->input->post("nombre");
-            $codigo = $this->input->post("codigo");
-            $dir1 = $this->input->post("dir1");
-            $dir2 = $this->input->post("dir2");
-            $dir3 = $this->input->post("dir3");
-            $zona = $this->input->post("zona");
-            $pais = $this->input->post("pais");
-            $estado = $this->input->post("estado");
-            $ciudad = $this->input->post("ciudad");
-            $contacto = $this->input->post("contacto");
-            $area = $this->input->post("area");
-            $tlf = $this->input->post("tlf");
-            $pass = $this->input->post("pass");
+						$dataRequest = json_decode(
+							$this->security->xss_clean(
+								strip_tags(
+									$this->cryptography->decrypt(
+										base64_decode($this->input->get_post('plot')),
+										utf8_encode($this->input->get_post('request'))
+									)
+								)
+							)
+						);
+
+            $rif = $dataRequest->rif;
+            $nombre = $dataRequest->nombre;
+            $codigo = $dataRequest->codigo;
+            $dir1 = $dataRequest->dir1;
+            $dir2 = $dataRequest->dir2;
+            $dir3 = $dataRequest->dir3;
+            $zona = $dataRequest->zona;
+            $pais = $dataRequest->pais;
+            $estado = $dataRequest->estado;
+            $ciudad = $dataRequest->ciudad;
+            $contacto = $dataRequest->contacto;
+            $area = $dataRequest->area;
+            $tlf = $dataRequest->tlf;
+            $pass = $dataRequest->pass;
 
             $lista = $this->callWSActualizarSucursales($urlCountry, $pass, $rif, $nombre, $codigo, $dir1, $dir2, $dir3, $zona, $pais, $estado, $ciudad, $contacto, $area, $tlf);
-
-            $this->output->set_content_type('application/json')->set_output(json_encode($lista));
+						$response = $this->cryptography->encrypt($lista);
+						$this->output->set_content_type('application/json')->set_output(json_encode($response,JSON_UNESCAPED_UNICODE));
 
         }elseif($paisS!=$urlCountry && $paisS!=''){
             $this->session->sess_destroy();
