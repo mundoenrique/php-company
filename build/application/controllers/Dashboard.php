@@ -372,6 +372,7 @@ class Dashboard extends CI_Controller {
 
 		if($paisS==$urlCountry && $logged_in){
 			//VALIDAMOS QUE RECIBA EL POST
+
 			if($this->input->is_ajax_request()){
 				$dataRequest = json_decode(
 					$this->security->xss_clean(
