@@ -340,8 +340,8 @@ $(function(){
             }
         });
 
-        $.get(baseURL+api+isoPais+'/consulta/PagoOS')
-            .done(function(data){
+        $.get(baseURL+api+isoPais+'/consulta/PagoOS').done(function(response){
+					data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
                 $aux.dialog('destroy');
                 switch (data.code) {
                     case 0:
@@ -376,14 +376,16 @@ $(function(){
 																				var ceo_cook = decodeURIComponent(
 																					document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 																				);
-                                        $.post(baseURL + api + isoPais + '/consulta/PagoOSProcede', {
-                                            "idOS": idOS,
-                                            "codeToken": codeToken,
-                                            "totalamount": totalamount,
-																						"factura": factura,
-																						ceo_name: ceo_cook
-                                        })
-                                            .done(function (data) {
+																				var dataRequest = JSON.stringify ({
+																					idOS: idOS,
+                                          codeToken: codeToken,
+                                        	totalamount: totalamount,
+																					factura: factura
+																				})
+																					dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
+																					$.post(baseURL + api + isoPais + '/consulta/PagoOSProcede', {request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)})
+																					.done(function(response){
+																						data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
                                                 $aux.dialog('destroy');
                                                 switch (data.code) {
                                                     case 0:
