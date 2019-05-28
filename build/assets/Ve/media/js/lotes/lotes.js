@@ -33,17 +33,26 @@ $(function () { // Document ready
 							$("#cargaLote").replaceWith('<h3 id="cargando">Cargando...</h3>');
 							ceo_cook = decodeURIComponent(
 								document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-								);
-
-							dat.formData = {
-								'data-tipoLote': $("#tipoLote").val(),
-								'data-formatolote': $("#tipoLote option:selected").attr('rel'),
-								ceo_name: ceo_cook
+							);
+							var paquete = {
+								data_tipoLote: $("#tipoLote").val(),
+								data_formatolote: $("#tipoLote option:selected").attr('rel')
 							};
-							dat.submit(function (result, textStatus, jqXHR) {
-
+							var paquete = {
+								data_tipoLote: $("#tipoLote").val(),
+								data_formatolote: $("#tipoLote option:selected").attr('rel')
+							};
+							var dataRequest = JSON.stringify(paquete)
+							dataRequest  = CryptoJS.AES.encrypt(dataRequest , ceo_cook, {format: CryptoJSAesJson}).toString();
+							dat.formData = {
+								request: dataRequest,
+								ceo_name: ceo_cook,
+								plot: btoa(ceo_cook)
+							}
+							dat.submit().done(function (response, textStatus, jqXHR) {
+								result = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
 								if (result) {
-									result = $.parseJSON(result);
+
 
 									if (!result.ERROR) {
 										mostrarError(result);
@@ -128,9 +137,10 @@ $(function () { // Document ready
 			$('#actualizador').show();
 		}
 		$.get(baseURL + api + isoPais + "/lotes/lista/pendientes",
-			function (data) {
-
-
+			function (response) {
+				data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {
+					format: CryptoJSAesJson
+				}).toString(CryptoJS.enc.Utf8))
 				var icon, batch, color, title;
 
 				if (!data.result.ERROR) {
@@ -281,16 +291,16 @@ $(function () { // Document ready
 						});
 						ceo_cook = decodeURIComponent(
 							document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-							);
-
-						$.post(baseURL + api + isoPais + "/lotes/eliminar", {
-							'data-idTicket': ticket,
-							'data-idLote': lote,
-							'data-pass': pass,
-							ceo_name: ceo_cook
-						}).done(
-							function (data) {
-
+						);
+						var dataRequest = JSON.stringify ({
+							data_idTicket: ticket,
+							data_idLote: lote,
+							data_pass: pass,
+						});
+						dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
+						$.post(baseURL + api + isoPais + "/lotes/eliminar",  {request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)}).done(
+							function (response) {
+								data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 								$aux.dialog('destroy');
 
 								if (!data.ERROR) {
@@ -305,15 +315,11 @@ $(function () { // Document ready
 									} else {
 										notificacion("Eliminando lote", data.ERROR);
 									}
-
 								}
-
 							});
-
 					} else {
 						$(this).find($('#msg')).text('Debe ingresar su contraseña');
 					}
-
 				}
 			}
 		});

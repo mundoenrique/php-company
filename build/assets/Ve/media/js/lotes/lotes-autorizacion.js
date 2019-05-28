@@ -570,15 +570,21 @@ function envioAjaxAutorizar(baseURL, isoPais, js_var, pass, osTipo, select_modal
 			var ceo_cook = decodeURIComponent(
 				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 				);
+				dataRequest = JSON.stringify({
+					data_lotes:js_var.loteA,
+					data_pass: pass,
+					data_tipoOS: osTipo,
+					data_medio: select_modal,
+					data_iva: nuevo_iva,
+				});
+				dataRequest  = CryptoJS.AES.encrypt(dataRequest , ceo_cook, {format: CryptoJSAesJson}).toString();
 			$.post(baseURL + isoPais + '/lotes/preliminar', {
-					'data-lotes': js_var.loteA,
-					'data-pass': pass,
-					'data-tipoOS': osTipo,
-					'data-medio': select_modal,
-					'data-iva': nuevo_iva,
-					ceo_name: ceo_cook
+				request: dataRequest,
+				ceo_name: ceo_cook,
+				plot: btoa(ceo_cook)
 				})
-				.done(function (data) {
+				.done(function (response) {
+					data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 					var
 						code = data.code,
 						title = data.title,
