@@ -104,9 +104,12 @@ var widget_var = {
 //	Enviar todo
 
 	$('#aplicar').on('click',function(){
+		var change = false;
+		if($('#empresasS').val() != 0 && $('#productosS').val() != 0) {
+			change = true;
+		}
 
-
-		if( widget_var.idproducto !== undefined ){
+		if(change){
 
 			var ceo_cook = decodeURIComponent(
 				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
@@ -138,7 +141,7 @@ var widget_var = {
 				 }
 			);
 		}else{
-      		MarcarError('Seleccione una empresa');
+      		MarcarError('Debe seleccionar empresa y producto');
     	}
   	});
 
