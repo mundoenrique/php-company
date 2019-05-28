@@ -35,7 +35,7 @@ class Lotes_innominada extends CI_Controller {
 
 					$nombreCompleto = $this->session->userdata('nombreCompleto');
 					$lastSessionD = $this->session->userdata('lastSession');
-					$FooterCustomInsertJS=["jquery-1.10.2.min.js","jquery-ui-1.10.3.custom.min.js","jquery.balloon.min.js","dashboard/widget-empresa.js","header.js","jquery.dataTables.min.js","lotes/lotes-innominada.js","jquery-md5.js","routes.js"];
+					$FooterCustomInsertJS=["jquery-1.10.2.min.js","jquery-ui-1.10.3.custom.min.js","jquery.balloon.min.js","aes.min.js","aes-json-format.min.js","dashboard/widget-empresa.js","header.js","jquery.dataTables.min.js","lotes/lotes-innominada.js","jquery-md5.js","routes.js"];
 					$FooterCustomJS="";
 					$titlePage="Conexión Empresas Online - Solicitud Innominadas";
 					$programa = $this->session->userdata('nombreProductoS').' / '. $this->session->userdata('marcaProductoS') ;
@@ -318,11 +318,9 @@ class Lotes_innominada extends CI_Controller {
 			$paisS = $this->session->userdata('pais');
 
 			if($paisS==$urlCountry && $logged_in){
-					//if ( $moduloAct!==false) {
+
 					$response = $this->users_model->callWSConsultarSucursales($urlCountry, $idEmpresa, '1', '10', true);
-					//}else{
-					//$response = array("ERROR"=>lang('SIN_FUNCION'));
-					//}
+					$response = $this->cryptography->encrypt($response);
 					$this->output->set_content_type('application/json')->set_output(json_encode($response,JSON_UNESCAPED_UNICODE));
 
 			}elseif($paisS!=$urlCountry&& $paisS!=''){
