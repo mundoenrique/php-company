@@ -2257,37 +2257,37 @@ class Reportes extends CI_Controller {
 			$moduloAct = np_hoplite_existeLink($menuP,"REPREP");
 
 			if($paisS==$urlCountry && $logged_in && $moduloAct!==false){
-				// $dataRequest = json_decode(
-				// 	$this->security->xss_clean(
-				// 		strip_tags(
-				// 			$this->cryptography->decrypt(
-				// 				base64_decode($this->input->get_post('plot')),
-				// 				utf8_encode($this->input->get_post('request'))
-				// 			)
-				// 		)
-				// 	)
-				// );
-				// $paginaActual = $dataRequest->paginaActual;
-				// $empresa = $dataRequest->empresa;
-				// $fechaInicial = $dataRequest->fechaInicial;
-				// $fechaFin = $dataRequest->fechaFin;
-				// $idTarjetaHabiente = $dataRequest->idTarjetaHabiente;
-				// $tipoReposicion = $dataRequest->tipoReposicion;
-				// $producto = $dataRequest->producto;
-				// $tamPg = $dataRequest->tamPg;
-				// $paginar = $dataRequest->paginar;
-					$paginaActual=$this->input->post('paginaActual');
-					$empresa = $this->input->post('empresa');
-					$fechaInicial = $this->input->post('fechaInicial');
-					$fechaFin = $this->input->post('fechaFin');
-					$idTarjetaHabiente = $this->input->post('idTarjetaHabiente');
-					$tipoReposicion = $this->input->post('tipoReposicion');
-					$producto =$this->input->post('producto');
-					$tamPg =$this->input->post('tamPg');
-					$paginar =$this->input->post('paginar');
+				$dataRequest = json_decode(
+					$this->security->xss_clean(
+						strip_tags(
+							$this->cryptography->decrypt(
+								base64_decode($this->input->get_post('plot')),
+								utf8_encode($this->input->get_post('request'))
+							)
+						)
+					)
+				);
+				$paginaActual = $dataRequest->filtro_busq->paginaActual;
+				$empresa = $dataRequest->filtro_busq->empresa;
+				$fechaInicial = $dataRequest->filtro_busq->fechaInicial;
+				$fechaFin = $dataRequest->filtro_busq->fechaFin;
+				$idTarjetaHabiente = $dataRequest->filtro_busq->idTarjetaHabiente;
+				$tipoReposicion = $dataRequest->filtro_busq->tipoReposicion;
+				$producto = $dataRequest->filtro_busq->producto;
+				$tamPg = $dataRequest->filtro_busq->tamPg;
+				$paginar = $dataRequest->filtro_busq->paginar;
+					// $paginaActual=$this->input->post('paginaActual');
+					// $empresa = $this->input->post('empresa');
+					// $fechaInicial = $this->input->post('fechaInicial');
+					// $fechaFin = $this->input->post('fechaFin');
+					// $idTarjetaHabiente = $this->input->post('idTarjetaHabiente');
+					// $tipoReposicion = $this->input->post('tipoReposicion');
+					// $producto =$this->input->post('producto');
+					// $tamPg =$this->input->post('tamPg');
+					// $paginar =$this->input->post('paginar');
 
 					$pruebaTabla = $this->callWSReposiciones($urlCountry, $empresa, $producto, $fechaInicial, $fechaFin, $paginaActual, $tipoReposicion, $idTarjetaHabiente, $tamPg, $paginar);
-					//$pruebaTabla = $this->cryptography->encrypt($pruebaTabla);
+					$pruebaTabla = $this->cryptography->encrypt($pruebaTabla);
 					$this->output->set_content_type('application/json')->set_output(json_encode($pruebaTabla));
 
 			}else{
