@@ -108,13 +108,10 @@ var widget_var = {
 		if($('#empresasS').val() != 0 && $('#productosS').val() != 0) {
 			change = true;
 		}
-
 		if(change){
-
 			var ceo_cook = decodeURIComponent(
 				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 			);
-
 			var dataRequest = JSON.stringify ({
 				data_accodgrupoe:widget_var.accodgrupoe,
 				data_acrif:widget_var.acrif,

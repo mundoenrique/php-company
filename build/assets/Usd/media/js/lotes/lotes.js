@@ -38,7 +38,7 @@ var ceo_cook;
 										);
 
                     dat.formData = {'data-tipoLote':$("#tipoLote").val(), 'data-formatolote':$("#tipoLote option:selected").attr('rel'), ceo_name: ceo_cook};
-                    dat.submit(function (result, textStatus, jqXHR){
+                    dat.submit().done(function (result, textStatus, jqXHR){
 
                       if(result){
                         result = $.parseJSON(result);
@@ -123,8 +123,7 @@ $('#actualizador').show();
 }
   $.get(baseURL+api+isoPais+"/lotes/lista/pendientes",
     function(data){
-
-
+			data = JSON.parse(CryptoJS.AES.decrypt(data.code, data.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
       var icon, batch, color, title;
 
       if(!data.result.ERROR){
