@@ -72,8 +72,8 @@ var widget_var = {
 			.done(function(response){
 				data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 			$("#empresasS").removeAttr('disabled');
-			$('#productosS').empty();
-			$("#productosS").append('<option>Seleccione un producto</option>');
+			$('#productosS').empty().css('display', 'block');
+			$("#productosS").append('<option value="0">Seleccione un producto</option>');
 
 
 			if(!data.ERROR){
@@ -107,9 +107,11 @@ var widget_var = {
 //	Enviar todo
 
 	$('#aplicar').on('click',function(){
-
-
-		if( widget_var.idproducto !== undefined ){
+		var change = false;
+		if($('#empresasS').val() != 0 && $('#productosS').val() != 0) {
+			change = true;
+		}
+		if(change){
 			var ceo_cook = decodeURIComponent(
 				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 			);
@@ -139,7 +141,7 @@ var widget_var = {
 				}
 			);
 		}else{
-      		MarcarError('Seleccione una empresa');
+      		MarcarError('Debe seleccionar empresa y producto');
     }
   });
 
