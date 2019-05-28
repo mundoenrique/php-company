@@ -14,7 +14,8 @@ $(document).ready(function() {
 		var tamPg=20;
 
 		$("#cargando_empresa").fadeIn("slow");
-		$.getJSON(baseURL + api + isoPais + '/empresas/lista').always(function( data ) {
+		$.getJSON(baseURL + api + isoPais + '/empresas/lista').always(function( response ) {
+			var data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 			$("#cargando_empresa").fadeOut("slow");
 			if(!(data.ERROR)){
 
@@ -178,12 +179,16 @@ function buscarReposiciones(paginaActual){
 		    	var ceo_cook = decodeURIComponent(
 						document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 					);
-					filtro_busq.ceo_name = ceo_cook;
-	//SE REALIZA LA INVOCACION AJAX
-		    	$consulta = $.post(baseURL + api + isoPais + "/reportes/reposiciones",filtro_busq );
-	//DE SER EXITOSA LA COMUNICACION CON EL SERVICIO SE EJECUTA EL SIGUIENTE METODO "DONE"
-		 		$consulta.done(function(data){
 
+					var dataRequest = JSON.stringify({filtro_busq:filtro_busq});
+					console.log(dataRequest)
+	//SE REALIZA LA INVOCACION AJAX
+	dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
+		    	$consulta = $.post(baseURL + api + isoPais + "/reportes/reposiciones",{request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)} );
+	//DE SER EXITOSA LA COMUNICACION CON EL SERVICIO SE EJECUTA EL SIGUIENTE METODO "DONE"
+		 		$consulta.done(function(response){
+					var data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
+					$aux.dialog('destroy');
 		 			$('#cargando').fadeOut("slow");
 		 			$("#repReposiciones_btnBuscar").show();
 
