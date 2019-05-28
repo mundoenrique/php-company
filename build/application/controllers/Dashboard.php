@@ -122,7 +122,9 @@ class Dashboard extends CI_Controller {
 			redirect($urlCountry.'/login');
 		}elseif($this->input->is_ajax_request()){
 			log_message('info','ajax call');
-			$this->output->set_content_type('application/json')->set_output(json_encode(array('ERROR' => '-29' )));
+			$responseError = ['ERROR' => lang('ERROR_(-29)'), "rc"=> "-29"];
+			$responseError = $this->cryptography->encrypt($responseError);
+			$this->output->set_content_type('application/json')->set_output(json_encode($responseError));
 		}
 		else{
 			redirect($urlCountry.'/login');
@@ -251,7 +253,9 @@ class Dashboard extends CI_Controller {
 			redirect($urlCountry.'/login');
 		}elseif($this->input->is_ajax_request()){
 			log_message('info','ajax call');
-			$this->output->set_content_type('application/json')->set_output(json_encode(array('ERROR' => '-29' )));
+			$responseError = ['ERROR' => lang('ERROR_(-29)'), "rc"=> "-29"];
+			$responseError = $this->cryptography->encrypt($responseError);
+			$this->output->set_content_type('application/json')->set_output(json_encode($responseError));
 		}
 		else{
 			redirect($urlCountry.'/login');
@@ -313,7 +317,9 @@ class Dashboard extends CI_Controller {
 			redirect($urlCountry.'/login');
 		}elseif($this->input->is_ajax_request()){
 			log_message('info','ajax call');
-			$this->output->set_content_type('application/json')->set_output(json_encode(array('ERROR' => '-29' )));
+			$responseError = ['ERROR' => lang('ERROR_(-29)'), "rc"=> "-29"];
+			$responseError = $this->cryptography->encrypt($responseError);
+			$this->output->set_content_type('application/json')->set_output(json_encode($responseError));
 		}else{
 			redirect($urlCountry.'/login');
 		}
