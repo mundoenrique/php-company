@@ -41,7 +41,9 @@ class Lotes extends CI_Controller {
 			$token = $this->session->userdata('token');
 			$nombreCompleto = $this->session->userdata('nombreCompleto');
 			$lastSessionD = $this->session->userdata('lastSession');
-			$FooterCustomInsertJS=["jquery-3.4.0.min.js", "jquery-ui-1.12.1.min.js","jquery-md5.js","jquery.balloon.min.js","aes.min.js","aes-json-format.min.js","jquery.fileupload.js","jquery.iframe-transport.js","dashboard/widget-empresa.js","lotes/lotes.js","jquery.dataTables.min.js","header.js","routes.js"];
+			$jsRte = '../../../js/';
+			$thirdsJsRte = '../../../js/third_party/';
+			$FooterCustomInsertJS=["jquery-3.4.0.min.js", "jquery-ui-1.12.1.min.js","jquery-md5.js","jquery.balloon.min.js","aes.min.js","aes-json-format.min.js","jquery.fileupload.js","jquery.iframe-transport.js","dashboard/widget-empresa.js","lotes/lotes.js","jquery.dataTables.min.js","header.js","routes.js",$thirdsJsRte."jquery.validate.min.js",$jsRte."validate-forms.js",$thirdsJsRte."additional-methods.min.js"];
 			$FooterCustomJS="";
 			$titlePage="Conexión Empresas Online - Lotes";
 

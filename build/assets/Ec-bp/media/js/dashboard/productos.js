@@ -171,6 +171,7 @@ var accodgrupoe;
     $("#widget-info-2").append("<img class='load-widget' id='cargando' src='"+$('#cdn').val()+"media/img/loading.gif'>");//'<h4 id="cargando">Cargando...</h4>'
 
     $.getJSON(baseURL+api+isoPais+'/empresas/lista').always(function(response) {
+
 			data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 
       $("#widget-info-2").find($('#cargando')).remove();
@@ -239,10 +240,8 @@ var accodgrupoe;
           }else{
             MarcarError('Intente de nuevo');
           }
-
          }
       );
-
     }else{
       MarcarError('Seleccione una empresa');
     }
