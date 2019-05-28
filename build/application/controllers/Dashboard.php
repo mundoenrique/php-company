@@ -97,11 +97,25 @@ class Dashboard extends CI_Controller {
 		//VALIDAR QUE USUARIO ESTE LOGGEDIN
 		if($paisS==$urlCountry && $logged_in){
 
-			if($this->input->post()){
-				$paginar= $this->input->post('data-paginar');
-				$tamanoPagina= $this->input->post('data-tamanoPagina');
-				$paginaActual= $this->input->post('data-paginaActual');
-				$filtroEmpresas= $this->input->post('data-filtroEmpresas');
+			if($this->input->post('request')){
+				$dataRequest = json_decode(
+					$this->security->xss_clean(
+						strip_tags(
+							$this->cryptography->decrypt(
+								base64_decode($this->input->get_post('plot')),
+								utf8_encode($this->input->get_post('request'))
+							)
+						)
+					)
+				);
+				$paginar = $dataRequest->data_paginar;
+				$tamanoPagina = $dataRequest->data_tamanoPagina;
+				$paginaActual = $dataRequest->data_paginaActual;
+				$filtroEmpresas = $dataRequest->data_filtroEmpresas;
+				// $paginar= $this->input->post('data-paginar');
+				// $tamanoPagina= $this->input->post('data-tamanoPagina');
+				// $paginaActual= $this->input->post('data-paginaActual');
+				// $filtroEmpresas= $this->input->post('data-filtroEmpresas');
 				$rTest = $this->callWSListaEmpresasUsuario($paginar,$paginaActual,$tamanoPagina,$urlCountry); // solicitud sin paginar (obtiene todas las empresas), el filtrado se realiza desde js
 
 				//$rTest = $this->callWSListaEmpresasPaginar($paginar,$tamanoPagina,$paginaActual,$filtroEmpresas,$urlCountry); // solicitud paginada y con filtro de búsqueda
@@ -112,7 +126,7 @@ class Dashboard extends CI_Controller {
 				$paginar=FALSE;
 				$lista = $this->callWSListaEmpresasPaginar($paginar,$tamanoPagina=null,$paginaActual=null,$filtroEmpresas=null,$urlCountry);
 			}
-
+			$response = $this->cryptography->encrypt($lista);
 			$this->output->set_content_type('application/json')->set_output(json_encode($lista,JSON_UNESCAPED_UNICODE));
 
 		}elseif($paisS!=$urlCountry && $paisS!=""){
@@ -331,9 +345,18 @@ class Dashboard extends CI_Controller {
 		$paisS = $this->session->userdata('pais');
 
 		if($paisS==$urlCountry && $logged_in){
-			if($this->input->post()){
-				$acrifPost = $this->input->post('acrif');
-
+			if($this->input->post('request')){
+				$dataRequest = json_decode(
+					$this->security->xss_clean(
+						strip_tags(
+							$this->cryptography->decrypt(
+								base64_decode($this->input->get_post('plot')),
+								utf8_encode($this->input->get_post('request'))
+							)
+						)
+					)
+				);
+				$acrifPost = $dataRequest->acrif;
 				$responseMenuEmpresas =$this->callWSMenuEmpresaTarjetaHambiente($acrifPost,$urlCountry,$ctipo='false');
 				if(array_key_exists('ERROR', $responseMenuEmpresas)){
 					$productos = $responseMenuEmpresas;
@@ -344,14 +367,16 @@ class Dashboard extends CI_Controller {
 			}else{
 				$productos=null;
 			}
-
+			$productos = $this->cryptography->encrypt($productos);
 			$this->output->set_content_type('application/json')->set_output(json_encode($productos,JSON_UNESCAPED_UNICODE));
 		}elseif($paisS!=$urlCountry && $paisS!=''){
 			$this->session->sess_destroy();
 			redirect($urlCountry.'/login');
 		}elseif($this->input->is_ajax_request()){
 			log_message('info','ajax call');
-			$this->output->set_content_type('application/json')->set_output(json_encode(array('ERROR' => '-29' )));
+			$responseError = ['ERROR' => lang('ERROR_(-29)'), "rc"=> "-29"];
+			$responseError = $this->cryptography->encrypt($responseError);
+			$this->output->set_content_type('application/json')->set_output(json_encode($responseError));
 		}else{
 			redirect($urlCountry.'/login');
 		}

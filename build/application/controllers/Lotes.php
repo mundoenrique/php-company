@@ -2412,6 +2412,7 @@ class Lotes extends CI_Controller {
 		$response = json_decode($jsonResponse);
 
 		//log_message("DEBUG", "generarOS =====>>>>>> ".json_encode($response));
+		log_message("DEBUG", "generarOS =====>>>>>> ".($response->bean));
 		if(isset($response->rc)) {
 			switch($response->rc) {
 				case 0:
@@ -2451,7 +2452,7 @@ class Lotes extends CI_Controller {
 
 		}
 
-		return json_encode($response);
+		return $response;
 	}
 
 	/**
@@ -2473,8 +2474,8 @@ class Lotes extends CI_Controller {
 				)
 			)
 		);
-		$tempIdOrdenL = $dataRequest->tempIdOrdenL;
-		$tempIdOrdenLNF = isset($dataRequest->tempIdOrdenLNF) ? $dataRequest->tempIdOrdenLNF : '';
+		$tempIdOrdenL = isset($dataRequest->tempIdOrdenL) ? $dataRequest->tempIdOrdenL : FALSE;
+		$tempIdOrdenLNF = isset($dataRequest->tempIdOrdenLNF) ? $dataRequest->tempIdOrdenLNF : FALSE;
 
 		$token = $this->session->userdata('token');
 		$username = $this->session->userdata('userName');
@@ -2491,7 +2492,8 @@ class Lotes extends CI_Controller {
 			if ( $moduloAct!==false) {
 				$t = $this->callWSgenerarOS($urlCountry,$token,$username,$tempIdOrdenL,$tempIdOrdenLNF,$acrifS,$moduloOS);
 			}else{
-				$t = json_encode(array("ERROR"=>lang('SIN_FUNCION')));
+				$t = ['ERROR' => lang('SIN_FUNCION')];
+				//$t = json_encode(array("ERROR"=>lang('SIN_FUNCION')));
 			}
 			$t = $this->cryptography->encrypt($t);
 			$this->output->set_content_type('application/json')->set_output(json_encode($t));
@@ -2501,7 +2503,7 @@ class Lotes extends CI_Controller {
 		}elseif($this->input->is_ajax_request()){
 			$responseError = ['ERROR' => lang('ERROR_(-29)'), "rc"=> "-29"];
 			$responseError = $this->cryptography->encrypt($responseError);
-			$this->output->set_content_type('')->set_output(json_encode($responseError));
+			$this->output->set_content_type('application/json')->set_output(json_encode($responseError));
 		}else{
 			redirect($urlCountry.'/login');
 		}
