@@ -1551,19 +1551,32 @@ class Reportes extends CI_Controller {
 							}
 							else
 							{
-									$paginaActual=$this->input->post('paginaActual');
-									$loteproducto = $this->input->post('lotes_producto');
-									$acrif = $this->input->post('acrif');
+								$dataRequest = json_decode(
+									$this->security->xss_clean(
+										strip_tags(
+											$this->cryptography->decrypt(
+												base64_decode($this->input->get_post('plot')),
+												utf8_encode($this->input->get_post('request'))
+											)
+										)
+									)
+								);
+									$paginaActual = $dataRequest->filtro_busq->paginaActual;
+									$loteproducto = $dataRequest->filtro_busq->lotes_producto;
+									$acrif = $dataRequest->filtro_busq->acrif;
+
 									$username = $this->session->userdata('userName');
 									$token = $this->session->userdata('token');
 									$pruebaTabla = $this->callWSEstatusTarjetasHabientes($urlCountry,$token,$username,$acrif, $loteproducto, $paginaActual );
-
+									$pruebaTabla = $this->cryptography->encrypt($pruebaTabla);
 									$this->output->set_content_type('application/json')->set_output(json_encode($pruebaTabla));
 							}
 					}
 			}else{
 					$this->session->sess_destroy();
-					$this->output->set_content_type('application/json')->set_output(json_encode( array('ERROR' => lang('ERROR_(-29)'), "rc"=> "-29")));
+					$responseError = ['ERROR' => lang('ERROR_(-29)'), "rc"=> "-29"];
+					$responseError = $this->cryptography->encrypt($responseError);
+					$this->output->set_content_type('application/json')->set_output(json_encode($responseError));
 			}
 
 	}
@@ -4445,7 +4458,7 @@ class Reportes extends CI_Controller {
 			if($paisS==$urlCountry && $logged_in && $moduloAct!==false){
 					$nombreCompleto = $this->session->userdata('nombreCompleto');
 					$lastSessionD = $this->session->userdata('lastSession');
-					$FooterCustomInsertJS=["jquery-1.10.2.min.js","jquery-ui-1.10.3.custom.min.js","header.js","jquery.balloon.min.js","jquery.dataTables.min.js","reportes/tarjetasHabientes.js","routes.js"];
+					$FooterCustomInsertJS=["jquery-3.4.0.min.js", "jquery-ui-1.12.1.min.js","aes.min.js","aes-json-format.min.js","header.js","jquery.balloon.min.js","jquery.dataTables.min.js","reportes/tarjetasHabientes.js","routes.js"];
 					$FooterCustomJS="";
 					$titlePage="Conexión Empresas Online - Reportes";
 
