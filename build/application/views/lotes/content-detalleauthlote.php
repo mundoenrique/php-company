@@ -3,8 +3,6 @@
 	$pais = $this->uri->segment(1);
 	$urlBaseA = $this->config->item('base_url');
 	$urlBase = $urlBaseA.$pais;
-	$ceo_name = $this->security->get_csrf_token_name();
-	$ceo_cook = $this->security->get_csrf_hash();
 
 		if($dataCOS!='') {
 			$bread = "BREADCRUMB_CALCULO_ORDEN_SERVICIO";
@@ -327,20 +325,17 @@
 	<div id="batchs-last">
 		<?php
 	if($dataCOS!=''){
-			echo "<form action='".$urlBase."/lotes/calculo' method='post'>
-								<input type='hidden' name='$ceo_name' value='$ceo_cook'>
+			echo "<form id='go-back' action='".$urlBase."/lotes/calculo' method='POST'>
 								<input type='hidden' name='data-COS' value='".$dataCOS."' />";
 
 		}else if($dataOS!=''){
-			echo "<form action='".$urlBase."/consulta/ordenes-de-servicio' method='post'>
-								<input type='hidden' name='$ceo_name' value='$ceo_cook'>
+			echo "<form id='go-back' action='".$urlBase."/consulta/ordenes-de-servicio' method='POST'>
 								<input type='hidden' name='data-OS' value='".$dataOS."' />";
 		}else{
-			echo "<form action='$breadcrumb_back' method='post'>
-								<input type='hidden' name='$ceo_name' value='$ceo_cook'>";
+			echo "<form id='go-back' action='$breadcrumb_back' method='GET'>";
 		}
 
-		echo '<button>'.lang("DETALLE_LOTES_VOLVER").'</button> </form>';
+		echo '<button id="btn-goback">'.lang("DETALLE_LOTES_VOLVER").'</button> </form>';
 		?>
 
 </div>
