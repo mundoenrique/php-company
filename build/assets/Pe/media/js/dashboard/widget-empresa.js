@@ -57,29 +57,30 @@ var widget_var = {
 		widget_var.accodcia = $('option:selected', this).attr('accodcia');
 		widget_var.accodgrupoe = $('option:selected', this).attr('accodgrupoe');
 
-		$('#productosS').empty();
-		$("#productosS").append('<option>Cargando...</option>');
-		$(this).attr('disabled',true);
-		var ceo_cook = decodeURIComponent(
-			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-		);
-		$.post(baseURL+api+isoPais+"/producto/lista", { 'acrif': widget_var.acrif, ceo_name: ceo_cook }, function(data){
-			$("#empresasS").removeAttr('disabled');
+		if (widget_var.acrif!=0) {
 			$('#productosS').empty();
-			$("#productosS").append('<option>Seleccione un producto</option>');
+			$("#productosS").append('<option>Cargando...</option>');
+			$(this).attr('disabled',true);
+			var ceo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
+			$.post(baseURL+api+isoPais+"/producto/lista", { 'acrif': widget_var.acrif, ceo_name: ceo_cook }, function(data){
+				$("#empresasS").removeAttr('disabled');
+				$('#productosS').empty().css('display', 'block');
+				$("#productosS").append('<option value="0">Seleccione un producto</option>');
 
 
-			if(!data.ERROR){
-			$.each(data, function(k,v){
-				$("#productosS").append('<option value="'+v.idProducto+'" nombre='+v.nombre+' marca='+v.marca+' >'+v.descripcion+" / "+v.marca.toUpperCase()+'</option>');
+				if(!data.ERROR){
+					$.each(data, function(k,v){
+						$("#productosS").append('<option value="'+v.idProducto+'" nombre='+v.nombre+' marca='+v.marca+' >'+v.descripcion+" / "+v.marca.toUpperCase()+'</option>');
+					});
+				}else{
+					if(data.ERROR=='-29'){
+						alert('Usuario actualmente desconectado'); location.reload();
+					}
+				}
 			});
-			}else{
-  				if(data.ERROR=='-29'){
-  				alert('Usuario actualmente desconectado'); location.reload();
-  				}
-  			}
-		});
-
+		}
 	});
 
 //--Fin Seleccionar empresa
@@ -100,28 +101,28 @@ var widget_var = {
 //	Enviar todo
 
 	$('#aplicar').on('click',function(){
-
-
-		if( widget_var.idproducto !== undefined ){
-
+		var change = false;
+		if($('#empresasS').val()!=0 && $('#productosS').val()!=0) {
+			change = true;
+		}
+		if(change){
 			var ceo_cook = decodeURIComponent(
 				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 			);
 			$.post( baseURL+"api/v1/"+isoPais+"/empresas/cambiar",
 				{ 'data-accodgrupoe':widget_var.accodgrupoe, 'data-acrif':widget_var.acrif, 'data-acnomcia':widget_var.acnomcia, 'data-acrazonsocial':widget_var.acrazonsocial, 'data-acdesc':widget_var.acdesc, 'data-accodcia':widget_var.accodcia, 'data-idproducto':widget_var.idproducto, 'data-nomProd':widget_var.nombprod, 'data-marcProd':widget_var.marcprod, 'llamada':'productos', ceo_name: ceo_cook },
-				 function(data){
-
-          			if(data === 1){
-            			$(location).attr('href',baseURL+isoPais+"/dashboard/productos/detalle");
-          			}else{
-            			MarcarError('Intente de nuevo');
-          			}
-				 }
+				function(data){
+					if(data === 1){
+						$(location).attr('href',baseURL+isoPais+"/dashboard/productos/detalle");
+					}else{
+						MarcarError('Intente de nuevo');
+					}
+				}
 			);
 		}else{
-      		MarcarError('Seleccione una empresa');
-    	}
-  	});
+			MarcarError('Debe seleccionar empresa y producto');
+		}
+	});
 
 function MarcarError(msj){
   $.balloon.defaults.classname = "error-login-2";
