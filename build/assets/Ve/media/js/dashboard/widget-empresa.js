@@ -22,8 +22,10 @@ $(function () {
 		$('#sEmpresa').hide();
 		$("#widget-info-2").append("<img class='load-widget' id='cargando' src='" + $('#cdn').val() + "media/img/loading.gif'>");
 
-		$.getJSON(baseURL + api + isoPais + '/empresas/lista').always(function (data) {
-
+		$.getJSON(baseURL + api + isoPais + '/empresas/lista').always(function (response) {
+			data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {
+				format: CryptoJSAesJson
+			}).toString(CryptoJS.enc.Utf8))
 			$("#widget-info-2").find($('#cargando')).remove();
 
 			$('#sEmpresaS').show();
@@ -60,12 +62,21 @@ $(function () {
 		$(this).attr('disabled', true);
 		var ceo_cook = decodeURIComponent(
 			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-			);
-
+		);
+		var dataRequest = JSON.stringify({
+			acrif: widget_var.acrif
+		})
+		dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {
+			format: CryptoJSAesJson
+		}).toString();
 		$.post(baseURL + api + isoPais + "/producto/lista", {
-			'acrif': widget_var.acrif,
-				ceo_name: ceo_cook
-		}, function (data) {
+			request: dataRequest,
+			ceo_name: ceo_cook,
+			plot: btoa(ceo_cook)
+		}, function (response) {
+			data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {
+				format: CryptoJSAesJson
+			}).toString(CryptoJS.enc.Utf8))
 			$("#empresasS").removeAttr('disabled');
 			$('#productosS').empty();
 			$("#productosS").append('<option>Seleccione un producto</option>');
@@ -103,26 +114,37 @@ $(function () {
 	//	Enviar todo
 
 	$('#aplicar').on('click', function () {
-		var ceo_cook = decodeURIComponent(
-			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-		);
-		if (widget_var.idproducto !== undefined) {
+		var change = false;
+		if ($('#empresasS').val() != 0 && $('#productosS').val() != 0) {
+			change = true;
+		}
 
+		if (change) {
+			var ceo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
+			var dataRequest = JSON.stringify({
+				data_accodgrupoe: widget_var.accodgrupoe,
+				data_acrif: widget_var.acrif,
+				data_acnomcia: widget_var.acnomcia,
+				data_acrazonsocial: widget_var.acrazonsocial,
+				data_acdesc: widget_var.acdesc,
+				data_accodcia: widget_var.accodcia,
+				data_idproducto: widget_var.idproducto,
+				data_nomProd: widget_var.nombprod,
+				data_marcProd: widget_var.marcprod,
+				llamada: 'productos'
+			});
+			dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {
+				format: CryptoJSAesJson
+			}).toString();
 			$.post(baseURL + "api/v1/" + isoPais + "/empresas/cambiar", {
-					'data-accodgrupoe': widget_var.accodgrupoe,
-					'data-acrif': widget_var.acrif,
-					'data-acnomcia': widget_var.acnomcia,
-					'data-acrazonsocial': widget_var.acrazonsocial,
-					'data-acdesc': widget_var.acdesc,
-					'data-accodcia': widget_var.accodcia,
-					'data-idproducto': widget_var.idproducto,
-					'data-nomProd': widget_var.nombprod,
-					'data-marcProd': widget_var.marcprod,
-					'llamada': 'productos',
-					ceo_name: ceo_cook
+					request: dataRequest,
+					ceo_name: ceo_cook,
+					plot: btoa(ceo_cook)
 				},
-				function (data) {
-
+				function (respnse) {
+					data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 					if (data === 1) {
 						$(location).attr('href', baseURL + isoPais + "/dashboard/productos/detalle");
 					} else {
