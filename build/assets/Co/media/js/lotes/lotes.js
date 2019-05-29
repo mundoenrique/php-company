@@ -134,12 +134,7 @@ if(!$("#table-text-lotes").hasClass('dataTable')){
 $('#actualizador').show();
 }
   $.get(baseURL+api+isoPais+"/lotes/lista/pendientes",
-	function (response) {
-		data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {
-			format: CryptoJSAesJson
-		}).toString(CryptoJS.enc.Utf8))
-
-
+    function(data){
       var icon, batch, color, title;
 
       if(!data.result.ERROR){
