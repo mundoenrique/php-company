@@ -638,4 +638,15 @@ $(function () {
 
 	});
 
+	$('#btn-goback').on('click', function(e) {
+		e.preventDefault();
+		var ceo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
+		if($('#go-back').attr('method') == 'POST') {
+			$('#go-back').append('<input type="hidden" name="ceo_name" value="' + ceo_cook + '">');
+		}
+		$('#go-back').submit();
+	});
+
 }); //Fin document ready

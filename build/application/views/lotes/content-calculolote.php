@@ -239,7 +239,7 @@ $reten = ($reten == NULL) ? "nonEmpty" : trim($reten, ', ');
 	<input type='hidden' name='<?php echo $ceo_name ?>' value='<?php echo $ceo_cook ?>'>
 	<input type='hidden' name='data-COS' value='<?php echo serialize($data) ?>'/>
 </form>
-<form id='viewAutorizar' action="<?php echo $urlBase ?>/lotes/autorizacion " method="post">
+<form id='viewAutorizar' action="<?php echo $urlBase ?>/lotes/autorizacion " method="GET">
 
 </form>
 <div id='loading' style='text-align:center' class='elem-hidden'><?php echo insert_image_cdn("loading.gif"); ?></div>
