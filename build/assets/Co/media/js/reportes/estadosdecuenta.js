@@ -25,7 +25,8 @@ $(document).ready(function() {
 //LLENA EL COMBO DE EMPRESA
 //--------------------------
 		$("#cargando_empresa").fadeIn("slow");
-		$.getJSON(baseURL + api + isoPais + '/empresas/lista').always(function( data ) {
+		$.getJSON(baseURL + api + isoPais + '/empresas/lista').always(function(response) {
+			data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 			$("#cargando_empresa").fadeOut("slow");
 			if(!(data.ERROR)){
 
@@ -55,9 +56,13 @@ $(document).ready(function() {
 
 			var ceo_cook = decodeURIComponent(
 				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-				);
-
-			$.post(baseURL + api + isoPais + "/producto/lista", { 'acrif': acrif, ceo_name: ceo_cook }, function(data){
+			);
+			var dataRequest = JSON.stringify ({
+				acrif: acrif
+			})
+			dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
+			$.post(baseURL + api + isoPais + "/producto/lista", {request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook) }, function(response){
+				data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 				$("#cargando_producto").fadeOut("slow");
 				$("#repEstadosDeCuenta_empresa").removeAttr('disabled');
 				if(!data.ERROR){
@@ -223,20 +228,20 @@ function BuscarEstadosdeCuenta(paginaActual){
 //SE MUESTRA EL GIF DE CARGANDO DEBAJO DEL FORMULARIO EN CASO DE QUE EL FORMULARIO SEA VALIDO
 		$('#cargando').fadeIn("slow");
 		$("#repEstadosDeCuenta_btnBuscar").hide();
-			$('#div_tablaDetalle').fadeOut("fast");
-
-		filtro_busq.paginaActual=paginaActual;
-
+		$('#div_tablaDetalle').fadeOut("fast");
 		var ceo_cook = decodeURIComponent(
 			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-			);
-
-		filtro_busq.ceo_name = ceo_cook
-
-		$consulta = $.post(baseURL + api + isoPais + "/reportes/estadosdecuenta",filtro_busq );
+		);
+		filtro_busq.paginaActual=paginaActual;
+		var dataRequest = JSON.stringify ({
+			filtro_busq: filtro_busq
+		})
+		dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
+		$consulta = $.post(baseURL + api + isoPais + "/reportes/estadosdecuenta",{request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook) });
 //DE SER EXITOSA LA COMUNICACION CON EL SERVICIO SE EJECUTA EL SIGUIENTE METODO "DONE"
 
- 		$consulta.done(function(data){
+		$consulta.done(function(response){
+			data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 
 // SE OCULTA EL GIF DE CARGANDO Y SE MUESTRA EL CONTENEDOR DE LA TABLA
 		$("#mensaje").remove();
@@ -397,15 +402,19 @@ if(buscarReporte){
 //SE EJECUTA LA CONSULTA PARA EL GRAFICO
 				var ceo_cook = decodeURIComponent(
 					document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-					);
-
-				filtro_busq.ceo_name = ceo_cook
-
-				$consulta = $.post(baseURL + api + isoPais + "/reportes/EstadosdeCuentaGrafico",filtro_busq );
+				);
+				var dataRequest = JSON.stringify({
+					filtro_busq: filtro_busq
+				})
+				dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {
+					format: CryptoJSAesJson
+				}).toString();
+				$consulta = $.post(baseURL + api + isoPais + "/reportes/EstadosdeCuentaGrafico",{request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook) } );
 // APARECE LA VENTANA DE CARGANDO MIENTRAS SE REALIZA LA CONSULTA
 				$( "#cargando" ).dialog({title:"Ver Gráfica Estado de cuenta",modal:true, width: 200, height: 170});
 //DE SER EXITOSA LA COMUNICACION CON EL SERVICIO SE EJECUTA EL SIGUIENTE METODO "DONE"
-		 		$consulta.done(function(data){
+				$consulta.done(function(response){
+					data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 
 			 		$( "#cargando" ).dialog("destroy");
 
@@ -888,19 +897,17 @@ if(buscarReporte){
 function descargarArchivo(datos, url, titulo){
 
 	$aux = $("#cargando").dialog({title:titulo,modal:true, close:function(){$(this).dialog('close')}, resizable:false });
-
 			var ceo_cook = decodeURIComponent(
 				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-				);
+			);
 
 			datos.ceo_name = ceo_cook
-
 			$.post(url,datos).done(function(data){
     			$aux.dialog('destroy')
     			if(!data.ERROR){
 						var ceo_cook = decodeURIComponent(
 							document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-							);
+						);
 
 						$('form#formulario').empty();
 						$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'">');

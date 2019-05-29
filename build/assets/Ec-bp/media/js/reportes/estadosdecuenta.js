@@ -22,7 +22,7 @@ $(document).ready(function() {
 //LLENA EL COMBO DE EMPRESA
 //--------------------------
 		$("#cargando_empresa").fadeIn("slow");
-		$.getJSON(baseURL + api + isoPais + '/empresas/lista').always(function( response ) {
+		$.getJSON(baseURL + api + isoPais + '/empresas/lista').always(function(response) {
 			data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 			$("#cargando_empresa").fadeOut("slow");
 			if(!(data.ERROR)){
@@ -236,7 +236,6 @@ function BuscarEstadosdeCuenta(paginaActual){
 		filtro_busq.paginaActual=paginaActual;
 		var dataRequest = JSON.stringify ({
 			filtro_busq: filtro_busq
-
 		})
 		dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
 		$consulta = $.post(baseURL + api + isoPais + "/reportes/estadosdecuenta",{request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook) } );
@@ -906,6 +905,9 @@ function descargarArchivo(datos, url, titulo){
 			$.post(url,datos).done(function(data){
     			$aux.dialog('destroy')
     			if(!data.ERROR){
+						var ceo_cook = decodeURIComponent(
+							document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+						);
 						$('form#formulario').empty();
 						$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'">');
     				$('form#formulario').append('<input type="hidden" name="bytes" value="'+JSON.stringify(data.bytes)+'" />');

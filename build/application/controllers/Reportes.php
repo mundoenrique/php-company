@@ -1218,7 +1218,7 @@ class Reportes extends CI_Controller {
 					$lastSessionD = $this->session->userdata('lastSession');
 					$jsRte = '../../../js/';
 					$thirdsJsRte = '../../../js/third_party/';
-					$FooterCustomInsertJS=["jquery-3.4.0.min.js", "jquery-ui-1.12.1.min.js","jquery.paginate.js","reportes/saldosalcierre.js","header.js","jquery.balloon.min.js","routes.js",$thirdsJsRte."jquery.validate.min.js",$jsRte."validate-forms.js",$thirdsJsRte."additional-methods.min.js"];
+					$FooterCustomInsertJS=["jquery-3.4.0.min.js", "jquery-ui-1.12.1.min.js","jquery.paginate.js","aes.min.js","aes-json-format.min.js","reportes/saldosalcierre.js","header.js","jquery.balloon.min.js","routes.js",$thirdsJsRte."jquery.validate.min.js",$jsRte."validate-forms.js",$thirdsJsRte."additional-methods.min.js"];
 					$FooterCustomJS="";
 					$titlePage="Conexión Empresas Online - Reportes";
 
@@ -1258,10 +1258,6 @@ class Reportes extends CI_Controller {
 	public function getSaldosAmanecidos($urlCountry){
 			np_hoplite_countryCheck($urlCountry);
 
-			$this->form_validation->set_rules('empresa', 'Empresa',  'trim|xss_clean');
-			$this->form_validation->set_rules('cedula', 'cedula',  'trim|xss_clean');
-			$this->form_validation->set_rules('producto', 'producto',  'trim|xss_clean');
-
 			$logged_in = $this->session->userdata('logged_in');
 
 			$paisS = $this->session->userdata('pais');
@@ -1278,17 +1274,36 @@ class Reportes extends CI_Controller {
 							}
 							else
 							{
-									$paginaActual=$this->input->post('paginaActual');
-									$empresa = $this->input->post('empresa');
-									$cedula = $this->input->post('cedula');
-									$producto = $this->input->post('producto');
-									$paginar = $this->input->post('paginar');
-									$tamPg = $this->input->post('tamPg');
+									$dataRequest = json_decode(
+										$this->security->xss_clean(
+											strip_tags(
+												$this->cryptography->decrypt(
+													base64_decode($this->input->get_post('plot')),
+													utf8_encode($this->input->get_post('request'))
+												)
+											)
+										)
+									);
+									$paginaActual = $dataRequest->paginaActual;
+									$empresa = $dataRequest->empresa;
+									$cedula = $dataRequest->cedula;
+									$producto = $dataRequest->producto;
+									$paginar = $dataRequest->paginar;
+									$tamPg = $dataRequest->tamPg;
+
+									$_POST['empresa'] = $empresa;
+									$_POST['cedula'] = $cedula;
+									$_POST['producto'] = $producto;
+
+									$this->form_validation->set_rules('empresa', 'Empresa',  'trim|xss_clean');
+									$this->form_validation->set_rules('cedula', 'cedula',  'trim|xss_clean');
+									$this->form_validation->set_rules('producto', 'producto',  'trim|xss_clean');
 									$username = $this->session->userdata('userName');
 									$token = $this->session->userdata('token');
 
 									$pruebaTabla = $this->callWSSaldosAmanecidos($urlCountry,$token,$username,$empresa,$cedula,$producto,$paginaActual,$paginar,$tamPg);
-									$this->output->set_content_type('application/json')->set_output(json_encode($pruebaTabla));
+									$response = $this->cryptography->encrypt($pruebaTabla);
+									$this->output->set_content_type('application/json')->set_output(json_encode($response));
 							}
 					}
 			}else{
@@ -2896,7 +2911,7 @@ class Reportes extends CI_Controller {
 					$lastSessionD = $this->session->userdata('lastSession');
 					$jsRte = '../../../js/';
 					$thirdsJsRte = '../../../js/third_party/';
-					$FooterCustomInsertJS=["jquery-3.4.0.min.js", "jquery-ui-1.12.1.min.js","reportes/actividadporusuario.js","kendo.dataviz.min.js","header.js","jquery.balloon.min.js","jquery.dataTables.min.js","routes.js",$thirdsJsRte."jquery.validate.min.js",$jsRte."validate-forms.js",$thirdsJsRte."additional-methods.min.js"];
+					$FooterCustomInsertJS=["jquery-3.4.0.min.js", "jquery-ui-1.12.1.min.js","aes.min.js","aes-json-format.min.js","reportes/actividadporusuario.js","kendo.dataviz.min.js","header.js","jquery.balloon.min.js","jquery.dataTables.min.js","routes.js",$thirdsJsRte."jquery.validate.min.js",$jsRte."validate-forms.js",$thirdsJsRte."additional-methods.min.js"];
 					$FooterCustomJS="";
 					$titlePage="Conexión Empresas Online - Reportes";
 
@@ -2955,18 +2970,29 @@ class Reportes extends CI_Controller {
 							}
 							else
 							{
-									$fechaIni = $this->input->post('data-fechaIni');
-									$fechaFin = $this->input->post('data-fechaFin');
-									$acodcia = $this->input->post('data-acodcia');
+									$dataRequest = json_decode(
+										$this->security->xss_clean(
+												strip_tags(
+														$this->cryptography->decrypt(
+																base64_decode($this->input->get_post('plot')),
+																utf8_encode($this->input->get_post('request'))
+														)
+												)
+										)
+									);
+									$fechaIni = $dataRequest->data_fechaIni;
+									$fechaFin = $dataRequest->data_fechaFin;
+									$acodcia = $dataRequest->data_acodcia;
 
 									$response = $this->callWSActividadPorUsuario($urlCountry, $fechaIni, $fechaFin, $acodcia);
-
+									$response = $this->cryptography->encrypt($response);
 									$this->output->set_content_type('application/json')->set_output(json_encode($response));
 							}
 					}
 			}else{
 					$this->session->sess_destroy();
-					$this->output->set_content_type('application/json')->set_output(json_encode( array('ERROR' => lang('ERROR_(-29)'), "rc"=> "-29")));
+					$response = $this->cryptography->encrypt( array('ERROR' => lang('ERROR_(-29)'), "rc"=> "-29"));
+					$this->output->set_content_type('application/json')->set_output(json_encode($response));
 			}
 
 	}
@@ -3021,6 +3047,7 @@ class Reportes extends CI_Controller {
 			if($response){
 					log_message('info','actividadporusuario '.$response->rc."/".$response->msg);
 					if($response->rc==0){
+
 							return $response;
 					}else{
 
@@ -3351,19 +3378,26 @@ class Reportes extends CI_Controller {
 									)
 								);
 
-									$producto=$dataRequest->producto;
-									$empresa = $dataRequest->empresa;
-									$fechaIni = $dataRequest->fechaInicial;
-									$fechaFin = $dataRequest->fechaFin;
-									$tipoConsulta = $dataRequest->tipoConsulta;
-									$cedula = $dataRequest->cedula;
-									$tarjeta= $dataRequest->tarjeta;
+									//$producto=$dataRequest->producto;
+									$producto = (isset($dataRequest->producto))? $dataRequest->producto : "";
+									//$empresa = $dataRequest->empresa;
+									$empresa = (isset($dataRequest->empresa))? $dataRequest->empresa : "";
+									//$fechaIni = $dataRequest->fechaInicial;
+									$fechaIni = (isset($dataRequest->fechaInicial))? $dataRequest->fechaInicial : "";
+									//$fechaFin = $dataRequest->fechaFin;
+									$fechaFin = (isset($dataRequest->fechaFin))? $dataRequest->fechaFin : "";
+									//$tipoConsulta = $dataRequest->tipoConsulta;
+									$tipoConsulta = (isset($dataRequest->tipoConsulta))? $dataRequest->tipoConsulta : "";
+									//$cedula = $dataRequest->cedula;
+									$cedula = (isset($dataRequest->cedula))? $dataRequest->cedula : "";
+									//$tarjeta= $dataRequest->tarjeta;
+									$tarjeta = (isset($dataRequest->tarjeta))? $dataRequest->tarjeta : "";
 									$username = $this->session->userdata('userName');
 									$token = $this->session->userdata('token');
 
 									$pruebaTabla = $this->callWSGastosPorCategorias($urlCountry,$token,$username,$empresa,$tarjeta,$cedula,$fechaIni,$fechaFin,$producto,$tipoConsulta);
-								$response = $this->cryptography->encrypt($pruebaTabla);
-								$this->output->set_content_type('application/json')->set_output(json_encode($response,JSON_UNESCAPED_UNICODE));
+									$response = $this->cryptography->encrypt($pruebaTabla);
+									$this->output->set_content_type('application/json')->set_output(json_encode($response,JSON_UNESCAPED_UNICODE));
 
 							}
 					}
@@ -4519,7 +4553,7 @@ class Reportes extends CI_Controller {
 					$lastSessionD = $this->session->userdata('lastSession');
 
 					$FooterCustomInsertJS=["jquery-1.10.2.min.js","jquery-ui-1.10.3.custom.min.js",
-						"header.js","jquery.balloon.min.js","jquery.dataTables.min.js",
+						"header.js","jquery.balloon.min.js","jquery.dataTables.min.js","aes.min.js","aes-json-format.min.js",
 						"reportes/guarderia.js", "routes.js"];
 
 					$FooterCustomJS="";
