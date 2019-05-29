@@ -143,9 +143,11 @@
 		if($orden=='0' || $orden=='1'  || $orden==''){
 		echo '
 		<div id="batchs-last">
+			<form name="no-form" onsubmit="return false">
 			<input id="clave" class="input-clave" type="password" placeholder="'.lang("MSG_INGRESE_CLAVE").'" value="" />
 			<button '.$borrar.' id="eliminarF" type="submit">'.lang('TITULO_LOTESBTN_ELIMINAR').'</button>
 			<button id="firma" >'.lang("TITULO_LOTESBTN_FIRMAR").'</button>
+			</form>
 		</div>';
 		}else{
 			echo '
