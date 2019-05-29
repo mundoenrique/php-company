@@ -187,10 +187,7 @@ $(function(){
 				var ceo_cook = decodeURIComponent(
 					document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 				);
-				var dataRequest = JSON.stringify ({})
-				dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
-				$.post(baseURL+api+isoPais+'/usuario/config/perfilUsuario', {request: dataRquest, ceo_name: ceo_cook, plot: btoa(ceo_cook)})
-        .done(function(response){
+        $.post(baseURL+api+isoPais+'/usuario/config/perfilUsuario', {ceo_name: ceo_cook}).done(function( response ) {
 					data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
             if(!data.ERROR){
                 $(".ui-dialog-content").dialog("destroy");
