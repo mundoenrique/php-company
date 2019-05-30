@@ -436,9 +436,20 @@ class Servicios extends CI_Controller {
 		$token = $this->session->userdata('token');
 		$idEmpresa = $this->session->userdata('acrifS');
 		$idProductoS = $this->session->userdata('idProductoS');
-		$pg = $this->input->post('data-pg');
-		$paginas = $this->input->post('data-paginas');
-		$paginar = $this->input->post('data-paginar');
+
+		$dataRequest = json_decode(
+			$this->security->xss_clean(
+				strip_tags(
+					$this->cryptography->decrypt(
+						base64_decode($this->input->get_post('plot')),
+						utf8_encode($this->input->get_post('request'))
+					)
+				)
+			)
+		);
+		$pg = $dataRequest->data_pg;
+		$paginas = $dataRequest->data_paginas;
+		$paginar = $dataRequest->data_paginar;
 
 		$listaTarjetas = [
 			"paginaActual" => $pg,
@@ -447,10 +458,10 @@ class Servicios extends CI_Controller {
 		];
 		$listaTarjetas = [$listaTarjetas];
 
-		$tarjetas = $this->input->post('data-tarjeta');
-		$dnis = $this->input->post('data-id_ext_per');
-		$montoTrans = $this->input->post('data-monto');
-		$pass = $this->input->post('data-pass');
+		$tarjetas = $dataRequest->data_tarjeta;
+		$dnis = $dataRequest->data_id_ext_per;
+		$montoTrans = $dataRequest->data_monto;
+		$pass = $dataRequest->data_pass;
 		$lista;
 
 		foreach ($tarjetas as $key => $value) {
@@ -495,6 +506,7 @@ class Servicios extends CI_Controller {
 					$response->logAccesoObject, $response->usuario
 				);
 				log_message('DEBUG', 'RESULTS: ' . json_encode($response));
+				$response= $this->cryptography->encrypt($response);
 				return $response;
 
 			} else {
@@ -525,11 +537,13 @@ class Servicios extends CI_Controller {
 						}
 					}
 				}
+				$codigoError = $this->cryptography->encrypt($codigoError);
 				return $codigoError;
 
 			}
 		} else {
-			return $codigoError = array('ERROR' => lang('ERROR_GENERICO_USER') );
+			$codigoError = $this->cryptography->encrypt(array('ERROR' => lang('ERROR_GENERICO_USER') ));
+			return $codigoError;
 
 		}
 	}
@@ -596,9 +610,20 @@ class Servicios extends CI_Controller {
 		$token = $this->session->userdata('token');
 		$idEmpresa = $this->session->userdata('acrifS');
 		$idProductoS = $this->session->userdata('idProductoS');
-		$pg = $this->input->post('data-pg');
-		$paginas = $this->input->post('data-paginas');
-		$paginar = $this->input->post('data-paginar');
+
+		$dataRequest = json_decode(
+			$this->security->xss_clean(
+				strip_tags(
+					$this->cryptography->decrypt(
+						base64_decode($this->input->get_post('plot')),
+						utf8_encode($this->input->get_post('request'))
+					)
+				)
+			)
+		);
+		$pg = $dataRequest->data_pg;
+		$paginas = $dataRequest->data_paginas;
+		$paginar = $dataRequest->data_paginar;
 
 		$listaTarjetas = [
 			"paginaActual" => $pg,
@@ -606,10 +631,11 @@ class Servicios extends CI_Controller {
 			"paginar" => $paginar
 		];
 		$listaTarjetas = [$listaTarjetas];
-		$tarjetas = $this->input->post('data-tarjeta');
-		$dnis = $this->input->post('data-id_ext_per');
-		$montoTrans = $this->input->post('data-monto');
-		$pass = $this->input->post('data-pass');
+
+		$tarjetas = $dataRequest->data_tarjeta;
+		$dnis = $dataRequest->data_id_ext_per;
+		$montoTrans = $dataRequest->data_monto;
+		$pass = $dataRequest->data_pass;
 		$lista;
 
 		foreach ($tarjetas as $key => $value) {
@@ -653,6 +679,7 @@ class Servicios extends CI_Controller {
 					$response->logAccesoObject, $response->usuario
 				);
 				log_message('DEBUG', 'RESULTS: ' . json_encode($response));
+				$response= $this->cryptography->encrypt($response);
 				return $response;
 
 			} else {
@@ -675,11 +702,13 @@ class Servicios extends CI_Controller {
 
 					}
 				}
+				$codigoError = $this->cryptography->encrypt($codigoError);
 				return $codigoError;
 
 			}
 		} else {
-			return $codigoError = ['ERROR' => lang('ERROR_GENERICO_USER')];
+			$codigoError = $this->cryptography->encrypt(['ERROR' => lang('ERROR_GENERICO_USER')]);
+			return $codigoError;
 
 		}
 	}
