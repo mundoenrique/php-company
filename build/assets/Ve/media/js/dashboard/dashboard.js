@@ -364,10 +364,10 @@ $(function () {
 			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 		);
 		var dataRequest = JSON.stringify({
-			data_filtroEmpresas:dash_var.filtro,
-			data_paginar:dash_var.paginar,
-			data_tamanoPagina:dash_var.cantEmp,
-			data_paginaActual:dash_var.pgActual
+			data_filtroEmpresas: dash_var.filtro,
+			data_paginar: dash_var.paginar,
+			data_tamanoPagina: dash_var.cantEmp,
+			data_paginaActual: dash_var.pgActual
 		});
 		var dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
 		$.post(baseURL + api + isoPais + "/empresas/lista",{request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)},
