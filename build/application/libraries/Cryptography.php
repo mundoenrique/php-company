@@ -32,14 +32,14 @@ class Cryptography {
     $iv  = substr($salted, 32,16);
     $encrypted_data = openssl_encrypt(json_encode($object), 'aes-256-cbc', $key, true, $iv);
 		$data = [
-			"ct" => base64_encode($encrypted_data),
-			"iv" => bin2hex($iv),
-			"s" => bin2hex($salt),
+			"res" => base64_encode($encrypted_data),
+			"str" => bin2hex($iv),
+			"env" => bin2hex($salt)
 		];
 
 		$response = [
 			'plot' => $keyStr,
-			'code' => json_encode($data)
+			'code' => urlencode(base64_encode(json_encode($data)))
 		];
 
     return $response;
@@ -47,12 +47,12 @@ class Cryptography {
 
 	public function decrypt($passphrase, $jsonString)
 	{
-		$jsondata = json_decode($jsonString, true);
-    try {
-        $salt = hex2bin($jsondata["s"]);
-        $iv  = hex2bin($jsondata["iv"]);
+		$jsondata = json_decode(base64_decode(urldecode($jsonString)), true);
+		try {
+        $salt = hex2bin($jsondata["str"]);
+        $iv  = hex2bin($jsondata["env"]);
     } catch(Exception $e) { return null; }
-    $ct = base64_decode($jsondata["ct"]);
+    $ct = base64_decode($jsondata["req"]);
     $concatedPassphrase = $passphrase.$salt;
     $md5 = array();
     $md5[0] = md5($concatedPassphrase, true);
@@ -64,7 +64,7 @@ class Cryptography {
     $key = substr($result, 0, 32);
 		$data = openssl_decrypt($ct, 'aes-256-cbc', $key, true, $iv);
 		log_message('DEBUG', 'NOVO DECRYPT DATA: '.$data);
-    return $data;
+		return $data;
 	}
 
 	private function generateKey()
