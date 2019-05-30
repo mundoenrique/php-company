@@ -1009,8 +1009,9 @@ $(function() {
         }
     });
 
-    $.get( baseURL + api + isoPais + '/servicios/transferencia-maestra/consultarSaldo', function( data ) {
-        var data = JSON.parse(data)
+		$.get( baseURL + api + isoPais + '/servicios/transferencia-maestra/consultarSaldo',
+		function(response) {
+			var data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
         //console.log( "Data Loaded: " +  data.rc);
         if (data.rc == 0) {
             var dataAmount = data.maestroDeposito.saldoDisponible
