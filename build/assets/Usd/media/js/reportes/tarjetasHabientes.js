@@ -10,9 +10,10 @@ $(".fecha").keypress(function(e){
 $(document).ready(function() {
 
 		$("#cargando_empresa").fadeIn("slow");
-		$.getJSON(baseURL + api + isoPais + '/empresas/consulta-empresa-usuario').always(function( data ) {
+		$.getJSON(baseURL + api + isoPais + '/empresas/consulta-empresa-usuario').always(function( response ) {
             // var prueba= JSON.stringify(data);
 			// console.log(prueba);
+			data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 			$("#cargando_empresa").fadeOut("slow");
 			if(!(data.ERROR)){
 
@@ -45,8 +46,12 @@ $(document).ready(function() {
 				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 			);
 
-			$.post(baseURL + api + isoPais + "/reportes/consulta-producto-empresa", { 'acrif': acrif, ceo_name: ceo_cook, ceo_name: ceo_cook }, function(data){
-
+			var dataRequest = JSON.stringify({
+				'acrif': acrif
+			})
+			dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
+			$.post(baseURL + api + isoPais + "/reportes/consulta-producto-empresa", {request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook) }, function(response){
+				data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 				$("#cargando_producto").fadeOut("slow");
 				$("#Reporte-tarjeta-hambiente").removeAttr('disabled');
 				if(!data.ERROR){
