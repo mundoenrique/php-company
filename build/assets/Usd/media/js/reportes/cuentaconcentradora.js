@@ -35,6 +35,7 @@ $(document).ready(function() {
 
 	$("#cargando_empresa").fadeIn("slow");
 	$.getJSON(baseURL + api + isoPais + '/empresas/lista').always(function( data ) {
+		data = JSON.parse(CryptoJS.AES.decrypt(data.code, data.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 		$("#cargando_empresa").fadeOut("slow");
 		if(!(data.ERROR)){
 
@@ -416,9 +417,14 @@ function WS(filtro_busq){
 
 	filtro_busq.ceo_name = ceo_cook;
 			//SE REALIZA LA INVOCACION AJAX
-			$consulta = $.post(baseURL + api + isoPais + "/reportes/cuentaConcentradora",filtro_busq );
+var dataRequest= JSON.stringify({
+	filtro_busq: filtro_busq
+});
+			dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
+			$consulta = $.post(baseURL + api + isoPais + "/reportes/cuentaConcentradora", {request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)} );
 			//DE SER EXITOSA LA COMUNICACION CON EL SERVICIO SE EJECUTA EL SIGUIENTE METODO "DONE"
 			$consulta.done(function(data){
+				data = JSON.parse(CryptoJS.AES.decrypt(data.code, data.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 				$("#mensaje").remove();
 				$("#div_tablaDetalle").fadeIn("slow");
 

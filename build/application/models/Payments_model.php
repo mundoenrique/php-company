@@ -210,7 +210,7 @@ class Payments_model extends CI_Model {
 				break;
 			case 404:
 				$this->code = 2;
-				$this->msg = 'En este momento no podemos atender tu solicitud, intanta más tarde';
+				$this->msg = 'En este momento no podemos atender tu solicitud, intenta más tarde';
 				break;
 			default:
 				$this->code = 2;
@@ -229,5 +229,5 @@ class Payments_model extends CI_Model {
 
 		return json_encode($this->response);
 
-	}	
+	}
 }

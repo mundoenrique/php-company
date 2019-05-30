@@ -1584,13 +1584,13 @@ class Reportes extends CI_Controller {
 								);
 									$paginaActual = $dataRequest->filtro_busq->paginaActual;
 									$loteproducto = $dataRequest->filtro_busq->lotes_producto;
+									$acrif = $dataRequest->filtro_busq->acrif;
 
 									$_POST['paginaActual'] = $paginaActual;
 									$_POST['lotes_producto'] = $loteproducto;
 
 									$this->form_validation->set_rules('empresa', 'Empresa',  'trim|xss_clean');
 									$this->form_validation->set_rules('lotes_producto', 'Tarjeta',  'trim|xss_clean');
-									$acrif = $dataRequest->filtro_busq->acrif;
 
 									$username = $this->session->userdata('userName');
 									$token = $this->session->userdata('token');

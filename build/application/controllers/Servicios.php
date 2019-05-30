@@ -506,7 +506,6 @@ class Servicios extends CI_Controller {
 					$response->logAccesoObject, $response->usuario
 				);
 				log_message('DEBUG', 'RESULTS: ' . json_encode($response));
-				$response= $this->cryptography->encrypt($response);
 				return $response;
 
 			} else {
@@ -537,7 +536,6 @@ class Servicios extends CI_Controller {
 						}
 					}
 				}
-				$codigoError = $this->cryptography->encrypt($codigoError);
 				return $codigoError;
 
 			}

@@ -45,6 +45,8 @@ $("#repGastosPorCategoria_dni").attr("maxlength","12");
 //--------------------------
 	$("#cargando_empresa").fadeIn("slow");
 	$.getJSON(baseURL + api + isoPais + '/empresas/lista').always(function( data ) {
+
+		data = JSON.parse(CryptoJS.AES.decrypt(data.code, data.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 		$("#cargando_empresa").fadeOut("slow");
 	if(!(data.ERROR)){
 
@@ -74,7 +76,14 @@ $("#repGastosPorCategoria_dni").attr("maxlength","12");
 			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 		);
 
-		$.post(baseURL + api + isoPais + "/producto/lista", { 'acrif': acrif, ceo_name: ceo_cook }, function(data){
+		var dataRequest = JSON.stringify ({
+			'acrif': acrif
+		})
+
+		dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
+		$.post(baseURL + api + isoPais + "/producto/lista",  { request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook) }, function(data){
+			data = JSON.parse(CryptoJS.AES.decrypt(data.code, data.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
+
 			$("#cargando_producto").fadeOut("slow");
 			$("#repGastosPorCategoria_empresa").removeAttr('disabled');
 			if(!data.ERROR){
@@ -279,11 +288,19 @@ var filtro_busq={};
 				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 			);
 			filtro_busq.ceo_name = ceo_cook;
+
+			var dataRequest= JSON.stringify({
+				filtro_busq: filtro_busq
+			});
+
+			dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
 //SE REALIZA LA PETICION AL SERVICIO DE GASTOS POR CATEGORIA
-			$consulta = $.post(baseURL + api + isoPais + "/reportes/gastosporcategorias",filtro_busq );
+			$consulta = $.post(baseURL + api + isoPais + "/reportes/gastosporcategorias",{request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook) });
 
 //SI LA CONSULTA ES SATISFACTORIA SE PROCEDE A LLENAR LA TABLA
 			$consulta.done(function(data){
+
+				data = JSON.parse(CryptoJS.AES.decrypt(data.code, data.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 				var tr;
 				var td;
 				var th;
