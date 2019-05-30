@@ -95,10 +95,7 @@ class Reportes extends CI_Controller {
 			$moduloAct = np_hoplite_existeLink($menuP,"REPCON");
 
 			if($paisS==$urlCountry && $logged_in && $moduloAct!==false){
-					$this->form_validation->set_rules('empresa', 'Empresa',  'trim|xss_clean');
-					$this->form_validation->set_rules('fechaInicial', 'Fecha Inicio',  'trim|xss_clean');
-					$this->form_validation->set_rules('fechaFin', 'Fecha Fin',  'trim|xss_clean');
-					$this->form_validation->set_rules('producto', 'Fecha Fin',  'trim|xss_clean');
+
 					//Validate Request For Ajax
 					if($this->input->is_ajax_request()){
 							if ($this->form_validation->run() == FALSE)
@@ -117,20 +114,21 @@ class Reportes extends CI_Controller {
 									)
 								)
 							);
-							$paginaActual = $dataRequest->filtro_busq->paginaActual;
-							$empresa = $dataRequest->filtro_busq->empresa;
-							$fechaInicial = $dataRequest->filtro_busq->fechaInicial;
-							$fechaFin = $dataRequest->filtro_busq->fechaFin;
+							$_POST['paginaActual'] = $dataRequest->filtro_busq->paginaActual;
+							$_POST['empresa'] = $dataRequest->filtro_busq->empresa;
+							$_POST['fechaInicial'] = $dataRequest->filtro_busq->fechaInicial;
+							$_POST['fechaFin'] = $dataRequest->filtro_busq->fechaFin;
 							$filtroFecha = $dataRequest->filtro_busq->filtroFecha;
-							$tipoNota = $dataRequest->filtro_busq->tipoNota;
-
-									$username = $this->session->userdata('userName');
-									$token = $this->session->userdata('token');
-									$tipoNota = $this->input->post('tipoNota');
-
-									$pruebaTabla = $this->callWSCuentaConcentradora($urlCountry,$token,$username,$empresa,$fechaInicial,$fechaFin,$paginaActual,$filtroFecha,$tipoNota);
-									$pruebaTabla = $this->cryptography->encrypt($pruebaTabla);
-									$this->output->set_content_type('application/json')->set_output(json_encode($pruebaTabla));
+							$tipoNota= $dataRequest->filtro_busq->tipoNota;
+							$this->form_validation->set_rules('empresa', 'Empresa',  'trim|xss_clean');
+							$this->form_validation->set_rules('fechaInicial', 'Fecha Inicio',  'trim|xss_clean');
+							$this->form_validation->set_rules('fechaFin', 'Fecha Fin',  'trim|xss_clean');
+							$this->form_validation->set_rules('producto', 'Fecha Fin',  'trim|xss_clean');
+							$username = $this->session->userdata('userName');
+							$token = $this->session->userdata('token');
+							$pruebaTabla = $this->callWSCuentaConcentradora($urlCountry,$token,$username,$empresa,$fechaInicial,$fechaFin,$paginaActual,$filtroFecha,$tipoNota);
+							$pruebaTabla = $this->cryptography->encrypt($pruebaTabla);
+							$this->output->set_content_type('application/json')->set_output(json_encode($pruebaTabla));
 							}
 					}
 			}else{
@@ -868,10 +866,6 @@ class Reportes extends CI_Controller {
 	public function getTarjetasEmitidas($urlCountry){
 			np_hoplite_countryCheck($urlCountry);
 
-			$this->form_validation->set_rules('empresa', 'Empresa',  'trim|xss_clean');
-			$this->form_validation->set_rules('fechaInicial', 'Fecha Inicio',  'trim|xss_clean');
-			$this->form_validation->set_rules('fechaFin', 'Fecha Fin',  'trim|xss_clean');
-
 			$logged_in = $this->session->userdata('logged_in');
 
 			$paisS = $this->session->userdata('pais');
@@ -898,9 +892,12 @@ class Reportes extends CI_Controller {
 										)
 									)
 								);
-								$empresa = $dataRequest->filtro_busq->empresa;
-								$fechaInicial = $dataRequest->filtro_busq->fechaInicial;
-								$fechaFin = $dataRequest->filtro_busq->fechaFin;
+								$_POST['empresa'] = $dataRequest->filtro_busq->empresa;
+								$_POST['fechaInicial'] = $dataRequest->filtro_busq->fechaInicial;
+								$_POST['fechaFin']  = $dataRequest->filtro_busq->fechaFin;
+								$this->form_validation->set_rules('empresa', 'Empresa',  'trim|xss_clean');
+								$this->form_validation->set_rules('fechaInicial', 'Fecha Inicio',  'trim|xss_clean');
+								$this->form_validation->set_rules('fechaFin', 'Fecha Fin',  'trim|xss_clean');
 								$tipoConsulta = $dataRequest->filtro_busq->radioGeneral;
 								$username = $this->session->userdata('userName');
 								$token = $this->session->userdata('token');
