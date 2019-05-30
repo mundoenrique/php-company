@@ -37,8 +37,14 @@ var ceo_cook;
 											document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 										);
 
-                    dat.formData = {'data-tipoLote':$("#tipoLote").val(), 'data-formatolote':$("#tipoLote option:selected").attr('rel'), ceo_name: ceo_cook};
+										var dataRequest= JSON.stringify({
+											data_tipoLote:$("#tipoLote").val(),
+											data_formatolote:$("#tipoLote option:selected")
+										})
+										dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
+                    dat.formData = {request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)};
                     dat.submit().done(function (result, textStatus, jqXHR){
+											data = JSON.parse(CryptoJS.AES.decrypt(result.code, result.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 
                       if(result){
                         result = $.parseJSON(result);

@@ -3,7 +3,9 @@ $(function() {
 var params={};
 
     $("#cargando_empresa").fadeIn("slow");
-    $.getJSON(baseURL + api + isoPais + '/empresas/lista').always(function( data ) {
+    $.getJSON(baseURL + api + isoPais + '/empresas/lista').always(function( response ) {
+
+			data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
     $("#cargando_empresa").fadeOut("slow");
       if(!data.ERROR){
           $.each(data.lista, function(k,v){
@@ -96,9 +98,18 @@ $("#empresa").on('change', function(){
 				var ceo_cook = decodeURIComponent(
 					document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 				);
+				data_fechaIni=$("#fecha_ini").val(),
+				data_fechaFin= $("#fecha_fin").val(),
+				data_acodcia=$("#empresa").val()
 
-          $.post(baseURL + api + isoPais + "/reportes/actividadporusuario", {"data-fechaIni": $("#fecha_ini").val(),"data-fechaFin": $("#fecha_fin").val(), "data-acodcia":$("#empresa").val(), ceo_name: ceo_cook})
-          .always(function(data){
+				var dataRequest = JSON.stringify({
+					'data_fechaIni': data_fechaIni,'data_fechaFin':data_fechaFin,'data_acodcia':data_acodcia
+				})
+				dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
+          $.post(baseURL + api + isoPais + "/reportes/actividadporusuario", {request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook) })
+          .always(function(response){
+
+				data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
             $('#cargando').hide();
             $("#btnBuscar").show();
             $('.resultadosAU').show();

@@ -113,12 +113,18 @@ function buscarStatusTarjetasHambientes(paginaActual){
 				);
 
 				filtro_busq.ceo_name = ceo_cook;
+				var dataRequest= JSON.stringify({
+					filtro_busq: filtro_busq
+				});
 
-	    	/******* SE REALIZA LA INVOCACION AJAX *******/
-			$consulta = $.post(baseURL + api + isoPais + "/reportes/estatusTarjetashabientes",filtro_busq );
+				dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
+				/******* SE REALIZA LA INVOCACION AJAX *******/
+
+			$consulta = $.post(baseURL + api + isoPais + "/reportes/estatusTarjetashabientes",{request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook) });
 			/******* DE SER EXITOSA LA COMUNICACION CON EL SERVICIO SE EJECUTA EL SIGUIENTE METODO "DONE" *******/
-			$consulta.done(function(data){
+			$consulta.done(function(response){
 
+				data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 				$("#mensaje").remove();
 				$('#cargando').fadeOut("slow");
 				$("#EstatusLotes-btnBuscar").show();
