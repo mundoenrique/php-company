@@ -892,9 +892,13 @@ class Reportes extends CI_Controller {
 										)
 									)
 								);
-								$_POST['empresa'] = $dataRequest->filtro_busq->empresa;
-								$_POST['fechaInicial'] = $dataRequest->filtro_busq->fechaInicial;
-								$_POST['fechaFin']  = $dataRequest->filtro_busq->fechaFin;
+								$empresa = $dataRequest->filtro_busq->empresa;
+								$fechaInicial = $dataRequest->filtro_busq->fechaInicial;
+								$fechaFin = $dataRequest->filtro_busq->fechaFin;
+
+								$_POST['empresa'] = $empresa;
+								$_POST['fechaInicial'] = $fechaInicial;
+								$_POST['fechaFin']  = $fechaFin;
 								$this->form_validation->set_rules('empresa', 'Empresa',  'trim|xss_clean');
 								$this->form_validation->set_rules('fechaInicial', 'Fecha Inicio',  'trim|xss_clean');
 								$this->form_validation->set_rules('fechaFin', 'Fecha Fin',  'trim|xss_clean');
@@ -1544,8 +1548,7 @@ class Reportes extends CI_Controller {
 	public function getEstatusTarjetasHabientes($urlCountry){
 			np_hoplite_countryCheck($urlCountry);
 
-			$this->form_validation->set_rules('empresa', 'Empresa',  'trim|xss_clean');
-			$this->form_validation->set_rules('lotes_producto', 'Tarjeta',  'trim|xss_clean');
+
 
 			$logged_in = $this->session->userdata('logged_in');
 
@@ -1575,6 +1578,12 @@ class Reportes extends CI_Controller {
 								);
 									$paginaActual = $dataRequest->filtro_busq->paginaActual;
 									$loteproducto = $dataRequest->filtro_busq->lotes_producto;
+
+									$_POST['paginaActual'] = $paginaActual;
+									$_POST['lotes_producto'] = $loteproducto;
+
+									$this->form_validation->set_rules('empresa', 'Empresa',  'trim|xss_clean');
+									$this->form_validation->set_rules('lotes_producto', 'Tarjeta',  'trim|xss_clean');
 									$acrif = $dataRequest->filtro_busq->acrif;
 
 									$username = $this->session->userdata('userName');
@@ -1672,12 +1681,6 @@ class Reportes extends CI_Controller {
 	 */
 	public function getEstatusLotes($urlCountry){
 			np_hoplite_countryCheck($urlCountry);
-
-			$this->form_validation->set_rules('empresa', 'Empresa',  'trim|xss_clean');
-			$this->form_validation->set_rules('fechaInicial', 'Fecha Inicio',  'trim|xss_clean');
-			$this->form_validation->set_rules('fechaFin', 'Fecha Fin',  'trim|xss_clean');
-			$this->form_validation->set_rules('lotes_producto', 'Tarjeta',  'trim|xss_clean');
-
 			$logged_in = $this->session->userdata('logged_in');
 
 			$paisS = $this->session->userdata('pais');
@@ -1709,12 +1712,21 @@ class Reportes extends CI_Controller {
 							$fechaInicial = $dataRequest->filtro_busq->fechaInicial;
 							$fechaFin = $dataRequest->filtro_busq->fechaFin;
 							$loteproducto = $dataRequest->filtro_busq->lotes_producto;
+							$_POST['empresa'] = $empresa;
+							$_POST['fechaInicial'] = $fechaInicial;
+							$_POST['fechaFin'] = $fechaFin;
+							$_POST['lotes_producto'] = $loteproducto;
+							$this->form_validation->set_rules('empresa', 'Empresa',  'trim|xss_clean');
+							$this->form_validation->set_rules('fechaInicial', 'Fecha Inicio',  'trim|xss_clean');
+							$this->form_validation->set_rules('fechaFin', 'Fecha Fin',  'trim|xss_clean');
+							$this->form_validation->set_rules('lotes_producto', 'Tarjeta',  'trim|xss_clean');
+
 							$username = $this->session->userdata('userName');
 							$token = $this->session->userdata('token');
 
-									$pruebaTabla = $this->callWSEstatusLotes($urlCountry,$token,$username,$empresa,$fechaInicial,$fechaFin,$loteproducto);
-									$pruebaTabla = $this->cryptography->encrypt($pruebaTabla);
-									$this->output->set_content_type('application/json')->set_output(json_encode($pruebaTabla));
+							$pruebaTabla = $this->callWSEstatusLotes($urlCountry,$token,$username,$empresa,$fechaInicial,$fechaFin,$loteproducto);
+							$pruebaTabla = $this->cryptography->encrypt($pruebaTabla);
+							$this->output->set_content_type('application/json')->set_output(json_encode($pruebaTabla));
 							}
 					}
 			}else{
@@ -2563,11 +2575,6 @@ class Reportes extends CI_Controller {
 	public function getRecargasRealizadas($urlCountry){
 			np_hoplite_countryCheck($urlCountry);
 
-			$this->form_validation->set_rules('paginaActual', 'paginaActual',  'trim|xss_clean');
-			$this->form_validation->set_rules('empresa', 'Empresa',  'trim|xss_clean');
-			$this->form_validation->set_rules('anio', 'anio',  'trim|xss_clean');
-			$this->form_validation->set_rules('mes', 'mes',  'trim|xss_clean');
-
 			$logged_in = $this->session->userdata('logged_in');
 
 			$paisS = $this->session->userdata('pais');
@@ -2597,9 +2604,18 @@ class Reportes extends CI_Controller {
 							$empresa = $dataRequest->filtro_busq->empresa;
 							$anio = $dataRequest->filtro_busq->anio;
 							$mes = $dataRequest->filtro_busq->mes;
+							$_POST['paginaActual'] =	$paginaActual;
+							$_POST['empresa'] = $empresa;
+							$_POST['anio'] = $anio;
+							$_POST['mes'] =	$mes;
+							$this->form_validation->set_rules('paginaActual', 'paginaActual',  'trim|xss_clean');
+							$this->form_validation->set_rules('empresa', 'Empresa',  'trim|xss_clean');
+							$this->form_validation->set_rules('anio', 'anio',  'trim|xss_clean');
+							$this->form_validation->set_rules('mes', 'mes',  'trim|xss_clean');
 
-									$username = $this->session->userdata('userName');
-									$token = $this->session->userdata('token');
+
+							$username = $this->session->userdata('userName');
+							$token = $this->session->userdata('token');
 
 									$pruebaTabla = $this->callWSRecargasRealizadas($urlCountry,$token,$username,$empresa,$mes,$anio,$paginaActual);
 									$pruebaTabla = $this->cryptography->encrypt($pruebaTabla);
@@ -2949,9 +2965,6 @@ class Reportes extends CI_Controller {
 	public function getactividadporusuario($urlCountry){
 			np_hoplite_countryCheck($urlCountry);
 
-			$this->form_validation->set_rules('fech_ini', 'Desde',  'trim|xss_clean');
-			$this->form_validation->set_rules('fech_fin', 'Hasta',  'trim|xss_clean');
-
 			$logged_in = $this->session->userdata('logged_in');
 
 			$paisS = $this->session->userdata('pais');
@@ -2980,7 +2993,10 @@ class Reportes extends CI_Controller {
 									$fechaIni = $dataRequest->data_fechaIni;
 									$fechaFin = $dataRequest->data_fechaFin;
 									$acodcia = $dataRequest->data_acodcia;
-
+									$_POST['fech_ini'] = $fechaIni;
+									$_POST['fech_fin'] = $fechaFin;
+									$this->form_validation->set_rules('fech_ini', 'Desde',  'trim|xss_clean');
+									$this->form_validation->set_rules('fech_fin', 'Hasta',  'trim|xss_clean');
 									$response = $this->callWSActividadPorUsuario($urlCountry, $fechaIni, $fechaFin, $acodcia);
 									$response = $this->cryptography->encrypt($response);
 									$this->output->set_content_type('application/json')->set_output(json_encode($response));
@@ -3758,11 +3774,6 @@ class Reportes extends CI_Controller {
 
 			if($paisS==$urlCountry && $logged_in && $moduloAct!==false){
 
-					$this->form_validation->set_rules('paginaActual', 'paginaActual',  'trim|xss_clean');
-					$this->form_validation->set_rules('empresa', 'Empresa',  'trim|xss_clean');
-					$this->form_validation->set_rules('anio', 'anio',  'trim|xss_clean');
-					$this->form_validation->set_rules('mes', 'mes',  'trim|xss_clean');
-
 					//Validate Request For Ajax
 					if($this->input->is_ajax_request()){
 							if ($this->form_validation->run() == FALSE)
@@ -3792,6 +3803,12 @@ class Reportes extends CI_Controller {
 									$acnomcia = $dataRequest->filtro_busq->acnomcia;
 									$productoDesc = $dataRequest->filtro_busq->productoDesc;
 									$paginaActual = $dataRequest->filtro_busq->paginaActual;
+									$_POST['paginaActual'] = $paginaActual;
+									$_POST['empresa'] = $empresa;
+									$this->form_validation->set_rules('paginaActual', 'paginaActual',  'trim|xss_clean');
+									$this->form_validation->set_rules('empresa', 'Empresa',  'trim|xss_clean');
+									$this->form_validation->set_rules('anio', 'anio',  'trim|xss_clean');
+									$this->form_validation->set_rules('mes', 'mes',  'trim|xss_clean');
 									$username = $this->session->userdata('userName');
 									$token = $this->session->userdata('token');
 
