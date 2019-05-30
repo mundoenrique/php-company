@@ -114,10 +114,17 @@ class Reportes extends CI_Controller {
 									)
 								)
 							);
-							$_POST['paginaActual'] = $dataRequest->filtro_busq->paginaActual;
-							$_POST['empresa'] = $dataRequest->filtro_busq->empresa;
-							$_POST['fechaInicial'] = $dataRequest->filtro_busq->fechaInicial;
-							$_POST['fechaFin'] = $dataRequest->filtro_busq->fechaFin;
+
+							$paginaActual= $dataRequest->filtro_busq->paginaActual;
+							$empresa= $dataRequest->filtro_busq->empresa;
+							$fechaInicial= $dataRequest->filtro_busq->fechaInicial;
+							$fechaFin = $dataRequest->filtro_busq->fechaFin;
+
+
+							$_POST['paginaActual'] = $paginaActual;
+							$_POST['empresa'] = $empresa;
+							$_POST['fechaInicial'] = $fechaInicial;
+							$_POST['fechaFin'] = $fechaFin;
 							$filtroFecha = $dataRequest->filtro_busq->filtroFecha;
 							$tipoNota= $dataRequest->filtro_busq->tipoNota;
 							$this->form_validation->set_rules('empresa', 'Empresa',  'trim|xss_clean');
