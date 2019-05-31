@@ -228,11 +228,23 @@ $('#cargando').dialog({ modal: true,maxWidth: 700,maxHeight: 300,dialogClass: 'h
 		var ceo_cook = decodeURIComponent(
 			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 		);
+		var dataRequest = JSON.stringify({
+			filtro_busq: filtro_busq
+		})
+		dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {
+			format: CryptoJSAesJson
+		}).toString();
+		//filtro_busq.ceo_name = ceo_cook;
 
-		filtro_busq.ceo_name = ceo_cook;
-
-		$consulta = $.post(baseURL + api + isoPais + "/reportes/graficoCuentaConcentradora",filtro_busq );
-		$consulta.done(function(data){
+		$consulta = $.post(baseURL + api + isoPais + "/reportes/graficoCuentaConcentradora",{
+			request: dataRequest,
+			ceo_name: ceo_cook,
+			plot: btoa(ceo_cook)
+		});
+		$consulta.done(function(response){
+			data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {
+				format: CryptoJSAesJson
+			}).toString(CryptoJS.enc.Utf8))
 			$(".ui-dialog-content").dialog().dialog("close");
 			if(data.rc==0){
 
