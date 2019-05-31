@@ -1,5 +1,6 @@
 'use strict'
 $(function() {
+	$('#login-form input, #login-form button').attr('disabled', false);
 	$.balloon.defaults.css = null;
 
 	$('#login-btn').on('click', function(e) {
