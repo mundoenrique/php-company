@@ -10,7 +10,8 @@ $(document).ready(function () {
 	$("#SaldosAmanecidos-TH").attr('maxlength', '10');
 
 	$("#cargando_empresa").fadeIn("slow");
-	$.getJSON(baseURL + api + isoPais + '/empresas/lista').always(function (data) {
+	$.getJSON(baseURL + api + isoPais + '/empresas/lista').always(function (response) {
+		var data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 		$("#cargando_empresa").fadeOut("slow");
 		if (!(data.ERROR)) {
 
@@ -42,10 +43,15 @@ $(document).ready(function () {
 			var ceo_cook = decodeURIComponent(
 				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 			);
+			var dataRequest = JSON.stringify ({
+				acrif: acrif
+			})
+			dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
 			$.post(baseURL + api + isoPais + "/producto/lista", {
-				'acrif': acrif,
-				ceo_name: ceo_cook
-			}, function (data) {
+				request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)
+			}, function (response) {
+				data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
+
 				$("#cargando_producto").fadeOut("slow");
 				$("#SaldosAmanecidos-empresa").removeAttr('disabled');
 				if (!data.ERROR) {
@@ -254,11 +260,15 @@ $(document).ready(function () {
 			var ceo_cook = decodeURIComponent(
 				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 			);
-			filtro_busq.ceo_name = ceo_cook;
+			var dataRequest = JSON.stringify (filtro_busq)
+			dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
 			//SE REALIZA LA INVOCACION AJAX
-			$consulta = $.post(baseURL + api + isoPais + "/reportes/saldosamanecidos", filtro_busq);
+			$consulta = $.post(baseURL + api + isoPais + "/reportes/saldosamanecidos",{
+				request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)
+			} );
 			//DE SER EXITOSA LA COMUNICACION CON EL SERVICIO SE EJECUTA EL SIGUIENTE METODO "DONE"
-			$consulta.done(function (data) {
+			$consulta.done(function (response) {
+				data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 				$("#mensaje").remove();
 				$('#cargando').fadeOut("slow");
 				$("#SaldosAmanecidos-btnBuscar").show();

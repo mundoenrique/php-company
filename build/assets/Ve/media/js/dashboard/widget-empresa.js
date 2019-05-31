@@ -143,7 +143,7 @@ $(function () {
 					ceo_name: ceo_cook,
 					plot: btoa(ceo_cook)
 				},
-				function (respnse) {
+				function (response) {
 					data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 					if (data === 1) {
 						$(location).attr('href', baseURL + isoPais + "/dashboard/productos/detalle");
