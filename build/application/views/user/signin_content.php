@@ -11,12 +11,12 @@
 					<input type="hidden" id="<?= $novoName; ?>" class="ignore" value="<?= $novoCook; ?>">
 					<fieldset>
 						<label for="user_login">Usuario</label>
-						<input type="text" id="user_login" name="user_login" placeholder="Usuario" required>
+						<input type="text" id="user_login" name="user_login" placeholder="Usuario" required disabled>
 						<label for="user_pass">Contraseña</label>
-						<input type="password" id="user_pass" name="user_pass" placeholder="Contraseña" required>
+						<input type="password" id="user_pass" name="user_pass" placeholder="Contraseña" required disabled>
 					</fieldset>
 					<div class="general-form-msg"></div>
-					<button id="login-btn" name="login-btn" class="btn-sidebar">Ingresar</button>
+					<button id="login-btn" name="login-btn" class="btn-sidebar" disabled>Ingresar</button>
 				</form>
 				<div class="align-center">
 					<p>Restablecer contraseña</p>
