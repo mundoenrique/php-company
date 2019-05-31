@@ -60,10 +60,19 @@ function validateForms(form, options) {
 		return value !== target.val();
 	}
 
-	if(typeof options==='undefined' || options.handleMsg===false) {
+	function ignoreMsgHandling() {
 		defaults.onfocusout = false;
 		defaults.onkeyup = function() {};
 		defaults.errorPlacement = function(error, element) {}
+	}
+
+	if(typeof options!=='undefined') {
+		if(options.handleMsg===false)
+			ignoreMsgHandling();
+		if(options.handleStyle===false)
+			errorClass = '';
+	} else {
+		ignoreMsgHandling();
 	}
 
 	jQuery.validator.setDefaults(defaults);
@@ -103,7 +112,9 @@ function validateForms(form, options) {
 			"type": {pattern: alphabetical},
 			"account": {pattern: numeric},
 			"pass": {pattern: userPassword},
-			"idTipoLote": {pattern: numeric}
+			"idTipoLote": {pattern: numeric},
+			"id-document": {pattern: numeric},
+			"card-number": {pattern: numeric}
 		},
 		messages: {
 			"user-name": "Debe indicar su nombre de usuario",
