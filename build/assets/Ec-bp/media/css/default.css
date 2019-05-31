@@ -7277,3 +7277,13 @@ li.ui-state-default.ui-corner-top:nth-child(3)
 {
 	display: none;
 }
+
+.validate-error {
+	border-color: red;
+}
+
+#mensajeError {
+	float: none;
+	display: block;
+	color: red;
+}

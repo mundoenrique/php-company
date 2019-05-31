@@ -36,14 +36,19 @@ var valido=true;
   // ACCION DEL EVENTO PARA BUSCAR TARJETAS TM
 
   $('#buscar').on('click', function(){
-    if( ! validar_filtro_busqueda("lotes-contenedor")){
-      return false;
-    }
-
-    serv_var.busk = true;
-    serv_var.TotalTjts = 0;
-
-    buscar(1);
+		var errElem = $(this).siblings('#mensajeError');
+		var form = $('#form-criterio-busqueda');
+		errElem.fadeOut('fast');
+		validateForms(form);
+		if(form.valid()) {
+			serv_var.busk = true;
+			serv_var.TotalTjts = 0;
+			buscar(1);
+		} else {
+			$('.div_tabla_detalle').fadeOut('fast');
+      errElem.html('Debe ingresar datos numéricos');
+			errElem.fadeIn('fast');
+		}
   });
 
 
@@ -452,46 +457,6 @@ var valido=true;
     serv_var.monto=[];
     serv_var.fallidas = 0;
 
-  }
-
-  function validar_filtro_busqueda(div){
-
-    valido =true;
-
-    //VALIDA INPUT:TEXT QUE SEAN REQUERIDOS NO SE ENCUENTREN VACIOS
-    marcarojo($("#dni"));
-    marcarojo($("#nroTjta"));
-
-    if(!valido){
-      $(".div_tabla_detalle").fadeOut("fast");
-      $("#mensajeError").html("Debe ingresar datos numéricos");
-      $("#mensajeError").fadeIn("fast");
-    }else{
-      $("#mensajeError").fadeOut("fast");
-    }
-
-    return valido;
-  }
-
-  function marcarojo($elem){
-    if($elem.val()!==""){
-        if( ! validarNumerico($elem.val())){
-                valido=false;
-                $elem.attr("style","border-color:red");
-        }else{
-                $elem.attr("style","");
-        }
-    }else{
-      $elem.attr("style","");
-    }
-  }
-
-  function validarNumerico(valor){
-    if(valor.match(/^[0-9]*$/)){
-      return true;
-    }else{
-      return false;
-    }
   }
 
  function resettOp(selected){

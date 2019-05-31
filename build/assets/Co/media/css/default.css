@@ -7331,3 +7331,13 @@ button.green:hover {
       top: 0px;
   }
 /* Fin Menu-Head New*/
+
+.validate-error {
+	border-color: red;
+}
+
+#mensajeError {
+	float: left;
+	display: none;
+	color: red;
+}

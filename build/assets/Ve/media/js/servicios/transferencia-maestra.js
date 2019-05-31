@@ -36,14 +36,19 @@ $(function () {
 	// ACCION DEL EVENTO PARA BUSCAR TARJETAS TM
 
 	$('#buscar').on('click', function () {
-		if (!validar_filtro_busqueda("lotes-contenedor")) {
-			return false;
+		var errElem = $(this).siblings('#mensajeError');
+		var form = $('#form-criterio-busqueda');
+		errElem.fadeOut('fast');
+		validateForms(form);
+		if(form.valid()) {
+			serv_var.busk = true;
+			serv_var.TotalTjts = 0;
+			buscar(1);
+		} else {
+			$('.div_tabla_detalle').fadeOut('fast');
+      errElem.html('Debe ingresar datos numéricos');
+			errElem.fadeIn('fast');
 		}
-
-		serv_var.busk = true;
-		serv_var.TotalTjts = 0;
-
-		buscar(1);
 	});
 
 

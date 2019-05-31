@@ -292,14 +292,19 @@ function paramsValidate(){
 }
 	// ACCION DEL EVENTO PARA BUSCAR TARJETAS TM
 	$('#buscar').on('click', function() {
-		if (!validar_filtro_busqueda("lotes-contenedor")) {
-			return false;
+		var errElem = $(this).siblings('#mensajeError');
+		var form = $('#form-criterio-busqueda');
+		errElem.fadeOut('fast');
+		validateForms(form);
+		if(form.valid()) {
+			serv_var.busk = true;
+			serv_var.TotalTjts = 0;
+			buscar(1);
+		} else {
+			$('.div_tabla_detalle').fadeOut('fast');
+      errElem.html('Debe ingresar datos numéricos');
+			errElem.fadeIn('fast');
 		}
-
-		serv_var.busk = true;
-		serv_var.TotalTjts = 0;
-		buscar(1);
-
 	});
 
 	// ACCION EVENTO ICON->CONSULTAR SALDO
@@ -469,9 +474,6 @@ function paramsValidate(){
 		}
 	});
 
-	// Elimina elemento que ocasiona conflictos en el despliegue de
-	// errores del widget de "Criterio de búsqueda"
-	$('#recarga_concetradora > #batchs-last > #mensajeError').remove()
 }); //FIN DOCUMENT READY
 
 function toFormatShow (valor) {
@@ -483,22 +485,6 @@ function toFormatShow (valor) {
 		valor = toFormat(valor);
 		return (isoPais == 'Co' ? '$ ' : 'Bs. ') + formatoNumero(valor, 2, ",", ".");
 	}
-}
-
-function validar_filtro_busqueda(div) {
-	valido = true;
-	//VALIDA INPUT:TEXT QUE SEAN REQUERIDOS NO SE ENCUENTREN VACIOS
-	marcarojo($("#dni"));
-	marcarojo($("#nroTjta"));
-
-	if (!valido) {
-		$(".div_tabla_detalle").fadeOut("fast");
-		showErrMsg("Debe ingresar datos numéricos");
-	} else {
-			$("#mensajeError").fadeOut("fast");
-	}
-
-	return valido;
 }
 
 function notiPagOS (titu, msg, type) {
@@ -522,19 +508,6 @@ function notiPagOS (titu, msg, type) {
 			}
 		}
 	});
-}
-
-function marcarojo($elem) {
-	if ($elem.val() !== "") {
-		if (!validarNumerico($elem.val())) {
-			valido = false;
-			$elem.attr("style", "border-color:red");
-		} else {
-			$elem.attr("style", "");
-		}
-	} else {
-		$elem.attr("style", "");
-	}
 }
 
 // BUSCAR TARJETAS PARA TRANSFERENCIA MAESTRA
@@ -947,14 +920,6 @@ function resett() {
 	serv_var.dni_tarjetas = "";
 	serv_var.monto = [];
 	serv_var.fallidas = 0;
-}
-
-function validarNumerico(valor) {
-	if (valor.match(/^[0-9]*$/)) {
-			return true;
-	} else {
-			return false;
-	}
 }
 
 function resettOp(selected) {
