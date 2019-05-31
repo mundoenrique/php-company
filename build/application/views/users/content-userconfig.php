@@ -60,9 +60,11 @@ $nombreCompleto = $this->session->userdata('nombreCompleto');
 					<span class="input-email">
 						<p id="first"><?php echo lang('INFO_USER_EMAIL'); ?></p>
 						<input id="email_user" type="text" disabled="disabled" value="" style="float:left;" maxlength='45'/>
+						<?php if($pais != 'Ec-bp'): ?>
 						<a title=<?php echo lang('TITLE_MODIFICAR'); ?>>
 							<span id="email_userInput" class="icon lapiz-mod" data-icon="" ></span>
 						</a>
+						<?php endif; ?>
 					</span>
 
             </div>

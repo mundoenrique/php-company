@@ -1984,6 +1984,10 @@ class Users extends CI_Controller {
         if($response){
             log_message('info', ' PERFIL USER '.$response->rc.'/'.$response->msg);
             if($response->rc==0){
+								if($urlCountry == 'Ec-bp') {
+									$email = maskString($response->email, 4, 8);
+									$response->email = $email;
+								}
                 return $response;
             }else{
                 if($response->rc==-61 || $response->rc==-29){
