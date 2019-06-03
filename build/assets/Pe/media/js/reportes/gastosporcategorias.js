@@ -44,7 +44,8 @@ $("#repGastosPorCategoria_dni").attr("maxlength","12");
 //LLENA EL COMBO DE EMPRESA
 //--------------------------
 	$("#cargando_empresa").fadeIn("slow");
-	$.getJSON(baseURL + api + isoPais + '/empresas/lista').always(function( data ) {
+	$.getJSON(baseURL + api + isoPais + '/empresas/lista').always(function( response ) {
+		var data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
 		$("#cargando_empresa").fadeOut("slow");
 	if(!(data.ERROR)){
 
@@ -73,7 +74,10 @@ $("#repGastosPorCategoria_dni").attr("maxlength","12");
 		var ceo_cook = decodeURIComponent(
 			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 		);
-		$.post(baseURL + api + isoPais + "/producto/lista", { 'acrif': acrif, ceo_name: ceo_cook }, function(data){
+		var dataRequest = JSON.stringify({'acrif': acrif});
+		dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
+		$.post(baseURL + api + isoPais + "/producto/lista", {request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)}, function(response){
+			var data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
 			$("#cargando_producto").fadeOut("slow");
 			$("#repGastosPorCategoria_empresa").removeAttr('disabled');
 			if(!data.ERROR){
@@ -280,11 +284,13 @@ var filtro_busq={};
 			var ceo_cook = decodeURIComponent(
 				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 			);
-			filtro_busq.ceo_name = ceo_cook;
-			$consulta = $.post(baseURL + api + isoPais + "/reportes/gastosporcategorias",filtro_busq );
+			var dataRequest = JSON.stringify(filtro_busq);
+			dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
+			$consulta = $.post(baseURL + api + isoPais + "/reportes/gastosporcategorias", {request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)});
 
 //SI LA CONSULTA ES SATISFACTORIA SE PROCEDE A LLENAR LA TABLA
-			$consulta.done(function(data){
+			$consulta.done(function(response){
+				var data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
 				var tr;
 				var td;
 				var th;
