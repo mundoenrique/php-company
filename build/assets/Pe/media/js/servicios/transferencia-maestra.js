@@ -60,10 +60,11 @@ var valido=true;
 			var ceo_cook = decodeURIComponent(
 				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 			);
-      $.post(baseURL+api+isoPais+'/servicios/transferencia-maestra/buscar',
-        { 'data-dni':$('#dni').val(), 'data-tjta':$('#nroTjta').val(), 'data-pg':pgSgt, 'data-paginas':serv_var.paginas, 'data-paginar':serv_var.paginar, ceo_name: ceo_cook })
-      .done(function(data){
-
+			var dataRequest = JSON.stringify({ 'data-dni':$('#dni').val(), 'data-tjta':$('#nroTjta').val(), 'data-pg':pgSgt, 'data-paginas':serv_var.paginas, 'data-paginar':serv_var.paginar, ceo_name: ceo_cook });
+			dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
+      $.post(baseURL+api+isoPais+'/servicios/transferencia-maestra/buscar', {request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)})
+      .done(function(response){
+				var data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
           $aux.dialog('destroy');
 
         if(!data.result.ERROR){
