@@ -11,7 +11,10 @@
 
 
 		$("#cargando_empresa").fadeIn("slow");
-		$.getJSON(baseURL + api + isoPais + '/empresas/lista').always(function (data) {
+		$.getJSON(baseURL + api + isoPais + '/empresas/lista').always(function (response) {
+			data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {
+				format: CryptoJSAesJson
+			}).toString(CryptoJS.enc.Utf8))
 			$("#cargando_empresa").fadeOut("slow");
 			if (!(data.ERROR)) {
 
@@ -43,11 +46,11 @@
 				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 			);
 			$('form#formulario').empty();
-			$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ ceo_cook +'"/>');
+			$('form#formulario').append('<input type="hidden" name="ceo_name" value="' + ceo_cook + '"/>');
 			$('form#formulario').append('<input type="hidden" name="empresa" value="' + filtro_busq.empresa + '" />');
 			$('form#formulario').append('<input type="hidden" name="anio" value="' + filtro_busq.anio + '" />');
 			$('form#formulario').append('<input type="hidden" name="mes" value="' + filtro_busq.mes + '" />');
-			$('form#formulario').attr('action', base + api + isoPais + "/reportes/recargasRealizadasXLS");
+			$('form#formulario').attr('action', baseURL + api + isoPais + "/reportes/recargasRealizadasXLS");
 			$('form#formulario').submit();
 
 			/*datos = {
@@ -67,11 +70,11 @@
 			);
 
 			$('form#formulario').empty();
-			$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ ceo_cook +'"/>');
+			$('form#formulario').append('<input type="hidden" name="ceo_name" value="' + ceo_cook + '"/>');
 			$('form#formulario').append('<input type="hidden" name="empresa" value="' + filtro_busq.empresa + '" />');
 			$('form#formulario').append('<input type="hidden" name="anio" value="' + filtro_busq.anio + '" />');
 			$('form#formulario').append('<input type="hidden" name="mes" value="' + filtro_busq.mes + '" />');
-			$('form#formulario').attr('action', base + api + isoPais + "/reportes/recargasRealizadasPDF");
+			$('form#formulario').attr('action', baseURL + api + isoPais + "/reportes/recargasRealizadasPDF");
 			$('form#formulario').submit();
 
 		});
@@ -92,11 +95,23 @@
 				var ceo_cook = decodeURIComponent(
 					document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 				);
-				filtro_busq.ceo_name = ceo_cook;
+				var dataRequest = JSON.stringify({
+					filtro_busq: filtro_busq
+				})
 				//SE REALIZA LA INVOCACION AJAX
-				$consulta = $.post(baseURL + api + isoPais + "/reportes/recargasrealizadas", filtro_busq);
+				dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {
+					format: CryptoJSAesJson
+				}).toString();
+				$consulta = $.post(baseURL + api + isoPais + "/reportes/recargasrealizadas", {
+					request: dataRequest,
+					ceo_name: ceo_cook,
+					plot: btoa(ceo_cook)
+				});
 				//DE SER EXITOSA LA COMUNICACION CON EL SERVICIO SE EJECUTA EL SIGUIENTE METODO "DONE"
-				$consulta.done(function (data) {
+				$consulta.done(function (response) {
+					data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {
+						format: CryptoJSAesJson
+					}).toString(CryptoJS.enc.Utf8))
 					$("#mensaje").remove();
 					$('#cargando').fadeOut("slow");
 					$("#repRecargasRealizadas_btnBuscar").show();
@@ -200,56 +215,67 @@
 
 
 						$("#grafica").click(function () {
-							var _axis = "Bolivares";
-							var jsonChart = {
-								title: {
-									text: "Recargas realizadas"
-								},
-								legend: {
-									position: "top"
-								},
-								series: [],
-								categoryAxis: {
-									categories: []
-								},
-								valueAxis: {
-									name: _axis,
-									title: {
-										text: ""
-									}
-								}
+							var arrayseries = []
 
-							}
-
-							// SE OBTIENE LAS CATEGORIAS
-							$.each(data.listaGrafico[0].categorias, function (posLista, itemLista) {
-								jsonChart.categoryAxis.categories.push(itemLista.nombreCategoria);
-							});
-							var width_categoria = 300;
-							width_categoria = (parseInt(width_categoria) * parseInt(data.listaGrafico[0].categorias.length));
-							$("#chart").dialog({
-								modal: true,
-								width: 800,
-								height: 400
-							});
-
-							// SE OBTIENE LAS SERIES
 							$.each(data.listaGrafico[0].series, function (posSeries, itemSeries) {
 								var serie = {};
-								serie.name = itemSeries.nombreSerie;
-								serie.data = itemSeries.valores;
-								serie.color = colores[posSeries];
-								$.each(serie.data[0], function (pos, item) {
-									replaceAll(item, ",", "");
-									replaceAll(item, ".", "");
-								});
-								serie.axis = _axis;
-								jsonChart.series.push(serie);
+								let nuevo = [itemSeries.nombreSerie, itemSeries.valores[0]];
+								arrayseries.push(nuevo);
 							});
-							// GRAFICA
-							$("#chart").kendoChart(jsonChart);
+							$('#chart').highcharts({
+								chart: {
+									type: 'column',
+									plotBackgroundColor: null,
+									plotBorderWidth: null,
+									plotShadow: false
+								},
+								plotOptions: {
+									series: {
+										colorByPoint: true
+									}
+								},
+								title: {
+									text: data.recargas[0].producto
+								},
+								xAxis: {
+									type: 'category'
+								},
+								yAxis: {
+									min: 0,
+									title: {
+										text: 'Recargas realizadas'
+									}
+								},
+								legend: {
+									enabled: false
+								},
+								tooltip: {
+									pointFormat: 'Recargas: <b>{point.y}</b>'
+								},
+								series: [{
+									name: 'Population',
+									data: arrayseries,
+									dataLabels: {
+										enabled: true,
+										rotation: 0,
+										color: '#000000',
+										align: 'center',
+										format: '{point.y}',
+										y: 2,
+										style: {
+											fontSize: '13px'
+										}
+									}
+								}]
+							});
 
-
+							$("#chart").dialog({
+								modal: true,
+								width: 700,
+								height: 400
+							});
+							$("#chart").height(400);
+							$("#chart svg").height(385);
 
 						});
 						$('#tabla-datos-general tbody tr:even').addClass('even ');
@@ -358,7 +384,7 @@
 					document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 				);
 				$('form#formulario').empty();
-				$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ ceo_cook +'"/>');
+				$('form#formulario').append('<input type="hidden" name="ceo_name" value="' + ceo_cook + '"/>');
 				$('form#formulario').append('<input type="hidden" name="bytes" value="' + JSON.stringify(data.bytes) + '" />');
 				$('form#formulario').append('<input type="hidden" name="ext" value="' + data.ext + '" />');
 				$('form#formulario').append('<input type="hidden" name="nombreArchivo" value="' + data.nombreArchivo + '" />');
