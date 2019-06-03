@@ -34,11 +34,12 @@ $(function() { // Document ready
 										ceo_cook = decodeURIComponent(
 											document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 										);
-                    dat.formData = {'data-tipoLote':$("#tipoLote").val(), 'data-formatolote':$("#tipoLote option:selected").attr('rel'), ceo_name: ceo_cook };
-                    dat.submit(function (result, textStatus, jqXHR){
-
+										var dataRequest = JSON.stringify({'data_tipoLote':$("#tipoLote").val(), 'data_formatolote':$("#tipoLote option:selected").attr('rel')});
+										dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
+										dat.formData = {request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)};
+                    dat.submit().done(function (response, textStatus, jqXHR){
+											var result = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
                       if(result){
-                        result = $.parseJSON(result);
 
                         if(!result.ERROR){
                           mostrarError(result);
@@ -119,8 +120,8 @@ if(!$("#table-text-lotes").hasClass('dataTable')){
 $('#actualizador').show();
 }
   $.get(baseURL+api+isoPais+"/lotes/lista/pendientes",
-    function(data){
-
+    function(response){
+			var data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
 
       var icon, batch, color, title;
 
