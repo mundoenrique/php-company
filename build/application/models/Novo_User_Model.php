@@ -326,7 +326,7 @@ class Novo_User_Model extends NOVO_Model {
 
 			$this->response->code = 1;
 			$this->response->icon = 'ui-icon-closethick';
-			$this->response->msg = 'El sistema ha dectetado una actividad no autorizada, por favor intente nuevamente';
+			$this->response->msg = 'El sistema ha detectado una actividad no autorizada, por favor intente nuevamente';
 			$this->response->data = [
 				'btn1'=> [
 					'text'=> 'Aceptar',
