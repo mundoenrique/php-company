@@ -166,8 +166,8 @@ var accodgrupoe;
     $('#sEmpresa').hide();
     $("#widget-info-2").append("<img class='load-widget' id='cargando' src='"+$('#cdn').val()+"media/img/loading.gif'>");//'<h4 id="cargando">Cargando...</h4>'
 
-    $.getJSON(baseURL+api+isoPais+'/empresas/lista').always(function( data ) {
-
+    $.getJSON(baseURL+api+isoPais+'/empresas/lista').always(function( response ) {
+			var data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
       $("#widget-info-2").find($('#cargando')).remove();
 
       $('#sEmpresaS').show();
@@ -215,9 +215,12 @@ var accodgrupoe;
 			var ceo_cook = decodeURIComponent(
 				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 			);
+			var dataRequest = JSON.stringify({'data_accodgrupoe':accodgrupoe, 'data_acrif':acrif, 'data_acnomcia':acnomcia, 'data_acrazonsocial':acrazonsocial, 'data_acdesc':acdesc, 'data_accodcia':accodcia, 'llamada':'soloEmpresa'});
+			dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
       $.post( baseURL+api+isoPais+"/empresas/cambiar",
-        { 'data-accodgrupoe':accodgrupoe, 'data-acrif':acrif, 'data-acnomcia':acnomcia, 'data-acrazonsocial':acrazonsocial, 'data-acdesc':acdesc, 'data-accodcia':accodcia, 'llamada':'soloEmpresa', ceo_name: ceo_cook },
-         function(data){
+				{request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)},
+         function(response){
+					var data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
 
           if(data === 1){
             $(location).attr('href',baseURL+isoPais+"/dashboard/productos/");
