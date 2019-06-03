@@ -202,7 +202,10 @@ $(function(){
 	var ceo_cook = decodeURIComponent(
 		document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 	);
-	$.post(baseURL+isoPais+'/lotes/innominada/listaSucursalesInnominadas', {ceo_name: ceo_cook}).done( function(data){
+	var dataRequest = JSON.stringify({});
+	dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
+	$.post(baseURL+isoPais+'/lotes/innominada/listaSucursalesInnominadas', {request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)}).done( function(response){
+		var data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
 		$('#cargando').hide();
 		$('#sucursal').prop('disabled', false);
 		var html = "";
