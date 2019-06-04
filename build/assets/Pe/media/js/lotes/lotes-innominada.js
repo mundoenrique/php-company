@@ -180,8 +180,10 @@ $(function(){
 			var ceo_cook = decodeURIComponent(
 				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 			);
-			arrData.ceo_name = ceo_cook;
-			$.post(baseURL+isoPais+'/lotes/innominada/createCuentasInnominadas', arrData).done( function(data){
+			var dataRequest = JSON.stringify(arrData);
+			dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
+			$.post(baseURL+isoPais+'/lotes/innominada/createCuentasInnominadas', {request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)}).done( function(response){
+				var data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
 				$aux.dialog('destroy');
 				if(!data.ERROR){
 					solicitud_exitosa();
