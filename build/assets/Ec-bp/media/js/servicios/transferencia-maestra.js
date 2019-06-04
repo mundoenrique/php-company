@@ -143,7 +143,7 @@ $(function() {
 			var form = $('#form-recarga-cuenta');
 			validateForms(form);
 			if (form.valid()) {
-				if (paramsValidate()) {
+				if (paramsValidate(type.val())) {
 					dataSend = {
 						"amount": amount.val(),
 						"descript": descrip.val(),
@@ -251,44 +251,50 @@ $(function() {
 		}
 	});
 
-function paramsValidate(){
-		var montoMaxTransDia = parametrosRecarga.montoMaxTransDia;
-		var montoMinTransDia = parametrosRecarga.montoMinTransDia;
-		var montoMaxTransaccion = parametrosRecarga.montoMaxTransaccion;
-		var valid = true;
-		var montoATransferir = parseFloat($('#amount').val());
+function paramsValidate(type){
 
-		if(montoATransferir > serv_var.saldoDispon){
+	var montoMaxTransDia = parametrosRecarga.montoMaxTransDia;
+	var montoMinTransDia = parametrosRecarga.montoMinTransDia;
+	var montoMaxTransaccion = parametrosRecarga.montoMaxTransaccion;
+	var valid = true;
+	var montoATransferir = parseFloat($('#amount').val());
+
+	if(type == 'abono') {
+		var saldo = $('#account option:selected').text().split(':');
+		serv_var.saldoDispon = parseFloat(saldo[1]);
+	}
+
+	if(montoATransferir > serv_var.saldoDispon){
+		valid = false;
+		codeCtas = 'deft';
+		msgCtas = "El monto a transferir excede el saldo disponible.";
+		notiPagOS(titleCtas, msgCtas);
+	}
+
+	if((montoATransferir < montoMinTransDia) && valid){
+		valid = false;
+		codeCtas = 'deft';
+		msgCtas = "El monto a transferir debe ser mayor al monto mínimo de transacción diaria.";
+		notiPagOS(titleCtas, msgCtas);
+	}
+
+	if(montoMaxTransaccion > 0){
+		if((montoATransferir > montoMaxTransaccion)  && valid){
 			valid = false;
 			codeCtas = 'deft';
-			msgCtas = "El monto a transferir excede el saldo disponible.";
+			msgCtas = "El monto a transferir debe ser menor al monto máximo por transacción.";
 			notiPagOS(titleCtas, msgCtas);
 		}
-
-		if((montoATransferir < montoMinTransDia) && valid){
+	}else{
+		if((montoATransferir > montoMaxTransDia) && valid){
 			valid = false;
 			codeCtas = 'deft';
-			msgCtas = "El monto a transferir debe ser mayor al monto mínimo de transacción diaria.";
+			msgCtas = "El monto a transferir debe ser menor al monto máximo de transacción diaria.";
 			notiPagOS(titleCtas, msgCtas);
 		}
+	}
 
-		if(montoMaxTransaccion > 0){
-			if((montoATransferir > montoMaxTransaccion)  && valid){
-				valid = false;
-				codeCtas = 'deft';
-				msgCtas = "El monto a transferir debe ser menor al monto máximo por transacción.";
-				notiPagOS(titleCtas, msgCtas);
-			}
-		}else{
-			if((montoATransferir > montoMaxTransDia) && valid){
-				valid = false;
-				codeCtas = 'deft';
-				msgCtas = "El monto a transferir debe ser menor al monto máximo de transacción diaria.";
-				notiPagOS(titleCtas, msgCtas);
-			}
-		}
-
-		return valid;
+	return valid;
 }
 	// ACCION DEL EVENTO PARA BUSCAR TARJETAS TM
 	$('#buscar').on('click', function() {
