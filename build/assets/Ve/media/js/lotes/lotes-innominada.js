@@ -224,7 +224,9 @@ $(function () {
 	var ceo_cook = decodeURIComponent(
 		document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 	);
-	$.post(baseURL + isoPais + '/lotes/innominada/listaSucursalesInnominadas', {ceo_name: ceo_cook}).done(function (data) {
+	$.post(baseURL + isoPais + '/lotes/innominada/listaSucursalesInnominadas', {ceo_name: ceo_cook}).done(function (response) {
+		data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
+
 		$('#cargando').hide();
 		$('#sucursal').prop('disabled', false);
 		var html = "";
