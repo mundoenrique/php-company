@@ -685,19 +685,32 @@ class Lotes extends CI_Controller {
 
 		if($paisS==$urlCountry && $logged_in){
 
-			$lotes = explode(',', $this->input->post('data-lotes'));
+			$dataRequest = json_decode(
+				$this->security->xss_clean(
+					strip_tags(
+						$this->cryptography->decrypt(
+							base64_decode($this->input->get_post('plot')),
+							utf8_encode($this->input->get_post('request'))
+						)
+					)
+				)
+			);
+
+			$lotes = explode(',', $dataRequest->data_lotes);
 			array_pop($lotes);
 
-			$pass = $this->input->post('data-pass') ;
+			$pass = $dataRequest->data_pass;
 			$rTest = $this->callWSdesasociarFirma($urlCountry,$lotes,$pass);
 
-			$this->output->set_content_type('application/json')->set_output(json_encode($rTest));
+			$response = $this->cryptography->encrypt($rTest);
+			$this->output->set_content_type('application/json')->set_output(json_encode($response,JSON_UNESCAPED_UNICODE));
 
 		}elseif($paisS!=$urlCountry && $paisS!=''){
 			$this->session->sess_destroy();
 			redirect($urlCountry.'/login');
 		}elseif($this->input->is_ajax_request()){
-			$this->output->set_content_type('application/json')->set_output(json_encode( array('ERROR' => '-29' )));
+			$response = $this->cryptography->encrypt(array('ERROR' => '-29' ));
+			$this->output->set_content_type('application/json')->set_output(json_encode($response,JSON_UNESCAPED_UNICODE));
 		}else{
 			redirect($urlCountry.'/login');
 		}
