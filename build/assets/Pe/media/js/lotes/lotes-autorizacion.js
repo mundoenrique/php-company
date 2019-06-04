@@ -58,7 +58,10 @@ if( !$("#loteXdesa").val()&& !$('#lotesxAuth').val() ){
 			var ceo_cook = decodeURIComponent(
 				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 			);
-      $.post(baseURL+isoPais+'/lotes/autorizacion/firmar',{'data-lotes': js_var.loteF,'data-pass':pass, ceo_name: ceo_cook}).done(function(data){
+			var dataRequest = JSON.stringify({'data_lotes': js_var.loteF,'data_pass':pass});
+			dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
+      $.post(baseURL+isoPais+'/lotes/autorizacion/firmar',{request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)}).done(function(response){
+				var data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
          $aux.dialog('destroy');
         if(!data.ERROR){
           $('<div>Proceso exitoso.<h5>Listando lotes</h5></div>').dialog({title:"Firmando lote",modal: true, bgiframe: true});
@@ -222,7 +225,10 @@ $item = $(this);
 						var ceo_cook = decodeURIComponent(
 							document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 						);
-            $.post(baseURL+isoPais+'/lotes/autorizacion/desasociar',{'data-lotes': idlote,'data-pass':pass, ceo_name: ceo_cook}).done( function(data){
+						var dataRequest = JSON.stringify({'data_lotes':idlote, 'data_pass':pass});
+						dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
+            $.post(baseURL+isoPais+'/lotes/autorizacion/desasociar',{request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)}).done( function(response){
+							var data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
               $aux.dialog('destroy');
                if(!data.ERROR){
 
@@ -509,9 +515,12 @@ function eliminarLotes(idlote,acnumlote,ctipolote,pass){
 	var ceo_cook = decodeURIComponent(
 		document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 	);
+	var dataRequest = JSON.stringify({'data_lotes': idlote,'data_acnumlote':acnumlote,'data_ctipolote':ctipolote,'data_pass':pass});
+	dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
          $.post(baseURL+isoPais+'/lotes/autorizacion/eliminarAuth',
-          {'data-lotes': idlote,'data-acnumlote':acnumlote,'data-ctipolote':ctipolote,'data-pass':pass, ceo_name: ceo_cook})
-          .done(function(data){
+				 {request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)})
+          .done(function(response){
+						var data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
       $aux.dialog('destroy');
                if(!data.ERROR){
 
