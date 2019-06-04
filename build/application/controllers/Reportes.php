@@ -4572,7 +4572,7 @@ class Reportes extends CI_Controller {
 					$nombreCompleto = $this->session->userdata('nombreCompleto');
 					$lastSessionD = $this->session->userdata('lastSession');
 
-					$FooterCustomInsertJS=["jquery-1.10.2.min.js","jquery-ui-1.10.3.custom.min.js",
+					$FooterCustomInsertJS=["jquery-3.4.0.min.js", "jquery-ui-1.12.1.min.js",
 						"header.js","jquery.balloon.min.js","jquery.dataTables.min.js","aes.min.js","aes-json-format.min.js",
 						"reportes/guarderia.js", "routes.js"];
 
