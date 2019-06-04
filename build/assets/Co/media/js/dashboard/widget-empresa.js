@@ -23,11 +23,11 @@ var widget_var = {
 	$("#sEmpresa").on("click",function(){
 
 		$('#sEmpresa').hide();
-    	$("#widget-info-2").append("<img class='load-widget' id='cargando' src='"+$('#cdn').val()+"media/img/loading.gif'>");
+    $("#widget-info-2").append("<img class='load-widget' id='cargando' src='"+$('#cdn').val()+"media/img/loading.gif'>");
 
 		$.getJSON(baseURL+api+isoPais+'/empresas/lista').always(function(response){
 			data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
-			$("#widget-info-2").find($('#cargando')).remove();
+			$("#widget-info-2").find($('img#cargando')).remove();
 
 			$('#sEmpresaS').show();
 

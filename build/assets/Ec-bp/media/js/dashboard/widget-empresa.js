@@ -27,7 +27,7 @@ var widget_var = {
 
 		$.getJSON(baseURL+api+isoPais+'/empresas/lista').always(function(response) {
 				data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
-			$("#widget-info-2").find($('#cargando')).remove();
+			$("#widget-info-2").find($('img#cargando')).remove();
 
 			$('#sEmpresaS').show();
 
