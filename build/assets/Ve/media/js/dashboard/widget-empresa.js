@@ -79,7 +79,7 @@ $(function () {
 					format: CryptoJSAesJson
 				}).toString(CryptoJS.enc.Utf8))
 				$("#empresasS").removeAttr('disabled');
-				$('#productosS').empty();
+				$('#productosS').empty().css('display', 'block');
 				$("#productosS").append('<option>Seleccione un producto</option>');
 
 
