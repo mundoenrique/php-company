@@ -57,23 +57,24 @@ var widget_var = {
 		widget_var.accodcia = $('option:selected', this).attr('accodcia');
 		widget_var.accodgrupoe = $('option:selected', this).attr('accodgrupoe');
 
-		$('#productosS').empty();
-		$("#productosS").append('<option>Cargando...</option>');
-		$(this).attr('disabled',true);
+		if (widget_var.acrif!=0) {
+			$('#productosS').empty();
+			$("#productosS").append('<option>Cargando...</option>');
+			$(this).attr('disabled',true);
 
-		var ceo_cook = decodeURIComponent(
-			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-		);
-		var dataRequest = JSON.stringify ({
-			acrif: widget_var.acrif
-		})
-		dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
-		$.post(baseURL+api+isoPais+"/producto/lista", {request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)} )
-		.done(function(response){
-			data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
-			$("#empresasS").removeAttr('disabled');
-			$('#productosS').empty().css('display', 'block');
-			$("#productosS").append('<option value="0">Seleccione un producto</option>');
+			var ceo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
+			var dataRequest = JSON.stringify ({
+				acrif: widget_var.acrif
+			})
+			dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
+			$.post(baseURL+api+isoPais+"/producto/lista", {request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)} )
+			.done(function(response){
+				data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
+				$("#empresasS").removeAttr('disabled');
+				$('#productosS').empty().css('display', 'block');
+				$("#productosS").append('<option value="0">Seleccione un producto</option>');
 
 
 			if(!data.ERROR){
@@ -85,8 +86,8 @@ var widget_var = {
   				alert('Usuario actualmente desconectado'); location.reload();
   				}
   			}
-		});
-
+			});
+		}
 	});
 
 //--Fin Seleccionar empresa
