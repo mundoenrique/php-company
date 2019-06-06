@@ -2093,17 +2093,17 @@ input.ui-button::-moz-focus-inner, button.ui-button::-moz-focus-inner {
   background-position: -65px -16px;
 }
 
-.ui-id- {
+.ui-id {
   position: relative;
   padding: .2em;
 }
 
-.ui-id- .ui-id-nav {
+.ui-id .ui-id-nav {
   margin: 0;
   padding: 0;
 }
 
-.ui-id- .ui-id-nav li {
+.ui-id .ui-id-nav li {
   list-style: none;
   float: left;
   position: relative;
@@ -2114,26 +2114,26 @@ input.ui-button::-moz-focus-inner, button.ui-button::-moz-focus-inner {
   white-space: nowrap;
 }
 
-.ui-id- .ui-id-nav li a {
+.ui-id .ui-id-nav li a {
   float: left;
   padding: .5em 1em;
   text-decoration: none;
 }
 
-.ui-id- .ui-id-nav li.ui-id-active {
+.ui-id .ui-id-nav li.ui-id-active {
   margin-bottom: -1px;
   padding-bottom: 1px;
 }
 
-.ui-id- .ui-id-nav li.ui-id-active a, .ui-id- .ui-id-nav li.ui-state-disabled a, .ui-id- .ui-id-nav li.ui-id-loading a {
+.ui-id .ui-id-nav li.ui-id-active a, .ui-id .ui-id-nav li.ui-state-disabled a, .ui-id .ui-id-nav li.ui-id-loading a {
   cursor: text;
 }
 
-.ui-id- .ui-id-nav li a, .ui-id-collapsible .ui-id-nav li.ui-id-active a {
+.ui-id .ui-id-nav li a, .ui-id-collapsible .ui-id-nav li.ui-id-active a {
   cursor: pointer;
 }
 
-.ui-id- .ui-id-panel {
+.ui-id .ui-id-panel {
   display: block;
   /*border-width:0;*/
   padding: 1em 1.4em;
