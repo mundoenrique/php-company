@@ -133,8 +133,11 @@ $('#lotes-2').on('click','#select-allA', function() {
 			var ceo_cook = decodeURIComponent(
 				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 			);
-      $.post(baseURL+isoPais+'/lotes/preliminar',{'data-lotes':js_var.loteA, 'data-pass':pass,'data-tipoOS':osTipo, ceo_name: ceo_cook})
-      .done(function(data){
+			var dataRequest = JSON.stringify({'data_lotes':js_var.loteA, 'data_pass':pass,'data_tipoOS':osTipo});
+			dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
+      $.post(baseURL+isoPais+'/lotes/preliminar',{request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)})
+      .done(function(response){
+				var data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
 				var code = data.code, title = data.title, msg = data.msg, dataCalc = data.data;
 				$('#loading').dialog('destroy');
 				if(code === 0) {
