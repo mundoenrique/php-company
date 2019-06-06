@@ -248,8 +248,8 @@ class Dashboard extends CI_Controller {
 			$this->session->sess_destroy();
 			redirect($urlCountry.'/login');
 		}elseif($this->input->is_ajax_request()){
-			log_message('info','ajax call');
-			$this->output->set_content_type('application/json')->set_output(json_encode(array('ERROR' => '-29' )));
+			$response = $this->cryptography->encrypt(['ERROR' => '-29']);
+			$this->output->set_content_type('application/json')->set_output(json_encode($response));
 		}
 		else{
 			redirect($urlCountry.'/login');
@@ -384,56 +384,65 @@ class Dashboard extends CI_Controller {
 					)
 				);
 				$llamada = $dataRequest->llamada;
+				$accodgrupoe = $dataRequest->data_accodgrupoe;
 				$acrifPost = $dataRequest->data_acrif;
 				$acnomciaPost = $dataRequest->data_acnomcia;
 				$acrazonsocialPost = $dataRequest->data_acrazonsocial;
 				$acdescPost = $dataRequest->data_acdesc;
 				$accodciaPost = $dataRequest->data_accodcia;
-				$accodgrupoe = $dataRequest->data_accodgrupoe;
 
-				$_POST['data-acrif'] = $acrifPost;
-				$_POST['data-acnomcia'] = $acnomciaPost;
-				$_POST['data-acrazonsocial'] =$acrazonsocialPost;
-				$_POST['data-accodcia'] = $acdescPost;
+				$_POST['group'] = $accodgrupoe;
+				$_POST['fiscal-inf'] = $acrifPost;
+				$_POST['name'] = $acnomciaPost;
+				$_POST['business-name'] = $acrazonsocialPost;
+				$_POST['description'] = $acdescPost;
+				$_POST['code'] = $accodciaPost;
 
-				if($llamada=='soloEmpresa'){
+				$this->form_validation->set_error_delimiters('', '---');
+				$result = $this->form_validation->run('enterprise');
+				log_message('DEBUG', 'NOVO VALIDATION FORM enterprise: '.json_encode($result));
+				$respuesta = 0;
 
-					if ($this->form_validation->run() == FALSE)
-					{
-						$respuesta=0;
-					}
-					else
-					{
-						$newdata = array(
-							'acrifS'=>$acrifPost,
-							'acnomciaS'=>$acnomciaPost,
-							'acrazonsocialS'=>$acrazonsocialPost,
-							'acdescS'=>$acdescPost,
-							'accodciaS'=>$accodciaPost,
-							'accodgrupoeS'=> $accodgrupoe,
-							'idProductoS'=>" ",
-							'nombreProductoS' =>" ",
-							'marcaProductoS' =>" "
-						);
-						$this->session->set_userdata($newdata);
+				unset(
+					$_POST['group'],
+					$_POST['fiscal-inf'],
+					$_POST['name'],
+					$_POST['business-name'],
+					$_POST['description'],
+					$_POST['code']
+				);
 
-						$respuesta=1;
-					}
+				if($llamada=='soloEmpresa' && $result) {
 
-				}elseif($llamada=='productos'){
+					$newdata = array(
+						'acrifS'=>$acrifPost,
+						'acnomciaS'=>$acnomciaPost,
+						'acrazonsocialS'=>$acrazonsocialPost,
+						'acdescS'=>$acdescPost,
+						'accodciaS'=>$accodciaPost,
+						'accodgrupoeS'=> $accodgrupoe,
+						'idProductoS'=>" ",
+						'nombreProductoS' =>" ",
+						'marcaProductoS' =>" "
+					);
+					$this->session->set_userdata($newdata);
+
+					$respuesta=1;
+
+				} elseif ($llamada=='productos' && $result) {
+					$this->form_validation->reset_validation();
 					$idProductoPost = $dataRequest->data_idproducto;
 					$nomProduc = $dataRequest->data_nomProd;
 					$marcProduc = $dataRequest->data_marcProd;
 
-					$_POST['data-idproducto'] = $idProductoPost;
-					//$this->form_validation->set_rules('data-idproducto', 'idproducto',  'required');
+					$_POST['idProductoPost'] = $idProductoPost;
+					$_POST['nomProduc'] = $nomProduc;
+					$_POST['marcProduc'] = $marcProduc;
 
-					if ($this->form_validation->run() == FALSE)
-					{
-						$respuesta=0;
-					}
-					else
-					{
+					$result = $this->form_validation->run('products');
+					log_message('DEBUG', 'NOVO VALIDATION FORM products: '.json_encode($result));
+
+					if($result) {
 						$newdata = array(
 							'acrifS'=>$acrifPost,
 							'acnomciaS'=>$acnomciaPost,
@@ -447,17 +456,19 @@ class Dashboard extends CI_Controller {
 						);
 						$this->session->set_userdata($newdata);
 						$respuesta=1;
+					} else {
+						log_message('DEBUG', 'NOVO VALIDATION ERRORS: '.json_encode(validation_errors()));
 					}
+				} else {
+					log_message('DEBUG', 'NOVO VALIDATION ERRORS: '.json_encode(validation_errors()));
 				}
-			}else{
-				$respuesta=0;
 			}
 			$response = $this->cryptography->encrypt($respuesta);
 			$this->output->set_content_type('application/json')->set_output(json_encode($response,JSON_UNESCAPED_UNICODE));
-		}elseif($paisS!=$urlCountry && $paisS!=""){
+		} elseif($paisS!=$urlCountry && $paisS!="") {
 			$this->session->sess_destroy();
 			redirect($urlCountry.'/login');
-		}else{
+		} else {
 			redirect($urlCountry.'/login');
 		}
 	}
@@ -483,16 +494,26 @@ class Dashboard extends CI_Controller {
 		$paisS = $this->session->userdata('pais');
 
 		if($paisS==$urlCountry && $logged_in){
-			$acdescPost = $this->input->post('data-acdesc');
 			if($this->input->post()){
 
+				$acdescPost = $this->input->post('data-acdesc');
 				$acrifPost = $this->input->post('data-acrif');
 				$acnomciaPost = $this->input->post('data-acnomcia');
 				$acrazonsocialPost = $this->input->post('data-acrazonsocial');
 				$acdescPost = $this->input->post('data-acdesc');
-
 				$accodciaPost = $this->input->post('data-accodcia');
 				$accodgrupoePost = $this->input->post('data-accodgrupoe');
+
+				$this->form_validation->set_error_delimiters('', '---');
+				$result = $this->form_validation->run('dash-products');
+				log_message('DEBUG', 'NOVO VALIDATION FORM dash-products: '.json_encode($result));
+
+				if(!$result) {
+					log_message('DEBUG', 'NOVO VALIDATION ERRORS: '.json_encode(validation_errors()));
+					redirect(base_url($urlCountry.'/dashboard'), 'location');
+					exit();
+				}
+
 				$newdata = array(
 					'acrifS'=>$acrifPost,
 					'acnomciaS'=>$acnomciaPost,
@@ -599,6 +620,16 @@ class Dashboard extends CI_Controller {
 				$idProductoPost = $this->input->post('data-idproducto');
 				$nombreProductoPost = $this->input->post('data-nombreProducto');
 				$marcaProductoPost = $this->input->post('data-marcaProducto');
+
+				$this->form_validation->set_error_delimiters('', '---');
+				$result = $this->form_validation->run('products-detail');
+				log_message('DEBUG', 'NOVO VALIDATION FORM products-detail: '.json_encode($result));
+
+				if(!$result) {
+					log_message('DEBUG', 'NOVO VALIDATION ERRORS: '.json_encode(validation_errors()));
+					redirect(base_url($urlCountry.'/dashboard/productos'), 'location');
+					exit();
+				}
 
 				$newdata = array(
 					'idProductoS'=>$idProductoPost,
@@ -731,11 +762,9 @@ class Dashboard extends CI_Controller {
 		$data = json_encode($data);
 		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
 		$jsonResponse = np_Hoplite_Decrypt($response, 'callWSListaEmpresas');
-		log_message('INFO', 'RESPONSE LISTA DE EMPRESAS===>>>>'. $jsonResponse);
 		$response = json_decode($jsonResponse);
 
 		if($response){
-			log_message('info','dashb_empr '.$response->rc);
 			if($response->rc==0){
 				return $response;
 			}else{
@@ -759,7 +788,6 @@ class Dashboard extends CI_Controller {
 				return $codigoError;
 			}
 		}else{
-			log_message('info','dashb_empr NO WS');
 			return $codigoError = array('ERROR' => lang('ERROR_GENERICO_USER') );
 		}
 

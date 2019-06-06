@@ -499,37 +499,7 @@ function paginar(){
         }); //Fin post
 
 
-} //Fin paginar
-
-
-/*
-function paginado(paginas, filtro){
-
-  $('#paginado-dash').paginate({
-        count: paginas,
-        display: dash_var.cantEmp,
-        start: dash_var.pgActual,
-        border: false,
-        text_color: '#79B5E3',
-        background_color: 'none',
-        text_hover_color: '#2573AF',
-        background_hover_color: 'none',
-        images: false,
-            onChange: function(page){
-           $(".isotope-item").show();
-             // dash_var.p=true;
-              $('#listCompanies').find('.style-companies-item-activa').removeClass('style-companies-item-activa');
-              $("span#more-info").fadeOut("fast");
-              $(".isotope-item").css('z-index','2');
-
-              $container.isotope( { filter: filtro+page } );
-              $(".isotope-hidden").hide();
-            }
-        });
-
-}
-*/
-    /***********************Paginacion inicio***********************/
+} //Fin paginar    /***********************Paginacion inicio***********************/
     function paginacion(total, filtro){
         var texHtml="";
         $("#list_pagination").html("");

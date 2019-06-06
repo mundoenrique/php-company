@@ -321,7 +321,7 @@ class Novo_User_Model extends NOVO_Model {
 		log_message('DEBUG', $logMessage);
 
 		$this->response->title = lang('SYSTEM_NAME');
-		if($result["score"] <= 0.5) {
+		if($result["score"] <= 0) {
 
 			$this->response->code = 1;
 			$this->response->icon = 'ui-icon-closethick';
