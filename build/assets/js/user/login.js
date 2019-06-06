@@ -22,7 +22,7 @@ $(function() {
 				grecaptcha
 				.execute('6Lejt6MUAAAAANd7KndpsZ2mRSQXuYHncIxFJDYf', {action: 'login'})
 				.then(function(token) {
-					validateCaptcha(token,user,text);
+					validateCaptcha(token, user, text);
 				});
 			});
 		} else {
@@ -53,20 +53,26 @@ function validateCaptcha(token,user,text)
 		user: user.user,
 		token: token
 	}
-    verb = "POST"; who = 'User'; where = 'validateCaptcha';
-    callNovoCore(verb, who, where, data, function(response) {
-        switch(response.code) {
-            case 0:
-                ingresar(user,text);
-                break;
-            case 1:
+	verb = "POST"; who = 'User'; where = 'validateCaptcha';
+	callNovoCore(verb, who, where, data, function(response) {
+		switch(response.code) {
+			case 0:
+				ingresar(user,text);
+				break;
+			case 1:
 				notiSystem(response.title, response.msg, response.icon, response.data);
-				$('#login-form input, #login-form button').attr('disabled', false);
-				$('#login-btn').html(text);
-                break;
-        }
+				break;
+		}
+		if(response.code !== 0) {
+			$('#login-form input, #login-form button').attr('disabled', false);
+			$('#login-btn').html(text);
 
-    })
+			setTimeout(function() {
+				$("#user_login").hideBalloon();
+			}, 2000);
+		}
+
+	})
 }
 
 function ingresar(user, text) {
@@ -101,7 +107,7 @@ function ingresar(user, text) {
 				}
 				break;
 		}
-		if(response.code !== 2) {
+		if(response.code !== 2 && response.code !== 0) {
 			$('#login-form input, #login-form button').attr('disabled', false);
 			$('#login-btn').html(text);
 			$('#user_pass').val('');
