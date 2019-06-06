@@ -865,8 +865,8 @@ class Users extends CI_Controller {
 						$jsRte = '../../../js/';
 						$thirdsJsRte = '../../../js/third_party/';
             $FooterCustomInsertJS=["jquery-3.4.0.min.js", "jquery-ui-1.12.1.min.js",
-							"jquery.balloon.min.js","jquery-md5.js","jquery.paginate.js",
-							"users/configuracion.js","header.js","jquery.fileupload.js","jquery.iframe-transport.js","aes.min.js","aes-json-format.min.js","aes.min.js","aes-json-format.min.js","routes.js",
+							"jquery.balloon.min.js","jquery-md5.js","jquery.paginate.js","aes.min.js","aes-json-format.min.js",
+							"users/configuracion.js","header.js","jquery.fileupload.js","jquery.iframe-transport.js","routes.js",
 							$thirdsJsRte."jquery.validate.min.js",$jsRte."validate-forms.js",$thirdsJsRte."additional-methods.min.js"];
             $FooterCustomJS="";
             $titlePage="Conexión Empresas Online-Configuración";
