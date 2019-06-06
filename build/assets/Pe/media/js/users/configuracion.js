@@ -941,7 +941,7 @@ $(function() {
 																var dataRequest = JSON.stringify({'data_rif':$("option:selected","#listaEmpresasSuc").attr("data-rif")});
 																dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
                                 dat.formData = {request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)};
-                                dat.submit().success( function (response, textStatus, jqXHR){
+                                dat.submit().done( function (response, textStatus, jqXHR){
 																	var result = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
 																	console.log(result)
                                     if(result){
