@@ -5833,11 +5833,11 @@ padding:5px 0px;
   width: 230px;
 }
 
-#ui-tabs-1 #wrapper {
+#ui-id-1 #wrapper {
   padding: 0px !important;
 }
 
-#ui-tabs-2 #wrapper {
+#ui-id-2 #wrapper {
   padding: 0px !important;
 }
 
@@ -6925,7 +6925,7 @@ button.green:hover {
   font-weight: bold;
 }
 
-#ui-tabs-3 #wrapper {
+#ui-id-3 #wrapper {
   padding: 0 !important;
 }
 
