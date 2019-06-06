@@ -169,12 +169,12 @@ $(function(){
 				fecha_expira = fecha_expira[0] + fecha_expira[1].substr(2);
 
 			var arrData = {
-				'data-cant' : $('#cant_tarjetas').val(),
-				'data-monto' : $('#monto').val(),
-				'data-lembozo1' : $('#embozo_1').val(),
-				'data-lembozo2' : $('#embozo_2').val(),
-				'data-codsucursal' : $('#sucursal').val(),
-				'data-fechaexp' : fecha_expira
+				'data_cant' : $('#cant_tarjetas').val(),
+				'data_monto' : $('#monto').val(),
+				'data_lembozo1' : $('#embozo_1').val(),
+				'data_lembozo2' : $('#embozo_2').val(),
+				'data_codsucursal' : $('#sucursal').val(),
+				'data_fechaexp' : fecha_expira
 			};
 
 			var ceo_cook = decodeURIComponent(
