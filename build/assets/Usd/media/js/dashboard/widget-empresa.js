@@ -53,7 +53,7 @@ var widget_var = {
  		widget_var.acdesc = $('option:selected', this).attr('acdesc');
 		widget_var.accodcia = $('option:selected', this).attr('accodcia');
 		widget_var.accodgrupoe = $('option:selected', this).attr('accodgrupoe');
-
+		if (widget_var.acrif!=0) {
 		$('#productosS').empty();
 		$("#productosS").append('<option>Cargando...</option>');
 		$(this).attr('disabled',true);
@@ -81,9 +81,9 @@ var widget_var = {
   				if(data.ERROR=='-29'){
   				alert('Usuario actualmente desconectado'); location.reload();
   				}
-  			}
+  		}
 		});
-
+	}
 	});
 
 //--Fin Seleccionar empresa
