@@ -249,7 +249,7 @@ $(function(){
     var rif, nombre, accodcia, tipo;
 
 // CARGA DE LA INFORMACION DE LA EMPRESA SELECCIONADA
-    $('#ui-tabs-1').on('change','#listaEmpresas',function(){ //seleccionar una empresa
+    $('#ui-id-1').on('change','#listaEmpresas',function(){ //seleccionar una empresa
         if ($('option:selected', this).attr('data-accodcia')==undefined){
             $("#config-empresas #campos-config").addClass('elem-hidden');
             return;
@@ -282,7 +282,7 @@ $(function(){
 						data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 
             $(".ui-dialog-content").dialog().dialog("destroy");
-            $('#ui-tabs-1 #listaEmpresas').removeAttr('disabled');
+            $('#ui-id-1 #listaEmpresas').removeAttr('disabled');
             if(!data.ERROR){
                 $("#config-empresas #campos-config").removeClass('elem-hidden');
 
@@ -560,11 +560,11 @@ $(function(){
 
 //CONFIGURACION SUCURSALES
     var datos;
-    $("#ui-tabs-2").on('click',"#archivo",function () {
+    $("#ui-id-2").on('click',"#archivo",function () {
         $("#userfile").trigger('click');
     });
 
-    $('#ui-tabs-2').on("click","#btn-new-suc",function(){
+    $('#ui-id-2').on("click","#btn-new-suc",function(){
         $.each($(".error"), function(){
             $(this).removeClass("error");
         });
@@ -585,7 +585,7 @@ $(function(){
         $("#suc_cod").removeAttr("disabled");
     });
 
-    $('#ui-tabs-2').on('change','#listaEmpresasSuc',function(){
+    $('#ui-id-2').on('change','#listaEmpresasSuc',function(){
         $.each($(".error"), function(){
             $(this).removeClass("error");
         });
@@ -638,19 +638,19 @@ $(function(){
 
     });
 
-    $('#ui-tabs-2').on('change','#suc_pais',function(){
+    $('#ui-id-2').on('change','#suc_pais',function(){
         $.each(datos.paisTo.listaEstados, function(listaPos, listaItem){
             $('#suc_estado').append('<option value="'+listaItem.codEstado+'">'+listaItem.estados+'</option>');
         });
     });
 
-    $('#ui-tabs-2').on('change','#pais',function(){
+    $('#ui-id-2').on('change','#pais',function(){
         $.each(datos.paisTo.listaEstados, function(listaPos, listaItem){
             $('#suc_estado').append('<option value="'+listaItem.codEstado+'">'+listaItem.estados+'</option>');
         });
     });
 
-    $('#ui-tabs-2').on('change','#suc_estado',function(){
+    $('#ui-id-2').on('change','#suc_estado',function(){
 
         ciudades = datos.paisTo.listaEstados.filter(function(dat){ return dat.codEstado==$("option:selected",'#suc_estado').val() });
         $('#suc_ciudad').empty();
@@ -710,7 +710,7 @@ $(function(){
                     $("#suc_contacto").val("");
                     $("#suc_area").val("");
                     $("#tbody-datos-general").empty();
-                    $("#ui-tabs-2 #campos-config").hide();
+                    $("#ui-id-2 #campos-config").hide();
                     consultarSucursales(totalpaginas);
                     $("<div>Proceso exitoso.<h5>Listando sucursales...</h5></div>").dialog({title:"Agregar sucursal", modal:true, close:function(){$(this).dialog('destroy')}})
 
@@ -879,7 +879,7 @@ $(function(){
             if(data.rc=="0"){
                 totalpgs=data.totalPaginas;
 
-                $("#ui-tabs-2 #campos-config").show();
+                $("#ui-id-2 #campos-config").show();
                 $("#tabla-datos-general").show();
 
                 if($("#tabla-datos-general").hasClass('dataTable')){
@@ -954,7 +954,7 @@ $(function(){
     }
 
 		var ceo_cook;
-    $("#ui-tabs-2").on("click", "#userfile",function(){
+    $("#ui-id-2").on("click", "#userfile",function(){
 			var dat;
         $(this).fileupload({
             type: 'post',
