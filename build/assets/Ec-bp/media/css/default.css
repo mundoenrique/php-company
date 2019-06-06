@@ -1627,6 +1627,14 @@ select.ui-datepicker-year{
 	float: left;
 }
 
+.ui-dialog-buttonpane button{
+
+	padding: 5px;
+}
+.ui-dialog-buttonpane:hover button{
+	background: #fcf6d1;
+
+}
 .ui-datepicker-multi .ui-datepicker-group table {
 	width: 95%;
 	margin: 0 auto .4em;
