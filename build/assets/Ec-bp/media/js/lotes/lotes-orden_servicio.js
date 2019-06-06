@@ -80,7 +80,7 @@ $(function () {
 							document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 						);
 						$('#viewAutorizar').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'" />');
-						notificacion("Confirmar cálculo orden de servicio", "<h3>Proceso exitoso</h3><h5>No tiene permitido gestionar ordenes de servicio.</h5>", "#viewAutorizar");
+						notificacion("Confirmar cálculo orden de servicio", "<h3>Proceso exitoso</h3>", "#viewAutorizar");
 					}
 
 				} else {

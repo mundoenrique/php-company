@@ -95,7 +95,7 @@
 			</div>
 			<div id="batchs-last">
 				<span id="mensajeError" style="float:left; display:none; color:red;"></span>
-				<button id='recargar' disabled><?= "Recargar" ?></button>
+				<button id='recargar' disabled><?= "Transferir" ?></button>
 			</div>
 		</div>
 		<div id="top-batchs">
