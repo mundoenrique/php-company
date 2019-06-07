@@ -36,13 +36,10 @@ $(function() { // Document ready
 											ceo_cook = decodeURIComponent(
 												document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 											);
-
 											var paquete = {
 												data_tipoLote: $("#tipoLote").val(),
 												data_formatolote: $("#tipoLote option:selected").attr('rel')
 											};
-
-
 											var dataRequest = JSON.stringify(paquete)
 											dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
 
