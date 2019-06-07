@@ -95,18 +95,8 @@ class Reportes extends CI_Controller {
 			$moduloAct = np_hoplite_existeLink($menuP,"REPCON");
 
 			if($paisS==$urlCountry && $logged_in && $moduloAct!==false){
-				$this->form_validation->set_rules('empresa', 'Empresa',  'trim|xss_clean');
-				$this->form_validation->set_rules('fechaInicial', 'Fecha Inicio',  'trim|xss_clean');
-				$this->form_validation->set_rules('fechaFin', 'Fecha Fin',  'trim|xss_clean');
-				$this->form_validation->set_rules('producto', 'Fecha Fin',  'trim|xss_clean');
 					//Validate Request For Ajax
 					if($this->input->is_ajax_request()){
-							if ($this->form_validation->run() == FALSE)
-							{
-									echo "FORM NO VALIDO";
-							}
-							else
-							{
 								$dataRequest = json_decode(
 									$this->security->xss_clean(
 										strip_tags(
@@ -118,22 +108,40 @@ class Reportes extends CI_Controller {
 								)
 							);
 
-							$paginaActual= $dataRequest->filtro_busq->paginaActual;
-							$empresa= $dataRequest->filtro_busq->empresa;
-							$fechaInicial= $dataRequest->filtro_busq->fechaInicial;
-							$fechaFin = $dataRequest->filtro_busq->fechaFin;
-							$filtroFecha = $dataRequest->filtro_busq->filtroFecha;
-							$tipoNota= $dataRequest->filtro_busq->tipoNota;
-							$_POST['paginaActual'] = $paginaActual;
-							$_POST['empresa'] = $empresa;
-							$_POST['fechaInicial'] = $fechaInicial;
-							$_POST['fechaFin'] = $fechaFin;
+							$_POST['paginaActual'] = $dataRequest->paginaActual;
+							$_POST['empresa'] = $dataRequest->empresa;
+							$_POST['fechaInicial'] = $dataRequest->fechaInicial;
+							$_POST['fechaFin'] = $dataRequest->fechaFin;
 
-							$username = $this->session->userdata('userName');
-							$token = $this->session->userdata('token');
-							$pruebaTabla = $this->callWSCuentaConcentradora($urlCountry,$token,$username,$empresa,$fechaInicial,$fechaFin,$paginaActual,$filtroFecha,$tipoNota);
-							$pruebaTabla = $this->cryptography->encrypt($pruebaTabla);
-							$this->output->set_content_type('application/json')->set_output(json_encode($pruebaTabla));
+							$this->form_validation->set_rules('empresa', 'Empresa', 'trim|xss_clean|required');
+					$this->form_validation->set_rules('fechaInicial', 'Fecha Inicio', 'trim|xss_clean|regex_match[/^[0-9\/]+$/]');
+							$this->form_validation->set_rules('fechaFin', 'Fecha Fin', 'trim|xss_clean|regex_match[/^[0-9\/]+$/]');
+							$this->form_validation->set_rules('paginaActual', 'paginaActual', 'trim|xss_clean|required');
+
+							$this->form_validation->set_error_delimiters('', '---');
+							if ($this->form_validation->run() == FALSE)
+							{
+								$responseError = 'La combinacion de caracteres es invalido';
+								$responseError = $this->cryptography->encrypt($responseError);
+								$this->output->set_content_type('application/json')->set_output(json_encode($responseError));
+								return $responseError;
+								log_message('DEBUG', 'NOVO VALIDATION ERRORS: '.json_encode(validation_errors()));
+								//echo "FORM NO VALIDO";
+							}
+							else
+							{
+								$paginaActual= $dataRequest->paginaActual;
+								$empresa= $dataRequest->empresa;
+								$fechaInicial= $dataRequest->fechaInicial;
+								$fechaFin = $dataRequest->fechaFin;
+								$filtroFecha = $dataRequest->filtroFecha;
+								$tipoNota= $dataRequest->tipoNota;
+								$username = $this->session->userdata('userName');
+								$token = $this->session->userdata('token');
+								unset($_POST['paginaActual'], $_POST['empresa'], $_POST['fechaInicial'], $_POST['fechaFin']);
+								$pruebaTabla = $this->callWSCuentaConcentradora($urlCountry,$token,$username,$empresa,$fechaInicial,$fechaFin,$paginaActual,$filtroFecha,$tipoNota);
+								$pruebaTabla = $this->cryptography->encrypt($pruebaTabla);
+								$this->output->set_content_type('application/json')->set_output(json_encode($pruebaTabla));
 							}
 					}
 			}else{
@@ -513,12 +521,6 @@ class Reportes extends CI_Controller {
 			$fechaFin = $dataRequest->filtro_busq->fechaFin;
 			$filtroFecha = $dataRequest->filtro_busq->filtroFecha;
 			$nomEmpresa = isset($dataRequest->filtro_busq->nomEmpresa)?$dataRequest->filtro_busq->nomEmpresa :'';
-					// $paginaActual=$this->input->post('paginaActual');
-					// $empresa = $this->input->post('empresa');
-					// $fechaInicial = $this->input->post('fechaInicial');
-					// $fechaFin = $this->input->post('fechaFin');
-					// $filtroFecha = $this->input->post('filtroFecha');
-					// $nomEmpresa = $this->input->post('nomEmpresa');
 
 					$data = array(
 							"pais"=>$urlCountry,
@@ -879,41 +881,44 @@ class Reportes extends CI_Controller {
 			$moduloAct = np_hoplite_existeLink($menuP,"REPTAR");
 
 			if($paisS==$urlCountry && $logged_in && $moduloAct!==false){
-				$this->form_validation->set_rules('empresa', 'Empresa',  'trim|xss_clean');
-				$this->form_validation->set_rules('fechaInicial', 'Fecha Inicio',  'trim|xss_clean');
-				$this->form_validation->set_rules('fechaFin', 'Fecha Fin',  'trim|xss_clean');
+
 					//Validate Request For Ajax
 					if($this->input->is_ajax_request()){
+						$dataRequest = json_decode(
+							$this->security->xss_clean(
+								strip_tags(
+									$this->cryptography->decrypt(
+										base64_decode($this->input->get_post('plot')),
+										utf8_encode($this->input->get_post('request'))
+									)
+								)
+							)
+						);
+						$_POST['empresa'] = $dataRequest->filtro_busq->empresa;
+						$_POST['fechaInicial'] = $dataRequest->filtro_busq->fechaInicial;
+						$_POST['fechaFin']  = $dataRequest->filtro_busq->fechaFin;
+						$this->form_validation->set_rules('empresa', 'Empresa', 'trim|xss_clean|required');
+						$this->form_validation->set_rules('fechaInicial', 'Fecha Inicio', 'trim|xss_clean|required|regex_match[/^[0-9\/]+$/]');
+						$this->form_validation->set_rules('fechaFin', 'Fecha Fin', 'trim|xss_clean|required|regex_match[/^[0-9\/]+$/]');
 							if ($this->form_validation->run() == FALSE)
 							{
-									echo "FORM NO VALIDO";
+								$responseError = 'La combinacion de caracteres es invalido';
+								$responseError = $this->cryptography->encrypt($responseError);
+								$this->output->set_content_type('application/json')->set_output(json_encode($responseError));
+								return $responseError;
 							}
 							else
 							{
-								$dataRequest = json_decode(
-									$this->security->xss_clean(
-										strip_tags(
-											$this->cryptography->decrypt(
-												base64_decode($this->input->get_post('plot')),
-												utf8_encode($this->input->get_post('request'))
-											)
-										)
-									)
-								);
 								$empresa = $dataRequest->filtro_busq->empresa;
 								$fechaInicial = $dataRequest->filtro_busq->fechaInicial;
 								$fechaFin = $dataRequest->filtro_busq->fechaFin;
-
-								$_POST['empresa'] = $empresa;
-								$_POST['fechaInicial'] = $fechaInicial;
-								$_POST['fechaFin']  = $fechaFin;
 								$tipoConsulta = $dataRequest->filtro_busq->radioGeneral;
 								$username = $this->session->userdata('userName');
 								$token = $this->session->userdata('token');
-
-									$pruebaTabla = $this->callWSTarjetasEmitidas($urlCountry,$token,$username,$empresa,$fechaInicial,$fechaFin,$tipoConsulta);
-									$pruebaTabla = $this->cryptography->encrypt($pruebaTabla);
-									$this->output->set_content_type('application/json')->set_output(json_encode($pruebaTabla));
+								unset($_POST['empresa'], $_POST['fechaInicial'], $_POST['fechaFin']);
+								$pruebaTabla = $this->callWSTarjetasEmitidas($urlCountry,$token,$username,$empresa,$fechaInicial,$fechaFin,$tipoConsulta);
+								$pruebaTabla = $this->cryptography->encrypt($pruebaTabla);
+								$this->output->set_content_type('application/json')->set_output(json_encode($pruebaTabla));
 							}
 					}
 			}else{
@@ -1272,41 +1277,45 @@ class Reportes extends CI_Controller {
 			$moduloAct = np_hoplite_existeLink($menuP,"REPSAL");
 
 			if($paisS==$urlCountry && $logged_in && $moduloAct!==false){
-				$this->form_validation->set_rules('empresa', 'Empresa',  'trim|xss_clean');
-				$this->form_validation->set_rules('cedula', 'cedula',  'trim|xss_clean');
-				$this->form_validation->set_rules('producto', 'producto',  'trim|xss_clean');
-							//Validate Request For Ajax
+											//Validate Request For Ajax
 					if($this->input->is_ajax_request()){
+						$dataRequest = json_decode(
+							$this->security->xss_clean(
+								strip_tags(
+									$this->cryptography->decrypt(
+										base64_decode($this->input->get_post('plot')),
+										utf8_encode($this->input->get_post('request'))
+									)
+								)
+							)
+						);
+						$_POST['empresa'] = $dataRequest->empresa;
+						$_POST['cedula'] = $dataRequest->cedula;
+						$_POST['producto'] = $dataRequest->producto;
+						$this->form_validation->set_rules('empresa', 'Empresa',  'trim|xss_clean|required');
+						$this->form_validation->set_rules('cedula', 'cedula',  'trim|xss_clean|regex_match[/^[0-9]+$/]');
+						$this->form_validation->set_rules('producto', 'producto',  'trim|xss_clean|required');
+
 							if ($this->form_validation->run() == FALSE)
 							{
-									echo "FORM NO VALIDO";
+								$responseError = 'La combinacion de caracteres es invalido';
+								$responseError = $this->cryptography->encrypt($responseError);
+								$this->output->set_content_type('application/json')->set_output(json_encode($responseError));
+								return $responseError;
+
 							}
 							else
 							{
-									$dataRequest = json_decode(
-										$this->security->xss_clean(
-											strip_tags(
-												$this->cryptography->decrypt(
-													base64_decode($this->input->get_post('plot')),
-													utf8_encode($this->input->get_post('request'))
-												)
-											)
-										)
-									);
+
 									$paginaActual = $dataRequest->paginaActual;
 									$empresa = $dataRequest->empresa;
 									$cedula = $dataRequest->cedula;
 									$producto = $dataRequest->producto;
 									$paginar = $dataRequest->paginar;
 									$tamPg = $dataRequest->tamPg;
-
-									$_POST['empresa'] = $empresa;
-									$_POST['cedula'] = $cedula;
-									$_POST['producto'] = $producto;
-
 									$username = $this->session->userdata('userName');
 									$token = $this->session->userdata('token');
-
+									unset($_POST['empresa'], $_POST['cedula'], $_POST['producto']);
 									$pruebaTabla = $this->callWSSaldosAmanecidos($urlCountry,$token,$username,$empresa,$cedula,$producto,$paginaActual,$paginar,$tamPg);
 									$response = $this->cryptography->encrypt($pruebaTabla);
 									$this->output->set_content_type('application/json')->set_output(json_encode($response));
@@ -1314,7 +1323,9 @@ class Reportes extends CI_Controller {
 					}
 			}else{
 				$this->session->sess_destroy();
-				$this->output->set_content_type('application/json')->set_output(json_encode( array('mensaje' => lang('ERROR_(-29)'), "rc"=> "-29")));
+				$responseError = ['ERROR' => lang('ERROR_(-29)'), "rc"=> "-29"];
+				$responseError = $this->cryptography->encrypt($responseError);
+				$this->output->set_content_type('application/json')->set_output(json_encode($responseError));
 			}
 
 	}
@@ -1563,36 +1574,39 @@ class Reportes extends CI_Controller {
 			$moduloAct = np_hoplite_existeLink($menuP,"TEBTHA");
 
 			if($paisS==$urlCountry && $logged_in && $moduloAct!==false){
-				$this->form_validation->set_rules('empresa', 'Empresa',  'trim|xss_clean');
-				$this->form_validation->set_rules('lotes_producto', 'Tarjeta',  'trim|xss_clean');
+
 					//Validate Request For Ajax
 					if($this->input->is_ajax_request()){
+						$dataRequest = json_decode(
+							$this->security->xss_clean(
+								strip_tags(
+									$this->cryptography->decrypt(
+										base64_decode($this->input->get_post('plot')),
+										utf8_encode($this->input->get_post('request'))
+									)
+								)
+							)
+						);
+						$_POST['paginaActual'] = $dataRequest->filtro_busq->paginaActual;
+						$_POST['lotes_producto'] = $dataRequest->filtro_busq->lotes_producto;
+						$this->form_validation->set_rules('empresa', 'Empresa',  'trim|xss_clean|required');
+						$this->form_validation->set_rules('lotes_producto', 'Tarjeta',  'trim|xss_clean|required');
 							if ($this->form_validation->run() == FALSE)
 							{
-									echo "FORM NO VALIDO";
+								$responseError = 'La combinacion de caracteres es invalido';
+								$responseError = $this->cryptography->encrypt($responseError);
+								$this->output->set_content_type('application/json')->set_output(json_encode($responseError));
+								return $responseError;
 							}
 							else
 							{
-								$dataRequest = json_decode(
-									$this->security->xss_clean(
-										strip_tags(
-											$this->cryptography->decrypt(
-												base64_decode($this->input->get_post('plot')),
-												utf8_encode($this->input->get_post('request'))
-											)
-										)
-									)
-								);
+
 									$paginaActual = $dataRequest->filtro_busq->paginaActual;
 									$loteproducto = $dataRequest->filtro_busq->lotes_producto;
 									$acrif = $dataRequest->filtro_busq->acrif;
-
-									$_POST['paginaActual'] = $paginaActual;
-									$_POST['lotes_producto'] = $loteproducto;
-
-
 									$username = $this->session->userdata('userName');
 									$token = $this->session->userdata('token');
+									unset($_POST['paginaActual'], $_POST['lotes_producto']);
 									$pruebaTabla = $this->callWSEstatusTarjetasHabientes($urlCountry,$token,$username,$acrif, $loteproducto, $paginaActual );
 									$pruebaTabla = $this->cryptography->encrypt($pruebaTabla);
 									$this->output->set_content_type('application/json')->set_output(json_encode($pruebaTabla));
@@ -1694,42 +1708,46 @@ class Reportes extends CI_Controller {
 			$moduloAct = np_hoplite_existeLink($menuP,"REPLOT");
 
 			if($paisS==$urlCountry && $logged_in && $moduloAct!==false){
-				$this->form_validation->set_rules('empresa', 'Empresa',  'trim|xss_clean');
-				$this->form_validation->set_rules('fechaInicial', 'Fecha Inicio',  'trim|xss_clean');
-				$this->form_validation->set_rules('fechaFin', 'Fecha Fin',  'trim|xss_clean');
-				$this->form_validation->set_rules('lotes_producto', 'Tarjeta',  'trim|xss_clean');
 
 					//Validate Request For Ajax
 					if($this->input->is_ajax_request()){
+						$dataRequest = json_decode(
+							$this->security->xss_clean(
+								strip_tags(
+									$this->cryptography->decrypt(
+										base64_decode($this->input->get_post('plot')),
+										utf8_encode($this->input->get_post('request'))
+									)
+								)
+							)
+						);
+							$_POST['empresa'] = $dataRequest->filtro_busq->empresa;
+							$_POST['fechaInicial'] = $dataRequest->filtro_busq->fechaInicial;
+							$_POST['fechaFin'] = $dataRequest->filtro_busq->fechaFin;
+							$_POST['lotes_producto'] = $dataRequest->filtro_busq->lotes_producto;
+							$this->form_validation->set_rules('empresa', 'Empresa',  'trim|xss_clean|required');
+							$this->form_validation->set_rules('fechaInicial', 'Fecha Inicio',  'trim|xss_clean|regex_match[/^[0-9\/]+$/]|required');
+							$this->form_validation->set_rules('fechaFin', 'Fecha Fin',  'trim|xss_clean|regex_match[/^[0-9\/]+$/]|required');
+							$this->form_validation->set_rules('lotes_producto', 'Tarjeta',  'trim|xss_clean|required');
+
 							if ($this->form_validation->run() == FALSE)
 							{
-									echo "FORM NO VALIDO";
+								$responseError = 'La combinacion de caracteres es invalido';
+								$responseError = $this->cryptography->encrypt($responseError);
+								$this->output->set_content_type('application/json')->set_output(json_encode($responseError));
+								return $responseError;
 							}
 							else
 							{
-								$dataRequest = json_decode(
-								$this->security->xss_clean(
-									strip_tags(
-										$this->cryptography->decrypt(
-											base64_decode($this->input->get_post('plot')),
-											utf8_encode($this->input->get_post('request'))
-										)
-									)
-								)
-							);
+
 							$paginaActual = $dataRequest->filtro_busq->paginaActual;
 							$empresa = $dataRequest->filtro_busq->empresa;
 							$fechaInicial = $dataRequest->filtro_busq->fechaInicial;
 							$fechaFin = $dataRequest->filtro_busq->fechaFin;
 							$loteproducto = $dataRequest->filtro_busq->lotes_producto;
-							$_POST['empresa'] = $empresa;
-							$_POST['fechaInicial'] = $fechaInicial;
-							$_POST['fechaFin'] = $fechaFin;
-							$_POST['lotes_producto'] = $loteproducto;
-
 							$username = $this->session->userdata('userName');
 							$token = $this->session->userdata('token');
-
+							unset($_POST['lotes_producto'], $_POST['empresa'], $_POST['fechaInicial'], $_POST['fechaFin']);
 							$pruebaTabla = $this->callWSEstatusLotes($urlCountry,$token,$username,$empresa,$fechaInicial,$fechaFin,$loteproducto);
 							$pruebaTabla = $this->cryptography->encrypt($pruebaTabla);
 							$this->output->set_content_type('application/json')->set_output(json_encode($pruebaTabla));
@@ -2579,39 +2597,44 @@ class Reportes extends CI_Controller {
 			$moduloAct = np_hoplite_existeLink($menuP,"REPPRO");
 
 			if($paisS==$urlCountry && $logged_in && $moduloAct!==false){
-				$this->form_validation->set_rules('paginaActual', 'paginaActual',  'trim|xss_clean');
-				$this->form_validation->set_rules('empresa', 'Empresa',  'trim|xss_clean');
-				$this->form_validation->set_rules('anio', 'anio',  'trim|xss_clean');
-				$this->form_validation->set_rules('mes', 'mes',  'trim|xss_clean');
+
 							//Validate Request For Ajax
 					if($this->input->is_ajax_request()){
+						$dataRequest = json_decode(
+							$this->security->xss_clean(
+								strip_tags(
+									$this->cryptography->decrypt(
+										base64_decode($this->input->get_post('plot')),
+										utf8_encode($this->input->get_post('request'))
+									)
+								)
+							)
+						);
+							$_POST['paginaActual'] =	$dataRequest->filtro_busq->paginaActual;
+							$_POST['empresa'] = $dataRequest->filtro_busq->empresa;
+							$_POST['anio'] = $dataRequest->filtro_busq->anio;
+							$_POST['mes'] =	$dataRequest->filtro_busq->mes;
+						$this->form_validation->set_rules('paginaActual', 'paginaActual',  'trim|xss_clean|required');
+						$this->form_validation->set_rules('empresa', 'Empresa',  'trim|xss_clean|required');
+						$this->form_validation->set_rules('anio', 'anio',  'trim|xss_clean|regex_match[/^[0-9\/]+$/]|required');
+						$this->form_validation->set_rules('mes', 'mes',  'trim|xss_clean|regex_match[/^[0-9\/]+$/]|required');
 							if ($this->form_validation->run() == FALSE)
 							{
-									echo "FORM NO VALIDO";
+								$responseError = 'La combinacion de caracteres es invalido';
+								$responseError = $this->cryptography->encrypt($responseError);
+								$this->output->set_content_type('application/json')->set_output(json_encode($responseError));
+								return $responseError;
 							}
 							else
 							{
-							$dataRequest = json_decode(
-								$this->security->xss_clean(
-									strip_tags(
-										$this->cryptography->decrypt(
-											base64_decode($this->input->get_post('plot')),
-											utf8_encode($this->input->get_post('request'))
-										)
-									)
-								)
-							);
-							$paginaActual = $dataRequest->filtro_busq->paginaActual;
-							$empresa = $dataRequest->filtro_busq->empresa;
-							$anio = $dataRequest->filtro_busq->anio;
-							$mes = $dataRequest->filtro_busq->mes;
-							$_POST['paginaActual'] =	$paginaActual;
-							$_POST['empresa'] = $empresa;
-							$_POST['anio'] = $anio;
-							$_POST['mes'] =	$mes;
-							$username = $this->session->userdata('userName');
-							$token = $this->session->userdata('token');
 
+									$paginaActual = $dataRequest->filtro_busq->paginaActual;
+									$empresa = $dataRequest->filtro_busq->empresa;
+									$anio = $dataRequest->filtro_busq->anio;
+									$mes = $dataRequest->filtro_busq->mes;
+									$username = $this->session->userdata('userName');
+									$token = $this->session->userdata('token');
+									unset($_POST['paginaActual'], $_POST['empresa'], $_POST['anio'], $_POST['mes']);
 									$pruebaTabla = $this->callWSRecargasRealizadas($urlCountry,$token,$username,$empresa,$mes,$anio,$paginaActual);
 									$pruebaTabla = $this->cryptography->encrypt($pruebaTabla);
 									$this->output->set_content_type('application/json')->set_output(json_encode($pruebaTabla));
@@ -2967,31 +2990,37 @@ class Reportes extends CI_Controller {
 			$moduloAct = np_hoplite_existeLink($menuP,"REPUSU");
 
 			if($paisS==$urlCountry && $logged_in && $moduloAct!==false){
-				$this->form_validation->set_rules('fech_ini', 'Desde',  'trim|xss_clean');
-				$this->form_validation->set_rules('fech_fin', 'Hasta',  'trim|xss_clean');
-					//Validate Request For Ajax
+									//Validate Request For Ajax
 					if($this->input->is_ajax_request()){
+						$dataRequest = json_decode(
+							$this->security->xss_clean(
+									strip_tags(
+											$this->cryptography->decrypt(
+													base64_decode($this->input->get_post('plot')),
+													utf8_encode($this->input->get_post('request'))
+											)
+									)
+							)
+						);
+						$_POST['fech_ini'] = $dataRequest->data_fechaIni;
+						$_POST['fech_fin'] = $dataRequest->data_fechaFin;
+						$this->form_validation->set_rules('fech_ini', 'Desde',  'trim|xss_clean|regex_match[/^[0-9\/]+$/]');
+						$this->form_validation->set_rules('fech_fin', 'Hasta',  'trim|xss_clean|regex_match[/^[0-9\/]+$/]');
+
 							if ($this->form_validation->run() == FALSE)
 							{
-									echo "FORM NO VALIDO";
+								$responseError = 'La combinacion de caracteres es invalido';
+								$responseError = $this->cryptography->encrypt($responseError);
+								$this->output->set_content_type('application/json')->set_output(json_encode($responseError));
+								return $responseError;
 							}
 							else
 							{
-									$dataRequest = json_decode(
-										$this->security->xss_clean(
-												strip_tags(
-														$this->cryptography->decrypt(
-																base64_decode($this->input->get_post('plot')),
-																utf8_encode($this->input->get_post('request'))
-														)
-												)
-										)
-									);
+
 									$fechaIni = $dataRequest->data_fechaIni;
 									$fechaFin = $dataRequest->data_fechaFin;
 									$acodcia = $dataRequest->data_acodcia;
-									$_POST['fech_ini'] = $fechaIni;
-									$_POST['fech_fin'] = $fechaFin;
+									unset($_POST['fech_ini'], $_POST['fech_fin']);
 									$response = $this->callWSActividadPorUsuario($urlCountry, $fechaIni, $fechaFin, $acodcia);
 									$response = $this->cryptography->encrypt($response);
 									$this->output->set_content_type('application/json')->set_output(json_encode($response));
@@ -3352,13 +3381,6 @@ class Reportes extends CI_Controller {
 	public function getgastosporcategorias($urlCountry){
 			np_hoplite_countryCheck($urlCountry);
 
-			$this->form_validation->set_rules('producto', 'producto',  'trim|xss_clean');
-			$this->form_validation->set_rules('empresa', 'empresa',  'trim|xss_clean');
-			$this->form_validation->set_rules('fechaIni', 'fechaIni',  'trim|xss_clean');
-			$this->form_validation->set_rules('fechaFin', 'fechaFin',  'trim|xss_clean');
-			$this->form_validation->set_rules('tipoConsulta', 'tipoConsulta',  'trim|xss_clean');
-			$this->form_validation->set_rules('cedula', 'cedula',  'trim|xss_clean');
-			$this->form_validation->set_rules('tarjeta', 'tarjeta',  'trim|xss_clean');
 
 			$logged_in = $this->session->userdata('logged_in');
 
@@ -3369,40 +3391,57 @@ class Reportes extends CI_Controller {
 			if($paisS==$urlCountry && $logged_in && $moduloAct!==false){
 					//Validate Request For Ajax
 					if($this->input->is_ajax_request()){
+						$dataRequest = json_decode(
+							$this->security->xss_clean(
+								strip_tags(
+									$this->cryptography->decrypt(
+										base64_decode($this->input->get_post('plot')),
+										utf8_encode($this->input->get_post('request'))
+									)
+								)
+							)
+						);
+						$_POST['producto'] = $dataRequest->producto;
+						$_POST['empresa'] =  $dataRequest->empresa;
+						$_POST['fechaIni'] = $dataRequest->fechaInicial;
+						$_POST['fechaFin'] =$dataRequest->fechaFin;
+						$_POST['tipoConsulta'] =  $dataRequest->tipoConsulta;
+						$_POST['cedula'] = $dataRequest->cedula;
+						$_POST['tarjeta'] = $dataRequest->tarjeta;
+						$this->form_validation->set_rules('producto', 'producto',  'trim|xss_clean|required');
+						$this->form_validation->set_rules('empresa', 'empresa',  'trim|xss_clean|required');
+						$this->form_validation->set_rules('fechaIni', 'fechaIni',  'trim|xss_clean|required|regex_match[/^[0-9\/]+$/]');
+						$this->form_validation->set_rules('fechaFin', 'fechaFin',  'trim|xss_clean|required|regex_match[/^[0-9\/]+$/]');
+						$this->form_validation->set_rules('tipoConsulta', 'tipoConsulta',  'trim|xss_clean|required');
+						$this->form_validation->set_rules('cedula', 'cedula',  'trim|xss_clean|required');
+						$this->form_validation->set_rules('tarjeta', 'tarjeta',  'trim|xss_clean|required|regex_match[/^[0-9]+$/]');
+
 							if ($this->form_validation->run() == FALSE)
 							{
-									echo "FORM NO VALIDO";
+								$responseError = 'La combinacion de caracteres es invalido';
+								$responseError = $this->cryptography->encrypt($responseError);
+								$this->output->set_content_type('application/json')->set_output(json_encode($responseError));
+								return $responseError;
 							}
 							else
 							{
-								$dataRequest = json_decode(
-									$this->security->xss_clean(
-										strip_tags(
-											$this->cryptography->decrypt(
-												base64_decode($this->input->get_post('plot')),
-												utf8_encode($this->input->get_post('request'))
-											)
-										)
-									)
-								);
 
-									//$producto=$dataRequest->producto;
 									$producto = (isset($dataRequest->producto))? $dataRequest->producto : "";
-									//$empresa = $dataRequest->empresa;
+
 									$empresa = (isset($dataRequest->empresa))? $dataRequest->empresa : "";
-									//$fechaIni = $dataRequest->fechaInicial;
+
 									$fechaIni = (isset($dataRequest->fechaInicial))? $dataRequest->fechaInicial : "";
-									//$fechaFin = $dataRequest->fechaFin;
+
 									$fechaFin = (isset($dataRequest->fechaFin))? $dataRequest->fechaFin : "";
-									//$tipoConsulta = $dataRequest->tipoConsulta;
+
 									$tipoConsulta = (isset($dataRequest->tipoConsulta))? $dataRequest->tipoConsulta : "";
-									//$cedula = $dataRequest->cedula;
+
 									$cedula = (isset($dataRequest->cedula))? $dataRequest->cedula : "";
-									//$tarjeta= $dataRequest->tarjeta;
+
 									$tarjeta = (isset($dataRequest->tarjeta))? $dataRequest->tarjeta : "";
 									$username = $this->session->userdata('userName');
 									$token = $this->session->userdata('token');
-
+									unset($_POST['producto'], $_POST['empresa'], $_POST['fechaIni'], $_POST['fechaFin'],$_POST['tipoConsulta'], $_POST['cedula'], $_POST['tarjeta']);
 									$pruebaTabla = $this->callWSGastosPorCategorias($urlCountry,$token,$username,$empresa,$tarjeta,$cedula,$fechaIni,$fechaFin,$producto,$tipoConsulta);
 									$response = $this->cryptography->encrypt($pruebaTabla);
 									$this->output->set_content_type('application/json')->set_output(json_encode($response,JSON_UNESCAPED_UNICODE));
@@ -3768,29 +3807,40 @@ class Reportes extends CI_Controller {
 			$moduloAct = np_hoplite_existeLink($menuP,"REPEDO");
 
 			if($paisS==$urlCountry && $logged_in && $moduloAct!==false){
-				$this->form_validation->set_rules('paginaActual', 'paginaActual',  'trim|xss_clean');
-				$this->form_validation->set_rules('empresa', 'Empresa',  'trim|xss_clean');
-				$this->form_validation->set_rules('anio', 'anio',  'trim|xss_clean');
-				$this->form_validation->set_rules('mes', 'mes',  'trim|xss_clean');
+
 
 					//Validate Request For Ajax
 					if($this->input->is_ajax_request()){
+						$dataRequest = json_decode(
+							$this->security->xss_clean(
+								strip_tags(
+									$this->cryptography->decrypt(
+										base64_decode($this->input->get_post('plot')),
+										utf8_encode($this->input->get_post('request'))
+									)
+								)
+							)
+						);
+						$_POST['paginaActual'] = $dataRequest->filtro_busq->paginaActual;
+						$_POST['empresa'] = $dataRequest->filtro_busq->empresa;
+						$_POST['cedula'] = $dataRequest->filtro_busq->cedula;
+						$_POST['fechaIni'] = $dataRequest->fechaInicial;
+						$_POST['fechaFin'] =$dataRequest->fechaFin;
+						$this->form_validation->set_rules('paginaActual', 'paginaActual',  'trim|xss_clean|required');
+						$this->form_validation->set_rules('empresa', 'Empresa',  'trim|xss_clean|required');
+						$this->form_validation->set_rules('cedula', 'cedula',  'trim|xss_clean|regex_match[/^[0-9]+$/]');
+						$this->form_validation->set_rules('fechaIni', 'fechaIni', 'trim|xss_clean|required|regex_match[/^[0-9\/]+$/]');
+						$this->form_validation->set_rules('fechaFin', 'fechaFin', 'trim|xss_clean|required|regex_match[/^[0-9\/]+$/]');
+
 							if ($this->form_validation->run() == FALSE)
 							{
-									echo "FORM NO VALIDO";
+								$responseError = 'La combinacion de caracteres es invalido';
+								$responseError = $this->cryptography->encrypt($responseError);
+								$this->output->set_content_type('application/json')->set_output(json_encode($responseError));
+								return $responseError;
 							}
 							else
 							{
-								$dataRequest = json_decode(
-									$this->security->xss_clean(
-										strip_tags(
-											$this->cryptography->decrypt(
-												base64_decode($this->input->get_post('plot')),
-												utf8_encode($this->input->get_post('request'))
-											)
-										)
-									)
-								);
 
 									$empresa = $dataRequest->filtro_busq->empresa;
 									$fechaIni = $dataRequest->filtro_busq->fechaInicial;
@@ -3802,11 +3852,10 @@ class Reportes extends CI_Controller {
 									$acnomcia = $dataRequest->filtro_busq->acnomcia;
 									$productoDesc = $dataRequest->filtro_busq->productoDesc;
 									$paginaActual = $dataRequest->filtro_busq->paginaActual;
-									$_POST['paginaActual'] = $paginaActual;
-									$_POST['empresa'] = $empresa;
+
 									$username = $this->session->userdata('userName');
 									$token = $this->session->userdata('token');
-
+									unset($_POST['paginaActual'], $_POST['empresa']);
 									$pruebaTabla = $this->callWSEstadosDeCuenta($urlCountry,$token,$username,$empresa,$fechaIni,$fechaFin,$paginaActual,$producto,$cedula,$tipoConsulta);
 									$pruebaTabla = $this->cryptography->encrypt($pruebaTabla);
 									$this->output->set_content_type('application/json')->set_output(json_encode($pruebaTabla));
