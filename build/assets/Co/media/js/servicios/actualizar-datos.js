@@ -17,13 +17,18 @@ $(function(){ // Document ready
 		          $('#archivo').val($('#userfile').val());
 		            dat = data;
 
+								var ceo_cook = decodeURIComponent(
+									document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+								);
+								dat.ceo_name = ceo_cook
+
 		            var ext = $('#userfile').val().substr( $('#userfile').val().lastIndexOf(".") +1 );
 		            if( ext === "xls" || ext === "xlsx" ){
 			            data.context = $('#cargarXLS').click(function () {
 
 			                    $("#cargarXLS").replaceWith('<h3 id="cargando_archivo">Cargando...</h3>');
 			                   // dat.formData = {'data-rif':$("option:selected","#listaEmpresasSuc").attr("data-rif")};
-			                    dat.submit().success( function (result, textStatus, jqXHR){
+			                    dat.submit().done( function (result, textStatus, jqXHR){
 			                     result = $.parseJSON(result);
 			                      if(result){
 			                        if(!result.ERROR){
@@ -98,7 +103,7 @@ $(function(){ // Document ready
 
 			var ceo_cook = decodeURIComponent(
 				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-				);
+			);
 
 			$.post(baseURL+api+isoPais+'/servicios/actualizar-datos/buscar-datos',{ceo_name: ceo_cook}).done(function(data){
 

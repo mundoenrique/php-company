@@ -753,6 +753,9 @@ var filtro_busq={};
       $.post(url,datos).done(function(data){
           $aux.dialog('destroy')
           if(!data.ERROR){
+						var ceo_cook = decodeURIComponent(
+							document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+						);
 						$('form#formulario').empty();
 						$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'">');
             $('form#formulario').append('<input type="hidden" name="bytes" value="'+JSON.stringify(data.bytes)+'" />');
