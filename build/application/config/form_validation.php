@@ -90,7 +90,7 @@ $config = [
 		[
 			'field' => 'data-acdesc',
 			'label' => 'data-acdesc',
-			'rules' => 'trim|regex_match[/^([\w-.,ñáéíóúÑÁÉÍÓÚ]+[\s]*)+$/i]|required'
+			'rules' => 'trim|regex_match[/^([\w-.,ñáéíóúÑÁÉÍÓÚ]+[\s]*)+$/i]'
 		],
 		[
 			'field' => 'data-accodcia',
@@ -139,7 +139,7 @@ $config = [
 		[
 			'field' => 'description',
 			'label' => 'description',
-			'rules' => 'trim|regex_match[/^([\w-.,ñáéíóúÑÁÉÍÓÚ]+[\s]*)+$/i]|required'
+			'rules' => 'trim|regex_match[/^([\w-.,ñáéíóúÑÁÉÍÓÚ]+[\s]*)+$/i]'
 		],
 		[
 			'field' => 'code',
