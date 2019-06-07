@@ -52,12 +52,10 @@ class User extends NOVO_Controller {
 		$browser = strtolower($this->agent->browser());
 		$version = (float) $this->agent->version();
 		$noBrowser = "internet explorer";
-		$sliderbar = true;
 		$contentpage = 'users/content-login';
 
 		$views = ['user/login', 'user/signin'];
-		if($browser == $noBrowser && $version < 8.0){
-			$sliderbar = false;
+		if($browser == $noBrowser && $version < 11.0) {
 			$views = ['staticpages/content-browser'];
 		}
 		array_push(
