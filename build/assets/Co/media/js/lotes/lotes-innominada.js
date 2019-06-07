@@ -172,9 +172,6 @@ $(function(){
 			$aux = $("#loading").dialog({title:'Procesando solicitud',modal:true, close:function(){$(this).dialog('close')}, resizable:false });
 			var fecha_expira = $('#fecha_expira').val().split('/');
 				fecha_expira = fecha_expira[0] + fecha_expira[1].substr(2);
-			var ceo_cook = decodeURIComponent(
-				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-			);
 
 			var arrData = {
 				'data_cant' : $('#cant_tarjetas').val(),
@@ -182,9 +179,13 @@ $(function(){
 				'data_lembozo1' : $('#embozo_1').val(),
 				'data_lembozo2' : $('#embozo_2').val(),
 				'data_codsucursal' : $('#sucursal').val(),
-				'data_fechaexp' : fecha_expira,
+				'data_fechaexp' : fecha_expira
 			};
-			var dataRequest = JSON.stringify (arrData)
+
+			var ceo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
+			var dataRequest = JSON.stringify(arrData)
 				dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
 				$.post(baseURL+isoPais+'/lotes/innominada/createCuentasInnominadas', {request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)})
 				.done(function(response){
