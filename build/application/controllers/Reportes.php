@@ -95,7 +95,10 @@ class Reportes extends CI_Controller {
 			$moduloAct = np_hoplite_existeLink($menuP,"REPCON");
 
 			if($paisS==$urlCountry && $logged_in && $moduloAct!==false){
-
+				$this->form_validation->set_rules('empresa', 'Empresa',  'trim|xss_clean');
+				$this->form_validation->set_rules('fechaInicial', 'Fecha Inicio',  'trim|xss_clean');
+				$this->form_validation->set_rules('fechaFin', 'Fecha Fin',  'trim|xss_clean');
+				$this->form_validation->set_rules('producto', 'Fecha Fin',  'trim|xss_clean');
 					//Validate Request For Ajax
 					if($this->input->is_ajax_request()){
 							if ($this->form_validation->run() == FALSE)
@@ -126,10 +129,6 @@ class Reportes extends CI_Controller {
 							$_POST['fechaInicial'] = $fechaInicial;
 							$_POST['fechaFin'] = $fechaFin;
 
-							$this->form_validation->set_rules('empresa', 'Empresa',  'trim|xss_clean');
-							$this->form_validation->set_rules('fechaInicial', 'Fecha Inicio',  'trim|xss_clean');
-							$this->form_validation->set_rules('fechaFin', 'Fecha Fin',  'trim|xss_clean');
-							$this->form_validation->set_rules('producto', 'Fecha Fin',  'trim|xss_clean');
 							$username = $this->session->userdata('userName');
 							$token = $this->session->userdata('token');
 							$pruebaTabla = $this->callWSCuentaConcentradora($urlCountry,$token,$username,$empresa,$fechaInicial,$fechaFin,$paginaActual,$filtroFecha,$tipoNota);
@@ -880,6 +879,9 @@ class Reportes extends CI_Controller {
 			$moduloAct = np_hoplite_existeLink($menuP,"REPTAR");
 
 			if($paisS==$urlCountry && $logged_in && $moduloAct!==false){
+				$this->form_validation->set_rules('empresa', 'Empresa',  'trim|xss_clean');
+				$this->form_validation->set_rules('fechaInicial', 'Fecha Inicio',  'trim|xss_clean');
+				$this->form_validation->set_rules('fechaFin', 'Fecha Fin',  'trim|xss_clean');
 					//Validate Request For Ajax
 					if($this->input->is_ajax_request()){
 							if ($this->form_validation->run() == FALSE)
@@ -905,9 +907,6 @@ class Reportes extends CI_Controller {
 								$_POST['empresa'] = $empresa;
 								$_POST['fechaInicial'] = $fechaInicial;
 								$_POST['fechaFin']  = $fechaFin;
-								$this->form_validation->set_rules('empresa', 'Empresa',  'trim|xss_clean');
-								$this->form_validation->set_rules('fechaInicial', 'Fecha Inicio',  'trim|xss_clean');
-								$this->form_validation->set_rules('fechaFin', 'Fecha Fin',  'trim|xss_clean');
 								$tipoConsulta = $dataRequest->filtro_busq->radioGeneral;
 								$username = $this->session->userdata('userName');
 								$token = $this->session->userdata('token');
@@ -1273,6 +1272,9 @@ class Reportes extends CI_Controller {
 			$moduloAct = np_hoplite_existeLink($menuP,"REPSAL");
 
 			if($paisS==$urlCountry && $logged_in && $moduloAct!==false){
+				$this->form_validation->set_rules('empresa', 'Empresa',  'trim|xss_clean');
+				$this->form_validation->set_rules('cedula', 'cedula',  'trim|xss_clean');
+				$this->form_validation->set_rules('producto', 'producto',  'trim|xss_clean');
 							//Validate Request For Ajax
 					if($this->input->is_ajax_request()){
 							if ($this->form_validation->run() == FALSE)
@@ -1302,9 +1304,6 @@ class Reportes extends CI_Controller {
 									$_POST['cedula'] = $cedula;
 									$_POST['producto'] = $producto;
 
-									$this->form_validation->set_rules('empresa', 'Empresa',  'trim|xss_clean');
-									$this->form_validation->set_rules('cedula', 'cedula',  'trim|xss_clean');
-									$this->form_validation->set_rules('producto', 'producto',  'trim|xss_clean');
 									$username = $this->session->userdata('userName');
 									$token = $this->session->userdata('token');
 
@@ -1564,6 +1563,8 @@ class Reportes extends CI_Controller {
 			$moduloAct = np_hoplite_existeLink($menuP,"TEBTHA");
 
 			if($paisS==$urlCountry && $logged_in && $moduloAct!==false){
+				$this->form_validation->set_rules('empresa', 'Empresa',  'trim|xss_clean');
+				$this->form_validation->set_rules('lotes_producto', 'Tarjeta',  'trim|xss_clean');
 					//Validate Request For Ajax
 					if($this->input->is_ajax_request()){
 							if ($this->form_validation->run() == FALSE)
@@ -1589,8 +1590,6 @@ class Reportes extends CI_Controller {
 									$_POST['paginaActual'] = $paginaActual;
 									$_POST['lotes_producto'] = $loteproducto;
 
-									$this->form_validation->set_rules('empresa', 'Empresa',  'trim|xss_clean');
-									$this->form_validation->set_rules('lotes_producto', 'Tarjeta',  'trim|xss_clean');
 
 									$username = $this->session->userdata('userName');
 									$token = $this->session->userdata('token');
@@ -1695,6 +1694,11 @@ class Reportes extends CI_Controller {
 			$moduloAct = np_hoplite_existeLink($menuP,"REPLOT");
 
 			if($paisS==$urlCountry && $logged_in && $moduloAct!==false){
+				$this->form_validation->set_rules('empresa', 'Empresa',  'trim|xss_clean');
+				$this->form_validation->set_rules('fechaInicial', 'Fecha Inicio',  'trim|xss_clean');
+				$this->form_validation->set_rules('fechaFin', 'Fecha Fin',  'trim|xss_clean');
+				$this->form_validation->set_rules('lotes_producto', 'Tarjeta',  'trim|xss_clean');
+
 					//Validate Request For Ajax
 					if($this->input->is_ajax_request()){
 							if ($this->form_validation->run() == FALSE)
@@ -1722,10 +1726,6 @@ class Reportes extends CI_Controller {
 							$_POST['fechaInicial'] = $fechaInicial;
 							$_POST['fechaFin'] = $fechaFin;
 							$_POST['lotes_producto'] = $loteproducto;
-							$this->form_validation->set_rules('empresa', 'Empresa',  'trim|xss_clean');
-							$this->form_validation->set_rules('fechaInicial', 'Fecha Inicio',  'trim|xss_clean');
-							$this->form_validation->set_rules('fechaFin', 'Fecha Fin',  'trim|xss_clean');
-							$this->form_validation->set_rules('lotes_producto', 'Tarjeta',  'trim|xss_clean');
 
 							$username = $this->session->userdata('userName');
 							$token = $this->session->userdata('token');
@@ -2306,15 +2306,6 @@ class Reportes extends CI_Controller {
 				$producto = $dataRequest->filtro_busq->producto;
 				$tamPg = $dataRequest->filtro_busq->tamPg;
 				$paginar = $dataRequest->filtro_busq->paginar;
-					// $paginaActual=$this->input->post('paginaActual');
-					// $empresa = $this->input->post('empresa');
-					// $fechaInicial = $this->input->post('fechaInicial');
-					// $fechaFin = $this->input->post('fechaFin');
-					// $idTarjetaHabiente = $this->input->post('idTarjetaHabiente');
-					// $tipoReposicion = $this->input->post('tipoReposicion');
-					// $producto =$this->input->post('producto');
-					// $tamPg =$this->input->post('tamPg');
-					// $paginar =$this->input->post('paginar');
 
 					$pruebaTabla = $this->callWSReposiciones($urlCountry, $empresa, $producto, $fechaInicial, $fechaFin, $paginaActual, $tipoReposicion, $idTarjetaHabiente, $tamPg, $paginar);
 					$pruebaTabla = $this->cryptography->encrypt($pruebaTabla);
@@ -2588,6 +2579,10 @@ class Reportes extends CI_Controller {
 			$moduloAct = np_hoplite_existeLink($menuP,"REPPRO");
 
 			if($paisS==$urlCountry && $logged_in && $moduloAct!==false){
+				$this->form_validation->set_rules('paginaActual', 'paginaActual',  'trim|xss_clean');
+				$this->form_validation->set_rules('empresa', 'Empresa',  'trim|xss_clean');
+				$this->form_validation->set_rules('anio', 'anio',  'trim|xss_clean');
+				$this->form_validation->set_rules('mes', 'mes',  'trim|xss_clean');
 							//Validate Request For Ajax
 					if($this->input->is_ajax_request()){
 							if ($this->form_validation->run() == FALSE)
@@ -2614,12 +2609,6 @@ class Reportes extends CI_Controller {
 							$_POST['empresa'] = $empresa;
 							$_POST['anio'] = $anio;
 							$_POST['mes'] =	$mes;
-							$this->form_validation->set_rules('paginaActual', 'paginaActual',  'trim|xss_clean');
-							$this->form_validation->set_rules('empresa', 'Empresa',  'trim|xss_clean');
-							$this->form_validation->set_rules('anio', 'anio',  'trim|xss_clean');
-							$this->form_validation->set_rules('mes', 'mes',  'trim|xss_clean');
-
-
 							$username = $this->session->userdata('userName');
 							$token = $this->session->userdata('token');
 
@@ -2978,6 +2967,8 @@ class Reportes extends CI_Controller {
 			$moduloAct = np_hoplite_existeLink($menuP,"REPUSU");
 
 			if($paisS==$urlCountry && $logged_in && $moduloAct!==false){
+				$this->form_validation->set_rules('fech_ini', 'Desde',  'trim|xss_clean');
+				$this->form_validation->set_rules('fech_fin', 'Hasta',  'trim|xss_clean');
 					//Validate Request For Ajax
 					if($this->input->is_ajax_request()){
 							if ($this->form_validation->run() == FALSE)
@@ -3001,8 +2992,6 @@ class Reportes extends CI_Controller {
 									$acodcia = $dataRequest->data_acodcia;
 									$_POST['fech_ini'] = $fechaIni;
 									$_POST['fech_fin'] = $fechaFin;
-									$this->form_validation->set_rules('fech_ini', 'Desde',  'trim|xss_clean');
-									$this->form_validation->set_rules('fech_fin', 'Hasta',  'trim|xss_clean');
 									$response = $this->callWSActividadPorUsuario($urlCountry, $fechaIni, $fechaFin, $acodcia);
 									$response = $this->cryptography->encrypt($response);
 									$this->output->set_content_type('application/json')->set_output(json_encode($response));
@@ -3779,6 +3768,10 @@ class Reportes extends CI_Controller {
 			$moduloAct = np_hoplite_existeLink($menuP,"REPEDO");
 
 			if($paisS==$urlCountry && $logged_in && $moduloAct!==false){
+				$this->form_validation->set_rules('paginaActual', 'paginaActual',  'trim|xss_clean');
+				$this->form_validation->set_rules('empresa', 'Empresa',  'trim|xss_clean');
+				$this->form_validation->set_rules('anio', 'anio',  'trim|xss_clean');
+				$this->form_validation->set_rules('mes', 'mes',  'trim|xss_clean');
 
 					//Validate Request For Ajax
 					if($this->input->is_ajax_request()){
@@ -3811,10 +3804,6 @@ class Reportes extends CI_Controller {
 									$paginaActual = $dataRequest->filtro_busq->paginaActual;
 									$_POST['paginaActual'] = $paginaActual;
 									$_POST['empresa'] = $empresa;
-									$this->form_validation->set_rules('paginaActual', 'paginaActual',  'trim|xss_clean');
-									$this->form_validation->set_rules('empresa', 'Empresa',  'trim|xss_clean');
-									$this->form_validation->set_rules('anio', 'anio',  'trim|xss_clean');
-									$this->form_validation->set_rules('mes', 'mes',  'trim|xss_clean');
 									$username = $this->session->userdata('userName');
 									$token = $this->session->userdata('token');
 
@@ -4389,17 +4378,10 @@ class Reportes extends CI_Controller {
 				$cedula = $dataRequest->filtro_busq->cedula;
 				$paginaActual = $dataRequest->filtro_busq->paginaActual;
 				$tipoConsulta = $dataRequest->filtro_busq->tipoConsulta;
-					// $empresa = $this->input->post('empresa');
-					// $fechaInicial = $this->input->post('fechaInicial');
-					// $fechaFin = $this->input->post('fechaFin');
-					// $producto = $this->input->post('producto');
-					// $cedula = $this->input->post('cedula');
-					// $paginaActual = $this->input->post('paginaActual');
-					// $tipoConsulta =$this->input->post('tipoConsulta');
 
-					$response = $this->callWSGraficoEstadosdeCuenta($urlCountry,$empresa,$fechaInicial,$fechaFin,$producto,$cedula,$paginaActual,$tipoConsulta);
-					$response = $this->cryptography->encrypt($response);
-					$this->output->set_content_type("application/json")->set_output(json_encode($response));
+				$response = $this->callWSGraficoEstadosdeCuenta($urlCountry,$empresa,$fechaInicial,$fechaFin,$producto,$cedula,$paginaActual,$tipoConsulta);
+				$response = $this->cryptography->encrypt($response);
+				$this->output->set_content_type("application/json")->set_output(json_encode($response));
 
 			}elseif($paisS!=$urlCountry && $paisS!=""){
 					$this->session->sess_destroy();
