@@ -752,7 +752,18 @@ if(buscarReporte){
 				if(data.rc =="-29"){
 		             alert("Usuario actualmente desconectado");
 		             $(location).attr('href',baseURL+isoPais+'/login');
-		         }else{
+		         }else if(data){
+							$("#mensaje").remove();
+							contenedor.html('<div id="top-batchs"><span aria-hidden="true" class="icon" data-icon="&#xe05c;"></span>Estado de cuenta </div>');
+							$("#tabla-datos-general").fadeOut("fast");
+							$("#view-results").attr("style","display:none");
+							var div =$(document.createElement("div")).appendTo(contenedor);
+							div.attr("id","mensaje");
+							div.attr("style","background-color:rgb(252,199,199); margin-top:62px;");
+							var p = $(document.createElement("p")).appendTo(div);
+							p.html(data);
+							p.attr("style","text-align:center;padding:10px;font-size:14px");
+						 }else{
 
 		 			$("#mensaje").remove();
 		 			contenedor.html('<div id="top-batchs"><span aria-hidden="true" class="icon" data-icon="&#xe05c;"></span>Estado de cuenta </div>');
