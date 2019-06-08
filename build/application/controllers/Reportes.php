@@ -4426,13 +4426,13 @@ class Reportes extends CI_Controller {
 					)
 				);
 
-				$empresa = $dataRequest->filtro_busq->empresa;
-				$fechaInicial = $dataRequest->filtro_busq->fechaInicial;
-				$fechaFin = $dataRequest->filtro_busq->fechaFin;
-				$producto = $dataRequest->filtro_busq->producto;
-				$cedula = $dataRequest->filtro_busq->cedula;
-				$paginaActual = $dataRequest->filtro_busq->paginaActual;
-				$tipoConsulta = $dataRequest->filtro_busq->tipoConsulta;
+				$empresa = $dataRequest->empresa;
+				$fechaInicial = $dataRequest->fechaInicial;
+				$fechaFin = $dataRequest->fechaFin;
+				$producto = $dataRequest->producto;
+				$cedula = $dataRequest->cedula;
+				$paginaActual = $dataRequest->paginaActual;
+				$tipoConsulta = $dataRequest->tipoConsulta;
 
 				$response = $this->callWSGraficoEstadosdeCuenta($urlCountry,$empresa,$fechaInicial,$fechaFin,$producto,$cedula,$paginaActual,$tipoConsulta);
 				$response = $this->cryptography->encrypt($response);
