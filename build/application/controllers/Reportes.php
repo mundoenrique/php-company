@@ -3821,9 +3821,9 @@ class Reportes extends CI_Controller {
 								)
 							)
 						);
-						$_POST['paginaActual'] = $dataRequest->filtro_busq->paginaActual;
-						$_POST['empresa'] = $dataRequest->filtro_busq->empresa;
-						$_POST['cedula'] = $dataRequest->filtro_busq->cedula;
+						$_POST['paginaActual'] = $dataRequest->paginaActual;
+						$_POST['empresa'] = $dataRequest->empresa;
+						$_POST['cedula'] = $dataRequest->cedula;
 						$_POST['fechaIni'] = $dataRequest->fechaInicial;
 						$_POST['fechaFin'] =$dataRequest->fechaFin;
 						$this->form_validation->set_rules('paginaActual', 'paginaActual',  'trim|xss_clean|required');
@@ -3832,8 +3832,10 @@ class Reportes extends CI_Controller {
 						$this->form_validation->set_rules('fechaIni', 'fechaIni', 'trim|xss_clean|required|regex_match[/^[0-9\/]+$/]');
 						$this->form_validation->set_rules('fechaFin', 'fechaFin', 'trim|xss_clean|required|regex_match[/^[0-9\/]+$/]');
 
+						$this->form_validation->set_error_delimiters('', '---');
 							if ($this->form_validation->run() == FALSE)
 							{
+								log_message('DEBUG', 'NOVO VALIDATION ERRORS: '.json_encode(validation_errors()));
 								$responseError = 'La combinacion de caracteres es invalido';
 								$responseError = $this->cryptography->encrypt($responseError);
 								$this->output->set_content_type('application/json')->set_output(json_encode($responseError));
