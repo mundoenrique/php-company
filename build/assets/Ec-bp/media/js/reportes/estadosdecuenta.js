@@ -234,9 +234,7 @@ function BuscarEstadosdeCuenta(paginaActual){
 			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 		);
 		filtro_busq.paginaActual=paginaActual;
-		var dataRequest = JSON.stringify ({
-			filtro_busq: filtro_busq
-		})
+		var dataRequest = JSON.stringify(filtro_busq);
 		dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
 		$consulta = $.post(baseURL + api + isoPais + "/reportes/estadosdecuenta",{request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook) } );
 	//DE SER EXITOSA LA COMUNICACION CON EL SERVICIO SE EJECUTA EL SIGUIENTE METODO "DONE"
@@ -761,7 +759,10 @@ if(buscarReporte){
 							div.attr("id","mensaje");
 							div.attr("style","background-color:rgb(252,199,199); margin-top:62px;");
 							var p = $(document.createElement("p")).appendTo(div);
-							p.html(data);
+							if (data.rc=="-150")
+								p.html(data.mensaje);
+							else
+								p.html(data);
 							p.attr("style","text-align:center;padding:10px;font-size:14px");
 						 }else{
 
