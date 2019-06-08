@@ -2630,10 +2630,10 @@ class Reportes extends CI_Controller {
 							else
 							{
 
-									$paginaActual = $dataRequest->filtro_busq->paginaActual;
-									$empresa = $dataRequest->filtro_busq->empresa;
-									$anio = $dataRequest->filtro_busq->anio;
-									$mes = $dataRequest->filtro_busq->mes;
+									$paginaActual = $dataRequest->paginaActual;
+									$empresa = $dataRequest->empresa;
+									$anio = $dataRequest->anio;
+									$mes = $dataRequest->mes;
 									$username = $this->session->userdata('userName');
 									$token = $this->session->userdata('token');
 									unset($_POST['paginaActual'], $_POST['empresa'], $_POST['anio'], $_POST['mes']);

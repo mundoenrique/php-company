@@ -108,10 +108,7 @@ $(document).ready(function () {
 				$(this).hide();
 				$('#div_tablaDetalle').fadeOut("fast");
 				filtro_busq.paginaActual = 1;
-				var dataRequest = JSON.stringify({
-					filtro_busq: filtro_busq
-
-				})
+				var dataRequest = JSON.stringify(filtro_busq);
 
 				//SE REALIZA LA INVOCACION AJAX
 				dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {
