@@ -1723,10 +1723,10 @@ class Reportes extends CI_Controller {
 								)
 							)
 						);
-							$_POST['empresa'] = $dataRequest->filtro_busq->empresa;
-							$_POST['fechaInicial'] = $dataRequest->filtro_busq->fechaInicial;
-							$_POST['fechaFin'] = $dataRequest->filtro_busq->fechaFin;
-							$_POST['lotes_producto'] = $dataRequest->filtro_busq->lotes_producto;
+							$_POST['empresa'] = $dataRequest->empresa;
+							$_POST['fechaInicial'] = $dataRequest->fechaInicial;
+							$_POST['fechaFin'] = $dataRequest->fechaFin;
+							$_POST['lotes_producto'] = $dataRequest->lotes_producto;
 							$this->form_validation->set_rules('empresa', 'Empresa',  'trim|xss_clean|required');
 							$this->form_validation->set_rules('fechaInicial', 'Fecha Inicio',  'trim|xss_clean|regex_match[/^[0-9\/]+$/]|required');
 							$this->form_validation->set_rules('fechaFin', 'Fecha Fin',  'trim|xss_clean|regex_match[/^[0-9\/]+$/]|required');
@@ -1742,11 +1742,11 @@ class Reportes extends CI_Controller {
 							else
 							{
 
-							$paginaActual = $dataRequest->filtro_busq->paginaActual;
-							$empresa = $dataRequest->filtro_busq->empresa;
-							$fechaInicial = $dataRequest->filtro_busq->fechaInicial;
-							$fechaFin = $dataRequest->filtro_busq->fechaFin;
-							$loteproducto = $dataRequest->filtro_busq->lotes_producto;
+							$paginaActual = $dataRequest->paginaActual;
+							$empresa = $dataRequest->empresa;
+							$fechaInicial = $dataRequest->fechaInicial;
+							$fechaFin = $dataRequest->fechaFin;
+							$loteproducto = $dataRequest->lotes_producto;
 							$username = $this->session->userdata('userName');
 							$token = $this->session->userdata('token');
 							unset($_POST['lotes_producto'], $_POST['empresa'], $_POST['fechaInicial'], $_POST['fechaFin']);
