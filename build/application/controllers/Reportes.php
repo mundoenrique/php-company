@@ -515,12 +515,12 @@ class Reportes extends CI_Controller {
 					)
 				)
 			);
-			$paginaActual = $dataRequest->filtro_busq->paginaActual;
-			$empresa = $dataRequest->filtro_busq->empresa;
-			$fechaInicial = $dataRequest->filtro_busq->fechaInicial;
-			$fechaFin = $dataRequest->filtro_busq->fechaFin;
-			$filtroFecha = $dataRequest->filtro_busq->filtroFecha;
-			$nomEmpresa = isset($dataRequest->filtro_busq->nomEmpresa)?$dataRequest->filtro_busq->nomEmpresa :'';
+			$paginaActual = $dataRequest->paginaActual;
+			$empresa = $dataRequest->empresa;
+			$fechaInicial = $dataRequest->fechaInicial;
+			$fechaFin = $dataRequest->fechaFin;
+			$filtroFecha = $dataRequest->filtroFecha;
+			$nomEmpresa = isset($dataRequest->nomEmpresa)?$dataRequest->nomEmpresa :'';
 
 					$data = array(
 							"pais"=>$urlCountry,
