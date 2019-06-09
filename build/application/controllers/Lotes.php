@@ -2427,7 +2427,7 @@ class Lotes extends CI_Controller {
 		$response = json_decode($jsonResponse);
 
 		//log_message("DEBUG", "generarOS =====>>>>>> ".json_encode($response));
-		log_message("DEBUG", "generarOS =====>>>>>> ".($response->bean));
+		log_message("DEBUG", "generarOS =====>>>>>> ".($jsonResponse));
 		if(isset($response->rc)) {
 			switch($response->rc) {
 				case 0:
