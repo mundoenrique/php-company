@@ -822,7 +822,17 @@ $(function(){
 					document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 				);
 
-        $.post(baseURL+api+isoPais+'/usuario/config/consultarSucursales', {'rif':rif,"paginaActual":paginaActual, 'data-paginar':pagina, 'data-cantItems':cantItems,	ceo_name:ceo_cook} ).done(function( data ) {
+				var dataRequest = JSON.stringify ({
+					rif:rif,
+					paginaActual:paginaActual,
+					data_paginar:pagina,
+					data_cantItems:cantItems,
+				})
+
+				dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
+        $.post(baseURL+api+isoPais+'/usuario/config/consultarSucursales', {	request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)} ).done(function( response ) {
+
+					data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
             $(".ui-dialog-content").dialog().dialog("destroy");
             $('#listaEmpresasSuc').removeAttr('disabled');
             datos = data;

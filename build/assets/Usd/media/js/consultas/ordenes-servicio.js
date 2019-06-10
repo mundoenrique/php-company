@@ -259,8 +259,8 @@ $('#tabla-datos-general').on('click','#anular', function(){
 							})
 							dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
               $.post(baseURL+api+isoPais+'/consulta/anularos',{request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)})
-			   .done(function(data){
-					data = JSON.parse(CryptoJS.AES.decrypt(data.code, data.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
+			   .done(function(response){
+					data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
             $aux.dialog('destroy');
 
                 if(!data.ERROR){
