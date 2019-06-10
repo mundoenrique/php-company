@@ -188,9 +188,6 @@ var filtro_busq={};
 function buscarReposiciones(paginaActual){
 
 				var $consulta;
-				var ceo_cook = decodeURIComponent(
-					document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-				);
 	    //	pag=paginaActual;
 	    	if(validar_filtro_busqueda("lotes-2")){
 	    		$('#cargando').fadeIn("slow");
@@ -207,12 +204,17 @@ function buscarReposiciones(paginaActual){
 		    	filtro_busq.paginar = true;
 		    	filtro_busq.acnomcia = $("option:selected","#repReposiciones_empresa").attr("acnomcia");
 					filtro_busq.des = $("option:selected","#repReposiciones_producto").attr("des");
-					filtro_busq.ceo_name = ceo_cook;
 
 	//SE REALIZA LA INVOCACION AJAX
-		    	$consulta = $.post(baseURL + api + isoPais + "/reportes/reposiciones",filtro_busq );
+					var ceo_cook = decodeURIComponent(
+						document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+					);
+					var dataRequest = JSON.stringify(filtro_busq);
+					dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
+		    	$consulta = $.post(baseURL + api + isoPais + "/reportes/reposiciones", {request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)});
 	//DE SER EXITOSA LA COMUNICACION CON EL SERVICIO SE EJECUTA EL SIGUIENTE METODO "DONE"
-		 		$consulta.done(function(data){
+		 		$consulta.done(function(response){
+					var data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
 
 		 			$('#cargando').fadeOut("slow");
 		 			$("#repReposiciones_btnBuscar").show();

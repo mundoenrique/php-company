@@ -80,8 +80,8 @@ var datatable;
 		})
 		dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
 
-		$.post(baseURL+isoPais+'/lotes/innominada/eliminarLotesInnominadas', { request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook) }).done( function(data){
-			data = JSON.parse(CryptoJS.AES.decrypt(data.code, data.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
+		$.post(baseURL+isoPais+'/lotes/innominada/eliminarLotesInnominadas', { request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook) }).done( function(response){
+			data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 			$aux.dialog('destroy');
 				if(!data.ERROR){
 					notificacion("Lote eliminado","<p>El nro. de lote <b>" + numlote + "</b> ha sido eliminado correctamente</p>");

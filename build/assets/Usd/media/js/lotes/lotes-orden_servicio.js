@@ -47,8 +47,8 @@ $(function(){
 
 
 		$.post(baseURL+api+isoPais+"/lotes/confirmarPreOSL", { request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)})
-			.done(function(data) {
-				data = JSON.parse(CryptoJS.AES.decrypt(data.code, data.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
+			.done(function(response) {
+				data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 				$aux.dialog('destroy');
 
 				if(!data.ERROR){
