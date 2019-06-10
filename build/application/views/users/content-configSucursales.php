@@ -135,7 +135,7 @@
 				<div id="opciones-btn" style='margin-top:20px'>
 					<button id='agregarSuc'><?php echo lang('EMP_BTN_ADD_CONTACT'); ?></button>
 					<button id='btn-modif-suc'><?php echo lang('SUC_BTN_MODIFICAR'); ?></button>
-					<input id="pass_suc" type="password" class="pass" style="margin-left:256px; margin-top: 4px" placeholder="Ingrese su contraseña">
+					<input id="pass_suc" type="password" class="pass" style="margin-left:245px; margin-top: 4px" placeholder="Ingrese su contraseña">
 
 			</div>
 		</div>
