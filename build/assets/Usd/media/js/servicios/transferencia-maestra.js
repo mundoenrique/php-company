@@ -319,32 +319,41 @@ var valido=true;
 			var ceo_cook = decodeURIComponent(
 				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 			);
-
-      $.post(url, {'data-tarjeta':serv_var.noTarjetas, 'data-id_ext_per':serv_var.dni_tarjetas, 'data-pass':pass, 'data-monto':serv_var.monto, 'data-pg':1, 'data-paginas':1, 'data-paginar':false, ceo_name: ceo_cook })
-        .done(function(data){
-
+			var dataRequest = JSON.stringify ({
+				data_tarjeta:serv_var.noTarjetas,
+				data_id_ext_per:serv_var.dni_tarjetas,
+				data_pass:pass,
+				data_monto:serv_var.monto,
+				data_pg:1,
+				data_paginas:1,
+				data_paginar:false,
+			})
+			dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
+      $.post(url, { request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook) })
+        .done(function(response){
+					data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
         $aux.dialog("destroy");
 
-        if(!data.ERROR){
-          serv_var.cantXdia = data.cantXDia.lista;
-          serv_var.saldoDispon = data.maestroDeposito.saldoDisponible;
-          serv_var.maestroParam = data.maestroParametros;
-          serv_var.acumXsem = data.acumXSemana.lista;
+        if(!response.ERROR){
+          serv_var.cantXdia = response.cantXDia.lista;
+          serv_var.saldoDispon = response.maestroDeposito.saldoDisponible;
+          serv_var.maestroParam = response.maestroParametros;
+          serv_var.acumXsem = response.acumXSemana.lista;
 
           $('#resultado-tarjetas').find('#saldoDisponible').text('saldo disponible: '+(serv_var.saldoDispon));
           $('#resultado-tarjetas').find('#comisionTrans').text('Comisión por transacción: '+toFormatShow(serv_var.maestroParam.costoComisionTrans));
           $('#resultado-tarjetas').find('#comisionCons').text('Comisión por consulta saldo: '+toFormatShow(serv_var.maestroParam.costoComisionCons));
 
-          if(operacion==30){ mostrar_saldo(data); }
+          if(operacion==30){ mostrar_saldo(response); }
 
-          mostrar_estatus(data);
+          mostrar_estatus(response);
           notificacion(mensaje,'<h4>Proceso exitoso</h4><h5>'+serv_var.fallidas+' tarjetas fallidas</h5><h5>Verifique estatus y/o saldo de sus tarjetas</h5>');
 
         }else{
-          if(data.ERROR=='-29'){
+          if(response.ERROR=='-29'){
             alert('Usuario actualmente desconectado'); location.reload();
           }else{
-            notificacion(mensaje, data.ERROR);
+            notificacion(mensaje, response.ERROR);
           }
         }
         resett();

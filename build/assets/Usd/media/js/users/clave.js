@@ -60,18 +60,18 @@ function changePassNewUser(passOld,pass,passC){
 	);
 
 	$consulta = $.post(baseURL+isoPais+"/changePassNewUserAuth", { userpwdOld: passOld, userpwd: pass, userpwdConfirm: passC, ceo_name: ceo_cook } );
-	$consulta.done(function(data){
+	$consulta.done(function(response){
 		$aux.dialog('destroy');
-		data = $.parseJSON(data);
-		if(data.rc == 0) {
-			$("<div><h3>" + data.msg + "</h3><h5>" + data.redirect + "</h5></div>").dialog({title:"Cambiar contraseña", modal:true, resizable:false,close:function(){$(this).dialog('destroy');}});
-			notificacion(data.msg);
+		response = $.parseJSON(response);
+		if(response.rc == 0) {
+			$("<div><h3>" + response.msg + "</h3><h5>" + response.redirect + "</h5></div>").dialog({title:"Cambiar contraseña", modal:true, resizable:false,close:function(){$(this).dialog('destroy');}});
+			notificacion(response.msg);
 			$(location).attr('href',baseURL+isoPais+"/dashboard");
-		} else if (data.rc == '-29') {
-			alert(data.msg);
+		} else if (response.rc == '-29') {
+			alert(response.msg);
 			$(location).attr('href',baseURL+isoPais+"/logout");
 		} else {
-			notificacion(data.msg);
+			notificacion(response.msg);
 		}
 	});
 
