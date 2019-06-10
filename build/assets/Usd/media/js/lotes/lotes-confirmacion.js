@@ -41,14 +41,14 @@ $(function(){
 						embozo2:embozo2,
 						conceptoDim:conceptoDim,
 						info:info,
-						idTipoLote:idTipoLote,
+						idTipoLote:idTipoLote
 					})
 					dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
 
           $.post(baseURL+isoPais+'/lotes/confirmacion/confirmar',
             { request: dataRequest,ceo_name: ceo_cook,plot: btoa(ceo_cook)})
-          .done( function(data){
-						data = JSON.parse(CryptoJS.AES.decrypt(data.code, data.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
+          .done( function(response){
+						data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
               if(!data.ERROR){
                 if (data.linkAut) {
                     notificacion('Confirmación','Proceso exitoso.<h5>Ha confirmado el Lote Nro: '+$('#numLote').text()+'</h5>', baseURL+isoPais+'/lotes/autorizacion');

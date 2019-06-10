@@ -515,12 +515,12 @@ class Reportes extends CI_Controller {
 					)
 				)
 			);
-			$paginaActual = $dataRequest->filtro_busq->paginaActual;
-			$empresa = $dataRequest->filtro_busq->empresa;
-			$fechaInicial = $dataRequest->filtro_busq->fechaInicial;
-			$fechaFin = $dataRequest->filtro_busq->fechaFin;
-			$filtroFecha = $dataRequest->filtro_busq->filtroFecha;
-			$nomEmpresa = isset($dataRequest->filtro_busq->nomEmpresa)?$dataRequest->filtro_busq->nomEmpresa :'';
+			$paginaActual = $dataRequest->paginaActual;
+			$empresa = $dataRequest->empresa;
+			$fechaInicial = $dataRequest->fechaInicial;
+			$fechaFin = $dataRequest->fechaFin;
+			$filtroFecha = $dataRequest->filtroFecha;
+			$nomEmpresa = isset($dataRequest->nomEmpresa)?$dataRequest->nomEmpresa :'';
 
 					$data = array(
 							"pais"=>$urlCountry,
@@ -894,14 +894,16 @@ class Reportes extends CI_Controller {
 								)
 							)
 						);
-						$_POST['empresa'] = $dataRequest->filtro_busq->empresa;
-						$_POST['fechaInicial'] = $dataRequest->filtro_busq->fechaInicial;
-						$_POST['fechaFin']  = $dataRequest->filtro_busq->fechaFin;
+						$_POST['empresa'] = $dataRequest->empresa;
+						$_POST['fechaInicial'] = $dataRequest->fechaInicial;
+						$_POST['fechaFin']  = $dataRequest->fechaFin;
 						$this->form_validation->set_rules('empresa', 'Empresa', 'trim|xss_clean|required');
 						$this->form_validation->set_rules('fechaInicial', 'Fecha Inicio', 'trim|xss_clean|required|regex_match[/^[0-9\/]+$/]');
 						$this->form_validation->set_rules('fechaFin', 'Fecha Fin', 'trim|xss_clean|required|regex_match[/^[0-9\/]+$/]');
+						$this->form_validation->set_error_delimiters('', '---');
 							if ($this->form_validation->run() == FALSE)
 							{
+								log_message('DEBUG', 'NOVO VALIDATION ERRORS: '.json_encode(validation_errors()));
 								$responseError = 'La combinacion de caracteres es invalido';
 								$responseError = $this->cryptography->encrypt($responseError);
 								$this->output->set_content_type('application/json')->set_output(json_encode($responseError));
@@ -909,10 +911,10 @@ class Reportes extends CI_Controller {
 							}
 							else
 							{
-								$empresa = $dataRequest->filtro_busq->empresa;
-								$fechaInicial = $dataRequest->filtro_busq->fechaInicial;
-								$fechaFin = $dataRequest->filtro_busq->fechaFin;
-								$tipoConsulta = $dataRequest->filtro_busq->radioGeneral;
+								$empresa = $dataRequest->empresa;
+								$fechaInicial = $dataRequest->fechaInicial;
+								$fechaFin = $dataRequest->fechaFin;
+								$tipoConsulta = $dataRequest->radioGeneral;
 								$username = $this->session->userdata('userName');
 								$token = $this->session->userdata('token');
 								unset($_POST['empresa'], $_POST['fechaInicial'], $_POST['fechaFin']);
@@ -1721,10 +1723,10 @@ class Reportes extends CI_Controller {
 								)
 							)
 						);
-							$_POST['empresa'] = $dataRequest->filtro_busq->empresa;
-							$_POST['fechaInicial'] = $dataRequest->filtro_busq->fechaInicial;
-							$_POST['fechaFin'] = $dataRequest->filtro_busq->fechaFin;
-							$_POST['lotes_producto'] = $dataRequest->filtro_busq->lotes_producto;
+							$_POST['empresa'] = $dataRequest->empresa;
+							$_POST['fechaInicial'] = $dataRequest->fechaInicial;
+							$_POST['fechaFin'] = $dataRequest->fechaFin;
+							$_POST['lotes_producto'] = $dataRequest->lotes_producto;
 							$this->form_validation->set_rules('empresa', 'Empresa',  'trim|xss_clean|required');
 							$this->form_validation->set_rules('fechaInicial', 'Fecha Inicio',  'trim|xss_clean|regex_match[/^[0-9\/]+$/]|required');
 							$this->form_validation->set_rules('fechaFin', 'Fecha Fin',  'trim|xss_clean|regex_match[/^[0-9\/]+$/]|required');
@@ -1740,11 +1742,11 @@ class Reportes extends CI_Controller {
 							else
 							{
 
-							$paginaActual = $dataRequest->filtro_busq->paginaActual;
-							$empresa = $dataRequest->filtro_busq->empresa;
-							$fechaInicial = $dataRequest->filtro_busq->fechaInicial;
-							$fechaFin = $dataRequest->filtro_busq->fechaFin;
-							$loteproducto = $dataRequest->filtro_busq->lotes_producto;
+							$paginaActual = $dataRequest->paginaActual;
+							$empresa = $dataRequest->empresa;
+							$fechaInicial = $dataRequest->fechaInicial;
+							$fechaFin = $dataRequest->fechaFin;
+							$loteproducto = $dataRequest->lotes_producto;
 							$username = $this->session->userdata('userName');
 							$token = $this->session->userdata('token');
 							unset($_POST['lotes_producto'], $_POST['empresa'], $_POST['fechaInicial'], $_POST['fechaFin']);
@@ -2610,16 +2612,18 @@ class Reportes extends CI_Controller {
 								)
 							)
 						);
-							$_POST['paginaActual'] =	$dataRequest->filtro_busq->paginaActual;
-							$_POST['empresa'] = $dataRequest->filtro_busq->empresa;
-							$_POST['anio'] = $dataRequest->filtro_busq->anio;
-							$_POST['mes'] =	$dataRequest->filtro_busq->mes;
+						$_POST['paginaActual'] = $dataRequest->paginaActual;
+						$_POST['empresa'] = $dataRequest->empresa;
+						$_POST['anio'] = $dataRequest->anio;
+						$_POST['mes'] = $dataRequest->mes;
 						$this->form_validation->set_rules('paginaActual', 'paginaActual',  'trim|xss_clean|required');
 						$this->form_validation->set_rules('empresa', 'Empresa',  'trim|xss_clean|required');
 						$this->form_validation->set_rules('anio', 'anio',  'trim|xss_clean|regex_match[/^[0-9\/]+$/]|required');
 						$this->form_validation->set_rules('mes', 'mes',  'trim|xss_clean|regex_match[/^[0-9\/]+$/]|required');
+						$this->form_validation->set_error_delimiters('', '---');
 							if ($this->form_validation->run() == FALSE)
 							{
+								log_message('DEBUG', 'NOVO VALIDATION ERRORS: '.json_encode(validation_errors()));
 								$responseError = 'La combinacion de caracteres es invalido';
 								$responseError = $this->cryptography->encrypt($responseError);
 								$this->output->set_content_type('application/json')->set_output(json_encode($responseError));
@@ -2628,10 +2632,10 @@ class Reportes extends CI_Controller {
 							else
 							{
 
-									$paginaActual = $dataRequest->filtro_busq->paginaActual;
-									$empresa = $dataRequest->filtro_busq->empresa;
-									$anio = $dataRequest->filtro_busq->anio;
-									$mes = $dataRequest->filtro_busq->mes;
+									$paginaActual = $dataRequest->paginaActual;
+									$empresa = $dataRequest->empresa;
+									$anio = $dataRequest->anio;
+									$mes = $dataRequest->mes;
 									$username = $this->session->userdata('userName');
 									$token = $this->session->userdata('token');
 									unset($_POST['paginaActual'], $_POST['empresa'], $_POST['anio'], $_POST['mes']);
@@ -3821,9 +3825,9 @@ class Reportes extends CI_Controller {
 								)
 							)
 						);
-						$_POST['paginaActual'] = $dataRequest->filtro_busq->paginaActual;
-						$_POST['empresa'] = $dataRequest->filtro_busq->empresa;
-						$_POST['cedula'] = $dataRequest->filtro_busq->cedula;
+						$_POST['paginaActual'] = $dataRequest->paginaActual;
+						$_POST['empresa'] = $dataRequest->empresa;
+						$_POST['cedula'] = $dataRequest->cedula;
 						$_POST['fechaIni'] = $dataRequest->fechaInicial;
 						$_POST['fechaFin'] =$dataRequest->fechaFin;
 						$this->form_validation->set_rules('paginaActual', 'paginaActual',  'trim|xss_clean|required');
@@ -3832,8 +3836,10 @@ class Reportes extends CI_Controller {
 						$this->form_validation->set_rules('fechaIni', 'fechaIni', 'trim|xss_clean|required|regex_match[/^[0-9\/]+$/]');
 						$this->form_validation->set_rules('fechaFin', 'fechaFin', 'trim|xss_clean|required|regex_match[/^[0-9\/]+$/]');
 
+						$this->form_validation->set_error_delimiters('', '---');
 							if ($this->form_validation->run() == FALSE)
 							{
+								log_message('DEBUG', 'NOVO VALIDATION ERRORS: '.json_encode(validation_errors()));
 								$responseError = 'La combinacion de caracteres es invalido';
 								$responseError = $this->cryptography->encrypt($responseError);
 								$this->output->set_content_type('application/json')->set_output(json_encode($responseError));
@@ -4420,13 +4426,13 @@ class Reportes extends CI_Controller {
 					)
 				);
 
-				$empresa = $dataRequest->filtro_busq->empresa;
-				$fechaInicial = $dataRequest->filtro_busq->fechaInicial;
-				$fechaFin = $dataRequest->filtro_busq->fechaFin;
-				$producto = $dataRequest->filtro_busq->producto;
-				$cedula = $dataRequest->filtro_busq->cedula;
-				$paginaActual = $dataRequest->filtro_busq->paginaActual;
-				$tipoConsulta = $dataRequest->filtro_busq->tipoConsulta;
+				$empresa = $dataRequest->empresa;
+				$fechaInicial = $dataRequest->fechaInicial;
+				$fechaFin = $dataRequest->fechaFin;
+				$producto = $dataRequest->producto;
+				$cedula = $dataRequest->cedula;
+				$paginaActual = $dataRequest->paginaActual;
+				$tipoConsulta = $dataRequest->tipoConsulta;
 
 				$response = $this->callWSGraficoEstadosdeCuenta($urlCountry,$empresa,$fechaInicial,$fechaFin,$producto,$cedula,$paginaActual,$tipoConsulta);
 				$response = $this->cryptography->encrypt($response);

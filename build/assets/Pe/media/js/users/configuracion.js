@@ -943,7 +943,6 @@ $(function() {
                                 dat.formData = {request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)};
                                 dat.submit().done( function (response, textStatus, jqXHR){
 																	var result = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
-																	console.log(result)
                                     if(result){
                                         if(!result.ERROR){
                                             mostrarError(result);
