@@ -26,7 +26,7 @@ $(function() {
 				}, function(token) {
 					if(!token) {
 						title = prefixCountry + strCountry;
-						msg = 'No fue posible procesar su solicitud, por favor vuelva a intertar';
+						msg = 'No fue posible procesar su solicitud, por favor vuelva a intentar';
 						icon = iconWarning;
 						data = {
 							btn1: {

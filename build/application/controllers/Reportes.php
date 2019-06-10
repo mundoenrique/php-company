@@ -1268,67 +1268,70 @@ class Reportes extends CI_Controller {
 	 * @param  string $urlCountry
 	 * @return JSON
 	 */
-	public function getSaldosAmanecidos($urlCountry){
-			np_hoplite_countryCheck($urlCountry);
+	public function getSaldosAmanecidos($urlCountry) {
+		np_hoplite_countryCheck($urlCountry);
 
-			$logged_in = $this->session->userdata('logged_in');
+		$logged_in = $this->session->userdata('logged_in');
 
-			$paisS = $this->session->userdata('pais');
+		$paisS = $this->session->userdata('pais');
 
-			$menuP =$this->session->userdata('menuArrayPorProducto');
-			$moduloAct = np_hoplite_existeLink($menuP,"REPSAL");
+		$menuP =$this->session->userdata('menuArrayPorProducto');
+		$moduloAct = np_hoplite_existeLink($menuP,"REPSAL");
 
-			if($paisS==$urlCountry && $logged_in && $moduloAct!==false){
-											//Validate Request For Ajax
-					if($this->input->is_ajax_request()){
-						$dataRequest = json_decode(
-							$this->security->xss_clean(
-								strip_tags(
-									$this->cryptography->decrypt(
-										base64_decode($this->input->get_post('plot')),
-										utf8_encode($this->input->get_post('request'))
-									)
-								)
+		if($paisS==$urlCountry && $logged_in && $moduloAct!==false) {
+			if($this->input->is_ajax_request()){
+				$dataRequest = json_decode(
+					$this->security->xss_clean(
+						strip_tags(
+							$this->cryptography->decrypt(
+								base64_decode($this->input->get_post('plot')),
+								utf8_encode($this->input->get_post('request'))
 							)
-						);
-						$_POST['empresa'] = $dataRequest->empresa;
-						$_POST['cedula'] = $dataRequest->cedula;
-						$_POST['producto'] = $dataRequest->producto;
-						$this->form_validation->set_rules('empresa', 'Empresa',  'trim|xss_clean|required');
-						$this->form_validation->set_rules('cedula', 'cedula',  'trim|xss_clean|regex_match[/^[0-9]+$/]');
-						$this->form_validation->set_rules('producto', 'producto',  'trim|xss_clean|required');
+						)
+					)
+				);
+				$_POST['empresa'] = $dataRequest->empresa;
+				$_POST['cedula'] = $dataRequest->cedula;
+				$_POST['producto'] = $dataRequest->producto;
+				$_POST['paginaActual'] = $dataRequest->paginaActual;
+				$_POST['tamPg'] = $dataRequest->tamPg;
+				$this->form_validation->set_rules('empresa', 'empresa', 'trim|regex_match[/^([\w-]+[\s]*)+$/i]|required');
+				$this->form_validation->set_rules('cedula', 'cedula',  'trim|regex_match[/^[0-9]+$/]');
+				$this->form_validation->set_rules('producto', 'producto',  'trim|regex_match[/^([\w-]+[\s]*)+$/i]required');
+				$this->form_validation->set_rules('paginaActual', 'paginaActual', 'trim|numeric|required');
+				$this->form_validation->set_rules('tamPg', 'tamPg', 'trim|numeric|required');
 
-							if ($this->form_validation->run() == FALSE)
-							{
-								$responseError = 'La combinacion de caracteres es invalido';
-								$responseError = $this->cryptography->encrypt($responseError);
-								$this->output->set_content_type('application/json')->set_output(json_encode($responseError));
-								return $responseError;
+				$this->form_validation->set_error_delimiters('', '---');
 
-							}
-							else
-							{
+				if ($this->form_validation->run() == FALSE)	{
+					log_message('DEBUG', 'NOVO VALIDATION ERRORS: '.json_encode(validation_errors()));
+					$responseError = 'Combinacion de caracteres no válida';
+					$responseError = $this->cryptography->encrypt($responseError);
+					$this->output->set_content_type('application/json')->set_output(json_encode($responseError));
+					return $responseError;
 
-									$paginaActual = $dataRequest->paginaActual;
-									$empresa = $dataRequest->empresa;
-									$cedula = $dataRequest->cedula;
-									$producto = $dataRequest->producto;
-									$paginar = $dataRequest->paginar;
-									$tamPg = $dataRequest->tamPg;
-									$username = $this->session->userdata('userName');
-									$token = $this->session->userdata('token');
-									unset($_POST['empresa'], $_POST['cedula'], $_POST['producto']);
-									$pruebaTabla = $this->callWSSaldosAmanecidos($urlCountry,$token,$username,$empresa,$cedula,$producto,$paginaActual,$paginar,$tamPg);
-									$response = $this->cryptography->encrypt($pruebaTabla);
-									$this->output->set_content_type('application/json')->set_output(json_encode($response));
-							}
-					}
-			}else{
-				$this->session->sess_destroy();
-				$responseError = ['ERROR' => lang('ERROR_(-29)'), "rc"=> "-29"];
-				$responseError = $this->cryptography->encrypt($responseError);
-				$this->output->set_content_type('application/json')->set_output(json_encode($responseError));
+				}	else {
+
+					$paginaActual = $dataRequest->paginaActual;
+					$empresa = $dataRequest->empresa;
+					$cedula = $dataRequest->cedula;
+					$producto = $dataRequest->producto;
+					$paginar = TRUE;
+					$tamPg = $dataRequest->tamPg;
+					$username = $this->session->userdata('userName');
+					$token = $this->session->userdata('token');
+					unset($_POST['empresa'], $_POST['cedula'], $_POST['producto']);
+					$pruebaTabla = $this->callWSSaldosAmanecidos($urlCountry,$token,$username,$empresa,$cedula,$producto,$paginaActual,$paginar,$tamPg);
+					$response = $this->cryptography->encrypt($pruebaTabla);
+					$this->output->set_content_type('application/json')->set_output(json_encode($response));
+				}
 			}
+		} else {
+			$this->session->sess_destroy();
+			$responseError = ['ERROR' => lang('ERROR_(-29)'), "rc"=> "-29"];
+			$responseError = $this->cryptography->encrypt($responseError);
+			$this->output->set_content_type('application/json')->set_output(json_encode($responseError));
+		}
 
 	}
 

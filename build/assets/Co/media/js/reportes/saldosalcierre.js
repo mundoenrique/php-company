@@ -241,27 +241,24 @@ $(document).ready(function() {
 			    	if(validar_filtro_busqueda("lotes-2")){
 			    		$('#cargando').fadeIn("slow");
 			    		$("#SaldosAmanecidos-btnBuscar").hide();
-			    		$('#div_tablaDetalle').fadeOut("fast");
-
+							$('#div_tablaDetalle').fadeOut("fast"); filtro_busq.empresa = $("#SaldosAmanecidos-empresa").val();
+							filtro_busq.cedula = $("#SaldosAmanecidos-TH").val().replace(/ /g, '');
+							filtro_busq.producto = $("#SaldosAmanecidos-producto").val();
+							filtro_busq.nomEmpresa = $('option:selected', "#SaldosAmanecidos-empresa").attr("acnomcia");
+							filtro_busq.descProd = $('option:selected', "#SaldosAmanecidos-producto").attr("des");
+							filtro_busq.paginaActual = paginaActual;
+							filtro_busq.paginar = true;
+							filtro_busq.tamPg = tamPg;
 							var ceo_cook = decodeURIComponent(
 								document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 							);
-			//SE REALIZA LA INVOCACION AJAX
-							var dataRequest = JSON.stringify ({
-								empresa:$("#SaldosAmanecidos-empresa").val(),
-								cedula:$("#SaldosAmanecidos-TH").val().replace(/ /g,''),
-								producto:$("#SaldosAmanecidos-producto").val(),
-								nomEmpresa:$('option:selected', "#SaldosAmanecidos-empresa").attr("acnomcia"),
-								descProd:$('option:selected', "#SaldosAmanecidos-producto").attr("des"),
-								paginaActual:paginaActual,
-								paginar:true,
-								tamPg:tamPg
-							})
-								dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
-								$.post(baseURL + api + isoPais + "/reportes/saldosamanecidos", {request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)})
-			//DE SER EXITOSA LA COMUNICACION CON EL SERVICIO SE EJECUTA EL SIGUIENTE METODO "DONE"
-								.done(function(response){
-									data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
+							//SE REALIZA LA INVOCACION AJAX
+							var dataRequest = JSON.stringify(filtro_busq)
+							dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, { format: CryptoJSAesJson }).toString();
+							$.post(baseURL + api + isoPais + "/reportes/saldosamanecidos", { request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook) })
+								//DE SER EXITOSA LA COMUNICACION CON EL SERVICIO SE EJECUTA EL SIGUIENTE METODO "DONE"
+								.done(function (response) {
+									data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, { format: CryptoJSAesJson }).toString(CryptoJS.enc.Utf8))
 				 			$("#mensaje").remove();
 				 			$('#cargando').fadeOut("slow");
 				 			$("#SaldosAmanecidos-btnBuscar").show();
