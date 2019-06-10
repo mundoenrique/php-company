@@ -222,9 +222,7 @@ function buscarReposiciones(paginaActual){
 					filtro_busq.ceo_name = ceo_cook;
 
 	//SE REALIZA LA INVOCACION AJAX
-	var dataRequest= JSON.stringify({
-		filtro_busq:filtro_busq
-	});
+	var dataRequest= JSON.stringify(filtro_busq);
 	dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
 		    	$consulta = $.post(baseURL + api + isoPais + "/reportes/reposiciones",{request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)} );
 	//DE SER EXITOSA LA COMUNICACION CON EL SERVICIO SE EJECUTA EL SIGUIENTE METODO "DONE"

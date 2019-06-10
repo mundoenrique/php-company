@@ -2317,15 +2317,15 @@ class Reportes extends CI_Controller {
 						)
 					)
 				);
-				$paginaActual = $dataRequest->filtro_busq->paginaActual;
-				$empresa = $dataRequest->filtro_busq->empresa;
-				$fechaInicial = $dataRequest->filtro_busq->fechaInicial;
-				$fechaFin = $dataRequest->filtro_busq->fechaFin;
-				$idTarjetaHabiente = $dataRequest->filtro_busq->idTarjetaHabiente;
-				$tipoReposicion = $dataRequest->filtro_busq->tipoReposicion;
-				$producto = $dataRequest->filtro_busq->producto;
-				$tamPg = $dataRequest->filtro_busq->tamPg;
-				$paginar = $dataRequest->filtro_busq->paginar;
+				$paginaActual = $dataRequest->paginaActual;
+				$empresa = $dataRequest->empresa;
+				$fechaInicial = $dataRequest->fechaInicial;
+				$fechaFin = $dataRequest->fechaFin;
+				$idTarjetaHabiente = $dataRequest->idTarjetaHabiente;
+				$tipoReposicion = $dataRequest->tipoReposicion;
+				$producto = $dataRequest->producto;
+				$tamPg = $dataRequest->tamPg;
+				$paginar = $dataRequest->paginar;
 
 					$pruebaTabla = $this->callWSReposiciones($urlCountry, $empresa, $producto, $fechaInicial, $fechaFin, $paginaActual, $tipoReposicion, $idTarjetaHabiente, $tamPg, $paginar);
 					$pruebaTabla = $this->cryptography->encrypt($pruebaTabla);
