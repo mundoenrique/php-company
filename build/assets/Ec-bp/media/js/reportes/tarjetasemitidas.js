@@ -97,7 +97,6 @@ $(document).ready(function() {
 
 				filtro_busq.acrif = $("option:selected","#repTarjetasEmitidas_empresa").attr("acrif");
 				filtro_busq.acnomcia = $("option:selected","#repTarjetasEmitidas_empresa").attr("acnomcia");
-				filtro_busq.ceo_name = ceo_cook;
 				var dataRequest = JSON.stringify(filtro_busq);
 
 				//SE REALIZA LA INVOCACION AJAX
