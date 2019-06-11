@@ -105,9 +105,7 @@ var filtro_busq={};
 	    	$(this).hide();
 	    	$('#div_tablaDetalle').fadeOut("fast");
 //SE REALIZA LA INVOCACION AJAX
-				var dataRequest = JSON.stringify({
-					filtro_busq: filtro_busq
-				})
+				var dataRequest = JSON.stringify(filtro_busq);
 				dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {
 					format: CryptoJSAesJson
 				}).toString();
