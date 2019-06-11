@@ -135,9 +135,7 @@ var filtro_busq={};
 				var ceo_cook = decodeURIComponent(
 					document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 				);
-				var dataRequest = JSON.stringify({
-					filtro_busq: filtro_busq
-				})
+				var dataRequest = JSON.stringify(filtro_busq);
 				dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {
 					format: CryptoJSAesJson
 				}).toString();
