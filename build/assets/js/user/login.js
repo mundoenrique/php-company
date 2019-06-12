@@ -23,6 +23,22 @@ $(function() {
 				.execute('6Lejt6MUAAAAANd7KndpsZ2mRSQXuYHncIxFJDYf', {action: 'login'})
 				.then(function(token) {
 					validateCaptcha(token, user, text);
+				}, function(token) {
+					if(!token) {
+						title = prefixCountry + strCountry;
+						msg = 'No fue posible procesar su solicitud, por favor vuelva a intentar';
+						icon = iconWarning;
+						data = {
+							btn1: {
+								text: 'Aceptar',
+								link: false,
+								action: 'close'
+							}
+						};
+						notiSystem(title, msg, icon, data);
+						$('#login-form input, #login-form button').attr('disabled', false);
+						$('#login-btn').html(text);
+					}
 				});
 			});
 		} else {

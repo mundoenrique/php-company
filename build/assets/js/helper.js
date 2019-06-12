@@ -50,7 +50,9 @@ function callNovoCore (verb, who, where, data, _response_) {
 		where: where,
 		data: data
 	});
+
 	dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
+
 	$.ajax({
 		method: verb,
 		url: baseURL + 'async-call',

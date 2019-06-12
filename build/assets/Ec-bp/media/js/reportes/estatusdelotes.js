@@ -137,10 +137,7 @@ var filtro_busq={};
 				var ceo_cook = decodeURIComponent(
 					document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 				);
-				var dataRequest = JSON.stringify({
-					filtro_busq: filtro_busq
-
-				})
+				var dataRequest = JSON.stringify(filtro_busq);
 				dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {
 					format: CryptoJSAesJson
 				}).toString();
@@ -194,17 +191,28 @@ var filtro_busq={};
 						if(data.rc =="-29"){
 										alert(data.mensaje);
 										$(location).attr('href',baseURL+isoPais+'/login');
+								}else if(data){
+									$("#mensaje").remove();
+									var contenedor=$("#div_tablaDetalle");
+									$("#tabla-estatus-lotes").fadeOut("fast");
+									$("#view-results").attr("style","display:none");
+									var div =$(document.createElement("div")).appendTo(contenedor);
+									div.attr("id","mensaje");
+									div.attr("style","background-color:rgb(252,199,199); margin-top:45px;");
+									var p = $(document.createElement("p")).appendTo(div);
+									p.html(data);
+									p.attr("style","text-align:center;padding:10px;font-size:14px");
 								}else{
-							$("#mensaje").remove();
-							var contenedor=$("#div_tablaDetalle");
-							$("#tabla-estatus-lotes").fadeOut("fast");
-							$("#view-results").attr("style","display:none");
-							var div =$(document.createElement("div")).appendTo(contenedor);
-							div.attr("id","mensaje");
-							div.attr("style","background-color:rgb(252,199,199); margin-top:45px;");
-							var p = $(document.createElement("p")).appendTo(div);
-							p.html(data.mensaje);
-							p.attr("style","text-align:center;padding:10px;font-size:14px");
+									$("#mensaje").remove();
+									var contenedor=$("#div_tablaDetalle");
+									$("#tabla-estatus-lotes").fadeOut("fast");
+									$("#view-results").attr("style","display:none");
+									var div =$(document.createElement("div")).appendTo(contenedor);
+									div.attr("id","mensaje");
+									div.attr("style","background-color:rgb(252,199,199); margin-top:45px;");
+									var p = $(document.createElement("p")).appendTo(div);
+									p.html(data.mensaje);
+									p.attr("style","text-align:center;padding:10px;font-size:14px");
 						}
 					}
 				});

@@ -253,9 +253,14 @@ $('#tabla-datos-general').on('click','#anular', function(){
 							var ceo_cook = decodeURIComponent(
 								document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 							);
-
-              $.post(baseURL+api+isoPais+'/consulta/anularos',{'data-idOS':idOS, 'data-pass':pass, ceo_name: ceo_cook})
-			   .done(function(data){
+							var dataRequest = JSON.stringify ({
+								data_idOS:idOS,
+								data_pass:pass
+							})
+							dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
+              $.post(baseURL+api+isoPais+'/consulta/anularos',{request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)})
+			   .done(function(response){
+					data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
             $aux.dialog('destroy');
 
                 if(!data.ERROR){

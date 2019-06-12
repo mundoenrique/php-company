@@ -769,15 +769,17 @@ class Consultas extends CI_Controller {
 					if($funcAct){
 							$result = $this->callWsPagoOS($urlCountry);
 					}else{
-							$result = json_encode($result = array("ERROR"=>lang('SIN_FUNCION')));
+							$result = ["ERROR"=>lang('SIN_FUNCION')];
 					}
-					$this->output->set_content_type('application/json')->set_output(json_encode($result));
+					$response = $this->cryptography->encrypt($result);
+					$this->output->set_content_type('application/json')->set_output(json_encode($response));
 
 			}elseif($paisS!=$urlCountry && $paisS!=''){
 					$this->session->sess_destroy();
 					redirect($urlCountry.'/login');
 			}elseif($this->input->is_ajax_request()){
-					$this->output->set_content_type('application/json')->set_output(json_encode( array('ERROR' => '-29' )));
+					$response = $this->cryptography->encrypt(array('ERROR' => '-29' ));
+					$this->output->set_content_type('application/json')->set_output(json_encode($response));
 			}else{
 					redirect($urlCountry.'/login');
 			}
@@ -820,8 +822,6 @@ class Consultas extends CI_Controller {
 			$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
 			$jsonResponse = np_Hoplite_Decrypt($response, 'callWsPagoOS');
 			$response =  json_decode($jsonResponse);
-
-			log_message("info","enviar TOKEN ------------------->>>>" . json_encode($response));
 
 			//simula respuesta de WS
 			/*sleep(2);
@@ -874,10 +874,20 @@ class Consultas extends CI_Controller {
 
 			np_hoplite_countryCheck($urlCountry);
 
-			$idOS = $this->input->post('idOS');
-			$codeToken = $this->input->post('codeToken');
-			$totalamount = $this->input->post('totalamount');
-			$factura = $this->input->post('factura');
+			$dataRequest = json_decode(
+				$this->security->xss_clean(
+					strip_tags(
+						$this->cryptography->decrypt(
+							base64_decode($this->input->get_post('plot')),
+							utf8_encode($this->input->get_post('request'))
+						)
+					)
+				)
+			);
+			$idOS = $dataRequest->idOS;
+			$codeToken = $dataRequest->codeToken;
+			$totalamount = $dataRequest->totalamount;
+			$factura = $dataRequest->factura;
 
 			$this->lang->load('erroreseol');
 
@@ -893,13 +903,15 @@ class Consultas extends CI_Controller {
 					}else{
 							$result = array("ERROR"=>lang('SIN_FUNCION'));
 					}
-					$this->output->set_content_type('application/json')->set_output(json_encode($result));
+					$response = $this->cryptography->encrypt($result);
+					$this->output->set_content_type('application/json')->set_output(json_encode($response));
 
 			}elseif($paisS!=$urlCountry && $paisS!=''){
 					$this->session->sess_destroy();
 					redirect($urlCountry.'/login');
 			}elseif($this->input->is_ajax_request()){
-					$this->output->set_content_type('application/json')->set_output(json_encode( array('ERROR' => '-29' )));
+					$response = $this->cryptography->encrypt(array('ERROR' => '-29' ));
+					$this->output->set_content_type('application/json')->set_output(json_encode($response));
 			}else{
 					redirect($urlCountry.'/login');
 			}

@@ -9,7 +9,8 @@ $(document).ready(function() {
 		$("#SaldosAmanecidos-TH").attr('maxlength','10');
 
 		$("#cargando_empresa").fadeIn("slow");
-		$.getJSON(baseURL + api + isoPais + '/empresas/lista').always(function( data ) {
+		$.getJSON(baseURL + api + isoPais + '/empresas/lista').always(function(response){
+			data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 			$("#cargando_empresa").fadeOut("slow");
 			if(!(data.ERROR)){
 
@@ -41,7 +42,13 @@ $(document).ready(function() {
 			var ceo_cook = decodeURIComponent(
 				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 			);
-			$.post(baseURL + api + isoPais + "/producto/lista", { 'acrif': acrif, ceo_name: ceo_cook }, function(data){
+			var dataRequest = JSON.stringify ({
+				acrif: acrif
+			})
+				dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
+				$.post(baseURL + api + isoPais + "/producto/lista", {request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)})
+				.done(function(response){
+					data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 				$("#cargando_producto").fadeOut("slow");
 				$("#SaldosAmanecidos-empresa").removeAttr('disabled');
 				if(!data.ERROR){
@@ -241,20 +248,24 @@ $(document).ready(function() {
 						$('#cargando').fadeIn("slow");
 						$("#SaldosAmanecidos-btnBuscar").hide();
 						$('#div_tablaDetalle').fadeOut("fast");
-						filtro_busq.empresa=$("#SaldosAmanecidos-empresa").val();
-						filtro_busq.cedula=$("#SaldosAmanecidos-TH").val().replace(/ /g,'');
-						filtro_busq.producto=$("#SaldosAmanecidos-producto").val();
-						filtro_busq.nomEmpresa=$('option:selected', "#SaldosAmanecidos-empresa").attr("acnomcia");
-						filtro_busq.descProd=$('option:selected', "#SaldosAmanecidos-producto").attr("des");
-						filtro_busq.paginaActual=paginaActual;
-						filtro_busq.paginar=true;
-						filtro_busq.tamPg=tamPg;
-						filtro_busq.ceo_name=ceo_cook;
-
+						filtro_busq.empresa = $("#SaldosAmanecidos-empresa").val();
+						filtro_busq.cedula = $("#SaldosAmanecidos-TH").val().replace(/ /g, '');
+						filtro_busq.producto = $("#SaldosAmanecidos-producto").val();
+						filtro_busq.nomEmpresa = $('option:selected', "#SaldosAmanecidos-empresa").attr("acnomcia");
+						filtro_busq.descProd = $('option:selected', "#SaldosAmanecidos-producto").attr("des");
+						filtro_busq.paginaActual = paginaActual;
+						filtro_busq.paginar = true;
+						filtro_busq.tamPg = tamPg;
+						var ceo_cook = decodeURIComponent(
+							document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+						);
 						//SE REALIZA LA INVOCACION AJAX
-						$consulta = $.post(baseURL + api + isoPais + "/reportes/saldosamanecidos",filtro_busq );
-						//DE SER EXITOSA LA COMUNICACION CON EL SERVICIO SE EJECUTA EL SIGUIENTE METODO "DONE"
-						$consulta.done(function(data){
+						var dataRequest = JSON.stringify(filtro_busq)
+						dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, { format: CryptoJSAesJson }).toString();
+						$.post(baseURL + api + isoPais + "/reportes/saldosamanecidos", { request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook) })
+							//DE SER EXITOSA LA COMUNICACION CON EL SERVICIO SE EJECUTA EL SIGUIENTE METODO "DONE"
+							.done(function (response) {
+								data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, { format: CryptoJSAesJson }).toString(CryptoJS.enc.Utf8))
 							$("#mensaje").remove();
 							$('#cargando').fadeOut("slow");
 							$("#SaldosAmanecidos-btnBuscar").show();

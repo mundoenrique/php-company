@@ -27,7 +27,8 @@ $(document).ready(function() {
 //LLENA EL COMBO DE EMPRESA
 //--------------------------
 		$("#cargando_empresa").fadeIn("slow");
-		$.getJSON(baseURL + api + isoPais + '/empresas/lista').always(function( data ) {
+		$.getJSON(baseURL + api + isoPais + '/empresas/lista').always(function( response ) {
+			var data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
 			$("#cargando_empresa").fadeOut("slow");
 			if(!(data.ERROR)){
 
@@ -57,7 +58,10 @@ $(document).ready(function() {
 			var ceo_cook = decodeURIComponent(
 				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 			);
-			$.post(baseURL + api + isoPais + "/producto/lista", { 'acrif': acrif, ceo_name: ceo_cook }, function(data){
+			var dataRequest = JSON.stringify({'acrif': acrif});
+			dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
+			$.post(baseURL + api + isoPais + "/producto/lista", {request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)}, function(response){
+				var data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
 				$("#cargando_producto").fadeOut("slow");
 				$("#repEstadosDeCuenta_empresa").removeAttr('disabled');
 				if(!data.ERROR){
@@ -231,11 +235,13 @@ function BuscarEstadosdeCuenta(paginaActual){
 			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 		);
 		filtro_busq.ceo_name = ceo_cook;
-		$consulta = $.post(baseURL + api + isoPais + "/reportes/estadosdecuenta",filtro_busq );
+		var dataRequest = JSON.stringify(filtro_busq);
+		dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
+		$consulta = $.post(baseURL + api + isoPais + "/reportes/estadosdecuenta", {request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)} );
 //DE SER EXITOSA LA COMUNICACION CON EL SERVICIO SE EJECUTA EL SIGUIENTE METODO "DONE"
 
- 		$consulta.done(function(data){
-
+ 		$consulta.done(function(response){
+			var data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
 // SE OCULTA EL GIF DE CARGANDO Y SE MUESTRA EL CONTENEDOR DE LA TABLA
 		$("#mensaje").remove();
 		$("#view-results").attr("style","");

@@ -36,14 +36,19 @@ $(function () {
 	// ACCION DEL EVENTO PARA BUSCAR TARJETAS TM
 
 	$('#buscar').on('click', function () {
-		if (!validar_filtro_busqueda("lotes-contenedor")) {
-			return false;
+		var errElem = $(this).siblings('#mensajeError');
+		var form = $('#form-criterio-busqueda');
+		errElem.fadeOut('fast');
+		validateForms(form);
+		if(form.valid()) {
+			serv_var.busk = true;
+			serv_var.TotalTjts = 0;
+			buscar(1);
+		} else {
+			$('.div_tabla_detalle').fadeOut('fast');
+      errElem.html('Debe ingresar datos numéricos');
+			errElem.fadeIn('fast');
 		}
-
-		serv_var.busk = true;
-		serv_var.TotalTjts = 0;
-
-		buscar(1);
 	});
 
 
@@ -66,16 +71,17 @@ $(function () {
 		var ceo_cook = decodeURIComponent(
 			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 		);
-		$.post(baseURL + api + isoPais + '/servicios/transferencia-maestra/buscar', {
-				'data-dni': $('#dni').val(),
-				'data-tjta': $('#nroTjta').val(),
-				'data-pg': pgSgt,
-				'data-paginas': serv_var.paginas,
-				'data-paginar': serv_var.paginar,
-				ceo_name: ceo_cook
+		var dataRequest = JSON.stringify ({
+			data_dni: $('#dni').val(),
+			data_tjta: $('#nroTjta').val(),
+			data_pg: pgSgt,
+			data_paginas: serv_var.paginas,
+			data_paginar: serv_var.paginar
 			})
-			.done(function (data) {
-
+			dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
+		$.post(baseURL + api + isoPais + '/servicios/transferencia-maestra/buscar',{request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)})
+			.done(function (response) {
+				data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 				$aux.dialog('destroy');
 
 				if (!data.result.ERROR) {

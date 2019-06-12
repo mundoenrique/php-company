@@ -35,10 +35,12 @@ $(function(){
 					var ceo_cook = decodeURIComponent(
 						document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 					);
+					var dataRequest = JSON.stringify({'pass':pass, 'embozo1':embozo1, 'embozo2':embozo2, 'conceptoDim':conceptoDim, 'info':info, 'idTipoLote':idTipoLote});
+					dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
           $.post(baseURL+isoPais+'/lotes/confirmacion/confirmar',
-            {'pass':pass, 'embozo1':embozo1, 'embozo2':embozo2, 'conceptoDim':conceptoDim, 'info':info, 'idTipoLote':idTipoLote, ceo_name: ceo_cook})
-          .done( function(data){
-
+						{request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)})
+          .done( function(response){
+							var data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
               if(!data.ERROR){
                 if (data.linkAut) {
                   notificacion('Confirmación','Proceso exitoso.<h5>Ha confirmado el Lote Nro: '+$('#numLote').text()+'</h5>', baseURL+isoPais+'/lotes/autorizacion')

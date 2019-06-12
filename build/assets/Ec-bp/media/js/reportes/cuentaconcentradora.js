@@ -192,10 +192,7 @@ $(document).ready(function () {
 		var ceo_cook = decodeURIComponent(
 			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 		);
-		//filtro_busq.ceo_name = ceo_cook;
-		var dataRequest = JSON.stringify({
-			filtro_busq: filtro_busq
-		})
+		var dataRequest = JSON.stringify(filtro_busq);
 
 		dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {
 			format: CryptoJSAesJson
@@ -411,9 +408,7 @@ $(document).ready(function () {
 			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 		);
 		//filtro_busq.ceo_name = ceo_cook;
-		var dataRequest = JSON.stringify({
-			filtro_busq: filtro_busq
-		})
+		var dataRequest = JSON.stringify(filtro_busq);
 
 		dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {
 			format: CryptoJSAesJson

@@ -80,17 +80,17 @@ $config = [
 		[
 			'field' => 'data-acnomcia',
 			'label' => 'data-acnomcia',
-			'rules' => 'trim|regex_match[/^([\w-.,ñ]+[\s]*)+$/i]|required'
+			'rules' => 'trim|regex_match[/^([\w-.,#ñáéíóúÑÁÉÍÓÚ]+[\s]*)+$/i]|required'
 		],
 		[
 			'field' => 'data-acrazonsocial',
 			'label' => 'data-acrazonsocial',
-			'rules' => 'trim|regex_match[/^([\w-.,ñ]+[\s]*)+$/i]|required'
+			'rules' => 'trim|regex_match[/^([\w-.,#ñáéíóúÑÁÉÍÓÚ]+[\s]*)+$/i]|required'
 		],
 		[
 			'field' => 'data-acdesc',
 			'label' => 'data-acdesc',
-			'rules' => 'trim|regex_match[/^([\w-.,ñ]+[\s]*)+$/i]|required'
+			'rules' => 'trim|regex_match[/^([\w-.,#ñáéíóúÑÁÉÍÓÚ]+[\s]*)+$/i]'
 		],
 		[
 			'field' => 'data-accodcia',
@@ -102,12 +102,12 @@ $config = [
 		[
 			'field' => 'data-marcaProducto',
 			'label' => 'data-marcaProducto',
-			'rules' => 'trim|regex_match[/^([\w-.,ñ]+[\s]*)+$/i]|required'
+			'rules' => 'trim|regex_match[/^([\w-.,#ñáéíóúÑÁÉÍÓÚ]+[\s]*)+$/i]|required'
 		],
 		[
 			'field' => 'data-nombreProducto',
 			'label' => 'data-nombreProducto',
-			'rules' => 'trim|regex_match[/^([\w-.,ñ]+[\s]*)+$/i]|required'
+			'rules' => 'trim|regex_match[/^([\w-.,#ñáéíóúÑÁÉÍÓÚ]+[\s]*)+$/i]|required'
 		],
 		[
 			'field' => 'data-idproducto',
@@ -129,17 +129,17 @@ $config = [
 		[
 			'field' => 'name',
 			'label' => 'name',
-			'rules' => 'trim|regex_match[/^([\w-.,ñ]+[\s]*)+$/i]|required'
+			'rules' => 'trim|regex_match[/^([\w-.,#ñáéíóúÑÁÉÍÓÚ]+[\s]*)+$/i]|required'
 		],
 		[
 			'field' => 'business-name',
 			'label' => 'business-name',
-			'rules' => 'trim|regex_match[/^([\w-.,ñ]+[\s]*)+$/i]|required'
+			'rules' => 'trim|regex_match[/^([\w-.,#ñáéíóúÑÁÉÍÓÚ]+[\s]*)+$/i]|required'
 		],
 		[
 			'field' => 'description',
 			'label' => 'description',
-			'rules' => 'trim|regex_match[/^([\w-.,ñ]+[\s]*)+$/i]|required'
+			'rules' => 'trim|regex_match[/^([\w-.,#ñáéíóúÑÁÉÍÓÚ]+[\s]*)+$/i]'
 		],
 		[
 			'field' => 'code',
@@ -156,12 +156,12 @@ $config = [
 		[
 			'field' => 'nomProduc',
 			'label' => 'nomProduc',
-			'rules' => 'trim|regex_match[/^([\w-.,ñ]+[\s]*)+$/i]|required'
+			'rules' => 'trim|regex_match[/^([\w-.,#ñáéíóúÑÁÉÍÓÚ]+[\s]*)+$/i]|required'
 		],
 		[
 			'field' => 'marcProduc',
 			'label' => 'marcProduc',
-			'rules' => 'trim|regex_match[/^([\w-.,ñ]+[\s]*)+$/i]|required'
+			'rules' => 'trim|regex_match[/^([\w-.,#ñáéíóúÑÁÉÍÓÚ]+[\s]*)+$/i]|required'
 		]
 	]
 ];

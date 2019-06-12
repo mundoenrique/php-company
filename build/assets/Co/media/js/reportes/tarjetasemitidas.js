@@ -13,7 +13,8 @@ $(document).ready(function() {
 
 	$("#cargando_empresa").fadeIn("fast");
 
-	$.getJSON(baseURL + api + isoPais +'/empresas/lista').always(function( data ) {
+	$.getJSON(baseURL + api + isoPais +'/empresas/lista').always(function(response) {
+		data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 		$("#cargando_empresa").fadeOut("fast");
 		if(!(data.ERROR)){
 
@@ -72,6 +73,9 @@ $(document).ready(function() {
 
 		var filtro_busq={};
 		var $consulta;
+		var ceo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
 		if(validar_filtro_busqueda("lotes-2")){
 
 			$('#cargando').fadeIn("slow");
@@ -90,16 +94,14 @@ $(document).ready(function() {
 
 			filtro_busq.acrif = $("option:selected","#repTarjetasEmitidas_empresa").attr("acrif");
 			filtro_busq.acnomcia = $("option:selected","#repTarjetasEmitidas_empresa").attr("acnomcia");
+			var dataRequest = JSON.stringify(filtro_busq);
 
 			//SE REALIZA LA INVOCACION AJAX
-			var ceo_cook = decodeURIComponent(
-				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-				);
-				filtro_busq.ceo_name = ceo_cook
-			$consulta = $.post(baseURL+ api+ isoPais +"/reportes/tarjetasemitidas",filtro_busq );
+			dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
+				$consulta = $.post(baseURL+ api+ isoPais +"/reportes/tarjetasemitidas",{request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook) } );
 			//DE SER EXITOSA LA COMUNICACION CON EL SERVICIO SE EJECUTA EL SIGUIENTE METODO "DONE"
-
-			$consulta.done(function(data){
+			$consulta.done(function(response){
+				data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 				$("#mensaje").remove();
 				$("#view-results").attr("style","");
 				$('#cargando').fadeOut("slow");
@@ -144,7 +146,7 @@ $(document).ready(function() {
 									descargarArchivo(datos, baseURL+api+isoPais+"/reportes/tarjetasEmitidasExpXLS", "Exportar Excel" );*/
 									var ceo_cook = decodeURIComponent(
 										document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-										);
+									);
 									$('form#formulario').empty();
 									$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'">');
 									$('form#formulario').append('<input type="hidden" name="idEmpresa" value="'+filtro_busq.acrif+'" />');
@@ -550,7 +552,7 @@ return valido;
   $aux = $("#cargando").dialog({title:titulo,modal:true, close:function(){$(this).dialog('close')}, resizable:false });
 	var ceo_cook = decodeURIComponent(
 		document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-		);
+	);
 			datos.ceo_name = ceo_cook
       $.post(url,datos).done(function(data){
           $aux.dialog('destroy')

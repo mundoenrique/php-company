@@ -436,9 +436,20 @@ class Servicios extends CI_Controller {
 		$token = $this->session->userdata('token');
 		$idEmpresa = $this->session->userdata('acrifS');
 		$idProductoS = $this->session->userdata('idProductoS');
-		$pg = $this->input->post('data-pg');
-		$paginas = $this->input->post('data-paginas');
-		$paginar = $this->input->post('data-paginar');
+
+		$dataRequest = json_decode(
+			$this->security->xss_clean(
+				strip_tags(
+					$this->cryptography->decrypt(
+						base64_decode($this->input->get_post('plot')),
+						utf8_encode($this->input->get_post('request'))
+					)
+				)
+			)
+		);
+		$pg = $dataRequest->data_pg;
+		$paginas = $dataRequest->data_paginas;
+		$paginar = $dataRequest->data_paginar;
 
 		$listaTarjetas = [
 			"paginaActual" => $pg,
@@ -447,10 +458,10 @@ class Servicios extends CI_Controller {
 		];
 		$listaTarjetas = [$listaTarjetas];
 
-		$tarjetas = $this->input->post('data-tarjeta');
-		$dnis = $this->input->post('data-id_ext_per');
-		$montoTrans = $this->input->post('data-monto');
-		$pass = $this->input->post('data-pass');
+		$tarjetas = $dataRequest->data_tarjeta;
+		$dnis = $dataRequest->data_id_ext_per;
+		$montoTrans = $dataRequest->data_monto;
+		$pass = $dataRequest->data_pass;
 		$lista;
 
 		foreach ($tarjetas as $key => $value) {
@@ -529,7 +540,8 @@ class Servicios extends CI_Controller {
 
 			}
 		} else {
-			return $codigoError = array('ERROR' => lang('ERROR_GENERICO_USER') );
+			$codigoError = $this->cryptography->encrypt(array('ERROR' => lang('ERROR_GENERICO_USER') ));
+			return $codigoError;
 
 		}
 	}
@@ -596,9 +608,20 @@ class Servicios extends CI_Controller {
 		$token = $this->session->userdata('token');
 		$idEmpresa = $this->session->userdata('acrifS');
 		$idProductoS = $this->session->userdata('idProductoS');
-		$pg = $this->input->post('data-pg');
-		$paginas = $this->input->post('data-paginas');
-		$paginar = $this->input->post('data-paginar');
+
+		$dataRequest = json_decode(
+			$this->security->xss_clean(
+				strip_tags(
+					$this->cryptography->decrypt(
+						base64_decode($this->input->get_post('plot')),
+						utf8_encode($this->input->get_post('request'))
+					)
+				)
+			)
+		);
+		$pg = $dataRequest->data_pg;
+		$paginas = $dataRequest->data_paginas;
+		$paginar = $dataRequest->data_paginar;
 
 		$listaTarjetas = [
 			"paginaActual" => $pg,
@@ -606,10 +629,11 @@ class Servicios extends CI_Controller {
 			"paginar" => $paginar
 		];
 		$listaTarjetas = [$listaTarjetas];
-		$tarjetas = $this->input->post('data-tarjeta');
-		$dnis = $this->input->post('data-id_ext_per');
-		$montoTrans = $this->input->post('data-monto');
-		$pass = $this->input->post('data-pass');
+
+		$tarjetas = $dataRequest->data_tarjeta;
+		$dnis = $dataRequest->data_id_ext_per;
+		$montoTrans = $dataRequest->data_monto;
+		$pass = $dataRequest->data_pass;
 		$lista;
 
 		foreach ($tarjetas as $key => $value) {
@@ -653,6 +677,7 @@ class Servicios extends CI_Controller {
 					$response->logAccesoObject, $response->usuario
 				);
 				log_message('DEBUG', 'RESULTS: ' . json_encode($response));
+				$response= $this->cryptography->encrypt($response);
 				return $response;
 
 			} else {
@@ -675,11 +700,13 @@ class Servicios extends CI_Controller {
 
 					}
 				}
+				$codigoError = $this->cryptography->encrypt($codigoError);
 				return $codigoError;
 
 			}
 		} else {
-			return $codigoError = ['ERROR' => lang('ERROR_GENERICO_USER')];
+			$codigoError = $this->cryptography->encrypt(['ERROR' => lang('ERROR_GENERICO_USER')]);
+			return $codigoError;
 
 		}
 	}
@@ -706,7 +733,7 @@ class Servicios extends CI_Controller {
 		$paisS = $this->session->userdata('pais');
 
 		if($paisS == $urlCountry && $logged_in && $moduloAct !==false ) {
-			$FooterCustomInsertJS = ["jquery-1.10.2.min.js", "jquery-ui-1.10.3.custom.min.js", "jquery.balloon.min.js",
+			$FooterCustomInsertJS = ["jquery-3.4.0.min.js", "jquery-ui-1.12.1.min.js", "jquery.balloon.min.js",
 			"aes.min.js","aes-json-format.min.js","jquery.dataTables.min.js", "header.js", "dashboard/widget-empresa.js",
 			"jquery.fileupload.js", "jquery.iframe-transport.js", "servicios/actualizar-datos.js", "routes.js"];
 			$FooterCustomJS = "";
@@ -1296,7 +1323,8 @@ class Servicios extends CI_Controller {
 				$result = $this->callWsRecargaTM($urlCountry);
 
 			}else{
-				$result = array("ERROR"=>lang('SIN_FUNCION'));
+
+				$result = ["ERROR"=>lang('SIN_FUNCION')];
 
 			}
 			$response = $this->cryptography->encrypt($result);
@@ -1412,7 +1440,8 @@ class Servicios extends CI_Controller {
 		);
 		$amount = $dataRequest->amount;
 		$descript = $dataRequest->descript;
-		$account = $dataRequest->account;
+		//$account = $dataRequest->account;
+		$account = (isset($dataRequest->account))? $dataRequest->account : "";
 		$type = $dataRequest->type;
 		$codeToken = $dataRequest->codeToken;
 
@@ -1428,7 +1457,7 @@ class Servicios extends CI_Controller {
 			if($funcAct) {
 				$result = $this->callWsRecargaTMProcede($urlCountry, $amount, $descript, $account, $type, $codeToken);
 			}else{
-				$result = array("ERROR"=>lang('SIN_FUNCION'));
+				$result = ["ERROR"=>lang('SIN_FUNCION')];
 			}
 			$response = $this->cryptography->encrypt($result);
 			$this->output->set_content_type('application/json')->set_output(json_encode($response));

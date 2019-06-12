@@ -63,9 +63,9 @@ class Users extends CI_Controller {
             $header = $this->parser->parse('layouts/layout-header',array('menuHeaderActive'=>FALSE,'menuHeaderMainActive'=>FALSE,'menuHeader'=>$menuHeader,'titlePage'=>$titlePage,'is_login'=>true),TRUE);
 						//JAVASCRIPTS A CARGAR
 						if($urlCountry == 'Ec-bp') {
-							$FooterCustomInsertJS=["jquery-1.10.2.min.js","jquery-ui-1.10.3.custom.min.js","jquery-md5.js","jquery.ui.sliderbutton.js","jquery.balloon.min.js","users/login.js","routes.js"];
+							$FooterCustomInsertJS=["jquery-3.4.0.min.js", "jquery-ui-1.12.1.min.js","jquery-md5.js","jquery.ui.sliderbutton.js","jquery.balloon.min.js","aes.min.js","aes-json-format.min.js","users/login.js","routes.js"];
 						} else {
-							$FooterCustomInsertJS=["jquery-1.10.2.min.js","jquery-ui-1.10.3.custom.min.js","jquery-md5.js","jquery.kwicks.js","jquery.ui.sliderbutton.js","jquery.balloon.min.js","users/login.js","routes.js"];
+							$FooterCustomInsertJS=["jquery-3.4.0.min.js", "jquery-ui-1.12.1.min.js","jquery-md5.js","jquery.kwicks.js","jquery.ui.sliderbutton.js","jquery.balloon.min.js","aes.min.js","aes-json-format.min.js","users/login.js","routes.js"];
 						}
             //INSTANCIA DE CÓDIGO JS A AGREGAR
             $FooterCustomJS = "";
@@ -420,7 +420,7 @@ class Users extends CI_Controller {
         //INSTANCIA DEL CONTENIDO PARA EL HEADER, INCLUYE MENU
         $header = $this->parser->parse('layouts/layout-header',array('menuHeaderActive'=>FALSE,'menuHeaderMainActive'=>FALSE,'menuHeader'=>$menuHeader,'titlePage'=>$titlePage),TRUE);
         //JAVASCRIPTS A CARGAR
-        $FooterCustomInsertJS=["jquery-1.10.2.min.js","jquery-ui-1.10.3.custom.min.js","jquery-md5.js","jquery.kwicks.js","jquery.ui.sliderbutton.js","jquery.balloon.min.js","users/pass-recovery.js","routes.js"];
+        $FooterCustomInsertJS=["jquery-3.4.0.min.js", "jquery-ui-1.12.1.min.js","jquery-md5.js","jquery.kwicks.js","jquery.ui.sliderbutton.js","jquery.balloon.min.js","aes.min.js","aes-json-format.min.js","users/pass-recovery.js","routes.js"];
         //INSTANCIA DEL FOOTER
         $footer = $this->parser->parse('layouts/layout-footer',array('menuFooterActive'=>TRUE,'menuFooter'=>$menuFooter,'FooterCustomInsertJSActive'=>TRUE,'FooterCustomInsertJS'=>$FooterCustomInsertJS,'FooterCustomJSActive'=>FALSE),TRUE);
         //INSTANCIA DE PARTE DE CUERPO
@@ -599,7 +599,7 @@ class Users extends CI_Controller {
             //INSTANCIA DEL CONTENIDO PARA EL HEADER , INCLUYE MENU
             $header = $this->parser->parse('layouts/layout-header',array('bodyclass'=>'full-width','menuHeaderActive'=>FALSE,'menuHeaderMainActive'=>FALSE,'menuHeader'=>$menuHeader,'titlePage'=>$titlePage),TRUE);
             //JAVASCRIPTS A CARGAR.
-            $FooterCustomInsertJS=["jquery-1.10.2.min.js","jquery-ui-1.10.3.custom.min.js","jquery.balloon.min.js","users/terminos.js","routes.js"];
+            $FooterCustomInsertJS=["jquery-3.4.0.min.js", "jquery-ui-1.12.1.min.js","jquery.balloon.min.js","aes.min.js","aes-json-format.min.js","users/terminos.js","routes.js"];
             $footer = $this->parser->parse('layouts/layout-footer',array('menuFooterActive'=>TRUE,'menuFooter'=>$menuFooter,'FooterCustomInsertJSActive'=>TRUE,'FooterCustomInsertJS'=>$FooterCustomInsertJS,'FooterCustomJSActive'=>FALSE),TRUE);
             $content = $this->parser->parse('users/content-condiciones',array(),TRUE);
             $sidebarlogin= $this->parser->parse('users/widget-signin',array('sidebarActive'=>FALSE),TRUE);
@@ -662,7 +662,7 @@ class Users extends CI_Controller {
             //INSTANCIA DEL CONTENIDO PARA EL HEADER , INCLUYE MENU
             $header = $this->parser->parse('layouts/layout-header',array('bodyclass'=>'full-width','menuHeaderActive'=>FALSE,'menuHeaderMainActive'=>FALSE,'menuHeader'=>$menuHeader,'titlePage'=>$titlePage),TRUE);
             //JAVASCRIPTS A CARGAR.
-            $FooterCustomInsertJS=["jquery-1.10.2.min.js","jquery-ui-1.10.3.custom.min.js","jquery.balloon.min.js","jquery-md5.js","users/clave.js","header.js","routes.js"];
+            $FooterCustomInsertJS=["jquery-3.4.0.min.js", "jquery-ui-1.12.1.min.js","jquery.balloon.min.js","jquery-md5.js","aes.min.js","aes-json-format.min.js","users/clave.js","header.js","routes.js"];
             $footer = $this->parser->parse('layouts/layout-footer',array('menuFooterActive'=>TRUE,'menuFooter'=>$menuFooter,'FooterCustomInsertJSActive'=>TRUE,'FooterCustomInsertJS'=>$FooterCustomInsertJS,'FooterCustomJSActive'=>FALSE),TRUE);
             $content = $this->parser->parse('users/content-changePassNewUser',array(
                 'titulo'=>$nombreCompleto,
@@ -864,9 +864,9 @@ class Users extends CI_Controller {
             $lastSessionD = $this->session->userdata('lastSession');
 						$jsRte = '../../../js/';
 						$thirdsJsRte = '../../../js/third_party/';
-            $FooterCustomInsertJS=["jquery-1.10.2.min.js","jquery-ui-1.10.3.custom.min.js",
-							"jquery.balloon.min.js","jquery-md5.js","jquery.paginate.js",
-							"users/configuracion.js","header.js","jquery.fileupload.js","jquery.iframe-transport.js","aes.min.js","aes-json-format.min.js","aes.min.js","aes-json-format.min.js","routes.js",
+            $FooterCustomInsertJS=["jquery-3.4.0.min.js", "jquery-ui-1.12.1.min.js",
+							"jquery.balloon.min.js","jquery-md5.js","jquery.paginate.js","aes.min.js","aes-json-format.min.js",
+							"users/configuracion.js","header.js","jquery.fileupload.js","jquery.iframe-transport.js","routes.js",
 							$thirdsJsRte."jquery.validate.min.js",$jsRte."validate-forms.js",$thirdsJsRte."additional-methods.min.js"];
             $FooterCustomJS="";
             $titlePage="Conexión Empresas Online-Configuración";
@@ -939,7 +939,7 @@ class Users extends CI_Controller {
             $idProductoS = $this->session->userdata('idProductoS');
             $idEmpresa = $this->session->userdata('acrifS');
 
-            $lista[] = $this->callWSListaEmpresas($urlCountry);
+						$lista[] = $this->callWSListaEmpresas($urlCountry);
             $content = $this->parser->parse('users/content-empresasconfig',array('listaEmpr' => $lista),TRUE);
 
             $datos = array(
@@ -1166,7 +1166,11 @@ class Users extends CI_Controller {
      * @param  string $urlCountry
      * @return JSON
      */
-    public function getInfoEmpresaUser($urlCountry){
+    public function getInfoEmpresaUser($urlCountry) {
+			if(!$this->input->is_ajax_request()) {
+				redirect(base_url($urlCountry.'/dashboard'), 'location');
+				exit();
+			}
 
         //cargar archivo de configuración del país
         np_hoplite_countryCheck($urlCountry);
@@ -1186,7 +1190,7 @@ class Users extends CI_Controller {
 							)
 						);
 						$acodcia = $dataRequest->data_accodcia;
-            $lista = $this->callWSInfoEmpresa($urlCountry, $acodcia);
+						$lista = $this->callWSInfoEmpresa($urlCountry, $acodcia);
 						$response = $this->cryptography->encrypt($lista);
             $this->output->set_content_type('application/json')->set_output(json_encode($response));
         }elseif($paisS!=$urlCountry && $paisS!=''){
@@ -1195,7 +1199,8 @@ class Users extends CI_Controller {
             redirect($urlCountry.'/login');
 
         }elseif($this->input->is_ajax_request()){
-            $this->output->set_content_type('application/json')->set_output(json_encode( array('ERROR' => '-29' )));
+						$response = $this->cryptography->encrypt(array('ERROR' => '-29' ));
+            $this->output->set_content_type('application/json')->set_output(json_encode($response));
         }else{
             redirect($urlCountry.'/login');
         }
@@ -1250,9 +1255,17 @@ class Users extends CI_Controller {
         $response = json_decode($jsonResponse);
 
         if($response){
-            log_message('info', 'info empr user '.$response->rc);
             if($response->rc==0){
-                return $response;
+							if($urlCountry == 'Ec-bp') {
+								$actel = maskString($response->lista[0]->actel, 2, 2);
+								$response->lista[0]->actel = $actel;
+								$actel2 = maskString($response->lista[0]->actel2, 2, 2);
+								$response->lista[0]->actel2 = $actel2;
+								$actel3 = maskString($response->lista[0]->actel3, 2, 2);
+								$response->lista[0]->actel3 = $actel3;
+
+							}
+							return $response;
             }else{
                 if($response->rc==-61 || $response->rc==-29){
                     $this->session->sess_destroy();
@@ -1292,14 +1305,24 @@ class Users extends CI_Controller {
 
         if($paisS==$urlCountry && $logged_in){
 
-            $acrif = $this->input->post('data-rif');
-            $paginaActual = $this->input->post('paginaActual');
-            $paginar = $this->input->post('data-paginar');
-            $cantItems = $this->input->post('data-cantItems');
+						$dataRequest = json_decode(
+							$this->security->xss_clean(
+								strip_tags(
+									$this->cryptography->decrypt(
+										base64_decode($this->input->get_post('plot')),
+										utf8_encode($this->input->get_post('request'))
+									)
+								)
+							)
+						);
+						$acrif = $dataRequest->data_rif;
+						$paginaActual = $dataRequest->paginaActual;
+						$paginar = $dataRequest->data_paginar;
+						$cantItems = $dataRequest->data_cantItems;
 
             $lista = $this->callWSContactoEmpresa($urlCountry, $acrif, $paginaActual, $paginar, $cantItems);
-
-            $this->output->set_content_type('application/json')->set_output(json_encode($lista));
+						$response = $this->cryptography->encrypt($lista);
+            $this->output->set_content_type('application/json')->set_output(json_encode($response));
 
         }elseif($paisS!=$urlCountry && $paisS!=''){
 
@@ -1307,7 +1330,8 @@ class Users extends CI_Controller {
             redirect($urlCountry.'/login');
 
         }elseif($this->input->is_ajax_request()){
-            $this->output->set_content_type('application/json')->set_output(json_encode( array('ERROR' => lang('ERROR_(-29)'), "rc"=> '-29' )));
+						$response = $this->cryptography->encrypt(array(array('ERROR' => lang('ERROR_(-29)'), "rc"=> '-29' )));
+            $this->output->set_content_type('application/json')->set_output(json_encode($response));
         }else{
             redirect($urlCountry.'/login');
         }
@@ -1542,18 +1566,28 @@ class Users extends CI_Controller {
 
         if($paisS==$urlCountry && $logged_in){
 
-            $acrif = $this->input->post('rif');
-            $cedula = $this->input->post("cedula");
-            $nombre = $this->input->post("nombre");
-            $apellido = $this->input->post("apellido");
-            $cargo = $this->input->post("cargo");
-            $email = $this->input->post("email");
-            $tipoContacto = $this->input->post("tipoContacto");
-            $pass = $this->input->post("pass");
+						$dataRequest = json_decode(
+							$this->security->xss_clean(
+								strip_tags(
+									$this->cryptography->decrypt(
+										base64_decode($this->input->get_post('plot')),
+										utf8_encode($this->input->get_post('request'))
+									)
+								)
+							)
+						);
+						$acrif = $dataRequest->rif;
+						$cedula = $dataRequest->cedula;
+						$nombre = $dataRequest->nombre;
+						$apellido = $dataRequest->apellido;
+						$cargo = $dataRequest->cargo;
+						$email = $dataRequest->email;
+						$tipoContacto = $dataRequest->tipoContacto;
+						$pass = $dataRequest->pass;
 
             $lista = $this->callWSAgregarContactoEmpresa($urlCountry, $acrif, $cedula, $nombre, $apellido, $cargo, $email, $tipoContacto,$pass);
-
-            $this->output->set_content_type('application/json')->set_output(json_encode($lista));
+						$response = $this->cryptography->encrypt($lista);
+            $this->output->set_content_type('application/json')->set_output(json_encode($response));
 
         }elseif($paisS!=$urlCountry && $paisS!=''){
 
@@ -1561,7 +1595,8 @@ class Users extends CI_Controller {
             redirect($urlCountry.'/login');
 
         }elseif($this->input->is_ajax_request()){
-            $this->output->set_content_type('application/json')->set_output(json_encode( array('ERROR' => lang('ERROR_(-29)'), "rc"=> '-29' )));
+					$response = $this->cryptography->encrypt(array('ERROR' => lang('ERROR_(-29)'), "rc"=> '-29' ));
+            $this->output->set_content_type('application/json')->set_output(json_encode($response));
         }else{
             redirect($urlCountry.'/login');
         }
@@ -1907,28 +1942,32 @@ class Users extends CI_Controller {
      * @param  string $urlCountry
      * @return JSON
      */
-    public function getPerfilUser($urlCountry){
+    public function getPerfilUser($urlCountry) {
+			if(!$this->input->is_ajax_request()) {
+				redirect(base_url($urlCountry.'/dashboard'), 'location');
+				exit();
+			}
 
-        np_hoplite_countryCheck($urlCountry);
+			np_hoplite_countryCheck($urlCountry);
 
-        $logged_in = $this->session->userdata('logged_in');
-				$paisS = $this->session->userdata('pais');
+			$logged_in = $this->session->userdata('logged_in');
+			$paisS = $this->session->userdata('pais');
 
-        if($paisS==$urlCountry &&$logged_in){
+			if($paisS==$urlCountry &&$logged_in){
 
-            $lista = $this->callWSPerfilUser($urlCountry);
-						$response = $this->cryptography->encrypt($lista);
-            $this->output->set_content_type('application/json')->set_output(json_encode($response));
+					$lista = $this->callWSPerfilUser($urlCountry);
+					$response = $this->cryptography->encrypt($lista);
+					$this->output->set_content_type('application/json')->set_output(json_encode($response));
 
-        }elseif($paisS!=$urlCountry && $paisS!=''){
-            $this->session->sess_destroy();
-            redirect($urlCountry.'/login');
-        }elseif($this->input->is_ajax_request()){
-						$response = $this->cryptography->encrypt(array('ERROR' => lang('ERROR_(-29)'), "rc"=> '-29' ));
-            $this->output->set_content_type('application/json')->set_output(json_encode($response));
-        }else{
-            redirect($urlCountry.'/login');
-        }
+			}elseif($paisS!=$urlCountry && $paisS!=''){
+					$this->session->sess_destroy();
+					redirect($urlCountry.'/login');
+			}elseif($this->input->is_ajax_request()){
+					$response = $this->cryptography->encrypt(array('ERROR' => lang('ERROR_(-29)'), "rc"=> '-29' ));
+					$this->output->set_content_type('application/json')->set_output(json_encode($response));
+			}else{
+					redirect($urlCountry.'/login');
+			}
 
     }
 
@@ -1985,7 +2024,7 @@ class Users extends CI_Controller {
             log_message('info', ' PERFIL USER '.$response->rc.'/'.$response->msg);
             if($response->rc==0){
 								if($urlCountry == 'Ec-bp') {
-									$email = maskString($response->email, 4, 8);
+									$email = maskString($response->email, 4, 8, '@');
 									$response->email = $email;
 								}
                 return $response;
@@ -2147,19 +2186,30 @@ class Users extends CI_Controller {
 
         if($paisS==$urlCountry &&$logged_in){
 
-            $rif = $this->input->post("rif");
-            $paginaActual = $this->input->post("paginaActual");
-            $cantItems = $this->input->post("data-cantItems");
-            $paginar = $this->input->post("data-paginar");
+						$dataRequest = json_decode(
+							$this->security->xss_clean(
+								strip_tags(
+									$this->cryptography->decrypt(
+										base64_decode($this->input->get_post('plot')),
+										utf8_encode($this->input->get_post('request'))
+									)
+								)
+							)
+						);
+						$rif = $dataRequest->rif;
+						$paginaActual = $dataRequest->paginaActual;
+						$cantItems = $dataRequest->data_cantItems;
+						$paginar = $dataRequest->data_paginar;
 
             $lista = $this->callWSConsultarSucursales($urlCountry, $rif, $paginaActual, $cantItems, $paginar);
-
-            $this->output->set_content_type('application/json')->set_output(json_encode($lista));
+						$response = $this->cryptography->encrypt($lista);
+            $this->output->set_content_type('application/json')->set_output(json_encode($response));
         }elseif($paisS!=$urlCountry && $paisS!=''){
             $this->session->sess_destroy();
             redirect($urlCountry.'/login');
         }elseif($this->input->is_ajax_request()){
-            $this->output->set_content_type('application/json')->set_output(json_encode( array('ERROR' => lang('ERROR_(-29)'), "rc"=> '-29' )));
+					$response = $this->cryptography->encrypt(array('ERROR' => lang('ERROR_(-29)'), "rc"=> '-29' ));
+            $this->output->set_content_type('application/json')->set_output(json_encode($response));
         }else{
             redirect($urlCountry.'/login');
         }
@@ -2266,29 +2316,40 @@ class Users extends CI_Controller {
 
         if($paisS==$urlCountry &&$logged_in){
 
-            $rif = $this->input->post("rif");
-            $nombre = $this->input->post("nombre");
-            $codigo = $this->input->post("codigo");
-            $dir1 = $this->input->post("dir1");
-            $dir2 = $this->input->post("dir2");
-            $dir3 = $this->input->post("dir3");
-            $zona = $this->input->post("zona");
-            $pais = $this->input->post("pais");
-            $estado = $this->input->post("estado");
-            $ciudad = $this->input->post("ciudad");
-            $contacto = $this->input->post("contacto");
-            $area = $this->input->post("area");
-            $tlf = $this->input->post("tlf");
-            $pass = $this->input->post("pass");
+						$dataRequest = json_decode(
+							$this->security->xss_clean(
+									strip_tags(
+											$this->cryptography->decrypt(
+													base64_decode($this->input->get_post('plot')),
+													utf8_encode($this->input->get_post('request'))
+											)
+									)
+							)
+					);
+					$rif = $dataRequest->rif;
+					$nombre = $dataRequest->nombre;
+					$codigo = $dataRequest->codigo;
+					$dir1 = $dataRequest->dir1;
+					$dir2 = $dataRequest->dir2;
+					$dir3 = $dataRequest->dir3;
+					$zona = $dataRequest->zona;
+					$pais = $dataRequest->pais;
+					$estado = $dataRequest->estado;
+					$ciudad = $dataRequest->ciudad;
+					$contacto = $dataRequest->contacto;
+					$area = $dataRequest->area;
+					$tlf = $dataRequest->tlf;
+					$pass = $dataRequest->pass;
 
             $lista = $this->callWSAgregarSucursales($urlCountry, $pass, $rif, $nombre, $codigo, $dir1, $dir2, $dir3, $zona, $pais, $estado, $ciudad, $contacto, $area, $tlf);
-
-            $this->output->set_content_type('application/json')->set_output(json_encode($lista));
+						$response = $this->cryptography->encrypt($lista);
+            $this->output->set_content_type('application/json')->set_output(json_encode($response));
         }elseif($paisS!=$urlCountry && $paisS!=''){
             $this->session->sess_destroy();
             redirect($urlCountry.'/login');
         }elseif($this->input->is_ajax_request()){
-            $this->output->set_content_type('application/json')->set_output(json_encode( array('ERROR' => lang('ERROR_(-29)'), "rc"=> '-29' )));
+						$response = $this->cryptography->encrypt(array('ERROR' => lang('ERROR_(-29)'), "rc"=> '-29' ));
+            $this->output->set_content_type('application/json')->set_output(json_encode($response));
         }else{
             redirect($urlCountry.'/login');
         }
@@ -2402,24 +2463,35 @@ class Users extends CI_Controller {
 
         if($paisS==$urlCountry &&$logged_in){
 
-            $rif = $this->input->post("rif");
-            $nombre = $this->input->post("nombre");
-            $codigo = $this->input->post("codigo");
-            $dir1 = $this->input->post("dir1");
-            $dir2 = $this->input->post("dir2");
-            $dir3 = $this->input->post("dir3");
-            $zona = $this->input->post("zona");
-            $pais = $this->input->post("pais");
-            $estado = $this->input->post("estado");
-            $ciudad = $this->input->post("ciudad");
-            $contacto = $this->input->post("contacto");
-            $area = $this->input->post("area");
-            $tlf = $this->input->post("tlf");
-            $pass = $this->input->post("pass");
+						$dataRequest = json_decode(
+							$this->security->xss_clean(
+								strip_tags(
+									$this->cryptography->decrypt(
+										base64_decode($this->input->get_post('plot')),
+										utf8_encode($this->input->get_post('request'))
+									)
+								)
+							)
+						);
+
+            $rif = $dataRequest->rif;
+            $nombre = $dataRequest->nombre;
+            $codigo = $dataRequest->codigo;
+            $dir1 = $dataRequest->dir1;
+            $dir2 = $dataRequest->dir2;
+            $dir3 = $dataRequest->dir3;
+            $zona = $dataRequest->zona;
+            $pais = $dataRequest->pais;
+            $estado = $dataRequest->estado;
+            $ciudad = $dataRequest->ciudad;
+            $contacto = $dataRequest->contacto;
+            $area = $dataRequest->area;
+            $tlf = $dataRequest->tlf;
+            $pass = $dataRequest->pass;
 
             $lista = $this->callWSActualizarSucursales($urlCountry, $pass, $rif, $nombre, $codigo, $dir1, $dir2, $dir3, $zona, $pais, $estado, $ciudad, $contacto, $area, $tlf);
-
-            $this->output->set_content_type('application/json')->set_output(json_encode($lista));
+						$response = $this->cryptography->encrypt($lista);
+						$this->output->set_content_type('application/json')->set_output(json_encode($response,JSON_UNESCAPED_UNICODE));
 
         }elseif($paisS!=$urlCountry && $paisS!=''){
             $this->session->sess_destroy();
@@ -2547,8 +2619,9 @@ class Users extends CI_Controller {
             //VERIFICAR SI NO SUBIO ARCHIVO
             if ( ! $this->upload->do_upload())
             {
-                $error = array('ERROR' => "No se pudo cargar el archivo.");
-                $this->output->set_content_type('application/json')->set_output(json_encode($error));
+								$error = ['ERROR' => 'Falla Al mover archivo.'];
+								$response = $this->cryptography->encrypt($error);
+								$this->output->set_content_type('application/json')->set_output(json_encode($response));
             }
             else
             {
@@ -2582,14 +2655,26 @@ class Users extends CI_Controller {
                     $formatoArchivo=substr($extensionArchivo, 1);
                     $username = $this->session->userdata('userName');
                     $token = $this->session->userdata('token');
-                    $idEmpresa = $this->input->post("data-rif");
 
+										$dataRequest = json_decode(
+											$this->security->xss_clean(
+												strip_tags(
+													$this->cryptography->decrypt(
+														base64_decode($this->input->get_post('plot')),
+														utf8_encode($this->input->get_post('request'))
+													)
+												)
+											)
+										);
+										$idEmpresa = $dataRequest->data_rif;
                     $cargaSuc = $this->callWScargarSucursales($urlCountry,$formatoArchivo,$nombreArchivo,$nombreArchivoNuevo,$idEmpresa);
-
-                    $this->output->set_content_type('application/json')->set_output(json_encode($cargaSuc));
+										$response = $this->cryptography->encrypt($cargaSuc);
+                    $this->output->set_content_type('application/json')->set_output(json_encode($response));
 
                 } else {
-                    echo $error = 'Falla Al mover archivo.';
+									$error = ['ERROR' => 'Falla Al mover archivo.'];
+									$response = $this->cryptography->encrypt($error);
+									$this->output->set_content_type('application/json')->set_output(json_encode($response));
                 }
             }
 
@@ -2597,7 +2682,8 @@ class Users extends CI_Controller {
             $this->session->sess_destroy();
             redirect($urlCountry.'/login');
         }elseif($this->input->is_ajax_request()){
-            $this->output->set_content_type('application/json')->set_output(json_encode( array('ERROR' => lang('ERROR_(-29)'), "rc"=> '-29' )));
+						$response = $this->cryptography->encrypt(array('ERROR' => lang('ERROR_(-29)'), "rc"=> '-29' ));
+            $this->output->set_content_type('application/json')->set_output(json_encode($response));
         }else{
             redirect($urlCountry.'/login');
         }

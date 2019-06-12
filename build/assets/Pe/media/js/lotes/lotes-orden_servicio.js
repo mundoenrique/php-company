@@ -51,8 +51,11 @@ $(function(){
 		var ceo_cook = decodeURIComponent(
 			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 		);
-		$.post(baseURL+api+isoPais+"/lotes/confirmarPreOSL", { "tempIdOrdenL": l, "tempIdOrdenLNF": lnf, ceo_name: ceo_cook })
-			.done(function(data) {
+		var dataRequest = JSON.stringify({"tempIdOrdenL": l, "tempIdOrdenLNF": lnf});
+		dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
+		$.post(baseURL+api+isoPais+"/lotes/confirmarPreOSL", {request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)})
+			.done(function(response) {
+				var data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
 				$aux.dialog('destroy');
 
 				authloading=false;

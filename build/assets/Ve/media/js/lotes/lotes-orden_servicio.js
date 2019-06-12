@@ -46,12 +46,20 @@ $(function () {
 			draggable: false,
 			dialogClass: 'hide-close'
 		});
+		var dataRequest = JSON.stringify({
+			tempIdOrdenL: l,
+			tempIdOrdenLNF: lnf
+		})
+		dataRequest  = CryptoJS.AES.encrypt(dataRequest , ceo_cook, {format: CryptoJSAesJson}).toString();
 		$.post(baseURL + api + isoPais + "/lotes/confirmarPreOSL", {
-				"tempIdOrdenL": l,
-				"tempIdOrdenLNF": lnf,
-				ceo_name: ceo_cook
+			request: dataRequest,
+			ceo_name: ceo_cook,
+			plot: btoa(ceo_cook)
 			})
-			.done(function (data) {
+			.done(function (response) {
+			var	data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {
+					format: CryptoJSAesJson
+				}).toString(CryptoJS.enc.Utf8))
 				$aux.dialog('destroy');
 				var title, message, site = null,
 					code = '';
@@ -69,11 +77,14 @@ $(function () {
 					if (data.moduloOS) {
 						site = 'form#toOS';
 						$("#data-confirm").attr('value', data.ordenes);
-
+						ceo_cook = decodeURIComponent(
+							document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+						);
+						$('#toOS').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'" />');
 					} else {
+
 						message += '<h5>No tiene permitido gestionar ordenes de servicio.</h5>';
 						site = '#viewAutorizar';
-
 					}
 
 				} else {
@@ -149,8 +160,11 @@ $(function () {
 	}
 
 	$('#cancelar-OS').on('click', function () {
-
+		var ceo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
 		$('form#viewAutorizar').append($('#tempIdOrdenL'));
+		$('#viewAutorizar').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'" />');
 		$("#viewAutorizar").submit();
 
 	});

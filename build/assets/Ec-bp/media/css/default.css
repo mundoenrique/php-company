@@ -1627,6 +1627,14 @@ select.ui-datepicker-year{
 	float: left;
 }
 
+.ui-dialog-buttonpane button{
+
+	padding: 5px;
+}
+.ui-dialog-buttonpane:hover button{
+	background: #fcf6d1;
+
+}
 .ui-datepicker-multi .ui-datepicker-group table {
 	width: 95%;
 	margin: 0 auto .4em;
@@ -2009,17 +2017,17 @@ select.ui-datepicker-year{
 	background-position: -65px -16px;
 }
 
-.ui-tabs {
+.ui-id {
 	position: relative;
 	padding: .2em;
 }
 
-.ui-tabs .ui-tabs-nav {
+.ui-id .ui-id-nav {
 	margin: 0;
 	padding: 0;
 }
 
-.ui-tabs .ui-tabs-nav li {
+.ui-id .ui-id-nav li {
 	list-style: none;
 	float: left;
 	position: relative;
@@ -2030,29 +2038,29 @@ select.ui-datepicker-year{
 	white-space: nowrap;
 }
 
-.ui-tabs .ui-tabs-nav li a {
+.ui-id .ui-id-nav li a {
 	float: left;
 	padding: .5em 1em;
 	text-decoration: none;
 }
 
-.ui-tabs .ui-tabs-nav li.ui-tabs-active {
+.ui-id .ui-id-nav li.ui-id-active {
 	margin-bottom: -1px;
 	padding-bottom: 1px;
 }
 
-.ui-tabs .ui-tabs-nav li.ui-tabs-active a,
-.ui-tabs .ui-tabs-nav li.ui-state-disabled a,
-.ui-tabs .ui-tabs-nav li.ui-tabs-loading a {
+.ui-id .ui-id-nav li.ui-id-active a,
+.ui-id .ui-id-nav li.ui-state-disabled a,
+.ui-id .ui-id-nav li.ui-id-loading a {
 	cursor: text;
 }
 
-.ui-tabs .ui-tabs-nav li a,
-.ui-tabs-collapsible .ui-tabs-nav li.ui-tabs-active a {
+.ui-id .ui-id-nav li a,
+.ui-id-collapsible .ui-id-nav li.ui-id-active a {
 	cursor: pointer;
 }
 
-.ui-tabs .ui-tabs-panel {
+.ui-id .ui-id-panel {
 	display: block;
 	/*border-width:0;*/
 	padding: 1em 1.4em;
@@ -4049,10 +4057,11 @@ ul#brands li p img {
 	margin-bottom: 10px;
 	background: #F2F2F2;
 	float: left;
-	margin: 0px 7px;
+	/* margin: 0px 7px; */
 	/*width: 618px;*/
 	border: 1px solid #dddddd;
 	line-height: 35px;
+	margin-left: 7px;
 }
 
 .table-text-aut tbody tr span {
@@ -5745,11 +5754,11 @@ li#select-empresa select {
 	width: 230px;
 }
 
-#ui-tabs-1 #wrapper {
+#ui-id-1 #wrapper {
 	padding: 0px !important;
 }
 
-#ui-tabs-2 #wrapper {
+#ui-id-2 #wrapper {
 	padding: 0px !important;
 }
 
@@ -6805,7 +6814,7 @@ button.green:hover {
 	font-weight: 700;
 }
 
-#ui-tabs-3 #wrapper {
+#ui-id-3 #wrapper {
 	padding: 0 !important;
 }
 
@@ -7276,4 +7285,14 @@ li.menu-item.security:nth-child(3),
 li.ui-state-default.ui-corner-top:nth-child(3)
 {
 	display: none;
+}
+
+.validate-error {
+	border-color: red;
+}
+
+#mensajeError {
+	float: none;
+	display: block;
+	color: red;
 }

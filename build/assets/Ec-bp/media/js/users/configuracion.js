@@ -224,7 +224,7 @@ $(function(){
 					$.post(baseURL+api+isoPais+'/usuario/config/ActualizarPerfilUsuario', {request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)} )
 					.done(function(response){
 						data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
-                $(".ui-dialog-content").dialog().dialog("destroy");
+              $(".ui-dialog-content").dialog().dialog("destroy");
                 if(data.rc=='0'){
                     notificacion("Modificar usuario","Proceso exitoso.");
                 }else{
@@ -249,7 +249,7 @@ $(function(){
     var rif, nombre, accodcia, tipo;
 
 // CARGA DE LA INFORMACION DE LA EMPRESA SELECCIONADA
-    $('#ui-tabs-1').on('change','#listaEmpresas',function(){ //seleccionar una empresa
+    $('#ui-id-1').on('change','#listaEmpresas',function(){ //seleccionar una empresa
         if ($('option:selected', this).attr('data-accodcia')==undefined){
             $("#config-empresas #campos-config").addClass('elem-hidden');
             return;
@@ -282,7 +282,7 @@ $(function(){
 						data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 
             $(".ui-dialog-content").dialog().dialog("destroy");
-            $('#ui-tabs-1 #listaEmpresas').removeAttr('disabled');
+            $('#ui-id-1 #listaEmpresas').removeAttr('disabled');
             if(!data.ERROR){
                 $("#config-empresas #campos-config").removeClass('elem-hidden');
 
@@ -348,9 +348,13 @@ $(function(){
 							var ceo_cook = decodeURIComponent(
 								document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 							);
-							json.ceo_name = ceo_cook;
-                $carg = $('#loading').dialog({title:"Agregar contacto",modal: true,maxWidth: 700,maxHeight: 300,dialogClass: 'hide-close' });
-                $.post(baseURL+api+isoPais+'/usuario/config/agregarContacto', json).done(function( data ) {
+								$carg = $('#loading').dialog({title:"Agregar contacto",modal: true,maxWidth: 700,maxHeight: 300,dialogClass: 'hide-close' });
+
+								var dataRequest = JSON.stringify (json)
+								dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
+								$.post(baseURL+api+isoPais+'/usuario/config/agregarContacto', {request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)})
+                .done(function(response){
+									data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
                     $carg.dialog("destroy");
                     $("#pass").css("border-color","");
                     if (data.rc=="0") {
@@ -436,14 +440,11 @@ $(function(){
 						var ceo_cook = decodeURIComponent(
 							document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 						);
-						json.ceo_name = ceo_cook;
-
 						var dataRequest = JSON.stringify (json);
 							dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
 							$.post(baseURL+api+isoPais+'/usuario/config/ActualizarTlfEmpresa', {request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)} )
 							.done(function(response){
 								data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
-
 								$(".ui-dialog-content").dialog().dialog("destroy");
 
                 if(data.rc=="0"){
@@ -473,8 +474,12 @@ $(function(){
 						var ceo_cook = decodeURIComponent(
 							document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 						);
-						json.ceo_name = ceo_cook;
-            $.post(baseURL+api+isoPais+'/usuario/config/eliminarContacto', json).done(function( data ) {
+
+						var dataRequest = JSON.stringify (json)
+						dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
+						$.post(baseURL+api+isoPais+'/usuario/config/eliminarContacto', {request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)})
+            .done(function(response){
+							data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
                 $(".ui-dialog-content").dialog().dialog("destroy");
 
                 if(data.rc=="0"){
@@ -517,8 +522,11 @@ $(function(){
 								var ceo_cook = decodeURIComponent(
 									document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 								);
-								json.ceo_name = ceo_cook;
-                $.post(baseURL+api+isoPais+'/usuario/config/ActualizarContacto', json).done(function( data ) {
+								var dataRequest = JSON.stringify (json)
+								dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
+								$.post(baseURL+api+isoPais+'/usuario/config/ActualizarContacto', {request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)})
+                .done(function(response){
+									data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
                     $(".ui-dialog-content").dialog().dialog("destroy");
                     if(data.rc=="0"){
                         $("#pass.pass").css("border-color","");
@@ -552,11 +560,11 @@ $(function(){
 
 //CONFIGURACION SUCURSALES
     var datos;
-    $("#ui-tabs-2").on('click',"#archivo",function () {
+    $("#ui-id-2").on('click',"#archivo",function () {
         $("#userfile").trigger('click');
     });
 
-    $('#ui-tabs-2').on("click","#btn-new-suc",function(){
+    $('#ui-id-2').on("click","#btn-new-suc",function(){
         $.each($(".error"), function(){
             $(this).removeClass("error");
         });
@@ -577,7 +585,7 @@ $(function(){
         $("#suc_cod").removeAttr("disabled");
     });
 
-    $('#ui-tabs-2').on('change','#listaEmpresasSuc',function(){
+    $('#ui-id-2').on('change','#listaEmpresasSuc',function(){
         $.each($(".error"), function(){
             $(this).removeClass("error");
         });
@@ -630,19 +638,19 @@ $(function(){
 
     });
 
-    $('#ui-tabs-2').on('change','#suc_pais',function(){
+    $('#ui-id-2').on('change','#suc_pais',function(){
         $.each(datos.paisTo.listaEstados, function(listaPos, listaItem){
             $('#suc_estado').append('<option value="'+listaItem.codEstado+'">'+listaItem.estados+'</option>');
         });
     });
 
-    $('#ui-tabs-2').on('change','#pais',function(){
+    $('#ui-id-2').on('change','#pais',function(){
         $.each(datos.paisTo.listaEstados, function(listaPos, listaItem){
             $('#suc_estado').append('<option value="'+listaItem.codEstado+'">'+listaItem.estados+'</option>');
         });
     });
 
-    $('#ui-tabs-2').on('change','#suc_estado',function(){
+    $('#ui-id-2').on('change','#suc_estado',function(){
 
         ciudades = datos.paisTo.listaEstados.filter(function(dat){ return dat.codEstado==$("option:selected",'#suc_estado').val() });
         $('#suc_ciudad').empty();
@@ -681,8 +689,11 @@ $(function(){
 						var ceo_cook = decodeURIComponent(
 							document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 						);
-						json.ceo_name = ceo_cook;
-            $.post(baseURL+api+isoPais+'/usuario/config/agregarSucursales', json ).done(function( data ) {
+						var dataRequest = JSON.stringify (json)
+						dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
+						$.post(baseURL+api+isoPais+'/usuario/config/agregarSucursales', {request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)})
+						.done(function(response){
+							data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
                 $(".ui-dialog-content").dialog().dialog("destroy");
                 if(data.rc == "0"){
                     $("#lotes-general #form-new-suc").hide();
@@ -699,7 +710,7 @@ $(function(){
                     $("#suc_contacto").val("");
                     $("#suc_area").val("");
                     $("#tbody-datos-general").empty();
-                    $("#ui-tabs-2 #campos-config").hide();
+                    $("#ui-id-2 #campos-config").hide();
                     consultarSucursales(totalpaginas);
                     $("<div>Proceso exitoso.<h5>Listando sucursales...</h5></div>").dialog({title:"Agregar sucursal", modal:true, close:function(){$(this).dialog('destroy')}})
 
@@ -770,9 +781,6 @@ $(function(){
         validez = validarSucursal();
         if( validez && $("#pass_suc").val()!="" )
         {
-					var ceo_cook = decodeURIComponent(
-						document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-					);
             var json = {};
             $('#loading').dialog({title:"Modificar sucursal", modal: true,maxWidth: 700,maxHeight: 300,dialogClass: 'hide-close' });
             json.rif = $("option:selected",'#listaEmpresasSuc').attr('data-rif');
@@ -791,9 +799,17 @@ $(function(){
             json.tlf = $("#suc_tlf").val();
 						json.pass = hex_md5($("#pass_suc").val());
 						json.ceo_name = ceo_cook;
-            resetPass();
-            $.post(baseURL+api+isoPais+'/usuario/config/actualizarSucursales', json ).done(function( data ) {
-                $(".ui-dialog-content").dialog().dialog("destroy");
+						resetPass();
+						var ceo_cook = decodeURIComponent(
+							document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+						);
+
+						var dataRequest = JSON.stringify (json)
+						dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
+						$.post(baseURL+api+isoPais+'/usuario/config/actualizarSucursales', {request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)})
+						.done(function(response){
+							data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
+              $(".ui-dialog-content").dialog().dialog("destroy");
 
                 if(data.rc == "0"){
                     $.each(datos.lista, function (k,v) {
@@ -847,14 +863,23 @@ $(function(){
 				var ceo_cook = decodeURIComponent(
 					document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 				);
-        $.post(baseURL+api+isoPais+'/usuario/config/consultarSucursales', {'rif':rif,"paginaActual":paginaActual, 'data-paginar':pagina, 'data-cantItems':cantItems, ceo_name: ceo_cook} ).done(function( data ) {
+				var dataRequest = JSON.stringify ({
+					rif: rif,
+					paginaActual: paginaActual,
+					data_paginar: pagina,
+					data_cantItems: cantItems,
+				})
+				dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
+				$.post(baseURL+api+isoPais+'/usuario/config/consultarSucursales', {request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)})
+        .done(function(response){
+					data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
             $(".ui-dialog-content").dialog().dialog("destroy");
             $('#listaEmpresasSuc').removeAttr('disabled');
             datos = data;
             if(data.rc=="0"){
                 totalpgs=data.totalPaginas;
 
-                $("#ui-tabs-2 #campos-config").show();
+                $("#ui-id-2 #campos-config").show();
                 $("#tabla-datos-general").show();
 
                 if($("#tabla-datos-general").hasClass('dataTable')){
@@ -928,9 +953,9 @@ $(function(){
 
     }
 
-
-    $("#ui-tabs-2").on("click", "#userfile",function(){
-
+		var ceo_cook;
+    $("#ui-id-2").on("click", "#userfile",function(){
+			var dat;
         $(this).fileupload({
             type: 'post',
             replaceFileInput:false,
@@ -946,13 +971,26 @@ $(function(){
                 if( ext === "txt" || ext==="TXT"){
                     data.context = $('#btn-new-mas')
                         .click(function () {
-
-                            if( $("option:selected","#listaEmpresasSuc").attr("data-rif") != ""){
+                            if( $("option:selected","#listaEmpresasSuc").attr("data_rif") != ""){
                                 $("#form-new-suc").fadeOut("fast");
                                 $("#btn-new-mas").replaceWith('<h3 id="cargando_masivo">Cargando...</h3>');
-                                dat.formData = {'data-rif':$("option:selected","#listaEmpresasSuc").attr("data-rif")};
-                                dat.submit().success( function (result, textStatus, jqXHR){
 
+																ceo_cook = decodeURIComponent(
+																	document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+																);
+																var paquete = {
+																	data_rif: $("#listaEmpresasSuc option:selected").attr('rel')
+																};
+																var dataRequest = JSON.stringify(paquete)
+																dataRequest  = CryptoJS.AES.encrypt(dataRequest , ceo_cook, {format: CryptoJSAesJson}).toString();
+																dat.formData = {
+																	request: dataRequest,
+																	ceo_name: ceo_cook,
+																	plot: btoa(ceo_cook)
+																}
+																//dat.formData = {'data_rif':$("option:selected","#listaEmpresasSuc").attr("data-rif")};
+                                dat.submit().done( function (response, textStatus, jqXHR){
+																	result = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
                                     if(result){
                                         if(!result.ERROR){
                                             mostrarError(result);
@@ -1125,7 +1163,16 @@ $(function(){
 						var ceo_cook = decodeURIComponent(
 							document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 						);
-            $.post(baseURL+api+isoPais+'/usuario/config/InfoContactoEmpresa', {'data-rif':rif, "paginaActual":paginaActual, 'data-paginar':pagina, 'data-cantItems':cantItems, ceo_name: ceo_cook }).done(function( data ) {
+						var dataRequest = JSON.stringify ({
+							data_rif: rif,
+							paginaActual: paginaActual,
+							data_paginar: pagina,
+							data_cantItems: cantItems
+						})
+						dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
+						$.post(baseURL+api+isoPais+'/usuario/config/InfoContactoEmpresa', {request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)})
+            $consulta.done(function(response){
+							data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 
                 $("#agregarContact").show();
                 $("#lotes-general #agregarContacto").fadeOut();

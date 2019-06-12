@@ -130,7 +130,7 @@ class Lotes extends CI_Controller {
 
 			$nombreCompleto = $this->session->userdata('nombreCompleto');
 			$lastSessionD = $this->session->userdata('lastSession');
-			$FooterCustomInsertJS=["jquery-3.4.0.min.js", "jquery-ui-1.12.1.min.js","jquery.balloon.min.js","dashboard/widget-empresa.js","header.js","routes.js"];
+			$FooterCustomInsertJS=["jquery-3.4.0.min.js", "jquery-ui-1.12.1.min.js","jquery.balloon.min.js","aes.min.js","aes-json-format.min.js","dashboard/widget-empresa.js","header.js","routes.js"];
 			$FooterCustomJS="";
 			$titlePage="Conexión Empresas Online - Lotes";
 			$idProductoS = $this->session->userdata('idProductoS');
@@ -685,19 +685,32 @@ class Lotes extends CI_Controller {
 
 		if($paisS==$urlCountry && $logged_in){
 
-			$lotes = explode(',', $this->input->post('data-lotes'));
+			$dataRequest = json_decode(
+				$this->security->xss_clean(
+					strip_tags(
+						$this->cryptography->decrypt(
+							base64_decode($this->input->get_post('plot')),
+							utf8_encode($this->input->get_post('request'))
+						)
+					)
+				)
+			);
+
+			$lotes = explode(',', $dataRequest->data_lotes);
 			array_pop($lotes);
 
-			$pass = $this->input->post('data-pass') ;
+			$pass = $dataRequest->data_pass;
 			$rTest = $this->callWSdesasociarFirma($urlCountry,$lotes,$pass);
 
-			$this->output->set_content_type('application/json')->set_output(json_encode($rTest));
+			$response = $this->cryptography->encrypt($rTest);
+			$this->output->set_content_type('application/json')->set_output(json_encode($response,JSON_UNESCAPED_UNICODE));
 
 		}elseif($paisS!=$urlCountry && $paisS!=''){
 			$this->session->sess_destroy();
 			redirect($urlCountry.'/login');
 		}elseif($this->input->is_ajax_request()){
-			$this->output->set_content_type('application/json')->set_output(json_encode( array('ERROR' => '-29' )));
+			$response = $this->cryptography->encrypt(array('ERROR' => '-29' ));
+			$this->output->set_content_type('application/json')->set_output(json_encode($response,JSON_UNESCAPED_UNICODE));
 		}else{
 			redirect($urlCountry.'/login');
 		}
@@ -966,7 +979,7 @@ class Lotes extends CI_Controller {
 
 			$nombreCompleto = $this->session->userdata('nombreCompleto');
 			$lastSessionD = $this->session->userdata('lastSession');
-			$FooterCustomInsertJS=["jquery-3.4.0.min.js", "jquery-ui-1.12.1.min.js","jquery.balloon.min.js","dashboard/widget-empresa.js","lotes/lotes-autorizacion.js","jquery.dataTables.min.js","header.js","routes.js"];
+			$FooterCustomInsertJS=["jquery-3.4.0.min.js", "jquery-ui-1.12.1.min.js","jquery.balloon.min.js","aes.min.js","aes-json-format.min.js","dashboard/widget-empresa.js","lotes/lotes-autorizacion.js","jquery.dataTables.min.js","header.js","routes.js"];
 			$FooterCustomJS="";
 			$titlePage="Conexión Empresas Online - Lotes";
 			$programa = $this->session->userdata('nombreProductoS').' / '. $this->session->userdata('marcaProductoS') ;
@@ -2414,6 +2427,7 @@ class Lotes extends CI_Controller {
 		$response = json_decode($jsonResponse);
 
 		//log_message("DEBUG", "generarOS =====>>>>>> ".json_encode($response));
+		log_message("DEBUG", "generarOS =====>>>>>> ".($jsonResponse));
 		if(isset($response->rc)) {
 			switch($response->rc) {
 				case 0:
@@ -2453,7 +2467,7 @@ class Lotes extends CI_Controller {
 
 		}
 
-		return json_encode($response);
+		return $response;
 	}
 
 	/**
@@ -2475,8 +2489,8 @@ class Lotes extends CI_Controller {
 				)
 			)
 		);
-		$tempIdOrdenL = $dataRequest->tempIdOrdenL;
-		$tempIdOrdenLNF = isset($dataRequest->tempIdOrdenLNF) ? $dataRequest->tempIdOrdenLNF : '';
+		$tempIdOrdenL = isset($dataRequest->tempIdOrdenL) ? $dataRequest->tempIdOrdenL : FALSE;
+		$tempIdOrdenLNF = isset($dataRequest->tempIdOrdenLNF) ? $dataRequest->tempIdOrdenLNF : FALSE;
 
 		$token = $this->session->userdata('token');
 		$username = $this->session->userdata('userName');
@@ -2493,7 +2507,8 @@ class Lotes extends CI_Controller {
 			if ( $moduloAct!==false) {
 				$t = $this->callWSgenerarOS($urlCountry,$token,$username,$tempIdOrdenL,$tempIdOrdenLNF,$acrifS,$moduloOS);
 			}else{
-				$t = json_encode(array("ERROR"=>lang('SIN_FUNCION')));
+				$t = ['ERROR' => lang('SIN_FUNCION')];
+				//$t = json_encode(array("ERROR"=>lang('SIN_FUNCION')));
 			}
 			$t = $this->cryptography->encrypt($t);
 			$this->output->set_content_type('application/json')->set_output(json_encode($t));
@@ -2503,7 +2518,7 @@ class Lotes extends CI_Controller {
 		}elseif($this->input->is_ajax_request()){
 			$responseError = ['ERROR' => lang('ERROR_(-29)'), "rc"=> "-29"];
 			$responseError = $this->cryptography->encrypt($responseError);
-			$this->output->set_content_type('')->set_output(json_encode($responseError));
+			$this->output->set_content_type('application/json')->set_output(json_encode($responseError));
 		}else{
 			redirect($urlCountry.'/login');
 		}
@@ -2531,7 +2546,7 @@ class Lotes extends CI_Controller {
 		$paisS = $this->session->userdata('pais');
 
 		if($paisS==$urlCountry && $logged_in && $moduloAct!==false){
-			$FooterCustomInsertJS=["jquery-1.10.2.min.js","jquery-ui-1.10.3.custom.min.js","jquery.balloon.min.js","jquery.paginate.js","header.js","dashboard/widget-empresa.js","jquery.fileupload.js","jquery.iframe-transport.js","jquery-md5.js","lotes/lotes-reproceso.js","routes.js"];
+			$FooterCustomInsertJS=["jquery-3.4.0.min.js", "jquery-ui-1.12.1.min.js","jquery.balloon.min.js","jquery.paginate.js","header.js","aes.min.js","aes-json-format.min.js","dashboard/widget-empresa.js","jquery.fileupload.js","jquery.iframe-transport.js","jquery-md5.js","lotes/lotes-reproceso.js","routes.js"];
 			$FooterCustomJS="";
 			$titlePage="Reproceso de Datos";
 

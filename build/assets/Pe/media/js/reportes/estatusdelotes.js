@@ -129,9 +129,11 @@ var filtro_busq={};
 			var ceo_cook = decodeURIComponent(
 				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 			);
-			filtro_busq.ceo_name = ceo_cook;
-			$consulta = $.post(baseURL + api + isoPais + "/reportes/estatuslotes",filtro_busq );
-			$consulta.done(function(data){
+			var dataRequest = JSON.stringify(filtro_busq);
+			dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
+			$consulta = $.post(baseURL + api + isoPais + "/reportes/estatuslotes", {request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)});
+			$consulta.done(function(response){
+				var data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
 				$("#mensaje").remove();
 				$('#cargando').fadeOut("slow");
 				$("#EstatusLotes-btnBuscar").show();

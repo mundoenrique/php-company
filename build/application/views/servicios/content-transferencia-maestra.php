@@ -102,23 +102,23 @@
 			<span aria-hidden="true" class="icon" data-icon="&#xe07a;"></span> <?= lang('CRITERIOS_BUSQUEDA') ?>
 		</div>
 		<div id="lotes-contenedor">
-			<form name="trasn-master">
+			<form id="form-criterio-busqueda" name="trasn-master">
 				<div id="search-1">
 					<h5><?= lang('ID_PERSONA'); ?></h5>
 						<span>
-							<input type="text" id="dni" placeholder="<?= lang('ID_PERSONA'); ?>"/>
+							<input type="text" id="dni" name="id-document" placeholder="<?= lang('ID_PERSONA'); ?>"/>
 					</span>
 				</div>
 				<div id="search-3">
 					<h5><?= lang('NRO_TARJETA'); ?></h5>
 					<span>
-						<input type="text" id="nroTjta" placeholder="<?= lang('INGRESE_NOTARJETA') ?>" maxlength="16"/>
+						<input type="text" id="nroTjta" name="card-number" placeholder="<?= lang('INGRESE_NOTARJETA') ?>" maxlength="16"/>
 					</span>
 				</div>
 			</form>
 		</div>
 		<div id="batchs-last">
-			<span id="mensajeError" style="float:left; display:none; color:red;"></span>
+			<span id="mensajeError"></span>
 			<button id='buscar'><?= lang('BUSCAR'); ?></button>
 		</div>
 		<div id='resultado-tarjetas' style='display:none'>

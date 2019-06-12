@@ -33,14 +33,19 @@ $(function() {
     // ACCION DEL EVENTO PARA BUSCAR TARJETAS TM
 
     $('#buscar').on('click', function() {
-        if (!validar_filtro_busqueda("lotes-contenedor")) {
-            return false;
-        }
-
-        serv_var.busk = true;
-        serv_var.TotalTjts = 0;
-
-        buscar(1);
+			var errElem = $(this).siblings('#mensajeError');
+			var form = $('#form-criterio-busqueda');
+			errElem.fadeOut('fast');
+			validateForms(form);
+			if(form.valid()) {
+				serv_var.busk = true;
+				serv_var.TotalTjts = 0;
+				buscar(1);
+			} else {
+				$('.div_tabla_detalle').fadeOut('fast');
+				errElem.html('Debe ingresar datos numéricos');
+				errElem.fadeIn('fast');
+			}
     });
 
 
@@ -63,17 +68,19 @@ $(function() {
 
 				var ceo_cook = decodeURIComponent(
 					document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-					);
+				);
 
-        $.post(baseURL + api + isoPais + '/servicios/transferencia-maestra/buscar', {
-            'data-dni': $('#dni').val(),
-            'data-tjta': $('#nroTjta').val(),
-            'data-pg': pgSgt,
-            'data-paginas': serv_var.paginas,
-						'data-paginar': serv_var.paginar,
-						'ceo_name': ceo_cook
-        })
-            .done(function(data) {
+        var dataRequest = JSON.stringify ({
+					data_dni: $('#dni').val(),
+					data_tjta: $('#nroTjta').val(),
+					data_pg: pgSgt,
+					data_paginas: serv_var.paginas,
+					data_paginar: serv_var.paginar
+				})
+					dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
+					$.post(baseURL + api + isoPais + "/servicios/transferencia-maestra/buscar", {request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)} )
+					.done(function(response){
+						data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 
                 $aux.dialog('destroy');
 
@@ -333,19 +340,21 @@ $(function() {
 
 				var ceo_cook = decodeURIComponent(
 					document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-					);
+				);
 
-        $.post(url, {
-            'data-tarjeta': serv_var.noTarjetas,
-            'data-id_ext_per': serv_var.dni_tarjetas,
-            'data-pass': pass,
-            'data-monto': serv_var.monto,
-            'data-pg': 1,
-            'data-paginas': 1,
-						'data-paginar': false,
-						'ceo_name': ceo_cook
-        })
-            .done(function(data) {
+        var dataRequest = JSON.stringify ({
+					data_tarjeta: serv_var.noTarjetas,
+					data_id_ext_per: serv_var.dni_tarjetas,
+					data_pass: pass,
+					data_monto: serv_var.monto,
+					data_pg: 1,
+					data_paginas: 1,
+					data_paginar: false
+				})
+					dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
+					$.post(url, {request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)} )
+					.done(function(response){
+						data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 
                 $aux.dialog("destroy");
 
@@ -507,46 +516,6 @@ $(function() {
         serv_var.monto = [];
         serv_var.fallidas = 0;
 
-    }
-
-    function validar_filtro_busqueda(div) {
-
-        valido = true;
-
-        //VALIDA INPUT:TEXT QUE SEAN REQUERIDOS NO SE ENCUENTREN VACIOS
-        marcarojo($("#dni"));
-        marcarojo($("#nroTjta"));
-
-        if (!valido) {
-            $(".div_tabla_detalle").fadeOut("fast");
-            $("#mensajeError").html("Debe ingresar datos numéricos");
-            $("#mensajeError").fadeIn("fast");
-        } else {
-            $("#mensajeError").fadeOut("fast");
-        }
-
-        return valido;
-    }
-
-    function marcarojo($elem) {
-        if ($elem.val() !== "") {
-            if (!validarNumerico($elem.val())) {
-                valido = false;
-                $elem.attr("style", "border-color:red");
-            } else {
-                $elem.attr("style", "");
-            }
-        } else {
-            $elem.attr("style", "");
-        }
-    }
-
-    function validarNumerico(valor) {
-        if (valor.match(/^[0-9]*$/)) {
-            return true;
-        } else {
-            return false;
-        }
     }
 
     function resettOp(selected) {
@@ -929,7 +898,8 @@ $(function() {
                 }
             });
             $.get(baseURL + api + isoPais + '/servicios/transferencia-maestra/pagoTM')
-                .done(function (data) {
+						.done(function (response) {
+							var data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
                     $aux.dialog('destroy');
                     switch (data.code) {
                         case 0:
@@ -962,16 +932,17 @@ $(function() {
 																						});
 																						var ceo_cook = decodeURIComponent(
 																							document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-																							);
-
-                                            $.post(baseURL + api + isoPais + '/servicios/transferencia-maestra/RegargaTMProcede', {
-                                                "amount":amount,
-																								"descript": descrip,
-																								"type": 'abono',
-																								"codeToken": codeToken,
-																								'ceo_name': ceo_cook
-                                            })
-                                                .done(function (data) {
+																						);
+																						var dataRequest = JSON.stringify ({
+																							amount: amount,
+																							descript: descrip,
+																							type: 'abono',
+																							codeToken: codeToken
+																						})
+																							dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
+																							$.post(baseURL + api + isoPais + '/servicios/transferencia-maestra/RegargaTMProcede', {request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)})
+																							.done(function(response){
+																								data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
                                                     $aux.dialog('destroy');
                                                     switch (data.code) {
                                                         case 0:
@@ -1004,8 +975,9 @@ $(function() {
         }
     });
 
-    $.get( baseURL + api + isoPais + '/servicios/transferencia-maestra/consultarSaldo', function( data ) {
-        var data = JSON.parse(data)
+		$.get( baseURL + api + isoPais + '/servicios/transferencia-maestra/consultarSaldo',
+		function(response) {
+			var data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
         //console.log( "Data Loaded: " +  data.rc);
         if (data.rc == 0) {
             var dataAmount = data.maestroDeposito.saldoDisponible

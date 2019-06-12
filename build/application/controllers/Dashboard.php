@@ -97,7 +97,9 @@ class Dashboard extends CI_Controller {
 		//VALIDAR QUE USUARIO ESTE LOGGEDIN
 		if($paisS==$urlCountry && $logged_in){
 
-			if($this->input->post()){
+			if($this->input->post('request')){
+
+
 				$paginar= $this->input->post('data-paginar');
 				$tamanoPagina= $this->input->post('data-tamanoPagina');
 				$paginaActual= $this->input->post('data-paginaActual');
@@ -112,15 +114,17 @@ class Dashboard extends CI_Controller {
 				$paginar=FALSE;
 				$lista = $this->callWSListaEmpresasPaginar($paginar,$tamanoPagina=null,$paginaActual=null,$filtroEmpresas=null,$urlCountry);
 			}
-
-			$this->output->set_content_type('application/json')->set_output(json_encode($lista,JSON_UNESCAPED_UNICODE));
+			$response = $this->cryptography->encrypt($lista);
+			$this->output->set_content_type('application/json')->set_output(json_encode($response,JSON_UNESCAPED_UNICODE));
 
 		}elseif($paisS!=$urlCountry && $paisS!=""){
 			$this->session->sess_destroy();
 			redirect($urlCountry.'/login');
 		}elseif($this->input->is_ajax_request()){
 			log_message('info','ajax call');
-			$this->output->set_content_type('application/json')->set_output(json_encode(array('ERROR' => '-29' )));
+			$responseError = ['ERROR' => lang('ERROR_(-29)'), "rc"=> "-29"];
+			$responseError = $this->cryptography->encrypt($responseError);
+			$this->output->set_content_type('application/json')->set_output(json_encode($responseError));
 		}
 		else{
 			redirect($urlCountry.'/login');
@@ -212,6 +216,10 @@ class Dashboard extends CI_Controller {
 	 * @return json
 	 */
 	public function getListaEmpresasJSON($urlCountry){
+		if(!$this->input->is_ajax_request()) {
+			redirect(base_url($urlCountry.'/dashboard'), 'location');
+			exit();
+		}
 		np_hoplite_countryCheck($urlCountry);
 		$logged_in = $this->session->userdata('logged_in');
 		$paisS = $this->session->userdata('pais');
@@ -261,6 +269,10 @@ class Dashboard extends CI_Controller {
 	 * @return json
 	 */
 	public function getListaProductosJSON($urlCountry){
+		if(!$this->input->is_ajax_request()) {
+			redirect(base_url($urlCountry.'/dashboard'), 'location');
+			exit();
+		}
 
 		np_hoplite_countryCheck($urlCountry);
 		$logged_in = $this->session->userdata('logged_in');
@@ -311,7 +323,9 @@ class Dashboard extends CI_Controller {
 			redirect($urlCountry.'/login');
 		}elseif($this->input->is_ajax_request()){
 			log_message('info','ajax call');
-			$this->output->set_content_type('application/json')->set_output(json_encode(array('ERROR' => '-29' )));
+			$responseError = ['ERROR' => lang('ERROR_(-29)'), "rc"=> "-29"];
+			$responseError = $this->cryptography->encrypt($responseError);
+			$this->output->set_content_type('application/json')->set_output(json_encode($responseError));
 		}else{
 			redirect($urlCountry.'/login');
 		}
@@ -331,9 +345,18 @@ class Dashboard extends CI_Controller {
 		$paisS = $this->session->userdata('pais');
 
 		if($paisS==$urlCountry && $logged_in){
-			if($this->input->post()){
-				$acrifPost = $this->input->post('acrif');
-
+			if($this->input->post('request')){
+				$dataRequest = json_decode(
+					$this->security->xss_clean(
+						strip_tags(
+							$this->cryptography->decrypt(
+								base64_decode($this->input->get_post('plot')),
+								utf8_encode($this->input->get_post('request'))
+							)
+						)
+					)
+				);
+				$acrifPost = $dataRequest->acrif;
 				$responseMenuEmpresas =$this->callWSMenuEmpresaTarjetaHambiente($acrifPost,$urlCountry,$ctipo='false');
 				if(array_key_exists('ERROR', $responseMenuEmpresas)){
 					$productos = $responseMenuEmpresas;
@@ -344,14 +367,16 @@ class Dashboard extends CI_Controller {
 			}else{
 				$productos=null;
 			}
-
+			$productos = $this->cryptography->encrypt($productos);
 			$this->output->set_content_type('application/json')->set_output(json_encode($productos,JSON_UNESCAPED_UNICODE));
 		}elseif($paisS!=$urlCountry && $paisS!=''){
 			$this->session->sess_destroy();
 			redirect($urlCountry.'/login');
 		}elseif($this->input->is_ajax_request()){
 			log_message('info','ajax call');
-			$this->output->set_content_type('application/json')->set_output(json_encode(array('ERROR' => '-29' )));
+			$responseError = ['ERROR' => lang('ERROR_(-29)'), "rc"=> "-29"];
+			$responseError = $this->cryptography->encrypt($responseError);
+			$this->output->set_content_type('application/json')->set_output(json_encode($responseError));
 		}else{
 			redirect($urlCountry.'/login');
 		}
@@ -372,6 +397,7 @@ class Dashboard extends CI_Controller {
 
 		if($paisS==$urlCountry && $logged_in){
 			//VALIDAMOS QUE RECIBA EL POST
+
 			if($this->input->is_ajax_request()){
 				$dataRequest = json_decode(
 					$this->security->xss_clean(

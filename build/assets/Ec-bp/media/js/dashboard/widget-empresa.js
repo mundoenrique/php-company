@@ -27,7 +27,7 @@ var widget_var = {
 
 		$.getJSON(baseURL+api+isoPais+'/empresas/lista').always(function(response) {
 				data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
-			$("#widget-info-2").find($('#cargando')).remove();
+			$("#widget-info-2").find($('img#cargando')).remove();
 
 			$('#sEmpresaS').show();
 
@@ -57,36 +57,37 @@ var widget_var = {
 		widget_var.accodcia = $('option:selected', this).attr('accodcia');
 		widget_var.accodgrupoe = $('option:selected', this).attr('accodgrupoe');
 
-		$('#productosS').empty();
-		$("#productosS").append('<option>Cargando...</option>');
-		$(this).attr('disabled',true);
-		var ceo_cook = decodeURIComponent(
-			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-		);
+		if (widget_var.acrif!=0) {
+			$('#productosS').empty();
+			$("#productosS").append('<option>Cargando...</option>');
+			$(this).attr('disabled',true);
+			var ceo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
 
-		var dataRequest = JSON.stringify ({
-			acrif: widget_var.acrif
-		})
-			dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
-			$.post(baseURL+api+isoPais+"/producto/lista", {request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)} )
-			.done(function(response){
-				data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
-			$("#empresasS").removeAttr('disabled');
-			$('#productosS').empty().css('display', 'block');
-			$("#productosS").append('<option value="0">Seleccione un producto</option>');
+			var dataRequest = JSON.stringify ({
+				acrif: widget_var.acrif
+			})
+				dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
+				$.post(baseURL+api+isoPais+"/producto/lista", {request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)} )
+				.done(function(response){
+					data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
+				$("#empresasS").removeAttr('disabled');
+				$('#productosS').empty().css('display', 'block');
+				$("#productosS").append('<option value="0">Seleccione un producto</option>');
 
 
-			if(!data.ERROR){
-			$.each(data, function(k,v){
-				$("#productosS").append('<option value="'+v.idProducto+'" nombre='+v.nombre+' marca='+v.marca+' >'+v.descripcion+" / "+v.marca.toUpperCase()+'</option>');
+				if(!data.ERROR){
+				$.each(data, function(k,v){
+					$("#productosS").append('<option value="'+v.idProducto+'" nombre='+v.nombre+' marca='+v.marca+' >'+v.descripcion+" / "+v.marca.toUpperCase()+'</option>');
+				});
+				}else{
+						if(data.ERROR=='-29'){
+						alert('Usuario actualmente desconectado'); location.reload();
+						}
+					}
 			});
-			}else{
-  				if(data.ERROR=='-29'){
-  				alert('Usuario actualmente desconectado'); location.reload();
-  				}
-  			}
-		});
-
+		}
 	});
 
 //--Fin Seleccionar empresa

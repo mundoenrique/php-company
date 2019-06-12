@@ -35,7 +35,9 @@ $(document).ready(function () {
 
 
 	$("#cargando_empresa").fadeIn("slow");
-	$.getJSON(baseURL + api + isoPais + '/empresas/lista').always(function (data) {
+	$.getJSON(baseURL + api + isoPais + '/empresas/lista').always(function (response) {
+
+		var data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 		$("#cargando_empresa").fadeOut("slow");
 		if (!(data.ERROR)) {
 
@@ -232,9 +234,11 @@ $(document).ready(function () {
 		var ceo_cook = decodeURIComponent(
 			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 		);
-		filtro_busq.ceo_name = ceo_cook;
-		$consulta = $.post(baseURL + api + isoPais + "/reportes/graficoCuentaConcentradora", filtro_busq);
-		$consulta.done(function (data) {
+		var dataRequest = JSON.stringify(filtro_busq);
+		dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
+		$consulta = $.post(baseURL + api + isoPais + "/reportes/graficoCuentaConcentradora", {request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)});
+		$consulta.done(function (reponse) {
+			var data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
 			$(".ui-dialog-content").dialog().dialog("close");
 			if (data.rc == 0) {
 
@@ -426,10 +430,19 @@ $(document).ready(function () {
 		var ceo_cook = decodeURIComponent(
 			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 		);
-		filtro_busq.ceo_name = ceo_cook;
-		$consulta = $.post(baseURL + api + isoPais + "/reportes/cuentaConcentradora", filtro_busq);
+
+		var dataRequest = JSON.stringify(filtro_busq);
+		dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
+
+		$consulta = $.post(baseURL + api + isoPais + "/reportes/cuentaConcentradora", {
+			request: dataRequest,
+			ceo_name: ceo_cook,
+			plot: btoa(ceo_cook)
+		});
 		//DE SER EXITOSA LA COMUNICACION CON EL SERVICIO SE EJECUTA EL SIGUIENTE METODO "DONE"
-		$consulta.done(function (data) {
+		$consulta.done(function (response) {
+				data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
+
 			$("#mensaje").remove();
 			$("#div_tablaDetalle").fadeIn("slow");
 

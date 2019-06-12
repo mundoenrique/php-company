@@ -22,7 +22,7 @@ $(document).ready(function() {
 //LLENA EL COMBO DE EMPRESA
 //--------------------------
 		$("#cargando_empresa").fadeIn("slow");
-		$.getJSON(baseURL + api + isoPais + '/empresas/lista').always(function( response ) {
+		$.getJSON(baseURL + api + isoPais + '/empresas/lista').always(function(response) {
 			data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 			$("#cargando_empresa").fadeOut("slow");
 			if(!(data.ERROR)){
@@ -234,10 +234,7 @@ function BuscarEstadosdeCuenta(paginaActual){
 			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 		);
 		filtro_busq.paginaActual=paginaActual;
-		var dataRequest = JSON.stringify ({
-			filtro_busq: filtro_busq
-
-		})
+		var dataRequest = JSON.stringify(filtro_busq);
 		dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
 		$consulta = $.post(baseURL + api + isoPais + "/reportes/estadosdecuenta",{request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook) } );
 	//DE SER EXITOSA LA COMUNICACION CON EL SERVICIO SE EJECUTA EL SIGUIENTE METODO "DONE"
@@ -404,9 +401,7 @@ if(buscarReporte){
 				var ceo_cook = decodeURIComponent(
 					document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 				);
-				var dataRequest = JSON.stringify({
-					filtro_busq: filtro_busq
-				})
+				var dataRequest = JSON.stringify(filtro_busq);
 				dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {
 					format: CryptoJSAesJson
 				}).toString();
@@ -753,7 +748,21 @@ if(buscarReporte){
 				if(data.rc =="-29"){
 		             alert("Usuario actualmente desconectado");
 		             $(location).attr('href',baseURL+isoPais+'/login');
-		         }else{
+		         }else if(data){
+							$("#mensaje").remove();
+							contenedor.html('<div id="top-batchs"><span aria-hidden="true" class="icon" data-icon="&#xe05c;"></span>Estado de cuenta </div>');
+							$("#tabla-datos-general").fadeOut("fast");
+							$("#view-results").attr("style","display:none");
+							var div =$(document.createElement("div")).appendTo(contenedor);
+							div.attr("id","mensaje");
+							div.attr("style","background-color:rgb(252,199,199); margin-top:62px;");
+							var p = $(document.createElement("p")).appendTo(div);
+							if (data.rc=="-150")
+								p.html(data.mensaje);
+							else
+								p.html(data);
+							p.attr("style","text-align:center;padding:10px;font-size:14px");
+						 }else{
 
 		 			$("#mensaje").remove();
 		 			contenedor.html('<div id="top-batchs"><span aria-hidden="true" class="icon" data-icon="&#xe05c;"></span>Estado de cuenta </div>');
@@ -906,6 +915,9 @@ function descargarArchivo(datos, url, titulo){
 			$.post(url,datos).done(function(data){
     			$aux.dialog('destroy')
     			if(!data.ERROR){
+						var ceo_cook = decodeURIComponent(
+							document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+						);
 						$('form#formulario').empty();
 						$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'">');
     				$('form#formulario').append('<input type="hidden" name="bytes" value="'+JSON.stringify(data.bytes)+'" />');

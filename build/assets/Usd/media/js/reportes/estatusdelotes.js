@@ -1,3 +1,10 @@
+var acrif;
+var acnomcia;
+var acrazonsocial;
+var acdesc;
+var accodcia;
+var accodgrupoe;
+
 $(".fecha").keypress(function(e){
 	if(e.keycode != 8 || e.keycode != 46){
 		return false;
@@ -9,6 +16,7 @@ $(document).ready(function() {
 		$("#cargando_empresa").fadeIn("slow");
 		$.getJSON(baseURL + api + isoPais+ '/empresas/lista').always(function( data ) {
 			$("#cargando_empresa").fadeOut("slow");
+			data = JSON.parse(CryptoJS.AES.decrypt(data.code, data.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 			if(!(data.ERROR)){
 
 				$.each(data.lista, function(k,v){
@@ -25,9 +33,15 @@ $(document).ready(function() {
 				}
 		});
 
+
 		$("#EstatusLotes-empresa").on("change",function(){
 
 			acrif = $('option:selected', this).attr("acrif");
+			acnomcia = $('option:selected', this).attr('acnomcia');
+			acrazonsocial = $('option:selected', this).attr('acrazonsocial');
+			acdesc = $('option:selected', this).attr('acdesc');
+			accodcia = $('option:selected', this).attr('accodcia');
+			accodgrupoe = $('option:selected', this).attr('accodgrupoe');
 
 			if(acrif){
 
@@ -39,11 +53,24 @@ $(document).ready(function() {
 				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 			);
 
-			$.post(baseURL + api + isoPais+ "/producto/lista", { 'acrif': acrif, ceo_name: ceo_cook }, function(data){
+			var dataRequest = JSON.stringify ({
+				data_accodgrupoe:accodgrupoe,
+				acrif:acrif,
+				data_acnomcia:acnomcia,
+				data_acrazonsocial:acrazonsocial,
+				data_acdesc:acdesc,
+				data_accodcia:accodcia,
+				llamada:'soloEmpresa'
+			})
+			dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
+			$.post(baseURL + api + isoPais+ "/producto/lista", { request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook) }, function(response){
+				data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
+
 				$("#cargando_producto").fadeOut("slow");
 				$("#EstatusLotes-empresa").removeAttr('disabled');
 				if(!data.ERROR){
 					$.each(data, function(k,v){
+
 						$("#EstatusLotes-producto").append('<option value="'+v.idProducto+'" >'+v.descripcion+" / "+v.marca.toUpperCase()+'</option>');
 					});
 				}else{
@@ -129,11 +156,12 @@ var filtro_busq={};
 				var ceo_cook = decodeURIComponent(
 					document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 				);
+				var dataRequest = JSON.stringify(filtro_busq);
+				dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
+				$consulta = $.post(baseURL + api + isoPais+ "/reportes/estatuslotes", {request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)} );
+				$consulta.done(function(response){
+				data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 
-				filtro_busq.ceo_name = ceo_cook;
-
-			$consulta = $.post(baseURL + api + isoPais+ "/reportes/estatuslotes",filtro_busq );
-			$consulta.done(function(data){
 				$("#mensaje").remove();
 				$('#cargando').fadeOut("slow");
 				$("#EstatusLotes-btnBuscar").show();

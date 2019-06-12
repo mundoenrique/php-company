@@ -35,7 +35,7 @@ class Lotes_innominada extends CI_Controller {
 
 					$nombreCompleto = $this->session->userdata('nombreCompleto');
 					$lastSessionD = $this->session->userdata('lastSession');
-					$FooterCustomInsertJS=["jquery-1.10.2.min.js","jquery-ui-1.10.3.custom.min.js","jquery.balloon.min.js","dashboard/widget-empresa.js","header.js","jquery.dataTables.min.js","lotes/lotes-innominada.js","jquery-md5.js","routes.js"];
+					$FooterCustomInsertJS=["jquery-3.4.0.min.js", "jquery-ui-1.12.1.min.js","jquery.balloon.min.js","aes.min.js","aes-json-format.min.js","dashboard/widget-empresa.js","header.js","jquery.dataTables.min.js","lotes/lotes-innominada.js","jquery-md5.js","routes.js"];
 					$FooterCustomJS="";
 					$titlePage="Conexión Empresas Online - Solicitud Innominadas";
 					$programa = $this->session->userdata('nombreProductoS').' / '. $this->session->userdata('marcaProductoS') ;
@@ -117,7 +117,7 @@ class Lotes_innominada extends CI_Controller {
 
 					$nombreCompleto = $this->session->userdata('nombreCompleto');
 					$lastSessionD = $this->session->userdata('lastSession');
-					$FooterCustomInsertJS=["jquery-1.10.2.min.js","jquery-ui-1.10.3.custom.min.js","jquery.balloon.min.js","dashboard/widget-empresa.js","header.js","jquery-md5.js","jquery.dataTables.min.js","lotes/lotes-innominada_inventario.js","routes.js"];
+					$FooterCustomInsertJS=["jquery-3.4.0.min.js", "jquery-ui-1.12.1.min.js","jquery.balloon.min.js","dashboard/widget-empresa.js","header.js","jquery-md5.js","jquery.dataTables.min.js","aes.min.js","aes-json-format.min.js","lotes/lotes-innominada_inventario.js","routes.js"];
 					$FooterCustomJS="";
 					$titlePage="Conexión Empresas Online - Lotes";
 					$idProductoS = $this->session->userdata('idProductoS');
@@ -195,7 +195,7 @@ class Lotes_innominada extends CI_Controller {
 
 					$nombreCompleto = $this->session->userdata('nombreCompleto');
 					$lastSessionD = $this->session->userdata('lastSession');
-					$FooterCustomInsertJS=["jquery-1.10.2.min.js","jquery-ui-1.10.3.custom.min.js","jquery.balloon.min.js","dashboard/widget-empresa.js","header.js","jquery-md5.js","jquery.dataTables.min.js","lotes/lotes-innominada_detalle.js","routes.js"];
+					$FooterCustomInsertJS=["jquery-3.4.0.min.js", "jquery-ui-1.12.1.min.js","jquery.balloon.min.js","dashboard/widget-empresa.js","header.js","jquery-md5.js","jquery.dataTables.min.js","aes.min.js","aes-json-format.min.js","lotes/lotes-innominada_detalle.js","routes.js"];
 					$FooterCustomJS="";
 					$titlePage="Conexión Empresas Online - Lotes";
 					$idProductoS = $this->session->userdata('idProductoS');
@@ -277,25 +277,40 @@ class Lotes_innominada extends CI_Controller {
 
 			if($paisS==$urlCountry && $logged_in){
 					//if ( $moduloAct!==false) {
-					$cantReg=$this->input->post('data-cant');
-					$idEmpresa=$this->input->post('data-empresa');
-					$monto=$this->input->post('data-monto');
-					$lembozo1=$this->input->post('data-lembozo1');
-					$lembozo2=$this->input->post('data-lembozo2');
-					$codSucursal=$this->input->post('data-codsucursal');
-					$fechaExp=$this->input->post('data-fechaexp');
 
-					$response = $this->innominadas_model->callWSCreateInnominadas($urlCountry, $cantReg, $monto,  $lembozo1, $lembozo2, $codSucursal, $fechaExp);
+					$dataRequest = json_decode(
+						$this->security->xss_clean(
+								strip_tags(
+										$this->cryptography->decrypt(
+												base64_decode($this->input->get_post('plot')),
+												utf8_encode($this->input->get_post('request'))
+										)
+								)
+						)
+					);
+					$cantReg = $dataRequest->data_cant;
+					//$idEmpresa = $dataRequest->data_empresa;
+					$idEmpresa = (isset($dataRequest->data_empresa))? $dataRequest->data_empresa :"";
+					//$monto = $dataRequest->data_monto;
+					$monto = (isset($dataRequest->data_monto))? $dataRequest->data_monto : "";
+					$lembozo1 = $dataRequest->data_lembozo1;
+					$lembozo2 = $dataRequest->data_lembozo2;
+					$codSucursal = $dataRequest->data_codsucursal;
+					$fechaExp = $dataRequest->data_fechaexp;
+
+					$response = $this->innominadas_model->callWSCreateInnominadas($urlCountry, $cantReg, $monto, $lembozo1, $lembozo2, $codSucursal, $fechaExp);
 					/*}else{
 							$response = array("ERROR"=>lang('SIN_FUNCION'));
 					}*/
+					$response = $this->cryptography->encrypt($response);
 					$this->output->set_content_type('application/json')->set_output(json_encode($response,JSON_UNESCAPED_UNICODE));
 
 			}elseif($paisS!=$urlCountry&& $paisS!=''){
 					$this->session->sess_destroy();
 					redirect($urlCountry.'/login');
 			}elseif($this->input->is_ajax_request()){
-					$this->output->set_content_type('application/json')->set_output(json_encode( array('ERROR' => '-29' )));
+					$response = $this->cryptography->encrypt(array('ERROR' => '-29' ));
+					$this->output->set_content_type('application/json')->set_output(json_encode($response));
 			}else{
 					redirect($urlCountry.'/login');
 			}
@@ -318,11 +333,9 @@ class Lotes_innominada extends CI_Controller {
 			$paisS = $this->session->userdata('pais');
 
 			if($paisS==$urlCountry && $logged_in){
-					//if ( $moduloAct!==false) {
+
 					$response = $this->users_model->callWSConsultarSucursales($urlCountry, $idEmpresa, '1', '10', true);
-					//}else{
-					//$response = array("ERROR"=>lang('SIN_FUNCION'));
-					//}
+					$response = $this->cryptography->encrypt($response);
 					$this->output->set_content_type('application/json')->set_output(json_encode($response,JSON_UNESCAPED_UNICODE));
 
 			}elseif($paisS!=$urlCountry&& $paisS!=''){
@@ -427,7 +440,7 @@ class Lotes_innominada extends CI_Controller {
 					if (isset($response->nombre)) {
 							np_hoplite_byteArrayToFile($response->archivo,"xls",$response->nombre);
 					} else {
-							echo "<script>alert('No fue posible generar el archico, intente más tarde'); window.history.go(-2);</script>";
+							echo "<script>alert('No fue posible generar el archivo, intente más tarde'); window.history.go(-2);</script>";
 					}
 
 			} elseif($paisS!=$urlCountry&& $paisS!=''){

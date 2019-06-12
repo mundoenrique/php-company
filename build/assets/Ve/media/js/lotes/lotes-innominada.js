@@ -189,22 +189,22 @@ $(function () {
 			});
 			var fecha_expira = $('#fecha_expira').val().split('/');
 			fecha_expira = fecha_expira[0] + fecha_expira[1].substr(2);
+
+			var arrData = {
+				'data_cant': $('#cant_tarjetas').val(),
+				'data_monto': $('#monto').val(),
+				'data_lembozo1': $('#embozo_1').val(),
+				'data_lembozo2': $('#embozo_2').val(),
+				'data_codsucursal': $('#sucursal').val(),
+				'data_fechaexp': fecha_expira
+			};
 			var ceo_cook = decodeURIComponent(
 				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 			);
-			var arrData = {
-				'data-cant': $('#cant_tarjetas').val(),
-				'data-monto': $('#monto').val(),
-				'data-lembozo1': $('#embozo_1').val(),
-				'data-lembozo2': $('#embozo_2').val(),
-				'data-codsucursal': $('#sucursal').val(),
-				'data-fechaexp': fecha_expira,
-				'ceo_name': ceo_cook
-			};
-
-
-			arrData.ceo_name = ceo_cook;
-			$.post(baseURL + isoPais + '/lotes/innominada/createCuentasInnominadas', arrData).done(function (data) {
+			var dataRequest = JSON.stringify(arrData)
+			dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
+			$.post(baseURL + isoPais + '/lotes/innominada/createCuentasInnominadas', {request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)}).done(function (response) {
+				var data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 				$aux.dialog('destroy');
 				if (!data.ERROR) {
 					solicitud_exitosa();
@@ -224,7 +224,11 @@ $(function () {
 	var ceo_cook = decodeURIComponent(
 		document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 	);
-	$.post(baseURL + isoPais + '/lotes/innominada/listaSucursalesInnominadas', {ceo_name: ceo_cook}).done(function (data) {
+	var dataRequest = JSON.stringify({})
+			dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
+	$.post(baseURL + isoPais + '/lotes/innominada/listaSucursalesInnominadas', {ceo_name: ceo_cook}).done(function (response) {
+		var data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
+
 		$('#cargando').hide();
 		$('#sucursal').prop('disabled', false);
 		var html = "";

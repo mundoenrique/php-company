@@ -1,4 +1,4 @@
-<?php 
+<?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 $lang['ERROR_GENERICO_USER']= "Error en Sistema, por favor intente nuevamente."; // cuando ocurre algun error que el usuario no deberia ver (los sgts con el prefix "Error")
 $lang['ERROR_CAMBIO_CLAVE']= "Error en el formulario.";
@@ -143,7 +143,7 @@ $lang['ERROR_(-133)']= "Error validando registros del lote.";
 $lang['ERROR_(-134)']= "Error desencriptando";
 $lang['ERROR_(-135)']= "Error no se encontro la ruta para generar el archivo";
 $lang['ERROR_(-136)']= "Error cargando la lista de empresas por usuario.";
-$lang['ERROR_(-137)']= "No fue posible generar el archico, intente más tarde";
+$lang['ERROR_(-137)']= "No fue posible generar el archivo, intente más tarde";
 $lang['ERROR_(-138)']= "La empresa no tiene productos asociados.";
 $lang['ERROR_(-139)']= "Error desconectando usuario";
 $lang['ERROR_(-140)']= "Error de Mensajes";
@@ -156,7 +156,7 @@ $lang['ERROR_(-146)']= "No se logro insertar los registros";
 $lang['ERROR_(-147)']= "La empresa no tiene comisiones configuradas";
 $lang['ERROR_(-148)']= "La empresa no tiene dirección definida";
 $lang['ERROR_(-149)']= "No se pudo cargar los datos Fiscales de la empresa recaudadora";
-$lang['ERROR_(-150)']= "No hay data seleccionada para su filtro de búsqueda";
+$lang['ERROR_(-150)']= "No se encontraron registros";
 $lang['ERROR_(-151)']= "Error fallo validando transaccion";
 $lang['ERROR_(-152)']= "El usuario no sobrepasa el monto minimo";
 $lang['ERROR_(-153)']= "El usuario sobrepaso el monto total semanal de transacciones";

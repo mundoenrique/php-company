@@ -4,12 +4,12 @@ $(function(){
 
 	$("#sEmpresa").on("click",function(){
 
-		$.getJSON(baseURL+api+isoPais+'/empresas/lista').always(function( data ) {
+		$.getJSON(baseURL+api+isoPais+'/empresas/lista').always(function( response ) {
 			$("#sEmpresaS").append("<select style='width: 200px;' id='empresasS'></select>");
 			$("#sEmpresaS").append("<select style='width: 200px;' id='productosS'></select>");
 			$("#sEmpresaS").append("<button id='sEmpresa' type='submit'>Aplicar</button>");
 
-  			$.each(data.lista, function(k,v){
+  			$.each(response.lista, function(k,v){
 				$("#empresasS").append('<option value="'+v.acrif+'" >'+v.acnomcia+'</option>');
 			});
    		});
