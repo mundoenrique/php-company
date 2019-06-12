@@ -116,9 +116,10 @@ if(!function_exists('urlReplace')) {
 }
 
 if(!function_exists('maskString')) {
-	function maskString($string, $start = 1, $end = 1) {
+	function maskString($string, $start = 1, $end = 1, $type = NULL) {
+		$type = $type ? $type : '';
 		$length = strlen($string);
-		return substr($string, 0, $start).str_repeat('*', 3).'@'.str_repeat('*', 3).substr($string, $length - $end, $end);
+		return substr($string, 0, $start).str_repeat('*', 3).$type.str_repeat('*', 3).substr($string, $length - $end, $end);
 	}
 }
 

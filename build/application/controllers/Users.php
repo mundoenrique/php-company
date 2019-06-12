@@ -1166,7 +1166,11 @@ class Users extends CI_Controller {
      * @param  string $urlCountry
      * @return JSON
      */
-    public function getInfoEmpresaUser($urlCountry){
+    public function getInfoEmpresaUser($urlCountry) {
+			if(!$this->input->is_ajax_request()) {
+				redirect(base_url($urlCountry.'/dashboard'), 'location');
+				exit();
+			}
 
         //cargar archivo de configuración del país
         np_hoplite_countryCheck($urlCountry);
@@ -1251,9 +1255,17 @@ class Users extends CI_Controller {
         $response = json_decode($jsonResponse);
 
         if($response){
-            log_message('info', 'info empr user '.$response->rc);
             if($response->rc==0){
-                return $response;
+							if($urlCountry == 'Ec-bp') {
+								$actel = maskString($response->lista[0]->actel, 2, 2);
+								$response->lista[0]->actel = $actel;
+								$actel2 = maskString($response->lista[0]->actel2, 2, 2);
+								$response->lista[0]->actel2 = $actel2;
+								$actel3 = maskString($response->lista[0]->actel3, 2, 2);
+								$response->lista[0]->actel3 = $actel3;
+
+							}
+							return $response;
             }else{
                 if($response->rc==-61 || $response->rc==-29){
                     $this->session->sess_destroy();
@@ -1930,28 +1942,32 @@ class Users extends CI_Controller {
      * @param  string $urlCountry
      * @return JSON
      */
-    public function getPerfilUser($urlCountry){
+    public function getPerfilUser($urlCountry) {
+			if(!$this->input->is_ajax_request()) {
+				redirect(base_url($urlCountry.'/dashboard'), 'location');
+				exit();
+			}
 
-        np_hoplite_countryCheck($urlCountry);
+			np_hoplite_countryCheck($urlCountry);
 
-        $logged_in = $this->session->userdata('logged_in');
-				$paisS = $this->session->userdata('pais');
+			$logged_in = $this->session->userdata('logged_in');
+			$paisS = $this->session->userdata('pais');
 
-        if($paisS==$urlCountry &&$logged_in){
+			if($paisS==$urlCountry &&$logged_in){
 
-            $lista = $this->callWSPerfilUser($urlCountry);
-						$response = $this->cryptography->encrypt($lista);
-            $this->output->set_content_type('application/json')->set_output(json_encode($response));
+					$lista = $this->callWSPerfilUser($urlCountry);
+					$response = $this->cryptography->encrypt($lista);
+					$this->output->set_content_type('application/json')->set_output(json_encode($response));
 
-        }elseif($paisS!=$urlCountry && $paisS!=''){
-            $this->session->sess_destroy();
-            redirect($urlCountry.'/login');
-        }elseif($this->input->is_ajax_request()){
-						$response = $this->cryptography->encrypt(array('ERROR' => lang('ERROR_(-29)'), "rc"=> '-29' ));
-            $this->output->set_content_type('application/json')->set_output(json_encode($response));
-        }else{
-            redirect($urlCountry.'/login');
-        }
+			}elseif($paisS!=$urlCountry && $paisS!=''){
+					$this->session->sess_destroy();
+					redirect($urlCountry.'/login');
+			}elseif($this->input->is_ajax_request()){
+					$response = $this->cryptography->encrypt(array('ERROR' => lang('ERROR_(-29)'), "rc"=> '-29' ));
+					$this->output->set_content_type('application/json')->set_output(json_encode($response));
+			}else{
+					redirect($urlCountry.'/login');
+			}
 
     }
 
@@ -2008,7 +2024,7 @@ class Users extends CI_Controller {
             log_message('info', ' PERFIL USER '.$response->rc.'/'.$response->msg);
             if($response->rc==0){
 								if($urlCountry == 'Ec-bp') {
-									$email = maskString($response->email, 4, 8);
+									$email = maskString($response->email, 4, 8, '@');
 									$response->email = $email;
 								}
                 return $response;

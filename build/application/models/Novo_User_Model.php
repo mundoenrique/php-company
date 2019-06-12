@@ -173,7 +173,7 @@ class Novo_User_Model extends NOVO_Model {
 			$this->response->title = 'Restablecer contraseña';
 			switch($this->isResponseRc) {
 				case 0:
-					$maskMail = maskString($dataRequest->email, 4, $end = 6);
+					$maskMail = maskString($dataRequest->email, 4, $end = 6, '@');
 					$this->response->code = 0;
 					$this->response->msg = 'Proceso exitoso, se ha enviado un correo a '.$maskMail. ' con la contraseña temporal';
 					$this->response->icon = 'ui-icon-circle-check';
