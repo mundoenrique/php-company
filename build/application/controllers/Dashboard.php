@@ -216,6 +216,10 @@ class Dashboard extends CI_Controller {
 	 * @return json
 	 */
 	public function getListaEmpresasJSON($urlCountry){
+		if(!$this->input->is_ajax_request()) {
+			redirect(base_url($urlCountry.'/dashboard'), 'location');
+			exit();
+		}
 		np_hoplite_countryCheck($urlCountry);
 		$logged_in = $this->session->userdata('logged_in');
 		$paisS = $this->session->userdata('pais');
@@ -265,6 +269,10 @@ class Dashboard extends CI_Controller {
 	 * @return json
 	 */
 	public function getListaProductosJSON($urlCountry){
+		if(!$this->input->is_ajax_request()) {
+			redirect(base_url($urlCountry.'/dashboard'), 'location');
+			exit();
+		}
 
 		np_hoplite_countryCheck($urlCountry);
 		$logged_in = $this->session->userdata('logged_in');
