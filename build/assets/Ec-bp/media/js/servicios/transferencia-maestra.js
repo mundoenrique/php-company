@@ -20,14 +20,16 @@ var serv_var = {
 	fallidas: 0
 }
 var parametrosRecarga;
+var masterTransferBalanace, dailyOper, weeklyOper;
 
 var codeCtas, titleCtas, msgCtas
 $(function() {
-	// VARIABLES GLOBALES
+	// VARIABLES GLOBALESx
 	var valido = true;
 	codeCtas = $('#account').attr('code');
 	titleCtas = $('#account').attr('title');
 	msgCtas = $('#account').attr('msg');
+
 
 	$('#filtroOS').show();
 	$("#dni").attr("maxlength", "12");
@@ -35,12 +37,13 @@ $(function() {
 	$.get( baseURL + api + isoPais + '/servicios/transferencia-maestra/consultarSaldo',
 	function(response) {
 		var data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
-		var dataAmount, Amountmsg = " - ";
+		var Amountmsg = " - ";
 		if (data.rc == 0) {
-			serv_var.saldoDispon = data.maestroDeposito.saldoDisponible;
-			dataAmount = data.maestroDeposito.saldoDisponible;
+			masterTransferBalanace = data.maestroDeposito.saldoDisponible;
 			parametrosRecarga = data.maestroDeposito.parametrosRecarga;
-			Amountmsg = toFormatShow(dataAmount);
+			dailyOper = data.maestroDeposito.cantidadTranxDia.lista[0];
+			weeklyOper = data.maestroDeposito.cantidadTranxSemana.lista[0];
+			Amountmsg = toFormatShow(masterTransferBalanace);
 			$("#amount, #description, #account, #charge, #credit, #recargar").prop("disabled", false);
 
 		} else if (data.rc == -233) {
@@ -53,7 +56,7 @@ $(function() {
 			window.location.replace(baseURL+isoPais+'/finsesion');
 		}else if(data.rc == -251){
 			codeCtas = 'deft';
-			msgCtas = "No existen parámetros definidos para esta empresa sobre este producto.";
+			msgCtas = "No existen parámetros definidos para la empresa sobre este producto.";
 		} else {
 			$("#amount, #description, #account, #charge, #credit, #recargar").prop("disabled", true);
 		}
@@ -253,45 +256,65 @@ $(function() {
 
 function paramsValidate(type){
 
+	var amountTransfer = parseFloat($('#amount').val());
+	var commission = parseFloat(parametrosRecarga.costoComisionTrans);
+	var minAmount = parseFloat(parametrosRecarga.montoMinTransDia);
+	var maxAmount = parseFloat(parametrosRecarga.montoMaxTransaccion);
+	var accumTransweekly = parseInt(weeklyOper.idCuenta);
+	var maxAmountTransweekly = parseFloat(parametrosRecarga.montoMaxTransSemanal);
+	var accumAmountweekly = parseFloat(weeklyOper.montoOperacion);
+	var maxQuanTransDaily = parseInt(parametrosRecarga.cantidadMaxTransDia);
+	var accumTransDaily = parseInt(dailyOper.idCuenta);
+	var maxAmountTransDaily = parseFloat(parametrosRecarga.montoMaxTransDia);
+	var accumAmountDaily = parseFloat(dailyOper.montoOperacion);
+	var valid = true;
+	codeCtas = 'deft';
+
+	/* var montoMaxTransDia = parametrosRecarga.montoMaxTransDia;
 	var montoMaxTransDia = parametrosRecarga.montoMaxTransDia;
 	var montoMinTransDia = parametrosRecarga.montoMinTransDia;
 	var montoMaxTransaccion = parametrosRecarga.montoMaxTransaccion;
-	var valid = true;
-	var montoATransferir = parseFloat($('#amount').val());
+	var montoMaxTransSemanal = parametrosRecarga.montoMaxTransSemanal;
+	var accumTransdaily = dailyOper.idCuenta;
+	var accumAmountdaily = dailyOper.montoOperacion; */
 
 	if(type == 'abono') {
 		var saldo = $('#account option:selected').text().split(':');
-		serv_var.saldoDispon = parseFloat(saldo[1]);
+		masterTransferBalanace = parseFloat(saldo[1]);
 	}
 
-	if(montoATransferir > serv_var.saldoDispon){
+	if ((amountTransfer + commission) > masterTransferBalanace) {
 		valid = false;
-		codeCtas = 'deft';
-		msgCtas = "El monto a transferir excede el saldo disponible.";
-		notiPagOS(titleCtas, msgCtas);
+		msgCtas = "El saldo disponible no es suficiente para realizar la transacción.";
 	}
 
-	if((montoATransferir < montoMinTransDia) && valid){
+	if ((maxQuanTransDaily > 0) && (maxQuanTransDaily < (accumTransDaily + 1)) && valid) {
 		valid = false;
-		codeCtas = 'deft';
-		msgCtas = "El monto a transferir debe ser mayor al monto mínimo de transacción diaria.";
-		notiPagOS(titleCtas, msgCtas);
+		msgCtas = "Ha excedido la cantidad de transacciones por día.";
 	}
 
-	if(montoMaxTransaccion > 0){
-		if((montoATransferir > montoMaxTransaccion)  && valid){
-			valid = false;
-			codeCtas = 'deft';
-			msgCtas = "El monto a transferir debe ser menor al monto máximo por transacción.";
-			notiPagOS(titleCtas, msgCtas);
-		}
-	}else{
-		if((montoATransferir > montoMaxTransDia) && valid){
-			valid = false;
-			codeCtas = 'deft';
-			msgCtas = "El monto a transferir debe ser menor al monto máximo de transacción diaria.";
-			notiPagOS(titleCtas, msgCtas);
-		}
+	if ((minAmount > 0) && (amountTransfer < minAmount) && valid) {
+		valid = false;
+		msgCtas = "El monto a transferir debe ser mayor al monto mínimo por transacción";
+	}
+
+	if ((maxAmount > 0) && (amountTransfer > maxAmount) && valid) {
+		valid = false;
+		msgCtas = "El monto a transferir no debe superar el monto máximo por transacción.";
+	}
+
+	if ((maxAmountTransweekly > 0) && ((amountTransfer + accumAmountweekly) > maxAmountTransweekly) && valid) {
+		valid = false;
+		msgCtas = "El monto a transferir no debe superar el monto máximo semanal.";
+	}
+
+	if ((maxAmountTransDaily > 0) && ((amountTransfer + accumAmountDaily) > maxAmountTransDaily) && valid) {
+		valid = false;
+		msgCtas = "El monto a transferir no debe superar el monto máximo diario.";
+	}
+
+	if(!valid) {
+		notiPagOS(titleCtas, msgCtas, codeCtas);
 	}
 
 	return valid;
