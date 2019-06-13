@@ -3851,16 +3851,16 @@ class Reportes extends CI_Controller {
 							else
 							{
 
-									$empresa = $dataRequest->filtro_busq->empresa;
-									$fechaIni = $dataRequest->filtro_busq->fechaInicial;
-									$fechaFin = $dataRequest->filtro_busq->fechaFin;
-									$cedula = $dataRequest->filtro_busq->cedula;
-									$producto = $dataRequest->filtro_busq->producto;
-									$tipoConsulta = $dataRequest->filtro_busq->tipoConsulta;
-									$acrif = $dataRequest->filtro_busq->acrif;
-									$acnomcia = $dataRequest->filtro_busq->acnomcia;
-									$productoDesc = $dataRequest->filtro_busq->productoDesc;
-									$paginaActual = $dataRequest->filtro_busq->paginaActual;
+									$empresa = $dataRequest->empresa;
+									$fechaIni = $dataRequest->fechaInicial;
+									$fechaFin = $dataRequest->fechaFin;
+									$cedula = $dataRequest->cedula;
+									$producto = $dataRequest->producto;
+									$tipoConsulta = $dataRequest->tipoConsulta;
+									$acrif = $dataRequest->acrif;
+									$acnomcia = $dataRequest->acnomcia;
+									$productoDesc = $dataRequest->productoDesc;
+									$paginaActual = $dataRequest->paginaActual;
 
 									$username = $this->session->userdata('userName');
 									$token = $this->session->userdata('token');
