@@ -1,4 +1,5 @@
 $(function() {
+	params = {};
 
     $("#cargando_empresa").fadeIn("slow");
     $.getJSON(baseURL + api + isoPais + '/empresas/lista').always(function(response) {
