@@ -6782,7 +6782,10 @@ button.green:hover {
 
 #opciones-btn button {
 	float: right;
-	margin: 5px;
+	margin-right: 60px;
+	margin-left: 5px;
+	margin-bottom: 5px;
+	margin-top: 5px;
 }
 
 .select-empresa {
@@ -7282,8 +7285,7 @@ select.ui-datepicker-month, select.ui-datepicker-year {
 	margin-top: 5px;
 }
 
-li.menu-item.security:nth-child(3),
-li.ui-state-default.ui-corner-top:nth-child(3)
+li.menu-item.security:nth-child(3)
 {
 	display: none;
 }
