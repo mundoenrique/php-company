@@ -17,7 +17,7 @@ $lang['MSG_BLOQUEAR_USER'] = 'El usuario será bloqueado al próximo intento fal
 
 //TERMINOS Y CONDICIONES
 $lang['MSG_CONFIR_EXIT'] = 'Para continuar, debe aceptar los términos y condiciones de uso. De lo contrario será dirigido a la página inicial';
-$lang['MSG_NEW_PASS_USER'] = 'Por motivos de seguridad es necesario que cambie su contraseña la primera vez que ingresa a nuestro sistema "Conexión Empresas Online"';
+$lang['MSG_NEW_PASS_USER'] = 'Por motivos de seguridad es necesario que cambie su contraseña la primera vez que ingresa a nuestro sistema "Conexión Empresas Online".';
 $lang['MSG_NEW_PASS_CADU'] = 'Por medidas de seguridad, es indispensable que cambie su contraseña de acceso al sistema para continuar sus operaciones.';
 
 //CONFIGURACION
