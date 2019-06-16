@@ -6241,13 +6241,14 @@ span.jPag-snext-img {
 	border-radius:0 0 0 15px;
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
 	align-items: center;
 }
 
 p.ben-icon {
 	font-size: 60px;
 	color:#FFDD00;
+	margin-top: 30px;
+	margin-bottom: 0px;
 }
 
 p.ben-title {
@@ -6258,6 +6259,7 @@ p.ben-title {
 
 p.ben-txt {
  color: #74777b;
+ text-align: justify;
 }
 
 #ben-1 {

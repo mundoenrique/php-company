@@ -3251,9 +3251,12 @@ span.jPag-snext-img {
 }
 
 p.ben-icon {
-	font-size: 60px;
-	color: #FFDD00;
+	margin-top: 30px;
 	margin-bottom: 0px;
+}
+
+p.ben-title {
+	margin-top: 24px;
 }
 
 .paginacion-dash {
