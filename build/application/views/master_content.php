@@ -53,14 +53,14 @@
             </a>
           </li>
           <?php endif; ?>
-          <?php if($module !== 'benefits'): ?>
+          <?php if($module !== 'benefits' && $module !== 'change-password' && $module !== 'terms'): ?>
           <li class="menu-item benefits">
             <a href="<?= base_url('inf-beneficios') ?>" rel="section">
               <?= lang('BREADCRUMB_BENEFICIOS') ?>
             </a>
           </li>
           <?php endif; ?>
-          <?php if($module !== 'terms'): ?>
+          <?php if($module !== 'terms' && $module !== 'change-password'): ?>
           <li class="menu-item terms">
             <a href="<?= base_url('inf-condiciones'); ?>" rel="section">
               <?= lang('BREADCRUMB_CONDICIONES') ?>
