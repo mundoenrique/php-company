@@ -103,7 +103,9 @@ $("#empresa").on('change', function(){
 				data_acodcia=$("#empresa").val()
 
 				var dataRequest = JSON.stringify({
-					'data_fechaIni': data_fechaIni,'data_fechaFin':data_fechaFin,'data_acodcia':data_acodcia
+					data_fechaIni: data_fechaIni,
+					data_fechaFin:data_fechaFin,
+					data_acodcia:data_acodcia
 				})
 				dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
           $.post(baseURL + api + isoPais + "/reportes/actividadporusuario", {request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook) })

@@ -289,9 +289,7 @@ var filtro_busq={};
 			);
 			filtro_busq.ceo_name = ceo_cook;
 
-			var dataRequest= JSON.stringify({
-				filtro_busq: filtro_busq
-			});
+			var dataRequest= JSON.stringify(filtro_busq);
 
 			dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
 //SE REALIZA LA PETICION AL SERVICIO DE GASTOS POR CATEGORIA
