@@ -97,7 +97,9 @@ $urlCdn = get_cdn();
 
 		</div>
 		<div id="opciones-btn">
+			<?php if($pais != 'Ec-bp'): ?>
 			<button id='modif' type="submit"><?php echo lang('EMP_BTN_MODIF'); ?></button>
+			<?php endif; ?>
 			<button id='mostrarContact' type="submit" ><?php echo lang('EMP_BTN_CONTACT'); ?></button>
 			<button id='agregarContact' class='agregar-contact' ><?php echo lang('EMP_BTN_AGREGAR_CONTACT_EMPRESA'); ?></button>
 		</div>

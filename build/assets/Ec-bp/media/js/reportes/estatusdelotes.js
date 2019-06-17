@@ -188,6 +188,7 @@ var filtro_busq={};
 
 					paginar();
 					}else{
+						console.log(data);
 						if(data.rc =="-29"){
 										alert(data.mensaje);
 										$(location).attr('href',baseURL+isoPais+'/login');
@@ -200,8 +201,11 @@ var filtro_busq={};
 									div.attr("id","mensaje");
 									div.attr("style","background-color:rgb(252,199,199); margin-top:45px;");
 									var p = $(document.createElement("p")).appendTo(div);
-									p.html(data);
-									p.attr("style","text-align:center;padding:10px;font-size:14px");
+									if (data.rc == "-150")
+										p.html(data.mensaje);
+									else
+										p.html(data);
+									p.attr("style", "text-align:center;width:638px;padding:10px;font-size:14px");
 								}else{
 									$("#mensaje").remove();
 									var contenedor=$("#div_tablaDetalle");
@@ -211,8 +215,11 @@ var filtro_busq={};
 									div.attr("id","mensaje");
 									div.attr("style","background-color:rgb(252,199,199); margin-top:45px;");
 									var p = $(document.createElement("p")).appendTo(div);
-									p.html(data.mensaje);
-									p.attr("style","text-align:center;padding:10px;font-size:14px");
+									if (data.rc == "-150")
+										p.html(data.mensaje);
+									else
+										p.html(data);
+									p.attr("style", "text-align:center;width:638px;padding:10px;font-size:14px");
 						}
 					}
 				});
@@ -269,7 +276,7 @@ if((radio == "")&&($("#"+div+" input[type='radio'].required").length!="")){
 
 if(!valido){
 	$(".div_tabla_detalle").fadeOut("fast");
-	showErrMsg("Por favor rellene los campos marcados en color rojo");
+	showErrMsg("Por favor, rellene los campos marcados en color rojo.");
 }else{
 	$("#mensajeError").fadeOut("fast");
 }
