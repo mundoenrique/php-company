@@ -4,7 +4,7 @@ function insert_js_cdn($filename = '') {
 	$filepath = BASE_CDN_PATH . 'js/' . $filename;
 	$version = '';
 	if (file_exists($filepath)) {
-		$version = '?v=' . date('Ymd-B', filemtime($filepath));
+		$version = '?v=' . date('Ymd-U', filemtime($filepath));
 	}
 
 	$js = '<script src="' . $fileurl . $version . '" type="text/javascript"></script>' . "\n";
@@ -17,7 +17,7 @@ function insert_css_cdn($filename = '', $media = 'screen') {
 	$filepath = BASE_CDN_PATH . 'css/' . $filename;
 	$version = '';
 	if (file_exists($filepath)) {
-		$version = '?v=' . date('Ymd-B', filemtime($filepath));
+		$version = '?v=' . date('Ymd-U', filemtime($filepath));
 	}
 
 	$css = '<link href="' . $fileurl . $version .  '" media="' . $media . '" rel="stylesheet" type="text/css" />' . "\n";
