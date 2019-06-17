@@ -772,8 +772,11 @@ $(document).ready(function () {
 							div.attr("id", "mensaje");
 							div.attr("style", "background-color:rgb(252,199,199); margin-top:62px;");
 							var p = $(document.createElement("p")).appendTo(div);
-							p.html(data.mensaje);
-							p.attr("style", "text-align:center;padding:10px;font-size:14px");
+							if (data.rc == "-150")
+								p.html(data.mensaje);
+							else
+								p.html(data);
+							p.attr("style", "text-align:center;width:638px;padding:10px;font-size:14px");
 						}
 					}
 

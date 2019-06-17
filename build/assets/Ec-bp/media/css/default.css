@@ -6241,13 +6241,14 @@ span.jPag-snext-img {
 	border-radius:0 0 0 15px;
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
 	align-items: center;
 }
 
 p.ben-icon {
 	font-size: 60px;
 	color:#FFDD00;
+	margin-top: 30px;
+	margin-bottom: 0px;
 }
 
 p.ben-title {
@@ -6258,6 +6259,7 @@ p.ben-title {
 
 p.ben-txt {
  color: #74777b;
+ text-align: justify;
 }
 
 #ben-1 {
@@ -6782,7 +6784,10 @@ button.green:hover {
 
 #opciones-btn button {
 	float: right;
-	margin: 5px;
+	margin-right: 60px;
+	margin-left: 5px;
+	margin-bottom: 5px;
+	margin-top: 5px;
 }
 
 .select-empresa {
@@ -7282,8 +7287,7 @@ select.ui-datepicker-month, select.ui-datepicker-year {
 	margin-top: 5px;
 }
 
-li.menu-item.security:nth-child(3),
-li.ui-state-default.ui-corner-top:nth-child(3)
+li.menu-item.security:nth-child(3)
 {
 	display: none;
 }

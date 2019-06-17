@@ -284,7 +284,7 @@ class Novo_User_Model extends NOVO_Model {
 	public function callWs_FinishSession_User($dataRequest = FALSE)
 	{
 		log_message('INFO', 'NOVO User Model: FinishSession method Initialized');
-		$user = $dataRequest ? mb_strtoupper($dataRequest->user) : $this->session->userdata('userName');
+		$user = $dataRequest->user != 'noUser' ? mb_strtoupper($dataRequest->user) : $this->session->userdata('userName');
 		$this->className = 'com.novo.objects.TOs.UsuarioTO';
 
 		$this->dataAccessLog->userName = $user;
