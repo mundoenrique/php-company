@@ -235,13 +235,17 @@ $(document).ready(function() {
 
 				return valido;
 			}
+
+			var filtro_busq={};
+
 			function buscarSaldos(paginaActual){
 			    	var $consulta;
 
 			    	if(validar_filtro_busqueda("lotes-2")){
 			    		$('#cargando').fadeIn("slow");
 			    		$("#SaldosAmanecidos-btnBuscar").hide();
-							$('#div_tablaDetalle').fadeOut("fast"); filtro_busq.empresa = $("#SaldosAmanecidos-empresa").val();
+							$('#div_tablaDetalle').fadeOut("fast");
+							filtro_busq.empresa = $("#SaldosAmanecidos-empresa").val();
 							filtro_busq.cedula = $("#SaldosAmanecidos-TH").val().replace(/ /g, '');
 							filtro_busq.producto = $("#SaldosAmanecidos-producto").val();
 							filtro_busq.nomEmpresa = $('option:selected', "#SaldosAmanecidos-empresa").attr("acnomcia");
