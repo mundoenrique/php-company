@@ -285,31 +285,30 @@ class Servicios extends CI_Controller {
 		$token = $this->session->userdata('token');
 		$idEmpresa = $this->session->userdata('acrifS');
 		$idProductoS = $this->session->userdata('idProductoS');
-		$pg = $this->input->post('data-pg');
-		$paginas = $this->input->post('data-paginas');
-		$paginar = $this->input->post('data-paginar');
+
+		$dataRequest = json_decode(
+			$this->security->xss_clean(
+				strip_tags(
+					$this->cryptography->decrypt(
+						base64_decode($this->input->get_post('plot')),
+						utf8_encode($this->input->get_post('request'))
+					)
+				)
+			)
+		);
+		$tarjetas = $dataRequest->data_tarjeta;
+		$dnis = $dataRequest->data_id_ext_per;
+		$pass = $dataRequest->data_pass;
+		$pg = $dataRequest->data_pg;
+		$paginas = $dataRequest->data_paginas;
+		$paginar = $dataRequest->data_paginar;
 
 		$listaTarjetas = [
 			"paginaActual" => $pg,
 			"tamanoPagina" => $paginas,
 			"paginar" => $paginar
 		];
-
 		$listaTarjetas = array($listaTarjetas);
-		$dataRequest = json_decode(
-			$this->security->xss_clean(
-					strip_tags(
-							$this->cryptography->decrypt(
-									base64_decode($this->input->get_post('plot')),
-									utf8_encode($this->input->get_post('request'))
-							)
-					)
-			)
-	);
-	$tarjetas = $dataRequest->data_tarjeta;
-	$dnis = $dataRequest->data_id_ext_per;
-	$pass = $dataRequest->data_pass;
-	$lista;
 
 		foreach ($tarjetas as $key => $value) {
 			$tjs = ["noTarjeta" => $value, "id_ext_per" => $dnis[$key]];
