@@ -45,6 +45,8 @@ class Reports_additional extends CI_Controller {
 			'jquery-md5.js',
 			'jquery.balloon.min.js',
 			'jquery.iframe-transport.js',
+			'aes.min.js',
+			'aes-json-format.min.js',
 			'header.js',
 			'dashboard/widget-empresa.js',
 			'combustible/jquery.dataTables.js',
