@@ -205,18 +205,29 @@ class Reports_additional extends CI_Controller {
 	 */
 	public function callSystem($urlCountry)
 	{
+		$dataRequest = json_decode(
+			$this->security->xss_clean(
+				strip_tags(
+					$this->cryptography->decrypt(
+						base64_decode($this->input->get_post('plot')),
+						utf8_encode($this->input->get_post('request'))
+					)
+				)
+			)
+		);
 		//Optener el modelo
-		$model = $this->input->post('mod');
+		$model = $dataRequest->mod;
 		//Cargar el modelo
 		$this->load->model($model . '_model', 'modelo');
 		//Optener el Método
-		$method = 'callWS' . $this->input->post('way');
+		$method = 'callWS' . $dataRequest->way;
 		//Optener datos para el request
-		$dataRequest = $this->input->post('request');
+		$data = $dataRequest->request;
 		//Obtener respuesta del servicio
-		$dataResponse = $this->modelo->$method($dataRequest);
+		$dataResponse = $this->modelo->$method($data);
 		//Enviar respuesta a la vista
-		$this->output->set_content_type('application/json')->set_output(json_encode($dataResponse));
+		$response = $this->cryptography->encrypt($dataResponse);
+		$this->output->set_content_type('application/json')->set_output(json_encode($response));
 	}
 	/**
 	 * @info		método para eliminar archivos de reportes descargados por el usuario
