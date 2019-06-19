@@ -670,6 +670,7 @@ function paginar() {
 			$('.table-text-aut .' + page).show();
 		}
 	});
+	$('#paginado-TM .jPag-pages').css('width', '350px')
 }
 
 // SUMAR LOS MONTOS INGRESADOS Y VALIDAR MONTO MAX. Y MIN.
