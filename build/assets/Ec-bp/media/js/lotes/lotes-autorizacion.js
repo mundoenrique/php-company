@@ -332,7 +332,7 @@ $(function () {
 		var ctipolote = $(this).attr('ctipolote') + ",";
 
       var canvas = "<div id='dialog-confirm'>";
-      canvas +="<p>Lote Nro.: "+acnumlote+"</p>";
+		canvas += "<p>Lote Nro.: " + $(this).attr('numlote')+"</p>";
       canvas += "<form onsubmit='return false'><fieldset><input type='password' id='pass' name='user-password' size=24 placeholder='Ingrese su contraseña' class='text ui-widget-content ui-corner-all'/>";
       canvas += "<h5 id='msg'></h5></fieldset></form></div>";
 			tabla = $(this).parents('table').attr('id');

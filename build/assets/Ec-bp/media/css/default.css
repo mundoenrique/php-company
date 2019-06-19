@@ -4058,8 +4058,7 @@ ul#brands li p img {
 	margin-bottom: 10px;
 	background: #F2F2F2;
 	float: left;
-	/* margin: 0px 7px; */
-	/*width: 618px;*/
+	margin-bottom: 0;
 	border: 1px solid #dddddd;
 	line-height: 35px;
 	margin-left: 7px;
