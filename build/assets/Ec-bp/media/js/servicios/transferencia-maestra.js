@@ -249,7 +249,7 @@ $(function() {
 					});
 				}
 			} else {
-				notiPagOS('Campos inválidos', 'Verifique los datos ingresados e intente nuevamente');
+				notiPagOS('Campos inválidos', 'Verifique los datos ingresados e intente nuevamente.');
 			}
 		}
 	});

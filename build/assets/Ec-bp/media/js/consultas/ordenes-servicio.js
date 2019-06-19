@@ -110,7 +110,7 @@ $(function () {
 				notificacion("Buscar Orden de Servicio", "Verifique los datos ingresados e intente nuevamente");
 			}
 		} else {
-			notificacion("Buscar Orden de Servicio", "<h2>Verifique que:</h2><h6>1. Ha seleccionado un rango de fechas</h6><h6>2. Ha seleccionado un estatus de lote</h6>")
+			notificacion("Buscar Orden de Servicio", "<h2>Verifique que:</h2><h6>1. Ha seleccionado un rango de fechas.</h6><h6>2. Ha seleccionado un estatus de lote.</h6>")
 		}
 	});
 
