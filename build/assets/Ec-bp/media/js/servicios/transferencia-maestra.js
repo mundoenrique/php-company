@@ -249,7 +249,7 @@ $(function() {
 					});
 				}
 			} else {
-				notiPagOS('Campos inválidos', 'Verifique los datos ingresados e intente nuevamente');
+				notiPagOS('Campos inválidos', 'Verifique los datos ingresados e intente nuevamente.');
 			}
 		}
 	});
@@ -670,6 +670,7 @@ function paginar() {
 			$('.table-text-aut .' + page).show();
 		}
 	});
+	$('#paginado-TM .jPag-pages').css('width', '350px')
 }
 
 // SUMAR LOS MONTOS INGRESADOS Y VALIDAR MONTO MAX. Y MIN.

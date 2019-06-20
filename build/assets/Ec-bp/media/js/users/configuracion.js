@@ -111,7 +111,7 @@ $(function(){
 															});
 
 													} else {
-														$(this).find($('#vacio')).text('Verifique los datos ingresados e intente nuevamente')
+														$(this).find($('#vacio')).text('Verifique los datos ingresados e intente nuevamente.')
 													}
                     }
                     $(this).find($('#old')).val('');

@@ -184,7 +184,7 @@ $('#lotes-2').on('click','#select-allA', function() {
     	});
     // resetValuesAuth();
     }else{
-        notificacion("Autorizando lotes","<h2>Verifique que: </h2><h3>1. Ha seleccionado al menos un lote</h3><h3>2. Ha ingresado su contraseña</h4><h3>3. Ha seleccionado el tipo orden de servicio</h3>");
+        notificacion("Autorizando lotes","<h2>Verifique que: </h2><h3>1. Ha seleccionado al menos un lote.</h3><h3>2. Ha ingresado su contraseña.</h4><h3>3. Ha seleccionado el tipo orden de servicio.</h3>");
     }
 
   });

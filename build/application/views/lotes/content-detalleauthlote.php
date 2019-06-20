@@ -129,18 +129,25 @@
 					<table id="table-lote-detail">
 						<thead>
 							<th>'.lang('ID_PERSONA').'</th>
-							<th id="td-nombre-2">'.lang('TABLA_REG_EMISION_NOMB').'</th>
-							<th id="td-nombre-2">'.lang('TABLA_REG_EMISION_APELL').'</th>
-							<th id="td-nombre-2">'.lang('TABLA_REG_EMISION_UBIC').'</th>
+							<th class="width-td">'.lang('TABLA_REG_EMISION_NOMB').'</th>
+							<th class="width-td">'.lang('TABLA_REG_EMISION_APELL').'</th>
+							<th class="width-td">'.lang('TABLA_REG_EMISION_UBIC').'</th>
+							<th class="width-td">'.lang('TABLA_REG_RECARGA_STATUS').'</th>
 						</thead>
 						<tbody>';
 				foreach ($data[0]->registrosLoteEmision as $registros) {
+					$statusEmision = ['0', '1', '7'];
+					$statusEmisionText = lang('STATUS_EMISION_'.$registros->status);
+					if(!in_array($registros->status, $statusEmision)) {
+						$statusEmisionText = 'N/A';
+					}
 					echo '
 						<tr>
 							<td>'.$registros->idExtPer.'</td>
-							<td id="td-nombre-2">'.$registros->nombres.'</td>
-							<td id="td-nombre-2">'.$registros->apellidos.'</td>
-							<td id="td-nombre-2">'.$registros->ubicacion.'</td>
+							<td class="width-td">'.$registros->nombres.'</td>
+							<td class="width-td">'.$registros->apellidos.'</td>
+							<td class="width-td">'.$registros->ubicacion.'</td>
+							<td class="width-td">'.$statusEmisionText.'</td>
 						</tr>
 					';
 				}
