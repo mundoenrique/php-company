@@ -31,7 +31,7 @@ if ( ! function_exists('insert_js_cdn'))
 		$filepath = $path_cdn . 'media/js/' . $filename;
 		$version = '';
 		if (file_exists($filepath)) {
-			$version = '?v=' . date('Ymd-B', filemtime($filepath));
+			$version = '?v=' . date('Ymd-U', filemtime($filepath));
 		}
 		$js='<script src="' . $url_cdn.'media/js/' . $filename . $version . '" type="text/javascript"></script>';
 		echo "\n";
@@ -55,7 +55,7 @@ if ( ! function_exists('insert_css_cdn'))
 		$filepath = $path_cdn . 'media/css/' . $filename;
 		$version = '';
 		if (file_exists($filepath)) {
-			$version = '?v=' . date('Ymd-B', filemtime($filepath));
+			$version = '?v=' . date('Ymd-U', filemtime($filepath));
 		}
 		$css='<link rel="stylesheet" type="text/css" href="' . $url_cdn . 'media/css/' . $filename . $version . '"/>';
 		echo "\n";
@@ -78,7 +78,7 @@ if ( ! function_exists('insert_image_cdn'))
 		$filepath = $path_cdn . 'media/img/' . $filename;
 		$version = '';
 		if (file_exists($filepath)) {
-			$version = '?v=' . date('Ymd-B', filemtime($filepath));
+			$version = '?v=' . date('Ymd-U', filemtime($filepath));
 		}
 		$img='<img src="' . $url_cdn . 'media/img/' . $filename . $version . '">';
 		return $img;

@@ -11,7 +11,7 @@ $(function() {
 			contents: $('#psw_info').html()
 		});
 	})
-	.on('keyup', function() {
+	.on('keyup focus', function() {
 		var pswd = $(this).val();
 
 		passStrength(pswd);
@@ -25,7 +25,7 @@ $(function() {
 		e.preventDefault();
 		var form = $('#form-change-pass');
 		var ChangeBtn = $(this);
-		validateForms(form);
+		validateForms(form, { handleMsg: true });
 		if(form.valid()) {
 			var userType = $('#user-type').val();
 			var currentPass = $('#current-pass').val();
@@ -48,6 +48,12 @@ $(function() {
 			changePassword(passData, textBtn);
 		}
 	});
+
+	/* $('#signup').on('click', function () {
+		verb = 'POST'; who = 'User'; where = 'FinishSession'; data = {user: 'noUser'};
+		callNovoCore(verb, who, where, data);
+	}); */
+
 });
 
 function passStrength(pswd) {
@@ -120,4 +126,3 @@ function changePassword(passData, textBtn) {
 		$('#btn-change-pass').html(textBtn)
 	})
 }
-
