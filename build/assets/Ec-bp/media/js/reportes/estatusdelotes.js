@@ -224,7 +224,7 @@ var filtro_busq={};
 					}
 				});
 			} else {
-				showErrMsg('Verifique los datos ingresados e intente nuevamente');
+				showErrMsg('Verifique los datos ingresados e intente nuevamente.');
 			}
 
 }

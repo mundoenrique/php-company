@@ -49,18 +49,18 @@ $(function() {
 		} else if (data.rc == -233) {
 			Amountmsg = "La empresa no posee saldo.";
 			$("#amount, #description, #account, #charge, #credit, #recargar").prop("disabled", false);
-			if(codeCtas != '0') {
-				$('#account').prop('disabled', true);
-			}
 		} else if (data.rc == -61) {
 			window.location.replace(baseURL+isoPais+'/finsesion');
-		}else if(data.rc == -251){
+		}else if(data.rc == -251) {
 			codeCtas = 'deft';
 			msgCtas = "No existen parámetros definidos para la empresa sobre este producto.";
 		} else {
 			$("#amount, #description, #account, #charge, #credit, #recargar").prop("disabled", true);
 		}
 		$("#saldoEmpresa").text('Saldo disponible: ' + Amountmsg);
+		if (codeCtas != '0') {
+			$('#account').prop("disabled", true);
+		}
 
 		switch(codeCtas) {
 			case '0':
@@ -249,7 +249,7 @@ $(function() {
 					});
 				}
 			} else {
-				notiPagOS('Campos inválidos', 'Verifique los datos ingresados e intente nuevamente');
+				notiPagOS('Campos inválidos', 'Verifique los datos ingresados e intente nuevamente.');
 			}
 		}
 	});
@@ -269,14 +269,6 @@ function paramsValidate(type){
 	var accumAmountDaily = parseFloat(dailyOper.montoOperacion);
 	var valid = true;
 	codeCtas = 'deft';
-
-	/* var montoMaxTransDia = parametrosRecarga.montoMaxTransDia;
-	var montoMaxTransDia = parametrosRecarga.montoMaxTransDia;
-	var montoMinTransDia = parametrosRecarga.montoMinTransDia;
-	var montoMaxTransaccion = parametrosRecarga.montoMaxTransaccion;
-	var montoMaxTransSemanal = parametrosRecarga.montoMaxTransSemanal;
-	var accumTransdaily = dailyOper.idCuenta;
-	var accumAmountdaily = dailyOper.montoOperacion; */
 
 	if(type == 'abono') {
 		var saldo = $('#account option:selected').text().split(':');
@@ -678,6 +670,7 @@ function paginar() {
 			$('.table-text-aut .' + page).show();
 		}
 	});
+	$('#paginado-TM .jPag-pages').css('width', '350px')
 }
 
 // SUMAR LOS MONTOS INGRESADOS Y VALIDAR MONTO MAX. Y MIN.
