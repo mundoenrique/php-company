@@ -1,4 +1,4 @@
-<?php 
+<?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 //CARGA DE LOTES
 $lang['TITULO_LOTES_CARGA']= "Carga de Lotes";
@@ -86,6 +86,9 @@ $lang['TABLA_REGISTRO_MONTO']='Monto';
 $lang['TABLA_REG_EMISION_NOMB'] = 'Nombres';
 $lang['TABLA_REG_EMISION_APELL'] = 'Apellidos';
 $lang['TABLA_REG_EMISION_UBIC'] = 'Ubicación';
+$lang['STATUS_EMISION_0'] = 'En Proceso';
+$lang['STATUS_EMISION_1'] = 'Procesado';
+$lang['STATUS_EMISION_7'] = 'Rechazado';
 $lang['TABLA_REG_RECARGA_CTA'] = 'Cuenta';
 $lang['TABLA_REG_RECARGA_MONTO'] = 'Monto';
 $lang['TABLA_REG_RECARGA_STATUS']='Estatus';

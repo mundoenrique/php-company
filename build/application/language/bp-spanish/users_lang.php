@@ -16,8 +16,8 @@ $lang['MSG_BLOQUEAR_USER'] = 'El usuario será bloqueado al próximo intento fal
 
 //TERMINOS Y CONDICIONES
 $lang['MSG_CONFIR_EXIT'] = 'Para continuar, debe aceptar los términos y condiciones de uso. De lo contrario será dirigido a la página inicial';
-$lang['MSG_NEW_PASS_USER'] = 'Por motivos de seguridad es necesario que cambie su contraseña la primera vez que ingresa a nuestro sistema "Conexión Empresas"';
-$lang['MSG_NEW_PASS_CADU'] = 'Clave vencida. Por motivos de seguridad es necesario que cambie su contraseña antes de continuar en nuestro sistema "Conexión Empresas"';
+$lang['MSG_NEW_PASS_USER'] = 'Por motivos de seguridad es necesario que cambie su contraseña la primera vez que ingresa a nuestro sistema "Conexión Empresas".';
+$lang['MSG_NEW_PASS_CADU'] = 'Clave vencida. Por motivos de seguridad es necesario que cambie su contraseña antes de continuar en nuestro sistema "Conexión Empresas".';
 
 //CONFIGURACION
 $lang['CARGANDO'] = 'Cargando...';
@@ -95,7 +95,7 @@ $lang['LOGOUT_MSG'] = 'Su sesión en Conexión Empresas Online ha caducado';
 $lang['LOGOUT_BTN_BACK'] ='Aceptar';
 
 $lang["TITULO_TERMINOS"]='Condiciones Generales, Términos de Uso y Confidencialidad';
-$lang["TERMINOS"] = '<p style="color:red; font-size: 60px; margin-top: 40px;"><strong>CONTENIDO NO DISPONIBLE?</strong></p>';
+$lang["TERMINOS"] = '<p style="color:red; font-size: 60px; margin-top: 40px;"><strong>TEXTO NO SUMINISTRADO.</strong></p>';
 
 
 //change password

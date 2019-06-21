@@ -8,7 +8,6 @@
   <meta name="viewport" content="width=device-width">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <meta http-equiv="cleartype" content="on">
-  <meta http-equiv="pragma" content="no-cache">
   <link rel="profile" href="http://gmpg.org/xfn/11">
   <link rel="icon" type="image/<?= $ext ?>" href="<?= $this->asset->insertFile($favicon.'.'.$ext, 'images/favicon') ?>">
   <?= $this->asset->insertCss(); ?>
@@ -53,14 +52,14 @@
             </a>
           </li>
           <?php endif; ?>
-          <?php if($module !== 'benefits'): ?>
+          <?php if($module !== 'benefits' && $module !== 'change-password' && $module !== 'terms'): ?>
           <li class="menu-item benefits">
             <a href="<?= base_url('inf-beneficios') ?>" rel="section">
               <?= lang('BREADCRUMB_BENEFICIOS') ?>
             </a>
           </li>
           <?php endif; ?>
-          <?php if($module !== 'terms'): ?>
+          <?php if($module !== 'terms' && $module !== 'change-password'): ?>
           <li class="menu-item terms">
             <a href="<?= base_url('inf-condiciones'); ?>" rel="section">
               <?= lang('BREADCRUMB_CONDICIONES') ?>

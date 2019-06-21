@@ -63,7 +63,7 @@ class Asset {
 		log_message('INFO', 'NOVO Assets: insertFile method initialized');
 		$country = $country ? $country.'/' : '';
 		$file = assetPath($folder.'/'.$country.$fileName);
-		$version = '?V'.date('Ymd-B', fileatime($file));
+		$version = '?V'.date('Ymd-U', filemtime($file));
 		$file_url = assetUrl($folder.'/'.$country.$fileName.$version);
 		return $file_url;
 	}
@@ -76,7 +76,7 @@ class Asset {
 		$version = '';
 		$thirdParty = strpos($fileName, 'third_party');
 		if($thirdParty === FALSE && file_exists($file)) {
-			$version = '?V'.date('Ymd-B', filemtime($file));
+			$version = '?V'.date('Ymd-U', filemtime($file));
 			//$ext = (ENVIRONMENT === 'testing' || ENVIRONMENT === 'production') ? '.min'.$ext : $ext;
 		} else {
 			$ext = '.min'.$ext;

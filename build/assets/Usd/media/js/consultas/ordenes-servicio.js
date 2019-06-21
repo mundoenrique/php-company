@@ -54,10 +54,10 @@ if($("#msg").val()){
     		$('form#formulario').submit();
 
 			}else{
-				notificacion("Buscar Orden de Servicio","Rango de fecha Incoherente");
+				notificacion("Buscar Orden de Servicio","Rango de fecha Incoherente.");
 			}
 		}else{
-			notificacion("Buscar Orden de Servicio","<h2>Verifique que:</h2><h6>1. Ha seleccionado un rango de fechas</h6><h6>2. Ha seleccionado un estatus de lote</h6>")
+			notificacion("Buscar Orden de Servicio","<h2>Verifique que:</h2><h6>1. Ha seleccionado un rango de fechas.</h6><h6>2. Ha seleccionado un estatus de lote.</h6>")
 		}
 	});
 
