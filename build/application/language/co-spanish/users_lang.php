@@ -1,4 +1,4 @@
-<?php 
+<?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 $lang['WELCOME_TITLE']='Bienvenido a Conexión Empresas Online';
 $lang['WELCOME_MESSAGE']='Con este sistema las gestiones de pago de su empresa son más eficientes, seguras y rápidas. Empiece a disfrutar de todas las ventajas que le ofrece Conexión Empresas Online.';
@@ -17,8 +17,8 @@ $lang['MSG_BLOQUEAR_USER'] = 'El usuario será bloqueado al próximo intento fal
 
 //TERMINOS Y CONDICIONES
 $lang['MSG_CONFIR_EXIT'] = 'Para continuar, debe aceptar los términos y condiciones de uso. De lo contrario será dirigido a la página inicial';
-$lang['MSG_NEW_PASS_USER'] = 'Por motivos de seguridad es necesario que cambie su contraseña la primera vez que ingresa a nuestro sistema "Conexión Empresas Online"';
-$lang['MSG_NEW_PASS_CADU'] = 'Clave vencida. Por motivos de seguridad es necesario que cambie su contraseña antes de continuar en nuestro sistema "Conexión Empresas Online"';
+$lang['MSG_NEW_PASS_USER'] = 'Por motivos de seguridad es necesario que cambie su contraseña la primera vez que ingresa a nuestro sistema "Conexión Empresas Online".';
+$lang['MSG_NEW_PASS_CADU'] = 'Clave vencida. Por motivos de seguridad es necesario que cambie su contraseña antes de continuar en nuestro sistema "Conexión Empresas Online".';
 
 //CONFIGURACION
 $lang['CARGANDO'] = 'Cargando...';

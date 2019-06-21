@@ -127,6 +127,9 @@ function ingresar(user, text) {
 			$('#login-form input, #login-form button').attr('disabled', false);
 			$('#login-btn').html(text);
 			$('#user_pass').val('');
+			if(country == 'bp') {
+				$('#user_login').val('');
+			}
 
 			setTimeout(function() {
 				$("#user_login").hideBalloon();

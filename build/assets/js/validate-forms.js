@@ -79,7 +79,7 @@ function validateForms(form, options) {
 
 	form.validate({
 		rules: {
-			"user-name": {minlength: 5},
+			"user-name": {pattern: alphanumunder},
 			"id-company": {fiscalRegistry: true},
 			"email": {pattern: emailValid},
 			"new-pass": {differs: "#current-pass", validatePass: true},

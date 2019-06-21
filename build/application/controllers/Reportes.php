@@ -1592,8 +1592,8 @@ class Reportes extends CI_Controller {
 								)
 							)
 						);
-						$_POST['paginaActual'] = $dataRequest->filtro_busq->paginaActual;
-						$_POST['lotes_producto'] = $dataRequest->filtro_busq->lotes_producto;
+						$_POST['paginaActual'] = $dataRequest->paginaActual;
+						$_POST['lotes_producto'] = $dataRequest->lotes_producto;
 						$this->form_validation->set_rules('empresa', 'Empresa',  'trim|xss_clean|required');
 						$this->form_validation->set_rules('lotes_producto', 'Tarjeta',  'trim|xss_clean|required');
 							if ($this->form_validation->run() == FALSE)
@@ -1606,9 +1606,9 @@ class Reportes extends CI_Controller {
 							else
 							{
 
-									$paginaActual = $dataRequest->filtro_busq->paginaActual;
-									$loteproducto = $dataRequest->filtro_busq->lotes_producto;
-									$acrif = $dataRequest->filtro_busq->acrif;
+									$paginaActual = $dataRequest->paginaActual;
+									$loteproducto = $dataRequest->lotes_producto;
+									$acrif = $dataRequest->acrif;
 									$username = $this->session->userdata('userName');
 									$token = $this->session->userdata('token');
 									unset($_POST['paginaActual'], $_POST['lotes_producto']);
