@@ -79,6 +79,12 @@ class User extends NOVO_Controller {
 				"user/kwicks"
 			);
 		}
+		if($this->countryUri === 'bp' && ENVIRONMENT === 'production') {
+			array_push(
+				$this->includeAssets->jsFiles,
+				"third_party/borders"
+			);
+		}
 		$this->views = $views;
 		$this->render->titlePage = lang('SYSTEM_NAME');
 		$this->loadView('login');
