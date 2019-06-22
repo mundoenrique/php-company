@@ -8,7 +8,6 @@
   <meta name="viewport" content="width=device-width">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <meta http-equiv="cleartype" content="on">
-  <meta http-equiv="pragma" content="no-cache">
   <link rel="profile" href="http://gmpg.org/xfn/11">
   <link rel="icon" type="image/<?= $ext ?>" href="<?= $this->asset->insertFile($favicon.'.'.$ext, 'images/favicon') ?>">
   <?= $this->asset->insertCss(); ?>

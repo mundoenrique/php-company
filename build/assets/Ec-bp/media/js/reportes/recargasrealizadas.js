@@ -264,7 +264,7 @@ $(document).ready(function () {
 									name: 'Population',
 									data: arrayseries,
 									dataLabels: {
-										enabled: true,
+										enabled: false,
 										rotation: 0,
 										color: '#000000',
 										align: 'center',
@@ -310,7 +310,7 @@ $(document).ready(function () {
 
 				});
 			} else {
-				showErrMsg('Verifique los datos ingresados e intente nuevamente');
+				showErrMsg('Verifique los datos ingresados e intente nuevamente.');
 			}
 		}
 
