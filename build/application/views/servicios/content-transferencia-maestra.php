@@ -148,10 +148,12 @@
 					<tbody></tbody>
 				</table>
 				<div id='paginado-TM'></div>
+				<?php if($pais != 'Ec-bp'): ?>
 				<div class='montos-TM' >
 					<p id='comisionTrans'></p>
 					<p id='comisionCons'></p>
 				</div>
+				<?php endif; ?>
 			</div>
 			<div id="batchs-last">
 				<form name="no-form" onsubmit="return false">

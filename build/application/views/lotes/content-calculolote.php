@@ -77,7 +77,9 @@ $reten = ($reten == NULL) ? "nonEmpty" : trim($reten, ', ');
 							<tr id="datos-principales">
 								<th style='display:none'></th>
 								<th style='display:none'></th>
+								<?php if($pais != 'Ec-bp'): ?>
 								<th><?php echo lang('TABLA_OS_MONTO'); ?></th>
+								<? endif; ?>
 								<th><?php echo lang('TABLA_OS_MONTO_IVA'); ?></th>
 								<th class="th-empresa"><?php echo lang('TABLA_OS'); ?></th>
 								<th><?php echo lang('TABLA_OS_MONTO_TOTAL'); ?></th>
@@ -94,17 +96,25 @@ $reten = ($reten == NULL) ? "nonEmpty" : trim($reten, ', ');
 
 						foreach ($data->lista as $value) {
 							array_push($tempidOrdenLotes, $value->idOrdenTemp);
+							$comision = "<td>".lang('TABLA_OS_COMISION')."</td>";
+							if($pais == 'Ec-bp') {
+								$comision = '';
+							}
 							$ltr="<tr class='OShead-2 OSinfo $value->idOrdenTemp elem-hidden'>
 							<td>".lang('TABLA_OS_NROLOTE')."</td>
 							<td>".lang('TABLA_OS_FECHA')."</td>
 							<td>".lang('TABLA_OS_TIPO')."</td>
 							<td>".lang('TABLA_OS_CANT')."</td>
 							<td>".lang('TABLA_OS_STATUS')."</td>
-							<td>".lang('TABLA_OS_MONTO_RECARGA')."</td>
-							<td>".lang('TABLA_OS_COMISION')."</td>
-							<td>".lang('TABLA_OS_MONTO_TOTAL')."</td>
+							<td>".lang('TABLA_OS_MONTO_RECARGA')."</td>".
+							$comision.
+							"<td>".lang('TABLA_OS_MONTO_TOTAL')."</td>
 						</tr>";
 							foreach ($value->lotes as $l) {
+								$montoComision = "<td>$l->montoComision</td>";
+								if($pais == 'Ec-bp') {
+									$montoComision = '';
+								}
 
 								$montoNeto = floatval($l->montoRecarga)+floatval($l->montoComision);
 								$ltr  .= "<tr class='OSinfo $value->idOrdenTemp elem-hidden'>
@@ -114,7 +124,7 @@ $reten = ($reten == NULL) ? "nonEmpty" : trim($reten, ', ');
 							<td>$l->ncantregs</td>
 							<td>".ucfirst(mb_strtolower($l->status))."</td>
 							<td>$l->montoRecarga</td>
-							<td>$l->montoComision</td>
+							$montoComision
 							<td>$montoNeto</td>
 						</tr>";
 							}
@@ -139,6 +149,10 @@ $reten = ($reten == NULL) ? "nonEmpty" : trim($reten, ', ');
 									<td style='float:left; padding:0; '><table><tbody>$ltr</tbody></table></td>
 								</tr>";
 							}else {
+								$monComision = "<td>$value->montoComision</td>";
+								if($pais == 'Ec-bp') {
+									$monComision = '';
+								}
 								echo "
 								<tr id='$value->idOrdenTemp'>
 									<td class='OS-icon'>
@@ -146,7 +160,7 @@ $reten = ($reten == NULL) ? "nonEmpty" : trim($reten, ', ');
 											<span aria-hidden='true' class='icon' data-icon='&#xe003;'></span>
 										</a>
 									</td>
-									<td>$value->montoComision</td>
+									$monComision
 									<td>$value->montoIVA</td>
 									<td class='th-empresa'>$value->montoOS</td>
 									<td>".amount_format($value->montoTotal)."</td>

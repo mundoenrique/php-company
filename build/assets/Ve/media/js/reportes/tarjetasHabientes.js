@@ -235,7 +235,7 @@ $(document).ready(function () {
 
 		if (!valido) {
 			$(".div_tabla_detalle").fadeOut("fast");
-			$("#mensajeError").html("Por favor rellene los campos marcados en color rojo");
+			$("#mensajeError").html("Por favor, rellene los campos marcados en color rojo.");
 			$("#mensajeError").fadeIn("fast");
 		} else {
 			$("#mensajeError").fadeOut("fast");

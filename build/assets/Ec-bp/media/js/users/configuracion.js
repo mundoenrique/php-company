@@ -111,7 +111,7 @@ $(function(){
 															});
 
 													} else {
-														$(this).find($('#vacio')).text('Verifique los datos ingresados e intente nuevamente')
+														$(this).find($('#vacio')).text('Verifique los datos ingresados e intente nuevamente.')
 													}
                     }
                     $(this).find($('#old')).val('');
@@ -133,7 +133,7 @@ $(function(){
             }
 
             //validate letter
-            if ( pswd.match(/[A-z]/) ) {
+            if ( pswd.match(/[a-z]/) ) {
                 $('#letter').removeClass('invalid').addClass('valid');
             } else {
                 $('#letter').removeClass('valid').addClass('invalid');
