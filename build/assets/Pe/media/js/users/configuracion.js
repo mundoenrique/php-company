@@ -52,7 +52,16 @@ $(function() {
             maxWidth: 470,
             maxHeight: 280,
             resizable:false,
-            close: function(){ $(this).dialog("destroy")},
+            close: function(){
+							var rulesList = $('#psw_info ul');
+							rulesList.find('#length').removeClass('valid').addClass('invalid');
+							rulesList.find('#letter').removeClass('valid').addClass('invalid');
+							rulesList.find('#capital').removeClass('valid').addClass('invalid');
+							rulesList.find('#number').removeClass('valid').addClass('invalid');
+							rulesList.find('#especial').removeClass('valid').addClass('invalid');
+							rulesList.find('#consecutivo').removeClass('valid').addClass('invalid');
+							$(this).dialog("destroy");
+						},
             buttons: {
                 OK: function(){
 
