@@ -122,7 +122,11 @@ $(document).ready(function () {
 	//------------------------------------------
 	//EJECUION DE LA BUSQUEDA DE LA INFORMACION
 	//------------------------------------------
-	$("#repEstadosDeCuenta_btnBuscar").click(function () { /*$('#paginacion').hide();*/ $('#contend-pagination').hide(); buscarReporte = true; BuscarEstadosdeCuenta(0) });
+	$("#repEstadosDeCuenta_btnBuscar").click(function () {
+		$('#contend-pagination').hide();
+		buscarReporte = true;
+		BuscarEstadosdeCuenta(0)
+	});
 
 
 	//---------------------------------------------------------
@@ -305,20 +309,6 @@ $(document).ready(function () {
 							span.attr("data-icon", '&#xe05a;');
 							span.attr("title", "Exportar a EXCEL");
 							span.click(function () {
-
-
-								/*datos={
-									empresa:filtro_busq.empresa,
-									fechaInicial: filtro_busq.fechaInicial,
-									fechaFin: filtro_busq.fechaFin,
-									cedula: filtro_busq.cedula.replace(/ /g,''),
-									paginaActual: 1,
-									producto: filtro_busq.producto,
-									tipoConsulta: filtro_busq.tipoConsulta,
-									nomEmpresa: filtro_busq.acnomcia.replace(","," "),
-									descProducto: filtro_busq.productoDesc
-								}
-								descargarArchivo(datos, baseURL+api+isoPais+"/reportes/EstadosdeCuentaXLS", "Exportar a EXCEL" );*/
 								var ceo_cook = decodeURIComponent(
 									document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 								);
@@ -349,20 +339,6 @@ $(document).ready(function () {
 							span.attr("data-icon", '&#xe02e;');
 							span.attr("title", "Exportar a PDF");
 							span.click(function () {
-
-
-								/*datos={
-									empresa:filtro_busq.empresa,
-									fechaInicial: filtro_busq.fechaInicial,
-									fechaFin: filtro_busq.fechaFin,
-									cedula: filtro_busq.cedula.replace(/ /g,''),
-									paginaActual: 1,
-									producto: filtro_busq.producto,
-									tipoConsulta: filtro_busq.tipoConsulta,
-									nomEmpresa: filtro_busq.acnomcia.replace(","," "),
-									descProducto: filtro_busq.productoDesc
-								}
-								descargarArchivo(datos, baseURL+api+isoPais+"/reportes/EstadosdeCuentaPDF", "Exportar a PDF" );*/
 								var ceo_cook = decodeURIComponent(
 									document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 								);
@@ -593,7 +569,7 @@ $(document).ready(function () {
 									tr = $(document.createElement("tr")).appendTo(tbody);
 									tr.attr("id", "Datos2");
 									td = $(document.createElement("td")).appendTo(tr);
-									td.html("********" + item.tarjeta);
+									td.html(item.tarjeta);
 									td.attr("id", "Datos2-long");
 									td = $(document.createElement("td")).appendTo(tr);
 									td.html(item.fecha);
@@ -961,7 +937,4 @@ $(document).ready(function () {
 			}
 		});
 	}
-
-
-
 });
