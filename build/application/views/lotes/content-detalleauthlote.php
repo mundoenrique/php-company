@@ -72,7 +72,7 @@
 			</div>
 			<div id="detalleLote-1-short">
 				<h5><?php echo lang('TABLA_LOTESPA_TIPOLOTE') ?></h5>
-				<p><?php echo $data[0]->acnombre ?></p>
+				<p id="type-1"><?php echo $data[0]->acnombre ?></p>
 			</div>
 		</div>
 

@@ -52,10 +52,16 @@ $(function(){
             maxWidth: 470,
             maxHeight: 280,
             resizable:false,
-            close: function(){ $(this).dialog("destroy")},
+						close: function(){
+                            $(this).dialog("destroy")
+													 $('#length').removeClass('valid').addClass('invalid');
+													 $('#letter').removeClass('valid').addClass('invalid');
+													 $('#capital').removeClass('valid').addClass('invalid');
+													 $('#number').removeClass('valid').addClass('invalid');
+													 $('#especial').removeClass('valid').addClass('invalid');
+													 $('#consecutivo').removeClass('valid').addClass('invalid');					},
             buttons: {
                 OK: function(){
-
                     var old =$(this).find($('#old')).val();
                     var newC =$(this).find($('#new')).val();
                     var cNewC = $(this).find($('#confNew')).val();
@@ -92,7 +98,6 @@ $(function(){
                         $.post(baseURL+'/'+isoPais+"/changePassNewUserAuth", {request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)},
                             function(response){
 															data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
-                                data = $.parseJSON(data)
                                 if(data.rc == 0){
                                     $dialogo.dialog("destroy");
                                     notificacion('Cambiar contraseña','Proceso exitoso.');
@@ -127,7 +132,7 @@ $(function(){
             }
 
             //validate letter
-            if ( pswd.match(/[A-z]/) ) {
+            if ( pswd.match(/[a-z]/) ) {
                 $('#letter').removeClass('invalid').addClass('valid');
             } else {
                 $('#letter').removeClass('valid').addClass('invalid');
