@@ -20,7 +20,7 @@ $(function(){ // Document ready
 								var ceo_cook = decodeURIComponent(
 									document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 								);
-								dat.ceo_name = ceo_cook
+								dat.formData = {ceo_name: ceo_cook};
 
 		            var ext = $('#userfile').val().substr( $('#userfile').val().lastIndexOf(".") +1 );
 		            if( ext === "xls" || ext === "xlsx" ){
@@ -28,8 +28,10 @@ $(function(){ // Document ready
 
 			                    $("#cargarXLS").replaceWith('<h3 id="cargando_archivo">Cargando...</h3>');
 			                   // dat.formData = {'data-rif':$("option:selected","#listaEmpresasSuc").attr("data-rif")};
-			                    dat.submit().done( function (result, textStatus, jqXHR){
-			                     result = $.parseJSON(result);
+			                    dat.submit().done( function (response, textStatus, jqXHR){
+														result = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
+													 //result = $.parseJSON(result);
+
 			                      if(result){
 			                        if(!result.ERROR){
 			                          mostrarError(result);
@@ -101,11 +103,14 @@ $(function(){ // Document ready
 			$("#buscar-datos").hide();
 			$("#loading").dialog({title: "Buscando datos", modal:true});
 
-			var ceo_cook = decodeURIComponent(
-				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-			);
-
-			$.post(baseURL+api+isoPais+'/servicios/actualizar-datos/buscar-datos',{ceo_name: ceo_cook}).done(function(data){
+		var ceo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
+		var dataRequest = JSON.stringify ({"data_nombre": $('#nombre').val(),"data_status": estatus})
+		dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
+		$.post(baseURL+api+isoPais+'/servicios/actualizar-datos/buscar-datos', {request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)})
+		.done(function(response){
+			data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 
 				if(!data.ERROR){
 
@@ -133,14 +138,14 @@ $(function(){ // Document ready
 			$aux = $("#loading").dialog({title:'Descargando archivo de datos',modal:true, close:function(){$(this).dialog('close')}, resizable:false });
 			var ceo_cook = decodeURIComponent(
 				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-				);
+			);
 			$('form#formulario').empty();
 			$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'">');
-    		$('form#formulario').append('<input type="hidden" name="data-idOS" value="'+OS+'" />');
-    		$('form#formulario').append($('#data-OS'));
-    		$('form#formulario').attr('action',baseURL+api+isoPais+"/servicios/actualizar-datos/downXLS");
-    		$('form#formulario').submit();
-    		setTimeout(function(){$aux.dialog('destroy')},8000);
+    	$('form#formulario').append('<input type="hidden" name="data-idOS" value="'+OS+'" />');
+    	$('form#formulario').append($('#data-OS'));
+    	$('form#formulario').attr('action',baseURL+api+isoPais+"/servicios/actualizar-datos/downXLS");
+    	$('form#formulario').submit();
+    	setTimeout(function(){$aux.dialog('destroy')},8000);
 	});
 
 

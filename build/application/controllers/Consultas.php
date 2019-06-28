@@ -385,7 +385,7 @@ class Consultas extends CI_Controller {
 
 			$response = json_decode($jsonResponse);
 
-			log_message("INFO",'Respuesta del response rc: '.$response->rc.'/'.$response->formatoArchivo);
+			log_message("INFO",'Respuesta: '.json_encode($response));
 			if($response){
 					log_message("INFO",'PDF OS '.$response->rc.'/'.$response->msg);
 

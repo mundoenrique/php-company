@@ -39,7 +39,7 @@ class Reports_additional_model extends CI_Model {
 	 * @return array $response['code', 'title', 'msg', 'css', 'date', 'data']
 	*/
 	public function callWSReportRecharWithComm($dataRequest = NULL) {
-		log_message('INFO', '--[' . $this->userName . '] DATAREQUEST ReportRecharWithComm:' . $dataRequest);
+		log_message('INFO', '--[' . $this->userName . '] DATAREQUEST ReportRecharWithComm:' . json_encode($dataRequest));
 		//Construye log de acceso
 		$modulo = 'reportes';
 		$function = 'recargasRealizadas';
@@ -51,7 +51,7 @@ class Reports_additional_model extends CI_Model {
 		//Parametro adicional log de acceso
 		$logAcceso['tipoServicio'] = 'comisionRecargas';
 
-		$datareport = json_decode($dataRequest);
+		$datareport = $dataRequest;
 		$month = date('m');
 		$year = date('Y');
 		$firstDate = date('d/m/Y', mktime(0,0,0, $month, 1, $year)) . ' 00:00';
