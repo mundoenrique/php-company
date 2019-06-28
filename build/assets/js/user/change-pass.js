@@ -83,10 +83,9 @@ function passStrength(pswd) {
 		valid = false;
 	}
 
-	if (!pswd.match(/((\w|[!@#$%])*\d(\w|[!@#$%])*\d(\w|[!@#$%])*\d(\w|[!@#\$%])*\d(\w|[!@#$%])*(\d)*)/)
-			&& pswd.match(/\d{1}/) ) {
+	if (pswd.split(/[0-9]/).length - 1 >= 1 && pswd.split(/[0-9]/).length - 1 <= 3) {
 		$('.pass-config #number').removeClass('invalid').addClass('valid');
-		valid = !valid ?  valid : true;
+		valid = !valid ? valid : true;
 	} else {
 		$('.pass-config #number').removeClass('valid').addClass('invalid');
 		valid = false;
