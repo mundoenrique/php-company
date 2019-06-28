@@ -82,7 +82,7 @@ $ceo_cook = $this->security->get_csrf_hash();
 <div id='loading' style='text-align:center'><?php echo insert_image_cdn("loading.gif"); ?></div>
 <div class='more-empr'><a id='more' class='elem-hidden'><?php echo lang('LOAD'); ?></a></div>
 
-<div id='products-general' class="elem-hidden resultSet" style='width: 930px; margin-top: -50px'>
+<div id='products-general' class="elem-hidden resultSet" style='width: 930px; margin-top: -22px'>
 	<h2 style='text-align:center;' ><?php echo lang('ERROR_(-150)') ?></h2>
 </div>
 <div id='products-general' class="elem-hidden resultSet2" style='width: 930px; margin-top: -30px'>
