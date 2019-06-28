@@ -107,14 +107,12 @@ $(function () {
 			var dataRequest = JSON.stringify({
 				'data_fechaIni': data_fechaIni,'data_fechaFin':data_fechaFin,'data_acodcia':data_acodcia
 			})
-			console.log(dataRequest)
 			dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
 			$.post(baseURL + api + isoPais + "/reportes/actividadporusuario", {
 				request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)
 				})
 				.always(function (response) {
 					data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
-					console.log(data)
 					$('#cargando').hide();
 					$("#btnBuscar").show();
 					$('.resultadosAU').show();

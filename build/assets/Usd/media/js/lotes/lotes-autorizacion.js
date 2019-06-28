@@ -76,14 +76,16 @@ if( !$("#loteXdesa").val()&& !$('#lotesxAuth').val() ){
 				data = JSON.parse(CryptoJS.AES.decrypt(data.code, data.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
          $aux.dialog('destroy');
         if(!data.ERROR){
-
+					$('<div>Proceso exitoso.<h5>Listando lotes</h5></div>').dialog({
+						title: "Firmando lote",
+						modal: true,
+						bgiframe: true
+					});
          location.reload();
         }else{
            if(data.ERROR=='-29'){
                 alert('Usuario actualmente desconectado'); location.reload();
               }else{
-
-
           notificacion('Firmando lote',data.ERROR);
           }
         }
@@ -154,7 +156,7 @@ $('#lotes-2').on('click','#select-allA', function() {
       $.post(baseURL+isoPais+'/lotes/preliminar',{request: dataRequest,  ceo_name: ceo_cook,plot: btoa(ceo_cook)})
       .done(function(response){
 				data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
-        var code = response.code, title = response.title, msg = response.msg, dataCalc = response.data;
+        var code = data.code, title = data.title, msg = data.msg, dataCalc = data.data;
 				$('#loading').dialog('destroy');
 				if(code === 0) {
 					$("#data-COS").attr('value', dataCalc);
@@ -180,10 +182,7 @@ $('#lotes-2').on('click','#select-allA', function() {
     }else{
         notificacion("Autorizando lotes","<h2>Verifique que: </h2><h3>1. Ha seleccionado al menos un lote.</h3><h3>2. Ha ingresado su contraseña.</h4><h3>3. Ha seleccionado el tipo orden de servicio.</h3>");
     }
-
   });
-
-
  $('#lotes-2').on('click','#button-eliminar', function(){ //eliminar en autorizar
 
     var pass = $('#claveAuth').val();

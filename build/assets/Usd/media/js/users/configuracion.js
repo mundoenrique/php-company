@@ -127,7 +127,7 @@ $(function () {
 			}
 
 			//validate letter
-			if (pswd.match(/[A-z]/)) {
+			if (pswd.match(/[a-z]/)) {
 				$('#letter').removeClass('invalid').addClass('valid');
 			} else {
 				$('#letter').removeClass('valid').addClass('invalid');
