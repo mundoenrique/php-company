@@ -87,16 +87,16 @@ $(function () {
 						var ceo_cook = decodeURIComponent(
 							document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 						);
-						var dataRequest = JSON.stringify ({
+						var dataRequest = JSON.stringify({
 							userpwdOld: old,
 							userpwd: newC,
 							userpwdConfirm: cNewC,
 							ceo_name: ceo_cook
 						})
-						dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
-						$.post(baseURL + '/' + isoPais + "/changePassNewUserAuth", {request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)},
+						dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, { format: CryptoJSAesJson }).toString();
+						$.post(baseURL + '/' + isoPais + "/changePassNewUserAuth", { request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook) },
 							function (response) {
-								data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
+								data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, { format: CryptoJSAesJson }).toString(CryptoJS.enc.Utf8))
 
 								if (data.rc == 0) {
 									$dialogo.dialog("destroy");
@@ -147,10 +147,12 @@ $(function () {
 
 			//validate number
 
-			if (!pswd.match(/((\w|[!@#$%])*\d(\w|[!@#$%])*\d(\w|[!@#$%])*\d(\w|[!@#\$%])*\d(\w|[!@#$%])*(\d)*)/) && pswd.match(/\d{1}/)) {
+			if (pswd.split(/[0-9]/).length - 1 >= 1 && pswd.split(/[0-9]/).length - 1 <= 3) {
 				$('#number').removeClass('invalid').addClass('valid');
+				valid = !valid ? valid : true;
 			} else {
 				$('#number').removeClass('valid').addClass('invalid');
+				valid = false;
 			}
 
 			if (!pswd.match(/(.)\1{2,}/)) {
@@ -248,12 +250,12 @@ $(function () {
 			var ceo_cook = decodeURIComponent(
 				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 			);
-			var dataRequest = JSON.stringify ({
-				email :email
+			var dataRequest = JSON.stringify({
+				email: email
 			})
-			dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
-			$.post(baseURL + api + isoPais + '/usuario/config/ActualizarPerfilUsuario', {request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)} ).done(function (response) {
-				data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
+			dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, { format: CryptoJSAesJson }).toString();
+			$.post(baseURL + api + isoPais + '/usuario/config/ActualizarPerfilUsuario', { request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook) }).done(function (response) {
+				data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, { format: CryptoJSAesJson }).toString(CryptoJS.enc.Utf8))
 				$(".ui-dialog-content").dialog().dialog("destroy");
 				if (data.rc == '0') {
 					notificacion("Modificar usuario", "Proceso exitoso.");
@@ -556,10 +558,10 @@ $(function () {
 			var ceo_cook = decodeURIComponent(
 				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 			);
-			var dataRequest = JSON.stringify (json)
-			dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
-			$.post(baseURL + api + isoPais + '/usuario/config/eliminarContacto', {request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)}).done(function (response) {
-				data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
+			var dataRequest = JSON.stringify(json)
+			dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, { format: CryptoJSAesJson }).toString();
+			$.post(baseURL + api + isoPais + '/usuario/config/eliminarContacto', { request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook) }).done(function (response) {
+				data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, { format: CryptoJSAesJson }).toString(CryptoJS.enc.Utf8))
 				$(".ui-dialog-content").dialog().dialog("destroy");
 
 				if (data.rc == "0") {
@@ -617,10 +619,10 @@ $(function () {
 				var ceo_cook = decodeURIComponent(
 					document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 				);
-				var dataRequest = JSON.stringify (json)
-				dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
-				$.post(baseURL + api + isoPais + '/usuario/config/ActualizarContacto', {request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)}).done(function (response) {
-					data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
+				var dataRequest = JSON.stringify(json)
+				dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, { format: CryptoJSAesJson }).toString();
+				$.post(baseURL + api + isoPais + '/usuario/config/ActualizarContacto', { request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook) }).done(function (response) {
+					data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, { format: CryptoJSAesJson }).toString(CryptoJS.enc.Utf8))
 					$(".ui-dialog-content").dialog().dialog("destroy");
 					if (data.rc == "0") {
 						$("#pass.pass").css("border-color", "");
@@ -1357,10 +1359,10 @@ $(function () {
 				format: CryptoJSAesJson
 			}).toString();
 			$.post(baseURL + api + isoPais + '/usuario/config/InfoContactoEmpresa', {
-					request: dataRequest,
-					ceo_name: ceo_cook,
-					plot: btoa(ceo_cook)
-				})
+				request: dataRequest,
+				ceo_name: ceo_cook,
+				plot: btoa(ceo_cook)
+			})
 				.done(function (response) {
 					data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {
 						format: CryptoJSAesJson
