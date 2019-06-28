@@ -40,13 +40,13 @@ $(function () {
 		var form = $('#form-criterio-busqueda');
 		errElem.fadeOut('fast');
 		validateForms(form);
-		if(form.valid()) {
+		if (form.valid()) {
 			serv_var.busk = true;
 			serv_var.TotalTjts = 0;
 			buscar(1);
 		} else {
 			$('.div_tabla_detalle').fadeOut('fast');
-      errElem.html('Debe ingresar datos numéricos');
+			errElem.html('Debe ingresar datos numéricos');
 			errElem.fadeIn('fast');
 		}
 	});
@@ -71,17 +71,17 @@ $(function () {
 		var ceo_cook = decodeURIComponent(
 			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 		);
-		var dataRequest = JSON.stringify ({
+		var dataRequest = JSON.stringify({
 			data_dni: $('#dni').val(),
 			data_tjta: $('#nroTjta').val(),
 			data_pg: pgSgt,
 			data_paginas: serv_var.paginas,
 			data_paginar: serv_var.paginar
-			})
-			dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
-		$.post(baseURL + api + isoPais + '/servicios/transferencia-maestra/buscar',{request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)})
+		})
+		dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, { format: CryptoJSAesJson }).toString();
+		$.post(baseURL + api + isoPais + '/servicios/transferencia-maestra/buscar', { request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook) })
 			.done(function (response) {
-				data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
+				data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, { format: CryptoJSAesJson }).toString(CryptoJS.enc.Utf8))
 				$aux.dialog('destroy');
 
 				if (!data.result.ERROR) {
@@ -340,16 +340,16 @@ $(function () {
 		var ceo_cook = decodeURIComponent(
 			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 		);
-		$.post(url,{
-				'data-tarjeta': serv_var.noTarjetas,
-				'data-id_ext_per': serv_var.dni_tarjetas,
-				'data-pass': pass,
-				'data-monto': serv_var.monto,
-				'data-pg': 1,
-				'data-paginas': 1,
-				'data-paginar': false,
-				ceo_name: ceo_cook
-			})
+		$.post(url, {
+			'data-tarjeta': serv_var.noTarjetas,
+			'data-id_ext_per': serv_var.dni_tarjetas,
+			'data-pass': pass,
+			'data-monto': serv_var.monto,
+			'data-pg': 1,
+			'data-paginas': 1,
+			'data-paginar': false,
+			ceo_name: ceo_cook
+		})
 			.done(function (data) {
 
 				$aux.dialog("destroy");
@@ -394,7 +394,7 @@ $(function () {
 		);
 		var canvas = "<div id='dialog-confirm'>";
 		canvas += "<form name='no-form' onsubmit='return false'>";
-		canvas += "<input type='hidden' name='ceo_name' value="+ceo_cook+"/>";
+		canvas += "<input type='hidden' name='ceo_name' value=" + ceo_cook + "/>";
 		canvas += "<p>Tarjeta: " + serv_var.noTarjetas + "</p>";
 		canvas += "<fieldset><input type='password' name='pass' id='pass' placeholder='Ingrese su contraseña' size='28'>";
 		canvas += "</fieldset><h5 id='msg'></h5>";
@@ -491,8 +491,10 @@ $(function () {
 				}
 				$('.table-text-aut tbody tr').hide();
 				$('.table-text-aut .' + page).show();
+				$('#paginado-TM .jPag-pages').css('width', '350px');
 			}
 		});
+		$('#paginado-TM .jPag-pages').css('width', '350px');
 	}
 
 
