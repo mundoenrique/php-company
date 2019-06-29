@@ -77,12 +77,13 @@ $(function(){
     }
 
     $('#userpwd').keyup(function() {
-        // set password variable
+				// set password variable
         var pswd = $(this).val();
         //validate the length
         if ( pswd.length < 8 || pswd.length > 15 ) {
             $('#length').removeClass('valid').addClass('invalid');
         } else {
+					$('#userpwd').attr("style", "border-color:red");
             $('#length').removeClass('invalid').addClass('valid');
         }
 
@@ -124,7 +125,8 @@ $(function(){
     }).focus(function() {
 
         $("#userpwd").showBalloon({position: "right", contents: $('#psw_info')});
-        $('#psw_info').show();
+				$('#psw_info').show();
+
 
     }).blur(function() {
 
