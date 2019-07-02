@@ -63,7 +63,7 @@ $urlCdn = get_cdn();
 
 					<table>
 						<tr>
-						
+
 							<td style="vertical-align: top; width: 152px;">
 								<h5 style="width:85px "><?php echo lang('TITULO_REPORTES_RESULTADOS'); ?></h5>
 							<?php if($pais !== 'Co'): ?>
@@ -128,12 +128,14 @@ $urlCdn = get_cdn();
 			<a id = "grafica_a">
 				<span id="grafic" title = "Ver gráfico" aria-hidden="true" class="icon" data-icon="&#xe050;"></span>
 			</a>
+			<?php if($pais != 'Ec-bp'): ?>
 			<a id = "exportCon_XLS_a">
 				<span id="export_excel" title = "Exportar Excel de Consolidado" aria-hidden="true" class="icon consolidado xls" data-icon="&#xe05a;"></span>
 			</a>
 			<a id = "exportCon_PDF_a">
 				<span id="export_pdf" title = "Exportar PDF de Consolidado" aria-hidden="true" class="icon consolidado pdf" data-icon="&#xe02e;"></span>
 			</a>
+			<?php endif; ?>
 		</div>
 		<table id="tabla-datos-general" class = "tabla-reportes  tbody-CC">
 			<thead id= "thead-datos-principales">

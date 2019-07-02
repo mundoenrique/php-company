@@ -100,19 +100,6 @@ $(document).ready(function () {
 	});
 
 	$("#exportPDF_a").click(function () {
-
-		/*datos={
-		 empresa: filtro_busq.empresa,
-		 fechaInicial: filtro_busq.fechaInicial,
-		 fechaFin: filtro_busq.fechaFin,
-		 filtroFecha: filtro_busq.filtroFecha,
-		 producto: filtro_busq.producto,
-		 nomEmpresa: filtro_busq.acnomcia,
-		 descProd: filtro_busq.productoDES +"/"+filtro_busq.marca
-		 }
-
-		 descargarArchivo(datos, baseURL+api+isoPais+"/reportes/cuentaConcentradoraExpPDF", "Exportar PDF" );
-		 */
 		var ceo_cook = decodeURIComponent(
 			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 		);
@@ -146,19 +133,6 @@ $(document).ready(function () {
 				OK: function () {
 
 					$(".ui-dialog-content").dialog().dialog("close");
-					/*datos={
-					 empresa: filtro_busq.empresa,
-					 fechaInicial: filtro_busq.fechaInicial,
-					 fechaFin: filtro_busq.fechaFin,
-					 filtroFecha: filtro_busq.filtroFecha,
-					 producto: filtro_busq.producto,
-					 nomEmpresa: filtro_busq.acnomcia,
-					 descProd: filtro_busq.productoDES +"/"+filtro_busq.marca,
-					 anio: $("option:selected","#anio").val()
-					 }
-
-					 descargarArchivo(datos, baseURL+api+isoPais+"/reportes/cuentaConcentradoraConsolidadoExp"+formato, "Exportar "+formato );
-					 */
 					var ceo_cook = decodeURIComponent(
 						document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 					);
@@ -475,15 +449,6 @@ $(document).ready(function () {
 
 				paginacion(data.totalPaginas, data.paginaActual);
 
-				/*
-				 // PAGINACION
-				 if (evBuscar) {
-				 //paginar(data.totalPaginas, data.paginaActual);
-				 paginacion(data.totalPaginas, data.paginaActual);
-				 evBuscar=false;
-				 }
-				 */
-
 				$('#tabla-datos-general tbody tr:even').addClass('even ');
 
 			} else {
@@ -512,32 +477,6 @@ $(document).ready(function () {
 
 		});
 	}
-
-	/*
-	 function paginar(totalPaginas, paginaActual) {
-	 $("#paginacion").paginate({
-	 count 		: totalPaginas,
-	 start 		: paginaActual,
-	 display     : 10,
-	 border					: false,
-	 text_color  			: '#79B5E3',
-	 background_color    	: 'none',
-	 text_hover_color  		: '#2573AF',
-	 background_hover_color	: 'none',
-	 images		: false,
-	 mouse		: 'press',
-	 onChange     			: function(page){
-	 if( !$('.tbody-CC tr').hasClass('pg'+page) ){
-	 BuscarDepositos(page);
-	 }
-	 $('.tbody-CC .tbody-reportes tr').hide();
-	 $('.tbody-CC .pg'+page).show();
-
-	 }
-	 });
-	 }
-	 */
-
 	/***********************Paginacion inicio***********************/
 	function paginacion(total, inicial) {
 		var texHtml = "";
