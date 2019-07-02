@@ -84,8 +84,9 @@ function notificacion(title, msj){
 
 // SUB-MENU CONFIGURACION
 
-$('#config').balloon({contents: $('.submenu'), position: 'bottom', classname: 'config-menuH'});
 
+$('#config').balloon({contents: $('.submenu'), position: 'bottom', classname: 'config-menuH'});
+$('#profileMenu').balloon({contents: $('.submenu'), position: 'bottom', classname: 'config-menuH'});
 
   $.datepicker.regional['es'] = {
     closeText: 'Cerrar',
