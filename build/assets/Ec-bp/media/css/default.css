@@ -3789,21 +3789,16 @@ ul#brands li {
 	display: inline;
 	float: left;
 	padding-right: 49px;
+	position: absolute;
+  left: 530px;
+  top: 295px;
 }
 
 ul#brands li p {
 	width: 100px;
 	height: 70px;
 	display: block;
-	-webkit-box-shadow: rgba(51, 51, 51, 0.5) 0 1px 1px;
-	-moz-box-shadow: rgba(51, 51, 51, 0.5) 0 1px 1px;
-	box-shadow: rgba(51, 51, 51, 0.5) 0 1px 1px;
-	background: #eeeeee;
-	background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(100%, #f2f2f2));
-	background-image: -webkit-linear-gradient(#ffffff, #f2f2f2);
-	background-image: -moz-linear-gradient(#ffffff, #f2f2f2);
-	background-image: -o-linear-gradient(#ffffff, #f2f2f2);
-	background-image: linear-gradient(#ffffff, #f2f2f2);
+
 }
 
 ul#brands li p img {
