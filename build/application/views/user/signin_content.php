@@ -2,10 +2,12 @@
 <div id="sidebar">
 	<div id="widget-area">
 		<div class="widget tooltip" id="widget-signin">
+			<?php if($countryUri != 'bp'): ?>
 			<h2 class="widget-title">
 				<span aria-hidden="true" class="icon" data-icon="&#xe03f;"></span>
 				<?= lang('WIDGET_LOGIN_TITLE'); ?>
 			</h2>
+			<?php endif; ?>
 			<div class="widget-content">
 				<form id="login-form" name="login-form" accept-charset="utf-8">
 					<input type="hidden" id="<?= $novoName; ?>" class="ignore" value="<?= $novoCook; ?>">

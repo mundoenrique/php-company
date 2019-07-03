@@ -56,7 +56,7 @@ $reten = ($reten == NULL) ? "nonEmpty" : trim($reten, ', ');
 					<span aria-hidden="true" class="icon" data-icon="&#xe035;"></span>
 					<?php echo lang('TITULO_ORDEN_SERVICIO'); ?>
 				</div>
-				<div id="lotes-contenedor">
+				<div id="lotes-contenedor" class="b-rs">
 					<table id="tabla-datos-general" class="tabla-reportes-OS">
 						<thead>
 						<?php
@@ -174,7 +174,18 @@ $reten = ($reten == NULL) ? "nonEmpty" : trim($reten, ', ');
 
 						</tbody>
 					</table>
-
+						<?php
+							if($pais=='Ec-bp'){
+								?>
+									<div class="botones-OS">
+										<button id="confirmarPreOSL" style="display: none">
+											<?php echo lang('BTN_CONFIRMAR_OS') ?></button>
+										<button id='cancelar-OS' style="display: none">
+											<?php echo lang('BTN_CANCELAR_OS') ?></button>
+									</div>
+								<?php
+							}
+						?>
 
 				</div>
 				<?php echo "<input type='hidden' id='tempIdOrdenL' name='tempIdOrdenL' value='$tempIdOrdenL' />";

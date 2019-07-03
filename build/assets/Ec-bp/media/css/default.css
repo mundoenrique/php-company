@@ -3209,7 +3209,7 @@ span#more-info a p b {
 	height: 51px;
 	float: left;
 	color: #FFFFFF;
-	background: #e5e5e5;
+	/* background: #e5e5e5; */
 	clear: both;
 	margin-bottom: 10px;
 	z-index: 1;
@@ -3876,14 +3876,16 @@ ul#brands li p img {
 #products-general, #lotes-contenedor-2 {
 	background: white;
 	float: left;
-	width: 641px;
+	width: 640px;
 	padding: 10px;
-	-webkit-border-radius: 0px 0px 0px 15px;
-	-moz-border-radius: 0px 0px 0px 15px;
-	-ms-border-radius: 0px 0px 0px 15px;
-	-o-border-radius: 0px 0px 0px 15px;
-	border-radius: 0px 0px 0px 15px;
-	border: solid 1px #cfcfcf;
+	-webkit-border-radius: 0px 0px 0px 30px;
+	-moz-border-radius: 0px 0px 0px 30px;
+	-ms-border-radius: 0px 0px 0px 30px;
+	-o-border-radius: 0px 0px 0px 30px;
+	border-radius: 0px 0px 0px 30px;
+	border-bottom: solid 1px #cfcfcf;
+	border-left: solid 1px #cfcfcf;
+	border-right: solid 1px #cfcfcf;
 }
 
 #lotes-contenedor-2-auth {
@@ -3903,6 +3905,7 @@ ul#brands li p img {
 
 #lotes-contenedor-2 table {
 	float: left;
+	margin-top: 10px;
 }
 
 #lotes-contenedor-2 table tr {
@@ -3917,21 +3920,20 @@ ul#brands li p img {
 
 #table-text-lotes tbody tr {
 	margin-bottom: 10px;
-	background: #F3F3F3;
-	-webkit-box-shadow: rgba(51, 51, 51, 0.5) 0 1px 1px;
+	/* background: #F3F3F3; */
+	/* -webkit-box-shadow: rgba(51, 51, 51, 0.5) 0 1px 1px;
 	-moz-box-shadow: rgba(51, 51, 51, 0.5) 0 1px 1px;
-	box-shadow: rgba(51, 51, 51, 0.5) 0 1px 1px;
-	background: #F3F3F3;
+	box-shadow: rgba(51, 51, 51, 0.5) 0 1px 1px; */
 	float: left;
 	margin: 0px 5px;
-	-webkit-border-radius: 3px 3px 3px 3px;
+	/* -webkit-border-radius: 3px 3px 3px 3px;
 	-moz-border-radius: 3px 3px 3px 3px;
 	-ms-border-radius: 3px 3px 3px 3px;
 	-o-border-radius: 3px 3px 3px 3px;
-	border-radius: 3px 3px 3px 3px;
+	border-radius: 3px 3px 3px 3px; */
 	width: 610px;
 	line-height: 38px;
-	border: 1px solid #dddddd;
+	border-bottom: 1px solid #dddddd;
 	height: 38px;
 }
 
@@ -4013,22 +4015,15 @@ ul#brands li p img {
 }
 
 #table-text-lotes thead tr {
-	background: none repeat scroll 0 0 #004574;
-	-webkit-border-radius: 10px 10px 0 0;
-	-moz-border-radius: 10px 10px 0 0;
-	-ms-border-radius: 10px 10px 0 0;
-	-o-border-radius: 10px 10px 0 0;
-	border-radius: 10px 10px 0 0;
-	color: #FFF;
+	color: #0f265c;
 	font-size: 13px;
-	border: solid 1px;
 	margin-left: 42px;
 	float: left;
-	height: 27px;
+	/* height: 27px; */
+	border-bottom: 1px solid #ddd;
 }
 
 #table-text-lotes thead th {
-	border-right: solid 1px;
 	max-width: 100px;
 	min-width: 100px;
 }
@@ -4053,7 +4048,7 @@ ul#brands li p img {
 }
 
 #table-text-lotes td {
-	border-left: 1px solid #dddddd;
+
 	max-width: 100px;
 	min-width: 100px;
 	float: left;
@@ -4079,7 +4074,7 @@ ul#brands li p img {
 }
 
 .even {
-	background: #eeeeee !important;
+	/* background: #eeeeee !important; */
 }
 
 .table-text-aut thead tr {
@@ -4625,13 +4620,13 @@ tr.GC-first th {
 
 #batchs-last {
 	width: 640px;
-	background: #F2F2F2;
+	background: #FFFFFF;
 	float: left;
 	padding: 10px;
 	border-right: solid 1px #cfcfcf;
 	border-left: solid 1px #cfcfcf;
 	border-bottom: solid 1px #cfcfcf;
-	border-bottom-left-radius: 15px;
+	border-bottom-left-radius: 30px;
 }
 
 #batchs-last input {
@@ -4655,7 +4650,10 @@ tr.GC-first th {
 #batchs-last #button-eliminar {
 	margin: 10px;
 }
-
+.ordenes_ser{
+	border-bottom:1px solid #CFCFCF;
+	border-bottom-left-radius: 30px;
+}
 #userfile {
 	margin: 0px !important;
 }
@@ -4665,14 +4663,17 @@ tr.GC-first th {
 }
 
 #top-batchs {
-	width: 641px;
+	width: 640px;
 	height: 30px;
 	padding: 10px;
-	background: #004574;
+	background: #FFF;
 	float: left;
-	color: white;
+	color: #0F265C;
 	font-size: 18px;
 	margin-top: 10px;
+	border-top: 1px solid #CFCFCF;
+	border-left: 1px solid #CFCFCF;
+	border-right: 1px solid #CFCFCF;
 }
 
 #top-batchs span {

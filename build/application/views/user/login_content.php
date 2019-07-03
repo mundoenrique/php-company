@@ -1,6 +1,4 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
-<?php echo $scriptCaptcha;?>
-
 <div id="content">
 	<div class="img-back">
 		<h1 class="welcome-title"><?= lang('WELCOME_TITLE'); ?></h1>
