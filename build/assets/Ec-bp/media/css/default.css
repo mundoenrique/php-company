@@ -3079,10 +3079,10 @@ li.space-companies {
 
 a.style-companies-item {
 	background: #fff;
-	border: 1px solid #cfcfcf;
-	-webkit-border-bottom-left-radius: 15px;
-	-moz-border-radius-bottomleft: 15px;
-	border-bottom-left-radius: 15px;
+	border: 1px solid #dfe0e2;
+	-webkit-border-bottom-left-radius: 30px;
+	-moz-border-radius-bottomleft: 30px;
+	border-bottom-left-radius: 30px;
 	width: 260px;
 	height: 120px;
 	display: block;
@@ -3091,7 +3091,7 @@ a.style-companies-item {
 a.style-companies-item span {
 	float: left;
 	font-size: 39px;
-	padding-left: 10px;
+	/* padding-left: 10px; */
 	padding-top: 40px;
 }
 
@@ -3127,14 +3127,19 @@ a.style-companies-item:hover {
 
 #more-info {
 	width: 260px;
-	height: 140px;
-	background: #e5e5e5;
+	height: 100px;
+	background: #FFFFFF;
 	list-style: none;
 	margin-top: 3px;
 	position: absolute;
 	color: white;
 	display: none;
 	z-index: 3;
+	top:25px;
+	border-left: 1px solid #dfe0e2;
+	border-right: 1px solid #dfe0e2;
+	border-bottom: 1px solid #dfe0e2;
+	border-bottom-left-radius: 30px;
 }
 
 #more-info span {
@@ -3161,7 +3166,7 @@ a.style-companies-item:hover {
 }
 
 span#more-info a {
-	padding: 5px;
+	/* padding: 5px; */
 }
 
 span#more-info a p {
@@ -3180,7 +3185,10 @@ span#more-info a p b {
 #text-companies-2 {
 	font-family: "prelo";
 }
-
+.style-companies-item>#text-companies-T,
+.style-companies-item>#text-companies {
+	float: initial
+}
 #text-companies-T {
 	float: right;
 	padding-right: 10px;
@@ -4858,6 +4866,7 @@ li#select-empresa select {
 .num-product-detail {
 	font-size: 18px;
 	font-weight: 700;
+	display: none;
 }
 
 /* #tabla-datos-general {
@@ -5677,7 +5686,7 @@ li#select-empresa select {
 	text-align: center;
 	padding: 5px;
 	color: #555;
-	max-width: 80px;
+	max-width: 95px;
 	min-width: 80px;
 }
 
@@ -5733,6 +5742,12 @@ li#select-empresa select {
 	top: 105px;
 	margin-left: 730px;
 	width: 230px;
+}
+#lotes-general>#ui-id-2,
+#lotes-general>#ui-id-1{
+	border:1px solid #dfe0e2;
+	border-bottom-left-radius: 30px;
+	border-bottom-right-radius: 0;
 }
 
 #ui-id-1 #wrapper {
@@ -6615,13 +6630,15 @@ button.green:hover {
 #campos-config {
 	width: 700px;
 	height: auto;
-	border: 1px solid #80808054;
-	margin-left: 3px;
-	border-radius: 4px;
 	float: left;
 	background: none;
 }
-
+#config-user{
+	overflow: hidden;
+	border: 1px solid #dfe0e2;
+	border-bottom-left-radius: 30px;
+	border-bottom-right-radius: 0;
+}
 #campos-config-descarga {
 	width: 500px;
 	height: auto;
