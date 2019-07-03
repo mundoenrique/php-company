@@ -118,18 +118,18 @@ $("#listCompanies").on('mouseover','.style-companies-item',function(){
 
   }
 */
-itemsFiltro = $('.space-companies').not('.isotope-hidden').length;
-filas= Math.floor(itemsFiltro/3) ;
-   (itemsFiltro/3)==filas? filas=filas : filas=filas+1;
- $container.height((filas*$('.isotope-item').height())+160);
+// itemsFiltro = $('.space-companies').not('.isotope-hidden').length;
+// filas= Math.floor(itemsFiltro/3) ;
+//    (itemsFiltro/3)==filas? filas=filas : filas=filas+1;
+//  $container.height((filas*$('.isotope-item').height())+160);
 
 });
 
-$("#listCompanies").on('mouseleave','.style-companies-item',function(){
+$("#listCompanies").on('mouseleave',function(){
 //$(this).parents('#listCompanies').find('.style-companies-item-activa').removeClass('style-companies-item-activa');
-  $("span#more-info").parents('li').not(this).css('z-index','2');
+  $("span#more-info").parents('li').css('z-index','2');
 
-  $("span#more-info").not(this).fadeOut("fast");
+  $("span#more-info").fadeOut("fast");
 }
 );
 
