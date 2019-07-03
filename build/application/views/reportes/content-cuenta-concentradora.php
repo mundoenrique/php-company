@@ -63,7 +63,7 @@ $urlCdn = get_cdn();
 
 					<table>
 						<tr>
-						
+
 							<td style="vertical-align: top; width: 152px;">
 								<h5 style="width:85px "><?php echo lang('TITULO_REPORTES_RESULTADOS'); ?></h5>
 							<?php if($pais !== 'Co'): ?>
@@ -106,8 +106,22 @@ $urlCdn = get_cdn();
 
 	<div id="batchs-last">
 		<span id="mensajeError" style="float:left; display:none; color:red;"> <?php echo lang('REPORTE_MENSAJE_ERROR'); ?></span>
-		<button id="repUsuario_btnBuscar" type="submit"><?php echo lang('REPORTE_BOTON_BUSCAR'); ?>
+		<?php
+					if($pais=='Ec-bp'){
+						?>
+							<center>
+						<?php
+					}
+				?>
+		<button id="repUsuario_btnBuscar" type="submit" class="novo-btn-primary"><?php echo lang('REPORTE_BOTON_BUSCAR'); ?>
 		</button>
+		<?php
+					if($pais=='Ec-bp'){
+						?>
+							</center>
+						<?php
+					}
+				?>
 	</div>
 	<div id = "cargando" style = "display:none"><h2 style="text-align:center"><?php echo lang('CARGANDO'); ?></h2><img style="display:block; margin-left:auto; margin-right:auto" src="<?php echo $urlCdn."media/img/loading.gif"?>" /></div>
 	<div id = "grafica" style = "display:none"></div>

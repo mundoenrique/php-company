@@ -4,7 +4,7 @@ $(function(){
 
  // Busqueda button
 
- $('#sProducto').addClass('btn-products-bp');
+ $('#sProducto').addClass('novo-btn-primary');
       var $container = $('#products-list');
 
 

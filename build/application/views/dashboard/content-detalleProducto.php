@@ -151,9 +151,17 @@ function to_ascii($word){
 			if($moduloAct!==false){
 				echo '
 				<p><a href="'.$urlBase.'/lotes">
-				<span aria-hidden="true" class="icon" data-icon=""></span>
-				Cargar Lotes</a>
-				</p>';
+				';
+				if($pais!='Ec-bp'){
+					echo'
+					<span aria-hidden="true" class="icon" data-icon=""></span>
+					Cargar Lotes</a>
+					</p>';
+				}else{
+					echo'
+					Cargar Lotes</a>
+					</p>';
+				}
 			}
 
 			$moduloAct = np_hoplite_existeLink($menuP,"TEBAUT");
@@ -164,13 +172,23 @@ function to_ascii($word){
 					echo '<p> <a title="'.lang('SIN_FUNCION').'">';
 				}
 
-				echo '
-				<span aria-hidden="true" class="icon" data-icon="&#xe03C;"></span>
-				Lotes:
-				<span class="num-product-detail">'.$lotes['total'].'</span>
-				'.$lotes['xfirmar'].' Por firmar / '.$lotes['xautorizar'].' Por autorizar
-				</a>
-				</p>';
+				if($pais!='Ec-bp'){
+					echo '
+					<span aria-hidden="true" class="icon" data-icon="&#xe03C;"></span>
+					Lotes:
+					<span class="num-product-detail">'.$lotes['total'].'</span>
+					'.$lotes['xfirmar'].' Por firmar / '.$lotes['xautorizar'].' Por autorizar
+					</a>
+					</p>';
+				}else{
+					echo '
+					Lotes:
+					<span class="num-product-detail">'.$lotes['total'].'</span>
+					'.$lotes['xfirmar'].' Por firmar / '.$lotes['xautorizar'].' Por autorizar
+					</a>
+					</p>';
+				}
+
 			}
 
 			$moduloAct = np_hoplite_existeLink($menuP,"TEBORS");
@@ -180,18 +198,26 @@ function to_ascii($word){
 				}else{
 					echo '<p> <a title="'.lang('SIN_FUNCION').'">';
 				}
-				echo '
-				<span aria-hidden="true" class="icon" data-icon="&#xe035;"></span>
-				Órdenes de servicio:
-				<span class="num-product-detail">'.$ordenesS['total'].'</span>
-				'.$ordenesS['pendientes'].' No conciliadas / '.$ordenesS['conciliadas'].' Conciliadas
-				</a>
-				</p>';
+					if($pais!='Ec-bp'){
+						echo '
+						<span aria-hidden="true" class="icon" data-icon="&#xe035;"></span>';
+					}
+					echo '
+						Órdenes de servicio:
+						<span class="num-product-detail">'.$ordenesS['total'].'</span>
+						'.$ordenesS['pendientes'].' No conciliadas / '.$ordenesS['conciliadas'].' Conciliadas
+						</a>
+						</p>';
+
 			}
 
 			$moduloAct = np_hoplite_existeLink($menuP,"TRAMAE");
 			if (isset($tarjetas)) {
-				echo'<p> <a style="cursor:default"><span aria-hidden="true" class="icon" data-icon="&#xe027;"></span>
+				echo'<p>';
+				if($pais!='Ec-bp'){
+					echo '<span aria-hidden="true" class="icon" data-icon="&#xe027;"></span>';
+				}
+				echo '<a style="cursor:default">
 				Tarjetas:
 				<span class="num-product-detail">'.$tarjetas['total'].'</span>
 				'.$tarjetas['activas'].' Activas / '.$tarjetas['inactivas'].' Inactivas

@@ -378,7 +378,7 @@ nav ul.menu li.menu-item {
 }
 
 nav ul.menu li.menu-item a {
-	display: block;
+	/* display: block; */
 	font-weight: normal;
 }
 
@@ -433,32 +433,6 @@ textarea {
 	font-size: 14px;
 }
 
-button {
-	background: url('../img/BackgroundButton.png') left center no-repeat #ffdd00;
-	border: 0;
-	-webkit-border-radius: 3px;
-	-moz-border-radius: 3px;
-	-ms-border-radius: 3px;
-	-o-border-radius: 3px;
-	border-radius: 3px;
-	color: #10133f;
-	float: none;
-	line-height: 35px;
-	margin: 15px auto;
-	font-weight: 700;
-	outline: none;
-	font-size: 13px;
-	text-align: center;
-}
-
-button:hover {
-	background: url('../img/BackgroundButtonHover.png') left center no-repeat #ffdd00;
-}
-
-button:active {
-	background: none;
-	background-color: #ffd000;
-}
 
 .file-field {
 	background: #ffdd00;
@@ -611,6 +585,7 @@ h2.widget-title{
 }
 
 #widget-area .widget .widget-content {
+text-decoration: underline !important;
 	overflow: hidden;
 	padding: 10px;
 }
@@ -749,6 +724,7 @@ h2.widget-title{
 }
 
 #main-nav ul.menu li.menu-item a:hover {
+
 	background: #ffdd00;
 	background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffdd00), color-stop(100%, #004574));
 	background-image: -webkit-linear-gradient(#ffdd00, #004574);
@@ -855,10 +831,22 @@ h2.widget-title{
 
 #extra-nav ul.menu li.menu-item {
 	line-height: 50px;
-	padding-right: 15px;
+	padding-right: 5px;
+	padding-left:5px;
+
 }
 
+#extra-nav ul.menu li.menu-item a:hover{
+	display:inline;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	-ms-border-radius: 3px;
+	-o-border-radius: 3px;
+	border-radius: 3px;
+	background-color:#f0f0f0;
+}
 #extra-nav ul.menu li.menu-item a {
+	text-decoration: underline;
 	font-size: 12px;
 	font-weight: 700;
 }
@@ -1385,7 +1373,8 @@ html {
 	vertical-align: middle;
 	text-align: center;
 	overflow: visible;
-	background-color: #ffdd00 !important;
+	/* background: url('../img/BackgroundButton.png') left center no-repeat #ffdd00; */
+	 background-color: #ffdd00 !important;
 	border-color: #ffdd00 !important;
 }
 
@@ -1768,7 +1757,10 @@ select.ui-datepicker-year{
 }
 
 .ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset {
-	float: right;
+	/*centrar botones de modales jqueryUI*/
+	float: none;
+	text-align:center;
+	/*centrar botones de modales jqueryUI*/
 }
 
 .ui-dialog .ui-dialog-buttonpane button {
@@ -2246,6 +2238,7 @@ body .ui-tooltip {
 
 .ui-widget-header .ui-icon {
 	background-image: url(../css/images/ui-icons_555555_256x240.png);
+
 }
 
 .ui-state-default .ui-icon {
@@ -3501,11 +3494,7 @@ li.filter-1 a {
 	margin-top: 20px !important;
 	margin-right: 15px;
 }
-.btn-products-bp{
-	width:120px;
-	padding-left:15px;
-	padding-right:15px;
-}
+
 
 #products-list li img {
 	margin: 0px;
@@ -3805,7 +3794,23 @@ ul#brands li p img {
 	font-size: 15px;
 	font-family: "prelo";
 }
+#text-product-detail p a{
+	padding-left:15px;
+	padding-right:15px;
+	text-decoration: underline;
+}
+#text-product-detail p a:hover{
+	display:inline;
+	padding-left:15px;
+	padding-right:15px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	-ms-border-radius: 3px;
+	-o-border-radius: 3px;
+	border-radius: 3px;
+	background-color:#f0f0f0;
 
+}
 #text-product-detail button {
 	float: left;
 	margin-right: 10px;
@@ -4639,7 +4644,7 @@ tr.GC-first th {
 	float: left;
 }
 #batchs-last #selec_tipo_lote{
-	margin: 12px 10px 0px 0px;
+	margin: 0px 0px 0px 0px;
 }
 
 #batchs-last h3 {
@@ -4659,7 +4664,7 @@ tr.GC-first th {
 }
 
 .input-TM {
-	margin-left: 270px !important;
+	margin-left: 2px !important;
 }
 
 #top-batchs {
@@ -5765,9 +5770,21 @@ li#select-empresa select {
 	margin-left: 730px;
 	width: 230px;
 }
-
+#config-user{
+	border: 1px solid #80808054;
+    margin-left: 3px;
+    width: 685px;
+    height: 373px;
+}
+/* #ui-id-1,#ui-id-2{
+	border: 1px solid #80808054;
+	margin-left: 3px;
+	width: 685px;
+	height: 373px;
+} */
 #ui-id-1 #wrapper {
 	padding: 0px !important;
+
 }
 
 #ui-id-2 #wrapper {
@@ -5904,7 +5921,7 @@ span.jPag-snext-img {
 }
 
 .input-clave {
-	margin-left: 300px !important;
+	margin-left: -2px !important;
 }
 
 .input-claveLotes {
@@ -6647,7 +6664,6 @@ button.green:hover {
 #campos-config {
 	width: 700px;
 	height: auto;
-	border: 1px solid #80808054;
 	margin-left: 3px;
 	border-radius: 4px;
 	float: left;
@@ -7312,3 +7328,83 @@ li.menu-item.security:nth-child(3)
 	display: block;
 	color: red;
 }
+
+
+
+/**Estilos de los botones NOVO NEW****/
+
+.novo-btn-primary,.novo-btn-secondary{
+	width:120px;
+	padding-left:15px;
+	padding-right:15px;
+}
+.novo-btn-primary-modal,.novo-btn-secondary-modal{
+	width:68px;
+	padding-left:15px;
+	padding-right:15px;
+}
+.novo-btn-primary,.novo-btn-primary-modal{
+	background: url('../img/BackgroundButton.png') left center no-repeat #ffdd00;
+}
+
+.novo-btn-primary:hover{
+	background: url('../img/BackgroundButtonHover.png') left center no-repeat #ffdd00;
+}
+.novo-btn-primary-modal:hover{
+	background: url('../img/BackgroundButtonHover.png') left center no-repeat #ffdd00;
+}
+
+.novo-btn-secondary,.novo-btn-secondary-modal{
+	border: 1px solid #ffdd00;
+	background:white !important;
+}
+/* .novo-btn-secondary-modal{
+	background:white;
+} */
+.novo-btn-secondary:hover{
+	border: 1px solid #ffdd00 !important;
+	background-color: #fffede !important;
+}
+
+.novo-btn-secondary-modal:hover{
+
+	background:#fffede !important;
+	border: 1px solid #ffdd00 !important;
+}
+.btn-authorization{
+	margin-top: 14px;
+	margin-left: -33px;
+	border: 1px solid #ffdd00;
+}
+/****Estilos de los botones NOVO****/
+button {
+
+	border: 0;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	-ms-border-radius: 3px;
+	-o-border-radius: 3px;
+	border-radius: 3px;
+	color: #10133f;
+	float: none;
+	line-height: 35px;
+	margin: 15px auto;
+	font-weight: 700;
+	outline: none;
+	font-size: 13px;
+	text-align: center;
+}
+
+button:hover {
+	background: url('../img/BackgroundButtonHover.png') left center no-repeat #ffdd00;
+}
+
+button:active {
+	background: none;
+	background-color: #ffd000;
+}
+/*********************************/
+
+/* .loadingScreenWindow .ui-button {
+  display: none;
+} */

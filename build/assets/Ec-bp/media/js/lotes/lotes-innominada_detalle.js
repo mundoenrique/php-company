@@ -7,7 +7,7 @@ var	notificacion = function(titu, msj){
 				close: function(){$(this).dialog('destroy')},
 				resizable:false,
 				buttons:{
-					OK: function(){
+					Aceptar: function(){
 						$(this).dialog('destroy');
 					}
 				}

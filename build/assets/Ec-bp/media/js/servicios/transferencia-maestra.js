@@ -137,7 +137,7 @@ $(function() {
 					$('.ui-dialog-titlebar-close', ui.dialog).hide();
 				},
 				buttons: {
-					ok: function () {
+					Aceptar: function () {
 						$(this).dialog("destroy");
 					}
 				}
@@ -180,6 +180,8 @@ $(function() {
 										canvas += "<h5 id='msg'></h5></fieldset></form></div>";
 
 								$(canvas).dialog({
+
+									dialogClass: "hide-close",
 									title: data.title,
 									modal: true,
 									resizable: false,
@@ -187,7 +189,11 @@ $(function() {
 									close: function () {
 										$(this).dialog("destroy");
 									},
-									buttons: {
+									buttons: {	"Cancelar": { text: 'Cancelar', class: 'novo-btn-secondary-modal', style: 'border-color: #ffdd00 !important;background:white !important;',
+											mouseover: function(){
+
+											},click: function () {
+											$(this).dialog("close"); }},
 										Procesar: function () {
 											var codeToken = $("#token-code").val();
 											dataSend.codeToken = codeToken;
@@ -519,7 +525,7 @@ function notiPagOS (titu, msg, type) {
 			$('.ui-dialog-titlebar-close', ui.dialog).hide();
 		},
 		buttons:{
-			OK: function(){
+			Aceptar: function(){
 				$(this).dialog('destroy');
 				if (type == 'close') {
 					window.location.replace(baseURL + isoPais+'/logout');
@@ -864,6 +870,8 @@ function confirmar(titulo, url, operacion, mensaje) {
 	canvas += "</div>"
 
 	$(canvas).dialog({
+
+		dialogClass: "hide-close",
 		title: titulo,
 		modal: true,
 		position: {
@@ -875,6 +883,10 @@ function confirmar(titulo, url, operacion, mensaje) {
 			$(this).dialog("destroy");
 		},
 		buttons: {
+			"Cancelar": { text: 'Cancelar', class: 'novo-btn-secondary-modal', style: 'border-color: #ffdd00 !important;background:white !important;',
+			click: function () {
+			$(this).dialog("close"); }
+			},
 			Aceptar: function() {
 				pass = $(this).find('#pass').val();
 
@@ -917,7 +929,7 @@ function notificacion(titulo, mensaje) {
 			$(this).dialog("close");
 		},
 		buttons: {
-			OK: function() {
+			Aceptar: function() {
 				resett();
 				$(this).dialog("close");
 			}

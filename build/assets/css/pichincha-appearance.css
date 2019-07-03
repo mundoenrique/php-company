@@ -482,6 +482,9 @@ ol.breadcrumb li a {
 	font-size: 12px;
 	text-align: center;
 }
+.align-center a {
+	text-decoration:underline;
+}
 
 .align-text-center {
 	text-align: center;
@@ -672,8 +675,19 @@ button .requesting {
 }
 
 #extra-nav ul.menu li.menu-item a {
+
+	text-decoration:underline;
 	font-family: Prelo Semibold;
 	font-size: 12px;
+}
+#extra-nav ul.menu li.menu-item a:hover{
+	display:inline;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	-ms-border-radius: 3px;
+	-o-border-radius: 3px;
+	border-radius: 3px;
+	background-color:#f0f0f0;
 }
 
 .config-menuH {

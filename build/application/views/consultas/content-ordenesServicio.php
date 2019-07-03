@@ -111,7 +111,21 @@ if($osConfirmV){
             </div>
 
             <div id="batchs-last">
-                <button id='buscarOS'>Buscar</button>
+						<?php
+							if($pais=='Ec-bp'){
+								?>
+									<center>
+								<?php
+							}
+						?>
+						<button id='buscarOS' class="novo-btn-secondary">Buscar</button>
+						<?php
+						if($pais=='Ec-bp'){
+							?>
+								</center>
+							<?php
+						}
+						?>
             </div>
 
         </div>
