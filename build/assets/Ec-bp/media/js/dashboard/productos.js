@@ -4,6 +4,7 @@ $(function(){
 
  // Busqueda button
 
+ $('#sProducto').addClass('btn-products-bp');
       var $container = $('#products-list');
 
 
@@ -165,7 +166,7 @@ var accodgrupoe;
 // Cambiar empresa
 
 
-  $("#sEmpresa").on("click",function(){
+  // $("#sEmpresa").on("click",function(){
 
     $('#sEmpresa').hide();
     $("#widget-info-2").append("<img class='load-widget' id='cargando' src='"+$('#cdn').val()+"media/img/loading.gif'>");//'<h4 id="cargando">Cargando...</h4>'
@@ -191,7 +192,7 @@ var accodgrupoe;
 
       });
 
-  });
+  // });
 
 
 //--Fin Cambiar empresa

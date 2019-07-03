@@ -129,7 +129,7 @@ if($osConfirmV){
             <span aria-hidden="true" class="icon" data-icon="&#xe035;"></span>
             <?php echo lang('TITULO_CONSULTA_OSE'); ?>
         </div>
-        <div id="lotes-contenedor">
+        <div id="lotes-contenedor" class="ordenes_ser">
             <h2><?php echo $datos['ERROR'] ?></h2>
         </div>
         <?php	}
@@ -142,7 +142,7 @@ if($osConfirmV){
             <?php echo lang('TITULO_CONSULTA_OSE'); ?>
         </div>
 
-        <div id="lotes-contenedor">
+        <div id="lotes-contenedor" class="ordenes_ser">
             <table id="tabla-datos-general" class="tabla-reportes-OS">
                 <thead>
                     <tr id="datos-principales-OS">

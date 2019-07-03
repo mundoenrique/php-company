@@ -20,7 +20,7 @@ var widget_var = {
 // Cambiar empresa
 
 
-	$("#sEmpresa").on("click",function(){
+	// $("#sEmpresa").on("click",function(){
 
 		$('#sEmpresa').hide();
     	$("#widget-info-2").append("<img class='load-widget' id='cargando' src='"+$('#cdn').val()+"media/img/loading.gif'>");
@@ -42,7 +42,7 @@ var widget_var = {
   			}
    		});
 
-	});
+	// });
 
 
 //--Fin Cambiar empresa
