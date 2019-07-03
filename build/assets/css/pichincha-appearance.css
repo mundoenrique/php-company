@@ -52,7 +52,7 @@ body {
 	line-height: 17px;
 }
 
-body::before {
+/* body::before {
 	border-bottom: 300px solid transparent;
 	border-left: 280px solid transparent;
 	border-right: 413px solid #f3f4f8;
@@ -65,7 +65,7 @@ body::before {
 	width: 0;
 	height: 0;
 	z-index: -1;
-}
+} */
 
 html {
 	-ms-text-size-adjust: 100%;
@@ -433,7 +433,7 @@ textarea {
 }
 
 #head {
-	background: #ffdd00;
+	background: #FFF;
 	overflow: hidden;
 }
 
@@ -443,11 +443,11 @@ textarea {
 	overflow: hidden;
 }
 
-#head-wrapper {
-	background: transparent url('../images/logo-pichincha-azul.svg') scroll no-repeat 0px 2px;
+/* #head-wrapper {
+	background: transparent url('../images/logo-pichincha-azul.png') scroll no-repeat 0px 0px;
 	-ms-background-position-x:-320px;
 	overflow: hidden;
-}
+} */
 
 .breadcrumb {
 	font-size: 13px;
@@ -467,14 +467,7 @@ ol.breadcrumb li a {
 
 #widget-area {
 	background: #f3f3f3;
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	-ms-border-radius: 5px;
-	-o-border-radius: 5px;
-	border-radius: 6px;
-	-webkit-box-shadow: rgba(51, 51, 51, 0.35) 0 1px 2px;
-	-moz-box-shadow: rgba(51, 51, 51, 0.35) 0 1px 2px;
-	box-shadow: rgba(51, 51, 51, 0.35) 0 1px 2px;
+	border-bottom-left-radius: 30px;
 }
 
 #widget-area .widget h2.widget-title {
