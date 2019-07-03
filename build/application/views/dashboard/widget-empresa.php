@@ -12,8 +12,15 @@ $pais = $this->uri->segment(1);
 	<?php echo $acdescS;?>
 </div>
 <div id="widget-info-2">
-	<button id="sEmpresa" type="submit"><?php echo lang('WIDGET_EMPRESAS_BTNSELECCIONAR') ?></button>
-	<div id="sEmpresaS" style='display:none'>
+	<?php
+		if($pais!=='Ec-bp'){
+			?>
+					<button id="sEmpresa" type="submit"><?php echo lang('WIDGET_EMPRESAS_BTNSELECCIONAR') ?></button>
+					<div id="sEmpresaS" style='display:none'>
+			<?
+		}else{?> 
+			<div id="sEmpresaS" style='display:block'> <?php }
+		?>
 		<select style='width: 200px;' id='empresasS'>
 			<option value="0"><?php echo lang('WIDGET_EMPRESAS_OPC_SEL_EMPRESAS') ?></option>
 		</select>
