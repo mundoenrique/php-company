@@ -136,12 +136,15 @@ function to_ascii($word){
             }
 
             echo "
-			<li class='product-description ".$tipoCategoria." $nombreMarca ".url_title($producto->filial)."' id='$producto->idProducto'>
+			<li class='product-description ".$tipoCategoria." $nombreMarca ".url_title($producto->filial)."' id='$producto->idProducto'>";
+						if($pais!='Ec-bp'){
+			echo "
 				<span class='".$tipoClass."'>
 					<span aria-hidden='true' class='icon' data-icon='".$tipoIcon."'></span>
-				</span>
+				</span>";
+			}
 
-				<div id='img-1'>".$tjta."</div>
+			echo "<div id='img-1'>".$tjta."</div>
 				<div id='img-2'>".$marca."</div>
 				<div id='text-desc'>
 					<p class='info-producto-1'> ".strtoupper($producto->descripcion)."</p>

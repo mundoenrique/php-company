@@ -3368,14 +3368,14 @@ li.filter-1 a {
 }
 
 #widget-info {
-	background: #dddddd;
-	padding: 10px 0px 10px 0px;
+	padding: 10px 10px 10px 10px;
 	color: #0F265C;
 	float: left;
 	font-weight: 700;
 	text-align: center;
 	font-family: "preloslap";
 	font-size: 14px;
+	background:#f0f0f0;
 
 }
 
@@ -3460,9 +3460,10 @@ li.filter-1 a {
 }
 
 #widget-info-2 {
-	background-color: #dddddd;
+
+	background:#f0f0f0;
 	float: left;
-	border-top: 1px solid #dddddd;
+	border-top: 1px solid #f0f0f0;
 	border-bottom-left-radius: 30px;
 	padding: 10px;
 	color: #10133f;
@@ -3511,6 +3512,11 @@ li.filter-1 a {
 	float: right;
 	margin-top: 20px !important;
 	margin-right: 15px;
+}
+.btn-products-bp{
+	width:120px;
+	padding-left:15px;
+	padding-right:15px;
 }
 
 #products-list li img {
@@ -6614,6 +6620,9 @@ button.green:hover {
 #campos-config {
 	width: 700px;
 	height: auto;
+	border: 1px solid #80808054;
+	margin-left: 3px;
+	border-radius: 4px;
 	float: left;
 	background: none;
 }
@@ -6670,11 +6679,8 @@ button.green:hover {
 }
 
 #campos-1 span {
-	border: 1px solid #80808054;
 	width: 245px;
 	float: left;
-	margin-left: 3px;
-	border-radius: 4px;
 }
 
 #campos-1 span p {
