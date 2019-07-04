@@ -97,47 +97,55 @@ $(function () {
 
 	paginar();
 
+$("#listCompanies").on('mouseenter','.style-companies-item',function(){
+	//$(this).parents('li').css('z-index', '3');
+	$(".style-companies-item").trigger("click");
+	$(this).next("span#more-info").fadeIn("fast");
+
+})
+$("#listCompanies").on('mouseleave','.space-companies',function(){
+	//$(this).parents('li').css('z-index', '3');
+	$("span#more-info").fadeOut("fast");
+})
+
+	// $("#listCompanies").on('mouseover', '.style-companies-item', function () {
+	// 	//$(this).addClass('style-companies-item-activa');
+	// 	$(this).parents('li').css('z-index', '3');
+
+	// 	$(this).next("span#more-info").fadeIn("fast");
+	// 	/*
+	// 		if( dash_var.p && dash_var.pp == dash_var.pgActual ){
+	// 			dash_var.pp-=1;
+	// 		}
+
+
+	// 		if( dash_var.p && (dash_var.pp<dash_var.pgActual || dash_var.pgActual==dash_var.pgTotal) ){
+
+	// 			dash_var.p=false;
+	// 			$container.height($container.height()+140);
+
+	// 		}
+	// 	*/
+	// 	itemsFiltro = $('.space-companies').not('.isotope-hidden').length;
+	// 	filas = Math.floor(itemsFiltro / 3);
+	// 	(itemsFiltro / 3) == filas ? filas = filas : filas = filas + 1;
+	// 	$container.height((filas * $('.isotope-item').height()) + 160);
+
+	// });
+
+	// $("#listCompanies").on('mouseleave', '.style-companies-item', function () {
+	// 	//$(this).parents('#listCompanies').find('.style-companies-item-activa').removeClass('style-companies-item-activa');
+	// 	$("span#more-info").parents('li').not(this).css('z-index', '2');
+
+	// 	$("span#more-info").not(this).fadeOut("fast");
+	// }
+	// );
 
 
 
-	$("#listCompanies").on('mouseover', '.style-companies-item', function () {
-		//$(this).addClass('style-companies-item-activa');
-		$(this).parents('li').css('z-index', '3');
-
-		$(this).next("span#more-info").fadeIn("fast");
-		/*
-			if( dash_var.p && dash_var.pp == dash_var.pgActual ){
-				dash_var.pp-=1;
-			}
-
-
-			if( dash_var.p && (dash_var.pp<dash_var.pgActual || dash_var.pgActual==dash_var.pgTotal) ){
-
-				dash_var.p=false;
-				$container.height($container.height()+140);
-
-			}
-		*/
-		itemsFiltro = $('.space-companies').not('.isotope-hidden').length;
-		filas = Math.floor(itemsFiltro / 3);
-		(itemsFiltro / 3) == filas ? filas = filas : filas = filas + 1;
-		$container.height((filas * $('.isotope-item').height()) + 160);
-
-	});
-
-	$("#listCompanies").on('mouseleave', '.style-companies-item', function () {
-		//$(this).parents('#listCompanies').find('.style-companies-item-activa').removeClass('style-companies-item-activa');
-		$("span#more-info").parents('li').not(this).css('z-index', '2');
-
-		$("span#more-info").not(this).fadeOut("fast");
-	}
-	);
-
-
-
-	$("#more-info").on("click", function (event) {
-		event.stopPropagation();
-	});
+	// $("#more-info").on("click", function (event) {
+	// 	event.stopPropagation();
+	// });
 
 	// --Fin seleccionar Item
 
