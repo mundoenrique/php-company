@@ -3905,9 +3905,7 @@ ul#brands li p img {
 	-ms-border-radius: 0px 0px 0px 30px;
 	-o-border-radius: 0px 0px 0px 30px;
 	border-radius: 0px 0px 0px 30px;
-	border-bottom: solid 1px #DFE0E2;
-	border-left: solid 1px #DFE0E2;
-	border-right: solid 1px #DFE0E2;
+	border: solid 1px #DFE0E2;
 }
 
 #lotes-contenedor-2-auth {
