@@ -220,6 +220,10 @@ h2.widget-title {
 	position: relative;
 }
 
+.margin-bottom{
+	margin-bottom: 30px;
+}
+
 button .requesting {
 	height: 25px;
 	position: absolute;
