@@ -1,4 +1,10 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
+<?php if($countryUri == 'bp'): ?>
+<center class="margin-bottom">
+	<img src="<?= $this->asset->insertFile('logo-pichincha-azul.png', 'images'); ?>" alt="Banco PICHINCHA">
+</center>
+<h1 class="welcome-title-bp"><?= lang('WELCOME_TITLE'); ?></h1>
+<?php endif; ?>
 <div id="sidebar">
 	<div id="widget-area">
 		<div class="widget tooltip" id="widget-signin">
@@ -30,3 +36,6 @@
 		</div>
 	</div>
 </div>
+<?php if($countryUri == 'bp'): ?>
+<p class="align-center"><?= lang('WELCOME_MESSAGE') ?></p>
+<?php endif; ?>

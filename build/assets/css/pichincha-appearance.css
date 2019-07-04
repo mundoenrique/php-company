@@ -52,21 +52,6 @@ body {
 	line-height: 17px;
 }
 
-/* body::before {
-	border-bottom: 300px solid transparent;
-	border-left: 280px solid transparent;
-	border-right: 413px solid #f3f4f8;
-	border-top: 190px solid #f3f4f8;
-	content: '';
-	display: block;
-	position: absolute;
-	top: 0;
-	right: 0;
-	width: 0;
-	height: 0;
-	z-index: -1;
-} */
-
 html {
 	-ms-text-size-adjust: 100%;
 	-webkit-text-size-adjust: 100%;
@@ -339,6 +324,13 @@ table {
 
 .welcome-title {
 	line-height: 30px;
+	color: #033572;
+}
+
+.welcome-title-bp {
+	line-height: 0;
+	font-size: 20px;
+	text-align: center;
 	color: #033572;
 }
 
