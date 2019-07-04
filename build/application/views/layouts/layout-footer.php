@@ -10,13 +10,14 @@ $logged_in = $this->session->userdata('logged_in');
 				<ul class="menu">
 
 					<?
-						if(!$logged_in){?>
+						if(!$logged_in && $pais != 'Ec-bp'){?>
 						<li class="menu-item signup">
 							<a href="<? echo $urlBase?>/login" rel="section">
 								<? echo lang('BREADCRUMB_INICIO');?>
 							</a>
 						</li>
 					<?	} ?>
+					<?php if($pais != 'Ec-bp'): ?>
 					<li class="menu-item benefits">
 						<a href="<? echo $urlBase.'/'.'beneficios'?>" rel="section">
 							<? echo lang('BREADCRUMB_BENEFICIOS');?>
@@ -28,6 +29,7 @@ $logged_in = $this->session->userdata('logged_in');
 						</a>
 					</li>
 					<?php
+					endif;
 					if($logged_in){
 					?>
 						<?php
@@ -39,21 +41,24 @@ $logged_in = $this->session->userdata('logged_in');
 								</a>
 							</li>
 						<?php } ?>
-
+						<?php if($pais != 'Ec-bp'): ?>
 						<li class="menu-item privacy">
 							<a id='exit' href="<?php echo $urlBase; ?>/logout" rel="section">
 								<? echo lang('SUBMENU_LOGOUT'); ?>
 							</a>
 						</li>
-					<?php } ?>
+
+						<?php endif; } ?>
 				</ul>
 			</nav>
+			<?php if($pais != 'Ec-bp'): ?>
 			<a id="ownership" href="http://www.novopayment.com/" rel="me">Powered by NovoPayment, Inc.</a>
 			<div class="separator"></div>
 			<div id="credits">
 				<!--<p>© <?php echo date('Y')?> <?php echo lang('FOOTER') ?> </p>-->
 				<p>© <?php echo date('Y'); ?> NovoPayment Inc. All rights reserved.</p>
 			</div>
+				<?php endif; ?>
 		</div>
 	</footer>
 <?php if($FooterCustomInsertJSActive){?>
