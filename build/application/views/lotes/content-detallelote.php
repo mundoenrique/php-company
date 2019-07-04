@@ -30,7 +30,7 @@ $info;
 			<a ><?php echo lang('POSITION_DETAIL'); ?></a>
 		</li>
 	</ol>
-	
+
 
 
 
@@ -54,30 +54,32 @@ $info;
 				<h5><?php echo lang('TABLA_LOTESPA_NOMBREEMPRESA') ?></h5>
 				<p><?php echo $info->nombreEmpresa ?></p>
 			</div>
-			
+
 		</div>
-		<div id="detalleLote-3">			
+		<div id="detalleLote-3">
 			<div >
 				<h5><?php echo lang('TABLA_LOTESPA_OBSERVACIONES') ?></h5>
-				<?php 
+				<?php
 					foreach ($info->mensajes as $errores) {
 						echo "<p>Linea: $errores->linea, $errores->mensaje ($errores->detalle)</p>";
 					}
 				?>
 			</div>
-			
+
 		</div>
-		
+
 
 	</div>
 	<div id="batchs-last">
-		<button onclick="location.href='<?php echo $urlBase; ?>/lotes'"><?php echo lang('DETALLE_LOTES_VOLVER') ?></button>
+		<center>
+		<button onclick="location.href='<?php echo $urlBase; ?>/lotes'" class="novo-btn-primary"><?php echo lang('DETALLE_LOTES_VOLVER') ?></button>
+		</center>
 	</div>
 <?php
 	}else{
 		if($data[0]["ERROR"]=='-29'){
                           echo "<script>alert('Usuario actualmente desconectado');  location.reload();</script>";
-                          } 
+                          }
 		echo '
 				<div id="products-general" style="margin-top: 10px;">
 				<h2 style="text-align:center">'.$data[0]['ERROR'].'</h2>

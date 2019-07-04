@@ -52,21 +52,6 @@ body {
 	line-height: 17px;
 }
 
-/* body::before {
-	border-bottom: 300px solid transparent;
-	border-left: 280px solid transparent;
-	border-right: 413px solid #f3f4f8;
-	border-top: 190px solid #f3f4f8;
-	content: '';
-	display: block;
-	position: absolute;
-	top: 0;
-	right: 0;
-	width: 0;
-	height: 0;
-	z-index: -1;
-} */
-
 html {
 	-ms-text-size-adjust: 100%;
 	-webkit-text-size-adjust: 100%;
@@ -342,6 +327,13 @@ table {
 	color: #033572;
 }
 
+.welcome-title-bp {
+	line-height: 0;
+	font-size: 20px;
+	text-align: center;
+	color: #033572;
+}
+
 nav ul.menu {
 	overflow: hidden;
 }
@@ -481,6 +473,9 @@ ol.breadcrumb li a {
 .align-center p {
 	font-size: 12px;
 	text-align: center;
+}
+.align-center a {
+	text-decoration:underline;
 }
 
 .align-text-center {
@@ -672,8 +667,19 @@ button .requesting {
 }
 
 #extra-nav ul.menu li.menu-item a {
+
+	text-decoration:underline;
 	font-family: Prelo Semibold;
 	font-size: 12px;
+}
+#extra-nav ul.menu li.menu-item a:hover{
+	display:inline;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	-ms-border-radius: 3px;
+	-o-border-radius: 3px;
+	border-radius: 3px;
+	background-color:#f0f0f0;
 }
 
 .config-menuH {
