@@ -420,6 +420,8 @@ $(".tbody-statuslotes").dataTable( {
 		var canvas = "<div>"+mensaje+"</div>";
 
 		$(canvas).dialog({
+
+			dialogClass: "hide-close",
 			title: titulo,
 			modal: true,
 			maxWidth: 700,
@@ -429,8 +431,11 @@ $(".tbody-statuslotes").dataTable( {
 				$(this).dialog("destroy");
 			},
 			buttons: {
-				OK: function(){
+				"Aceptar": { text: 'Aceptar', class: 'novo-btn-primary-modal',
+				click: function () {
+
 					$(this).dialog("destroy");
+				 }
 				}
 			}
 		});

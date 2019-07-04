@@ -251,6 +251,7 @@ function downloadReport(downloadData) {
 function msgSystemrepor(code, title, msg) {
 	var msgSystem = $('#msg-system-report');
 	msgSystem.dialog({
+
 		title: title,
 		modal: 'true',
 		width: '210px',

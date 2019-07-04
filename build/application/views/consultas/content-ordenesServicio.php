@@ -118,7 +118,7 @@ if($osConfirmV){
 								<?php
 							}
 						?>
-						<button id='buscarOS' class="novo-btn-secondary">Buscar</button>
+						<button id='buscarOS' class="novo-btn-primary">Buscar</button>
 						<?php
 						if($pais=='Ec-bp'){
 							?>

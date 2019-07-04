@@ -15,11 +15,13 @@ $(function () {
 				$('#confirmarPreOSL').show();
 				$('#cancelar-OS').show();}
 			},
-							continuar: function () {
+			"continuar": { text: 'continuar', class: 'novo-btn-primary-modal',
+				click: function () {
 					$(this).dialog('destroy');
 					$('#confirmarPreOSL').show();
 					$('#cancelar-OS').show();
 				}
+			}
 			}
 		});
 	} else {
@@ -148,10 +150,14 @@ $(function () {
 				}
 			},
 			buttons: {
-				Aceptar: function () {
-					$(this).dialog("destroy");
-					if (sitio) {
-						$(sitio).submit();
+				"Aceptar": {
+					text: 'Aceptar',
+					class: 'novo-btn-primary-modal',
+					click: function () {
+						$(this).dialog("destroy");
+						if (sitio) {
+							$(sitio).submit();
+						}
 					}
 				}
 			}

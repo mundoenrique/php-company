@@ -150,7 +150,11 @@ $(function () {
 				pass = hex_md5( pass );
 				$('#claveAuth').val( '' );
 
-				$('#loading').dialog({title:'Autorizando lotes', modal:true, resizable:false, dialogClass: 'hide-close', close:function(){$(this).dialog('destroy')}});
+				$('#loading').dialog({title:'Autorizando lotes', modal:true, resizable:false, dialogClass: 'hide-close',
+				close:function(){
+					$(this).dialog('destroy')
+				}
+			});
 				var ceo_cook = decodeURIComponent(
 					document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 				);
@@ -356,24 +360,27 @@ $(function () {
 					click: function () {
 						$(this).dialog("close"); }
 					},
-					Eliminar: function () {
-						pass = $(this).find($('#pass')).val();
-						if (pass !== "") {
-						var form = $(this).find('form');
-						validateForms(form);
-						if(form.valid()) {
-              pass = hex_md5( pass );
-              $('#pass').val( '' );
-              $(this).dialog('destroy');
+					"Eliminar":{
+						text: 'Cancelar',
+						class: 'novo-btn-primary-modal',
+						click: function(){
+							pass = $(this).find($('#pass')).val();
+							if (pass !== "") {
+							var form = $(this).find('form');
+							validateForms(form);
+							if(form.valid()) {
+								pass = hex_md5( pass );
+								$('#pass').val( '' );
+								$(this).dialog('destroy');
 
-              eliminarLotes(idlote,acnumlote,ctipolote,pass);
-            } else {
-              $(this).find($('#msg')).text("Contraseña inválida");
-            }
-          }else{
-            $(this).find( $('#msg')).text("Debe ingresar su contraseña");
-          }
-
+								eliminarLotes(idlote,acnumlote,ctipolote,pass);
+							} else {
+								$(this).find($('#msg')).text("Contraseña inválida");
+							}
+						}else{
+							$(this).find( $('#msg')).text("Debe ingresar su contraseña");
+						}
+						}
 					}
 				}
 			});
@@ -428,10 +435,14 @@ $(function () {
 				$('.ui-dialog-titlebar-close', ui.dialog).hide();
 			},
 			buttons: {
-				Aceptar: function () {
-					$(this).dialog("close");
-					if (code === 3) {
-						$(location).attr('href', baseURL + isoPais + '/login');
+				"Aceptar":{
+					text: 'Aceptar',
+					class: 'novo-btn-primary-modal',
+					click: function () {
+						$(this).dialog("close");
+						if (code === 3) {
+							$(location).attr('href', baseURL + isoPais + '/login');
+						}
 					}
 				}
 			}

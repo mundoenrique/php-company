@@ -29,6 +29,8 @@ function formaterDate(selectDate)
 
 function notiSystem(title, message, type) {
 	$('#msg-system').dialog({
+
+		dialogClass: "hide-close",
 		title: title,
 		modal: 'true',
 		width: '210px',

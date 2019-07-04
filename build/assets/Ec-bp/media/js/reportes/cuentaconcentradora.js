@@ -137,14 +137,16 @@ $(document).ready(function () {
 		}
 
 		$("#consolid").dialog({
+
+			dialogClass: "hide-close",
 			modal: true,
 			resizable: true,
 			title: "Selección de Año",
 			width: "180px",
 			maxheight: "250px",
 			buttons: {
-				OK: function () {
-
+				"Aceptar": { text: 'Aceptar', class: 'novo-btn-primary-modal',
+				click: function () {
 					$(".ui-dialog-content").dialog().dialog("close");
 					/*datos={
 					 empresa: filtro_busq.empresa,
@@ -172,6 +174,7 @@ $(document).ready(function () {
 					$('form#formulario').append('<input type="hidden" name="anio" value="' + $("option:selected", "#anio").val() + '" />');
 					$('form#formulario').attr('action', baseURL + api + isoPais + "/reportes/cuentaConcentradoraConsolidadoExp" + formato);
 					$('form#formulario').submit();
+				 }
 				}
 			}
 		});
@@ -715,6 +718,8 @@ function notificacion(titulo, mensaje) {
 	var canvas = "<div>" + mensaje + "</div>";
 
 	$(canvas).dialog({
+
+		dialogClass: "hide-close",
 		title: titulo,
 		modal: true,
 		maxWidth: 700,
@@ -724,8 +729,11 @@ function notificacion(titulo, mensaje) {
 			$(this).dialog("destroy");
 		},
 		buttons: {
-			OK: function () {
+			"Aceptar": { text: 'Aceptar', class: 'novo-btn-primary-modal',
+			click: function () {
+
 				$(this).dialog("destroy");
+			 }
 			}
 		}
 	});

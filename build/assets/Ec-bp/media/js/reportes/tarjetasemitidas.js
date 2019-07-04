@@ -605,6 +605,8 @@ function notificacion(titulo, mensaje){
   var canvas = "<div>"+mensaje+"</div>";
 
   $(canvas).dialog({
+
+		dialogClass: "hide-close",
     title: titulo,
     modal: true,
     maxWidth: 700,
@@ -614,9 +616,10 @@ function notificacion(titulo, mensaje){
       $(this).dialog("destroy");
     },
     buttons: {
-      OK: function(){
-            $(this).dialog("destroy");
-          }
+			"Aceptar": { text: 'Aceptar', class: 'novo-btn-primary-modal',
+			click: function () {
+				$(this).dialog("destroy"); }
+			}
     }
   });
 }
