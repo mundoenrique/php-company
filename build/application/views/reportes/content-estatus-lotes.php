@@ -30,9 +30,9 @@ $urlCdn = get_cdn();
 					</a>
 				</li>
 			</ol>
-			
+
 	<div id="lotes-general">
-				
+
 				<div id="top-batchs"><span aria-hidden="true" class="icon" data-icon="&#xe07a;"></span><?php echo lang('CRITERIOS_BUSQUEDA'); ?>
 				</div>
 				<div id="lotes-contenedor">
@@ -63,23 +63,37 @@ $urlCdn = get_cdn();
 								</select>
 							</span>
 						</div>
-						
+
 
 					</form>
 				</div>
 				</div>
 				<div id="batchs-last">
 					<span id="mensajeError" style="float:left; display:none; color:red;"><?php echo lang('REPORTE_MENSAJE_ERROR'); ?></span>
-						<button id= "EstatusLotes-btnBuscar" type="submit"><?php echo lang('REPORTE_BOTON_BUSCAR'); ?>
+					<?php
+					if($pais=='Ec-bp'){
+						?>
+							<center>
+						<?php
+					}
+				?>
+						<button id= "EstatusLotes-btnBuscar" type="submit" class="novo-btn-primary"><?php echo lang('REPORTE_BOTON_BUSCAR'); ?>
 						</button>
+						<?php
+					if($pais=='Ec-bp'){
+						?>
+							</center>
+						<?php
+					}
+				?>
 				</div>
 				<div id = "cargando" style = "display:none"><h2 style="text-align:center">Cargando Reporte</h2><img style="display:block; margin-left:auto; margin-right:auto" src="<?php echo $urlCdn."media/img/loading.gif"?>"/></div>
 				<div id="div_tablaDetalle" class="div_tabla_detalle elem-hidden" >
 					<div id="top-batchs">
-						<span aria-hidden="true" class="icon" data-icon="&#xe046;"></span> Estatus de lotes 
+						<span aria-hidden="true" class="icon" data-icon="&#xe046;"></span> Estatus de lotes
 					</div>
 					<br>
-					<div id="view-results">
+					<div id="view-results" class="view_results_help">
 					<a id = "exportXLS_a" >
 					<span id="export_excel" title="Exportar Excel" aria-hidden="true" class="icon" target="_blank" data-icon="&#xe05a;"></span>
 				</a>
@@ -87,7 +101,7 @@ $urlCdn = get_cdn();
 					<span id="export_pdf" title="Exportar PDF" aria-hidden="true" class="icon" data-icon="&#xe02e;"></span>
 				</a>
 					</div>
-					<table id="tabla-estatus-lotes" class = "tabla-reportes tbody-statuslotes"> 
+					<table id="tabla-estatus-lotes" class = "tabla-reportes tbody-statuslotes">
 						<thead>
 							<tr  id="datos-principales">
 								<th>Tipo de lote</th>
@@ -106,6 +120,6 @@ $urlCdn = get_cdn();
 				</div>
 				<form id='formulario' method='post'></form>
 	</div>
-	
+
 
 	</div>

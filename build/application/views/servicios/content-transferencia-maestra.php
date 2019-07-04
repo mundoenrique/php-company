@@ -95,7 +95,17 @@
 			</div>
 			<div id="batchs-last">
 				<span id="mensajeError" style="float:left; display:none; color:red;"></span>
-				<button id='recargar' disabled><?= "Transferir" ?></button>
+				<?php
+					if($pais=='Ec-bp'){
+						?>
+							<center>
+								<button id='recargar' class="novo-btn-primary" disabled><?= "Transferir" ?></button>
+							</center>
+						<?php
+					}else{?>
+						<button id='recargar' disabled><?= "Transferir" ?></button>
+					<?php }
+				?>
 			</div>
 		</div>
 		<div id="top-batchs">
@@ -119,7 +129,18 @@
 		</div>
 		<div id="batchs-last">
 			<span id="mensajeError"></span>
-			<button id='buscar'><?= lang('BUSCAR'); ?></button>
+			<?php
+					if($pais=='Ec-bp'){
+						?>
+							<center>
+								<button id='buscar' class="novo-btn-primary"><?= lang('BUSCAR'); ?></button>
+							</center>
+						<?php
+					}else{?>
+						<button id='buscar'><?= lang('BUSCAR'); ?>
+						</button>
+					<?php }
+				?>
 		</div>
 		<div id='resultado-tarjetas' style='display:none'>
 			<div id="top-batchs">
@@ -157,10 +178,32 @@
 			</div>
 			<div id="batchs-last">
 				<form name="no-form" onsubmit="return false">
+				<?php
+					if($pais=='Ec-bp'){
+						?>
+							<center>
+						<?php
+					}
+				?>
 					<input id='clave' class='input-TM' type='password' name='user_pass' placeholder="<?= lang('PLACEHOLDER_PASS'); ?>"/>
+					<?php
+					if($pais=='Ec-bp'){
+						?>
+							</center>
+							<center>
+						<?php
+					}
+				?>
 					<button id='cargo-tjta' class='elem-hidden'><?= lang('CARGO'); ?></button>
 					<button id='abonar-tjta' class='elem-hidden'><?= lang('ABONO'); ?></button>
 					<button id='consultar-tjta' class='elem-hidden'><?= lang('CONSULTA'); ?></button>
+					<?php
+					if($pais=='Ec-bp'){
+						?>
+							</center>
+						<?php
+					}
+				?>
 				</form>
 			</div>
 		</div>

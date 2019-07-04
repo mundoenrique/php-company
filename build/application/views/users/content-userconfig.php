@@ -70,10 +70,12 @@ $nombreCompleto = $this->session->userdata('nombreCompleto');
 				<?php if($pais != 'Ec-bp'): ?>
         <button id='btn-modificar' type="submit"><?php echo lang('BOTON_MOD_USER'); ?></button>
 				<?php endif; ?>
-        <button id='btn-cambioC' type="submit"><?php echo lang('BOTON_CAMBIO_CLAVE'); ?></button>
+        <button id='btn-cambioC' class="novo-btn-primary" type="submit" style="width:174px;"><?php echo lang('BOTON_CAMBIO_CLAVE'); ?></button>
       </div>
     </div>
-  </div>
+	</div>
+
+
 
 </div>
 

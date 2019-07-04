@@ -30,9 +30,9 @@ $urlCdn = get_cdn();
 			</a>
 		</li>
 	</ol>
-		
+
 	<div id="lotes-general">
-		
+
 		<div id="top-batchs"><span aria-hidden="true" class="icon" data-icon="&#xe07a;"></span> <?php echo lang('CRITERIOS_BUSQUEDA'); ?>
 		</div>
 		<div id="lotes-contenedor">
@@ -68,22 +68,36 @@ $urlCdn = get_cdn();
 							<p><?php echo lang('REPORTES_RADIO_PRODUCTO'); ?></p>
 						</span>
 					</div>
-					
+
 
 				</form>
 			</div>
 		</div>
 		<div id="batchs-last">
 			<span id="mensajeError" style="float:left; display:none; color:red;"> <?php echo lang('REPORTE_MENSAJE_ERROR'); ?> </span>
-			<button id="repTarjetasEmitidas_btnBuscar" type="submit"><?php echo lang('REPORTE_BOTON_BUSCAR'); ?>
+			<?php
+					if($pais=='Ec-bp'){
+						?>
+							<center>
+						<?php
+					}
+				?>
+			<button id="repTarjetasEmitidas_btnBuscar" type="submit" class="novo-btn-primary"><?php echo lang('REPORTE_BOTON_BUSCAR'); ?>
 			</button>
+			<?php
+					if($pais=='Ec-bp'){
+						?>
+							</center>
+						<?php
+					}
+				?>
 		</div>
 
 		<div id = "chart" style="display:none"></div>
 		<div id = "cargando" style = "display:none"><h2 style="text-align:center"><?php echo lang('CARGANDO'); ?></h2><img style="display:block; margin-left:auto; margin-right:auto" src="<?php echo $urlCdn."media/img/loading.gif"?>"/></div>
 		 <div id="div_tablaDetalle" class="div_tabla_detalle elem-hidden">
 			<!-- <div id="top-batchs">
-				<span aria-hidden="true" class="icon" data-icon="&#xe035;"></span> Resultados 
+				<span aria-hidden="true" class="icon" data-icon="&#xe035;"></span> Resultados
 			</div> -->
 		<!--	<div id="view-results">
 				<a>
@@ -107,15 +121,15 @@ $urlCdn = get_cdn();
 
 			</div>
 			<form id='formulario' method='post'></form>
-			<input id="producto" type='hidden' data='<?php echo lang('PRODUCTO_TARJETAS'); ?>'/> 
-			<input id="emision" type='hidden' data='<?php echo lang('EMISION_TARJETAS'); ?>'/> 
-			<input id="reptarjeta" type='hidden' data='<?php echo lang('REPTARJETA_TARJETAS'); ?>'/> 
-			<input id="repclave" type='hidden' data='<?php echo lang('REPCLAVE_TARJETAS'); ?>'/> 
-			<input id="total" type='hidden' data='<?php echo lang('TOTAL_TARJETAS'); ?>'/> 
-			<input id="categoria_uno" type='hidden' data='<?php echo lang('CATEGORIA_UNO'); ?>'/> 
-			<input id="categoria_dos" type='hidden' data='<?php echo lang('CATEGORIAL_DOS'); ?>'/> 
-			<input id="titulografico" type='hidden' data='<?php echo lang('GRAFICO_TITULO_TARJETAS'); ?>'/> 
-			<input id="titulograficotext" type='hidden' data='<?php echo lang('GRAFICO_TITULO_TEXT_TARJETAS'); ?>'/> 
+			<input id="producto" type='hidden' data='<?php echo lang('PRODUCTO_TARJETAS'); ?>'/>
+			<input id="emision" type='hidden' data='<?php echo lang('EMISION_TARJETAS'); ?>'/>
+			<input id="reptarjeta" type='hidden' data='<?php echo lang('REPTARJETA_TARJETAS'); ?>'/>
+			<input id="repclave" type='hidden' data='<?php echo lang('REPCLAVE_TARJETAS'); ?>'/>
+			<input id="total" type='hidden' data='<?php echo lang('TOTAL_TARJETAS'); ?>'/>
+			<input id="categoria_uno" type='hidden' data='<?php echo lang('CATEGORIA_UNO'); ?>'/>
+			<input id="categoria_dos" type='hidden' data='<?php echo lang('CATEGORIAL_DOS'); ?>'/>
+			<input id="titulografico" type='hidden' data='<?php echo lang('GRAFICO_TITULO_TARJETAS'); ?>'/>
+			<input id="titulograficotext" type='hidden' data='<?php echo lang('GRAFICO_TITULO_TEXT_TARJETAS'); ?>'/>
 
 		</div>
 

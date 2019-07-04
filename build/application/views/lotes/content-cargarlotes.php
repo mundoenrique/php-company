@@ -63,12 +63,24 @@ $ceo_cook = $this->security->get_csrf_hash();
 						<div id="selection-2">
 							<h5>&nbsp;</h5>
 							<input type="file" name="userfile" id="userfile" class='elem-hidden' />
-							<input id='archivo' placeholder='Click aquí para seleccionar archivo de Lote.' readonly="readonly" style='margin-left:0;width:459px'/>
+							<input id='archivo' placeholder='Clic aquí para seleccionar archivo de Lote.' readonly="readonly" style='margin-left:0;width:459px'/>
 						</div>
 
 					</div>
 					<div id="batchs-last">
-							<button id="cargaLote" ><?php echo lang('TITULO_LOTES_BTNCARGAR'); ?></button>
+						<?php
+							if($pais =='Ec-bp'){
+								?>
+									<center>
+									<button id="cargaLote" class="novo-btn-primary" ><?php echo lang('TITULO_LOTES_BTNCARGAR'); ?></button>
+									</center>
+								<?php
+							}else{
+								?>
+									<button id="cargaLote" ><?php echo lang('TITULO_LOTES_BTNCARGAR'); ?></button>
+								<?php
+							}
+						?>
 						</div>
 
 					<div id="lotes-2">

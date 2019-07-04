@@ -147,7 +147,7 @@ button {
 }
 
 #head-wrapper {
-	height: 29px;
+	height: 45px;
 	margin: 12px auto;
 	width: 1000px;
 }
@@ -188,7 +188,7 @@ ol.breadcrumb li {
 }
 
 #sidebar {
-	float: right;
+	margin: auto;
 	width: 250px;
 }
 
@@ -218,6 +218,10 @@ h2.widget-title {
 	width: 100%;
 	height: 35px;
 	position: relative;
+}
+
+.margin-bottom{
+	margin-bottom: 30px;
 }
 
 button .requesting {
