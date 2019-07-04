@@ -19,6 +19,8 @@ $(function () {
 			$('#products-list').height($('#products-list').height() + 30);
 		}
 	});
+ $('#sProducto').addClass('novo-btn-primary');
+      var $container = $('#products-list');
 
 
 	var $optionSets = $('.filter'),

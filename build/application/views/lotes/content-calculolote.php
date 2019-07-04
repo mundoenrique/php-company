@@ -178,9 +178,9 @@ $reten = ($reten == NULL) ? "nonEmpty" : trim($reten, ', ');
 							if($pais=='Ec-bp'){
 								?>
 									<div class="botones-OS">
-										<button id="confirmarPreOSL" style="display: none">
+										<button id="confirmarPreOSL" style="display: none" class="novo-btn-primary">
 											<?php echo lang('BTN_CONFIRMAR_OS') ?></button>
-										<button id='cancelar-OS' style="display: none">
+										<button id='cancelar-OS' style="display: none" class="novo-btn-secondary">
 											<?php echo lang('BTN_CANCELAR_OS') ?></button>
 									</div>
 								<?php

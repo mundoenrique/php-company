@@ -81,7 +81,6 @@ $(function () {
 	// });
 	// EVENTO BUSCAR OS SEGUN FILTRO
 	$("#buscarOS").on("click", function () {
-
 		var statuLote = $("#status_lote").val();
 		if (statuLote !== '' && COS_var.fecha_inicio !== '' && COS_var.fecha_fin !== '') {
 			var form = $('#form-criterio-busqueda');
@@ -89,7 +88,10 @@ $(function () {
 			if (form.valid()) {
 				if (Date.parse(COS_var.fecha_fin) >= Date.parse(COS_var.fecha_inicio)) {
 
-					$aux = $("#loading").dialog({ title: 'Buscando Orden de Servicio', modal: true, close: function () { $(this).dialog('destroy') }, resizable: false });
+					$aux = $("#loading").dialog({
+
+						dialogClass: "hide-close",
+						title: 'Buscando Orden de Servicio', modal: true, close: function () { $(this).dialog('destroy') }, resizable: false });
 
 					var ceo_cook = decodeURIComponent(
 						document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
@@ -167,14 +169,21 @@ $(function () {
 	function notificacion(titu, msj) {
 		var canvas = "<div>" + msj + "</div>";
 		$(canvas).dialog({
+
+			dialogClass: "hide-close",
 			title: titu,
 			modal: true,
 			close: function () { $(this).dialog('destroy') },
 			resizable: false,
 			buttons: {
-				OK: function () {
+				"Cancelar": {
+					text: 'Cancelar', class: 'novo-btn-secondary-modal', click: function () {
+					$(this).dialog("close"); }
+				},
+				Aceptar: function () {
 					$(this).dialog('destroy');
-				}
+				},
+
 			}
 		});
 	}
@@ -456,7 +465,7 @@ function notiPagOS(titu, msg, type) {
 			$('.ui-dialog-titlebar-close', ui.dialog).hide();
 		},
 		buttons: {
-			OK: function () {
+			Aceptar: function () {
 				$(this).dialog('destroy');
 				if (type == 'close') {
 					window.location.replace(baseURL + isoPais + '/logout');

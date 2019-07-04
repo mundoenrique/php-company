@@ -41,12 +41,13 @@ $(function () {
 
 	//cambio de clave
 	$('#btn-cambioC').on('click', function () {
-
 		var canvas = "<form id='formu'><input type=password id='old' name='user-password' placeholder='Contraseña actual' size=26/>";
 		canvas += "<input type=password id='new' name='user-password-1' placeholder='Contraseña nueva' maxlength=" + max + " size=26/>";
 		canvas += "<input type=password id='confNew' name='user-password-2' placeholder='Confirme contraseña nueva' maxlength=" + max + " size=26/><h5 id='vacio'></h5></form>";
 
 		$(canvas).dialog({
+
+			dialogClass: "hide-close",
 			title: "Cambiar contraseña",
 			modal: true,
 			maxWidth: 470,
@@ -54,8 +55,11 @@ $(function () {
 			resizable: false,
 			close: function () { $(this).dialog("destroy") },
 			buttons: {
-				OK: function () {
-
+				"Cancelar": { text: 'Cancelar', class: 'novo-btn-secondary-modal', style: 'border-color: #ffdd00 !important;background:white !important;',
+				click: function () {
+					$(this).dialog("close"); }
+				},
+				Aceptar: function () {
 					var old = $(this).find($('#old')).val();
 					var newC = $(this).find($('#new')).val();
 					var cNewC = $(this).find($('#confNew')).val();
@@ -63,14 +67,31 @@ $(function () {
 
 					if (old == "" || newC == "" || cNewC == "") {
 
+						$('#old').attr("style","border-color:red");
+						$('#new').attr("style","border-color:red");
+						$('#confNew').attr("style","border-color:red");
 						$(this).find($('#vacio')).text('Todos los campos son obligatorios (*).');
 
 					} else if (newC != cNewC) {
 						$(this).find($('#vacio')).text('Contraseñas no coinciden.');
-
+						$('#new').attr("style","border-color:red");
+						$('#confNew').attr("style","border-color:red");
+						$('#old').attr("style","border-color:1px solid transparent");
 					} else if (newC.length > max) {
+
+						$('#new').attr("style","border-color:red");
+
+						$('#old').attr("style","border-color:1px solid transparent");
+						$('#confNew').attr("style","border-color:1px solid transparent");
 						$(this).find($('#vacio')).text('Máximo ' + max + ' caracteres')
+
 					} else if (!($('#length').hasClass("valid") && $('#letter').hasClass("valid") && $('#capital').hasClass("valid") && $('#number').hasClass("valid") && $('#consecutivo').hasClass("valid") && $('#especial').hasClass("valid"))) {
+
+						$('#new').attr("style","border-color:red");
+
+
+						$('#old').attr("style","border-color:1px solid transparent");
+						$('#confNew').attr("style","border-color:1px solid transparent");
 						$(this).find($('#vacio')).text('Verifique el formato de la contraseña.');
 					} else {
 						$(this).find($('#vacio')).text('Cambiando contraseña...');
@@ -185,7 +206,8 @@ $(function () {
 	//fin cambio de clave
 
 	function CargarPerfilUser() {
-		$('#loading').dialog({ title: "Perfil de usuario", modal: true, maxWidth: 700, maxHeight: 300, close: function () { $(this).dialog('destroy'); } });
+		$('#loading').dialog({
+			dialogClass: "hide-close",title: "Perfil de usuario", modal: true, maxWidth: 700, maxHeight: 300, close: function () { $(this).dialog('destroy'); } });
 		var ceo_cook = decodeURIComponent(
 			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 		);

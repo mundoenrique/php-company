@@ -68,7 +68,19 @@ $ceo_cook = $this->security->get_csrf_hash();
 
 					</div>
 					<div id="batchs-last">
-							<button id="cargaLote" ><?php echo lang('TITULO_LOTES_BTNCARGAR'); ?></button>
+						<?php
+							if($pais =='Ec-bp'){
+								?>
+									<center>
+									<button id="cargaLote" class="novo-btn-primary" ><?php echo lang('TITULO_LOTES_BTNCARGAR'); ?></button>
+									</center>
+								<?php
+							}else{
+								?>
+									<button id="cargaLote" ><?php echo lang('TITULO_LOTES_BTNCARGAR'); ?></button>
+								<?php
+							}
+						?>
 						</div>
 
 					<div id="lotes-2">

@@ -262,75 +262,87 @@ $(function () { // Document ready
 
 		var canvas = "<div id='dialog-confirm'>";
 		canvas += "<p>Nombre: " + arch + "</p>  <p><strong>Ingrese su contraseña</strong></p>";
-		canvas += "<form onsubmit='return false'><fieldset><input type='password' id='pass' name='user-password' size=30 placeholder='Ingrese su contraseña' class='text ui-widget-content ui-corner-all'/>";
+		canvas += "<form onsubmit='return false'><fieldset><input type='password' id='pass' name='user-password' size=27 placeholder='Ingrese su contraseña' class='text ui-widget-content ui-corner-all'/>";
 		canvas += "<h5 id='msg'></h5></fieldset></form></div>";
 
 		var pass;
 
 		$(canvas).dialog({
+			dialogClass: "hide-close",
 			title: titu,
 			modal: true,
 			resizable: false,
 			close: function () {
 				$(this).dialog("destroy");
+
 			},
 			buttons: {
-				Eliminar: function () {
-					pass = $(this).find('#pass').val();
+				"Cancelar": {
+					text: 'Cancelar',
+					class: 'novo-btn-secondary-modal',
+					click: function () {
+					$(this).dialog("close");
+					}
+				},
+				"Eliminar": {
+					text: 'Eliminar',
+					class: 'novo-btn-primary-modal',
+					click: function () {
+						pass = $(this).find('#pass').val();
+						if (pass !== "") {
+							var form = $(this).find('form');
+							validateForms(form);
+							if (form.valid()) {
+								pass = hex_md5(pass);
+								$('#pass').val('');
+								$(this).dialog('destroy');
+								var $aux = $('#loading').dialog({
+									title: "Eliminando lote",
+									modal: true,
+									resizable: false,
+									close: function () {
+										$aux.dialog('close');
+									}
+								});
+								ceo_cook = decodeURIComponent(
+									document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+								);
+								var dataRequest = JSON.stringify ({
+									data_idTicket: ticket,
+									data_idLote: lote,
+									data_pass: pass,
+								})
+								dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
+								$.post(baseURL + api + isoPais + "/lotes/eliminar",  {request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)}).done(
+									function (response) {
+										data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
+										$aux.dialog('destroy');
 
-					if (pass !== "") {
-						var form = $(this).find('form');
-						validateForms(form);
-						if (form.valid()) {
-							pass = hex_md5(pass);
-							$('#pass').val('');
-							$(this).dialog('destroy');
-							var $aux = $('#loading').dialog({
-								title: "Eliminando lote",
-								modal: true,
-								resizable: false,
-								close: function () {
-									$aux.dialog('close');
-								}
-							});
-							ceo_cook = decodeURIComponent(
-								document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-							);
-							var dataRequest = JSON.stringify ({
-								data_idTicket: ticket,
-								data_idLote: lote,
-								data_pass: pass,
-							})
-							dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
-							$.post(baseURL + api + isoPais + "/lotes/eliminar",  {request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)}).done(
-								function (response) {
-									data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
-									$aux.dialog('destroy');
+										if (!data.ERROR) {
+											notificacion("Eliminando lote", 'Eliminación exitosa');
 
-									if (!data.ERROR) {
-										notificacion("Eliminando lote", 'Eliminación exitosa');
-
-										$item.fadeOut("slow");
-										actualizarLote();
-									} else {
-										if (data.ERROR == '-29') {
-											alert('Usuario actualmente desconectado');
-											location.reload();
+											$item.fadeOut("slow");
+											actualizarLote();
 										} else {
-											notificacion("Eliminando lote", data.ERROR);
+											if (data.ERROR == '-29') {
+												alert('Usuario actualmente desconectado');
+												location.reload();
+											} else {
+												notificacion("Eliminando lote", data.ERROR);
+											}
+
 										}
 
-									}
-
-								});
+									});
+							} else {
+								$(this).find($('#msg')).text('Contraseña inválida');
+							}
 						} else {
-							$(this).find($('#msg')).text('Contraseña inválida');
+							$(this).find($('#msg')).text('Debe ingresar su contraseña');
 						}
-					} else {
-						$(this).find($('#msg')).text('Debe ingresar su contraseña');
-					}
 
-				}
+					}
+				},
 			}
 		});
 

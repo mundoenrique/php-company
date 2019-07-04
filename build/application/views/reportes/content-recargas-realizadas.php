@@ -31,9 +31,9 @@ $urlCdn = get_cdn();
 				</li>
 			</ol>
 
-						
+
 	<div id="lotes-general">
-				
+
 				<div id="top-batchs"><span aria-hidden="true" class="icon" data-icon="&#xe07a;"></span> <?php echo lang('CRITERIOS_BUSQUEDA'); ?>
 					</div>
 			<div id="lotes-contenedor">
@@ -51,22 +51,36 @@ $urlCdn = get_cdn();
 							<h5><?php echo lang('REPORTES_SELECCION_MESAÑO'); ?></h5>
 
 							<input id="repRecargasRealizadas_anio" type="text" name="my-date" placeholder="MM-YYYY" class="required"/>
-						</div>	
+						</div>
 					</form>
-				</div>	
-			</div>	
-					
+				</div>
+			</div>
+
 				<div id="batchs-last">
 					<span id="mensajeError" style="float:left; display:none; color:red;"> <?php echo lang('REPORTE_MENSAJE_ERROR'); ?></span>
-					<button id = "repRecargasRealizadas_btnBuscar"type="submit"><?php echo lang('REPORTE_BOTON_BUSCAR'); ?>
+					<?php
+					if($pais=='Ec-bp'){
+						?>
+							<center>
+						<?php
+					}
+				?>
+					<button id = "repRecargasRealizadas_btnBuscar"type="submit" class="novo-btn-primary"><?php echo lang('REPORTE_BOTON_BUSCAR'); ?>
 						</button>
+						<?php
+					if($pais=='Ec-bp'){
+						?>
+							</center>
+						<?php
+					}
+				?>
 				</div>
 				<div id = "cargando" style = "display:none"><h2 style="text-align:center"><?php echo lang('CARGANDO'); ?></h2><img style="display:block; margin-left:auto; margin-right:auto" src="<?php echo $urlCdn."media/img/loading.gif"?>"/></div>
 				<div id = "chart" style="display:none"></div>
 
 				<div id="div_tablaDetalle" style="display:none" class="div_tabla_detalle">
 					<div id="top-batchs">
-						<span aria-hidden="true" class="icon" data-icon="&#xe046;"></span> Recargas realizadas 
+						<span aria-hidden="true" class="icon" data-icon="&#xe046;"></span> Recargas realizadas
 					</div>
 					<br>
 					<div id="view-results">
@@ -89,8 +103,8 @@ $urlCdn = get_cdn();
 								</tbody>
 					</table>
 
-				</div>	
+				</div>
 				<form id='formulario' method='post'></form>
-		</div>	
+		</div>
 
 	</div>
