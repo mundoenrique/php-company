@@ -18,7 +18,7 @@ $pais = $this->uri->segment(1);
 					<button id="sEmpresa" type="submit"><?php echo lang('WIDGET_EMPRESAS_BTNSELECCIONAR') ?></button>
 					<div id="sEmpresaS" style='display:none'>
 			<?
-		}else{?> 
+		}else{?>
 			<div id="sEmpresaS" style='display:block'> <?php }
 		?>
 		<select style='width: 200px;' id='empresasS'>
@@ -27,7 +27,10 @@ $pais = $this->uri->segment(1);
 		<select style='width: 200px; display:none' id='productosS'>
 			<option value="0"></option>
 		</select>
-		<button id='aplicar'><?php echo lang('WIDGET_EMPRESAS_BTNAPLICAR') ?></button>
+		<center>
+
+		<button id='aplicar' class="novo-btn-secondary"><?php echo lang('WIDGET_EMPRESAS_BTNAPLICAR') ?></button>
+		</center>
 	</div>
 </div>
 <?php if ($pais !== 'Ec-bp'): ?>

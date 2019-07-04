@@ -340,6 +340,7 @@ $(function () {
 		if ((!$('#clave').val() && tabla == 'table-firmar') || (!$('#claveAuth').val() && tabla == 'table-auth')) {
 
 			$(canvas).dialog({
+			dialogClass: "hide-close",
 				title: "Eliminar Lote",
 				modal: true,
 				position: {
@@ -351,13 +352,13 @@ $(function () {
 					$(this).dialog('destroy');
 				},
 				buttons: {
+					"Cancelar": { text: 'Cancelar', class: 'novo-btn-secondary-modal',
+					click: function () {
+						$(this).dialog("close"); }
+					},
 					Eliminar: function () {
-
 						pass = $(this).find($('#pass')).val();
-
-
 						if (pass !== "") {
-
 						var form = $(this).find('form');
 						validateForms(form);
 						if(form.valid()) {
@@ -427,7 +428,7 @@ $(function () {
 				$('.ui-dialog-titlebar-close', ui.dialog).hide();
 			},
 			buttons: {
-				OK: function () {
+				Aceptar: function () {
 					$(this).dialog("close");
 					if (code === 3) {
 						$(location).attr('href', baseURL + isoPais + '/login');

@@ -222,15 +222,48 @@
       		if( ($orden=='0' || $orden=='2' || $orden=='') && $lotesxAuth ){
 			echo '<div id="batchs-last">
 							<form name="no-form" onsubmit="return false">
-      				<input id="claveAuth" type="password" name="claveAuth" placeholder="'.lang("MSG_INGRESE_CLAVE").'" value="" #batchs-last input style="margin-left: 10px;"/>';
-			echo 	'<button '.$borrar.' id="button-eliminar" type="submit" >'.lang('TITULO_LOTESBTN_ELIMINAR').'</button>';
-			echo 	'<button id="button-autorizar" type="submit">'.lang('TITULO_LOTESBTN_AUTORIZAR').'</button>';
-			$selectTipoLote = $pais == 'Ve' ? '<input type="hidden" id="selec_tipo_lote" value="1">' :
-			'<select id="selec_tipo_lote" name="tipo_lote_select">
-				<option value="0">'.lang('SELECT_OPTION_XLOTE').'</option>
-				<option value="1" selected>'.lang('SELECT_OPTION_XTIPO_lOTE').'</option>
-			</select>';
-			echo $selectTipoLote;
+							';
+								if($pais=='Ec-bp'){ ?>
+								<center>
+									<table>
+										<tr>
+											<td>
+								<?php
+							echo '
+							<input id="claveAuth" type="password" name="claveAuth" placeholder="'.lang("MSG_INGRESE_CLAVE").'" value="" #batchs-last input style="margin-left: 10px;"/>';
+
+							if($pais=='Ec-bp'){
+								?>
+									</td> <td valign="top">
+
+									<?php
+										echo '<select id="selec_tipo_lote" name="tipo_lote_select">
+										<option value="0">'.lang('SELECT_OPTION_XLOTE').'</option>
+										<option value="1" selected>'.lang('SELECT_OPTION_XTIPO_lOTE').'</option>
+									</select>';
+									?>
+									</td></tr><tr><td>
+								<?php
+							}
+								echo 	'<center><button '.$borrar.' id="button-eliminar" type="submit" class="novo-btn-secondary">'.lang('TITULO_LOTESBTN_ELIMINAR').'</button></center>';
+								?> </td><td><?php
+								echo 	'<center><button id="button-autorizar" type="submit" class="novo-btn-primary btn-authorization">'.lang('TITULO_LOTESBTN_AUTORIZAR').'</button></center>'; ?>
+									<td></tr>
+								</table>
+									</center>
+<?php
+							}else{
+								echo 	'<button '.$borrar.' id="button-eliminar" type="submit" >'.lang('TITULO_LOTESBTN_ELIMINAR').'</button>';
+								echo 	'<button id="button-autorizar" type="submit">'.lang('TITULO_LOTESBTN_AUTORIZAR').'</button>';
+							}
+							if($pais!='Ec-bp'){
+								$selectTipoLote = $pais == 'Ve' ? '<input type="hidden" id="selec_tipo_lote" value="1">' :
+								'<select id="selec_tipo_lote" name="tipo_lote_select">
+									<option value="0">'.lang('SELECT_OPTION_XLOTE').'</option>
+									<option value="1" selected>'.lang('SELECT_OPTION_XTIPO_lOTE').'</option>
+								</select>';
+								echo $selectTipoLote;
+							}
 			echo '</form>
 					</div>';
       			}elseif ( ($orden=='0' || $orden=='2' || $orden=='') && !$lotesxAuth ) {

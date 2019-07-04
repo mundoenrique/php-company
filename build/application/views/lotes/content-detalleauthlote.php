@@ -342,7 +342,7 @@
 			echo "<form id='go-back' action='$breadcrumb_back' method='GET'>";
 		}
 
-		echo '<button id="btn-goback">'.lang("DETALLE_LOTES_VOLVER").'</button> </form>';
+		echo '<button id="btn-goback" class="novo-btn-secondary">'.lang("DETALLE_LOTES_VOLVER").'</button> </form>';
 		?>
 
 </div>
