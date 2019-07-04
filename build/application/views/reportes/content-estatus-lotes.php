@@ -93,7 +93,7 @@ $urlCdn = get_cdn();
 						<span aria-hidden="true" class="icon" data-icon="&#xe046;"></span> Estatus de lotes
 					</div>
 					<br>
-					<div id="view-results">
+					<div id="view-results" class="view_results_help">
 					<a id = "exportXLS_a" >
 					<span id="export_excel" title="Exportar Excel" aria-hidden="true" class="icon" target="_blank" data-icon="&#xe05a;"></span>
 				</a>
