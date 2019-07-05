@@ -98,13 +98,11 @@ $(function () {
 	paginar();
 
 $("#listCompanies").on('mouseenter','.style-companies-item',function(){
-	//$(this).parents('li').css('z-index', '3');
-	$(".style-companies-item").trigger("click");
+
 	$(this).next("span#more-info").fadeIn("fast");
 
 })
 $("#listCompanies").on('mouseleave','.space-companies',function(){
-	//$(this).parents('li').css('z-index', '3');
 	$("span#more-info").fadeOut("fast");
 })
 
@@ -168,7 +166,6 @@ $("#listCompanies").on('mouseleave','.space-companies',function(){
 		layoutMode: 'fitRows'
 	});
 	//--Fin inicializar filtro
-
 
 	var $optionSets = $('#options'),  // contenedor de filtros
 		$optionLinks = $optionSets.find('a');
@@ -340,7 +337,6 @@ $("#listCompanies").on('mouseleave','.space-companies',function(){
 	});
  */
 	//-- FIN PAGINACION
-
 
 	$("#listCompanies").on("click", '.style-companies-item', function () {
 		var ceo_cook = decodeURIComponent(
@@ -517,6 +513,12 @@ $("#listCompanies").on('mouseleave','.space-companies',function(){
 				} else {
 					$('#more').hide();
 				}
+
+				$('[id=more-info]').on('click', function(event) {
+					var companyCont = $(event.target).closest('.space-companies');
+					var companyLink = companyCont.find('.style-companies-item');
+					companyLink.trigger('click');
+				});
 
 			}); //Fin post
 
