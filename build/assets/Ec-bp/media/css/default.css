@@ -189,16 +189,16 @@ table {
 @font-face {
 	font-family: "prelo";
 	font-style: normal;
-	font-weight: 500;
-	src: url('../fonts/prelo-medium-webfont.eot');
-	src: url('../fonts/prelo-medium-webfont.eot?#iefix') format('embedded-opentype'),
-		url('../fonts/prelo-medium-webfont.woff2') format('woff2'),
-		url('../fonts/prelo-medium-webfont.woff') format('woff'),
-		url('../fonts/prelo-medium-webfont.ttf') format('truetype');
+	font-weight: 400;
+	src: url('../fonts/prelo-book-webfont.eot');
+	src: url('../fonts/prelo-book-webfont.eot?#iefix') format('embedded-opentype'),
+		url('../fonts/prelo-book-webfont.woff2') format('woff2'),
+		url('../fonts/prelo-book-webfont.woff') format('woff'),
+		url('../fonts/prelo-book-webfont.ttf') format('truetype');
 }
 
 @font-face {
-	font-family: "prelo";
+	font-family: "prelo-semibold";
 	font-style: normal;
 	font-weight: 700;
 	src: url('../fonts/prelo-semibold-webfont.eot');
@@ -256,10 +256,10 @@ table {
 body {
 	color: #10133f;
 	direction: ltr;
-	font-family: "preloslap", sans-serif;
+	font-family: "prelo", sans-serif;
 	font-size: 12px;
 	line-height: 17px;
-	font-weight: 500;
+	font-weight: 400;
 }
 
 h1,
@@ -3905,7 +3905,9 @@ ul#brands li p img {
 	-ms-border-radius: 0px 0px 0px 30px;
 	-o-border-radius: 0px 0px 0px 30px;
 	border-radius: 0px 0px 0px 30px;
-	border: solid 1px #DFE0E2;
+	border-bottom: solid 1px #DFE0E2;
+	border-left: solid 1px #DFE0E2;
+	border-right: solid 1px #DFE0E2;
 }
 
 #lotes-contenedor-2-auth {
@@ -3940,21 +3942,13 @@ ul#brands li p img {
 
 #table-text-lotes tbody tr {
 	margin-bottom: 10px;
-	/* background: #F3F3F3; */
-	/* -webkit-box-shadow: rgba(51, 51, 51, 0.5) 0 1px 1px;
-	-moz-box-shadow: rgba(51, 51, 51, 0.5) 0 1px 1px;
-	box-shadow: rgba(51, 51, 51, 0.5) 0 1px 1px; */
 	float: left;
 	margin: 0px 5px;
-	/* -webkit-border-radius: 3px 3px 3px 3px;
-	-moz-border-radius: 3px 3px 3px 3px;
-	-ms-border-radius: 3px 3px 3px 3px;
-	-o-border-radius: 3px 3px 3px 3px;
-	border-radius: 3px 3px 3px 3px; */
 	width: 610px;
 	line-height: 38px;
-	border-bottom: 1px solid #dddddd;
+	border-bottom: 1px solid #dfe0e2;
 	height: 38px;
+	color:#72787A;
 }
 
 #table-text-lotes tbody tr:hover {
@@ -4035,11 +4029,12 @@ ul#brands li p img {
 
 #table-text-lotes thead tr {
 	color: #0f265c;
-	font-size: 13px;
+	font-family: 'prelo-semibold', sans-serif;
+	font-size: 14px;
 	margin-left: 42px;
 	float: left;
 	/* height: 27px; */
-	border-bottom: 1px solid #ddd;
+	border-bottom: 1px solid #dfe0e2;
 }
 
 #table-text-lotes thead th {
@@ -4082,6 +4077,7 @@ ul#brands li p img {
 	/* border: 1px solid #dddddd; */
 	line-height: 35px;
 	margin-left: 7px;
+	color:#72787A;
 }
 
 .table-text-aut tbody tr span {
@@ -4097,8 +4093,9 @@ ul#brands li p img {
 }
 
 .table-text-aut thead tr {
+	font-family: 'prelo-semibold', sans-serif;
 	color: #0F265C;
-	font-size: 13px;
+	font-size: 14px;
 	margin-left: 6px;
 	float: left;
 	border-bottom: 1px solid #DFE0E2;
@@ -4131,7 +4128,7 @@ ul#brands li p img {
 	float: left;
 	padding: 3px;
 	text-align: center;
-	font-size: 11px;
+	font-size: 14px;
 	height: 35px;
 	line-height: 18px;
 }
@@ -4258,7 +4255,7 @@ ul#brands li p img {
 	min-width: 70px;
 	padding: 3px;
 	text-align: center;
-	font-size: 12px;
+	font-size: 14px;
 }
 
 #table-lote-detail tbody td#icon-batchs {
@@ -4281,7 +4278,7 @@ ul#brands li p img {
 	float: left;
 	padding: 3px;
 	text-align: center;
-	font-size: 12px;
+	font-size: 14px;
 }
 
 #table-lote-detail>#td-nombre-2 {
@@ -4864,7 +4861,7 @@ li#select-empresa select {
 #datos-principales {
 	font-size: 15px;
 	color: #0f265c;
-	font-size: 13px;
+	font-size: 15px;
 	width: auto;
 	padding-bottom: 20px;
 	float: left;
@@ -5139,6 +5136,7 @@ li#select-empresa select {
 	text-align: center;
 	line-height: 20px;
 	font-size: 13.4px;
+	color:#72787A;
 }
 
 #Datos2-long {
@@ -5157,6 +5155,10 @@ li#select-empresa select {
 	width: 60px;
 	max-width: 60px;
 	min-width: 60px;
+}
+#Datos2-short a {
+	color:#72787A!important;
+	font-weight: bold;
 }
 
 #Datos3 {
@@ -5445,7 +5447,7 @@ li#select-empresa select {
 .tbody-reportes tr td {
 	text-align: center;
 	padding: 5px;
-	color: #10133F;
+	color: #72787A;
 	max-width: 115px;
 	min-width: 115px;
 }
@@ -5912,8 +5914,8 @@ span.jPag-snext-img {
 	color: #0F265C;
 	width: 660px;
 	float: left;
-	font-weight: 700;
 	margin-bottom: 10px;
+	font-family: "prelo-semibold", sans-serif;
 }
 
 .thead-edc #Datos2 {
