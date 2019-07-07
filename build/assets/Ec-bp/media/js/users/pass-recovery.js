@@ -39,6 +39,8 @@ $(function(){
 
     var enviar = function(jsonData){
         $aux = $("#loading").dialog({
+
+					dialogClass: "hide-close",
             title:'Procesando solicitud',
             modal:true,
             close: function(){$(this).dialog('destroy')},
@@ -142,6 +144,8 @@ $(function(){
         }
 
         $(mostrar).dialog({
+
+			dialogClass: "hide-close",
             title: "Restablecer contraseña",
             modal: true,
             width: 400,
@@ -158,14 +162,18 @@ $(function(){
 
             },
             buttons: {
-                Aceptar: function() {
-                    $(this).dialog("destroy");
+							"Aceptar": {
+								text: 'Aceptar',
+								class: 'novo-btn-primary-modal',
+								click: function () {
+									$(this).dialog("destroy");
                     if (sitio){
                         $('form')[0].reset();
                         window.location.href= baseURL + isoPais + '/login';
 
                     }
-                }
+								}
+							}
             }
         });
 

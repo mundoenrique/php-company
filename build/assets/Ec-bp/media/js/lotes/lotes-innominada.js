@@ -22,6 +22,7 @@ var datatable;
 	      canvas += "<h5 id='msg'></h5></fieldset></div>";
 
       $(canvas).dialog({
+				dialogClass: "hide-close",
         title: 'Eliminar Lote',
         modal: true,
         resizable: false,
@@ -29,18 +30,22 @@ var datatable;
         	$(this).dialog("destroy");
         },
         buttons: {
-		  Eliminar: function(){
-			var pass = $(this).find('#pass').val();
-        	if(pass!==""){
-				pass = hex_md5( pass );
-	          	action_eliminar_lote(idlote, numlote, pass);
+					"Eliminar": {
+						text: 'Eliminar',
+						class: 'novo-btn-secondary-modal',
+						click: function () {
+							var pass = $(this).find('#pass').val();
+								if(pass!==""){
+							pass = hex_md5( pass );
+										action_eliminar_lote(idlote, numlote, pass);
 
-        	} else {
-				$(this).find( $('#msg')).text("Debe ingresar su contraseña");
-				return false;
-          	}
-			$(this).dialog("destroy");
-          }
+								} else {
+							$(this).find( $('#msg')).text("Debe ingresar su contraseña");
+							return false;
+									}
+						$(this).dialog("destroy");
+						}
+					}
         }
       });
 
@@ -53,6 +58,7 @@ var datatable;
 	      canvas +="<p>La solicitud fue procesada de manera exitosa</p></div>";
 
       $(canvas).dialog({
+				dialogClass: "hide-close",
         title: 'Solicitud procesada',
         modal: true,
         resizable: false,
@@ -60,9 +66,13 @@ var datatable;
         	$(this).dialog("destroy");
         },
         buttons: {
-		  Aceptar: function(){
-			$(this).dialog("destroy");
-          }
+					"Aceptar": {
+						text: 'Aceptar',
+						class: 'novo-btn-primary-modal',
+						click: function () {
+							$(this).dialog("destroy");
+						}
+					}
         }
       });
 
@@ -150,13 +160,18 @@ var datatable;
 	function notificacion(titu, msj){
 		var canvas = "<div>"+msj+"</div>";
 			$(canvas).dialog({
+				dialogClass: "hide-close",
 				title : titu,
 				modal:true,
 				close: function(){$(this).dialog('destroy')},
 				resizable:false,
 				buttons:{
-					Aceptar: function(){
+					"Aceptar": {
+						text: 'Aceptar',
+						class: 'novo-btn-primary-modal',
+						click: function () {
 						$(this).dialog('destroy');
+						}
 					}
 				}
 			});

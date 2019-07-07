@@ -840,6 +840,15 @@ text-decoration: underline !important;
 	border-radius: 3px;
 	background-color:#f0f0f0;
 }
+#extra-nav ul.menu li.menu-item a:active{
+	display:inline;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	-ms-border-radius: 3px;
+	-o-border-radius: 3px;
+	border-radius: 3px;
+	background-color:#dddbdb;
+}
 #extra-nav ul.menu li.menu-item a {
 	text-decoration: underline;
 	font-size: 12px;
@@ -1763,6 +1772,7 @@ select.ui-datepicker-year {
 .ui-dialog .ui-dialog-buttonpane button {
 	margin: .5em .4em .5em 0;
 	cursor: pointer;
+	color: #10133f;
 }
 
 .ui-dialog .ui-resizable-se {
@@ -3809,6 +3819,18 @@ ul#brands li p img {
 	-o-border-radius: 3px;
 	border-radius: 3px;
 	background-color:#f0f0f0;
+
+}
+#text-product-detail p a:active{
+	display:inline;
+	padding-left:15px;
+	padding-right:15px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	-ms-border-radius: 3px;
+	-o-border-radius: 3px;
+	border-radius: 3px;
+	background-color:#d8d8d8;
 
 }
 #text-product-detail button {
@@ -7294,53 +7316,6 @@ li.menu-item.security:nth-child(3) {
 	color: red;
 }
 
-
-
-/**Estilos de los botones NOVO NEW****/
-
-.novo-btn-primary,.novo-btn-secondary{
-	width:120px;
-	padding-left:15px;
-	padding-right:15px;
-}
-.novo-btn-primary-modal,.novo-btn-secondary-modal{
-	width:68px;
-	padding-left:15px;
-	padding-right:15px;
-}
-.novo-btn-primary,.novo-btn-primary-modal{
-	background: url('../img/BackgroundButton.png') left center no-repeat #ffdd00;
-}
-
-.novo-btn-primary:hover{
-	background: url('../img/BackgroundButtonHover.png') left center no-repeat #ffdd00;
-}
-.novo-btn-primary-modal:hover{
-	background: url('../img/BackgroundButtonHover.png') left center no-repeat #ffdd00;
-}
-
-.novo-btn-secondary,.novo-btn-secondary-modal{
-	border: 1px solid #ffdd00;
-	background:white !important;
-}
-/* .novo-btn-secondary-modal{
-	background:white;
-} */
-.novo-btn-secondary:hover{
-	border: 1px solid #ffdd00 !important;
-	background-color: #fffede !important;
-}
-
-.novo-btn-secondary-modal:hover{
-
-	background:#fffede !important;
-	border: 1px solid #ffdd00 !important;
-}
-.btn-authorization{
-	margin-top: 14px;
-	margin-left: -33px;
-	border: 1px solid #ffdd00;
-}
 /****Estilos de los botones NOVO****/
 button {
 
@@ -7367,8 +7342,70 @@ button:hover {
 button:active {
 	background: none;
 	background-color: #ffd000;
+	color: #10133f;
 }
 /*********************************/
+
+
+/**Estilos de los botones NOVO NEW****/
+
+.novo-btn-primary,.novo-btn-secondary{
+	width:120px;
+	padding-left:15px;
+	padding-right:15px;
+}
+.novo-btn-primary-modal,.novo-btn-secondary-modal{
+	width:68px;
+	padding-left:15px;
+	padding-right:15px;
+}
+.novo-btn-primary,.novo-btn-primary-modal{
+	background: url('../img/BackgroundButton.png') left center no-repeat #ffdd00;
+}
+
+.novo-btn-primary:hover{
+	background: url('../img/BackgroundButtonHover.png') left center no-repeat #ffdd00;
+}
+.novo-btn-primary:active{
+	background: #ffd000;
+}
+.novo-btn-primary-modal:hover{
+	background: url('../img/BackgroundButtonHover.png') left center no-repeat #ffdd00;
+}
+
+.novo-btn-secondary,.novo-btn-secondary-modal{
+	border: 1px solid #ffdd00;
+	background:white !important;
+}
+/* .novo-btn-secondary-modal{
+	background:white;
+} */
+.novo-btn-secondary:hover{
+	border: 1px solid #ffdd00 !important;
+	background-color: #fffede !important;
+}
+.novo-btn-secondary:active{
+	border: 1px solid #ffdd00 !important;
+	color:#10133f;
+	background-color: #fdfbb5 !important;
+}
+
+.novo-btn-secondary-modal:hover{
+
+	background:#fffede !important;
+	border: 1px solid #ffdd00 !important;
+}
+.novo-btn-secondary-modal:active{
+
+	background:#fdfbb5 !important;
+	border: 1px solid #ffdd00 !important;
+}
+.btn-authorization{
+	margin-top: 14px;
+	margin-left: -33px;
+	border: 1px solid #ffdd00;
+}
+
 
 /* .loadingScreenWindow .ui-button {
   display: none;

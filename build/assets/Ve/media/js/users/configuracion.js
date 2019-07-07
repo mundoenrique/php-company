@@ -46,9 +46,9 @@ $(function () {
 	//cambio de clave
 	$('#btn-cambioC').on('click', function () {
 
-		var canvas = "<form id='formu'><input type=password id='old' placeholder='Contraseña actual' size=26/>";
-		canvas += "<input type=password id='new' placeholder='Contraseña nueva' maxlength=" + max + " size=26/>";
-		canvas += "<input type=password id='confNew' placeholder='Confirme contraseña nueva' maxlength=" + max + " size=26/><h5 id='vacio'></h5></form>";
+		var canvas = "<form id='formu'><input type=password id='old' placeholder='Contraseña actual' size=26 class='required'/>";
+		canvas += "<input type=password id='new' placeholder='Contraseña nueva' maxlength=" + max + " size=26 class='required'/>";
+		canvas += "<input type=password id='confNew' placeholder='Confirme contraseña nueva' maxlength=" + max + " size=26 class='required'/><h5 id='vacio'></h5></form>";
 
 		$(canvas).dialog({
 			title: "Cambiar contraseña",

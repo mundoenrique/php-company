@@ -43,18 +43,27 @@ $("#cambioClave").on("click",function(event){
 function notificacion(mensaje){
 
 	$('<h3>'+mensaje+'</h3>').dialog({
+
+		dialogClass: "hide-close",
 		title: 'Cambiar contraseña',
 		modal: true,
 		resizable:false,
 		close:function(){$(this).dialog('destroy');},
-		buttons: {OK: function(){$(this).dialog('destroy');}}
+		buttons: {
+			"Aceptar": { text: 'Aceptar', class: 'novo-btn-primary-modal',
+				click: function () {
+
+				$(this).dialog('destroy');
+				}
+				}}
 	});
 }
 
 
 function changePassNewUser(passOld,pass,passC){
 
-	$aux = $('#loading').dialog({title:"Cambiando contraseña", modal: true, resizable:false, close:function(){$aux.dialog('close');}});
+	$aux = $('#loading').dialog({
+		dialogClass: "hide-close",title:"Cambiando contraseña", modal: true, resizable:false, close:function(){$aux.dialog('close');}});
 	var ceo_cook = decodeURIComponent(
 		document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 	);
@@ -63,7 +72,8 @@ function changePassNewUser(passOld,pass,passC){
 		$aux.dialog('destroy');
 		data = $.parseJSON(data);
 		if(data.rc == 0) {
-			$("<div><h3>" + data.msg + "</h3><h5>" + data.redirect + "</h5></div>").dialog({title:"Cambiar contraseña", modal:true, resizable:false,close:function(){$(this).dialog('destroy');}});
+			$("<div><h3>" + data.msg + "</h3><h5>" + data.redirect + "</h5></div>").dialog({
+				dialogClass: "hide-close",title:"Cambiar contraseña", modal:true, resizable:false,close:function(){$(this).dialog('destroy');}});
 			notificacion(data.msg);
 			$(location).attr('href',baseURL+isoPais+"/dashboard");
 		} else if (data.rc == '-29') {

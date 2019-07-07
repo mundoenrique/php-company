@@ -404,6 +404,8 @@ $(document).ready(function () {
 		var canvas = "<div>" + mensaje + "</div>";
 
 		$(canvas).dialog({
+
+			dialogClass: "hide-close",
 			title: titulo,
 			modal: true,
 			maxWidth: 700,
@@ -413,8 +415,11 @@ $(document).ready(function () {
 				$(this).dialog("destroy");
 			},
 			buttons: {
-				OK: function () {
+				"Aceptar": { text: 'Aceptar', class: 'novo-btn-primary-modal',
+				click: function () {
+
 					$(this).dialog("destroy");
+				 }
 				}
 			}
 		});
