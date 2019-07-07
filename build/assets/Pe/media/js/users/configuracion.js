@@ -110,7 +110,7 @@ $(function () {
 		});
 
 
-		$('#new').keyup(function () {
+		$('#new').on('keyup focus', function () {
 			// set password variable
 			var pswd = $(this).val();
 			//validate the length
@@ -121,7 +121,7 @@ $(function () {
 			}
 
 			//validate letter
-			if (pswd.match(/[A-z]/)) {
+			if (pswd.match(/[a-z]/)) {
 				$('#letter').removeClass('invalid').addClass('valid');
 			} else {
 				$('#letter').removeClass('valid').addClass('invalid');
@@ -177,7 +177,8 @@ $(function () {
 		var ceo_cook = decodeURIComponent(
 			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 		);
-		$.post(baseURL + api + isoPais + '/usuario/config/perfilUsuario', { ceo_name: ceo_cook }).done(function (data) {
+		$.post(baseURL + api + isoPais + '/usuario/config/perfilUsuario', { ceo_name: ceo_cook }).done(function (response) {
+			data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, { format: CryptoJSAesJson }).toString(CryptoJS.enc.Utf8))
 			if (!data.ERROR) {
 				$(".ui-dialog-content").dialog("destroy");
 
