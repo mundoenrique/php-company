@@ -116,7 +116,7 @@ $(function () {
 		});
 
 
-		$('#new').keyup(function () {
+		$('#new').on('keyup focus', function () {
 			// set password variable
 			var pswd = $(this).val();
 			//validate the length
@@ -127,7 +127,7 @@ $(function () {
 			}
 
 			//validate letter
-			if (pswd.match(/[A-z]/)) {
+			if (pswd.match(/[a-z]/)) {
 				$('#letter').removeClass('invalid').addClass('valid');
 			} else {
 				$('#letter').removeClass('valid').addClass('invalid');
