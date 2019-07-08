@@ -50,6 +50,9 @@ $style_css = $this->uri->segment(3);
 <body <?php if(isset($bodyclass)){echo 'class="'.$bodyclass.'"'; }?> data-country="<?php echo $pais; ?>" data-app-base="<?php echo $urlBase;?>" data-app-base-cdn="<?php echo $urlBaseCDN;?>">
 <header id="head">
 	<div id="head-wrapper">
+		<?php if($pais == 'Ec-bp'): ?>
+		<img class="img-header" src="<?= $this->asset->insertFile('logo-pichincha-azul.png', 'images'); ?>" alt="Banco PICHINCHA">
+		<?php endif; ?>
 		<a id="branding" rel="start">
 		</a>
 		<?php if($menuHeaderActive){?>
