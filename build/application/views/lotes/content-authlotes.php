@@ -227,10 +227,10 @@
 								<center>
 									<table>
 										<tr>
-											<td>
+											<td valign="top">
 								<?php
 							echo '
-							<input id="claveAuth" type="password" name="claveAuth" placeholder="'.lang("MSG_INGRESE_CLAVE").'" value="" #batchs-last input style="margin-left: 10px;"/>';
+							<input id="claveAuth" type="password" name="claveAuth" placeholder="'.lang("MSG_INGRESE_CLAVE").'" value="" #batchs-last input style="margin-left: 10px;    margin-bottom: 0px;"/>';
 
 							if($pais=='Ec-bp'){
 								?>
@@ -242,11 +242,11 @@
 										<option value="1" selected>'.lang('SELECT_OPTION_XTIPO_lOTE').'</option>
 									</select>';
 									?>
-									</td></tr><tr><td>
+									</td></tr><tr><td valign="top">
 								<?php
 							}
 								echo 	'<center><button '.$borrar.' id="button-eliminar" type="submit" class="novo-btn-secondary">'.lang('TITULO_LOTESBTN_ELIMINAR').'</button></center>';
-								?> </td><td><?php
+								?> </td><td valign="top"><?php
 								echo 	'<center><button id="button-autorizar" type="submit" class="novo-btn-primary btn-authorization">'.lang('TITULO_LOTESBTN_AUTORIZAR').'</button></center>'; ?>
 									<td></tr>
 								</table>
