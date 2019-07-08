@@ -6096,6 +6096,8 @@ margin-left: 250px;
 #archivo {
   margin-left: 5px;
   cursor: pointer;
+	display: block;
+  margin-top: 4px;
 }
 
 .suc em {
