@@ -466,7 +466,7 @@ textarea {
 }
 
 #head {
-	background: #ffdd00;
+	background: #FFF ;
 	height: 60px;
 	left: 0;
 	overflow: hidden;
@@ -486,12 +486,15 @@ textarea {
 }
 
 #head-wrapper {
-	background: transparent url('../img/logo-pichincha-azul.svg') scroll no-repeat 0px 2px;
 	-ms-background-position-x: -297px;
 	height: 29px;
 	margin: 12px auto;
 	overflow: hidden;
 	width: 940px;
+}
+
+.img-header {
+	height: 28px;
 }
 
 #wrapper {
@@ -771,6 +774,8 @@ text-decoration: underline !important;
 #account-nav {
 	color: white;
 	margin-top: 10px;
+	min-width: 250px;
+	float: right;
 }
 
 #account-nav ul {
@@ -3960,6 +3965,38 @@ ul#brands li p img {
 #lotes-contenedor-2 table td {
 	overflow: hidden;
 	text-align: center;
+}
+
+.marg-b{
+	margin-bottom: 10px;
+}
+
+.legend{
+	margin-left: 25px;
+}
+
+.square {
+	line-height: 1em;
+	display: inline-block;
+	padding: .7em .2em .2em;
+	width: 2em;
+	margin-right: 5px;
+	height: 1em;
+	color: #fff;
+	text-align: right;
+	vertical-align: bottom;
+}
+
+.done {
+	background: #8ece64;
+}
+
+.war {
+	background: #673ab7;
+}
+
+.err {
+	background: #eb695a;
 }
 
 #table-text-lotes tbody tr {
