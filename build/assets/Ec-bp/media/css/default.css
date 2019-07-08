@@ -4697,9 +4697,8 @@ tr.GC-first th {
 	margin-top: 0px;
 	float: left;
 }
-
-#batchs-last #selec_tipo_lote {
-	margin: 12px 10px 0px 0px;
+#batchs-last #selec_tipo_lote{
+	 margin: 0px 0px 0px 0px;
 }
 
 #batchs-last h3 {
