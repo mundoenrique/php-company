@@ -3474,6 +3474,9 @@ li.filter-1 a {
 	font-family: "preloslap";
 	font-weight: 500;
 }
+#widget-info-2 p {
+	text-align: left!important;
+}
 
 #widget-info-2 button {
 	margin: 10px 21px;
@@ -5748,7 +5751,7 @@ li#select-empresa select {
 	text-align: center;
 	padding: 5px;
 	color: #555;
-	max-width: 95px;
+	/* max-width: 95px; */
 	min-width: 80px;
 }
 
