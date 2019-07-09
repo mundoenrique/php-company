@@ -194,14 +194,6 @@ $(function () {
 				"Cancelar": {
 					text: 'Cancelar', class: 'novo-btn-secondary-modal', click: function () {
 					$(this).dialog("close"); }
-				},
-				"Eliminar":{
-
-					text: 'Eliminar',
-					class: 'novo-btn-primary-modal',
-					click: function () {
-						$(this).dialog('destroy');
-					}
 				}
 
 			}

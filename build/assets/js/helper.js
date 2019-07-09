@@ -80,6 +80,7 @@ function callNovoCore (verb, who, where, data, _response_) {
 		data = {
 			btn1: {
 				text: 'Aceptar',
+				class: 'novo-btn-primary-modal',
 				link: false,
 				action: 'close'
 			}
