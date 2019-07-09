@@ -3776,22 +3776,28 @@ li.filter-1 a {
 }
 
 ul#brands {
-	padding: 10;
 	float: left;
+	overflow: hidden;
+	position: absolute;
+	z-index: 1;
+	margin: 85px 0 0 37px !important;
+	padding: 0;
+	height: 70px;
+	width: 690px;
+	display: flex;
+	justify-content: center;
 }
 
 ul#brands li {
 	width: 100px;
 	height: 70px;
-	padding: 10px;
+	padding: 0px;
 	list-style: none;
 	display: inline;
-	float: left;
-	padding-right: 49px;
-	position: absolute;
-  left: 530px;
-  top: 295px;
+	float: none;
+	margin: 0;
 }
+
 
 ul#brands li p {
 	width: 100px;
