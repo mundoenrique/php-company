@@ -36,7 +36,7 @@ body {
 }
 
 a {
-	color: #10133f !important;
+	color: #0F265C !important;
 }
 
 a:focus {
@@ -254,7 +254,7 @@ table {
 }
 
 body {
-	color: #10133f;
+	color: #0F265C;
 	direction: ltr;
 	font-family: "prelo", sans-serif;
 	font-size: 12px;
@@ -277,7 +277,7 @@ h6 {
 }
 
 h1 {
-	color: #10133f;
+	color: #0F265C;
 	font-size: 32px;
 	line-height: 50px;
 	margin: 0 0 10px;
@@ -303,7 +303,7 @@ h4 {
 }
 
 h5 {
-	color: #10133f;
+	color: #0F265C;
 	font-size: 13px;
 	line-height: 18px;
 }
@@ -315,7 +315,7 @@ h6 {
 }
 
 a {
-	color: #10133f;
+	color: #0f265c;
 	cursor: pointer;
 	font-weight: 700;
 	text-decoration: none;
@@ -3163,7 +3163,7 @@ span#more-info a {
 }
 
 span#more-info a p {
-	color: #10133f;
+	color: #0F265C;
 	font-weight: 700;
 	font-size: 12px;
 }
