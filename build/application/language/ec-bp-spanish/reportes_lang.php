@@ -49,7 +49,7 @@ $lang['TITULO_REPORTES_TIPO']= "Tipo";
 $lang['TITULO_REPORTES_TARJETA']= "Tarjeta";
 $lang['TITULO_REPORTES_ANIO'] = "Año";
 $lang['ESTADOS_CUENTA_RESULT']= "Estado de cuenta";
-$lang['REPORTE_MENSAJE_ERROR']= "Por favor, complete los campos que se le indican en color rojo.";
+$lang['REPORTE_MENSAJE_ERROR']= "Por favor, completa los campos que se indican en color rojo.";
 
 
 // COMBOS

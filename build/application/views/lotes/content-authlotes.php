@@ -14,6 +14,7 @@
 	$cantXauth=0;
 	$loteXdesa=false;
 	$lotesxAuth=false;
+	$icon = $pais != "Ec-bp" ? '<span aria-hidden="true" class="icon" data-icon="&#xe03c;"></span>' : '';
 
 	if( !array_key_exists('ERROR', $data[0]) ){
 		$entrar=true;
@@ -94,7 +95,7 @@
 	if( count($info->listaPorFirmar)>0 ){
 	echo '
 		<div id="top-batchs">
-			<span aria-hidden="true" class="icon" data-icon="&#xe03c;"></span>'.lang("TITULO_LOTES_PORFIRMAR").'
+			'.$icon.lang("TITULO_LOTES_PORFIRMAR").'
 		</div>
 
 		<div id="lotes-contenedor" class="lotes-contenedor-autorizacion">
@@ -163,8 +164,8 @@
 			if( $entrar && count($info->listaPorAutorizar)>0 ){
 				echo '
 			<div id="top-batchs">
-				<span aria-hidden="true" class="icon" data-icon="&#xe03c;"></span>
-				'.lang("TITULO_LOTES_PORAUTORIZAR").'
+
+				'.$icon.lang("TITULO_LOTES_PORAUTORIZAR").'
 			</div>
 
 			<div id="lotes-contenedor">
@@ -179,7 +180,7 @@
 					echo			'<th>'.lang('TABLA_LOTESP_NROLOTE').'</th>';
 					echo			'<th id="td-nombre-2">'.lang('ID_FISCAL').'</th>';
 					echo			'<th id="td-nombre-2">Empresa</th>';
-					echo			'<th>Fecha carga</th>';
+					echo			'<th class="field-date">Fecha carga</th>';
 					echo			'<th>Tipo / Reg</th>';
 					echo			'<th>Monto</th>';
 					echo			'<th>Opciones</th>';
@@ -227,26 +228,27 @@
 								<center>
 									<table>
 										<tr>
-											<td>
+											<td valign="top">
 								<?php
 							echo '
-							<input id="claveAuth" type="password" name="claveAuth" placeholder="'.lang("MSG_INGRESE_CLAVE").'" value="" #batchs-last input style="margin-left: 10px;"/>';
+
+							<select id="selec_tipo_lote" name="tipo_lote_select">
+										<option value="0">'.lang('SELECT_OPTION_XLOTE').'</option>
+										<option value="1" selected>'.lang('SELECT_OPTION_XTIPO_lOTE').'</option>
+									</select>';
 
 							if($pais=='Ec-bp'){
 								?>
 									</td> <td valign="top">
 
 									<?php
-										echo '<select id="selec_tipo_lote" name="tipo_lote_select">
-										<option value="0">'.lang('SELECT_OPTION_XLOTE').'</option>
-										<option value="1" selected>'.lang('SELECT_OPTION_XTIPO_lOTE').'</option>
-									</select>';
+										echo '<input id="claveAuth" type="password" name="claveAuth" placeholder="'.lang("MSG_INGRESE_CLAVE").'" value="" #batchs-last input style="margin-left: 10px;    margin-bottom: 0px;"/>';
 									?>
-									</td></tr><tr><td>
+									</td></tr><tr><td valign="top">
 								<?php
 							}
 								echo 	'<center><button '.$borrar.' id="button-eliminar" type="submit" class="novo-btn-secondary">'.lang('TITULO_LOTESBTN_ELIMINAR').'</button></center>';
-								?> </td><td><?php
+								?> </td><td valign="top"><?php
 								echo 	'<center><button id="button-autorizar" type="submit" class="novo-btn-primary btn-authorization">'.lang('TITULO_LOTESBTN_AUTORIZAR').'</button></center>'; ?>
 									<td></tr>
 								</table>

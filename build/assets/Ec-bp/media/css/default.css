@@ -466,7 +466,7 @@ textarea {
 }
 
 #head {
-	background: #ffdd00;
+	background: #FFF ;
 	height: 60px;
 	left: 0;
 	overflow: hidden;
@@ -486,12 +486,15 @@ textarea {
 }
 
 #head-wrapper {
-	background: transparent url('../img/logo-pichincha-azul.svg') scroll no-repeat 0px 2px;
 	-ms-background-position-x: -297px;
 	height: 29px;
 	margin: 12px auto;
 	overflow: hidden;
 	width: 940px;
+}
+
+.img-header {
+	height: 28px;
 }
 
 #wrapper {
@@ -771,6 +774,8 @@ text-decoration: underline !important;
 #account-nav {
 	color: white;
 	margin-top: 10px;
+	min-width: 250px;
+	float: right;
 }
 
 #account-nav ul {
@@ -839,6 +844,15 @@ text-decoration: underline !important;
 	-o-border-radius: 3px;
 	border-radius: 3px;
 	background-color:#f0f0f0;
+}
+#extra-nav ul.menu li.menu-item a:active{
+	display:inline;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	-ms-border-radius: 3px;
+	-o-border-radius: 3px;
+	border-radius: 3px;
+	background-color:#dddbdb;
 }
 #extra-nav ul.menu li.menu-item a {
 	text-decoration: underline;
@@ -1763,6 +1777,7 @@ select.ui-datepicker-year {
 .ui-dialog .ui-dialog-buttonpane button {
 	margin: .5em .4em .5em 0;
 	cursor: pointer;
+	color: #10133f;
 }
 
 .ui-dialog .ui-resizable-se {
@@ -3187,7 +3202,7 @@ span#more-info a p b {
 	padding-left: 10px;
 	line-height: 12px;
 	font-size: 14px;
-	height: 12px;
+	height: 14px;
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	overflow: hidden;
@@ -3504,6 +3519,8 @@ li.filter-1 a {
 #products-list li img {
 	margin: 0px;
 	float: left;
+	width: 100px;
+	height: 80px;
 }
 
 .product-description:hover {
@@ -3752,8 +3769,8 @@ li.filter-1 a {
 
 #img-product p img {
 	float: left;
-	width: auto;
-	height: auto;
+	width: 250px;
+	height: 200px;
 	position: relative;
 	left: 200px;
 }
@@ -3815,6 +3832,18 @@ ul#brands li p img {
 	-o-border-radius: 3px;
 	border-radius: 3px;
 	background-color:#f0f0f0;
+
+}
+#text-product-detail p a:active{
+	display:inline;
+	padding-left:15px;
+	padding-right:15px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	-ms-border-radius: 3px;
+	-o-border-radius: 3px;
+	border-radius: 3px;
+	background-color:#d8d8d8;
 
 }
 #text-product-detail button {
@@ -3944,6 +3973,38 @@ ul#brands li p img {
 #lotes-contenedor-2 table td {
 	overflow: hidden;
 	text-align: center;
+}
+
+.marg-b{
+	margin-bottom: 10px;
+}
+
+.legend{
+	margin-left: 25px;
+}
+
+.square {
+	line-height: 1em;
+	display: inline-block;
+	padding: .7em .2em .2em;
+	width: 2em;
+	margin-right: 5px;
+	height: 1em;
+	color: #fff;
+	text-align: right;
+	vertical-align: bottom;
+}
+
+.done {
+	background: #8ece64;
+}
+
+.war {
+	background: #673ab7;
+}
+
+.err {
+	background: #eb695a;
 }
 
 #table-text-lotes tbody tr {
@@ -4140,6 +4201,11 @@ ul#brands li p img {
 }
 
 .table-text-aut #td-nombre-2 {
+	max-width: 100px !important;
+	min-width: 100px !important;
+}
+
+#td-nombre-2.bp-min-width {
 	max-width: 120px !important;
 	min-width: 120px !important;
 }
@@ -4644,9 +4710,8 @@ tr.GC-first th {
 	margin-top: 0px;
 	float: left;
 }
-
-#batchs-last #selec_tipo_lote {
-	margin: 12px 10px 0px 0px;
+#batchs-last #selec_tipo_lote{
+	 margin: 0px 0px 0px 0px;
 }
 
 #batchs-last h3 {
@@ -6196,6 +6261,15 @@ span.jPag-snext-img {
 	line-height: 18px;
 }
 
+.table-text-aut td.field-date {
+	max-width: 80px;
+	min-width: 80px;
+}
+.table-text-aut th.field-date {
+	max-width: 80px;
+	min-width: 80px;
+}
+
 .total-empr-dash {
 	float: left;
 	padding: 15px;
@@ -7300,53 +7374,6 @@ li.menu-item.security:nth-child(3) {
 	color: red;
 }
 
-
-
-/**Estilos de los botones NOVO NEW****/
-
-.novo-btn-primary,.novo-btn-secondary{
-	width:120px;
-	padding-left:15px;
-	padding-right:15px;
-}
-.novo-btn-primary-modal,.novo-btn-secondary-modal{
-	width:68px;
-	padding-left:15px;
-	padding-right:15px;
-}
-.novo-btn-primary,.novo-btn-primary-modal{
-	background: url('../img/BackgroundButton.png') left center no-repeat #ffdd00;
-}
-
-.novo-btn-primary:hover{
-	background: url('../img/BackgroundButtonHover.png') left center no-repeat #ffdd00;
-}
-.novo-btn-primary-modal:hover{
-	background: url('../img/BackgroundButtonHover.png') left center no-repeat #ffdd00;
-}
-
-.novo-btn-secondary,.novo-btn-secondary-modal{
-	border: 1px solid #ffdd00;
-	background:white !important;
-}
-/* .novo-btn-secondary-modal{
-	background:white;
-} */
-.novo-btn-secondary:hover{
-	border: 1px solid #ffdd00 !important;
-	background-color: #fffede !important;
-}
-
-.novo-btn-secondary-modal:hover{
-
-	background:#fffede !important;
-	border: 1px solid #ffdd00 !important;
-}
-.btn-authorization{
-	margin-top: 14px;
-	margin-left: -33px;
-	border: 1px solid #ffdd00;
-}
 /****Estilos de los botones NOVO****/
 button {
 
@@ -7373,8 +7400,70 @@ button:hover {
 button:active {
 	background: none;
 	background-color: #ffd000;
+	color: #10133f;
 }
 /*********************************/
+
+
+/**Estilos de los botones NOVO NEW****/
+
+.novo-btn-primary,.novo-btn-secondary{
+	width:120px;
+	padding-left:15px;
+	padding-right:15px;
+}
+.novo-btn-primary-modal,.novo-btn-secondary-modal{
+	width:68px;
+	padding-left:15px;
+	padding-right:15px;
+}
+.novo-btn-primary,.novo-btn-primary-modal{
+	background: url('../img/BackgroundButton.png') left center no-repeat #ffdd00;
+}
+
+.novo-btn-primary:hover{
+	background: url('../img/BackgroundButtonHover.png') left center no-repeat #ffdd00;
+}
+.novo-btn-primary:active{
+	background: #ffd000;
+}
+.novo-btn-primary-modal:hover{
+	background: url('../img/BackgroundButtonHover.png') left center no-repeat #ffdd00;
+}
+
+.novo-btn-secondary,.novo-btn-secondary-modal{
+	border: 1px solid #ffdd00;
+	background:white !important;
+}
+/* .novo-btn-secondary-modal{
+	background:white;
+} */
+.novo-btn-secondary:hover{
+	border: 1px solid #ffdd00 !important;
+	background-color: #fffede !important;
+}
+.novo-btn-secondary:active{
+	border: 1px solid #ffdd00 !important;
+	color:#10133f;
+	background-color: #fdfbb5 !important;
+}
+
+.novo-btn-secondary-modal:hover{
+
+	background:#fffede !important;
+	border: 1px solid #ffdd00 !important;
+}
+.novo-btn-secondary-modal:active{
+
+	background:#fdfbb5 !important;
+	border: 1px solid #ffdd00 !important;
+}
+.btn-authorization{
+	margin-bottom: 10px;
+	margin-top: 10px;
+	border: 1px solid #ffdd00;
+}
+
 
 /* .loadingScreenWindow .ui-button {
   display: none;

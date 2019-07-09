@@ -129,6 +129,8 @@ $(function() {
 		camposValid += '</div>';
 		if(!validInput) {
 			$(camposValid).dialog ({
+
+				dialogClass: "hide-close",
 				title: 'Campos inválidos',
 				modal: true,
 				resizable:false,
@@ -137,9 +139,10 @@ $(function() {
 					$('.ui-dialog-titlebar-close', ui.dialog).hide();
 				},
 				buttons: {
-					Aceptar: function () {
-						$(this).dialog("destroy");
-					}
+					"Aceptar": { text: 'Aceptar', class: 'novo-btn-primary-modal',
+				click: function () {
+					$(this).dialog("destroy"); }
+				}
 				}
 			});
 		} else {
@@ -159,6 +162,8 @@ $(function() {
 					type.prop('checked', false);
 
 					var $aux = $('#loading').dialog({
+
+						dialogClass: "hide-close",
 							title:'Enviando código de seguridad',
 							modal: true,
 							resizable:false,
@@ -189,7 +194,7 @@ $(function() {
 									close: function () {
 										$(this).dialog("destroy");
 									},
-									buttons: {	"Cancelar": { text: 'Cancelar', class: 'novo-btn-secondary-modal', style: 'border-color: #ffdd00 !important;background:white !important;',
+									buttons: {	"Cancelar": { text: 'Cancelar', class: 'novo-btn-secondary-modal',
 											mouseover: function(){
 
 											},click: function () {
@@ -204,6 +209,8 @@ $(function() {
 													$("#token-code").val('');
 													$(this).dialog('destroy');
 													$aux = $('#loading').dialog({
+
+														dialogClass: "hide-close",
 															title: 'Procesando',
 															modal: true,
 															resizable: false,
@@ -517,6 +524,8 @@ function toFormatShow (valor) {
 function notiPagOS (titu, msg, type) {
 	var canvas = "<div style='text-align: center;'>" + msg + "</div>";
 	$(canvas).dialog({
+
+		dialogClass: "hide-close",
 		title : titu,
 		modal:true,
 		resizable:false,
@@ -525,13 +534,15 @@ function notiPagOS (titu, msg, type) {
 			$('.ui-dialog-titlebar-close', ui.dialog).hide();
 		},
 		buttons:{
-			Aceptar: function(){
+			"Aceptar": { text: 'Aceptar', class: 'novo-btn-primary-modal',
+			click: function () {
 				$(this).dialog('destroy');
 				if (type == 'close') {
 					window.location.replace(baseURL + isoPais+'/logout');
 				} else if (type == 'ok') {
 					location.reload(true);
 				}
+			}
 			}
 		}
 	});
@@ -541,6 +552,8 @@ function notiPagOS (titu, msg, type) {
 function buscar(pgSgt) {
 
 	var $aux = $('#loading').dialog({
+
+		dialogClass: "hide-close",
 		title: "Buscando tarjetas",
 		modal: true,
 		resizable: false,
@@ -793,6 +806,8 @@ function calcularTrans(operacion) {
 function llamarWS(pass, url, operacion, mensaje) {
 
 	var $aux = $('#loading').dialog({
+
+		dialogClass: "hide-close",
 		title: mensaje,
 		modal: true,
 		bgiframe: true,
@@ -916,6 +931,8 @@ function notificacion(titulo, mensaje) {
 	var canvas = "<div>" + mensaje + "</div>";
 
 	$(canvas).dialog({
+
+		dialogClass: "hide-close",
 		title: titulo,
 		modal: true,
 		maxWidth: 700,
@@ -929,10 +946,13 @@ function notificacion(titulo, mensaje) {
 			$(this).dialog("close");
 		},
 		buttons: {
-			Aceptar: function() {
+			"Aceptar": { text: 'Aceptar', class: 'novo-btn-primary-modal',
+				click: function () {
+
 				resett();
 				$(this).dialog("close");
-			}
+				 }
+				}
 		}
 	});
 }

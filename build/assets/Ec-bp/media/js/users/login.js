@@ -75,6 +75,8 @@ var ingresar_ = function() {
                 } else if (data == 'conectado') {
                     $('<div><h6>Su última sesión se cerró de manera incorrecta. Tenga en cuenta que para salir de la aplicación debe seleccionar <strong>"Salir"</strong>.<br><strong>Pulse "Aceptar" para continuar.</strong></h6></div>')
                         .dialog({
+
+														dialogClass: "hide-close",
                             title: "Conexión Empresas Online",
                             modal: true,
                             maxWidth: 700,
@@ -85,7 +87,10 @@ var ingresar_ = function() {
                                 habilitar();
                             },
                             buttons: {
-                                Aceptar: function() {
+															"Aceptar": {
+																text: 'Aceptar',
+																class: 'novo-btn-primary-modal',
+																click: function () {
 																	var ceo_cook = decodeURIComponent(
 																		document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 																	);
@@ -95,8 +100,8 @@ var ingresar_ = function() {
                                     });
                                     $(this).dialog("destroy");
                                     habilitar();
-
-                                }
+																}
+															}
                             }
                         });
                 } else {
@@ -129,7 +134,9 @@ var ingresar_ = function() {
             $('.verifica_sesion').hide();
             if (cookie == '') {
                 $('<div><h5>La funcionalidad de cookies de su navegador se encuentra desactivada.</h5><h4>Por favor vuelva activarla.</h4></div>').dialog({
-                    title: "Conexión Empresas Online",
+
+										dialogClass: "hide-close",
+										title: "Conexión Empresas Online",
                     modal: true,
                     maxWidth: 700,
                     maxHeight: 300,
@@ -138,9 +145,13 @@ var ingresar_ = function() {
                         $(this).dialog("destroy");
                     },
                     buttons: {
-                        Aceptar: function() {
-                            $(this).dialog("destroy");
-                        }
+											"Aceptar": {
+												text: 'Aceptar',
+												class: 'novo-btn-primary-modal',
+												click: function () {
+												$(this).dialog("destroy");
+												}
+											}
                     }
                 });
             }

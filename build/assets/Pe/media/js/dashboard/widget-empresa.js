@@ -127,7 +127,7 @@ var widget_var = {
 				}
 			);
 		}else{
-			MarcarError('Debe seleccionar empresa y producto');
+			MarcarError('Debes seleccionar empresa y producto');
 		}
 	});
 

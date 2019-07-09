@@ -16,7 +16,7 @@ $urlCdn = get_cdn();
 				echo "<script>alert('".$listaEmpr[0]['msg']."'); location.reload();</script>";
 			}
 		}else{
-			echo "<option value=''>Seleccione una empresa</option>";
+			echo "<option value=''>Selecciona una empresa</option>";
 			foreach ($listaEmpr[0]->lista as $listado) {
 				echo "<option data-rif='$listado->acrif' data-nombre='$listado->acnomcia' data-accodcia='$listado->accodcia'>$listado->acnomcia</option>";
 			}

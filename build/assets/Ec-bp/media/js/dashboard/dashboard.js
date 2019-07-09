@@ -456,14 +456,15 @@ $("#listCompanies").on('mouseleave','.space-companies',function(){
 							if (!dataIcon) {
 								dataIcon = "&#xe033;";
 							}
+							var s = v.resumenProductos > 1 || v.resumenProductos < 1 ? 's' : '';
 							var canvas = '<li class="space-companies ' + cat + ' ' + pg + ' ' + pgf + '" id=' + v.accodcia + ' data-category=' + cat + '>';
 							canvas += '<a class=style-companies-item data-accodcia="' + v.accodcia.trim() + '" data-acrif="' + v.acrif.trim() + '" data-acnomcia="' + v.acnomcia.trim() + '" data-acrazonsocial="' + v.acrazonsocial.trim() + '" data-acdesc="' + v.acdesc.trim() + '" data-accodgrupoe="' + v.accodgrupoe.trim() + '"><span aria-hidden=true class=icon data-icon=' + dataIcon + '></span>';
 							canvas += '<p id=text-companies-T>' + charset(v.acnomcia.trim(), 'empresa asociada') + '</p> ';
 							canvas += '<p id=text-companies>' + $("#estandar").attr("data-fiscal") + ': ' + v.acrif.trim() + '</p> ';
 							canvas += '<p id=text-companies>' + v.acdesc.trim() + '</p></a>';
-							canvas += '<span id=more-info><a><p><b><span aria-hidden=true class=icon data-icon=&#xe027;></span>' + v.resumenProductos + '</b>Productos</p>';
-							canvas += '<p><b><span aria-hidden=true class=icon data-icon=&#xe013;></span>' + v.resumenSucursal.trim() + '</b>Sucursales</p>';
-							canvas += '<p><b class="contacto-dash"><span aria-hidden=true class="icon icon-contact" data-icon=&#xe070;></span></b>' + charset(v.acpercontac.trim(), 'contacto asociado').toLowerCase().replace(/(^| )(\w)/g, function (x) { return x.toUpperCase(); }) + '</p>';//resumenTarjetaHabiente Tarjetahabientes
+							canvas += '<span id=more-info><a><p><b>' + v.resumenProductos + '</b>Producto'+s+'</p>';
+							canvas += '<p><b>' + v.resumenSucursal.trim() + '</b>Sucursales</p>';
+							canvas += '<p><b></b>' + charset(v.acpercontac.trim(), 'contacto asociado').toLowerCase().replace(/(^| )(\w)/g, function (x) { return x.toUpperCase(); }) + '</p>';//resumenTarjetaHabiente Tarjetahabientes
 							canvas += '</a></span></li>';
 
 							var $newitem = $(canvas);

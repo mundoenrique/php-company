@@ -236,7 +236,7 @@ var accodgrupoe;
 				}
 			});
     }else{
-      MarcarError('Seleccione una empresa');
+      MarcarError('Selecciona una empresa');
     }
   });
 

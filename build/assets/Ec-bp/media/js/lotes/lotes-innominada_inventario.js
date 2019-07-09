@@ -53,13 +53,19 @@ var	calendario = function(input){
 	notificacion = function(titu, msj){
 		var canvas = "<div>"+msj+"</div>";
 			$(canvas).dialog({
+
+			dialogClass: "hide-close",
 				title : titu,
 				modal:true,
 				close: function(){$(this).dialog('destroy')},
 				resizable:false,
 				buttons:{
-					Aceptar: function(){
-						$(this).dialog('destroy');
+					"Aceptar": {
+						text: 'Aceptar',
+						class: 'novo-btn-primary-modal',
+						click: function () {
+						$(this).dialog("close");
+						}
 					}
 				}
 			});

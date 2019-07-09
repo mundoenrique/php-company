@@ -137,7 +137,6 @@ $(function () { // Document ready
 					format: CryptoJSAesJson
 				}).toString(CryptoJS.enc.Utf8))
 
-
 				var icon, batch, color, title;
 
 				if (!data.result.ERROR) {
@@ -153,6 +152,7 @@ $(function () { // Document ready
 
 					$.inArray('tebcon', data.funciones) != -1 ? confirma = "" : confirma = 'hidden';
 					$.inArray('tebelc', data.funciones) != -1 ? elimina = "" : elimina = 'hidden';
+					var anchor;
 
 					$.each(data.result.lista, function (k, v) {
 						if (v.estatus == 5) { //"con error";
@@ -160,29 +160,40 @@ $(function () { // Document ready
 							color = "icon-batchs-red";
 							dir = "detalle";
 							title = "Ver lote";
+							anchor = "<span aria-hidden='true' class='icon' data-icon=" + icon + "></span>";
 						} else if (v.estatus == 1) { //"ok";
 							icon = "&#xe083;";
 							color = "icon-batchs-green";
 							dir = "confirmacion";
 							title = "Confirmar lote";
+							anchor = "<span aria-hidden='true' class='icon' style='font-size:12px'>Confirmar</span>";
 						} else if (v.estatus == 0) { //verificando";
 							icon = "&#xe00a;";
 							color = "icon-batchs-orange";
 							title = "Validando lote";
+							anchor = "<span aria-hidden='true' class='icon' data-icon=" + icon + "></span>";
 						} else if (v.estatus == 6) { //ok pero con errores
 							icon = "&#xe083;";
 							color = "icon-batchs-purple";
 							title = "Confirmar lote";
+							anchor = "<span aria-hidden='true' class='icon' style='font-size:12px'>Confirmar</span>";
 						}
 
 						(v.numLote === "") ? v.numLote = '-': v.numLote;
 						(v.nombre === "") ? v.nombre = '-': v.nombre;
 
-						batch = "<tr><td id='icon-batchs' class=" + color + "><span aria-hidden='true' class='icon' data-icon=''></span></td>";
-						batch += "<td>" + v.numLote + "</td><td id='td-nombre'>" + v.nombreArchivo + "</td><td class='field-date'>" + v.fechaCarga + "</td><td>" + v.descripcion + "</td>";
-						batch += "<td id='icons-options'><a " + elimina + " id='borrar' title='Eliminar Lote' data-idTicket=" + v.idTicket + " data-idLote='" + v.idLote + "' data-arch='" + v.nombreArchivo + "'><span aria-hidden='true' class='icon' data-icon='&#xe067;'></span></a>";
-						batch += v.estatus == 6 ? "<a " + confirma + " class='detalle' title='Ver lote' data-idTicket=" + v.idTicket + " data-edo=" + v.estatus + " data-forma=" + forma + " data-opc='verLote'><span aria-hidden='true' class='icon' data-icon='&#xe003;'></span></a>" : "";
-						batch += "<a " + confirma + " class='detalle' title='" + title + "' data-idTicket=" + v.idTicket + " data-edo=" + v.estatus + " data-forma=" + forma + " ><span aria-hidden='true' class='icon' data-icon=" + icon + "></span></a></td></tr>";
+						batch = "<tr>";
+						batch+=   "<td id='icon-batchs' class=" + color + "></td>";
+						batch+=   "<td>" + v.numLote + "</td>";
+						batch+=   "<td id='td-nombre'>" + v.nombreArchivo + "</td>";
+						batch+=   "<td class='field-date'>" + v.fechaCarga + "</td>";
+						batch+=   "<td>" + v.descripcion + "</td>";
+						batch+=   "<td id='icons-options'>";
+						batch+=     "<a " + elimina + " id='borrar' title='Eliminar Lote' data-idTicket=" + v.idTicket;
+						batch+=     " data-idLote='" + v.idLote + "' data-arch='" + v.nombreArchivo + "'>";
+						batch+=     "<span aria-hidden='true' class='icon' data-icon='&#xe067;'></span></a>";
+						batch+=     v.estatus == 6 ? "<a " + confirma + " class='detalle' title='Ver lote' data-idTicket=" + v.idTicket + " data-edo=" + v.estatus + " data-forma=" + forma + " data-opc='verLote'><span aria-hidden='true' class='icon' data-icon='&#xe003;'></span></a>" : "";
+						batch += "<a " + confirma + " class='detalle' title='" + title + "' data-idTicket=" + v.idTicket + " data-edo=" + v.estatus + " data-forma=" + forma + ">"+anchor+"</a></td></tr>";
 
 						$("#actualizador").hide();
 						$("#table-text-lotes tbody").append(batch);
@@ -297,11 +308,19 @@ $(function () { // Document ready
 								$('#pass').val('');
 								$(this).dialog('destroy');
 								var $aux = $('#loading').dialog({
+
+									dialogClass: "hide-close",
 									title: "Eliminando lote",
 									modal: true,
 									resizable: false,
-									close: function () {
-										$aux.dialog('close');
+									buttons: {
+										"Aceptar": {
+											text: 'Aceptar',
+											class: 'novo-btn-primary-modal',
+											click: function () {
+											$(this).dialog("close");
+											}
+										}
 									}
 								});
 								ceo_cook = decodeURIComponent(
@@ -387,6 +406,8 @@ $(function () { // Document ready
 		var canvas = "<div>" + mensaje + "</div>";
 
 		$(canvas).dialog({
+
+			dialogClass: "hide-close",
 			title: titulo,
 			modal: true,
 			maxWidth: 700,
@@ -396,16 +417,16 @@ $(function () { // Document ready
 				$(this).dialog("destroy");
 			},
 			buttons: {
-				OK: function () {
-					$(this).dialog("destroy");
+				"Aceptar": {
+					text: 'Aceptar',
+					class: 'novo-btn-secondary-modal',
+					click: function () {
+					$(this).dialog("close");
+					}
 				}
 			}
 		});
 	}
 
 	//--Fin POUP Notificacion
-
-
-
-
 }); //--Fin document ready :)
