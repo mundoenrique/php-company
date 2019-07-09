@@ -30,69 +30,71 @@ if($osConfirmV){
 }
 ?>
 <div id="content-products">
-    <h1><?php echo lang('TITULO_CONSULTA_OS'); ?></h1>
+  <h1><?php echo lang('TITULO_CONSULTA_OS'); ?></h1>
 
-    <h2 class="title-marca">
-        <?php echo ucwords(mb_strtolower($programa));?>
-    </h2>
+  <h2 class="title-marca">
+    <?php echo ucwords(mb_strtolower($programa));?>
+  </h2>
 
-    <ol class="breadcrumb">
-        <li>
-            <a href="<?php echo $urlBase; ?>/dashboard" rel="start"><?php echo lang('BREADCRUMB_INICIO'); ?></a>
-        </li>
-        /
-        <li>
-            <a href="<?php echo $urlBase; ?>/dashboard" rel="section"><?php echo lang('BREADCRUMB_EMPRESAS'); ?></a>
-        </li>
-        /
-        <li>
-            <a href="<?php echo $urlBase; ?>/dashboard/productos"
-                rel="section"><?php echo lang('BREADCRUMB_PRODUCTOS'); ?></a>
-        </li>
-        /
-        <li>
-            <a href="<?php echo $urlBase; ?>/lotes/autorizacion"
-                rel="section"><?php echo lang('BREADCRUMB_AUTORIZACION'); ?></a>
-        </li>
-        /
-        <li>
-            <a rel="section"><?php echo lang('BREADCRUMB_ORDEN_SERVICIO'); ?></a>
-        </li>
-    </ol>
+  <ol class="breadcrumb">
+    <li>
+      <a href="<?php echo $urlBase; ?>/dashboard" rel="start"><?php echo lang('BREADCRUMB_INICIO'); ?></a>
+    </li>
+    /
+    <li>
+      <a href="<?php echo $urlBase; ?>/dashboard" rel="section"><?php echo lang('BREADCRUMB_EMPRESAS'); ?></a>
+    </li>
+    /
+    <li>
+      <a href="<?php echo $urlBase; ?>/dashboard/productos"
+        rel="section"><?php echo lang('BREADCRUMB_PRODUCTOS'); ?></a>
+    </li>
+    /
+    <li>
+      <a href="<?php echo $urlBase; ?>/lotes/autorizacion"
+        rel="section"><?php echo lang('BREADCRUMB_AUTORIZACION'); ?></a>
+    </li>
+    /
+    <li>
+      <a rel="section"><?php echo lang('BREADCRUMB_ORDEN_SERVICIO'); ?></a>
+    </li>
+  </ol>
 
-    <div id="lotes-general" class='elem-hidden'>
+  <div id="lotes-general" class='elem-hidden'>
 
-        <div id='filtroOS'>
+    <div id='filtroOS'>
 
-            <div id="top-batchs">
-                <span aria-hidden="true" class="icon" data-icon="&#xe07a;"></span>
-                <?php echo lang('TITULO_CRITERIOSBUSQ'); ?>
-            </div>
+      <div id="top-batchs">
+				<?php if($pais != 'Ec-bp'): ?>
+				<span aria-hidden="true" class="icon" data-icon="&#xe07a;"></span>
+				<?php endif; ?>
+        <?php echo lang('TITULO_CRITERIOSBUSQ'); ?>
+      </div>
 
-            <div id="lotes-contenedor">
-							<form id="form-criterio-busqueda" onsubmit="return false">
-                <span class="info-OD">
-                    <h5>5 días</h5>
-                    <input class="required login" type="radio" name="dias" value="5" />
-                </span>
-                <span class="info-OD">
-                    <h5>10 días</h5>
-                    <input class="required login" type="radio" name="dias" value="10" />
-                </span>
-                <span class="info-OD">
-                    <h5>Fecha inicial</h5>
-                    <input id='fecha_inicial' name="start-dmy-date" class="required login" placeholder="DD/MM/AA" value=""
-                        onfocus="javascript:this.value=''" />
-                </span>
-                <span class="info-OD">
-                    <h5>Fecha final</h5>
-                    <input id='fecha_final' name="end-dmy-date" class="required login" placeholder="DD/MM/AA" value=""
-                        onfocus="javascript:this.value=''" />
-                </span>
-                <div class="info-OD">
-                    <h5>Estatus de Lote</h5>
-                    <select id="status_lote" name="batch" class="required">
-                        <?
+      <div id="lotes-contenedor">
+        <form id="form-criterio-busqueda" onsubmit="return false">
+          <span class="info-OD">
+            <h5>5 días</h5>
+            <input class="required login" type="radio" name="dias" value="5" />
+          </span>
+          <span class="info-OD">
+            <h5>10 días</h5>
+            <input class="required login" type="radio" name="dias" value="10" />
+          </span>
+          <span class="info-OD">
+            <h5>Fecha inicial</h5>
+            <input id='fecha_inicial' name="start-dmy-date" class="required login" placeholder="DD/MM/AA" value=""
+              onfocus="javascript:this.value=''" />
+          </span>
+          <span class="info-OD">
+            <h5>Fecha final</h5>
+            <input id='fecha_final' name="end-dmy-date" class="required login" placeholder="DD/MM/AA" value=""
+              onfocus="javascript:this.value=''" />
+          </span>
+          <div class="info-OD">
+            <h5>Estatus de Lote</h5>
+            <select id="status_lote" name="batch" class="required">
+              <?
                         if( array_key_exists("ERROR", $tipoStatus[0]) ){
                             if($tipoStatus['ERROR']=='-29'){
                                 echo "<script>alert('Usuario actualmente desconectado'); location.reload();</script>";
@@ -105,32 +107,32 @@ if($osConfirmV){
                                 echo '<option value="'.$tipos->codEstatus.'">'.ucfirst(mb_strtolower($tipos->descEstatus)).'</option>';
                             }
                         }?>
-                    </select>
-                </div>
-							</form>
-            </div>
+            </select>
+          </div>
+        </form>
+      </div>
 
-            <div id="batchs-last">
-						<?php
+      <div id="batchs-last">
+        <?php
 							if($pais=='Ec-bp'){
 								?>
-									<center>
-								<?php
+        <center>
+          <?php
 							}
 						?>
-						<button id='buscarOS' class="novo-btn-primary">Buscar</button>
-						<?php
+          <button id='buscarOS' class="novo-btn-primary">Buscar</button>
+          <?php
 						if($pais=='Ec-bp'){
 							?>
-								</center>
-							<?php
+        </center>
+        <?php
 						}
 						?>
-            </div>
+      </div>
 
-        </div>
+    </div>
 
-        <?php
+    <?php
         if(isset($datos) && $datos!=false){
 
             if( array_key_exists("ERROR", $datos) ) {
@@ -139,40 +141,44 @@ if($osConfirmV){
                     echo "<script>alert('Usuario actualmente desconectado'); location.reload();</script>";
                 }
                 ?>
-        <div id="top-batchs" class='top-listOS'>
-            <span aria-hidden="true" class="icon" data-icon="&#xe035;"></span>
-            <?php echo lang('TITULO_CONSULTA_OSE'); ?>
-        </div>
-        <div id="lotes-contenedor" class="ordenes_ser">
-            <h2><?php echo $datos['ERROR'] ?></h2>
-        </div>
-        <?php	}
+    <div id="top-batchs" class='top-listOS'>
+			<?php if($pais != 'Ec-bp'): ?>
+			<span aria-hidden="true" class="icon" data-icon="&#xe035;"></span>
+			<?php endif; ?>
+      <?php echo lang('TITULO_CONSULTA_OSE'); ?>
+    </div>
+    <div id="lotes-contenedor" class="ordenes_ser">
+      <h2><?php echo $datos['ERROR'] ?></h2>
+    </div>
+    <?php	}
 
             if(array_key_exists('lista',$datos) ) {
                 if(count($datos->lista)>0){
                     ?>
-        <div id="top-batchs" class='top-listOS'>
-            <span aria-hidden="true" class="icon" data-icon="&#xe035;"></span>
-            <?php echo lang('TITULO_CONSULTA_OSE'); ?>
-        </div>
+    <div id="top-batchs" class='top-listOS'>
+			<?php if($pais != 'Ec-bp'): ?>
+			<span aria-hidden="true" class="icon" data-icon="&#xe035;"></span>
+			<?php endif; ?>
+      <?php echo lang('TITULO_CONSULTA_OSE'); ?>
+    </div>
 
-        <div id="lotes-contenedor" class="ordenes_ser">
-            <table id="tabla-datos-general" class="tabla-reportes-OS">
-                <thead>
-                    <tr id="datos-principales-OS">
-                        <th style='display:none'></th>
-                        <th style='display:none'></th>
-                        <th><?php echo lang('TABLA_COS_ID_ORDEN') ?></th>
-                        <th><?php echo lang('TABLA_COS_FECHA') ?></th>
-                        <?= !(in_array("tebpgo", $funciones) && $statusAth === 'AUTORIZADO') ? '<th>' . lang('ID_FISCAL') . '</th>' : '' ?>
-                        <th class="th-empresa"><?php echo lang('TABLA_COS_EMPRESA') ?></th>
-                        <th><?php echo lang('TABLA_COS_MONTO_OS') ?></th>
-                        <th><?php echo lang('TABLA_COS_MONTO_DEPOSITADO') ?></th>
-                        <?= (in_array("tebpgo", $funciones) && $statusAth === 'AUTORIZADO') ? "<th></th>" : '' ?>
-                    </tr>
-                </thead>
-                <tbody id="tbody-datos-general" class="tbody-reportes-OS jslista">
-                    <?php
+    <div id="lotes-contenedor" class="ordenes_ser">
+      <table id="tabla-datos-general" class="tabla-reportes-OS">
+        <thead>
+          <tr id="datos-principales-OS">
+            <th style='display:none'></th>
+            <th style='display:none'></th>
+            <th><?php echo lang('TABLA_COS_ID_ORDEN') ?></th>
+            <th><?php echo lang('TABLA_COS_FECHA') ?></th>
+            <?= !(in_array("tebpgo", $funciones) && $statusAth === 'AUTORIZADO') ? '<th>' . lang('ID_FISCAL') . '</th>' : '' ?>
+            <th class="th-empresa"><?php echo lang('TABLA_COS_EMPRESA') ?></th>
+            <th><?php echo lang('TABLA_COS_MONTO_OS') ?></th>
+            <th><?php echo lang('TABLA_COS_MONTO_DEPOSITADO') ?></th>
+            <?= (in_array("tebpgo", $funciones) && $statusAth === 'AUTORIZADO') ? "<th></th>" : '' ?>
+          </tr>
+        </thead>
+        <tbody id="tbody-datos-general" class="tbody-reportes-OS jslista">
+          <?php
                             $lc=0;
 														$tempidOrdenLotes=array();
 
@@ -263,33 +269,33 @@ if($osConfirmV){
                             echo "<input type='hidden' id='tempIdOrdenL' name='tempIdOrdenL' value='$tempIdOrdenL' />";
 
                             ?>
-                </tbody>
-            </table>
-        </div>
-        <?php }
+        </tbody>
+      </table>
+    </div>
+    <?php }
             }
 
             if(array_key_exists('lotesNF',$datos) ){
                 if(count($datos->lotesNF)>0){
                     ?>
-        <div id="top-batchs">
-            <span aria-hidden="true" class="icon" data-icon="&#xe046;"></span>
-            <?php echo lang('TITULO_CONSULTA_OS_LOTESNF') ?>
-        </div>
-        <div id="lotes-contenedor">
-            <table id='tablelotesNF' class="tabla-lotesNF">
-                <thead>
-                    <tr id="datos-principales" class="tabla-lotesNF">
-                        <th><?php echo lang('ID_FISCAL') ?></th>
-                        <th class="th-empresa"><?php echo lang('TABLA_COS_EMPRESA') ?></th>
-                        <th><?php echo lang('TABLA_COS_NRO_LOTE')?></th>
-                        <th><?php echo lang('TABLA_COS_FECHA_CARGA') ?></th>
-                        <th><?php echo lang('TABLA_COS_TIPO_LOTE').' / '.lang('TABLA_CANT_REG') ?></th>
-                        <th><?php echo lang('TABLA_COS_STATUS') ?></th>
-                    </tr>
-                </thead>
-                <tbody id="tbody-datos-general" class="tbody-reportes-OS jslistaNF">
-                    <?php
+    <div id="top-batchs">
+      <span aria-hidden="true" class="icon" data-icon="&#xe046;"></span>
+      <?php echo lang('TITULO_CONSULTA_OS_LOTESNF') ?>
+    </div>
+    <div id="lotes-contenedor">
+      <table id='tablelotesNF' class="tabla-lotesNF">
+        <thead>
+          <tr id="datos-principales" class="tabla-lotesNF">
+            <th><?php echo lang('ID_FISCAL') ?></th>
+            <th class="th-empresa"><?php echo lang('TABLA_COS_EMPRESA') ?></th>
+            <th><?php echo lang('TABLA_COS_NRO_LOTE')?></th>
+            <th><?php echo lang('TABLA_COS_FECHA_CARGA') ?></th>
+            <th><?php echo lang('TABLA_COS_TIPO_LOTE').' / '.lang('TABLA_CANT_REG') ?></th>
+            <th><?php echo lang('TABLA_COS_STATUS') ?></th>
+          </tr>
+        </thead>
+        <tbody id="tbody-datos-general" class="tbody-reportes-OS jslistaNF">
+          <?php
                             $tempidOrdenLotesNF=array();
                             foreach ($datos->lotesNF as $valueNF) {
                                 array_push($tempidOrdenLotesNF, $valueNF->acidlote);
@@ -307,11 +313,11 @@ if($osConfirmV){
                             $tempIdOrdenLNF=serialize($tempidOrdenLotesNF);
                             echo "<input type='hidden' id='tempIdOrdenLNF' name='tempIdOrdenLNF' value='$tempIdOrdenLNF' />";
                             ?>
-                </tbody>
-            </table>
+        </tbody>
+      </table>
 
-        </div>
-        <?php }
+    </div>
+    <?php }
             }
 
             if( !array_key_exists("ERROR", $datos) && $datos->rc==-88 ){
@@ -320,23 +326,23 @@ if($osConfirmV){
 
         } ?>
 
-    </div>
+  </div>
 
 </div>
 <form id='formulario' method='post'></form>
 
 <form id='detalle_lote' method='post' action="<?php echo $urlBase ?>/lotes/autorizacion/detalle">
-		<input type='hidden' name='<?php echo $ceo_name ?>' value='<?php echo $ceo_cook ?>'>
-    <input type='hidden' id='data-OS' name='data-OS' value='<?php echo serialize($datos) ?>' />
+  <input type='hidden' name='<?php echo $ceo_name ?>' value='<?php echo $ceo_cook ?>'>
+  <input type='hidden' id='data-OS' name='data-OS' value='<?php echo serialize($datos) ?>' />
 </form>
 
 <div id='loading' style='text-align:center; padding-top:30px;' class='elem-hidden'>
-    <?php echo insert_image_cdn("loading.gif"); ?></div>
+  <?php echo insert_image_cdn("loading.gif"); ?></div>
 
 
 <div id="msg-certificate-notifi" style="display:none">
-	<div id="msg-info" class="comb-content"></div>
-	<div id="actions" class="comb-content actions-buttons">
-		<button id="close-info" class="buttons-action">Aceptar</button>
-	</div>
+  <div id="msg-info" class="comb-content"></div>
+  <div id="actions" class="comb-content actions-buttons">
+    <button id="close-info" class="buttons-action">Aceptar</button>
+  </div>
 </div>

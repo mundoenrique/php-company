@@ -33,7 +33,11 @@ $urlCdn = get_cdn();
 
 	<div id="lotes-general">
 
-		<div id="top-batchs"><span aria-hidden="true" class="icon" data-icon="&#xe07a;"></span> <?php echo lang('CRITERIOS_BUSQUEDA'); ?>
+		<div id="top-batchs">
+			<?php if($pais != 'Ec-bp'): ?>
+			<span aria-hidden="true" class="icon" data-icon="&#xe07a;"></span>
+			<?php endif;?>
+				<?php echo lang('CRITERIOS_BUSQUEDA'); ?>
 		</div>
 		<div id="lotes-contenedor">
 			<div id="lotes-2">
