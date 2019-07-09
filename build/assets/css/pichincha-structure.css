@@ -970,6 +970,7 @@ button.ui-button::-moz-focus-inner {
 
 .ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset {
 	float: right;
+
 }
 
 .ui-dialog .ui-dialog-buttonpane button {
@@ -1446,13 +1447,11 @@ li.filter-1 a {
 }
 
 button.r-button {
-	float: right;
 	margin: 0;
 }
 
 .cancel-anchor {
 	padding: 0 10px 0 0;
-	float: right;
 	margin-left: 15px;
 }
 
@@ -2231,7 +2230,7 @@ tr.GC-first th {
 }
 
 #batchs-last #selec_tipo_lote {
-	margin: 12px 10px 0px 0px;
+	margin: 0px 10px 0px 0px;
 }
 
 #batchs-last #button-eliminar {
@@ -3934,3 +3933,5 @@ a {
 .general-form-msg {
 	width: 100%;
 }
+
+
