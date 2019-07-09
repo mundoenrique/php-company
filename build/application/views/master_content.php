@@ -106,7 +106,7 @@
     <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
       <div class="ui-dialog-buttonset">
         <button type="button" id="cancel" class="cancel-button"></button>
-        <button type="button" id="accept" class=""></button>
+        <button type="button" id="accept" class="novo-btn-primary" style="width:120px;"></button>
       </div>
     </div>
   </div>
