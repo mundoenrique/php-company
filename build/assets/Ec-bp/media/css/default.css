@@ -3202,7 +3202,7 @@ span#more-info a p b {
 	padding-left: 10px;
 	line-height: 12px;
 	font-size: 14px;
-	height: 12px;
+	height: 14px;
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	overflow: hidden;
@@ -3519,6 +3519,8 @@ li.filter-1 a {
 #products-list li img {
 	margin: 0px;
 	float: left;
+	width: 100px;
+	height: 80px;
 }
 
 .product-description:hover {
@@ -3767,8 +3769,8 @@ li.filter-1 a {
 
 #img-product p img {
 	float: left;
-	width: auto;
-	height: auto;
+	width: 250px;
+	height: 200px;
 	position: relative;
 	left: 200px;
 }
@@ -4193,6 +4195,11 @@ ul#brands li p img {
 }
 
 .table-text-aut #td-nombre-2 {
+	max-width: 100px !important;
+	min-width: 100px !important;
+}
+
+#td-nombre-2.bp-min-width {
 	max-width: 120px !important;
 	min-width: 120px !important;
 }
@@ -6246,6 +6253,15 @@ span.jPag-snext-img {
 
 .field-date {
 	line-height: 18px;
+}
+
+.table-text-aut td.field-date {
+	max-width: 80px;
+	min-width: 80px;
+}
+.table-text-aut th.field-date {
+	max-width: 80px;
+	min-width: 80px;
 }
 
 .total-empr-dash {
