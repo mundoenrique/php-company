@@ -170,6 +170,10 @@ $('#lotes-2').on('click','#select-allA', function() {
 						},
 						buttons: {
 							siguiente: function () {
+								var ceo_cook = decodeURIComponent(
+									document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+								);
+								$('#autorizacion').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'">');
 								$('#autorizacion').submit();
 							}
 						}
@@ -374,7 +378,10 @@ $('#lotes-2').on('click','#borrar', function(){
 
 
 $('#lotes-2').on('click','#detalle', function(){ // autorizacion/detalleAuth
-    var lote = $(this).attr('idlote');
+		var lote = $(this).attr('idlote');
+		var ceo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
     $(':checkbox').each(function(){this.checked=0;});
     $("form#detalleAuth").append('<input type="hidden" name="data-lote" value="'+lote+'" />');
     $("form#detalleAuth").submit();
