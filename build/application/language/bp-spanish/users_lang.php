@@ -96,6 +96,7 @@ $lang['LOGOUT_BTN_BACK'] ='Aceptar';
 
 $lang["TITULO_TERMINOS"]='TÉRMINOS Y CONDICIONES';
 $lang["TERMINOS"] = '<h2>USO DE CANALES ELECTRÓNICOS</h2>
+<div class="box-term">
 <p>
 Este acuerdo contiene los términos y condiciones que rigen el acceso y uso de los canales electrónicos de Banco Pichincha C.A. (Banca Electrónica, Banca Móvil, Billetera Móvil, Aplicaciones Móviles y demás plataformas tecnológicas o canales que ponga a disposición), que permiten a sus clientes acceder a productos y servicios bancarios a través de Internet y de sus dispositivos móviles de manera ágil y segura.
 </p>
@@ -109,6 +110,7 @@ Adicionalmente, usted se compromete a cumplir con los términos y condiciones de
 Al aceptar estos Términos y Condiciones acuerda acceder y usar los canales electrónicos de Banco Pichincha C.A., sujetándose a lo estipulado en este acuerdo y en todos los documentos que rigen cada uno de los productos o servicios, los cuales podrían incluir —sin limitarse a ellos— el pago de cargos relacionados con el uso y el mantenimiento de dichos productos o servicios de acuerdo con la normativa vigente, recogidos en el Tarifario de Servicios Financieros publicado en el portal web de Banco Pichincha (<a href="https://www.pichincha.com">www.pichincha.com</a>), cuyo contenido declara conocer y acepta el pago de tales cargos con la sola utilización de los servicios o la realización de cualquier transacción a través de los canales electrónicos.
 </p>
 <h3>1. Definiciones</h3>
+<br>
 <p>
 Para los propósitos de este acuerdo, las expresiones “usted” y “su” se refieren al cliente de los canales electrónicos; “Banco”, “nosotros” y “nuestro” se refieren a Banco Pichincha C.A.
 </p>
@@ -125,6 +127,7 @@ b) “Día Laborable”: Son todos los días del año, excepto los sábados, dom
 c) “Servicio”: se refiere a los servicios prestados por Banco Pichincha C.A. a través de los canales electrónicos, que permitirán a usted, sujeto al cumplimiento de las medidas de seguridad impuestas por el Banco, solicitar y aceptar productos y servicios ofertados por Banco Pichincha C.A., obtener información de saldos y realizar operaciones y transacciones bancarias determinadas o habilitadas por el Banco, las mismas que se regirán por los contratos particulares entre usted y el Banco, así como, la normativa vigente que les sea aplicable. Podrán utilizar el servicio los clientes de Banco Pichincha C.A. que se encuentren vinculados a cada canal electrónico y que cuenten con un usuario registrado, clave de acceso, número secreto, registro biométrico o cualquier otro medio de identificación establecido por el Banco para el acceso. Como regla general, el cliente necesitará un dispositivo con acceso a Internet, SMS y/o USSD que cumpla los requerimientos de hardware y software detallados en este documento.
 </p>
 <h3>2. Comunicaciones Electrónicas</h3>
+<br>
 <h4>a. Consentimiento</h4>
 <p>
 ·	Entiendo que la aceptación de los términos y condiciones de este acuerdo, así como las solicitudes e instrucciones que transmita a través de cualquier de los canales electrónicos del Banco, constituyen mi declaración de voluntad y por tanto serán válidos y vinculantes. Este consentimiento también aplicará a cualquier persona nombrada en la Cuenta en cualquier calidad.
@@ -166,6 +169,7 @@ Si usted no cuenta con las especificaciones antes mencionada, ya sea para su equ
 Asimismo, el Banco no se responsabiliza por el grado de compatibilidad de su equipo o dispositivo ni por los costos o gastos asociados con la adquisición o utilización de éstos. Como tal, es su responsabilidad mantener un equipo o dispositivo que sea compatible con las especificaciones del canal electrónico correspondiente (Banca Móvil, Banca Electrónica, Billetera Móvil, etc.). También serán de su responsabilidad los costos y gastos asociados con la instalación, el uso y el mantenimiento de su equipo, dispositivo o aplicaciones, de las líneas telefónicas, y con su proveedor de acceso a Internet o de servicio inalámbrico y todos los servicios y/o canales de comunicación utilizados para acceder a los servicios del Banco a través de sus canales electrónicos.
 </p>
 <h3>3. Medidas de seguridad</h3>
+<br>
 <p>
 Para el acceso a los canales electrónicos, las medidas de seguridad de Banco Pichincha C.A. requieren, durante el proceso de afiliación, la creación de un usuario y una contraseña y/o el registro de rasgos biométricos, los cuales constituyen los medios de autenticación que permitirán al Banco verificar su identidad para darle acceso a los canales electrónicos y pueda solicitar o aceptar productos, servicios y operaciones bancarias ofrecidos por Banco Pichincha C.A. a través de éstos, así como servirán para validar la autenticidad de las transacciones que realice por medio de ellos.
 </p>
@@ -185,6 +189,7 @@ Si usted sospecha que el acceso a los canales electrónicos o a los Servicios of
 El Banco se reserva la facultad de limitar o suspender temporal o definitivamente el acceso a los canales electrónicos cuando por razones de seguridad, comerciales o por presentarse eventos que pongan en peligro los intereses del Banco, de sus clientes o de terceros, cuando encuentre procedente hacerlo.
 </p>
 <h3>4. Servicios disponibles</h3>
+<br>
 <p>Dependiendo de la naturaleza de su relación con Banco Pichincha C.A., los Servicios que podría solicitar y aceptar a través de los canales electrónicos a su disposición incluyen, sin limitar, los siguientes:</p>
 <p>· Transferencias directas e interbancarias</p>
 <p>· Pago de servicios y facturas</p>
@@ -201,6 +206,7 @@ Adicionalmente, se pueden incluir servicios de valor agregado, tales como notici
 A su discreción, cada cierto tiempo Banco Pichincha podrá añadir, eliminar o suspender servicios ofrecidos a través de sus canales electrónicos. Estos términos y condiciones regirían todos los futuros servicios por canales electrónicos. Banco Pichincha actualizará este acuerdo, para informarle de cualquier cambio. Al utilizar cualquier servicio nuevo que estuviera disponible, estará aceptando este documento y obligándose a cumplirlo en todas sus partes, así como con cualquier actualización relacionada con el nuevo servicio.
 </p>
 <h3>5. Acceso a los canales electrónicos</h3>
+<br>
 <p>
 Para el acceso y uso de los canales electrónicos el Banco puede generar códigos de seguridad (OTP) que serán enviados al correo electrónico y/o número de teléfono celular que tiene registrado en el Banco y que servirán como medida de validación y seguridad. La generación de códigos de seguridad implica su conocimiento y aceptación de las condiciones de utilización, por lo que en caso de expiración deberá generar un nuevo código, y al sobrepasar el número máximo de intentos fallidos definido por el Banco, se bloqueará el usuario; sin que esta situación pueda entenderse en ningún caso como una falla en los servicios prestados o el incumplimiento de las obligaciones a cargo del Banco.
 </p>
@@ -211,6 +217,7 @@ Sujeto a cualquier limitación expresada a continuación, contará con acceso a 
 Banco Pichincha C.A. acuerda actualizar periódicamente la información que usted obtendría a través de los canales electrónicos. Sin embargo, usted conoce y acepta que Banco Pichincha C.A. no está obligado de forma alguna a realizar tales actualizaciones en horas específicas del día ni siguiendo un itinerario determinado. Los balances que muestre su cuenta pueden incluir depósitos o transacciones sujetos a nuestra verificación. Los saldos reflejados en los canales electrónicos podrían diferir, debido a depósitos o transacciones que estén en proceso, cheques por cobrar o algún otro retiro, pago o cargo. Las transacciones realizadas por los canales electrónicos se regirán a los horarios establecidos por Banco Pichincha C.A. y/o por el Banco Central del Ecuador, si fuere del caso.
 </p>
 <h3>6. Derechos y responsabilidades del usuario (solo aplicable a cuentas usadas principalmente para fines personales, familiares o domésticos)</h3>
+<br>
 <h4>a. Notificación de Errores o Preguntas sobre sus Transferencias Electrónicas</h4>
 <p>
 Si al revisar sus estados de cuenta o registro de transferencias, usted detecta o sospecha que ha ocurrido un error o necesita asistencia, deberá inmediatamente contactarse a nuestro Call Center.
@@ -244,6 +251,7 @@ No obstante las condiciones establecidas en esta sección, en caso de que cualqu
 Si usted ha perdido su usuario, contraseña, tarjeta de Débito, Tarjeta de Coordenadas, PIN o cualquier otro habilitante o mecanismo de identificación, o sospecha que alguien lo ha hurtado, o si detecta alguna transferencia no autorizada en una de sus cuentas, o si sospecha de algún tipo de actividad ilícita en su cuenta, debe informarlo a Banco Pichincha C.A. inmediatamente. Banco Pichincha C.A. no asume obligación adicional ni responsabilidad por pérdidas en que usted incurra como resultado de transacciones no autorizadas, sujeto a las limitaciones que imponen la Ley y las regulaciones. También debe notificarnos inmediatamente si sus estados de cuenta reflejaran retiros, transferencias o pagos no autorizados por usted. Si usted no notificase a Banco Pichincha C.A. inmediatamente tenga conocimiento de tales hechos  y, con dicha notificación hubiere sido posible evitar el acceso no autorizado, el Banco entenderá que dichas transacciones u operaciones fueron realizadas por usted o con su consentimiento, por lo que no asumirá responsabilidad alguna por ellas.
 </p>
 <h3>7. Solicitud de Servicios Adicionales</h3>
+<br>
 <p>
 Si usted solicita o acepta a través de los canales electrónicos un servicio adicional o algún cambio a su cuenta o a algún servicio que ya le proveamos, , Banco Pichincha C.A. está autorizado a procesar tal solicitud como si fuera sido presentada de forma física. Los canales electrónicos le proveerán una confirmación tan pronto complete su solicitud. No obstante lo anterior, tales solicitudes adicionales de servicio no se interpretarán como efectivas hasta que Banco Pichincha C.A. confirme su aceptación o le preste el servicio.
 </p>
@@ -251,6 +259,7 @@ Si usted solicita o acepta a través de los canales electrónicos un servicio ad
 Usted conoce y acepta expresamente que los identificadores y claves generadas por usted y/o aquellas asignadas por el Banco para el acceso y/o transacción en cualquier canal electrónico constituye una firma electrónica habilitada para poder manifestar su aceptación expresa sobre los servicios brindados por el Banco, sin la necesidad de verificación adicional o firma de documentos de forma física. Asimismo, la aceptación de servicios brindados a través de medios electrónicos, electromecánicos, telefónicos o a través de un mensaje de datos constituye aceptación suficiente del servicio a ser bridado, sin la necesidad de verificación adicional por parte del Banco. Para acceder a los servicios por medios electrónicos, usted acepta someterse a los procedimientos o mecanismos de seguridad que el Banco exija para el efecto.
 </p>
 <h3>8. Confidencialidad</h3>
+<br>
 <p>
 Con la aceptación de este documento, usted autoriza que los datos personales que de manera libre, consciente y voluntaria proporcione a Banco Pichincha C.A., sean recopilados, almacenados y usados por el Banco con el objeto de identificarle y ofrecerle los Servicios a través de los canales electrónicos.
 </p>
@@ -276,10 +285,12 @@ e. Ofertarle productos y darle a conocer campañas comerciales de productos o se
 Para más información, por favor refiérase a nuestra Política de Privacidad, publicada en <a href="https://www.pichincha.com">www.pichincha.com</a>.
 </p>
 <h3>9. Declaraciones y Garantías</h3>
+<br>
 <p>
 Banco Pichincha C.A. no garantiza, expresa o implícitamente, la exactitud de la información referencial o de los materiales (incluido texto, gráficas, enlaces u otros) contenidos en los canales electrónicos, y expresamente rechaza toda responsabilidad por errores u omisiones que estos puedan presentar. Usted conoce que ha recibido de Banco Pichincha C.A. información adecuada en relación con el acceso y uso de los canales electrónicos, y que usted ha decidido, libre y voluntariamente, afiliarse y obtener acceso a ellos de acuerdo con los términos y condiciones aquí expresados. Usted declara y garantiza a Banco Pichincha C.A. que no tiene la intención ni usará los canales electrónicos con el propósito, directo o indirecto, de proveer servicios (incluidos, pero sin estar limitar, financieros, administrativos o de procesamiento de datos, entre otros relacionados) en nombre de alguna otra parte o entidad. Cualquier enlace a páginas de organizaciones que no estén afiliadas a Banco Pichincha C.A. se provee tan solo como una sugerencia temática que podría ser de interés para usted. Banco Pichincha C.A. no provee garantía alguna en relación con la exactitud, la integridad o la confiabilidad de esas páginas, o en relación con cuan adecuado sea para un propósito específico, ni garantiza que esas páginas no afiliadas y de terceros estén desprovistas de defectos, reclamaciones, o de virus u otros potenciales riesgos. Estos enlaces no representan un patrocinio ni generan responsabilidad por las opiniones, ideas, productos, informaciones o servicios que en sus páginas brinden.
 </p>
 <h3>10. Limitación de Responsabilidad</h3>
+<br>
 <p>
 Banco Pichincha C.A. no será responsable por la información o las instrucciones incorrectas que usted provea. Usted conoce y acepta que Banco Pichincha C.A procesará la información que usted provea, por tanto, autoriza a Banco Pichincha C.A. a tomar acción a partir de toda instrucción que provenga, o que aparente provenir en un grado razonable, de usted mediante los canales electrónicos. Banco Pichincha C.A. no está obligado a tomar medidas posteriores para confirmar o autenticar tales instrucciones y tomará acción sobre ellas tan pronto las reciba, sin necesidad de confirmación posterior. Ni Banco Pichincha C.A. ni ningún otro proveedor de información serán responsables por deficiencias en el grado de exactitud, de la totalidad, de la disponibilidad o de la conveniencia de dicha información, ni por inversiones o decisiones que se tomen basadas en ella. Salvo que quede expreso en las provisiones de este instrumento o en algún otro acuerdo aplicable a la relación entre usted y Banco Pichincha C.A., o que lo determine la Ley, usted acuerda que Banco Pichincha C.A. no será responsable por pérdida o daño alguno, directo o indirecto, causado por los canales electrónicos, o que de alguna forma surja o se relacione con el uso y el acceso a ellos de parte suya. Usted queda en la obligación de indemnizar a Banco Pichincha C.A. y eximirlo de cualquier responsabilidad ante cualquier demanda o reclamación presentada contra Banco Pichincha C.A., que busque imputar responsabilidad en Banco Pichincha C.A., en violación de las disposiciones de esta sección. El término “Banco Pichincha”, usado en esta sección, incluye a Banco Pichincha C.A., sus filiales y subsidiarias, así como a sus accionistas, directores, oficiales, empleados o los agentes de cada uno de estos. Salvo que la ley exija lo contrario, de ninguna manera Banco Pichincha C.A. es legalmente responsable ante usted por concepto de daños especiales, indirectos o consecuentes, los cuales incluyen, pero sin limitarse a ellos, pérdida de ganancias u honorarios de abogados, aún si estuviésemos nosotros advertidos de antemano sobre la posibilidad de tales daños.
 </p>
@@ -290,6 +301,7 @@ El Banco no asume ni podrá adjudicársele responsabilidad alguna, por daños o 
 En el caso de menores de edad, el/los padre(s), tutor legal o quien posea la patria potestad o custodia del menor, al prestar su consentimiento a este documento, acepta y asume total responsabilidad por las acciones del(los) menor(es) al utilizar los canales electrónicos. Banco Pichincha C.A. no se responsabiliza por el acceso de menores de edad a los canales electrónicos, sin autorización de los padres o el acceso de un tercero en el canal electrónico de un titular que haya accedido con los identificadores y claves registrados por dicho titular.
 </p>
 <h3>11. Comunicación con Banco Pichincha</h3>
+<br>
 <p>
 En caso de necesitar asistencia relacionada con los canales electrónicos o si necesita comunicarse con Banco Pichincha C.A., debe llamar a nuestro Call Center al (02) 2 999 999 a nivel nacional.
 </p>
@@ -300,6 +312,7 @@ Para información adicional relacionada con Banco Pichincha C.A. o alguna de sus
 Para comunicación inmediata con Banco Pichincha, debe llamar a nuestro Call Center o visitar alguna de nuestras sucursales. Por este medio nos autoriza a grabar, usar y/o copiar cualquier formulario electrónico que nos envíe. Usted acepta y conoce que, para propósitos de la seguridad en el manejo de información, Banco Pichincha no solicita la entrega de información personal, usuario, claves de seguridad o número de tarjetas de crédito, a través de correo electrónico, por lo que es su responsabilidad mantener en secreto dicha información .
 </p>
 <h3>12. Vigencia</h3>
+<br>
 <p>
 No obstante, su(s) cuenta(s) en Banco Pichincha, sus afiliadas o subsidiarias permanecerán activas a pesar de la cancelación de los canales electrónicos. Si usted o una persona autorizada notifican su intención de cancelar el uso de los canales electrónicos, o si la cuenta se cancelara por alguna razón, usted asume responsabilidad por las transacciones autorizadas previamente a la cancelación.
 </p>
@@ -322,6 +335,7 @@ Banco Pichincha C.A. se reserva el derecho de cancelar inmediatamente su acceso 
 Banco Pichincha C.A. podría notificarle con antelación, en caso de cancelación del canal electrónico.
 </p>
 <h3>13. Disposiciones misceláneas</h3>
+<br>
 <p>
 a. Banco Pichincha C.A. se reserva el derecho de enmendar, actualizar, modificar o descontinuar los canales electrónicos en cualquier momento, así como de enmendar o modificar estos términos y condiciones en cualquier tiempo, previa notificación escrita o digital a usted.
 </p>
@@ -337,6 +351,7 @@ d. Banco Pichincha C.A. se reserva el derecho de iniciar cualquier acción legal
 <p>
 e. El acceso a los canales electrónicos y el uso de las contraseñas en él queda limitado a los usuarios autorizados por Banco Pichincha C.A. Banco Pichincha C.A. puede usar todos los recursos legales a su disposición contra cualquier persona que tratase y/o usase los canales electrónicos sin la debida autorización o con una intención para la cual no se ha desarrollado.
 </p>
+</div>
 ';
 
 
