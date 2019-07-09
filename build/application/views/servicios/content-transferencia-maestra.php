@@ -205,14 +205,19 @@
             <?php
 					}
 				?>
-            <button id='cargo-tjta' class='elem-hidden'><?= lang('CARGO'); ?></button>
-            <button id='abonar-tjta' class='elem-hidden'><?= lang('ABONO'); ?></button>
-            <button id='consultar-tjta' class='elem-hidden'><?= lang('CONSULTA'); ?></button>
-            <?php
+					<button id='cargo-tjta' class='elem-hidden'><?= lang('CARGO'); ?></button>
+					<button id='abonar-tjta' class='elem-hidden'><?= lang('ABONO'); ?></button>
+					<?php
 					if($pais=='Ec-bp'){
 						?>
-          </center>
-          <?php
+
+					<button id='consultar-tjta' class='elem-hidden novo-btn-primary'><?= lang('CONSULTA'); ?></button>
+							</center>
+						<?php
+					}else{?>
+
+					<button id='consultar-tjta' class='elem-hidden'><?= lang('CONSULTA'); ?></button>
+					<?php
 					}
 				?>
         </form>

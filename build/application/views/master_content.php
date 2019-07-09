@@ -16,9 +16,12 @@
 
 <body base-url="<?= base_url(); ?>" asset-url="<?= assetUrl(); ?>" country="<?= $countryUri; ?>"
   pais="<?= $countryConf; ?>">
-	<?php if($countryUri != 'bp'): ?>
+	<?php if($countryUri != 'bp' || $module != 'login'): ?>
   <header id="head">
     <div id="head-wrapper">
+		<?php if($countryUri == 'bp'): ?>
+		<img class="img-header" src="<?= $this->asset->insertFile('logo-pichincha-azul.png', 'images'); ?>" alt="Banco PICHINCHA">
+		<?php endif; ?>
       <a id="branding" rel="start"></a>
       <?php
 				if($logged) {
@@ -106,7 +109,7 @@
     <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
       <div class="ui-dialog-buttonset">
         <button type="button" id="cancel" class="cancel-button"></button>
-        <button type="button" id="accept" class=""></button>
+        <button type="button" id="accept" class="novo-btn-primary" style="width:120px;"></button>
       </div>
     </div>
   </div>

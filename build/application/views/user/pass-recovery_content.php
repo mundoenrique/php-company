@@ -23,8 +23,23 @@
 				</div>
 			</fieldset>
 			<div class="form-actions">
+
+			<?php
+			//	echo "sdjkha".base_url('inicio');
+			$pais=$this->urlCountry = $this->uri->segment(1, 0);
+				if($pais=='bp'){
+					?>
+						<center>
+					<?php
+				}
+			?>
 				<a class="cancel-anchor" href="<?= base_url('inicio') ?>">Cancelar</a>
 				<button id="btn-pass-recover" class="r-button">Continuar</button>
+				<?php if($pais=='bp'){
+					?>
+						</center>
+					<?php
+				}?>
 			</div>
 		</form>
 	</article>
