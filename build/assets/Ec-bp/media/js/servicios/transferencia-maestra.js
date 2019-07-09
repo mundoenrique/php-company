@@ -139,7 +139,7 @@ $(function() {
 					$('.ui-dialog-titlebar-close', ui.dialog).hide();
 				},
 				buttons: {
-					"Aceptar": { text: 'Aceptar', class: 'novo-btn-secondary-modal',
+					"Aceptar": { text: 'Aceptar', class: 'novo-btn-primary-modal',
 				click: function () {
 					$(this).dialog("destroy"); }
 				}

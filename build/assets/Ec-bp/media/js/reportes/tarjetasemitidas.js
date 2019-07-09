@@ -126,7 +126,7 @@ $(document).ready(function() {
 
 					div=$(document.createElement("div")).appendTo(contenedor);
 					div.attr("id","top-batchs");
-					$(div).append('<span data-icon="&#xe046;" class="icon" aria-hidden="true"></span>Tarjetas emitidas');
+					$(div).append('Tarjetas emitidas');
 
 			if(data.rc == "0"){
 								div=$(document.createElement("div")).appendTo(contenedor);

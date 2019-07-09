@@ -191,13 +191,8 @@ $(function () {
 			close: function () { $(this).dialog('destroy') },
 			resizable: false,
 			buttons: {
-				"Cancelar": {
-					text: 'Cancelar', class: 'novo-btn-secondary-modal', click: function () {
-					$(this).dialog("close"); }
-				},
-				"Eliminar":{
-
-					text: 'Eliminar',
+				"Aceptar":{
+					text: 'Aceptar',
 					class: 'novo-btn-primary-modal',
 					click: function () {
 						$(this).dialog('destroy');

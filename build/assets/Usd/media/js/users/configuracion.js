@@ -1017,7 +1017,7 @@ $(function () {
 									$('#archivo').val("");
 								});
 							} else {
-								notificacion("Cargar archivo sucursales", "Seleccione una Empresa.");
+								notificacion("Cargar archivo sucursales", "Selecciona una empresa.");
 							}
 						});
 				} else {

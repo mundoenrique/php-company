@@ -9,7 +9,7 @@ $lang['FOOTER'] ='Todos los derechos reservados.';
 //WIDGET EMPRESAS
 $lang['WIDGET_EMPRESAS_BTNSELECCIONAR']= "Seleccionar otra empresa";
 $lang['WIDGET_EMPRESAS_BTNOTROSPROGRAMAS']= "Conozca otros programas";
-$lang['WIDGET_EMPRESAS_OPC_SEL_EMPRESAS']= "Seleccione una empresa";
+$lang['WIDGET_EMPRESAS_OPC_SEL_EMPRESAS']= "Selecciona una empresa";
 $lang['WIDGET_EMPRESAS_BTNAPLICAR']= "Seleccionar";
 
 //MIGAJASDEPAN
