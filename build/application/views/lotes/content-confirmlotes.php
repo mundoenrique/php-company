@@ -45,7 +45,9 @@ log_message('info',json_encode($data));
 			?>
 
 			<div id="top-batchs">
+				<?php if($pais != 'Ec-bp'): ?>
 				<span aria-hidden="true" class="icon" data-icon="&#xe03c;"></span>
+				<?php endif; ?>
 				<?php echo lang('TITULO_LOTES_CONFIRMACIONT'); ?>
 			</div>
 			<div id="lotes-contenedor">
