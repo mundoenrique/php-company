@@ -76,14 +76,16 @@ if( !$("#loteXdesa").val()&& !$('#lotesxAuth').val() ){
 				data = JSON.parse(CryptoJS.AES.decrypt(data.code, data.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
          $aux.dialog('destroy');
         if(!data.ERROR){
-
+					$('<div>Proceso exitoso.<h5>Listando lotes</h5></div>').dialog({
+						title: "Firmando lote",
+						modal: true,
+						bgiframe: true
+					});
          location.reload();
         }else{
            if(data.ERROR=='-29'){
                 alert('Usuario actualmente desconectado'); location.reload();
               }else{
-
-
           notificacion('Firmando lote',data.ERROR);
           }
         }
@@ -168,6 +170,10 @@ $('#lotes-2').on('click','#select-allA', function() {
 						},
 						buttons: {
 							siguiente: function () {
+								var ceo_cook = decodeURIComponent(
+									document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+								);
+								$('#autorizacion').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'">');
 								$('#autorizacion').submit();
 							}
 						}
@@ -180,10 +186,7 @@ $('#lotes-2').on('click','#select-allA', function() {
     }else{
         notificacion("Autorizando lotes","<h2>Verifique que: </h2><h3>1. Ha seleccionado al menos un lote.</h3><h3>2. Ha ingresado su contraseña.</h4><h3>3. Ha seleccionado el tipo orden de servicio.</h3>");
     }
-
   });
-
-
  $('#lotes-2').on('click','#button-eliminar', function(){ //eliminar en autorizar
 
     var pass = $('#claveAuth').val();
@@ -375,7 +378,10 @@ $('#lotes-2').on('click','#borrar', function(){
 
 
 $('#lotes-2').on('click','#detalle', function(){ // autorizacion/detalleAuth
-    var lote = $(this).attr('idlote');
+		var lote = $(this).attr('idlote');
+		var ceo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
     $(':checkbox').each(function(){this.checked=0;});
     $("form#detalleAuth").append('<input type="hidden" name="data-lote" value="'+lote+'" />');
     $("form#detalleAuth").submit();

@@ -4782,7 +4782,7 @@ border-right:2px solid $color-base2!important;
 }
 
 #userfile {
-  margin: 0px !important;
+	margin: 0px !important;
   /*width:auto!important;*/
 }
 
@@ -6795,7 +6795,7 @@ button.green:hover {
   width: 200px;
   /*border: none;*/
   float: left;
-  clear: both;
+ /* clear: both;*/
 }
 
 #campos-1 span {
@@ -6861,7 +6861,7 @@ button.green:hover {
 
 .lapiz-mod {
   float: left !important;
-  width: 17px !important;
+  width: 7px !important;
   border: none !important;
   line-height: 3;
 }
@@ -6889,7 +6889,8 @@ button.green:hover {
 
 #opciones-btn button {
   float: right;
-  margin: 5px;
+ /* margin: 5px;*/
+ margin-left:7px;
 }
 
 .select-empresa {

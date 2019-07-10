@@ -116,7 +116,7 @@ $('select.categories-products').val('*');
 // mostrar resultados nulos
 function resultNull(){
   $container.isotope({onLayout: function( $elems, instance ){
-           $('#products-list').height($('#products-list').height()+30);
+
         },resizesContainer:false});
 
   if ( !$container.data('isotope').$filteredAtoms.length ) {

@@ -110,18 +110,18 @@
 				</div>
 				<div id="campos-1">
 					<span>
-						<p id="first"><?php echo lang('SUC_AREA'); ?></p>
+						<p id="first" style="width:250px;"><?php echo lang('SUC_AREA'); ?></p>
 						<input type="text" id="suc_area" class='nro' placeholder= "Código de área">
 					</span>
 					<span>
-						<p id="first"><?php echo lang('SUC_TELEFONO'); ?></p>
+						<p id="first" style="width:250px;"><?php echo lang('SUC_TELEFONO'); ?></p>
 						<input type = "text" id = "suc_tlf" class='nro' placeholder = "Teléfono">
 					</span>
 
 				</div>
 				<div id="campos-1">
 					<span>
-						<p id="first"><?php echo lang('SUC_CONTACTO'); ?></p>
+						<p id="first" style="width:250px;"><?php echo lang('SUC_CONTACTO'); ?></p>
 						<input type="text" id="suc_contacto" placeholder= "Nombre del contacto" size="26" maxlength='100'>
 					</span>
 					<span>
@@ -135,7 +135,7 @@
 				<div id="opciones-btn" style='margin-top:20px'>
 					<button id='agregarSuc'><?php echo lang('EMP_BTN_ADD_CONTACT'); ?></button>
 					<button id='btn-modif-suc'><?php echo lang('SUC_BTN_MODIFICAR'); ?></button>
-					<input id="pass_suc" type="password" class="pass" style="margin-left:245px; margin-top: 4px" placeholder="Ingrese su contraseña">
+					<input id="pass_suc" type="password" class="pass" style="margin-left:245px;" placeholder="Ingrese su contraseña">
 
 			</div>
 		</div>

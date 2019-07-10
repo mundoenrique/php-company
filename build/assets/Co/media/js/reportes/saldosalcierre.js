@@ -235,7 +235,8 @@ $(document).ready(function() {
 
 				return valido;
 			}
-				var filtro_busq={};
+
+			var filtro_busq={};
 			function buscarSaldos(paginaActual){
 			    	var $consulta;
 

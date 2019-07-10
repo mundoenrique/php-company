@@ -39,6 +39,10 @@ $lang['TITULO_CREAR_BENEFICIARIO'] = 'Crear beneficiario';
 
 //DETALLE DE LOTES
 $lang['TITULO_LOTES_DETALLE']= "Detalles del Lote";
+$lang['TITULO_CUENTAS_INNO']= "Cuentas innominadas";
+$lang['TITULO_CUENTAS_INVINNO']= "Inventario de cuentas innominadas";
+$lang['DWL_XLS'] = 'Descargar Reporte';
+$lang['DWL_PDF'] ="Exportar a PDF";
 $lang['BREADCRUMB_AUTH']= "Autorizacion";
 $lang['BREADCRUMB_INICIO']= "Inicio";
 $lang['BREADCRUMB_LOTES']= "Lotes";

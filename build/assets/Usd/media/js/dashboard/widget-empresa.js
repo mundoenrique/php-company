@@ -47,6 +47,8 @@ var widget_var = {
 // Seleccionar empresa
 
 	$("#empresasS").on("change",function(){
+
+		$("#seleccionar_empresaS").remove();
 		widget_var.acrif = $(this).val();
 		widget_var.acnomcia = $('option:selected', this).attr('acnomcia');
 		widget_var.acrazonsocial = $('option:selected', this).attr('acrazonsocial');

@@ -1,5 +1,7 @@
 $(function() {
 
+	var params={};
+
     $("#cargando_empresa").fadeIn("slow");
     $.getJSON(baseURL + api + isoPais + '/empresas/lista').always(function(response) {
 			data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
