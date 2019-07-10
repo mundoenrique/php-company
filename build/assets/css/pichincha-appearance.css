@@ -44,7 +44,7 @@
 
 body {
 	background: #fff;
-	color: #555;
+	color: #72787A;
 	direction: ltr;
 	font-family: "Prelo Medium", sans-serif;
 	font-size: 14px;
@@ -86,7 +86,7 @@ h6 {
 }
 
 h1 {
-	color: #10133f;
+	color: #0f265c;
 	font-size: 32px;
 	line-height: 50px;
 }
@@ -321,7 +321,13 @@ table {
 	background-size: 100%;
 	background-repeat: no-repeat;
 }
-
+.box-term {
+	text-align: left;
+	width: 990px;
+}
+.box-term h4 {
+	color: #72787A;
+}
 .welcome-title {
 	line-height: 30px;
 	color: #033572;
@@ -669,8 +675,7 @@ button .requesting {
 #extra-nav ul.menu li.menu-item a {
 
 	text-decoration:underline;
-	font-family: Prelo Semibold;
-	font-size: 12px;
+	font-size: 14px;
 }
 #extra-nav ul.menu li.menu-item a:hover{
 	display:inline;
