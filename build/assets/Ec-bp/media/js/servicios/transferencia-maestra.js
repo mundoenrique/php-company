@@ -112,7 +112,7 @@ $(function() {
 		}
 
 		if(account.val() === '0') {
-			camposValid += '<p>* Seleccione una cuenta</p>';
+			camposValid += '<p>* Selecciona una cuenta</p>';
 			validInput = false;
 			account.css('border-color', '#cd0a0a')
 		} else {
@@ -120,7 +120,7 @@ $(function() {
 		}
 
 		if(type.val() === undefined) {
-			camposValid += '<p>* Seleccione cargo o  abono</p>';
+			camposValid += '<p>* Selecciona cargo o abono</p>';
 			validInput = false;
 			$('#charge-or-credit').css('border', '1px solid #cd0a0a');
 		} else {
@@ -446,7 +446,7 @@ function paramsValidate(type){
 			} else
 				notificacion('Cargo a tarjeta', 'Contraseña inválida');
 		} else {
-			notificacion('Consulta a tarjeta', '<h2>Verifique que: </h2><h3>1. Ha seleccionado al menos una tarjeta</h3><h3>2. Ha ingresado su contraseña</h3>');
+			notificacion('Consulta a tarjeta', '<h2>Verifica que: </h2><h3>1. Has seleccionado al menos una tarjeta</h3><h3>2. Has ingresado su contraseña</h3>');
 		}
 	});
 
@@ -460,7 +460,7 @@ function paramsValidate(type){
 			else
 				notificacion('Cargo a tarjeta', 'Contraseña inválida');
 		} else if ($('#clave').val() == '') {
-			notificacion('Abono a tarjeta', '<h2>Verifique que: </h2><h3>1. Ha ingresado el monto a abonar</h3><h3>2. Ha ingresado su contraseña</h3>');
+			notificacion('Abono a tarjeta', '<h2>Verifica que: </h2><h3>1. Ha ingresado el monto a abonar</h3><h3>2. Has ingresado su contraseña</h3>');
 		}
 	});
 
@@ -474,7 +474,7 @@ function paramsValidate(type){
 			else
 				notificacion('Cargo a tarjeta', 'Contraseña inválida');
 		} else if ($('#clave').val() == '') {
-			notificacion('Cargo a tarjeta', '<h2>Verifique que: </h2><h3>1. Ha ingresado el monto a cargar</h3><h3>2. Ha ingresado su contraseña</h3>');
+			notificacion('Cargo a tarjeta', '<h2>Verifica que: </h2><h3>1. Ha ingresado el monto a cargar</h3><h3>2. Has ingresado su contraseña</h3>');
 		}
 	});
 

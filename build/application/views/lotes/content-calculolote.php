@@ -53,7 +53,9 @@ $reten = ($reten == NULL) ? "nonEmpty" : trim($reten, ', ');
 			if($data->lista){
 				?>
 				<div id="top-batchs">
+					<?php if($pais != 'Ec-bp'): ?>
 					<span aria-hidden="true" class="icon" data-icon="&#xe035;"></span>
+					<?php endif; ?>
 					<?php echo lang('TITULO_ORDEN_SERVICIO'); ?>
 				</div>
 				<div id="lotes-contenedor" class="b-rs">

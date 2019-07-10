@@ -46,7 +46,7 @@ var	calendario = function(input){
 			}
 		}
 		if(valid){
-			notificacion("Solicitud de Innominadas","<h2>Verifique que:</h2>" + contenido);
+			notificacion("Solicitud de Innominadas","<h2>Verifica que:</h2>" + contenido);
 		}
 		return valid;
 	},

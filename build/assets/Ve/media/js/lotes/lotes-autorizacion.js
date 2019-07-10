@@ -620,10 +620,10 @@ function envioAjaxAutorizar(baseURL, isoPais, js_var, pass, osTipo, select_modal
 				});
 		} else {
 			var
-				mensajeNoti = '<h2>Verifique que:</h2>';
+				mensajeNoti = '<h2>Verifica que:</h2>';
 			mensajeNoti += '<h3>1. Ha seleccionado al menos un lote</h3>';
-			mensajeNoti += '<h3>2. Ha ingresado su contraseña</h3>';
-			mensajeNoti += '<h3>3. Ha seleccionado el tipo orden de servicio</h3>';
+			mensajeNoti += '<h3>2. Has ingresado su contraseña</h3>';
+			mensajeNoti += '<h3>3. Has seleccionado el tipo orden de servicio</h3>';
 
 			notificacion("Autorizando lotes", mensajeNoti);
 		}

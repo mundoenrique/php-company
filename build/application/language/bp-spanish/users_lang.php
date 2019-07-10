@@ -1,6 +1,6 @@
 <?php
 $lang['WELCOME_TITLE']='Bienvenido a Conexión Empresas';
-$lang['WELCOME_MESSAGE']='Con este sistema las gestiones de pago de su empresa son más eficientes, seguras y rápidas.<br>Empiece a disfrutar de todas las ventajas que le ofrece Conexión Empresas.';
+$lang['WELCOME_MESSAGE']='Con este sistema las gestiones de pago de tu empresa son más eficientes, seguras y rápidas.<br>Empieza a disfrutar de todas las ventajas que te ofrece Conexión Empresas.';
 $lang['WIDGET_LOGIN_TITLE']="Cliente afiliado";
 $lang['WIDGET_ADDCLIENT_TITLE']="Nuevo Cliente";
 

@@ -45,12 +45,6 @@ $(function () {
 
 			dialogClass: "hide-close",
 			title: 'Confirmar cálculo orden de servicio',
-			buttons: {
-				"Cancelar": { text: 'Cancelar', class: 'novo-btn-secondary-modal',
-				click: function () {
-				$(this).dialog("close"); }
-			}
-			},
 			modal: true,
 			resizable: false
 		});

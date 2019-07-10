@@ -260,7 +260,7 @@ $lang['ERROR_RECARGAS'] = 'No fue posible obtener la lista de recargas, por favo
 $lang['ERROR_DESCARGA'] = 'No fue posible descargar el archivo, por favor intenta más tarde';
 
 //recuperar contraseña
-$lang["TITULO_ERROR"] = 'No ha sido posible procesar su solicitud.';
+$lang["TITULO_ERROR"] = 'No ha sido posible procesar tu solicitud.';
 $lang["ERROR_RIF"] = 'Por favor verifique el No. de NIT de la empresa.';
 $lang["ERROR_USER"] = 'El Usuario no está registrado en el sistema.';
 $lang["ERROR_MAIL"] = 'El correo indicado no corresponde, por favor verifíquelo e inténtelo de nuevo.';
