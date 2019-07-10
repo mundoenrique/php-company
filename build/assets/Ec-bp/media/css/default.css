@@ -3369,7 +3369,7 @@ li.filter-1 a {
 }
 
 #widget-info {
-	padding: 10px 10px 10px 10px;
+	padding:10px 18px 10px 2px;
 	color: #0F265C;
 	float: left;
 	font-weight: 700;
@@ -5420,7 +5420,12 @@ li#select-empresa select {
 #lotesConfirmacion-short h5 {
 	font-weight: 700;
 }
-
+center {
+	padding-top:20px;
+}
+.b-rs>.botones-OS {
+	padding-top: 40px;
+}
 #type-1 {
 	color: #aa78c2;
 	font-weight: 700;
