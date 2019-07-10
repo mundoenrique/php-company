@@ -638,7 +638,7 @@ $(function () {
 		});
 
 		$("#anterior-22").unbind("click");
-		$("#anterior-22").click(function () {
+		$("#anterior-22, #anterior-2").click(function () {
 			//buscarReposiciones(1);
 			$(".isotope-item").show();
 			$('#listCompanies').find('.style-companies-item-activa').removeClass('style-companies-item-activa');
@@ -656,7 +656,7 @@ $(function () {
 		});
 
 		$("#siguiente-22").unbind("click");
-		$("#siguiente-22").click(function () {
+		$("#siguiente-22, #siguiente-2").click(function () {
 			//buscarReposiciones(total);
 			$(".isotope-item").show();
 			$('#listCompanies').find('.style-companies-item-activa').removeClass('style-companies-item-activa');

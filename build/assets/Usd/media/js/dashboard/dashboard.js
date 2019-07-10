@@ -624,7 +624,7 @@ function paginado(paginas, filtro){
     });
 
     $("#anterior-22").unbind("click");
-    $("#anterior-22").click(function(){
+    $("#anterior-22, #anterior-2").click(function(){
       //buscarReposiciones(1);
       $('#listCompanies').find('.style-companies-item-activa').removeClass('style-companies-item-activa');
       $("span#more-info").fadeOut("fast");
@@ -639,7 +639,7 @@ function paginado(paginas, filtro){
     });
 
     $("#siguiente-22").unbind("click");
-    $("#siguiente-22").click(function(){
+    $("#siguiente-22, #siguiente-2").click(function(){
       //buscarReposiciones(total);
       $('#listCompanies').find('.style-companies-item-activa').removeClass('style-companies-item-activa');
       $("span#more-info").fadeOut("fast");
