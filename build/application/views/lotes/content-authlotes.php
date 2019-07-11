@@ -263,7 +263,7 @@
 								'<select id="selec_tipo_lote" name="tipo_lote_select">
 									<option value="0">'.lang('SELECT_OPTION_XLOTE').'</option>
 									<option value="1" selected>'.lang('SELECT_OPTION_XTIPO_lOTE').'</option>
-								</select>';
+								</select><input id="claveAuth" type="password" name="claveAuth" placeholder="'.lang("MSG_INGRESE_CLAVE").'" value="" #batchs-last input style="margin-left: 10px;    margin-bottom: 0px;"/>';
 								echo $selectTipoLote;
 							}
 			echo '</form>
