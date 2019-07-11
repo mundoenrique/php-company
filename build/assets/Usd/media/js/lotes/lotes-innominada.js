@@ -18,7 +18,7 @@ var datatable;
 
       var canvas = "<div id='dialog-confirm'>";
 	      canvas +="<p>Lote número: " + numlote + "</p>";
-	      canvas += "<fieldset><input type='password' id='pass' size=30 placeholder='Ingrese su contraseña' class='text ui-widget-content ui-corner-all'/>";
+	      canvas += "<fieldset><input type='password' id='pass' size=30 placeholder='Ingresa tu contraseña' class='text ui-widget-content ui-corner-all'/>";
 	      canvas += "<h5 id='msg'></h5></fieldset></div>";
 
       $(canvas).dialog({
@@ -36,7 +36,7 @@ var datatable;
 	          	action_eliminar_lote(idlote, numlote, pass);
 
         	} else {
-				$(this).find( $('#msg')).text("Debe ingresar su contraseña");
+				$(this).find( $('#msg')).text("Debes ingresar tu contraseña");
 				return false;
           	}
 			$(this).dialog("destroy");
@@ -110,19 +110,19 @@ var datatable;
 
 		if($("#sucursal").val()==""){
 			++count;
-			contenido+= "<h6>" + count + ". Ha seleccionado una sucursal</h6>";
+			contenido+= "<h6>" + count + ". Has seleccionado una sucursal</h6>";
 		}
 		if($("#cant_tarjetas").val()==""||$("#cant_tarjetas").val()=="0"){
 			++count;
-			contenido+= "<h6>" + count + ". Ha ingresado una cantidad</h6>";
+			contenido+= "<h6>" + count + ". Has ingresado una cantidad</h6>";
 		}
 		if($("#fecha_expira").val()==""){
 			++count;
-			contenido+= "<h6>" + count + ". Ha seleccionado una fecha de expiración</h6>";
+			contenido+= "<h6>" + count + ". Has seleccionado una fecha de expiración</h6>";
 		}
 		if($("#embozo_1").val()==""){
 			++count;
-			contenido+= "<h6>" + count + ". Ha ingresado una Linea Embozo 1</h6>";
+			contenido+= "<h6>" + count + ". Has ingresado una Linea Embozo 1</h6>";
 		}
 		if($("#embozo_2").val()==""){
 			++count;
@@ -132,13 +132,13 @@ var datatable;
 
 		}else {
 			++count;
-			contenido+= "<h6>" + count + ". No haya ingresado caracteres especiales en Linea Embozo 2</h6>";
+			contenido+= "<h6>" + count + ". No hayas ingresado caracteres especiales en Linea Embozo 2</h6>";
 		}
 		if(!/[^a-zA-Z0-9]/.test($("#embozo_1").val())){
 
 		}else {
 			++count;
-			contenido+= "<h6>" + count + ". No haya ingresado caracteres especiales en Linea Embozo 1</h6>";
+			contenido+= "<h6>" + count + ". No hayas ingresado caracteres especiales en Linea Embozo 1</h6>";
 		}
 		if(maxTarjetas !== 0 && cantTartjetas > maxTarjetas) {
 			++count;

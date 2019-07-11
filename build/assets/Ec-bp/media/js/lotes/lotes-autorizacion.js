@@ -99,7 +99,7 @@ $(function () {
 			});
 			// resetValuesFirm();
 		} else {
-			notificacion("Firmando lotes", "Seleccione al menos un lote e ingrese su contraseña");
+			notificacion("Firmando lotes", "Selecciona al menos un lote e ingresa tu contraseña");
 		}
 
 	});
@@ -173,7 +173,7 @@ $(function () {
 					$('#loading').dialog('destroy');
 					if(code === 0) {
 						$("#data-COS").attr('value', dataCalc);
-						$("<div><h3>Proceso exitoso</h3><h5>Ha generado el cálculo de la orden de servicio.</h5></div>").dialog({
+						$("<div><h3>Proceso exitoso</h3><h5>Se generó el cálculo de la orden de servicio.</h5></div>").dialog({
 							title:"Autorizando lotes",
 							modal: true,
 							resizable: false,
@@ -182,7 +182,7 @@ $(function () {
 								$('.ui-dialog-titlebar-close', ui.dialog).hide();
 							},
 							buttons: {
-								siguiente: function () {
+								Siguiente: function () {
 									var ceo_cook = decodeURIComponent(
 										document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 									);
@@ -197,10 +197,10 @@ $(function () {
 				});
 				// resetValuesAuth();
 			} else {
-				notificacion('Autorización de Lotes', 'Verifique los datos ingresados e intente nuevamente.');
+				notificacion('Autorización de lotes', 'Verifiqua los datos ingresados e intenta nuevamente.');
 			}
     }else{
-        notificacion("Autorizando lotes","<h2>Verifica que: </h2><h3>1. Ha seleccionado al menos un lote.</h3><h3>2. Has ingresado su contraseña.</h4><h3>3. Has seleccionado el tipo orden de servicio.</h3>");
+        notificacion("Autorizando lotes","<h2>Verifica que: </h2><h3>1. Has seleccionado al menos un lote.</h3><h3>2. Has ingresado tu contraseña.</h4><h3>3. Has seleccionado el tipo orden de servicio.</h3>");
     }
 
 	});
@@ -222,10 +222,10 @@ $(function () {
 			// resetValuesAuth();
 
 			} else {
-				notificacion('Autorización de Lotes', 'Verifique los datos ingresados e intente nuevamente.');
+				notificacion('Autorización de lotes', 'Verifiqua los datos ingresados e intenta nuevamente.');
 			}
     }else{
-      notificacion("Autorizando lotes","Seleccione al menos un lote e ingrese su contraseña");
+      notificacion("Autorizando lotes","Selecciona al menos un lote e ingresa tu contraseña");
     }
 
 	});
@@ -239,8 +239,8 @@ $(function () {
 		var acnumlote = [$(this).attr('numlote')];
 
 		var canvas = "<div id='dialog-confirm'>";
-		canvas += "<p>Lote Nro.: " + acnumlote + "</p>";
-		canvas += "<fieldset><input type='password' id='pass' placeholder='Ingrese su contraseña' size=30/>";
+		canvas += "<p>Lote nro.: " + acnumlote + "</p>";
+		canvas += "<fieldset><input type='password' id='pass' placeholder='Ingresa tu contraseña' size=30/>";
 		canvas += "</fieldset><h5 id='msg'></h5></div>";
 
 		var pass;
@@ -295,7 +295,7 @@ $(function () {
 						});
 
 					} else {
-						$(this).find($('#msg')).text("Debe ingresar su contraseña");
+						$(this).find($('#msg')).text("Debes ingresar tu contraseña");
 					}
 
 
@@ -318,7 +318,7 @@ $(function () {
 			//resetValuesFirm();
 
 		} else {
-			notificacion("Autorizando lotes", "Seleccione al menos un lote e ingrese su contraseña");
+			notificacion("Autorizando lotes", "Selecciona al menos un lote e ingresa tu contraseña");
 		}
 
 	});
@@ -336,8 +336,8 @@ $(function () {
 		var ctipolote = $(this).attr('ctipolote') + ",";
 
       var canvas = "<div id='dialog-confirm'>";
-		canvas += "<p>Lote Nro.: " + $(this).attr('numlote')+"</p>";
-      canvas += "<form onsubmit='return false'><fieldset><input type='password' id='pass' name='user-password' size=24 placeholder='Ingrese su contraseña' class='text ui-widget-content ui-corner-all'/>";
+		canvas += "<p>Lote nro.: " + $(this).attr('numlote')+"</p>";
+      canvas += "<form onsubmit='return false'><fieldset><input type='password' id='pass' name='user-password' size=24 placeholder='Ingresa tu contraseña' class='text ui-widget-content ui-corner-all'/>";
       canvas += "<h5 id='msg'></h5></fieldset></form></div>";
 			tabla = $(this).parents('table').attr('id');
 
@@ -378,7 +378,7 @@ $(function () {
 								$(this).find($('#msg')).text("Contraseña inválida");
 							}
 						}else{
-							$(this).find( $('#msg')).text("Debe ingresar su contraseña");
+							$(this).find( $('#msg')).text("Debes ingresar tu contraseña");
 						}
 						}
 					}
@@ -397,7 +397,7 @@ $(function () {
 						pass = hex_md5($('#claveAuth').val());
 						eliminarLotes(idlote,acnumlote,ctipolote,pass);
 					} else
-						notificacion('Autorización de Lotes', 'Verifique los datos ingresados e intente nuevamente.');
+						notificacion('Autorización de lotes', 'Verifiqua los datos ingresados e intenta nuevamente.');
         }
 
 

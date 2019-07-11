@@ -90,7 +90,7 @@ $(function () {
 
 			});
 		} else {
-			notificacion("Firmando lotes", "Seleccione al menos un lote e ingrese su contraseña");
+			notificacion("Firmando lotes", "Selecciona al menos un lote e ingresa tu contraseña");
 		}
 
 	});
@@ -136,7 +136,7 @@ $(function () {
 		if (nuevo_iva == 1) {
 			if (select_modal == "") {
 				$("#modal-lote").dialog({
-					title: 'Seleccione modalidad de pago',
+					title: 'Selecciona modalidad de pago',
 					modal: true,
 					resizable: false,
 					draggable: false,
@@ -174,7 +174,7 @@ $(function () {
 			eliminarLotes(js_var.loteA, js_var.numloteA, js_var.tipoloteA, pass);
 
 		} else {
-			notificacion("Autorizando lotes", "Seleccione al menos un lote e ingrese su contraseña");
+			notificacion("Autorizando lotes", "Selecciona al menos un lote e ingresa tu contraseña");
 		}
 
 	});
@@ -186,8 +186,8 @@ $(function () {
 		var acnumlote = [$(this).attr('numlote')];
 
 		var canvas = "<div id='dialog-confirm'>";
-		canvas += "<p>Lote Nro.: " + acnumlote + "</p>";
-		canvas += "<fieldset><input type='password' id='pass' placeholder='Ingrese su contraseña' size=30/>";
+		canvas += "<p>Lote nro.: " + acnumlote + "</p>";
+		canvas += "<fieldset><input type='password' id='pass' placeholder='Ingresa tu contraseña' size=30/>";
 		canvas += "</fieldset><h5 id='msg'></h5></div>";
 
 		var pass;
@@ -241,7 +241,7 @@ $(function () {
 						});
 
 					} else {
-						$(this).find($('#msg')).text("Debe ingresar su contraseña");
+						$(this).find($('#msg')).text("Debes ingresar tu contraseña");
 					}
 
 
@@ -264,7 +264,7 @@ $(function () {
 			eliminarLotes(js_var.loteF, js_var.numloteF, js_var.tipoloteF, pass)
 
 		} else {
-			notificacion("Eliminar Lote", "Seleccione al menos un lote e ingrese su contraseña");
+			notificacion("Eliminar Lote", "Selecciona al menos un lote e ingresa tu contraseña");
 		}
 
 	});
@@ -279,8 +279,8 @@ $(function () {
 		var ctipolote = $(this).attr('ctipolote') + ",";
 
 		var canvas = "<div id='dialog-confirm'>";
-		canvas += "<p>Lote Nro.: " + acnumlote + "</p>";
-		canvas += "<fieldset><input type='password' id='pass' size=30 placeholder='Ingrese su contraseña' class='text ui-widget-content ui-corner-all'/>";
+		canvas += "<p>Lote nro.: " + acnumlote + "</p>";
+		canvas += "<fieldset><input type='password' id='pass' size=30 placeholder='Ingresa tu contraseña' class='text ui-widget-content ui-corner-all'/>";
 		canvas += "<h5 id='msg'></h5></fieldset></div>";
 		tabla = $(this).parents('table').attr('id');
 
@@ -312,7 +312,7 @@ $(function () {
 							eliminarLotes(idlote, acnumlote, ctipolote, pass);
 
 						} else {
-							$(this).find($('#msg')).text("Debe ingresar su contraseña");
+							$(this).find($('#msg')).text("Debes ingresar tu contraseña");
 						}
 
 					}
@@ -600,7 +600,7 @@ function envioAjaxAutorizar(baseURL, isoPais, js_var, pass, osTipo, select_modal
 						var
 							modalMsg = '<div>';
 						modalMsg += '<h3>Proceso exitoso</h3>';
-						modalMsg += '<h5>Ha generado el cálculo de la orden de servicio.</h5>';
+						modalMsg += '<h5>Se generó el cálculo de la orden de servicio.</h5>';
 						modalMsg += '</div>';
 						$(modalMsg).dialog({
 							title: "Autorizando lotes",
@@ -621,8 +621,8 @@ function envioAjaxAutorizar(baseURL, isoPais, js_var, pass, osTipo, select_modal
 		} else {
 			var
 				mensajeNoti = '<h2>Verifica que:</h2>';
-			mensajeNoti += '<h3>1. Ha seleccionado al menos un lote</h3>';
-			mensajeNoti += '<h3>2. Has ingresado su contraseña</h3>';
+			mensajeNoti += '<h3>1. Has seleccionado al menos un lote</h3>';
+			mensajeNoti += '<h3>2. Has ingresado tu contraseña</h3>';
 			mensajeNoti += '<h3>3. Has seleccionado el tipo orden de servicio</h3>';
 
 			notificacion("Autorizando lotes", mensajeNoti);

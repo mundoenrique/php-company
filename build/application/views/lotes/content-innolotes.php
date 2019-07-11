@@ -41,7 +41,7 @@
 						<h5>Sucursal</h5>
 						<span id="cargando" style="color:#0072C0">Cargando...</span>
 						<select id="sucursal" name="batch" class="select_sucursales" disabled="disabled">
-							<option value="">Seleccione</option>
+							<option value="">Selecciona</option>
 						</select>
 					</span>
 					<div class="info-OD">

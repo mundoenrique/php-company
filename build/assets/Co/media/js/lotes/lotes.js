@@ -71,7 +71,7 @@ var ceo_cook;
                       $('#archivo').val("");
                     });
                   }else{
-                    notificacion("Cargando archivo","Seleccione un tipo de lote");
+                    notificacion("Cargando archivo","Selecciona un tipo de lote");
                   }
                 });
             }else{
@@ -256,7 +256,7 @@ $("#table-text-lotes").on("click","#borrar",
 
       var canvas = "<div id='dialog-confirm'>";
       canvas +="<p>Nombre: "+arch+"</p>";
-      canvas += "<fieldset><input type='password' id='pass' size=30 placeholder='Ingrese su contraseña' class='text ui-widget-content ui-corner-all'/>";
+      canvas += "<fieldset><input type='password' id='pass' size=30 placeholder='Ingresa tu contraseña' class='text ui-widget-content ui-corner-all'/>";
       canvas += "<h5 id='msg'></h5></fieldset></div>";
 
       var pass;
@@ -307,7 +307,7 @@ $("#table-text-lotes").on("click","#borrar",
               });
 
             }else{
-              $(this).find( $('#msg') ).text('Debe ingresar su contraseña');
+              $(this).find( $('#msg') ).text('Debes ingresar tu contraseña');
             }
 
           }

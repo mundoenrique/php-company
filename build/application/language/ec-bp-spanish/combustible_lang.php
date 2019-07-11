@@ -1,4 +1,4 @@
-<?php 
+<?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 //Page title
 $lang['TITLE_COMBUSTIBLE'] = "Administración y Control de trayectos";
@@ -153,9 +153,9 @@ $lang['TRAVELS_VEHICLES'] = "Vehículos";
 $lang['TRAVELS_STATUS'] = "Estado";
 $lang['TRAVELS_DATE'] = "Fecha";
 $lang['TRAVELS_LOAD'] = "Cargando...";
-$lang['TRAVELS_SELECT'] = "Seleccione";
-$lang['TRAVELS_SELECT_DRIVER'] = "Seleccione un conductor";
-$lang['TRAVELS_SELECT_STATUS'] = "Seleccione un estado";
+$lang['TRAVELS_SELECT'] = "Selecciona";
+$lang['TRAVELS_SELECT_DRIVER'] = "Selecciona un conductor";
+$lang['TRAVELS_SELECT_STATUS'] = "Selecciona un estado";
 $lang['TRAVELS_IN_PLATE'] = "Indique la matricula";
 $lang['TRAVELS_LABEL_SEARCH'] = "search-option";
 $lang['TRAVELS_LABEL_IN'] = "plate";
@@ -166,7 +166,7 @@ $lang['TRAVELS_FINISHED'] = "Finalizado";
 $lang['TRAVELS_CANCELLED'] = "Cancelado";
 $lang['TRAVELS_DRIVER'] = "Conductor";
 $lang['TRAVELS_VEHICLE'] = "Vehículo";
-$lang['TRAVELS_SELECT_VEHICLE'] = "Seleccione un vehículo";
+$lang['TRAVELS_SELECT_VEHICLE'] = "Selecciona un vehículo";
 $lang['TRAVELS_NON_DRIVER'] = "No hay conductores disponibles para el rango de fecha seleccionado";
 $lang['TRAVELS_NON_VEHICLE'] = "No hay Vehículos disponobles para el rango de fecha seleccionado";
 $lang['TRAVELS_NON_DRIV_VEHI'] = "No hay conductores ni vehículos disponobles para el rango de fecha seleccionado";
@@ -195,7 +195,7 @@ $lang['TAG_EDIT'] = "Editar";
 $lang['TAG_INACTIVE'] = 'Inactivo';
 $lang['TAG_NAME'] = "Nombre";
 $lang['TAG_SAVE_CHANGES'] = 'Guardar cambios';
-$lang['TAG_SELECT'] = 'Seleccione una opción';
+$lang['TAG_SELECT'] = 'Selecciona una opción';
 $lang['TAG_SEND'] = 'Enviar datos';
 $lang['TAG_STATUS'] = "Estado";
 $lang['TAG_WITHOUT_CHANGES'] = "Sin cambios";

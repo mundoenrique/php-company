@@ -238,7 +238,7 @@ class Payment extends CI_Controller {
 		if ($this->logged_in && !$this->idProductoS) {
 			echo "
 			<script>
-                alert('Seleccione un producto');
+                alert('Selecciona un producto');
                 location.href = '" . $this->config->item('base_url') . "$this->urlCountry/dashboard/';
             </script>
 			";

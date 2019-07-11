@@ -14,7 +14,7 @@
 						<input  class="required login" type="password" name="Ingrese clave de confirmación" placeholder="DD/MM/AA" value="" />
 					</span>
 					<div class="info-OD">
-						<h5>Tipo de Lote</h5>
+						<h5>Tipo de lote</h5>
 						<select id="type-batch" name="batch">
 							<option value="" selected="selected">Selecciona</option>
 							<option value="emision">En proceso</option>

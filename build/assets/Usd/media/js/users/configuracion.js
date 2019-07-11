@@ -44,7 +44,7 @@ $(function () {
 
 		var canvas = "<form id='formu'><input type=password id='old' placeholder='Contraseña actual' size=26/>";
 		canvas += "<input type=password id='new' placeholder='Contraseña nueva' maxlength=" + max + " size=26/>";
-		canvas += "<input type=password id='confNew' placeholder='Confirme contraseña nueva' maxlength=" + max + " size=26/><h5 id='vacio'></h5></form>";
+		canvas += "<input type=password id='confNew' placeholder='Confirma la nueva contraseña ' maxlength=" + max + " size=26/><h5 id='vacio'></h5></form>";
 
 		$(canvas).dialog({
 			title: "Cambiar contraseña",
@@ -71,7 +71,7 @@ $(function () {
 					} else if (newC.length > max) {
 						$(this).find($('#vacio')).text('Máximo ' + max + ' caracteres')
 					} else if (!($('#length').hasClass("valid") && $('#letter').hasClass("valid") && $('#capital').hasClass("valid") && $('#number').hasClass("valid") && $('#consecutivo').hasClass("valid") && $('#especial').hasClass("valid"))) {
-						$(this).find($('#vacio')).text('Verifique el formato de la contraseña.');
+						$(this).find($('#vacio')).text('Verifica el formato de la contraseña.');
 					} else {
 						$(this).find($('#vacio')).text('Cambiando contraseña...');
 						$('.ui-button').hide();
@@ -242,7 +242,7 @@ $(function () {
 			});
 		} else {
 			$(".ui-dialog-content").dialog().dialog("destroy");
-			notificacion("Modificar usuario", "Verifique que el formato del e-mail sea correcto.")
+			notificacion("Modificar usuario", "Verifica que el formato del e-mail sea correcto.")
 		}
 	});
 
@@ -374,16 +374,16 @@ $(function () {
 
 			} else {
 				$(".ui-dialog-content").dialog().dialog("destroy");
-				notificacion("Agregar contacto", "Debe seleccionar una empresa.")
+				notificacion("Agregar contacto", "Debes seleccionar una empresa.")
 			}
 		} else if ($("#passAgregar").val() == "") {
 			$(".ui-dialog-content").dialog().dialog("destroy");
 			$("#passAgregar").addClass("error");
-			notificacion("Agregar contacto", "Debe ingresar su contraseña.");
+			notificacion("Agregar contacto", "Debes ingresar tu contraseña.");
 		} else {
 			$(".ui-dialog-content").dialog().dialog("destroy");
 			$("#passAgregar").removeClass("error");
-			notificacion("Agregar contacto", "Formulario inválido, verifique los datos suministrados.");
+			notificacion("Agregar contacto", "Formulario inválido, verifica los datos suministrados.");
 		}
 
 	});
@@ -466,7 +466,7 @@ $(function () {
 
 			});
 		} else {
-			notificacion("Modificar empresa", "Verifique número de teléfono.")
+			notificacion("Modificar empresa", "Verifica número de teléfono.")
 		}
 	});
 
@@ -505,7 +505,7 @@ $(function () {
 			});
 		} else {
 			$("#pass.pass").css("border-color", "red");
-			notificacion("Eliminar contacto", "Debe ingresar su contraseña.");
+			notificacion("Eliminar contacto", "Debes ingresar tu contraseña.");
 		}
 	});
 
@@ -553,10 +553,10 @@ $(function () {
 				});
 			} else {
 				$("#pass.pass").css("border-color", "red");
-				notificacion("Actualizar contacto", "Debe ingresar su contraseña.");
+				notificacion("Actualizar contacto", "Debes ingresar tu contraseña.");
 			}
 		} else {
-			notificacion("Actualizar contacto", "Formulario inválido, verifique los datos suministrados.");
+			notificacion("Actualizar contacto", "Formulario inválido, verifica los datos suministrados.");
 		}
 
 	});
@@ -733,9 +733,9 @@ $(function () {
 				}
 			});
 		} else if (validez && $('#pass_suc').val() == '') {
-			notificacion("Agregar sucursal", "Debe ingresar su contraseña.")
+			notificacion("Agregar sucursal", "Debes ingresar tu contraseña.")
 		} else {
-			notificacion("Agregar sucursal", "Formulario inválido, verifique los datos suministrados.")
+			notificacion("Agregar sucursal", "Formulario inválido, verifica los datos suministrados.")
 		}
 
 	});
@@ -848,9 +848,9 @@ $(function () {
 
 		} else {
 			if (validez && $("#pass_suc").val() == "") {
-				notificacion("Modificar sucursal", "Debe ingresar su contraseña.");
+				notificacion("Modificar sucursal", "Debes ingresar tu contraseña.");
 			} else {
-				notificacion("Modificar sucursal", "Formulario inválido, verifique los datos suministrados.");
+				notificacion("Modificar sucursal", "Formulario inválido, verifica los datos suministrados.");
 
 			}
 		}
@@ -1251,7 +1251,7 @@ $(function () {
 				});
 
 		} else {
-			notificacion("Contactos", "Debe seleccionar una empresa.");
+			notificacion("Contactos", "Debes seleccionar una empresa.");
 		}
 	}
 

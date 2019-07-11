@@ -296,8 +296,8 @@ function validar_campos()
             'destination': {required: true}
         },
         messages: {
-            'driver': 'Seleccione un conductor',
-            'vehicle': 'Seleccione un vehículo',
+            'driver': 'Selecciona un conductor',
+            'vehicle': 'Selecciona un vehículo',
             'origin': 'Debe definir origen del viaje',
             'destination': 'Debe definir destino del viaje',
         }

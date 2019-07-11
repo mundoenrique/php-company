@@ -98,7 +98,7 @@ $urlBase = $urlBaseA.$pais;
 							<thead>
 								<tr id="datos-principales">
 									<th  >Archivo</th>
-									<th class='td-medio'>Lote Nro.</th>
+									<th class='td-medio'>Lote nro.</th>
 									<th >Estatus</th>
 									<th class='td-medio'>Fecha reg.</th>
 									<th id='td-nombre-2'>Observaciones</th>

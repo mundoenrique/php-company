@@ -310,7 +310,7 @@ $(document).ready(function () {
 
 				});
 			} else {
-				showErrMsg('Verifique los datos ingresados e intente nuevamente.');
+				showErrMsg('Verifiqua los datos ingresados e intenta nuevamente.');
 			}
 		}
 

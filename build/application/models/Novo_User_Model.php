@@ -84,7 +84,7 @@ class Novo_User_Model extends NOVO_Model {
 
 					$this->response->code = 0;
 					$this->response->title = 'Usuario nuevo';
-					$this->response->msg = 'Debe aceptar los términos de uso';
+					$this->response->msg = 'Debes aceptar los términos de uso';
 					$this->response->data = base_url('inf-condiciones');
 					$this->session->set_flashdata('changePassword', 'newUser');
 					$this->session->set_flashdata('userType', $response->usuario->ctipo);
@@ -92,7 +92,7 @@ class Novo_User_Model extends NOVO_Model {
 					if($this->isResponseRc === -185) {
 						$this->response->code = 0;
 						$this->response->title = 'Clave vencida';
-						$this->response->msg = 'Debe cambiar la clave';
+						$this->response->msg = 'Debes cambiar la clave';
 						$this->response->data = base_url('cambiar-clave');
 						$this->session->set_flashdata('changePassword', 'expiredPass');
 						break;
@@ -118,7 +118,7 @@ class Novo_User_Model extends NOVO_Model {
 					break;
 				case -262:
 					$this->response->code = 3;
-					$this->response->msg = 'Estimado usuario usted no tiene permisos para la aplicación, por favor comuníquese ';
+					$this->response->msg = 'Estimado usuario no tienes permisos para la aplicación, por favor comunícate ';
 					$this->response->msg.= 'con el administrador';
 					$this->response->icon = 'ui-icon-info';
 					$this->response->data = [
@@ -195,7 +195,7 @@ class Novo_User_Model extends NOVO_Model {
 					$msg = lang('ERROR_MAIL');
 					break;
 				case -173:
-					$msg = 'No fue posible enviar el correo.<br>Verifíquelo e intente nuevamente.';
+					$msg = 'No fue posible enviar el correo.<br>Verifícalo e intenta nuevamente.';
 					break;
 				case -205:
 					$msg = lang('ERROR_USER');
@@ -247,7 +247,7 @@ class Novo_User_Model extends NOVO_Model {
 				case 0:
 					$this->callWs_FinishSession_User();
 					$this->response->code = 0;
-					$this->response->msg = 'La contraseña fue cambiada exitosamente.<br>Por motivos de seguridad es necesario que inicie sesión nuevamente.';
+					$this->response->msg = 'La contraseña fue cambiada exitosamente.<br>Por motivos de seguridad es necesario que inicies sesión nuevamente.';
 					$this->response->icon = 'ui-icon-circle-check';
 					$this->response->data = [
 						'btn1'=> [
@@ -326,7 +326,7 @@ class Novo_User_Model extends NOVO_Model {
 
 			$this->response->code = 1;
 			$this->response->icon = 'ui-icon-closethick';
-			$this->response->msg = 'El sistema ha detectado una actividad no autorizada, por favor intente nuevamente';
+			$this->response->msg = 'El sistema ha detectado una actividad no autorizada, por favor intenta nuevamente';
 			$this->response->data = [
 				'btn1'=> [
 					'text'=> 'Aceptar',

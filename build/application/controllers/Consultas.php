@@ -503,7 +503,7 @@ class Consultas extends CI_Controller {
 							echo "<form id='formu' method='post'><input type='hidden' name='data-OS' value='$OS'>
 							<input type='hidden' name='$ceo_name' value='$ceo_cook'></form>
 							<script>
-									alert('En estos momentos no podemos atender su solicitud por favor intente más tarde.');
+									alert('En estos momentos no podemos atender tu solicitud por favor intente más tarde.');
 									document.getElementById('formu').action='".$this->config->item('base_url')."$urlCountry/consulta/ordenes-de-servicio';
 									document.getElementById('formu').submit();
 							</script>";
@@ -514,7 +514,7 @@ class Consultas extends CI_Controller {
 					echo "<form id='formu' method='post'><input type='hidden' name='data-OS' value='$OS'>
 					<input type='hidden' name='$ceo_name' value='$ceo_cook'></form>
 					<script>
-					alert('En estos momentos no podemos atender su solicitud por favor intente más tarde.');
+					alert('En estos momentos no podemos atender tu solicitud por favor intente más tarde.');
 					document.getElementById('formu').action='".$this->config->item('base_url')."$urlCountry/consulta/ordenes-de-servicio';
 					document.getElementById('formu').submit();
 					</script>";

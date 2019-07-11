@@ -32,17 +32,17 @@ var	calendario = function(input){
 		if($("#nro_lote").val()==""&&$("#fecha_inicial").val()==""&&$("#fecha_final").val()==""){
 			++count;
 			valid = true;
-			contenido+= "<h6>" + count + ". Ha ingresado un nro. de lote</h6>";
+			contenido+= "<h6>" + count + ". Has ingresado un nro. de lote</h6>";
 		}
 		if(($("#fecha_inicial").val()==""||$("#fecha_final").val()=="")&&$("#nro_lote").val()==""){
 			valid = true;
 			if($("#fecha_inicial").val()==""){
 				++count;
-				contenido+= "<h6>" + count + ". Ha seleccionado una Fecha inicial</h6>";
+				contenido+= "<h6>" + count + ". Has seleccionado una Fecha inicial</h6>";
 			}
 			if($("#fecha_final").val()==""){
 				++count;
-				contenido+= "<h6>" + count + ". Ha seleccionado una Fecha final</h6>";
+				contenido+= "<h6>" + count + ". Has seleccionado una Fecha final</h6>";
 			}
 		}
 		if(valid){

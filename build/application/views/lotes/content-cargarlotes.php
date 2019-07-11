@@ -54,7 +54,7 @@ $margB = $pais == 'Ec-bp' ? 'style="margin-bottom: 10px;"' : '';
           <div id="selection-1">
             <h5><?php echo lang('TITULO_LOTES_TIPOLOTES'); ?></h5>
             <select id="tipoLote" name="batch">
-              <option value="">Seleccione</option>
+              <option value="">Selecciona</option>
               <?php
 								foreach ($selectTiposLotes[0]->lista as $tipol) {
 									$tipoLS = ucfirst(mb_strtolower($tipol->tipoLote));

@@ -104,7 +104,7 @@ $(function () { // Document ready
 
 		if (verificar(datosPost, datosPost.tipo, $contenedor)) {
 			if (pass == '') {
-				notificacion(titulo, "Debe ingresar su contraseña.");
+				notificacion(titulo, "Debes ingresar tu contraseña.");
 				$("#pass" + funcion).addClass("error");
 			} else {
 				$("#pass" + funcion).removeClass("error");
@@ -145,7 +145,7 @@ $(function () { // Document ready
 				});
 			}
 		} else {
-			notificacion(titulo, "Formulario inválido, verifique los datos suministrados.");
+			notificacion(titulo, "Formulario inválido, verifica los datos suministrados.");
 		}
 	}
 
@@ -613,7 +613,7 @@ $(function () { // Document ready
 				}
 			},
 			create: function (ev, ui) {
-				$('.ui-dialog-buttonpane .ui-dialog-buttonset button').before("<input type='password' id=passmodificar placeholder='Ingrese su contraseña' style='margin-right:10px'>");
+				$('.ui-dialog-buttonpane .ui-dialog-buttonset button').before("<input type='password' id=passmodificar placeholder='Ingresa tu contraseña' style='margin-right:10px'>");
 			},
 			close: function () {
 				$(this).dialog("destroy");
@@ -628,7 +628,7 @@ $(function () { // Document ready
 
 		var canvas = "<div id='dialog-confirm'>";
 		canvas += "<p>Empleado: " + datos.nombre + ' ' + datos.apellido + "</p>";
-		canvas += "<fieldset><input type='password' id='pass' placeholder='Ingrese su contraseña' class='text ui-widget-content ui-corner-all'/>";
+		canvas += "<fieldset><input type='password' id='pass' placeholder='Ingresa tu contraseña' class='text ui-widget-content ui-corner-all'/>";
 		canvas += "<h5 id='msg'></h5></fieldset></div>";
 
 		var pass;
@@ -653,7 +653,7 @@ $(function () { // Document ready
 						eliminarBeneficiario(pass, [datos.id_registro]);
 
 					} else {
-						$(this).find($('#msg')).text('Debe ingresar su contraseña');
+						$(this).find($('#msg')).text('Debes ingresar tu contraseña');
 					}
 
 				}
@@ -668,7 +668,7 @@ $(function () { // Document ready
 
 		if (pass != '') {
 
-			var tituloModal = 'Seleccione modalidad de pago';
+			var tituloModal = 'Selecciona modalidad de pago';
 			var nuevoIva = document.getElementById('nuevoIva');
 
 			if (nuevoIva.value == 1) {
@@ -708,7 +708,7 @@ $(function () { // Document ready
 				sendReproceso(pass, "", tituloModal, tipoLote, nuevoIva.value);
 			}
 		} else {
-			notificacion('Reprocesar Datos', 'Debe ingresar su contraseña');
+			notificacion('Reprocesar Datos', 'Debes ingresar tu contraseña');
 			$("#passreprocesar").addClass('error');
 		}
 
@@ -776,7 +776,7 @@ $(function () { // Document ready
 			});
 		} else {
 			notificacion("Autorizando lotes",
-				"<h2>Verifica que: </h2><h3>1. Ha seleccionado al menos un lote.</h3><h3>2. Has ingresado su contraseña.</h4><h3>3. Has seleccionado el tipo orden de servicio.</h3>");
+				"<h2>Verifica que: </h2><h3>1. Has seleccionado al menos un lote.</h3><h3>2. Has ingresado tu contraseña.</h4><h3>3. Has seleccionado el tipo orden de servicio.</h3>");
 		}
 	}
 
@@ -791,7 +791,7 @@ $(function () { // Document ready
 
 			eliminarBeneficiario(pass, listarItems());
 		} else {
-			notificacion('Eliminar beneficiarios', 'Debe ingresar su contraseña');
+			notificacion('Eliminar beneficiarios', 'Debes ingresar tu contraseña');
 			$("#passreprocesar").addClass('error');
 		}
 		resett();

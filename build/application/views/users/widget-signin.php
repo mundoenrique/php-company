@@ -36,7 +36,7 @@ $recoverPwdLink = $this->config->item('base_url') .$pais. '/users/pass_recovery'
 						<p class="align-center" style="<?php echo $pais=="Ec-bp"?"font-size: 12px; text-align: center;":"font-size: 12px; margin-top: 50px; text-align: center;" ?>">
 						Restablecer contraseña
                 <br>
-                <a href="<?php echo $recoverPwdLink;?>" rel="section">¿Olvidó o bloqueó su<br> clave de acceso?</a>
+                <a href="<?php echo $recoverPwdLink;?>" rel="section">¿Olvidaste o bloqueaste tu<br>clave de acceso?</a>
             </p>
 
         <div id="login-mobile" style="display:none">

@@ -3,7 +3,7 @@ var authloading=false;
 $(window).bind('beforeunload', function(e) {
 	if(authloading===true){
 		//return "Unloading this page may lose. What do you want to do..."
-		return "En este momento se esta procesando una petición, por favor espere, de lo contrario podría usted perder información considerada como importante.";
+		return "En este momento se esta procesando una petición, por favor espera, de lo contrario podrías perder información considerada como importante.";
 		e.preventDefault();
 	}
 });

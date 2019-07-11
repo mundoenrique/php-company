@@ -33,7 +33,7 @@
                         'value' => '',
                         'placeholder' => 'Contraseña nueva'
                     ))?>
-                    <?=form_label('Confirme contraseña nueva *', 'userpwdConfirm');?>
+                    <?=form_label('Confirma la nueva contraseña  *', 'userpwdConfirm');?>
                     <?=form_password(array(
                         'name' => 'userpwdConfirm',
                         'id' => 'userpwdConfirm',

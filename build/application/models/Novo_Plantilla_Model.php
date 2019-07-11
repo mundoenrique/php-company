@@ -1,8 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 /**
- * @info clase para 
- * @author 
+ * @info clase para
+ * @author
  *
  */
 class Novo_Plantilla_Model extends NOVO_Model {
@@ -13,8 +13,8 @@ class Novo_Plantilla_Model extends NOVO_Model {
 		log_message('INFO', 'NOVO Plantilla Model Class Initialized');
 	}
 	/**
-	 * @info Método para 
-	 * @author 
+	 * @info Método para
+	 * @author
 	 */
 	public function callWs_Plantilla_User($dataRequest)
 	{
@@ -33,7 +33,7 @@ class Novo_Plantilla_Model extends NOVO_Model {
 			switch($this->isResponseRc) {
 				case 0:
 					log_message('DEBUG', 'NOVO ['.$dataRequest->user.'] RESPONSE: Login: ' . json_encode($response->usuario));
-					
+
 					break;
 				case -5000:
 					$this->response->code = 1;
@@ -43,7 +43,7 @@ class Novo_Plantilla_Model extends NOVO_Model {
 					break;
 				case -6000:
 					$this->response->code = 3;
-					$this->response->msg = 'Estimado usuario usted no tiene permisos para la aplicación, por favor comuníquese ';
+					$this->response->msg = 'Estimado usuario no tienes permisos para la aplicación, por favor comunícate ';
 					$this->response->msg.= 'con el administrador';
 					$this->response->icon = 'ui-icon-info';
 					$this->response->data = [
