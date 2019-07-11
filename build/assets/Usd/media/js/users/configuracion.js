@@ -116,7 +116,7 @@ $(function () {
 		});
 
 
-		$('#new').keyup(function () {
+		$('#new').on('keyup focus', function () {
 			// set password variable
 			var pswd = $(this).val();
 			//validate the length
@@ -1017,7 +1017,7 @@ $(function () {
 									$('#archivo').val("");
 								});
 							} else {
-								notificacion("Cargar archivo sucursales", "Seleccione una Empresa.");
+								notificacion("Cargar archivo sucursales", "Selecciona una empresa.");
 							}
 						});
 				} else {

@@ -58,6 +58,7 @@ function notificacion(title, msj){
   var canvas = "<div>"+msj+"</div>";
 
   $(canvas).dialog({
+
     title: title,
     modal: true,
     maxWidth: 700,
@@ -84,8 +85,9 @@ function notificacion(title, msj){
 
 // SUB-MENU CONFIGURACION
 
-$('#config').balloon({contents: $('.submenu'), position: 'bottom', classname: 'config-menuH'});
 
+$('#config').balloon({contents: $('.submenu'), position: 'bottom', classname: 'config-menuH'});
+$('#profileMenu').balloon({contents: $('.submenu'), position: 'bottom', classname: 'config-menuH'});
 
   $.datepicker.regional['es'] = {
     closeText: 'Cerrar',
@@ -111,6 +113,8 @@ $(':input').on('click', function(){$('#ui-datepicker-div'); $('#ui-datepicker-di
 
 if (!navigator.cookieEnabled) {
 	$('<div><h5>La funcionalidad de cookies de su navegador se encuentra desactivada.</h5><h4>Por favor vuelva activarla.</h4></div>').dialog({
+
+		dialogClass: "hide-close",
 		title: "Conexion empresas Online",
 		modal: true,
 		maxWidth: 700,
@@ -118,8 +122,12 @@ if (!navigator.cookieEnabled) {
 		resizable: false,
 		close: function(){$(this).dialog("destroy");},
 		buttons: {
-			Aceptar: function(){
-				$(this).dialog("destroy");
+			"Aceptar": {
+				text: 'Aceptar',
+				class: 'novo-btn-primary-modal',
+				click: function () {
+				$(this).dialog("close");
+				}
 			}
 		}
 	});

@@ -280,7 +280,7 @@ $(function () {
 			}
 
 		} else {
-			notificacion('Consulta a tarjeta', '<h2>Verifique que: </h2><h3>1. Ha seleccionado al menos una tarjeta</h3><h3>2. Ha ingresado su contraseña</h3>');
+			notificacion('Consulta a tarjeta', '<h2>Verifica que: </h2><h3>1. Has seleccionado al menos una tarjeta</h3><h3>2. Has ingresado su contraseña</h3>');
 
 		}
 
@@ -295,7 +295,7 @@ $(function () {
 			llamarWS($('#clave').val(), baseURL + api + isoPais + '/servicios/transferencia-maestra/abonar', '20', 'Abonando...');
 
 		} else if ($('#clave').val() == '') {
-			notificacion('Abono a tarjeta', '<h2>Verifique que: </h2><h3>1. Ha ingresado el monto a abonar</h3><h3>2. Ha ingresado su contraseña</h3>');
+			notificacion('Abono a tarjeta', '<h2>Verifica que: </h2><h3>1. Ha ingresado el monto a abonar</h3><h3>2. Has ingresado su contraseña</h3>');
 
 		}
 
@@ -311,7 +311,7 @@ $(function () {
 			llamarWS($('#clave').val(), baseURL + api + isoPais + '/servicios/transferencia-maestra/cargar', '40', 'Cargando...');
 
 		} else if ($('#clave').val() == '') {
-			notificacion('Cargo a tarjeta', '<h2>Verifique que: </h2><h3>1. Ha ingresado el monto a cargar</h3><h3>2. Ha ingresado su contraseña</h3>');
+			notificacion('Cargo a tarjeta', '<h2>Verifica que: </h2><h3>1. Ha ingresado el monto a cargar</h3><h3>2. Has ingresado su contraseña</h3>');
 
 		}
 

@@ -3,20 +3,25 @@ $(function () {
 	var empty = $('#empty').val()
 	if (empty != 'nonEmpty') {
 		$("<div><h3>Existe uno más lotes sin retenciones asociadas</h3><h5>" + empty + "</h5></div>").dialog({
+
+			dialogClass: "hide-close",
 			title: "Retenciones",
 			modal: true,
 			resizable: false,
-			close: function () {
-				$(this).dialog('destroy');
-				$('#confirmarPreOSL').show();
-				$('#cancelar-OS').show();
-			},
 			buttons: {
-				continuar: function () {
+				"Cancelar": { text: 'Cancelar', class: 'novo-btn-secondary-modal',
+				click: function () {
+				$(this).dialog("close");
+				$('#confirmarPreOSL').show();
+				$('#cancelar-OS').show();}
+			},
+			"continuar": { text: 'continuar', class: 'novo-btn-primary-modal',
+				click: function () {
 					$(this).dialog('destroy');
 					$('#confirmarPreOSL').show();
 					$('#cancelar-OS').show();
 				}
+			}
 			}
 		});
 	} else {
@@ -37,10 +42,9 @@ $(function () {
 		var lnf = $("#tempIdOrdenLNF").val();
 
 		$aux = $('#loading').dialog({
+
+			dialogClass: "hide-close",
 			title: 'Confirmar cálculo orden de servicio',
-			close: function () {
-				$(this).dialog('close');
-			},
 			modal: true,
 			resizable: false
 		});
@@ -127,6 +131,7 @@ $(function () {
 		var canvas = "<div>" + mensaje + "</div>";
 
 		$(canvas).dialog({
+			dialogClass: "hide-close",
 			title: titulo,
 			modal: true,
 			maxWidth: 700,
@@ -139,10 +144,14 @@ $(function () {
 				}
 			},
 			buttons: {
-				OK: function () {
-					$(this).dialog("destroy");
-					if (sitio) {
-						$(sitio).submit();
+				"Aceptar": {
+					text: 'Aceptar',
+					class: 'novo-btn-primary-modal',
+					click: function () {
+						$(this).dialog("destroy");
+						if (sitio) {
+							$(sitio).submit();
+						}
 					}
 				}
 			}

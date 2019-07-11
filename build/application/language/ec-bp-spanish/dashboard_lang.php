@@ -1,4 +1,4 @@
-<?php 
+<?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 $lang['SYSTEM_NAME']= "Conexión Empresas";
 $lang['LAST_SESSION']="Última sesión";
@@ -9,11 +9,11 @@ $lang['FOOTER'] ='Todos los derechos reservados.';
 //WIDGET EMPRESAS
 $lang['WIDGET_EMPRESAS_BTNSELECCIONAR']= "Seleccionar otra empresa";
 $lang['WIDGET_EMPRESAS_BTNOTROSPROGRAMAS']= "Conozca otros programas";
-$lang['WIDGET_EMPRESAS_OPC_SEL_EMPRESAS']= "Seleccione una empresa";
+$lang['WIDGET_EMPRESAS_OPC_SEL_EMPRESAS']= "Selecciona una empresa";
 $lang['WIDGET_EMPRESAS_BTNAPLICAR']= "Seleccionar";
 
 //MIGAJASDEPAN
-$lang['BREADCRUMB_WELCOME'] = 'Bienvenido';
+$lang['BREADCRUMB_WELCOME'] = 'Bienvenido/a';
 $lang['BREADCRUMB_INICIO']= "Inicio";
 $lang['BREADCRUMB_BENEFICIOS']= "Beneficios";
 $lang['BREADCRUMB_CONDICIONES']= "Condiciones de uso";

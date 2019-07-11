@@ -46,9 +46,9 @@ $(function () {
 	//cambio de clave
 	$('#btn-cambioC').on('click', function () {
 
-		var canvas = "<form id='formu'><input type=password id='old' placeholder='Contraseña actual' size=26/>";
-		canvas += "<input type=password id='new' placeholder='Contraseña nueva' maxlength=" + max + " size=26/>";
-		canvas += "<input type=password id='confNew' placeholder='Confirme contraseña nueva' maxlength=" + max + " size=26/><h5 id='vacio'></h5></form>";
+		var canvas = "<form id='formu'><input type=password id='old' placeholder='Contraseña actual' size=26 class='required'/>";
+		canvas += "<input type=password id='new' placeholder='Contraseña nueva' maxlength=" + max + " size=26 class='required'/>";
+		canvas += "<input type=password id='confNew' placeholder='Confirme contraseña nueva' maxlength=" + max + " size=26 class='required'/><h5 id='vacio'></h5></form>";
 
 		$(canvas).dialog({
 			title: "Cambiar contraseña",
@@ -121,7 +121,7 @@ $(function () {
 		});
 
 
-		$('#new').keyup(function () {
+		$('#new').on('keyup focus', function () {
 			// set password variable
 			var pswd = $(this).val();
 			//validate the length
@@ -132,7 +132,7 @@ $(function () {
 			}
 
 			//validate letter
-			if (pswd.match(/[A-z]/)) {
+			if (pswd.match(/[a-z]/)) {
 				$('#letter').removeClass('invalid').addClass('valid');
 			} else {
 				$('#letter').removeClass('valid').addClass('invalid');
@@ -1176,7 +1176,7 @@ $(function () {
 									$('#archivo').val("");
 								});
 							} else {
-								notificacion("Cargar archivo sucursales", "Seleccione una Empresa.");
+								notificacion("Cargar archivo sucursales", "Selecciona una empresa.");
 							}
 						});
 				} else {

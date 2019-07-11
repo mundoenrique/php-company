@@ -112,7 +112,7 @@ $(function() {
 		}
 
 		if(account.val() === '0') {
-			camposValid += '<p>* Seleccione una cuenta</p>';
+			camposValid += '<p>* Selecciona una cuenta</p>';
 			validInput = false;
 			account.css('border-color', '#cd0a0a')
 		} else {
@@ -120,7 +120,7 @@ $(function() {
 		}
 
 		if(type.val() === undefined) {
-			camposValid += '<p>* Seleccione cargo o  abono</p>';
+			camposValid += '<p>* Selecciona cargo o abono</p>';
 			validInput = false;
 			$('#charge-or-credit').css('border', '1px solid #cd0a0a');
 		} else {
@@ -129,6 +129,8 @@ $(function() {
 		camposValid += '</div>';
 		if(!validInput) {
 			$(camposValid).dialog ({
+
+				dialogClass: "hide-close",
 				title: 'Campos inválidos',
 				modal: true,
 				resizable:false,
@@ -137,9 +139,10 @@ $(function() {
 					$('.ui-dialog-titlebar-close', ui.dialog).hide();
 				},
 				buttons: {
-					ok: function () {
-						$(this).dialog("destroy");
-					}
+					"Aceptar": { text: 'Aceptar', class: 'novo-btn-primary-modal',
+				click: function () {
+					$(this).dialog("destroy"); }
+				}
 				}
 			});
 		} else {
@@ -159,6 +162,8 @@ $(function() {
 					type.prop('checked', false);
 
 					var $aux = $('#loading').dialog({
+
+						dialogClass: "hide-close",
 							title:'Enviando código de seguridad',
 							modal: true,
 							resizable:false,
@@ -180,6 +185,8 @@ $(function() {
 										canvas += "<h5 id='msg'></h5></fieldset></form></div>";
 
 								$(canvas).dialog({
+
+									dialogClass: "hide-close",
 									title: data.title,
 									modal: true,
 									resizable: false,
@@ -187,7 +194,11 @@ $(function() {
 									close: function () {
 										$(this).dialog("destroy");
 									},
-									buttons: {
+									buttons: {	"Cancelar": { text: 'Cancelar', class: 'novo-btn-secondary-modal',
+											mouseover: function(){
+
+											},click: function () {
+											$(this).dialog("close"); }},
 										Procesar: function () {
 											var codeToken = $("#token-code").val();
 											dataSend.codeToken = codeToken;
@@ -198,6 +209,8 @@ $(function() {
 													$("#token-code").val('');
 													$(this).dialog('destroy');
 													$aux = $('#loading').dialog({
+
+														dialogClass: "hide-close",
 															title: 'Procesando',
 															modal: true,
 															resizable: false,
@@ -433,7 +446,7 @@ function paramsValidate(type){
 			} else
 				notificacion('Cargo a tarjeta', 'Contraseña inválida');
 		} else {
-			notificacion('Consulta a tarjeta', '<h2>Verifique que: </h2><h3>1. Ha seleccionado al menos una tarjeta</h3><h3>2. Ha ingresado su contraseña</h3>');
+			notificacion('Consulta a tarjeta', '<h2>Verifica que: </h2><h3>1. Has seleccionado al menos una tarjeta</h3><h3>2. Has ingresado su contraseña</h3>');
 		}
 	});
 
@@ -447,7 +460,7 @@ function paramsValidate(type){
 			else
 				notificacion('Cargo a tarjeta', 'Contraseña inválida');
 		} else if ($('#clave').val() == '') {
-			notificacion('Abono a tarjeta', '<h2>Verifique que: </h2><h3>1. Ha ingresado el monto a abonar</h3><h3>2. Ha ingresado su contraseña</h3>');
+			notificacion('Abono a tarjeta', '<h2>Verifica que: </h2><h3>1. Ha ingresado el monto a abonar</h3><h3>2. Has ingresado su contraseña</h3>');
 		}
 	});
 
@@ -461,7 +474,7 @@ function paramsValidate(type){
 			else
 				notificacion('Cargo a tarjeta', 'Contraseña inválida');
 		} else if ($('#clave').val() == '') {
-			notificacion('Cargo a tarjeta', '<h2>Verifique que: </h2><h3>1. Ha ingresado el monto a cargar</h3><h3>2. Ha ingresado su contraseña</h3>');
+			notificacion('Cargo a tarjeta', '<h2>Verifica que: </h2><h3>1. Ha ingresado el monto a cargar</h3><h3>2. Has ingresado su contraseña</h3>');
 		}
 	});
 
@@ -511,6 +524,8 @@ function toFormatShow (valor) {
 function notiPagOS (titu, msg, type) {
 	var canvas = "<div style='text-align: center;'>" + msg + "</div>";
 	$(canvas).dialog({
+
+		dialogClass: "hide-close",
 		title : titu,
 		modal:true,
 		resizable:false,
@@ -519,13 +534,15 @@ function notiPagOS (titu, msg, type) {
 			$('.ui-dialog-titlebar-close', ui.dialog).hide();
 		},
 		buttons:{
-			OK: function(){
+			"Aceptar": { text: 'Aceptar', class: 'novo-btn-primary-modal',
+			click: function () {
 				$(this).dialog('destroy');
 				if (type == 'close') {
 					window.location.replace(baseURL + isoPais+'/logout');
 				} else if (type == 'ok') {
 					location.reload(true);
 				}
+			}
 			}
 		}
 	});
@@ -535,6 +552,8 @@ function notiPagOS (titu, msg, type) {
 function buscar(pgSgt) {
 
 	var $aux = $('#loading').dialog({
+
+		dialogClass: "hide-close",
 		title: "Buscando tarjetas",
 		modal: true,
 		resizable: false,
@@ -787,6 +806,8 @@ function calcularTrans(operacion) {
 function llamarWS(pass, url, operacion, mensaje) {
 
 	var $aux = $('#loading').dialog({
+
+		dialogClass: "hide-close",
 		title: mensaje,
 		modal: true,
 		bgiframe: true,
@@ -864,6 +885,8 @@ function confirmar(titulo, url, operacion, mensaje) {
 	canvas += "</div>"
 
 	$(canvas).dialog({
+
+		dialogClass: "hide-close",
 		title: titulo,
 		modal: true,
 		position: {
@@ -875,6 +898,10 @@ function confirmar(titulo, url, operacion, mensaje) {
 			$(this).dialog("destroy");
 		},
 		buttons: {
+			"Cancelar": { text: 'Cancelar', class: 'novo-btn-secondary-modal', style: 'border-color: #ffdd00 !important;background:white !important;',
+			click: function () {
+			$(this).dialog("close"); }
+			},
 			Aceptar: function() {
 				pass = $(this).find('#pass').val();
 
@@ -904,6 +931,8 @@ function notificacion(titulo, mensaje) {
 	var canvas = "<div>" + mensaje + "</div>";
 
 	$(canvas).dialog({
+
+		dialogClass: "hide-close",
 		title: titulo,
 		modal: true,
 		maxWidth: 700,
@@ -917,10 +946,13 @@ function notificacion(titulo, mensaje) {
 			$(this).dialog("close");
 		},
 		buttons: {
-			OK: function() {
+			"Aceptar": { text: 'Aceptar', class: 'novo-btn-primary-modal',
+				click: function () {
+
 				resett();
 				$(this).dialog("close");
-			}
+				 }
+				}
 		}
 	});
 }

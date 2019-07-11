@@ -3,7 +3,6 @@ $(function () {
 	var totalpaginas;
 
 	var max = 15;
-
 	// funcionalidad tab
 
 	$("#lotes-general").tabs({
@@ -41,12 +40,13 @@ $(function () {
 
 	//cambio de clave
 	$('#btn-cambioC').on('click', function () {
-
-		var canvas = "<form id='formu'><input type=password id='old' name='user-password' placeholder='Contraseña actual' size=26/>";
-		canvas += "<input type=password id='new' name='user-password-1' placeholder='Contraseña nueva' maxlength=" + max + " size=26/>";
-		canvas += "<input type=password id='confNew' name='user-password-2' placeholder='Confirme contraseña nueva' maxlength=" + max + " size=26/><h5 id='vacio'></h5></form>";
+		var canvas = "<form id='formu'><input type=password id='old' name='user-password' placeholder='Contraseña actual' size=26 class='required'/>";
+		canvas += "<input type=password id='new' name='user-password-1' placeholder='Contraseña nueva' maxlength=" + max + " size=26 class='required'/>";
+		canvas += "<input type=password id='confNew' name='user-password-2' placeholder='Confirme contraseña nueva' maxlength=" + max + " size=26/ class='required'><h5 id='vacio'></h5></form>";
 
 		$(canvas).dialog({
+
+			dialogClass: "hide-close",
 			title: "Cambiar contraseña",
 			modal: true,
 			maxWidth: 470,
@@ -54,71 +54,84 @@ $(function () {
 			resizable: false,
 			close: function () { $(this).dialog("destroy") },
 			buttons: {
-				OK: function () {
-
-					var old = $(this).find($('#old')).val();
-					var newC = $(this).find($('#new')).val();
-					var cNewC = $(this).find($('#confNew')).val();
-					var $dialogo = $(this);
-
-					if (old == "" || newC == "" || cNewC == "") {
-
-						$(this).find($('#vacio')).text('Todos los campos son obligatorios (*).');
-
-					} else if (newC != cNewC) {
-						$(this).find($('#vacio')).text('Contraseñas no coinciden.');
-
-					} else if (newC.length > max) {
-						$(this).find($('#vacio')).text('Máximo ' + max + ' caracteres')
-					} else if (!($('#length').hasClass("valid") && $('#letter').hasClass("valid") && $('#capital').hasClass("valid") && $('#number').hasClass("valid") && $('#consecutivo').hasClass("valid") && $('#especial').hasClass("valid"))) {
-						$(this).find($('#vacio')).text('Verifique el formato de la contraseña.');
-					} else {
-						$(this).find($('#vacio')).text('Cambiando contraseña...');
-						$('.ui-button').hide();
-						old = hex_md5(old);
-						newC = hex_md5(newC);
-						cNewC = hex_md5(cNewC);
-						var ceo_cook = decodeURIComponent(
-							document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-						);
-						var dataRequest = JSON.stringify({
-							userpwdOld: old,
-							userpwd: newC,
-							userpwdConfirm: cNewC,
-						})
-						var form = $(this).closest('form');
-						validateForms(form);
-						if (form.valid()) {
-
-							dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, { format: CryptoJSAesJson }).toString();
-							$.post(baseURL + '/' + isoPais + "/changePassNewUserAuth", { request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook) })
-								.done(function (response) {
-									data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, { format: CryptoJSAesJson }).toString(CryptoJS.enc.Utf8))
-									//data = $.parseJSON(data)
-
-									if (data.rc == 0) {
-										$dialogo.dialog("destroy");
-										notificacion('Cambiar contraseña', 'Proceso exitoso.');
-									} else {
-										if (data.rc == -29) {
-											alert("Usuario actualmente desconectado");
-											$(location).attr('href', baseURL + '/' + isoPais + '/login');
-										} else {
-											$dialogo.dialog("destroy");
-											notificacion('Cambiar contraseña', data.msg);
+				"Cancelar": { text: 'Cancelar', class: 'novo-btn-secondary-modal',
+				click: function () {
+					$(this).dialog("close"); }
+				},
+				"Aceptar": {
+								text: 'Aceptar',
+								class: 'novo-btn-primary-modal',
+								click: function(){
+									$("input[type='password']").on('focus keypress', function(){
+										$(this).removeAttr("style");
+									});
+									var old = $(this).find($('#old')).val();
+								var newC = $(this).find($('#new')).val();
+								var cNewC = $(this).find($('#confNew')).val();
+								var $dialogo = $(this);
+									$.each($("input[type='password'].required"), function (posItem, item) {
+										var elemento = $(item);
+										if (elemento.val() == "") {
+											$(this).find($('#vacio')).text('Todos los campos son obligatorios (*).');
+											elemento.attr("style", "border-color:red");
 										}
-									}
-								});
+									});
 
-						} else {
-							$(this).find($('#vacio')).text('Verifique los datos ingresados e intente nuevamente.')
-						}
+								if (newC != cNewC) {
+									$(this).find($('#vacio')).text('Contraseñas no coinciden.');
+									$('#confNew').attr("style", "border-color:red");
+								} else if (newC.length > max) {
+									 $('#new').attr("style","border-color:red");
+
+									$(this).find($('#vacio')).text('Máximo ' + max + ' caracteres')
+
+								} else if (!($('#length').hasClass("valid") && $('#letter').hasClass("valid") && $('#capital').hasClass("valid") && $('#number').hasClass("valid") && $('#consecutivo').hasClass("valid") && $('#especial').hasClass("valid"))) {
+									$(this).find($('#vacio')).text('Verifique el formato de la contraseña.');
+								} else {
+									$(this).find($('#vacio')).text('Cambiando contraseña...');
+									$('.ui-button').hide();
+									old = hex_md5(old);
+									newC = hex_md5(newC);
+									cNewC = hex_md5(cNewC);
+									var ceo_cook = decodeURIComponent(
+										document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+									);
+									var dataRequest = JSON.stringify({
+										userpwdOld: old,
+										userpwd: newC,
+										userpwdConfirm: cNewC,
+									})
+									var form = $(this).closest('form');
+									validateForms(form);
+									if (form.valid()) {
+
+										dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, { format: CryptoJSAesJson }).toString();
+										$.post(baseURL + '/' + isoPais + "/changePassNewUserAuth", { request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook) })
+											.done(function (response) {
+												data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, { format: CryptoJSAesJson }).toString(CryptoJS.enc.Utf8))
+												//data = $.parseJSON(data)
+
+												if (data.rc == 0) {
+													$dialogo.dialog("destroy");
+													notificacion('Cambiar contraseña', 'Proceso exitoso.');
+												} else {
+													if (data.rc == -29) {
+														alert("Usuario actualmente desconectado");
+														$(location).attr('href', baseURL + '/' + isoPais + '/login');
+													} else {
+														$dialogo.dialog("destroy");
+														notificacion('Cambiar contraseña', data.msg);
+													}
+												}
+											});
+
+									} else {
+										$(this).find($('#vacio')).text('Verifique los datos ingresados e intente nuevamente.')
+									}
+								}
+							}
 					}
-					$(this).find($('#old')).val('');
-					$(this).find($('#new')).val('');
-					$(this).find($('#confNew')).val('');
 				}
-			}
 		});
 
 
@@ -185,7 +198,8 @@ $(function () {
 	//fin cambio de clave
 
 	function CargarPerfilUser() {
-		$('#loading').dialog({ title: "Perfil de usuario", modal: true, maxWidth: 700, maxHeight: 300, close: function () { $(this).dialog('destroy'); } });
+		$('#loading').dialog({
+			dialogClass: "hide-close",title: "Perfil de usuario", modal: true, maxWidth: 700, maxHeight: 300, close: function () { $(this).dialog('destroy'); } });
 		var ceo_cook = decodeURIComponent(
 			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 		);
@@ -363,7 +377,8 @@ $(function () {
 						$("#pass").css("border-color", "");
 						if (data.rc == "0") {
 							$("#lotes-general #agregarContacto input").val('');
-							$("<div>Proceso exitoso.<h5>Listando contactos...</h5></div>").dialog({ title: "Agregar contacto", modal: true, close: function () { $(this).dialog('destroy') } })
+							$("<div>Proceso exitoso.<h5>Listando contactos...</h5></div>").dialog({
+								dialogClass: "hide-close",title: "Agregar contacto", modal: true, close: function () { $(this).dialog('destroy') } })
 							$('#contenedor_contacts').empty();
 							listarContactos(0);
 							$('#agregarContact').show();
@@ -441,7 +456,8 @@ $(function () {
 
 
 		if (tlfRegex.test($("#tlf1").val()) && (tlfRegex.test($("#tlf2").val()) || $("#tlf2").val() == "") && (tlfRegex.test($("#tlf3").val()) || $("#tlf3").val() == "")) {
-			$('#loading').dialog({ title: "Modificar empresa", modal: true, maxWidth: 700, maxHeight: 300, dialogClass: 'hide-close' });
+			$('#loading').dialog({
+				dialogClass: "hide-close",title: "Modificar empresa", modal: true, maxWidth: 700, maxHeight: 300, dialogClass: 'hide-close' });
 			var ceo_cook = decodeURIComponent(
 				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 			);
@@ -476,7 +492,8 @@ $(function () {
 			json.cedula = idcontacto;
 			json.pass = hex_md5($("#pass").val());
 			resetPass();
-			$('#loading').dialog({ title: "Eliminar contacto", modal: true, maxWidth: 700, maxHeight: 300, dialogClass: 'hide-close' });
+			$('#loading').dialog({
+				dialogClass: "hide-close",title: "Eliminar contacto", modal: true, maxWidth: 700, maxHeight: 300, dialogClass: 'hide-close' });
 			var ceo_cook = decodeURIComponent(
 				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 			);
@@ -492,7 +509,8 @@ $(function () {
 						$("#pass.pass").css("border-color", "");
 						$('#contenedor_contacts').empty();
 						listarContactos(0);
-						$("<div>Proceso exitoso.<h5>Listando contactos...</div>").dialog({ title: "Eliminar contacto", modal: true, close: function () { $(this).dialog('destroy') } });//notificacion("Eliminar contacto","Proceso exitoso.");
+						$("<div>Proceso exitoso.<h5>Listando contactos...</div>").dialog({
+							dialogClass: "hide-close",title: "Eliminar contacto", modal: true, close: function () { $(this).dialog('destroy') } });//notificacion("Eliminar contacto","Proceso exitoso.");
 					} else {
 						if (data.rc == '-61' || data.rc == '-29') {
 							alert('Usuario actualmente desconectado'); location.reload();
@@ -525,7 +543,8 @@ $(function () {
 			if (!$("#pass").val() == "") {
 				$("#pass").val("");
 				resetPass();
-				$('#loading').dialog({ title: "Actualizar contacto", modal: true, maxWidth: 700, maxHeight: 300, dialogClass: 'hide-close' });
+				$('#loading').dialog({
+					dialogClass: "hide-close",title: "Actualizar contacto", modal: true, maxWidth: 700, maxHeight: 300, dialogClass: 'hide-close' });
 				var ceo_cook = decodeURIComponent(
 					document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 				);
@@ -539,7 +558,9 @@ $(function () {
 							$("#pass.pass").css("border-color", "");
 							$('#contenedor_contacts').empty();
 							listarContactos(0);
-							$("<div>Proceso exitoso.<h5>Listando contactos...</div>").dialog({ title: "Actualizar contacto", modal: true, close: function () { $(this).dialog('destroy') } });//notificacion("Actualizar contacto","Proceso exitoso.");
+							$("<div>Proceso exitoso.<h5>Listando contactos...</div>").dialog({
+
+			dialogClass: "hide-close",title: "Actualizar contacto", modal: true, close: function () { $(this).dialog('destroy') } });//notificacion("Actualizar contacto","Proceso exitoso.");
 						} else {
 							if (data.rc == '-61' || data.rc == '-29') {
 								alert('Usuario actualmente desconectado'); location.reload();
@@ -693,7 +714,8 @@ $(function () {
 			json.pass = hex_md5($("#pass_suc").val());
 			resetPass();
 
-			$('#loading').dialog({ title: "Agregar sucursal", modal: true, maxWidth: 700, maxHeight: 300, dialogClass: 'hide-close' });
+			$('#loading').dialog({
+				dialogClass: "hide-close",title: "Agregar sucursal", modal: true, maxWidth: 700, maxHeight: 300, dialogClass: 'hide-close' });
 			var ceo_cook = decodeURIComponent(
 				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 			);
@@ -720,7 +742,8 @@ $(function () {
 						$("#tbody-datos-general").empty();
 						$("#ui-id-2 #campos-config").hide();
 						consultarSucursales(totalpaginas);
-						$("<div>Proceso exitoso.<h5>Listando sucursales...</h5></div>").dialog({ title: "Agregar sucursal", modal: true, close: function () { $(this).dialog('destroy') } })
+						$("<div>Proceso exitoso.<h5>Listando sucursales...</h5></div>").dialog({
+							dialogClass: "hide-close",title: "Agregar sucursal", modal: true, close: function () { $(this).dialog('destroy') } })
 
 					} else {
 						if (data.rc == '-61' || data.rc == '-29') {
@@ -790,7 +813,8 @@ $(function () {
 		validez = validarSucursal();
 		if (validez && $("#pass_suc").val() != "") {
 			var json = {};
-			$('#loading').dialog({ title: "Modificar sucursal", modal: true, maxWidth: 700, maxHeight: 300, dialogClass: 'hide-close' });
+			$('#loading').dialog({
+				dialogClass: "hide-close",title: "Modificar sucursal", modal: true, maxWidth: 700, maxHeight: 300, dialogClass: 'hide-close' });
 			json.rif = $("option:selected", '#listaEmpresasSuc').attr('data-rif');
 			json.codigo = $("#suc_cod").attr("cod");
 			json.cod = $("#suc_cod").val();
@@ -863,7 +887,8 @@ $(function () {
 			return;
 		}
 
-		$('#loading').dialog({ title: "Sucursales", modal: true, maxWidth: 700, maxHeight: 300, dialogClass: 'hide-close' });
+		$('#loading').dialog({
+			dialogClass: "hide-close",title: "Sucursales", modal: true, maxWidth: 700, maxHeight: 300, dialogClass: 'hide-close' });
 		$('#listaEmpresasSuc').attr('disabled', true);
 
 		pagina = false;
@@ -1017,7 +1042,7 @@ $(function () {
 									$('#archivo').val("");
 								});
 							} else {
-								notificacion("Cargar archivo sucursales", "Seleccione una Empresa.");
+								notificacion("Cargar archivo sucursales", "Selecciona una empresa.");
 							}
 						});
 				} else {
@@ -1052,13 +1077,19 @@ $(function () {
 		var canvas = "<div>" + mensaje + "</div>";
 
 		$(canvas).dialog({
+
+			dialogClass: "hide-close",
 			title: titulo,
 			modal: true,
 			maxWidth: 700,
 			maxHeight: 300,
 			buttons: {
-				OK: function () {
+				"Aceptar": {
+					text: 'Aceptar',
+					class: 'novo-btn-primary-modal',
+					click: function () {
 					$(this).dialog("destroy");
+					}
 				}
 			}
 		});
@@ -1167,7 +1198,8 @@ $(function () {
 			pagina = false;
 			cantItems = 1;
 			if (!$("#lotes-general #agregarContacto").is(':visible')) {
-				$('#loading').dialog({ title: "Contactos", modal: true, maxWidth: 700, maxHeight: 300, dialogClass: 'hide-close' });
+				$('#loading').dialog({
+					dialogClass: "hide-close",title: "Contactos", modal: true, maxWidth: 700, maxHeight: 300, dialogClass: 'hide-close' });
 			}
 			$("#lotes-general #contactos").fadeOut("slow");
 			var ceo_cook = decodeURIComponent(
@@ -1290,7 +1322,8 @@ $(function () {
 
 				if (!$('.tabla-sucursales').find($('.' + page)).hasClass(page)) {
 
-					$('#loading').dialog({ modal: true, maxWidth: 700, maxHeight: 300, dialogClass: 'hide-close' });
+					$('#loading').dialog({
+						dialogClass: "hide-close",modal: true, maxWidth: 700, maxHeight: 300, dialogClass: 'hide-close' });
 					$("#tabla-datos-general").hide();
 					consultarSucursales(page);
 				}

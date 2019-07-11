@@ -35,7 +35,11 @@ $urlCdn = get_cdn();
 
 	<div id="lotes-general">
 
-		<div id="top-batchs"><span aria-hidden="true" class="icon" data-icon="&#xe07a;"></span> <?php echo lang('CRITERIOS_BUSQUEDA'); ?>
+		<div id="top-batchs">
+			<?php if($pais != 'Ec-bp'): ?>
+			<span aria-hidden="true" class="icon" data-icon="&#xe07a;"></span>
+			<?php endif;?>
+			<?php echo lang('CRITERIOS_BUSQUEDA'); ?>
 		</div>
 		<div id="lotes-contenedor">
 			<div id="lotes-2">
@@ -106,15 +110,32 @@ $urlCdn = get_cdn();
 
 	<div id="batchs-last">
 		<span id="mensajeError" style="float:left; display:none; color:red;"> <?php echo lang('REPORTE_MENSAJE_ERROR'); ?></span>
-		<button id="repUsuario_btnBuscar" type="submit"><?php echo lang('REPORTE_BOTON_BUSCAR'); ?>
+		<?php
+					if($pais=='Ec-bp'){
+						?>
+							<center>
+						<?php
+					}
+				?>
+		<button id="repUsuario_btnBuscar" type="submit" class="novo-btn-primary"><?php echo lang('REPORTE_BOTON_BUSCAR'); ?>
 		</button>
+		<?php
+					if($pais=='Ec-bp'){
+						?>
+							</center>
+						<?php
+					}
+				?>
 	</div>
 	<div id = "cargando" style = "display:none"><h2 style="text-align:center"><?php echo lang('CARGANDO'); ?></h2><img style="display:block; margin-left:auto; margin-right:auto" src="<?php echo $urlCdn."media/img/loading.gif"?>" /></div>
 	<div id = "grafica" style = "display:none"></div>
 	<div id="div_tablaDetalle" style="display:none" class="div_tabla_detalle">
 
 		<div id="top-batchs">
-			<span aria-hidden="true" class="icon" data-icon="&#xe046;"></span> Cuenta concentradora
+			<?php if($pais != 'Ec-bp'): ?>
+			<span aria-hidden="true" class="icon" data-icon="&#xe046;"></span>
+			<?php endif;?>
+			Cuenta concentradora
 		</div>
 		<br>
 

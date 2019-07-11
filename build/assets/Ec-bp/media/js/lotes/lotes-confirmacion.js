@@ -68,7 +68,7 @@ $(function(){
 									if(data.ERROR=='-29'){
 														alert('Usuario actualmente desconectado');  location.reload();
 														}  else{notificacion("Confirmación", data.ERROR,null);}
-									$("#confirm").replaceWith('<button id="confirma" >Confirmar</button>');
+									$("#confirm").replaceWith('<button id="confirma" class="novo-btn-primary" >Confirmar</button>');
 
 								}
 						});
@@ -90,6 +90,8 @@ function notificacion(titulo, mensaje, sitio){
   var canvas = "<div>"+mensaje+"</div>";
 
   $(canvas).dialog({
+
+		dialogClass: "hide-close",
     title: titulo,
     modal: true,
     maxWidth: 700,
@@ -104,7 +106,10 @@ function notificacion(titulo, mensaje, sitio){
             }
     },
     buttons: {
-      OK: function(){
+			"Cancelar": { text: 'Cancelar', class: 'novo-btn-secondary-modal', style: 'border-color: #ffdd00 !important;background:white !important;', click: function () {
+				$(this).dialog("close"); }
+			},
+      Aceptar: function(){
             $(this).dialog("close");
             if (sitio) {
               if(sitio=='form#toOS')

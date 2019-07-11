@@ -16,8 +16,12 @@
 
 <body base-url="<?= base_url(); ?>" asset-url="<?= assetUrl(); ?>" country="<?= $countryUri; ?>"
   pais="<?= $countryConf; ?>">
+	<?php if($countryUri != 'bp' || $module != 'login'): ?>
   <header id="head">
     <div id="head-wrapper">
+		<?php if($countryUri == 'bp'): ?>
+		<img class="img-header" src="<?= $this->asset->insertFile('logo-pichincha-azul.png', 'images'); ?>" alt="Banco PICHINCHA">
+		<?php endif; ?>
       <a id="branding" rel="start"></a>
       <?php
 				if($logged) {
@@ -27,6 +31,7 @@
     </div>
   </header>
   <?php
+		endif;
 		if($logged) {
 			$menuP =$this->session->userdata('menuArrayPorProducto');
 			$menu = createMenu($menuP, $countryConf);
@@ -34,7 +39,7 @@
 		}
 	?>
   <div id="wrapper">
-    <?php
+	<?php
 		foreach($viewPage as $views) {
 			$this->load->view($views . '_content');
 		}
@@ -52,14 +57,14 @@
             </a>
           </li>
           <?php endif; ?>
-          <?php if($module !== 'benefits' && $module !== 'change-password' && $module !== 'terms'): ?>
+          <?php if($module !== 'benefits' && $module !== 'change-password' && $module !== 'terms' && $countryUri != 'bp'): ?>
           <li class="menu-item benefits">
             <a href="<?= base_url('inf-beneficios') ?>" rel="section">
               <?= lang('BREADCRUMB_BENEFICIOS') ?>
             </a>
           </li>
           <?php endif; ?>
-          <?php if($module !== 'terms' && $module !== 'change-password'): ?>
+          <?php if($module !== 'terms' && $module !== 'change-password' && $countryUri != 'bp'): ?>
           <li class="menu-item terms">
             <a href="<?= base_url('inf-condiciones'); ?>" rel="section">
               <?= lang('BREADCRUMB_CONDICIONES') ?>
@@ -73,7 +78,7 @@
             </a>
           </li>
           <?php endif; ?>
-          <?php if($logged):	?>
+          <?php if($logged && $countryUri != 'bp'):	?>
           <li class="menu-item privacy">
             <a id='exit' href="<?= base_url('cerrar-sesion'); ?>" rel="section">
               <? echo lang('SUBMENU_LOGOUT'); ?>
@@ -82,6 +87,7 @@
           <?php endif; ?>
         </ul>
       </nav>
+			<?php if($countryUri != 'bp'): ?>
       <a id="ownership" href="http://www.novopayment.com/" rel="me">
         Powered by NovoPayment, Inc.
       </a>
@@ -89,6 +95,7 @@
       <div id="credits">
         <p>© <?= date('Y'); ?> NovoPayment Inc. All rights reserved.</p>
       </div>
+			<?php endif; ?>
     </div>
   </footer>
   <div id="loader" class="hidden">
@@ -102,11 +109,16 @@
     <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
       <div class="ui-dialog-buttonset">
         <button type="button" id="cancel" class="cancel-button"></button>
-        <button type="button" id="accept" class=""></button>
+        <button type="button" id="accept" class="novo-btn-primary" style="width:120px;"></button>
       </div>
     </div>
   </div>
-  <?= $this->asset->insertJs(); ?>
+	<?php
+		if($module == 'login') {
+		echo 	$scriptCaptcha;
+		}
+		echo $this->asset->insertJs();
+	?>
 </body>
 
 </html>

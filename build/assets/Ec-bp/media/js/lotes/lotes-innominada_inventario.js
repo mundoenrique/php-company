@@ -46,20 +46,26 @@ var	calendario = function(input){
 			}
 		}
 		if(valid){
-			notificacion("Solicitud de Innominadas","<h2>Verifique que:</h2>" + contenido);
+			notificacion("Solicitud de Innominadas","<h2>Verifica que:</h2>" + contenido);
 		}
 		return valid;
 	},
 	notificacion = function(titu, msj){
 		var canvas = "<div>"+msj+"</div>";
 			$(canvas).dialog({
+
+			dialogClass: "hide-close",
 				title : titu,
 				modal:true,
 				close: function(){$(this).dialog('destroy')},
 				resizable:false,
 				buttons:{
-					OK: function(){
-						$(this).dialog('destroy');
+					"Aceptar": {
+						text: 'Aceptar',
+						class: 'novo-btn-primary-modal',
+						click: function () {
+						$(this).dialog("close");
+						}
 					}
 				}
 			});

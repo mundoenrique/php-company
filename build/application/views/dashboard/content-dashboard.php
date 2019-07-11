@@ -26,6 +26,19 @@ $ceo_cook = $this->security->get_csrf_hash();
 <div class="filter" id="options">
 	<p id='totalEmpresas' class='total-empr-dash'></p>
 	<ul class="filter-ul option-set" >
+	<?php if($pais == 'Ec-bp'): ?>
+	<select id="filtrar" class="categories-products">
+		<option value="" data-option-value="*" class="selected">Todas</option>
+		<option value="A-C" data-option-value=".A, .B, .C">a-c</option>
+		<option value="D-G" data-option-value=".D, .E, .F, .G">d-g</option>
+		<option value="H-K" data-option-value=".H, .I, .J, .K">h-k</option>
+		<option value="L-O" data-option-value=".L, .M, .N, .O">l-o</option>
+		<option value="P-S" data-option-value=".P, .Q, .R, .S">p-s</option>
+		<option value="T-W" data-option-value=".T, .U, .V, .W">t-w</option>
+		<option value="X-Z" data-option-value=".X, .Y, .Z">x-z</option>
+	</select>
+	<?php endif; ?>
+		<?php if($pais != 'Ec-bp'): ?>
 		<li><a value="" data-option-value="*" class="selected">Todas</a></li>
 		<li><a value="A-C" data-option-value=".A, .B, .C">a-c</a></li>
 		<li><a value="D-G" data-option-value=".D, .E, .F, .G">d-g</a></li>
@@ -34,6 +47,7 @@ $ceo_cook = $this->security->get_csrf_hash();
 		<li><a value="P-S" data-option-value=".P, .Q, .R, .S">p-s</a></li>
 		<li><a value="T-W" data-option-value=".T, .U, .V, .W">t-w</a></li>
 		<li><a value="X-Z" data-option-value=".X, .Y, .Z">x-z</a></li>
+		<?php endif; ?>
 		<li ><input id="search-filter" placeholder="<?php echo lang('BREADCRUMB_PH_BUSCAR') ?>"></li>
 		<li class="filter-3"><a id="buscar" title="<?php echo lang('BREADCRUMB_TITL_BUSCAR') ?>"><span aria-hidden="true" class="icon" data-icon="&#xe07a;" ></span></a></li>
 	</ul>
@@ -82,7 +96,7 @@ $ceo_cook = $this->security->get_csrf_hash();
 <div id='loading' style='text-align:center'><?php echo insert_image_cdn("loading.gif"); ?></div>
 <div class='more-empr'><a id='more' class='elem-hidden'><?php echo lang('LOAD'); ?></a></div>
 
-<div id='products-general' class="elem-hidden resultSet" style='width: 930px; margin-top: -50px'>
+<div id='products-general' class="elem-hidden resultSet" style='width: 930px; margin-top: -22px'>
 	<h2 style='text-align:center;' ><?php echo lang('ERROR_(-150)') ?></h2>
 </div>
 <div id='products-general' class="elem-hidden resultSet2" style='width: 930px; margin-top: -30px'>

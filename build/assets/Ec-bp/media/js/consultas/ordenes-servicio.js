@@ -81,7 +81,6 @@ $(function () {
 	// });
 	// EVENTO BUSCAR OS SEGUN FILTRO
 	$("#buscarOS").on("click", function () {
-
 		var statuLote = $("#status_lote").val();
 		if (statuLote !== '' && COS_var.fecha_inicio !== '' && COS_var.fecha_fin !== '') {
 			var form = $('#form-criterio-busqueda');
@@ -89,7 +88,10 @@ $(function () {
 			if (form.valid()) {
 				if (Date.parse(COS_var.fecha_fin) >= Date.parse(COS_var.fecha_inicio)) {
 
-					$aux = $("#loading").dialog({ title: 'Buscando Orden de Servicio', modal: true, close: function () { $(this).dialog('destroy') }, resizable: false });
+					$aux = $("#loading").dialog({
+
+						dialogClass: "hide-close",
+						title: 'Buscando Orden de Servicio', modal: true, close: function () { $(this).dialog('destroy') }, resizable: false });
 
 					var ceo_cook = decodeURIComponent(
 						document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
@@ -110,7 +112,7 @@ $(function () {
 				notificacion("Buscar Orden de Servicio", "Verifique los datos ingresados e intente nuevamente");
 			}
 		} else {
-			notificacion("Buscar Orden de Servicio", "<h2>Verifique que:</h2><h6>1. Ha seleccionado un rango de fechas.</h6><h6>2. Ha seleccionado un estatus de lote.</h6>")
+			notificacion("Buscar Orden de Servicio", "<h2>Verifica que:</h2><h6>1. Has seleccionado un rango de fechas.</h6><h6>2. Has seleccionado un estatus de lote.</h6>")
 		}
 	});
 
@@ -130,7 +132,22 @@ $(function () {
 		var ceo_cook = decodeURIComponent(
 			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 		);
-		$aux = $("#loading").dialog({ title: 'Descargando archivo PDF', modal: true, close: function () { $(this).dialog('close') }, resizable: false });
+		$aux = $("#loading").dialog({
+
+			dialogClass: "hide-close",
+			title: 'Descargando archivo PDF', modal: true,
+			close: function () {
+				$(this).dialog('close')
+			},buttons: {
+				"Aceptar": {
+					text: 'Aceptar',
+					class: 'novo-btn-primary-modal',
+					click: function () {
+					$(this).dialog("close");
+					}
+				}
+			},
+			resizable: false });
 		$('form#formulario').empty();
 		$('form#formulario').append('<input type="hidden" name="ceo_name" value="' + ceo_cook + '">');
 		$('form#formulario').append('<input type="hidden" name="data-idOS" value="' + OS + '" />');
@@ -167,14 +184,21 @@ $(function () {
 	function notificacion(titu, msj) {
 		var canvas = "<div>" + msj + "</div>";
 		$(canvas).dialog({
+
+			dialogClass: "hide-close",
 			title: titu,
 			modal: true,
 			close: function () { $(this).dialog('destroy') },
 			resizable: false,
 			buttons: {
-				OK: function () {
-					$(this).dialog('destroy');
+				"Aceptar":{
+					text: 'Aceptar',
+					class: 'novo-btn-primary-modal',
+					click: function () {
+						$(this).dialog('destroy');
+					}
 				}
+
 			}
 		});
 	}
@@ -283,18 +307,47 @@ $(function () {
 		var pass;
 
 		$(canvas).dialog({
+
+			dialogClass: "hide-close",
 			title: 'Anular Orden de Servicio',
 			modal: true,
 			resizable: false,
+			buttons: {
+				"Aceptar": {
+					text: 'Aceptar',
+					class: 'novo-btn-primary-modal',
+					click: function () {
+					$(this).dialog("close");
+					}
+				}
+			},
 			close: function () { $(this).dialog("destroy"); },
 			buttons: {
-				Anular: function () {
-					pass = $(this).find('#pass').val();
+				"Anular": {
+					text: 'Anular',
+					class: 'novo-btn-primary-modal',
+					click: function () {
+						pass = $(this).find('#pass').val();
 					if (pass !== "") {
 						pass = hex_md5(pass);
 						$('#pass').val('');
 						$(this).dialog('destroy');
-						var $aux = $('#loading').dialog({ title: 'Anulando Orden de Servicio', modal: true, resizable: false, close: function () { $aux.dialog('close'); } });
+						var $aux = $('#loading').dialog({
+
+							dialogClass: "hide-close",
+							title: 'Anulando Orden de Servicio', modal: true, resizable: false,
+							buttons: {
+								"Aceptar": {
+									text: 'Aceptar',
+									class: 'novo-btn-primary-modal',
+									click: function () {
+									$(this).dialog("close");
+									}
+								}
+							},
+							close: function () { $aux.dialog('close');
+							}
+						});
 						var ceo_cook = decodeURIComponent(
 							document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 						);
@@ -324,6 +377,7 @@ $(function () {
 					} else {
 						$(this).find($('#msg')).text('Debe ingresar su contraseña');
 					}
+					}
 				}
 			}
 		});
@@ -336,6 +390,8 @@ $(function () {
 			totalamount = $(this).closest('tr').find('#montoDeposito').text(),
 			factura = $(this).closest('tr').find('#facturaOS').text(),
 			$aux = $('#loading').dialog({
+
+				dialogClass: "hide-close",
 				title: 'Enviando código de seguridad',
 				modal: true,
 				resizable: false,
@@ -356,6 +412,8 @@ $(function () {
 					canvas += "<h5 id='msg'></h5></fieldset></div>";
 
 					$(canvas).dialog({
+
+						dialogClass: "hide-close",
 						title: data.title,
 						modal: true,
 						resizable: false,
@@ -364,12 +422,17 @@ $(function () {
 							$(this).dialog("destroy");
 						},
 						buttons: {
-							Procesar: function () {
-								var codeToken = $("#token-code").val();
+							"Procesar": {
+								text: 'Procesar',
+								class: 'novo-btn-secondary-modal',
+								click: function () {
+									var codeToken = $("#token-code").val();
 								if (codeToken != '') {
 									$("#token-code").val('');
 									$(this).dialog('destroy');
 									$aux = $('#loading').dialog({
+
+										dialogClass: "hide-close",
 										title: 'Procesando',
 										modal: true,
 										resizable: false,
@@ -412,6 +475,7 @@ $(function () {
 									$(this).find($('#token-code').css('border-color', '#cd0a0a'));
 									$(this).find($('#msg')).text('Debe ingresar el código de seguridad enviado a su correo');
 								}
+								}
 							}
 						}
 					});
@@ -430,7 +494,19 @@ $(function () {
 		orden = $(this).parents("tr").attr("id");
 		$(this).removeAttr("href");
 		$(this).removeAttr('target');
-		$aux = $("#loading").dialog({ title: 'Descargando factura', modal: true, close: function () { $(this).dialog('close') }, resizable: false });
+		$aux = $("#loading").dialog({
+
+			dialogClass: "hide-close",
+			title: 'Descargando factura', modal: true,
+			buttons: {
+				"Aceptar": {
+					text: 'Aceptar',
+					class: 'novo-btn-primary-modal',
+					click: function () {
+					$(this).dialog("close");
+					}
+				}
+			}, resizable: false });
 		var ceo_cook = decodeURIComponent(
 			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 		);
@@ -448,6 +524,8 @@ $(function () {
 function notiPagOS(titu, msg, type) {
 	var canvas = "<div style='text-align: center;'>" + msg + "</div>";
 	$(canvas).dialog({
+
+		dialogClass: "hide-close",
 		title: titu,
 		modal: true,
 		resizable: false,
@@ -456,10 +534,11 @@ function notiPagOS(titu, msg, type) {
 			$('.ui-dialog-titlebar-close', ui.dialog).hide();
 		},
 		buttons: {
-			OK: function () {
-				$(this).dialog('destroy');
-				if (type == 'close') {
-					window.location.replace(baseURL + isoPais + '/logout');
+			"Aceptar": {
+				text: 'Aceptar',
+				class: 'novo-btn-primary-modal',
+				click: function () {
+				$(this).dialog("close");
 				}
 			}
 		}

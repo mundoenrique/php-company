@@ -84,6 +84,10 @@ p {
 	padding-left: 30px;
 }
 
+.img-header {
+	height: 28px;
+}
+
 nav ul.menu {
 	margin: 0;
 	padding: 0;
@@ -147,7 +151,7 @@ button {
 }
 
 #head-wrapper {
-	height: 29px;
+	height: 45px;
 	margin: 12px auto;
 	width: 1000px;
 }
@@ -188,7 +192,7 @@ ol.breadcrumb li {
 }
 
 #sidebar {
-	float: right;
+	margin: auto;
 	width: 250px;
 }
 
@@ -218,6 +222,10 @@ h2.widget-title {
 	width: 100%;
 	height: 35px;
 	position: relative;
+}
+
+.margin-bottom{
+	margin-bottom: 30px;
 }
 
 button .requesting {
@@ -962,6 +970,7 @@ button.ui-button::-moz-focus-inner {
 
 .ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset {
 	float: right;
+
 }
 
 .ui-dialog .ui-dialog-buttonpane button {
@@ -1438,14 +1447,12 @@ li.filter-1 a {
 }
 
 button.r-button {
-	float: right;
 	margin: 0;
 }
 
 .cancel-anchor {
 	padding: 0 10px 0 0;
-	float: right;
-	margin-left: 15px;
+	margin-left: 4px;
 }
 
 .cancel-button {
@@ -2223,7 +2230,7 @@ tr.GC-first th {
 }
 
 #batchs-last #selec_tipo_lote {
-	margin: 12px 10px 0px 0px;
+	margin: 0px 10px 0px 0px;
 }
 
 #batchs-last #button-eliminar {
@@ -3926,3 +3933,5 @@ a {
 .general-form-msg {
 	width: 100%;
 }
+
+

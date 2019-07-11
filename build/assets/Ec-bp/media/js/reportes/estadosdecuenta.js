@@ -295,7 +295,7 @@ $(document).ready(function () {
 
 
 							//CREA LA CABECERA DE LA TABLA JUNTO CON LOS ICONOS
-							contenedor.html('<div id="top-batchs"><span aria-hidden="true" class="icon" data-icon="&#xe05c;"></span> Resultados Estado de cuenta </div>');
+							contenedor.html('<div id="top-batchs">Resultados Estado de cuenta </div>');
 							div = $(document.createElement("div")).appendTo(contenedor);
 							div.attr("id", "view-results");
 							div.attr("style", "padding-right:20px;");
@@ -922,6 +922,8 @@ $(document).ready(function () {
 		var canvas = "<div>" + mensaje + "</div>";
 
 		$(canvas).dialog({
+
+			dialogClass: "hide-close",
 			title: titulo,
 			modal: true,
 			maxWidth: 700,
@@ -931,8 +933,11 @@ $(document).ready(function () {
 				$(this).dialog("destroy");
 			},
 			buttons: {
-				OK: function () {
+				"Aceptar": { text: 'Aceptar', class: 'novo-btn-primary-modal',
+				click: function () {
+
 					$(this).dialog("destroy");
+				 }
 				}
 			}
 		});

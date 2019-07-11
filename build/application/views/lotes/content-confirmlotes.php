@@ -45,7 +45,9 @@ log_message('info',json_encode($data));
 			?>
 
 			<div id="top-batchs">
+				<?php if($pais != 'Ec-bp'): ?>
 				<span aria-hidden="true" class="icon" data-icon="&#xe03c;"></span>
+				<?php endif; ?>
 				<?php echo lang('TITULO_LOTES_CONFIRMACIONT'); ?>
 			</div>
 			<div id="lotes-contenedor">
@@ -151,9 +153,24 @@ log_message('info',json_encode($data));
 			</div>
 			<div id="batchs-last">
 				<form id="form-confirmacion" onsubmit="return false">
-					<input id="clave" class="input-clave" type="password" name="user-password" placeholder="<?php echo lang('MSG_INGRESE_CLAVE'); ?>" value="">
-					<button onclick="location.href='<?php echo $urlBase; ?>/lotes'"><?php echo lang('BOTON_LOTES_CANCELAR') ?></button>
-					<button id="confirma" ><?php echo lang('BOTON_LOTES_CONFIRMAR') ?></button>
+				<?php
+					if($pais=='Ec-bp'){
+						?>
+							<center>
+						<?php
+					}
+				?>
+						<input id="clave" class="input-clave" type="password" name="user-password" placeholder="<?php echo lang('MSG_INGRESE_CLAVE'); ?>" value="">
+						<?php
+					if($pais=='Ec-bp'){
+						?>
+							</center>
+							<center>
+						<?php
+					}
+				?>
+					<button class="novo-btn-secondary" onclick="location.href='<?php echo $urlBase; ?>/lotes'"><?php echo lang('BOTON_LOTES_CANCELAR') ?></button>
+					<button id="confirma" class="novo-btn-primary"><?php echo lang('BOTON_LOTES_CONFIRMAR') ?></button>
 
 					<input type="hidden" id="tipo" name="tipo" class="ignore" data-tipo='<?php echo $info->tipoLote ?>'/>
 
@@ -161,6 +178,7 @@ log_message('info',json_encode($data));
 
 					<input type="hidden" id="idTipoLote" name="idTipoLote" class="ignore" value='<?php echo $info->idTipoLote ?>'/>
 
+					</center>
 				</form>
 			</div>
 

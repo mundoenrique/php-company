@@ -267,7 +267,7 @@ $lang['ERROR_GET_LIST'] = "No fue posible obtener la lista, por favor intenta m�
 $lang['ERROR_DESCARGA'] = 'No fue posible descargar el archivo, por favor intenta más tarde';
 
 //recuperar contraseña
-$lang["TITULO_ERROR"] = 'No ha sido posible procesar su solicitud.';
+$lang["TITULO_ERROR"] = 'No ha sido posible procesar tu solicitud.';
 $lang["ERROR_RIF"] = 'Por favor verifique el No. de RIF de la empresa.';
 $lang["ERROR_USER"] = 'El Usuario no está registrado en el sistema.';
 $lang["ERROR_MAIL"] = 'El correo indicado no corresponde, por favor verifíquelo e inténtelo de nuevo.';

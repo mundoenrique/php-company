@@ -137,7 +137,7 @@ var datatable;
 			contenido+= "<h6>"+count+". La cantidad de tarjetas no sea superior a "+maxTarjetas+"</h6>";
 		}
 		if(count > 0){
-			notificacion("Solicitud de Innominadas","<h2>Verifique que:</h2>" + contenido);
+			notificacion("Solicitud de Innominadas","<h2>Verifica que:</h2>" + contenido);
 			valid = true;
 		}
 		return valid;
