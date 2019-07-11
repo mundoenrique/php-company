@@ -4755,3 +4755,67 @@ li.ui-state-default.ui-corner-top:nth-child(3) {
 	color: #e8446c;
 	font-size: 12px;
 }
+/**Estilos de los botones NOVO NEW****/
+
+.novo-btn-primary,.novo-btn-secondary{
+	width:120px;
+	padding-left:15px;
+	padding-right:15px;
+}
+.novo-btn-primary-modal,.novo-btn-secondary-modal{
+	width:68px;
+	padding-left:15px;
+	padding-right:15px;
+}
+
+.novo-btn-primary:hover{
+	background: url('../img/BackgroundButtonHover.png') left center no-repeat #ffdd00;
+}
+.novo-btn-primary:active{
+	background: #ffd000;
+}
+.novo-btn-primary-modal:hover{
+	background: url('../img/BackgroundButtonHover.png') left center no-repeat #ffdd00;
+}
+
+.novo-btn-secondary,.novo-btn-secondary-modal{
+	border: 1px solid #ffdd00;
+	background:white !important;
+}
+/* .novo-btn-secondary-modal{
+	background:white;
+} */
+.novo-btn-secondary:hover{
+	border: 1px solid #ffdd00 !important;
+	background-color: #fffede !important;
+}
+.novo-btn-secondary:active{
+	border: 1px solid #ffdd00 !important;
+	color:#10133f;
+	background-color: #fdfbb5 !important;
+}
+
+.novo-btn-secondary-modal:hover{
+
+	background:#fffede !important;
+	border: 1px solid #ffdd00 !important;
+}
+.novo-btn-secondary-modal:active{
+
+	background:#fdfbb5 !important;
+	border: 1px solid #ffdd00 !important;
+}
+.btn-authorization{
+	margin-bottom: 10px;
+	margin-top: 10px;
+	border: 1px solid #ffdd00;
+}
+.cancel_anchor{
+	border-radius:3px;
+}
+
+.novo-cancel-pass-recovery{
+	display:inline-block;
+	border-radius:3px;
+	margin: 15px 0px 0px;
+}
