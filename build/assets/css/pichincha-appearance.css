@@ -4275,7 +4275,7 @@ a.cancel-anchor:hover {
 	-webkit-box-shadow: none;
 	-moz-box-shadow: none;
 	box-shadow: none;
-	color: #f04848 !important;
+
 }
 
 .cancel-button {
@@ -4769,7 +4769,7 @@ li.ui-state-default.ui-corner-top:nth-child(3) {
 }
 
 .novo-btn-primary:hover{
-	background: url('../img/BackgroundButtonHover.png') left center no-repeat #ffdd00;
+	/* background: url('../img/BackgroundButtonHover.png') left center no-repeat #ffdd00; */
 }
 .novo-btn-primary:active{
 	background: #ffd000;
@@ -4816,6 +4816,9 @@ li.ui-state-default.ui-corner-top:nth-child(3) {
 
 .novo-cancel-pass-recovery{
 	display:inline-block;
+	width:120px;
 	border-radius:3px;
+	padding-left: 0px;
+	padding-right: 0px;
 	margin: 15px 0px 0px;
 }
