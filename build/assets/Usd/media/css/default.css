@@ -4405,7 +4405,7 @@ ul#brands li p img {
   max-width: 70px;
   min-width: 70px;
   float: left;
-  padding: 3px;
+  padding-right: 3px;
   text-align: center;
   font-size: 12px;
 }
