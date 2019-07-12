@@ -330,8 +330,8 @@ $(function () {
 		})
 		dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, { format: CryptoJSAesJson }).toString();
 		$.post(url, { request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook) })
-			.done(function (response) {
-				data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, { format: CryptoJSAesJson }).toString(CryptoJS.enc.Utf8))
+			.done(function (data) {
+				response = JSON.parse(CryptoJS.AES.decrypt(data.code, data.plot, { format: CryptoJSAesJson }).toString(CryptoJS.enc.Utf8))
 				$aux.dialog("destroy");
 
 				if (!response.ERROR) {
