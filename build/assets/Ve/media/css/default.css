@@ -5527,6 +5527,9 @@ li#select-empresa select {
   padding-right:10px;*/
   width: 300px;
 }
+tbody#tbody-datos-general .odd>.dataTables_empty {
+	min-width: 647px!important;
+}
 #embozo1 select, #embozo2 select {
   width: 250px;
   background: #f3f3f3;
