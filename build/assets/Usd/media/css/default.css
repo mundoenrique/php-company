@@ -5547,6 +5547,10 @@ padding:5px 0px;
   border-radius: 3px;
   border-left: 3px solid #54c2d0;
 }
+
+tbody#tbody-datos-general .odd>.dataTables_empty {
+	min-width: 647px!important;
+}
 .tbody-reportes tr td {
   text-align: center;
   border: 1px dotted #dddddd;
