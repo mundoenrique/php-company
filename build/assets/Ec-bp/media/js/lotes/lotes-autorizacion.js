@@ -82,7 +82,8 @@ $(function () {
 					$('<div>Proceso exitoso.<h5>Listando lotes</h5></div>').dialog({
 						title: "Firmando lote",
 						modal: true,
-						bgiframe: true
+						bgiframe: true,
+						dialogClass: 'hide-close',
 					});
 					location.reload();
 				} else {
@@ -178,6 +179,7 @@ $(function () {
 							modal: true,
 							resizable: false,
 							draggable: false,
+							dialogClass: 'hide-close',
 							open: function(event, ui) {
 								$('.ui-dialog-titlebar-close', ui.dialog).hide();
 							},
@@ -250,6 +252,7 @@ $(function () {
 			title: "Desasociar firma de lote",
 			modal: true,
 			bgiframe: true,
+			dialogClass: 'hide-close',
 			close: function () {
 				$(this).dialog('destroy');
 			},
@@ -265,14 +268,15 @@ $(function () {
 						var $aux = $('#loading').dialog({
 							title: "Desasociar firma de lote",
 							modal: true,
-							bgiframe: true
+							bgiframe: true,
+							dialogClass: 'hide-close',
 						});
 						var ceo_cook = decodeURIComponent(
 							document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 						);
 						var dataRequest = JSON.stringify({'data_lotes':idlote, 'data_pass':pass});
 						dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
-						$.post(baseURL + isoPais + '/lotes/autorizacion/desasociar', {request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)}).done(function (data) {
+						$.post(baseURL + isoPais + '/lotes/autorizacion/desasociar', {request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)}).done(function (response) {
 							var data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
 							$aux.dialog('destroy');
 							if (!data.ERROR) {
@@ -344,7 +348,7 @@ $(function () {
 		if ((!$('#clave').val() && tabla == 'table-firmar') || (!$('#claveAuth').val() && tabla == 'table-auth')) {
 
 			$(canvas).dialog({
-			dialogClass: "hide-close",
+				dialogClass: "hide-close",
 				title: "Eliminar Lote",
 				modal: true,
 				position: {
@@ -431,6 +435,7 @@ $(function () {
 			maxHeight: 300,
 			bgiframe: true,
 			draggable: false,
+			dialogClass: 'hide-close',
 			open: function (event, ui) {
 				$('.ui-dialog-titlebar-close', ui.dialog).hide();
 			},
