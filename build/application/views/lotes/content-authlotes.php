@@ -279,11 +279,12 @@
 								echo 	'<button id="button-autorizar" type="submit">'.lang('TITULO_LOTESBTN_AUTORIZAR').'</button>';
 							}
 							if($pais!='Ec-bp'){
+								echo '<input id="claveAuth" type="password" name="claveAuth" placeholder="'.lang("MSG_INGRESE_CLAVE").'" value="" #batchs-last input style="margin-left: 10px;"/>';
 								$selectTipoLote = $pais == 'Ve' ? '<input type="hidden" id="selec_tipo_lote" value="1">' :
 								'<select id="selec_tipo_lote" name="tipo_lote_select">
 									<option value="0">'.lang('SELECT_OPTION_XLOTE').'</option>
 									<option value="1" selected>'.lang('SELECT_OPTION_XTIPO_lOTE').'</option>
-								</select><input id="claveAuth" type="password" name="claveAuth" placeholder="'.lang("MSG_INGRESE_CLAVE").'" value="" #batchs-last input style="margin-left: 10px;    margin-bottom: 0px;"/>';
+								</select>';
 								echo $selectTipoLote;
 							}
 			echo '</form>
