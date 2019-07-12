@@ -25,7 +25,7 @@ $("#cambioClave").on("click",function(event){
 		alerta = "Máximo 15 caracteres";
 		notificacion(alerta);
 	}else if ( !($('#length').hasClass("valid") && $('#letter').hasClass("valid") && $('#capital').hasClass("valid") && $('#number').hasClass("valid") && $('#consecutivo').hasClass("valid") && $('#especial').hasClass("valid"))){
-		alerta = "Verifique el formato de la contraseña";
+		alerta = "Verifica el formato de la contraseña";
 		notificacion(alerta);
 	}else{
 		if(active=='1'){

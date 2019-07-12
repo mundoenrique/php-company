@@ -53,7 +53,9 @@
 	?>
 
 	<div id="top-batchs">
+		<?php if($pais != 'Ec-bp'): ?>
 		<span aria-hidden="true" class="icon" data-icon="&#xe03c;"></span>
+		<?php endif; ?>
 		<?php echo lang('TITULO_LOTES_DETALLE'); ?>
 	</div>
 
@@ -111,7 +113,10 @@
 	</div>
 	<div id='detalle-reg'>
 		<div id="top-batchs">
-			<span aria-hidden="true" class="icon" data-icon="&#xe03c;"></span><?php echo lang('TITLE_REG_LOTES'); ?>
+			<?php if($pais != 'Ec-bp'): ?>
+			<span aria-hidden="true" class="icon" data-icon="&#xe03c;"></span>
+			<?php endif; ?>
+			<?php echo lang('TITLE_REG_LOTES'); ?>
 		</div>
 		<div id="lotes-contenedor">
 		<?php

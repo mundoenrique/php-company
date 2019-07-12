@@ -75,7 +75,7 @@
               <select id="account" name="account" code="<?= $dataCtas['code'] ?>" title="<?= $dataCtas['title'] ?>"
                 msg="<?= $dataCtas['msg'] ?>" disabled>
                 <option value="0" selected>
-                  <?= $dataCtas['code'] == 0 ? 'Seleccione una Cuenta' : $dataCtas['data'] ?>
+                  <?= $dataCtas['code'] == 0 ? 'Selecciona una Cuenta' : $dataCtas['data'] ?>
                 </option>
                 <?php if($dataCtas['code'] == 0): foreach($ctas as $pos => $cta): ?>
                 <option value="<?= $cta['value'] ?>"><?= $cta['descrip'].'   --Saldo: '.$cta['saldo'] ?></option>

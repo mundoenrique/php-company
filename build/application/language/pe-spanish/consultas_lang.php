@@ -6,12 +6,12 @@ $lang['TITULO_CRITERIOSBUSQ']="Criterio de búsqueda";
 $lang['TITULO_CONSULTA_OSE']="Órdenes de servicio";
 $lang['TITULO_CONSULTA_OS_LOTESNF']="Lotes no facturables";
 
-$lang['TABLA_COS_ID_ORDEN']='Orden Nro.';
+$lang['TABLA_COS_ID_ORDEN']='Orden nro.';
 $lang['TABLA_COS_FECHA']='Fecha';
 $lang['TABLA_COS_EMPRESA']='Empresa';
 $lang['TABLA_COS_MONTO_OS']='Monto OS';
 $lang['TABLA_COS_MONTO_DEPOSITADO']='Monto depositado';
-$lang['TABLA_COS_NRO_LOTE']='Lote Nro.';
+$lang['TABLA_COS_NRO_LOTE']='Lote nro.';
 $lang['TABLA_COS_TIPO']='Tipo';
 $lang['TABLA_COS_CANT']='Cant.';
 $lang['TABLA_COS_STATUS']='Estatus';

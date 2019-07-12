@@ -223,7 +223,7 @@ function validar_campos()
             'last-date': {required: true, dateConfirm: true}
         },
         messages: {
-            'search-option': 'Seleccione un opción',
+            'search-option': 'Selecciona un opción',
             'plate': 'Indique la matricula del vehículo',
             'first-date': {
                 required: 'Indique la fecha de inicio',

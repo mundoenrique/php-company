@@ -86,7 +86,7 @@ class Lotes extends CI_Controller {
 		}elseif($logged_in) {
 			echo "
 			<script>
-			alert('Seleccione un producto');
+			alert('Selecciona un producto');
 			location.href = '".$this->config->item('base_url')."$urlCountry/dashboard/productos';
 			</script>
 			";

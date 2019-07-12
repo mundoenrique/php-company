@@ -29,7 +29,7 @@
 				<div class="align-center">
 					<p>Restablecer contraseña</p>
 					<a href="<?= base_url('recuperar-clave') ?>" rel="section">
-						¿Olvidó o bloqueó su<br> clave de acceso?
+						¿Olvidaste o bloqueaste tu<br>clave de acceso?
 					</a>
 				</div>
 			</div>

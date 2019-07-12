@@ -106,49 +106,6 @@ $("#listCompanies").on('mouseleave','.space-companies',function(){
 	$("span#more-info").fadeOut("fast");
 })
 
-	// $("#listCompanies").on('mouseover', '.style-companies-item', function () {
-	// 	//$(this).addClass('style-companies-item-activa');
-	// 	$(this).parents('li').css('z-index', '3');
-
-	// 	$(this).next("span#more-info").fadeIn("fast");
-	// 	/*
-	// 		if( dash_var.p && dash_var.pp == dash_var.pgActual ){
-	// 			dash_var.pp-=1;
-	// 		}
-
-
-	// 		if( dash_var.p && (dash_var.pp<dash_var.pgActual || dash_var.pgActual==dash_var.pgTotal) ){
-
-	// 			dash_var.p=false;
-	// 			$container.height($container.height()+140);
-
-	// 		}
-	// 	*/
-	// 	itemsFiltro = $('.space-companies').not('.isotope-hidden').length;
-	// 	filas = Math.floor(itemsFiltro / 3);
-	// 	(itemsFiltro / 3) == filas ? filas = filas : filas = filas + 1;
-	// 	$container.height((filas * $('.isotope-item').height()) + 160);
-
-	// });
-
-	// $("#listCompanies").on('mouseleave', '.style-companies-item', function () {
-	// 	//$(this).parents('#listCompanies').find('.style-companies-item-activa').removeClass('style-companies-item-activa');
-	// 	$("span#more-info").parents('li').not(this).css('z-index', '2');
-
-	// 	$("span#more-info").not(this).fadeOut("fast");
-	// }
-	// );
-
-
-
-	// $("#more-info").on("click", function (event) {
-	// 	event.stopPropagation();
-	// });
-
-	// --Fin seleccionar Item
-
-
-
 	// Busqueda alfabetica
 
 
@@ -293,24 +250,14 @@ $("#listCompanies").on('mouseleave','.space-companies',function(){
 	function noResults() {
 
 		if (!$container.data('isotope').$filteredAtoms.length && $('.space-companies').length > 0) {
-			//  if(!$("#more").is(":visible")){
 			$('.resultSet').show();
-			//$('#paginado-dash').empty();
 			$('#contend-pagination-p').hide();
 			//}
 
 		} else {
 			$('.resultSet').hide();
-			//$('#paginado-dash').show();
 			$('#contend-pagination-p').show();
 		}
-
-		/* if( dash_var.paginar && dash_var.pgActual < dash_var.pgTotal ){
-								$('#more').show();
-							}else{
-								$('#more').hide();
-							}
-							*/
 	}
 	// Mostrar/ocultar Text sin resultados
 
@@ -323,20 +270,6 @@ $("#listCompanies").on('mouseleave','.space-companies',function(){
 		}
 	);
 	//-- Fin mostrar/ocultar campo de texto
-
-
-
-	// PAGINACION
-	/*
-	$('#more').on('click', function(){
-		 if( dash_var.pgActual < dash_var.pgTotal ){
-				dash_var.pgActual+=1;
-				paginar();
-		 }
-
-	});
- */
-	//-- FIN PAGINACION
 
 	$("#listCompanies").on("click", '.style-companies-item', function () {
 		var ceo_cook = decodeURIComponent(

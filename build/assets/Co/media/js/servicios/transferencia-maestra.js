@@ -280,7 +280,7 @@ $(function () {
 			}
 
 		} else {
-			notificacion('Consulta a tarjeta', '<h2>Verifica que: </h2><h3>1. Has seleccionado al menos una tarjeta</h3><h3>2. Has ingresado su contraseña</h3>');
+			notificacion('Consulta a tarjeta', '<h2>Verifica que: </h2><h3>1. Has seleccionado al menos una tarjeta</h3><h3>2. Has ingresado tu contraseña</h3>');
 
 		}
 
@@ -295,7 +295,7 @@ $(function () {
 			llamarWS($('#clave').val(), baseURL + api + isoPais + '/servicios/transferencia-maestra/abonar', '20', 'Abonando...');
 
 		} else if ($('#clave').val() == '') {
-			notificacion('Abono a tarjeta', '<h2>Verifica que: </h2><h3>1. Ha ingresado el monto a abonar</h3><h3>2. Has ingresado su contraseña</h3>');
+			notificacion('Abono a tarjeta', '<h2>Verifica que: </h2><h3>1. Ha ingresado el monto a abonar</h3><h3>2. Has ingresado tu contraseña</h3>');
 
 		}
 
@@ -311,7 +311,7 @@ $(function () {
 			llamarWS($('#clave').val(), baseURL + api + isoPais + '/servicios/transferencia-maestra/cargar', '40', 'Cargando...');
 
 		} else if ($('#clave').val() == '') {
-			notificacion('Cargo a tarjeta', '<h2>Verifica que: </h2><h3>1. Ha ingresado el monto a cargar</h3><h3>2. Has ingresado su contraseña</h3>');
+			notificacion('Cargo a tarjeta', '<h2>Verifica que: </h2><h3>1. Has ingresado el monto a cargar</h3><h3>2. Has ingresado tu contraseña</h3>');
 
 		}
 
@@ -374,7 +374,7 @@ $(function () {
 					}
 
 					mostrar_estatus(data);
-					notificacion(mensaje, '<h4>Proceso exitoso</h4><h5>' + serv_var.fallidas + ' tarjetas fallidas</h5><h5>Verifique estatus y/o saldo de sus tarjetas</h5>');
+					notificacion(mensaje, '<h4>Proceso exitoso</h4><h5>' + serv_var.fallidas + ' tarjetas fallidas</h5><h5>Verifica estatus y/o saldo de las tarjetas</h5>');
 
 				} else {
 					if (data.ERROR == '-29') {
@@ -397,7 +397,7 @@ $(function () {
 		var canvas = "<div id='dialog-confirm'>";
 		canvas += "<form name='no-form' onsubmit='return false'>";
 		canvas += "<p>Tarjeta: " + serv_var.noTarjetas + "</p>";
-		canvas += "<fieldset><input type='password' name='pass' id='pass' placeholder='Ingrese su contraseña' size='28'>";
+		canvas += "<fieldset><input type='password' name='pass' id='pass' placeholder='Ingresa tu contraseña' size='28'>";
 		canvas += "</fieldset><h5 id='msg'></h5>";
 		canvas += "</form>"
 		canvas += "</div>"
@@ -423,7 +423,7 @@ $(function () {
 						$(this).dialog("destroy");
 					} else {
 						$(this).find('#msg').empty();
-						$(this).find('#msg').append("Debe ingresar la contraseña");
+						$(this).find('#msg').append("Debes ingresar la contraseña");
 					}
 
 					resett();
@@ -675,15 +675,15 @@ $(function () {
 				return false;
 
 			} else if (sum > toFormat(serv_var.maestroParam.montoMaxTransDia)) { // validar montos (diario y semanal)
-				notificacion(trans + ' a tarjeta', '<h2>Ha excedido el monto diario</h2> <h6>Monto ' + trans + ': ' + toFormatShow(sum) + '</h6><h6>Monto permitido: ' + toFormatShow(serv_var.maestroParam.montoMaxTransDia) + '</h6>')
+				notificacion(trans + ' a tarjeta', '<h2>Has excedido el monto diario</h2> <h6>Monto ' + trans + ': ' + toFormatShow(sum) + '</h6><h6>Monto permitido: ' + toFormatShow(serv_var.maestroParam.montoMaxTransDia) + '</h6>')
 				return false;
 
 			} else if ((sum + acumSem) > toFormat(serv_var.maestroParam.montoMaxTransSemanal)) {
-				notificacion(trans + ' a tarjeta', '<h2>Ha excedido el monto semanal</h2> <h6>Monto ' + trans + ': ' + toFormatShow(sum) + '</h6><h6>Monto permitido: ' + toFormatShow(serv_var.maestroParam.montoMaxTransSemanal - acumSem) + '</h6>')
+				notificacion(trans + ' a tarjeta', '<h2>Has excedido el monto semanal</h2> <h6>Monto ' + trans + ': ' + toFormatShow(sum) + '</h6><h6>Monto permitido: ' + toFormatShow(serv_var.maestroParam.montoMaxTransSemanal - acumSem) + '</h6>')
 				return false;
 
 			} else if (toFormat(sum + comision) > toFormat(serv_var.saldoDispon) && operacion == '20') { // si saldo disponible para abono
-				notificacion(trans + ' a tarjeta', '<h2>Ha excedido el saldo disponible</h2> <h6>Monto ' + trans + ' mas comisión: ' + toFormatShow(sum + comision) + '</h6><h6>Saldo disponible: ' + toFormatShow(serv_var.saldoDispon) + '</h6>')
+				notificacion(trans + ' a tarjeta', '<h2>Has excedido el saldo disponible</h2> <h6>Monto ' + trans + ' mas comisión: ' + toFormatShow(sum + comision) + '</h6><h6>Saldo disponible: ' + toFormatShow(serv_var.saldoDispon) + '</h6>')
 				return false;
 
 			} else if (sum < toFormat(serv_var.maestroParam.montoMinTransDia)) {
@@ -700,7 +700,7 @@ $(function () {
 
 
 		} else {
-			notificacion(trans + ' a tarjeta', 'Ingrese el monto');
+			notificacion(trans + ' a tarjeta', 'Ingresa el monto');
 			return false;
 		}
 
@@ -960,7 +960,7 @@ $(function () {
 												})
 										} else {
 											$(this).find($('#token-code').css('border-color', '#cd0a0a'));
-											$(this).find($('#msg')).text('Debe ingresar el código de seguridad enviado a su correo');
+											$(this).find($('#msg')).text('Debes ingresar el código de seguridad enviado a tu correo');
 										}
 									}
 								}

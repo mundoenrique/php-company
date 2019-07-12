@@ -50,7 +50,7 @@ function to_ascii($word){
                 <?php
                 if(!array_key_exists("ERROR", $productos)){
                     foreach ($listaCategorias as $lista) {
-                        echo '<option value=".'.url_title(to_ascii(mb_strtolower($lista->descripcion))).'">'.$lista->descripcion.'</option>';
+                        echo '<option value=".'.url_title(to_ascii(mb_strtolower($lista->descripcion))).'">'.ucfirst(mb_strtolower($lista->descripcion)).'</option>';
                     }
                 }
                 ?>

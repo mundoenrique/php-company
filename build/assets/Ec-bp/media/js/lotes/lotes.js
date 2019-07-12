@@ -67,11 +67,11 @@ $(function () { // Document ready
 								$('#archivo').val("");
 							});
 						} else {
-							notificacion("Cargando archivo", "Seleccione un tipo de lote");
+							notificacion("Cargando archivo", "Selecciona un tipo de lote");
 						}
 					});
 			} else {
-				notificacion("Cargando archivo", "Tipo de archivo no permitido. <h5>Formato requerido: txt o xls</h5>");
+				notificacion("Cargando archivo", "Tipo de archivo no permitido. <h5>Formato requerido: xls</h5>");
 				$('#userfile').val("");
 				$('#archivo').val("");
 			}
@@ -272,8 +272,8 @@ $(function () { // Document ready
 
 
 		var canvas = "<div id='dialog-confirm'>";
-		canvas += "<p>Nombre: " + arch + "</p>  <p><strong>Ingrese su contraseña</strong></p>";
-		canvas += "<form onsubmit='return false'><fieldset><input type='password' id='pass' name='user-password' size=27 placeholder='Ingrese su contraseña' class='text ui-widget-content ui-corner-all'/>";
+		canvas += "<p>Nombre: " + arch + "</p>  <p><strong>Ingresa tu contraseña</strong></p>";
+		canvas += "<form onsubmit='return false'><fieldset><input type='password' id='pass' name='user-password' size=27 placeholder='Ingresa tu contraseña' class='text ui-widget-content ui-corner-all'/>";
 		canvas += "<h5 id='msg'></h5></fieldset></form></div>";
 
 		var pass;
@@ -357,7 +357,7 @@ $(function () { // Document ready
 								$(this).find($('#msg')).text('Contraseña inválida');
 							}
 						} else {
-							$(this).find($('#msg')).text('Debe ingresar su contraseña');
+							$(this).find($('#msg')).text('Debes ingresar tu contraseña');
 						}
 
 					}

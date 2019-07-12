@@ -249,7 +249,7 @@ $(function () {
 					if (data === 1) {
 						$(location).attr('href', baseURL + isoPais + "/dashboard/productos/");
 					} else {
-						MarcarError('Intente de nuevo');
+						MarcarError('Intenta de nuevo');
 					}
 
 				}
