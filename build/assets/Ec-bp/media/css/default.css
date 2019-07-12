@@ -4174,7 +4174,7 @@ ul#brands li p img {
 .table-text-aut thead th {
 	max-width: 60px;
 	min-width: 60px;
-	padding: 3px;
+	padding: 4px;
 	text-align: center;
 }
 
@@ -4193,7 +4193,7 @@ ul#brands li p img {
 }
 
 .table-text-aut td {
-	max-width: 60px;
+	max-width: 66px;
 	min-width: 60px;
 	float: left;
 	padding: 3px;
@@ -4610,7 +4610,7 @@ tr.GC-first th {
 }
 
 .table-text-aut td.bp-min-width {
-	min-width: 75px;
+	min-width: 81px;
 }
 
 #tabs {
@@ -5527,7 +5527,7 @@ center {
 	text-align: center;
 	padding: 5px;
 	color: #72787A;
-	max-width: 115px;
+	max-width: 115px!important;
 	min-width: 115px;
 }
 

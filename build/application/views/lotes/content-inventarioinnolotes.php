@@ -51,7 +51,7 @@ $info;
 			<form action="/innominada/inventario"></form>
 			<div id="lotes-contenedor" >
 				<span class="info-OD">
-					<h5>Lote Nro.</h5>
+					<h5>Lote nro.</h5>
 					<input id='nro_lote' class="required login" placeholder="" value="" onfocus="javascript:this.value=''"/>
 				</span>
 				<span class="info-OD">
@@ -83,7 +83,7 @@ $info;
 
 								</th>
 								<th>
-									Lote Nro.
+									Lote nro.
 								</th>
 								<th id="td-nombre">
 									Cant. de tarjetas
@@ -142,7 +142,7 @@ $info;
 
 								</th>
 								<th class="fecha-carga">
-									Lote Nro.
+									Lote nro.
 								</th>
 								<th id="td-nombre">
 									Nro. Tarjeta

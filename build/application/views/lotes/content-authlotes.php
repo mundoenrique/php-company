@@ -144,12 +144,32 @@
 		if($orden=='0' || $orden=='1'  || $orden==''){
 		echo '
 		<div id="batchs-last">
-			<form name="no-form" onsubmit="return false">
-			<input id="clave" class="input-clave" type="password" placeholder="'.lang("MSG_INGRESE_CLAVE").'" value="" />
+			<form name="no-form" onsubmit="return false">';
+			if($pais == 'Ec-bp') { ?>
+			<center>
+				<table>
+					<tr>
+						<td valign="top" colspan="2">
+							<?= '<center><input id="clave" class="input-clave" type="password" placeholder="'.lang("MSG_INGRESE_CLAVE").'" value="" /></center>' ?>
+						</td>
+					</tr>
+					<tr>
+						<td valign="top">
+							<?= '<center><button '.$borrar.' id="eliminarF" type="submit" class="novo-btn-secondary">'.lang('TITULO_LOTESBTN_ELIMINAR').'</button></center>'; ?>
+						</td>
+						<td valign="top">
+							<?= '<center><button id="firma" class="novo-btn-primary">'.lang("TITULO_LOTESBTN_FIRMAR").'</button></center>' ?>
+						</td>
+					</tr>
+				</table>
+			</center>
+			<?php } else {
+			echo '<input id="clave" class="input-clave" type="password" placeholder="'.lang("MSG_INGRESE_CLAVE").'" value="" />
 			<button '.$borrar.' id="eliminarF" type="submit">'.lang('TITULO_LOTESBTN_ELIMINAR').'</button>
 			<button id="firma" >'.lang("TITULO_LOTESBTN_FIRMAR").'</button>
 			</form>
 		</div>';
+		}
 		}else{
 			echo '
 		<div id="batchs-last">
@@ -263,7 +283,7 @@
 								'<select id="selec_tipo_lote" name="tipo_lote_select">
 									<option value="0">'.lang('SELECT_OPTION_XLOTE').'</option>
 									<option value="1" selected>'.lang('SELECT_OPTION_XTIPO_lOTE').'</option>
-								</select>';
+								</select><input id="claveAuth" type="password" name="claveAuth" placeholder="'.lang("MSG_INGRESE_CLAVE").'" value="" #batchs-last input style="margin-left: 10px;    margin-bottom: 0px;"/>';
 								echo $selectTipoLote;
 							}
 			echo '</form>

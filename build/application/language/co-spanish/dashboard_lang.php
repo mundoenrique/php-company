@@ -41,7 +41,7 @@ $lang['GESLOT']= "Lotes";  // perfil
 $lang['CONSUL']= "Consulta";  //perfil
 $lang['SERVIC']= "Servicios"; // perfil
 $lang['GESREP']= "Reportes";  // perfil
-$lang['TEBCAR']= "Carga de Lotes"; // modulo
+$lang['TEBCAR']= "Carga de lotes"; // modulo
 $lang['COMBUS']= "Trayectos"; // perfil
 
 $lang['TICARG']= "Solicitud"; // modulo
@@ -49,7 +49,7 @@ $lang['TIINVN']= "Afiliación"; // modulo
 
 $lang['TEBCON']= "Confirmación de Lote";
 $lang['TEBELC']= "Eliminación de lote por confirmar";
-$lang['TEBAUT']= "Autorización de Lotes"; // modulo
+$lang['TEBAUT']= "Autorización de lotes"; // modulo
 $lang['TEBELI']= "Eliminación de lote por autorizar";
 $lang['TEBGUR']= 'Reproceso de Datos'; // modulo guardería
 $lang['TEBORS']= "Órdenes de servicio"; // modulo

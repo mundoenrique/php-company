@@ -204,7 +204,7 @@ $urlCdn = get_cdn();
 			</div>
 				<div id="consolid" style="display:none">
 					<select id="anio">
-						<option value ="">Seleccione Año</option>>
+						<option value ="">Selecciona Año</option>>
 					</select>
 				</div>
 			<form id='formulario' method='post'></form>

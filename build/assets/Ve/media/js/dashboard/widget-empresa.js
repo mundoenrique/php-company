@@ -80,7 +80,7 @@ $(function () {
 				}).toString(CryptoJS.enc.Utf8))
 				$("#empresasS").removeAttr('disabled');
 				$('#productosS').empty().css('display', 'block');
-				$("#productosS").append('<option>Seleccione un producto</option>');
+				$("#productosS").append('<option>Selecciona un producto</option>');
 
 
 				if (!data.ERROR) {
@@ -149,7 +149,7 @@ $(function () {
 					if (data === 1) {
 						$(location).attr('href', baseURL + isoPais + "/dashboard/productos/detalle");
 					} else {
-						MarcarError('Intente de nuevo');
+						MarcarError('Intenta de nuevo');
 					}
 				}
 			);

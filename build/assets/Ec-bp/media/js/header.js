@@ -112,7 +112,7 @@ $('#profileMenu').balloon({contents: $('.submenu'), position: 'bottom', classnam
 $(':input').on('click', function(){$('#ui-datepicker-div'); $('#ui-datepicker-div').css('left',$(this).position().left);});
 
 if (!navigator.cookieEnabled) {
-	$('<div><h5>La funcionalidad de cookies de su navegador se encuentra desactivada.</h5><h4>Por favor vuelva activarla.</h4></div>').dialog({
+	$('<div><h5>La funcionalidad de cookies de tu navegador se encuentra desactivada.</h5><h4>Por favor vuelve activarla.</h4></div>').dialog({
 
 		dialogClass: "hide-close",
 		title: "Conexion empresas Online",

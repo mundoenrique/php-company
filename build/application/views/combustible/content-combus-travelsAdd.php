@@ -90,7 +90,7 @@
                     <div class="field-set">
                     <span class="field-area coor-map">
                         <label for="origin" class="label"><?php echo lang('TRAVEL_ORIGIN'); ?></label>
-                        <input type="text" id="origin" name="origin" class="coordinate" placeholder="Seleccione punto de partida">
+                        <input type="text" id="origin" name="origin" class="coordinate" placeholder="Selecciona punto de partida">
                         <input type="hidden" id="orgL" name="orgL">
                     </span>
                     </div>
@@ -112,7 +112,7 @@
                     <div class="field-set">
                     <span class="field-area coor-map">
                         <label for="destination" class="label"><?php echo lang('TRAVEL_DESTINATION'); ?></label>
-                        <input type="text" name="destination" id="destination" class="coordinate" placeholder="Seleccione punto de llegada">
+                        <input type="text" name="destination" id="destination" class="coordinate" placeholder="Selecciona punto de llegada">
                         <input type="hidden" id="desL" name="desL">
                     </span>
                     </div>

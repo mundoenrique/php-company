@@ -56,7 +56,7 @@ $info;
 
 			<div id="detalleLote-1">
 				<div id="detalleLote-1-RUC">
-					<h5><?php echo "Lote Nro.";//echo lang('ID_FISCAL') ?></h5>
+					<h5><?php echo "Lote nro.";//echo lang('ID_FISCAL') ?></h5>
 					<p><?php echo $numLote;//echo $data[0]->acrif ?></p>
 				</div>
 				<div id="detalleLote-1-nombre">

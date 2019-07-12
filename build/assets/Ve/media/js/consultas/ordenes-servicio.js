@@ -40,7 +40,7 @@ $(function () {
 		if (statuLote !== '' && COS_var.fecha_inicio !== '' && COS_var.fecha_fin !== '') {
 			if (Date.parse(COS_var.fecha_fin) >= Date.parse(COS_var.fecha_inicio)) {
 				$aux = $("#loading").dialog({
-					title: 'Buscando Orden de Servicio',
+					title: 'Buscando orden de servicio',
 					modal: true,
 					resizable: false,
 					draggable: false,
@@ -57,10 +57,10 @@ $(function () {
 				$('form#formulario').attr('action', baseURL + isoPais + "/consulta/ordenes-de-servicio");
 				$('form#formulario').submit();
 			} else {
-				notificacion("Buscar Orden de Servicio", "Rango de fecha Incoherente");
+				notificacion("Buscar orden de servicio", "Rango de fecha Incoherente");
 			}
 		} else {
-			notificacion("Buscar Orden de Servicio", "<h2>Verifica que:</h2><h6>1. Has seleccionado un rango de fechas.</h6><h6>2. Has seleccionado un estatus de lote.</h6>")
+			notificacion("Buscar orden de servicio", "<h2>Verifica que:</h2><h6>1. Has seleccionado un rango de fechas.</h6><h6>2. Has seleccionado un estatus de lote.</h6>")
 		}
 	});
 
@@ -242,9 +242,9 @@ $(function () {
 			aplicaCostD = $(this).parents('tr').attr('aplica-costo'),
 			pass,
 			canvas = '<div id="dialog-confirm">';
-		canvas += '<p>Orden Nro.: ' + idOS + '</p>';
+		canvas += '<p>Orden nro.: ' + idOS + '</p>';
 		canvas += '<fieldset>';
-		canvas += '<input type="password" id="pass" size=30 placeholder="Ingrese su contraseña" ';
+		canvas += '<input type="password" id="pass" size=30 placeholder="Ingresa tu contraseña" ';
 		canvas += 'class="text ui-widget-content ui-corner-all"/>';
 		canvas += '<h5 id="msg"></h5>';
 		canvas += '</fieldset>';
@@ -308,7 +308,7 @@ $(function () {
 								}
 							});
 					} else {
-						$(this).find($('#msg')).text('Debe ingresar su contraseña');
+						$(this).find($('#msg')).text('Debes ingresar tu contraseña');
 					}
 				}
 			}

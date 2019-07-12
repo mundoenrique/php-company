@@ -54,8 +54,8 @@ $lang['REPORTE_MENSAJE_ERROR']= "Por favor, completa los campos que se indican e
 
 
 // COMBOS
-$lang['REPORTES_SELECCIONE_EMPRESA']= "Seleccione la empresa";
-$lang['REPORTES_SELECCIONE_PRODUCTO']= "Seleccione el producto";
+$lang['REPORTES_SELECCIONE_EMPRESA']= "Selecciona la empresa";
+$lang['REPORTES_SELECCIONE_PRODUCTO']= "Selecciona el producto";
 $lang['REPORTES_OPCION_TARJETA']= "Tarjeta";
 $lang['REPORTES_OPCION_CLAVE']= "Clave";
 

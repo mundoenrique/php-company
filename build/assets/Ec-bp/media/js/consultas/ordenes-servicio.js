@@ -91,7 +91,7 @@ $(function () {
 					$aux = $("#loading").dialog({
 
 						dialogClass: "hide-close",
-						title: 'Buscando Orden de Servicio', modal: true, close: function () { $(this).dialog('destroy') }, resizable: false });
+						title: 'Buscando orden de servicio', modal: true, close: function () { $(this).dialog('destroy') }, resizable: false });
 
 					var ceo_cook = decodeURIComponent(
 						document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
@@ -106,13 +106,13 @@ $(function () {
 					$('form#formulario').submit();
 
 				} else {
-					notificacion('Buscar Orden de Servicio', 'Rango de fecha Incoherente');
+					notificacion('Buscar orden de servicio', 'Rango de fecha Incoherente');
 				}
 			} else {
-				notificacion("Buscar Orden de Servicio", "Verifique los datos ingresados e intente nuevamente");
+				notificacion("Buscar orden de servicio", "Verifiqua los datos ingresados e intenta nuevamente");
 			}
 		} else {
-			notificacion("Buscar Orden de Servicio", "<h2>Verifica que:</h2><h6>1. Has seleccionado un rango de fechas.</h6><h6>2. Has seleccionado un estatus de lote.</h6>")
+			notificacion("Buscar orden de servicio", "<h2>Verifica que:</h2><h6>1. Has seleccionado un rango de fechas.</h6><h6>2. Has seleccionado un estatus de lote.</h6>")
 		}
 	});
 
@@ -294,10 +294,10 @@ $(function () {
 		var idOS = $(this).parents('tr').attr('id');
 
 		var canvas = "<div id='dialog-confirm'>";
-		canvas += "<p>Orden Nro.: " + idOS + "</p>";
+		canvas += "<p>Orden nro.: " + idOS + "</p>";
 		canvas += "<fieldset>";
 		canvas += "<form id='anular-os-form'  name='anular-os-form'>"
-		canvas += "<input type='password' id='pass' size=30 placeholder='Ingrese su contraseña' class='text ";
+		canvas += "<input type='password' id='pass' size=30 placeholder='Ingresa tu contraseña' class='text ";
 		canvas += "ui-widget-content ui-corner-all'>";
 		canvas += "<h5 id='msg'></h5>";
 		canvas += "</form>";
@@ -375,7 +375,7 @@ $(function () {
 							}
 						});
 					} else {
-						$(this).find($('#msg')).text('Debe ingresar su contraseña');
+						$(this).find($('#msg')).text('Debes ingresar tu contraseña');
 					}
 					}
 				}
@@ -407,8 +407,8 @@ $(function () {
 			switch (data.code) {
 				case 0:
 					var canvas = "<div id='dialog-confirm'>";
-					canvas += "<p>Orden Nro.: " + idOS + "</p>";
-					canvas += "<fieldset><input type='text' id='token-code' size=30 placeholder='Ingrese el código' class='text ui-widget-content ui-corner-all'/>";
+					canvas += "<p>Orden nro.: " + idOS + "</p>";
+					canvas += "<fieldset><input type='text' id='token-code' size=30 placeholder='Ingresa el código' class='text ui-widget-content ui-corner-all'/>";
 					canvas += "<h5 id='msg'></h5></fieldset></div>";
 
 					$(canvas).dialog({
@@ -473,7 +473,7 @@ $(function () {
 										})
 								} else {
 									$(this).find($('#token-code').css('border-color', '#cd0a0a'));
-									$(this).find($('#msg')).text('Debe ingresar el código de seguridad enviado a su correo');
+									$(this).find($('#msg')).text('Debes ingresar el código de seguridad enviado a tu correo');
 								}
 								}
 							}

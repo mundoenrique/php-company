@@ -86,7 +86,7 @@ $(function () { // Document ready
 		if (verificar(datosPost, datosPost.tipo, $contenedor)) {
 
 			if (pass == '') {
-				notificacion(titulo, "Debe ingresar su contraseña.");
+				notificacion(titulo, "Debes ingresar tu contraseña.");
 				$("#passCrear").addClass("error");
 			} else {
 
@@ -121,7 +121,7 @@ $(function () { // Document ready
 				});
 			}
 		} else {
-			notificacion(titulo, "Formulario inválido, verifique los datos suministrados.");
+			notificacion(titulo, "Formulario inválido, verifica los datos suministrados.");
 		}
 	}
 
@@ -343,7 +343,7 @@ $(function () { // Document ready
 
 		var canvas = "<div id='dialog-confirm'>";
 		canvas += "<p>Beneficiario: " + nomb + "</p>";
-		canvas += "<fieldset><input type='password' id='pass' placeholder='Ingrese su contraseña' class='text ui-widget-content ui-corner-all'/>";
+		canvas += "<fieldset><input type='password' id='pass' placeholder='Ingresa tu contraseña' class='text ui-widget-content ui-corner-all'/>";
 		canvas += "<h5 id='msg'></h5></fieldset></div>";
 
 		var pass;
@@ -402,7 +402,7 @@ $(function () { // Document ready
 							});
 
 					} else {
-						$(this).find($('#msg')).text('Debe ingresar su contraseña');
+						$(this).find($('#msg')).text('Debes ingresar tu contraseña');
 					}
 
 				}

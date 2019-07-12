@@ -79,7 +79,7 @@ if( !$("#loteXdesa").val()&& !$('#lotesxAuth').val() ){
       });
      // resetValuesFirm();
     }else{
-      notificacion("Firmando lotes","Seleccione al menos un lote e ingrese su contraseña");
+      notificacion("Firmando lotes","Selecciona al menos un lote e ingresa tu contraseña");
     }
 
   });
@@ -142,7 +142,7 @@ $('#lotes-2').on('click','#select-allA', function() {
 				$('#loading').dialog('destroy');
 				if(code === 0) {
 					$("#data-COS").attr('value', dataCalc);
-					$("<div><h3>Proceso exitoso</h3><h5>Ha generado el cálculo de la orden de servicio.</h5></div>").dialog({
+					$("<div><h3>Proceso exitoso</h3><h5>Se generó el cálculo de la orden de servicio.</h5></div>").dialog({
 						title:"Autorizando lotes",
 						modal: true,
 						resizable: false,
@@ -151,7 +151,7 @@ $('#lotes-2').on('click','#select-allA', function() {
 							$('.ui-dialog-titlebar-close', ui.dialog).hide();
 						},
 						buttons: {
-							siguiente: function () {
+							Siguiente: function () {
 								$('#autorizacion').submit();
 							}
 						}
@@ -161,7 +161,7 @@ $('#lotes-2').on('click','#select-allA', function() {
 				}
     	});
     } else {
-			notificacion("Autorizando lotes","<h2>Verifica que: </h2><h3>1. Ha seleccionado al menos un lote.</h3><h3>2. Has ingresado su contraseña.</h4><h3>3. Has seleccionado el tipo orden de servicio.</h3>");
+			notificacion("Autorizando lotes","<h2>Verifica que: </h2><h3>1. Has seleccionado al menos un lote.</h3><h3>2. Has ingresado tu contraseña.</h4><h3>3. Has seleccionado el tipo orden de servicio.</h3>");
     }
 
   });
@@ -189,7 +189,7 @@ $('#lotes-2').on('click','#select-allA', function() {
      // resetValuesAuth();
 
     }else{
-      notificacion("Autorizando lotes","Seleccione al menos un lote e ingrese su contraseña");
+      notificacion("Autorizando lotes","Selecciona al menos un lote e ingresa tu contraseña");
     }
 
   });
@@ -203,8 +203,8 @@ $item = $(this);
       var acnumlote = [$(this).attr('numlote')];
 
       var canvas = "<div id='dialog-confirm'>";
-          canvas +="<p>Lote Nro.: "+acnumlote+"</p>";
-          canvas +="<fieldset><input type='password' id='pass' placeholder='Ingrese su contraseña' size=30/>";
+          canvas +="<p>Lote nro.: "+acnumlote+"</p>";
+          canvas +="<fieldset><input type='password' id='pass' placeholder='Ingresa tu contraseña' size=30/>";
           canvas += "</fieldset><h5 id='msg'></h5></div>";
 
       var pass;
@@ -252,7 +252,7 @@ $item = $(this);
             });
 
           }else{
-            $(this).find( $('#msg')).text("Debe ingresar su contraseña");
+            $(this).find( $('#msg')).text("Debes ingresar tu contraseña");
           }
 
 
@@ -285,7 +285,7 @@ $item = $(this);
      //resetValuesFirm();
 
     }else{
-      notificacion("Autorizando lotes","Seleccione al menos un lote e ingrese su contraseña");
+      notificacion("Autorizando lotes","Selecciona al menos un lote e ingresa tu contraseña");
     }
 
   });
@@ -303,8 +303,8 @@ $('#lotes-2').on('click','#borrar', function(){
       var ctipolote = $(this).attr('ctipolote')+",";
 
       var canvas = "<div id='dialog-confirm'>";
-      canvas +="<p>Lote Nro.: "+acnumlote+"</p>";
-      canvas += "<fieldset><input type='password' id='pass' size=30 placeholder='Ingrese su contraseña' class='text ui-widget-content ui-corner-all'/>";
+      canvas +="<p>Lote nro.: "+acnumlote+"</p>";
+      canvas += "<fieldset><input type='password' id='pass' size=30 placeholder='Ingresa tu contraseña' class='text ui-widget-content ui-corner-all'/>";
       canvas += "<h5 id='msg'></h5></fieldset></div>";
       tabla = $(this).parents('table').attr('id');
 
@@ -331,7 +331,7 @@ $('#lotes-2').on('click','#borrar', function(){
             eliminarLotes(idlote,acnumlote,ctipolote,pass);
 
           }else{
-            $(this).find( $('#msg')).text("Debe ingresar su contraseña");
+            $(this).find( $('#msg')).text("Debes ingresar tu contraseña");
           }
 
           }

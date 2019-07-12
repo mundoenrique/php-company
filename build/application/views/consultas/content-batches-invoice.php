@@ -60,7 +60,7 @@ $ceo_cook = $this->security->get_csrf_hash();
 			<table id="novo-table" class="hover cell-border" style="width: 635px;">
 				<thead>
 					<tr>
-						<th class="thead" style="width: 86px;">Tipo de Lote</th>
+						<th class="thead" style="width: 86px;">Tipo de lote</th>
 						<th class="thead" style="width: 60px;">Cantidad de Lotes</th>
 						<th class="thead" style="width: 60px;">Total de registros</th>
 						<th class="thead" style="width: 84px;">Precio unitario Bs.</th>

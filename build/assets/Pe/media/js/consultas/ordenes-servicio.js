@@ -41,7 +41,7 @@ if($("#msg").val()){
 
 			if( Date.parse(COS_var.fecha_fin) >= Date.parse(COS_var.fecha_inicio) ){
 
-		$aux = $("#loading").dialog({title:'Buscando Orden de Servicio',modal:true, close:function(){$(this).dialog('destroy')}, resizable:false });
+		$aux = $("#loading").dialog({title:'Buscando orden de servicio',modal:true, close:function(){$(this).dialog('destroy')}, resizable:false });
 
 				var ceo_cook = decodeURIComponent(
 					document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
@@ -55,10 +55,10 @@ if($("#msg").val()){
     		$('form#formulario').submit();
 
 			}else{
-				notificacion("Buscar Orden de Servicio","Rango de fecha Incoherente.");
+				notificacion("Buscar orden de servicio","Rango de fecha Incoherente.");
 			}
 		}else{
-			notificacion("Buscar Orden de Servicio","<h2>Verifica que:</h2><h6>1. Has seleccionado un rango de fechas.</h6><h6>2. Has seleccionado un estatus de lote.</h6>")
+			notificacion("Buscar orden de servicio","<h2>Verifica que:</h2><h6>1. Has seleccionado un rango de fechas.</h6><h6>2. Has seleccionado un estatus de lote.</h6>")
 		}
 	});
 
@@ -230,8 +230,8 @@ $('#tabla-datos-general').on('click','#anular', function(){
 
 
 	var canvas = "<div id='dialog-confirm'>";
-      canvas +="<p>Orden Nro.: "+idOS+"</p>";
-      canvas += "<fieldset><input type='password' id='pass' size=30 placeholder='Ingrese su contraseña' class='text ui-widget-content ui-corner-all'/>";
+      canvas +="<p>Orden nro.: "+idOS+"</p>";
+      canvas += "<fieldset><input type='password' id='pass' size=30 placeholder='Ingresa tu contraseña' class='text ui-widget-content ui-corner-all'/>";
       canvas += "<h5 id='msg'></h5></fieldset></div>";
 
       var pass;
@@ -274,7 +274,7 @@ $('#tabla-datos-general').on('click','#anular', function(){
               });
 
             }else{
-              $(this).find( $('#msg') ).text('Debe ingresar su contraseña');
+              $(this).find( $('#msg') ).text('Debes ingresar tu contraseña');
             }
 
           }

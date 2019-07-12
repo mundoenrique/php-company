@@ -43,7 +43,7 @@
 				<button id='btn-new-mas'><?php echo lang('SUC_BTN_NEW_MASV'); ?></button>
 
 				<input type="file" name="userfile" id="userfile" class='elem-hidden'/>
-				<input id='archivo' placeholder='Seleccione archivo de sucursales.' readonly="readonly" size='35'/>
+				<input id='archivo' placeholder='Selecciona archivo de sucursales.' readonly="readonly" size='35'/>
 
 			</div>
 
@@ -94,7 +94,7 @@
 					<span>
 						<p id="first" class='refestado'><?php echo lang('SUC_ESTADO'); ?>*</p>
 						<select id="suc_estado">
-							<option value="">Seleccione <?php echo lang('SUC_ESTADO'); ?></option>
+							<option value="">Selecciona <?php echo lang('SUC_ESTADO'); ?></option>
 						</select>
 					</span>
 
@@ -103,7 +103,7 @@
 					<span>
 						<p id="first" class='refciudad'><?php echo lang('SUC_CIUDAD'); ?>*</p>
 						<select id="suc_ciudad">
-							<option value="">Seleccione <?php echo lang('SUC_CIUDAD'); ?></option>
+							<option value="">Selecciona <?php echo lang('SUC_CIUDAD'); ?></option>
 						</select>
 					</span>
 
@@ -135,7 +135,7 @@
 				<div id="opciones-btn" style='margin-top:20px'>
 					<button id='agregarSuc'><?php echo lang('EMP_BTN_ADD_CONTACT'); ?></button>
 					<button id='btn-modif-suc'><?php echo lang('SUC_BTN_MODIFICAR'); ?></button>
-					<input id="pass_suc" type="password" class="pass" style="margin-left:245px;" placeholder="Ingrese su contraseña">
+					<input id="pass_suc" type="password" class="pass" style="margin-left:245px;" placeholder="Ingresa tu contraseña">
 
 			</div>
 		</div>

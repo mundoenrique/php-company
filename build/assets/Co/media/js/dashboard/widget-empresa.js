@@ -74,7 +74,7 @@ var widget_var = {
 				data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 				$("#empresasS").removeAttr('disabled');
 				$('#productosS').empty().css('display', 'block');
-				$("#productosS").append('<option value="0">Seleccione un producto</option>');
+				$("#productosS").append('<option value="0">Selecciona un producto</option>');
 
 
 			if(!data.ERROR){
@@ -135,7 +135,7 @@ var widget_var = {
         if(data === 1){
         	$(location).attr('href',baseURL+isoPais+"/dashboard/productos/detalle");
         }else{
-        	MarcarError('Intente de nuevo');
+        	MarcarError('Intenta de nuevo');
 				}
 			}
 		);
