@@ -213,13 +213,15 @@
 
 
 						$("#grafica").click(function () {
-							var arrayseries = []
 
+							// SE OBTIENE LAS SERIES
+							var arrayseries = []
 							$.each(data.listaGrafico[0].series, function (posSeries, itemSeries) {
 								var serie = {};
 								let nuevo = [itemSeries.nombreSerie, itemSeries.valores[0]];
 								arrayseries.push(nuevo);
 							});
+							// GRAFICA
 							$('#chart').highcharts({
 								chart: {
 									type: 'column',
@@ -254,7 +256,7 @@
 									name: 'Population',
 									data: arrayseries,
 									dataLabels: {
-										enabled: true,
+										enabled: false,
 										rotation: 0,
 										color: '#000000',
 										align: 'center',

@@ -401,15 +401,26 @@ if(buscarReporte){
 			var ceo_cook = decodeURIComponent(
 				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 			);
-			filtro_busq.ceo_name = ceo_cook;
-
-//SE EJECUTA LA CONSULTA PARA EL GRAFICO
-				$consulta = $.post(baseURL + api + isoPais + "/reportes/EstadosdeCuentaGrafico",filtro_busq );
-// APARECE LA VENTANA DE CARGANDO MIENTRAS SE REALIZA LA CONSULTA
-				$( "#cargando" ).dialog({title:"Ver Gráfica Estado de cuenta",modal:true, width: 200, height: 170});
-//DE SER EXITOSA LA COMUNICACION CON EL SERVICIO SE EJECUTA EL SIGUIENTE METODO "DONE"
-		 		$consulta.done(function(data){
-
+			var dataRequest = JSON.stringify(filtro_busq);
+							dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {
+								format: CryptoJSAesJson
+							}).toString();
+							//SE EJECUTA LA CONSULTA PARA EL GRAFICO
+							$consulta = $.post(baseURL + api + isoPais + "/reportes/EstadosdeCuentaGrafico", {
+								request: dataRequest,
+								ceo_name: ceo_cook,
+								plot: btoa(ceo_cook)
+							});
+							// APARECE LA VENTANA DE CARGANDO MIENTRAS SE REALIZA LA CONSULTA
+							$("#cargando").dialog({
+								title: "Ver Gráfica Estado de cuenta",
+								modal: true,
+								width: 200,
+								height: 170
+							});
+							//DE SER EXITOSA LA COMUNICACION CON EL SERVICIO SE EJECUTA EL SIGUIENTE METODO "DONE"
+							$consulta.done(function (response) {
+								data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 			 		$( "#cargando" ).dialog("destroy");
 
 			 		if(data.rc=="0"){
