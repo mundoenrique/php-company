@@ -198,58 +198,72 @@ var filtro_busq={};
 
 
 
-			 		$("#grafica").click(function(){
-			    	var _axis="Bolivares";
-					var jsonChart={
-						title:{
-							text:"Recargas realizadas"
-						},
-						legend:{
-							position:"top"
-						},
-						series:[],
-						categoryAxis:{
-							labels:{
-								font: "9px Arial, Helvetica, sans-serif"
-							},
-							categories:[]
-						},
-						valueAxis:{
-							name:_axis,
-							title:{
-								text:""
-							}
-						}
+						 $("#grafica").click(function () {
 
-					}
+							// SE OBTIENE LAS SERIES
+							var arrayseries = []
+							$.each(data.listaGrafico[0].series, function (posSeries, itemSeries) {
+								var serie = {};
+								let nuevo = [itemSeries.nombreSerie, itemSeries.valores[0]];
+								arrayseries.push(nuevo);
+							});
+							// GRAFICA
+							$('#chart').highcharts({
+								chart: {
+									type: 'column',
+									plotBackgroundColor: null,
+									plotBorderWidth: null,
+									plotShadow: false
+								},
+								plotOptions: {
+									series: {
+										colorByPoint: true
+									}
+								},
+								title: {
+									text: data.recargas[0].producto
+								},
+								xAxis: {
+									type: 'category'
+								},
+								yAxis: {
+									min: 0,
+									title: {
+										text: 'Recargas realizadas'
+									}
+								},
+								legend: {
+									enabled: false
+								},
+								tooltip: {
+									pointFormat: 'Recargas: <b>{point.y}</b>'
+								},
+								series: [{
+									name: 'Population',
+									data: arrayseries,
+									dataLabels: {
+										enabled: false,
+										rotation: 0,
+										color: '#000000',
+										align: 'center',
+										format: '{point.y}',
+										y: 2,
+										style: {
+											fontSize: '13px'
+										}
+									}
+								}]
+							});
 
-// SE OBTIENE LAS CATEGORIAS
-					$.each(data.listaGrafico[0].categorias,function(posLista,itemLista){
-						jsonChart.categoryAxis.categories.push(itemLista.nombreCategoria);
-					});
-					var width_categoria=300;
-					width_categoria=(parseInt(width_categoria)*parseInt(data.listaGrafico[0].categorias.length));
-					$( "#chart" ).dialog({modal:true, width: 800, height: 400});
+							$("#chart").dialog({
+								modal: true,
+								width: 700,
+								height: 400
+							});
+							$("#chart").height(400);
+							$("#chart svg").height(385);
 
-// SE OBTIENE LAS SERIES
-					$.each(data.listaGrafico[0].series,function(posSeries,itemSeries){
-						var serie={};
-						serie.name=itemSeries.nombreSerie;
-						serie.data=itemSeries.valores;
-						serie.color = colores[posSeries];
-						$.each(serie.data[0],function(pos,item){
-							replaceAll(item,",","");
-							replaceAll(item,".","");
 						});
-						serie.axis= _axis;
-						jsonChart.series.push(serie);
-					});
-// GRAFICA
-					$("#chart").kendoChart(jsonChart);
-
-
-
-			  	    });
 					$('#tabla-datos-general tbody tr:even').addClass('even ');
 		 			}else{
 						if(data.rc =="-29"){
