@@ -39,9 +39,14 @@ $(function(){
 
             if( Date.parse(COS_var.fecha_fin) >= Date.parse(COS_var.fecha_inicio) ){
 
-                $aux = $("#loading").dialog({title:'Buscando Orden de Servicio',modal:true, close:function(){$(this).dialog('destroy')}, resizable:false });
+                $aux = $("#loading").dialog({title:'Buscando orden de servicio',modal:true, close:function(){$(this).dialog('destroy')}, resizable:false });
 
-                $('form#formulario').empty();
+								var ceo_cook = decodeURIComponent(
+									document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+								);
+
+								$('form#formulario').empty();
+								$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'">');
                 $('form#formulario').append('<input type="hidden" name="data-fechIn" value="'+COS_var.fecIsend+'" />');
                 $('form#formulario').append('<input type="hidden" name="data-fechFin" value="'+COS_var.fecfsend+'" />');
                 $('form#formulario').append('<input type="hidden" name="data-status" value="'+statuLote+'" />');
@@ -49,10 +54,10 @@ $(function(){
                 $('form#formulario').submit();
 
             }else{
-                notificacion("Buscar Orden de Servicio","Rango de fecha Incoherente");
+                notificacion("Buscar orden de servicio","Rango de fecha Incoherente.");
             }
         }else{
-            notificacion("Buscar Orden de Servicio","<h2>Verifique que:</h2><h6>1. Ha seleccionado un rango de fechas</h6><h6>2. Ha seleccionado un estatus de lote</h6>")
+            notificacion("Buscar orden de servicio","<h2>Verifica que:</h2><h6>1. Has seleccionado un rango de fechas.</h6><h6>2. Has seleccionado un estatus de lote.</h6>")
         }
     });
 
@@ -70,7 +75,13 @@ $(function(){
 
         var OS = $(this).parents("tr").attr('id');
         $aux = $("#loading").dialog({title:'Descargando archivo PDF',modal:true, close:function(){$(this).dialog('close')}, resizable:false });
-        $('form#formulario').empty();
+
+				var ceo_cook = decodeURIComponent(
+					document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+					);
+
+				$('form#formulario').empty();
+				$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'">');
         $('form#formulario').append('<input type="hidden" name="data-idOS" value="'+OS+'" />');
         $('form#formulario').append($('#data-OS'));
         $('form#formulario').attr('action',baseURL+api+isoPais+"/consulta/downloadOS");
@@ -161,8 +172,8 @@ $(function(){
                 "sLengthMenu":     "Mostrar _MENU_ registros",
                 "sZeroRecords":    "No se encontraron resultados",
                 "sEmptyTable":     "Ningún dato disponible en esta tabla",
-                "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-                "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+                "sInfo":           "Mostrando registros del _START_ al _END_, de un total de _TOTAL_ registros",
+                "sInfoEmpty":      "Mostrando registros del 0 al 0, de un total de 0 registros",
                 "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
                 "sInfoPostFix":    "",
                 "sSearch":         "Buscar:",
@@ -203,8 +214,8 @@ $(function(){
 
 
         var canvas = "<div id='dialog-confirm'>";
-        canvas +="<p>Id Orden: "+idOS+"</p>";
-        canvas += "<fieldset><input type='password' id='pass' size=30 placeholder='Ingrese su contraseña' class='text ui-widget-content ui-corner-all'/>";
+        canvas +="<p>Orden nro.: "+idOS+"</p>";
+        canvas += "<fieldset><input type='password' id='pass' size=30 placeholder='Ingresa tu contraseña' class='text ui-widget-content ui-corner-all'/>";
         canvas += "<h5 id='msg'></h5></fieldset></div>";
 
         var pass;
@@ -222,8 +233,18 @@ $(function(){
                         $('#pass').val( '' );
                         $(this).dialog('destroy');
                         var $aux = $('#loading').dialog({title:'Anulando Orden de Servicio' ,modal: true, resizable:false, close:function(){$aux.dialog('close');}});
-                        $.post(baseURL+api+isoPais+'/consulta/anularos',{'data-idOS':idOS, 'data-pass':pass})
-                            .done(function(data){
+
+												var ceo_cook = decodeURIComponent(
+													document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+												);
+												var dataRequest = JSON.stringify ({
+													data_idOS:idOS,
+													data_pass:pass
+												})
+												dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
+												$consulta = $.post(baseURL+api+isoPais+"/consulta/anularos", {request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)} );
+												$consulta.done(function(response){
+													data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
                                 $aux.dialog('destroy');
                                 if(!data.ERROR){
                                     notificacion("Anulando Orden de Servicio",'Anulación exitosa');
@@ -240,7 +261,7 @@ $(function(){
                                 }
                             });
                     }else{
-                        $(this).find( $('#msg') ).text('Debe ingresar su contraseña');
+                        $(this).find( $('#msg') ).text('Debes ingresar tu contraseña');
                     }
                 }
             }
@@ -263,78 +284,84 @@ $(function(){
             }
         });
 
-        $.get(baseURL+api+isoPais+'/consulta/PagoOS')
-            .done(function(data){
-                $aux.dialog('destroy');
-                switch (data.code) {
-                    case 0:
-                        var canvas = "<div id='dialog-confirm'>";
-                        canvas += "<p>Id Orden: " + idOS + "</p>";
-                        canvas += "<fieldset><input type='text' id='token-code' size=30 placeholder='Ingrese el código' class='text ui-widget-content ui-corner-all'/>";
-                        canvas += "<h5 id='msg'></h5></fieldset></div>";
-
-                        $(canvas).dialog({
-                            title: data.title,
-                            modal: true,
-                            resizable: false,
-                            draggable: false,
-                            close: function () {
-                                $(this).dialog("destroy");
-                            },
-                            buttons: {
-                                Procesar: function () {
-                                    var codeToken = $("#token-code").val();
-                                    if (codeToken != '') {
-                                        $("#token-code").val('');
-                                        $(this).dialog('destroy');
-                                        $aux = $('#loading').dialog({
-                                            title: 'Procesando',
-                                            modal: true,
-                                            resizable: false,
-                                            draggable: false,
-                                            open: function (event, ui) {
-                                                $('.ui-dialog-titlebar-close', ui.dialog).hide();
-                                            }
-                                        });
-                                        $.post(baseURL + api + isoPais + '/consulta/PagoOSProcede', {
-                                            "idOS": idOS,
-                                            "codeToken": codeToken,
-                                            "totalamount": totalamount,
-                                            "factura": factura
-                                        })
-                                            .done(function (data) {
-                                                $aux.dialog('destroy');
-                                                switch (data.code) {
-                                                    case 0:
-                                                        notiPagOS(data.title, data.msg, 'ok');
-                                                        COS_var.tablaOS.fnDeleteRow(COS_var.tablaOS.fnGetPosition(btnPagarOS.parentNode.parentNode.parentNode));
-                                                        break;
-                                                    case 1:
-                                                        notiPagOS(data.title, data.msg, 'error');
-                                                        (data.errorReg == 1) ? COS_var.tablaOS.fnDeleteRow(COS_var.tablaOS.fnGetPosition(btnPagarOS.parentNode.parentNode.parentNode)) : '';
-                                                        break;
-                                                    case 2:
-                                                    default:
-                                                        notiPagOS(data.title, data.msg, 'close');
-                                                }
-
-
-                                            })
-                                    } else {
-                                        $(this).find($('#token-code').css('border-color', '#cd0a0a'));
-                                        $(this).find($('#msg')).text('Debe ingresar el código de seguridad enviado a su correo');
-                                    }
+        $.get(baseURL+api+isoPais+'/consulta/PagoOS').done(function(response){
+					data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
+          $aux.dialog('destroy');
+            switch (data.code) {
+                case 0:
+                    var canvas = "<div id='dialog-confirm'>";
+                    canvas += "<p>Orden nro.: " + idOS + "</p>";
+                    canvas += "<fieldset><input type='text' id='token-code' size=30 placeholder='Ingresa el código' class='text ui-widget-content ui-corner-all'/>";
+                    canvas += "<h5 id='msg'></h5></fieldset></div>";
+                    $(canvas).dialog({
+                      title: data.title,
+                      modal: true,
+                      resizable: false,
+                      draggable: false,
+                      close: function () {
+                        $(this).dialog("destroy");
+                        },
+                        buttons: {
+                          Procesar: function () {
+                            var codeToken = $("#token-code").val();
+                            if (codeToken != '') {
+                              $("#token-code").val('');
+                              $(this).dialog('destroy');
+                              $aux = $('#loading').dialog({
+                                title: 'Procesando',
+                                modal: true,
+                                resizable: false,
+                                draggable: false,
+                                open: function (event, ui) {
+                                  $('.ui-dialog-titlebar-close', ui.dialog).hide();
                                 }
+															});
+
+															var ceo_cook = decodeURIComponent(
+																document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+															);
+															var dataRequest = JSON.stringify ({
+																idOS: idOS,
+                                codeToken: codeToken,
+                              	totalamount: totalamount,
+																factura: factura
+															})
+																dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
+																$.post(baseURL + api + isoPais + '/consulta/PagoOSProcede', {request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)})
+																.done(function(response){
+																	data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
+                              	 		$aux.dialog('destroy');
+                                      switch (data.code) {
+                                        case 0:
+                                          notiPagOS(data.title, data.msg, 'ok');
+                                          COS_var.tablaOS.fnDeleteRow(COS_var.tablaOS.fnGetPosition(btnPagarOS.parentNode.parentNode.parentNode));
+                                          break;
+                                        case 1:
+                                          notiPagOS(data.title, data.msg, 'error');
+                                          (data.errorReg == 1) ? COS_var.tablaOS.fnDeleteRow(COS_var.tablaOS.fnGetPosition(btnPagarOS.parentNode.parentNode.parentNode)) : '';
+                                          break;
+                                        case 2:
+                                        default:
+                                          notiPagOS(data.title, data.msg, 'close');
+                                      }
+
+
+                                })
+                            } else {
+                              $(this).find($('#token-code').css('border-color', '#cd0a0a'));
+                              $(this).find($('#msg')).text('Debes ingresar el código de seguridad enviado a tu correo');
                             }
-                        });
-                        break;
-                    case 1:
-                        notiPagOS(data.title, data.msg, 'error');
-                        break;
-                    case 2:
-                    default:
-                        notiPagOS(data.title, data.msg, 'close');
-                }
+                          }
+                        }
+                    });
+            	break;
+            	case 1:
+            	  notiPagOS(data.title, data.msg, 'error');
+            	  break;
+            	case 2:
+            	default:
+            	notiPagOS(data.title, data.msg, 'close');
+            }
         });
     });
 
@@ -343,7 +370,11 @@ $(function(){
         $(this).removeAttr("href");
         $(this).removeAttr('target');
         $aux = $("#loading").dialog({title:'Descargando factura',modal:true, close:function(){$(this).dialog('close')}, resizable:false });
-        $('form#formulario').empty();
+				var ceo_cook = decodeURIComponent(
+					document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+					);
+				$('form#formulario').empty();
+				$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'">');
         $('form#formulario').append('<input type="hidden" name="data-idOS" value="'+orden+'" />');
         $('form#formulario').append($('#data-OS'));
         $('form#formulario').attr('action',baseURL+api+isoPais+"/consulta/facturar");

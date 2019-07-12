@@ -118,7 +118,7 @@ function validaCampos(_response_) {
 	});
 	if(!valid) {
 		$('#mensajeError')
-		.text('Por favor introduzca los campos que se le indican en color rojo')
+		.text('Por favor, completa los campos que se indican en color rojo.')
 		.fadeIn();
 	} else {
 		valid = daysDifference();
@@ -155,16 +155,26 @@ function daysDifference() {
  */
 function ReportRechar(dataReport) {
 	dataReport = JSON.stringify(dataReport);
+	var ceo_cook = decodeURIComponent(
+		document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+	);
+	var dataRequest = JSON.stringify ({
+		mod: reports_additional,
+		way: ReportRecharWithComm,
+		request: dataReport
+	})
+	dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
 	$.ajax({
 		method: 'POST',
 		url: baseURL + isoPais + '/reportes/comisiones-recarga',
-		data: {mod: 'reports_additional', way: 'ReportRecharWithComm', request: dataReport},
+		data: {request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)},
 		beforeSend: function() {
 			$('#detail-report').hide();
 			$('#loading').fadeIn();
 			$('#search').attr('disabled', true);
 		}
 	}).done(function(response) {
+		data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 		var code = response.code, title = response.title, msg = response.msg, date = response.date;
 		var data, table;
 		$('#novo-table').dataTable().fnClearTable();
@@ -209,14 +219,25 @@ function ReportRechar(dataReport) {
 function downloadReport(downloadData) {
 	var report = downloadData.report;
 	downloadData = JSON.stringify(downloadData);
+	var ceo_cook = decodeURIComponent(
+		document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+	);
+	var dataRequest = JSON.stringify ({
+		mod: reports_additional,
+		way: DownloadReport,
+		request: downloadData,
+	})
+
+	dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
 	$.ajax({
 		method: 'POST',
 		url: baseURL + isoPais + '/reportes/comisiones-recarga',
-		data: {mod: 'reports_additional', way: 'DownloadReport', request: downloadData},
+		data: {request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)},
 		beforeSend: function() {
 			$('#search').attr('disabled', true);
 		}
 	}).done(function(response) {
+		data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 		var code = response.code, title = response.title, msg = response.msg;
 		$('#search').removeAttr('disabled');
 		$('#loading-report').hide();
@@ -224,7 +245,11 @@ function downloadReport(downloadData) {
 
 		switch(code) {
 			case 0:
+				var ceo_cook = decodeURIComponent(
+					document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+				);
 				$('#down-report').empty();
+				$('#down-report').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'">');
 				$('#down-report').append('<input type="hidden" name="mod" value="lists_and_requirements" />');
 				$('#down-report').append('<input type="hidden" name="way" value="downloadFile" />');
 				$('#down-report').append('<input type="hidden" name="request" value="' + msg + '" />');

@@ -9,14 +9,15 @@ $(".fecha").keypress(function(e){
 
 $(document).ready(function() {
 	$("#cedula").attr('maxlength','8');
-	
+
 		var tamPg=20;
 
 		$("#cargando_empresa").fadeIn("slow");
 		$.getJSON(baseURL + api + isoPais + '/empresas/lista').always(function( data ) {
+			data = JSON.parse(CryptoJS.AES.decrypt(data.code, data.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 			$("#cargando_empresa").fadeOut("slow");
 			if(!(data.ERROR)){
-				
+
 				$.each(data.lista, function(k,v){
 
 					$("#repReposiciones_empresa").append('<option accodcia="'+v.accodcia+'" acnomcia="'+v.acnomcia+'" acrazonsocial="'+v.acrazonsocial+'" acdesc="'+v.acdesc+'" value="'+v.acrif+'">'+v.acnomcia+'</option>');
@@ -39,13 +40,23 @@ $(document).ready(function() {
 			$("#repReposiciones_producto").children( 'option:not(:first)' ).remove();
 			$("#cargando_producto").fadeIn("slow");
 			$("#repReposiciones_empresa").attr('disabled',true);
-			$.post(baseURL + api + isoPais + "/producto/lista", { 'acrif': acrif }, function(data){
+			var ceo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
+
+			var dataRequest = JSON.stringify ({
+				acrif:acrif
+			})
+			dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
+			$.post(baseURL + api + isoPais + "/producto/lista", { request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook) }, function(data){
+				data = JSON.parse(CryptoJS.AES.decrypt(data.code, data.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
+
 				$("#cargando_producto").fadeOut("slow");
 				$("#repReposiciones_empresa").removeAttr('disabled');
-				if(!data.ERROR){	
-					$.each(data, function(k,v){  				
+				if(!data.ERROR){
+					$.each(data, function(k,v){
 						$("#repReposiciones_producto").append('<option value="'+v.idProducto+'" des="'+v.descripcion+"/" +v.marca.toUpperCase()+'" >'+v.descripcion+" / "+v.marca.toUpperCase()+'</option>');
-					}); 
+					});
 				}else{
 					if(data.ERROR.indexOf('-29') !=-1){
 		             alert("Usuario actualmente desconectado");
@@ -53,7 +64,7 @@ $(document).ready(function() {
 		         }else{
 					$("#repReposiciones_producto").append('<option value="">'+data.ERROR+'</option>');
 				}
-				} 
+				}
 			});
 		}
 		});
@@ -101,7 +112,7 @@ $(document).ready(function() {
 						$( "#repReposiciones_fechaFinal" ).attr("disabled","true");
 					}else{
 						$( "#repReposiciones_fechaFinal" ).removeAttr("disabled");
-						$( "#repReposiciones_fechaInicial" ).removeAttr("disabled");	
+						$( "#repReposiciones_fechaInicial" ).removeAttr("disabled");
 					}
 				}
 			});
@@ -115,7 +126,7 @@ $(document).ready(function() {
 					$("#repReposiciones_fechaFinal").datepicker("setDate", "today");
 				}else if($(this).val()=="2"){
 					$("#repReposiciones_fechaInicial").datepicker("setDate", "-6m");
-					$("#repReposiciones_fechaFinal").datepicker("setDate", "today");		
+					$("#repReposiciones_fechaFinal").datepicker("setDate", "today");
 				}
 			}
 		});
@@ -123,8 +134,11 @@ $(document).ready(function() {
 
 
 	    $("#export_excel").click(function(){
-
+			var ceo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
 			$('form#formulario').empty();
+			$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'">');
 			$('form#formulario').append('<input type="hidden" name="empresa" value="'+filtro_busq.empresa+'" />');
 			$('form#formulario').append('<input type="hidden" name="fechaInicial" value="'+filtro_busq.fechaInicial+'" />');
 			$('form#formulario').append('<input type="hidden" name="fechaFin" value="'+filtro_busq.fechaFin+'" />');
@@ -135,7 +149,7 @@ $(document).ready(function() {
 			$('form#formulario').append('<input type="hidden" name="nomProducto" value="'+filtro_busq.des+'" />');
 			$('form#formulario').append('<input type="hidden" name="paginaActual" value="1" />');
 			$('form#formulario').attr('action',baseURL+api+isoPais+"/reportes/reposicionesExpXLS");
-			$('form#formulario').submit(); 
+			$('form#formulario').submit();
 
 
 			/*datos={
@@ -154,9 +168,9 @@ $(document).ready(function() {
     			$aux.dialog('destroy')
     			if(!data.ERROR){
     				$('form#formulario').empty();
-    				$('form#formulario').append('<input type="hidden" name="bytes" value="'+JSON.stringify(data.bytes)+'" />');    		
-    				$('form#formulario').append('<input type="hidden" name="ext" value="'+data.ext+'" />');  
-    				$('form#formulario').append('<input type="hidden" name="nombreArchivo" value="'+data.nombreArchivo+'" />');  
+    				$('form#formulario').append('<input type="hidden" name="bytes" value="'+JSON.stringify(data.bytes)+'" />');
+    				$('form#formulario').append('<input type="hidden" name="ext" value="'+data.ext+'" />');
+    				$('form#formulario').append('<input type="hidden" name="nombreArchivo" value="'+data.nombreArchivo+'" />');
     				$('form#formulario').attr('action',baseURL+'/'+isoPais+"/file");
     				$('form#formulario').submit()
     			}else{
@@ -164,16 +178,16 @@ $(document).ready(function() {
     					alert('Usuario actualmente desconectado');
 						location.reload();
     				}else{
-    					notificacion('Descargando archivo de datos',data.ERROR)	
+    					notificacion('Descargando archivo de datos',data.ERROR)
     				}
-    				
+
     			}
     		})*/
 
 	    });
 
 
-//METODO PARA REALIZAR LA BUSQUEDA 
+//METODO PARA REALIZAR LA BUSQUEDA
 $("#repReposiciones_btnBuscar").click(function(){
 	evBuscar=true;
 	buscarReposiciones("1");
@@ -181,7 +195,7 @@ $("#repReposiciones_btnBuscar").click(function(){
 
 var filtro_busq={};
 function buscarReposiciones(paginaActual){
-		    
+
 	    	var $consulta;
 	    //	pag=paginaActual;
 	    	if(validar_filtro_busqueda("lotes-2")){
@@ -200,12 +214,20 @@ function buscarReposiciones(paginaActual){
 
 		    	filtro_busq.acnomcia = $("option:selected","#repReposiciones_empresa").attr("acnomcia");
 		    	filtro_busq.des = $("option:selected","#repReposiciones_producto").attr("des");
-		    	
+
+					var ceo_cook = decodeURIComponent(
+						document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+					);
+
+					filtro_busq.ceo_name = ceo_cook;
+
 	//SE REALIZA LA INVOCACION AJAX
-		    	$consulta = $.post(baseURL + api + isoPais + "/reportes/reposiciones",filtro_busq );
+	var dataRequest= JSON.stringify(filtro_busq);
+	dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
+		    	$consulta = $.post(baseURL + api + isoPais + "/reportes/reposiciones",{request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)} );
 	//DE SER EXITOSA LA COMUNICACION CON EL SERVICIO SE EJECUTA EL SIGUIENTE METODO "DONE"
 		 		$consulta.done(function(data){
-		 			
+					data = JSON.parse(CryptoJS.AES.decrypt(data.code, data.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 		 			$('#cargando').fadeOut("slow");
 		 			$("#repReposiciones_btnBuscar").show();
 
@@ -216,7 +238,7 @@ function buscarReposiciones(paginaActual){
 			 			contenedor=$("#div_tablaDetalle");
 			 			var tr;
 			 			var td;
-	//DE TRAER RESULTADOS LA CONSULTA SE GENERA LA TABLA CON LA DATA... 
+	//DE TRAER RESULTADOS LA CONSULTA SE GENERA LA TABLA CON LA DATA...
 	//DE LO CONTRARIO SE GENERA UN MENSAJE "No existe Data relacionada con su filtro de busqueda"
 
 		 			if(data.rc == "0"){
@@ -226,7 +248,7 @@ function buscarReposiciones(paginaActual){
 	    			$('#div_tablaDetalle').fadeIn("slow");
 	    			//$("#paginacion").show();
 	    			$("#contend-pagination").show();
-		 			
+
 			 			$.each(data.listadoReposiciones,function(posLista,itemLista){
 			 				tr=$(document.createElement("tr")).appendTo(tbody);
 			 				tr.addClass('pg'+data.paginaActual);
@@ -242,7 +264,7 @@ function buscarReposiciones(paginaActual){
 			 				td=$(document.createElement("td")).appendTo(tr);
 			 				td.html(itemLista.fechaExp);
 			 				td.attr("style","text-align: center");
-			 						 				
+
 			 			});
 						/*
 			 			if (evBuscar) {
@@ -252,8 +274,8 @@ function buscarReposiciones(paginaActual){
 					 	*/
 
 						paginacion(data.totalPaginas, data.paginaActual);
-			 			
-			 			$('#tabla-datos-general tbody tr:even').addClass('even '); 
+
+			 			$('#tabla-datos-general tbody tr:even').addClass('even ');
 		 			}else{
 		 				if(data.rc =="-29"){
 				             alert(data.mensaje);
@@ -282,9 +304,9 @@ function buscarReposiciones(paginaActual){
 
 function validar_filtro_busqueda(div){
 	var valido=true;
-		//VALIDA INPUT:TEXT QUE SEAN REQUERIDOS NO SE ENCUENTREN VACIOS 
+		//VALIDA INPUT:TEXT QUE SEAN REQUERIDOS NO SE ENCUENTREN VACIOS
 		$.each($("#"+div+" input[type='text'].required"),function(posItem,item){
-			var $elem=$(item); 
+			var $elem=$(item);
 			if( $elem.attr('id') !="cedula" ){
 				if($elem.val()==""){
 					valido=false;
@@ -296,7 +318,7 @@ function validar_filtro_busqueda(div){
 
 		});
 
-		//VALIDA SELECT QUE SEAN REQUERIDOS NO SE ENCUENTREN VACIOS 
+		//VALIDA SELECT QUE SEAN REQUERIDOS NO SE ENCUENTREN VACIOS
 		$.each($("#"+div+" select.required"),function(posItem,item){
 			var $elem=$(item);
 			if($elem.val()==""){
@@ -305,14 +327,14 @@ function validar_filtro_busqueda(div){
 			}else{
 				$elem.attr("style","");
 			}
-		});  
+		});
 
 
 		//VALIDA INPUT:CHECKBOX  y INPUT:RADIO QUE SEAN REQUERIDOS NO SE ENCUENTREN VACIOS
 		var check = $("#"+div+" input[type='checkbox'].required:checked").length;
 		var radio = $("#"+div+" input[type='radio'].required:checked ").length;
 		if((check == "")&&($("#"+div+" input[type='checkbox'].required").length!="")){
-			valido=false;   	
+			valido=false;
 			$("#"+div+" input[type='checkbox'].required").next().attr("style","color:red");
 		}else{
 			$("#"+div+" input[type='checkbox'].required").next().attr("style","");
@@ -323,7 +345,7 @@ function validar_filtro_busqueda(div){
 			$("#"+div+" input[type='radio'].required").next().attr("style","color:red");
 		}else{
 			$("#"+div+" input[type='radio'].required").next().attr("style","");
-		} 
+		}
 
 
 		if(!valido){
@@ -344,9 +366,9 @@ function paginar(totalPaginas, paginaActual) {
 		display     : tamPg,
 		border					: false,
 		text_color  			: '#79B5E3',
-		background_color    	: 'none',	
+		background_color    	: 'none',
 		text_hover_color  		: '#2573AF',
-		background_hover_color	: 'none', 
+		background_hover_color	: 'none',
 		images		: false,
 		mouse		: 'press',
 		onChange     			: function(page){
@@ -356,7 +378,7 @@ function paginar(totalPaginas, paginaActual) {
 											$('.tbody-SC tbody tr').hide();
 											$('.tbody-SC .pg'+page).show();
 
-									
+
 								  }
 	});
 }
@@ -387,7 +409,7 @@ function paginar(totalPaginas, paginaActual) {
 				id = id.split("_");
 			buscarReposiciones(id[1]);
 		});
-		
+
 		$("#anterior-1").unbind("mouseover");
 		$("#anterior-1").unbind("mouseout");
 		$("#anterior-1").mouseover(function(){

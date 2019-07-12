@@ -25,7 +25,7 @@ $("#cambioClave").on("click",function(event){
 		alerta = "Máximo 15 caracteres";
 		notificacion(alerta);
 	}else if ( !($('#length').hasClass("valid") && $('#letter').hasClass("valid") && $('#capital').hasClass("valid") && $('#number').hasClass("valid") && $('#consecutivo').hasClass("valid") && $('#especial').hasClass("valid"))){
-		alerta = "Verifique el formato de la contraseña";
+		alerta = "Verifica el formato de la contraseña";
 		notificacion(alerta);
 	}else{
 		if(active=='1'){
@@ -55,7 +55,10 @@ function notificacion(mensaje){
 function changePassNewUser(passOld,pass,passC){
 
 	$aux = $('#loading').dialog({title:"Cambiando contraseña", modal: true, resizable:false, close:function(){$aux.dialog('close');}});
-	$consulta = $.post(baseURL+isoPais+"/changePassNewUserAuth", { userpwdOld: passOld, userpwd: pass, userpwdConfirm: passC } );
+	var ceo_cook = decodeURIComponent(
+		document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+	);
+	$consulta = $.post(baseURL+isoPais+"/changePassNewUserAuth", { userpwdOld: passOld, userpwd: pass, userpwdConfirm: passC, ceo_name: ceo_cook } );
 	$consulta.done(function(data){
 		$aux.dialog('destroy');
 		data = $.parseJSON(data);

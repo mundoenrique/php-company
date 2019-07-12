@@ -25,7 +25,7 @@ $("#cambioClave").on("click",function(event){
 		alerta = "Máximo 15 caracteres";
 		notificacion(alerta);
 	}else if ( !($('#length').hasClass("valid") && $('#letter').hasClass("valid") && $('#capital').hasClass("valid") && $('#number').hasClass("valid") && $('#consecutivo').hasClass("valid") && $('#especial').hasClass("valid"))){
-		alerta = "Verifique el formato de la contraseña";
+		alerta = "Verifica el formato de la contraseña";
 		notificacion(alerta);
 	}else{
 		if(active=='1'){
@@ -55,19 +55,23 @@ function notificacion(mensaje){
 function changePassNewUser(passOld,pass,passC){
 
 	$aux = $('#loading').dialog({title:"Cambiando contraseña", modal: true, resizable:false, close:function(){$aux.dialog('close');}});
-	$consulta = $.post(baseURL+isoPais+"/changePassNewUserAuth", { userpwdOld: passOld, userpwd: pass, userpwdConfirm: passC } );
-	$consulta.done(function(data){
+	var ceo_cook = decodeURIComponent(
+		document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+	);
+
+	$consulta = $.post(baseURL+isoPais+"/changePassNewUserAuth", { userpwdOld: passOld, userpwd: pass, userpwdConfirm: passC, ceo_name: ceo_cook } );
+	$consulta.done(function(response){
 		$aux.dialog('destroy');
-		data = $.parseJSON(data);
-		if(data.rc == 0) {
-			$("<div><h3>" + data.msg + "</h3><h5>" + data.redirect + "</h5></div>").dialog({title:"Cambiar contraseña", modal:true, resizable:false,close:function(){$(this).dialog('destroy');}});
-			notificacion(data.msg);
+		response = $.parseJSON(response);
+		if(response.rc == 0) {
+			$("<div><h3>" + response.msg + "</h3><h5>" + response.redirect + "</h5></div>").dialog({title:"Cambiar contraseña", modal:true, resizable:false,close:function(){$(this).dialog('destroy');}});
+			notificacion(response.msg);
 			$(location).attr('href',baseURL+isoPais+"/dashboard");
-		} else if (data.rc == '-29') {
-			alert(data.msg);
+		} else if (response.rc == '-29') {
+			alert(response.msg);
 			$(location).attr('href',baseURL+isoPais+"/logout");
 		} else {
-			notificacion(data.msg);
+			notificacion(response.msg);
 		}
 	});
 

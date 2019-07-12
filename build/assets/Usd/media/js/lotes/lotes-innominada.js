@@ -11,14 +11,14 @@ var datatable;
 		});
 	}
 
-  //Eliminar lote
+  //Eliminar Lote
 
     function eliminar_lote(idlote, numlote){
 
 
       var canvas = "<div id='dialog-confirm'>";
 	      canvas +="<p>Lote número: " + numlote + "</p>";
-	      canvas += "<fieldset><input type='password' id='pass' size=30 placeholder='Ingrese su contraseña' class='text ui-widget-content ui-corner-all'/>";
+	      canvas += "<fieldset><input type='password' id='pass' size=30 placeholder='Ingresa tu contraseña' class='text ui-widget-content ui-corner-all'/>";
 	      canvas += "<h5 id='msg'></h5></fieldset></div>";
 
       $(canvas).dialog({
@@ -36,7 +36,7 @@ var datatable;
 	          	action_eliminar_lote(idlote, numlote, pass);
 
         	} else {
-				$(this).find( $('#msg')).text("Debe ingresar su contraseña");
+				$(this).find( $('#msg')).text("Debes ingresar tu contraseña");
 				return false;
           	}
 			$(this).dialog("destroy");
@@ -70,7 +70,18 @@ var datatable;
 
     function action_eliminar_lote(idlote, numlote, pass){
 		$aux = $("#loading").dialog({title:'Eliminando lote ' + numlote,modal:true, close:function(){$(this).dialog('close')}, resizable:false });
-		$.post(baseURL+isoPais+'/lotes/innominada/eliminarLotesInnominadas', { "data-pass": pass, "data-idlote": idlote, "data-numlote": numlote }).done( function(data){
+		var ceo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
+		var dataRequest = JSON.stringify ({
+			data_pass: pass,
+			data_idlote: idlote,
+			data_numlote: numlote,
+		})
+		dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
+
+		$.post(baseURL+isoPais+'/lotes/innominada/eliminarLotesInnominadas', { request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook) }).done( function(response){
+			data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 			$aux.dialog('destroy');
 				if(!data.ERROR){
 					notificacion("Lote eliminado","<p>El nro. de lote <b>" + numlote + "</b> ha sido eliminado correctamente</p>");
@@ -87,7 +98,7 @@ var datatable;
 				}
 		});
     }
-  //--Fin Eliminar lote
+  //--Fin Eliminar Lote
 
 	function validate(){
 		var
@@ -99,19 +110,19 @@ var datatable;
 
 		if($("#sucursal").val()==""){
 			++count;
-			contenido+= "<h6>" + count + ". Ha seleccionado una sucursal</h6>";
+			contenido+= "<h6>" + count + ". Has seleccionado una sucursal</h6>";
 		}
 		if($("#cant_tarjetas").val()==""||$("#cant_tarjetas").val()=="0"){
 			++count;
-			contenido+= "<h6>" + count + ". Ha ingresado una cantidad</h6>";
+			contenido+= "<h6>" + count + ". Has ingresado una cantidad</h6>";
 		}
 		if($("#fecha_expira").val()==""){
 			++count;
-			contenido+= "<h6>" + count + ". Ha seleccionado una fecha de expiración</h6>";
+			contenido+= "<h6>" + count + ". Has seleccionado una fecha de expiración</h6>";
 		}
 		if($("#embozo_1").val()==""){
 			++count;
-			contenido+= "<h6>" + count + ". Ha ingresado una Linea Embozo 1</h6>";
+			contenido+= "<h6>" + count + ". Has ingresado una Linea Embozo 1</h6>";
 		}
 		if($("#embozo_2").val()==""){
 			++count;
@@ -121,20 +132,20 @@ var datatable;
 
 		}else {
 			++count;
-			contenido+= "<h6>" + count + ". No haya ingresado caracteres especiales en Linea Embozo 2</h6>";
+			contenido+= "<h6>" + count + ". No hayas ingresado caracteres especiales en Linea Embozo 2</h6>";
 		}
 		if(!/[^a-zA-Z0-9]/.test($("#embozo_1").val())){
 
 		}else {
 			++count;
-			contenido+= "<h6>" + count + ". No haya ingresado caracteres especiales en Linea Embozo 1</h6>";
+			contenido+= "<h6>" + count + ". No hayas ingresado caracteres especiales en Linea Embozo 1</h6>";
 		}
 		if(maxTarjetas !== 0 && cantTartjetas > maxTarjetas) {
 			++count;
 			contenido+= "<h6>"+count+". La cantidad de tarjetas no sea superior a "+maxTarjetas+"</h6>";
 		}
 		if(count > 0){
-			notificacion("Solicitud de Innominadas","<h2>Verifique que:</h2>" + contenido);
+			notificacion("Solicitud de Innominadas","<h2>Verifica que:</h2>" + contenido);
 			valid = true;
 		}
 		return valid;
@@ -164,17 +175,40 @@ $(function(){
 			$aux = $("#loading").dialog({title:'Procesando solicitud',modal:true, close:function(){$(this).dialog('close')}, resizable:false });
 			var fecha_expira = $('#fecha_expira').val().split('/');
 				fecha_expira = fecha_expira[0] + fecha_expira[1].substr(2);
+			var ceo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
+			var dataRequest = JSON.stringify({
+			//	filtro_busq: filtro_busq,
+				data_cant: $('#cant_tarjetas').val(),
+				data_monto: $('#monto').val(),
+				data_lembozo1: $('#embozo_1').val(),
+				data_lembozo2: $('#embozo_2').val(),
+				data_codsucursal: $('#sucursal').val(),
+				data_fechaexp: fecha_expira,
+				ceo_name: ceo_cook
+			})
+			dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {
+				format: CryptoJSAesJson
+			}).toString();
+			// var arrData = {
+			// 	'data-cant' : $('#cant_tarjetas').val(),
+			// 	'data-monto' : $('#monto').val(),
+			// 	'data-lembozo1' : $('#embozo_1').val(),
+			// 	'data-lembozo2' : $('#embozo_2').val(),
+			// 	'data-codsucursal' : $('#sucursal').val(),
+			// 	'data-fechaexp' : fecha_expira,
+			// 	'ceo_name': ceo_cook
+			// };
 
-			var arrData = {
-				'data-cant' : $('#cant_tarjetas').val(),
-				'data-monto' : $('#monto').val(),
-				'data-lembozo1' : $('#embozo_1').val(),
-				'data-lembozo2' : $('#embozo_2').val(),
-				'data-codsucursal' : $('#sucursal').val(),
-				'data-fechaexp' : fecha_expira
-			};
-
-			$.post(baseURL+isoPais+'/lotes/innominada/createCuentasInnominadas', arrData).done( function(data){
+			$.post(baseURL+isoPais+'/lotes/innominada/createCuentasInnominadas', {
+				request: dataRequest,
+				ceo_name: ceo_cook,
+				plot: btoa(ceo_cook)
+			}).done( function(response){
+				data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {
+					format: CryptoJSAesJson
+				}).toString(CryptoJS.enc.Utf8))
 				$aux.dialog('destroy');
 				if(!data.ERROR){
 					solicitud_exitosa();
@@ -192,7 +226,23 @@ $(function(){
 		}
 	});
 
-	$.post(baseURL+isoPais+'/lotes/innominada/listaSucursalesInnominadas').done( function(data){
+	var ceo_cook = decodeURIComponent(
+		document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+	);
+	var dataRequest = JSON.stringify({
+		ceo_name: ceo_cook
+	})
+	dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {
+		format: CryptoJSAesJson
+	}).toString();
+	$.post(baseURL+isoPais+'/lotes/innominada/listaSucursalesInnominadas', {
+		request: dataRequest,
+		ceo_name: ceo_cook,
+		plot: btoa(ceo_cook)
+	}).done( function(response){
+		data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {
+			format: CryptoJSAesJson
+		}).toString(CryptoJS.enc.Utf8))
 		$('#cargando').hide();
 		$('#sucursal').prop('disabled', false);
 		var html = "";
@@ -228,8 +278,8 @@ $(function(){
 			"sLengthMenu":     "Mostrar _MENU_ registros",
 			"sZeroRecords":    "No se encontraron resultados",
 			"sEmptyTable":     "Ningún dato disponible en esta tabla",
-			"sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-			"sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+			"sInfo":           "Mostrando registros del _START_ al _END_,de un total de _TOTAL_ registros",
+			"sInfoEmpty":      "Mostrando registros del 0 al 0, de un total de 0 registros",
 			"sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
 			"sInfoPostFix":    "",
 			"sSearch":         "Buscar:",

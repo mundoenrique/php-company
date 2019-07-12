@@ -1,4 +1,7 @@
 <?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+$lang['WELCOME_TITLE']='Bienvenido a Conexión Empresas Online';
+$lang['WELCOME_MESSAGE']='Con este sistema las gestiones de pago de tu empresa son más eficientes, seguras y rápidas. Empieza a disfrutar de todas las ventajas que te ofrece Conexión Empresas Online.';
 $lang['WIDGET_LOGIN_TITLE']="Cliente afiliado Venezuela";
 $lang['WIDGET_ADDCLIENT_TITLE']="Nuevo Cliente";
 
@@ -14,7 +17,7 @@ $lang['MSG_BLOQUEAR_USER'] = 'El usuario será bloqueado al próximo intento fal
 
 //TERMINOS Y CONDICIONES
 $lang['MSG_CONFIR_EXIT'] = 'Para continuar, debe aceptar los términos y condiciones de uso. De lo contrario será dirigido a la página inicial';
-$lang['MSG_NEW_PASS_USER'] = 'Por motivos de seguridad es necesario que cambie su contraseña la primera vez que ingresa a nuestro sistema "Conexión Empresas Online"';
+$lang['MSG_NEW_PASS_USER'] = 'Por motivos de seguridad es necesario que cambie su contraseña la primera vez que ingresa a nuestro sistema "Conexión Empresas Online".';
 $lang['MSG_NEW_PASS_CADU'] = 'Por medidas de seguridad, es indispensable que cambie su contraseña de acceso al sistema para continuar sus operaciones.';
 
 //CONFIGURACION
@@ -50,7 +53,7 @@ $lang['BOTON_CAMBIO_CLAVE'] = 'Cambiar contraseña';
 // TAB EMPRESA
 $lang['EMP_TITLE_CONFIG'] = 'Configuración de empresa';
 $lang['EMP_CARGANDO'] = 'Cargando...';
-$lang['EMP_IDENTIFICADOR'] = 'Identificador empresa';
+$lang['EMP_IDENTIFICADOR'] = 'Nro identificador:';
 $lang['EMP_NOMBRE'] = 'Nombre: ';
 $lang['EMP_RAZON_SOCIAL'] = 'Razón social: ';
 $lang['EMP_CONTACTO'] = 'Contacto: ';
@@ -83,8 +86,8 @@ $lang['SUC_ESTADO'] = 'Estado: ';
 $lang['SUC_CIUDAD'] = 'Ciudad: ';
 $lang['SUC_TELEFONO'] = 'Teléfono: ';
 $lang['SUC_CONTACTO'] = 'Contacto: ';
-$lang['SUC_AREA'] = 'Código de Área: ';
-$lang['SUC_CODIGO'] = 'Sucursal Cod.: ';
+$lang['SUC_AREA'] = 'Código de área: ';
+$lang['SUC_CODIGO'] = 'Cód. de sucursal: ';
 $lang['SUC_BTN_MODIFICAR'] = 'Modificar';
 $lang['SUC_BTN_NEW_SUC'] = 'Nueva sucursal';
 $lang['SUC_BTN_NEW_MASV'] = 'Subir archivo';

@@ -9,3 +9,5 @@ function formatterDate(date) {
 
 	return new Date(dateStr);
 }
+
+$('input[type=text], input[type=password], input[type=textarea]').attr('autocomplete','off');

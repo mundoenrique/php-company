@@ -2,6 +2,8 @@
 $pais = $this->uri->segment(1);
 $urlBaseA = $this->config->item('base_url');
 $urlBase = $urlBaseA.$pais;
+$ceo_name = $this->security->get_csrf_token_name();
+$ceo_cook = $this->security->get_csrf_hash();
 
 $data = unserialize($data);
 
@@ -51,10 +53,12 @@ $reten = ($reten == NULL) ? "nonEmpty" : trim($reten, ', ');
 			if($data->lista){
 				?>
 				<div id="top-batchs">
+					<?php if($pais != 'Ec-bp'): ?>
 					<span aria-hidden="true" class="icon" data-icon="&#xe035;"></span>
+					<?php endif; ?>
 					<?php echo lang('TITULO_ORDEN_SERVICIO'); ?>
 				</div>
-				<div id="lotes-contenedor">
+				<div id="lotes-contenedor" class="b-rs">
 					<table id="tabla-datos-general" class="tabla-reportes-OS">
 						<thead>
 						<?php
@@ -75,7 +79,9 @@ $reten = ($reten == NULL) ? "nonEmpty" : trim($reten, ', ');
 							<tr id="datos-principales">
 								<th style='display:none'></th>
 								<th style='display:none'></th>
+								<?php if($pais != 'Ec-bp'): ?>
 								<th><?php echo lang('TABLA_OS_MONTO'); ?></th>
+								<? endif; ?>
 								<th><?php echo lang('TABLA_OS_MONTO_IVA'); ?></th>
 								<th class="th-empresa"><?php echo lang('TABLA_OS'); ?></th>
 								<th><?php echo lang('TABLA_OS_MONTO_TOTAL'); ?></th>
@@ -92,17 +98,25 @@ $reten = ($reten == NULL) ? "nonEmpty" : trim($reten, ', ');
 
 						foreach ($data->lista as $value) {
 							array_push($tempidOrdenLotes, $value->idOrdenTemp);
+							$comision = "<td>".lang('TABLA_OS_COMISION')."</td>";
+							if($pais == 'Ec-bp') {
+								$comision = '';
+							}
 							$ltr="<tr class='OShead-2 OSinfo $value->idOrdenTemp elem-hidden'>
 							<td>".lang('TABLA_OS_NROLOTE')."</td>
 							<td>".lang('TABLA_OS_FECHA')."</td>
 							<td>".lang('TABLA_OS_TIPO')."</td>
 							<td>".lang('TABLA_OS_CANT')."</td>
 							<td>".lang('TABLA_OS_STATUS')."</td>
-							<td>".lang('TABLA_OS_MONTO_RECARGA')."</td>
-							<td>".lang('TABLA_OS_COMISION')."</td>
-							<td>".lang('TABLA_OS_MONTO_TOTAL')."</td>
+							<td>".lang('TABLA_OS_MONTO_RECARGA')."</td>".
+							$comision.
+							"<td>".lang('TABLA_OS_MONTO_TOTAL')."</td>
 						</tr>";
 							foreach ($value->lotes as $l) {
+								$montoComision = "<td>$l->montoComision</td>";
+								if($pais == 'Ec-bp') {
+									$montoComision = '';
+								}
 
 								$montoNeto = floatval($l->montoRecarga)+floatval($l->montoComision);
 								$ltr  .= "<tr class='OSinfo $value->idOrdenTemp elem-hidden'>
@@ -112,7 +126,7 @@ $reten = ($reten == NULL) ? "nonEmpty" : trim($reten, ', ');
 							<td>$l->ncantregs</td>
 							<td>".ucfirst(mb_strtolower($l->status))."</td>
 							<td>$l->montoRecarga</td>
-							<td>$l->montoComision</td>
+							$montoComision
 							<td>$montoNeto</td>
 						</tr>";
 							}
@@ -137,6 +151,10 @@ $reten = ($reten == NULL) ? "nonEmpty" : trim($reten, ', ');
 									<td style='float:left; padding:0; '><table><tbody>$ltr</tbody></table></td>
 								</tr>";
 							}else {
+								$monComision = "<td>$value->montoComision</td>";
+								if($pais == 'Ec-bp') {
+									$monComision = '';
+								}
 								echo "
 								<tr id='$value->idOrdenTemp'>
 									<td class='OS-icon'>
@@ -144,7 +162,7 @@ $reten = ($reten == NULL) ? "nonEmpty" : trim($reten, ', ');
 											<span aria-hidden='true' class='icon' data-icon='&#xe003;'></span>
 										</a>
 									</td>
-									<td>$value->montoComision</td>
+									$monComision
 									<td>$value->montoIVA</td>
 									<td class='th-empresa'>$value->montoOS</td>
 									<td>".amount_format($value->montoTotal)."</td>
@@ -158,7 +176,18 @@ $reten = ($reten == NULL) ? "nonEmpty" : trim($reten, ', ');
 
 						</tbody>
 					</table>
-
+						<?php
+							if($pais=='Ec-bp'){
+								?>
+									<div class="botones-OS">
+										<button id="confirmarPreOSL" style="display: none" class="novo-btn-primary">
+											<?php echo lang('BTN_CONFIRMAR_OS') ?></button>
+										<button id='cancelar-OS' style="display: none" class="novo-btn-secondary">
+											<?php echo lang('BTN_CANCELAR_OS') ?></button>
+									</div>
+								<?php
+							}
+						?>
 
 				</div>
 				<?php echo "<input type='hidden' id='tempIdOrdenL' name='tempIdOrdenL' value='$tempIdOrdenL' />";
@@ -229,13 +258,15 @@ $reten = ($reten == NULL) ? "nonEmpty" : trim($reten, ', ');
 </div>
 
 <form id='toOS' action="<?php echo $urlBase ?>/consulta/ordenes-de-servicio " method="post">
+
 	<input type="hidden" name="data-confirm" value="" id="data-confirm" />
 </form>
 
 <form id='detalle_lote' method='post' action="<?php echo $urlBase ?>/lotes/autorizacion/detalle">
+	<input type='hidden' name='<?php echo $ceo_name ?>' value='<?php echo $ceo_cook ?>'>
 	<input type='hidden' name='data-COS' value='<?php echo serialize($data) ?>'/>
 </form>
-<form id='viewAutorizar' action="<?php echo $urlBase ?>/lotes/autorizacion " method="post">
+<form id='viewAutorizar' action="<?php echo $urlBase ?>/lotes/autorizacion " method="GET">
 
 </form>
 <div id='loading' style='text-align:center' class='elem-hidden'><?php echo insert_image_cdn("loading.gif"); ?></div>

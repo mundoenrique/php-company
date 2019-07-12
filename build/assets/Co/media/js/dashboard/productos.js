@@ -133,10 +133,14 @@ function resultNull(){
 
 
 
-  $('button#sProducto').on('click', function(){
+$('button#sProducto').on('click', function(){
+		var ceo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
     var idproducto = $(this).attr("data-idproducto");
     var nombreProducto = $(this).attr("data-nombreProducto");
-    var marcaProducto = $(this).attr("data-marcaProducto");
+		var marcaProducto = $(this).attr("data-marcaProducto");
+		$('form#productos').append('<input type="hidden" name="ceo_name" value="'+ ceo_cook +'"/>');
     $('form#productos').append('<input type="hidden" name="data-idproducto" value="'+idproducto+'" />');
     $('form#productos').append('<input type="hidden" name="data-nombreProducto" value="'+nombreProducto+'" />');
     $('form#productos').append('<input type="hidden" name="data-marcaProducto" value="'+marcaProducto+'" />');
@@ -166,8 +170,8 @@ var accodgrupoe;
     $('#sEmpresa').hide();
     $("#widget-info-2").append("<img class='load-widget' id='cargando' src='"+$('#cdn').val()+"media/img/loading.gif'>");//'<h4 id="cargando">Cargando...</h4>'
 
-    $.getJSON(baseURL+api+isoPais+'/empresas/lista').always(function( data ) {
-
+    $.getJSON(baseURL+api+isoPais+'/empresas/lista').always(function(response) {
+			data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
       $("#widget-info-2").find($('#cargando')).remove();
 
       $('#sEmpresaS').show();
@@ -209,24 +213,34 @@ var accodgrupoe;
 
   $('#aplicar').on('click',function(){
 
-
     if( acrif !== undefined ){
-
-      $.post( baseURL+api+isoPais+"/empresas/cambiar",
-        { 'data-accodgrupoe':accodgrupoe, 'data-acrif':acrif, 'data-acnomcia':acnomcia, 'data-acrazonsocial':acrazonsocial, 'data-acdesc':acdesc, 'data-accodcia':accodcia, 'llamada':'soloEmpresa' },
-         function(data){
-
+			var ceo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
+			var dataRequest = JSON.stringify ({
+				data_accodgrupoe:accodgrupoe,
+				data_acrif:acrif,
+				data_acnomcia:acnomcia,
+				data_acrazonsocial:acrazonsocial,
+				data_acdesc:acdesc,
+				data_accodcia:accodcia,
+				llamada:'soloEmpresa'
+			})
+				dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
+				$.post( baseURL+api+isoPais+"/empresas/cambiar", {request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)} )
+				.done(function(response){
+					data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
           if(data === 1){
             $(location).attr('href',baseURL+isoPais+"/dashboard/productos/");
           }else{
-            MarcarError('Intente de nuevo');
+            MarcarError('Intenta de nuevo');
           }
 
          }
       );
 
     }else{
-      MarcarError('Seleccione una empresa');
+      MarcarError('Selecciona una empresa');
     }
   });
 

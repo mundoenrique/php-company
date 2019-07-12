@@ -457,7 +457,6 @@ button:hover {
   text-shadow: 1px 1px 0 #004574, 1px 1px 0 false #004574;
   text-shadow: 1px 1px 0 false #004574, 1px 1px 0 false #004574;
 }
-
 #head {
   background: #0072c0;
   background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #0072c0), color-stop(100%, #0054a9));
@@ -2094,17 +2093,17 @@ input.ui-button::-moz-focus-inner, button.ui-button::-moz-focus-inner {
   background-position: -65px -16px;
 }
 
-.ui-tabs {
+.ui-id {
   position: relative;
   padding: .2em;
 }
 
-.ui-tabs .ui-tabs-nav {
+.ui-id .ui-id-nav {
   margin: 0;
   padding: 0;
 }
 
-.ui-tabs .ui-tabs-nav li {
+.ui-id .ui-id-nav li {
   list-style: none;
   float: left;
   position: relative;
@@ -2115,26 +2114,26 @@ input.ui-button::-moz-focus-inner, button.ui-button::-moz-focus-inner {
   white-space: nowrap;
 }
 
-.ui-tabs .ui-tabs-nav li a {
+.ui-id .ui-id-nav li a {
   float: left;
   padding: .5em 1em;
   text-decoration: none;
 }
 
-.ui-tabs .ui-tabs-nav li.ui-tabs-active {
+.ui-id .ui-id-nav li.ui-id-active {
   margin-bottom: -1px;
   padding-bottom: 1px;
 }
 
-.ui-tabs .ui-tabs-nav li.ui-tabs-active a, .ui-tabs .ui-tabs-nav li.ui-state-disabled a, .ui-tabs .ui-tabs-nav li.ui-tabs-loading a {
+.ui-id .ui-id-nav li.ui-id-active a, .ui-id .ui-id-nav li.ui-state-disabled a, .ui-id .ui-id-nav li.ui-id-loading a {
   cursor: text;
 }
 
-.ui-tabs .ui-tabs-nav li a, .ui-tabs-collapsible .ui-tabs-nav li.ui-tabs-active a {
+.ui-id .ui-id-nav li a, .ui-id-collapsible .ui-id-nav li.ui-id-active a {
   cursor: pointer;
 }
 
-.ui-tabs .ui-tabs-panel {
+.ui-id .ui-id-panel {
   display: block;
   /*border-width:0;*/
   padding: 1em 1.4em;
@@ -4655,6 +4654,11 @@ border-right:2px solid $color-base2!important;
   min-width: 150px !important;
 }
 
+.width-td {
+	max-width: 125px !important;
+	min-width: 125px !important;
+}
+
 #td-nombre {
   max-width: 150px !important;
   min-width: 150px !important;
@@ -5823,11 +5827,11 @@ padding:5px 0px;
   width: 230px;
 }
 
-#ui-tabs-1 #wrapper {
+#ui-id-1 #wrapper {
   padding: 0px !important;
 }
 
-#ui-tabs-2 #wrapper {
+#ui-id-2 #wrapper {
   padding: 0px !important;
 }
 
@@ -5867,7 +5871,8 @@ ul.jPag-pages {
   float: left;
   list-style-type: none;
   margin: 0px 0px 0px 0px;
-  padding: 0px;
+	padding: 0px;
+	width: auto !important;
 }
 
 ul.jPag-pages li {
@@ -6090,7 +6095,9 @@ margin-left: 250px;
 
 #archivo {
   margin-left: 5px;
-  cursor: pointer;
+	cursor: pointer;
+	display: block;
+  margin-top: 4px;
 }
 
 .suc em {
@@ -6915,7 +6922,7 @@ button.green:hover {
   font-weight: bold;
 }
 
-#ui-tabs-3 #wrapper {
+#ui-id-3 #wrapper {
   padding: 0 !important;
 }
 
@@ -7332,3 +7339,27 @@ button.green:hover {
       top: 0px;
   }
 /* Fin Menu-Head New*/
+
+.validate-error {
+	border-color: red;
+}
+
+#mensajeError {
+	float: left;
+	display: none;
+	color: red;
+}
+.ui-dialog-buttonpane button{
+	background: #0072c0;
+	padding: 5px;
+	color:white;
+	border: 0px;
+	outline: none;
+	box-shadow: 0px 0px 13px 2px rgba(0, 0, 0, 0);
+ }
+ .ui-button:focus,
+ .ui-dialog-buttonpane:hover button{
+	 background: #0081da;
+	 border: 0px;
+	 box-shadow: 0px 0px 13px 2px rgba(0, 0, 0, 0);
+	}

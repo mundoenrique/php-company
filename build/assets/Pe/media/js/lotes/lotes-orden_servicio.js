@@ -3,7 +3,7 @@ var authloading=false;
 $(window).bind('beforeunload', function(e) {
 	if(authloading===true){
 		//return "Unloading this page may lose. What do you want to do..."
-		return "En este momento se esta procesando una petición, por favor espere, de lo contrario podría usted perder información considerada como importante.";
+		return "En este momento se esta procesando una petición, por favor espera, de lo contrario podrías perder información considerada como importante.";
 		e.preventDefault();
 	}
 });
@@ -48,8 +48,14 @@ $(function(){
 		authloading=true;
 
 		$aux = $('#loading').dialog({title:'Confirmar cálculo orden de servicio',close: function(){$(this).dialog('close');}, modal: true, resizable:false});
-		$.post(baseURL+api+isoPais+"/lotes/confirmarPreOSL", { "tempIdOrdenL": l, "tempIdOrdenLNF": lnf })
-			.done(function(data) {
+		var ceo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
+		var dataRequest = JSON.stringify({"tempIdOrdenL": l, "tempIdOrdenLNF": lnf});
+		dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
+		$.post(baseURL+api+isoPais+"/lotes/confirmarPreOSL", {request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)})
+			.done(function(response) {
+				var data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
 				$aux.dialog('destroy');
 
 				authloading=false;

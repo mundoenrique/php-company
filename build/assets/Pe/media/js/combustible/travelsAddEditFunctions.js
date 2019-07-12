@@ -1,10 +1,13 @@
 function sendData (modelo, method, travel)
 {
     dataRequest = JSON.stringify(travel);
+		var ceo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
     $.ajax({
         url: baseURL + '/' + isoPais + '/trayectos/modelo',
         type: 'POST',
-        data: {modelo: modelo, way: method, data: dataRequest},
+        data: {modelo: modelo, way: method, data: dataRequest, ceo_name: ceo_cook},
         datatype: 'json',
         beforeSend: function(xrh, status) {
             $('#loading').removeClass('elem-hidden');
@@ -261,7 +264,7 @@ function validar_campos()
             'first-hour': 'La hora de inicio debe estar en formato 24h',
             'first-minute': 'Minutos de inicio debe estar entre 00 y 59',
             'last-date': {
-                required: 'Indique la fecha final',
+                required: 'Indique la Fecha final',
                 dateConfirm: 'La fecha de fin no puede ser anterior a la fecha inicio'
             },
             'last-hour': 'La hora de final debe estar en formato 24h',
@@ -287,8 +290,8 @@ function validar_campos()
             'destination': {required: true}
         },
         messages: {
-            'driver': 'Seleccione un conductor',
-            'vehicle': 'Seleccione un vehículo',
+            'driver': 'Selecciona un conductor',
+            'vehicle': 'Selecciona un vehículo',
             'origin': 'Debe definir origen del viaje',
             'destination': 'Debe definir destino del viaje',
         }

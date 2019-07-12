@@ -37,27 +37,29 @@ $urlCdn = get_cdn();
         </div>
         <div id="lotes-contenedor">
             <div id="lotes-2">
+							<form id="form-criterio-busqueda" onsubmit="return false">
                 <div id="search-1">
                     <h5><?php echo lang('REPORTES_SELECCION_EMPRESA'); ?><img id ="cargando_empresa" style="display:none;width: 25px; margin-left:10px" src="<?php echo $urlCdn."media/img/loading.gif"?>"/></h5>
-                    <select class="required" id = "SaldosAmanecidos-empresa">
+                    <select class="required" id = "SaldosAmanecidos-empresa" name="empresa-select">
                         <option selected="selected" value=""><?php echo lang('REPORTES_SELECCIONE_EMPRESA'); ?></option>
                     </select>
                 </div>
                 <div id="search-1">
                     <h5><?php echo lang('ID_PERSONA'); ?></h5>
                     <span>
-                        <input id = "SaldosAmanecidos-TH"  class="required login nro" type="text" placeholder="<?php echo lang('ID_PERSONA'); ?>" value="" />
+                        <input id = "SaldosAmanecidos-TH"  class="login nro" type="text" name="id-persona" placeholder="<?php echo lang('ID_PERSONA'); ?>" value="" />
                     </span>
                 </div>
                 <div id="search-2">
                         <h5><?php echo lang('REPORTES_SELECCION_PRODUCTO'); ?><img id ="cargando_producto" style="display:none;width: 25px; margin-left:10px" src="<?php echo $urlCdn."media/img/loading.gif"?>"/></h5>
                         <span>
-                            <select  class="required" id="SaldosAmanecidos-producto">
+                            <select  class="required" id="SaldosAmanecidos-producto" name="producto-select">
                                 <option value="" selected="selected"><?php echo lang('REPORTES_SELECCIONE_PRODUCTO'); ?></option>
                             </select>
                         </span>
                 </div>
                 
+							</form>
             </div>
         </div>
         <div id="batchs-last">

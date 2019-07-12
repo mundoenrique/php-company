@@ -2,7 +2,8 @@
 $pais = $this->uri->segment(1);
 $urlBaseA = $this->config->item('base_url');
 $urlBase = $urlBaseA.$pais;
-
+$ceo_name = $this->security->get_csrf_token_name();
+$ceo_cook = $this->security->get_csrf_hash();
 
 $info;
 log_message('info',json_encode($data));
@@ -44,7 +45,9 @@ log_message('info',json_encode($data));
 			?>
 
 			<div id="top-batchs">
+				<?php if($pais != 'Ec-bp'): ?>
 				<span aria-hidden="true" class="icon" data-icon="&#xe03c;"></span>
+				<?php endif; ?>
 				<?php echo lang('TITULO_LOTES_CONFIRMACIONT'); ?>
 			</div>
 			<div id="lotes-contenedor">
@@ -149,17 +152,34 @@ log_message('info',json_encode($data));
 					?>
 			</div>
 			<div id="batchs-last">
-				<input id="clave" class="input-clave" type="password" placeholder="<?php echo lang('MSG_INGRESE_CLAVE'); ?>" value="">
-				<button onclick="location.href='<?php echo $urlBase; ?>/lotes'"><?php echo lang('BOTON_LOTES_CANCELAR') ?></button>
-				<button id="confirma" ><?php echo lang('BOTON_LOTES_CONFIRMAR') ?></button>
+				<form id="form-confirmacion" onsubmit="return false">
+				<?php
+					if($pais=='Ec-bp'){
+						?>
+							<center>
+						<?php
+					}
+				?>
+						<input id="clave" class="input-clave" type="password" name="user-password" placeholder="<?php echo lang('MSG_INGRESE_CLAVE'); ?>" value="">
+						<?php
+					if($pais=='Ec-bp'){
+						?>
+							</center>
+							<center>
+						<?php
+					}
+				?>
+					<button class="novo-btn-secondary" onclick="location.href='<?php echo $urlBase; ?>/lotes'"><?php echo lang('BOTON_LOTES_CANCELAR') ?></button>
+					<button id="confirma" class="novo-btn-primary"><?php echo lang('BOTON_LOTES_CONFIRMAR') ?></button>
 
-				<input id="tipo" type='hidden' data-tipo='<?php echo $info->tipoLote ?>'/>
+					<input type="hidden" id="tipo" name="tipo" class="ignore" data-tipo='<?php echo $info->tipoLote ?>'/>
 
-				<input id="info" type='hidden' name='info' value='<?php echo serialize($info) ?>'/>
+					<input type="hidden" id="info" name='info' class="ignore" value='<?php echo serialize($info) ?>'/>
 
-				<input id="idTipoLote" type="hidden" name="idTipoLote" value='<?php echo $info->idTipoLote ?>'/>
+					<input type="hidden" id="idTipoLote" name="idTipoLote" class="ignore" value='<?php echo $info->idTipoLote ?>'/>
 
-
+					</center>
+				</form>
 			</div>
 
 			<?php
@@ -179,5 +199,6 @@ log_message('info',json_encode($data));
 </div>
 
 <form id='toOS' action="<?php echo $urlBase ?>/consulta/ordenes-de-servicio " method="post">
+	<input type='hidden' name='<?php echo $ceo_name ?>' value='<?php echo $ceo_cook ?>'>
 	<input type="hidden" name="data-confirm" value="" id="data-confirm" />
 </form>

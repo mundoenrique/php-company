@@ -1,5 +1,6 @@
 <?php
-$lang['SYSTEM_NAME']= "Empresas Online Venezuela";
+defined('BASEPATH') OR exit('No direct script access allowed');
+$lang['SYSTEM_NAME']= "Conexión Empresas Online Venezuela";
 $lang['LAST_SESSION']="Última sesión";
 $lang['ID_FISCAL']= "RIF.";
 $lang['ID_PERSONA']= "Cédula";
@@ -8,7 +9,7 @@ $lang['FOOTER'] ='Todos los derechos reservados.';
 //WIDGET EMPRESAS
 $lang['WIDGET_EMPRESAS_BTNSELECCIONAR']= "Seleccionar otra empresa";
 $lang['WIDGET_EMPRESAS_BTNOTROSPROGRAMAS']= "Conozca otros programas";
-$lang['WIDGET_EMPRESAS_OPC_SEL_EMPRESAS']= "Seleccione una empresa";
+$lang['WIDGET_EMPRESAS_OPC_SEL_EMPRESAS']= "Selecciona una empresa";
 $lang['WIDGET_EMPRESAS_BTNAPLICAR']= "Seleccionar";
 
 //MIGAJASDEPAN
@@ -24,11 +25,11 @@ $lang['BREADCRUMB_EMPRESAS']= "Empresas";
 $lang['BREADCRUMB_PRODUCTOS']= "Productos";
 $lang['BREADCRUMB_AUTORIZACION']= "Autorización";
 $lang['BREADCRUMB_CONFIRMACION']= "Confirmación";
-$lang['BREADCRUMB_ORDEN_SERVICIO']= "Orden de servicio";
+$lang['BREADCRUMB_ORDEN_SERVICIO']= "Órdenes de servicio";
 $lang['BREADCRUMB_CALCULO_ORDEN_SERVICIO']= "Preliminar orden de servicio";
 $lang['BREADCRUMB_TARJETAHABIENTES'] = "Tarjetahabientes";
 $lang['BREADCRUMB_SERVICIOS'] = "Servicios";
-$lang['BREADCRUMB_TRANSMAESTRA'] = "Transferencia Maestra";
+$lang['BREADCRUMB_TRANSMAESTRA'] = "Transferencia maestra";
 $lang['BREADCRUMB_OTROS_PROGRAMS'] = 'Otros programas';
 $lang['BREADCRUMB_PH_BUSCAR'] = 'Buscar...';
 $lang['BREADCRUMB_TITL_BUSCAR'] = 'Buscar texto';
@@ -42,7 +43,7 @@ $lang['GESLOT']= "Lotes";  // perfil
 $lang['CONSUL']= "Consulta";  //perfil
 $lang['SERVIC']= "Servicios"; // perfil
 $lang['GESREP']= "Reportes";  // perfil
-$lang['TEBCAR']= "Carga de Lotes"; // modulo
+$lang['TEBCAR']= "Carga de lotes"; // modulo
 $lang['COMBUS']= "Trayectos"; // perfil
 
 $lang['TICARG']= "Solicitud"; // modulo
@@ -50,10 +51,10 @@ $lang['TIINVN']= "Afiliación"; // modulo
 
 $lang['TEBCON']= "Confirmación de Lote";
 $lang['TEBELC']= "Eliminación de lote por confirmar";
-$lang['TEBAUT']= "Autorización de Lotes"; // modulo
+$lang['TEBAUT']= "Autorización de lotes"; // modulo
 $lang['TEBELI']= "Eliminación de lote por autorizar";
 $lang['TEBGUR']= 'Reproceso de Datos'; // modulo guardería
-$lang['TEBORS']= "Órdenes de Servicio"; // modulo
+$lang['TEBORS']= "Órdenes de servicio"; // modulo
 $lang['LOTFAC']= "Lotes por facturar"; // modulo
 $lang['TEBANU']= "Anular orden de servicio";
 $lang["TEBCOS"]= "Consultar orden se servicio";
@@ -67,7 +68,7 @@ $lang['TEBPOL']= 'Actualización de datos'; // modulo emisión de poliza
 $lang['TEBDPG']= "Depósitos en garantía";
 $lang['SALDAM']= "Saldos amanecidos";
 $lang['TEBCOD']= "Generar consolidado";
-$lang['REPEDO']= "Estados de cuenta";
+$lang['REPEDO']= "Estado de cuenta";
 $lang['REPUSU']= "Actividad por usuario";
 $lang['REPPRO']= "Recargas realizadas";
 $lang['REPTAR']= "Tarjetas emitidas";

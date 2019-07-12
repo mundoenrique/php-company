@@ -39,7 +39,12 @@ $(document).ready(function() {
 			$("#repReposiciones_producto").children( 'option:not(:first)' ).remove();
 			$("#cargando_producto").fadeIn("slow");
 			$("#repReposiciones_empresa").attr('disabled',true);
-			$.post(baseURL + api + isoPais + "/producto/lista", { 'acrif': acrif }, function(data){
+
+			var ceo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+				);
+
+			$.post(baseURL + api + isoPais + "/producto/lista", { 'acrif': acrif, ceo_name: ceo_cook }, function(data){
 				$("#cargando_producto").fadeOut("slow");
 				$("#repReposiciones_empresa").removeAttr('disabled');
 				if(!data.ERROR){
@@ -123,8 +128,11 @@ $(document).ready(function() {
 
 
 	    $("#export_excel").click(function(){
-
+				var ceo_cook = decodeURIComponent(
+					document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+					);
 			$('form#formulario').empty();
+			$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'">');
 			$('form#formulario').append('<input type="hidden" name="empresa" value="'+filtro_busq.empresa+'" />');
 			$('form#formulario').append('<input type="hidden" name="fechaInicial" value="'+filtro_busq.fechaInicial+'" />');
 			$('form#formulario').append('<input type="hidden" name="fechaFin" value="'+filtro_busq.fechaFin+'" />');
@@ -201,9 +209,16 @@ function buscarReposiciones(paginaActual){
 		    	filtro_busq.des = $("option:selected","#repReposiciones_producto").attr("des");
 
 	//SE REALIZA LA INVOCACION AJAX
-		    	$consulta = $.post(baseURL + api + isoPais + "/reportes/reposiciones",filtro_busq );
+					var ceo_cook = decodeURIComponent(
+						document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+						);
+					var dataRequest = JSON.stringify(filtro_busq);
+					dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
+
+		    	$consulta = $.post(baseURL + api + isoPais + "/reportes/reposiciones", {request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)});
 	//DE SER EXITOSA LA COMUNICACION CON EL SERVICIO SE EJECUTA EL SIGUIENTE METODO "DONE"
-		 		$consulta.done(function(data){
+		 		$consulta.done(function(response){
+					var data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
 
 		 			$('#cargando').fadeOut("slow");
 		 			$("#repReposiciones_btnBuscar").show();

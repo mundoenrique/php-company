@@ -98,9 +98,13 @@ function getCardList(dni, card)
 
 
 function addEdit(id, card) {
+	var ceo_cook = decodeURIComponent(
+		document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+	);
 	$('form#formulario').empty();
 	$('form#formulario').append('<input type="hidden" name="dni" value="' + id + '" />');
 	$('form#formulario').append('<input type="hidden" name="card" value="' + card + '" />');
 	$('form#formulario').attr('action', baseURL + isoPais + '/controles/visa/configurar');
+	$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'" />');
 	$('form#formulario').submit();
 }

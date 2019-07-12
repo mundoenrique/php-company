@@ -12,6 +12,9 @@ var	calendario = function(input){
 		});
 	},
 	getTarjetas = function(numlote, acrif, acnomcia, dtfechorcarga, nmonto){
+		var ceo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
 		$('form#formulario').empty();
 		$('form#formulario').append('<input type="hidden" name="data-numlote" value="' + numlote + '" />');
 		$('form#formulario').append('<input type="hidden" name="data-acrif" value="' + acrif + '" />');
@@ -19,6 +22,7 @@ var	calendario = function(input){
 		$('form#formulario').append('<input type="hidden" name="data-dtfechorcarga" value="' + dtfechorcarga + '" />');
 		$('form#formulario').append('<input type="hidden" name="data-nmonto" value="' + nmonto + '" />');
 		$('form#formulario').attr('action',baseURL+isoPais+"/lotes/innominada/detalle");
+		$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'" />');
 		$('form#formulario').submit();
 	},
 	validate = function(){
@@ -28,21 +32,21 @@ var	calendario = function(input){
 		if($("#nro_lote").val()==""&&$("#fecha_inicial").val()==""&&$("#fecha_final").val()==""){
 			++count;
 			valid = true;
-			contenido+= "<h6>" + count + ". Ha ingresado un nro. de lote</h6>";
+			contenido+= "<h6>" + count + ". Has ingresado un nro. de lote</h6>";
 		}
 		if(($("#fecha_inicial").val()==""||$("#fecha_final").val()=="")&&$("#nro_lote").val()==""){
 			valid = true;
 			if($("#fecha_inicial").val()==""){
 				++count;
-				contenido+= "<h6>" + count + ". Ha seleccionado una fecha inicial</h6>";
+				contenido+= "<h6>" + count + ". Has seleccionado una Fecha inicial</h6>";
 			}
 			if($("#fecha_final").val()==""){
 				++count;
-				contenido+= "<h6>" + count + ". Ha seleccionado una fecha final</h6>";
+				contenido+= "<h6>" + count + ". Has seleccionado una Fecha final</h6>";
 			}
 		}
 		if(valid){
-			notificacion("Solicitud de Innominadas","<h2>Verifique que:</h2>" + contenido);
+			notificacion("Solicitud de Innominadas","<h2>Verifica que:</h2>" + contenido);
 		}
 		return valid;
 	},
@@ -61,11 +65,15 @@ var	calendario = function(input){
 			});
 	},
 	listaInnominadas = function(){
+		var ceo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
 		$('form#formulario').empty();
 		$('form#formulario').append('<input type="hidden" name="data-numlote" value="' + getNumlote() + '" />');
 		$('form#formulario').append('<input type="hidden" name="data-fecha_inicial" value="' + getFecha_inicial() + '" />');
 		$('form#formulario').append('<input type="hidden" name="data-fecha_final" value="' + getFecha_final() + '" />');
 		$('form#formulario').attr('action',baseURL+isoPais+"/lotes/innominada/afiliacion");
+		$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'" />');
 		$('form#formulario').submit();
 	},
 	setNumlote = function(){
@@ -104,8 +112,8 @@ var	calendario = function(input){
 		        "sLengthMenu":     "Mostrar _MENU_ registros",
 		        "sZeroRecords":    "No se encontraron resultados",
 		        "sEmptyTable":     "Ningún dato disponible en esta tabla",
-		        "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-		        "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+		        "sInfo":           "Mostrando registros del _START_ al _END_, de un total de _TOTAL_ registros",
+		        "sInfoEmpty":      "Mostrando registros del 0 al 0, de un total de 0 registros",
 		        "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
 		        "sInfoPostFix":    "",
 		        "sSearch":         "Buscar:",

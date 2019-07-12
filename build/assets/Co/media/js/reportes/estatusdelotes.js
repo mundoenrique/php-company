@@ -7,7 +7,8 @@ $(".fecha").keypress(function(e){
 $(document).ready(function() {
 
 		$("#cargando_empresa").fadeIn("slow");
-		$.getJSON(baseURL + api + isoPais + '/empresas/lista').always(function( data ) {
+		$.getJSON(baseURL + api + isoPais + '/empresas/lista').always(function(response){
+			data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 			$("#cargando_empresa").fadeOut("slow");
 			if(!(data.ERROR)){
 
@@ -34,8 +35,17 @@ $(document).ready(function() {
 			$("#EstatusLotes-producto").children( 'option:not(:first)' ).remove();
 
 			$("#cargando_producto").fadeIn("slow");
-			$(this).attr('disabled',true);
-			$.post(baseURL + api + isoPais + "/producto/lista", { 'acrif': acrif }, function(data){
+			$(this).attr('disabled',true);}
+
+			var ceo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
+			var dataRequest = JSON.stringify ({
+				acrif: acrif
+			})
+			dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
+			$.post(baseURL + api + isoPais + "/producto/lista", {request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook) }, function(response){
+				data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 				$("#cargando_producto").fadeOut("slow");
 				$("#EstatusLotes-empresa").removeAttr('disabled');
 				if(!data.ERROR){
@@ -53,7 +63,7 @@ $(document).ready(function() {
 
 			});
 		}
-		});
+		);
 
 
 
@@ -69,7 +79,11 @@ $(document).ready(function() {
 			}
 			descargarArchivo(datos, baseURL+api+isoPais+"/reportes/estatuslotesExpXLS", "Exportar Excel" );
 */
+var ceo_cook = decodeURIComponent(
+	document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+	);
 			$('form#formulario').empty();
+	$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'">');
 	$('form#formulario').append('<input type="hidden" name="empresa" value="'+filtro_busq.empresa+'" />');
 	$('form#formulario').append('<input type="hidden" name="fechaInicial" value="'+filtro_busq.fechaInicial+'" />');
 	$('form#formulario').append('<input type="hidden" name="fechaFin" value="'+filtro_busq.fechaFin+'" />');
@@ -90,7 +104,11 @@ $("#export_pdf").click(function(){
 	}
 	descargarArchivo(datos, baseURL+api+isoPais+"/reportes/estatuslotesExpPDF", "Exportar PDF" );
 */
+var ceo_cook = decodeURIComponent(
+	document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+	);
 $('form#formulario').empty();
+$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'">');
 	$('form#formulario').append('<input type="hidden" name="empresa" value="'+filtro_busq.empresa+'" />');
 	$('form#formulario').append('<input type="hidden" name="fechaInicial" value="'+filtro_busq.fechaInicial+'" />');
 	$('form#formulario').append('<input type="hidden" name="fechaFin" value="'+filtro_busq.fechaFin+'" />');
@@ -114,9 +132,16 @@ var filtro_busq={};
 			$('#cargando').fadeIn("slow");
 			$("#EstatusLotes-btnBuscar").hide();
 	    	$('#div_tablaDetalle').fadeOut("fast");
-
-			$consulta = $.post(baseURL + api + isoPais + "/reportes/estatuslotes",filtro_busq );
-			$consulta.done(function(data){
+				var ceo_cook = decodeURIComponent(
+					document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+				);
+				var dataRequest = JSON.stringify(filtro_busq);
+				dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {
+					format: CryptoJSAesJson
+				}).toString();
+				$.post(baseURL + api + isoPais + "/reportes/estatuslotes",{request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)})
+				.done(function(response){
+					data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 				$("#mensaje").remove();
 				$('#cargando').fadeOut("slow");
 				$("#EstatusLotes-btnBuscar").show();
@@ -228,7 +253,7 @@ if((radio == "")&&($("#"+div+" input[type='radio'].required").length!="")){
 
 if(!valido){
 	$(".div_tabla_detalle").fadeOut("fast");
-	$("#mensajeError").html("Por favor rellene los campos marcados en color rojo");
+	$("#mensajeError").html("Por favor, rellene los campos marcados en color rojo.");
 	$("#mensajeError").fadeIn("fast");
 }else{
 	$("#mensajeError").fadeOut("fast");
@@ -291,8 +316,8 @@ $(".tbody-statuslotes").dataTable( {
             "sLengthMenu":     "Mostrar _MENU_ registros",
             "sZeroRecords":    "No se encontraron resultados",
             "sEmptyTable":     "Ningún dato disponible en esta tabla",
-            "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-            "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+            "sInfo":           "Mostrando registros del _START_ al _END_, de un total de _TOTAL_ registros",
+            "sInfoEmpty":      "Mostrando registros del 0 al 0, de un total de 0 registros",
             "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
             "sInfoPostFix":    "",
             "sSearch":         "Buscar:",
@@ -343,11 +368,15 @@ $(".tbody-statuslotes").dataTable( {
 	function descargarArchivo(datos, url, titulo){
 
 		$aux = $("#cargando").dialog({title:titulo,modal:true, close:function(){$(this).dialog('close')}, resizable:false });
-
-		$.post(url,datos).done(function(data){
+		var ceo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
+			datos.ceo_name = ceo_cook
+			$.post(url,datos).done(function(data){
 			$aux.dialog('destroy')
 			if(!data.ERROR){
 				$('form#formulario').empty();
+				$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'">');
 				$('form#formulario').append('<input type="hidden" name="bytes" value="'+JSON.stringify(data.bytes)+'" />');
 				$('form#formulario').append('<input type="hidden" name="ext" value="'+data.ext+'" />');
 				$('form#formulario').append('<input type="hidden" name="nombreArchivo" value="'+data.nombreArchivo+'" />');

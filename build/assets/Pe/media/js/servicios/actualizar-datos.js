@@ -96,8 +96,10 @@ $(function(){ // Document ready
 			$('#nombre').removeAttr('style');
 			$("#buscar-datos").hide();
 			$("#loading").dialog({title: "Buscando datos", modal:true});
-
-			$.post(baseURL+api+isoPais+'/servicios/actualizar-datos/buscar-datos').done(function(data){
+			var ceo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
+			$.post(baseURL+api+isoPais+'/servicios/actualizar-datos/buscar-datos', {ceo_name: ceo_cook}).done(function(data){
 
 				if(!data.ERROR){
 
@@ -123,10 +125,14 @@ $(function(){ // Document ready
 		var OS = $(this).parents("tr").attr('id');	
 		
 			$aux = $("#loading").dialog({title:'Descargando archivo de datos',modal:true, close:function(){$(this).dialog('close')}, resizable:false });
+			var ceo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
 			$('form#formulario').empty();
     		$('form#formulario').append('<input type="hidden" name="data-idOS" value="'+OS+'" />');
     		$('form#formulario').append($('#data-OS'));
     		$('form#formulario').attr('action',baseURL+api+isoPais+"/servicios/actualizar-datos/downXLS");
+				$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'" />');
     		$('form#formulario').submit(); 
     		setTimeout(function(){$aux.dialog('destroy')},8000);
 	});

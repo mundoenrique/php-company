@@ -1,265 +1,307 @@
+$(function () {
 
+	// Busqueda button
 
-$(function(){
+	var $container = $('#products-list');
 
- // Busqueda button
 
-      var $container = $('#products-list');
+	$container.isotope({
+		itemSelector: '.product-description',
+		animationEngine: 'jQuery',
+		animationOptions: {
+			duration: 400,
+			easing: 'linear',
+			queue: false,
+			layoutMode: 'fitRows'
+		},
+		onLayout: function ($elems, instance) {
+			$('#products-list').height($('#products-list').height() + 30);
+		}
+	});
 
 
-      $container.isotope({
-        itemSelector : '.product-description',
-        animationEngine :'jQuery',
-        animationOptions: {
-        duration: 400,
-        easing: 'linear',
-        queue: false,
-        layoutMode : 'fitRows'
-        },
-        onLayout: function( $elems, instance ){
-           $('#products-list').height($('#products-list').height()+30);
-        }
-      });
+	var $optionSets = $('.filter'),
+		$optionLinks = $optionSets.find('a');
 
+	$optionLinks.click(function () {
 
-      var $optionSets = $('.filter'),
-          $optionLinks = $optionSets.find('a');
+		var $optionSet = $(this).parents('.filter-ul');
+		$optionSet.find('.selected').removeClass('selected');
+		$(this).addClass('selected');
 
-      $optionLinks.click(function(){
+		value = $(this).attr('data-option-value');
 
-        var $optionSet = $(this).parents('.filter-ul');
-        $optionSet.find('.selected').removeClass('selected');
-        $(this).addClass('selected');
+		$container.isotope({
+			filter: value,
+			resizesContainer: true
+		});
+		$('select.categories-products').val('*');
 
-            value = $(this).attr('data-option-value');
+		resultNull();
 
-          $container.isotope( {filter:value,resizesContainer:true} );
-        $('select.categories-products').val('*');
+	});
 
-       resultNull();
 
-      });
+	$('select.categories-products').change(function () { // busqueda select option
 
+		var filters = $(this).val();
+		$container.isotope({
+			filter: filters,
+			resizesContainer: true
+		});
 
-      $('select.categories-products').change(function(){  // busqueda select option
+		resultNull();
 
-        var filters = $(this).val();
-       $container.isotope({filter: filters,resizesContainer:true});
+		$(this).hasClass('area') ? $('.tarjeta').val('*') : $('.area').val('*');
 
-        resultNull();
+	});
 
-        $(this).hasClass('area')? $('.tarjeta').val('*'):$('.area').val('*');
 
-      });
 
+	//-- Fin busqueda button
 
+	// Busqueda campo de texto
 
-      //-- Fin busqueda button
+	var items = [];
+	$('li.product-description').each(function () {
+		var tmp = {};
+		tmp.id = $(this).attr('id');
+		tmp.name = ($(this).text().toLowerCase());
+		items.push(tmp);
+	});
 
-// Busqueda campo de texto
+	$('#search-filter').bind('keyup', function () {
+		isotopeSearch($(this).val().toLowerCase());
+	});
 
-var items = [];
-$('li.product-description').each(function(){
-    var tmp = {};
-    tmp.id = $(this).attr('id');
-    tmp.name = ($(this).text().toLowerCase());
-    items.push( tmp );
-  });
+	function isotopeSearch(kwd) {
 
-$('#search-filter').bind('keyup', function() {
-    isotopeSearch( $(this).val().toLowerCase() );
-  });
 
-function isotopeSearch(kwd)
-{
+		var matches = []; // arreglo que contiene las coincidencias
 
+		if ((kwd != '')) { // min 2 chars to execute query:
 
-  var matches = []; // arreglo que contiene las coincidencias
 
-  if ( (kwd != '')  ) { // min 2 chars to execute query:
+			for (var i = 0; i < items.length; i++) {
+				if (items[i].name.indexOf(kwd) !== -1) {
+					matches.push($('#' + items[i].id)[0]);
+				}
+			}
 
 
-    for (var i = 0; i < items.length; i++) {
-      if( items[i].name.indexOf(kwd) !==-1 ){
-        matches.push( $('#'+items[i].id)[0] );
-      }
-    }
+			$container.isotope({
+				filter: $(matches),
+				resizesContainer: true
+			});
 
+		} else {
 
-    $container.isotope({ filter: $(matches),resizesContainer:true });
+			$container.isotope({
+				filter: '.product-description',
+				resizesContainer: true
+			});
+		}
 
-  } else {
 
-    $container.isotope({ filter: '.product-description',resizesContainer:true });
-  }
+		resultNull();
+		$('select.categories-products').val('*');
+	}
 
+	//-- Fin busqueda campo de texto
 
-  resultNull();
-$('select.categories-products').val('*');
-}
 
-//-- Fin busqueda campo de texto
+	// Mostrar/ocultar campo de texto
 
+	$("#buscar").click(
+		function () {
 
-// Mostrar/ocultar campo de texto
+			$("#search-filter").fadeToggle('fast');
 
-      $("#buscar").click(
-        function () {
+		}
+	);
+	//-- Fin mostrar/ocultar campo de texto
 
-          $("#search-filter").fadeToggle('fast');
 
-        }
-      );
-//-- Fin mostrar/ocultar campo de texto
+	// mostrar resultados nulos
+	function resultNull() {
+		$container.isotope({
+			onLayout: function ($elems, instance) {
+				$('#products-list').height($('#products-list').height() + 30);
+			},
+			resizesContainer: false
+		});
 
+		if (!$container.data('isotope').$filteredAtoms.length) {
+			$('.results').fadeIn('slow');
+		} else {
+			$('.results').fadeOut('fast');
+		}
+	}
+	// fin mostrar resultados nulos
 
-// mostrar resultados nulos
-function resultNull(){
-  $container.isotope({onLayout: function( $elems, instance ){
-           $('#products-list').height($('#products-list').height()+30);
-        },resizesContainer:false});
 
-  if ( !$container.data('isotope').$filteredAtoms.length ) {
-    $('.results').fadeIn('slow');
-  } else {
-    $('.results').fadeOut('fast');
-  }
-}
-// fin mostrar resultados nulos
 
+	$('button#sProducto').on('click', function () {
+		var ceo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
+		var idproducto = $(this).attr("data-idproducto");
+		var nombreProducto = $(this).attr("data-nombreProducto");
+		var marcaProducto = $(this).attr("data-marcaProducto");
+		$('form#productos').append('<input type="hidden" name="ceo_name" value="'+ ceo_cook +'"/>');
+		$('form#productos').append('<input type="hidden" name="data-idproducto" value="' + idproducto + '" />');
+		$('form#productos').append('<input type="hidden" name="data-nombreProducto" value="' + nombreProducto + '" />');
+		$('form#productos').append('<input type="hidden" name="data-marcaProducto" value="' + marcaProducto + '" />');
+		$('form#productos').submit();
+	});
+	//
 
 
-  $('button#sProducto').on('click', function(){
-    var idproducto = $(this).attr("data-idproducto");
-    var nombreProducto = $(this).attr("data-nombreProducto");
-    var marcaProducto = $(this).attr("data-marcaProducto");
-    $('form#productos').append('<input type="hidden" name="data-idproducto" value="'+idproducto+'" />');
-    $('form#productos').append('<input type="hidden" name="data-nombreProducto" value="'+nombreProducto+'" />');
-    $('form#productos').append('<input type="hidden" name="data-marcaProducto" value="'+marcaProducto+'" />');
-    $('form#productos').submit();
-  });
-//
+	// Datos a enviar
 
+	var acrif;
+	var acnomcia;
+	var acrazonsocial;
+	var acdesc;
+	var accodcia;
+	var accodgrupoe;
 
-// Datos a enviar
+	// -- fin datos a enviar
 
-var acrif;
-var acnomcia;
-var acrazonsocial;
-var acdesc;
-var accodcia;
-var accodgrupoe;
 
-// -- fin datos a enviar
 
+	// Cambiar empresa
 
 
-// Cambiar empresa
+	$("#sEmpresa").on("click", function () {
 
+		$('#sEmpresa').hide();
+		$("#widget-info-2").append("<img class='load-widget' id='cargando' src='" + $('#cdn').val() + "media/img/loading.gif'>"); //'<h4 id="cargando">Cargando...</h4>'
 
-  $("#sEmpresa").on("click",function(){
+		$.getJSON(baseURL + api + isoPais + '/empresas/lista').always(function (response) {
+			data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {
+				format: CryptoJSAesJson
+			}).toString(CryptoJS.enc.Utf8))
+			$("#widget-info-2").find($('#cargando')).remove();
 
-    $('#sEmpresa').hide();
-    $("#widget-info-2").append("<img class='load-widget' id='cargando' src='"+$('#cdn').val()+"media/img/loading.gif'>");//'<h4 id="cargando">Cargando...</h4>'
+			$('#sEmpresaS').show();
+			$('#productosS').hide();
 
-    $.getJSON(baseURL+api+isoPais+'/empresas/lista').always(function( data ) {
+			if (!data.ERROR) {
+				$.each(data.lista, function (k, v) {
+					$("#empresasS").append('<option value="' + v.acrif + '" acnomcia="' + v.acnomcia + '" acrazonsocial="' + v.acrazonsocial + '" acdesc="' + v.acdesc + '" accodcia="' + v.accodcia + '" accodgrupoe=' + v.accodgrupoe + '>' + v.acnomcia + '</option>');
+				});
+			} else {
+				if (data.ERROR == '-29') {
+					alert('Usuario actualmente desconectado');
+					location.reload();
+				}
+			}
 
-      $("#widget-info-2").find($('#cargando')).remove();
+		});
 
-      $('#sEmpresaS').show();
-      $('#productosS').hide();
+	});
 
-        if(!data.ERROR){
-          $.each(data.lista, function(k,v){
-          $("#empresasS").append('<option value="'+v.acrif+'" acnomcia="'+v.acnomcia+'" acrazonsocial="'+v.acrazonsocial+'" acdesc="'+v.acdesc+'" accodcia="'+v.accodcia+'" accodgrupoe='+v.accodgrupoe+'>'+v.acnomcia+'</option>');
-        });
-        }else{
-          if(data.ERROR=='-29'){
-          alert('Usuario actualmente desconectado'); location.reload();
-          }
-        }
 
-      });
+	//--Fin Cambiar empresa
 
-  });
+	// Seleccionar empresa
 
+	$("#empresasS").on("change", function () {
+		acrif = $(this).val();
+		acnomcia = $('option:selected', this).attr('acnomcia');
+		acrazonsocial = $('option:selected', this).attr('acrazonsocial');
+		acdesc = $('option:selected', this).attr('acdesc');
+		accodcia = $('option:selected', this).attr('accodcia');
+		accodgrupoe = $('option:selected', this).attr('accodgrupoe');
 
-//--Fin Cambiar empresa
+	});
 
-// Seleccionar empresa
+	//--Fin Seleccionar empresa
 
-  $("#empresasS").on("change",function(){
-    acrif = $(this).val();
-    acnomcia = $('option:selected', this).attr('acnomcia');
-    acrazonsocial = $('option:selected', this).attr('acrazonsocial');
-    acdesc = $('option:selected', this).attr('acdesc');
-    accodcia = $('option:selected', this).attr('accodcia');
-    accodgrupoe = $('option:selected', this).attr('accodgrupoe');
 
-  });
+	//  Enviar todo
 
-//--Fin Seleccionar empresa
+	$('#aplicar').on('click', function () {
 
 
-//  Enviar todo
 
-  $('#aplicar').on('click',function(){
+		if (acrif !== undefined ) {
+			var ceo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+				);
+			var dataRequest = JSON.stringify ({
+				data_accodgrupoe:accodgrupoe,
+				data_acrif:acrif,
+				data_acnomcia:acnomcia,
+				data_acrazonsocial:acrazonsocial,
+				data_acdesc:acdesc,
+				data_accodcia:accodcia,
+				llamada:'soloEmpresa'
+			});
+			dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
 
+			$.post(baseURL + api + isoPais + "/empresas/cambiar", {
+					request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)
+				},
+				function (response) {
+					data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
+					if (data === 1) {
+						$(location).attr('href', baseURL + isoPais + "/dashboard/productos/");
+					} else {
+						MarcarError('Intenta de nuevo');
+					}
 
-    if( acrif !== undefined ){
+				}
+			);
 
-      $.post( baseURL+api+isoPais+"/empresas/cambiar",
-        { 'data-accodgrupoe':accodgrupoe, 'data-acrif':acrif, 'data-acnomcia':acnomcia, 'data-acrazonsocial':acrazonsocial, 'data-acdesc':acdesc, 'data-accodcia':accodcia, 'llamada':'soloEmpresa' },
-         function(data){
+		} else {
+			MarcarError('Selecciona una empresa');
+		}
+	});
 
-          if(data === 1){
-            $(location).attr('href',baseURL+isoPais+"/dashboard/productos/");
-          }else{
-            MarcarError('Intente de nuevo');
-          }
+	$('#sPrograms').on('click', function () {
+		$(location).attr('href', baseURL + isoPais + "/dashboard/programas");
+	});
 
-         }
-      );
+	function MarcarError(msj) {
+		$.balloon.defaults.classname = "error-login-2";
+		$.balloon.defaults.css = null;
+		$("#aplicar").showBalloon({
+			position: "left",
+			contents: msj
+		}); //mostrar tooltip
+		setTimeout(function () {
+			$("#aplicar").hideBalloon({
+				position: "left",
+				contents: msj
+			});
+		}, 2500); // ocultar tooltip
+	}
 
-    }else{
-      MarcarError('Seleccione una empresa');
-    }
-  });
+	//-- Fin enviar todo
 
-$('#sPrograms').on('click',function(){
-  $(location).attr('href',baseURL+isoPais+"/dashboard/programas");
- });
 
-function MarcarError(msj){
-  $.balloon.defaults.classname = "error-login-2";
-  $.balloon.defaults.css = null;
-  $("#aplicar").showBalloon({position: "left", contents: msj});  //mostrar tooltip
-  setTimeout( function(){ $("#aplicar").hideBalloon({position: "left", contents: msj}); }, 2500 );  // ocultar tooltip
-}
+	// widget FIXED
 
-//-- Fin enviar todo
+	var top = ($('#sidebar-products').offset().top - 170) - parseFloat($('#sidebar-products').css('marginTop').replace(/auto/, 0));
+	$(window).scroll(function (event) {
 
+		var y = $(this).scrollTop();
 
-// widget FIXED
+		if (y >= top) {
 
-var top = ($('#sidebar-products').offset().top-170) - parseFloat($('#sidebar-products').css('marginTop').replace(/auto/, 0));
-       $(window).scroll(function (event) {
+			$('#sidebar-products').addClass('sub-widget');
+			$('#sidebar-products').css('top', 160);
 
-         var y = $(this).scrollTop();
+		} else {
 
-          if (y >= top) {
+			$('#sidebar-products').removeClass('sub-widget');
+		}
+	});
 
-            $('#sidebar-products').addClass('sub-widget');
-            $('#sidebar-products').css('top',160);
+	//--FIN widget FIXED
 
-        } else {
 
-            $('#sidebar-products').removeClass('sub-widget');
-         }
-     });
 
-//--FIN widget FIXED
-
-
-
-  });
+});

@@ -10,7 +10,7 @@ $(document).ready(function() {
 		$.getJSON(baseURL + api + isoPais + '/empresas/lista').always(function( data ) {
 			$("#cargando_empresa").fadeOut("slow");
 			if(!(data.ERROR)){
-				
+
 				$.each(data.lista, function(k,v){
 
 					$("#EstatusLotes-empresa").append('<option value="'+v.accodcia+'" acnomcia="'+v.acnomcia+'" acrazonsocial="'+v.acrazonsocial+'" acdesc="'+v.acdesc+'" acrif="'+v.acrif+'">'+v.acnomcia+'</option>');
@@ -35,13 +35,16 @@ $(document).ready(function() {
 
 			$("#cargando_producto").fadeIn("slow");
 			$(this).attr('disabled',true);
-			$.post(baseURL + api + isoPais + "/producto/lista", { 'acrif': acrif }, function(data){
+			var ceo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
+			$.post(baseURL + api + isoPais + "/producto/lista", { 'acrif': acrif, ceo_name: ceo_cook }, function(data){
 				$("#cargando_producto").fadeOut("slow");
 				$("#EstatusLotes-empresa").removeAttr('disabled');
-				if(!data.ERROR){	
-					$.each(data, function(k,v){  				
+				if(!data.ERROR){
+					$.each(data, function(k,v){
 						$("#EstatusLotes-producto").append('<option value="'+v.idProducto+'" >'+v.descripcion+" / "+v.marca.toUpperCase()+'</option>');
-					}); 
+					});
 				}else{
 					if(data.ERROR.indexOf('-29') !=-1){
 		             alert("Usuario actualmente desconectado");
@@ -49,7 +52,7 @@ $(document).ready(function() {
 		         }else{
 					$("#EstatusLotes-producto").append('<option value="">Empresa sin productos</option>');
 				}
-				} 
+				}
 
 			});
 		}
@@ -67,8 +70,11 @@ $(document).ready(function() {
 				lotes_producto: filtro_busq.lotes_producto,
 				paginaActual: 1
 			}
-			descargarArchivo(datos, baseURL+api+isoPais+"/reportes/estatuslotesExpXLS", "Exportar Excel" );	
+			descargarArchivo(datos, baseURL+api+isoPais+"/reportes/estatuslotesExpXLS", "Exportar Excel" );
 */
+	var ceo_cook = decodeURIComponent(
+		document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+	);
 			$('form#formulario').empty();
 	$('form#formulario').append('<input type="hidden" name="empresa" value="'+filtro_busq.empresa+'" />');
 	$('form#formulario').append('<input type="hidden" name="fechaInicial" value="'+filtro_busq.fechaInicial+'" />');
@@ -76,7 +82,8 @@ $(document).ready(function() {
 	$('form#formulario').append('<input type="hidden" name="lotes_producto" value="'+filtro_busq.lotes_producto+'" />');
 	$('form#formulario').append('<input type="hidden" name="paginaActual" value="'+1+'" />');
 	$('form#formulario').attr('action',baseURL+api+isoPais+"/reportes/estatuslotesExpXLS");
-	$('form#formulario').submit(); 
+	$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'" />');
+	$('form#formulario').submit();
 		});
 
 $("#export_pdf").click(function(){
@@ -90,6 +97,9 @@ $("#export_pdf").click(function(){
 	}
 	descargarArchivo(datos, baseURL+api+isoPais+"/reportes/estatuslotesExpPDF", "Exportar PDF" );
 */
+	var ceo_cook = decodeURIComponent(
+		document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+	);
 $('form#formulario').empty();
 	$('form#formulario').append('<input type="hidden" name="empresa" value="'+filtro_busq.empresa+'" />');
 	$('form#formulario').append('<input type="hidden" name="fechaInicial" value="'+filtro_busq.fechaInicial+'" />');
@@ -97,13 +107,14 @@ $('form#formulario').empty();
 	$('form#formulario').append('<input type="hidden" name="lotes_producto" value="'+filtro_busq.lotes_producto+'" />');
 	$('form#formulario').append('<input type="hidden" name="paginaActual" value="'+1+'" />');
 	$('form#formulario').attr('action',baseURL+api+isoPais+"/reportes/estatuslotesExpPDF");
-	$('form#formulario').submit(); 
-});	  
+	$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'" />');
+	$('form#formulario').submit();
+});
 
-//METODO PARA REALIZAR LA BUSQUEDA 
+//METODO PARA REALIZAR LA BUSQUEDA
 var filtro_busq={};
 	$("#EstatusLotes-btnBuscar").click(function(){
-		
+
 		var $consulta;
 		filtro_busq.empresa=$("#EstatusLotes-empresa").val();
 		filtro_busq.fechaInicial=$("#EstatusLotes-fecha-in").val();
@@ -114,9 +125,15 @@ var filtro_busq={};
 			$('#cargando').fadeIn("slow");
 			$("#EstatusLotes-btnBuscar").hide();
 	    	$('#div_tablaDetalle').fadeOut("fast");
-	
-			$consulta = $.post(baseURL + api + isoPais + "/reportes/estatuslotes",filtro_busq );
-			$consulta.done(function(data){
+
+			var ceo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
+			var dataRequest = JSON.stringify(filtro_busq);
+			dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
+			$consulta = $.post(baseURL + api + isoPais + "/reportes/estatuslotes", {request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)});
+			$consulta.done(function(response){
+				var data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
 				$("#mensaje").remove();
 				$('#cargando').fadeOut("slow");
 				$("#EstatusLotes-btnBuscar").show();
@@ -157,8 +174,8 @@ var filtro_busq={};
 						td.html(itemLista.nmonto);
 						td.attr("style","text-align: center");
 					});
-				$('#tabla-estatus-lotes tbody tr:even').addClass('even ');  
-				
+				$('#tabla-estatus-lotes tbody tr:even').addClass('even ');
+
 				paginar();
 				}else{
 					if(data.rc =="-29"){
@@ -185,7 +202,7 @@ var filtro_busq={};
 
 function validar_filtro_busqueda(div){
 	var valido=true;
-//VALIDA INPUT:TEXT QUE SEAN REQUERIDOS NO SE ENCUENTREN VACIOS 
+//VALIDA INPUT:TEXT QUE SEAN REQUERIDOS NO SE ENCUENTREN VACIOS
 $.each($("#"+div+" input[type='text'].required"),function(posItem,item){
 	var $elem=$(item);
 	if($elem.val()==""){
@@ -196,7 +213,7 @@ $.each($("#"+div+" input[type='text'].required"),function(posItem,item){
 	}
 });
 
-//VALIDA SELECT QUE SEAN REQUERIDOS NO SE ENCUENTREN VACIOS 
+//VALIDA SELECT QUE SEAN REQUERIDOS NO SE ENCUENTREN VACIOS
 $.each($("#"+div+" select.required"),function(posItem,item){
 	var $elem=$(item);
 	if($elem.val()==""){
@@ -205,14 +222,14 @@ $.each($("#"+div+" select.required"),function(posItem,item){
 	}else{
 		$elem.attr("style","");
 	}
-});  
+});
 
 
 //VALIDA INPUT:CHECKBOX  y INPUT:RADIO QUE SEAN REQUERIDOS NO SE ENCUENTREN VACIOS
 var check = $("#"+div+" input[type='checkbox'].required:checked").length;
 var radio = $("#"+div+" input[type='radio'].required:checked ").length;
 if((check == "")&&($("#"+div+" input[type='checkbox'].required").length!="")){
-	valido=false;   	
+	valido=false;
 	$("#"+div+" input[type='checkbox'].required").next().attr("style","color:red");
 }else{
 	$("#"+div+" input[type='checkbox'].required").next().attr("style","");
@@ -223,12 +240,12 @@ if((radio == "")&&($("#"+div+" input[type='radio'].required").length!="")){
 	$("#"+div+" input[type='radio'].required").next().attr("style","color:red");
 }else{
 	$("#"+div+" input[type='radio'].required").next().attr("style","");
-} 
+}
 
 
 if(!valido){
 	$(".div_tabla_detalle").fadeOut("fast");
-	$("#mensajeError").html("Por favor rellene los campos marcados en color rojo");
+	$("#mensajeError").html("Por favor, rellene los campos marcados en color rojo.");
 	$("#mensajeError").fadeIn("fast");
 }else{
 	$("#mensajeError").fadeOut("fast");
@@ -258,16 +275,16 @@ function CalculateDateDiff(dateFrom, dateTo) {
 	}
 
 	if(years> 0){
-		$("#mensajeError").html("El rango de fecha no debe ser mayor a 3 meses");	
-		$("#mensajeError").fadeIn("fast");	
+		$("#mensajeError").html("El rango de fecha no debe ser mayor a 3 meses");
+		$("#mensajeError").fadeIn("fast");
 		return true;
 	}
 	if(months<3){
-		$("#mensajeError").fadeOut("fast");	
+		$("#mensajeError").fadeOut("fast");
 		return false;
 	}else{
-		$("#mensajeError").html("El rango de fecha no debe ser mayor a 3 meses");	
-		$("#mensajeError").fadeIn("fast");	
+		$("#mensajeError").html("El rango de fecha no debe ser mayor a 3 meses");
+		$("#mensajeError").fadeIn("fast");
 	}
 
 
@@ -275,13 +292,13 @@ function CalculateDateDiff(dateFrom, dateTo) {
 }
 
 
-function downloadme(x){ 
-	myTempWindow = window.open(x,'','left=1000,screenX=1000'); 
-	myTempWindow.document.execCommand('SaveAs','null','download.pdf'); 
-} 
+function downloadme(x){
+	myTempWindow = window.open(x,'','left=1000,screenX=1000');
+	myTempWindow.document.execCommand('SaveAs','null','download.pdf');
+}
 
 function paginar(){
-$(".tbody-statuslotes").dataTable( { 
+$(".tbody-statuslotes").dataTable( {
           "iDisplayLength": 10,
           'bDestroy':true,
           "sPaginationType": "full_numbers",
@@ -291,8 +308,8 @@ $(".tbody-statuslotes").dataTable( {
             "sLengthMenu":     "Mostrar _MENU_ registros",
             "sZeroRecords":    "No se encontraron resultados",
             "sEmptyTable":     "Ningún dato disponible en esta tabla",
-            "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-            "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+            "sInfo":           "Mostrando registros del _START_ al _END_, de un total de _TOTAL_ registros",
+            "sInfoEmpty":      "Mostrando registros del 0 al 0, de un total de 0 registros",
             "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
             "sInfoPostFix":    "",
             "sSearch":         "Buscar:",
@@ -335,32 +352,39 @@ $(".tbody-statuslotes").dataTable( {
 					$("#EstatusLotes-fecha-in").datepicker('option','maxDate',selectedate);
 				}else if(input=='EstatusLotes-fecha-fin'){
 					$("#EstatusLotes-fecha-in").datepicker('option','maxDate',"+0D");
-				}				
+				}
 			}
-		});    
+		});
 	}
 
 	function descargarArchivo(datos, url, titulo){
 
 		$aux = $("#cargando").dialog({title:titulo,modal:true, close:function(){$(this).dialog('close')}, resizable:false });
-
+		var ceo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
+		datos.ceo_name = ceo_cook;
 		$.post(url,datos).done(function(data){
 			$aux.dialog('destroy')
 			if(!data.ERROR){
+				var ceo_cook = decodeURIComponent(
+					document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+				);
 				$('form#formulario').empty();
-				$('form#formulario').append('<input type="hidden" name="bytes" value="'+JSON.stringify(data.bytes)+'" />');       
-				$('form#formulario').append('<input type="hidden" name="ext" value="'+data.ext+'" />');  
-				$('form#formulario').append('<input type="hidden" name="nombreArchivo" value="'+data.nombreArchivo+'" />');  
+				$('form#formulario').append('<input type="hidden" name="bytes" value="'+JSON.stringify(data.bytes)+'" />');
+				$('form#formulario').append('<input type="hidden" name="ext" value="'+data.ext+'" />');
+				$('form#formulario').append('<input type="hidden" name="nombreArchivo" value="'+data.nombreArchivo+'" />');
 				$('form#formulario').attr('action',baseURL+isoPais+"/file");
+				$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'" />');
 				$('form#formulario').submit()
 			}else{
 				if(data.ERROR=="-29"){
 					alert('Usuario actualmente desconectado');
 					location.reload();
 				}else{
-					notificacion(titulo,data.ERROR) 
+					notificacion(titulo,data.ERROR)
 				}
-				
+
 			}
 		})
 

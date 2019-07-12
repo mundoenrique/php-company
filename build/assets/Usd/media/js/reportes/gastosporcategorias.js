@@ -18,7 +18,7 @@ var colores = ["#298C9A","#522551","#50C592","#54C2D0","#2B569F","#2C855F","#F59
 //-------------------------------------------------------------------------
 $(".fecha").keypress(function(e){
 	if(e.keycode != 8 || e.keycode != 46){
-		return false;	
+		return false;
 	}
 });
 
@@ -45,9 +45,11 @@ $("#repGastosPorCategoria_dni").attr("maxlength","12");
 //--------------------------
 	$("#cargando_empresa").fadeIn("slow");
 	$.getJSON(baseURL + api + isoPais + '/empresas/lista').always(function( data ) {
+
+		data = JSON.parse(CryptoJS.AES.decrypt(data.code, data.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 		$("#cargando_empresa").fadeOut("slow");
 	if(!(data.ERROR)){
-		
+
 		$.each(data.lista, function(k,v){
 			$("#repGastosPorCategoria_empresa").append('<option accodcia="'+v.accodcia+'" acnomcia="'+v.acnomcia+'" acrazonsocial="'+v.acrazonsocial+'" acdesc="'+v.acdesc+'" value="'+v.acrif+'">'+v.acnomcia+'</option>');
 		});
@@ -58,7 +60,7 @@ $("#repGastosPorCategoria_dni").attr("maxlength","12");
          }else{
          	$("#repGastosPorCategoria_empresa").append('<option value="">'+data.ERROR+'</option>');
          }
-	}	
+	}
 	});
 //---------------------------------------------------------
 //LLENA EL COMBO DE PRODUCTO SEGUN LA SELECCION DE EMPRESA
@@ -70,15 +72,26 @@ $("#repGastosPorCategoria_dni").attr("maxlength","12");
 
 		$("#cargando_producto").fadeIn("slow");
 		$(this).attr('disabled',true);
-		$.post(baseURL + api + isoPais + "/producto/lista", { 'acrif': acrif }, function(data){
+		var ceo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
+
+		var dataRequest = JSON.stringify ({
+			'acrif': acrif
+		})
+
+		dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
+		$.post(baseURL + api + isoPais + "/producto/lista",  { request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook) }, function(data){
+			data = JSON.parse(CryptoJS.AES.decrypt(data.code, data.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
+
 			$("#cargando_producto").fadeOut("slow");
 			$("#repGastosPorCategoria_empresa").removeAttr('disabled');
-			if(!data.ERROR){	
-				$.each(data, function(k,v){  									
+			if(!data.ERROR){
+				$.each(data, function(k,v){
 					if(v.descripcion.toLowerCase().indexOf("bonus")==-1 && v.descripcion.toLowerCase().indexOf("provis")==-1 && v.descripcion.toLowerCase().indexOf("alimentacion")==-1 && v.descripcion.toLowerCase().indexOf("alimentación")==-1){
 						$("#repGastosPorCategoria_producto").append('<option value="'+v.idProducto+'" des="'+v.descripcion+'">'+v.descripcion+" / "+v.marca.toUpperCase()+'</option>');
 					}
-				}); 
+				});
 			}else{
 				if(data.ERROR.indexOf('-29') !=-1){
              alert("Usuario actualmente desconectado");
@@ -86,7 +99,7 @@ $("#repGastosPorCategoria_dni").attr("maxlength","12");
          }else{
 				$("#repGastosPorCategoria_producto").append('<option value="">'+data.ERROR+'</option>');
 			}
-			} 
+			}
 		});
 	}
 	});
@@ -107,7 +120,7 @@ $("#repGastosPorCategoria_dni").attr("maxlength","12");
 					$( "#repGastosPorCategoria_anio" ).attr("disabled","true");
 					$( "#repGastosPorCategoria_anio [selected='selected']").val("0");
 					$( "#repGastosPorCategoria_fecha_ini" ).removeAttr("disabled");
-					$( "#repGastosPorCategoria_fecha_fin" ).removeAttr("disabled");			
+					$( "#repGastosPorCategoria_fecha_fin" ).removeAttr("disabled");
 				}
 			}
 		});
@@ -143,7 +156,7 @@ $( "#repGastosPorCategoria_fecha_ini" ).datepicker({
          $( "#repGastosPorCategoria_fecha_fin" ).datepicker( 'option', 'maxDate', sumaMes);
       },
       onSelect: function(){
-        selIn=true;         
+        selIn=true;
       }
     });
 
@@ -152,10 +165,10 @@ $( "#repGastosPorCategoria_fecha_ini" ).datepicker({
         changeMonth: true,
         changeYear: true,
         dateFormat:"dd/mm/yy",
-        numberOfMonths: 1, 
+        numberOfMonths: 1,
       maxDate:"+0D",
       onClose: function( selectedDate ) {
-  
+
         if(selFi){
         restaMes = new Date($('#repGastosPorCategoria_fecha_fin').datepicker('getDate').getTime()-90*24*60*60*1000);
         selFi=false;
@@ -168,14 +181,14 @@ $( "#repGastosPorCategoria_fecha_ini" ).datepicker({
         $( "#repGastosPorCategoria_fecha_ini" ).datepicker( 'option', 'maxDate', selectedDate );
       },
       onSelect: function(){
-        selFi=true;         
+        selFi=true;
       }
     });
 //--------------------------
 //MENEJO DEL EXPORTAR A PDF
 //--------------------------
 		$(".exportPDF_a").click(function(){
-			
+
 			/*datos = {
 				empresa: filtro_busq.empresa,
 				fechaIni: filtro_busq.fechaInicial,
@@ -185,10 +198,14 @@ $( "#repGastosPorCategoria_fecha_ini" ).datepicker({
 				cedula: filtro_busq.cedula.replace(/ /g,''),
 				tipoConsulta: filtro_busq.tipoConsulta
 			}
-			
+
 			descargarArchivo(datos, baseURL+api+isoPais+"/reportes/gastosporcategoriasExpPDF", "Exportar PDF" );
 */
+			var ceo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
 			$('form#formulario').empty();
+			$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'">');
 			$('form#formulario').append('<input type="hidden" name="empresa" value="'+filtro_busq.empresa+'" />');
 			$('form#formulario').append('<input type="hidden" name="fechaIni" value="'+filtro_busq.fechaInicial+'" />');
 			$('form#formulario').append('<input type="hidden" name="fechaFin" value="'+filtro_busq.fechaFin+'" />');
@@ -199,13 +216,13 @@ $( "#repGastosPorCategoria_fecha_ini" ).datepicker({
 			$('form#formulario').attr('action',baseURL+api+isoPais+"/reportes/gastosporcategoriasExpPDF");
 			$('form#formulario').submit();
 
-		});	  
+		});
 
 //---------------------------
 //MANEJO DEL EXPORTAR A XLS
 //---------------------------
 		$(".exportXLS_a").click(function(){
-			
+
 		// 	datos = {
 		// 		empresa: filtro_busq.empresa,
 		// 		fechaIni: filtro_busq.fechaInicial,
@@ -217,8 +234,11 @@ $( "#repGastosPorCategoria_fecha_ini" ).datepicker({
 		// 	}
 
 		// 	descargarArchivo(datos, baseURL+api+isoPais+"/reportes/gastosporcategoriasExpXLS", "Exportar Excel" );
-		
-		$('form#formulario').empty();
+			var ceo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
+			$('form#formulario').empty();
+			$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'">');
 			$('form#formulario').append('<input type="hidden" name="empresa" value="'+filtro_busq.empresa+'" />');
 			$('form#formulario').append('<input type="hidden" name="fechaIni" value="'+filtro_busq.fechaInicial+'" />');
 			$('form#formulario').append('<input type="hidden" name="fechaFin" value="'+filtro_busq.fechaFin+'" />');
@@ -227,8 +247,8 @@ $( "#repGastosPorCategoria_fecha_ini" ).datepicker({
 			$('form#formulario').append('<input type="hidden" name="cedula" value="'+filtro_busq.cedula.replace(/ /g,'')+'" />');
 			$('form#formulario').append('<input type="hidden" name="tipoConsulta" value="'+filtro_busq.tipoConsulta+'" />');
 			$('form#formulario').attr('action',baseURL+api+isoPais+"/reportes/gastosporcategoriasExpXLS");
-			$('form#formulario').submit(); 
-	});	        
+			$('form#formulario').submit();
+	});
 
 
 //------------------------------------------
@@ -236,13 +256,13 @@ $( "#repGastosPorCategoria_fecha_ini" ).datepicker({
 //------------------------------------------
 var filtro_busq={};
 	$("#repGastosPorCategoria_btnBuscar").click(function(){
-		
+
 		var $consulta;
-		
+
 //SE VALIDAN TODOS LOS CAMPOS DENTRO DEL DIV LOTES-2
 		if(validar_filtro_busqueda("lotes-2")){
 
-//SE MUESTRA EL GIF DE CARGANDO DEBAJO DEL FORMULARIO EN CASO DE QUE EL FORMULARIO SEA VALIDO			
+//SE MUESTRA EL GIF DE CARGANDO DEBAJO DEL FORMULARIO EN CASO DE QUE EL FORMULARIO SEA VALIDO
 			$('#cargando').fadeIn("slow");
 			$(this).hide();
 		    $('#div-anio').fadeOut("fast");
@@ -264,11 +284,21 @@ var filtro_busq={};
 			filtro_busq.cedula=$("#repGastosPorCategoria_dni").val().replace(/ /g,'');
 			filtro_busq.tipoConsulta=$("input[name='radio']:checked").val();
 
+			var ceo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
+			filtro_busq.ceo_name = ceo_cook;
+
+			var dataRequest= JSON.stringify(filtro_busq);
+
+			dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
 //SE REALIZA LA PETICION AL SERVICIO DE GASTOS POR CATEGORIA
-			$consulta = $.post(baseURL + api + isoPais + "/reportes/gastosporcategorias",filtro_busq );
+			$consulta = $.post(baseURL + api + isoPais + "/reportes/gastosporcategorias",{request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook) });
 
 //SI LA CONSULTA ES SATISFACTORIA SE PROCEDE A LLENAR LA TABLA
-			$consulta.done(function(data){				
+			$consulta.done(function(data){
+
+				data = JSON.parse(CryptoJS.AES.decrypt(data.code, data.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 				var tr;
 				var td;
 				var th;
@@ -300,7 +330,7 @@ var filtro_busq={};
 
 
 
-//SE INICIA LA CARGA DE LA GRAFICA 
+//SE INICIA LA CARGA DE LA GRAFICA
 					$(".grafica").click(function(){
 
 			    	var _axis="Bolivares";
@@ -346,7 +376,7 @@ var filtro_busq={};
 					}
 
 //SE CARGAN LAS CATEGORIAS DENTRO DEL JSON
-					var datos = {};								
+					var datos = {};
 					$.each(data.listaGrafico[0].categorias,function(posLista,itemLista){
 						jsonChart.categoryAxis.categories.push(itemLista.nombreCategoria);
 					});
@@ -364,13 +394,13 @@ var filtro_busq={};
 					});
 
 //MUESTRA EL JSON TERMINADO EN LA CONSOLA PARA VERIFICAR QUE TODO ESTA BIEN Y SE GENERA ..
-//LA GRAFICA DENTRO DE UNA VENTANA MODAL					
+//LA GRAFICA DENTRO DE UNA VENTANA MODAL
 
 					$( "#chart" ).dialog({modal:true, width: 750, height: 400});
 					$("#chart").kendoChart(jsonChart);
 			  	    });
 
-//SE VERIFICA SI EL RADIO ESTA ACTIVADO PARA ANUAL POR MES 
+//SE VERIFICA SI EL RADIO ESTA ACTIVADO PARA ANUAL POR MES
 					if($("#anual").is(":checked")){
 
 //SE OCULTA EL GIF DE CARGANDO Y SE MUESTRA EL CONTENEDOR DE LA TABLA DE ANIO
@@ -381,7 +411,7 @@ var filtro_busq={};
 //COMIENZA LA CARGA DE TABLA CON LOS VALORES DE CADA UNO DE LAS CATEGORIAS
 						$.each(data.listaGrupo,function(posLista,itemLista){
 							$.each(itemLista.gastoMensual,function(pos,item){
-								if(item.mes == "ENERO"){								
+								if(item.mes == "ENERO"){
 									tr=$("#enero");
 									td=$(document.createElement("td")).appendTo(tr);
 									td.html(item.monto);
@@ -465,7 +495,7 @@ var filtro_busq={};
 								}
 
 							});
-			
+
 						tr=$("#totales");
 						th=$(document.createElement("th")).appendTo(tr);
 						th.html(itemLista.totalCategoria);
@@ -475,7 +505,7 @@ var filtro_busq={};
 
 //SE CARGAN LOS TOTATALES DE ACUERDO A CADA MES
 					$.each(data.totalesAlMes,function(pos,item){
-								if(item.mes == "ENERO"){								
+								if(item.mes == "ENERO"){
 									tr=$("#enero");
 									td=$(document.createElement("td")).appendTo(tr);
 									td.html(item.monto);
@@ -568,17 +598,17 @@ var filtro_busq={};
 //EN CASO DE QUE QUE EL RADIO ESTA HABILITADO PARA MENSUAL
 					}else{
 
-//SE OCULTA EL GIF DE CARGANDO Y SE MUESTRA EL CONTENEDOR DE LA TABLA DE MES						
+//SE OCULTA EL GIF DE CARGANDO Y SE MUESTRA EL CONTENEDOR DE LA TABLA DE MES
 						$('#cargando').fadeOut("slow");
 						$('#div-mes').fadeIn("slow");
 						$('#div-anio').fadeOut("slow");
 
-//COMIENZA LA CARGA DE LOS DATOS DENTRO DE LA TABLA						
+//COMIENZA LA CARGA DE LOS DATOS DENTRO DE LA TABLA
 						var tbody=$("#tbody-datos-mes");
 						tbody.empty();
 						var trr=$("#totales-mes");
 						trr.empty();
-						$.each(data.totalesPorDia,function(pos,item){									
+						$.each(data.totalesPorDia,function(pos,item){
 							tr=$(document.createElement("tr")).appendTo(tbody);
 							td=$(document.createElement("td")).appendTo(tr);
 							td.html(item.fechaDia);
@@ -608,7 +638,7 @@ var filtro_busq={};
 						th.html(data.totalGeneral);
 						th.attr("class","GC-Medium");
 
-						
+
 					}
 
 //EN CASO DE QUE EL SERVICIO NO DEVUELVA 0 SE MUESTRA EL MENSAJE CORRESPONDIENTE AL CODIGO
@@ -633,21 +663,21 @@ var filtro_busq={};
 			 			p.attr("style","text-align:center;padding:10px;font-size:14px");
 			 		}
 				}
-			});		
-		}	
+			});
+		}
 	});
 
 //---------------------------------------------------------
-//FUNCION PARA VALIDAR CADA UNO DE LOS TIPOS DE INPUT 
+//FUNCION PARA VALIDAR CADA UNO DE LOS TIPOS DE INPUT
 //---------------------------------------------------------
 	function validar_filtro_busqueda(div){
 		var valido=true;
-		//VALIDA INPUT:TEXT QUE SEAN REQUERIDOS NO SE ENCUENTREN VACIOS 
+		//VALIDA INPUT:TEXT QUE SEAN REQUERIDOS NO SE ENCUENTREN VACIOS
 		$.each($("#"+div+" input[type='text'].required"),function(posItem,item){
 			var $elem=$(item);
 			if($elem.val()==""){
 				if($("#repGastosPorCategoria_tarjeta").val().replace(/ /g,'') == "" && $("#repGastosPorCategoria_dni").val().replace(/ /g,'')==""){
-					valido=false;	
+					valido=false;
 					$elem.attr("style","border-color:red");
 				}
 				else{
@@ -656,7 +686,7 @@ var filtro_busq={};
 				}
 				if($("#mensual").is(":checked")){
 					if ($("#repGastosPorCategoria_fecha_fin").val() == "" || $("#repGastosPorCategoria_fecha_ini").val()=="") {
-						valido=false;	
+						valido=false;
 						$("#repGastosPorCategoria_fecha_fin").attr("style","border-color:red");
 						$("#repGastosPorCategoria_fecha_ini").attr("style","border-color:red");
 					}
@@ -667,10 +697,10 @@ var filtro_busq={};
 			}else{
 				$elem.attr("style","");
 			}
-			
+
 		});
 
-		//VALIDA SELECT QUE SEAN REQUERIDOS NO SE ENCUENTREN VACIOS 
+		//VALIDA SELECT QUE SEAN REQUERIDOS NO SE ENCUENTREN VACIOS
 		$.each($("#"+div+" select.required"),function(posItem,item){
 			var $elem=$(item);
 			if($elem.val()==""){
@@ -680,14 +710,14 @@ var filtro_busq={};
 				$elem.attr("style","");
 			}
 
-		});  
+		});
 
 
 		//VALIDA INPUT:CHECKBOX  y INPUT:RADIO QUE SEAN REQUERIDOS NO SE ENCUENTREN VACIOS
 		var check = $("#"+div+" input[type='checkbox'].required:checked").length;
 		var radio = $("#"+div+" input[type='radio'].required:checked ").length;
 		if((check == "")&&($("#"+div+" input[type='checkbox'].required").length!="")){
-			valido=false;   	
+			valido=false;
 			$("#"+div+" input[type='checkbox'].required").next().attr("style","color:red");
 		}else{
 			$("#"+div+" input[type='checkbox'].required").next().attr("style","");
@@ -698,7 +728,7 @@ var filtro_busq={};
 			$("#"+div+" input[type='radio'].required").next().attr("style","color:red");
 		}else{
 			$("#"+div+" input[type='radio'].required").next().attr("style","");
-		} 
+		}
 
 
 		if(!valido){
@@ -716,13 +746,21 @@ var filtro_busq={};
 
   $aux = $("#cargando").dialog({title:titulo,modal:true, close:function(){$(this).dialog('close')}, resizable:false });
 
+	var ceo_cook = decodeURIComponent(
+		document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+	);
+	datos.ceo_name = ceo_cook;
       $.post(url,datos).done(function(data){
           $aux.dialog('destroy')
           if(!data.ERROR){
-            $('form#formulario').empty();
-            $('form#formulario').append('<input type="hidden" name="bytes" value="'+JSON.stringify(data.bytes)+'" />');       
-            $('form#formulario').append('<input type="hidden" name="ext" value="'+data.ext+'" />');  
-            $('form#formulario').append('<input type="hidden" name="nombreArchivo" value="'+data.nombreArchivo+'" />');  
+						var ceo_cook = decodeURIComponent(
+							document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+						);
+						$('form#formulario').empty();
+						$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'">');
+            $('form#formulario').append('<input type="hidden" name="bytes" value="'+JSON.stringify(data.bytes)+'" />');
+            $('form#formulario').append('<input type="hidden" name="ext" value="'+data.ext+'" />');
+            $('form#formulario').append('<input type="hidden" name="nombreArchivo" value="'+data.nombreArchivo+'" />');
             $('form#formulario').attr('action',baseURL+isoPais+"/file");
             $('form#formulario').submit()
           }else{
@@ -730,9 +768,9 @@ var filtro_busq={};
               alert('Usuario actualmente desconectado');
             location.reload();
             }else{
-              notificacion(titulo,data.ERROR) 
+              notificacion(titulo,data.ERROR)
             }
-            
+
           }
         })
 

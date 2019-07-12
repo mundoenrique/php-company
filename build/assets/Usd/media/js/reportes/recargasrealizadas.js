@@ -11,7 +11,11 @@ $(document).ready(function() {
 
 
 		$("#cargando_empresa").fadeIn("slow");
-		$.getJSON(baseURL + api + isoPais + '/empresas/lista').always(function( data ) {
+
+
+		$.getJSON(baseURL + api + isoPais + '/empresas/lista').always(function( response ) {
+
+			data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 			$("#cargando_empresa").fadeOut("slow");
 			if(!(data.ERROR)){
 
@@ -39,8 +43,11 @@ $(document).ready(function() {
 	    });
 
 	   $("#export_excel").click(function(){
-
-	    	$('form#formulario').empty();
+				var ceo_cook = decodeURIComponent(
+					document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+				);
+				$('form#formulario').empty();
+				$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'">');
 		$('form#formulario').append('<input type="hidden" name="empresa" value="'+filtro_busq.empresa+'" />');
 		$('form#formulario').append('<input type="hidden" name="anio" value="'+filtro_busq.anio+'" />');
 		$('form#formulario').append('<input type="hidden" name="mes" value="'+filtro_busq.mes+'" />');
@@ -67,8 +74,12 @@ $(document).ready(function() {
 		}
 
 		descargarArchivo(datos, baseURL+api+isoPais+"/reportes/recargasRealizadasPDF", "Exportar PDF" );
-		  	*/
+				*/
+		var ceo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
 		$('form#formulario').empty();
+		$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'">');
 		$('form#formulario').append('<input type="hidden" name="empresa" value="'+filtro_busq.empresa+'" />');
 		$('form#formulario').append('<input type="hidden" name="anio" value="'+filtro_busq.anio+'" />');
 		$('form#formulario').append('<input type="hidden" name="mes" value="'+filtro_busq.mes+'" />');
@@ -89,10 +100,20 @@ var filtro_busq={};
 	    	$('#cargando').fadeIn("slow");
 	    	$(this).hide();
 	    	$('#div_tablaDetalle').fadeOut("fast");
+				var ceo_cook = decodeURIComponent(
+					document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+				);
+
+				filtro_busq.ceo_name = ceo_cook;
+				var dataRequest= JSON.stringify(filtro_busq);
+
+				dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
 //SE REALIZA LA INVOCACION AJAX
-		    	$consulta = $.post(baseURL + api + isoPais + "/reportes/recargasrealizadas",filtro_busq );
+		    	$consulta = $.post(baseURL + api + isoPais + "/reportes/recargasrealizadas",{request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook) });
 //DE SER EXITOSA LA COMUNICACION CON EL SERVICIO SE EJECUTA EL SIGUIENTE METODO "DONE"
 		 		$consulta.done(function(data){
+
+				data = JSON.parse(CryptoJS.AES.decrypt(data.code, data.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 		 				$("#mensaje").remove();
 		 				$('#cargando').fadeOut("slow");
 		 				$("#repRecargasRealizadas_btnBuscar").show();
@@ -321,10 +342,20 @@ function validar_filtro_busqueda(div){
 
   $aux = $("#cargando").dialog({title:titulo,modal:true, close:function(){$(this).dialog('close')}, resizable:false });
 
+	var ceo_cook = decodeURIComponent(
+		document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+	);
+
+	datos.ceo_name = ceo_cook;
+
       $.post(url,datos).done(function(data){
           $aux.dialog('destroy')
           if(!data.ERROR){
-            $('form#formulario').empty();
+						var ceo_cook = decodeURIComponent(
+							document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+						);
+						$('form#formulario').empty();
+						$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'">');
             $('form#formulario').append('<input type="hidden" name="bytes" value="'+JSON.stringify(data.bytes)+'" />');
             $('form#formulario').append('<input type="hidden" name="ext" value="'+data.ext+'" />');
             $('form#formulario').append('<input type="hidden" name="nombreArchivo" value="'+data.nombreArchivo+'" />');

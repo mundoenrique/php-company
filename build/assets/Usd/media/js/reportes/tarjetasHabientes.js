@@ -10,9 +10,10 @@ $(".fecha").keypress(function(e){
 $(document).ready(function() {
 
 		$("#cargando_empresa").fadeIn("slow");
-		$.getJSON(baseURL + api + isoPais + '/empresas/consulta-empresa-usuario').always(function( data ) {
+		$.getJSON(baseURL + api + isoPais + '/empresas/consulta-empresa-usuario').always(function( response ) {
             // var prueba= JSON.stringify(data);
 			// console.log(prueba);
+			data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 			$("#cargando_empresa").fadeOut("slow");
 			if(!(data.ERROR)){
 
@@ -41,8 +42,16 @@ $(document).ready(function() {
 
 			$("#cargando_producto").fadeIn("slow");
 			$(this).attr('disabled',true);
-			$.post(baseURL + api + isoPais + "/reportes/consulta-producto-empresa", { 'acrif': acrif }, function(data){
+			var ceo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
 
+			var dataRequest = JSON.stringify({
+				'acrif': acrif
+			})
+			dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
+			$.post(baseURL + api + isoPais + "/reportes/consulta-producto-empresa", {request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook) }, function(response){
+				data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 				$("#cargando_producto").fadeOut("slow");
 				$("#Reporte-tarjeta-hambiente").removeAttr('disabled');
 				if(!data.ERROR){
@@ -66,7 +75,7 @@ $(document).ready(function() {
 	$("#export_excel").click(function(){
 
 	descargarArchivo(filtro_busq, baseURL+api+isoPais+"/reportes/estatustarjetashabientesExpXLS", "Exportar XLS" );
-		
+
 	});
 
     $("#export_pdf").click(function(){
@@ -85,25 +94,37 @@ $("#EstatusLotes-btnBuscar").click(function(){
 
 function buscarStatusTarjetasHambientes(paginaActual){
 		var $consulta;
-		filtro_busq.nombreEmpresa = $('option:selected',"#Reporte-tarjeta-hambiente").attr("acnomcia");	
-		filtro_busq.lotes_producto = $("#EstatusLotes-producto").val();	
+		filtro_busq.nombreEmpresa = $('option:selected',"#Reporte-tarjeta-hambiente").attr("acnomcia");
+		filtro_busq.lotes_producto = $("#EstatusLotes-producto").val();
 		filtro_busq.acrif = $('option:selected', "#Reporte-tarjeta-hambiente").attr("acrif");
 
 		filtro_busq.paginaActual = paginaActual;
 		EstatusLotes_producto= $('option:selected', "#EstatusLotes-producto").text();
 		nombreProducto = EstatusLotes_producto.split("/");
 		filtro_busq.nombreProducto = nombreProducto[0].trim();
-			
+
 		if(validar_filtro_busqueda("lotes-2")){
 			$('#cargando').fadeIn("slow");
 			$("#EstatusLotes-btnBuscar").hide();
 	    	$('#div_tablaDetalle').fadeOut("fast");
 
-	    	/******* SE REALIZA LA INVOCACION AJAX *******/
-			$consulta = $.post(baseURL + api + isoPais + "/reportes/estatusTarjetashabientes",filtro_busq );
-			/******* DE SER EXITOSA LA COMUNICACION CON EL SERVICIO SE EJECUTA EL SIGUIENTE METODO "DONE" *******/
-			$consulta.done(function(data){
+				var ceo_cook = decodeURIComponent(
+					document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+				);
 
+				filtro_busq.ceo_name = ceo_cook;
+				var dataRequest= JSON.stringify({
+					filtro_busq: filtro_busq
+				});
+
+				dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
+				/******* SE REALIZA LA INVOCACION AJAX *******/
+
+			$consulta = $.post(baseURL + api + isoPais + "/reportes/estatusTarjetashabientes",{request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook) });
+			/******* DE SER EXITOSA LA COMUNICACION CON EL SERVICIO SE EJECUTA EL SIGUIENTE METODO "DONE" *******/
+			$consulta.done(function(response){
+
+				data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 				$("#mensaje").remove();
 				$('#cargando').fadeOut("slow");
 				$("#EstatusLotes-btnBuscar").show();
@@ -118,7 +139,7 @@ function buscarStatusTarjetasHambientes(paginaActual){
 				var tr;
 				var td;
 
-			/****** DE TRAER RESULTADOS LA CONSULTA SE GENERA LA TABLA CON LA DATA... *******/ 
+			/****** DE TRAER RESULTADOS LA CONSULTA SE GENERA LA TABLA CON LA DATA... *******/
 	        /****** DE LO CONTRARIO SE GENERA UN MENSAJE "No existe Data relacionada con su filtro de busqueda" ******/
 
 				if($(".tbody-statuslotes").hasClass('dataTable')){
@@ -143,7 +164,7 @@ function buscarStatusTarjetasHambientes(paginaActual){
 				//$('#tabla-estatus-lotes tbody tr:even').addClass('even');
 
 				paginacion(data.totalPaginas, data.paginaActual);
-				
+
 
 				}else{
 					if(data.rc =="-29"){
@@ -215,7 +236,7 @@ if((radio == "")&&($("#"+div+" input[type='radio'].required").length!="")){
 
 if(!valido){
 	$(".div_tabla_detalle").fadeOut("fast");
-	$("#mensajeError").html("Por favor rellene los campos marcados en color rojo");
+	$("#mensajeError").html("Por favor, rellene los campos marcados en color rojo.");
 	$("#mensajeError").fadeIn("fast");
 }else{
 	$("#mensajeError").fadeOut("fast");
@@ -292,7 +313,7 @@ function paginacion(total, inicial){
 				id = id.split("_");
 			buscarStatusTarjetasHambientes(id[1]);
 		});
-		
+
 		$("#anterior-1").unbind("mouseover");
 		$("#anterior-1").unbind("mouseout");
 		$("#anterior-1").mouseover(function(){
@@ -391,14 +412,17 @@ function paginacion(total, inicial){
 	   function descargarArchivo(filtro_busq, url, titulo){
 
 		$aux = $("#cargando").dialog({title:titulo,modal:true, close:function(){$(this).dialog('close')}, resizable:false });
-
+				var ceo_cook = decodeURIComponent(
+					document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+				);
 				$('form#formulario').empty();
+				$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'">');
 				$('form#formulario').append('<input type="hidden" name="nombreEmpresa" value="'+filtro_busq.nombreEmpresa+'" />');
 				$('form#formulario').append('<input type="hidden" name="nombreProducto" value="'+filtro_busq.nombreProducto+'" />');
 				$('form#formulario').append('<input type="hidden" name="lotes_producto" value="'+filtro_busq.lotes_producto+'" />');
 				$('form#formulario').append('<input type="hidden" name="acrif" value="'+filtro_busq.acrif+'" />');
 				$('form#formulario').attr('action',url);
-				$('form#formulario').submit(); 
+				$('form#formulario').submit();
     		   setTimeout(function(){$aux.dialog('destroy')},8000);
 	}
 

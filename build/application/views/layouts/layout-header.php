@@ -4,6 +4,13 @@ $pais = $CI->config->item('country');
 $urlBase= $CI->config->item('base_url');
 $urlBaseCDN = $CI->config->item('base_url_cdn');
 $nombreCompleto = $this->session->userdata('nombreCompleto');
+$ext = "png";
+
+switch($pais) {
+	case 'Ec-bp':
+		$ext = "ico";
+		break;
+}
 
 $style_css = $this->uri->segment(3);
 
@@ -17,10 +24,13 @@ $style_css = $this->uri->segment(3);
 	<meta name="description" content="" />
 	<meta name="viewport" content="width=device-width" />
 	<meta http-equiv="cleartype" content="on" />
-	<meta http-equiv="pragma" content="no-cache" />
+	<meta name="googlebot" content="none" />
+	<meta name="robots" content="noindex, nofollow" />
 	<link rel="profile" href="http://gmpg.org/xfn/11" />
-	<link rel="icon" type="image/png" href="<?php echo get_cdn(); ?>media/img/favicon.png" />
+	<link rel="icon" type="image/<?= $ext ?>" href="<?php echo get_cdn(); ?>media/img/favicon.<?= $ext ?>" />
 	<?php
+
+	echo insert_css_cdn("jquery-ui.min.css");
 
 	echo insert_css_cdn("default.css");
 
@@ -40,6 +50,9 @@ $style_css = $this->uri->segment(3);
 <body <?php if(isset($bodyclass)){echo 'class="'.$bodyclass.'"'; }?> data-country="<?php echo $pais; ?>" data-app-base="<?php echo $urlBase;?>" data-app-base-cdn="<?php echo $urlBaseCDN;?>">
 <header id="head">
 	<div id="head-wrapper">
+		<?php if($pais == 'Ec-bp'): ?>
+		<img class="img-header" src="<?= $this->asset->insertFile('logo-pichincha-azul.png', 'images'); ?>" alt="Banco PICHINCHA">
+		<?php endif; ?>
 		<a id="branding" rel="start">
 		</a>
 		<?php if($menuHeaderActive){?>
@@ -51,15 +64,16 @@ $style_css = $this->uri->segment(3);
 
 </header>
 
-<?php if($menuHeaderMainActive){
-	$menuP =$this->session->userdata('menuArrayPorProducto');
-
-	?>
-
-	<div id="nav-bar2">
-		<?php echo np_hoplite_crearMenu($menuP,$pais,$urlBase);?>
-	</div>
-<?php };?>
+<?php
+	if($menuHeaderMainActive){
+		$menuP =$this->session->userdata('menuArrayPorProducto');
+		$menu = createMenu($menuP, $pais);
+		$settingsMenu = new stdClass();
+		$settingsMenu->menu = $menu;
+		$settingsMenu->pais = $pais;
+		$this->load->view('widget/widget_menu-business_content', $settingsMenu);
+	}
+?>
 
 <input type="hidden" id="path_JScdn" value="<? echo $urlBaseCDN;?>media/js/">
 

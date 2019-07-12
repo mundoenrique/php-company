@@ -1,17 +1,18 @@
 <?php
+defined('BASEPATH') OR exit('No direct script access allowed');
 $lang['TITULO_TARJETAHABIENTES']="Tarjetahabientes";
-$lang['TITULO_CONSULTA_OS']="Órdenes de Servicio";
+$lang['TITULO_CONSULTA_OS']="Órdenes de servicio";
 $lang['TITULO_CRITERIOSBUSQ']="Criterio de búsqueda";
-$lang['TITULO_CONSULTA_OSE']="Órdenes de Servicio";
+$lang['TITULO_CONSULTA_OSE']="Órdenes de servicio";
 $lang['TITULO_CONSULTA_OS_LOTESNF']="Lotes no facturables";
 $lang['TITULO_LOTES_POR_FACTURAR']="Lotes por facturar";
 
-$lang['TABLA_COS_ID_ORDEN']='Id Orden';
+$lang['TABLA_COS_ID_ORDEN']='Orden nro.';
 $lang['TABLA_COS_FECHA']='Fecha';
 $lang['TABLA_COS_EMPRESA']='Empresa';
 $lang['TABLA_COS_MONTO_OS']='Monto OS';
 $lang['TABLA_COS_MONTO_DEPOSITADO']='Monto depositado';
-$lang['TABLA_COS_NRO_LOTE']='Nro. Lote';
+$lang['TABLA_COS_NRO_LOTE']='Lote nro.';
 $lang['TABLA_COS_TIPO']='Tipo';
 $lang['TABLA_COS_CANT']='Cant.';
 $lang['TABLA_COS_STATUS']='Estatus';
@@ -24,7 +25,7 @@ $lang['TABLA_COS_MONTO_TOTAL']='Monto total';
 
 //REGISTRO DE PAGO
 $lang['TITULO_REGISTRO_PAGO']='Registro de Pago';
-$lang['ORDENES_DE_SERVICIO']='Órdenes de Servicio Generadas';
+$lang['ORDENES_DE_SERVICIO']='Órdenes de servicio Generadas';
 $lang['TABLA_EMPRESA']='Empresa';
 $lang['TABLA_ORDEN_SERVICIO']='Orden de Servicio';
 $lang['TABLA_FECHA']='Fecha emisión';

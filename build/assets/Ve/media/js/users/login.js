@@ -39,15 +39,18 @@ var ingresar_ = function() {
             $(".ju-sliderbutton-text").html("Verificando...");
 
             $(".ju-sliderbutton .ju-sliderbutton-slider .ui-slider-handle").hide();
-
+						var ceo_cook = decodeURIComponent(
+							document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+						);
             $consulta = $.post(baseURL + isoPais + "/validation", {
                 user_login: user,
                 user_pass: pass,
-                user_active: active
+								user_active: active,
+								ceo_name: ceo_cook
             });
 
             $consulta.done(function(data) {
-                    console.log(data);
+
                 $('.verifica_sesion').hide();
 
                 var user = $("#user_login").val();
@@ -73,7 +76,7 @@ var ingresar_ = function() {
                     $(location).attr('href', baseURL + isoPais + '/clave');
 
                 } else if (data == 'conectado') {
-                    $('<div><h6>Su última sesión se cerró de manera incorrecta. Tenga en cuenta que para salir de la aplicación debe seleccionar <strong>"Salir"</strong>. <h4>Pulse "Aceptar" para continuar.<h4></h6></div>')
+                    $('<div><h6>Tu última sesión se cerró de manera incorrecta. Ten en cuenta que para salir de la aplicación debe seleccionar <strong>"Salir"</strong>. <h4>Pulse "Aceptar" para continuar.<h4></h6></div>')
                         .dialog({
                             title: "Conexión Empresas Online",
                             modal: true,
@@ -87,7 +90,8 @@ var ingresar_ = function() {
                             buttons: {
                                 Aceptar: function() {
                                     $.post(baseURL + isoPais + "/logout", {
-                                        'data-user': user
+																				'data-user': user,
+																				ceo_name: ceo_cook
                                     });
                                     $(this).dialog("destroy");
                                     habilitar();
@@ -109,7 +113,8 @@ var ingresar_ = function() {
                     buttons: {
                       Aceptar: function() {
                         $.post(baseURL + '/' + isoPais + "/logout", {
-                            'data-user': user
+														'data-user': user,
+														ceo_name: ceo_cook
                         });
                         $(this).dialog("destroy");
                         habilitar();
@@ -167,7 +172,7 @@ data.toLowerCase().indexOf('inactivo') != -1 ? $.balloon.defaults.classname = "l
         } else {
             $('.verifica_sesion').hide();
             if (cookie == '') {
-                $('<div><h5>La funcionalidad de cookies de su navegador se encuentra desactivada.</h5><h4>Por favor vuelva activarla.</h4></div>').dialog({
+                $('<div><h5>La funcionalidad de cookies de tu navegador se encuentra desactivada.</h5><h4>Por favor vuelve activarla.</h4></div>').dialog({
                     title: "Conexión Empresas Online",
                     modal: true,
                     maxWidth: 700,
@@ -189,7 +194,7 @@ data.toLowerCase().indexOf('inactivo') != -1 ? $.balloon.defaults.classname = "l
     habilitar = function() {
         $("#user_login").removeAttr('disabled');
         $("#user_pass").removeAttr('disabled');
-        $(".ju-sliderbutton-text").html("Deslice para ingresar");
+        $(".ju-sliderbutton-text").html("Desliza para ingresar");
         $(".ju-sliderbutton .ju-sliderbutton-slider .ui-slider-handle").show();
     },
     marcarError = function(msj) {
@@ -234,7 +239,7 @@ $(function() {
     /*Inicializar sliderbutton*/
 
     $('#sliderbutton-login').sliderbutton({
-        text: "Deslice para ingresar",
+        text: "Desliza para ingresar",
         activate: function() {
             ingresar_();
         }

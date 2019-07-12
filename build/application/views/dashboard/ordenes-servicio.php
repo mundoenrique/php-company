@@ -1,20 +1,20 @@
 
 			<div id="lotes-general">
 				<div class="tabs-contenedor">
-					<div id="top-batchs"><span aria-hidden="true" class="icon" data-icon="&#xe035;"></span> Ordenes de Servicio
+					<div id="top-batchs"><span aria-hidden="true" class="icon" data-icon="&#xe035;"></span> Órdenes de servicio
 					</div>
 				<div id="lotes-contenedor">
 
 					<span class="info-OD">
-						<h5>Fecha Inicial</h5>
+						<h5>Fecha inicial</h5>
 						<input  class="required login" type="password" name="Ingrese clave de confirmación" placeholder="DD/MM/AA" value="" />
 					</span>
 					<span class="info-OD">
-						<h5>Fecha Final</h5>
+						<h5>Fecha final</h5>
 						<input  class="required login" type="password" name="Ingrese clave de confirmación" placeholder="DD/MM/AA" value="" />
 					</span>
 					<div class="info-OD">
-						<h5>Tipo de Lote</h5>
+						<h5>Tipo de lote</h5>
 						<select id="type-batch" name="batch">
 							<option value="" selected="selected">Selecciona</option>
 							<option value="emision">En proceso</option>

@@ -321,14 +321,16 @@ function noResults(){
 
 
 $("#listCompanies").on("click",'.style-companies-item',function(){
-
+	var ceo_cook = decodeURIComponent(
+		document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+	);
     var rif = $(this).attr("data-acrif");
     var activ = $(this).attr("data-acnomcia");
     var razon = $(this).attr("data-acrazonsocial");
     var desc = $(this).attr("data-acdesc");
     var accodcia = $(this).attr("data-accodcia");
     var accodgrupoe = $(this).attr("data-accodgrupoe");
-
+		$('form#empresas').append('<input type="hidden" name="ceo_name" value="'+ ceo_cook +'"/>');
     $('form#empresas').append('<input type="hidden" name="data-acrif" value="'+rif+'" />');
     $('form#empresas').append('<input type="hidden" name="data-acnomcia" value="'+activ+'" />');
     $('form#empresas').append('<input type="hidden" name="data-acrazonsocial" value="'+razon+'" />');
@@ -347,10 +349,21 @@ function paginar(){
  $('#loading').show();
  $('#more').hide();
 
-  $.post(baseURL+api+isoPais+"/empresas/lista",
- { 'data-filtroEmpresas':dash_var.filtro,'data-paginar':dash_var.paginar, 'data-tamanoPagina':dash_var.cantEmp, 'data-paginaActual':dash_var.pgActual},
-          function(data){
+	var ceo_cook = decodeURIComponent(
+		document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+	);
 
+	var dataRequest = JSON.stringify({
+		data_filtroEmpresas:dash_var.filtro,
+		data_paginar:dash_var.paginar,
+		data_tamanoPagina:dash_var.cantEmp,
+		data_paginaActual:dash_var.pgActual
+	});
+	var dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
+  $.post(baseURL+api+isoPais+"/empresas/lista",
+	{request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)},
+          function(response){
+						data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
           if(!data.ERROR){
             var item=1, pg=1, cat, pgfa=1, pgfd=1, pgfh=1, pgfl=1, pgfp=1, pgft=1, pgfx=1, pgf;
             var itemfa=1, itemfd=1, itemfh=1, itemfl=1, itemfp=1, itemft=1, itemfx=1;
@@ -611,7 +624,7 @@ function paginado(paginas, filtro){
     });
 
     $("#anterior-22").unbind("click");
-    $("#anterior-22").click(function(){
+    $("#anterior-22, #anterior-2").click(function(){
       //buscarReposiciones(1);
       $('#listCompanies').find('.style-companies-item-activa').removeClass('style-companies-item-activa');
       $("span#more-info").fadeOut("fast");
@@ -626,7 +639,7 @@ function paginado(paginas, filtro){
     });
 
     $("#siguiente-22").unbind("click");
-    $("#siguiente-22").click(function(){
+    $("#siguiente-22, #siguiente-2").click(function(){
       //buscarReposiciones(total);
       $('#listCompanies').find('.style-companies-item-activa').removeClass('style-companies-item-activa');
       $("span#more-info").fadeOut("fast");

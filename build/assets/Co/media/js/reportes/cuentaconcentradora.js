@@ -32,7 +32,10 @@ $(document).ready(function() {
 
 
 	$("#cargando_empresa").fadeIn("slow");
-	$.getJSON(baseURL + api + isoPais + '/empresas/lista').always(function( data ) {
+	$.getJSON(baseURL + api + isoPais + '/empresas/lista').always(function(response) {
+		data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {
+			format: CryptoJSAesJson
+		}).toString(CryptoJS.enc.Utf8))
 		$("#cargando_empresa").fadeOut("slow");
 		if(!(data.ERROR)){
 
@@ -76,8 +79,11 @@ $(document).ready(function() {
 
 
 	$("#exportXLS_a").click(function(){
-
+		var ceo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
 		$('form#formulario').empty();
+		$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'">');
 		$('form#formulario').append('<input type="hidden" name="empresa" value="'+filtro_busq.empresa+'" />');
 		$('form#formulario').append('<input type="hidden" name="fechaInicial" value="'+filtro_busq.fechaInicial+'" />');
 		$('form#formulario').append('<input type="hidden" name="fechaFin" value="'+filtro_busq.fechaFin+'" />');
@@ -102,7 +108,11 @@ $(document).ready(function() {
 
 		 descargarArchivo(datos, baseURL+api+isoPais+"/reportes/cuentaConcentradoraExpPDF", "Exportar PDF" );
 		 */
+		var ceo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
 		$('form#formulario').empty();
+		$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'">');
 		$('form#formulario').append('<input type="hidden" name="empresa" value="'+filtro_busq.empresa+'" />');
 		$('form#formulario').append('<input type="hidden" name="fechaInicial" value="'+filtro_busq.fechaInicial+'" />');
 		$('form#formulario').append('<input type="hidden" name="fechaFin" value="'+filtro_busq.fechaFin+'" />');
@@ -129,7 +139,9 @@ $(document).ready(function() {
 			maxheight:"250px",
 			buttons:{
 				OK:function(){
-
+					var ceo_cook = decodeURIComponent(
+						document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+						);
 					$(".ui-dialog-content").dialog().dialog("close");
 					/*datos={
 					 empresa: filtro_busq.empresa,
@@ -145,6 +157,7 @@ $(document).ready(function() {
 					 descargarArchivo(datos, baseURL+api+isoPais+"/reportes/cuentaConcentradoraConsolidadoExp"+formato, "Exportar "+formato );
 					 */
 					$('form#formulario').empty();
+					$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'">');
 					$('form#formulario').append('<input type="hidden" name="empresa" value="'+filtro_busq.empresa+'" />');
 					$('form#formulario').append('<input type="hidden" name="fechaInicial" value="'+filtro_busq.fechaInicial+'" />');
 					$('form#formulario').append('<input type="hidden" name="fechaFin" value="'+filtro_busq.fechaFin+'" />');
@@ -166,9 +179,22 @@ $(document).ready(function() {
 
 		$('#cargando').dialog({ modal: true,maxWidth: 700,maxHeight: 300,dialogClass: 'hide-close' });
 
-
-		$consulta = $.post(baseURL + api + isoPais + "/reportes/graficoCuentaConcentradora",filtro_busq );
-		$consulta.done(function(data){
+		var ceo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
+		var dataRequest = JSON.stringify(filtro_busq);
+		dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {
+			format: CryptoJSAesJson
+		}).toString();
+		$consulta = $.post(baseURL + api + isoPais + "/reportes/graficoCuentaConcentradora", {
+			request: dataRequest,
+			ceo_name: ceo_cook,
+			plot: btoa(ceo_cook)
+		});
+		$consulta.done(function (response) {
+			data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {
+				format: CryptoJSAesJson
+			}).toString(CryptoJS.enc.Utf8))
 			$(".ui-dialog-content").dialog().dialog("close");
 			if(data.rc==0){
 
@@ -348,9 +374,24 @@ $(document).ready(function() {
 		$("#repUsuario_btnBuscar").hide();
 		$('#div_tablaDetalle').hide();
 		//SE REALIZA LA INVOCACION AJAX
-		$consulta = $.post(baseURL + api + isoPais + "/reportes/cuentaConcentradora",filtro_busq );
+
+		var ceo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
+		var dataRequest = JSON.stringify(filtro_busq);
+		dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {
+			format: CryptoJSAesJson
+		}).toString();
+		$consulta = $.post(baseURL + api + isoPais + "/reportes/cuentaConcentradora", {
+			request: dataRequest,
+			ceo_name: ceo_cook,
+			plot: btoa(ceo_cook)
+		});
 		//DE SER EXITOSA LA COMUNICACION CON EL SERVICIO SE EJECUTA EL SIGUIENTE METODO "DONE"
-		$consulta.done(function(data){
+		$consulta.done(function (response) {
+			data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {
+				format: CryptoJSAesJson
+			}).toString(CryptoJS.enc.Utf8))
 			$("#mensaje").remove();
 			$("#div_tablaDetalle").fadeIn("slow");
 
@@ -557,10 +598,17 @@ $(document).ready(function() {
 
 		$aux = $("#cargando").dialog({title:titulo,modal:true, close:function(){$(this).dialog('close')}, resizable:false });
 
+		var ceo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
+
+		datos.ceo_name = ceo_cook
+
 		$.post(url,datos).done(function(data){
 			$aux.dialog('destroy')
 			if(!data.ERROR){
 				$('form#formulario').empty();
+				$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'">');
 				$('form#formulario').append('<input type="hidden" name="bytes" value="'+JSON.stringify(data.bytes)+'" />');
 				$('form#formulario').append('<input type="hidden" name="ext" value="'+data.ext+'" />');
 				$('form#formulario').append('<input type="hidden" name="nombreArchivo" value="'+data.nombreArchivo+'" />');

@@ -2,6 +2,8 @@
 $pais = $this->uri->segment(1);
 $urlBaseA = $this->config->item('base_url');
 $urlBase = $urlBaseA.$pais;
+$ceo_name = $this->security->get_csrf_token_name();
+$ceo_cook = $this->security->get_csrf_hash();
 
 function to_ascii($word){
     $word=str_replace("á", 'a', $word);
@@ -48,7 +50,7 @@ function to_ascii($word){
                 <?php
                 if(!array_key_exists("ERROR", $productos)){
                     foreach ($listaCategorias as $lista) {
-                        echo '<option value=".'.url_title(to_ascii(mb_strtolower($lista->descripcion))).'">'.$lista->descripcion.'</option>';
+                        echo '<option value=".'.url_title(to_ascii(mb_strtolower($lista->descripcion))).'">'.ucfirst(mb_strtolower($lista->descripcion)).'</option>';
                     }
                 }
                 ?>
@@ -79,7 +81,9 @@ function to_ascii($word){
 
     </div>
 
-    <form id="productos" method="post" action="<?php echo site_url($pais.'/dashboard/productos/detalle'); ?>"></form>
+    <form id="productos" method="post" action="<?php echo site_url($pais.'/dashboard/productos/detalle'); ?>">
+			<input type='hidden' name='<?php echo $ceo_name ?>' value='<?php echo $ceo_cook ?>'>
+		</form>
 
     <?php
 
@@ -132,12 +136,15 @@ function to_ascii($word){
             }
 
             echo "
-			<li class='product-description ".$tipoCategoria." $nombreMarca ".url_title($producto->filial)."' id='$producto->idProducto'>
+			<li class='product-description ".$tipoCategoria." $nombreMarca ".url_title($producto->filial)."' id='$producto->idProducto'>";
+						if($pais!='Ec-bp'){
+			echo "
 				<span class='".$tipoClass."'>
 					<span aria-hidden='true' class='icon' data-icon='".$tipoIcon."'></span>
-				</span>
+				</span>";
+			}
 
-				<div id='img-1'>".$tjta."</div>
+			echo "<div id='img-1'>".$tjta."</div>
 				<div id='img-2'>".$marca."</div>
 				<div id='text-desc'>
 					<p class='info-producto-1'> ".strtoupper($producto->descripcion)."</p>

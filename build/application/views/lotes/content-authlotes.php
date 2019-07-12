@@ -2,6 +2,8 @@
 	$pais = $this->uri->segment(1);
 	$urlBaseA = $this->config->item('base_url');
 	$urlBase = $urlBaseA.$pais;
+	$ceo_name = $this->security->get_csrf_token_name();
+	$ceo_cook = $this->security->get_csrf_hash();
 
 	$entrar;
 	$orden="";
@@ -12,6 +14,7 @@
 	$cantXauth=0;
 	$loteXdesa=false;
 	$lotesxAuth=false;
+	$icon = $pais != "Ec-bp" ? '<span aria-hidden="true" class="icon" data-icon="&#xe03c;"></span>' : '';
 
 	if( !array_key_exists('ERROR', $data[0]) ){
 		$entrar=true;
@@ -86,13 +89,13 @@
 	if($entrar){
 
 		if(count($info->listaPorFirmar)==0 && count($info->listaPorAutorizar)==0){
-			echo "<div id='products-general' style='margin-top:10px'><h2 >No hay lotes por autorizar</h2></div>";
+			echo "<div id='products-general' style='margin-top:10px'><h2 >No hay Lotes por autorizar</h2></div>";
 		}
 
 	if( count($info->listaPorFirmar)>0 ){
 	echo '
 		<div id="top-batchs">
-			<span aria-hidden="true" class="icon" data-icon="&#xe03c;"></span>'.lang("TITULO_LOTES_PORFIRMAR").'
+			'.$icon.lang("TITULO_LOTES_PORFIRMAR").'
 		</div>
 
 		<div id="lotes-contenedor" class="lotes-contenedor-autorizacion">
@@ -141,10 +144,32 @@
 		if($orden=='0' || $orden=='1'  || $orden==''){
 		echo '
 		<div id="batchs-last">
-			<input id="clave" class="input-clave" type="password" placeholder="'.lang("MSG_INGRESE_CLAVE").'" value="" />
+			<form name="no-form" onsubmit="return false">';
+			if($pais == 'Ec-bp') { ?>
+			<center>
+				<table>
+					<tr>
+						<td valign="top" colspan="2">
+							<?= '<center><input id="clave" class="input-clave" type="password" placeholder="'.lang("MSG_INGRESE_CLAVE").'" value="" /></center>' ?>
+						</td>
+					</tr>
+					<tr>
+						<td valign="top">
+							<?= '<center><button '.$borrar.' id="eliminarF" type="submit" class="novo-btn-secondary">'.lang('TITULO_LOTESBTN_ELIMINAR').'</button></center>'; ?>
+						</td>
+						<td valign="top">
+							<?= '<center><button id="firma" class="novo-btn-primary">'.lang("TITULO_LOTESBTN_FIRMAR").'</button></center>' ?>
+						</td>
+					</tr>
+				</table>
+			</center>
+			<?php } else {
+			echo '<input id="clave" class="input-clave" type="password" placeholder="'.lang("MSG_INGRESE_CLAVE").'" value="" />
 			<button '.$borrar.' id="eliminarF" type="submit">'.lang('TITULO_LOTESBTN_ELIMINAR').'</button>
 			<button id="firma" >'.lang("TITULO_LOTESBTN_FIRMAR").'</button>
+			</form>
 		</div>';
+		}
 		}else{
 			echo '
 		<div id="batchs-last">
@@ -159,8 +184,8 @@
 			if( $entrar && count($info->listaPorAutorizar)>0 ){
 				echo '
 			<div id="top-batchs">
-				<span aria-hidden="true" class="icon" data-icon="&#xe03c;"></span>
-				'.lang("TITULO_LOTES_PORAUTORIZAR").'
+
+				'.$icon.lang("TITULO_LOTES_PORAUTORIZAR").'
 			</div>
 
 			<div id="lotes-contenedor">
@@ -175,7 +200,7 @@
 					echo			'<th>'.lang('TABLA_LOTESP_NROLOTE').'</th>';
 					echo			'<th id="td-nombre-2">'.lang('ID_FISCAL').'</th>';
 					echo			'<th id="td-nombre-2">Empresa</th>';
-					echo			'<th>Fecha carga</th>';
+					echo			'<th class="field-date">Fecha carga</th>';
 					echo			'<th>Tipo / Reg</th>';
 					echo			'<th>Monto</th>';
 					echo			'<th>Opciones</th>';
@@ -217,16 +242,52 @@
       		echo '</div>';
       		if( ($orden=='0' || $orden=='2' || $orden=='') && $lotesxAuth ){
 			echo '<div id="batchs-last">
-      				<input id="claveAuth" type="password" placeholder="'.lang("MSG_INGRESE_CLAVE").'" value="" #batchs-last input style="margin-left: 10px;"/>';
-			echo 	'<button '.$borrar.' id="button-eliminar" type="submit" >'.lang('TITULO_LOTESBTN_ELIMINAR').'</button>';
-			echo 	'<button id="button-autorizar" type="submit">'.lang('TITULO_LOTESBTN_AUTORIZAR').'</button>';
-			$selectTipoLote = $pais == 'Ve' ? '<input type="hidden" id="selec_tipo_lote" value="1">' :
-			'<select id="selec_tipo_lote">
-				<option value="0">'.lang('SELECT_OPTION_XLOTE').'</option>
-				<option value="1" selected>'.lang('SELECT_OPTION_XTIPO_lOTE').'</option>
-			</select>';
-			echo $selectTipoLote;
-			echo '</div>';
+							<form name="no-form" onsubmit="return false">
+							';
+								if($pais=='Ec-bp'){ ?>
+								<center>
+									<table>
+										<tr>
+											<td valign="top">
+								<?php
+							echo '
+
+							<select id="selec_tipo_lote" name="tipo_lote_select">
+										<option value="0">'.lang('SELECT_OPTION_XLOTE').'</option>
+										<option value="1" selected>'.lang('SELECT_OPTION_XTIPO_lOTE').'</option>
+									</select>';
+
+							if($pais=='Ec-bp'){
+								?>
+									</td> <td valign="top">
+
+									<?php
+										echo '<input id="claveAuth" type="password" name="claveAuth" placeholder="'.lang("MSG_INGRESE_CLAVE").'" value="" #batchs-last input style="margin-left: 10px;    margin-bottom: 0px;"/>';
+									?>
+									</td></tr><tr><td valign="top">
+								<?php
+							}
+								echo 	'<center><button '.$borrar.' id="button-eliminar" type="submit" class="novo-btn-secondary">'.lang('TITULO_LOTESBTN_ELIMINAR').'</button></center>';
+								?> </td><td valign="top"><?php
+								echo 	'<center><button id="button-autorizar" type="submit" class="novo-btn-primary btn-authorization">'.lang('TITULO_LOTESBTN_AUTORIZAR').'</button></center>'; ?>
+									<td></tr>
+								</table>
+									</center>
+<?php
+							}else{
+								echo 	'<button '.$borrar.' id="button-eliminar" type="submit" >'.lang('TITULO_LOTESBTN_ELIMINAR').'</button>';
+								echo 	'<button id="button-autorizar" type="submit">'.lang('TITULO_LOTESBTN_AUTORIZAR').'</button>';
+							}
+							if($pais!='Ec-bp'){
+								$selectTipoLote = $pais == 'Ve' ? '<input type="hidden" id="selec_tipo_lote" value="1">' :
+								'<select id="selec_tipo_lote" name="tipo_lote_select">
+									<option value="0">'.lang('SELECT_OPTION_XLOTE').'</option>
+									<option value="1" selected>'.lang('SELECT_OPTION_XTIPO_lOTE').'</option>
+								</select><input id="claveAuth" type="password" name="claveAuth" placeholder="'.lang("MSG_INGRESE_CLAVE").'" value="" #batchs-last input style="margin-left: 10px;    margin-bottom: 0px;"/>';
+								echo $selectTipoLote;
+							}
+			echo '</form>
+					</div>';
       			}elseif ( ($orden=='0' || $orden=='2' || $orden=='') && !$lotesxAuth ) {
       				echo '<div id="batchs-last">
       					<h3>'.lang('MSJ_NO_LOTESXAUTH').'</h3>
@@ -268,12 +329,16 @@
 <input type='hidden' id='lotesxAuth' value='<?php echo $lotesxAuth ?>'/>
 <div class='elem-hidden'> <h3 id='msg_2dafirma'> <?php echo lang('MSG_2DA_FIRMA') ?> </h3> </div>
 
-<form id='autorizacion' method='post' action="<?php echo $urlBase ?>/lotes/calculo">
+<?php
+echo "<form id='autorizacion' method='post' action='$urlBase/lotes/calculo'>
 	<input type='hidden' name='data-COS' value='' id='data-COS'/>
-</form>
+</form>";
 
-<form id='detalleAuth' method='post' action="<?php echo $urlBase ?>/lotes/autorizacion/detalle"></form>
 
+echo "<form id='detalleAuth' method='post' action= '$urlBase/lotes/autorizacion/detalle'>
+	<input type='hidden' name='$ceo_name' value='$ceo_cook'>
+</form>";
+?>
 <?php
 	if ($pais == 'Ve'):
 

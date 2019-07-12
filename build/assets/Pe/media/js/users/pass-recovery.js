@@ -28,7 +28,7 @@ $(function(){
 
         if(!validar(json)){
             titulo = 'Campos inválidos';
-            mensaje1 = 'Por favor <strong>Verifique</strong> los datos, e intente nuevamente';
+            mensaje1 = 'Por favor <strong>Verifica</strong> los datos, e intenta nuevamente';
             modal = true;
             notificacion(sitio, modal, titulo, mensaje1);
         } else {
@@ -45,6 +45,10 @@ $(function(){
             close: function(){$(this).dialog('destroy')},
             resizable:false });
 
+				var ceo_cook = decodeURIComponent(
+					document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+				);
+				jsonData.ceo_name = ceo_cook;
         $.post(baseURL + isoPais+'/users/recuperar-pass', jsonData )
             .done(function( data ) {
             if (data == "validate") {
@@ -52,28 +56,28 @@ $(function(){
                 sitio = true;
                 modal = true;
                 titulo =   '<h4><strong>Solicitud procesada satisfactoriamente.</strong></h4>';
-                mensaje1 = 'Su contraseña a <strong>Conexión Empresas Online</strong> ha sido restablecida.<br><br> <h4>Pulse \"Aceptar\" para continuar.<h4>';
+                mensaje1 = 'Tu contraseña a <strong>Conexión Empresas Online</strong> ha sido restablecida.<br><br> <h4>Pulsa \"Aceptar\" para continuar.<h4>';
                 notificacion(sitio, modal, titulo, mensaje1);
             } else if (data == "no-companies") {
                 $aux.dialog('destroy');
                 sitio = true;
                 modal = true;
-                titulo = '<h3><strong>No se pudo procesar su solicitud.</strong></h3>';
-                mensaje1 = 'Disculpe, el usuario indicado no posee empresa asignada.';
+                titulo = '<h3><strong>No se pudo procesar tu solicitud.</strong></h3>';
+                mensaje1 = 'El usuario indicado no posee empresa asignada.';
                 notificacion(sitio, modal, titulo, mensaje1);
             } else if (data == "general-error") {
                 $aux.dialog('destroy');
                 sitio = true;
                 modal = true;
                 titulo = '<h3><strong>Error en sistema.</strong></h3>';
-                mensaje1 = 'Disculpe los inconvenientes. Intente nuevamente más tarde.';
+                mensaje1 = 'Disculpa los inconvenientes. Intenta nuevamente más tarde.';
                 notificacion(sitio, modal, titulo, mensaje1);
             } else if (data == "error-email") {
                 $aux.dialog('destroy');
                 sitio = true;
                 modal = true;
-                titulo = '<h3><strong>No se pudo procesar su solicitud.</strong></h3>';
-                mensaje1 = 'Inconvenientes enviando el email al destinatario. Verifique el email ingresado e intente nuevamente.';
+                titulo = '<h3><strong>No se pudo procesar tu solicitud.</strong></h3>';
+                mensaje1 = 'Inconvenientes enviando el email al destinatario. Verifica el email ingresado e intenta nuevamente.';
                 notificacion(sitio, modal, titulo, mensaje1);
             }  else {
                 data = $.parseJSON(data);

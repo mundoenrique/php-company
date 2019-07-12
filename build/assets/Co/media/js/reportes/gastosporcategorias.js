@@ -44,7 +44,8 @@ $("#repGastosPorCategoria_dni").attr("maxlength","12");
 //LLENA EL COMBO DE EMPRESA
 //--------------------------
 	$("#cargando_empresa").fadeIn("slow");
-	$.getJSON(baseURL + api + isoPais + '/empresas/lista').always(function( data ) {
+		$.getJSON(baseURL + api + isoPais + '/empresas/lista').always(function(response) {
+			data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 		$("#cargando_empresa").fadeOut("slow");
 	if(!(data.ERROR)){
 
@@ -70,7 +71,17 @@ $("#repGastosPorCategoria_dni").attr("maxlength","12");
 
 		$("#cargando_producto").fadeIn("slow");
 		$(this).attr('disabled',true);
-		$.post(baseURL + api + isoPais + "/producto/lista", { 'acrif': acrif }, function(data){
+
+		var ceo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
+		var dataRequest = JSON.stringify ({
+			acrif: acrif
+		})
+			dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
+			$.post(baseURL + api + isoPais + "/producto/lista", {request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)})
+		  .done(function(response){
+				data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 			$("#cargando_producto").fadeOut("slow");
 			$("#repGastosPorCategoria_empresa").removeAttr('disabled');
 			if(!data.ERROR){
@@ -188,7 +199,11 @@ $( "#repGastosPorCategoria_fecha_ini" ).datepicker({
 
 			descargarArchivo(datos, baseURL+api+isoPais+"/reportes/gastosporcategoriasExpPDF", "Exportar PDF" );
 */
+			var ceo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+				);
 			$('form#formulario').empty();
+			$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'">');
 			$('form#formulario').append('<input type="hidden" name="empresa" value="'+filtro_busq.empresa+'" />');
 			$('form#formulario').append('<input type="hidden" name="fechaIni" value="'+filtro_busq.fechaInicial+'" />');
 			$('form#formulario').append('<input type="hidden" name="fechaFin" value="'+filtro_busq.fechaFin+'" />');
@@ -218,7 +233,12 @@ $( "#repGastosPorCategoria_fecha_ini" ).datepicker({
 
 		// 	descargarArchivo(datos, baseURL+api+isoPais+"/reportes/gastosporcategoriasExpXLS", "Exportar Excel" );
 
+		var ceo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
+
 		$('form#formulario').empty();
+			$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'">');
 			$('form#formulario').append('<input type="hidden" name="empresa" value="'+filtro_busq.empresa+'" />');
 			$('form#formulario').append('<input type="hidden" name="fechaIni" value="'+filtro_busq.fechaInicial+'" />');
 			$('form#formulario').append('<input type="hidden" name="fechaFin" value="'+filtro_busq.fechaFin+'" />');
@@ -265,10 +285,17 @@ var filtro_busq={};
 			filtro_busq.tipoConsulta=$("input[name='radio']:checked").val();
 
 //SE REALIZA LA PETICION AL SERVICIO DE GASTOS POR CATEGORIA
-			$consulta = $.post(baseURL + api + isoPais + "/reportes/gastosporcategorias",filtro_busq );
-
+			var ceo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
+			var dataRequest = JSON.stringify(filtro_busq)
+			dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {
+				format: CryptoJSAesJson
+			}).toString();
+			$.post(baseURL + api + isoPais + "/reportes/gastosporcategorias",{request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)})
+			.done(function(response){
+				data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 //SI LA CONSULTA ES SATISFACTORIA SE PROCEDE A LLENAR LA TABLA
-			$consulta.done(function(data){
 				var tr;
 				var td;
 				var th;
@@ -716,10 +743,19 @@ var filtro_busq={};
 
   $aux = $("#cargando").dialog({title:titulo,modal:true, close:function(){$(this).dialog('close')}, resizable:false });
 
+	var ceo_cook = decodeURIComponent(
+		document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
+		datos.ceo_name = ceo_cook
+
       $.post(url,datos).done(function(data){
           $aux.dialog('destroy')
           if(!data.ERROR){
-            $('form#formulario').empty();
+						var ceo_cook = decodeURIComponent(
+							document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+						);
+						$('form#formulario').empty();
+						$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'">');
             $('form#formulario').append('<input type="hidden" name="bytes" value="'+JSON.stringify(data.bytes)+'" />');
             $('form#formulario').append('<input type="hidden" name="ext" value="'+data.ext+'" />');
             $('form#formulario').append('<input type="hidden" name="nombreArchivo" value="'+data.nombreArchivo+'" />');

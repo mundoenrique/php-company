@@ -1,4 +1,5 @@
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * CodeIgniter XML Helpers
  *
@@ -18,10 +19,14 @@ if ( ! function_exists('np_hoplite_Encryption'))
 	 * @param  string $data
 	 * @return string
 	 */
-	function np_Hoplite_Encryption($data)
+	function np_Hoplite_Encryption($data, $service = false)
 	{
 		$CI =& get_instance();
-		
+		if($service) {
+			$userName = $CI->session->userdata('userName') != '' ? $CI->session->userdata('userName') : 'NO USERNAME';
+			log_message('DEBUG', '['. $userName .'] REQUEST ' . $service . ': ' . $data);
+		}
+
 		$dataB = base64_encode($data);
 		$iv = "\0\0\0\0\0\0\0\0";
 		while( (strlen($dataB)%8) != 0) {
@@ -41,7 +46,7 @@ if ( ! function_exists('np_hoplite_Decrypt'))
 	 * @param  string $cryptDataBase64
 	 * @return string
 	 */
-	function np_Hoplite_Decrypt($cryptDataBase64)
+	function np_Hoplite_Decrypt($cryptDataBase64, $service = false)
 	{
 		$CI =& get_instance();
 		$data = base64_decode($cryptDataBase64);
@@ -49,7 +54,17 @@ if ( ! function_exists('np_hoplite_Decrypt'))
 		$descryptData = mcrypt_decrypt(
 			MCRYPT_DES, $CI->config->item('keyNovo'), $data, MCRYPT_MODE_CBC, $iv
 		);
-		$decryptData = trim($descryptData);
-		return base64_decode($decryptData);
+		$decryptData = base64_decode(trim($descryptData));
+		$response = json_decode($decryptData);
+
+		if($service) {
+			$rc = isset($response->rc) ? ' RC: '.$response->rc : '';
+			$msg = isset($response->msg) ? ' MSG: '.$response->msg : '';
+			$country = isset($response->pais) ? ' COUNTRY: '.$response->pais : '';
+			$userName = $CI->session->userdata('userName') != '' ? $CI->session->userdata('userName') : 'NO USERNAME';
+
+			log_message('DEBUG', '['.$userName.'] RESPONSE: '. $service . $rc . $msg . $country);
+		}
+		return $decryptData;
 	}
 }

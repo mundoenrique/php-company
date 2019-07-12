@@ -27,7 +27,8 @@ $(document).ready(function() {
 //LLENA EL COMBO DE EMPRESA
 //--------------------------
 		$("#cargando_empresa").fadeIn("slow");
-		$.getJSON(baseURL + api + isoPais + '/empresas/lista').always(function( data ) {
+		$.getJSON(baseURL + api + isoPais + '/empresas/lista').always(function( response ) {
+			var data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
 			$("#cargando_empresa").fadeOut("slow");
 			if(!(data.ERROR)){
 
@@ -54,7 +55,13 @@ $(document).ready(function() {
 			$("#repEstadosDeCuenta_producto").children( 'option:not(:first)' ).remove();
 			$("#cargando_producto").fadeIn("slow");
 			$(this).attr('disabled',true);
-			$.post(baseURL + api + isoPais + "/producto/lista", { 'acrif': acrif }, function(data){
+			var ceo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
+			var dataRequest = JSON.stringify({'acrif': acrif});
+			dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
+			$.post(baseURL + api + isoPais + "/producto/lista", {request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)}, function(response){
+				var data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
 				$("#cargando_producto").fadeOut("slow");
 				$("#repEstadosDeCuenta_empresa").removeAttr('disabled');
 				if(!data.ERROR){
@@ -183,7 +190,7 @@ $(document).ready(function() {
 
 
 //---------------------------------------------------------
-//FUNCION QUE INICIA LA BUSQUEDA DE Estados de cuenta
+//FUNCION QUE INICIA LA BUSQUEDA DE Estado de cuenta
 //---------------------------------------------------------
 var filtro_busq={};
 function BuscarEstadosdeCuenta(paginaActual){
@@ -224,11 +231,17 @@ function BuscarEstadosdeCuenta(paginaActual){
 
 		filtro_busq.paginaActual=paginaActual;
 
-		$consulta = $.post(baseURL + api + isoPais + "/reportes/estadosdecuenta",filtro_busq );
+		var ceo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
+		filtro_busq.ceo_name = ceo_cook;
+		var dataRequest = JSON.stringify(filtro_busq);
+		dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
+		$consulta = $.post(baseURL + api + isoPais + "/reportes/estadosdecuenta", {request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)} );
 //DE SER EXITOSA LA COMUNICACION CON EL SERVICIO SE EJECUTA EL SIGUIENTE METODO "DONE"
 
- 		$consulta.done(function(data){
-
+ 		$consulta.done(function(response){
+			var data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
 // SE OCULTA EL GIF DE CARGANDO Y SE MUESTRA EL CONTENEDOR DE LA TABLA
 		$("#mensaje").remove();
 		$("#view-results").attr("style","");
@@ -278,7 +291,7 @@ if(buscarReporte){
 
 
 //CREA LA CABECERA DE LA TABLA JUNTO CON LOS ICONOS
-		contenedor.html('<div id="top-batchs"><span aria-hidden="true" class="icon" data-icon="&#xe05c;"></span> Resultados Estados de cuenta </div>');
+		contenedor.html('<div id="top-batchs"><span aria-hidden="true" class="icon" data-icon="&#xe05c;"></span> Resultados Estado de cuenta </div>');
 		div=$(document.createElement("div")).appendTo(contenedor);
 		div.attr("id","view-results");
 		div.attr("style","padding-right:20px;");
@@ -307,6 +320,9 @@ if(buscarReporte){
 			}
 			descargarArchivo(datos, baseURL+api+isoPais+"/reportes/EstadosdeCuentaXLS", "Exportar a EXCEL" );*/
 
+						var ceo_cook = decodeURIComponent(
+							document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+						);
 			$('form#formulario').empty();
     				$('form#formulario').append('<input type="hidden" name="empresa" value="'+filtro_busq.empresa+'" />');
     				$('form#formulario').append('<input type="hidden" name="fechaInicial" value="'+filtro_busq.fechaInicial+'" />');
@@ -318,6 +334,7 @@ if(buscarReporte){
     				$('form#formulario').append('<input type="hidden" name="nomEmpresa" value="'+filtro_busq.acnomcia.replace(","," ")+'" />');
     				$('form#formulario').append('<input type="hidden" name="descProducto" value="'+filtro_busq.productoDesc+'" />');
     				$('form#formulario').attr('action',baseURL+api+isoPais+"/reportes/EstadosdeCuentaXLS");
+						$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'" />');
     				$('form#formulario').submit()
 
 
@@ -347,6 +364,9 @@ if(buscarReporte){
 				descProducto: filtro_busq.productoDesc
 			}
 			descargarArchivo(datos, baseURL+api+isoPais+"/reportes/EstadosdeCuentaPDF", "Exportar a PDF" );*/
+						var ceo_cook = decodeURIComponent(
+							document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+						);
 			$('form#formulario').empty();
     				$('form#formulario').append('<input type="hidden" name="empresa" value="'+filtro_busq.empresa+'" />');
     				$('form#formulario').append('<input type="hidden" name="fechaInicial" value="'+filtro_busq.fechaInicial+'" />');
@@ -358,6 +378,7 @@ if(buscarReporte){
     				$('form#formulario').append('<input type="hidden" name="nomEmpresa" value="'+filtro_busq.acnomcia.replace(","," ")+'" />');
     				$('form#formulario').append('<input type="hidden" name="descProducto" value="'+filtro_busq.productoDesc+'" />');
     				$('form#formulario').attr('action',baseURL+api+isoPais+"/reportes/EstadosdeCuentaPDF");
+						$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'" />');
     				$('form#formulario').submit()
 
 		});
@@ -374,13 +395,17 @@ if(buscarReporte){
 		span.attr("aria-hidden","true");
 		span.attr("class","icon");
 		span.attr("data-icon",'&#xe050;');
-		span.attr("title","Generar Gráfica");
+		span.attr("title","Generar gráfica");
 		span.click(function(){
 
 //SE EJECUTA LA CONSULTA PARA EL GRAFICO
+				var ceo_cook = decodeURIComponent(
+					document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+				);
+				filtro_busq.ceo_name = ceo_cook;
 				$consulta = $.post(baseURL + api + isoPais + "/reportes/EstadosdeCuentaGrafico",filtro_busq );
 // APARECE LA VENTANA DE CARGANDO MIENTRAS SE REALIZA LA CONSULTA
-				$( "#cargando" ).dialog({title:"Ver Gráfica Estados de cuenta",modal:true, width: 200, height: 170});
+				$( "#cargando" ).dialog({title:"Ver Gráfica Estado de cuenta",modal:true, width: 200, height: 170});
 //DE SER EXITOSA LA COMUNICACION CON EL SERVICIO SE EJECUTA EL SIGUIENTE METODO "DONE"
 		 		$consulta.done(function(data){
 
@@ -461,7 +486,7 @@ if(buscarReporte){
 						if(data.rc=='-29'||data.rc=='-61'){
 							alert("Usuario actualmente desconectado"); location.reload();
 						}else{
-							notificacion("Ver Gráfica Estados de cuenta",data.mensaje);
+							notificacion("Ver Gráfica Estado de cuenta",data.mensaje);
 						}
 					}
 
@@ -473,7 +498,7 @@ if(buscarReporte){
 
 		a=$(document.createElement("a")).appendTo(div);
 		a.attr("id","export_mosivo_a");
-		span=$(a).append("<span id = 'export_mosivo' title='Exportar Masivo' data-icon ='&#xe009;' aria-hidden = 'true' class = 'icon'></span>").css("display","none");
+		span=$(a).append("<span id = 'export_mosivo' title='Exportar masivo' data-icon ='&#xe009;' aria-hidden = 'true' class = 'icon'></span>").css("display","none");
 
 		span.attr("aria-hidden","true");
 		span.attr("class","icon");
@@ -494,6 +519,9 @@ if(buscarReporte){
 				descProducto: filtro_busq.productoDesc
 			}
 			descargarArchivo(datos, baseURL+api+isoPais+"/reportes/EstadosdeCuentaMasivo", "Generar Comprobante Masivo" );*/
+						var ceo_cook = decodeURIComponent(
+							document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+						);
 			$('form#formulario').empty();
     				$('form#formulario').append('<input type="hidden" name="empresa" value="'+filtro_busq.empresa+'" />');
     				$('form#formulario').append('<input type="hidden" name="fechaInicial" value="'+filtro_busq.fechaInicial+'" />');
@@ -505,6 +533,7 @@ if(buscarReporte){
     				$('form#formulario').append('<input type="hidden" name="nomEmpresa" value="'+filtro_busq.acnomcia.replace(","," ")+'" />');
     				$('form#formulario').append('<input type="hidden" name="descProducto" value="'+filtro_busq.productoDesc+'" />');
     				$('form#formulario').attr('action',baseURL+api+isoPais+"/reportes/EstadosdeCuentaMasivo");
+						$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'" />');
     				$('form#formulario').submit()
 
 
@@ -615,6 +644,9 @@ if(buscarReporte){
 	 					}
 
 	 					descargarArchivo(datos, baseURL+api+isoPais+"/reportes/EstadosdeCuentaComp", "Generar Comprobante de pago" );*/
+						var ceo_cook = decodeURIComponent(
+							document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+						);
 	 					$('form#formulario').empty();
     				$('form#formulario').append('<input type="hidden" name="empresa" value="'+filtro_busq.empresa+'" />');
     				$('form#formulario').append('<input type="hidden" name="fechaInicial" value="'+filtro_busq.fechaInicial+'" />');
@@ -631,6 +663,7 @@ if(buscarReporte){
     				$('form#formulario').append('<input type="hidden" name="nomEmpresa" value="'+filtro_busq.acnomcia.replace(","," ")+'" />');
     				$('form#formulario').append('<input type="hidden" name="cliente" value="'+$(this).attr("cliente")+'" />');
     				$('form#formulario').attr('action',baseURL+api+isoPais+"/reportes/EstadosdeCuentaMasivo");
+						$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'" />');
     				$('form#formulario').submit()
 
 
@@ -697,8 +730,8 @@ if(buscarReporte){
 		           "sLengthMenu":     "Mostrar _MENU_ registros",
 		           "sZeroRecords":    "No se encontraron resultados",
 		           "sEmptyTable":     "Ningún dato disponible en esta tabla",
-		           "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-		           "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+		           "sInfo":           "Mostrando registros del _START_ al _END_, de un total de _TOTAL_ registros",
+		           "sInfoEmpty":      "Mostrando registros del 0 al 0, de un total de 0 registros",
 		           "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
 		           "sInfoPostFix":    "",
 		           "sSearch":         "Buscar:",
@@ -723,7 +756,7 @@ if(buscarReporte){
 		         }else{
 
 		 			$("#mensaje").remove();
-		 			contenedor.html('<div id="top-batchs"><span aria-hidden="true" class="icon" data-icon="&#xe05c;"></span>Estados de cuenta </div>');
+		 			contenedor.html('<div id="top-batchs"><span aria-hidden="true" class="icon" data-icon="&#xe05c;"></span>Estado de cuenta </div>');
 		 			$("#tabla-datos-general").fadeOut("fast");
 		 			$("#view-results").attr("style","display:none");
 		 			var div =$(document.createElement("div")).appendTo(contenedor);
@@ -864,14 +897,22 @@ function descargarArchivo(datos, url, titulo){
 
 	$aux = $("#cargando").dialog({title:titulo,modal:true, close:function(){$(this).dialog('close')}, resizable:false });
 
+			var ceo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
+			datos.ceo_name = ceo_cook;
 			$.post(url,datos).done(function(data){
     			$aux.dialog('destroy')
     			if(!data.ERROR){
+						var ceo_cook = decodeURIComponent(
+							document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+						);
     				$('form#formulario').empty();
     				$('form#formulario').append('<input type="hidden" name="bytes" value="'+JSON.stringify(data.bytes)+'" />');
     				$('form#formulario').append('<input type="hidden" name="ext" value="'+data.ext+'" />');
     				$('form#formulario').append('<input type="hidden" name="nombreArchivo" value="'+data.nombreArchivo+'" />');
     				$('form#formulario').attr('action',baseURL+isoPais+"/file");
+						$('form#formulario').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'" />');
     				$('form#formulario').submit()
     			}else{
     				if(data.ERROR=="-29"){

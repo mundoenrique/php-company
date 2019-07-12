@@ -1,15 +1,219 @@
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-	/**
-	 * CodeIgniter XML Helpers
-	 *
-	 * @package		CodeIgniter
-	 * @subpackage	Helpers
-	 * @category	Helpers
-	 * @author		ExpressionEngine Dev Team
-	 * @link		http://codeigniter.com/user_guide/helpers/xml_helper.html
-	 */
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+/**
+ * CodeIgniter XML Helpers
+ *
+ * @package		CodeIgniter
+ * @subpackage	Helpers
+ * @category	Helpers
+ * @author		ExpressionEngine Dev Team
+ * @link		http://codeigniter.com/user_guide/helpers/xml_helper.html
+ */
+if(!function_exists('assetPath')) {
+	function assetPath($route = '') {
+		return get_instance()->config->item('asset_path').$route;
+	}
+}
 
-	// ------------------------------------------------------------------------
+if(!function_exists('assetUrl')) {
+	function assetUrl($route = '') {
+		return get_instance()->config->item('asset_url').$route;
+	}
+}
+
+if(!function_exists('countryCheck')) {
+	function countryCheck($country) {
+		$CI = &get_instance();
+
+		switch ($country) {
+			case 'bp':
+				$CI->config->load('config-bp');
+				break;
+			case 'co':
+				$CI->config->load('config-co');
+				break;
+			case 'pe':
+				$CI->config->load('config-pe');
+				break;
+			case 'us':
+				$CI->config->load('config-us');
+				break;
+			case 've':
+				$CI->config->load('config-ve');
+				break;
+			default:
+				redirect('/pe/inicio');
+		}
+	}
+}
+
+if(!function_exists('getFaviconLoader')) {
+	function getFaviconLoader() {
+		$CI = &get_instance();
+		$favicon = $CI->config->item('favicon');
+		$loader = 'loading-';
+		switch($CI->config->item('country')) {
+			case 'Ec-bp':
+				$ext = 'ico';
+				$loader.= 'bp.gif';
+				break;
+			default:
+				$ext = 'png';
+				$loader.= 'novo.gif';
+		}
+
+		$faviconLoader = new stdClass();
+		$faviconLoader->favicon = $favicon;
+		$faviconLoader->ext = $ext;
+		$faviconLoader->loader = $loader;
+
+		return $faviconLoader;
+	}
+}
+
+if(!function_exists('accessLog')) {
+	function accessLog($dataAccessLog) {
+		$CI = &get_instance();
+		$sessionId = $CI->session->userdata('sessionId') ? $CI->session->userdata('sessionId') : '';
+		$userName = $CI->session->userdata('userName') ? $CI->session->userdata('userName') : $dataAccessLog->userName;
+		return $accessLog = [
+			"sessionId"=> $sessionId,
+			"userName" => $userName,
+			"canal" => $CI->config->item('channel'),
+			"modulo"=> $dataAccessLog->modulo,
+			"function"=> $dataAccessLog->function,
+			"operacion"=> $dataAccessLog->operation,
+			"RC"=> 0,
+			"IP"=> $CI->input->ip_address(),
+			"dttimesstamp"=> date('m/d/Y H:i'),
+			"lenguaje"=> strtoupper(LANGUAGE)
+		];
+	}
+}
+
+if(!function_exists('urlReplace')) {
+	function urlReplace($countryUri, $countrySess, $url) {
+		$CI = &get_instance();
+		switch($countrySess) {
+			case 'Ec-bp':
+				$country = 'bp';
+				break;
+			case 'Co':
+				$country = 'co';
+				break;
+			case 'Pe':
+				$country = 'pe';
+				break;
+			case 'Usd':
+				$country = 'us';
+				break;
+			case 'Ve':
+				$country = 've';
+				break;
+		}
+		return str_replace($countryUri, $country, $url);
+	}
+}
+
+if(!function_exists('maskString')) {
+	function maskString($string, $start = 1, $end = 1, $type = NULL) {
+		$type = $type ? $type : '';
+		$length = strlen($string);
+		return substr($string, 0, $start).str_repeat('*', 3).$type.str_repeat('*', 3).substr($string, $length - $end, $end);
+	}
+}
+
+if(!function_exists('createMenu')) {
+	function createMenu($menuP) {
+		$menuData = unserialize($menuP);
+		$levelOneOpts = [];
+		if($menuData==NULL||!isset($menuData))
+			return $levelOneOpts;
+		foreach($menuData as $function) {
+			$levelTwoOpts = [];
+			$levelThreeOpts = [];
+			$seeLotFact = FALSE;
+			foreach($function->modulos as $module) {
+				if($module->idModulo==='TEBAUT')
+					$seeLotFact = TRUE;
+				if($module->idModulo==='LOTFAC'&&!$seeLotFact)
+					continue;
+				$moduleOpt = [
+					'route' => menuRoute($module->idModulo, $seeLotFact),
+					'text' => lang($module->idModulo)
+				];
+				if($module->idModulo==='TICARG'||$module->idModulo==='TIINVN')
+					$levelThreeOpts[] = $moduleOpt;
+				else
+					$levelTwoOpts[] = $moduleOpt;
+			}
+			if(!empty($levelThreeOpts))
+				$levelTwoOpts[] = [
+					'route' => '#',
+					'text' => 'Cuentas innominadas',
+					'suboptions' => $levelThreeOpts
+				];
+			$levelOneOpts[] = [
+				'icon' => menuIcon($function->idPerfil),
+				'text' => lang($function->idPerfil),
+				'suboptions' => $levelTwoOpts
+			];
+		}
+		return $levelOneOpts;
+	}
+}
+
+if(!function_exists('menuIcon')) {
+	function menuIcon($functionId) {
+		switch ($functionId) {
+			case 'CONSUL': return "&#xe072;";
+			case 'GESLOT': return "&#xe03c;";
+			case 'SERVIC': return "&#xe019;";
+			case 'GESREP': return "&#xe021;";
+			case 'COMBUS': return "&#xe08e;";
+		}
+		return '';
+	}
+}
+
+if(!function_exists('menuRoute')) {
+	function menuRoute($functionId, $seeLotFact) {
+		$CI = &get_instance();
+		$country = $CI->config->item('country');
+		$countryUri = $CI->config->item('countryUri');
+		switch ($functionId) {
+			case 'TEBCAR': return base_url($country."/lotes/carga");
+			case 'TEBAUT': return base_url($country."/lotes/autorizacion");
+			case 'TEBGUR': return base_url($country."/lotes/reproceso");
+			case 'TICARG': return base_url($country."/lotes/innominada");
+			case 'TIINVN': return base_url($country."/lotes/innominada/afiliacion");
+			case 'TEBTHA': return base_url($country."/reportes/tarjetahabientes");
+			case 'TEBORS': return base_url($country."/consulta/ordenes-de-servicio");
+			case 'TRAMAE': return base_url($country."/servicios/transferencia-maestra");
+			case 'CONVIS': return base_url($country."/controles/visa");
+			case 'PAGPRO': return base_url($country."/pagos");
+			case 'TEBPOL': return base_url($country."/servicios/actualizar-datos");
+			case 'CMBCON': return base_url($country."/trayectos/conductores");
+			case 'CMBVHI': return base_url($country."/trayectos/gruposVehiculos");
+			case 'CMBCTA': return base_url($country."/trayectos/cuentas");
+			case 'CMBVJE': return base_url($country."/trayectos/viajes");
+			case 'REPTAR': return base_url($country."/reportes/tarjetas-emitidas");
+			case 'REPPRO': return base_url($country."/reportes/recargas-realizadas");
+			case 'REPLOT': return base_url($country."/reportes/estatus-lotes");
+			case 'REPUSU': return base_url($country."/reportes/actividad-por-usuario");
+			case 'REPCON': return base_url($country."/reportes/cuenta-concentradora");
+			case 'REPSAL': return base_url($country."/reportes/saldos-al-cierre");
+			case 'REPREP': return base_url($country."/reportes/reposiciones");
+			case 'REPCAT': return base_url($country."/reportes/gastos-por-categorias");
+			case 'REPEDO': return base_url($country."/reportes/estados-de-cuenta");
+			case 'REPPGE': return base_url($country."/reportes/guarderia");
+			case 'REPRTH': return base_url($country."/reportes/comisiones");
+			case 'LOTFAC': if ($seeLotFact) return base_url($country."/consulta/lotes-por-facturar");
+		}
+		return '#';
+	}
+}
+
 	if ( ! function_exists('np_hoplite_log')) {
 		/**
 		 * Helper que lanza la descarga de un documento que arma el objeto logAccesoObject y lo retorna
@@ -55,20 +259,27 @@
 
 			switch ($countryISO) {
 				case 'Ve':
+				case 've':
 					$CI->config->load('ve-config');
 					break;
 				case 'Co':
+				case 'co':
 					$CI->config->load('co-config');
 					break;
 				case 'Pe':
+				case 'pe':
 					$CI->config->load('pe-config');
 					break;
 				case 'Usd':
+				case 'us':
 					$CI->config->load('usd-config');
+					break;
+				case 'Ec-bp':
+				case 'bp':
+					$CI->config->load('ec-bp-config');
 					break;
 				default:
 					redirect('/Pe/login');
-					break;
 			}
 		}
 	}
@@ -271,7 +482,7 @@
 						if($submenu->idModulo == "TICARG"||$submenu->idModulo == "TIINVN"){
 							if($menuBoolean == false) {
 								$opMenuSubmenu.= "<li>
-													<a href='#'>Innominadas</a>
+													<a href='#'>Cuentas innominadas</a>
 													SUBMENU-INNO
 												</li>";
 								$menuBoolean = true;
@@ -404,5 +615,13 @@
 			}
 
 			// return $CI->session->userdata('pais');
+		}
+	}
+
+	if(!function_exists('mask_account')) {
+		function mask_account($account, $start = 1, $end = 1){
+			$CI = &get_instance();
+			$len = strlen($account);
+			return substr($account, 0, $start).str_repeat('*', $len - ($start + $end)).substr($account, $len - $end, $end);
 		}
 	}

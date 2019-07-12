@@ -1,16 +1,17 @@
 <?php
-$lang['TITULO_TRANSMAESTRA']="Transferencia Maestra";
+defined('BASEPATH') OR exit('No direct script access allowed');
+$lang['TITULO_TRANSMAESTRA']="Transferencia maestra";
 
-$lang['CRITERIOS_BUSQUEDA'] = 'Criterios de Búsqueda';
-$lang['SEL_EMPRESA'] = 'Selección de empresa';
-$lang['SEL_OPTION_EMP'] = 'Seleccione una empresa';
-$lang['NRO_TARJETA'] = 'Número de Tarjeta';
+$lang['CRITERIOS_BUSQUEDA'] = 'Criterio de búsqueda';
+$lang['SEL_EMPRESA'] = 'Empresa';
+$lang['SEL_OPTION_EMP'] = 'Selecciona una empresa';
+$lang['NRO_TARJETA'] = 'Número de tarjeta';
 $lang['BUSCAR'] = 'Buscar';
 $lang['RESULTADOS'] = 'Resultados';
 $lang['CARGO'] = 'Cargo';
-$lang['CONSULTA'] = 'Consulta';
+$lang['CONSULTA'] = 'Consultar';
 $lang['ABONO'] = 'Abono';
-$lang['PLACEHOLDER_PASS']='Ingrese su contraseña';
+$lang['PLACEHOLDER_PASS']='Ingresa tu contraseña';
 $lang['INGRESE_NOTARJETA']='Ingrese número';
 $lang['ESTATUS'] ='Estatus';
 $lang['NOMBRE']='Nombre';

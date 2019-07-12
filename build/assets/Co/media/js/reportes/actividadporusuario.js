@@ -1,9 +1,10 @@
 $(function() {
 
-var params={};
+	var params={};
 
     $("#cargando_empresa").fadeIn("slow");
-    $.getJSON(baseURL + api + isoPais + '/empresas/lista').always(function( data ) {
+    $.getJSON(baseURL + api + isoPais + '/empresas/lista').always(function(response) {
+			data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
     $("#cargando_empresa").fadeOut("slow");
       if(!data.ERROR){
           $.each(data.lista, function(k,v){
@@ -89,12 +90,18 @@ $("#empresa").on('change', function(){
         $(this).hide();
         $('.resultadosAU').hide();
 
-        params.fecha_ini = $("#fecha_ini").val();
-        params.fecha_fin = $("#fecha_fin").val();
-        params.acodcia = $("#empresa").val();
-
-          $.post(baseURL + api + isoPais + "/reportes/actividadporusuario", {"data-fechaIni": $("#fecha_ini").val(),"data-fechaFin": $("#fecha_fin").val(), "data-acodcia":$("#empresa").val()})
-          .always(function(data){
+				var ceo_cook = decodeURIComponent(
+					document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+				);
+				var dataRequest = JSON.stringify ({
+					data_fechaIni: $("#fecha_ini").val(),
+					data_fechaFin: $("#fecha_fin").val(),
+					data_acodcia: $("#empresa").val()
+				})
+					dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
+					$.post(baseURL + api + isoPais + "/reportes/actividadporusuario", {request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)})
+          .always(function(response){
+						data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
             $('#cargando').hide();
             $("#btnBuscar").show();
             $('.resultadosAU').show();
@@ -172,8 +179,8 @@ $("#empresa").on('change', function(){
             "sLengthMenu":     "Mostrar _MENU_ registros",
             "sZeroRecords":    "No se encontraron resultados",
             "sEmptyTable":     "Ningún dato disponible en esta tabla",
-            "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-            "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+            "sInfo":           "Mostrando registros del _START_ al _END_, de un total de _TOTAL_ registros",
+            "sInfoEmpty":      "Mostrando registros del 0 al 0, de un total de 0 registros",
             "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
             "sInfoPostFix":    "",
             "sSearch":         "Buscar:",
@@ -267,8 +274,13 @@ $('#table-activ-user').on('click', '.vA', function(){
 
    descargarArchivo(datos, baseURL + api + isoPais + "/reportes/downPDFactividadUsuario", "Descargando archivo PDF" );
 */
+var ceo_cook = decodeURIComponent(
+	document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+	);
 $('#exportTo').attr('action', baseURL + api + isoPais + "/reportes/downPDFactividadUsuario");
-    $('#data-fechaIni').val(params.fecha_ini);
+
+		$('#exportTo').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'">');
+		$('#data-fechaIni').val(params.fecha_ini);
     $('#data-fechaFin').val(params.fecha_fin);
     $('#data-acodcia').val(params.acodcia);
     $('#data-acrif').val(params.acrif);
@@ -288,8 +300,13 @@ $('#exportTo').attr('action', baseURL + api + isoPais + "/reportes/downPDFactivi
    descargarArchivo(datos, baseURL + api + isoPais + "/reportes/downXLSactividadUsuario", "Descargando archivo excel" );
 */
 
+		var ceo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
+
   $('#exportTo').attr('action', baseURL + api + isoPais + "/reportes/downXLSactividadUsuario");
-    $('#data-fechaIni').val(params.fecha_ini);
+	$('#exportTo').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'">');
+	$('#data-fechaIni').val(params.fecha_ini);
     $('#data-fechaFin').val(params.fecha_fin);
     $('#data-acodcia').val(params.acodcia);
     $('#data-acrif').val(params.acrif);
@@ -302,10 +319,19 @@ $('#exportTo').attr('action', baseURL + api + isoPais + "/reportes/downPDFactivi
 
   $aux = $("#loadImg").dialog({title:titulo,modal:true, close:function(){$(this).dialog('close')}, resizable:false });
 
+			var ceo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
+			datos.ceo_name = ceo_cook
+
       $.post(url,datos).done(function(data){
-          $aux.dialog('destroy')
+					$aux.dialog('destroy')
+					var ceo_cook = decodeURIComponent(
+						document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+					);
           if(!data.ERROR){
-            $('#exportTo').empty();
+						$('#exportTo').empty();
+						$('#exportTo').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'">');
             $('#exportTo').append('<input type="hidden" name="bytes" value="'+JSON.stringify(data.bytes)+'" />');
             $('#exportTo').append('<input type="hidden" name="ext" value="'+data.ext+'" />');
             $('#exportTo').append('<input type="hidden" name="nombreArchivo" value="'+data.nombreArchivo+'" />');

@@ -1,4 +1,5 @@
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * CodeIgniter XML Helpers
  *
@@ -18,12 +19,16 @@ if ( ! function_exists('np_Hoplite_GetWS')) {
 	 * @param  json $cryptDataBase64
 	 * @return json
 	 */
-	function np_Hoplite_GetWS($nameWS,$cryptDataBase64)
+	function np_Hoplite_GetWS($nameWS, $cryptDataBase64)
 	{
-		log_message("DEBUG","INICIANDO LLAMADO WS: ".$nameWS);
+		$getPais = json_decode($cryptDataBase64);
+		$pais = $getPais->pais;
+
 		$CI =& get_instance();
 		$urlcurlWS=$CI->config->item('urlWS').$nameWS;
-		log_message("INFO",$urlcurlWS);
+
+		log_message('DEBUG', 'BY COUNTRY: '.$pais.', AND WEBSERVICE URL: '.$urlcurlWS);
+
 		$ch = curl_init();
 		$dataPost = $cryptDataBase64;
 		curl_setopt($ch, CURLOPT_URL, $urlcurlWS);
@@ -36,10 +41,10 @@ if ( ! function_exists('np_Hoplite_GetWS')) {
 		);
 		$response = curl_exec($ch);
 		$httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-		log_message("ERROR","CURL HTTP CODE: " . $httpCode);
-		if($httpCode==404){
+		log_message("DEBUG","CURL HTTP CODE: " . $httpCode);
+		if(!$httpCode || $httpCode != 200) {
 			return FALSE;
-		}else{
+		} else {
 			return $response;
 		}
 
@@ -56,7 +61,7 @@ if ( ! function_exists('GetAPIServ')) {
 	function GetAPIServ($urlAPI, $headerAPI, $bodyAPI, $method)
 	{
 		$CI =& get_instance();
-		log_message("INFO", "INICIANDO LLAMADO API POR EL METODO:===>>> " . $method);
+		log_message("DEBUG", "INICIANDO LLAMADO API POR EL METODO:===>>> " . $method);
 		$header = [
 			'Content-Type: application/json',
 		];
@@ -67,7 +72,7 @@ if ( ! function_exists('GetAPIServ')) {
 		}
 
 		$urlcurlAPI = $CI->config->item('urlAPI') . $urlAPI;
-		log_message("INFO", "URL API: " . $urlcurlAPI);
+		log_message("DEBUG", "URL API: " . $urlcurlAPI);
 
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, $urlcurlAPI);
@@ -116,7 +121,7 @@ if ( ! function_exists('GetCeoApi')) {
 		}
 
 		$urlcurlAPI = $CI->config->item('urlServ') . 'ceoapi/1.0/' . $urlAPI;
-		log_message("INFO", "URL API: " . $urlcurlAPI);
+		log_message("DEBUG", "URL API: " . $urlcurlAPI);
 
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, $urlcurlAPI);

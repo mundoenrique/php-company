@@ -2,6 +2,7 @@
 $(function() { // Document ready
 
 var f, dir, forma;
+var ceo_cook;
 
 
  // $('thead').hide();
@@ -33,12 +34,26 @@ var f, dir, forma;
                 .click(function () {
 
                   if( $("#tipoLote").val() != ""  ){
-                    $("#cargaLote").replaceWith('<h3 id="cargando">Cargando...</h3>');
-                    dat.formData = {'data-tipoLote':$("#tipoLote").val(), 'data-formatolote':$("#tipoLote option:selected").attr('rel')};
-                    dat.submit().success( function (result, textStatus, jqXHR){
+										$("#cargaLote").replaceWith('<h3 id="cargando">Cargando...</h3>');
 
+										ceo_cook = decodeURIComponent(
+											document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+										);
+										var paquete = {
+											data_tipoLote: $("#tipoLote").val(),
+											data_formatolote: $("#tipoLote option:selected").attr('rel')
+										};
+										var dataRequest = JSON.stringify(paquete)
+										dataRequest  = CryptoJS.AES.encrypt(dataRequest , ceo_cook, {format: CryptoJSAesJson}).toString();
+										dat.formData = {
+											request: dataRequest,
+											ceo_name: ceo_cook,
+											plot: btoa(ceo_cook)
+										}
+										dat.submit().done(function (response, textStatus, jqXHR) {
+											result = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
                       if(result){
-                        result = $.parseJSON(result);
+                        //result = $.parseJSON(result);
 
                         if(!result.ERROR){
                           mostrarError(result);
@@ -56,7 +71,7 @@ var f, dir, forma;
                       $('#archivo').val("");
                     });
                   }else{
-                    notificacion("Cargando archivo","Seleccione un tipo de lote");
+                    notificacion("Cargando archivo","Selecciona un tipo de lote");
                   }
                 });
             }else{
@@ -119,9 +134,10 @@ if(!$("#table-text-lotes").hasClass('dataTable')){
 $('#actualizador').show();
 }
   $.get(baseURL+api+isoPais+"/lotes/lista/pendientes",
-    function(data){
-
-
+	function (response) {
+		data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {
+			format: CryptoJSAesJson
+		}).toString(CryptoJS.enc.Utf8))
       var icon, batch, color, title;
 
       if(!data.result.ERROR){
@@ -160,7 +176,7 @@ $('#actualizador').show();
 
         batch = "<tr><td id='icon-batchs' class="+color+"><span aria-hidden='true' class='icon' data-icon=''></span></td>";
         batch += "<td>"+v.numLote+"</td><td id='td-nombre'>"+v.nombreArchivo+"</td><td class='field-date'>"+v.fechaCarga+"</td><td>"+v.descripcion+"</td>";
-        batch += "<td id='icons-options'><a "+elimina+" id='borrar' title='Eliminar lote' data-idTicket="+v.idTicket+" data-idLote='"+v.idLote+"' data-arch='"+v.nombreArchivo+"'><span aria-hidden='true' class='icon' data-icon='&#xe067;'></span></a>";
+        batch += "<td id='icons-options'><a "+elimina+" id='borrar' title='Eliminar Lote' data-idTicket="+v.idTicket+" data-idLote='"+v.idLote+"' data-arch='"+v.nombreArchivo+"'><span aria-hidden='true' class='icon' data-icon='&#xe067;'></span></a>";
         batch += "<a "+confirma+" id='detalle' title='"+title+"' data-idTicket="+v.idTicket+" data-edo="+v.estatus+" data-forma="+forma+"><span aria-hidden='true' class='icon' data-icon="+icon+"></span></a></td></tr>";
 
         $("#actualizador").hide();
@@ -178,8 +194,8 @@ $('#actualizador').show();
             "sLengthMenu":     "Mostrar _MENU_ registros",
             "sZeroRecords":    "No se encontraron resultados",
             "sEmptyTable":     "Ningún dato disponible en esta tabla",
-            "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-            "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+            "sInfo":           "Mostrando registros del _START_ al _END_, de un total de _TOTAL_ registros",
+            "sInfoEmpty":      "Mostrando registros del 0 al 0, de un total de 0 registros",
             "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
             "sInfoPostFix":    "",
             "sSearch":         "Buscar:",
@@ -228,7 +244,7 @@ $("#table-text-lotes").on("click","#borrar",
     var lote = $(this).attr("data-idLote");
     var arch = $(this).attr("data-arch");
 
-    confirmar( $(this).parents('tr'), ticket, lote, arch, "Eliminar lote" );
+    confirmar( $(this).parents('tr'), ticket, lote, arch, "Eliminar Lote" );
 
   }
 );
@@ -240,7 +256,7 @@ $("#table-text-lotes").on("click","#borrar",
 
       var canvas = "<div id='dialog-confirm'>";
       canvas +="<p>Nombre: "+arch+"</p>";
-      canvas += "<fieldset><input type='password' id='pass' size=30 placeholder='Ingrese su contraseña' class='text ui-widget-content ui-corner-all'/>";
+      canvas += "<fieldset><input type='password' id='pass' size=30 placeholder='Ingresa tu contraseña' class='text ui-widget-content ui-corner-all'/>";
       canvas += "<h5 id='msg'></h5></fieldset></div>";
 
       var pass;
@@ -260,9 +276,19 @@ $("#table-text-lotes").on("click","#borrar",
               $('#pass').val( '' );
               $(this).dialog('destroy');
               var $aux = $('#loading').dialog({title:"Eliminando lote",modal: true, resizable:false, close:function(){$aux.dialog('close');}});
-              $.post(baseURL+api+isoPais+"/lotes/eliminar", {'data-idTicket':ticket, 'data-idLote':lote, 'data-pass':pass}).done(
-                function(data){
 
+							ceo_cook = decodeURIComponent(
+								document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+							);
+							var dataRequest = JSON.stringify ({
+								data_idTicket: ticket,
+								data_idLote: lote,
+								data_pass: pass,
+							})
+							dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
+							$.post(baseURL + api + isoPais + "/lotes/eliminar",  {request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)}).done(
+							function (response) {
+								data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
                 $aux.dialog('destroy');
 
                 if(!data.ERROR){
@@ -281,7 +307,7 @@ $("#table-text-lotes").on("click","#borrar",
               });
 
             }else{
-              $(this).find( $('#msg') ).text('Debe ingresar su contraseña');
+              $(this).find( $('#msg') ).text('Debes ingresar tu contraseña');
             }
 
           }
@@ -299,16 +325,21 @@ $("#table-text-lotes").on("click", "#detalle",
   function(){
     var estado = $(this).attr("data-edo");
     var ticket = $(this).attr("data-idTicket");
+		ceo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
 
-    if(estado=="1"){
-      $("form#confirmar").append('<input type="hidden" name="data-estado" value="'+estado+'" />');
-      $("form#confirmar").append('<input type="hidden" name="data-idTicket" value="'+ticket+'" />');
-      $("form#confirmar").submit();
-    }else if(estado=="5") {
-      $("form#detalle").append('<input type="hidden" name="data-estado" value="'+estado+'" />');
-      $("form#detalle").append('<input type="hidden" name="data-idTicket" value="'+ticket+'" />');
-      $("form#detalle").submit();
-    }
+		if (estado == "1") {
+			$("form#confirmar").append('<input type="hidden" name="ceo_name" value="' + ceo_cook + '" />');
+			$("form#confirmar").append('<input type="hidden" name="data-estado" value="' + estado + '" />');
+			$("form#confirmar").append('<input type="hidden" name="data-idTicket" value="' + ticket + '" />');
+			$("form#confirmar").submit();
+		} else if (estado == "5") {
+			$("form#detalle").append('<input type="hidden" name="ceo_name" value="' + ceo_cook + '" />');
+			$("form#detalle").append('<input type="hidden" name="data-estado" value="' + estado + '" />');
+			$("form#detalle").append('<input type="hidden" name="data-idTicket" value="' + ticket + '" />');
+			$("form#detalle").submit();
+		}
 
 });
 

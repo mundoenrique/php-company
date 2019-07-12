@@ -1,4 +1,7 @@
 <?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+$lang['WELCOME_TITLE']='Bienvenido a Conexión Empresas Online';
+$lang['WELCOME_MESSAGE']='Con este sistema las gestiones de pago de tu empresa son más eficientes, seguras y rápidas. Empieza a disfrutar de todas las ventajas que te ofrece Conexión Empresas Online.';
 $lang['WIDGET_LOGIN_TITLE']="Cliente afiliado Perú";
 $lang['WIDGET_ADDCLIENT_TITLE']="Nuevo Cliente";
 
@@ -14,8 +17,8 @@ $lang['MSG_BLOQUEAR_USER'] = 'El usuario será bloqueado al próximo intento fal
 
 //TERMINOS Y CONDICIONES
 $lang['MSG_CONFIR_EXIT'] = 'Para continuar, debe aceptar los términos y condiciones de uso. De lo contrario será dirigido a la página inicial';
-$lang['MSG_NEW_PASS_USER'] = 'Por motivos de seguridad es necesario que cambie su contraseña la primera vez que ingresa a nuestro sistema "Conexión Empresas Online"';
-$lang['MSG_NEW_PASS_CADU'] = 'Clave vencida. Por motivos de seguridad es necesario que cambie su contraseña antes de continuar en nuestro sistema "Conexión Empresas Online"';
+$lang['MSG_NEW_PASS_USER'] = 'Por motivos de seguridad es necesario que cambie su contraseña la primera vez que ingresa a nuestro sistema "Conexión Empresas Online".';
+$lang['MSG_NEW_PASS_CADU'] = 'Clave vencida. Por motivos de seguridad es necesario que cambie su contraseña antes de continuar en nuestro sistema "Conexión Empresas Online".';
 
 //CONFIGURACION
 $lang['CARGANDO'] = 'Cargando...';
@@ -41,14 +44,14 @@ $lang['BOTON_MOD_USER'] = 'Modificar datos de usuario';
 $lang['BOTON_CAMBIO_CLAVE'] = 'Cambiar contraseña';
 
 // TAB EMPRESA
-$lang['EMP_TITLE_CONFIG'] = 'Configuración de empresa';
+$lang['EMP_TITLE_CONFIG'] = 'Configuración de la empresa';
 $lang['EMP_CARGANDO'] = 'Cargando...';
-$lang['EMP_IDENTIFICADOR'] = 'Identificador empresa';
+$lang['EMP_IDENTIFICADOR'] = 'Nro. identificador:';
 $lang['EMP_NOMBRE'] = 'Nombre: ';
 $lang['EMP_RAZON_SOCIAL'] = 'Razón social: ';
 $lang['EMP_CONTACTO'] = 'Contacto: ';
-$lang['EMP_DIR_UBICACION'] = 'Direccion ubicación: ';
-$lang['EMP_DIR_FACTURACION'] = 'Direccion facturación: ';
+$lang['EMP_DIR_UBICACION'] = 'Dirección: ';
+$lang['EMP_DIR_FACTURACION'] = 'Direccion de facturación: ';
 $lang['TITLE_TELEFONO1'] = 'Teléfono 1: ';
 $lang['TITLE_TELEFONO2'] = 'Teléfono 2: ';
 $lang['TITLE_TELEFONO3'] = 'Teléfono 3: ';
@@ -58,7 +61,7 @@ $lang['EMP_BTN_ADD_CONTACT'] = 'Agregar';
 $lang['EMP_BTN_ELIM_CONTACT'] = 'Eliminar';
 $lang['EMP_BTN_MODIF_CONTACT'] = 'Modificar';
 $lang['EMP_BTN_AGREGAR_CONTACT'] = 'Añadir';
-$lang['EMP_BTN_AGREGAR_CONTACT_EMPRESA'] = 'Agregar Contacto';
+$lang['EMP_BTN_AGREGAR_CONTACT_EMPRESA'] = 'Agregar contacto';
 $lang['EMP_BTN_LIMPIAR_CONTACT'] = 'Limpiar';
 $lang['EMP_ID'] = 'ID';
 $lang['EMP_CONTACT_TIPO'] = 'Tipo';
@@ -76,8 +79,8 @@ $lang['SUC_ESTADO'] = 'Departamento: ';
 $lang['SUC_CIUDAD'] = 'Provincia: ';
 $lang['SUC_TELEFONO'] = 'Teléfono: ';
 $lang['SUC_CONTACTO'] = 'Contacto: ';
-$lang['SUC_AREA'] = 'Código de Área: ';
-$lang['SUC_CODIGO'] = 'Sucursal Cod.: ';
+$lang['SUC_AREA'] = 'Código de área: ';
+$lang['SUC_CODIGO'] = 'Cód. de sucursal: ';
 $lang['SUC_BTN_MODIFICAR'] = 'Modificar';
 $lang['SUC_BTN_NEW_SUC'] = 'Nueva sucursal';
 $lang['SUC_BTN_NEW_MASV'] = 'Subir archivo';
