@@ -84,8 +84,25 @@ function validateForms(form, options) {
 			"email": {pattern: emailValid},
 			"new-pass": {differs: "#current-pass", validatePass: true},
 			"confirm-pass": {equalTo: "#new-pass"},
-			"user_login": {pattern: alphanumunder},
-			"user_pass": {pattern: userPassword},
+			"user_login":{
+				required: {
+        	depends:function(){
+            $(this).val($.trim($(this).val()));
+            	return true;
+        	}
+				},
+				pattern: alphanumunder
+			},
+
+			"user_pass":{
+				required: {
+        	depends:function(){
+            $(this).val($.trim($(this).val()));
+            	return true;
+        		}
+				},
+				pattern: userPassword
+			},
 			"tipo_lote_select": {pattern: numeric},
 			"user-password": {pattern: userPassword},
 			"user-password-1": {pattern: userPassword},
