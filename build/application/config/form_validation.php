@@ -5,7 +5,7 @@ $config = [
 		[
 			'field' => 'user',
 			'label' => 'user',
-			'rules' => 'trim|regex_match[/^([\wñÑ]+)+$/i]|required'
+			'rules' => 'trim|regex_match[/^([\wñÑ.\-+&]+)+$/i]|required'
 		],
 		[
 			'field' => 'token',
@@ -17,7 +17,7 @@ $config = [
 		[
 			'field' => 'user',
 			'label' => 'user',
-			'rules' => 'trim|regex_match[/^([\wñÑ]+)+$/i]|required'
+			'rules' => 'trim|regex_match[/^([\wñÑ.\-+&]+)+$/i]|required'
 		],
 		[
 			'field' => 'pass',

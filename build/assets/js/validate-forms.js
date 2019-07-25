@@ -9,7 +9,7 @@ function validateForms(form, options) {
 	var middlePhrase = /^['a-z0-9ñáéíóú ().']{15,45}$/i;
 	var longPhrase = /^['a-z0-9ñáéíóú ().']{10,70}$/i;
 	var emailValid = /^([a-zA-Z]+[0-9_.+-]*)+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-	var alphanumunder = /^[\wñ]+$/i;
+	var alphanumunder = /^([\w.\-+&ñÑ]+)+$/i;
 	var alphanum = /^[a-z0-9]+$/i;
 	var userPassword = /^[\w!@\*\-\?¡¿+\/.,#]+$/;
 	var numeric = /^[0-9]+$/;
