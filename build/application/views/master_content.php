@@ -107,13 +107,9 @@
       <span id="system-msg" class="system-msg"></span>
     </p>
     <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-      <div class="ui-dialog-buttonset">
-				<button type="button" id="cancel" class="cancel-button"></button>
-				<?php if($countryUri == 'bp'):?>
-				<button type="button" id="accept" class="novo-btn-primary" style="margin-right:80px;"></button>
-				<?php else: ?>
-				<button type="button" id="accept" class="novo-btn-primary"></button>
-				<?php endif;?>
+      <div class="ui-dialog-buttonset novo-dialog-buttonset">
+				<button type="button" id="cancel" class="cancel-button novo-btn-secondary-modal dialog-buttons"></button>
+				<button type="button" id="accept" class="novo-btn-primary-modal dialog-buttons"></button>
       </div>
     </div>
   </div>
