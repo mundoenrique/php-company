@@ -39,7 +39,7 @@ class Information extends NOVO_Controller {
 			$newUser = TRUE;
 			$this->session->set_flashdata('changePassword', $this->session->flashdata('changePassword'));
 			$this->session->set_flashdata('userType', $this->session->flashdata('userType'));
-			$this->render->message = "Estimado usuario debe leer y aceptar los términos de uso y confidencialidad para "; $this->render->message.= "comenzar a usar nuestra plataforma.";
+			$this->render->message = "Estimado usuario debes leer y aceptar los términos de uso y confidencialidad para "; $this->render->message.= "comenzar a usar nuestra plataforma.";
 		}
 		$this->render->titlePage = 'Condiciones';
 		$this->render->referer = $this->input->server('HTTP_REFERER');

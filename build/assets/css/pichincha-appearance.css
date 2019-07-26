@@ -34,14 +34,6 @@
 			 url('../fonts/bp/preloslab-semibold-webfont.ttf') format('truetype');
 }
 
-@font-face {
-	font-family: "novoglyphs";
-  src: url('../fonts/bp/novoglyphs-webfont.eot');
-  src: url('../fonts/bp/novoglyphs-webfont.eot?#iefix') format('eot'), url('../fonts/bp/novoglyphs-webfont.woff') format('woff'), url('../fonts/bp/novoglyphs-webfont.ttf') format('truetype'), url('../fonts/bp/novoglyphs-webfont.svg') format('svg');
-  font-weight: normal;
-  font-style: normal;
-}
-
 body {
 	background: #fff;
 	color: #72787A;
@@ -4287,15 +4279,6 @@ a.cancel-anchor:hover {
 	color: #10133f;
 }
 
-.cancel-button:hover {
-	background: transparent;
-	-webkit-box-shadow: none;
-	-moz-box-shadow: none;
-	box-shadow: none;
-	font-weight: normal;
-	color: #f04848;
-}
-
 #content-products>#camposBenef {
 	display: none;
 }
@@ -4766,25 +4749,28 @@ li.ui-state-default.ui-corner-top:nth-child(3) {
 	width:68px;
 	padding-left:15px;
 	padding-right:15px;
+	text-align: center;
 }
 
-.novo-btn-primary:hover{
-	/* background: url('../img/BackgroundButtonHover.png') left center no-repeat #ffdd00; */
+.dialog-buttons {
+	padding-left:0;
+	padding-right:0;
+	padding-left:0;
+	padding-right:0;
 }
+
 .novo-btn-primary:active{
 	background: #ffd000;
 }
 .novo-btn-primary-modal:hover{
-	background: url('../img/BackgroundButtonHover.png') left center no-repeat #ffdd00;
+	background: url('../images/BackgroundButtonHover.png') left center no-repeat #ffdd00;
 }
 
 .novo-btn-secondary,.novo-btn-secondary-modal{
 	border: 1px solid #ffdd00;
-	background:white !important;
+	background: #FFF !important;
 }
-/* .novo-btn-secondary-modal{
-	background:white;
-} */
+
 .novo-btn-secondary:hover{
 	border: 1px solid #ffdd00 !important;
 	background-color: #fffede !important;

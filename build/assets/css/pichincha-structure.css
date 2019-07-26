@@ -970,7 +970,12 @@ button.ui-button::-moz-focus-inner {
 
 .ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset {
 	float: right;
+}
 
+.ui-dialog .ui-dialog-buttonpane .novo-dialog-buttonset {
+	float: none;
+	width: 150px;
+	margin: 0 auto;
 }
 
 .ui-dialog .ui-dialog-buttonpane button {
@@ -1456,7 +1461,6 @@ button.r-button {
 }
 
 .cancel-button {
-	float: right;
 	margin-left: 15px;
 }
 

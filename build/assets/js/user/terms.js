@@ -2,7 +2,7 @@
 $(function() {
 	$('#terms').on('click', function() {
 		title = prefixCountry + strCountry;
-		msg = 'Al presionar "Aceptar" declara que ha leído y aceptado los términos de uso de nuestra plataforma.';
+		msg = 'Al presionar "Aceptar" declaras que has leído y aceptado los términos de uso de nuestra plataforma..';
 		icon = iconInfo;
 		data = {
 			btn1: {

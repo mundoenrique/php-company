@@ -16,12 +16,11 @@
 			<?php endif; ?>
 			<div class="widget-content">
 				<form id="login-form" name="login-form" accept-charset="utf-8">
-					<input type="hidden" id="<?= $novoName; ?>" class="ignore" value="<?= $novoCook; ?>">
 					<fieldset>
 						<label for="user_login">Usuario</label>
-						<input type="text" id="user_login" name="user_login" placeholder="Usuario" required disabled>
+						<input type="text" id="user_login" name="user_login" required disabled>
 						<label for="user_pass">Contraseña</label>
-						<input type="password" id="user_pass" name="user_pass" placeholder="Contraseña" required disabled>
+						<input type="password" id="user_pass" name="user_pass" required disabled>
 					</fieldset>
 					<div class="general-form-msg"></div>
 					<button id="login-btn" name="login-btn" class="btn-sidebar" disabled>Ingresar</button>
