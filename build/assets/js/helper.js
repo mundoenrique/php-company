@@ -75,7 +75,7 @@ function callNovoCore (verb, who, where, data, _response_) {
 
 	}).fail(function(xrh, status, response) {
 		title = prefixCountry + strCountry;
-		msg = 'En estos momentos no podemos atender tu solicitud, por favor intente en unos minutos';
+		msg = 'En estos momentos no podemos atender tu solicitud, por favor intenta en unos minutos';
 		icon = iconWarning;
 		data = {
 			btn1: {
@@ -103,6 +103,10 @@ function formatterDate(date) {
 function notiSystem(title, message, icon, data) {
 	var btn1 = data.btn1;
 	var btn2 = data.btn2;
+	if(!btn2) {
+		$('#accept').css('margin', '0')
+		$('.novo-dialog-buttonset').css('width', '80px')
+	}
 	var dialogMoldal = $('#system-info');
 	dialogMoldal.dialog({
 		title: title,

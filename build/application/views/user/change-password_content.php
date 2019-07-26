@@ -8,8 +8,12 @@
 		<div id="widget-area">
 			<div class="widget tooltip" id="widget-signin">
 				<h2 class="widget-title">
+					<?php if($countryUri != 'bp'){ ?>
 					<span aria-hidden="true" class="icon" data-icon="&#xe03f;"></span>
-					<?= lang('INFO_CHANGE_PASS'); ?>
+					<?php
+						};
+						echo lang('INFO_CHANGE_PASS');
+					?>
 				</h2>
 				<div class="widget-content">
 					<form id="form-change-pass" name="form-change-pass" accept-charset="utf-8">
