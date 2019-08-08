@@ -1,6 +1,6 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed '); ?>
 <div id="content-condiciones">
-	<h1><?= lang('BREADCRUMB_WELCOME').'(a)'; ?> <span class='first-title'> <?= $fullName ?></span></h1>
+	<h1><?= lang('BREADCRUMB_WELCOME'); ?> <span class='first-title'> <?= $fullName ?></span></h1>
 	<p id="text-alerta">
 		<?= $message ?>
 	</p>
