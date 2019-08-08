@@ -365,7 +365,7 @@ $(function () {
 						$(this).dialog("close"); }
 					},
 					"Eliminar":{
-						text: 'Cancelar',
+						text: 'Aceptar',
 						class: 'novo-btn-primary-modal',
 						click: function(){
 							pass = $(this).find($('#pass')).val();
