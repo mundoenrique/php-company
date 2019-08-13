@@ -4375,7 +4375,10 @@ ul#brands li p img {
   margin-left: 10px;
   float: left;
 }
-
+#table-lote-detail thead th.sorting {
+	max-width: 70px;
+	min-width: 77px;
+}
 #table-lote-detail thead th {
   /*padding: 5px;*/
   border-right: solid 1px;

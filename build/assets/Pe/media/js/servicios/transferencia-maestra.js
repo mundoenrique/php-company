@@ -676,7 +676,7 @@ $(function () {
 
 		if (isoPais == 'Pe' || isoPais == 'Usd') {
 
-			return parseFloat(valor.replace(',', ''));
+			return parseFloat(valor.replace(/,/g, ''));
 
 		} else if (isoPais == 'Ve' || isoPais == 'Co') {
 
