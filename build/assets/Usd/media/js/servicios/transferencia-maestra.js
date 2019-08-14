@@ -529,7 +529,7 @@ $(function () {
 				this.checked = 1;
 			});
 
-			if (toFormat($(this).val()) < toFormat(serv_var.maestroParam.montoMinTransDia)) { // validacion de monto minimo
+			if ($(this).val() < serv_var.maestroParam.montoMinTransDia) { // validacion de monto minimo
 				$(this).showBalloon({ position: 'right', contents: 'monto minímo: ' + serv_var.maestroParam.montoMinTransDia });
 			} else if (((isoPais == 'Pe' || isoPais == 'Usd') && !$(this).val().match(/^-?[0-9]+([\.][0-9]{0,2})?$/)) || ((isoPais == 'Ve' || isoPais == 'Co') && !$(this).val().match(/^-?[0-9]+([\,][0-9]{0,2})?$/))) { // validacion solo numeros reales
 				$(this).val("");
