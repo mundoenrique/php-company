@@ -3,7 +3,7 @@
 $ceo_name = $this->security->get_csrf_token_name();
 $ceo_cook = $this->security->get_csrf_hash();
 ?>
-<h1><?= lang('BREADCRUMB_WELCOME'); ?>(a) <span class='first-title'><?= $fullName; ?></span></h1>
+<h1><?= lang('BREADCRUMB_WELCOME'); ?> <span class='first-title'><?= $fullName; ?></span></h1>
 <ol class="breadcrumb">
 	<li>
 		<a href="#" rel="start">
