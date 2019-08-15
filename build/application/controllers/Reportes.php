@@ -1592,12 +1592,13 @@ class Reportes extends CI_Controller {
 								)
 							)
 						);
-						$_POST['paginaActual'] = $dataRequest->paginaActual;
+						$_POST['nombreEmpresa'] = $dataRequest->nombreEmpresa;
 						$_POST['lotes_producto'] = $dataRequest->lotes_producto;
-						$this->form_validation->set_rules('empresa', 'Empresa',  'trim|xss_clean|required');
-						$this->form_validation->set_rules('lotes_producto', 'Tarjeta',  'trim|xss_clean|required');
+						$this->form_validation->set_rules('nombreEmpresa', 'nombreEmpresa',  'trim|xss_clean|required');
+						$this->form_validation->set_rules('lotes_producto', 'tarjeta',  'trim|xss_clean|required');
 							if ($this->form_validation->run() == FALSE)
 							{
+								log_message('DEBUG', 'NOVO VALIDATION ERRORS: '.json_encode(validation_errors()));
 								$responseError = 'La combinacion de caracteres es invalido';
 								$responseError = $this->cryptography->encrypt($responseError);
 								$this->output->set_content_type('application/json')->set_output(json_encode($responseError));
@@ -1730,7 +1731,7 @@ class Reportes extends CI_Controller {
 							$_POST['fechaInicial'] = $dataRequest->fechaInicial;
 							$_POST['fechaFin'] = $dataRequest->fechaFin;
 							$_POST['lotes_producto'] = $dataRequest->lotes_producto;
-							$this->form_validation->set_rules('empresa', 'Empresa',  'trim|xss_clean|required');
+							$this->form_validation->set_rules('empresa', 'empresa',  'trim|xss_clean|required');
 							$this->form_validation->set_rules('fechaInicial', 'Fecha Inicio',  'trim|xss_clean|regex_match[/^[0-9\/]+$/]|required');
 							$this->form_validation->set_rules('fechaFin', 'Fecha Fin',  'trim|xss_clean|regex_match[/^[0-9\/]+$/]|required');
 							$this->form_validation->set_rules('lotes_producto', 'Tarjeta',  'trim|xss_clean|required');
