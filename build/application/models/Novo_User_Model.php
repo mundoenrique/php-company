@@ -63,7 +63,7 @@ class Novo_User_Model extends NOVO_Model {
 					$this->session->set_userdata($userData);
 					$this->response->code = 0;
 					$this->response->msg = 'Ingreso exitoso';
-					$this->response->data = base_url('dashboard');
+					$this->response->data = base_url('empresas');
 					break;
 				case -2:
 				case -185:
