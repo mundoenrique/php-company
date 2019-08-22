@@ -568,7 +568,7 @@ $(function () {
 				this.checked = 1;
 			});
 
-			if (toFormat($(this).val()) < toFormat(serv_var.maestroParam.montoMinTransDia)) { // validacion de monto minimo
+			if ($(this).val() < serv_var.maestroParam.montoMinTransDia) { // se elimina la conversion de tipo con formato
 				$(this).showBalloon({
 					position: 'right',
 					contents: 'monto minímo: ' + serv_var.maestroParam.montoMinTransDia
@@ -612,6 +612,12 @@ $(function () {
 				break;
 		}
 
+		$.each($("input[class='monto']").filter(function() {
+			return this.value >= serv_var.maestroParam.montoMinTransDia;
+		}), function(k, v) {
+		  console.log( $(this).val() );
+		});
+
 		$.each($('.monto'), function (k, v) {
 
 			if ($(this).val().length > 0) {
@@ -619,7 +625,6 @@ $(function () {
 			}
 
 			montoMinDia = toFormat(serv_var.maestroParam.montoMinTransDia);
-
 
 			if (typeof v !== "undefined" && v >= montoMinDia) {
 				if (sum > 0)
