@@ -604,7 +604,7 @@ $(function () {
 				this.checked = 1;
 			});
 
-			if (toFormat($(this).val()) < toFormat(serv_var.maestroParam.montoMinTransDia)) { // validacion de monto minimo
+			if ($(this).val() < serv_var.maestroParam.montoMinTransDia) { // validacion de monto minimo
 				$(this).showBalloon({
 					position: 'right',
 					contents: 'monto minímo: ' + serv_var.maestroParam.montoMinTransDia

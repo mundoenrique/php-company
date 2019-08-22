@@ -4375,7 +4375,21 @@ ul#brands li p img {
   margin-left: 10px;
   float: left;
 }
-
+#table-lote-detail thead th.sorting {
+	max-width: 70px;
+	min-width: 77px;
+}
+#table-lote-detail td.recarga-monto {
+	max-width: 79px;
+	min-width: 76px;
+	margin: 0;
+}
+#table-lote-detail thead tr.lote-emision{
+	margin-left: 7px !important;
+}
+#table-lote-detail thead  th.recarga-estatus{
+	padding-right: 49px !important;
+}
 #table-lote-detail thead th {
   /*padding: 5px;*/
   border-right: solid 1px;
