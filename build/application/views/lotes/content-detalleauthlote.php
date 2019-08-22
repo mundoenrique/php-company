@@ -134,10 +134,10 @@
 					<table id="table-lote-detail">
 						<thead>
 							<th>'.lang('ID_PERSONA').'</th>
-							<th class="width-td">'.lang('TABLA_REG_EMISION_NOMB').'</th>
-							<th class="width-td">'.lang('TABLA_REG_EMISION_APELL').'</th>
-							<th class="width-td">'.lang('TABLA_REG_EMISION_UBIC').'</th>
-							<th class="width-td">'.lang('TABLA_REG_RECARGA_STATUS').'</th>
+							<th class="recarga-estatus">'.lang('TABLA_REG_EMISION_NOMB').'</th>
+							<th class="recarga-estatus">'.lang('TABLA_REG_EMISION_APELL').'</th>
+							<th class="recarga-estatus">'.lang('TABLA_REG_EMISION_UBIC').'</th>
+							<th class="recarga-estatus">'.lang('TABLA_REG_RECARGA_STATUS').'</th>
 						</thead>
 						<tbody>';
 				foreach ($data[0]->registrosLoteEmision as $registros) {
@@ -168,7 +168,7 @@
 						<thead>
 							<th id="td-nombre-2">'.lang('ID_PERSONA').'</th>
 							<th id="td-nombre-2">'.lang('TABLA_REG_RECARGA_CTA').'</th>
-							<th >'.lang('TABLA_REG_RECARGA_MONTO').'</th>
+							<th>'.lang('TABLA_REG_RECARGA_MONTO').'</th>
 							<th '.(($data[0]->ctipolote=='2') ? 'style="display:none"' : '').'>'.lang('TABLA_REG_RECARGA_STATUS').'</th>
 						</thead>
 						<tbody>';
@@ -184,7 +184,7 @@
 						<tr>
 							<td id="td-nombre-2">'.$registros->id_ext_per.'</td>
 							<td id="td-nombre-2">'.substr_replace($registros->nro_cuenta,'*************',0,-4).'</td>
-							<td >'.$registros->monto.'</td>
+							<td  class="recarga-monto">'.$registros->monto.'</td>
 							<td '.(($data[0]->ctipolote=='2') ? 'style="display:none"' : '').'>'.@$estatus.'</td>
 						</tr>
 					';
@@ -259,11 +259,13 @@
 				echo $html_view_results;
 				echo '
 					<table id="table-lote-detail">
-						<thead>
+						<thead >
+							<tr class="lote-emision">
 							<th>'.lang('ID_PERSONA').'</th>
 							<th id="td-nombre-2">'.lang('TITULO_TARJETA').'</th>
 							<th id="td-nombre-2">'.lang('TABLA_REG_EMISION_NOMB').'</th>
 							<th id="td-nombre-2">'.lang('TABLA_REG_EMISION_APELL').'</th>
+							</tr>
 						</thead>
 						<tbody>';
 				foreach ($data[0]->registrosLoteEmision as $registros) {

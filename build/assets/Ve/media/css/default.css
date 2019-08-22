@@ -4375,7 +4375,10 @@ ul#brands li p img {
   padding: 3px;
   text-align: center;
 }
-
+#table-lote-detail thead th.sorting {
+	max-width: 70px;
+	min-width: 77px;
+}
 #table-text-TM tbody td#icon-batchs {
   font-size: 32px;
   width: 35px;

@@ -1930,19 +1930,12 @@ class Lotes extends CI_Controller {
 			$pass = $dataRequest->pass;
 			$embozo1 = isset($dataRequest->embozo1) ? $dataRequest->embozo1 : '';
 			$embozo2 = isset($dataRequest->embozo2) ? $dataRequest->embozo2 : '';
-			$conceptoAbono = isset($dataRequest->conceptoAbono) ? $dataRequest->conceptoAbono : '';
+			$conceptoAbono = isset($dataRequest->conceptoDim) ? $dataRequest->conceptoDim : '';
 			$info = isset($dataRequest->info) ? $dataRequest->info : '';
 			$idTipoLote = isset($dataRequest->idTipoLote) ? $dataRequest->idTipoLote : '' ;
 
 			$username = $this->session->userdata('userName');
 			$token = $this->session->userdata('token');
-
-			// $pass = $this->input->post('pass') ;
-			// $embozo1 = $this->input->post('embozo1');
-			// $embozo2 = $this->input->post('embozo2');
-			// $conceptoAbono = $this->input->post('conceptoDim');
-			// $info = $this->input->post('info');
-			// $idTipoLote = $this->input->post('idTipoLote');
 
 			$info = unserialize( stripslashes($info) );
 			$info->lineaEmbozo1 = $embozo1;
