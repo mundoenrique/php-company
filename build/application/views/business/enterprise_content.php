@@ -3,6 +3,11 @@
 $ceo_name = $this->security->get_csrf_token_name();
 $ceo_cook = $this->security->get_csrf_hash();
 ?>
+
+<script>
+	var data = <?= json_encode($listaEmpresas) ?>;
+</script>
+
 <h1><?= lang('BREADCRUMB_WELCOME'); ?> <span class='first-title'><?= $fullName; ?></span></h1>
 <ol class="breadcrumb">
 	<li>
@@ -38,8 +43,9 @@ $ceo_cook = $this->security->get_csrf_hash();
 	<input type='hidden' name='<?php echo $ceo_name ?>' value='<?php echo $ceo_cook ?>'>
 </form>
 
-
-<ul id="listCompanies" class="dashboard-companies"></ul>
+<!-- despliegue del contenido del listado de las empresas -->
+<ul id="listCompanies" class="dashboard-companies">
+</ul>
 
 <div id="contend-pagination-p" style="width:950px; float:left; display:none;">
 	<table align="center">

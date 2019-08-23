@@ -4,11 +4,11 @@
  * @author J. Enrique Peñaloza P
 */
 class CallModels extends Novo_Controller {
-	private $model;
-	private $method;
-	private $rule;
-	private $request;
-	private $dataResponse;
+	protected $model;
+	protected $method;
+	protected $rule;
+	protected $request;
+	protected $dataResponse;
 
 	public function __construct()
 	{

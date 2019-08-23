@@ -1,8 +1,10 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 /**
- * @info Controlador para
- * @author
+ * @info Controlador para manejar las peticiones referentes a empresas
+ * @author Pedro Torres
+ * @date 23/08/2019
+ *
 */
 class Business extends NOVO_Controller {
 
@@ -10,28 +12,36 @@ class Business extends NOVO_Controller {
 	{
 		parent:: __construct();
 		log_message('INFO', 'NOVO Business Controller class Initialized');
-		//$this->lang->load('XXX');
 	}
 	/**
 	 * @info Método para obtener las renderizar las empresas asociadas a un usuarios
-	 * @author J. Enrique Peñaloza
+	 * @author Pedro Torres
+	 * @date 24/08/2019
 	 */
 	public function getEnterprises()
 	{
 		log_message('INFO', 'NOVO Business: getCompanies Method Initialized');
-		/* array_push(
+
+		$this->load->helper('form');
+
+		$this->model = 'Novo_'.$this->router->fetch_class().'_Model';
+		$this->method = 'callWs_'.$this->router->fetch_method().'_'.$this->router->fetch_class();
+
+		array_push(
 			$this->includeAssets->cssFiles,
-			"xxx/xxx",
-			"third_party/xxx"
+			"$this->countryUri/default"
 		);
 		array_push(
 			$this->includeAssets->jsFiles,
-			"header"
+			"third_party/jquery.paginate",
+			"third_party/jquery.isotope",
+			"business/enterprise"
 		);
-		*/
+
 		$this->views = ['business/enterprise'];
 		$this->render->titlePage = "Empresas";
+		$this->render->listaEmpresas = $this->callMethodNotAsync();
 		$this->render->lastSession = $this->session->userdata('lastSession');
-		$this->loadView('companies');
+		$this->loadView('enterprise');
 	}
 }

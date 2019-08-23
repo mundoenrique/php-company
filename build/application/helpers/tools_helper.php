@@ -74,11 +74,10 @@ if(!function_exists('getFaviconLoader')) {
 if(!function_exists('accessLog')) {
 	function accessLog($dataAccessLog) {
 		$CI = &get_instance();
-		$sessionId = $CI->session->userdata('sessionId') ? $CI->session->userdata('sessionId') : '';
-		$userName = $CI->session->userdata('userName') ? $CI->session->userdata('userName') : $dataAccessLog->userName;
+
 		return $accessLog = [
-			"sessionId"=> $sessionId,
-			"userName" => $userName,
+			"sessionId"=> $CI->session->userdata('sessionId') ?: '',
+			"userName" => $CI->session->userdata('userName') ?: $dataAccessLog->userName,
 			"canal" => $CI->config->item('channel'),
 			"modulo"=> $dataAccessLog->modulo,
 			"function"=> $dataAccessLog->function,

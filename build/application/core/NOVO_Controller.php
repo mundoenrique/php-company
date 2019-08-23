@@ -17,6 +17,11 @@ class NOVO_Controller extends CI_Controller {
 	protected $render;
 	protected $dataRequest;
 	protected $idProductos;
+	protected $model;
+	protected $method;
+	protected $request;
+	protected $dataResponse;
+
 	public $accessControl;
 
 	public function __construct()
@@ -31,6 +36,11 @@ class NOVO_Controller extends CI_Controller {
 		$this->render->fullName = $this->session->userdata('fullName');
 		$this->idProductos = $this->session->userdata('idProductos');
 		$this->optionsCheck();
+
+		$this->model = '';
+		$this->method = '';
+		$this->request = new stdClass();
+		$this->dataResponse = new stdClass();
 	}
 
 	private function optionsCheck()
@@ -105,6 +115,7 @@ class NOVO_Controller extends CI_Controller {
 			case 'login':
 			case 'benefits':
 			case 'terms':
+			case 'enterprise':
 			case 'pass-recovery':
 				$auth = TRUE;
 				break;
@@ -126,6 +137,13 @@ class NOVO_Controller extends CI_Controller {
 		} else {
 			redirect(base_url('inicio'), 'location');
 		}
+	}
+
+	protected function callMethodNotAsync()
+	{
+		$this->load->model($this->model,'modelLoaded');
+		$method = $this->method;
+		return $this->modelLoaded->$method();
 	}
 }
 

@@ -18,14 +18,6 @@ class User extends NOVO_Controller {
 	public function login()
 	{
 		log_message('INFO', 'NOVO User: index Method Initialized');
-		if($this->session->userdata('logged')) {
-
-			$urlRedirect = str_replace($this->countryUri.'/', $this->config->item('country').'/', base_url('dashboard'));
-			redirect($urlRedirect, 'location');
-
-			//redirect(base_url('empresas'), 'location');
-			exit();
-		}
 
 		$userData = [
 			'sessionId',
