@@ -396,5 +396,5 @@ echo "<form id='detalleAuth' method='post' action= '$urlBase/lotes/autorizacion/
 <?php
 	endif;
 ?>
-
+</div>
 <div id='loading' style='text-align:center' class='elem-hidden'><?php echo insert_image_cdn("loading.gif"); ?></div>
