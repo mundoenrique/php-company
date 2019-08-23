@@ -87,7 +87,7 @@ $lang['SUC_TITLE_NEW_SUC'] = 'Gestión de Sucursal';
 $lang['SUC_BTN_UPFILE'] = 'subir archivo de nuevas sucursales';
 
 //TAB DESCARGAS
-$lang['DWL_MANUAL'] = "TV-MUS-002-conexion-empresas-online-V10.pdf";
+$lang['DWL_MANUAL'] = "Manual-de-usuario-CEO_PICHINCHA.pdf";
 
 // PAGINA LOGOUT
 $lang['LOGOUT_TITULO'] = 'Gracias por usar nuestros servicios';
