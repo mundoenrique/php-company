@@ -5453,7 +5453,7 @@ center {
 
 #view-results {
 	float: left;
-	clear: both;
+	/* clear: both; */
 	padding-left: 7px;
 	margin-bottom: 10px;
 }
