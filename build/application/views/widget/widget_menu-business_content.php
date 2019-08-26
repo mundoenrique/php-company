@@ -46,7 +46,7 @@
 			<?php endforeach; ?>
 			<?php if($pais != 'Ec-bp'): ?>
 			<li>
-				<a href="<?=base_url($pais.'/logout')?>" rel="subsection">
+				<a href="<?=base_url('/cerrar-sesion')?>" rel="subsection">
 					<span aria-hidden="true" class="icon" data-icon="&#xe03e;"></span>
 					<?=lang("SUBMENU_LOGOUT")?>
 				</a>
