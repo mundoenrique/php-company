@@ -35,7 +35,14 @@
 		if($logged) {
 			$menuP =$this->session->userdata('menuArrayPorProducto');
 			$menu = createMenu($menuP, $countryConf);
+			$settingsMenu = new stdClass();
+			$settingsMenu->menu = $menu;
+			$settingsMenu->pais = $countryConf;
+			$this->load->view('widget/widget_menu-business_content', $settingsMenu);
+			/*
+			$menu = createMenu($menuP, $countryConf);
 			$this->load->view('widget/widget_menu-business_content', $menu);
+			*/
 		}
 	?>
   <div id="wrapper">
