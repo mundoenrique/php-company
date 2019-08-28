@@ -115,14 +115,13 @@ class NOVO_Controller extends CI_Controller {
 			case 'login':
 			case 'benefits':
 			case 'terms':
-			case 'enterprise':
 			case 'pass-recovery':
-				$auth = TRUE;
-				break;
+			$auth = TRUE;
+			break;
 			case 'change-password':
-				$auth = ($this->session->flashdata('changePassword'));
-				break;
-			case 'companies':
+			$auth = ($this->session->flashdata('changePassword'));
+			break;
+			case 'enterprise': // estas vistas deben estar logueadas
 			$auth = ($this->render->logged);
 			break;
 			default:
@@ -139,11 +138,32 @@ class NOVO_Controller extends CI_Controller {
 		}
 	}
 
+	/**
+	 * Llama un metodo especifico de un modelo
+	 *
+	 * @return void
+	 * @author Pedro Torres
+	 */
 	protected function callMethodNotAsync()
 	{
 		$this->load->model($this->model,'modelLoaded');
 		$method = $this->method;
 		return $this->modelLoaded->$method();
+	}
+
+
+	/**
+	 * Carga las definiciones de lenguages
+	 *
+	 * @param array $languages contiene la lista de los lenguages
+	 * @return void
+	 * @author Pedro Torres
+	 */
+	protected function loadLanguages($languages)
+	{
+		foreach ($languages as $k => $v) {
+			$this->lang->load($v);
+		}
 	}
 }
 

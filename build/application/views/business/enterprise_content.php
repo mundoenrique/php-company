@@ -1,8 +1,8 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
-<?php
-$ceo_name = $this->security->get_csrf_token_name();
-$ceo_cook = $this->security->get_csrf_hash();
-?>
+
+<form id='logout' action="<?= $urlBase . 'logout'?>" method='post'>
+  <input type='hidden' name='data-caducada' value='true'>
+</form>
 
 <script>
 	var data = <?= json_encode($listaEmpresas) ?>;
@@ -39,8 +39,8 @@ $ceo_cook = $this->security->get_csrf_hash();
 	</ul>
 </div>
 
-<form id="empresas" method="post" action="<?= site_url($pais.'/dashboard/productos/'); ?>">
-	<input type='hidden' name='<?php echo $ceo_name ?>' value='<?php echo $ceo_cook ?>'>
+<form id="empresas" method="post" action="<?= str_replace('/'.$countryUri.'/','/'.$countryConf.'/',base_url('dashboard/productos')); ?>">
+	<input type='hidden' name='<?= $novoName ?>' value='<?= $novoCook ?>'>
 </form>
 
 <!-- despliegue del contenido del listado de las empresas -->
