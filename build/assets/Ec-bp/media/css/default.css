@@ -5423,6 +5423,12 @@ li#select-empresa select {
 center {
 	padding-top:20px;
 }
+
+center a.novo-btn-secondary,
+center button.novo-btn-secondary {
+	margin-right: 45px;
+}
+
 .b-rs>.botones-OS {
 	padding-top: 40px;
 }
