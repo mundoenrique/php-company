@@ -480,6 +480,11 @@ ol.breadcrumb li a {
 	text-align: center;
 }
 
+center a.novo-btn-secondary,
+center button.novo-btn-secondary {
+	margin-right: 45px;
+}
+
 h2.widget-title {
 	font-size: 18px;
 }
