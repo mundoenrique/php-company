@@ -12,11 +12,11 @@ function formatterDate(date) {
 
 $('input[type=text], input[type=password], input[type=textarea]').attr('autocomplete','off');
 $("select").change(function(){
-	$(this).attr('style','');
+	$(this).attr('style','border-color:#dddddd');
 	$('#mensajeError').css('display','none');
 });
-$("input, p").focus(function(){
-	$(this).attr('style','');
+$("input").focus(function(){
+	$(this).not('#archivo').css('border-color', '#dddddd');
 	$('#mensajeError').css('display','none');
 });
 function showErrMsg(errMsg) {
