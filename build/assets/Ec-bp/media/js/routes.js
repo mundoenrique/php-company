@@ -12,7 +12,7 @@ function formatterDate(date) {
 
 $('input[type=text], input[type=password], input[type=textarea]').attr('autocomplete','off');
 $("select").change(function(){
-	$(this).attr('style','border-color:#dddddd');
+	$(this).css('border-color', '#dddddd');
 	$('#mensajeError').css('display','none');
 });
 $("input").focus(function(){
