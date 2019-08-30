@@ -313,7 +313,6 @@ class Novo_User_Model extends NOVO_Model {
 
 	public function callWs_validateCaptcha_User($dataRequest)
 	{
-
 		$this->load->library('recaptcha');
 		$result = $this->recaptcha->verifyResponse($dataRequest->token);
 
@@ -324,6 +323,7 @@ class Novo_User_Model extends NOVO_Model {
 		$this->response->title = lang('SYSTEM_NAME');
 		if($result["score"] <= 0) {
 
+			$this->response->owner = 'captcha';
 			$this->response->code = 1;
 			$this->response->icon = 'ui-icon-closethick';
 			$this->response->msg = 'El sistema ha detectado una actividad no autorizada, por favor intenta nuevamente';
@@ -335,10 +335,10 @@ class Novo_User_Model extends NOVO_Model {
 				]
 			];
 		} else {
-			$this->response->code = 0;
-			$this->response->data = 'Ok';
+			$this->callWs_Login_User($dataRequest->dataLogin[0]);
+			$this->response->owner = 'login';
+
 		}
 		return $this->response;
-
 	}
 }
