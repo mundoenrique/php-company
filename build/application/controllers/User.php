@@ -19,6 +19,12 @@ class User extends NOVO_Controller {
 	{
 		log_message('INFO', 'NOVO User: index Method Initialized');
 
+		if($this->session->userdata('logged')) {
+
+			redirect(base_url('empresas'), 'location');
+			exit();
+		}
+
 		$userData = [
 			'sessionId',
 			'idUsuario',
