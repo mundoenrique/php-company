@@ -97,12 +97,15 @@ $(function () {
 
 	paginar();
 
-$("#listCompanies").on('mouseenter','.style-companies-item',function(){
-
+$("#listCompanies").on('mouseenter','.style-companies-item, #more-info',function(e){
+	var tes = document.querySelector(".style-companies-item");
+		tes.style.boxShadow = "0px 0px 5px 1px rgba(15, 38, 92, 0.6)"
 	$(this).next("span#more-info").fadeIn("fast");
 
 })
 $("#listCompanies").on('mouseleave','.space-companies',function(){
+	var tes = document.querySelector(".style-companies-item");
+	tes.style.boxShadow = ""
 	$("span#more-info").fadeOut("fast");
 })
 
