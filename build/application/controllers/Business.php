@@ -44,6 +44,7 @@ class Business extends NOVO_Controller {
 		$this->render->titlePage = "Empresas";
 		$this->render->listaEmpresas = $this->callMethodNotAsync();
 		$this->render->pais = $this->session->userdata('countrySess');
+		$this->render->uniqueMenuUser = $this->config->item('uniqueMenuUser');
 		$this->render->lastSession = $this->session->userdata('lastSession');
 		$this->loadView('enterprise');
 	}

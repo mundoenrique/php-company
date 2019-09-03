@@ -634,7 +634,7 @@ button .requesting {
 	font-size: 12px !important;
 }
 
-#account-nav {
+/* #account-nav {
 	color: white;
 }
 
@@ -644,6 +644,39 @@ button .requesting {
 
 #account-nav ul li a {
 	color: white;
+	color: #0f265c !important;
+	display: flex;
+}
+
+#account-nav ul li a span.icon {
+	font-size: 16px;
+} */
+
+#account-nav {
+	color: white;
+	margin-top: 10px;
+	min-width: 250px;
+	float: right;
+}
+
+#account-nav ul {
+	float: right;
+	width: auto !important;
+}
+
+#account-nav ul li {
+
+	height: 20px;
+	margin-bottom: 5px;
+	text-transform: capitalize;
+	margin-left: 20px;
+}
+
+#account-nav ul li a {
+	color: white;
+	float: left;
+	font-size: 14px;
+	font-weight: 700;
 	color: #0f265c !important;
 	display: flex;
 }
@@ -679,7 +712,7 @@ button .requesting {
 	background-color:#f0f0f0;
 }
 
-.config-menuH {
+/* .config-menuH {
 	background-color: white !important;
 	color: #0F265C;
 	opacity: 1.00 !important;
@@ -697,20 +730,74 @@ button .requesting {
 
 .config-menuH div {
 	display: none;
+} */
+
+.config-menuH {
+	min-width: 20px;
+	padding: 5px;
+	background-color: white !important;
+	color: #0F265C;
+	opacity: 1.00 !important;
+	z-index: 32767;
+	text-align: left;
+	visibility: visible;
+	position: absolute;
+	top: 41px;
+	left: 939.5px;
+	display: none;
+	box-shadow: none !important;
+	border-radius: 0 0 0 15px !important;
+	border: 1px solid #d5d5d5 !important;
+}
+
+.config-menuH ul {
+	float: left;
+	padding-left: -50px;
+	font-size: 14px;
+
+}
+
+.config-menuH li {
+	list-style: none;
+	padding: 5px !important;
+}
+
+.config-menuH div {
+	display: none;
 }
 
 .menu-item {
 	list-style: none !important;
 }
 
+.submenu {
+	margin-left: -37px !important;
+	float: left;
+	font-family: "prelo";
+}
+
+.submenu a {
+	color: #DA5A5A !important;
+	font-weight: normal;
+	padding-left: 10px;
+	height: 10px;
+}
+
+.submenu .menu-item:hover {
+	font-weight: 700;
+	border-left: 3px solid #FFDD00;
+} /* */
+/*
 .submenu a {
 	color: #0F265C !important;
 	font-weight: normal;
+	padding-left: 10px;
+	height: 10px;
 }
 
 .submenu .menu-item:hover {
 	border-left: 3px solid #FFDD00;
-}
+} */
 
 #text-general {
 	display: none;

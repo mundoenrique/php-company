@@ -110,7 +110,8 @@ if(!function_exists('urlReplace')) {
 				$country = 've';
 				break;
 		}
-		return str_replace($countryUri, $country, $url);
+		// OLD return str_replace($countryUri, $country, $url);
+		return str_replace($countryUri.'/', $country.'/', $url);
 	}
 }
 

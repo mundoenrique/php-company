@@ -1,5 +1,6 @@
 'use strict'
 $(function() {
+	var data;
 
 	function restartFormLogin(textBtn) {
 
@@ -12,7 +13,15 @@ $(function() {
 		setTimeout(function() {
 			$("#user_login").hideBalloon();
 		}, 2000);
-	}
+	};
+
+	function getCredentialsUser(){
+		return {
+							user: $('#user_login').val(),
+							pass: $.md5($('#user_pass').val()),
+							active: ''
+						}
+	};
 
 	const responseCodeLogin = {
 		0: function(response){
@@ -35,11 +44,12 @@ $(function() {
 			})
 		},
 		3: function(response, textBtn){
+			var dataLogin = getCredentialsUser();
 			notiSystem(response.title, response.msg, response.icon, response.data);
 			var btn = response.data.btn1;
 			if(btn.action == 'logout') {
 				$('#accept').on('click', function() {
-					verb = 'POST'; who = btn.link.who; where = btn.link.where; data = getCredentialsUser();
+					verb = 'POST'; who = btn.link.who; where = btn.link.where; data = dataLogin;
 					callNovoCore (verb, who, where, data);
 				});
 			}
@@ -51,13 +61,6 @@ $(function() {
 		$('#login-form input, #login-form button').attr('disabled', disable);
 	}
 
-	function getCredentialsUser(){
-		return {
-							user: $('#user_login').val(),
-							pass: $.md5($('#user_pass').val()),
-							active: ''
-						}
-	};
 
 	function validateLogin(token,user,text){
 		data = {

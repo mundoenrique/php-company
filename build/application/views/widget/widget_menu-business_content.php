@@ -3,7 +3,8 @@
 	<nav id="nav2">
 		<ul style="margin:0">
 			<li>
-				<a href="<?=base_url('/empresas')?>" rel="start" >
+				<!-- <a href="<?=base_url('/empresas')?>" rel="start" > -->
+				<a href="<?=base_url($pais.'/empresas')?>" rel="start" >
 					<span aria-hidden="true" class="icon" data-icon="&#xe097;"></span>
 					<?=lang('MENU_INICIO')?>
 				</a>
@@ -46,7 +47,8 @@
 			<?php endforeach; ?>
 			<?php if($pais != 'Ec-bp'): ?>
 			<li>
-				<a href="<?=base_url('/cerrar-sesion')?>" rel="subsection">
+				<!-- <a href="<?=base_url('/cerrar-sesion')?>" rel="subsection"> -->
+				<a href="<?=base_url($pais.'/cerrar-sesion')?>" rel="subsection">
 					<span aria-hidden="true" class="icon" data-icon="&#xe03e;"></span>
 					<?=lang("SUBMENU_LOGOUT")?>
 				</a>

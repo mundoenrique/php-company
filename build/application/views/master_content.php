@@ -34,15 +34,11 @@
 		endif;
 		if($logged) {
 			$menuP =$this->session->userdata('menuArrayPorProducto');
-			$menu = createMenu($menuP, $countryConf);
+			$menu = createMenu($menuP, '');
 			$settingsMenu = new stdClass();
 			$settingsMenu->menu = $menu;
-			$settingsMenu->pais = $countryConf;
+			$settingsMenu->pais = '';
 			$this->load->view('widget/widget_menu-business_content', $settingsMenu);
-			/*
-			$menu = createMenu($menuP, $countryConf);
-			$this->load->view('widget/widget_menu-business_content', $menu);
-			*/
 		}
 	?>
   <div id="wrapper">
@@ -51,8 +47,7 @@
 			$this->load->view($views . '_content');
 		}
 	?>
-  </div>
-
+	</div>
   <footer id="foot" class="foot">
     <div id="foot-wrapper">
       <nav id="extra-nav">

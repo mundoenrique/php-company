@@ -70,7 +70,7 @@ $style_css = $this->uri->segment(3);
 		$menu = createMenu($menuP, $pais);
 		$settingsMenu = new stdClass();
 		$settingsMenu->menu = $menu;
-		$settingsMenu->pais = $pais;
+		$settingsMenu->pais = $this->config->item('countryUri');
 		$this->load->view('widget/widget_menu-business_content', $settingsMenu);
 	}
 ?>
