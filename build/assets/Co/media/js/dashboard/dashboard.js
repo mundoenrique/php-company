@@ -92,6 +92,23 @@ var dash_var = {
   pp : 1
 }
 
+// Busqueda alfabetica
+
+var $container = $('#listCompanies');
+
+// Inicializar filtro
+$container.isotope({
+	itemSelector : '.space-companies',
+	animationEngine :'jQuery',
+	animationOptions: {
+		duration: 400,
+		easing: 'linear',
+		queue: false
+	},
+
+	layoutMode: 'fitRows'
+});
+//--Fin inicializar filtro
 
 
 
@@ -143,23 +160,6 @@ $("#more-info").on("click",function(event){
 
 
 
-// Busqueda alfabetica
-
-  var $container = $('#listCompanies');
-
-  // Inicializar filtro
-  $container.isotope({
-    itemSelector : '.space-companies',
-    animationEngine :'jQuery',
-    animationOptions: {
-      duration: 400,
-      easing: 'linear',
-      queue: false
-    },
-
-    layoutMode: 'fitRows'
-  });
-  //--Fin inicializar filtro
 
 
   var $optionSets = $('#options'),  // contenedor de filtros

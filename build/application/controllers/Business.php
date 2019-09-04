@@ -35,9 +35,7 @@ class Business extends NOVO_Controller {
 			$this->includeAssets->jsFiles,
 			"third_party/jquery.paginate",
 			"third_party/jquery.isotope",
-			"business/enterprise",
-			"header",
-			"routes"
+			"business/enterprise"
 		);
 
 		$this->views = ['business/enterprise'];

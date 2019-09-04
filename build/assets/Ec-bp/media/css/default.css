@@ -3158,10 +3158,6 @@ a.style-companies-item:hover {
 	z-index: 8;
 }
 
-span#more-info a {
-	/* padding: 5px; */
-}
-
 span#more-info a p {
 	color: #0F265C;
 	font-weight: 700;

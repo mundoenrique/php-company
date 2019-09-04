@@ -40,7 +40,7 @@
 	<div id="wrapper">
 		<?php
 		foreach($viewPage as $views) {
-			$this->load->view($views . '_content');
+			$this->load->view($views . '_content', $params);
 		}
 	?>
 	</div>

@@ -83,7 +83,7 @@ function notificacion(title, msj){
 //FIN USER TIME OUT
 
 // SUB-MENU CONFIGURACION
-$('.settings').balloon({tipSize: 0, html: true, contents: $('.submenu'), position: 'bottom', classname: 'config-menuH'});
+//$('.settings').balloon({tipSize: 0, html: true, contents: $('.submenu'), position: 'bottom', classname: 'config-menuH'});
 
 
   $.datepicker.regional['es'] = {

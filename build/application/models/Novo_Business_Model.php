@@ -59,7 +59,6 @@ class Novo_Business_Model extends NOVO_Model {
 					break;
 			}
 		}
-
 		return $this->response;
 	}
 }

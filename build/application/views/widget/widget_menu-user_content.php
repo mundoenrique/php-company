@@ -6,13 +6,13 @@
 	<ul class="menu">
 		<?php if( $uniqueMenuUser ): ?>
 			<li class="menu-item settings">
-				<a rel="section" title="Mi Perfil" id="profileMenu">
+				<a rel="section" title="Mi Perfil" id="config">
 					<span aria-hidden="true" class="icon" data-icon="&#xe090;"></span>
 					<?php echo $fullName; ?>
 				</a>
 				<ul class="submenu">
 					<li class="menu-item setting">
-						<a id='subm-user' rel="subsection" id='config' href="<?= $urlRedirect.'0' ?>">
+						<a id='subm-user' rel="subsection" href="<?= $urlRedirect.'0' ?>">
 							<?php echo lang('CONFIGURACION') ?>
 						</a>
 					</li>

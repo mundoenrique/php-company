@@ -8,7 +8,7 @@ $(function() {
 		css: {
 			color: 'rgb(102, 102, 102)'
 		},
-		tipSize: 15,
+		tipSize: 0,
 		contents: $('.submenu')
 	});
 });

@@ -107,25 +107,44 @@ $(function () {
 		layoutMode: 'fitRows'
 	});
 
-	$("#listCompanies").on('mouseover', '.style-companies-item', function () {
+	if( isoPais != 'Ec-bp' ){
 
-		$(this).parents('li').css('z-index', '3');
-		$(this).next("span#more-info").fadeIn("fast");
-		itemsFiltro = $('.space-companies').not('.isotope-hidden').length;
-		filas = Math.floor(itemsFiltro / 3);
-		if ((itemsFiltro / 3) !== filas) {filas += 1}
-		$container.height((filas * $('.isotope-item').height()) + 160);
-	});
+		$("#listCompanies").on('mouseover', '.style-companies-item', function () {
 
-	$("#listCompanies").on('mouseleave', '.style-companies-item', function () {
+			$(this).parents('li').css('z-index', '3');
+			$(this).next("span#more-info").fadeIn("fast");
+			itemsFiltro = $('.space-companies').not('.isotope-hidden').length;
+			filas = Math.floor(itemsFiltro / 3);
+			if ((itemsFiltro / 3) !== filas) {filas += 1}
+			$container.height((filas * $('.isotope-item').height()) + 160);
+		});
 
-		$("span#more-info").parents('li').not(this).css('z-index', '2');
-		$("span#more-info").not(this).fadeOut("fast");
-	});
+		$("#listCompanies").on('mouseleave', '.style-companies-item', function () {
 
-	$("#more-info").on("click", function (event) {
-		event.stopPropagation();
-	});
+			$("span#more-info").parents('li').not(this).css('z-index', '2');
+			$("span#more-info").not(this).fadeOut("fast");
+		});
+
+		$("#more-info").on("click", function (event) {
+			event.stopPropagation();
+		});
+	}
+	else
+	{
+		$("#listCompanies").on('mouseenter','.style-companies-item',function(e){
+			$(this).next("span#more-info").fadeIn("fast");
+		})
+
+		$("#listCompanies").on('mouseleave','.space-companies',function(){
+			$("span#more-info").fadeOut("fast");
+		})
+
+		$("#listCompanies").on('click', '#more-info', function(event) {
+			var companyCont = $(event.target).closest('.space-companies');
+			var companyLink = companyCont.find('.style-companies-item');
+			companyLink.trigger('click');
+		});
+	}
 
 	//Evento que filtra
 	$('#options').find('a').click(function () {
@@ -159,6 +178,37 @@ $(function () {
 		}
 
 	});
+
+	$('#filtrar').on('change', function(){
+		$(".isotope-item").show();
+		$('#listCompanies').find('.style-companies-item-activa').removeClass('style-companies-item-activa');
+		$("span#more-info").fadeOut("fast");
+		$(".isotope-item").css('z-index', '2');
+		var $seletor = $(this).find('option:selected');
+		var value = $(this).find('option:selected').attr('data-option-value');
+		albafiltro(value, $seletor);
+	})
+	//-- Fin busqueda campo de texto
+	function albafiltro(value, $seletor) {
+		var paginas
+		$container.isotope({ filter: value });
+		noResults();
+
+		itemsFiltro = $('.space-companies').not('.isotope-hidden').length;
+		var itemsFiltroD = Math.floor(itemsFiltro / dash_var.cantEmp);
+		if (itemsFiltro > 0) {
+
+			paginas = (itemsFiltro / dash_var.cantEmp) == itemsFiltroD ? itemsFiltroD : itemsFiltroD + 1;
+
+
+			$container.isotope({ filter: '.' + $seletor.attr('value') + 1 });
+
+
+			paginacion(paginas, '.' + $seletor.attr('value'));
+			$(".isotope-hidden").hide();
+
+		}
+	}		
 
 	$('#search-filter').bind('keyup', function () {
 
@@ -525,7 +575,6 @@ $(function () {
 			} else {
 				$('#more').hide();
 			}
-
 		}; //Fin post
 	})(); //Fin paginar
 }); //--Fin document ready

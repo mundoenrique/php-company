@@ -1258,10 +1258,11 @@ a.style-companies-item span {
 
 #more-info {
 	width: 260px;
-	height: 140px;
+	height: 100px;
 	margin-top: 3px;
 	position: absolute;
 	z-index: 3;
+	top: 25px;
 }
 
 #more-info span {
@@ -1280,7 +1281,7 @@ a.style-companies-item span {
 }
 
 span#more-info a {
-	padding: 5px;
+	/* padding: 5px; */
 }
 
 span#more-info a p b {
@@ -1301,7 +1302,8 @@ span#more-info a p b {
 	float: right;
 	padding-right: 10px;
 	width: 190px;
-	padding-left: 10px;
+	padding-left: 20px;
+	/*padding-left: 10px;*/
 	height: 12px;
 }
 

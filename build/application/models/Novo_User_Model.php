@@ -146,7 +146,6 @@ class Novo_User_Model extends NOVO_Model {
 					break;
 			}
 		}
-
 		return $this->response;
 	}
 	/**

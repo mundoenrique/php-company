@@ -76,7 +76,7 @@ class NOVO_Model extends CI_Model {
 					$this->response->data = [
 						'btn1'=> [
 							'text'=> 'Aceptar',
-							'link'=> base_url('dashboard'),
+							'link'=> base_url('empresas'),
 							'action'=> 'redirect'
 						]
 					];
@@ -88,7 +88,7 @@ class NOVO_Model extends CI_Model {
 			$this->response->data = [
 				'btn1'=> [
 					'text'=> 'Aceptar',
-					'link'=> base_url('dashboard'),
+					'link'=> base_url('empresas'),
 					'action'=> 'redirect'
 				]
 			];

@@ -45,14 +45,13 @@ function callNovoCore(verb, who, where, data, _response_) {
 	});
 
 	dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, { format: CryptoJSAesJson }).toString();
-
 	$.ajax({
 		method: verb,
 		url: baseURL + 'async-call',
 		data: { request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook) },
 		context: document.body,
-		dataType: 'json',
-	}).done(function (response, status) {
+		dataType: 'json'
+	}).done(function (response) {
 		response = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, { format: CryptoJSAesJson }).toString(CryptoJS.enc.Utf8))
 
 		if(response.code === 303){
@@ -63,7 +62,7 @@ function callNovoCore(verb, who, where, data, _response_) {
 		if (response.data !== 'finishSession') {
 			_response_(response);
 		}
-	}).fail(function (xrh, status, response) {
+	}).fail(function () {
 		title = prefixCountry + strCountry;
 		msg = 'En estos momentos no podemos atender tu solicitud, por favor intenta en unos minutos';
 		icon = iconWarning;

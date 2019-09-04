@@ -2,6 +2,10 @@
 $(function() {
 	var data;
 
+	function disabledInputsform(disable){
+		$('#login-form input, #login-form button').attr('disabled', disable);
+	}
+
 	function restartFormLogin(textBtn) {
 
 		disabledInputsform(false);
@@ -54,12 +58,12 @@ $(function() {
 				});
 			}
 			restartFormLogin(textBtn);
+		},
+		99: function(response){
+			notiSystem(response.title, response.msg, response.icon, response.data);
 		}
 	}
 
-	function disabledInputsform(disable){
-		$('#login-form input, #login-form button').attr('disabled', disable);
-	}
 
 
 	function validateLogin(token,user,text){
@@ -71,6 +75,9 @@ $(function() {
 		verb = "POST"; who = 'User'; where = 'validateCaptcha';
 		// verb = "POST"; who = 'User'; where = 'Login'; data = user; // llama al login
 		callNovoCore(verb, who, where, data, function(response) {
+
+			disabledInputsform(false);
+			$('#login-btn').html(text);
 
 			if (response.code !== 0 && response.owner === 'captcha'){
 
@@ -88,8 +95,8 @@ $(function() {
 	}
 
 	function validateResponseLogin(response, textBtn) {
-
-		responseCodeLogin[response.code](response, textBtn);
+		const property = responseCodeLogin.hasOwnProperty(response.code) ? response.code : 99
+		responseCodeLogin[property](response, textBtn);
 	}
 
 	$.balloon.defaults.css = null;
