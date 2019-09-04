@@ -6,3 +6,5 @@ $config['language']	= 'bp-spanish';
 $config['favicon'] = 'favicon-bp';
 // Menu user/config diseño de unica columna
 $config['uniqueMenuUser'] = TRUE;
+//show sign-out
+$config['show_sign-out'] = FALSE;
