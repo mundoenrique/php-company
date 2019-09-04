@@ -679,7 +679,8 @@ class Dashboard extends CI_Controller {
 				$OpcionesMenu = serialize($responseMenuPorProducto->lista);
 
 				$menu = [
-					'menuArrayPorProducto'=>$OpcionesMenu
+					'menuArrayPorProducto' => $OpcionesMenu,
+					'user_access' => $responseMenuPorProducto->lista
 				];
 				$this->session->set_userdata($menu);
 

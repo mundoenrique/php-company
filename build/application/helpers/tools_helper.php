@@ -124,8 +124,8 @@ if(!function_exists('maskString')) {
 }
 
 if(!function_exists('createMenu')) {
-	function createMenu($menuP) {
-		$menuData = unserialize($menuP);
+	function createMenu($userAccess, $seralize = FALSE) {
+		$menuData = $seralize ? unserialize($userAccess) : $userAccess;
 		$levelOneOpts = [];
 		if($menuData==NULL||!isset($menuData))
 			return $levelOneOpts;

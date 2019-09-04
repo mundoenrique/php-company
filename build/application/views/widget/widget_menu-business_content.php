@@ -45,7 +45,7 @@
 					<? endif; ?>
 				</li>
 			<?php endforeach; ?>
-			<?php if($pais != 'Ec-bp'): ?>
+			<?php if($showItem): ?>
 			<li>
 				<!-- <a href="<?=base_url('/cerrar-sesion')?>" rel="subsection"> -->
 				<a href="<?=base_url($pais.'/cerrar-sesion')?>" rel="subsection">

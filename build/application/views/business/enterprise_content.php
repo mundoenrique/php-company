@@ -22,7 +22,7 @@
 		</a>
 	</li>
 </ol>
-<div class="lastsession"><?php echo lang('LAST_SESSION'); ?>: <?= $lastSession; ?></div>
+<div class="lastsession"><?= lang('LAST_SESSION'); ?>: <?= $lastSession; ?></div>
 <div class="filter" id="options">
 	<p id='totalEmpresas' class='total-empr-dash'></p>
 	<ul class="filter-ul option-set" >

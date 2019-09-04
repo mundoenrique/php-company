@@ -116,19 +116,26 @@ class NOVO_Controller extends CI_Controller {
 			case 'benefits':
 			case 'terms':
 			case 'pass-recovery':
-			$auth = TRUE;
-			break;
+				$auth = TRUE;
+				break;
 			case 'change-password':
-			$auth = ($this->session->flashdata('changePassword'));
-			break;
+				$auth = ($this->session->flashdata('changePassword'));
+				break;
 			case 'enterprise': // estas vistas deben estar logueadas
-			$auth = ($this->render->logged);
-			break;
+				$auth = ($this->render->logged);
+				break;
 			default:
 
 		}
-		$this->render->goOut = ($this->render->logged) ? 'cerrar-sesion' : 'inicio';
 		if($auth) {
+			$userAccess = $this->session->userdata('user_access');
+			$menu = createMenu($userAccess);
+			$userMenu = new stdClass();
+			$userMenu->menu = $menu;
+			$userMenu->pais = '';
+			$this->render->settingsMenu = $userMenu;
+			$this->render->showItem = $this->config->item('show_sign-out');
+			$this->render->goOut = ($this->render->logged) ? 'cerrar-sesion' : 'inicio';
 			$this->render->module = $module;
 			$this->render->viewPage = $this->views;
 			$this->asset->initialize($this->includeAssets);
