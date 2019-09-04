@@ -21,6 +21,10 @@ class Novo_Business_Model extends NOVO_Model {
 	public function callWs_getEnterprises_Business()
 	{
 		log_message('INFO', 'NOVO Business Model: Enterprises method Initialized');
+		$menu = [
+			'user_access'
+		];
+		$this->session->unset_userdata($menu);
 		$this->className = "com.novo.objects.MO.ListadoEmpresasMO";
 
 		$this->dataAccessLog->modulo = 'dashboard';
@@ -56,6 +60,6 @@ class Novo_Business_Model extends NOVO_Model {
 			}
 		}
 
-	return $this->response;
+		return $this->response;
 	}
 }
