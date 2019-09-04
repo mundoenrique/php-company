@@ -7332,9 +7332,10 @@ button.green:hover {
       width: 960px;
   }
   #nav2 ul {
-      list-style: none;
-      text-align: left;
-      padding-left: 0px;
+		list-style: none;
+		text-align: left;
+		padding-left: 0px;
+		margin: 0;
   }
   /*step 2
   * Luego definiremos la apariencia que tendrá nuestro menú.

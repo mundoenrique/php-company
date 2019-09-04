@@ -4704,6 +4704,7 @@ p#user-name {
 	background-color: white;
 	list-style: none;
 	text-align: left;
+	margin: 0;
 }
 
 #nav2 ul li > ul li a {

@@ -1,7 +1,7 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 <div id="nav-bar2">
 	<nav id="nav2">
-		<ul style="margin:0">
+		<ul>
 			<li>
 				<!-- <a href="<?=base_url('/empresas')?>" rel="start" > -->
 				<a href="<?=base_url($pais.'/empresas')?>" rel="start" >
