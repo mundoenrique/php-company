@@ -14,8 +14,7 @@ $config['settingContents'] =
 [
 	'master_content' => [
 		'menuFooter' => FALSE,
-		'ownerShip' => FALSE,
-		'logo' => 'logo-pichincha-azul.png'
+		'ownerShip' => FALSE
 	],
 	'widget_menu-user' => [
 		'menuTop' => 'unique'

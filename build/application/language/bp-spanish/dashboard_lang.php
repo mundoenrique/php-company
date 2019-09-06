@@ -86,7 +86,11 @@ $lang['CMBVJE'] = 'Viajes';
 $lang['LOAD'] = 'Más empresas';
 $lang['DASH150'] = 'El usuario no tiene empresas asociadas';
 $lang['PRODUCTOS-138'] = 'Usuario sin productos asociados para la empresa ';
+
 //PRODUCTOS
 $lang['FILTER_TODAS'] = 'TODAS';
 $lang['FILTER_SEL_CAT'] = 'Buscar por categoría';
 $lang['FILTER_SEL_MARC'] = 'Buscar por marca';
+
+//MASTER-CONTENT
+$lang['LOGO-HEAD'] = 'logo-pichincha-azul.png';

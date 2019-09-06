@@ -19,8 +19,8 @@
 	<?php if($countryUri != 'bp' || $module != 'login'): ?>
 	<header id="head">
 		<div id="head-wrapper">
-			<?php if($settingContents['master_content']['logo']): ?>
-			<img class="img-header" src="<?= $this->asset->insertFile($settingContents['master_content']['logo'], 'images'); ?>"
+			<?php if( lang('LOGO-HEAD') ): ?>
+			<img class="img-header" src="<?= $this->asset->insertFile( lang('LOGO-HEAD'), 'images'); ?>"
 				alt="Banco PICHINCHA">
 			<?php endif; ?>
 			<a id="branding" rel="start"></a>
