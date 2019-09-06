@@ -419,7 +419,7 @@ $(function () { // Document ready
 			buttons: {
 				"Aceptar": {
 					text: 'Aceptar',
-					class: 'novo-btn-secondary-modal',
+					class: 'novo-btn-primary-modal',
 					click: function () {
 					$(this).dialog("close");
 					}
