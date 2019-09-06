@@ -106,9 +106,9 @@ function notificacion(titulo, mensaje, sitio){
             }
     },
     buttons: {
-			"Cancelar": { text: 'Cancelar', class: 'novo-btn-secondary-modal', style: 'border-color: #ffdd00 !important;background:white !important;', click: function () {
-				$(this).dialog("close"); }
-			},
+			// "Cancelar": { text: 'Cancelar', class: 'novo-btn-secondary-modal aqui', style: 'border-color: #ffdd00 !important;background:white !important;', click: function () {
+			// 	$(this).dialog("close"); }
+			// },
       Aceptar: function(){
             $(this).dialog("close");
             if (sitio) {

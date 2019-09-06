@@ -96,7 +96,7 @@ h3 {
 }
 
 h4 {
-	color: #39b54a;
+	color: #333333;
 	font-size: 14px;
 	line-height: 20px;
 }
@@ -478,6 +478,11 @@ ol.breadcrumb li a {
 
 .align-text-center {
 	text-align: center;
+}
+
+center a.novo-btn-secondary,
+center button.novo-btn-secondary {
+	margin-right: 45px;
 }
 
 h2.widget-title {

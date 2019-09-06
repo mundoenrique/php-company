@@ -89,10 +89,9 @@ $(function () {
 							userpwdConfirm: cNewC,
 						})
 						dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, { format: CryptoJSAesJson }).toString();
-						$.post(baseURL + '/' + isoPais + "/changePassNewUserAuth", { request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook) },
+						$.post(baseURL + '/' + isoPais + "/changePassNewUserAuth", { request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook) }),
 							function (response) {
 								data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, { format: CryptoJSAesJson }).toString(CryptoJS.enc.Utf8))
-								data = $.parseJSON(data)
 								if (data.rc == 0) {
 									$dialogo.dialog("destroy");
 									notificacion('Cambiar contraseña', 'Proceso exitoso.');
@@ -105,7 +104,7 @@ $(function () {
 										notificacion('Cambiar contraseña', data.msg);
 									}
 								}
-							});
+							};
 
 					}
 					$(this).find($('#old')).val('');

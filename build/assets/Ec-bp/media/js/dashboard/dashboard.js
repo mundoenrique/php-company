@@ -97,8 +97,7 @@ $(function () {
 
 	paginar();
 
-$("#listCompanies").on('mouseenter','.style-companies-item',function(){
-
+$("#listCompanies").on('mouseenter','.style-companies-item, #more-info',function(e){
 	$(this).next("span#more-info").fadeIn("fast");
 
 })
