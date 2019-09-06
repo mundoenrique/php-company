@@ -107,7 +107,7 @@ $(function () {
 		layoutMode: 'fitRows'
 	});
 
-	if( isoPais != 'Ec-bp' ){
+	if( showDetailsCompanies == 'bottom' ){
 
 		$("#listCompanies").on('mouseover', '.style-companies-item', function () {
 
@@ -208,7 +208,7 @@ $(function () {
 			$(".isotope-hidden").hide();
 
 		}
-	}		
+	}
 
 	$('#search-filter').bind('keyup', function () {
 

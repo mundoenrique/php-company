@@ -67,6 +67,7 @@ class NOVO_Controller extends CI_Controller {
 			$this->render->ext = $faviconLoader->ext;
 			$this->render->loader = $faviconLoader->loader;
 			$this->render->countryConf = $this->config->item('country');
+			$this->render->settingContents = $this->config->item('settingContents');
 			$this->render->countryUri = $this->countryUri;
 			$this->render->novoName = $this->security->get_csrf_token_name();
 			$this->render->novoCook = $this->security->get_csrf_hash();

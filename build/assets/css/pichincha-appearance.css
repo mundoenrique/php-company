@@ -9,11 +9,11 @@
 
 @font-face {
 	font-family: "Prelo Medium";
-  src: url('../fonts/bp/_prelo-medium-webfont.eot');
-  src: url('../fonts/bp/_prelo-medium-webfont.eot?#iefix') format('embedded-opentype'),
-	url('../fonts/bp/_prelo-medium-webfont.woff2') format('woff2'),
-	url('../fonts/bp/_prelo-medium-webfont.woff') format('woff'),
-	url('../fonts/bp/_prelo-medium-webfont.ttf') format('truetype');
+  src: url('../fonts/bp/prelo-medium-webfont.eot');
+  src: url('../fonts/bp/prelo-medium-webfont.eot?#iefix') format('embedded-opentype'),
+	url('../fonts/bp/prelo-medium-webfont.woff2') format('woff2'),
+	url('../fonts/bp/prelo-medium-webfont.woff') format('woff'),
+	url('../fonts/bp/prelo-medium-webfont.ttf') format('truetype');
 }
 
 @font-face {

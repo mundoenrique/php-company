@@ -3,7 +3,6 @@
 	<nav id="nav2">
 		<ul>
 			<li>
-				<!-- <a href="<?=base_url('/empresas')?>" rel="start" > -->
 				<a href="<?=base_url($pais.'/empresas')?>" rel="start" >
 					<span aria-hidden="true" class="icon" data-icon="&#xe097;"></span>
 					<?=lang('MENU_INICIO')?>
@@ -45,9 +44,8 @@
 					<? endif; ?>
 				</li>
 			<?php endforeach; ?>
-			<?php if($showItem): ?>
+			<?php if($settingContents['widget_menu-business']['menuPrincipalFull']): ?>
 			<li>
-				<!-- <a href="<?=base_url('/cerrar-sesion')?>" rel="subsection"> -->
 				<a href="<?=base_url($pais.'/cerrar-sesion')?>" rel="subsection">
 					<span aria-hidden="true" class="icon" data-icon="&#xe03e;"></span>
 					<?=lang("SUBMENU_LOGOUT")?>

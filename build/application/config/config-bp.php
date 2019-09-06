@@ -8,3 +8,24 @@ $config['favicon'] = 'favicon-bp';
 $config['uniqueMenuUser'] = TRUE;
 //show sign-out
 $config['show_sign-out'] = FALSE;
+
+// Config elements master_content
+$config['settingContents'] =
+[
+	'master_content' => [
+		'menuFooter' => FALSE,
+		'ownerShip' => FALSE,
+		'logo' => 'logo-pichincha-azul.png'
+	],
+	'widget_menu-user' => [
+		'menuTop' => 'unique'
+	],
+	'widget_menu-business' => [
+		'menuPrincipalFull' => FALSE
+	],
+	'enterprise_content' => [
+		'typeFilterEnterprise' => 'select',
+		'typeOverDetailCompanies' => 'over'
+	]
+];
+

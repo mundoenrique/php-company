@@ -25,6 +25,7 @@ var baseAssets = getPropertyOfElement('asset-url');
 var country = getPropertyOfElement('country');
 var pais = getPropertyOfElement('pais');
 var isoPais = pais;
+var showDetailsCompanies = getPropertyOfElement('type-over-detail-companies');
 var loader = $('#loader').html();
 var prefixCountry = country !== 'bp' ? 'Empresas Online ' : '';
 var settingsCountry = { bp: 'Conexión Empresas', co: 'Colombia', pe: 'Perú', us: 'Perú', ve: 'Venezuela' };

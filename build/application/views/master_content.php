@@ -15,12 +15,12 @@
 </head>
 
 <body base-url="<?= base_url(); ?>" asset-url="<?= assetUrl(); ?>" country="<?= $countryUri; ?>"
-	pais="<?= $countryConf; ?>">
+	pais="<?= $countryConf; ?>" type-over-detail-companies="<?= $settingContents['enterprise_content']['typeOverDetailCompanies'];?>">
 	<?php if($countryUri != 'bp' || $module != 'login'): ?>
 	<header id="head">
 		<div id="head-wrapper">
-			<?php if($countryUri == 'bp'): ?>
-			<img class="img-header" src="<?= $this->asset->insertFile('logo-pichincha-azul.png', 'images'); ?>"
+			<?php if($settingContents['master_content']['logo']): ?>
+			<img class="img-header" src="<?= $this->asset->insertFile($settingContents['master_content']['logo'], 'images'); ?>"
 				alt="Banco PICHINCHA">
 			<?php endif; ?>
 			<a id="branding" rel="start"></a>
@@ -44,61 +44,67 @@
 		}
 	?>
 	</div>
+
 	<footer id="foot" class="foot">
 		<div id="foot-wrapper">
-			<nav id="extra-nav">
-				<ul class="menu">
-					<?php if(!$logged && $module !== 'login'): ?>
-					<li class="menu-item signup">
-						<a id="signup" href="<?= base_url($goOut); ?>" rel="section">
-							<?= lang('BREADCRUMB_INICIO'); ?>
-						</a>
-					</li>
-					<?php endif; ?>
-					<?php if($module !== 'benefits' && $module !== 'change-password' && $module !== 'terms' && $countryUri != 'bp'): ?>
-					<li class="menu-item benefits">
-						<a href="<?= base_url('inf-beneficios') ?>" rel="section">
-							<?= lang('BREADCRUMB_BENEFICIOS') ?>
-						</a>
-					</li>
-					<?php endif; ?>
-					<?php if($module !== 'terms' && $module !== 'change-password' && $countryUri != 'bp'): ?>
-					<li class="menu-item terms">
-						<a href="<?= base_url('inf-condiciones'); ?>" rel="section">
-							<?= lang('BREADCRUMB_CONDICIONES') ?>
-						</a>
-					</li>
-					<?php endif; ?>
-					<?php if($logged && $countryUri == 've' && $module !== 'rates'): ?>
-					<li class="menu-item privacy">
-						<a id='tarifas' href="<?= base_url('inf-tarifas'); ?>" rel="section">
-							<? echo lang('SUBMENU_TARIFAS'); ?>
-						</a>
-					</li>
-					<?php endif; ?>
-					<?php if($logged && $countryUri != 'bp'):	?>
-					<li class="menu-item privacy">
-						<a id='exit' href="<?= base_url('cerrar-sesion'); ?>" rel="section">
-							<? echo lang('SUBMENU_LOGOUT'); ?>
-						</a>
-					</li>
-					<?php endif; ?>
-				</ul>
-			</nav>
-			<?php if($countryUri != 'bp'): ?>
-			<a id="ownership" href="http://www.novopayment.com/" rel="me">
-				Powered by NovoPayment, Inc.
-			</a>
-			<div class="separator"></div>
-			<div id="credits">
-				<p>© <?= date('Y'); ?> NovoPayment Inc. All rights reserved.</p>
-			</div>
+			<?php if ($settingContents['master_content']['menuFooter']): ?>
+				<nav id="extra-nav">
+					<ul class="menu">
+						<?php if(!$logged && $module !== 'login'): ?>
+						<li class="menu-item signup">
+							<a id="signup" href="<?= base_url($goOut); ?>" rel="section">
+								<?= lang('BREADCRUMB_INICIO'); ?>
+							</a>
+						</li>
+						<?php endif; ?>
+						<?php if($module !== 'benefits' && $module !== 'change-password' && $module !== 'terms'): ?>
+						<li class="menu-item benefits">
+							<a href="<?= base_url('inf-beneficios') ?>" rel="section">
+								<?= lang('BREADCRUMB_BENEFICIOS') ?>
+							</a>
+						</li>
+						<?php endif; ?>
+						<?php if($module !== 'terms' && $module !== 'change-password'): ?>
+						<li class="menu-item terms">
+							<a href="<?= base_url('inf-condiciones'); ?>" rel="section">
+								<?= lang('BREADCRUMB_CONDICIONES') ?>
+							</a>
+						</li>
+						<?php endif; ?>
+						<?php if($logged && $countryUri == 've' && $module !== 'rates'): ?>
+						<li class="menu-item privacy">
+							<a id='tarifas' href="<?= base_url('inf-tarifas'); ?>" rel="section">
+								<? echo lang('SUBMENU_TARIFAS'); ?>
+							</a>
+						</li>
+						<?php endif; ?>
+						<?php if($logged):	?>
+						<li class="menu-item privacy">
+							<a id='exit' href="<?= base_url('cerrar-sesion'); ?>" rel="section">
+								<? echo lang('SUBMENU_LOGOUT'); ?>
+							</a>
+						</li>
+						<?php endif; ?>
+					</ul>
+				</nav>
+			<?php endif; ?>
+
+			<?php if($settingContents['master_content']['ownerShip']): ?>
+				<a id="ownership" href="http://www.novopayment.com/" rel="me">
+					Powered by NovoPayment, Inc.
+				</a>
+				<div class="separator"></div>
+				<div id="credits">
+					<p>© <?= date('Y'); ?> NovoPayment Inc. All rights reserved.</p>
+				</div>
 			<?php endif; ?>
 		</div>
 	</footer>
+
 	<div id="loader" class="hidden">
 		<img src="<?= $this->asset->insertFile($loader, 'images/loading-gif') ?>" class="requesting" alt="Verificando...">
 	</div>
+
 	<div id="system-info" class="hidden">
 		<p>
 			<!-- <span id="system-type" class="system-type ui-icon"></span>-->

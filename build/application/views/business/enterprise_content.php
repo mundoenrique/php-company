@@ -8,6 +8,7 @@
 	var data = <?= json_encode($listaEmpresas) ?>;
 </script>
 
+
 <h1><?= lang('BREADCRUMB_WELCOME'); ?> <span class='first-title'><?= $fullName; ?></span></h1>
 <ol class="breadcrumb">
 	<li>
@@ -26,28 +27,31 @@
 <div class="filter" id="options">
 	<p id='totalEmpresas' class='total-empr-dash'></p>
 	<ul class="filter-ul option-set" >
-	<?php if($countryConf == 'Ec-bp'): ?>
-	<select id="filtrar" class="categories-products">
-		<option value="" data-option-value="*" class="selected">Todas</option>
-		<option value="A-C" data-option-value=".A, .B, .C">a-c</option>
-		<option value="D-G" data-option-value=".D, .E, .F, .G">d-g</option>
-		<option value="H-K" data-option-value=".H, .I, .J, .K">h-k</option>
-		<option value="L-O" data-option-value=".L, .M, .N, .O">l-o</option>
-		<option value="P-S" data-option-value=".P, .Q, .R, .S">p-s</option>
-		<option value="T-W" data-option-value=".T, .U, .V, .W">t-w</option>
-		<option value="X-Z" data-option-value=".X, .Y, .Z">x-z</option>
-	</select>
-	<?php endif; ?>
-		<?php if($countryConf != 'Ec-bp'): ?>
-		<li><a value="" data-option-value="*" class="selected">Todas</a></li>
-		<li><a value="A-C" data-option-value=".A, .B, .C">a-c</a></li>
-		<li><a value="D-G" data-option-value=".D, .E, .F, .G">d-g</a></li>
-		<li><a value="H-K" data-option-value=".H, .I, .J, .K">h-k</a></li>
-		<li><a value="L-O" data-option-value=".L, .M, .N, .O">l-o</a></li>
-		<li><a value="P-S" data-option-value=".P, .Q, .R, .S">p-s</a></li>
-		<li><a value="T-W" data-option-value=".T, .U, .V, .W">t-w</a></li>
-		<li><a value="X-Z" data-option-value=".X, .Y, .Z">x-z</a></li>
+
+		<?php if($settingContents['enterprise_content']['typeFilterEnterprise'] === 'select'): ?>
+			<select id="filtrar" class="categories-products">
+				<option value="" data-option-value="*" class="selected">Todas</option>
+				<option value="A-C" data-option-value=".A, .B, .C">a-c</option>
+				<option value="D-G" data-option-value=".D, .E, .F, .G">d-g</option>
+				<option value="H-K" data-option-value=".H, .I, .J, .K">h-k</option>
+				<option value="L-O" data-option-value=".L, .M, .N, .O">l-o</option>
+				<option value="P-S" data-option-value=".P, .Q, .R, .S">p-s</option>
+				<option value="T-W" data-option-value=".T, .U, .V, .W">t-w</option>
+				<option value="X-Z" data-option-value=".X, .Y, .Z">x-z</option>
+			</select>
 		<?php endif; ?>
+
+		<?php if($settingContents['enterprise_content']['typeFilterEnterprise'] === 'list'): ?>
+			<li><a value="" data-option-value="*" class="selected">Todas</a></li>
+			<li><a value="A-C" data-option-value=".A, .B, .C">a-c</a></li>
+			<li><a value="D-G" data-option-value=".D, .E, .F, .G">d-g</a></li>
+			<li><a value="H-K" data-option-value=".H, .I, .J, .K">h-k</a></li>
+			<li><a value="L-O" data-option-value=".L, .M, .N, .O">l-o</a></li>
+			<li><a value="P-S" data-option-value=".P, .Q, .R, .S">p-s</a></li>
+			<li><a value="T-W" data-option-value=".T, .U, .V, .W">t-w</a></li>
+			<li><a value="X-Z" data-option-value=".X, .Y, .Z">x-z</a></li>
+		<?php endif; ?>
+
 		<li ><input id="search-filter" placeholder="<?php echo lang('BREADCRUMB_PH_BUSCAR') ?>"></li>
 		<li class="filter-3"><a id="buscar" title="<?php echo lang('BREADCRUMB_TITL_BUSCAR') ?>"><span aria-hidden="true" class="icon" data-icon="&#xe07a;" ></span></a></li>
 	</ul>

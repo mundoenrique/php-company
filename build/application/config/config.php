@@ -49,6 +49,26 @@ $config['uniqueMenuUser'] = FALSE;
 //show sign-out
 $config['show_sign-out'] = TRUE;
 
+// Config elements master_content
+$config['settingContents'] =
+[
+	'master_content' => [
+		'menuFooter' => TRUE,
+		'ownerShip' => TRUE,
+		'logo' => FALSE
+	],
+	'widget_menu-user' => [
+		'menuTop' => 'extended'
+	],
+	'widget_menu-business' => [
+		'menuPrincipalFull' => TRUE
+	],
+	'enterprise_content' => [
+		'typeFilterEnterprise' => 'list',
+		'typeOverDetailCompanies' => 'bottom'
+	]
+];
+
 /*
 |--------------------------------------------------------------------------
 | Index File
