@@ -3264,11 +3264,6 @@ span.jPag-snext-img {
 
 .file-field {
 	background: #0072c0;
-	background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #0072c0), color-stop(100%, #004574));
-	background-image: -webkit-linear-gradient(#0072c0, #004574);
-	background-image: -moz-linear-gradient(#0072c0, #004574);
-	background-image: -o-linear-gradient(#0072c0, #004574);
-	background-image: linear-gradient(#0072c0, #004574);
 	border: 0;
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
@@ -3287,12 +3282,8 @@ span.jPag-snext-img {
 }
 
 .file-field:hover {
-	background: #0054a9;
-	background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #0072c0), color-stop(100%, #0081da));
-	background-image: -webkit-linear-gradient(#0072c0, #0081da);
-	background-image: -moz-linear-gradient(#0072c0, #0081da);
-	background-image: -o-linear-gradient(#0072c0, #0081da);
-	background-image: linear-gradient(#0072c0, #0081da);
+	background-color: #0081C3;
+	transition: background-color 0.5s;
 }
 
 #sliderbutton-login {
@@ -5371,9 +5362,6 @@ button.green:hover {
 
 #widget-info {
 	background: #E4E3E4;
-	-webkit-box-shadow: rgba(51, 51, 51, 0.5) 0 1px 2px;
-	-moz-box-shadow: rgba(51, 51, 51, 0.5) 0 1px 2px;
-	box-shadow: rgba(51, 51, 51, 0.5) 0 1px 2px;
 	padding: 10px;
 	color: #0081C3;
 	float: left;
