@@ -9,6 +9,7 @@ $(function() {
 	function restartFormLogin(textBtn) {
 
 		disabledInputsform(false);
+		textBtn = textBtn || 'Ingresar';
 		$('#login-btn').html(textBtn);
 		$('#user_pass').val('');
 		if(country == 'bp') {
@@ -61,10 +62,9 @@ $(function() {
 		},
 		99: function(response){
 			notiSystem(response.title, response.msg, response.icon, response.data);
+			disabledInputsform(false);
 		}
 	}
-
-
 
 	function validateLogin(token,user,text){
 		data = {
@@ -76,7 +76,6 @@ $(function() {
 		// verb = "POST"; who = 'User'; where = 'Login'; data = user; // llama al login
 		callNovoCore(verb, who, where, data, function(response) {
 
-			disabledInputsform(false);
 			$('#login-btn').html(text);
 
 			if (response.code !== 0 && response.owner === 'captcha'){
@@ -104,6 +103,7 @@ $(function() {
 
 	$('#login-btn').on('click', function(e) {
 		e.preventDefault();
+		disabledInputsform(true);
 
 		$(".general-form-msg").html('');
 		var form = $('#login-form');
@@ -113,8 +113,6 @@ $(function() {
 		var user = getCredentialsUser();
 
 		if(form.valid()) {
-			disabledInputsform(true);
-
 			$(this).html(loader);
 			grecaptcha.ready(function() {
 				grecaptcha
