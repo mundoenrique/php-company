@@ -65,7 +65,8 @@ $config['settingContents'] =
 	],
 	'enterprise_content' => [
 		'typeFilterEnterprise' => 'list',
-		'typeOverDetailCompanies' => 'bottom'
+		'typeOverDetailCompanies' => 'bottom',
+		'showRazonSocialDetailCompanies' => TRUE
 	]
 ];
 

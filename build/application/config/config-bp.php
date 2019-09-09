@@ -24,7 +24,8 @@ $config['settingContents'] =
 	],
 	'enterprise_content' => [
 		'typeFilterEnterprise' => 'select',
-		'typeOverDetailCompanies' => 'over'
+		'typeOverDetailCompanies' => 'over',
+		'showRazonSocialDetailCompanies' => FALSE
 	]
 ];
 

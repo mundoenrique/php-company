@@ -15,7 +15,10 @@
 </head>
 
 <body base-url="<?= base_url(); ?>" asset-url="<?= assetUrl(); ?>" country="<?= $countryUri; ?>"
-	pais="<?= $countryConf; ?>" type-over-detail-companies="<?= $settingContents['enterprise_content']['typeOverDetailCompanies'];?>">
+	pais="<?= $countryConf; ?>"
+	type-over-detail-companies="<?= $settingContents['enterprise_content']['typeOverDetailCompanies'];?>"
+	show-razon-social-detail-companies="<?= $settingContents['enterprise_content']['showRazonSocialDetailCompanies'];?>"
+	>
 	<?php if($countryUri != 'bp' || $module != 'login'): ?>
 	<header id="head">
 		<div id="head-wrapper">

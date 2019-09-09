@@ -519,7 +519,7 @@ $(function () {
 						var canvas = '<li class="space-companies ' + cat + ' ' + pg + ' ' + pgf + '" id=' + v.accodcia + ' data-category=' + cat + '>';
 						canvas += '<a class=style-companies-item data-accodcia="' + v.accodcia + '" data-acrif="' + v.acrif + '" data-acnomcia="' + v.acnomcia + '" data-acrazonsocial="' + v.acrazonsocial + '" data-acdesc="' + v.acdesc + '" data-accodgrupoe="' + v.accodgrupoe + '"><span aria-hidden=true class=icon data-icon=' + dataIcon + '></span>';
 						canvas += '<p id=text-companies-T>' + charset(v.acnomcia, 'empresa asociada') + '</p> ';
-						canvas += '<p id=text-companies>' + v.acrazonsocial.substr(0, 52).replace(/[\,]+\s|[\,]/, ', ').toLowerCase().replace(/(^| )(\w)/g, function (x) { return x.toUpperCase(); }) + '</p>';
+						if (showRazonSocial){canvas += '<p id=text-companies>' + v.acrazonsocial.substr(0, 52).replace(/[\,]+\s|[\,]/, ', ').toLowerCase().replace(/(^| )(\w)/g, function (x) { return x.toUpperCase(); }) + '</p>'};
 						canvas += '<p id=text-companies>' + $("#estandar").attr("data-fiscal") + ': ' + v.acrif + '</p> ';
 						canvas += '<p id=text-companies>' + v.acdesc + '</p></a>';
 						canvas += '<span id=more-info><a><p><b><span aria-hidden=true class=icon data-icon=&#xe027;></span>' + v.resumenProductos + '</b>Productos</p>';
