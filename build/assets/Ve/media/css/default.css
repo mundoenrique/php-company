@@ -42,12 +42,12 @@ html {
 	-webkit-font-smoothing: antialiased;
 }
 
-/* html,
+html,
 body {
 	margin: 0px;
 	min-height: 100%;
 	position: relative;
-} */
+}
 
 body {
 	background: #FFF url('../img/bg-site.jpg?20160707') fixed repeat-x 0 0;
@@ -599,7 +599,7 @@ nav ul.menu li.menu-item a {
 #foot-wrapper {
 	margin: 0 auto;
 	overflow: hidden;
-	width: 1000px;
+	width: 960px;
 }
 
 .hidden {
@@ -831,7 +831,7 @@ p.subtitulos-login {
 }
 
 .container {
-	background-color: #FFFFFF;
+	/* background-color: #FFFFFF; */
 	border-radius: 4px;
 	box-shadow: 0 0 4px rgba(31, 31, 31, 0.35);
 	margin: 5px;
