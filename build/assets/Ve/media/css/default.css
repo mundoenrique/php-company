@@ -6,6 +6,8 @@ Build @project.build.number@ - @project.build.date@
 Default skin.
 @project.copyright@
 */
+
+
 @font-face {
 	font-family: "sourcesanspro-regular";
 	src: url('../fonts/sourcesanspro-regular-webfont.eot');
@@ -40,21 +42,22 @@ html {
 	-webkit-font-smoothing: antialiased;
 }
 
-html,
+/* html,
 body {
 	margin: 0px;
 	min-height: 100%;
 	position: relative;
-}
+} */
 
 body {
-	background: #FFFFFF url('../img/bg-site.jpg?20160707') fixed repeat-x 0 0;
+	background: #FFF url('../img/bg-site.jpg?20160707') fixed repeat-x 0 0;
 	color: #555555;
 	direction: ltr;
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 	font-size: 12px;
 	line-height: 17px;
 }
+
 
 article,
 aside,
