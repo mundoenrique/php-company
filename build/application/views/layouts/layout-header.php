@@ -71,7 +71,7 @@ $style_css = $this->uri->segment(3);
 		$settingsMenu = new stdClass();
 		$settingsMenu->menu = $menu;
 		$settingsMenu->pais = $this->config->item('countryUri');
-		$settingsMenu->showItem = $this->config->item('show_sign-out');
+		$settingsMenu->settingContents = $this->config->item('settingContents');
 		$this->load->view('widget/widget_menu-business_content', $settingsMenu);
 	}
 ?>

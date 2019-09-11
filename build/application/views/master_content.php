@@ -43,7 +43,7 @@
 	<div id="wrapper">
 		<?php
 		foreach($viewPage as $views) {
-			$this->load->view($views . '_content', $params);
+		$this->load->view($views . '_content'/*, $params*/);
 		}
 	?>
 	</div>

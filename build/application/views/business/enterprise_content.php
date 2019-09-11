@@ -1,9 +1,4 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
-
-<form id='logout' action="<?= $urlBase . 'logout'?>" method='post'>
-  <input type='hidden' name='data-caducada' value='true'>
-</form>
-
 <script>
 	var data = <?= json_encode($listaEmpresas) ?>;
 </script>

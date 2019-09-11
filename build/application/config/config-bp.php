@@ -3,12 +3,11 @@
 $config['country'] = 'Ec-bp';
 $config['base_url']	= BASE_URL.'bp/';
 $config['language']	= 'bp-spanish';
+$config['language_file']	= ['general'];
+$config['language_file_login'] = ['login'];
 $config['favicon'] = 'favicon-bp';
 // Menu user/config diseño de unica columna
 $config['uniqueMenuUser'] = TRUE;
-//show sign-out
-$config['show_sign-out'] = FALSE;
-
 // Config elements master_content
 $config['settingContents'] =
 [
@@ -28,4 +27,3 @@ $config['settingContents'] =
 		'showRazonSocialDetailCompanies' => FALSE
 	]
 ];
-

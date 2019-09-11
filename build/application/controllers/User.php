@@ -86,6 +86,11 @@ class User extends NOVO_Controller {
 		}
 		$this->views = $views;
 		$this->render->titlePage = lang('SYSTEM_NAME');
+
+		$this->lang->load(['login'], 'base-spanish');
+		if(count($this->config->item('language_file_login')) > 0 ) {
+			$this->lang->load($this->config->item('language_file_login'));
+		}
 		$this->loadView('login');
 	}
 	/**

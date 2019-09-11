@@ -46,9 +46,6 @@ $config['format_time'] = 'g:i A';
 $config['cypher_base'] = CYPHER_BASE;
 // Menu user/config diseño de unica columna
 $config['uniqueMenuUser'] = FALSE;
-//show sign-out
-$config['show_sign-out'] = TRUE;
-
 // Config elements master_content
 $config['settingContents'] =
 [
@@ -121,7 +118,7 @@ $config['url_suffix'] = '';
 | than english.
 |
 */
-$config['language']	= 'pe-spanish';
+$config['language']	= 'base-spanish';
 
 /*
 |--------------------------------------------------------------------------

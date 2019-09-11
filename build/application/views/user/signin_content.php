@@ -3,7 +3,7 @@
 <center class="margin-bottom">
 	<img src="<?= $this->asset->insertFile('logo-pichincha-azul.png', 'images'); ?>" alt="Banco PICHINCHA">
 </center>
-<h1 class="welcome-title-bp"><?= lang('WELCOME_TITLE'); ?></h1>
+<h1 class="welcome-title-bp"><?= lang('LOGIN_WELCOME_TITLE'); ?></h1>
 <?php endif; ?>
 <div id="sidebar">
 	<div id="widget-area">
@@ -11,7 +11,7 @@
 			<?php if($countryUri != 'bp'): ?>
 			<h2 class="widget-title">
 				<span aria-hidden="true" class="icon" data-icon="&#xe03f;"></span>
-				<?= lang('WIDGET_LOGIN_TITLE'); ?>
+				<?= lang('LOGIN_WIDGET_TITLE'); ?>
 			</h2>
 			<?php endif; ?>
 			<div class="widget-content">
@@ -36,5 +36,5 @@
 	</div>
 </div>
 <?php if($countryUri == 'bp'): ?>
-<p class="align-center"><?= lang('WELCOME_MESSAGE') ?></p>
+<p class="align-center"><?= lang('LOGIN_WELCOME_MESSAGE') ?></p>
 <?php endif; ?>

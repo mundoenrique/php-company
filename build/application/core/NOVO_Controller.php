@@ -36,9 +36,6 @@ class NOVO_Controller extends CI_Controller {
 		$this->render->fullName = $this->session->userdata('fullName');
 		$this->idProductos = $this->session->userdata('idProductos');
 		$this->optionsCheck();
-
-		$this->model = '';
-		$this->method = '';
 		$this->request = new stdClass();
 		$this->dataResponse = new stdClass();
 	}
@@ -46,9 +43,11 @@ class NOVO_Controller extends CI_Controller {
 	private function optionsCheck()
 	{
 		log_message('INFO', 'NOVO optionsCheck Method Initialized');
+		$this->lang->load(['general', 'errors'], 'base-spanish');
 		countryCheck($this->countryUri);
-		$this->loadLanguages(['erroreseol', 'dashboard', 'users']);
-
+		if(count($this->config->item('language_file')) > 0 ) {
+			$this->lang->load($this->config->item('language_file'));
+		}
 		if($this->input->is_ajax_request()) {
 			$this->dataRequest = json_decode(
 				$this->security->xss_clean(
@@ -121,7 +120,7 @@ class NOVO_Controller extends CI_Controller {
 			case 'change-password':
 				$auth = ($this->session->flashdata('changePassword'));
 				break;
-			case 'enterprise': // estas vistas deben estar logueadas
+			case 'enterprise':
 				$auth = ($this->render->logged);
 				break;
 			default:
@@ -134,7 +133,6 @@ class NOVO_Controller extends CI_Controller {
 			$userMenu->menu = $menu;
 			$userMenu->pais = '';
 			$this->render->settingsMenu = $userMenu;
-			$this->render->showItem = $this->config->item('show_sign-out');
 			$this->render->goOut = ($this->render->logged) ? 'cerrar-sesion' : 'inicio';
 			$this->render->module = $module;
 			$this->render->viewPage = $this->views;
@@ -157,20 +155,4 @@ class NOVO_Controller extends CI_Controller {
 		$method = $this->method;
 		return $this->modelLoaded->$method();
 	}
-
-
-	/**
-	 * Carga las definiciones de lenguages
-	 *
-	 * @param array $languages contiene la lista de los lenguages
-	 * @return void
-	 * @author Pedro Torres
-	 */
-	protected function loadLanguages($languages)
-	{
-		foreach ($languages as $k => $v) {
-			$this->lang->load($v);
-		}
-	}
 }
-

@@ -4,8 +4,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 //País
 $config['country']='Ec-bp';
 $config['countryUri']='bp';
-//show sign-out
-$config['show_sign-out'] = FALSE;
 /*
 |--------------------------------------------------------------------------
 | Base CDN URL
