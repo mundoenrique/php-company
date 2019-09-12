@@ -780,31 +780,34 @@ class Lotes extends CI_Controller {
 		$jsonResponse = np_Hoplite_Decrypt($response, 'callWSdesasociarFirma');
 		$response = json_decode($jsonResponse);
 
-		if($response){
-			log_message('info','desasociar '.$response->rc)	;
-			if($response->rc==0){
-				return $response;
-			}else{
-				if($response->rc==-61 || $response->rc==-29){
+		if($response) {
+			switch($response->rc) {
+				case 0:
+					$response = $response;
+					break;
+				case -61:
+				case -29:
 					$this->session->sess_destroy();
-					return array('ERROR' => '-29' );
-				}
-				else{
+					$response = array('ERROR' => '-29' );
+					break;
+				case -22:
+					$response = array('ERROR' => lang('MSG_FIRMA_LOTE') );
+					break;
+					default:
 					$codigoError = lang('ERROR_('.$response->rc.')');
 					if(strpos($codigoError, 'Error')!==false){
 						$codigoError = array('ERROR' => lang('ERROR_GENERICO_USER') );
-					}else{
+					} else {
 						$codigoError = array('ERROR' => lang('ERROR_('.$response->rc.')') );
 					}
-
-					return $codigoError;}
-				}
-			}else{
-				log_message('info','desasociar No WS')	;
-				return $codigoError = array('ERROR' => lang('ERROR_GENERICO_USER') );
+					$response = $codigoError;
 			}
 
+		} else {
+			$response = array('ERROR' => lang('ERROR_GENERICO_USER') );
 		}
+		return $response;
+	}
 
 	/**
 	 * Método para eliminar los lotes pendientes por firmar/autorizar.

@@ -874,6 +874,14 @@ function llamarWS(pass, url, operacion, mensaje) {
 	});
 }
 
+$('#form-password').on('keyup keypress', function(e) {
+	var keyCode = e.keyCode || e.which;
+  if (keyCode === 13) {
+    e.preventDefault();
+    return false;
+  }
+});
+
 // CONFIRMAR OPERACION
 function confirmar(titulo, url, operacion, mensaje) {
 	var canvas = "<div id='dialog-confirm'>";

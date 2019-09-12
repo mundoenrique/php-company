@@ -51,7 +51,7 @@
 								<li id="letter" class="invalid">Al menos una <strong>letra minúscula</strong></li>
 								<li id="capital" class="invalid">Al menos una <strong>letra mayúscula</strong></li>
 								<li id="number" class="invalid">De 1 a 3 <strong>números</strong></li>
-								<li id="especial" class="invalid">Al menos un <strong>caracter especial</strong> (ej: * & $ # . ?)</li>
+								<li id="especial" class="invalid">Al menos un <strong>caracter especial</strong> (ej: ! @ * - ? ¡ ¿ + / . , _ #)</li>
 								<li id="consecutivo" class="invalid">No debe tener más de 2 <strong>caracteres</strong> iguales consecutivos</li>
     				</ul>
 </div>
