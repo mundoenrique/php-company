@@ -20,17 +20,17 @@
 						<input type="hidden" id="status-user" name="user-type" value="<?= $userType ?>">
 						<fieldset>
 							<div class="field-input">
-								<label for="current-pass">Contraseña actual *</label>
+								<label for="current-pass"><?= lang('CURRENT_PASSWORD');?></label>
 								<input type="password" id="current-pass" name="current-pass" class="input-middle"
 									placeholder="Contraseña actual" required>
 							</div>
 							<div class="field-input">
-								<label for="new-pass">Contraseña nueva *</label>
+								<label for="new-pass"><?= lang('NEW_PASSWORD');?></label>
 								<input type="password" id="new-pass" name="new-pass" class="input-middle"
 									placeholder="Contraseña nueva" required>
 							</div>
 							<div class="field-input">
-								<label for="confirm-pass">Confirme la nueva contraseña *</label>
+								<label for="confirm-pass"><?= lang('CONFIRM_PASSWORD');?></label>
 								<input type="password" id="confirm-pass" name="confirm-pass" class="input-middle"
 									placeholder="Confirmar contraseña" required>
 							</div>
@@ -42,14 +42,14 @@
 		</div>
 	</div>
 	<div id="psw_info" style="display: none">
-		<h5>Requerimientos para configurar la contraseña. La clave debe tener:</h5>
+		<h5><?= lang('PASSWORD_INFO_TITLE');?></h5>
 		<ul>
-			<li id="length" class="invalid">De 8 a 15 <strong>Caracteres</strong></li>
-			<li id="letter" class="invalid">Al menos una <strong>letra minúscula</strong></li>
-			<li id="capital" class="invalid">Al menos una <strong>letra mayúscula</strong></li>
-			<li id="number" class="invalid">De 1 a 3 <strong>números</strong></li>
-			<li id="especial" class="invalid">Al menos un <strong>caracter especial</strong> (ej: ! @ * - ? ¡ ¿ + / . , _ #)</li>
-			<li id="consecutivo" class="invalid">No debe tener más de 2 <strong>caracteres</strong> iguales consecutivos</li>
+			<li id="length" class="invalid"><?= lang('PASSWORD_INFO_1');?></li>
+			<li id="letter" class="invalid"><?= lang('PASSWORD_INFO_2');?></li>
+			<li id="capital" class="invalid"><?= lang('PASSWORD_INFO_3');?></li>
+			<li id="number" class="invalid"><?= lang('PASSWORD_INFO_4');?></li>
+			<li id="especial" class="invalid"><?= lang('PASSWORD_INFO_5');?></li>
+			<li id="consecutivo" class="invalid"><?= lang('PASSWORD_INFO_6');?></li>
 		</ul>
 	</div>
 </div>

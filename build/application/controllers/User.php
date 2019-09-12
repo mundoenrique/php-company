@@ -18,6 +18,7 @@ class User extends NOVO_Controller {
 	public function login()
 	{
 		log_message('INFO', 'NOVO User: index Method Initialized');
+		$view = 'login';
 
 		if($this->session->userdata('logged')) {
 
@@ -43,6 +44,14 @@ class User extends NOVO_Controller {
 
 		$this->load->library('user_agent');
 		$this->load->library('recaptcha');
+
+		$this->lang->load([$view, 'signin'], 'base-spanish');
+		if(count($this->config->item('language_file_'.$view)) > 0 ) {
+			$this->lang->load($this->config->item('language_file_'.$view));
+		}
+		if(count($this->config->item('language_file_signin')) > 0 ) {
+			$this->lang->load($this->config->item('language_file_signin'));
+		}
 
 		$this->render->scriptCaptcha = $this->recaptcha->getScriptTag();
 		log_message('DEBUG', 'NOVO RESPONSE: recaptcha: ' . $this->recaptcha->getScriptTag());
@@ -87,11 +96,7 @@ class User extends NOVO_Controller {
 		$this->views = $views;
 		$this->render->titlePage = lang('SYSTEM_NAME');
 
-		$this->lang->load(['login'], 'base-spanish');
-		if(count($this->config->item('language_file_login')) > 0 ) {
-			$this->lang->load($this->config->item('language_file_login'));
-		}
-		$this->loadView('login');
+		$this->loadView($view);
 	}
 	/**
 	 * @info Método que renderiza la vista para recuperar la contraseña
@@ -99,6 +104,13 @@ class User extends NOVO_Controller {
 	 */
 	public function recoveryPass()
 	{
+		$view = 'pass-recovery';
+
+		$this->lang->load([$view], 'base-spanish');
+		if(count($this->config->item('language_file_'.$view)) > 0 ) {
+			$this->lang->load($this->config->item('language_file_'.$view));
+		}
+
 		log_message('INFO', 'NOVO User: passwordRecovery Method Initialized');
 		array_push(
 			$this->includeAssets->jsFiles,
@@ -107,9 +119,9 @@ class User extends NOVO_Controller {
 			"validate-forms",
 			"third_party/additional-methods"
 		);
-		$this->views = ['user/pass-recovery'];
-		$this->render->titlePage = "Recuperar contraseña";
-		$this->loadView('pass-recovery');
+		$this->views = ['user/'.$view];
+		$this->render->titlePage = lang('PASSRECOVERY_TITLE');
+		$this->loadView($view);
 	}
 	/**
 	 * @info Método que renderiza la vista para cambiar la contraseña
@@ -117,10 +129,15 @@ class User extends NOVO_Controller {
 	 */
 	public function changePassword()
 	{
+		$view = 'change-password';
 		log_message('INFO', 'NOVO User: changePassword Method Initialized');
 		if(!$this->session->flashdata('changePassword')) {
 			redirect(base_url('inicio'), 'location');
 			exit();
+		}
+		$this->lang->load([$view], 'base-spanish');
+		if(count($this->config->item('language_file_'.$view)) > 0 ) {
+			$this->lang->load($this->config->item('language_file_'.$view));
 		}
 		array_push(
 			$this->includeAssets->jsFiles,
@@ -142,13 +159,13 @@ class User extends NOVO_Controller {
 
 		$this->render->fullName = $this->session->userdata('fullName');
 		$this->render->userType = $this->session->flashdata('userType');
-		$this->views = ['user/change-password'];
-		$this->render->titlePage = "Recuperar contraseña";
+		$this->views = ['user/'.$view];
+		$this->render->titlePage = LANG('CHANGEPASSWORD_TITLE');
 
 		$this->session->set_flashdata('changePassword', $this->session->flashdata('changePassword'));
 		$this->session->set_flashdata('userType', $this->session->flashdata('userType'));
 
-		$this->loadView('change-password');
+		$this->loadView($view);
 	}
 	/**
 	 * @info Método para el cierre de sesión

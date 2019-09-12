@@ -21,6 +21,12 @@ class Business extends NOVO_Controller {
 	public function getEnterprises()
 	{
 		log_message('INFO', 'NOVO Business: getCompanies Method Initialized');
+		$view = 'enterprise';
+
+		$this->lang->load([$view], 'base-spanish');
+		if(count($this->config->item('language_file_'.$view)) > 0 ) {
+			$this->lang->load($this->config->item('language_file_'.$view));
+		}
 
 		$this->load->helper('form');
 
@@ -38,12 +44,12 @@ class Business extends NOVO_Controller {
 			"business/enterprise"
 		);
 
-		$this->views = ['business/enterprise'];
+		$this->views = ['business/'.$view];
 		$this->render->titlePage = "Empresas";
 		$this->render->listaEmpresas = $this->callMethodNotAsync();
 		$this->render->pais = $this->session->userdata('countrySess');
 		$this->render->uniqueMenuUser = $this->config->item('uniqueMenuUser');
 		$this->render->lastSession = $this->session->userdata('lastSession');
-		$this->loadView('enterprise');
+		$this->loadView($view);
 	}
 }

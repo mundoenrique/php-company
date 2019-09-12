@@ -62,7 +62,7 @@ class Novo_User_Model extends NOVO_Model {
 
 					$this->session->set_userdata($userData);
 					$this->response->code = 0;
-					$this->response->msg = lang('LOGIN_MSG-'.$this->isResponseRc);
+					$this->response->msg = lang('LOGIN_MSG'.$this->isResponseRc);
 					$this->response->data = base_url('empresas');
 					break;
 				case -2:
@@ -83,16 +83,16 @@ class Novo_User_Model extends NOVO_Model {
 					$this->session->set_userdata($userData);
 
 					$this->response->code = 0;
-					$this->response->title = lang('LOGIN_TITLE-'.$this->isResponseRc);
-					$this->response->msg = lang('LOGIN_MSG-'.$this->isResponseRc);
+					$this->response->title = lang('LOGIN_TITLE'.$this->isResponseRc);
+					$this->response->msg = lang('LOGIN_MSG'.$this->isResponseRc);
 					$this->response->data = base_url('inf-condiciones');
 					$this->session->set_flashdata('changePassword', 'newUser');
 					$this->session->set_flashdata('userType', $response->usuario->ctipo);
 
 					if($this->isResponseRc === -185) {
 						$this->response->code = 0;
-						$this->response->title = lang('LOGIN_TITLE-'.$this->isResponseRc);
-						$this->response->msg = lang('LOGIN_MSG-'.$this->isResponseRc);
+						$this->response->title = lang('LOGIN_TITLE'.$this->isResponseRc);
+						$this->response->msg = lang('LOGIN_MSG'.$this->isResponseRc);
 						$this->response->data = base_url('cambiar-clave');
 						$this->session->set_flashdata('changePassword', 'expiredPass');
 						break;
@@ -101,24 +101,24 @@ class Novo_User_Model extends NOVO_Model {
 				case -1:
 				case -263:
 					$this->response->code = 1;
-					$this->response->title = lang('LOGIN_TITLE-'.$this->isResponseRc);
-					$this->response->msg = lang('LOGIN_MSG-'.$this->isResponseRc);
+					$this->response->title = lang('LOGIN_TITLE'.$this->isResponseRc);
+					$this->response->msg = lang('LOGIN_MSG'.$this->isResponseRc);
 					$this->response->className = 'error-login-2';
 					break;
 				case -8:
 				case -35:
 					$this->response->code = 1;
-					$this->response->title = lang('LOGIN_TITLE-'.$this->isResponseRc);
-					$this->response->msg = lang('LOGIN_MSG-'.$this->isResponseRc);
+					$this->response->title = lang('LOGIN_TITLE'.$this->isResponseRc);
+					$this->response->msg = lang('LOGIN_MSG'.$this->isResponseRc);
 					$this->response->className = 'login-inactive';
 					break;
 				case -229:
 					$this->response->code = 2;
-					$this->response->title = lang('LOGIN_TITLE-'.$this->isResponseRc);
+					$this->response->title = lang('LOGIN_TITLE'.$this->isResponseRc);
 					break;
 				case -262:
 					$this->response->code = 3;
-					$this->response->msg = lang('LOGIN_MSG-'.$this->isResponseRc);
+					$this->response->msg = lang('LOGIN_MSG'.$this->isResponseRc);
 					$this->response->icon = 'ui-icon-info';
 					$this->response->data = [
 						'btn1'=> [
@@ -130,7 +130,7 @@ class Novo_User_Model extends NOVO_Model {
 					break;
 				case -28:
 					$this->response->code = 3;
-					$this->response->msg = lang('LOGIN_MSG-'.$this->isResponseRc);
+					$this->response->msg = lang('LOGIN_MSG'.$this->isResponseRc);
 					$this->response->icon = 'ui-icon-alert';
 					$this->response->data = [
 						'btn1'=> [
