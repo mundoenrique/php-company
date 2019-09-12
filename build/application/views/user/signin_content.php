@@ -17,18 +17,18 @@
 			<div class="widget-content">
 				<form id="login-form" name="login-form" accept-charset="utf-8">
 					<fieldset>
-						<label for="user_login">Usuario</label>
+						<label for="user_login"><?= lang('USER'); ?></label>
 						<input type="text" id="user_login" name="user_login" required disabled>
-						<label for="user_pass">Contraseña</label>
+						<label for="user_pass"><?= lang('PASSWORD'); ?></label>
 						<input type="password" id="user_pass" name="user_pass" required disabled>
 					</fieldset>
 					<div class="general-form-msg"></div>
-					<button id="login-btn" name="login-btn" class="btn-sidebar" disabled>Ingresar</button>
+					<button id="login-btn" name="login-btn" class="btn-sidebar" disabled><?= lang('SIGNIN'); ?></button>
 				</form>
 				<div class="align-center">
-					<p>Restablecer contraseña</p>
+					<p><?= lang('RECOVERY_PASSWORD_TITLE'); ?></p>
 					<a href="<?= base_url('recuperar-clave') ?>" rel="section">
-						¿Olvidaste o bloqueaste tu<br>clave de acceso?
+						<?= lang('RECOVERY_PASSWORD_LINK'); ?>
 					</a>
 				</div>
 			</div>

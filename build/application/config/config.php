@@ -51,7 +51,7 @@ $config['settingContents'] =
 [
 	'master_content' => [
 		'menuFooter' => TRUE,
-		'ownerShip' => TRUE,
+		'ownerShip' => 'http://www.novopayment.com/',
 		'logo' => FALSE
 	],
 	'widget_menu-user' => [

@@ -92,20 +92,20 @@
 				</nav>
 			<?php endif; ?>
 
-			<?php if($settingContents['master_content']['ownerShip']): ?>
-				<a id="ownership" href="http://www.novopayment.com/" rel="me">
-					Powered by NovoPayment, Inc.
+			<?php if($settingContents['master_content']['ownerShip'] !== FALSE): ?>
+				<a id="ownership" href="<?= $settingContents['master_content']['ownerShip'] ?>" rel="me">
+					<?= lang('OWNERSHIP'); ?>
 				</a>
 				<div class="separator"></div>
 				<div id="credits">
-					<p>© <?= date('Y'); ?> NovoPayment Inc. All rights reserved.</p>
+					<p>© <?= date('Y').' '.lang('CREDITS'); ?></p>
 				</div>
 			<?php endif; ?>
 		</div>
 	</footer>
 
 	<div id="loader" class="hidden">
-		<img src="<?= $this->asset->insertFile($loader, 'images/loading-gif') ?>" class="requesting" alt="Verificando...">
+		<img src="<?= $this->asset->insertFile($loader, 'images/loading-gif') ?>" class="requesting" alt="<?= lang('ALT_LOADER'); ?>">
 	</div>
 
 	<div id="system-info" class="hidden">

@@ -91,3 +91,21 @@ $lang['TITLE_MODIFICAR'] = 'Modificar';
 $lang['BUTTON_ACCEPT']= 'Aceptar';
 $lang['BUTTON_CONTINUE']= 'Continuar';
 $lang['BUTTON_CANCEL']= 'Cancelar';
+
+//MASTER_CONTENT
+$lang['OWNERSHIP'] = 'Powered by NovoPayment, Inc.';
+$lang['CREDITS'] = 'NovoPayment Inc. All rights reserved.';
+$lang['ALT_LOADER'] = 'Verificando...';
+
+//ENTERPRISE_CONTENT
+$lang['ALL'] = 'Todos';
+$lang['FIRST_PAGE'] = 'Primera';
+$lang['LAST_PAGE'] = 'Última';
+
+//SIGNIN_CONTENT
+$lang['USER'] = 'Usuario';
+$lang['PASSWORD'] = 'Contraseña';
+$lang['SIGNIN'] = 'Ingresar';
+$lang['RECOVERY_PASSWORD_TITLE'] = 'Restablecer contraseña';
+$lang['RECOVERY_PASSWORD_LINK'] = '¿Olvidaste o bloqueaste tu<br>clave de acceso?';
+
