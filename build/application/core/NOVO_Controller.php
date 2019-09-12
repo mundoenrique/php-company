@@ -38,12 +38,12 @@ class NOVO_Controller extends CI_Controller {
 		$this->optionsCheck();
 		$this->request = new stdClass();
 		$this->dataResponse = new stdClass();
+		$this->lang->load(['general', 'error', 'response'], 'base-spanish');
 	}
 
 	private function optionsCheck()
 	{
 		log_message('INFO', 'NOVO optionsCheck Method Initialized');
-		$this->lang->load(['general', 'error'], 'base-spanish');
 		countryCheck($this->countryUri);
 		if(count($this->config->item('language_file')) > 0 ) {
 			$this->lang->load($this->config->item('language_file'));

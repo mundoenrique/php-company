@@ -27,7 +27,7 @@ class NOVO_Model extends CI_Model {
 		$this->isResponseRc = 'No web service';
 		$this->token = $this->session->userdata('token') ? $this->session->userdata('token') : '';
 		$this->userName = $this->session->userdata('userName');
-		$this->lang->load(['error','general'], 'base-spanish' );
+		$this->lang->load(['error','general', 'response'], 'base-spanish' );
 	}
 
 	public function sendToService($model)
@@ -96,7 +96,8 @@ class NOVO_Model extends CI_Model {
 		return $responseDecrypt;
 	}
 
-	public function cypherData() {
+	public function cypherData()
+	{
 		log_message('INFO', 'NOVO cypherData Method Initialized');
 		log_message('DEBUG', 'NOVO RESPONSE TO VIEW: '.json_encode($this->response));
 

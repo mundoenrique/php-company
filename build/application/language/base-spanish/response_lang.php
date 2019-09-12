@@ -19,7 +19,6 @@ $lang['LOGIN_MSG-262'] = 'Estimado usuario no tienes permisos para la aplicació
 $lang['LOGIN_TITLE-263']= 'Usuario incorrecto';
 $lang['LOGIN_MSG-263']= "Usuario o contraseña inválido";
 
-
 $lang['RECOVERYPASS_TITLE'] = 'Restablecer contraseña';
 $lang['RECOVERYPASS_MSG-0'] = 'Proceso exitoso, se ha enviado un correo a {$maskMail$} con la contraseña temporal.';
 $lang['RECOVERYPASS_MSG-6'] = 'El usuario indicado no posee empresa asignada.';
@@ -35,3 +34,11 @@ $lang['CHANGEPASSWORD_MSG-22'] = 'La contraseña actual es incorrecta.<br>Por fa
 $lang['FINISHSESSION_MSG-0'] = 'Sessión finalizada exitosamente';
 
 $lang['VALIDATECAPTCHA_MSG-0'] = 'El sistema ha detectado una actividad no autorizada, por favor intenta nuevamente';
+
+// Novo_Business_Model
+$lang['GETENTERPRISES_TITLE-5000'] = 'Usuario Incorrecto';
+$lang['GETENTERPRISES_MSG-5000'] = 'Usuario o contraseña inválido';
+$lang['GETENTERPRISES_MSG-6000'] = 'Estimado usuario no tienes permisos para la aplicación, por favor comunícate con el administrador';
+
+// CallModels
+$lang['CALLMODELSINDEX_MSG'] = 'Combinación de caracteres no válida, por favor verifique e intente de nuevo';

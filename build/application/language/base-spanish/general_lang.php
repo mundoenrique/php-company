@@ -90,3 +90,4 @@ $lang['TITLE_MODIFICAR'] = 'Modificar';
 //BOTONES
 $lang['BUTTON_ACCEPT']= 'Aceptar';
 $lang['BUTTON_CONTINUE']= 'Continuar';
+$lang['BUTTON_CANCEL']= 'Cancelar';

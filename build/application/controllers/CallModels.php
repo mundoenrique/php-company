@@ -56,12 +56,12 @@ class CallModels extends Novo_Controller {
 			log_message('DEBUG', 'NOVO VALIDATION ERRORS: '.json_encode(validation_errors()));
 			$this->dataResponse->code = 303;
 			$this->dataResponse->title = lang('SYSTEM_NAME');
-			$this->dataResponse->msg = 'Combinación de caracteres no válida, por favor verifique e intente de nuevo';
+			$this->dataResponse->msg = lang('CALLMODELS_INDEX_MSG');
 			$this->dataResponse->data = base_url('inicio');
 			$this->dataResponse->icon = 'ui-icon-alert';
 			$this->dataResponse->data = [
 				'btn1'=> [
-					'text'=> 'Aceptar',
+					'text'=> lang('BUTTON_ACCEPT'),
 					'link'=> base_url('inicio'),
 					'action'=> 'redirect'
 				]

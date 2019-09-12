@@ -47,14 +47,13 @@ class Novo_Business_Model extends NOVO_Model {
 					break;
 				case -5000:
 					$this->response->code = 1;
-					$this->response->title = 'Usuario incorrecto';
+					$this->response->title = lang('GETENTERPRISES_TITLE-'.$this->isResponseRc);
 					$this->response->className = 'error-login-2';
-					$this->response->msg = lang('ERROR_(-1)');
+					$this->response->msg = lang('GETENTERPRISES_MSG-'.$this->isResponseRc);
 					break;
 				case -6000:
 					$this->response->code = 3;
-					$this->response->msg = 'Estimado usuario no tienes permisos para la aplicación, por favor comunícate ';
-					$this->response->msg.= 'con el administrador';
+					$this->response->msg = lang('GETENTERPRISES_MSG-'.$this->isResponseRc);
 					$this->response->icon = 'ui-icon-info';
 					break;
 			}
