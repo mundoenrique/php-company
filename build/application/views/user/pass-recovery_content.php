@@ -4,7 +4,7 @@ $pais= $this->uri->segment(1, 0);
 ?>
 <section class="container">
 	<header class="padding-left-right">
-		<h1>Recuperar contraseña</h1>
+		<h1><?= lang('PASSRECOVERY_TITLE'); ?></h1>
 	</header>
 	<article class="padding-left-right">
 		<p class="paragraph"><?= lang('FORGOT_PASS'); ?></p>
@@ -38,17 +38,17 @@ $pais= $this->uri->segment(1, 0);
 						<?php	if($pais=='bp'): ?>
 								<center>
 						<?	endif; ?>
-								<a class="cancel-anchor novo-btn-secondary novo-cancel-pass-recovery" href="<?= base_url('inicio') ?>">Cancelar</a>
+								<a class="cancel-anchor novo-btn-secondary novo-cancel-pass-recovery" href="<?= base_url('inicio') ?>"><?= lang('BUTTON_CANCEL'); ?></a>
 						<?php	if($pais=='bp'): ?>
 						<?php else:
 								?>
-								<button id="btn-pass-recover" class="novo-btn-primary">Continuar</button><?php
+								<button id="btn-pass-recover" class="novo-btn-primary"><?= lang('BUTTON_CONTINUE'); ?></button><?php
 						endif; ?>
 						</td>
 						<td valign="top">
 						<?php	if($pais=='bp'): ?>
 								<button id="btn-pass-recover" class="novo-btn-primary">
-								<a class="cancel-anchor" href="<?= base_url('inicio') ?>">Continuar</a>
+								<a class="cancel-anchor" href="<?= base_url('inicio') ?>"><?= lang('BUTTON_CONTINUE'); ?></a>
 								</button>
 								</center>
 						<?	endif; ?>

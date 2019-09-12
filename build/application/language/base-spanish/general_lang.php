@@ -109,3 +109,15 @@ $lang['SIGNIN'] = 'Ingresar';
 $lang['RECOVERY_PASSWORD_TITLE'] = 'Restablecer contraseña';
 $lang['RECOVERY_PASSWORD_LINK'] = '¿Olvidaste o bloqueaste tu<br>clave de acceso?';
 
+//PASS-RECOVERY
+$lang['PASSRECOVERY_TITLE'] = 'Recuperar contraseña';
+
+//RATES_CONTENT
+$lang['RATE_TITLE'] = 'Tarifas';
+$lang['BACK'] = 'Volver atrás';
+
+//TERMS_CONTENT
+$lang['ACCEPT_TERMS'] = 'Acepto los términos y condiciones.';
+
+
+
