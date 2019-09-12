@@ -187,7 +187,7 @@
         <?php endif; ?>
       </div>
       <div id="batchs-last">
-        <form name="no-form" onsubmit="return false">
+        <form name="no-form" onsubmit="return false" id="form-password">
           <?php
 					if($pais=='Ec-bp'){
 						?>
