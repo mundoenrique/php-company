@@ -27,8 +27,7 @@ class NOVO_Model extends CI_Model {
 		$this->isResponseRc = 'No web service';
 		$this->token = $this->session->userdata('token') ? $this->session->userdata('token') : '';
 		$this->userName = $this->session->userdata('userName');
-		$this->lang->load('erroreseol');
-		$this->lang->load('dashboard');
+		$this->lang->load(['error','general'], 'base-spanish' );
 	}
 
 	public function sendToService($model)
@@ -62,7 +61,7 @@ class NOVO_Model extends CI_Model {
 					$this->response->icon = 'ui-icon-alert';
 					$this->response->data = [
 						'btn1'=> [
-							'text'=> 'Aceptar',
+							'text'=> lang('BUTTON_ACCEPT'),
 							'link'=> base_url('inicio'),
 							'action'=> 'redirect'
 						]
@@ -75,7 +74,7 @@ class NOVO_Model extends CI_Model {
 					$this->response->icon = 'ui-icon-alert';
 					$this->response->data = [
 						'btn1'=> [
-							'text'=> 'Aceptar',
+							'text'=> lang('BUTTON_ACCEPT'),
 							'link'=> base_url('empresas'),
 							'action'=> 'redirect'
 						]
@@ -87,7 +86,7 @@ class NOVO_Model extends CI_Model {
 			$this->response->icon = 'ui-icon-alert';
 			$this->response->data = [
 				'btn1'=> [
-					'text'=> 'Aceptar',
+					'text'=> lang('BUTTON_ACCEPT'),
 					'link'=> base_url('empresas'),
 					'action'=> 'redirect'
 				]

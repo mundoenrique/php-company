@@ -62,7 +62,7 @@ class Novo_User_Model extends NOVO_Model {
 
 					$this->session->set_userdata($userData);
 					$this->response->code = 0;
-					$this->response->msg = 'Ingreso exitoso';
+					$this->response->msg = lang('LOGIN_MSG-'.$this->isResponseRc);
 					$this->response->data = base_url('empresas');
 					break;
 				case -2:
@@ -83,16 +83,16 @@ class Novo_User_Model extends NOVO_Model {
 					$this->session->set_userdata($userData);
 
 					$this->response->code = 0;
-					$this->response->title = 'Usuario nuevo';
-					$this->response->msg = 'Debes aceptar los términos de uso';
+					$this->response->title = lang('LOGIN_TITLE-'.$this->isResponseRc);
+					$this->response->msg = lang('LOGIN_MSG-'.$this->isResponseRc);
 					$this->response->data = base_url('inf-condiciones');
 					$this->session->set_flashdata('changePassword', 'newUser');
 					$this->session->set_flashdata('userType', $response->usuario->ctipo);
 
 					if($this->isResponseRc === -185) {
 						$this->response->code = 0;
-						$this->response->title = 'Clave vencida';
-						$this->response->msg = 'Debes cambiar la clave';
+						$this->response->title = lang('LOGIN_TITLE-'.$this->isResponseRc);
+						$this->response->msg = lang('LOGIN_MSG-'.$this->isResponseRc);
 						$this->response->data = base_url('cambiar-clave');
 						$this->session->set_flashdata('changePassword', 'expiredPass');
 						break;
@@ -101,29 +101,28 @@ class Novo_User_Model extends NOVO_Model {
 				case -1:
 				case -263:
 					$this->response->code = 1;
-					$this->response->title = 'Usuario incorrecto';
+					$this->response->title = lang('LOGIN_TITLE-'.$this->isResponseRc);
+					$this->response->msg = lang('LOGIN_MSG-'.$this->isResponseRc);
 					$this->response->className = 'error-login-2';
-					$this->response->msg = lang('ERROR_(-1)');
 					break;
 				case -8:
 				case -35:
 					$this->response->code = 1;
-					$this->response->title = 'Usuario suspendido';
+					$this->response->title = lang('LOGIN_TITLE-'.$this->isResponseRc);
+					$this->response->msg = lang('LOGIN_MSG-'.$this->isResponseRc);
 					$this->response->className = 'login-inactive';
-					$this->response->msg = lang('ERROR_(-8)');
 					break;
 				case -229:
 					$this->response->code = 2;
-					$this->response->title = 'Usuario aplicación anterior';
+					$this->response->title = lang('LOGIN_TITLE-'.$this->isResponseRc);
 					break;
 				case -262:
 					$this->response->code = 3;
-					$this->response->msg = 'Estimado usuario no tienes permisos para la aplicación, por favor comunícate ';
-					$this->response->msg.= 'con el administrador';
+					$this->response->msg = lang('LOGIN_MSG-'.$this->isResponseRc);
 					$this->response->icon = 'ui-icon-info';
 					$this->response->data = [
 						'btn1'=> [
-							'text'=> 'Aceptar',
+							'text'=> lang('BUTTON_ACCEPT'),
 							'link'=> FALSE,
 							'action'=> 'close'
 						]
@@ -131,11 +130,11 @@ class Novo_User_Model extends NOVO_Model {
 					break;
 				case -28:
 					$this->response->code = 3;
-					$this->response->msg = lang('ERROR_(-28)');
+					$this->response->msg = lang('LOGIN_MSG-'.$this->isResponseRc);
 					$this->response->icon = 'ui-icon-alert';
 					$this->response->data = [
 						'btn1'=> [
-							'text'=> 'Aceptar',
+							'text'=> lang('BUTTON_ACCEPT'),
 							'link'=> [
 								'who'=> 'User',
 								'where'=> 'FinishSession'
@@ -169,35 +168,23 @@ class Novo_User_Model extends NOVO_Model {
 		$response = $this->sendToService('RecoveryPass');
 
 		if($this->isResponseRc !== FALSE) {
-			$this->response->title = 'Restablecer contraseña';
+			$this->response->title = lang('RECOVERYPASS_TITLE');
 			switch($this->isResponseRc) {
 				case 0:
 					$maskMail = maskString($dataRequest->email, 4, $end = 6, '@');
 					$this->response->code = 0;
-					$this->response->msg = 'Proceso exitoso, se ha enviado un correo a '.$maskMail.' con la contraseña temporal.';
+					$this->response->msg = str_replace('{$maskMail$}', $maskMail, lang('RECOVERYPASS_MSG-'.$this->isResponseRc));
 					$this->response->icon = 'ui-icon-circle-check';
 					$this->response->data = [
 						'btn1'=> [
-							'text'=> 'Continuar',
+							'text'=> lang('BUTTON_CONTINUE'),
 							'link'=> base_url('inicio'),
 							'action'=> 'redirect'
 						]
 					];
 					break;
-				case -6:
-					$msg = 'El usuario indicado no posee empresa asignada.';
-					break;
-				case -150:
-					$msg = lang('ERROR_RIF');
-					break;
-				case -159:
-					$msg = lang('ERROR_MAIL');
-					break;
-				case -173:
-					$msg = 'No fue posible enviar el correo.<br>Verifícalo e intenta nuevamente.';
-					break;
 				case -205:
-					$msg = lang('ERROR_USER');
+					$msg = lang('RECOVERYPASS_MSG-'.$this->isResponseRc);
 					if($this->countryUri == 've') {
 						$msg.= '<br>'.lang('ERROR_SUPPORT');
 					}
@@ -206,11 +193,11 @@ class Novo_User_Model extends NOVO_Model {
 
 			if($this->isResponseRc != 0) {
 				$this->response->code = 1;
-				$this->response->msg = $msg;
+				$this->response->msg = lang('RECOVERYPASS_MSG-'.$this->isResponseRc);
 				$this->response->icon = 'ui-icon-info';
 				$this->response->data = [
 					'btn1'=> [
-						'text'=> 'Aceptar',
+						'text'=> lang('BUTTON_ACCEPT'),
 						'link'=> FALSE,
 						'action'=> 'close'
 					]
@@ -246,11 +233,11 @@ class Novo_User_Model extends NOVO_Model {
 				case 0:
 					$this->callWs_FinishSession_User();
 					$this->response->code = 0;
-					$this->response->msg = 'La contraseña fue cambiada exitosamente.<br>Por motivos de seguridad es necesario que inicies sesión nuevamente.';
+					$this->response->msg = lang('CHANGEPASSWORD_MSG-'.$this->isResponseRc);
 					$this->response->icon = 'ui-icon-circle-check';
 					$this->response->data = [
 						'btn1'=> [
-							'text'=> 'Continuar',
+							'text'=> lang('BUTTON_CONTINUE'),
 							'link'=> base_url('inicio'),
 							'action'=> 'redirect'
 						]
@@ -260,10 +247,10 @@ class Novo_User_Model extends NOVO_Model {
 				case -22:
 					$this->response->code = 1;
 					$this->response->icon = 'ui-icon-alert';
-					$this->response->msg = lang('ERROR_('.$this->isResponseRc.')');
+					$this->response->msg = lang('CHANGEPASSWORD_MSG-'.$this->isResponseRc);
 					$this->response->data = [
 						'btn1'=> [
-							'text'=> 'Aceptar',
+							'text'=> lang('BUTTON_ACCEPT'),
 							'link'=> FALSE,
 							'action'=> 'close'
 						]
@@ -297,14 +284,10 @@ class Novo_User_Model extends NOVO_Model {
 		$response = $this->sendToService('FinishSession');
 
 		if($this->isResponseRc !== FALSE) {
-			switch($this->isResponseRc) {
-				case 0:
-					$this->response->code = 0;
-					$this->response->msg = 'Sessión finalizada exitosamente';
-					$this->response->data = 'finishSession';
-					break;
-				}
-			}
+			$this->response->code = 0;
+			$this->response->msg = lang('FINISHSESSION_MSG-'.$this->isResponseRc);
+			$this->response->data = 'finishSession';
+		}
 
 		$this->session->sess_destroy();
 		return $this->response;
@@ -325,10 +308,10 @@ class Novo_User_Model extends NOVO_Model {
 			$this->response->owner = 'captcha';
 			$this->response->code = 1;
 			$this->response->icon = 'ui-icon-closethick';
-			$this->response->msg = 'El sistema ha detectado una actividad no autorizada, por favor intenta nuevamente';
+			$this->response->msg = lang('VALIDATECAPTCHA_MSG-'.$this->isResponseRc);
 			$this->response->data = [
 				'btn1'=> [
-					'text'=> 'Aceptar',
+					'text'=> lang('BUTTON_ACCEPT'),
 					'link'=> base_url('inicio'),
 					'action'=> 'close'
 				]
