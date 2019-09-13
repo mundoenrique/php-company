@@ -16,4 +16,3 @@ $lang['PASSWORD_INFO_5'] = 'Al menos un <strong>caracter especial</strong> (ej: 
 $lang['PASSWORD_INFO_6'] = 'No debe tener más de 2 <strong>caracteres</strong> iguales consecutivos';
 $lang['MSG_NEW_PASS_USER'] = 'Por motivos de seguridad es necesario que cambie su contraseña la primera vez que ingresa a nuestro sistema "Conexión Empresas Online".';
 $lang['MSG_NEW_PASS_CADU'] = 'Clave vencida. Por motivos de seguridad es necesario que cambies tu contraseña antes de continuar en nuestro sistema "Conexión Empresas Online".';
-$lang['INFO_CHANGE_PASS']= "Cambio de contraseña";
