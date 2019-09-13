@@ -17,8 +17,8 @@ class Information extends NOVO_Controller {
 		$view = 'benefits';
 
 		$this->lang->load([$view], 'base-spanish');
-		if(array_search($view, $this->config->item('language_file_specific')) > 0) {
-			$this->lang->load($view, $this->config->item('language'));
+		if(in_array($view, $this->config->item('language_file_specific')) ) {
+			$this->lang->load($view);
 		}
 
 		log_message('INFO', 'NOVO Information: benefits Method Initialized');
@@ -34,8 +34,8 @@ class Information extends NOVO_Controller {
 		$view = 'terms';
 
 		$this->lang->load([$view], 'base-spanish');
-		if(array_search($view, $this->config->item('language_file_specific')) > 0) {
-			$this->lang->load($view, $this->config->item('language'));
+		if(in_array($view, $this->config->item('language_file_specific')) ) {
+			$this->lang->load($view);
 		}
 
 		if($this->session->flashdata('changePassword')) {
