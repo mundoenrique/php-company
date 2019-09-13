@@ -24,12 +24,11 @@ class Business extends NOVO_Controller {
 		$view = 'enterprise';
 
 		$this->lang->load([$view], 'base-spanish');
-		if(count($this->config->item('language_file_'.$view)) > 0 ) {
-			$this->lang->load($this->config->item('language_file_'.$view));
+		if(array_search($view, $this->config->item('language_file_specific')) > 0) {
+			$this->lang->load($view, $this->config->item('language'));
 		}
 
 		$this->load->helper('form');
-
 		$this->model = 'Novo_'.$this->router->fetch_class().'_Model';
 		$this->method = 'callWs_'.$this->router->fetch_method().'_'.$this->router->fetch_class();
 

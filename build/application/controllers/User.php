@@ -46,11 +46,11 @@ class User extends NOVO_Controller {
 		$this->load->library('recaptcha');
 
 		$this->lang->load([$view, 'signin'], 'base-spanish');
-		if(count($this->config->item('language_file_'.$view)) > 0 ) {
-			$this->lang->load($this->config->item('language_file_'.$view));
+		if(array_search($view, $this->config->item('language_file_specific')) > 0) {
+			$this->lang->load($view, $this->config->item('language'));
 		}
-		if(count($this->config->item('language_file_signin')) > 0 ) {
-			$this->lang->load($this->config->item('language_file_signin'));
+		if(array_search('signin', $this->config->item('language_file_specific')) > 0) {
+			$this->lang->load('signin', $this->config->item('language'));
 		}
 
 		$this->render->scriptCaptcha = $this->recaptcha->getScriptTag();
@@ -107,8 +107,8 @@ class User extends NOVO_Controller {
 		$view = 'pass-recovery';
 
 		$this->lang->load([$view], 'base-spanish');
-		if(count($this->config->item('language_file_'.$view)) > 0 ) {
-			$this->lang->load($this->config->item('language_file_'.$view));
+		if(array_search($view, $this->config->item('language_file_specific')) > 0) {
+			$this->lang->load($view, $this->config->item('language'));
 		}
 
 		log_message('INFO', 'NOVO User: passwordRecovery Method Initialized');
@@ -136,8 +136,8 @@ class User extends NOVO_Controller {
 			exit();
 		}
 		$this->lang->load([$view], 'base-spanish');
-		if(count($this->config->item('language_file_'.$view)) > 0 ) {
-			$this->lang->load($this->config->item('language_file_'.$view));
+		if(array_search($view, $this->config->item('language_file_specific')) > 0) {
+			$this->lang->load($view, $this->config->item('language'));
 		}
 		array_push(
 			$this->includeAssets->jsFiles,
@@ -180,6 +180,4 @@ class User extends NOVO_Controller {
 		}
 		redirect(base_url('inicio'), 'location');
 	}
-
-
 }

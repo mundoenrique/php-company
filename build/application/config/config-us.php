@@ -3,5 +3,4 @@
 $config['country'] = 'Usd';
 $config['base_url']	= BASE_URL.'us/';
 $config['language']	= 'us-spanish';
-$config['language_file'] = [];
-$config['language_file_login'] = [];
+$config['language_file_specific'] = [];

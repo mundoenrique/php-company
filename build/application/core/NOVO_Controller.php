@@ -45,8 +45,8 @@ class NOVO_Controller extends CI_Controller {
 	{
 		log_message('INFO', 'NOVO optionsCheck Method Initialized');
 		countryCheck($this->countryUri);
-		if(count($this->config->item('language_file')) > 0 ) {
-			$this->lang->load($this->config->item('language_file'));
+		if(array_search('general', $this->config->item('language_file_specific')) > 0) {
+			$this->lang->load('general', $this->config->item('language'));
 		}
 		if($this->input->is_ajax_request()) {
 			$this->dataRequest = json_decode(

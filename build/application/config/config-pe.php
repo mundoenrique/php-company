@@ -3,5 +3,4 @@
 $config['country'] = 'Pe';
 $config['base_url']	= BASE_URL.'pe/';
 $config['language']	= 'pe-spanish';
-$config['language_file'] = [];
-$config['language_file_login'] = [];
+$config['language_file_specific'] = [];
