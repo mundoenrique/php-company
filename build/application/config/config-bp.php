@@ -4,7 +4,7 @@ $config['country'] = 'Ec-bp';
 $config['base_url']	= BASE_URL.'bp/';
 $config['language']	= 'bp-spanish';
 $config['language_file']	= ['general'];
-$config['language_file_specific'] = ['login'];
+$config['language_file_specific'] = ['general','login', 'terms'];
 
 $config['favicon'] = 'favicon-bp';
 // Menu user/config diseño de unica columna
