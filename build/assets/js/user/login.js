@@ -1,20 +1,44 @@
 'use strict'
-
 $(function() {
 	var data;
+
+	function disabledInputsform(disable){
+		$('#login-form input, #login-form button').attr('disabled', disable);
+	}
+
+	function restartFormLogin(textBtn) {
+
+		disabledInputsform(false);
+		$('#login-btn').html(textBtn);
+		$('#user_pass').val('');
+		if(country == 'bp') {
+			$('#user_login').val('');
+		}
+		setTimeout(function() {
+			$("#user_login").hideBalloon();
+		}, 2000);
+	};
+
+	function getCredentialsUser(){
+		return {
+			user: $('#user_login').val(),
+			pass: $.md5($('#user_pass').val()),
+			active: ''
+		}
+	};
 
 	const responseCodeLogin = {
 		0: function(response){
 			$(location).attr('href', response.data)
 		},
 		1: function(response, textBtn){
-			restartFormLogin(textBtn);
 			$('#user_login').showBalloon({
 				html: true,
 				classname: response.className,
 				position: "left",
 				contents: response.msg
 			});
+			restartFormLogin(textBtn);
 		},
 		2: function(){
 			user.active = 1;
@@ -37,35 +61,10 @@ $(function() {
 		},
 		99: function(response){
 			notiSystem(response.title, response.msg, response.icon, response.data);
-			restartFormLogin(textBtn);
 		}
 	}
 
-	function disabledInputsform(disable){
-		$('#login-form input, #login-form button').attr('disabled', disable);
-	}
 
-	function restartFormLogin(textBtn) {
-
-		disabledInputsform(false);
-		textBtn = textBtn || 'Ingresar';
-		$('#login-btn').html(textBtn);
-		$('#user_pass').val('');
-		if(country == 'bp') {
-			$('#user_login').val('');
-		}
-		setTimeout(function() {
-			$("#user_login").hideBalloon();
-		}, 2000);
-	};
-
-	function getCredentialsUser(){
-		return {
-							user: $('#user_login').val(),
-							pass: $.md5($('#user_pass').val()),
-							active: ''
-						}
-	};
 
 	function validateLogin(token,user,text){
 		data = {
@@ -77,12 +76,13 @@ $(function() {
 		// verb = "POST"; who = 'User'; where = 'Login'; data = user; // llama al login
 		callNovoCore(verb, who, where, data, function(response) {
 
-			//$('#login-btn').html(text);
+			$('#login-btn').html(text);
 
 			if (response.code !== 0 && response.owner === 'captcha'){
 
 				notiSystem(response.title, response.msg, response.icon, response.data);
-				restartFormLogin(text);
+				disabledInputsform(false);
+				$('#login-btn').html(text);
 
 				setTimeout(function() {
 					$("#user_login").hideBalloon();
@@ -113,12 +113,12 @@ $(function() {
 		var user = getCredentialsUser();
 
 		if(form.valid()) {
-			$(this).html(loader);
 
+			$(this).html(loader);
 			grecaptcha.ready(function() {
 				grecaptcha
 				.execute('6Lejt6MUAAAAANd7KndpsZ2mRSQXuYHncIxFJDYf', {action: 'login'})
-				.then(function(token ) {
+				.then(function(token) {
 					validateLogin(token, user, text);
 				}, function(token) {
 					if(!token) {
@@ -132,12 +132,12 @@ $(function() {
 								action: 'close'
 							}
 						};
-						restartFormLogin(text);
 						notiSystem(title, msg, icon, data);
+						$('#login-btn').html(text);
+						disabledInputsform(false);
 					}
 				});
 			});
-
 		} else {
 
 			if (user.user.trim() || user.pass.trim()){
