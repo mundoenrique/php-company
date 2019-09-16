@@ -67,8 +67,7 @@ class Novo_User_Model extends NOVO_Model {
 					break;
 				case -2:
 				case -185:
-					$fullName = mb_strtolower($response->usuario->primerNombre).' ';
-					$fullName.= mb_strtolower($response->usuario->primerApellido);
+					$fullName = mb_strtolower($response->usuario->primerNombre.' '.$response->usuario->primerApellido);
 					$userData = [
 						'sessionId' => $response->logAccesoObject->sessionId,
 						'idUsuario' => $response->usuario->idUsuario,
@@ -308,7 +307,7 @@ class Novo_User_Model extends NOVO_Model {
 			$this->response->owner = 'captcha';
 			$this->response->code = 1;
 			$this->response->icon = 'ui-icon-closethick';
-			$this->response->msg = lang('VALIDATECAPTCHA_MSG-'.$this->isResponseRc);
+			$this->response->msg = lang('VALIDATECAPTCHA_MSG-0');
 			$this->response->data = [
 				'btn1'=> [
 					'text'=> lang('BUTTON_ACCEPT'),

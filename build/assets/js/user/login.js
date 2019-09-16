@@ -64,38 +64,35 @@ $(function() {
 		}
 	}
 
+	function validateResponseLogin(response, textBtn) {
+		const property = responseCodeLogin.hasOwnProperty(response.code) ? response.code : 99
+		responseCodeLogin[property](response, textBtn);
+	}
 
-
-	function validateLogin(token,user,text){
+	function validateLogin(dataValidateLogin){
 		data = {
-			user: user.user,
-			token: token,
-			dataLogin: [user, text]
+			user: dataValidateLogin.user.user,
+			token: dataValidateLogin.token,
+			dataLogin: [dataValidateLogin.user, dataValidateLogin.text]
 		}
 		verb = "POST"; who = 'User'; where = 'validateCaptcha';
 		// verb = "POST"; who = 'User'; where = 'Login'; data = user; // llama al login
 		callNovoCore(verb, who, where, data, function(response) {
 
-			$('#login-btn').html(text);
+			$('#login-btn').html(dataValidateLogin.text);
 
 			if (response.code !== 0 && response.owner === 'captcha'){
 
 				notiSystem(response.title, response.msg, response.icon, response.data);
-				disabledInputsform(false);
-				$('#login-btn').html(text);
+				restartFormLogin(dataValidateLogin.text);
 
 				setTimeout(function() {
 					$("#user_login").hideBalloon();
 				}, 2000);
 			} else {
-				validateResponseLogin(response, text);
+				validateResponseLogin(response, dataValidateLogin.text);
 			}
 		})
-	}
-
-	function validateResponseLogin(response, textBtn) {
-		const property = responseCodeLogin.hasOwnProperty(response.code) ? response.code : 99
-		responseCodeLogin[property](response, textBtn);
 	}
 
 	$.balloon.defaults.css = null;
@@ -119,23 +116,18 @@ $(function() {
 				grecaptcha
 				.execute('6Lejt6MUAAAAANd7KndpsZ2mRSQXuYHncIxFJDYf', {action: 'login'})
 				.then(function(token) {
-					validateLogin(token, user, text);
-				}, function(token) {
-					if(!token) {
+					validateLogin({token: token, user: user, text: text});
+				},function() {
 						title = prefixCountry + strCountry;
-						msg = 'No fue posible procesar tu solicitud, por favor vuelve a intentar';
 						icon = iconWarning;
 						data = {
 							btn1: {
-								text: 'Aceptar',
 								link: false,
 								action: 'close'
 							}
 						};
 						notiSystem(title, msg, icon, data);
-						$('#login-btn').html(text);
-						disabledInputsform(false);
-					}
+						restartFormLogin(text);
 				});
 			});
 		} else {

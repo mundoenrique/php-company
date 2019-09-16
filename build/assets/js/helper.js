@@ -64,19 +64,17 @@ function callNovoCore(verb, who, where, data, _response_) {
 		if (response.data !== 'finishSession') {
 			_response_(response);
 		}
-	}).fail(function () {
+	}).fail(function (xhr) {
 		title = prefixCountry + strCountry;
-		msg = 'En estos momentos no podemos atender tu solicitud, por favor intenta en unos minutos';
 		icon = iconWarning;
 		data = {
 			btn1: {
-				text: 'Aceptar',
 				class: 'novo-btn-primary-modal',
 				link: false,
 				action: 'close'
 			}
 		};
-		notiSystem(title, msg, icon, data);
+		notiSystem(title, null, icon, data);
 		var resp = {
 			code: 'unanswered'
 		}
@@ -91,14 +89,27 @@ function formatterDate(date) {
 	return new Date(dateStr);
 }
 
+function createButton(dialogMoldal, elementBotton, valuesButton){
+	valuesButton.text && elementBotton.text(valuesButton.text);
+	elementBotton.show();
+	elementBotton.on('click', function (e) {
+		if (valuesButton.action === 'redirect') {
+			$(location).attr('href', valuesButton.link);
+		}
+		$(this).off('click');
+		dialogMoldal.dialog('close');
+	});
+}
+
 function notiSystem(title, message, icon, data) {
-	var btn1 = data.btn1;
-	var btn2 = data.btn2;
-	if (!btn2) {
-		$('#accept').css('margin', '0')
-		$('.novo-dialog-buttonset').css('width', '80px')
-	}
+
+	var btnAccept = $('#accept');
+	var btnCancel = $('#cancel');
 	var dialogMoldal = $('#system-info');
+	var message = message || $('#system-msg').text();
+	var btn1 = data.btn1 || { link: false, action: 'close', text: btnAccept.text()};
+	var btn2 = data.btn2;
+
 	dialogMoldal.dialog({
 		title: title,
 		modal: 'true',
@@ -107,33 +118,17 @@ function notiSystem(title, message, icon, data) {
 		resizable: false,
 		closeOnEscape: false,
 		open: function (event, ui) {
-			$('#cancel').hide();
-
 			$('.ui-dialog-titlebar-close', ui.dialog).hide();
 			$('#system-type').addClass(icon);
 			$('#system-msg').html(message);
 
-			$('#accept')
-				.text(btn1.text)
-				.on('click', function (e) {
-					dialogMoldal.dialog('close');
-					if (btn1.action === 'redirect') {
-						$(location).attr('href', btn1.link);
-					}
-					$(this).off('click');
-				});
-
-			if (btn2) {
-				$('#cancel')
-					.text(btn2.text)
-					.on('click', function (e) {
-						dialogMoldal.dialog('close');
-						if (btn2.action === 'redirect') {
-							$(location).attr('href', btn2.link);
-						}
-						$(this).off('click');
-					})
-					.show();
+			createButton(dialogMoldal, btnAccept, btn1);
+			if (!btn2) {
+				btnCancel.hide();
+				btnAccept.css('margin', '0');
+				$('.novo-dialog-buttonset').css('width', '80px');
+			}else{
+				createButton(dialogMoldal, btnCancel, btn2);
 			}
 		}
 	});
