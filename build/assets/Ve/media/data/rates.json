@@ -1,0 +1,185 @@
+{
+	"source_type": "rates",
+	"currency": "vef",
+	"currency_symbol": "Bs.",
+	"last_update": "2019-09-18",
+	"data": [
+		{
+			"name": "Servicios",
+			"description": null,
+			"items": [
+				{
+					"name": "Servicio administrativo mínimo",
+					"description": "Aplica a facturas cuyo servicio administrativo sea inferior a Bs. 240.000",
+					"rates": [
+						240000,
+						240000
+					]
+				},
+				{
+					"name": "Servicios operativos y de logística cobro único mensual",
+					"description": "Quedan exceptuadas las facturas con servicio administrativo mínimo","rates": [
+						240000,
+						240000
+					]
+				}
+			]
+		},
+		{
+			"name": "Tarjetas",
+			"description": null,
+			"items": [
+				{
+					"name": "Emisión (c/u)",
+					"description": null,
+					"rates": [
+						70000,
+						70000
+					]
+				},
+				{
+					"name": "Reposición / Renovación (c/u)",
+					"description": null,
+					"rates": [
+						70000,
+						70000
+					]
+				}
+			]
+		},
+		{
+			"name": "Claves",
+			"description": null,
+			"items": [
+				{
+					"name": "Reposición",
+					"description": null,
+					"rates": [
+						50000,
+						50000
+					]
+				}
+			]
+		},
+		{
+			"name": "Cajeros Automáticos*",
+			"description": null,
+			"items": [
+				{
+					"name": "Retiro de Cajeros",
+					"description": null,
+					"rates": []
+				},
+				{
+					"name": "Banco Venezolano de Crédito",
+					"description": null,
+					"rates": [
+						null,
+						"3%"
+					]
+				},
+				{
+					"name": "Otros bancos",
+					"description": null,
+					"rates": [
+						null,
+						"5%"
+					]
+				},
+				{
+					"name": "Consulta de Saldo | Rechazo (fondos insuficientes o clave errada)",
+					"description": null,
+					"rates": []
+				},
+				{
+					"name": "Banco Venezolano de Crédito",
+					"description": null,
+					"rates": [
+						null,
+						7.25
+					]
+				},
+				{
+					"name": "Otros bancos",
+					"description": null,
+					"rates": [
+						null,
+						9
+					]
+				}
+			]
+		},
+		{
+			"name": "Transferencias**",
+			"description": null,
+			"items": [
+				{
+					"name": "A cuentas bancarias, montos menores a Bs. 800.000",
+					"description": null,
+					"rates": [
+						null,
+						6000
+					]
+				},
+				{
+					"name": "A cuentas bancarias, montos mayores a Bs. 800.000",
+					"description": null,
+					"rates": [
+						null,
+						"0.75%"
+					]
+				}
+			]
+		},
+		{
+			"name": "Pagos**",
+			"description": null,
+			"items": [
+				{
+					"name": "De tarjetas de crédito, montos menores a Bs. 800.000",
+					"description": null,
+					"rates": [
+						null,
+						6000
+					]
+				},
+				{
+					"name": "De tarjetas de crédito, montos mayores a Bs. 800.000",
+					"description": null,
+					"rates": [
+						null,
+						"0.75%"
+					]
+				}
+			]
+		},
+		{
+			"name": "IVR, Centro de Contacto, App Móvil, Página Web",
+			"description": null,
+			"items": [
+				{
+					"name": "Consulta de saldo",
+					"description": null,
+					"rates": [
+						0,
+						0
+					]
+				}
+			]
+		}
+	],
+	"refs": [
+		{
+			"tag": "*",
+			"name": "Aplican las tarifas establecidas por las instituciones bancarias."
+		},
+		{
+			"tag": "**",
+			"name": "Disponible de acuerdo con el Programa Plata Servitebca contratado."
+		},
+		{
+			"tag": null,
+			"name": "Estas tarifas podrán variar de tiempo en tiempo."
+		}
+	]
+}
