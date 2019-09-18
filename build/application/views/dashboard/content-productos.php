@@ -150,7 +150,7 @@ function to_ascii($word){
 					<p class='info-producto-1'> ".strtoupper($producto->descripcion)."</p>
 					<p class='text-category'>$producto->filial / $producto->categoria</p>
 				</div>
-				<button id='sProducto' data-nombreProducto='$producto->descripcion' data-marcaProducto='$producto->marca' data-idProducto='$producto->idProducto' type='submit'>
+				<button id='sProducto' data-nombreProducto='$producto->descripcion' data-marcaProducto='$producto->marca' data-idProducto='$producto->idProducto' type='submit' class='btn-products-bp novo-btn-primary'>
 					Seleccionar
 				</button>
 			</li>
