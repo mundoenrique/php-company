@@ -3,7 +3,7 @@
 	<div class="content-beneficios">
 		<div class="content-tarifas">
 			<?php
-			$json_file = file_get_contents(BASE_CDN_PATH . 'Ve/media/data/rates.json');
+			$json_file = file_get_contents(BASE_CDN_PATH . 'data/ve/rates.json');
 			$json_data = json_decode($json_file);
 
 			$rates_currency = $json_data->currency;
