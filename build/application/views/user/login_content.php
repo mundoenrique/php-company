@@ -68,7 +68,7 @@
 				<?= lang('LOGIN_NEED_HELP_MSG') ?>
 			</p>
 			<p class="subtitulos-login">
-				<?php if($countryUri != "co") {echo  lang('LOGIN_INFO');} ?>
+				<?= lang('LOGIN_INFO'); ?>
 			</p>
 			<p><?= lang('LOGIN_INFO-1'); ?></p>
 			<p><?= lang('LOGIN_INFO-2'); ?></p>

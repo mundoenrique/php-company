@@ -86,6 +86,8 @@ $lang['CONFIG_USER'] = 'Configuración de usuario';
 $lang['CONFIG_EMPR'] = 'Configuración de empresa';
 $lang['CONFIG_SUCU'] = 'Configuración de sucursal';
 $lang['TITLE_MODIFICAR'] = 'Modificar';
+$lang['AYUDA'] = 'Ayuda';
+
 
 //BOTONES
 $lang['BUTTON_ACCEPT']= 'Aceptar';

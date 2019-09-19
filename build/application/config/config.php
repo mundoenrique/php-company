@@ -52,10 +52,11 @@ $config['settingContents'] =
 	'master_content' => [
 		'menuFooter' => TRUE,
 		'ownerShip' => 'http://www.novopayment.com/',
-		'logo' => FALSE
+		'logo' => TRUE
 	],
 	'widget_menu-user' => [
-		'menuTop' => 'extended'
+		'menuTop' => 'extended',
+		'optionHelp' => FALSE
 	],
 	'widget_menu-business' => [
 		'menuPrincipalFull' => TRUE
@@ -64,6 +65,10 @@ $config['settingContents'] =
 		'typeFilterEnterprise' => 'list',
 		'typeOverDetailCompanies' => 'bottom',
 		'showRazonSocialDetailCompanies' => TRUE
+	],
+	'signin_content' => [
+		'loginTitle' => TRUE,
+		'welcomeMessage' => FALSE
 	]
 ];
 

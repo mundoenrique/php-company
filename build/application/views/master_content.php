@@ -19,33 +19,35 @@
 	type-over-detail-companies="<?= $settingContents['enterprise_content']['typeOverDetailCompanies'];?>"
 	show-razon-social-detail-companies="<?= $settingContents['enterprise_content']['showRazonSocialDetailCompanies'];?>"
 	>
-	<?php if($countryUri != 'bp' || $module != 'login'): ?>
-	<header id="head">
-		<div id="head-wrapper">
-			<?php if( lang('LOGO-HEAD') ): ?>
-			<img class="img-header" src="<?= $this->asset->insertFile( lang('LOGO-HEAD'), 'images'); ?>"
-				alt="Banco PICHINCHA">
-			<?php endif; ?>
-			<a id="branding" rel="start"></a>
-			<?php
-				if($logged) {
-					$this->load->view('widget/widget_menu-user_content');
-				}
-			?>
-		</div>
-	</header>
+	<?php if($settingContents['master_content']['logo'] || $module != 'login'): ?>
+		<header id="head">
+			<div id="head-wrapper">
+				<?php if( lang('LOGO-HEAD') ): ?>
+					<img class="img-header" src="<?= $this->asset->insertFile( lang('LOGO-HEAD'), 'images'); ?>"
+						alt="Banco PICHINCHA">
+				<?php endif; ?>
+				<a id="branding" rel="start"></a>
+				<?php
+					if($logged) {
+						$this->load->view('widget/widget_menu-user_content');
+					}
+				?>
+			</div>
+		</header>
+	<?php endif; ?>
+
 	<?php
-		endif;
 		if($logged) {
 			$this->load->view('widget/widget_menu-business_content', $settingsMenu);
 		}
 	?>
+
 	<div id="wrapper">
 		<?php
-		foreach($viewPage as $views) {
-		$this->load->view($views . '_content'/*, $params*/);
-		}
-	?>
+			foreach($viewPage as $views) {
+			$this->load->view($views . '_content');
+			}
+		?>
 	</div>
 
 	<footer id="foot" class="foot">

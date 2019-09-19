@@ -80,18 +80,15 @@
 						</li>
 					</ul>
 				</li>
+				<?php if($settingContents['widget_menu-user']['optionHelp']): ?>
+							<li class="menu-item profile">
+								<a href="<?=  base_url('guias') ?>" rel="section" title="Ayuda">
+									<span aria-hidden="true" class="icon" data-icon="&#xe04b;"></span>
+									<?= lang('AYUDA') ?>
+								</a>
+							</li>
+						<?php endif; ?>
 			<?php endif; ?>
 		<?php endif; ?>
 	</ul>
 </nav>
-<?php if($countryUri === 've'): ?>
-	<li class="menu-item profile">
-		<?php
-			$urlRedirect = str_replace($countryUri.'/', $this->config->item('country').'/', base_url('guias'));
-		?>
-		<a href="<?= $urlRedirect; ?>" rel="section" title="Ayuda">
-			<span aria-hidden="true" class="icon" data-icon="&#xe04b;"></span>
-			<?= lang('AYUDA') ?>
-		</a>
-	</li>
-<?php endif; ?>

@@ -542,7 +542,6 @@ $(function () {
 					}); //Fin each
 
 					$container.isotope({ filter: '.1' });
-					//paginado(dash_var.pgTotal,'.');
 					paginacion(dash_var.pgTotal, '.');
 					$('.isotope-hidden').hide();
 					$('#contend-pagination-p').show();
@@ -557,19 +556,13 @@ $(function () {
 				$('.resultSet2').show();
 
 				if (data.ERROR == "-29") {
-					alert("Usuario actualmente desconectado");
 					$(location).attr('href', baseURL + isoPais + '/login');
 				} else {
 					$('.resultSet2 h2').text(data.ERROR);
 				}
 
 			}
-			/*}).done(function(data){*/
-
 		} else {
-			//  dash_var.p=true;
-			// dash_var.pp=dash_var.pgActual;
-
 			if (dash_var.paginar && dash_var.pgActual < dash_var.pgTotal) {
 				$('#more').show();
 			} else {
