@@ -1,0 +1,10 @@
+textarea {
+    border-top-width: 0px !important;
+    width: 15em !important;
+}
+.novo-campo {
+  width: 285px;
+}
+input#nameGroup {
+    width: 15.1em;
+}

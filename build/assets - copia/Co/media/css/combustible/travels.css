@@ -1,0 +1,79 @@
+.whith-form {
+    margin-bottom: 15px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.filter-travel {
+    height: 21px;
+    overflow: hidden;
+    width: 640px;
+}
+
+.filter-travel  ul {
+    padding: 0;
+    margin: 0;
+}
+
+.filter-travel  li {
+    border-right: 1px solid #dddddd;
+    display: inline-block;
+    float:left;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    width: 126px;
+}
+
+.filter-travel li:first-child {
+    border-left: 1px solid #dddddd;
+}
+
+
+li.item-hover:hover, li.item-hover:hover a {
+    background-color: #54c2d0;
+    color: #FFFFFF;
+    cursor: pointer;
+}
+
+.selected a {
+    color: #888888;
+    cursor: default;
+}
+
+.container-filter {
+  float: left;
+  width: 615px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 10px;
+  display: block;
+  margin-top: 25px;
+}
+
+.filters {
+  display: block;
+  float:left;
+  padding-left: 10px;
+  padding-right:10px;
+  width: 170px;
+  margin: 5px;
+  text-align: center;
+}
+
+#search-option {
+  width: 150px;
+  border-left-width: 0px;
+  border-right-width: 0px;
+  border-top-width: 0px;
+  margin-top: 4px;
+}
+
+input {
+  text-align: center;
+  width: 150px;
+  margin-top: 5px;
+}
+
+label {
+    color: #0072c0;
+}

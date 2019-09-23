@@ -1,0 +1,1 @@
+if("Microsoft Internet Explorer"==navigator.appName){var ua=RegExp("MSIE ([0-8]{1,}[.0-9]{0,})");if(null!=ua.exec(navigator.userAgent)){var version=parseFloat(RegExp.$1);if(8>=version)for(var html5els=["article","aside","audio","canvas","footer","header","hgroup","nav","section","source","time","video"],j=0;html5els.length>j;j++)document.createElement(html5els[j])}}
