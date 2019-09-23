@@ -79,8 +79,6 @@ $(function() {
 		// verb = "POST"; who = 'User'; where = 'Login'; data = user; // llama al login
 		callNovoCore(verb, who, where, data, function(response) {
 
-			$('#login-btn').html(dataValidateLogin.text);
-
 			if (response.code !== 0 && response.owner === 'captcha'){
 
 				notiSystem(response.title, response.msg, response.icon, response.data);
@@ -100,18 +98,18 @@ $(function() {
 
 	$('#login-btn').on('click', function(e) {
 		e.preventDefault();
-		disabledInputsform(true);
 
 		$(".general-form-msg").html('');
-		var form = $('#login-form');
-		validateForms(form, {handleMsg: false});
-
 		var text = $(this).text();
+		var form = $('#login-form');
 		var user = getCredentialsUser();
 
+		validateForms(form, {handleMsg: false});
 		if(form.valid()) {
 
+			disabledInputsform(true);
 			$(this).html(loader);
+
 			grecaptcha.ready(function() {
 				grecaptcha
 				.execute('6Lejt6MUAAAAANd7KndpsZ2mRSQXuYHncIxFJDYf', {action: 'login'})
@@ -145,4 +143,3 @@ $(function() {
 	});
 
 })
-
