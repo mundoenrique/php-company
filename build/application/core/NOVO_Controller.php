@@ -120,6 +120,7 @@ class NOVO_Controller extends CI_Controller {
 			case 'change-password':
 				$auth = ($this->session->flashdata('changePassword'));
 				break;
+			case 'products':
 			case 'enterprise':
 				$auth = ($this->render->logged);
 				break;
@@ -149,10 +150,10 @@ class NOVO_Controller extends CI_Controller {
 	 * @return void
 	 * @author Pedro Torres
 	 */
-	protected function callMethodNotAsync()
+	protected function callMethodNotAsync($params = '')
 	{
 		$this->load->model($this->model,'modelLoaded');
 		$method = $this->method;
-		return $this->modelLoaded->$method();
+		return $this->modelLoaded->$method($params);
 	}
 }

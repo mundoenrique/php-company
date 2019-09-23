@@ -3,14 +3,15 @@
 $config['country'] = 'Ve';
 $config['base_url']	= BASE_URL.'ve/';
 $config['language']	= 've-spanish';
-$config['language_file_specific'] = ['login', 'pass-recovery', 'terms'];
+$config['language_file_specific'] = ['general', 'login', 'pass-recovery', 'terms'];
 // Config elements master_content
 $config['settingContents'] =
 [
 	'master_content' => [
 		'menuFooter' => TRUE,
 		'ownerShip' => 'http://www.novopayment.com/',
-		'logo' => FALSE
+		'logo' => TRUE,
+		'showRates' => TRUE
 	],
 	'widget_menu-user' => [
 		'menuTop' => 'extended',
@@ -23,6 +24,13 @@ $config['settingContents'] =
 		'typeFilterEnterprise' => 'list',
 		'typeOverDetailCompanies' => 'bottom',
 		'showRazonSocialDetailCompanies' => TRUE
+	],
+	'signin_content' => [
+		'loginTitle' => TRUE,
+		'welcomeMessage' => FALSE
+	],
+	'change-password_content' => [
+		'showInfoPass' => TRUE
 	]
 ];
 

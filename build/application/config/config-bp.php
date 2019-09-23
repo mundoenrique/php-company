@@ -12,24 +12,28 @@ $config['favicon'] = 'favicon-bp';
 $config['settingContents'] =
 [
 	'master_content' => [
-		'menuFooter' => FALSE,
-		'ownerShip' => FALSE,
-		'logo' => FALSE
+		'menuFooter' => TRUE,
+		'ownerShip' => 'http://www.novopayment.com/',
+		'logo' => TRUE,
+		'showRates' => FALSE
 	],
 	'widget_menu-user' => [
-		'menuTop' => 'unique',
+		'menuTop' => 'extended',
 		'optionHelp' => FALSE
 	],
 	'widget_menu-business' => [
 		'menuPrincipalFull' => TRUE
 	],
 	'enterprise_content' => [
-		'typeFilterEnterprise' => 'select',
-		'typeOverDetailCompanies' => 'top',
-		'showRazonSocialDetailCompanies' => FALSE
+		'typeFilterEnterprise' => 'list',
+		'typeOverDetailCompanies' => 'bottom',
+		'showRazonSocialDetailCompanies' => TRUE
 	],
 	'signin_content' => [
-		'loginTitle' => FALSE,
-		'welcomeMessage' => TRUE
+		'loginTitle' => TRUE,
+		'welcomeMessage' => FALSE
+	],
+	'change-password_content' => [
+		'showInfoPass' => FALSE
 	]
 ];

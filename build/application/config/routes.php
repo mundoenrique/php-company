@@ -108,7 +108,7 @@ $route['(:any)/clave'] = "users/changePassNewUser/$1";
 $route['(:any)/changePassNewUserAuth'] = "users/changePassNewUserAuth/$1";
 $route['(:any)/logout'] = "users/logout/$1";
 $route['(:any)/dashboard'] = "dashboard/index/$1";
-$route['(:any)/dashboard/productos'] = "dashboard/dashboardProductos/$1";
+$route['(:any)/dashboard/productos'] = "business/getProducts/$1";
 $route['(:any)/dashboard/productos/detalle'] = "dashboard/dashboardProductosDetalle/$1";
 $route['(:any)/dashboard/programas'] = "dashboard/programas/$1";
 

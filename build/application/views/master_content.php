@@ -76,17 +76,17 @@
 							</a>
 						</li>
 						<?php endif; ?>
-						<?php if($logged && $countryUri == 've' && $module !== 'rates'): ?>
+						<?php if($logged && $settingContents['master_content']['showRates'] && $module !== 'rates'): ?>
 						<li class="menu-item privacy">
 							<a id='tarifas' href="<?= base_url('inf-tarifas'); ?>" rel="section">
-								<? echo lang('SUBMENU_TARIFAS'); ?>
+								<?= lang('SUBMENU_TARIFAS'); ?>
 							</a>
 						</li>
 						<?php endif; ?>
 						<?php if($logged):	?>
 						<li class="menu-item privacy">
 							<a id='exit' href="<?= base_url('cerrar-sesion'); ?>" rel="section">
-								<? echo lang('SUBMENU_LOGOUT'); ?>
+								<?= lang('SUBMENU_LOGOUT'); ?>
 							</a>
 						</li>
 						<?php endif; ?>

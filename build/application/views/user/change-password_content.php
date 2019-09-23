@@ -8,8 +8,8 @@
 		<div id="widget-area">
 			<div class="widget tooltip" id="widget-signin">
 				<h2 class="widget-title">
-					<?php if($countryUri != 'bp'){ ?>
-					<span aria-hidden="true" class="icon" data-icon="&#xe03f;"></span>
+					<?php if($settingContents['change-password_content']['showInfoPass']){ ?>
+						<span aria-hidden="true" class="icon" data-icon="&#xe03f;"></span>
 					<?php
 						};
 						echo lang('INFO_CHANGE_PASS');

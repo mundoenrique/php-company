@@ -52,7 +52,7 @@
 	</ul>
 </div>
 
-<form id="empresas" method="post" action="<?= str_replace('/'.$countryUri.'/','/'.$countryConf.'/',base_url('dashboard/productos')); ?>">
+<form id="empresas" method="post" action="<?= str_replace('/'.$countryConf.'/','/'.$countryUri.'/',base_url('dashboard/productos')); ?>">
 	<input type='hidden' name='<?= $novoName ?>' value='<?= $novoCook ?>'>
 </form>
 

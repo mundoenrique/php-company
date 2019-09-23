@@ -52,7 +52,8 @@ $config['settingContents'] =
 	'master_content' => [
 		'menuFooter' => TRUE,
 		'ownerShip' => 'http://www.novopayment.com/',
-		'logo' => TRUE
+		'logo' => TRUE,
+		'showRates' => TRUE
 	],
 	'widget_menu-user' => [
 		'menuTop' => 'extended',
@@ -69,6 +70,9 @@ $config['settingContents'] =
 	'signin_content' => [
 		'loginTitle' => TRUE,
 		'welcomeMessage' => FALSE
+	],
+	'change-password_content' => [
+		'showInfoPass' => TRUE
 	]
 ];
 
