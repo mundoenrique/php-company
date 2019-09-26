@@ -3381,8 +3381,12 @@ li.filter-1 a {
 }
 
 #content-products {
-	width: 960px;
+	width: 960px !important;
 	padding: 20px 2px;
+}
+
+.mt-1{
+	margin-top: 10px !important;
 }
 
 #content-condiciones {
