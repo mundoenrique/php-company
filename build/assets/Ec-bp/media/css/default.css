@@ -3381,13 +3381,13 @@ li.filter-1 a {
 }
 
 #content-products {
-	width: 960px !important;
+	width: 960px;
 	padding: 20px 2px;
 }
 
-.mt-1{
+/* .mt-1{
 	margin-top: 10px !important;
-}
+} */
 
 #content-condiciones {
 	width: 940px;
@@ -5819,7 +5819,7 @@ center button.novo-btn-secondary {
 
 .sub-widget {
 	position: fixed;
-	top: 105px;
+	top: 250px;
 	margin-left: 730px;
 	width: 230px;
 }
