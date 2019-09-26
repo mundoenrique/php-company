@@ -83,4 +83,13 @@ class Asset {
 		}
 		return $fileName.$ext.$version;
 	}
+	/**
+	 * @info Verifica la existencia de un archivo
+	 * @autor Pedro Torres
+	 * @date 23/09/2019
+	 */
+	public function verifyFileUrl($url)
+	{
+		return @get_headers($url)[0] === 'HTTP/1.1 200 OK';
+	}
 }

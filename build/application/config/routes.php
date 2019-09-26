@@ -66,6 +66,9 @@ $route['(:any)/inf-condiciones'] = "information/terms";
 $route['(:any)/inf-tarifas'] = "information/rates";
 
 $route['(:any)/empresas'] = "business/getEnterprises";
+$route['(:any)/empresas/lista'] = "dashboard/getListaEmpresasJSON/$1";
+$route['(:any)/productos'] = "business/getProducts/$1";
+$route['(:any)/producto/detalle'] = "business/showDetailProduct/$1";
 
 //old routes
 $route['(:any)/login'] = "users/login/$1";
@@ -108,7 +111,7 @@ $route['(:any)/clave'] = "users/changePassNewUser/$1";
 $route['(:any)/changePassNewUserAuth'] = "users/changePassNewUserAuth/$1";
 $route['(:any)/logout'] = "users/logout/$1";
 $route['(:any)/dashboard'] = "dashboard/index/$1";
-$route['(:any)/dashboard/productos'] = "business/getProducts/$1";
+$route['(:any)/dashboard/productos'] = "dashboard/dashboardProductos/$1";
 $route['(:any)/dashboard/productos/detalle'] = "dashboard/dashboardProductosDetalle/$1";
 $route['(:any)/dashboard/programas'] = "dashboard/programas/$1";
 

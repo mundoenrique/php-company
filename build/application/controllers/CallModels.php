@@ -30,10 +30,12 @@ class CallModels extends Novo_Controller {
 	{
 		log_message('INFO', 'NOVO CallModels: index Method Initialized');
 
-		foreach($this->dataRequest->data AS $item => $value) {
-			$_POST[$item] = $value;
+		if (!empty($this->dataRequest->data)){
+			foreach($this->dataRequest->data AS $item => $value) {
+				$_POST[$item] = $value;
+			}
+			unset($this->dataRequest);
 		}
-		unset($this->dataRequest);
 
 		$this->form_validation->set_error_delimiters('', '---');
 		$result = $this->form_validation->run($this->rule);
@@ -52,6 +54,7 @@ class CallModels extends Novo_Controller {
 			$this->load->model($this->model, 'modelLoad');
 			$method = $this->method;
 			$this->dataResponse = $this->modelLoad->$method($this->request);
+
 		} else {
 			log_message('DEBUG', 'NOVO VALIDATION ERRORS: '.json_encode(validation_errors()));
 			$this->dataResponse->code = 303;

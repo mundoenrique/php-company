@@ -23,7 +23,7 @@
 		<header id="head">
 			<div id="head-wrapper">
 				<?php if( lang('LOGO-HEAD') ): ?>
-					<img class="img-header" src="<?= $this->asset->insertFile( lang('LOGO-HEAD'), 'images'); ?>"
+					<img class="img-header" src="<?= $this->asset->insertFile( lang('LOGO-HEAD')); ?>"
 						alt="Banco PICHINCHA">
 				<?php endif; ?>
 				<a id="branding" rel="start"></a>

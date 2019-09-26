@@ -8,5 +8,7 @@ $lang['LAST_PAGE'] = 'Última';
 $lang['LOAD'] = 'Más empresas';
 $lang['FILTER_TODOS']= "TODOS";
 $lang['FILTER_TODAS']= "TODAS";
-$lang['FILTER_SEL_CAT']= "TODAS";
-$lang['FILTER_SEL_MARC']= "TODAS";
+$lang['FILTER_SEL_CAT']= "Buscar por categorías";
+$lang['FILTER_SEL_MARC']= "Buscar por marca";
+$lang['BREADCRUMB_TITL_BUSCAR']= "Buscar texto";
+

@@ -5,6 +5,10 @@ $urlBaseA = $this->config->item('base_url');
 $urlBase = $urlBaseA.$pais;
 $ceo_name = $this->security->get_csrf_token_name();
 $ceo_cook = $this->security->get_csrf_hash();
+$acnomciaS = $this->session->userdata('acnomciaS');
+$acdescS = $this->session->userdata('acdescS');
+$acrifS = $this->session->userdata('acrifS');
+$acrazonsocialS = $this->session->userdata('acrazonsocialS');
 
 function to_ascii($word){
 	$word=str_replace("á", 'a', $word);
@@ -18,9 +22,6 @@ function to_ascii($word){
 }
 ?>
 
-<form id="productos" method="post" action="<?php echo site_url($pais.'/dashboard/productos/detalle'); ?>">
-	<input type='hidden' name='<?php echo $ceo_name ?>' value='<?php echo $ceo_cook ?>'>
-</form>
 <div id="content-products">
 
 <h1>Productos</h1>
@@ -75,29 +76,33 @@ function to_ascii($word){
 	</ul>
 </div>
 
-<form id="productos" method="post" action="<?php echo site_url($pais.'/dashboard/productos/detalle'); ?>">
+<form id="empresas" method="post" action="<?= str_replace('/'.$countryConf.'/','/'.$countryUri.'/',base_url('productos')); ?>">
+	<input type='hidden' name='<?= $novoName ?>' value='<?= $novoCook ?>'>
+</form>
+
+<form id="productos" method="post" action="<?= str_replace('/'.$countryUri.'/','/'.$countryConf.'/', site_url('dashboard/productos/detalle')); ?>">
 	<input type='hidden' name='<?php echo $ceo_name ?>' value='<?php echo $ceo_cook ?>'>
 </form>
 
 <?php
 	if(!array_key_exists("ERROR", $productos)){
-		echo "<div id='lotes-general'>
+		echo "<div id='lotes-general' >
 			<ul id='products-list'>";
 				foreach ($productos as $producto) {
+
 					$nombreMarca  =  url_title(to_ascii(mb_strtolower($producto->marca)));
 					$nombreTarjeta = url_title(to_ascii(mb_strtolower($producto->descripcion)));
+					$tipoCategoria = url_title(to_ascii(mb_strtolower($producto->categoria)));
+
 					if ($nombreMarca === 'cheque') {
 						$nombreTarjeta = 'plata-guarderia';
 					}
-					$tipoCategoria = url_title(to_ascii(mb_strtolower($producto->categoria)));
-					//VALIDACION EN LA VISTA PARA MOSTRAR EL ICONO Y LA CLASE QUE CORRESPONDE
-
-					echo $this->config->item('asset_url').$pais.'/media/img/tarjetas/'.$nombreTarjeta.'.png'.'<br/>';
-					if($tipoCategoria=="recursos-humanos"){
+					if($tipoCategoria=="recursos-humanos")
+					{
 						$tipoClass="color-product-rrhh";
 						$tipoIcon="&#xe090;";
-
-					}elseif ($tipoCategoria=='administracion-y-finanzas') {
+					}
+					elseif ($tipoCategoria=='administracion-y-finanzas') {
 						$tipoClass="color-product-admon";
 						$tipoIcon="&#xe057;";
 
@@ -108,17 +113,13 @@ function to_ascii($word){
 						$tipoClass="color-product-default";
 						$tipoIcon="&#xe093;";
 					}
-					$tjta;
-					if( file_exists( $this->config->item('CDN').'co/media/img/tarjetas/'.$nombreTarjeta.'.png') ){
-						$tjta = insert_image_cdn("tarjetas/$nombreTarjeta.png");
-					}else{
-						$tjta = insert_image_cdn("tarjetas/default.png");
+					$tjta = $this->asset->insertFile( "$nombreTarjeta.png", "images/tarjetas" );
+					if( !$this->asset->verifyFileUrl($tjta) ){
+						$tjta = $this->asset->insertFile( "default.png", "images/tarjetas" );
 					}
-					$marca;
-					if( file_exists( $this->config->item('CDN').'co/media/img/marcas/'.$nombreMarca.'.png') ){
-						$marca = insert_image_cdn("marcas/$nombreMarca.png");
-					}else{
-						$marca = insert_image_cdn("marcas/default.png");
+					$marca = $this->asset->insertFile( "$nombreMarca.png", "images/marcas" );
+					if( !$this->asset->verifyFileUrl($marca) ){
+						$marca = $this->asset->insertFile( "default.png", "images/marcas" );
 					}
 					echo "
 					<li class='product-description ".$tipoCategoria." $nombreMarca ".url_title($producto->filial)
@@ -129,8 +130,8 @@ function to_ascii($word){
 									<span aria-hidden='true' class='icon' data-icon='".$tipoIcon."'></span>
 								</span>";
 						}
-						echo "<div id='img-1'>+++".$tjta."</div>";
-						echo "<div id='img-2'>***".$marca."</div>";
+						echo "<div id='img-1'><img class='img-card' src='".$tjta."'></div>";
+						echo "<div id='img-2'><img class='img-brand' src='".$marca."'></div>";
 						echo "<div id='text-desc'>
 									<p class='info-producto-1'> ".strtoupper($producto->descripcion)."</p>
 									<p class='text-category'>$producto->filial / $producto->categoria</p>
@@ -158,6 +159,43 @@ function to_ascii($word){
 		}
 	}
 ?>
+
 </div>
 
-<input type='hidden' id='cdn' value=<?php echo get_cdn(); ?> />
+<div id="sidebar-products">
+	<div id="widget-info">
+		<?php echo $acrazonsocialS;?> /
+		<?php echo lang('ID_FISCAL')." ". $acrifS;?> /
+		<?php echo $acdescS;?>
+	</div>
+	<div id="widget-info-2">
+
+		<?php if($pais!=='Ec-bp'){ ?>
+			<button id="sEmpresa" type="submit"><?php echo lang('WIDGET_EMPRESAS_BTNSELECCIONAR') ?></button>
+			<div id="sEmpresaS" style='display:none'>
+		<?}else{?>
+			<div id="sEmpresaS" style='display:block'>
+		<?php }?>
+
+				<select style='width: 200px;' id='empresasS'>
+					<option value="0" id='seleccionar_empresaS'><?php echo lang('WIDGET_EMPRESAS_OPC_SEL_EMPRESAS') ?></option>
+				</select>
+
+				<select style='width: 200px; display:none' id='productosS'>
+					<option value="0"></option>
+				</select>
+
+				<center>
+					<button id='aplicar' class="novo-btn-secondary"><?php echo lang('WIDGET_EMPRESAS_BTNAPLICAR') ?></button>
+				</center>
+			</div>
+			</div>
+		<?php if ($pais !== 'Ec-bp'): ?>
+		<div id="widget-info-2">
+			<button id="sPrograms" ><?php echo lang('WIDGET_EMPRESAS_BTNOTROSPROGRAMAS') ?></button>
+		</div>
+		<?php endif; ?>
+	</div>
+
+	<input type='hidden' id='cdn' value=<?php echo get_cdn(); ?> />
+

@@ -1,6 +1,16 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed');
 
 $config = [
+	'listenterprises' => [
+		[
+			'field' => 'plot',
+			'rules' => 'trim|required'
+		],
+		[
+			'field' => 'request',
+			'rules' => 'trim|required'
+		]
+	],
 	'validatecaptcha' => [
 		[
 			'field' => 'user',

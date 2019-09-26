@@ -103,7 +103,7 @@ class Business extends NOVO_Controller {
 				$this->includeAssets->jsFiles,
 				"third_party/jquery.paginate",
 				"third_party/jquery.isotope",
-				"business/enterprise"
+				"business/products"
 			);
 
 			$this->views = ['business/products'];
@@ -124,4 +124,10 @@ class Business extends NOVO_Controller {
 			redirect($urlCountry.'/empresas');
 		}
 	}
+
+	public function showDetailProduct()
+	{
+
+	}
+
 }
