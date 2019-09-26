@@ -8,6 +8,8 @@ var acrazonsocial;
 var acdesc;
 var accodcia;
 var accodgrupoe;
+var btnSelectProduct = document.querySelectorAll('button#sProducto');
+
 // -- fin datos a enviar
 
 var top = ($('#sidebar-products').offset().top-170) - parseFloat($('#sidebar-products').css('marginTop').replace(/auto/, 0));
@@ -107,43 +109,53 @@ function resultNull(){
 }
 // fin mostrar resultados nulos
 
-$('button#sProducto').on('click', function(){
+for (const button of btnSelectProduct) {
+  button.addEventListener('click', function() {
+		productSelected = this;
 		var ceo_cook = decodeURIComponent(
 			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 		);
-    var idproducto = $(this).attr("data-idproducto");
-    var nombreProducto = $(this).attr("data-nombreProducto");
-		var marcaProducto = $(this).attr("data-marcaProducto");
-		$('form#productos').append('<input type="hidden" name="ceo_name" value="'+ ceo_cook +'"/>');
-    $('form#productos').append('<input type="hidden" name="data-idproducto" value="'+idproducto+'" />');
-    $('form#productos').append('<input type="hidden" name="data-nombreProducto" value="'+nombreProducto+'" />');
-    $('form#productos').append('<input type="hidden" name="data-marcaProducto" value="'+marcaProducto+'" />');
-    $('form#productos').submit();
-  });
+		document.getElementsByName('ceo_name')[0].value = ceo_cook;
+		document.getElementsByName('data-idproducto')[0].value = productSelected.getAttribute('data-idproducto');
+		document.getElementsByName('data-nombreProducto')[0].value = productSelected.getAttribute('data-nombreProducto');
+		document.getElementsByName('data-marcaProducto')[0].value = productSelected.getAttribute('data-marcaProducto');
+		document.getElementById('productos').submit();
+  })
+}
 //
+document.getElementById('sEmpresa').addEventListener('click', function(){
 
+	document.getElementById('sEmpresa').style.display = 'none';
+	urlImageLoading = document.getElementsByTagName('body')[0].getAttribute('asset-url')+'images/loading-gif/loading-novo.gif';
+	newNode = document.createElement('span');
+	newNode.innerHTML = "<img class='load-widget' id='cargando' src='"+urlImageLoading+"'>";
+	document.getElementById('widget-info-2').appendChild(newNode);
 
-// Cambiar empresa
-$("#sEmpresa").on("click",function(){
-	$('#sEmpresa').hide();
-	$("#widget-info-2").append("<img class='load-widget' id='cargando' src='"+$('body').attr('asset-url')+"images/loading-gif/loading-novo.gif'>");
-	data = '';
-	callNovoCore('POST', 'Business', 'listEnterprises', data, function(response) {
-		$("#widget-info-2").find($('#cargando')).remove();
-		$('#sEmpresaS').show();
-		$('#productosS').hide();
+	callNovoCore('POST', 'Business', 'listEnterprises', '', function(response) {
+		document.getElementById('cargando').style.display = 'none';
+		document.getElementById('productosS').style.display = 'none';
+		document.getElementById('sEmpresaS').style.display = 'block';
 		if(!response.ERROR){
+			sel = document.getElementById('empresasS');
 			$.each(response.lista, function(k,v){
-				$("#empresasS").append('<option value="'+v.acrif+'" acnomcia="'+v.acnomcia+'" acrazonsocial="'+v.acrazonsocial+'" acdesc="'+v.acdesc+'" accodcia="'+v.accodcia+'" accodgrupoe='+v.accodgrupoe+'>'+v.acnomcia+'</option>');
+				newOption = document.createElement('option');
+				newOption.value = v.acrif;
+				newOption.acnomcia = v.acnomcia;
+				newOption.acrazonsocial = v.acrazonsocial;
+				newOption.acdesc = v.acdesc;
+				newOption.accoDocumentia = v.accodcia;
+				newOption.accodgrupoe = v.accodgrupoe;
+				newOption.text = v.acnomcia;
+				sel.add(newOption);
 			});
 		}else{
 			if(response.ERROR=='-29'){
-			alert('Usuario actualmente desconectado'); location.reload();
+				document.location.reload();
 			}
 		}
 	})
+
 });
-//--Fin Cambiar empresa
 
 // Seleccionar empresa
 $("#empresasS").on("change",function(){
@@ -164,16 +176,18 @@ $('#aplicar').on('click',function(){
 		var ceo_cook = decodeURIComponent(
 			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 		);
+		formTofill = document.getElementById('empresas');
 
-		$('form#empresas').append('<input type="hidden" name="ceo_name" value="' + ceo_cook + '"/>');
-		$('form#empresas').append('<input type="hidden" name="data-acrif" value="' + acrif + '" />');
-		$('form#empresas').append('<input type="hidden" name="data-acnomcia" value="' + acnomcia + '" />');
-		$('form#empresas').append('<input type="hidden" name="data-acrazonsocial" value="' + acrazonsocial + '" />');
-		$('form#empresas').append('<input type="hidden" name="data-acdesc" value="' + acdesc + '" />');
-		$('form#empresas').append('<input type="hidden" name="data-accodcia" value="' + accodcia + '" />');
-		$('form#empresas').append('<input type="hidden" name="data-accodgrupoe" value="' + accodgrupoe + '" />');
-		$('form#empresas').submit();
-
+		var newContentForm = document.createElement('span');
+		newContentForm.innerHTML += '<input type="hidden" name="ceo_name" value="' + ceo_cook + '"/>';
+		newContentForm.innerHTML += '<input type="hidden" name="data-acrif" value="' + acrif + '" />';
+		newContentForm.innerHTML += '<input type="hidden" name="data-acnomcia" value="' + acnomcia + '" />';
+		newContentForm.innerHTML += '<input type="hidden" name="data-acrazonsocial" value="' + acrazonsocial + '" />';
+		newContentForm.innerHTML += '<input type="hidden" name="data-acdesc" value="' + acdesc + '" />';
+		newContentForm.innerHTML += '<input type="hidden" name="data-accodcia" value="' + accodcia + '" />';
+		newContentForm.innerHTML += '<input type="hidden" name="data-accodgrupoe" value="' + accodgrupoe + '" />';
+		formTofill.appendChild(newContentForm);
+		formTofill.submit();
 	}else{
 		MarcarError('Selecciona una empresa');
 	}

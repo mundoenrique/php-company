@@ -82,6 +82,9 @@ function to_ascii($word){
 
 <form id="productos" method="post" action="<?= str_replace('/'.$countryUri.'/','/'.$countryConf.'/', site_url('dashboard/productos/detalle')); ?>">
 	<input type='hidden' name='<?php echo $ceo_name ?>' value='<?php echo $ceo_cook ?>'>
+  <input type="hidden" name="data-idproducto"  />
+  <input type="hidden" name="data-nombreProducto"  />
+  <input type="hidden" name="data-marcaProducto" />
 </form>
 
 <?php
@@ -170,7 +173,7 @@ function to_ascii($word){
 	</div>
 	<div id="widget-info-2">
 
-		<?php if($pais!=='Ec-bp'){ ?>
+			<?php if($pais!=='Ec-bp'){ ?>
 			<button id="sEmpresa" type="submit"><?php echo lang('WIDGET_EMPRESAS_BTNSELECCIONAR') ?></button>
 			<div id="sEmpresaS" style='display:none'>
 		<?}else{?>
