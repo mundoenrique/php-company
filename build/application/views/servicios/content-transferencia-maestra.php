@@ -55,6 +55,7 @@
         <form id="form-recarga-cuenta" onsubmit="return false">
           <div id="search-1">
             <h5><span id="saldoEmpresa"></span></h5>
+            <input type="hidden" name="disponible" id="disponible">
             <br>
             <h5 style="float:left;"><?= "Monto" ?></h5>
             <span>
@@ -70,17 +71,16 @@
           <?php if($pais == 'Ec-bp'): ?>
           <div id="search-1">
             <br>
-            <h5 style="float:left;"><?= "Cuenta" ?></h5>
+            <h5 style="float:left;"><?= "Cuenta" ?></h5>            
             <span>
-              <select id="account" name="account" code="<?= $dataCtas['code'] ?>" title="<?= $dataCtas['title'] ?>"
-                msg="<?= $dataCtas['msg'] ?>" disabled>
-                <option value="0" selected>
-                  <?= $dataCtas['code'] == 0 ? 'Selecciona una Cuenta' : $dataCtas['data'] ?>
-                </option>
-                <?php if($dataCtas['code'] == 0): foreach($ctas as $pos => $cta): ?>
-                <option value="<?= $cta['value'] ?>"><?= $cta['descrip'].'   --Saldo: '.$cta['saldo'] ?></option>
-                <?php endforeach; endif; ?>
-              </select>
+            <input type="hidden" id="account-transfer" code="<?= $dataCtas['code'] ?>" name="account-transfer" value="<?= $ctas[1]['value']?>">
+              
+              <?php if($dataCtas['code'] == 0):?>
+							<div id="numberaccount" style="display: none; padding-top: 0.4rem;">
+								<?= $ctas[1]['descrip']; ?>
+							</div>
+							<?php endif; ?>
+
             </span>
           </div>
           <div id="charge-or-credit" class="panel-right">
@@ -93,6 +93,13 @@
               <label for="credit">abono</label>
             </span>
           </div>
+
+          <div style="padding-top: 9rem;">
+						<center>
+							<input id="clave" class="input-clave" type="password" name="user-password" placeholder="Ingresa tu clave"
+								value="" autocomplete="off" style="border-color: rgb(221, 221, 221);">
+						</center>
+					</div>
           <?php endif; ?>
         </form>
       </div>
