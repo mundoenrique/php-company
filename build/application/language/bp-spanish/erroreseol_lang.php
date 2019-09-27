@@ -27,7 +27,7 @@ $lang['ERROR_(-18)']= "Lote no conseguido";
 $lang['ERROR_(-19)']= "Lote sin detalle";
 $lang['ERROR_(-20)']= "Error de acceso a base de datos";
 $lang['ERROR_(-21)']= "Ocurrio un error de conexión con el servicio";
-$lang['ERROR_(-22)']= "La contraseña actual es incorrecta.<br>Por favor verifíquela e intente de nuevo.";
+$lang['ERROR_(-22)']= "La contraseña actual es incorrecta.<br>Por favor verifícala e intente de nuevo.";
 $lang['ERROR_(-23)']= "Error cantidad maxima mensuales TR";
 $lang['ERROR_(-24)']= "Error cantidad maxima diarias TR";
 $lang['ERROR_(-25)']= "Error monto maximo diario TR";
@@ -262,10 +262,10 @@ $lang['ERROR_DESCARGA'] = 'No fue posible descargar el archivo, por favor intent
 $lang["TITULO_ERROR"] = 'No ha sido posible procesar tu solicitud.';
 $lang["ERROR_RIF"] = 'Por favor verifique el No. de RUC de la empresa.';
 $lang["ERROR_USER"] = 'El Usuario no está registrado en el sistema.';
-$lang["ERROR_MAIL"] = 'El correo indicado no corresponde, por favor verifíquelo e inténtelo de nuevo.';
+$lang["ERROR_MAIL"] = 'El correo indicado no corresponde, por favor verifícalo e inténtalo de nuevo.';
 $lang["ERROR_SUPPORT"] = 'Por favor envíe un correo a <strong>soporteempresas@tebca.com</strong> o contacte a nuestros Ejecutivos en los teléfonos: ...';
 
 //Botón de pago
 $lang['PAG_OS_E_CORREO'] = 'No fue posible enviar el correo,<br> intente más tarde';
 $lang['NO_EMPRESAS_LIST'] = 'No fue posible obtener la lista de empresas';
-$lang['MSG_FIRMA_LOTE'] = 'La contraseña es incorrecta.<br>Por favor verifíquela e intente de nuevo.';
+$lang['MSG_INVALID_PASS'] = 'La contraseña es incorrecta.<br>Por favor verifícala e intenta de nuevo.';
