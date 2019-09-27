@@ -1588,4 +1588,57 @@ class Servicios extends CI_Controller {
 		}
 		return $response;
 	}
+
+	/*consulta de las tarjetas emitidas par la empresa.*/
+public function consultaTarjetas($urlCountry)
+{
+		//VALIDATE COUNTRY
+		np_hoplite_countryCheck($urlCountry);
+		$this->lang->load('reportes');
+		$this->lang->load('servicios');
+		$this->lang->load('dashboard');
+		$this->lang->load('users');
+		$this->load->library('parser');
+		$this->lang->load('erroreseol');
+		$logged_in = $this->session->userdata('logged_in');
+
+		$paisS = $this->session->userdata('pais');
+		$menuP =$this->session->userdata('menuArrayPorProducto');
+		$moduloAct = np_hoplite_existeLink($menuP,"REPEDO");
+
+		if($paisS==$urlCountry && $logged_in && $moduloAct!==false){
+				$nombreCompleto = $this->session->userdata('nombreCompleto');
+				$lastSessionD = $this->session->userdata('lastSession');
+				$jsRte = '../../../js/';
+				$thirdsJsRte = '../../../js/third_party/';
+				$FooterCustomInsertJS=["jquery-3.4.0.min.js", "jquery-ui-1.12.1.min.js","aes.min.js","aes-json-format.min.js","servicios/consultatarjetas.js","kendo.dataviz.min.js","jquery.paginate.js","header.js","jquery.balloon.min.js","jquery.dataTables.min.js","routes.js",$thirdsJsRte."jquery.validate.min.js",$jsRte."validate-forms.js",$thirdsJsRte."additional-methods.min.js"];
+				$FooterCustomJS="";
+				$titlePage="Conexión Empresas Online - Servicios";
+
+				$menuHeader = $this->parser->parse('widgets/widget-menuHeader',array(),TRUE);
+				$menuFooter = $this->parser->parse('widgets/widget-menuFooter',array(),TRUE);
+
+				$header = $this->parser->parse('layouts/layout-header',array('bodyclass'=>'','menuHeaderActive'=>TRUE,'menuHeaderMainActive'=>TRUE,'menuHeader'=>$menuHeader,'titlePage'=>$titlePage),TRUE);
+				$footer = $this->parser->parse('layouts/layout-footer',array('menuFooterActive'=>TRUE,'menuFooter'=>$menuFooter,'FooterCustomInsertJSActive'=>TRUE,'FooterCustomInsertJS'=>$FooterCustomInsertJS,'FooterCustomJSActive'=>TRUE,'FooterCustomJS'=>$FooterCustomJS),TRUE);
+				$content = $this->parser->parse('servicios/content-consulta-tarjetas',array(
+						'titulo'=>$nombreCompleto,
+						'breadcrum'=>'',
+						'lastSession'=>$lastSessionD,
+						),TRUE);
+				$sidebarLotes= $this->parser->parse('widgets/widget-publi-4',array('sidebarActive'=>TRUE),TRUE);
+
+				$datos = array(
+					'header'=>$header,
+					'content'=>$content,
+					'footer'=>$footer,
+					'sidebar'=>'',
+					);
+			$this->parser->parse('layouts/layout-b', $datos);
+	}elseif($paisS!=$urlCountry && $paisS!=""){
+			$this->session->sess_destroy();
+			redirect($urlCountry.'/login');
+	}else{
+			redirect($urlCountry.'/login');
+	}
+}
 }
