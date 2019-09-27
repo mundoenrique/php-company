@@ -17,7 +17,7 @@
 					]
 				},
 				{
-					"name": "Servicios operativos y de logística cobro único mensual",
+					"name": "Servicios operativos y de logística (cobro único mensual)",
 					"description": "Quedan exceptuadas las facturas con servicio administrativo mínimo","rates": [
 						240000,
 						240000
@@ -62,11 +62,11 @@
 			]
 		},
 		{
-			"name": "Cajeros Automáticos*",
+			"name": "Cajeros automáticos*",
 			"description": null,
 			"items": [
 				{
-					"name": "Retiro de Cajeros",
+					"name": "Retiro de cajeros",
 					"description": null,
 					"rates": []
 				},
@@ -87,7 +87,7 @@
 					]
 				},
 				{
-					"name": "Consulta de Saldo | Rechazo (fondos insuficientes o clave errada)",
+					"name": "Consulta de saldo | Rechazo (fondos insuficientes o clave errada)",
 					"description": null,
 					"rates": []
 				},
