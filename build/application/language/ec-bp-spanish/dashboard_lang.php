@@ -30,6 +30,7 @@ $lang['BREADCRUMB_CALCULO_ORDEN_SERVICIO']= "Preliminar orden de servicio";
 $lang['BREADCRUMB_TARJETAHABIENTES'] = "Tarjetahabientes";
 $lang['BREADCRUMB_SERVICIOS'] = "Servicios";
 $lang['BREADCRUMB_TRANSMAESTRA'] = "Transferencia maestra";
+$lang['BREADCRUMB_CONSTARJETA'] = "Consulta de tarjetas";
 $lang['BREADCRUMB_OTROS_PROGRAMS'] = 'Otros programas';
 $lang['BREADCRUMB_PH_BUSCAR'] = 'Buscar...';
 $lang['BREADCRUMB_TITL_BUSCAR'] = 'Buscar texto';
