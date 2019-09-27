@@ -179,6 +179,10 @@ $reten = ($reten == NULL) ? "nonEmpty" : trim($reten, ', ');
 						<?php
 							if($pais=='Ec-bp'){
 								?>
+								<div class="recepcion-tcs">
+									<p class="t-center">Ingresa el codigo de seguridad enviado a tu correo</p>
+									<input type="text" id="emailtcs" name="emailtcs" value="">
+								</div>
 									<div class="botones-OS">
 										<button id="confirmarPreOSL" style="display: none" class="novo-btn-primary">
 											<?php echo lang('BTN_CONFIRMAR_OS') ?></button>
