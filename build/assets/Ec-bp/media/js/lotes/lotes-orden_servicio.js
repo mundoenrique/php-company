@@ -40,6 +40,13 @@ $(function () {
 	$("#confirmarPreOSL").on("click", function () {
 		var l = $("#tempIdOrdenL").val();
 		var lnf = $("#tempIdOrdenLNF").val();
+		var emailtcs = $("#emailtcs").val();
+
+		if(emailtcs == 0 && emailtcs !== ''){
+			console.log("campos con espacios en blanco ");
+			notificacion("Confirmar Codigo de seguridad", "No puede llevar espacios en blanco", null);
+			return false;
+		}
 
 		$aux = $('#loading').dialog({
 
@@ -53,9 +60,10 @@ $(function () {
 		);
 
 
-		var dataRequest = JSON.stringify({
+		var | = JSON.stringify({
 			tempIdOrdenL: l,
-			tempIdOrdenLNF: lnf
+			tempIdOrdenLNF: lnf,
+			autorizacionOtp: emailtcs
 		})
 
 		dataRequest  = CryptoJS.AES.encrypt(dataRequest , ceo_cook, {format: CryptoJSAesJson}).toString();
@@ -103,6 +111,13 @@ $(function () {
 			});
 
 	});
+
+	function validationIn(emailtcs){
+
+
+
+
+	}
 
 
 	// MOSTRAR/OCULTAR LOTES SEGUN OS
