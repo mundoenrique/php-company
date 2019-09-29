@@ -86,8 +86,6 @@ $urlCdn = get_cdn();
 		</div>
 	</div>
 	<div id="batchs-last">
-		<span id="mensajeError"
-			style="float:left; display:none; color:red;"><?php echo lang('REPORTE_MENSAJE_ERROR'); ?></span>
 		<?php
 					if($pais=='Ec-bp'){
 						?>
@@ -109,7 +107,7 @@ $urlCdn = get_cdn();
 
 </div>
 
-<div id='resultado-tarjetas' style='display:'>
+<div id='resultado-tarjetas' style='display:none'>
 	<div id="top-batchs" style="width:900px !important">
 		<?php if($pais != 'Ec-bp'): ?>
 		<span aria-hidden="true" class="icon" data-icon="&#xe008;"></span>
@@ -117,8 +115,16 @@ $urlCdn = get_cdn();
 		<?= lang('RESULTADOS') ?>
 	</div>
 	<div id='lotes-contenedor' style="width:900px !important">
-		<div id="check-all">
+	<div style="display:flex">
+		<div id="check-all" style="width: 50%;">
 			<input id="select-allR" type='checkbox' /><em id='textS'> <?= lang("SEL_ALL"); ?></em>
+		</div>
+		<div style="width: 50%; text-align: right; padding-top: 10px; padding-right: 10px;">
+			<a id="exportXLS_a">
+			<span id="export_excel" title="Exportar Excel" aria-hidden="true" class="icon" target="_blank"
+			data-icon="&#xe05a;"></span>
+			</a>
+		</div>
 		</div>
 		<table class="table-text-service" width="100%">
 			<thead>
@@ -131,11 +137,11 @@ $urlCdn = get_cdn();
 				<th><?= lang('ESTATUS_PLASTICO'); ?></th>
 				<th id="td-nombre-2" class="bp-min-width"><?= lang('NOMBRE') ?></th>
 				<th class="bp-min-width"><?= lang('ID_PERSONA'); ?></th>
-				<th><?= lang('SALDO'); ?></th>
-				<th><?= lang('OPCIONES'); ?></th>
+				<!-- <th><?= lang('SALDO'); ?></th>
+				<th><?= lang('OPCIONES'); ?></th> -->
 			</thead>
 			<tbody>
-				
+
 			</tbody>
 		</table>
 		<div id='paginado-TM'></div>
