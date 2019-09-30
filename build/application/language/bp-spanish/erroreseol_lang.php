@@ -236,6 +236,7 @@ $lang['ERROR_(-227)']= "En estos momentos no podemos procesar tu solicitud";
 $lang['ERROR_(-228)']= "En estos momentos no podemos procesar tu solicitud";
 $lang['ERROR_(-229)']= "En estos momentos no podemos procesar tu solicitud";
 $lang['ERROR_(-230)']= "En estos momentos no podemos procesar tu solicitud,<br> por favor intente más tarde";
+$lang['ERROR_(-231)']= "Codigo de seguridad invalida";
 $lang['ERROR_(-233)']= "La empresa no posee saldo disponible para el servicio";
 $lang['ERROR_(-238)']= "El registro no existe";
 $lang['ERROR_(-241)']= "Parámetros inválidos";
