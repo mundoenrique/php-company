@@ -60,7 +60,7 @@ $(function () {
 		);
 
 
-		var | = JSON.stringify({
+		var dataRequest = JSON.stringify({
 			tempIdOrdenL: l,
 			tempIdOrdenLNF: lnf,
 			autorizacionOtp: emailtcs
