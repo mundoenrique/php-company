@@ -97,7 +97,7 @@
           <div style="padding-top: 9rem;">
 						<center>
 							<input id="clave" class="input-clave" type="password" name="user-password" placeholder="Ingresa tu clave"
-								value="" autocomplete="off" style="border-color: rgb(221, 221, 221);">
+								value="" onpaste="return false" autocomplete="off" style="border-color: rgb(221, 221, 221);">
 						</center>
 					</div>
           <?php endif; ?>
