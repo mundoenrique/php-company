@@ -2450,6 +2450,11 @@ class Lotes extends CI_Controller {
 							'ERROR' => $response->rc,
 							'msg' => lang('ERROR_(-56)')
 						];
+					case -231:
+						$response = [
+							'ERROR' => $response->rc,
+							'msg' => lang('ERROR_(-231)')
+						];
 						break;
 					default:
 						$response = [
