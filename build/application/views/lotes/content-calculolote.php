@@ -181,7 +181,7 @@ $reten = ($reten == NULL) ? "nonEmpty" : trim($reten, ', ');
 								?>
 								<div class="recepcion-tcs">
 									<p class="t-center">Ingresa el codigo de seguridad enviado a tu correo</p>
-									<input type="text" id="passOtp" name="passOtp" value="">
+									<input type="text" id="passOtp" name="passOtp" value=""  onpaste="return false">
 								</div>
 									<div class="botones-OS">
 										<button id="confirmarPreOSL" style="display: none" class="novo-btn-primary">
