@@ -86,7 +86,7 @@ $(function() {
 		$(this).find($('#amount').removeAttr('style'));
 		$(this).find($('#description').removeAttr('style'));
 		var RE = /^\d*\.?\d*$/,
-				decimal = /^[0-9]*([.][0-9]{1,2})?$/,
+				decimal = /^[0-9]*([.][0-9]{2})?$/,
 				descRegExp = /^['a-z0-9ñáéíóú ,.:()']+$/i,
 				camposValid = '<div id="validar">',
 				validInput = true,
@@ -106,7 +106,7 @@ $(function() {
 			validInput = false;
 			amount.css('border-color', '#cd0a0a')
 		}else if(!decimal.test(amount.val())){
-			camposValid += '<p>* El monto debe tener mínimo un decimal</p>';
+			camposValid += '<p>* El monto debe contener dos decimales</p>';
 			validInput = false;
 			amount.css('border-color', '#cd0a0a')
 		}
