@@ -40,16 +40,14 @@ $(function () {
 	$("#confirmarPreOSL").on("click", function () {
 		var l = $("#tempIdOrdenL").val();
 		var lnf = $("#tempIdOrdenLNF").val();
-		var emailtcs = $("#emailtcs").val();
+		var rePassOtp = $("#passOtp").val();
 
-		if(emailtcs == 0 && emailtcs !== ''){
-			console.log("campos con espacios en blanco ");
+		if(rePassOtp == 0 && rePassOtp !== ''){
 			notificacion("Confirmar Codigo de seguridad", "No puede llevar espacios en blanco", null);
 			return false;
 		}
 
 		$aux = $('#loading').dialog({
-
 			dialogClass: "hide-close",
 			title: 'Confirmar cálculo orden de servicio',
 			modal: true,
@@ -63,7 +61,7 @@ $(function () {
 		var dataRequest = JSON.stringify({
 			tempIdOrdenL: l,
 			tempIdOrdenLNF: lnf,
-			autorizacionOtp: emailtcs
+			autorizacionOtp: rePassOtp
 		})
 
 		dataRequest  = CryptoJS.AES.encrypt(dataRequest , ceo_cook, {format: CryptoJSAesJson}).toString();
