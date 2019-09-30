@@ -64,8 +64,7 @@ class Asset {
 		$country = $country ? $country.'/' : '';
 		$file = assetPath($folder.'/'.$country.$fileName);
 		$version = '?V'.date('Ymd-U', filemtime($file));
-		$file_url = assetUrl($folder.'/'.$country.$fileName.$version);
-		return $file_url;
+		return assetUrl($folder.'/'.$country.$fileName.$version);
 	}
 	/**
 	 * @info Método para versionar archivos

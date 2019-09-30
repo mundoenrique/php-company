@@ -1562,8 +1562,10 @@ button.r-button {
 }
 
 #products-list li img {
-	margin: 0px;
 	float: left;
+	margin: 0px;
+	width: 100px;
+	height: 80px;
 }
 
 .info-producto-1 {

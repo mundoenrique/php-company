@@ -11,4 +11,5 @@ $lang['FILTER_TODAS']= "TODAS";
 $lang['FILTER_SEL_CAT']= "Buscar por categorías";
 $lang['FILTER_SEL_MARC']= "Buscar por marca";
 $lang['BREADCRUMB_TITL_BUSCAR']= "Buscar texto";
+$lang['ID_FISCAL']= "RUC.";
 

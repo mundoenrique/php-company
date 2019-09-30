@@ -88,6 +88,7 @@ function to_ascii($word){
 </form>
 
 <?php
+	$paisBase = $pais == 'bp'? $pais : null;
 	if(!array_key_exists("ERROR", $productos)){
 		echo "<div id='lotes-general' >
 			<ul id='products-list'>";
@@ -116,25 +117,27 @@ function to_ascii($word){
 						$tipoClass="color-product-default";
 						$tipoIcon="&#xe093;";
 					}
-					$tjta = $this->asset->insertFile( "$nombreTarjeta.png", "images/tarjetas" );
+					@$tjta = $this->asset->insertFile( "$nombreTarjeta.png", "images/tarjetas", $paisBase);
 					if( !$this->asset->verifyFileUrl($tjta) ){
-						$tjta = $this->asset->insertFile( "default.png", "images/tarjetas" );
+						$tjta = $this->asset->insertFile( "default.png", "images/tarjetas", $paisBase);
 					}
-					$marca = $this->asset->insertFile( "$nombreMarca.png", "images/marcas" );
+					@$marca = $this->asset->insertFile( "$nombreMarca.png", "images/marcas", $paisBase);
 					if( !$this->asset->verifyFileUrl($marca) ){
-						$marca = $this->asset->insertFile( "default.png", "images/marcas" );
+						$marca = $this->asset->insertFile( "default.png", "images/marcas", $paisBase);
 					}
 					echo "
 					<li class='product-description ".$tipoCategoria." $nombreMarca ".url_title($producto->filial)
 					."' id='$producto->idProducto'>";
-						if($pais!='Ec-bp'){
+//						if($pais!='Ec-bp'){
+						if($pais!='bp'){
+
 							echo "
 								<span class='".$tipoClass."'>
 									<span aria-hidden='true' class='icon' data-icon='".$tipoIcon."'></span>
 								</span>";
 						}
-						echo "<div id='img-1'><img class='img-card' src='".$tjta."'></div>";
-						echo "<div id='img-2'><img class='img-brand' src='".$marca."'></div>";
+						echo "<div id='img-1'><img src='".$tjta."'></div>";
+						echo "<div id='img-2'><img src='".$marca."'></div>";
 						echo "<div id='text-desc'>
 									<p class='info-producto-1'> ".strtoupper($producto->descripcion)."</p>
 									<p class='text-category'>$producto->filial / $producto->categoria</p>
@@ -173,7 +176,7 @@ function to_ascii($word){
 	</div>
 	<div id="widget-info-2">
 
-			<?php if($pais!=='Ec-bp'){ ?>
+			<?php if($pais!=='bp'){ ?>
 			<button id="sEmpresa" type="submit"><?php echo lang('WIDGET_EMPRESAS_BTNSELECCIONAR') ?></button>
 			<div id="sEmpresaS" style='display:none'>
 		<?}else{?>
@@ -193,7 +196,7 @@ function to_ascii($word){
 				</center>
 			</div>
 			</div>
-		<?php if ($pais !== 'Ec-bp'): ?>
+		<?php if ($pais !== 'bp'): ?>
 		<div id="widget-info-2">
 			<button id="sPrograms" ><?php echo lang('WIDGET_EMPRESAS_BTNOTROSPROGRAMAS') ?></button>
 		</div>

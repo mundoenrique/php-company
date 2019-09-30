@@ -123,30 +123,40 @@ for (const button of btnSelectProduct) {
   })
 }
 //
-document.getElementById('sEmpresa').addEventListener('click', function(){
+if (elemEmpresa = document.getElementById('sEmpresa')){
 
-	document.getElementById('sEmpresa').style.display = 'none';
-	urlImageLoading = document.getElementsByTagName('body')[0].getAttribute('asset-url')+'images/loading-gif/loading-novo.gif';
-	newNode = document.createElement('span');
-	newNode.innerHTML = "<img class='load-widget' id='cargando' src='"+urlImageLoading+"'>";
-	document.getElementById('widget-info-2').appendChild(newNode);
+	elemEmpresa.addEventListener('click', function(){
+
+		document.getElementById('sEmpresa').style.display = 'none';
+		urlImageLoading = document.getElementsByTagName('body')[0].getAttribute('asset-url')+'images/loading-gif/loading-novo.gif';
+		newNode = document.createElement('span');
+		newNode.innerHTML = "<img class='load-widget' id='cargando' src='"+urlImageLoading+"'>";
+		document.getElementById('widget-info-2').appendChild(newNode);
+
+		callNovoCore('POST', 'Business', 'listEnterprises', '', function(response) {
+			document.getElementById('cargando').style.display = 'none';
+			document.getElementById('productosS').style.display = 'none';
+			document.getElementById('sEmpresaS').style.display = 'block';
+			if(!response.ERROR){
+				sel = document.getElementById('empresasS');
+				$.each(response.lista, function(k,v){
+          $("#empresasS").append('<option value="'+v.acrif+'" acnomcia="'+v.acnomcia+'" acrazonsocial="'+v.acrazonsocial+'" acdesc="'+v.acdesc+'" accodcia="'+v.accodcia+'" accodgrupoe='+v.accodgrupoe+'>'+v.acnomcia+'</option>');
+				});
+			}else{
+				if(response.ERROR=='-29'){
+					document.location.reload();
+				}
+			}
+		})
+
+	});
+}else{
 
 	callNovoCore('POST', 'Business', 'listEnterprises', '', function(response) {
-		document.getElementById('cargando').style.display = 'none';
-		document.getElementById('productosS').style.display = 'none';
-		document.getElementById('sEmpresaS').style.display = 'block';
 		if(!response.ERROR){
 			sel = document.getElementById('empresasS');
 			$.each(response.lista, function(k,v){
-				newOption = document.createElement('option');
-				newOption.value = v.acrif;
-				newOption.acnomcia = v.acnomcia;
-				newOption.acrazonsocial = v.acrazonsocial;
-				newOption.acdesc = v.acdesc;
-				newOption.accoDocumentia = v.accodcia;
-				newOption.accodgrupoe = v.accodgrupoe;
-				newOption.text = v.acnomcia;
-				sel.add(newOption);
+				$("#empresasS").append('<option value="'+v.acrif+'" acnomcia="'+v.acnomcia+'" acrazonsocial="'+v.acrazonsocial+'" acdesc="'+v.acdesc+'" accodcia="'+v.accodcia+'" accodgrupoe='+v.accodgrupoe+'>'+v.acnomcia+'</option>');
 			});
 		}else{
 			if(response.ERROR=='-29'){
@@ -154,8 +164,7 @@ document.getElementById('sEmpresa').addEventListener('click', function(){
 			}
 		}
 	})
-
-});
+}
 
 // Seleccionar empresa
 $("#empresasS").on("change",function(){
@@ -165,6 +174,7 @@ $("#empresasS").on("change",function(){
 	acdesc = $('option:selected', this).attr('acdesc');
 	accodcia = $('option:selected', this).attr('accodcia');
 	accodgrupoe = $('option:selected', this).attr('accodgrupoe');
+	console.log($(this));
 });
 //--Fin Seleccionar empresa
 
@@ -181,11 +191,13 @@ $('#aplicar').on('click',function(){
 		var newContentForm = document.createElement('span');
 		newContentForm.innerHTML += '<input type="hidden" name="ceo_name" value="' + ceo_cook + '"/>';
 		newContentForm.innerHTML += '<input type="hidden" name="data-acrif" value="' + acrif + '" />';
+
 		newContentForm.innerHTML += '<input type="hidden" name="data-acnomcia" value="' + acnomcia + '" />';
 		newContentForm.innerHTML += '<input type="hidden" name="data-acrazonsocial" value="' + acrazonsocial + '" />';
 		newContentForm.innerHTML += '<input type="hidden" name="data-acdesc" value="' + acdesc + '" />';
 		newContentForm.innerHTML += '<input type="hidden" name="data-accodcia" value="' + accodcia + '" />';
 		newContentForm.innerHTML += '<input type="hidden" name="data-accodgrupoe" value="' + accodgrupoe + '" />';
+
 		formTofill.appendChild(newContentForm);
 		formTofill.submit();
 	}else{

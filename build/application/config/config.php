@@ -51,6 +51,7 @@ $config['settingContents'] =
 [
 	'master_content' => [
 		'menuFooter' => TRUE,
+		'menuTop' => 'full',
 		'ownerShip' => 'http://www.novopayment.com/',
 		'logo' => TRUE,
 		'showRates' => TRUE
