@@ -63,8 +63,16 @@
 					</div>
 				</div>
 
+				<?php
+					if ( $pais == 'Ec-bp'):
+				?>
+				<div class="text-center">
+					<input id="user-password" class="required input5" type="password" placeholder="Ingrese la Clave" autocomplete="off">
+				</div>
+				<?php endif; ?>
+
 				<div id="batchs-last">
-					<button id="procesar">Procesar</button>
+					<button id="procesar" class="novo-btn-primary">Procesar</button>
 				</div>
 
 			</div>

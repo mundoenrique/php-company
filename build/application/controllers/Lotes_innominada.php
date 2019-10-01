@@ -35,7 +35,9 @@ class Lotes_innominada extends CI_Controller {
 
 					$nombreCompleto = $this->session->userdata('nombreCompleto');
 					$lastSessionD = $this->session->userdata('lastSession');
-					$FooterCustomInsertJS=["jquery-3.4.0.min.js", "jquery-ui-1.12.1.min.js","jquery.balloon.min.js","aes.min.js","aes-json-format.min.js","dashboard/widget-empresa.js","header.js","jquery.dataTables.min.js","lotes/lotes-innominada.js","jquery-md5.js","routes.js"];
+					$jsRte = '../../../js/';
+					$thirdsJsRte = '../../../js/third_party/';
+					$FooterCustomInsertJS=["jquery-3.4.0.min.js", "jquery-ui-1.12.1.min.js","jquery.balloon.min.js","aes.min.js","aes-json-format.min.js","dashboard/widget-empresa.js","header.js","jquery.dataTables.min.js","lotes/lotes-innominada.js","jquery-md5.js","routes.js",$thirdsJsRte."jquery.validate.min.js",$jsRte."validate-forms.js",$thirdsJsRte."additional-methods.min.js"];
 					$FooterCustomJS="";
 					$titlePage="Conexión Empresas Online - Solicitud Innominadas";
 					$programa = $this->session->userdata('nombreProductoS').' / '. $this->session->userdata('marcaProductoS') ;
@@ -294,11 +296,12 @@ class Lotes_innominada extends CI_Controller {
 					//$monto = $dataRequest->data_monto;
 					$monto = (isset($dataRequest->data_monto))? $dataRequest->data_monto : "";
 					$lembozo1 = $dataRequest->data_lembozo1;
-					$lembozo2 = $dataRequest->data_lembozo2;
+					$lembozo2 = (isset($dataRequest->data_lembozo2))? $dataRequest->data_lembozo2 : "";
 					$codSucursal = $dataRequest->data_codsucursal;
+					$password = (isset($dataRequest->data_password))? $dataRequest->data_password : "";
 					$fechaExp = $dataRequest->data_fechaexp;
 
-					$response = $this->innominadas_model->callWSCreateInnominadas($urlCountry, $cantReg, $monto, $lembozo1, $lembozo2, $codSucursal, $fechaExp);
+					$response = $this->innominadas_model->callWSCreateInnominadas($urlCountry, $cantReg, $monto, $lembozo1, $lembozo2, $codSucursal, $password, $fechaExp);
 					/*}else{
 							$response = array("ERROR"=>lang('SIN_FUNCION'));
 					}*/
