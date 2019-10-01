@@ -2301,6 +2301,10 @@ class Lotes extends CI_Controller {
 					$code = 2;
 					$msg = 'Por favor verifica tu contraseña e intentalo de nuevo';
 					break;
+				case -3:
+					$code = 2;
+					$msg = lang('ERROR_(-39)');
+					break;
 				case -51:
 					$code = 2;
 					$msgVE = 'No fue posible obtener los datos de la empresa para la Orden de Servicio. ';
