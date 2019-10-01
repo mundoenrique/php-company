@@ -379,6 +379,11 @@ span.icon:before {
 	speak: none;
 }
 
+#filtroOS #top-batchs span.icon:before,
+#lotes-general #top-batchs span.icon:before {
+	display: none;
+}
+
 .separator {
 	border-bottom: 1px solid #FFF;
 	clear: both;
@@ -6956,6 +6961,16 @@ button.green:hover {
 	padding: 11px;
 }
 
+.input5 {
+	width: 110px;
+	border-color: rgb(221, 221, 221);
+}
+
+.text-center {
+	margin: 0 auto;
+	margin-left: 262px;
+}
+
 .select_sucursales {
 	width: 622px;
 }
@@ -7429,6 +7444,7 @@ button:active {
 	width:120px;
 	padding-left:15px;
 	padding-right:15px;
+	display: block;
 }
 .novo-btn-primary-modal,.novo-btn-secondary-modal{
 	width:68px;

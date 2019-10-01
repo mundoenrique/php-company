@@ -130,6 +130,15 @@ var datatable;
 			++count;
 			contenido+= "<h6>" + count + ". Has seleccionado una fecha de expiración</h6>";
 		}
+
+		if($("#user-password").val() == ''){
+			++count;
+			contenido+= "<h6>" + count + ". Has ingresado la clave</h6>";
+		}else if($.trim($("#user-password").val()) == ''){
+			++count;
+			contenido+= "<h6>" + count + ". Clave inválida</h6>";
+		}
+
 		if($("#embozo_1").val()==""){
 			++count;
 			contenido+= "<h6>" + count + ". Has ingresado una Linea Embozo 1</h6>";
@@ -140,12 +149,17 @@ var datatable;
 			++count;
 			contenido+= "<h6>" + count + ". No hayas ingresado caracteres especiales en Linea Embozo 2</h6>";
 		}
-		if(!/[^a-zA-Z0-9 ]/.test($("#embozo_1").val())){
 
-		}else {
+		if(($("#embozo_1").val().length > 25 || ($("#embozo_1").val().length < 3))){
+			++count;
+			contenido+= "<h6>" + count + ". No hayas ingresado menos de 3 y más de 25 caracteres en Linea Embozo 1</h6>";
+		}
+
+		if(/[^a-zA-Z0-9 ]/.test($("#embozo_1").val())){
 			++count;
 			contenido+= "<h6>" + count + ". No hayas ingresado caracteres especiales en Linea Embozo 1</h6>";
 		}
+
 		if(maxTarjetas !== 0 && cantTartjetas > maxTarjetas) {
 			++count;
 			contenido+= "<h6>"+count+". La cantidad de tarjetas no sea superior a "+maxTarjetas+"</h6>";
@@ -181,6 +195,9 @@ $(function(){
 
 	calendario("fecha_expira");
 
+	$('#embozo_2').attr('disabled', 'disabled');
+
+
 	$('#procesar').on('click', function(){
 		if(!validate()){
 			$aux = $("#loading").dialog({title:'Procesando solicitud',modal:true, close:function(){$(this).dialog('close')}, resizable:false });
@@ -195,6 +212,7 @@ $(function(){
 				'data_lembozo1' : $('#embozo_1').val(),
 				'data_lembozo2' : $('#embozo_2').val(),
 				'data_codsucursal' : $('#sucursal').val(),
+				'data_password' : hex_md5($('#user-password').val()),
 				'data_fechaexp' : fecha_expira,
 				'ceo_name' : ceo_cook
 			};
@@ -211,7 +229,6 @@ $(function(){
 					if(data.ERROR=='-29'){
 						alert('Usuario actualmente desconectado');
 						location.reload();
-
 					}else{
 						notificacion("Imposible procesar solicitud",data.ERROR);
 					}
