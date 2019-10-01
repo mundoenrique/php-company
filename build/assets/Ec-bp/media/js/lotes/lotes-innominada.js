@@ -212,7 +212,7 @@ $(function(){
 				'data_lembozo1' : $('#embozo_1').val(),
 				'data_lembozo2' : $('#embozo_2').val(),
 				'data_codsucursal' : $('#sucursal').val(),
-				'data_password' : $('#user-password').val(),
+				'data_password' : hex_md5($('#user-password').val()),
 				'data_fechaexp' : fecha_expira,
 				'ceo_name' : ceo_cook
 			};
