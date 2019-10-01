@@ -791,7 +791,7 @@ class Lotes extends CI_Controller {
 					$response = array('ERROR' => '-29' );
 					break;
 				case -22:
-					$response = array('ERROR' => lang('MSG_FIRMA_LOTE') );
+					$response = array('ERROR' => lang('MSG_INVALID_PASS') );
 					break;
 					default:
 					$codigoError = lang('ERROR_('.$response->rc.')');
