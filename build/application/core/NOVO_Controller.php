@@ -115,6 +115,7 @@ class NOVO_Controller extends CI_Controller {
 			case 'benefits':
 			case 'terms':
 			case 'pass-recovery':
+			case 'rates':
 				$auth = TRUE;
 				break;
 			case 'change-password':
