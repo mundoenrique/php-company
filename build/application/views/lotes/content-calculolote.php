@@ -7,6 +7,7 @@ $ceo_cook = $this->security->get_csrf_hash();
 
 $data = unserialize($data);
 
+$this->session->set_userdata('authToken', $data->tokenOTP->authToken);
 //Verifica si existen lotes sin retenciones asociadas si aplica
 $reten = NULL;
 for ($i = 0; $i < count($data->lista); $i++){

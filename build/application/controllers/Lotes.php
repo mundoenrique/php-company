@@ -2356,7 +2356,7 @@ class Lotes extends CI_Controller {
 	 * @param  string $acrifS
 	 * @return array
 	 */
-	private function callWSgenerarOS($urlCountry,$token,$username,$listaTemp,$tempIdOrdenLNF, $autorizacionOtp, $acrifS, $moduloOS){
+	private function callWSgenerarOS($urlCountry,$token,$username,$listaTemp,$tempIdOrdenLNF, $tokenOTP, $acrifS, $moduloOS){
 		$this->lang->load('erroreseol');
 		$this->lang->load('dashboard');
 		$operacion = "generarOS";
@@ -2412,11 +2412,11 @@ class Lotes extends CI_Controller {
 			"rifEmpresa"=>$acrifS,
 			"lista"=> $lista,
 			"lotesNF"=>$listaNF,
-			"autorizacionOtp"=> $autorizacionOtp,
+			"tokenOTP"=> $tokenOTP,
 			"usuario"=> $usuario,
 			"logAccesoObject"=> $logAcceso,
 			"token"=> $token
-			);
+		);
 
 		$data = json_encode($data,JSON_UNESCAPED_UNICODE);
 
@@ -2512,7 +2512,12 @@ class Lotes extends CI_Controller {
 
 		if($paisS==$urlCountry && $logged_in){
 			if ( $moduloAct!==false) {
-				$t = $this->callWSgenerarOS($urlCountry,$token,$username,$tempIdOrdenL,$tempIdOrdenLNF, $autorizacionOtp, $acrifS, $moduloOS);
+				$tokenOTP = [
+					'authToken' => $this->session->userdata('authToken'),
+					'tokenOTP' => $autorizacionOtp
+				];
+				$t = $this->callWSgenerarOS($urlCountry,$token,$username,$tempIdOrdenL,$tempIdOrdenLNF, $tokenOTP, $acrifS, $moduloOS);
+				$this->session->unset_userdata('authToken');
 			}else{
 				$t = ['ERROR' => lang('SIN_FUNCION')];
 				//$t = json_encode(array("ERROR"=>lang('SIN_FUNCION')));
