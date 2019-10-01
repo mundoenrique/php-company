@@ -59,8 +59,9 @@ $(function() {
 			}
 			restartFormLogin(textBtn);
 		},
-		99: function(response){
+		99: function(response, textBtn){
 			notiSystem(response.title, response.msg, response.icon, response.data);
+			restartFormLogin(textBtn);
 		}
 	}
 
