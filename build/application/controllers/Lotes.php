@@ -2460,6 +2460,12 @@ class Lotes extends CI_Controller {
 							'msg' => lang('ERROR_(-231)')
 						];
 						break;
+					case -286:
+						$response = [
+							'ERROR' => $response->rc,
+							'msg' => lang('ERROR_(-286)')
+						];
+						break;
 					default:
 						$response = [
 							'ERROR' => lang('ERROR_('.$response->rc.')')
@@ -2514,7 +2520,7 @@ class Lotes extends CI_Controller {
 			if ( $moduloAct!==false) {
 				$tokenOTP = [
 					'authToken' => $this->session->userdata('authToken'),
-					'tokenOTP' => $autorizacionOtp
+					'tokenCliente' => $autorizacionOtp
 				];
 				$t = $this->callWSgenerarOS($urlCountry,$token,$username,$tempIdOrdenL,$tempIdOrdenLNF, $tokenOTP, $acrifS, $moduloOS);
 				$this->session->unset_userdata('authToken');
