@@ -77,6 +77,7 @@ $lang['CMBVJE'] = 'Viajes';
 //CONFIGURACION
 $lang['CARGANDO'] = 'Cargando...';
 $lang['CONFIGURACION'] = 'Configuración';
+$lang['SUBMENU_TARIFAS'] = 'Tarifas';
 $lang['SUBMENU_EMPRESAS'] = 'Empresas';
 $lang['SUBMENU_SUCURSALES'] = 'Sucursales';
 $lang['SUBMENU_USUARIO'] = 'Usuario';
