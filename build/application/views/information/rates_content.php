@@ -1,5 +1,5 @@
 <div id="content-beneficioss">
-	<h1><?= lang('RATE_TITLE'); ?></h1>
+	<h1><?= lang('SUBMENU_TARIFAS'); ?></h1>
 	<div class="content-beneficios">
 		<div class="content-tarifas">
 			<?php
