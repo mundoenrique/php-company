@@ -523,7 +523,7 @@ $(document).ready(function () {
 							$.each(data.listadoEstadosCuentas, function (posLista, dataitem) {
 								div = $(document.createElement("div")).appendTo(contenedor);
 								div.attr("class", "EC-container rpg" + paginaActual);
-								div.attr("style", "width:650px;margin-top:100px");
+								div.attr("style", "width:950px;margin-top:100px");
 								tabla = $(document.createElement("table")).appendTo(div);
 								tabla.attr("id", "tabla-datos-general");
 								tabla.attr("class", "tabla-reportes trpg" + paginaActual);
@@ -551,6 +551,15 @@ $(document).ready(function () {
 								th.html($("#fecha").attr("data"));
 								th.attr("id", "Datos2-med");
 								th = $(document.createElement("th")).appendTo(tr);
+								th.html($("#fid").attr("data"));
+								th.attr("id", "Datos2-med");
+								th = $(document.createElement("th")).appendTo(tr);
+								th.html($("#terminalTransaccion").attr("data"));
+								th.attr("id", "Datos2-med");
+								th = $(document.createElement("th")).appendTo(tr);
+								th.html($("#secuencia").attr("data"));
+								th.attr("id", "Datos2-med");
+								th = $(document.createElement("th")).appendTo(tr);
 								th.html($("#referencia").attr("data"));
 								th.attr("id", "Datos2-med");
 								th = $(document.createElement("th")).appendTo(tr);
@@ -573,6 +582,15 @@ $(document).ready(function () {
 									td.attr("id", "Datos2-long");
 									td = $(document.createElement("td")).appendTo(tr);
 									td.html(item.fecha);
+									td.attr("id", "Datos2-med");
+									td = $(document.createElement("td")).appendTo(tr);
+									td.html(item.fid);
+									td.attr("id", "Datos2-med");
+									td = $(document.createElement("td")).appendTo(tr);
+									td.html(item.terminalTransaccion);
+									td.attr("id", "Datos2-med");
+									td = $(document.createElement("td")).appendTo(tr);
+									td.html(item.secuencia);
 									td.attr("id", "Datos2-med");
 									td = $(document.createElement("td")).appendTo(tr);
 									td.html(item.referencia);
