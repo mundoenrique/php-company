@@ -4768,6 +4768,10 @@ tr.GC-first th {
 	font-size: 18px;
 }
 
+div#div_tablaDetalle #top-batchs {
+	width: 925px;
+}
+
 #top-batchs span {
 	margin-right: 5px;
 }
@@ -5208,7 +5212,7 @@ li#select-empresa select {
 
 #Datos2 {
 	float: left;
-	width: 660px;
+	width: 945px;
 	background: white;
 	border-bottom: 1px solid #DFE0E2;
 
@@ -5224,20 +5228,14 @@ li#select-empresa select {
 
 #Datos2-long {
 	width: 147px;
-	max-width: 147px;
-	min-width: 147px;
 }
 
 #Datos2-med {
 	width: 90px;
-	max-width: 90px;
-	min-width: 90px;
 }
 
 #Datos2-short {
 	width: 60px;
-	max-width: 60px;
-	min-width: 60px;
 }
 #Datos2-short a {
 	color:#72787A!important;
@@ -5490,7 +5488,7 @@ center button.novo-btn-secondary {
 }
 
 #div_tablaDetalle {
-	width: 660px;
+	width: 945px;
 	height: auto;
 	float: left;
 	background-color: #FFFFFF;
@@ -5504,14 +5502,14 @@ center button.novo-btn-secondary {
 } */
 
 .tabla-reportes {
-	width: 660px;
+	width: 945px;
 	border: none;
 }
 
 .tabla-reportes::after {
 	content: " ";
 	display: block;
-	width: 100%;
+	width: 945px;
 	background-color: #FFFFFF;
 	height: 30px;
 	border-bottom-left-radius: 30px;
@@ -5524,11 +5522,8 @@ center button.novo-btn-secondary {
 
 .tabla-reportes thead th {
 	border-left: 1px solid white;
-
 	padding: 5px;
 	text-align: center;
-	min-width: 115px;
-	max-width: 115px;
 }
 
 .tbody-reportes tr {
@@ -6006,7 +6001,7 @@ span.jPag-snext-img {
 
 .thead-edc #Datos1 {
 	color: #0F265C;
-	width: 660px;
+	width: 945px;
 	float: left;
 	margin-bottom: 10px;
 	font-family: "prelo-semibold", sans-serif;
@@ -6014,7 +6009,7 @@ span.jPag-snext-img {
 
 .thead-edc #Datos2 {
 	float: left;
-	width: 660px;
+	width: 945px;
 	background: white;
 	border-left: 0;
 	-webkit-border-radius: 3px;
@@ -6039,20 +6034,20 @@ span.jPag-snext-img {
 
 .thead-edc #Datos2-long {
 	width: 147px !important;
-	max-width: 147px !important;
-	min-width: 147px !important;
+}
+
+.tabla-reportes th#Datos2-long:first-child,
+.tabla-reportes td#Datos2-long:first-child {
+	width: 105px !important;
+	min-width: 105px !important;
 }
 
 .thead-edc #Datos2-med {
 	width: 90px !important;
-	max-width: 90px !important;
-	min-width: 90px !important;
 }
 
 .thead-edc #Datos2-short {
 	width: 60px !important;
-	max-width: 60px !important;
-	min-width: 60px !important;
 }
 
 .error-mensaje-reportes {

@@ -168,6 +168,9 @@ $urlCdn = get_cdn();
   <input id="cliente" type='hidden' data='' />
   <input id="tarjeta" type='hidden' data='<?php echo lang('TARJETA_ESTADO_DE_CUENTA'); ?>' />
   <input id="fecha" type='hidden' data='<?php echo lang('FECHA_ESTADO_DE_CUENTA'); ?>' />
+  <input id="fid" type='hidden' data='<?php echo lang('FID_ESTADO_DE_CUENTA'); ?>' />
+	<input id="terminalTransaccion" type='hidden' data='<?php echo lang('TERMINALTRANSACCION_ESTADO_DE_CUENTA'); ?>' />
+	<input id="secuencia" type='hidden' data='<?php echo lang('SECUENCIA_ESTADO_DE_CUENTA'); ?>' />
   <input id="referencia" type='hidden' data='<?php echo lang('REFERENCIA_ESTADO_DE_CUENTA'); ?>' />
   <input id="descripcion" type='hidden' data='<?php echo lang('DESCRIPCION_ESTADO_DE_CUENTA'); ?>' />
   <form id='formulario' method='post'></form>
