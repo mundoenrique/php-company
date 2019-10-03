@@ -7498,6 +7498,13 @@ button:active {
 	border: 1px solid #ffdd00;
 }
 
+.recepcion-tcs,
+.t-center{
+	margin-top: 140px;
+	width: auto;
+	text-align: center
+}
+
 
 /* .loadingScreenWindow .ui-button {
   display: none;

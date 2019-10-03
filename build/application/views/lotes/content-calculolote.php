@@ -7,6 +7,7 @@ $ceo_cook = $this->security->get_csrf_hash();
 
 $data = unserialize($data);
 
+$this->session->set_userdata('authToken', $data->tokenOTP->authToken);
 //Verifica si existen lotes sin retenciones asociadas si aplica
 $reten = NULL;
 for ($i = 0; $i < count($data->lista); $i++){
@@ -179,6 +180,10 @@ $reten = ($reten == NULL) ? "nonEmpty" : trim($reten, ', ');
 						<?php
 							if($pais=='Ec-bp'){
 								?>
+								<div class="recepcion-tcs">
+									<p class="t-center">Ingresa el codigo de seguridad enviado a tu correo</p>
+									<input type="text" id="passOtp" name="passOtp" value=""  onpaste="return false">
+								</div>
 									<div class="botones-OS">
 										<button id="confirmarPreOSL" style="display: none" class="novo-btn-primary">
 											<?php echo lang('BTN_CONFIRMAR_OS') ?></button>
