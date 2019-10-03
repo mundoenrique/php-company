@@ -78,6 +78,7 @@ $(function () {
 				$aux.dialog('destroy');
 
 				if (!data.ERROR) {
+					console.log(data)
 					if (data.moduloOS) {
 						$("#data-confirm").attr('value', data.ordenes);
 						ceo_cook = decodeURIComponent(
@@ -100,6 +101,8 @@ $(function () {
 						location.reload();
 					} else if (data.ERROR == '-56') {
 						notificacion("Error de facturación", data.msg, null);
+					}else if(data.ERROR == '-286'){
+						notificacion("Confirmar cálculo orden de servicio", data.msg, null);
 					} else {
 						notificacion("Confirmar cálculo orden de servicio", data.ERROR, null);
 					}

@@ -2439,6 +2439,7 @@ class Lotes extends CI_Controller {
 						"costoLog" => ($response->lista[0]->aplicaCostD === 'D'),
 						"ordenes"=>serialize($response)
 					];
+					$this->session->unset_userdata('authToken');
 					break;
 					case -29:
 					case -61:
@@ -2523,7 +2524,7 @@ class Lotes extends CI_Controller {
 					'tokenCliente' => $autorizacionOtp
 				];
 				$t = $this->callWSgenerarOS($urlCountry,$token,$username,$tempIdOrdenL,$tempIdOrdenLNF, $tokenOTP, $acrifS, $moduloOS);
-				$this->session->unset_userdata('authToken');
+
 			}else{
 				$t = ['ERROR' => lang('SIN_FUNCION')];
 				//$t = json_encode(array("ERROR"=>lang('SIN_FUNCION')));
