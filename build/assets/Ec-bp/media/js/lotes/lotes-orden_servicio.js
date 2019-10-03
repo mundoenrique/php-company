@@ -40,9 +40,14 @@ $(function () {
 	$("#confirmarPreOSL").on("click", function () {
 		var l = $("#tempIdOrdenL").val();
 		var lnf = $("#tempIdOrdenLNF").val();
+		var rePassOtp = $("#passOtp").val();
+
+		if(rePassOtp == 0 && rePassOtp !== ''){
+			notificacion("Confirmar Codigo de seguridad", "No puede llevar espacios en blanco", null);
+			return false;
+		}
 
 		$aux = $('#loading').dialog({
-
 			dialogClass: "hide-close",
 			title: 'Confirmar cálculo orden de servicio',
 			modal: true,
@@ -55,7 +60,8 @@ $(function () {
 
 		var dataRequest = JSON.stringify({
 			tempIdOrdenL: l,
-			tempIdOrdenLNF: lnf
+			tempIdOrdenLNF: lnf,
+			autorizacionOtp: rePassOtp
 		})
 
 		dataRequest  = CryptoJS.AES.encrypt(dataRequest , ceo_cook, {format: CryptoJSAesJson}).toString();
@@ -72,6 +78,7 @@ $(function () {
 				$aux.dialog('destroy');
 
 				if (!data.ERROR) {
+					console.log(data)
 					if (data.moduloOS) {
 						$("#data-confirm").attr('value', data.ordenes);
 						ceo_cook = decodeURIComponent(
@@ -94,6 +101,8 @@ $(function () {
 						location.reload();
 					} else if (data.ERROR == '-56') {
 						notificacion("Error de facturación", data.msg, null);
+					}else if(data.ERROR == '-286'){
+						notificacion("Confirmar cálculo orden de servicio", data.msg, null);
 					} else {
 						notificacion("Confirmar cálculo orden de servicio", data.ERROR, null);
 					}
@@ -103,6 +112,13 @@ $(function () {
 			});
 
 	});
+
+	function validationIn(emailtcs){
+
+
+
+
+	}
 
 
 	// MOSTRAR/OCULTAR LOTES SEGUN OS
