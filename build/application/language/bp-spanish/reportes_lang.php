@@ -128,6 +128,9 @@ $lang['CUENTA_ESTADOS_DE_CUENTA'] = "Cuenta: ";
 $lang['CLIENTE_ESTADOS_DE_CUENTA'] = "Cliente: ";
 $lang['TARJETA_ESTADO_DE_CUENTA'] = "Tarjeta";
 $lang['FECHA_ESTADO_DE_CUENTA'] = "Fecha";
+$lang['FID_ESTADO_DE_CUENTA'] = "Fid";
+$lang['TERMINALTRANSACCION_ESTADO_DE_CUENTA'] = "Terminal";
+$lang['SECUENCIA_ESTADO_DE_CUENTA'] = "Secuencia";
 $lang['REFERENCIA_ESTADO_DE_CUENTA'] = "Referencia";
 $lang['DESCRIPCION_ESTADO_DE_CUENTA'] = "Descripción";
 

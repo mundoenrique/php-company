@@ -2301,6 +2301,10 @@ class Lotes extends CI_Controller {
 					$code = 2;
 					$msg = 'Por favor verifica tu contraseña e intentalo de nuevo';
 					break;
+				case -3:
+					$code = 2;
+					$msg = lang('ERROR_(-39)');
+					break;
 				case -51:
 					$code = 2;
 					$msgVE = 'No fue posible obtener los datos de la empresa para la Orden de Servicio. ';
@@ -2352,7 +2356,7 @@ class Lotes extends CI_Controller {
 	 * @param  string $acrifS
 	 * @return array
 	 */
-	private function callWSgenerarOS($urlCountry,$token,$username,$listaTemp,$tempIdOrdenLNF,$acrifS,$moduloOS){
+	private function callWSgenerarOS($urlCountry,$token,$username,$listaTemp,$tempIdOrdenLNF, $tokenOTP, $acrifS, $moduloOS){
 		$this->lang->load('erroreseol');
 		$this->lang->load('dashboard');
 		$operacion = "generarOS";
@@ -2408,10 +2412,11 @@ class Lotes extends CI_Controller {
 			"rifEmpresa"=>$acrifS,
 			"lista"=> $lista,
 			"lotesNF"=>$listaNF,
+			"tokenOTP"=> $tokenOTP,
 			"usuario"=> $usuario,
 			"logAccesoObject"=> $logAcceso,
 			"token"=> $token
-			);
+		);
 
 		$data = json_encode($data,JSON_UNESCAPED_UNICODE);
 
@@ -2434,6 +2439,7 @@ class Lotes extends CI_Controller {
 						"costoLog" => ($response->lista[0]->aplicaCostD === 'D'),
 						"ordenes"=>serialize($response)
 					];
+					$this->session->unset_userdata('authToken');
 					break;
 					case -29:
 					case -61:
@@ -2448,6 +2454,17 @@ class Lotes extends CI_Controller {
 						$response = [
 							'ERROR' => $response->rc,
 							'msg' => lang('ERROR_(-56)')
+						];
+					case -231:
+						$response = [
+							'ERROR' => $response->rc,
+							'msg' => lang('ERROR_(-231)')
+						];
+						break;
+					case -286:
+						$response = [
+							'ERROR' => $response->rc,
+							'msg' => lang('ERROR_(-286)')
 						];
 						break;
 					default:
@@ -2487,6 +2504,7 @@ class Lotes extends CI_Controller {
 		);
 		$tempIdOrdenL = isset($dataRequest->tempIdOrdenL) ? $dataRequest->tempIdOrdenL : FALSE;
 		$tempIdOrdenLNF = isset($dataRequest->tempIdOrdenLNF) ? $dataRequest->tempIdOrdenLNF : FALSE;
+		$autorizacionOtp = isset($dataRequest->autorizacionOtp) ? $dataRequest->autorizacionOtp : FALSE;
 
 		$token = $this->session->userdata('token');
 		$username = $this->session->userdata('userName');
@@ -2501,7 +2519,12 @@ class Lotes extends CI_Controller {
 
 		if($paisS==$urlCountry && $logged_in){
 			if ( $moduloAct!==false) {
-				$t = $this->callWSgenerarOS($urlCountry,$token,$username,$tempIdOrdenL,$tempIdOrdenLNF,$acrifS,$moduloOS);
+				$tokenOTP = [
+					'authToken' => $this->session->userdata('authToken'),
+					'tokenCliente' => $autorizacionOtp
+				];
+				$t = $this->callWSgenerarOS($urlCountry,$token,$username,$tempIdOrdenL,$tempIdOrdenLNF, $tokenOTP, $acrifS, $moduloOS);
+
 			}else{
 				$t = ['ERROR' => lang('SIN_FUNCION')];
 				//$t = json_encode(array("ERROR"=>lang('SIN_FUNCION')));
