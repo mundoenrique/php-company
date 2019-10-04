@@ -526,7 +526,7 @@ $(document).ready(function () {
 								div.attr("style", "width:950px;margin-top:100px");
 								tabla = $(document.createElement("table")).appendTo(div);
 								tabla.attr("id", "tabla-datos-general");
-								tabla.attr("class", "tabla-reportes trpg" + paginaActual);
+								tabla.attr("class", "estado-cuenta trpg" + paginaActual);
 								thead = $(document.createElement("thead")).appendTo(tabla);
 								thead.attr("class", "thead-edc");
 
