@@ -657,17 +657,14 @@ button .requesting {
 /* #account-nav {
 	color: white;
 }
-
 #account-nav ul li {
 	text-transform: capitalize;
 }
-
 #account-nav ul li a {
 	color: white;
 	color: #0f265c !important;
 	display: flex;
 }
-
 #account-nav ul li a span.icon {
 	font-size: 16px;
 } */
@@ -743,11 +740,9 @@ button .requesting {
 	border-radius: 0 0 0 15px !important;
 	border: 1px solid #d5d5d5 !important;
 }
-
 .config-menuH li {
 	list-style: none;
 }
-
 .config-menuH div {
 	display: none;
 } */
