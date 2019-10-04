@@ -77,7 +77,8 @@ class NOVO_Controller extends CI_Controller {
 				"$this->skin-validate",
 				"third_party/jquery-ui",
 				"$structure-structure",
-				"$this->skin-appearance"
+				"$this->skin-appearance",
+				"$this->countryUri/default"
 			];
 			$this->includeAssets->jsFiles = [
 				"third_party/html5",
@@ -128,4 +129,3 @@ class NOVO_Controller extends CI_Controller {
 		}
 	}
 }
-
