@@ -126,7 +126,7 @@ $urlCdn = get_cdn();
   <input id="cargo" type='hidden' data='<?php echo lang('CARGO'); ?>' />
   <div id="chart" style="display:none"></div>
 
-  <div id="div_tablaDetalle" style="display:none">
+  <div id="div_tablaDetalle" class="estado-cuenta" style="display:none">
 
     <!-- <div id="top-batchs">
 					<span aria-hidden="true" class="icon" data-icon="&#xe035;"></span><?php echo lang('ESTADOS_CUENTA_RESULT'); ?>
