@@ -4768,7 +4768,7 @@ tr.GC-first th {
 	font-size: 18px;
 }
 
-div#div_tablaDetalle #top-batchs {
+.estado-cuenta #top-batchs{
 	width: 925px;
 }
 
@@ -5212,10 +5212,13 @@ li#select-empresa select {
 
 #Datos2 {
 	float: left;
-	width: 945px;
+	width: 660px;
 	background: white;
 	border-bottom: 1px solid #DFE0E2;
+}
 
+.estado-cuenta #Datos2 {
+	width: 945px;
 }
 
 #Datos2 td {
@@ -5228,15 +5231,34 @@ li#select-empresa select {
 
 #Datos2-long {
 	width: 147px;
+	max-width: 147px;
+	min-width: 147px;
+}
+
+.estado-cuenta #Datos2-long{
+	width: 147px;
 }
 
 #Datos2-med {
+	width: 90px;
+	max-width: 90px;
+	min-width: 90px;
+}
+
+.estado-cuenta #Datos2-med{
 	width: 90px;
 }
 
 #Datos2-short {
 	width: 60px;
+	max-width: 60px;
+	min-width: 60px;
 }
+
+.estado-cuenta #Datos2-short{
+	width: 60px;
+}
+
 #Datos2-short a {
 	color:#72787A!important;
 	font-weight: bold;
@@ -5245,6 +5267,12 @@ li#select-empresa select {
 #Datos3 {
 	float: left;
 	width: 660px;
+	color: #0F265C;
+}
+
+.estado-cuenta #Datos3 {
+	float: left;
+	width: 945px;
 	color: #0F265C;
 }
 
@@ -5488,6 +5516,15 @@ center button.novo-btn-secondary {
 }
 
 #div_tablaDetalle {
+	width: 660px;
+	height: auto;
+	float: left;
+	background-color: #FFFFFF;
+	border: 1px solid #DFE0E2;
+	border-bottom-left-radius: 30px;
+}
+
+#div_tablaDetalle.estado-cuenta {
 	width: 945px;
 	height: auto;
 	float: left;
@@ -5502,25 +5539,40 @@ center button.novo-btn-secondary {
 } */
 
 .tabla-reportes {
-	width: 945px;
+	width: 660px;
 	border: none;
 }
 
-.tabla-reportes::after {
+.estado-cuenta{
+	width: 950px;
+	border: none;
+}
+
+.tabla-reportes::after,
+.estado-cuenta::after {
 	content: " ";
 	display: block;
-	width: 945px;
+	width: 100%;
 	background-color: #FFFFFF;
 	height: 30px;
 	border-bottom-left-radius: 30px;
 }
 
-.tabla-reportes thead {
+.tabla-reportes thead,
+.estado-cuenta thead {
 	color: white;
 	float: left;
 }
 
 .tabla-reportes thead th {
+	border-left: 1px solid white;
+	padding: 5px;
+	text-align: center;
+	min-width: 115px;
+	max-width: 115px;
+}
+
+.estado-cuenta thead th {
 	border-left: 1px solid white;
 	padding: 5px;
 	text-align: center;
@@ -6001,15 +6053,19 @@ span.jPag-snext-img {
 
 .thead-edc #Datos1 {
 	color: #0F265C;
-	width: 945px;
+	width: 660px;
 	float: left;
 	margin-bottom: 10px;
 	font-family: "prelo-semibold", sans-serif;
 }
 
+.estado-cuenta #Datos1 {
+	width: 945px;
+}
+
 .thead-edc #Datos2 {
 	float: left;
-	width: 945px;
+	width: 660px;
 	background: white;
 	border-left: 0;
 	-webkit-border-radius: 3px;
@@ -6023,6 +6079,10 @@ span.jPag-snext-img {
 	color: #10133f !important;
 }
 
+.estado-cuenta #Datos2 {
+	width: 945px;
+}
+
 .thead-edc #Datos2 td {
 	padding: 5px;
 	text-align: center;
@@ -6034,19 +6094,37 @@ span.jPag-snext-img {
 
 .thead-edc #Datos2-long {
 	width: 147px !important;
+	max-width: 147px !important;
+	min-width: 147px !important;
 }
 
-.tabla-reportes th#Datos2-long:first-child,
-.tabla-reportes td#Datos2-long:first-child {
+.thead-edc #Datos2-long .estado-cuenta{
+	width: 147px !important;
+}
+
+.estado-cuenta th#Datos2-long:first-child,
+.estado-cuenta td#Datos2-long:first-child {
 	width: 105px !important;
 	min-width: 105px !important;
 }
 
 .thead-edc #Datos2-med {
 	width: 90px !important;
+	max-width: 90px !important;
+	min-width: 90px !important;
+}
+
+.thead-edc #Datos2-med .estado-cuenta{
+	width: 90px !important;
 }
 
 .thead-edc #Datos2-short {
+	width: 60px !important;
+	max-width: 60px !important;
+	min-width: 60px !important;
+}
+
+.thead-edc #Datos2-short .estado-cuenta{
 	width: 60px !important;
 }
 
