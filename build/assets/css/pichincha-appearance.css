@@ -1,36 +1,28 @@
 @font-face {
-	font-family: "prelo";
-	src: url('../fonts/bp/prelo-book-webfont.eot');
-	src: url('../fonts/bp/prelo-book-webfont.eot?#iefix') format('embedded-opentype'),
-	url('../fonts/bp/prelo-book-webfont.woff2') format('woff2'),
-	url('../fonts/bp/prelo-book-webfont.woff') format('woff'),
-	url('../fonts/bp/prelo-book-webfont.ttf') format('truetype');
-}
-
-@font-face {
 	font-family: "Prelo Medium";
   src: url('../fonts/bp/prelo-medium-webfont.eot');
   src: url('../fonts/bp/prelo-medium-webfont.eot?#iefix') format('embedded-opentype'),
-	url('../fonts/bp/prelo-medium-webfont.woff2') format('woff2'),
-	url('../fonts/bp/prelo-medium-webfont.woff') format('woff'),
-	url('../fonts/bp/prelo-medium-webfont.ttf') format('truetype');
+			 url('../fonts/bp/prelo-medium-webfont.woff2') format('woff2'),
+			 url('../fonts/bp/prelo-medium-webfont.woff') format('woff'),
+			 url('../fonts/bp/prelo-medium-webfont.ttf') format('truetype');
 }
 
 @font-face {
-	font-family: "prelo-semibold";
-	src: url('../fonts/bp/prelo-semibold-webfont.eot');
-	src: url('../fonts/bp/prelo-semibold-webfont.eot?#iefix') format('embedded-opentype'),
-		url('../fonts/bp/prelo-semibold-webfont.woff2') format('woff2'),
-		url('../fonts/bp/prelo-semibold-webfont.woff') format('woff'),
-		url('../fonts/bp/prelo-semibold-webfont.ttf') format('truetype');
+	font-family: "Prelo Semibold";
+  src: url('../fonts/bp/prelo-semibold-webfont.eot');
+  src: url('../fonts/bp/prelo-semibold-webfont.eot?#iefix') format('embedded-opentype'),
+			 url('../fonts/bp/prelo-semibold-webfont.woff2') format('woff2'),
+			 url('../fonts/bp/prelo-semibold-webfont.woff') format('woff'),
+			 url('../fonts/bp/prelo-semibold-webfont.ttf') format('truetype');
 }
+
 @font-face {
 	font-family: "Prelo Slab Book";
   src: url('../fonts/bp/preloslab-book-webfont.eot');
   src: url('../fonts/bp/preloslab-book-webfont.eot?#iefix') format('embedded-opentype'),
-	url('../fonts/bp/preloslab-book-webfont.woff2') format('woff2'),
-	url('../fonts/bp/preloslab-book-webfont.woff') format('woff'),
-	url('../fonts/bp/preloslab-book-webfont.ttf') format('truetype');
+			 url('../fonts/bp/preloslab-book-webfont.woff2') format('woff2'),
+			 url('../fonts/bp/preloslab-book-webfont.woff') format('woff'),
+			 url('../fonts/bp/preloslab-book-webfont.ttf') format('truetype');
 }
 
 @font-face {
@@ -42,19 +34,11 @@
 			 url('../fonts/bp/preloslab-semibold-webfont.ttf') format('truetype');
 }
 
-@font-face {
-	font-family: "novoglyphs";
-	src: url('../fonts/novoglyphs-webfont.eot');
-	src: url('../fonts/novoglyphs-webfont.eot?#iefix') format('eot'), url('../fonts/novoglyphs-webfont.woff') format('woff'), url('../fonts/novoglyphs-webfont.ttf') format('truetype'), url('../fonts/novoglyphs-webfont.svg') format('svg');
-	font-weight: normal;
-	font-style: normal;
-}
-
 body {
 	background: #fff;
 	color: #72787A;
 	direction: ltr;
-	font-family: "Prelo Medium", sans-serif !important;
+	font-family: "Prelo Medium", sans-serif;
 	font-size: 14px;
 	font-weight: normal;
 	line-height: 17px;
@@ -132,6 +116,7 @@ h6 {
 a {
 	color: #10133f !important;
 	cursor: pointer;
+	font-family: "Prelo Semibold";
 	text-decoration: none;
 }
 
@@ -262,7 +247,7 @@ button {
 	color: #10133f;
 	line-height: 35px;
 	outline: none;
-	font-family: "prelo";
+	font-family: "Prelo Semibold";
 	font-size: 13px;
 	text-align: center;
 }
@@ -654,46 +639,16 @@ button .requesting {
 	font-size: 12px !important;
 }
 
-/* #account-nav {
-	color: white;
-}
-#account-nav ul li {
-	text-transform: capitalize;
-}
-#account-nav ul li a {
-	color: white;
-	color: #0f265c !important;
-	display: flex;
-}
-#account-nav ul li a span.icon {
-	font-size: 16px;
-} */
-
 #account-nav {
 	color: white;
-	margin-top: 10px;
-	min-width: 250px;
-	float: right;
-}
-
-#account-nav ul {
-	float: right;
-	width: auto !important;
 }
 
 #account-nav ul li {
-
-	height: 20px;
-	margin-bottom: 5px;
 	text-transform: capitalize;
-	margin-left: 20px;
 }
 
 #account-nav ul li a {
 	color: white;
-	float: left;
-	font-size: 14px;
-	font-weight: 700;
 	color: #0f265c !important;
 	display: flex;
 }
@@ -729,52 +684,20 @@ button .requesting {
 	background-color:#f0f0f0;
 }
 
-/* .config-menuH {
-	background-color: white !important;
-	color: #0F265C;
-	opacity: 1.00 !important;
-	text-align: left;
-	visibility: visible;
-	display: none;
-	box-shadow: none !important;
-	border-radius: 0 0 0 15px !important;
-	border: 1px solid #d5d5d5 !important;
-}
-.config-menuH li {
-	list-style: none;
-}
-.config-menuH div {
-	display: none;
-} */
-
 .config-menuH {
-	min-width: 20px;
-	padding: 5px;
 	background-color: white !important;
 	color: #0F265C;
 	opacity: 1.00 !important;
-	z-index: 32767;
 	text-align: left;
 	visibility: visible;
-	position: absolute;
-	top: 41px;
-	left: 939.5px;
 	display: none;
 	box-shadow: none !important;
 	border-radius: 0 0 0 15px !important;
 	border: 1px solid #d5d5d5 !important;
 }
 
-.config-menuH ul {
-	float: left;
-	padding-left: -50px;
-	font-size: 14px;
-
-}
-
 .config-menuH li {
 	list-style: none;
-	padding: 5px !important;
 }
 
 .config-menuH div {
@@ -785,17 +708,9 @@ button .requesting {
 	list-style: none !important;
 }
 
-.submenu {
-	margin-left: -37px !important;
-	float: left;
-	font-family: "prelo";
-}
-
 .submenu a {
 	color: #0F265C !important;
-	font-weight: normal !important;
-	padding-left: 10px;
-	height: 10px;
+	font-weight: normal;
 }
 
 .submenu .menu-item:hover {
@@ -2339,9 +2254,9 @@ a.style-companies-item span {
 }
 
 a.style-companies-item:hover {
-	box-shadow: 0px 0px 5px 1px rgba(15, 38, 92, 0.6);
-	-webkit-box-shadow: 0px 0px 5px 1px rgba(15, 38, 92, 0.6);
-	-moz-box-shadow: 0px 0px 5px 1px rgba(15, 38, 92, 0.6);
+	box-shadow: 0px 0px 5px 1px rgba(15,38,92,0.6);
+	-webkit-box-shadow: 0px 0px 5px 1px rgba(15,38,92,0.6);
+	-moz-box-shadow: 0px 0px 5px 1px rgba(15,38,92,0.6);
 	transition: all 100ms ease-in;
 	color: white;
 }
@@ -2358,7 +2273,6 @@ a.style-companies-item:hover {
 }
 
 .style-companies-item-activa span {
-	float: left;
 	font-size: 39px;
 }
 
@@ -2367,15 +2281,10 @@ a.style-companies-item:hover {
 }
 
 #more-info {
-	background: #FFFFFF;
+	background: #e5e5e5;
 	list-style: none;
 	color: white;
 	display: none;
-	top:25px;
-	border-left: 1px solid #dfe0e2;
-	border-right: 1px solid #dfe0e2;
-	border-bottom: 1px solid #dfe0e2;
-	border-bottom-left-radius: 30px;
 }
 
 #more-info:after {
@@ -2393,8 +2302,8 @@ a.style-companies-item:hover {
 }
 
 span#more-info a p {
-	color: #0F265C;
-	font-weight: 700;
+	color: #10133f;
+	font-family: "Prelo Semibold";
 	font-size: 12px;
 }
 
@@ -2402,39 +2311,29 @@ span#more-info a p b {
 	font-size: 18px;
 }
 
-#text-companies,
-#text-companies-2 {
-	font-family: "prelo";
-}
-.style-companies-item>#text-companies-T,
-.style-companies-item>#text-companies {
-	float: initial
-}
-
 #text-companies-T {
 	line-height: 14px;
-	font-size: 14px;
 	overflow: hidden;
+	font-family: "Prelo Semibold";
 }
 
 #text-companies {
 	line-height: 12px;
-	font-size: 14px;
 	text-overflow: ellipsis;
 	white-space: nowrap;
-	/*overflow: hidden;*/
+	overflow: hidden;
 	font-weight: normal;
 }
 
 #text-companies-2 {
 	color: #545454;
-	font-weight: regular;
+	font-weight: normal;
 }
 
 .filter {
 	color: #FFFFFF;
-	background: #FFF;
-	font-family: "prelo";
+	background: #e5e5e5;
+	font-family: "Prelo Semibold";
 }
 
 .filter-2 {
@@ -2445,8 +2344,7 @@ span#more-info a p b {
 .lastsession {
 	color: #888888;
 	font-size: 12px;
-	font-weight: 700;
-	font-family: "prelo";
+	font-family: "Prelo Semibold";
 }
 
 div.filter li {
@@ -4724,7 +4622,6 @@ p#user-name {
 	background-color: white;
 	list-style: none;
 	text-align: left;
-	margin: 0;
 }
 
 #nav2 ul li > ul li a {
@@ -4733,11 +4630,9 @@ p#user-name {
 
 #nav2 ul li a {
 	text-decoration: none;
-	font-weight: normal;
-	font-family: "prelo", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-family: "Prelo Semibold";
 	font-size: 16px;
 	line-height: 40px;
-	padding: 0 10px;
 	color: #0f265c !important;
 }
 

@@ -1258,11 +1258,10 @@ a.style-companies-item span {
 
 #more-info {
 	width: 260px;
-	height: 100px;
+	height: 140px;
 	margin-top: 3px;
 	position: absolute;
 	z-index: 3;
-	top: 25px;
 }
 
 #more-info span {
@@ -1281,7 +1280,7 @@ a.style-companies-item span {
 }
 
 span#more-info a {
-	/* padding: 5px; */
+	padding: 5px;
 }
 
 span#more-info a p b {
@@ -1302,8 +1301,7 @@ span#more-info a p b {
 	float: right;
 	padding-right: 10px;
 	width: 190px;
-	padding-left: 20px;
-	/*padding-left: 10px;*/
+	padding-left: 10px;
 	height: 12px;
 }
 
@@ -1562,10 +1560,8 @@ button.r-button {
 }
 
 #products-list li img {
-	float: left;
 	margin: 0px;
-	width: 100px;
-	height: 80px;
+	float: left;
 }
 
 .info-producto-1 {
@@ -3848,7 +3844,7 @@ button.green {
 #nav2 {
 	height: 40px;
 	margin: 0 auto;
-	width: 1000px;
+	width: 960px;
 }
 
 #nav2 ul {

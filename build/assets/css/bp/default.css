@@ -1,37 +1,37 @@
 @font-face {
 	font-family: "Prelo Medium";
-	src: url('../fonts/bp/prelo-medium-webfont.eot');
-	src: url('../fonts/bp/prelo-medium-webfont.eot?#iefix') format('embedded-opentype'),
-		url('../fonts/bp/prelo-medium-webfont.woff2') format('woff2'),
-		url('../fonts/bp/prelo-medium-webfont.woff') format('woff'),
-		url('../fonts/bp/prelo-medium-webfont.ttf') format('truetype');
+	src: url('../../fonts/bp/prelo-medium-webfont.eot');
+	src: url('../../fonts/bp/prelo-medium-webfont.eot?#iefix') format('embedded-opentype'),
+		url('../../fonts/bp/prelo-medium-webfont.woff2') format('woff2'),
+		url('../../fonts/bp/prelo-medium-webfont.woff') format('woff'),
+		url('../../fonts/bp/prelo-medium-webfont.ttf') format('truetype');
 }
 
 @font-face {
 	font-family: "Prelo Semibold";
-	src: url('../fonts/bp/prelo-semibold-webfont.eot');
-	src: url('../fonts/bp/prelo-semibold-webfont.eot?#iefix') format('embedded-opentype'),
-		url('../fonts/bp/prelo-semibold-webfont.woff2') format('woff2'),
-		url('../fonts/bp/prelo-semibold-webfont.woff') format('woff'),
-		url('../fonts/bp/prelo-semibold-webfont.ttf') format('truetype');
+	src: url('../../fonts/bp/prelo-semibold-webfont.eot');
+	src: url('../../fonts/bp/prelo-semibold-webfont.eot?#iefix') format('embedded-opentype'),
+		url('../../fonts/bp/prelo-semibold-webfont.woff2') format('woff2'),
+		url('../../fonts/bp/prelo-semibold-webfont.woff') format('woff'),
+		url('../../fonts/bp/prelo-semibold-webfont.ttf') format('truetype');
 }
 
 @font-face {
 	font-family: "Prelo Slab Book";
-	src: url('../fonts/bp/preloslab-book-webfont.eot');
-	src: url('../fonts/bp/preloslab-book-webfont.eot?#iefix') format('embedded-opentype'),
-		url('../fonts/bp/preloslab-book-webfont.woff2') format('woff2'),
-		url('../fonts/bp/preloslab-book-webfont.woff') format('woff'),
-		url('../fonts/bp/preloslab-book-webfont.ttf') format('truetype');
+	src: url('../../fonts/bp/preloslab-book-webfont.eot');
+	src: url('../../fonts/bp/preloslab-book-webfont.eot?#iefix') format('embedded-opentype'),
+		url('../../fonts/bp/preloslab-book-webfont.woff2') format('woff2'),
+		url('../../fonts/bp/preloslab-book-webfont.woff') format('woff'),
+		url('../../fonts/bp/preloslab-book-webfont.ttf') format('truetype');
 }
 
 @font-face {
 	font-family: "Prelo Slab Semibold";
-	src: url('../fonts/bp/preloslab-semibold-webfont.eot');
-	src: url('../fonts/bp/preloslab-semibold-webfont.eot?#iefix') format('embedded-opentype'),
-		url('../fonts/bp/preloslab-semibold-webfont.woff2') format('woff2'),
-		url('../fonts/bp/preloslab-semibold-webfont.woff') format('woff'),
-		url('../fonts/bp/preloslab-semibold-webfont.ttf') format('truetype');
+	src: url('../../fonts/bp/preloslab-semibold-webfont.eot');
+	src: url('../../fonts/bp/preloslab-semibold-webfont.eot?#iefix') format('embedded-opentype'),
+		url('../../fonts/bp/preloslab-semibold-webfont.woff2') format('woff2'),
+		url('../../fonts/bp/preloslab-semibold-webfont.woff') format('woff'),
+		url('../../fonts/bp/preloslab-semibold-webfont.ttf') format('truetype');
 }
 
 body {
@@ -299,7 +299,7 @@ html input[disabled] {
 }
 
 button {
-	background: url('../images/BackgroundButton.png') left center no-repeat #ffdd00;
+	background: url('../../images/BackgroundButton.png') left center no-repeat #ffdd00;
 	border: 0;
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
@@ -320,7 +320,7 @@ button {
 }
 
 button:hover {
-	background: url('../images/BackgroundButtonHover.png') left center no-repeat #ffdd00;
+	background: url('../../images/BackgroundButtonHover.png') left center no-repeat #ffdd00;
 }
 
 button:active {
@@ -5608,7 +5608,7 @@ li.ui-state-default.ui-corner-top:nth-child(3) {
 }
 
 .novo-btn-primary-modal:hover {
-	background: url('../images/BackgroundButtonHover.png') left center no-repeat #ffdd00;
+	background: url('../../images/BackgroundButtonHover.png') left center no-repeat #ffdd00;
 }
 
 .novo-btn-secondary,
@@ -6717,33 +6717,33 @@ body .ui-tooltip {
 
 .ui-icon,
 .ui-widget-content .ui-icon {
-	background-image: url(../images/ui-icons_444444_256x240.png);
+	background-image: url(../../images/ui-icons_444444_256x240.png);
 }
 
 .ui-widget-header .ui-icon {
-	background-image: url(../images/ui-icons_444444_256x240.png);
+	background-image: url(.../../images/ui-icons_444444_256x240.png);
 }
 
 .ui-state-default .ui-icon {
-	background-image: url(../images/ui-icons_ffffff_256x240.png);
+	background-image: url(../../images/ui-icons_ffffff_256x240.png);
 }
 
 .ui-state-hover .ui-icon,
 .ui-state-focus .ui-icon {
-	background-image: url(../images/ui-icons_555555_256x240.png);
+	background-image: url(../../images/ui-icons_555555_256x240.png);
 }
 
 .ui-state-active .ui-icon {
-	background-image: url(../images/ui-icons_ffffff_256x240.png);
+	background-image: url(../../images/ui-icons_ffffff_256x240.png);
 }
 
 .ui-state-highlight .ui-icon {
-	background-image: url(../images/ui-icons_777620_256x240.png);
+	background-image: url(../../images/ui-icons_777620_256x240.png);
 }
 
 .ui-state-error .ui-icon,
 .ui-state-error-text .ui-icon {
-	background-image: url(../images/ui-icons_cc0000_256x240.png);
+	background-image: url(../../images/ui-icons_cc0000_256x240.png);
 }
 
 .ui-icon-blank {

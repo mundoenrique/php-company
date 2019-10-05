@@ -10,16 +10,16 @@ Default skin.
 */
 @font-face {
   font-family: "sourcesanspro-regular";
-  src: url('../fonts/sourcesanspro-regular-webfont.eot');
-  src: url('../fonts/sourcesanspro-regular-webfont.eot?#iefix') format('eot'), url('../fonts/sourcesanspro-regular-webfont.woff') format('woff'), url('../fonts/sourcesanspro-regular-webfont.ttf') format('truetype'), url('../fonts/sourcesanspro-regular-webfont.svg') format('svg');
+  src: url('../../fonts/sourcesanspro-regular-webfont.eot');
+  src: url('../../fonts/sourcesanspro-regular-webfont.eot?#iefix') format('eot'), url('../../fonts/sourcesanspro-regular-webfont.woff') format('woff'), url('../../fonts/sourcesanspro-regular-webfont.ttf') format('truetype'), url('../../fonts/sourcesanspro-regular-webfont.svg') format('svg');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: "novoglyphs";
-  src: url('../fonts/novoglyphs-webfont.eot');
-  src: url('../fonts/novoglyphs-webfont.eot?#iefix') format('eot'), url('../fonts/novoglyphs-webfont.woff') format('woff'), url('../fonts/novoglyphs-webfont.ttf') format('truetype'), url('../fonts/novoglyphs-webfont.svg') format('svg');
+  src: url('../../fonts/novoglyphs-webfont.eot');
+  src: url('../../fonts/novoglyphs-webfont.eot?#iefix') format('eot'), url('../../fonts/novoglyphs-webfont.woff') format('woff'), url('../../fonts/novoglyphs-webfont.ttf') format('truetype'), url('../../fonts/novoglyphs-webfont.svg') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -38,7 +38,7 @@ body {
 }
 
 body {
-  background: #FFFFFF url('../img/bg-site.jpg?20160707') fixed repeat-x 0 0;
+  background: #FFFFFF url('../../images/bg-site.jpg?20160707') fixed repeat-x 0 0;
   color: #555555;
   direction: ltr;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -371,7 +371,7 @@ button:hover {
 }
 
 #head-wrapper {
-  background: transparent url('../img/sprite-branding.png?20160709') scroll no-repeat 0px -35px;
+  background: transparent url('../../images/sprite-branding.png?20160709') scroll no-repeat 0px -35px;
   height: 60px;
   margin: 0 auto;
   overflow: hidden;
@@ -5524,7 +5524,7 @@ fieldset {
 }
 
 #ownership {
-	background: transparent url('../img/sprite-branding.png?20160709') scroll no-repeat 0 -145px;
+	background: transparent url('../../images/sprite-branding.png?20160709') scroll no-repeat 0 -145px;
 	display: block;
 	float: right;
 	height: 25px;
@@ -6672,11 +6672,11 @@ body .ui-tooltip {
 
 .ui-icon,
 .ui-widget-content .ui-icon {
-	background-image: url(images/ui-icons_222222_256x240.png);
+	background-image: url(../../images/ui-icons_222222_256x240.png);
 }
 
 .ui-widget-header .ui-icon {
-	background-image: url(images/ui-icons_ffffff_256x240.png);
+	background-image: url(../../images/ui-icons_ffffff_256x240.png);
 }
 
 .ui-state-default .ui-icon {
@@ -6685,7 +6685,7 @@ body .ui-tooltip {
 
 .ui-state-hover .ui-icon,
 .ui-state-focus .ui-icon {
-	background-image: url(images/ui-icons_ef8c08_256x240.png);
+	background-image: url(../../images/ui-icons_ef8c08_256x240.png);
 }
 
 .ui-state-active .ui-icon {
@@ -6693,12 +6693,12 @@ body .ui-tooltip {
 }
 
 .ui-state-highlight .ui-icon {
-	background-image: url(images/ui-icons_228ef1_256x240.png);
+	background-image: url(../../images/ui-icons_228ef1_256x240.png);
 }
 
 .ui-state-error .ui-icon,
 .ui-state-error-text .ui-icon {
-	background-image: url(images/ui-icons_ffd27a_256x240.png);
+	background-image: url(../../images/ui-icons_ffd27a_256x240.png);
 }
 
 .ui-icon-blank {
