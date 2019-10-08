@@ -22,14 +22,10 @@ var serv_var = {
 var parametrosRecarga;
 var masterTransferBalanace, dailyOper, weeklyOper;
 
-var codeCtas, titleCtas, msgCtas
+var codeCtas, titleCtas, msgCtas, numberAccount
 $(function() {
 	// VARIABLES GLOBALESx
 	var valido = true;
-	codeCtas = $('#account-transfer').attr('code');
-	titleCtas = $('#account-transfer').attr('title');
-	msgCtas = $('#account-transfer').attr('msg');
-
 
 	$('#filtroOS').show();
 	$("#dni").attr("maxlength", "12");
@@ -37,7 +33,8 @@ $(function() {
 	$.get( baseURL + api + isoPais + '/servicios/transferencia-maestra/consultarSaldo',
 	function(response) {
 		var data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
-		var Amountmsg = " - ";
+		var Amountmsg = " - ",
+				numberaccount = ' - ';
 		console.log(data);
 		
 		if (data.rc == 0) {
@@ -45,40 +42,32 @@ $(function() {
 			parametrosRecarga = data.maestroDeposito.parametrosRecarga;
 			dailyOper = data.maestroDeposito.cantidadTranxDia.lista[0];
 			weeklyOper = data.maestroDeposito.cantidadTranxSemana.lista[0];
-			Amountmsg = toFormatShow(masterTransferBalanace);
-			$("#amount, #description, #account-transfer, #charge, #credit, #recargar").prop("disabled", false);
+			Amountmsg = toFormatShow(masterTransferBalanace);			
+
+			if(!data.maestroDeposito.cuentaFondeo){
+				numberaccount = ' No tiene cuenta asociada ';
+				$("#amount, #description, #charge, #credit, #recargar, #clave").prop("disabled", true);
+			}
+			else{
+				numberaccount = data.maestroDeposito.cuentaFondeo;			
+				$("#amount, #description, #charge, #credit, #recargar, #clave").prop("disabled", false);
+			}			
 
 		} else if (data.rc == -233) {
 			Amountmsg = "La empresa no posee saldo.";
-			$("#amount, #description, #account-transfer, #charge, #credit, #recargar").prop("disabled", false);
+			$("#amount, #description, #charge, #credit, #recargar, #clave").prop("disabled", true);
 		} else if (data.rc == -61) {
 			window.location.replace(baseURL+isoPais+'/finsesion');
-		}else if(data.rc == -251) {
-			codeCtas = 'deft';
+		}else if(data.rc == -251) {			
 			msgCtas = "No existen parámetros definidos para la empresa sobre este producto.";
 		} else {
-			$("#amount, #description, #account-transfer, #charge, #credit, #recargar").prop("disabled", true);
+			$("#amount, #description, #charge, #credit, #recargar", "#clave").prop("disabled", true);
 		}
 		$("#saldoEmpresa").text('Saldo disponible: ' + Amountmsg);
 		$("#disponible").val(Amountmsg);
-		if (codeCtas != '0') {
-			$('#account-transfer').prop("disabled", true);
-			$('#numberaccount').hide();
-		}
-		else{
-			$('#numberaccount').show();
-		}
+		$("#numberaccount").html("<div style='float: left'>"+ numberaccount +"</div>");
 
-		switch(codeCtas) {
-			case '0':
-			case '-150':
-				break;
-			case '3':
-				notiPagOS(titleCtas, msgCtas, 'close');
-				break;
-			default:
-				notiPagOS(titleCtas, msgCtas, 'error');
-		}
+		
 	});
 
 	$('#recarga_concetradora').on('click','#recargar', function(e) {
@@ -230,6 +219,7 @@ function paramsValidate(type){
 	var accumAmountDaily = parseFloat(dailyOper.montoOperacion);
 	var valid = true;
 	codeCtas = 'deft';
+	titleCtas = 'Recarga cuenta.'
 
 	if(type == 'abono') {
 		var saldo = $('#account option:selected').text().split(':');
