@@ -4,7 +4,7 @@
 	$urlBase = $urlBaseA.$pais;
 	$monto = $this->input->get('monto');
 	$show_cl = (in_array("trapgo", $funciones)) ? '' : 'display:none';
-	$ctas = $pais == 'Ec-bp' ? $dataCtas['data'] : $dataCtas;
+
 ?>
 
 <div id="content-products">
@@ -72,14 +72,10 @@
           <div id="search-1">
             <br>
             <h5 style="float:left;"><?= "Cuenta" ?></h5>            
-            <span>
-            <input type="hidden" id="account-transfer" code="<?= $dataCtas['code'] ?>" name="account-transfer" value="<?= $ctas[1]['value']?>">
+            <span>            
               
-              <?php if($dataCtas['code'] == 0):?>
-							<div id="numberaccount" style="display: none; padding-top: 0.4rem;">
-								<?= $ctas[1]['descrip']; ?>
-							</div>
-							<?php endif; ?>
+							<div id="numberaccount" style="padding-top: 0.4rem;">								
+							</div>							
 
             </span>
           </div>
@@ -97,7 +93,7 @@
           <div style="padding-top: 9rem;">
 						<center>
 							<input id="clave" class="input-clave" type="password" name="user-password" placeholder="Ingresa tu clave"
-								value="" onpaste="return false" autocomplete="off" style="border-color: rgb(221, 221, 221);">
+								value="" disabled onpaste="return false" autocomplete="off" style="border-color: rgb(221, 221, 221);">
 						</center>
 					</div>
           <?php endif; ?>
