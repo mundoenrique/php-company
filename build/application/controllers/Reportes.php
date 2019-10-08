@@ -59,7 +59,7 @@ class Reportes extends CI_Controller {
 							'breadcrum'=>'',
 							'lastSession'=>$lastSessionD,
 							),TRUE);
-					$sidebarLotes= $this->parser->parse('widgets/widget-publi-4',array('sidebarActive'=>TRUE),TRUE);
+					$sidebarLotes= ($urlCountry == 'Ec-bp') ? '' :  $this->parser->parse('widgets/widget-publi-4',array('sidebarActive'=>TRUE),TRUE);
 
 					$datos = array(
 							'header'       =>$header,
@@ -845,7 +845,7 @@ class Reportes extends CI_Controller {
 							'breadcrum'=>'',
 							'lastSession'=>$lastSessionD,
 							),TRUE);
-					$sidebarLotes= $this->parser->parse('widgets/widget-publi-4',array('sidebarActive'=>TRUE),TRUE);
+					$sidebarLotes= ($urlCountry == 'Ec-bp') ? '' : $this->parser->parse('widgets/widget-publi-4',array('sidebarActive'=>TRUE),TRUE);
 
 					$datos = array(
 							'header'=>$header,
@@ -1547,7 +1547,7 @@ class Reportes extends CI_Controller {
 							'breadcrum'=>'',
 							'lastSession'=>$lastSessionD,
 							),TRUE);
-					$sidebarLotes= $this->parser->parse('widgets/widget-publi-4',array('sidebarActive'=>TRUE),TRUE);
+					$sidebarLotes= ($urlCountry == 'Ec-bp') ? '' : $this->parser->parse('widgets/widget-publi-4',array('sidebarActive'=>TRUE),TRUE);
 					$datos = array(
 							'header'=>$header,
 							'content'=>$content,
@@ -2569,7 +2569,7 @@ class Reportes extends CI_Controller {
 							'breadcrum'=>'',
 							'lastSession'=>$lastSessionD,
 							),TRUE);
-					$sidebarLotes= $this->parser->parse('widgets/widget-publi-4',array('sidebarActive'=>TRUE),TRUE);
+					$sidebarLotes= ($urlCountry == 'Ec-bp')? '': $this->parser->parse('widgets/widget-publi-4',array('sidebarActive'=>TRUE),TRUE);
 
 					$datos = array(
 							'header'=>$header,
@@ -3782,7 +3782,7 @@ class Reportes extends CI_Controller {
 							'breadcrum'=>'',
 							'lastSession'=>$lastSessionD,
 							),TRUE);
-					$sidebarLotes= $this->parser->parse('widgets/widget-publi-4',array('sidebarActive'=>TRUE),TRUE);
+					$sidebarLotes= ($urlCountry =='Ec-bp') ? '' : $this->parser->parse('widgets/widget-publi-4',array('sidebarActive'=>TRUE),TRUE);
 
 					$datos = array(
 						'header'=>$header,
