@@ -5929,6 +5929,14 @@ center button.novo-btn-secondary {
 	margin-left: 730px;
 	width: 230px;
 }
+
+.sub-widget-2 {
+	position: fixed;
+	top: 250px;
+	margin-left: 0px;
+	width: 230px;
+}
+
 #lotes-general>#ui-id-2,
 #lotes-general>#ui-id-1{
 	border:1px solid #dfe0e2;
@@ -7571,7 +7579,7 @@ button:active {
 	width:120px;
 	padding-left:15px;
 	padding-right:15px;
-	display: block;
+	
 }
 .novo-btn-primary-modal,.novo-btn-secondary-modal{
 	width:68px;
