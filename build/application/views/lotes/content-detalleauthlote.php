@@ -133,11 +133,11 @@
 				echo '
 					<table id="table-lote-detail">
 						<thead>
-							<th>'.lang('ID_PERSONA').'</th>
-							<th class="recarga-estatus">'.lang('TABLA_REG_EMISION_NOMB').'</th>
-							<th class="recarga-estatus">'.lang('TABLA_REG_EMISION_APELL').'</th>
-							<th class="recarga-estatus">'.lang('TABLA_REG_EMISION_UBIC').'</th>
-							<th class="recarga-estatus">'.lang('TABLA_REG_RECARGA_STATUS').'</th>
+							<th id="td-width-80">'.lang('ID_PERSONA').'</th>
+							<th id="td-width-125" >'.lang('TABLA_REG_EMISION_NOMB').'</th>
+							<th id="td-width-125" >'.lang('TABLA_REG_EMISION_APELL').'</th>
+							<th id="td-width-125" >'.lang('TABLA_REG_EMISION_UBIC').'</th>
+							<th id="td-width-125" >'.lang('TABLA_REG_RECARGA_STATUS').'</th>
 						</thead>
 						<tbody>';
 				foreach ($data[0]->registrosLoteEmision as $registros) {
@@ -148,7 +148,7 @@
 					}
 					echo '
 						<tr>
-							<td>'.$registros->idExtPer.'</td>
+							<td id="td-width-80">'.$registros->idExtPer.'</td>
 							<td class="width-td">'.$registros->nombres.'</td>
 							<td class="width-td">'.$registros->apellidos.'</td>
 							<td class="width-td">'.$registros->ubicacion.'</td>
