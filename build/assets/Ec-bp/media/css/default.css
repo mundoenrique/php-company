@@ -4365,6 +4365,16 @@ ul#brands li p img {
 	min-width: 150px !important;
 }
 
+#td-width-80 {
+	max-width: 80px !important;
+	min-width: 80px !important;
+}
+
+#td-width-125 {
+	max-width: 125px !important;
+	min-width: 125px !important;
+}
+
 #td-full {
 	max-width: 300px !important;
 	min-width: 300px !important;
