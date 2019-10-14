@@ -57,6 +57,7 @@ $lang['TEBORS']= "Órdenes de servicio"; // modulo
 $lang['TEBANU']= "Anular orden de servicio";
 $lang["TEBCOS"]= "Consultar orden se servicio";
 $lang['TRAMAE']= "Transferencia maestra"; // modulo
+$lang['COPELO']= "Consulta de tarjetas"; 
 $lang['CONVIS']= "Controles de pago"; // modulo
 $lang['PAGPRO']= "Pago a Proveedores"; // modulo
 $lang['TRACAR']= "Cargos a tarjetas";
