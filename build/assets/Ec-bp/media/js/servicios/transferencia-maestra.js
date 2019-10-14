@@ -264,7 +264,7 @@ function paramsValidate(type){
 }
 	// ACCION DEL EVENTO PARA BUSCAR TARJETAS TM
 	$('#buscar').on('click', function() {
-		var errElem = $(this).siblings('#mensajeError');
+		var errElem = $('#mensajeErrorbp');		
 		var form = $('#form-criterio-busqueda');
 		errElem.fadeOut('fast');
 		validateForms(form);
@@ -519,6 +519,8 @@ function buscar(pgSgt) {
 		.done(function(response){
 			data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 
+			console.log('esta es la data', data);
+			
 		$aux.dialog('destroy');
 		if (!data.result.ERROR) {
 			$('#resultado-tarjetas').show();
