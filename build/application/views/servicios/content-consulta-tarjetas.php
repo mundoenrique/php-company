@@ -121,7 +121,7 @@ $urlCdn = get_cdn();
 		</div>
 		<div style="width: 50%; text-align: right; padding-top: 10px; padding-right: 10px;">
 			<a id="exportXLS_a">
-			<span id="export_excel" title="Exportar Excel" aria-hidden="true" class="icon" target="_blank"
+			<span title="Exportar Excel" aria-hidden="true" class="icon" target="_blank"
 			data-icon="&#xe05a;"></span>
 			</a>
 		</div>
@@ -144,6 +144,7 @@ $urlCdn = get_cdn();
 
 			</tbody>
 		</table>
+		<form id='formulario' method='post'></form>
 		<div id='paginado-TM'></div>
 
 	</div>
