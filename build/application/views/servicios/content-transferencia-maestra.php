@@ -141,7 +141,8 @@
       <span id="mensajeError"></span>
       <?php
 					if($pais=='Ec-bp'){
-						?>
+            ?>
+      <span id="mensajeErrorbp" style="float:left; display:none; color:red;"></span>
       <center>
         <button id='buscar' class="novo-btn-primary"><?= lang('BUSCAR'); ?></button>
       </center>
