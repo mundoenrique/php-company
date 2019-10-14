@@ -140,7 +140,7 @@ function buscar(pgSgt) {
 		data_orden: $('#servicio').val(),
 		data_lote: $('#lote').val(),
 		data_cedula: $('#cedula').val(),
-		data_tarjeta: $('#tarjeta').val(),		
+		data_tarjeta: $('#tarjeta').val(),
 		data_pg: pgSgt,
 		data_paginas: serv_var.paginas,
 		data_paginar: serv_var.paginar
@@ -159,7 +159,7 @@ function buscar(pgSgt) {
 			}).toString(CryptoJS.enc.Utf8))
 
 			console.log('estya es la data', data);
-			
+
 
 		 	$aux.dialog('destroy');
 		 if (!data.result.ERROR) {
@@ -180,8 +180,8 @@ function buscar(pgSgt) {
 				} else {
 					notificacion("Buscando tarjetas", data.result.ERROR);
 				}
-			} 
-		}); 
+			}
+		});
 }
 
 
@@ -189,19 +189,19 @@ function buscar(pgSgt) {
 
 function cargarResultado(data) {
 
-	if (serv_var.busk) {		
+	if (serv_var.busk) {
 		serv_var.busk = false;
 		$('.table-text-service tbody').empty();
-	}	
+	}
 
 	var tr;
-	/* serv_var.pgTotal = parseInt(data.result.listaTarjetas[0].totalPaginas, 10);
-	serv_var.pgActual = parseInt(data.result.listaTarjetas[0].paginaActual, 10); */
+	 serv_var.pgTotal = parseInt(data.result.totalPaginas, 10);
+	 serv_var.pgActual = parseInt(data.result.pagina, 10);
 
 	if (data.result.detalleEmisiones.length > 0) {
 		serv_var.TotalTjts += data.result.detalleEmisiones.length;
 		$('#textS').empty();
-		/* $('#textS').append('<em>Seleccionar todo (' + serv_var.TotalTjts + ' de ' + data.result.listaTarjetas[0].totalRegistros + ')</em>'); */
+		$('#textS').append('<em>Seleccionar todo (' + serv_var.TotalTjts + ' de ' + data.result.totalRegistros + ')</em>');
 		$('.table-text-service thead th').css('min-width', '75px');
 		$('.table-text-service tbody td').css('min-width', '75px');
 
@@ -329,4 +329,29 @@ function notificacion(titulo, mensaje) {
 				}
 		}
 	});
+
 }
+
+
+
+$("#exportXLS_a").on('click', function () {
+
+	var servicio = $('#servicio').val(),
+		lote = $('#lote').val(),
+		cedula = $('#cedula').val(),
+		tarjeta = $('#tarjeta').val();
+
+	var ceo_cook = decodeURIComponent(
+		document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+	);
+	$('form#formulario').empty();
+	$('form#formulario').append('<input type="hidden" name="ceo_name" value="' + ceo_cook + '">');
+	$('form#formulario').append('<input type="hidden" name="orden" value="' + servicio + '">');
+	$('form#formulario').append('<input type="hidden" name="cedula" value="' + cedula + '">');
+	$('form#formulario').append('<input type="hidden" name="tarjeta" value="' + tarjeta + '">');
+	$('form#formulario').append('<input type="hidden" name="lote" value="' + lote + '">');
+	$('form#formulario').append('<input type="hidden" name="paginaActual" value="' + 1 + '" />');
+	$('form#formulario').attr('action', baseURL + api + isoPais + "/servicios/consultaTarjetasExpXLS");
+	$('form#formulario').submit();
+});
+
