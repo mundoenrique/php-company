@@ -265,6 +265,7 @@ $route['api/v1/(:any)/servicios/transferencia-maestra/consultarSaldo'] = "servic
 $route['api/v1/(:any)/servicios/transferencia-maestra/pagoTM'] = "servicios/RegargaTM/$1";
 $route['api/v1/(:any)/servicios/transferencia-maestra/RegargaTMProcede'] = "servicios/RegargaTMProcede/$1";
 $route['(:any)/servicios/consulta-tarjetas'] = "servicios/consultaTarjetas/$1";
+$route['api/v1/(:any)/servicios/transferencia-maestra/buscarTarjetas'] = "servicios/buscarTarjetas/$1";
 
 $route['(:any)/servicios/actualizar-datos'] = "servicios/actualizarDatos/$1";
 $route['api/v1/(:any)/servicios/actualizar-datos/cargarArchivo'] = "servicios/cargarArchivo/$1";
