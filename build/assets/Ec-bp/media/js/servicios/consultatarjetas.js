@@ -137,8 +137,10 @@ function buscar(pgSgt) {
 	);
 
 	var dataRequest = JSON.stringify({
-		data_dni: $('#servicio').val(),
-		data_tjta: '',
+		data_orden: $('#servicio').val(),
+		data_lote: $('#lote').val(),
+		data_cedula: $('#cedula').val(),
+		data_tarjeta: $('#tarjeta').val(),		
 		data_pg: pgSgt,
 		data_paginas: serv_var.paginas,
 		data_paginar: serv_var.paginar
@@ -146,7 +148,7 @@ function buscar(pgSgt) {
 	dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {
 		format: CryptoJSAesJson
 	}).toString();
-	$.post(baseURL + api + isoPais + "/servicios/transferencia-maestra/buscar", {
+	$.post(baseURL + api + isoPais + "/servicios/transferencia-maestra/buscarTarjetas", {
 			request: dataRequest,
 			ceo_name: ceo_cook,
 			plot: btoa(ceo_cook)
@@ -156,8 +158,11 @@ function buscar(pgSgt) {
 				format: CryptoJSAesJson
 			}).toString(CryptoJS.enc.Utf8))
 
-			$aux.dialog('destroy');
-			if (!data.result.ERROR) {
+			console.log('estya es la data', data);
+			
+
+		 	$aux.dialog('destroy');
+		 if (!data.result.ERROR) {
 				$('#resultado-tarjetas').show();
 				$.inArray('trasal', data.funciones) !== -1 ? $('#consultar-tjta').show() : serv_var.consulta = 'hidden';
 				$.inArray('tracar', data.funciones) !== -1 ? $('#cargo-tjta').show() : serv_var.cargo = 'hidden';
@@ -175,8 +180,8 @@ function buscar(pgSgt) {
 				} else {
 					notificacion("Buscando tarjetas", data.result.ERROR);
 				}
-			}
-		});
+			} 
+		}); 
 }
 
 
@@ -184,47 +189,39 @@ function buscar(pgSgt) {
 
 function cargarResultado(data) {
 
-	if (serv_var.busk) {
+	if (serv_var.busk) {		
 		serv_var.busk = false;
-		$('.table-text-aut tbody').empty();
-	}
-	serv_var.maestroParam = data.result.maestroParametros;
-	serv_var.saldoDispon = data.result.maestroDeposito.saldoDisponible;
-	serv_var.cantXdia = data.result.cantXDia.lista;
-	serv_var.acumXsem = data.result.acumXSemana.lista;
-
-	$("#saldoEmpresa").text('Saldo disponible: ' + toFormatShow(serv_var.saldoDispon));
-	$('#resultado-tarjetas').find('#saldoDisponible').text('Saldo disponible: ' + toFormatShow(serv_var.saldoDispon));
-	$('#resultado-tarjetas').find('#comisionTrans').text('Comisión por transacción: ' + toFormatShow(serv_var.maestroParam.costoComisionTrans));
-	$('#resultado-tarjetas').find('#comisionCons').text('Comisión por consulta saldo: ' + toFormatShow(serv_var.maestroParam.costoComisionCons));
+		$('.table-text-service tbody').empty();
+	}	
 
 	var tr;
-	serv_var.pgTotal = parseInt(data.result.listaTarjetas[0].totalPaginas, 10);
-	serv_var.pgActual = parseInt(data.result.listaTarjetas[0].paginaActual, 10);
+	/* serv_var.pgTotal = parseInt(data.result.listaTarjetas[0].totalPaginas, 10);
+	serv_var.pgActual = parseInt(data.result.listaTarjetas[0].paginaActual, 10); */
 
-	if (data.result.listadoTarjetas.lista.length > 0) {
-		serv_var.TotalTjts += data.result.listadoTarjetas.lista.length;
+	if (data.result.detalleEmisiones.length > 0) {
+		serv_var.TotalTjts += data.result.detalleEmisiones.length;
 		$('#textS').empty();
-		$('#textS').append('<em>Seleccionar todo (' + serv_var.TotalTjts + ' de ' + data.result.listaTarjetas[0].totalRegistros + ')</em>');
+		/* $('#textS').append('<em>Seleccionar todo (' + serv_var.TotalTjts + ' de ' + data.result.listaTarjetas[0].totalRegistros + ')</em>'); */
 		$('.table-text-service thead th').css('min-width', '75px');
 		$('.table-text-service tbody td').css('min-width', '75px');
 
-		$.each(data.result.listadoTarjetas.lista, function (k, v) {
-			tr = '<tr class="' + data.result.listaTarjetas[0].paginaActual + '" tjta="' + v.noTarjetaConMascara + '" id_ext_per="' + v.id_ext_per + '"><td class="checkbox-select"><input id="check-oneTM" type="checkbox" value=""/></td>';
-			tr += '<td id="td-nombre-2" class="bp-min-width">' + v.noTarjetaConMascara + '</td>';
-			tr += '<td id="estatus' + v.noTarjetaConMascara.replace(/[*]/g, "") + '" class="bp-min-width">-</td>'; //estatus
-			tr += '<td id="td-nombre-2" class="bp-min-width">' + v.NombreCliente.toLowerCase().replace(/(^| )(\w)/g, function (x) {
+		$.each(data.result.detalleEmisiones, function (k, v) {
+			/* tr = '<tr class="' + data.result.listaTarjetas[0].paginaActual + '" tjta="' + v.nroTarjeta + '" id_ext_per="' + v.cedula + '"><td class="checkbox-select"><input id="check-oneTM" type="checkbox" value=""/></td>'; */
+			tr = '<tr class="" tjta="' + v.nroTarjeta + '" id_ext_per="' + v.cedula + '"><td class="checkbox-select"><input id="check-oneTM" type="checkbox" value=""/></td>';
+			tr += '<td id="td-nombre-2" class="bp-min-width">' + v.nroTarjeta + '</td>';
+			tr += '<td class="bp-min-width">' + v.ordenS + '</td>';
+			tr += '<td class="bp-min-width">' + v.nroLote + '</td>';
+			tr += '<td class="bp-min-width">' + v.edoEmision + '</td>';
+			tr += '<td class="bp-min-width">' + v.edoPlastico + '</td>';
+			tr += '<td id="td-nombre-2" class="bp-min-width">' + v.nombre.toLowerCase().replace(/(^| )(\w)/g, function (x) {
 				return x.toUpperCase();
 			}) + '</td>';
-			tr += '<td class="bp-min-width">' + v.id_ext_per + '</td>';
-			tr += '<td class="bp-min-width">' + v.id_ext_per + '</td>';
-			tr += '<td class="bp-min-width">' + v.id_ext_per + '</td>';
-			tr += '<td class="bp-min-width">' + v.id_ext_per + '</td>';
-			tr += '<td id="saldo' + v.noTarjetaConMascara.replace(/[*]/g, "") + '" class="bp-min-width">-</td>'; //saldo
-			tr += '<td class="bp-min-width"><a id="consulta_saldo" title="consulta saldo" ' + serv_var.consulta + '><span class="icon" data-icon="&#xe072;"></span></a>';
+			tr += '<td class="bp-min-width">' + v.cedula + '</td>';
+			/* tr += '<td id="saldo' + v.noTarjetaConMascara.replace(/[*]/g, "") + '" class="bp-min-width">-</td>'; //saldo */
+			/* tr += '<td class="bp-min-width"><a id="consulta_saldo" title="consulta saldo" ' + serv_var.consulta + '><span class="icon" data-icon="&#xe072;"></span></a>';
 			tr += '<a id="abono_tarjeta" title="abono tarjeta" ' + serv_var.abono + '><span class="icon" data-icon="&#xe031;"></span></a>';
 			tr += '<a id="cargo_tarjeta" title="cargo tarjeta" ' + serv_var.cargo + '><span class="icon" data-icon="&#xe08d;"></span></a>';
-			tr += '</td></tr>';
+			tr += '</td></tr>'; */
 
 			$('.table-text-service tbody').append(tr);
 		});
