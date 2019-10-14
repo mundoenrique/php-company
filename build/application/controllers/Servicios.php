@@ -1635,4 +1635,154 @@ public function consultaTarjetas($urlCountry)
 			redirect($urlCountry.'/login');
 	}
 }
+
+
+
+	/**
+	 * Método para solicitar las tarjetas emitidas
+	 *
+	 * @param  string $urlCountry
+	 * @return json
+	 */
+	public function buscarTarjetas($urlCountry)
+{
+		np_hoplite_countryCheck($urlCountry);
+
+		$logged_in = $this->session->userdata('logged_in');
+		$paisS = $this->session->userdata('pais');
+		$menuP =$this->session->userdata('menuArrayPorProducto');
+		$moduloAct = np_hoplite_existeLink($menuP, "TRAMAE");
+
+		if($paisS==$urlCountry && $logged_in && $moduloAct!==false) {
+				$result = $this->callWSbuscarTarjetasemitidas($urlCountry);
+				$menuP =$this->session->userdata('menuArrayPorProducto');
+				$funciones = np_hoplite_modFunciones($menuP);
+				$r["result"] = $result;
+				$r["funciones"] = $funciones;
+
+				$response = $this->cryptography->encrypt($r);
+				$this->output->set_content_type('application/json')->set_output(json_encode($response));
+
+		} elseif($paisS != $urlCountry && $paisS != '') {
+			$this->session->sess_destroy();
+			redirect($urlCountry.'/login');
+
+		} elseif ($this->input->is_ajax_request()) {
+			$response = $this->cryptography->encrypt(array('ERROR' => '-29' ));
+			$this->output->set_content_type('application/json')->set_output(json_encode($response));
+
+		}else{
+			redirect($urlCountry.'/login');
+
+		}
+	}
+
+
+/**
+	 * Método que llama al WS para realizar la busqueda de tarjetas en transferencia maestra
+	 *
+	 * @param  string $urlCountry
+	 * @return json
+	 */
+	private function callWSbuscarTarjetasemitidas($urlCountry)
+	{
+
+		$this->lang->load('erroreseol');
+
+		$username = $this->session->userdata('userName');
+		$token = $this->session->userdata('token');
+		$idEmpresa = $this->session->userdata('acrifS');
+		$idProductoS = $this->session->userdata('idProductoS');
+		$dataRequest = json_decode(
+			$this->security->xss_clean(
+					strip_tags(
+							$this->cryptography->decrypt(
+									base64_decode($this->input->get_post('plot')),
+									utf8_encode($this->input->get_post('request'))
+							)
+					)
+			)
+	);
+		$orden = $dataRequest->data_orden;
+		$lote = $dataRequest->data_lote;
+		$cedula = $dataRequest->data_cedula;
+		$tarjeta = $dataRequest->data_tarjeta;
+		$pg = $dataRequest->data_pg;
+		$paginas = $dataRequest->data_paginas;
+		$paginar = $dataRequest->data_paginar;  
+		$Ausuario = ["userName" =>$username];
+		$acodcia = $this->session->userdata('accodciaS');
+		$acgrupo = $this->session->userdata('accodgrupoeS');
+		$sessionId = $this->session->userdata('sessionId');
+		$canal = "ceo";
+		$modulo="reportes";
+		$function="buscarTarjetasEmitidas";
+		$operation="buscarTarjetasEmitidas";
+		$ip = $this->input->ip_address();
+		$timeLog= date("m/d/Y H:i");
+		$className="com.novo.objects.MO.ListadoEmisionesMO";
+
+		$logAcceso = np_hoplite_log($sessionId, $username, $canal, $modulo, $function, $operation, 0, $ip, $timeLog);
+		
+		$data = array(
+			"nrOrdenServicio" => $orden,
+  		"nroLote" => $lote,
+  		"cedula" => $cedula,
+  		"nroTarjeta" => $tarjeta,
+  		"opcion" => "EMI_REC",
+			"idOperation" => $operation,
+			"accodcia" => $acodcia,
+			"className" => $className,
+			"rifEmpresa" => $idEmpresa,			
+			"usuario" => $Ausuario,
+			"idProducto" => $idProductoS,			
+			"logAccesoObject"=>$logAcceso,
+			"token"=>$token,
+			"pais" =>$urlCountry
+		);
+
+		$data = json_encode($data, JSON_UNESCAPED_UNICODE);
+
+		$dataEncry = np_Hoplite_Encryption($data, 'callWSbuscarTarjetasemitidas');
+		$data = ['bean' => $dataEncry, 'pais' =>$urlCountry];
+		$data = json_encode($data);
+		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+		$jsonResponse = np_Hoplite_Decrypt($response, 'callWSbuscarTarjetasemitidas');
+		$response = json_decode($jsonResponse);
+		
+		 if($response) {
+			if($response->rc == 0) {
+				unset(
+					$response->rc, $response->msg, $response->className, $response->token, $response->idOperation,
+					$response->logAccesoObject, $response->usuario
+				);
+				log_message('DEBUG', 'RESULTS: ' . json_encode($response));
+					return $response;
+			} else {
+				if($response->rc == -61 || $response->rc == -29){
+					$this->session->sess_destroy();
+					$codigoError = ['ERROR'=> '-29'];
+				} else{
+					$codigoError = lang('ERROR_('.$response->rc.')');
+					if(strpos($codigoError, 'Error') !== false) {
+						$codigoError = ['ERROR'=> $response->msg];
+					} else {
+						if(gettype($codigoError) == 'boolean') {
+							$codigoError = ['ERROR'=> $response->msg];
+						} else {
+							$codigoError = ['ERROR'=> lang('ERROR_('.$response->rc.')')];
+						}
+					}
+				}
+				return $codigoError;
+			}
+		} else {
+			return $codigoError = ['ERROR'=> lang('ERROR_GENERICO_USER')];
+		}
+
+		
+	}
+
+
 }
+
