@@ -36,29 +36,29 @@ $(function() {
 		var Amountmsg = " - ",
 				numberaccount = ' - ';
 		console.log(data);
-		
+
 		if (data.rc == 0) {
 			masterTransferBalanace = data.maestroDeposito.saldoDisponible;
 			parametrosRecarga = data.maestroDeposito.parametrosRecarga;
 			dailyOper = data.maestroDeposito.cantidadTranxDia.lista[0];
 			weeklyOper = data.maestroDeposito.cantidadTranxSemana.lista[0];
-			Amountmsg = toFormatShow(masterTransferBalanace);			
+			Amountmsg = toFormatShow(masterTransferBalanace);
 
 			if(!data.maestroDeposito.cuentaFondeo){
 				numberaccount = ' No tiene cuenta asociada ';
 				$("#amount, #description, #charge, #credit, #recargar, #clave").prop("disabled", true);
 			}
 			else{
-				numberaccount = data.maestroDeposito.cuentaFondeo;			
+				numberaccount = data.maestroDeposito.cuentaFondeo;
 				$("#amount, #description, #charge, #credit, #recargar, #clave").prop("disabled", false);
-			}			
+			}
 
 		} else if (data.rc == -233) {
 			Amountmsg = "La empresa no posee saldo.";
 			$("#amount, #description, #charge, #credit, #recargar, #clave").prop("disabled", true);
 		} else if (data.rc == -61) {
 			window.location.replace(baseURL+isoPais+'/finsesion');
-		}else if(data.rc == -251) {			
+		}else if(data.rc == -251) {
 			msgCtas = "No existen parámetros definidos para la empresa sobre este producto.";
 		} else {
 			$("#amount, #description, #charge, #credit, #recargar", "#clave").prop("disabled", true);
@@ -67,7 +67,7 @@ $(function() {
 		$("#disponible").val(Amountmsg);
 		$("#numberaccount").html("<div style='float: left'>"+ numberaccount +"</div>");
 
-		
+
 	});
 
 	$('#recarga_concetradora').on('click','#recargar', function(e) {
@@ -117,7 +117,7 @@ $(function() {
 			descrip.css('border-color', '#cd0a0a');
 		} else {
 			descrip.removeAttr('style');
-		}		
+		}
 
 		if(type.val() === undefined) {
 			camposValid += '<p>* Selecciona cargo o abono</p>';
@@ -136,7 +136,7 @@ $(function() {
 			clave.removeAttr('style');
 		}
 
-		
+
 		camposValid += '</div>';
 		if(!validInput) {
 			$(camposValid).dialog ({
@@ -169,34 +169,43 @@ $(function() {
 						"descript": descrip.val(),
 						"account": account.val(),
 						"type": type.val(),
-						"pass": hex_md5( pass )						
-					};					
+						"pass": hex_md5( pass )
+					};
 
 					$("#recargar").replaceWith('<h3 id="confirm">Procesando...</h3>');
-					$.get(baseURL + api + isoPais + '/servicios/transferencia-maestra/pagoTM')
+
+
+					var ceo_cook = decodeURIComponent(
+						document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+					);
+					var dataRequest = JSON.stringify(dataSend);
+					dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
+					$.post(baseURL + api + isoPais + '/servicios/transferencia-maestra/RegargaTMProcede', {request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)})
 					.done(function (response) {
 						var data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
+
 						console.log(data);
-						
+
 						data.code = 2;
 						switch (data.code) {
 							case 0:
-									amount.val('');
-									descrip.val('');					
-									type.prop('checked', false);
-									notiPagOS('Confirmación', '<h3>Proceso exitoso</h3>', 'ok');									
-							break
+								notiPagOS(data.title, data.msg, 'ok');
+								break;
 							case 1:
+									$("#confirm").replaceWith("<button id='recargar' class='novo-btn-primary'>Transferir</button>");
+								notiPagOS(data.title, data.msg, 'error');
+								break;
+							case 2:
+							case 3:
 									clave.val('');
 									$("#confirm").replaceWith("<button id='recargar' class='novo-btn-primary'>Transferir</button>");
-									notiPagOS('Confirmación', '<h3>Clave incorrecta</h3>', 'error');
-							break
+									notiPagOS(data.title, data.msg, 'error');
+									break;
 							default:
 									$("#confirm").replaceWith("<button id='recargar' class='novo-btn-primary'>Transferir</button>");
-									notiPagOS("Confirmación", '<h3>Error general</h3>','error');									
-							break
+								notiPagOS(data.title, data.msg, 'close');
 						}
-					});					
+					});
 				} /*Finaliza validación de transacciones diarias*/
 			} else {
 				notiPagOS('Campos inválidos', 'Verifica los datos ingresados e intenta nuevamente.');
@@ -264,7 +273,7 @@ function paramsValidate(type){
 }
 	// ACCION DEL EVENTO PARA BUSCAR TARJETAS TM
 	$('#buscar').on('click', function() {
-		var errElem = $('#mensajeErrorbp');		
+		var errElem = $('#mensajeErrorbp');
 		var form = $('#form-criterio-busqueda');
 		errElem.fadeOut('fast');
 		validateForms(form);
@@ -517,10 +526,8 @@ function buscar(pgSgt) {
 		dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
 		$.post(baseURL + api + isoPais + "/servicios/transferencia-maestra/buscar", {request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)} )
 		.done(function(response){
-			data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
+		data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 
-			console.log('esta es la data', data);
-			
 		$aux.dialog('destroy');
 		if (!data.result.ERROR) {
 			$('#resultado-tarjetas').show();
