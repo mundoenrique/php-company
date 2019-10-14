@@ -4147,6 +4147,50 @@ ul#brands li p img {
 	height: 38px;
 }
 
+.table-text-service tbody tr {
+	margin-bottom: 10px;
+	background: #FFFFFF;	
+	border-bottom: 1px solid #DFE0E2;
+	color:#72787A;
+}
+
+.table-text-service tbody tr span {
+	font-size: 20px;
+}
+
+.table-text-service tbody tr:hover {
+	background: #FFF;
+}
+
+.table-text-service thead tr {
+	font-family: 'prelo-semibold', sans-serif;
+	color: #0F265C;
+	font-size: 14px;		
+	border-bottom: 1px solid #DFE0E2;
+}
+
+.table-text-service thead th {
+	padding: 4px;
+	text-align: center;
+}
+
+.table-text-service tbody td#icon-batchs {
+	font-size: 32px;
+}
+
+.table-text-service #icons-options {
+	font-size: 20px;	
+}
+
+.table-text-service td {	
+	padding: 3px;
+	text-align: center;
+	font-size: 14px;
+	height: 35px;
+	line-height: 18px;
+}
+
+
 .table-text-aut tbody tr {
 	margin-bottom: 10px;
 	background: #FFFFFF;
