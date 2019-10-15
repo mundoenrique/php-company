@@ -11,15 +11,8 @@ $(function () {
 		$(".listaxAuth .checkbox-select").remove();
 	}
 
-	var top = ($('#sidebar-products').offset().top - 100) - parseFloat($('#sidebar-products').css('marginTop').replace(/auto/, 0));
-       $(window).scroll(function (event) {
-         var y = $(this).scrollTop();
-          if (y >= top) {
-            $('#sidebar-products').addClass('sub-widget-2');
-        } else {
-            $('#sidebar-products').removeClass('sub-widget-2');
-         }
-     });
+	$('.mt-1').removeAttr("style");
+	$('#content-products').removeAttr("style");
 
 	var js_var = {
 		loteF: "",
