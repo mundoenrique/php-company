@@ -1804,9 +1804,9 @@ public function consultaTarjetas($urlCountry)
 		$this->lang->load('erroreseol');//HOJA DE ERRORES;
 		$canal = "ceo";
 		$modulo    ="reportes";
-		$function  ="buscarTarjetasEmitidas";
-		$operation ="buscarTarjetasEmitidas";
-		$className ="com.novo.objects.MO.generarArchivoXls ";
+		$function  ="buscarTarjetasEmitidasExcel";
+		$operation ="buscarTarjetasEmitidasExcel";
+		$className ="com.novo.objects.MO.SaldosAmanecidosMO";
 		$timeLog   = date("m/d/Y H:i");
 		$ip= $this->input->ip_address();
 		$sessionId = $this->session->userdata('sessionId');
@@ -1831,6 +1831,7 @@ public function consultaTarjetas($urlCountry)
 				$lote = $this->input->post('lote');
 				$cedula = $this->input->post('cedula');
 				$tarjeta = $this->input->post('tarjeta');
+				$pagina = $this->input->post('paginaActual');
 
 						$data = array(
 							"nrOrdenServicio" => $servicio,
@@ -1839,6 +1840,7 @@ public function consultaTarjetas($urlCountry)
 							"nroTarjeta" => $tarjeta,
 							"opcion" => "EMI_REC",
 							"idOperation" => $operation,
+							"pagina" => $pagina,
 							"accodcia" => $acodcia,
 							"className" => $className,
 							"rifEmpresa" => $idEmpresa,
@@ -1858,7 +1860,6 @@ public function consultaTarjetas($urlCountry)
 
 				$response =  json_decode($jsonResponse);
 
-				log_message('info', 'VER DATA GENERADA '.print_r($response->archivo));
 				if($response){
 						log_message('info', 'ConsultaTarjetas xls '.$response->rc);
 

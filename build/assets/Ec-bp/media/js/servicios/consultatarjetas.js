@@ -158,9 +158,6 @@ function buscar(pgSgt) {
 				format: CryptoJSAesJson
 			}).toString(CryptoJS.enc.Utf8))
 
-			console.log('estya es la data', data);
-
-
 		 	$aux.dialog('destroy');
 		 if (!data.result.ERROR) {
 				$('#resultado-tarjetas').show();
@@ -206,8 +203,7 @@ function cargarResultado(data) {
 		$('.table-text-service tbody td').css('min-width', '75px');
 
 		$.each(data.result.detalleEmisiones, function (k, v) {
-			/* tr = '<tr class="' + data.result.listaTarjetas[0].paginaActual + '" tjta="' + v.nroTarjeta + '" id_ext_per="' + v.cedula + '"><td class="checkbox-select"><input id="check-oneTM" type="checkbox" value=""/></td>'; */
-			tr = '<tr class="" tjta="' + v.nroTarjeta + '" id_ext_per="' + v.cedula + '"><td class="checkbox-select"><input id="check-oneTM" type="checkbox" value=""/></td>';
+			tr = '<tr class="' + data.result.pagina+ '" tjta="' + v.nroTarjeta + '" id_ext_per="' + v.cedula + '"><td class="checkbox-select"><input id="check-oneTM" type="checkbox" value=""/></td>';			
 			tr += '<td id="td-nombre-2" class="bp-min-width">' + v.nroTarjeta + '</td>';
 			tr += '<td class="bp-min-width">' + v.ordenS + '</td>';
 			tr += '<td class="bp-min-width">' + v.nroLote + '</td>';
@@ -350,7 +346,7 @@ $("#exportXLS_a").on('click', function () {
 	$('form#formulario').append('<input type="hidden" name="cedula" value="' + cedula + '">');
 	$('form#formulario').append('<input type="hidden" name="tarjeta" value="' + tarjeta + '">');
 	$('form#formulario').append('<input type="hidden" name="lote" value="' + lote + '">');
-	$('form#formulario').append('<input type="hidden" name="paginaActual" value="' + 1 + '" />');
+	$('form#formulario').append('<input type="hidden" name="paginaActual" value="' + serv_var.pgActual + '" />');
 	$('form#formulario').attr('action', baseURL + api + isoPais + "/servicios/consultaTarjetasExpXLS");
 	$('form#formulario').submit();
 });
