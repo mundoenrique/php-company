@@ -4,7 +4,7 @@
 	$urlBase = $urlBaseA.$pais;
 	$monto = $this->input->get('monto');
 	$show_cl = (in_array("trapgo", $funciones)) ? '' : 'display:none';
-	$ctas = $pais == 'Ec-bp' ? $dataCtas['data'] : $dataCtas;
+
 ?>
 
 <div id="content-products">
@@ -55,6 +55,7 @@
         <form id="form-recarga-cuenta" onsubmit="return false">
           <div id="search-1">
             <h5><span id="saldoEmpresa"></span></h5>
+            <input type="hidden" name="disponible" id="disponible">
             <br>
             <h5 style="float:left;"><?= "Monto" ?></h5>
             <span>
@@ -70,17 +71,12 @@
           <?php if($pais == 'Ec-bp'): ?>
           <div id="search-1">
             <br>
-            <h5 style="float:left;"><?= "Cuenta" ?></h5>
-            <span>
-              <select id="account" name="account" code="<?= $dataCtas['code'] ?>" title="<?= $dataCtas['title'] ?>"
-                msg="<?= $dataCtas['msg'] ?>" disabled>
-                <option value="0" selected>
-                  <?= $dataCtas['code'] == 0 ? 'Selecciona una Cuenta' : $dataCtas['data'] ?>
-                </option>
-                <?php if($dataCtas['code'] == 0): foreach($ctas as $pos => $cta): ?>
-                <option value="<?= $cta['value'] ?>"><?= $cta['descrip'].'   --Saldo: '.$cta['saldo'] ?></option>
-                <?php endforeach; endif; ?>
-              </select>
+            <h5 style="float:left;"><?= "Cuenta" ?></h5>            
+            <span>            
+              
+							<div id="numberaccount" style="padding-top: 0.4rem;">								
+							</div>							
+
             </span>
           </div>
           <div id="charge-or-credit" class="panel-right">
@@ -93,6 +89,13 @@
               <label for="credit">abono</label>
             </span>
           </div>
+
+          <div style="padding-top: 9rem;">
+						<center>
+							<input id="clave" class="input-clave" type="password" name="user-password" placeholder="Ingresa tu clave"
+								value="" disabled onpaste="return false" autocomplete="off" style="border-color: rgb(221, 221, 221);">
+						</center>
+					</div>
           <?php endif; ?>
         </form>
       </div>
@@ -138,7 +141,8 @@
       <span id="mensajeError"></span>
       <?php
 					if($pais=='Ec-bp'){
-						?>
+            ?>
+      <span id="mensajeErrorbp" style="float:left; display:none; color:red;"></span>
       <center>
         <button id='buscar' class="novo-btn-primary"><?= lang('BUSCAR'); ?></button>
       </center>

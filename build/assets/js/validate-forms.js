@@ -128,6 +128,7 @@ function validateForms(form, options) {
 			"text": {pattern: text},
 			"type": {pattern: alphabetical},
 			"account": {pattern: numeric},
+			"account-transfer": {pattern: alphanum},
 			"pass": {pattern: userPassword},
 			"idTipoLote": {pattern: numeric},
 			"id-document": {pattern: numeric},
