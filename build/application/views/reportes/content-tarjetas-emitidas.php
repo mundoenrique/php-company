@@ -52,6 +52,17 @@ $urlCdn = get_cdn();
 					</div>
 					<div id="search-1">
 						<h5><?php echo lang('TITULO_REPORTES_RANGO'); ?></h5>
+						<?php
+							if ( $pais == 'Ec-bp'):
+						?>
+						<span>
+							<p><?php echo lang('TITULO_REPORTES_FECHAMES'); ?></p>
+							<input id = "repTarjetasEmitidas_fecha_mes"  class="required login fecha monthpicker" type="text" name="start-my-date" placeholder="MM/AAAA" value="" onFocus="javascript:this.value=''"/>
+						</span>
+						<?php endif; ?>
+						<?php
+							if ( $pais !== 'Ec-bp'):
+						?>
 						<span>
 							<p><?php echo lang('TITULO_REPORTES_FECHAINI'); ?></p>
 							<input id = "repTarjetasEmitidas_fecha_in"  class="required login fecha" type="text" name="start-dmy-date" placeholder="DD/MM/AA" value="" onFocus="javascript:this.value=''"/>
@@ -60,13 +71,18 @@ $urlCdn = get_cdn();
 							<p><?php echo lang('TITULO_REPORTES_FECHAFIN'); ?></p>
 							<input id = "repTarjetasEmitidas_fecha_fin" class="required login fecha" type="text" name="end-dmy-date" placeholder="DD/MM/AA" value="" onFocus="javascript:this.value=''"/>
 						</span>
+						<?php endif; ?>
 					</div>
 					<div id="search-2">
 						<h5><?php echo lang('TITULO_REPORTES_RESULTADOS'); ?></h5>
+						<?php
+							if ( $pais !== 'Ec-bp'):
+						?>
 						<span>
 							<input type="radio" name="radio" id='radio-general' class="required" value = "0"/>
 							<p><?php echo lang('REPORTES_RADIO_GENERAL'); ?></p>
 						</span>
+						<?php endif; ?>
 						<span>
 							<input type="radio" name="radio" id='radio-producto' class="required" value = "1"/>
 							<p><?php echo lang('REPORTES_RADIO_PRODUCTO'); ?></p>

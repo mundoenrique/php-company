@@ -29,38 +29,16 @@ $(document).ready(function () {
 			}
 		}
 	})
+	options = {
+		pattern: 'mm/yyyy',
+		selectedYear: 2019,
+		startYear: 2008,
+		finalYear: 2019,
+		monthNames: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic']
+	};
 
-	$("#repTarjetasEmitidas_fecha_in").datepicker({
-		defaultDate: "+1w",
-		changeMonth: true,
-		changeYear: true,
-		dateFormat: "dd/mm/yy",
-		numberOfMonths: 1,
-		maxDate: "+0D",
-		onClose: function (selectedDate) {
-			if (selectedDate) {
-				$("#repTarjetasEmitidas_fecha_fin").datepicker("option", "minDate", selectedDate);
-			} else {
-				$("#repTarjetasEmitidas_fecha_fin").datepicker("option", "minDate", "");
-			}
-		}
-	});
-
-	$("#repTarjetasEmitidas_fecha_fin").datepicker({
-		defaultDate: "+1w",
-		dateFormat: "dd/mm/yy",
-		changeMonth: true,
-		changeYear: true,
-		numberOfMonths: 1,
-		maxDate: "+0D",
-		onClose: function (selectedDate) {
-			if (selectedDate) {
-				$("#repTarjetasEmitidas_fecha_in").datepicker("option", "maxDate", selectedDate);
-			} else {
-				$("#repTarjetasEmitidas_fecha_in").datepicker("option", "maxDate", "+0D");
-			}
-		}
-	});
+	$('.monthpicker').monthpicker(options);
+	$('.ui-datepicker.ui-widget.ui-widget-content.ui-helper-clearfix.ui-corner-all').addClass('monthpicker-border');
 
 	//METODO PARA REALIZAR LA BUSQUEDA
 	$("#repTarjetasEmitidas_btnBuscar").click(function () {
@@ -79,13 +57,14 @@ $(document).ready(function () {
 				$(this).hide();
 				$('#div_tablaDetalle').fadeOut("fast");
 
-				filtro_busq.empresa = $("#repTarjetasEmitidas_empresa").val();
-				filtro_busq.fechaInicial = $("#repTarjetasEmitidas_fecha_in").val();
-				filtro_busq.fechaFin = $("#repTarjetasEmitidas_fecha_fin").val();
-				if ($("#radio-general").is(":checked")) {
-					filtro_busq.radioGeneral = $("#radio-general").val();
-				} else {
-					filtro_busq.radioGeneral = $("#radio-producto").val();
+				filtro_busq.empresa=$("#repTarjetasEmitidas_empresa").val();
+				filtro_busq.fechaMes=$("#repTarjetasEmitidas_fecha_mes").val();
+				filtro_busq.fechaInicial=$("#repTarjetasEmitidas_fecha_in").val();
+				filtro_busq.fechaFin=$("#repTarjetasEmitidas_fecha_fin").val();
+				if($("#radio-general").is(":checked")){
+					filtro_busq.radioGeneral= $("#radio-general").val();
+				}else{
+					filtro_busq.radioGeneral= $("#radio-producto").val();
 				}
 				filtro_busq.paginaActual = 1;
 
@@ -158,6 +137,7 @@ $(document).ready(function () {
 							$('form#formulario').append('<input type="hidden" name="idEmpresa" value="' + filtro_busq.acrif + '" />');
 							$('form#formulario').append('<input type="hidden" name="nomEmpresa" value="' + filtro_busq.acnomcia + '" />');
 							$('form#formulario').append('<input type="hidden" name="empresa" value="' + filtro_busq.empresa + '" />');
+							$('form#formulario').append('<input type="hidden" name="fechaMes" value="' + filtro_busq.fechaMes + '" />');
 							$('form#formulario').append('<input type="hidden" name="fechaInicial" value="' + filtro_busq.fechaInicial + '" />');
 							$('form#formulario').append('<input type="hidden" name="fechaFin" value="' + filtro_busq.fechaFin + '" />');
 							$('form#formulario').append('<input type="hidden" name="radioGeneral" value="' + filtro_busq.radioGeneral + '" />');
@@ -165,13 +145,13 @@ $(document).ready(function () {
 							$('form#formulario').submit();
 						});
 
-						a = $(document.createElement("a")).appendTo(div);
-						span = $(a).append("<span title='Exportar PDF' data-icon ='&#xe02e;' aria-hidden = 'true' class = 'icon'></span>");
-						span.attr("aria-hidden", "true");
-						span.attr("class", "icon");
-						span.attr("data-icon", '&#xe050;');
-						span.click(function () {
-							/*datos = {
+					a = $(document.createElement("a")).appendTo(div);
+					span = $(a).append("<span title='Ver gráfico' data-icon ='&#xe050' aria-hidden = 'true' class = 'icon'></span>");
+					span.attr("aria-hidden", "true");
+					span.attr("class", "icon");
+					span.attr("data-icon", '&#xe050;');
+					span.click(function () {
+						/*datos = {
 								idEmpresa: filtro_busq.acrif,
 								nomEmpresa: filtro_busq.acnomcia,
 								empresa: filtro_busq.empresa,
@@ -179,374 +159,374 @@ $(document).ready(function () {
 								fechaFin: filtro_busq.fechaFin,
 								radioGeneral: filtro_busq.radioGeneral
 							}
+						descargarArchivo(datos, baseURL+api+isoPais+"/reportes/tarjetasEmitidasExpPDF", "Exportar PDF" );*/
+						var ceo_cook = decodeURIComponent(
+							document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+						);
+						$('form#formulario').empty();
+						$('form#formulario').append('<input type="hidden" name="ceo_name" value="' + ceo_cook + '">');
+						$('form#formulario').append('<input type="hidden" name="idEmpresa" value="' + filtro_busq.acrif + '" />');
+						$('form#formulario').append('<input type="hidden" name="nomEmpresa" value="' + filtro_busq.acnomcia + '" />');
+						$('form#formulario').append('<input type="hidden" name="empresa" value="' + filtro_busq.empresa + '" />');
+						$('form#formulario').append('<input type="hidden" name="fechaInicial" value="' + filtro_busq.fechaInicial + '" />');
+						$('form#formulario').append('<input type="hidden" name="fechaFin" value="' + filtro_busq.fechaFin + '" />');
+						$('form#formulario').append('<input type="hidden" name="radioGeneral" value="' + filtro_busq.radioGeneral + '" />');
+						$('form#formulario').attr('action', baseURL + api + isoPais + "/reportes/tarjetasEmitidasExpPDF");
+						$('form#formulario').submit();
+					});
 
-							descargarArchivo(datos, baseURL+api+isoPais+"/reportes/tarjetasEmitidasExpPDF", "Exportar PDF" );*/
-							var ceo_cook = decodeURIComponent(
-								document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-							);
-							$('form#formulario').empty();
-							$('form#formulario').append('<input type="hidden" name="ceo_name" value="' + ceo_cook + '">');
-							$('form#formulario').append('<input type="hidden" name="idEmpresa" value="' + filtro_busq.acrif + '" />');
-							$('form#formulario').append('<input type="hidden" name="nomEmpresa" value="' + filtro_busq.acnomcia + '" />');
-							$('form#formulario').append('<input type="hidden" name="empresa" value="' + filtro_busq.empresa + '" />');
-							$('form#formulario').append('<input type="hidden" name="fechaInicial" value="' + filtro_busq.fechaInicial + '" />');
-							$('form#formulario').append('<input type="hidden" name="fechaFin" value="' + filtro_busq.fechaFin + '" />');
-							$('form#formulario').append('<input type="hidden" name="radioGeneral" value="' + filtro_busq.radioGeneral + '" />');
-							$('form#formulario').attr('action', baseURL + api + isoPais + "/reportes/tarjetasEmitidasExpPDF");
-							$('form#formulario').submit();
-						});
+				if ($('#radio-general').is(":checked")) {
 
-						if ($('#radio-general').is(":checked")) {
+					a = $(document.createElement("a")).appendTo(div);
+					span = $(a).append("<span title='Ver gráfico' data-icon ='&#xe050' aria-hidden = 'true' class = 'icon'></span>");
+					span.attr("aria-hidden", "true");
+					span.attr("class", "icon");
+					span.attr("data-icon", '&#xe050;');
+					span.click(function () {
 
-							a = $(document.createElement("a")).appendTo(div);
-							span = $(a).append("<span title='Ver gráfico' data-icon ='&#xe050' aria-hidden = 'true' class = 'icon'></span>");
-							span.attr("aria-hidden", "true");
-							span.attr("class", "icon");
-							span.attr("data-icon", '&#xe050;');
-							span.click(function () {
+						// GRAFICA
+							var aux = {};
+							var _axis = "Bolivares";
 
-								// GRAFICA
-								var aux = {};
-								var _axis = "Bolivares";
-
-								var jsonChart = {
+							var jsonChart = {
+								title: {
+									text: $("#titulograficotext").attr("data")
+								},
+								legend: {
+									position: "top"
+								},
+								series: [],
+								categoryAxis: {
+									categories: [],
+									labels: {
+										rotation: -45
+									}
+								},
+								valueAxis: {
+									name: _axis,
 									title: {
-										text: $("#titulograficotext").attr("data")
-									},
-									legend: {
-										position: "top"
-									},
-									series: [],
-									categoryAxis: {
-										categories: [],
-										labels: {
-											rotation: -45
-										}
-									},
-									valueAxis: {
-										name: _axis,
-										title: {
-											text: ""
-										}
+										text: ""
 									}
 								}
-
-								// SE OBTIENE LAS CATEGORIAS
-								$.each(data.listaGrafico[0].categorias, function (posLista, itemLista) {
-									jsonChart.categoryAxis.categories.push(itemLista.nombreCategoria);
-								});
-
-								// SE OBTIENE LAS series
-
-								$.each(data.listaGrafico[0].series, function (posSeries, itemSeries) {
-									var serie = {};
-									serie.name = itemSeries.nombreSerie;
-									serie.data = itemSeries.valores;
-									serie.axis = _axis;
-									serie.color = colores[posSeries];
-									jsonChart.series.push(serie);
-								});
+							}
 
 
-								// GRAFICA
-								$("#chart").kendoChart(jsonChart);
-								$("#chart").dialog({
-									modal: true,
-									width: 900,
-									height: 600
-								});
-								$("#chart svg").width(Number($(window).width()));
-								$("#chart svg").height(Number($(window).height()));
-								$("#chart").data("kendoChart").refresh();
-							});
+					// SE OBTIENE LAS CATEGORIAS
+					$.each(data.listaGrafico[0].categorias, function (posLista, itemLista) {
+						jsonChart.categoryAxis.categories.push(itemLista.nombreCategoria);
+					});
+
+					// SE OBTIENE LAS series
+
+					$.each(data.listaGrafico[0].series, function (posSeries, itemSeries) {
+						var serie = {};
+						serie.name = itemSeries.nombreSerie;
+						serie.data = itemSeries.valores;
+						serie.axis = _axis;
+						serie.color = colores[posSeries];
+						jsonChart.series.push(serie);
+					});
 
 
-
-							tabla = $(document.createElement("table")).appendTo(contenedor);
-							tabla.attr("id", "tabla-datos-general");
-							tabla.attr("class", "tabla-reportes");
-
-							thead = $(document.createElement("thead")).appendTo(tabla);
-							tbody = $(document.createElement("tbody")).appendTo(tabla);
-							tbody.attr("id", "tbody-datos-general");
-							tbody.attr("class", "tbody-reportes");
-							tr = $(document.createElement("tr")).appendTo(thead);
-							tr.attr("id", "datos-principales");
-							th = $(document.createElement("th")).appendTo(tr);
-							th.html($("#producto").attr("data"));
-							th = $(document.createElement("th")).appendTo(tr);
-							th.html($("#emision").attr("data"));
-							th = $(document.createElement("th")).appendTo(tr);
-							th.html($("#reptarjeta").attr("data"));
-							th = $(document.createElement("th")).appendTo(tr);
-							th.html($("#repclave").attr("data"));
-							th = $(document.createElement("th")).appendTo(tr);
-							th.html($("#total").attr("data"));
-
-
-							$.each(data.lista, function (posLista, itemLista) {
-
-								tr = $(document.createElement("tr")).appendTo(tbody);
-								td = $(document.createElement("td")).appendTo(tr);
-								td.html(itemLista.nomProducto);
-								td = $(document.createElement("td")).appendTo(tr);
-								td.html(itemLista.totalEmision);
-								td.attr("style", "text-align: center")
-								td = $(document.createElement("td")).appendTo(tr);
-								td.html(itemLista.totalReposicionTarjeta);
-								td.attr("style", "text-align: center")
-								td = $(document.createElement("td")).appendTo(tr);
-								td.html(itemLista.totalReposicionClave);
-								td.attr("style", "text-align: center")
-								td = $(document.createElement("td")).appendTo(tr);
-								td.html(itemLista.totalProducto);
-								td.attr("style", "text-align: center");
-
-							});
-
-							$('#tabla-datos-general tbody tr:even').addClass('even ');
-
-
-						} else {
-
-							$.each(data.lista, function (posLista, itemLista) {
-
-								div = $(document.createElement("div")).appendTo(contenedor);
-								div.attr("id", "view-results");
+					// GRAFICA
+					$("#chart").kendoChart(jsonChart);
+					$("#chart").dialog({
+						modal: true,
+						width: 900,
+						height: 600
+					});
+					$("#chart svg").width(Number($(window).width()));
+					$("#chart svg").height(Number($(window).height()));
+					$("#chart").data("kendoChart").refresh();
+				});
 
 
 
-								a = $(document.createElement("a")).appendTo(div);
-								span = $(a).append("<span title = 'Ver gráfico' data-icon ='&#xe050' aria-hidden = 'true' class = 'icon'></span>");
+	tabla = $(document.createElement("table")).appendTo(contenedor);
+	tabla.attr("id", "tabla-datos-general");
+	tabla.attr("class", "tabla-reportes");
+
+	thead = $(document.createElement("thead")).appendTo(tabla);
+	tbody = $(document.createElement("tbody")).appendTo(tabla);
+	tbody.attr("id", "tbody-datos-general");
+	tbody.attr("class", "tbody-reportes");
+	tr = $(document.createElement("tr")).appendTo(thead);
+	tr.attr("id", "datos-principales");
+	th = $(document.createElement("th")).appendTo(tr);
+	th.html($("#producto").attr("data"));
+	th = $(document.createElement("th")).appendTo(tr);
+	th.html($("#emision").attr("data"));
+	th = $(document.createElement("th")).appendTo(tr);
+	th.html($("#reptarjeta").attr("data"));
+	th = $(document.createElement("th")).appendTo(tr);
+	th.html($("#repclave").attr("data"));
+	th = $(document.createElement("th")).appendTo(tr);
+	th.html($("#total").attr("data"));
 
 
-								span.click(function () {
+	$.each(data.lista, function (posLista, itemLista) {
 
-									var $consulta;
+		tr = $(document.createElement("tr")).appendTo(tbody);
+		td = $(document.createElement("td")).appendTo(tr);
+		td.html(itemLista.nomProducto);
+		td = $(document.createElement("td")).appendTo(tr);
+		td.html(itemLista.totalEmision);
+		td.attr("style", "text-align: center")
+		td = $(document.createElement("td")).appendTo(tr);
+		td.html(itemLista.totalReposicionTarjeta);
+		td.attr("style", "text-align: center")
+		td = $(document.createElement("td")).appendTo(tr);
+		td.html(itemLista.totalReposicionClave);
+		td.attr("style", "text-align: center")
+		td = $(document.createElement("td")).appendTo(tr);
+		td.html(itemLista.totalProducto);
+		td.attr("style", "text-align: center");
 
+	});
 
-									var aux = {};
-									var _axis = "Bolivares";
-
-									var jsonChart = {
-										title: {
-											text: ""
-										},
-										legend: {
-											position: "top"
-										},
-										series: [],
-										categoryAxis: {
-											categories: [$("#categoria_uno").attr("data"), $("#categoria_dos").attr("data")]
-										},
-										valueAxis: {
-											name: _axis,
-											title: {
-												text: ""
-											}
-										}
-
-									}
+	$('#tabla-datos-general tbody tr:even').addClass('even ');
 
 
-									// SE OBTIENE LAS CATEGORIAS
+} else {
 
+	$.each(data.lista, function (posLista, itemLista) {
 
-									// SE OBTIENE LAS SERIES
-									var serie = {};
-									var seriep = {};
-									var seriea = {};
-									var titulo = {};
-
-									jsonChart.title.text = itemLista.nomProducto;
-
-									serie.name = $("#emision").attr("data");
-									serie.data = [itemLista.emision, itemLista.emisionSuplementaria.totalEmision];
-									serie.axis = _axis;
-									serie.color = colores[0];
-
-									seriep.name = $("#reptarjeta").attr("data");
-									seriep.data = [itemLista.repPlastico, itemLista.emisionSuplementaria.totalReposicionTarjeta];
-									seriep.axis = _axis;
-									seriep.color = colores[1];
-
-									seriea.name = $("#repclave").attr("data");
-									seriea.data = [itemLista.repClave, itemLista.emisionSuplementaria.totalReposicionClave];
-									seriea.axis = _axis;
-									seriea.color = colores[2];
-
-									jsonChart.series.push(seriep);
-									jsonChart.series.push(seriea);
-									jsonChart.series.push(serie);
-
-									// GRAFICA
-									$("#chart").kendoChart(jsonChart);
-									$("#chart").dialog({
-										modal: true,
-										width: 900,
-										height: 600
-									});
-									$("#chart svg").width(Number($(window).width()));
-									$("#chart svg").height(Number($(window).height()));
-									$("#chart").data("kendoChart").refresh();
-								});
+		div = $(document.createElement("div")).appendTo(contenedor);
+		div.attr("id", "view-results");
 
 
 
-								tabla = $(document.createElement("table")).appendTo(contenedor);
-								tabla.attr("class", "tabla-reportes");
-								tabla.attr("id", "tabla-datos-general");
+		a = $(document.createElement("a")).appendTo(div);
+		span = $(a).append("<span title = 'Ver gráfico' data-icon ='&#xe050' aria-hidden = 'true' class = 'icon'></span>");
 
-								thead = $(document.createElement("thead")).appendTo(tabla);
-								thead.attr("id", "thead-datos-principales");
-								tbody = $(document.createElement("tbody")).appendTo(tabla);
-								tbody.attr("class", "tbody-reportes");
 
-								tr = $(document.createElement("tr")).appendTo(thead);
-								tr.attr("id", "datos-principales");
-								th = $(document.createElement("th")).appendTo(tr);
-								th.html(itemLista.nomProducto);
-								th = $(document.createElement("th")).appendTo(tr);
-								th.html($("#emision").attr("data"));
-								th = $(document.createElement("th")).appendTo(tr);
-								th.html($("#reptarjeta").attr("data"));
-								th = $(document.createElement("th")).appendTo(tr);
-								th.html($("#repclave").attr("data"));
-								th = $(document.createElement("th")).appendTo(tr);
-								th.html($("#total").attr("data"));
+		span.click(function () {
 
-								tr = $(document.createElement("tr")).appendTo(tbody);
-								td = $(document.createElement("td")).appendTo(tr);
-								td.html($("#categoria_uno").attr("data"));
-								td = $(document.createElement("td")).appendTo(tr);
-								td = $(document.createElement("a")).appendTo(td);
-								td.attr("class", "emision");
-								td.attr("id", posLista);
-								td.html(itemLista.totalEmision);
-								td.attr("style", "text-align: center")
-								td = $(document.createElement("td")).appendTo(tr);
-								td = $(document.createElement("a")).appendTo(td);
-								td.attr("id", posLista);
-								td.attr("class", "reposicion");
-								td.html(itemLista.totalReposicionTarjeta);
-								td.attr("style", "text-align: center")
-								td = $(document.createElement("td")).appendTo(tr);
-								td.html(itemLista.totalReposicionClave);
-								td.attr("style", "text-align: center")
-								td = $(document.createElement("td")).appendTo(tr);
-								td.html(itemLista.totalProducto);
-								td.attr("style", "text-align: center");
+			var $consulta;
 
-								tr = $(document.createElement("tr")).appendTo(tbody);
-								td = $(document.createElement("td")).appendTo(tr);
-								td.html($("#categoria_dos").attr("data"));
-								td = $(document.createElement("td")).appendTo(tr);
-								td = $(document.createElement("a")).appendTo(td);
-								td.attr("href", "#");
-								td.attr("id", "solicitud");
-								td.html(itemLista.emisionSuplementaria.totalEmision);
-								td.attr("style", "text-align: center")
-								td = $(document.createElement("td")).appendTo(tr);
-								td = $(document.createElement("a")).appendTo(td);
-								td.attr("href", "#");
-								td.attr("id", "solicitud");
-								td.html(itemLista.emisionSuplementaria.totalReposicionTarjeta);
-								td.attr("style", "text-align: center")
-								td = $(document.createElement("td")).appendTo(tr);
-								td.html(itemLista.emisionSuplementaria.totalReposicionClave);
-								td.attr("style", "text-align: center")
-								td = $(document.createElement("td")).appendTo(tr);
-								td.html(itemLista.emisionSuplementaria.totalProducto);
-								td.attr("style", "text-align: center");
 
-								tr = $(document.createElement("tr")).appendTo(tbody);
-								td = $(document.createElement("td")).appendTo(tr);
-								td.html($("#total").attr("data"));
-								td.attr("style", "text-align: right")
-								td = $(document.createElement("td")).appendTo(tr);
-								td.html(itemLista.totalEmision);
-								td.attr("style", "text-align: center")
-								td = $(document.createElement("td")).appendTo(tr);
-								td.html(itemLista.totalReposicionTarjeta);
-								td.attr("style", "text-align: center")
-								td = $(document.createElement("td")).appendTo(tr);
-								td.html(itemLista.totalReposicionClave);
-								td.attr("style", "text-align: center")
-								td = $(document.createElement("td")).appendTo(tr);
-								td.html(itemLista.totalProducto)
-								td.attr("style", "text-align: center; ");
-							});
+			var aux = {};
+			var _axis = "Bolivares";
 
-							$('.tabla-reportes tbody tr:even').addClass('even ');
-
-						}
-						$(".emision").click(function (event) {
-							// event.preventDefault();
-							var selectClass = $(".emision").attr('class');
-							repId = event.target.id;
-							console.log(event.target.id)
-							 if(selectClass === "emision"){
-							 		console.log("se selecciono el id " + selectClass)
-							 }else{
-								 console.log("no es la seleccion");
-							 }
-
-						});
-					} else {
-						if (data.rc == "-29") {
-							alert("Usuario actualmente desconectado");
-							$(location).attr('href', baseURL + isoPais + '/login');
-						} else if (data) {
-							var contenedor = $("#div_tablaDetalle");
-							$("#tabla-datos-general").fadeOut("fast");
-							$("#view-results").attr("style", "display:none");
-							var div = $(document.createElement("div")).appendTo(contenedor);
-							div.attr("id", "mensaje");
-							div.attr("style", "background-color:rgb(252,199,199); margin-top:60px;");
-							var p = $(document.createElement("p")).appendTo(div);
-							if (data.rc == "-150")
-								p.html(data.mensaje);
-							else
-								p.html(data);
-							p.attr("style", "text-align:center;width:638px;padding:10px;font-size:14px");
-						} else {
-							$("#mensaje").remove();
-							var contenedor = $("#div_tablaDetalle");
-							$("#tabla-datos-general").fadeOut("fast");
-							$("#view-results").attr("style", "display:none");
-							var div = $(document.createElement("div")).appendTo(contenedor);
-							div.attr("id", "mensaje");
-							div.attr("style", "background-color:rgb(252,199,199); margin-top:60px;");
-							var p = $(document.createElement("p")).appendTo(div);
-							if (data.rc == "-150")
-								p.html(data.mensaje);
-							else
-								p.html(data);
-							p.attr("style", "text-align:center;width:638px;padding:10px;font-size:14px");
-						}
+			var jsonChart = {
+				title: {
+					text: ""
+				},
+				legend: {
+					position: "top"
+				},
+				series: [],
+				categoryAxis: {
+					categories: [$("#categoria_uno").attr("data"), $("#categoria_dos").attr("data")]
+				},
+				valueAxis: {
+					name: _axis,
+					title: {
+						text: ""
 					}
+				}
+
+			}
+
+
+			// SE OBTIENE LAS CATEGORIAS
+
+
+			// SE OBTIENE LAS SERIES
+			var serie = {};
+			var seriep = {};
+			var seriea = {};
+			var titulo = {};
+
+			jsonChart.title.text = itemLista.nomProducto;
+
+			serie.name = $("#emision").attr("data");
+			serie.data = [itemLista.emision, itemLista.emisionSuplementaria.totalEmision];
+			serie.axis = _axis;
+			serie.color = colores[0];
+
+			seriep.name = $("#reptarjeta").attr("data");
+			seriep.data = [itemLista.repPlastico, itemLista.emisionSuplementaria.totalReposicionTarjeta];
+			seriep.axis = _axis;
+			seriep.color = colores[1];
+
+			seriea.name = $("#repclave").attr("data");
+			seriea.data = [itemLista.repClave, itemLista.emisionSuplementaria.totalReposicionClave];
+			seriea.axis = _axis;
+			seriea.color = colores[2];
+
+			jsonChart.series.push(seriep);
+			jsonChart.series.push(seriea);
+			jsonChart.series.push(serie);
+
+			// GRAFICA
+			$("#chart").kendoChart(jsonChart);
+			$("#chart").dialog({
+				modal: true,
+				width: 900,
+				height: 600
+			});
+			$("#chart svg").width(Number($(window).width()));
+			$("#chart svg").height(Number($(window).height()));
+			$("#chart").data("kendoChart").refresh();
+		});
+
+
+
+		tabla = $(document.createElement("table")).appendTo(contenedor);
+		tabla.attr("class", "tabla-reportes");
+		tabla.attr("id", "tabla-datos-general");
+
+		thead = $(document.createElement("thead")).appendTo(tabla);
+		thead.attr("id", "thead-datos-principales");
+		tbody = $(document.createElement("tbody")).appendTo(tabla);
+		tbody.attr("class", "tbody-reportes");
+
+		tr = $(document.createElement("tr")).appendTo(thead);
+		tr.attr("id", "datos-principales");
+		th = $(document.createElement("th")).appendTo(tr);
+		th.html(itemLista.nomProducto);
+		th = $(document.createElement("th")).appendTo(tr);
+		th.html($("#emision").attr("data"));
+		th = $(document.createElement("th")).appendTo(tr);
+		th.html($("#reptarjeta").attr("data"));
+		th = $(document.createElement("th")).appendTo(tr);
+		th.html($("#repclave").attr("data"));
+		th = $(document.createElement("th")).appendTo(tr);
+		th.html($("#total").attr("data"));
+
+		tr = $(document.createElement("tr")).appendTo(tbody);
+		td = $(document.createElement("td")).appendTo(tr);
+		td.html($("#categoria_uno").attr("data"));
+		td = $(document.createElement("td")).appendTo(tr);
+		td = $(document.createElement("a")).appendTo(td);
+		td.attr("class", "emision");
+		td.attr("id", posLista);
+		td.html(itemLista.totalEmision);
+		td.attr("style", "text-align: center")
+		td = $(document.createElement("td")).appendTo(tr);
+		td = $(document.createElement("a")).appendTo(td);
+		td.attr("id", posLista);
+		td.attr("class", "reposicion");
+		td.html(itemLista.totalReposicionTarjeta);
+		td.attr("style", "text-align: center")
+		td = $(document.createElement("td")).appendTo(tr);
+		td.html(itemLista.totalReposicionClave);
+		td.attr("style", "text-align: center")
+		td = $(document.createElement("td")).appendTo(tr);
+		td.html(itemLista.totalProducto);
+		td.attr("style", "text-align: center");
+
+		tr = $(document.createElement("tr")).appendTo(tbody);
+		td = $(document.createElement("td")).appendTo(tr);
+		td.html($("#categoria_dos").attr("data"));
+		td = $(document.createElement("td")).appendTo(tr);
+		td = $(document.createElement("a")).appendTo(td);
+		td.attr("href", "#");
+		td.attr("id", "solicitud");
+		td.html(itemLista.emisionSuplementaria.totalEmision);
+		td.attr("style", "text-align: center")
+		td = $(document.createElement("td")).appendTo(tr);
+		td = $(document.createElement("a")).appendTo(td);
+		td.attr("href", "#");
+		td.attr("id", "solicitud");
+		td.html(itemLista.emisionSuplementaria.totalReposicionTarjeta);
+		td.attr("style", "text-align: center")
+		td = $(document.createElement("td")).appendTo(tr);
+		td.html(itemLista.emisionSuplementaria.totalReposicionClave);
+		td.attr("style", "text-align: center")
+		td = $(document.createElement("td")).appendTo(tr);
+		td.html(itemLista.emisionSuplementaria.totalProducto);
+		td.attr("style", "text-align: center");
+
+		tr = $(document.createElement("tr")).appendTo(tbody);
+		td = $(document.createElement("td")).appendTo(tr);
+		td.html($("#total").attr("data"));
+		td.attr("style", "text-align: right")
+		td = $(document.createElement("td")).appendTo(tr);
+		td.html(itemLista.totalEmision);
+		td.attr("style", "text-align: center")
+		td = $(document.createElement("td")).appendTo(tr);
+		td.html(itemLista.totalReposicionTarjeta);
+		td.attr("style", "text-align: center")
+		td = $(document.createElement("td")).appendTo(tr);
+		td.html(itemLista.totalReposicionClave);
+		td.attr("style", "text-align: center")
+		td = $(document.createElement("td")).appendTo(tr);
+		td.html(itemLista.totalProducto)
+		td.attr("style", "text-align: center; ");
+	});
+
+	$('.tabla-reportes tbody tr:even').addClass('even ');
+
+}
+						$(".emision").click(function (event) {
+	// event.preventDefault();
+	var selectClass = $(".emision").attr('class');
+	repId = event.target.id;
+	console.log(event.target.id)
+	if (selectClass === "emision") {
+		console.log("se selecciono el id " + selectClass)
+	} else {
+		console.log("no es la seleccion");
+	}
+
+});
+					} else {
+	if (data.rc == "-29") {
+		alert("Usuario actualmente desconectado");
+		$(location).attr('href', baseURL + isoPais + '/login');
+	} else if (data) {
+		var contenedor = $("#div_tablaDetalle");
+		$("#tabla-datos-general").fadeOut("fast");
+		$("#view-results").attr("style", "display:none");
+		var div = $(document.createElement("div")).appendTo(contenedor);
+		div.attr("id", "mensaje");
+		div.attr("style", "background-color:rgb(252,199,199); margin-top:60px;");
+		var p = $(document.createElement("p")).appendTo(div);
+		if (data.rc == "-150")
+			p.html(data.mensaje);
+		else
+			p.html(data);
+		p.attr("style", "text-align:center;width:638px;padding:10px;font-size:14px");
+	} else {
+		$("#mensaje").remove();
+		var contenedor = $("#div_tablaDetalle");
+		$("#tabla-datos-general").fadeOut("fast");
+		$("#view-results").attr("style", "display:none");
+		var div = $(document.createElement("div")).appendTo(contenedor);
+		div.attr("id", "mensaje");
+		div.attr("style", "background-color:rgb(252,199,199); margin-top:60px;");
+		var p = $(document.createElement("p")).appendTo(div);
+		if (data.rc == "-150")
+			p.html(data.mensaje);
+		else
+			p.html(data);
+		p.attr("style", "text-align:center;width:638px;padding:10px;font-size:14px");
+	}
+}
 
 				});
 			} else {
-				showErrMsg('Verifiqua los datos ingresados e intenta nuevamente.');
-			}
+	showErrMsg('Verifiqua los datos ingresados e intenta nuevamente.');
+}
 
 		};
 
 	});
 
-	// document.addEventListener("click", function(e){
+// document.addEventListener("click", function(e){
 
-	// 	if (e.classList.contains("emision")){
-	// 		console.log(e.getAtribute("id"));
-	// 	}
-	// })
+// 	if (e.classList.contains("emision")){
+// 		console.log(e.getAtribute("id"));
+// 	}
+// })
 
 
 
-	$("#solicitud_tarjeta").click(function(){
-		console.log($('#solicitud_tarjeta'))
-	});
+$("#solicitud_tarjeta").click(function () {
+	console.log($('#solicitud_tarjeta'))
+});
 
 });
 
