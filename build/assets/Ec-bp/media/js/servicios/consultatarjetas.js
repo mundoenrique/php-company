@@ -350,7 +350,7 @@ $("#exportXLS_a").on('click', function () {
 	$('form#formulario').append('<input type="hidden" name="cedula" value="' + cedula + '">');
 	$('form#formulario').append('<input type="hidden" name="tarjeta" value="' + tarjeta + '">');
 	$('form#formulario').append('<input type="hidden" name="lote" value="' + lote + '">');
-	$('form#formulario').append('<input type="hidden" name="paginaActual" value="' + 1 + '" />');
+	$('form#formulario').append('<input type="hidden" name="paginaActual" value="' + serv_var.pgActual + '" />');
 	$('form#formulario').attr('action', baseURL + api + isoPais + "/servicios/consultaTarjetasExpXLS");
 	$('form#formulario').submit();
 });
