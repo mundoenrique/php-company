@@ -34,8 +34,7 @@ $(function() {
 	function(response) {
 		var data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 		var Amountmsg = " - ",
-				numberaccount = ' - ';
-		console.log(data);
+				numberaccount = ' - ';	
 
 		if (data.rc == 0) {
 			masterTransferBalanace = data.maestroDeposito.saldoDisponible;
@@ -183,8 +182,6 @@ $(function() {
 					$.post(baseURL + api + isoPais + '/servicios/transferencia-maestra/RegargaTMProcede', {request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)})
 					.done(function (response) {
 						var data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
-
-						console.log(data);
 
 						data.code = 2;
 						switch (data.code) {
