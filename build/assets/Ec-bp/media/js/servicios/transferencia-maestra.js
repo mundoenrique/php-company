@@ -29,29 +29,33 @@ $(function() {
 
 	$('#filtroOS').show();
 	$("#dni").attr("maxlength", "12");
+	$("#loadingData").show();
 
 	$.get( baseURL + api + isoPais + '/servicios/transferencia-maestra/consultarSaldo',
 	function(response) {
 		var data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 		var Amountmsg = " - ",
-				numberaccount = ' - ';	
+				numberaccount = ' - ';			
+
+		$("#loadingData").hide();
 
 		if (data.rc == 0) {
+			
 			masterTransferBalanace = data.maestroDeposito.saldoDisponible;
 			parametrosRecarga = data.maestroDeposito.parametrosRecarga;
 			dailyOper = data.maestroDeposito.cantidadTranxDia.lista[0];
 			weeklyOper = data.maestroDeposito.cantidadTranxSemana.lista[0];
+			Amountmsg = toFormatShow(masterTransferBalanace);			
+			numberaccount = data.maestroDeposito.cuentaFondeo;
+			$("#amount, #description, #charge, #credit, #recargar, #clave").prop("disabled", false);
+
+		} else if(data.rc == -402)
+		{
+			var rta = JSON.parse(data.bean)
+			masterTransferBalanace = rta.saldoDisponible;
 			Amountmsg = toFormatShow(masterTransferBalanace);
-
-			if(!data.maestroDeposito.cuentaFondeo){
-				numberaccount = ' No tiene cuenta asociada ';
-				$("#amount, #description, #charge, #credit, #recargar, #clave").prop("disabled", true);
-			}
-			else{
-				numberaccount = data.maestroDeposito.cuentaFondeo;
-				$("#amount, #description, #charge, #credit, #recargar, #clave").prop("disabled", false);
-			}
-
+			numberaccount = ' No tiene cuenta asociada ';			
+			$("#amount, #description, #charge, #credit, #recargar, #clave").prop("display", false);			
 		} else if (data.rc == -233) {
 			Amountmsg = "La empresa no posee saldo.";
 			$("#amount, #description, #charge, #credit, #recargar, #clave").prop("disabled", true);
