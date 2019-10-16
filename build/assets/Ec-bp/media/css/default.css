@@ -4170,7 +4170,7 @@ ul#brands li p img {
 
 .table-text-service tbody tr {
 	margin-bottom: 10px;
-	background: #FFFFFF;	
+	background: #FFFFFF;
 	border-bottom: 1px solid #DFE0E2;
 	color:#72787A;
 }
@@ -4186,7 +4186,7 @@ ul#brands li p img {
 .table-text-service thead tr {
 	font-family: 'prelo-semibold', sans-serif;
 	color: #0F265C;
-	font-size: 14px;		
+	font-size: 14px;
 	border-bottom: 1px solid #DFE0E2;
 }
 
@@ -4200,10 +4200,10 @@ ul#brands li p img {
 }
 
 .table-text-service #icons-options {
-	font-size: 20px;	
+	font-size: 20px;
 }
 
-.table-text-service td {	
+.table-text-service td {
 	padding: 3px;
 	text-align: center;
 	font-size: 14px;
@@ -4808,6 +4808,10 @@ tr.GC-first th {
 
 #batchs-last #button-eliminar {
 	margin: 10px;
+}
+
+.button-process {
+	text-align: center;
 }
 
 .ordenes_ser {
