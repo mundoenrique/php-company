@@ -47,7 +47,7 @@ $(function() {
 			weeklyOper = data.maestroDeposito.cantidadTranxSemana.lista[0];
 			Amountmsg = toFormatShow(masterTransferBalanace);			
 			numberaccount = data.maestroDeposito.cuentaFondeo;
-			$("#amount, #description, #charge, #credit, #recargar, #clave").prop("disabled", false);
+			$("#amount, #description, #charge, #credit, #recargar, #claveTranferencia").prop("disabled", false);
 
 		} else if(data.rc == -402)
 		{
@@ -55,21 +55,20 @@ $(function() {
 			masterTransferBalanace = rta.saldoDisponible;
 			Amountmsg = toFormatShow(masterTransferBalanace);
 			numberaccount = ' No tiene cuenta asociada ';			
-			$("#amount, #description, #charge, #credit, #recargar, #clave").prop("display", false);			
+			$("#amount, #description, #charge, #credit, #recargar, #claveTranferencia").prop("display", false);			
 		} else if (data.rc == -233) {
 			Amountmsg = "La empresa no posee saldo.";
-			$("#amount, #description, #charge, #credit, #recargar, #clave").prop("disabled", true);
+			$("#amount, #description, #charge, #credit, #recargar, #claveTranferencia").prop("disabled", true);
 		} else if (data.rc == -61) {
 			window.location.replace(baseURL+isoPais+'/finsesion');
 		}else if(data.rc == -251) {
 			msgCtas = "No existen parámetros definidos para la empresa sobre este producto.";
 		} else {
-			$("#amount, #description, #charge, #credit, #recargar", "#clave").prop("disabled", true);
+			$("#amount, #description, #charge, #credit, #recargar", "#claveTranferencia").prop("disabled", true);
 		}
 		$("#saldoEmpresa").text('Saldo disponible: ' + Amountmsg);
 		$("#disponible").val(Amountmsg);
 		$("#numberaccount").html("<div style='float: left'>"+ numberaccount +"</div>");
-
 
 	});
 
@@ -86,7 +85,7 @@ $(function() {
 				disponible = $('#disponible'),
 				descrip = $('#description'),
 				account = $('#account-transfer'),
-				clave = $('#clave'),
+				clave = $('#claveTranferencia'),
 				type = $('input:radio[name=type]:checked'),
 				valAmount = (amount == ''  || !RE.test(amount)) ? false : true,
 				valdescript = (descrip == '') ?  false : true,
@@ -635,10 +634,10 @@ function paginar() {
 			}
 			$('.table-text-aut tbody tr').hide();
 			$('.table-text-aut .' + page).show();
-			$('#paginado-TM .jPag-pages').css('width', '350px')
+			$('#paginado-TM .jPag-pages').css('width', '600px')
 		}
 	});
-	$('#paginado-TM .jPag-pages').css('width', '350px')
+	$('#paginado-TM .jPag-pages').css('width', '600px')
 }
 
 // SUMAR LOS MONTOS INGRESADOS Y VALIDAR MONTO MAX. Y MIN.
