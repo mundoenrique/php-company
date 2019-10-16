@@ -342,7 +342,7 @@ $("#exportXLS_a").on('click', function () {
 	);
 	$('form#formulario').empty();
 	$('form#formulario').append('<input type="hidden" name="ceo_name" value="' + ceo_cook + '">');
-	$('form#formulario').append('<input type="hidden" name="orden" value="' + servicio + '">');
+	$('form#formulario').append('<input type="hidden" name="servicio" value="' + servicio + '">');
 	$('form#formulario').append('<input type="hidden" name="cedula" value="' + cedula + '">');
 	$('form#formulario').append('<input type="hidden" name="tarjeta" value="' + tarjeta + '">');
 	$('form#formulario').append('<input type="hidden" name="lote" value="' + lote + '">');
