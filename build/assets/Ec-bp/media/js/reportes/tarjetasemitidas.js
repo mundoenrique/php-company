@@ -29,11 +29,11 @@ $(document).ready(function () {
 			}
 		}
 	})
+	var f = new Date();
 	options = {
 		pattern: 'mm/yyyy',
-		selectedYear: 2019,
-		startYear: 2008,
-		finalYear: 2019,
+		startYear: 2019,
+		finalYear: f.getFullYear(),
 		monthNames: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic']
 	};
 
