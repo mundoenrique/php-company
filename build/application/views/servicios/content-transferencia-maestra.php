@@ -53,6 +53,9 @@
       </div>
       <div id="lotes-contenedor">
         <form id="form-recarga-cuenta" onsubmit="return false">
+        <div id='loadingData' style='text-align:center; color:#ffdd00; display:none'>
+        <h3 style='color:#ffdd00'>Consultando...</h3>
+      </div>
           <div id="search-1">
             <h5><span id="saldoEmpresa"></span></h5>
             <input type="hidden" name="disponible" id="disponible">
