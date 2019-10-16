@@ -71,7 +71,7 @@
 				</div>
 				<?php endif; ?>
 
-				<div id="batchs-last">
+				<div id="batchs-last" class="button-process">
 					<button id="procesar" class="novo-btn-primary">Procesar</button>
 				</div>
 
