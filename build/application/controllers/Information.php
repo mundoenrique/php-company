@@ -16,11 +16,6 @@ class Information extends NOVO_Controller {
 	{
 		$view = 'benefits';
 
-		$this->lang->load([$view], 'base-spanish');
-		if(in_array($view, $this->config->item('language_file_specific')) ) {
-			$this->lang->load($view);
-		}
-
 		log_message('INFO', 'NOVO Information: benefits Method Initialized');
 		$this->render->titlePage = 'Beneficios';
 		$this->views = ['information/'.$view];
@@ -32,11 +27,6 @@ class Information extends NOVO_Controller {
 		log_message('INFO', 'NOVO Information: terms Method Initialized');
 		$newUser = FALSE;
 		$view = 'terms';
-
-		$this->lang->load([$view], 'base-spanish');
-		if(in_array($view, $this->config->item('language_file_specific')) ) {
-			$this->lang->load($view);
-		}
 
 		if($this->session->flashdata('changePassword')) {
 			if($this->config->item('country') !== ($this->session->userdata('countrySess'))) {
@@ -67,11 +57,10 @@ class Information extends NOVO_Controller {
 	public function rates()
 	{
 		log_message('INFO', 'NOVO Information: rates Method Initialized');
-		$this->render->titlePage = 'Condiciones';
+		$this->render->titlePage = 'Tarifas';
 		$this->render->referer = $this->input->server('HTTP_REFERER');
 		$baseReferer = substr($this->render->referer, 0, strlen(base_url()));
 		$this->render->goBack = $baseReferer === base_url();
-		$this->lang->load('users');
 		$this->views = ['information/rates'];
 		$this->loadView('rates');
 	}

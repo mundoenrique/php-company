@@ -45,31 +45,21 @@ class User extends NOVO_Controller {
 		$this->load->library('user_agent');
 		$this->load->library('recaptcha');
 
-		$this->lang->load([$view, 'signin'], 'base-spanish');
-		if(in_array($view, $this->config->item('language_file_specific'))) {
-			$this->lang->load($view);
-		}
-		if(array_search('signin', $this->config->item('language_file_specific')) > 0) {
-			$this->lang->load('signin');
-		}
 
-		$this->render->scriptCaptcha = $this->recaptcha->getScriptTag();
-		log_message('DEBUG', 'NOVO RESPONSE: recaptcha: ' . $this->recaptcha->getScriptTag());
 
 		$browser = strtolower($this->agent->browser());
 		$version = (float) $this->agent->version();
 		$noBrowser = "internet explorer";
 		$views = ['user/login', 'user/signin'];
+
 		if($this->countryUri == 'bp') {
 			$views = ['user/signin'];
 		}
+
 		if($browser == $noBrowser && $version < 11.0) {
 			$views = ['staticpages/content-browser'];
 		}
-		array_push(
-			$this->includeAssets->cssFiles,
-			"$this->countryUri/default"
-		);
+
 		array_push(
 			$this->includeAssets->jsFiles,
 			"third_party/jquery.md5",
@@ -77,9 +67,9 @@ class User extends NOVO_Controller {
 			"third_party/jquery.validate",
 			"validate-forms",
 			"third_party/additional-methods",
-			"user/login",
-			"$this->countryUri/clave"
+			"user/login"
 		);
+
 		if($this->countryUri !== 'bp') {
 			array_push(
 				$this->includeAssets->jsFiles,
@@ -87,15 +77,17 @@ class User extends NOVO_Controller {
 				"user/kwicks"
 			);
 		}
+
 		if($this->countryUri === 'bp' && ENVIRONMENT === 'production') {
 			array_push(
 				$this->includeAssets->jsFiles,
 				"third_party/borders"
 			);
 		}
+
 		$this->views = $views;
 		$this->render->titlePage = lang('SYSTEM_NAME');
-
+		$this->render->scriptCaptcha = $this->recaptcha->getScriptTag();
 		$this->loadView($view);
 	}
 	/**
@@ -104,14 +96,9 @@ class User extends NOVO_Controller {
 	 */
 	public function recoveryPass()
 	{
+		log_message('INFO', 'NOVO User: passwordRecovery Method Initialized');
 		$view = 'pass-recovery';
 
-		$this->lang->load([$view], 'base-spanish');
-		if(in_array($view, $this->config->item('language_file_specific')) ) {
-			$this->lang->load($view);
-		}
-
-		log_message('INFO', 'NOVO User: passwordRecovery Method Initialized');
 		array_push(
 			$this->includeAssets->jsFiles,
 			"user/pass-recovery",
@@ -135,10 +122,7 @@ class User extends NOVO_Controller {
 			redirect(base_url('inicio'), 'location');
 			exit();
 		}
-		$this->lang->load([$view], 'base-spanish');
-		if(in_array($view, $this->config->item('language_file_specific')) ) {
-			$this->lang->load($view);
-		}
+
 		array_push(
 			$this->includeAssets->jsFiles,
 			"user/change-pass",
