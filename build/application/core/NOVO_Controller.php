@@ -21,7 +21,6 @@ class NOVO_Controller extends CI_Controller {
 	protected $method;
 	protected $request;
 	protected $dataResponse;
-
 	public $accessControl;
 
 	public function __construct()
@@ -30,24 +29,23 @@ class NOVO_Controller extends CI_Controller {
 		log_message('INFO', 'NOVO_Controller Class Initialized');
 
 		$this->includeAssets = new stdClass();
-		$this->countryUri = $this->uri->segment(1, 0) ? $this->uri->segment(1, 0) : 'pe';
 		$this->render = new stdClass();
+		$this->request = new stdClass();
+		$this->dataResponse = new stdClass();
+		$this->countryUri = $this->uri->segment(1, 0) ? $this->uri->segment(1, 0) : 'pe';
 		$this->render->logged = $this->session->userdata('logged');
 		$this->render->fullName = $this->session->userdata('fullName');
 		$this->idProductos = $this->session->userdata('idProductos');
 		$this->optionsCheck();
-		$this->request = new stdClass();
-		$this->dataResponse = new stdClass();
-		$this->lang->load(['general', 'error', 'response'], 'base-spanish');
 	}
 
 	private function optionsCheck()
 	{
 		log_message('INFO', 'NOVO optionsCheck Method Initialized');
+		languageLoad($this->router->fetch_method());
 		countryCheck($this->countryUri);
-		if(in_array('general', $this->config->item('language_file_specific'))) {
-			$this->lang->load('general');
-		}
+		languageLoad($this->router->fetch_method(), $this->countryUri);
+
 		if($this->input->is_ajax_request()) {
 			$this->dataRequest = json_decode(
 				$this->security->xss_clean(
@@ -85,9 +83,9 @@ class NOVO_Controller extends CI_Controller {
 			$this->includeAssets->cssFiles = [
 				"$this->skin-validate",
 				"third_party/jquery-ui",
-				"$structure-structure",
-				"$this->skin-appearance",
-				"$this->countryUri/default"
+				//"$structure-structure",
+				//"$this->skin-appearance",
+				"$this->skin-base",
 			];
 			$this->includeAssets->jsFiles = [
 				"third_party/html5",
@@ -126,6 +124,9 @@ class NOVO_Controller extends CI_Controller {
 			case 'enterprise':
 				$auth = ($this->render->logged);
 				break;
+			case 'rates':
+				$auth = ($this->render->logged && $this->countryUri === 've');
+				break;
 			default:
 
 		}
@@ -136,7 +137,8 @@ class NOVO_Controller extends CI_Controller {
 			$userMenu->menu = $menu;
 			$userMenu->pais = '';
 			$this->render->settingsMenu = $userMenu;
-			$this->render->goOut = ($this->render->logged) ? 'cerrar-sesion' : 'inicio';
+			$this->render->goOut = ($this->render->logged || $this->session->flashdata('changePassword'))
+			? 'cerrar-sesion' : 'inicio';
 			$this->render->module = $module;
 			$this->render->viewPage = $this->views;
 			$this->asset->initialize($this->includeAssets);

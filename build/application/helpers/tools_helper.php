@@ -214,6 +214,74 @@ if(!function_exists('menuRoute')) {
 	}
 }
 
+if(!function_exists('languajeLoad')) {
+	function languageLoad($method, $client = FALSE) {
+		log_message('INFO', 'NOVO HELPER languajeLoad Initialized for method '.$method);
+		$CI = &get_instance();
+		$languages = [];
+		$langFiles = $method;
+		$lanGeneral = ['bp'];
+		$load = !$client ? 'default_lang' : $client;
+
+		switch($load) {
+			case 'bp':
+				$languages = [
+					'login' => ['login'],
+					'recoveryPass'	=> ['pass-recovery'],
+					'terms'	=> ['terms'],
+				];
+				break;
+			case 'bbog':
+				$languages = [];
+				break;
+			case 'co':
+				$languages = [
+					'login' => ['login'],
+					'recoveryPass'	=> ['pass-recovery'],
+					'terms'	=> ['terms'],
+				];
+				break;
+			case 'pe':
+				$languages = [
+					'login' => ['login'],
+				];
+				break;
+			case 'us':
+				$languages = [
+					'login' => ['login'],
+				];
+				break;
+			case 've':
+				$languages = [
+					'login' => ['login'],
+					'recoveryPass'	=> ['pass-recovery'],
+					'terms'	=> ['terms'],
+				];
+				break;
+			default:
+				$languages = [
+					'login' => ['login', 'signin'],
+					'recoveryPass'	=> ['pass-recovery'],
+					'changePassword'	=> [],
+					'finishSession'	=> [],
+					'benefits'	=> ['benefits'],
+					'terms'	=> ['terms'],
+					'rates'	=> ['rates'],
+					'getEnterprises'	=> ['enterprise'],
+					'getProducts'	=> ['enterprise'],
+				];
+		}
+		if(array_key_exists($langFiles, $languages)) {
+			$languages = $languages[$langFiles];
+			if(in_array($client, $lanGeneral)) {
+				array_unshift($languages, 'general');
+			}
+			$CI->lang->load($languages);
+		}
+
+	}
+}
+	//old helpers
 	if ( ! function_exists('np_hoplite_log')) {
 		/**
 		 * Helper que lanza la descarga de un documento que arma el objeto logAccesoObject y lo retorna
