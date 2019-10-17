@@ -458,8 +458,15 @@ $("#listCompanies").on('mouseleave','.space-companies',function(){
 
 	} //Fin paginar    /***********************Paginacion inicio***********************/
 	function paginacion(total, filtro) {
+
+		if(total <= 5)
+		{
+			$('#anterior-1, #anterior-2, #anterior-22, #siguiente-1, #siguiente-2, #siguiente-22').attr("style","color:grey !important; pointer-events: none");
+		}
+
 		var texHtml = "";
 		$("#list_pagination").html("");
+		$("#list_pagination").css("max-width","80px");
 		for (var i = 1; i <= total; ++i) {
 			texHtml += '<span class="cajonNum"><a href="javascript:" id="page_' + i + '" class="num-pagina">' + i + '</a></span>';
 		}
