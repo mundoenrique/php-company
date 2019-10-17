@@ -23,9 +23,6 @@ class Business extends NOVO_Controller {
 		log_message('INFO', 'NOVO Business: getCompanies Method Initialized');
 		$view = 'enterprise';
 
-		$this->model = 'Novo_'.$this->router->fetch_class().'_Model';
-		$this->method = 'callWs_'.$this->router->fetch_method().'_'.$this->router->fetch_class();
-
 		array_push(
 			$this->includeAssets->jsFiles,
 			"third_party/jquery.paginate",
@@ -48,8 +45,6 @@ class Business extends NOVO_Controller {
 		$view = 'enterprise';
 		$responseService = new stdClass();
 
-		$this->config->set_item('language', 'spanish-base');
-		$this->form_validation->set_error_delimiters('', '---');
 		$result = $this->form_validation->run('dash-products');
 		log_message('DEBUG', 'NOVO VALIDATION FORM dash-products: '.json_encode($result));
 

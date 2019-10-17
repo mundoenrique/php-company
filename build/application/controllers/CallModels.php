@@ -31,8 +31,6 @@ class CallModels extends Novo_Controller {
 			unset($this->dataRequest);
 		}
 
-		$this->config->set_item('language', 'spanish-base');
-		$this->form_validation->set_error_delimiters('', '---');
 		$result = $this->form_validation->run($this->rule);
 		log_message('DEBUG', 'NOVO VALIDATION FORM '.$this->rule.': '.json_encode($result));
 		if($result) {

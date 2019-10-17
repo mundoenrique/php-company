@@ -29,23 +29,26 @@ class NOVO_Controller extends CI_Controller {
 		log_message('INFO', 'NOVO_Controller Class Initialized');
 
 		$this->includeAssets = new stdClass();
-		$this->render = new stdClass();
 		$this->request = new stdClass();
 		$this->dataResponse = new stdClass();
+		$this->render = new stdClass();
+		$this->model = 'Novo_'.$this->router->fetch_class().'_Model';
+		$this->method = 'callWs_'.$this->router->fetch_method().'_'.$this->router->fetch_class();
 		$this->countryUri = $this->uri->segment(1, 0) ? $this->uri->segment(1, 0) : 'pe';
+		$this->idProductos = $this->session->userdata('idProductos');
 		$this->render->logged = $this->session->userdata('logged');
 		$this->render->fullName = $this->session->userdata('fullName');
-		$this->idProductos = $this->session->userdata('idProductos');
 		$this->optionsCheck();
 	}
 
 	private function optionsCheck()
 	{
 		log_message('INFO', 'NOVO optionsCheck Method Initialized');
-		languageLoad($this->router->fetch_method());
+		languageLoad();
 		countryCheck($this->countryUri);
-		languageLoad($this->router->fetch_method(), $this->countryUri);
-
+		languageLoad($this->countryUri);
+		$this->form_validation->set_error_delimiters('', '---');
+		$this->config->set_item('language', 'spanish-base');
 		if($this->input->is_ajax_request()) {
 			$this->dataRequest = json_decode(
 				$this->security->xss_clean(
