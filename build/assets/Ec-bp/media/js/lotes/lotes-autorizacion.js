@@ -260,6 +260,10 @@ $(function () {
 				$(this).dialog('destroy');
 			},
 			buttons: {
+				"Cancelar": { text: 'Cancelar', class: 'novo-btn-secondary-modal',
+					click: function () {
+						$(this).dialog("close"); }
+					},
 				Desasociar: function () {
 
 					pass = $(this).find($('#pass')).val();
