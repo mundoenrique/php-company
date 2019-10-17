@@ -50,6 +50,7 @@ class NOVO_Model extends CI_Model {
 		} else {
 			$responseDecrypt = $this->encrypt_connect->decode($response, $this->userName, $model);
 		}
+
 		$this->isResponseRc = $responseDecrypt->rc;
 		$this->response->code = 303;
 		$this->response->title = lang('SYSTEM_NAME');
@@ -57,7 +58,6 @@ class NOVO_Model extends CI_Model {
 		switch($this->isResponseRc) {
 			case -29:
 			case -61:
-				log_message('INFO', 'NOVO -------------------29'.json_encode($this->isResponseRc));
 				$this->response->msg = lang('ERROR_(-29)');
 				$this->response->data = base_url('inicio');
 				$this->response->data = [
@@ -70,7 +70,6 @@ class NOVO_Model extends CI_Model {
 				$this->session->sess_destroy();
 				break;
 			default:
-				log_message('INFO', 'NOVO -------------------default'.json_encode($this->isResponseRc));
 				$this->response->msg = lang('ERROR_GENERAL');
 				$this->response->data = [
 					'btn1'=> [
