@@ -84,20 +84,23 @@ class Encrypt_Connect {
 		curl_setopt($ch, CURLOPT_URL, $urlWS);
 		curl_setopt($ch, CURLOPT_POST, TRUE);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+		curl_setopt($ch, CURLOPT_TIMEOUT, 58);
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $request);
 		curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-			               'Content-Type: text/plain',
-			               'Content-Length: ' . strlen($request))
+			'Content-Type: text/plain',
+			'Content-Length: ' . strlen($request))
 		);
 		$response = curl_exec($ch);
 		$httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
 		log_message('DEBUG','NOVO ['.$userName.'] RESPONSE CURL HTTP CODE: ' . $httpCode);
 
-		if(!$httpCode || $httpCode != 200) {
-			return FALSE;
-		} else {
-			return $response;
+		if(!$response) {
+			$response = new stdClass();
+			$response->rc = -9999;
 		}
+
+		return $response;
+
 	}
 }

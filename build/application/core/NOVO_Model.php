@@ -9,8 +9,8 @@ class NOVO_Model extends CI_Model {
 	public $country;
 	public $countryUri;
 	public $dataRequest;
-	public $response;
 	public $isResponseRc;
+	public $response;
 	public $userName;
 
 	public function __construct()
@@ -24,10 +24,8 @@ class NOVO_Model extends CI_Model {
 		$this->country = $this->session->userdata('countrySess') ? $this->session->userdata('countrySess')
 			: $this->config->item('country');
 		$this->countryUri = $this->session->userdata('countryUri');
-		$this->isResponseRc = 'No web service';
 		$this->token = $this->session->userdata('token') ? $this->session->userdata('token') : '';
 		$this->userName = $this->session->userdata('userName');
-		$this->lang->load(['error','general', 'response'], 'base-spanish' );
 	}
 
 	public function sendToService($model)
@@ -46,51 +44,42 @@ class NOVO_Model extends CI_Model {
 		$encryptData = $this->encrypt_connect->encode($this->dataRequest, $this->userName, $model);
 		$request = ['bean'=> $encryptData, 'pais'=> $this->country];
 		$response = $this->encrypt_connect->connectWs($request, $this->userName);
-		$responseDecrypt = $this->encrypt_connect->decode($response, $this->userName, $model);
-		$this->isResponseRc = FALSE;
-		$this->response->title = lang('SYSTEM_NAME');
 
-		if(isset($responseDecrypt->rc)) {
-			$this->isResponseRc = $responseDecrypt->rc;
-			switch($this->isResponseRc) {
-				case -29:
-				case -61:
-					$this->response->code = 303;
-					$this->response->msg = lang('ERROR_(-29)');
-					$this->response->data = base_url('inicio');
-					$this->response->icon = 'ui-icon-alert';
-					$this->response->data = [
-						'btn1'=> [
-							'text'=> lang('BUTTON_ACCEPT'),
-							'link'=> base_url('inicio'),
-							'action'=> 'redirect'
-						]
-					];
-					$this->session->sess_destroy();
-					break;
-				default:
-					$this->response->code = 303;
-					$this->response->msg = lang('ERROR_GENERAL');
-					$this->response->icon = 'ui-icon-alert';
-					$this->response->data = [
-						'btn1'=> [
-							'text'=> lang('BUTTON_ACCEPT'),
-							'link'=> base_url('empresas'),
-							'action'=> 'redirect'
-						]
-					];
-			}
+		if(isset($response->rc)) {
+			$responseDecrypt = $response;
 		} else {
-			$this->response->code = 303;
-			$this->response->msg = lang('ERROR_GENERAL');
-			$this->response->icon = 'ui-icon-alert';
-			$this->response->data = [
-				'btn1'=> [
-					'text'=> lang('BUTTON_ACCEPT'),
-					'link'=> base_url('empresas'),
-					'action'=> 'redirect'
-				]
-			];
+			$responseDecrypt = $this->encrypt_connect->decode($response, $this->userName, $model);
+		}
+		$this->isResponseRc = $responseDecrypt->rc;
+		$this->response->code = 303;
+		$this->response->title = lang('SYSTEM_NAME');
+		$this->response->icon = 'ui-icon-alert';
+		switch($this->isResponseRc) {
+			case -29:
+			case -61:
+				log_message('INFO', 'NOVO -------------------29'.json_encode($this->isResponseRc));
+				$this->response->msg = lang('ERROR_(-29)');
+				$this->response->data = base_url('inicio');
+				$this->response->data = [
+					'btn1'=> [
+						'text'=> lang('BUTTON_ACCEPT'),
+						'link'=> base_url('inicio'),
+						'action'=> 'redirect'
+					]
+				];
+				$this->session->sess_destroy();
+				break;
+			default:
+				log_message('INFO', 'NOVO -------------------default'.json_encode($this->isResponseRc));
+				$this->response->msg = lang('ERROR_GENERAL');
+				$this->response->data = [
+					'btn1'=> [
+						'text'=> lang('BUTTON_ACCEPT'),
+						'link'=> base_url('empresas'),
+						'action'=> 'redirect'
+					]
+				];
+				break;
 		}
 
 		return $responseDecrypt;
