@@ -4,11 +4,7 @@
  * @author J. Enrique Peñaloza P
 */
 class CallModels extends Novo_Controller {
-	protected $model;
-	protected $method;
 	protected $rule;
-	protected $request;
-	protected $dataResponse;
 
 	public function __construct()
 	{
@@ -18,8 +14,6 @@ class CallModels extends Novo_Controller {
 			$this->model = 'Novo_'.$this->dataRequest->who.'_Model';
 			$this->rule = strtolower($this->dataRequest->where);
 			$this->method = 'callWs_'.$this->dataRequest->where.'_'.$this->dataRequest->who;
-			$this->request = new stdClass();
-			$this->dataResponse = new stdClass();
 
 		} else {
 			show_404();
@@ -37,6 +31,7 @@ class CallModels extends Novo_Controller {
 			unset($this->dataRequest);
 		}
 
+		$this->config->set_item('language', 'spanish-base');
 		$this->form_validation->set_error_delimiters('', '---');
 		$result = $this->form_validation->run($this->rule);
 		log_message('DEBUG', 'NOVO VALIDATION FORM '.$this->rule.': '.json_encode($result));
