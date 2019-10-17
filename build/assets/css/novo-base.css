@@ -344,7 +344,6 @@ button {
 	box-shadow: rgba(51, 51, 51, 0.5) 0 1px 2px;
 	color: #F5F6F5;
 	float: right;
-	line-height: 35px;
 	margin-left: 10px;
 	min-width: 67px;
 	min-height: 35px;
@@ -462,6 +461,7 @@ nav ul.menu li.menu-item a {
 	list-style: none;
 	text-align: left;
 	padding-left: 0px;
+	margin: 0;
 }
 
 #nav2>ul>li {
@@ -2800,7 +2800,7 @@ ul.jPag-pages {
 }
 
 ul.jPag-pages li {
-	display: inline-block;
+	display: inline;
 	padding: 0px;
 	margin: 0px;
 }
@@ -5499,13 +5499,6 @@ button.green:hover {
 	padding: 10px;
 }
 
-/*#widget-area .widget .widget-content input,
-#widget-area .widget .widget-content select,
-#widget-area .widget .widget-content textarea {
-	width: 178px;
-}*/
-
-
 .load-widget {
 	margin-left: 70px;
 }
@@ -5545,6 +5538,14 @@ fieldset {
 	height: 35px;
 	position: relative;
 	width: 100%;
+}
+
+button .requesting {
+	height: 25px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 }
 
 .btn-sidebar {
@@ -6847,7 +6848,7 @@ body .ui-tooltip {
 .ui-button:hover .ui-icon,
 .ui-state-focus .ui-icon,
 .ui-state-hover .ui-icon {
-	background-image: url(../images/ui-icons_555555_256x240.png)
+	background-image: url(./images/ui-icons_555555_256x240.png)
 }
 
 .ui-icon-blank {

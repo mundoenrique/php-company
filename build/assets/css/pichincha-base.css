@@ -5412,6 +5412,7 @@ p#user-name {
 	background-color: white;
 	list-style: none;
 	text-align: left;
+	margin: 0;
 	padding-left: 0px;
 }
 

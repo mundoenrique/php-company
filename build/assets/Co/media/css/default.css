@@ -462,6 +462,7 @@ nav ul.menu li.menu-item a {
 	list-style: none;
 	text-align: left;
 	padding-left: 0px;
+	margin: 0;
 }
 
 #nav2>ul>li {
