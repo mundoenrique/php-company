@@ -215,15 +215,15 @@ if(!function_exists('menuRoute')) {
 }
 
 if(!function_exists('languajeLoad')) {
-	function languageLoad($method, $client = FALSE) {
-		log_message('INFO', 'NOVO HELPER languajeLoad Initialized for method '.$method);
+	function languageLoad($client = 'default_lang') {
 		$CI = &get_instance();
+		$class = $CI->router->fetch_class();
+		$langFiles = $CI->router->fetch_method();
 		$languages = [];
-		$langFiles = $method;
 		$lanGeneral = ['bp'];
-		$load = !$client ? 'default_lang' : $client;
+		log_message('INFO', 'NOVO HELPER languajeLoad Initialized for controller '.$class. ' and method '.$langFiles);
 
-		switch($load) {
+		switch($client) {
 			case 'bp':
 				$languages = [
 					'login' => ['login'],
