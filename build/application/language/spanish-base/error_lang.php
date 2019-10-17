@@ -1,6 +1,9 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-$lang['ERROR_GENERICO_USER']= "Error en Sistema, por favor intente nuevamente."; // cuando ocurre algun error que el usuario no deberia ver (los sgts con el prefix "Error")
+$lang['ERROR_GENERAL']= "En este momento no podemos atender tu solicitud, por favor intenta en unos minutos";
+$lang['ERROR_TIMEOUT'] = "El servidor esta demorando mucho tiempo en responder por favor intentalo de nuevo";
+
+$lang['ERROR_GENERICO_USER']= "Error en Sistema, por favor intente nuevamente.";
 $lang['ERROR_CAMBIO_CLAVE']= "Error en el formulario.";
 $lang['ERROR_NO_DATA'] = "No se encontraron datos";
 $lang['SIN_FUNCION'] = 'No tiene permisos para realizar esta operación';//'Operación no asignada';
