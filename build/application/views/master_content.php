@@ -116,8 +116,12 @@
 		</p>
 		<div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
 			<div class="ui-dialog-buttonset novo-dialog-buttonset">
-				<button type="button" id="cancel" class="cancel-button novo-btn-secondary-modal dialog-buttons"><?= lang('BUTTON_CANCEL'); ?></button>
-				<button type="button" id="accept" class="novo-btn-primary-modal dialog-buttons"><?= lang('BUTTON_ACCEPT'); ?></button>
+				<button type="button" id="cancel" class="cancel-button novo-btn-secondary-modal dialog-buttons">
+					<?= lang('BUTTON_CANCEL'); ?>
+				</button>
+				<button type="button" id="accept" class="novo-btn-primary-modal dialog-buttons">
+					<?= lang('BUTTON_ACCEPT'); ?>
+				</button>
 			</div>
 		</div>
 	</div>
