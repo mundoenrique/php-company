@@ -31,119 +31,119 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataRequest->ctipo = $dataRequest->active;
 
 		$response = $this->sendToService('Login');
-		if($this->isResponseRc !== FALSE) {
-			switch($this->isResponseRc) {
-				case 0:
-					log_message('DEBUG', 'NOVO ['.$dataRequest->user.'] RESPONSE: Login: ' . json_encode($response->usuario));
-					$fullName = mb_strtolower($response->usuario->primerNombre).' ';
-					$fullName.= mb_strtolower($response->usuario->primerApellido);
-					$formatDate = $this->config->item('format_date');
-					$formatTime = $this->config->item('format_time');
-					$lastSession = date(
-						"$formatDate $formatTime", strtotime(
-							str_replace('/', '-', $response->usuario->fechaUltimaConexion)
-						)
-					);
-					$userData = [
-						'sessionId' => $response->logAccesoObject->sessionId,
-						'logged' => TRUE,
-						'idUsuario' => $response->usuario->idUsuario,
-						'userName' => $response->usuario->userName,
-						'fullName' => $fullName,
-						'codigoGrupo' => $response->usuario->codigoGrupo,
-						'lastSession' => $lastSession,
-						'token' => $response->token,
-						'cl_addr' => $this->encrypt_connect->encode($_SERVER['REMOTE_ADDR'], $dataRequest->user, 'REMOTE_ADDR'),
-						'countrySess' => $this->config->item('country'),
-						'pais' => $this->config->item('country'),
-						'nombreCompleto' => $fullName,
-						'logged_in' => TRUE
-					];
 
-					$this->session->set_userdata($userData);
+		switch($this->isResponseRc) {
+			case 0:
+				log_message('DEBUG', 'NOVO ['.$dataRequest->user.'] RESPONSE: Login: ' . json_encode($response->usuario));
+				$fullName = mb_strtolower($response->usuario->primerNombre).' ';
+				$fullName.= mb_strtolower($response->usuario->primerApellido);
+				$formatDate = $this->config->item('format_date');
+				$formatTime = $this->config->item('format_time');
+				$lastSession = date(
+					"$formatDate $formatTime", strtotime(
+						str_replace('/', '-', $response->usuario->fechaUltimaConexion)
+					)
+				);
+				$userData = [
+					'sessionId' => $response->logAccesoObject->sessionId,
+					'logged' => TRUE,
+					'idUsuario' => $response->usuario->idUsuario,
+					'userName' => $response->usuario->userName,
+					'fullName' => $fullName,
+					'codigoGrupo' => $response->usuario->codigoGrupo,
+					'lastSession' => $lastSession,
+					'token' => $response->token,
+					'cl_addr' => $this->encrypt_connect->encode($_SERVER['REMOTE_ADDR'], $dataRequest->user, 'REMOTE_ADDR'),
+					'countrySess' => $this->config->item('country'),
+					'pais' => $this->config->item('country'),
+					'nombreCompleto' => $fullName,
+					'logged_in' => TRUE
+				];
+
+				$this->session->set_userdata($userData);
+				$this->response->code = 0;
+				$this->response->msg = lang('LOGIN_MSG'.$this->isResponseRc);
+				$this->response->data = base_url('empresas');
+				break;
+			case -2:
+			case -185:
+				$fullName = mb_strtolower($response->usuario->primerNombre.' '.$response->usuario->primerApellido);
+				$userData = [
+					'sessionId' => $response->logAccesoObject->sessionId,
+					'idUsuario' => $response->usuario->idUsuario,
+					'userName' => $response->usuario->userName,
+					'fullName' => $fullName,
+					'codigoGrupo' => $response->usuario->codigoGrupo,
+					'token' => $response->token,
+					'cl_addr' => $this->encrypt_connect->encode($_SERVER['REMOTE_ADDR'], $dataRequest->user, 'REMOTE_ADDR'),
+					'countrySess' => $this->config->item('country')
+				];
+
+				$this->session->set_userdata($userData);
+
+				$this->response->code = 0;
+				$this->response->title = lang('LOGIN_TITLE'.$this->isResponseRc);
+				$this->response->msg = lang('LOGIN_MSG'.$this->isResponseRc);
+				$this->response->data = base_url('inf-condiciones');
+				$this->session->set_flashdata('changePassword', 'newUser');
+				$this->session->set_flashdata('userType', $response->usuario->ctipo);
+
+				if($this->isResponseRc === -185) {
 					$this->response->code = 0;
-					$this->response->msg = lang('LOGIN_MSG'.$this->isResponseRc);
-					$this->response->data = base_url('empresas');
-					break;
-				case -2:
-				case -185:
-					$fullName = mb_strtolower($response->usuario->primerNombre.' '.$response->usuario->primerApellido);
-					$userData = [
-						'sessionId' => $response->logAccesoObject->sessionId,
-						'idUsuario' => $response->usuario->idUsuario,
-						'userName' => $response->usuario->userName,
-						'fullName' => $fullName,
-						'codigoGrupo' => $response->usuario->codigoGrupo,
-						'token' => $response->token,
-						'cl_addr' => $this->encrypt_connect->encode($_SERVER['REMOTE_ADDR'], $dataRequest->user, 'REMOTE_ADDR'),
-						'countrySess' => $this->config->item('country')
-					];
-
-					$this->session->set_userdata($userData);
-
-					$this->response->code = 0;
 					$this->response->title = lang('LOGIN_TITLE'.$this->isResponseRc);
 					$this->response->msg = lang('LOGIN_MSG'.$this->isResponseRc);
-					$this->response->data = base_url('inf-condiciones');
-					$this->session->set_flashdata('changePassword', 'newUser');
-					$this->session->set_flashdata('userType', $response->usuario->ctipo);
-
-					if($this->isResponseRc === -185) {
-						$this->response->code = 0;
-						$this->response->title = lang('LOGIN_TITLE'.$this->isResponseRc);
-						$this->response->msg = lang('LOGIN_MSG'.$this->isResponseRc);
-						$this->response->data = base_url('cambiar-clave');
-						$this->session->set_flashdata('changePassword', 'expiredPass');
-						break;
-					}
+					$this->response->data = base_url('cambiar-clave');
+					$this->session->set_flashdata('changePassword', 'expiredPass');
 					break;
-				case -1:
-				case -263:
-					$this->response->code = 1;
-					$this->response->title = lang('LOGIN_TITLE'.$this->isResponseRc);
-					$this->response->msg = lang('LOGIN_MSG'.$this->isResponseRc);
-					$this->response->className = 'error-login-2';
-					break;
-				case -8:
-				case -35:
-					$this->response->code = 1;
-					$this->response->title = lang('LOGIN_TITLE'.$this->isResponseRc);
-					$this->response->msg = lang('LOGIN_MSG'.$this->isResponseRc);
-					$this->response->className = 'login-inactive';
-					break;
-				case -229:
-					$this->response->code = 2;
-					$this->response->title = lang('LOGIN_TITLE'.$this->isResponseRc);
-					break;
-				case -262:
-					$this->response->code = 3;
-					$this->response->msg = lang('LOGIN_MSG'.$this->isResponseRc);
-					$this->response->icon = 'ui-icon-info';
-					$this->response->data = [
-						'btn1'=> [
-							'text'=> lang('BUTTON_ACCEPT'),
-							'link'=> FALSE,
-							'action'=> 'close'
-						]
-					];
-					break;
-				case -28:
-					$this->response->code = 3;
-					$this->response->msg = lang('LOGIN_MSG'.$this->isResponseRc);
-					$this->response->icon = 'ui-icon-alert';
-					$this->response->data = [
-						'btn1'=> [
-							'text'=> lang('BUTTON_ACCEPT'),
-							'link'=> [
-								'who'=> 'User',
-								'where'=> 'FinishSession'
-							],
-							'action'=> 'logout'
-						]
-					];
-					break;
-			}
+				}
+				break;
+			case -1:
+			case -263:
+				$this->response->code = 1;
+				$this->response->title = lang('LOGIN_TITLE'.$this->isResponseRc);
+				$this->response->msg = lang('LOGIN_MSG'.$this->isResponseRc);
+				$this->response->className = 'error-login-2';
+				break;
+			case -8:
+			case -35:
+				$this->response->code = 1;
+				$this->response->title = lang('LOGIN_TITLE'.$this->isResponseRc);
+				$this->response->msg = lang('LOGIN_MSG'.$this->isResponseRc);
+				$this->response->className = 'login-inactive';
+				break;
+			case -229:
+				$this->response->code = 2;
+				$this->response->title = lang('LOGIN_TITLE'.$this->isResponseRc);
+				break;
+			case -262:
+				$this->response->code = 3;
+				$this->response->msg = lang('LOGIN_MSG'.$this->isResponseRc);
+				$this->response->icon = 'ui-icon-info';
+				$this->response->data = [
+					'btn1'=> [
+						'text'=> lang('BUTTON_ACCEPT'),
+						'link'=> FALSE,
+						'action'=> 'close'
+					]
+				];
+				break;
+			case -28:
+				$this->response->code = 3;
+				$this->response->msg = lang('LOGIN_MSG'.$this->isResponseRc);
+				$this->response->icon = 'ui-icon-alert';
+				$this->response->data = [
+					'btn1'=> [
+						'text'=> lang('BUTTON_ACCEPT'),
+						'link'=> [
+							'who'=> 'User',
+							'where'=> 'FinishSession'
+						],
+						'action'=> 'logout'
+					]
+				];
+				break;
 		}
+
 		return $this->response;
 	}
 	/**
@@ -166,43 +166,42 @@ class Novo_User_Model extends NOVO_Model {
 
 		$response = $this->sendToService('RecoveryPass');
 
-		if($this->isResponseRc !== FALSE) {
-			$this->response->title = lang('RECOVERYPASS_TITLE');
-			switch($this->isResponseRc) {
-				case 0:
-					$maskMail = maskString($dataRequest->email, 4, $end = 6, '@');
-					$this->response->code = 0;
-					$this->response->msg = str_replace('{$maskMail$}', $maskMail, lang('RECOVERYPASS_MSG-'.$this->isResponseRc));
-					$this->response->icon = 'ui-icon-circle-check';
-					$this->response->data = [
-						'btn1'=> [
-							'text'=> lang('BUTTON_CONTINUE'),
-							'link'=> base_url('inicio'),
-							'action'=> 'redirect'
-						]
-					];
-					break;
-				case -205:
-					$msg = lang('RECOVERYPASS_MSG-'.$this->isResponseRc);
-					if($this->countryUri == 've') {
-						$msg.= '<br>'.lang('ERROR_SUPPORT');
-					}
-					break;
-			}
-
-			if($this->isResponseRc != 0) {
-				$this->response->code = 1;
-				$this->response->msg = lang('RECOVERYPASS_MSG-'.$this->isResponseRc);
-				$this->response->icon = 'ui-icon-info';
+		$this->response->title = lang('RECOVERYPASS_TITLE');
+		switch($this->isResponseRc) {
+			case 0:
+				$maskMail = maskString($dataRequest->email, 4, $end = 6, '@');
+				$this->response->code = 0;
+				$this->response->msg = str_replace('{$maskMail$}', $maskMail, lang('RECOVERYPASS_MSG-'.$this->isResponseRc));
+				$this->response->icon = 'ui-icon-circle-check';
 				$this->response->data = [
 					'btn1'=> [
-						'text'=> lang('BUTTON_ACCEPT'),
-						'link'=> FALSE,
-						'action'=> 'close'
+						'text'=> lang('BUTTON_CONTINUE'),
+						'link'=> base_url('inicio'),
+						'action'=> 'redirect'
 					]
 				];
-			}
+				break;
+			case -205:
+				$msg = lang('RECOVERYPASS_MSG-'.$this->isResponseRc);
+				if($this->countryUri == 've') {
+					$msg.= '<br>'.lang('ERROR_SUPPORT');
+				}
+				break;
 		}
+
+		if($this->isResponseRc != 0) {
+			$this->response->code = 1;
+			$this->response->msg = lang('RECOVERYPASS_MSG-'.$this->isResponseRc);
+			$this->response->icon = 'ui-icon-info';
+			$this->response->data = [
+				'btn1'=> [
+					'text'=> lang('BUTTON_ACCEPT'),
+					'link'=> FALSE,
+					'action'=> 'close'
+				]
+			];
+		}
+
 
 		return $this->response;
 	}
@@ -227,37 +226,35 @@ class Novo_User_Model extends NOVO_Model {
 
 		$response = $this->sendToService('ChangePassword');
 
-		if($this->isResponseRc !== FALSE) {
-			switch($this->isResponseRc) {
-				case 0:
-					$this->callWs_FinishSession_User();
-					$this->response->code = 0;
-					$this->response->msg = lang('CHANGEPASSWORD_MSG-'.$this->isResponseRc);
-					$this->response->icon = 'ui-icon-circle-check';
-					$this->response->data = [
-						'btn1'=> [
-							'text'=> lang('BUTTON_CONTINUE'),
-							'link'=> base_url('inicio'),
-							'action'=> 'redirect'
-						]
-					];
-					break;
-				case -4:
-				case -22:
-					$this->response->code = 1;
-					$this->response->icon = 'ui-icon-alert';
-					$this->response->msg = lang('CHANGEPASSWORD_MSG-'.$this->isResponseRc);
-					$this->response->data = [
-						'btn1'=> [
-							'text'=> lang('BUTTON_ACCEPT'),
-							'link'=> FALSE,
-							'action'=> 'close'
-						]
-					];
-					$this->session->set_flashdata('changePassword', $changePassType);
-					$this->session->set_flashdata('userType', $this->session->flashdata('userType'));
-					break;
-			}
+		switch($this->isResponseRc) {
+			case 0:
+				$this->callWs_FinishSession_User();
+				$this->response->code = 0;
+				$this->response->msg = lang('CHANGEPASSWORD_MSG-'.$this->isResponseRc);
+				$this->response->icon = 'ui-icon-circle-check';
+				$this->response->data = [
+					'btn1'=> [
+						'text'=> lang('BUTTON_CONTINUE'),
+						'link'=> base_url('inicio'),
+						'action'=> 'redirect'
+					]
+				];
+				break;
+			case -4:
+			case -22:
+				$this->response->code = 1;
+				$this->response->icon = 'ui-icon-alert';
+				$this->response->msg = lang('CHANGEPASSWORD_MSG-'.$this->isResponseRc);
+				$this->response->data = [
+					'btn1'=> [
+						'text'=> lang('BUTTON_ACCEPT'),
+						'link'=> FALSE,
+						'action'=> 'close'
+					]
+				];
+				$this->session->set_flashdata('changePassword', $changePassType);
+				$this->session->set_flashdata('userType', $this->session->flashdata('userType'));
+				break;
 		}
 
 		return $this->response;
@@ -320,6 +317,7 @@ class Novo_User_Model extends NOVO_Model {
 			$this->response->owner = 'login';
 
 		}
+
 		return $this->response;
 	}
 }
