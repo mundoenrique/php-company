@@ -143,6 +143,7 @@ var datatable;
 			++count;
 			contenido+= "<h6>" + count + ". Has ingresado una Linea Embozo 1</h6>";
 		}
+
 		if(!/[^a-zA-Z0-9 ]/.test($("#embozo_2").val())){
 
 		}else {
@@ -192,6 +193,12 @@ var datatable;
 	}
 
 $(function(){
+
+ 	$('#embozo_1').on('blur', function(){
+		var value = $(this).val();
+		var value_without_space = $.trim(value);
+		$(this).val(value_without_space);
+	});
 
 	calendario("fecha_expira");
 
