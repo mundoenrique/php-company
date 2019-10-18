@@ -127,11 +127,6 @@ var datatable;
 			contenido+= "<h6>" + count + ". Has ingresado una cantidad</h6>";
 		}
 
-		if(cantTartjetas[0] == '0'){
-			++count;
-			contenido+= "<h6>" + count + ". Que el primer dígito de la cantidad no sea cero</h6>";
-		}
-
 		if($("#fecha_expira").val()==""){
 			++count;
 			contenido+= "<h6>" + count + ". Has seleccionado una fecha de expiración</h6>";
@@ -199,6 +194,12 @@ var datatable;
 	}
 
 $(function(){
+
+	$('#cant_tarjetas').keyup(function(){
+		var value = $(this).val();
+		var value_without_space = value.replace(/^0+/,'');
+		$(this).val(value_without_space);
+	});
 
  	$('#embozo_1').on('blur', function(){
 		var value = $(this).val();
