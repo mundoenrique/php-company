@@ -1,19 +1,4 @@
 'use strict'
-
-/**
- * lee una propiedad especifica de un elemento html
- * de no indicarse el elemento se toma por defecto el body
- *
- * @param {*} element  elemento al cual quiero extraer su propiedad
- * @param {*} property  propiedad a leer
- * @author pedro torres
- * @date 27/08/2019
- */
-function getPropertyOfElement(property, element) {
-	var element = element || 'body';
-	return $(element).attr(property);
-}
-
 //icons
 var iconSuccess = 'ui-icon-circle-check';
 var iconInfo = 'ui-icon-info';
@@ -31,11 +16,15 @@ var loader = $('#loader').html();
 var prefixCountry = country !== 'bp' ? 'Empresas Online ' : '';
 var settingsCountry = { bp: 'Conexión Empresas', co: 'Colombia', pe: 'Perú', us: 'Perú', ve: 'Venezuela' };
 var strCountry = settingsCountry[country];
-
 var verb, who, where, data, title, msg, icon, data, dataResponse;
 
 $('input[type=text], input[type=password], input[type=textarea]').attr('autocomplete', 'off');
 
+/**
+ * @info Llama al core del servidor
+ * @author J. Enrique Peñaloza Piñero
+ * @date 15/04/2019
+ */
 function callNovoCore(verb, who, where, data, _response_) {
 	var ceo_cook = decodeURIComponent(
 		document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
@@ -47,6 +36,7 @@ function callNovoCore(verb, who, where, data, _response_) {
 	});
 
 	dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, { format: CryptoJSAesJson }).toString();
+
 	$.ajax({
 		method: verb,
 		url: baseURL + 'async-call',
@@ -70,7 +60,7 @@ function callNovoCore(verb, who, where, data, _response_) {
 		data = {
 			btn1: {
 				class: 'novo-btn-primary-modal',
-				link: false,
+				link: baseURL+'empresas',
 				action: 'close'
 			}
 		};
@@ -82,25 +72,11 @@ function callNovoCore(verb, who, where, data, _response_) {
 	});
 }
 
-function formatterDate(date) {
-	var dateArray = date.split('/');
-	var dateStr = dateArray[1] + '/' + dateArray[0] + '/' + dateArray[2];
-
-	return new Date(dateStr);
-}
-
-function createButton(dialogMoldal, elementBotton, valuesButton){
-	valuesButton.text && elementBotton.text(valuesButton.text);
-	elementBotton.show();
-	elementBotton.on('click', function (e) {
-		if (valuesButton.action === 'redirect') {
-			$(location).attr('href', valuesButton.link);
-		}
-		$(this).off('click');
-		dialogMoldal.dialog('close');
-	});
-}
-
+/**
+ * @info Uso del modal informativo
+ * @author J. Enrique Peñaloza Piñero
+ * @date 05/03/2019
+ */
 function notiSystem(title, message, icon, data) {
 
 	var btnAccept = $('#accept');
@@ -123,13 +99,48 @@ function notiSystem(title, message, icon, data) {
 			$('#system-msg').html(message);
 
 			createButton(dialogMoldal, btnAccept, btn1);
-			if (!btn2) {
+			if(!btn2) {
 				btnCancel.hide();
 				btnAccept.css('margin', '0');
 				$('.novo-dialog-buttonset').css('width', '80px');
-			}else{
+			} else {
 				createButton(dialogMoldal, btnCancel, btn2);
 			}
 		}
 	});
+}
+
+/**
+ * @info Uso del modal informativo
+ * @author Pedor Torres
+ * @date 16/09/2019
+ */
+function createButton(dialogMoldal, elementBotton, valuesButton){
+	valuesButton.text && elementBotton.text(valuesButton.text);
+	elementBotton.show();
+	elementBotton.on('click', function (e) {
+		if (valuesButton.action === 'redirect') {
+			$(location).attr('href', valuesButton.link);
+		}
+		$(this).off('click');
+		dialogMoldal.dialog('close');
+	});
+}
+
+/**
+ * @info lee una propiedad especifica de un elemento html,
+ * de no indicarse el elemento se toma por defecto el body
+ * @author Pedro Torres
+ * @date 27/08/2019
+ */
+function getPropertyOfElement(property, element) {
+	var element = element || 'body';
+	return $(element).attr(property);
+}
+
+function formatterDate(date) {
+	var dateArray = date.split('/');
+	var dateStr = dateArray[1] + '/' + dateArray[0] + '/' + dateArray[2];
+
+	return new Date(dateStr);
 }
