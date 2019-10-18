@@ -16,12 +16,10 @@ class NOVO_Controller extends CI_Controller {
 	protected $views;
 	protected $render;
 	protected $dataRequest;
-	protected $idProductos;
 	protected $model;
 	protected $method;
 	protected $request;
 	protected $dataResponse;
-	public $accessControl;
 
 	public function __construct()
 	{
@@ -35,7 +33,6 @@ class NOVO_Controller extends CI_Controller {
 		$this->model = 'Novo_'.$this->router->fetch_class().'_Model';
 		$this->method = 'callWs_'.$this->router->fetch_method().'_'.$this->router->fetch_class();
 		$this->countryUri = $this->uri->segment(1, 0) ? $this->uri->segment(1, 0) : 'pe';
-		$this->idProductos = $this->session->userdata('idProductos');
 		$this->render->logged = $this->session->userdata('logged');
 		$this->render->fullName = $this->session->userdata('fullName');
 		$this->optionsCheck();
