@@ -126,6 +126,12 @@ var datatable;
 			++count;
 			contenido+= "<h6>" + count + ". Has ingresado una cantidad</h6>";
 		}
+
+		if(cantTartjetas[0] == '0'){
+			++count;
+			contenido+= "<h6>" + count + ". Que el primer dígito de la cantidad no sea cero</h6>";
+		}
+
 		if($("#fecha_expira").val()==""){
 			++count;
 			contenido+= "<h6>" + count + ". Has seleccionado una fecha de expiración</h6>";
