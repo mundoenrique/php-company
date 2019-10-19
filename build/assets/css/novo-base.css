@@ -5718,24 +5718,20 @@ button .requesting {
 	margin-left: 0.4em;
 }
 
-.cancel-button {
-	background: transparent;
+button.cancel-button {
+	background: #FFF !important;
 	-webkit-box-shadow: none;
 	-moz-box-shadow: none;
 	box-shadow: none;
-	color: #555;
-	font-weight: normal;
+	color: #555 !important;
 	float: right;
-	line-height: 35px;
-	margin-left: 15px;
+	margin: .5em .4em .5em 15px;
 	text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.35);
 }
 
-.cancel-button:hover {
-	color: #f04848;
-	line-height: 35px;
+button.cancel-button:hover {
+	color: #f04848 !important;
 	text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.35);
-	font-weight: normal;
 	background: transparent;
 	-webkit-box-shadow: none;
 	-moz-box-shadow: none;
@@ -6338,7 +6334,7 @@ button.ui-button::-moz-focus-inner {
 	border-width: 1px 0 0;
 	background-image: none;
 	margin-top: .5em;
-	padding: .3em 1em .5em .4em;
+	padding: .3em 1em .1em .4em;
 }
 
 .ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset {
