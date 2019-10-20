@@ -483,7 +483,7 @@ $("#listCompanies").on('mouseleave','.space-companies',function(){
     if(parseInt(dash_var.pgTotal) == pasa )
       {
         $('#siguiente-1, #siguiente-22').attr("style","color:grey !important; pointer-events: none")
-        $('#anterior-1').removeAttr("style")
+        $('#anterior-1, #anterior-22').removeAttr("style")
 			}
 			else
 			{
