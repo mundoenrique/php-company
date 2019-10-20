@@ -95,7 +95,7 @@ function notiSystem(title, message, icon, data) {
 		closeOnEscape: false,
 		dialogClass: 'hide-close',
 		open: function (event, ui) {
-			$('#system-type').addClass(icon);
+			$('#system-icon').addClass(icon);
 			$('#system-msg').html(message);
 
 			createButton(dialogMoldal, btnAccept, btn1);

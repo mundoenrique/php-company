@@ -5561,16 +5561,25 @@ li.ui-state-default.ui-corner-top:nth-child(3) {
 
 #system-info .ui-dialog-buttonpane {
 	border: none;
-	padding-right: 0;
+	padding: 0;
+	float: right;
+	width: 269px;
 }
 
 #system-info #cancel {
 	display: none;
 }
 
+.system-content {
+	float: left;
+}
+
 .system-msg {
 	text-align: justify;
-	width: 100%;
+	width: 250px;
+	float: right;
+	padding: 0;
+	margin-left: 3px;
 }
 
 .general-form-msg {
@@ -5724,12 +5733,10 @@ li.ui-state-default.ui-corner-top:nth-child(3) {
 }
 
 .ui-icon {
-	display: block;
+	display: inline-block;
 	text-indent: -99999px;
 	overflow: hidden;
 	background-repeat: no-repeat;
-	width: 16px;
-	height: 16px;
 }
 
 .ui-resizable {
@@ -5859,6 +5866,8 @@ li.ui-state-default.ui-corner-top:nth-child(3) {
 }
 
 .ui-button {
+	background-color: #ffdd00 !important;
+	border-color: #ffdd00 !important;
 	display: inline-block;
 	line-height: normal;
 	cursor: pointer;
@@ -5876,6 +5885,12 @@ li.ui-state-default.ui-corner-top:nth-child(3) {
 .ui-button:hover,
 .ui-button:active {
 	text-decoration: none;
+}
+
+.ui-button:focus,
+.ui-button:hover {
+	background: none;
+	font-weight: normal;
 }
 
 .ui-button .ui-button-text {
@@ -6219,6 +6234,8 @@ select.ui-datepicker-year {
 	position: absolute;
 	right: .3em;
 	top: 50%;
+	min-height: 0;
+	min-width: 0;
 	width: 21px;
 	margin: -10px 0 0 0;
 	padding: 1px;
@@ -6722,7 +6739,7 @@ body .ui-tooltip {
 }
 
 .ui-widget-header .ui-icon {
-	background-image: url(.../images/ui-icons_444444_256x240.png);
+	background-image: url(../images/ui-icons_444444_256x240.png);
 }
 
 .ui-state-default .ui-icon {

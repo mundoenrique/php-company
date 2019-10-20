@@ -111,7 +111,8 @@
 	</div>
 
 	<div id="system-info" class="hidden">
-		<p>
+		<p class="system-content">
+			<span id="system-icon" class="ui-icon"></span>
 			<span id="system-msg" class="system-msg"><?= lang('MESSAGE_SYSTEM'); ?></span>
 		</p>
 		<div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
