@@ -5901,6 +5901,19 @@ center button.novo-btn-secondary {
 	min-width: 80px;
 }
 
+.tabla-detalles {
+	width: 950px;
+}
+
+.datos-detalles th{
+	padding: 10px;
+}
+
+.tbody-detalles tr td.info-detal{
+	text-align: center;
+	padding: 5px;
+}
+
 .botones-OS {
 	float: right;
 	width: 430px;
