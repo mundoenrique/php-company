@@ -150,6 +150,15 @@ $urlCdn = get_cdn();
 			<input id="categoria_dos" type='hidden' data='<?php echo lang('CATEGORIAL_DOS'); ?>'/>
 			<input id="titulografico" type='hidden' data='<?php echo lang('GRAFICO_TITULO_TARJETAS'); ?>'/>
 			<input id="titulograficotext" type='hidden' data='<?php echo lang('GRAFICO_TITULO_TEXT_TARJETAS'); ?>'/>
+			<input id="fecha_emision" type='hidden' data='<?php echo lang('FECHA_EMISION'); ?>'/>
+			<input id="numero_lote" type='hidden' data='<?php echo lang('NUMERO_LOTE'); ?>'/>
+			<input id="numero_tarjeta" type='hidden' data='<?php echo lang('NUMERO_TARJETA'); ?>'/>
+			<input id="cedula" type='hidden' data='<?php echo lang('CEDULA'); ?>'/>
+			<input id="nombre" type='hidden' data='<?php echo lang('NOMBRE'); ?>'/>
+			<input id="apellido" type='hidden' data='<?php echo lang('APELLIDO'); ?>'/>
+			<input id="ubicación" type='hidden' data='<?php echo lang('UBICACIÓN'); ?>'/>
+			<input id="estado_emision" type='hidden' data='<?php echo lang('ESTADO_EMISION'); ?>'/>
+			<input id="estado_plastico" type='hidden' data='<?php echo lang('ESTADO_PLASTICO'); ?>'/>
 
 		</div>
 
