@@ -1,6 +1,53 @@
 'use strict'
 $(function() {
 	var data;
+	$.balloon.defaults.css = null;
+	disabledInputsform(false);
+
+	$('#login-btn').on('click', function(e) {
+		e.preventDefault();
+
+		$(".general-form-msg").html('');
+		var text = $(this).text();
+		var form = $('#login-form');
+		var user = getCredentialsUser();
+
+		validateForms(form, {handleMsg: false});
+		if(form.valid()) {
+
+			disabledInputsform(true);
+			$(this).html(loader);
+
+			grecaptcha.ready(function() {
+				grecaptcha
+				.execute('6Lejt6MUAAAAANd7KndpsZ2mRSQXuYHncIxFJDYf', {action: 'login'})
+				.then(function(token) {
+					if(token) {
+						validateLogin({token: token, user: user, text: text});
+					}
+				}, function(token) {
+					if(!token) {
+						title = prefixCountry + strCountry;
+						icon = iconWarning;
+						data = {
+							btn1: {
+								link: baseURL+'inicio',
+								action: 'redirect'
+							}
+						};
+						notiSystem(title, msg, icon, data);
+						restartFormLogin(text);
+					}
+				});
+			});
+		} else {
+			if (user.user=='' || user.pass=='d41d8cd98f00b204e9800998ecf8427e') {
+				$(".general-form-msg").html('Todos los campos son requeridos');
+			} else {
+				$(".general-form-msg").html('Combinación incorrecta de usuario y contraseña');
+			}
+		}
+	});
 
 	function disabledInputsform(disable){
 		$('#login-form input, #login-form button').attr('disabled', disable);
@@ -94,53 +141,8 @@ $(function() {
 		})
 	}
 
-	$.balloon.defaults.css = null;
-	disabledInputsform(false);
-
-	$('#login-btn').on('click', function(e) {
-		e.preventDefault();
-
-		$(".general-form-msg").html('');
-		var text = $(this).text();
-		var form = $('#login-form');
-		var user = getCredentialsUser();
-
-		validateForms(form, {handleMsg: false});
-		if(form.valid()) {
-
-			disabledInputsform(true);
-			$(this).html(loader);
-
-			grecaptcha.ready(function() {
-				grecaptcha
-				.execute('6Lejt6MUAAAAANd7KndpsZ2mRSQXuYHncIxFJDYf', {action: 'login'})
-				.then(function(token) {
-					validateLogin({token: token, user: user, text: text});
-				},function() {
-						title = prefixCountry + strCountry;
-						icon = iconWarning;
-						data = {
-							btn1: {
-								link: false,
-								action: 'close'
-							}
-						};
-						notiSystem(title, msg, icon, data);
-						restartFormLogin(text);
-				});
-			});
-		} else {
-
-			if (user.user.trim() || user.pass.trim()){
-				$(".general-form-msg").html('Todos los campos son requeridos');
-			} else {
-				$(".general-form-msg").html('Combinación incorrecta de usuario y contraseña');
-			}
-		}
-	});
-
 	$('#user_login, #user_pass').on('focus keypress', function() {
 		$(this).removeClass('validate-error');
-	});
+	})
 
 })
