@@ -40,8 +40,10 @@ options = {
 $('.monthpicker').monthpicker(options);
 $('.ui-datepicker.ui-widget.ui-widget-content.ui-helper-clearfix.ui-corner-all').addClass('monthpicker-border');
 
-//METODO PARA REALIZAR LA BUSQUEDA
-$("#repTarjetasEmitidas_btnBuscar").click(function () {
+	$('input[name=radio]').attr('checked', true);
+
+	//METODO PARA REALIZAR LA BUSQUEDA
+	$("#repTarjetasEmitidas_btnBuscar").click(function () {
 
 		var filtro_busq = {};
 		var $consulta;
