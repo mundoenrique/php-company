@@ -40,8 +40,10 @@ options = {
 $('.monthpicker').monthpicker(options);
 $('.ui-datepicker.ui-widget.ui-widget-content.ui-helper-clearfix.ui-corner-all').addClass('monthpicker-border');
 
-//METODO PARA REALIZAR LA BUSQUEDA
-$("#repTarjetasEmitidas_btnBuscar").click(function () {
+	$('input[name=radio]').attr('checked', true);
+
+	//METODO PARA REALIZAR LA BUSQUEDA
+	$("#repTarjetasEmitidas_btnBuscar").click(function () {
 
 		var filtro_busq = {};
 		var $consulta;
@@ -465,9 +467,7 @@ $("#repTarjetasEmitidas_btnBuscar").click(function () {
 						console.log(data.lista[selectId])
 						var dataGeneral = data.lista;
 						propiedadTrabajar = cellElement.class == 'emision' ? 'detalleEmisiones' : 'detallesReposiciones';
-						if(nombreProducto == dataGeneral.nomProducto && selectClass == ){
 
-						}
 
 						// //$.each(data.lista, function (posLista, itemLista) {
 						// 	 var dataTable = data.lista.detalleEmisiones[selectId];
