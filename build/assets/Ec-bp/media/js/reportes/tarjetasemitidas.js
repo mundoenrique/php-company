@@ -393,13 +393,20 @@ $("#repTarjetasEmitidas_btnBuscar").click(function () {
 								td = $(document.createElement("td")).appendTo(tr);
 								td.html($("#categoria_uno").attr("data"));
 								td = $(document.createElement("td")).appendTo(tr);
+								if(itemLista.totalEmision != 0){
 								td = $(document.createElement("a")).appendTo(td);
+								td.attr("title","emision");
+								}
+
 								td.attr("class", "emision");
 								td.attr("id", posLista);
 								td.html(itemLista.totalEmision);
 								td.attr("style", "text-align: center")
 								td = $(document.createElement("td")).appendTo(tr);
-								td = $(document.createElement("a")).appendTo(td);
+								if(itemLista.totalReposicionTarjeta != 0){
+									td = $(document.createElement("a")).appendTo(td);
+									td.attr("title","reposicion");
+								}
 								td.attr("class", "reposicion");
 								td.attr("id", posLista);
 								td.html(itemLista.totalReposicionTarjeta);
@@ -415,13 +422,19 @@ $("#repTarjetasEmitidas_btnBuscar").click(function () {
 								td = $(document.createElement("td")).appendTo(tr);
 								td.html($("#categoria_dos").attr("data"));
 								td = $(document.createElement("td")).appendTo(tr);
+								if(itemLista.emisionSuplementaria.totalEmision != 0){
 								td = $(document.createElement("a")).appendTo(td);
+								td.attr("title","emision suplementaria");
+								}
 								td.attr("id", posLista);
 								td.attr("class", "suplementario_emision");
 								td.html(itemLista.emisionSuplementaria.totalEmision);
 								td.attr("style", "text-align: center")
 								td = $(document.createElement("td")).appendTo(tr);
+								if(itemLista.emisionSuplementaria.totalReposicionTarjeta != 0){
 								td = $(document.createElement("a")).appendTo(td);
+								td.attr("title","reposición suplementaria");
+								}
 								td.attr("id", posLista);
 								td.attr("class", "suplementario_reposicion");
 								td.html(itemLista.emisionSuplementaria.totalReposicionTarjeta);
@@ -456,110 +469,91 @@ $("#repTarjetasEmitidas_btnBuscar").click(function () {
 
 					}
 					$("tbody.tbody-reportes").on('click', 'tr td', function (event) {
-						//console.log($(this).closest('table').find('th')[0].innerText)
 						$("#chart").children().remove();
 						var selectClass = $(event.target).attr('class');
 						var selectId = event.target.id;
 						var nombreProducto = $(this).closest('table').find('th')[0].innerText;
-						console.log(data.lista[selectId].detalleEmisiones)
-						console.log(data.lista[selectId])
 						var dataGeneral = data.lista;
-						propiedadTrabajar = cellElement.class == 'emision' ? 'detalleEmisiones' : 'detallesReposiciones';
-						if(nombreProducto == dataGeneral.nomProducto && selectClass == ){
+						var propiedadTrabajar = selectClass == 'emision' ? dataGeneral[selectId].detalleEmisiones : dataGeneral[selectId].detalleReposiciones;
+							console.log(dataGeneral)
+							console.log(propiedadTrabajar)
+							console.log(dataGeneral[selectId].detalleEmisiones)
 
-						}
+							if(propiedadTrabajar !== undefined || propiedadTrabajar == 0){
+								var contenidoTabla = $("#chart");
+								$("#chart").dialog({ modal: true, title: "Consulta tarjetas emitidas", width: 960, height: "auto", draggable: false });
+								var newTabla =$(document.createElement("table")).appendTo(contenidoTabla);
+								newTabla.attr("class", "tabla-detalles");
+								newTabla.attr("id", "tabla-detalles-general");
 
-						// //$.each(data.lista, function (posLista, itemLista) {
-						// 	 var dataTable = data.lista.detalleEmisiones[selectId];
-						// 	// console.log(dataTable);
+								thead = $(document.createElement("thead")).appendTo(newTabla);
+								thead.attr("id", "thead-detalles-principales");
+								thead.attr("class", "thead-detalles-principales");
+								tbody = $(document.createElement("tbody")).appendTo(newTabla);
+								tbody.attr("class", "tbody-detalles");
 
-						// 		//$.each(dataTable, function (key, detalLista){
-						// 			// console.log(detalLista)
-						// 				var contenidoTabla = $("#chart");
-						// 				$("#chart").dialog({ modal: true, title: "Consulta tarjetas emitidas", width: 960, height: "auto", draggable: false });
-						// 				var newTabla =$(document.createElement("table")).appendTo(contenidoTabla);
-						// 				newTabla.attr("class", "tabla-detalles");
-						// 				newTabla.attr("id", "tabla-detalles-general");
+								tr = $(document.createElement("tr")).appendTo(thead);
+								tr.attr("class", "datos-detalles");
+								th = $(document.createElement("th")).appendTo(tr);
+								th.html($("#fecha_emision").attr("data"));
+								th = $(document.createElement("th")).appendTo(tr);
+								th.html($("#numero_lote").attr("data"));
+								th = $(document.createElement("th")).appendTo(tr);
+								th.html($("#numero_tarjeta").attr("data"));
+								th = $(document.createElement("th")).appendTo(tr);
+								th.html($("#cedula").attr("data"));
+								th = $(document.createElement("th")).appendTo(tr);
+								th.html($("#nombre").attr("data"));
+								th = $(document.createElement("th")).appendTo(tr);
+								th.html($("#apellido").attr("data"));
+								th = $(document.createElement("th")).appendTo(tr);
+								th.html($("#ubicación").attr("data"));
+								th = $(document.createElement("th")).appendTo(tr);
+								th.html($("#estado_emision").attr("data"));
+								th = $(document.createElement("th")).appendTo(tr);
+								th.html($("#estado_plastico").attr("data"));
 
-						// 				thead = $(document.createElement("thead")).appendTo(newTabla);
-						// 				thead.attr("id", "thead-detalles-principales");
-						// 				thead.attr("class", "thead-detalles-principales");
-						// 				tbody = $(document.createElement("tbody")).appendTo(newTabla);
-						// 				tbody.attr("class", "tbody-detalles");
 
-						// 				tr = $(document.createElement("tr")).appendTo(thead);
-						// 				tr.attr("class", "datos-detalles");
-						// 				th = $(document.createElement("th")).appendTo(tr);
-						// 				th.html($("#fecha_emision").attr("data"));
-						// 				th = $(document.createElement("th")).appendTo(tr);
-						// 				th.html($("#numero_lote").attr("data"));
-						// 				th = $(document.createElement("th")).appendTo(tr);
-						// 				th.html($("#numero_tarjeta").attr("data"));
-						// 				th = $(document.createElement("th")).appendTo(tr);
-						// 				th.html($("#cedula").attr("data"));
-						// 				th = $(document.createElement("th")).appendTo(tr);
-						// 				th.html($("#nombre").attr("data"));
-						// 				th = $(document.createElement("th")).appendTo(tr);
-						// 				th.html($("#apellido").attr("data"));
-						// 				th = $(document.createElement("th")).appendTo(tr);
-						// 				th.html($("#ubicación").attr("data"));
-						// 				th = $(document.createElement("th")).appendTo(tr);
-						// 				th.html($("#estado_emision").attr("data"));
-						// 				th = $(document.createElement("th")).appendTo(tr);
-						// 				th.html($("#estado_plastico").attr("data"));
+									console.log(propiedadTrabajar[0].detalle.length)
+									$.each(propiedadTrabajar[0].detalle, function (i, tabla){
 
-						// 			$.each(dataTable, function (i, tabla){
-						// 				//console.log(tabla);
+										console.log(i , tabla)
+											tr = $(document.createElement("tr")).appendTo(tbody);
+											td = $(document.createElement("td")).appendTo(tr);
+											td.html(tabla.fechaEmision);
+											td.attr("class", "info-detal");
+											td = $(document.createElement("td")).appendTo(tr);
+											td.html(tabla.nroLote);
+											td.attr("class", "info-detal");
+											td = $(document.createElement("td")).appendTo(tr);
+											td.html(tabla.nroTarjeta);
+											td.attr("class", "info-detal");
+											td = $(document.createElement("td")).appendTo(tr);
+											td.html(tabla.cedula);
+											td.attr("class", "info-detal");
+											td = $(document.createElement("td")).appendTo(tr);
+											td.html(tabla.nombres);
+											td.attr("class", "info-detal");
+											td = $(document.createElement("td")).appendTo(tr);
+											td.html(tabla.apellidos);
+											td.attr("class", "info-detal");
+											td = $(document.createElement("td")).appendTo(tr);
+											td.html(tabla.ubicacion);
+											td.attr("class", "info-detal");
+											td = $(document.createElement("td")).appendTo(tr);
+											td.html(tabla.estadoEmision);
+											td.attr("class", "info-detal");
+											td = $(document.createElement("td")).appendTo(tr);
+											td.html(tabla.estadoPlastico);
+											td.attr("class", "info-detal");
+									});
 
-						// 					tr = $(document.createElement("tr")).appendTo(tbody);
-						// 					td = $(document.createElement("td")).appendTo(tr);
-						// 					td.html(tabla.fechaEmision);
-						// 					td.attr("class", "info-detal");
-						// 					td = $(document.createElement("td")).appendTo(tr);
-						// 					td.html(tabla.nroLote);
-						// 					td.attr("class", "info-detal");
-						// 					td = $(document.createElement("td")).appendTo(tr);
-						// 					td.html(tabla.nroTarjeta);
-						// 					td.attr("class", "info-detal");
-						// 					td = $(document.createElement("td")).appendTo(tr);
-						// 					td.html(tabla.cedula);
-						// 					td.attr("class", "info-detal");
-						// 					td = $(document.createElement("td")).appendTo(tr);
-						// 					td.html(tabla.nombres);
-						// 					td.attr("class", "info-detal");
-						// 					td = $(document.createElement("td")).appendTo(tr);
-						// 					td.html(tabla.apellidos);
-						// 					td.attr("class", "info-detal");
-						// 					td = $(document.createElement("td")).appendTo(tr);
-						// 					td.html(tabla.ubicacion);
-						// 					td.attr("class", "info-detal");
-						// 					td = $(document.createElement("td")).appendTo(tr);
-						// 					td.html(tabla.estadoEmision);
-						// 					td.attr("class", "info-detal");
-						// 					td = $(document.createElement("td")).appendTo(tr);
-						// 					td.html(tabla.estadoPlastico);
-						// 					td.attr("class", "info-detal");
-						// 			})
-							//	})
-						//});
 
-						// switch (selectClass) {
-						// 	case 'emision':
-						// 		console.log('se elegio' + selectClass);
-						// 		break;
-						// 	case 'reposicion':
-						// 		console.log('se elegio' + selectClass);
-						// 		break;
-						// 	case 'suplementario_emision':
-						// 		console.log('se elegio' + selectClass);
-						// 		break;
-						// 	case 'suplementario_reposicion':
-						// 		console.log('se elegio' + selectClass);
-						// 		break;
-						// 	default:
-						// 		console.log('no se elegio nada')
-						// 		break;
-						// }
+							}else{
+
+							console.log('falla')
+
+							}
 					});
 
 
