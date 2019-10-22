@@ -45,7 +45,7 @@
 	<div id="wrapper">
 		<?php
 			foreach($viewPage as $views) {
-			$this->load->view($views . '_content');
+				$this->load->view($views . '_content');
 			}
 		?>
 	</div>
@@ -110,10 +110,10 @@
 		<img src="<?= $this->asset->insertFile($loader, 'images/loading-gif') ?>" class="requesting" alt="<?= lang('ALT_LOADER'); ?>">
 	</div>
 
-	<div id="system-info" class="hidden">
+	<div id="system-info" class="hidden" rc-default="<?= lang('ERROR_RC_DEFAULT'); ?>">
 		<p class="system-content">
 			<span id="system-icon" class="ui-icon"></span>
-			<span id="system-msg" class="system-msg"><?= lang('MESSAGE_SYSTEM'); ?></span>
+			<span id="system-msg" class="system-msg"><?= lang('ERROR_MESSAGE_SYSTEM'); ?></span>
 		</p>
 		<div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
 			<div class="ui-dialog-buttonset novo-dialog-buttonset">
