@@ -7395,6 +7395,16 @@ button.green:hover {
 	height: 38px;
 }
 
+#tabla-detalles-general_wrapper > .dataTables_length, #tabla-detalles-general_wrapper > .dataTables_filter {
+	display: none;
+}
+
+.title-detalles-tabla{
+	padding: 10px;
+	margin-left: 10px;
+	font-size: 18px;
+}
+
 .prueba_fuego {
 	position: absolute;
 	background-color: green;
