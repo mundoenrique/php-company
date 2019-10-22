@@ -297,8 +297,8 @@ class Novo_User_Model extends NOVO_Model {
 		$logMessage = 'NOVO ['.$dataRequest->user.'] RESPONSE: recaptcha: País: "' .$this->config->item('country');
 		$logMessage.= '", Score: "' . $result["score"] .'", Hostname: "'. $result["hostname"].'"';
 		log_message('DEBUG', $logMessage);
-
 		$this->response->title = lang('SYSTEM_NAME');
+
 		if($result["score"] <= 0) {
 
 			$this->response->owner = 'captcha';
@@ -307,9 +307,9 @@ class Novo_User_Model extends NOVO_Model {
 			$this->response->msg = lang('VALIDATECAPTCHA_MSG-0');
 			$this->response->data = [
 				'btn1'=> [
-					'text'=> lang('BUTTON_ACCEPT'),
+					'text'=> lang('GEN_BTN_ACCEPT'),
 					'link'=> base_url('inicio'),
-					'action'=> 'close'
+					'action'=> 'redirect'
 				]
 			];
 		} else {
