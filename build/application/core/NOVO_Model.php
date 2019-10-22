@@ -55,7 +55,7 @@ class NOVO_Model extends CI_Model {
 		$this->response->code = 303;
 		$this->response->title = lang('SYSTEM_NAME');
 		$this->response->icon = 'ui-icon-alert';
-		$this->response->msg = '';
+		$this->response->msg = $this->isResponseRc == 0 ? lang('RESP_MSG-0') : '';
 		$this->response->data = [
 			'btn1'=> [
 				'text'=> lang('GEN_BTN_ACCEPT'),
