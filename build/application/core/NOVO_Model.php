@@ -55,6 +55,7 @@ class NOVO_Model extends CI_Model {
 		$this->response->code = 303;
 		$this->response->title = lang('SYSTEM_NAME');
 		$this->response->icon = 'ui-icon-alert';
+		$this->response->msg = '';
 		$this->response->data = [
 			'btn1'=> [
 				'text'=> lang('GEN_BTN_ACCEPT'),
@@ -73,7 +74,7 @@ class NOVO_Model extends CI_Model {
 				break;
 		}
 
-		return $this->response;
+		return $responseDecrypt;
 	}
 
 	public function responseToView()
