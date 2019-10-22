@@ -470,7 +470,7 @@ $('.ui-datepicker.ui-widget.ui-widget-content.ui-helper-clearfix.ui-corner-all')
 						$('.tabla-reportes tbody tr:even').addClass('even ');
 
 					}
-					$("tbody.tbody-reportes").on('click', 'tr td', function (event) {
+					$("tbody.tbody-reportes").on('click', 'tr td a', function (event) {
 						$("#chart").children().remove();
 						var selectClass = $(event.target).attr('class');
 						var selectId = event.target.id;
@@ -481,12 +481,18 @@ $('.ui-datepicker.ui-widget.ui-widget-content.ui-helper-clearfix.ui-corner-all')
 							console.log(propiedadTrabajar)
 							console.log(dataGeneral[selectId].detalleEmisiones)
 
-							if(propiedadTrabajar !== undefined || propiedadTrabajar == 0){
+							if(propiedadTrabajar.length != 0){
 								var contenidoTabla = $("#chart");
 								$("#chart").dialog({ modal: true, title: "Consulta tarjetas emitidas", width: 960, height: "auto", draggable: false });
 								var newTabla =$(document.createElement("table")).appendTo(contenidoTabla);
 								newTabla.attr("class", "tabla-detalles");
 								newTabla.attr("id", "tabla-detalles-general");
+
+
+								var div = $(document.createElement("div")).appendTo(newTabla);
+								div.attr("class", "title-detalles-tabla");
+								div.html(nombreProducto);
+								$(div).insertBefore($("#tabla-detalles-general"));
 
 								thead = $(document.createElement("thead")).appendTo(newTabla);
 								thead.attr("id", "thead-detalles-principales");
@@ -549,11 +555,31 @@ $('.ui-datepicker.ui-widget.ui-widget-content.ui-helper-clearfix.ui-corner-all')
 											td.html(tabla.estadoPlastico);
 											td.attr("class", "info-detal");
 									});
-
-
-							}else{
-
-							console.log('falla')
+									$('#tabla-detalles-general').dataTable({
+										"iDisplayLength": 4,
+										'bDestroy': true,
+										"sPaginationType": "full_numbers",
+										"oLanguage": {
+											"sProcessing": "Procesando...",
+											"sLengthMenu": "Mostrar _MENU_ registros",
+											"sZeroRecords": "No se encontraron resultados",
+											"sEmptyTable": "Ningún dato disponible en esta tabla",
+											"sInfo": "Mostrando registros del _START_ al _END_, de un total de _TOTAL_ registros",
+											"sInfoEmpty": "Mostrando registros del 0 al 0, de un total de 0 registros",
+											"sInfoFiltered": "",
+											"sInfoPostFix": "",
+											"sSearch": "",
+											"sUrl": "",
+											"sInfoThousands": ",",
+											"sLoadingRecords": "Cargando...",
+											"oPaginate": {
+												"sFirst": "<<",
+												"sLast": ">>",
+												"sNext": ">",
+												"sPrevious": "<"
+											}
+										}
+									});
 
 							}
 					});
