@@ -21,8 +21,9 @@ class User extends NOVO_Controller {
 		$view = 'login';
 
 		if($this->session->userdata('logged')) {
-
-			redirect(base_url('empresas'), 'location');
+			$oldUrl = str_replace($this->countryUri.'/', $this->config->item('country').'/', base_url('dashboard'));
+			$urlRedirect = $this->countryUri != 'bdb' ? $oldUrl : base_url('empresas');
+			redirect($urlRedirect, 'location');
 			exit();
 		}
 
