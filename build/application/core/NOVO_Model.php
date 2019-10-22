@@ -55,40 +55,32 @@ class NOVO_Model extends CI_Model {
 		$this->response->code = 303;
 		$this->response->title = lang('SYSTEM_NAME');
 		$this->response->icon = 'ui-icon-alert';
+		$this->response->data = [
+			'btn1'=> [
+				'text'=> lang('GEN_BTN_ACCEPT'),
+				'link'=> base_url('inicio'),
+				'action'=> 'redirect'
+			]
+		];
 		switch($this->isResponseRc) {
 			case -29:
 			case -61:
 				$this->response->msg = lang('ERROR_(-29)');
-				$this->response->data = base_url('inicio');
-				$this->response->data = [
-					'btn1'=> [
-						'text'=> lang('BUTTON_ACCEPT'),
-						'link'=> base_url('inicio'),
-						'action'=> 'redirect'
-					]
-				];
 				$this->session->sess_destroy();
 				break;
 			default:
-				$this->response->msg = lang('ERROR_GENERAL');
-				$this->response->data = [
-					'btn1'=> [
-						'text'=> lang('BUTTON_ACCEPT'),
-						'link'=> base_url('empresas'),
-						'action'=> 'redirect'
-					]
-				];
+				$this->response->msg = lang('ERROR_MESSAGE_SYSTEM');
 				break;
 		}
 
-		return $responseDecrypt;
+		return $this->response;
 	}
 
-	public function cypherData()
+	public function responseToView()
 	{
-		log_message('INFO', 'NOVO cypherData Method Initialized');
+		log_message('INFO', 'NOVO responseToView Method Initialized');
 		log_message('DEBUG', 'NOVO RESPONSE TO VIEW: '.json_encode($this->response));
 
-		return $this->cryptography->encrypt($this->response);
+		return $this->response;
 	}
 }
