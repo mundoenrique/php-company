@@ -93,12 +93,12 @@ class Encrypt_Connect {
 		$response = curl_exec($ch);
 		$httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
-		log_message('DEBUG','NOVO ['.$userName.'] RESPONSE CURL HTTP CODE: ' . $httpCode);
-
 		if(!$response) {
 			$response = new stdClass();
-			$response->rc = -9999;
+			$response->rc = lang('ERROR_RC_DEFAULT');
 		}
+
+		log_message('DEBUG','NOVO ['.$userName.'] RESPONSE CURL HTTP CODE: ' . $httpCode);
 
 		return $response;
 
