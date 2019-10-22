@@ -92,7 +92,8 @@ $lang['TITLE_MODIFICAR'] = 'Modificar';
 $lang['AYUDA'] = 'Ayuda';
 
 
-//BOTONES
+//BUTTONS
+$lang['GEN_BTN_ACCEPT']= 'Aceptar';
 $lang['BUTTON_ACCEPT']= 'Aceptar';
 $lang['BUTTON_CONTINUE']= 'Continuar';
 $lang['BUTTON_CANCEL']= 'Cancelar';
@@ -102,5 +103,4 @@ $lang['BACK'] = 'Volver atrás';
 $lang['OWNERSHIP'] = 'Powered by NovoPayment, Inc.';
 $lang['CREDITS'] = 'NovoPayment Inc. All rights reserved.';
 $lang['ALT_LOADER'] = 'Verificando...';
-$lang['MESSAGE_SYSTEM'] = 'En estos momentos no podemos atender tu solicitud, por favor intenta en unos minutos';
 $lang['CALLMODELS_INDEX_MSG'] = 'Combinación de caracteres no válida, por favor verifique e intente de nuevo';
