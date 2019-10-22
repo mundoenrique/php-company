@@ -226,6 +226,7 @@ if(!function_exists('languajeLoad')) {
 		switch($client) {
 			case 'bp':
 				$languages = [
+					'index' => [],
 					'login' => ['login'],
 					'recoveryPass'	=> ['pass-recovery'],
 					'terms'	=> ['terms'],
