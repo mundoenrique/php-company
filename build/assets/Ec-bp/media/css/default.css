@@ -1568,6 +1568,27 @@ select.ui-datepicker-year {
 	border: none;
 }
 
+#repTarjetasEmitidas_fecha_mes > .monthpicker {
+	display: none;
+}
+
+table.mtz-monthpicker {
+	display: table !important;
+	width: 100% !important;
+	text-transform: none !important;
+}
+
+.monthpicker-border {
+	padding: 0;
+	border: none !important;
+	position: relative;
+	z-index: 998 !important;
+}
+
+td.mtz-monthpicker-month {
+	cursor: pointer !important;
+}
+
 .ui-datepicker table {
 	width: 64%;
 	font-size: 15px;
@@ -5880,6 +5901,19 @@ center button.novo-btn-secondary {
 	min-width: 80px;
 }
 
+.tabla-detalles {
+	width: 950px;
+}
+
+.datos-detalles th{
+	padding: 10px;
+}
+
+.tbody-detalles tr td.info-detal{
+	text-align: center;
+	padding: 5px;
+}
+
 .botones-OS {
 	float: right;
 	width: 430px;
@@ -7359,6 +7393,16 @@ button.green:hover {
 	min-width: 100px;
 	float: left;
 	height: 38px;
+}
+
+#tabla-detalles-general_wrapper > .dataTables_length, #tabla-detalles-general_wrapper > .dataTables_filter {
+	display: none;
+}
+
+.title-detalles-tabla{
+	padding: 10px;
+	margin-left: 10px;
+	font-size: 18px;
 }
 
 .prueba_fuego {

@@ -114,7 +114,7 @@ class Reportes extends CI_Controller {
 							$_POST['fechaFin'] = $dataRequest->fechaFin;
 
 							$this->form_validation->set_rules('empresa', 'Empresa', 'trim|xss_clean|required');
-					$this->form_validation->set_rules('fechaInicial', 'Fecha Inicio', 'trim|xss_clean|regex_match[/^[0-9\/]+$/]');
+							$this->form_validation->set_rules('fechaInicial', 'Fecha Inicio', 'trim|xss_clean|regex_match[/^[0-9\/]+$/]');
 							$this->form_validation->set_rules('fechaFin', 'Fecha Fin', 'trim|xss_clean|regex_match[/^[0-9\/]+$/]');
 							$this->form_validation->set_rules('paginaActual', 'paginaActual', 'trim|xss_clean|required');
 
@@ -833,7 +833,7 @@ class Reportes extends CI_Controller {
 					$lastSessionD = $this->session->userdata('lastSession');
 					$jsRte = '../../../js/';
 					$thirdsJsRte = '../../../js/third_party/';
-					$FooterCustomInsertJS=["jquery-3.4.0.min.js", "jquery-ui-1.12.1.min.js","jquery.dataTables.min.js","aes.min.js","aes-json-format.min.js","reportes/tarjetasemitidas.js","kendo.dataviz.min.js","header.js","jquery.balloon.min.js","routes.js",$thirdsJsRte."jquery.validate.min.js",$jsRte."validate-forms.js",$thirdsJsRte."additional-methods.min.js"];
+					$FooterCustomInsertJS=["jquery-3.4.0.min.js", "jquery-ui-1.12.1.min.js","jquery.dataTables.min.js","aes.min.js","aes-json-format.min.js","jquery.mtz.monthpicker.js","reportes/tarjetasemitidas.js","kendo.dataviz.min.js","header.js","jquery.balloon.min.js","routes.js",$thirdsJsRte."jquery.validate.min.js",$jsRte."validate-forms.js",$thirdsJsRte."additional-methods.min.js"];
 					$FooterCustomJS="";
 					$titlePage="Conexión Empresas Online - Reportes";
 					$menuHeader = $this->parser->parse('widgets/widget-menuHeader',array(),TRUE);
@@ -895,12 +895,16 @@ class Reportes extends CI_Controller {
 							)
 						);
 						$_POST['empresa'] = $dataRequest->empresa;
-						$_POST['fechaInicial'] = $dataRequest->fechaInicial;
-						$_POST['fechaFin']  = $dataRequest->fechaFin;
+						$_POST['fechaMes'] = $dataRequest->fechaMes;
+						$_POST['fechaInicial'] = (isset($dataRequest->fechaInicial))?$dataRequest->fechaInicial:"";
+						$_POST['fechaFin']  = (isset($dataRequest->fechaFin))?$dataRequest->fechaFin:"";
+
 						$this->form_validation->set_rules('empresa', 'Empresa', 'trim|xss_clean|required');
-						$this->form_validation->set_rules('fechaInicial', 'Fecha Inicio', 'trim|xss_clean|required|regex_match[/^[0-9\/]+$/]');
-						$this->form_validation->set_rules('fechaFin', 'Fecha Fin', 'trim|xss_clean|required|regex_match[/^[0-9\/]+$/]');
+						$this->form_validation->set_rules('fechaMes', 'Fecha Mes', 'trim|xss_clean|regex_match[/^[0-9\/]+$/]');
+						$this->form_validation->set_rules('fechaInicial', 'Fecha Inicio', 'trim|xss_clean|regex_match[/^[0-9\/]+$/]');
+						$this->form_validation->set_rules('fechaFin', 'Fecha Fin', 'trim|xss_clean|regex_match[/^[0-9\/]+$/]');
 						$this->form_validation->set_error_delimiters('', '---');
+						}
 							if ($this->form_validation->run() == FALSE)
 							{
 								log_message('DEBUG', 'NOVO VALIDATION ERRORS: '.json_encode(validation_errors()));
@@ -912,17 +916,18 @@ class Reportes extends CI_Controller {
 							else
 							{
 								$empresa = $dataRequest->empresa;
-								$fechaInicial = $dataRequest->fechaInicial;
-								$fechaFin = $dataRequest->fechaFin;
+								$fechaMes = (isset($dataRequest->fechaMes))?$dataRequest->fechaMes:"";
+								$fechaInicial = (isset($dataRequest->fechaInicial))?$dataRequest->fechaInicial: "";
+								$fechaFin = (isset($dataRequest->fechaFin))?$dataRequest->fechaFin: "";
 								$tipoConsulta = $dataRequest->radioGeneral;
 								$username = $this->session->userdata('userName');
 								$token = $this->session->userdata('token');
-								unset($_POST['empresa'], $_POST['fechaInicial'], $_POST['fechaFin']);
-								$pruebaTabla = $this->callWSTarjetasEmitidas($urlCountry,$token,$username,$empresa,$fechaInicial,$fechaFin,$tipoConsulta);
+								unset($_POST['empresa'], $_POST['fechaMes'], $_POST['fechaInicial'], $_POST['fechaFin']);
+								$pruebaTabla = $this->callWSTarjetasEmitidas($urlCountry,$token,$username,$empresa,$fechaMes,$fechaInicial,$fechaFin,$tipoConsulta);
 								$pruebaTabla = $this->cryptography->encrypt($pruebaTabla);
 								$this->output->set_content_type('application/json')->set_output(json_encode($pruebaTabla));
 							}
-					}
+
 			}else{
 					$this->session->sess_destroy();
 					$responseError = ['ERROR' => lang('ERROR_(-29)'), "rc"=> "-29"];
@@ -938,7 +943,7 @@ class Reportes extends CI_Controller {
 	 * @param  string $urlCountry
 	 * @return JSON
 	 */
-	private function callWSTarjetasEmitidas($urlCountry,$token,$username,$empresa,$fechaInicial,$fechaFin,$tipoConsulta){
+	private function callWSTarjetasEmitidas($urlCountry,$token,$username,$empresa,$fechaMes,$fechaInicial,$fechaFin, $tipoConsulta){
 			$this->lang->load('erroreseol');//HOJA DE ERRORES;
 			$canal = "ceo";
 			$modulo="reportes";
@@ -954,6 +959,7 @@ class Reportes extends CI_Controller {
 					"idOperation"=>$operation,
 					"className"=> $className,
 					"accodcia"=> $empresa,
+					"fechaMes"=> $fechaMes,
 					"fechaIni"=> $fechaInicial,
 					"fechaFin"=> $fechaFin,
 					"tipoConsulta"=> $tipoConsulta,
@@ -1033,6 +1039,7 @@ class Reportes extends CI_Controller {
 					$idEmpresa = $this->input->post('idEmpresa');
 					$nomEmpresa = $this->input->post('nomEmpresa');
 					$empresa = $this->input->post('empresa');
+					$fechaMes = $this->input->post('fechaMes');
 					$fechaInicial = $this->input->post('fechaInicial');
 					$fechaFin = $this->input->post('fechaFin');
 					$tipoConsulta = $this->input->post('radioGeneral');
@@ -1045,6 +1052,7 @@ class Reportes extends CI_Controller {
 							"idExtEmp"=> $idEmpresa,
 							"nombreEmpresa"=> $nomEmpresa,
 							"accodcia"=> $empresa,
+							"fechaMes"=> $fechaMes,
 							"fechaIni"=> $fechaInicial,
 							"fechaFin"=> $fechaFin,
 							"tipoConsulta"=> $tipoConsulta,
