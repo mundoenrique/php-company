@@ -2,6 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 $lang['ERROR_MESSAGE_SYSTEM'] = 'En este momento no podemos atender tu solicitud, por favor intenta más tarde';
 $lang['ERROR_RC_DEFAULT'] = -9999;
+$lang['ERROR_DEFAULT-CODE'] = 4;
 $lang['ERROR_TIMEOUT'] = "El servidor esta demorando mucho tiempo en responder por favor intentalo de nuevo";
 $lang['ERROR_GENERICO_USER']= "Error en Sistema, por favor intente nuevamente.";
 $lang['ERROR_CAMBIO_CLAVE']= "Error en el formulario.";

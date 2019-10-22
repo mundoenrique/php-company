@@ -76,7 +76,6 @@ $lang['CMBVHI'] = 'Vehículos';
 $lang['CMBCTA'] = 'Cuentas';
 $lang['CMBVJE'] = 'Viajes';
 //SETTINGS
-//CONFIGURACION
 $lang['CARGANDO'] = 'Cargando...';
 $lang['CONFIGURACION'] = 'Configuración';
 $lang['SUBMENU_TARIFAS'] = 'Tarifas';
@@ -90,15 +89,12 @@ $lang['CONFIG_EMPR'] = 'Configuración de empresa';
 $lang['CONFIG_SUCU'] = 'Configuración de sucursal';
 $lang['TITLE_MODIFICAR'] = 'Modificar';
 $lang['AYUDA'] = 'Ayuda';
-
-
 //BUTTONS
 $lang['GEN_BTN_ACCEPT']= 'Aceptar';
 $lang['BUTTON_ACCEPT']= 'Aceptar';
 $lang['BUTTON_CONTINUE']= 'Continuar';
 $lang['BUTTON_CANCEL']= 'Cancelar';
 $lang['BACK'] = 'Volver atrás';
-
 //MASTER_CONTENT
 $lang['OWNERSHIP'] = 'Powered by NovoPayment, Inc.';
 $lang['CREDITS'] = 'NovoPayment Inc. All rights reserved.';

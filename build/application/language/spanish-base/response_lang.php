@@ -2,6 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 // Novo_User_Model
+$lang['RESP_MSG-0'] = 'Proceso ejecutado exitosamente';
 $lang['LOGIN_MSG-0'] = 'Ingreso exitoso';
 $lang['LOGIN_TITLE-1']= 'Usuario incorrecto';
 $lang['LOGIN_MSG-1']= "Usuario o contraseña inválido";

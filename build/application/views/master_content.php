@@ -110,7 +110,7 @@
 		<img src="<?= $this->asset->insertFile($loader, 'images/loading-gif') ?>" class="requesting" alt="<?= lang('ALT_LOADER'); ?>">
 	</div>
 
-	<div id="system-info" class="hidden" rc-default="<?= lang('ERROR_RC_DEFAULT'); ?>">
+	<div id="system-info" class="hidden" default-code="<?= lang('ERROR_DEFAULT-CODE'); ?>">
 		<p class="system-content">
 			<span id="system-icon" class="ui-icon"></span>
 			<span id="system-msg" class="system-msg"><?= lang('ERROR_MESSAGE_SYSTEM'); ?></span>
