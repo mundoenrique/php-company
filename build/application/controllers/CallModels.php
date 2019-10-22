@@ -44,6 +44,9 @@ class CallModels extends Novo_Controller {
 				}
 			}
 			unset($_POST);
+			languageLoad(NULL, $this->rule);
+			$this->config->set_item('language', 'spanish-'.$this->countryUri);
+			languageLoad($this->countryUri, $this->rule);
 			$this->load->model($this->model, 'modelLoad');
 			$method = $this->method;
 			$this->dataResponse = $this->modelLoad->$method($this->request);

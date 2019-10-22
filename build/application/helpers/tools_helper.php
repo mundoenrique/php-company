@@ -215,19 +215,20 @@ if(!function_exists('menuRoute')) {
 }
 
 if(!function_exists('languajeLoad')) {
-	function languageLoad($client = 'default_lang') {
+	function languageLoad($client = 'default_lang', $langFiles = FALSE) {
 		$CI = &get_instance();
 		$class = $CI->router->fetch_class();
-		$langFiles = $CI->router->fetch_method();
+		$langFiles = $langFiles ?: $CI->router->fetch_method();
 		$languages = [];
 		$lanGeneral = ['bp'];
+		$client = !$client ? 'default_lang' : $client;
 		log_message('INFO', 'NOVO HELPER languajeLoad Initialized for controller '.$class. ' and method '.$langFiles);
 
 		switch($client) {
 			case 'bp':
 				$languages = [
-					'index' => [],
 					'login' => ['login'],
+					'validatecaptcha' => ['login'],
 					'recoveryPass'	=> ['pass-recovery'],
 					'terms'	=> ['terms'],
 				];
@@ -238,6 +239,7 @@ if(!function_exists('languajeLoad')) {
 			case 'co':
 				$languages = [
 					'login' => ['login'],
+					'validatecaptcha' => ['login'],
 					'recoveryPass'	=> ['pass-recovery'],
 					'terms'	=> ['terms'],
 				];
@@ -245,16 +247,19 @@ if(!function_exists('languajeLoad')) {
 			case 'pe':
 				$languages = [
 					'login' => ['login'],
+					'validatecaptcha' => ['login'],
 				];
 				break;
 			case 'us':
 				$languages = [
 					'login' => ['login'],
+					'validatecaptcha' => ['login'],
 				];
 				break;
 			case 've':
 				$languages = [
 					'login' => ['login'],
+					'validatecaptcha' => ['login'],
 					'recoveryPass'	=> ['pass-recovery'],
 					'terms'	=> ['terms'],
 				];
@@ -262,6 +267,7 @@ if(!function_exists('languajeLoad')) {
 			default:
 				$languages = [
 					'login' => ['login', 'signin'],
+					'validatecaptcha' => ['login'],
 					'recoveryPass'	=> ['pass-recovery'],
 					'changePassword'	=> [],
 					'finishSession'	=> [],
