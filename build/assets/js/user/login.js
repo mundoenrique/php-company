@@ -22,9 +22,7 @@ $(function() {
 				grecaptcha
 				.execute('6Lejt6MUAAAAANd7KndpsZ2mRSQXuYHncIxFJDYf', {action: 'login'})
 				.then(function(token) {
-					if(token) {
-						validateLogin({token: token, user: user, text: text});
-					}
+					validateLogin({token: token, user: user, text: text});
 				}, function(token) {
 					if(!token) {
 						title = prefixCountry + strCountry;
@@ -124,10 +122,9 @@ $(function() {
 			dataLogin: [dataValidateLogin.user, dataValidateLogin.text]
 		}
 		verb = "POST"; who = 'User'; where = 'validateCaptcha';
-		// verb = "POST"; who = 'User'; where = 'Login'; data = user; // llama al login
 		callNovoCore(verb, who, where, data, function(response) {
 
-			if (response.code !== 0 && response.owner === 'captcha'){
+			if (response.code !== 0 && response.owner === 'captcha') {
 
 				notiSystem(response.title, response.msg, response.icon, response.data);
 				restartFormLogin(dataValidateLogin.text);

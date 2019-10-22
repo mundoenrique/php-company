@@ -43,32 +43,30 @@ function callNovoCore(verb, who, where, data, _response_) {
 		data: { request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook) },
 		context: document.body,
 		dataType: 'json'
-	}).done(function (response) {
+	}).done(function (response, textStatus, jqXHR) {
+
 		response = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, { format: CryptoJSAesJson }).toString(CryptoJS.enc.Utf8))
 
-		if(response.code === 303){
+		if(response.code === 303) {
 			notiSystem(response.title, response.msg, response.icon, response.data);
-			response.code = 'unanswered';
 		}
 
-		if (response.data !== 'finishSession') {
-			_response_(response);
-		}
-	}).fail(function (xhr) {
-		title = prefixCountry + strCountry;
-		icon = iconWarning;
-		data = {
-			btn1: {
-				class: 'novo-btn-primary-modal',
-				link: baseURL+'empresas',
-				action: 'close'
+		_response_(response);
+
+	}).fail(function (jqXHR, textStatus, errorThrown ) {
+
+		var response = {
+			code: parseInt(getPropertyOfElement('system-info', 'rc-default')),
+			title: prefixCountry + strCountry,
+			icon: iconWarning,
+			data: {
+				btn1: {
+					link: baseURL+'inicio',
+					action: 'redirect'
+				}
 			}
 		};
-		notiSystem(title, null, icon, data);
-		var resp = {
-			code: 'unanswered'
-		}
-		_response_(resp);
+		_response_(response);
 	});
 }
 
