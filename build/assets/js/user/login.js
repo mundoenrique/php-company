@@ -11,6 +11,9 @@ $(function() {
 		var text = $(this).text();
 		var form = $('#login-form');
 		var user = getCredentialsUser();
+		var captcha = getPropertyOfElement('recaptcha');
+		where = getPropertyOfElement('login-uri', '#widget-signin');
+		console.log('captcha', captcha)
 
 		validateForms(form, {handleMsg: false});
 		if(form.valid()) {
@@ -18,26 +21,30 @@ $(function() {
 			disabledInputsform(true);
 			$(this).html(loader);
 
-			grecaptcha.ready(function() {
-				grecaptcha
-				.execute('6Lejt6MUAAAAANd7KndpsZ2mRSQXuYHncIxFJDYf', {action: 'login'})
-				.then(function(token) {
-					validateLogin({token: token, user: user, text: text});
-				}, function(token) {
-					if(!token) {
-						title = prefixCountry + strCountry;
-						icon = iconWarning;
-						data = {
-							btn1: {
-								link: baseURL+'inicio',
-								action: 'redirect'
-							}
-						};
-						notiSystem(title, msg, icon, data);
-						restartFormLogin(text);
-					}
+			if(captcha) {
+				grecaptcha.ready(function() {
+					grecaptcha
+					.execute('6Lejt6MUAAAAANd7KndpsZ2mRSQXuYHncIxFJDYf', {action: 'login'})
+					.then(function(token) {
+						validateLogin({token: token, user: user, where: where});
+					}, function(token) {
+						if(!token) {
+							title = prefixCountry + strCountry;
+							icon = iconWarning;
+							data = {
+								btn1: {
+									link: baseURL+'inicio',
+									action: 'redirect'
+								}
+							};
+							notiSystem(title, msg, icon, data);
+							restartFormLogin(text);
+						}
+					});
 				});
-			});
+			} else {
+				validateLogin({token: 'token', user: user, text: text, where: where});
+			}
 		} else {
 			if (user.user=='' || user.pass=='d41d8cd98f00b204e9800998ecf8427e') {
 				$(".general-form-msg").html('Todos los campos son requeridos');
@@ -72,8 +79,32 @@ $(function() {
 		}
 	};
 
+	function validateLogin(dataValidateLogin){
+		data = {
+			user: dataValidateLogin.user.user,
+			token: dataValidateLogin.token,
+			dataLogin: [dataValidateLogin.user, dataValidateLogin.text]
+		}
+		verb = "POST"; who = 'User'; where = dataValidateLogin.where;
+		callNovoCore(verb, who, where, data, function(response) {
+
+			if (response.code !== 0 && response.owner === 'captcha') {
+
+				notiSystem(response.title, response.msg, response.icon, response.data);
+				restartFormLogin(dataValidateLogin.text);
+
+			} else {
+				validateResponseLogin(response, dataValidateLogin.text);
+			}
+		})
+	}
+
+	function validateResponseLogin(response, textBtn) {
+		responseCodeLogin[response.code](response, textBtn);
+	}
+
 	const responseCodeLogin = {
-		0: function(response){
+		0: function(response) {
 			$(location).attr('href', response.data)
 		},
 		1: function(response, textBtn){
@@ -85,7 +116,7 @@ $(function() {
 			});
 			restartFormLogin(textBtn);
 		},
-		2: function(){
+		2: function() {
 			user.active = 1;
 			verb = "POST"; who = 'User'; where = 'Login'; data = getCredentialsUser();
 			callNovoCore(verb, who, where, data, function(response) {
@@ -104,38 +135,10 @@ $(function() {
 			}
 			restartFormLogin(textBtn);
 		},
-		99: function(response, textBtn){
-			notiSystem(response.title, response.msg, response.icon, response.data);
+		4: function(response, textBtn) {
+			console.log('aqui');
 			restartFormLogin(textBtn);
 		}
-	}
-
-	function validateResponseLogin(response, textBtn) {
-		const property = responseCodeLogin.hasOwnProperty(response.code) ? response.code : 99
-		responseCodeLogin[property](response, textBtn);
-	}
-
-	function validateLogin(dataValidateLogin){
-		data = {
-			user: dataValidateLogin.user.user,
-			token: dataValidateLogin.token,
-			dataLogin: [dataValidateLogin.user, dataValidateLogin.text]
-		}
-		verb = "POST"; who = 'User'; where = 'validateCaptcha';
-		callNovoCore(verb, who, where, data, function(response) {
-
-			if (response.code !== 0 && response.owner === 'captcha') {
-
-				notiSystem(response.title, response.msg, response.icon, response.data);
-				restartFormLogin(dataValidateLogin.text);
-
-				setTimeout(function() {
-					$("#user_login").hideBalloon();
-				}, 2000);
-			} else {
-				validateResponseLogin(response, dataValidateLogin.text);
-			}
-		})
 	}
 
 	$('#user_login, #user_pass').on('focus keypress', function() {

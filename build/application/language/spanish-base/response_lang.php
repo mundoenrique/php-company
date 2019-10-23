@@ -1,7 +1,10 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
 // Novo_User_Model
+$lang['ERROR_MESSAGE_SYSTEM'] = 'En este momento no podemos atender tu solicitud, por favor intenta más tarde';
+$lang['ERROR_RC_DEFAULT'] = -9999;
+$lang['RES_DEFAULT_CODE'] = 4;
+$lang['ERROR_TIMEOUT'] = "El servidor esta demorando mucho tiempo en responder por favor intentalo de nuevo";
 $lang['RESP_MSG-0'] = 'Proceso ejecutado exitosamente';
 $lang['LOGIN_MSG-0'] = 'Ingreso exitoso';
 $lang['LOGIN_TITLE-1']= 'Usuario incorrecto';

@@ -62,7 +62,7 @@ class Novo_User_Model extends NOVO_Model {
 
 				$this->session->set_userdata($userData);
 				$this->response->code = 0;
-				$this->response->data = base_url(lang('LOGIN_SUCCESS'));
+				$this->response->data = base_url(lang('GEN_ENTERPRISE_LIST'));
 				break;
 			case -2:
 			case -185:
@@ -286,7 +286,7 @@ class Novo_User_Model extends NOVO_Model {
 		$this->load->library('recaptcha');
 		$result = $this->recaptcha->verifyResponse($dataRequest->token);
 
-		$logMessage = 'NOVO ['.$dataRequest->user.'] RESPONSE: recaptcha: País: "' .$this->config->item('country');
+		$logMessage = 'NOVO ['.$dataRequest->user.'] RESPONSE: recaptcha País: "' .$this->config->item('country');
 		$logMessage.= '", Score: "' . $result["score"] .'", Hostname: "'. $result["hostname"].'"';
 		log_message('DEBUG', $logMessage);
 		$this->response->title = lang('SYSTEM_NAME');

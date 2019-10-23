@@ -34,6 +34,7 @@ function callNovoCore(verb, who, where, data, _response_) {
 		where: where,
 		data: data
 	});
+	var code = parseInt(getPropertyOfElement('default-code', '#system-info'));
 
 	dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, { format: CryptoJSAesJson }).toString();
 
@@ -47,16 +48,15 @@ function callNovoCore(verb, who, where, data, _response_) {
 
 		response = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, { format: CryptoJSAesJson }).toString(CryptoJS.enc.Utf8))
 
-		if(response.code === 303) {
+		if(response.code === code) {
 			notiSystem(response.title, response.msg, response.icon, response.data);
 		}
 
 		_response_(response);
 
 	}).fail(function (jqXHR, textStatus, errorThrown ) {
-
 		var response = {
-			code: parseInt(getPropertyOfElement('system-info', 'rc-default')),
+			code: code,
 			title: prefixCountry + strCountry,
 			icon: iconWarning,
 			data: {
@@ -66,6 +66,7 @@ function callNovoCore(verb, who, where, data, _response_) {
 				}
 			}
 		};
+		notiSystem(response.title, response.msg, response.icon, response.data);
 		_response_(response);
 	});
 }
@@ -76,7 +77,6 @@ function callNovoCore(verb, who, where, data, _response_) {
  * @date 05/03/2019
  */
 function notiSystem(title, message, icon, data) {
-
 	var btnAccept = $('#accept');
 	var btnCancel = $('#cancel');
 	var dialogMoldal = $('#system-info');

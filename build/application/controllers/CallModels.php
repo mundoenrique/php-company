@@ -67,6 +67,13 @@ class CallModels extends Novo_Controller {
 			];
 			$this->session->sess_destroy();
 		}
+		$data = $this->dataResponse->data;
+		if(!is_array($data) && strpos($data, 'dashboard') !== FALSE) {
+			$data = str_replace($this->countryUri.'/', $this->config->item('country').'/', $data);
+		} elseif(is_array($data) && strpos($data['btn1']['link'], 'dashboard') !== FALSE) {
+			$data['btn1']['link'] = str_replace($this->countryUri.'/', $this->config->item('country').'/', $data['btn1']['link']);
+		}
+		$this->dataResponse->data = $data;
 		$dataResponse = $this->cryptography->encrypt($this->dataResponse);
 		$this->output->set_content_type('application/json')->set_output(json_encode($dataResponse));
 	}

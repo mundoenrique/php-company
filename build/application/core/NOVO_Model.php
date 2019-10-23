@@ -52,14 +52,14 @@ class NOVO_Model extends CI_Model {
 		}
 
 		$this->isResponseRc = $responseDecrypt->rc;
-		$this->response->code = 303;
+		$this->response->code = lang('RES_DEFAULT_CODE');
 		$this->response->title = lang('SYSTEM_NAME');
 		$this->response->icon = 'ui-icon-alert';
 		$this->response->msg = $this->isResponseRc == 0 ? lang('RESP_MSG-0') : '';
 		$this->response->data = [
 			'btn1'=> [
 				'text'=> lang('GEN_BTN_ACCEPT'),
-				'link'=> base_url('inicio'),
+				'link'=> base_url(lang('GEN_ENTERPRISE_LIST')),
 				'action'=> 'redirect'
 			]
 		];
