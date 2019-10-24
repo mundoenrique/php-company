@@ -19,6 +19,7 @@ class User extends NOVO_Controller {
 	{
 		log_message('INFO', 'NOVO User: index Method Initialized');
 		$view = 'login';
+		$this->render->loginUri = 'Login';
 
 		if($this->session->userdata('logged')) {
 			$oldUrl = str_replace($this->countryUri.'/', $this->config->item('country').'/', base_url('dashboard'));
@@ -44,9 +45,11 @@ class User extends NOVO_Controller {
 		$this->session->unset_userdata($userData);
 
 		$this->load->library('user_agent');
-		$this->load->library('recaptcha');
-
-
+		if($this->render->activeRecaptcha) {
+			$this->load->library('recaptcha');
+			$this->render->scriptCaptcha = $this->recaptcha->getScriptTag();
+			$this->render->loginUri = 'validateCaptcha';
+		}
 
 		$browser = strtolower($this->agent->browser());
 		$version = (float) $this->agent->version();
@@ -88,7 +91,6 @@ class User extends NOVO_Controller {
 
 		$this->views = $views;
 		$this->render->titlePage = lang('SYSTEM_NAME');
-		$this->render->scriptCaptcha = $this->recaptcha->getScriptTag();
 		$this->loadView($view);
 	}
 	/**

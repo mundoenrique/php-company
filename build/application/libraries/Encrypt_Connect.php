@@ -84,7 +84,7 @@ class Encrypt_Connect {
 		curl_setopt($ch, CURLOPT_URL, $urlWS);
 		curl_setopt($ch, CURLOPT_POST, TRUE);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-		curl_setopt($ch, CURLOPT_TIMEOUT, 58);
+		curl_setopt($ch, CURLOPT_TIMEOUT, 59);
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $request);
 		curl_setopt($ch, CURLOPT_HTTPHEADER, array(
 			'Content-Type: text/plain',
@@ -96,6 +96,7 @@ class Encrypt_Connect {
 		if(!$response) {
 			$response = new stdClass();
 			$response->rc = lang('ERROR_RC_DEFAULT');
+			log_message('INFO','NOVO ['.$userName.'] RESPONSE RC DEFAULT: ' . $response->rc);
 		}
 
 		log_message('DEBUG','NOVO ['.$userName.'] RESPONSE CURL HTTP CODE: ' . $httpCode);

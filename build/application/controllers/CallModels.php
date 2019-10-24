@@ -53,14 +53,14 @@ class CallModels extends Novo_Controller {
 
 		} else {
 			log_message('DEBUG', 'NOVO VALIDATION ERRORS: '.json_encode(validation_errors()));
-			$this->dataResponse->code = 303;
+			$this->dataResponse->code = lang('RES_DEFAULT_CODE');;
 			$this->dataResponse->title = lang('SYSTEM_NAME');
 			$this->dataResponse->msg = lang('CALLMODELS_INDEX_MSG');
 			$this->dataResponse->data = base_url('inicio');
 			$this->dataResponse->icon = 'ui-icon-alert';
 			$this->dataResponse->data = [
 				'btn1'=> [
-					'text'=> lang('BUTTON_ACCEPT'),
+					'text'=> lang('GEN_BTN_ACCEPT'),
 					'link'=> base_url('inicio'),
 					'action'=> 'redirect'
 				]
@@ -68,10 +68,12 @@ class CallModels extends Novo_Controller {
 			$this->session->sess_destroy();
 		}
 		$data = $this->dataResponse->data;
+		$dataLink = isset($data['btn1']['link']) ? $data['btn1']['link'] : FALSE;
 		if(!is_array($data) && strpos($data, 'dashboard') !== FALSE) {
 			$data = str_replace($this->countryUri.'/', $this->config->item('country').'/', $data);
-		} elseif(is_array($data) && strpos($data['btn1']['link'], 'dashboard') !== FALSE) {
-			$data['btn1']['link'] = str_replace($this->countryUri.'/', $this->config->item('country').'/', $data['btn1']['link']);
+		} elseif($dataLink && !is_array($dataLink) && strpos($dataLink, 'dashboard') !== FALSE) {
+			$dataLink = str_replace($this->countryUri.'/', $this->config->item('country').'/', $dataLink);
+			$data['btn1']['link'] =  $dataLink;
 		}
 		$this->dataResponse->data = $data;
 		$dataResponse = $this->cryptography->encrypt($this->dataResponse);

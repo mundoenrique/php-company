@@ -16,7 +16,7 @@ var loader = $('#loader').html();
 var prefixCountry = country !== 'bp' ? 'Empresas Online ' : '';
 var settingsCountry = { bp: 'Conexión Empresas', co: 'Colombia', pe: 'Perú', us: 'Perú', ve: 'Venezuela' };
 var strCountry = settingsCountry[country];
-var verb, who, where, data, title, msg, icon, data, dataResponse;
+var verb, who, where, data, title, msg, icon, dataResponse;
 
 $('input[type=text], input[type=password], input[type=textarea]').attr('autocomplete', 'off');
 
@@ -25,16 +25,16 @@ $('input[type=text], input[type=password], input[type=textarea]').attr('autocomp
  * @author J. Enrique Peñaloza Piñero
  * @date 15/04/2019
  */
-function callNovoCore(verb, who, where, data, _response_) {
+function callNovoCore(verb, who, where, request, _response_) {
 	var ceo_cook = decodeURIComponent(
 		document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 	);
 	var dataRequest = JSON.stringify({
 		who: who,
 		where: where,
-		data: data
+		data: request
 	});
-	var code = parseInt(getPropertyOfElement('default-code', '#system-info'));
+	var codeResp = parseInt(getPropertyOfElement('default-code', '#system-info'));
 
 	dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, { format: CryptoJSAesJson }).toString();
 
@@ -48,7 +48,7 @@ function callNovoCore(verb, who, where, data, _response_) {
 
 		response = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, { format: CryptoJSAesJson }).toString(CryptoJS.enc.Utf8))
 
-		if(response.code === code) {
+		if(response.code === codeResp) {
 			notiSystem(response.title, response.msg, response.icon, response.data);
 		}
 
@@ -56,7 +56,7 @@ function callNovoCore(verb, who, where, data, _response_) {
 
 	}).fail(function (jqXHR, textStatus, errorThrown ) {
 		var response = {
-			code: code,
+			code: codeResp,
 			title: prefixCountry + strCountry,
 			icon: iconWarning,
 			data: {

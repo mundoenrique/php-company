@@ -59,8 +59,8 @@ class Novo_User_Model extends NOVO_Model {
 					'nombreCompleto' => $fullName,
 					'logged_in' => TRUE
 				];
-
 				$this->session->set_userdata($userData);
+
 				$this->response->code = 0;
 				$this->response->data = base_url(lang('GEN_ENTERPRISE_LIST'));
 				break;
@@ -77,7 +77,6 @@ class Novo_User_Model extends NOVO_Model {
 					'cl_addr' => $this->encrypt_connect->encode($_SERVER['REMOTE_ADDR'], $dataRequest->user, 'REMOTE_ADDR'),
 					'countrySess' => $this->config->item('country')
 				];
-
 				$this->session->set_userdata($userData);
 
 				$this->response->code = 0;
@@ -88,7 +87,6 @@ class Novo_User_Model extends NOVO_Model {
 				if($this->isResponseRc === -185) {
 					$this->response->data = base_url('cambiar-clave');
 					$this->session->set_flashdata('changePassword', 'expiredPass');
-					break;
 				}
 				break;
 			case -1:
@@ -271,11 +269,9 @@ class Novo_User_Model extends NOVO_Model {
 
 		$response = $this->sendToService('FinishSession');
 
-		if($this->isResponseRc !== FALSE) {
-			$this->response->code = 0;
-			$this->response->msg = lang('FINISHSESSION_MSG-'.$this->isResponseRc);
-			$this->response->data = 'finishSession';
-		}
+		$this->response->code = 0;
+		$this->response->msg = lang('GEN_BTN_ACCEPT');
+		$this->response->data = FALSE;
 
 		$this->session->sess_destroy();
 		return $this->response;
@@ -292,9 +288,7 @@ class Novo_User_Model extends NOVO_Model {
 		$this->response->title = lang('SYSTEM_NAME');
 
 		if($result["score"] <= 0) {
-
-			$this->response->owner = 'captcha';
-			$this->response->code = 1;
+			$this->response->code = 3;
 			$this->response->icon = 'ui-icon-closethick';
 			$this->response->msg = lang('VALIDATECAPTCHA_MSG-0');
 			$this->response->data = [
@@ -305,9 +299,7 @@ class Novo_User_Model extends NOVO_Model {
 				]
 			];
 		} else {
-			$this->callWs_Login_User($dataRequest->dataLogin[0]);
-			$this->response->owner = 'login';
-
+			$this->callWs_Login_User($dataRequest);
 		}
 
 		return $this->response;

@@ -9,7 +9,7 @@
 
 <div id="sidebar">
 	<div id="widget-area">
-		<div class="widget tooltip" id="widget-signin">
+		<div id="widget-signin" class="widget tooltip" login-uri="<?= $loginUri ?>">
 
 			<?php if( $settingContents['signin_content']['loginTitle'] ): ?>
 				<h2 class="widget-title">

@@ -15,7 +15,7 @@
 </head>
 
 <body base-url="<?= base_url(); ?>" asset-url="<?= assetUrl(); ?>" country="<?= $countryUri; ?>"
-	pais="<?= $countryConf; ?>"
+	recaptcha="<?= $activeRecaptcha; ?>" pais="<?= $countryConf; ?>"
 	type-over-detail-companies="<?= $settingContents['enterprise_content']['typeOverDetailCompanies'];?>"
 	show-razon-social-detail-companies="<?= $settingContents['enterprise_content']['showRazonSocialDetailCompanies'];?>"
 	>
@@ -110,7 +110,7 @@
 		<img src="<?= $this->asset->insertFile($loader, 'images/loading-gif') ?>" class="requesting" alt="<?= lang('ALT_LOADER'); ?>">
 	</div>
 
-	<div id="system-info" class="hidden" default-code="<?= lang('ERROR_DEFAULT-CODE'); ?>">
+	<div id="system-info" class="hidden" default-code="<?= lang('RES_DEFAULT_CODE'); ?>">
 		<p class="system-content">
 			<span id="system-icon" class="ui-icon"></span>
 			<span id="system-msg" class="system-msg"><?= lang('ERROR_MESSAGE_SYSTEM'); ?></span>
@@ -126,12 +126,8 @@
 			</div>
 		</div>
 	</div>
-	<?php
-		if($module == 'login') {
-		echo 	$scriptCaptcha;
-		}
-		echo $this->asset->insertJs();
-	?>
+	<?= ($module == 'login' && $activeRecaptcha) ?  $scriptCaptcha : ''; ?>
+	<?= $this->asset->insertJs(); ?>
 </body>
 
 </html>

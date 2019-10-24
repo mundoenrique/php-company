@@ -35,6 +35,7 @@ class NOVO_Controller extends CI_Controller {
 		$this->countryUri = $this->uri->segment(1, 0) ? $this->uri->segment(1, 0) : 'pe';
 		$this->render->logged = $this->session->userdata('logged');
 		$this->render->fullName = $this->session->userdata('fullName');
+		$this->render->activeRecaptcha = $this->config->item('active_recaptcha');
 		$this->optionsCheck();
 	}
 

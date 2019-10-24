@@ -1,6 +1,6 @@
 'use strict'
 $(function() {
-	var data;
+	var userCred, forWho, forWhere, btnText;
 	$.balloon.defaults.css = null;
 	disabledInputsform(false);
 
@@ -8,12 +8,10 @@ $(function() {
 		e.preventDefault();
 
 		$(".general-form-msg").html('');
-		var text = $(this).text();
 		var form = $('#login-form');
-		var user = getCredentialsUser();
 		var captcha = getPropertyOfElement('recaptcha');
-		where = getPropertyOfElement('login-uri', '#widget-signin');
-		console.log('captcha', captcha)
+		userCred = getCredentialsUser();
+		btnText = $(this).text();
 
 		validateForms(form, {handleMsg: false});
 		if(form.valid()) {
@@ -26,9 +24,9 @@ $(function() {
 					grecaptcha
 					.execute('6Lejt6MUAAAAANd7KndpsZ2mRSQXuYHncIxFJDYf', {action: 'login'})
 					.then(function(token) {
-						validateLogin({token: token, user: user, where: where});
-					}, function(token) {
-						if(!token) {
+						if(token) {
+							validateLogin(token);
+						} else {
 							title = prefixCountry + strCountry;
 							icon = iconWarning;
 							data = {
@@ -38,15 +36,30 @@ $(function() {
 								}
 							};
 							notiSystem(title, msg, icon, data);
-							restartFormLogin(text);
+							restartFormLogin();
+						}
+					}, function(token) {
+						if(!token) {
+							/*
+							title = prefixCountry + strCountry;
+							icon = iconWarning;
+							data = {
+								btn1: {
+									link: baseURL+'inicio',
+									action: 'redirect'
+								}
+							};
+							notiSystem(title, msg, icon, data);
+							restartFormLogin();
+							*/
 						}
 					});
 				});
 			} else {
-				validateLogin({token: 'token', user: user, text: text, where: where});
+				validateLogin();
 			}
 		} else {
-			if (user.user=='' || user.pass=='d41d8cd98f00b204e9800998ecf8427e') {
+			if (userCred.user == '' || userCred.pass=='d41d8cd98f00b204e9800998ecf8427e') {
 				$(".general-form-msg").html('Todos los campos son requeridos');
 			} else {
 				$(".general-form-msg").html('Combinación incorrecta de usuario y contraseña');
@@ -58,10 +71,10 @@ $(function() {
 		$('#login-form input, #login-form button').attr('disabled', disable);
 	}
 
-	function restartFormLogin(textBtn) {
+	function restartFormLogin() {
 
 		disabledInputsform(false);
-		$('#login-btn').html(textBtn);
+		$('#login-btn').html(btnText);
 		$('#user_pass').val('');
 		if(country == 'bp') {
 			$('#user_login').val('');
@@ -79,33 +92,31 @@ $(function() {
 		}
 	};
 
-	function validateLogin(dataValidateLogin){
+	function validateLogin(token) {
+		verb = 'POST'; who = forWho || 'User'; where = forWhere || getPropertyOfElement('login-uri', '#widget-signin');
 		data = {
-			user: dataValidateLogin.user.user,
-			token: dataValidateLogin.token,
-			dataLogin: [dataValidateLogin.user, dataValidateLogin.text]
+			user: userCred.user,
+			pass: userCred.pass,
+			active: userCred.active,
+			token: token || ''
 		}
-		verb = "POST"; who = 'User'; where = dataValidateLogin.where;
 		callNovoCore(verb, who, where, data, function(response) {
-
-			if (response.code !== 0 && response.owner === 'captcha') {
-
-				notiSystem(response.title, response.msg, response.icon, response.data);
-				restartFormLogin(dataValidateLogin.text);
-
-			} else {
-				validateResponseLogin(response, dataValidateLogin.text);
-			}
+			responseCodeLogin[response.code](response);
 		})
-	}
-
-	function validateResponseLogin(response, textBtn) {
-		responseCodeLogin[response.code](response, textBtn);
+		forWho = null; forWhere = null
 	}
 
 	const responseCodeLogin = {
 		0: function(response) {
-			$(location).attr('href', response.data)
+			if(response.data) {
+				$(location).attr('href', response.data)
+			} else {
+				$('#system-info').dialog('close');
+				$('#accept')
+				.html(response.msg)
+				.attr('disabled', false);
+				restartFormLogin();
+			}
 		},
 		1: function(response, textBtn){
 			$('#user_login').showBalloon({
@@ -114,29 +125,29 @@ $(function() {
 				position: "left",
 				contents: response.msg
 			});
-			restartFormLogin(textBtn);
+			restartFormLogin();
 		},
 		2: function() {
-			user.active = 1;
-			verb = "POST"; who = 'User'; where = 'Login'; data = getCredentialsUser();
-			callNovoCore(verb, who, where, data, function(response) {
-				validateResponseLogin(response);
-			})
+			userCred.active = 1; forWhere = 'Login';
+			validateLogin();
 		},
-		3: function(response, textBtn){
-			var dataLogin = getCredentialsUser();
+		3: function(response) {
+			var oldID = $('#accept').attr('id');
+			$('#accept').attr('id', 'closed-btn');
 			notiSystem(response.title, response.msg, response.icon, response.data);
 			var btn = response.data.btn1;
 			if(btn.action == 'logout') {
-				$('#accept').on('click', function() {
-					verb = 'POST'; who = btn.link.who; where = btn.link.where; data = dataLogin;
-					callNovoCore (verb, who, where, data);
+				$('#closed-btn').on('click', function() {
+					$(this).html(loader);
+					$(this).attr('disabled', true);
+					$(this).attr('id', oldID);
+					forWho = btn.link.who; forWhere = btn.link.where;
+					validateLogin();
 				});
 			}
-			restartFormLogin(textBtn);
+			$('#login-btn').html(btnText);
 		},
-		4: function(response, textBtn) {
-			console.log('aqui');
+		4: function(textBtn) {
 			restartFormLogin(textBtn);
 		}
 	}
