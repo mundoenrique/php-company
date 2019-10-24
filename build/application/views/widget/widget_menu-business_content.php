@@ -3,7 +3,7 @@
 	<nav id="nav2">
 		<ul>
 			<li>
-				<a href="<?=base_url($pais.'/empresas')?>" rel="start" >
+				<a href="<?=base_url($enterpriseList)?>" rel="start" >
 					<span aria-hidden="true" class="icon" data-icon="&#xe097;"></span>
 					<?=lang('MENU_INICIO')?>
 				</a>

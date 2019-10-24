@@ -138,6 +138,7 @@ class NOVO_Controller extends CI_Controller {
 			$userMenu = new stdClass();
 			$userMenu->menu = $menu;
 			$userMenu->pais = '';
+			$userMenu->enterpriseList = lang('GEN_ENTERPRISE_LIST');
 			$this->render->settingsMenu = $userMenu;
 			$this->render->goOut = ($this->render->logged || $this->session->flashdata('changePassword'))
 			? 'cerrar-sesion' : 'inicio';
