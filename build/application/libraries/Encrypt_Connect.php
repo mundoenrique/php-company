@@ -49,19 +49,27 @@ class Encrypt_Connect {
 	{
 		log_message('INFO', 'NOVO Encrypt_Connect: decode Method Initialized');
 		$data = base64_decode($cryptData);
+		$response = new stdClass();
 		$descryptData = mcrypt_decrypt(
 			MCRYPT_DES, $this->keyNovo, $data, MCRYPT_MODE_CBC, $this->iv
 		);
 		$decryptData = base64_decode(trim($descryptData));
 		$response = json_decode($decryptData);
-		$response = $response == '' ? ' unanswered' : $response;
 
-		$rc = isset($response->rc) ? ' RC: '.$response->rc : '';
-		$msg = isset($response->msg) ? ' MSG: '.$response->msg : '';
-		$country = isset($response->pais) ? ' COUNTRY: '.$response->pais : '';
-		$unAnswered = $response === ' unanswered' ? $response : '';
+		$rc = isset($response->rc) ? 'RC '.$response->rc : 'RC Def '.$this->CI->lang('RESP_RC_DEFAULT');
+		$msg = isset($response->msg) ? 'MSG '.$response->msg : 'MSG Def '.$this->CI->lang('RESP_MESSAGE_SYSTEM');
+		$country = isset($response->pais) ? 'COUNTRY '.$response->pais : 'COUNTRY Def '.$this->CI->config->item('country');
 
-		log_message('DEBUG', 'NOVO ['.$userName.'] RESPONSE '.$model . '=' . $rc . $msg . $country . $unAnswered);
+		log_message('DEBUG', 'NOVO ['.$userName.'] RESPONSE '.$model.'= '.$rc.', '.$msg.', '.$country);
+		if(!$response) {
+			log_message('DEBUG', 'NOVO ['.$userName.'] Sin respuesta del servicio');
+			$response->rc = $this->CI->lang('RESP_RC_DEFAULT');
+			$response->msg = $this->CI->lang('RESP_MESSAGE_SYSTEM');
+		}
+		if(!isset($response->pais)) {
+			log_message('DEBUG', 'NOVO ['.$userName.'] Insertando pais al RESPONSE');
+			$response->pais = $this->CI->config->item('country');
+		}
 
 		return $response;
 
