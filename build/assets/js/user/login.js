@@ -132,20 +132,25 @@ $(function() {
 			validateLogin();
 		},
 		3: function(response) {
-			var oldID = $('#accept').attr('id');
-			$('#accept').attr('id', 'closed-btn');
-			notiSystem(response.title, response.msg, response.icon, response.data);
 			var btn = response.data.btn1;
 			if(btn.action == 'logout') {
+				var oldID = $('#accept').attr('id');
+				$('#accept').attr('id', 'closed-btn');
+			} else {
+				restartFormLogin();
+			}
+			notiSystem(response.title, response.msg, response.icon, response.data);
+			if(btn.action == 'logout') {
 				$('#closed-btn').on('click', function() {
-					$(this).html(loader);
-					$(this).attr('disabled', true);
-					$(this).attr('id', oldID);
+					$(this)
+					.html(loader)
+					.attr('disabled', true)
+					.attr('id', oldID);
 					forWho = btn.link.who; forWhere = btn.link.where;
 					validateLogin();
 				});
+				$('#login-btn').html(btnText);
 			}
-			$('#login-btn').html(btnText);
 		},
 		4: function(textBtn) {
 			restartFormLogin(textBtn);
