@@ -88,26 +88,26 @@ class Encrypt_Connect {
 	public function connectWs($request, $userName, $model)
 	{
 		log_message('INFO', 'NOVO Encrypt_Connect: connectWs Method Initialized');
-		$failResponse = new stdClass();
 		$fail = FALSE;
 		$urlWS = $this->CI->config->item('urlWS').'eolwebInterfaceWS';
 
 		log_message('DEBUG', 'NOVO ['.$userName.'] REQUEST BY COUNTRY: '.$request['pais'].', AND WEBSERVICE URL: '.$urlWS);
 
-		$request = json_encode($request);
+		$requestSerV = json_encode($request);
 
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, $urlWS);
 		curl_setopt($ch, CURLOPT_POST, TRUE);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
 		curl_setopt($ch, CURLOPT_TIMEOUT, 59);
-		curl_setopt($ch, CURLOPT_POSTFIELDS, $request);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $requestSerV);
 		curl_setopt($ch, CURLOPT_HTTPHEADER, array(
 			'Content-Type: text/plain',
-			'Content-Length: ' . strlen($request))
+			'Content-Length: ' . strlen($requestSerV))
 		);
 		$response = curl_exec($ch);
 		$httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+		$CurlError = curl_error($ch);
 		curl_close($ch);
 
 		log_message('DEBUG','NOVO ['.$userName.'] RESPONSE CURL HTTP CODE: ' . $httpCode);
@@ -118,8 +118,10 @@ class Encrypt_Connect {
 			$fail = TRUE;
 		}
 		if(!$response) {
-			$failResponse->rc = 'RC Def '.lang('RESP_RC_DEFAULT');
-			$failResponse->msg = 'MSG Def '.lang('RESP_MESSAGE_SYSTEM');
+			$failResponse = new stdClass();
+			$failResponse->rc = lang('RESP_RC_DEFAULT');
+			$failResponse->msg = lang('RESP_MESSAGE_SYSTEM');
+			log_message("ERROR",'NOVO ['.$userName.'] ERROR CURL: '.json_encode($CurlError));
 			$response = $failResponse;
 			$fail = TRUE;
 		}
@@ -127,7 +129,7 @@ class Encrypt_Connect {
 			$this->logMessage = $failResponse;
 			$this->logMessage->userName = $userName;
 			$this->logMessage->model = $model;
-			$this->logMessage->pais = $this->CI->config->item('country');
+			$this->logMessage->pais = $request['pais'];
 			$this->writeLog($this->logMessage);
 		}
 
@@ -146,6 +148,6 @@ class Encrypt_Connect {
 		$msg = $logMessage->msg;
 		$rc = $logMessage->rc;
 		$country = $logMessage->pais;
-		log_message('DEBUG', 'NOVO ['.$userName.'] RESPONSE '.$model.'= rc: '.$rc.', msg: '.$msg.', country'.$country);
+		log_message('DEBUG', 'NOVO ['.$userName.'] RESPONSE '.$model.' country: '.$country.', rc: '.$rc.', msg: '.$msg);
 	}
 }
