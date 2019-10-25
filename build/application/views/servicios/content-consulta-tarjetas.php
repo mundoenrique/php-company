@@ -137,8 +137,8 @@ $urlCdn = get_cdn();
 				<th><?= lang('ESTATUS_PLASTICO'); ?></th>
 				<th id="td-nombre-2" class="bp-min-width"><?= lang('NOMBRE') ?></th>
 				<th class="bp-min-width"><?= lang('ID_PERSONA'); ?></th>
-				<!-- <th><?= lang('SALDO'); ?></th>
-				<th><?= lang('OPCIONES'); ?></th> -->
+				<!-- <th><?= lang('SALDO'); ?></th>-->
+				<th><?= lang('OPCIONES'); ?></th> 
 			</thead>
 			<tbody>
 
