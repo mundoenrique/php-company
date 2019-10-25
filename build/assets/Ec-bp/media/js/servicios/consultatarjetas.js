@@ -6,10 +6,15 @@ var serv_var = {
 	paginar: true,
 	dni_tarjetas: "",
 	noTarjetas: "",
-	TotalTjts: 0,
-	cargo: 'show',
-	abono: 'show',
-	consulta: 'show',
+	TotalTjts: 0,	
+	actualizarDatos: 'hidden',
+	consulta: 'hidden',
+	bloquear: 'hidden',
+	desbloqear: 'hidden',
+	entregar: 'hidden',
+	enviar: 'hidden',
+	recibirBanco: 'hidden',
+	recibirEmpresa: 'hidden',
 	maestroParam: null,
 	cantXdia: null,
 	acumXsem: null,
@@ -158,12 +163,12 @@ function buscar(pgSgt) {
 				format: CryptoJSAesJson
 			}).toString(CryptoJS.enc.Utf8))
 
+			console.log(data);
+			
+
 		 	$aux.dialog('destroy');
 		 if (!data.result.ERROR) {
-				$('#resultado-tarjetas').show();
-				$.inArray('trasal', data.funciones) !== -1 ? $('#consultar-tjta').show() : serv_var.consulta = 'hidden';
-				$.inArray('tracar', data.funciones) !== -1 ? $('#cargo-tjta').show() : serv_var.cargo = 'hidden';
-				$.inArray('traabo', data.funciones) !== -1 ? $('#abonar-tjta').show() : serv_var.abono = 'hidden';
+				$('#resultado-tarjetas').show();			
 
 				cargarResultado(data);
 				$('#resultado-tarjetas').find('.jPag-sprevious').attr('title', "anterior");
@@ -202,7 +207,19 @@ function cargarResultado(data) {
 		$('.table-text-service thead th').css('min-width', '75px');
 		$('.table-text-service tbody td').css('min-width', '75px');
 
-		$.each(data.result.detalleEmisiones, function (k, v) {
+		var aumenta = 1;
+		var iconos = {'ACTUALIZAR_DATOS':'&#xe02d;',
+		'CONSULTAR_SALDO':'&#xe022;',
+		'BLOQUEO':'&#xe028;',
+		'DESBLOQUEO_TARJETA':'&#xe030;',
+		'ENTREGAR_A_TARJETAHABIENTE':'&#xe011;',
+		'ENVIAR_A_EMPRESA':'&#xe05e;',
+		'RECIBIR_EN_EMPRESA':'&#xe062;',
+		'RECIBIR_EN_BANCO':'&#xe09c;'}
+		$.each(data.result.detalleEmisiones, function (k, v) {			
+			
+			//$.inArray('Enviado a Banco', data.result.operacioneTarjeta) !== -1 ? alert(1) : alert(2);
+
 			tr = '<tr class="' + data.result.pagina+ '" tjta="' + v.nroTarjeta + '" id_ext_per="' + v.cedula + '"><td class="checkbox-select"><input id="check-oneTM" type="checkbox" value=""/></td>';			
 			tr += '<td id="td-nombre-2" class="bp-min-width">' + v.nroTarjeta + '</td>';
 			tr += '<td class="bp-min-width">' + v.ordenS + '</td>';
@@ -214,14 +231,24 @@ function cargarResultado(data) {
 			}) + '</td>';
 			tr += '<td class="bp-min-width">' + v.cedula + '</td>';
 			/* tr += '<td id="saldo' + v.noTarjetaConMascara.replace(/[*]/g, "") + '" class="bp-min-width">-</td>'; //saldo */
-			/* tr += '<td class="bp-min-width"><a id="consulta_saldo" title="consulta saldo" ' + serv_var.consulta + '><span class="icon" data-icon="&#xe072;"></span></a>';
-			tr += '<a id="abono_tarjeta" title="abono tarjeta" ' + serv_var.abono + '><span class="icon" data-icon="&#xe031;"></span></a>';
-			tr += '<a id="cargo_tarjeta" title="cargo tarjeta" ' + serv_var.cargo + '><span class="icon" data-icon="&#xe08d;"></span></a>';
-			tr += '</td></tr>'; */
-
+			 tr += '<td class="bp-min-width">';
+			 $.each(data.result.operacioneTarjeta, function (i, j)
+			{										
+				if(v.edoEmision == j.edoTarjeta)
+				{  
+					for(k in j.operacion)
+					{						
+						var	operacion = j.operacion[k].replace(/\s/g,'_');														
+						tr += '<a id="'+operacion+'" title="'+MaysPrimera(j.operacion[k].toLowerCase())+'" ><span class="icon" data-icon="'+iconos[operacion]+'"></span></a>';
+					}
+				}			
+			})
+			tr += '</td></tr>'; 
 			$('.table-text-service tbody').append(tr);
+			aumenta++;
 		});
 
+		
 		paginar();
 
 	} else {
@@ -351,3 +378,19 @@ $("#exportXLS_a").on('click', function () {
 	$('form#formulario').submit();
 });
 
+
+
+// ACCION EVENTO ICON->CONSULTAR SALDO
+$(".table-text-service").on('click', '#RECIBIR_EN_BANCO', function() {
+
+	serv_var.noTarjetas = [$(this).parents('tr').attr('tjta')];
+	serv_var.dni_tarjetas = [$(this).parents('tr').attr('id_ext_per')];
+
+	alert(serv_var.noTarjetas)
+	
+	
+});
+
+function MaysPrimera(string){
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
