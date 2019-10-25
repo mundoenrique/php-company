@@ -92,26 +92,26 @@ class Novo_User_Model extends NOVO_Model {
 			case -1:
 			case -263:
 				$this->response->code = 1;
-				$this->response->msg = lang('LOGIN_MSG'.$this->isResponseRc);
+				$this->response->msg = lang('RESP_INVALID_USER');
 				$this->response->className = 'error-login-2';
 				break;
 			case -8:
 			case -35:
 				$this->response->code = 1;
-				$this->response->msg = lang('LOGIN_MSG'.$this->isResponseRc);
+				$this->response->msg = lang('RESP_SUSPENDED_USER');
 				$this->response->className = 'login-inactive';
 				break;
 			case -229:
 				$this->response->code = 2;
-				$this->response->msg = lang('LOGIN_TITLE'.$this->isResponseRc);
+				$this->response->msg = lang('RESP_OLD_USER');
 				break;
 			case -262:
 				$this->response->code = 3;
-				$this->response->msg = lang('LOGIN_MSG'.$this->isResponseRc);
+				$this->response->msg = lang('RESP_NO_PERMISSIONS');
 				$this->response->icon = 'ui-icon-info';
 				$this->response->data = [
 					'btn1'=> [
-						'text'=> lang('BUTTON_ACCEPT'),
+						'text'=> FALSE,
 						'link'=> FALSE,
 						'action'=> 'close'
 					]
@@ -119,11 +119,11 @@ class Novo_User_Model extends NOVO_Model {
 				break;
 			case -28:
 				$this->response->code = 3;
-				$this->response->msg = lang('LOGIN_MSG'.$this->isResponseRc);
+				$this->response->msg = lang('RESP_INCORRECTLY_CLOSED');
 				$this->response->icon = 'ui-icon-alert';
 				$this->response->data = [
 					'btn1'=> [
-						'text'=> lang('BUTTON_ACCEPT'),
+						'text'=> FALSE,
 						'link'=> [
 							'who'=> 'User',
 							'where'=> 'FinishSession'
@@ -161,31 +161,29 @@ class Novo_User_Model extends NOVO_Model {
 			case 0:
 				$maskMail = maskString($dataRequest->email, 4, $end = 6, '@');
 				$this->response->code = 0;
-				$this->response->msg = str_replace('{$maskMail$}', $maskMail, lang('RECOVERYPASS_MSG-'.$this->isResponseRc));
+				$this->response->msg = novoLang(lang('RESP_TEMP_PASS'), $maskMail);
 				$this->response->icon = 'ui-icon-circle-check';
 				$this->response->data = [
 					'btn1'=> [
-						'text'=> lang('BUTTON_CONTINUE'),
+						'text'=> lang('GEN_BTN_CONTINUE'),
 						'link'=> base_url('inicio'),
 						'action'=> 'redirect'
 					]
 				];
 				break;
 			case -205:
-				$msg = lang('RECOVERYPASS_MSG-'.$this->isResponseRc);
-				if($this->countryUri == 've') {
-					$msg.= '<br>'.lang('ERROR_SUPPORT');
-				}
+				//soporteempresas@tebca.com
+				$this->response->msg = lang('RES_UNREGISTERED_USER');
+				$this->response->msg.= novoLang(lang('RES_SUPPORT'), [lang('RES_SUPPORT_MAIL'), lang('RES_SUPPORT_TELF')]);
 				break;
 		}
 
 		if($this->isResponseRc != 0) {
 			$this->response->code = 1;
-			$this->response->msg = lang('RECOVERYPASS_MSG-'.$this->isResponseRc);
 			$this->response->icon = 'ui-icon-info';
 			$this->response->data = [
 				'btn1'=> [
-					'text'=> lang('BUTTON_ACCEPT'),
+					'text'=> FALSE,
 					'link'=> FALSE,
 					'action'=> 'close'
 				]
@@ -224,7 +222,7 @@ class Novo_User_Model extends NOVO_Model {
 				$this->response->icon = 'ui-icon-circle-check';
 				$this->response->data = [
 					'btn1'=> [
-						'text'=> lang('BUTTON_CONTINUE'),
+						'text'=> lang('GEN_BTN_CONTINUE'),
 						'link'=> base_url('inicio'),
 						'action'=> 'redirect'
 					]
@@ -237,7 +235,7 @@ class Novo_User_Model extends NOVO_Model {
 				$this->response->msg = lang('CHANGEPASSWORD_MSG-'.$this->isResponseRc);
 				$this->response->data = [
 					'btn1'=> [
-						'text'=> lang('BUTTON_ACCEPT'),
+						'text'=> FALSE,
 						'link'=> FALSE,
 						'action'=> 'close'
 					]

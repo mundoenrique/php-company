@@ -146,6 +146,6 @@ class Encrypt_Connect {
 		$msg = $logMessage->msg;
 		$rc = $logMessage->rc;
 		$country = $logMessage->pais;
-		log_message('DEBUG', 'NOVO ['.$userName.'] RESPONSE '.$model.'= rc: '.$rc.', msg: '.$msg.', '.$country);
+		log_message('DEBUG', 'NOVO ['.$userName.'] RESPONSE '.$model.'= rc: '.$rc.', msg: '.$msg.', country'.$country);
 	}
 }
