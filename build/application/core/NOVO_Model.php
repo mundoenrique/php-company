@@ -51,7 +51,7 @@ class NOVO_Model extends CI_Model {
 			$responseDecrypt = $this->encrypt_connect->decode($response, $this->userName, $model);
 		}
 
-		$this->isResponseRc = $responseDecrypt->rc;
+		$this->isResponseRc = (int) $responseDecrypt->rc;
 		$this->response->code = lang('RES_DEFAULT_CODE');
 		$this->response->title = lang('SYSTEM_NAME');
 		$this->response->icon = 'ui-icon-alert';
