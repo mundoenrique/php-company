@@ -11,7 +11,7 @@ $config = [
 			'rules' => 'trim|required'
 		]
 	],
-	'validatecaptcha' => [
+	'validateCaptcha' => [
 		[
 			'field' => 'user',
 			'label' => 'user',
