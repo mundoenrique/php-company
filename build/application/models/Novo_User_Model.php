@@ -31,7 +31,7 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataRequest->ctipo = $dataRequest->active;
 
 		$response = $this->sendToService('Login');
-
+		//$this->isResponseRc = -262;
 		switch($this->isResponseRc) {
 			case 0:
 				log_message('DEBUG', 'NOVO ['.$dataRequest->user.'] RESPONSE: Login: ' . json_encode($response->usuario));

@@ -35,7 +35,7 @@ $config = [
 			'rules' => 'trim|regex_match[/^([\w!@\*\-\?¡¿+\/.,#]+)+$/i]|required'
 		]
 	],
-	'finishsession' => [
+	'finishSession' => [
 		[
 			'field' => 'user',
 			'label' => 'user',
