@@ -38,17 +38,17 @@ $pais= $this->uri->segment(1, 0);
 						<?php	if($pais=='bp'): ?>
 								<center>
 						<?	endif; ?>
-								<a class="cancel-anchor novo-btn-secondary novo-cancel-pass-recovery" href="<?= base_url('inicio') ?>"><?= lang('BUTTON_CANCEL'); ?></a>
+								<a class="cancel-anchor novo-btn-secondary novo-cancel-pass-recovery" href="<?= base_url('inicio') ?>"><?= lang('GEN_BTN_CANCEL'); ?></a>
 						<?php	if($pais=='bp'): ?>
 						<?php else:
 								?>
-								<button id="btn-pass-recover" class="novo-btn-primary"><?= lang('BUTTON_CONTINUE'); ?></button><?php
+								<button id="btn-pass-recover" class="novo-btn-primary"><?= lang('GEN_BTN_CONTINUE'); ?></button><?php
 						endif; ?>
 						</td>
 						<td valign="top">
 						<?php	if($pais=='bp'): ?>
 								<button id="btn-pass-recover" class="novo-btn-primary">
-								<a class="cancel-anchor" href="<?= base_url('inicio') ?>"><?= lang('BUTTON_CONTINUE'); ?></a>
+								<a class="cancel-anchor" href="<?= base_url('inicio') ?>"><?= lang('GEN_BTN_CONTINUE'); ?></a>
 								</button>
 								</center>
 						<?	endif; ?>

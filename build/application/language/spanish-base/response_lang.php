@@ -1,10 +1,23 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 // Novo_User_Model
-$lang['ERROR_MESSAGE_SYSTEM'] = 'En este momento no podemos atender tu solicitud, por favor intenta más tarde';
-$lang['ERROR_RC_DEFAULT'] = -9999;
+$lang['RESP_MESSAGE_SYSTEM'] = 'En este momento no podemos atender tu solicitud, por favor intenta más tarde';
+$lang['RESP_RC_DEFAULT'] = -9999;
 $lang['RES_DEFAULT_CODE'] = 4;
-$lang['ERROR_TIMEOUT'] = "El servidor esta demorando mucho tiempo en responder por favor intentalo de nuevo";
+$lang['RESP_TIMEOUT'] = "El servidor esta demorando mucho tiempo en responder por favor intentalo de nuevo";
+$lang['RESP_INVALID_USER']= "Usuario o contraseña inválido";
+$lang['RESP_SUSPENDED_USER'] = 'Usuario no disponible, se encuentra inactivo';
+$lang['RESP_OLD_USER'] = 'Usuario aplicación anterior';
+$lang['RESP_TEMP_PASS'] = 'Proceso exitoso, se ha enviado un correo a %s con la contraseña temporal.';
+$lang['RES_UNREGISTERED_USER'] = 'Usuario no registrado en el sistema.';
+$lang['RES_SUPPORT'] = '';
+$lang['RES_SUPPORT_MAIL'] = '';
+$lang['RES_SUPPORT_TELF'] = '';
+$lang['RESP_NO_PERMISSIONS'] = 'Estimado usuario no tienes permiso para usar la aplicación, por favor comunícate con el administrador';//RC-262
+$lang['RESP_INCORRECTLY_CLOSED'] = '<div><h6>Tu última sesión se cerró de manera incorrecta. Ten en cuenta que para salir de la aplicación debes seleccionar <strong>"Salir"</strong>. <h4>Pulsa "Aceptar" para continuar.<h4></h6></div>';//RC-28
+
+
+
 $lang['RESP_MSG-0'] = 'Proceso ejecutado exitosamente';
 $lang['LOGIN_MSG-0'] = 'Ingreso exitoso';
 $lang['LOGIN_TITLE-1']= 'Usuario incorrecto';

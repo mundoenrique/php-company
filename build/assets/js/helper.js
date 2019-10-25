@@ -55,13 +55,14 @@ function callNovoCore(verb, who, where, request, _response_) {
 		_response_(response);
 
 	}).fail(function (jqXHR, textStatus, errorThrown ) {
+		var uriRedirec = getPropertyOfElement('redirect', '#system-info');
 		var response = {
 			code: codeResp,
 			title: prefixCountry + strCountry,
 			icon: iconWarning,
 			data: {
 				btn1: {
-					link: baseURL+'inicio',
+					link: baseURL+uriRedirec,
 					action: 'redirect'
 				}
 			}

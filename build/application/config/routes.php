@@ -52,19 +52,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'user/login';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
-
+//Asynchronous
 $route['(:any)/async-call'] = "callModels";
-
+//User
 $route['(:any)/inicio'] = "user/login";
 $route['(:any)/inicio/(:any)'] = "user/login";
 $route['(:any)/recuperar-clave'] = "user/recoveryPass";
 $route['(:any)/cambiar-clave'] = "user/changePassword";
 $route['(:any)/cerrar-sesion'] = "user/finishSession";
-
+//Information
 $route['(:any)/inf-beneficios'] = "information/benefits";
 $route['(:any)/inf-condiciones'] = "information/terms";
 $route['(:any)/inf-tarifas'] = "information/rates";
-
+//Business
 $route['(:any)/empresas'] = "business/getEnterprises";
 $route['(:any)/empresas/lista'] = "dashboard/getListaEmpresasJSON/$1";
 $route['(:any)/productos'] = "business/getProducts/$1";
