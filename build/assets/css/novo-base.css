@@ -610,7 +610,7 @@ nav ul.menu li.menu-item a {
 }
 
 .system-msg {
-	text-align: justify;
+	text-align: left;
 	width: 250px;
 	float: right;
 	padding: 0;
