@@ -259,7 +259,7 @@ if(!function_exists('languajeLoad')) {
 				$languages = [
 					'login' => ['login'],
 					'validatecaptcha' => ['login'],
-					'recoveryPass'	=> ['pass-recovery'],
+					'recoveryPass'	=> ['pass-recovery', 'response'],
 					'terms'	=> ['terms'],
 				];
 				break;

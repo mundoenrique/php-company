@@ -42,7 +42,7 @@ $config = [
 			'rules' => 'trim|regex_match[/^([\wñÑ]+)+$/i]|required'
 		]
 	],
-	'recoverypass' => [
+	'recoveryPass' => [
 		[
 			'field' => 'userName',
 			'label' => 'userName',
