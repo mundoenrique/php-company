@@ -26,21 +26,9 @@ $(function() {
 					.then(function(token) {
 						if(token) {
 							validateLogin(token);
-						} else {
-							title = prefixCountry + strCountry;
-							icon = iconWarning;
-							data = {
-								btn1: {
-									link: baseURL+'inicio',
-									action: 'redirect'
-								}
-							};
-							notiSystem(title, msg, icon, data);
-							restartFormLogin();
 						}
 					}, function(token) {
 						if(!token) {
-							/*
 							title = prefixCountry + strCountry;
 							icon = iconWarning;
 							data = {
@@ -51,7 +39,6 @@ $(function() {
 							};
 							notiSystem(title, msg, icon, data);
 							restartFormLogin();
-							*/
 						}
 					});
 				});
@@ -152,8 +139,8 @@ $(function() {
 				$('#login-btn').html(btnText);
 			}
 		},
-		4: function(textBtn) {
-			restartFormLogin(textBtn);
+		4: function() {
+			$('#login-btn').html(btnText);
 		}
 	}
 
