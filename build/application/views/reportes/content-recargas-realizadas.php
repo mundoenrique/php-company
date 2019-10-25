@@ -57,7 +57,7 @@ $urlCdn = get_cdn();
             <span>
               <h5><?php echo lang('REPORTES_SELECCION_MESAÑO'); ?></h5>
 
-              <input id="repRecargasRealizadas_anio" type="text" name="my-date" placeholder="MM-YYYY"
+              <input id="repRecargasRealizadas_anio" type="text" name="my-date" placeholder="MM-AAAA"
                 class="required" />
           </div>
         </form>
