@@ -104,7 +104,6 @@ class NOVO_Controller extends CI_Controller {
 				);
 			}
 		}
-		//$this->config->set_item('language', 'spanish-'.$this->countryUri);
 	}
 
 	protected function loadView($module)

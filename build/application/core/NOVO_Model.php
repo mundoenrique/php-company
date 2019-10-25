@@ -43,7 +43,7 @@ class NOVO_Model extends CI_Model {
 
 		$encryptData = $this->encrypt_connect->encode($this->dataRequest, $this->userName, $model);
 		$request = ['bean'=> $encryptData, 'pais'=> $this->country];
-		$response = $this->encrypt_connect->connectWs($request, $this->userName);
+		$response = $this->encrypt_connect->connectWs($request, $this->userName, $model);
 
 		if(isset($response->rc)) {
 			$responseDecrypt = $response;
@@ -58,7 +58,7 @@ class NOVO_Model extends CI_Model {
 		$this->response->msg = $this->isResponseRc == 0 ? lang('RESP_MSG-0') : '';
 		$this->response->data = [
 			'btn1'=> [
-				'text'=> lang('GEN_BTN_ACCEPT'),
+				'text'=> FALSE,
 				'link'=> base_url(lang('GEN_ENTERPRISE_LIST')),
 				'action'=> 'redirect'
 			]
@@ -70,7 +70,7 @@ class NOVO_Model extends CI_Model {
 				$this->session->sess_destroy();
 				break;
 			default:
-				$this->response->msg = lang('ERROR_MESSAGE_SYSTEM');
+				$this->response->msg = lang('RESP_MESSAGE_SYSTEM');
 				break;
 		}
 

@@ -10,6 +10,7 @@ class Encrypt_Connect {
 	private $countryConf;
 	private $iv;
 	private $keyNovo;
+	private $logMessage;
 
 	public function __construct()
 	{
@@ -17,6 +18,7 @@ class Encrypt_Connect {
 		$this->CI = &get_instance();
 		$this->keyNovo = $this->CI->config->item('keyNovo');
 		$this->iv = "\0\0\0\0\0\0\0\0";
+		$this->logMessage = new stdClass();
 	}
 	/**
 	 * @info método para cifrar las petiones al servicio
@@ -49,27 +51,31 @@ class Encrypt_Connect {
 	{
 		log_message('INFO', 'NOVO Encrypt_Connect: decode Method Initialized');
 		$data = base64_decode($cryptData);
-		$response = new stdClass();
 		$descryptData = mcrypt_decrypt(
 			MCRYPT_DES, $this->keyNovo, $data, MCRYPT_MODE_CBC, $this->iv
 		);
 		$decryptData = base64_decode(trim($descryptData));
 		$response = json_decode($decryptData);
 
-		$rc = isset($response->rc) ? 'RC '.$response->rc : 'RC Def '.$this->CI->lang('RESP_RC_DEFAULT');
-		$msg = isset($response->msg) ? 'MSG '.$response->msg : 'MSG Def '.$this->CI->lang('RESP_MESSAGE_SYSTEM');
-		$country = isset($response->pais) ? 'COUNTRY '.$response->pais : 'COUNTRY Def '.$this->CI->config->item('country');
+		$rc = isset($response->rc) ? 'RC '.$response->rc : lang('RESP_RC_DEFAULT');
+		$msg = isset($response->msg) ? 'MSG '.$response->msg : lang('RESP_MESSAGE_SYSTEM');
+		$country = isset($response->pais) ? 'COUNTRY '.$response->pais : $this->CI->config->item('country');
 
-		log_message('DEBUG', 'NOVO ['.$userName.'] RESPONSE '.$model.'= '.$rc.', '.$msg.', '.$country);
 		if(!$response) {
 			log_message('DEBUG', 'NOVO ['.$userName.'] Sin respuesta del servicio');
-			$response->rc = $this->CI->lang('RESP_RC_DEFAULT');
-			$response->msg = $this->CI->lang('RESP_MESSAGE_SYSTEM');
+			$response = new stdClass();
+			$response->rc = lang('RESP_RC_DEFAULT');
+			$response->msg = lang('RESP_MESSAGE_SYSTEM');
 		}
 		if(!isset($response->pais)) {
 			log_message('DEBUG', 'NOVO ['.$userName.'] Insertando pais al RESPONSE');
 			$response->pais = $this->CI->config->item('country');
 		}
+
+		$this->logMessage = $response;
+		$this->logMessage->model = $model;
+		$this->logMessage->userName = $userName;
+		$this->writeLog($this->logMessage);
 
 		return $response;
 
@@ -77,11 +83,13 @@ class Encrypt_Connect {
 	/**
 	 * @info método para realizar la petición al servicio
 	 * @author J. Enrique Peñaloza Piñero
+	 * @date May 13th, 2019
 	 */
-	public function connectWs($request, $userName)
+	public function connectWs($request, $userName, $model)
 	{
 		log_message('INFO', 'NOVO Encrypt_Connect: connectWs Method Initialized');
-
+		$failResponse = new stdClass();
+		$fail = FALSE;
 		$urlWS = $this->CI->config->item('urlWS').'eolwebInterfaceWS';
 
 		log_message('DEBUG', 'NOVO ['.$userName.'] REQUEST BY COUNTRY: '.$request['pais'].', AND WEBSERVICE URL: '.$urlWS);
@@ -100,16 +108,44 @@ class Encrypt_Connect {
 		);
 		$response = curl_exec($ch);
 		$httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-
-		if(!$response) {
-			$response = new stdClass();
-			$response->rc = lang('ERROR_RC_DEFAULT');
-			log_message('INFO','NOVO ['.$userName.'] RESPONSE RC DEFAULT: ' . $response->rc);
-		}
+		curl_close($ch);
 
 		log_message('DEBUG','NOVO ['.$userName.'] RESPONSE CURL HTTP CODE: ' . $httpCode);
 
-		return $response;
+		$failResponse = json_decode($response);
+		if(is_object($failResponse)) {
+			$response = $failResponse;
+			$fail = TRUE;
+		}
+		if(!$response) {
+			$failResponse->rc = 'RC Def '.lang('RESP_RC_DEFAULT');
+			$failResponse->msg = 'MSG Def '.lang('RESP_MESSAGE_SYSTEM');
+			$response = $failResponse;
+			$fail = TRUE;
+		}
+		if($fail) {
+			$this->logMessage = $failResponse;
+			$this->logMessage->userName = $userName;
+			$this->logMessage->model = $model;
+			$this->logMessage->pais = $this->CI->config->item('country');
+			$this->writeLog($this->logMessage);
+		}
 
+
+		return $response;
+	}
+	/**
+	 * @info Método para es cribir el log de la respuesta del servicio
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date October 25th, 2019
+	 */
+	private function writeLog($logMessage)
+	{
+		$userName = $logMessage->userName;
+		$model = $logMessage->model;
+		$msg = $logMessage->msg;
+		$rc = $logMessage->rc;
+		$country = $logMessage->pais;
+		log_message('DEBUG', 'NOVO ['.$userName.'] RESPONSE '.$model.'= rc: '.$rc.', msg: '.$msg.', '.$country);
 	}
 }
