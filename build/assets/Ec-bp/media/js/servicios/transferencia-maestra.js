@@ -35,17 +35,20 @@ $(function() {
 	function(response) {
 		var data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 		var Amountmsg = " - ",
-				numberaccount = ' - ';			
+				numberaccount = ' - ';
 
 		$("#loadingData").hide();
 
+		console.log(data);
+
+
 		if (data.rc == 0) {
-			
+
 			masterTransferBalanace = data.maestroDeposito.saldoDisponible;
 			parametrosRecarga = data.maestroDeposito.parametrosRecarga;
 			dailyOper = data.maestroDeposito.cantidadTranxDia.lista[0];
 			weeklyOper = data.maestroDeposito.cantidadTranxSemana.lista[0];
-			Amountmsg = toFormatShow(masterTransferBalanace);			
+			Amountmsg = toFormatShow(masterTransferBalanace);
 			numberaccount = data.maestroDeposito.cuentaFondeo;
 			$("#amount, #description, #charge, #credit, #recargar, #claveTranferencia").prop("disabled", false);
 
@@ -54,8 +57,8 @@ $(function() {
 			var rta = JSON.parse(data.bean)
 			masterTransferBalanace = rta.saldoDisponible;
 			Amountmsg = toFormatShow(masterTransferBalanace);
-			numberaccount = ' No tiene cuenta asociada ';			
-			$("#amount, #description, #charge, #credit, #recargar, #claveTranferencia").prop("display", false);			
+			numberaccount = ' No tiene cuenta asociada ';
+			$("#amount, #description, #charge, #credit, #recargar, #claveTranferencia").prop("display", false);
 		} else if (data.rc == -233) {
 			Amountmsg = "La empresa no posee saldo.";
 			$("#amount, #description, #charge, #credit, #recargar, #claveTranferencia").prop("disabled", true);
@@ -101,7 +104,7 @@ $(function() {
 			validInput = false;
 			amount.css('border-color', '#cd0a0a')
 		}
-		else if(parseInt(amount.val()) > parseInt(disponible.val())){
+		else if(parseInt(amount.val()) > parseInt(disponible.val()) && type.val() !== 'abono'){
 			camposValid += '<p>* El monto no debe superar el saldo disponible</p>';
 			validInput = false;
 			amount.css('border-color', '#cd0a0a')
@@ -185,7 +188,7 @@ $(function() {
 					$.post(baseURL + api + isoPais + '/servicios/transferencia-maestra/RegargaTMProcede', {request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)})
 					.done(function (response) {
 						var data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
-						
+
 						switch (data.code) {
 							case 0:
 								notiPagOS(data.title, data.msg, 'ok');
