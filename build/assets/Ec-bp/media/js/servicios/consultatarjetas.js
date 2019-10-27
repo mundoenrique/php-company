@@ -6,7 +6,7 @@ var serv_var = {
 	paginar: true,
 	dni_tarjetas: "",
 	noTarjetas: "",
-	TotalTjts: 0,	
+	TotalTjts: 0,
 	actualizarDatos: 'hidden',
 	consulta: 'hidden',
 	bloquear: 'hidden',
@@ -164,11 +164,11 @@ function buscar(pgSgt) {
 			}).toString(CryptoJS.enc.Utf8))
 
 			console.log(data);
-			
+
 
 		 	$aux.dialog('destroy');
 		 if (!data.result.ERROR) {
-				$('#resultado-tarjetas').show();			
+				$('#resultado-tarjetas').show();
 
 				cargarResultado(data);
 				$('#resultado-tarjetas').find('.jPag-sprevious').attr('title', "anterior");
@@ -209,18 +209,18 @@ function cargarResultado(data) {
 
 		var aumenta = 1;
 		var iconos = {'ACTUALIZAR_DATOS':'&#xe02d;',
-		'CONSULTAR_SALDO':'&#xe022;',
-		'BLOQUEO':'&#xe028;',
-		'DESBLOQUEO_TARJETA':'&#xe030;',
+		'CONSULTA_SALDO_TARJETA':'&#xe022;',
+		'BLOQUEO_TARJETA':'&#xe028;',
+		'DESBLOQUEO':'&#xe030;',
 		'ENTREGAR_A_TARJETAHABIENTE':'&#xe011;',
 		'ENVIAR_A_EMPRESA':'&#xe05e;',
 		'RECIBIR_EN_EMPRESA':'&#xe062;',
 		'RECIBIR_EN_BANCO':'&#xe09c;'}
-		$.each(data.result.detalleEmisiones, function (k, v) {			
-			
+		$.each(data.result.detalleEmisiones, function (k, v) {
+
 			//$.inArray('Enviado a Banco', data.result.operacioneTarjeta) !== -1 ? alert(1) : alert(2);
 
-			tr = '<tr class="' + data.result.pagina+ '" tjta="' + v.nroTarjeta + '" id_ext_per="' + v.cedula + '"><td class="checkbox-select"><input id="check-oneTM" type="checkbox" value=""/></td>';			
+			tr = '<tr class="' + data.result.pagina+ '" tjta="' + v.nroTarjeta + '" id_ext_per="' + v.cedula + '"><td class="checkbox-select"><input id="check-oneTM" type="checkbox" value=""/></td>';
 			tr += '<td id="td-nombre-2" class="bp-min-width">' + v.nroTarjeta + '</td>';
 			tr += '<td class="bp-min-width">' + v.ordenS + '</td>';
 			tr += '<td class="bp-min-width">' + v.nroLote + '</td>';
@@ -233,22 +233,22 @@ function cargarResultado(data) {
 			/* tr += '<td id="saldo' + v.noTarjetaConMascara.replace(/[*]/g, "") + '" class="bp-min-width">-</td>'; //saldo */
 			 tr += '<td class="bp-min-width">';
 			 $.each(data.result.operacioneTarjeta, function (i, j)
-			{										
+			{
 				if(v.edoEmision == j.edoTarjeta)
-				{  
+				{
 					for(k in j.operacion)
-					{						
-						var	operacion = j.operacion[k].replace(/\s/g,'_');														
+					{
+						var	operacion = j.operacion[k].replace(/\s/g,'_');
 						tr += '<a id="'+operacion+'" title="'+MaysPrimera(j.operacion[k].toLowerCase())+'" ><span class="icon" data-icon="'+iconos[operacion]+'"></span></a>';
 					}
-				}			
+				}
 			})
-			tr += '</td></tr>'; 
+			tr += '</td></tr>';
 			$('.table-text-service tbody').append(tr);
 			aumenta++;
 		});
 
-		
+
 		paginar();
 
 	} else {
@@ -296,10 +296,6 @@ function paginar() {
 function resett() {
 	$(':checkbox').each(function () {
 		this.checked = 0;
-	});
-
-	$(':input').each(function () {
-		$(this).val('');
 	});
 
 	$.each($('.monto'), function () {
@@ -380,17 +376,306 @@ $("#exportXLS_a").on('click', function () {
 
 
 
-// ACCION EVENTO ICON->CONSULTAR SALDO
+// ACCION EVENTO ICON->RECIBIR EN BANCO
 $(".table-text-service").on('click', '#RECIBIR_EN_BANCO', function() {
 
 	serv_var.noTarjetas = [$(this).parents('tr').attr('tjta')];
 	serv_var.dni_tarjetas = [$(this).parents('tr').attr('id_ext_per')];
 
-	alert(serv_var.noTarjetas)
-	
-	
+	var mensaje = 'Si desea recibir la tarjeta pulse aceptar de lo contrario cancelar.'
+			op = '20'
+			url = '1'
+
+	procesar('Recibir tarjeta en banco',url,op,mensaje)
+
+
 });
+
+// ACCION EVENTO ICON->RECIBIR EN EMRPESA
+$(".table-text-service").on('click', '#RECIBIR_EN_EMPRESA', function() {
+
+	serv_var.noTarjetas = [$(this).parents('tr').attr('tjta')];
+	serv_var.dni_tarjetas = [$(this).parents('tr').attr('id_ext_per')];
+
+	var mensaje = 'Si desea recibir la tarjeta pulse aceptar de lo contrario cancelar.'
+			op = '20'
+			url = '1'
+
+	procesar('Recibir tarjeta en empresa',url,op,mensaje)
+
+
+});
+
+// ACCION EVENTO ICON->BLOQUEAR TARJETA
+$(".table-text-service").on('click', '#BLOQUEO_TARJETA', function() {
+
+	serv_var.noTarjetas = [$(this).parents('tr').attr('tjta')];
+	serv_var.dni_tarjetas = [$(this).parents('tr').attr('id_ext_per')];
+
+	var mensaje = 'Si desea bloquear la atrjeta pulse aceptar de lo contrario cancelar.'
+			op = '20'
+			url = '1'
+
+	procesar('Bloqueo de tarjeta',url,op,mensaje)
+
+})
+
+
+// ACCION EVENTO ICON->ENVIAR A EMPRESA
+$(".table-text-service").on('click', '#ENVIAR_A_EMPRESA', function() {
+
+	serv_var.noTarjetas = [$(this).parents('tr').attr('tjta')];
+	serv_var.dni_tarjetas = [$(this).parents('tr').attr('id_ext_per')];
+
+	var mensaje = 'Si desea enviar la tarjeta pulse aceptar de lo contrario cancelar.'
+			op = '20'
+			url = '1'
+
+	procesar('Enviar tarjeta a empresa',url,op,mensaje)
+
+})
+
+// ACCION EVENTO ICON->ENTREGAR_A_TARJETAHABIENTE
+$(".table-text-service").on('click', '#ENTREGAR_A_TARJETAHABIENTE', function() {
+
+	serv_var.noTarjetas = [$(this).parents('tr').attr('tjta')];
+	serv_var.dni_tarjetas = [$(this).parents('tr').attr('id_ext_per')];
+
+	var mensaje = 'Si desea entregar la tarjeta pulse aceptar de lo contrario cancelar.'
+			op = '20'
+			url = '1'
+
+	procesar('Entregar tarjeta',url,op,mensaje)
+
+})
+
+// ACCION EVENTO ICON->DESBLOQUEO
+$(".table-text-service").on('click', '#DESBLOQUEO', function() {
+
+	serv_var.noTarjetas = [$(this).parents('tr').attr('tjta')];
+	serv_var.dni_tarjetas = [$(this).parents('tr').attr('id_ext_per')];
+
+	var mensaje = 'Si desea desbloquear la tarjeta pulse aceptar de lo contrario cancelar.'
+			op = '20'
+			url = '1'
+
+	procesar('Desbloquear tarjeta',url,op,mensaje)
+
+})
+
+// ACCION EVENTO ICON->ACTUALIZAR DATOS
+$(".table-text-service").on('click', '#ACTUALIZAR_DATOS', function() {
+
+	serv_var.noTarjetas = [$(this).parents('tr').attr('tjta')];
+	serv_var.dni_tarjetas = [$(this).parents('tr').attr('id_ext_per')];
+
+	var canvas = "<div id='dialog-confirm'>";
+	canvas += "<form name='no-form' onsubmit='return false'>";
+	canvas += '<div id="campos-transfer">';
+	canvas += '<span><p>Nombre:</p>';
+	canvas += '<input  type="text" name="pass" id="nombres">';
+	canvas += '<li id="errornombre" style="display:none"></li>';
+	canvas += '</span>';
+	canvas += '<span><p>Apellidos:</p>';
+	canvas += '<input type="text" name="pass" id="apellidos">';
+	canvas += '<li id="errorapellido" style="display:none"></li>';
+	canvas += '</span>';
+	canvas += '</div>';
+	canvas += '<div id="campos-transfer">';
+	canvas += '<span><p>Correo:</p>';
+	canvas += '<input type="text" name="pass" id="correo" >';
+	canvas += '<li id="errorcorreo" style="display:none"></li>';
+	canvas += '</span>';
+	canvas += '<span><p>PIN: </p>';
+	canvas += '<input type="password" name="numero" id="pin" maxlength="4">';
+	canvas += '<li id="errorpin" style="display:none"></li>';
+	canvas += '</span>';
+	canvas += '</div>';
+	canvas += "</fieldset><h5 id='msg'></h5>";
+	canvas += "</form>"
+	canvas += "</div>"
+
+	$(canvas).dialog({
+
+		dialogClass: "close",
+		title: 'Actualizar datos tarjetahabiente',
+		modal: true,
+		width: 500,
+		top: 900,
+		position: {
+			my: "top 800"
+		},
+		close: function() {
+			resett();
+			$(this).dialog("destroy");
+		},
+		buttons: {
+			Aceptar: function() {
+				$(this).find('#msg').empty();
+				validarFields();
+
+
+			}
+		}
+	});
+
+
+
+})
+
+$('#pin').on('input', function () {
+	this.value = this.value.replace(/[^0-9]/g,'');
+});
+
+function validarFields()
+{
+	var valNombre = $('#dialog-confirm').find('#nombres')
+	var valApellidos = $('#dialog-confirm').find('#apellidos')
+	var valCorreo = $('#dialog-confirm').find('#correo')
+	var valPin = $('#dialog-confirm').find('#pin')
+	var errorName = $('#dialog-confirm').find('#errornombre')
+	var errorApellido = $('#dialog-confirm').find('#errorapellido')
+	var errorCorreo = $('#dialog-confirm').find('#errorcorreo')
+	var errorPin = $('#dialog-confirm').find('#errorpin')
+
+	spaceString('#nombres')
+	spaceString('#apellidos')
+	spaceString('#correo')
+	spaceString('#pin')
+
+	var camposValid = ''
+			msgValido = ''
+			validInput = true
+			descRegExp = /^['a-z0-9ñáéíóú ,.:()']+$/i
+			emailRegExp = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
+			numRegExp = /^\d+$/
+
+	if(valNombre.val() === '')
+	{
+		errorName.show();
+		errorName.html('El campo no puede estar vacio')
+		validInput = false;
+		valNombre.addClass('textbox-transfer');
+	}
+	else if(!descRegExp.test(valNombre.val()))
+	{
+		errorName.show();
+		errorName.html('No se admiten caracteres especiales')
+		validInput = false;
+		valNombre.addClass('textbox-transfer');
+	}
+	else{
+		errorName.hide();
+		validInput = true;
+		valNombre.removeClass('textbox-transfer');
+	}
+
+	if(valApellidos.val() === '')
+	{
+		errorApellido.show();
+		errorApellido.html('El campo no puede estar vacio')
+		validInput = false;
+		valApellidos.addClass('textbox-transfer');
+	}
+	else if(!descRegExp.test(valApellidos.val()))
+	{
+		errorApellido.show();
+		errorApellido.html('No se admiten caracteres especiales')
+		validInput = false;
+		valApellidos.addClass('textbox-transfer');
+	}
+	else{
+		errorApellido.hide();
+		validInput = true;
+		valApellidos.removeClass('textbox-transfer');
+	}
+
+	if(valCorreo.val() === '')
+	{
+		errorCorreo.show();
+		errorCorreo.html('El campo no puede estar vacio')
+		validInput = false;
+		valCorreo.addClass('textbox-transfer');
+	}
+	else if(!emailRegExp.test(valCorreo.val()))
+	{
+		errorCorreo.show();
+		errorCorreo.html('Formato de correo incorrecto (ejemlo@datos.com)')
+		validInput = false;
+		valCorreo.addClass('textbox-transfer');
+	}
+	else{
+		errorCorreo.hide();
+		validInput = true;
+		valCorreo.removeClass('textbox-transfer');
+	}
+
+	if(!numRegExp.test(valPin.val()))
+	{
+		errorPin.show();
+		errorPin.html('El campo debe ser numerico')
+		validInput = false;
+		valPin.addClass('textbox-transfer');
+	}
+	else if(valPin.val().length != 4)
+	{
+		errorPin.show();
+		errorPin.html('El campo debe contener 4 numeros')
+		validInput = false;
+		valPin.addClass('textbox-transfer');
+	}
+	else{
+		errorPin.hide();
+		validInput = true;
+		valPin.removeClass('textbox-transfer');
+	}
+
+	$('#dialog-confirm').find('#msg').append(camposValid);
+}
+
+function spaceString(name)
+{
+	var Field = $('#dialog-confirm').find(name)
+
+	var cambia = Field.val()
+			cambia = cambia.trim()
+			cambia =  cambia.replace(/ +/g, ' ')
+			Field.val(cambia)
+}
 
 function MaysPrimera(string){
   return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+//PROCESAR OPERACION
+function procesar(titulo, url, operacion, mensaje) {
+	var canvas = "<div id='dialog-confirm'>";
+	canvas += "<form name='no-form' onsubmit='return false'>";
+	canvas += "<center>Tarjeta: " + serv_var.noTarjetas + "</center>";
+	canvas += "<br><p>" + mensaje + "</p>";
+	canvas += "</fieldset><h5 id='msg'></h5>";
+	canvas += "</form>"
+	canvas += "</div>"
+
+	$(canvas).dialog({
+
+		dialogClass: "hide-close",
+		title: titulo,
+		modal: true,
+		position: {
+			my: "top 800",
+		},
+		close: function() {
+			resett();
+			$(this).dialog("destroy");
+		},
+		buttons: {
+			"Cancelar": { text: 'Cancelar', class: 'novo-btn-secondary-modal', style: 'border-color: #ffdd00 !important;background:white !important;',
+			click: function () {
+			$(this).dialog("close"); }
+			},
+			Aceptar: function() {
+			}
+		}
+	});
 }
