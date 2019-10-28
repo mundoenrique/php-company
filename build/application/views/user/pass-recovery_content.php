@@ -4,10 +4,10 @@ $pais= $this->uri->segment(1, 0);
 ?>
 <section class="container">
 	<header class="padding-left-right">
-		<h1><?= lang('PASSRECOVERY_TITLE'); ?></h1>
+		<h1><?= lang('RECOVER_PASS_TITLE'); ?></h1>
 	</header>
 	<article class="padding-left-right">
-		<p class="paragraph"><?= lang('FORGOT_PASS'); ?></p>
+		<p class="paragraph"><?= novoLang(lang('RECOVER_PASS_FORGOTTEN'), lang('GEN_SYSTEM_NAME')); ?></p>
 		<form id="form-pass-recovery" name="form-pass-recovery" accept-charset="utf-8">
 			<fieldset class="recuperar-clave-fieldset">
 				<div class="field-wrapper">
@@ -58,10 +58,10 @@ $pais= $this->uri->segment(1, 0);
 			<?php	if($pais=='bp'): ?>
 			<center>
 			<?php endif; ?>
-<div class="content-t">
+			<div class="content-t">
 
-</div>
 			</div>
+				</div>
 		</form>
 	</article>
 </section>

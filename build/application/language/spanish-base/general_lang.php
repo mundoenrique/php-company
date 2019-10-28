@@ -94,9 +94,6 @@ $lang['AYUDA'] = 'Ayuda';
 $lang['GEN_BTN_ACCEPT']= 'Aceptar';
 $lang['GEN_BTN_CANCEL']= 'Cancelar';
 $lang['GEN_BTN_CONTINUE']= 'Continuar';
-$lang['BUTTON_ACCEPT']= 'Aceptar';
-$lang['BUTTON_CONTINUE']= 'Continuar';
-$lang['BUTTON_CANCEL']= 'Cancelar';
 $lang['BACK'] = 'Volver atrás';
 //MASTER_CONTENT
 $lang['OWNERSHIP'] = 'Powered by NovoPayment, Inc.';

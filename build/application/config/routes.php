@@ -57,7 +57,7 @@ $route['(:any)/async-call'] = "callModels";
 //User
 $route['(:any)/inicio'] = "user/login";
 $route['(:any)/inicio/(:any)'] = "user/login";
-$route['(:any)/recuperar-clave'] = "user/recoveryPass";
+$route['(:any)/recuperar-clave'] = "user/RecoverPass";
 $route['(:any)/cambiar-clave'] = "user/changePassword";
 $route['(:any)/cerrar-sesion'] = "user/finishSession";
 //Information

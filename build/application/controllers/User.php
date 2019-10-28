@@ -97,7 +97,7 @@ class User extends NOVO_Controller {
 	 * @info Método que renderiza la vista para recuperar la contraseña
 	 * @author J. Enrique Peñaloza P.
 	 */
-	public function recoveryPass()
+	public function RecoverPass()
 	{
 		log_message('INFO', 'NOVO User: passwordRecovery Method Initialized');
 		$view = 'pass-recovery';

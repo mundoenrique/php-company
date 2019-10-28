@@ -1,8 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-$lang['PASSRECOVERY_TITLE'] = 'Recuperar contraseña';
-$lang['FORGOT_PASS']= "Si olvidaste o bloqueaste tu contraseña de acceso a <strong>Conexión Empresas Online</strong>, por favor ingresa los datos que se solicitan a continuación.";
+$lang['RECOVER_PASS_TITLE'] = 'Recuperar contraseña';
+$lang['RECOVER_PASS_FORGOTTEN']= "Si olvidaste o bloqueaste tu contraseña de acceso a <strong>%s</strong>, por favor ingresa los datos que se solicitan a continuación.";
 $lang['USER_USER']= "Usuario";
 $lang['RIF_NIT']= "RUC de la Empresa";
 $lang['MAIL']= "Correo electrónico";

@@ -140,9 +140,9 @@ class Novo_User_Model extends NOVO_Model {
 	 * @info Método para recuperar contraseña
 	 * @author J. Enrique Peñaloza Piñero
 	 */
-	public function callWs_RecoveryPass_User($dataRequest)
+	public function callWs_RecoverPass_User($dataRequest)
 	{
-		log_message('INFO', 'NOVO User Model: RecoveryPass method Initialized');
+		log_message('INFO', 'NOVO User Model: RecoverPass method Initialized');
 		$this->className = 'com.novo.objects.TO.UsuarioTO';
 
 		$this->dataAccessLog->modulo = 'clave';
@@ -153,15 +153,15 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataRequest->userName = mb_strtoupper($dataRequest->userName);
 		$this->dataRequest->idEmpresa = $dataRequest->idEmpresa;
 		$this->dataRequest->email = $dataRequest->email;
+		$maskMail = maskString($dataRequest->email, 4, $end = 6, '@');
 
-		$response = $this->sendToService('RecoveryPass');
+		$response = $this->sendToService('RecoverPass');
 
-		$this->response->title = lang('RECOVERYPASS_TITLE');
+		$this->response->title = lang('RECOVER_PASS_TITLE');
 		switch($this->isResponseRc) {
 			case 0:
-				$maskMail = maskString($dataRequest->email, 4, $end = 6, '@');
 				$this->response->code = 0;
-				$this->response->msg = novoLang(lang('RESP_TEMP_PASS'), $maskMail);
+				$this->response->msg = novoLang(lang('RESP_TEMP_PASS'), $this->dataRequest->userName, $maskMail);
 				$this->response->icon = 'ui-icon-circle-check';
 				$this->response->data = [
 					'btn1'=> [
@@ -171,20 +171,33 @@ class Novo_User_Model extends NOVO_Model {
 					]
 				];
 				break;
+			case -6:
+				$this->response->code = 1;
+				$this->response->msg = novoLang(lang('RESP_COMPANNY_NOT_ASSIGNED'), $this->dataRequest->userName);
+				break;
+			case -150:
+				$this->response->code = 1;
+				$this->response->msg = novoLang(lang('RESP_FISCAL_REGISTRY_NO_FOUND'), lang('RESP_FISCAL_REGISTRY'));
+				break;
+			case -159:
+				$this->response->code = 1;
+				$this->response->msg = novoLang(lang('RESP_EMAIL_NO_FOUND'), $maskMail);
+				break;
+			case -173:
+				$this->response->code = 1;
+				$this->response->msg = lang('RESP_EMAIL_NO_SENT');
+				break;
 			case -205:
-				//soporteempresas@tebca.com
-				$this->response->msg = lang('RES_UNREGISTERED_USER');
-				$this->response->msg.= novoLang(lang('RES_SUPPORT'), [lang('RES_SUPPORT_MAIL'), lang('RES_SUPPORT_TELF')]);
+				$this->response->code = 1;
+				$this->response->msg = lang('RESP_UNREGISTERED_USER');
+				$this->response->msg.= novoLang(lang('RESP_SUPPORT'), [lang('RESP_SUPPORT_MAIL'), lang('RESP_SUPPORT_TELF')]);
 				break;
 		}
 
-		if($this->isResponseRc != 0) {
-			$this->response->code = 1;
+		if($this->isResponseRc != 0 && $this->response->code == 1) {
 			$this->response->icon = 'ui-icon-info';
 			$this->response->data = [
 				'btn1'=> [
-					'text'=> FALSE,
-					'link'=> FALSE,
 					'action'=> 'close'
 				]
 			];

@@ -1,24 +1,31 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-// Novo_User_Model
-$lang['RESP_MESSAGE_SYSTEM'] = 'En este momento no podemos atender tu solicitud, por favor intenta más tarde';
+
 $lang['RESP_RC_DEFAULT'] = -9999;
-$lang['RES_DEFAULT_CODE'] = 4;
+$lang['RESP_DEFAULT_CODE'] = 4;
+$lang['RESP_RC_0'] = 'Proceso ejecutado exitosamente';
+$lang['RESP_MESSAGE_SYSTEM'] = 'En este momento no podemos atender tu solicitud, por favor intenta más tarde';
 $lang['RESP_TIMEOUT'] = "El servidor esta demorando mucho tiempo en responder por favor intentalo de nuevo";
+$lang['RESP_VALIDATION_INPUT'] = "Combinación de caracteres no válida.";
 $lang['RESP_INVALID_USER']= "Usuario o contraseña inválido";
 $lang['RESP_SUSPENDED_USER'] = 'Usuario no disponible, se encuentra inactivo';
 $lang['RESP_OLD_USER'] = 'Usuario aplicación anterior';
-$lang['RESP_TEMP_PASS'] = 'Proceso exitoso, se ha enviado un correo a %s con la contraseña temporal.';
-$lang['RES_UNREGISTERED_USER'] = 'Usuario no registrado en el sistema.';
-$lang['RES_SUPPORT'] = '';
-$lang['RES_SUPPORT_MAIL'] = '';
-$lang['RES_SUPPORT_TELF'] = '';
-$lang['RESP_NO_PERMISSIONS'] = 'Estimado usuario no tienes permiso para usar la aplicación, por favor comunícate con el administrador';//RC-262
-$lang['RESP_INCORRECTLY_CLOSED'] = '<div><h6>Tu última sesión se cerró de manera incorrecta. Ten en cuenta que para salir de la aplicación debes seleccionar <strong>"Salir"</strong>. <h4>Pulsa "Aceptar" para continuar.<h4></h6></div>';//RC-28
+$lang['RESP_UNREGISTERED_USER'] = 'Usuario no registrado en el sistema.';
+$lang['RESP_SUPPORT'] = '';
+$lang['RESP_SUPPORT_MAIL'] = '';
+$lang['RESP_SUPPORT_TELF'] = '';
+$lang['RESP_INCORRECTLY_CLOSED'] = '<div><h6>Tu última sesión se cerró de manera incorrecta. Ten en cuenta que para salir de la aplicación debes seleccionar <strong>"Salir"</strong>. <h4>Pulsa "Aceptar" para continuar.<h4></h6></div>';
+$lang['RESP_NO_PERMISSIONS'] = 'Estimado usuario no tienes permiso para usar la aplicación, por favor comunícate con el administrador';
+$lang['RESP_TEMP_PASS'] = 'Hola %s, enviamos un correo a %s con una contraseña temporal para que inicies sesión.';
+$lang['RESP_COMPANNY_NOT_ASSIGNED'] = 'El usuario %s no tiene empresa asignada.';
+$lang['RESP_FISCAL_REGISTRY'] = 'RUC.';
+$lang['RESP_FISCAL_REGISTRY_NO_FOUND'] = 'Por favor vericia el Número de %s de la empresa.';
+$lang['RESP_EMAIL_NO_FOUND'] = 'El correo %s es incorrecto, por favor verifícalo e intenta de nuevo.';
+$lang['RESP_EMAIL_NO_SENT'] = 'No fue posible enviar el correo de recuperación, por favor intentalo de nuevo.';
 
 
 
-$lang['RESP_MSG-0'] = 'Proceso ejecutado exitosamente';
+
 $lang['LOGIN_MSG-0'] = 'Ingreso exitoso';
 $lang['LOGIN_TITLE-1']= 'Usuario incorrecto';
 $lang['LOGIN_MSG-1']= "Usuario o contraseña inválido";

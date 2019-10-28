@@ -53,9 +53,9 @@ class CallModels extends Novo_Controller {
 
 		} else {
 			log_message('DEBUG', 'NOVO VALIDATION ERRORS: '.json_encode(validation_errors()));
-			$this->dataResponse->code = lang('RES_DEFAULT_CODE');;
-			$this->dataResponse->title = lang('SYSTEM_NAME');
-			$this->dataResponse->msg = lang('CALLMODELS_INDEX_MSG');
+			$this->dataResponse->code = lang('RESP_DEFAULT_CODE');;
+			$this->dataResponse->title = lang('GEN_SYSTEM_NAME');
+			$this->dataResponse->msg = lang('RESP_VALIDATION_INPUT');
 			$this->dataResponse->data = base_url('inicio');
 			$this->dataResponse->icon = 'ui-icon-alert';
 			$this->dataResponse->data = [

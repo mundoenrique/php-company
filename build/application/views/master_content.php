@@ -110,7 +110,7 @@
 		<img src="<?= $this->asset->insertFile($loader, 'images/loading-gif') ?>" class="requesting" alt="<?= lang('ALT_LOADER'); ?>">
 	</div>
 
-	<div id="system-info" class="hidden" default-code="<?= lang('RES_DEFAULT_CODE'); ?>"
+	<div id="system-info" class="hidden" default-code="<?= lang('RESP_DEFAULT_CODE'); ?>"
 			redirect="<?= lang('GEN_ENTERPRISE_LIST') ?>">
 		<p class="system-content">
 			<span id="system-icon" class="ui-icon"></span>
