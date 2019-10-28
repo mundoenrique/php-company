@@ -2,10 +2,14 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 $lang['GEN_SYSTEM_NAME']= 'Conexión Empresas Online';
-$lang['SYSTEM_NAME']= 'Conexión Empresas Online';
+$lang['GEN_ENTERPRISE_LIST'] = 'dashboard';
+$lang['GEN_USER'] = 'Usuario';
+$lang['GEN_PASSWORD'] = 'Contraseña';
+$lang['GEN_EMAIL'] = 'Correo electrónico';
+$lang['RECOVER_PASS_TITLE'] = 'Recuperar contraseña';
+$lang['FISCAL_REGISTRY'] = 'RUC.';
 $lang['LAST_SESSION']='Última sesión';
 $lang['FOOTER'] ='Todos los derechos reservados.';
-$lang['GEN_ENTERPRISE_LIST'] = 'dashboard';
 //ENTERPRISE WIDGET
 $lang['WIDGET_EMPRESAS_BTNSELECCIONAR']= 'Seleccionar otra empresa';
 $lang['WIDGET_EMPRESAS_BTNOTROSPROGRAMAS']= 'Conozca otros programas';

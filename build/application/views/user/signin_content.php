@@ -21,9 +21,9 @@
 			<div class="widget-content">
 				<form id="login-form" name="login-form" accept-charset="utf-8">
 					<fieldset>
-						<label for="user_login"><?= lang('USER'); ?></label>
+						<label for="user_login"><?= lang('GEN_USER'); ?></label>
 						<input type="text" id="user_login" name="user_login" required disabled>
-						<label for="user_pass"><?= lang('PASSWORD'); ?></label>
+						<label for="user_pass"><?= lang('GEN_PASSWORD'); ?></label>
 						<input type="password" id="user_pass" name="user_pass" required disabled>
 					</fieldset>
 					<div class="general-form-msg"></div>
@@ -31,7 +31,7 @@
 				</form>
 
 				<div class="align-center">
-					<p><?= lang('RECOVERY_PASSWORD_TITLE'); ?></p>
+					<p><?= lang('RECOVER_PASS_TITLE'); ?></p>
 					<a href="<?= base_url('recuperar-clave') ?>" rel="section">
 						<?= lang('RECOVERY_PASSWORD_LINK'); ?>
 					</a>

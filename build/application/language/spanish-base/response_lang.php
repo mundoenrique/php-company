@@ -18,7 +18,6 @@ $lang['RESP_INCORRECTLY_CLOSED'] = '<div><h6>Tu última sesión se cerró de man
 $lang['RESP_NO_PERMISSIONS'] = 'Estimado usuario no tienes permiso para usar la aplicación, por favor comunícate con el administrador';
 $lang['RESP_TEMP_PASS'] = 'Hola %s, enviamos un correo a %s con una contraseña temporal para que inicies sesión.';
 $lang['RESP_COMPANNY_NOT_ASSIGNED'] = 'El usuario %s no tiene empresa asignada.';
-$lang['RESP_FISCAL_REGISTRY'] = 'RUC.';
 $lang['RESP_FISCAL_REGISTRY_NO_FOUND'] = 'Por favor vericia el Número de %s de la empresa.';
 $lang['RESP_EMAIL_NO_FOUND'] = 'El correo %s es incorrecto, por favor verifícalo e intenta de nuevo.';
 $lang['RESP_EMAIL_NO_SENT'] = 'No fue posible enviar el correo de recuperación, por favor intentalo de nuevo.';

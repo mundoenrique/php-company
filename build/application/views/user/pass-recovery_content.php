@@ -11,16 +11,18 @@ $pais= $this->uri->segment(1, 0);
 		<form id="form-pass-recovery" name="form-pass-recovery" accept-charset="utf-8">
 			<fieldset class="recuperar-clave-fieldset">
 				<div class="field-wrapper">
-					<label for="user-name" class="line-field"><?= lang('USER_USER'); ?></label>
+					<label for="user-name" class="line-field"><?= lang('GEN_USER'); ?></label>
 					<input type="text" id="user-name" name="user-name" class="input-field field-large" maxlength="15" required>
 				</div>
 				<div class="field-wrapper">
-					<label for="id-company" class="line-field"><?= lang('RIF_NIT'); ?></label>
+					<label for="id-company" class="line-field">
+						<?= novoLang(lang('RECOVER_PASS_FISCAL_REGISTRY'), lang('FISCAL_REGISTRY')); ?>
+					</label>
 					<input type="text" id="id-company" name="id-company" class="input-field field-large" maxlength="17"
 						placeholder="<?= lang('PLACE_HOLDER_NIT'); ?>"  required>
 				</div>
 				<div class="field-wrapper">
-					<label for="email" class="line-field"><?= lang('MAIL'); ?></label>
+					<label for="email" class="line-field"><?= lang('GEN_EMAIL'); ?></label>
 					<input type="text" id="email" name="email" class="input-field  field-large" maxlength="64"
 						placeholder="<?= lang('PLACE_HOLDER_MAIL') ?>" required>
 				</div>
