@@ -20,18 +20,19 @@ class Novo_User_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO User Model: Login method Initialized');
 		$this->className = 'com.novo.objects.TOs.UsuarioTO';
+		$userName = mb_strtoupper($dataRequest->user);
 
-		$this->dataAccessLog->modulo = 'login';
-		$this->dataAccessLog->function = 'login';
-		$this->dataAccessLog->operation = 'loginFull';
-		$this->dataAccessLog->userName = $dataRequest->user;
+		$this->dataAccessLog->modulo = 'Usuario';
+		$this->dataAccessLog->function = 'Ingreso al sistema';
+		$this->dataAccessLog->operation = 'Iniciar sesion';
+		$this->dataAccessLog->userName = $userName;
 
-		$this->dataRequest->userName = mb_strtoupper($dataRequest->user);
+		$this->dataRequest->idOperation = 'loginFull';
+		$this->dataRequest->userName = $userName;
 		$this->dataRequest->password = $dataRequest->pass;
 		$this->dataRequest->ctipo = $dataRequest->active;
 
 		$response = $this->sendToService('Login');
-		//$this->isResponseRc = -262;
 		switch($this->isResponseRc) {
 			case 0:
 				log_message('DEBUG', 'NOVO ['.$dataRequest->user.'] RESPONSE: Login: ' . json_encode($response->usuario));
@@ -47,7 +48,7 @@ class Novo_User_Model extends NOVO_Model {
 				$userData = [
 					'sessionId' => $response->logAccesoObject->sessionId,
 					'logged' => TRUE,
-					'idUsuario' => $response->usuario->idUsuario,
+					'userId' => $response->usuario->idUsuario,
 					'userName' => $response->usuario->userName,
 					'fullName' => $fullName,
 					'codigoGrupo' => $response->usuario->codigoGrupo,
@@ -55,6 +56,7 @@ class Novo_User_Model extends NOVO_Model {
 					'token' => $response->token,
 					'cl_addr' => $this->encrypt_connect->encode($_SERVER['REMOTE_ADDR'], $dataRequest->user, 'REMOTE_ADDR'),
 					'countrySess' => $this->config->item('country'),
+					'idUsuario' => $response->usuario->idUsuario,
 					'pais' => $this->config->item('country'),
 					'nombreCompleto' => $fullName,
 					'logged_in' => TRUE
@@ -69,7 +71,7 @@ class Novo_User_Model extends NOVO_Model {
 				$fullName = mb_strtolower($response->usuario->primerNombre.' '.$response->usuario->primerApellido);
 				$userData = [
 					'sessionId' => $response->logAccesoObject->sessionId,
-					'idUsuario' => $response->usuario->idUsuario,
+					'userId' => $response->usuario->idUsuario,
 					'userName' => $response->usuario->userName,
 					'fullName' => $fullName,
 					'codigoGrupo' => $response->usuario->codigoGrupo,
@@ -144,13 +146,15 @@ class Novo_User_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO User Model: RecoverPass method Initialized');
 		$this->className = 'com.novo.objects.TO.UsuarioTO';
+		$userName = mb_strtoupper($dataRequest->userName);
 
-		$this->dataAccessLog->modulo = 'clave';
-		$this->dataAccessLog->function = 'recuperarClave';
-		$this->dataAccessLog->operation = 'olvidoClave';
-		$this->dataAccessLog->userName = $dataRequest->userName;
+		$this->dataAccessLog->modulo = 'Usuario';
+		$this->dataAccessLog->function = 'Recuperar Clave';
+		$this->dataAccessLog->operation = 'Enviar Clave';
+		$this->dataAccessLog->userName = $userName;
 
-		$this->dataRequest->userName = mb_strtoupper($dataRequest->userName);
+		$this->dataRequest->idOperation = 'olvidoClave';
+		$this->dataRequest->userName = $userName;
 		$this->dataRequest->idEmpresa = $dataRequest->idEmpresa;
 		$this->dataRequest->email = $dataRequest->email;
 		$maskMail = maskString($dataRequest->email, 4, $end = 6, '@');
@@ -161,7 +165,7 @@ class Novo_User_Model extends NOVO_Model {
 		switch($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
-				$this->response->msg = novoLang(lang('RESP_TEMP_PASS'), $this->dataRequest->userName, $maskMail);
+				$this->response->msg = novoLang(lang('RESP_TEMP_PASS'), [$this->dataRequest->userName, $maskMail]);
 				$this->response->icon = 'ui-icon-circle-check';
 				$this->response->data = [
 					'btn1'=> [
@@ -203,7 +207,6 @@ class Novo_User_Model extends NOVO_Model {
 			];
 		}
 
-
 		return $this->response;
 	}
 	/**
@@ -215,10 +218,11 @@ class Novo_User_Model extends NOVO_Model {
 		log_message('INFO', 'NOVO User Model: ChangePassword Method Initialized');
 		$this->className = 'com.novo.objects.TOs.UsuarioTO';
 
-		$this->dataAccessLog->modulo = 'login';
-		$this->dataAccessLog->function = 'login';
-		$this->dataAccessLog->operation = 'cambioClave';
+		$this->dataAccessLog->modulo = 'Usuario';
+		$this->dataAccessLog->function = 'Clave';
+		$this->dataAccessLog->operation = 'Cambiar Clave';
 
+		$this->dataRequest->idOperation = 'cambioClave';
 		$this->dataRequest->userName = $this->session->userdata('userName');
 		$this->dataRequest->passwordOld = $dataRequest->currentPass;
 		$this->dataRequest->password = $dataRequest->newPass;
@@ -267,15 +271,16 @@ class Novo_User_Model extends NOVO_Model {
 	public function callWs_FinishSession_User($dataRequest = FALSE)
 	{
 		log_message('INFO', 'NOVO User Model: FinishSession method Initialized');
-		$user = $dataRequest ? mb_strtoupper($dataRequest->user) : $this->session->userdata('userName');
+		$userName = $dataRequest ? mb_strtoupper($dataRequest->user) : $this->session->userdata('userName');
 		$this->className = 'com.novo.objects.TOs.UsuarioTO';
 
-		$this->dataAccessLog->userName = $user;
-		$this->dataAccessLog->modulo = 'logout';
-		$this->dataAccessLog->function = 'logout';
-		$this->dataAccessLog->operation = 'desconectarUsuario';
+		$this->dataAccessLog->userName = $userName;
+		$this->dataAccessLog->modulo = 'Usuario';
+		$this->dataAccessLog->function = 'Salir del sistema';
+		$this->dataAccessLog->operation = 'Cerrar sesion';
 
-		$this->dataRequest->idUsuario = $user;
+		$this->dataRequest->idOperation = 'desconectarUsuario';
+		$this->dataRequest->idUsuario = $userName;
 		$this->dataRequest->codigoGrupo = $this->session->userdata('codigoGrupo');
 
 		$response = $this->sendToService('FinishSession');

@@ -35,7 +35,6 @@ class NOVO_Model extends CI_Model {
 		$this->accessLog = accessLog($this->dataAccessLog);
 		$this->userName = $this->userName ?: mb_strtoupper($this->dataAccessLog->userName);
 
-		$this->dataRequest->idOperation = $this->dataAccessLog->operation;
 		$this->dataRequest->className = $this->className;
 		$this->dataRequest->logAccesoObject = $this->accessLog;
 		$this->dataRequest->token = $this->token;

@@ -34,6 +34,7 @@ class NOVO_Controller extends CI_Controller {
 		$this->method = 'callWs_'.$this->router->fetch_method().'_'.$this->router->fetch_class();
 		$this->countryUri = $this->uri->segment(1, 0) ? $this->uri->segment(1, 0) : 'pe';
 		$this->render->logged = $this->session->userdata('logged');
+		$this->render->userId = $this->session->userdata('idUsuario');
 		$this->render->fullName = $this->session->userdata('fullName');
 		$this->render->activeRecaptcha = $this->config->item('active_recaptcha');
 		$this->optionsCheck();

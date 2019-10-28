@@ -57,12 +57,8 @@ class Encrypt_Connect {
 		$decryptData = base64_decode(trim($descryptData));
 		$response = json_decode($decryptData);
 
-		$rc = isset($response->rc) ? 'RC '.$response->rc : lang('RESP_RC_DEFAULT');
-		$msg = isset($response->msg) ? 'MSG '.$response->msg : lang('RESP_MESSAGE_SYSTEM');
-		$country = isset($response->pais) ? 'COUNTRY '.$response->pais : $this->CI->config->item('country');
-
 		if(!$response) {
-			log_message('DEBUG', 'NOVO ['.$userName.'] Sin respuesta del servicio');
+			log_message('ERROR', 'NOVO ['.$userName.'] Sin respuesta del servicio');
 			$response = new stdClass();
 			$response->rc = lang('RESP_RC_DEFAULT');
 			$response->msg = lang('RESP_MESSAGE_SYSTEM');
@@ -117,11 +113,11 @@ class Encrypt_Connect {
 			$response = $failResponse;
 			$fail = TRUE;
 		}
-		if(!$response) {
+		if($httpCode != 200 || !$response) {
+			log_message('ERROR','NOVO ['.$userName.'] ERROR CURL: '.json_encode($CurlError));
 			$failResponse = new stdClass();
 			$failResponse->rc = lang('RESP_RC_DEFAULT');
 			$failResponse->msg = lang('RESP_MESSAGE_SYSTEM');
-			log_message('ERROR','NOVO ['.$userName.'] ERROR CURL: '.json_encode($CurlError));
 			$response = $failResponse;
 			$fail = TRUE;
 		}
@@ -148,6 +144,6 @@ class Encrypt_Connect {
 		$msg = $logMessage->msg;
 		$rc = $logMessage->rc;
 		$country = $logMessage->pais;
-		log_message('DEBUG', 'NOVO ['.$userName.'] RESPONSE '.$model.'= country: '.$country.', rc: '.$rc.', msg: '.$msg);
+		log_message('DEBUG', 'NOVO ['.$userName.'] RESPONSE '.$model.'= rc: '.$rc.', msg: '.$msg.', country: '.$country);
 	}
 }

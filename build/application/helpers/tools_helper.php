@@ -268,7 +268,7 @@ if(!function_exists('languajeLoad')) {
 					'login' => ['login', 'signin'],
 					'validatecaptcha' => ['login'],
 					'RecoverPass'	=> ['password-recover'],
-					'changePassword'	=> [],
+					'changePassword'	=> ['change-password'],
 					'finishSession'	=> [],
 					'benefits'	=> ['benefits'],
 					'terms'	=> ['terms'],
