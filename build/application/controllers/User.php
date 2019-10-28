@@ -28,21 +28,7 @@ class User extends NOVO_Controller {
 			exit();
 		}
 
-		$userData = [
-			'sessionId',
-			'idUsuario',
-			'userName',
-			'fullName',
-			'codigoGrupo',
-			'lastSession',
-			'token',
-			'cl_addr',
-			'countrySess',
-			'pais',
-			'nombreCompleto'
-		];
-
-		$this->session->unset_userdata($userData);
+		$this->session->sess_destroy();
 
 		$this->load->library('user_agent');
 		if($this->render->activeRecaptcha) {
@@ -119,8 +105,8 @@ class User extends NOVO_Controller {
 	 */
 	public function changePassword()
 	{
-		$view = 'change-password';
 		log_message('INFO', 'NOVO User: changePassword Method Initialized');
+		$view = 'change-password';
 		if(!$this->session->flashdata('changePassword')) {
 			redirect(base_url('inicio'), 'location');
 			exit();
@@ -161,7 +147,7 @@ class User extends NOVO_Controller {
 	public function finishSession()
 	{
 		log_message('INFO', 'NOVO User: finishSession Method Initialized');
-		if($this->render->logged) {
+		if($this->render->userId) {
 			$this->load->model('Novo_User_Model', 'finishSession');
 			$this->finishSession->callWs_FinishSession_User();
 		}
