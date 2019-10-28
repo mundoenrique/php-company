@@ -30,7 +30,7 @@ class Encrypt_Connect {
 		if($model !== 'REMOTE_ADDR') {
 			$data = json_encode($data, JSON_UNESCAPED_UNICODE);
 		}
-		log_message('DEBUG', 'NOVO ['.$userName.'] REQUEST '.$model.': '.$data);
+		log_message('DEBUG', 'NOVO ['.$userName.'] REQUEST '.$model.'= '.$data);
 
 		$dataB = base64_encode($data);
 		while((strlen($dataB)%8) != 0) {
@@ -121,7 +121,7 @@ class Encrypt_Connect {
 			$failResponse = new stdClass();
 			$failResponse->rc = lang('RESP_RC_DEFAULT');
 			$failResponse->msg = lang('RESP_MESSAGE_SYSTEM');
-			log_message("ERROR",'NOVO ['.$userName.'] ERROR CURL: '.json_encode($CurlError));
+			log_message('ERROR','NOVO ['.$userName.'] ERROR CURL: '.json_encode($CurlError));
 			$response = $failResponse;
 			$fail = TRUE;
 		}
@@ -148,6 +148,6 @@ class Encrypt_Connect {
 		$msg = $logMessage->msg;
 		$rc = $logMessage->rc;
 		$country = $logMessage->pais;
-		log_message('DEBUG', 'NOVO ['.$userName.'] RESPONSE '.$model.' country: '.$country.', rc: '.$rc.', msg: '.$msg);
+		log_message('DEBUG', 'NOVO ['.$userName.'] RESPONSE '.$model.'= country: '.$country.', rc: '.$rc.', msg: '.$msg);
 	}
 }

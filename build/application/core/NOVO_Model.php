@@ -53,7 +53,7 @@ class NOVO_Model extends CI_Model {
 
 		$this->isResponseRc = (int) $responseDecrypt->rc;
 		$this->response->code = lang('RESP_DEFAULT_CODE');
-		$this->response->title = lang('SYSTEM_NAME');
+		$this->response->title = lang('GEN_SYSTEM_NAME');
 		$this->response->icon = 'ui-icon-alert';
 		$this->response->msg = $this->isResponseRc == 0 ? lang('RESP_RC_0') : '';
 		$this->response->data = [
