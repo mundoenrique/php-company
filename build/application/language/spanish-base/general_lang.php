@@ -6,6 +6,7 @@ $lang['GEN_ENTERPRISE_LIST'] = 'dashboard';
 $lang['GEN_USER'] = 'Usuario';
 $lang['GEN_PASSWORD'] = 'Contraseña';
 $lang['GEN_EMAIL'] = 'Correo electrónico';
+$lang['GEN_PLACE_HOLDER_EMAIL'] = "usuario@ejemplo.com";
 $lang['RECOVER_PASS_TITLE'] = 'Recuperar contraseña';
 $lang['FISCAL_REGISTRY'] = 'RUC.';
 $lang['LAST_SESSION']='Última sesión';

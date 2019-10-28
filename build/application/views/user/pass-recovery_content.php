@@ -19,12 +19,12 @@ $pais= $this->uri->segment(1, 0);
 						<?= novoLang(lang('RECOVER_PASS_FISCAL_REGISTRY'), lang('FISCAL_REGISTRY')); ?>
 					</label>
 					<input type="text" id="id-company" name="id-company" class="input-field field-large" maxlength="17"
-						placeholder="<?= lang('PLACE_HOLDER_NIT'); ?>"  required>
+						placeholder="<?= lang('PLACE_HOLDER_FISCAL_REGISTER'); ?>" required>
 				</div>
 				<div class="field-wrapper">
 					<label for="email" class="line-field"><?= lang('GEN_EMAIL'); ?></label>
 					<input type="text" id="email" name="email" class="input-field  field-large" maxlength="64"
-						placeholder="<?= lang('PLACE_HOLDER_MAIL') ?>" required>
+						placeholder="<?= lang('GEN_PLACE_HOLDER_EMAIL') ?>" required>
 				</div>
 			</fieldset>
 			<div class="form-actions">
