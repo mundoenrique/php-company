@@ -28,7 +28,6 @@ $config['asset_url'] = BASE_CDN_URL;
 $config['asset_path'] = BASE_CDN_PATH;
 $config['favicon'] = 'favicon-novo';
 $config['channel'] = 'ceo';
-$config['app_lang'] = LANGUAGE;
 // Main web service access
 $config['urlWS'] = WS_URL;
 $config['keyNovo'] = base64_decode(WS_KEY);

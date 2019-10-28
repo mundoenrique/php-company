@@ -3,7 +3,6 @@
 $config['country'] = 'Ec-bp';
 $config['base_url']	= BASE_URL.'bp/';
 $config['language']	= 'spanish-bp';
-$config['language_file_specific'] = ['general','login', 'terms'];
 
 $config['favicon'] = 'favicon-bp';
 

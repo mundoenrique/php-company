@@ -3,4 +3,3 @@
 $config['country'] = 'Usd';
 $config['base_url']	= BASE_URL.'us/';
 $config['language']	= 'spanish-us';
-$config['language_file_specific'] = ['login','terms'];

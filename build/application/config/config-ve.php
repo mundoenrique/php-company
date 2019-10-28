@@ -3,7 +3,6 @@
 $config['country'] = 'Ve';
 $config['base_url']	= BASE_URL.'ve/';
 $config['language']	= 'spanish-ve';
-$config['language_file_specific'] = ['general', 'login', 'pass-recovery', 'terms', 'enterprise'];
 // Config elements master_content
 $config['settingContents'] =
 [
