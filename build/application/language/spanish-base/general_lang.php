@@ -7,8 +7,16 @@ $lang['GEN_USER'] = 'Usuario';
 $lang['GEN_PASSWORD'] = 'Contraseña';
 $lang['GEN_EMAIL'] = 'Correo electrónico';
 $lang['GEN_PLACE_HOLDER_EMAIL'] = "usuario@ejemplo.com";
-$lang['RECOVER_PASS_TITLE'] = 'Recuperar contraseña';
-$lang['FISCAL_REGISTRY'] = 'RUC.';
+$lang['GEN_RECOVER_PASS_TITLE'] = 'Recuperar contraseña';
+$lang['GEN_FISCAL_REGISTRY'] = 'RUC.';
+//BUTTONS
+$lang['GEN_BTN_ACCEPT']= 'Aceptar';
+$lang['GEN_BTN_CANCEL']= 'Cancelar';
+$lang['GEN_BTN_CONTINUE']= 'Continuar';
+$lang['GEN_BTN_BACK'] = 'Volver atrás';
+
+
+
 $lang['LAST_SESSION']='Última sesión';
 $lang['FOOTER'] ='Todos los derechos reservados.';
 //ENTERPRISE WIDGET
@@ -95,11 +103,6 @@ $lang['CONFIG_EMPR'] = 'Configuración de empresa';
 $lang['CONFIG_SUCU'] = 'Configuración de sucursal';
 $lang['TITLE_MODIFICAR'] = 'Modificar';
 $lang['AYUDA'] = 'Ayuda';
-//BUTTONS
-$lang['GEN_BTN_ACCEPT']= 'Aceptar';
-$lang['GEN_BTN_CANCEL']= 'Cancelar';
-$lang['GEN_BTN_CONTINUE']= 'Continuar';
-$lang['BACK'] = 'Volver atrás';
 //MASTER_CONTENT
 $lang['OWNERSHIP'] = 'Powered by NovoPayment, Inc.';
 $lang['CREDITS'] = 'NovoPayment Inc. All rights reserved.';

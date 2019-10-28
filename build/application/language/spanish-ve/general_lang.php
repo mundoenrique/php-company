@@ -1,4 +1,4 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-$lang['FISCAL_REGISTRY'] = 'RIF.';
+$lang['GEN_FISCAL_REGISTRY'] = 'RIF.';

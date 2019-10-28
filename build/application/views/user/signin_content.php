@@ -31,7 +31,7 @@
 				</form>
 
 				<div class="align-center">
-					<p><?= lang('RECOVER_PASS_TITLE'); ?></p>
+					<p><?= lang('GEN_RECOVER_PASS_TITLE'); ?></p>
 					<a href="<?= base_url('recuperar-clave') ?>" rel="section">
 						<?= lang('RECOVERY_PASSWORD_LINK'); ?>
 					</a>

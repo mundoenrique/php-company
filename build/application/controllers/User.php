@@ -110,7 +110,7 @@ class User extends NOVO_Controller {
 			"third_party/additional-methods"
 		);
 		$this->views = ['user/'.$view];
-		$this->render->titlePage = lang('RECOVER_PASS_TITLE');
+		$this->render->titlePage = lang('GEN_RECOVER_PASS_TITLE');
 		$this->loadView($view);
 	}
 	/**

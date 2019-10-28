@@ -157,7 +157,7 @@ class Novo_User_Model extends NOVO_Model {
 
 		$response = $this->sendToService('RecoverPass');
 
-		$this->response->title = lang('RECOVER_PASS_TITLE');
+		$this->response->title = lang('GEN_RECOVER_PASS_TITLE');
 		switch($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
@@ -177,7 +177,7 @@ class Novo_User_Model extends NOVO_Model {
 				break;
 			case -150:
 				$this->response->code = 1;
-				$this->response->msg = novoLang(lang('RESP_FISCAL_REGISTRY_NO_FOUND'), lang('FISCAL_REGISTRY'));
+				$this->response->msg = novoLang(lang('RESP_FISCAL_REGISTRY_NO_FOUND'), lang('GEN_FISCAL_REGISTRY'));
 				break;
 			case -159:
 				$this->response->code = 1;
