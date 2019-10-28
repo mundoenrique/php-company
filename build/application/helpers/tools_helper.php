@@ -228,7 +228,7 @@ if(!function_exists('languajeLoad')) {
 				$languages = [
 					'login' => ['login'],
 					'validatecaptcha' => ['login'],
-					'recoveryPass'	=> ['pass-recovery'],
+					'RecoverPass'	=> ['password-recover'],
 					'terms'	=> ['terms'],
 				];
 				break;
@@ -239,7 +239,7 @@ if(!function_exists('languajeLoad')) {
 				$languages = [
 					'login' => ['login'],
 					'validatecaptcha' => ['login'],
-					'recoveryPass'	=> ['pass-recovery'],
+					'RecoverPass'	=> ['password-recover', 'response'],
 					'terms'	=> ['terms'],
 				];
 				break;
@@ -259,7 +259,7 @@ if(!function_exists('languajeLoad')) {
 				$languages = [
 					'login' => ['login'],
 					'validatecaptcha' => ['login'],
-					'recoveryPass'	=> ['pass-recovery', 'response'],
+					'RecoverPass'	=> ['password-recover', 'response'],
 					'terms'	=> ['terms'],
 				];
 				break;
@@ -267,7 +267,7 @@ if(!function_exists('languajeLoad')) {
 				$languages = [
 					'login' => ['login', 'signin'],
 					'validatecaptcha' => ['login'],
-					'recoveryPass'	=> ['pass-recovery'],
+					'RecoverPass'	=> ['password-recover'],
 					'changePassword'	=> [],
 					'finishSession'	=> [],
 					'benefits'	=> ['benefits'],
