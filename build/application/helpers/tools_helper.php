@@ -219,7 +219,7 @@ if(!function_exists('languajeLoad')) {
 		$class = $CI->router->fetch_class();
 		$langFiles = $langFiles ?: $CI->router->fetch_method();
 		$languages = [];
-		$lanGeneral = ['bp'];
+		$lanGeneral = ['bp', 'co', 've'];
 		$client = !$client ? 'default_lang' : $client;
 		log_message('INFO', 'NOVO HELPER languajeLoad Initialized for controller '.$class. ' and method '.$langFiles);
 
@@ -239,7 +239,7 @@ if(!function_exists('languajeLoad')) {
 				$languages = [
 					'login' => ['login'],
 					'validatecaptcha' => ['login'],
-					'RecoverPass'	=> ['password-recover', 'response'],
+					'RecoverPass'	=> ['password-recover'],
 					'terms'	=> ['terms'],
 				];
 				break;
