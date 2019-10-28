@@ -7140,8 +7140,10 @@ button.green:hover {
 }
 
 .text-center {
-	margin: 0 auto;
-	margin-left: 262px;
+	border-left: solid 1px #DFE0E2;
+	padding-left: 270px;
+	border-right: solid 1px #DFE0E2;
+	margin-right: 28px;
 }
 
 .select_sucursales {
