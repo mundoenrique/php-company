@@ -895,7 +895,7 @@ class Reportes extends CI_Controller {
 							)
 						);
 						$_POST['empresa'] = $dataRequest->empresa;
-						$_POST['fechaMes'] = $dataRequest->fechaMes;
+						$_POST['fechaMes'] = (isset($dataRequest->fechaMes))?$dataRequest->fechaMes:'';
 						$_POST['fechaInicial'] = (isset($dataRequest->fechaInicial))?$dataRequest->fechaInicial:"";
 						$_POST['fechaFin']  = (isset($dataRequest->fechaFin))?$dataRequest->fechaFin:"";
 
@@ -1043,6 +1043,8 @@ class Reportes extends CI_Controller {
 					$fechaInicial = $this->input->post('fechaInicial');
 					$fechaFin = $this->input->post('fechaFin');
 					$tipoConsulta = $this->input->post('radioGeneral');
+					$tipoDetalle = $this->input->post('tipoDetalle');
+					$posicionDetalle = $this->input->post('posicionDetalle');
 
 
 					$data = array(
@@ -1056,6 +1058,9 @@ class Reportes extends CI_Controller {
 							"fechaIni"=> $fechaInicial,
 							"fechaFin"=> $fechaFin,
 							"tipoConsulta"=> $tipoConsulta,
+							"tipoDetalle" => $tipoDetalle,
+							"posicionDetalle" => $posicionDetalle,
+							"opcion" => "CARD_EMI",
 							"logAccesoObject" => $logAcceso,
 							"token"=> $token,
 							);
