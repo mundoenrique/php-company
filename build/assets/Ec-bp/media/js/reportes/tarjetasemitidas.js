@@ -122,16 +122,7 @@ $('.ui-datepicker.ui-widget.ui-widget-content.ui-helper-clearfix.ui-corner-all')
 							span.attr("class", "icon");
 							span.attr("data-icon", '&#xe050;');
 							span.click(function () {
-								/*datos = {
-									idEmpresa: filtro_busq.acrif,
-									nomEmpresa: filtro_busq.acnomcia,
-									empresa: filtro_busq.empresa,
-									fechaInicial: filtro_busq.fechaInicial,
-									fechaFin: filtro_busq.fechaFin,
-									radioGeneral: filtro_busq.radioGeneral
-								}
 
-								descargarArchivo(datos, baseURL+api+isoPais+"/reportes/tarjetasEmitidasExpXLS", "Exportar Excel" );*/
 								var ceo_cook = decodeURIComponent(
 									document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 								);
@@ -154,15 +145,6 @@ $('.ui-datepicker.ui-widget.ui-widget-content.ui-helper-clearfix.ui-corner-all')
 							span.attr("class", "icon");
 							span.attr("data-icon", '&#xe050;');
 							span.click(function () {
-								/*datos = {
-										idEmpresa: filtro_busq.acrif,
-										nomEmpresa: filtro_busq.acnomcia,
-										empresa: filtro_busq.empresa,
-										fechaInicial: filtro_busq.fechaInicial,
-										fechaFin: filtro_busq.fechaFin,
-										radioGeneral: filtro_busq.radioGeneral
-									}
-								descargarArchivo(datos, baseURL+api+isoPais+"/reportes/tarjetasEmitidasExpPDF", "Exportar PDF" );*/
 								var ceo_cook = decodeURIComponent(
 									document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 								);
@@ -400,7 +382,7 @@ $('.ui-datepicker.ui-widget.ui-widget-content.ui-helper-clearfix.ui-corner-all')
 								td.attr("title","emision");
 								}
 
-								td.attr("class", "emision");
+								td.attr("class", "ep");
 								td.attr("id", posLista);
 								td.html(itemLista.totalEmision);
 								td.attr("style", "text-align: center")
@@ -409,7 +391,7 @@ $('.ui-datepicker.ui-widget.ui-widget-content.ui-helper-clearfix.ui-corner-all')
 									td = $(document.createElement("a")).appendTo(td);
 									td.attr("title","reposicion");
 								}
-								td.attr("class", "reposicion");
+								td.attr("class", "rp");
 								td.attr("id", posLista);
 								td.html(itemLista.totalReposicionTarjeta);
 								td.attr("style", "text-align: center")
@@ -475,24 +457,54 @@ $('.ui-datepicker.ui-widget.ui-widget-content.ui-helper-clearfix.ui-corner-all')
 						var selectClass = $(event.target).attr('class');
 						var selectId = event.target.id;
 						var nombreProducto = $(this).closest('table').find('th')[0].innerText;
+						var tipoNombre = $(this).attr('title')
 						var dataGeneral = data.lista;
-						var propiedadTrabajar = selectClass == 'emision' ? dataGeneral[selectId].detalleEmisiones : dataGeneral[selectId].detalleReposiciones;
-							console.log(dataGeneral)
-							console.log(propiedadTrabajar)
-							console.log(dataGeneral[selectId].detalleEmisiones)
+						var propiedadTrabajar = selectClass == 'ep' ? dataGeneral[selectId].detalleEmisiones : dataGeneral[selectId].detalleReposiciones;
+
 
 							if(propiedadTrabajar.length != 0){
 								var contenidoTabla = $("#chart");
-								$("#chart").dialog({ modal: true, title: "Consulta tarjetas emitidas", width: 960, height: "auto", draggable: false });
+								$("#chart").dialog({ modal: true, title: "Consulta tarjetas "+tipoNombre, width: 960, height: "auto", draggable: false });
 								var newTabla =$(document.createElement("table")).appendTo(contenidoTabla);
 								newTabla.attr("class", "tabla-detalles");
 								newTabla.attr("id", "tabla-detalles-general");
-
 
 								var div = $(document.createElement("div")).appendTo(newTabla);
 								div.attr("class", "title-detalles-tabla");
 								div.html(nombreProducto);
 								$(div).insertBefore($("#tabla-detalles-general"));
+
+								var div = $(document.createElement("div")).appendTo(newTabla);
+								div.attr("id", "view-results");
+								a = $(document.createElement("a")).appendTo(div);
+								span = $(a).append("<span title='Exportar Excel' data-icon ='&#xe05a;' aria-hidden = 'true' class = 'icon '></span>");
+								span.attr("aria-hidden", "true");
+								span.attr("class", "icon");
+								span.attr("data-icon", '&#xe050;');
+								$(div).insertBefore($("#tabla-detalles-general"));
+								span.click(function(){
+									var ceo_cook = decodeURIComponent(
+										document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+									);
+									filtro_busq.tipoDetalle = selectClass;
+									filtro_busq.posicionDetalle = selectId;
+
+									$('form#formulario').empty();
+									$('form#formulario').append('<input type="hidden" name="ceo_name" value="' + ceo_cook + '">');
+									$('form#formulario').append('<input type="hidden" name="idEmpresa" value="' + filtro_busq.acrif + '" />');
+									$('form#formulario').append('<input type="hidden" name="nomEmpresa" value="' + filtro_busq.acnomcia + '" />');
+									$('form#formulario').append('<input type="hidden" name="empresa" value="' + filtro_busq.empresa + '" />');
+									$('form#formulario').append('<input type="hidden" name="fechaMes" value="' + filtro_busq.fechaMes + '" />');
+									$('form#formulario').append('<input type="hidden" name="fechaInicial" value="' + filtro_busq.fechaInicial + '" />');
+									$('form#formulario').append('<input type="hidden" name="fechaFin" value="' + filtro_busq.fechaFin + '" />');
+									$('form#formulario').append('<input type="hidden" name="radioGeneral" value="' + filtro_busq.radioGeneral + '" />');
+									$('form#formulario').append('<input type="hidden" name="tipoDetalle" value="' + filtro_busq.tipoDetalle + '" />');
+									$('form#formulario').append('<input type="hidden" name="posicionDetalle" value="' + filtro_busq.posicionDetalle + '" />');
+
+
+									 $('form#formulario').attr('action', baseURL + api + isoPais + "/reportes/tarjetasEmitidasExpXLS");
+									 $('form#formulario').submit();
+								})
 
 								thead = $(document.createElement("thead")).appendTo(newTabla);
 								thead.attr("id", "thead-detalles-principales");
@@ -521,38 +533,45 @@ $('.ui-datepicker.ui-widget.ui-widget-content.ui-helper-clearfix.ui-corner-all')
 								th = $(document.createElement("th")).appendTo(tr);
 								th.html($("#estado_plastico").attr("data"));
 
-
-									console.log(propiedadTrabajar[0].detalle.length)
 									$.each(propiedadTrabajar[0].detalle, function (i, tabla){
 
-										console.log(i , tabla)
+
 											tr = $(document.createElement("tr")).appendTo(tbody);
 											td = $(document.createElement("td")).appendTo(tr);
 											td.html(tabla.fechaEmision);
+											td.attr("id","fechaEmision")
 											td.attr("class", "info-detal");
 											td = $(document.createElement("td")).appendTo(tr);
 											td.html(tabla.nroLote);
+											td.attr("id","nroLote");
 											td.attr("class", "info-detal");
 											td = $(document.createElement("td")).appendTo(tr);
 											td.html(tabla.nroTarjeta);
+											td.attr("id","nroTajeta");
 											td.attr("class", "info-detal");
 											td = $(document.createElement("td")).appendTo(tr);
 											td.html(tabla.cedula);
+											td.attr("id","cedula");
 											td.attr("class", "info-detal");
 											td = $(document.createElement("td")).appendTo(tr);
 											td.html(tabla.nombres);
+											td.attr("id","nombres");
 											td.attr("class", "info-detal");
 											td = $(document.createElement("td")).appendTo(tr);
 											td.html(tabla.apellidos);
+											td.attr("id","apellidos");
 											td.attr("class", "info-detal");
 											td = $(document.createElement("td")).appendTo(tr);
 											td.html(tabla.ubicacion);
+											td.attr("id","ubicacion");
 											td.attr("class", "info-detal");
 											td = $(document.createElement("td")).appendTo(tr);
 											td.html(tabla.estadoEmision);
+											td.attr("id","estadoEmision");
 											td.attr("class", "info-detal");
 											td = $(document.createElement("td")).appendTo(tr);
 											td.html(tabla.estadoPlastico);
+											td.attr("id","estadoPlastico");
 											td.attr("class", "info-detal");
 									});
 									$('#tabla-detalles-general').dataTable({
