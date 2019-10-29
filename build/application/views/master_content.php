@@ -111,5 +111,4 @@
 	<?= ($module == 'login' && $activeRecaptcha) ?  $scriptCaptcha : ''; ?>
 	<?= $this->asset->insertJs(); ?>
 </body>
-
 </html>
