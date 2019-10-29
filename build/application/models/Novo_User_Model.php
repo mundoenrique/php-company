@@ -20,6 +20,7 @@ class Novo_User_Model extends NOVO_Model {
 	public function callWs_Login_User($dataRequest)
 	{
 		log_message('INFO', 'NOVO User Model: Login method Initialized');
+
 		$this->className = 'com.novo.objects.TOs.UsuarioTO';
 		$userName = mb_strtoupper($dataRequest->user);
 
@@ -34,6 +35,7 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataRequest->ctipo = $dataRequest->active;
 
 		$response = $this->sendToService('Login');
+
 		switch($this->isResponseRc) {
 			case 0:
 				log_message('DEBUG', 'NOVO ['.$dataRequest->user.'] RESPONSE: Login: ' . json_encode($response->usuario));
@@ -147,7 +149,9 @@ class Novo_User_Model extends NOVO_Model {
 	public function callWs_RecoverPass_User($dataRequest)
 	{
 		log_message('INFO', 'NOVO User Model: RecoverPass method Initialized');
+
 		$this->className = 'com.novo.objects.TO.UsuarioTO';
+
 		$userName = mb_strtoupper($dataRequest->userName);
 
 		$this->dataAccessLog->modulo = 'Usuario';
@@ -159,8 +163,8 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataRequest->userName = $userName;
 		$this->dataRequest->idEmpresa = $dataRequest->idEmpresa;
 		$this->dataRequest->email = $dataRequest->email;
-		$maskMail = maskString($dataRequest->email, 4, $end = 6, '@');
 
+		$maskMail = maskString($dataRequest->email, 4, $end = 6, '@');
 		$response = $this->sendToService('RecoverPass');
 
 		switch($this->isResponseRc) {
@@ -219,6 +223,7 @@ class Novo_User_Model extends NOVO_Model {
 	public function CallWs_ChangePassword_User($dataRequest)
 	{
 		log_message('INFO', 'NOVO User Model: ChangePassword Method Initialized');
+
 		$this->className = 'com.novo.objects.TOs.UsuarioTO';
 
 		$this->dataAccessLog->modulo = 'Usuario';
@@ -279,8 +284,10 @@ class Novo_User_Model extends NOVO_Model {
 	public function callWs_FinishSession_User($dataRequest = FALSE)
 	{
 		log_message('INFO', 'NOVO User Model: FinishSession method Initialized');
-		$userName = $dataRequest ? mb_strtoupper($dataRequest->user) : $this->session->userdata('userName');
+
 		$this->className = 'com.novo.objects.TOs.UsuarioTO';
+
+		$userName = $dataRequest ? mb_strtoupper($dataRequest->user) : $this->session->userdata('userName');
 
 		$this->dataAccessLog->userName = $userName;
 		$this->dataAccessLog->modulo = 'Usuario';
@@ -298,6 +305,7 @@ class Novo_User_Model extends NOVO_Model {
 		$this->response->data = FALSE;
 
 		$this->session->sess_destroy();
+
 		return $this->response;
 	}
 	/**
@@ -309,12 +317,16 @@ class Novo_User_Model extends NOVO_Model {
 	 */
 	public function callWs_validateCaptcha_User($dataRequest)
 	{
+		log_message('INFO', 'NOVO User Model: validateCaptcha method Initialized');
+
 		$this->load->library('recaptcha');
+
 		$result = $this->recaptcha->verifyResponse($dataRequest->token);
 
 		$logMessage = 'NOVO ['.$dataRequest->user.'] RESPONSE: recaptcha País: "' .$this->config->item('country');
 		$logMessage.= '", Score: "' . $result["score"] .'", Hostname: "'. $result["hostname"].'"';
 		log_message('DEBUG', $logMessage);
+
 		$this->response->title = lang('GEN_SYSTEM_NAME');
 
 		if($result["score"] <= 0) {
