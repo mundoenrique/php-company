@@ -583,6 +583,13 @@ nav ul.menu li.menu-item a {
 /********************************************
 										BODY WRAPPER
 **********************************************/
+#head-wrapper,
+#wrapper,
+#foot-wrapper {
+	margin: 0 auto;
+    width: 1000px;
+}
+
 #wrapper {
 	clear: both;
 	padding-top: 105px;
@@ -593,13 +600,6 @@ nav ul.menu li.menu-item a {
 	padding-top: 65px;
 }
 
-#head-wrapper,
-#wrapper,
-#foot-wrapper {
-	margin: 0 auto;
-	overflow: hidden;
-	width: 1000px;
-}
 
 .hidden {
 	display: none;
@@ -1080,7 +1080,7 @@ p.subtitulos-login {
 
 
 #content-condiciones {
-	width: 940px;
+	width: 1000px;
 	padding: 20px 10px;
 }
 
@@ -5474,7 +5474,7 @@ button.green:hover {
 
 #sidebar-cambioclave {
 	float: left;
-	width: 220px;
+	width: 250px;
 }
 
 #widget-area {
