@@ -1,6 +1,6 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed '); ?>
 <div id="content-condiciones">
-	<h1><?= lang('BREADCRUMB_WELCOME'); ?> <span class='first-title'> <?= $fullName ?></span></h1>
+	<h1><?= lang('GEN_WELCOME_TEXT'); ?> <span class='first-title'> <?= $fullName ?></span></h1>
 	<p id="text-alerta">
 		<?= $message ?>
 	</p>
@@ -8,12 +8,10 @@
 		<div id="widget-area">
 			<div class="widget tooltip" id="widget-signin">
 				<h2 class="widget-title">
-					<?php if($settingContents['change-password_content']['showInfoPass']){ ?>
-						<span aria-hidden="true" class="icon" data-icon="&#xe03f;"></span>
-					<?php
-						};
-						echo lang('INFO_CHANGE_PASS');
-					?>
+					<?php if($settingContents['change-password_content']['showInfoPass']): ?>
+					<span aria-hidden="true" class="icon" data-icon="&#xe03f;"></span>
+					<?php endif; ?>
+					<?= lang('INFO_CHANGE_PASS'); ?>
 				</h2>
 				<div class="widget-content">
 					<form id="form-change-pass" name="form-change-pass" accept-charset="utf-8">
@@ -21,18 +19,15 @@
 						<fieldset>
 							<div class="field-input">
 								<label for="current-pass"><?= lang('CURRENT_PASSWORD');?></label>
-								<input type="password" id="current-pass" name="current-pass" class="input-middle"
-									placeholder="Contraseña actual" required>
+								<input type="password" id="current-pass" name="current-pass" class="input-middle" required>
 							</div>
 							<div class="field-input">
 								<label for="new-pass"><?= lang('NEW_PASSWORD');?></label>
-								<input type="password" id="new-pass" name="new-pass" class="input-middle"
-									placeholder="Contraseña nueva" required>
+								<input type="password" id="new-pass" name="new-pass" class="input-middle" required>
 							</div>
 							<div class="field-input">
 								<label for="confirm-pass"><?= lang('CONFIRM_PASSWORD');?></label>
-								<input type="password" id="confirm-pass" name="confirm-pass" class="input-middle"
-									placeholder="Confirmar contraseña" required>
+								<input type="password" id="confirm-pass" name="confirm-pass" class="input-middle" required>
 							</div>
 						</fieldset>
 						<button id="btn-change-pass" name="btn-change-pass" class="btn-middle btn-sidebar">Aceptar</button>

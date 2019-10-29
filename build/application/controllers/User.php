@@ -133,7 +133,7 @@ class User extends NOVO_Controller {
 		$this->render->fullName = $this->session->userdata('fullName');
 		$this->render->userType = $this->session->flashdata('userType');
 		$this->views = ['user/'.$view];
-		$this->render->titlePage = LANG('CHANGEPASSWORD_TITLE');
+		$this->render->titlePage = LANG('GEN_PASSWORD_CHANGE_TITLE');
 
 		$this->session->set_flashdata('changePassword', $this->session->flashdata('changePassword'));
 		$this->session->set_flashdata('userType', $this->session->flashdata('userType'));

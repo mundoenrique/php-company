@@ -2,6 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 $lang['GEN_SYSTEM_NAME']= 'Conexión Empresas Online';
+$lang['GEN_WELCOME_TEXT'] = 'Bienvenido(a)';
 $lang['GEN_ENTERPRISE_LIST'] = 'dashboard';
 $lang['GEN_USER'] = 'Usuario';
 $lang['GEN_PASSWORD'] = 'Contraseña';
@@ -9,6 +10,8 @@ $lang['GEN_EMAIL'] = 'Correo electrónico';
 $lang['GEN_PLACE_HOLDER_EMAIL'] = "usuario@ejemplo.com";
 $lang['GEN_RECOVER_PASS_TITLE'] = 'Recuperar contraseña';
 $lang['GEN_FISCAL_REGISTRY'] = 'RUC.';
+$lang['GEN_PASSWORD_CHANGE_TITLE'] = 'Cambiar contraseña';
+$lang['CHANGEPASSWORD_TITLE'] = 'Recuperar contraseña';
 //BUTTONS
 $lang['GEN_BTN_ACCEPT']= 'Aceptar';
 $lang['GEN_BTN_CANCEL']= 'Cancelar';

@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * @info Módelo para la información del usuario
  * @author J. Enrique Peñaloza Piñero
- *
+ * @date May 14th, 2019
  */
 class Novo_User_Model extends NOVO_Model {
 
@@ -15,6 +15,7 @@ class Novo_User_Model extends NOVO_Model {
 	/**
 	 * @info Método para el inicio de sesión
 	 * @author J. Enrique Peñaloza Piñero
+	 * @date April 29th, 2019
 	 */
 	public function callWs_Login_User($dataRequest)
 	{
@@ -141,6 +142,7 @@ class Novo_User_Model extends NOVO_Model {
 	/**
 	 * @info Método para recuperar contraseña
 	 * @author J. Enrique Peñaloza Piñero
+	 * @date April 29th, 2019
 	 */
 	public function callWs_RecoverPass_User($dataRequest)
 	{
@@ -161,7 +163,6 @@ class Novo_User_Model extends NOVO_Model {
 
 		$response = $this->sendToService('RecoverPass');
 
-		$this->response->title = lang('GEN_RECOVER_PASS_TITLE');
 		switch($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
@@ -199,6 +200,7 @@ class Novo_User_Model extends NOVO_Model {
 		}
 
 		if($this->isResponseRc != 0 && $this->response->code == 1) {
+			$this->response->title = lang('GEN_RECOVER_PASS_TITLE');
 			$this->response->icon = 'ui-icon-info';
 			$this->response->data = [
 				'btn1'=> [
@@ -212,6 +214,7 @@ class Novo_User_Model extends NOVO_Model {
 	/**
 	 * @info Método para el cambio de Contraseña
 	 * @author J. Enrique Peñaloza Piñero
+	 * @date April 29th, 2019
 	 */
 	public function CallWs_ChangePassword_User($dataRequest)
 	{
@@ -228,14 +231,13 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataRequest->password = $dataRequest->newPass;
 
 		$changePassType = $this->session->flashdata('changePassword');
-
 		$response = $this->sendToService('ChangePassword');
 
 		switch($this->isResponseRc) {
 			case 0:
 				$this->callWs_FinishSession_User();
 				$this->response->code = 0;
-				$this->response->msg = lang('CHANGEPASSWORD_MSG-'.$this->isResponseRc);
+				$this->response->msg = lang('RESP_PASSWORD_CHANGED');
 				$this->response->icon = 'ui-icon-circle-check';
 				$this->response->data = [
 					'btn1'=> [
@@ -246,20 +248,25 @@ class Novo_User_Model extends NOVO_Model {
 				];
 				break;
 			case -4:
+				$this->response->code = 1;
+				$this->response->msg = lang('RESP_PASSWORD_USED');
+				break;
 			case -22:
 				$this->response->code = 1;
-				$this->response->icon = 'ui-icon-alert';
-				$this->response->msg = lang('CHANGEPASSWORD_MSG-'.$this->isResponseRc);
-				$this->response->data = [
-					'btn1'=> [
-						'text'=> FALSE,
-						'link'=> FALSE,
-						'action'=> 'close'
-					]
-				];
-				$this->session->set_flashdata('changePassword', $changePassType);
-				$this->session->set_flashdata('userType', $this->session->flashdata('userType'));
+				$this->response->msg = lang('RESP_PASSWORD_INCORRECT');
 				break;
+		}
+
+		if($this->isResponseRc != 0 && $this->response->code == 1) {
+			$this->session->set_flashdata('changePassword', $changePassType);
+			$this->session->set_flashdata('userType', $this->session->flashdata('userType'));
+			$this->response->title = lang('GEN_PASSWORD_CHANGE_TITLE');
+			$this->response->icon = 'ui-icon-alert';
+			$this->response->data = [
+				'btn1'=> [
+					'action'=> 'close'
+				]
+			];
 		}
 
 		return $this->response;
@@ -267,6 +274,7 @@ class Novo_User_Model extends NOVO_Model {
 	/**
 	 * @info Método para el cierre de sesión
 	 * @author J. Enrique Peñaloza Piñero
+	 * @date May 1st, 2019
 	 */
 	public function callWs_FinishSession_User($dataRequest = FALSE)
 	{
@@ -292,7 +300,13 @@ class Novo_User_Model extends NOVO_Model {
 		$this->session->sess_destroy();
 		return $this->response;
 	}
-
+	/**
+	 * @info Método validación recaptcha
+	 * @author Yelsyns Lopez
+	 * @date May 16th, 2019
+	 * @modified J. Enrique Peñaloza Piñero
+	 * @date
+	 */
 	public function callWs_validateCaptcha_User($dataRequest)
 	{
 		$this->load->library('recaptcha');
@@ -301,12 +315,12 @@ class Novo_User_Model extends NOVO_Model {
 		$logMessage = 'NOVO ['.$dataRequest->user.'] RESPONSE: recaptcha País: "' .$this->config->item('country');
 		$logMessage.= '", Score: "' . $result["score"] .'", Hostname: "'. $result["hostname"].'"';
 		log_message('DEBUG', $logMessage);
-		$this->response->title = lang('SYSTEM_NAME');
+		$this->response->title = lang('GEN_SYSTEM_NAME');
 
 		if($result["score"] <= 0) {
 			$this->response->code = 3;
 			$this->response->icon = 'ui-icon-closethick';
-			$this->response->msg = lang('VALIDATECAPTCHA_MSG-0');
+			$this->response->msg = lang('RESP_RECAPTCHA_VALIDATION_FAILED');
 			$this->response->data = [
 				'btn1'=> [
 					'text'=> lang('GEN_BTN_ACCEPT'),
