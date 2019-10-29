@@ -9,17 +9,13 @@ var baseURL = getPropertyOfElement('base-url');
 var baseAssets = getPropertyOfElement('asset-url');
 var country = getPropertyOfElement('country');
 var pais = getPropertyOfElement('pais');
-var showDetailsCompanies = getPropertyOfElement('type-over-detail-companies');
-var showRazonSocial = getPropertyOfElement('show-razon-social-detail-companies');
 var isoPais = pais;
 var loader = $('#loader').html();
 var prefixCountry = country !== 'bp' ? 'Empresas Online ' : '';
 var settingsCountry = { bp: 'Conexión Empresas', co: 'Colombia', pe: 'Perú', us: 'Perú', ve: 'Venezuela' };
 var strCountry = settingsCountry[country];
 var verb, who, where, data, title, msg, icon, dataResponse;
-
-$('input[type=text], input[type=password], input[type=textarea]').attr('autocomplete', 'off');
-
+$('input[type=text], input[type=password], input[type=email]').attr('autocomplete', 'off');
 /**
  * @info Llama al core del servidor
  * @author J. Enrique Peñaloza Piñero
@@ -35,7 +31,6 @@ function callNovoCore(verb, who, where, request, _response_) {
 		data: request
 	});
 	var codeResp = parseInt(getPropertyOfElement('default-code', '#system-info'));
-
 	dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, { format: CryptoJSAesJson }).toString();
 
 	$.ajax({
@@ -71,7 +66,6 @@ function callNovoCore(verb, who, where, request, _response_) {
 		_response_(response);
 	});
 }
-
 /**
  * @info Uso del modal informativo
  * @author J. Enrique Peñaloza Piñero
@@ -108,10 +102,9 @@ function notiSystem(title, message, icon, data) {
 		}
 	});
 }
-
 /**
- * @info Uso del modal informativo
- * @author Pedor Torres
+ * @info Crea botones para modal informativo
+ * @author Pedro Torres
  * @date 16/09/2019
  */
 function createButton(dialogMoldal, elementBotton, valuesButton){
@@ -120,12 +113,14 @@ function createButton(dialogMoldal, elementBotton, valuesButton){
 	elementBotton.on('click', function (e) {
 		if (valuesButton.action === 'redirect') {
 			$(location).attr('href', valuesButton.link);
+			$(this).html(loader)
+		}
+		if (valuesButton.action !== 'redirect') {
+			dialogMoldal.dialog('close');
 		}
 		$(this).off('click');
-		dialogMoldal.dialog('close');
 	});
 }
-
 /**
  * @info lee una propiedad especifica de un elemento html,
  * de no indicarse el elemento se toma por defecto el body
@@ -135,11 +130,4 @@ function createButton(dialogMoldal, elementBotton, valuesButton){
 function getPropertyOfElement(property, element) {
 	var element = element || 'body';
 	return $(element).attr(property);
-}
-
-function formatterDate(date) {
-	var dateArray = date.split('/');
-	var dateStr = dateArray[1] + '/' + dateArray[0] + '/' + dateArray[2];
-
-	return new Date(dateStr);
 }

@@ -15,7 +15,7 @@ class Novo_User_Model extends NOVO_Model {
 	/**
 	 * @info Método para el inicio de sesión
 	 * @author J. Enrique Peñaloza Piñero
-	 * @date April 29th, 2019
+	 * @date May 14th, 2019
 	 */
 	public function callWs_Login_User($dataRequest)
 	{
@@ -34,6 +34,7 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataRequest->ctipo = $dataRequest->active;
 
 		$response = $this->sendToService('Login');
+		//$this->isResponseRc =
 		switch($this->isResponseRc) {
 			case 0:
 				log_message('DEBUG', 'NOVO ['.$dataRequest->user.'] RESPONSE: Login: ' . json_encode($response->usuario));
@@ -305,7 +306,7 @@ class Novo_User_Model extends NOVO_Model {
 	 * @author Yelsyns Lopez
 	 * @date May 16th, 2019
 	 * @modified J. Enrique Peñaloza Piñero
-	 * @date
+	 * @date October 21st, 2019
 	 */
 	public function callWs_validateCaptcha_User($dataRequest)
 	{

@@ -4,6 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $lang['RESP_RC_DEFAULT'] = -9999;
 $lang['RESP_DEFAULT_CODE'] = 4;
 $lang['RESP_RC_0'] = 'Proceso ejecutado exitosamente';
+$lang['RES_DUPLICATED_SESSION'] = 'Tu sesión ha sido abierta en otra ubicación, si no has sido tu comunícate con el administrador';
 $lang['RESP_MESSAGE_SYSTEM'] = 'En este momento no podemos atender tu solicitud, por favor intenta más tarde';
 $lang['RESP_TIMEOUT'] = "El servidor esta demorando mucho tiempo en responder por favor intentalo de nuevo";
 $lang['RESP_VALIDATION_INPUT'] = "Combinación de caracteres no válida.";
