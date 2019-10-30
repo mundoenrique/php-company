@@ -25,7 +25,13 @@ if(!function_exists('countryCheck')) {
 	function countryCheck($country) {
 		$CI = &get_instance();
 
+		$CI->config->load('config-'.$country);
+
+		/*
 		switch ($country) {
+			case 'bdb':
+				$CI->config->load('config-bdb');
+				break;
 			case 'bp':
 				$CI->config->load('config-bp');
 				break;
@@ -44,18 +50,23 @@ if(!function_exists('countryCheck')) {
 			default:
 				redirect('/pe/inicio');
 		}
+		*/
 	}
 }
 
 if(!function_exists('getFaviconLoader')) {
-	function getFaviconLoader() {
+	function getFaviconLoader($countryUri) {
 		$CI = &get_instance();
 		$favicon = $CI->config->item('favicon');
 		$loader = 'loading-';
-		switch($CI->config->item('country')) {
-			case 'Ec-bp':
+		switch($countryUri) {
+			case 'bp':
 				$ext = 'ico';
 				$loader.= 'bp.gif';
+				break;
+			case 'bdb':
+				$ext = 'ico';
+				$loader.= 'bdb.gif';
 				break;
 			default:
 				$ext = 'png';
@@ -219,7 +230,7 @@ if(!function_exists('languajeLoad')) {
 		$class = $CI->router->fetch_class();
 		$langFiles = $langFiles ?: $CI->router->fetch_method();
 		$languages = [];
-		$lanGeneral = ['bp', 'co', 've'];
+		$lanGeneral = ['bdb', 'bp', 'co', 've'];
 		$loadlanguages = FALSE;
 		$client = !$client ? 'default_lang' : $client;
 		log_message('INFO', 'NOVO HELPER languajeLoad Initialized for controller '.$class. ' and method '.$langFiles);
@@ -233,7 +244,7 @@ if(!function_exists('languajeLoad')) {
 					'terms'	=> ['terms'],
 				];
 				break;
-			case 'bbog':
+			case 'bdb':
 				$languages = [];
 				break;
 			case 'co':

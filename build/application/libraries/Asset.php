@@ -6,12 +6,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  *
  */
 class Asset {
-	private $cssFiles = [];
-	private $jsFiles = [];
+	private $cssFiles;
+	private $jsFiles;
+	private $section;
 
 	public function __construct()
 	{
 		log_message('INFO', 'NOVO Assets Library Class Initialized');
+		$this->cssFiles = [];
+		$this->jsFiles = [];
+		$this->section = [];
 	}
 	/**
 	 * @info Método para inicializar los atributos de la librería
@@ -30,7 +34,7 @@ class Asset {
 	 */
 	public function insertCss()
 	{
-		log_message('INFO', 'NOVO Assets: insertCss method initialized');
+		log_message('INFO', 'NOVO Asset: insertCss method initialized');
 		$file_url = NULL;
 		foreach($this->cssFiles as $fileName) {
 			$file = assetPath('css/'.$fileName.'.css');
@@ -45,7 +49,7 @@ class Asset {
 	 */
 	public function insertJs()
 	{
-		log_message('INFO', 'NOVO Assets: insertJs method initialized');
+		log_message('INFO', 'NOVO Asset: insertJs method initialized');
 		$file_url = NULL;
 		foreach($this->jsFiles as $fileName) {
 			$file = assetPath('js/'.$fileName.'.js');
@@ -60,7 +64,7 @@ class Asset {
 	 */
 	public function insertFile($fileName, $folder = 'images', $country = FALSE)
 	{
-		log_message('INFO', 'NOVO Assets: insertFile method initialized');
+		log_message('INFO', 'NOVO Asset: insertFile method initialized');
 		$country = $country ? $country.'/' : '';
 		$file = assetPath($folder.'/'.$country.$fileName);
 		$version = '?V'.date('Ymd-U', filemtime($file));
@@ -76,19 +80,30 @@ class Asset {
 		$thirdParty = strpos($fileName, 'third_party');
 		if($thirdParty === FALSE && file_exists($file)) {
 			$version = '?V'.date('Ymd-U', filemtime($file));
-			//$ext = (ENVIRONMENT === 'testing' || ENVIRONMENT === 'production') ? '.min'.$ext : $ext;
 		} else {
 			$ext = '.min'.$ext;
 		}
 		return $fileName.$ext.$version;
 	}
 	/**
-	 * @info Verifica la existencia de un archivo
-	 * @autor Pedro Torres
-	 * @date 23/09/2019
+	 * @info Método para comprobar el comportamiento de una vista
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date October 29th, 2019
 	 */
-	public function verifyFileUrl($url)
+	public function viewBehavior($section, $client)
 	{
-		return @get_headers($url)[0] === 'HTTP/1.1 200 OK';
+		log_message('INFO', 'NOVO Asset: viewBehavior method initialized');
+		$this->section = [
+			'icons' => [
+				'novo' => TRUE,
+				'bp' => FALSE,
+				'bdb' => TRUE
+			],
+			'footer' => [
+				'novo' => TRUE,
+				'bp' => FALSE,
+				'bdb' => FALSE
+			]
+		];
 	}
 }

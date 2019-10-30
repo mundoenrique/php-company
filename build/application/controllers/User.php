@@ -42,7 +42,7 @@ class User extends NOVO_Controller {
 		$noBrowser = "internet explorer";
 		$views = ['user/login', 'user/signin'];
 
-		if($this->countryUri == 'bp') {
+		if($this->skin !== 'novo') {
 			$views = ['user/signin'];
 		}
 
@@ -60,7 +60,7 @@ class User extends NOVO_Controller {
 			"user/login"
 		);
 
-		if($this->countryUri !== 'bp') {
+		if($this->skin === 'pichincha') {
 			array_push(
 				$this->includeAssets->jsFiles,
 				"third_party/jquery.kwicks",
@@ -68,7 +68,7 @@ class User extends NOVO_Controller {
 			);
 		}
 
-		if($this->countryUri === 'bp' && ENVIRONMENT === 'production') {
+		if($this->skin === 'pichincha' && ENVIRONMENT === 'production') {
 			array_push(
 				$this->includeAssets->jsFiles,
 				"third_party/borders"

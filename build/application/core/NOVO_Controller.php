@@ -10,9 +10,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @author J. Enrique Peñaloza P
  */
 class NOVO_Controller extends CI_Controller {
+	protected 	$skin;
 	protected $includeAssets;
 	protected $countryUri;
-	protected $skin;
 	protected $views;
 	protected $render;
 	protected $dataRequest;
@@ -46,6 +46,8 @@ class NOVO_Controller extends CI_Controller {
 		languageLoad();
 		countryCheck($this->countryUri);
 		languageLoad($this->countryUri);
+		$this->skin = $this->config->item('client');
+		$this->render->newViews = $this->config->item('new-views');
 		$this->form_validation->set_error_delimiters('', '---');
 		$this->config->set_item('language', 'spanish-base');
 		if($this->input->is_ajax_request()) {
@@ -60,7 +62,7 @@ class NOVO_Controller extends CI_Controller {
 				)
 			);
 		} else {
-			$faviconLoader = getFaviconLoader();
+			$faviconLoader = getFaviconLoader($this->countryUri);
 			$this->render->favicon = $faviconLoader->favicon;
 			$this->render->ext = $faviconLoader->ext;
 			$this->render->loader = $faviconLoader->loader;
@@ -72,15 +74,19 @@ class NOVO_Controller extends CI_Controller {
 			$this->session->set_userdata('countryUri', $this->countryUri);
 			switch($this->countryUri) {
 				case 'bp':
-					$this->skin = 'pichincha';
 					$structure = 'pichincha';
 					break;
 				default:
-					$this->skin = 'novo';
 					$structure = 'novo';
 			}
 			if($this->skin !== 'pichincha') {
 				$structure = 'novo';
+			}
+			if($this->render->newViews === '-core') {
+				$this->includeAssets->cssFiles = [
+					"format/reboot",
+					"format/root"
+				];
 			}
 			$this->includeAssets->cssFiles = [
 				"$this->skin-validate",

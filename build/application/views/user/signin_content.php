@@ -1,8 +1,8 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 
-<?php if( lang('LOGO-HEAD')): ?>
+<?php if( lang('GEN-LOGO-HEAD')): ?>
 	<center class="margin-bottom">
-		<img src="<?= $this->asset->insertFile(lang('LOGO-HEAD'), 'images'); ?>" alt="Banco PICHINCHA">
+		<img src="<?= $this->asset->insertFile(lang('GEN-LOGO-HEAD'), 'images'); ?>" alt="Banco PICHINCHA">
 	</center>
 	<h1 class="welcome-title-bp"><?= lang('LOGIN_WELCOME_TITLE'); ?></h1>
 <?php endif; ?>
