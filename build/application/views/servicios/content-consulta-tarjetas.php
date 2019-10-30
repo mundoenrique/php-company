@@ -138,7 +138,7 @@ $urlCdn = get_cdn();
 				<th id="td-nombre-2" class="bp-min-width"><?= lang('NOMBRE') ?></th>
 				<th class="bp-min-width"><?= lang('ID_PERSONA'); ?></th>
 				<!-- <th><?= lang('SALDO'); ?></th>-->
-				<th><?= lang('OPCIONES'); ?></th> 
+				<th><?= lang('OPCIONES'); ?></th>
 			</thead>
 			<tbody>
 
@@ -149,6 +149,30 @@ $urlCdn = get_cdn();
 
 	</div>
 	<div id="batchs-last" style="width:900px !important">
+	<div id="process-masivo" styley="display:none">
+	<center>
+		<table>
+			<tbody>
+				<tr>
+					<td valign="top">
+						<select id="selec_tipo_proceso" name="selec_tipo_proceso">
+							<option value="">Seleccionar</option>
+						</select>
+					</td>
+					<td valign="top">
+						<input id="claveAuth" type="password" name="claveAuth" placeholder="Ingresa tu clave" value="" #batchs-last="" input="" style="margin-left: 10px; margin-bottom: 0px; border-color: rgb(221, 221, 221);" autocomplete="off">																																	</td>
+				</tr>
+				<tr>
+					<td colspan="2" valign="top">
+						<center>
+							<button id="button-autorizar" type="submit" class="novo-btn-primary btn-authorization">Procesar</button>
+						</center>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</center>
+	</div>
 	</div>
 </div>
 </div>
