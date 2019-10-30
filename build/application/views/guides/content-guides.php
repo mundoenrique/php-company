@@ -4,7 +4,7 @@ $urlBaseA = $this->config->item('base_url');
 $urlBase = $urlBaseA.$pais;
 ?>
 
-	<div class="container">
+	<div class="container-ayuda">
 		<div class="publicidad">
 		<?php
 

@@ -1,9 +1,9 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 <div id="content">
 	<div class="img-back">
-		<h1 class="welcome-title"><?= lang('WELCOME_TITLE'); ?></h1>
+		<h1 class="welcome-title"><?= lang('LOGIN_WELCOME_TITLE'); ?></h1>
 	</div>
-	<p><?= lang('WELCOME_MESSAGE') ?></p>
+	<p><?= lang('LOGIN_WELCOME_MESSAGE') ?></p>
 
 	<ul class='acordion kwicks kwicks-horizontal' >
 		<li class="acordion-item" id="panel-1">
@@ -11,9 +11,9 @@
 				<p>
 					<span aria-hidden="true" class="icon" data-icon="&#xe028;"></span>
 
-				<p class="titulo-login-desc">Operaciones seguras</p>
+				<p class="titulo-login-desc"><?= lang('LOGIN_SECURE_OPER_TITLE'); ?></p>
 				<p class='desc-func'>
-					Resguardamos la integridad y la privacidad de la información cumpliendo los más altos estándares internacionales de seguridad.
+					<?= lang('LOGIN_SECURE_OPER_MSG'); ?>
 				</p>
 			</div>
 		</li>
@@ -22,18 +22,18 @@
 				<p>
 					<span aria-hidden="true" class="icon" data-icon="&#xe04f;"></span>
 				</p>
-				<p class="titulo-login-desc">Accesibilidad 7x24</p>
+				<p class="titulo-login-desc"><?= lang('LOGIN_ACCESS_TITLE'); ?></p>
 				<p class='desc-func'>
-					La plataforma está disponible las 24 horas del día, los 7 días de la semana y le ofrece conexión directa vía Internet para realizar las operaciones de su empresa.
+					<?= lang('LOGIN_ACCESS_MSG'); ?>
 				</p>
 			</div>
 		</li>
 		<li >
 			<div class="acordion-item-content-3" id="panel-3">
 				<p><span aria-hidden="true" class="icon" data-icon="&#xe023;"></span>
-				<p class="titulo-login-desc">Actualización automática</p>
+				<p class="titulo-login-desc"><?= lang('LOGIN_AUTOMATIC_UPGRADE_TITLE'); ?></p>
 				<p class='desc-func'>
-					Las actualizaciones y mejoras de la plataforma se ejecutarán de forma automática, permitiéndole a su empresa estar siempre al día con las nuevas funcionalidades que se desarrollen.
+					<?= lang('LOGIN_AUTOMATIC_UPGRADE_MSG'); ?>
 				</p>
 			</div>
 		</li>
@@ -42,9 +42,9 @@
 				<p>
 					<span aria-hidden="true" class="icon" data-icon="&#xe00b;"></span>
 				</p>
-				<p class="titulo-login-desc">Reportes Online</p>
+				<p class="titulo-login-desc"><?= lang('LOGIN_ONLINE_REPORTS_TITLE'); ?></p>
 				<p class='desc-func'>
-					Obtenga información sobre las operaciones realizadas y gestione en línea la emisión de reportes y gráficos que facilitan auditorías y controles sobre los gastos realizados por su empresa.
+					<?= lang('LOGIN_ONLINE_REPORTS_MSG'); ?>
 				</p>
 			</div>
 		</li>
@@ -53,9 +53,9 @@
 				<p>
 					<span aria-hidden="true" class="icon" data-icon="&#xe089;"></span>
 				</p>
-				<p class="titulo-login-desc">Operaciones</p>
+				<p class="titulo-login-desc"><?= lang('LOGIN_OPERATIONS_TITLE'); ?></p>
 				<p class='desc-func'>
-					Consulte, autorice o anule Lotes de Emisión y Recarga de tarjetas con mayor facilidad y obtenga la Orden de Servicio para facilitar su pago.
+					<?= lang('LOGIN_OPERATIONS_MSG'); ?>
 				</p>
 			</div>
 		</li>
@@ -63,16 +63,16 @@
 
 	<div id="text-general">
 		<div class="text-der" style="padding-left: 380px;">
-			<p class="subtitulos-login">¿Necesita ayuda?</p>
+			<p class="subtitulos-login"><?= lang('LOGIN_NEED_HELP_TITLE'); ?></p>
 			<p>
-				Nuestros Ejecutivos del Centro de Soporte a  Empresas están a su orden para ofrecerle mayor información o aclararle cualquier duda.
+				<?= lang('LOGIN_NEED_HELP_MSG') ?>
 			</p>
 			<p class="subtitulos-login">
-				<?php if($countryUri != "co") {echo  lang('LOGIN_INFO');} ?>
+				<?= lang('LOGIN_INFO'); ?>
 			</p>
-			<p><?php echo lang('INFO-1'); ?></p>
-			<p><?php if ($countryUri == "co") {echo "infocolombia@novopayment.com";} else { echo lang('INFO-2'); }?></p>
-			<p><?php if ($countryUri != "co") { echo lang('INFO-3'); }  ?></p>
+			<p><?= lang('LOGIN_INFO-1'); ?></p>
+			<p><?= lang('LOGIN_INFO-2'); ?></p>
+			<p><?= lang('LOGIN_INFO-3'); ?></p>
 		</div>
 	</div>
 

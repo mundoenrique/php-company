@@ -28,7 +28,6 @@ $config['asset_url'] = BASE_CDN_URL;
 $config['asset_path'] = BASE_CDN_PATH;
 $config['favicon'] = 'favicon-novo';
 $config['channel'] = 'ceo';
-$config['app_lang'] = LANGUAGE;
 // Main web service access
 $config['urlWS'] = WS_URL;
 $config['keyNovo'] = base64_decode(WS_KEY);
@@ -44,6 +43,39 @@ $config['LOTES_USERPASS'] = BULK_FTP_USERNAME.':'.BULK_FTP_PASSWORD;
 $config['format_date'] = 'j/m/Y';
 $config['format_time'] = 'g:i A';
 $config['cypher_base'] = CYPHER_BASE;
+$config['active_recaptcha'] = ACTIVE_RECAPTCHA;
+// Menu user/config diseño de unica columna
+$config['uniqueMenuUser'] = FALSE;
+// Config elements master_content
+$config['settingContents'] =
+[
+	'master_content' => [
+		'menuFooter' => TRUE,
+		'menuTop' => 'full',
+		'ownerShip' => 'http://www.novopayment.com/',
+		'logo' => TRUE,
+		'showRates' => TRUE
+	],
+	'widget_menu-user' => [
+		'menuTop' => 'extended',
+		'optionHelp' => FALSE
+	],
+	'widget_menu-business' => [
+		'menuPrincipalFull' => TRUE
+	],
+	'enterprise_content' => [
+		'typeFilterEnterprise' => 'list',
+		'typeOverDetailCompanies' => 'bottom',
+		'showRazonSocialDetailCompanies' => TRUE
+	],
+	'signin_content' => [
+		'loginTitle' => TRUE,
+		'welcomeMessage' => FALSE
+	],
+	'change-password_content' => [
+		'showInfoPass' => TRUE
+	]
+];
 
 /*
 |--------------------------------------------------------------------------
@@ -96,7 +128,7 @@ $config['url_suffix'] = '';
 | than english.
 |
 */
-$config['language']	= 'pe-spanish';
+$config['language']	= 'spanish-base';
 
 /*
 |--------------------------------------------------------------------------
@@ -474,6 +506,7 @@ $config['csrf_cookie_name'] = 'cook';
 $config['csrf_expire'] = 7200;
 $config['csrf_regenerate'] = TRUE;
 $config['csrf_exclude_uris'] = array(
+	'[\w\-]+/productos',
 	'[\w\-]+/dashboard/productos',
 	'[\w\-]+/dashboard/productos/detalle',
 	'[\w\-]+/consulta/ordenes-de-servicio',

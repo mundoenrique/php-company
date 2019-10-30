@@ -29,7 +29,7 @@ $nombreCompleto = $this->session->userdata('nombreCompleto');
     <div id="campos-config">
       <div class='content-user'>
         <span aria-hidden="true" class="icon" data-icon="&#xe090;"></span>
-        <p id="user-name">{user}</p>
+        <p id="user-name" class="title1">{user}</p>
       </div>
       <div id="campos-1">
         <span>

@@ -4431,7 +4431,7 @@ button.green:hover {
 	line-height: 3;
 }
 
-p#user-name {
+p.title1 {
 	font-size: 15px;
 	color: #0f265c;
 	font-family: "Prelo Semibold";

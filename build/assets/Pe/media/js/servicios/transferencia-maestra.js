@@ -535,61 +535,83 @@ $(function () {
 	});
 
 
+		/**
+	* Obtiene la sumatoria de los montos indicados en la transferencia maestra
+	* @author pedro torres
+	* @date 16/08/2019
+	*
+	* @param {*} listaInputs Array de objetos
+	*/
+	function sumaMontosTransferencia (listaInputs) {
+
+		var totalMontos = 0;
+		$.each(listaInputs, function(k, inputMonto){
+
+			totalMontos += parseInt($(inputMonto).val());
+
+			serv_var.monto.push(toFormat($(inputMonto).val()));
+			serv_var.noTarjetas += $(this).parents('tr').attr('tjta') + ",";
+			serv_var.dni_tarjetas += $(this).parents('tr').attr('id_ext_per') + ",";
+		});
+		return totalMontos;
+		}
+
+		/**
+		* Function que convierte las propiedades indicadas a arrays
+		* @param {array} arrayProperty
+		*/
+
+		function propertytoArray(arrayProperty, separetor) {
+
+			arrayProperty = arrayProperty || [];
+			separetor = separetor || ',';
+
+			arrayProperty.forEach(function(prop){
+				serv_var[prop] = serv_var[prop].substr(0, serv_var[prop].lastIndexOf(separetor)).split(separetor);
+			});
+			}
+
 	// SUMAR LOS MONTOS INGRESADOS Y VALIDAR MONTO MAX. Y MIN.
 
 	function calcularTrans(operacion) {
 
-		var sum = 0, comision = 0, trans;
+		var sum = 0,
+			comision = 0,
+			trans;
 		serv_var.monto = [];
 		serv_var.noTarjetas = "";
 		serv_var.dni_tarjetas = "";
 
-		switch (operacion) {
-			case '20': trans = 'Abono'; break;
-			case '40': trans = 'Cargo'; break;
-		}
+		var typeOperacion = {"20": "Abono", "40": "Cargo"};
+		trans = typeOperacion[operacion];
 
-		$.each($('.monto'), function (k, v) {
-
-			v = toFormat($(this).val());
-
-			montoMinDia = toFormat(serv_var.maestroParam.montoMinTransDia);
-
-
-			if (v && v >= montoMinDia) {
-				sum += v;
-				//serv_var.monto.push(toFormatSend(v));
-				serv_var.monto.push(v);
-				serv_var.noTarjetas += $(this).parents('tr').attr('tjta') + ",";
-				serv_var.dni_tarjetas += $(this).parents('tr').attr('id_ext_per') + ",";
-
-			} else {
-				$(this).val('');
-				$.each($(this).parents('tr').find(':checkbox'), function () {
-					this.checked = 0;
-				});
-			}
-
+		inputsConMontoValidos = $("input[class='monto']").filter(function() {
+			return this.value >= serv_var.maestroParam.montoMinTransDia;
 		});
 
-		if (sum) {
+		if (sum = sumaMontosTransferencia(inputsConMontoValidos)) {
 
-			serv_var.noTarjetas = serv_var.noTarjetas.substr(0, serv_var.noTarjetas.lastIndexOf(','));
-			serv_var.noTarjetas = serv_var.noTarjetas.split(',');
-			serv_var.dni_tarjetas = serv_var.dni_tarjetas.substr(0, serv_var.dni_tarjetas.lastIndexOf(','));
-			serv_var.dni_tarjetas = serv_var.dni_tarjetas.split(',');
-
+			propertytoArray(['noTarjetas', 'dni_tarjetas']);
 
 			var cantxdia = 0;
 			var tjtas = serv_var.noTarjetas.length;
-			serv_var.cantXdia.filter(function (op) { if (op.operacion == operacion) { cantxdia = parseInt(op.idCuenta, 10) } });
-			var maxTransDia = parseInt(serv_var.maestroParam.cantidadMaxTransDia, 10);
-
-
+			var maxTransDia = parseInt(serv_var.maestroParam.cantidadMaxTransDia);
 			var acumSem = 0; // monto acumulado en la semana
-			serv_var.acumXsem.filter(function (op) { if (op.operacion == operacion) { acumSem = toFormat(op.montoOperacion) } });
 
-			comision = toFormat(serv_var.maestroParam.costoComisionTrans) * serv_var.noTarjetas.length; // comision total por las trans
+			serv_var.cantXdia.forEach( function(element) {
+				if (element.operacion == operacion) {
+					cantxdia = parseInt(element.idCuenta)
+				}
+			});
+
+			serv_var.acumXsem.forEach(function (element) {
+				if (element.operacion == operacion){
+					acumSem = parseInt(element.montoOperacion)
+				}
+			});
+
+			comision = serv_var.maestroParam.costoComisionTrans * serv_var.noTarjetas.length; // comision total por las trans
+
 
 			if ((cantxdia + tjtas) > maxTransDia) { // validaciones de cantidad trans por dia
 				var canvas = "<h6>" + trans + "s realizados en el día: " + cantxdia + "</h6>";
@@ -630,9 +652,14 @@ $(function () {
 
 		} else {
 			notificacion(trans + ' a tarjeta', 'Ingresa el monto');
+			$.each(inputsConMontoValidos, function(){
+				$(this).val('');
+				$.each($(this).parents('tr').find(':checkbox'), function () {
+					this.checked = 0;
+				});
+			});
 			return false;
 		}
-
 	}
 
 	function calcularConsulta() {

@@ -1,9 +1,9 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 <div id="nav-bar2">
 	<nav id="nav2">
-		<ul style="margin:0">
+		<ul>
 			<li>
-				<a href="<?=base_url($pais.'/dashboard')?>" rel="start" >
+				<a href="<?=base_url($enterpriseList)?>" rel="start" >
 					<span aria-hidden="true" class="icon" data-icon="&#xe097;"></span>
 					<?=lang('MENU_INICIO')?>
 				</a>
@@ -44,9 +44,9 @@
 					<? endif; ?>
 				</li>
 			<?php endforeach; ?>
-			<?php if($pais != 'Ec-bp'): ?>
+			<?php if($settingContents['widget_menu-business']['menuPrincipalFull']): ?>
 			<li>
-				<a href="<?=base_url($pais.'/logout')?>" rel="subsection">
+				<a href="<?=base_url($pais.'/cerrar-sesion')?>" rel="subsection">
 					<span aria-hidden="true" class="icon" data-icon="&#xe03e;"></span>
 					<?=lang("SUBMENU_LOGOUT")?>
 				</a>

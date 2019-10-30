@@ -64,8 +64,7 @@ class Asset {
 		$country = $country ? $country.'/' : '';
 		$file = assetPath($folder.'/'.$country.$fileName);
 		$version = '?V'.date('Ymd-U', filemtime($file));
-		$file_url = assetUrl($folder.'/'.$country.$fileName.$version);
-		return $file_url;
+		return assetUrl($folder.'/'.$country.$fileName.$version);
 	}
 	/**
 	 * @info Método para versionar archivos
@@ -82,5 +81,14 @@ class Asset {
 			$ext = '.min'.$ext;
 		}
 		return $fileName.$ext.$version;
+	}
+	/**
+	 * @info Verifica la existencia de un archivo
+	 * @autor Pedro Torres
+	 * @date 23/09/2019
+	 */
+	public function verifyFileUrl($url)
+	{
+		return @get_headers($url)[0] === 'HTTP/1.1 200 OK';
 	}
 }

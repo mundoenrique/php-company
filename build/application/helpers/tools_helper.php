@@ -74,11 +74,10 @@ if(!function_exists('getFaviconLoader')) {
 if(!function_exists('accessLog')) {
 	function accessLog($dataAccessLog) {
 		$CI = &get_instance();
-		$sessionId = $CI->session->userdata('sessionId') ? $CI->session->userdata('sessionId') : '';
-		$userName = $CI->session->userdata('userName') ? $CI->session->userdata('userName') : $dataAccessLog->userName;
+
 		return $accessLog = [
-			"sessionId"=> $sessionId,
-			"userName" => $userName,
+			"sessionId"=> $CI->session->userdata('sessionId') ?: '',
+			"userName" => $CI->session->userdata('userName') ?: $dataAccessLog->userName,
 			"canal" => $CI->config->item('channel'),
 			"modulo"=> $dataAccessLog->modulo,
 			"function"=> $dataAccessLog->function,
@@ -111,7 +110,7 @@ if(!function_exists('urlReplace')) {
 				$country = 've';
 				break;
 		}
-		return str_replace($countryUri, $country, $url);
+		return str_replace($countryUri.'/', $country.'/', $url);
 	}
 }
 
@@ -124,8 +123,8 @@ if(!function_exists('maskString')) {
 }
 
 if(!function_exists('createMenu')) {
-	function createMenu($menuP) {
-		$menuData = unserialize($menuP);
+	function createMenu($userAccess, $seralize = FALSE) {
+		$menuData = $seralize ? unserialize($userAccess) : $userAccess;
 		$levelOneOpts = [];
 		if($menuData==NULL||!isset($menuData))
 			return $levelOneOpts;
@@ -214,6 +213,87 @@ if(!function_exists('menuRoute')) {
 	}
 }
 
+if(!function_exists('languajeLoad')) {
+	function languageLoad($client = 'default_lang', $langFiles = FALSE) {
+		$CI = &get_instance();
+		$class = $CI->router->fetch_class();
+		$langFiles = $langFiles ?: $CI->router->fetch_method();
+		$languages = [];
+		$lanGeneral = ['bp', 'co', 've'];
+		$loadlanguages = FALSE;
+		$client = !$client ? 'default_lang' : $client;
+		log_message('INFO', 'NOVO HELPER languajeLoad Initialized for controller '.$class. ' and method '.$langFiles);
+
+		switch($client) {
+			case 'bp':
+				$languages = [
+					'login' => ['login'],
+					'validatecaptcha' => ['login'],
+					'RecoverPass'	=> ['password-recover'],
+					'terms'	=> ['terms'],
+				];
+				break;
+			case 'bbog':
+				$languages = [];
+				break;
+			case 'co':
+				$languages = [
+					'login' => ['login'],
+					'validatecaptcha' => ['login'],
+					'RecoverPass'	=> ['password-recover'],
+					'terms'	=> ['terms'],
+				];
+				break;
+			case 'pe':
+				$languages = [
+					'login' => ['login'],
+					'validatecaptcha' => ['login'],
+				];
+				break;
+			case 'us':
+				$languages = [
+					'login' => ['login'],
+					'validatecaptcha' => ['login'],
+				];
+				break;
+			case 've':
+				$languages = [
+					'login' => ['login'],
+					'validatecaptcha' => ['login'],
+					'RecoverPass'	=> ['password-recover', 'response'],
+					'terms'	=> ['terms'],
+				];
+				break;
+			default:
+				$languages = [
+					'login' => ['login', 'signin'],
+					'validatecaptcha' => ['login'],
+					'RecoverPass'	=> ['password-recover'],
+					'changePassword'	=> ['password-change'],
+					'benefits'	=> ['benefits'],
+					'terms'	=> ['terms'],
+					'rates'	=> ['rates'],
+					'getEnterprises'	=> ['enterprise'],
+					'getProducts'	=> ['enterprise'],
+				];
+		}
+
+		if(array_key_exists($langFiles, $languages)) {
+			$languages = $languages[$langFiles];
+			$loadlanguages = TRUE;
+		}
+		if(in_array($client, $lanGeneral)) {
+			array_unshift($languages, 'general');
+			$loadlanguages = TRUE;
+		}
+
+		if($loadlanguages) {
+			$CI->lang->load($languages);
+		}
+
+	}
+}
+	//old helpers
 	if ( ! function_exists('np_hoplite_log')) {
 		/**
 		 * Helper que lanza la descarga de un documento que arma el objeto logAccesoObject y lo retorna
@@ -360,7 +440,6 @@ if(!function_exists('menuRoute')) {
 			$urlBase = $urlBaseA.$pais;
 
 			$menuP = unserialize($menuP);
-			//log_message("INFO", "<<<<<==FUNCIONES Y PERMISOS DEL USUARIO==>>>>>: ".json_encode($menuP));
 			$seeLotFact = FALSE;
 
 			$menuH="";

@@ -9,8 +9,8 @@ class NOVO_Model extends CI_Model {
 	public $country;
 	public $countryUri;
 	public $dataRequest;
-	public $response;
 	public $isResponseRc;
+	public $response;
 	public $userName;
 
 	public function __construct()
@@ -24,11 +24,8 @@ class NOVO_Model extends CI_Model {
 		$this->country = $this->session->userdata('countrySess') ? $this->session->userdata('countrySess')
 			: $this->config->item('country');
 		$this->countryUri = $this->session->userdata('countryUri');
-		$this->isResponseRc = 'No web service';
-		$this->token = $this->session->userdata('token') ? $this->session->userdata('token') : '';
+		$this->token = $this->session->userdata('token') ?: '';
 		$this->userName = $this->session->userdata('userName');
-		$this->lang->load('erroreseol');
-		$this->lang->load('dashboard');
 	}
 
 	public function sendToService($model)
@@ -36,9 +33,8 @@ class NOVO_Model extends CI_Model {
 		log_message('INFO', 'NOVO sendToService Method Initialized');
 
 		$this->accessLog = accessLog($this->dataAccessLog);
-		$this->userName = $this->userName ? $this->userName : mb_strtoupper($this->dataAccessLog->userName);
+		$this->userName = $this->userName ?: mb_strtoupper($this->dataAccessLog->userName);
 
-		$this->dataRequest->idOperation = $this->dataAccessLog->operation;
 		$this->dataRequest->className = $this->className;
 		$this->dataRequest->logAccesoObject = $this->accessLog;
 		$this->dataRequest->token = $this->token;
@@ -46,61 +42,38 @@ class NOVO_Model extends CI_Model {
 
 		$encryptData = $this->encrypt_connect->encode($this->dataRequest, $this->userName, $model);
 		$request = ['bean'=> $encryptData, 'pais'=> $this->country];
-		$response = $this->encrypt_connect->connectWs($request, $this->userName);
-		$responseDecrypt = $this->encrypt_connect->decode($response, $this->userName, $model);
-		$this->isResponseRc = FALSE;
-		$this->response->title = lang('SYSTEM_NAME');
+		$response = $this->encrypt_connect->connectWs($request, $this->userName, $model);
 
-		if(isset($responseDecrypt->rc)) {
-			$this->isResponseRc = $responseDecrypt->rc;
-			switch($this->isResponseRc) {
-				case -29:
-				case -61:
-					$this->response->code = 303;
-					$this->response->msg = lang('ERROR_(-29)');
-					$this->response->data = base_url('inicio');
-					$this->response->icon = 'ui-icon-alert';
-					$this->response->data = [
-						'btn1'=> [
-							'text'=> 'Aceptar',
-							'link'=> base_url('inicio'),
-							'action'=> 'redirect'
-						]
-					];
-					$this->session->sess_destroy();
-					break;
-				default:
-					$this->response->code = 303;
-					$this->response->msg = lang('ERROR_GENERAL');
-					$this->response->icon = 'ui-icon-alert';
-					$this->response->data = [
-						'btn1'=> [
-							'text'=> 'Aceptar',
-							'link'=> base_url('dashboard'),
-							'action'=> 'redirect'
-						]
-					];
-			}
+		if(isset($response->rc)) {
+			$responseDecrypt = $response;
 		} else {
-			$this->response->code = 303;
-			$this->response->msg = lang('ERROR_GENERAL');
-			$this->response->icon = 'ui-icon-alert';
-			$this->response->data = [
-				'btn1'=> [
-					'text'=> 'Aceptar',
-					'link'=> base_url('dashboard'),
-					'action'=> 'redirect'
-				]
-			];
+			$responseDecrypt = $this->encrypt_connect->decode($response, $this->userName, $model);
 		}
 
+		$this->isResponseRc = (int) $responseDecrypt->rc;
+		$this->response->code = lang('RESP_DEFAULT_CODE');
+		$this->response->title = lang('GEN_SYSTEM_NAME');
+		$this->response->msg = '';
+		$this->response->icon = 'ui-icon-alert';
+		$this->response->data = [
+			'btn1'=> [
+				'text'=> FALSE,
+				'link'=> base_url(lang('GEN_ENTERPRISE_LIST')),
+				'action'=> 'redirect'
+			]
+		];
+		switch($this->isResponseRc) {
+			case -29:
+			case -61:
+				$this->response->msg = lang('RES_DUPLICATED_SESSION');
+				$this->session->sess_destroy();
+				break;
+			default:
+				$this->response->msg = lang('RESP_MESSAGE_SYSTEM');
+				break;
+		}
+		$this->response->msg = $this->isResponseRc == 0 ? lang('RESP_RC_0') : $this->response->msg;
+
 		return $responseDecrypt;
-	}
-
-	public function cypherData() {
-		log_message('INFO', 'NOVO cypherData Method Initialized');
-		log_message('DEBUG', 'NOVO RESPONSE TO VIEW: '.json_encode($this->response));
-
-		return $this->cryptography->encrypt($this->response);
 	}
 }

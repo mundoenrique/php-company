@@ -26,8 +26,8 @@ if ($country === 'Ec-bp') {
 		<link rel="profile" href="http://gmpg.org/xfn/11">
 		<?php
 		echo insert_favicon($country);
-		echo insert_css_cdn($stylesheet);
-		echo insert_js_cdn('third_party/html5.min.js');
+		echo insert_css($stylesheet);
+		echo insert_js('third_party/html5.min.js');
 		?>
 	</head>
 	<body>
@@ -53,7 +53,7 @@ if ($country === 'Ec-bp') {
 			</div>
 		</footer>
 		<?php
-		echo insert_js_cdn('third_party/jquery-3.4.0.min.js');
+		echo insert_js('third_party/jquery-3.4.0.min.js');
 		?>
 		<script>
 			$('#history-back').on('click', function(event) {

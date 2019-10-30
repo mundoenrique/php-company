@@ -1,7 +1,17 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed');
 
 $config = [
-	'validatecaptcha' => [
+	'listenterprises' => [
+		[
+			'field' => 'plot',
+			'rules' => 'trim|required'
+		],
+		[
+			'field' => 'request',
+			'rules' => 'trim|required'
+		]
+	],
+	'validateCaptcha' => [
 		[
 			'field' => 'user',
 			'label' => 'user',
@@ -25,14 +35,14 @@ $config = [
 			'rules' => 'trim|regex_match[/^([\w!@\*\-\?¡¿+\/.,#]+)+$/i]|required'
 		]
 	],
-	'finishsession' => [
+	'finishSession' => [
 		[
 			'field' => 'user',
 			'label' => 'user',
 			'rules' => 'trim|regex_match[/^([\wñÑ]+)+$/i]|required'
 		]
 	],
-	'recoverypass' => [
+	'recoverPass' => [
 		[
 			'field' => 'userName',
 			'label' => 'userName',
@@ -49,7 +59,7 @@ $config = [
 			'rules' => 'trim|regex_match[/^([a-zA-Z]+[0-9_.+-]*)+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/]|required'
 		]
 	],
-	'changepassword' => [
+	'changePassword' => [
 		[
 			'field' => 'currentPass',
 			'label' => 'currentPass',

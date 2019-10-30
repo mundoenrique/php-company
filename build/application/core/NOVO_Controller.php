@@ -16,8 +16,10 @@ class NOVO_Controller extends CI_Controller {
 	protected $views;
 	protected $render;
 	protected $dataRequest;
-	protected $idProductos;
-	public $accessControl;
+	protected $model;
+	protected $method;
+	protected $request;
+	protected $dataResponse;
 
 	public function __construct()
 	{
@@ -25,21 +27,27 @@ class NOVO_Controller extends CI_Controller {
 		log_message('INFO', 'NOVO_Controller Class Initialized');
 
 		$this->includeAssets = new stdClass();
-		$this->countryUri = $this->uri->segment(1, 0) ? $this->uri->segment(1, 0) : 'pe';
+		$this->request = new stdClass();
+		$this->dataResponse = new stdClass();
 		$this->render = new stdClass();
+		$this->model = 'Novo_'.$this->router->fetch_class().'_Model';
+		$this->method = 'callWs_'.$this->router->fetch_method().'_'.$this->router->fetch_class();
+		$this->countryUri = $this->uri->segment(1, 0) ? $this->uri->segment(1, 0) : 'pe';
 		$this->render->logged = $this->session->userdata('logged');
+		$this->render->userId = $this->session->userdata('idUsuario');
 		$this->render->fullName = $this->session->userdata('fullName');
-		$this->idProductos = $this->session->userdata('idProductos');
+		$this->render->activeRecaptcha = $this->config->item('active_recaptcha');
 		$this->optionsCheck();
 	}
 
 	private function optionsCheck()
 	{
 		log_message('INFO', 'NOVO optionsCheck Method Initialized');
+		languageLoad();
 		countryCheck($this->countryUri);
-		$this->lang->load('erroreseol');
-		$this->lang->load('dashboard');
-		$this->lang->load('users');
+		languageLoad($this->countryUri);
+		$this->form_validation->set_error_delimiters('', '---');
+		$this->config->set_item('language', 'spanish-base');
 		if($this->input->is_ajax_request()) {
 			$this->dataRequest = json_decode(
 				$this->security->xss_clean(
@@ -57,6 +65,7 @@ class NOVO_Controller extends CI_Controller {
 			$this->render->ext = $faviconLoader->ext;
 			$this->render->loader = $faviconLoader->loader;
 			$this->render->countryConf = $this->config->item('country');
+			$this->render->settingContents = $this->config->item('settingContents');
 			$this->render->countryUri = $this->countryUri;
 			$this->render->novoName = $this->security->get_csrf_token_name();
 			$this->render->novoCook = $this->security->get_csrf_hash();
@@ -76,8 +85,9 @@ class NOVO_Controller extends CI_Controller {
 			$this->includeAssets->cssFiles = [
 				"$this->skin-validate",
 				"third_party/jquery-ui",
-				"$structure-structure",
-				"$this->skin-appearance"
+				//"$structure-structure",
+				//"$this->skin-appearance",
+				"$this->skin-base",
 			];
 			$this->includeAssets->jsFiles = [
 				"third_party/html5",
@@ -106,19 +116,32 @@ class NOVO_Controller extends CI_Controller {
 			case 'benefits':
 			case 'terms':
 			case 'pass-recovery':
+			case 'rates':
 				$auth = TRUE;
 				break;
 			case 'change-password':
 				$auth = ($this->session->flashdata('changePassword'));
 				break;
-			case 'companies':
-			$auth = ($this->render->logged);
-			break;
+			case 'products':
+			case 'enterprise':
+				$auth = ($this->render->logged);
+				break;
+			case 'rates':
+				$auth = ($this->render->logged && $this->countryUri === 've');
+				break;
 			default:
 
 		}
-		$this->render->goOut = ($this->render->logged) ? 'cerrar-sesion' : 'inicio';
 		if($auth) {
+			$userAccess = $this->session->userdata('user_access');
+			$menu = createMenu($userAccess);
+			$userMenu = new stdClass();
+			$userMenu->menu = $menu;
+			$userMenu->pais = '';
+			$userMenu->enterpriseList = lang('GEN_ENTERPRISE_LIST');
+			$this->render->settingsMenu = $userMenu;
+			$this->render->goOut = ($this->render->logged || $this->session->flashdata('changePassword'))
+			? 'cerrar-sesion' : 'inicio';
 			$this->render->module = $module;
 			$this->render->viewPage = $this->views;
 			$this->asset->initialize($this->includeAssets);
@@ -127,5 +150,17 @@ class NOVO_Controller extends CI_Controller {
 			redirect(base_url('inicio'), 'location');
 		}
 	}
-}
 
+	/**
+	 * Llama un metodo especifico de un modelo
+	 *
+	 * @return void
+	 * @author Pedro Torres
+	 */
+	protected function callMethodNotAsync($params = '')
+	{
+		$this->load->model($this->model,'modelLoaded');
+		$method = $this->method;
+		return $this->modelLoaded->$method($params);
+	}
+}

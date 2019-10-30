@@ -18,51 +18,38 @@ class User extends NOVO_Controller {
 	public function login()
 	{
 		log_message('INFO', 'NOVO User: index Method Initialized');
+		$view = 'login';
+		$this->render->loginUri = 'Login';
+
 		if($this->session->userdata('logged')) {
-
-			$urlRedirect = str_replace($this->countryUri.'/', $this->config->item('country').'/', base_url('dashboard'));
+			$oldUrl = str_replace($this->countryUri.'/', $this->config->item('country').'/', base_url('dashboard'));
+			$urlRedirect = $this->countryUri != 'bdb' ? $oldUrl : base_url('empresas');
 			redirect($urlRedirect, 'location');
-
-			//redirect(base_url('empresas'), 'location');
 			exit();
 		}
 
-		$userData = [
-			'sessionId',
-			'idUsuario',
-			'userName',
-			'fullName',
-			'codigoGrupo',
-			'lastSession',
-			'token',
-			'cl_addr',
-			'countrySess',
-			'pais',
-			'nombreCompleto'
-		];
-
-		$this->session->unset_userdata($userData);
+		$this->session->sess_destroy();
 
 		$this->load->library('user_agent');
-		$this->load->library('recaptcha');
-
-		$this->render->scriptCaptcha = $this->recaptcha->getScriptTag();
-		log_message('DEBUG', 'NOVO RESPONSE: recaptcha: ' . $this->recaptcha->getScriptTag());
+		if($this->render->activeRecaptcha) {
+			$this->load->library('recaptcha');
+			$this->render->scriptCaptcha = $this->recaptcha->getScriptTag();
+			$this->render->loginUri = 'validateCaptcha';
+		}
 
 		$browser = strtolower($this->agent->browser());
 		$version = (float) $this->agent->version();
 		$noBrowser = "internet explorer";
 		$views = ['user/login', 'user/signin'];
+
 		if($this->countryUri == 'bp') {
 			$views = ['user/signin'];
 		}
+
 		if($browser == $noBrowser && $version < 11.0) {
 			$views = ['staticpages/content-browser'];
 		}
-		array_push(
-			$this->includeAssets->cssFiles,
-			"$this->countryUri/default"
-		);
+
 		array_push(
 			$this->includeAssets->jsFiles,
 			"third_party/jquery.md5",
@@ -70,9 +57,9 @@ class User extends NOVO_Controller {
 			"third_party/jquery.validate",
 			"validate-forms",
 			"third_party/additional-methods",
-			"user/login",
-			"$this->countryUri/clave"
+			"user/login"
 		);
+
 		if($this->countryUri !== 'bp') {
 			array_push(
 				$this->includeAssets->jsFiles,
@@ -80,23 +67,27 @@ class User extends NOVO_Controller {
 				"user/kwicks"
 			);
 		}
+
 		if($this->countryUri === 'bp' && ENVIRONMENT === 'production') {
 			array_push(
 				$this->includeAssets->jsFiles,
 				"third_party/borders"
 			);
 		}
+
 		$this->views = $views;
-		$this->render->titlePage = lang('SYSTEM_NAME');
-		$this->loadView('login');
+		$this->render->titlePage = lang('GEN_SYSTEM_NAME');
+		$this->loadView($view);
 	}
 	/**
 	 * @info Método que renderiza la vista para recuperar la contraseña
 	 * @author J. Enrique Peñaloza P.
 	 */
-	public function recoveryPass()
+	public function RecoverPass()
 	{
 		log_message('INFO', 'NOVO User: passwordRecovery Method Initialized');
+		$view = 'pass-recovery';
+
 		array_push(
 			$this->includeAssets->jsFiles,
 			"user/pass-recovery",
@@ -104,9 +95,9 @@ class User extends NOVO_Controller {
 			"validate-forms",
 			"third_party/additional-methods"
 		);
-		$this->views = ['user/pass-recovery'];
-		$this->render->titlePage = "Recuperar contraseña";
-		$this->loadView('pass-recovery');
+		$this->views = ['user/'.$view];
+		$this->render->titlePage = lang('GEN_RECOVER_PASS_TITLE');
+		$this->loadView($view);
 	}
 	/**
 	 * @info Método que renderiza la vista para cambiar la contraseña
@@ -115,10 +106,12 @@ class User extends NOVO_Controller {
 	public function changePassword()
 	{
 		log_message('INFO', 'NOVO User: changePassword Method Initialized');
+		$view = 'change-password';
 		if(!$this->session->flashdata('changePassword')) {
 			redirect(base_url('inicio'), 'location');
 			exit();
 		}
+
 		array_push(
 			$this->includeAssets->jsFiles,
 			"user/change-pass",
@@ -139,13 +132,13 @@ class User extends NOVO_Controller {
 
 		$this->render->fullName = $this->session->userdata('fullName');
 		$this->render->userType = $this->session->flashdata('userType');
-		$this->views = ['user/change-password'];
-		$this->render->titlePage = "Recuperar contraseña";
+		$this->views = ['user/'.$view];
+		$this->render->titlePage = LANG('GEN_PASSWORD_CHANGE_TITLE');
 
 		$this->session->set_flashdata('changePassword', $this->session->flashdata('changePassword'));
 		$this->session->set_flashdata('userType', $this->session->flashdata('userType'));
 
-		$this->loadView('change-password');
+		$this->loadView($view);
 	}
 	/**
 	 * @info Método para el cierre de sesión
@@ -154,12 +147,10 @@ class User extends NOVO_Controller {
 	public function finishSession()
 	{
 		log_message('INFO', 'NOVO User: finishSession Method Initialized');
-		if($this->render->logged) {
+		if($this->render->userId) {
 			$this->load->model('Novo_User_Model', 'finishSession');
 			$this->finishSession->callWs_FinishSession_User();
 		}
 		redirect(base_url('inicio'), 'location');
 	}
-
-
 }

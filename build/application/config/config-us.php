@@ -2,4 +2,4 @@
 
 $config['country'] = 'Usd';
 $config['base_url']	= BASE_URL.'us/';
-$config['language']	= 'us-spanish';
+$config['language']	= 'spanish-us';
