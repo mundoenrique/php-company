@@ -2,39 +2,39 @@
   font-family: 'Open Sans';
   font-style: normal;
   font-weight: 300;
-  src: url('../fonts/Open_Sans/OpenSans-Light.ttf') format('truetype');
+  src: url('../../fonts/bdb/OpenSans-Light.ttf') format('truetype');
 }
 
 @font-face {
   font-family: 'Open Sans';
   font-style: normal;
   font-weight: 400;
-  src: url('../fonts/Open_Sans/OpenSans-Regular.ttf') format('truetype');
+  src: url('../../fonts/bdb/OpenSans-Regular.ttf') format('truetype');
 }
 
 @font-face {
   font-family: 'Open Sans';
   font-style: normal;
   font-weight: 600;
-  src: url('../fonts/Open_Sans/OpenSans-SemiBold.ttf') format('truetype');
+  src: url('../../fonts/bdb/OpenSans-SemiBold.ttf') format('truetype');
 }
 
 @font-face {
   font-family: 'Open Sans';
   font-style: normal;
   font-weight: 700;
-  src: url('../fonts/Open_Sans/OpenSans-Bold.ttf') format('truetype');
+  src: url('../../fonts/bdb/OpenSans-Bold.ttf') format('truetype');
 }
 
 @font-face {
 	font-family: "NovoPayment Glyphs";
 	font-style: normal;
 	font-weight: normal;
-	src: url('../fonts/Novopayments_Glyphs/novopayment-glyphs-webfont.eot?#iefix');
-  src: url('../fonts/Novopayments_Glyphs/novopayment-glyphs-webfont.eot?#iefix') format('embedded-opentype'),
-       url('../fonts/Novopayments_Glyphs/novopayment-glyphs-webfont.woff') format('woff'),
-       url('../fonts/Novopayments_Glyphs/novopayment-glyphs-webfont.ttf') format('truetype'),
-       url('../fonts/Novopayments_Glyphs/novopayment-glyphs-webfont.svg') format('svg');
+	src: url('../../fonts/novopayment-glyphs-webfont.eot?#iefix');
+  src: url('../../fonts/novopayment-glyphs-webfont.eot?#iefix') format('embedded-opentype'),
+       url('../../fonts/novopayment-glyphs-webfont.woff') format('woff'),
+       url('../../fonts/novopayment-glyphs-webfont.ttf') format('truetype'),
+       url('../../fonts/novopayment-glyphs-webfont.svg') format('svg');
 }
 
 :root {
@@ -51,8 +51,8 @@
   --yellow: #ffb400;
   --vista-blue: #7ed3b2;
   --trikemaster: #8b4f80;
-  --pink-salmon: #ff8c94;  
-  --black:  #111111;  
+  --pink-salmon: #ff8c94;
+  --black:  #111111;
   --bg-color: #f6f3f1;
 
   --widget-color:#f4f4f4;
@@ -60,11 +60,11 @@
   --border-color:#b5bac3;
   --text-color: #7b7b7b;
   --placeholder-color: #828994;
-    
+
   --label-color: #012c71;
   --primary-shade: #012c71a6;
   --primary-tint: #1a417f;
-  
+
   /* Type Scale */
   --h00: 2.5rem;
   --h0: 2rem;
