@@ -31,12 +31,12 @@ class NOVO_Controller extends CI_Controller {
 		$this->request = new stdClass();
 		$this->dataResponse = new stdClass();
 		$this->render = new stdClass();
-		$this->rule = lcfirst($this->router->fetch_method());
+		$this->rule = $this->router->fetch_method();
 		$this->model = 'Novo_'.$this->router->fetch_class().'_Model';
 		$this->method = 'callWs_'.$this->router->fetch_method().'_'.$this->router->fetch_class();
 		$this->countryUri = $this->uri->segment(1, 0) ? $this->uri->segment(1, 0) : 'pe';
 		$this->render->logged = $this->session->userdata('logged');
-		$this->render->userId = $this->session->userdata('idUsuario');
+		$this->render->userId = $this->session->userdata('userId');
 		$this->render->fullName = $this->session->userdata('fullName');
 		$this->render->activeRecaptcha = $this->config->item('active_recaptcha');
 		$this->optionsCheck();
@@ -65,7 +65,7 @@ class NOVO_Controller extends CI_Controller {
 				)
 			);
 		} else {
-			$access = $this->verify_access->accessAuthorization($this->router->fetch_method());
+			$access = $this->verify_access->accessAuthorization($this->router->fetch_method(), $this->countryUri);
 			$valid = TRUE;
 			if($_POST) {
 				$valid = $this->verify_access->validateForm($this->rule, $this->countryUri);
@@ -82,6 +82,7 @@ class NOVO_Controller extends CI_Controller {
 	protected function preloadView($auth)
 	{
 		log_message('INFO', 'NOVO NOVO_Controller: preloadView method initialized');
+
 		if($auth) {
 			$faviconLoader = getFaviconLoader($this->countryUri);
 			$this->render->favicon = $faviconLoader->favicon;
@@ -113,8 +114,8 @@ class NOVO_Controller extends CI_Controller {
 			if($this->render->newViews === '-core') {
 				array_unshift(
 					$this->includeAssets->cssFiles,
-					"format/root",
-					"format/reboot"
+					"format/root-$this->skin",
+					"format/reboot-$this->skin"
 				);
 			}
 			$this->includeAssets->jsFiles = [
@@ -133,7 +134,8 @@ class NOVO_Controller extends CI_Controller {
 				);
 			}
 		} else {
-			redirect(base_url('inicio'), 'location');
+
+			redirect(base_url('cerrar-sesion'), 'location');
 		}
 	}
 	/**

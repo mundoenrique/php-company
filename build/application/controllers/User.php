@@ -147,7 +147,7 @@ class User extends NOVO_Controller {
 	public function finishSession()
 	{
 		log_message('INFO', 'NOVO User: finishSession Method Initialized');
-		if($this->render->userId) {
+		if($this->render->userId || $this->render->logged) {
 			$this->load->model('Novo_User_Model', 'finishSession');
 			$this->finishSession->callWs_FinishSession_User();
 		}
