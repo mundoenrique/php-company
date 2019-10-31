@@ -11,6 +11,7 @@ $lang['GEN_PLACE_HOLDER_EMAIL'] = "usuario@ejemplo.com";
 $lang['GEN_RECOVER_PASS_TITLE'] = 'Recuperar contraseña';
 $lang['GEN_FISCAL_REGISTRY'] = 'RUC.';
 $lang['GEN_PASSWORD_CHANGE_TITLE'] = 'Cambiar contraseña';
+$lang['GEN_ALTERNATIVE_TEXT'] = 'Novopayment';
 $lang['CHANGEPASSWORD_TITLE'] = 'Recuperar contraseña';
 //BUTTONS
 $lang['GEN_BTN_ACCEPT']= 'Aceptar';

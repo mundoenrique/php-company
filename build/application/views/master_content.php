@@ -18,11 +18,11 @@
 	<div id="wrapper">
 		<?php
 			foreach($viewPage as $views) {
-				$this->load->view($views . '_content'.$newViews);
+				$this->load->view($views.'_content'.$newViews);
 			}
 		?>
 	</div>
-	<?php $this->load->view('footer_content',$newViews) ?>
+	<?php $this->load->view('footer_content'.$newViews) ?>
 	<?php $this->load->view('tools_content') ?>
 
 

@@ -82,12 +82,6 @@ class NOVO_Controller extends CI_Controller {
 			if($this->skin !== 'pichincha') {
 				$structure = 'novo';
 			}
-			if($this->render->newViews === '-core') {
-				$this->includeAssets->cssFiles = [
-					"format/reboot",
-					"format/root"
-				];
-			}
 			$this->includeAssets->cssFiles = [
 				"$this->skin-validate",
 				"third_party/jquery-ui",
@@ -95,6 +89,13 @@ class NOVO_Controller extends CI_Controller {
 				//"$this->skin-appearance",
 				"$this->skin-base",
 			];
+			if($this->render->newViews === '-core') {
+				array_unshift(
+					$this->includeAssets->cssFiles,
+					"format/root",
+					"format/reboot"
+				);
+			}
 			$this->includeAssets->jsFiles = [
 				"third_party/html5",
 				"third_party/jquery-3.4.0",
