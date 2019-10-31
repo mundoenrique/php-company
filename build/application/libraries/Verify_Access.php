@@ -25,16 +25,16 @@ class Verify_Access {
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date October 31th, 2019
 	 */
-	public function validateForm($rule, $countryUri)
+	public function validateForm($rule, $countryUri, $user)
 	{
 		log_message('INFO', 'NOVO Verify_Access: validateForm method initialized');
 
 		$result = $this->CI->form_validation->run($rule);
 
-		log_message('DEBUG', 'NOVO VALIDATION FORM '.$rule.': '.json_encode($result));
+		log_message('DEBUG', 'NOVO ['.$user.'] VALIDATION FORM '.$rule.': '.json_encode($result));
 
 		if(!$result) {
-			log_message('DEBUG', 'NOVO VALIDATION ERRORS: '.json_encode(validation_errors()));
+			log_message('DEBUG', 'NOVO  ['.$user.'] VALIDATION ERRORS: '.json_encode(validation_errors()));
 		}
 
 		languageLoad(NULL, $rule);
@@ -70,7 +70,7 @@ class Verify_Access {
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date October 31th, 2019
 	 */
-	public function ResponseByDefect()
+	public function ResponseByDefect($user)
 	{
 		log_message('INFO', 'NOVO Verify_Access: ResponseByDefect method initialized');
 
@@ -88,7 +88,42 @@ class Verify_Access {
 		];
 		$this->CI->session->sess_destroy();
 
+		log_message('DEBUG', 'NOVO  ['.$user.'] ResponseByDefect: '.json_encode($this->responseDefect));
+
 		return $this->responseDefect;
+	}
+	/**
+	 * @info método que valida la autorización de acceso del usuario a las funcionalidades
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date October 31th, 2019
+	 */
+	public function accessAuthorization($module)
+	{
+		log_message('INFO', 'NOVO Verify_Access: accessAuthorization method initialized');
+
+		$auth = FALSE;
+		switch($module) {
+			case 'login':
+			case 'benefits':
+			case 'terms':
+			case 'recoverPass':
+				$auth = TRUE;
+				break;
+			case 'changePassword':
+				$auth = ($this->CI->session->flashdata('changePassword'));
+				break;
+			case 'products':
+			case 'enterprise':
+				$auth = ($this->CI->session->userdata('logged'));
+				break;
+			case 'rates':
+				$auth = ($this->CI->session->userdata('logged') && $countryUri === 've');
+				break;
+		}
+
+		log_message('INFO', 'NOVO accessAuthorization '.$module.': '.json_encode($auth));
+
+		return $auth;
 	}
 	/**
 	 * @info método que valida la autorización de acceso del usuario a las funcionalidades
@@ -113,37 +148,5 @@ class Verify_Access {
 
 		return $redirectUrl;
 
-	}
-	/**
-	 * @info método que valida la autorización de acceso del usuario a las funcionalidades
-	 * @author J. Enrique Peñaloza Piñero
-	 * @date October 31th, 2019
-	 */
-	public function accessAuthorization($validate)
-	{
-		log_message('INFO', 'NOVO Verify_Access: accessAuthorization method initialized');
-
-		$auth = FALSE;
-		switch($module) {
-			case 'login':
-			case 'benefits':
-			case 'terms':
-			case 'pass-recovery':
-			case 'rates':
-				$auth = TRUE;
-				break;
-			case 'change-password':
-				$auth = ($this->session->flashdata('changePassword'));
-				break;
-			case 'products':
-			case 'enterprise':
-				$auth = ($this->render->logged);
-				break;
-			case 'rates':
-				$auth = ($this->render->logged && $this->countryUri === 've');
-				break;
-		}
-
-		return $auth;
 	}
 }

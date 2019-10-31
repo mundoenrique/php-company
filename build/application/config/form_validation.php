@@ -44,8 +44,8 @@ $config = [
 	],
 	'recoverPass' => [
 		[
-			'field' => 'userName',
-			'label' => 'userName',
+			'field' => 'user',
+			'label' => 'user',
 			'rules' => 'trim|regex_match[/^([\wñÑ]+)+$/i]|required'
 		],
 		[

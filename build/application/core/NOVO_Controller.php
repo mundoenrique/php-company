@@ -10,7 +10,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @author J. Enrique Peñaloza P
  */
 class NOVO_Controller extends CI_Controller {
-	protected 	$skin;
+	protected $skin;
+	protected $rule;
 	protected $includeAssets;
 	protected $countryUri;
 	protected $views;
@@ -30,6 +31,7 @@ class NOVO_Controller extends CI_Controller {
 		$this->request = new stdClass();
 		$this->dataResponse = new stdClass();
 		$this->render = new stdClass();
+		$this->rule = lcfirst($this->router->fetch_method());
 		$this->model = 'Novo_'.$this->router->fetch_class().'_Model';
 		$this->method = 'callWs_'.$this->router->fetch_method().'_'.$this->router->fetch_class();
 		$this->countryUri = $this->uri->segment(1, 0) ? $this->uri->segment(1, 0) : 'pe';
@@ -50,6 +52,7 @@ class NOVO_Controller extends CI_Controller {
 		$this->render->newViews = $this->config->item('new-views');
 		$this->form_validation->set_error_delimiters('', '---');
 		$this->config->set_item('language', 'spanish-base');
+
 		if($this->input->is_ajax_request()) {
 			$this->dataRequest = json_decode(
 				$this->security->xss_clean(
@@ -62,6 +65,24 @@ class NOVO_Controller extends CI_Controller {
 				)
 			);
 		} else {
+			$access = $this->verify_access->accessAuthorization($this->router->fetch_method());
+			$valid = TRUE;
+			if($_POST) {
+				$valid = $this->verify_access->validateForm($this->rule, $this->countryUri);
+			}
+			$this->preloadView($access && $valid);
+		}
+
+	}
+	/**
+	 * Método para realizar la precarga de las vistas
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date October 31th, 2019
+	 */
+	protected function preloadView($auth)
+	{
+		log_message('INFO', 'NOVO NOVO_Controller: preloadView method initialized');
+		if($auth) {
 			$faviconLoader = getFaviconLoader($this->countryUri);
 			$this->render->favicon = $faviconLoader->favicon;
 			$this->render->ext = $faviconLoader->ext;
@@ -111,63 +132,43 @@ class NOVO_Controller extends CI_Controller {
 					"menu-datepicker"
 				);
 			}
-		}
-	}
-
-	protected function loadView($module)
-	{
-		log_message('INFO', 'NOVO loadView Method Initialized Module loaded: '.$module);
-		$auth = FALSE;
-		switch($module) {
-			case 'login':
-			case 'benefits':
-			case 'terms':
-			case 'pass-recovery':
-			case 'rates':
-				$auth = TRUE;
-				break;
-			case 'change-password':
-				$auth = ($this->session->flashdata('changePassword'));
-				break;
-			case 'products':
-			case 'enterprise':
-				$auth = ($this->render->logged);
-				break;
-			case 'rates':
-				$auth = ($this->render->logged && $this->countryUri === 've');
-				break;
-			default:
-
-		}
-		if($auth) {
-			$userAccess = $this->session->userdata('user_access');
-			$menu = createMenu($userAccess);
-			$userMenu = new stdClass();
-			$userMenu->menu = $menu;
-			$userMenu->pais = '';
-			$userMenu->enterpriseList = lang('GEN_ENTERPRISE_LIST');
-			$this->render->settingsMenu = $userMenu;
-			$this->render->goOut = ($this->render->logged || $this->session->flashdata('changePassword'))
-			? 'cerrar-sesion' : 'inicio';
-			$this->render->module = $module;
-			$this->render->viewPage = $this->views;
-			$this->asset->initialize($this->includeAssets);
-			$this->load->view('master_content', $this->render);
 		} else {
 			redirect(base_url('inicio'), 'location');
 		}
 	}
-
 	/**
-	 * Llama un metodo especifico de un modelo
-	 *
-	 * @return void
+	 * Método para cargar un modelo especifico
 	 * @author Pedro Torres
+	 * @date Auguts 23rd, 2019
 	 */
-	protected function callMethodNotAsync($params = '')
+	protected function loadModel($params = FALSE)
 	{
 		$this->load->model($this->model,'modelLoaded');
 		$method = $this->method;
 		return $this->modelLoaded->$method($params);
+	}
+	/**
+	 * Método para renderizar una vista
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date May 14th, 2019
+	 */
+	protected function loadView($module)
+	{
+		log_message('INFO', 'NOVO loadView Method Initialized. Module loaded: '.$module);
+
+		$userAccess = $this->session->userdata('user_access');
+		$menu = createMenu($userAccess);
+		$userMenu = new stdClass();
+		$userMenu->menu = $menu;
+		$userMenu->pais = '';
+		$userMenu->enterpriseList = lang('GEN_ENTERPRISE_LIST');
+		$this->render->settingsMenu = $userMenu;
+		$this->render->goOut = ($this->render->logged || $this->session->flashdata('changePassword'))
+		? 'cerrar-sesion' : 'inicio';
+		$this->render->module = $module;
+		$this->render->viewPage = $this->views;
+		$this->asset->initialize($this->includeAssets);
+		$this->load->view('master_content', $this->render);
+
 	}
 }

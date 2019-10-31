@@ -6,7 +6,7 @@
 	<?= lang("TERMINOS") ?>
 	<?php if($goBack) : ?>
 		<div style="margin-top:25px; text-align: center;">
-			<a href="<?= $referer;?>"><button style="float: none;"><?= lang('BACK');?></button></a>
+			<a href="<?= $referer;?>"><button style="float: none;"><?= lang('GEN_BTN_BACK');?></button></a>
 		</div>
 	<?php endif; ?>
 </div>

@@ -7,7 +7,7 @@ $(function() {
 		if(form.valid()) {
 			var textBtn = recoverBtn.text();
 			var recoverData = {
-				userName: $('#user-name').val(),
+				user: $('#user-name').val(),
 				idEmpresa: $('#id-company').val(),
 				email: $('#email').val()
 

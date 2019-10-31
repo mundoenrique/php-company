@@ -2,9 +2,8 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * @info Controlador para manejar las peticiones referentes a empresas
- * @author Pedro Torres
- * @date 23/08/2019
- *
+ * @author J. Enrique Peñaloza Piñero
+ * @date October 30th, 2019
 */
 class Business extends NOVO_Controller {
 
@@ -14,7 +13,7 @@ class Business extends NOVO_Controller {
 		log_message('INFO', 'NOVO Business Controller class Initialized');
 	}
 	/**
-	 * @info Método para obtener las renderizar las empresas asociadas a un usuarios
+	 * @info Método para renderizar las empresas asociadas al usuario
 	 * @author Pedro Torres
 	 * @date 24/08/2019
 	 */
@@ -32,7 +31,7 @@ class Business extends NOVO_Controller {
 
 		$this->views = ['business/'.$view];
 		$this->render->titlePage = "Empresas";
-		$this->render->listaEmpresas = $this->callMethodNotAsync();
+		$this->render->listaEmpresas = $this->loadModel();
 		$this->render->pais = $this->session->userdata('countrySess');
 		$this->render->uniqueMenuUser = $this->config->item('uniqueMenuUser');
 		$this->render->lastSession = $this->session->userdata('lastSession');
@@ -90,7 +89,7 @@ class Business extends NOVO_Controller {
 			$this->views = ['business/products'];
 			$this->render->titlePage = "Productos";
 
-			$responseService = $this->callMethodNotAsync($newdata);
+			$responseService = $this->loadModel($newdata);
 
 			$this->render->productos = $responseService->productos ?: [];
 			$this->render->listaCategorias = $responseService->listaCategorias ?: [];

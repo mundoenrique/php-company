@@ -38,7 +38,8 @@ class Novo_User_Model extends NOVO_Model {
 
 		switch($this->isResponseRc) {
 			case 0:
-				log_message('DEBUG', 'NOVO ['.$dataRequest->user.'] RESPONSE: Login: ' . json_encode($response->usuario));
+				log_message('DEBUG', 'NOVO ['.$userName.'] RESPONSE: Login: ' . json_encode($response->usuario));
+
 				$fullName = mb_strtolower($response->usuario->primerNombre).' ';
 				$fullName.= mb_strtolower($response->usuario->primerApellido);
 				$formatDate = $this->config->item('format_date');
@@ -116,8 +117,6 @@ class Novo_User_Model extends NOVO_Model {
 				$this->response->icon = 'ui-icon-info';
 				$this->response->data = [
 					'btn1'=> [
-						'text'=> FALSE,
-						'link'=> FALSE,
 						'action'=> 'close'
 					]
 				];
@@ -128,7 +127,6 @@ class Novo_User_Model extends NOVO_Model {
 				$this->response->icon = 'ui-icon-alert';
 				$this->response->data = [
 					'btn1'=> [
-						'text'=> FALSE,
 						'link'=> [
 							'who'=> 'User',
 							'where'=> 'FinishSession'
@@ -152,7 +150,7 @@ class Novo_User_Model extends NOVO_Model {
 
 		$this->className = 'com.novo.objects.TO.UsuarioTO';
 
-		$userName = mb_strtoupper($dataRequest->userName);
+		$userName = mb_strtoupper($dataRequest->user);
 
 		$this->dataAccessLog->modulo = 'Usuario';
 		$this->dataAccessLog->function = 'Recuperar Clave';

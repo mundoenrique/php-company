@@ -20,7 +20,7 @@ class Novo_Business_Model extends NOVO_Model {
 	 */
 	public function callWs_getEnterprises_Business()
 	{
-		log_message('INFO', 'NOVO Business Model: Enterprises method Initialized');
+		log_message('INFO', 'NOVO Business Model: getEnterprises method Initialized');
 		$menu = [
 			'user_access'
 		];
