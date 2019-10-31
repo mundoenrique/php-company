@@ -2,7 +2,7 @@
 
 <?php if( lang('GEN-LOGO-HEAD')): ?>
 	<center class="margin-bottom">
-		<img src="<?= $this->asset->insertFile(lang('GEN-LOGO-HEAD'), 'images'); ?>" alt="Banco PICHINCHA">
+		<img src="<?= $this->asset->insertFile('logo/'.lang('GEN-LOGO-HEAD')); ?>" alt="Banco PICHINCHA">
 	</center>
 	<h1 class="welcome-title-bp"><?= lang('LOGIN_WELCOME_TITLE'); ?></h1>
 <?php endif; ?>
