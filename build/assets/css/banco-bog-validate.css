@@ -1,0 +1,11 @@
+.widget #login-form {
+	padding: 24px;
+}
+
+.w-100 {
+	width: 100% !important;
+}
+
+.login-content {
+	padding: 60px 0;
+}
