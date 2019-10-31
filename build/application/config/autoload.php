@@ -64,7 +64,8 @@ $autoload['libraries'] = array(
 	'form_validation',
 	'Asset',
 	'Encrypt_Connect',
-	'Cryptography'
+	'Cryptography',
+	'Verify_Access'
 );
 
 
