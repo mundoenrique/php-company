@@ -1971,7 +1971,7 @@ public function consultaTarjetas($urlCountry)
 		$tarjeta = $dataRequest->tarjeta;
 		$idpersona = $dataRequest->id_ext_per;
 		$password = $dataRequest->pass;
-		$Ausuario = ["userName" =>$username, "password" =>$password];
+		$Ausuario = ["userName" =>$username, "password" =>$password, "idProducto" => $idProductoS];
 		$acodcia = $this->session->userdata('accodciaS');
 		$acgrupo = $this->session->userdata('accodgrupoeS');
 		$sessionId = $this->session->userdata('sessionId');
@@ -1985,18 +1985,26 @@ public function consultaTarjetas($urlCountry)
 
 		$logAcceso = np_hoplite_log($sessionId, $username, $canal, $modulo, $function, $operation, 0, $ip, $timeLog);
 
-		$data = array(
+		for($i=0; $i<=count($tarjeta); $i++)
+		{
+				$items = array(
+					"edoNuevo" => $estadoNuevo,
+					"edoAnterior" => $estadoAnterior[0],
+					"numeroTarjeta" => $tarjeta[0],
+					"idExtPer" => $idpersona[0],
+					"idExtEmp" => $idEmpresa,
+					"accodcia" => $acodcia
+				);
+		};
+		$bean = array(
 			"idLote" => $lote,
-			"edoNuevo" => $estadoNuevo,
-			"edoAnterior" => $estadoAnterior,
-			"numeroTarjeta" => $tarjeta,
-			"idExtPer" => $idpersona,
-			"idExtEmp" => $idEmpresa,
-			"accodcia" => $acodcia,
+			"items" => [$items],
+			"usuario" => $Ausuario
+		);
+		$data = array(
+			"bean" => $bean,
 			"idOperation" => $operation,
 			"className" => $className,
-			"usuario" => $Ausuario,
-			"idProducto" => $idProductoS,
 			"logAccesoObject"=>$logAcceso,
 			"token"=>$token,
 			"pais" =>$urlCountry
