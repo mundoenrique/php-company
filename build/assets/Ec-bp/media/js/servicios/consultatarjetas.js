@@ -4,8 +4,8 @@ var serv_var = {
 	busk: false,
 	paginas: 10,
 	paginar: true,
-	dni_tarjetas: "",
-	noTarjetas: "",
+	dni_tarjetas: [],
+	noTarjetas: [],
 	TotalTjts: 0,
 	actualizarDatos: 'hidden',
 	consulta: 'hidden',
@@ -25,7 +25,8 @@ var serv_var = {
 	masivos:[],
 	lote:'',
 	estado_nuevo:'',
-	estado_anterior:''
+	estado_anterior:'',
+	items:[]
 }
 
 $('#buscar').on('click', function () {
@@ -231,7 +232,7 @@ function cargarResultado(data) {
 			var valida = $.inArray(v.edoEmision, validaope) !== -1 ? 1:0;
 			if(valida == 1)
 			{
-				$.inArray(v.edoEmision, serv_var.masivos) !== -1 ?  '' : serv_var.masivos.push(v.edoEmision)
+				$.inArray(v.edoEmision, serv_var.masivos) !== -1 ?  '' : serv_var.masivos.push(v.edoEmision);
 			}
 
 			tr = '<tr class="' + data.result.pagina+ '" tjta="' + v.nroTarjeta + '" num_lote="'+v.nroLote+'" edo_anterior="'+v.edoEmision+'" id_ext_per="' + v.cedula + '"><td class="checkbox-select"><input id="check-oneTM" type="checkbox" value=""/></td>';
@@ -267,6 +268,9 @@ function cargarResultado(data) {
 
 		});
 
+		console.log(serv_var.masivos);
+
+
 		var optionsmasivo = ''
 		for(var i in serv_var.masivos)
 		{
@@ -275,6 +279,8 @@ function cargarResultado(data) {
 
 		if(opcmasivo != '')
 		{
+			$('#selec_tipo_proceso').empty();
+			$('#selec_tipo_proceso').append('<option value="">Seleccionar</option>');
 			$('#process-masivo').show()
 			$('#selec_tipo_proceso').append(optionsmasivo);
 		}
@@ -384,6 +390,7 @@ function notificacion(titulo, mensaje, opcion = 0) {
 						resett();
 						$(this).dialog("close");
 						serv_var.TotalTjts = 0;
+						serv_var.masivos = [];
 						$('#resultado-tarjetas').hide();
 						$('.table-text-service tbody').empty();
 						buscar(serv_var.pgActual)
@@ -438,10 +445,10 @@ $(".table-text-service").on('click', '#RECIBIR_EN_BANCO', function() {
 // ACCION EVENTO ICON->RECIBIR EN EMRPESA
 $(".table-text-service").on('click', '#RECIBIR_EN_EMPRESA', function() {
 
-	serv_var.noTarjetas = $(this).parents('tr').attr('tjta');
-	serv_var.dni_tarjetas = $(this).parents('tr').attr('id_ext_per');
+	serv_var.noTarjetas = [$(this).parents('tr').attr('tjta')];
+	serv_var.dni_tarjetas = [$(this).parents('tr').attr('id_ext_per')];
 	serv_var.estado_nuevo = 'Recibir en Empresa';
-	serv_var.estado_anterior = $(this).parents('tr').attr('edo_anterior');
+	serv_var.estado_anterior = [$(this).parents('tr').attr('edo_anterior')];
 	serv_var.lote = $(this).parents('tr').attr('num_lote');
 
 	procesar('Recibir tarjeta en empresa')
@@ -835,3 +842,20 @@ function llamarWSCambio(pass,mensaje) {
 })
 
 }
+
+// ACCIÓN EVENTO CHECK UNITARIO
+$('.table-text-service').on('click', '#check-oneTM', function() {
+	var tjts = $(this).parents('tr').attr('tjta');
+	var dnis = $(this).parents('tr').attr('id_ext_per');
+
+	if ($(this).is(':checked')) {
+		serv_var.noTarjetas.push(tjts);
+		serv_var.dni_tarjetas.push(dnis);
+	}
+
+
+	console.log(serv_var.noTarjetas);
+	console.log(serv_var.dni_tarjetas);
+
+
+});
