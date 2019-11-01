@@ -8,8 +8,6 @@ var iconDanger = 'ui-icon-closethick';
 var baseURL = getPropertyOfElement('base-url');
 var baseAssets = getPropertyOfElement('asset-url');
 var country = getPropertyOfElement('country');
-var pais = getPropertyOfElement('pais');
-var isoPais = pais;
 var loader = $('#loader').html();
 var prefixCountry = country !== 'bp' ? 'Empresas Online ' : '';
 var settingsCountry = { bp: 'Conexión Empresas', co: 'Colombia', pe: 'Perú', us: 'Perú', ve: 'Venezuela' };
@@ -50,14 +48,14 @@ function callNovoCore(verb, who, where, request, _response_) {
 		_response_(response);
 
 	}).fail(function (jqXHR, textStatus, errorThrown ) {
-		var uriRedirec = getPropertyOfElement('redirect', '#system-info');
+		var uriRedirect = getPropertyOfElement('redirect', '#system-info');
 		var response = {
 			code: codeResp,
 			title: prefixCountry + strCountry,
 			icon: iconWarning,
 			data: {
 				btn1: {
-					link: baseURL+uriRedirec,
+					link: baseURL+uriRedirect,
 					action: 'redirect'
 				}
 			}
