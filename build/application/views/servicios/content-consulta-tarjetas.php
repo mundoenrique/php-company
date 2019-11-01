@@ -156,7 +156,6 @@ $urlCdn = get_cdn();
 				<tr>
 					<td valign="top">
 						<select id="selec_tipo_proceso" name="selec_tipo_proceso">
-							<option value="">Seleccionar</option>
 						</select>
 					</td>
 					<td valign="top">
