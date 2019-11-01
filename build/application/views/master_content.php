@@ -12,19 +12,18 @@
 	<?= $this->asset->insertCss(); ?>
 	<title><?= $titlePage; ?> - CEO</title>
 </head>
-<body base-url="<?= base_url(); ?>" asset-url="<?= assetUrl(); ?>" country="<?= $countryUri; ?>"
-	recaptcha="<?= $activeRecaptcha; ?>" pais="<?= $countryConf; ?>">
+<body base-url="<?= base_url(); ?>" asset-url="<?= assetUrl(); ?>" country="<?= $countryUri; ?>">
 	<?php $this->load->view('header_content'.$newViews) ?>
-	<div id="wrapper">
+
+	<?= $mainHtmlOpen ?>
 		<?php
 			foreach($viewPage as $views) {
 				$this->load->view($views.'_content'.$newViews);
 			}
 		?>
-	</div>
-	<?php $this->load->view('footer_content'.$newViews) ?>
-	<?php $this->load->view('tools_content') ?>
+	<?= $mainHtmlClose ?>
 
+	<?php $this->load->view('footer_content'.$newViews) ?>
 
 	<?= ($module == 'login' && $activeRecaptcha) ?  $scriptCaptcha : ''; ?>
 	<?= $this->asset->insertJs(); ?>

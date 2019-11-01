@@ -27,10 +27,11 @@ class Novo_Business_Model extends NOVO_Model {
 		$this->session->unset_userdata($menu);
 		$this->className = "com.novo.objects.MO.ListadoEmpresasMO";
 
-		$this->dataAccessLog->modulo = 'dashboard';
-		$this->dataAccessLog->function = 'dashboard';
-		$this->dataAccessLog->operation = 'listaEmpresas';
+		$this->dataAccessLog->modulo = 'Negocio';
+		$this->dataAccessLog->function = 'Empresas';
+		$this->dataAccessLog->operation = 'lista de empresas';
 
+		$this->dataRequest->idOperation = 'listaEmpresas';
 		$this->dataRequest->accodusuario = $this->session->userdata('userName');
 		$this->dataRequest->paginaActual = 1;
 		$this->dataRequest->paginar = FALSE;

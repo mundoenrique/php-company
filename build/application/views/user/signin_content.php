@@ -9,7 +9,7 @@
 
 <div id="sidebar">
 	<div id="widget-area">
-		<div id="widget-signin" class="widget tooltip" login-uri="<?= $loginUri ?>">
+		<div id="widget-signin" class="widget tooltip" login-uri="<?= $loginUri ?>" recaptcha="<?= $activeRecaptcha; ?>">
 
 			<?php if( $settingContents['signin_content']['loginTitle'] ): ?>
 				<h2 class="widget-title">

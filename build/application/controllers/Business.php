@@ -31,9 +31,7 @@ class Business extends NOVO_Controller {
 
 		$this->views = ['business/'.$view];
 		$this->render->titlePage = "Empresas";
-		$this->render->listaEmpresas = $this->loadModel();
-		$this->render->pais = $this->session->userdata('countrySess');
-		$this->render->uniqueMenuUser = $this->config->item('uniqueMenuUser');
+		$this->render->enterpriseList = $this->loadModel();
 		$this->render->lastSession = $this->session->userdata('lastSession');
 		$this->loadView($view);
 	}

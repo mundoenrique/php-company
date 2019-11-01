@@ -97,7 +97,7 @@ class Verify_Access {
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date October 31th, 2019
 	 */
-	public function accessAuthorization($module)
+	public function accessAuthorization($module, $countryUri)
 	{
 		log_message('INFO', 'NOVO Verify_Access: accessAuthorization method initialized');
 
@@ -110,15 +110,18 @@ class Verify_Access {
 				$auth = TRUE;
 				break;
 			case 'changePassword':
-				$auth = ($this->CI->session->flashdata('changePassword'));
+				$auth = ($this->CI->session->flashdata('changePassword') != NULL);
 				break;
 			case 'products':
-			case 'enterprise':
-				$auth = ($this->CI->session->userdata('logged'));
+			case 'getEnterprises':
+				$auth = ($this->CI->session->userdata('logged') != NULL && $countryUri === 'bdb');
 				break;
 			case 'rates':
 				$auth = ($this->CI->session->userdata('logged') && $countryUri === 've');
 				break;
+			case 'finishSession':
+			$auth = ($this->CI->session->userdata('logged') || $this->CI->session->userdata('userId'));
+			break;
 		}
 
 		log_message('INFO', 'NOVO accessAuthorization '.$module.': '.json_encode($auth));
@@ -134,19 +137,15 @@ class Verify_Access {
 	{
 		log_message('INFO', 'NOVO Verify_Access: validateRedirect method initialized');
 
-		$data = $redirectUrl;
-		$dataLink = isset($data['btn1']['link']) ? $data['btn1']['link'] : FALSE;
+		$dataLink = isset($redirectUrl['btn1']['link']) ? $redirectUrl['btn1']['link'] : FALSE;
 
-		if(!is_array($data) && strpos($data, 'dashboard') !== FALSE) {
-			$data = str_replace($countryUri.'/', $this->CI->config->item('country').'/', $data);
+		if(!is_array($redirectUrl) && strpos($redirectUrl, 'dashboard') !== FALSE) {
+			$redirectUrl = str_replace($countryUri.'/', $this->CI->config->item('country').'/', $redirectUrl);
 		} elseif($dataLink && !is_array($dataLink) && strpos($dataLink, 'dashboard') !== FALSE) {
 			$dataLink = str_replace($countryUri.'/', $this->CI->config->item('country').'/', $dataLink);
-			$data['btn1']['link'] =  $dataLink;
+			$redirectUrl['btn1']['link'] =  $dataLink;
 		}
 
-		$redirectUrl = $data;
-
 		return $redirectUrl;
-
 	}
 }

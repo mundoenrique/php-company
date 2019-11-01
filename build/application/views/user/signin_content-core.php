@@ -3,7 +3,7 @@
 	<div class="flex flex-column items-center">
 		<img src="<?= $this->asset->insertFile('logo/'.lang('GEN-LOGO-HEAD')); ?>" alt=<?= lang('GEN_ALTERNATIVE_TEXT'); ?>>
 		<span class="mb-2 secondary center h3">Empresas</span>
-		<div id="widget-signin" class="widget rounded" login-uri="<?= $loginUri ?>">
+		<div id="widget-signin" class="widget rounded" login-uri="<?= $loginUri ?>" recaptcha="<?= $activeRecaptcha; ?>">
 			<form id="login-form">
 				<div class="form-group">
 					<label for="user_login">Usuario</label>
