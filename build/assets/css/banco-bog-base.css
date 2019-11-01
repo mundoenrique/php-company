@@ -265,7 +265,7 @@
 	 }
 
 	 .btn-search {
-		 background-image: url("../images/icon-searcher_gray.svg");
+		 background-image: url("../images/icons/icon-searcher_gray.svg");
 		 background-position: center;
 		 background-repeat: no-repeat;
 		 border-radius: 0 20px 20px 0;
@@ -279,7 +279,7 @@
 
 	 .btn-search:hover {
 		 background-color: var(--primary) !important;
-		 background-image: url("../images/icon-searcher_white.svg");
+		 background-image: url("../images/icons/icon-searcher_white.svg");
 		 background-position: center;
 		 background-repeat: no-repeat;
 		 border-radius: 0 20px 20px 0;
@@ -1365,7 +1365,7 @@
 		 -o-transition: all 0.4s ease-in-out;
 		 -ms-transition: all 0.4s ease-in-out;
 		 transition: all 0.4s ease-in-out;
-		 background: #fff url("../images/bg-product.png");
+		 background: #fff url("../images/banco-bog-product.png");
 		 background-position: right;
 		 background-repeat: no-repeat;
 		 background-size: 40%;
