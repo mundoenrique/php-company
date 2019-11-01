@@ -12,11 +12,12 @@ $lang['GEN_RECOVER_PASS_TITLE'] = 'Recuperar contraseña';
 $lang['GEN_FISCAL_REGISTRY'] = 'RUC.';
 $lang['GEN_PASSWORD_CHANGE_TITLE'] = 'Cambiar contraseña';
 $lang['GEN_ALTERNATIVE_TEXT'] = 'Novopayment';
-$lang['CHANGEPASSWORD_TITLE'] = 'Recuperar contraseña';
+$lang['GEN_HTML_OPEN_MAIN'] = '<div id="wrapper">';
+$lang['GEN_HTML_CLOSE_MAIN'] = '</div>';
 //BUTTONS
-$lang['GEN_BTN_ACCEPT']= 'Aceptar';
-$lang['GEN_BTN_CANCEL']= 'Cancelar';
-$lang['GEN_BTN_CONTINUE']= 'Continuar';
+$lang['GEN_BTN_ACCEPT'] = 'Aceptar';
+$lang['GEN_BTN_CANCEL'] = 'Cancelar';
+$lang['GEN_BTN_CONTINUE'] = 'Continuar';
 $lang['GEN_BTN_BACK'] = 'Volver atrás';
 
 

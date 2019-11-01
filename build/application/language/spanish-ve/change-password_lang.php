@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 //CHANGE-PASSWORD
 
-$lang['CHANGEPASSWORD_TITLE'] = 'Recuperar contraseña';
+
 $lang['CURRENT_PASSWORD'] = 'Contraseña actual *';
 $lang['NEW_PASSWORD'] = 'Contraseña nueva *';
 $lang['CONFIRM_PASSWORD'] = 'Confirme la nueva contraseña *';
