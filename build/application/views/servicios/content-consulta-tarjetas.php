@@ -155,16 +155,16 @@ $urlCdn = get_cdn();
 			<tbody>
 				<tr>
 					<td valign="top">
-						<select id="selec_tipo_proceso" name="selec_tipo_proceso">
+						<select id="select-tipo-proceso" name="selec_tipo_proceso">
 						</select>
 					</td>
 					<td valign="top">
-						<input id="claveAuth" type="password" name="claveAuth" placeholder="Ingresa tu clave" value="" #batchs-last="" input="" style="margin-left: 10px; margin-bottom: 0px; border-color: rgb(221, 221, 221);" autocomplete="off">																																	</td>
+						<input id="claveMasivo" type="password" disabled name="claveAuth" placeholder="Ingresa tu clave" value="" #batchs-last="" input="" style="margin-left: 10px; margin-bottom: 0px; border-color: rgb(221, 221, 221);" autocomplete="off">																																	</td>
 				</tr>
 				<tr>
 					<td colspan="2" valign="top">
 						<center>
-							<button id="button-autorizar" type="submit" class="novo-btn-primary btn-authorization">Procesar</button>
+							<button id="button-masivo" disabled class="novo-btn-primary btn-authorization">Procesar</button>
 						</center>
 					</td>
 				</tr>
