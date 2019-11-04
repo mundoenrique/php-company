@@ -230,17 +230,19 @@ function cargarResultado(data) {
 
 		$.each(data.result.detalleEmisiones, function (k, v) {
 
-			var valida = $.inArray(v.edoEmision, validaope) !== -1 ? 1:0;
+			var statusEmi = v.edoEmision.split(' / ')
+
+			var valida = $.inArray(statusEmi[0], validaope) !== -1 ? 1:0;
 			if(valida == 1)
 			{
-				$.inArray(v.edoEmision, serv_var.masivos) !== -1 ?  '' : serv_var.masivos.push(v.edoEmision);
+				$.inArray(statusEmi[0], serv_var.masivos) !== -1 ?  '' : serv_var.masivos.push(statusEmi[0]);
 			}
 
-			tr = '<tr class="' + data.result.pagina+ '" tjta="' + v.nroTarjeta + '" num_lote="'+v.nroLote+'" edo_anterior="'+v.edoEmision+'" id_ext_per="' + v.cedula + '"><td class="checkbox-select"><input id="check-oneTM" type="checkbox" value=""/></td>';
+			tr = '<tr class="' + data.result.pagina+ '" tjta="' + v.nroTarjeta + '" num_lote="'+v.nroLote+'" edo_anterior="'+statusEmi[0]+'" id_ext_per="' + v.cedula + '"><td class="checkbox-select"><input id="check-oneTM" type="checkbox" value=""/></td>';
 			tr += '<td id="td-nombre-2" class="bp-min-width">' + v.nroTarjeta + '</td>';
 			tr += '<td class="bp-min-width">' + v.ordenS + '</td>';
 			tr += '<td class="bp-min-width">' + v.nroLote + '</td>';
-			tr += '<td class="bp-min-width">' + v.edoEmision + '</td>';
+			tr += '<td class="bp-min-width">' + statusEmi[0] + '</td>';
 			tr += '<td class="bp-min-width">' + v.edoPlastico + '</td>';
 			tr += '<td id="td-nombre-2" class="bp-min-width">' + v.nombre.toLowerCase().replace(/(^| )(\w)/g, function (x) {
 				return x.toUpperCase();
