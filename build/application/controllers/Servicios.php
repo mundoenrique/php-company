@@ -2121,8 +2121,8 @@ public function consultaTarjetas($urlCountry)
 		$sessionId = $this->session->userdata('sessionId');
 		$canal = "ceo";
 		$modulo="reportes";
-		$function="operacionesTarjetaLote";
-		$operation="operacionesTarjetaLote";
+		$function="operacionSeguimientoLoteCeo";
+		$operation="operacionSeguimientoLoteCeo";
 		$ip = $this->input->ip_address();
 		$timeLog= date("m/d/Y H:i");
 		$className="com.novo.business.lote.seguimiento.resources.NovoBusinessOperacionSeguimientoWS";
@@ -2143,6 +2143,7 @@ public function consultaTarjetas($urlCountry)
 			"idLote" => $lote,
 			"items" => $lista,
 			"usuario" => $Ausuario,
+			"opcion" => "saldo",
 			"idOperation" => $operation,
 			"className" => $className,
 			"logAccesoObject"=>$logAcceso,
