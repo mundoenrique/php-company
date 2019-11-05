@@ -224,18 +224,19 @@ function cargarResultado(data) {
 		'RECIBIR_EN_BANCO':'&#xe09c;'}
 
 		var validaope = ['Enviado a Empresa','Recibido en Empresa','Entregada a Tarjetahabiente']
-		var opcmasivo = {'Enviado a Empresa': 'Recibir en Empresa',
-		'Recibido en Empresa':'Entregar a Tarjetahabiente',
-		'Entregada a Tarjetahabiente': 'Consultar saldo'}
+		var opcmasivo = {'Enviado a Empresa': 'Recibir en Empresa - Recibido en empresa',
+		'Recibido en Empresa':'Entregar a Tarjetahabiente - Entregada a Tarjetahabiente / Activa',
+		'Entregada a Tarjetahabiente / Activa': 'Consultar saldo - saldo',
+		'Entregada a Tarjetahabiente / Bloqueada': 'Desbloquear - Desbloqueada'}
 
 		$.each(data.result.detalleEmisiones, function (k, v) {
 
 			var statusEmi = v.edoEmision.split(' / ')
 
 			var valida = $.inArray(statusEmi[0], validaope) !== -1 ? 1:0;
-			if(valida == 1)
+			if(valida == 1 && v.edoEmision != 'Entregada a Tarjetahabiente / Inactiva')
 			{
-				$.inArray(statusEmi[0], serv_var.masivos) !== -1 ?  '' : serv_var.masivos.push(statusEmi[0]);
+				$.inArray(v.edoEmision, serv_var.masivos) !== -1 ?  '' : serv_var.masivos.push(v.edoEmision);
 			}
 
 			tr = '<tr class="' + data.result.pagina+ '" tjta="' + v.nroTarjeta + '" num_lote="'+v.nroLote+'" edo_anterior="'+statusEmi[0]+'" id_ext_per="' + v.cedula + '"><td class="checkbox-select"><input id="check-oneTM" type="checkbox" value=""/></td>';
@@ -271,10 +272,12 @@ function cargarResultado(data) {
 
 		});
 
+
 		var optionsmasivo = ''
 		for(var i in serv_var.masivos)
 		{
-			optionsmasivo += '<option value="'+opcmasivo[serv_var.masivos[i]]+'#1">'+opcmasivo[serv_var.masivos[i]]+'</option>'
+			opcname = opcmasivo[serv_var.masivos[i]].split(' - ')
+			optionsmasivo += '<option value="'+opcname[1]+'#1">'+opcname[0]+'</option>'
 		}
 
 		if(serv_var.masivos.length !=0)
@@ -465,7 +468,7 @@ $(".table-text-service").on('click', '#RECIBIR_EN_EMPRESA', function() {
 
 	serv_var.noTarjetas.push($(this).parents('tr').attr('tjta'));
 	serv_var.dni_tarjetas.push($(this).parents('tr').attr('id_ext_per'));
-	serv_var.estado_nuevo = 'Recibir en Empresa';
+	serv_var.estado_nuevo = 'Recibido en Empresa';
 	serv_var.estado_anterior.push($(this).parents('tr').attr('edo_anterior'));
 	serv_var.lote = $(this).parents('tr').attr('num_lote');
 
@@ -527,7 +530,7 @@ $(".table-text-service").on('click', '#ENTREGAR_A_TARJETAHABIENTE', function() {
 
 	serv_var.noTarjetas.push($(this).parents('tr').attr('tjta'));
 	serv_var.dni_tarjetas.push($(this).parents('tr').attr('id_ext_per'));
-	serv_var.estado_nuevo = 'Recibir en Empresa';
+	serv_var.estado_nuevo = 'Entregada a Tarjetahabiente / Activa';
 	serv_var.estado_anterior.push($(this).parents('tr').attr('edo_anterior'));
 	serv_var.lote = $(this).parents('tr').attr('num_lote');
 
