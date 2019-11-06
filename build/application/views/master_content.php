@@ -27,5 +27,8 @@
 
 	<?= ($module == 'login' && $activeRecaptcha) ?  $scriptCaptcha : ''; ?>
 	<?= $this->asset->insertJs(); ?>
+	<script>
+		var lang = <? print_r(json_encode($this->lang->language)); ?>
+	</script>
 </body>
 </html>

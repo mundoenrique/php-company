@@ -146,5 +146,4 @@ $(function() {
 	$('#user_login, #user_pass').on('focus keypress', function() {
 		$(this).removeClass('validate-error');
 	})
-
 })

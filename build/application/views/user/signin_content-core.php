@@ -1,7 +1,7 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 <div class="login-content h-100 flex items-center justify-center bg-primary">
 	<div class="flex flex-column items-center">
-		<img src="<?= $this->asset->insertFile('logo/'.lang('GEN-LOGO-HEAD')); ?>" alt=<?= lang('GEN_ALTERNATIVE_TEXT'); ?>>
+		<img src="<?= $this->asset->insertFile($countryUri.'/'.lang('GEN-LOGO-HEAD')); ?>" alt=<?= lang('GEN_ALTERNATIVE_TEXT'); ?>>
 		<span class="mb-2 secondary center h3">Empresas</span>
 		<div id="widget-signin" class="widget rounded" login-uri="<?= $loginUri ?>" recaptcha="<?= $activeRecaptcha; ?>">
 			<form id="login-form">

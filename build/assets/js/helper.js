@@ -99,6 +99,7 @@ function notiSystem(title, message, icon, data) {
 			}
 		}
 	});
+	dialogMoldal.removeClass('none');
 }
 /**
  * @info Crea botones para modal informativo

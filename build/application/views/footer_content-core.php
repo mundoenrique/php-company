@@ -19,7 +19,14 @@
 	<span class="spinner-border secondary" role="status" aria-hidden="true"></span>
 </div>
 
-<div id="system-info" class="none" name="system-info" cancel="<?= lang('BUTTON_CANCEL'); ?>"
-	accept="<?= lang('BUTTON_ACCEPT'); ?>">
-	<p><span id="system-msg" class="system-msg"><?= lang('MESSAGE_SYSTEM'); ?></span></p>
+<div id="system-info" class="none">
+	<p>
+		<span id="system-msg" class="system-msg"><?= lang('RESP_MESSAGE_SYSTEM'); ?></span>
+	</p>
+	<div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+		<div class="ui-dialog-buttonset">
+			<button type="button" id="cancel" class="btn underline">Cancelar</button>
+			<button type="button" id="accept" class="btn btn-primary">Continuar</button>
+		</div>
+	</div>
 </div>
