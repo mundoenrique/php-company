@@ -113,8 +113,10 @@ $('#select-allR').on('click', function () {
 		$(':checkbox').each(function () {
 			this.checked = 1;
 			if ($(this).parents('tr').attr('tjta') != undefined) {
-				serv_var.noTarjetas += $(this).parents('tr').attr('tjta') + ",";
-				serv_var.dni_tarjetas += $(this).parents('tr').attr('id_ext_per') + ",";
+				serv_var.lote.push($(this).parents('tr').attr('num_lote'));
+				serv_var.noTarjetas.push($(this).parents('tr').attr('tjta'));
+				serv_var.dni_tarjetas.push($(this).parents('tr').attr('id_ext_per'));
+				serv_var.estado_anterior.push($(this).parents('tr').attr('edo_anterior'));
 			}
 		});
 	} else {
@@ -123,6 +125,7 @@ $('#select-allR').on('click', function () {
 		});
 		resett();
 	}
+
 });
 
 
@@ -221,21 +224,29 @@ function cargarResultado(data) {
 		'ENTREGAR_A_TARJETAHABIENTE':'&#xe011;',
 		'ENVIAR_A_EMPRESA':'&#xe05e;',
 		'RECIBIR_EN_EMPRESA':'&#xe062;',
-		'RECIBIR_EN_BANCO':'&#xe09c;'}
+		'RECIBIR_EN_BANCO':'&#xe09c;',
+		'NINGUNA':'-'}
 
-		var validaope = ['Recibido en Banco','Enviado a Empresa','Recibido en Empresa','Entregada a Tarjetahabiente']
-		var opcmasivo = {'Enviar a empresa': 'Enviado a Empresa # 1',
+		var validaope = []
+
+		for(var l in data.result.operacioneTarjeta)
+		{
+			validaope.push(data.result.operacioneTarjeta[l].edoTarjeta)
+		}
+
+		var opcmasivo = {'Recibir en banco': 'Recibido en Banco # 1',
+		'Enviar a empresa': 'Enviado a Empresa # 1',
 		'Recibir en empresa': 'Recibido en empresa # 1',
 		'Entregar a tarjetahabiente':'Entregada a Tarjetahabiente / Activa # 1',
-		'Bloqueo tarjeta' : 'bloquear # 2',
+		'Bloqueo tarjeta' : 'bloqueo # 2',
 		'Consulta saldo tarjeta': 'saldo # 2',
-		'Desbloquear': 'Desbloqueada # 2'}
+		'Desbloquear': 'desbloqueo # 2'}
 
 		$.each(data.result.detalleEmisiones, function (k, v) {
 
 			var statusEmi = v.edoEmision.split(' / ')
 
-			var valida = $.inArray(statusEmi[0], validaope) !== -1 ? 1:0;
+			var valida = $.inArray(v.edoEmision, validaope) !== -1 ? 1:0;
 
 			tr = '<tr class="' + data.result.pagina+ '" tjta="' + v.nroTarjeta + '" num_lote="'+v.nroLote+'" edo_anterior="'+statusEmi[0]+'" id_ext_per="' + v.cedula + '"><td class="checkbox-select"><input id="check-oneTM" type="checkbox" value=""/></td>';
 			tr += '<td id="td-nombre-2" class="bp-min-width">' + v.nroTarjeta + '</td>';
@@ -247,7 +258,7 @@ function cargarResultado(data) {
 				return x.toUpperCase();
 			}) + '</td>';
 			tr += '<td class="bp-min-width">' + v.cedula + '</td>';
-			/* tr += '<td id="saldo' + v.noTarjetaConMascara.replace(/[*]/g, "") + '" class="bp-min-width">-</td>'; //saldo */
+			 tr += '<td id="saldo' + v.nroTarjeta.replace(/[*]/g, "") + '" class="bp-min-width">-</td>'; //saldo
 			 tr += '<td class="bp-min-width">';
 			 var operacion = ''
 			 $.each(data.result.operacioneTarjeta, function (i, j)
@@ -321,8 +332,10 @@ function paginar() {
 					$(':checkbox').each(function () {
 						this.checked = 0;
 					});
-					serv_var.noTarjetas = "";
-					serv_var.dni_tarjetas = "";
+					serv_var.noTarjetas = [];
+					serv_var.dni_tarjetas = [];
+					serv_var.lote = [];
+					serv_var.estado_anterior = [];
 					serv_var.monto = [];
 					serv_var.fallidas = 0;
 				}
@@ -349,6 +362,8 @@ function resett() {
 
 	serv_var.noTarjetas = [];
 	serv_var.dni_tarjetas = [];
+	serv_var.lote = [];
+	serv_var.estado_anterior = [];
 	serv_var.monto = [];
 	serv_var.fallidas = 0;
 }
@@ -435,40 +450,37 @@ $("#exportXLS_a").on('click', function () {
 // ACCION EVENTO ICON->RECIBIR EN BANCO
 $(".table-text-service").on('click', '#RECIBIR_EN_BANCO', function() {
 
-	serv_var.noTarjetas = [$(this).parents('tr').attr('tjta')];
-	serv_var.dni_tarjetas = [$(this).parents('tr').attr('id_ext_per')];
+	resett();
+	serv_var.noTarjetas.push($(this).parents('tr').attr('tjta'));
+	serv_var.dni_tarjetas.push($(this).parents('tr').attr('id_ext_per'));
+	serv_var.estado_nuevo = 'Recibido en Banco';
+	serv_var.estado_anterior.push($(this).parents('tr').attr('edo_anterior'));
+	serv_var.lote.push($(this).parents('tr').attr('num_lote'));
 
-	var mensaje = 'Si desea recibir la tarjeta pulse aceptar de lo contrario cancelar.'
-			op = '20'
-			url = '1'
-
-	procesar('Recibir tarjeta en banco',url,op,mensaje)
-
-
+	url = "/servicios/cambiarEstadoemision"
+	procesar('Recibir en banco',url)
 });
 
 // ACCION EVENTO ICON->RECIBIR EN BANCO
 $(".table-text-service").on('click', '#CONSULTA_SALDO_TARJETA', function() {
 
+	resett();
 	serv_var.noTarjetas.push($(this).parents('tr').attr('tjta'));
 	serv_var.dni_tarjetas.push($(this).parents('tr').attr('id_ext_per'));
-	serv_var.estado_nuevo = 'Recibir en Empresa';
+	serv_var.estado_nuevo = 'Saldo';
 	serv_var.estado_anterior.push($(this).parents('tr').attr('edo_anterior'));
 	serv_var.lote.push($(this).parents('tr').attr('num_lote'));
 
-	op = '10'
+	op = 'saldo'
 	url = '/servicios/cambiarEstadotarjeta'
 
 	procesar('Consultar saldo',op)
-
-
 });
 
 // ACCION EVENTO ICON->RECIBIR EN EMRPESA
 $(".table-text-service").on('click', '#RECIBIR_EN_EMPRESA', function() {
 
 	resett();
-
 	serv_var.noTarjetas.push($(this).parents('tr').attr('tjta'));
 	serv_var.dni_tarjetas.push($(this).parents('tr').attr('id_ext_per'));
 	serv_var.estado_nuevo = 'Recibido en Empresa';
@@ -483,13 +495,14 @@ $(".table-text-service").on('click', '#RECIBIR_EN_EMPRESA', function() {
 // ACCION EVENTO ICON->BLOQUEAR TARJETA
 $(".table-text-service").on('click', '#BLOQUEO_TARJETA', function() {
 
+	resett();
 	serv_var.noTarjetas.push($(this).parents('tr').attr('tjta'));
 	serv_var.dni_tarjetas.push($(this).parents('tr').attr('id_ext_per'));
 	serv_var.estado_nuevo = 'Bloqueada';
 	serv_var.estado_anterior = ['Desbloqueada'];
 	serv_var.lote.push($(this).parents('tr').attr('num_lote'));
 
-	op = 'bloquear'
+	op = 'bloqueo'
 	url = '/servicios/cambiarEstadotarjeta'
 
 	procesar('Bloquear de tarjeta',url,op)
@@ -499,13 +512,14 @@ $(".table-text-service").on('click', '#BLOQUEO_TARJETA', function() {
 // ACCION EVENTO ICON->DESBLOQUEO
 $(".table-text-service").on('click', '#DESBLOQUEO', function() {
 
+	resett();
 	serv_var.noTarjetas.push($(this).parents('tr').attr('tjta'));
 	serv_var.dni_tarjetas.push($(this).parents('tr').attr('id_ext_per'));
 	serv_var.estado_nuevo = 'Desbloqueada';
 	serv_var.estado_anterior = ['Bloqueada'];
 	serv_var.lote.push($(this).parents('tr').attr('num_lote'));
 
-	op = 'desbloquear'
+	op = 'desbloqueo'
 	url = '/servicios/cambiarEstadotarjeta'
 
 	procesar('Desbloquear de tarjeta',url,op)
@@ -517,7 +531,6 @@ $(".table-text-service").on('click', '#DESBLOQUEO', function() {
 $(".table-text-service").on('click', '#ENVIAR_A_EMPRESA', function() {
 
 	resett();
-
 	serv_var.noTarjetas.push($(this).parents('tr').attr('tjta'));
 	serv_var.dni_tarjetas.push($(this).parents('tr').attr('id_ext_per'));
 	serv_var.estado_nuevo = 'Enviado a Empresa';
@@ -532,6 +545,7 @@ $(".table-text-service").on('click', '#ENVIAR_A_EMPRESA', function() {
 // ACCION EVENTO ICON->ENTREGAR_A_TARJETAHABIENTE
 $(".table-text-service").on('click', '#ENTREGAR_A_TARJETAHABIENTE', function() {
 
+	resett();
 	serv_var.noTarjetas.push($(this).parents('tr').attr('tjta'));
 	serv_var.dni_tarjetas.push($(this).parents('tr').attr('id_ext_per'));
 	serv_var.estado_nuevo = 'Entregada a Tarjetahabiente / Activa';
@@ -839,7 +853,9 @@ function llamarWSCambio(pass,mensaje,url,op) {
 	});
 
 	pass = hex_md5(pass);
-	$('#clave').val("");
+	$('#claveMasivo').val("");
+	$('#claveMasivo').prop("disabled",true);
+
 	var ceo_cook = decodeURIComponent(
 		document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 	);
@@ -864,7 +880,15 @@ function llamarWSCambio(pass,mensaje,url,op) {
 			$aux.dialog("destroy");
 
 			if (!data.result.ERROR) {
-				notificacion(mensaje, 'Proceso realizado correctamente', 1);
+
+				var reload = 1;
+				if(op == 'saldo')
+				{
+					reload = 2;
+					mostrar_saldo(data)
+				}
+				notificacion(mensaje, 'Proceso realizado correctamente', reload);
+
 			}
 			else{
 				if (data.result.ERROR == '-29') {
@@ -919,12 +943,13 @@ $('#button-masivo').click(function() {
 
 	serv_var.estado_nuevo = $("#select-tipo-proceso").val();
 	urlproc = serv_var.estado_nuevo.split(' # ');
-	alert(urlproc[0])
 	serv_var.estado_nuevo = urlproc[0]
 	var clamasivo = $('#claveMasivo')
 	var errmasivo=''
 
 	url = (urlproc[1] == 1) ? '/servicios/cambiarEstadoemision' : '/servicios/cambiarEstadotarjeta';
+
+
 
 	if(serv_var.noTarjetas.length == 0)
 	{
@@ -944,10 +969,15 @@ $('#button-masivo').click(function() {
 	{
 		llamarWSCambio(clamasivo.val(), 'Proceso Masivo',url,urlproc[0]);
 	}
-
-
-
 });
+
+// MOSTRAR EL SALDO DISPONIBLE PARA CADA TARJETA LUEGO DE CONSULTAR
+function mostrar_saldo(data) {
+	$.each(data.listadoTarjetas.lista, function(k, t) {
+		if (t.saldos !== undefined)
+			$('#saldo' + t.noTarjetaConMascara.replace(/[*]/g, "")).text((t.saldos.disponible));
+	});
+}
 
 //FUNCION PARA REMOVER UN ELMENTO DE UN ARRAY
 function removeItemFromArr ( arr, item ) {
