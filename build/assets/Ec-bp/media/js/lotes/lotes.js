@@ -4,6 +4,7 @@ $(function () { // Document ready
 	var ceo_cook;
 	$('#lotes-2').show();
 	$(".aviso").removeClass("elem-hidden");
+	$(".sidebar-products").removeClass("sub-widget");
 
 	var top = ($('#sidebar-products').offset().top - 100) - parseFloat($('#sidebar-products').css('marginTop').replace(/auto/, 0));
        $(window).scroll(function (event) {
