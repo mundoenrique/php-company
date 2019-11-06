@@ -108,13 +108,13 @@ $urlCdn = get_cdn();
 </div>
 
 <div id='resultado-tarjetas' style='display:none'>
-	<div id="top-batchs" style="width:900px !important">
+	<div id="top-batchs" style="width:936px !important">
 		<?php if($pais != 'Ec-bp'): ?>
 		<span aria-hidden="true" class="icon" data-icon="&#xe008;"></span>
 		<?php endif;?>
 		<?= lang('RESULTADOS') ?>
 	</div>
-	<div id='lotes-contenedor' style="width:900px !important">
+	<div id='lotes-contenedor' style="width:936px !important">
 	<div style="display:flex">
 		<div id="check-all" style="width: 50%;">
 			<input id="select-allR" type='checkbox' /><em id='textS'> <?= lang("SEL_ALL"); ?></em>
@@ -130,14 +130,14 @@ $urlCdn = get_cdn();
 			<thead>
 				<th class="checkbox-select">
 					<span aria-hidden="true" class="icon" data-icon="&#xe083;"></span></th>
-				<th id="td-nombre-2" class="bp-min-width"><?= lang('NRO_TARJETA'); ?></th>
-				<th id="td-nombre-2" class="bp-min-width"><?= lang('ORDEN'); ?></th>
+				<th  class="bp-min-width"><?= lang('NRO_TARJETA'); ?></th>
+				<th  class="bp-min-width"><?= lang('ORDEN'); ?></th>
 				<th><?= lang('LOTE'); ?></th>
 				<th><?= lang('ESTATUS_EMISION'); ?></th>
 				<th><?= lang('ESTATUS_PLASTICO'); ?></th>
-				<th id="td-nombre-2" class="bp-min-width"><?= lang('NOMBRE') ?></th>
+				<th class="bp-min-width"><?= lang('NOMBRE') ?></th>
 				<th class="bp-min-width"><?= lang('ID_PERSONA'); ?></th>
-				<!-- <th><?= lang('SALDO'); ?></th>-->
+				<th><?= lang('SALDO'); ?></th>
 				<th><?= lang('OPCIONES'); ?></th>
 			</thead>
 			<tbody>
@@ -148,7 +148,7 @@ $urlCdn = get_cdn();
 		<div id='paginado-TM'></div>
 
 	</div>
-	<div id="batchs-last" style="width:900px !important">
+	<div id="batchs-last" style="width:936px !important">
 	<div id="process-masivo" styley="display:none">
 	<center>
 		<table>
