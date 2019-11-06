@@ -535,7 +535,7 @@ class Dashboard extends CI_Controller {
 
 				if(!$result) {
 					log_message('DEBUG', 'NOVO VALIDATION ERRORS: '.json_encode(validation_errors()));
-					redirect(base_url($urlCountry.'/empresas'), 'location');
+					redirect(base_url($urlCountry.'/dashboard'), 'location');
 					exit();
 				}
 

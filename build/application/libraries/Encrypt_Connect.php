@@ -63,12 +63,15 @@ class Encrypt_Connect {
 			$response->rc = lang('RESP_RC_DEFAULT');
 			$response->msg = lang('RESP_MESSAGE_SYSTEM');
 		}
+
 		if(!isset($response->pais)) {
 			log_message('DEBUG', 'NOVO ['.$userName.'] Insertando pais al RESPONSE');
 			$response->pais = $this->CI->config->item('country');
 		}
 
-		$this->logMessage = $response;
+		$this->logMessage->rc = $response->rc;
+		$this->logMessage->msg = $response->msg;
+		$this->logMessage->pais = $this->CI->config->item('country');
 		$this->logMessage->model = $model;
 		$this->logMessage->userName = $userName;
 		$this->writeLog($this->logMessage);
@@ -113,6 +116,7 @@ class Encrypt_Connect {
 			$response = $failResponse;
 			$fail = TRUE;
 		}
+
 		if($httpCode != 200 || !$response) {
 			log_message('ERROR','NOVO ['.$userName.'] ERROR CURL: '.json_encode($CurlError));
 			$failResponse = new stdClass();
@@ -121,6 +125,7 @@ class Encrypt_Connect {
 			$response = $failResponse;
 			$fail = TRUE;
 		}
+
 		if($fail) {
 			$this->logMessage = $failResponse;
 			$this->logMessage->userName = $userName;
@@ -128,7 +133,6 @@ class Encrypt_Connect {
 			$this->logMessage->pais = $request['pais'];
 			$this->writeLog($this->logMessage);
 		}
-
 
 		return $response;
 	}

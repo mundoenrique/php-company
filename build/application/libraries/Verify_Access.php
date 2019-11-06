@@ -107,6 +107,7 @@ class Verify_Access {
 			case 'benefits':
 			case 'terms':
 			case 'recoverPass':
+			case 'finishSession':
 				$auth = TRUE;
 				break;
 			case 'changePassword':
@@ -119,9 +120,6 @@ class Verify_Access {
 			case 'rates':
 				$auth = ($this->CI->session->userdata('logged') && $countryUri === 've');
 				break;
-			case 'finishSession':
-			$auth = ($this->CI->session->userdata('logged') || $this->CI->session->userdata('userId'));
-			break;
 		}
 
 		log_message('INFO', 'NOVO accessAuthorization '.$module.': '.json_encode($auth));

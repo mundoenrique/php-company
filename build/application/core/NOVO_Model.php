@@ -76,4 +76,11 @@ class NOVO_Model extends CI_Model {
 
 		return $responseDecrypt;
 	}
+
+	protected function responseToView()
+	{
+		log_message('INFO', 'NOVO NOVO_Model CLASS: responseToView method Initialized');
+
+
+	}
 }

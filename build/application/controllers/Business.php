@@ -24,15 +24,18 @@ class Business extends NOVO_Controller {
 
 		array_push(
 			$this->includeAssets->jsFiles,
-			"third_party/jquery.paginate",
-			"third_party/jquery.isotope",
+			"third_party/isotope.pkgd-3.0.6",
+			"third_party/pagination-2.1.4",
 			"business/enterprise"
 		);
 
 		$this->views = ['business/'.$view];
+		$responseList = $this->loadModel();
 		$this->render->titlePage = "Empresas";
-		$this->render->enterpriseList = $this->loadModel();
 		$this->render->lastSession = $this->session->userdata('lastSession');
+		$this->render->enterprisesTotal = $responseList->data->enterprisesTotal;
+		$this->render->enterpriseList = $responseList->data->list;
+		$this->render->recordsPage = ceil($responseList->data->enterprisesTotal/$responseList->data->recordsPage);
 		$this->loadView($view);
 	}
 

@@ -38,7 +38,7 @@ class Novo_User_Model extends NOVO_Model {
 
 		switch($this->isResponseRc) {
 			case 0:
-				log_message('DEBUG', 'NOVO ['.$userName.'] RESPONSE: Login: ' . json_encode($response->usuario));
+				log_message('DEBUG', 'NOVO ['.$userName.'] RESPONSE Login: ' . json_encode($response->usuario));
 
 				$fullName = mb_strtolower($response->usuario->primerNombre).' ';
 				$fullName.= mb_strtolower($response->usuario->primerApellido);
@@ -54,7 +54,7 @@ class Novo_User_Model extends NOVO_Model {
 					'logged' => TRUE,
 					'userId' => $response->usuario->idUsuario,
 					'userName' => $response->usuario->userName,
-					'fullName' => $fullName,
+					'fullName' => ucwords(mb_strtolower($fullName)),
 					'codigoGrupo' => $response->usuario->codigoGrupo,
 					'lastSession' => $lastSession,
 					'token' => $response->token,
@@ -77,7 +77,7 @@ class Novo_User_Model extends NOVO_Model {
 					'sessionId' => $response->logAccesoObject->sessionId,
 					'userId' => $response->usuario->idUsuario,
 					'userName' => $response->usuario->userName,
-					'fullName' => $fullName,
+					'fullName' => ucwords(mb_strtolower($fullName)),
 					'codigoGrupo' => $response->usuario->codigoGrupo,
 					'token' => $response->token,
 					'cl_addr' => $this->encrypt_connect->encode($_SERVER['REMOTE_ADDR'], $dataRequest->user, 'REMOTE_ADDR'),

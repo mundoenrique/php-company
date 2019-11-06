@@ -14,3 +14,12 @@
 	</div>
 </footer>
 <?php endif; ?>
+
+<div id="loader" class="none">
+	<span class="spinner-border secondary" role="status" aria-hidden="true"></span>
+</div>
+
+<div id="system-info" class="none" name="system-info" cancel="<?= lang('BUTTON_CANCEL'); ?>"
+	accept="<?= lang('BUTTON_ACCEPT'); ?>">
+	<p><span id="system-msg" class="system-msg"><?= lang('MESSAGE_SYSTEM'); ?></span></p>
+</div>

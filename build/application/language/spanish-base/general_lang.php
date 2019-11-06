@@ -1,6 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+$lang['GEN_HTML_OPEN_MAIN'] = '<div id="wrapper">';
+$lang['GEN_HTML_CLOSE_MAIN'] = '</div>';
 $lang['GEN_SYSTEM_NAME']= 'Conexión Empresas Online';
 $lang['GEN_WELCOME_TEXT'] = 'Bienvenido(a)';
 $lang['GEN_ENTERPRISE_LIST'] = 'dashboard';
@@ -12,8 +14,11 @@ $lang['GEN_RECOVER_PASS_TITLE'] = 'Recuperar contraseña';
 $lang['GEN_FISCAL_REGISTRY'] = 'RUC.';
 $lang['GEN_PASSWORD_CHANGE_TITLE'] = 'Cambiar contraseña';
 $lang['GEN_ALTERNATIVE_TEXT'] = 'Novopayment';
-$lang['GEN_HTML_OPEN_MAIN'] = '<div id="wrapper">';
-$lang['GEN_HTML_CLOSE_MAIN'] = '</div>';
+$lang['GEN_PRODUCTS'] = 'Productos';
+$lang['GEN_PRODUCT'] = 'Producto';
+$lang['GEN_BRANC_OFFICE'] = 'Sucursal';
+$lang['GEN_BRANC_OFFICES'] = 'Sucursales';
+$lang['GEN_CONTAC_PERSON'] = 'Contacto';
 //BUTTONS
 $lang['GEN_BTN_ACCEPT'] = 'Aceptar';
 $lang['GEN_BTN_CANCEL'] = 'Cancelar';
