@@ -1986,7 +1986,8 @@ public function consultaTarjetas($urlCountry)
 		$logAcceso = np_hoplite_log($sessionId, $username, $canal, $modulo, $function, $operation, 0, $ip, $timeLog);
 
 		foreach ($tarjeta as $key => $value) {
-			$tjs = ["edoNuevo" => $estadoNuevo,
+			$tjs = ["idLote" => $lote[$key],
+			"edoNuevo" => $estadoNuevo,
 			"edoAnterior" => $estadoAnterior[$key],
 			"numeroTarjeta" => $tarjeta[$key],
 			"idExtPer" => $idpersona[$key],
@@ -1996,7 +1997,6 @@ public function consultaTarjetas($urlCountry)
 		}
 
 		$data = array(
-			"idLote" => $lote,
 			"items" => $lista,
 			"usuario" => $Ausuario,
 			"idOperation" => $operation,
@@ -2115,6 +2115,7 @@ public function consultaTarjetas($urlCountry)
 		$tarjeta = $dataRequest->tarjeta;
 		$idpersona = $dataRequest->id_ext_per;
 		$password = $dataRequest->pass;
+		$opcion = $dataRequest->opcion;
 		$Ausuario = ["userName" =>$username, "password" =>$password, "idProducto" => $idProductoS];
 		$acodcia = $this->session->userdata('accodciaS');
 		$acgrupo = $this->session->userdata('accodgrupoeS');
@@ -2130,7 +2131,8 @@ public function consultaTarjetas($urlCountry)
 		$logAcceso = np_hoplite_log($sessionId, $username, $canal, $modulo, $function, $operation, 0, $ip, $timeLog);
 
 		foreach ($tarjeta as $key => $value) {
-			$tjs = ["edoNuevo" => $estadoNuevo,
+			$tjs = ["idLote" => $lote[$key],
+			"edoNuevo" => $estadoNuevo,
 			"edoAnterior" => $estadoAnterior[$key],
 			"numeroTarjeta" => $tarjeta[$key],
 			"idExtPer" => $idpersona[$key],
@@ -2140,10 +2142,9 @@ public function consultaTarjetas($urlCountry)
 		}
 
 		$data = array(
-			"idLote" => $lote,
 			"items" => $lista,
 			"usuario" => $Ausuario,
-			"opcion" => "saldo",
+			"opcion" => $opcion,
 			"idOperation" => $operation,
 			"className" => $className,
 			"logAccesoObject"=>$logAcceso,
