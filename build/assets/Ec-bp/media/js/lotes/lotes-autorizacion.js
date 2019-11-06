@@ -11,6 +11,9 @@ $(function () {
 		$(".listaxAuth .checkbox-select").remove();
 	}
 
+	$('.mt-1').removeAttr("style");
+	$('#content-products').removeAttr("style");
+
 	var js_var = {
 		loteF: "",
 		numloteF: "",
@@ -257,6 +260,10 @@ $(function () {
 				$(this).dialog('destroy');
 			},
 			buttons: {
+				"Cancelar": { text: 'Cancelar', class: 'novo-btn-secondary-modal',
+					click: function () {
+						$(this).dialog("close"); }
+					},
 				Desasociar: function () {
 
 					pass = $(this).find($('#pass')).val();
