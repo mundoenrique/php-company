@@ -474,7 +474,7 @@ $(".table-text-service").on('click', '#CONSULTA_SALDO_TARJETA', function() {
 	op = 'saldo'
 	url = '/servicios/cambiarEstadotarjeta'
 
-	procesar('Consultar saldo',op)
+	procesar('Consultar saldo',url,op)
 });
 
 // ACCION EVENTO ICON->RECIBIR EN EMRPESA
