@@ -7629,6 +7629,13 @@ li.menu-item.security:nth-child(3) {
 	color: red;
 }
 
+.sub-widget-2 {
+	position: fixed;
+	top: 250px;
+	margin-left: 0px;
+	width: 230px;
+}
+
 /****Estilos de los botones NOVO****/
 button {
 

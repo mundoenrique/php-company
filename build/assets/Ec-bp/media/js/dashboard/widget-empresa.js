@@ -166,8 +166,8 @@ function MarcarError(msj){
 
 	// widget FIXED
 
-var top = ($('#sidebar-products').offset().top - 100) - parseFloat($('#sidebar-products').css('marginTop').replace(/auto/, 0));
-       $(window).scroll(function (event) {
+	var top = ($('#sidebar-products').offset().top - 100) - parseFloat($('#sidebar-products').css('marginTop').replace(/auto/, 0));
+	$(window).scroll(function (event) {
 
          var y = $(this).scrollTop();
 
