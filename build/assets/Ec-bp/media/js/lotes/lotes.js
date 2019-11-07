@@ -5,7 +5,6 @@ $(function () { // Document ready
 	$('#lotes-2').show();
 	$(".aviso").removeClass("elem-hidden");
 	$(".sidebar-products").removeClass("sub-widget");
-	
 	var top = ($('#sidebar-products').offset().top - 100) - parseFloat($('#sidebar-products').css('marginTop').replace(/auto/, 0));
        $(window).scroll(function (event) {
          var y = $(this).scrollTop();
@@ -15,8 +14,6 @@ $(function () { // Document ready
             $('#sidebar-products').removeClass('sub-widget-2');
          }
      });
-
-
 
 	actualizarLote();
 
