@@ -1,27 +1,21 @@
 'use strict'
+var offset = new Date().getTimezoneOffset();
+console.log(offset);
 $(function () {
 	var filterPage;
 
 	//external js: isotope.pkgd.js
 	var enterpriseList = $('#enterprise-list').isotope({
 		itemSelector: '.card',
-		layoutMode: 'fitRows'
+		layoutMode: 'masonry',
+    masonry: {
+      columnWidth: 270,
+      isFitWidth: true,
+      gutter: 16
+    }
 	});
 
-	enterpriseList.isotope({ filter: '.page_1' });
-
-	function onArrange() {
-		console.log('arrange done');
-	}
-	// bind event listener
-	enterpriseList.on( 'arrangeComplete', onArrange );
-	// un-bind event listener
-	enterpriseList.off( 'arrangeComplete', onArrange );
-	// bind event listener to be triggered just once. note ONE not ON
-	enterpriseList.one( 'arrangeComplete', function() {
-		console.log('just this one time');
-		$('#enterprise-list').removeClass('none')
-	});
+	enterpriseList.isotope({ filter: '.page_1' }).removeClass('visible');
 
 	$('#show-page').on('click', 'a', function(e) {
 		filterPage = $(this).attr('filter-page');
@@ -29,6 +23,8 @@ $(function () {
 	});
 
 	$('#alphabetical').on('click', 'button', function(e) {
+		$(this).parent().children().removeClass('current-outline');
+		$(this).addClass('current-outline');
 		filterPage = $(this).attr('filter-page');
 		orderPages(filterPage);
 		enterpriseList.isotope({ filter: '.'+filterPage });
@@ -39,13 +35,13 @@ $(function () {
 		shwoPage.children().remove();
 		filterOrder = filterOrder.split('_')[0];
 		var classU = '';
-		var page = 1;
+		var page = 1, classElement, init, finish, substr;
 		$('#enterprise-list').children('div.card').each(function(pos, element) {
-			var classElement = $(element).attr('class');
-			var init = classElement.indexOf(filterOrder);
-			var finish = (init + filterOrder.length);
-			var substr = classElement.substring(init, finish);
-			classElement = classElement.substring(init, finish + 2)
+			classElement = $(element).attr('class');
+			init = classElement.indexOf(filterOrder);
+			finish = (init + filterOrder.length);
+			substr = classElement.substring(init, finish);
+			classElement = classElement.substring(init, finish + 2);
 
 			if(filterOrder == substr && classU !== classElement) {
 				classU = classElement;
@@ -54,18 +50,4 @@ $(function () {
 			}
 		})
 	};
-
-	//external js: pagination.js
-	$('.pagination').pagination({
-		dataSource: function(done){
-			var result = [];
-			for (var i = 1; i <= 15; i++) {
-					result.push(i);
-			}
-			console.log(result)
-			done(result);
-	 },
-	 pageRange: 2,
-	 pageSize: 4
-	})
 });

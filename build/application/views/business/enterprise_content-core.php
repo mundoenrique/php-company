@@ -10,13 +10,13 @@
 		</nav>
 	</div>
 	<div class="flex h6 flex-auto justify-end">
-		<span>Último acceso: 11/08/2019 a las 19:12:35</span>
+		<span>Último acceso: <?= $lastSession ?></span>
 	</div>
 </div>
 
 <div class="flex mt-3 light items-center">
 	<div class="flex h5">
-		<span>Total Empresas: 4</span>
+		<span>Total Empresas: <?= $enterprisesTotal ?></span>
 	</div>
 	<div id="alphabetical"  class="flex h6 flex-auto justify-end">
 		<button class="btn btn-outline btn-small btn-rounded-left bg-white" filter-page="page_1">TODOS</button>
@@ -32,10 +32,10 @@
 </div>
 <div class="line mt-1"></div>
 
-<div id="enterprise-list" class="flex my-5 pt-2 justify-center flex-wrap" record-page="<?= $recordsPage; ?>">
+<div id="enterprise-list" class="products my-5 mx-auto pt-2 visible">
 
 	<?php foreach($enterpriseList AS $enterpriseaAttr): ?>
-	<div class="card bg-white m-2 <?= $enterpriseaAttr->category.' '.$enterpriseaAttr->page.' '.$enterpriseaAttr->albeticalPage ?>">
+	<div class="card bg-white mb-2 <?= $enterpriseaAttr->category.' '.$enterpriseaAttr->page.' '.$enterpriseaAttr->albeticalPage ?>">
 		<div class="product prod-first flex mx-1 px-1 py-3 flex-column">
 			<span class="h5 semibold primary truncate"><?= $enterpriseaAttr->acnomcia; ?></span>
 			<span class="my-1 h6 light text truncate"><?= $enterpriseaAttr->acdesc; ?></span>
