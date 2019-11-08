@@ -20,6 +20,7 @@ Normalize is licensed MIT. https://github.com/necolas/normalize.css */
  *::before,
  *::after {
 	 box-sizing: border-box; /* 1 */
+	 outline: none;
  }
 
  html {
