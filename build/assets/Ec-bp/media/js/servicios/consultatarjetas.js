@@ -247,8 +247,10 @@ function cargarResultado(data) {
 			var statusEmi = v.edoEmision.split(' / ')
 
 			var valida = $.inArray(v.edoEmision, validaope) !== -1 ? 1:0;
-
-			tr = '<tr class="' + data.result.pagina+ '" tjta="' + v.nroTarjeta + '" num_lote="'+v.nroLote+'" edo_anterior="'+statusEmi[0]+'" id_ext_per="' + v.cedula + '"><td class="checkbox-select"><input id="check-oneTM" type="checkbox" value=""/></td>';
+			var personal = [];
+			personal.push(v.nombres,v.apellidos,v.numCelular,v.email)
+			tr = '<tr class="' + data.result.pagina+ '" tjta="' + v.nroTarjeta + '" num_lote="'+v.nroLote+'" edo_anterior="'+statusEmi[0]+'" id_ext_per="' + v.cedula + '" personal="' + personal + '" >';
+			tr += '<td class="checkbox-select"><input id="check-oneTM" type="checkbox" value=""/></td>';
 			tr += '<td id="td-nombre-2" class="bp-min-width">' + v.nroTarjeta + '</td>';
 			tr += '<td class="bp-min-width">' + v.ordenS + '</td>';
 			tr += '<td class="bp-min-width">' + v.nroLote + '</td>';
@@ -565,6 +567,9 @@ $(".table-text-service").on('click', '#ACTUALIZAR_DATOS', function() {
 	serv_var.estado_nuevo = 'Actualizar datos';
 	serv_var.estado_anterior.push($(this).parents('tr').attr('edo_anterior'));
 
+	var dataPersona = $(this).parents('tr').attr('personal');
+	dataPersona = dataPersona.split(',');
+
 	var canvas = "<div id='dialog-confirm'>";
 	canvas += "<form name='no-form' onsubmit='return false'>";
 	canvas += '<div id="campos-transfer">';
@@ -573,13 +578,13 @@ $(".table-text-service").on('click', '#ACTUALIZAR_DATOS', function() {
 	canvas += '<li id="errornombre" style="display:none"></li>';
 	canvas += '</span>';
 	canvas += '<span><p>Apellidos:</p>';
-	canvas += '<input type="text" name="pass" id="apellidos">';
+	canvas += '<input type="text" name="pass" id="apellidos" value="'+dataPersona[1]+'">';
 	canvas += '<li id="errorapellido" style="display:none"></li>';
 	canvas += '</span>';
 	canvas += '</div>';
 	canvas += '<div id="campos-transfer">';
 	canvas += '<span><p>Correo:</p>';
-	canvas += '<input type="text" name="pass" id="correo" >';
+	canvas += '<input type="text" name="pass" id="correo" value="'+dataPersona[2]+'">';
 	canvas += '<li id="errorcorreo" style="display:none"></li>';
 	canvas += '</span>';
 	canvas += '<span><p>PIN: </p>';
@@ -589,7 +594,7 @@ $(".table-text-service").on('click', '#ACTUALIZAR_DATOS', function() {
 	canvas += '</div>';
 	canvas += '<div id="campos-transfer">';
 	canvas += '<span><p>Teléfono celular:</p>';
-	canvas += '<input type="text" name="pass" id="celular" >';
+	canvas += '<input type="text" name="pass" id="celular" value="'+dataPersona[3]+'">';
 	canvas += '<li id="errorcelular" style="display:none"></li>';
 	canvas += '</span>';
 	canvas += '<span><p>Contraseña: </p>';
@@ -732,21 +737,28 @@ function validarFields()
 		valCorreo.removeClass('textbox-transfer');
 	}
 
-	if(!numRegExp.test(valPin.val()))
+	if(valPin.val().length > 0)
 	{
-		errorPin.show();
-		errorPin.html('El campo debe ser numerico')
-		validInput = false;
-		valPin.addClass('textbox-transfer');
-	}
-	else if(valPin.val().length != 4)
-	{
-		errorPin.show();
-		errorPin.html('El campo debe contener 4 numeros')
-		validInput = false;
-		valPin.addClass('textbox-transfer');
-	}
-	else{
+			if(!numRegExp.test(valPin.val()))
+			{
+				errorPin.show();
+				errorPin.html('El campo debe ser numerico')
+				validInput = false;
+				valPin.addClass('textbox-transfer');
+			}
+			else if(valPin.val().length != 4)
+			{
+				errorPin.show();
+				errorPin.html('El campo debe contener 4 numeros')
+				validInput = false;
+				valPin.addClass('textbox-transfer');
+			}
+			else{
+				errorPin.hide();
+				validInput = true;
+				valPin.removeClass('textbox-transfer');
+			}
+	} else{
 		errorPin.hide();
 		validInput = true;
 		valPin.removeClass('textbox-transfer');
@@ -1012,8 +1024,6 @@ $('#button-masivo').click(function() {
 	var errmasivo=''
 
 	url = (urlproc[1] == 1) ? '/servicios/cambiarEstadoemision' : '/servicios/cambiarEstadotarjeta';
-
-
 
 	if(serv_var.noTarjetas.length == 0)
 	{
