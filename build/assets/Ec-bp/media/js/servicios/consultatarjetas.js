@@ -252,7 +252,7 @@ function cargarResultado(data) {
 			tr += '<td id="td-nombre-2" class="bp-min-width">' + v.nroTarjeta + '</td>';
 			tr += '<td class="bp-min-width">' + v.ordenS + '</td>';
 			tr += '<td class="bp-min-width">' + v.nroLote + '</td>';
-			tr += '<td class="bp-min-width">' + statusEmi[0] + '</td>';
+			tr += '<td class="bp-min-width">' + v.edoEmision + '</td>';
 			tr += '<td class="bp-min-width">' + v.edoPlastico + '</td>';
 			tr += '<td id="td-nombre-2" class="bp-min-width">' + v.nombre.toLowerCase().replace(/(^| )(\w)/g, function (x) {
 				return x.toUpperCase();
@@ -562,12 +562,14 @@ $(".table-text-service").on('click', '#ACTUALIZAR_DATOS', function() {
 
 	serv_var.noTarjetas = [$(this).parents('tr').attr('tjta')];
 	serv_var.dni_tarjetas = [$(this).parents('tr').attr('id_ext_per')];
+	serv_var.estado_nuevo = 'Actualizar datos';
+	serv_var.estado_anterior.push($(this).parents('tr').attr('edo_anterior'));
 
 	var canvas = "<div id='dialog-confirm'>";
 	canvas += "<form name='no-form' onsubmit='return false'>";
 	canvas += '<div id="campos-transfer">';
 	canvas += '<span><p>Nombre:</p>';
-	canvas += '<input  type="text" name="pass" id="nombres">';
+	canvas += '<input type="text" name="pass" id="nombres">';
 	canvas += '<li id="errornombre" style="display:none"></li>';
 	canvas += '</span>';
 	canvas += '<span><p>Apellidos:</p>';
@@ -617,6 +619,16 @@ $(".table-text-service").on('click', '#ACTUALIZAR_DATOS', function() {
 			Aceptar: function() {
 				$(this).find('#msg').empty();
 				validarFields();
+				var nombre = $('#nombres').val();
+				 apellidos = $('#apellidos').val();
+				 correo =	$('#correo').val();
+				 pin =	$('#pin').val();
+				 celular	= $('#celular').val();
+				 clave =	$('#clave').val();
+
+				 url = "/servicios/cambiarEstadoemision";
+				 op = 'act_datos';
+				llamarActDatos(url, op);
 
 
 			}
@@ -832,6 +844,58 @@ function procesar(titulo, url, op = 1) {
 			}
 		}
 	});
+}
+
+function llamarActDatos(url,op, title){
+	var $aux = $('#loading').dialog({
+
+		dialogClass: "hide-close",
+		title: title,
+		modal: true,
+		bgiframe: true,
+		dialogClass: 'hide-close',
+		close: function() {
+			$aux.dialog('close');
+		},
+		position: {
+			my: "top"
+		}
+	});
+	pass = hex_md5(pass);
+
+	var dataRequest = JSON.stringify ({
+		lote : serv_var.lote,
+		nombre: nombres,
+		apellidos: apellidos,
+		correo: correo,
+		pin: pin,
+		celular:celular,
+		pass: clave
+		opcion: op,
+		})
+
+	var ceo_cook = decodeURIComponent(
+		document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+	);
+	dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
+	$.post(baseURL + api + isoPais + url,
+	{request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)} )
+	.done(function(response){
+		data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
+		$aux.dialog("destroy");
+		if (!data.result.ERROR) {
+			notificacion(mensaje, 'Proceso realizado correctamente', reload);
+		}
+		else{
+			if (data.result.ERROR == '-29') {
+				alert('Usuario actualmente desconectado');
+				location.reload();
+			} else {
+				notificacion(mensaje, data.result.ERROR,2);
+			}
+		}
+	})
+
 }
 
 
