@@ -1126,8 +1126,13 @@ class Lotes extends CI_Controller {
 
         $paisS = $this->session->userdata('pais');
 
-        $menuP =$this->session->userdata('menuArrayPorProducto');
-        $moduloAct = np_hoplite_existeLink($menuP,"TEBAUT");
+				$menuP =$this->session->userdata('menuArrayPorProducto');
+				$moduloAct = np_hoplite_existeLink($menuP,"TEBAUT");
+				if($urlCountry == 'Ec-bp') {
+					$moduloActTebAut = np_hoplite_existeLink($menuP,"TEBAUT");
+					$moduloActTebOrs = np_hoplite_existeLink($menuP,"TEBORS");
+					$moduloAct = $moduloActTebAut || $moduloActTebOrs;
+				}
 
         if($paisS==$urlCountry && $logged_in && $moduloAct!==false){
 
@@ -1199,6 +1204,7 @@ class Lotes extends CI_Controller {
      * @return bytes
      */
     public function expdetalleLoteAuthPDF($urlCountry){
+
         np_hoplite_countryCheck($urlCountry);
         $this->lang->load('erroreseol');//HOJA DE ERRORES;
         $canal = "ceo";
@@ -1218,7 +1224,13 @@ class Lotes extends CI_Controller {
         $paisS = $this->session->userdata('pais');
 
         $menuP =$this->session->userdata('menuArrayPorProducto');
-        $moduloAct = np_hoplite_existeLink($menuP,"TEBAUT");
+				$moduloAct = np_hoplite_existeLink($menuP,"TEBAUT");
+				if($urlCountry == 'Ec-bp') {
+					$moduloActTebAut = np_hoplite_existeLink($menuP,"TEBAUT");
+					$moduloActTebOrs = np_hoplite_existeLink($menuP,"TEBORS");
+
+					$moduloAct = $moduloActTebAut || $moduloActTebOrs;
+				}
 
         if($paisS==$urlCountry && $logged_in && $moduloAct!==false){
 
