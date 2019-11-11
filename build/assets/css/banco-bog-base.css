@@ -1008,6 +1008,7 @@ textarea.form-control {
 .table-cell   { display: table-cell   !important }
 .flex         { display: flex         !important }
 .inline-flex  { display: inline-flex  !important }
+.visible			{ visibility: hidden		!important }
 
 @media (min-width: 992px) {
 	.lg-none { display: none !important }
