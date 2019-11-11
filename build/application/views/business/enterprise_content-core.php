@@ -52,27 +52,26 @@
 	<?php endforeach; ?>
 </div>
 
-<div>
-	<div class="pagination flex flex-auto justify-center my-5 py-5">
+<div class="pagination page-number flex mb-5 py-5 flex-auto justify-center">
 
-		<nav class="h4">
-			<a href="#">Primera</a>
-			<a href="#">««</a>
-			<a href="#">«</a>
-		</nav>
+	<nav class="h4">
+		<a href="#">Primera</a>
+		<a href="#">««</a>
+		<a href="#">«</a>
+	</nav>
 
-		<div id="show-page" class="h4">
-			<?php for($i=1; $i <= $recordsPage; $i++): ?>
-			<span>
-				<a href="javascript:" filter-page="page_<?= $i ?>"><?= $i; ?></a>
-			</span>
-			<?php endfor; ?>
-		</div>
-
-		<nav class="h4">
-			<a href="#">»</a>
-			<a href="#">»»</a>
-			<a href="#">Última</a>
-		</nav>
+	<div id="show-page" class="h4 flex justify-center ">
+		<?php for($i=1; $i <= $recordsPage; $i++): ?>
+		<span class="mx-1">
+			<a href="javascript:" filter-page="page_<?= $i ?>"><?= $i; ?></a>
+		</span>
+		<?php endfor; ?>
 	</div>
+
+	<nav class="h4">
+		<a href="#">»</a>
+		<a href="#">»»</a>
+		<a href="#">Última</a>
+	</nav>
 </div>
+

@@ -764,7 +764,7 @@ textarea.form-control {
   border-color: var(--border-color);
 }
 
-.btn-outline:hover {
+.btn-outline:hover:not(:disabled) {
   background-color: var(--primary) !important;
   border: .85px solid var(--primary);
   box-shadow: 1px 1px 2px 0 var(--shadows-color);
@@ -773,7 +773,8 @@ textarea.form-control {
 
 .btn-outline:disabled,
 .btn-outline.is-disabled {
-  opacity: .5;
+	opacity: .5;
+	cursor: default;
 }
 
 .current-outline {
@@ -1578,38 +1579,54 @@ textarea.form-control {
 	margin-right: .5rem;
 }
 
+.page-number nav, .page-number span {
+	display: inline-block;
+}
+
 .page-number span {
 	position: relative;
-  -webkit-transition: all 0.4s ease;
+	-webkit-transition: all 0.4s ease;
 	transition: all 0.4s ease;
-	padding: 0px 2px;
-	margin: 0 2px;
+	padding: 0px 3px !important;
+	margin: 0 3px !important;
 	cursor: pointer;
 }
 
 .page-number nav a {
-	padding: 0 2px;
-	margin: 0 2px;
+	padding: 0 3px !important;
+	margin: 0 3px !important;
+	-webkit-transition: all 0.4s ease;
+	transition: all 0.4s ease;
 }
 
+.page-current {
+	font-weight: var(--bold-font-weight);
+}
 
-.page-number span:hover, .page-number nav a:hover  {
-	font-weight: var(--semibold-font-weight);
+.page-number nav a:hover, .page-number span:hover:not(.page-current) a,
+.main-nav-user  > li:hover:not(.page-current) > a {
+	-webkit-transition: all 0.4s ease;
+	transition: all 0.4s ease;
+	text-shadow: 0 0.01em 0.01em #012c71,0 -0.01em #012c71,0.01em 0 #012c71,-0.01em 0 #012c71;
 }
 
 .page-number span:hover::before,
-.page-number .active span::before,
+.page-number .page-current::before,
 .page-number span:hover::after,
-.page-number .active span::after {
+.page-number .page-current::after,
+.main-nav-user  li:hover::before,
+.main-nav-user  .page-current::before,
+.main-nav-user  li:hover::after,
+.main-nav-user  .page-current::after  {
 	width: 100%;
 }
 
-.page-number span::after  {
+.page-number span::after, .main-nav-user  li::after {
 	bottom: 0;
 	right: 0;
 
 }
-.page-number span::after {
+.page-number span::after,  .main-nav-user > li::after  {
 	background-color: var(--yellow);
   content: '';
   height: 3px;
@@ -1887,12 +1904,17 @@ i[class*=" icon-"]:before {
 /* Main-nav-user  */
 .main-nav-user li {
   position: relative;
-  cursor: pointer;
+	cursor: pointer;
 }
 
 .main-nav-user > li {
   padding-top: 12px;
-  padding-bottom: 12px;
+	padding-bottom: 12px;
+}
+
+.main-nav-user > li > a{
+  -webkit-transition: all 0.4s ease;
+	transition: all 0.4s ease;
 }
 
 .dropdown-user  li:not(:last-child) {
