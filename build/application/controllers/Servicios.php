@@ -1971,6 +1971,7 @@ public function consultaTarjetas($urlCountry)
 		$tarjeta = $dataRequest->tarjeta;
 		$idpersona = $dataRequest->id_ext_per;
 		$password = $dataRequest->pass;
+		$opcion = $dataRequest->opcion;
 		$Ausuario = ["userName" =>$username, "password" =>$password, "idProducto" => $idProductoS];
 		$acodcia = $this->session->userdata('accodciaS');
 		$acgrupo = $this->session->userdata('accodgrupoeS');
@@ -1984,27 +1985,58 @@ public function consultaTarjetas($urlCountry)
 		$className="com.novo.objects.MO.SeguimientoLoteMO";
 
 		$logAcceso = np_hoplite_log($sessionId, $username, $canal, $modulo, $function, $operation, 0, $ip, $timeLog);
-
-		foreach ($tarjeta as $key => $value) {
-			$tjs = ["idLote" => $lote[$key],
-			"edoNuevo" => $estadoNuevo,
-			"edoAnterior" => $estadoAnterior[$key],
-			"numeroTarjeta" => $tarjeta[$key],
-			"idExtPer" => $idpersona[$key],
-			"idExtEmp" => $idEmpresa,
-			"accodcia" => $acodcia];
+		if($opcion == 'act_datos')
+    {
+			foreach ($tarjeta as $key => $value) {
+				$tjs = ["idLote" => $lote[$key],
+				"edoNuevo" => $estadoNuevo,
+				"edoAnterior" => $estadoAnterior[$key],
+				"numeroTarjeta" => $tarjeta[$key],
+				"idExtPer" => $idpersona[$key],
+				"idExtEmp" => $idEmpresa,
+				"accodcia" => $acodcia,
+				"firstName" => $dataRequest->nombres,
+				"lastName" => $dataRequest->apellidos,
+				"email" => $dataRequest->correo,
+				"phone" => $dataRequest->celular,
+				"pin" => $dataRequest->pin
+			];
 			$lista[$key] = $tjs;
+			}
+		}else{
+			foreach ($tarjeta as $key => $value) {
+        $tjs = ["idLote" => $lote[$key],
+        "edoNuevo" => $estadoNuevo,
+        "edoAnterior" => $estadoAnterior[$key],
+        "numeroTarjeta" => $tarjeta[$key],
+        "idExtPer" => $idpersona[$key],
+        "idExtEmp" => $idEmpresa,
+        "accodcia" => $acodcia];
+        $lista[$key] = $tjs;
 		}
+	}
 
 		$data = array(
-			"items" => $lista,
-			"usuario" => $Ausuario,
-			"idOperation" => $operation,
-			"className" => $className,
-			"logAccesoObject"=>$logAcceso,
-			"token"=>$token,
-			"pais" =>$urlCountry
-		);
+      "items" => $lista,
+      "usuario" => $Ausuario,
+      "opcion" => $opcion,
+      // "actualiza" => $actualiza,
+      "idOperation" => $operation,
+      "className" => $className,
+      "logAccesoObject"=>$logAcceso,
+      "token"=>$token,
+      "pais" =>$urlCountry
+    );
+
+		// $data = array(
+		// 	"items" => $lista,
+		// 	"usuario" => $Ausuario,
+		// 	"idOperation" => $operation,
+		// 	"className" => $className,
+		// 	"logAccesoObject"=>$logAcceso,
+		// 	"token"=>$token,
+		// 	"pais" =>$urlCountry
+		// );
 
 		$data = json_encode($data, JSON_UNESCAPED_UNICODE);
 		$dataEncry = np_Hoplite_Encryption($data, 'callWScambiarEstadoemision');
@@ -2115,7 +2147,6 @@ public function consultaTarjetas($urlCountry)
 		$tarjeta = $dataRequest->tarjeta;
 		$idpersona = $dataRequest->id_ext_per;
 		$password = $dataRequest->pass;
-		$opcion = $dataRequest->opcion;
 		$Ausuario = ["userName" =>$username, "password" =>$password, "idProducto" => $idProductoS];
 		$acodcia = $this->session->userdata('accodciaS');
 		$acgrupo = $this->session->userdata('accodgrupoeS');

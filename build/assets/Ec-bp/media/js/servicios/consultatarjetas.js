@@ -559,6 +559,8 @@ $(".table-text-service").on('click', '#ENTREGAR_A_TARJETAHABIENTE', function() {
 
 })
 
+var nombres, apellidos, correo, pin, celular, clave;
+
 // ACCION EVENTO ICON->ACTUALIZAR DATOS
 $(".table-text-service").on('click', '#ACTUALIZAR_DATOS', function() {
 
@@ -566,6 +568,9 @@ $(".table-text-service").on('click', '#ACTUALIZAR_DATOS', function() {
 	serv_var.dni_tarjetas = [$(this).parents('tr').attr('id_ext_per')];
 	serv_var.estado_nuevo = 'Actualizar datos';
 	serv_var.estado_anterior.push($(this).parents('tr').attr('edo_anterior'));
+	serv_var.lote.push($(this).parents('tr').attr('num_lote'));
+
+
 
 	var dataPersona = $(this).parents('tr').attr('personal');
 	dataPersona = dataPersona.split(',');
@@ -623,19 +628,19 @@ $(".table-text-service").on('click', '#ACTUALIZAR_DATOS', function() {
 		buttons: {
 			Aceptar: function() {
 				$(this).find('#msg').empty();
-				validarFields();
-				var nombre = $('#nombres').val();
-				 apellidos = $('#apellidos').val();
-				 correo =	$('#correo').val();
-				 pin =	$('#pin').val();
-				 celular	= $('#celular').val();
-				 clave =	$('#clave').val();
-
-				 url = "/servicios/cambiarEstadoemision";
-				 op = 'act_datos';
-				llamarActDatos(url, op);
-
-
+				var validate = validarFields();
+				if(validate == true)
+				{
+					nombres = $('#nombres').val();
+					apellidos = $('#apellidos').val();
+					correo =  $('#correo').val();
+					pin = $('#pin').val();
+					celular = $('#celular').val();
+					clave = $('#clave').val();
+					$(this).dialog("destroy");
+					url = "/servicios/cambiarEstadoemision";
+					llamarActDatos(url,'Actualizar datos');
+				}
 			}
 		}
 	});
@@ -789,7 +794,7 @@ function validarFields()
 		valClave.removeClass('textbox-transfer');
 	}
 
-
+	return validInput;
 }
 
 function spaceString(name)
@@ -858,7 +863,7 @@ function procesar(titulo, url, op = 1) {
 	});
 }
 
-function llamarActDatos(url,op, title){
+function llamarActDatos(url, title){
 	var $aux = $('#loading').dialog({
 
 		dialogClass: "hide-close",
@@ -873,17 +878,21 @@ function llamarActDatos(url,op, title){
 			my: "top"
 		}
 	});
-	pass = hex_md5(pass);
-
+	pass = hex_md5(clave);
+	var op = "act_datos";
 	var dataRequest = JSON.stringify ({
 		lote : serv_var.lote,
-		nombre: nombres,
+		nombres: nombres,
 		apellidos: apellidos,
 		correo: correo,
 		pin: pin,
 		celular:celular,
-		pass: clave
-		opcion: op,
+		pass: pass,
+		estado_nuevo: serv_var.estado_nuevo,
+    estado_anterior: serv_var.estado_anterior,
+    tarjeta: serv_var.noTarjetas,
+    id_ext_per: serv_var.dni_tarjetas,
+    opcion: op
 		})
 
 	var ceo_cook = decodeURIComponent(
@@ -896,14 +905,15 @@ function llamarActDatos(url,op, title){
 		data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 		$aux.dialog("destroy");
 		if (!data.result.ERROR) {
-			notificacion(mensaje, 'Proceso realizado correctamente', reload);
+			notificacion('Actualizar datos','Proceso realizado correctamente', 1);
+
 		}
 		else{
 			if (data.result.ERROR == '-29') {
 				alert('Usuario actualmente desconectado');
 				location.reload();
 			} else {
-				notificacion(mensaje, data.result.ERROR,2);
+				notificacion("mensaje", data.result.ERROR,2);
 			}
 		}
 	})
