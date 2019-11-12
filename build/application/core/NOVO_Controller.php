@@ -21,6 +21,7 @@ class NOVO_Controller extends CI_Controller {
 	protected $method;
 	protected $request;
 	protected $dataResponse;
+	protected $greeting;
 
 	public function __construct()
 	{
@@ -39,6 +40,7 @@ class NOVO_Controller extends CI_Controller {
 		$this->render->userId = $this->session->userdata('userId');
 		$this->render->fullName = $this->session->userdata('fullName');
 		$this->render->activeRecaptcha = $this->config->item('active_recaptcha');
+		$this->greeting = (int) $this->session->userdata('greeting');
 		$this->optionsCheck();
 	}
 
@@ -52,7 +54,17 @@ class NOVO_Controller extends CI_Controller {
 		$this->render->newViews = $this->config->item('new-views');
 		$this->form_validation->set_error_delimiters('', '---');
 		$this->config->set_item('language', 'spanish-base');
-
+		switch ($this->greeting) {
+			case $this->greeting < 12 && $this->greeting >= 0:
+				$this->render->greeting = lang('GEN_MORNING');
+				break;
+			case $this->greeting >= 12 && $this->greeting < 19:
+				$this->render->greeting = lang('GEN_AFTERNOON');
+				break;
+			case $this->greeting >= 19 && $this->greeting <= 23:
+				$this->render->greeting = lang('GEN_EVENING');
+				break;
+		}
 		if($this->input->is_ajax_request()) {
 			$this->dataRequest = json_decode(
 				$this->security->xss_clean(

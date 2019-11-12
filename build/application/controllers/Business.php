@@ -32,9 +32,11 @@ class Business extends NOVO_Controller {
 		$this->views = ['business/'.$view];
 		$responseList = $this->loadModel();
 		$this->render->titlePage = "Empresas";
+		$this->render->category = "";
 		$this->render->lastSession = $this->session->userdata('lastSession');
 		$this->render->enterprisesTotal = $responseList->data->enterprisesTotal;
 		$this->render->enterpriseList = $responseList->data->list;
+		$this->render->filters = $responseList->data->filters;
 		$this->render->recordsPage = ceil($responseList->data->enterprisesTotal/$responseList->data->recordsPage);
 		$this->loadView($view);
 	}

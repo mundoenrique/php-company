@@ -36,6 +36,9 @@ class CallModels extends Novo_Controller {
 
 		if($valid) {
 			$this->request = $this->verify_access->createRequest($user);
+			$time = strtotime($this->request->currentime.' UTC');
+			$dateInLocal = date("H", $time);
+			$this->session->set_userdata('greeting', $dateInLocal);
 			$this->dataResponse = $this->loadModel($this->request);
 		} else {
 			$this->dataResponse = $this->verify_access->ResponseByDefect($user);

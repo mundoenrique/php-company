@@ -23,6 +23,7 @@ function callNovoCore(verb, who, where, request, _response_) {
 	var ceo_cook = decodeURIComponent(
 		document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 	);
+	request.currentime = new Date();
 	var dataRequest = JSON.stringify({
 		who: who,
 		where: where,
@@ -84,8 +85,13 @@ function notiSystem(title, message, icon, data) {
 		draggable: false,
 		resizable: false,
 		closeOnEscape: false,
-		dialogClass: 'hide-close',
+		minWidth: 310,
+		dialogClass: "border-none",
+    classes: {
+      "ui-dialog-titlebar": "border-none",
+    },
 		open: function (event, ui) {
+			$('.ui-dialog-titlebar-close').hide();
 			$('#system-icon').addClass(icon);
 			$('#system-msg').html(message);
 

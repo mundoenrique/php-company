@@ -1,5 +1,5 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
-<span class="primary">Buenos dias <?= $fullName ?></span>
+<span class="primary"><?= $greeting.' '.$fullName ?></span>
 <div class="flex mb-2 light items-center">
 	<div class="flex tertiary">
 		<nav class="main-nav nav-inferior">
@@ -18,24 +18,20 @@
 	<div class="flex h5">
 		<span>Total Empresas: <?= $enterprisesTotal ?></span>
 	</div>
-	<div id="alphabetical"  class="flex h6 flex-auto justify-end">
+	<div id="alphabetical" class="flex h6 flex-auto justify-end">
 		<button class="btn btn-outline btn-small btn-rounded-left bg-white" filter-page="page_1">TODOS</button>
-		<button class="btn-options btn-outline bold bg-white" filter-page="A-C_1">A-C</button>
-		<button class="btn-options btn-outline bold bg-white" filter-page="D-G_1">D-G</button>
-		<button class="btn-options btn-outline bold bg-white" filter-page="H-K_1">H-K</button>
-		<button class="btn-options btn-outline bold bg-white" filter-page="L-O_1">L-O</button>
-		<button class="btn-options btn-outline bold bg-white" filter-page="P-S_1">P-S</button>
-		<button class="btn-options btn-outline bold bg-white" filter-page="T-W_1">T-W</button>
-		<button class="btn-options btn-outline bold bg-white" filter-page="X-Z_1">X-Z</button>
+		<?php foreach($filters AS $filtersAttr): ?>
+		<button class="btn-options btn-outline bold bg-white" filter-page="<?= $filtersAttr['filter'] ?>"
+			<?= $filtersAttr['active'] ? '' : 'disabled' ?>><?= $filtersAttr['text']; ?></button>
+		<?php endforeach; ?>
 		<button class="btn-search btn-outline bg-white"></button>
 	</div>
 </div>
 <div class="line mt-1"></div>
 
 <div id="enterprise-list" class="products my-5 mx-auto pt-2 visible">
-
 	<?php foreach($enterpriseList AS $enterpriseaAttr): ?>
-	<div class="card bg-white mb-2 <?= $enterpriseaAttr->category.' '.$enterpriseaAttr->page.' '.$enterpriseaAttr->albeticalPage ?>">
+	<div class="card bg-white mb-2 <?= $enterpriseaAttr->page.' '.$enterpriseaAttr->albeticalPage ?>">
 		<div class="product prod-first flex mx-1 px-1 py-3 flex-column">
 			<span class="h5 semibold primary truncate"><?= $enterpriseaAttr->acnomcia; ?></span>
 			<span class="my-1 h6 light text truncate"><?= $enterpriseaAttr->acdesc; ?></span>
@@ -53,13 +49,11 @@
 </div>
 
 <div class="pagination page-number flex mb-5 py-5 flex-auto justify-center">
-
 	<nav class="h4">
 		<a href="#">Primera</a>
 		<a href="#">««</a>
 		<a href="#">«</a>
 	</nav>
-
 	<div id="show-page" class="h4 flex justify-center ">
 		<?php for($i=1; $i <= $recordsPage; $i++): ?>
 		<span class="mx-1">
@@ -67,7 +61,6 @@
 		</span>
 		<?php endfor; ?>
 	</div>
-
 	<nav class="h4">
 		<a href="#">»</a>
 		<a href="#">»»</a>
@@ -75,3 +68,8 @@
 	</nav>
 </div>
 
+<div id="no-enterprise" class="bg-color mx-4 my-5">
+	<div class="flex justify-center">
+		<span class="my-5 py-5 h4 regular text">No tienes empresas asignadas</span>
+	</div>
+</div>
