@@ -58,7 +58,7 @@ class Novo_User_Model extends NOVO_Model {
 					'codigoGrupo' => $response->usuario->codigoGrupo,
 					'lastSession' => $lastSession,
 					'token' => $response->token,
-					'cl_addr' => $this->encrypt_connect->encode($_SERVER['REMOTE_ADDR'], $dataRequest->user, 'REMOTE_ADDR'),
+					'cl_addr' => $this->encrypt_connect->encode($_SERVER['REMOTE_ADDR'], $userName, 'REMOTE_ADDR'),
 					'countrySess' => $this->config->item('country'),
 					'idUsuario' => $response->usuario->idUsuario,
 					'pais' => $this->config->item('country'),

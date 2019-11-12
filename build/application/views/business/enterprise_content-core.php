@@ -33,13 +33,13 @@
 	<?php foreach($enterpriseList AS $enterpriseaAttr): ?>
 	<div class="card bg-white mb-2 <?= $enterpriseaAttr->page.' '.$enterpriseaAttr->albeticalPage ?>">
 		<div class="product prod-first flex mx-1 px-1 py-3 flex-column">
-			<span class="h5 semibold primary truncate"><?= $enterpriseaAttr->acnomcia; ?></span>
+			<span class="h5 semibold primary truncate enterprise-name"><?= $enterpriseaAttr->acnomcia; ?></span>
 			<span class="my-1 h6 light text truncate"><?= $enterpriseaAttr->acdesc; ?></span>
-			<span class="pt-1 h5 regular tertiary truncate">
-				<?= lang('GEN_FISCAL_REGISTRY').' '.$enterpriseaAttr->acrif; ?>
+			<span class="pt-1 h5 regular tertiary truncate id-fiscal">
+				<?= lang('GEN_FISCAL_REGISTRY').': '.$enterpriseaAttr->acrif; ?>
 			</span>
 			<div class="mask flex mt-5 mx-1 pt-2 flex-column tertiary bg-white">
-				<span class="product-pb h5 truncate"><?= $enterpriseaAttr->resumenProductos ?></span>
+				<span class="product-pb h5 truncate total-product"><?= $enterpriseaAttr->resumenProductos ?></span>
 				<span class="product-pb h5 truncate"><?= lang('GEN_CONTAC_PERSON').':'; ?></span>
 				<span class="product-pb h5 truncate"><?= $enterpriseaAttr->acpercontac; ?></span>
 			</div>
@@ -73,3 +73,6 @@
 		<span class="my-5 py-5 h4 regular text">No tienes empresas asignadas</span>
 	</div>
 </div>
+<form id="get_products" action="<?= base_url('productos') ?>" method="POST">
+	<input type="hidden" name="<?= $novoName ?>" valule="<?= $novoCook ?>">
+</form>

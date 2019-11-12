@@ -46,14 +46,16 @@ $(function () {
 		$(this).parent().children().removeClass('current-outline');
 		$(this).addClass('current-outline');
 		filterPage = $(this).attr('filter-page');
-		orderPage(filterPage);
-		paginateList(filterPage);
-		enterpriseList.isotope({ filter: '.'+filterPage });
+		if(filterPage) {
+			orderPage(filterPage);
+			paginateList(filterPage);
+			enterpriseList.isotope({ filter: '.'+filterPage });
+		}
 	});
 
 	var orderPage = function(filter) {
 		var reg = $('.'+filter).length;
-		if(reg < 4) {
+		if(reg < 3) {
 			$('#enterprise-list').removeClass('mx-auto');
 		} else {
 			$('#enterprise-list').addClass('mx-auto');
@@ -80,4 +82,16 @@ $(function () {
 		})
 		$('#show-page > span:first').addClass('page-current');
 	};
+	$('.product').on('click', function() {
+		var getProducts = $('#get_products')
+		var totalProduct = parseInt($(this).find('.total-product').text());
+		var EnterpriseName = $(this).find('.enterprise-name').text();
+		var idFiscal = $(this).find('.id-fiscal').text();
+		if(totalProduct > 0) {
+			$(this).off('click');
+			getProducts.append(`<input type="hidden" name="idFiscal" value="${idFiscal}">`);
+			getProducts.append(`<input type="hidden" name="enterpriseName" value="${EnterpriseName}">`);
+			getProducts.submit();
+		}
+	});
 });

@@ -56,8 +56,8 @@ $route['translate_uri_dashes'] = FALSE;
 $route['(:any)/async-call'] = "callModels";
 //User
 $route['(:any)/inicio'] = "user/login";
-$route['(:any)/cerrar-sesion'] = "user/finishSession";
 $route['(:any)/inicio/(:any)'] = "user/login";
+$route['(:any)/cerrar-sesion'] = "user/finishSession";
 $route['(:any)/recuperar-clave'] = "user/recoverPass";
 $route['(:any)/cambiar-clave'] = "user/changePassword";
 //Information
@@ -66,9 +66,7 @@ $route['(:any)/inf-condiciones'] = "information/terms";
 $route['(:any)/inf-tarifas'] = "information/rates";
 //Business
 $route['(:any)/empresas'] = "business/getEnterprises";
-$route['(:any)/empresas/lista'] = "dashboard/getListaEmpresasJSON/$1";
-$route['(:any)/productos'] = "business/getProducts/$1";
-$route['(:any)/producto/detalle'] = "business/showDetailProduct/$1";
+$route['(:any)/productos'] = "business/getProducts";
 
 //old routes
 $route['(:any)/login'] = "users/login/$1";

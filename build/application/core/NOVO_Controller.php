@@ -21,6 +21,7 @@ class NOVO_Controller extends CI_Controller {
 	protected $method;
 	protected $request;
 	protected $dataResponse;
+	protected $appUserName;
 	protected $greeting;
 
 	public function __construct()
@@ -37,6 +38,7 @@ class NOVO_Controller extends CI_Controller {
 		$this->method = 'callWs_'.$this->router->fetch_method().'_'.$this->router->fetch_class();
 		$this->countryUri = $this->uri->segment(1, 0) ? $this->uri->segment(1, 0) : 'pe';
 		$this->render->logged = $this->session->userdata('logged');
+		$this->appUserName = $this->session->userdata('userName');
 		$this->render->userId = $this->session->userdata('userId');
 		$this->render->fullName = $this->session->userdata('fullName');
 		$this->render->activeRecaptcha = $this->config->item('active_recaptcha');
@@ -77,10 +79,13 @@ class NOVO_Controller extends CI_Controller {
 				)
 			);
 		} else {
-			$access = $this->verify_access->accessAuthorization($this->router->fetch_method(), $this->countryUri);
+			$access = $this->verify_access->accessAuthorization($this->router->fetch_method(), $this->countryUri, $this->appUserName);
 			$valid = TRUE;
-			if($_POST) {
-				$valid = $this->verify_access->validateForm($this->rule, $this->countryUri);
+			if($_POST && $access) {
+				$valid = $this->verify_access->validateForm($this->rule, $this->countryUri, $this->appUserName);
+				if($valid) {
+					$this->request = $this->verify_access->createRequest($this->appUserName);
+				}
 			}
 			$this->preloadView($access && $valid);
 		}
@@ -156,12 +161,14 @@ class NOVO_Controller extends CI_Controller {
 	 * Método para cargar un modelo especifico
 	 * @author Pedro Torres
 	 * @date Auguts 23rd, 2019
+	 * @modified J. Enrique Peñaloza Piñero
+	 * @date October 31st, 2019
 	 */
-	protected function loadModel($params = FALSE)
+	protected function loadModel($request = FALSE)
 	{
 		$this->load->model($this->model,'modelLoaded');
 		$method = $this->method;
-		return $this->modelLoaded->$method($params);
+		return $this->modelLoaded->$method($request);
 	}
 	/**
 	 * Método para renderizar una vista

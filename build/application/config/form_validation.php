@@ -1,16 +1,6 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed');
 
 $config = [
-	'listenterprises' => [
-		[
-			'field' => 'plot',
-			'rules' => 'trim|required'
-		],
-		[
-			'field' => 'request',
-			'rules' => 'trim|required'
-		]
-	],
 	'validateCaptcha' => [
 		[
 			'field' => 'user',
@@ -75,6 +65,19 @@ $config = [
 			'label' => 'confirmPass',
 			'rules' => 'trim|regex_match[/^([\w!@\*\-\?¡¿+\/.,#]+)+$/i]|matches[newPass]|required'
 		]
+	],
+	'getProducts' => [
+		[
+			'field' => 'idFiscal',
+			'label' => 'idFiscal',
+			'rules' => 'trim|regex_match[/^([\w-:.]+[\s]*)+$/i]|required'
+		],
+		[
+			'field' => 'enterpriseName',
+			'label' => 'enterpriseName',
+			'rules' => 'trim|regex_match[/^([\w-.,#ñÑáéíóúÑÁÉÍÓÚ\(\)&:\+]+[\s]*)+$/i]|required'
+		]
+
 	],
 	'dash-products' => [
 		[

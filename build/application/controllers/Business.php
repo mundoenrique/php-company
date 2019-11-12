@@ -41,71 +41,19 @@ class Business extends NOVO_Controller {
 		$this->loadView($view);
 	}
 
-	public function getProducts($urlCountry)
+	public function getProducts()
 	{
 		log_message('INFO', 'NOVO Business: getProducts Method Initialized');
-		$view = 'enterprise';
-		$responseService = new stdClass();
+		$view = 'products';
 
-		$result = $this->form_validation->run('dash-products');
-		log_message('DEBUG', 'NOVO VALIDATION FORM dash-products: '.json_encode($result));
+		array_push(
+			$this->includeAssets->jsFiles,
+			'select-tools'
+		);
 
-		if(!$result) {
-			log_message('DEBUG', 'NOVO VALIDATION ERRORS: '.json_encode(validation_errors()));
-			redirect(base_url($urlCountry.'/empresas'), 'location');
-			exit();
-		}
-
-		$menu = ['menuArrayPorProducto'];
-		$this->session->unset_userdata($menu);
-
-		if($this->input->post()){
-
-			$newdata = array(
-				'acrifS'=> $this->input->post('data-acrif'),
-				'acnomciaS'=> $this->input->post('data-acnomcia'),
-				'acrazonsocialS'=> $this->input->post('data-acrazonsocial'),
-				'acdescS'=> $this->input->post('data-acdesc'),
-				'accodciaS'=> $this->input->post('data-accodcia'),
-				'accodgrupoeS'=> $this->input->post('data-accodgrupoe')
-			);
-			$this->session->set_userdata($newdata);
-		}
-
-		if($newdata['acrifS']){
-
-			$this->load->helper('form');
-			$this->model = 'Novo_'.$this->router->fetch_class().'_Model';
-			$this->method = 'callWs_'.$this->router->fetch_method().'_'.$this->router->fetch_class();
-
-			array_push(
-				$this->includeAssets->cssFiles,
-				"$this->countryUri/default"
-			);
-			array_push(
-				$this->includeAssets->jsFiles,
-				"third_party/jquery.paginate",
-				"third_party/jquery.isotope",
-				"business/products"
-			);
-
-			$this->views = ['business/products'];
-			$this->render->titlePage = "Productos";
-
-			$responseService = $this->loadModel($newdata);
-
-			$this->render->productos = $responseService->productos ?: [];
-			$this->render->listaCategorias = $responseService->listaCategorias ?: [];
-			$this->render->listaMarcas = $responseService->listaMarcas ?: [];
-
-			$this->render->pais = $this->session->userdata('countrySess');
-			$this->render->uniqueMenuUser = $this->config->item('uniqueMenuUser');
-			$this->render->lastSession = $this->session->userdata('lastSession');
-			$this->loadView('products');
-
-		}else{
-			redirect($urlCountry.'/empresas');
-		}
+		$this->views = ['business/'.$view];
+		$this->render->titlePage = "Productos";
+		$this->loadView($view);
 	}
 
 	public function showDetailProduct()
