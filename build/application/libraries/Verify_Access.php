@@ -48,7 +48,7 @@ class Verify_Access {
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date October 31th, 2019
 	 */
-	public function createRequest()
+	public function createRequest($user)
 	{
 		log_message('INFO', 'NOVO Verify_Access: createRequest method initialized');
 
@@ -56,13 +56,14 @@ class Verify_Access {
 			switch($key) {
 				case 'request':
 				case 'plot':
+				case 'ceo_name':
 					continue;
 				default:
 				$this->requestServ->$key = $value;
 			}
 		}
 		unset($_POST);
-
+		log_message('INFO', 'NOVO ['.$user.'] request created '.json_encode($this->requestServ));
 		return $this->requestServ;
 	}
 	/**
@@ -97,7 +98,7 @@ class Verify_Access {
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date October 31th, 2019
 	 */
-	public function accessAuthorization($module, $countryUri)
+	public function accessAuthorization($module, $countryUri, $user)
 	{
 		log_message('INFO', 'NOVO Verify_Access: accessAuthorization method initialized');
 
@@ -113,7 +114,7 @@ class Verify_Access {
 			case 'changePassword':
 				$auth = ($this->CI->session->flashdata('changePassword') != NULL);
 				break;
-			case 'products':
+			case 'getProducts':
 			case 'getEnterprises':
 				$auth = ($this->CI->session->userdata('logged') != NULL && $countryUri === 'bdb');
 				break;
@@ -122,7 +123,7 @@ class Verify_Access {
 				break;
 		}
 
-		log_message('INFO', 'NOVO accessAuthorization '.$module.': '.json_encode($auth));
+		log_message('INFO', 'NOVO ['.$user.'] accessAuthorization '.$module.': '.json_encode($auth));
 
 		return $auth;
 	}

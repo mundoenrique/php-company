@@ -31,20 +31,20 @@ class CallModels extends Novo_Controller {
 			unset($this->dataRequest);
 		}
 
-		$user = isset($_POST['user']) ? mb_strtoupper($_POST['user']) : $this->session->userdata('userName');
-		$valid = $this->verify_access->validateForm($this->rule, $this->countryUri, $user);
+		$this->appUserName = isset($_POST['user']) ? mb_strtoupper($_POST['user']) : $this->session->userdata('userName');
+		$valid = $this->verify_access->validateForm($this->rule, $this->countryUri, $this->appUserName);
 
 		if($valid) {
-			$this->request = $this->verify_access->createRequest($user);
+			$this->request = $this->verify_access->createRequest($this->appUserName);
 			$time = strtotime($this->request->currentime.' UTC');
 			$dateInLocal = date("H", $time);
 			$this->session->set_userdata('greeting', $dateInLocal);
 			$this->dataResponse = $this->loadModel($this->request);
 		} else {
-			$this->dataResponse = $this->verify_access->ResponseByDefect($user);
+			$this->dataResponse = $this->verify_access->ResponseByDefect($this->appUserName);
 		}
 		$data = $this->dataResponse->data;
-		$this->dataResponse->data = $this->verify_access->validateRedirect($data, $this->countryUri, $user);
+		$this->dataResponse->data = $this->verify_access->validateRedirect($data, $this->countryUri, $this->appUserName);
 		$dataResponse = $this->cryptography->encrypt($this->dataResponse);
 		$this->output->set_content_type('application/json')->set_output(json_encode($dataResponse));
 	}
