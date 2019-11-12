@@ -489,7 +489,7 @@ $(".table-text-service").on('click', '#RECIBIR_EN_EMPRESA', function() {
 	serv_var.estado_anterior.push($(this).parents('tr').attr('edo_anterior'));
 	serv_var.lote.push($(this).parents('tr').attr('num_lote'));
 
-	url = "/servicios/cambiarEstadoemision"
+	url = "/servicios/cambiarEstadoemision";
 	procesar('Recibir tarjeta en empresa',url)
 
 });
@@ -574,12 +574,12 @@ $(".table-text-service").on('click', '#ACTUALIZAR_DATOS', function() {
 
 	var dataPersona = $(this).parents('tr').attr('personal');
 	dataPersona = dataPersona.split(',');
-
+	console.log(dataPersona)
 	var canvas = "<div id='dialog-confirm'>";
 	canvas += "<form name='no-form' onsubmit='return false'>";
 	canvas += '<div id="campos-transfer">';
 	canvas += '<span><p>Nombre:</p>';
-	canvas += '<input type="text" name="pass" id="nombres">';
+	canvas += '<input type="text" name="pass" id="nombres" value="'+dataPersona[0]+'">';
 	canvas += '<li id="errornombre" style="display:none"></li>';
 	canvas += '</span>';
 	canvas += '<span><p>Apellidos:</p>';
@@ -589,7 +589,7 @@ $(".table-text-service").on('click', '#ACTUALIZAR_DATOS', function() {
 	canvas += '</div>';
 	canvas += '<div id="campos-transfer">';
 	canvas += '<span><p>Correo:</p>';
-	canvas += '<input type="text" name="pass" id="correo" value="'+dataPersona[2]+'">';
+	canvas += '<input type="text" name="pass" id="correo" value="'+dataPersona[3]+'">';
 	canvas += '<li id="errorcorreo" style="display:none"></li>';
 	canvas += '</span>';
 	canvas += '<span><p>PIN: </p>';
@@ -599,7 +599,7 @@ $(".table-text-service").on('click', '#ACTUALIZAR_DATOS', function() {
 	canvas += '</div>';
 	canvas += '<div id="campos-transfer">';
 	canvas += '<span><p>Teléfono celular:</p>';
-	canvas += '<input type="text" name="pass" id="celular" value="'+dataPersona[3]+'">';
+	canvas += '<input type="text" name="pass" id="celular" value="'+dataPersona[2]+'">';
 	canvas += '<li id="errorcelular" style="display:none"></li>';
 	canvas += '</span>';
 	canvas += '<span><p>Contraseña: </p>';

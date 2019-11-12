@@ -2147,6 +2147,7 @@ public function consultaTarjetas($urlCountry)
 		$tarjeta = $dataRequest->tarjeta;
 		$idpersona = $dataRequest->id_ext_per;
 		$password = $dataRequest->pass;
+		$opcion = $dataRequest->opcion;
 		$Ausuario = ["userName" =>$username, "password" =>$password, "idProducto" => $idProductoS];
 		$acodcia = $this->session->userdata('accodciaS');
 		$acgrupo = $this->session->userdata('accodgrupoeS');
