@@ -19,7 +19,8 @@
 	<span class="spinner-border secondary" role="status" aria-hidden="true"></span>
 </div>
 
-<div id="system-info" class="none">
+<div id="system-info" class="hide" default-code="<?= lang('RESP_DEFAULT_CODE'); ?>"
+	redirect="<?= lang('GEN_ENTERPRISE_LIST') ?>">
 	<p>
 		<span id="system-icon" class="ui-icon mt-0"></span>
 		<span id="system-msg" class="system-msg"><?= lang('RESP_MESSAGE_SYSTEM'); ?></span>

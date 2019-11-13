@@ -85,7 +85,7 @@ function notiSystem(title, message, icon, data) {
 		draggable: false,
 		resizable: false,
 		closeOnEscape: false,
-		minWidth: 310,
+		minWidth: lang.GEN_MODAL_SIZE,
 		dialogClass: "border-none",
     classes: {
       "ui-dialog-titlebar": "border-none",
@@ -105,7 +105,6 @@ function notiSystem(title, message, icon, data) {
 			}
 		}
 	});
-	dialogMoldal.removeClass('none');
 }
 /**
  * @info Crea botones para modal informativo
