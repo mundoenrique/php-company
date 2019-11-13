@@ -15,13 +15,21 @@
 <body base-url="<?= base_url(); ?>" asset-url="<?= assetUrl(); ?>" country="<?= $countryUri; ?>">
 	<?php $this->load->view('header_content'.$newViews) ?>
 
-	<?= $mainHtmlOpen ?>
+	<?php if($newViews != ''): ?>
+		<main class="content bg-content pt-3 px-5 h3 regular">
+	<?php else: ?>
+		<div id="wrapper">
+	<?php endif; ?>
 		<?php
 			foreach($viewPage as $views) {
 				$this->load->view($views.'_content'.$newViews);
 			}
 		?>
-	<?= $mainHtmlClose ?>
+	<?php if($newViews != ''): ?>
+		</main>
+	<?php else: ?>
+		</div>
+	<?php endif; ?>
 
 	<?php $this->load->view('footer_content'.$newViews) ?>
 
