@@ -17,7 +17,7 @@ class Novo_Business_Model extends NOVO_Model {
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date November 1st, 2019
 	 */
-	public function callWs_getEnterprises_Business($dataRequest = FALSE)
+	public function callWs_getEnterprises_Business($dataRequest)
 	{
 		log_message('INFO', 'NOVO Business Model: getEnterprises method Initialized');
 
@@ -45,13 +45,15 @@ class Novo_Business_Model extends NOVO_Model {
 			case 0:
 				$this->response->code = 0;
 
-				$enterpriseList = $this->OrderEnterpriseList($response->listadoEmpresas->lista);
+				$enterpriseList = $this->OrderEnterpriseList($response->listadoEmpresas->lista, $dataRequest);
 				$responseList->list = $enterpriseList->list;
-				$responseList->filters = $enterpriseList->filters;
-				$responseList->curretPage = trim($response->listadoEmpresas->paginaActual);
-				$responseList->totalPages = trim($response->listadoEmpresas->totalPaginas);
-				$responseList->enterprisesTotal = $response->listadoEmpresas->totalRegistros;
-				$responseList->recordsPage = $this->dataRequest->tamanoPagina;
+				if(!$dataRequest) {
+					$responseList->filters = $enterpriseList->filters;
+					$responseList->curretPage = trim($response->listadoEmpresas->paginaActual);
+					$responseList->totalPages = trim($response->listadoEmpresas->totalPaginas);
+					$responseList->enterprisesTotal = $response->listadoEmpresas->totalRegistros;
+					$responseList->recordsPage = $this->dataRequest->tamanoPagina;
+				}
 
 				$this->response->data = $responseList;
 				log_message('DEBUG', 'NOVO ['.$this->userName.'] RESPONSE getEnterprises: '.json_encode($enterpriseList));
@@ -65,7 +67,7 @@ class Novo_Business_Model extends NOVO_Model {
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date November 13th, 2019
 	 */
-	private function OrderEnterpriseList($enterpriseList)
+	private function OrderEnterpriseList($enterpriseList, $dataRequest)
 	{
 		$responseList = new stdClass();
 		$filters = new stdClass();
@@ -113,7 +115,9 @@ class Novo_Business_Model extends NOVO_Model {
 		foreach($enterpriseList AS $pos => $enterprises) {
 			foreach($enterprises AS $key => $value) {
 				$enterpriseList[$pos]->$key = trim($value);
-
+				if($dataRequest) {
+					continue;
+				}
 				if($item > $this->dataRequest->tamanoPagina) {
 					$item = 1;
 					$page++;
@@ -214,14 +218,16 @@ class Novo_Business_Model extends NOVO_Model {
 		}
 
 		$responseList->list = $enterpriseList;
-		$responseList->filters = $filters;
+		if(!$dataRequest) {
+			$responseList->filters = $filters;
+		}
 
 		return $responseList;
 	}
 	/**
-	 * @info Método para obtener lista d eproductos para una empresa
+	 * @info Método para obtener lista de productos para una empresa
 	 * @author J. Enrique Peñaloza Piñero
-	 * @date November 13th, 2019
+	 * @date November 12th, 2019
 	 */
 	public function callWs_getProducts_Business($dataRequest)
 	{
