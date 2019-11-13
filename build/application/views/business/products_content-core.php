@@ -69,26 +69,9 @@
 		</div>
 	</div>
 	<div>
-		<div class="widget order-1 p-3">
-			<div class="flex flex-column items-center">
-				<span class="h5 semibold center primary">Empresa de Servicios Públicos / Bogotá - DC</span>
-				<span class="my-2 h5 regular text">NIT: J-00000000-9</span>
-				<div class="mt-2 mb-5">
-					<div class="h6 regular">
-						<select class="custom-select bg-secondary" placeholder="Seleccionar otra empresa">
-							<option value="Option_1">Option 1</option>
-							<option value="Option_2">Option 2</option>
-							<option value="Option_3">Option 3</option>
-						</select>
-					</div>
-				</div>
-				<div>
-					<button class="btn btn-secondary btn-small flex  mx-auto my-2">
-						Seleccionar
-					</button>
-				</div>
-			</div>
-		</div>
+	<?php if($widget): ?>
+		<?php $this->load->view('widget/widget_enterprise-product_content'.$newViews, $widget) ?>
+	<?php endif; ?>
 	</div>
 </div>
 <div>

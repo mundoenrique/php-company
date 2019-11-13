@@ -16,7 +16,6 @@ class Novo_Business_Model extends NOVO_Model {
 	 * @info Obtiene la lista de empresas para un usuario
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date November 1st, 2019
-	 *
 	 */
 	public function callWs_getEnterprises_Business($dataRequest = FALSE)
 	{
@@ -219,78 +218,46 @@ class Novo_Business_Model extends NOVO_Model {
 
 		return $responseList;
 	}
-
-	public function callWs_getProducts_Business($params)
+	/**
+	 * @info Método para obtener lista d eproductos para una empresa
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date November 13th, 2019
+	 */
+	public function callWs_getProducts_Business($dataRequest)
 	{
-		log_message('INFO', 'NOVO Business Model: Enterprises method Initialized');
+		log_message('INFO', 'NOVO Business Model: getProducts method Initialized');
 		$menu = [
 			'user_access'
 		];
 		$this->session->unset_userdata($menu);
 		$this->className = "com.novo.objects.TOs.UsuarioTO";
 
-		$this->dataAccessLog->modulo = 'dashboard';
-		$this->dataAccessLog->function = 'dashboard';
-		$this->dataAccessLog->operation = 'menuEmpresa';
+		$this->dataAccessLog->modulo = 'Negocios';
+		$this->dataAccessLog->function = 'Productos';
+		$this->dataAccessLog->operation = 'lista de productos';
 
-		$this->dataRequest->userName = $this->session->userdata('userName');
-		$this->dataRequest->ctipo = "A";
-		$this->dataRequest->idEmpresa = $params['acrifS'];
+		$this->dataRequest->idOperation = 'menuEmpresa';
 
-		log_message('DEBUG', 'NOVO ['.$this->session->userdata('userName').'] RESPONSE: Business: ' . json_encode($this->dataRequest));
-		$this->response = $this->sendToService('Business');
+		$this->dataRequest->ctipo = isset($dataRequest->type) ? $dataRequest->type : 'A';
+		$this->dataRequest->userName = $this->userName;
+		$this->dataRequest->idEmpresa = $dataRequest->idFiscal;
+
+		$response = $this->sendToService('getProducts');
 
 		switch($this->isResponseRc) {
-			case -5000:
-				$this->response->code = 1;
-				$this->response->title = lang('GETENTERPRISES_TITLE-'.$this->isResponseRc);
-				$this->response->className = 'error-login-2';
-				$this->response->msg = lang('GETENTERPRISES_MSG-'.$this->isResponseRc);
+			case 0:
+				log_message('DEBUG', 'NOVO ['.$this->userName.'] RESPONSE getProducts: '.json_encode($response));
+				$this->session->set_userdata('getProducts', $dataRequest);
+
+				$responseList = new stdClass();
+				$responseList->widget = $dataRequest;
+				$this->response->code = 0;
+				$this->response->data = $responseList;
 				break;
-			case -6000:
-				$this->response->code = 3;
-				$this->response->msg = lang('GETENTERPRISES_MSG-'.$this->isResponseRc);
-				$this->response->icon = 'ui-icon-info';
-				break;
+
 		}
+
 		return $this->response;
 	}
 
-	public function callWs_listEnterprises_Business()
-	{
-		log_message('INFO', 'NOVO Business Model: Enterprises method Initialized');
-		$menu = [
-			'user_access'
-		];
-		$this->session->unset_userdata($menu);
-		$this->className = "com.novo.objects.MO.ListadoEmpresasMO";
-
-		$this->dataAccessLog->modulo = 'dashboard';
-		$this->dataAccessLog->function = 'dashboard';
-		$this->dataAccessLog->operation = 'getPaginar';
-
-		$this->dataRequest->accodusuario = $this->session->userdata('userName');
-		$this->dataRequest->paginaActual = NULL;
-		$this->dataRequest->tamanoPagina = NULL;
-		$this->dataRequest->paginar = FALSE;
-		$this->dataRequest->filtroEmpresas = NULL;
-
-		log_message('DEBUG', 'NOVO ['.$this->session->userdata('userName').'] RESPONSE: Business: ' . json_encode($this->dataRequest));
-		$this->response = $this->sendToService('Business');
-
-		switch($this->isResponseRc) {
-			case -5000:
-				$this->response->code = 1;
-				$this->response->title = lang('GETENTERPRISES_TITLE-'.$this->isResponseRc);
-				$this->response->className = 'error-login-2';
-				$this->response->msg = lang('GETENTERPRISES_MSG-'.$this->isResponseRc);
-				break;
-			case -6000:
-				$this->response->code = 3;
-				$this->response->msg = lang('GETENTERPRISES_MSG-'.$this->isResponseRc);
-				$this->response->icon = 'ui-icon-info';
-				break;
-		}
-		return $this->response;
-	}
 }
