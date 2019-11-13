@@ -1,10 +1,12 @@
 'use strict'
 $(function () {
 	var filterPage;
-	var enterpriseListevent = $('#enterprise-list');
+	var enterpriseListEvent = $('#enterprise-list');
+	var enterprisePages = $('#enterprise-pages');
+	var noEnterprise = $('#no-enterprise');
 
 	//external js: isotope.pkgd.js
-	var enterpriseList = enterpriseListevent.isotope({
+	var enterpriseList = enterpriseListEvent.isotope({
 		itemSelector: '.card',
 		layoutMode: 'masonry',
     masonry: {
@@ -15,20 +17,23 @@ $(function () {
 		initLayout: false
 	});
 
-	enterpriseList.one('arrangeComplete', function( event, filteredItems ) {
+	enterpriseList.one('arrangeComplete', function(event, filteredItems) {
 		if(filteredItems.length > 0) {
-			$('#no-enterprise').addClass('none');
+			noEnterprise.addClass('none');
 			$('#alphabetical > button:first').addClass('current-outline');
 			$('#show-page > span:first').addClass('page-current');
 			$(event.currentTarget).removeClass('visible');
+			enterprisePages.removeClass('visible');
+		} else {
+			noEnterprise.children('div>span').text(lan.ENTERPRISE_NOT_ASSIGNED)
 		}
 	});
 
 	enterpriseList.on('arrangeComplete', function(event, filteredItems) {
 		/*if(filteredItems.length < 4) {
-			enterpriseListevent.removeClass('mx-auto')
+			enterpriseListEvent.removeClass('mx-auto')
 		} else {
-			enterpriseListevent.addClass('mx-auto')
+			enterpriseListEvent.addClass('mx-auto')
 		}*/
 	});
 
@@ -55,7 +60,7 @@ $(function () {
 
 	var orderPage = function(filter) {
 		var reg = $('.'+filter).length;
-		if(reg < 3) {
+		if(reg < 5) {
 			$('#enterprise-list').removeClass('mx-auto');
 		} else {
 			$('#enterprise-list').addClass('mx-auto');
@@ -68,7 +73,7 @@ $(function () {
 		filterOrder = filterOrder.split('_')[0];
 		var classU = '';
 		var page = 1, classElement, init, finish, substr;
-		enterpriseListevent.children('div.card').each(function(pos, element) {
+		enterpriseListEvent.children('div.card').each(function(pos, element) {
 			classElement = $(element).attr('class');
 			init = classElement.indexOf(filterOrder);
 			finish = (init + filterOrder.length);
@@ -89,6 +94,16 @@ $(function () {
 		var idFiscal = $(this).find('.id-fiscal').text();
 		if(totalProduct > 0) {
 			$(this).off('click');
+			noEnterprise
+			.removeClass('none')
+			.children('div')
+			.html(loader)
+			.find('span')
+			.removeClass('secondary')
+			.addClass('spinner-border-lg primary');
+			enterpriseList.addClass('none');
+			enterprisePages.addClass('none');
+			idFiscal = idFiscal.replace(lang.GEN_FISCAL_REGISTRY, '');
 			getProducts.append(`<input type="hidden" name="idFiscal" value="${idFiscal}">`);
 			getProducts.append(`<input type="hidden" name="enterpriseName" value="${EnterpriseName}">`);
 			getProducts.submit();

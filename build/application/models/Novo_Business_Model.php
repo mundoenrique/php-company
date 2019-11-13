@@ -18,7 +18,7 @@ class Novo_Business_Model extends NOVO_Model {
 	 * @date November 1st, 2019
 	 *
 	 */
-	public function callWs_getEnterprises_Business($select = FALSE)
+	public function callWs_getEnterprises_Business($dataRequest = FALSE)
 	{
 		log_message('INFO', 'NOVO Business Model: getEnterprises method Initialized');
 
@@ -38,174 +38,186 @@ class Novo_Business_Model extends NOVO_Model {
 		$this->dataRequest->paginar = FALSE;
 		$this->dataRequest->tamanoPagina = 10;
 		$this->dataRequest->filtroEmpresas = '';
-		$filters = new stdClass();
-		$filters->A_C = [
-			'active' => FALSE,
-			'filter' => 'A-C_1',
-			'text' => 'A-C',
-		];
-		$filters->D_G = [
-			'active' => FALSE,
-			'filter' => 'D-G_1',
-			'text' => 'D-G',
-		];
-		$filters->H_K = [
-			'active' => FALSE,
-			'filter' => 'H-K_1',
-			'text' => 'H-K',
-		];
-		$filters->L_O = [
-			'active' => FALSE,
-			'filter' => 'L-O_1',
-			'text' => 'L-O',
-		];
-		$filters->P_S = [
-			'active' => FALSE,
-			'filter' => 'P-S_1',
-			'text' => 'P-S',
-		];
-		$filters->T_W = [
-			'active' => FALSE,
-			'filter' => 'T-W_1',
-			'text' => 'T-W',
-		];
-		$filters->X_Z = [
-			'active' => FALSE,
-			'filter' => 'X-Z_1',
-			'text' => 'X-Z',
-		];
 
 		$response = $this->sendToService('getEnterprises');
+		$responseList = new stdClass();
 
 		switch($this->isResponseRc) {
 			case 0:
-				$enterpriseList = $response->listadoEmpresas->lista;
-				$item = 1; $page = 1; $cat = FALSE;
-				$itemAlphaBeA = 1; $itemAlphaBeD = 1; $itemAlphaBeH = 1;  $itemAlphaBeL = 1; $itemAlphaBeP = 1;
-				$itemAlphaBeT = 1; $itemAlphaBeX = 1;
-				$pageAlphaBeA = 1; $pageAlphaBeD = 1; $pageAlphaBeH = 1;  $pageAlphaBeL = 1; $pageAlphaBeP = 1;
-				$pageAlphaBeT = 1; $pageAlphaBeX = 1;
-				foreach($enterpriseList AS $pos => $enterprises) {
-					foreach($enterprises AS $key => $value) {
-						$enterpriseList[$pos]->$key = trim($value);
+				$this->response->code = 0;
 
-						if($item > $this->dataRequest->tamanoPagina) {
-							$item = 1;
-							$page++;
-						}
+				$enterpriseList = $this->OrderEnterpriseList($response->listadoEmpresas->lista);
+				$responseList->list = $enterpriseList->list;
+				$responseList->filters = $enterpriseList->filters;
+				$responseList->curretPage = trim($response->listadoEmpresas->paginaActual);
+				$responseList->totalPages = trim($response->listadoEmpresas->totalPaginas);
+				$responseList->enterprisesTotal = $response->listadoEmpresas->totalRegistros;
+				$responseList->recordsPage = $this->dataRequest->tamanoPagina;
 
-						$enterpriseList[$pos]->page = 'page_'.$page;
-
-						if($key === 'resumenProductos') {
-							$enterpriseList[$pos]->resumenProductos = $enterpriseList[$pos]->resumenProductos == 1 ?
-							$enterpriseList[$pos]->resumenProductos.' '.lang('GEN_PRODUCT') :
-							$enterpriseList[$pos]->resumenProductos.' '.lang('GEN_PRODUCTS');
-						}
-
-						if($key === 'acpercontac') {
-							$enterpriseList[$pos]->acpercontac = ucwords(mb_strtolower($enterpriseList[$pos]->acpercontac));
-						}
-
-						if($key === 'acnomcia') {
-							$cat = substr($enterpriseList[$pos]->$key, 0, 1);
-							$enterpriseList[$pos]->category = $cat;
-
-							switch ($cat) {
-								case strpos('ABC', $cat) !== FALSE:
-									if($itemAlphaBeA > $this->dataRequest->tamanoPagina) {
-										$itemAlphaBeA = 1; 	$pageAlphaBeA++;
-									}
-									$enterpriseList[$pos]->albeticalPage = 'A-C_'.$pageAlphaBeA;
-									$itemAlphaBeA++;
-									if(!$filters->A_C['active']) {
-										$filters->A_C['active'] = TRUE;
-									}
-									break;
-								case strpos('DEFG', $cat) !== FALSE:
-									if($itemAlphaBeD > $this->dataRequest->tamanoPagina) {
-										$itemAlphaBeD = 1; 	$pageAlphaBeD++;
-									}
-									$enterpriseList[$pos]->albeticalPage = 'D-G_'.$pageAlphaBeD;
-									$itemAlphaBeD++;
-									if(!$filters->D_G['active']) {
-										$filters->D_G['active'] = TRUE;
-									}
-									break;
-								case strpos('HIJK', $cat) !== FALSE:
-									if($itemAlphaBeH > $this->dataRequest->tamanoPagina) {
-										$itemAlphaBeH = 1; 	$pageAlphaBeH++;
-									}
-									$enterpriseList[$pos]->albeticalPage = 'H-K_'.$pageAlphaBeH;
-									$itemAlphaBeH++;
-									if(!$filters->H_K['active']) {
-										$filters->H_K['active'] = TRUE;
-									}
-									break;
-								case strpos('LMNO', $cat) !== FALSE:
-									if($itemAlphaBeL > $this->dataRequest->tamanoPagina) {
-										$itemAlphaBeL = 1; 	$pageAlphaBeL++;
-									}
-									$enterpriseList[$pos]->albeticalPage = 'L-O_'.$pageAlphaBeL;
-									$itemAlphaBeL++;
-									if(!$filters->L_O['active']) {
-										$filters->L_O['active'] = TRUE;
-									}
-									break;
-								case strpos('PQRS', $cat) !== FALSE:
-									if($itemAlphaBeP > $this->dataRequest->tamanoPagina) {
-										$itemAlphaBeP = 1; 	$pageAlphaBeP++;
-									}
-									$enterpriseList[$pos]->albeticalPage = 'P-S_'.$pageAlphaBeP;
-									$itemAlphaBeP++;
-									if(!$filters->P_S['active']) {
-										$filters->P_S['active'] = TRUE;
-									}
-									break;
-								case strpos('TUVW', $cat) !== FALSE:
-									if($itemAlphaBeT > $this->dataRequest->tamanoPagina) {
-										$itemAlphaBeT = 1; 	$pageAlphaBeT++;
-									}
-									$enterpriseList[$pos]->albeticalPage = 'T-W_'.$pageAlphaBeT;
-									$itemAlphaBeT++;
-									if(!$filters->T_W['active']) {
-										$filters->T_W['active'] = TRUE;
-									}
-									break;
-								case strpos('XYZ', $cat) !== FALSE:
-									if($itemAlphaBeX > $this->dataRequest->tamanoPagina) {
-										$itemAlphaBeX = 1; 	$pageAlphaBeX++;
-									}
-									$enterpriseList[$pos]->albeticalPage = 'X-Z_'.$pageAlphaBeX;
-									$itemAlphaBeX++;
-									if(!$filters->X_Z['active']) {
-										$filters->X_Z['active'] = TRUE;
-									}
-									break;
-							}
-						}
-
-					}
-					$item++;
-				}
+				$this->response->data = $responseList;
+				log_message('DEBUG', 'NOVO ['.$this->userName.'] RESPONSE getEnterprises: '.json_encode($enterpriseList));
+				break;
 		}
 
-			log_message('DEBUG', 'NOVO ['.$this->userName.'] RESPONSE getEnterprises: '.json_encode($enterpriseList));
-
-			$responseList = new stdClass();
-			$responseList->list = $enterpriseList;
-			$responseList->filters = $filters;
-			$responseList->curretPage = trim($response->listadoEmpresas->paginaActual);
-			$responseList->totalPages = trim($response->listadoEmpresas->totalPaginas);
-			$responseList->enterprisesTotal = $response->listadoEmpresas->totalRegistros;
-			$responseList->recordsPage = $this->dataRequest->tamanoPagina;
-
-
-			$this->response->code = 0;
-			$this->response->data = $responseList;
-
-
-
 		return $this->response;
+	}
+	/**
+	 * @info Método para ordenar lista de empresas para vista consolidada
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date November 13th, 2019
+	 */
+	private function OrderEnterpriseList($enterpriseList)
+	{
+		$responseList = new stdClass();
+		$filters = new stdClass();
+		$filters->FIRST = [
+			'active' => FALSE,
+			'filter' => lang('ENTERPRISE_FILTER_1').'_1',
+			'text' => lang('ENTERPRISE_FILTER_1'),
+		];
+		$filters->SECOND = [
+			'active' => FALSE,
+			'filter' => lang('ENTERPRISE_FILTER_2').'_1',
+			'text' => lang('ENTERPRISE_FILTER_2')
+		];
+		$filters->THIRD = [
+			'active' => FALSE,
+			'filter' => lang('ENTERPRISE_FILTER_3').'_1',
+			'text' => lang('ENTERPRISE_FILTER_3')
+		];
+		$filters->FOURTH = [
+			'active' => FALSE,
+			'filter' => lang('ENTERPRISE_FILTER_4').'_1',
+			'text' => lang('ENTERPRISE_FILTER_4')
+		];
+		$filters->FIFTH = [
+			'active' => FALSE,
+			'filter' => lang('ENTERPRISE_FILTER_5').'_1',
+			'text' => lang('ENTERPRISE_FILTER_5')
+		];
+		$filters->SIXTH = [
+			'active' => FALSE,
+			'filter' => lang('ENTERPRISE_FILTER_6').'_1',
+			'text' => lang('ENTERPRISE_FILTER_6')
+		];
+		$filters->SEVENTH = [
+			'active' => FALSE,
+			'filter' => lang('ENTERPRISE_FILTER_7').'_1',
+			'text' => lang('ENTERPRISE_FILTER_7')
+		];
+
+		$item = 1; $page = 1; $cat = FALSE;
+		$itemAlphaBeFi = 1; $itemAlphaBeSec = 1; $itemAlphaBeTh = 1;  $itemAlphaBeFo = 1; $itemAlphaBeFif = 1;
+		$itemAlphaBeSi = 1; $itemAlphaBeSev = 1;
+		$pageAlphaBeFi = 1; $pageAlphaBeSec = 1; $pageAlphaBeTh = 1;  $pageAlphaBeFo = 1; $pageAlphaBeFif = 1;
+		$pageAlphaBeSi = 1; $pageAlphaBeSev = 1;
+		foreach($enterpriseList AS $pos => $enterprises) {
+			foreach($enterprises AS $key => $value) {
+				$enterpriseList[$pos]->$key = trim($value);
+
+				if($item > $this->dataRequest->tamanoPagina) {
+					$item = 1;
+					$page++;
+				}
+
+				$enterpriseList[$pos]->page = 'page_'.$page;
+
+				if($key === 'resumenProductos') {
+					$enterpriseList[$pos]->resumenProductos = $enterpriseList[$pos]->resumenProductos == 1 ?
+					$enterpriseList[$pos]->resumenProductos.' '.lang('GEN_PRODUCT') :
+					$enterpriseList[$pos]->resumenProductos.' '.lang('GEN_PRODUCTS');
+				}
+
+				if($key === 'acpercontac') {
+					$enterpriseList[$pos]->acpercontac = ucwords(mb_strtolower($enterpriseList[$pos]->acpercontac));
+				}
+
+				if($key === 'acnomcia') {
+					$cat = substr($enterpriseList[$pos]->$key, 0, 1);
+					$enterpriseList[$pos]->category = $cat;
+
+					switch ($cat) {
+						case strpos('ABC', $cat) !== FALSE:
+							if($itemAlphaBeFi > $this->dataRequest->tamanoPagina) {
+								$itemAlphaBeFi = 1; 	$pageAlphaBeFi++;
+							}
+							$enterpriseList[$pos]->albeticalPage = lang('ENTERPRISE_FILTER_1').'_'.$pageAlphaBeFi;
+							$itemAlphaBeFi++;
+							if(!$filters->FIRST['active']) {
+								$filters->FIRST['active'] = TRUE;
+							}
+							break;
+						case strpos('DEFG', $cat) !== FALSE:
+							if($itemAlphaBeSec > $this->dataRequest->tamanoPagina) {
+								$itemAlphaBeSec = 1; 	$pageAlphaBeSec++;
+							}
+							$enterpriseList[$pos]->albeticalPage = lang('ENTERPRISE_FILTER_2').'_'.$pageAlphaBeSec;
+							$itemAlphaBeSec++;
+							if(!$filters->SECOND['active']) {
+								$filters->SECOND['active'] = TRUE;
+							}
+							break;
+						case strpos('HIJK', $cat) !== FALSE:
+							if($itemAlphaBeTh > $this->dataRequest->tamanoPagina) {
+								$itemAlphaBeTh = 1; 	$pageAlphaBeTh++;
+							}
+							$enterpriseList[$pos]->albeticalPage = lang('ENTERPRISE_FILTER_3').'_'.$pageAlphaBeTh;
+							$itemAlphaBeTh++;
+							if(!$filters->THIRD['active']) {
+								$filters->THIRD['active'] = TRUE;
+							}
+							break;
+						case strpos('LMNO', $cat) !== FALSE:
+							if($itemAlphaBeFo > $this->dataRequest->tamanoPagina) {
+								$itemAlphaBeFo = 1; 	$pageAlphaBeFo++;
+							}
+							$enterpriseList[$pos]->albeticalPage = lang('ENTERPRISE_FILTER_4').'_'.$pageAlphaBeFo;
+							$itemAlphaBeFo++;
+							if(!$filters->FOURTH['active']) {
+								$filters->FOURTH['active'] = TRUE;
+							}
+							break;
+						case strpos('PQRS', $cat) !== FALSE:
+							if($itemAlphaBeFi > $this->dataRequest->tamanoPagina) {
+								$itemAlphaBeFi = 1; 	$pageAlphaBeFif++;
+							}
+							$enterpriseList[$pos]->albeticalPage = lang('ENTERPRISE_FILTER_5').'_'.$pageAlphaBeFif;
+							$itemAlphaBeFif++;
+							if(!$filters->FIFTH['active']) {
+								$filters->FIFTH['active'] = TRUE;
+							}
+							break;
+						case strpos('TUVW', $cat) !== FALSE:
+							if($itemAlphaBeSi > $this->dataRequest->tamanoPagina) {
+								$itemAlphaBeSi = 1; 	$pageAlphaBeSi++;
+							}
+							$enterpriseList[$pos]->albeticalPage = lang('ENTERPRISE_FILTER_6').'_'.$pageAlphaBeSi;
+							$itemAlphaBeSi++;
+							if(!$filters->SIXTH['active']) {
+								$filters->SIXTH['active'] = TRUE;
+							}
+							break;
+						case strpos('XYZ', $cat) !== FALSE:
+							if($itemAlphaBeSev > $this->dataRequest->tamanoPagina) {
+								$itemAlphaBeSev = 1; 	$pageAlphaBeSev++;
+							}
+							$enterpriseList[$pos]->albeticalPage = lang('ENTERPRISE_FILTER_7').'_'.$pageAlphaBeSev;
+							$itemAlphaBeSev++;
+							if(!$filters->SEVENTH['active']) {
+								$filters->SEVENTH['active'] = TRUE;
+							}
+							break;
+					}
+				}
+
+			}
+			$item++;
+		}
+
+		$responseList->list = $enterpriseList;
+		$responseList->filters = $filters;
+
+		return $responseList;
 	}
 
 	public function callWs_getProducts_Business($params)
