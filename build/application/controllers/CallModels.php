@@ -1,7 +1,7 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed');
 /**
  * @info Controlador para las peticiones asíncronas de la aplicación
- * @author J. Enrique Peñaloza P
+ * @author J. Enrique Peñaloza Piñero
 */
 class CallModels extends Novo_Controller {
 

@@ -17,7 +17,7 @@ class Request_Data {
 	}
 	/**
 	 * @info Método para obtener la lista de empresas asociadas al usuario
-	 * @author: J. Enrique Peñaloza P.
+	 * @author: J. Enrique Peñaloza Piñero.
 	 */
 	public function getEnterprises($dataRequest)
 	{

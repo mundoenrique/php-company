@@ -19,7 +19,7 @@ class Asset {
 	}
 	/**
 	 * @info Método para inicializar los atributos de la librería
-	 * @author: J. Enrique Peñaloza P.
+	 * @author: J. Enrique Peñaloza Piñero.
 	 */
 	public function initialize($params = [])
 	{
@@ -30,7 +30,7 @@ class Asset {
 	}
 	/**
 	 * @info Método para insertar archivos css en el documento
-	 * @author: J. Enrique Peñaloza P.
+	 * @author: J. Enrique Peñaloza Piñero.
 	 */
 	public function insertCss()
 	{
@@ -45,7 +45,7 @@ class Asset {
 	}
 	/**
 	 * @info Método para insertar archivos js en el documento
-	 * @author J. Enrique Peñaloza P.
+	 * @author J. Enrique Peñaloza Piñero.
 	 */
 	public function insertJs()
 	{
@@ -60,7 +60,7 @@ class Asset {
 	}
 	/**
 	 * @info Método para insertar imagenes, json, etc
-	 * @author J. Enrique Peñaloza P.
+	 * @author J. Enrique Peñaloza Piñero.
 	 */
 	public function insertFile($fileName, $folder = 'images', $country = FALSE)
 	{
@@ -72,7 +72,7 @@ class Asset {
 	}
 	/**
 	 * @info Método para versionar archivos
-	 * @author J. Enrique Peñaloza P.
+	 * @author J. Enrique Peñaloza Piñero.
 	 */
 	private function versionFiles($file, $fileName, $ext)
 	{

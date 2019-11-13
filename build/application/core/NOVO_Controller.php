@@ -7,7 +7,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * de la aplicación.
  *
  * @package controllers
- * @author J. Enrique Peñaloza P
+ * @author J. Enrique Peñaloza Piñero
  */
 class NOVO_Controller extends CI_Controller {
 	protected $skin;

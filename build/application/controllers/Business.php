@@ -14,8 +14,8 @@ class Business extends NOVO_Controller {
 	}
 	/**
 	 * @info Método para renderizar las empresas asociadas al usuario
-	 * @author Pedro Torres
-	 * @date 24/08/2019
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date November 05th, 2019
 	 */
 	public function getEnterprises()
 	{
@@ -40,7 +40,11 @@ class Business extends NOVO_Controller {
 		$this->render->recordsPage = ceil($responseList->data->enterprisesTotal/$responseList->data->recordsPage);
 		$this->loadView($view);
 	}
-
+	/**
+	 * @info Método para renderizarlos productos asociados a la empresa
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date November 12th, 2019
+	 */
 	public function getProducts()
 	{
 		log_message('INFO', 'NOVO Business: getProducts Method Initialized');
@@ -50,9 +54,16 @@ class Business extends NOVO_Controller {
 			$this->includeAssets->jsFiles,
 			'select-tools'
 		);
+		if($this->session->userdata('getProducts')) {
+			$this->request->idFiscal = $this->session->userdata('getProducts')->idFiscal;
+			$this->request->enterpriseName = $this->session->userdata('getProducts')->enterpriseName;
+		}
 
 		$this->views = ['business/'.$view];
+		$responseList = $this->loadModel($this->request);
 		$this->render->titlePage = "Productos";
+		$this->render->widget =  $responseList->data->widget;
+
 		$this->loadView($view);
 	}
 

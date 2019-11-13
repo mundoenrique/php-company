@@ -2,7 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * @info Controlador para la vista principal de la aplicación
- * @author J. Enrique Peñaloza P
+ * @author J. Enrique Peñaloza Piñero
 */
 class User extends NOVO_Controller {
 
@@ -13,7 +13,7 @@ class User extends NOVO_Controller {
 	}
 	/**
 	 * @info Método que renderiza la vista de login
-	 * @author J. Enrique Peñaloza P.
+	 * @author J. Enrique Peñaloza Piñero.
 	 */
 	public function login()
 	{
@@ -81,7 +81,7 @@ class User extends NOVO_Controller {
 	}
 	/**
 	 * @info Método que renderiza la vista para recuperar la contraseña
-	 * @author J. Enrique Peñaloza P.
+	 * @author J. Enrique Peñaloza Piñero.
 	 */
 	public function recoverPass()
 	{
@@ -101,7 +101,7 @@ class User extends NOVO_Controller {
 	}
 	/**
 	 * @info Método que renderiza la vista para cambiar la contraseña
-	 * @author J. Enrique Peñaloza P.
+	 * @author J. Enrique Peñaloza Piñero.
 	 */
 	public function changePassword()
 	{
@@ -141,7 +141,7 @@ class User extends NOVO_Controller {
 	}
 	/**
 	 * @info Método para el cierre de sesión
-	 * @author J. Enrique Peñaloza P.
+	 * @author J. Enrique Peñaloza Piñero.
 	 */
 	public function finishSession()
 	{
