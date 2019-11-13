@@ -1001,6 +1001,7 @@ textarea.form-control {
 /* Display
 	========================================================================== */
 
+.hide       { display: none }
 .none         { display: none         !important }
 .inline       { display: inline       !important }
 .inline-block { display: inline-block !important }
@@ -1755,6 +1756,7 @@ i[class*=" icon-"]:before {
 	width: 2em;
 	height: 1em;
 }
+
 .icon-chevron-down:hover {
   color: var(--secondary) !important;
 }
@@ -1787,11 +1789,11 @@ i[class*=" icon-"]:before {
   margin-right: .5rem;
   vertical-align: middle;
   border: .25em solid currentColor;
-      border-top-width: .25em;
-      border-right-color: currentcolor;
-      border-right-width: .25em;
-      border-bottom-width: .25em;
-      border-left-width: .25em;
+	border-top-width: .25em;
+	border-right-color: currentcolor;
+	border-right-width: .25em;
+	border-bottom-width: .25em;
+	border-left-width: .25em;
   border-right-color: transparent;
   border-radius: 50%;
   -webkit-animation: spinner-border 1.8s linear infinite;
