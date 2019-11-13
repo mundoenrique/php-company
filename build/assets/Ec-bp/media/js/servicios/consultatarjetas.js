@@ -30,7 +30,7 @@ $('#buscar').on('click', function () {
 		camposValid = '<div id="validar">';
 
 	if (servicio.val().length == 0 && lote.val().length == 0 && cedula.val().length == 0 && tarjeta.val().length == 0) {
-		camposValid += '<p>* Debe diligenciar al menos un campo</p>';
+		camposValid += '<p>* Debe agregar al menos un campo</p>';
 		validInput = false;
 	} else {
 
