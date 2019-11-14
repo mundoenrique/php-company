@@ -15,25 +15,22 @@
 <div class="flex mt-3 items-center">
 	<div class="flex h6 flex-auto justify-end">
 		<button class="btn btn-outline btn-small btn-rounded-left bg-white">TODOS</button>
-
-		<div class="regular">
-			<select class="custom-select bg-secondary" placeholder="Buscar por categorias">
-				<option value="Option_1">Option 1</option>
-				<option value="Option_2">Option 2</option>
-				<option value="Option_3">Option 3</option>
-			</select>
-		</div>
-		<div class="regular">
-			<select class="custom-select bg-secondary" placeholder="Buscar por marca">
-				<option value="Option_1">Option 1</option>
-				<option value="Option_2">Option 2</option>
-				<option value="Option_3">Option 3</option>
-			</select>
+		<select class="select-box custom-select mr-0 h6">
+			<option selected disabled>Buscar por categorias</option>
+      <option>Option 1</option>
+      <option>Option 2</option>
+      <option>Option 3</option>
+    </select>
+    <select class="select-box custom-select h6">
+    	<option selected disabled>Buscar por marca</option>
+      <option>Option 1</option>
+      <option>Option 2</option>
+      <option>Option 3</option>
+		</select>
 		<div id="sb-search" class="sb-search">
 			<input id="search" class="sb-search-input" type="search" name="search" value="" placeholder="Buscar...">
       <span class="sb-icon-search"><i class="icon icon-find"></i></span>
-		</div>
-		<button class="btn-search bg-white"></button>
+    </div>
 	</div>
 </div>
 <div class="line mt-1"></div>
