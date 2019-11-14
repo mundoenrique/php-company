@@ -4,6 +4,8 @@ $(function () {
 	var enterpriseListEvent = $('#enterprise-list');
 	var enterprisePages = $('#enterprise-pages');
 	var noEnterprise = $('#no-enterprise');
+	var alphabetical = $('#alphabetical');
+	var showPage = $('#show-page');
 
 	//external js: isotope.pkgd.js
 	var enterpriseList = enterpriseListEvent.isotope({
@@ -39,15 +41,8 @@ $(function () {
 
 	enterpriseList.isotope({filter: '.page_1'});
 
-	$('#show-page').on('click', 'a', function(e) {
-		$(this).parents().children().removeClass('page-current');
-		$(this).parent().addClass('page-current');
-		filterPage = $(this).attr('filter-page');
-		orderPage(filterPage);
-		enterpriseList.isotope({ filter: '.'+filterPage });
-	});
-
-	$('#alphabetical').on('click', 'button', function(e) {
+	alphabetical.on('click', 'button', function(e) {
+		e.preventDefault();
 		$(this).parent().children().removeClass('current-outline');
 		$(this).addClass('current-outline');
 		filterPage = $(this).attr('filter-page');
@@ -58,13 +53,80 @@ $(function () {
 		}
 	});
 
-	var orderPage = function(filter) {
-		var reg = $('.'+filter).length;
+	/* showPage.on('click', 'a', function(e) {
+		e.preventDefault();
+		$(this).parents().children().removeClass('page-current');
+		$(this).parent().addClass('page-current');
+		filterPage = $(this).attr('filter-page');
+		orderPage(filterPage);
+		enterpriseList.isotope({ filter: '.'+filterPage });
+	}); */
+
+	enterprisePages.on('click', function(e) {
+		e.preventDefault();
+		var event = $(e.target)
+		var position = event.attr('position');
+		var fast = (position == 'minus' || position == 'plus')
+		if(!fast && e.target.tagName == 'A') {
+			var paginateEvent = {
+				targetEvent: event,
+				pagesTotal: parseInt($(this).find('#show-page > span').length),
+				currentPage: parseInt($(this).find('.page-current').children().text()),
+				currentFilter: $(this).find('.page-current').children().attr('filter-page'),
+			}
+
+			renderpage[position](paginateEvent);
+		}
+
+	});
+
+	const renderpage = {
+		page: function(paginateEvent) {
+			var currentFilter = paginateEvent.currentFilter + paginateEvent.currentPage;
+			filterPage = paginateEvent.targetEvent.attr('filter-page')+paginateEvent.targetEvent.text();
+			if(currentFilter != filterPage) {
+				orderPage(filterPage, paginateEvent.targetEvent.text());
+			}
+		},
+		next: function(paginateEvent) {
+			var newPage = paginateEvent.currentPage + 1 > paginateEvent.pagesTotal ?
+			paginateEvent.pagesTotal : paginateEvent.currentPage + 1;
+			filterPage = paginateEvent.currentFilter + newPage
+			if(paginateEvent.currentPage < paginateEvent.pagesTotal) {
+				orderPage(filterPage, newPage);
+			}
+		},
+		prev: function(paginateEvent) {
+			var newPage = paginateEvent.currentPage - 1 < 1 ? paginateEvent.currentPage : paginateEvent.currentPage - 1;
+			filterPage = paginateEvent.currentFilter + newPage;
+			if(newPage < paginateEvent.currentPage) {
+				orderPage(filterPage, newPage);
+			}
+		},
+		last: function(paginateEvent) {
+			filterPage = paginateEvent.currentFilter + paginateEvent.pagesTotal;
+			if(paginateEvent.currentPage < paginateEvent.pagesTotal) {
+				orderPage(filterPage, paginateEvent.pagesTotal);
+			}
+		},
+		first: function(paginateEvent) {
+			filterPage = paginateEvent.currentFilter + '1';
+			if(paginateEvent.currentPage > 1) {
+				orderPage(filterPage, '1');
+			}
+		}
+	}
+
+	var orderPage = function(filterPage, newpage) {
+		var reg = $('.'+filterPage).length;
 		if(reg < 5) {
 			$('#enterprise-list').removeClass('mx-auto');
 		} else {
 			$('#enterprise-list').addClass('mx-auto');
 		}
+		enterprisePages.find('span').removeClass('page-current');
+		enterprisePages.find(`span > a:contains(${newpage})`).parent().addClass('page-current');;
+		enterpriseList.isotope({ filter: '.'+filterPage });
 	}
 
 	var paginateList = function(filterOrder) {
@@ -81,12 +143,21 @@ $(function () {
 			classElement = classElement.substring(init, finish + 2);
 			if(filterOrder == substr && classU !== classElement) {
 				classU = classElement;
-				shwoPage.append(`<span class="mx-1"><a href="javascript:" filter-page="${classU}">${page}</a></span>`);
+				shwoPage.append(`<span class="mx-1"><a href="javascript:" position="page" filter-page="${filterOrder}_">${page}</a></span>`);
 				page++;
 			}
 		})
 		$('#show-page > span:first').addClass('page-current');
 	};
+
+	$('.product').hover(function() {
+
+		if ($(this).find('span.danger').length) {
+			$(this).css('cursor', 'default')
+		}
+
+	});
+
 	$('.product').on('click', function() {
 		var getProducts = $('#get_products')
 		var totalProduct = parseInt($(this).find('.total-product').text());

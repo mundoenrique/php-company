@@ -10,16 +10,18 @@
 		</nav>
 	</div>
 	<div class="flex h6 flex-auto justify-end">
-		<span>Último acceso: <?= $lastSession ?></span>
+		<span><?= lang('ENTERPRISE_LAST_ACCESS') ?>: <?= $lastSession ?></span>
 	</div>
 </div>
 
 <div class="flex mt-3 light items-center">
 	<div class="flex h5">
-		<span>Total Empresas: <?= $enterprisesTotal ?></span>
+		<span><?= lang('ENTERPRISE_TOTAL') ?>: <?= $enterprisesTotal ?></span>
 	</div>
 	<div id="alphabetical" class="flex h6 flex-auto justify-end">
-		<button class="btn btn-outline btn-small btn-rounded-left bg-white" filter-page="page_1">TODOS</button>
+		<button class="btn btn-outline btn-small btn-rounded-left bg-white" filter-page="page_1">
+			<?= lang('ENTERPRISE_FILTER_TODAS'); ?>
+		</button>
 		<?php foreach($filters AS $filtersAttr): ?>
 		<button class="btn-options btn-outline bold bg-white" filter-page="<?= $filtersAttr['filter'] ?>"
 			<?= $filtersAttr['active'] ? '' : 'disabled' ?>><?= $filtersAttr['text']; ?></button>
@@ -45,7 +47,8 @@
 				<?= lang('GEN_FISCAL_REGISTRY').' '.$enterpriseaAttr->acrif; ?>
 			</span>
 			<div class="mask flex mt-5 mx-1 pt-2 flex-column tertiary bg-white">
-				<span class="product-pb h5 truncate total-product"><?= $enterpriseaAttr->resumenProductos ?></span>
+				<?php $red = strpos($enterpriseaAttr->resumenProductos, '0') !== FALSE ? ' danger' : FALSE; ?>
+				<span class="product-pb h5 truncate<?= $red; ?> total-product"><?= $enterpriseaAttr->resumenProductos ?></span>
 				<span class="product-pb h5 truncate"><?= lang('GEN_CONTAC_PERSON').':'; ?></span>
 				<span class="product-pb h5 truncate"><?= $enterpriseaAttr->acpercontac; ?></span>
 			</div>
@@ -56,22 +59,26 @@
 
 <div id="enterprise-pages" class="visible">
 	<div class="pagination page-number flex mb-5 py-5 flex-auto justify-center">
-		<nav class="h4">
-			<a href="#">Primera</a>
-			<a href="#">««</a>
-			<a href="#">«</a>
+		<nav id="first-pages" class="h4">
+			<?php if($recordsPage >= 2): ?>
+			<a href="javascript:" position="first"><?= lang('ENTERPRISE_FIRST_PAGE'); ?></a>
+			<a href="javascript:" position="minus">««</a>
+			<?php endif; ?>
+			<a href="javascript:" position="prev">«</a>
 		</nav>
 		<div id="show-page" class="h4 flex justify-center ">
 			<?php for($i=1; $i <= $recordsPage; $i++): ?>
 			<span class="mx-1">
-				<a href="javascript:" filter-page="page_<?= $i ?>"><?= $i; ?></a>
+				<a href="javascript:" position="page" filter-page="page_"><?= $i; ?></a>
 			</span>
 			<?php endfor; ?>
 		</div>
-		<nav class="h4">
-			<a href="#">»</a>
-			<a href="#">»»</a>
-			<a href="#">Última</a>
+		<nav id="last-pages" class="h4">
+			<a href="javascript:" position="next">»</a>
+			<?php if($recordsPage >= 2): ?>
+			<a href="javascript:" position="plus">»»</a>
+			<a href="javascript:" position="last"><?= lang('ENTERPRISE_LAST_PAGE'); ?></a>
+			<?php endif; ?>
 		</nav>
 	</div>
 </div>

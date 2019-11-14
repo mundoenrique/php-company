@@ -108,10 +108,10 @@ class Novo_Business_Model extends NOVO_Model {
 		];
 
 		$item = 1; $page = 1; $cat = FALSE;
-		$itemAlphaBeFi = 1; $itemAlphaBeSec = 1; $itemAlphaBeTh = 1;  $itemAlphaBeFo = 1; $itemAlphaBeFif = 1;
-		$itemAlphaBeSi = 1; $itemAlphaBeSev = 1;
-		$pageAlphaBeFi = 1; $pageAlphaBeSec = 1; $pageAlphaBeTh = 1;  $pageAlphaBeFo = 1; $pageAlphaBeFif = 1;
-		$pageAlphaBeSi = 1; $pageAlphaBeSev = 1;
+		$itemAlphaBeFi = 1; $itemAlphaBeSec = 1; $itemAlphaBeTh = 1;  $itemAlphaBeFo = 1;
+		$itemAlphaBeFif = 1; $itemAlphaBeSi = 1; $itemAlphaBeSev = 1;
+		$pageAlphaBeFi = 1; $pageAlphaBeSec = 1; $pageAlphaBeTh = 1;  $pageAlphaBeFo = 1;
+		$pageAlphaBeFif = 1; $pageAlphaBeSi = 1; $pageAlphaBeSev = 1;
 		foreach($enterpriseList AS $pos => $enterprises) {
 			foreach($enterprises AS $key => $value) {
 				$enterpriseList[$pos]->$key = trim($value);
