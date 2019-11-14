@@ -7518,3 +7518,11 @@ body .ui-tooltip {
 	margin: -5px 0 0 -5px;
 	padding: 5px;
 }
+
+.modal-btn-primary {
+	margin: 0 !important;
+}
+
+.modal-buttonset {
+	width: 80px !important;
+}

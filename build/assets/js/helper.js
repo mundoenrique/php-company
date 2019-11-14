@@ -99,8 +99,8 @@ function notiSystem(title, message, icon, data) {
 			createButton(dialogMoldal, btnAccept, btn1);
 			if(!btn2) {
 				btnCancel.hide();
-				btnAccept.css('margin', '0');
-				$('.novo-dialog-buttonset').css('width', '80px');
+				btnAccept.addClass('modal-btn-primary');
+				$('.novo-dialog-buttonset').addClass('modal-buttonset');
 			} else {
 				createButton(dialogMoldal, btnCancel, btn2);
 			}
