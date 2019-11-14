@@ -124,8 +124,6 @@ class NOVO_Controller extends CI_Controller {
 				$structure = 'novo';
 			}
 			$this->includeAssets->cssFiles = [
-				"$this->skin-validate",
-				"third_party/jquery-ui",
 				//"$structure-structure",
 				//"$this->skin-appearance",
 				"$this->skin-base",
@@ -135,6 +133,12 @@ class NOVO_Controller extends CI_Controller {
 					$this->includeAssets->cssFiles,
 					"format/root-$this->skin",
 					"format/reboot-$this->skin"
+				);
+			} else {
+				array_unshift(
+					$this->includeAssets->cssFiles,
+					"$this->skin-validate",
+					"third_party/jquery-ui"
 				);
 			}
 			$this->includeAssets->jsFiles = [

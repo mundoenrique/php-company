@@ -19,17 +19,19 @@
 	<span class="spinner-border secondary" role="status" aria-hidden="true"></span>
 </div>
 
-<div id="system-info" class="hide" default-code="<?= lang('RESP_DEFAULT_CODE'); ?>"
+<div id="system-info" class="hide" name="system-info" default-code="<?= lang('RESP_DEFAULT_CODE'); ?>"
 	redirect="<?= lang('GEN_ENTERPRISE_LIST') ?>">
 	<p>
-		<span id="system-icon" class="ui-icon mt-0"></span>
+		<span class="dialog-icon">
+			<i id="system-icon" class="ui-icon mt-0"></i>
+		</span>
 		<span id="system-msg" class="system-msg"><?= lang('RESP_MESSAGE_SYSTEM'); ?></span>
 	</p>
 	<hr class="separador-one m-0">
 	<div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
 		<div class="ui-dialog-buttonset novo-dialog-buttonset">
-			<button type="button" id="cancel" class="btn underline"><?= lang('GEN_BTN_CANCEL'); ?></button>
-			<button type="button" id="accept" class="btn btn-primary"><?= lang('GEN_BTN_ACCEPT'); ?></button>
+			<button type="button" id="cancel" class="btn btn-small underline"><?= lang('GEN_BTN_CANCEL'); ?></button>
+			<button type="button" id="accept" class="btn btn-small btn-primary"><?= lang('GEN_BTN_ACCEPT'); ?></button>
 		</div>
 	</div>
 </div>

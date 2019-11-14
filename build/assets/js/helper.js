@@ -94,6 +94,7 @@ function notiSystem(title, message, icon, data) {
 			$('.ui-dialog-titlebar-close').hide();
 			$('#system-icon').addClass(icon);
 			$('#system-msg').html(message);
+			$('#accept, #cancel').removeClass("ui-button ui-corner-all ui-widget");
 
 			createButton(dialogMoldal, btnAccept, btn1);
 			if(!btn2) {
@@ -117,7 +118,13 @@ function createButton(dialogMoldal, elementBotton, valuesButton){
 	elementBotton.on('click', function (e) {
 		if (valuesButton.action === 'redirect') {
 			$(location).attr('href', valuesButton.link);
-			$(this).html(loader)
+			$(this).html(loader);
+			$(this).children('span').addClass('spinner-border-sm');
+			if($(this).attr('id') == 'cancel') {
+				$(this).children('span')
+				.removeClass('secondary')
+				.addClass('primary');
+			}
 		}
 		if (valuesButton.action !== 'redirect') {
 			dialogMoldal.dialog('close');
