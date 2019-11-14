@@ -12,8 +12,6 @@ if ( ! function_exists('novoLang'))
 {
 	function novoLang($line, $args = [])
 	{
-		//$line = get_instance()->lang->line($line);
-
 		$line = vsprintf($line, (array) $args);
 
 		return $line;
