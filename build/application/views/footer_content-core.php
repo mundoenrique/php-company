@@ -30,8 +30,8 @@
 	<hr class="separador-one m-0">
 	<div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
 		<div class="ui-dialog-buttonset novo-dialog-buttonset">
-			<button type="button" id="cancel" class="btn btn-small underline"><?= lang('GEN_BTN_CANCEL'); ?></button>
-			<button type="button" id="accept" class="btn btn-small btn-primary"><?= lang('GEN_BTN_ACCEPT'); ?></button>
+			<button type="button" id="cancel" class="btn underline"><?= lang('GEN_BTN_CANCEL'); ?></button>
+			<button type="button" id="accept" class="btn btn-primary"><?= lang('GEN_BTN_ACCEPT'); ?></button>
 		</div>
 	</div>
 </div>

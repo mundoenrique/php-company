@@ -904,6 +904,12 @@ textarea.form-control {
   font-size: var(--h5);
 }
 
+.ui-dialog-buttonpane .btn {
+	width: 5.75rem;
+	height: 2.5rem;
+	padding: var(--button-small-padding-y) var(--button-small-padding-x);
+}
+
 /* icon */
 
 .btn-icon {
