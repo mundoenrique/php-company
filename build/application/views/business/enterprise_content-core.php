@@ -26,7 +26,10 @@
 		<button class="btn-options btn-outline bold bg-white" filter-page="<?= $filtersAttr['filter'] ?>"
 			<?= $filtersAttr['active'] ? '' : 'disabled' ?>><?= $filtersAttr['text']; ?></button>
 		<?php endforeach; ?>
-		<button class="btn-search btn-outline bg-white"></button>
+		<div id="sb-search" class="sb-search">
+			<input id="search" class="sb-search-input" type="search" name="search" value="" placeholder="Buscar...">
+      <span class="sb-icon-search"><i class="icon icon-find"></i></span>
+    </div>
 	</div>
 </div>
 <div class="line mt-1"></div>

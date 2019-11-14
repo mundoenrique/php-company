@@ -26,7 +26,15 @@ header.main-head > div > img {
 	width: 12em;
 }
 
+/* Content */
+
+main.content {
+	min-height: calc(100vh - 3.75rem - 2.75rem - 45px);
+	background-color: var(--bg-color);
+}
+
 /* Footer */
+
 footer.main-footer {
 	display: flex;
 	flex-shrink: 0;
@@ -712,6 +720,109 @@ textarea.form-control {
 .input-file + .js-label-file.has-file{
   color: var(--tertiary-color);
   border: .85px solid var(--tertiary-color);
+}
+
+.sb-search {
+	border-radius: 0 var(--btn-border-radius) var(--btn-border-radius) 0;
+	position: relative;
+	width: 0%;
+	min-width: 47px;
+	float: right;
+	overflow: hidden;
+	-webkit-transition: .3s;
+	-moz-transition: .3s;
+	transition: .3s;
+
+}
+
+.sb-search-input {
+	position: absolute;
+	top: 0;
+	right: 0px;
+	border: none;
+	outline: none;
+	width: 100%;
+	margin: 0;
+	z-index: 10;
+	padding: 7px 3.4rem 7px 8px;
+	color: var(--text-color);
+	font-weight: var(--semibold-font-weight);
+	background: var(--secondary);
+	border: .85px solid var(--border-color);
+
+}
+
+.sb-search-input:-moz-placeholder,
+.sb-search-input::-moz-placeholder,
+.sb-search-input:-ms-input-placeholder,
+.sb-search-input::-webkit-input-placeholder {
+	color: var(--placeholder-color);
+}
+
+.sb-icon-search,
+.sb-search-submit  {
+	width: 47px;
+	display: block;
+	position: absolute;
+	right: 0;
+	top: 0;
+	padding: 0;
+	margin: 0;
+	line-height: 21px;
+	text-align: center;
+	cursor: pointer;
+	border-radius: 0 var(--btn-border-radius) var(--btn-border-radius) 0;
+}
+
+.sb-search-submit {
+	background: var(--secondary);
+	opacity: 0;
+	color: transparent;
+	color: var(--danger);
+	border: none;
+	outline: none;
+	z-index: -1;
+	height: 29px;
+}
+
+.sb-icon-search {
+	background: var(--primary);
+	color: var(--secondary);
+	z-index: 90;
+	font-size: var(--h3);
+	height: 29.6px;
+	-webkit-padding-before: 2px;
+}
+
+.sb-icon-search i:hover {
+	color: var(--secondary) !important;
+}
+
+
+.sb-search.sb-search-open,
+.no-js .sb-search {
+	width: 100%;
+}
+
+.sb-search.sb-search-open .sb-icon-search,
+.no-js .sb-search .sb-icon-search {
+	border: none;
+	background: var(--primary);
+	color: var(--secondary);
+	z-index: 11;
+	height: 29.7px;
+}
+
+@media (min-width: 768px) {
+	.sb-search.sb-search-open, .no-js .sb-search {
+		width: 30%;
+	}
+}
+
+@media (min-width: 1024px) {
+	.sb-search.sb-search-open, .no-js .sb-search {
+		width: 20%;
+	}
 }
 
 /* Validator */

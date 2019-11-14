@@ -26,7 +26,8 @@ class Business extends NOVO_Controller {
 			$this->includeAssets->jsFiles,
 			"third_party/isotope.pkgd-3.0.6",
 			"third_party/pagination-2.1.4",
-			"business/enterprise"
+			"business/enterprise",
+			"option-search"
 		);
 
 		$this->views = ['business/'.$view];
@@ -52,7 +53,7 @@ class Business extends NOVO_Controller {
 
 		array_push(
 			$this->includeAssets->jsFiles,
-			'select-tools'
+			"option-search"
 		);
 		if($this->session->userdata('getProducts')) {
 			$this->request->idFiscal = $this->session->userdata('getProducts')->idFiscal;

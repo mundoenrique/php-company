@@ -29,6 +29,9 @@
 				<option value="Option_2">Option 2</option>
 				<option value="Option_3">Option 3</option>
 			</select>
+		<div id="sb-search" class="sb-search">
+			<input id="search" class="sb-search-input" type="search" name="search" value="" placeholder="Buscar...">
+      <span class="sb-icon-search"><i class="icon icon-find"></i></span>
 		</div>
 		<button class="btn-search bg-white"></button>
 	</div>
