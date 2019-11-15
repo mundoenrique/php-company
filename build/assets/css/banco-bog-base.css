@@ -2718,13 +2718,16 @@ a.ui-button:active,
   box-shadow: 0 1px 4px 0 rgba(0,0,0,.2);
 }
 
+.products {
+	height: 328px !important;
+}
+
 .product {
   position: relative;
   height: 139px;
   width: 260px;
   overflow: hidden;
   cursor: pointer;
-  /* background: #fff url("../images/bdb/bg-content.png") no-repeat center center; */
 }
 
 .product .mask,
