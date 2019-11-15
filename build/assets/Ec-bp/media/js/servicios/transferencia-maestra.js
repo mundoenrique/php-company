@@ -164,7 +164,6 @@ $(function() {
 		} else {
 			var form = $('#form-recarga-cuenta');
 			validateForms(form);
-			console.log(form.valid());
 			if (form.valid()) {
 				/*Incia validación de transacciones diarias*/
 				if (paramsValidate(type.val())) {

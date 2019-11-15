@@ -4,23 +4,34 @@ var serv_var = {
 	busk: false,
 	paginas: 10,
 	paginar: true,
-	dni_tarjetas: "",
-	noTarjetas: "",
+	dni_tarjetas: [],
+	noTarjetas: [],
 	TotalTjts: 0,
-	cargo: 'show',
-	abono: 'show',
-	consulta: 'show',
+	actualizarDatos: 'hidden',
+	consulta: 'hidden',
+	bloquear: 'hidden',
+	desbloqear: 'hidden',
+	entregar: 'hidden',
+	enviar: 'hidden',
+	recibirBanco: 'hidden',
+	recibirEmpresa: 'hidden',
 	maestroParam: null,
 	cantXdia: null,
 	acumXsem: null,
 	monto: [],
 	saldoDispon: 0,
 	montoMin: 0,
-	fallidas: 0
+	fallidas: 0,
+	masivos:[],
+	lote:[],
+	estado_nuevo:'',
+	estado_anterior:[],
+	items:[]
 }
 
 $('#buscar').on('click', function () {
 
+	serv_var.masivos = [];
 	var RE = /^\d*$/,
 		servicio = $('#servicio'),
 		lote = $('#lote'),
@@ -84,6 +95,7 @@ $('#buscar').on('click', function () {
 					text: 'Aceptar',
 					class: 'novo-btn-primary-modal',
 					click: function () {
+						resett()
 						$(this).dialog("destroy");
 					}
 				}
@@ -102,8 +114,10 @@ $('#select-allR').on('click', function () {
 		$(':checkbox').each(function () {
 			this.checked = 1;
 			if ($(this).parents('tr').attr('tjta') != undefined) {
-				serv_var.noTarjetas += $(this).parents('tr').attr('tjta') + ",";
-				serv_var.dni_tarjetas += $(this).parents('tr').attr('id_ext_per') + ",";
+				serv_var.lote.push($(this).parents('tr').attr('num_lote'));
+				serv_var.noTarjetas.push($(this).parents('tr').attr('tjta'));
+				serv_var.dni_tarjetas.push($(this).parents('tr').attr('id_ext_per'));
+				serv_var.estado_anterior.push($(this).parents('tr').attr('edo_anterior'));
 			}
 		});
 	} else {
@@ -112,6 +126,7 @@ $('#select-allR').on('click', function () {
 		});
 		resett();
 	}
+
 });
 
 
@@ -161,9 +176,6 @@ function buscar(pgSgt) {
 		 	$aux.dialog('destroy');
 		 if (!data.result.ERROR) {
 				$('#resultado-tarjetas').show();
-				$.inArray('trasal', data.funciones) !== -1 ? $('#consultar-tjta').show() : serv_var.consulta = 'hidden';
-				$.inArray('tracar', data.funciones) !== -1 ? $('#cargo-tjta').show() : serv_var.cargo = 'hidden';
-				$.inArray('traabo', data.funciones) !== -1 ? $('#abonar-tjta').show() : serv_var.abono = 'hidden';
 
 				cargarResultado(data);
 				$('#resultado-tarjetas').find('.jPag-sprevious').attr('title', "anterior");
@@ -202,25 +214,97 @@ function cargarResultado(data) {
 		$('.table-text-service thead th').css('min-width', '75px');
 		$('.table-text-service tbody td').css('min-width', '75px');
 
+
+		var iconos = {'ACTUALIZAR_DATOS':'&#xe02d;',
+		'CONSULTA_SALDO_TARJETA':'&#xe022;',
+		'BLOQUEO_TARJETA':'&#xe028;',
+		'DESBLOQUEO':'&#xe03f;',
+		'ENTREGAR_A_TARJETAHABIENTE':'&#xe011;',
+		'ENVIAR_A_EMPRESA':'&#xe05e;',
+		'RECIBIR_EN_EMPRESA':'&#xe062;',
+		'RECIBIR_EN_BANCO':'&#xe09c;',
+		'NINGUNA':'-'}
+
+		var validaope = []
+
+		for(var l in data.result.operacioneTarjeta)
+		{
+			validaope.push(data.result.operacioneTarjeta[l].edoTarjeta)
+		}
+
+		var opcmasivo = {'Recibir en banco': 'Recibido en Banco # 1',
+		'Enviar a empresa': 'Enviado a Empresa # 1',
+		'Recibir en empresa': 'Recibido en empresa # 1',
+		'Entregar a tarjetahabiente':'Entregada a Tarjetahabiente / Activa # 1',
+		'Bloqueo tarjeta' : 'bloqueo # 2',
+		'Consulta saldo tarjeta': 'saldo # 2',
+		'Desbloquear': 'desbloqueo # 2'}
+
 		$.each(data.result.detalleEmisiones, function (k, v) {
-			tr = '<tr class="' + data.result.pagina+ '" tjta="' + v.nroTarjeta + '" id_ext_per="' + v.cedula + '"><td class="checkbox-select"><input id="check-oneTM" type="checkbox" value=""/></td>';			
+
+			//var statusEmi = v.edoEmision.split('')[0]
+			var statusEmi = v.edoEmision.slice(0, v.edoEmision.indexOf("/"));
+			var valida = $.inArray(v.edoEmision, validaope) !== -1 ? 1:0;
+			var personal = [];
+			personal.push(v.nombres,v.apellidos,v.numCelular,v.email)
+			tr = '<tr class="' + data.result.pagina+ '" tjta="' + v.nroTarjeta + '" num_lote="'+v.nroLote+'" edo_anterior="'+statusEmi[0]+'" id_ext_per="' + v.cedula + '" personal="' + personal + '" >';
+			tr += '<td class="checkbox-select"><input id="check-oneTM" type="checkbox" value=""/></td>';
 			tr += '<td id="td-nombre-2" class="bp-min-width">' + v.nroTarjeta + '</td>';
 			tr += '<td class="bp-min-width">' + v.ordenS + '</td>';
 			tr += '<td class="bp-min-width">' + v.nroLote + '</td>';
-			tr += '<td class="bp-min-width">' + v.edoEmision + '</td>';
+			tr += '<td class="bp-min-width">' + statusEmi + '</td>';
 			tr += '<td class="bp-min-width">' + v.edoPlastico + '</td>';
 			tr += '<td id="td-nombre-2" class="bp-min-width">' + v.nombre.toLowerCase().replace(/(^| )(\w)/g, function (x) {
 				return x.toUpperCase();
 			}) + '</td>';
 			tr += '<td class="bp-min-width">' + v.cedula + '</td>';
-			/* tr += '<td id="saldo' + v.noTarjetaConMascara.replace(/[*]/g, "") + '" class="bp-min-width">-</td>'; //saldo */
-			/* tr += '<td class="bp-min-width"><a id="consulta_saldo" title="consulta saldo" ' + serv_var.consulta + '><span class="icon" data-icon="&#xe072;"></span></a>';
-			tr += '<a id="abono_tarjeta" title="abono tarjeta" ' + serv_var.abono + '><span class="icon" data-icon="&#xe031;"></span></a>';
-			tr += '<a id="cargo_tarjeta" title="cargo tarjeta" ' + serv_var.cargo + '><span class="icon" data-icon="&#xe08d;"></span></a>';
-			tr += '</td></tr>'; */
-
+			 tr += '<td id="saldo' + v.nroTarjeta.replace(/[*]/g, "") + '" class="bp-min-width"> - '; //saldo
+			 tr += '</td>'
+			 tr += '<td class="bp-min-width">';
+			 var operacion = ''
+			 $.each(data.result.operacioneTarjeta, function (i, j)
+			{
+				if(v.edoEmision == j.edoTarjeta && valida == 1)
+				{
+					for(k in j.operacion)
+					{
+						nomoperacion = MaysPrimera(j.operacion[k].toLowerCase());
+						operacion = j.operacion[k].replace(/\s/g,'_');
+						tr += '<a id="'+operacion+'" title="'+nomoperacion+'" ><span class="icon" data-icon="'+iconos[operacion]+'"></span></a>';
+						$.inArray(nomoperacion, serv_var.masivos) !== -1 ?  '' : serv_var.masivos.push(nomoperacion);
+					}
+				}
+			})
+			if(operacion == '')
+			{
+				tr += '-';
+			}
+			tr += '</td></tr>';
 			$('.table-text-service tbody').append(tr);
+
 		});
+
+		optionsmasivo = '';
+		for (var propiedad in opcmasivo) {
+			if (opcmasivo.hasOwnProperty(propiedad)) {
+				if($.inArray(propiedad, serv_var.masivos) !== -1)
+				{
+					optionsmasivo += '<option value="'+opcmasivo[propiedad]+'">'+propiedad+'</option>'
+				}
+			}
+		}
+
+		if(serv_var.masivos.length !=0)
+		{
+			$('#select-tipo-proceso').empty();
+			$('#select-tipo-proceso').append('<option value="">Seleccionar</option>');
+			$('#process-masivo').show()
+			$('#select-tipo-proceso').append(optionsmasivo);
+		}
+		else
+		{
+			$('#process-masivo').hide()
+		}
 
 		paginar();
 
@@ -249,8 +333,10 @@ function paginar() {
 					$(':checkbox').each(function () {
 						this.checked = 0;
 					});
-					serv_var.noTarjetas = "";
-					serv_var.dni_tarjetas = "";
+					serv_var.noTarjetas = [];
+					serv_var.dni_tarjetas = [];
+					serv_var.lote = [];
+					serv_var.estado_anterior = [];
 					serv_var.monto = [];
 					serv_var.fallidas = 0;
 				}
@@ -259,10 +345,10 @@ function paginar() {
 			}
 			$('.table-text-service tbody tr').hide();
 			$('.table-text-service .' + page).show();
-			$('#paginado-TM .jPag-pages').css('width', '350px')
+			$('#paginado-TM .jPag-pages').css('width', '600px')
 		}
 	});
-	$('#paginado-TM .jPag-pages').css('width', '350px')
+	$('#paginado-TM .jPag-pages').css('width', '600px')
 }
 
 // LIMPIAR LOS CHECK Y CAMPO CLAVE
@@ -271,16 +357,14 @@ function resett() {
 		this.checked = 0;
 	});
 
-	$(':input').each(function () {
-		$(this).val('');
-	});
-
 	$.each($('.monto'), function () {
 		$(this).hideBalloon();
 	});
 
-	serv_var.noTarjetas = "";
-	serv_var.dni_tarjetas = "";
+	serv_var.noTarjetas = [];
+	serv_var.dni_tarjetas = [];
+	serv_var.lote = [];
+	serv_var.estado_anterior = [];
 	serv_var.monto = [];
 	serv_var.fallidas = 0;
 }
@@ -297,7 +381,7 @@ function toFormatShow(valor) {
 }
 
 // DIALOGO DE NOTIFICACIONES
-function notificacion(titulo, mensaje) {
+function notificacion(titulo, mensaje, opcion = 0) {
 	var canvas = "<div>" + mensaje + "</div>";
 
 	$(canvas).dialog({
@@ -311,18 +395,29 @@ function notificacion(titulo, mensaje) {
 		position: {
 			my: "top"
 		},
-		close: function() {
-			resett();
-			$(this).dialog("close");
-		},
 		buttons: {
 			"Aceptar": { text: 'Aceptar', class: 'novo-btn-primary-modal',
 				click: function () {
-
-				resett();
-				$(this).dialog("close");
-				 }
+					switch(opcion){
+						case 0:
+							resett();
+							$(this).dialog("close");
+							break
+						case 1:
+							resett();
+							$(this).dialog("close");
+							serv_var.TotalTjts = 0;
+							serv_var.masivos = [];
+							$('#resultado-tarjetas').hide();
+							$('.table-text-service tbody').empty();
+							buscar(serv_var.pgActual)
+							break
+						case 2:
+							$(this).dialog("close");
+							break
+					}
 				}
+			}
 		}
 	});
 
@@ -350,4 +445,650 @@ $("#exportXLS_a").on('click', function () {
 	$('form#formulario').attr('action', baseURL + api + isoPais + "/servicios/consultaTarjetasExpXLS");
 	$('form#formulario').submit();
 });
+
+
+
+// ACCION EVENTO ICON->RECIBIR EN BANCO
+$(".table-text-service").on('click', '#RECIBIR_EN_BANCO', function() {
+
+	resett();
+	serv_var.noTarjetas.push($(this).parents('tr').attr('tjta'));
+	serv_var.dni_tarjetas.push($(this).parents('tr').attr('id_ext_per'));
+	serv_var.estado_nuevo = 'Recibido en Banco';
+	serv_var.estado_anterior.push($(this).parents('tr').attr('edo_anterior'));
+	serv_var.lote.push($(this).parents('tr').attr('num_lote'));
+
+	url = "/servicios/cambiarEstadoemision"
+	procesar('Recibir en banco',url)
+});
+
+// ACCION EVENTO ICON->RECIBIR EN BANCO
+$(".table-text-service").on('click', '#CONSULTA_SALDO_TARJETA', function() {
+
+	resett();
+	serv_var.noTarjetas.push($(this).parents('tr').attr('tjta'));
+	serv_var.dni_tarjetas.push($(this).parents('tr').attr('id_ext_per'));
+	serv_var.estado_nuevo = 'Saldo';
+	serv_var.estado_anterior.push($(this).parents('tr').attr('edo_anterior'));
+	serv_var.lote.push($(this).parents('tr').attr('num_lote'));
+
+	op = 'saldo'
+	url = '/servicios/cambiarEstadotarjeta'
+
+	procesar('Consultar saldo',url,op)
+});
+
+// ACCION EVENTO ICON->RECIBIR EN EMRPESA
+$(".table-text-service").on('click', '#RECIBIR_EN_EMPRESA', function() {
+
+	resett();
+	serv_var.noTarjetas.push($(this).parents('tr').attr('tjta'));
+	serv_var.dni_tarjetas.push($(this).parents('tr').attr('id_ext_per'));
+	serv_var.estado_nuevo = 'Recibido en Empresa';
+	serv_var.estado_anterior.push($(this).parents('tr').attr('edo_anterior'));
+	serv_var.lote.push($(this).parents('tr').attr('num_lote'));
+
+	url = "/servicios/cambiarEstadoemision";
+	procesar('Recibir tarjeta en empresa',url)
+
+});
+
+// ACCION EVENTO ICON->BLOQUEAR TARJETA
+$(".table-text-service").on('click', '#BLOQUEO_TARJETA', function() {
+
+	resett();
+	serv_var.noTarjetas.push($(this).parents('tr').attr('tjta'));
+	serv_var.dni_tarjetas.push($(this).parents('tr').attr('id_ext_per'));
+	serv_var.estado_nuevo = 'Bloqueada';
+	serv_var.estado_anterior = ['Desbloqueada'];
+	serv_var.lote.push($(this).parents('tr').attr('num_lote'));
+
+	op = 'bloqueo'
+	url = '/servicios/cambiarEstadotarjeta'
+
+	procesar('Bloquear de tarjeta',url,op)
+
+})
+
+// ACCION EVENTO ICON->DESBLOQUEO
+$(".table-text-service").on('click', '#DESBLOQUEO', function() {
+
+	resett();
+	serv_var.noTarjetas.push($(this).parents('tr').attr('tjta'));
+	serv_var.dni_tarjetas.push($(this).parents('tr').attr('id_ext_per'));
+	serv_var.estado_nuevo = 'Desbloqueada';
+	serv_var.estado_anterior = ['Bloqueada'];
+	serv_var.lote.push($(this).parents('tr').attr('num_lote'));
+
+	op = 'desbloqueo'
+	url = '/servicios/cambiarEstadotarjeta'
+
+	procesar('Desbloquear de tarjeta',url,op)
+
+})
+
+
+// ACCION EVENTO ICON->ENVIAR A EMPRESA
+$(".table-text-service").on('click', '#ENVIAR_A_EMPRESA', function() {
+
+	resett();
+	serv_var.noTarjetas.push($(this).parents('tr').attr('tjta'));
+	serv_var.dni_tarjetas.push($(this).parents('tr').attr('id_ext_per'));
+	serv_var.estado_nuevo = 'Enviado a Empresa';
+	serv_var.estado_anterior.push($(this).parents('tr').attr('edo_anterior'));
+	serv_var.lote.push($(this).parents('tr').attr('num_lote'));
+
+	url = "/servicios/cambiarEstadoemision"
+	procesar('Enviar tarjeta a empresa',url)
+
+})
+
+// ACCION EVENTO ICON->ENTREGAR_A_TARJETAHABIENTE
+$(".table-text-service").on('click', '#ENTREGAR_A_TARJETAHABIENTE', function() {
+
+	resett();
+	serv_var.noTarjetas.push($(this).parents('tr').attr('tjta'));
+	serv_var.dni_tarjetas.push($(this).parents('tr').attr('id_ext_per'));
+	serv_var.estado_nuevo = 'Entregada a Tarjetahabiente / Activa';
+	serv_var.estado_anterior.push($(this).parents('tr').attr('edo_anterior'));
+	serv_var.lote.push($(this).parents('tr').attr('num_lote'));
+
+	url = "/servicios/cambiarEstadoemision"
+	procesar('Entregar tarjeta',url)
+
+})
+
+var nombres, apellidos, correo, pin, celular, clave;
+
+// ACCION EVENTO ICON->ACTUALIZAR DATOS
+$(".table-text-service").on('click', '#ACTUALIZAR_DATOS', function() {
+
+	serv_var.noTarjetas = [$(this).parents('tr').attr('tjta')];
+	serv_var.dni_tarjetas = [$(this).parents('tr').attr('id_ext_per')];
+	serv_var.estado_nuevo = 'Actualizar datos';
+	serv_var.estado_anterior.push($(this).parents('tr').attr('edo_anterior'));
+	serv_var.lote.push($(this).parents('tr').attr('num_lote'));
+
+
+
+	var dataPersona = $(this).parents('tr').attr('personal');
+	dataPersona = dataPersona.split(',');
+	var canvas = "<div id='dialog-confirm'>";
+	canvas += "<form name='no-form' onsubmit='return false'>";
+	canvas += '<div id="campos-transfer">';
+	canvas += '<span><p>Nombre:</p>';
+	canvas += '<input type="text" name="pass" id="nombres" value="'+dataPersona[0]+'">';
+	canvas += '<li id="errornombre" style="display:none"></li>';
+	canvas += '</span>';
+	canvas += '<span><p>Apellidos:</p>';
+	canvas += '<input type="text" name="pass" id="apellidos" value="'+dataPersona[1]+'">';
+	canvas += '<li id="errorapellido" style="display:none"></li>';
+	canvas += '</span>';
+	canvas += '</div>';
+	canvas += '<div id="campos-transfer">';
+	canvas += '<span><p>Correo:</p>';
+	canvas += '<input type="text" name="pass" id="correo" value="'+dataPersona[3]+'">';
+	canvas += '<li id="errorcorreo" style="display:none"></li>';
+	canvas += '</span>';
+	canvas += '<span><p>PIN: </p>';
+	canvas += '<input type="password" name="numero" id="pin" maxlength="4">';
+	canvas += '<li id="errorpin" style="display:none"></li>';
+	canvas += '</span>';
+	canvas += '</div>';
+	canvas += '<div id="campos-transfer">';
+	canvas += '<span><p>Teléfono celular:</p>';
+	canvas += '<input type="text" name="pass" id="celular" value="'+dataPersona[2]+'">';
+	canvas += '<li id="errorcelular" style="display:none"></li>';
+	canvas += '</span>';
+	canvas += '<span><p>Contraseña: </p>';
+	canvas += '<input type="password" name="numero" id="clave" placeholder="Ingrese su contraseña" maxlength="16">';
+	canvas += '<li id="errorclave" style="display:none"></li>';
+	canvas += '</span>';
+	canvas += '</div>';
+	canvas += "</fieldset><h5 id='msg'></h5>";
+	canvas += "</form>"
+	canvas += "</div>"
+
+	$(canvas).dialog({
+
+		dialogClass: "close",
+		title: 'Actualizar datos tarjetahabiente',
+		modal: true,
+		width: 500,
+		top: 900,
+		position: {
+			my: "top 800"
+		},
+		close: function() {
+			resett();
+			$(this).dialog("destroy");
+		},
+		buttons: {
+			Aceptar: function() {
+				$(this).find('#msg').empty();
+				var validate = validarFields();
+				if(validate == true)
+				{
+					nombres = $('#nombres').val();
+					apellidos = $('#apellidos').val();
+					correo =  $('#correo').val();
+					pin = $('#pin').val();
+					celular = $('#celular').val();
+					clave = $('#clave').val();
+					$(this).dialog("destroy");
+					url = "/servicios/cambiarEstadoemision";
+					llamarActDatos(url,'Actualizar datos');
+				}
+			}
+		}
+	});
+
+
+
+})
+
+$('#pin').on('input', function () {
+	this.value = this.value.replace(/[^0-9]/g,'');
+});
+
+function validarFields()
+{
+	var valNombre = $('#dialog-confirm').find('#nombres')
+	var valApellidos = $('#dialog-confirm').find('#apellidos')
+	var valCorreo = $('#dialog-confirm').find('#correo')
+	var valPin = $('#dialog-confirm').find('#pin')
+	var valCelular = $('#dialog-confirm').find('#celular')
+	var valClave = $('#dialog-confirm').find('#clave')
+	var errorName = $('#dialog-confirm').find('#errornombre')
+	var errorApellido = $('#dialog-confirm').find('#errorapellido')
+	var errorCorreo = $('#dialog-confirm').find('#errorcorreo')
+	var errorPin = $('#dialog-confirm').find('#errorpin')
+	var errorCelular = $('#dialog-confirm').find('#errorcelular')
+	var errorClave = $('#dialog-confirm').find('#errorclave')
+
+	spaceString('#nombres')
+	spaceString('#apellidos')
+	spaceString('#correo')
+	spaceString('#pin')
+	spaceString('#celular')
+	spaceString('#clave')
+
+	var camposValid = ''
+			msgValido = ''
+			validInput = true
+			descRegExp = /^['a-z0-9ñáéíóú ,.:()']+$/i
+			emailRegExp = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
+			numRegExp = /^\d+$/
+
+	if(valNombre.val() === '')
+	{
+		errorName.show();
+		errorName.html('El campo no puede estar vacio')
+		validInput = false;
+		valNombre.addClass('textbox-transfer');
+	}
+	else if(!descRegExp.test(valNombre.val()))
+	{
+		errorName.show();
+		errorName.html('No se admiten caracteres especiales')
+		validInput = false;
+		valNombre.addClass('textbox-transfer');
+	}
+	else{
+		errorName.hide();
+		validInput = true;
+		valNombre.removeClass('textbox-transfer');
+	}
+
+	if(valApellidos.val() === '')
+	{
+		errorApellido.show();
+		errorApellido.html('El campo no puede estar vacio')
+		validInput = false;
+		valApellidos.addClass('textbox-transfer');
+	}
+	else if(!descRegExp.test(valApellidos.val()))
+	{
+		errorApellido.show();
+		errorApellido.html('No se admiten caracteres especiales')
+		validInput = false;
+		valApellidos.addClass('textbox-transfer');
+	}
+	else{
+		errorApellido.hide();
+		validInput = true;
+		valApellidos.removeClass('textbox-transfer');
+	}
+
+	if(valCorreo.val() === '')
+	{
+		errorCorreo.show();
+		errorCorreo.html('El campo no puede estar vacio')
+		validInput = false;
+		valCorreo.addClass('textbox-transfer');
+	}
+	else if(!emailRegExp.test(valCorreo.val()))
+	{
+		errorCorreo.show();
+		errorCorreo.html('Formato de correo incorrecto (ejemlo@datos.com)')
+		validInput = false;
+		valCorreo.addClass('textbox-transfer');
+	}
+	else{
+		errorCorreo.hide();
+		validInput = true;
+		valCorreo.removeClass('textbox-transfer');
+	}
+
+	if(valPin.val().length > 0)
+	{
+			if(!numRegExp.test(valPin.val()))
+			{
+				errorPin.show();
+				errorPin.html('El campo debe ser numerico')
+				validInput = false;
+				valPin.addClass('textbox-transfer');
+			}
+			else if(valPin.val().length != 4)
+			{
+				errorPin.show();
+				errorPin.html('El campo debe contener 4 numeros')
+				validInput = false;
+				valPin.addClass('textbox-transfer');
+			}
+			else{
+				errorPin.hide();
+				validInput = true;
+				valPin.removeClass('textbox-transfer');
+			}
+	} else{
+		errorPin.hide();
+		validInput = true;
+		valPin.removeClass('textbox-transfer');
+	}
+
+	if(valCelular.val().length >= 13)
+	{
+		errorCelular.show();
+		errorCelular.html('el campo solo debe tener maximo 13 numeros')
+		validInput = false;
+		valCelular.addClass('textbox-transfer');
+	}	else{
+		errorPin.hide();
+		validInput = true;
+		valPin.removeClass('textbox-transfer');
+	}
+	 if(!numRegExp.test(valCelular.val()))
+	{
+		errorCelular.show();
+		errorCelular.html('El campo debe ser numerico')
+		validInput = false;
+		valCelular.addClass('textbox-transfer');
+	}	else{
+		errorPin.hide();
+		validInput = true;
+		valPin.removeClass('textbox-transfer');
+	}
+
+	if(valClave.val() === '')
+	{
+		errorClave.show();
+		errorClave.html('El campo no puede estar vacio')
+		validInput = false;
+		valClave.addClass('textbox-transfer');
+	}
+	else{
+		errorClave.hide();
+		validInput = true;
+		valClave.removeClass('textbox-transfer');
+	}
+
+	return validInput;
+}
+
+function spaceString(name)
+{
+	var Field = $('#dialog-confirm').find(name)
+
+	var cambia = Field.val()
+			cambia = cambia.trim()
+			cambia =  cambia.replace(/ +/g, ' ')
+			Field.val(cambia)
+}
+
+function MaysPrimera(string){
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+//PROCESAR OPERACION
+function procesar(titulo, url, op = 1) {
+	var canvas = "<div id='dialog-confirm'>";
+	canvas += "<form name='no-form' onsubmit='return false'>";
+	canvas += "<center>Tarjeta: " + serv_var.noTarjetas + "</center>";
+	canvas += "<br><p><input type='password' name='pass' id='pass' placeholder='Ingresa tu contraseña' size='28'></p>";
+	canvas += "</fieldset><h5 id='msg'></h5>";
+	canvas += "</form>"
+	canvas += "</div>"
+
+	$(canvas).dialog({
+
+		dialogClass: "hide-close",
+		title: titulo,
+		modal: true,
+		position: {
+			my: "top 800",
+		},
+		close: function() {
+			resett();
+			$(this).dialog("destroy");
+		},
+		buttons: {
+			"Cancelar": { text: 'Cancelar', class: 'novo-btn-secondary-modal', style: 'border-color: #ffdd00 !important;background:white !important;',
+			click: function () {
+			$(this).dialog("close"); }
+			},
+			Aceptar: function() {
+
+				pass = $(this).find('#pass').val();
+
+				if (pass !== '') {
+					var form= $(this).find('form');
+					validateForms(form);
+					if (form.valid()) {
+						llamarWSCambio(pass, titulo,url, op);
+						$(this).find('#pass').val('');
+						$(this).dialog("destroy");
+					} else {
+						$(this).find('#msg').empty();
+						$(this).find('#msg').append("Contraseña inválida");
+					}
+				} else {
+					$(this).find('#msg').empty();
+					$(this).find('#msg').append("Debes ingresar la contraseña");
+				}
+				resett();
+			}
+		}
+	});
+}
+
+function llamarActDatos(url, title){
+	var $aux = $('#loading').dialog({
+
+		dialogClass: "hide-close",
+		title: title,
+		modal: true,
+		bgiframe: true,
+		dialogClass: 'hide-close',
+		close: function() {
+			$aux.dialog('close');
+		},
+		position: {
+			my: "top"
+		}
+	});
+	pass = hex_md5(clave);
+	var op = "act_datos";
+	var dataRequest = JSON.stringify ({
+		lote : serv_var.lote,
+		nombres: nombres,
+		apellidos: apellidos,
+		correo: correo,
+		pin: pin,
+		celular:celular,
+		pass: pass,
+		estado_nuevo: serv_var.estado_nuevo,
+    estado_anterior: serv_var.estado_anterior,
+    tarjeta: serv_var.noTarjetas,
+    id_ext_per: serv_var.dni_tarjetas,
+    opcion: op
+		})
+
+	var ceo_cook = decodeURIComponent(
+		document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+	);
+	dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
+	$.post(baseURL + api + isoPais + url,
+	{request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)} )
+	.done(function(response){
+		data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
+		$aux.dialog("destroy");
+		if (!data.result.ERROR) {
+			notificacion('Actualizar datos','Proceso realizado correctamente', 1);
+
+		}
+		else{
+			if (data.result.ERROR == '-29') {
+				alert('Usuario actualmente desconectado');
+				location.reload();
+			} else {
+				notificacion("mensaje", data.result.ERROR,2);
+			}
+		}
+	})
+
+}
+
+
+function llamarWSCambio(pass,mensaje,url,op) {
+
+	var $aux = $('#loading').dialog({
+
+		dialogClass: "hide-close",
+		title: mensaje,
+		modal: true,
+		bgiframe: true,
+		dialogClass: 'hide-close',
+		close: function() {
+			$aux.dialog('close');
+		},
+		position: {
+			my: "top"
+		}
+	});
+
+	pass = hex_md5(pass);
+	$('#claveMasivo').val("");
+	$('#claveMasivo').prop("disabled",true);
+
+	var ceo_cook = decodeURIComponent(
+		document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+	);
+
+
+	var dataRequest = JSON.stringify ({
+		lote : serv_var.lote,
+		estado_nuevo: serv_var.estado_nuevo,
+		estado_anterior: serv_var.estado_anterior,
+		tarjeta: serv_var.noTarjetas,
+		id_ext_per: serv_var.dni_tarjetas,
+		opcion: op,
+		pass: pass
+		})
+
+		dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
+		$.post(baseURL + api + isoPais + url,
+		{request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)} )
+		.done(function(response){
+			data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
+
+			$aux.dialog("destroy");
+
+			if (!data.result.ERROR) {
+
+				var reload = 1;
+				if(op == 'saldo')
+				{
+					reload = 2;
+					mostrar_saldo(data)
+				}
+				notificacion(mensaje, 'Proceso realizado correctamente', reload);
+
+			}
+			else{
+				if (data.result.ERROR == '-29') {
+					alert('Usuario actualmente desconectado');
+					location.reload();
+				} else {
+					notificacion(mensaje, data.result.ERROR,2);
+				}
+			}
+			resett()
+})
+
+}
+
+// ACCIÓN EVENTO CHECK UNITARIO
+$('.table-text-service').on('click', '#check-oneTM', function() {
+	var dlote = $(this).parents('tr').attr('num_lote');
+	var tjts = $(this).parents('tr').attr('tjta');
+	var dnis = $(this).parents('tr').attr('id_ext_per');
+	var edoant = ($(this).parents('tr').attr('edo_anterior'));
+
+	if ($(this).is(':checked')) {
+		serv_var.lote.push(dlote);
+		serv_var.noTarjetas.push(tjts);
+		serv_var.dni_tarjetas.push(dnis);
+		serv_var.estado_anterior.push(edoant);
+	}
+	else{
+		removeItemFromArr(serv_var.lote,dlote);
+		removeItemFromArr(serv_var.noTarjetas,tjts);
+		removeItemFromArr(serv_var.dni_tarjetas,dnis);
+		removeItemFromArr(serv_var.estado_anterior,edoant);
+	}
+
+});
+
+$("#select-tipo-proceso").on("change", function () {
+	acrif = $('option:selected', this).attr("value");
+
+	if(acrif !== '')
+	{
+		$('#claveMasivo, #button-masivo').prop('disabled', false);
+
+	}
+	else
+	{
+		$('#claveMasivo, #button-masivo').prop('disabled', true);
+
+	}
+
+
+});
+
+//ACCION PARA LANZAR EL PROCESO MASIVO
+$('#button-masivo').click(function() {
+
+	serv_var.estado_nuevo = $("#select-tipo-proceso").val();
+	urlproc = serv_var.estado_nuevo.split(' # ');
+	serv_var.estado_nuevo = urlproc[0]
+	var clamasivo = $('#claveMasivo')
+	var errmasivo=''
+
+	url = (urlproc[1] == 1) ? '/servicios/cambiarEstadoemision' : '/servicios/cambiarEstadotarjeta';
+
+	if(serv_var.noTarjetas.length == 0)
+	{
+		errmasivo += '<p>* Debe selecionar almenos un registro.</p>'
+	}
+
+	if(clamasivo.val() == '')
+	{
+		errmasivo += '<p>* Debe Ingresar su clave.</p>'
+	}
+
+	if(errmasivo != '')
+	{
+		notificacion('Proceso masivo',errmasivo, 2)
+	}
+	else
+	{
+		llamarWSCambio(clamasivo.val(), 'Proceso Masivo',url,urlproc[0]);
+	}
+});
+
+// MOSTRAR EL SALDO DISPONIBLE PARA CADA TARJETA LUEGO DE CONSULTAR
+function mostrar_saldo(data) {
+	$.each(JSON.parse(data.result.bean), function(k, t) {
+
+		if (t.saldo !== undefined)
+		{
+			$('#saldo' + t.numeroTarjeta.replace(/[*]/g, "")).text((t.saldo));
+
+		}	else{
+			$('#saldo' + t.numeroTarjeta.replace(/[*]/g, "")).empty();
+			$('#saldo' + t.numeroTarjeta.replace(/[*]/g, "")).append('<span title="'+t.msgNovoTrans+'"  class="icon" data-icon="&#xe04b;"></span>');
+		}
+
+	});
+}
+
+//FUNCION PARA REMOVER UN ELMENTO DE UN ARRAY
+function removeItemFromArr ( arr, item ) {
+	var i = arr.indexOf( item );
+	arr.splice( i, 1 );
+}
+
+
 

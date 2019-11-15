@@ -6977,6 +6977,43 @@ button.green:hover {
 	border-bottom: 1px solid #bbb;
 }
 
+#campos-transfer {
+	background: none;
+	font-size: 12px;
+	color: #555555;
+	width: 500px;
+	height: auto;
+	margin: 5px;
+	float: left;
+}
+
+#campos-transfer span {
+	width: 245px;
+	float: left;
+}
+
+#campos-transfer span p {
+	padding: 5px;
+	vertical-align: middle;
+	font-size: 13px;
+}
+
+#campos-transfer span input {
+	float: left;
+	padding: 5px;
+	background: none;
+	padding: 8px;
+	width: 180px;
+	border: 1px solid #dddddd;
+}
+
+#campos-transfer li {
+	float: left;
+	color: #cd0a0a;
+	list-style: none;
+}
+
+
 #suc_cuidad {
 	width: 130px;
 	border: none;
@@ -7697,6 +7734,13 @@ button:active {
 	text-align: center
 }
 
+.textbox-transfer{
+  border-color: rgb(205, 10, 10) !important;
+}
+
+.view-results a span {
+	font-size: 20px;
+}
 
 /* .loadingScreenWindow .ui-button {
   display: none;
