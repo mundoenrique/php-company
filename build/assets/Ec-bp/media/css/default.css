@@ -7738,6 +7738,10 @@ button:active {
   border-color: rgb(205, 10, 10) !important;
 }
 
+.view-results a span {
+	font-size: 20px;
+}
+
 /* .loadingScreenWindow .ui-button {
   display: none;
 } */

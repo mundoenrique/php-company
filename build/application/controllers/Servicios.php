@@ -2028,16 +2028,6 @@ public function consultaTarjetas($urlCountry)
       "pais" =>$urlCountry
     );
 
-		// $data = array(
-		// 	"items" => $lista,
-		// 	"usuario" => $Ausuario,
-		// 	"idOperation" => $operation,
-		// 	"className" => $className,
-		// 	"logAccesoObject"=>$logAcceso,
-		// 	"token"=>$token,
-		// 	"pais" =>$urlCountry
-		// );
-
 		$data = json_encode($data, JSON_UNESCAPED_UNICODE);
 		$dataEncry = np_Hoplite_Encryption($data, 'callWScambiarEstadoemision');
 		$data = ['bean' => $dataEncry, 'pais' =>$urlCountry];
@@ -2193,34 +2183,39 @@ public function consultaTarjetas($urlCountry)
 		$response = json_decode($jsonResponse);
 
 		  if($response) {
-			if($response->rc == 0) {
-				unset(
-					$response->rc, $response->msg, $response->className, $response->token, $response->idOperation,
-					$response->logAccesoObject, $response->usuario
-				);
-				log_message('DEBUG', 'RESULTS: ' . json_encode($response));
-					return $response;
-			} else {
-				if($response->rc == -61 || $response->rc == -29){
-					$this->session->sess_destroy();
-					$codigoError = ['ERROR'=> '-29'];
-				} else{
-					$codigoError = lang('ERROR_('.$response->rc.')');
-					if(strpos($codigoError, 'Error') !== false) {
-						$codigoError = ['ERROR'=> $response->msg];
-					} else {
-						if(gettype($codigoError) == 'boolean') {
+				if($opcion == 'saldo'){
+						return $response;
+				}else {
+				if($response->rc == 0) {
+					unset(
+						$response->rc, $response->msg, $response->className, $response->token, $response->idOperation,
+						$response->logAccesoObject, $response->usuario
+					);
+					log_message('DEBUG', 'RESULTS: ' . json_encode($response));
+						return $response;
+				} else {
+					if($response->rc == -61 || $response->rc == -29){
+						$this->session->sess_destroy();
+						$codigoError = ['ERROR'=> '-29'];
+					} else{
+						$codigoError = lang('ERROR_('.$response->rc.')');
+						if(strpos($codigoError, 'Error') !== false) {
 							$codigoError = ['ERROR'=> $response->msg];
 						} else {
-							$codigoError = ['ERROR'=> lang('ERROR_('.$response->rc.')')];
+							if(gettype($codigoError) == 'boolean') {
+								$codigoError = ['ERROR'=> $response->msg];
+							} else {
+								$codigoError = ['ERROR'=> lang('ERROR_('.$response->rc.')')];
+							}
 						}
 					}
-				}
 				return $codigoError;
 			}
+		}
 		} else {
 			return $codigoError = ['ERROR'=> lang('ERROR_GENERICO_USER')];
 		}
+
 	}
 
 

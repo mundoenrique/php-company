@@ -95,6 +95,7 @@ $('#buscar').on('click', function () {
 					text: 'Aceptar',
 					class: 'novo-btn-primary-modal',
 					click: function () {
+						resett()
 						$(this).dialog("destroy");
 					}
 				}
@@ -172,9 +173,6 @@ function buscar(pgSgt) {
 				format: CryptoJSAesJson
 			}).toString(CryptoJS.enc.Utf8))
 
-			console.log(data);
-
-
 		 	$aux.dialog('destroy');
 		 if (!data.result.ERROR) {
 				$('#resultado-tarjetas').show();
@@ -244,8 +242,8 @@ function cargarResultado(data) {
 
 		$.each(data.result.detalleEmisiones, function (k, v) {
 
-			var statusEmi = v.edoEmision.split(' / ')
-
+			//var statusEmi = v.edoEmision.split('')[0]
+			var statusEmi = v.edoEmision.slice(0, v.edoEmision.indexOf("/"));
 			var valida = $.inArray(v.edoEmision, validaope) !== -1 ? 1:0;
 			var personal = [];
 			personal.push(v.nombres,v.apellidos,v.numCelular,v.email)
@@ -254,13 +252,14 @@ function cargarResultado(data) {
 			tr += '<td id="td-nombre-2" class="bp-min-width">' + v.nroTarjeta + '</td>';
 			tr += '<td class="bp-min-width">' + v.ordenS + '</td>';
 			tr += '<td class="bp-min-width">' + v.nroLote + '</td>';
-			tr += '<td class="bp-min-width">' + v.edoEmision + '</td>';
+			tr += '<td class="bp-min-width">' + statusEmi + '</td>';
 			tr += '<td class="bp-min-width">' + v.edoPlastico + '</td>';
 			tr += '<td id="td-nombre-2" class="bp-min-width">' + v.nombre.toLowerCase().replace(/(^| )(\w)/g, function (x) {
 				return x.toUpperCase();
 			}) + '</td>';
 			tr += '<td class="bp-min-width">' + v.cedula + '</td>';
-			 tr += '<td id="saldo' + v.nroTarjeta.replace(/[*]/g, "") + '" class="bp-min-width">-</td>'; //saldo
+			 tr += '<td id="saldo' + v.nroTarjeta.replace(/[*]/g, "") + '" class="bp-min-width"> - '; //saldo
+			 tr += '</td>'
 			 tr += '<td class="bp-min-width">';
 			 var operacion = ''
 			 $.each(data.result.operacioneTarjeta, function (i, j)
@@ -346,10 +345,10 @@ function paginar() {
 			}
 			$('.table-text-service tbody tr').hide();
 			$('.table-text-service .' + page).show();
-			$('#paginado-TM .jPag-pages').css('width', '350px')
+			$('#paginado-TM .jPag-pages').css('width', '600px')
 		}
 	});
-	$('#paginado-TM .jPag-pages').css('width', '350px')
+	$('#paginado-TM .jPag-pages').css('width', '600px')
 }
 
 // LIMPIAR LOS CHECK Y CAMPO CLAVE
@@ -574,7 +573,6 @@ $(".table-text-service").on('click', '#ACTUALIZAR_DATOS', function() {
 
 	var dataPersona = $(this).parents('tr').attr('personal');
 	dataPersona = dataPersona.split(',');
-	console.log(dataPersona)
 	var canvas = "<div id='dialog-confirm'>";
 	canvas += "<form name='no-form' onsubmit='return false'>";
 	canvas += '<div id="campos-transfer">';
@@ -769,6 +767,17 @@ function validarFields()
 		valPin.removeClass('textbox-transfer');
 	}
 
+	if(valCelular.val().length >= 13)
+	{
+		errorCelular.show();
+		errorCelular.html('el campo solo debe tener maximo 13 numeros')
+		validInput = false;
+		valCelular.addClass('textbox-transfer');
+	}	else{
+		errorPin.hide();
+		validInput = true;
+		valPin.removeClass('textbox-transfer');
+	}
 	 if(!numRegExp.test(valCelular.val()))
 	{
 		errorCelular.show();
@@ -984,6 +993,7 @@ function llamarWSCambio(pass,mensaje,url,op) {
 					notificacion(mensaje, data.result.ERROR,2);
 				}
 			}
+			resett()
 })
 
 }
@@ -1016,11 +1026,14 @@ $("#select-tipo-proceso").on("change", function () {
 	if(acrif !== '')
 	{
 		$('#claveMasivo, #button-masivo').prop('disabled', false);
+
 	}
 	else
 	{
 		$('#claveMasivo, #button-masivo').prop('disabled', true);
+
 	}
+
 
 });
 
@@ -1057,9 +1070,17 @@ $('#button-masivo').click(function() {
 
 // MOSTRAR EL SALDO DISPONIBLE PARA CADA TARJETA LUEGO DE CONSULTAR
 function mostrar_saldo(data) {
-	$.each(data.listadoTarjetas.lista, function(k, t) {
-		if (t.saldos !== undefined)
-			$('#saldo' + t.noTarjetaConMascara.replace(/[*]/g, "")).text((t.saldos.disponible));
+	$.each(JSON.parse(data.result.bean), function(k, t) {
+
+		if (t.saldo !== undefined)
+		{
+			$('#saldo' + t.numeroTarjeta.replace(/[*]/g, "")).text((t.saldo));
+
+		}	else{
+			$('#saldo' + t.numeroTarjeta.replace(/[*]/g, "")).empty();
+			$('#saldo' + t.numeroTarjeta.replace(/[*]/g, "")).append('<span title="'+t.msgNovoTrans+'"  class="icon" data-icon="&#xe04b;"></span>');
+		}
+
 	});
 }
 
