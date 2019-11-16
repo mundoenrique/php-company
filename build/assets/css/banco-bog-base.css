@@ -2719,7 +2719,8 @@ a.ui-button:active,
 }
 
 .products {
-	height: 328px !important;
+	min-height: 328px !important;
+	max-width: 1700px !important;
 }
 
 .product {
