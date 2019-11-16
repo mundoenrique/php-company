@@ -51,12 +51,19 @@ class Verify_Access {
 	public function createRequest($user)
 	{
 		log_message('INFO', 'NOVO Verify_Access: createRequest method initialized');
-
 		foreach ($_POST AS $key => $value) {
 			switch($key) {
 				case 'request':
 				case 'plot':
 				case 'ceo_name':
+					continue;
+				case 'currenTime':
+					$time = strtotime($value.' UTC');
+					$dateInLocal = date("H", $time);
+					$this->CI->session->set_userdata('greeting', $dateInLocal);
+					continue;
+				case 'screenSize':
+					$this->CI->session->set_userdata('screenSize', $value);
 					continue;
 				default:
 				$this->requestServ->$key = $value;

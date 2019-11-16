@@ -57,14 +57,14 @@ class NOVO_Controller extends CI_Controller {
 		$this->form_validation->set_error_delimiters('', '---');
 		$this->config->set_item('language', 'spanish-base');
 		switch ($this->greeting) {
-			case $this->greeting < 12 && $this->greeting >= 0:
-				$this->render->greeting = lang('GEN_MORNING');
+			case $this->greeting >= 19 && $this->greeting <= 23:
+				$this->render->greeting = lang('GEN_EVENING');
 				break;
 			case $this->greeting >= 12 && $this->greeting < 19:
 				$this->render->greeting = lang('GEN_AFTERNOON');
 				break;
-			case $this->greeting >= 19 && $this->greeting <= 23:
-				$this->render->greeting = lang('GEN_EVENING');
+			case $this->greeting < 12 && $this->greeting >= 0:
+				$this->render->greeting = lang('GEN_MORNING');
 				break;
 		}
 		if($this->input->is_ajax_request()) {

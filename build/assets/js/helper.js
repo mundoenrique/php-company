@@ -12,6 +12,8 @@ var loader = $('#loader').html();
 var prefixCountry = country !== 'bp' ? 'Empresas Online ' : '';
 var settingsCountry = { bp: 'Conexión Empresas', co: 'Colombia', pe: 'Perú', us: 'Perú', ve: 'Venezuela' };
 var strCountry = settingsCountry[country];
+var currenTime = new Date();
+var screenSize = screen.width;
 var verb, who, where, data, title, msg, icon, dataResponse;
 $('input[type=text], input[type=password], input[type=email]').attr('autocomplete', 'off');
 /**
@@ -23,7 +25,8 @@ function callNovoCore(verb, who, where, request, _response_) {
 	var ceo_cook = decodeURIComponent(
 		document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 	);
-	request.currentime = new Date();
+	request.currenTime = currenTime;
+	request.screenSize = screenSize;
 	var dataRequest = JSON.stringify({
 		who: who,
 		where: where,
@@ -141,4 +144,9 @@ function createButton(dialogMoldal, elementBotton, valuesButton){
 function getPropertyOfElement(property, element) {
 	var element = element || 'body';
 	return $(element).attr(property);
+}
+var form = $('form').attr('method')
+if(form) {
+	$('form').append(`<input type="hidden" name="currenTime" value="${currenTime}"></input>`);
+	$('form').append(`<input type="hidden" name="screenSize" value="${screenSize}"></input>`);
 }
