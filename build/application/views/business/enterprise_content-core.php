@@ -62,7 +62,7 @@
 
 <div id="enterprise-pages" class="visible">
 	<div class="pagination page-number flex mb-5 py-5 flex-auto justify-center">
-		<nav id="first-pages" class="h4">
+		<nav class="h4">
 			<?php if($recordsPage >= 2): ?>
 			<a href="javascript:" position="first"><?= lang('ENTERPRISE_FIRST_PAGE'); ?></a>
 			<a href="javascript:" position="minus">««</a>
@@ -76,7 +76,7 @@
 			</span>
 			<?php endfor; ?>
 		</div>
-		<nav id="last-pages" class="h4">
+		<nav class="h4">
 			<a href="javascript:" position="next">»</a>
 			<?php if($recordsPage >= 2): ?>
 			<a href="javascript:" position="plus">»»</a>
