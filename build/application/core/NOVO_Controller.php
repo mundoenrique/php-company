@@ -110,8 +110,6 @@ class NOVO_Controller extends CI_Controller {
 			$this->render->countryUri = $this->countryUri;
 			$this->render->novoName = $this->security->get_csrf_token_name();
 			$this->render->novoCook = $this->security->get_csrf_hash();
-			$this->render->mainHtmlOpen = lang('GEN_HTML_OPEN_MAIN');
-			$this->render->mainHtmlClose = lang('GEN_HTML_CLOSE_MAIN');
 			$this->session->set_userdata('countryUri', $this->countryUri);
 			switch($this->countryUri) {
 				case 'bp':
