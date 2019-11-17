@@ -372,7 +372,7 @@ textarea.form-control {
 	background-color: var(--secondary);
   border-bottom: 1px solid var(--border-color);
 	transition: all 0.1ms ease-in-out;
-	appearance: none;
+	color: var(--placeholder-color);
 }
 
 .select-box option:first-child {
