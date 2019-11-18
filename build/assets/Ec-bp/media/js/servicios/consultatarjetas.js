@@ -974,9 +974,9 @@ function llamarWSCambio(pass,mensaje,url,op) {
 			data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 
 			$aux.dialog("destroy");
-
-			if (!data.result.ERROR) {
-
+			if(data.result.rc == -1){
+				notificacion(mensaje, 'La contraseña es incorrecta. Por favor verifícala e intenta de nuevo.', reload);
+			} else if (!data.result.ERROR) {
 				var reload = 1;
 				if(op == 'saldo')
 				{
@@ -1072,6 +1072,9 @@ $('#button-masivo').click(function() {
 // MOSTRAR EL SALDO DISPONIBLE PARA CADA TARJETA LUEGO DE CONSULTAR
 function mostrar_saldo(data) {
 	$.each(JSON.parse(data.result.bean), function(k, t) {
+
+		console.log(k)
+		console.log(t)
 
 		if (t.saldo !== undefined)
 		{
