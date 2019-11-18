@@ -54,7 +54,8 @@ class Business extends NOVO_Controller {
 		array_push(
 			$this->includeAssets->jsFiles,
 			"option-search",
-			"business/widget-enterprise"
+			"business/widget-enterprise",
+			"business/products"
 		);
 
 		if($this->session->userdata('getProducts') && $this->request->idFiscal == $this->session->userdata('getProducts')->idFiscal) {
@@ -62,7 +63,7 @@ class Business extends NOVO_Controller {
 			$this->request->enterpriseName = $this->session->userdata('getProducts')->enterpriseName;
 		}
 
-		$this->views = ['business/'.$view];
+
 		$responseList = $this->loadModel($this->request);
 
 		if($responseList->code === 0) {
@@ -82,13 +83,17 @@ class Business extends NOVO_Controller {
 		$this->render->widget =  new stdClass();
 		$this->render->widget->enterpriseData =  $responseList->data->widget;
 		$this->render->widget->enterpriseList =  $enterpriseList;
-
+		$this->views = ['business/'.$view];
 		$this->loadView($view);
 	}
 
-	public function showDetailProduct()
+	public function getProductDetail()
 	{
-
+		log_message('INFO', 'NOVO Business: getProducts Method Initialized');
+		$view = 'product-detail';
+		$this->render->titlePage = "Detalle del producto";
+		$this->views = ['business/'.$view];
+		$this->loadView($view);
 	}
 
 }

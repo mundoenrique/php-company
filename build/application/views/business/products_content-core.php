@@ -48,7 +48,7 @@
 				</div>
 			</div>
 			<div>
-				<button class="btn btn-primary btn-small flex mx-auto">
+				<button class="product-detail btn btn-primary btn-small flex mx-auto">
 					Seleccionar
 				</button>
 			</div>
@@ -61,6 +61,4 @@
 		<?php endif; ?>
 	</div>
 </div>
-<div>
 <div class="flex my-5 flex-auto justify-center"></div>
-<form id="get_products_detail" action="<?= base_url('detalle-producto') ?>" method="POST"></form>
