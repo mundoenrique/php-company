@@ -4,7 +4,7 @@
 		<span class="h5 semibold center primary truncate"><?= $enterpriseData->enterpriseName ?></span>
 		<span class="my-2 h5 regular text"><?= lang('GEN_FISCAL_REGISTRY').' '.$enterpriseData->idFiscal ?></span>
 		<form id="enterprise-widget-form" action="<?= base_url('productos') ?>" method="POST">
-			<select id="enterprise-select" class="select-box custom-select mt-3 mb-4 h6">
+			<select id="enterprise-select" class="select-box custom-select mt-3 mb-4 h6 w-100">
 				<option selected disabled>Seleccionar otra empresa</option>
 				<?php foreach($enterpriseList AS $enterprise) : ?>
 				<?php if($enterprise->acnomcia == $enterpriseData->enterpriseName): ?>
