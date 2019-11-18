@@ -674,8 +674,9 @@ function validarFields()
 	spaceString('#clave')
 
 	var camposValid = ''
-			msgValido = ''
-			validInput = true
+			msgValido = '';
+			validInput = true;
+			nomRegExp = /^[a-z]$/i;
 			descRegExp = /^['a-z0-9ñáéíóú ,.:()']+$/i
 			emailRegExp = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
 			numRegExp = /^\d+$/
@@ -687,10 +688,10 @@ function validarFields()
 		validInput = false;
 		valNombre.addClass('textbox-transfer');
 	}
-	else if(!descRegExp.test(valNombre.val()))
+	else if(!nomRegExp.test(valNombre.val()))
 	{
 		errorName.show();
-		errorName.html('No se admiten caracteres especiales')
+		errorName.html('No se admiten números')
 		validInput = false;
 		valNombre.addClass('textbox-transfer');
 	}
@@ -707,10 +708,10 @@ function validarFields()
 		validInput = false;
 		valApellidos.addClass('textbox-transfer');
 	}
-	else if(!descRegExp.test(valApellidos.val()))
+	else if(!nomRegExp.test(valApellidos.val()))
 	{
 		errorApellido.show();
-		errorApellido.html('No se admiten caracteres especiales')
+		errorApellido.html('No se admiten números')
 		validInput = false;
 		valApellidos.addClass('textbox-transfer');
 	}
