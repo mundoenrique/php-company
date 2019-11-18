@@ -31,13 +31,32 @@ class Novo_Business_Model extends NOVO_Model {
 		$this->dataAccessLog->function = 'Empresas';
 		$this->dataAccessLog->operation = 'lista de empresas';
 
-		$this->dataRequest->idOperation = 'listaEmpresas';
+		$screenSize = $this->session->userdata('screenSize');
+
+		switch ($screenSize) {
+			case $screenSize >= 1920:
+				$sizePage = 12;
+				break;
+			case $screenSize >= 1440:
+				$sizePage = 10;
+				break;
+			case $screenSize >= 1200:
+				$sizePage = 8;
+				break;
+			case $screenSize >= 992:
+				$sizePage = 6;
+			break;
+			default:
+				$sizePage = 4;
+		}
+
+		$this->dataRequest->idOperation = 'listaEmpresas';//!$dataRequest ? 'listaEmpresas' : 'getPaginar';
 		$this->dataRequest->accodusuario = $this->session->userdata('userName');
 		$this->dataRequest->paginaActual = 1;
 		$this->dataRequest->paginar = FALSE;
-		$this->dataRequest->tamanoPagina = 10;
+		$this->dataRequest->tamanoPagina = $sizePage;
 		$this->dataRequest->filtroEmpresas = '';
-
+		log_message('INFO', '--------------------------'.$screenSize.'---'.$sizePage);
 		$response = $this->sendToService('getEnterprises');
 		$responseList = new stdClass();
 
@@ -45,7 +64,8 @@ class Novo_Business_Model extends NOVO_Model {
 			case 0:
 				$this->response->code = 0;
 
-				$enterpriseList = $this->OrderEnterpriseList($response->listadoEmpresas->lista, $dataRequest);
+				$enterpriseList = $response->listadoEmpresas->lista;//!$dataRequest ? $response->listadoEmpresas->lista : $response->lista;
+				$enterpriseList = $this->OrderEnterpriseList($enterpriseList, $dataRequest);
 				$responseList->list = $enterpriseList->list;
 				if(!$dataRequest) {
 					$responseList->filters = $enterpriseList->filters;
@@ -112,10 +132,14 @@ class Novo_Business_Model extends NOVO_Model {
 		$itemAlphaBeFif = 1; $itemAlphaBeSi = 1; $itemAlphaBeSev = 1;
 		$pageAlphaBeFi = 1; $pageAlphaBeSec = 1; $pageAlphaBeTh = 1;  $pageAlphaBeFo = 1;
 		$pageAlphaBeFif = 1; $pageAlphaBeSi = 1; $pageAlphaBeSev = 1;
+		$delete =  [];
 		foreach($enterpriseList AS $pos => $enterprises) {
 			foreach($enterprises AS $key => $value) {
 				$enterpriseList[$pos]->$key = trim($value);
 				if($dataRequest) {
+					if($key === 'resumenProductos' && $value == 0) {
+						$delete[] = $pos;
+					}
 					continue;
 				}
 				if($item > $this->dataRequest->tamanoPagina) {
@@ -126,13 +150,13 @@ class Novo_Business_Model extends NOVO_Model {
 				$enterpriseList[$pos]->page = 'page_'.$page;
 
 				if($key === 'resumenProductos') {
-					$enterpriseList[$pos]->resumenProductos = $enterpriseList[$pos]->resumenProductos == 1 ?
-					$enterpriseList[$pos]->resumenProductos.' '.lang('GEN_PRODUCT') :
-					$enterpriseList[$pos]->resumenProductos.' '.lang('GEN_PRODUCTS');
+					$enterpriseList[$pos]->resumenProductos = $value == 1 ?
+					$value.' '.lang('GEN_PRODUCT') :
+					$value.' '.lang('GEN_PRODUCTS');
 				}
 
 				if($key === 'acpercontac') {
-					$enterpriseList[$pos]->acpercontac = ucwords(mb_strtolower($enterpriseList[$pos]->acpercontac));
+					$enterpriseList[$pos]->acpercontac = ucwords(mb_strtolower($value));
 				}
 
 				if($key === 'acnomcia') {
@@ -217,7 +241,14 @@ class Novo_Business_Model extends NOVO_Model {
 			$item++;
 		}
 
+		if($dataRequest) {
+			foreach($delete AS $pos) {
+				unset($enterpriseList[$pos]);
+			}
+		}
+
 		$responseList->list = $enterpriseList;
+
 		if(!$dataRequest) {
 			$responseList->filters = $filters;
 		}
@@ -252,18 +283,49 @@ class Novo_Business_Model extends NOVO_Model {
 
 		switch($this->isResponseRc) {
 			case 0:
-				log_message('DEBUG', 'NOVO ['.$this->userName.'] RESPONSE getProducts: '.json_encode($response));
 				$this->session->set_userdata('getProducts', $dataRequest);
 
 				$responseList = new stdClass();
 				$responseList->widget = $dataRequest;
+				$responseList->productList = $response;
 				$this->response->code = 0;
-				$this->response->data = $responseList;
+				foreach($response->productos AS $pos => $products) {
+					foreach($products AS $key => $value) {
+						switch ($key) {
+							case 'nombre':
+								$value = url_title(mb_strtolower($value)).'.svg';
+								if(!file_exists(assetPath('images/programs/'.$value))) {
+									$value = 'default.svg';
+								}
+								$products->programImg = $value;
+							break;
+							case 'descripcion':
+								$products->$key = mb_strtoupper($value);
+								break;
+								case 'categoria':
+								$products->$key = ucwords(mb_strtolower($value));
+							break;
+							case 'filial':
+								$products->$key = mb_strtoupper($value);
+								break;
+							case 'marca':
+								$value = mb_strtolower($value).'.png';
+								if(!file_exists(assetPath('images/brands/'.$value))) {
+									$value = 'default.png';
+								}
+								$products->imgBrand = $value;
+								break;
+							}
+						}
+
+					}
+					log_message('DEBUG', 'NOVO ['.$this->userName.'] RESPONSE getProducts: '.json_encode($response));
+					$this->response->data = $responseList;
 				break;
 
+			}
+
+			return $this->response;
 		}
 
-		return $this->response;
 	}
-
-}

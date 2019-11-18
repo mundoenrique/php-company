@@ -1,12 +1,12 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
-<span class="primary">Selección de producto</span>
+<h1 class="primary h3 regular">Selección de producto</h1>
 <div class="flex mb-2 items-center light">
 	<div class="flex tertiary">
 		<nav class="main-nav nav-inferior">
 			<ul class="mb-0 h6 light tertiary list-style-none list-inline">
-				<li class="inline"><a class="tertiary" href="#">Inicio /</a></li>
-				<li class="inline"><a class="tertiary" href="#">Empresas /</a></li>
-				<li class="inline"><a class="tertiary" href="#">Productos</a></li>
+				<li class="inline"><a class="tertiary" href="ceo_dashboard.html">Inicio /</a></li>
+				<li class="inline"><a class="tertiary" href="ceo_dashboard.html">Empresas /</a></li>
+				<li class="inline"><a class="tertiary" href="ceo_product.html">Productos</a></li>
 			</ul>
 		</nav>
 	</div>
@@ -17,48 +17,34 @@
 		<button class="btn btn-outline btn-small btn-rounded-left bg-white">TODOS</button>
 		<select class="select-box custom-select mr-0 h6">
 			<option selected disabled>Buscar por categorias</option>
-      <option>Option 1</option>
-      <option>Option 2</option>
-      <option>Option 3</option>
-    </select>
-    <select class="select-box custom-select h6">
-    	<option selected disabled>Buscar por marca</option>
-      <option>Option 1</option>
-      <option>Option 2</option>
-      <option>Option 3</option>
+			<?php foreach($categories AS $categorie): ?>
+			<option value="<?= $categorie->idCategoria; ?>"><?= $categorie->descripcion; ?></option>
+			<?php endforeach; ?>
+		</select>
+		<select class="select-box custom-select h6">
+			<option selected disabled>Buscar por marca</option>
+			<?php foreach($brands AS $brand): ?>
+			<option value="<?= $brand->idMarca; ?>"><?= $brand->nombre; ?></option>
+			<?php endforeach; ?>
 		</select>
 		<div id="sb-search" class="sb-search">
 			<input id="search" class="sb-search-input" type="search" name="search" value="" placeholder="Buscar...">
-      <span class="sb-icon-search"><i class="icon icon-find"></i></span>
-    </div>
+			<span class="sb-icon-search"><i class="icon icon-find"></i></span>
+		</div>
 	</div>
 </div>
 <div class="line mt-1"></div>
 
 <div class="flex mt-4 mx-4 flex-wrap justify-between">
-	<div>
-		<div class="select-product flex mb-1 pl-3 pr-4 py-1 bg-white justify-between items-center flex-wrap">
+	<div class="flex-auto">
+		<?php foreach($productList AS $pos => $products): ?>
+		<div class="select-product flex mb-1 mr-5 pl-3 pr-4 py-1 bg-white justify-between items-center">
 			<div class="flex mr-3 mx-1 items-center">
-				<img src="<?= $this->asset->insertFile($countryUri.'/img-card_blue.svg'); ?>" alt="" />
-				<img class="mx-2" src="<?= $this->asset->insertFile($countryUri.'/logo_visa.svg'); ?>" alt="" />
+				<img src="<?= $this->asset->insertFile('programs/'.$products->programImg); ?>" alt="" />
+				<img class="mx-2" src="<?= $this->asset->insertFile('brands/'.$products->imgBrand); ?>" alt="" />
 				<div class="flex flex-column">
-					<span class="h5 semibold primary">PREPAGO B-BOGOTÁ</span>
-					<span class="h6 light text">BANCO BOGOTÁ / Recursos Humano</span>
-				</div>
-			</div>
-			<div>
-				<a class="btn btn-primary btn-small flex mx-auto" href="ceo_product_lots.html">
-					Seleccionar
-				</a>
-			</div>
-		</div>
-		<div class="select-product flex mb-1 pl-3 pr-4 py-1 bg-white justify-between items-center flex-wrap">
-			<div class="flex mr-3 mx-1 items-center">
-				<img src="<?= $this->asset->insertFile($countryUri.'/img-card_gray.svg'); ?>" alt="" />
-				<img class="mx-2" src="<?= $this->asset->insertFile($countryUri.'/logo_visa.svg'); ?>" alt="" />
-				<div class="flex flex-column">
-					<span class="h5 semibold primary">PREPAGO B-BOGOTÁ</span>
-					<span class="h6 light text">BANCO BOGOTÁ / Recursos Humano</span>
+					<span class="h5 semibold primary"><?= $products->descripcion ?></span>
+					<span class="h6 light text"><?= $products->filial ?> / <?= $products->categoria ?></span>
 				</div>
 			</div>
 			<div>
@@ -67,12 +53,14 @@
 				</button>
 			</div>
 		</div>
+		<?php endforeach; ?>
 	</div>
 	<div>
-	<?php if($widget): ?>
+		<?php if($widget): ?>
 		<?php $this->load->view('widget/widget_enterprise-product_content'.$newViews, $widget) ?>
-	<?php endif; ?>
+		<?php endif; ?>
 	</div>
 </div>
 <div>
 <div class="flex my-5 flex-auto justify-center"></div>
+<form id="get_products_detail" action="<?= base_url('detalle-producto') ?>" method="POST"></form>

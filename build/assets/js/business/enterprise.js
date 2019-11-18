@@ -1,4 +1,5 @@
 'use strict'
+var contar = false;
 $(function () {
 	var filterPage;
 	var enterpriseListEvent = $('#enterprise-list');
@@ -27,7 +28,7 @@ $(function () {
 			$(event.currentTarget).removeClass('visible');
 			enterprisePages.removeClass('visible');
 		} else {
-			noEnterprise.children('div>span').text(lan.ENTERPRISE_NOT_ASSIGNED)
+			noEnterprise.find('span').text(lang.ENTERPRISE_NOT_ASSIGNED);
 		}
 	});
 
@@ -47,20 +48,11 @@ $(function () {
 		$(this).addClass('current-outline');
 		filterPage = $(this).attr('filter-page');
 		if(filterPage) {
-			orderPage(filterPage);
+			orderPage(filterPage, 1);
 			paginateList(filterPage);
 			enterpriseList.isotope({ filter: '.'+filterPage });
 		}
 	});
-
-	/* showPage.on('click', 'a', function(e) {
-		e.preventDefault();
-		$(this).parents().children().removeClass('page-current');
-		$(this).parent().addClass('page-current');
-		filterPage = $(this).attr('filter-page');
-		orderPage(filterPage);
-		enterpriseList.isotope({ filter: '.'+filterPage });
-	}); */
 
 	enterprisePages.on('click', function(e) {
 		e.preventDefault();
@@ -74,10 +66,8 @@ $(function () {
 				currentPage: parseInt($(this).find('.page-current').children().text()),
 				currentFilter: $(this).find('.page-current').children().attr('filter-page'),
 			}
-
 			renderpage[position](paginateEvent);
 		}
-
 	});
 
 	const renderpage = {
@@ -117,6 +107,17 @@ $(function () {
 		}
 	}
 
+	$('#enterprise-pages a[position="plus"]').on('mouseover', function() {
+		contar = true;
+		console.log('over')
+		pasarpage(1, 1000, 'casa_')
+	});
+
+	$('#enterprise-pages a[position="plus"]').on('mouseleave', function() {
+		contar = false;
+		console.log('leave')
+	});
+
 	var orderPage = function(filterPage, newpage) {
 		var reg = $('.'+filterPage).length;
 		if(reg < 5) {
@@ -130,8 +131,7 @@ $(function () {
 	}
 
 	var paginateList = function(filterOrder) {
-		var shwoPage = $('#show-page');
-		shwoPage.children().remove();
+		showPage.children().remove();
 		filterOrder = filterOrder.split('_')[0];
 		var classU = '';
 		var page = 1, classElement, init, finish, substr;
@@ -143,7 +143,7 @@ $(function () {
 			classElement = classElement.substring(init, finish + 2);
 			if(filterOrder == substr && classU !== classElement) {
 				classU = classElement;
-				shwoPage.append(`<span class="mx-1"><a href="javascript:" position="page" filter-page="${filterOrder}_">${page}</a></span>`);
+				showPage.append(`<span class="mx-1"><a href="javascript:" position="page" filter-page="${filterOrder}_">${page}</a></span>`);
 				page++;
 			}
 		})
@@ -151,11 +151,9 @@ $(function () {
 	};
 
 	$('.product').hover(function() {
-
 		if ($(this).find('span.danger').length) {
 			$(this).css('cursor', 'default')
 		}
-
 	});
 
 	$('.product').on('click', function() {
@@ -181,3 +179,19 @@ $(function () {
 		}
 	});
 });
+
+function pasarpage(current, total, filtro)
+{
+	var paginateEvent = {
+		pagesTotal: parseInt($(this).find('#show-page > span').length),
+		currentPage: parseInt($(this).find('.page-current').children().text()),
+		currentFilter: $(this).find('.page-current').children().attr('filter-page'),
+	}
+	if(current <= total && contar)
+	{
+		console.log(current++, filtro+current)
+		pasarpage(current, total, filtro)
+
+	}
+
+}

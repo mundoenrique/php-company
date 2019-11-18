@@ -53,17 +53,35 @@ class Business extends NOVO_Controller {
 
 		array_push(
 			$this->includeAssets->jsFiles,
-			"option-search"
+			"option-search",
+			"business/widget-enterprise"
 		);
-		if($this->session->userdata('getProducts')) {
+
+		if($this->session->userdata('getProducts') && $this->request->idFiscal == $this->session->userdata('getProducts')->idFiscal) {
 			$this->request->idFiscal = $this->session->userdata('getProducts')->idFiscal;
 			$this->request->enterpriseName = $this->session->userdata('getProducts')->enterpriseName;
 		}
 
 		$this->views = ['business/'.$view];
 		$responseList = $this->loadModel($this->request);
+
+		if($responseList->code === 0) {
+			$this->load->model('Novo_Business_Model', 'Business');
+			$enterpriseList = $this->Business->callWs_getEnterprises_Business(TRUE);
+
+			if($enterpriseList->code == 0) {
+				$enterpriseList = $enterpriseList->data->list;
+			}
+
+		}
+
 		$this->render->titlePage = "Productos";
-		$this->render->widget =  $responseList->data->widget;
+		$this->render->brands = $responseList->data->productList->listaMarcas;
+		$this->render->categories = $responseList->data->productList->listaCategorias;
+		$this->render->productList = $responseList->data->productList->productos;
+		$this->render->widget =  new stdClass();
+		$this->render->widget->enterpriseData =  $responseList->data->widget;
+		$this->render->widget->enterpriseList =  $enterpriseList;
 
 		$this->loadView($view);
 	}

@@ -14,7 +14,7 @@ var settingsCountry = { bp: 'Conexión Empresas', co: 'Colombia', pe: 'Perú', u
 var strCountry = settingsCountry[country];
 var currenTime = new Date();
 var screenSize = screen.width;
-var verb, who, where, data, title, msg, icon, dataResponse;
+var verb, who, where, data, title, msg, icon, dataResponse, ceo_cook;
 $('input[type=text], input[type=password], input[type=email]').attr('autocomplete', 'off');
 /**
  * @info Llama al core del servidor
@@ -22,7 +22,7 @@ $('input[type=text], input[type=password], input[type=email]').attr('autocomplet
  * @date 15/04/2019
  */
 function callNovoCore(verb, who, where, request, _response_) {
-	var ceo_cook = decodeURIComponent(
+	ceo_cook = decodeURIComponent(
 		document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 	);
 	request.currenTime = currenTime;
@@ -147,6 +147,12 @@ function getPropertyOfElement(property, element) {
 }
 var form = $('form').attr('method')
 if(form) {
-	$('form').append(`<input type="hidden" name="currenTime" value="${currenTime}"></input>`);
-	$('form').append(`<input type="hidden" name="screenSize" value="${screenSize}"></input>`);
+	$('button').not('.btn-options').on('click', function() {
+		ceo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
+		$('form').append(`<input type="hidden" name="ceo_name" value="${ceo_cook}"></input>`);
+		$('form').append(`<input type="hidden" name="currenTime" value="${currenTime}"></input>`);
+		$('form').append(`<input type="hidden" name="screenSize" value="${screenSize}"></input>`);
+	})
 }
