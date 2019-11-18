@@ -2048,6 +2048,8 @@ public function consultaTarjetas($urlCountry)
 				if($response->rc == -61 || $response->rc == -29){
 					$this->session->sess_destroy();
 					$codigoError = ['ERROR'=> '-29'];
+				}else if($response->rc==-1){
+					$codigoError = array('ERROR' => lang('MSG_INVALID_PASS'), "rc"=> $response->rc);
 				} else{
 					$codigoError = lang('ERROR_('.$response->rc.')');
 					if(strpos($codigoError, 'Error') !== false) {
@@ -2197,6 +2199,8 @@ public function consultaTarjetas($urlCountry)
 					if($response->rc == -61 || $response->rc == -29){
 						$this->session->sess_destroy();
 						$codigoError = ['ERROR'=> '-29'];
+					}else if($response->rc==-1){
+						$codigoError = array('ERROR' => lang('MSG_INVALID_PASS'), "rc"=> $response->rc);
 					} else{
 						$codigoError = lang('ERROR_('.$response->rc.')');
 						if(strpos($codigoError, 'Error') !== false) {
