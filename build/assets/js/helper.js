@@ -145,14 +145,17 @@ function getPropertyOfElement(property, element) {
 	var element = element || 'body';
 	return $(element).attr(property);
 }
-var form = $('form').attr('method')
-if(form) {
-	$('button').not('.btn-options').on('click', function() {
+
+function insertFormInput(form) {
+	$('button, select').prop('disabled', true);
+	if(form.attr('method')) {
 		ceo_cook = decodeURIComponent(
 			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 		);
-		$('form').append(`<input type="hidden" name="ceo_name" value="${ceo_cook}"></input>`);
-		$('form').append(`<input type="hidden" name="currenTime" value="${currenTime}"></input>`);
-		$('form').append(`<input type="hidden" name="screenSize" value="${screenSize}"></input>`);
-	})
+		currenTime = new Date();
+		screenSize = screen.width;
+		form.append(`<input type="hidden" name="ceo_name" value="${ceo_cook}"></input>`);
+		form.append(`<input type="hidden" name="currenTime" value="${currenTime}"></input>`);
+		form.append(`<input type="hidden" name="screenSize" value="${screenSize}"></input>`);
+	}
 }
