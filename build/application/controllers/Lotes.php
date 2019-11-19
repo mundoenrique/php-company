@@ -1131,7 +1131,7 @@ class Lotes extends CI_Controller {
 				if($urlCountry == 'Ec-bp') {
 					$moduloActTebAut = np_hoplite_existeLink($menuP,"TEBAUT");
 					$moduloActTebOrs = np_hoplite_existeLink($menuP,"TEBORS");
-					$moduloAct = $moduloActTebAut || $moduloActTebOrs;
+					$moduloAct = $moduloActTebAut !== FALSE || $moduloActTebOrs !== FALSE
 				}
 
         if($paisS==$urlCountry && $logged_in && $moduloAct!==false){
@@ -1227,7 +1227,7 @@ class Lotes extends CI_Controller {
 				if($urlCountry == 'Ec-bp') {
 					$moduloActTebAut = np_hoplite_existeLink($menuP,"TEBAUT");
 					$moduloActTebOrs = np_hoplite_existeLink($menuP,"TEBORS");
-					$moduloAct = $moduloActTebAut || $moduloActTebOrs;
+					$moduloAct = $moduloActTebAut !== FALSE || $moduloActTebOrs !== FALSE;
 				}
 
         if($paisS==$urlCountry && $logged_in && $moduloAct!==false){
