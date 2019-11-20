@@ -124,7 +124,7 @@ class Innominadas_Model extends CI_Model {
 		$idOperation = "generarReporteTarjetasInnominadas";
 		$classname = "com.novo.objects.MO.ListadoLotesMO";
 		$canal = "ceo";
-		$modulo = "generarReporteTarjetasInnominadas";
+		$modulo = "ReporteTarjetasInnominadas";
 		$funcion = "ReporteTarjetasInnominadas";
 		$operation = "ReporteTarjetasInnominadas";
 
