@@ -372,7 +372,7 @@ textarea.form-control {
 	background-color: var(--secondary);
   border-bottom: 1px solid var(--border-color);
 	transition: all 0.1ms ease-in-out;
-	color: var(--placeholder-color);
+	color: var(--text-color);
 }
 
 .select-box option:first-child {
@@ -869,6 +869,17 @@ textarea.form-control {
 
 .btn-secondary:disabled{
 	opacity: .5;
+}
+
+/* Btn-Link */
+
+.btn-link {
+	text-decoration: underline;
+}
+
+.btn-link:hover {
+	color: var(--tertiary);
+	text-decoration: underline;
 }
 
 /* sizes */
@@ -2168,7 +2179,7 @@ i[class*=" icon-"]:before {
 .main-nav-user  > li:hover:not(.page-current) > a {
 	-webkit-transition: all .4s ease;
 	transition: all .4s ease;
-	text-shadow: 0 0 #012c71;
+	text-shadow: 0 0 var(--primary);
 }
 
 .page-number span:hover::before,
@@ -3005,6 +3016,12 @@ a.ui-button:active,
 	max-width: 815px;
   height: 70px;
   box-shadow: 1px 1px 2px 0 rgba(0,0,0,.2);
+}
+
+@media (min-width: 1024px) {
+	.select-product {
+		margin-right: var(--space-3);
+	}
 }
 
 .product-presentation {

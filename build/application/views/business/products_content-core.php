@@ -38,7 +38,7 @@
 <div class="flex mt-4 mx-4 flex-wrap justify-between">
 	<div class="flex-auto">
 		<?php foreach($productList AS $pos => $products): ?>
-		<div class="select-product flex mb-1 mr-5 pl-3 pr-4 py-1 bg-white justify-between items-center">
+		<div class="select-product flex mb-1 pl-3 pr-4 py-1 bg-white justify-between items-center">
 			<div class="flex mr-3 mx-1 items-center">
 				<img src="<?= $this->asset->insertFile('programs/'.$products->programImg); ?>" alt="" />
 				<img class="mx-2" src="<?= $this->asset->insertFile('brands/'.$products->imgBrand); ?>" alt="" />
@@ -48,7 +48,7 @@
 				</div>
 			</div>
 			<div>
-				<button class="product-detail btn btn-primary btn-small flex mx-auto">
+				<button class="product-detail btn btn-primary btn-small flex mx-auto justify-center">
 					Seleccionar
 				</button>
 			</div>

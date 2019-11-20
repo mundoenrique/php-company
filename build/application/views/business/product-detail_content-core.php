@@ -15,8 +15,9 @@
 <div class="flex mt-1 flex-wrap justify-between">
 	<div class="flex flex-auto flex-column">
 		<div class="flex mb-3 mx-4 justify-center">
-			<div class="card-image">
-				<img src="<?= $this->asset->insertFile($countryUri.'/img-card_blue.svg'); ?>" alt="" />
+			<div class="product-presentation relative">
+				<img class="card-image" src="<?= $this->asset->insertFile($countryUri.'/img-card_blue.svg'); ?>" alt="Card-Image" />
+				<img class="item-network" src="<?= $this->asset->insertFile($countryUri.'/logo_visa_white.svg'); ?>" alt="Logo-Visa" />
 			</div>
 		</div>
 
@@ -26,14 +27,13 @@
 				<span class="h5 light">Prepago B-Bogotá - Visa</span>
 			</div>
 
-			<div class="flex mt-3 flex-column ">
-				<a class="btn btn-small-xs underline" href="ceo_load_lots.html">Cargar Lotes</a>
-				<a class="btn btn-small-xs underline" href="ceo_authorization_lots.html">Lotes: 6 (3 Por firmar / 1 Por
-					autorizar)</a>
-				<a class="btn btn-small-xs underline" href="ceo_service_orders.html">Órdenes de servicio: 11 No conciliadas
-					/ 0 Conciliadas</a>
-				<a class="btn btn-small-xs underline">Tarjetas: 119 Activas / 0 Inactivas</a>
+			<div class="flex mt-3 flex-column items-start">
+				<a class="btn btn-link btn-small-xs mx-4 px-0" href="ceo_load_lots.html">Cargar Lotes</a>
+        <a class="btn btn-link btn-small-xs mx-4 px-0" href="ceo_authorization_lots.html">Lotes: 6 (3 Por firmar / 1 Por autorizar)</a>
+        <a class="btn btn-link btn-small-xs mx-4 px-0" href="ceo_service_orders.html">Órdenes de servicio: 11 No conciliadas / 0 Conciliadas</a>
+        <a class="btn btn-link btn-small-xs mx-4 px-0">Tarjetas: 119 Activas / 0 Inactivas</a>
 			</div>
+
 		</div>
 	</div>
 	<div>
