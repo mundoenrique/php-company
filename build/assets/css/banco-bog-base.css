@@ -882,6 +882,13 @@ textarea.form-control {
 	text-decoration: underline;
 }
 
+/* Btn-Loading */
+
+.btn-loading {
+	width: 120px;
+	height: 32px;
+}
+
 /* sizes */
 
 .btn-small {
@@ -1785,17 +1792,12 @@ i[class*=" icon-"]:before {
 }
 
 .spinner-border {
-  display: inline-block;
-  width: 2rem;
-  height: 2rem;
-  margin-right: .5rem;
+  display: inline-flex;
+  width: 1.5rem;
+  height: 1.5rem;
   vertical-align: middle;
-  border: .25em solid currentColor;
-	border-top-width: .25em;
-	border-right-color: currentcolor;
-	border-right-width: .25em;
-	border-bottom-width: .25em;
-	border-left-width: .25em;
+	color: var(--disabled-color);
+  border: .2em solid currentColor;
   border-right-color: transparent;
   border-radius: 50%;
   -webkit-animation: spinner-border 1.8s linear infinite;
@@ -1803,9 +1805,8 @@ i[class*=" icon-"]:before {
 }
 
 .spinner-border-sm {
-  width: 1.5rem;
-  height: 1.5rem;
-  border-width: .2em;
+  width: 1.25rem;
+  height: 1.25rem;
 }
 
 .spinner-border-lg {

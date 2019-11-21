@@ -48,17 +48,17 @@
 				</div>
 			</div>
 			<div>
-				<button class="product-detail btn btn-primary btn-small flex mx-auto justify-center">
-					Seleccionar
-				</button>
+					<button class="product-detail btn btn-primary btn-small btn-loading flex mx-auto justify-center">
+						Seleccionar
+					</button>
+				</div>
 			</div>
+			<?php endforeach; ?>
 		</div>
-		<?php endforeach; ?>
+		<div>
+			<?php if($widget): ?>
+			<?php $this->load->view('widget/widget_enterprise-product_content'.$newViews, $widget) ?>
+			<?php endif; ?>
+		</div>
 	</div>
-	<div>
-		<?php if($widget): ?>
-		<?php $this->load->view('widget/widget_enterprise-product_content'.$newViews, $widget) ?>
-		<?php endif; ?>
-	</div>
-</div>
 <div class="flex my-5 flex-auto justify-center"></div>

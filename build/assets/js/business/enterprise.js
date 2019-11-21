@@ -169,7 +169,7 @@ $(function () {
 			$(this).html(loader)
 			.find('span')
 			.removeClass('secondary')
-			.addClass('spinner-border-lg primary');
+			.addClass('spinner-border-lg mx-auto');
 			insertFormInput(getProducts);
 			getProducts.submit();
 		}
