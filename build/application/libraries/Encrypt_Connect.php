@@ -30,7 +30,7 @@ class Encrypt_Connect {
 		if($model !== 'REMOTE_ADDR') {
 			$data = json_encode($data, JSON_UNESCAPED_UNICODE);
 		}
-		log_message('DEBUG', 'NOVO ['.$userName.'] REQUEST '.$model.'= '.$data);
+		log_message('DEBUG', 'NOVO ['.$userName.'] REQUEST '.$model.': '.$data);
 
 		$dataB = base64_encode($data);
 		while((strlen($dataB)%8) != 0) {
@@ -58,14 +58,14 @@ class Encrypt_Connect {
 		$response = json_decode($decryptData);
 
 		if(!$response) {
-			log_message('ERROR', 'NOVO ['.$userName.'] Sin respuesta del servicio');
+			log_message('ERROR', 'NOVO ['.$userName.'] NO SERVICE RESPONSE');
 			$response = new stdClass();
 			$response->rc = lang('RESP_RC_DEFAULT');
 			$response->msg = lang('RESP_MESSAGE_SYSTEM');
 		}
 
 		if(!isset($response->pais)) {
-			log_message('DEBUG', 'NOVO ['.$userName.'] Insertando pais al RESPONSE');
+			log_message('INFO', 'NOVO ['.$userName.'] INSERTING COUNTRY TO THE RESPONSE');
 			$response->pais = $this->CI->config->item('country');
 		}
 

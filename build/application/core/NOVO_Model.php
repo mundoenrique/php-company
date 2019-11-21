@@ -77,10 +77,11 @@ class NOVO_Model extends CI_Model {
 		return $responseDecrypt;
 	}
 
-	protected function responseToView()
+	protected function responseToTheView($model)
 	{
-		log_message('INFO', 'NOVO NOVO_Model CLASS: responseToView method Initialized');
+		log_message('INFO', 'NOVO_Model CLASS: responseToView method Initialized');
+		log_message('DEBUG', 'NOVO ['.$this->userName.'] RESULT '.$model.' SENT TO THE VIEW '.json_encode($this->response));
 
-
+		return $this->response;
 	}
 }

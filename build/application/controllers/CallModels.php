@@ -11,8 +11,8 @@ class CallModels extends Novo_Controller {
 		log_message('INFO', 'NOVO CallModels Controller Class Initialized');
 		if($this->input->is_ajax_request()) {
 			$this->rule = lcfirst($this->dataRequest->where);
-			$this->model = 'Novo_'.$this->dataRequest->who.'_Model';
-			$this->method = 'callWs_'.$this->dataRequest->where.'_'.$this->dataRequest->who;
+			$this->model = 'Novo_'.ucfirst($this->dataRequest->who).'_Model';
+			$this->method = 'callWs_'.ucfirst($this->dataRequest->where).'_'.$this->dataRequest->who;
 
 		} else {
 			show_404();
@@ -28,18 +28,21 @@ class CallModels extends Novo_Controller {
 				$_POST[$item] = $value;
 			}
 
-			unset($this->dataRequest);
 		}
-
 		$this->appUserName = isset($_POST['user']) ? mb_strtoupper($_POST['user']) : $this->session->userdata('userName');
+
+		log_message('DEBUG', 'NOVO ['.$this->appUserName.'] REQUEST FROM THE VIEW '.json_encode($this->dataRequest));
+
+		unset($this->dataRequest);
 		$valid = $this->verify_access->validateForm($this->rule, $this->countryUri, $this->appUserName);
 
 		if($valid) {
-			$this->request = $this->verify_access->createRequest($this->appUserName);
+			$this->request = $this->verify_access->createRequest($this->rule, $this->appUserName);
 			$this->dataResponse = $this->loadModel($this->request);
 		} else {
 			$this->dataResponse = $this->verify_access->ResponseByDefect($this->appUserName);
 		}
+
 		$data = $this->dataResponse->data;
 		$this->dataResponse->data = $this->verify_access->validateRedirect($data, $this->countryUri, $this->appUserName);
 		$dataResponse = $this->cryptography->encrypt($this->dataResponse);

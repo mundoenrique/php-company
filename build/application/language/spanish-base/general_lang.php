@@ -26,7 +26,12 @@ $lang['GEN_BTN_ACCEPT'] = 'Aceptar';
 $lang['GEN_BTN_CANCEL'] = 'Cancelar';
 $lang['GEN_BTN_CONTINUE'] = 'Continuar';
 $lang['GEN_BTN_BACK'] = 'Volver atrás';
-
+//MODULES
+$lang['GEN_LOGIN'] = 'Login';
+$lang['GEN_RECOVER_PASS'] = 'RecoverPass';
+$lang['GEN_CHANGE_PASS'] = 'ChangePassword';
+$lang['GEN_FINISH_SESSION'] = 'FinishSession';
+$lang['GEN_VALIDATE_CAPTCHA'] = 'validateCaptcha';
 
 
 $lang['LAST_SESSION']='Última sesión';

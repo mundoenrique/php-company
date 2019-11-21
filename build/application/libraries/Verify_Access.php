@@ -34,7 +34,7 @@ class Verify_Access {
 		log_message('DEBUG', 'NOVO ['.$user.'] VALIDATION FORM '.$rule.': '.json_encode($result));
 
 		if(!$result) {
-			log_message('DEBUG', 'NOVO  ['.$user.'] VALIDATION ERRORS: '.json_encode(validation_errors()));
+			log_message('DEBUG', 'NOVO  ['.$user.'] VALIDATION '.$rule.' ERRORS: '.json_encode(validation_errors()));
 		}
 
 		languageLoad(NULL, $rule);
@@ -48,7 +48,7 @@ class Verify_Access {
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date October 31th, 2019
 	 */
-	public function createRequest($user)
+	public function createRequest($rule, $user)
 	{
 		log_message('INFO', 'NOVO Verify_Access: createRequest method initialized');
 		foreach ($_POST AS $key => $value) {
@@ -70,7 +70,7 @@ class Verify_Access {
 			}
 		}
 		unset($_POST);
-		log_message('INFO', 'NOVO ['.$user.'] request created '.json_encode($this->requestServ));
+		log_message('INFO', 'NOVO ['.$user.'] '.$rule.' REQUEST CREATED '.json_encode($this->requestServ));
 		return $this->requestServ;
 	}
 	/**

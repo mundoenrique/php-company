@@ -9,7 +9,7 @@ $(function() {
 
 		$(".general-form-msg").html('');
 		var form = $('#login-form');
-		var captcha = getPropertyOfElement('recaptcha', '#system-info');
+		var captcha = getPropertyOfElement('recaptcha', '#widget-signin');
 		userCred = getCredentialsUser();
 		btnText = $(this).text();
 

@@ -8,6 +8,11 @@ $config = [
 			'rules' => 'trim|regex_match[/^([\wñÑ.\-+&]+)+$/i]|required'
 		],
 		[
+			'field' => 'pass',
+			'label' => 'pass',
+			'rules' => 'trim|regex_match[/^([\w!@\*\-\?¡¿+\/.,#]+)+$/i]|required'
+		],
+		[
 			'field' => 'token',
 			'label' => 'token',
 			'rules' => 'trim|required'

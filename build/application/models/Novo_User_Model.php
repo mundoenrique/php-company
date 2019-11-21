@@ -34,7 +34,7 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataRequest->password = $dataRequest->pass;
 		$this->dataRequest->ctipo = $dataRequest->active;
 
-		$response = $this->sendToService('Login');
+		$response = $this->sendToService(lang('GEN_LOGIN'));
 
 		switch($this->isResponseRc) {
 			case 0:
@@ -137,7 +137,7 @@ class Novo_User_Model extends NOVO_Model {
 				break;
 		}
 
-		return $this->response;
+		return $this->responseToTheView(lang('GEN_LOGIN'));
 	}
 	/**
 	 * @info Método para recuperar contraseña
@@ -163,7 +163,7 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataRequest->email = $dataRequest->email;
 
 		$maskMail = maskString($dataRequest->email, 4, $end = 6, '@');
-		$response = $this->sendToService('RecoverPass');
+		$response = $this->sendToService(lang('GEN_RECOVER_PASS'));
 
 		switch($this->isResponseRc) {
 			case 0:
@@ -211,7 +211,7 @@ class Novo_User_Model extends NOVO_Model {
 			];
 		}
 
-		return $this->response;
+		return $this->responseToTheView(lang('GEN_RECOVER_PASS'));
 	}
 	/**
 	 * @info Método para el cambio de Contraseña
@@ -234,7 +234,7 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataRequest->password = $dataRequest->newPass;
 
 		$changePassType = $this->session->flashdata('changePassword');
-		$response = $this->sendToService('ChangePassword');
+		$response = $this->sendToService(lang('GEN_CHANGE_PASS'));
 
 		switch($this->isResponseRc) {
 			case 0:
@@ -272,7 +272,7 @@ class Novo_User_Model extends NOVO_Model {
 			];
 		}
 
-		return $this->response;
+		return $this->responseToTheView(lang('GEN_CHANGE_PASS'));
 	}
 	/**
 	 * @info Método para el cierre de sesión
@@ -296,7 +296,7 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataRequest->idUsuario = $userName;
 		$this->dataRequest->codigoGrupo = $this->session->userdata('codigoGrupo');
 
-		$response = $this->sendToService('FinishSession');
+		$response = $this->sendToService(lang('GEN_FINISH_SESSION'));
 
 		$this->response->code = 0;
 		$this->response->msg = lang('GEN_BTN_ACCEPT');
@@ -304,7 +304,7 @@ class Novo_User_Model extends NOVO_Model {
 
 		$this->session->sess_destroy();
 
-		return $this->response;
+		return $this->responseToTheView(lang('GEN_FINISH_SESSION'));
 	}
 	/**
 	 * @info Método validación recaptcha

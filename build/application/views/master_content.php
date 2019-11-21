@@ -33,7 +33,7 @@
 
 	<?php $this->load->view('footer_content'.$newViews) ?>
 
-	<?= ($module == 'login' && $activeRecaptcha) ?  $scriptCaptcha : ''; ?>
+	<?= ($module == lang('GEN_LOGIN') && $activeRecaptcha) ?  $scriptCaptcha : ''; ?>
 	<?= $this->asset->insertJs(); ?>
 	<script>
 		var lang = <? print_r(json_encode($this->lang->language)); ?>

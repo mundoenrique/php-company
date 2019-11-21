@@ -263,10 +263,8 @@ class Novo_Business_Model extends NOVO_Model {
 	public function callWs_getProducts_Business($dataRequest)
 	{
 		log_message('INFO', 'NOVO Business Model: getProducts method Initialized');
-		$menu = [
-			'user_access'
-		];
-		$this->session->unset_userdata($menu);
+
+		$this->session->unset_userdata('user_access');
 		$this->className = "com.novo.objects.TOs.UsuarioTO";
 
 		$this->dataAccessLog->modulo = 'Negocios';
@@ -284,7 +282,6 @@ class Novo_Business_Model extends NOVO_Model {
 		switch($this->isResponseRc) {
 			case 0:
 				$this->session->set_userdata('getProducts', $dataRequest);
-				log_message('INFO', '-------------------REQUEST PRODUCT SESSION'.json_encode($this->session->userdata('getProducts')));
 
 				$responseList = new stdClass();
 				$responseList->widget = $dataRequest;
@@ -320,8 +317,8 @@ class Novo_Business_Model extends NOVO_Model {
 						}
 
 					}
-					log_message('DEBUG', 'NOVO ['.$this->userName.'] RESPONSE getProducts: '.json_encode($response));
 					$this->response->data = $responseList;
+					log_message('INFO', 'NOVO ['.$this->userName.'] RESPONSE getProducts: '.json_encode($response));
 				break;
 
 			}
