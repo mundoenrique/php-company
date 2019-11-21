@@ -770,7 +770,7 @@ textarea.form-control {
 	========================================================================== */
 
 .btn {
-	display: inline-block;
+	display: inline-flex;
 	height: auto;
 	margin: 0;
 	padding: var(--button-padding-y) var(--button-padding-x);
@@ -783,7 +783,8 @@ textarea.form-control {
 	color: var(--text-color);
 	text-decoration: none;
 	cursor: pointer;
-	vertical-align: middle;
+	align-items: center;
+	justify-content: center;
 	transition: .3s;
 	-webkit-appearance: none;
 }
@@ -820,7 +821,8 @@ textarea.form-control {
 	color: var(--primary) !important;
 	box-shadow: 1px 1px 2px 0 var(--shadows-color) !important;
 }
-.current-outline:hover {
+
+.current-outline:hover:not(:disabled) {
 	border-color: var(--primary) !important;
 	color: var(--secondary) !important;
 	box-shadow: 1px 1px 2px 0 var(--shadows-color) !important;
@@ -943,6 +945,43 @@ textarea.form-control {
   margin: 0 1px;
   transition: .3s;
 }
+
+.btn-options.active:not(:disabled) {
+  color: var(--primary);
+	border-color: var(--primary);
+}
+
+.btn-options:hover:not(:disabled) {
+	color: var(--secondary);
+	background-color: var(--primary);
+	border-color: var(--primary);
+}
+
+/* Btn-Group Radio */
+
+.btn-group {
+  position: relative;
+  display: inline-flex;
+  vertical-align: middle;
+}
+
+.btn-group > .btn-options {
+  position: relative;
+  flex: 1 1 auto;
+}
+
+.btn-group > .btn-options:not(:first-child) {
+  margin-left: -1px;
+}
+
+.btn-group-toggle > .btn-options input[type="radio"],
+.btn-group-toggle > .btn-options input[type="checkbox"] {
+  position: absolute;
+  clip: rect(0, 0, 0, 0);
+  pointer-events: none;
+}
+
+/* Btn Search */
 
 .btn-search {
   background-image: url("../images/bdb/icon-searcher_gray.svg");
@@ -1703,7 +1742,7 @@ span[class^="icon-"],
 span[class*=" icon-"],
 i[class^="icon-"],
 i[class*=" icon-"] {
-	display: inline-block;
+	display: inline-flex;
 	height: auto;
 	width: auto;
 	margin-right: .5rem;
@@ -2060,15 +2099,11 @@ i[class*=" icon-"]:before {
 	cursor: pointer;
 }
 
-.main-nav-user > .nav-item {
-  padding-top: 12px;
-	padding-bottom: 12px;
-}
-
 .main-nav-user > .nav-item > .nav-link{
   -webkit-transition: all .4s ease;
 	transition: all .4s ease;
-	padding: 0;
+	padding-top: 12px;
+	padding-bottom: 12px;
 	opacity: 1;
 }
 
@@ -2138,6 +2173,9 @@ i[class*=" icon-"]:before {
 }
 
 .dropdown-user li a {
+	display: block;
+	padding: .1rem 1rem;
+	width: 10rem !important;
 	color: var(--tertiary);
 }
 
@@ -2369,8 +2407,8 @@ table.dataTable.no-footer {
   border-bottom: 1px solid var(--border-color) !important;
 }
 
-table.dataTable tbody tr td {
-	padding: 0 3px !important;
+table.dataTable tbody th, table.dataTable tbody td {
+	height: 38px !important;
 }
 
 table.dataTable thead th.select-checkbox {
@@ -2422,9 +2460,35 @@ table.dataTable tr.selected td.select-checkbox::after {
 	font-size: var(--h4);
 }
 
+table.dataTable tbody tr td {
+	padding-right:  4px !important;
+	padding-left:  4px !important;
+}
 
+table.dataTable, table.dataTable th, table.dataTable td {
+	box-sizing: border-box !important;
+}
 
+table.dataTable.dtr-inline.collapsed > tbody > tr[role="row"] > td:first-child::before, table.dataTable.dtr-inline.collapsed > tbody > tr[role="row"] > th:first-child::before {
+	left: -24px !important;
+	background-color: var(--primary) !important;
+}
 
+table.dataTable.dtr-inline.collapsed > tbody > tr.parent > td:first-child::before, table.dataTable.dtr-inline.collapsed > tbody > tr.parent > th:first-child::before {
+	background-color:	var(--yellow) !important;
+}
+
+table.dataTable > tbody > tr.child ul.dtr-details {
+	width: 100% !important;
+}
+
+table.dataTable > tbody > tr.child ul.dtr-details > li:first-child {
+	padding-top: 0.5em !important;
+}
+
+table#resultsAccount thead th:nth-child(7){
+	width: 170px !important;
+}
 
 /* Widgets */
 
@@ -2542,7 +2606,7 @@ ul.steps li.step-item i {
 	top: .3em;
 }
 .ui-icon {
-	display: inline-block;
+	display: inline-flex;
 	width: 16px;
 	height: 16px;
 	vertical-align: middle;
@@ -2587,11 +2651,11 @@ ul.steps li.step-item i {
 	filter: Alpha(Opacity=30); /* support: IE8 */
 }
 .ui-button {
-	padding: .4em 1em;
-	display: inline-block;
+	display: inline-flex;
 	position: relative;
-	line-height: normal;
 	margin-right: .1em;
+	padding: .4em 1em;
+	line-height: normal;
 	cursor: pointer;
 	vertical-align: middle;
 	text-align: center;
@@ -2948,7 +3012,7 @@ a.ui-button:active,
 .bg-img {
   background-image: linear-gradient(rgba(0,0,0,.8), rgba(0,0,0,.8)),
     url("../images/bdb/bg-loading.jpg");
-  height: 100%;
+  height: 100vh;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;

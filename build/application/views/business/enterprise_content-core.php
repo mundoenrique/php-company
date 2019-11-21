@@ -1,95 +1,97 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
-<span class="primary"><?= $greeting.' '.$fullName ?></span>
-<div class="flex mb-2 light items-center">
-	<div class="flex tertiary">
-		<nav class="main-nav nav-inferior">
-			<ul class="mb-0 light h6 tertiary list-style-none list-inline ">
-				<li class="inline"><a class="tertiary" href="ceo_dashboard.html">Inicio /</a></li>
-				<li class="inline"><a class="tertiary" href="ceo_dashboard.html">Empresas</a></li>
-			</ul>
-		</nav>
+<div class="pt-3 px-5 pb-5">
+	<span class="primary h3 regular"><?= $greeting.' '.$fullName ?></span>
+	<div class="flex mb-2 light items-center">
+		<div class="flex tertiary">
+			<nav class="main-nav nav-inferior">
+				<ul class="mb-0 light h6 tertiary list-style-none list-inline ">
+					<li class="inline"><a class="tertiary" href="ceo_dashboard.html">Inicio /</a></li>
+					<li class="inline"><a class="tertiary" href="ceo_dashboard.html">Empresas</a></li>
+				</ul>
+			</nav>
+		</div>
+		<div class="flex h6 flex-auto justify-end">
+			<span><?= lang('ENTERPRISE_LAST_ACCESS') ?>: <?= $lastSession ?></span>
+		</div>
 	</div>
-	<div class="flex h6 flex-auto justify-end">
-		<span><?= lang('ENTERPRISE_LAST_ACCESS') ?>: <?= $lastSession ?></span>
-	</div>
-</div>
 
-<div class="flex mt-3 light items-center">
-	<div class="flex h5">
-		<span><?= lang('ENTERPRISE_TOTAL') ?>: <?= $enterprisesTotal ?></span>
-	</div>
-	<div id="alphabetical" class="flex h6 flex-auto justify-end">
-		<button class="btn btn-outline btn-small btn-rounded-left bg-white" filter-page="page_1">
-			<?= lang('ENTERPRISE_FILTER_TODAS'); ?>
-		</button>
-		<?php foreach($filters AS $filtersAttr): ?>
-		<button class="btn-options btn-outline bold bg-white" filter-page="<?= $filtersAttr['filter'] ?>"
-			<?= $filtersAttr['active'] ? '' : 'disabled' ?>><?= $filtersAttr['text']; ?></button>
-		<?php endforeach; ?>
-		<div id="sb-search" class="sb-search">
-			<input id="search" class="sb-search-input" type="search" name="search" value="" placeholder="Buscar...">
-      <span class="sb-icon-search"><i class="icon icon-find"></i></span>
-    </div>
-	</div>
-</div>
-<div class="line mt-1"></div>
-
-<div id="no-enterprise" class="bg-color mx-4 my-5">
-	<div class="flex justify-center">
-		<span class="my-5 py-5 h4 regular text"></span>
-	</div>
-</div>
-
-<div id="enterprise-list" class="products my-5 <?= $enterprisesTotal < 5 ? '' : 'mx-auto';?> pt-2 visible">
-	<?php foreach($enterpriseList AS $enterpriseaAttr): ?>
-	<div class="card bg-white mb-2 <?= $enterpriseaAttr->page.' '.$enterpriseaAttr->albeticalPage ?>">
-		<div class="product prod-first flex mx-1 px-1 py-3 flex-column">
-			<span class="h5 semibold primary truncate"><?= $enterpriseaAttr->acnomcia; ?></span>
-			<span class="my-1 h6 light text truncate"><?= $enterpriseaAttr->acdesc; ?></span>
-			<span class="pt-1 h5 regular tertiary truncate">
-				<?= lang('GEN_FISCAL_REGISTRY').' '.$enterpriseaAttr->acrif; ?>
-			</span>
-			<div class="mask flex mt-5 mx-1 pt-2 flex-column tertiary bg-white">
-				<?php $danger = strpos($enterpriseaAttr->resumenProductos, '0') !== FALSE ? ' danger' : FALSE; ?>
-				<span class="product-pb h5 truncate<?= $danger; ?> total-product">
-					<?= $enterpriseaAttr->resumenProductos ?>
-				</span>
-				<span class="product-pb h5 truncate"><?= lang('GEN_CONTAC_PERSON').':'; ?></span>
-				<span class="product-pb h5 truncate"><?= $enterpriseaAttr->acpercontac; ?></span>
+	<div class="flex mt-3 light items-center">
+		<div class="flex">
+			<span><?= lang('ENTERPRISE_TOTAL') ?>: <?= $enterprisesTotal ?></span>
+		</div>
+		<div id="alphabetical" class="flex h6 flex-auto justify-end">
+			<button class="btn btn-outline btn-small btn-rounded-left bg-white" filter-page="page_1">
+				<?= lang('ENTERPRISE_FILTER_TODAS'); ?>
+			</button>
+			<?php foreach($filters AS $filtersAttr): ?>
+			<button class="btn-options btn-outline bold bg-white" filter-page="<?= $filtersAttr['filter'] ?>"
+				<?= $filtersAttr['active'] ? '' : 'disabled' ?>><?= $filtersAttr['text']; ?></button>
+			<?php endforeach; ?>
+			<div id="sb-search" class="sb-search">
+				<input id="search" class="sb-search-input" type="search" name="search" value="" placeholder="Buscar...">
+				<span class="sb-icon-search"><i class="icon icon-find"></i></span>
 			</div>
 		</div>
-		<form id="enterprise-<?= $enterpriseaAttr->accodcia; ?>" action="<?= base_url('productos') ?>" method="POST">
-			<input type="hidden" name="enterpriseCode" value="<?= $enterpriseaAttr->accodcia; ?>">
-			<input type="hidden" name="enterpriseGroup" value="<?= $enterpriseaAttr->accodgrupoe; ?>">
-			<input type="hidden" name="idFiscal" value="<?= $enterpriseaAttr->acrif; ?>">
-			<input type="hidden" name="enterpriseName" value="<?= $enterpriseaAttr->acnomcia; ?>">
-		</form>
 	</div>
-	<?php endforeach; ?>
-</div>
+	<div class="line mt-1"></div>
 
-<div id="enterprise-pages" class="visible">
-	<div class="pagination page-number flex mb-5 py-5 flex-auto justify-center">
-		<nav class="h4">
-			<?php if($recordsPage >= 2): ?>
-			<a href="javascript:" position="first"><?= lang('ENTERPRISE_FIRST_PAGE'); ?></a>
-			<a href="javascript:" position="minus">««</a>
-			<?php endif; ?>
-			<a href="javascript:" position="prev">«</a>
-		</nav>
-		<div id="show-page" class="h4 flex justify-center ">
-			<?php for($i=1; $i <= $recordsPage; $i++): ?>
-			<span class="mx-1">
-				<a href="javascript:" position="page" filter-page="page_"><?= $i; ?></a>
-			</span>
-			<?php endfor; ?>
+	<div id="no-enterprise" class="bg-color mx-4 my-5">
+		<div class="flex justify-center">
+			<span class="my-5 py-5 h4 regular text"></span>
 		</div>
-		<nav class="h4">
-			<a href="javascript:" position="next">»</a>
-			<?php if($recordsPage >= 2): ?>
-			<a href="javascript:" position="plus">»»</a>
-			<a href="javascript:" position="last"><?= lang('ENTERPRISE_LAST_PAGE'); ?></a>
-			<?php endif; ?>
-		</nav>
+	</div>
+
+	<div id="enterprise-list" class="products my-5 <?= $enterprisesTotal < 5 ? '' : 'mx-auto';?> pt-2 visible">
+		<?php foreach($enterpriseList AS $enterpriseaAttr): ?>
+		<div class="card bg-white mb-2 <?= $enterpriseaAttr->page.' '.$enterpriseaAttr->albeticalPage ?>">
+			<div class="product prod-first flex mx-1 px-1 py-3 flex-column">
+				<span class="semibold primary truncate"><?= $enterpriseaAttr->acnomcia; ?></span>
+				<span class="my-1 h6 light text truncate"><?= $enterpriseaAttr->acdesc; ?></span>
+				<span class="pt-1 regular tertiary truncate">
+					<?= lang('GEN_FISCAL_REGISTRY').' '.$enterpriseaAttr->acrif; ?>
+				</span>
+				<div class="mask flex mt-5 mx-1 pt-2 flex-column tertiary bg-white">
+					<?php $danger = strpos($enterpriseaAttr->resumenProductos, '0') !== FALSE ? ' danger' : FALSE; ?>
+					<span class="product-pb truncate<?= $danger; ?> total-product">
+						<?= $enterpriseaAttr->resumenProductos ?>
+					</span>
+					<span class="product-pb truncate"><?= lang('GEN_CONTAC_PERSON').':'; ?></span>
+					<span class="product-pb truncate"><?= $enterpriseaAttr->acpercontac; ?></span>
+				</div>
+			</div>
+			<form id="enterprise-<?= $enterpriseaAttr->accodcia; ?>" action="<?= base_url('productos') ?>" method="POST">
+				<input type="hidden" name="enterpriseCode" value="<?= $enterpriseaAttr->accodcia; ?>">
+				<input type="hidden" name="enterpriseGroup" value="<?= $enterpriseaAttr->accodgrupoe; ?>">
+				<input type="hidden" name="idFiscal" value="<?= $enterpriseaAttr->acrif; ?>">
+				<input type="hidden" name="enterpriseName" value="<?= $enterpriseaAttr->acnomcia; ?>">
+			</form>
+		</div>
+		<?php endforeach; ?>
+	</div>
+
+	<div id="enterprise-pages" class="visible">
+		<div class="pagination page-number flex mb-5 py-5 flex-auto justify-center">
+			<nav class="h4">
+				<?php if($recordsPage >= 2): ?>
+				<a href="javascript:" position="first"><?= lang('ENTERPRISE_FIRST_PAGE'); ?></a>
+				<a href="javascript:" position="minus">««</a>
+				<?php endif; ?>
+				<a href="javascript:" position="prev">«</a>
+			</nav>
+			<div id="show-page" class="h4 flex justify-center ">
+				<?php for($i=1; $i <= $recordsPage; $i++): ?>
+				<span class="mx-1">
+					<a href="javascript:" position="page" filter-page="page_"><?= $i; ?></a>
+				</span>
+				<?php endfor; ?>
+			</div>
+			<nav class="h4">
+				<a href="javascript:" position="next">»</a>
+				<?php if($recordsPage >= 2): ?>
+				<a href="javascript:" position="plus">»»</a>
+				<a href="javascript:" position="last"><?= lang('ENTERPRISE_LAST_PAGE'); ?></a>
+				<?php endif; ?>
+			</nav>
+		</div>
 	</div>
 </div>

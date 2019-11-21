@@ -16,7 +16,7 @@
 	<?php $this->load->view('header_content'.$newViews) ?>
 
 	<?php if($newViews != ''): ?>
-		<main class="content bg-content pt-3 px-5 h3 regular">
+		<main class="content bg-content">
 	<?php else: ?>
 		<div id="wrapper">
 	<?php endif; ?>
