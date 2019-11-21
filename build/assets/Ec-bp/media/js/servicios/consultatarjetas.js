@@ -590,10 +590,10 @@ $(".table-text-service").on('click', '#ACTUALIZAR_DATOS', function() {
 	canvas += '<input type="text" name="pass" id="correo" value="'+dataPersona[3]+'">';
 	canvas += '<li id="errorcorreo" style="display:none"></li>';
 	canvas += '</span>';
-	canvas += '<span><p>PIN: </p>';
-	canvas += '<input type="password" name="numero" id="pin" maxlength="4">';
-	canvas += '<li id="errorpin" style="display:none"></li>';
-	canvas += '</span>';
+	// canvas += '<span><p>PIN: </p>';
+	// canvas += '<input type="password" name="numero" id="pin" maxlength="4">';
+	// canvas += '<li id="errorpin" style="display:none"></li>';
+	// canvas += '</span>';
 	canvas += '</div>';
 	canvas += '<div id="campos-transfer">';
 	canvas += '<span><p>Teléfono celular:</p>';
@@ -674,8 +674,9 @@ function validarFields()
 	spaceString('#clave')
 
 	var camposValid = ''
-			msgValido = ''
-			validInput = true
+			msgValido = '';
+			validInput = true;
+			nomRegExp = /^[a-z]$/i;
 			descRegExp = /^['a-z0-9ñáéíóú ,.:()']+$/i
 			emailRegExp = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
 			numRegExp = /^\d+$/
@@ -687,10 +688,10 @@ function validarFields()
 		validInput = false;
 		valNombre.addClass('textbox-transfer');
 	}
-	else if(!descRegExp.test(valNombre.val()))
+	else if(!nomRegExp.test(valNombre.val()))
 	{
 		errorName.show();
-		errorName.html('No se admiten caracteres especiales')
+		errorName.html('No se admiten números')
 		validInput = false;
 		valNombre.addClass('textbox-transfer');
 	}
@@ -707,10 +708,10 @@ function validarFields()
 		validInput = false;
 		valApellidos.addClass('textbox-transfer');
 	}
-	else if(!descRegExp.test(valApellidos.val()))
+	else if(!nomRegExp.test(valApellidos.val()))
 	{
 		errorApellido.show();
-		errorApellido.html('No se admiten caracteres especiales')
+		errorApellido.html('No se admiten números')
 		validInput = false;
 		valApellidos.addClass('textbox-transfer');
 	}
@@ -973,9 +974,9 @@ function llamarWSCambio(pass,mensaje,url,op) {
 			data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 
 			$aux.dialog("destroy");
-
-			if (!data.result.ERROR) {
-
+			if(data.result.rc == -1){
+				notificacion(mensaje, 'La contraseña es incorrecta. Por favor verifícala e intenta de nuevo.', reload);
+			} else if (!data.result.ERROR) {
 				var reload = 1;
 				if(op == 'saldo')
 				{
@@ -1071,6 +1072,9 @@ $('#button-masivo').click(function() {
 // MOSTRAR EL SALDO DISPONIBLE PARA CADA TARJETA LUEGO DE CONSULTAR
 function mostrar_saldo(data) {
 	$.each(JSON.parse(data.result.bean), function(k, t) {
+
+		console.log(k)
+		console.log(t)
 
 		if (t.saldo !== undefined)
 		{
