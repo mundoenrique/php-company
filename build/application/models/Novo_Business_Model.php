@@ -284,6 +284,7 @@ class Novo_Business_Model extends NOVO_Model {
 		switch($this->isResponseRc) {
 			case 0:
 				$this->session->set_userdata('getProducts', $dataRequest);
+				log_message('INFO', '-------------------REQUEST PRODUCT SESSION'.json_encode($this->session->userdata('getProducts')));
 
 				$responseList = new stdClass();
 				$responseList->widget = $dataRequest;

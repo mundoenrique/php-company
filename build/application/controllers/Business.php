@@ -58,11 +58,14 @@ class Business extends NOVO_Controller {
 			"business/products"
 		);
 
-		if($this->session->userdata('getProducts') && $this->request->idFiscal == $this->session->userdata('getProducts')->idFiscal) {
-			$this->request->idFiscal = $this->session->userdata('getProducts')->idFiscal;
-			$this->request->enterpriseName = $this->session->userdata('getProducts')->enterpriseName;
-		}
 
+		if(!isset($this->request->enterpriseCode)) {
+			$request = $this->session->userdata('getProducts');
+			$this->request->enterpriseCode = $request->enterpriseCode;
+			$this->request->enterpriseGroup = $request->enterpriseGroup;
+			$this->request->idFiscal = $request->idFiscal;
+			$this->request->enterpriseName = $request->enterpriseName;
+		}
 
 		$responseList = $this->loadModel($this->request);
 
@@ -81,6 +84,8 @@ class Business extends NOVO_Controller {
 		$this->render->categories = $responseList->data->productList->listaCategorias;
 		$this->render->productList = $responseList->data->productList->productos;
 		$this->render->widget =  new stdClass();
+		$this->render->widget->products = FALSE;
+		$this->render->widget->widgeTitle = 'Selecciona una empresa';
 		$this->render->widget->enterpriseData =  $responseList->data->widget;
 		$this->render->widget->enterpriseList =  $enterpriseList;
 		$this->views = ['business/'.$view];
@@ -89,10 +94,12 @@ class Business extends NOVO_Controller {
 
 	public function getProductDetail()
 	{
-		log_message('INFO', 'NOVO Business: getProducts Method Initialized');
+		log_message('INFO', 'NOVO Business: getProductDetail Method Initialized');
 		$view = 'product-detail';
 		$this->render->titlePage = "Detalle del producto";
 		$this->views = ['business/'.$view];
+		$this->render->widget =  new stdClass();
+		$this->render->widget->widgeTitle = 'Debes seleccionar empresa y producto';
 		$this->loadView($view);
 	}
 

@@ -146,9 +146,9 @@ function getPropertyOfElement(property, element) {
 	return $(element).attr(property);
 }
 
-function insertFormInput(form) {
+function insertFormInput(form = false) {
 	$('button, select').prop('disabled', true);
-	if(form.attr('method')) {
+	if(form) {
 		ceo_cook = decodeURIComponent(
 			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 		);

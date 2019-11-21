@@ -7,6 +7,7 @@ $(function () {
 	var noEnterprise = $('#no-enterprise');
 	var alphabetical = $('#alphabetical');
 	var showPage = $('#show-page');
+	var SelectProduc = $('.product');
 
 	//external js: isotope.pkgd.js
 	var enterpriseList = enterpriseListEvent.isotope({
@@ -150,31 +151,26 @@ $(function () {
 		$('#show-page > span:first').addClass('page-current');
 	};
 
-	$('.product').hover(function() {
+	SelectProduc.hover(function() {
 		if ($(this).find('span.danger').length) {
 			$(this).css('cursor', 'default')
 		}
 	});
 
-	$('.product').on('click', function() {
-		var getProducts = $('#get_products')
+	SelectProduc.on('click', function(e) {
+		e.preventDefault();
+		var getProducts = $(this).parent('.card').find('form').attr('id');
 		var totalProduct = parseInt($(this).find('.total-product').text());
-		var EnterpriseName = $(this).find('.enterprise-name').text();
-		var idFiscal = $(this).find('.id-fiscal').text();
+		getProducts = $('#'+getProducts);
 		if(totalProduct > 0) {
-			$(this).off('click');
-			noEnterprise
-			.removeClass('none')
-			.children('div')
-			.html(loader)
+			SelectProduc
+			.off('click')
+			.css('cursor', 'default');
+			$(this).html(loader)
 			.find('span')
 			.removeClass('secondary')
 			.addClass('spinner-border-lg primary');
-			enterpriseList.addClass('none');
-			enterprisePages.addClass('none');
-			idFiscal = idFiscal.replace(lang.GEN_FISCAL_REGISTRY, '');
-			getProducts.append(`<input type="hidden" name="idFiscal" value="${idFiscal}">`);
-			getProducts.append(`<input type="hidden" name="enterpriseName" value="${EnterpriseName}">`);
+			insertFormInput(getProducts);
 			getProducts.submit();
 		}
 	});

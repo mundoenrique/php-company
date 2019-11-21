@@ -68,6 +68,16 @@ $config = [
 	],
 	'getProducts' => [
 		[
+			'field' => 'enterpriseCode',
+			'label' => 'enterpriseCode',
+			'rules' => 'trim|regex_match[/^([\w]+)+$/i]'
+		],
+		[
+			'field' => 'enterpriseGroup',
+			'label' => 'enterpriseGroup',
+			'rules' => 'trim|regex_match[/^([\w-]+)+$/i]'
+		],
+		[
 			'field' => 'idFiscal',
 			'label' => 'idFiscal',
 			'rules' => 'trim|regex_match[/^([\w-:.]+[\s]*)+$/i]|required'

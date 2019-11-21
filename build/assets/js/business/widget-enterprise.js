@@ -12,12 +12,15 @@ $(function() {
 
 	enterpriseWidgetBtn.on('click', function(e) {
 		e.preventDefault();
-		$(this).css('width', '111.1px');
+		insertFormInput(enterpriseWidgetForm);
 		$(this).html(loader);
 		$(this).find('span').addClass('spinner-border-sm');
-		$(':button').prop('disabled', true);
-		var EnterpriseName = WidgetSelcet.find('option:selected').text()
+		var enterpriseCode = WidgetSelcet.find('option:selected').attr('enterpriseCode')
+		var enterpriseGroup = WidgetSelcet.find('option:selected').attr('enterpriseGroup')
 		var idFiscal= WidgetSelcet.val()
+		var EnterpriseName = WidgetSelcet.find('option:selected').text()
+		enterpriseWidgetForm.append(`<input type="hidden" name="enterpriseCode" value="${enterpriseCode}">`);
+		enterpriseWidgetForm.append(`<input type="hidden" name="enterpriseGroup" value="${enterpriseGroup}">`);
 		enterpriseWidgetForm.append(`<input type="hidden" name="idFiscal" value="${idFiscal}">`);
 		enterpriseWidgetForm.append(`<input type="hidden" name="enterpriseName" value="${EnterpriseName}">`);
 		enterpriseWidgetForm.submit();

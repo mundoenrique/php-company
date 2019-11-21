@@ -44,18 +44,26 @@
 	<?php foreach($enterpriseList AS $enterpriseaAttr): ?>
 	<div class="card bg-white mb-2 <?= $enterpriseaAttr->page.' '.$enterpriseaAttr->albeticalPage ?>">
 		<div class="product prod-first flex mx-1 px-1 py-3 flex-column">
-			<span class="h5 semibold primary truncate enterprise-name"><?= $enterpriseaAttr->acnomcia; ?></span>
+			<span class="h5 semibold primary truncate"><?= $enterpriseaAttr->acnomcia; ?></span>
 			<span class="my-1 h6 light text truncate"><?= $enterpriseaAttr->acdesc; ?></span>
-			<span class="pt-1 h5 regular tertiary truncate id-fiscal">
+			<span class="pt-1 h5 regular tertiary truncate">
 				<?= lang('GEN_FISCAL_REGISTRY').' '.$enterpriseaAttr->acrif; ?>
 			</span>
 			<div class="mask flex mt-5 mx-1 pt-2 flex-column tertiary bg-white">
-				<?php $red = strpos($enterpriseaAttr->resumenProductos, '0') !== FALSE ? ' danger' : FALSE; ?>
-				<span class="product-pb h5 truncate<?= $red; ?> total-product"><?= $enterpriseaAttr->resumenProductos ?></span>
+				<?php $danger = strpos($enterpriseaAttr->resumenProductos, '0') !== FALSE ? ' danger' : FALSE; ?>
+				<span class="product-pb h5 truncate<?= $danger; ?> total-product">
+					<?= $enterpriseaAttr->resumenProductos ?>
+				</span>
 				<span class="product-pb h5 truncate"><?= lang('GEN_CONTAC_PERSON').':'; ?></span>
 				<span class="product-pb h5 truncate"><?= $enterpriseaAttr->acpercontac; ?></span>
 			</div>
 		</div>
+		<form id="enterprise-<?= $enterpriseaAttr->accodcia; ?>" action="<?= base_url('productos') ?>" method="POST">
+			<input type="hidden" name="enterpriseCode" value="<?= $enterpriseaAttr->accodcia; ?>">
+			<input type="hidden" name="enterpriseGroup" value="<?= $enterpriseaAttr->accodgrupoe; ?>">
+			<input type="hidden" name="idFiscal" value="<?= $enterpriseaAttr->acrif; ?>">
+			<input type="hidden" name="enterpriseName" value="<?= $enterpriseaAttr->acnomcia; ?>">
+		</form>
 	</div>
 	<?php endforeach; ?>
 </div>
@@ -85,7 +93,3 @@
 		</nav>
 	</div>
 </div>
-
-<form id="get_products" action="<?= base_url('productos') ?>" method="POST">
-	<input type="hidden" name="<?= $novoName ?>" valule="<?= $novoCook ?>">
-</form>
