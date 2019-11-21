@@ -590,10 +590,10 @@ $(".table-text-service").on('click', '#ACTUALIZAR_DATOS', function() {
 	canvas += '<input type="text" name="pass" id="correo" value="'+dataPersona[3]+'">';
 	canvas += '<li id="errorcorreo" style="display:none"></li>';
 	canvas += '</span>';
-	canvas += '<span><p>PIN: </p>';
-	canvas += '<input type="password" name="numero" id="pin" maxlength="4">';
-	canvas += '<li id="errorpin" style="display:none"></li>';
-	canvas += '</span>';
+	// canvas += '<span><p>PIN: </p>';
+	// canvas += '<input type="password" name="numero" id="pin" maxlength="4">';
+	// canvas += '<li id="errorpin" style="display:none"></li>';
+	// canvas += '</span>';
 	canvas += '</div>';
 	canvas += '<div id="campos-transfer">';
 	canvas += '<span><p>Teléfono celular:</p>';
