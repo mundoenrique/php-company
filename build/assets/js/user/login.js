@@ -17,7 +17,6 @@ $(function() {
 		if(form.valid()) {
 			disabledInputsform(true);
 			$(this).html(loader);
-			$('#login-btn span').addClass('spinner-border-sm')
 			if(captcha) {
 				grecaptcha.ready(function() {
 					grecaptcha
