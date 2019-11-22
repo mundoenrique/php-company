@@ -950,7 +950,6 @@ function llamarWSCambio(pass,mensaje,url,op) {
 
 	pass = hex_md5(pass);
 	$('#claveMasivo').val("");
-	$('#claveMasivo').prop("disabled",true);
 
 	var ceo_cook = decodeURIComponent(
 		document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
