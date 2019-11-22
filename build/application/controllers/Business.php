@@ -19,7 +19,7 @@ class Business extends NOVO_Controller {
 	 */
 	public function getEnterprises()
 	{
-		log_message('INFO', 'NOVO Business: getCompanies Method Initialized');
+		log_message('INFO', 'NOVO Business: getEnterprises Method Initialized');
 		$view = 'enterprise';
 
 		array_push(
@@ -38,7 +38,7 @@ class Business extends NOVO_Controller {
 		$this->render->enterprisesTotal = $responseList->data->enterprisesTotal;
 		$this->render->enterpriseList = $responseList->data->list;
 		$this->render->filters = $responseList->data->filters;
-		$this->render->recordsPage = ceil($responseList->data->enterprisesTotal/$responseList->data->recordsPage);
+		$this->render->recordsPage = $responseList->data->recordsPage;
 		$this->loadView($view);
 	}
 	/**
@@ -58,8 +58,8 @@ class Business extends NOVO_Controller {
 			"business/products"
 		);
 
-
-		if(!isset($this->request->enterpriseCode)) {
+		$requestArray = (array)$this->request;
+		if(empty($requestArray)) {
 			$request = $this->session->userdata('getProducts');
 			$this->request->enterpriseCode = $request->enterpriseCode;
 			$this->request->enterpriseGroup = $request->enterpriseGroup;

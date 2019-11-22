@@ -30,6 +30,7 @@ $(function () {
 			enterprisePages.removeClass('visible');
 		} else {
 			noEnterprise.find('span').text(lang.ENTERPRISE_NOT_ASSIGNED);
+			enterprisePages.addClass('none');
 		}
 	});
 

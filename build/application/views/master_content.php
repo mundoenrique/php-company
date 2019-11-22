@@ -12,7 +12,7 @@
 	<?= $this->asset->insertCss(); ?>
 	<title><?= $titlePage; ?> - CEO</title>
 </head>
-<body code="" msg="" data="">
+<body code="" msg="" icon="" data="">
 	<?php $this->load->view('header_content'.$newViews) ?>
 
 	<?php if($newViews != ''): ?>

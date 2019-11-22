@@ -25,9 +25,13 @@ class NOVO_Model extends CI_Model {
 			: $this->config->item('country');
 		$this->countryUri = $this->session->userdata('countryUri');
 		$this->token = $this->session->userdata('token') ?: '';
-		$this->userName = $this->session->userdata('userName');
+		$this->userName = $this->session->userName;
 	}
-
+	/**
+	 * @info Método para comunicación con el servicio
+	 * @author J. Enrique Peñaloza Piñero.
+	 * @date April 20th, 2019
+	 */
 	public function sendToService($model)
 	{
 		log_message('INFO', 'NOVO sendToService Method Initialized');
@@ -76,8 +80,12 @@ class NOVO_Model extends CI_Model {
 
 		return $responseDecrypt;
 	}
-
-	protected function responseToTheView($model)
+	/**
+	 * @info Método enviar el resultado de la consulta a la vista
+	 * @author J. Enrique Peñaloza Piñero.
+	 * @date November 21st, 2019
+	 */
+	public function responseToTheView($model)
 	{
 		log_message('INFO', 'NOVO_Model CLASS: responseToView method Initialized');
 		log_message('DEBUG', 'NOVO ['.$this->userName.'] RESULT '.$model.' SENT TO THE VIEW '.json_encode($this->response));

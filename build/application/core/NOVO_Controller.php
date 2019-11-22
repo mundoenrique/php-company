@@ -84,7 +84,7 @@ class NOVO_Controller extends CI_Controller {
 			if($_POST && $access) {
 				$valid = $this->verify_access->validateForm($this->rule, $this->countryUri, $this->appUserName);
 				if($valid) {
-					$this->request = $this->verify_access->createRequest($this->appUserName);
+					$this->request = $this->verify_access->createRequest($this->rule, $this->appUserName);
 				}
 			}
 			$this->preloadView($access && $valid);

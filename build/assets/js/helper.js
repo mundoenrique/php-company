@@ -42,17 +42,7 @@ function callNovoCore(verb, who, where, request, _response_) {
 		_response_(response);
 
 	}).fail(function (jqXHR, textStatus, errorThrown ) {
-		var response = {
-			code: codeResp,
-			/* title: lang.GEN_SYSTEM_NAME,
-			icon: lang.GEN_ICON_WARNING,
-			data: {
-				btn1: {
-					link: baseURL+lang.GEN_ENTERPRISE_LIST,
-					action: 'redirect'
-				}
-			} */
-		};
+		var response = {code: codeResp};
 		notiSystem();
 		_response_(response);
 	});
