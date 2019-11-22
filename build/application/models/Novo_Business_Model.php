@@ -21,10 +21,7 @@ class Novo_Business_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO Business Model: getEnterprises method Initialized');
 
-		$menu = [
-			'user_access'
-		];
-		$this->session->unset_userdata($menu);
+		$this->session->unset_userdata('user_access');
 		$this->className = "com.novo.objects.MO.ListadoEmpresasMO";
 
 		$this->dataAccessLog->modulo = 'Negocios';
@@ -56,15 +53,14 @@ class Novo_Business_Model extends NOVO_Model {
 		$this->dataRequest->paginar = FALSE;
 		$this->dataRequest->tamanoPagina = $sizePage;
 		$this->dataRequest->filtroEmpresas = '';
-		log_message('INFO', '--------------------------'.$screenSize.'---'.$sizePage);
-		$response = $this->sendToService('getEnterprises');
+		$response = $this->sendToService(lang('GEN_GET_ENTERPRISES'));
 		$responseList = new stdClass();
 
 		switch($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
 
-				$enterpriseList = $response->listadoEmpresas->lista;//!$dataRequest ? $response->listadoEmpresas->lista : $response->lista;
+				$enterpriseList = $response->listadoEmpresas->lista;
 				$enterpriseList = $this->OrderEnterpriseList($enterpriseList, $dataRequest);
 				$responseList->list = $enterpriseList->list;
 				if(!$dataRequest) {
@@ -78,9 +74,12 @@ class Novo_Business_Model extends NOVO_Model {
 				$this->response->data = $responseList;
 				log_message('DEBUG', 'NOVO ['.$this->userName.'] RESPONSE getEnterprises: '.json_encode($enterpriseList));
 				break;
+			case 6:
+				$this->response->code = 3;
+				break;
 		}
 
-		return $this->response;
+		return $this->responseToTheView(lang('GEN_GET_ENTERPRISES'));
 	}
 	/**
 	 * @info Método para ordenar lista de empresas para vista consolidada

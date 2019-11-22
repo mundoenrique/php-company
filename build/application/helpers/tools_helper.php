@@ -245,7 +245,9 @@ if(!function_exists('languajeLoad')) {
 				];
 				break;
 			case 'bdb':
-				$languages = [];
+				$languages = [
+					'login' => ['login']
+				];
 				break;
 			case 'co':
 				$languages = [

@@ -6,5 +6,10 @@ $lang['GEN_WELCOME_TEXT'] = 'Bienvenido/a';
 $lang['GEN-LOGO-HEAD'] = 'logo-pichincha-azul.png';
 $lang['GEN_ALTERNATIVE_TEXT'] = 'Banco Pichincha';
 $lang['BREADCRUMB_WELCOME'] = 'Bienvenido/a';
-
 $lang['BREADCRUMB_WELCOME'] = 'Bienvenido/a';
+//MODAL STYLES
+$lang['GEN_ICON'] = '';
+$lang['GEN_ICON_SUCCESS'] = '';
+$lang['GEN_ICON_INFO'] = '';
+$lang['GEN_ICON_WARNING'] = '';
+$lang['GEN_ICON_DANGER'] = '';

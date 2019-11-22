@@ -82,11 +82,11 @@ class Verify_Access {
 	{
 		log_message('INFO', 'NOVO Verify_Access: ResponseByDefect method initialized');
 
-		$this->responseDefect->code = lang('RESP_DEFAULT_CODE');;
+		$this->responseDefect->code = lang('RESP_DEFAULT_CODE');
 		$this->responseDefect->title = lang('GEN_SYSTEM_NAME');
 		$this->responseDefect->msg = lang('RESP_VALIDATION_INPUT');
 		$this->responseDefect->data = base_url('inicio');
-		$this->responseDefect->icon = 'ui-icon-alert';
+		$this->responseDefect->icon = lang('GEN_ICON_WARNING');
 		$this->responseDefect->data = [
 			'btn1'=> [
 				'text'=> lang('GEN_BTN_ACCEPT'),
@@ -124,10 +124,10 @@ class Verify_Access {
 			case 'getEnterprises':
 			case 'getProducts':
 			case 'getProductDetail':
-				$auth = ($this->CI->session->userdata('logged') != NULL && $countryUri === 'bdb');
+				$auth = ($this->CI->session->logged != NULL && $countryUri === 'bdb');
 				break;
 			case 'rates':
-				$auth = ($this->CI->session->userdata('logged') != NULL && $countryUri === 've');
+				$auth = ($this->CI->session->logged != NULL && $countryUri === 've');
 				break;
 		}
 

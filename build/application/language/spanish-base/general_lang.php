@@ -4,7 +4,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $lang['GEN_SYSTEM_NAME']= 'Conexión Empresas Online';
 $lang['GEN_WELCOME_TEXT'] = 'Bienvenido(a)';
 $lang['GEN_ENTERPRISE_LIST'] = 'dashboard';
-$lang['GEN_MODAL_SIZE'] = 310;
 $lang['GEN_USER'] = 'Usuario';
 $lang['GEN_PASSWORD'] = 'Contraseña';
 $lang['GEN_EMAIL'] = 'Correo electrónico';
@@ -32,6 +31,16 @@ $lang['GEN_RECOVER_PASS'] = 'RecoverPass';
 $lang['GEN_CHANGE_PASS'] = 'ChangePassword';
 $lang['GEN_FINISH_SESSION'] = 'FinishSession';
 $lang['GEN_VALIDATE_CAPTCHA'] = 'validateCaptcha';
+$lang['GEN_GET_ENTERPRISES'] = 'getEnterprises';
+$lang['GEN_ACTIVE_RECAPTCHA'] = ACTIVE_RECAPTCHA;
+$lang['GEN_LOGIN_URI'] = ACTIVE_RECAPTCHA ? $lang['GEN_VALIDATE_CAPTCHA'] : $lang['GEN_LOGIN'];
+//MODAL STYLES
+$lang['GEN_MODAL_SIZE'] = 310;
+$lang['GEN_ICON'] = 'ui-icon';
+$lang['GEN_ICON_SUCCESS'] = 'ui-icon-circle-check';
+$lang['GEN_ICON_INFO'] = 'ui-icon-info';
+$lang['GEN_ICON_WARNING'] = 'ui-icon-alert';
+$lang['GEN_ICON_DANGER'] = 'ui-icon-closethick';
 
 
 $lang['LAST_SESSION']='Última sesión';

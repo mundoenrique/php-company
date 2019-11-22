@@ -1,5 +1,4 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
-<?php if($logged): ?>
 <footer class="main-footer">
 	<div class="flex pr-2 pr-lg-0">
 		<img src="<?= $this->asset->insertFile($countryUri.'/img-mark.svg'); ?>" alt="Logo Superintendencia">
@@ -13,14 +12,12 @@
 			reservados. Banco de Bogotá - 2019.</span>
 	</div>
 </footer>
-<?php endif; ?>
 
 <div id="loader" class="none">
 	<span class="spinner-border secondary" role="status" aria-hidden="true"></span>
 </div>
 
-<div id="system-info" class="hide" name="system-info" default-code="<?= lang('RESP_DEFAULT_CODE'); ?>"
-	redirect="<?= lang('GEN_ENTERPRISE_LIST') ?>">
+<div id="system-info" class="hide" name="system-info">
 	<p>
 		<span class="dialog-icon">
 			<i id="system-icon" class="ui-icon mt-0"></i>

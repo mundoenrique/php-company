@@ -54,7 +54,7 @@ class NOVO_Model extends CI_Model {
 		$this->response->code = lang('RESP_DEFAULT_CODE');
 		$this->response->title = lang('GEN_SYSTEM_NAME');
 		$this->response->msg = '';
-		$this->response->icon = 'ui-icon-alert';
+		$this->response->icon = lang('GEN_ICON_WARNING');
 		$this->response->data = [
 			'btn1'=> [
 				'text'=> FALSE,
@@ -65,7 +65,7 @@ class NOVO_Model extends CI_Model {
 		switch($this->isResponseRc) {
 			case -29:
 			case -61:
-				$this->response->msg = lang('RES_DUPLICATED_SESSION');
+				$this->response->msg = lang('RESP_DUPLICATED_SESSION');
 				$this->session->sess_destroy();
 				break;
 			default:

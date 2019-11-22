@@ -9,7 +9,7 @@ $(function() {
 
 		$(".general-form-msg").html('');
 		var form = $('#login-form');
-		var captcha = getPropertyOfElement('recaptcha', '#widget-signin');
+		var captcha = lang.GEN_ACTIVE_RECAPTCHA;
 		userCred = getCredentialsUser();
 		btnText = $(this).text();
 
@@ -28,15 +28,14 @@ $(function() {
 						}
 					}, function(token) {
 						if(!token) {
-							title = prefixCountry + strCountry;
-							icon = iconWarning;
+							icon = lan.GEN_ICON_WARNING;
 							data = {
 								btn1: {
 									link: baseURL+'inicio',
 									action: 'redirect'
 								}
 							};
-							notiSystem(title, msg, icon, data);
+							notiSystem(false, false, icon, data);
 							restartFormLogin();
 						}
 					});
@@ -79,7 +78,7 @@ $(function() {
 	};
 
 	function validateLogin(token) {
-		verb = 'POST'; who = forWho || 'User'; where = forWhere || getPropertyOfElement('login-uri', '#widget-signin');
+		verb = 'POST'; who = forWho || 'User'; where = forWhere || lang.GEN_LOGIN_URI;
 		data = {
 			user: userCred.user,
 			pass: userCred.pass,
@@ -114,7 +113,7 @@ $(function() {
 			restartFormLogin();
 		},
 		2: function() {
-			userCred.active = 1; forWhere = 'Login';
+			userCred.active = 1; forWhere = lang.GEN_LOGIN;
 			validateLogin();
 		},
 		3: function(response) {

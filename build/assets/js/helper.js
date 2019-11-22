@@ -1,20 +1,10 @@
 'use strict'
-//icons
-var iconSuccess = 'ui-icon-circle-check';
-var iconInfo = 'ui-icon-info';
-var iconWarning = 'ui-icon-alert';
-var iconDanger = 'ui-icon-closethick';
 //app
-var baseURL = getPropertyOfElement('base-url');
-var baseAssets = getPropertyOfElement('asset-url');
-var country = getPropertyOfElement('country');
 var loader = $('#loader').html();
-var prefixCountry = country !== 'bp' ? 'Empresas Online ' : '';
-var settingsCountry = { bp: 'Conexión Empresas', co: 'Colombia', pe: 'Perú', us: 'Perú', ve: 'Venezuela' };
-var strCountry = settingsCountry[country];
-var currenTime = new Date();
-var screenSize = screen.width;
+var currenTime;
+var screenSize;
 var verb, who, where, data, title, msg, icon, dataResponse, ceo_cook;
+
 $('input[type=text], input[type=password], input[type=email]').attr('autocomplete', 'off');
 /**
  * @info Llama al core del servidor
@@ -25,14 +15,14 @@ function callNovoCore(verb, who, where, request, _response_) {
 	ceo_cook = decodeURIComponent(
 		document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 	);
-	request.currenTime = currenTime;
-	request.screenSize = screenSize;
+	request.currenTime = new Date();
+	request.screenSize = screen.width;
 	var dataRequest = JSON.stringify({
 		who: who,
 		where: where,
 		data: request
 	});
-	var codeResp = parseInt(getPropertyOfElement('default-code', '#system-info'));
+	var codeResp = parseInt(lang.RESP_DEFAULT_CODE);
 	dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, { format: CryptoJSAesJson }).toString();
 
 	$.ajax({
@@ -52,19 +42,18 @@ function callNovoCore(verb, who, where, request, _response_) {
 		_response_(response);
 
 	}).fail(function (jqXHR, textStatus, errorThrown ) {
-		var uriRedirect = getPropertyOfElement('redirect', '#system-info');
 		var response = {
 			code: codeResp,
-			title: prefixCountry + strCountry,
-			icon: iconWarning,
+			/* title: lang.GEN_SYSTEM_NAME,
+			icon: lang.GEN_ICON_WARNING,
 			data: {
 				btn1: {
-					link: baseURL+uriRedirect,
+					link: baseURL+lang.GEN_ENTERPRISE_LIST,
 					action: 'redirect'
 				}
-			}
+			} */
 		};
-		notiSystem(response.title, response.msg, response.icon, response.data);
+		notiSystem();
 		_response_(response);
 	});
 }
@@ -77,12 +66,14 @@ function notiSystem(title, message, icon, data) {
 	var btnAccept = $('#accept');
 	var btnCancel = $('#cancel');
 	var dialogMoldal = $('#system-info');
-	var message = message || $('#system-msg').text();
-	var btn1 = data.btn1 || {link: false, action: 'close', text: btnAccept.text()};
-	var btn2 = data.btn2;
+	var defaulBtn = {link: baseURL+lang.GEN_ENTERPRISE_LIST, action: 'redirect', text: lang.GEN_BTN_ACCEPT};
+	var btn1 = data ? data.btn1 : defaulBtn;
+	var btn2 = data ? data.btn2 : false;
+	message = message || lang.RESP_MESSAGE_SYSTEM;
+	icon = icon || lang.GEN_ICON_DANGER
 
 	dialogMoldal.dialog({
-		title: title,
+		title: title || lang.GEN_SYSTEM_NAME,
 		modal: 'true',
 		minHeight: 100,
 		draggable: false,
@@ -145,7 +136,11 @@ function getPropertyOfElement(property, element) {
 	var element = element || 'body';
 	return $(element).attr(property);
 }
-
+/**
+ * @info Incorpora inputs a formularios
+ * @author J. Enrique Peñaloza
+ * @date November 18th, 2019
+ */
 function insertFormInput(form = false) {
 	$('button, select').prop('disabled', true);
 	if(form) {

@@ -12,7 +12,7 @@
 	<?= $this->asset->insertCss(); ?>
 	<title><?= $titlePage; ?> - CEO</title>
 </head>
-<body base-url="<?= base_url(); ?>" asset-url="<?= assetUrl(); ?>" country="<?= $countryUri; ?>">
+<body code="" msg="" data="">
 	<?php $this->load->view('header_content'.$newViews) ?>
 
 	<?php if($newViews != ''): ?>
@@ -36,7 +36,10 @@
 	<?= ($module == lang('GEN_LOGIN') && $activeRecaptcha) ?  $scriptCaptcha : ''; ?>
 	<?= $this->asset->insertJs(); ?>
 	<script>
-		var lang = <? print_r(json_encode($this->lang->language)); ?>
+		var lang = <? print_r(json_encode($this->lang->language)); ?>;
+		var baseURL = '<?= base_url(); ?>';
+		var assetUrl = '<?= assetUrl(); ?>';
+		var country = '<?= $this->config->item('country'); ?>';
 	</script>
 </body>
 </html>

@@ -114,7 +114,7 @@ class Novo_User_Model extends NOVO_Model {
 			case -262:
 				$this->response->code = 3;
 				$this->response->msg = lang('RESP_NO_PERMISSIONS');
-				$this->response->icon = 'ui-icon-info';
+				$this->response->icon = lang('GEN_ICON_INFO');
 				$this->response->data = [
 					'btn1'=> [
 						'action'=> 'close'
@@ -124,7 +124,7 @@ class Novo_User_Model extends NOVO_Model {
 			case -28:
 				$this->response->code = 3;
 				$this->response->msg = lang('RESP_INCORRECTLY_CLOSED');
-				$this->response->icon = 'ui-icon-alert';
+				$this->response->icon = lang('GEN_ICON_WARNING');
 				$this->response->data = [
 					'btn1'=> [
 						'link'=> [
@@ -169,7 +169,7 @@ class Novo_User_Model extends NOVO_Model {
 			case 0:
 				$this->response->code = 0;
 				$this->response->msg = novoLang(lang('RESP_TEMP_PASS'), [$this->dataRequest->userName, $maskMail]);
-				$this->response->icon = 'ui-icon-circle-check';
+				$this->response->icon = lang('GEN_ICON_SUCCESS');
 				$this->response->data = [
 					'btn1'=> [
 						'text'=> lang('GEN_BTN_CONTINUE'),
@@ -203,7 +203,7 @@ class Novo_User_Model extends NOVO_Model {
 
 		if($this->isResponseRc != 0 && $this->response->code == 1) {
 			$this->response->title = lang('GEN_RECOVER_PASS_TITLE');
-			$this->response->icon = 'ui-icon-info';
+			$this->response->icon = lang('GEN_ICON_INFO');
 			$this->response->data = [
 				'btn1'=> [
 					'action'=> 'close'
@@ -241,7 +241,7 @@ class Novo_User_Model extends NOVO_Model {
 				$this->callWs_FinishSession_User();
 				$this->response->code = 0;
 				$this->response->msg = lang('RESP_PASSWORD_CHANGED');
-				$this->response->icon = 'ui-icon-circle-check';
+				$this->response->icon = lang('GEN_ICON_SUCCESS');
 				$this->response->data = [
 					'btn1'=> [
 						'text'=> lang('GEN_BTN_CONTINUE'),
@@ -264,7 +264,7 @@ class Novo_User_Model extends NOVO_Model {
 			$this->session->set_flashdata('changePassword', $changePassType);
 			$this->session->set_flashdata('userType', $this->session->flashdata('userType'));
 			$this->response->title = lang('GEN_PASSWORD_CHANGE_TITLE');
-			$this->response->icon = 'ui-icon-alert';
+			$this->response->icon = lan('GEN_ICON_WARNING');
 			$this->response->data = [
 				'btn1'=> [
 					'action'=> 'close'
@@ -329,7 +329,7 @@ class Novo_User_Model extends NOVO_Model {
 
 		if($result["score"] <= 0) {
 			$this->response->code = 3;
-			$this->response->icon = 'ui-icon-closethick';
+			$this->response->icon = lang('GEN_ICON_DANGER');
 			$this->response->msg = lang('RESP_RECAPTCHA_VALIDATION_FAILED');
 			$this->response->data = [
 				'btn1'=> [

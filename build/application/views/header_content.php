@@ -1,5 +1,5 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
-<?php if($settingContents['master_content']['logo'] || $module != 'login'): ?>
+<?php if($countryUri !== 'bp' && !$logged): ?>
 <header id="head">
 	<div id="head-wrapper">
 		<?php if( lang('GEN-LOGO-HEAD') ): ?>

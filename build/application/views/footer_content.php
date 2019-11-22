@@ -3,7 +3,7 @@
 	<div id="foot-wrapper">
 		<nav id="extra-nav">
 			<ul class="menu">
-				<?php if(!$logged && $module !== 'login'): ?>
+				<?php if(!$logged && $module !== lang('GEN_LOGIN')): ?>
 				<li class="menu-item signup">
 					<a id="signup" href="<?= base_url($goOut); ?>" rel="section">
 						<?= lang('BREADCRUMB_INICIO'); ?>
@@ -56,10 +56,9 @@
 	<img src="<?= $this->asset->insertFile($loader, 'images/loading-gif') ?>" class="requesting"
 		alt="<?= lang('ALT_LOADER'); ?>">
 </div>
-<div id="system-info" class="hidden" default-code="<?= lang('RESP_DEFAULT_CODE'); ?>"
-	redirect="<?= lang('GEN_ENTERPRISE_LIST') ?>">
+<div id="system-info" class="hidden">
 	<p class="system-content">
-		<span id="system-icon" class="ui-icon"></span>
+		<span id="system-icon" class="<?= lang('GEN_ICON'); ?>"></span>
 		<span id="system-msg" class="system-msg"><?= lang('RESP_MESSAGE_SYSTEM'); ?></span>
 	</p>
 	<div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
