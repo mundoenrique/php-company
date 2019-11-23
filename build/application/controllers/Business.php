@@ -20,6 +20,7 @@ class Business extends NOVO_Controller {
 	public function getEnterprises()
 	{
 		log_message('INFO', 'NOVO Business: getEnterprises Method Initialized');
+
 		$view = 'enterprise';
 
 		array_push(
@@ -32,6 +33,7 @@ class Business extends NOVO_Controller {
 
 		$this->views = ['business/'.$view];
 		$responseList = $this->loadModel();
+		$this->responseAttr($responseList);
 		$this->render->titlePage = "Empresas";
 		$this->render->category = "";
 		$this->render->lastSession = $this->session->userdata('lastSession');
@@ -39,6 +41,8 @@ class Business extends NOVO_Controller {
 		$this->render->enterpriseList = $responseList->data->list;
 		$this->render->filters = $responseList->data->filters;
 		$this->render->recordsPage = $responseList->data->recordsPage;
+		$this->render->msgEnterprise = $responseList->data->text;
+		$this->render->disabled = $responseList->code == 0 ?: 'disabled';
 		$this->loadView($view);
 	}
 	/**
@@ -49,6 +53,13 @@ class Business extends NOVO_Controller {
 	public function getProducts()
 	{
 		log_message('INFO', 'NOVO Business: getProducts Method Initialized');
+
+		$requestArray = (array)$this->request;
+
+		if(empty($requestArray) && !$this->session->has_userdata('getProducts')) {
+			redirect(base_url('inicio'), 'location');
+		}
+
 		$view = 'products';
 
 		array_push(
@@ -58,9 +69,8 @@ class Business extends NOVO_Controller {
 			"business/products"
 		);
 
-		$requestArray = (array)$this->request;
 		if(empty($requestArray)) {
-			$request = $this->session->userdata('getProducts');
+			$request = $this->session->getProducts;
 			$this->request->enterpriseCode = $request->enterpriseCode;
 			$this->request->enterpriseGroup = $request->enterpriseGroup;
 			$this->request->idFiscal = $request->idFiscal;
@@ -91,10 +101,15 @@ class Business extends NOVO_Controller {
 		$this->views = ['business/'.$view];
 		$this->loadView($view);
 	}
-
+	/**
+	 * @info Método para renderizar la vista consolidada del producto
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date November 22th, 2019
+	 */
 	public function getProductDetail()
 	{
 		log_message('INFO', 'NOVO Business: getProductDetail Method Initialized');
+
 		$view = 'product-detail';
 		$this->render->titlePage = "Detalle del producto";
 		$this->views = ['business/'.$view];

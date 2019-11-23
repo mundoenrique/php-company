@@ -12,7 +12,7 @@
 	<?= $this->asset->insertCss(); ?>
 	<title><?= $titlePage; ?> - CEO</title>
 </head>
-<body code="" msg="" icon="" data="">
+<body>
 	<?php $this->load->view('header_content'.$newViews) ?>
 
 	<?php if($newViews != ''): ?>
@@ -40,6 +40,11 @@
 		var baseURL = '<?= base_url(); ?>';
 		var assetUrl = '<?= assetUrl(); ?>';
 		var country = '<?= $this->config->item('country'); ?>';
+		var code = <?= $code; ?>;
+		var title = '<?= $title; ?>';
+		var msg = '<?= $msg; ?>';
+		var icon = '<?= $icon; ?>';
+		var data = <?= $data; ?>;
 	</script>
 </body>
 </html>

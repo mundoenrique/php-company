@@ -22,7 +22,6 @@ class Novo_Business_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO Business Model: getEnterprises method Initialized');
 
-		$this->session->unset_userdata('user_access');
 		$this->className = "com.novo.objects.MO.ListadoEmpresasMO";
 
 		$this->dataAccessLog->modulo = 'Negocios';
@@ -52,15 +51,26 @@ class Novo_Business_Model extends NOVO_Model {
 				$responseList->list = $enterpriseList->list;
 
 				if(!$dataRequest) {
+					$access = [
+						'user_access',
+						'getProducts'
+					];
+
+					$this->session->unset_userdata($access);
+
 					$responseList->filters = $enterpriseList->filters;
 					$responseList->enterprisesTotal = $response->listadoEmpresas->totalRegistros;
 					$responseList->recordsPage = ceil($responseList->enterprisesTotal/$sizePage);
+					$responseList->text = '';
 				}
-
-			break;
+				break;
 			case -6:
 				$this->response->code = 1;
-			break;
+				$responseList->text = lang('ENTERPRISE_NOT_ASSIGNED');
+				break;
+			default:
+				$responseList->text = lang('ENTERPRISE_NOT_OBTEIN');
+				$this->response->data['btn1']['link'] = base_url('cerrar-sesion');
 		}
 
 		if(!$dataRequest && $this->response->code != 0) {
@@ -69,6 +79,8 @@ class Novo_Business_Model extends NOVO_Model {
 			$responseList->recordsPage = ceil($responseList->enterprisesTotal/$sizePage);
 			$responseList->list = [];
 		}
+
+		$responseList->res = $this->response->data;
 		$this->response->data = $responseList;
 
 		return $this->responseToTheView(lang('GEN_GET_ENTERPRISES'));

@@ -45,10 +45,15 @@ class NOVO_Controller extends CI_Controller {
 		$this->greeting = (int) $this->session->userdata('greeting');
 		$this->optionsCheck();
 	}
-
+	/**
+	 * Método para varificar datos génericos de la solcitud
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date April 20th, 2019
+	 */
 	private function optionsCheck()
 	{
-		log_message('INFO', 'NOVO optionsCheck Method Initialized');
+		log_message('INFO', 'NOVO_Controller: optionsCheck Method Initialized');
+
 		languageLoad();
 		countryCheck($this->countryUri);
 		languageLoad($this->countryUri);
@@ -87,6 +92,11 @@ class NOVO_Controller extends CI_Controller {
 					$this->request = $this->verify_access->createRequest($this->rule, $this->appUserName);
 				}
 			}
+			$this->render->code = -1;
+			$this->render->title = -1;
+			$this->render->msg = -1;
+			$this->render->icon = -1;
+			$this->render->data = -1;
 			$this->preloadView($access && $valid);
 		}
 
@@ -98,7 +108,7 @@ class NOVO_Controller extends CI_Controller {
 	 */
 	protected function preloadView($auth)
 	{
-		log_message('INFO', 'NOVO NOVO_Controller: preloadView method initialized');
+		log_message('INFO', 'NOVO_Controller: preloadView method initialized');
 
 		if($auth) {
 			$faviconLoader = getFaviconLoader($this->countryUri);
@@ -168,9 +178,27 @@ class NOVO_Controller extends CI_Controller {
 	 */
 	protected function loadModel($request = FALSE)
 	{
+		log_message('INFO', 'NOVO_Controller: loadModel method initialized. Model loaded: '.$this->model);
+
 		$this->load->model($this->model,'modelLoaded');
 		$method = $this->method;
 		return $this->modelLoaded->$method($request);
+	}
+	/**
+	 * Método para extraer mensaje al usuario
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date Auguts 22nd, 2019
+	 */
+	protected function responseAttr($responseView)
+	{
+		log_message('INFO', 'NOVO_Controller: responseAttr method initialized');
+		$this->render->code = $responseView->code;
+		if($this->render->code > 2) {
+			$this->render->title = $responseView->title;
+			$this->render->msg = $responseView->msg;
+			$this->render->icon = $responseView->icon;
+			$this->render->data = json_encode($responseView->data->res);
+		}
 	}
 	/**
 	 * Método para renderizar una vista
@@ -179,7 +207,7 @@ class NOVO_Controller extends CI_Controller {
 	 */
 	protected function loadView($module)
 	{
-		log_message('INFO', 'NOVO loadView Method Initialized. Module loaded: '.$module);
+		log_message('INFO', 'NOVO_Controller: loadView method initialized. View loaded: '.$module);
 
 		$userAccess = $this->session->userdata('user_access');
 		$menu = createMenu($userAccess);
@@ -190,6 +218,7 @@ class NOVO_Controller extends CI_Controller {
 		$this->render->settingsMenu = $userMenu;
 		$this->render->goOut = ($this->render->logged || $this->session->flashdata('changePassword'))
 		? 'cerrar-sesion' : 'inicio';
+
 		$this->render->module = $module;
 		$this->render->viewPage = $this->views;
 		$this->asset->initialize($this->includeAssets);

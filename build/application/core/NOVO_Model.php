@@ -74,6 +74,7 @@ class NOVO_Model extends CI_Model {
 				break;
 			default:
 				$this->response->msg = lang('RESP_MESSAGE_SYSTEM');
+				$this->response->icon = lang('GEN_ICON_DANGER');
 				break;
 		}
 		$this->response->msg = $this->isResponseRc == 0 ? lang('RESP_RC_0') : $this->response->msg;

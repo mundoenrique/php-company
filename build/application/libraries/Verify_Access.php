@@ -121,13 +121,15 @@ class Verify_Access {
 			case 'changePassword':
 				$auth = ($this->CI->session->flashdata('changePassword') != NULL);
 				break;
+			case 'rates':
+				$auth = ($this->CI->session->has_userdata('logged') && $countryUri === 've');
+				break;
 			case 'getEnterprises':
 			case 'getProducts':
-			case 'getProductDetail':
-				$auth = ($this->CI->session->logged != NULL && $countryUri === 'bdb');
+				$auth = ($this->CI->session->has_userdata('logged') && $countryUri === 'bdb');
 				break;
-			case 'rates':
-				$auth = ($this->CI->session->logged != NULL && $countryUri === 've');
+			case 'getProductDetail':
+				$auth = ($this->CI->session->has_userdata('getProducts') && $countryUri === 'bdb');
 				break;
 		}
 

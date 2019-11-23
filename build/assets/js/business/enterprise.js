@@ -29,7 +29,7 @@ $(function () {
 			$(event.currentTarget).removeClass('visible');
 			enterprisePages.removeClass('visible');
 		} else {
-			noEnterprise.find('span').text(lang.ENTERPRISE_NOT_ASSIGNED);
+			searchIcon.off('click').css('cursor', 'default');
 			enterprisePages.addClass('none');
 		}
 	});

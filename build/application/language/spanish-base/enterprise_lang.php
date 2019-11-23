@@ -12,6 +12,7 @@ $lang['ENTERPRISE_FILTER_SEL_CAT']= 'Buscar por categorías';
 $lang['ENTERPRISE_FILTER_SEL_MARC']= 'Buscar por marca';
 $lang['ENTERPRISE_BREADCRUMB_TITL_BUSCAR']= 'Buscar por texto';
 $lang['ENTERPRISE_NOT_ASSIGNED']= 'No tienes empresa asignada';
+$lang['ENTERPRISE_NOT_OBTEIN']= 'No fue posible obtener el listado de empresas';
 $lang['ENTERPRISE_FILTER_1']= 'A-C';
 $lang['ENTERPRISE_FILTER_2']= 'D-G';
 $lang['ENTERPRISE_FILTER_3']= 'H-K';

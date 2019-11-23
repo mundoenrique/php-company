@@ -20,7 +20,7 @@
 			<span><?= lang('ENTERPRISE_TOTAL') ?>: <?= $enterprisesTotal ?></span>
 		</div>
 		<div id="alphabetical" class="flex h6 flex-auto justify-end">
-			<button class="btn btn-outline btn-small btn-rounded-left bg-white" filter-page="page_1">
+			<button class="btn btn-outline btn-small btn-rounded-left bg-white" filter-page="page_1" <?= $disabled ?>>
 				<?= lang('ENTERPRISE_FILTER_TODAS'); ?>
 			</button>
 			<?php foreach($filters AS $filtersAttr): ?>
@@ -37,7 +37,7 @@
 
 	<div id="no-enterprise" class="bg-color mx-4 my-5">
 		<div class="flex justify-center">
-			<span class="my-5 py-5 h4 regular text"></span>
+			<span class="my-5 py-5 h4 regular text"><?= $msgEnterprise ?></span>
 		</div>
 	</div>
 

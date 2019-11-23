@@ -3,9 +3,20 @@
 var loader = $('#loader').html();
 var currenTime;
 var screenSize;
-var verb, who, where, data, title, msg, icon, dataResponse, ceo_cook;
+var verb, who, where, dataResponse, ceo_cook;
 
-$('input[type=text], input[type=password], input[type=email]').attr('autocomplete', 'off');
+$(function () {
+	$('input[type=text], input[type=password], input[type=email]').attr('autocomplete', 'off');
+	/**
+ * @info Maneja llamado del modal para petiociones submit
+ * @author J. Enrique Peñaloza Piñero
+ * @date November 22nd, 2019
+ */
+	if(code > 2) {
+		notiSystem(title, msg, icon, data)
+	}
+
+});
 /**
  * @info Llama al core del servidor
  * @author J. Enrique Peñaloza Piñero
@@ -42,8 +53,18 @@ function callNovoCore(verb, who, where, request, _response_) {
 		_response_(response);
 
 	}).fail(function (jqXHR, textStatus, errorThrown ) {
-		var response = {code: codeResp};
-		notiSystem();
+		var response = {
+			code: codeResp,
+			title: lang.GEN_SYSTEM_NAME,
+			icon: lang.GEN_ICON_DANGER,
+			data: {
+				btn1: {
+					link: baseURL+lang.GEN_ENTERPRISE_LIST,
+					action: 'redirect'
+				}
+			}
+		};
+		notiSystem(response.title, response.msg, response.icon, response.data);
 		_response_(response);
 	});
 }
@@ -56,11 +77,8 @@ function notiSystem(title, message, icon, data) {
 	var btnAccept = $('#accept');
 	var btnCancel = $('#cancel');
 	var dialogMoldal = $('#system-info');
-	var defaulBtn = {link: baseURL+lang.GEN_ENTERPRISE_LIST, action: 'redirect', text: lang.GEN_BTN_ACCEPT};
-	var btn1 = data ? data.btn1 : defaulBtn;
-	var btn2 = data ? data.btn2 : false;
-	message = message || lang.RESP_MESSAGE_SYSTEM;
-	icon = icon || lang.GEN_ICON_DANGER
+	var btn1 = data.btn1;
+	var btn2 = data.btn2;
 
 	dialogMoldal.dialog({
 		title: title || lang.GEN_SYSTEM_NAME,
@@ -96,12 +114,11 @@ function notiSystem(title, message, icon, data) {
  * @author Pedro Torres
  * @date 16/09/2019
  */
-function createButton(dialogMoldal, elementBotton, valuesButton){
-	valuesButton.text && elementBotton.text(valuesButton.text);
-	elementBotton.show();
-	elementBotton.on('click', function (e) {
+function createButton(dialogMoldal, elementButton, valuesButton) {
+	valuesButton.text && elementButton.text(valuesButton.text);
+	elementButton.show();
+	elementButton.on('click', function (e) {
 		if (valuesButton.action === 'redirect') {
-			$(location).attr('href', valuesButton.link);
 			$(this).html(loader);
 			$(this).children('span').addClass('spinner-border-sm');
 			if($(this).attr('id') == 'cancel') {
@@ -109,22 +126,13 @@ function createButton(dialogMoldal, elementBotton, valuesButton){
 				.removeClass('secondary')
 				.addClass('primary');
 			}
+			$(location).attr('href', valuesButton.link);
 		}
 		if (valuesButton.action !== 'redirect') {
 			dialogMoldal.dialog('close');
 		}
 		$(this).off('click');
 	});
-}
-/**
- * @info lee una propiedad especifica de un elemento html,
- * de no indicarse el elemento se toma por defecto el body
- * @author Pedro Torres
- * @date 27/08/2019
- */
-function getPropertyOfElement(property, element) {
-	var element = element || 'body';
-	return $(element).attr(property);
 }
 /**
  * @info Incorpora inputs a formularios
@@ -143,4 +151,14 @@ function insertFormInput(form = false) {
 		form.append(`<input type="hidden" name="currenTime" value="${currenTime}"></input>`);
 		form.append(`<input type="hidden" name="screenSize" value="${screenSize}"></input>`);
 	}
+}
+/**
+ * @info lee una propiedad especifica de un elemento html,
+ * de no indicarse el elemento se toma por defecto el body
+ * @author Pedro Torres
+ * @date 27/08/2019
+ */
+function getPropertyOfElement(property, element) {
+	var element = element || 'body';
+	return $(element).attr(property);
 }
