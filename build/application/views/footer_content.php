@@ -10,51 +10,51 @@
 					</a>
 				</li>
 				<?php endif; ?>
-				<?php if($module !== 'benefits' && $module !== 'change-password' && $module !== 'terms' && $settingContents['master_content']['menuFooter']): ?>
+				<?php if(verifyDisplay('footer', $module, lang('GEN_FOTTER_BENEFITS'))): ?>
 				<li class="menu-item benefits">
 					<a href="<?= base_url('inf-beneficios') ?>" rel="section">
-						<?= lang('GEN_FOTTER_BENEFITS') ?>
+						<?= lang('GEN_FOTTER_BENEFITS'); ?>
 					</a>
 				</li>
 				<?php endif; ?>
-				<?php if($module !== 'terms' && $module !== 'change-password'  && $settingContents['master_content']['menuFooter']): ?>
+				<?php if(verifyDisplay('footer', $module, lang('GEN_FOTTER_TERMS'))): ?>
 				<li class="menu-item terms">
 					<a href="<?= base_url('inf-condiciones'); ?>" rel="section">
-						<?= lang('GEN_FOTTER_TERMS') ?>
+						<?= lang('GEN_FOTTER_TERMS'); ?>
 					</a>
 				</li>
 				<?php endif; ?>
-				<?php if($logged && $settingContents['master_content']['showRates'] && $module !== 'rates'): ?>
+				<?php if(verifyDisplay('footer', $module, lang('GEN_FOTTER_RATES'))): ?>
 				<li class="menu-item privacy">
 					<a id='tarifas' href="<?= base_url('inf-tarifas'); ?>" rel="section">
 						<?= lang('GEN_FOTTER_RATES'); ?>
 					</a>
 				</li>
 				<?php endif; ?>
-				<?php if($logged):	?>
+				<?php if(verifyDisplay('footer', $module, lang('GEN_FOTTER_LOGOUT'))):	?>
 				<li class="menu-item privacy">
 					<a id='exit' href="<?= base_url('cerrar-sesion'); ?>" rel="section">
-						<?= lang('SUBMENU_LOGOUT'); ?>
+						<?= lang('GEN_FOTTER_LOGOUT'); ?>
 					</a>
 				</li>
 				<?php endif; ?>
 			</ul>
 		</nav>
 
-		<?php if($settingContents['master_content']['ownerShip'] !== FALSE): ?>
-		<a id="ownership" href="<?= $settingContents['master_content']['ownerShip'] ?>" rel="me">
-			<?= lang('OWNERSHIP'); ?>
+		<?php if(verifyDisplay('footer', $module, lang('GEN_FOTTER_OWNERSHIP'))): ?>
+		<a id="ownership" href="<?= lang('GEN_FOTTER_OWNER_URL') ?>" rel="me"  target="_blank">
+			<?= lang('GEN_FOTTER_OWNERSHIP'); ?>
 		</a>
 		<div class="separator"></div>
 		<div id="credits">
-			<p>© <?= date('Y').' '.lang('CREDITS'); ?></p>
+			<p>© <?= date('Y').' '.lang('GEN_FOTTER_RIGHTS'); ?></p>
 		</div>
 		<?php endif; ?>
 	</div>
 </footer>
 <div id="loader" class="hidden">
 	<img src="<?= $this->asset->insertFile($loader, 'images/loading-gif') ?>" class="requesting"
-		alt="<?= lang('ALT_LOADER'); ?>">
+		alt="<?= lang('GEN_ALT_LOADER'); ?>">
 </div>
 <div id="system-info" class="hidden">
 	<p class="system-content">

@@ -107,7 +107,9 @@ $autoload['helper'] = array(
 	'tools',
 	'form',
 	'cookie',
-	'novo_language'
+	'novo_toolset',
+	'novo_language',
+	'novo_display'
 );
 
 /*
