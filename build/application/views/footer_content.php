@@ -6,28 +6,28 @@
 				<?php if(!$logged && $module !== lang('GEN_LOGIN')): ?>
 				<li class="menu-item signup">
 					<a id="signup" href="<?= base_url($goOut); ?>" rel="section">
-						<?= lang('BREADCRUMB_INICIO'); ?>
+						<?= lang('GEN_FOTTER_START'); ?>
 					</a>
 				</li>
 				<?php endif; ?>
 				<?php if($module !== 'benefits' && $module !== 'change-password' && $module !== 'terms' && $settingContents['master_content']['menuFooter']): ?>
 				<li class="menu-item benefits">
 					<a href="<?= base_url('inf-beneficios') ?>" rel="section">
-						<?= lang('BREADCRUMB_BENEFICIOS') ?>
+						<?= lang('GEN_FOTTER_BENEFITS') ?>
 					</a>
 				</li>
 				<?php endif; ?>
 				<?php if($module !== 'terms' && $module !== 'change-password'  && $settingContents['master_content']['menuFooter']): ?>
 				<li class="menu-item terms">
 					<a href="<?= base_url('inf-condiciones'); ?>" rel="section">
-						<?= lang('BREADCRUMB_CONDICIONES') ?>
+						<?= lang('GEN_FOTTER_TERMS') ?>
 					</a>
 				</li>
 				<?php endif; ?>
 				<?php if($logged && $settingContents['master_content']['showRates'] && $module !== 'rates'): ?>
 				<li class="menu-item privacy">
 					<a id='tarifas' href="<?= base_url('inf-tarifas'); ?>" rel="section">
-						<?= lang('SUBMENU_TARIFAS'); ?>
+						<?= lang('GEN_FOTTER_RATES'); ?>
 					</a>
 				</li>
 				<?php endif; ?>

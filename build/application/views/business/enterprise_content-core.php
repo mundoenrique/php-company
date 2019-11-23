@@ -1,11 +1,11 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 <div class="pt-3 px-5 pb-5">
-	<span class="primary h3 regular"><?= $greeting.' '.$fullName ?></span>
+	<h1 class="primary h3 regular"><?= $greeting.' '.$fullName ?></h1>
 	<div class="flex mb-2 light items-center">
 		<div class="flex tertiary">
 			<nav class="main-nav nav-inferior">
 				<ul class="mb-0 light h6 tertiary list-style-none list-inline ">
-					<li class="inline"><a class="tertiary" href="ceo_dashboard.html">Inicio /</a></li>
+					<li class="inline"><a class="tertiary" href="ceo_dashboard.html">Inicio</a></li> /
 					<li class="inline"><a class="tertiary" href="ceo_dashboard.html">Empresas</a></li>
 				</ul>
 			</nav>
@@ -21,7 +21,7 @@
 		</div>
 		<div id="alphabetical" class="flex h6 flex-auto justify-end">
 			<button class="btn btn-outline btn-small btn-rounded-left bg-white" filter-page="page_1" <?= $disabled ?>>
-				<?= lang('ENTERPRISE_FILTER_TODAS'); ?>
+				<?= lang('ENTERPRISE_FILTER_ALL'); ?>
 			</button>
 			<?php foreach($filters AS $filtersAttr): ?>
 			<button class="btn-options btn-outline bold bg-white" filter-page="<?= $filtersAttr['filter'] ?>"
@@ -72,7 +72,7 @@
 	<div id="enterprise-pages" class="visible">
 		<div class="pagination page-number flex mb-5 py-5 flex-auto justify-center">
 			<nav class="h4">
-				<?php if($recordsPage >= 2): ?>
+				<?php if($recordsPage >= 3): ?>
 				<a href="javascript:" position="first"><?= lang('ENTERPRISE_FIRST_PAGE'); ?></a>
 				<a href="javascript:" position="minus">««</a>
 				<?php endif; ?>
@@ -87,7 +87,7 @@
 			</div>
 			<nav class="h4">
 				<a href="javascript:" position="next">»</a>
-				<?php if($recordsPage >= 2): ?>
+				<?php if($recordsPage >= 3): ?>
 				<a href="javascript:" position="plus">»»</a>
 				<a href="javascript:" position="last"><?= lang('ENTERPRISE_LAST_PAGE'); ?></a>
 				<?php endif; ?>

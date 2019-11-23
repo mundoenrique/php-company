@@ -95,7 +95,7 @@ class Business extends NOVO_Controller {
 		$this->render->productList = $responseList->data->productList->productos;
 		$this->render->widget =  new stdClass();
 		$this->render->widget->products = FALSE;
-		$this->render->widget->widgeTitle = 'Selecciona una empresa';
+		$this->render->widget->widgeTitle = lang('ENTERPRISE_SELECT');
 		$this->render->widget->enterpriseData =  $responseList->data->widget;
 		$this->render->widget->enterpriseList =  $enterpriseList;
 		$this->views = ['business/'.$view];

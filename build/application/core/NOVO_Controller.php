@@ -166,7 +166,7 @@ class NOVO_Controller extends CI_Controller {
 			}
 		} else {
 
-			redirect(base_url('cerrar-sesion'), 'location');
+			redirect(base_url('inicio'), 'location');
 		}
 	}
 	/**
