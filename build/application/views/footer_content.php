@@ -3,7 +3,7 @@
 	<div id="foot-wrapper">
 		<nav id="extra-nav">
 			<ul class="menu">
-				<?php if(!$logged && $module !== lang('GEN_LOGIN')): ?>
+				<?php if(verifyDisplay('footer', $module, lang('GEN_FOTTER_START'))): ?>
 				<li class="menu-item signup">
 					<a id="signup" href="<?= base_url($goOut); ?>" rel="section">
 						<?= lang('GEN_FOTTER_START'); ?>

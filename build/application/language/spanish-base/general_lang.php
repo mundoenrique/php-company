@@ -20,6 +20,10 @@ $lang['GEN_CONTAC_PERSON'] = 'Contacto';
 $lang['GEN_MORNING'] = 'Buenos días';
 $lang['GEN_AFTERNOON'] = 'Buenas tardes';
 $lang['GEN_EVENING'] = 'Buenas noches';
+$lang['GEN_SHOW_HEADER'] = 'Mostrar encabezado';
+$lang['GEN_SHOW_HEADER_LOGO'] = 'Mostrar logo en el encabezado';
+$lang['GEN_SIGNIN_TOP'] = 'widget superior';
+$lang['GEN_SIGNIN_HEADER'] = 'widget Cabecera';
 //BUTTONS
 $lang['GEN_BTN_ACCEPT'] = 'Aceptar';
 $lang['GEN_BTN_CANCEL'] = 'Cancelar';

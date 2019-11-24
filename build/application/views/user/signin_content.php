@@ -1,21 +1,21 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 
-<?php if( lang('GEN-LOGO-HEAD')): ?>
-	<center class="margin-bottom">
-		<img src="<?= $this->asset->insertFile(lang('GEN-LOGO-HEAD')); ?>" alt="<?= lang('GEN_ALTERNATIVE_TEXT') ?>">
-	</center>
-	<h1 class="welcome-title-bp"><?= lang('LOGIN_WELCOME_TITLE'); ?></h1>
+<?php if(verifyDisplay('body', $module,  lang('GEN_SIGNIN_TOP'))): ?>
+<center class="margin-bottom">
+	<img src="<?= $this->asset->insertFile(lang('GEN-LOGO-HEADER')); ?>" alt="<?= lang('GEN_ALTERNATIVE_TEXT') ?>">
+</center>
+<h1 class="welcome-title-bp"><?= lang('LOGIN_WELCOME_TITLE'); ?></h1>
 <?php endif; ?>
 
 <div id="sidebar">
 	<div id="widget-area">
 		<div id="widget-signin" class="widget tooltip">
 
-			<?php if( $settingContents['signin_content']['loginTitle'] ): ?>
-				<h2 class="widget-title">
-					<span aria-hidden="true" class="icon" data-icon="&#xe03f;"></span>
-					<?= lang('LOGIN_WIDGET_TITLE'); ?>
-				</h2>
+			<?php if(verifyDisplay('body', $module,  lang('GEN_SIGNIN_HEADER'))): ?>
+			<h2 class="widget-title">
+				<span aria-hidden="true" class="icon" data-icon="&#xe03f;"></span>
+				<?= lang('LOGIN_WIDGET_TITLE'); ?>
+			</h2>
 			<?php endif; ?>
 
 			<div class="widget-content">
@@ -42,5 +42,5 @@
 	</div>
 </div>
 <?php if($settingContents['signin_content']['welcomeMessage']): ?>
-	<p class="align-center"><?= lang('LOGIN_WELCOME_MESSAGE') ?></p>
+<p class="align-center"><?= lang('LOGIN_WELCOME_MESSAGE') ?></p>
 <?php endif; ?>
