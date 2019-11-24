@@ -8,7 +8,7 @@
 		<div id="widget-area">
 			<div class="widget tooltip" id="widget-signin">
 				<h2 class="widget-title">
-					<?php if($settingContents['change-password_content']['showInfoPass']): ?>
+					<?php if($pais != 'Ec-bp'): ?>
 					<span aria-hidden="true" class="icon" data-icon="&#xe03f;"></span>
 					<?php endif; ?>
 					<?= lang('INFO_CHANGE_PASS'); ?>

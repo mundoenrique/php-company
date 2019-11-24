@@ -19,6 +19,8 @@ if ( ! function_exists('verifyDisplay'))
 {
 	function verifyDisplay($partialView, $module, $link)
 	{
+		log_message('INFO', 'NOVO verifyDisplay HELPER Initialized');
+
 		switch ($partialView) {
 			case 'header' :
 				$display = verifyHeader($module, $link);
@@ -30,6 +32,8 @@ if ( ! function_exists('verifyDisplay'))
 			$display = verifyFooter($module, $link);
 			break;
 		}
+
+		log_message('INFO', 'NOVO verifyDisplay '.$module. ' '.$link.': '.json_encode($display));
 
 		return $display;
 	}
@@ -43,6 +47,8 @@ if ( ! function_exists('verifyheader'))
 {
 	function verifyheader($module, $link)
 	{
+		log_message('INFO', 'NOVO verifyheader HELPER Initialized');
+
 		$CI = &get_instance();
 		$client = $CI->config->item('client');
 		$country = $CI->config->item('country');
@@ -58,6 +64,15 @@ if ( ! function_exists('verifyheader'))
 			case lang('GEN_SHOW_HEADER_LOGO'):
 				$display = (in_array($client, $showThem));
 				break;
+			case lang('GEN_TAG_GOUT_MENU'):
+				$display = (in_array($client, $showUs));
+				break;
+			case lang('GEN_TAG_LINK_UNIC'):
+				$display = (in_array($client, $showUs));
+				break;
+			case lang('GEN_TAG_HELPER'):
+				$display = (in_array($client, $showUs) && $country == 'Ve');
+				break;
 		}
 
 		return $display;
@@ -72,6 +87,8 @@ if ( ! function_exists('verifyBody'))
 {
 	function verifyBody($module, $link)
 	{
+		log_message('INFO', 'NOVO verifyBody HELPER Initialized');
+
 		$CI = &get_instance();
 		$client = $CI->config->item('client');
 		$country = $CI->config->item('country');
@@ -85,6 +102,9 @@ if ( ! function_exists('verifyBody'))
 				break;
 			case lang('GEN_SIGNIN_HEADER'):
 				$display = (in_array($client, $showUs));
+				break;
+			case lang('GEN_TAG_WELCOME_MESSAGE'):
+				$display = (in_array($client, $showThem));
 				break;
 		}
 
@@ -100,6 +120,8 @@ if ( ! function_exists('verifyFooter'))
 {
 	function verifyFooter($module, $link)
 	{
+		log_message('INFO', 'NOVO verifyFooter HELPER Initialized');
+
 		$CI = &get_instance();
 		$client = $CI->config->item('client');
 		$country = $CI->config->item('country');

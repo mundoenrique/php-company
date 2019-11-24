@@ -41,6 +41,6 @@
 		</div>
 	</div>
 </div>
-<?php if($settingContents['signin_content']['welcomeMessage']): ?>
+<?php if(verifyDisplay('body', $module, lang('GEN_TAG_WELCOME_MESSAGE'))): ?>
 <p class="align-center"><?= lang('LOGIN_WELCOME_MESSAGE') ?></p>
 <?php endif; ?>

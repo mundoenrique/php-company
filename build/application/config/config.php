@@ -46,39 +46,6 @@ $config['cypher_base'] = CYPHER_BASE;
 $config['active_recaptcha'] = ACTIVE_RECAPTCHA;
 $config['new-views'] = '';
 $config['client'] = 'novo';
-// Menu user/config diseño de unica columna
-$config['uniqueMenuUser'] = FALSE;
-// Config elements master_content
-$config['settingContents'] =
-[
-	'master_content' => [
-		'menuFooter' => TRUE,
-		'menuTop' => 'full',
-		'ownerShip' => 'http://www.novopayment.com/',
-		'logo' => TRUE,
-		'showRates' => TRUE
-	],
-	'widget_menu-user' => [
-		'menuTop' => 'extended',
-		'optionHelp' => FALSE
-	],
-	'widget_menu-business' => [
-		'menuPrincipalFull' => TRUE
-	],
-	'enterprise_content' => [
-		'typeFilterEnterprise' => 'list',
-		'typeOverDetailCompanies' => 'bottom',
-		'showRazonSocialDetailCompanies' => TRUE
-	],
-	'signin_content' => [
-		'loginTitle' => TRUE,
-		'welcomeMessage' => FALSE
-	],
-	'change-password_content' => [
-		'showInfoPass' => TRUE
-	]
-];
-
 /*
 |--------------------------------------------------------------------------
 | Index File

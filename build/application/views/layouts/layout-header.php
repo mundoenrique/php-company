@@ -72,7 +72,6 @@ $style_css = $this->uri->segment(3);
 		$settingsMenu->menu = $menu;
 		$settingsMenu->pais = $this->config->item('countryUri');
 		$settingsMenu->enterpriseList = $this->config->item('country').'/'.lang('GEN_ENTERPRISE_LIST');
-		$settingsMenu->settingContents = $this->config->item('settingContents');
 		$this->load->view('widget/widget_menu-business_content', $settingsMenu);
 	}
 ?>

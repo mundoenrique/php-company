@@ -116,11 +116,11 @@ class NOVO_Controller extends CI_Controller {
 			$this->render->ext = $faviconLoader->ext;
 			$this->render->loader = $faviconLoader->loader;
 			$this->render->countryConf = $this->config->item('country');
-			$this->render->settingContents = $this->config->item('settingContents');
 			$this->render->countryUri = $this->countryUri;
 			$this->render->novoName = $this->security->get_csrf_token_name();
 			$this->render->novoCook = $this->security->get_csrf_hash();
 			$this->session->set_userdata('countryUri', $this->countryUri);
+
 			switch($this->countryUri) {
 				case 'bp':
 					$structure = 'pichincha';
@@ -128,14 +128,17 @@ class NOVO_Controller extends CI_Controller {
 				default:
 					$structure = 'novo';
 			}
+
 			if($this->skin !== 'pichincha') {
 				$structure = 'novo';
 			}
+
 			$this->includeAssets->cssFiles = [
 				//"$structure-structure",
 				//"$this->skin-appearance",
 				"$this->skin-base",
 			];
+
 			if($this->render->newViews === '-core') {
 				array_unshift(
 					$this->includeAssets->cssFiles,
@@ -149,6 +152,7 @@ class NOVO_Controller extends CI_Controller {
 					"third_party/jquery-ui"
 				);
 			}
+
 			$this->includeAssets->jsFiles = [
 				"third_party/html5",
 				"third_party/jquery-3.4.0",
@@ -157,6 +161,7 @@ class NOVO_Controller extends CI_Controller {
 				"aes-json-format",
 				"helper"
 			];
+
 			if($this->render->logged) {
 				array_push(
 					$this->includeAssets->jsFiles,
@@ -164,10 +169,11 @@ class NOVO_Controller extends CI_Controller {
 					"menu-datepicker"
 				);
 			}
-		} else {
 
+		} else {
 			redirect(base_url('inicio'), 'location');
 		}
+
 	}
 	/**
 	 * Método para cargar un modelo especifico
@@ -192,13 +198,16 @@ class NOVO_Controller extends CI_Controller {
 	protected function responseAttr($responseView)
 	{
 		log_message('INFO', 'NOVO_Controller: responseAttr method initialized');
+
 		$this->render->code = $responseView->code;
+
 		if($this->render->code > 2) {
 			$this->render->title = $responseView->title;
 			$this->render->msg = $responseView->msg;
 			$this->render->icon = $responseView->icon;
 			$this->render->data = json_encode($responseView->data->resp);
 		}
+
 	}
 	/**
 	 * Método para renderizar una vista
@@ -218,11 +227,9 @@ class NOVO_Controller extends CI_Controller {
 		$this->render->settingsMenu = $userMenu;
 		$this->render->goOut = ($this->render->logged || $this->session->flashdata('changePassword'))
 		? 'cerrar-sesion' : 'inicio';
-
 		$this->render->module = $module;
 		$this->render->viewPage = $this->views;
 		$this->asset->initialize($this->includeAssets);
 		$this->load->view('master_content', $this->render);
-
 	}
 }
