@@ -6,7 +6,7 @@
 			<span class="my-2 h5 regular text"><?= lang('GEN_FISCAL_REGISTRY').' '.$enterpriseData->idFiscal ?></span>
 			<form id="enterprise-widget-form" action="<?= base_url('productos') ?>" method="POST">
 				<select id="enterprise-select" class="select-box custom-select mt-3 mb-4 h6 w-100">
-					<option selected disabled>Selecciona otra empresa</option>
+					<option selected disabled><?= lang('GEN_SELECT_ENTERPRISE'); ?></option>
 					<?php foreach($enterpriseList AS $enterprise) : ?>
 						<?php if($enterprise->acnomcia == $enterpriseData->enterpriseName): ?>
 							<?php continue; ?>
@@ -18,13 +18,13 @@
 				</select>
 				<?php if(!isset($products)): ?>
 				<select id="product-select" class="select-box custom-select mt-3 mb-4 h6 w-100">
-					<option selected disabled>Desbes seleccionar una empresa</option>
+					<option selected disabled><?= lang('GEN_MUST_SELECT_ENTERPRISE'); ?></option>
 				</select>
 				<?php endif; ?>
 				<div>
 					<button id="enterprise-widget-btn" class="btn btn-secondary btn-small btn-loading flex mx-auto my-2" disabled
 						title="<?= $widgetBtnTitle ?>">
-						Seleccionar
+						<?= lang('GEN_BTN_SELECT'); ?>
 					</button>
 				</div>
 			</form>

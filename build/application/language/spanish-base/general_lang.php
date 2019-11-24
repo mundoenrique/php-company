@@ -4,6 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $lang['GEN_SYSTEM_NAME']= 'Conexión Empresas Online';
 $lang['GEN_WELCOME_TEXT'] = 'Bienvenido(a)';
 $lang['GEN_ENTERPRISE_LIST'] = 'dashboard';
+$lang['GEN_ALT_LOADER'] = 'Verificando...';
 $lang['GEN_USER'] = 'Usuario';
 $lang['GEN_PASSWORD'] = 'Contraseña';
 $lang['GEN_EMAIL'] = 'Correo electrónico';
@@ -25,12 +26,14 @@ $lang['GEN_SHOW_HEADER_LOGO'] = 'Mostrar logo en el encabezado';
 $lang['GEN_SIGNIN_TOP'] = 'widget superior';
 $lang['GEN_SIGNIN_HEADER'] = 'widget Cabecera';
 $lang['GEN_ENTERPRISE_NOT_OBTEIN']= 'No fue posible obtener el listado de empresas';
-
+$lang['GEN_SELECT_ENTERPRISE']= 'Selecciona otra empresa';
+$lang['GEN_MUST_SELECT_ENTERPRISE']= 'Selecciona otra empresa';
 //BUTTONS
 $lang['GEN_BTN_ACCEPT'] = 'Aceptar';
 $lang['GEN_BTN_CANCEL'] = 'Cancelar';
 $lang['GEN_BTN_CONTINUE'] = 'Continuar';
 $lang['GEN_BTN_BACK'] = 'Volver atrás';
+$lang['GEN_BTN_SELECT']= 'Seleccionar';
 //MODULES
 $lang['GEN_LOGIN'] = 'Login';
 $lang['GEN_RECOVER_PASS'] = 'RecoverPass';
@@ -58,4 +61,3 @@ $lang['GEN_FOTTER_LOGOUT'] = 'Salir';
 $lang['GEN_FOTTER_OWNERSHIP'] = 'Powered by NovoPayment, Inc.';
 $lang['GEN_FOTTER_OWNER_URL'] = 'https://www.novopayment.com';
 $lang['GEN_FOTTER_RIGHTS'] = 'NovoPayment Inc. All rights reserved.';
-$lang['GEN_ALT_LOADER'] = 'Verificando...';
