@@ -36,6 +36,7 @@ $lang['GEN_CHANGE_PASS'] = 'ChangePassword';
 $lang['GEN_FINISH_SESSION'] = 'FinishSession';
 $lang['GEN_VALIDATE_CAPTCHA'] = 'validateCaptcha';
 $lang['GEN_GET_ENTERPRISES'] = 'getEnterprises';
+$lang['GEN_GET_PRODUCTS'] = 'getProducts';
 $lang['GEN_ACTIVE_RECAPTCHA'] = ACTIVE_RECAPTCHA;
 $lang['GEN_LOGIN_URI'] = ACTIVE_RECAPTCHA ? $lang['GEN_VALIDATE_CAPTCHA'] : $lang['GEN_LOGIN'];
 //MODAL STYLES

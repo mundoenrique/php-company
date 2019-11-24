@@ -60,7 +60,7 @@ class Business extends NOVO_Controller {
 			redirect(base_url('inicio'), 'location');
 		}
 
-		$view = 'products';
+		$view = lang('GEN_GET_PRODUCTS');
 
 		array_push(
 			$this->includeAssets->jsFiles,
@@ -78,26 +78,23 @@ class Business extends NOVO_Controller {
 		}
 
 		$responseList = $this->loadModel($this->request);
+		$this->responseAttr($responseList);
 
+		$this->render->widget =  new stdClass();
+		$this->render->widget->enterpriseList = [];
 		if($responseList->code === 0) {
 			$this->load->model('Novo_Business_Model', 'Business');
 			$enterpriseList = $this->Business->callWs_getEnterprises_Business(TRUE);
-
-			if($enterpriseList->code == 0) {
-				$enterpriseList = $enterpriseList->data->list;
-			}
-
+			$this->render->widget->enterpriseList =  $enterpriseList->data->list;
 		}
 
 		$this->render->titlePage = "Productos";
-		$this->render->brands = $responseList->data->productList->listaMarcas;
-		$this->render->categories = $responseList->data->productList->listaCategorias;
-		$this->render->productList = $responseList->data->productList->productos;
-		$this->render->widget =  new stdClass();
+		$this->render->brands = $responseList->data->brandList;
+		$this->render->categories = $responseList->data->categoriesList;
+		$this->render->productList = $responseList->data->productList;
 		$this->render->widget->products = FALSE;
 		$this->render->widget->widgeTitle = lang('ENTERPRISE_SELECT');
 		$this->render->widget->enterpriseData =  $responseList->data->widget;
-		$this->render->widget->enterpriseList =  $enterpriseList;
 		$this->views = ['business/'.$view];
 		$this->loadView($view);
 	}

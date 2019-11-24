@@ -1,9 +1,9 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 /**
- * @info clase para
- * @author
- *
+ * @info clase para obtener los datos del negocio
+ * @author J. Enrique peñaloza Piñero
+ * @date October 31st, 2019
  */
 class Novo_Business_Model extends NOVO_Model {
 
@@ -39,7 +39,6 @@ class Novo_Business_Model extends NOVO_Model {
 
 		$response = $this->sendToService(lang('GEN_GET_ENTERPRISES'));
 		$filters = $this->requestdata->setFilters();
-		$responseList = new stdClass();
 
 		switch($this->isResponseRc) {
 			case 0:
@@ -48,7 +47,7 @@ class Novo_Business_Model extends NOVO_Model {
 				$enterpriseArgs = $response->listadoEmpresas;
 				$enterpriseArgs->sizePage = $sizePage;
 				$enterpriseList = $this->requestdata->OrderEnterpriseList($enterpriseArgs, $filters, $dataRequest);
-				$responseList->list = $enterpriseList->list;
+				$this->response->data->list = $enterpriseList->list;
 
 				if(!$dataRequest) {
 					$access = [
@@ -58,32 +57,29 @@ class Novo_Business_Model extends NOVO_Model {
 
 					$this->session->unset_userdata($access);
 
-					$responseList->filters = $enterpriseList->filters;
-					$responseList->enterprisesTotal = $response->listadoEmpresas->totalRegistros;
-					$responseList->recordsPage = ceil($responseList->enterprisesTotal/$sizePage);
-					$responseList->text = '';
+					$this->response->data->filters = $enterpriseList->filters;
+					$this->response->data->enterprisesTotal = $response->listadoEmpresas->totalRegistros;
+					$this->response->data->recordsPage = ceil($this->response->data->enterprisesTotal/$sizePage);
+					$this->response->data->text = '';
 				}
 				break;
 			case -6:
 				$this->response->title = lang('ENTERPRISE_TITLE');
 				$this->response->code = 1;
-				$responseList->text = lang('ENTERPRISE_NOT_ASSIGNED');
+				$this->response->data->text = lang('ENTERPRISE_NOT_ASSIGNED');
 			break;
 			default:
 				$this->response->title = lang('ENTERPRISE_TITLE');
-				$responseList->text = lang('ENTERPRISE_NOT_OBTEIN');
-				$this->response->data['btn1']['link'] = base_url('cerrar-sesion');
+				$this->response->data->text = lang('ENTERPRISE_NOT_OBTEIN');
+				$this->response->data->resp['btn1']['link'] = base_url('cerrar-sesion');
 		}
 
 		if(!$dataRequest && $this->response->code != 0) {
-			$responseList->filters = $filters;
-			$responseList->enterprisesTotal = 0;
-			$responseList->recordsPage = ceil($responseList->enterprisesTotal/$sizePage);
-			$responseList->list = [];
+			$this->response->data->filters = $filters;
+			$this->response->data->enterprisesTotal = 0;
+			$this->response->data->recordsPage = ceil($this->response->data->enterprisesTotal/$sizePage);
+			$this->response->data->list = [];
 		}
-
-		$responseList->res = $this->response->data;
-		$this->response->data = $responseList;
 
 		return $this->responseToTheView(lang('GEN_GET_ENTERPRISES'));
 	}
@@ -109,16 +105,16 @@ class Novo_Business_Model extends NOVO_Model {
 		$this->dataRequest->userName = $this->userName;
 		$this->dataRequest->idEmpresa = $dataRequest->idFiscal;
 
-		$response = $this->sendToService('getProducts');
+		$response = $this->sendToService(lang('GEN_GET_PRODUCTS'));
+		$this->response->data->widget = $dataRequest;
 
 		switch($this->isResponseRc) {
 			case 0:
-				$this->session->set_userdata('getProducts', $dataRequest);
-
-				$responseList = new stdClass();
-				$responseList->widget = $dataRequest;
-				$responseList->productList = $response;
 				$this->response->code = 0;
+				$this->session->set_userdata('getProducts', $dataRequest);
+				$noDeleteCat = [];
+				$noDeleteBrand = [];
+
 				foreach($response->productos AS $pos => $products) {
 					foreach($products AS $key => $value) {
 						switch ($key) {
@@ -128,34 +124,69 @@ class Novo_Business_Model extends NOVO_Model {
 									$value = 'default.svg';
 								}
 								$products->programImg = $value;
-							break;
+								break;
 							case 'descripcion':
 								$products->$key = mb_strtoupper($value);
 								break;
 								case 'categoria':
-								$products->$key = ucwords(mb_strtolower($value));
-							break;
+									$products->$key = ucwords(mb_strtolower($value));
+								break;
+							case 'idCategoria':
+								$noDeleteCat[] =  $value;
+								break;
 							case 'filial':
 								$products->$key = mb_strtoupper($value);
 								break;
 							case 'marca':
-								$value = mb_strtolower($value).'.png';
-								if(!file_exists(assetPath('images/brands/'.$value))) {
-									$value = 'default.png';
+								$newValue = mb_strtolower($value).'.png';
+								if(!file_exists(assetPath('images/brands/'.$newValue))) {
+									$newValue = 'default.png';
 								}
-								$products->imgBrand = $value;
+								$products->imgBrand = $newValue;
+								$noDeleteBrand[] =  $value;
 								break;
-							}
 						}
-
 					}
-					$this->response->data = $responseList;
-					log_message('INFO', 'NOVO ['.$this->userName.'] RESPONSE getProducts: '.json_encode($response));
+				}
+
+				$noDeleteCat = array_unique($noDeleteCat);
+				sort($noDeleteCat);
+				$categorieList = [];
+
+				foreach($response->listaCategorias AS $pos => $categorie) {
+					foreach($noDeleteCat AS $item) {
+						if($categorie->idCategoria == $item) {
+							$categorieList[] = $response->listaCategorias[$pos];
+						}
+					}
+				}
+
+				$noDeleteCat = array_unique($noDeleteBrand);
+				sort($noDeleteCat);
+				$brandList = [];
+
+				foreach($response->listaMarcas AS $pos => $brand) {
+					foreach($noDeleteCat AS $item) {
+						if(mb_strtolower($brand->nombre) == mb_strtolower($item)) {
+							$brandList[] = $response->listaMarcas[$pos];
+						}
+					}
+				}
+
+				$this->response->data->categoriesList = $categorieList;
+				$this->response->data->brandList = $brandList;
+				$this->response->data->productList = $response->productos;
 				break;
-
-			}
-
-			return $this->response;
 		}
 
+		if($this->response->code != 0) {
+			$this->response->data->categoriesList = [];
+				$this->response->data->brandList = [];
+				$this->response->data->productList = [];
+		}
+
+
+		return $this->responseToTheView(lang('GEN_GET_PRODUCTS'));
 	}
+
+}

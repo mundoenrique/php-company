@@ -197,7 +197,7 @@ class NOVO_Controller extends CI_Controller {
 			$this->render->title = $responseView->title;
 			$this->render->msg = $responseView->msg;
 			$this->render->icon = $responseView->icon;
-			$this->render->data = json_encode($responseView->data->res);
+			$this->render->data = json_encode($responseView->data->resp);
 		}
 	}
 	/**

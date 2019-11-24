@@ -66,6 +66,16 @@ class NOVO_Model extends CI_Model {
 				'action'=> 'redirect'
 			]
 		];
+		if(!$this->input->is_ajax_request()) {
+			$this->response->data = new stdClass();
+			$this->response->data->resp = [
+				'btn1'=> [
+					'text'=> FALSE,
+					'link'=> base_url(lang('GEN_ENTERPRISE_LIST')),
+					'action'=> 'redirect'
+				]
+			];
+		}
 		switch($this->isResponseRc) {
 			case -29:
 			case -61:
