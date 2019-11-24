@@ -21,7 +21,7 @@ class Business extends NOVO_Controller {
 	{
 		log_message('INFO', 'NOVO Business: getEnterprises Method Initialized');
 
-		$view = 'enterprise';
+		$view = lang('GEN_GET_ENTERPRISES');
 
 		array_push(
 			$this->includeAssets->jsFiles,
@@ -34,7 +34,7 @@ class Business extends NOVO_Controller {
 		$this->views = ['business/'.$view];
 		$responseList = $this->loadModel();
 		$this->responseAttr($responseList);
-		$this->render->titlePage = "Empresas";
+		$this->render->titlePage = lang('ENTERPRISE_TITLE');
 		$this->render->category = "";
 		$this->render->lastSession = $this->session->userdata('lastSession');
 		$this->render->enterprisesTotal = $responseList->data->enterprisesTotal;
