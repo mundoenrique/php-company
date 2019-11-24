@@ -6,7 +6,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  *
  */
 
-class RequestData {
+class Request_Data {
 	private $CI;
 	private $NOVO_Model;
 

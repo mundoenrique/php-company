@@ -11,7 +11,7 @@ class Novo_Business_Model extends NOVO_Model {
 	{
 		parent:: __construct();
 		log_message('INFO', 'NOVO Business Model Class Initialized');
-		$this->load->library('RequestData');
+		$this->load->library('Request_Data');
 	}
 	/**
 	 * @info Obtiene la lista de empresas para un usuario
@@ -28,7 +28,7 @@ class Novo_Business_Model extends NOVO_Model {
 		$this->dataAccessLog->function = 'Empresas';
 		$this->dataAccessLog->operation = 'lista de empresas';
 
-		$sizePage = $this->requestdata->setPageSize($this->session->screenSize);
+		$sizePage = $this->request_data->setPageSize($this->session->screenSize);
 
 		$this->dataRequest->idOperation = 'listaEmpresas';
 		$this->dataRequest->accodusuario = $this->userName;
@@ -38,7 +38,7 @@ class Novo_Business_Model extends NOVO_Model {
 		$this->dataRequest->filtroEmpresas = '';
 
 		$response = $this->sendToService(lang('GEN_GET_ENTERPRISES'));
-		$filters = $this->requestdata->setFilters();
+		$filters = $this->request_data->setFilters();
 
 		switch($this->isResponseRc) {
 			case 0:
@@ -46,7 +46,7 @@ class Novo_Business_Model extends NOVO_Model {
 
 				$enterpriseArgs = $response->listadoEmpresas;
 				$enterpriseArgs->sizePage = $sizePage;
-				$enterpriseList = $this->requestdata->OrderEnterpriseList($enterpriseArgs, $filters, $dataRequest);
+				$enterpriseList = $this->request_data->OrderEnterpriseList($enterpriseArgs, $filters, $dataRequest);
 				$this->response->data->list = $enterpriseList->list;
 
 				if(!$dataRequest) {
