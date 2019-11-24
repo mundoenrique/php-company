@@ -39,7 +39,7 @@
 		var lang = <? print_r(json_encode($this->lang->language)); ?>;
 		var baseURL = '<?= base_url(); ?>';
 		var assetUrl = '<?= assetUrl(); ?>';
-		var country = '<?= $this->config->item('country'); ?>';
+		var country = '<?= $countryUri; ?>';
 		var code = <?= $code; ?>;
 		var title = '<?= $title; ?>';
 		var msg = '<?= $msg; ?>';

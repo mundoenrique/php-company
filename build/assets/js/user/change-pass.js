@@ -48,12 +48,6 @@ $(function() {
 			changePassword(passData, textBtn);
 		}
 	});
-
-	/* $('#signup').on('click', function () {
-		verb = 'POST'; who = 'User'; where = 'FinishSession'; data = {user: 'noUser'};
-		callNovoCore(verb, who, where, data);
-	}); */
-
 });
 
 function passStrength(pswd) {
