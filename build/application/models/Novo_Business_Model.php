@@ -70,14 +70,18 @@ class Novo_Business_Model extends NOVO_Model {
 			break;
 			default:
 				$this->response->title = lang('ENTERPRISE_TITLE');
-				$this->response->data->text = lang('ENTERPRISE_NOT_OBTEIN');
+				$this->response->data->text = lang('GEN_ENTERPRISE_NOT_OBTEIN');
 				$this->response->data->resp['btn1']['link'] = base_url('cerrar-sesion');
 		}
 
-		if(!$dataRequest && $this->response->code != 0) {
-			$this->response->data->filters = $filters;
-			$this->response->data->enterprisesTotal = 0;
-			$this->response->data->recordsPage = ceil($this->response->data->enterprisesTotal/$sizePage);
+		if($this->response->code != 0) {
+
+			if(!$dataRequest)	{
+				$this->response->data->filters = $filters;
+				$this->response->data->enterprisesTotal = 0;
+				$this->response->data->recordsPage = ceil($this->response->data->enterprisesTotal/$sizePage);
+			}
+
 			$this->response->data->list = [];
 		}
 

@@ -27,13 +27,13 @@
 						<input type="password" id="user_pass" name="user_pass" required disabled>
 					</fieldset>
 					<div class="general-form-msg"></div>
-					<button id="login-btn" name="login-btn" class="btn-sidebar" disabled><?= lang('SIGNIN'); ?></button>
+					<button id="login-btn" name="login-btn" class="btn-sidebar" disabled><?= lang('LOGIN_BTN') ?></button>
 				</form>
 
 				<div class="align-center">
 					<p><?= lang('GEN_RECOVER_PASS_TITLE'); ?></p>
 					<a href="<?= base_url('recuperar-clave') ?>" rel="section">
-						<?= lang('RECOVERY_PASSWORD_LINK'); ?>
+						<?= lang('LOGIN_RECOVERY_PASS_LINK'); ?>
 					</a>
 				</div>
 			</div>

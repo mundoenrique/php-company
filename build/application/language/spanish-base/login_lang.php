@@ -21,3 +21,6 @@ $lang['LOGIN_INFO-1'] = 'Teléfono: (51-1) 619-8900';
 $lang['LOGIN_INFO-2'] = 'Fax: (51-1) 619-8900 anexo 200';
 $lang['LOGIN_INFO-3'] = 'E-mail: ventas@tebca.com.pe';
 $lang['LOGIN_WIDGET_TITLE'] = 'Cliente afiliado Perú';
+$lang['LOGIN_SIGNIN'] = 'Ingresar';
+$lang['LOGIN_RECOVERY_PASSWORD'] = 'Restablecer contraseña';
+$lang['LOGIN_RECOVERY_PASS_LINK'] = '¿Olvidaste o bloqueaste tu<br>clave de acceso?';

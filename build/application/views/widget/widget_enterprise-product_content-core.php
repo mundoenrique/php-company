@@ -23,7 +23,7 @@
 				<?php endif; ?>
 				<div>
 					<button id="enterprise-widget-btn" class="btn btn-secondary btn-small btn-loading flex mx-auto my-2" disabled
-						title="<?= $widgeTitle; ?>">
+						title="<?= $widgetBtnTitle ?>">
 						Seleccionar
 					</button>
 				</div>

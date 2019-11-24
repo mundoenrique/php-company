@@ -274,13 +274,13 @@ if(!function_exists('languajeLoad')) {
 				$languages = [
 					'login' => ['login'],
 					'validatecaptcha' => ['login'],
-					'recoverPass'	=> ['password-recover', 'response'],
+					'recoverPass'	=> ['password-recover'],
 					'terms'	=> ['terms'],
 				];
 				break;
 			default:
 				$languages = [
-					'login' => ['login', 'signin'],
+					'login' => ['login'],
 					'validatecaptcha' => ['login'],
 					'recoverPass'	=> ['password-recover'],
 					'changePassword'	=> ['password-change'],
@@ -288,7 +288,7 @@ if(!function_exists('languajeLoad')) {
 					'terms'	=> ['terms'],
 					'rates'	=> ['rates'],
 					'getEnterprises'	=> ['enterprise'],
-					'getProducts'	=> ['enterprise'],
+					'getProducts'	=> ['products'],
 				];
 		}
 

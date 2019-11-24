@@ -24,6 +24,8 @@ $lang['GEN_SHOW_HEADER'] = 'Mostrar encabezado';
 $lang['GEN_SHOW_HEADER_LOGO'] = 'Mostrar logo en el encabezado';
 $lang['GEN_SIGNIN_TOP'] = 'widget superior';
 $lang['GEN_SIGNIN_HEADER'] = 'widget Cabecera';
+$lang['GEN_ENTERPRISE_NOT_OBTEIN']= 'No fue posible obtener el listado de empresas';
+
 //BUTTONS
 $lang['GEN_BTN_ACCEPT'] = 'Aceptar';
 $lang['GEN_BTN_CANCEL'] = 'Cancelar';
