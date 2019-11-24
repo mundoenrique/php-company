@@ -37,9 +37,9 @@ class Verify_Access {
 			log_message('DEBUG', 'NOVO  ['.$user.'] VALIDATION '.$rule.' ERRORS: '.json_encode(validation_errors()));
 		}
 
-		languageLoad(NULL, $rule);
+		languageLoad('generic', NULL, $rule);
 		$this->CI->config->set_item('language', 'spanish-'.$countryUri);
-		languageLoad($countryUri, $rule);
+		languageLoad('specific', $countryUri, $rule);
 
 		return $result;
 	}

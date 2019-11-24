@@ -226,15 +226,15 @@ if(!function_exists('menuRoute')) {
 }
 
 if(!function_exists('languajeLoad')) {
-	function languageLoad($client = 'default_lang', $langFiles = FALSE) {
+	function languageLoad($call, $client = 'default_lang', $langFiles = FALSE) {
 		$CI = &get_instance();
 		$class = $CI->router->fetch_class();
 		$langFiles = $langFiles ?: $CI->router->fetch_method();
-		$languages = [];
+		$languagesFile = [];
 		$lanGeneral = ['bdb', 'bp', 'co', 've'];
-		$loadlanguages = FALSE;
+		$loadLanguages = FALSE;
 		$client = !$client ? 'default_lang' : $client;
-		log_message('INFO', 'NOVO HELPER languajeLoad Initialized for controller '.$class. ' and method '.$langFiles);
+		log_message('INFO', 'NOVO Language '.$call.', HELPER: languajeLoad Initialized for controller: '.$class. ' and method: '.$langFiles);
 
 		switch($client) {
 			case 'bp':
@@ -293,16 +293,17 @@ if(!function_exists('languajeLoad')) {
 		}
 
 		if(array_key_exists($langFiles, $languages)) {
-			$languages = $languages[$langFiles];
-			$loadlanguages = TRUE;
-		}
-		if(in_array($client, $lanGeneral)) {
-			array_unshift($languages, 'general');
-			$loadlanguages = TRUE;
+			$languagesFile = $languages[$langFiles];
+			$loadLanguages = TRUE;
 		}
 
-		if($loadlanguages) {
-			$CI->lang->load($languages);
+		if(in_array($client, $lanGeneral)) {
+			array_unshift($languagesFile, 'general');
+			$loadLanguages = TRUE;
+		}
+
+		if($loadLanguages) {
+			$CI->lang->load($languagesFile);
 		}
 
 	}
