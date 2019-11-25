@@ -950,7 +950,6 @@ function llamarWSCambio(pass,mensaje,url,op) {
 
 	pass = hex_md5(pass);
 	$('#claveMasivo').val("");
-	$('#claveMasivo').prop("disabled",true);
 
 	var ceo_cook = decodeURIComponent(
 		document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
@@ -1051,12 +1050,12 @@ $('#button-masivo').click(function() {
 
 	if(serv_var.noTarjetas.length == 0)
 	{
-		errmasivo += '<p>* Debe selecionar almenos un registro.</p>'
+		errmasivo += '<p>* Debes seleccionar al menos un registro.</p>'
 	}
 
 	if(clamasivo.val() == '')
 	{
-		errmasivo += '<p>* Debe Ingresar su clave.</p>'
+		errmasivo += '<p>* Debes ingresar tu clave.</p>'
 	}
 
 	if(errmasivo != '')
