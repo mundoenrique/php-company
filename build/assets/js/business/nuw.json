@@ -6,3 +6,422 @@
 
 //lista de productos
 {"productos":[{"nombre":"CUENTA GENERAL PN","descripcion":"CUENTA GENERAL PN DESCRIPCI\u00d3N","categoria":"Marketing y Ventas","idCategoria":"3","filial":"SERVITEBCA","marca":"Visa","innominada":false,"maxTarjetas":0,"idProducto":"C1","rc":0},{"nombre":"PLATASUELDOV","descripcion":"PLATA SUELDO VISA","categoria":"Recursos Humanos","idCategoria":"1","filial":"SERVITEBCA","marca":"Visa","innominada":false,"maxTarjetas":0,"idProducto":"E","rc":0},{"nombre":"PLATAUNICASUELDO","descripcion":"PLATA UNICA SUELDO","categoria":"Recursos Humanos","idCategoria":"1","filial":"SERVITEBCA","marca":"Visa","innominada":false,"maxTarjetas":0,"idProducto":"N","rc":0},{"nombre":"PLATAUNICAV","descripcion":"PLATA UNICA VISA","categoria":"Recursos Humanos","idCategoria":"1","filial":"SERVITEBCA","marca":"Visa","innominada":false,"maxTarjetas":0,"idProducto":"8","rc":0}],"cantidadProductos":"5","listaMarcas":[{"idMarca":"1","nombre":"Visa"},{"idMarca":"3","nombre":"MasterCard"}],"listaCategorias":[{"idCategoria":"1","descripcion":"Recursos Humanos"},{"idCategoria":"2","descripcion":"Administraci\u00f3n y Finanzas"},{"idCategoria":"3","descripcion":"Marketing y Ventas"}],"rc":0,"msg":"Se cargo correctamente el listado de productos asociado","logAccesoObject":{"sessionId":"051aff6d6b32466edba5982a1e977ec4","userName":"MFAJARDO","canal":"ceo","modulo":"login","funcion":"","operacion":"","RC":0,"IP":"127.0.0.1","dttimesstamp":"11\/16\/2019 19:38","lenguaje":"ES"}}
+
+
+
+
+
+
+
+[{
+	"idPerfil": "GESLOT",
+	"modulos": [{
+		"idModulo": "TEBCAR",
+		"descripcion": "CARGA DE LOTES",
+		"status": "A",
+		"funciones": [{
+			"accodfuncion": "TEBCON",
+			"acnomfuncion": "CONFIRMACION DE LOTE"
+		}, {
+			"accodfuncion": "TEBELC",
+			"acnomfuncion": "ELIMINACI\u00d3N DE LOTE POR CONFIRMAR"
+		}],
+		"rc": 0
+	}, {
+		"idModulo": "TEBAUT",
+		"descripcion": "AUTORIZACION DE LOTES",
+		"status": "A",
+		"funciones": [{
+			"accodfuncion": "TEBAUT",
+			"acnomfuncion": "CONSULTA DE MODULO"
+		},{
+			"accodfuncion": "TEBELI",
+			"acnomfuncion": "ELIMINACION DE LOTE"
+		}],
+		"rc": 0
+	}, {
+		"idModulo": "TEBGUR",
+		"descripcion": "REPROCESO DE DATOS",
+		"status": "A",
+		"funciones": [{
+			"accodfuncion": "TEBGUR",
+			"acnomfuncion": "CONSULTA DE MODULO"
+		}, {
+			"accodfuncion": "MODIFY",
+			"acnomfuncion": "ACTUALIZACION DE DATOS"
+		}, {
+			"accodfuncion": "REPROC",
+			"acnomfuncion": "REPROCESO DE DATOS"
+		}, {
+			"accodfuncion": "INCLUI",
+			"acnomfuncion": "INCLUSION DE DATOS"
+		}],
+		"rc": 0
+	}, {
+		"idModulo": "TICARG",
+		"descripcion": "SOLICITUD - TARJETAS INNOMINADAS",
+		"status": "A",
+		"funciones": [{
+			"accodfuncion": "TICREA",
+			"acnomfuncion": "GENERACI\u00d3N DE LOTE"
+		}, {
+			"accodfuncion": "TIELIM",
+			"acnomfuncion": "ELIMINACI\u00d3N DE LOTE"
+		}],
+		"rc": 0
+	}, {
+		"idModulo": "TIINVN",
+		"descripcion": "INVENTARIO - TARJETAS INNOMINADAS",
+		"status": "A",
+		"funciones": [{
+			"accodfuncion": "TIREPO",
+			"acnomfuncion": "REPORTE DE INNOMINADAS"
+		}],
+		"rc": 0
+	}]
+}, {
+	"idPerfil": "CONSUL",
+	"modulos": [{
+		"idModulo": "TEBORS",
+		"descripcion": "ORDEN DE SERVICIO",
+		"status": "A",
+		"funciones": [{
+			"accodfuncion": "TEBANU",
+			"acnomfuncion": "ANULAR ORDEN DE SERVICIO"
+		}, {
+			"accodfuncion": "TEBCOS",
+			"acnomfuncion": "CONSULTAR ORDEN DE SERVICIO"
+		}],
+		"rc": 0
+	}, {
+		"idModulo": "TEBPOL",
+		"descripcion": "Actualización de datos",
+		"status": "A",
+		"funciones": [{
+			"accodfuncion": "TEBANU",
+			"acnomfuncion": "ANULAR ORDEN DE SERVICIO"
+		}, {
+			"accodfuncion": "TEBCOS",
+			"acnomfuncion": "CONSULTAR ORDEN DE SERVICIO"
+		}],
+		"rc": 0
+	}]
+}, {
+	"idPerfil": "SERVIC",
+	"modulos": [{
+		"idModulo": "TRAMAE",
+		"descripcion": "TRANSFERENCIA MAESTRA",
+		"status": "A",
+		"funciones": [{
+			"accodfuncion": "TRAABO",
+			"acnomfuncion": "ABONOS A TARJETAS"
+		}, {
+			"accodfuncion": "TRACAR",
+			"acnomfuncion": "CARGOS A TARJETAS"
+		}, {
+			"accodfuncion": "TRASAL",
+			"acnomfuncion": "CONSULTA A TARJETAS"
+		}],
+		"rc": 0
+	}, {
+		"idModulo": "CONVIS",
+		"descripcion": "CONTROLES TARJETAS VISA",
+		"status": "A",
+		"funciones": [{
+			"accodfuncion": "CONVIS",
+			"acnomfuncion": "CONSULTA DE CONTROLES"
+		}, {
+			"accodfuncion": "CONVIS",
+			"acnomfuncion": "CONSULTA DE CONTROLES"
+		}, {
+			"accodfuncion": "CONVIS",
+			"acnomfuncion": "CONSULTA DE CONTROLES"
+		}],
+		"rc": 0
+	}, {
+		"idModulo": "PAGPRO",
+		"descripcion": "PAGO A PROVEEDORES",
+		"status": "A",
+		"funciones": [{
+			"accodfuncion": "PAGPRO",
+			"acnomfuncion": "PAGO A PROVEEDORES"
+		}, {
+			"accodfuncion": "PAGPRO",
+			"acnomfuncion": "PAGO A PROVEEDORES"
+		}, {
+			"accodfuncion": "PAGPRO",
+			"acnomfuncion": "PAGO A PROVEEDORES"
+		}],
+		"rc": 0
+	}, {
+		"idModulo": "COPELO",
+		"descripcion": "CONSULTA TARJETAS - RECEPCION EMPRESA",
+		"status": "A",
+		"funciones": [{
+			"accodfuncion": "OPCONL",
+			"acnomfuncion": "CONSULTA TARJETAS - RECEPCION EMPRESA"
+		}],
+		"rc": 0
+ }]
+}, {
+	"idPerfil": "COMBUS",
+	"modulos": [{
+		"idModulo": "CMBCON",
+		"descripcion": "COMBUSTIBLE - CONDUCTORES",
+		"status": "A",
+		"funciones": [{
+			"accodfuncion": "CNDELI",
+			"acnomfuncion": "ELIMINAR CONDUCTOR"
+		}, {
+			"accodfuncion": "CNDINS",
+			"acnomfuncion": "ACTUALIZAR CONDUCTOR"
+		}, {
+			"accodfuncion": "CNDINS",
+			"acnomfuncion": "ACTUALIZAR CONDUCTOR"
+		}, {
+			"accodfuncion": "CNDCON",
+			"acnomfuncion": "CONSULTAR CONDUCTORES"
+		}, {
+			"accodfuncion": "CNDELI",
+			"acnomfuncion": "ELIMINAR CONDUCTOR"
+		}, {
+			"accodfuncion": "CNDELI",
+			"acnomfuncion": "ELIMINAR CONDUCTOR"
+		}, {
+			"accodfuncion": "CNDINS",
+			"acnomfuncion": "ACTUALIZAR CONDUCTOR"
+		}, {
+			"accodfuncion": "CNDINS",
+			"acnomfuncion": "ACTUALIZAR CONDUCTOR"
+		}, {
+			"accodfuncion": "CNDCON",
+			"acnomfuncion": "CONSULTAR CONDUCTORES"
+		}, {
+			"accodfuncion": "CNDELI",
+			"acnomfuncion": "ELIMINAR CONDUCTOR"
+		}, {
+			"accodfuncion": "CNDCON",
+			"acnomfuncion": "CONSULTAR CONDUCTORES"
+		}, {
+			"accodfuncion": "CNDCON",
+			"acnomfuncion": "CONSULTAR CONDUCTORES"
+		}],
+		"rc": 0
+	}, {
+		"idModulo": "CMBVHI",
+		"descripcion": "COMBUSTIBLE - VEHICULOS",
+		"status": "A",
+		"funciones": [{
+			"accodfuncion": "VHIELI",
+			"acnomfuncion": "ELIMINAR VEHICULO"
+		}, {
+			"accodfuncion": "VHIELI",
+			"acnomfuncion": "ELIMINAR VEHICULO"
+		}, {
+			"accodfuncion": "VHIINS",
+			"acnomfuncion": "ACTUALIZAR VEHICULO"
+		}, {
+			"accodfuncion": "VHIINS",
+			"acnomfuncion": "ACTUALIZAR VEHICULO"
+		}, {
+			"accodfuncion": "VHICON",
+			"acnomfuncion": "CONSULTAR VEHICULO"
+		}, {
+			"accodfuncion": "VHICON",
+			"acnomfuncion": "CONSULTAR VEHICULO"
+		}, {
+			"accodfuncion": "VHIELI",
+			"acnomfuncion": "ELIMINAR VEHICULO"
+		}, {
+			"accodfuncion": "VHIELI",
+			"acnomfuncion": "ELIMINAR VEHICULO"
+		}, {
+			"accodfuncion": "VHIINS",
+			"acnomfuncion": "ACTUALIZAR VEHICULO"
+		}, {
+			"accodfuncion": "VHIINS",
+			"acnomfuncion": "ACTUALIZAR VEHICULO"
+		}, {
+			"accodfuncion": "VHICON",
+			"acnomfuncion": "CONSULTAR VEHICULO"
+		}, {
+			"accodfuncion": "VHICON",
+			"acnomfuncion": "CONSULTAR VEHICULO"
+		}],
+		"rc": 0
+	}, {
+		"idModulo": "CMBCTA",
+		"descripcion": "COMBUSTIBLE - CUENTAS",
+		"status": "A",
+		"funciones": [{
+			"accodfuncion": "CTAINS",
+			"acnomfuncion": "ACTUALIZAR CUENTAS"
+		}, {
+			"accodfuncion": "CTAELI",
+			"acnomfuncion": "ELIMINAR CUENTAS"
+		}, {
+			"accodfuncion": "CTAELI",
+			"acnomfuncion": "ELIMINAR CUENTAS"
+		}, {
+			"accodfuncion": "CTACON",
+			"acnomfuncion": "CONSULTAR CUENTAS"
+		}, {
+			"accodfuncion": "CTACON",
+			"acnomfuncion": "CONSULTAR CUENTAS"
+		}, {
+			"accodfuncion": "CTAINS",
+			"acnomfuncion": "ACTUALIZAR CUENTAS"
+		}, {
+			"accodfuncion": "CTAINS",
+			"acnomfuncion": "ACTUALIZAR CUENTAS"
+		}, {
+			"accodfuncion": "CTAELI",
+			"acnomfuncion": "ELIMINAR CUENTAS"
+		}, {
+			"accodfuncion": "CTAELI",
+			"acnomfuncion": "ELIMINAR CUENTAS"
+		}, {
+			"accodfuncion": "CTACON",
+			"acnomfuncion": "CONSULTAR CUENTAS"
+		}, {
+			"accodfuncion": "CTACON",
+			"acnomfuncion": "CONSULTAR CUENTAS"
+		}, {
+			"accodfuncion": "CTAINS",
+			"acnomfuncion": "ACTUALIZAR CUENTAS"
+		}],
+		"rc": 0
+	}, {
+		"idModulo": "CMBVJE",
+		"descripcion": "COMBUSTIBLE - VIAJES",
+		"status": "A",
+		"funciones": [{
+			"accodfuncion": "VJECND",
+			"acnomfuncion": "ASIGNAR VIAJE A CONDUCTOR"
+		}, {
+			"accodfuncion": "VJECND",
+			"acnomfuncion": "ASIGNAR VIAJE A CONDUCTOR"
+		}, {
+			"accodfuncion": "VJEINS",
+			"acnomfuncion": "CREAR VIAJE"
+		}, {
+			"accodfuncion": "VJECON",
+			"acnomfuncion": "CONSULTAR VIAJES"
+		}, {
+			"accodfuncion": "VJECON",
+			"acnomfuncion": "CONSULTAR VIAJES"
+		}, {
+			"accodfuncion": "VJEELI",
+			"acnomfuncion": "ELIMINAR VIAJES"
+		}, {
+			"accodfuncion": "VJEELI",
+			"acnomfuncion": "ELIMINAR VIAJES"
+		}, {
+			"accodfuncion": "VJEINS",
+			"acnomfuncion": "CREAR VIAJE"
+		}, {
+			"accodfuncion": "VJEINS",
+			"acnomfuncion": "CREAR VIAJE"
+		}, {
+			"accodfuncion": "VJECND",
+			"acnomfuncion": "ASIGNAR VIAJE A CONDUCTOR"
+		}, {
+			"accodfuncion": "VJECND",
+			"acnomfuncion": "ASIGNAR VIAJE A CONDUCTOR"
+		}, {
+			"accodfuncion": "VJECON",
+			"acnomfuncion": "CONSULTAR VIAJES"
+		}, {
+			"accodfuncion": "VJECON",
+			"acnomfuncion": "CONSULTAR VIAJES"
+		}, {
+			"accodfuncion": "VJEINS",
+			"acnomfuncion": "CREAR VIAJE"
+		}, {
+			"accodfuncion": "VJEELI",
+			"acnomfuncion": "ELIMINAR VIAJES"
+		}, {
+			"accodfuncion": "VJEELI",
+			"acnomfuncion": "ELIMINAR VIAJES"
+		}],
+		"rc": 0
+	}]
+}, {
+	"idPerfil": "GESREP",
+	"modulos": [{
+		"idModulo": "REPEDO",
+		"descripcion": "REPORTE DE ESTADOS DE CUENTA",
+		"status": "A",
+		"funciones": [{
+			"accodfuncion": "REPEDO",
+			"acnomfuncion": "REPORTE DE ESTADOS DE CUENTA"
+		}],
+		"rc": 0
+	}, {
+		"idModulo": "REPSAL",
+		"descripcion": "REPORTE SALDOS AL CIERRE",
+		"status": "A",
+		"funciones": [{
+			"accodfuncion": "REPSAL",
+			"acnomfuncion": "REPORTE SALDOS AL CIERRE"
+		}],
+		"rc": 0
+	}, {
+		"idModulo": "REPUSU",
+		"descripcion": "REPORTE DE USUARIOS EMPRESA",
+		"status": "A",
+		"funciones": [{
+			"accodfuncion": "REPUSU",
+			"acnomfuncion": "REPORTE ACTIVIDAD POR USUARIO"
+		}],
+		"rc": 0
+	}, {
+		"idModulo": "REPPRO",
+		"descripcion": "REPORTE RECARGAS POR PRODUCTO",
+		"status": "A",
+		"funciones": [{
+			"accodfuncion": "REPPRO",
+			"acnomfuncion": "REPORTE RECARGAS REALIZADAS"
+		}],
+		"rc": 0
+	}, {
+		"idModulo": "REPTAR",
+		"descripcion": "REPORTE TARJETAS EMITIDAS",
+		"status": "A",
+		"funciones": [{
+			"accodfuncion": "REPTAR",
+			"acnomfuncion": "REPORTE TARJETAS EMITIDAS"
+		}],
+		"rc": 0
+	}, {
+		"idModulo": "REPLOT",
+		"descripcion": "REPORTE DE ESTATUS DE LOTES",
+		"status": "A",
+		"funciones": [{
+			"accodfuncion": "REPLOT",
+			"acnomfuncion": "REPORTE ESTATUS DE LOTES"
+		}],
+		"rc": 0
+	}, {
+		"idModulo": "REPCAT",
+		"descripcion": "REPORTES DE CATEGORIA DE COMER",
+		"status": "A",
+		"funciones": [{
+			"accodfuncion": "REPCAT",
+			"acnomfuncion": "REPORTES GASTOS POR CATEGORIAS"
+		}],
+		"rc": 0
+	}, {
+		"idModulo": "REPCON",
+		"descripcion": "REPORTE CUENTA CONCENTRADORA",
+		"status": "A",
+		"funciones": [{
+			"accodfuncion": "REPCON",
+			"acnomfuncion": "REPORTE CUENTA CONCENTRADORA"
+		}, {
+			"accodfuncion": "TEBCOD",
+			"acnomfuncion": "GENERAR CONSOLIDADO"
+		}],
+		"rc": 0
+	}]
+}]

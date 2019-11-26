@@ -1,18 +1,31 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 <nav class="navbar-secondary line-main-nav flex bg-secondary items-center">
 	<ul class="main-nav-user flex my-0 list-style-none">
-		<li class="nav-item mr-1 inline"><a class="nav-link pr-2 semibold primary" href="ceo_dashboard.php">Inicio</a>
+		<li class="nav-item mr-1 inline"><a class="nav-link pr-2 semibold primary" href="ceo_dashboard.php">Empresas</a>
 		</li>
 		<li class="nav-item mr-1 inline">
 			<a class="nav-link px-2 semibold primary">Lotes</a>
 			<ul class="dropdown-user pl-0 regular tertiary bg-secondary list-style-none list-inline">
 				<li><a href="ceo_load_lots.php">Carga de lotes</a></li>
-				<li><a href="ceo_authorization_lots.php">Autorización de Lotes</a></li>
+				<li><a href="ceo_authorization_lots.php">Autorización de lotes</a></li>
+				<li><a href="ceo_authorization_lots.php">Reproceso de lotes</a></li>
 				<li><a href="#">Cuentas innominadas</a></li>
 			</ul>
 		</li>
 		<li class="nav-item mr-1 inline">
 			<a class="nav-link px-2 semibold primary">Consulta</a>
+			<ul class="dropdown-user pl-0 regular tertiary bg-secondary list-style-none list-inline">
+				<li><a href="ceo_service_orders.php">Órdenes de servicio</a></li>
+			</ul>
+		</li>
+		<li class="nav-item mr-1 inline">
+			<a class="nav-link px-2 semibold primary">Servicios</a>
+			<ul class="dropdown-user pl-0 regular tertiary bg-secondary list-style-none list-inline">
+				<li><a href="ceo_service_orders.php">Órdenes de servicio</a></li>
+			</ul>
+		</li>
+		<li class="nav-item mr-1 inline">
+			<a class="nav-link px-2 semibold primary">Trayectos</a>
 			<ul class="dropdown-user pl-0 regular tertiary bg-secondary list-style-none list-inline">
 				<li><a href="ceo_service_orders.php">Órdenes de servicio</a></li>
 			</ul>

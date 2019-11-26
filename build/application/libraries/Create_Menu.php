@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @author J. Enrique Peñaloza Piñero
  * @date October 31th, 2019
  */
-class Verify_Access {
+class Create_Menu {
 	private $CI;
 	private $class;
 	private $method;
@@ -15,7 +15,7 @@ class Verify_Access {
 
 	public function __construct()
 	{
-		log_message('INFO', 'NOVO Verify_Access Library Class Initialized');
+		log_message('INFO', 'NOVO Create_Menu Library Class Initialized');
 		$this->CI = &get_instance();
 		$this->requestServ = new stdClass();
 		$this->responseDefect = new stdClass();

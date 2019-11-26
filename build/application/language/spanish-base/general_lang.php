@@ -1,6 +1,17 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
+//MENU BUSINESS
+$lang['GEN_MENU_ENTERPRISE'] = 'Empresas';
+$lang['GEN_MENU_LOTS'] = 'Lotes';
+$lang['GEN_MENU_CONSULTATIONS'] = 'Consultas';
+$lang['GEN_MENU_SERVICES'] = 'Servicios';
+$lang['GEN_MENU_TRAJECTS'] = 'Trayectos';
+$lang['GEN_MENU_REPORTS'] = 'Reportes';
+//SUBMENU BUSINESS
+$lang['GEN_MENU_LOT_LOAD'] = 'Carga de lotes';
+$lang['GEN_MENU_LOT_AUTH'] = 'Autorización';
+$lang['GEN_MENU_LOT_UNNAMED'] = 'Cuentas innomindas';
+//GENERAL LANGUAGE
 $lang['GEN_SYSTEM_NAME']= 'Conexión Empresas Online';
 $lang['GEN_WELCOME_TEXT'] = 'Bienvenido(a)';
 $lang['GEN_ENTERPRISE_LIST'] = 'dashboard';
