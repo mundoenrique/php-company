@@ -50,6 +50,7 @@ class Encrypt_Connect {
 	public function decode($cryptData, $userName, $model)
 	{
 		log_message('INFO', 'NOVO Encrypt_Connect: decode Method Initialized');
+
 		$data = base64_decode($cryptData);
 		$descryptData = mcrypt_decrypt(
 			MCRYPT_DES, $this->keyNovo, $data, MCRYPT_MODE_CBC, $this->iv
@@ -71,6 +72,7 @@ class Encrypt_Connect {
 
 		$this->logMessage->rc = $response->rc;
 		$this->logMessage->msg = $response->msg;
+		$this->logMessage->response = $response;
 		$this->logMessage->pais = $this->CI->config->item('country');
 		$this->logMessage->model = $model;
 		$this->logMessage->userName = $userName;
@@ -145,9 +147,14 @@ class Encrypt_Connect {
 	{
 		$userName = $logMessage->userName;
 		$model = $logMessage->model;
-		$msg = $logMessage->msg;
 		$rc = $logMessage->rc;
+		$msg = $logMessage->msg;
+		$response = $logMessage->response;
 		$country = $logMessage->pais;
 		log_message('DEBUG', 'NOVO ['.$userName.'] RESPONSE '.$model.'= rc: '.$rc.', msg: '.$msg.', country: '.$country);
+
+		if(RESPONSE_SERV_COMPLETE) {
+			log_message('DEBUG', 'NOVO ['.$userName.'] COMPLETE RESPONSE '.$model.': '.json_encode($response));
+		}
 	}
 }

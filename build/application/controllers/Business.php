@@ -82,13 +82,14 @@ class Business extends NOVO_Controller {
 
 		$this->render->widget =  new stdClass();
 		$this->render->widget->enterpriseList = [];
+
 		if($responseList->code === 0) {
 			$this->load->model('Novo_Business_Model', 'Business');
 			$enterpriseList = $this->Business->callWs_getEnterprises_Business(TRUE);
 			$this->render->widget->enterpriseList =  $enterpriseList->data->list;
 		}
 
-		$this->render->titlePage = "Productos";
+		$this->render->titlePage = lang('PRODUCTS_TITLE');
 		$this->render->brands = $responseList->data->brandList;
 		$this->render->categories = $responseList->data->categoriesList;
 		$this->render->productList = $responseList->data->productList;
@@ -107,12 +108,39 @@ class Business extends NOVO_Controller {
 	{
 		log_message('INFO', 'NOVO Business: getProductDetail Method Initialized');
 
-		$view = 'product-detail';
-		$this->render->titlePage = "Detalle del producto";
-		$this->views = ['business/'.$view];
+		$view = lang('GEN_GET_PRODUCTS_DETAIL');
+
+		$detailList = $this->loadModel($this->request);
+		$this->responseAttr($detailList);
+
 		$this->render->widget =  new stdClass();
-		$this->render->widget->widgeBtnTitle = 'Debes seleccionar empresa y producto';
+		$this->render->widget->enterpriseList = [];
+
+		if($detailList->code === 0) {
+			$this->load->model('Novo_Business_Model', 'Business');
+			$enterpriseList = $this->Business->callWs_getEnterprises_Business(TRUE);
+			$this->render->widget->enterpriseList =  $enterpriseList->data->list;
+		}
+
+		$this->render->titlePage = lang('PRODUCTS_DETAIL_TITLE');
+		$this->render->productName = $detailList->data->productDetail->name;
+		$this->render->productImg = $detailList->data->productDetail->img;
+		$this->render->productBrand = $detailList->data->productDetail->brand;
+		$this->render->productImgBrand = $detailList->data->productDetail->imgBrand;
+		$this->render->lotsTotal = $detailList->data->productSummary->lots;
+		$this->render->toSign = $detailList->data->productSummary->toSign;
+		$this->render->toAuthorize = $detailList->data->productSummary->toAuthorize;
+		$this->render->serviceOrders = $detailList->data->productSummary->serviceOrders;
+		$this->render->serviceOrdersNoCon = $detailList->data->productSummary->serviceOrdersNoCon;
+		$this->render->serviceOrdersCon = $detailList->data->productSummary->serviceOrdersCon;
+		$this->render->totalCards = $detailList->data->productSummary->totalCards;
+		$this->render->activeCards = $detailList->data->productSummary->activeCards;
+		$this->render->inactiveCards = $detailList->data->productSummary->inactiveCards;
+		$this->render->widget->widgetBtnTitle = lang('GEN_MUST_SELECT_ENTERPRISE');
+		$this->render->widget->enterpriseData =  $detailList->data->widget;
+		$this->views = ['business/'.$view];
 		$this->loadView($view);
+
 	}
 
 }

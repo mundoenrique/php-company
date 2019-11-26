@@ -23,7 +23,7 @@ $lang['GEN_AFTERNOON'] = 'Buenas tardes';
 $lang['GEN_EVENING'] = 'Buenas noches';
 $lang['GEN_ENTERPRISE_NOT_OBTEIN']= 'No fue posible obtener el listado de empresas';
 $lang['GEN_SELECT_ENTERPRISE']= 'Selecciona otra empresa';
-$lang['GEN_MUST_SELECT_ENTERPRISE']= 'Selecciona otra empresa';
+$lang['GEN_MUST_SELECT_ENTERPRISE']= 'Selecciona una empresa';
 //BUTTONS
 $lang['GEN_BTN_ACCEPT'] = 'Aceptar';
 $lang['GEN_BTN_CANCEL'] = 'Cancelar';
@@ -32,14 +32,15 @@ $lang['GEN_BTN_BACK'] = 'Volver atrás';
 $lang['GEN_BTN_SELECT']= 'Seleccionar';
 //MODULES
 $lang['GEN_LOGIN'] = 'Login';
+$lang['GEN_ACTIVE_RECAPTCHA'] = ACTIVE_RECAPTCHA;
+$lang['GEN_LOGIN_URI'] = ACTIVE_RECAPTCHA ? $lang['GEN_VALIDATE_CAPTCHA'] : $lang['GEN_LOGIN'];
 $lang['GEN_RECOVER_PASS'] = 'RecoverPass';
 $lang['GEN_CHANGE_PASS'] = 'ChangePassword';
 $lang['GEN_FINISH_SESSION'] = 'FinishSession';
 $lang['GEN_VALIDATE_CAPTCHA'] = 'validateCaptcha';
 $lang['GEN_GET_ENTERPRISES'] = 'getEnterprises';
 $lang['GEN_GET_PRODUCTS'] = 'getProducts';
-$lang['GEN_ACTIVE_RECAPTCHA'] = ACTIVE_RECAPTCHA;
-$lang['GEN_LOGIN_URI'] = ACTIVE_RECAPTCHA ? $lang['GEN_VALIDATE_CAPTCHA'] : $lang['GEN_LOGIN'];
+$lang['GEN_GET_PRODUCTS_DETAIL'] = 'getProductDetail';
 //MODAL STYLES
 $lang['GEN_MODAL_SIZE'] = 310;
 $lang['GEN_ICON'] = 'ui-icon';

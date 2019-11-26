@@ -289,6 +289,7 @@ if(!function_exists('languajeLoad')) {
 					'rates'	=> ['rates'],
 					'getEnterprises'	=> ['enterprise'],
 					'getProducts'	=> ['products'],
+					'getProductDetail'	=> ['products'],
 				];
 		}
 

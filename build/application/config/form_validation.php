@@ -94,6 +94,13 @@ $config = [
 		]
 
 	],
+	'getProductDetail' => [
+		[
+			'field' => 'productPrefix',
+			'label' => 'productPrefix',
+			'rules' => 'trim|regex_match[/^([\w]+)+$/i]|required',
+		]
+	],
 	'dash-products' => [
 		[
 			'field' => 'data-accodgrupoe',

@@ -44,14 +44,17 @@
 					<img src="<?= $this->asset->insertFile('programs/'.$products->programImg); ?>" alt="" />
 					<img class="mx-2" src="<?= $this->asset->insertFile('brands/'.$products->imgBrand); ?>" alt="" />
 					<div class="flex flex-column">
-						<span class="semibold primary"><?= $products->descripcion ?></span>
+						<span class="semibold primary"><?= $products->descripcion; ?></span>
 						<span class="h6 light text"><?= $products->filial ?> / <?= $products->categoria ?></span>
 					</div>
 				</div>
 				<div>
 					<button class="product-detail btn btn-primary btn-small btn-loading flex mx-auto justify-center">
-						Seleccionar
+						<?= lang('GEN_BTN_SELECT') ?>
 					</button>
+					<form id="product-<?= $products->idProducto; ?>" action="<?= base_url('detalle-producto') ?>" method="POST">
+						<input type="hidden" name="productPrefix" value="<?= $products->idProducto; ?>">
+					</form>
 				</div>
 			</div>
 			<?php endforeach; ?>

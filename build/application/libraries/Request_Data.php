@@ -50,7 +50,7 @@ class Request_Data {
 	 */
 	public function OrderEnterpriseList($enterpriseArgs, $filters, $dataRequest)
 	{
-		log_message('INFO', 'NOVO Request_Data: setFilters method Initialized');
+		log_message('INFO', 'NOVO Request_Data: OrderEnterpriseList method Initialized');
 
 		$responseList = new stdClass();
 		$item = 1; $page = 1; $cat = FALSE;
