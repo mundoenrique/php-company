@@ -741,33 +741,6 @@ function validarFields()
 		valCorreo.removeClass('textbox-transfer');
 	}
 
-	/* if(valPin.val().length > 0)
-	{
-			if(!numRegExp.test(valPin.val()))
-			{
-				errorPin.show();
-				errorPin.html('El campo debe ser numerico')
-				validInput = false;
-				valPin.addClass('textbox-transfer');
-			}
-			else if(valPin.val().length != 4)
-			{
-				errorPin.show();
-				errorPin.html('El campo debe contener 4 numeros')
-				validInput = false;
-				valPin.addClass('textbox-transfer');
-			}
-			else{
-				errorPin.hide();
-				validInput = true;
-				valPin.removeClass('textbox-transfer');
-			}
-	} else{
-		errorPin.hide();
-		validInput = true;
-		valPin.removeClass('textbox-transfer');
-	}
- */
 	if(valCelular.val().length >= 13)
 	{
 		errorCelular.show();
