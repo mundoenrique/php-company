@@ -558,7 +558,7 @@ $(".table-text-service").on('click', '#ENTREGAR_A_TARJETAHABIENTE', function() {
 
 })
 
-var nombres, apellidos, correo, /* pin, */ celular, clave;
+var nombres, apellidos, correo, celular, clave;
 
 // ACCION EVENTO ICON->ACTUALIZAR DATOS
 $(".table-text-service").on('click', '#ACTUALIZAR_DATOS', function() {
@@ -668,9 +668,9 @@ function validarFields()
 	var camposValid = ''
 			msgValido = '';
 			validInput = true;
-			nomRegExp = /^[a-z]$/i;
-			descRegExp = /^['a-z0-9ñáéíóú ,.:()']+$/i
-			emailRegExp = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
+			nomRegExp = /^[A-Z]+$/i;
+			descRegExp = /^['a-z0-9ñáéíóú ,.:()']+$/i;
+			emailRegExp = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 			numRegExp = /^\d+$/
 
 	if(valNombre.val() === '')
@@ -739,23 +739,17 @@ function validarFields()
 		errorCelular.html('el campo solo debe tener maximo 13 numeros')
 		validInput = false;
 		valCelular.addClass('textbox-transfer');
-	}	else{
-		errorCelular.hide();
-		validInput = true;
-		valCelular.removeClass('textbox-transfer');
-	}
-	 if(!numRegExp.test(valCelular.val()))
-	{
+	}else if(!numRegExp.test(valCelular.val())){
 		errorCelular.show();
 		errorCelular.html('El campo debe ser numerico')
 		validInput = false;
 		valCelular.addClass('textbox-transfer');
-	}	else{
+	}else{
 		errorCelular.hide();
 		validInput = true;
 		valCelular.removeClass('textbox-transfer');
 	}
-
+	
 	if(valClave.val() === '')
 	{
 		errorClave.show();
@@ -1035,10 +1029,6 @@ $('#button-masivo').click(function() {
 // MOSTRAR EL SALDO DISPONIBLE PARA CADA TARJETA LUEGO DE CONSULTAR
 function mostrar_saldo(data) {
 	$.each(JSON.parse(data.result.bean), function(k, t) {
-
-		console.log(k)
-		console.log(t)
-
 		if (t.saldo !== undefined)
 		{
 			$('#saldo' + t.numeroTarjeta.replace(/[*]/g, "")).text((t.saldo));
