@@ -141,191 +141,94 @@ if ( ! function_exists('np_hoplite_jsontoiconsector')) {
 	}
 }
 
-if ( ! function_exists('np_hoplite_crearMenu')) {
-	/**
-	 * Helper que carga el menú con las funciones del usuario.
-	 *
-	 * @param  string $menuP     menú enviado por el WS
-	 * @param  string $pais 	 país de conexión del usuario
-	 * @param  string $urlBaseA  URL base del sistema ej: "https://online.novopayment.dev/empresas/"
-	 * @return hmtl
-	 */
-	function np_hoplite_crearMenu($menuP,$pais,$urlBaseA)
-	{
-		$urlBase = $urlBaseA.$pais;
-
-		$menuP = unserialize($menuP);
-		$seeLotFact = FALSE;
-
-		$menuH="";
-		$menuInno="";
-		$menuBoolean=false;
-		if($menuP!=NULL && isset($menuP)){
-			foreach ($menuP as $opcionPrincipal) {
-				switch ($opcionPrincipal->idPerfil) {
-					case 'CONSUL':
-						$icon="&#xe072;";
-						break;
-					case 'GESLOT':
-						$icon="&#xe03c;";
-						break;
-					case 'SERVIC':
-						$icon="&#xe019;";
-						break;
-					case 'GESREP':
-						$icon="&#xe021;";
-						break;
-					case 'COMBUS':
-						$icon="&#xe08e;";
-						break;
-				}
-				$opMenuSubmenu="<ul>
-									<div id='scrollup' style='display:none'>
-										<span class='ui-icon ui-icon-triangle-1-n'></span>
-									</div>";
-				foreach ($opcionPrincipal->modulos as $submenu) {
-
-					switch ($submenu->idModulo) {
-
-						case 'TEBCAR':
-							$ruta=$urlBase."/lotes/carga";
-							break;
-						case 'TEBAUT':
-							$ruta=$urlBase."/lotes/autorizacion";
-							$seeLotFact = TRUE;
-							break;
-						case 'TEBGUR':
-							$ruta=$urlBase."/lotes/reproceso";
-							break;
-						case 'TICARG':
-							$ruta=$urlBase."/lotes/innominada";
-							break;
-						case 'TIINVN':
-							$ruta=$urlBase."/lotes/innominada/afiliacion";
-							break;
-						case 'TEBTHA':
-							$ruta=$urlBase."/reportes/tarjetahabientes";
-							break;
-						case 'TEBORS':
-							$ruta=$urlBase."/consulta/ordenes-de-servicio";
-							break;
-						case 'LOTFAC':
-							if($seeLotFact) {
-								$ruta=$urlBase."/consulta/lotes-por-facturar";
-							}
-							break;
-						case 'TRAMAE':
-							$ruta=$urlBase."/servicios/transferencia-maestra";
-							break;
-						case 'CONVIS':
-							$ruta=$urlBase."/controles/visa";
-							break;
-						case 'PAGPRO':
-							$ruta=$urlBase."/pagos";
-							break;
-						case 'TEBPOL':
-							$ruta=$urlBase."/servicios/actualizar-datos";
-							break;
-						case 'CMBCON':
-							$ruta=$urlBase."/trayectos/conductores";
-							break;
-						case 'CMBVHI':
-							$ruta=$urlBase."/trayectos/gruposVehiculos";
-							break;
-						case 'CMBCTA':
-							$ruta=$urlBase."/trayectos/cuentas";
-							break;
-						case 'CMBVJE':
-							$ruta=$urlBase."/trayectos/viajes";
-							break;
-						case 'REPTAR':
-							$ruta=$urlBase."/reportes/tarjetas-emitidas";
-							break;
-						case 'REPPRO':
-							$ruta=$urlBase."/reportes/recargas-realizadas";
-							break;
-						case 'REPLOT':
-							$ruta=$urlBase."/reportes/estatus-lotes";
-							break;
-						case 'REPUSU':
-							$ruta=$urlBase."/reportes/actividad-por-usuario";
-							break;
-						case 'REPCON':
-							$ruta=$urlBase."/reportes/cuenta-concentradora";
-							break;
-						case 'REPSAL':
-							$ruta=$urlBase."/reportes/saldos-al-cierre";
-							break;
-						case 'REPREP':
-							$ruta=$urlBase."/reportes/reposiciones";
-							break;
-						case 'REPCAT':
-							$ruta=$urlBase."/reportes/gastos-por-categorias";
-							break;
-						case 'REPEDO':
-							$ruta=$urlBase."/reportes/estados-de-cuenta";
-							break;
-						case 'REPPGE':
-							$ruta=$urlBase."/reportes/guarderia";
-							break;
-						case 'REPRTH':
-							$ruta= $urlBase . "/reportes/comisiones";
-							break;
-
-					}
-					if($submenu->idModulo == "TICARG"||$submenu->idModulo == "TIINVN"){
-						if($menuBoolean == false) {
-							$opMenuSubmenu.= "<li>
-												<a href='#'>Cuentas innominadas</a>
-												SUBMENU-INNO
-											</li>";
-							$menuBoolean = true;
-						}
-						$menuInno.= "<li>
-										<a href='".$ruta."'>". lang($submenu->idModulo)."</a>
-									</li>";
-					} else {
-						if($submenu->idModulo == 'LOTFAC' && !$seeLotFact) continue;
-						$opMenuSubmenu.= "<li>
-											<a href='".$ruta."'>". lang($submenu->idModulo)."</a>
-										</li>";
-					}
-				}
-				$opMenuSubmenu.= "<div id='scrolldown' style='display:none'>
-									<span class='ui-icon ui-icon-triangle-1-s'></span>
-								</div>
-							</ul>";
-				$opMenu= "<li>
-							<a rel='section'>
-								<span aria-hidden='true' class='icon' data-icon='".$icon."'></span>
-								".lang($opcionPrincipal->idPerfil)."
-							</a>
-							".$opMenuSubmenu."
-						</li>";
-				if($menuBoolean == true){
-					$opMenu = str_replace("SUBMENU-INNO", "<ul>" . $menuInno . "</ul>", $opMenu);
-				}
-				$menuH.=$opMenu;
+if(!function_exists('createMenu')) {
+	function createMenu($userAccess, $seralize = FALSE) {
+		$menuData = $seralize ? unserialize($userAccess) : $userAccess;
+		$levelOneOpts = [];
+		if($menuData==NULL||!isset($menuData))
+			return $levelOneOpts;
+		foreach($menuData as $function) {
+			$levelTwoOpts = [];
+			$levelThreeOpts = [];
+			$seeLotFact = FALSE;
+			foreach($function->modulos as $module) {
+				if($module->idModulo==='TEBAUT')
+					$seeLotFact = TRUE;
+				if($module->idModulo==='LOTFAC'&&!$seeLotFact)
+					continue;
+				$moduleOpt = [
+					'route' => menuRoute($module->idModulo, $seeLotFact),
+					'text' => lang($module->idModulo)
+				];
+				if($module->idModulo==='TICARG'||$module->idModulo==='TIINVN')
+					$levelThreeOpts[] = $moduleOpt;
+				else
+					$levelTwoOpts[] = $moduleOpt;
 			}
+			if(!empty($levelThreeOpts))
+				$levelTwoOpts[] = [
+					'route' => '#',
+					'text' => 'Cuentas innominadas',
+					'suboptions' => $levelThreeOpts
+				];
+			$levelOneOpts[] = [
+				'icon' => menuIcon($function->idPerfil),
+				'text' => lang($function->idPerfil),
+				'suboptions' => $levelTwoOpts
+			];
 		}
-		$menu='<nav id="nav2">
-				<ul style="margin:0">
-					<li>
-						<a href="'.$urlBase.'/dashboard" rel="start" >
-							<span aria-hidden="true" class="icon" data-icon="&#xe097;"></span>
-							'.lang('MENU_INICIO').'
-						</a>
-					</li>
-					'.$menuH.'
-					<li>
-						<a href="'.$urlBase.'/logout" rel="subsection">
-							<span aria-hidden="true" class="icon" data-icon="&#xe03e;"></span>
-							'.lang("SUBMENU_LOGOUT").'
-						</a>
-					</li>
-				</ul>
-			</nav>';
-		echo $menu;
+		return $levelOneOpts;
+	}
+}
+
+if(!function_exists('menuIcon')) {
+	function menuIcon($functionId) {
+		switch ($functionId) {
+			case 'CONSUL': return "&#xe072;";
+			case 'GESLOT': return "&#xe03c;";
+			case 'SERVIC': return "&#xe019;";
+			case 'GESREP': return "&#xe021;";
+			case 'COMBUS': return "&#xe08e;";
+		}
+		return '';
+	}
+}
+
+if(!function_exists('menuRoute')) {
+	function menuRoute($functionId, $seeLotFact) {
+		$CI = &get_instance();
+		$country = $CI->config->item('country');
+		$countryUri = $CI->config->item('countryUri');
+		switch ($functionId) {
+			case 'TEBCAR': return base_url($country."/lotes/carga");
+			case 'TEBAUT': return base_url($country."/lotes/autorizacion");
+			case 'TEBGUR': return base_url($country."/lotes/reproceso");
+			case 'TICARG': return base_url($country."/lotes/innominada");
+			case 'TIINVN': return base_url($country."/lotes/innominada/afiliacion");
+			case 'TEBTHA': return base_url($country."/reportes/tarjetahabientes");
+			case 'TEBORS': return base_url($country."/consulta/ordenes-de-servicio");
+			case 'TRAMAE': return base_url($country."/servicios/transferencia-maestra");
+			case 'CONVIS': return base_url($country."/controles/visa");
+			case 'PAGPRO': return base_url($country."/pagos");
+			case 'TEBPOL': return base_url($country."/servicios/actualizar-datos");
+			case 'CMBCON': return base_url($country."/trayectos/conductores");
+			case 'CMBVHI': return base_url($country."/trayectos/gruposVehiculos");
+			case 'CMBCTA': return base_url($country."/trayectos/cuentas");
+			case 'CMBVJE': return base_url($country."/trayectos/viajes");
+			case 'REPTAR': return base_url($country."/reportes/tarjetas-emitidas");
+			case 'REPPRO': return base_url($country."/reportes/recargas-realizadas");
+			case 'REPLOT': return base_url($country."/reportes/estatus-lotes");
+			case 'REPUSU': return base_url($country."/reportes/actividad-por-usuario");
+			case 'REPCON': return base_url($country."/reportes/cuenta-concentradora");
+			case 'REPSAL': return base_url($country."/reportes/saldos-al-cierre");
+			case 'REPREP': return base_url($country."/reportes/reposiciones");
+			case 'REPCAT': return base_url($country."/reportes/gastos-por-categorias");
+			case 'REPEDO': return base_url($country."/reportes/estados-de-cuenta");
+			case 'REPPGE': return base_url($country."/reportes/guarderia");
+			case 'REPRTH': return base_url($country."/reportes/comisiones");
+			case 'LOTFAC': if ($seeLotFact) return base_url($country."/consulta/lotes-por-facturar");
+		}
+		return '#';
 	}
 }
 
