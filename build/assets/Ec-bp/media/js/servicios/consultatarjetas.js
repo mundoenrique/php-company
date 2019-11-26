@@ -632,7 +632,6 @@ $(".table-text-service").on('click', '#ACTUALIZAR_DATOS', function() {
 					nombres = $('#nombres').val();
 					apellidos = $('#apellidos').val();
 					correo =  $('#correo').val();
-					/* pin = $('#pin').val(); */
 					celular = $('#celular').val();
 					clave = $('#clave').val();
 					$(this).dialog("destroy");
@@ -647,29 +646,22 @@ $(".table-text-service").on('click', '#ACTUALIZAR_DATOS', function() {
 
 })
 
-/* $('#pin').on('input', function () {
-	this.value = this.value.replace(/[^0-9]/g,'');
-}); */
-
 function validarFields()
 {
 	var valNombre = $('#dialog-confirm').find('#nombres')
 	var valApellidos = $('#dialog-confirm').find('#apellidos')
 	var valCorreo = $('#dialog-confirm').find('#correo')
-	/* var valPin = $('#dialog-confirm').find('#pin') */
 	var valCelular = $('#dialog-confirm').find('#celular')
 	var valClave = $('#dialog-confirm').find('#clave')
 	var errorName = $('#dialog-confirm').find('#errornombre')
 	var errorApellido = $('#dialog-confirm').find('#errorapellido')
 	var errorCorreo = $('#dialog-confirm').find('#errorcorreo')
-	/* var errorPin = $('#dialog-confirm').find('#errorpin') */
 	var errorCelular = $('#dialog-confirm').find('#errorcelular')
 	var errorClave = $('#dialog-confirm').find('#errorclave')
 
 	spaceString('#nombres')
 	spaceString('#apellidos')
 	spaceString('#correo')
-	/* spaceString('#pin') */
 	spaceString('#celular')
 	spaceString('#clave')
 
@@ -868,7 +860,6 @@ function llamarActDatos(url, title){
 		nombres: nombres,
 		apellidos: apellidos,
 		correo: correo,
-		/* pin: pin, */
 		celular:celular,
 		pass: pass,
 		estado_nuevo: serv_var.estado_nuevo,
