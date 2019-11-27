@@ -15,7 +15,7 @@
 					<input id="user_pass" name="user_pass" class="form-control" type="password">
 					<div class="help-block"></div>
 				</div>
-				<button id="login-btn" class="btn btn-primary w-100 mt-3 mb-5"><?= lang('LOGIN_BTN') ?></button>
+				<button id="login-btn" class="btn btn-loading-lg btn-primary w-100 mt-3 mb-5"><?= lang('LOGIN_BTN') ?></button>
 			</form>
 		</div>
 	</div>

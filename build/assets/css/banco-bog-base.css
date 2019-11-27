@@ -11,10 +11,8 @@ header.main-head {
 	position: sticky;
 	top: 0;
 	z-index: 999;
-	display: flex;
 	width: 100%;
 	height: 3.75rem;
-	align-items: center;
 	background-color: var(--primary);
 	font-weight: var(--light-font-weight);
 }
@@ -641,7 +639,8 @@ textarea.form-control {
 }
 
 .custom-switch .custom-control-input:disabled:checked ~ .custom-control-label::before {
-  background-color: var(--primary);
+	background-color: var(--primary);
+	opacity: .5;
 }
 
 /* Form inline */
@@ -1057,6 +1056,10 @@ textarea.form-control {
 	height: 32px;
 }
 
+.btn-loading-lg {
+	height: 38px;
+}
+
 /* sizes */
 
 .btn-small {
@@ -1073,12 +1076,6 @@ textarea.form-control {
   padding-top: 5px;
   padding-bottom: 5px;
   font-size: var(--h5);
-}
-
-.ui-dialog-buttonpane .btn {
-	width: 5.75rem;
-	height: 2.5rem;
-	padding: var(--button-small-padding-y) var(--button-small-padding-x);
 }
 
 /* icon */
@@ -1854,6 +1851,16 @@ textarea.form-control {
 	margin-right: .5rem;
 }
 
+.vinieta {
+	margin-bottom: 0;
+	padding-left: 1.5rem;
+	list-style-type: none;
+}
+.vinieta li:before {
+	content:"\2713\0020";
+	color: var(--primary);
+}
+
 /* Alignment */
 .justify      { text-align: justify !important }
 .text-left   { text-align: left !important }
@@ -1914,7 +1921,6 @@ i[class*=" icon-"] {
 	display: inline-flex;
 	height: auto;
 	width: auto;
-	margin-right: .5rem;
 	font-family: "NovoPayment Glyphs";
 	font-size: inherit;
 	font-style: normal;
@@ -1940,6 +1946,7 @@ i[class*=" icon-"]:before {
 .icon-download:before      { content: "\e008"; }
 .icon-upload:before        { content: "\e009"; }
 .icon-user:before          { content: "\e015"; }
+.icon-key:before 					 { content: "\e01a"; }
 .icon-lock:before 				 { content: "\e01b"; }
 .icon-card:before          { content: "\e029"; }
 .icon-thumbs-up:before     { content: "\e032"; }
@@ -1955,7 +1962,13 @@ i[class*=" icon-"]:before {
 .icon-hand-down:before     { content: "\e044"; }
 .icon-hand-left:before     { content: "\e045"; }
 .icon-hand-right:before    { content: "\e046"; }
+.icon-chart-pie:before  	 { content: "\e04c"; }
+.icon-file-blank:before 	 { content: "\e057"; }
+.icon-file-graph:before 	 { content: "\e058"; }
+.icon-file-pdf:before 		 { content: "\e059"; }
+.icon-file-word:before     { content: "\e05a"; }
 .icon-file-excel:before 	 { content: "\e05b"; }
+.icon-spinner:before 			 { content: "\e060"; }
 
 .icon-user{
 	color:  var(--tertiary);
@@ -2000,7 +2013,7 @@ i[class*=" icon-"]:before {
   display: inline-flex;
   width: 1.5rem;
   height: 1.5rem;
-	color: var(--disabled-color);
+	color: var(--border-color-2);
   border: .2em solid currentColor;
   border-right-color: transparent;
   border-radius: 50%;
@@ -2048,7 +2061,8 @@ i[class*=" icon-"]:before {
 
 .navbar-brand {
   display: inline-block;
-  margin-right: 1rem;
+	margin-right: 1rem;
+	padding: .375rem 0;
 }
 
 .navbar-brand:hover, .navbar-brand:focus {
@@ -2056,7 +2070,7 @@ i[class*=" icon-"]:before {
 }
 
 .navbar-brand img {
-	width: 12em;
+	height: 2rem;
 }
 
 .navbar-nav {
@@ -2182,6 +2196,10 @@ i[class*=" icon-"]:before {
   height: 4px;
   background: var(--yellow);
   position: relative;
+}
+
+.main-nav-dropdown {
+	height: 3.75rem;
 }
 
 .main-nav-dropdown ul {
@@ -3157,9 +3175,8 @@ a.ui-button:active,
 }
 .ui-dialog .ui-dialog-content p {
 	display: flex;
-	align-items: center;
-	padding: .6em 1em 0;
-	min-height: 44px;
+	padding: 1.6em 1em 1em;
+	min-height: 80px;
 }
 .ui-dialog-content .dialog-icon {
 	margin-right: 12px;
@@ -3172,6 +3189,9 @@ a.ui-button:active,
 }
 .ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset {
 	float: right;
+}
+.ui-dialog-buttonpane .btn {
+	width: 5.75rem;
 }
 .ui-draggable .ui-dialog-titlebar {
 	cursor: move;
@@ -3276,7 +3296,12 @@ a.ui-button:active,
 .select-product {
 	max-width: 815px;
   height: 70px;
-  box-shadow: 1px 1px 2px 0 rgba(0,0,0,.2);
+	box-shadow: 1px 1px 2px 0 rgba(0,0,0,.2);
+	transition: all .6s ease-in-out;
+}
+
+.select-product:hover {
+	box-shadow: 1px 1px 2px 0px var(--text-color);
 }
 
 @media (min-width: 1024px) {
