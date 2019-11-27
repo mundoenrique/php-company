@@ -9,7 +9,12 @@
 				<li><a href="ceo_load_lots.php">Carga de lotes</a></li>
 				<li><a href="ceo_authorization_lots.php">Autorización de lotes</a></li>
 				<li><a href="ceo_authorization_lots.php">Reproceso de lotes</a></li>
-				<li><a href="#">Cuentas innominadas</a></li>
+				<li><a href="#">Cuentas innominadas</a>
+					<ul class="pl-0 regular tertiary bg-secondary list-style-none list-inline">
+						<li><a href="cualquiercosa">Solicitud</a></li>
+						<li><a href="cualquiercosa">afiliación</a></li>
+					</ul>
+				</li>
 			</ul>
 		</li>
 		<li class="nav-item mr-1 inline">

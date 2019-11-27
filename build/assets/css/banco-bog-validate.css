@@ -1,0 +1,29 @@
+.dropdown-user li ul {
+	display: none;
+	position: absolute;
+	width: 13.1em !important;
+}
+
+.dropdown-user li:hover > ul {
+	display: block;
+
+}
+
+.dropdown-user li {
+	position: relative;
+}
+
+.dropdown-user li ul {
+	right:-157px;
+	top:0px;
+}
+
+.dropdown-user ul {
+	border-bottom-left-radius: 5px 5px;
+	border-bottom-right-radius: 5px 5px;
+}
+
+.dropdown-user ul li:hover:last-child {
+	border-bottom-left-radius: 5px 5px;
+	border-bottom-right-radius: 5px 5px;
+}

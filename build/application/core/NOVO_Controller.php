@@ -137,6 +137,7 @@ class NOVO_Controller extends CI_Controller {
 				//"$structure-structure",
 				//"$this->skin-appearance",
 				"$this->skin-base",
+				"$this->skin-validate",
 			];
 
 			if($this->render->newViews === '-core') {
@@ -218,7 +219,7 @@ class NOVO_Controller extends CI_Controller {
 	{
 		log_message('INFO', 'NOVO_Controller: loadView method initialized. View loaded: '.$module);
 
-		$userAccess = $this->session->userdata('user_access');
+		$userAccess = $this->session->user_access;
 		$menu = createMenu($userAccess);
 		$userMenu = new stdClass();
 		$userMenu->menu = $menu;
