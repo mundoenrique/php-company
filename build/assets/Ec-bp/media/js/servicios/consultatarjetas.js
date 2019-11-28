@@ -30,7 +30,9 @@ var serv_var = {
 }
 
 $('#buscar').on('click', function () {
-
+	$(':checkbox').each(function () {
+		this.checked = 0;
+	});
 	serv_var.masivos = [];
 	var RE = /^\d*$/,
 		servicio = $('#servicio'),
