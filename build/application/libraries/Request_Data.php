@@ -86,7 +86,8 @@ class Request_Data {
 				}
 
 				if($key === 'acnomcia') {
-					$cat = substr($enterpriseArgs->lista[$pos]->$key, 0, 1);
+					preg_match('/([^\W])/', mb_strtoupper($value), $matches);
+					$cat = substr(reset($matches), 0, 1);
 					$enterpriseArgs->lista[$pos]->category = $cat;
 
 					switch ($cat) {

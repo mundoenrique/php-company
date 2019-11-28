@@ -130,12 +130,6 @@
 		"funciones": [{
 			"accodfuncion": "CONVIS",
 			"acnomfuncion": "CONSULTA DE CONTROLES"
-		}, {
-			"accodfuncion": "CONVIS",
-			"acnomfuncion": "CONSULTA DE CONTROLES"
-		}, {
-			"accodfuncion": "CONVIS",
-			"acnomfuncion": "CONSULTA DE CONTROLES"
 		}],
 		"rc": 0
 	}, {
@@ -143,12 +137,6 @@
 		"descripcion": "PAGO A PROVEEDORES",
 		"status": "A",
 		"funciones": [{
-			"accodfuncion": "PAGPRO",
-			"acnomfuncion": "PAGO A PROVEEDORES"
-		}, {
-			"accodfuncion": "PAGPRO",
-			"acnomfuncion": "PAGO A PROVEEDORES"
-		}, {
 			"accodfuncion": "PAGPRO",
 			"acnomfuncion": "PAGO A PROVEEDORES"
 		}],
@@ -176,33 +164,6 @@
 			"accodfuncion": "CNDINS",
 			"acnomfuncion": "ACTUALIZAR CONDUCTOR"
 		}, {
-			"accodfuncion": "CNDINS",
-			"acnomfuncion": "ACTUALIZAR CONDUCTOR"
-		}, {
-			"accodfuncion": "CNDCON",
-			"acnomfuncion": "CONSULTAR CONDUCTORES"
-		}, {
-			"accodfuncion": "CNDELI",
-			"acnomfuncion": "ELIMINAR CONDUCTOR"
-		}, {
-			"accodfuncion": "CNDELI",
-			"acnomfuncion": "ELIMINAR CONDUCTOR"
-		}, {
-			"accodfuncion": "CNDINS",
-			"acnomfuncion": "ACTUALIZAR CONDUCTOR"
-		}, {
-			"accodfuncion": "CNDINS",
-			"acnomfuncion": "ACTUALIZAR CONDUCTOR"
-		}, {
-			"accodfuncion": "CNDCON",
-			"acnomfuncion": "CONSULTAR CONDUCTORES"
-		}, {
-			"accodfuncion": "CNDELI",
-			"acnomfuncion": "ELIMINAR CONDUCTOR"
-		}, {
-			"accodfuncion": "CNDCON",
-			"acnomfuncion": "CONSULTAR CONDUCTORES"
-		}, {
 			"accodfuncion": "CNDCON",
 			"acnomfuncion": "CONSULTAR CONDUCTORES"
 		}],
@@ -215,35 +176,8 @@
 			"accodfuncion": "VHIELI",
 			"acnomfuncion": "ELIMINAR VEHICULO"
 		}, {
-			"accodfuncion": "VHIELI",
-			"acnomfuncion": "ELIMINAR VEHICULO"
-		}, {
 			"accodfuncion": "VHIINS",
 			"acnomfuncion": "ACTUALIZAR VEHICULO"
-		}, {
-			"accodfuncion": "VHIINS",
-			"acnomfuncion": "ACTUALIZAR VEHICULO"
-		}, {
-			"accodfuncion": "VHICON",
-			"acnomfuncion": "CONSULTAR VEHICULO"
-		}, {
-			"accodfuncion": "VHICON",
-			"acnomfuncion": "CONSULTAR VEHICULO"
-		}, {
-			"accodfuncion": "VHIELI",
-			"acnomfuncion": "ELIMINAR VEHICULO"
-		}, {
-			"accodfuncion": "VHIELI",
-			"acnomfuncion": "ELIMINAR VEHICULO"
-		}, {
-			"accodfuncion": "VHIINS",
-			"acnomfuncion": "ACTUALIZAR VEHICULO"
-		}, {
-			"accodfuncion": "VHIINS",
-			"acnomfuncion": "ACTUALIZAR VEHICULO"
-		}, {
-			"accodfuncion": "VHICON",
-			"acnomfuncion": "CONSULTAR VEHICULO"
 		}, {
 			"accodfuncion": "VHICON",
 			"acnomfuncion": "CONSULTAR VEHICULO"
@@ -260,35 +194,8 @@
 			"accodfuncion": "CTAELI",
 			"acnomfuncion": "ELIMINAR CUENTAS"
 		}, {
-			"accodfuncion": "CTAELI",
-			"acnomfuncion": "ELIMINAR CUENTAS"
-		}, {
 			"accodfuncion": "CTACON",
 			"acnomfuncion": "CONSULTAR CUENTAS"
-		}, {
-			"accodfuncion": "CTACON",
-			"acnomfuncion": "CONSULTAR CUENTAS"
-		}, {
-			"accodfuncion": "CTAINS",
-			"acnomfuncion": "ACTUALIZAR CUENTAS"
-		}, {
-			"accodfuncion": "CTAINS",
-			"acnomfuncion": "ACTUALIZAR CUENTAS"
-		}, {
-			"accodfuncion": "CTAELI",
-			"acnomfuncion": "ELIMINAR CUENTAS"
-		}, {
-			"accodfuncion": "CTAELI",
-			"acnomfuncion": "ELIMINAR CUENTAS"
-		}, {
-			"accodfuncion": "CTACON",
-			"acnomfuncion": "CONSULTAR CUENTAS"
-		}, {
-			"accodfuncion": "CTACON",
-			"acnomfuncion": "CONSULTAR CUENTAS"
-		}, {
-			"accodfuncion": "CTAINS",
-			"acnomfuncion": "ACTUALIZAR CUENTAS"
 		}],
 		"rc": 0
 	}, {
@@ -299,47 +206,11 @@
 			"accodfuncion": "VJECND",
 			"acnomfuncion": "ASIGNAR VIAJE A CONDUCTOR"
 		}, {
-			"accodfuncion": "VJECND",
-			"acnomfuncion": "ASIGNAR VIAJE A CONDUCTOR"
-		}, {
 			"accodfuncion": "VJEINS",
 			"acnomfuncion": "CREAR VIAJE"
 		}, {
 			"accodfuncion": "VJECON",
 			"acnomfuncion": "CONSULTAR VIAJES"
-		}, {
-			"accodfuncion": "VJECON",
-			"acnomfuncion": "CONSULTAR VIAJES"
-		}, {
-			"accodfuncion": "VJEELI",
-			"acnomfuncion": "ELIMINAR VIAJES"
-		}, {
-			"accodfuncion": "VJEELI",
-			"acnomfuncion": "ELIMINAR VIAJES"
-		}, {
-			"accodfuncion": "VJEINS",
-			"acnomfuncion": "CREAR VIAJE"
-		}, {
-			"accodfuncion": "VJEINS",
-			"acnomfuncion": "CREAR VIAJE"
-		}, {
-			"accodfuncion": "VJECND",
-			"acnomfuncion": "ASIGNAR VIAJE A CONDUCTOR"
-		}, {
-			"accodfuncion": "VJECND",
-			"acnomfuncion": "ASIGNAR VIAJE A CONDUCTOR"
-		}, {
-			"accodfuncion": "VJECON",
-			"acnomfuncion": "CONSULTAR VIAJES"
-		}, {
-			"accodfuncion": "VJECON",
-			"acnomfuncion": "CONSULTAR VIAJES"
-		}, {
-			"accodfuncion": "VJEINS",
-			"acnomfuncion": "CREAR VIAJE"
-		}, {
-			"accodfuncion": "VJEELI",
-			"acnomfuncion": "ELIMINAR VIAJES"
 		}, {
 			"accodfuncion": "VJEELI",
 			"acnomfuncion": "ELIMINAR VIAJES"
