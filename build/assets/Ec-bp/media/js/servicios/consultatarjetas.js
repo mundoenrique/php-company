@@ -671,7 +671,7 @@ function validarFields()
 			nomRegExp = /^[A-Z]+$/i;
 			descRegExp = /^['a-z0-9ñáéíóú ,.:()']+$/i;
 			emailRegExp = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-			numRegExp = /^\d+$/
+			numRegExp = /^\d+$/i;
 
 	if(valNombre.val() === '')
 	{
@@ -689,7 +689,6 @@ function validarFields()
 	}
 	else{
 		errorName.hide();
-		validInput = true;
 		valNombre.removeClass('textbox-transfer');
 	}
 
@@ -709,7 +708,6 @@ function validarFields()
 	}
 	else{
 		errorApellido.hide();
-		validInput = true;
 		valApellidos.removeClass('textbox-transfer');
 	}
 
@@ -729,24 +727,24 @@ function validarFields()
 	}
 	else{
 		errorCorreo.hide();
-		validInput = true;
 		valCorreo.removeClass('textbox-transfer');
 	}
 
-	if(valCelular.val().length >= 13)
+	if(valCelular.val().length > 13)
 	{
 		errorCelular.show();
 		errorCelular.html('el campo solo debe tener maximo 13 numeros')
 		validInput = false;
 		valCelular.addClass('textbox-transfer');
+
 	}else if(!numRegExp.test(valCelular.val())){
 		errorCelular.show();
 		errorCelular.html('El campo debe ser numerico')
 		validInput = false;
 		valCelular.addClass('textbox-transfer');
+
 	}else{
 		errorCelular.hide();
-		validInput = true;
 		valCelular.removeClass('textbox-transfer');
 	}
 	
@@ -759,7 +757,6 @@ function validarFields()
 	}
 	else{
 		errorClave.hide();
-		validInput = true;
 		valClave.removeClass('textbox-transfer');
 	}
 
