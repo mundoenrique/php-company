@@ -35,12 +35,14 @@
 					<a class="btn btn-link btn-small-xs mx-4 px-0" href="ceo_authorization_lots.html">
 						<?= novoLang(lang('PRODUCTS_LOTS_TOTAL'), [$lotsTotal, $toSign, $toAuthorize]) ?>
 					</a>
+					<?php if($viewSomeAttr): ?>
 					<a class="btn btn-link btn-small-xs mx-4 px-0" href="ceo_service_orders.html">
 					<?= novoLang(lang('PRODUCTS_ORDERSERV_TOTAL'), [$serviceOrders, $serviceOrdersNoCon, $serviceOrdersCon]) ?>
 					</a>
 					<a class="btn btn-link btn-small-xs mx-4 px-0">
 					<?= novoLang(lang('PRODUCTS_CARDS_TOTAL'), [$totalCards, $activeCards, $inactiveCards]) ?>
 					</a>
+					<?php endif; ?>
 				</div>
 			</div>
 		</div>

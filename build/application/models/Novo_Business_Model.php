@@ -238,7 +238,8 @@ class Novo_Business_Model extends NOVO_Model {
 			'name' => '--',
 			'img' => '--',
 			'brand' => '--',
-			'imgBrand' => '--'
+			'imgBrand' => '--',
+			'viewSomeAttr' => FALSE,
 		];
 		$productSummary = [
 			'lots' => '--',
@@ -277,23 +278,38 @@ class Novo_Business_Model extends NOVO_Model {
 				$productSummary['lots'] = trim($response->estadistica->lote->total);
 				$productSummary['toSign'] = trim($response->estadistica->lote->numPorFirmar);
 				$productSummary['toAuthorize'] = trim($response->estadistica->lote->numPorAutorizar);
-				$productSummary['serviceOrders'] = trim($response->estadistica->ordenServicio->Total);
-				$productSummary['serviceOrdersCon'] = trim($response->estadistica->ordenServicio->numConciliada);
-				$productSummary['serviceOrdersNoCon'] = trim($response->estadistica->ordenServicio->numNoConciliada);
-				$productSummary['totalCards'] = trim($response->estadistica->listadoTarjeta->numeroTarjetas);
-				$productSummary['activeCards'] = trim($response->estadistica->listadoTarjeta->numTarjetasActivas);
-				$productSummary['inactiveCards'] = trim($response->estadistica->listadoTarjeta->numTarjetasInactivas);
+
+				if(trim($response->estadistica->producto->marca) == 'idProducto') {
+					$productDetail['viewSomeAttr'] = FALSE;
+				}
+
+				if(isset($response->estadistica->ordenServicio)) {
+					$productSummary['serviceOrders'] = trim($response->estadistica->ordenServicio->Total);
+					$productSummary['serviceOrdersCon'] = trim($response->estadistica->ordenServicio->numConciliada);
+					$productSummary['serviceOrdersNoCon'] = trim($response->estadistica->ordenServicio->numNoConciliada);
+					$productSummary['totalCards'] = trim($response->estadistica->listadoTarjeta->numeroTarjetas);
+				}
+
+				if(isset($response->estadistica->ordenServicio)) {
+					$productSummary['activeCards'] = trim($response->estadistica->listadoTarjeta->numTarjetasActivas);
+					$productSummary['inactiveCards'] = trim($response->estadistica->listadoTarjeta->numTarjetasInactivas);
+				}
 
 				$this->response->data->productDetail = (object) $productDetail;
 				$this->response->data->productSummary = (object) $productSummary;
 
 				if(isset($response->estadistica->producto->mesesVencimiento)) {
+					$expMaxMonths = trim($response->estadistica->producto->mesesVencimiento);
+					$currentDate = date('Y-m');
+					$newDate = strtotime ('+'.$expMaxMonths.' month' , strtotime($currentDate));
+					$expireDate = date ('m/Y' , $newDate);
 					$expMax = new stdClass();
-					$expMax->expMaxMonths = trim($response->estadistica->producto->mesesVencimiento);
+					$expMax->expMaxMonths = $expireDate;
 					$expMax->maxCards = trim($response->estadistica->producto->maxTarjetas);
+					$this->session->set_userdata('expMax', $expMax);
+					log_message('INFO', 'NOVO -----------------------'.json_encode($this->session->expMax));
 				}
 
-				$this->session->set_userdata('expMax', $expMax);
 				break;
 		}
 
