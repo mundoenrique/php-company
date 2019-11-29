@@ -656,7 +656,9 @@ class Lotes extends CI_Controller {
 				}
 				else{
 					$codigoError = lang('ERROR_('.$response->rc.')');
-					if(strpos($codigoError, 'Error')!==false){
+				if($response->rc==-1){
+					$codigoError = array('ERROR' => lang('MSG_INVALID_PASS'), "rc"=> $response->rc);
+				}else if(strpos($codigoError, 'Error')!==false){
 						$codigoError = array('ERROR' => lang('ERROR_GENERICO_USER') );
 					}else{
 						$codigoError = array('ERROR' => lang('ERROR_('.$response->rc.')') );
