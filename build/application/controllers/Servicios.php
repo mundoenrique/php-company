@@ -1618,7 +1618,7 @@ public function consultaTarjetas($urlCountry)
 				$lastSessionD = $this->session->userdata('lastSession');
 				$jsRte = '../../../js/';
 				$thirdsJsRte = '../../../js/third_party/';
-				$FooterCustomInsertJS=["jquery-3.4.0.min.js", "jquery-ui-1.12.1.min.js","aes.min.js","jquery-md5.js","aes-json-format.min.js","servicios/consultatarjetas.js","kendo.dataviz.min.js","jquery.paginate.js","header.js","jquery.balloon.min.js","jquery.dataTables.min.js","routes.js",$thirdsJsRte."jquery.validate.min.js",$jsRte."validate-forms.js",$thirdsJsRte."additional-methods.min.js"];
+				$FooterCustomInsertJS=["jquery-3.4.0.min.js","jquery-ui-1.12.1.min.js","aes.min.js","jquery-md5.js","aes-json-format.min.js","routes.js","kendo.dataviz.min.js","jquery.paginate.js","header.js","jquery.balloon.min.js","jquery.dataTables.min.js","servicios/consultatarjetas.js",$thirdsJsRte."jquery.validate.min.js",$jsRte."validate-forms.js",$thirdsJsRte."additional-methods.min.js"];
 				$FooterCustomJS="";
 				$titlePage="Conexión Empresas Online - Servicios";
 

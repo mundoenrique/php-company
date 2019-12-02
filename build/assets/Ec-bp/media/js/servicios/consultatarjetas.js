@@ -383,7 +383,8 @@ function toFormatShow(valor) {
 }
 
 // DIALOGO DE NOTIFICACIONES
-function notificacion(titulo, mensaje, opcion = 0) {
+function notificacion(titulo, mensaje, opcion) {
+	opcion = opcion =! undefined ? opcion : 0;
 	var canvas = "<div>" + mensaje + "</div>";
 
 	$(canvas).dialog({
@@ -670,10 +671,10 @@ function validarFields()
 	var camposValid = ''
 			msgValido = '';
 			validInput = true;
-			nomRegExp = /^[A-Z]+$/i;
+			nomRegExp = /^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/i;
 			descRegExp = /^['a-z0-9ñáéíóú ,.:()']+$/i;
 			emailRegExp = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-			numRegExp = /^\d+$/i;
+			numRegExp = /\d+/;
 
 	if(valNombre.val() === '')
 	{
@@ -682,10 +683,17 @@ function validarFields()
 		validInput = false;
 		valNombre.addClass('textbox-transfer');
 	}
-	else if(!nomRegExp.test(valNombre.val()))
+	else if(numRegExp.test(valNombre.val()))
 	{
 		errorName.show();
 		errorName.html('No se admiten números')
+		validInput = false;
+		valNombre.addClass('textbox-transfer');
+	}
+	else if(!nomRegExp.test(valNombre.val()))
+	{
+		errorName.show();
+		errorName.html('No se admiten caracteres especiales')
 		validInput = false;
 		valNombre.addClass('textbox-transfer');
 	}
@@ -749,7 +757,7 @@ function validarFields()
 		errorCelular.hide();
 		valCelular.removeClass('textbox-transfer');
 	}
-	
+
 	if(valClave.val() === '')
 	{
 		errorClave.show();
@@ -780,7 +788,8 @@ function MaysPrimera(string){
 }
 
 //PROCESAR OPERACION
-function procesar(titulo, url, op = 1) {
+function procesar(titulo, url, op) {
+	op = op != undefined ? op : 1;
 	var canvas = "<div id='dialog-confirm'>";
 	canvas += "<form name='no-form' onsubmit='return false'>";
 	canvas += "<center>Tarjeta: " + serv_var.noTarjetas + "</center>";
@@ -1045,6 +1054,3 @@ function removeItemFromArr ( arr, item ) {
 	var i = arr.indexOf( item );
 	arr.splice( i, 1 );
 }
-
-
-
