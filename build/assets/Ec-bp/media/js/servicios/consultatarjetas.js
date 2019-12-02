@@ -709,10 +709,17 @@ function validarFields()
 		validInput = false;
 		valApellidos.addClass('textbox-transfer');
 	}
-	else if(!nomRegExp.test(valApellidos.val()))
+	else if(numRegExp.test(valApellidos.val()))
 	{
 		errorApellido.show();
 		errorApellido.html('No se admiten números')
+		validInput = false;
+		valApellidos.addClass('textbox-transfer');
+	}
+	else if(!nomRegExp.test(valApellidos.val()))
+	{
+		errorApellido.show();
+		errorApellido.html('No se admiten caracteres especiales')
 		validInput = false;
 		valApellidos.addClass('textbox-transfer');
 	}
