@@ -61,6 +61,7 @@ class NOVO_Controller extends CI_Controller {
 		$this->render->newViews = $this->config->item('new-views');
 		$this->form_validation->set_error_delimiters('', '---');
 		$this->config->set_item('language', 'spanish-base');
+
 		switch ($this->greeting) {
 			case $this->greeting >= 19 && $this->greeting <= 23:
 				$this->render->greeting = lang('GEN_EVENING');
@@ -72,6 +73,7 @@ class NOVO_Controller extends CI_Controller {
 				$this->render->greeting = lang('GEN_MORNING');
 				break;
 		}
+
 		if($this->input->is_ajax_request()) {
 			$this->dataRequest = json_decode(
 				$this->security->xss_clean(
@@ -86,17 +88,16 @@ class NOVO_Controller extends CI_Controller {
 		} else {
 			$access = $this->verify_access->accessAuthorization($this->router->fetch_method(), $this->countryUri, $this->appUserName);
 			$valid = TRUE;
+
 			if($_POST && $access) {
 				$valid = $this->verify_access->validateForm($this->rule, $this->countryUri, $this->appUserName);
+
 				if($valid) {
 					$this->request = $this->verify_access->createRequest($this->rule, $this->appUserName);
 				}
+
 			}
-			$this->render->code = -1;
-			$this->render->title = -1;
-			$this->render->msg = -1;
-			$this->render->icon = -1;
-			$this->render->data = -1;
+
 			$this->preloadView($access && $valid);
 		}
 

@@ -40,11 +40,11 @@
 		var baseURL = '<?= base_url(); ?>';
 		var assetUrl = '<?= assetUrl(); ?>';
 		var country = '<?= $countryUri; ?>';
-		var code = <?= $code; ?>;
-		var title = '<?= $title; ?>';
-		var msg = '<?= $msg; ?>';
-		var icon = '<?= $icon; ?>';
-		var data = <?= $data; ?>;
+		var code = <?= isset($code) ? $code : 0; ?>;
+		var title = '<?= isset($title) ? $title: ''; ?>';
+		var msg = '<?= isset($msg) ? $msg : ''; ?>';
+		var icon = '<?= isset($icon) ? $icon : ''; ?>';
+		var data = <?= isset($data) ? $data : 0; ?>;
 	</script>
 </body>
 </html>
