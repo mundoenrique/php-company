@@ -383,7 +383,8 @@ function toFormatShow(valor) {
 }
 
 // DIALOGO DE NOTIFICACIONES
-function notificacion(titulo, mensaje, opcion = 0) {
+function notificacion(titulo, mensaje) {
+	var opcion = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
 	var canvas = "<div>" + mensaje + "</div>";
 
 	$(canvas).dialog({
