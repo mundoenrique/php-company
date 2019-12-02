@@ -65,7 +65,7 @@ $info;
 			</div>
 
 			<div id="batchs-last">
-				<button id='buscarOS'>Buscar</button>
+				<button id='buscarOS' class='novo-btn-primary'>Buscar</button>
 			</div>
 
 		</div>
