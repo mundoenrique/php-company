@@ -383,8 +383,8 @@ function toFormatShow(valor) {
 }
 
 // DIALOGO DE NOTIFICACIONES
-function notificacion(titulo, mensaje) {
-	var opcion = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
+function notificacion(titulo, mensaje, opcion) {
+	opcion = opcion =! undefined ? opcion : 0;
 	var canvas = "<div>" + mensaje + "</div>";
 
 	$(canvas).dialog({
@@ -757,7 +757,7 @@ function validarFields()
 		errorCelular.hide();
 		valCelular.removeClass('textbox-transfer');
 	}
-	
+
 	if(valClave.val() === '')
 	{
 		errorClave.show();
@@ -788,7 +788,8 @@ function MaysPrimera(string){
 }
 
 //PROCESAR OPERACION
-function procesar(titulo, url, op = 1) {
+function procesar(titulo, url, op) {
+	op = op != undefined ? op : 1;
 	var canvas = "<div id='dialog-confirm'>";
 	canvas += "<form name='no-form' onsubmit='return false'>";
 	canvas += "<center>Tarjeta: " + serv_var.noTarjetas + "</center>";
@@ -1053,6 +1054,3 @@ function removeItemFromArr ( arr, item ) {
 	var i = arr.indexOf( item );
 	arr.splice( i, 1 );
 }
-
-
-
