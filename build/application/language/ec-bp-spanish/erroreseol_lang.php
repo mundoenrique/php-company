@@ -269,3 +269,4 @@ $lang["ERROR_SUPPORT"] = 'Por favor envíe un correo a <strong>soporteempresas@t
 $lang['PAG_OS_E_CORREO'] = 'No fue posible enviar el correo,<br> intente más tarde';
 $lang['NO_EMPRESAS_LIST'] = 'No fue posible obtener la lista de empresas';
 $lang['MSG_FIRMA_LOTE'] = 'La contraseña es incorrecta.<br>Por favor verifíquela e intente de nuevo.';
+$lang['MSG_INVALID_PASS'] = 'La contraseña es incorrecta.<br>Por favor verifícala e intenta de nuevo.';
