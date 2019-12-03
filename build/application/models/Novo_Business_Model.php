@@ -239,7 +239,7 @@ class Novo_Business_Model extends NOVO_Model {
 			'img' => '--',
 			'brand' => '--',
 			'imgBrand' => '--',
-			'viewSomeAttr' => FALSE,
+			'viewSomeAttr' => TRUE,
 		];
 		$productSummary = [
 			'lots' => '--',
@@ -256,7 +256,7 @@ class Novo_Business_Model extends NOVO_Model {
 		switch($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
-				log_message('INFO', 'NOVO Business Model: getProductDetail USER_ACCESS LIST '.json_encode($response->lista));
+				log_message('INFO', 'NOVO ['.$this->userName.'] '.lang('GEN_GET_PRODUCTS_DETAIL').' USER_ACCESS LIST: '.json_encode($response->lista));
 
 				$this->session->set_userdata('user_access', $response->lista);
 				$imgBrand = url_title(trim(mb_strtolower($response->estadistica->producto->marca))).'_card.svg';
@@ -279,7 +279,7 @@ class Novo_Business_Model extends NOVO_Model {
 				$productSummary['toSign'] = trim($response->estadistica->lote->numPorFirmar);
 				$productSummary['toAuthorize'] = trim($response->estadistica->lote->numPorAutorizar);
 
-				if(trim($response->estadistica->producto->marca) == 'idProducto') {
+				if(trim($response->estadistica->producto->idProducto) == 'G') {
 					$productDetail['viewSomeAttr'] = FALSE;
 				}
 
@@ -307,7 +307,6 @@ class Novo_Business_Model extends NOVO_Model {
 					$expMax->expMaxMonths = $expireDate;
 					$expMax->maxCards = trim($response->estadistica->producto->maxTarjetas);
 					$this->session->set_userdata('expMax', $expMax);
-					log_message('INFO', 'NOVO -----------------------'.json_encode($this->session->expMax));
 				}
 
 				break;

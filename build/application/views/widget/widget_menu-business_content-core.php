@@ -1,7 +1,8 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 <nav class="navbar-secondary line-main-nav flex bg-secondary items-center">
 	<ul class="main-nav-user flex my-0 list-style-none">
-		<li class="nav-item mr-1 inline"><a class="nav-link pr-2 semibold primary" href="ceo_dashboard.php">Empresas</a>
+		<li class="nav-item mr-1 inline">
+			<a class="nav-link pr-2 semibold primary" href="<?= base_url('empresas') ?>">Empresas</a>
 		</li>
 		<li class="nav-item mr-1 inline">
 			<a class="nav-link px-2 semibold primary">Lotes</a>

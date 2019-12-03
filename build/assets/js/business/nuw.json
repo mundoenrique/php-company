@@ -220,6 +220,24 @@
 }, {
 	"idPerfil": "GESREP",
 	"modulos": [{
+		"idModulo": "REPREP",
+		"descripcion": "REPOSICIONES",
+		"status": "A",
+		"funciones": [{
+			"accodfuncion": "REPREP",
+			"acnomfuncion": "REPORTE REPOSICIONES"
+		}],
+		"rc": 0
+	},{
+		"idModulo": "TEBTHA",
+		"descripcion": "TARJETAHABIENTES",
+		"status": "I",
+		"funciones": [{
+			"accodfuncion": "REPTHA",
+			"acnomfuncion": "TARJETAHABIENTE"
+		}],
+		"rc": 0
+	},{
 		"idModulo": "REPEDO",
 		"descripcion": "REPORTE DE ESTADOS DE CUENTA",
 		"status": "A",
