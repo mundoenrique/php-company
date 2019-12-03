@@ -1605,31 +1605,30 @@ class Reportes extends CI_Controller {
 								)
 							)
 						);
-						$_POST['nombreEmpresa'] = $dataRequest->nombreEmpresa;
-						$_POST['lotes_producto'] = $dataRequest->lotes_producto;
-						$this->form_validation->set_rules('nombreEmpresa', 'nombreEmpresa',  'trim|xss_clean|required');
-						$this->form_validation->set_rules('lotes_producto', 'tarjeta',  'trim|xss_clean|required');
-							if ($this->form_validation->run() == FALSE)
-							{
-								log_message('DEBUG', 'NOVO VALIDATION ERRORS: '.json_encode(validation_errors()));
-								$responseError = 'La combinacion de caracteres es invalido';
-								$responseError = $this->cryptography->encrypt($responseError);
-								$this->output->set_content_type('application/json')->set_output(json_encode($responseError));
-								return $responseError;
-							}
-							else
-							{
-
-									$paginaActual = $dataRequest->paginaActual;
-									$loteproducto = $dataRequest->lotes_producto;
-									$acrif = $dataRequest->acrif;
-									$username = $this->session->userdata('userName');
-									$token = $this->session->userdata('token');
-									unset($_POST['paginaActual'], $_POST['lotes_producto']);
-									$pruebaTabla = $this->callWSEstatusTarjetasHabientes($urlCountry,$token,$username,$acrif, $loteproducto, $paginaActual );
-									$pruebaTabla = $this->cryptography->encrypt($pruebaTabla);
-									$this->output->set_content_type('application/json')->set_output(json_encode($pruebaTabla));
-							}
+						if($dataRequest !== null){
+							$_POST['nombreEmpresa'] = $dataRequest->nombreEmpresa;
+							$_POST['lotes_producto'] = $dataRequest->lotes_producto;
+							$this->form_validation->set_rules('nombreEmpresa', 'nombreEmpresa',  'trim|xss_clean|required');
+							$this->form_validation->set_rules('lotes_producto', 'tarjeta',  'trim|xss_clean|required');
+								if ($this->form_validation->run() == FALSE)
+								{
+									log_message('DEBUG', 'NOVO VALIDATION ERRORS: '.json_encode(validation_errors()));
+									$responseError = 'La combinacion de caracteres es invalido';
+									$responseError = $this->cryptography->encrypt($responseError);
+									$this->output->set_content_type('application/json')->set_output(json_encode($responseError));
+									return $responseError;
+								}else{
+								  $paginaActual = $dataRequest->paginaActual;
+								  $loteproducto = $dataRequest->lotes_producto;
+								  $acrif = $dataRequest->acrif;
+								  $username = $this->session->userdata('userName');
+								  $token = $this->session->userdata('token');
+								  unset($_POST['paginaActual'], $_POST['lotes_producto']);
+								  $pruebaTabla = $this->callWSEstatusTarjetasHabientes($urlCountry,$token,$username,$acrif, $loteproducto, $paginaActual );
+								  $pruebaTabla = $this->cryptography->encrypt($pruebaTabla);
+								  $this->output->set_content_type('application/json')->set_output(json_encode($pruebaTabla));
+								}
+						}
 					}
 			}else{
 					$this->session->sess_destroy();
