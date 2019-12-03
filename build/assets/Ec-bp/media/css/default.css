@@ -7436,6 +7436,7 @@ button:active {
 	background: none;
 	background-color: #ffd000;
 	color: #10133f;
+
 }
 /*********************************/
 
@@ -7446,6 +7447,7 @@ button:active {
 	width:120px;
 	padding-left:15px;
 	padding-right:15px;
+	 display: block;
 }
 .novo-btn-primary-modal,.novo-btn-secondary-modal{
 	width:68px;
@@ -7499,6 +7501,24 @@ button:active {
 	border: 1px solid #ffdd00;
 }
 
+#filtroOS #top-batchs span.icon:before,
+#lotes-general #top-batchs span.icon:before {
+	display: none;
+}
+
+.input5 {
+	width: 110px;
+	border-color: rgb(221, 221, 221);
+}
+
+.text-center {
+	/* margin: 0 auto;
+	margin-left: 262px; */
+	border-left: solid 1px #DFE0E2;
+	padding-left: 270px;
+	border-right: solid 1px #DFE0E2;
+	margin-right: 28px;
+}
 
 /* .loadingScreenWindow .ui-button {
   display: none;

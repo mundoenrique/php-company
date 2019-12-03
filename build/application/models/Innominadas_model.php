@@ -7,7 +7,7 @@ class Innominadas_Model extends CI_Model {
 	{
 		log_message('INFO', 'NOVO Plantilla Model Class Initialized');
 	}
-	public function callWSCreateInnominadas($urlCountry, $cantReg, $monto,  $lembozo1, $lembozo2, $codSucursal, $fechaExp){
+	public function callWSCreateInnominadas($urlCountry, $cantReg, $monto,  $lembozo1, $lembozo2, $codSucursal, $password,  $fechaExp){
 
 		$this->lang->load('erroreseol');
 
@@ -61,6 +61,7 @@ class Innominadas_Model extends CI_Model {
 				"reproceso" => true,
 				"sucursalCod" => $codSucursal,
 				"ubicacion" => "EM",
+				"password" => $password,
 				"fechaExp" => $fechaExp,
 				"destinoEmb" => "01"
 				),
@@ -93,7 +94,9 @@ class Innominadas_Model extends CI_Model {
 				if($response->rc==-61 || $response->rc==-29){
 					$this->session->sess_destroy();
 					$codigoError = array('ERROR' => lang('ERROR_(-29)'), "rc"=> $response->rc);
-				}else if($response->rc==-150){
+				}else	if($response->rc==-1){
+				$codigoError = array('ERROR' => lang('MSG_INVALID_PASS'), "rc"=> $response->rc);
+			}else if($response->rc==-150){
 					$codigoError = array('ERROR' => lang('ERROR_(-150)'), "rc"=> $response->rc, 'paisTo'=>$response->paisTo);
 				}
 				else{
