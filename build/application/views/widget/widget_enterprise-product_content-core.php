@@ -8,7 +8,7 @@
 				<select id="enterprise-select" class="select-box custom-select mt-3 mb-4 h6 w-100">
 					<option selected disabled><?= lang('GEN_SELECT_ENTERPRISE'); ?></option>
 					<?php foreach($enterpriseList AS $enterprise) : ?>
-						<?php if($enterprise->acnomcia == $enterpriseData->enterpriseName): ?>
+						<?php if($enterprise->acnomcia == $enterpriseData->enterpriseName && count($enterpriseList) > 1): ?>
 							<?php continue; ?>
 						<?php endif;?>
 					<option value="<?= $enterprise->acrif; ?>" enterpriseCode="<?= $enterprise->accodcia; ?>" enterpriseGroup="<?= $enterprise->accodgrupoe; ?>">

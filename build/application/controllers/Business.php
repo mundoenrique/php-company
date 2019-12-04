@@ -33,7 +33,7 @@ class Business extends NOVO_Controller {
 
 		$this->views = ['business/'.$view];
 		$responseList = $this->loadModel();
-		$this->responseAttr($responseList);
+		$this->responseAttr($responseList, FALSE);
 		$this->render->titlePage = lang('ENTERPRISE_TITLE');
 		$this->render->category = "";
 		$this->render->lastSession = $this->session->userdata('lastSession');
@@ -79,23 +79,17 @@ class Business extends NOVO_Controller {
 
 		$responseList = $this->loadModel($this->request);
 		$this->responseAttr($responseList);
-
-		$this->render->widget =  new stdClass();
-		$this->render->widget->enterpriseList = [];
-
-		if($responseList->code === 0) {
-			$this->load->model('Novo_Business_Model', 'Business');
-			$enterpriseList = $this->Business->callWs_getEnterprises_Business(TRUE);
-			$this->render->widget->enterpriseList =  $enterpriseList->data->list;
-		}
-
 		$this->render->titlePage = lang('PRODUCTS_TITLE');
 		$this->render->brands = $responseList->data->brandList;
 		$this->render->categories = $responseList->data->categoriesList;
 		$this->render->productList = $responseList->data->productList;
-		$this->render->widget->products = FALSE;
-		$this->render->widget->widgetBtnTitle = lang('PRODUCTS_WIDGET_BTN');
-		$this->render->widget->enterpriseData =  $responseList->data->widget;
+
+		if($this->render->widget) {
+			$this->render->widget->products = FALSE;
+			$this->render->widget->widgetBtnTitle = lang('PRODUCTS_WIDGET_BTN');
+			$this->render->widget->enterpriseData =  $responseList->data->widget;
+		}
+
 		$this->views = ['business/'.$view];
 		$this->loadView($view);
 	}
@@ -124,7 +118,7 @@ class Business extends NOVO_Controller {
 
 		$this->render->titlePage = lang('PRODUCTS_DETAIL_TITLE');
 		$this->render->productName = $detailList->data->productDetail->name;
-		$this->render->productImg = $detailList->data->productDetail->img;
+		$this->render->productImg = $detailList->data->productDetail->imgProgram;
 		$this->render->productBrand = $detailList->data->productDetail->brand;
 		$this->render->productImgBrand = $detailList->data->productDetail->imgBrand;
 		$this->render->viewSomeAttr = $detailList->data->productDetail->viewSomeAttr;

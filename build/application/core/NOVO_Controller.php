@@ -23,6 +23,7 @@ class NOVO_Controller extends CI_Controller {
 	protected $dataResponse;
 	protected $appUserName;
 	protected $greeting;
+	protected $products;
 
 	public function __construct()
 	{
@@ -39,9 +40,11 @@ class NOVO_Controller extends CI_Controller {
 		$this->countryUri = $this->uri->segment(1, 0) ? $this->uri->segment(1, 0) : 'pe';
 		$this->render->logged = $this->session->userdata('logged');
 		$this->appUserName = $this->session->userdata('userName');
+		$this->products = $this->session->has_userdata('products');
 		$this->render->userId = $this->session->userdata('userId');
 		$this->render->fullName = $this->session->userdata('fullName');
 		$this->render->activeRecaptcha = $this->config->item('active_recaptcha');
+		$this->render->widget =  FALSE;
 		$this->greeting = (int) $this->session->userdata('greeting');
 		$this->optionsCheck();
 	}
@@ -69,7 +72,7 @@ class NOVO_Controller extends CI_Controller {
 			case $this->greeting >= 12 && $this->greeting < 19:
 				$this->render->greeting = lang('GEN_AFTERNOON');
 				break;
-			case $this->greeting >= 0 && $this->greeting < 12 :
+			case $this->greeting >= 0 && $this->greeting < 12:
 				$this->render->greeting = lang('GEN_MORNING');
 				break;
 		}
@@ -197,11 +200,22 @@ class NOVO_Controller extends CI_Controller {
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date Auguts 22nd, 2019
 	 */
-	protected function responseAttr($responseView)
+	protected function responseAttr($responseView, $active = TRUE)
 	{
 		log_message('INFO', 'NOVO_Controller: responseAttr method initialized');
 
 		$this->render->code = $responseView->code;
+
+		if($responseView->code == 0  && $active) {
+			$this->load->model('Novo_Business_Model', 'Business');
+			$enterpriseList = $this->Business->callWs_getEnterprises_Business(TRUE);
+
+			if(count($enterpriseList->data->list) > 1 || $this->products) {
+				$this->render->widget =  new stdClass();
+				$this->render->widget->enterpriseList = $enterpriseList->data->list;
+			}
+
+		}
 
 		if($this->render->code > 2) {
 			$this->render->title = $responseView->title;
