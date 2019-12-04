@@ -30,6 +30,7 @@ var serv_var = {
 }
 
 $('#buscar').on('click', function () {
+
 	$(':checkbox').each(function () {
 		this.checked = 0;
 	});
@@ -141,12 +142,18 @@ function buscar(pgSgt) {
 		title: "Buscando tarjetas",
 		modal: true,
 		resizable: false,
-		dialogClass: 'hide-close',
-		close: function () {
-			$aux.dialog('close');
-		},
 		position: {
 			my: "top"
+		},
+		buttons: {
+			"Aceptar": {
+				text: 'Aceptar',
+				class: 'novo-btn-primary-modal',
+				click: function () {
+					resett()
+					$(this).dialog("destroy");
+				}
+			}
 		}
 	});
 	var ceo_cook = decodeURIComponent(
@@ -384,7 +391,8 @@ function toFormatShow(valor) {
 
 // DIALOGO DE NOTIFICACIONES
 function notificacion(titulo, mensaje, opcion) {
-	opcion = opcion =! undefined ? opcion : 0;
+
+	opcion = opcion == undefined ? 0 : opcion;
 	var canvas = "<div>" + mensaje + "</div>";
 
 	$(canvas).dialog({
