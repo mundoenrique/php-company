@@ -1,17 +1,11 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 /**
- * @info Librería para validar el acceso del usuario a las funciones
+ * @info Librería para crear el menú de l apalicación
  * @author J. Enrique Peñaloza Piñero
  * @date October 31th, 2019
  */
 class Create_Menu {
-	private $CI;
-	private $class;
-	private $method;
-	private $operation;
-	private $requestServ;
-	private $responseDefect;
 
 	public function __construct()
 	{
@@ -21,140 +15,194 @@ class Create_Menu {
 		$this->responseDefect = new stdClass();
 	}
 	/**
-	 * @info método que valida los datos de los formularios enviados
+	 * @info método insertar el menu principal
 	 * @author J. Enrique Peñaloza Piñero
-	 * @date October 31th, 2019
+	 * @date December 3rd, 2019
 	 */
-	public function validateForm($rule, $countryUri, $user)
+	public function mainMenu($firstLevel)
 	{
-		log_message('INFO', 'NOVO Verify_Access: validateForm method initialized');
+		log_message('INFO', 'NOVO Create_Menu: mainMenu method initialized');
 
-		$result = $this->CI->form_validation->run($rule);
-
-		log_message('DEBUG', 'NOVO ['.$user.'] VALIDATION FORM '.$rule.': '.json_encode($result));
-
-		if(!$result) {
-			log_message('DEBUG', 'NOVO  ['.$user.'] VALIDATION '.$rule.' ERRORS: '.json_encode(validation_errors()));
+		switch ($firstLevel) {
+			case 'GESLOT':
+				$mainMenuLang = lang('GEN_MENU_LOTS');
+				break;
+			case 'CONSUL':
+				$mainMenuLang = lang('GEN_MENU_CONSULTATIONS');
+				break;
+			case 'SERVIC':
+				$mainMenuLang = lang('GEN_MENU_SERVICES');
+				break;
+			case 'GESREP':
+				$mainMenuLang = lang('GEN_MENU_REPORTS');
+				break;
+			case 'COMBUS':
+				$mainMenuLang = lang('GEN_MENU_TRAJECTS');
+				break;
 		}
 
-		languageLoad('generic', NULL, $rule);
-		$this->CI->config->set_item('language', 'spanish-'.$countryUri);
-		languageLoad('specific', $countryUri, $rule);
-
-		return $result;
+		return $mainMenuLang;
 	}
 	/**
-	 * @info método para crear el request al modelo
+	 * @info método insertar el sub menu
 	 * @author J. Enrique Peñaloza Piñero
-	 * @date October 31th, 2019
+	 * @date December 3rd, 2019
 	 */
-	public function createRequest($rule, $user)
+	public function secondaryMenu($firstLevel)
 	{
-		log_message('INFO', 'NOVO Verify_Access: createRequest method initialized');
-		foreach ($_POST AS $key => $value) {
-			switch($key) {
-				case 'request':
-				case 'plot':
-				case 'ceo_name':
-					continue;
-				case 'currenTime':
-					$time = strtotime($value.' UTC');
-					$dateInLocal = date("H", $time);
-					$this->CI->session->set_userdata('greeting', $dateInLocal);
-					continue;
-				case 'screenSize':
-					$this->CI->session->set_userdata('screenSize', $value);
-					continue;
-				default:
-				$this->requestServ->$key = $value;
+		log_message('INFO', 'NOVO Create_Menu: secondaryMenu method initialized');
+
+		$level = new stdClass();
+		$level->second = [];
+		$level->third = [];
+		$control = 1;
+		foreach($firstLevel->modulos AS $module) {
+			if($module->idModulo === 'TICARG' || $module->idModulo === 'TIINVN') {
+				$levelThird = new stdClass();
+				if($control === 1) {
+					$levelThird->title = lang('GEN_MENU_LOT_UNNAMED');
+					$level->third[] = $levelThird;
+					$level->second[] = $this->menulang('UNNAMED');
+				}
+				$control++;
+				$level->third[] = $this->menulang($module->idModulo);
+				continue;
 			}
+			$level->second[] = $this->menulang($module->idModulo);
 		}
-		unset($_POST);
-		log_message('INFO', 'NOVO ['.$user.'] '.$rule.' REQUEST CREATED '.json_encode($this->requestServ));
-		return $this->requestServ;
+		log_message('INFO', 'secondaryMenu: '.json_encode($level));
+		return $level;
 	}
 	/**
-	 * @info método para crear el request al modelo
+	 * @info método insertar el texto y el link al submenu
 	 * @author J. Enrique Peñaloza Piñero
-	 * @date October 31th, 2019
+	 * @date December 3rd, 2019
 	 */
-	public function ResponseByDefect($user)
+	public function menulang($subMenu)
 	{
-		log_message('INFO', 'NOVO Verify_Access: ResponseByDefect method initialized');
+		log_message('INFO', 'NOVO Create_Menu: menulang method initialized');
 
-		$this->responseDefect->code = lang('RESP_DEFAULT_CODE');
-		$this->responseDefect->title = lang('GEN_SYSTEM_NAME');
-		$this->responseDefect->msg = lang('RESP_VALIDATION_INPUT');
-		$this->responseDefect->data = base_url('inicio');
-		$this->responseDefect->icon = lang('GEN_ICON_WARNING');
-		$this->responseDefect->data = [
-			'btn1'=> [
-				'text'=> lang('GEN_BTN_ACCEPT'),
-				'link'=> base_url('inicio'),
-				'action'=> 'redirect'
-			]
-		];
-		$this->CI->session->sess_destroy();
+		$subMenuLang = new stdClass();
 
-		log_message('DEBUG', 'NOVO  ['.$user.'] ResponseByDefect: '.json_encode($this->responseDefect));
-
-		return $this->responseDefect;
-	}
-	/**
-	 * @info método que valida la autorización de acceso del usuario a las funcionalidades
-	 * @author J. Enrique Peñaloza Piñero
-	 * @date October 31th, 2019
-	 */
-	public function accessAuthorization($module, $countryUri, $user)
-	{
-		log_message('INFO', 'NOVO Verify_Access: accessAuthorization method initialized');
-
-		$auth = FALSE;
-		switch($module) {
-			case 'login':
-			case 'benefits':
-			case 'terms':
-			case 'recoverPass':
-			case 'finishSession':
-				$auth = TRUE;
+		switch ($subMenu) {
+			case 'TEBCAR':
+				$subMenuLang->text = lang('GEN_MENU_LOT_LOAD');
+				$subMenuLang->link = '#';
 				break;
-			case 'changePassword':
-				$auth = ($this->CI->session->flashdata('changePassword') != NULL);
+			case 'TEBAUT':
+				$subMenuLang->text = lang('GEN_MENU_LOT_AUTH');
+				$subMenuLang->link = '#';
 				break;
-			case 'rates':
-				$auth = ($this->CI->session->has_userdata('logged') && $countryUri === 've');
+			case 'TICARG':
+				$subMenuLang->text = lang('GEN_MENU_LOT_UNNAMED_REQ');
+				$subMenuLang->link = '#';
 				break;
-			case 'getEnterprises':
-			case 'getProducts':
-				$auth = ($this->CI->session->has_userdata('logged') && $countryUri === 'bdb');
+			case 'TIINVN':
+				$subMenuLang->text = lang('GEN_MENU_LOT_UNNAMED_AFFIL');
+				$subMenuLang->link = '#';
 				break;
-			case 'getProductDetail':
-				$auth = ($this->CI->session->has_userdata('getProducts') && $countryUri === 'bdb');
+			case 'TEBGUR':
+				$subMenuLang->text = lang('GEN_MENU_LOT_REPROCESS');
+				$subMenuLang->link = '#';
+				break;
+			case 'TEBORS':
+				$subMenuLang->text = lang('GEN_MENU_CONS_ORDERS_SERV');
+				$subMenuLang->link = '#';
+				break;
+			case 'TEBPOL':
+				$subMenuLang->text = lang('GEN_MENU_CONS_DATA_UPGRADE');
+				$subMenuLang->link = '#';
+				break;
+			case 'TRAMAE':
+				$subMenuLang->text = lang('GEN_MENU_SERV_MASTER_TRANSFER');
+				$subMenuLang->link = '#';
+				break;
+			case 'COPELO':
+				$subMenuLang->text = lang('GEN_MENU_SERV_CARD_INQUIRY');
+				$subMenuLang->link = '#';
+				break;
+			case 'CONVIS':
+				$subMenuLang->text = lang('GEN_MENU_SERV_CONTROLS_PAY');
+				$subMenuLang->link = '#';
+				break;
+			case 'PAGPRO':
+				$subMenuLang->text = lang('GEN_MENU_SERV_PROV_PAY');
+				$subMenuLang->link = '#';
+				break;
+			case 'CMBCON':
+				$subMenuLang->text = lang('GEN_MENU_WAY_DRIVERS');
+				$subMenuLang->link = '#';
+				break;
+			case 'CMBVHI':
+				$subMenuLang->text = lang('GEN_MENU_WAY_VEHICLES');
+				$subMenuLang->link = '#';
+				break;
+			case 'CMBCTA':
+				$subMenuLang->text = lang('GEN_MENU_WAY_ACCOUNTS');
+				$subMenuLang->link = '#';
+				break;
+			case 'CMBVJE':
+				$subMenuLang->text = lang('GEN_MENU_WAY_TRAVELS');
+				$subMenuLang->link = '#';
+				break;
+			case 'TEBTHA':
+				$subMenuLang->text = lang('GEN_MENU_REP_CARDHOLDERS');
+				$subMenuLang->link = '#';
+				break;
+			case 'REPREP':
+				$subMenuLang->text = lang('GEN_MENU_REP_CARD_REPLACE');
+				$subMenuLang->link = '#';
+				break;
+			case 'REPEDO':
+				$subMenuLang->text = lang('GEN_MENU_REP_ACCAOUNT_STATUS');
+				$subMenuLang->link = '#';
+				break;
+			case 'REPSAL':
+				$subMenuLang->text = lang('GEN_MENU_REP_CLOSING_BAKANCE');
+				$subMenuLang->link = '#';
+				break;
+			case 'REPUSU':
+				$subMenuLang->text = lang('GEN_MENU_REP_USER_ACT');
+				$subMenuLang->link = '#';
+				break;
+			case 'REPPRO':
+				$subMenuLang->text = lang('GEN_MENU_REP_RECHARGE_MADE');
+				$subMenuLang->link = '#';
+				break;
+			case 'REPTAR':
+				$subMenuLang->text = lang('GEN_MENU_REP_ISSUED_CARDS');
+				$subMenuLang->link = '#';
+				break;
+			case 'REPLOT':
+				$subMenuLang->text = lang('GEN_MENU_REP_STATUS_LOT');
+				$subMenuLang->link = '#';
+				break;
+			case 'REPCAT':
+				$subMenuLang->text = lang('GEN_MENU_REP_CATEGORY_EXPENSE');
+				$subMenuLang->link = '#';
+				break;
+			case 'REPCON':
+				$subMenuLang->text = lang('GEN_MENU_REP_MASTER_ACCOUNT');
+				$subMenuLang->link = '#';
+				break;
+			case 'REPPGE':
+				$subMenuLang->text = lang('GEN_MENU_REP_KISGARDEN_PAY');
+				$subMenuLang->link = '#';
+				break;
+			case 'REPRTH':
+				$subMenuLang->text = lang('GEN_MENU_REP_RECHARGE_FEE');
+				$subMenuLang->link = '#';
+				break;
+			case 'LOTFAC':
+				$subMenuLang->text = lang('GEN_MENU_REP_LOTS_BILLED');
+				$subMenuLang->link = '#';
+				break;
+			case 'UNNAMED':
+				$subMenuLang->text = lang('GEN_MENU_LOT_UNNAMED');
+				$subMenuLang->link = FALSE;
 				break;
 		}
 
-		log_message('INFO', 'NOVO ['.$user.'] accessAuthorization '.$module.': '.json_encode($auth));
-
-		return $auth;
-	}
-	/**
-	 * @info método que valida la autorización de acceso del usuario a las funcionalidades
-	 * @author J. Enrique Peñaloza Piñero
-	 * @date October 31th, 2019
-	 */
-	public function validateRedirect($redirectUrl, $countryUri)
-	{
-		log_message('INFO', 'NOVO Verify_Access: validateRedirect method initialized');
-
-		$dataLink = isset($redirectUrl['btn1']['link']) ? $redirectUrl['btn1']['link'] : FALSE;
-
-		if(!is_array($redirectUrl) && strpos($redirectUrl, 'dashboard') !== FALSE) {
-			$redirectUrl = str_replace($countryUri.'/', $this->CI->config->item('country').'/', $redirectUrl);
-		} elseif($dataLink && !is_array($dataLink) && strpos($dataLink, 'dashboard') !== FALSE) {
-			$dataLink = str_replace($countryUri.'/', $this->CI->config->item('country').'/', $dataLink);
-			$redirectUrl['btn1']['link'] =  $dataLink;
-		}
-
-		return $redirectUrl;
+		return $subMenuLang;
 	}
 }

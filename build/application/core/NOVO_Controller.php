@@ -69,7 +69,7 @@ class NOVO_Controller extends CI_Controller {
 			case $this->greeting >= 12 && $this->greeting < 19:
 				$this->render->greeting = lang('GEN_AFTERNOON');
 				break;
-			case $this->greeting < 12 && $this->greeting >= 0:
+			case $this->greeting >= 0 && $this->greeting < 12 :
 				$this->render->greeting = lang('GEN_MORNING');
 				break;
 		}
@@ -220,12 +220,9 @@ class NOVO_Controller extends CI_Controller {
 	{
 		log_message('INFO', 'NOVO_Controller: loadView method initialized. View loaded: '.$module);
 
-		$userAccess = $this->session->user_access;
-		$menu = createMenu($userAccess);
 		$userMenu = new stdClass();
-		$userMenu->menu = $menu;
-		$userMenu->pais = '';
-		$userMenu->enterpriseList = lang('GEN_ENTERPRISE_LIST');
+		$userMenu->userAccess = $this->session->user_access;
+		$userMenu->enterpriseUrl = lang('GEN_ENTERPRISE_LIST');
 		$this->render->settingsMenu = $userMenu;
 		$this->render->goOut = ($this->render->logged || $this->session->flashdata('changePassword'))
 		? 'cerrar-sesion' : 'inicio';

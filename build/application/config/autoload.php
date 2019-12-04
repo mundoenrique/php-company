@@ -65,7 +65,8 @@ $autoload['libraries'] = array(
 	'Asset',
 	'Encrypt_Connect',
 	'Cryptography',
-	'Verify_Access'
+	'Verify_Access',
+	'Create_Menu'
 );
 
 

@@ -2,52 +2,32 @@
 <nav class="navbar-secondary line-main-nav flex bg-secondary items-center">
 	<ul class="main-nav-user flex my-0 list-style-none">
 		<li class="nav-item mr-1 inline">
-			<a class="nav-link pr-2 semibold primary" href="<?= base_url('empresas') ?>">Empresas</a>
+			<a class="nav-link pr-2 semibold primary" href="<?= base_url($enterpriseUrl); ?>">
+				<?= lang('GEN_MENU_ENTERPRISE') ?>
+			</a>
 		</li>
+		<?php if($this->session->has_userdata('user_access')): ?>
+		<?php foreach($userAccess AS $firstLevel): ?>
 		<li class="nav-item mr-1 inline">
-			<a class="nav-link px-2 semibold primary">Lotes</a>
+			<a class="nav-link px-2 semibold primary"><?= $this->create_menu->mainMenu($firstLevel->idPerfil) ?></a>
 			<ul class="dropdown-user pl-0 regular tertiary bg-secondary list-style-none list-inline">
-				<li><a href="ceo_load_lots.php">Carga de lotes</a></li>
-				<li><a href="ceo_authorization_lots.php">Autorización de lotes</a></li>
-				<li><a href="ceo_authorization_lots.php">Reproceso de lotes</a></li>
-				<li><a href="#">Cuentas innominadas</a>
+				<?php $secondLevel = $this->create_menu->secondaryMenu($firstLevel) ?>
+				<?php foreach($secondLevel->second AS $submenu): ?>
+				<li>
+					<a <?= $submenu->link ? 'href="'.$submenu->link.'"' : '';  ?>><?= $submenu->text ?></a>
+					<?php if(!empty($secondLevel->third) && $submenu->text == $secondLevel->third[0]->title): ?>
+					<?php unset($secondLevel->third[0]) ?>
 					<ul class="pl-0 regular tertiary bg-secondary list-style-none list-inline">
-						<li><a href="cualquiercosa">Solicitud</a></li>
-						<li><a href="cualquiercosa">afiliación</a></li>
+						<?php foreach($secondLevel->third AS $levelThird): ?>
+						<li><a href="<?= $levelThird->link ?>"><?= $levelThird->text ?></a></li>
+						<?php endforeach; ?>
 					</ul>
+					<?php endif; ?>
 				</li>
+				<?php endforeach; ?>
 			</ul>
 		</li>
-		<li class="nav-item mr-1 inline">
-			<a class="nav-link px-2 semibold primary">Consulta</a>
-			<ul class="dropdown-user pl-0 regular tertiary bg-secondary list-style-none list-inline">
-				<li><a href="ceo_service_orders.php">Órdenes de servicio</a></li>
-			</ul>
-		</li>
-		<li class="nav-item mr-1 inline">
-			<a class="nav-link px-2 semibold primary">Servicios</a>
-			<ul class="dropdown-user pl-0 regular tertiary bg-secondary list-style-none list-inline">
-				<li><a href="ceo_service_orders.php">Órdenes de servicio</a></li>
-			</ul>
-		</li>
-		<li class="nav-item mr-1 inline">
-			<a class="nav-link px-2 semibold primary">Trayectos</a>
-			<ul class="dropdown-user pl-0 regular tertiary bg-secondary list-style-none list-inline">
-				<li><a href="ceo_service_orders.php">Órdenes de servicio</a></li>
-			</ul>
-		</li>
-		<li class="nav-item mr-1 inline">
-			<a class="nav-link px-2 semibold primary">Reportes</a>
-			<ul class="dropdown-user pl-0 regular tertiary bg-secondary list-style-none list-inline">
-				<li><a href="#">Reposiciones</a></li>
-				<li><a href="#">Saldos al cierre</a></li>
-				<li><a href="ceo_reports_account_statement.php">Estado de cuenta</a></li>
-				<li><a href="#">Actividad por usuario</a></li>
-				<li><a href="#">Recargas relizadas</a></li>
-				<li><a href="#">Tarjetas emitidas</a></li>
-				<li><a href="#">Gastos por categoría</a></li>
-				<li><a href="#">Cuenta concentradora</a></li>
-			</ul>
-		</li>
+		<?php endforeach; ?>
+		<?php endif; ?>
 	</ul>
 </nav>

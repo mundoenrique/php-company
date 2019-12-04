@@ -11,5 +11,5 @@
 		</div>
 	</nav>
 </header>
-<?php $this->load->view('widget/widget_menu-business_content'.$newViews); ?>
+<?php $this->load->view('widget/widget_menu-business_content'.$newViews, $settingsMenu); ?>
 <?php endif; ?>
