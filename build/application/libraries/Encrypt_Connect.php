@@ -94,7 +94,7 @@ class Encrypt_Connect {
 
 		log_message('DEBUG', 'NOVO ['.$userName.'] REQUEST BY COUNTRY: '.$request['pais'].', AND WEBSERVICE URL: '.$urlWS);
 
-		$requestSerV = json_encode($request);
+		$requestSerV = json_encode($request, JSON_UNESCAPED_UNICODE);
 
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, $urlWS);
@@ -120,7 +120,7 @@ class Encrypt_Connect {
 		}
 
 		if($httpCode != 200 || !$response) {
-			log_message('ERROR','NOVO ['.$userName.'] ERROR CURL: '.json_encode($CurlError));
+			log_message('ERROR','NOVO ['.$userName.'] ERROR CURL: '.json_encode($CurlError, JSON_UNESCAPED_UNICODE));
 			$failResponse = new stdClass();
 			$failResponse->rc = lang('RESP_RC_DEFAULT');
 			$failResponse->msg = lang('RESP_MESSAGE_SYSTEM');
@@ -154,7 +154,7 @@ class Encrypt_Connect {
 		log_message('DEBUG', 'NOVO ['.$userName.'] RESPONSE '.$model.'= rc: '.$rc.', msg: '.$msg.', country: '.$country);
 
 		if(RESPONSE_SERV_COMPLETE) {
-			log_message('DEBUG', 'NOVO ['.$userName.'] COMPLETE RESPONSE '.$model.': '.json_encode($response));
+			log_message('DEBUG', 'NOVO ['.$userName.'] COMPLETE RESPONSE '.$model.': '.json_encode($response, JSON_UNESCAPED_UNICODE));
 		}
 	}
 }

@@ -70,7 +70,7 @@ class Create_Menu {
 			}
 			$level->second[] = $this->menulang($module->idModulo);
 		}
-		log_message('INFO', 'secondaryMenu: '.json_encode($level));
+		log_message('INFO', 'secondaryMenu: '.json_encode($level, JSON_UNESCAPED_UNICODE));
 		return $level;
 	}
 	/**

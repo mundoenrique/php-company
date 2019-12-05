@@ -31,10 +31,10 @@ class Verify_Access {
 
 		$result = $this->CI->form_validation->run($rule);
 
-		log_message('DEBUG', 'NOVO ['.$user.'] VALIDATION FORM '.$rule.': '.json_encode($result));
+		log_message('DEBUG', 'NOVO ['.$user.'] VALIDATION FORM '.$rule.': '.json_encode($result, JSON_UNESCAPED_UNICODE));
 
 		if(!$result) {
-			log_message('DEBUG', 'NOVO  ['.$user.'] VALIDATION '.$rule.' ERRORS: '.json_encode(validation_errors()));
+			log_message('DEBUG', 'NOVO  ['.$user.'] VALIDATION '.$rule.' ERRORS: '.json_encode(validation_errors(), JSON_UNESCAPED_UNICODE));
 		}
 
 		languageLoad('generic', NULL, $rule);
@@ -70,7 +70,7 @@ class Verify_Access {
 			}
 		}
 		unset($_POST);
-		log_message('INFO', 'NOVO ['.$user.'] '.$rule.' REQUEST CREATED '.json_encode($this->requestServ));
+		log_message('INFO', 'NOVO ['.$user.'] '.$rule.' REQUEST CREATED '.json_encode($this->requestServ, JSON_UNESCAPED_UNICODE));
 		return $this->requestServ;
 	}
 	/**
@@ -96,7 +96,7 @@ class Verify_Access {
 		];
 		$this->CI->session->sess_destroy();
 
-		log_message('DEBUG', 'NOVO  ['.$user.'] ResponseByDefect: '.json_encode($this->responseDefect));
+		log_message('DEBUG', 'NOVO  ['.$user.'] ResponseByDefect: '.json_encode($this->responseDefect, JSON_UNESCAPED_UNICODE));
 
 		return $this->responseDefect;
 	}
@@ -133,7 +133,7 @@ class Verify_Access {
 				break;
 		}
 
-		log_message('INFO', 'NOVO ['.$user.'] accessAuthorization '.$module.': '.json_encode($auth));
+		log_message('INFO', 'NOVO ['.$user.'] accessAuthorization '.$module.': '.json_encode($auth, JSON_UNESCAPED_UNICODE));
 
 		return $auth;
 	}

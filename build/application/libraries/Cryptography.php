@@ -30,7 +30,7 @@ class Cryptography {
     }
     $key = substr($salted, 0, 32);
     $iv  = substr($salted, 32,16);
-    $encrypted_data = openssl_encrypt(json_encode($object), 'aes-256-cbc', $key, true, $iv);
+    $encrypted_data = openssl_encrypt(json_encode($object, JSON_UNESCAPED_UNICODE), 'aes-256-cbc', $key, true, $iv);
 		$data = [
 			"res" => base64_encode($encrypted_data),
 			"str" => bin2hex($iv),
@@ -39,7 +39,7 @@ class Cryptography {
 
 		$response = [
 			'plot' => $keyStr,
-			'code' => urlencode(base64_encode(json_encode($data)))
+			'code' => urlencode(base64_encode(json_encode($data, JSON_UNESCAPED_UNICODE)))
 		];
 
     return $response;
