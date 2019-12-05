@@ -84,10 +84,15 @@ class Business extends NOVO_Controller {
 		$this->render->categories = $responseList->data->categoriesList;
 		$this->render->productList = $responseList->data->productList;
 
+		if(count($this->render->widget->enterpriseList) < 2) {
+			$this->render->widget = FALSE;
+		}
+
 		if($this->render->widget) {
 			$this->render->widget->products = FALSE;
 			$this->render->widget->widgetBtnTitle = lang('PRODUCTS_WIDGET_BTN');
-			$this->render->widget->enterpriseData =  $responseList->data->widget;
+			$this->render->widget->enterpriseData =  $this->session->getProducts;
+			$this->render->widget->actionForm = 'productos';
 		}
 
 		$this->views = ['business/'.$view];
@@ -102,20 +107,25 @@ class Business extends NOVO_Controller {
 	{
 		log_message('INFO', 'NOVO Business: getProductDetail Method Initialized');
 
+		$requestArray = (array)$this->request;
+
+		if(empty($requestArray) && !$this->session->has_userdata('productPrefix')) {
+			redirect(base_url('inicio'), 'location');
+		}
+
 		$view = lang('GEN_GET_PRODUCTS_DETAIL');
+
+		array_push(
+			$this->includeAssets->jsFiles,
+			"business/widget-enterprise"
+		);
+
+		if(empty($requestArray)) {
+			$this->request->productPrefix = $this->session->productPrefix;
+		}
 
 		$detailList = $this->loadModel($this->request);
 		$this->responseAttr($detailList);
-
-		$this->render->widget =  new stdClass();
-		$this->render->widget->enterpriseList = [];
-
-		if($detailList->code === 0) {
-			$this->load->model('Novo_Business_Model', 'Business');
-			$enterpriseList = $this->Business->callWs_getEnterprises_Business(TRUE);
-			$this->render->widget->enterpriseList =  $enterpriseList->data->list;
-		}
-
 		$this->render->titlePage = lang('PRODUCTS_DETAIL_TITLE');
 		$this->render->productName = $detailList->data->productDetail->name;
 		$this->render->productImg = $detailList->data->productDetail->imgProgram;
@@ -131,11 +141,14 @@ class Business extends NOVO_Controller {
 		$this->render->totalCards = $detailList->data->productSummary->totalCards;
 		$this->render->activeCards = $detailList->data->productSummary->activeCards;
 		$this->render->inactiveCards = $detailList->data->productSummary->inactiveCards;
-		$this->render->widget->widgetBtnTitle = lang('GEN_MUST_SELECT_ENTERPRISE');
-		$this->render->widget->enterpriseData =  $detailList->data->widget;
+
+		if($this->render->widget) {
+			$this->render->widget->widgetBtnTitle = lang('GEN_MUST_SELECT_ENTERPRISE');
+			$this->render->widget->enterpriseData =  $this->session->getProducts;
+			$this->render->widget->actionForm = 'detalle-producto';
+		}
+
 		$this->views = ['business/'.$view];
 		$this->loadView($view);
-
 	}
-
 }

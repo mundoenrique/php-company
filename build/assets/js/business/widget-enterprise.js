@@ -2,12 +2,35 @@
 $(function() {
 	var enterpriseWidgetForm = $('#enterprise-widget-form');
 	var WidgetSelcet = $('#enterprise-select');
-	var enterpriseWidgetBtn = $('#enterprise-widget-btn')
+	var enterpriseWidgetBtn = $('#enterprise-widget-btn');
+	var formAction = enterpriseWidgetForm.attr('form-action');
+	var enterpriseCode;
+	var enterpriseGroup;
+	var idFiscal;
+	var enterpriseName;
 
 	enterpriseWidgetForm.on('change', function() {
-		enterpriseWidgetBtn
-		.prop('disabled', false)
-		.removeAttr('title')
+		enterpriseCode = WidgetSelcet.find('option:selected').attr('code')
+		enterpriseGroup = WidgetSelcet.find('option:selected').attr('group')
+		idFiscal = WidgetSelcet.val()
+		enterpriseName = WidgetSelcet.find('option:selected').text()
+		if(formAction == 'productos') {
+			enterpriseWidgetBtn
+			.prop('disabled', false)
+			.removeAttr('title');
+		} else {
+			verb = 'POST'; who = 'Business'; where = 'getProducts';
+			data = {
+				enterpriseCode: enterpriseCode,
+				enterpriseGroup: enterpriseGroup,
+				idFiscal: idFiscal,
+				enterpriseName: enterpriseName,
+				select: true
+			}
+			callNovoCore(verb, who, where, data, function(response) {
+				responseCodeLogin[response.code](response);
+			})
+		}
 	});
 
 	enterpriseWidgetBtn.on('click', function(e) {
@@ -15,14 +38,10 @@ $(function() {
 		insertFormInput(enterpriseWidgetForm);
 		$(this).html(loader);
 		$(this).find('span').addClass('spinner-border-sm');
-		var enterpriseCode = WidgetSelcet.find('option:selected').attr('enterpriseCode')
-		var enterpriseGroup = WidgetSelcet.find('option:selected').attr('enterpriseGroup')
-		var idFiscal= WidgetSelcet.val()
-		var EnterpriseName = WidgetSelcet.find('option:selected').text()
 		enterpriseWidgetForm.append(`<input type="hidden" name="enterpriseCode" value="${enterpriseCode}">`);
 		enterpriseWidgetForm.append(`<input type="hidden" name="enterpriseGroup" value="${enterpriseGroup}">`);
 		enterpriseWidgetForm.append(`<input type="hidden" name="idFiscal" value="${idFiscal}">`);
-		enterpriseWidgetForm.append(`<input type="hidden" name="enterpriseName" value="${EnterpriseName}">`);
+		enterpriseWidgetForm.append(`<input type="hidden" name="enterpriseName" value="${enterpriseName}">`);
 		enterpriseWidgetForm.submit();
 	});
 });

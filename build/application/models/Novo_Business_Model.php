@@ -91,11 +91,13 @@ class Novo_Business_Model extends NOVO_Model {
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date November 12th, 2019
 	 */
-	public function callWs_getProducts_Business($dataRequest = FALSE)
+	public function callWs_getProducts_Business($dataRequest)
 	{
 		log_message('INFO', 'NOVO Business Model: getProducts method Initialized');
 
-		$this->session->unset_userdata('user_access');
+		$select = isset($dataRequest->select);
+		$select ?: $this->session->unset_userdata('user_access');
+		unset($dataRequest->select);
 
 		$this->className = "com.novo.objects.TOs.UsuarioTO";
 		$this->dataAccessLog->modulo = 'Negocios';
@@ -108,85 +110,29 @@ class Novo_Business_Model extends NOVO_Model {
 		$this->dataRequest->idEmpresa = $dataRequest->idFiscal;
 
 		$response = $this->sendToService(lang('GEN_GET_PRODUCTS'));
-		$this->response->data->widget = $dataRequest;
 
 		switch($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
-				$this->session->set_userdata('getProducts', $dataRequest);
-				$noDeleteCat = [];
-				$noDeleteBrand = [];
-
-				foreach($response->productos AS $pos => $products) {
-					foreach($products AS $key => $value) {
-						switch ($key) {
-							case 'nombre':
-								$programImg = url_title(mb_strtolower($value)).'.svg';
-								if(!file_exists(assetPath('images/programs/'.$programImg))) {
-									$programImg = 'default.svg';
-								}
-								$products->programImg = $programImg;
-								break;
-							case 'descripcion':
-								$products->$key = mb_strtoupper($value);
-								break;
-								case 'categoria':
-									$products->$key = ucwords(mb_strtolower($value));
-								break;
-							case 'idCategoria':
-								$noDeleteCat[] =  $value;
-								break;
-							case 'filial':
-								$products->$key = mb_strtoupper($value);
-								break;
-							case 'marca':
-								$imgBrand = mb_strtolower($value).'_product.svg';
-								if(!file_exists(assetPath('images/brands/'.$imgBrand))) {
-									$imgBrand = 'default.png';
-								}
-								$products->imgBrand = $imgBrand;
-								$noDeleteBrand[] =  $value;
-								break;
-						}
-					}
-				}
-
-				$noDeleteCat = array_unique($noDeleteCat);
-				sort($noDeleteCat);
-				$categorieList = [];
-
-				foreach($response->listaCategorias AS $pos => $categorie) {
-					foreach($noDeleteCat AS $item) {
-						if($categorie->idCategoria == $item) {
-							$categorieList[] = $response->listaCategorias[$pos];
-						}
-					}
-				}
-
-				$noDeleteCat = array_unique($noDeleteBrand);
-				sort($noDeleteCat);
-				$brandList = [];
-
-				foreach($response->listaMarcas AS $pos => $brand) {
-					foreach($noDeleteCat AS $item) {
-						if(mb_strtolower($brand->nombre) == mb_strtolower($item)) {
-							$brandList[] = $response->listaMarcas[$pos];
-						}
-					}
-				}
-
+				$select ?: $this->session->set_userdata('getProducts', $dataRequest);
+				$productList = $this->request_data->getProductsOrder($response, $select);
 				$this->session->unset_userdata('products');
 				count($response->productos) < 2 ?: $this->session->set_userdata('products', TRUE);
-				$this->response->data->categoriesList = $categorieList;
-				$this->response->data->brandList = $brandList;
-				$this->response->data->productList = $response->productos;
+
+				if($select) {
+					$this->response->data = $productList;
+				} else {
+					$this->response->data->categoriesList = $productList->categorieList;
+					$this->response->data->brandList = $productList->brandList;
+					$this->response->data->productList = $productList->productList;
+				}
 				break;
 		}
 
-		if($this->response->code != 0) {
+		if($this->response->code != 0 && !$select) {
 			$this->response->data->categoriesList = [];
-				$this->response->data->brandList = [];
-				$this->response->data->productList = [];
+			$this->response->data->brandList = [];
+			$this->response->data->productList = [];
 		}
 
 		return $this->responseToTheView(lang('GEN_GET_PRODUCTS'));
@@ -205,7 +151,7 @@ class Novo_Business_Model extends NOVO_Model {
 		$this->dataAccessLog->function = 'Producto';
 		$this->dataAccessLog->operation = 'Detalle Producto';
 
-		$enterpriseInf = $this->session->getProducts;;
+		$enterpriseInf = $this->session->getProducts;
 		$this->dataRequest->idOperation = 'menuPorProducto';
 		$this->dataRequest->menus = [
 			[
@@ -225,7 +171,6 @@ class Novo_Business_Model extends NOVO_Model {
 		];
 
 		$response = $this->sendToService(lang('GEN_GET_PRODUCTS_DETAIL'));
-		$this->response->data->widget = $enterpriseInf;
 		$productDetail = [
 			'name' => '--',
 			'imgProgram' => 'default.svg',
@@ -250,7 +195,11 @@ class Novo_Business_Model extends NOVO_Model {
 				$this->response->code = 0;
 				log_message('INFO', 'NOVO ['.$this->userName.'] '.lang('GEN_GET_PRODUCTS_DETAIL').' USER_ACCESS LIST: '.json_encode($response->lista));
 
-				$this->session->set_userdata('user_access', $response->lista);
+				$sess = [
+					'productPrefix' => $dataRequest->productPrefix,
+					'user_access' => $response->lista
+				];
+				$this->session->set_userdata($sess);
 				$imgBrand = url_title(trim(mb_strtolower($response->estadistica->producto->marca))).'_card.svg';
 
 				if(!file_exists(assetPath('images/brands/'.$imgBrand))) {

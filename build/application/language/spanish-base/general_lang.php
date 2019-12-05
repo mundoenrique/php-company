@@ -104,3 +104,4 @@ $lang['GEN_TAG_WELCOME_MESSAGE'] = 'Mensaje de bienvenida';
 $lang['GEN_TAG_GOUT_MENU'] = 'Botón Salir';
 $lang['GEN_TAG_LINK_UNIC'] = 'Solo un link';
 $lang['GEN_TAG_HELPER'] = 'link de ayuda CEO';
+$lang['GEN_TAG_SEARCH_CAT'] = 'Buscar por categoría';

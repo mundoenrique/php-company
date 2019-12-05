@@ -21,10 +21,9 @@ class NOVO_Model extends CI_Model {
 		$this->dataAccessLog = new stdClass();
 		$this->dataRequest = new stdClass();
 		$this->response = new stdClass();
-		$this->country = $this->session->userdata('countrySess') ? $this->session->userdata('countrySess')
-			: $this->config->item('country');
-		$this->countryUri = $this->session->userdata('countryUri');
-		$this->token = $this->session->userdata('token') ?: '';
+		$this->country = $this->session->has_userdata('countrySess') ? $this->session->countrySess : $this->config->item('country');
+		$this->countryUri = $this->session->countryUri;
+		$this->token = $this->session->token ?: '';
 		$this->userName = $this->session->userName;
 	}
 	/**

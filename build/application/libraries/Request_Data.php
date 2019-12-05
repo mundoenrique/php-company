@@ -13,6 +13,7 @@ class Request_Data {
 	public function __construct()
 	{
 		log_message('INFO', 'NOVO Request_Data Library Class Initialized');
+
 		$this->CI = &get_instance();
 	}
 	/**
@@ -59,15 +60,23 @@ class Request_Data {
 		$pageAlphaBeFi = 1; $pageAlphaBeSec = 1; $pageAlphaBeTh = 1;  $pageAlphaBeFo = 1;
 		$pageAlphaBeFif = 1; $pageAlphaBeSi = 1; $pageAlphaBeSev = 1;
 		$delete =  [];
+
 		foreach($enterpriseArgs->lista AS $pos => $enterprises) {
 			foreach($enterprises AS $key => $value) {
 				$enterpriseArgs->lista[$pos]->$key = trim($value);
+
 				if($dataRequest) {
 					if($key === 'resumenProductos' && $value == 0) {
 						$delete[] = $pos;
 					}
+					if($key == 'acnomcia') {
+						$string = (mb_strtoupper(trim($value)));
+						$string = strlen($string) > 30 ? substr($string, 0, 30).'...' : $string;
+						$enterpriseArgs->lista[$pos]->acnomcia = $string;
+					}
 					continue;
 				}
+
 				if($item > $enterpriseArgs->sizePage) {
 					$item = 1;
 					$page++;
@@ -95,8 +104,10 @@ class Request_Data {
 							if($itemAlphaBeFi > $enterpriseArgs->sizePage) {
 								$itemAlphaBeFi = 1; 	$pageAlphaBeFi++;
 							}
+
 							$enterpriseArgs->lista[$pos]->albeticalPage = lang('ENTERPRISE_FILTER_1').'_'.$pageAlphaBeFi;
 							$itemAlphaBeFi++;
+
 							if(!$filters->FIRST['active']) {
 								$filters->FIRST['active'] = TRUE;
 							}
@@ -105,8 +116,10 @@ class Request_Data {
 							if($itemAlphaBeSec > $enterpriseArgs->sizePage) {
 								$itemAlphaBeSec = 1; 	$pageAlphaBeSec++;
 							}
+
 							$enterpriseArgs->lista[$pos]->albeticalPage = lang('ENTERPRISE_FILTER_2').'_'.$pageAlphaBeSec;
 							$itemAlphaBeSec++;
+
 							if(!$filters->SECOND['active']) {
 								$filters->SECOND['active'] = TRUE;
 							}
@@ -115,8 +128,10 @@ class Request_Data {
 							if($itemAlphaBeTh > $enterpriseArgs->sizePage) {
 								$itemAlphaBeTh = 1; 	$pageAlphaBeTh++;
 							}
+
 							$enterpriseArgs->lista[$pos]->albeticalPage = lang('ENTERPRISE_FILTER_3').'_'.$pageAlphaBeTh;
 							$itemAlphaBeTh++;
+
 							if(!$filters->THIRD['active']) {
 								$filters->THIRD['active'] = TRUE;
 							}
@@ -125,8 +140,10 @@ class Request_Data {
 							if($itemAlphaBeFo > $enterpriseArgs->sizePage) {
 								$itemAlphaBeFo = 1; 	$pageAlphaBeFo++;
 							}
+
 							$enterpriseArgs->lista[$pos]->albeticalPage = lang('ENTERPRISE_FILTER_4').'_'.$pageAlphaBeFo;
 							$itemAlphaBeFo++;
+
 							if(!$filters->FOURTH['active']) {
 								$filters->FOURTH['active'] = TRUE;
 							}
@@ -135,8 +152,10 @@ class Request_Data {
 							if($itemAlphaBeFi > $enterpriseArgs->sizePage) {
 								$itemAlphaBeFi = 1; 	$pageAlphaBeFif++;
 							}
+
 							$enterpriseArgs->lista[$pos]->albeticalPage = lang('ENTERPRISE_FILTER_5').'_'.$pageAlphaBeFif;
 							$itemAlphaBeFif++;
+
 							if(!$filters->FIFTH['active']) {
 								$filters->FIFTH['active'] = TRUE;
 							}
@@ -145,8 +164,10 @@ class Request_Data {
 							if($itemAlphaBeSi > $enterpriseArgs->sizePage) {
 								$itemAlphaBeSi = 1; 	$pageAlphaBeSi++;
 							}
+
 							$enterpriseArgs->lista[$pos]->albeticalPage = lang('ENTERPRISE_FILTER_6').'_'.$pageAlphaBeSi;
 							$itemAlphaBeSi++;
+
 							if(!$filters->SIXTH['active']) {
 								$filters->SIXTH['active'] = TRUE;
 							}
@@ -155,8 +176,10 @@ class Request_Data {
 							if($itemAlphaBeSev > $enterpriseArgs->sizePage) {
 								$itemAlphaBeSev = 1; 	$pageAlphaBeSev++;
 							}
+
 							$enterpriseArgs->lista[$pos]->albeticalPage = lang('ENTERPRISE_FILTER_7').'_'.$pageAlphaBeSev;
 							$itemAlphaBeSev++;
+
 							if(!$filters->SEVENTH['active']) {
 								$filters->SEVENTH['active'] = TRUE;
 							}
@@ -229,5 +252,131 @@ class Request_Data {
 		];
 
 		return $filters;
+	}
+	/**
+	 * @info Método para ordenar los productos asociados a una empresa
+	 * @author J. Enrique Peñaloza Piñero.
+	 * @date December 5th, 2019
+	 */
+	public function getProductsOrder($responseList, $select)
+	{
+		log_message('INFO', 'NOVO Request_Data: getProductsOrder method Initialized');
+
+		if($select) {
+			return $this->orderToSelectList($responseList);
+		} else {
+			return $this->orderToProductList($responseList);
+		}
+
+
+	}
+	/**
+	 * @info Método para ordenar los productos para la lista de productos
+	 * @author J. Enrique Peñaloza Piñero.
+	 * @date December 5th, 2019
+	 */
+	public function orderToProductList($response)
+	{
+		log_message('INFO', 'NOVO Request_Data: orderToProductList method Initialized');
+
+		$noDeleteCat = [];
+		$noDeleteBrand = [];
+
+		foreach($response->productos AS $pos => $products) {
+			foreach($products AS $key => $value) {
+				switch ($key) {
+					case 'nombre':
+						$programImg = url_title(mb_strtolower($value)).'.svg';
+
+						if(!file_exists(assetPath('images/programs/'.$programImg))) {
+							$programImg = 'default.svg';
+						}
+
+						$products->programImg = $programImg;
+						break;
+					case 'descripcion':
+						$products->$key = trim(mb_strtoupper($value));
+						break;
+						case 'categoria':
+							$products->$key = trim(ucwords(mb_strtolower($value)));
+						break;
+					case 'idCategoria':
+						$noDeleteCat[] =  $value;
+						break;
+					case 'filial':
+						$products->$key = trim(mb_strtoupper($value));
+						break;
+					case 'marca':
+						$imgBrand = mb_strtolower($value).'_product.svg';
+
+						if(!file_exists(assetPath('images/brands/'.$imgBrand))) {
+							$imgBrand = 'default.png';
+						}
+
+						$products->imgBrand = $imgBrand;
+						$noDeleteBrand[] =  $value;
+						break;
+				}
+			}
+		}
+
+		$noDeleteCat = array_unique($noDeleteCat);
+		sort($noDeleteCat);
+		$categorieList = [];
+
+		foreach($response->listaCategorias AS $pos => $categorie) {
+			foreach($noDeleteCat AS $item) {
+				if($categorie->idCategoria == $item) {
+					$categorieList[] = $response->listaCategorias[$pos];
+				}
+			}
+		}
+
+		$noDeleteCat = array_unique($noDeleteBrand);
+		sort($noDeleteCat);
+		$brandList = [];
+
+		foreach($response->listaMarcas AS $pos => $brand) {
+			foreach($noDeleteCat AS $item) {
+				if(mb_strtolower($brand->nombre) == mb_strtolower($item)) {
+					$brandList[] = $response->listaMarcas[$pos];
+				}
+			}
+		}
+
+		$productList = new stdClass();
+		$productList->categorieList = $categorieList;
+		$productList->brandList = $brandList;
+		$productList->productList = $response->productos;
+
+		return $productList;
+	}
+	/**
+	 * @info Método para ordenar los productos para la lista de productos
+	 * @author J. Enrique Peñaloza Piñero.
+	 * @date December 5th, 2019
+	 */
+	public function orderToSelectList($response)
+	{
+		log_message('INFO', 'NOVO Request_Data: orderToSelectList method Initialized');
+
+		$productListSelect = [];
+
+		foreach($response->productos AS $pos => $products) {
+			foreach($products AS $key => $value) {
+				switch ($key) {
+					case 'descripcion':
+						$productList['desc'] = trim($value);
+						break;
+					case 'idProducto':
+						$productList['id'] = trim($value);
+						break;
+				}
+			}
+
+			$productListSelect[] = $productList;
+		}
+
+		return $productListSelect;
 	}
 }
