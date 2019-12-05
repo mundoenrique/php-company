@@ -101,17 +101,24 @@ function buscarStatusTarjetasHambientes(paginaActual){
 		if(validar_filtro_busqueda("lotes-2")){
 			$('#cargando').fadeIn("slow");
 			$("#EstatusLotes-btnBuscar").hide();
-	    	$('#div_tablaDetalle').fadeOut("fast");
+	    $('#div_tablaDetalle').fadeOut("fast");
 
-				/******* SE REALIZA LA INVOCACION AJAX *******/
-				var ceo_cook = decodeURIComponent(
-					document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-				);
-				filtro_busq.ceo_name = ceo_cook;
-			$consulta = $.post(baseURL + api + isoPais + "/reportes/estatusTarjetashabientes",filtro_busq );
+			var dataRequest = JSON.stringify ({
+				nombreEmpresa:  filtro_busq.nombreEmpresa,
+				lotes_producto: filtro_busq.lotes_producto,
+				acrif: filtro_busq.acrif,
+				paginaActual: filtro_busq.paginaActual,
+				nombreProducto: filtro_busq.nombreProducto
+			})
+			/******* SE REALIZA LA INVOCACION AJAX *******/
+			var ceo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
+			dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
+			$consulta = $.post(baseURL + api + isoPais + "/reportes/estatusTarjetashabientes", {request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)});
 			/******* DE SER EXITOSA LA COMUNICACION CON EL SERVICIO SE EJECUTA EL SIGUIENTE METODO "DONE" *******/
-			$consulta.done(function(data){
-
+      $consulta.done(function(response){
+        data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 				$("#mensaje").remove();
 				$('#cargando').fadeOut("slow");
 				$("#EstatusLotes-btnBuscar").show();
@@ -120,7 +127,7 @@ function buscarStatusTarjetasHambientes(paginaActual){
 				var tbody=$("#tbody-datos-general");
 			 			if (evBuscar) {
 					 			tbody.empty();
-					 			}
+					 	}
 
 				contenedor=$("#div_tablaDetalle");
 				var tr;
@@ -146,18 +153,24 @@ function buscarStatusTarjetasHambientes(paginaActual){
 						td=$(document.createElement("td")).appendTo(tr);
 						td.attr("style","max-width: 319px !important; min-width: 319px !important;");
 						td.html(itemLista.Tarjetahabiente);
-
 					});
 				//$('#tabla-estatus-lotes tbody tr:even').addClass('even');
 
-				paginacion(data.totalPaginas, data.paginaActual);
-
-
-				}else{
+				    paginacion(data.totalPaginas, data.paginaActual);
+				}else{ 
 					if(data.rc =="-29"){
-			             alert(data.mensaje);
-			             $(location).attr('href',baseURL+isoPais+'/login');
-			         }else{
+			      alert(data.mensaje);
+            $(location).attr('href',baseURL+isoPais+'/login');
+          }else if(data.rc == "-20"){
+            $("#tabla-estatus-lotes").fadeOut("fast");
+			 			$("#view-results").attr("style","display:none");
+            $("#contend-pagination").hide();
+            var div =$(document.createElement("div")).appendTo(contenedor);
+             div.attr("id","mensaje");
+             div.attr("style","background-color:rgb(252,199,199); margin-top:45px; margin-left: 20px");
+            var p = $(document.createElement("p")).appendTo(div);
+            p.html(data.ERROR);
+			    }else{
 		 				$("#mensaje").remove();
 		 				//var contenedor=$("#div_tablaDetalle");
 		 				$("#tabla-estatus-lotes").fadeOut("fast");
@@ -171,7 +184,7 @@ function buscarStatusTarjetasHambientes(paginaActual){
 							p.html(data.mensaje);
 						else
 							p.html(data);
-						p.attr("style", "text-align:center;width:638px;padding:10px;font-size:14px");
+            p.attr("style", "text-align:center;width:638px;padding:10px;font-size:14px");
 			 		}
 				}
 			});
