@@ -9,8 +9,9 @@ class Novo_Business_Model extends NOVO_Model {
 
 	public function __construct()
 	{
-		parent:: __construct();
 		log_message('INFO', 'NOVO Business Model Class Initialized');
+
+		parent:: __construct();
 		$this->load->library('Request_Data');
 	}
 	/**
@@ -23,13 +24,11 @@ class Novo_Business_Model extends NOVO_Model {
 		log_message('INFO', 'NOVO Business Model: getEnterprises method Initialized');
 
 		$this->className = "com.novo.objects.MO.ListadoEmpresasMO";
-
 		$this->dataAccessLog->modulo = 'Negocios';
 		$this->dataAccessLog->function = 'Empresas';
 		$this->dataAccessLog->operation = 'lista de empresas';
 
 		$sizePage = $this->request_data->setPageSize($this->session->screenSize);
-
 		$this->dataRequest->idOperation = 'listaEmpresas';
 		$this->dataRequest->accodusuario = $this->userName;
 		$this->dataRequest->paginaActual = 1;
@@ -39,6 +38,7 @@ class Novo_Business_Model extends NOVO_Model {
 
 		$response = $this->sendToService(lang('GEN_GET_ENTERPRISES'));
 		$filters = FALSE;
+
 		if(!$dataRequest) {
 			$filters = $this->request_data->setFilters();
 		}
@@ -46,20 +46,16 @@ class Novo_Business_Model extends NOVO_Model {
 		switch($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
-
 				$enterpriseArgs = $response->listadoEmpresas;
 				$enterpriseArgs->sizePage = $sizePage;
 				$enterpriseList = $this->request_data->OrderEnterpriseList($enterpriseArgs, $filters, $dataRequest);
 				$this->response->data->list = $enterpriseList->list;
-
 				if(!$dataRequest) {
 					$access = [
 						'user_access',
 						'getProducts'
 					];
-
 					$this->session->unset_userdata($access);
-
 					$this->response->data->filters = $enterpriseList->filters;
 					$this->response->data->enterprisesTotal = $response->listadoEmpresas->totalRegistros;
 					$this->response->data->recordsPage = ceil($this->response->data->enterprisesTotal/$sizePage);
@@ -100,8 +96,8 @@ class Novo_Business_Model extends NOVO_Model {
 		log_message('INFO', 'NOVO Business Model: getProducts method Initialized');
 
 		$this->session->unset_userdata('user_access');
-		$this->className = "com.novo.objects.TOs.UsuarioTO";
 
+		$this->className = "com.novo.objects.TOs.UsuarioTO";
 		$this->dataAccessLog->modulo = 'Negocios';
 		$this->dataAccessLog->function = 'Productos';
 		$this->dataAccessLog->operation = 'lista de productos';
@@ -179,6 +175,8 @@ class Novo_Business_Model extends NOVO_Model {
 					}
 				}
 
+				$this->session->unset_userdata('products');
+				count($response->productos) < 2 ?: $this->session->set_userdata('products', TRUE);
 				$this->response->data->categoriesList = $categorieList;
 				$this->response->data->brandList = $brandList;
 				$this->response->data->productList = $response->productos;
@@ -190,7 +188,6 @@ class Novo_Business_Model extends NOVO_Model {
 				$this->response->data->brandList = [];
 				$this->response->data->productList = [];
 		}
-
 
 		return $this->responseToTheView(lang('GEN_GET_PRODUCTS'));
 	}
@@ -204,13 +201,11 @@ class Novo_Business_Model extends NOVO_Model {
 		log_message('INFO', 'NOVO Business Model: getProductDetail method Initialized');
 
 		$this->className = "com.novo.objects.MO.ListadoMenuMO";
-
 		$this->dataAccessLog->modulo = 'Negocios';
 		$this->dataAccessLog->function = 'Producto';
 		$this->dataAccessLog->operation = 'Detalle Producto';
 
 		$enterpriseInf = $this->session->getProducts;;
-
 		$this->dataRequest->idOperation = 'menuPorProducto';
 		$this->dataRequest->menus = [
 			[
@@ -230,15 +225,12 @@ class Novo_Business_Model extends NOVO_Model {
 		];
 
 		$response = $this->sendToService(lang('GEN_GET_PRODUCTS_DETAIL'));
-
-
 		$this->response->data->widget = $enterpriseInf;
-
 		$productDetail = [
 			'name' => '--',
-			'img' => '--',
-			'brand' => '--',
-			'imgBrand' => '--',
+			'imgProgram' => 'default.svg',
+			'brand' => '',
+			'imgBrand' => 'default.png',
 			'viewSomeAttr' => TRUE,
 		];
 		$productSummary = [
@@ -272,7 +264,7 @@ class Novo_Business_Model extends NOVO_Model {
 				}
 
 				$productDetail['name'] = ucwords(mb_strtolower($response->estadistica->producto->descripcion));
-				$productDetail['img'] = $imgProgram;
+				$productDetail['imgProgram'] = $imgProgram;
 				$productDetail['brand'] = trim($response->estadistica->producto->marca);
 				$productDetail['imgBrand'] = $imgBrand;
 				$productSummary['lots'] = trim($response->estadistica->lote->total);
@@ -295,9 +287,6 @@ class Novo_Business_Model extends NOVO_Model {
 					$productSummary['inactiveCards'] = trim($response->estadistica->listadoTarjeta->numTarjetasInactivas);
 				}
 
-				$this->response->data->productDetail = (object) $productDetail;
-				$this->response->data->productSummary = (object) $productSummary;
-
 				if(isset($response->estadistica->producto->mesesVencimiento)) {
 					$expMaxMonths = trim($response->estadistica->producto->mesesVencimiento);
 					$currentDate = date('Y-m');
@@ -308,9 +297,15 @@ class Novo_Business_Model extends NOVO_Model {
 					$expMax->maxCards = trim($response->estadistica->producto->maxTarjetas);
 					$this->session->set_userdata('expMax', $expMax);
 				}
-
+				break;
+			case -99:
+				$this->response->code = 3;
+				$this->response->msg = 'Estimado '.$this->userName.' no tienes privilegios suficientes para manipular este producto';
 				break;
 		}
+
+		$this->response->data->productDetail = (object) $productDetail;
+		$this->response->data->productSummary = (object) $productSummary;
 
 		return $this->responseToTheView(lang('GEN_GET_PRODUCTS_DETAIL'));
 	}

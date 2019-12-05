@@ -106,6 +106,9 @@ if ( ! function_exists('verifyBody'))
 			case lang('GEN_TAG_WELCOME_MESSAGE'):
 				$display = (in_array($client, $showThem));
 				break;
+			case lang('GEN_TAG_SEARCH_CAT'):
+				$display = (in_array($client, $showUs));
+				break;
 		}
 
 		return $display;

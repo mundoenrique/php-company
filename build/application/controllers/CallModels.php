@@ -7,13 +7,14 @@ class CallModels extends Novo_Controller {
 
 	public function __construct()
 	{
-		parent:: __construct();
 		log_message('INFO', 'NOVO CallModels Controller Class Initialized');
+
+		parent:: __construct();
+
 		if($this->input->is_ajax_request()) {
 			$this->rule = lcfirst($this->dataRequest->where);
 			$this->model = 'Novo_'.ucfirst($this->dataRequest->who).'_Model';
 			$this->method = 'callWs_'.ucfirst($this->dataRequest->where).'_'.$this->dataRequest->who;
-
 		} else {
 			show_404();
 		}
@@ -29,6 +30,7 @@ class CallModels extends Novo_Controller {
 			}
 
 		}
+
 		$this->appUserName = isset($_POST['user']) ? mb_strtoupper($_POST['user']) : $this->session->userdata('userName');
 
 		log_message('DEBUG', 'NOVO ['.$this->appUserName.'] REQUEST FROM THE VIEW '.json_encode($this->dataRequest));

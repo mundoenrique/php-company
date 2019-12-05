@@ -16,12 +16,14 @@
 	<div class="flex mt-3 items-center">
 		<div class="flex h6 flex-auto justify-end">
 			<button class="btn btn-outline btn-small btn-rounded-left bg-white">TODOS</button>
+			<?php if(verifyDisplay('body', $module,  lang('GEN_TAG_SEARCH_CAT'))): ?>
 			<select class="select-box custom-select mr-0 h6">
 				<option selected disabled>Buscar por categorias</option>
 				<?php foreach($categories AS $categorie): ?>
 				<option value="<?= $categorie->idCategoria; ?>"><?= $categorie->descripcion; ?></option>
 				<?php endforeach; ?>
 			</select>
+			<?php endif; ?>
 			<select class="select-box custom-select h6">
 				<option selected disabled>Buscar por marca</option>
 				<?php foreach($brands AS $brand): ?>
@@ -45,7 +47,10 @@
 					<img class="mx-2" src="<?= $this->asset->insertFile('brands/'.$products->imgBrand); ?>" alt="" />
 					<div class="flex flex-column">
 						<span class="semibold primary"><?= $products->descripcion; ?></span>
-						<span class="h6 light text"><?= $products->filial ?> / <?= $products->categoria ?></span>
+						<span class="h6 light text">
+							<?php $category = isset($products->categoria) ? ' / '.$products->categoria : ''; ?>
+							<?= $products->filial.$category ?>
+						</span>
 					</div>
 				</div>
 				<div>
