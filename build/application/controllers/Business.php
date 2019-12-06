@@ -132,6 +132,7 @@ class Business extends NOVO_Controller {
 		$this->render->productBrand = $detailList->data->productDetail->brand;
 		$this->render->productImgBrand = $detailList->data->productDetail->imgBrand;
 		$this->render->viewSomeAttr = $detailList->data->productDetail->viewSomeAttr;
+		$this->render->prefix = $detailList->data->productDetail->prefix;
 		$this->render->lotsTotal = $detailList->data->productSummary->lots;
 		$this->render->toSign = $detailList->data->productSummary->toSign;
 		$this->render->toAuthorize = $detailList->data->productSummary->toAuthorize;

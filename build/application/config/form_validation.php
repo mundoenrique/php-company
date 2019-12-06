@@ -99,6 +99,31 @@ $config = [
 			'field' => 'productPrefix',
 			'label' => 'productPrefix',
 			'rules' => 'trim|regex_match[/^([\w]+)+$/i]|required',
+		],
+		[
+			'field' => 'goToDetail',
+			'label' => 'goToDetail',
+			'rules' => 'trim|regex_match[/active/]',
+		],
+		[
+			'field' => 'enterpriseCode',
+			'label' => 'enterpriseCode',
+			'rules' => 'trim|regex_match[/^([\w]+)+$/i]'
+		],
+		[
+			'field' => 'enterpriseGroup',
+			'label' => 'enterpriseGroup',
+			'rules' => 'trim|regex_match[/^([\w-]+)+$/i]'
+		],
+		[
+			'field' => 'idFiscal',
+			'label' => 'idFiscal',
+			'rules' => 'trim|regex_match[/^([\w-:.]+[\s]*)+$/i]'
+		],
+		[
+			'field' => 'enterpriseName',
+			'label' => 'enterpriseName',
+			'rules' => 'trim|regex_match[/^([\w-.,#ñÑáéíóúÑÁÉÍÓÚ\(\)&:\+]+[\s]*)+$/i]'
 		]
 	],
 	'dash-products' => [

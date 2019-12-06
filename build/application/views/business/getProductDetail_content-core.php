@@ -1,5 +1,5 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
-<div class="pt-3 px-5 pb-5">
+<div id="detail-product" class="pt-3 px-5 pb-5" prefix-prod="<?= $prefix ?>">
 	<h1 class="primary h3 regular"><?= $productName; ?></h1>
 	<div class="flex mb-2 items-center">
 		<div class="flex tertiary">

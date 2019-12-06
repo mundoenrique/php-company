@@ -5,10 +5,13 @@ $(function() {
 	var WidgetSelcetP = $('#product-select');
 	var enterpriseWidgetBtn = $('#enterprise-widget-btn');
 	var formAction = enterpriseWidgetForm.attr('form-action');
+	var prefix = getPropertyOfElement('prefix-prod', '#detail-product');
 	var enterpriseCode;
 	var enterpriseGroup;
 	var idFiscal;
 	var enterpriseName;
+	var productPrefix;
+	var goToDetail = false;
 
 	enterpriseWidgetForm.on('change', '#enterprise-select', function() {
 		enterpriseCode = WidgetSelcet.find('option:selected').attr('code')
@@ -24,8 +27,11 @@ $(function() {
 			.prop('disabled', true)
 			.find('option:selected').text('Esperando productos...')
 			WidgetSelcetP.children()
-			.not(':first-child')
+			.not('option:selected')
 			.remove()
+			enterpriseWidgetBtn
+			.prop('disabled', true);
+			enterpriseWidgetBtn.attr('title', 'Selecciona un producto');
 
 			verb = 'POST'; who = 'Business'; where = 'getProducts';
 			data = {
@@ -44,13 +50,23 @@ $(function() {
 	const resproctList = {
 		0: function(response) {
 			WidgetSelcetP.find('option:selected').text('Selecciona un producto');
-			$.each(response.data, function(index, prod){
-				WidgetSelcetP.append(`<option value="${prod.id}">${prod.desc}</option>`)
+			goToDetail = true;
+			$.each(response.data, function(index, prod) {
+				if(prod.id == prefix) {
+					return;
+				}
+				WidgetSelcetP.append(`<option value="${prod.id}">${prod.desc}</option>`);
 			});
 			WidgetSelcetP.prop('disabled', false);
-
 		}
 	}
+
+	enterpriseWidgetForm.on('change', '#product-select', function() {
+		productPrefix = WidgetSelcetP.val()
+		enterpriseWidgetBtn
+		.prop('disabled', false)
+		.removeAttr('title');
+	});
 
 	enterpriseWidgetBtn.on('click', function(e) {
 		e.preventDefault();
@@ -61,6 +77,10 @@ $(function() {
 		enterpriseWidgetForm.append(`<input type="hidden" name="enterpriseGroup" value="${enterpriseGroup}">`);
 		enterpriseWidgetForm.append(`<input type="hidden" name="idFiscal" value="${idFiscal}">`);
 		enterpriseWidgetForm.append(`<input type="hidden" name="enterpriseName" value="${enterpriseName}">`);
+		if(goToDetail) {
+			enterpriseWidgetForm.append(`<input type="hidden" name="productPrefix" value="${productPrefix}">`);
+			enterpriseWidgetForm.append(`<input type="hidden" name="goToDetail" value="active">`);
+		}
 		enterpriseWidgetForm.submit();
 	});
 });

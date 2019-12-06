@@ -150,20 +150,27 @@ class Novo_Business_Model extends NOVO_Model {
 		$this->dataAccessLog->modulo = 'Negocios';
 		$this->dataAccessLog->function = 'Producto';
 		$this->dataAccessLog->operation = 'Detalle Producto';
-
 		$enterpriseInf = $this->session->getProducts;
+		$productPrefix = $dataRequest->productPrefix;
+
+		if(isset($dataRequest->goToDetail)) {
+			unset($dataRequest->goToDetail, $dataRequest->productPrefix);
+			$enterpriseInf = $dataRequest;
+			$this->session->set_userdata('getProducts', $dataRequest);
+		}
+
 		$this->dataRequest->idOperation = 'menuPorProducto';
 		$this->dataRequest->menus = [
 			[
 				'app' => 'EOL',
-				'prod' => $dataRequest->productPrefix,
+				'prod' => $productPrefix,
 				'idUsuario' => $this->userName,
 				'idEmpresa' => $enterpriseInf->idFiscal,
 			]
 		];
 		$this->dataRequest->estadistica = [
 			'producto' => [
-				'prefijo' => $dataRequest->productPrefix,
+				'prefijo' => $productPrefix,
 				'rifEmpresa' => $enterpriseInf->idFiscal,
 				'acCodCia' => $enterpriseInf->enterpriseCode,
 				'acCodGrupo' => $enterpriseInf->enterpriseGroup
@@ -177,6 +184,7 @@ class Novo_Business_Model extends NOVO_Model {
 			'brand' => '',
 			'imgBrand' => 'default.png',
 			'viewSomeAttr' => TRUE,
+			'prefix' => $productPrefix
 		];
 		$productSummary = [
 			'lots' => '--',
@@ -196,33 +204,42 @@ class Novo_Business_Model extends NOVO_Model {
 				log_message('INFO', 'NOVO ['.$this->userName.'] '.lang('GEN_GET_PRODUCTS_DETAIL').' USER_ACCESS LIST: '.json_encode($response->lista));
 
 				$sess = [
-					'productPrefix' => $dataRequest->productPrefix,
+					'productPrefix' => $productPrefix,
 					'user_access' => $response->lista
 				];
 				$this->session->set_userdata($sess);
-				$imgBrand = url_title(trim(mb_strtolower($response->estadistica->producto->marca))).'_card.svg';
 
-				if(!file_exists(assetPath('images/brands/'.$imgBrand))) {
-					$imgBrand = 'default.png';
+				if(isset($response->estadistica->producto->imgProgram)) {
+					$imgBrand = url_title(trim(mb_strtolower($response->estadistica->producto->marca))).'_card.svg';
+
+					if(!file_exists(assetPath('images/brands/'.$imgBrand))) {
+						$imgBrand = 'default.png';
+					}
+
+					$imgProgram = url_title(trim(mb_strtolower($response->estadistica->producto->nombre))).'.svg';
+
+					if(!file_exists(assetPath('images/programs/'.$imgProgram))) {
+						$imgProgram = 'default.svg';
+					}
+
+					$productDetail['name'] = ucwords(mb_strtolower($response->estadistica->producto->descripcion));
+					$productDetail['imgProgram'] = $imgProgram;
+					$productDetail['brand'] = trim($response->estadistica->producto->marca);
+					$productDetail['imgBrand'] = $imgBrand;
+
+					if(trim($response->estadistica->producto->idProducto) == 'G') {
+						$productDetail['viewSomeAttr'] = FALSE;
+					}
+				} else {
+					$this->response->code = 3;
+					$this->response->title = lang('PRODUCTS_DETAIL_TITLE');
+					$this->response->msg = 'El producto no fue configurado correctamente, por favor comunícate con el administrador.';
 				}
 
-				$imgProgram = url_title(trim(mb_strtolower($response->estadistica->producto->nombre))).'.svg';
-
-				if(!file_exists(assetPath('images/programs/'.$imgProgram))) {
-					$imgProgram = 'default.svg';
-				}
-
-				$productDetail['name'] = ucwords(mb_strtolower($response->estadistica->producto->descripcion));
-				$productDetail['imgProgram'] = $imgProgram;
-				$productDetail['brand'] = trim($response->estadistica->producto->marca);
-				$productDetail['imgBrand'] = $imgBrand;
 				$productSummary['lots'] = trim($response->estadistica->lote->total);
 				$productSummary['toSign'] = trim($response->estadistica->lote->numPorFirmar);
 				$productSummary['toAuthorize'] = trim($response->estadistica->lote->numPorAutorizar);
 
-				if(trim($response->estadistica->producto->idProducto) == 'G') {
-					$productDetail['viewSomeAttr'] = FALSE;
-				}
 
 				if(isset($response->estadistica->ordenServicio)) {
 					$productSummary['serviceOrders'] = trim($response->estadistica->ordenServicio->Total);
