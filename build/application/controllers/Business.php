@@ -84,7 +84,7 @@ class Business extends NOVO_Controller {
 		$this->render->categories = $responseList->data->categoriesList;
 		$this->render->productList = $responseList->data->productList;
 
-		if(count($this->render->widget->enterpriseList) < 2) {
+		if($this->render->widget && count($this->render->widget->enterpriseList) < 2) {
 			$this->render->widget = FALSE;
 		}
 
@@ -92,6 +92,7 @@ class Business extends NOVO_Controller {
 			$this->render->widget->products = FALSE;
 			$this->render->widget->widgetBtnTitle = lang('PRODUCTS_WIDGET_BTN');
 			$this->render->widget->enterpriseData =  $this->session->getProducts;
+			$this->render->widget->countProducts = FALSE;
 			$this->render->widget->actionForm = 'productos';
 		}
 
