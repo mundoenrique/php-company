@@ -1,13 +1,12 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 <div class="pt-3 px-5 pb-5">
-	<h1 class="primary h3 regular">Selección de producto</h1>
+	<h1 class="primary h3 regular"><?= lang('PRODUCTS_LIST'); ?></h1>
 	<div class="flex mb-2 items-center light">
 		<div class="flex tertiary">
 			<nav class="main-nav nav-inferior">
 				<ul class="mb-0 h6 light tertiary list-style-none list-inline">
-					<li class="inline"><a class="tertiary" href="ceo_dashboard.html">Inicio /</a></li>
-					<li class="inline"><a class="tertiary" href="ceo_dashboard.html">Empresas /</a></li>
-					<li class="inline"><a class="tertiary" href="ceo_product.html">Productos</a></li>
+					<li class="inline"><a class="tertiary" href="<?= base_url('empresas') ?>">Empresas /</a></li>
+					<li class="inline"><a class="tertiary" href="#">Productos</a></li>
 				</ul>
 			</nav>
 		</div>
@@ -15,17 +14,17 @@
 
 	<div class="flex mt-3 items-center">
 		<div class="flex h6 flex-auto justify-end">
-			<button class="btn btn-outline btn-small btn-rounded-left bg-white">TODOS</button>
+			<button class="btn btn-outline btn-small btn-rounded-left bg-white"><?= lang('PRODUCTS_ALL') ?></button>
 			<?php if(verifyDisplay('body', $module,  lang('GEN_TAG_SEARCH_CAT'))): ?>
 			<select class="select-box custom-select mr-0 h6">
-				<option selected disabled>Buscar por categorias</option>
+				<option selected disabled><?= lang('PRODUCTS_SEARCH_CATEGORY'); ?></option>
 				<?php foreach($categories AS $categorie): ?>
 				<option value="<?= $categorie->idCategoria; ?>"><?= $categorie->descripcion; ?></option>
 				<?php endforeach; ?>
 			</select>
 			<?php endif; ?>
 			<select class="select-box custom-select h6">
-				<option selected disabled>Buscar por marca</option>
+				<option selected disabled><?= lang('PRODUCTS_SEARCH_BRAND'); ?></option>
 				<?php foreach($brands AS $brand): ?>
 				<option value="<?= $brand->idMarca; ?>"><?= $brand->nombre; ?></option>
 				<?php endforeach; ?>

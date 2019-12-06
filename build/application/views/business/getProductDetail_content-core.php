@@ -5,9 +5,9 @@
 		<div class="flex tertiary">
 			<nav class="main-nav nav-inferior">
 				<ul class="mb-0 h6 light tertiary list-inline list-style-none">
-					<li class="inline"><a class="tertiary" href="ceo_dashboard.php">Inicio /</a></li>
-					<li class="inline"><a class="tertiary" href="ceo_dashboard.php">Empresas /</a></li>
-					<li class="inline"><a class="tertiary" href="ceo_product.php">Productos</a></li>
+					<li class="inline"><a class="tertiary" href="<?= base_url('empresas') ?>">Empresas</a></li> /
+					<li class="inline"><a class="tertiary" href="<?= base_url('productos') ?>">Productos</a></li> /
+					<li class="inline"><a class="tertiary" href="#">Detalle del producto</a></li>
 				</ul>
 			</nav>
 		</div>

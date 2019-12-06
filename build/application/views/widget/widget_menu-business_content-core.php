@@ -1,7 +1,7 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 <nav class="navbar-secondary line-main-nav flex bg-secondary items-center">
 	<ul class="main-nav-user flex my-0 list-style-none">
-		<li class="nav-item mr-1 inline">
+		<li class="nav-item mr-1 inline page-current">
 			<a class="nav-link pr-2 semibold primary" href="<?= base_url($enterpriseUrl); ?>">
 				<?= lang('GEN_MENU_ENTERPRISE') ?>
 			</a>

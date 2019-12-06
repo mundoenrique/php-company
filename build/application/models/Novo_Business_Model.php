@@ -209,7 +209,7 @@ class Novo_Business_Model extends NOVO_Model {
 				];
 				$this->session->set_userdata($sess);
 
-				if(isset($response->estadistica->producto->imgProgram)) {
+				if(isset($response->estadistica->producto->idProducto)) {
 					$imgBrand = url_title(trim(mb_strtolower($response->estadistica->producto->marca))).'_card.svg';
 
 					if(!file_exists(assetPath('images/brands/'.$imgBrand))) {

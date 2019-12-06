@@ -5,8 +5,7 @@
 		<div class="flex tertiary">
 			<nav class="main-nav nav-inferior">
 				<ul class="mb-0 light h6 tertiary list-style-none list-inline ">
-					<li class="inline"><a class="tertiary" href="ceo_dashboard.html">Inicio</a></li> /
-					<li class="inline"><a class="tertiary" href="ceo_dashboard.html">Empresas</a></li>
+					<li class="inline"><a class="tertiary" href="#">Empresas</a></li>
 				</ul>
 			</nav>
 		</div>
