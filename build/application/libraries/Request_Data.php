@@ -366,7 +366,9 @@ class Request_Data {
 			foreach($products AS $key => $value) {
 				switch ($key) {
 					case 'descripcion':
-						$productList['desc'] = trim($value);
+						$string = (mb_strtoupper(trim($value)));
+						$string = strlen($string) > 30 ? substr($string, 0, 30).'...' : $string;
+						$productList['desc'] = $string;
 						break;
 					case 'idProducto':
 						$productList['id'] = trim($value);

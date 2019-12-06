@@ -2,6 +2,7 @@
 $(function() {
 	var enterpriseWidgetForm = $('#enterprise-widget-form');
 	var WidgetSelcet = $('#enterprise-select');
+	var WidgetSelcetP = $('#product-select');
 	var enterpriseWidgetBtn = $('#enterprise-widget-btn');
 	var formAction = enterpriseWidgetForm.attr('form-action');
 	var enterpriseCode;
@@ -9,7 +10,7 @@ $(function() {
 	var idFiscal;
 	var enterpriseName;
 
-	enterpriseWidgetForm.on('change', function() {
+	enterpriseWidgetForm.on('change', '#enterprise-select', function() {
 		enterpriseCode = WidgetSelcet.find('option:selected').attr('code')
 		enterpriseGroup = WidgetSelcet.find('option:selected').attr('group')
 		idFiscal = WidgetSelcet.val()
@@ -19,6 +20,13 @@ $(function() {
 			.prop('disabled', false)
 			.removeAttr('title');
 		} else {
+			WidgetSelcetP
+			.prop('disabled', true)
+			.find('option:selected').text('Esperando productos...')
+			WidgetSelcetP.children()
+			.not(':first-child')
+			.remove()
+
 			verb = 'POST'; who = 'Business'; where = 'getProducts';
 			data = {
 				enterpriseCode: enterpriseCode,
@@ -28,10 +36,21 @@ $(function() {
 				select: true
 			}
 			callNovoCore(verb, who, where, data, function(response) {
-				responseCodeLogin[response.code](response);
+				resproctList[response.code](response);
 			})
 		}
 	});
+
+	const resproctList = {
+		0: function(response) {
+			WidgetSelcetP.find('option:selected').text('Selecciona un producto');
+			$.each(response.data, function(index, prod){
+				WidgetSelcetP.append(`<option value="${prod.id}">${prod.desc}</option>`)
+			});
+			WidgetSelcetP.prop('disabled', false);
+
+		}
+	}
 
 	enterpriseWidgetBtn.on('click', function(e) {
 		e.preventDefault();

@@ -213,6 +213,7 @@ class NOVO_Controller extends CI_Controller {
 			if(count($enterpriseList->data->list) > 1 || $this->products) {
 				$this->render->widget =  new stdClass();
 				$this->render->widget->enterpriseList = $enterpriseList->data->list;
+				$this->render->widget->countProducts = $this->products;
 			}
 
 		}
