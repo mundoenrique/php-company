@@ -687,7 +687,7 @@ function validarFields()
 	if(valNombre.val() === '')
 	{
 		errorName.show();
-		errorName.html('El campo no puede estar vacio')
+		errorName.html('El campo no puede estar vacío')
 		validInput = false;
 		valNombre.addClass('textbox-transfer');
 	}
@@ -713,7 +713,7 @@ function validarFields()
 	if(valApellidos.val() === '')
 	{
 		errorApellido.show();
-		errorApellido.html('El campo no puede estar vacio')
+		errorApellido.html('El campo no puede estar vacío')
 		validInput = false;
 		valApellidos.addClass('textbox-transfer');
 	}
@@ -739,7 +739,7 @@ function validarFields()
 	if(valCorreo.val() === '')
 	{
 		errorCorreo.show();
-		errorCorreo.html('El campo no puede estar vacio')
+		errorCorreo.html('El campo no puede estar vacío')
 		validInput = false;
 		valCorreo.addClass('textbox-transfer');
 	}
@@ -758,13 +758,19 @@ function validarFields()
 	if(valCelular.val().length > 13)
 	{
 		errorCelular.show();
-		errorCelular.html('el campo solo debe tener maximo 13 numeros')
+		errorCelular.html('El campo solo debe tener máximo 13 números')
 		validInput = false;
 		valCelular.addClass('textbox-transfer');
 
 	}else if(!numRegExp.test(valCelular.val())){
 		errorCelular.show();
-		errorCelular.html('El campo debe ser numerico')
+		errorCelular.html('El campo debe ser numérico')
+		validInput = false;
+		valCelular.addClass('textbox-transfer');
+
+	}else if(!/^[0-9][1-9]+/.test(valCelular.val())){
+		errorCelular.show();
+		errorCelular.html('El campo solo puede tener un solo cero al inicio')
 		validInput = false;
 		valCelular.addClass('textbox-transfer');
 
@@ -776,7 +782,7 @@ function validarFields()
 	if(valClave.val() === '')
 	{
 		errorClave.show();
-		errorClave.html('El campo no puede estar vacio')
+		errorClave.html('El campo no puede estar vacío')
 		validInput = false;
 		valClave.addClass('textbox-transfer');
 	}
