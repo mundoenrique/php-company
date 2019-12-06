@@ -25,13 +25,13 @@ $(function() {
 		} else {
 			WidgetSelcetP
 			.prop('disabled', true)
-			.find('option:selected').text('Esperando productos...')
+			.find('option:selected').text(lang.PRODUCTS_WAIT_PRODUCTS);
 			WidgetSelcetP.children()
 			.not('option:selected')
 			.remove()
 			enterpriseWidgetBtn
 			.prop('disabled', true);
-			enterpriseWidgetBtn.attr('title', 'Selecciona un producto');
+			enterpriseWidgetBtn.attr('title', lang.PRODUCTS_SELECT_PRODUCTS);
 
 			verb = 'POST'; who = 'Business'; where = 'getProducts';
 			data = {
@@ -49,7 +49,7 @@ $(function() {
 
 	const resproctList = {
 		0: function(response) {
-			WidgetSelcetP.find('option:selected').text('Selecciona un producto');
+			WidgetSelcetP.find('option:selected').text(lang.PRODUCTS_SELECT_PRODUCTS);
 			goToDetail = true;
 			$.each(response.data, function(index, prod) {
 				if(prod.id == prefix) {

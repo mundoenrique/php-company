@@ -233,7 +233,7 @@ class Novo_Business_Model extends NOVO_Model {
 				} else {
 					$this->response->code = 3;
 					$this->response->title = lang('PRODUCTS_DETAIL_TITLE');
-					$this->response->msg = 'El producto no fue configurado correctamente, por favor comunícate con el administrador.';
+					$this->response->msg = lang('RESP_UNCONFIGURED_PRODUCT');
 				}
 
 				$productSummary['lots'] = trim($response->estadistica->lote->total);
@@ -266,7 +266,7 @@ class Novo_Business_Model extends NOVO_Model {
 				break;
 			case -99:
 				$this->response->code = 3;
-				$this->response->msg = 'Estimado '.$this->userName.' no tienes privilegios suficientes para manipular este producto';
+				$this->response->msg = novoLang(lang('RESP_NO_ACCESS'), $this->userName);
 				break;
 		}
 

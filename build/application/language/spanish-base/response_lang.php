@@ -26,3 +26,5 @@ $lang['RESP_EMAIL_NO_SENT'] = 'No fue posible enviar el correo de recuperación,
 $lang['RESP_PASSWORD_CHANGED'] = 'La contraseña fue cambiada exitosamente.<br>Por motivos de seguridad es necesario que inicies sesión nuevamente.';
 $lang['RESP_PASSWORD_USED'] = 'La nueva contraseña no debe coincidir <strong>con las últimas cinco usadas</strong>.';
 $lang['RESP_PASSWORD_INCORRECT'] = 'La contraseña actual es incorrecta.<br>Por favor verifíquela e intente de nuevo.';
+$lang['RESP_UNCONFIGURED_PRODUCT'] = 'El producto no fue configurado correctamente, por favor comunícate con el administrador.';
+$lang['RESP_NO_ACCESS'] = '%s, no tienes privilegios suficientes para manipular este producto.';
