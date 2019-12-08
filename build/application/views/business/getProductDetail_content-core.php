@@ -26,20 +26,26 @@
 
 			<div class="flex flex-column">
 				<div class="flex flex-column">
-					<span class="mb-1 h3 semibold primary">Producto</span>
+					<span class="mb-1 h3 semibold primary"><?= lang('PRODUCT') ?></span>
 					<span class="light"><?= $productName ?> - <?= $productBrand ?></span>
 				</div>
 
 				<div class="flex mt-3 flex-column items-start">
-					<a class="btn btn-link btn-small-xs mx-4 px-0" href="ceo_load_lots.html">Cargar Lotes</a>
-					<a class="btn btn-link btn-small-xs mx-4 px-0" href="ceo_authorization_lots.html">
+					<?php if($this->verify_access->verifyAuthorization('TEBCAR')): ?>
+					<a class="btn btn-link btn-small-xs mx-4 px-0" href="<?= lang('GEN_LINK_LOT_LOAD') ?>"><?= lang('GEN_MENU_LOT_LOAD') ?></a>
+					<?php endif; ?>
+					<?php if($this->verify_access->verifyAuthorization('TEBAUT')): ?>
+					<a class="btn btn-link btn-small-xs mx-4 px-0" href="#">
 						<?= novoLang(lang('PRODUCTS_LOTS_TOTAL'), [$lotsTotal, $toSign, $toAuthorize]) ?>
 					</a>
-					<?php if($viewSomeAttr): ?>
-					<a class="btn btn-link btn-small-xs mx-4 px-0" href="ceo_service_orders.html">
+					<?php endif; ?>
+					<?php if($viewSomeAttr && $this->verify_access->verifyAuthorization('TEBORS')): ?>
+					<a class="btn btn-link btn-small-xs mx-4 px-0" href="#">
 					<?= novoLang(lang('PRODUCTS_ORDERSERV_TOTAL'), [$serviceOrders, $serviceOrdersNoCon, $serviceOrdersCon]) ?>
 					</a>
-					<a class="btn btn-link btn-small-xs mx-4 px-0">
+					<?php endif; ?>
+					<?php if($viewSomeAttr && $this->verify_access->verifyAuthorization('TRAMAE')): ?>
+					<a class="btn btn-link btn-small-xs mx-4 px-0" href="#">
 					<?= novoLang(lang('PRODUCTS_CARDS_TOTAL'), [$totalCards, $activeCards, $inactiveCards]) ?>
 					</a>
 					<?php endif; ?>

@@ -68,6 +68,8 @@ $route['(:any)/inf-tarifas'] = "information/rates";
 $route['(:any)/empresas'] = "business/getEnterprises";
 $route['(:any)/productos'] = "business/getProducts";
 $route['(:any)/detalle-producto'] = "business/getProductDetail";
+//Lots
+$route['(:any)/cargar-lotes'] = "lots/getPendingLots";
 
 //old routes
 $route['(:any)/login'] = "users/login/$1";
