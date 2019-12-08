@@ -1418,6 +1418,7 @@ class Lotes extends CI_Controller {
 		$data = json_encode($data);
 		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
 		$jsonResponse = np_Hoplite_Decrypt($response,'callWSconsultarTipoLote');
+		log_message('DEBUG', 'NOVO ['.$username.'] RESPONSE: callWSconsultarTipoLote: ' . $jsonResponse);
 		$response = json_decode($jsonResponse);
 
 		if($response){

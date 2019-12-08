@@ -23,7 +23,7 @@
 						<div class="col">
 							<label class="mt-1 h6" or="">Tipo de Lote</label>
 							<select class="select-box custom-select mb-3 h6 w-100">
-								<option selected disabled>Seleccionar</option>
+								<option selected disabled>Selecciona un tipo de lote</option>
 								<option>Option 1</option>
 								<option>Option 2</option>
 								<option>Option 3</option>

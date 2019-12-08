@@ -22,7 +22,6 @@ class Business extends NOVO_Controller {
 		log_message('INFO', 'NOVO Business: getEnterprises Method Initialized');
 
 		$view = lang('GEN_GET_ENTERPRISES');
-
 		array_push(
 			$this->includeAssets->jsFiles,
 			"third_party/isotope.pkgd-3.0.6",
@@ -31,7 +30,6 @@ class Business extends NOVO_Controller {
 			"option-search"
 		);
 
-		$this->views = ['business/'.$view];
 		$responseList = $this->loadModel();
 		$this->responseAttr($responseList, FALSE);
 		$this->render->titlePage = lang('ENTERPRISE_TITLE');
@@ -43,6 +41,7 @@ class Business extends NOVO_Controller {
 		$this->render->recordsPage = $responseList->data->recordsPage;
 		$this->render->msgEnterprise = $responseList->data->text;
 		$this->render->disabled = $responseList->code == 0 ?: 'disabled';
+		$this->views = ['business/'.$view];
 		$this->loadView($view);
 	}
 	/**
@@ -56,21 +55,19 @@ class Business extends NOVO_Controller {
 
 		$requestArray = (array)$this->request;
 
-		if(empty($requestArray) && !$this->session->has_userdata('getProducts')) {
+		if(empty($requestArray) && !$this->session->has_userdata('enterpriseInf')) {
 			redirect(base_url('inicio'), 'location');
 		}
 
 		$view = lang('GEN_GET_PRODUCTS');
-
 		array_push(
 			$this->includeAssets->jsFiles,
 			"option-search",
-			"business/widget-enterprise",
 			"business/products"
 		);
 
 		if(empty($requestArray)) {
-			$request = $this->session->getProducts;
+			$request = $this->session->enterpriseInf;
 			$this->request->enterpriseCode = $request->enterpriseCode;
 			$this->request->enterpriseGroup = $request->enterpriseGroup;
 			$this->request->idFiscal = $request->idFiscal;
@@ -91,7 +88,6 @@ class Business extends NOVO_Controller {
 		if($this->render->widget) {
 			$this->render->widget->products = FALSE;
 			$this->render->widget->widgetBtnTitle = lang('PRODUCTS_WIDGET_BTN');
-			$this->render->widget->enterpriseData =  $this->session->getProducts;
 			$this->render->widget->countProducts = FALSE;
 			$this->render->widget->actionForm = 'productos';
 		}
@@ -116,11 +112,6 @@ class Business extends NOVO_Controller {
 
 		$view = lang('GEN_GET_PRODUCTS_DETAIL');
 
-		array_push(
-			$this->includeAssets->jsFiles,
-			"business/widget-enterprise"
-		);
-
 		if(empty($requestArray)) {
 			$this->request->productPrefix = $this->session->productPrefix;
 		}
@@ -143,13 +134,6 @@ class Business extends NOVO_Controller {
 		$this->render->totalCards = $detailList->data->productSummary->totalCards;
 		$this->render->activeCards = $detailList->data->productSummary->activeCards;
 		$this->render->inactiveCards = $detailList->data->productSummary->inactiveCards;
-
-		if($this->render->widget) {
-			$this->render->widget->widgetBtnTitle = lang('GEN_MUST_SELECT_ENTERPRISE');
-			$this->render->widget->enterpriseData =  $this->session->getProducts;
-			$this->render->widget->actionForm = 'detalle-producto';
-		}
-
 		$this->views = ['business/'.$view];
 		$this->loadView($view);
 	}

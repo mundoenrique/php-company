@@ -133,7 +133,7 @@ class Verify_Access {
 				$auth = ($this->CI->session->has_userdata('logged') && $countryUri === 'bdb');
 				break;
 			case 'getProductDetail':
-				$auth = ($this->CI->session->has_userdata('getProducts') && $countryUri === 'bdb');
+				$auth = ($this->CI->session->has_userdata('enterpriseInf') && $countryUri === 'bdb');
 				break;
 			case 'getPendingLots':
 				$auth = $this->verifyAuthorization('TEBCAR');

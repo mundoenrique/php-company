@@ -80,6 +80,7 @@ $lang['GEN_GET_ENTERPRISES'] = 'getEnterprises';
 $lang['GEN_GET_PRODUCTS'] = 'getProducts';
 $lang['GEN_GET_PRODUCTS_DETAIL'] = 'getProductDetail';
 $lang['GEN_GET_PEN_LOTS'] = 'getPendingLots';
+$lang['GEN_GET_TYPE_LOT'] = 'getTypeLot';
 //MODAL STYLES
 $lang['GEN_MODAL_SIZE'] = 310;
 $lang['GEN_ICON'] = 'ui-icon';

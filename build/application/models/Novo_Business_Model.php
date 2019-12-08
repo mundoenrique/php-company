@@ -114,7 +114,7 @@ class Novo_Business_Model extends NOVO_Model {
 		switch($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
-				$select ?: $this->session->set_userdata('getProducts', $dataRequest);
+				$select ?: $this->session->set_userdata('enterpriseInf', $dataRequest);
 				$productList = $this->request_data->getProductsOrder($response, $select);
 				$this->session->unset_userdata('products');
 				count($response->productos) < 2 ?: $this->session->set_userdata('products', TRUE);
@@ -150,13 +150,13 @@ class Novo_Business_Model extends NOVO_Model {
 		$this->dataAccessLog->modulo = 'Negocios';
 		$this->dataAccessLog->function = 'Producto';
 		$this->dataAccessLog->operation = 'Detalle Producto';
-		$enterpriseInf = $this->session->getProducts;
+		$enterpriseInf = $this->session->enterpriseInf;
 		$productPrefix = $dataRequest->productPrefix;
 
 		if(isset($dataRequest->goToDetail)) {
 			unset($dataRequest->goToDetail, $dataRequest->productPrefix);
 			$enterpriseInf = $dataRequest;
-			$this->session->set_userdata('getProducts', $dataRequest);
+			$this->session->set_userdata('enterpriseInf', $dataRequest);
 		}
 
 		$this->dataRequest->idOperation = 'menuPorProducto';

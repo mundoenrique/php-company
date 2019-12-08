@@ -211,9 +211,17 @@ class NOVO_Controller extends CI_Controller {
 			$enterpriseList = $this->Business->callWs_getEnterprises_Business(TRUE);
 
 			if(count($enterpriseList->data->list) > 1 || $this->products) {
+				array_push(
+					$this->includeAssets->jsFiles,
+					"business/widget-enterprise"
+				);
 				$this->render->widget =  new stdClass();
+				$this->render->widget->widgetBtnTitle = lang('GEN_MUST_SELECT_ENTERPRISE');
+				$this->render->widget->enterpriseData =  $this->session->enterpriseInf;
 				$this->render->widget->enterpriseList = $enterpriseList->data->list;
 				$this->render->widget->countProducts = $this->products;
+				$this->render->widget->actionForm = 'detalle-producto';
+				$this->render->widget->widgetBtnTitle = lang('GEN_MUST_SELECT_ENTERPRISE');
 			}
 
 		}

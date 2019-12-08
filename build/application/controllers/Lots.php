@@ -31,10 +31,11 @@ class Lots extends NOVO_Controller {
 			"third_party/datatables",
 			"lots/load_lots"
 		);
+		$responseList = $this->loadModel();
+		$this->responseAttr($responseList);
+		$this->render->titlePage = lang('GEN_MENU_LOT_LOAD');
 
 		$this->views = ['lots/'.$view];
-
-		$this->render->titlePage = 'Cargar lotes';
 		$this->loadView($view);
 	}
 }

@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 /**
- * @info clase para
+ * @info clase para obtener información relacionada con los lotes
  * @author
  *
  */
