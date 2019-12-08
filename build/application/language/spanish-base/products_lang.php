@@ -2,6 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 $lang['PRODUCTS_TITLE'] = 'Productos';
+$lang['PRODUCT'] = 'Producto';
 $lang['PRODUCTS_LIST'] = 'Lista de productos';
 $lang['PRODUCTS_ALL'] = 'Todos';
 $lang['PRODUCTS_SEARCH_CATEGORY'] = 'Buscar por categoría';

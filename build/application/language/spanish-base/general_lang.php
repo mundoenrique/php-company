@@ -8,7 +8,8 @@ $lang['GEN_MENU_SERVICES'] = 'Servicios';
 $lang['GEN_MENU_TRAJECTS'] = 'Trayectos';
 $lang['GEN_MENU_REPORTS'] = 'Reportes';
 //SUBMENU BUSINESS
-$lang['GEN_MENU_LOT_LOAD'] = 'Carga de lotes';//TEBCAR
+$lang['GEN_MENU_LOT_LOAD'] = 'Cargar lotes';//TEBCAR
+$lang['GEN_LINK_LOT_LOAD'] = 'cargar-lotes';//TEBCAR
 $lang['GEN_MENU_LOT_AUTH'] = 'Autorización';//TEBAUT
 $lang['GEN_MENU_LOT_UNNAMED'] = 'Cuentas innomindas';
 $lang['GEN_MENU_LOT_UNNAMED_REQ'] = 'Solicitud';//TICARG
@@ -78,6 +79,7 @@ $lang['GEN_FINISH_SESSION'] = 'FinishSession';
 $lang['GEN_GET_ENTERPRISES'] = 'getEnterprises';
 $lang['GEN_GET_PRODUCTS'] = 'getProducts';
 $lang['GEN_GET_PRODUCTS_DETAIL'] = 'getProductDetail';
+$lang['GEN_GET_PEN_LOTS'] = 'getPendingLots';
 //MODAL STYLES
 $lang['GEN_MODAL_SIZE'] = 310;
 $lang['GEN_ICON'] = 'ui-icon';
