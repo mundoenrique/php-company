@@ -141,7 +141,6 @@ $autoload['config'] = array();
 */
 $autoload['language'] = array(
 	'general',
-	'error',
 	'response'
 );
 
