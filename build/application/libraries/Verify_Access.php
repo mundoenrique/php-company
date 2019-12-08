@@ -12,13 +12,14 @@ class Verify_Access {
 	private $operation;
 	private $requestServ;
 	private $responseDefect;
+	private $user;
 
 	public function __construct()
 	{
 		log_message('INFO', 'NOVO Verify_Access Library Class Initialized');
 		$this->CI = &get_instance();
 		$this->requestServ = new stdClass();
-		$this->responseDefect = new stdClass();
+		$this->user = $this->CI->session->userName;
 	}
 	/**
 	 * @info método que valida los datos de los formularios enviados
@@ -82,6 +83,7 @@ class Verify_Access {
 	{
 		log_message('INFO', 'NOVO Verify_Access: ResponseByDefect method initialized');
 
+		$this->responseDefect = new stdClass();
 		$this->responseDefect->code = lang('RESP_DEFAULT_CODE');
 		$this->responseDefect->title = lang('GEN_SYSTEM_NAME');
 		$this->responseDefect->msg = lang('RESP_VALIDATION_INPUT');
@@ -101,15 +103,17 @@ class Verify_Access {
 		return $this->responseDefect;
 	}
 	/**
-	 * @info método que valida la autorización de acceso del usuario a las funcionalidades
+	 * @info método que valida la autorización de acceso del usuario a las vistas
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date October 31th, 2019
 	 */
-	public function accessAuthorization($module, $countryUri, $user)
+	public function accessAuthorization($module, $countryUri, $user = FALSE)
 	{
 		log_message('INFO', 'NOVO Verify_Access: accessAuthorization method initialized');
 
 		$auth = FALSE;
+		$user = $user ?: $this->user;
+
 		switch($module) {
 			case 'login':
 			case 'benefits':
@@ -131,14 +135,56 @@ class Verify_Access {
 			case 'getProductDetail':
 				$auth = ($this->CI->session->has_userdata('getProducts') && $countryUri === 'bdb');
 				break;
+			case 'getPendingLots':
+				$auth = $this->verifyAuthorization('TEBCAR');
+				break;
 		}
 
 		log_message('INFO', 'NOVO ['.$user.'] accessAuthorization '.$module.': '.json_encode($auth, JSON_UNESCAPED_UNICODE));
 
 		return $auth;
 	}
+
 	/**
 	 * @info método que valida la autorización de acceso del usuario a las funcionalidades
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date October 31th, 2019
+	 */
+	public function verifyAuthorization($moduleLink, $function = FALSE)
+	{
+		log_message('INFO', 'NOVO Verify_Access: verifyAuthorization method initialized');
+
+		$userAccess = $this->CI->session->user_access;
+		$items = [];
+		$auth = FALSE;
+
+		if($userAccess) {
+			foreach($userAccess AS $item) {
+				foreach($item->modulos AS $module) {
+					if(!$function) {
+						$items[] = $module->idModulo;
+					} else {
+						foreach($module->funciones AS $functions) {
+							if($module->idModulo != $moduleLink) {
+								continue;
+							}
+							$items[] = $functions->accodfuncion;
+						}
+					}
+				}
+			}
+
+			$access = $function ? $function : $moduleLink;
+			$prompter = $function ? '->'.$function : '';
+			$auth = in_array($access, $items);
+			log_message('INFO', 'NOVO ['.$this->user.'] verifyAuthorization '.$moduleLink.$prompter.': '.json_encode($auth, JSON_UNESCAPED_UNICODE));
+		}
+
+
+		return $auth;
+	}
+	/**
+	 * @info método que valida la redirección del core correcto
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date October 31th, 2019
 	 */
