@@ -35,8 +35,10 @@ class Lots extends NOVO_Controller {
 		$this->responseAttr($responseList);
 		$this->render->titlePage = lang('GEN_MENU_LOT_LOAD');
 		$this->load->model('Novo_Lots_Model', 'Lots');
-		$this->render->lotTypes = $this->Lots->callWs_getTypeLots_Lots(TRUE);
+		$typesLot = $this->Lots->callWs_getTypeLots_Lots(TRUE);
+		$this->render->typesLot = $typesLot->data->typesLot;
 		$this->render->pendinglots = $responseList->data->pendinglots;
+		$this->render->productName = $this->session->productInf->productName.' / '.$this->session->productInf->brand;
 		$this->views = ['lots/'.$view];
 		$this->loadView($view);
 	}

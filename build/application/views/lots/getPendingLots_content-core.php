@@ -1,14 +1,15 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 <div class="pt-3 px-5 pb-5">
 	<h1 class="primary h3 regular inline">Carga de lotes</h1>
-	<span class="ml-2 regular tertiary"> Prepago B-Bogotá</span>
+	<span class="ml-2 regular tertiary"><?= $productName ?></span>
 	<div class="mb-2 flex items-center">
 		<div class="flex tertiary">
 			<nav class="main-nav nav-inferior">
 				<ul class="mb-0 h6 light tertiary list-style-none list-inline">
 					<li class="inline"><a class="tertiary" href="<?= base_url('empresas') ?>">Empresas</a></li> /
 					<li class="inline"><a class="tertiary" href="<?= base_url('productos') ?>">Productos</a></li> /
-					<li class="inline"><a class="tertiary" href="<?= base_url('detalle-producto') ?>">Detalle del producto</a></li> /
+					<li class="inline"><a class="tertiary" href="<?= base_url('detalle-producto') ?>">Detalle del producto</a>
+					</li> /
 					<li class="inline"><a class="tertiary" href="#">Cargar lotes</a></li>
 				</ul>
 			</nav>
@@ -23,10 +24,9 @@
 						<div class="col">
 							<label class="mt-1 h6" or="">Tipo de Lote</label>
 							<select class="select-box custom-select mb-3 h6 w-100">
-								<option selected disabled>Selecciona un tipo de lote</option>
-								<option>Option 1</option>
-								<option>Option 2</option>
-								<option>Option 3</option>
+								<?php foreach($typesLot AS $pos => $type): ?>
+								<option value="<?= $type->key; ?>" format="<?= $type->format; ?>" <?= $pos != 0 ?: 'selected disabled' ?>><?= $type->text; ?></option>
+								<?php endforeach; ?>
 							</select>
 						</div>
 						<div class="col-6 bg-color mt-1">

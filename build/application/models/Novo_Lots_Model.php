@@ -45,17 +45,18 @@ class Novo_Lots_Model extends NOVO_Model {
 
 				foreach($response->lista AS $pos => $pendingLots) {
 					//log_message('info', 'novo lotes pos '.$pos.' lot'.json_encode($lot));
+					$lots = [];
 					$lots['lotNum'] = $response->lista[$pos]->numLote != '' ? $response->lista[$pos]->numLote : '---';
 					$lots['status'] = $response->lista[$pos]->estatus;
 					$lots['fileName'] = $response->lista[$pos]->nombreArchivo;
 					$lots['ticketId'] = $response->lista[$pos]->idTicket;
 					$lots['loadDate'] = $response->lista[$pos]->fechaCarga;
-					$pendinglots[] = $lots;
+					$pendinglots[] = (object) $lots;
 				}
 				//log_message('info', 'novo lotes pendientes--------'.json_encode($pendinglots));
 				break;
 		}
-		$this->response->data->pendinglots = $pendinglots;
+		$this->response->data->pendinglots = (object) $pendinglots;
 		if($this->isResponseRc != 0) {
 
 		}
@@ -74,7 +75,7 @@ class Novo_Lots_Model extends NOVO_Model {
 		$this->className = 'com.novo.objects.MO.ConfirmarLoteMO';
 		$this->dataAccessLog->modulo = 'Lotes';
 		$this->dataAccessLog->function = 'Cargar Lotes';
-		$this->dataAccessLog->operation = 'Obtener lotes pendientes';
+		$this->dataAccessLog->operation = 'Obtener tipos lote';
 
 		$this->dataRequest->idOperation = 'consultarTipoLote';
 		$this->dataRequest->lotesTO = [
@@ -85,44 +86,31 @@ class Novo_Lots_Model extends NOVO_Model {
 		];
 
 		$response = $this->sendToService(lang('GEN_GET_TYPE_LOT'));
-		$typesLots = [
-			[
-				'format' => '',
-				'key' => '',
-				'text' => 'Selecciona'
-			]
+		$typesLot[] = (object) [
+			'key' => '',
+			'format' => '',
+			'text' => 'Selecciona un tipo de lote'
 		];
 
 		switch($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
 
-				foreach($response->lista AS $pos) {
-					foreach($pos AS $items => $value) {
-						switch ($items) {
-							case 'idTipoLote':
-								$types['key'] = $value;
-								break;
-							case 'formato':
-								$types['format'] = $value;
-								break;
-							case 'tipoLote':
-								$types['text'] = $value;
-								break;
-						}
-					}
-					$typesLots[] = $types;
+				foreach($response->lista AS $pos => $types) {
+					$type = [];
+					$type['key'] = ucfirst(mb_strtolower($response->lista[$pos]->idTipoLote));
+					$type['format'] = ucfirst(mb_strtolower($response->lista[$pos]->formato));
+					$type['text'] = ucfirst(mb_strtolower($response->lista[$pos]->tipoLote));
+					$typesLot[] = (object) $type;
 				}
-				$this->response->data->typesLots = $typesLots[0];
+				$this->response->data->typesLot = (object) $typesLot;
 				break;
 		}
 		if($this->isResponseRc != 0) {
-			$typesLots = [
-				[
-					'format' => '',
-					'key' => '',
-					'text' => 'Intenta de nuevo'
-				]
+			$typesLot[] = (object) [
+				'format' => '',
+				'key' => '',
+				'text' => 'Intenta de nuevo'
 			];
 		}
 
