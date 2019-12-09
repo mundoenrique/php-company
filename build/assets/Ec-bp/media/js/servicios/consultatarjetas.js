@@ -251,17 +251,17 @@ function cargarResultado(data) {
 
 		$.each(data.result.detalleEmisiones, function (k, v) {
 
-			var statusEmiNormal = v.edoEmision
+			var statusEmi = v.edoEmision.split('/')[0]
 			//var statusEmi = v.edoEmision.slice(0, v.edoEmision.indexOf("/"));
 			var valida = $.inArray(v.edoEmision, validaope) !== -1 ? 1:0;
 			var personal = [];
 			personal.push(v.nombres,v.apellidos,v.numCelular,v.email)
-			tr = '<tr class="' + data.result.pagina+ '" tjta="' + v.nroTarjeta + '" num_lote="'+v.nroLote+'" edo_anterior="'+statusEmiNormal[0]+'" id_ext_per="' + v.cedula + '" personal="' + personal + '" >';
+			tr = '<tr class="' + data.result.pagina+ '" tjta="' + v.nroTarjeta + '" num_lote="'+v.nroLote+'" edo_anterior="'+statusEmi[0]+'" id_ext_per="' + v.cedula + '" personal="' + personal + '" >';
 			tr += '<td class="checkbox-select"><input id="check-oneTM" type="checkbox" value=""/></td>';
 			tr += '<td id="td-nombre-2" class="bp-min-width">' + v.nroTarjeta + '</td>';
 			tr += '<td class="bp-min-width">' + v.ordenS + '</td>';
 			tr += '<td class="bp-min-width">' + v.nroLote + '</td>';
-			tr += '<td class="bp-min-width">' + statusEmiNormal + '</td>';
+			tr += '<td class="bp-min-width">' + statusEmi + '</td>';
 			tr += '<td class="bp-min-width">' + v.edoPlastico + '</td>';
 			tr += '<td id="td-nombre-2" class="bp-min-width">' + v.nombre.toLowerCase().replace(/(^| )(\w)/g, function (x) {
 				return x.toUpperCase();
