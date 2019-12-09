@@ -40,23 +40,43 @@ class Novo_Lots_Model extends NOVO_Model {
 
 		switch($this->isResponseRc) {
 			case 0:
-				//log_message('info', 'novo lotes pendientes--------'.json_encode($response));
+				log_message('info', 'NOVO lotes pendientes--------'.json_encode($response));
 				$this->response->code = 0;
 
 				foreach($response->lista AS $pos => $pendingLots) {
 					//log_message('info', 'novo lotes pos '.$pos.' lot'.json_encode($lot));
 					$lots = [];
 					$lots['lotNum'] = $response->lista[$pos]->numLote != '' ? $response->lista[$pos]->numLote : '---';
-					$lots['status'] = $response->lista[$pos]->estatus;
+					$lotStatus = $response->lista[$pos]->estatus;
+					switch ($lotStatus) {
+						case '1':
+							$lots['statusPr'] = 'status-pr ';
+							$lots['statusColor'] = ' bg-vista-blue';
+							$lots['statusText'] = 'Válido';
+							break;
+						case '5':
+							$lots['statusPr'] = '';
+							$lots['statusColor'] = ' bg-pink-salmon';
+							$lots['statusText'] = 'Con errores';
+							break;
+						case '6':
+							$lots['statusPr'] = 'status-pr ';
+							$lots['statusColor'] = ' bg-trikemaster';
+							$lots['statusText'] = 'Válido';
+							break;
+					}
+					$lots['status'] = $lotStatus;
 					$lots['fileName'] = $response->lista[$pos]->nombreArchivo;
 					$lots['ticketId'] = $response->lista[$pos]->idTicket;
 					$lots['loadDate'] = $response->lista[$pos]->fechaCarga;
-					$pendinglots[] = (object) $lots;
+					$pendingLotsList[] = (object) $lots;
 				}
 				//log_message('info', 'novo lotes pendientes--------'.json_encode($pendinglots));
 				break;
+				case -15:
+				break;
 		}
-		$this->response->data->pendinglots = (object) $pendinglots;
+		$this->response->data->pendinglots = (object) $pendingLotsList;
 		if($this->isResponseRc != 0) {
 
 		}
@@ -103,10 +123,13 @@ class Novo_Lots_Model extends NOVO_Model {
 					$type['text'] = ucfirst(mb_strtolower($response->lista[$pos]->tipoLote));
 					$typesLot[] = (object) $type;
 				}
+
 				$this->response->data->typesLot = (object) $typesLot;
 				break;
 		}
+
 		if($this->isResponseRc != 0) {
+			$this->response->code = 1;
 			$typesLot[] = (object) [
 				'format' => '',
 				'key' => '',

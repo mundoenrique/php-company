@@ -25,7 +25,8 @@
 							<label class="mt-1 h6" or="">Tipo de Lote</label>
 							<select class="select-box custom-select mb-3 h6 w-100">
 								<?php foreach($typesLot AS $pos => $type): ?>
-								<option value="<?= $type->key; ?>" format="<?= $type->format; ?>" <?= $pos != 0 ?: 'selected disabled' ?>><?= $type->text; ?></option>
+								<option value="<?= $type->key; ?>" format="<?= $type->format; ?>"
+									<?= $pos != 0 ?: 'selected disabled' ?>><?= $type->text; ?></option>
 								<?php endforeach; ?>
 							</select>
 						</div>
@@ -58,66 +59,34 @@
 							</tr>
 						</thead>
 						<tbody>
+							<?php foreach($pendinglots AS $lots): ?>
 							<tr>
-								<td>19062016</td>
-								<td>919062024.txt</td>
-								<td>20/06/2019 - 09:35:58</td>
+								<td><?= $lots->lotNum ?></td>
+								<td><?= $lots->fileName ?></td>
+								<td><?= $lots->loadDate ?></td>
 								<td>
-									<div class="status-pr flex items-center justify-center">
-										<div class="icon-circle bg-vista-blue" alt=""></div>
-										<span class="pl-1 uppercase">Válido</span>
+									<div class="<?= $lots->statusPr ?> flex items-center justify-center">
+										<div class="icon-circle <?= $lots->statusColor ?>" alt=""></div>
+										<span class="pl-1 uppercase"><?= $lots->statusText ?></span>
 									</div>
 								</td>
 								<td>
-									<button class="btn pr-1" title="" data-toggle="tooltip">
+									<?php if($lots->status == 1 || $lots->status == 6): ?>
+									<button class="btn px-0" title="Confirmar" data-toggle="tooltip">
 										<i class="icon icon-ok" aria-hidden="true"></i>
 									</button>
-									<button class="btn pl-0" title="Eliminar" data-toggle="tooltip">
-										<i class="icon icon-remove mr-1" aria-hidden="true"></i>
-									</button>
-								</td>
-							</tr>
-							<tr>
-								<td>20062016</td>
-								<td>020642026.txt</td>
-								<td>20/07/2019 - 10:35:58</td>
-								<td>
-									<div class="status-pr flex items-center justify-center">
-										<div class="icon-circle bg-trikemaster" alt=""></div>
-										<span class="pl-1 uppercase">Válido</span>
-									</div>
-								</td>
-								<td>
-									<button class="btn px-0" title="" data-toggle="tooltip">
-										<i class="icon icon-ok" aria-hidden="true"></i>
-									</button>
+									<?php endif; ?>
+									<?php if($lots->status == 5 || $lots->status == 6): ?>
 									<button class="btn px-1" title="Ver" data-toggle="tooltip">
 										<i class="icon icon-find mr-1" aria-hidden="true"></i>
 									</button>
+									<?php endif; ?>
 									<button class="btn px-0" title="Eliminar" data-toggle="tooltip">
 										<i class="icon icon-remove mr-1" aria-hidden="true"></i>
 									</button>
 								</td>
 							</tr>
-							<tr>
-								<td>20062016</td>
-								<td>545158421.txt</td>
-								<td>21/07/2019 - 11:35:58</td>
-								<td>
-									<div class="flex items-center justify-center">
-										<div class="icon-circle bg-pink-salmon" alt=""></div>
-										<span class="pl-1 uppercase">Con errores</span>
-									</div>
-								</td>
-								<td>
-									<button class="btn pr-1" title="Ver" data-toggle="tooltip">
-										<i class="icon icon-find mr-1" aria-hidden="true"></i>
-									</button>
-									<button class="btn pl-0" title="Eliminar" data-toggle="tooltip">
-										<i class="icon icon-remove mr-1" aria-hidden="true"></i>
-									</button>
-								</td>
-							</tr>
+							<?php endforeach; ?>
 						</tbody>
 					</table>
 					<div class="mx-3 h3">
