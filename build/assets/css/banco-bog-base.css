@@ -738,8 +738,8 @@ textarea.form-control {
 }
 
 .input-file + .js-label-file.has-file{
-  color: var(--tertiary-color);
-  border: .85px solid var(--tertiary-color);
+  color: var(--tertiary);
+  border: .85px solid var(--tertiary);
 }
 
 .icon-upload::before {
