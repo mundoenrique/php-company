@@ -53,7 +53,8 @@ class Novo_Business_Model extends NOVO_Model {
 				if(!$dataRequest) {
 					$access = [
 						'user_access',
-						'getProducts'
+						'productInf',
+						'enterpriseInf'
 					];
 					$this->session->unset_userdata($access);
 					$this->response->data->filters = $enterpriseList->filters;
@@ -96,8 +97,15 @@ class Novo_Business_Model extends NOVO_Model {
 		log_message('INFO', 'NOVO Business Model: getProducts method Initialized');
 
 		$select = isset($dataRequest->select);
-		$select ?: $this->session->unset_userdata('user_access');
-		unset($dataRequest->select);
+		if(!$select) {
+			$access = [
+				'user_access',
+				'productInf',
+				'enterpriseInf'
+			];
+			$this->session->unset_userdata($access);
+			unset($dataRequest->select);
+		}
 
 		$this->className = "com.novo.objects.TOs.UsuarioTO";
 		$this->dataAccessLog->modulo = 'Negocios';
@@ -203,12 +211,6 @@ class Novo_Business_Model extends NOVO_Model {
 				$this->response->code = 0;
 				log_message('INFO', 'NOVO ['.$this->userName.'] '.lang('GEN_GET_PRODUCTS_DETAIL').' USER_ACCESS LIST: '.json_encode($response->lista));
 
-				$sess = [
-					'productPrefix' => $productPrefix,
-					'user_access' => $response->lista
-				];
-				$this->session->set_userdata($sess);
-
 				if(isset($response->estadistica->producto->idProducto)) {
 					$imgBrand = url_title(trim(mb_strtolower($response->estadistica->producto->marca))).'_card.svg';
 
@@ -222,9 +224,11 @@ class Novo_Business_Model extends NOVO_Model {
 						$imgProgram = 'default.svg';
 					}
 
-					$productDetail['name'] = ucwords(mb_strtolower($response->estadistica->producto->descripcion));
+					$productName = ucwords(mb_strtolower($response->estadistica->producto->descripcion));
+					$productDetail['name'] = $productName;
 					$productDetail['imgProgram'] = $imgProgram;
-					$productDetail['brand'] = trim($response->estadistica->producto->marca);
+					$brand = trim($response->estadistica->producto->marca);
+					$productDetail['brand'] = $brand;
 					$productDetail['imgBrand'] = $imgBrand;
 
 					if(trim($response->estadistica->producto->idProducto) == 'G') {
@@ -263,6 +267,16 @@ class Novo_Business_Model extends NOVO_Model {
 					$expMax->maxCards = trim($response->estadistica->producto->maxTarjetas);
 					$this->session->set_userdata('expMax', $expMax);
 				}
+
+				$productInf = new stdClass();
+				$productInf->productPrefix = $productPrefix;
+				$productInf->productName = $productName;
+				$productInf->brand = $brand;
+				$sess = [
+					'productInf' => $productInf,
+					'user_access' => $response->lista
+				];
+				$this->session->set_userdata($sess);
 				break;
 			case -99:
 				$this->response->code = 3;

@@ -106,14 +106,15 @@ class Business extends NOVO_Controller {
 
 		$requestArray = (array)$this->request;
 
-		if(empty($requestArray) && !$this->session->has_userdata('productPrefix')) {
+		if(empty($requestArray) && !$this->session->has_userdata('productInf')) {
 			redirect(base_url('inicio'), 'location');
 		}
 
 		$view = lang('GEN_GET_PRODUCTS_DETAIL');
 
 		if(empty($requestArray)) {
-			$this->request->productPrefix = $this->session->productPrefix;
+			$request = $this->session->productInf;
+			$this->request->productPrefix = $request->productPrefix;
 		}
 
 		$detailList = $this->loadModel($this->request);

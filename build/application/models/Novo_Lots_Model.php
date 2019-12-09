@@ -29,7 +29,7 @@ class Novo_Lots_Model extends NOVO_Model {
 		$this->dataRequest->idOperation = 'buscarLotesPorConfirmar';
 		$this->dataRequest->lotesTO = [
 			'idEmpresa' => $this->session->enterpriseInf->idFiscal,
-			'codProducto' => $this->session->productPrefix
+			'codProducto' => $this->session->productInf->productPrefix
 		];
 		$this->dataRequest->usuario = [
 			'userName' => $this->userName
@@ -55,7 +55,7 @@ class Novo_Lots_Model extends NOVO_Model {
 				//log_message('info', 'novo lotes pendientes--------'.json_encode($pendinglots));
 				break;
 		}
-
+		$this->response->data->pendinglots = $pendinglots;
 		if($this->isResponseRc != 0) {
 
 		}
@@ -78,7 +78,7 @@ class Novo_Lots_Model extends NOVO_Model {
 
 		$this->dataRequest->idOperation = 'consultarTipoLote';
 		$this->dataRequest->lotesTO = [
-			'codProducto' => $this->session->productPrefix
+			'codProducto' => $this->session->productInf->productPrefix
 		];
 		$this->dataRequest->usuario = [
 			'userName' => $this->userName
