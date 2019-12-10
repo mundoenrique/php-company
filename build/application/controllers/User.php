@@ -53,7 +53,7 @@ class User extends NOVO_Controller {
 			"third_party/jquery.md5",
 			"third_party/jquery.balloon",
 			"third_party/jquery.validate",
-			"validate-forms",
+			"validate".$this->render->newViews."-forms",
 			"third_party/additional-methods",
 			"user/login"
 		);
@@ -90,7 +90,7 @@ class User extends NOVO_Controller {
 			$this->includeAssets->jsFiles,
 			"user/pass-recovery",
 			"third_party/jquery.validate",
-			"validate-forms",
+			"validate".$this->render->newViews."-forms",
 			"third_party/additional-methods"
 		);
 		$this->views = ['user/'.$view];
@@ -116,7 +116,7 @@ class User extends NOVO_Controller {
 			"third_party/jquery.md5",
 			"third_party/jquery.balloon",
 			"third_party/jquery.validate",
-			"validate-forms",
+			"validate".$this->render->newViews."-forms",
 			"third_party/additional-methods"
 		);
 		switch($this->session->flashdata('changePassword')) {

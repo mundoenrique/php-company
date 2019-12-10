@@ -40,6 +40,7 @@
 		var baseURL = '<?= base_url(); ?>';
 		var assetUrl = '<?= assetUrl(); ?>';
 		var country = '<?= $countryUri; ?>';
+		var newViews = '<?= $this->config->item('new-views'); ?>';
 		var code = <?= isset($code) ? $code : 0; ?>;
 		var title = '<?= isset($title) ? $title: ''; ?>';
 		var msg = '<?= isset($msg) ? $msg : ''; ?>';

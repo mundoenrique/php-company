@@ -128,7 +128,7 @@ $(function () {
 			$('#enterprise-list').addClass('mx-auto');
 		}
 		enterprisePages.find('span').removeClass('page-current');
-		enterprisePages.find(`span > a:contains(${newpage})`).parent().addClass('page-current');;
+		enterprisePages.find(`span > a:contains(${newpage})`).parent().addClass('page-current');
 		enterpriseList.isotope({ filter: '.'+filterPage });
 	}
 

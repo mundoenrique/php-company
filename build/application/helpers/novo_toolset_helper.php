@@ -156,7 +156,7 @@ if(!function_exists('languajeLoad')) {
 				break;
 			case 'bdb':
 				$languages = [
-					'login' => ['login']
+					'login' => ['login', 'validate']
 				];
 				break;
 			case 'co':
@@ -189,10 +189,10 @@ if(!function_exists('languajeLoad')) {
 				break;
 			default:
 				$languages = [
-					'login' => ['login'],
-					'validatecaptcha' => ['login'],
-					'recoverPass'	=> ['password-recover'],
-					'changePassword'	=> ['password-change'],
+					'login' => ['login', 'validate'],
+					'validatecaptcha' => ['login', 'validate'],
+					'recoverPass'	=> ['password-recover', 'validate'],
+					'changePassword'	=> ['password-change', 'validate'],
 					'benefits'	=> ['benefits'],
 					'terms'	=> ['terms'],
 					'rates'	=> ['rates'],

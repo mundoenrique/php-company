@@ -40,7 +40,6 @@ class Novo_Bulk_Model extends NOVO_Model {
 
 		switch($this->isResponseRc) {
 			case 0:
-				log_message('info', 'NOVO lotes pendientes--------'.json_encode($response));
 				$this->response->code = 0;
 
 				foreach($response->lista AS $pos => $pendingLots) {
@@ -144,8 +143,8 @@ class Novo_Bulk_Model extends NOVO_Model {
 	public function callWs_LoadBulk_Bulk($dataRequest)
 	{
 		log_message('INFO', 'NOVO Bulk Model: LoadBulk method Initialized');
-
 		log_message('INFO', 'NOVO ----------------'.json_encode($dataRequest));
-		print_r ($_FILES);
+
+		$this->className = '';
 	}
 }

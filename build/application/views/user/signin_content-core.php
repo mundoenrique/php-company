@@ -7,7 +7,7 @@
 			<form id="login-form">
 				<div class="form-group">
 					<label for="user_login"><?= lang('GEN_USER'); ?></label>
-					<input id="user_login" name="user_login" class="form-control" type="text">
+					<input id="user_login" name="user_login" class="form-control ignore" type="text">
 					<div class="help-block"></div>
 				</div>
 				<div class="form-group">
