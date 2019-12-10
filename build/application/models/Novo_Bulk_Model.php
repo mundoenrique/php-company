@@ -136,4 +136,16 @@ class Novo_Bulk_Model extends NOVO_Model {
 
 		return $this->responseToTheView(lang('GEN_GET_TYPE_LOT'));
 	}
+	/**
+	 * @info Método para cargar lotes
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date December 10th, 2019
+	 */
+	public function callWs_LoadBulk_Bulk($dataRequest)
+	{
+		log_message('INFO', 'NOVO Bulk Model: LoadBulk method Initialized');
+
+		log_message('INFO', 'NOVO ----------------'.json_encode($dataRequest));
+		print_r ($_FILES);
+	}
 }

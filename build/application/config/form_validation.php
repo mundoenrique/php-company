@@ -126,6 +126,18 @@ $config = [
 			'rules' => 'trim|regex_match[/^([\w-.,#ñÑáéíóúÑÁÉÍÓÚ\(\)&:\+]+[\s]*)+$/i]'
 		]
 	],
+	'loadBulk'  => [
+		[
+			'field' => 'typeBulk',
+			'label' => 'typeBulk',
+			'rules' => 'trim|regex_match[/^([A-Za-z0-9]*)+$/i]'
+		],
+		[
+			'field' => 'formatBulk',
+			'label' => 'formatBulk',
+			'rules' => 'trim|regex_match[/^([A-Za-z0-9]*)+$/i]'
+		]
+	],
 	'dash-products' => [
 		[
 			'field' => 'data-accodgrupoe',

@@ -14,9 +14,6 @@ $(function () {
 
 	$('#upload-file').on('click', function(e) {
 		e.preventDefault();
-		ceo_cook = decodeURIComponent(
-			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-		);
 		verb = 'POST'; who = 'Bulk'; where = 'LoadBulk';
 		data = {
 			file: $('#file')[0].files[0],
