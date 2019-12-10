@@ -31,7 +31,16 @@ $(function () {
 
   $('#pendingLots').DataTable({
     "ordering": false,
-    "pagingType": "full_numbers",
+		"pagingType": "full_numbers",
+		"columnDefs": [{
+			"targets": 1,
+			render: function ( data, type, row ) {
+				return data.length > 20 ?
+        	data.substr( 0, 20 ) +'…' :
+        	data;
+      }
+		}],
+		"table-layout": "fixed",
     "language": {
       "sProcessing": "Procesando...",
       "sLengthMenu": "Mostrar _MENU_ registros",
