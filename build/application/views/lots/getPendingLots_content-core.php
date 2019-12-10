@@ -15,7 +15,7 @@
 			</nav>
 		</div>
 	</div>
-	<div class="flex mt-1 mb-5 bg-color flex-wrap justify-between">
+	<div class="flex mt-1 mb-5 bg-color flex-nowrap justify-between">
 		<div class="flex flex-auto flex-column">
 			<div class="flex flex-column">
 				<span class="line-text mb-2 h4 semibold primary">Nuevos lotes</span>
@@ -72,17 +72,17 @@
 								</td>
 								<td>
 									<?php if($lots->status == 1 || $lots->status == 6): ?>
-									<button class="btn px-0" title="Confirmar" data-toggle="tooltip">
+									<button class="btn px-1" title="Confirmar" data-toggle="tooltip">
 										<i class="icon icon-ok" aria-hidden="true"></i>
 									</button>
 									<?php endif; ?>
 									<?php if($lots->status == 5 || $lots->status == 6): ?>
 									<button class="btn px-1" title="Ver" data-toggle="tooltip">
-										<i class="icon icon-find mr-1" aria-hidden="true"></i>
+										<i class="icon icon-find" aria-hidden="true"></i>
 									</button>
 									<?php endif; ?>
-									<button class="btn px-0" title="Eliminar" data-toggle="tooltip">
-										<i class="icon icon-remove mr-1" aria-hidden="true"></i>
+									<button class="btn px-1" title="Eliminar" data-toggle="tooltip">
+										<i class="icon icon-remove" aria-hidden="true"></i>
 									</button>
 								</td>
 							</tr>
