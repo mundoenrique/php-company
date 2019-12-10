@@ -85,25 +85,4 @@ class Asset {
 		}
 		return $fileName.$ext.$version;
 	}
-	/**
-	 * @info Método para comprobar el comportamiento de una vista
-	 * @author J. Enrique Peñaloza Piñero
-	 * @date October 29th, 2019
-	 */
-	public function viewBehavior($section, $client)
-	{
-		log_message('INFO', 'NOVO Asset: viewBehavior method initialized');
-		$this->section = [
-			'icons' => [
-				'novo' => TRUE,
-				'bp' => FALSE,
-				'bdb' => TRUE
-			],
-			'footer' => [
-				'novo' => TRUE,
-				'bp' => FALSE,
-				'bdb' => FALSE
-			]
-		];
-	}
 }

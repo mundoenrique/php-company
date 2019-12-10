@@ -23,7 +23,7 @@
 					<div class="flex px-5 pb-4 items-center row">
 						<div class="col">
 							<label class="mt-1 h6" or="">Tipo de Lote</label>
-							<select class="select-box custom-select mb-3 h6 w-100">
+							<select id="type-bulk" class="select-box custom-select mb-3 h6 w-100">
 								<?php foreach($typesLot AS $pos => $type): ?>
 								<option value="<?= $type->key; ?>" format="<?= $type->format; ?>"
 									<?= $pos != 0 ?: 'selected disabled' ?>><?= $type->text; ?></option>
@@ -38,8 +38,8 @@
 							</label>
 						</div>
 						<div class="col mt-1">
-							<button class="btn btn-primary btn-small flex mx-auto">
-								Seleccionar
+							<button id="upload-file" class="btn btn-primary btn-small btn-loading flex mx-auto">
+								Enviar
 							</button>
 						</div>
 					</div>

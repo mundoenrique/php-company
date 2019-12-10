@@ -34,13 +34,24 @@ function callNovoCore(verb, who, where, request, _response_) {
 		data: request
 	});
 	var codeResp = parseInt(lang.RESP_DEFAULT_CODE);
+	var formData = new FormData();
 	dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, { format: CryptoJSAesJson }).toString();
+	if(request.file) {
+		formData.append('file', request.file);
+		delete request.file;
+	}
+	formData.append('request', dataRequest);
+	formData.append('ceo_name', ceo_cook);
+	formData.append('plot', btoa(ceo_cook));
 
 	$.ajax({
 		method: verb,
 		url: baseURL + 'async-call',
-		data: { request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook) },
+		data: formData,
 		context: document.body,
+		cache: false,
+		contentType: false,
+		processData: false,
 		dataType: 'json'
 	}).done(function (response, textStatus, jqXHR) {
 

@@ -234,6 +234,16 @@ class Novo_Business_Model extends NOVO_Model {
 					if(trim($response->estadistica->producto->idProducto) == 'G') {
 						$productDetail['viewSomeAttr'] = FALSE;
 					}
+
+					$productInf = new stdClass();
+					$productInf->productPrefix = $productPrefix;
+					$productInf->productName = $productName;
+					$productInf->brand = $brand;
+					$sess = [
+						'productInf' => $productInf,
+						'user_access' => $response->lista
+					];
+					$this->session->set_userdata($sess);
 				} else {
 					$this->response->code = 3;
 					$this->response->title = lang('PRODUCTS_DETAIL_TITLE');
@@ -267,16 +277,6 @@ class Novo_Business_Model extends NOVO_Model {
 					$expMax->maxCards = trim($response->estadistica->producto->maxTarjetas);
 					$this->session->set_userdata('expMax', $expMax);
 				}
-
-				$productInf = new stdClass();
-				$productInf->productPrefix = $productPrefix;
-				$productInf->productName = $productName;
-				$productInf->brand = $brand;
-				$sess = [
-					'productInf' => $productInf,
-					'user_access' => $response->lista
-				];
-				$this->session->set_userdata($sess);
 				break;
 			case -99:
 				$this->response->code = 3;

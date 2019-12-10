@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @author J. Enrique Peñaloza Piñero
  * @date December 7th, 2019
 */
-class Lots extends NOVO_Controller {
+class Bulk extends NOVO_Controller {
 
 	public function __construct()
 	{
@@ -29,13 +29,14 @@ class Lots extends NOVO_Controller {
 		array_push(
 			$this->includeAssets->jsFiles,
 			"third_party/datatables",
-			"lots/load_lots"
+			"third_party/fileupload-10.4.0",
+			"bulk/load_bulk"
 		);
 		$responseList = $this->loadModel();
 		$this->responseAttr($responseList);
 		$this->render->titlePage = lang('GEN_MENU_LOT_LOAD');
-		$this->load->model('Novo_Lots_Model', 'Lots');
-		$typesLot = $this->Lots->callWs_getTypeLots_Lots(TRUE);
+		$this->load->model('Novo_Bulk_Model', 'Bulk');
+		$typesLot = $this->Bulk->callWs_getTypeLots_Bulk(TRUE);
 		$this->render->typesLot = $typesLot->data->typesLot;
 		$this->render->pendinglots = $responseList->data->pendinglots;
 		$this->render->productName = $this->session->productInf->productName.' / '.$this->session->productInf->brand;

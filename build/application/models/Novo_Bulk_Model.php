@@ -5,21 +5,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @author J. Enrique Peñaloza Piñero
  * @date December 8th, 2019
  */
-class Novo_Lots_Model extends NOVO_Model {
+class Novo_Bulk_Model extends NOVO_Model {
 
 	public function __construct()
 	{
 		parent:: __construct();
-		log_message('INFO', 'NOVO Lots Model Class Initialized');
+		log_message('INFO', 'NOVO Bulk Model Class Initialized');
 	}
 	/**
 	 * @info Método para obtener los tipos de lte asociados a un programa
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date December 8th, 2019
 	 */
-	public function callWs_getPendingLots_Lots()
+	public function callWs_getPendingLots_Bulk()
 	{
-		log_message('INFO', 'NOVO Lots Model: getPendingLots method Initialized');
+		log_message('INFO', 'NOVO Bulk Model: getPendingLots method Initialized');
 
 		$this->className = 'com.novo.objects.MO.ConfirmarLoteMO';
 		$this->dataAccessLog->modulo = 'Lotes';
@@ -44,7 +44,6 @@ class Novo_Lots_Model extends NOVO_Model {
 				$this->response->code = 0;
 
 				foreach($response->lista AS $pos => $pendingLots) {
-					//log_message('info', 'novo lotes pos '.$pos.' lot'.json_encode($lot));
 					$lots = [];
 					$lots['lotNum'] = $response->lista[$pos]->numLote != '' ? $response->lista[$pos]->numLote : '---';
 					$lotStatus = $response->lista[$pos]->estatus;
@@ -71,15 +70,12 @@ class Novo_Lots_Model extends NOVO_Model {
 					$lots['loadDate'] = $response->lista[$pos]->fechaCarga;
 					$pendingLotsList[] = (object) $lots;
 				}
-				//log_message('info', 'novo lotes pendientes--------'.json_encode($pendinglots));
 				break;
 				case -15:
-				break;
+					$this->response->code = 0;
+					break;
 		}
 		$this->response->data->pendinglots = (object) $pendingLotsList;
-		if($this->isResponseRc != 0) {
-
-		}
 
 		return $this->responseToTheView(lang('GEN_GET_PEN_LOTS'));
 	}
@@ -88,9 +84,9 @@ class Novo_Lots_Model extends NOVO_Model {
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date December 8th, 2019
 	 */
-	public function callWs_getTypeLots_Lots()
+	public function callWs_getTypeLots_Bulk()
 	{
-		log_message('INFO', 'NOVO Lots Model: getTypeLots method Initialized');
+		log_message('INFO', 'NOVO Bulk Model: getTypeLots method Initialized');
 
 		$this->className = 'com.novo.objects.MO.ConfirmarLoteMO';
 		$this->dataAccessLog->modulo = 'Lotes';
@@ -106,15 +102,15 @@ class Novo_Lots_Model extends NOVO_Model {
 		];
 
 		$response = $this->sendToService(lang('GEN_GET_TYPE_LOT'));
-		$typesLot[] = (object) [
-			'key' => '',
-			'format' => '',
-			'text' => 'Selecciona un tipo de lote'
-		];
 
 		switch($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
+				$typesLot[] = (object) [
+					'key' => '',
+					'format' => '',
+					'text' => 'Selecciona un tipo de lote'
+				];
 
 				foreach($response->lista AS $pos => $types) {
 					$type = [];
@@ -124,8 +120,7 @@ class Novo_Lots_Model extends NOVO_Model {
 					$typesLot[] = (object) $type;
 				}
 
-				$this->response->data->typesLot = (object) $typesLot;
-				break;
+			break;
 		}
 
 		if($this->isResponseRc != 0) {
@@ -136,6 +131,8 @@ class Novo_Lots_Model extends NOVO_Model {
 				'text' => 'Intenta de nuevo'
 			];
 		}
+
+		$this->response->data->typesLot = (object) $typesLot;
 
 		return $this->responseToTheView(lang('GEN_GET_TYPE_LOT'));
 	}
