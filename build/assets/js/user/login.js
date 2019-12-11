@@ -12,6 +12,10 @@ $(function() {
 		var captcha = lang.GEN_ACTIVE_RECAPTCHA;
 		userCred = getCredentialsUser();
 		btnText = $(this).text();
+		form.find('input').each(function() {
+			var trimVal = $(this).val().trim()
+			$(this).val(trimVal)
+		});
 
 		validateForms(form, {handleMsg: false});
 		if(form.valid()) {
@@ -69,9 +73,17 @@ $(function() {
 	};
 
 	function getCredentialsUser(){
+		ceo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
+		var cypherPass = CryptoJS.AES.encrypt($('#user_pass').val(), ceo_cook, { format: CryptoJSAesJson }).toString();
+
 		return {
 			user: $('#user_login').val(),
-			pass: $.md5($('#user_pass').val()),
+			pass: btoa(JSON.stringify({
+				passWord: cypherPass,
+				plot: btoa(ceo_cook)
+			})),
 			active: ''
 		}
 	};

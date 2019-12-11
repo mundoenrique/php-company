@@ -28,10 +28,9 @@ class CallModels extends Novo_Controller {
 			foreach($this->dataRequest->data AS $item => $value) {
 				$_POST[$item] = $value;
 			}
-
 		}
 
-		$this->appUserName = isset($_POST['user']) ? mb_strtoupper($_POST['user']) : $this->session->userdata('userName');
+		$this->appUserName = isset($_POST['user']) ? mb_strtoupper($_POST['user']) : $this->session->userName;
 
 		log_message('DEBUG', 'NOVO ['.$this->appUserName.'] REQUEST FROM THE VIEW '.json_encode($this->dataRequest ,JSON_UNESCAPED_UNICODE));
 

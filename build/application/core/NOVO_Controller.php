@@ -38,14 +38,14 @@ class NOVO_Controller extends CI_Controller {
 		$this->model = 'Novo_'.ucfirst($this->router->fetch_class()).'_Model';
 		$this->method = 'callWs_'.ucfirst($this->router->fetch_method()).'_'.$this->router->fetch_class();
 		$this->countryUri = $this->uri->segment(1, 0) ? $this->uri->segment(1, 0) : 'pe';
-		$this->render->logged = $this->session->userdata('logged');
-		$this->appUserName = $this->session->userdata('userName');
+		$this->render->logged = $this->session->logged;
+		$this->appUserName = $this->session->userName;
 		$this->products = $this->session->has_userdata('products');
-		$this->render->userId = $this->session->userdata('userId');
-		$this->render->fullName = $this->session->userdata('fullName');
+		$this->render->userId = $this->session->userId;
+		$this->render->fullName = $this->session->fullName;
 		$this->render->activeRecaptcha = $this->config->item('active_recaptcha');
 		$this->render->widget =  FALSE;
-		$this->greeting = (int) $this->session->userdata('greeting');
+		$this->greeting = (int) $this->session->greeting;
 		$this->optionsCheck();
 	}
 	/**

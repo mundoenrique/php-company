@@ -47,6 +47,25 @@ function validateForms(form) {
 		errorElement: lang.VALIDATE_ELEMENT
 	};
 
+	jQuery.validator.setDefaults(defaults);
+
+	form.validate({
+		rules: {
+			"user_login":{required: true, pattern: alphanumunder},
+			"user_pass":{verifyRequired: '#user_login', verifyPattern: '#user_login'}
+		},
+		messages: {
+			"user_login": lang.VALIDATE_USERLOGIN,
+			"user_pass": {
+				verifyRequired: lang.VALIDATE_USERPASS_REQ,
+				verifyPattern: lang.VALIDATE_USERPASS_PATT
+			},
+		},
+		errorPlacement: function(error, element) {
+			$(element).closest('.form-group').find('.help-block').html(error.html());
+		}
+	});
+
 	$.validator.methods.fiscalRegistry = function(value, element, param) {
 		return fiscalReg[validCountry].test(value);
 	}
@@ -60,83 +79,11 @@ function validateForms(form) {
 		return value !== target.val();
 	}
 
-	jQuery.validator.setDefaults(defaults);
+	$.validator.methods.verifyRequired = function(value, element, param) {
+		return value != '' && $(param).val() != '';
+	}
 
-	form.validate({
-		rules: {
-			"user-name": {pattern: alphanumunder},
-			"id-company": {fiscalRegistry: true},
-			"email": {pattern: emailValid},
-			"new-pass": {differs: "#current-pass", validatePass: true},
-			"confirm-pass": {equalTo: "#new-pass"},
-			"user_login":{
-				required: {
-        	depends:function(){
-            $(this).val($.trim($(this).val()));
-            	return true;
-        	}
-				},
-				pattern: alphanumunder
-			},
-
-			"user_pass":{
-				required: {
-        	depends:function(){
-            $(this).val($.trim($(this).val()));
-            	return true;
-        		}
-				},
-				pattern: userPassword
-			},
-			"tipo_lote_select": {pattern: numeric},
-			"user-password": {pattern: userPassword},
-			"user-password-1": {pattern: userPassword},
-			"user-password-2": {pattern: userPassword},
-			"id-persona": {pattern: numeric},
-			"start-dmy-date": {pattern: date.dmy},
-			"end-dmy-date": {pattern: date.dmy},
-			"tarjeta": {pattern: numeric},
-			"DNI": {pattern: numeric},
-			"claveAuth": {pattern: userPassword},
-			"fech_ini": {pattern: date.dmy},
-			"fech_fin": {pattern: date.dmy},
-			"empresa-select": {pattern: numeric},
-			"producto-select": {pattern: numeric},
-			"my-date": {pattern: date.my},
-			"radio": {pattern: alphanum},
-			"Ingrese ID": {pattern: numeric},
-			"token-code": {pattern: alphanum},
-			"dias": {pattern: numeric},
-			"batch": {pattern: numeric},
-			"ca": {pattern: alphabetical},
-			"amount": {pattern: amount[validCountry]},
-			"text": {pattern: text},
-			"type": {pattern: alphabetical},
-			"account": {pattern: numeric},
-			"pass": {pattern: userPassword},
-			"idTipoLote": {pattern: numeric},
-			"id-document": {pattern: numeric},
-			"card-number": {pattern: numeric}
-		},
-		messages: {
-			"user-name": "Debe indicar su nombre de usuario",
-			"id-company": 'El '+fiscalRegMsg[validCountry]+' no es válido',
-			"email": "Indique un correo válido (xxx@xxx.xxx)",
-			"current-pass": "Indique su contraseña actual",
-			"new-pass": {
-				required: "Indique su nueva contraseña",
-				differs: "La nueva contraseña debe ser diferente a la actual",
-				validatePass: "La contraseña debe cumplir los requerimientos"
-			},
-			"confirm-pass": {
-				required: "Confirme su nueva contraseña",
-				equalTo: 'Debe ser igual a su nueva contraseña'
-			}
-		},
-		errorPlacement: function(error, element) {
-			if(newViews !== '') {
-				$(element).closest('.form-group').find('.help-block').html(error.html());
-			}
-		}
-	});
+	$.validator.methods.verifyPattern = function(value, element, param) {
+		return userPassword.test(value) && alphanumunder.test($(param).val());
+	}
 }

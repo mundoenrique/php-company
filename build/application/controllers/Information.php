@@ -29,8 +29,8 @@ class Information extends NOVO_Controller {
 		$view = 'terms';
 
 		if($this->session->flashdata('changePassword')) {
-			if($this->config->item('country') !== ($this->session->userdata('countrySess'))) {
-				$urlRedirect = urlReplace($this->countryUri, $this->session->userdata('countrySess'), base_url('inicio'));
+			if($this->config->item('country') !== ($this->session->countrySess)) {
+				$urlRedirect = urlReplace($this->countryUri, $this->session->countrySess, base_url('inicio'));
 				$this->load->model('Novo_User_Model', 'finishSession');
 				$this->finishSession->callWs_FinishSession_User();
 				redirect($urlRedirect, 'location');

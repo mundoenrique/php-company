@@ -96,8 +96,10 @@ class Verify_Access {
 				'action'=> 'redirect'
 			]
 		];
-		$this->CI->load->model('Novo_User_Model', 'finishSession');
-		$this->CI->finishSession->callWs_FinishSession_User();
+		if($this->CI->session->has_userdata('logged')) {
+			$this->CI->load->model('Novo_User_Model', 'finishSession');
+			$this->CI->finishSession->callWs_FinishSession_User();
+		}
 
 		log_message('DEBUG', 'NOVO  ['.$user.'] ResponseByDefect: '.json_encode($this->responseDefect, JSON_UNESCAPED_UNICODE));
 

@@ -10,7 +10,7 @@ $config = [
 		[
 			'field' => 'pass',
 			'label' => 'pass',
-			'rules' => 'trim|regex_match[/^([\w!@\*\-\?¡¿+\/.,#]+)+$/i]|required'
+			'rules' => 'trim|required'
 		],
 		[
 			'field' => 'token',
@@ -27,7 +27,7 @@ $config = [
 		[
 			'field' => 'pass',
 			'label' => 'pass',
-			'rules' => 'trim|regex_match[/^([\w!@\*\-\?¡¿+\/.,#]+)+$/i]|required'
+			'rules' => 'trim|required'
 		]
 	],
 	'finishSession' => [

@@ -44,8 +44,8 @@
 					<?= novoLang(lang('PRODUCTS_ORDERSERV_TOTAL'), [$serviceOrders, $serviceOrdersNoCon, $serviceOrdersCon]) ?>
 					</a>
 					<?php endif; ?>
-					<?php if($viewSomeAttr && $this->verify_access->verifyAuthorization('TRAMAE')): ?>
-					<a class="btn btn-link btn-small-xs mx-4 px-0" href="#">
+					<?php if($viewSomeAttr): ?>
+					<a class="btn btn-link btn-small-xs mx-4 px-0" href="<?= $masterTransLink; ?>">
 					<?= novoLang(lang('PRODUCTS_CARDS_TOTAL'), [$totalCards, $activeCards, $inactiveCards]) ?>
 					</a>
 					<?php endif; ?>
