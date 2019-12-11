@@ -30,6 +30,9 @@ class Bulk extends NOVO_Controller {
 			$this->includeAssets->jsFiles,
 			"third_party/datatables",
 			"third_party/fileupload-10.4.0",
+			"third_party/jquery.validate",
+			"validate".$this->render->newViews."-forms",
+			"third_party/additional-methods",
 			"bulk/load_bulk"
 		);
 		$responseList = $this->loadModel();

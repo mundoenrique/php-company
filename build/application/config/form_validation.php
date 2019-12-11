@@ -128,14 +128,19 @@ $config = [
 	],
 	'loadBulk'  => [
 		[
-			'field' => 'typeBulk',
-			'label' => 'typeBulk',
-			'rules' => 'trim|regex_match[/^([A-Za-z0-9]*)+$/i]'
+			'field' => 'typeFile',
+			'label' => 'typeFile',
+			'rules' => 'trim|regex_match[/^[a-z0-9]+$/i]'
 		],
 		[
-			'field' => 'formatBulk',
-			'label' => 'formatBulk',
-			'rules' => 'trim|regex_match[/^([A-Za-z0-9]*)+$/i]'
+			'field' => 'formatFile',
+			'label' => 'formatFile',
+			'rules' => 'trim|regex_match[/^[a-z0-9]+$/i]'
+		],
+		[
+			'field' => 'typeFileText',
+			'label' => 'typeFileText',
+			'rules' => 'trim|regex_match[/^[a-z0-9ñáéíóú ().]{10,70}$/i]'
 		]
 	],
 	'dash-products' => [

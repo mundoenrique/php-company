@@ -199,6 +199,7 @@ if(!function_exists('languajeLoad')) {
 					'getEnterprises'	=> ['enterprise'],
 					'getProducts'	=> ['products'],
 					'getProductDetail'	=> ['products'],
+					'getPendingLots'	=> ['validate'],
 				];
 		}
 

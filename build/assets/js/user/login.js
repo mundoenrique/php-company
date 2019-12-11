@@ -1,6 +1,6 @@
 'use strict'
 $(function() {
-	var userCred, forWho, forWhere, btnText;
+	var userCred, forWho, forWhere;
 	var userLogin = $('#user_login');
 	var userPass = $('#user_pass');
 	$.balloon.defaults.css = null;
@@ -8,7 +8,6 @@ $(function() {
 
 	$('#login-btn').on('click', function(e) {
 		e.preventDefault();
-
 		$(".general-form-msg").html('');
 		var form = $('#login-form');
 		var captcha = lang.GEN_ACTIVE_RECAPTCHA;
@@ -58,7 +57,7 @@ $(function() {
 		}
 	});
 
-	function disabledInputsform(disable){
+	function disabledInputsform(disable) {
 		$('#login-form input, #login-form button').attr('disabled', disable);
 	}
 

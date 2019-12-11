@@ -1,6 +1,6 @@
 'use strict'
 function validateForms(form) {
-	var validCountry = typeof country!=='undefined'? country : isoPais;
+	var validCountry = country;
 	var onlyNumber = /^[0-9]{6,8}$/;
 	var namesValid = /^([a-zñáéíóú.]+[\s]*)+$/i;
 	var validNickName = /^([a-z]{2,}[0-9_]*)$/i;
@@ -28,15 +28,7 @@ function validateForms(form) {
 		my: /^(0?[1-9]|1[012])\/[0-9]{4}$/,
 	};
 	var amount = {
-		'Ec-bp': usdAmount,
 		'bp': usdAmount
-	};
-	var fiscalRegMsg = {
-		'bp': 'RUC',
-		'co': 'NIT',
-		'pe': 'RUC',
-		'us': 'RUC',
-		've': 'RIF'
 	};
 	var defaults = {
 		debug: true,
@@ -51,8 +43,10 @@ function validateForms(form) {
 
 	form.validate({
 		rules: {
-			"user_login":{required: true, pattern: alphanumunder},
-			"user_pass":{verifyRequired: '#user_login', verifyPattern: '#user_login'}
+			"user_login":	{required: true, pattern: alphanumunder},
+			"user_pass": 	{verifyRequired: '#user_login', verifyPattern: '#user_login'},
+			"type-bulk": 	{requiredTypeBulk: true},
+			"file-bulk":	{required: true, extension: "xls|xlsx|txt"}
 		},
 		messages: {
 			"user_login": lang.VALIDATE_USERLOGIN,
@@ -60,11 +54,28 @@ function validateForms(form) {
 				verifyRequired: lang.VALIDATE_USERPASS_REQ,
 				verifyPattern: lang.VALIDATE_USERPASS_PATT
 			},
+			"type-bulk": lang.VALIDATE_BULK_TYPE,
+			"file-bulk": lang.VALIDATE_BULK_FILE
 		},
 		errorPlacement: function(error, element) {
 			$(element).closest('.form-group').find('.help-block').html(error.html());
 		}
 	});
+
+	$.validator.methods.verifyRequired = function(value, element, param) {
+		return value != '' && $(param).val() != '';
+	}
+
+	$.validator.methods.verifyPattern = function(value, element, param) {
+		return userPassword.test(value) && alphanumunder.test($(param).val());
+	}
+
+	$.validator.methods.requiredTypeBulk = function(value, element, param) {
+		var eval1 = alphanum.test($(element).find('option:selected').attr('format'));
+		var eval2 = longPhrase.test($(element).find('option:selected').text());
+		var eval3 = alphanum.test($(element).find('option:selected').val());
+		return eval1 && eval2 && eval3;
+	}
 
 	$.validator.methods.fiscalRegistry = function(value, element, param) {
 		return fiscalReg[validCountry].test(value);
@@ -77,13 +88,5 @@ function validateForms(form) {
 	$.validator.methods.differs = function(value, element, param) {
 		var target = $(param);
 		return value !== target.val();
-	}
-
-	$.validator.methods.verifyRequired = function(value, element, param) {
-		return value != '' && $(param).val() != '';
-	}
-
-	$.validator.methods.verifyPattern = function(value, element, param) {
-		return userPassword.test(value) && alphanumunder.test($(param).val());
 	}
 }
