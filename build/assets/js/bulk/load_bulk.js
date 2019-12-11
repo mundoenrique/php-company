@@ -1,5 +1,6 @@
 'use strict'
 $(function () {
+	disabledform(false);
 	$('.input-file').each(function () {
     var $input = $(this),
       $label = $input.next('.js-label-file'),
@@ -12,18 +13,26 @@ $(function () {
     });
 	});
 
-	$('#upload-file').on('click', function(e) {
+	$('#upload-file-btn').on('click', function(e) {
 		e.preventDefault();
-		verb = 'POST'; who = 'Bulk'; where = 'LoadBulk';
-		data = {
-			file: $('#file')[0].files[0],
-			typeBulk: $('#type-bulk').val(),
-			formatBulk: $('#type-bulk option:selected').attr('format')
-		}
+		var form = $('#upload-file-form');
+		btnText = $(this).text();
+		validateForms(form);
 
-		callNovoCore(verb, who, where, data, function(response) {
-			console.log(response)
-		});
+		if(form.valid()) {
+			disabledform(true);
+			$(this).html(loader);
+			verb = 'POST'; who = 'Bulk'; where = 'LoadBulk';
+			data = {
+				file: $('#file-bulk')[0].files[0],
+				typeFile: $('#type-bulk').val(),
+				typeFileText: $('#type-bulk option:selected').text(),
+				formatFile: $('#type-bulk option:selected').attr('format')
+			}
+			callNovoCore(verb, who, where, data, function(response) {
+				console.log(response)
+			});
+		}
 	});
 
   $('#pendingLots').DataTable({

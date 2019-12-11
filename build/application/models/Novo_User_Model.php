@@ -28,10 +28,14 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataAccessLog->function = 'Ingreso al sistema';
 		$this->dataAccessLog->operation = 'Iniciar sesion';
 		$this->dataAccessLog->userName = $userName;
-
+		$passWord = json_decode(base64_decode($dataRequest->pass));
+		$passWord = $this->cryptography->decrypt(
+			base64_decode($passWord->plot),
+			utf8_encode($passWord->passWord)
+		);
 		$this->dataRequest->idOperation = 'loginFull';
 		$this->dataRequest->userName = $userName;
-		$this->dataRequest->password = $dataRequest->pass;
+		$this->dataRequest->password = md5($passWord);
 		$this->dataRequest->ctipo = $dataRequest->active;
 
 		$response = $this->sendToService(lang('GEN_LOGIN'));
@@ -99,13 +103,13 @@ class Novo_User_Model extends NOVO_Model {
 			case -263:
 				$this->response->code = 1;
 				$this->response->msg = lang('RESP_INVALID_USER');
-				$this->response->className = 'error-login-2';
+				$this->response->className = lang('VALIDATE_INVALID_USER');
 				break;
 			case -8:
 			case -35:
 				$this->response->code = 1;
 				$this->response->msg = lang('RESP_SUSPENDED_USER');
-				$this->response->className = 'login-inactive';
+				$this->response->className = lang('VALIDATE_INACTIVE_USER');
 				break;
 			case -229:
 				$this->response->code = 2;
@@ -229,7 +233,7 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataAccessLog->operation = 'Cambiar Clave';
 
 		$this->dataRequest->idOperation = 'cambioClave';
-		$this->dataRequest->userName = $this->session->userdata('userName');
+		$this->dataRequest->userName = $this->userName;
 		$this->dataRequest->passwordOld = $dataRequest->currentPass;
 		$this->dataRequest->password = $dataRequest->newPass;
 
@@ -285,7 +289,7 @@ class Novo_User_Model extends NOVO_Model {
 
 		$this->className = 'com.novo.objects.TOs.UsuarioTO';
 
-		$userName = $dataRequest ? mb_strtoupper($dataRequest->user) : $this->session->userdata('userName');
+		$userName = $dataRequest ? mb_strtoupper($dataRequest->user) : $this->userName;
 
 		$this->dataAccessLog->userName = $userName;
 		$this->dataAccessLog->modulo = 'Usuario';
@@ -294,7 +298,7 @@ class Novo_User_Model extends NOVO_Model {
 
 		$this->dataRequest->idOperation = 'desconectarUsuario';
 		$this->dataRequest->idUsuario = $userName;
-		$this->dataRequest->codigoGrupo = $this->session->userdata('codigoGrupo');
+		$this->dataRequest->codigoGrupo = $this->session->codigoGrupo;
 
 		$response = $this->sendToService(lang('GEN_FINISH_SESSION'));
 

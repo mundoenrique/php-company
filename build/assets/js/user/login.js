@@ -1,17 +1,22 @@
 'use strict'
 $(function() {
-	var userCred, forWho, forWhere, btnText;
+	var userCred, forWho, forWhere;
+	var userLogin = $('#user_login');
+	var userPass = $('#user_pass');
 	$.balloon.defaults.css = null;
 	disabledInputsform(false);
 
 	$('#login-btn').on('click', function(e) {
 		e.preventDefault();
-
 		$(".general-form-msg").html('');
 		var form = $('#login-form');
 		var captcha = lang.GEN_ACTIVE_RECAPTCHA;
 		userCred = getCredentialsUser();
 		btnText = $(this).text();
+		form.find('input').each(function() {
+			var trimVal = $(this).val().trim()
+			$(this).val(trimVal)
+		});
 
 		validateForms(form, {handleMsg: false});
 		if(form.valid()) {
@@ -43,15 +48,16 @@ $(function() {
 				validateLogin();
 			}
 		} else {
-			if (userCred.user == '' || userCred.pass=='d41d8cd98f00b204e9800998ecf8427e') {
+			if (userLogin.val() == '' || userPass.val() == '') {
 				$(".general-form-msg").html('Todos los campos son requeridos');
 			} else {
 				$(".general-form-msg").html('Combinación incorrecta de usuario y contraseña');
 			}
+			verifyPassValidate()
 		}
 	});
 
-	function disabledInputsform(disable){
+	function disabledInputsform(disable) {
 		$('#login-form input, #login-form button').attr('disabled', disable);
 	}
 
@@ -59,9 +65,9 @@ $(function() {
 
 		disabledInputsform(false);
 		$('#login-btn').html(btnText);
-		$('#user_pass').val('');
+		userPass.val('');
 		if(country == 'bp') {
-			$('#user_login').val('');
+			userLogin.val('');
 		}
 		setTimeout(function() {
 			$("#user_login").hideBalloon();
@@ -69,9 +75,17 @@ $(function() {
 	};
 
 	function getCredentialsUser(){
+		ceo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
+		var cypherPass = CryptoJS.AES.encrypt(userPass.val(), ceo_cook, { format: CryptoJSAesJson }).toString();
+
 		return {
-			user: $('#user_login').val(),
-			pass: $.md5($('#user_pass').val()),
+			user: userLogin.val(),
+			pass: btoa(JSON.stringify({
+				passWord: cypherPass,
+				plot: btoa(ceo_cook)
+			})),
 			active: ''
 		}
 	};
@@ -103,7 +117,7 @@ $(function() {
 			}
 		},
 		1: function(response, textBtn){
-			$('#user_login').showBalloon({
+			userLogin.showBalloon({
 				html: true,
 				classname: response.className,
 				position: "left",
@@ -143,5 +157,12 @@ $(function() {
 
 	$('#user_login, #user_pass').on('focus keypress', function() {
 		$(this).removeClass('validate-error');
-	})
+		verifyPassValidate();
+	});
+
+	function verifyPassValidate() {
+		if(userPass.val() != '' && validatePass.test(userPass.val())) {
+			userPass.removeClass('has-error');
+		}
+	}
 })

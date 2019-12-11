@@ -34,7 +34,7 @@ class Business extends NOVO_Controller {
 		$this->responseAttr($responseList, FALSE);
 		$this->render->titlePage = lang('ENTERPRISE_TITLE');
 		$this->render->category = "";
-		$this->render->lastSession = $this->session->userdata('lastSession');
+		$this->render->lastSession = $this->session->lastSession;
 		$this->render->enterprisesTotal = $responseList->data->enterprisesTotal;
 		$this->render->enterpriseList = $responseList->data->list;
 		$this->render->filters = $responseList->data->filters;
@@ -132,6 +132,7 @@ class Business extends NOVO_Controller {
 		$this->render->serviceOrders = $detailList->data->productSummary->serviceOrders;
 		$this->render->serviceOrdersNoCon = $detailList->data->productSummary->serviceOrdersNoCon;
 		$this->render->serviceOrdersCon = $detailList->data->productSummary->serviceOrdersCon;
+		$this->render->masterTransLink = $this->verify_access->verifyAuthorization('TRAMAE') ? 'transferencia-maestra' : 'javascript:';
 		$this->render->totalCards = $detailList->data->productSummary->totalCards;
 		$this->render->activeCards = $detailList->data->productSummary->activeCards;
 		$this->render->inactiveCards = $detailList->data->productSummary->inactiveCards;

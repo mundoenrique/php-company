@@ -1,9 +1,10 @@
 'use strict'
 //app
 var loader = $('#loader').html();
+var validatePass = /^[\w!@\*\-\?¡¿+\/.,#]+$/;
 var currenTime;
 var screenSize;
-var verb, who, where, dataResponse, ceo_cook;
+var verb, who, where, dataResponse, ceo_cook, btnText;
 
 $(function () {
 	$('input[type=text], input[type=password], input[type=email]').attr('autocomplete', 'off');
@@ -172,4 +173,12 @@ function insertFormInput(form = false) {
 function getPropertyOfElement(property, element) {
 	var element = element || 'body';
 	return $(element).attr(property);
+}
+/**
+ * @info función para deshabilitar campos de formulario
+ * @author J. Enrique Peñaloza Piñero
+ * @date December 11th, 2019
+ */
+function disabledform(disable) {
+	$('form input, form select, form button').attr('disabled', disable);
 }

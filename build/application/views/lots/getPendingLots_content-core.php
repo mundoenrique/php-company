@@ -19,26 +19,28 @@
 		<div class="flex flex-auto flex-column">
 			<div class="flex flex-column">
 				<span class="line-text mb-2 h4 semibold primary">Nuevos lotes</span>
-				<form method="post">
+				<form id="upload-file-form">
 					<div class="flex px-5 pb-4 items-center row">
-						<div class="col">
+						<div class="form-group col">
 							<label class="mt-1 h6" or="">Tipo de Lote</label>
-							<select id="type-bulk" class="select-box custom-select mb-3 h6 w-100">
+							<select id="type-bulk" name="type-bulk" class="select-box custom-select mb-3 h6 w-100">
 								<?php foreach($typesLot AS $pos => $type): ?>
 								<option value="<?= $type->key; ?>" format="<?= $type->format; ?>"
 									<?= $pos != 0 ?: 'selected disabled' ?>><?= $type->text; ?></option>
 								<?php endforeach; ?>
 							</select>
+							<div class="help-block"></div>
 						</div>
-						<div class="col-6 bg-color mt-1">
-							<input type="file" name="file" id="file" class="input-file">
-							<label for="file" class="label-file js-label-file">
+						<div class="form-group col-6 bg-color mt-1">
+							<input type="file" name="file-bulk" id="file-bulk" class="input-file">
+							<label for="file-bulk" class="label-file js-label-file">
 								<i class="icon icon-upload mr-1 pr-3 right"></i>
 								<span class="js-file-name h6 regular">Clic aquí para seleccionar el archivo de Lote.</span>
 							</label>
+							<div class="help-block"></div>
 						</div>
 						<div class="col mt-1">
-							<button id="upload-file" class="btn btn-primary btn-small btn-loading flex mx-auto">
+							<button id="upload-file-btn" class="btn btn-primary btn-small btn-loading flex mx-auto">
 								Enviar
 							</button>
 						</div>
