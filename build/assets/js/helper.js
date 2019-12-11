@@ -1,6 +1,7 @@
 'use strict'
 //app
 var loader = $('#loader').html();
+var validatePass = /^[\w!@\*\-\?¡¿+\/.,#]+$/;
 var currenTime;
 var screenSize;
 var verb, who, where, dataResponse, ceo_cook;

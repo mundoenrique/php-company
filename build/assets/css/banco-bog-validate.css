@@ -27,3 +27,25 @@
 	border-bottom-left-radius: 5px 5px;
 	border-bottom-right-radius: 5px 5px;
 }
+
+.invalid-user {
+	width: auto;
+	height: auto;
+	color: var(--danger);
+	border: 1px solid var(--danger);
+	background-color: var(--pink-salmon);
+	font-size: 11px;
+	letter-spacing: .016em;
+	z-index: 1;
+}
+
+.inactive-user {
+	width: auto;
+	height: auto;
+	color: var(--danger);
+	border: 1px solid var(--warning);
+	background-color: var(--warning);
+	font-size: 11px;
+	letter-spacing: .016em;
+	z-index: 1;
+}

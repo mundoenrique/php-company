@@ -1,6 +1,8 @@
 'use strict'
 $(function() {
 	var userCred, forWho, forWhere, btnText;
+	var userLogin = $('#user_login');
+	var userPass = $('#user_pass');
 	$.balloon.defaults.css = null;
 	disabledInputsform(false);
 
@@ -47,11 +49,12 @@ $(function() {
 				validateLogin();
 			}
 		} else {
-			if (userCred.user == '' || userCred.pass=='d41d8cd98f00b204e9800998ecf8427e') {
+			if (userLogin.val() == '' || userPass.val() == '') {
 				$(".general-form-msg").html('Todos los campos son requeridos');
 			} else {
 				$(".general-form-msg").html('Combinación incorrecta de usuario y contraseña');
 			}
+			verifyPassValidate()
 		}
 	});
 
@@ -63,9 +66,9 @@ $(function() {
 
 		disabledInputsform(false);
 		$('#login-btn').html(btnText);
-		$('#user_pass').val('');
+		userPass.val('');
 		if(country == 'bp') {
-			$('#user_login').val('');
+			userLogin.val('');
 		}
 		setTimeout(function() {
 			$("#user_login").hideBalloon();
@@ -76,10 +79,10 @@ $(function() {
 		ceo_cook = decodeURIComponent(
 			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 		);
-		var cypherPass = CryptoJS.AES.encrypt($('#user_pass').val(), ceo_cook, { format: CryptoJSAesJson }).toString();
+		var cypherPass = CryptoJS.AES.encrypt(userPass.val(), ceo_cook, { format: CryptoJSAesJson }).toString();
 
 		return {
-			user: $('#user_login').val(),
+			user: userLogin.val(),
 			pass: btoa(JSON.stringify({
 				passWord: cypherPass,
 				plot: btoa(ceo_cook)
@@ -115,7 +118,7 @@ $(function() {
 			}
 		},
 		1: function(response, textBtn){
-			$('#user_login').showBalloon({
+			userLogin.showBalloon({
 				html: true,
 				classname: response.className,
 				position: "left",
@@ -155,5 +158,12 @@ $(function() {
 
 	$('#user_login, #user_pass').on('focus keypress', function() {
 		$(this).removeClass('validate-error');
-	})
+		verifyPassValidate();
+	});
+
+	function verifyPassValidate() {
+		if(userPass.val() != '' && validatePass.test(userPass.val())) {
+			userPass.removeClass('has-error');
+		}
+	}
 })

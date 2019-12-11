@@ -11,7 +11,7 @@ function validateForms(form) {
 	var emailValid = /^([a-zA-Z]+[0-9_.+-]*)+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 	var alphanumunder = /^([\w.\-+&ñÑ]+)+$/i;
 	var alphanum = /^[a-z0-9]+$/i;
-	var userPassword = /^[\w!@\*\-\?¡¿+\/.,#]+$/;
+	var userPassword = validatePass;
 	var numeric = /^[0-9]+$/;
 	var alphabetical = /^[a-z]+$/i;
 	var text = /^['a-z0-9ñáéíóú ,.:()']+$/i;
