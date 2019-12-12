@@ -218,9 +218,14 @@ if(!in_array('tebeli', $funciones)){
 																																			<span aria-hidden='true' class='icon' data-icon='&#xe067;'></span>
 																																	</a>";
 																									}
-																									echo "<a id='detalle' title='Ver lote' idlote='$autorizar->acidlote'>
-																																	<span aria-hidden='true' class='icon' data-icon='&#xe003;'></span>
-																															</a>";
+																									if($autorizar->ctipolote == 'Z' || $autorizar->ctipolote == 'Y'){
+																										echo "";
+																									}else{
+																										echo "<a id='detalle' title='Ver lote' idlote='$autorizar->acidlote'>
+																										<span aria-hidden='true' class='icon' data-icon='&#xe003;'></span>
+																								</a>";
+																									}
+
 																							echo '</td>';
 																					echo "</tr>";
 																			}
