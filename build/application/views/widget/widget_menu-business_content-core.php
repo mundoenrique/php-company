@@ -13,7 +13,7 @@
 			<ul class="dropdown-user pl-0 regular tertiary bg-secondary list-style-none list-inline">
 				<?php $secondLevel = $this->create_menu->secondaryMenu($firstLevel) ?>
 				<?php foreach($secondLevel->second AS $submenu): ?>
-				<li>
+				<li <?= $submenu->link != '#' ? 'class="big-modal"' : ''; ?>>
 					<a <?= $submenu->link ? 'href="'.$submenu->link.'"' : '';  ?>><?= $submenu->text ?></a>
 					<?php if(!empty($secondLevel->third) && $submenu->text == $secondLevel->third[0]->title): ?>
 					<?php unset($secondLevel->third[0]) ?>
