@@ -35,6 +35,10 @@ $(function () {
 	});
 
   $('#pendingLots').DataTable({
+		drawCallback: function(d) {
+			$('#pre-loader').remove();
+			$('#content-datatable').removeClass('hide');
+		},
     "ordering": false,
 		"pagingType": "full_numbers",
 		"columnDefs": [{

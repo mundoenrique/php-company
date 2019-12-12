@@ -17,6 +17,9 @@ $(function () {
 		notiSystem(title, msg, icon, data)
 	}
 
+	$('.big-modal').on('click', function(){
+		$('.cover-spin').show(0)
+	});
 });
 /**
  * @info Llama al core del servidor
@@ -158,7 +161,7 @@ function insertFormInput(disabled, form = false,) {
 		notDisabled = false;
 	}
 
-	$('form button, form select, form input[type=file]')
+	$('form button, form select, form input[type=file], .flex button')
 	.not(notDisabled)
 	.prop('disabled', disabled);
 

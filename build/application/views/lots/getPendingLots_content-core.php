@@ -49,7 +49,10 @@
 			</div>
 			<div class="flex flex-column">
 				<span class="line-text mb-2 h4 semibold primary">Lotes pendientes</span>
-				<div class="center mx-1">
+				<div id="pre-loader" class="mt-2 mx-auto">
+					<span class="spinner-border spinner-border-lg primary" role="status" aria-hidden="true"></span>
+				</div>
+				<div id="content-datatable" class="center mx-1 hide">
 					<table id="pendingLots" class="cell-border h6 display">
 						<thead class="regular secondary bg-primary">
 							<tr>
