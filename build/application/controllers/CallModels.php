@@ -49,7 +49,7 @@ class CallModels extends Novo_Controller {
 		}
 
 		if($deleteFile) {
-			unlink($_FILES);
+			unlink($this->config->item('upload_bulk').'/'.'bulk/'.$_FILES['file']['name']);
 		}
 
 		if($valid) {

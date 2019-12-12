@@ -148,9 +148,14 @@ class Encrypt_Connect {
 	public function moveFile($file, $userName, $model)
 	{
 		log_message('INFO', 'NOVO Encrypt_Connect: moveFile Method Initialized');
+
 		$urlBulkService = $this->CI->config->item('url_bulk_service');
 		$userpassBulk = $this->CI->config->item('userpass_bulk');
 		$uploadBulk = $this->CI->config->item('upload_bulk').'/'.'bulk/';
+		$respUpload = new stdClass;
+		$respUpload->rc = 0;
+
+		log_message('INFO', 'NOVO UPLOAD FILE BY: '.$urlBulkService.' AND: '.$userpassBulk);
 
 		$ch = curl_init();
 		$fp = fopen($uploadBulk.$file, 'r');
@@ -162,12 +167,17 @@ class Encrypt_Connect {
 		curl_setopt($ch, CURLOPT_INFILESIZE, filesize($uploadBulk.$file));
 		curl_exec ($ch);
 		$error = curl_errno($ch);
-		if($error =! 0) {
-			log_message('ERROR','UPLOAD FILE BULK sftp '.$error.'/'.lang('RESP_UPLOAD_SFTP('.$error.')'));
 
+		if($error =! 0) {
+			log_message('ERROR','NOVO UPLOAD FILE BULK SFTP '.$error.'/ '.lang('RESP_UPLOAD_SFTP('.$error.')'));
+			$respUpload->rc = -65;
+			$respUpload->msg = 'No fue posible mover el archivo, por favor vuelve a intentarlo';
 		}
+
 		curl_close ($ch);
 		unlink($uploadBulk.$file);
+
+		return $respUpload;
 	}
 	/**
 	 * @info Método para es cribir el log de la respuesta del servicio

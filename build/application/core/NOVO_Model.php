@@ -60,8 +60,13 @@ class NOVO_Model extends CI_Model {
 	 * @author J. Enrique Peñaloza Piñero.
 	 * @date April 20th, 2019
 	 */
-	public function sendFile($model)
+	public function sendFile($file, $model)
 	{
+		log_message('INFO', 'NOVO sendFile Method Initialized');
+
+		$responseUpload = $this->encrypt_connect->moveFile($file, $this->userName, $model);
+
+		return $this->makeAnswer($responseUpload);
 	}
 	/**
 	 * @info Método armar la respuesta a los modelos
@@ -70,6 +75,11 @@ class NOVO_Model extends CI_Model {
 	 */
 	private function makeAnswer($responseModel)
 	{
+		$this->isResponseRc = (int) $responseModel->rc;
+		$this->response->code = lang('RESP_DEFAULT_CODE');
+		$this->response->title = lang('GEN_SYSTEM_NAME');
+		$this->response->msg = '';
+		$this->response->icon = lang('GEN_ICON_WARNING');
 		$arrayResponse = [
 			'btn1'=> [
 				'text'=> FALSE,
@@ -77,11 +87,6 @@ class NOVO_Model extends CI_Model {
 				'action'=> 'redirect'
 			]
 		];
-		$this->isResponseRc = (int) $responseModel->rc;
-		$this->response->code = lang('RESP_DEFAULT_CODE');
-		$this->response->title = lang('GEN_SYSTEM_NAME');
-		$this->response->msg = '';
-		$this->response->icon = lang('GEN_ICON_WARNING');
 		$this->response->data = $arrayResponse;
 
 		if(!$this->input->is_ajax_request()) {

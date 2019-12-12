@@ -143,8 +143,12 @@ class Novo_Bulk_Model extends NOVO_Model {
 	public function callWs_LoadBulk_Bulk($dataRequest)
 	{
 		$moveFile = TRUE;
-		$this->encrypt_connect->moveFile($dataRequest->file_name, $this->userName, 'LoadBulk');
-		$this->response->code = 0;
+		$response = $this->sendFile($dataRequest->file_name, lang('GEN_LOAD_BULK'));
 
+		if ($this->isResponseRc === 0) {
+
+		}
+
+		return $this->responseToTheView(lang('GEN_LOAD_BULK'));
 	}
 }
