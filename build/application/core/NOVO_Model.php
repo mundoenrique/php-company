@@ -53,28 +53,42 @@ class NOVO_Model extends CI_Model {
 			$responseDecrypt = $this->encrypt_connect->decode($response, $this->userName, $model);
 		}
 
-		$this->isResponseRc = (int) $responseDecrypt->rc;
-		$this->response->code = lang('RESP_DEFAULT_CODE');
-		$this->response->title = lang('GEN_SYSTEM_NAME');
-		$this->response->msg = '';
-		$this->response->icon = lang('GEN_ICON_WARNING');
-		$this->response->data = [
+		return $this->makeAnswer($responseDecrypt);
+	}
+	/**
+	 * @info Método para comunicación con el servicio
+	 * @author J. Enrique Peñaloza Piñero.
+	 * @date April 20th, 2019
+	 */
+	public function sendFile($model)
+	{
+	}
+	/**
+	 * @info Método armar la respuesta a los modelos
+	 * @author J. Enrique Peñaloza Piñero.
+	 * @date December 11th, 2019
+	 */
+	private function makeAnswer($responseModel)
+	{
+		$arrayResponse = [
 			'btn1'=> [
 				'text'=> FALSE,
 				'link'=> base_url(lang('GEN_ENTERPRISE_LIST')),
 				'action'=> 'redirect'
 			]
 		];
+		$this->isResponseRc = (int) $responseModel->rc;
+		$this->response->code = lang('RESP_DEFAULT_CODE');
+		$this->response->title = lang('GEN_SYSTEM_NAME');
+		$this->response->msg = '';
+		$this->response->icon = lang('GEN_ICON_WARNING');
+		$this->response->data = $arrayResponse;
+
 		if(!$this->input->is_ajax_request()) {
 			$this->response->data = new stdClass();
-			$this->response->data->resp = [
-				'btn1'=> [
-					'text'=> FALSE,
-					'link'=> base_url(lang('GEN_ENTERPRISE_LIST')),
-					'action'=> 'redirect'
-				]
-			];
+			$this->response->data->resp = $arrayResponse;;
 		}
+
 		switch($this->isResponseRc) {
 			case -29:
 			case -61:
@@ -86,9 +100,10 @@ class NOVO_Model extends CI_Model {
 				$this->response->icon = lang('GEN_ICON_DANGER');
 				break;
 		}
+
 		$this->response->msg = $this->isResponseRc == 0 ? lang('RESP_RC_0') : $this->response->msg;
 
-		return $responseDecrypt;
+		return $responseModel;
 	}
 	/**
 	 * @info Método enviar el resultado de la consulta a la vista

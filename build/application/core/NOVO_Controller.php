@@ -221,7 +221,7 @@ class NOVO_Controller extends CI_Controller {
 				$this->render->widget->enterpriseList = $enterpriseList->data->list;
 				$this->render->widget->countProducts = $this->products;
 				$this->render->widget->actionForm = 'detalle-producto';
-				$this->render->widget->widgetBtnTitle = lang('GEN_MUST_SELECT_ENTERPRISE');
+
 			}
 
 		}

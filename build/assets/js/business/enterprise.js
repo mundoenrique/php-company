@@ -34,14 +34,6 @@ $(function () {
 		}
 	});
 
-	enterpriseList.on('arrangeComplete', function(event, filteredItems) {
-		/*if(filteredItems.length < 4) {
-			enterpriseListEvent.removeClass('mx-auto')
-		} else {
-			enterpriseListEvent.addClass('mx-auto')
-		}*/
-	});
-
 	enterpriseList.isotope({filter: '.page_1'});
 
 	alphabetical.on('click', 'button', function(e) {
@@ -109,17 +101,6 @@ $(function () {
 		}
 	}
 
-	$('#enterprise-pages a[position="plus"]').on('mouseover', function() {
-		contar = true;
-		console.log('over')
-		pasarpage(1, 1000, 'casa_')
-	});
-
-	$('#enterprise-pages a[position="plus"]').on('mouseleave', function() {
-		contar = false;
-		console.log('leave')
-	});
-
 	var orderPage = function(filterPage, newpage) {
 		var reg = $('.'+filterPage).length;
 		if(reg < 5) {
@@ -171,24 +152,8 @@ $(function () {
 			.find('span')
 			.removeClass('secondary')
 			.addClass('spinner-border-lg mx-auto');
-			insertFormInput(getProducts);
+			insertFormInput(true, getProducts);
 			getProducts.submit();
 		}
 	});
 });
-
-function pasarpage(current, total, filtro)
-{
-	var paginateEvent = {
-		pagesTotal: parseInt($(this).find('#show-page > span').length),
-		currentPage: parseInt($(this).find('.page-current').children().text()),
-		currentFilter: $(this).find('.page-current').children().attr('filter-page'),
-	}
-	if(current <= total && contar)
-	{
-		console.log(current++, filtro+current)
-		pasarpage(current, total, filtro)
-
-	}
-
-}

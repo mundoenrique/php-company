@@ -167,6 +167,7 @@ class Encrypt_Connect {
 
 		}
 		curl_close ($ch);
+		unlink($uploadBulk.$file);
 	}
 	/**
 	 * @info Método para es cribir el log de la respuesta del servicio

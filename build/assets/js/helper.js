@@ -151,8 +151,17 @@ function createButton(dialogMoldal, elementButton, valuesButton) {
  * @author J. Enrique Peñaloza
  * @date November 18th, 2019
  */
-function insertFormInput(form = false) {
-	$('button, select').prop('disabled', true);
+function insertFormInput(disabled, form = false,) {
+	var notDisabled = '#product-select, #enterprise-widget-btn'
+
+	if(disabled) {
+		notDisabled = false;
+	}
+
+	$('form button, form select, form input[type=file]')
+	.not(notDisabled)
+	.prop('disabled', disabled);
+
 	if(form) {
 		ceo_cook = decodeURIComponent(
 			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
@@ -173,12 +182,4 @@ function insertFormInput(form = false) {
 function getPropertyOfElement(property, element) {
 	var element = element || 'body';
 	return $(element).attr(property);
-}
-/**
- * @info función para deshabilitar campos de formulario
- * @author J. Enrique Peñaloza Piñero
- * @date December 11th, 2019
- */
-function disabledform(disable) {
-	$('form input, form select, form button').attr('disabled', disable);
 }

@@ -1,6 +1,5 @@
 'use strict'
 $(function () {
-	disabledform(false);
 	$('.input-file').each(function () {
     var $input = $(this),
       $label = $input.next('.js-label-file'),
@@ -20,7 +19,6 @@ $(function () {
 		validateForms(form);
 
 		if(form.valid()) {
-			disabledform(true);
 			$(this).html(loader);
 			verb = 'POST'; who = 'Bulk'; where = 'LoadBulk';
 			data = {
@@ -29,6 +27,7 @@ $(function () {
 				typeFileText: $('#type-bulk option:selected').text(),
 				formatFile: $('#type-bulk option:selected').attr('format')
 			}
+			insertFormInput(true);
 			callNovoCore(verb, who, where, data, function(response) {
 				console.log(response)
 			});
