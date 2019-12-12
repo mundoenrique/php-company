@@ -6,9 +6,9 @@
 		<div class="flex tertiary">
 			<nav class="main-nav nav-inferior">
 				<ul class="mb-0 h6 light tertiary list-style-none list-inline">
-					<li class="inline"><a class="tertiary" href="<?= base_url('empresas') ?>">Empresas</a></li> /
-					<li class="inline"><a class="tertiary" href="<?= base_url('productos') ?>">Productos</a></li> /
-					<li class="inline"><a class="tertiary" href="<?= base_url('detalle-producto') ?>">Detalle del producto</a>
+					<li class="inline"><a class="tertiary big-modal" href="<?= base_url('empresas') ?>">Empresas</a></li> /
+					<li class="inline"><a class="tertiary big-modal" href="<?= base_url('productos') ?>">Productos</a></li> /
+					<li class="inline"><a class="tertiary big-modal" href="<?= base_url('detalle-producto') ?>">Detalle del producto</a>
 					</li> /
 					<li class="inline"><a class="tertiary" href="#">Cargar lotes</a></li>
 				</ul>

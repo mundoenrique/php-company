@@ -5,8 +5,8 @@
 		<div class="flex tertiary">
 			<nav class="main-nav nav-inferior">
 				<ul class="mb-0 h6 light tertiary list-inline list-style-none">
-					<li class="inline"><a class="tertiary" href="<?= base_url('empresas') ?>">Empresas</a></li> /
-					<li class="inline"><a class="tertiary" href="<?= base_url('productos') ?>">Productos</a></li> /
+					<li class="inline"><a class="tertiary big-modal" href="<?= base_url('empresas') ?>">Empresas</a></li> /
+					<li class="inline"><a class="tertiary big-modal" href="<?= base_url('productos') ?>">Productos</a></li> /
 					<li class="inline"><a class="tertiary" href="#">Detalle del producto</a></li>
 				</ul>
 			</nav>
@@ -32,7 +32,7 @@
 
 				<div class="flex mt-3 flex-column items-start">
 					<?php if($this->verify_access->verifyAuthorization('TEBCAR')): ?>
-					<a class="btn btn-link btn-small-xs mx-4 px-0" href="<?= lang('GEN_LINK_LOT_LOAD') ?>"><?= lang('GEN_MENU_LOT_LOAD') ?></a>
+					<a class="btn btn-link btn-small-xs mx-4 px-0 big-modal" href="<?= lang('GEN_LINK_LOT_LOAD') ?>"><?= lang('GEN_MENU_LOT_LOAD') ?></a>
 					<?php endif; ?>
 					<?php if($this->verify_access->verifyAuthorization('TEBAUT')): ?>
 					<a class="btn btn-link btn-small-xs mx-4 px-0" href="#">
