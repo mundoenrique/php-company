@@ -546,11 +546,11 @@ nav ul.menu li.menu-item a {
 
 }
 
-#nav2 ul li > ul li a {
+#nav2 ul li>ul li a {
 	font-size: 12px !important;
 }
 
-.menu li > ul {
+.menu li>ul {
 	display: none;
 	position: fixed;
 	z-index: 999;
@@ -723,7 +723,7 @@ span.icon:before {
 	padding: 0;
 }
 
-.kwicks.kwicks-processed > * {
+.kwicks.kwicks-processed>* {
 	margin: 0;
 	position: absolute;
 }
@@ -1586,6 +1586,9 @@ ul#brands li p img {
 	float: left;
 	width: 640px;
 	padding: 10px;
+	-webkit-box-shadow: rgba(51, 51, 51, 0.5) 0 1px 2px;
+	-moz-box-shadow: rgba(51, 51, 51, 0.5) 0 1px 2px;
+	box-shadow: rgba(51, 51, 51, 0.5) 0 1px 2px;
 }
 
 #selection-1 {
@@ -3284,7 +3287,7 @@ span.jPag-snext-img {
 
 .tooltip-funcionesAU {
 	color: #FFF !important;
-	background:#0072C0!important;
+	background: #0072C0 !important;
 	border: medium none !important;
 	border-radius: 6px 6px 6px 6px;
 	min-width: 20px;
@@ -5393,6 +5396,7 @@ button.green:hover {
 	min-width: 88px !important;
 	text-align: center !important;
 }
+
 .validate-error {
 	border-color: red;
 }
@@ -5662,9 +5666,11 @@ fieldset {
 	border: 0px;
 	box-shadow: 0px 0px 13px 2px rgba(0, 0, 0, 0);
 }
+
 .ui-icon-triangle-1-n {
 	margin-left: 115px;
 }
+
 .ui-menu-divider {
 	top: 15px;
 }
