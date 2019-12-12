@@ -40,12 +40,20 @@ class CallModels extends Novo_Controller {
 		log_message('DEBUG', 'NOVO ['.$this->appUserName.'] REQUEST FROM THE VIEW '.json_encode($this->dataRequest ,JSON_UNESCAPED_UNICODE));
 
 		unset($this->dataRequest);
-		$valid = $this->verify_access->validateForm($this->rule, $this->countryUri, $this->appUserName);
+		$valid = TRUE;
+		$deleteFile = FALSE;
 
-		if($_FILES && $valid) {
+		if($_FILES) {
+			$deleteFile = TRUE;
 			$valid = $this->manageFile();
-		} else if($_FILES) {
-			unset($_FILES);
+		}
+
+		if($deleteFile) {
+			unlink($_FILES);
+		}
+
+		if($valid) {
+			$valid = $this->verify_access->validateForm($this->rule, $this->countryUri, $this->appUserName);
 		}
 
 		if($valid) {
@@ -69,7 +77,7 @@ class CallModels extends Novo_Controller {
 	{
 		log_message('INFO', 'NOVO CallModels: manageFile Method Initialized');
 
-		$config['upload_path'] = $this->config->item('UPLOAD_BULK');
+		$config['upload_path'] = $this->config->item('upload_bulk').'/'.'bulk/';
 		$config['allowed_types'] = 'txt|xls|xlsx';
 		$ext =  explode('.', $_FILES['file']['name']);
 		$ext = end($ext);
@@ -87,13 +95,21 @@ class CallModels extends Novo_Controller {
 
 		if(!$this->upload->do_upload('file')) {
 			$errors = $this->upload->display_errors();
-			log_message('DEBUG', 'NOVO  ['.$this->appUserName.'] VALIDATION '.$rule.' ERRORS: '.json_encode($errors, JSON_UNESCAPED_UNICODE));
+
+			log_message('DEBUG', 'NOVO  ['.$this->appUserName.'] VALIDATION FILEUPLOAD ERRORS: '.json_encode($errors, JSON_UNESCAPED_UNICODE));
+
+			return FALSE;
 		} else {
-			$data = array('upload_data' => $this->upload->data());
-			$nombreArchivo = $data["upload_data"]["raw_name"];//NOMBRE ARCHIVO SIN EXTENSION
-			$rutaArchivo = $data["upload_data"]["file_path"];
-			$extensionArchivo = $data["upload_data"]["file_ext"];
-			$fileInfo = $this->upload->data();
+			$uploadData = (object) $this->upload->data();
+			$_POST['file_name'] = $uploadData->file_name;
+			$_POST['file_path'] = $uploadData->file_path;
+			$_POST['raw_name'] = $uploadData->raw_name;
+			$_POST['file_ext'] = $uploadData->file_ext;
+			unset($_POST['typeFileText']);
+
+			log_message('DEBUG', 'NOVO  ['.$this->appUserName.'] result fileupload: '.json_encode($uploadData, JSON_UNESCAPED_UNICODE));
+
+			return TRUE;
 		}
 	}
 }

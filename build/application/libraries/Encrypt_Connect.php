@@ -89,6 +89,7 @@ class Encrypt_Connect {
 	public function connectWs($request, $userName, $model)
 	{
 		log_message('INFO', 'NOVO Encrypt_Connect: connectWs Method Initialized');
+
 		$fail = FALSE;
 		$urlWS = $this->CI->config->item('urlWS').'eolwebInterfaceWS';
 
@@ -114,6 +115,7 @@ class Encrypt_Connect {
 		log_message('DEBUG','NOVO ['.$userName.'] RESPONSE CURL HTTP CODE: ' . $httpCode);
 
 		$failResponse = json_decode($response);
+
 		if(is_object($failResponse)) {
 			$response = $failResponse;
 			$fail = TRUE;
@@ -137,6 +139,34 @@ class Encrypt_Connect {
 		}
 
 		return $response;
+	}
+	/**
+	 * @info método para enviar archivos al servidor de backend
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date December113th, 2019
+	 */
+	public function moveFile($file, $userName, $model)
+	{
+		log_message('INFO', 'NOVO Encrypt_Connect: moveFile Method Initialized');
+		$urlBulkService = $this->CI->config->item('url_bulk_service');
+		$userpassBulk = $this->CI->config->item('userpass_bulk');
+		$uploadBulk = $this->CI->config->item('upload_bulk').'/'.'bulk/';
+
+		$ch = curl_init();
+		$fp = fopen($uploadBulk.$file, 'r');
+		curl_setopt($ch, CURLOPT_URL, $urlBulkService.$file);
+		curl_setopt($ch, CURLOPT_USERPWD, $userpassBulk);
+		curl_setopt($ch, CURLOPT_UPLOAD, 1);
+		curl_setopt($ch, CURLOPT_PROTOCOLS, CURLPROTO_SFTP);
+		curl_setopt($ch, CURLOPT_INFILE, $fp);
+		curl_setopt($ch, CURLOPT_INFILESIZE, filesize($uploadBulk.$file));
+		curl_exec ($ch);
+		$error = curl_errno($ch);
+		if($error =! 0) {
+			log_message('ERROR','UPLOAD FILE BULK sftp '.$error.'/'.lang('RESP_UPLOAD_SFTP('.$error.')'));
+
+		}
+		curl_close ($ch);
 	}
 	/**
 	 * @info Método para es cribir el log de la respuesta del servicio

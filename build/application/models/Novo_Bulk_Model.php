@@ -142,9 +142,9 @@ class Novo_Bulk_Model extends NOVO_Model {
 	 */
 	public function callWs_LoadBulk_Bulk($dataRequest)
 	{
-		log_message('INFO', 'NOVO Bulk Model: LoadBulk method Initialized');
-		log_message('INFO', 'NOVO ----------------'.json_encode($dataRequest));
+		$moveFile = TRUE;
+		$this->encrypt_connect->moveFile($dataRequest->file_name, $this->userName, 'LoadBulk');
+		$this->response->code = 0;
 
-		$this->className = '';
 	}
 }

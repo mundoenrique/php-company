@@ -39,8 +39,9 @@ $config['urlServ'] = SERVICE_URL;
 $config['client_id'] = SERVICE_CLIENT_ID;
 $config['client_secret'] = SERVICE_CLIENT_SECRET;
 // Bulk upload management
+$config['upload_bulk'] = BULK_LOCAL_PATH;
+$config['userpass_bulk'] = BULK_FTP_USERNAME.':'.BULK_FTP_PASSWORD;
 $config['LOTES_USERPASS'] = BULK_FTP_USERNAME.':'.BULK_FTP_PASSWORD;
-$config['USERPASS_BULK'] = BULK_FTP_USERNAME.':'.BULK_FTP_PASSWORD;
 $config['format_date'] = 'j/m/Y';
 $config['format_time'] = 'g:i A';
 $config['cypher_base'] = CYPHER_BASE;
