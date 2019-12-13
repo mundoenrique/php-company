@@ -39,7 +39,7 @@ $info;
 			</li>
 			/
 			<li class="breadcrumb-item-current">
-				<a><?php echo "Detalle del Lote";//echo lang('POSITION_INVENINNO'); ?></a>
+				<a><?php echo "Detalle del lote";//echo lang('POSITION_INVENINNO'); ?></a>
 			</li>
 		</ol>
 
@@ -47,7 +47,7 @@ $info;
 
 		<div id="top-batchs">
 			<span aria-hidden="true" class="icon" data-icon="&#xe03c;"></span>
-			<?php echo "Detalle del Lote";//echo lang('TITULO_LOTES_DETALLE'); ?>
+			<?php echo "Detalle del lote";//echo lang('TITULO_LOTES_DETALLE'); ?>
 		</div>
 
 		<div id="lotes-contenedor">
