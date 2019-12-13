@@ -755,10 +755,10 @@ function validarFields()
 		valCorreo.removeClass('textbox-transfer');
 	}
 
-	if(valCelular.val().length > 13)
+	if(valCelular.val().length < 10 || valCelular.val().length > 13)
 	{
 		errorCelular.show();
-		errorCelular.html('El campo solo debe tener máximo 13 números')
+		errorCelular.html('El campo debe tener mínimo 10 dígitos y máximo 13 dígitos')
 		validInput = false;
 		valCelular.addClass('textbox-transfer');
 
