@@ -4402,9 +4402,15 @@ ul#brands li p img {
 #table-lote-detail thead th {
 	max-width: 70px;
 	min-width: 70px;
-	padding: 3px;
+	padding: 5px;
 	text-align: center;
 	font-size: 14px;
+}
+
+td.cedu_bp {
+
+	max-width: 100px!important;
+	min-width: 90px!important;
 }
 
 #table-lote-detail tbody td#icon-batchs {
@@ -5897,7 +5903,7 @@ center button.novo-btn-secondary {
 	text-align: center;
 	padding: 5px;
 	color: #555;
-	/* max-width: 95px; */
+	max-width: 95px;
 	min-width: 80px;
 }
 
@@ -6252,8 +6258,8 @@ span.jPag-snext-img {
 
 .OSinfo td {
 	color: #0F265C!important;
-	max-width: 80px !important;
-	min-width: 65px !important;
+	max-width: 75px !important;
+	min-width: 75px !important;
 }
 
 .OShead-2 {
