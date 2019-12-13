@@ -4431,9 +4431,9 @@ td.cedu_bp {
 	max-width: 70px;
 	min-width: 70px;
 	float: left;
-	padding: 3px;
+	padding: 5px;
 	text-align: center;
-	font-size: 14px;
+	font-size: 12px;
 }
 
 #table-lote-detail>#td-nombre-2 {
