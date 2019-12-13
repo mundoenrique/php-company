@@ -734,7 +734,8 @@ textarea.form-control {
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	padding: 0 10px;
-  cursor: pointer;
+	cursor: pointer;
+	margin-top: 29px;
 }
 
 .input-file + .js-label-file.has-file{
@@ -1922,6 +1923,8 @@ textarea.form-control {
 .yellow        { color: var(--yellow) !important }
 .color-inherit { color: inherit !important }
 
+.pink-salmon   { color: var(--pink-salmon) !important }
+
 /* Decoration */
 .text-decoration-none { text-decoration: none !important }
 .underline { text-decoration: underline !important }
@@ -1963,6 +1966,7 @@ i[class*=" icon-"]:before {
 .icon-user:before          { content: "\e015"; }
 .icon-key:before 					 { content: "\e01a"; }
 .icon-lock:before 				 { content: "\e01b"; }
+.icon-unlock:before 			 { content: "\e01c"; }
 .icon-card:before          { content: "\e029"; }
 .icon-thumbs-up:before     { content: "\e032"; }
 .icon-arrow-up:before      { content: "\e03b"; }
@@ -2355,6 +2359,7 @@ i[class*=" icon-"]:before {
 
 .dropdown-user  li {
 	display: block;
+	position: relative;
 	line-height: 2.8em;
 	width: 13.1em !important;
 	font-size: var(--h6);
@@ -2384,9 +2389,23 @@ i[class*=" icon-"]:before {
 	color: var(--primary);
 }
 
-.dropdown-user li:hover:last-child {
+.dropdown-user ul,
+.dropdown-user li:hover:last-child,
+.dropdown-user ul li:hover:last-child {
   border-bottom-left-radius: 5px 5px;
   border-bottom-right-radius: 5px 5px;
+}
+
+.dropdown-user li ul {
+	display: none;
+	position: absolute;
+	right:-158px;
+	top:0px;
+	box-shadow: 1px 2px 5px -1px rgba(0,0,0,.15), 0 4px 14px -1px rgba(0,0,0,.1);
+}
+
+.dropdown-user li:hover > ul {
+	display: block;
 }
 
 /* Paginador y main-nav */
@@ -2702,6 +2721,10 @@ table#resultsAccount thead th:nth-child(7){
 	width: 170px !important;
 }
 
+/* #pendingLots td:last-child {
+	text-align: start !important;
+} */
+
 /* Widgets */
 
 .widget {
@@ -2752,6 +2775,19 @@ ul.steps li.step-item i {
 
 .fade:not(.show) {
   opacity: 0;
+}
+
+.fade-in {
+	animation: fadein .7s linear;
+}
+
+@keyframes fadein {
+	from {
+			opacity:0;
+	}
+	to {
+			opacity:1;
+	}
 }
 
 .collapse:not(.show) {

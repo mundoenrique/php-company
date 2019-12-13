@@ -23,7 +23,7 @@
 					<div class="flex px-5 pb-4 items-center row">
 						<div class="form-group col">
 							<label class="mt-1 h6" or="">Tipo de Lote</label>
-							<select id="type-bulk" name="type-bulk" class="select-box custom-select mb-3 h6 w-100">
+							<select id="type-bulk" name="type-bulk" class="select-box custom-select h6 w-100">
 								<?php foreach($typesLot AS $pos => $type): ?>
 								<option value="<?= $type->key; ?>" format="<?= $type->format; ?>"
 									<?= $pos != 0 ?: 'selected disabled' ?>><?= $type->text; ?></option>
@@ -31,9 +31,9 @@
 							</select>
 							<div class="help-block"></div>
 						</div>
-						<div class="form-group col-6 bg-color mt-1">
+						<div class="form-group col-6 bg-color">
 							<input type="file" name="file-bulk" id="file-bulk" class="input-file">
-							<label for="file-bulk" class="label-file js-label-file">
+							<label for="file-bulk" class="label-file js-label-file mb-0">
 								<i class="icon icon-upload mr-1 pr-3 right"></i>
 								<span class="js-file-name h6 regular">Clic aquí para seleccionar el archivo de Lote.</span>
 							</label>
