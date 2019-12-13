@@ -149,7 +149,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 			$this->className = 'com.novo.objects.MO.ConfirmarLoteMO';
 			$this->dataAccessLog->modulo = 'Lotes';
 			$this->dataAccessLog->function = 'Cargar Lotes';
-			$this->dataAccessLog->operation = 'Cargar lote';
+			$this->dataAccessLog->operation = 'Cargar Archivo';
 
 			$this->dataRequest->idOperation = 'cargarArchivo';
 			$this->dataRequest->codProducto = $this->session->productInf->productPrefix;
