@@ -43,12 +43,12 @@ $(function() {
 				select: true
 			}
 			callNovoCore(verb, who, where, data, function(response) {
-				resproctList[response.code](response);
+				respProctList[response.code](response);
 			})
 		}
 	});
 
-	const resproctList = {
+	const respProctList = {
 		0: function(response) {
 			WidgetSelcetP.find('option:selected').text(lang.GEN_SELECT_PRODUCTS);
 			goToDetail = true;

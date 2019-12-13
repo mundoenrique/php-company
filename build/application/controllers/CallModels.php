@@ -71,8 +71,6 @@ class CallModels extends Novo_Controller {
 	{
 		log_message('INFO', 'NOVO CallModels: manageFile Method Initialized');
 
-		$config['upload_path'] = $this->config->item('upload_bulk');
-		$config['allowed_types'] = 'txt|xls|xlsx';
 		$ext =  explode('.', $_FILES['file']['name']);
 		$ext = end($ext);
 		$pattern = [];
@@ -82,9 +80,11 @@ class CallModels extends Novo_Controller {
 		$replace[0] = '';
 		$replace[1] = '/_/';
 		$filename = '_'.substr(preg_replace($pattern, $replace, $_POST['typeFileText']), 0, 17);
-		$filename = $filename.'_'.time();
-		$filename = mb_strtolower($this->countryUri.$filename.'.'.$ext);
-		$config['file_name'] = $filename;
+		$filenameT = $filename.'_'.time();
+		$filenameT = mb_strtolower($this->countryUri.$filenameT.'.'.$ext);
+		$config['file_name'] = $filenameT;
+		$config['upload_path'] = $this->config->item('upload_bulk');
+		$config['allowed_types'] = 'txt|xls|xlsx';
 		$this->load->library('upload', $config);
 
 		if(!$this->upload->do_upload('file')) {
@@ -95,10 +95,10 @@ class CallModels extends Novo_Controller {
 			$valid = FALSE;
 		} else {
 			$uploadData = (object) $this->upload->data();
-			$_POST['file_name'] = $uploadData->file_name;
-			$_POST['file_path'] = $uploadData->file_path;
-			$_POST['raw_name'] = $uploadData->raw_name;
-			$_POST['file_ext'] = $uploadData->file_ext;
+			$_POST['fileName'] = $uploadData->file_name;
+			$_POST['filePath'] = $uploadData->file_path;
+			$_POST['rawName'] = $this->countryUri.$filename;
+			$_POST['fileExt'] = substr($uploadData->file_ext, 1);
 			unset($_POST['typeFileText'], $_POST['file']);
 
 			$valid = TRUE;

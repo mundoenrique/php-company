@@ -170,7 +170,7 @@ class Encrypt_Connect {
 
 		log_message('DEBUG','NOVO ['.$userName.'] UPLOAD FILE BULK SFTP '.$model.': '.$result.' '.lang('RESP_UPLOAD_SFTP('.$result.')'));
 
-		if($result =! 0) {
+		if($result != 0) {
 			$respUpload->rc = -105;
 		}
 

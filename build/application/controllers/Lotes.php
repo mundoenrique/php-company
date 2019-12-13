@@ -2775,7 +2775,7 @@ class Lotes extends CI_Controller {
 			//VERIFICAR SI NO SUBIO ARCHIVO
 			if ( ! $this->upload->do_upload()){
 				//ERROR
-				$error = array('ERROR' => 'No se puede cargar el archivo. Verifiquelo e intente de nuevo');// $this->upload->display_errors());
+				$error = array('ERROR' => 'No se puede cargar el archivo. Verificalo e intenta de nuevo');// $this->upload->display_errors());
 				$this->output->set_content_type('application/json')->set_output(json_encode($error));
 			}else{
 				//VALIDO

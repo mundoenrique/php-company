@@ -1,5 +1,10 @@
 'use strict'
 $(function () {
+	var file = $('#file-bulk');
+	var inputFile = file.next('.js-label-file').html().trim();
+	var form = $('#upload-file-form');
+	var SelectTypeBulk = $('#type-bulk');
+
 	$('.input-file').each(function () {
     var $input = $(this),
       $label = $input.next('.js-label-file'),
@@ -14,25 +19,39 @@ $(function () {
 
 	$('#upload-file-btn').on('click', function(e) {
 		e.preventDefault();
-		var form = $('#upload-file-form');
-		btnText = $(this).text();
+		var btnAction = $(this);
+		btnText = btnAction.text().trim();
 		validateForms(form);
 
 		if(form.valid()) {
-			$(this).html(loader);
+			btnAction.html(loader);
 			verb = 'POST'; who = 'Bulk'; where = 'LoadBulk';
 			data = {
-				file: $('#file-bulk')[0].files[0],
-				typeFile: $('#type-bulk').val(),
+				file: file[0].files[0],
+				typeFile: SelectTypeBulk.val(),
 				typeFileText: $('#type-bulk option:selected').text(),
 				formatFile: $('#type-bulk option:selected').attr('format')
 			}
 			insertFormInput(true);
 			callNovoCore(verb, who, where, data, function(response) {
-				console.log(response)
+				btnAction.html(btnText);
+				insertFormInput(false);
+				file.val('');
+				file.next('.js-label-file').html(inputFile);
+				SelectTypeBulk.prop('selectedIndex', 0);
+				respLoadBulk[response.code](response);
 			});
 		}
 	});
+
+	const respLoadBulk = {
+		0: function(response) {
+
+		},
+		3: function(response) {
+			notiSystem(response.title, response.msg, response.icon, response.data);
+		}
+	}
 
   $('#pendingLots').DataTable({
 		drawCallback: function(d) {

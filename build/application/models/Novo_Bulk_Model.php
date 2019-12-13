@@ -143,10 +143,40 @@ class Novo_Bulk_Model extends NOVO_Model {
 	public function callWs_LoadBulk_Bulk($dataRequest)
 	{
 		$moveFile = TRUE;
-		$response = $this->sendFile($dataRequest->file_name, lang('GEN_LOAD_BULK'));
+		$response = $this->sendFile($dataRequest->fileName, lang('GEN_LOAD_BULK'));
 
 		if ($this->isResponseRc === 0) {
+			$this->className = 'com.novo.objects.MO.ConfirmarLoteMO';
+			$this->dataAccessLog->modulo = 'Lotes';
+			$this->dataAccessLog->function = 'Cargar Lotes';
+			$this->dataAccessLog->operation = 'Cargar lote';
 
+			$this->dataRequest->idOperation = 'cargarArchivo';
+			$this->dataRequest->codProducto = $this->session->productInf->productPrefix;
+			$this->dataRequest->formato = $dataRequest->fileExt;
+			$this->dataRequest->nombre = $dataRequest->rawName;
+			$this->dataRequest->nombreArchivo = $dataRequest->fileName;
+			$this->dataRequest->idEmpresa = $this->session->enterpriseInf->idFiscal;
+			$this->dataRequest->codCia = $this->session->enterpriseInf->enterpriseCode;
+			$this->dataRequest->idTipoLote = $dataRequest->typeFile;
+			$this->dataRequest->formatoLote = $dataRequest->formatFile;
+			$this->dataRequest->usuario = $this->userName;
+
+			$this->response->data = [
+				'btn1'=> [
+					'action'=> 'close'
+				]
+			];
+
+		} else {
+			$this->response->code = 3;
+			$this->response->title = 'Cargar Lote';
+			$this->response->msg = "No fue posible cargar el lote, por favor verícalo e intenta de nuevo";
+			$this->response->data = [
+				'btn1'=> [
+					'action'=> 'close'
+				]
+			];
 		}
 
 		return $this->responseToTheView(lang('GEN_LOAD_BULK'));
