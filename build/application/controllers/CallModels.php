@@ -41,15 +41,9 @@ class CallModels extends Novo_Controller {
 
 		unset($this->dataRequest);
 		$valid = TRUE;
-		$deleteFile = FALSE;
 
-		if($_FILES) {
-			$deleteFile = TRUE;
+		if(!empty($_FILES)) {
 			$valid = $this->manageFile();
-		}
-
-		if($deleteFile) {
-			unlink($this->config->item('upload_bulk').'/'.'bulk/'.$_FILES['file']['name']);
 		}
 
 		if($valid) {
@@ -77,7 +71,7 @@ class CallModels extends Novo_Controller {
 	{
 		log_message('INFO', 'NOVO CallModels: manageFile Method Initialized');
 
-		$config['upload_path'] = $this->config->item('upload_bulk').'/'.'bulk/';
+		$config['upload_path'] = $this->config->item('upload_bulk');
 		$config['allowed_types'] = 'txt|xls|xlsx';
 		$ext =  explode('.', $_FILES['file']['name']);
 		$ext = end($ext);
@@ -87,7 +81,7 @@ class CallModels extends Novo_Controller {
 		$pattern[1] = '/\(/';
 		$replace[0] = '';
 		$replace[1] = '/_/';
-		$filename = '_'.substr(preg_replace($pattern, $replace, $_POST['typeFileText']), 0, 15);
+		$filename = '_'.substr(preg_replace($pattern, $replace, $_POST['typeFileText']), 0, 17);
 		$filename = $filename.'_'.time();
 		$filename = mb_strtolower($this->countryUri.$filename.'.'.$ext);
 		$config['file_name'] = $filename;
@@ -98,18 +92,18 @@ class CallModels extends Novo_Controller {
 
 			log_message('DEBUG', 'NOVO  ['.$this->appUserName.'] VALIDATION FILEUPLOAD ERRORS: '.json_encode($errors, JSON_UNESCAPED_UNICODE));
 
-			return FALSE;
+			$valid = FALSE;
 		} else {
 			$uploadData = (object) $this->upload->data();
 			$_POST['file_name'] = $uploadData->file_name;
 			$_POST['file_path'] = $uploadData->file_path;
 			$_POST['raw_name'] = $uploadData->raw_name;
 			$_POST['file_ext'] = $uploadData->file_ext;
-			unset($_POST['typeFileText']);
+			unset($_POST['typeFileText'], $_POST['file']);
 
-			log_message('DEBUG', 'NOVO  ['.$this->appUserName.'] result fileupload: '.json_encode($uploadData, JSON_UNESCAPED_UNICODE));
-
-			return TRUE;
+			$valid = TRUE;
 		}
+
+		return $valid;
 	}
 }

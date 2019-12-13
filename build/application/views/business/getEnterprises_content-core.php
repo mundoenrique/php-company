@@ -71,9 +71,8 @@
 	<div id="enterprise-pages" class="visible">
 		<div class="pagination page-number flex mb-5 py-5 flex-auto justify-center">
 			<nav class="h4">
-				<?php if($recordsPage >= 3): ?>
+				<?php if($recordsPage >= 4): ?>
 				<a href="javascript:" position="first"><?= lang('ENTERPRISE_FIRST_PAGE'); ?></a>
-				<a href="javascript:" position="minus">««</a>
 				<?php endif; ?>
 				<a href="javascript:" position="prev">«</a>
 			</nav>
@@ -86,8 +85,7 @@
 			</div>
 			<nav class="h4">
 				<a href="javascript:" position="next">»</a>
-				<?php if($recordsPage >= 3): ?>
-				<a href="javascript:" position="plus">»»</a>
+				<?php if($recordsPage >= 4): ?>
 				<a href="javascript:" position="last"><?= lang('ENTERPRISE_LAST_PAGE'); ?></a>
 				<?php endif; ?>
 			</nav>

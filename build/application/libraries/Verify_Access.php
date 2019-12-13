@@ -116,14 +116,20 @@ class Verify_Access {
 
 		$auth = FALSE;
 		$user = $user ?: $this->user;
+		$freeAccess = ['login', 'finishSession', 'terms'];
+		$auth = in_array($module, $freeAccess);
 
 		switch($module) {
-			case 'login':
-			case 'benefits':
-			case 'terms':
 			case 'recoverPass':
-			case 'finishSession':
-				$auth = TRUE;
+			case 'benefits':
+				$clients = ['novo', 'pichincha'];
+				$auth = in_array($this->CI->config->item('client'), $clients);
+				break;
+			case 'terms':
+				$clients = ['pichincha', 'banco-bog'];
+				if(in_array($this->CI->config->item('client'), $clients)) {
+					$auth = $this->CI->session->flashdata('changePassword');
+				}
 				break;
 			case 'changePassword':
 				$auth = ($this->CI->session->flashdata('changePassword') != NULL);
@@ -139,7 +145,7 @@ class Verify_Access {
 				$auth = ($this->CI->session->has_userdata('enterpriseInf') && $countryUri === 'bdb');
 				break;
 			case 'getPendingLots':
-				$auth = $this->verifyAuthorization('TEBCAR');
+				$auth = ($this->CI->session->has_userdata('enterpriseInf') && $this->verifyAuthorization('TEBCAR'));
 				break;
 		}
 

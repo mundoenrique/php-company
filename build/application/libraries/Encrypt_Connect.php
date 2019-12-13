@@ -151,30 +151,31 @@ class Encrypt_Connect {
 
 		$urlBulkService = $this->CI->config->item('url_bulk_service');
 		$userpassBulk = $this->CI->config->item('userpass_bulk');
-		$uploadBulk = $this->CI->config->item('upload_bulk').'/'.'bulk/';
+		$uploadBulk = $this->CI->config->item('upload_bulk');
 		$respUpload = new stdClass;
 		$respUpload->rc = 0;
 
 		log_message('INFO', 'NOVO UPLOAD FILE BY: '.$urlBulkService.' AND: '.$userpassBulk);
 
 		$ch = curl_init();
-		$fp = fopen($uploadBulk.$file, 'r');
+		$Fclose = $fOpen = fopen($uploadBulk.$file, 'r');
 		curl_setopt($ch, CURLOPT_URL, $urlBulkService.$file);
 		curl_setopt($ch, CURLOPT_USERPWD, $userpassBulk);
 		curl_setopt($ch, CURLOPT_UPLOAD, 1);
 		curl_setopt($ch, CURLOPT_PROTOCOLS, CURLPROTO_SFTP);
-		curl_setopt($ch, CURLOPT_INFILE, $fp);
+		curl_setopt($ch, CURLOPT_INFILE, $fOpen);
 		curl_setopt($ch, CURLOPT_INFILESIZE, filesize($uploadBulk.$file));
 		curl_exec ($ch);
-		$error = curl_errno($ch);
+		$result = curl_errno($ch);
 
-		if($error =! 0) {
-			log_message('ERROR','NOVO UPLOAD FILE BULK SFTP '.$error.'/ '.lang('RESP_UPLOAD_SFTP('.$error.')'));
-			$respUpload->rc = -65;
-			$respUpload->msg = 'No fue posible mover el archivo, por favor vuelve a intentarlo';
+		log_message('DEBUG','NOVO ['.$userName.'] UPLOAD FILE BULK SFTP '.$model.': '.$result.' '.lang('RESP_UPLOAD_SFTP('.$result.')'));
+
+		if($result =! 0) {
+			$respUpload->rc = -105;
 		}
 
 		curl_close ($ch);
+		fclose($Fclose);
 		unlink($uploadBulk.$file);
 
 		return $respUpload;

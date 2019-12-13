@@ -98,7 +98,10 @@ class NOVO_Model extends CI_Model {
 			case -29:
 			case -61:
 				$this->response->msg = lang('RESP_DUPLICATED_SESSION');
-				$this->session->sess_destroy();
+				if($this->session->has_userdata('logged') || $this->session->has_userdata('userId')) {
+					$this->load->model('Novo_User_Model', 'finishSession');
+					$this->finishSession->callWs_FinishSession_User();
+				}
 				break;
 			default:
 				$this->response->msg = lang('RESP_MESSAGE_SYSTEM');
