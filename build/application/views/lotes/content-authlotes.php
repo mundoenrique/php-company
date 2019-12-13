@@ -115,9 +115,14 @@ if(!in_array('tebeli', $funciones)){
 																	if($orden=='0' || $orden=='1'  || $orden==''){
 																			echo "<a ".$borrar." id='borrar' title='Eliminar' idlote='$firmar->acidlote' numlote='$firmar->acnumlote' ctipolote='$firmar->ctipolote'><span aria-hidden='true' class='icon' data-icon='&#xe067;'></span></a>";
 																	}
-															echo "<a id='detalle' title='Ver lote' idlote='$firmar->acidlote'><span aria-hidden='true' class='icon' data-icon='&#xe003;'></span></a>";
-															echo "</td>";
-													echo "</tr>";
+																	if($firmar->ctipolote == 'Z' || $firmar->ctipolote == 'Y'){
+																		echo '';
+																	}else {
+																		echo "<a id='detalle' title='Ver lote' idlote='$firmar->acidlote'><span aria-hidden='true' class='icon' data-icon='&#xe003;'></span></a>";
+																		echo "</td>";
+																echo "</tr>";
+																	}
+
 																	}
 							echo "</tbody></table>";
 									echo '</div>';
