@@ -3,7 +3,7 @@ $pais = $this->uri->segment(1);
 $urlBaseA = $this->config->item('base_url');
 $urlBase = $urlBaseA.$pais;
 $urlCdn = get_cdn();
-
+echo "aquiiii";
 ?>
 
 <div id="content-products">
@@ -34,7 +34,7 @@ $urlCdn = get_cdn();
 		</li>
 		/
 		<li class="breadcrumb-item-current">
-			<a href="<?= $urlBase; ?>/servicios/transferencia-maestra" rel="section">
+			<a href="<?= $urlBase; ?>/servicios/consulta-tarjetas" rel="section">
 				<?= lang('BREADCRUMB_CONSTARJETA'); ?>
 			</a>
 		</li>
