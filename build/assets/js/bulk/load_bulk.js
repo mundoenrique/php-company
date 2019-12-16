@@ -28,9 +28,9 @@ $(function () {
 			verb = 'POST'; who = 'Bulk'; where = 'LoadBulk';
 			data = {
 				file: file[0].files[0],
-				typeFile: SelectTypeBulk.val(),
-				typeFileText: $('#type-bulk option:selected').text(),
-				formatFile: $('#type-bulk option:selected').attr('format')
+				typeBulk: SelectTypeBulk.val(),
+				formatBulk: $('#type-bulk option:selected').attr('format'),
+				typeBulkText: $('#type-bulk option:selected').text()
 			}
 			insertFormInput(true);
 			callNovoCore(verb, who, where, data, function(response) {
@@ -45,11 +45,30 @@ $(function () {
 	});
 
 	const respLoadBulk = {
-		0: function(response) {
-
+		2: function(response) {
+			notiSystem(response.title, response.msg, response.icon, response.data);
 		},
 		3: function(response) {
-			notiSystem(response.title, response.msg, response.icon, response.data);
+			var msgModal = '';
+
+			$.each(response.msg, function(item, content) {
+				if(item == 'header') {
+					$.each(content, function(index, value) {
+						msgModal+= '<h5>'+value+'</h5>';
+					});
+				}
+
+				if(item == 'fields') {
+					$.each(content, function(index, value) {
+						msgModal+= '<h5>'+index+'</h5>';
+						$.each(value, function(pos, val) {
+							msgModal+= '<h6>'+val+'</h6>';
+						})
+					});
+				}
+			});
+
+			notiSystem(response.title, msgModal, response.icon, response.data);
 		}
 	}
 

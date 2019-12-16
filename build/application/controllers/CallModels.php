@@ -79,12 +79,12 @@ class CallModels extends Novo_Controller {
 		$pattern[1] = '/\(/';
 		$replace[0] = '';
 		$replace[1] = '/_/';
-		$filename = '_'.substr(preg_replace($pattern, $replace, $_POST['typeFileText']), 0, 17);
+		$filename = '_'.substr(preg_replace($pattern, $replace, $_POST['typeBulkText']), 0, 17);
 		$filenameT = $filename.'_'.time();
 		$filenameT = mb_strtolower($this->countryUri.$filenameT.'.'.$ext);
 		$config['file_name'] = $filenameT;
 		$config['upload_path'] = $this->config->item('upload_bulk');
-		$config['allowed_types'] = 'txt|xls|xlsx';
+		$config['allowed_types'] = 'xls|txt|xlsx';
 		$this->load->library('upload', $config);
 
 		if(!$this->upload->do_upload('file')) {
@@ -99,7 +99,7 @@ class CallModels extends Novo_Controller {
 			$_POST['filePath'] = $uploadData->file_path;
 			$_POST['rawName'] = $this->countryUri.$filename;
 			$_POST['fileExt'] = substr($uploadData->file_ext, 1);
-			unset($_POST['typeFileText'], $_POST['file']);
+			unset($_POST['typeBulkText'], $_POST['file']);
 
 			$valid = TRUE;
 		}

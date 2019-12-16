@@ -143,35 +143,89 @@ class Novo_Bulk_Model extends NOVO_Model {
 	public function callWs_LoadBulk_Bulk($dataRequest)
 	{
 		$moveFile = TRUE;
-		$response = $this->sendFile($dataRequest->fileName, lang('GEN_LOAD_BULK'));
+		$this->sendFile($dataRequest->fileName, lang('GEN_LOAD_BULK'));
 
 		if ($this->isResponseRc === 0) {
 			$this->className = 'com.novo.objects.MO.ConfirmarLoteMO';
 			$this->dataAccessLog->modulo = 'Lotes';
 			$this->dataAccessLog->function = 'Cargar Lotes';
-			$this->dataAccessLog->operation = 'Cargar Archivo';
+			$this->dataAccessLog->operation = 'Mover Archivo';
 
 			$this->dataRequest->idOperation = 'cargarArchivo';
-			$this->dataRequest->codProducto = $this->session->productInf->productPrefix;
-			$this->dataRequest->formato = $dataRequest->fileExt;
-			$this->dataRequest->nombre = $dataRequest->rawName;
-			$this->dataRequest->nombreArchivo = $dataRequest->fileName;
-			$this->dataRequest->idEmpresa = $this->session->enterpriseInf->idFiscal;
-			$this->dataRequest->codCia = $this->session->enterpriseInf->enterpriseCode;
-			$this->dataRequest->idTipoLote = $dataRequest->typeFile;
-			$this->dataRequest->formatoLote = $dataRequest->formatFile;
-			$this->dataRequest->usuario = $this->userName;
-
-			$this->response->data = [
-				'btn1'=> [
-					'action'=> 'close'
-				]
+			$this->dataRequest->lotesTO = [
+				'codProducto' => $this->session->productInf->productPrefix,
+				'formato' => $dataRequest->fileExt,
+				'nombre' => $dataRequest->rawName,
+				'nombreArchivo' => $dataRequest->fileName,
+				'idEmpresa' => $this->session->enterpriseInf->idFiscal,
+				'codCia' => $this->session->enterpriseInf->enterpriseCode,
+				'idTipoLote' => $dataRequest->typeBulk,
+				'formatoLote' => $dataRequest->formatBulk,
+			];
+			$this->dataRequest->usuario = [
+				'userName' => $this->userName
 			];
 
+			$response = $this->sendToService(lang('GEN_LOAD_BULK'));
+			$respLoadBulk = FALSE;
+
+			switch ($this->isResponseRc) {
+				case 0:
+					$this->response->msg = "Lote cargado exitosamente";
+					$this->response->icon = lang('GEN_ICON_SUCCESS');
+					$this->response->data['btn1']['link'] = base_url('cargar-lotes');
+					$respLoadBulk = TRUE;
+					break;
+				case -108:
+					$this->response->msg = "No fue posible cargar el lote, por favor intentalo de nuevo";
+					$respLoadBulk = TRUE;
+					break;
+					case -109:
+					case -256:
+					$this->response->msg = "No fue posible cargar el lote, por favor intentalo de nuevo";
+					$respLoadBulk = TRUE;
+					break;
+					case -128:
+					$code = 3;
+					$title = 'El lote no se cargo:';
+					$errorsHeader = $response->erroresFormato->erroresEncabezado->errores;
+					$errorsFields = $response->erroresFormato->erroresRegistros;
+					$errorsList = [];
+
+					if(!empty($errorsHeader)) {
+						foreach($errorsHeader AS $errors) {
+							$errorsList['header'][] = ucfirst(mb_strtolower($errors));
+						}
+
+					}
+
+					if(!empty($errorsFields)) {
+						foreach($errorsFields AS $errors) {
+							$name = ucfirst(mb_strtolower(str_replace(',', ':', trim($errors->nombre))));
+							foreach($errors->errores AS $item) {
+								$errorsList['fields'][$name][] = ucfirst(mb_strtolower($item));
+							}
+						}
+					}
+
+					$this->response->msg = $errorsList;
+					$respLoadBulk = TRUE;
+					break;
+			}
+
+			if($respLoadBulk) {
+				$this->response->code = isset($code) ? $code : 2;
+				$this->response->title = isset($code) ? $title : "Cargar lote";
+				$this->response->data = [
+					'btn1'=> [
+						'action'=> 'close'
+					]
+				];
+			}
 		} else {
 			$this->response->code = 3;
 			$this->response->title = 'Cargar Lote';
-			$this->response->msg = "No fue posible cargar el lote, por favor verícalo e intenta de nuevo";
+			$this->response->msg = "No fue posible mover el archivo al servidor, por favor intentalo de nuevo";
 			$this->response->data = [
 				'btn1'=> [
 					'action'=> 'close'

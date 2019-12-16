@@ -128,18 +128,18 @@ $config = [
 	],
 	'loadBulk'  => [
 		[
-			'field' => 'typeFile',
-			'label' => 'typeFile',
+			'field' => 'typeBulk',
+			'label' => 'typeBulk',
 			'rules' => 'trim|regex_match[/^[a-z0-9]+$/i]'
 		],
 		[
-			'field' => 'formatFile',
-			'label' => 'formatFile',
+			'field' => 'formatBulk',
+			'label' => 'formatBulk',
 			'rules' => 'trim|regex_match[/^[a-z0-9]+$/i]'
 		],
 		[
-			'field' => 'typeFileText',
-			'label' => 'typeFileText',
+			'field' => 'typeBulkText',
+			'label' => 'typeBulkText',
 			'rules' => 'trim|regex_match[/^[a-z0-9ñáéíóú ().]{10,70}$/i]'
 		]
 	],
