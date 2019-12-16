@@ -209,6 +209,7 @@ $(function(){
 
 	calendario("fecha_expira");
 
+	$('#embozo_1').attr('disabled', 'disabled');
 	$('#embozo_2').attr('disabled', 'disabled');
 
 
