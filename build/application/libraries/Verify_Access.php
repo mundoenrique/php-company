@@ -148,7 +148,7 @@ class Verify_Access {
 			case 'getDetailBulk':
 				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBCAR'));
 				break;
-			case 'getPendingBulk':
+			case 'confirmBulk':
 				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBCAR', 'TEBCON'));
 				break;
 		}

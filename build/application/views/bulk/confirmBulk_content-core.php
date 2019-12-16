@@ -11,7 +11,8 @@
 					<li class="inline"><a class="tertiary big-modal" href="<?= base_url('detalle-producto') ?>">Detalle del
 							producto</a>
 					</li> /
-					<li class="inline"><a class="tertiary big-modal" href="<?= base_url('cargar-lotes') ?>">Cargar lotes</a></li> /
+					<li class="inline"><a class="tertiary big-modal" href="<?= base_url('cargar-lotes') ?>">Cargar lotes</a></li>
+					/
 					<li class="inline"><a class="tertiary" href="javascript:">Confirmar lote</a></li>
 				</ul>
 			</nav>
@@ -23,41 +24,51 @@
 				<span class="line-text mb-2 h4 semibold primary">Confirmación</span>
 				<div class="row px-5">
 					<div class="form-group mb-3 col-4">
-						<label for="confirmNIT" id="confirmNIT">NIT</label>
-						<span id="confirmNIT" class="form-control px-1" readonly="readonly">J-00000000-9</span>
+						<label for="confirmNIT" id="confirmNIT"><?= lang('GEN_FISCAL_REGISTRY') ?></label>
+						<span id="confirmNIT" class="form-control px-1" readonly="readonly"><?= $detailBulk->idFiscal ?></span>
 					</div>
 
 					<div class="form-group mb-3 col-4">
 						<label for="confirmName" id="confirmName">Nombre de la empresa</label>
-						<span id="confirmName" class="form-control px-1" readonly="readonly">EMPRESA DE ENERGIA</span>
+						<span id="confirmName" class="form-control px-1"
+							readonly="readonly"><?= $detailBulk->enterpriseName ?></span>
 					</div>
 
 					<div class="form-group mb-3 col-4">
 						<label for="typeLot" id="typeLot">Tipo de lote</label>
-						<span id="typeLotName" class="form-control px-1 bold pink-salmon" readonly="readonly">EMISION</span>
+						<span id="typeLotName" class="form-control px-1 bold pink-salmon"
+							readonly="readonly"><?= $detailBulk->bulkType ?></span>
 					</div>
 
 					<div class="form-group mb-3 col-4">
 						<label for="regNumber" id="regNumber">Cantidad de registros</label>
-						<span id="amountNumber" class="form-control px-1 " readonly="readonly">1</span>
+						<span id="amountNumber" class="form-control px-1 "
+							readonly="readonly"><?= $detailBulk->totaRecords ?></span>
 					</div>
 
 					<div class="form-group mb-3 col-4">
 						<label for="amount" id="amount">Monto total</label>
-						<span id="totalAmount" class="form-control px-1" readonly="readonly">0.00</span>
+						<span id="totalAmount" class="form-control px-1" readonly="readonly"><?= $detailBulk->amount ?></span>
 					</div>
 
 					<div class="form-group mb-3 col-4">
 						<label for="lot" id="lot">Lote nro.</label>
-						<span id="numLot" class="form-control px-1" readonly="readonly">19062016</span>
+						<span id="numLot" class="form-control px-1" readonly="readonly"><?= $detailBulk->bulkNumber ?></span>
 					</div>
 
 					<div class="form-group mb-3 col-12">
 						<label for="obsConfirm" id="obsConfirm">Observaciones</label>
-						<span id="comment" class="form-control px-1" readonly="readonly">Linea: 2, El empleado ya esta asociado a
-							la empresa para el producto dado (1756632855)</span>
-						<span id="comment" class="form-control px-1" readonly="readonly">Linea: 4, El empleado ya esta asociado a
-							la empresa para el producto dado (0400892113)</span>
+						<?php if(!empty($detailBulk->errors)): ?>
+						<?php foreach($detailBulk->errors AS $pos => $error): ?>
+						<span id="comment" class="form-control px-1" readonly="readonly">
+							<?= $error->line; ?>, <?= $error->msg; ?> <?= $error->detail; ?>
+						</span>
+						<?php endforeach; ?>
+						<?php else: ?>
+						<span id="comment" class="form-control px-1" readonly="readonly">
+							<?= $detailBulk->success; ?>
+						</span>
+						<?php endif; ?>
 					</div>
 				</div>
 

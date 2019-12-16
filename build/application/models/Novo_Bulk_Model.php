@@ -271,22 +271,28 @@ class Novo_Bulk_Model extends NOVO_Model {
 			'bulkType' => '',
 			'bulkNumber' => '',
 			'totaRecords' => '',
+			'amount' => '',
+			'success' => 'Lote cargado exitosamente',
 			'errors' => []
 		];
 		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
+				log_message('info', 'NOVO --------------------'.json_encode($response));
 				$detailBulk['idFiscal'] = $response->lotesTO->idEmpresa;
 				$detailBulk['enterpriseName'] = mb_strtoupper($response->lotesTO->nombreEmpresa);
 				$detailBulk['bulkType'] = $response->lotesTO->tipoLote;
 				$detailBulk['bulkNumber'] = $response->lotesTO->numLote;
 				$detailBulk['totaRecords'] = $response->lotesTO->cantRegistros;
+				$detailBulk['amount'] = $response->lotesTO->monto;
 
-				foreach($response->lotesTO->mensajes AS $pos => $msg) {
-					$error['line'] = 'Línea: '.$msg->linea;
-					$error['msg'] = ucfirst(mb_strtolower($msg->mensaje));
-					$error['detail'] = '('.$msg->detalle.')';
-					$detailBulk['errors'][] = (object) $error;
+				if(!empty($response->lotesTO->mensajes)) {
+					foreach($response->lotesTO->mensajes AS $pos => $msg) {
+						$error['line'] = 'Línea: '.$msg->linea;
+						$error['msg'] = ucfirst(mb_strtolower($msg->mensaje));
+						$error['detail'] = '('.$msg->detalle.')';
+						$detailBulk['errors'][] = (object) $error;
+					}
 				}
 				$this->response->data->detailBulk = (object) $detailBulk;
 

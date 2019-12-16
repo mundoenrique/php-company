@@ -150,6 +150,13 @@ $config = [
 			'rules' => 'trim|regex_match[/^([\w]+)+$/i]|required'
 		]
 	],
+	'confirmBulk' => [
+		[
+			'field' => 'bulkTicked',
+			'label' => 'bulkTicked',
+			'rules' => 'trim|regex_match[/^([\w]+)+$/i]|required'
+		]
+	],
 	'dash-products' => [
 		[
 			'field' => 'data-accodgrupoe',

@@ -37,12 +37,12 @@ class Bulk extends NOVO_Controller {
 		);
 		$responseList = $this->loadModel();
 		$this->responseAttr($responseList);
-		$this->render->titlePage = lang('GEN_MENU_BULK_LOAD');
 		$this->load->model('Novo_Bulk_Model', 'Bulk');
 		$typesLot = $this->Bulk->callWs_getTypeLots_Bulk(TRUE);
 		$this->render->typesLot = $typesLot->data->typesLot;
 		$this->render->pendingBulk = $responseList->data->pendingBulk;
 		$this->render->productName = $this->session->productInf->productName.' / '.$this->session->productInf->brand;
+		$this->render->titlePage = lang('GEN_MENU_BULK_LOAD');
 		$this->views = ['bulk/'.$view];
 		$this->loadView($view);
 	}
@@ -73,6 +73,18 @@ class Bulk extends NOVO_Controller {
 		log_message('INFO', 'NOVO Bulk: confirmBulk Method Initialized');
 
 		$view = lang('GEN_CONFIRM_BULK');
+		array_push(
+			$this->includeAssets->jsFiles,
+			"third_party/jquery.validate",
+			"validate".$this->render->newViews."-forms",
+			"third_party/additional-methods",
+			"bulk/confirm_bulk"
+		);
+		$this->load->model('Novo_Bulk_Model', 'Bulk');
+		$responseDetail = $this->Bulk->callWs_GetDetailBulk_Bulk($this->request);
+		$this->responseAttr($responseDetail);
+		$this->render->detailBulk = $responseDetail->data->detailBulk;
+		$this->render->titlePage = lang('GEN_CONFIRM_BULK_TITLE');
 		$this->views = ['bulk/'.$view];
 		$this->loadView($view);
 	}

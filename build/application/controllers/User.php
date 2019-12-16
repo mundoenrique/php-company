@@ -73,8 +73,8 @@ class User extends NOVO_Controller {
 			);
 		}
 
-		$this->views = $views;
 		$this->render->titlePage = lang('GEN_SYSTEM_NAME');
+		$this->views = $views;
 		$this->loadView($view);
 	}
 	/**
@@ -93,8 +93,8 @@ class User extends NOVO_Controller {
 			"validate".$this->render->newViews."-forms",
 			"third_party/additional-methods"
 		);
-		$this->views = ['user/'.$view];
 		$this->render->titlePage = lang('GEN_RECOVER_PASS_TITLE');
+		$this->views = ['user/'.$view];
 		$this->loadView($view);
 	}
 	/**
@@ -104,7 +104,9 @@ class User extends NOVO_Controller {
 	public function changePassword()
 	{
 		log_message('INFO', 'NOVO User: changePassword Method Initialized');
+
 		$view = 'change-password';
+
 		if(!$this->session->flashdata('changePassword')) {
 			redirect(base_url('inicio'), 'location');
 			exit();
@@ -119,6 +121,7 @@ class User extends NOVO_Controller {
 			"validate".$this->render->newViews."-forms",
 			"third_party/additional-methods"
 		);
+
 		switch($this->session->flashdata('changePassword')) {
 			case 'newUser':
 			$this->render->message = lang("MSG_NEW_PASS_USER");
@@ -129,12 +132,10 @@ class User extends NOVO_Controller {
 		}
 
 		$this->render->userType = $this->session->flashdata('userType');
-		$this->views = ['user/'.$view];
-		$this->render->titlePage = LANG('GEN_PASSWORD_CHANGE_TITLE');
-
 		$this->session->set_flashdata('changePassword', $this->session->flashdata('changePassword'));
 		$this->session->set_flashdata('userType', $this->session->flashdata('userType'));
-
+		$this->render->titlePage = LANG('GEN_PASSWORD_CHANGE_TITLE');
+		$this->views = ['user/'.$view];
 		$this->loadView($view);
 	}
 	/**

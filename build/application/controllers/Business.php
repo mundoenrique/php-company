@@ -32,7 +32,6 @@ class Business extends NOVO_Controller {
 
 		$responseList = $this->loadModel();
 		$this->responseAttr($responseList, FALSE);
-		$this->render->titlePage = lang('ENTERPRISE_TITLE');
 		$this->render->category = "";
 		$this->render->lastSession = $this->session->lastSession;
 		$this->render->enterprisesTotal = $responseList->data->enterprisesTotal;
@@ -41,6 +40,7 @@ class Business extends NOVO_Controller {
 		$this->render->recordsPage = $responseList->data->recordsPage;
 		$this->render->msgEnterprise = $responseList->data->text;
 		$this->render->disabled = $responseList->code == 0 ?: 'disabled';
+		$this->render->titlePage = lang('ENTERPRISE_TITLE');
 		$this->views = ['business/'.$view];
 		$this->loadView($view);
 	}
@@ -76,7 +76,6 @@ class Business extends NOVO_Controller {
 
 		$responseList = $this->loadModel($this->request);
 		$this->responseAttr($responseList);
-		$this->render->titlePage = lang('PRODUCTS_TITLE');
 		$this->render->brands = $responseList->data->brandList;
 		$this->render->categories = $responseList->data->categoriesList;
 		$this->render->productList = $responseList->data->productList;
@@ -92,6 +91,7 @@ class Business extends NOVO_Controller {
 			$this->render->widget->actionForm = 'productos';
 		}
 
+		$this->render->titlePage = lang('PRODUCTS_TITLE');
 		$this->views = ['business/'.$view];
 		$this->loadView($view);
 	}
@@ -119,7 +119,6 @@ class Business extends NOVO_Controller {
 
 		$detailList = $this->loadModel($this->request);
 		$this->responseAttr($detailList);
-		$this->render->titlePage = lang('PRODUCTS_DETAIL_TITLE');
 		$this->render->productName = $detailList->data->productDetail->name;
 		$this->render->productImg = $detailList->data->productDetail->imgProgram;
 		$this->render->productBrand = $detailList->data->productDetail->brand;
@@ -136,6 +135,7 @@ class Business extends NOVO_Controller {
 		$this->render->totalCards = $detailList->data->productSummary->totalCards;
 		$this->render->activeCards = $detailList->data->productSummary->activeCards;
 		$this->render->inactiveCards = $detailList->data->productSummary->inactiveCards;
+		$this->render->titlePage = lang('PRODUCTS_DETAIL_TITLE');
 		$this->views = ['business/'.$view];
 		$this->loadView($view);
 	}
