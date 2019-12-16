@@ -236,7 +236,7 @@ class Lotes_innominada extends CI_Controller {
 							'acrif'=>$acrif,
 							'acnomcia'=>$acnomcia,
 							'dtfechorcarga'=>$dtfechorcarga,
-							'nmonto'=>$nmonto
+							'nmonto'=>number_format((float)$nmonto, 2, '.', '')
 					),TRUE);
 					$sidebarLotes= $this->parser->parse('dashboard/widget-empresa',array('sidebarActive'=>TRUE),TRUE);
 
