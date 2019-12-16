@@ -17,11 +17,11 @@ class Bulk extends NOVO_Controller {
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date December 7th, 2019
 	 */
-	public function getPendingLots()
+	public function getPendingBulk()
 	{
-		log_message('INFO', 'NOVO Lots: getPendingLots Method Initialized');
+		log_message('INFO', 'NOVO Bulk: getPendingBulk Method Initialized');
 
-		$view = lang('GEN_GET_PEN_LOTS');
+		$view = lang('GEN_GET_PEN_BULK');
 		array_push(
 			$this->includeAssets->cssFiles,
 			"third_party/datatables"
@@ -41,9 +41,35 @@ class Bulk extends NOVO_Controller {
 		$this->load->model('Novo_Bulk_Model', 'Bulk');
 		$typesLot = $this->Bulk->callWs_getTypeLots_Bulk(TRUE);
 		$this->render->typesLot = $typesLot->data->typesLot;
-		$this->render->pendinglots = $responseList->data->pendinglots;
+		$this->render->pendingBulk = $responseList->data->pendingBulk;
 		$this->render->productName = $this->session->productInf->productName.' / '.$this->session->productInf->brand;
-		$this->views = ['lots/'.$view];
+		$this->views = ['bulk/'.$view];
+		$this->loadView($view);
+	}
+	/**
+	 * @info Método para renderizar el detalle del lote
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date December 16th, 2019
+	 */
+	public function getDetailBulk()
+	{
+		log_message('INFO', 'NOVO Bulk: getDetailBulk Method Initialized');
+
+		$view = lang('GEN_DETAIL_BULK');
+		$this->views = ['bulk/'.$view];
+		$this->loadView($view);
+	}
+	/**
+	 * @info Método para confirmar el lote
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date December 16th, 2019
+	 */
+	public function confirmBulk()
+	{
+		log_message('INFO', 'NOVO Bulk: confirmBulk Method Initialized');
+
+		$view = lang('GEN_CONFIRM_BULK');
+		$this->views = ['bulk/'.$view];
 		$this->loadView($view);
 	}
 }

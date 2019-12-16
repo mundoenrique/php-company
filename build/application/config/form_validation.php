@@ -143,6 +143,13 @@ $config = [
 			'rules' => 'trim|regex_match[/^[a-z0-9ñáéíóú ().]{10,70}$/i]'
 		]
 	],
+	'getDetailBulk' => [
+		[
+			'field' => 'bulkTicked',
+			'label' => 'bulkTicked',
+			'rules' => 'trim|regex_match[/^([\w]+)+$/i]|required'
+		]
+	],
 	'dash-products' => [
 		[
 			'field' => 'data-accodgrupoe',

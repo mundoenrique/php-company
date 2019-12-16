@@ -157,7 +157,7 @@ if(!function_exists('languajeLoad')) {
 			case 'bdb':
 				$languages = [
 					'login' => ['login', 'validate'],
-					'getPendingLots'	=> ['validate'],
+					'getPendingBulk'	=> ['validate'],
 				];
 				break;
 			case 'co':
@@ -200,7 +200,7 @@ if(!function_exists('languajeLoad')) {
 					'getEnterprises'	=> ['enterprise'],
 					'getProducts'	=> ['products'],
 					'getProductDetail'	=> ['products'],
-					'getPendingLots'	=> ['validate'],
+					'getPendingBulk'	=> ['validate'],
 				];
 		}
 

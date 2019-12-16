@@ -53,7 +53,7 @@
 					<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
 				</div>
 				<div id="content-datatable" class="center mx-1 hide">
-					<table id="pendingLots" class="cell-border h6 display">
+					<table id="pending-bulk" class="cell-border h6 display">
 						<thead class="regular secondary bg-primary">
 							<tr>
 								<th>Nro. Lote</th>
@@ -64,31 +64,37 @@
 							</tr>
 						</thead>
 						<tbody>
-							<?php foreach($pendinglots AS $lots): ?>
-							<tr>
-								<td><?= $lots->lotNum ?></td>
-								<td><?= $lots->fileName ?></td>
-								<td><?= $lots->loadDate ?></td>
+							<?php foreach($pendingBulk AS $bulk): ?>
+							<tr ticket-id="<?= $bulk->ticketId ?>" bulk-id="<?= $bulk->bulkId ?>">
+								<td><?= $bulk->lotNum ?></td>
+								<td><?= $bulk->fileName ?></td>
+								<td><?= $bulk->loadDate ?></td>
 								<td>
-									<div class="<?= $lots->statusPr ?> flex items-center justify-center">
-										<div class="icon-circle <?= $lots->statusColor ?>" alt=""></div>
-										<span class="pl-1 uppercase"><?= $lots->statusText ?></span>
+									<div class="<?= $bulk->statusPr ?> flex items-center justify-center">
+										<div class="icon-circle <?= $bulk->statusColor ?>" alt=""></div>
+										<span class="pl-1 uppercase"><?= $bulk->statusText ?></span>
 									</div>
 								</td>
 								<td>
-									<?php if($lots->status == 1 || $lots->status == 6): ?>
+									<?php if($bulk->status == 1 || $bulk->status == 6): ?>
 									<button class="btn px-1" title="Confirmar" data-toggle="tooltip">
 										<i class="icon icon-ok" aria-hidden="true"></i>
 									</button>
 									<?php endif; ?>
-									<?php if($lots->status == 5 || $lots->status == 6): ?>
-									<button class="btn px-1" title="Ver" data-toggle="tooltip">
+									<?php if($bulk->status == 5 || $bulk->status == 6): ?>
+									<button class="btn px-1 big-modal" title="Ver" data-toggle="tooltip">
 										<i class="icon icon-find" aria-hidden="true"></i>
 									</button>
 									<?php endif; ?>
 									<button class="btn px-1" title="Eliminar" data-toggle="tooltip">
 										<i class="icon icon-remove" aria-hidden="true"></i>
 									</button>
+									<form id="bulk-<?= $bulk->ticketId; ?>" method="POST">
+										<input type="hidden" name="bulkStatus" value="<?= $bulk->status; ?>">
+										<input type="hidden" name="bulkId" value="<?= $bulk->bulkId; ?>">
+										<input type="hidden" name="bulkTicked" value="<?= $bulk->ticketId; ?>">
+										<input type="hidden" name="bulFile" value="<?= $bulk->fileName; ?>">
+									</form>
 								</td>
 							</tr>
 							<?php endforeach; ?>
@@ -110,7 +116,7 @@
 					</div>
 				</div>
 				<div class="my-5 py-4 center none">
-					<span class="h4">No tiene lotes pendientes</span>
+					<span class="h4">No fue posible obtener los lotes pendientes</span>
 				</div>
 			</div>
 		</div>

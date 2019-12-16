@@ -17,9 +17,9 @@ class Novo_Bulk_Model extends NOVO_Model {
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date December 8th, 2019
 	 */
-	public function callWs_getPendingLots_Bulk()
+	public function callWs_getPendingBulk_Bulk()
 	{
-		log_message('INFO', 'NOVO Bulk Model: getPendingLots method Initialized');
+		log_message('INFO', 'NOVO Bulk Model: getPendingBulk method Initialized');
 
 		$this->className = 'com.novo.objects.MO.ConfirmarLoteMO';
 		$this->dataAccessLog->modulo = 'Lotes';
@@ -35,48 +35,52 @@ class Novo_Bulk_Model extends NOVO_Model {
 			'userName' => $this->userName
 		];
 
-		$response = $this->sendToService(lang('GEN_GET_PEN_LOTS'));
-		$pendingLotsList = [];
+		$response = $this->sendToService(lang('GEN_GET_PEN_BULK'));
+		$pendingBulkList = [];
 
 		switch($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
 
-				foreach($response->lista AS $pos => $pendingLots) {
-					$lots = [];
-					$lots['lotNum'] = $response->lista[$pos]->numLote != '' ? $response->lista[$pos]->numLote : '---';
-					$lotStatus = $response->lista[$pos]->estatus;
-					switch ($lotStatus) {
+				foreach($response->lista AS $pos => $pendingBulk) {
+					$bulk = [];
+					$bulk['lotNum'] = $response->lista[$pos]->numLote != '' ? $response->lista[$pos]->numLote : '---';
+					$bulktatus = $response->lista[$pos]->estatus;
+
+					switch ($bulktatus) {
 						case '1':
-							$lots['statusPr'] = 'status-pr ';
-							$lots['statusColor'] = ' bg-vista-blue';
-							$lots['statusText'] = 'Válido';
+							$bulk['statusPr'] = 'status-pr ';
+							$bulk['statusColor'] = ' bg-vista-blue';
+							$bulk['statusText'] = 'Válido';
 							break;
 						case '5':
-							$lots['statusPr'] = '';
-							$lots['statusColor'] = ' bg-pink-salmon';
-							$lots['statusText'] = 'Con errores';
+							$bulk['statusPr'] = '';
+							$bulk['statusColor'] = ' bg-pink-salmon';
+							$bulk['statusText'] = 'Con errores';
 							break;
 						case '6':
-							$lots['statusPr'] = 'status-pr ';
-							$lots['statusColor'] = ' bg-trikemaster';
-							$lots['statusText'] = 'Válido';
+							$bulk['statusPr'] = 'status-pr ';
+							$bulk['statusColor'] = ' bg-trikemaster';
+							$bulk['statusText'] = 'Válido';
 							break;
 					}
-					$lots['status'] = $lotStatus;
-					$lots['fileName'] = $response->lista[$pos]->nombreArchivo;
-					$lots['ticketId'] = $response->lista[$pos]->idTicket;
-					$lots['loadDate'] = $response->lista[$pos]->fechaCarga;
-					$pendingLotsList[] = (object) $lots;
+
+					$bulk['status'] = $bulktatus;
+					$bulk['fileName'] = $response->lista[$pos]->nombreArchivo;
+					$bulk['ticketId'] = $response->lista[$pos]->idTicket;
+					$bulk['bulkId'] = $response->lista[$pos]->idLote;
+					$bulk['loadDate'] = $response->lista[$pos]->fechaCarga;
+					$pendingBulkList[] = (object) $bulk;
 				}
 				break;
 				case -15:
 					$this->response->code = 0;
 					break;
 		}
-		$this->response->data->pendinglots = (object) $pendingLotsList;
 
-		return $this->responseToTheView(lang('GEN_GET_PEN_LOTS'));
+		$this->response->data->pendingBulk = (object) $pendingBulkList;
+
+		return $this->responseToTheView(lang('GEN_GET_PEN_BULK'));
 	}
 	/**
 	 * @info Método para obtener los tipos de lte asociados a un programa

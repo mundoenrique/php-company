@@ -72,7 +72,7 @@ $(function () {
 		}
 	}
 
-  $('#pendingLots').DataTable({
+  $('#pending-bulk').DataTable({
 		drawCallback: function(d) {
 			$('#pre-loader').remove();
 			$('#content-datatable').removeClass('hide');
@@ -115,5 +115,33 @@ $(function () {
         "sSortDescending": ": Activar para ordenar la columna de manera descendente"
       }
     }
-  });
+	});
+
+	$('#pending-bulk tbody tr').on('click', 'button', function(e){
+		e.preventDefault();
+		var event = $(e.currentTarget);
+		var action = event.attr('title');
+		var form = $(this).parent().find('form')
+		insertFormInput(true, form);
+		switch(action) {
+			case 'Ver':
+				form.attr('action', baseURL+'detalle-lote');
+				break;
+			case 'Confirmar':
+				form.attr('action', baseURL+'confirmar-lote');
+				break;
+			case 'Eliminar':
+				var bulkInfo = {
+					'bulkId': form.find('input[name="bulkId"]').val(),
+					'bulkTicked': form.find('input[name="bulkTicked"]').val(),
+					'bulkStatus': form.find('input[name="bulkStatus"]').val()
+				}
+				console.log(bulkInfo)
+				break;
+		}
+		if(action != 'Eliminar') {
+			form.submit();
+		}
+		insertFormInput(false);
+	});
 });
