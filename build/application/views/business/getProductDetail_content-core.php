@@ -32,7 +32,7 @@
 
 				<div class="flex mt-3 flex-column items-start">
 					<?php if($this->verify_access->verifyAuthorization('TEBCAR')): ?>
-					<a class="btn btn-link btn-small-xs mx-4 px-0 big-modal" href="<?= lang('GEN_LINK_LOT_LOAD') ?>"><?= lang('GEN_MENU_LOT_LOAD') ?></a>
+					<a class="btn btn-link btn-small-xs mx-4 px-0 big-modal" href="<?= lang('GEN_LINK_BULK_LOAD') ?>"><?= lang('GEN_MENU_BULK_LOAD') ?></a>
 					<?php endif; ?>
 					<?php if($this->verify_access->verifyAuthorization('TEBAUT')): ?>
 					<a class="btn btn-link btn-small-xs mx-4 px-0" href="#">

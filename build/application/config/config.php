@@ -479,6 +479,7 @@ $config['csrf_regenerate'] = TRUE;
 $config['csrf_exclude_uris'] = array(
 	'[\w\-]+/productos',
 	'[\w\-]+/detalle-producto',
+	'[\w\-]+/detalle-lote',
 	'[\w\-]+/dashboard/productos',
 	'[\w\-]+/dashboard/productos/detalle',
 	'[\w\-]+/consulta/ordenes-de-servicio',

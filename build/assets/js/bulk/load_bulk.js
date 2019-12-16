@@ -117,7 +117,7 @@ $(function () {
     }
 	});
 
-	$('#pending-bulk tbody tr').on('click', 'button', function(e){
+	$('#pending-bulk').on('click', 'button', function(e){
 		e.preventDefault();
 		var event = $(e.currentTarget);
 		var action = event.attr('title');

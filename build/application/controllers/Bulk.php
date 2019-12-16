@@ -37,7 +37,7 @@ class Bulk extends NOVO_Controller {
 		);
 		$responseList = $this->loadModel();
 		$this->responseAttr($responseList);
-		$this->render->titlePage = lang('GEN_MENU_LOT_LOAD');
+		$this->render->titlePage = lang('GEN_MENU_BULK_LOAD');
 		$this->load->model('Novo_Bulk_Model', 'Bulk');
 		$typesLot = $this->Bulk->callWs_getTypeLots_Bulk(TRUE);
 		$this->render->typesLot = $typesLot->data->typesLot;
@@ -56,6 +56,10 @@ class Bulk extends NOVO_Controller {
 		log_message('INFO', 'NOVO Bulk: getDetailBulk Method Initialized');
 
 		$view = lang('GEN_DETAIL_BULK');
+		$responseDetail = $this->loadModel($this->request);
+		$this->responseAttr($responseDetail);
+		$this->render->detailBulk = $responseDetail->data->detailBulk;
+		$this->render->titlePage = lang('GEN_DETAIL_BULK_TITLE');
 		$this->views = ['bulk/'.$view];
 		$this->loadView($view);
 	}

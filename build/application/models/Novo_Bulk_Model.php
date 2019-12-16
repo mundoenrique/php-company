@@ -146,6 +146,8 @@ class Novo_Bulk_Model extends NOVO_Model {
 	 */
 	public function callWs_LoadBulk_Bulk($dataRequest)
 	{
+		log_message('INFO', 'NOVO Bulk Model: LoadBulk method Initialized');
+
 		$moveFile = TRUE;
 		$this->sendFile($dataRequest->fileName, lang('GEN_LOAD_BULK'));
 
@@ -238,5 +240,59 @@ class Novo_Bulk_Model extends NOVO_Model {
 		}
 
 		return $this->responseToTheView(lang('GEN_LOAD_BULK'));
+	}
+	/**
+	 * @info obtener el detalle de un lote
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date December 1th, 2019
+	 */
+	public function callWs_GetDetailBulk_Bulk($dataRequest)
+	{
+		log_message('INFO', 'NOVO Bulk Model: GetDetailBulk method Initialized');
+
+		$this->className = 'com.novo.objects.MO.ConfirmarLoteMO';
+		$this->dataAccessLog->modulo = 'Lotes';
+		$this->dataAccessLog->function = 'Cargar Lotes';
+		$this->dataAccessLog->operation = 'Detalle del lote';
+
+		$this->dataRequest->idOperation = 'verDetalleBandeja';
+		$this->dataRequest->lotesTO = [
+			'idTicket' => $dataRequest->bulkTicked
+		];
+		$this->dataRequest->usuario = [
+			'userName' => $this->userName
+		];
+
+		$response = $this->sendToService(lang('GEN_DETAIL_BULK'));
+		$respLoadBulk = FALSE;
+		$detailBulk = [
+			'idFiscal' => '',
+			'enterpriseName' => '',
+			'bulkType' => '',
+			'bulkNumber' => '',
+			'totaRecords' => '',
+			'errors' => []
+		];
+		switch ($this->isResponseRc) {
+			case 0:
+				$this->response->code = 0;
+				$detailBulk['idFiscal'] = $response->lotesTO->idEmpresa;
+				$detailBulk['enterpriseName'] = mb_strtoupper($response->lotesTO->nombreEmpresa);
+				$detailBulk['bulkType'] = $response->lotesTO->tipoLote;
+				$detailBulk['bulkNumber'] = $response->lotesTO->numLote;
+				$detailBulk['totaRecords'] = $response->lotesTO->cantRegistros;
+
+				foreach($response->lotesTO->mensajes AS $pos => $msg) {
+					$error['line'] = 'Línea: '.$msg->linea;
+					$error['msg'] = ucfirst(mb_strtolower($msg->mensaje));
+					$error['detail'] = '('.$msg->detalle.')';
+					$detailBulk['errors'][] = (object) $error;
+				}
+				$this->response->data->detailBulk = (object) $detailBulk;
+
+				break;
+		}
+
+		return $this->responseToTheView(lang('GEN_DETAIL_BULK'));
 	}
 }
