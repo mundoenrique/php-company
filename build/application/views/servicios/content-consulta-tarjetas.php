@@ -3,7 +3,6 @@ $pais = $this->uri->segment(1);
 $urlBaseA = $this->config->item('base_url');
 $urlBase = $urlBaseA.$pais;
 $urlCdn = get_cdn();
-echo "aquiiii";
 ?>
 
 <div id="content-products">
