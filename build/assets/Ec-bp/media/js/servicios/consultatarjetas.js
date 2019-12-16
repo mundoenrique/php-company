@@ -49,7 +49,7 @@ $('#buscar').on('click', function () {
 	} else {
 
 		if (servicio.val().length > 0 && !RE.test(servicio.val())) {
-			camposValid += '<p>* El campo orden de servicio debe ser numerico</p>';
+			camposValid += '<p>* El campo orden de servicio debe ser numérico</p>';
 			validInput = false;
 			servicio.css('border-color', '#cd0a0a')
 		} else {
@@ -57,7 +57,7 @@ $('#buscar').on('click', function () {
 		}
 
 		if (lote.val().length > 0 && !RE.test(lote.val())) {
-			camposValid += '<p>* El campo lote debe ser numerico</p>';
+			camposValid += '<p>* El campo lote debe ser numérico</p>';
 			validInput = false;
 			lote.css('border-color', '#cd0a0a')
 		} else {
@@ -65,7 +65,7 @@ $('#buscar').on('click', function () {
 		}
 
 		if (cedula.val().length > 0 && !RE.test(cedula.val())) {
-			camposValid += '<p>* El campo cédula debe ser numerico</p>';
+			camposValid += '<p>* El campo cédula debe ser numérico</p>';
 			validInput = false;
 			cedula.css('border-color', '#cd0a0a')
 		} else {
@@ -73,7 +73,7 @@ $('#buscar').on('click', function () {
 		}
 
 		if (tarjeta.val().length > 0 && !RE.test(tarjeta.val())) {
-			camposValid += '<p>* El campo tarjeta debe ser numerico</p>';
+			camposValid += '<p>* El campo tarjeta debe ser numérico</p>';
 			validInput = false;
 			tarjeta.css('border-color', '#cd0a0a')
 		} else {
