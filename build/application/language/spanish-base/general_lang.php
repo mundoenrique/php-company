@@ -64,7 +64,7 @@ $lang['GEN_DETAIL_BULK_TITLE'] = 'Detalle del lote';
 $lang['GEN_CONFIRM_BULK'] = 'confirmBulk';
 $lang['GEN_CONFIRM_BULK_TITLE'] = 'Confirmar lote';
 //MODAL STYLES
-$lang['GEN_MODAL_SIZE'] = 310;
+$lang['GEN_MODAL_WIDTH'] = 310;
 $lang['GEN_ICON'] = 'ui-icon';
 $lang['GEN_ICON_SUCCESS'] = 'ui-icon-circle-check';
 $lang['GEN_ICON_INFO'] = 'ui-icon-info';

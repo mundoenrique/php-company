@@ -77,7 +77,7 @@
 								</td>
 								<td>
 									<?php if($bulk->status == 1 || $bulk->status == 6): ?>
-									<button class="btn px-1" title="Confirmar" data-toggle="tooltip">
+									<button class="btn px-1  big-modal" title="Confirmar" data-toggle="tooltip">
 										<i class="icon icon-ok" aria-hidden="true"></i>
 									</button>
 									<?php endif; ?>

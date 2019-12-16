@@ -191,6 +191,10 @@ class Novo_Bulk_Model extends NOVO_Model {
 					$this->response->msg = "No fue posible cargar el lote, por favor intentalo de nuevo";
 					$respLoadBulk = TRUE;
 					break;
+					case -280:
+					$this->response->msg = "El tipo de archivo no es compatible con el producto";
+					$respLoadBulk = TRUE;
+					break;
 					case -128:
 					$code = 3;
 					$title = 'El lote no se cargo:';
@@ -222,11 +226,13 @@ class Novo_Bulk_Model extends NOVO_Model {
 			if($respLoadBulk) {
 				$this->response->code = isset($code) ? $code : 2;
 				$this->response->title = isset($code) ? $title : "Cargar lote";
-				$this->response->data = [
-					'btn1'=> [
-						'action'=> 'close'
-					]
-				];
+				if($this->isResponseRc != 0) {
+					$this->response->data = [
+						'btn1'=> [
+							'action'=> 'close'
+						]
+					];
+				}
 			}
 		} else {
 			$this->response->code = 3;
@@ -272,6 +278,10 @@ class Novo_Bulk_Model extends NOVO_Model {
 			'bulkNumber' => '',
 			'totaRecords' => '',
 			'amount' => '',
+			'fileName' => '',
+			'bulkTicked' => '',
+			'bulkStatus' => '',
+			'bulkId' => '',
 			'success' => 'Lote cargado exitosamente',
 			'errors' => []
 		];
@@ -285,6 +295,10 @@ class Novo_Bulk_Model extends NOVO_Model {
 				$detailBulk['bulkNumber'] = $response->lotesTO->numLote;
 				$detailBulk['totaRecords'] = $response->lotesTO->cantRegistros;
 				$detailBulk['amount'] = $response->lotesTO->monto;
+				$detailBulk['fileName'] = $response->lotesTO->nombreArchivo;
+				$detailBulk['bulkTicked'] = $response->lotesTO->idTicket;
+				$detailBulk['bulkStatus'] = $response->lotesTO->estatus;
+				$detailBulk['bulkId'] = $response->lotesTO->idLote;
 
 				if(!empty($response->lotesTO->mensajes)) {
 					foreach($response->lotesTO->mensajes AS $pos => $msg) {

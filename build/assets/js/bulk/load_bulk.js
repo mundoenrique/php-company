@@ -62,7 +62,7 @@ $(function () {
 					$.each(content, function(index, value) {
 						msgModal+= '<h5>'+index+'</h5>';
 						$.each(value, function(pos, val) {
-							msgModal+= '<h6>'+val+'</h6>';
+							msgModal+= '<h6 class="light mr-1">'+val+'</h6>';
 						})
 					});
 				}

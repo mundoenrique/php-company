@@ -80,8 +80,8 @@ class CallModels extends Novo_Controller {
 		$replace[0] = '';
 		$replace[1] = '/_/';
 		$filename = '_'.substr(preg_replace($pattern, $replace, $_POST['typeBulkText']), 0, 17);
-		$filenameT = $filename.'_'.time();
-		$filenameT = mb_strtolower($this->countryUri.$filenameT.'.'.$ext);
+		$filenameT = time().'_'.date('s').$this->countryUri.$filename;
+		$filenameT = mb_strtolower($filenameT.'.'.$ext);
 		$config['file_name'] = $filenameT;
 		$config['upload_path'] = $this->config->item('upload_bulk');
 		$config['allowed_types'] = 'xls|txt|xlsx';

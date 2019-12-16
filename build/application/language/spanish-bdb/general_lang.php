@@ -7,4 +7,4 @@ $lang['GEN-LOGO-BIG'] = 'logo-bancobogota.svg';
 $lang['GEN_ALTERNATIVE_TEXT'] = 'Banco de Bogotá';
 $lang['GEN_FISCAL_REGISTRY'] = 'NIT.';
 //MODAL STYLES
-$lang['GEN_MODAL_SIZE'] = 370;
+$lang['GEN_MODAL_WIDTH'] = 370;

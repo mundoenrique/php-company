@@ -81,10 +81,10 @@
 						</div>
 						<div class="flex flex-row">
 							<div class="mb-3 mr-4">
-								<a href="#" class="btn btn-link btn-small">Cancelar</a>
+								<a href="<?= base_url('cargar-lotes') ?>" class="btn btn-link btn-small big-modal">Cancelar</a>
 							</div>
 							<div class="mb-3 mr-1">
-								<button class="btn btn-primary  btn-loading btn-small">Confirmar</button>
+								<button id="confirm-bulk" class="btn btn-primary  btn-loading btn-small">Confirmar</button>
 							</div>
 						</div>
 					</div>
