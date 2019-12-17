@@ -77,16 +77,16 @@
 								</td>
 								<td>
 									<?php if($bulk->status == 1 || $bulk->status == 6): ?>
-									<button class="btn px-1  big-modal" title="Confirmar" data-toggle="tooltip">
+									<button class="btn mx-1 px-0 big-modal" title="Confirmar" data-toggle="tooltip">
 										<i class="icon icon-ok" aria-hidden="true"></i>
 									</button>
 									<?php endif; ?>
 									<?php if($bulk->status == 5 || $bulk->status == 6): ?>
-									<button class="btn px-1 big-modal" title="Ver" data-toggle="tooltip">
+									<button class="btn mx-1 px-0 big-modal" title="Ver" data-toggle="tooltip">
 										<i class="icon icon-find" aria-hidden="true"></i>
 									</button>
 									<?php endif; ?>
-									<button class="btn px-1" title="Eliminar" data-toggle="tooltip">
+									<button class="btn mx-1 px-0" title="Eliminar" data-toggle="tooltip">
 										<i class="icon icon-remove" aria-hidden="true"></i>
 									</button>
 									<form id="bulk-<?= $bulk->ticketId; ?>" method="POST">

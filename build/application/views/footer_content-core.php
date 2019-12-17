@@ -18,14 +18,13 @@
 </div>
 
 <div id="system-info" class="hide" name="system-info">
-	<p>
+	<p class="mb-0">
 		<span class="dialog-icon">
 			<i id="system-icon" class="ui-icon mt-0"></i>
 		</span>
 		<span id="system-msg" class="system-msg"><?= lang('RESP_MESSAGE_SYSTEM'); ?></span>
 	</p>
-	<hr class="separador-one m-0">
-	<div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+	<div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix mb-1">
 		<div class="ui-dialog-buttonset novo-dialog-buttonset">
 			<button type="button" id="cancel" class="btn btn-small btn-link"><?= lang('GEN_BTN_CANCEL'); ?></button>
 			<button type="button" id="accept" class="btn btn-small btn-loading btn-primary"><?= lang('GEN_BTN_ACCEPT'); ?></button>
