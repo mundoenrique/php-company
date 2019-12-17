@@ -829,6 +829,11 @@ textarea.form-control {
 	transition: .3s;
 }
 
+.sb-disabled {
+	opacity: .5;
+	pointer-events: none;
+}
+
 .sb-search-input {
 	position: absolute;
 	top: 0;
@@ -3000,9 +3005,9 @@ button.ui-button::-moz-focus-inner {
 	color: #333333;
 }
 .ui-widget-header {
-	background: var(--primary);
-	color: var(--secondary);
+	color: var(--primary);
 	font-weight: bold;
+	border-bottom: 2px solid var(--border-color-2) !important;
 }
 .ui-widget-header a {
 	color: #333333;
@@ -3206,6 +3211,7 @@ a.ui-button:active,
 	border: 0 transparent;
 	outline: 0;
 	box-shadow: 0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);
+	border-radius: .3125rem !important;
 }
 .ui-dialog .ui-dialog-titlebar {
 	padding: .7em 1em;
@@ -3230,14 +3236,13 @@ a.ui-button:active,
 }
 .ui-dialog .ui-dialog-content {
 	position: relative;
-	border-bottom: var(--border-width) solid var(--border-color) !important;
 	padding: 0;
 	background: none;
 	overflow: auto;
 }
 .ui-dialog .ui-dialog-content p {
 	display: flex;
-	padding: 1.6em 1em 1em;
+	padding: 1.5em 1em;
 	min-height: 80px;
 }
 .ui-dialog-content .dialog-icon {
@@ -3247,7 +3252,7 @@ a.ui-button:active,
 	text-align: left;
 	border-width: 1px 0 0 0;
 	background-image: none;
-	padding: .5em 1em;
+	padding: 0em 1em .5em;
 }
 .ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset {
 	float: right;

@@ -31,7 +31,7 @@
 			</select>
 			<div id="sb-search" class="sb-search">
 				<input id="search" class="sb-search-input" type="search" name="search" value="" placeholder="Buscar...">
-				<span class="sb-icon-search"><i class="icon icon-find"></i></span>
+				<span class="sb-icon-search mr-1"><i class="icon icon-find"></i></span>
 			</div>
 		</div>
 	</div>
