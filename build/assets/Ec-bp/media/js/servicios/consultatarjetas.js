@@ -262,14 +262,14 @@ function cargarResultado(data) {
 			tr += '<td class="bp-min-width">' + v.ordenS + '</td>';
 			tr += '<td class="bp-min-width">' + v.nroLote + '</td>';
 			tr += '<td class="bp-min-width">' + statusEmi + '</td>';
-			tr += '<td class="bp-min-width">' + v.edoPlastico + '</td>';
+			tr += '<td id="statusPlastico' + v.nroTarjeta.replace(/[*]/g, "") + '"class="bp-min-width">' + v.edoPlastico + '</td>';
 			tr += '<td id="td-nombre-2" class="bp-min-width">' + v.nombre.toLowerCase().replace(/(^| )(\w)/g, function (x) {
 				return x.toUpperCase();
 			}) + '</td>';
 			tr += '<td class="bp-min-width">' + v.cedula + '</td>';
 			 tr += '<td id="saldo' + v.nroTarjeta.replace(/[*]/g, "") + '" class="bp-min-width"> - '; //saldo
 			 tr += '</td>'
-			 tr += '<td class="bp-min-width">';
+			 tr += '<td id="opciones' + v.nroTarjeta.replace(/[*]/g, "") + '"class="bp-min-width">';
 			 var operacion = ''
 			 $.each(data.result.operacioneTarjeta, function (i, j)
 			{
@@ -1058,15 +1058,24 @@ $('#button-masivo').click(function() {
 // MOSTRAR EL SALDO DISPONIBLE PARA CADA TARJETA LUEGO DE CONSULTAR
 function mostrar_saldo(data) {
 	$.each(JSON.parse(data.result.bean), function(k, t) {
-		if (t.saldo !== undefined)
-		{
+
+		if(t.msgNovoTrans=="Approved or completed successfully"){
 			$('#saldo' + t.numeroTarjeta.replace(/[*]/g, "")).text((t.saldo));
-
-		}	else{
-			$('#saldo' + t.numeroTarjeta.replace(/[*]/g, "")).empty();
-			$('#saldo' + t.numeroTarjeta.replace(/[*]/g, "")).append('<span title="'+t.msgNovoTrans+'"  class="icon" data-icon="&#xe04b;"></span>');
 		}
-
+		if(t.msgNovoTrans=="No apta para procesarse"){
+			$('#statusPlastico' + t.numeroTarjeta.replace(/[*]/g, "")).text("Bloqueada");
+			$('#saldo' + t.numeroTarjeta.replace(/[*]/g, "")).empty();
+			$('#saldo' + t.numeroTarjeta.replace(/[*]/g, "")).text("-");
+			$('#opciones' + t.numeroTarjeta.replace(/[*]/g, "")).empty();
+			$('#opciones' + t.numeroTarjeta.replace(/[*]/g, "")).append('<a id="DESBLOQUEO" title="Desbloqueo"><span class="icon" data-icon="&#xe03f;"></span></a>');
+		}
+		if(t.msgNovoTrans=="Tarjeta Inactiva"){
+			$('#statusPlastico' + t.numeroTarjeta.replace(/[*]/g, "")).text("Inactiva");
+			$('#saldo' + t.numeroTarjeta.replace(/[*]/g, "")).empty();
+			$('#saldo' + t.numeroTarjeta.replace(/[*]/g, "")).text("-");
+			$('#opciones' + t.numeroTarjeta.replace(/[*]/g, "")).empty();
+			$('#opciones' + t.numeroTarjeta.replace(/[*]/g, "")).text("-");
+		}
 	});
 }
 
