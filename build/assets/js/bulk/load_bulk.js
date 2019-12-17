@@ -2,8 +2,8 @@
 $(function () {
 	var file = $('#file-bulk');
 	var inputFile = file.next('.js-label-file').html().trim();
-	var form = $('#upload-file-form');
 	var SelectTypeBulk = $('#type-bulk');
+	form = $('#upload-file-form');
 
 	$('.input-file').each(function () {
     var $input = $(this),
@@ -121,7 +121,7 @@ $(function () {
 		e.preventDefault();
 		var event = $(e.currentTarget);
 		var action = event.attr('title');
-		var form = $(this).parent().find('form')
+		form = $(this).parent().find('form')
 		insertFormInput(true, form);
 		switch(action) {
 			case 'Ver':

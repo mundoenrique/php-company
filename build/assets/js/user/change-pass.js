@@ -23,8 +23,8 @@ $(function() {
 
 	$('#btn-change-pass').on('click', function(e) {
 		e.preventDefault();
-		var form = $('#form-change-pass');
 		var ChangeBtn = $(this);
+		form = $('#form-change-pass');
 		validateForms(form, { handleMsg: true });
 		if(form.valid()) {
 			var userType = $('#user-type').val();

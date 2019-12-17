@@ -1,8 +1,8 @@
 $(function() {
 	$('#btn-pass-recover').on('click', function(e){
 		e.preventDefault();
-		var form = $('#form-pass-recovery');
 		var recoverBtn = $(this);
+		form = $('#form-pass-recovery');
 		validateForms(form, {handleMsg: true});
 		if(form.valid()) {
 			var textBtn = recoverBtn.text();

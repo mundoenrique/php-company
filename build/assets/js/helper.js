@@ -4,7 +4,7 @@ var loader = $('#loader').html();
 var validatePass = /^[\w!@\*\-\?¡¿+\/.,#]+$/;
 var currenTime;
 var screenSize;
-var verb, who, where, dataResponse, ceo_cook, btnText;
+var verb, who, where, dataResponse, ceo_cook, btnText, form;
 var searchEnterprise = $('#sb-search');
 
 $(function () {

@@ -9,7 +9,7 @@ $(function() {
 	$('#login-btn').on('click', function(e) {
 		e.preventDefault();
 		$(".general-form-msg").html('');
-		var form = $('#login-form');
+		form = $('#login-form');
 		var captcha = lang.GEN_ACTIVE_RECAPTCHA;
 		userCred = getCredentialsUser();
 		btnText = $(this).text();
