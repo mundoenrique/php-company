@@ -70,6 +70,9 @@ $(function() {
 	});
 
 	enterpriseWidgetBtn.on('click', function(e) {
+		searchEnterprise
+		.off('click')
+		.addClass('sb-disabled');
 		e.preventDefault();
 		insertFormInput(true, enterpriseWidgetForm);
 		$(this).html(loader);

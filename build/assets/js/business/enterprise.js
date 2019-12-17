@@ -1,5 +1,4 @@
 'use strict'
-var contar = false;
 $(function () {
 	var filterPage;
 	var enterpriseListEvent = $('#enterprise-list');
@@ -7,7 +6,7 @@ $(function () {
 	var noEnterprise = $('#no-enterprise');
 	var alphabetical = $('#alphabetical');
 	var showPage = $('#show-page');
-	var SelectProduc = $('.product');
+	var SelectEnterprise = $('.product');
 
 	//external js: isotope.pkgd.js
 	var enterpriseList = enterpriseListEvent.isotope({
@@ -133,19 +132,19 @@ $(function () {
 		$('#show-page > span:first').addClass('page-current');
 	};
 
-	SelectProduc.hover(function() {
+	SelectEnterprise.hover(function() {
 		if ($(this).find('span.danger').length) {
 			$(this).css('cursor', 'default')
 		}
 	});
 
-	SelectProduc.on('click', function(e) {
+	SelectEnterprise.on('click', function(e) {
 		e.preventDefault();
 		var getProducts = $(this).parent('.card').find('form').attr('id');
 		var totalProduct = parseInt($(this).find('.total-product').text());
 		getProducts = $('#'+getProducts);
 		if(totalProduct > 0) {
-			SelectProduc
+			SelectEnterprise
 			.off('click')
 			.css('cursor', 'default');
 			$(this).html(loader)
@@ -153,6 +152,9 @@ $(function () {
 			.removeClass('secondary')
 			.addClass('spinner-border-lg mx-auto');
 			insertFormInput(true, getProducts);
+			searchEnterprise
+			.off('click')
+			.addClass('sb-disabled')
 			getProducts.submit();
 		}
 	});

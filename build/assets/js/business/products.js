@@ -9,6 +9,9 @@ $(function() {
 		$(this).html(loader);
 		$(this).find('span').addClass('spinner-border-sm');
 		insertFormInput(true, getProductDetail);
+		searchEnterprise
+		.off('click')
+		.addClass('sb-disabled');
 		getProductDetail.submit();
 	});
 });

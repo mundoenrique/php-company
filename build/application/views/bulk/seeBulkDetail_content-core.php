@@ -1,7 +1,7 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 <div class="pt-3 px-5 pb-5">
 	<h1 class="primary h3 regular inline">Confirmación de Lotes</h1>
-	<span class="ml-2 regular tertiary"> Prepago B-Bogotá</span>
+	<span class="ml-2 regular tertiary"><?= $productName ?></span>
 	<div class="mb-2 flex items-center">
 		<div class="flex tertiary">
 			<nav class="main-nav nav-inferior">

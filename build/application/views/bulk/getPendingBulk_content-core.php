@@ -16,7 +16,7 @@
 		</div>
 	</div>
 	<div class="flex mt-1 mb-5 bg-color flex-nowrap justify-between">
-		<div class="flex flex-auto flex-column">
+		<div class="flex flex-auto flex-column <?= $widget ? '' : 'max-width-6';  ?>">
 			<div class="flex flex-column">
 				<span class="line-text mb-2 h4 semibold primary">Nuevos lotes</span>
 				<form id="upload-file-form">

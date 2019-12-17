@@ -5,6 +5,7 @@ var validatePass = /^[\w!@\*\-\?¡¿+\/.,#]+$/;
 var currenTime;
 var screenSize;
 var verb, who, where, dataResponse, ceo_cook, btnText;
+var searchEnterprise = $('#sb-search');
 
 $(function () {
 	$('input[type=text], input[type=password], input[type=email]').attr('autocomplete', 'off');
