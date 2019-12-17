@@ -140,10 +140,10 @@ var datatable;
 			contenido+= "<h6>" + count + ". Clave inválida</h6>";
 		}
 
-		if($("#embozo_1").val()==""){
-			++count;
-			contenido+= "<h6>" + count + ". Has ingresado una Linea Embozo 1</h6>";
-		}
+		// if($("#embozo_1").val()==""){
+		// 	++count;
+		// 	contenido+= "<h6>" + count + ". Has ingresado una Linea Embozo 1</h6>";
+		// }
 
 		if(!/[^a-zA-Z0-9 ]/.test($("#embozo_2").val())){
 
@@ -152,15 +152,15 @@ var datatable;
 			contenido+= "<h6>" + count + ". No hayas ingresado caracteres especiales en Linea Embozo 2</h6>";
 		}
 
-		if(($("#embozo_1").val().length > 25 || ($("#embozo_1").val().length < 3))){
-			++count;
-			contenido+= "<h6>" + count + ". No hayas ingresado menos de 3 y más de 25 caracteres en Linea Embozo 1</h6>";
-		}
+		// if(($("#embozo_1").val().length > 25 || ($("#embozo_1").val().length < 3))){
+		// 	++count;
+		// 	contenido+= "<h6>" + count + ". No hayas ingresado menos de 3 y más de 25 caracteres en Linea Embozo 1</h6>";
+		// }
 
-		if(/[^a-zA-Z0-9 ]/.test($("#embozo_1").val())){
-			++count;
-			contenido+= "<h6>" + count + ". No hayas ingresado caracteres especiales en Linea Embozo 1</h6>";
-		}
+		// if(/[^a-zA-Z0-9 ]/.test($("#embozo_1").val())){
+		// 	++count;
+		// 	contenido+= "<h6>" + count + ". No hayas ingresado caracteres especiales en Linea Embozo 1</h6>";
+		// }
 
 		if(maxTarjetas !== 0 && cantTartjetas > maxTarjetas) {
 			++count;
