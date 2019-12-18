@@ -1,6 +1,13 @@
 'use strict'
 $(function() {
 	var productDetail = $('.product-detail');
+	var noProduct = $('#no-product');
+	var productList = $('#product-list');
+
+	if(code > 2) {
+		noProduct.removeClass('none');
+		productList.addClass('none');
+	}
 
 	productDetail.on('click', function(e) {
 		e.preventDefault();

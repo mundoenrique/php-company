@@ -77,7 +77,7 @@
 				<form id="confirm-bulk-btn" method="post">
 					<div class="flex flex-column mb-4 mt-4 px-5 justify-center items-center">
 						<div class="form-group mb-3 mb-3 col-4 col-lg-3">
-							<input id="bulkTicked"  type="hidden"  value="<?= $detailBulk->bulkTicked ?>">
+							<input id="bulkTicked" name="bulkTicked"  type="hidden"  value="<?= $detailBulk->bulkTicked ?>">
 							<input id="password" name="password" class="form-control" type="password" placeholder="Ingresa tu contraseña">
 							<div class="help-block"></div>
 						</div>

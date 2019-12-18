@@ -38,7 +38,7 @@
 	<div class="line mt-1"></div>
 
 	<div class="flex mx-4 my-5 pt-2 flex-wrap justify-between">
-		<div class="flex-auto">
+		<div id="product-list" class="flex-auto">
 			<?php foreach($productList AS $pos => $products): ?>
 			<div class="select-product flex mb-1 pl-3 pr-4 py-1 bg-white justify-between items-center">
 				<div class="flex mr-3 mx-1 items-center">
@@ -63,10 +63,11 @@
 			</div>
 			<?php endforeach; ?>
 		</div>
-		<div>
-			<?php if($widget): ?>
-			<?php $this->load->view('widget/widget_enterprise-product_content'.$newViews, $widget) ?>
-			<?php endif; ?>
+		<div id="no-product" class="flex-auto my-5 py-4 center none">
+			<span class="h4">No fue posible obtener la lista de productos asociados</span>
 		</div>
+		<?php if($widget): ?>
+		<?php $this->load->view('widget/widget_enterprise-product_content'.$newViews, $widget) ?>
+		<?php endif; ?>
 	</div>
 </div>

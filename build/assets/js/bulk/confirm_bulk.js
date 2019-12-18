@@ -25,8 +25,15 @@ $(function () {
 			callNovoCore(verb, who, where, data, function(response) {
 				btnConfirmBulk.html(btnText);
 				insertFormInput(false);
+				inputPass.val('');
+				respConfirmBulk[response.code](response);
 			});
 		}
 	});
 
+	const respConfirmBulk = {
+		0: function(response) {
+			notiSystem(response.title, response.msg, response.icon, response.data);
+		}
+	}
 });

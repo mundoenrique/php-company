@@ -135,14 +135,19 @@ class Novo_Business_Model extends NOVO_Model {
 					$this->response->data->productList = $productList->productList;
 				}
 				break;
-				/* case -138:
-				break; */
+			case -138:
+				$this->response->code = 3;
+			break;
 		}
 
-		if($this->response->code != 0 && !$select) {
-			$this->response->data->categoriesList = [];
-			$this->response->data->brandList = [];
-			$this->response->data->productList = [];
+		if($this->response->code != 0) {
+			$this->response->msg = 'No fue posible obtener la lista de productos asociados, vuelve a intentarlor';
+			if(!$select) {
+				$this->response->data->categoriesList = [];
+				$this->response->data->brandList = [];
+				$this->response->data->productList = [];
+
+			}
 		}
 
 		return $this->responseToTheView(lang('GEN_GET_PRODUCTS'));

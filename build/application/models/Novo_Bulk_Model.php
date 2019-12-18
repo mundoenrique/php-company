@@ -326,14 +326,12 @@ class Novo_Bulk_Model extends NOVO_Model {
 		$this->dataAccessLog->modulo = 'Lotes';
 		$this->dataAccessLog->function = 'Validar Lote';
 		$this->dataAccessLog->operation = 'Confirmar Lote';
-		log_message('INFO', 'NOVO -----------------'.json_encode($this->session->flashdata('bulkConfirmInfo')));
+
 		$bulkConfirmInfo = $this->session->flashdata('bulkConfirmInfo');
 		$bulkConfirmInfo->lineaEmbozo1 = !isset($dataRequest->enbLine1) ?: $dataRequest->enbLine1;
 		$bulkConfirmInfo->lineaEmbozo2 = !isset($dataRequest->enbLine2) ?: $dataRequest->enbLine2;
 		$bulkConfirmInfo->conceptoAbono = !isset($dataRequest->paymentConcept) ?: $dataRequest->paymentConcept;
 		$bulkConfirmInfo->codCia = $this->session->enterpriseInf->idFiscal;
-
-
 
 		$this->dataRequest->idOperation = $bulkConfirmInfo->idTipoLote == 'L' && $this->country != 'Ec-bp' ? 'reprocesarLoteGeneral' :'confirmarLote';
 		$this->dataRequest->lotesTO = $bulkConfirmInfo;
@@ -349,7 +347,31 @@ class Novo_Bulk_Model extends NOVO_Model {
 		];
 
 		$response = $this->sendToService(lang('GEN_CONFIRM_BULK'));
-		//rc: -142
+
+		switch ($this->isResponseRc) {
+			case 0:
+				$this->response->code = 0;
+				$this->response->title = 'Confirmación de lote';
+				$this->response->msg = 'EL lote fie confirmado exitosamente';
+				$this->response->data['btn1']['link'] = base_url('lotes-autorizacion');
+				break;
+			case -1:
+				$this->response->code = 0;
+				$this->response->title = 'Confirmación de lote';
+				$this->response->msg = 'Por vafor verifica tu contraseña y vuelve a intentarlo';
+				$this->response->data['btn1']['action'] = 'close';
+				break;
+			case -142:
+				$this->response->code = 0;
+				$this->response->title = 'Confirmación de lote';
+				$this->response->msg = 'No fue posible confirmar el lote por favor intentalo más tarde';
+				break;
+		}
+
+		if($this->isResponseRc != 0) {
+			$this->session->set_flashdata('bulkConfirmInfo', $bulkConfirmInfo);
+		}
+
 		return $this->responseToTheView(lang('GEN_CONFIRM_BULK'));
 	}
 }
