@@ -4,23 +4,20 @@ $(function() {
 	var userLogin = $('#user_login');
 	var userPass = $('#user_pass');
 	$.balloon.defaults.css = null;
-	disabledInputsform(false);
+	insertFormInput(false);
 
 	$('#login-btn').on('click', function(e) {
 		e.preventDefault();
 		$(".general-form-msg").html('');
-		form = $('#login-form');
 		var captcha = lang.GEN_ACTIVE_RECAPTCHA;
+		form = $('#login-form');
 		userCred = getCredentialsUser();
 		btnText = $(this).text();
-		form.find('input').each(function() {
-			var trimVal = $(this).val().trim()
-			$(this).val(trimVal)
-		});
-
+		formInputTrim(form);
 		validateForms(form, {handleMsg: false});
+
 		if(form.valid()) {
-			disabledInputsform(true);
+			insertFormInput(true);
 			$(this).html(loader);
 			if(captcha) {
 				grecaptcha.ready(function() {
@@ -57,13 +54,13 @@ $(function() {
 		}
 	});
 
-	function disabledInputsform(disable) {
+	function insertFormInput(disable) {
 		$('#login-form input, #login-form button').attr('disabled', disable);
 	}
 
 	function restartFormLogin() {
 
-		disabledInputsform(false);
+		insertFormInput(false);
 		$('#login-btn').html(btnText);
 		userPass.val('');
 		if(country == 'bp') {
@@ -75,10 +72,8 @@ $(function() {
 	};
 
 	function getCredentialsUser(){
-		ceo_cook = decodeURIComponent(
-			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-		);
-		var cypherPass = CryptoJS.AES.encrypt(userPass.val(), ceo_cook, { format: CryptoJSAesJson }).toString();
+		ceo_cook = getCookieValue();
+		cypherPass = CryptoJS.AES.encrypt(userPass.val(), ceo_cook, { format: CryptoJSAesJson }).toString();
 
 		return {
 			user: userLogin.val(),

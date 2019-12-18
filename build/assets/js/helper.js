@@ -4,8 +4,9 @@ var loader = $('#loader').html();
 var validatePass = /^[\w!@\*\-\?¡¿+\/.,#]+$/;
 var currenTime;
 var screenSize;
-var verb, who, where, dataResponse, ceo_cook, btnText, form;
+var verb, who, where, dataResponse, ceo_cook, btnText, form, cypherPass;
 var searchEnterprise = $('#sb-search');
+var inputPass = $('#password');
 
 $(function () {
 	$('input[type=text], input[type=password], input[type=email]').attr('autocomplete', 'off');
@@ -28,9 +29,7 @@ $(function () {
  * @date 15/04/2019
  */
 function callNovoCore(verb, who, where, request, _response_) {
-	ceo_cook = decodeURIComponent(
-		document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-	);
+	ceo_cook = getCookieValue();
 	request.currenTime = new Date();
 	request.screenSize = screen.width;
 	var dataRequest = JSON.stringify({
@@ -83,6 +82,16 @@ function callNovoCore(verb, who, where, request, _response_) {
 		notiSystem(response.title, response.msg, response.icon, response.data);
 		_response_(response);
 	});
+}
+/**
+ * @info Obtiene valor de cookie
+ * @author J. Enrique Peñaloza Piñero
+ * @date December 18th, 2019
+ */
+function getCookieValue() {
+	return decodeURIComponent(
+		document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+	);
 }
 /**
  * @info Uso del modal informativo
@@ -168,9 +177,7 @@ function insertFormInput(disabled, form = false,) {
 	.prop('disabled', disabled);
 
 	if(form) {
-		ceo_cook = decodeURIComponent(
-			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-		);
+		ceo_cook = getCookieValue();
 		currenTime = new Date();
 		screenSize = screen.width;
 		form.append(`<input type="hidden" name="ceo_name" value="${ceo_cook}"></input>`);
@@ -187,4 +194,15 @@ function insertFormInput(disabled, form = false,) {
 function getPropertyOfElement(property, element) {
 	var element = element || 'body';
 	return $(element).attr(property);
+}
+/**
+ * @info quita espacios en blanco de los campos input
+ * @author J. Enrique Peñaloza Piñero
+ * @date November 18th, 2019
+ */
+function formInputTrim(form) {
+	form.find('input').each(function() {
+		var trimVal = $(this).val().trim()
+		$(this).val(trimVal)
+	});
 }

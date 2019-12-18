@@ -25,7 +25,6 @@ $(function () {
 
 		if(form.valid()) {
 			btnAction.html(loader);
-			verb = 'POST'; who = 'Bulk'; where = 'LoadBulk';
 			data = {
 				file: file[0].files[0],
 				typeBulk: SelectTypeBulk.val(),
@@ -33,6 +32,7 @@ $(function () {
 				typeBulkText: $('#type-bulk option:selected').text()
 			}
 			insertFormInput(true);
+			verb = 'POST'; who = 'Bulk'; where = 'LoadBulk';
 			callNovoCore(verb, who, where, data, function(response) {
 				btnAction.html(btnText);
 				insertFormInput(false);
@@ -117,12 +117,13 @@ $(function () {
     }
 	});
 
-	$('#pending-bulk').on('click', 'button', function(e){
+	$('#pending-bulk').on('click', 'button', function(e) {
 		e.preventDefault();
 		var event = $(e.currentTarget);
 		var action = event.attr('title');
 		form = $(this).parent().find('form')
 		insertFormInput(true, form);
+
 		switch(action) {
 			case 'Ver':
 				form.attr('action', baseURL+'detalle-lote');
@@ -139,9 +140,11 @@ $(function () {
 				console.log(bulkInfo)
 				break;
 		}
+
 		if(action != 'Eliminar') {
 			form.submit();
 		}
+
 		insertFormInput(false);
 	});
 });

@@ -135,6 +135,8 @@ class Novo_Business_Model extends NOVO_Model {
 					$this->response->data->productList = $productList->productList;
 				}
 				break;
+				/* case -138:
+				break; */
 		}
 
 		if($this->response->code != 0 && !$select) {

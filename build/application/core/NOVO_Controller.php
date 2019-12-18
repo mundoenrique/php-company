@@ -43,6 +43,8 @@ class NOVO_Controller extends CI_Controller {
 		$this->products = $this->session->has_userdata('products');
 		$this->render->userId = $this->session->userId;
 		$this->render->fullName = $this->session->fullName;
+		$this->render->productName = !$this->session->has_userdata('productInf') ?:
+			$this->session->productInf->productName.' / '.$this->session->productInf->brand;
 		$this->render->activeRecaptcha = $this->config->item('active_recaptcha');
 		$this->render->widget =  FALSE;
 		$this->greeting = (int) $this->session->greeting;

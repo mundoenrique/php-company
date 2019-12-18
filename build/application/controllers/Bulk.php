@@ -41,7 +41,6 @@ class Bulk extends NOVO_Controller {
 		$typesLot = $this->Bulk->callWs_getTypeLots_Bulk(TRUE);
 		$this->render->typesLot = $typesLot->data->typesLot;
 		$this->render->pendingBulk = $responseList->data->pendingBulk;
-		$this->render->productName = $this->session->productInf->productName.' / '.$this->session->productInf->brand;
 		$this->render->titlePage = lang('GEN_MENU_BULK_LOAD');
 		$this->views = ['bulk/'.$view];
 		$this->loadView($view);
