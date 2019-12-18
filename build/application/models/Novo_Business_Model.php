@@ -137,7 +137,7 @@ class Novo_Business_Model extends NOVO_Model {
 				break;
 			case -138:
 				$this->response->code = 3;
-				$this->response->msg = 'No fue posible obtener la lista de productos asociados, vuelve a intentarlor';
+				$this->response->msg = 'No fue posible obtener la lista de productos asociados, vuelve a intentarlo';
 				break;
 		}
 

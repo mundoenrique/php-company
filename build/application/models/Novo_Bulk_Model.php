@@ -235,7 +235,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 				}
 			}
 		} else {
-			$this->response->code = 3;
+			$this->response->code = 2;
 			$this->response->title = 'Cargar Lote';
 			$this->response->msg = "No fue posible mover el archivo al servidor, por favor intentalo de nuevo";
 			$this->response->data = [
