@@ -46,7 +46,8 @@ function validateForms(form) {
 			"user_login":	{required: true, pattern: alphanumunder},
 			"user_pass": 	{verifyRequired: '#user_login', verifyPattern: '#user_login'},
 			"type-bulk": 	{requiredTypeBulk: true},
-			"file-bulk":	{required: true, extension: "xls|xlsx|txt"}
+			"file-bulk":	{required: true, extension: "xls|xlsx|txt"},
+			"password": {required: true}
 		},
 		messages: {
 			"user_login": lang.VALIDATE_USERLOGIN,
@@ -55,7 +56,8 @@ function validateForms(form) {
 				verifyPattern: lang.VALIDATE_USERPASS_PATT
 			},
 			"type-bulk": lang.VALIDATE_BULK_TYPE,
-			"file-bulk": lang.VALIDATE_BULK_FILE
+			"file-bulk": lang.VALIDATE_BULK_FILE,
+			"password": lang.VALIDATE_PASS
 		},
 		errorPlacement: function(error, element) {
 			$(element).closest('.form-group').find('.help-block').html(error.html());

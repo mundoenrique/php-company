@@ -278,13 +278,11 @@ class Novo_Bulk_Model extends NOVO_Model {
 			'bulkNumber' => '',
 			'totaRecords' => '',
 			'amount' => '',
-			'fileName' => '',
-			'bulkTicked' => '',
-			'bulkStatus' => '',
-			'bulkId' => '',
 			'success' => 'Lote cargado exitosamente',
-			'errors' => []
+			'errors' => [],
 		];
+		$bulkConfirmInfo = new stdClass();
+
 		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
@@ -295,10 +293,8 @@ class Novo_Bulk_Model extends NOVO_Model {
 				$detailBulk['bulkNumber'] = $response->lotesTO->numLote;
 				$detailBulk['totaRecords'] = $response->lotesTO->cantRegistros;
 				$detailBulk['amount'] = $response->lotesTO->monto;
-				$detailBulk['fileName'] = $response->lotesTO->nombreArchivo;
-				$detailBulk['bulkTicked'] = $response->lotesTO->idTicket;
-				$detailBulk['bulkStatus'] = $response->lotesTO->estatus;
-				$detailBulk['bulkId'] = $response->lotesTO->idLote;
+				$bulkConfirmInfo = $response->lotesTO;
+				$this->session->set_flashdata('bulkConfirmInfo', $bulkConfirmInfo);
 
 				if(!empty($response->lotesTO->mensajes)) {
 					foreach($response->lotesTO->mensajes AS $pos => $msg) {
@@ -308,11 +304,23 @@ class Novo_Bulk_Model extends NOVO_Model {
 						$detailBulk['errors'][] = (object) $error;
 					}
 				}
+
 				$this->response->data->detailBulk = (object) $detailBulk;
 
 				break;
 		}
 
 		return $this->responseToTheView(lang('GEN_DETAIL_BULK'));
+	}
+	/**
+	 * @info Confirma un lote
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date December 18th, 2019
+	 */
+	public function callWs_ConfirmBulk_Bulk($dataRequest)
+	{
+		log_message('INFO', 'NOVO Bulk Model: ConfirmBulk method Initialized');
+
+		return $this->responseToTheView(lang('GEN_CONFIRM_BULK'));
 	}
 }

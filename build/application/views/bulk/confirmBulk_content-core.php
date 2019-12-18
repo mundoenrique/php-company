@@ -74,10 +74,11 @@
 
 				<div class="line mb-2"></div>
 
-				<form method="post">
+				<form id="confirm-bulk-btn" method="post">
 					<div class="flex flex-column mb-4 mt-4 px-5 justify-center items-center">
-						<div class="mb-3 mb-3 col-4 col-lg-3">
-							<input id="password" class="form-control" type="password" placeholder="Ingresa tu contraseña">
+						<div class="form-group mb-3 mb-3 col-4 col-lg-3">
+							<input id="password" name="password" class="form-control" type="password" placeholder="Ingresa tu contraseña">
+							<div class="help-block"></div>
 						</div>
 						<div class="flex flex-row">
 							<div class="mb-3 mr-4">

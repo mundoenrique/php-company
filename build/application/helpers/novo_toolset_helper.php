@@ -158,6 +158,7 @@ if(!function_exists('languajeLoad')) {
 				$languages = [
 					'login' => ['login', 'validate'],
 					'getPendingBulk'	=> ['validate'],
+					'confirmBulk'	=> ['validate'],
 				];
 				break;
 			case 'co':
@@ -201,6 +202,7 @@ if(!function_exists('languajeLoad')) {
 					'getProducts'	=> ['products'],
 					'getProductDetail'	=> ['products'],
 					'getPendingBulk'	=> ['validate'],
+					'confirmBulk'	=> ['validate'],
 				];
 		}
 
