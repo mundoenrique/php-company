@@ -47,7 +47,7 @@ function validateForms(form) {
 			"user_pass": 	{verifyRequired: '#user_login', verifyPattern: '#user_login'},
 			"type-bulk": 	{requiredTypeBulk: true},
 			"file-bulk":	{required: true, extension: "xls|xlsx|txt"},
-			"password": {required: true}
+			"password": {required: true, pattern: userPassword}
 		},
 		messages: {
 			"user_login": lang.VALIDATE_USERLOGIN,

@@ -286,15 +286,13 @@ class Novo_Bulk_Model extends NOVO_Model {
 		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
-				log_message('info', 'NOVO --------------------'.json_encode($response));
 				$detailBulk['idFiscal'] = $response->lotesTO->idEmpresa;
 				$detailBulk['enterpriseName'] = mb_strtoupper($response->lotesTO->nombreEmpresa);
 				$detailBulk['bulkType'] = $response->lotesTO->tipoLote;
 				$detailBulk['bulkNumber'] = $response->lotesTO->numLote;
 				$detailBulk['totaRecords'] = $response->lotesTO->cantRegistros;
 				$detailBulk['amount'] = $response->lotesTO->monto;
-				$bulkConfirmInfo = $response->lotesTO;
-				$this->session->set_flashdata('bulkConfirmInfo', $bulkConfirmInfo);
+				$detailBulk['bulkTicked'] = $response->lotesTO->idTicket;
 
 				if(!empty($response->lotesTO->mensajes)) {
 					foreach($response->lotesTO->mensajes AS $pos => $msg) {
@@ -305,6 +303,9 @@ class Novo_Bulk_Model extends NOVO_Model {
 					}
 				}
 
+				unset($response->lotesTO->mensajes);
+				$bulkConfirmInfo = $response->lotesTO;
+				$this->session->set_flashdata('bulkConfirmInfo', $bulkConfirmInfo);
 				$this->response->data->detailBulk = (object) $detailBulk;
 
 				break;
@@ -321,6 +322,34 @@ class Novo_Bulk_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO Bulk Model: ConfirmBulk method Initialized');
 
+		$this->className = 'com.novo.objects.MO.ConfirmarLoteMO';
+		$this->dataAccessLog->modulo = 'Lotes';
+		$this->dataAccessLog->function = 'Validar Lote';
+		$this->dataAccessLog->operation = 'Confirmar Lote';
+		log_message('INFO', 'NOVO -----------------'.json_encode($this->session->flashdata('bulkConfirmInfo')));
+		$bulkConfirmInfo = $this->session->flashdata('bulkConfirmInfo');
+		$bulkConfirmInfo->lineaEmbozo1 = !isset($dataRequest->enbLine1) ?: $dataRequest->enbLine1;
+		$bulkConfirmInfo->lineaEmbozo2 = !isset($dataRequest->enbLine2) ?: $dataRequest->enbLine2;
+		$bulkConfirmInfo->conceptoAbono = !isset($dataRequest->paymentConcept) ?: $dataRequest->paymentConcept;
+		$bulkConfirmInfo->codCia = $this->session->enterpriseInf->idFiscal;
+
+
+
+		$this->dataRequest->idOperation = $bulkConfirmInfo->idTipoLote == 'L' && $this->country != 'Ec-bp' ? 'reprocesarLoteGeneral' :'confirmarLote';
+		$this->dataRequest->lotesTO = $bulkConfirmInfo;
+		$passWord = json_decode(base64_decode($dataRequest->pass));
+		$passWord = $this->cryptography->decrypt(
+			base64_decode($passWord->plot),
+			utf8_encode($passWord->passWord)
+		);
+		$this->dataRequest->usuario = [
+			'userName' => $this->userName,
+			'password' => md5($passWord),
+			'codigoGrupo' => $this->session->enterpriseInf->enterpriseGroup
+		];
+
+		$response = $this->sendToService(lang('GEN_CONFIRM_BULK'));
+		//rc: -142
 		return $this->responseToTheView(lang('GEN_CONFIRM_BULK'));
 	}
 }

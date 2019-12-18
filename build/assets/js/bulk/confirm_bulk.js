@@ -15,6 +15,7 @@ $(function () {
 			ceo_cook = getCookieValue();
 			cypherPass = CryptoJS.AES.encrypt(inputPass.val(), ceo_cook, { format: CryptoJSAesJson }).toString();
 			data = {
+				bulkTicked: $('#bulkTicked').val(),
 				pass: btoa(JSON.stringify({
 					passWord: cypherPass,
 					plot: btoa(ceo_cook)
