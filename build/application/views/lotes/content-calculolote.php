@@ -157,7 +157,7 @@ $reten = ($reten == NULL) ? "nonEmpty" : trim($reten, ', ');
 									$monComision = '';
 								}
 								echo "
-								<tr id='$value->idOrdenTemp'>
+								<tr class='tr-calculo' id='$value->idOrdenTemp'>
 									<td class='OS-icon'>
 										<a id='ver_lotes' title='Ver lotes'>
 											<span aria-hidden='true' class='icon' data-icon='&#xe003;'></span>
