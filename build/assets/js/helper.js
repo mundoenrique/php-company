@@ -59,6 +59,11 @@ function callNovoCore(verb, who, where, request, _response_) {
 		dataType: 'json'
 	}).done(function (response, textStatus, jqXHR) {
 
+		if(request.modalReq) {
+			$('#accept').prop('disabled', false)
+			$('#system-info').dialog('destroy');
+		}
+
 		response = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, { format: CryptoJSAesJson }).toString(CryptoJS.enc.Utf8))
 
 		if(response.code === codeResp) {

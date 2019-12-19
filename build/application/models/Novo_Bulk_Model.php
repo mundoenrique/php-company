@@ -314,6 +314,22 @@ class Novo_Bulk_Model extends NOVO_Model {
 		return $this->responseToTheView(lang('GEN_DETAIL_BULK'));
 	}
 	/**
+	 * @info Elimina un lote
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date December 18th, 2019
+	 */
+	public function callWs_DeleteBulk_Bulk($dataRequest)
+	{
+		log_message('INFO', 'NOVO Bulk Model: DeleteBulk method Initialized');
+
+		$this->className = 'com.novo.objects.MO.ConfirmarLoteMO';
+		$this->dataAccessLog->modulo = 'Lotes';
+		$this->dataAccessLog->function = 'Cargar lotes';
+		$this->dataAccessLog->operation = 'Eliminar Lote';
+
+		$this->dataRequest->idOperation = 'eliminarLoteNoConfirmado';
+	}
+	/**
 	 * @info Confirma un lote
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date December 18th, 2019

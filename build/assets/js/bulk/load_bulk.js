@@ -132,12 +132,24 @@ $(function () {
 				form.attr('action', baseURL+'confirmar-lote');
 				break;
 			case 'Eliminar':
-				var bulkInfo = {
-					'bulkId': form.find('input[name="bulkId"]').val(),
-					'bulkTicked': form.find('input[name="bulkTicked"]').val(),
-					'bulkStatus': form.find('input[name="bulkStatus"]').val()
+				var oldID = $('#accept').attr('id');
+				$('#accept').attr('id', 'delete-bulk-btn');
+				var inputModal;
+				data = {
+					btn1: {
+						text: 'Eliminar',
+						action: 'close'
+					},
+					btn2: {
+						action: 'close'
+					}
 				}
-				console.log(bulkInfo)
+				inputModal = '<form id="delete-bulk-form" class="form-group">';
+				inputModal+= 		'<input id="password" name="password" type="password" autocomplete="off" placeholder="Indica tu contraseña">';
+				inputModal+= 		'<div class="help-block"></div>';
+				inputModal+= '</form>';
+				notiSystem('Eliminar lote', inputModal, lang.GEN_ICON_INFO, data);
+				deleteBulk(oldID);
 				break;
 		}
 
@@ -147,4 +159,49 @@ $(function () {
 
 		insertFormInput(false);
 	});
+
 });
+/**
+ * @info Elimina un lote
+ * @author J. Enrique Peñaloza Piñero
+ * @date December 18th, 2019
+ */
+function deleteBulk(oldID) {
+	console.log(oldID)
+	var deleteBulkBtn = $('#delete-bulk-btn')
+	var formDeleteBulk = $('#delete-bulk-form');
+	deleteBulkBtn.on('click', function() {
+		formInputTrim(formDeleteBulk);
+		validateForms(formDeleteBulk);
+
+		if(formDeleteBulk.valid()) {
+			$(this)
+			.html(loader)
+			.attr('disabled', true)
+			.attr('id', oldID);
+			ceo_cook = getCookieValue();
+			cypherPass = CryptoJS.AES.encrypt(inputPass.val(), ceo_cook, { format: CryptoJSAesJson }).toString();
+			data = {
+				modalReq: true,
+				bulkId: form.find('input[name="bulkId"]').val(),
+				bulkTicked: form.find('input[name="bulkTicked"]').val(),
+				bulkStatus: form.find('input[name="bulkStatus"]').val(),
+				pass: btoa(JSON.stringify({
+					passWord: cypherPass,
+					plot: btoa(ceo_cook)
+				}))
+			}
+			verb = 'POST'; who = 'Bulk'; where = 'DeleteBulk';
+			callNovoCore(verb, who, where, data, function(response) {
+
+				switch(response.code) {
+					case 0:
+						break;
+					}
+				});
+
+		}
+	});
+
+
+}

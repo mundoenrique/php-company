@@ -18,6 +18,7 @@ $(function() {
 
 		if(form.valid()) {
 			insertFormInput(true);
+			inputDisabled(true);
 			$(this).html(loader);
 			if(captcha) {
 				grecaptcha.ready(function() {
@@ -54,13 +55,10 @@ $(function() {
 		}
 	});
 
-	function insertFormInput(disable) {
-		$('#login-form input, #login-form button').attr('disabled', disable);
-	}
-
 	function restartFormLogin() {
 
 		insertFormInput(false);
+		inputDisabled(false);
 		$('#login-btn').html(btnText);
 		userPass.val('');
 		if(country == 'bp') {
@@ -161,3 +159,7 @@ $(function() {
 		}
 	}
 })
+
+function inputDisabled(disable) {
+	$('#login-form input').attr('disabled', disable);
+}
