@@ -763,10 +763,10 @@ function validarFields()
 		valCorreo.removeClass('textbox-transfer');
 	}
 
-	if(valCelular.val().length < 10 || valCelular.val().length > 13)
+	if(valCelular.val().length != 10)
 	{
 		errorCelular.show();
-		errorCelular.html('El campo debe tener mínimo 10 dígitos y máximo 13 dígitos')
+		errorCelular.html('El campo debe tener 10 dígitos')
 		validInput = false;
 		valCelular.addClass('textbox-transfer');
 
@@ -977,7 +977,7 @@ function llamarWSCambio(pass,mensaje,url,op,alerta) {
 					if (item.rcNovoTrans!="0"){
 						contador_menos = contador_menos + 1;
 					}
-			});	
+			});
 			}
 
 			$aux.dialog("destroy");
