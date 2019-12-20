@@ -13,6 +13,7 @@ class Asset {
 	public function __construct()
 	{
 		log_message('INFO', 'NOVO Assets Library Class Initialized');
+
 		$this->cssFiles = [];
 		$this->jsFiles = [];
 		$this->section = [];

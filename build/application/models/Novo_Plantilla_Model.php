@@ -18,7 +18,7 @@ class Novo_Plantilla_Model extends NOVO_Model {
 	 */
 	public function callWs_Plantilla_User($dataRequest)
 	{
-		log_message('INFO', 'NOVO Plantilla Model: Plantilla method Initialized');
+		log_message('INFO', 'NOVO Plantilla Model: Plantilla Method Initialized');
 		$this->className = '';
 
 		$this->dataAccessLog->modulo = '';

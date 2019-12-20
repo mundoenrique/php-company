@@ -28,7 +28,7 @@ class NOVO_Controller extends CI_Controller {
 	public function __construct()
 	{
 		parent:: __construct();
-		log_message('INFO', 'NOVO_Controller Class Initialized');
+		log_message('INFO', 'NOVO Controller Class Initialized');
 
 		$this->includeAssets = new stdClass();
 		$this->request = new stdClass();
@@ -57,7 +57,7 @@ class NOVO_Controller extends CI_Controller {
 	 */
 	private function optionsCheck()
 	{
-		log_message('INFO', 'NOVO_Controller: optionsCheck Method Initialized');
+		log_message('INFO', 'NOVO Controller: optionsCheck Method Initialized');
 
 		languageLoad('generic');
 		countryCheck($this->countryUri);
@@ -114,7 +114,7 @@ class NOVO_Controller extends CI_Controller {
 	 */
 	protected function preloadView($auth)
 	{
-		log_message('INFO', 'NOVO_Controller: preloadView method initialized');
+		log_message('INFO', 'NOVO Controller: preloadView Method Initialized');
 
 		if($auth) {
 			$faviconLoader = getFaviconLoader($this->countryUri);
@@ -191,10 +191,11 @@ class NOVO_Controller extends CI_Controller {
 	 */
 	protected function loadModel($request = FALSE)
 	{
-		log_message('INFO', 'NOVO_Controller: loadModel method initialized. Model loaded: '.$this->model);
+		log_message('INFO', 'NOVO Controller: loadModel Method Initialized. Model loaded: '.$this->model);
 
 		$this->load->model($this->model,'modelLoaded');
 		$method = $this->method;
+
 		return $this->modelLoaded->$method($request);
 	}
 	/**
@@ -204,7 +205,7 @@ class NOVO_Controller extends CI_Controller {
 	 */
 	protected function responseAttr($responseView, $active = TRUE)
 	{
-		log_message('INFO', 'NOVO_Controller: responseAttr method initialized');
+		log_message('INFO', 'NOVO Controller: responseAttr Method Initialized');
 
 		$this->render->code = $responseView->code;
 
@@ -223,9 +224,7 @@ class NOVO_Controller extends CI_Controller {
 				$this->render->widget->enterpriseList = $enterpriseList->data->list;
 				$this->render->widget->countProducts = $this->products;
 				$this->render->widget->actionForm = 'detalle-producto';
-
 			}
-
 		}
 
 		if($this->render->code > 2) {
@@ -234,7 +233,6 @@ class NOVO_Controller extends CI_Controller {
 			$this->render->icon = $responseView->icon;
 			$this->render->data = json_encode($responseView->data->resp);
 		}
-
 	}
 	/**
 	 * Método para renderizar una vista
@@ -243,14 +241,14 @@ class NOVO_Controller extends CI_Controller {
 	 */
 	protected function loadView($module)
 	{
-		log_message('INFO', 'NOVO_Controller: loadView method initialized. View loaded: '.$module);
+		log_message('INFO', 'NOVO Controller: loadView Method Initialized. Model loaded: '.$module);
 
 		$userMenu = new stdClass();
 		$userMenu->userAccess = $this->session->user_access;
 		$userMenu->enterpriseUrl = lang('GEN_ENTERPRISE_LIST');
 		$this->render->settingsMenu = $userMenu;
 		$this->render->goOut = ($this->render->logged || $this->session->flashdata('changePassword'))
-		? 'cerrar-sesion' : 'inicio';
+			? 'cerrar-sesion' : 'inicio';
 		$this->render->module = $module;
 		$this->render->viewPage = $this->views;
 		$this->asset->initialize($this->includeAssets);

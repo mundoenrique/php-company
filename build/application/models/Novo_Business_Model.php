@@ -9,9 +9,9 @@ class Novo_Business_Model extends NOVO_Model {
 
 	public function __construct()
 	{
+		parent:: __construct();
 		log_message('INFO', 'NOVO Business Model Class Initialized');
 
-		parent:: __construct();
 		$this->load->library('Request_Data');
 	}
 	/**
@@ -21,7 +21,7 @@ class Novo_Business_Model extends NOVO_Model {
 	 */
 	public function callWs_getEnterprises_Business($dataRequest)
 	{
-		log_message('INFO', 'NOVO Business Model: getEnterprises method Initialized');
+		log_message('INFO', 'NOVO Business Model: getEnterprises Method Initialized');
 
 		$this->className = "com.novo.objects.MO.ListadoEmpresasMO";
 		$this->dataAccessLog->modulo = 'Negocios';
@@ -94,7 +94,7 @@ class Novo_Business_Model extends NOVO_Model {
 	 */
 	public function callWs_getProducts_Business($dataRequest)
 	{
-		log_message('INFO', 'NOVO Business Model: getProducts method Initialized');
+		log_message('INFO', 'NOVO Business Model: getProducts Method Initialized');
 
 		$select = isset($dataRequest->select);
 		if(!$select) {
@@ -156,7 +156,7 @@ class Novo_Business_Model extends NOVO_Model {
 	 */
 	public function callWs_getProductDetail_Business($dataRequest)
 	{
-		log_message('INFO', 'NOVO Business Model: getProductDetail method Initialized');
+		log_message('INFO', 'NOVO Business Model: getProductDetail Method Initialized');
 
 		$this->className = "com.novo.objects.MO.ListadoMenuMO";
 		$this->dataAccessLog->modulo = 'Negocios';

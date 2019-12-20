@@ -10,7 +10,7 @@ class Business extends NOVO_Controller {
 	public function __construct()
 	{
 		parent:: __construct();
-		log_message('INFO', 'NOVO Business Controller class Initialized');
+		log_message('INFO', 'NOVO Business Controller Class Initialized');
 	}
 	/**
 	 * @info Método para renderizar las empresas asociadas al usuario

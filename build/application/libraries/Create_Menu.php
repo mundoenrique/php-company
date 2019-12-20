@@ -10,6 +10,7 @@ class Create_Menu {
 	public function __construct()
 	{
 		log_message('INFO', 'NOVO Create_Menu Library Class Initialized');
+
 		$this->CI = &get_instance();
 		$this->requestServ = new stdClass();
 		$this->responseDefect = new stdClass();

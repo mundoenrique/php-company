@@ -19,7 +19,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 	 */
 	public function callWs_getPendingBulk_Bulk()
 	{
-		log_message('INFO', 'NOVO Bulk Model: getPendingBulk method Initialized');
+		log_message('INFO', 'NOVO Bulk Model: getPendingBulk Method Initialized');
 
 		$this->className = 'com.novo.objects.MO.ConfirmarLoteMO';
 		$this->dataAccessLog->modulo = 'Lotes';
@@ -89,7 +89,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 	 */
 	public function callWs_GetBranchOffices_Bulk($dataRequest)
 	{
-		log_message('INFO', 'NOVO Bulk Model: GetBranchOffices method Initialized');
+		log_message('INFO', 'NOVO Bulk Model: GetBranchOffices Method Initialized');
 
 		$this->className = 'com.novo.objects.MO.ListadoSucursalesMO';
 		$this->dataAccessLog->modulo = 'Lotes';
@@ -97,6 +97,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 		$this->dataAccessLog->operation = 'Obtener sucursales';
 
 		$select = isset($dataRequest->select);
+		unset($dataRequest->select);
 		$this->dataRequest = new stdClass();
 		$this->dataRequest->idOperation = 'getConsultarSucursales';
 		$this->dataRequest->paginaActual = '1';
@@ -117,7 +118,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 				if($select) {
 					$branchOffice[] = (object) [
 						'key' => '',
-						'text' => 'Selecciona una sucursal'
+						'text' => lang('BULK_SELECT_BRANCH_OFFICE')
 					];
 				}
 
@@ -140,7 +141,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 			$this->response->code = 1;
 			$branchOffice[] = (object) [
 				'key' => '',
-				'text' => 'Intenta de nuevo'
+				'text' => lang('RESP_TRY_AGAIN')
 			];
 		}
 
@@ -155,7 +156,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 	 */
 	public function callWs_getTypeLots_Bulk()
 	{
-		log_message('INFO', 'NOVO Bulk Model: getTypeLots method Initialized');
+		log_message('INFO', 'NOVO Bulk Model: getTypeLots Method Initialized');
 
 		$this->className = 'com.novo.objects.MO.ConfirmarLoteMO';
 		$this->dataAccessLog->modulo = 'Lotes';
@@ -178,7 +179,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 				$typesLot[] = (object) [
 					'key' => '',
 					'format' => '',
-					'text' => 'Selecciona un tipo de lote'
+					'text' => lang('BULK_SELECT_BULK_TYPE')
 				];
 
 				foreach($response->lista AS $pos => $types) {
@@ -197,7 +198,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 			$typesLot[] = (object) [
 				'format' => '',
 				'key' => '',
-				'text' => 'Intenta de nuevo'
+				'text' => lang('RESP_TRY_AGAIN')
 			];
 		}
 
@@ -212,7 +213,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 	 */
 	public function callWs_LoadBulk_Bulk($dataRequest)
 	{
-		log_message('INFO', 'NOVO Bulk Model: LoadBulk method Initialized');
+		log_message('INFO', 'NOVO Bulk Model: LoadBulk Method Initialized');
 
 		$moveFile = TRUE;
 		$this->sendFile($dataRequest->fileName, lang('GEN_LOAD_BULK'));
@@ -244,7 +245,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 
 			switch ($this->isResponseRc) {
 				case 0:
-					$this->response->msg = "Lote cargado exitosamente";
+					$this->response->msg = lang('BULK_SUCCESS');
 					$this->response->icon = lang('GEN_ICON_SUCCESS');
 					$this->response->data['btn1']['link'] = base_url('cargar-lotes');
 					$respLoadBulk = TRUE;
@@ -253,17 +254,17 @@ class Novo_Bulk_Model extends NOVO_Model {
 					case -109:
 					case -256:
 					case -21:
-					$this->response->msg = "No fue posible cargar el lote, por favor intentalo de nuevo";
+					$this->response->msg = lang('BULK_NO_LOAD');
 					$this->response->data['btn1']['link'] = base_url('cargar-lotes');
 					$respLoadBulk = TRUE;
 					break;
 					case -280:
-					$this->response->msg = "El tipo de archivo no es compatible con el producto";
+					$this->response->msg = lang('BULK_INCOMPATIBLE_FILE');
 					$respLoadBulk = TRUE;
 					break;
 					case -128:
 					$code = 3;
-					$title = 'El lote no se cargo:';
+					$title = lang('BULK_NO_LOAD_TITLE');
 					$errorsHeader = $response->erroresFormato->erroresEncabezado->errores;
 					$errorsFields = $response->erroresFormato->erroresRegistros;
 					$errorsList = [];
@@ -291,7 +292,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 
 			if($respLoadBulk) {
 				$this->response->code = isset($code) ? $code : 2;
-				$this->response->title = isset($code) ? $title : "Cargar lote";
+				$this->response->title = isset($code) ? $title : lang('BULK_TITLE');
 				if($this->isResponseRc != 0) {
 					$this->response->data = [
 						'btn1'=> [
@@ -302,8 +303,8 @@ class Novo_Bulk_Model extends NOVO_Model {
 			}
 		} else {
 			$this->response->code = 2;
-			$this->response->title = 'Cargar Lote';
-			$this->response->msg = "No fue posible mover el archivo al servidor, por favor intentalo de nuevo";
+			$this->response->title = lang('BULK_TITLE');
+			$this->response->msg = lang('BULK_FILE_NO_MOVE');
 			$this->response->data = [
 				'btn1'=> [
 					'action'=> 'close'
@@ -314,13 +315,70 @@ class Novo_Bulk_Model extends NOVO_Model {
 		return $this->responseToTheView(lang('GEN_LOAD_BULK'));
 	}
 	/**
+	 * @info Elimina un lote
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date December 18th, 2019
+	 */
+	public function callWs_DeleteNoConfirmBulk_Bulk($dataRequest)
+	{
+		log_message('INFO', 'NOVO Bulk Model: DeleteNoConfirmBulk Method Initialized');
+
+		$this->className = 'com.novo.objects.MO.ConfirmarLoteMO';
+		$this->dataAccessLog->modulo = 'Lotes';
+		$this->dataAccessLog->function = 'Cargar lotes';
+		$this->dataAccessLog->operation = 'Eliminar lote no confirmado';
+
+		unset($dataRequest->modalReq);
+		$this->dataRequest->idOperation = 'eliminarLoteNoConfirmado';
+		$this->dataRequest->lotesTO = [
+			'idTicket' => $dataRequest->bulkTicked,
+			'idLote' => $dataRequest->bulkId
+		];
+		$password = json_decode(base64_decode($dataRequest->pass));
+		$password = $this->cryptography->decrypt(
+			base64_decode($password->plot),
+			utf8_encode($password->passWord)
+		);
+		$this->dataRequest->usuario = [
+			'userName' => $this->userName,
+			'password' => md5($password)
+		];
+
+		$response = $this->sendToService('DeleteNoConfirmBulk');
+
+		switch ($this->isResponseRc) {
+			case 0:
+				$this->response->code = 0;
+				$this->response->title = lang('BULK_DELETE_TITLE');
+				$this->response->msg = lang('BULK_DELETE_SUCCESS');
+				$this->response->icon = lang('GEN_ICON_SUCCESS');
+				$this->response->data['btn1'] = [
+					'text' => lang('GEN_BTN_ACCEPT'),
+					'link' => base_url('cargar-lotes'),
+					'action' => 'redirect'
+				];
+				break;
+			case -1:
+				$this->response->code = 0;
+				$this->response->title = lang('BULK_DELETE_TITLE');
+				$this->response->msg = lang('RESP_PASSWORD_NO_VALID');
+				$this->response->data['btn1'] = [
+					'text' => lang('GEN_BTN_ACCEPT'),
+					'action' => 'close'
+				];
+				break;
+		}
+
+		return $this->responseToTheView('DeleteNoConfirmBulk');
+	}
+	/**
 	 * @info obtener el detalle de un lote
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date December 1th, 2019
 	 */
 	public function callWs_GetDetailBulk_Bulk($dataRequest)
 	{
-		log_message('INFO', 'NOVO Bulk Model: GetDetailBulk method Initialized');
+		log_message('INFO', 'NOVO Bulk Model: GetDetailBulk Method Initialized');
 
 		$this->className = 'com.novo.objects.MO.ConfirmarLoteMO';
 		$this->dataAccessLog->modulo = 'Lotes';
@@ -380,67 +438,13 @@ class Novo_Bulk_Model extends NOVO_Model {
 		return $this->responseToTheView(lang('GEN_DETAIL_BULK'));
 	}
 	/**
-	 * @info Elimina un lote
-	 * @author J. Enrique Peñaloza Piñero
-	 * @date December 18th, 2019
-	 */
-	public function callWs_DeleteNoConfirmBulk_Bulk($dataRequest)
-	{
-		log_message('INFO', 'NOVO Bulk Model: DeleteNoConfirmBulk method Initialized');
-
-		$this->className = 'com.novo.objects.MO.ConfirmarLoteMO';
-		$this->dataAccessLog->modulo = 'Lotes';
-		$this->dataAccessLog->function = 'Cargar lotes';
-		$this->dataAccessLog->operation = 'Eliminar Lote';
-
-		unset($dataRequest->modalReq);
-		$this->dataRequest->idOperation = 'eliminarLoteNoConfirmado';
-		$this->dataRequest->lotesTO = [
-			'idTicket' => $dataRequest->bulkTicked,
-			'idLote' => $dataRequest->bulkId
-		];
-		$password = json_decode(base64_decode($dataRequest->pass));
-		$password = $this->cryptography->decrypt(
-			base64_decode($password->plot),
-			utf8_encode($password->passWord)
-		);
-		$this->dataRequest->usuario = [
-			'userName' => $this->userName,
-			'password' => md5($password)
-		];
-
-		$response = $this->sendToService('DeleteNoConfirmBulk');
-
-		switch ($this->isResponseRc) {
-			case 0:
-				$this->response->code = 0;
-				$this->response->title = 'Eliminar lote';
-				$this->response->msg = 'EL lote fue eliminado exitosamente';
-				$this->response->icon = lang('GEN_ICON_SUCCESS');
-				$this->response->data['btn1']['text'] = 'Aceptar';
-				$this->response->data['btn1']['link'] = base_url('cargar-lotes');
-				$this->response->data['btn1']['action'] = 'redirect';
-				break;
-			case -1:
-				$this->response->code = 0;
-				$this->response->title = 'Eliminar lote';
-				$this->response->msg = 'Por vafor verifica tu contraseña y vuelve a intentarlo';
-				$this->response->data['btn1']['text'] = 'Aceptar';
-				$this->response->data['btn1']['icon'] = lang('GEN_ICON_WARNING');
-				$this->response->data['btn1']['action'] = 'close';
-				break;
-		}
-
-		return $this->responseToTheView('DeleteNoConfirmBulk');
-	}
-	/**
 	 * @info Confirma un lote
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date December 18th, 2019
 	 */
 	public function callWs_ConfirmBulk_Bulk($dataRequest)
 	{
-		log_message('INFO', 'NOVO Bulk Model: ConfirmBulk method Initialized');
+		log_message('INFO', 'NOVO Bulk Model: ConfirmBulk Method Initialized');
 
 		$this->className = 'com.novo.objects.MO.ConfirmarLoteMO';
 		$this->dataAccessLog->modulo = 'Lotes';
@@ -471,20 +475,20 @@ class Novo_Bulk_Model extends NOVO_Model {
 		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
-				$this->response->title = 'Confirmación de lote';
-				$this->response->msg = 'EL lote fie confirmado exitosamente';
+				$this->response->title = lang('BULK_CONFIRM_TITLE');
+				$this->response->msg = lang('BULK_CONFIRM_SUCCESS');
 				$this->response->data['btn1']['link'] = base_url('lotes-autorizacion');
 				break;
 			case -1:
 				$this->response->code = 0;
-				$this->response->title = 'Confirmación de lote';
-				$this->response->msg = 'Por vafor verifica tu contraseña y vuelve a intentarlo';
+				$this->response->title = lang('BULK_CONFIRM_TITLE');
+				$this->response->msg = lang('RESP_PASSWORD_NO_VALID');
 				$this->response->data['btn1']['action'] = 'close';
 				break;
 			case -142:
 				$this->response->code = 0;
-				$this->response->title = 'Confirmación de lote';
-				$this->response->msg = 'No fue posible confirmar el lote por favor intentalo más tarde';
+				$this->response->title = lang('BULK_CONFIRM_TITLE');
+				$this->response->msg = lang('BULK_CONFIRM_FAIL');
 				break;
 		}
 

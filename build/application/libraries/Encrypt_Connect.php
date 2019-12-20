@@ -15,6 +15,7 @@ class Encrypt_Connect {
 	public function __construct()
 	{
 		log_message('INFO', 'NOVO Encrypt_Connect Library Class Initialized');
+
 		$this->CI = &get_instance();
 		$this->keyNovo = $this->CI->config->item('keyNovo');
 		$this->iv = "\0\0\0\0\0\0\0\0";

@@ -156,9 +156,8 @@ if(!function_exists('languajeLoad')) {
 				break;
 			case 'bdb':
 				$languages = [
-					'login' => ['login', 'validate'],
-					'getPendingBulk'	=> ['validate'],
-					'confirmBulk'	=> ['validate'],
+					'login' => ['login'],
+					'validatecaptcha' => ['login'],
 				];
 				break;
 			case 'co':
@@ -191,18 +190,21 @@ if(!function_exists('languajeLoad')) {
 				break;
 			default:
 				$languages = [
-					'login' => ['login', 'validate'],
-					'validatecaptcha' => ['login', 'validate'],
-					'recoverPass'	=> ['password-recover', 'validate'],
-					'changePassword'	=> ['password-change', 'validate'],
+					'login' => ['login'],
+					'validatecaptcha' => ['login'],
+					'recoverPass'	=> ['password-recover'],
+					'changePassword'	=> ['password-change'],
 					'benefits'	=> ['benefits'],
 					'terms'	=> ['terms'],
 					'rates'	=> ['rates'],
 					'getEnterprises'	=> ['enterprise'],
 					'getProducts'	=> ['products'],
 					'getProductDetail'	=> ['products'],
-					'getPendingBulk'	=> ['validate'],
-					'confirmBulk'	=> ['validate'],
+					'getPendingBulk'	=> ['bulk'],
+					'loadBulk'	=> ['bulk'],
+					'deleteNoConfirmBulk'	=> ['bulk'],
+					'confirmBulk'	=> ['bulk'],
+					'getDetailBulk'	=> ['bulk'],
 				];
 		}
 
@@ -212,7 +214,7 @@ if(!function_exists('languajeLoad')) {
 		}
 
 		if(in_array($client, $lanGeneral)) {
-			array_unshift($languagesFile, 'general');
+			array_unshift($languagesFile, 'general', 'validate');
 			$loadLanguages = TRUE;
 		}
 

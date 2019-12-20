@@ -17,6 +17,7 @@ class Verify_Access {
 	public function __construct()
 	{
 		log_message('INFO', 'NOVO Verify_Access Library Class Initialized');
+
 		$this->CI = &get_instance();
 		$this->requestServ = new stdClass();
 		$this->user = $this->CI->session->userName;

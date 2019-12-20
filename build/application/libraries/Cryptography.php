@@ -12,6 +12,7 @@ class Cryptography {
 	public function __construct()
 	{
 		log_message('INFO', 'NOVO Cryptography Library Class Initialized');
+
 		$this->CI = &get_instance();
 		$this->CypherBase = $this->CI->config->item('cypher_base');
 	}

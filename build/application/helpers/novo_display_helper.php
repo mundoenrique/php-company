@@ -51,9 +51,9 @@ if ( ! function_exists('verifyheader'))
 
 		$CI = &get_instance();
 		$client = $CI->config->item('client');
-		$country = $CI->config->item('country');
+		$country = $CI->config->item('country-uri');
 		$logged = $CI->session->has_userdata('logged');
-		$showUs = ['novo', 'banco-bog'];
+		$showUs = ['novo'];
 		$showThem = ['pichincha'];
 
 		switch ($link) {
@@ -71,10 +71,7 @@ if ( ! function_exists('verifyheader'))
 				$display = (in_array($client, $showUs));
 				break;
 			case lang('GEN_TAG_HELPER'):
-				$display = (in_array($client, $showUs) && $country == 'Ve');
-				break;
-			case lang('GEN_TAG_BRANCHOFFICE'):
-				$display = (in_array($client, $showUs) && $country == 'Bdb');
+				$display = (in_array($client, $showUs) && $country == 've');
 				break;
 		}
 
@@ -94,10 +91,10 @@ if ( ! function_exists('verifyBody'))
 
 		$CI = &get_instance();
 		$client = $CI->config->item('client');
-		$country = $CI->config->item('country');
+		$country = $CI->config->item('country-uri');
 		$logged = $CI->session->has_userdata('logged');
 		$showUs = ['novo'];
-		$showThem = ['pichincha'];
+		$showThem = ['pichincha', 'banco-bog'];
 
 		switch ($link) {
 			case lang('GEN_SIGNIN_TOP'):
@@ -111,6 +108,9 @@ if ( ! function_exists('verifyBody'))
 				break;
 			case lang('GEN_TAG_SEARCH_CAT'):
 				$display = (in_array($client, $showUs));
+				break;
+			case lang('GEN_TAG_BRANCHOFFICE'):
+				$display = (in_array($client, $showThem) && $country == 'bdb');
 				break;
 		}
 
@@ -130,7 +130,7 @@ if ( ! function_exists('verifyFooter'))
 
 		$CI = &get_instance();
 		$client = $CI->config->item('client');
-		$country = $CI->config->item('country');
+		$country = $CI->config->item('country-uri');
 		$logged = $CI->session->has_userdata('logged');
 		$show = ['novo'];
 
@@ -148,7 +148,7 @@ if ( ! function_exists('verifyFooter'))
 				$display = (in_array($client, $show) && $display);
 				break;
 			case lang('GEN_FOTTER_RATES'):
-				$display = ($module !== 'rates' && $logged && $country == 'Ve');
+				$display = ($module !== 'rates' && $logged && $country == 've');
 				$display = (in_array($client, $show) && $display);
 				break;
 			case lang('GEN_FOTTER_LOGOUT'):

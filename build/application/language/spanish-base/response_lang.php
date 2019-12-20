@@ -28,6 +28,8 @@ $lang['RESP_PASSWORD_USED'] = 'La nueva contraseña no debe coincidir <strong>co
 $lang['RESP_PASSWORD_INCORRECT'] = 'La contraseña actual es incorrecta.<br>Por favor verifíquela e intente de nuevo.';
 $lang['RESP_UNCONFIGURED_PRODUCT'] = 'El producto no fue configurado correctamente, por favor comunícate con el administrador.';
 $lang['RESP_NO_ACCESS'] = '%s, no tienes privilegios suficientes para manipular este producto.';
+$lang['RESP_TRY_AGAIN'] = 'Intenta de nuevo';
+$lang['RESP_PASSWORD_NO_VALID'] = 'Por vafor verifica tu contraseña y vuelve a intentarlo';
 //UPLOAD FILE
 $lang['RESP_UPLOAD_SFTP(0)'] = 'CURLE_PROCESS_OK';
 $lang['RESP_UPLOAD_SFTP(1)'] = 'CURLE_UNSUPPORTED_PROTOCOL';

@@ -8,9 +8,8 @@ class CallModels extends Novo_Controller {
 
 	public function __construct()
 	{
-		log_message('INFO', 'NOVO CallModels Controller Class Initialized');
-
 		parent:: __construct();
+		log_message('INFO', 'NOVO CallModels Controller Class Initialized');
 
 		if($this->input->is_ajax_request()) {
 			$this->rule = lcfirst($this->dataRequest->where);

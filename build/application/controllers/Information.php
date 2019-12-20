@@ -9,7 +9,7 @@ class Information extends NOVO_Controller {
 	public function __construct()
 	{
 		parent:: __construct();
-		log_message('INFO', 'NOVO Information class Initialized');
+		log_message('INFO', 'NOVO Information Class Initialized');
 	}
 
 	public function benefits()
