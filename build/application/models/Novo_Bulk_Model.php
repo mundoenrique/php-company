@@ -318,16 +318,54 @@ class Novo_Bulk_Model extends NOVO_Model {
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date December 18th, 2019
 	 */
-	public function callWs_DeleteBulk_Bulk($dataRequest)
+	public function callWs_DeleteNoConfirmBulk_Bulk($dataRequest)
 	{
-		log_message('INFO', 'NOVO Bulk Model: DeleteBulk method Initialized');
+		log_message('INFO', 'NOVO Bulk Model: DeleteNoConfirmBulk method Initialized');
 
 		$this->className = 'com.novo.objects.MO.ConfirmarLoteMO';
 		$this->dataAccessLog->modulo = 'Lotes';
 		$this->dataAccessLog->function = 'Cargar lotes';
 		$this->dataAccessLog->operation = 'Eliminar Lote';
 
+		unset($dataRequest->modalReq);
 		$this->dataRequest->idOperation = 'eliminarLoteNoConfirmado';
+		$this->dataRequest->lotesTO = [
+			'idTicket' => $dataRequest->bulkTicked,
+			'idLote' => $dataRequest->bulkId
+		];
+		$password = json_decode(base64_decode($dataRequest->pass));
+		$password = $this->cryptography->decrypt(
+			base64_decode($password->plot),
+			utf8_encode($password->passWord)
+		);
+		$this->dataRequest->usuario = [
+			'userName' => $this->userName,
+			'password' => md5($password)
+		];
+
+		$response = $this->sendToService('DeleteNoConfirmBulk');
+
+		switch ($this->isResponseRc) {
+			case 0:
+				$this->response->code = 0;
+				$this->response->title = 'Eliminar lote';
+				$this->response->msg = 'EL lote fue eliminado exitosamente';
+				$this->response->icon = lang('GEN_ICON_SUCCESS');
+				$this->response->data['btn1']['text'] = 'Aceptar';
+				$this->response->data['btn1']['link'] = base_url('cargar-lotes');
+				$this->response->data['btn1']['action'] = 'redirect';
+				break;
+			case -1:
+				$this->response->code = 0;
+				$this->response->title = 'Eliminar lote';
+				$this->response->msg = 'Por vafor verifica tu contraseña y vuelve a intentarlo';
+				$this->response->data['btn1']['text'] = 'Aceptar';
+				$this->response->data['btn1']['icon'] = lang('GEN_ICON_WARNING');
+				$this->response->data['btn1']['action'] = 'close';
+				break;
+		}
+
+		return $this->responseToTheView('DeleteNoConfirmBulk');
 	}
 	/**
 	 * @info Confirma un lote
@@ -351,14 +389,14 @@ class Novo_Bulk_Model extends NOVO_Model {
 
 		$this->dataRequest->idOperation = $bulkConfirmInfo->idTipoLote == 'L' && $this->country != 'Ec-bp' ? 'reprocesarLoteGeneral' :'confirmarLote';
 		$this->dataRequest->lotesTO = $bulkConfirmInfo;
-		$passWord = json_decode(base64_decode($dataRequest->pass));
-		$passWord = $this->cryptography->decrypt(
-			base64_decode($passWord->plot),
-			utf8_encode($passWord->passWord)
+		$password = json_decode(base64_decode($dataRequest->pass));
+		$password = $this->cryptography->decrypt(
+			base64_decode($password->plot),
+			utf8_encode($password->passWord)
 		);
 		$this->dataRequest->usuario = [
 			'userName' => $this->userName,
-			'password' => md5($passWord),
+			'password' => md5($password),
 			'codigoGrupo' => $this->session->enterpriseInf->enterpriseGroup
 		];
 

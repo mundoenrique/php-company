@@ -28,14 +28,14 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataAccessLog->function = 'Ingreso al sistema';
 		$this->dataAccessLog->operation = 'Iniciar sesion';
 		$this->dataAccessLog->userName = $userName;
-		$passWord = json_decode(base64_decode($dataRequest->pass));
-		$passWord = $this->cryptography->decrypt(
-			base64_decode($passWord->plot),
-			utf8_encode($passWord->passWord)
+		$password = json_decode(base64_decode($dataRequest->pass));
+		$password = $this->cryptography->decrypt(
+			base64_decode($password->plot),
+			utf8_encode($password->passWord)
 		);
 		$this->dataRequest->idOperation = 'loginFull';
 		$this->dataRequest->userName = $userName;
-		$this->dataRequest->password = md5($passWord);
+		$this->dataRequest->password = md5($password);
 		$this->dataRequest->ctipo = $dataRequest->active;
 
 		$response = $this->sendToService(lang('GEN_LOGIN'));

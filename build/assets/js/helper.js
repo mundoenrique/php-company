@@ -1,10 +1,10 @@
 'use strict'
 //app
-var loader = $('#loader').html();
-var validatePass = /^[\w!@\*\-\?¡¿+\/.,#]+$/;
 var currenTime;
 var screenSize;
 var verb, who, where, dataResponse, ceo_cook, btnText, form, cypherPass;
+var loader = $('#loader').html();
+var validatePass = /^[\w!@\*\-\?¡¿+\/.,#]+$/;
 var searchEnterprise = $('#sb-search');
 var inputPass = $('#password');
 
@@ -57,7 +57,7 @@ function callNovoCore(verb, who, where, request, _response_) {
 		contentType: false,
 		processData: false,
 		dataType: 'json'
-	}).done(function (response, textStatus, jqXHR) {
+	}).done(function (response, status, jqXHR) {
 
 		if(request.modalReq) {
 			$('#accept').prop('disabled', false)
@@ -73,6 +73,14 @@ function callNovoCore(verb, who, where, request, _response_) {
 		_response_(response);
 
 	}).fail(function (jqXHR, textStatus, errorThrown ) {
+
+		console.log(textStatus)
+
+		if(request.modalReq) {
+			$('#accept').prop('disabled', false)
+			$('#system-info').dialog('destroy');
+		}
+
 		var response = {
 			code: codeResp,
 			title: lang.GEN_SYSTEM_NAME,

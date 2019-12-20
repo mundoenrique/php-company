@@ -167,7 +167,6 @@ $(function () {
  * @date December 18th, 2019
  */
 function deleteBulk(oldID) {
-	console.log(oldID)
 	var deleteBulkBtn = $('#delete-bulk-btn')
 	var formDeleteBulk = $('#delete-bulk-form');
 	deleteBulkBtn.on('click', function() {
@@ -176,11 +175,12 @@ function deleteBulk(oldID) {
 
 		if(formDeleteBulk.valid()) {
 			$(this)
+			.off('click')
 			.html(loader)
-			.attr('disabled', true)
+			.prop('disabled', true)
 			.attr('id', oldID);
 			ceo_cook = getCookieValue();
-			cypherPass = CryptoJS.AES.encrypt(inputPass.val(), ceo_cook, { format: CryptoJSAesJson }).toString();
+			cypherPass = CryptoJS.AES.encrypt($('#password').val(), ceo_cook, { format: CryptoJSAesJson }).toString();
 			data = {
 				modalReq: true,
 				bulkId: form.find('input[name="bulkId"]').val(),
@@ -191,17 +191,10 @@ function deleteBulk(oldID) {
 					plot: btoa(ceo_cook)
 				}))
 			}
-			verb = 'POST'; who = 'Bulk'; where = 'DeleteBulk';
+			verb = 'POST'; who = 'Bulk'; where = 'DeleteNoConfirmBulk';
 			callNovoCore(verb, who, where, data, function(response) {
-
-				switch(response.code) {
-					case 0:
-						break;
-					}
-				});
-
+				notiSystem(response.title, response.msg, response.icon, response.data);
+			});
 		}
 	});
-
-
 }

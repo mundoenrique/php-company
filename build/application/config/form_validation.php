@@ -157,6 +157,28 @@ $config = [
 			'rules' => 'trim|regex_match[/^([\w]+)+$/i]|required'
 		]
 	],
+	'deleteNoConfirmBulk' => [
+		[
+			'field' => 'bulkId',
+			'label' => 'bulkId',
+			'rules' => 'trim|regex_match[/^([\w]+)+$/i]'
+		],
+		[
+			'field' => 'bulkTicked',
+			'label' => 'bulkTicked',
+			'rules' => 'trim|regex_match[/^([\w]+)+$/i]|required'
+		],
+		[
+			'field' => 'bulkStatus',
+			'label' => 'bulkStatus',
+			'rules' => 'trim|regex_match[/^([\w]+)+$/i]|required'
+		],
+		[
+			'field' => 'pass',
+			'label' => 'pass',
+			'rules' => 'trim|required'
+		]
+	],
 	'dash-products' => [
 		[
 			'field' => 'data-accodgrupoe',

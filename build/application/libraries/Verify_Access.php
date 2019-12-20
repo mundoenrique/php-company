@@ -151,7 +151,7 @@ class Verify_Access {
 			case 'confirmBulk':
 				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBCAR', 'TEBCON'));
 				break;
-			case 'deleteBulk':
+			case 'deleteNoConfirmBulk':
 				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBCAR', 'TEBELC'));
 				break;
 		}

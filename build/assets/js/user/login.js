@@ -5,6 +5,7 @@ $(function() {
 	var userPass = $('#user_pass');
 	$.balloon.defaults.css = null;
 	insertFormInput(false);
+	inputDisabled(false);
 
 	$('#login-btn').on('click', function(e) {
 		e.preventDefault();
