@@ -247,7 +247,7 @@ function cargarResultado(data) {
 		'Entregar a tarjetahabiente':'Entregada a Tarjetahabiente / Activa # 1',
 		'Bloqueo tarjeta' : 'bloqueo # 2',
 		'Consulta saldo tarjeta': 'saldo # 2',
-		'Desbloquear': 'desbloqueo # 2'}
+		'Desbloqueo': 'desbloqueo # 2'}
 
 		$.each(data.result.detalleEmisiones, function (k, v) {
 
@@ -967,6 +967,7 @@ function llamarWSCambio(pass,mensaje,url,op,alerta) {
 		.done(function(response){
 			data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 
+		if(data.result.bean){
 			if(op == 'saldo' || op == 'bloqueo' || op == 'desbloqueo'){
 				var contador_mas = 0;
 				var contador_menos = 0;
@@ -979,6 +980,7 @@ function llamarWSCambio(pass,mensaje,url,op,alerta) {
 					}
 			});	
 			}
+		}
 
 			$aux.dialog("destroy");
 			if(data.result.rc == -1){
