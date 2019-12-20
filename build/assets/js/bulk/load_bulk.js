@@ -2,7 +2,8 @@
 $(function () {
 	var file = $('#file-bulk');
 	var inputFile = file.next('.js-label-file').html().trim();
-	var SelectTypeBulk = $('#type-bulk');
+	var selectBranchOffice = $('#branch-office');
+	var selectTypeBulk = $('#type-bulk');
 	form = $('#upload-file-form');
 
 	$('.input-file').each(function () {
@@ -27,7 +28,8 @@ $(function () {
 			btnAction.html(loader);
 			data = {
 				file: file[0].files[0],
-				typeBulk: SelectTypeBulk.val(),
+				branchOffice: selectBranchOffice.val(),
+				typeBulk: selectTypeBulk.val(),
 				formatBulk: $('#type-bulk option:selected').attr('format'),
 				typeBulkText: $('#type-bulk option:selected').text()
 			}
@@ -38,7 +40,8 @@ $(function () {
 				insertFormInput(false);
 				file.val('');
 				file.next('.js-label-file').html(inputFile);
-				SelectTypeBulk.prop('selectedIndex', 0);
+				selectBranchOffice.prop('selectedIndex', 0);
+				selectTypeBulk.prop('selectedIndex', 0);
 				respLoadBulk[response.code](response);
 			});
 		}

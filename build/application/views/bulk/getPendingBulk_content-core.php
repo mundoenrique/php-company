@@ -21,12 +21,22 @@
 				<span class="line-text mb-2 h4 semibold primary">Nuevos lotes</span>
 				<form id="upload-file-form">
 					<div class="flex px-5 pb-4 items-center row">
-						<div class="form-group col">
-							<label class="mt-1 h6" or="">Tipo de Lote</label>
+						<div class="form-group col-3">
+							<label class="mt-1 h6" for="branch-office">Sucursal</label>
+							<select id="branch-office" name="branch-office" class="select-box custom-select h6 w-100">
+								<?php foreach($branchOffices AS $pos => $branchOffice): ?>
+								<option value="<?= $branchOffice->key; ?>"
+									<?= $pos != 0 ? '' : 'selected disabled' ?>><?= $branchOffice->text; ?></option>
+								<?php endforeach; ?>
+							</select>
+							<div class="help-block"></div>
+						</div>
+						<div class="form-group col-3">
+							<label class="mt-1 h6" for="type-bulk">Tipo de Lote</label>
 							<select id="type-bulk" name="type-bulk" class="select-box custom-select h6 w-100">
 								<?php foreach($typesLot AS $pos => $type): ?>
 								<option value="<?= $type->key; ?>" format="<?= $type->format; ?>"
-									<?= $pos != 0 ?: 'selected disabled' ?>><?= $type->text; ?></option>
+									<?= $pos != 0 ? '' : 'selected disabled' ?>><?= $type->text; ?></option>
 								<?php endforeach; ?>
 							</select>
 							<div class="help-block"></div>

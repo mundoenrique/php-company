@@ -83,6 +83,72 @@ class Novo_Bulk_Model extends NOVO_Model {
 		return $this->responseToTheView(lang('GEN_GET_PEN_BULK'));
 	}
 	/**
+	 * @info obtiene lista de sucursales
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date December 19th, 2019
+	 */
+	public function callWs_GetBranchOffices_Bulk($dataRequest)
+	{
+		log_message('INFO', 'NOVO Bulk Model: GetBranchOffices method Initialized');
+
+		$this->className = 'com.novo.objects.MO.ListadoSucursalesMO';
+		$this->dataAccessLog->modulo = 'Lotes';
+		$this->dataAccessLog->function = 'Carga de lotes';
+		$this->dataAccessLog->operation = 'Obtener sucursales';
+
+		$select = isset($dataRequest->select);
+		$this->dataRequest = new stdClass();
+		$this->dataRequest->idOperation = 'getConsultarSucursales';
+		$this->dataRequest->paginaActual = '1';
+		$this->dataRequest->tamanoPagina = 10;
+		$this->dataRequest->paginar = FALSE;
+		$this->dataRequest->lista = [
+			[
+				'rif' => $this->session->enterpriseInf->idFiscal
+			]
+		];
+
+		$response = $this->sendToService('GetBranchOffices');
+
+		switch($this->isResponseRc) {
+			case 0:
+				$this->response->code = 0;
+
+				if($select) {
+					$branchOffice[] = (object) [
+						'key' => '',
+						'text' => 'Selecciona una sucursal'
+					];
+				}
+
+				foreach($response->lista AS $pos => $branchs) {
+					$branch = [];
+					if($select) {
+						$branch['key'] = $response->lista[$pos]->cod;
+						$branch['text'] = ucfirst(mb_strtolower($response->lista[$pos]->nomb_cia));
+							$branchOffice[] = (object) $branch;
+							continue;
+					}
+					$branch['idFiscal'] = $response->lista[$pos]->rif;
+					$branch['name'] = mb_strtoupper($response->lista[$pos]->nomb_cia);
+					$branchOffice[] = (object) $branch;
+				}
+			break;
+		}
+
+		if($this->isResponseRc != 0) {
+			$this->response->code = 1;
+			$branchOffice[] = (object) [
+				'key' => '',
+				'text' => 'Intenta de nuevo'
+			];
+		}
+
+		$this->response->data->branchOffices = (object) $branchOffice;
+
+		return $this->responseToTheView('GetBranchOffices');
+	}
+	/**
 	 * @info Método para obtener los tipos de lte asociados a un programa
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date December 8th, 2019
@@ -165,6 +231,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 				'nombreArchivo' => $dataRequest->fileName,
 				'idEmpresa' => $this->session->enterpriseInf->idFiscal,
 				'codCia' => $this->session->enterpriseInf->enterpriseCode,
+				'sucursal' => isset($dataRequest->branchOffice) ? $dataRequest->branchOffice : '',
 				'idTipoLote' => $dataRequest->typeBulk,
 				'formatoLote' => $dataRequest->formatBulk,
 			];
@@ -182,13 +249,12 @@ class Novo_Bulk_Model extends NOVO_Model {
 					$this->response->data['btn1']['link'] = base_url('cargar-lotes');
 					$respLoadBulk = TRUE;
 					break;
-				case -108:
-					$this->response->msg = "No fue posible cargar el lote, por favor intentalo de nuevo";
-					$respLoadBulk = TRUE;
-					break;
+					case -108:
 					case -109:
 					case -256:
+					case -21:
 					$this->response->msg = "No fue posible cargar el lote, por favor intentalo de nuevo";
+					$this->response->data['btn1']['link'] = base_url('cargar-lotes');
 					$respLoadBulk = TRUE;
 					break;
 					case -280:

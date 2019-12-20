@@ -6,10 +6,10 @@ function validateForms(form) {
 	var validNickName = /^([a-z]{2,}[0-9_]*)$/i;
 	var regNumberValid = /^['a-z0-9']{6,45}$/i;
 	var shortPhrase = /^['a-z0-9ñáéíóú ().']{4,25}$/i;
-	var middlePhrase = /^['a-z0-9ñáéíóú ().']{15,45}$/i;
+	var middlePhrase = /^['a-z0-9ñáéíóú ().']{7,45}$/i;
 	var longPhrase = /^['a-z0-9ñáéíóú ().']{10,70}$/i;
 	var emailValid = /^([a-zA-Z]+[0-9_.+-]*)+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-	var alphanumunder = /^([\w.\-+&ñÑ]+)+$/i;
+	var alphanumunder = /^([\w.\-+&ñÑ ]+)+$/i;
 	var alphanum = /^[a-z0-9]+$/i;
 	var userPassword = validatePass;
 	var numeric = /^[0-9]+$/;
@@ -45,6 +45,7 @@ function validateForms(form) {
 		rules: {
 			"user_login":	{required: true, pattern: alphanumunder},
 			"user_pass": 	{verifyRequired: '#user_login', verifyPattern: '#user_login'},
+			"branch-office": 	{requiredBranchOffice: true},
 			"type-bulk": 	{requiredTypeBulk: true},
 			"file-bulk":	{required: true, extension: "xls|xlsx|txt"},
 			"password": {required: true, pattern: userPassword}
@@ -55,6 +56,7 @@ function validateForms(form) {
 				verifyRequired: lang.VALIDATE_USERPASS_REQ,
 				verifyPattern: lang.VALIDATE_USERPASS_PATT
 			},
+			"branch-office": lang.VALIDATE_BRANCH_OFFICE,
 			"type-bulk": lang.VALIDATE_BULK_TYPE,
 			"file-bulk": lang.VALIDATE_BULK_FILE,
 			"password": lang.VALIDATE_PASS
@@ -77,6 +79,13 @@ function validateForms(form) {
 		var eval2 = longPhrase.test($(element).find('option:selected').text());
 		var eval3 = alphanum.test($(element).find('option:selected').val());
 		return eval1 && eval2 && eval3;
+	}
+
+	$.validator.methods.requiredBranchOffice = function(value, element, param) {
+		var eval1 = alphanumunder.test($(element).find('option:selected').text());
+		var eval2 = alphanum.test($(element).find('option:selected').val());
+		console.log(eval1, eval2)
+		return eval1 && eval2;
 	}
 
 	$.validator.methods.fiscalRegistry = function(value, element, param) {

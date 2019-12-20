@@ -128,6 +128,11 @@ $config = [
 	],
 	'loadBulk'  => [
 		[
+			'field' => 'branchOffice',
+			'label' => 'branchOffice',
+			'rules' => 'trim|regex_match[/^[a-z0-9]+$/i]'
+		],
+		[
 			'field' => 'typeBulk',
 			'label' => 'typeBulk',
 			'rules' => 'trim|regex_match[/^[a-z0-9]+$/i]'

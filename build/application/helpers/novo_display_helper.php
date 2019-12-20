@@ -53,7 +53,7 @@ if ( ! function_exists('verifyheader'))
 		$client = $CI->config->item('client');
 		$country = $CI->config->item('country');
 		$logged = $CI->session->has_userdata('logged');
-		$showUs = ['novo'];
+		$showUs = ['novo', 'banco-bog'];
 		$showThem = ['pichincha'];
 
 		switch ($link) {
@@ -72,6 +72,9 @@ if ( ! function_exists('verifyheader'))
 				break;
 			case lang('GEN_TAG_HELPER'):
 				$display = (in_array($client, $showUs) && $country == 'Ve');
+				break;
+			case lang('GEN_TAG_BRANCHOFFICE'):
+				$display = (in_array($client, $showUs) && $country == 'Bdb');
 				break;
 		}
 
