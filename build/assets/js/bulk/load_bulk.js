@@ -108,8 +108,8 @@ $(function () {
       "sLoadingRecords": "Cargando...",
       "sprocessing": "Procesando ...",
       "oPaginate": {
-        "sFirst": "««",
-        "sLast": "»»",
+        "sFirst": "Primera",
+        "sLast": "Última",
         "sNext": "»",
         "sPrevious": "«"
       },
@@ -124,15 +124,18 @@ $(function () {
 		e.preventDefault();
 		var event = $(e.currentTarget);
 		var action = event.attr('title');
+		var bulkView = $('#bulkView')
 		form = $(this).parent().find('form')
 		insertFormInput(true, form);
 
 		switch(action) {
 			case 'Ver':
 				form.attr('action', baseURL+'detalle-lote');
+				form.append('<input type="hidden" name="bulkView" value="detail">');
 				break;
 			case 'Confirmar':
 				form.attr('action', baseURL+'confirmar-lote');
+				form.append('<input type="hidden" name="bulkView" value="confirm">');
 				break;
 			case 'Eliminar':
 				var oldID = $('#accept').attr('id');

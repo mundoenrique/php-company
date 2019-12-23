@@ -430,6 +430,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 				unset($response->lotesTO->mensajes);
 				$bulkConfirmInfo = $response->lotesTO;
 				$this->session->set_flashdata('bulkConfirmInfo', $bulkConfirmInfo);
+				$this->session->set_flashdata($dataRequest->bulkView, TRUE);
 				$this->response->data->detailBulk = (object) $detailBulk;
 
 				break;

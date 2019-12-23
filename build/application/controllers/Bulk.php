@@ -58,6 +58,10 @@ class Bulk extends NOVO_Controller {
 	{
 		log_message('INFO', 'NOVO Bulk: getDetailBulk Method Initialized');
 
+		if(!isset($this->request->bulkView) || $this->request->bulkView != 'detail') {
+			redirect(base_url('detalle-producto'), 'location');
+		}
+
 		$view = lang('GEN_DETAIL_BULK');
 		$responseDetail = $this->loadModel($this->request);
 		$this->responseAttr($responseDetail);
@@ -74,6 +78,10 @@ class Bulk extends NOVO_Controller {
 	public function confirmBulk()
 	{
 		log_message('INFO', 'NOVO Bulk: confirmBulk Method Initialized');
+
+		if(!isset($this->request->bulkView) || $this->request->bulkView != 'confirm') {
+			redirect(base_url('detalle-producto'), 'location');
+		}
 
 		$view = lang('GEN_CONFIRM_BULK');
 		array_push(
