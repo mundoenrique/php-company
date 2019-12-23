@@ -1582,8 +1582,6 @@ class Reportes extends CI_Controller {
 	public function getEstatusTarjetasHabientes($urlCountry){
 			np_hoplite_countryCheck($urlCountry);
 
-
-
 			$logged_in = $this->session->userdata('logged_in');
 
 			$paisS = $this->session->userdata('pais');
@@ -1604,32 +1602,31 @@ class Reportes extends CI_Controller {
 									)
 								)
 							)
-						);
-						$_POST['nombreEmpresa'] = $dataRequest->nombreEmpresa;
-						$_POST['lotes_producto'] = $dataRequest->lotes_producto;
-						$this->form_validation->set_rules('nombreEmpresa', 'nombreEmpresa',  'trim|xss_clean|required');
-						$this->form_validation->set_rules('lotes_producto', 'tarjeta',  'trim|xss_clean|required');
-							if ($this->form_validation->run() == FALSE)
-							{
-								log_message('DEBUG', 'NOVO VALIDATION ERRORS: '.json_encode(validation_errors()));
-								$responseError = 'La combinacion de caracteres es invalido';
-								$responseError = $this->cryptography->encrypt($responseError);
-								$this->output->set_content_type('application/json')->set_output(json_encode($responseError));
-								return $responseError;
-							}
-							else
-							{
-
-									$paginaActual = $dataRequest->paginaActual;
-									$loteproducto = $dataRequest->lotes_producto;
-									$acrif = $dataRequest->acrif;
-									$username = $this->session->userdata('userName');
-									$token = $this->session->userdata('token');
-									unset($_POST['paginaActual'], $_POST['lotes_producto']);
-									$pruebaTabla = $this->callWSEstatusTarjetasHabientes($urlCountry,$token,$username,$acrif, $loteproducto, $paginaActual );
-									$pruebaTabla = $this->cryptography->encrypt($pruebaTabla);
-									$this->output->set_content_type('application/json')->set_output(json_encode($pruebaTabla));
-							}
+            );
+						if($dataRequest !== null){
+							$_POST['nombreEmpresa'] = $dataRequest->nombreEmpresa;
+              $_POST['lotes_producto'] = $dataRequest->lotes_producto;
+							$this->form_validation->set_rules('nombreEmpresa', 'nombreEmpresa',  'trim|xss_clean|required');
+							$this->form_validation->set_rules('lotes_producto', 'tarjeta',  'trim|xss_clean|required');
+								if ($this->form_validation->run() == FALSE)
+								{
+									log_message('DEBUG', 'NOVO VALIDATION ERRORS: '.json_encode(validation_errors()));
+									$responseError = 'La combinacion de caracteres es invalido';
+									$responseError = $this->cryptography->encrypt($responseError);
+									$this->output->set_content_type('application/json')->set_output(json_encode($responseError));
+									return $responseError;
+								}else{
+								  $paginaActual = $dataRequest->paginaActual;
+								  $loteproducto = $dataRequest->lotes_producto;
+								  $acrif = $dataRequest->acrif;
+								  $username = $this->session->userdata('userName');
+								  $token = $this->session->userdata('token');
+                  unset($_POST['paginaActual'], $_POST['lotes_producto']);
+								  $pruebaTabla = $this->callWSEstatusTarjetasHabientes($urlCountry,$token,$username,$acrif, $loteproducto, $paginaActual );
+								  $pruebaTabla = $this->cryptography->encrypt($pruebaTabla);
+								  $this->output->set_content_type('application/json')->set_output(json_encode($pruebaTabla));
+								}
+						}
 					}
 			}else{
 					$this->session->sess_destroy();
@@ -1687,22 +1684,21 @@ class Reportes extends CI_Controller {
 					if($response->rc==0){
 							return $response;
 					}else{
-
-									if($response->rc==-61 || $response->rc==-29){
-											$codigoError = array('mensaje' => lang('ERROR_(-29)'), "rc"=> "-29");
-											$this->session->sess_destroy();
-											return $codigoError;
-
-									}else{
-											$codigoError = lang('ERROR_('.$response->rc.')');
-											if(strpos($codigoError, 'Error')!==false){
-													$codigoError = array('mensaje' => lang('ERROR_GENERICO_USER'), "rc"=> $response->rc);
-											}else{
-													$codigoError = array('mensaje' => lang('ERROR_('.$response->rc.')'), "rc"=> $response->rc);
-											}
-
-											return $codigoError;
-									}
+						if($response->rc==-61 || $response->rc==-29){
+							$codigoError = array('mensaje' => lang('ERROR_(-29)'), "rc"=> "-29");
+							$this->session->sess_destroy();
+							return $codigoError;
+						}else{
+              $codigoError = lang('ERROR_('.$response->rc.')');
+            if($response->rc==-20){
+              $codigoError = array('ERROR' => lang('ERROR_GENERAL'), "rc"=> $response->rc);
+						}else if(strpos($codigoError, 'Error')!==false){
+							$codigoError = array('mensaje' => lang('ERROR_GENERICO_USER'), "rc"=> $response->rc);
+						}else{
+							$codigoError = array('mensaje' => lang('ERROR_('.$response->rc.')'), "rc"=> $response->rc);
+						}
+							return $codigoError;
+						}
 					}
 
 			}else{

@@ -31,6 +31,9 @@ var serv_var = {
 
 $('#buscar').on('click', function () {
 
+	$(':checkbox').each(function () {
+		this.checked = 0;
+	});
 	serv_var.masivos = [];
 	var RE = /^\d*$/,
 		servicio = $('#servicio'),
@@ -139,12 +142,18 @@ function buscar(pgSgt) {
 		title: "Buscando tarjetas",
 		modal: true,
 		resizable: false,
-		dialogClass: 'hide-close',
-		close: function () {
-			$aux.dialog('close');
-		},
 		position: {
 			my: "top"
+		},
+		buttons: {
+			"Aceptar": {
+				text: 'Aceptar',
+				class: 'novo-btn-primary-modal',
+				click: function () {
+					resett()
+					$(this).dialog("destroy");
+				}
+			}
 		}
 	});
 	var ceo_cook = decodeURIComponent(
@@ -242,8 +251,8 @@ function cargarResultado(data) {
 
 		$.each(data.result.detalleEmisiones, function (k, v) {
 
-			//var statusEmi = v.edoEmision.split('')[0]
-			var statusEmi = v.edoEmision.slice(0, v.edoEmision.indexOf("/"));
+			var statusEmi = v.edoEmision.split('/')[0]
+			//var statusEmi = v.edoEmision.slice(0, v.edoEmision.indexOf("/"));
 			var valida = $.inArray(v.edoEmision, validaope) !== -1 ? 1:0;
 			var personal = [];
 			personal.push(v.nombres,v.apellidos,v.numCelular,v.email)
@@ -381,7 +390,9 @@ function toFormatShow(valor) {
 }
 
 // DIALOGO DE NOTIFICACIONES
-function notificacion(titulo, mensaje, opcion = 0) {
+function notificacion(titulo, mensaje, opcion) {
+
+	opcion = opcion == undefined ? 0 : opcion;
 	var canvas = "<div>" + mensaje + "</div>";
 
 	$(canvas).dialog({
@@ -668,55 +679,67 @@ function validarFields()
 	var camposValid = ''
 			msgValido = '';
 			validInput = true;
-			nomRegExp = /^[A-Z]+$/i;
+			nomRegExp = /^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/i;
 			descRegExp = /^['a-z0-9ñáéíóú ,.:()']+$/i;
 			emailRegExp = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-			numRegExp = /^\d+$/
+			numRegExp = /\d+/;
 
 	if(valNombre.val() === '')
 	{
 		errorName.show();
-		errorName.html('El campo no puede estar vacio')
+		errorName.html('El campo no puede estar vacío')
 		validInput = false;
 		valNombre.addClass('textbox-transfer');
 	}
-	else if(!nomRegExp.test(valNombre.val()))
+	else if(numRegExp.test(valNombre.val()))
 	{
 		errorName.show();
 		errorName.html('No se admiten números')
 		validInput = false;
 		valNombre.addClass('textbox-transfer');
 	}
+	else if(!nomRegExp.test(valNombre.val()))
+	{
+		errorName.show();
+		errorName.html('No se admiten caracteres especiales')
+		validInput = false;
+		valNombre.addClass('textbox-transfer');
+	}
 	else{
 		errorName.hide();
-		validInput = true;
 		valNombre.removeClass('textbox-transfer');
 	}
 
 	if(valApellidos.val() === '')
 	{
 		errorApellido.show();
-		errorApellido.html('El campo no puede estar vacio')
+		errorApellido.html('El campo no puede estar vacío')
 		validInput = false;
 		valApellidos.addClass('textbox-transfer');
 	}
-	else if(!nomRegExp.test(valApellidos.val()))
+	else if(numRegExp.test(valApellidos.val()))
 	{
 		errorApellido.show();
 		errorApellido.html('No se admiten números')
 		validInput = false;
 		valApellidos.addClass('textbox-transfer');
 	}
+	else if(!nomRegExp.test(valApellidos.val()))
+	{
+		errorApellido.show();
+		errorApellido.html('No se admiten caracteres especiales')
+		validInput = false;
+		valApellidos.addClass('textbox-transfer');
+	}
 	else{
 		errorApellido.hide();
-		validInput = true;
 		valApellidos.removeClass('textbox-transfer');
 	}
 
 	if(valCorreo.val() === '')
 	{
 		errorCorreo.show();
-		errorCorreo.html('El campo no puede estar vacio')
+		errorCorreo.html('El campo no puede estar vacío')
 		validInput = false;
 		valCorreo.addClass('textbox-transfer');
 	}
@@ -729,37 +752,42 @@ function validarFields()
 	}
 	else{
 		errorCorreo.hide();
-		validInput = true;
 		valCorreo.removeClass('textbox-transfer');
 	}
 
-	if(valCelular.val().length >= 13)
+	if(valCelular.val().length > 13)
 	{
 		errorCelular.show();
-		errorCelular.html('el campo solo debe tener maximo 13 numeros')
+		errorCelular.html('El campo solo debe tener máximo 13 números')
 		validInput = false;
 		valCelular.addClass('textbox-transfer');
+
 	}else if(!numRegExp.test(valCelular.val())){
 		errorCelular.show();
-		errorCelular.html('El campo debe ser numerico')
+		errorCelular.html('El campo debe ser numérico')
 		validInput = false;
 		valCelular.addClass('textbox-transfer');
+
+	}else if(!/^[0-9][1-9]+/.test(valCelular.val())){
+		errorCelular.show();
+		errorCelular.html('El campo solo puede tener un solo cero al inicio')
+		validInput = false;
+		valCelular.addClass('textbox-transfer');
+
 	}else{
 		errorCelular.hide();
-		validInput = true;
 		valCelular.removeClass('textbox-transfer');
 	}
-	
+
 	if(valClave.val() === '')
 	{
 		errorClave.show();
-		errorClave.html('El campo no puede estar vacio')
+		errorClave.html('El campo no puede estar vacío')
 		validInput = false;
 		valClave.addClass('textbox-transfer');
 	}
 	else{
 		errorClave.hide();
-		validInput = true;
 		valClave.removeClass('textbox-transfer');
 	}
 
@@ -781,7 +809,8 @@ function MaysPrimera(string){
 }
 
 //PROCESAR OPERACION
-function procesar(titulo, url, op = 1) {
+function procesar(titulo, url, op) {
+	op = op != undefined ? op : 1;
 	var canvas = "<div id='dialog-confirm'>";
 	canvas += "<form name='no-form' onsubmit='return false'>";
 	canvas += "<center>Tarjeta: " + serv_var.noTarjetas + "</center>";
@@ -1046,6 +1075,3 @@ function removeItemFromArr ( arr, item ) {
 	var i = arr.indexOf( item );
 	arr.splice( i, 1 );
 }
-
-
-

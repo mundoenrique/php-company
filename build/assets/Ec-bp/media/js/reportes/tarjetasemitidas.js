@@ -8,37 +8,37 @@ $(".fecha").keypress(function (e) {
 
 $(document).ready(function () {
 
-$("#cargando_empresa").fadeIn("fast");
+	$("#cargando_empresa").fadeIn("fast");
 
-$.getJSON(baseURL + api + isoPais + '/empresas/lista').always(function (response) {
-	data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {
-		format: CryptoJSAesJson
-	}).toString(CryptoJS.enc.Utf8))
-	$("#cargando_empresa").fadeOut("fast");
-	if (!(data.ERROR)) {
+	$.getJSON(baseURL + api + isoPais + '/empresas/lista').always(function (response) {
+		data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {
+			format: CryptoJSAesJson
+		}).toString(CryptoJS.enc.Utf8))
+		$("#cargando_empresa").fadeOut("fast");
+		if (!(data.ERROR)) {
 
-		$.each(data.lista, function (k, v) {
-			$("#repTarjetasEmitidas_empresa").append('<option acrif="' + v.acrif + '" value="' + v.accodcia + '" acnomcia="' + v.acnomcia + '" acrazonsocial="' + v.acrazonsocial + '" acdesc="' + v.acdesc + '" accodcia="' + v.accodcia + '">' + v.acnomcia + '</option>');
-		});
-	} else {
-		if (data.ERROR.indexOf('-29') != -1) {
-			alert("Usuario actualmente desconectado");
-			$(location).attr('href', baseURL + isoPais + '/login');
+			$.each(data.lista, function (k, v) {
+				$("#repTarjetasEmitidas_empresa").append('<option acrif="' + v.acrif + '" value="' + v.accodcia + '" acnomcia="' + v.acnomcia + '" acrazonsocial="' + v.acrazonsocial + '" acdesc="' + v.acdesc + '" accodcia="' + v.accodcia + '">' + v.acnomcia + '</option>');
+			});
 		} else {
-			$("#repTarjetasEmitidas_empresa").append('<option value="" >' + data.ERROR + '</option>');
+			if (data.ERROR.indexOf('-29') != -1) {
+				alert("Usuario actualmente desconectado");
+				$(location).attr('href', baseURL + isoPais + '/login');
+			} else {
+				$("#repTarjetasEmitidas_empresa").append('<option value="" >' + data.ERROR + '</option>');
+			}
 		}
-	}
-})
-options = {
-	pattern: 'mm/yyyy',
-	selectedYear: 2019,
-	startYear: 2008,
-	finalYear: 2019,
-	monthNames: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic']
-};
+	})
+	options = {
+		pattern: 'mm/yyyy',
+		selectedYear: 2019,
+		startYear: 2008,
+		finalYear: 2019,
+		monthNames: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic']
+	};
 
-$('.monthpicker').monthpicker(options);
-$('.ui-datepicker.ui-widget.ui-widget-content.ui-helper-clearfix.ui-corner-all').addClass('monthpicker-border');
+	$('.monthpicker').monthpicker(options);
+	$('.ui-datepicker.ui-widget.ui-widget-content.ui-helper-clearfix.ui-corner-all').addClass('monthpicker-border');
 
 	$('input[name=radio]').attr('checked', true);
 
@@ -86,58 +86,59 @@ $('.ui-datepicker.ui-widget.ui-widget-content.ui-helper-clearfix.ui-corner-all')
 				//DE SER EXITOSA LA COMUNICACION CON EL SERVICIO SE EJECUTA EL SIGUIENTE METODO "DONE"
 
 				$consulta.done(function (response) {
-						data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {
-							format: CryptoJSAesJson
-						}).toString(CryptoJS.enc.Utf8))
-						$("#mensaje").remove();
-						$("#view-results").attr("style", "");
-						$('#cargando').fadeOut("slow");
-						$("#repTarjetasEmitidas_btnBuscar").show();
-						$("#div_tablaDetalle").fadeIn("slow");
-						var contenedor = $("#div_tablaDetalle");
-						contenedor.empty();
-						var tbody;
-						var thead;
-						var caption;
-						var tr;
-						var td;
-						var th;
-						var div;
-						var tabla;
-						var a;
-						var span;
+					data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {
+						format: CryptoJSAesJson
+					}).toString(CryptoJS.enc.Utf8))
+					$("#mensaje").remove();
+					$("#view-results").attr("style", "");
+					$('#cargando').fadeOut("slow");
+					$("#repTarjetasEmitidas_btnBuscar").show();
+					$("#div_tablaDetalle").fadeIn("slow");
+					var contenedor = $("#div_tablaDetalle");
+					contenedor.empty();
+					var tbody;
+					var thead;
+					var caption;
+					var tr;
+					var td;
+					var th;
+					var div;
+					var tabla;
+					var a;
+					var span;
 
 
+					div = $(document.createElement("div")).appendTo(contenedor);
+					div.attr("id", "top-batchs");
+					$(div).append('Tarjetas emitidas');
+
+					if (data.rc == "0") {
 						div = $(document.createElement("div")).appendTo(contenedor);
-						div.attr("id", "top-batchs");
-						$(div).append('Tarjetas emitidas');
+						div.attr("id", "view-results");
 
-						if (data.rc == "0") {
-							div = $(document.createElement("div")).appendTo(contenedor);
-							div.attr("id", "view-results");
+						a = $(document.createElement("a")).appendTo(div);
+						span = $(a).append("<span title='Exportar Excel' data-icon ='&#xe05a;' aria-hidden = 'true' class = 'icon'></span>");
+						span.attr("aria-hidden", "true");
+						span.attr("class", "icon");
+						span.attr("data-icon", '&#xe050;');
+						span.click(function () {
 
-							a = $(document.createElement("a")).appendTo(div);
-							span = $(a).append("<span title='Exportar Excel' data-icon ='&#xe05a;' aria-hidden = 'true' class = 'icon'></span>");
-							span.attr("aria-hidden", "true");
-							span.attr("class", "icon");
-							span.attr("data-icon", '&#xe050;');
-							span.click(function () {
-
-								var ceo_cook = decodeURIComponent(
-									document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-								);
-								$('form#formulario').empty();
-								$('form#formulario').append('<input type="hidden" name="ceo_name" value="' + ceo_cook + '">');
-								$('form#formulario').append('<input type="hidden" name="idEmpresa" value="' + filtro_busq.acrif + '" />');
-								$('form#formulario').append('<input type="hidden" name="nomEmpresa" value="' + filtro_busq.acnomcia + '" />');
-								$('form#formulario').append('<input type="hidden" name="empresa" value="' + filtro_busq.empresa + '" />');
-								$('form#formulario').append('<input type="hidden" name="fechaMes" value="' + filtro_busq.fechaMes + '" />');
-								$('form#formulario').append('<input type="hidden" name="fechaInicial" value="' + filtro_busq.fechaInicial + '" />');
-								$('form#formulario').append('<input type="hidden" name="fechaFin" value="' + filtro_busq.fechaFin + '" />');
-								$('form#formulario').append('<input type="hidden" name="radioGeneral" value="' + filtro_busq.radioGeneral + '" />');
-								$('form#formulario').attr('action', baseURL + api + isoPais + "/reportes/tarjetasEmitidasExpXLS");
-								$('form#formulario').submit();
-							});
+							var ceo_cook = decodeURIComponent(
+								document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+							);
+							$('form#formulario').empty();
+							$('form#formulario').append('<input type="hidden" name="ceo_name" value="' + ceo_cook + '">');
+							$('form#formulario').append('<input type="hidden" name="idEmpresa" value="' + filtro_busq.acrif + '" />');
+							$('form#formulario').append('<input type="hidden" name="nomEmpresa" value="' + filtro_busq.acnomcia + '" />');
+							$('form#formulario').append('<input type="hidden" name="empresa" value="' + filtro_busq.empresa + '" />');
+							$('form#formulario').append('<input type="hidden" name="fechaMes" value="' + filtro_busq.fechaMes + '" />');
+							$('form#formulario').append('<input type="hidden" name="fechaInicial" value="' + filtro_busq.fechaInicial + '" />');
+							$('form#formulario').append('<input type="hidden" name="fechaFin" value="' + filtro_busq.fechaFin + '" />');
+							$('form#formulario').append('<input type="hidden" name="radioGeneral" value="' + filtro_busq.radioGeneral + '" />');
+							$('form#formulario').attr('action', baseURL + api + isoPais + "/reportes/tarjetasEmitidasExpXLS");
+							$('form#formulario').submit();
+						});
+						if ($('#radio-general').is(":checked")) {
 
 							a = $(document.createElement("a")).appendTo(div);
 							span = $(a).append("<span title='Ver gráfico' data-icon ='&#xe050' aria-hidden = 'true' class = 'icon'></span>");
@@ -145,47 +146,134 @@ $('.ui-datepicker.ui-widget.ui-widget-content.ui-helper-clearfix.ui-corner-all')
 							span.attr("class", "icon");
 							span.attr("data-icon", '&#xe050;');
 							span.click(function () {
-								var ceo_cook = decodeURIComponent(
-									document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-								);
-								$('form#formulario').empty();
-								$('form#formulario').append('<input type="hidden" name="ceo_name" value="' + ceo_cook + '">');
-								$('form#formulario').append('<input type="hidden" name="idEmpresa" value="' + filtro_busq.acrif + '" />');
-								$('form#formulario').append('<input type="hidden" name="nomEmpresa" value="' + filtro_busq.acnomcia + '" />');
-								$('form#formulario').append('<input type="hidden" name="empresa" value="' + filtro_busq.empresa + '" />');
-								$('form#formulario').append('<input type="hidden" name="fechaInicial" value="' + filtro_busq.fechaInicial + '" />');
-								$('form#formulario').append('<input type="hidden" name="fechaFin" value="' + filtro_busq.fechaFin + '" />');
-								$('form#formulario').append('<input type="hidden" name="radioGeneral" value="' + filtro_busq.radioGeneral + '" />');
-								$('form#formulario').attr('action', baseURL + api + isoPais + "/reportes/tarjetasEmitidasExpPDF");
-								$('form#formulario').submit();
+
+								// GRAFICA
+								var aux = {};
+								var _axis = "Bolivares";
+
+								var jsonChart = {
+									title: {
+										text: $("#titulograficotext").attr("data")
+									},
+									legend: {
+										position: "top"
+									},
+									series: [],
+									categoryAxis: {
+										categories: [],
+										labels: {
+											rotation: -45
+										}
+									},
+									valueAxis: {
+										name: _axis,
+										title: {
+											text: ""
+										}
+									}
+								}
+
+
+								// SE OBTIENE LAS CATEGORIAS
+								$.each(data.listaGrafico[0].categorias, function (posLista, itemLista) {
+									jsonChart.categoryAxis.categories.push(itemLista.nombreCategoria);
+								});
+
+								// SE OBTIENE LAS series
+
+								$.each(data.listaGrafico[0].series, function (posSeries, itemSeries) {
+									var serie = {};
+									serie.name = itemSeries.nombreSerie;
+									serie.data = itemSeries.valores;
+									serie.axis = _axis;
+									serie.color = colores[posSeries];
+									jsonChart.series.push(serie);
+								});
+
+
+								// GRAFICA
+								$("#chart").kendoChart(jsonChart);
+								$("#chart").dialog({
+									modal: true,
+									width: 900,
+									height: 600
+								});
+								$("#chart svg").width(Number($(window).width()));
+								$("#chart svg").height(Number($(window).height()));
+								$("#chart").data("kendoChart").refresh();
 							});
 
-							if ($('#radio-general').is(":checked")) {
+							tabla = $(document.createElement("table")).appendTo(contenedor);
+							tabla.attr("id", "tabla-datos-general");
+							tabla.attr("class", "tabla-reportes");
 
+							thead = $(document.createElement("thead")).appendTo(tabla);
+							tbody = $(document.createElement("tbody")).appendTo(tabla);
+							tbody.attr("id", "tbody-datos-general");
+							tbody.attr("class", "tbody-reportes");
+							tr = $(document.createElement("tr")).appendTo(thead);
+							tr.attr("id", "datos-principales");
+							th = $(document.createElement("th")).appendTo(tr);
+							th.html($("#producto").attr("data"));
+							th = $(document.createElement("th")).appendTo(tr);
+							th.html($("#emision").attr("data"));
+							th = $(document.createElement("th")).appendTo(tr);
+							th.html($("#reptarjeta").attr("data"));
+							th = $(document.createElement("th")).appendTo(tr);
+							th.html($("#repclave").attr("data"));
+							th = $(document.createElement("th")).appendTo(tr);
+							th.html($("#total").attr("data"));
+
+
+							$.each(data.lista, function (posLista, itemLista) {
+
+								tr = $(document.createElement("tr")).appendTo(tbody);
+								td = $(document.createElement("td")).appendTo(tr);
+								td.html(itemLista.nomProducto);
+								td = $(document.createElement("td")).appendTo(tr);
+								td.html(itemLista.totalEmision);
+								td.attr("style", "text-align: center")
+								td = $(document.createElement("td")).appendTo(tr);
+								td.html(itemLista.totalReposicionTarjeta);
+								td.attr("style", "text-align: center")
+								td = $(document.createElement("td")).appendTo(tr);
+								td.html(itemLista.totalReposicionClave);
+								td.attr("style", "text-align: center")
+								td = $(document.createElement("td")).appendTo(tr);
+								td.html(itemLista.totalProducto);
+								td.attr("style", "text-align: center");
+
+							});
+
+							$('#tabla-datos-general tbody tr:even').addClass('even ');
+
+
+						} else {
+
+							$.each(data.lista, function (posLista, itemLista) {
+
+								div = $(document.createElement("div")).appendTo(contenedor);
+								div.attr("id", "view-results");
 								a = $(document.createElement("a")).appendTo(div);
-								span = $(a).append("<span title='Ver gráfico' data-icon ='&#xe050' aria-hidden = 'true' class = 'icon'></span>");
-								span.attr("aria-hidden", "true");
-								span.attr("class", "icon");
-								span.attr("data-icon", '&#xe050;');
+								span = $(a).append("<span title = 'Ver gráfico' data-icon ='&#xe050' aria-hidden = 'true' class = 'icon'></span>");
+
 								span.click(function () {
 
-									// GRAFICA
+									var $consulta;
+
 									var aux = {};
 									var _axis = "Bolivares";
 
 									var jsonChart = {
 										title: {
-											text: $("#titulograficotext").attr("data")
+											text: ""
 										},
 										legend: {
 											position: "top"
 										},
 										series: [],
 										categoryAxis: {
-											categories: [],
-											labels: {
-												rotation: -45
-											}
+											categories: [$("#categoria_uno").attr("data"), $("#categoria_dos").attr("data")]
 										},
 										valueAxis: {
 											name: _axis,
@@ -193,25 +281,39 @@ $('.ui-datepicker.ui-widget.ui-widget-content.ui-helper-clearfix.ui-corner-all')
 												text: ""
 											}
 										}
+
 									}
 
 
 									// SE OBTIENE LAS CATEGORIAS
-									$.each(data.listaGrafico[0].categorias, function (posLista, itemLista) {
-										jsonChart.categoryAxis.categories.push(itemLista.nombreCategoria);
-									});
 
-									// SE OBTIENE LAS series
 
-									$.each(data.listaGrafico[0].series, function (posSeries, itemSeries) {
-										var serie = {};
-										serie.name = itemSeries.nombreSerie;
-										serie.data = itemSeries.valores;
-										serie.axis = _axis;
-										serie.color = colores[posSeries];
-										jsonChart.series.push(serie);
-									});
+									// SE OBTIENE LAS SERIES
+									var serie = {};
+									var seriep = {};
+									var seriea = {};
+									var titulo = {};
 
+									jsonChart.title.text = itemLista.nomProducto;
+
+									serie.name = $("#emision").attr("data");
+									serie.data = [itemLista.emision, itemLista.emisionSuplementaria.totalEmision];
+									serie.axis = _axis;
+									serie.color = colores[0];
+
+									seriep.name = $("#reptarjeta").attr("data");
+									seriep.data = [itemLista.repPlastico, itemLista.emisionSuplementaria.totalReposicionTarjeta];
+									seriep.axis = _axis;
+									seriep.color = colores[1];
+
+									seriea.name = $("#repclave").attr("data");
+									seriea.data = [itemLista.repClave, itemLista.emisionSuplementaria.totalReposicionClave];
+									seriea.axis = _axis;
+									seriea.color = colores[2];
+
+									jsonChart.series.push(seriep);
+									jsonChart.series.push(seriea);
+									jsonChart.series.push(serie);
 
 									// GRAFICA
 									$("#chart").kendoChart(jsonChart);
@@ -224,131 +326,6 @@ $('.ui-datepicker.ui-widget.ui-widget-content.ui-helper-clearfix.ui-corner-all')
 									$("#chart svg").height(Number($(window).height()));
 									$("#chart").data("kendoChart").refresh();
 								});
-
-
-
-								tabla = $(document.createElement("table")).appendTo(contenedor);
-								tabla.attr("id", "tabla-datos-general");
-								tabla.attr("class", "tabla-reportes");
-
-								thead = $(document.createElement("thead")).appendTo(tabla);
-								tbody = $(document.createElement("tbody")).appendTo(tabla);
-								tbody.attr("id", "tbody-datos-general");
-								tbody.attr("class", "tbody-reportes");
-								tr = $(document.createElement("tr")).appendTo(thead);
-								tr.attr("id", "datos-principales");
-								th = $(document.createElement("th")).appendTo(tr);
-								th.html($("#producto").attr("data"));
-								th = $(document.createElement("th")).appendTo(tr);
-								th.html($("#emision").attr("data"));
-								th = $(document.createElement("th")).appendTo(tr);
-								th.html($("#reptarjeta").attr("data"));
-								th = $(document.createElement("th")).appendTo(tr);
-								th.html($("#repclave").attr("data"));
-								th = $(document.createElement("th")).appendTo(tr);
-								th.html($("#total").attr("data"));
-
-
-								$.each(data.lista, function (posLista, itemLista) {
-
-									tr = $(document.createElement("tr")).appendTo(tbody);
-									td = $(document.createElement("td")).appendTo(tr);
-									td.html(itemLista.nomProducto);
-									td = $(document.createElement("td")).appendTo(tr);
-									td.html(itemLista.totalEmision);
-									td.attr("style", "text-align: center")
-									td = $(document.createElement("td")).appendTo(tr);
-									td.html(itemLista.totalReposicionTarjeta);
-									td.attr("style", "text-align: center")
-									td = $(document.createElement("td")).appendTo(tr);
-									td.html(itemLista.totalReposicionClave);
-									td.attr("style", "text-align: center")
-									td = $(document.createElement("td")).appendTo(tr);
-									td.html(itemLista.totalProducto);
-									td.attr("style", "text-align: center");
-
-								});
-
-								$('#tabla-datos-general tbody tr:even').addClass('even ');
-
-
-							} else {
-
-								$.each(data.lista, function (posLista, itemLista) {
-
-									div = $(document.createElement("div")).appendTo(contenedor);
-									div.attr("id", "view-results");
-
-									span.click(function () {
-
-										var $consulta;
-
-
-										var aux = {};
-										var _axis = "Bolivares";
-
-										var jsonChart = {
-											title: {
-												text: ""
-											},
-											legend: {
-												position: "top"
-											},
-											series: [],
-											categoryAxis: {
-												categories: [$("#categoria_uno").attr("data"), $("#categoria_dos").attr("data")]
-											},
-											valueAxis: {
-												name: _axis,
-												title: {
-													text: ""
-												}
-											}
-
-										}
-
-
-										// SE OBTIENE LAS CATEGORIAS
-
-
-										// SE OBTIENE LAS SERIES
-										var serie = {};
-										var seriep = {};
-										var seriea = {};
-										var titulo = {};
-
-										jsonChart.title.text = itemLista.nomProducto;
-
-										serie.name = $("#emision").attr("data");
-										serie.data = [itemLista.emision, itemLista.emisionSuplementaria.totalEmision];
-										serie.axis = _axis;
-										serie.color = colores[0];
-
-										seriep.name = $("#reptarjeta").attr("data");
-										seriep.data = [itemLista.repPlastico, itemLista.emisionSuplementaria.totalReposicionTarjeta];
-										seriep.axis = _axis;
-										seriep.color = colores[1];
-
-										seriea.name = $("#repclave").attr("data");
-										seriea.data = [itemLista.repClave, itemLista.emisionSuplementaria.totalReposicionClave];
-										seriea.axis = _axis;
-										seriea.color = colores[2];
-
-										jsonChart.series.push(seriep);
-										jsonChart.series.push(seriea);
-										jsonChart.series.push(serie);
-
-										// GRAFICA
-										$("#chart").kendoChart(jsonChart);
-										$("#chart").dialog({
-											modal: true,
-											width: 900,
-											height: 600
-										});
-										$("#chart svg").width(Number($(window).width()));
-										$("#chart svg").height(Number($(window).height()));
-										$("#chart").data("kendoChart").refresh();
-									});
 
 
 								tabla = $(document.createElement("table")).appendTo(contenedor);
@@ -377,9 +354,9 @@ $('.ui-datepicker.ui-widget.ui-widget-content.ui-helper-clearfix.ui-corner-all')
 								td = $(document.createElement("td")).appendTo(tr);
 								td.html($("#categoria_uno").attr("data"));
 								td = $(document.createElement("td")).appendTo(tr);
-								if(itemLista.totalEmision != 0){
-								td = $(document.createElement("a")).appendTo(td);
-								td.attr("title","emision");
+								if (itemLista.totalEmision != 0) {
+									td = $(document.createElement("a")).appendTo(td);
+									td.attr("title", "emision");
 								}
 
 								td.attr("class", "ep");
@@ -387,9 +364,9 @@ $('.ui-datepicker.ui-widget.ui-widget-content.ui-helper-clearfix.ui-corner-all')
 								td.html(itemLista.totalEmision);
 								td.attr("style", "text-align: center")
 								td = $(document.createElement("td")).appendTo(tr);
-								if(itemLista.totalReposicionTarjeta != 0){
+								if (itemLista.totalReposicionTarjeta != 0) {
 									td = $(document.createElement("a")).appendTo(td);
-									td.attr("title","reposicion");
+									td.attr("title", "reposicion");
 								}
 								td.attr("class", "rp");
 								td.attr("id", posLista);
@@ -406,18 +383,18 @@ $('.ui-datepicker.ui-widget.ui-widget-content.ui-helper-clearfix.ui-corner-all')
 								td = $(document.createElement("td")).appendTo(tr);
 								td.html($("#categoria_dos").attr("data"));
 								td = $(document.createElement("td")).appendTo(tr);
-								if(itemLista.emisionSuplementaria.totalEmision != 0){
-								td = $(document.createElement("a")).appendTo(td);
-								td.attr("title","emision suplementaria");
+								if (itemLista.emisionSuplementaria.totalEmision != 0) {
+									td = $(document.createElement("a")).appendTo(td);
+									td.attr("title", "emision suplementaria");
 								}
 								td.attr("id", posLista);
 								td.attr("class", "suplementario_emision");
 								td.html(itemLista.emisionSuplementaria.totalEmision);
 								td.attr("style", "text-align: center")
 								td = $(document.createElement("td")).appendTo(tr);
-								if(itemLista.emisionSuplementaria.totalReposicionTarjeta != 0){
-								td = $(document.createElement("a")).appendTo(td);
-								td.attr("title","reposición suplementaria");
+								if (itemLista.emisionSuplementaria.totalReposicionTarjeta != 0) {
+									td = $(document.createElement("a")).appendTo(td);
+									td.attr("title", "reposición suplementaria");
 								}
 								td.attr("id", posLista);
 								td.attr("class", "suplementario_reposicion");
@@ -449,23 +426,29 @@ $('.ui-datepicker.ui-widget.ui-widget-content.ui-helper-clearfix.ui-corner-all')
 
 							});
 
-						$('.tabla-reportes tbody tr:even').addClass('even ');
+							$('.tabla-reportes tbody tr:even').addClass('even ');
 
-					}
-					$("tbody.tbody-reportes").on('click', 'tr td a', function (event) {
-						$("#chart").children().remove();
-						var selectClass = $(event.target).attr('class');
-						var selectId = event.target.id;
-						var nombreProducto = $(this).closest('table').find('th')[0].innerText;
-						var tipoNombre = $(this).attr('title')
-						var dataGeneral = data.lista;
-						var propiedadTrabajar = selectClass == 'ep' ? dataGeneral[selectId].detalleEmisiones : dataGeneral[selectId].detalleReposiciones;
+						}
+						$("tbody.tbody-reportes").on('click', 'tr td a', function (event) {
+							$("#chart").children().remove();
+							var selectClass = $(event.target).attr('class');
+							var selectId = event.target.id;
+							var nombreProducto = $(this).closest('table').find('th')[0].innerText;
+							var tipoNombre = $(this).attr('title')
+							var dataGeneral = data.lista;
+							var propiedadTrabajar = selectClass == 'ep' ? dataGeneral[selectId].detalleEmisiones : dataGeneral[selectId].detalleReposiciones;
 
 
-							if(propiedadTrabajar.length != 0){
+							if (propiedadTrabajar.length != 0) {
 								var contenidoTabla = $("#chart");
-								$("#chart").dialog({ modal: true, title: "Consulta tarjetas "+tipoNombre, width: 960, height: "auto", draggable: false });
-								var newTabla =$(document.createElement("table")).appendTo(contenidoTabla);
+								$("#chart").dialog({
+									modal: true,
+									title: "Consulta tarjetas " + tipoNombre,
+									width: 960,
+									height: "auto",
+									draggable: false
+								});
+								var newTabla = $(document.createElement("table")).appendTo(contenidoTabla);
 								newTabla.attr("class", "tabla-detalles");
 								newTabla.attr("id", "tabla-detalles-general");
 
@@ -482,7 +465,7 @@ $('.ui-datepicker.ui-widget.ui-widget-content.ui-helper-clearfix.ui-corner-all')
 								span.attr("class", "icon");
 								span.attr("data-icon", '&#xe050;');
 								$(div).insertBefore($("#tabla-detalles-general"));
-								span.click(function(){
+								span.click(function () {
 									var ceo_cook = decodeURIComponent(
 										document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 									);
@@ -502,8 +485,8 @@ $('.ui-datepicker.ui-widget.ui-widget-content.ui-helper-clearfix.ui-corner-all')
 									$('form#formulario').append('<input type="hidden" name="posicionDetalle" value="' + filtro_busq.posicionDetalle + '" />');
 
 
-									 $('form#formulario').attr('action', baseURL + api + isoPais + "/reportes/tarjetasEmitidasExpXLS");
-									 $('form#formulario').submit();
+									$('form#formulario').attr('action', baseURL + api + isoPais + "/reportes/tarjetasEmitidasExpXLS");
+									$('form#formulario').submit();
 								})
 
 								thead = $(document.createElement("thead")).appendTo(newTabla);
@@ -533,119 +516,119 @@ $('.ui-datepicker.ui-widget.ui-widget-content.ui-helper-clearfix.ui-corner-all')
 								th = $(document.createElement("th")).appendTo(tr);
 								th.html($("#estado_plastico").attr("data"));
 
-									$.each(propiedadTrabajar[0].detalle, function (i, tabla){
+								$.each(propiedadTrabajar[0].detalle, function (i, tabla) {
 
 
-											tr = $(document.createElement("tr")).appendTo(tbody);
-											td = $(document.createElement("td")).appendTo(tr);
-											td.html(tabla.fechaEmision);
-											td.attr("id","fechaEmision")
-											td.attr("class", "info-detal");
-											td = $(document.createElement("td")).appendTo(tr);
-											td.html(tabla.nroLote);
-											td.attr("id","nroLote");
-											td.attr("class", "info-detal");
-											td = $(document.createElement("td")).appendTo(tr);
-											td.html(tabla.nroTarjeta);
-											td.attr("id","nroTajeta");
-											td.attr("class", "info-detal");
-											td = $(document.createElement("td")).appendTo(tr);
-											td.html(tabla.cedula);
-											td.attr("id","cedula");
-											td.attr("class", "info-detal");
-											td = $(document.createElement("td")).appendTo(tr);
-											td.html(tabla.nombres);
-											td.attr("id","nombres");
-											td.attr("class", "info-detal");
-											td = $(document.createElement("td")).appendTo(tr);
-											td.html(tabla.apellidos);
-											td.attr("id","apellidos");
-											td.attr("class", "info-detal");
-											td = $(document.createElement("td")).appendTo(tr);
-											td.html(tabla.ubicacion);
-											td.attr("id","ubicacion");
-											td.attr("class", "info-detal");
-											td = $(document.createElement("td")).appendTo(tr);
-											td.html(tabla.estadoEmision);
-											td.attr("id","estadoEmision");
-											td.attr("class", "info-detal");
-											td = $(document.createElement("td")).appendTo(tr);
-											td.html(tabla.estadoPlastico);
-											td.attr("id","estadoPlastico");
-											td.attr("class", "info-detal");
-									});
-									$('#tabla-detalles-general').dataTable({
-										"iDisplayLength": 4,
-										'bDestroy': true,
-										"sPaginationType": "full_numbers",
-										"oLanguage": {
-											"sProcessing": "Procesando...",
-											"sLengthMenu": "Mostrar _MENU_ registros",
-											"sZeroRecords": "No se encontraron resultados",
-											"sEmptyTable": "Ningún dato disponible en esta tabla",
-											"sInfo": "Mostrando registros del _START_ al _END_, de un total de _TOTAL_ registros",
-											"sInfoEmpty": "Mostrando registros del 0 al 0, de un total de 0 registros",
-											"sInfoFiltered": "",
-											"sInfoPostFix": "",
-											"sSearch": "",
-											"sUrl": "",
-											"sInfoThousands": ",",
-											"sLoadingRecords": "Cargando...",
-											"oPaginate": {
-												"sFirst": "<<",
-												"sLast": ">>",
-												"sNext": ">",
-												"sPrevious": "<"
-											}
+									tr = $(document.createElement("tr")).appendTo(tbody);
+									td = $(document.createElement("td")).appendTo(tr);
+									td.html(tabla.fechaEmision);
+									td.attr("id", "fechaEmision")
+									td.attr("class", "info-detal");
+									td = $(document.createElement("td")).appendTo(tr);
+									td.html(tabla.nroLote);
+									td.attr("id", "nroLote");
+									td.attr("class", "info-detal");
+									td = $(document.createElement("td")).appendTo(tr);
+									td.html(tabla.nroTarjeta);
+									td.attr("id", "nroTajeta");
+									td.attr("class", "info-detal");
+									td = $(document.createElement("td")).appendTo(tr);
+									td.html(tabla.cedula);
+									td.attr("id", "cedula");
+									td.attr("class", "info-detal");
+									td = $(document.createElement("td")).appendTo(tr);
+									td.html(tabla.nombres);
+									td.attr("id", "nombres");
+									td.attr("class", "info-detal");
+									td = $(document.createElement("td")).appendTo(tr);
+									td.html(tabla.apellidos);
+									td.attr("id", "apellidos");
+									td.attr("class", "info-detal");
+									td = $(document.createElement("td")).appendTo(tr);
+									td.html(tabla.ubicacion);
+									td.attr("id", "ubicacion");
+									td.attr("class", "info-detal");
+									td = $(document.createElement("td")).appendTo(tr);
+									td.html(tabla.estadoEmision);
+									td.attr("id", "estadoEmision");
+									td.attr("class", "info-detal");
+									td = $(document.createElement("td")).appendTo(tr);
+									td.html(tabla.estadoPlastico);
+									td.attr("id", "estadoPlastico");
+									td.attr("class", "info-detal");
+								});
+								$('#tabla-detalles-general').dataTable({
+									"iDisplayLength": 4,
+									'bDestroy': true,
+									"sPaginationType": "full_numbers",
+									"oLanguage": {
+										"sProcessing": "Procesando...",
+										"sLengthMenu": "Mostrar _MENU_ registros",
+										"sZeroRecords": "No se encontraron resultados",
+										"sEmptyTable": "Ningún dato disponible en esta tabla",
+										"sInfo": "Mostrando registros del _START_ al _END_, de un total de _TOTAL_ registros",
+										"sInfoEmpty": "Mostrando registros del 0 al 0, de un total de 0 registros",
+										"sInfoFiltered": "",
+										"sInfoPostFix": "",
+										"sSearch": "",
+										"sUrl": "",
+										"sInfoThousands": ",",
+										"sLoadingRecords": "Cargando...",
+										"oPaginate": {
+											"sFirst": "<<",
+											"sLast": ">>",
+											"sNext": ">",
+											"sPrevious": "<"
 										}
-									});
+									}
+								});
 
 							}
-					});
+						});
 
 
-				} else {
-					if (data.rc == "-29") {
-						alert("Usuario actualmente desconectado");
-						$(location).attr('href', baseURL + isoPais + '/login');
-					} else if (data) {
-						var contenedor = $("#div_tablaDetalle");
-						$("#tabla-datos-general").fadeOut("fast");
-						$("#view-results").attr("style", "display:none");
-						var div = $(document.createElement("div")).appendTo(contenedor);
-						div.attr("id", "mensaje");
-						div.attr("style", "background-color:rgb(252,199,199); margin-top:60px;");
-						var p = $(document.createElement("p")).appendTo(div);
-						if (data.rc == "-150")
-							p.html(data.mensaje);
-						else
-							p.html(data);
-						p.attr("style", "text-align:center;width:638px;padding:10px;font-size:14px");
 					} else {
-						$("#mensaje").remove();
-						var contenedor = $("#div_tablaDetalle");
-						$("#tabla-datos-general").fadeOut("fast");
-						$("#view-results").attr("style", "display:none");
-						var div = $(document.createElement("div")).appendTo(contenedor);
-						div.attr("id", "mensaje");
-						div.attr("style", "background-color:rgb(252,199,199); margin-top:60px;");
-						var p = $(document.createElement("p")).appendTo(div);
-						if (data.rc == "-150")
-							p.html(data.mensaje);
-						else
-							p.html(data);
-						p.attr("style", "text-align:center;width:638px;padding:10px;font-size:14px");
+						if (data.rc == "-29") {
+							alert("Usuario actualmente desconectado");
+							$(location).attr('href', baseURL + isoPais + '/login');
+						} else if (data) {
+							var contenedor = $("#div_tablaDetalle");
+							$("#tabla-datos-general").fadeOut("fast");
+							$("#view-results").attr("style", "display:none");
+							var div = $(document.createElement("div")).appendTo(contenedor);
+							div.attr("id", "mensaje");
+							div.attr("style", "background-color:rgb(252,199,199); margin-top:60px;");
+							var p = $(document.createElement("p")).appendTo(div);
+							if (data.rc == "-150")
+								p.html(data.mensaje);
+							else
+								p.html(data);
+							p.attr("style", "text-align:center;width:638px;padding:10px;font-size:14px");
+						} else {
+							$("#mensaje").remove();
+							var contenedor = $("#div_tablaDetalle");
+							$("#tabla-datos-general").fadeOut("fast");
+							$("#view-results").attr("style", "display:none");
+							var div = $(document.createElement("div")).appendTo(contenedor);
+							div.attr("id", "mensaje");
+							div.attr("style", "background-color:rgb(252,199,199); margin-top:60px;");
+							var p = $(document.createElement("p")).appendTo(div);
+							if (data.rc == "-150")
+								p.html(data.mensaje);
+							else
+								p.html(data);
+							p.attr("style", "text-align:center;width:638px;padding:10px;font-size:14px");
+						}
 					}
-				}
 
-			});
-		} else {
-			showErrMsg('Verifiqua los datos ingresados e intenta nuevamente.');
-		}
+				});
+			} else {
+				showErrMsg('Verifiqua los datos ingresados e intenta nuevamente.');
+			}
 		};
 	});
 
-	});
+});
 
 
 
