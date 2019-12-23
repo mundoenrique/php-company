@@ -305,21 +305,6 @@ function noResults(){
       );
 //-- Fin mostrar/ocultar campo de texto
 
-
-
-// PAGINACION
- /*
- $('#more').on('click', function(){
-    if( dash_var.pgActual < dash_var.pgTotal ){
-       dash_var.pgActual+=1;
-       paginar();
-    }
-
- });
-*/
-//-- FIN PAGINACION
-
-
 $("#listCompanies").on("click",'.style-companies-item',function(){
 	var ceo_cook = decodeURIComponent(
 		document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
