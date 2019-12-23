@@ -1,6 +1,7 @@
 <?php
 
 $pais = $this->uri->segment(1);
+log_message('DEBUG', '****************'.$pais);
 $urlBaseA = $this->config->item('base_url');
 $urlBase = $urlBaseA.$pais;
 
@@ -133,7 +134,7 @@ $info;
 										</td>
 										<td class="nro_cuenta" style="text-align:center; font-size:11px">' . $value->nroTarjeta . '</td>
 										<td class="ci" style="text-align:center; font-size:11px">' . $value->idExtPer . '</td>
-										<td class="nombre-persona" style="text-align:center; font-size:11px; word-wrap: break-word; overflow:hidden">' . $value->nombre .' '. $value->apellido . '</td>
+										<td class="nombre-persona" style="text-align:center; font-size:11px; word-wrap: break-word; overflow:hidden">' . $value->nombre .' '. (($pais == 'Ec-bp') ? $value->apellido : '') . '</td>
 										<td class="fecha-carga" style="text-align:center; font-size:11px">' . $value->fechaRegistro . '</td>
 										<td class="estatus-lote-td" style="font-size:11px">' . (($value->estatus=='0') ? 'NO AFILIADO' : 'AFILIADO') . '</td>
 									</tr>

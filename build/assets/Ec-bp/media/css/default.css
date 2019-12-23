@@ -5905,6 +5905,9 @@ center button.novo-btn-secondary {
 	max-width: 95px;
 	min-width: 80px;
 }
+ tr.tr-calculo > td{
+	 padding-left: 9px;
+ }
 
 .tabla-detalles {
 	width: 950px;
