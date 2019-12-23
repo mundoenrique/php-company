@@ -7663,6 +7663,7 @@ button:active {
 	background: none;
 	background-color: #ffd000;
 	color: #10133f;
+
 }
 /*********************************/
 
@@ -7673,8 +7674,9 @@ button:active {
 	width:120px;
 	padding-left:15px;
 	padding-right:15px;
-
+	 display: block;
 }
+
 .novo-btn-primary-modal,.novo-btn-secondary-modal{
 	width:68px;
 	padding-left:15px;
@@ -7740,6 +7742,20 @@ button:active {
 
 .view-results a span {
 	font-size: 20px;
+}
+
+.input5 {
+	width: 110px;
+	border-color: rgb(221, 221, 221);
+}
+
+.text-center {
+	/* margin: 0 auto;
+	margin-left: 262px; */
+	border-left: solid 1px #DFE0E2;
+	padding-left: 270px;
+	border-right: solid 1px #DFE0E2;
+	margin-right: 28px;
 }
 
 /* .loadingScreenWindow .ui-button {

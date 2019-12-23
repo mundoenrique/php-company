@@ -300,7 +300,7 @@ class Lotes_innominada extends CI_Controller {
 					$codSucursal = $dataRequest->data_codsucursal;
 					$password = (isset($dataRequest->data_password))? $dataRequest->data_password : "";
 					$fechaExp = $dataRequest->data_fechaexp;
-
+					$password = (isset($dataRequest->data_password))? $dataRequest->data_password : "";
 					$response = $this->innominadas_model->callWSCreateInnominadas($urlCountry, $cantReg, $monto, $lembozo1, $lembozo2, $codSucursal, $password, $fechaExp);
 					/*}else{
 							$response = array("ERROR"=>lang('SIN_FUNCION'));

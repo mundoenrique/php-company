@@ -131,7 +131,6 @@ var datatable;
 			++count;
 			contenido+= "<h6>" + count + ". Has seleccionado una fecha de expiración</h6>";
 		}
-
 		if($("#user-password").val() == ''){
 			++count;
 			contenido+= "<h6>" + count + ". Has ingresado la clave</h6>";
@@ -208,6 +207,7 @@ $(function(){
 	});
 
 	calendario("fecha_expira");
+	$('#embozo_2').attr('disabled', 'disabled');
 
 	$('#embozo_2').attr('disabled', 'disabled');
 
