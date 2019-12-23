@@ -438,10 +438,10 @@ $(function () {
 				}
 				$('.table-text-aut tbody tr').hide();
 				$('.table-text-aut .' + page).show();
-				$('#paginado-TM .jPag-pages').css('width', '350px');
+				$('#paginado-TM .jPag-pages').css('width', '450px');
 			}
 		});
-		$('#paginado-TM .jPag-pages').css('width', '350px');
+		$('#paginado-TM .jPag-pages').css('width', '450px');
 	}
 
 
