@@ -635,11 +635,12 @@ function paginar() {
 			}
 			$('.table-text-aut tbody tr').hide();
 			$('.table-text-aut .' + page).show();
-			$('#paginado-TM .jPag-pages').css('width', '600px')
+			$('#paginado-TM .jPag-pages').css('width', '450px')
 		}
 	});
-	$('#paginado-TM .jPag-pages').css('width', '600px')
+	$('#paginado-TM .jPag-pages').css('width', '450px')
 }
+
 
 // SUMAR LOS MONTOS INGRESADOS Y VALIDAR MONTO MAX. Y MIN.
 function calcularTrans(operacion) {
