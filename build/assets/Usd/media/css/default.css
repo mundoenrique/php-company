@@ -5892,6 +5892,7 @@ ul.jPag-pages {
   margin: 0px 0px 0px 0px;
 	padding: 0px;
 	width: auto !important;
+	display: inline-flex;
 }
 
 ul.jPag-pages li {
