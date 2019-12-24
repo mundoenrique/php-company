@@ -141,6 +141,7 @@ if(!function_exists('languajeLoad')) {
 		$langFiles = $langFiles ?: $CI->router->fetch_method();
 		$languagesFile = [];
 		$lanGeneral = ['bdb', 'bp', 'co', 've'];
+		$lanValidate = ['bdb'];
 		$loadLanguages = FALSE;
 		$client = !$client ? 'default_lang' : $client;
 		log_message('INFO', 'NOVO Language '.$call.', HELPER: languajeLoad Initialized for controller: '.$class. ' and method: '.$langFiles);
@@ -214,7 +215,12 @@ if(!function_exists('languajeLoad')) {
 		}
 
 		if(in_array($client, $lanGeneral)) {
-			array_unshift($languagesFile, 'general', 'validate');
+			array_unshift($languagesFile, 'general');
+			$loadLanguages = TRUE;
+		}
+
+		if(in_array($client, $lanValidate)) {
+			array_unshift($languagesFile, 'validate');
 			$loadLanguages = TRUE;
 		}
 
