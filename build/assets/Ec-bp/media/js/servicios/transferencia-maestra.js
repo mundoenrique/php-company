@@ -39,9 +39,6 @@ $(function() {
 
 		$("#loadingData").hide();
 
-		console.log(data);
-
-
 		if (data.rc == 0) {
 
 			masterTransferBalanace = data.maestroDeposito.saldoDisponible;
@@ -635,10 +632,11 @@ function paginar() {
 			}
 			$('.table-text-aut tbody tr').hide();
 			$('.table-text-aut .' + page).show();
-			$('#paginado-TM .jPag-pages').css('width', '450px')
+			$('#paginado-TM .jPag-pages').css('width', '600px')
 		}
 	});
-	$('#paginado-TM .jPag-pages').css('width', '450px')
+	$('#paginado-TM .jPag-pages').css('width', '600px')
+
 }
 
 

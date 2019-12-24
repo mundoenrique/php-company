@@ -5877,6 +5877,7 @@ ul.jPag-pages {
   list-style-type: none;
   margin: 0px 0px 0px 0px;
 	padding: 0px;
+	display: inline-flex;
 	width: auto !important;
 }
 
