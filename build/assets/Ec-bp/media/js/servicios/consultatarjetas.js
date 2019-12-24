@@ -1104,14 +1104,14 @@ function mostrar_saldo(data) {
 		if(t.msgNovoTrans=="No apta para procesarse"){
 			$('#statusPlastico' + t.numeroTarjeta.replace(/[*]/g, "")).text("Bloqueada");
 			$('#saldo' + t.numeroTarjeta.replace(/[*]/g, "")).empty();
-			$('#saldo' + t.numeroTarjeta.replace(/[*]/g, "")).text("-");
+			$('#saldo' + t.numeroTarjeta.replace(/[*]/g, "")).append('<span title="'+t.msgNovoTrans+'"  class="icon" data-icon="&#xe04b;"></span>');
 			$('#opciones' + t.numeroTarjeta.replace(/[*]/g, "")).empty();
 			$('#opciones' + t.numeroTarjeta.replace(/[*]/g, "")).append('<a id="DESBLOQUEO" title="Desbloqueo"><span class="icon" data-icon="&#xe03f;"></span></a>');
 		}
 		if(t.msgNovoTrans=="Tarjeta Inactiva"){
 			$('#statusPlastico' + t.numeroTarjeta.replace(/[*]/g, "")).text("Inactiva");
 			$('#saldo' + t.numeroTarjeta.replace(/[*]/g, "")).empty();
-			$('#saldo' + t.numeroTarjeta.replace(/[*]/g, "")).text("-");
+			$('#saldo' + t.numeroTarjeta.replace(/[*]/g, "")).append('<span title="'+t.msgNovoTrans+'"  class="icon" data-icon="&#xe04b;"></span>');
 			$('#opciones' + t.numeroTarjeta.replace(/[*]/g, "")).empty();
 			$('#opciones' + t.numeroTarjeta.replace(/[*]/g, "")).text("-");
 		}
