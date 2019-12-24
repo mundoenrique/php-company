@@ -2,9 +2,24 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 $lang['BULK_TITLE'] = 'Cargar lote';
+$lang['BULK_TITLE_PAGE'] = 'Carga de lote';
 $lang['BULK_NEW'] = 'Nuevos lotes';
+$lang['BULK_TYPE'] = 'Tipo de lote';
+$lang['BULK_BRANCH_OFFICE'] = 'Sucursal';
+$lang['BULK_GET_BRANCHOFFICE'] = '';
 $lang['BULK_SELECT_BRANCH_OFFICE'] = 'Selecciona una sucursal';
-$lang['BULK_SELECT_BULK_TYPE'] = 'Selecciona una sucursal';
+$lang['BULK_SELECT_BULK_TYPE'] = 'Selecciona un tipo de lote';
+$lang['BULK_SELECT_BULK_FILE'] = 'Clic aquí para seleccionar el archivo de Lote.';
+$lang['BULK_PENDING'] = 'Lotes pendientes';
+$lang['BULK_NUMBER'] = 'Nro de Lote';
+$lang['BULK_FILE_NAME'] = 'Nombre de archivo';
+$lang['BULK_LOAD_DATE'] = 'Fecha de carga';
+$lang['BULK_STATUS'] = 'Estado';
+$lang['BULK_OPTIONS'] = 'Opciones';
+$lang['BULK_ALL_RECORDS'] = 'Todos los registros serán procesados.';
+$lang['BULK_SOME_RECORDS'] = 'Existen registros que no serán procesados.';
+$lang['BULK_NO_RECORDS'] = 'Ningún registro será procesado.';
+$lang['BULK_NO_RENDER'] = 'No fue posible obtener los lotes pendientes.';
 $lang['BULK_SUCCESS'] = 'Lote cargado exitosamente';
 $lang['BULK_NO_LOAD_TITLE'] = 'Lote no Cargado:';
 $lang['BULK_NO_LOAD'] = 'No fue posible cargar el lote, por favor intentalo de nuevo';

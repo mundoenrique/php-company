@@ -1,24 +1,43 @@
 'use strict'
 $(function () {
+	if(code > 2 ) {
+		$('#content-datatable').addClass('none');
+		$('#no-bulk').removeClass('none');
+	}
 	var file = $('#file-bulk');
 	var inputFile = file.next('.js-label-file').html().trim();
 	var selectBranchOffice = $('#branch-office');
 	var selectTypeBulk = $('#type-bulk');
+	var uploadFileBtn = $('#upload-file-btn');
 	form = $('#upload-file-form');
 
 	$('.input-file').each(function () {
-    var $input = $(this),
-      $label = $input.next('.js-label-file'),
-      labelVal = $label.html();
+    var input = $(this);
+		var label = input.next('.js-label-file');
+    var labelVal = label.html();
 
-    $input.on('change', function (element) {
+    input.on('change', function (element) {
       var fileName = '';
       if (element.target.value) fileName = element.target.value.split('\\').pop();
-      fileName ? $label.addClass('has-file').find('.js-file-name').html(fileName) : $label.removeClass('has-file').html(labelVal);
+      fileName ? label.addClass('has-file').find('.js-file-name').html(fileName) : label.removeClass('has-file').html(labelVal);
     });
 	});
 
-	$('#upload-file-btn').on('click', function(e) {
+	selectTypeBulk.on('change', function() {
+		var getBranchOffices = [lang.BULK_GET_BRANCHOFFICE];
+		if(getBranchOffices != []) {
+			console.log(getBranchOffices)
+			console.log($(this).val())
+			console.log(getBranchOffices.indexOf($(this).val()))
+			getBranchOffices.indexOf($(this).val()) != -1
+			? selectBranchOffice.parent().removeClass('hide')
+			: selectBranchOffice.parent().addClass('hide');
+
+		}
+
+	});
+
+	uploadFileBtn.on('click', function(e) {
 		e.preventDefault();
 		var btnAction = $(this);
 		btnText = btnAction.text().trim();
@@ -124,26 +143,25 @@ $(function () {
 		e.preventDefault();
 		var event = $(e.currentTarget);
 		var action = event.attr('title');
-		var bulkView = $('#bulkView')
 		form = $(this).parent().find('form')
 		insertFormInput(true, form);
 
 		switch(action) {
-			case 'Ver':
+			case lang.GEN_BTN_SEE:
 				form.attr('action', baseURL+'detalle-lote');
 				form.append('<input type="hidden" name="bulkView" value="detail">');
 				break;
-			case 'Confirmar':
+			case lang.GEN_BTN_CONFIRM:
 				form.attr('action', baseURL+'confirmar-lote');
 				form.append('<input type="hidden" name="bulkView" value="confirm">');
 				break;
-			case 'Eliminar':
+			case lang.GEN_BTN_DELETE:
 				var oldID = $('#accept').attr('id');
 				$('#accept').attr('id', 'delete-bulk-btn');
 				var inputModal;
 				data = {
 					btn1: {
-						text: 'Eliminar',
+						text: lang.GEN_BTN_DELETE,
 						action: 'close'
 					},
 					btn2: {
@@ -151,15 +169,15 @@ $(function () {
 					}
 				}
 				inputModal = '<form id="delete-bulk-form" class="form-group">';
-				inputModal+= 		'<input id="password" name="password" type="password" autocomplete="off" placeholder="Indica tu contraseña">';
+				inputModal+= 		'<input id="password" name="password" type="password" autocomplete="off" placeholder="'+lang.GEN_PLACE_PASSWORD+'">';
 				inputModal+= 		'<div class="help-block"></div>';
 				inputModal+= '</form>';
-				notiSystem('Eliminar lote', inputModal, lang.GEN_ICON_INFO, data);
+				notiSystem(lang.BULK_DELETE_TITLE, inputModal, lang.GEN_ICON_INFO, data);
 				deleteBulk(oldID);
 				break;
 		}
 
-		if(action != 'Eliminar') {
+		if(action != lang.GEN_BTN_DELETE) {
 			form.submit();
 		}
 

@@ -1,6 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 <div class="pt-3 px-5 pb-5">
-	<h1 class="primary h3 regular inline">Carga de lotes</h1>
+	<h1 class="primary h3 regular inline"><?= lang('BULK_TITLE_PAGE'); ?></h1>
 	<span class="ml-2 regular tertiary"><?= $productName ?></span>
 	<div class="mb-2 flex items-center">
 		<div class="flex tertiary">
@@ -11,7 +11,7 @@
 					<li class="inline"><a class="tertiary big-modal" href="<?= base_url('detalle-producto') ?>">Detalle del
 							producto</a>
 					</li> /
-					<li class="inline"><a class="tertiary" href="#">Cargar lotes</a></li>
+					<li class="inline"><a class="tertiary" href="#"><?= lang('BULK_TITLE'); ?></a></li>
 				</ul>
 			</nav>
 		</div>
@@ -19,12 +19,22 @@
 	<div class="flex mt-1 mb-5 bg-color flex-nowrap justify-between">
 		<div class="flex flex-auto flex-column <?= $widget ? '' : 'max-width-6';  ?>">
 			<div class="flex flex-column">
-				<span class="line-text mb-2 h4 semibold primary">Nuevos lotes</span>
+				<span class="line-text mb-2 h4 semibold primary"><?= lang('BULK_NEW'); ?></span>
 				<form id="upload-file-form">
 					<div class="flex px-5 pb-4 items-center row">
-						<?php if(verifyDisplay('body', $module,  lang('GEN_TAG_BRANCHOFFICE'))): ?>
 						<div class="form-group col-3">
-							<label class="mt-1 h6" for="branch-office">Sucursal</label>
+							<label class="mt-1 h6" for="type-bulk"><?= lang('BULK_TYPE'); ?></label>
+							<select id="type-bulk" name="type-bulk" class="select-box custom-select h6 w-100">
+								<?php foreach($typesLot AS $pos => $type): ?>
+								<option value="<?= $type->key; ?>" format="<?= $type->format; ?>"
+									<?= $pos != 0 ? '' : 'selected disabled' ?>><?= $type->text; ?></option>
+								<?php endforeach; ?>
+							</select>
+							<div class="help-block"></div>
+						</div>
+						<?php if(verifyDisplay('body', $module,  lang('GEN_TAG_BRANCHOFFICE'))): ?>
+						<div class="form-group col-3 hide">
+							<label class="mt-1 h6" for="branch-office"><?= lang('BULK_BRANCH_OFFICE'); ?></label>
 							<select id="branch-office" name="branch-office" class="select-box custom-select h6 w-100">
 								<?php foreach($branchOffices AS $pos => $branchOffice): ?>
 								<option value="<?= $branchOffice->key; ?>" <?= $pos != 0 ? '' : 'selected disabled' ?>>
@@ -34,34 +44,24 @@
 							<div class="help-block"></div>
 						</div>
 						<?php endif; ?>
-						<div class="form-group col-3">
-							<label class="mt-1 h6" for="type-bulk">Tipo de Lote</label>
-							<select id="type-bulk" name="type-bulk" class="select-box custom-select h6 w-100">
-								<?php foreach($typesLot AS $pos => $type): ?>
-								<option value="<?= $type->key; ?>" format="<?= $type->format; ?>"
-									<?= $pos != 0 ? '' : 'selected disabled' ?>><?= $type->text; ?></option>
-								<?php endforeach; ?>
-							</select>
-							<div class="help-block"></div>
-						</div>
 						<div class="form-group col-6 bg-color">
 							<input type="file" name="file-bulk" id="file-bulk" class="input-file">
 							<label for="file-bulk" class="label-file js-label-file mb-0">
 								<i class="icon icon-upload mr-1 pr-3 right"></i>
-								<span class="js-file-name h6 regular">Clic aquí para seleccionar el archivo de Lote.</span>
+								<span class="js-file-name h6 regular"><?= lang('BULK_SELECT_BULK_FILE'); ?></span>
 							</label>
 							<div class="help-block"></div>
 						</div>
 						<div class="col mt-1">
 							<button id="upload-file-btn" class="btn btn-primary btn-small btn-loading flex mx-auto">
-								Enviar
+								<?= lang('GEN_BTN_SEND'); ?>
 							</button>
 						</div>
 					</div>
 				</form>
 			</div>
 			<div class="flex flex-column">
-				<span class="line-text mb-2 h4 semibold primary">Lotes pendientes</span>
+				<span class="line-text mb-2 h4 semibold primary"><?= lang('BULK_PENDING'); ?></span>
 				<div id="pre-loader" class="mt-2 mx-auto">
 					<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
 				</div>
@@ -69,11 +69,11 @@
 					<table id="pending-bulk" class="cell-border h6 display">
 						<thead class="regular secondary bg-primary">
 							<tr>
-								<th>Nro. Lote</th>
-								<th>Nombre</th>
-								<th>Fecha de carga</th>
-								<th>Estatus</th>
-								<th>Opciones</th>
+								<th><?= lang('BULK_NUMBER'); ?></th>
+								<th><?= lang('BULK_FILE_NAME'); ?></th>
+								<th><?= lang('BULK_LOAD_DATE'); ?></th>
+								<th><?= lang('BULK_STATUS'); ?></th>
+								<th><?= lang('BULK_OPTIONS'); ?></th>
 							</tr>
 						</thead>
 						<tbody>
@@ -116,20 +116,20 @@
 					<div class="mx-3 h3">
 						<div class="flex mt-4 items-center">
 							<div class="icon-square bg-vista-blue" alt=""></div>
-							<span class="pl-1 h6">Todos los registros serán procesados</span>
+							<span class="pl-1 h6"><?= lang('BULK_ALL_RECORDS'); ?></span>
 						</div>
 						<div class="flex mt-2 items-center">
 							<div class="icon-square bg-trikemaster" alt=""></div>
-							<span class="pl-1 h6">Existen registros que no serán procesados</span>
+							<span class="pl-1 h6"><?= lang('BULK_SOME_RECORDS'); ?></span>
 						</div>
 						<div class="flex mt-2 items-center">
 							<div class="icon-square bg-pink-salmon" alt=""></div>
-							<span class="pl-1 h6">Ningún registro será procesado</span>
+							<span class="pl-1 h6"><?= lang('BULK_SOME_RECORDS'); ?></span>
 						</div>
 					</div>
 				</div>
-				<div class="my-5 py-4 center none">
-					<span class="h4">No fue posible obtener los lotes pendientes</span>
+				<div id="no-bulk" class="my-5 py-4 center none">
+					<span class="h4"><?= lang('BULK_NO_RENDER'); ?></span>
 				</div>
 			</div>
 		</div>
