@@ -26,13 +26,9 @@ $(function () {
 	selectTypeBulk.on('change', function() {
 		var getBranchOffices = [lang.BULK_GET_BRANCHOFFICE];
 		if(getBranchOffices != []) {
-			console.log(getBranchOffices)
-			console.log($(this).val())
-			console.log(getBranchOffices.indexOf($(this).val()))
 			getBranchOffices.indexOf($(this).val()) != -1
-			? selectBranchOffice.parent().removeClass('hide')
-			: selectBranchOffice.parent().addClass('hide');
-
+			? selectBranchOffice.prop('disabled', false).parent().removeClass('hide')
+			: selectBranchOffice.prop('disabled', true).parent().addClass('hide');
 		}
 
 	});
@@ -62,6 +58,7 @@ $(function () {
 				selectBranchOffice.prop('selectedIndex', 0);
 				selectTypeBulk.prop('selectedIndex', 0);
 				respLoadBulk[response.code](response);
+				form.validate().resetForm();
 			});
 		}
 	});

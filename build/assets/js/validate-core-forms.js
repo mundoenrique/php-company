@@ -82,10 +82,7 @@ function validateForms(form) {
 	}
 
 	$.validator.methods.requiredBranchOffice = function(value, element, param) {
-		var eval1 = alphanumunder.test($(element).find('option:selected').text());
-		var eval2 = alphanum.test($(element).find('option:selected').val());
-		console.log(eval1, eval2)
-		return eval1 && eval2;
+		return alphanum.test($(element).find('option:selected').val());;
 	}
 
 	$.validator.methods.fiscalRegistry = function(value, element, param) {
