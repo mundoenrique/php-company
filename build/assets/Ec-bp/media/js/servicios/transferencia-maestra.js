@@ -37,7 +37,11 @@ $(function() {
 	$.get( baseURL + api + isoPais + '/servicios/transferencia-maestra/consultarSaldo',
 	function(response) {
 		var data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
-		var Amountmsg = " - ";
+		var Amountmsg = " - ",
+				numberaccount = ' - ';
+
+		$("#loadingData").hide();
+
 		if (data.rc == 0) {
 			masterTransferBalanace = data.maestroDeposito.saldoDisponible;
 			parametrosRecarga = data.maestroDeposito.parametrosRecarga;
@@ -687,10 +691,11 @@ function paginar() {
 			}
 			$('.table-text-aut tbody tr').hide();
 			$('.table-text-aut .' + page).show();
-			$('#paginado-TM .jPag-pages').css('width', '450px')
+			$('#paginado-TM .jPag-pages').css('width', '600px')
 		}
 	});
-	$('#paginado-TM .jPag-pages').css('width', '450px')
+	$('#paginado-TM .jPag-pages').css('width', '600px')
+
 }
 
 

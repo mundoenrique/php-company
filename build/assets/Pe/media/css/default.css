@@ -2946,10 +2946,11 @@ ul#brands li p img {
 
 ul.jPag-pages {
 	float: left;
-	list-style-type: none;
-	margin: 0px 0px 0px 0px;
-	padding: 0px;
-	width: auto !important;
+  list-style-type: none;
+  margin: 0px 0px 0px 0px;
+  padding: 0px;
+  display: inline-flex;
+  width: auto !important;
 }
 
 ul.jPag-pages li {
