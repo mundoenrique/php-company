@@ -160,6 +160,10 @@ if(!function_exists('languajeLoad')) {
 					'login' => ['login'],
 					'validatecaptcha' => ['login'],
 					'getPendingBulk'	=> ['bulk'],
+					'loadBulk'	=> ['bulk'],
+					'deleteNoConfirmBulk'	=> ['bulk'],
+					'confirmBulk'	=> ['bulk'],
+					'getDetailBulk'	=> ['bulk'],
 				];
 				break;
 			case 'co':

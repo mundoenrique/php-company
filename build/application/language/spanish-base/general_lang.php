@@ -47,7 +47,7 @@ $lang['GEN_BTN_CONFIRM'] = 'Confirmar';
 $lang['GEN_BTN_SEND'] = 'Enviar';
 $lang['GEN_BTN_SEE'] = 'Ver';
 $lang['GEN_BTN_DELETE'] = 'Eliminar';
-$lang['GEN_BTN_BACK'] = 'Volver atrás';
+$lang['GEN_BTN_BACK'] = 'Volver';
 $lang['GEN_BTN_SELECT']= 'Seleccionar';
 //MODULES
 $lang['GEN_LOGIN'] = 'Login';
