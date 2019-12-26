@@ -268,7 +268,7 @@ footer.main-footer {
 .form-control {
 	display: block;
 	width: 100%;
-	height: calc(1.15em + .75rem + 2px);
+	height: calc(1.18em + .75rem + 2px);
 	padding: .375rem .75rem;
 	font-size: .875rem;
 	font-weight: var(--font-weight-base);
@@ -372,7 +372,7 @@ textarea.form-control {
 	color: var(--text-color);
 	background-color: var(--secondary);
   border-bottom: 1px solid var(--border-color);
-	transition: all 0.1ms ease-in-out;
+	transition: all .1ms ease-in-out;
 }
 
 .select-box option:first-child {
@@ -388,7 +388,7 @@ textarea.form-control {
 	line-height: 1.5;
 	margin: 0 2px;
 	padding-right: 1.9rem !important;
-	padding: 0rem .4rem;
+	padding: 0 .4rem;
 	position: relative;
 	text-shadow: 0 0 0 var(--text-color);
 	transition: all .1s ease-in-out;
@@ -608,6 +608,33 @@ textarea.form-control {
 	opacity: .6;
 }
 
+.checkbox-table:before,
+.checkbox-table:after {
+  display: block;
+  position: absolute;
+  left: 50%;
+  width: 12px;
+  height: 12px;
+  box-sizing: border-box;
+}
+.checkbox-table::before {
+	content: ' ';
+	margin-top: 6px !important;
+	margin-left: -6px;
+	border: 1px solid var(--primary) !important;
+	border-radius: 3px;
+}
+
+.custom-control-input:checked ~ .checkbox-table::after {
+	transition: all .45s ease-out 0s;
+	content: '\2714';
+	text-align: center;
+	margin-top: -2px !important;
+	margin-left: -6px;
+	color: var(--primary);
+	font-size: var(--h4);
+}
+
 /* Switch */
 
 .custom-switch {
@@ -688,7 +715,7 @@ textarea.form-control {
 	position: relative;
 	flex-shrink: 0;
 	margin-top: 0;
-	margin-right: 0.25rem;
+	margin-right: .25rem;
 	margin-left: 0;
 }
 .form-inline .custom-control {
@@ -837,7 +864,7 @@ textarea.form-control {
 .sb-search-input {
 	position: absolute;
 	top: 0;
-	right: 0px;
+	right: 0;
 	outline: none;
 	width: 100%;
 	margin: 0;
@@ -847,7 +874,6 @@ textarea.form-control {
 	font-weight: var(--semibold-font-weight);
 	background: var(--secondary);
 	border: .85px solid var(--border-color);
-
 }
 
 .sb-search-input:-moz-placeholder,
@@ -1021,6 +1047,8 @@ textarea.form-control {
 .btn-primary:disabled,
 .btn-primary.is-disabled {
 	opacity: .5;
+	pointer-events: none;
+  cursor: default;
 }
 
 /* secondary */
@@ -1043,6 +1071,8 @@ textarea.form-control {
 
 .btn-secondary:disabled{
 	opacity: .5;
+	pointer-events: none;
+  cursor: default;
 }
 
 /* Btn-Link */
@@ -1054,6 +1084,12 @@ textarea.form-control {
 .btn-link:hover {
 	color: var(--tertiary);
 	text-decoration: underline;
+}
+
+.btn-link.is-disabled {
+	opacity: .4;
+	pointer-events: none;
+  cursor: default;
 }
 
 /* Btn-Loading */
@@ -2405,7 +2441,7 @@ i[class*=" icon-"]:before {
 	display: none;
 	position: absolute;
 	right:-158px;
-	top:0px;
+	top: 0;
 	box-shadow: 1px 2px 5px -1px rgba(0,0,0,.15), 0 4px 14px -1px rgba(0,0,0,.1);
 }
 
@@ -2554,7 +2590,7 @@ td > button > i:hover{
 	color: var(--text-color);
 	background-color: var(--secondary);
   border-bottom: 1px solid var(--border-color);
-	transition: all 0.1ms ease-in-out;
+	transition: all .1ms ease-in-out;
 }
 
 .dataTables_length select  {
@@ -2566,7 +2602,7 @@ td > button > i:hover{
 	line-height: 1.5;
 	margin: 0 2px;
 	padding-right: 1.8rem !important;
-	padding: 0rem .4rem;
+	padding: 0 .4rem;
 	position: relative;
 	text-shadow: 0 0 0 var(--text-color);
 	transition: all .1s ease-in-out;
@@ -2593,7 +2629,7 @@ td > button > i:hover{
   font-size: var(--h5) !important;
   color: var(--tertiary)!important;
   border: none !important;
-	transition: .3s;
+  transition: .3s;
 	padding: var(--space-1) !important;
 }
 
@@ -2620,6 +2656,7 @@ td > button > i:hover{
   background: transparent;
   box-shadow: none;
 }
+
 .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
   color: var(--primary) !important;
   font-weight: var(--semibold-font-weight) !important;
@@ -2719,16 +2756,12 @@ table.dataTable > tbody > tr.child ul.dtr-details {
 }
 
 table.dataTable > tbody > tr.child ul.dtr-details > li:first-child {
-	padding-top: 0.5em !important;
+	padding-top: .5em !important;
 }
 
 table#resultsAccount thead th:nth-child(7){
 	width: 170px !important;
 }
-
-/* #pendingLots td:last-child {
-	text-align: start !important;
-} */
 
 /* Widgets */
 
@@ -2740,7 +2773,7 @@ table#resultsAccount thead th:nth-child(7){
 }
 
 @media (max-width: 1200px) {
-	.widget {
+	.widget.optional {
 		display: none;
 	}
 }
@@ -2779,7 +2812,7 @@ ul.steps li.step-item i {
 }
 
 .fade:not(.show) {
-  opacity: 0;
+	opacity: 0;
 }
 
 .fade-in {
@@ -3244,15 +3277,18 @@ a.ui-button:active,
 	display: flex;
 	padding: 1.5em 1em;
 	min-height: 80px;
+	margin-bottom: 0;
+	padding: 1.5em 1em;
 }
 .ui-dialog-content .dialog-icon {
 	margin-right: 12px;
 }
 .ui-dialog .ui-dialog-buttonpane {
+	margin-bottom: 8px;
+	padding: 0 1em .5em;
 	text-align: left;
 	border-width: 1px 0 0 0;
 	background-image: none;
-	padding: 0em 1em .5em;
 }
 .ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset {
 	float: right;
@@ -3276,7 +3312,8 @@ a.ui-button:active,
 
 .login-content {
 	position: relative;
-	height: 100vh;
+	padding: 3.75rem 0;
+	min-height: calc(100vh - 2.75rem);
 }
 
 .login-content:before {
@@ -3286,7 +3323,7 @@ a.ui-button:active,
 	width: 100%;
 	height: 100%;
 	z-index: 0;
-	opacity: 0.4;
+	opacity: .4;
 	background-image: url("../images/bdb/bg-content.png");
 	background-repeat: no-repeat;
 	background-size: 35%;
@@ -3368,7 +3405,7 @@ a.ui-button:active,
 }
 
 .select-product:hover {
-	box-shadow: 1px 1px 2px 0px var(--text-color);
+	box-shadow: 1px 1px 2px 0 var(--text-color);
 }
 
 @media (min-width: 1024px) {
@@ -3417,7 +3454,7 @@ a.ui-button:active,
 }
 
 .logout-content {
-	min-height: calc(100vh - 3.75rem - 2.75rem - 90px);
+	min-height: calc(100vh - 3.75rem - 2.75rem - 64px);
 }
 
 .section {
@@ -3447,7 +3484,7 @@ a.ui-button:active,
 
 .nav-config .nav-config-box .nav-item-config .icon-config,
 .nav-config .nav-config-box .nav-item-config  h5{
-  filter: opacity(0.6);
+  filter: opacity(.6);
 }
 
 .nav-config .nav-config-box .box {
@@ -3532,14 +3569,18 @@ a.ui-button:active,
 }
 
 .files{
-  -moz-perspective: 100px;
-  -moz-transform-style: preserve-3d;
+	perspective: 100px;
+	-moz-perspective: 100px;
+	transform-style: preserve-3d;
+	-moz-transform-style: preserve-3d;
   -webkit-transform-style: preserve-3d;
 }
 
 .file {
-  position: relative;
-  -moz-perspective: 100px;
+	position: relative;
+	perspective: 100px;
+	-moz-perspective: 100px;
+	transform: rotateY(-3deg);
   -moz-transform: rotateY(-3deg);
   -webkit-transform: perspective(100) rotateY(-3deg);
   outline: 1px solid transparent;
@@ -3575,7 +3616,7 @@ a.ui-button:active,
 }
 
 .cover-spin {
-	background-color:rgba(0,0,0,0.3);
+	background-color:rgba(0,0,0,.3);
 	bottom:0;
 	display:none;
 	left:0;

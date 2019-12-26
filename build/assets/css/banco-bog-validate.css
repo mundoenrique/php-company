@@ -29,23 +29,35 @@
 }
 
 .invalid-user {
-	width: auto;
-	height: auto;
-	color: var(--danger);
+	align-items: center;
+	background-color: rgb(253, 247, 246,1);
+	border-radius: 5px;
 	border: 1px solid var(--danger);
-	background-color: var(--pink-salmon);
-	font-size: 11px;
+	box-shadow: 2px 2px 3px 0px var(--danger);
+	color: var(--tertiary);
+	display: flex;
+	font-size: 12px;
+	font-weight: var(--semibold-font-weight);
+	height: 22px;
 	letter-spacing: .016em;
+	padding: 0px 8px;
+	width: auto;
 	z-index: 1;
 }
 
 .inactive-user {
-	width: auto;
-	height: auto;
-	color: var(--danger);
+	align-items: center;
+	background-color:rgba(255, 247, 230, 1);
+	border-radius: 5px;
 	border: 1px solid var(--warning);
-	background-color: var(--warning);
-	font-size: 11px;
+	box-shadow: 2px 2px 3px 0px var(--warning);
+	color: var(--tertiary) !important;
+	display: flex;
+	font-size: 12px;
+	font-weight: var(--semibold-font-weight);
+	height: 22px;
 	letter-spacing: .016em;
+	padding: 0px 8px;
+	width: auto;
 	z-index: 1;
 }
