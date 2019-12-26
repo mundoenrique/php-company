@@ -478,7 +478,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 				$this->response->code = 0;
 				$this->response->title = lang('BULK_CONFIRM_TITLE');
 				$this->response->msg = lang('BULK_CONFIRM_SUCCESS');
-				$this->response->data['btn1']['link'] = base_url('lotes-autorizacion');
+				$this->response->data['btn1']['link'] = base_url(lang('GEN_LINK_BULK_AUTH'));
 				break;
 			case -1:
 				$this->response->code = 0;

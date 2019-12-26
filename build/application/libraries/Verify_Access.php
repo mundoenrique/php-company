@@ -155,6 +155,9 @@ class Verify_Access {
 			case 'deleteNoConfirmBulk':
 				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBCAR', 'TEBELC'));
 				break;
+			case 'authorizeBulk':
+				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBCAR') && $this->verifyAuthorization('TEBAUT'));
+				break;
 		}
 
 		log_message('INFO', 'NOVO ['.$user.'] accessAuthorization '.$module.': '.json_encode($auth, JSON_UNESCAPED_UNICODE));

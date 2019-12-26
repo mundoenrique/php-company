@@ -9,9 +9,9 @@ $lang['GEN_MENU_TRAJECTS'] = 'Trayectos';
 $lang['GEN_MENU_REPORTS'] = 'Reportes';
 //SUBMENU BUSINESS
 $lang['GEN_MENU_BULK_LOAD'] = 'Cargar lotes';//TEBCAR
-$lang['GEN_MENU_BULK_LOAD'] = 'Cargar lotes';//TEBCAR
 $lang['GEN_LINK_BULK_LOAD'] = 'cargar-lotes';//TEBCAR
 $lang['GEN_MENU_BULK_AUTH'] = 'Autorización';//TEBAUT
+$lang['GEN_LINK_BULK_AUTH'] = 'lotes-autorizacion';//TEBAUT
 $lang['GEN_MENU_LOT_UNNAMED'] = 'Cuentas innomindas';
 $lang['GEN_MENU_LOT_UNNAMED_REQ'] = 'Solicitud';//TICARG
 $lang['GEN_MENU_LOT_UNNAMED_AFFIL'] = 'Afiliación';//TIINVN
@@ -67,6 +67,8 @@ $lang['GEN_DETAIL_BULK'] = 'seeBulkDetail';
 $lang['GEN_DETAIL_BULK_TITLE'] = 'Detalle del lote';
 $lang['GEN_CONFIRM_BULK'] = 'confirmBulk';
 $lang['GEN_CONFIRM_BULK_TITLE'] = 'Confirmar lote';
+$lang['GEN_AUTHORIZE_BULK'] = 'authorizeBulk';
+$lang['GEN_AUTHORIZE_BULK_TITLE'] = 'Autorizar lote';
 //MODAL STYLES
 $lang['GEN_MODAL_WIDTH'] = 310;
 $lang['GEN_ICON'] = 'ui-icon';

@@ -72,6 +72,7 @@ $route['(:any)/detalle-producto'] = "business/getProductDetail";
 $route['(:any)/cargar-lotes'] = "bulk/getPendingBulk";
 $route['(:any)/detalle-lote'] = "bulk/getDetailBulk";
 $route['(:any)/confirmar-lote'] = "bulk/confirmBulk";
+$route['(:any)/lotes-autorizacion'] = "bulk/authorizeBulk";
 
 //old routes
 $route['(:any)/login'] = "users/login/$1";

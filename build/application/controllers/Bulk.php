@@ -101,4 +101,35 @@ class Bulk extends NOVO_Controller {
 		$this->views = ['bulk/'.$view];
 		$this->loadView($view);
 	}
+	/**
+	 * @info Método para autorizar un lote
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date December 25th, 2019
+	 */
+	public function authorizeBulk()
+	{
+		log_message('INFO', 'NOVO Bulk: authorizeBulk Method Initialized');
+
+		/* if(!isset($this->request->bulkView) || $this->request->bulkView != 'confirm') {
+			redirect(base_url('detalle-producto'), 'location');
+		} */
+
+		$view = lang('GEN_AUTHORIZE_BULK');
+		array_push(
+			$this->includeAssets->cssFiles,
+			"third_party/datatables"
+		);
+		array_push(
+			$this->includeAssets->jsFiles,
+			"third_party/datatables",
+			"third_party/jquery.validate",
+			"validate".$this->render->newViews."-forms",
+			"third_party/additional-methods",
+			"bulk/authorize_bulk"
+		);
+
+		$this->render->titlePage = lang('GEN_AUTHORIZE_BULK_TITLE');
+		$this->views = ['bulk/'.$view];
+		$this->loadView($view);
+	}
 }
