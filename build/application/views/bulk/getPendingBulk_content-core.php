@@ -51,7 +51,7 @@
 							<div class="help-block"></div>
 						</div>
 						<div class="col mt-1">
-							<button id="upload-file-btn" class="btn btn-primary btn-small btn-loading flex mx-auto">
+							<button id="upload-file-btn" class="btn btn-primary btn-small btn-loading flex ml-auto">
 								<?= lang('GEN_BTN_SEND'); ?>
 							</button>
 						</div>
