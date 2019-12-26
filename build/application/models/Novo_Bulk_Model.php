@@ -250,19 +250,19 @@ class Novo_Bulk_Model extends NOVO_Model {
 					$this->response->data['btn1']['link'] = base_url('cargar-lotes');
 					$respLoadBulk = TRUE;
 					break;
-					case -108:
-					case -109:
-					case -256:
-					case -21:
+				case -108:
+				case -109:
+				case -256:
+				case -21:
 					$this->response->msg = lang('BULK_NO_LOAD');
 					$this->response->data['btn1']['link'] = base_url('cargar-lotes');
 					$respLoadBulk = TRUE;
 					break;
-					case -280:
+				case -280:
 					$this->response->msg = lang('BULK_INCOMPATIBLE_FILE');
 					$respLoadBulk = TRUE;
 					break;
-					case -128:
+				case -128:
 					$code = 3;
 					$title = lang('BULK_NO_LOAD_TITLE');
 					$errorsHeader = $response->erroresFormato->erroresEncabezado->errores;
@@ -431,10 +431,10 @@ class Novo_Bulk_Model extends NOVO_Model {
 				$bulkConfirmInfo = $response->lotesTO;
 				$this->session->set_flashdata('bulkConfirmInfo', $bulkConfirmInfo);
 				$this->session->set_flashdata($dataRequest->bulkView, TRUE);
-				$this->response->data->detailBulk = (object) $detailBulk;
-
-				break;
+			break;
 		}
+
+		$this->response->data->detailBulk = (object) $detailBulk;
 
 		return $this->responseToTheView(lang('GEN_DETAIL_BULK'));
 	}
@@ -498,5 +498,73 @@ class Novo_Bulk_Model extends NOVO_Model {
 		}
 
 		return $this->responseToTheView(lang('GEN_CONFIRM_BULK'));
+	}
+	/**
+	 * @info Autoriza un lote
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date December 26th, 2019
+	 */
+	public function callWs_AuthorizeBulk_Bulk($dataRequest)
+	{
+		log_message('INFO', 'NOVO Bulk Model: AuthorizeBulk Method Initialized');
+
+		$this->className = 'com.novo.objects.TOs.LoteTO';
+		$this->dataAccessLog->modulo = 'Lotes';
+		$this->dataAccessLog->function = 'Autorización de lotes';
+		$this->dataAccessLog->operation = 'Autorizar lote';
+
+		$this->dataRequest->idOperation = 'cargarAutorizar';
+		$this->dataRequest->accodcia = $this->session->enterpriseInf->enterpriseCode;
+		$this->dataRequest->accodgrupo = $this->session->enterpriseInf->enterpriseGroup;
+		$this->dataRequest->acrif = $this->session->enterpriseInf->idFiscal;
+		$this->dataRequest->actipoproducto = $this->session->productInf->productPrefix;
+		$this->dataRequest->accodusuarioc = $this->userName;
+
+
+		$response = $this->sendToService(lang('GEN_AUTHORIZE_BULK'));
+		$signBulk = [];
+		$authorizeBulk = [];
+
+		switch ($this->isResponseRc) {
+			case 0:
+				$this->response->code = 0;
+				if(!empty($response->listaPorFirmar)) {
+					foreach($response->listaPorFirmar AS $bulk) {
+						$detailBulk['id'] = $bulk->acidlote;
+						$detailBulk['number'] = $bulk->acnumlote;
+						$detailBulk['loadDate'] = $bulk->dtfechorcarga;
+						$detailBulk['typeIDid'] = $bulk->ctipolote;
+						$detailBulk['type'] = ucwords(mb_strtolower(substr($bulk->acnombre, 0, 20)));
+						$detailBulk['records'] = $bulk->ncantregs;
+						$detailBulk['amount'] = $bulk->nmonto;
+						$signBulk[] = (object) $detailBulk;
+
+					}
+				}
+
+				if(!empty($response->listaPorAutorizar)) {
+					foreach($response->listaPorAutorizar AS $bulk) {
+						$detailBulk['id'] = $bulk->acidlote;
+						$detailBulk['number'] = $bulk->acnumlote;
+						$detailBulk['loadDate'] = $bulk->dtfechorcarga;
+						$detailBulk['typeIDid'] = $bulk->ctipolote;
+						$detailBulk['type'] = ucwords(mb_strtolower(substr($bulk->acnombre, 0, 20)));
+						$detailBulk['records'] = $bulk->ncantregs;
+						$detailBulk['amount'] = $bulk->nmonto;
+						$authorizeBulk[] = (object) $detailBulk;
+					}
+				}
+				break;
+			case -38:
+				$this->response->code = 3;
+				$this->response->title = 'Autorización de lotes';
+				$this->response->msg = 'No fue posible obtener el listado';
+				break;
+		}
+
+		$this->response->data->signBulk = (object) $signBulk;
+		$this->response->data->authorizeBulk = (object) $authorizeBulk;
+
+		return $this->responseToTheView(lang('GEN_AUTHORIZE_BULK'));
 	}
 }

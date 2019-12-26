@@ -30,7 +30,7 @@ var top = ($('.filter').offset().top-100) - parseFloat($('.filter').css('marginT
 
 // USER TIME OUT
 
-  /* function resetTimer(){
+  function resetTimer(){
     clearTimeout(head_var.idleTimer);
     head_var.idleTimer = setTimeout(function(){whenUserIdle()},180000); // 3 minutos de inactividad
 
@@ -41,7 +41,6 @@ var top = ($('.filter').offset().top-100) - parseFloat($('.filter').css('marginT
 
   resetTimer(); // Start the timer when the page loads
 
- */
 function whenUserIdle(){
   notificacion('Desconexión automática','<p>No se ha detectado actividad en la página.</p><p>La sesión ha finalizado.</p>');
   head_var.out = setTimeout(function(){

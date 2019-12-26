@@ -6,9 +6,10 @@
 		<div class="flex tertiary">
 			<nav class="main-nav nav-inferior">
 				<ul class="mb-0 h6 light tertiary list-style-none list-inline">
-				<li class="inline"><a class="tertiary big-modal" href="<?= base_url('empresas') ?>">Empresas</a></li> /
+					<li class="inline"><a class="tertiary big-modal" href="<?= base_url('empresas') ?>">Empresas</a></li> /
 					<li class="inline"><a class="tertiary big-modal" href="<?= base_url('productos') ?>">Productos</a></li> /
-					<li class="inline"><a class="tertiary big-modal" href="<?= base_url('detalle-producto') ?>">Detalle del producto</a></li> /
+					<li class="inline"><a class="tertiary big-modal" href="<?= base_url('detalle-producto') ?>">Detalle del
+							producto</a></li> /
 					<li class="inline"><a class="tertiary" href="javascript:">Autorizar lote</a></li>
 				</ul>
 			</nav>
@@ -19,28 +20,27 @@
 			<div class="flex pb-5 flex-column">
 				<span class="line-text mb-2 h4 semibold primary">Lotes pendientes por firmar</span>
 				<div class="center mx-1">
-					<table id="tableAuth" class="cell-border h6 display">
+					<table id="sign-bulk" class="cell-border h6 display">
 						<thead class="regular secondary bg-primary">
 							<tr id="headerRow">
 								<th class="toggle-all"><i id="select_all" name="select_invoice"></i></th>
 								<th>Nro. Lote</th>
-								<th>RUC.</th>
-								<th>Empresa</th>
 								<th>Fecha de carga</th>
-								<th>Tipo / Reg</th>
+								<th>Tipo</th>
+								<th>Registros</th>
 								<th>Monto</th>
 								<th>Opciones</th>
 							</tr>
 						</thead>
 						<tbody>
+							<?php foreach($signBulk AS $bulk): ?>
 							<tr>
 								<td></td>
-								<td>19062016</td>
-								<td>20000000002</td>
-								<td>Servicios Públicos</td>
-								<td>20/06/2019</td>
-								<td>Recarga / 11</td>
-								<td>1,000,000.00</td>
+								<td><?= $bulk->number; ?></td>
+								<td><?= $bulk->loadDate; ?></td>
+								<td><?= $bulk->type; ?></td>
+								<td><?= $bulk->records; ?></td>
+								<td><?= $bulk->amount; ?></td>
 								<td class="flex justify-center">
 									<button class="btn mx-1 px-0" title="Ver" data-toggle="tooltip"
 										onclick="window.location.href = 'ceo_auth_see_lot.php'">
@@ -51,40 +51,7 @@
 									</button>
 								</td>
 							</tr>
-							<tr>
-								<td></td>
-								<td>19081225</td>
-								<td>20000000002</td>
-								<td>Servicios Públicos</td>
-								<td>20/06/2019</td>
-								<td>Recarga / 11</td>
-								<td>110,055.00</td>
-								<td class="flex justify-center">
-									<button class="btn mx-1 px-0" title="Ver" data-toggle="tooltip">
-										<i class="icon icon-find" aria-hidden="true"></i>
-									</button>
-									<button class="btn mx-1 px-0" title="Eliminar" data-toggle="tooltip">
-										<i class="icon icon-remove mr-1" aria-hidden="true"></i>
-									</button>
-								</td>
-							</tr>
-							<tr>
-								<td></td>
-								<td>19081224</td>
-								<td>20000000002</td>
-								<td>Servicios Públicos</td>
-								<td>20/06/2019</td>
-								<td>Recarga / 11</td>
-								<td>1,000,000.00</td>
-								<td class="flex justify-center">
-									<button class="btn mx-1 px-0" title="Ver" data-toggle="tooltip">
-										<i class="icon icon-find" aria-hidden="true"></i>
-									</button>
-									<button class="btn mx-1 px-0" title="Eliminar" data-toggle="tooltip">
-										<i class="icon icon-remove mr-1" aria-hidden="true"></i>
-									</button>
-								</td>
-							</tr>
+							<?php endforeach; ?>
 						</tbody>
 					</table>
 					<form method="post">
@@ -115,80 +82,40 @@
 			<div class="flex pb-5 flex-column">
 				<span class="line-text mb-2 h4 semibold primary">Lotes pendientes por autorizar</span>
 				<div class="center mx-1">
-					<table id="tableFirm" class="cell-border h6 display">
+					<table id="authorize-bulk" class="cell-border h6 display">
 						<thead class="bg-primary secondary regular">
 							<tr>
 								<th></th>
 								<th>Nro. Lote</th>
-								<th>RUC.</th>
-								<th>Empresa</th>
 								<th>Fecha de carga</th>
-								<th>Tipo / Reg</th>
+								<th>Tipo</th>
+								<th>Registros</th>
 								<th>Monto</th>
 								<th>Opciones</th>
 							</tr>
 						</thead>
 						<tbody>
+							<?php foreach($authorizeBulk AS $bulk): ?>
 							<tr>
 								<td><button class="btn px-0" title="Eliminar" data-toggle="tooltip">
 										<i class="icon icon-user" aria-hidden="true"></i>
 									</button>
 								</td>
-								<td>19062016</td>
-								<td>20000000002</td>
-								<td>Servicios Públicos</td>
-								<td>20/06/2019</td>
-								<td>Recarga / 11</td>
-								<td>1,000,000.00</td>
+								<td><?= $bulk->number; ?></td>
+								<td><?= $bulk->loadDate; ?></td>
+								<td><?= $bulk->type; ?></td>
+								<td><?= $bulk->records; ?></td>
+								<td><?= $bulk->amount; ?></td>
 								<td class="flex justify-center">
 									<button class="btn mx-1 px-0" title="Ver" data-toggle="tooltip">
 										<i class="icon icon-find" aria-hidden="true"></i>
 									</button>
 									<button class="btn mx-1 px-0" title="Eliminar" data-toggle="tooltip">
-										<i class="icon icon-remove" aria-hidden="true"></i>
+										<i class="icon icon-remove mr-1" aria-hidden="true"></i>
 									</button>
 								</td>
 							</tr>
-							<tr>
-								<td><button class="btn px-0" title="Eliminar" data-toggle="tooltip">
-										<i class="icon icon-user" aria-hidden="true"></i>
-									</button>
-								</td>
-								<td>19081225</td>
-								<td>20000000002</td>
-								<td>Servicios Públicos</td>
-								<td>20/06/2019</td>
-								<td>Recarga / 11</td>
-								<td>110,055.00</td>
-								<td class="flex justify-center">
-									<button class="btn mx-1 px-0" title="Ver" data-toggle="tooltip">
-										<i class="icon icon-find" aria-hidden="true"></i>
-									</button>
-									<button class="btn mx-1 px-0" title="Eliminar" data-toggle="tooltip">
-										<i class="icon icon-remove" aria-hidden="true"></i>
-									</button>
-								</td>
-							</tr>
-							<tr>
-								<td><button class="btn px-0" title="Eliminar" data-toggle="tooltip">
-										<i class="icon icon-user" aria-hidden="true"></i>
-									</button>
-								</td>
-								<td>19081224</td>
-								<td>20000000002</td>
-								<td>Servicios Públicos</td>
-								<td>20/06/2019</td>
-								<td>Recarga / 11</td>
-								<td>1,000,000.00</td>
-								<td class="flex justify-center">
-									<button class="btn mx-1 px-0" title="Ver" data-toggle="tooltip">
-										<i class="icon icon-find" aria-hidden="true"></i>
-									</button>
-									<button class="btn mx-1 px-0" title="Eliminar" data-toggle="tooltip">
-										<i class="icon icon-remove" aria-hidden="true"></i>
-									</button>
-								</td>
-							</tr>
+							<?php endforeach; ?>
 						</tbody>
 					</table>
 
