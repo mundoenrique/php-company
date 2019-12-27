@@ -43,7 +43,7 @@ $(function () {
 		var rePassOtp = $("#passOtp").val();
 
 		if(rePassOtp == 0 && rePassOtp !== ''){
-			notificacion("Confirmar Codigo de seguridad", "No puede llevar espacios en blanco", null);
+			notificacion("Confirmar código de seguridad", "No puede llevar espacios en blanco", null);
 			return false;
 		}
 

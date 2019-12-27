@@ -59,4 +59,4 @@ $lang['PLACEHOLDER_CLAVE']='Ingrese clave';
 
 $lang['PAG_OS_TITLE'] = 'Pagar Orden de servicio';
 $lang['PAG_OS_ENV_OK'] = 'Envío exitoso';
-$lang['PAG_OS_OK'] = 'El pago fue realizado de forma exitosa';
+$lang['PAG_OS_OK'] = 'El pago fué realizado de forma exitosa';

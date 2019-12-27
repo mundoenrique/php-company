@@ -55,7 +55,7 @@ var datatable;
 
 
       var canvas = "<div id='dialog-confirm'>";
-	      canvas +="<p>La solicitud fue procesada de manera exitosa</p></div>";
+	      canvas +="<p>La solicitud fué procesada de manera exitosa</p></div>";
 
       $(canvas).dialog({
 				dialogClass: "hide-close",

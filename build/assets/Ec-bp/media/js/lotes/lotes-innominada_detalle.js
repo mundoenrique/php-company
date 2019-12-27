@@ -38,7 +38,7 @@ var	notificacion = function(titu, msj){
 		        "sZeroRecords":    "No se encontraron resultados.",
 		        "sEmptyTable":     "No se encontraron registros.",
 		        "sInfo":           "Mostrando registros del _START_ al _END_, de un total de _TOTAL_ registro(s).",
-		        "sInfoEmpty":      "Mostrando registros del 0 al 0, de un total de 0 registros.",
+		        "sInfoEmpty":      "Mostrando registros del 0 al 0, de un total de 0 registro(s).",
 		        "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
 		        "sInfoPostFix":    "",
 		        "sSearch":         "Buscar:",

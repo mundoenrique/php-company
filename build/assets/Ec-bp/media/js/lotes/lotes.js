@@ -94,7 +94,7 @@ $(function () { // Document ready
 			$('#cargando').replaceWith('<button id="cargaLote" >' + $('#boton').val() + '</button>');
 		},
 		error: function (e) {
-			notificacion("Cargando archivo", "error al intentar cargar el archivo");
+			notificacion("Cargando archivo", "Error al intentar cargar el archivo");
 			$('#userfile').val("");
 			$('#archivo').val("");
 			$('#cargando').replaceWith('<button id="cargaLote" >' + $('#boton').val() + '</button>');
@@ -219,10 +219,10 @@ $(function () { // Document ready
 						"oLanguage": {
 							"sProcessing": "Procesando...",
 							"sLengthMenu": "Mostrar _MENU_ registros",
-							"sZeroRecords": "No se encontraron resultados",
-							"sEmptyTable": "Ningún dato disponible en esta tabla",
-							"sInfo": "Mostrando registros del _START_ al _END_, de un total de _TOTAL_ registros",
-							"sInfoEmpty": "Mostrando registros del 0 al 0, de un total de 0 registros",
+							"sZeroRecords": "No se encontraron resultados.",
+							"sEmptyTable": "Ningún dato disponible en esta tabla.",
+							"sInfo": "Mostrando registros del _START_ al _END_, de un total de _TOTAL_ registro(s).",
+							"sInfoEmpty": "Mostrando registros del 0 al 0, de un total de 0 registro(s).",
 							"sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
 							"sInfoPostFix": "",
 							"sSearch": "Buscar:",
