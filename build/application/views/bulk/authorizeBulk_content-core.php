@@ -8,8 +8,7 @@
 				<ul class="mb-0 h6 light tertiary list-style-none list-inline">
 					<li class="inline"><a class="tertiary big-modal" href="<?= base_url('empresas') ?>">Empresas</a></li> /
 					<li class="inline"><a class="tertiary big-modal" href="<?= base_url('productos') ?>">Productos</a></li> /
-					<li class="inline"><a class="tertiary big-modal" href="<?= base_url('detalle-producto') ?>">Detalle del
-							producto</a></li> /
+					<li class="inline"><a class="tertiary big-modal" href="<?= base_url('detalle-producto') ?>">Detalle del producto</a></li> /
 					<li class="inline"><a class="tertiary" href="javascript:">Autorizar lote</a></li>
 				</ul>
 			</nav>
@@ -17,16 +16,19 @@
 	</div>
 	<div class="flex mt-1 bg-color flex-nowrap justify-between">
 		<div class="flex flex-auto flex-column <?= $widget ? '' : 'max-width-6';  ?>">
+			<?php if($signBulk != new stdClass()): ?>
 			<div class="flex pb-5 flex-column">
 				<span class="line-text mb-2 h4 semibold primary">Lotes pendientes por firmar</span>
 				<div class="center mx-1">
-					<table id="sign-bulk" class="cell-border h6 display">
+					<table id="sign-bulk" class="cell-border h6 display" sign="<?= $authorizeAttr->sign; ?>">
 						<thead class="regular secondary bg-primary">
 							<tr id="headerRow">
-								<th class="toggle-all"><i id="select_all" name="select_invoice"></i></th>
+								<th class="toggle-all"></th>
 								<th>Nro. Lote</th>
+								<th>Id de lote</th>
 								<th>Fecha de carga</th>
 								<th>Tipo</th>
+								<th>Id Tipo</th>
 								<th>Registros</th>
 								<th>Monto</th>
 								<th>Opciones</th>
@@ -36,9 +38,11 @@
 							<?php foreach($signBulk AS $bulk): ?>
 							<tr>
 								<td></td>
-								<td><?= $bulk->number; ?></td>
+								<td><?= $bulk->bulkNumber; ?></td>
+								<td><?= $bulk->idBulk; ?></td>
 								<td><?= $bulk->loadDate; ?></td>
 								<td><?= $bulk->type; ?></td>
+								<td><?= $bulk->idType; ?></td>
 								<td><?= $bulk->records; ?></td>
 								<td><?= $bulk->amount; ?></td>
 								<td class="flex justify-center">
@@ -57,7 +61,7 @@
 					<form method="post">
 						<div class="flex mb-4 mt-1 px-5 justify-end items-center row">
 							<div class="col-4 col-lg-4 col-xl-3">
-								<input id="password" class="form-control" type="password" placeholder="Ingresa tu contraseña">
+								<input id="password-sign" name="password-sign" class="form-control" type="password" placeholder="<?= lang('GEN_PLACE_PASSWORD'); ?>">
 							</div>
 							<div class="col-auto">
 								<button class="btn btn-primary btn-small flex mx-auto">
@@ -78,17 +82,19 @@
 					<span class="h4">No fue posible obtener el listado</span>
 				</div>
 			</div>
-
+			<?php endif; ?>
 			<div class="flex pb-5 flex-column">
 				<span class="line-text mb-2 h4 semibold primary">Lotes pendientes por autorizar</span>
 				<div class="center mx-1">
-					<table id="authorize-bulk" class="cell-border h6 display">
+					<table id="authorize-bulk" class="cell-border h6 display"  auth="<?= $authorizeAttr->auth; ?>" order-to-pay="<?= $authorizeAttr->toPAy; ?>">
 						<thead class="bg-primary secondary regular">
 							<tr>
-								<th></th>
+								<th class="<?= $authorizeAttr->allBulk; ?>"></th>
 								<th>Nro. Lote</th>
+								<th>Id de lote</th>
 								<th>Fecha de carga</th>
 								<th>Tipo</th>
+								<th>Id Tipo</th>
 								<th>Registros</th>
 								<th>Monto</th>
 								<th>Opciones</th>
@@ -96,14 +102,13 @@
 						</thead>
 						<tbody>
 							<?php foreach($authorizeBulk AS $bulk): ?>
-							<tr>
-								<td><button class="btn px-0" title="Eliminar" data-toggle="tooltip">
-										<i class="icon icon-user" aria-hidden="true"></i>
-									</button>
-								</td>
-								<td><?= $bulk->number; ?></td>
+							<tr class="<?= $bulk->selectRow; ?>">
+								<td class="<?= $bulk->selectRow; ?>"><?= $bulk->selectRowContent; ?></td>
+								<td><?= $bulk->bulkNumber; ?></td>
+								<td><?= $bulk->idBulk; ?></td>
 								<td><?= $bulk->loadDate; ?></td>
 								<td><?= $bulk->type; ?></td>
+								<td><?= $bulk->idType; ?></td>
 								<td><?= $bulk->records; ?></td>
 								<td><?= $bulk->amount; ?></td>
 								<td class="flex justify-center">
@@ -130,7 +135,7 @@
 								</select>
 							</div>
 							<div class="col-auto">
-								<input id="password" class="form-control" type="password" placeholder="Ingresa tu contraseña">
+								<input id="password-auth" name="password-auth" class="form-control" type="password" placeholder="<?= lang('GEN_PLACE_PASSWORD'); ?>">
 							</div>
 						</div>
 

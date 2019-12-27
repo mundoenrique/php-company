@@ -1,27 +1,29 @@
 'use strict'
 $(function () {
-	var table = $('#sign-bulk').DataTable({
+	var sign = getPropertyOfElement('sign', '#sign-bulk');
+	var auth = getPropertyOfElement('auth', '#authorize-bulk');
+	var signBulk = $('#sign-bulk').DataTable({
     "ordering": false,
     "pagingType": "full_numbers",
     "columnDefs": [
       {
         "targets": 0,
         "className": "select-checkbox",
-        "checkboxes": {"selectRow": true},
+				"checkboxes": {"selectRow": true}
       },
-      {"targets": 3,
-      render: function ( data, type, row ) {
-			  return data.length > 20 ?
-				  data.substr( 0, 20 ) +'…' :
-				  data;
-        }
+      {
+        "targets": 2,
+        "visible": false
       },
+      {
+        "targets": 5,
+        "visible": false
+      }
     ],
-		"table-layout": "fixed",
     "select": {
-      "style": "single",
+      "style": lang.GEN_TABLE_SELECT_SIGN,
       "info": false,
-      selector: ':not(td:nth-child(-n+7))'
+      selector: ':not(.no-select-checkbox, td:nth-child(-n+7))'
     },
     "language": {
       "sProcessing": "Procesando...",
@@ -49,32 +51,54 @@ $(function () {
         "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
         "sSortDescending": ": Activar para ordenar la columna de manera descendente"
       },
-      select: {
+      "select": {
         "rows": "%d Lote seleccionado"
       }
     }
-  });
-  /* $('#tableAuth').on('click', '.toggle-all', function () {
+	});
+
+  $('#sign-bulk').on('click', '.toggle-all', function () {
     $(this).closest("tr").toggleClass("selected");
     if ($(this).closest("tr").hasClass("selected")) {
-      table.rows().select();
+      signBulk.rows().select();
     } else {
-      table.rows().deselect();
+      signBulk.rows().deselect();
     }
-  }); */
+  });
 
-  $('#authorize-bulk').DataTable({
+  var authorizeBulk = $('#authorize-bulk').DataTable({
     "ordering": false,
     "pagingType": "full_numbers",
     "columnDefs": [
-      {"targets": 3,
-      render: function ( data, type, row ) {
-        return data.length > 20 ?
-				  data.substr( 0, 20 ) +'…' :
-				  data;
+			{
+				"targets": 0,
+				"className": "select-checkbox",
+				"checkboxes": {"selectRow": true},
+				'visible': auth != false,
+      	render: function (data, type, row) {
+					var content = '';
+					if(data != '') {
+						content = '<button class="btn px-0" title="En espera de autorización" data-toggle="tooltip">';
+						content+= 	'<i class="icon icon-user" aria-hidden="true"></i>';
+						content+= '</button>';
+					}
+					return content;
         }
       },
-    ],
+			{
+        "targets": 2,
+        "visible": false
+      },
+      {
+        "targets": 5,
+        "visible": false
+      }
+		],
+		"select": {
+      "style": lang.GEN_TABLE_SELECT_AUTH,
+      "info": false,
+      selector: ':not(.no-select-checkbox, td:nth-child(-n+7))'
+    },
     "language": {
       "sProcessing": "Procesando...",
       "sLengthMenu": "Mostrar _MENU_ registros",
@@ -101,6 +125,15 @@ $(function () {
         "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
         "sSortDescending": ": Activar para ordenar la columna de manera descendente"
       }
+    }
+	});
+
+	$('#authorize-bulk').on('click', '.toggle-all', function () {
+    $(this).closest("tr").toggleClass("selected");
+    if ($(this).closest("tr").hasClass("selected")) {
+      authorizeBulk.rows(':not(.no-select-checkbox)').select();
+    } else {
+      authorizeBulk.rows().deselect();
     }
   });
 });

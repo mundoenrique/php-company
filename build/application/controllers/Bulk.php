@@ -131,6 +131,7 @@ class Bulk extends NOVO_Controller {
 		$this->responseAttr($responseList);
 		$this->render->signBulk = $responseList->data->signBulk;
 		$this->render->authorizeBulk = $responseList->data->authorizeBulk;
+		$this->render->authorizeAttr = $responseList->data->authorizeAttr;
 		$this->render->titlePage = lang('GEN_AUTHORIZE_BULK_TITLE');
 		$this->views = ['bulk/'.$view];
 		$this->loadView($view);

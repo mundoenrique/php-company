@@ -9,3 +9,5 @@ $lang['GEN_FISCAL_REGISTRY'] = 'NIT.';
 $lang['GEN_PLACE_PASSWORD'] = 'Código de seguridad';
 //MODAL STYLES
 $lang['GEN_MODAL_WIDTH'] = 370;
+//DATATABLES
+$lang['GEN_TABLE_SELECT_AUTH'] = 'single';

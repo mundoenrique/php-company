@@ -146,6 +146,7 @@ class Verify_Access {
 				$auth = ($this->CI->session->has_userdata('enterpriseInf') && $countryUri === 'bdb');
 				break;
 			case 'getPendingBulk':
+			case 'loadBulk':
 			case 'getDetailBulk':
 				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBCAR'));
 				break;

@@ -524,36 +524,65 @@ class Novo_Bulk_Model extends NOVO_Model {
 		$response = $this->sendToService(lang('GEN_AUTHORIZE_BULK'));
 		$signBulk = [];
 		$authorizeBulk = [];
+		$authorizeAttr = [];
+		$allBulk = 'no-select-checkbox';
+
+		if(verifyDisplay('body', lang('GEN_AUTHORIZE_BULK'), lang('GEN_TAG_ALL_BULK'))) {
+			$allBulk = 'toggle-all';
+		}
+
+		$sign = TRUE;
+		$auth = TRUE;
+		$order = (int) $response->usuario->orden = '3';
+
+		if($order == 1) {
+			$auth = FALSE;
+		}
+
+		if($order > 1) {
+			$sign = FALSE;
+		}
 
 		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
+
 				if(!empty($response->listaPorFirmar)) {
 					foreach($response->listaPorFirmar AS $bulk) {
-						$detailBulk['id'] = $bulk->acidlote;
-						$detailBulk['number'] = $bulk->acnumlote;
+						$detailBulk['idBulk'] = $bulk->acidlote;
+						$detailBulk['bulkNumber'] = $bulk->acnumlote;
 						$detailBulk['loadDate'] = $bulk->dtfechorcarga;
-						$detailBulk['typeIDid'] = $bulk->ctipolote;
+						$detailBulk['idType'] = $bulk->ctipolote;
 						$detailBulk['type'] = ucwords(mb_strtolower(substr($bulk->acnombre, 0, 20)));
 						$detailBulk['records'] = $bulk->ncantregs;
 						$detailBulk['amount'] = $bulk->nmonto;
+						$detailBulk['selectBulk'] = $sign ? '' : 'no-select-checkbox';
 						$signBulk[] = (object) $detailBulk;
-
 					}
 				}
 
 				if(!empty($response->listaPorAutorizar)) {
 					foreach($response->listaPorAutorizar AS $bulk) {
-						$detailBulk['id'] = $bulk->acidlote;
-						$detailBulk['number'] = $bulk->acnumlote;
+						$detailBulk['idBulk'] = $bulk->acidlote;
+						$detailBulk['bulkNumber'] = $bulk->acnumlote;
 						$detailBulk['loadDate'] = $bulk->dtfechorcarga;
-						$detailBulk['typeIDid'] = $bulk->ctipolote;
+						$detailBulk['idType'] = $bulk->ctipolote;
 						$detailBulk['type'] = ucwords(mb_strtolower(substr($bulk->acnombre, 0, 20)));
 						$detailBulk['records'] = $bulk->ncantregs;
 						$detailBulk['amount'] = $bulk->nmonto;
+						$detailBulk['selectBulk'] = $auth ? '' : 'no-select-checkbox';
+						$detailBulk['selectRow'] = mb_strtoupper($bulk->accodusuarioa) == $this->userName ? 'no-select-checkbox' : '';
+						$detailBulk['selectRowContent'] = mb_strtoupper($bulk->accodusuarioa) == $this->userName ? 'TRUE' : '';
 						$authorizeBulk[] = (object) $detailBulk;
 					}
 				}
+
+				$authorizeAttr = (object) [
+					'toPAy' => $response->ordenXPagar,
+					'allBulk' => $allBulk,
+					'sign' => $sign,
+					'auth' => $auth
+				];
 				break;
 			case -38:
 				$this->response->code = 3;
@@ -564,6 +593,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 
 		$this->response->data->signBulk = (object) $signBulk;
 		$this->response->data->authorizeBulk = (object) $authorizeBulk;
+		$this->response->data->authorizeAttr = $authorizeAttr;
 
 		return $this->responseToTheView(lang('GEN_AUTHORIZE_BULK'));
 	}

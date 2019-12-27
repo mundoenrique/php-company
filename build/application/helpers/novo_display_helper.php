@@ -112,6 +112,9 @@ if ( ! function_exists('verifyBody'))
 			case lang('GEN_TAG_BRANCHOFFICE'):
 				$display = (in_array($client, $showThem) && $country == 'bdb');
 				break;
+			case lang('GEN_TAG_ALL_BULK'):
+				$display = (in_array($client, $showUs) || $country == 'bp');
+				break;
 		}
 
 		return $display;

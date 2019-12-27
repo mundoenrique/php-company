@@ -97,6 +97,10 @@ $lang['GEN_TAG_LINK_UNIC'] = 'Solo un link';
 $lang['GEN_TAG_HELPER'] = 'link de ayuda CEO';
 $lang['GEN_TAG_BRANCHOFFICE'] = 'ver select de sucursales';
 $lang['GEN_TAG_SEARCH_CAT'] = 'Buscar por categoría';
+$lang['GEN_TAG_ALL_BULK'] = 'Seleccionar todos los lotes';
+//DATATABLES
+$lang['GEN_TABLE_SELECT_SIGN'] = 'multi';
+$lang['GEN_TABLE_SELECT_AUTH'] = 'multi';
 //GENERAL LANGUAGE
 $lang['GEN_SYSTEM_NAME']= 'Conexión Empresas Online';
 $lang['GEN_WELCOME_TEXT'] = 'Bienvenido(a)';

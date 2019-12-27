@@ -2721,6 +2721,16 @@ table.dataTable tbody td.select-checkbox::before {
 	border-radius: 3px;
 }
 
+table.dataTable thead th.no-select-checkbox:before,
+table.dataTable tbody td.no-select-checkbox:before {
+  content: none !important;
+}
+
+table.dataTable thead th.no-select-checkbox:after,
+table.dataTable tbody td.no-select-checkbox:after {
+  content: none !important;
+}
+
 table.dataTable tbody > tr.selected, table.dataTable tbody > tr > .selected {
 	background-color: var(--disabled-color) !important;
 }

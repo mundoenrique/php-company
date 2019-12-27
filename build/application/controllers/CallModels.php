@@ -36,12 +36,12 @@ class CallModels extends Novo_Controller {
 
 		$this->appUserName = isset($_POST['user']) ? mb_strtoupper($_POST['user']) : $this->session->userName;
 
-		log_message('DEBUG', 'NOVO ['.$this->appUserName.'] REQUEST FROM THE VIEW '.json_encode($this->dataRequest ,JSON_UNESCAPED_UNICODE));
+		log_message('DEBUG', 'NOVO ['.$this->appUserName.'] REQUEST FROM THE VIEW '.json_encode($this->dataRequest, JSON_UNESCAPED_UNICODE));
 
 		unset($this->dataRequest);
 		$valid = $this->verify_access->accessAuthorization($this->rule, $this->countryUri, $this->appUserName);;
 
-		if(!empty($_FILES)) {
+		if(!empty($_FILES) && $valid) {
 			$valid = $this->manageFile();
 		}
 
