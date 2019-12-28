@@ -106,9 +106,9 @@ class Bulk extends NOVO_Controller {
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date December 25th, 2019
 	 */
-	public function authorizeBulk()
+	public function authorizeBulkList()
 	{
-		log_message('INFO', 'NOVO Bulk: authorizeBulk Method Initialized');
+		log_message('INFO', 'NOVO Bulk: authorizeBulkList Method Initialized');
 
 		/* if(!isset($this->request->bulkView) || $this->request->bulkView != 'confirm') {
 			redirect(base_url('detalle-producto'), 'location');

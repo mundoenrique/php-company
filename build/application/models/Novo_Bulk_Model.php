@@ -500,13 +500,13 @@ class Novo_Bulk_Model extends NOVO_Model {
 		return $this->responseToTheView(lang('GEN_CONFIRM_BULK'));
 	}
 	/**
-	 * @info Autoriza un lote
+	 * @info Obtiene la lista de lotes por autorizar
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date December 26th, 2019
 	 */
-	public function callWs_AuthorizeBulk_Bulk($dataRequest)
+	public function callWs_AuthorizeBulkList_Bulk($dataRequest)
 	{
-		log_message('INFO', 'NOVO Bulk Model: AuthorizeBulk Method Initialized');
+		log_message('INFO', 'NOVO Bulk Model: AuthorizeBulkList Method Initialized');
 
 		$this->className = 'com.novo.objects.TOs.LoteTO';
 		$this->dataAccessLog->modulo = 'Lotes';

@@ -219,3 +219,18 @@ function formInputTrim(form) {
 		$(this).val(trimVal)
 	});
 }
+/**
+ * @info Cifra la contraseña del usuario
+ * @author J. Enrique Peñaloza Piñero
+ * @date December 27th, 2019
+ */
+function crytoPass(password) {
+	ceo_cook = getCookieValue();
+	cypherPass = CryptoJS.AES.encrypt(password, ceo_cook, { format: CryptoJSAesJson }).toString();
+	password = btoa(JSON.stringify({
+		password: cypherPass,
+		plot: btoa(ceo_cook)
+	}));
+
+	return password;
+}

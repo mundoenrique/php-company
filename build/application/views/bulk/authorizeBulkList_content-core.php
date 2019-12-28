@@ -15,7 +15,10 @@
 		</div>
 	</div>
 	<div class="flex mt-1 bg-color flex-nowrap justify-between">
-		<div class="flex flex-auto flex-column <?= $widget ? '' : 'max-width-6';  ?>">
+		<!-- <div id="pre-loader" class="mt-2 mx-auto">
+			<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
+		</div> -->
+		<div class="flex flex-auto flex-column <?= $widget ? '' : 'max-width-6'; ?>">
 			<?php if($signBulk != new stdClass()): ?>
 			<div class="flex pb-5 flex-column">
 				<span class="line-text mb-2 h4 semibold primary">Lotes pendientes por firmar</span>
@@ -58,35 +61,34 @@
 							<?php endforeach; ?>
 						</tbody>
 					</table>
-					<form method="post">
+					<form id="sign-bulk-form" method="post">
 						<div class="flex mb-4 mt-1 px-5 justify-end items-center row">
-							<div class="col-4 col-lg-4 col-xl-3">
-								<input id="password-sign" name="password-sign" class="form-control" type="password" placeholder="<?= lang('GEN_PLACE_PASSWORD'); ?>">
+							<div class="col-4 col-lg-4 col-xl-3 form-group">
+								<input id="password-sign" name="password" class="form-control" type="password"
+									placeholder="<?= lang('GEN_PLACE_PASSWORD'); ?>">
+									<div class="help-block"></div>
 							</div>
 							<div class="col-auto">
-								<button class="btn btn-primary btn-small flex mx-auto">
-									Firmar
+								<button id="sign-bulk-btn" class="btn btn-primary btn-small btn-loading flex mx-auto">
+									<?= lang('GEN_BTN_SIGN'); ?>
 								</button>
 							</div>
 							<div class="col-auto">
-								<button class="btn btn-primary btn-small flex mx-auto">
-									Eliminar
+								<button id="del-sign-bulk-btn" class="btn btn-primary btn-small btn-loading flex mx-auto">
+								<?= lang('GEN_BTN_DELETE'); ?>
 								</button>
 							</div>
 						</div>
 					</form>
 					<div class="line mb-2"></div>
 				</div>
-
-				<div class="my-5 py-4 center none">
-					<span class="h4">No fue posible obtener el listado</span>
-				</div>
 			</div>
 			<?php endif; ?>
 			<div class="flex pb-5 flex-column">
 				<span class="line-text mb-2 h4 semibold primary">Lotes pendientes por autorizar</span>
 				<div class="center mx-1">
-					<table id="authorize-bulk" class="cell-border h6 display"  auth="<?= $authorizeAttr->auth; ?>" order-to-pay="<?= $authorizeAttr->toPAy; ?>">
+					<table id="authorize-bulk" class="cell-border h6 display" auth="<?= $authorizeAttr->auth; ?>"
+						order-to-pay="<?= $authorizeAttr->toPAy; ?>">
 						<thead class="bg-primary secondary regular">
 							<tr>
 								<th class="<?= $authorizeAttr->allBulk; ?>"></th>
@@ -135,18 +137,19 @@
 								</select>
 							</div>
 							<div class="col-auto">
-								<input id="password-auth" name="password-auth" class="form-control" type="password" placeholder="<?= lang('GEN_PLACE_PASSWORD'); ?>">
+								<input id="password-auth" name="password-auth" class="form-control" type="password"
+									placeholder="<?= lang('GEN_PLACE_PASSWORD'); ?>">
 							</div>
 						</div>
 
 						<div class="flex flex-auto justify-end col-6">
 							<div class="col-auto">
-								<button class="btn btn-primary btn-small flex mx-auto">
+								<button class="btn btn-primary btn-small btn-loading flex mx-auto">
 									Autorizar
 								</button>
 							</div>
 							<div class="col-auto">
-								<button class="btn btn-primary btn-small flex mx-auto">
+								<button class="btn btn-primary btn-small btn-loading flex mx-auto">
 									Eliminar
 								</button>
 							</div>

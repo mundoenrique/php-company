@@ -58,7 +58,6 @@ $(function () {
 				selectBranchOffice.prop('selectedIndex', 0);
 				selectTypeBulk.prop('selectedIndex', 0);
 				respLoadBulk[response.code](response);
-				form.validate().resetForm();
 			});
 		}
 	});
@@ -166,7 +165,7 @@ $(function () {
 					}
 				}
 				inputModal = '<form id="delete-bulk-form" class="form-group">';
-				inputModal = '<span class="regular"> Por favor ingresa la contraseña para eliminar el lote.</span>';
+				inputModal+= '<span class="regular"> '+lang.BULK_DELETE+'</span>';
 				inputModal+= 		'<input id="password" class="form-control mt-2 h6 col-9" name="password" type="password" autocomplete="off" placeholder="'+lang.GEN_PLACE_PASSWORD+'">';
 				inputModal+= 		'<div class="help-block"></div>';
 				inputModal+= '</form>';

@@ -97,4 +97,6 @@ function validateForms(form) {
 		var target = $(param);
 		return value !== target.val();
 	}
+
+	form.validate().resetForm();
 }

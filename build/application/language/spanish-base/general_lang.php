@@ -49,6 +49,7 @@ $lang['GEN_BTN_SEE'] = 'Ver';
 $lang['GEN_BTN_DELETE'] = 'Eliminar';
 $lang['GEN_BTN_BACK'] = 'Volver';
 $lang['GEN_BTN_SELECT']= 'Seleccionar';
+$lang['GEN_BTN_SIGN']= 'Firmar';
 //MODULES
 $lang['GEN_LOGIN'] = 'Login';
 $lang['GEN_VALIDATE_CAPTCHA'] = 'validateCaptcha';
@@ -67,7 +68,7 @@ $lang['GEN_DETAIL_BULK'] = 'seeBulkDetail';
 $lang['GEN_DETAIL_BULK_TITLE'] = 'Detalle del lote';
 $lang['GEN_CONFIRM_BULK'] = 'confirmBulk';
 $lang['GEN_CONFIRM_BULK_TITLE'] = 'Confirmar lote';
-$lang['GEN_AUTHORIZE_BULK'] = 'authorizeBulk';
+$lang['GEN_AUTHORIZE_BULK'] = 'authorizeBulkList';
 $lang['GEN_AUTHORIZE_BULK_TITLE'] = 'Autorizar lote';
 //MODAL STYLES
 $lang['GEN_MODAL_WIDTH'] = 310;
