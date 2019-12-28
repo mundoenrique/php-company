@@ -51,7 +51,7 @@
 					</div>
 					<span class="info-OD">
 						<h5>Fecha de expiraci&oacute;n</h5>
-						<input id="fecha_expira" class="required input4" placeholder="MM/AA" value="<?php echo $mesesVencimiento; ?>" <?php if($pais=="Co"){echo"disabled";} ?> ><!-- onfocus="javascript:this.value=''" -->
+						<input id="fecha_expira" class="required input4" placeholder="MM/AA" value="<?php echo $mesesVencimiento; ?>" <?php if($pais=="Co" || $pais=="Ec-bp"){echo"disabled";} ?> ><!-- onfocus="javascript:this.value=''" -->
 					</span>
 					<div class="info-OD">
 						<h5>L&iacute;nea de embozo 1</h5>
