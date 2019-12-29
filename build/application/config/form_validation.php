@@ -184,6 +184,30 @@ $config = [
 			'rules' => 'trim|required'
 		]
 	],
+	'signBulkList' => [
+		[
+			'field' => 'pass',
+			'label' => 'pass',
+			'rules' => 'trim|required'
+		],
+		[
+			'field' => 'bulk[]',
+			'label' => 'bulk',
+			'rules' => 'regex_match[/^([\w{}":,]*)+$/i]|required'
+		]
+	],
+	'deleteConfirmBulk' => [
+		[
+			'field' => 'pass',
+			'label' => 'pass',
+			'rules' => 'trim|required'
+		],
+		[
+			'field' => 'bulk[]',
+			'label' => 'bulk',
+			'rules' => 'regex_match[/^([\w{}":,]*)+$/i]|required'
+		]
+	],
 	'dash-products' => [
 		[
 			'field' => 'data-accodgrupoe',

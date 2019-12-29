@@ -68,7 +68,9 @@ $lang['GEN_DETAIL_BULK'] = 'seeBulkDetail';
 $lang['GEN_DETAIL_BULK_TITLE'] = 'Detalle del lote';
 $lang['GEN_CONFIRM_BULK'] = 'confirmBulk';
 $lang['GEN_CONFIRM_BULK_TITLE'] = 'Confirmar lote';
-$lang['GEN_AUTHORIZE_BULK'] = 'authorizeBulkList';
+$lang['GEN_AUTHORIZE_BULK_LIST'] = 'authorizeBulkList';
+$lang['GEN_SIGN_BULK_LIST'] = 'SignBulkList';
+$lang['GEN_DELETE_BULK'] = 'DeleteConfirmBulk';
 $lang['GEN_AUTHORIZE_BULK_TITLE'] = 'Autorizar lote';
 //MODAL STYLES
 $lang['GEN_MODAL_WIDTH'] = 310;

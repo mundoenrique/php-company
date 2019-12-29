@@ -114,7 +114,7 @@ class Bulk extends NOVO_Controller {
 			redirect(base_url('detalle-producto'), 'location');
 		} */
 
-		$view = lang('GEN_AUTHORIZE_BULK');
+		$view = lang('GEN_AUTHORIZE_BULK_LIST');
 		array_push(
 			$this->includeAssets->cssFiles,
 			"third_party/datatables"

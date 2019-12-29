@@ -171,30 +171,43 @@ function deleteBulk(action, btnId) {
 	}
 
 	if(data.length > 0 && form.valid()) {
-		var bulkId = []
+		var bulkInfo = [];
+		var btnAction = $('#'+btnId);
+		var passwordSign = $('#password-sign')
+		btnText = btnAction.text().trim();
+		btnAction.html(loader);
 
 		for(var i= 0; i < data.length; i++) {
-			bulkId[i] = data[i][2];
+			var info = {};
+			info['bulkNumber'] = data[i][1];
+			info['bulkId'] = data[i][2];
+			info['bulkIdType'] = data[i][5];
+			bulkInfo.push(JSON.stringify(info));
 		}
 
-		inputPass = crytoPass($('#password-sign').val());
+		inputPass = crytoPass(passwordSign.val());
 		data = {
-			bulk: bulkId,
+			bulk: bulkInfo,
 			pass: inputPass
 		}
+		passwordSign.val('');
+		signBulk.rows().deselect();
+		insertFormInput(true);
 
 		switch(action) {
 			case lang.GEN_BTN_SIGN:
-				where = 'SignBulk';
+				where = 'SignBulkList';
 				break;
-			case lang.GEN_BTN_SIGN:
+			case lang.GEN_BTN_DELETE:
 				where = 'DeleteConfirmBulk';
 				break;
 		}
 
 		verb = 'POST'; who = 'Bulk';
 		callNovoCore(verb, who, where, data, function(response) {
-			//notiSystem(response.title, response.msg, response.icon, response.data);
+			btnAction.html(btnText);
+			insertFormInput(false);
+			notiSystem(response.title, response.msg, response.icon, response.data);
 		});
 	}
 }

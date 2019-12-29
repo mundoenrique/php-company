@@ -74,8 +74,6 @@ function callNovoCore(verb, who, where, request, _response_) {
 
 	}).fail(function (jqXHR, textStatus, errorThrown ) {
 
-		console.log(textStatus)
-
 		if(request.modalReq) {
 			$('#accept').prop('disabled', false)
 			$('#system-info').dialog('destroy');

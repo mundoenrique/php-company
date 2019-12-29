@@ -53,6 +53,7 @@ class Verify_Access {
 	public function createRequest($rule, $user)
 	{
 		log_message('INFO', 'NOVO Verify_Access: createRequest method initialized');
+
 		foreach ($_POST AS $key => $value) {
 			switch($key) {
 				case 'request':
@@ -71,8 +72,10 @@ class Verify_Access {
 				$this->requestServ->$key = $value;
 			}
 		}
+
 		unset($_POST);
 		log_message('INFO', 'NOVO ['.$user.'] '.$rule.' REQUEST CREATED '.json_encode($this->requestServ, JSON_UNESCAPED_UNICODE));
+
 		return $this->requestServ;
 	}
 	/**
@@ -97,6 +100,7 @@ class Verify_Access {
 				'action'=> 'redirect'
 			]
 		];
+
 		if($this->CI->session->has_userdata('logged')) {
 			$this->CI->load->model('Novo_User_Model', 'finishSession');
 			$this->CI->finishSession->callWs_FinishSession_User();
@@ -157,7 +161,11 @@ class Verify_Access {
 				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBCAR', 'TEBELC'));
 				break;
 			case 'authorizeBulkList':
-				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBCAR') && $this->verifyAuthorization('TEBAUT'));
+			case 'signBulkList':
+				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBAUT'));
+				break;
+			case 'deleteConfirmBulk':
+				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBAUT', 'TEBELI'));
 				break;
 		}
 

@@ -511,7 +511,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 		$this->className = 'com.novo.objects.TOs.LoteTO';
 		$this->dataAccessLog->modulo = 'Lotes';
 		$this->dataAccessLog->function = 'Autorización de lotes';
-		$this->dataAccessLog->operation = 'Autorizar lote';
+		$this->dataAccessLog->operation = 'Lista de lotes por autorizar';
 
 		$this->dataRequest->idOperation = 'cargarAutorizar';
 		$this->dataRequest->accodcia = $this->session->enterpriseInf->enterpriseCode;
@@ -521,31 +521,31 @@ class Novo_Bulk_Model extends NOVO_Model {
 		$this->dataRequest->accodusuarioc = $this->userName;
 
 
-		$response = $this->sendToService(lang('GEN_AUTHORIZE_BULK'));
+		$response = $this->sendToService(lang('GEN_AUTHORIZE_BULK_LIST'));
 		$signBulk = [];
 		$authorizeBulk = [];
 		$authorizeAttr = [];
 		$allBulk = 'no-select-checkbox';
 
-		if(verifyDisplay('body', lang('GEN_AUTHORIZE_BULK'), lang('GEN_TAG_ALL_BULK'))) {
+		if(verifyDisplay('body', lang('GEN_AUTHORIZE_BULK_LIST'), lang('GEN_TAG_ALL_BULK'))) {
 			$allBulk = 'toggle-all';
 		}
 
 		$sign = TRUE;
 		$auth = TRUE;
-		$order = (int) $response->usuario->orden = '3';
-
-		if($order == 1) {
-			$auth = FALSE;
-		}
-
-		if($order > 1) {
-			$sign = FALSE;
-		}
 
 		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
+				$order = (int) $response->usuario->orden;
+
+				if($order == 1) {
+					$auth = FALSE;
+				}
+
+				if($order > 1) {
+					$sign = FALSE;
+				}
 
 				if(!empty($response->listaPorFirmar)) {
 					foreach($response->listaPorFirmar AS $bulk) {
@@ -595,6 +595,120 @@ class Novo_Bulk_Model extends NOVO_Model {
 		$this->response->data->authorizeBulk = (object) $authorizeBulk;
 		$this->response->data->authorizeAttr = $authorizeAttr;
 
-		return $this->responseToTheView(lang('GEN_AUTHORIZE_BULK'));
+		return $this->responseToTheView(lang('GEN_AUTHORIZE_BULK_LIST'));
+	}
+	/**
+	 * @info Firma lista de lotes
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date December 28th, 2019
+	 */
+	public function callWs_SignBulkList_Bulk($dataRequest)
+	{
+		log_message('INFO', 'NOVO Bulk Model: SignBulkList Method Initialized');
+
+		$this->className = 'com.novo.objects.MO.ListadoLotesMO';
+		$this->dataAccessLog->modulo = 'Lotes';
+		$this->dataAccessLog->function = 'Autorización de lotes';
+		$this->dataAccessLog->operation = 'Firmar lote';
+
+		$signListBulk = [];
+
+		foreach($dataRequest->bulk AS $bulkInfo) {
+			$bulkInfo = json_decode($bulkInfo);
+			$bulkList  = [
+				'acidlote' => $bulkInfo->bulkId,
+				'accodcia' => $this->session->enterpriseInf->enterpriseCode,
+				'accodgrupo' => $this->session->enterpriseInf->enterpriseGroup,
+				'actipoproducto' => $this->session->productInf->productPrefix
+			];
+			$signListBulk[] = $bulkList;
+		}
+
+		$password = json_decode(base64_decode($dataRequest->pass));
+		$password = $this->cryptography->decrypt(
+			base64_decode($password->plot),
+			utf8_encode($password->password)
+		);
+		$this->dataRequest->idOperation = 'firmarLote';
+		$this->dataRequest->lista = $signListBulk;
+		$this->dataRequest->usuario = [
+			'userName' => $this->userName,
+			'password' => md5($password)
+		];
+
+		$this->sendToService(lang('GEN_SIGN_BULK_LIST'));
+
+		switch ($this->isResponseRc) {
+			case 0:
+				$this->response->title = lang('BULK_SIGN_TITLE');
+				$this->response->msg = 'Lote firmado exitosamente';
+				$this->response->data['btn1']['link'] = 'lotes-autorizacion';
+				break;
+			case -1:
+				$this->response->title = lang('BULK_SIGN_TITLE');
+				$this->response->msg = lang('RESP_PASSWORD_NO_VALID');
+				$this->response->data['btn1']['action'] = 'close';
+				break;
+		}
+
+		return $this->responseToTheView(lang('GEN_SIGN_BULK_LIST'));
+	}
+	/**
+	 * @info Firma lista de lotes
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date December 28th, 2019
+	 */
+	public function callWs_DeleteConfirmBulk_Bulk($dataRequest)
+	{
+		log_message('INFO', 'NOVO Bulk Model: DeleteConfirmBulk Method Initialized');
+
+		$this->className = 'com.novo.objects.MO.AutorizarLoteMO';
+		$this->dataAccessLog->modulo = 'Lotes';
+		$this->dataAccessLog->function = 'Autorización de lotes';
+		$this->dataAccessLog->operation = 'Eliminar lote';
+
+		$deleteListBulk = [];
+
+		foreach($dataRequest->bulk AS $bulkInfo) {
+			$bulkInfo = json_decode($bulkInfo);
+			$bulkList  = [
+				'acrif' => $this->session->enterpriseInf->idFiscal,
+				'acidlote' => $bulkInfo->bulkId,
+				'acnumlote' => $bulkInfo->bulkNumber,
+				'ctipolote' => $bulkInfo->bulkIdType
+			];
+			$deleteListBulk[] = $bulkList;
+		}
+
+		$password = json_decode(base64_decode($dataRequest->pass));
+		$password = $this->cryptography->decrypt(
+			base64_decode($password->plot),
+			utf8_encode($password->password)
+		);
+		$this->dataRequest->idOperation = 'eliminarLotesPorAutorizar';
+		$this->dataRequest->listaLotes = [
+			'lista' => $deleteListBulk
+		];
+		$this->dataRequest->usuario = [
+			'userName' => $this->userName,
+			'password' => md5($password)
+		];
+
+		$this->sendToService(lang('GEN_DELETE_BULK'));
+
+		switch ($this->isResponseRc) {
+			case 0:
+				$this->response->title = lang('BULK_DELETE_TITLE');
+				$this->response->msg = 'Lote eliminado exitosamente';
+				$this->response->data['btn1']['link'] = 'lotes-autorizacion';
+				break;
+			case -22:
+				$this->response->title = lang('BULK_DELETE_TITLE');
+				$this->response->msg = lang('RESP_PASSWORD_NO_VALID');
+				$this->response->data['btn1']['action'] = 'close';
+				break;
+		}
+
+		return $this->responseToTheView(lang('GEN_DELETE_BULK'));
 	}
 }
