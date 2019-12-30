@@ -5544,11 +5544,6 @@ center {
 	padding-top:20px;
 }
 
-center a.novo-btn-secondary,
-center button.novo-btn-secondary {
-	margin-right: 45px;
-}
-
 .b-rs>.botones-OS {
 	padding-top: 40px;
 }
@@ -7684,7 +7679,7 @@ button:active {
 	width:120px;
 	padding-left:15px;
 	padding-right:15px;
-	 display: block;
+	margin: 10px;
 }
 
 .novo-btn-primary-modal,.novo-btn-secondary-modal{
