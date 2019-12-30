@@ -873,7 +873,7 @@ class Servicios extends CI_Controller {
 			if (!$this->upload->do_upload()) {
 				log_message('error', 'temp repos '.$config['upload_path']);
 
-				$error = array('ERROR' => 'No se puede cargar el archivo. Verifícalo e intente de nuevo');
+				$error = array('ERROR' => 'No se puede cargar el archivo. Verifícalo e intenta de nuevo');
 				echo json_encode($error);
 
 			} else {

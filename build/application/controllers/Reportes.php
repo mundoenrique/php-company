@@ -908,7 +908,7 @@ class Reportes extends CI_Controller {
 							if ($this->form_validation->run() == FALSE)
 							{
 								log_message('DEBUG', 'NOVO VALIDATION ERRORS: '.json_encode(validation_errors()));
-								$responseError = 'La combinación de caracteres es inválido';
+								$responseError = 'La combinación de caracteres es inválida';
 								$responseError = $this->cryptography->encrypt($responseError);
 								$this->output->set_content_type('application/json')->set_output(json_encode($responseError));
 								return $responseError;
@@ -1611,7 +1611,7 @@ class Reportes extends CI_Controller {
 								if ($this->form_validation->run() == FALSE)
 								{
 									log_message('DEBUG', 'NOVO VALIDATION ERRORS: '.json_encode(validation_errors()));
-									$responseError = 'La combinación de caracteres es inválido';
+									$responseError = 'La combinación de caracteres es inválida';
 									$responseError = $this->cryptography->encrypt($responseError);
 									$this->output->set_content_type('application/json')->set_output(json_encode($responseError));
 									return $responseError;
@@ -2637,7 +2637,7 @@ class Reportes extends CI_Controller {
 							if ($this->form_validation->run() == FALSE)
 							{
 								log_message('DEBUG', 'NOVO VALIDATION ERRORS: '.json_encode(validation_errors()));
-								$responseError = 'La combinación de caracteres es inválido';
+								$responseError = 'La combinación de caracteres es inválida';
 								$responseError = $this->cryptography->encrypt($responseError);
 								$this->output->set_content_type('application/json')->set_output(json_encode($responseError));
 								return $responseError;
@@ -3435,7 +3435,7 @@ class Reportes extends CI_Controller {
 
 							if ($this->form_validation->run() == FALSE)
 							{
-								$responseError = 'La combinación de caracteres es inválido';
+								$responseError = 'La combinación de caracteres es inválida';
 								$responseError = $this->cryptography->encrypt($responseError);
 								$this->output->set_content_type('application/json')->set_output(json_encode($responseError));
 								return $responseError;
@@ -3853,7 +3853,7 @@ class Reportes extends CI_Controller {
 							if ($this->form_validation->run() == FALSE)
 							{
 								log_message('DEBUG', 'NOVO VALIDATION ERRORS: '.json_encode(validation_errors()));
-								$responseError = 'La combinación de caracteres es inválido';
+								$responseError = 'La combinación de caracteres es inválida';
 								$responseError = $this->cryptography->encrypt($responseError);
 								$this->output->set_content_type('application/json')->set_output(json_encode($responseError));
 								return $responseError;
