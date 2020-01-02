@@ -115,7 +115,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 			case 0:
 				$this->response->code = 0;
 
-				if($select) {
+				if($select && count($response->lista) > 1) {
 					$branchOffice[] = (object) [
 						'key' => '',
 						'text' => lang('BULK_SELECT_BRANCH_OFFICE')
