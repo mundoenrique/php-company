@@ -1553,7 +1553,7 @@ class Servicios extends CI_Controller {
 		// $response = json_decode($data);
 		if ($response) {
 			$rc = $response->rc;
-			$codeError =[-1, -21, -155, -233, -241, -281, -285, -286, -287, -288, -296, -297, -298, -299, -301];
+			$codeError =[-1, -21, -155, -208, -233, -241, -281, -285, -286, -287, -288, -296, -297, -298, -299, -301];
 			$errorMsg = (in_array($rc, $codeError)) ?  lang('ERROR_('.$response->rc.')') : lang('ERROR_(-230)');
 			$errorMsg = ($rc == -300) ? $response->msg : $errorMsg;
 			switch ($rc) {
