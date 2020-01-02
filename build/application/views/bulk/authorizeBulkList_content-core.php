@@ -64,8 +64,7 @@
 					<form id="sign-bulk-form" method="post">
 						<div class="flex mb-4 mt-1 px-5 justify-end items-center row">
 							<div class="col-4 col-lg-4 col-xl-3 form-group">
-								<input id="password-sign" name="password" class="form-control" type="password"
-									placeholder="<?= lang('GEN_PLACE_PASSWORD'); ?>">
+								<input id="password-sign" name="password" class="form-control" type="password" placeholder="<?= lang('GEN_PLACE_PASSWORD'); ?>">
 								<div class="help-block bulk-select"></div>
 							</div>
 							<div class="col-auto">
@@ -87,8 +86,7 @@
 			<div class="flex pb-5 flex-column">
 				<span class="line-text mb-2 h4 semibold primary">Lotes pendientes por autorizar</span>
 				<div class="center mx-1">
-					<table id="authorize-bulk" class="cell-border h6 display" auth="<?= $authorizeAttr->auth; ?>"
-						order-to-pay="<?= $authorizeAttr->toPAy; ?>">
+					<table id="authorize-bulk" class="cell-border h6 display" auth="<?= $authorizeAttr->auth; ?>" order-to-pay="<?= $authorizeAttr->toPAy; ?>">
 						<thead class="bg-primary secondary regular">
 							<tr>
 								<th class="<?= $authorizeAttr->allBulk; ?>"></th>
@@ -136,8 +134,7 @@
 									<div class="help-block"></div>
 								</div>
 								<div class="col-auto form-group">
-									<input id="password-auth" name="password" class="form-control" type="password"
-										placeholder="<?= lang('GEN_PLACE_PASSWORD'); ?>">
+									<input id="password-auth" name="password" class="form-control" type="password" placeholder="<?= lang('GEN_PLACE_PASSWORD'); ?>">
 									<div class="help-block bulk-select"></div>
 								</div>
 							</div>
@@ -145,12 +142,12 @@
 							<div class="flex flex-auto justify-end col-6">
 								<div class="col-auto">
 									<button id="auth-bulk-btn" class="btn btn-primary btn-small btn-loading flex mx-auto">
-									<?= lang('GEN_BTN_AUTHORIZE'); ?>
+										<?= lang('GEN_BTN_AUTHORIZE'); ?>
 									</button>
 								</div>
 								<div class="col-auto">
 									<button id="del-auth-bulk-btn" class="btn btn-primary btn-small btn-loading flex mx-auto">
-									<?= lang('GEN_BTN_DELETE'); ?>
+										<?= lang('GEN_BTN_DELETE'); ?>
 									</button>
 								</div>
 							</div>

@@ -6,7 +6,7 @@
 		<div class="flex tertiary">
 			<nav class="main-nav nav-inferior">
 				<ul class="mb-0 h6 light tertiary list-style-none list-inline">
-				<li class="inline"><a class="tertiary big-modal" href="<?= base_url('empresas') ?>">Empresas</a></li> /
+					<li class="inline"><a class="tertiary big-modal" href="<?= base_url('empresas') ?>">Empresas</a></li> /
 					<li class="inline"><a class="tertiary big-modal" href="<?= base_url('productos') ?>">Productos</a></li> /
 					<li class="inline"><a class="tertiary big-modal" href="<?= base_url('detalle-producto') ?>">Detalle del producto</a></li> /
 					<li class="inline"><a class="tertiary" href="#"><?= lang('BULK_TITLE'); ?></a></li>
@@ -24,8 +24,8 @@
 							<label class="mt-1 h6" for="type-bulk"><?= lang('BULK_TYPE'); ?></label>
 							<select id="type-bulk" name="type-bulk" class="select-box custom-select h6 w-100">
 								<?php foreach($typesLot AS $pos => $type): ?>
-								<option value="<?= $type->key; ?>" format="<?= $type->format; ?>"
-									<?= $pos != 0 ? '' : 'selected disabled' ?>><?= $type->text; ?></option>
+								<option value="<?= $type->key; ?>" format="<?= $type->format; ?>" <?= $pos != 0 ? '' : 'selected disabled' ?>><?= $type->text; ?>
+								</option>
 								<?php endforeach; ?>
 							</select>
 							<div class="help-block"></div>

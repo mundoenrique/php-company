@@ -6,7 +6,7 @@
 		<div class="flex tertiary">
 			<nav class="main-nav nav-inferior">
 				<ul class="mb-0 h6 light tertiary list-style-none list-inline">
-				<li class="inline"><a class="tertiary big-modal" href="<?= base_url('empresas') ?>">Empresas</a></li> /
+					<li class="inline"><a class="tertiary big-modal" href="<?= base_url('empresas') ?>">Empresas</a></li> /
 					<li class="inline"><a class="tertiary big-modal" href="<?= base_url('productos') ?>">Productos</a></li> /
 					<li class="inline"><a class="tertiary big-modal" href="<?= base_url('detalle-producto') ?>">Detalle del producto</a></li> /
 					<li class="inline"><a class="tertiary big-modal" href="<?= base_url('cargar-lotes') ?>">Cargar lotes</a></li> /
@@ -27,8 +27,7 @@
 
 					<div class="form-group mb-3 col-4">
 						<label for="confirmName" id="confirmName"><?= lang('BULK_ENTERPRISE_NAME'); ?></label>
-						<span id="confirmName" class="form-control px-1"
-							readonly="readonly"><?= $detailBulk->enterpriseName ?></span>
+						<span id="confirmName" class="form-control px-1" readonly="readonly"><?= $detailBulk->enterpriseName ?></span>
 					</div>
 
 					<div class="form-group mb-3 col-auto">
@@ -45,8 +44,7 @@
 					<div class="flex flex-column mb-4 mt-4 px-5 justify-center items-center">
 						<div class="flex flex-row">
 							<div class="mb-3 mr-4">
-								<a href="<?= base_url('cargar-lotes') ?>"
-									class="btn btn-link btn-small big-modal"><?= lang('GEN_BTN_BACK') ?></a>
+								<a href="<?= base_url('cargar-lotes') ?>" class="btn btn-link btn-small big-modal"><?= lang('GEN_BTN_BACK') ?></a>
 							</div>
 						</div>
 					</div>

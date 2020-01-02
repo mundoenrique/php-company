@@ -17,10 +17,8 @@
 		<div class="flex flex-auto flex-column">
 			<div class="flex mb-3 mx-4 justify-center">
 				<div class="product-presentation relative">
-					<img class="card-image" src="<?= $this->asset->insertFile('programs/'.$productImg); ?>"
-						alt="<?= $productName; ?>" />
-					<img class="item-network" src="<?= $this->asset->insertFile('brands/'.$productImgBrand); ?>"
-						alt=<?= $productName; ?> />
+					<img class="card-image" src="<?= $this->asset->insertFile('programs/'.$productImg); ?>" alt="<?= $productName; ?>" />
+					<img class="item-network" src="<?= $this->asset->insertFile('brands/'.$productImgBrand); ?>" alt=<?= $productName; ?> />
 				</div>
 			</div>
 
@@ -41,12 +39,12 @@
 					<?php endif; ?>
 					<?php if($viewSomeAttr && $this->verify_access->verifyAuthorization('TEBORS')): ?>
 					<a class="btn btn-link btn-small-xs mx-4 px-0" href="#">
-					<?= novoLang(lang('PRODUCTS_ORDERSERV_TOTAL'), [$serviceOrders, $serviceOrdersNoCon, $serviceOrdersCon]) ?>
+						<?= novoLang(lang('PRODUCTS_ORDERSERV_TOTAL'), [$serviceOrders, $serviceOrdersNoCon, $serviceOrdersCon]) ?>
 					</a>
 					<?php endif; ?>
 					<?php if($viewSomeAttr): ?>
 					<a class="btn btn-link btn-small-xs mx-4 px-0" href="<?= $masterTransLink; ?>">
-					<?= novoLang(lang('PRODUCTS_CARDS_TOTAL'), [$totalCards, $activeCards, $inactiveCards]) ?>
+						<?= novoLang(lang('PRODUCTS_CARDS_TOTAL'), [$totalCards, $activeCards, $inactiveCards]) ?>
 					</a>
 					<?php endif; ?>
 				</div>

@@ -27,20 +27,17 @@
 
 					<div class="form-group mb-3 col-4">
 						<label for="confirmName" id="confirmName"><?= lang('BULK_ENTERPRISE_NAME') ?></label>
-						<span id="confirmName" class="form-control px-1"
-							readonly="readonly"><?= $detailBulk->enterpriseName ?></span>
+						<span id="confirmName" class="form-control px-1" readonly="readonly"><?= $detailBulk->enterpriseName ?></span>
 					</div>
 
 					<div class="form-group mb-3 col-4">
 						<label for="typeLot" id="typeLot"><?= lang('BULK_TYPE'); ?></label>
-						<span id="typeLotName" class="form-control px-1 bold pink-salmon"
-							readonly="readonly"><?= $detailBulk->bulkType ?></span>
+						<span id="typeLotName" class="form-control px-1 bold pink-salmon" readonly="readonly"><?= $detailBulk->bulkType ?></span>
 					</div>
 
 					<div class="form-group mb-3 col-4">
 						<label for="regNumber" id="regNumber"><?= lang('BULK_TOTAL_RECORDS'); ?></label>
-						<span id="amountNumber" class="form-control px-1 "
-							readonly="readonly"><?= $detailBulk->totaRecords ?></span>
+						<span id="amountNumber" class="form-control px-1 " readonly="readonly"><?= $detailBulk->totaRecords ?></span>
 					</div>
 
 					<div class="form-group mb-3 col-4">
@@ -75,18 +72,15 @@
 					<div class="flex flex-column mb-4 mt-4 px-5 justify-center items-center">
 						<div class="form-group mb-3 mb-3 col-4 col-lg-3">
 							<input id="bulkTicked" name="bulkTicked" type="hidden" value="<?= $detailBulk->bulkTicked ?>">
-							<input id="password" name="password" class="form-control" type="password"
-								placeholder="<?= lang('GEN_PLACE_PASSWORD'); ?>">
+							<input id="password" name="password" class="form-control" type="password" placeholder="<?= lang('GEN_PLACE_PASSWORD'); ?>">
 							<div class="help-block"></div>
 						</div>
 						<div class="flex flex-row">
 							<div class="mb-3 mr-4">
-								<a href="<?= base_url('cargar-lotes') ?>"
-									class="btn btn-link btn-small big-modal"><?= lang('GEN_BTN_CANCEL'); ?></a>
+								<a href="<?= base_url('cargar-lotes') ?>" class="btn btn-link btn-small big-modal"><?= lang('GEN_BTN_CANCEL'); ?></a>
 							</div>
 							<div class="mb-3 mr-1">
-								<button id="confirm-bulk"
-									class="btn btn-primary  btn-loading btn-small"><?= lang('GEN_BTN_CONFIRM'); ?></button>
+								<button id="confirm-bulk" class="btn btn-primary  btn-loading btn-small"><?= lang('GEN_BTN_CONFIRM'); ?></button>
 							</div>
 						</div>
 					</div>
