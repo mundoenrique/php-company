@@ -49,11 +49,11 @@
 								<td><?= $bulk->records; ?></td>
 								<td><?= $bulk->amount; ?></td>
 								<td class="flex justify-center">
-									<button class="btn mx-1 px-0" title="Ver" data-toggle="tooltip"
+									<button class="btn mx-1 px-0" title="<?= lang('GEN_BTN_SEE') ?>" data-toggle="tooltip"
 										onclick="window.location.href = 'ceo_auth_see_lot.php'">
 										<i class="icon icon-find" aria-hidden="true"></i>
 									</button>
-									<button class="btn mx-1 px-0" title="Eliminar" data-toggle="tooltip">
+									<button class="btn mx-1 px-0" title="<?= lang('GEN_BTN_DELETE') ?>" data-toggle="tooltip">
 										<i class="icon icon-remove mr-1" aria-hidden="true"></i>
 									</button>
 								</td>
@@ -66,7 +66,7 @@
 							<div class="col-4 col-lg-4 col-xl-3 form-group">
 								<input id="password-sign" name="password" class="form-control" type="password"
 									placeholder="<?= lang('GEN_PLACE_PASSWORD'); ?>">
-									<div class="help-block"></div>
+								<div class="help-block bulk-select"></div>
 							</div>
 							<div class="col-auto">
 								<button id="sign-bulk-btn" class="btn btn-primary btn-small btn-loading flex mx-auto">
@@ -75,7 +75,7 @@
 							</div>
 							<div class="col-auto">
 								<button id="del-sign-bulk-btn" class="btn btn-primary btn-small btn-loading flex mx-auto">
-								<?= lang('GEN_BTN_DELETE'); ?>
+									<?= lang('GEN_BTN_DELETE'); ?>
 								</button>
 							</div>
 						</div>
@@ -114,10 +114,10 @@
 								<td><?= $bulk->records; ?></td>
 								<td><?= $bulk->amount; ?></td>
 								<td class="flex justify-center">
-									<button class="btn mx-1 px-0" title="Ver" data-toggle="tooltip">
+									<button class="btn mx-1 px-0" title="<?= lang('GEN_BTN_SEE') ?>" data-toggle="tooltip">
 										<i class="icon icon-find" aria-hidden="true"></i>
 									</button>
-									<button class="btn mx-1 px-0" title="Eliminar" data-toggle="tooltip">
+									<button class="btn mx-1 px-0" title="<?= lang('GEN_BTN_DELETE') ?>" data-toggle="tooltip">
 										<i class="icon icon-remove mr-1" aria-hidden="true"></i>
 									</button>
 								</td>
@@ -125,36 +125,38 @@
 							<?php endforeach; ?>
 						</tbody>
 					</table>
-
-					<div class="flex py-4 items-center row">
-						<div class="flex col-6">
-							<div class="col-auto h6 regular">
-								<select class="select-box custom-select h6">
-									<option selected disabled>Procesar por tipo de lote</option>
-									<option>Option 1</option>
-									<option>Option 2</option>
-									<option>Option 3</option>
-								</select>
+					<form id="auth-bulk-form" method="post">
+						<div class="flex py-4 items-center row">
+							<div class="flex col-6">
+								<div class="col-auto h6 regular form-group">
+									<select id="type-order" name="type-order" class="select-box custom-select h6">
+										<option value="0" selected>Procesar por tipo de lote</option>
+										<option value="1">Procesar por lote</option>
+									</select>
+									<div class="help-block"></div>
+								</div>
+								<div class="col-auto form-group">
+									<input id="password-auth" name="password" class="form-control" type="password"
+										placeholder="<?= lang('GEN_PLACE_PASSWORD'); ?>">
+									<div class="help-block bulk-select"></div>
+								</div>
 							</div>
-							<div class="col-auto">
-								<input id="password-auth" name="password-auth" class="form-control" type="password"
-									placeholder="<?= lang('GEN_PLACE_PASSWORD'); ?>">
+
+							<div class="flex flex-auto justify-end col-6">
+								<div class="col-auto">
+									<button id="auth-bulk-btn" class="btn btn-primary btn-small btn-loading flex mx-auto">
+									<?= lang('GEN_BTN_AUTHORIZE'); ?>
+									</button>
+								</div>
+								<div class="col-auto">
+									<button id="del-auth-bulk-btn" class="btn btn-primary btn-small btn-loading flex mx-auto">
+									<?= lang('GEN_BTN_DELETE'); ?>
+									</button>
+								</div>
 							</div>
 						</div>
+					</form>
 
-						<div class="flex flex-auto justify-end col-6">
-							<div class="col-auto">
-								<button class="btn btn-primary btn-small btn-loading flex mx-auto">
-									Autorizar
-								</button>
-							</div>
-							<div class="col-auto">
-								<button class="btn btn-primary btn-small btn-loading flex mx-auto">
-									Eliminar
-								</button>
-							</div>
-						</div>
-					</div>
 					<div class="line mb-2"></div>
 				</div>
 

@@ -213,6 +213,7 @@ if(!function_exists('languajeLoad')) {
 					'confirmBulk'	=> ['bulk'],
 					'getDetailBulk'	=> ['bulk'],
 					'authorizeBulkList'	=> ['bulk'],
+					'deleteConfirmBulk'	=> ['bulk'],
 				];
 		}
 

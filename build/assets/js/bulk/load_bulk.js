@@ -164,8 +164,9 @@ $(function () {
 						action: 'close'
 					}
 				}
+				var bulkNum = $(this).closest('tr').find('td:nth-child(1)').text();
 				inputModal = '<form id="delete-bulk-form" class="form-group">';
-				inputModal+= '<span class="regular"> '+lang.BULK_DELETE+'</span>';
+				inputModal+= '<span class="regular"> '+lang.BULK_DELETE+': '+bulkNum+'</span>';
 				inputModal+= 		'<input id="password" class="form-control mt-2 h6 col-9" name="password" type="password" autocomplete="off" placeholder="'+lang.GEN_PLACE_PASSWORD+'">';
 				inputModal+= 		'<div class="help-block"></div>';
 				inputModal+= '</form>';

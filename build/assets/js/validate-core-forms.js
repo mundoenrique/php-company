@@ -48,7 +48,8 @@ function validateForms(form) {
 			"branch-office": 	{requiredBranchOffice: true},
 			"type-bulk": 	{requiredTypeBulk: true},
 			"file-bulk":	{required: true, extension: "xls|xlsx|txt"},
-			"password": {required: true, pattern: userPassword}
+			"password": {required: true, pattern: userPassword},
+			"type-order": {required: true}
 		},
 		messages: {
 			"user_login": lang.VALIDATE_USERLOGIN,
@@ -59,7 +60,8 @@ function validateForms(form) {
 			"branch-office": lang.VALIDATE_BRANCH_OFFICE,
 			"type-bulk": lang.VALIDATE_BULK_TYPE,
 			"file-bulk": lang.VALIDATE_BULK_FILE,
-			"password": lang.VALIDATE_PASS
+			"password": lang.VALIDATE_PASS,
+			"type-order": 'Selecciona un tipo de orden',
 		},
 		errorPlacement: function(error, element) {
 			$(element).closest('.form-group').find('.help-block').html(error.html());
