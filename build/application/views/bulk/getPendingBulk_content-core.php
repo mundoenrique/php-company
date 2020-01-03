@@ -20,7 +20,7 @@
 				<span class="line-text mb-2 h4 semibold primary"><?= lang('BULK_NEW'); ?></span>
 				<form id="upload-file-form">
 					<div class="flex px-5 pb-4 items-center row">
-						<div class="form-group col-3">
+						<div class="form-group col-6 col-lg-3 col-xl-3">
 							<label class="mt-1 h6" for="type-bulk"><?= lang('BULK_TYPE'); ?></label>
 							<select id="type-bulk" name="type-bulk" class="select-box custom-select h6 w-100">
 								<?php foreach($typesLot AS $pos => $type): ?>
@@ -31,7 +31,7 @@
 							<div class="help-block"></div>
 						</div>
 						<?php if(verifyDisplay('body', $module,  lang('GEN_TAG_BRANCHOFFICE'))): ?>
-						<div class="form-group col-3 hide">
+						<div class="form-group col-6 col-lg-3 col-xl-3 hide">
 							<label class="mt-1 h6" for="branch-office"><?= lang('BULK_BRANCH_OFFICE'); ?></label>
 							<select id="branch-office" name="branch-office" class="select-box custom-select h6 w-100">
 								<?php foreach($branchOffices AS $pos => $branchOffice): ?>
@@ -52,7 +52,7 @@
 							</label>
 							<div class="help-block"></div>
 						</div>
-						<div class="col mt-1">
+						<div class="col-auto mt-1 ml-auto">
 							<button id="upload-file-btn" class="btn btn-primary btn-small btn-loading flex ml-auto">
 								<?= lang('GEN_BTN_SEND'); ?>
 							</button>

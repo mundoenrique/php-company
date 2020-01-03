@@ -2024,6 +2024,15 @@ i[class*=" icon-"]:before {
 .icon-hand-left:before     { content: "\e045"; }
 .icon-hand-right:before    { content: "\e046"; }
 .icon-chart-pie:before  	 { content: "\e04c"; }
+.icon-car:before					 { content: "\e04e"; }
+.icon-bag:before 					 { content: "\e04f"; }
+.icon-food:before 				 { content: "\e050"; }
+.icon-film:before 				 { content: "\e051"; }
+.icon-lab:before 					 { content: "\e052"; }
+.icon-suitcase:before 		 { content: "\e053"; }
+.icon-plane:before 				 { content: "\e054"; }
+.icon-medkit:before 			 { content: "\e055"; }
+.icon-asterisk:before 		 { content: "\e056"; }
 .icon-file-blank:before 	 { content: "\e057"; }
 .icon-file-graph:before 	 { content: "\e058"; }
 .icon-file-pdf:before 		 { content: "\e059"; }
@@ -2509,11 +2518,15 @@ i[class*=" icon-"]:before {
 	width: 0;
 }
 
-/* Table */
-
-tr > td {
-  padding: 0 !important;
+.pagination a {
+	padding: 5px;
 }
+
+.pagination a.current {
+	font-weight: var(--bold-font-weight);
+}
+
+/* Table */
 
 td > button > i{
 	color: var(--primary);
@@ -2655,7 +2668,8 @@ td > button > i:hover{
   color: var(--primary) !important;
   border: 1px solid transparent;
   background: transparent;
-  box-shadow: none;
+	box-shadow: none;
+	padding-top: var(--space-3) !important;
 }
 
 .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
@@ -2733,7 +2747,8 @@ table.dataTable tbody td.no-select-checkbox:after {
 }
 
 table.dataTable tbody > tr.selected, table.dataTable tbody > tr > .selected {
-	background-color: var(--disabled-color) !important;
+	background-color: var(--border-color-2) !important;
+	color: var(--tertiary);
 }
 
 table.dataTable tr.selected td.select-checkbox::after {
@@ -3289,7 +3304,6 @@ a.ui-button:active,
 	padding: 1.2em 1em 1em;
 	min-height: 80px;
 	margin-bottom: 0;
-	padding: 1.5em 1em;
 }
 .ui-dialog-content .dialog-icon {
 	margin-right: 12px;
@@ -3653,4 +3667,18 @@ a.ui-button:active,
   vertical-align: middle;
   -webkit-animation: spinner-border 1.8s linear infinite;
   animation: spinner-border 1.8s linear infinite;
+}
+
+.detailLot tbody tr:first-child td {
+	border: 0 !important;
+	background-color: var(--secondary) !important;
+}
+
+.detailLot tbody tr td {
+	border: 0 !important;
+	background-color: var(--border-color-2) !important;
+}
+
+td > table.detailLot {
+	background-color: rgb(255, 255, 255) !important;
 }

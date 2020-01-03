@@ -8,7 +8,8 @@
 				<ul class="mb-0 h6 light tertiary list-style-none list-inline">
 					<li class="inline"><a class="tertiary big-modal" href="<?= base_url('empresas') ?>">Empresas</a></li> /
 					<li class="inline"><a class="tertiary big-modal" href="<?= base_url('productos') ?>">Productos</a></li> /
-					<li class="inline"><a class="tertiary big-modal" href="<?= base_url('detalle-producto') ?>">Detalle del producto</a></li> /
+					<li class="inline"><a class="tertiary big-modal" href="<?= base_url('detalle-producto') ?>">Detalle del
+							producto</a></li> /
 					<li class="inline"><a class="tertiary" href="javascript:">Autorizar lote</a></li>
 				</ul>
 			</nav>
@@ -62,10 +63,11 @@
 						</tbody>
 					</table>
 					<form id="sign-bulk-form" method="post">
-						<div class="flex mb-4 mt-1 px-5 justify-end items-center row">
-							<div class="col-4 col-lg-4 col-xl-3 form-group">
-								<input id="password-sign" name="password" class="form-control" type="password" placeholder="<?= lang('GEN_PLACE_PASSWORD'); ?>">
-								<div class="help-block bulk-select"></div>
+						<div class="flex row mt-3 mb-2 mx-2 justify-end">
+							<div class="col-4 col-lg-3 col-xl-3 form-group">
+								<input id="password-sign" name="password" class="form-control h6" type="password"
+									placeholder="<?= lang('GEN_PLACE_PASSWORD'); ?>">
+								<div class="help-block bulk-select text-left"></div>
 							</div>
 							<div class="col-auto">
 								<button id="sign-bulk-btn" class="btn btn-primary btn-small btn-loading flex mx-auto">
@@ -86,7 +88,8 @@
 			<div class="flex pb-5 flex-column">
 				<span class="line-text mb-2 h4 semibold primary">Lotes pendientes por autorizar</span>
 				<div class="center mx-1">
-					<table id="authorize-bulk" class="cell-border h6 display" auth="<?= $authorizeAttr->auth; ?>" order-to-pay="<?= $authorizeAttr->toPAy; ?>">
+					<table id="authorize-bulk" class="cell-border h6 display" auth="<?= $authorizeAttr->auth; ?>"
+						order-to-pay="<?= $authorizeAttr->toPAy; ?>">
 						<thead class="bg-primary secondary regular">
 							<tr>
 								<th class="<?= $authorizeAttr->allBulk; ?>"></th>
@@ -103,7 +106,7 @@
 						<tbody>
 							<?php foreach($authorizeBulk AS $bulk): ?>
 							<tr class="<?= $bulk->selectRow; ?>">
-								<td class="<?= $bulk->selectRow; ?>"><?= $bulk->selectRowContent; ?></td>
+								<td class="p-0 <?= $bulk->selectRow; ?>"><?= $bulk->selectRowContent; ?></td>
 								<td><?= $bulk->bulkNumber; ?></td>
 								<td><?= $bulk->idBulk; ?></td>
 								<td><?= $bulk->loadDate; ?></td>
@@ -124,32 +127,28 @@
 						</tbody>
 					</table>
 					<form id="auth-bulk-form" method="post">
-						<div class="flex py-4 items-center row">
-							<div class="flex col-6">
-								<div class="col-auto h6 regular form-group">
-									<select id="type-order" name="type-order" class="select-box custom-select h6">
-										<option value="0" selected>Procesar por tipo de lote</option>
-										<option value="1">Procesar por lote</option>
-									</select>
-									<div class="help-block"></div>
-								</div>
-								<div class="col-auto form-group">
-									<input id="password-auth" name="password" class="form-control" type="password" placeholder="<?= lang('GEN_PLACE_PASSWORD'); ?>">
-									<div class="help-block bulk-select"></div>
-								</div>
+						<div class="flex row mt-3 mb-2 mx-2 justify-end">
+							<div class="col-4 col-lg-3 h6 regular form-group">
+								<select id="type-order" name="type-order" class="select-box custom-select h6">
+									<option value="0" selected>Procesar por tipo de lote</option>
+									<option value="1">Procesar por lote</option>
+								</select>
+								<div class="help-block"></div>
 							</div>
-
-							<div class="flex flex-auto justify-end col-6">
-								<div class="col-auto">
-									<button id="auth-bulk-btn" class="btn btn-primary btn-small btn-loading flex mx-auto">
-										<?= lang('GEN_BTN_AUTHORIZE'); ?>
-									</button>
-								</div>
-								<div class="col-auto">
-									<button id="del-auth-bulk-btn" class="btn btn-primary btn-small btn-loading flex mx-auto">
-										<?= lang('GEN_BTN_DELETE'); ?>
-									</button>
-								</div>
+							<div class="col-6 col-lg-auto form-group">
+								<input id="password-auth" name="password" class="form-control h6" type="password"
+									placeholder="<?= lang('GEN_PLACE_PASSWORD'); ?>">
+								<div class="help-block bulk-select text-left"></div>
+							</div>
+							<div class="col-3 col-lg-auto">
+								<button id="auth-bulk-btn" class="btn btn-primary btn-small btn-loading flex mx-auto">
+									<?= lang('GEN_BTN_AUTHORIZE'); ?>
+								</button>
+							</div>
+							<div class="col-3 col-lg-auto">
+								<button id="del-auth-bulk-btn" class="btn btn-primary btn-small btn-loading flex mx-auto">
+									<?= lang('GEN_BTN_DELETE'); ?>
+								</button>
 							</div>
 						</div>
 					</form>

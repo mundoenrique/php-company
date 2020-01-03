@@ -25,7 +25,8 @@ $(function () {
         "targets": 5,
         "visible": false
       }
-    ],
+		],
+		"autoWidth": false,
     "select": {
       "style": lang.GEN_TABLE_SELECT_SIGN,
 			selector: ':not(.no-select-checkbox, td:nth-child(-n+65))'
@@ -103,6 +104,7 @@ $(function () {
         "visible": false
       }
 		],
+		"autoWidth": false,
 		"select": {
       "style": lang.GEN_TABLE_SELECT_AUTH,
       "info": false,
