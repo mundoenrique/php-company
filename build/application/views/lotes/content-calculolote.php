@@ -157,7 +157,7 @@ $reten = ($reten == NULL) ? "nonEmpty" : trim($reten, ', ');
 									$monComision = '';
 								}
 								echo "
-								<tr id='$value->idOrdenTemp'>
+								<tr class='tr-calculo' id='$value->idOrdenTemp'>
 									<td class='OS-icon'>
 										<a id='ver_lotes' title='Ver lotes'>
 											<span aria-hidden='true' class='icon' data-icon='&#xe003;'></span>
@@ -181,7 +181,7 @@ $reten = ($reten == NULL) ? "nonEmpty" : trim($reten, ', ');
 							if($pais=='Ec-bp'){
 								?>
 								<div class="recepcion-tcs">
-									<p class="t-center">Ingresa el codigo de seguridad enviado a tu correo</p>
+									<p class="t-center">Ingresa el código de seguridad enviado a tu correo</p>
 									<input type="text" id="passOtp" name="passOtp" value="">
 								</div>
 									<div class="botones-OS">

@@ -1684,7 +1684,7 @@ class Lotes extends CI_Controller {
 			//VERIFICAR SI NO SUBIO ARCHIVO
 
 			if ( ! $this->upload->do_upload()){
-					$responseError = ['ERROR' => 'No se puede cargar el archivo. Verifiquelo e intente de nuevo'];
+					$responseError = ['ERROR' => 'No se puede cargar el archivo. Verifícalo e intenta de nuevo'];
 					$responseError = $this->cryptography->encrypt($responseError);
 					$this->output->set_content_type('application/json')->set_output(json_encode($responseError));
 				//$error = array('ERROR' => 'No se puede cargar el archivo. Verifiquelo e intente de nuevo');// $this->upload->display_errors());
@@ -1741,7 +1741,7 @@ class Lotes extends CI_Controller {
 					 //echo json_encode($cargaLote);
 
 				} else {
-					$responseError = ['ERROR' =>'Falla Al mover archivo.'];
+					$responseError = ['ERROR' =>'Falla al mover archivo.'];
 					$responseError = $this->cryptography->encrypt($responseError);
 					$this->output->set_content_type('application/json')->set_output(json_encode($responseError));
 
@@ -2319,8 +2319,8 @@ class Lotes extends CI_Controller {
 					break;
 				case -51:
 					$code = 2;
-					$msgVE = 'No fue posible obtener los datos de la empresa para la Orden de Servicio. ';
-					$msgVE .= 'Por favor envíe esta pantalla y su usuario al correo ';
+					$msgVE = 'No fué posible obtener los datos de la empresa para la Orden de Servicio. ';
+					$msgVE .= 'Por favor envíe ésta pantalla y su usuario al correo ';
 					$msgVE .= '<strong>soporteempresas@tebca.com</strong>';
 					$msg = $urlCountry =="Ve" ? $msgVE : $response->msg;
 					break;
@@ -2798,7 +2798,7 @@ class Lotes extends CI_Controller {
 			//VERIFICAR SI NO SUBIO ARCHIVO
 			if ( ! $this->upload->do_upload()){
 				//ERROR
-				$error = array('ERROR' => 'No se puede cargar el archivo. Verifiquelo e intente de nuevo');// $this->upload->display_errors());
+				$error = array('ERROR' => 'No se puede cargar el archivo. Verifícalo e intenta de nuevo');// $this->upload->display_errors());
 				$this->output->set_content_type('application/json')->set_output(json_encode($error));
 			}else{
 				//VALIDO

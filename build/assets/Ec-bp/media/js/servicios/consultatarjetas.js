@@ -49,7 +49,7 @@ $('#buscar').on('click', function () {
 	} else {
 
 		if (servicio.val().length > 0 && !RE.test(servicio.val())) {
-			camposValid += '<p>* El campo orden de servicio debe ser numerico</p>';
+			camposValid += '<p>* El campo orden de servicio debe ser numérico</p>';
 			validInput = false;
 			servicio.css('border-color', '#cd0a0a')
 		} else {
@@ -57,7 +57,7 @@ $('#buscar').on('click', function () {
 		}
 
 		if (lote.val().length > 0 && !RE.test(lote.val())) {
-			camposValid += '<p>* El campo lote debe ser numerico</p>';
+			camposValid += '<p>* El campo lote debe ser numérico</p>';
 			validInput = false;
 			lote.css('border-color', '#cd0a0a')
 		} else {
@@ -65,7 +65,7 @@ $('#buscar').on('click', function () {
 		}
 
 		if (cedula.val().length > 0 && !RE.test(cedula.val())) {
-			camposValid += '<p>* El campo cédula debe ser numerico</p>';
+			camposValid += '<p>* El campo cédula debe ser numérico</p>';
 			validInput = false;
 			cedula.css('border-color', '#cd0a0a')
 		} else {
@@ -73,7 +73,7 @@ $('#buscar').on('click', function () {
 		}
 
 		if (tarjeta.val().length > 0 && !RE.test(tarjeta.val())) {
-			camposValid += '<p>* El campo tarjeta debe ser numerico</p>';
+			camposValid += '<p>* El campo tarjeta debe ser numérico</p>';
 			validInput = false;
 			tarjeta.css('border-color', '#cd0a0a')
 		} else {
@@ -247,7 +247,7 @@ function cargarResultado(data) {
 		'Entregar a tarjetahabiente':'Entregada a Tarjetahabiente / Activa # 1',
 		'Bloqueo tarjeta' : 'bloqueo # 2',
 		'Consulta saldo tarjeta': 'saldo # 2',
-		'Desbloquear': 'desbloqueo # 2'}
+		'Desbloqueo': 'desbloqueo # 2'}
 
 		$.each(data.result.detalleEmisiones, function (k, v) {
 
@@ -262,14 +262,14 @@ function cargarResultado(data) {
 			tr += '<td class="bp-min-width">' + v.ordenS + '</td>';
 			tr += '<td class="bp-min-width">' + v.nroLote + '</td>';
 			tr += '<td class="bp-min-width">' + statusEmi + '</td>';
-			tr += '<td class="bp-min-width">' + v.edoPlastico + '</td>';
+			tr += '<td id="statusPlastico' + v.nroTarjeta.replace(/[*]/g, "") + '"class="bp-min-width">' + v.edoPlastico + '</td>';
 			tr += '<td id="td-nombre-2" class="bp-min-width">' + v.nombre.toLowerCase().replace(/(^| )(\w)/g, function (x) {
 				return x.toUpperCase();
 			}) + '</td>';
 			tr += '<td class="bp-min-width">' + v.cedula + '</td>';
 			 tr += '<td id="saldo' + v.nroTarjeta.replace(/[*]/g, "") + '" class="bp-min-width"> - '; //saldo
 			 tr += '</td>'
-			 tr += '<td class="bp-min-width">';
+			 tr += '<td id="opciones' + v.nroTarjeta.replace(/[*]/g, "") + '"class="bp-min-width">';
 			 var operacion = ''
 			 $.each(data.result.operacioneTarjeta, function (i, j)
 			{
@@ -469,8 +469,10 @@ $(".table-text-service").on('click', '#RECIBIR_EN_BANCO', function() {
 	serv_var.estado_anterior.push($(this).parents('tr').attr('edo_anterior'));
 	serv_var.lote.push($(this).parents('tr').attr('num_lote'));
 
+	alerta = 'la acción de recibir en banco,'
+	op = "recibir_banco"
 	url = "/servicios/cambiarEstadoemision"
-	procesar('Recibir en banco',url)
+	procesar('Recibir en banco',url,op,alerta)
 });
 
 // ACCION EVENTO ICON->RECIBIR EN BANCO
@@ -483,10 +485,10 @@ $(".table-text-service").on('click', '#CONSULTA_SALDO_TARJETA', function() {
 	serv_var.estado_anterior.push($(this).parents('tr').attr('edo_anterior'));
 	serv_var.lote.push($(this).parents('tr').attr('num_lote'));
 
+	alerta = 'la consulta de saldo,'
 	op = 'saldo'
 	url = '/servicios/cambiarEstadotarjeta'
-
-	procesar('Consultar saldo',url,op)
+	procesar('Consultar saldo',url,op,alerta)
 });
 
 // ACCION EVENTO ICON->RECIBIR EN EMRPESA
@@ -499,8 +501,10 @@ $(".table-text-service").on('click', '#RECIBIR_EN_EMPRESA', function() {
 	serv_var.estado_anterior.push($(this).parents('tr').attr('edo_anterior'));
 	serv_var.lote.push($(this).parents('tr').attr('num_lote'));
 
+	alerta = 'la acción de recibir en empresa,'
+	op = "recibir_empresa"
 	url = "/servicios/cambiarEstadoemision";
-	procesar('Recibir tarjeta en empresa',url)
+	procesar('Recibir tarjeta en empresa',url,op,alerta)
 
 });
 
@@ -549,8 +553,10 @@ $(".table-text-service").on('click', '#ENVIAR_A_EMPRESA', function() {
 	serv_var.estado_anterior.push($(this).parents('tr').attr('edo_anterior'));
 	serv_var.lote.push($(this).parents('tr').attr('num_lote'));
 
+	alerta = 'el envío a empresa,'
+	op = "enviar_empresa"
 	url = "/servicios/cambiarEstadoemision"
-	procesar('Enviar tarjeta a empresa',url)
+	procesar('Enviar tarjeta a empresa',url,op,alerta)
 
 })
 
@@ -564,8 +570,10 @@ $(".table-text-service").on('click', '#ENTREGAR_A_TARJETAHABIENTE', function() {
 	serv_var.estado_anterior.push($(this).parents('tr').attr('edo_anterior'));
 	serv_var.lote.push($(this).parents('tr').attr('num_lote'));
 
+	alerta = 'la entrega a tarjetahabiente,'
+	op = "entregar_tarjetahabiente"
 	url = "/servicios/cambiarEstadoemision"
-	procesar('Entregar tarjeta',url)
+	procesar('Entregar tarjeta',url,op,alerta)
 
 })
 
@@ -755,10 +763,10 @@ function validarFields()
 		valCorreo.removeClass('textbox-transfer');
 	}
 
-	if(valCelular.val().length > 13)
+	if(valCelular.val().length != 10)
 	{
 		errorCelular.show();
-		errorCelular.html('El campo solo debe tener máximo 13 números')
+		errorCelular.html('El campo debe tener 10 dígitos')
 		validInput = false;
 		valCelular.addClass('textbox-transfer');
 
@@ -809,7 +817,7 @@ function MaysPrimera(string){
 }
 
 //PROCESAR OPERACION
-function procesar(titulo, url, op) {
+function procesar(titulo, url, op, alerta) {
 	op = op != undefined ? op : 1;
 	var canvas = "<div id='dialog-confirm'>";
 	canvas += "<form name='no-form' onsubmit='return false'>";
@@ -844,7 +852,7 @@ function procesar(titulo, url, op) {
 					var form= $(this).find('form');
 					validateForms(form);
 					if (form.valid()) {
-						llamarWSCambio(pass, titulo,url, op);
+						llamarWSCambio(pass, titulo,url, op, alerta);
 						$(this).find('#pass').val('');
 						$(this).dialog("destroy");
 					} else {
@@ -918,7 +926,7 @@ function llamarActDatos(url, title){
 }
 
 
-function llamarWSCambio(pass,mensaje,url,op) {
+function llamarWSCambio(pass,mensaje,url,op,alerta) {
 
 	var $aux = $('#loading').dialog({
 
@@ -959,6 +967,21 @@ function llamarWSCambio(pass,mensaje,url,op) {
 		.done(function(response){
 			data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 
+		if(data.result.bean){
+			if(op == 'saldo' || op == 'bloqueo' || op == 'desbloqueo'){
+				var contador_mas = 0;
+				var contador_menos = 0;
+				$.each(JSON.parse(data.result.bean), function(k, item) {
+					if (item.rcNovoTrans=="0"){
+						contador_mas = contador_mas + 1;
+					}
+					if (item.rcNovoTrans!="0"){
+						contador_menos = contador_menos + 1;
+					}
+			});
+			}
+		}
+
 			$aux.dialog("destroy");
 			if(data.result.rc == -1){
 				notificacion(mensaje, 'La contraseña es incorrecta. Por favor verifícala e intenta de nuevo.', reload);
@@ -969,8 +992,24 @@ function llamarWSCambio(pass,mensaje,url,op) {
 					reload = 2;
 					mostrar_saldo(data)
 				}
-				notificacion(mensaje, 'Proceso realizado correctamente', reload);
-
+				switch(op){
+					case 'saldo':
+					case 'recibir_banco':
+					case 'enviar_empresa':
+					case 'recibir_empresa':
+					case 'entregar_tarjetahabiente':
+					nota = 'Proceso realizado correctamente';
+						break;
+					case 'bloqueo':
+					nota = 'Se han procesado exitosamente '+contador_mas+' Bloqueo(s) de tarjetas y no se lograron procesar '+contador_menos;
+						break;
+					case 'desbloqueo':
+					nota = 'Se han procesado exitosamente '+contador_mas+' Desbloqueo(s) de tarjetas y no se lograron procesar '+contador_menos;
+						break;
+					default:
+					nota = 'No se pudo realizar '+alerta+' intenta más tarde.';
+					}
+				notificacion(mensaje, nota, reload);
 			}
 			else{
 				if (data.result.ERROR == '-29') {
@@ -1058,15 +1097,24 @@ $('#button-masivo').click(function() {
 // MOSTRAR EL SALDO DISPONIBLE PARA CADA TARJETA LUEGO DE CONSULTAR
 function mostrar_saldo(data) {
 	$.each(JSON.parse(data.result.bean), function(k, t) {
-		if (t.saldo !== undefined)
-		{
-			$('#saldo' + t.numeroTarjeta.replace(/[*]/g, "")).text((t.saldo));
 
-		}	else{
+		if(t.msgNovoTrans=="Approved or completed successfully"){
+			$('#saldo' + t.numeroTarjeta.replace(/[*]/g, "")).text((t.saldo));
+		}
+		if(t.msgNovoTrans=="No apta para procesarse"){
+			$('#statusPlastico' + t.numeroTarjeta.replace(/[*]/g, "")).text("Bloqueada");
 			$('#saldo' + t.numeroTarjeta.replace(/[*]/g, "")).empty();
 			$('#saldo' + t.numeroTarjeta.replace(/[*]/g, "")).append('<span title="'+t.msgNovoTrans+'"  class="icon" data-icon="&#xe04b;"></span>');
+			$('#opciones' + t.numeroTarjeta.replace(/[*]/g, "")).empty();
+			$('#opciones' + t.numeroTarjeta.replace(/[*]/g, "")).append('<a id="DESBLOQUEO" title="Desbloqueo"><span class="icon" data-icon="&#xe03f;"></span></a>');
 		}
-
+		if(t.msgNovoTrans=="Tarjeta Inactiva"){
+			$('#statusPlastico' + t.numeroTarjeta.replace(/[*]/g, "")).text("Inactiva");
+			$('#saldo' + t.numeroTarjeta.replace(/[*]/g, "")).empty();
+			$('#saldo' + t.numeroTarjeta.replace(/[*]/g, "")).append('<span title="'+t.msgNovoTrans+'"  class="icon" data-icon="&#xe04b;"></span>');
+			$('#opciones' + t.numeroTarjeta.replace(/[*]/g, "")).empty();
+			$('#opciones' + t.numeroTarjeta.replace(/[*]/g, "")).text("-");
+		}
 	});
 }
 

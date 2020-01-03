@@ -236,7 +236,7 @@ class Lotes_innominada extends CI_Controller {
 							'acrif'=>$acrif,
 							'acnomcia'=>$acnomcia,
 							'dtfechorcarga'=>$dtfechorcarga,
-							'nmonto'=>$nmonto
+							'nmonto'=>number_format((float)$nmonto, 2, '.', '')
 					),TRUE);
 					$sidebarLotes= $this->parser->parse('dashboard/widget-empresa',array('sidebarActive'=>TRUE),TRUE);
 
@@ -443,7 +443,7 @@ class Lotes_innominada extends CI_Controller {
 					if (isset($response->nombre)) {
 							np_hoplite_byteArrayToFile($response->archivo,"xls",$response->nombre);
 					} else {
-							echo "<script>alert('No fue posible generar el archivo, intente más tarde'); window.history.go(-2);</script>";
+							echo "<script>alert('No fué posible generar el archivo, intenta más tarde'); window.history.go(-2);</script>";
 					}
 
 			} elseif($paisS!=$urlCountry&& $paisS!=''){

@@ -26,7 +26,7 @@ $lang['NOMBRE'] = "Nombre";
 $lang['APELLIDO'] = "Apellido";
 $lang['UBICACIÓN'] = "Ubicación";
 $lang['ESTADO_EMISION'] = "Estado Emision";
-$lang['ESTADO_PLASTICO'] = "Estado Plastico";
+$lang['ESTADO_PLASTICO'] = "Estado Plástico";
 
 //GRAFICO TARJETAS EMITIDAS
 $lang['CATEGORIA_UNO']= "Principal";

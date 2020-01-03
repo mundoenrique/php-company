@@ -55,7 +55,7 @@ var datatable;
 
 
       var canvas = "<div id='dialog-confirm'>";
-	      canvas +="<p>La solicitud fue procesada de manera exitosa</p></div>";
+	      canvas +="<p>La solicitud fué procesada de manera exitosa</p></div>";
 
       $(canvas).dialog({
 				dialogClass: "hide-close",
@@ -139,10 +139,10 @@ var datatable;
 			contenido+= "<h6>" + count + ". Clave inválida</h6>";
 		}
 
-		if($("#embozo_1").val()==""){
-			++count;
-			contenido+= "<h6>" + count + ". Has ingresado una Linea Embozo 1</h6>";
-		}
+		// if($("#embozo_1").val()==""){
+		// 	++count;
+		// 	contenido+= "<h6>" + count + ". Has ingresado una Linea Embozo 1</h6>";
+		// }
 
 		if(!/[^a-zA-Z0-9 ]/.test($("#embozo_2").val())){
 
@@ -151,15 +151,15 @@ var datatable;
 			contenido+= "<h6>" + count + ". No hayas ingresado caracteres especiales en Linea Embozo 2</h6>";
 		}
 
-		if(($("#embozo_1").val().length > 25 || ($("#embozo_1").val().length < 3))){
-			++count;
-			contenido+= "<h6>" + count + ". No hayas ingresado menos de 3 y más de 25 caracteres en Linea Embozo 1</h6>";
-		}
+		// if(($("#embozo_1").val().length > 25 || ($("#embozo_1").val().length < 3))){
+		// 	++count;
+		// 	contenido+= "<h6>" + count + ". No hayas ingresado menos de 3 y más de 25 caracteres en Linea Embozo 1</h6>";
+		// }
 
-		if(/[^a-zA-Z0-9 ]/.test($("#embozo_1").val())){
-			++count;
-			contenido+= "<h6>" + count + ". No hayas ingresado caracteres especiales en Linea Embozo 1</h6>";
-		}
+		// if(/[^a-zA-Z0-9 ]/.test($("#embozo_1").val())){
+		// 	++count;
+		// 	contenido+= "<h6>" + count + ". No hayas ingresado caracteres especiales en Linea Embozo 1</h6>";
+		// }
 
 		if(maxTarjetas !== 0 && cantTartjetas > maxTarjetas) {
 			++count;
@@ -209,6 +209,7 @@ $(function(){
 	calendario("fecha_expira");
 	$('#embozo_2').attr('disabled', 'disabled');
 
+	$('#embozo_1').attr('disabled', 'disabled');
 	$('#embozo_2').attr('disabled', 'disabled');
 
 
@@ -291,10 +292,10 @@ $(function(){
 		"oLanguage": {
 			"sProcessing":     "Procesando...",
 			"sLengthMenu":     "Mostrar _MENU_ registros",
-			"sZeroRecords":    "No se encontraron resultados",
-			"sEmptyTable":     "Ningún dato disponible en esta tabla",
-			"sInfo":           "Mostrando registros del _START_ al _END_, de un total de _TOTAL_ registros",
-			"sInfoEmpty":      "Mostrando registros del 0 al 0, de un total de 0 registros",
+			"sZeroRecords":    "No se encontraron resultados.",
+			"sEmptyTable":     "No se encontraron registros.",
+			"sInfo":           "Mostrando registros del _START_ al _END_, de un total de _TOTAL_ registro(s).",
+			"sInfoEmpty":      "Mostrando registros del 0 al 0, de un total de 0 registros.",
 			"sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
 			"sInfoPostFix":    "",
 			"sSearch":         "Buscar:",

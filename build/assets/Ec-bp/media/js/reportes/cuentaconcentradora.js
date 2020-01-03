@@ -366,7 +366,7 @@ $(document).ready(function () {
 
 					WS(filtro_busq);
 				} else {
-					showErrMsg('Verifiqua los datos ingresados e intenta nuevamente.');
+					showErrMsg('Verifica los datos ingresados e intenta nuevamente.');
 				}
 			}
 

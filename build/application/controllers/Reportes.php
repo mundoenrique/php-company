@@ -322,7 +322,7 @@ class Reportes extends CI_Controller {
 															<input type='hidden'>
 															<input type='hidden' name='$ceo_name' value='$ceo_cook'>
 															</form>
-													<script> alert('La descarga del archivo presenta inconvenientes en estos momentos.');
+													<script> alert('La descarga del archivo presenta inconvenientes en éstos momentos.');
 													document.getElementById('formu').action='".$this->config->item('base_url')."$urlCountry/reportes/cuenta-concentradora';
 															document.getElementById('formu').submit();
 													</script>";
@@ -338,7 +338,7 @@ class Reportes extends CI_Controller {
 									<input type='hidden'>
 									<input type='hidden' name='$ceo_name' value='$ceo_cook'>
 								</form>
-								<script> alert('La descarga del archivo presenta inconvenientes en estos momentos.');          document.getElementById('formu').action='".$this->config->item('base_url')."$urlCountry/reportes/cuenta-concentradora';
+								<script> alert('La descarga del archivo presenta inconvenientes en éstos momentos.');          document.getElementById('formu').action='".$this->config->item('base_url')."$urlCountry/reportes/cuenta-concentradora';
 										document.getElementById('formu').submit();
 								</script>";
 					}
@@ -425,7 +425,7 @@ class Reportes extends CI_Controller {
 
 									if($response->rc==-61 || $response->rc==-29){
 											$this->session->sess_destroy();
-											echo "<script>alert('usuario actualmente desconectado');
+											echo "<script>alert('Usuario actualmente desconectado');
 											window.history.back(-1);</script>";
 
 									}else{
@@ -658,7 +658,7 @@ class Reportes extends CI_Controller {
 
 									if($response->rc==-61 || $response->rc==-29){
 											$this->session->sess_destroy();
-											echo "<script>alert('usuario actualmente desconectado');
+											echo "<script>alert('Usuario actualmente desconectado');
 											window.history.back(-1);</script>";
 
 									}else{
@@ -767,7 +767,7 @@ class Reportes extends CI_Controller {
 
 									if($response->rc==-61 || $response->rc==-29){
 											$this->session->sess_destroy();
-											echo "<script>alert('usuario actualmente desconectado');
+											echo "<script>alert('Usuario actualmente desconectado');
 											window.history.back(-1);</script>";
 
 									}else{
@@ -908,7 +908,7 @@ class Reportes extends CI_Controller {
 							if ($this->form_validation->run() == FALSE)
 							{
 								log_message('DEBUG', 'NOVO VALIDATION ERRORS: '.json_encode(validation_errors()));
-								$responseError = 'La combinacion de caracteres es invalido';
+								$responseError = 'La combinación de caracteres es inválida';
 								$responseError = $this->cryptography->encrypt($responseError);
 								$this->output->set_content_type('application/json')->set_output(json_encode($responseError));
 								return $responseError;
@@ -1082,7 +1082,7 @@ class Reportes extends CI_Controller {
 
 									if($response->rc==-61 || $response->rc==-29){
 											$this->session->sess_destroy();
-											echo "<script>alert('usuario actualmente desconectado');
+											echo "<script>alert('Usuario actualmente desconectado');
 											window.history.back(-1);</script>";
 
 									}else{
@@ -1487,7 +1487,7 @@ class Reportes extends CI_Controller {
 
 									if($response->rc==-61 || $response->rc==-29){
 											$this->session->sess_destroy();
-											echo "<script>alert('usuario actualmente desconectado');
+											echo "<script>alert('Usuario actualmente desconectado');
 											window.history.back(-1);</script>";
 									}else{
 											$codigoError = lang('ERROR_('.$response->rc.')');
@@ -1611,7 +1611,7 @@ class Reportes extends CI_Controller {
 								if ($this->form_validation->run() == FALSE)
 								{
 									log_message('DEBUG', 'NOVO VALIDATION ERRORS: '.json_encode(validation_errors()));
-									$responseError = 'La combinacion de caracteres es invalido';
+									$responseError = 'La combinación de caracteres es inválida';
 									$responseError = $this->cryptography->encrypt($responseError);
 									$this->output->set_content_type('application/json')->set_output(json_encode($responseError));
 									return $responseError;
@@ -1910,7 +1910,7 @@ class Reportes extends CI_Controller {
 
 									if($response->rc==-61 || $response->rc==-29){
 											$this->session->sess_destroy();
-											echo "<script>alert('usuario actualmente desconectado');
+											echo "<script>alert('Usuario actualmente desconectado');
 											window.history.back(-1);</script>";
 
 									}else{
@@ -2006,7 +2006,7 @@ class Reportes extends CI_Controller {
 
 									if($response->rc==-61 || $response->rc==-29){
 											$this->session->sess_destroy();
-											echo "<script>alert('usuario actualmente desconectado');
+											echo "<script>alert('Usuario actualmente desconectado');
 											window.history.back(-1);</script>";
 
 									}else{
@@ -2109,7 +2109,7 @@ class Reportes extends CI_Controller {
 
 									if($response->rc==-61 || $response->rc==-29){
 											$this->session->sess_destroy();
-											echo "<script>alert('usuario actualmente desconectado');
+											echo "<script>alert('Usuario actualmente desconectado');
 											window.history.back(-1);</script>";
 
 									}else{
@@ -2212,7 +2212,7 @@ class Reportes extends CI_Controller {
 
 									if($response->rc==-61 || $response->rc==-29){
 											$this->session->sess_destroy();
-											echo "<script>alert('usuario actualmente desconectado');
+											echo "<script>alert('Usuario actualmente desconectado');
 											window.history.back(-1);</script>";
 
 									}else{
@@ -2637,7 +2637,7 @@ class Reportes extends CI_Controller {
 							if ($this->form_validation->run() == FALSE)
 							{
 								log_message('DEBUG', 'NOVO VALIDATION ERRORS: '.json_encode(validation_errors()));
-								$responseError = 'La combinacion de caracteres es invalido';
+								$responseError = 'La combinación de caracteres es inválida';
 								$responseError = $this->cryptography->encrypt($responseError);
 								$this->output->set_content_type('application/json')->set_output(json_encode($responseError));
 								return $responseError;
@@ -2805,7 +2805,7 @@ class Reportes extends CI_Controller {
 
 									if($response->rc==-61 || $response->rc==-29){
 											$this->session->sess_destroy();
-											echo "<script>alert('usuario actualmente desconectado');
+											echo "<script>alert('Usuario actualmente desconectado');
 											window.history.back(-1);</script>";
 
 									}else{
@@ -2902,7 +2902,7 @@ class Reportes extends CI_Controller {
 
 									if($response->rc==-61 || $response->rc==-29){
 											$this->session->sess_destroy();
-											echo "<script>alert('usuario actualmente desconectado');
+											echo "<script>alert('Usuario actualmente desconectado');
 											window.history.back(-1);</script>";
 
 									}else{
@@ -3199,7 +3199,7 @@ class Reportes extends CI_Controller {
 
 									if($response->rc==-61 || $response->rc==-29){
 											$this->session->sess_destroy();
-											echo "<script>alert('usuario actualmente desconectado');
+											echo "<script>alert('Usuario actualmente desconectado');
 											window.history.back(-1);</script>";
 									}else{
 											$codigoError = lang('ERROR_('.$response->rc.')');
@@ -3298,7 +3298,7 @@ class Reportes extends CI_Controller {
 
 									if($response->rc==-61 || $response->rc==-29){
 											$this->session->sess_destroy();
-											echo "<script>alert('usuario actualmente desconectado');
+											echo "<script>alert('Usuario actualmente desconectado');
 											window.history.back(-1);</script>";
 									}
 
@@ -3435,7 +3435,7 @@ class Reportes extends CI_Controller {
 
 							if ($this->form_validation->run() == FALSE)
 							{
-								$responseError = 'La combinacion de caracteres es invalido';
+								$responseError = 'La combinación de caracteres es inválida';
 								$responseError = $this->cryptography->encrypt($responseError);
 								$this->output->set_content_type('application/json')->set_output(json_encode($responseError));
 								return $responseError;
@@ -3616,7 +3616,7 @@ class Reportes extends CI_Controller {
 
 									if($response->rc==-61 || $response->rc==-29){
 											$this->session->sess_destroy();
-											echo "<script>alert('usuario actualmente desconectado');
+											echo "<script>alert('Usuario actualmente desconectado');
 											window.history.back(-1);</script>";
 
 									}else{
@@ -3716,7 +3716,7 @@ class Reportes extends CI_Controller {
 
 									if($response->rc==-61 || $response->rc==-29){
 											$this->session->sess_destroy();
-											echo "<script>alert('usuario actualmente desconectado');
+											echo "<script>alert('Usuario actualmente desconectado');
 											window.history.back(-1);</script>";
 
 									}else{
@@ -3853,7 +3853,7 @@ class Reportes extends CI_Controller {
 							if ($this->form_validation->run() == FALSE)
 							{
 								log_message('DEBUG', 'NOVO VALIDATION ERRORS: '.json_encode(validation_errors()));
-								$responseError = 'La combinacion de caracteres es invalido';
+								$responseError = 'La combinación de caracteres es inválida';
 								$responseError = $this->cryptography->encrypt($responseError);
 								$this->output->set_content_type('application/json')->set_output(json_encode($responseError));
 								return $responseError;
@@ -4043,7 +4043,7 @@ class Reportes extends CI_Controller {
 									if($response->rc==-61 || $response->rc==-29){
 											$this->session->sess_destroy();
 
-											echo "<script>alert('usuario actualmente desconectado');
+											echo "<script>alert('Usuario actualmente desconectado');
 											window.history.back(-1);</script>";
 
 									}else{
@@ -4149,7 +4149,7 @@ class Reportes extends CI_Controller {
 									if($response->rc==-61 || $response->rc==-29){
 											$this->session->sess_destroy();
 
-											echo "<script>alert('usuario actualmente desconectado');
+											echo "<script>alert('Usuario actualmente desconectado');
 											window.history.back(-1);</script>";
 
 									}else{
@@ -4271,7 +4271,7 @@ class Reportes extends CI_Controller {
 									if($response->rc==-61 || $response->rc==-29){
 											$this->session->sess_destroy();
 
-											echo "<script>alert('usuario actualmente desconectado');
+											echo "<script>alert('Usuario actualmente desconectado');
 											window.history.back(-1);</script>";
 
 									}else{
@@ -4380,7 +4380,7 @@ class Reportes extends CI_Controller {
 
 									if($response->rc==-61 || $response->rc==-29){
 										$this->session->sess_destroy();
-										echo "<script>alert('usuario actualmente desconectado');
+										echo "<script>alert('Usuario actualmente desconectado');
 										window.history.back(-1);</script>";
 
 										}else{
@@ -4828,7 +4828,7 @@ class Reportes extends CI_Controller {
 
 									if($response->rc==-61 || $response->rc==-29){
 											$this->session->sess_destroy();
-											echo "<script>alert('usuario actualmente desconectado');
+											echo "<script>alert('Usuario actualmente desconectado');
 											window.history.back(-1);</script>";
 
 									}else{
@@ -4925,7 +4925,7 @@ class Reportes extends CI_Controller {
 
 									if($response->rc==-61 || $response->rc==-29){
 											$this->session->sess_destroy();
-											echo "<script>alert('usuario actualmente desconectado');
+											echo "<script>alert('Usuario actualmente desconectado');
 											window.history.back(-1);</script>";
 									}else{
 											$codigoError = lang('ERROR_('.$response->rc.')');

@@ -39,7 +39,7 @@ if ($country === 'Ec-bp') {
 		<div id="wrapper">
 			<div id="content">
 				<h1>Error General</h1>
-				<p>Ha ocurrido un problema técnico inesperado. Regrese a la página anterior e intente nuevamente.</p>
+				<p>Ha ocurrido un problema técnico inesperado. Regrese a la página anterior e intenta nuevamente.</p>
 				<a class="button" href="#" id="history-back">Regresar</a>
 			</div>
 		</div>

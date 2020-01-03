@@ -487,7 +487,7 @@ textarea {
 	margin: 0 auto;
 	overflow: hidden;
 	width: 960px;
-	font-size: 14px;
+	font-size: 13px;
 }
 
 #head-wrapper {
@@ -4402,9 +4402,15 @@ ul#brands li p img {
 #table-lote-detail thead th {
 	max-width: 70px;
 	min-width: 70px;
-	padding: 3px;
+	padding: 5px;
 	text-align: center;
 	font-size: 14px;
+}
+
+td.cedu_bp {
+
+	max-width: 100px!important;
+	min-width: 90px!important;
 }
 
 #table-lote-detail tbody td#icon-batchs {
@@ -4425,9 +4431,9 @@ ul#brands li p img {
 	max-width: 70px;
 	min-width: 70px;
 	float: left;
-	padding: 3px;
+	padding: 4px;
 	text-align: center;
-	font-size: 14px;
+	font-size: 12px;
 }
 
 #table-lote-detail>#td-nombre-2 {
@@ -5538,11 +5544,6 @@ center {
 	padding-top:20px;
 }
 
-center a.novo-btn-secondary,
-center button.novo-btn-secondary {
-	margin-right: 45px;
-}
-
 .b-rs>.botones-OS {
 	padding-top: 40px;
 }
@@ -5895,11 +5896,12 @@ center button.novo-btn-secondary {
 
 .tbody-reportes-OS tr td {
 	text-align: center;
-	padding: 5px;
 	color: #555;
-	/* max-width: 95px; */
-	min-width: 80px;
+	min-width: 90px;
 }
+ tr.tr-calculo > td{
+	 padding-left: 9px;
+ }
 
 .tabla-detalles {
 	width: 950px;
@@ -6254,8 +6256,8 @@ span.jPag-snext-img {
 
 .OSinfo td {
 	color: #0F265C!important;
-	max-width: 80px !important;
-	min-width: 65px !important;
+	max-width: 75px !important;
+	min-width: 75px !important;
 }
 
 .OShead-2 {
@@ -7676,7 +7678,7 @@ button:active {
 	width:120px;
 	padding-left:15px;
 	padding-right:15px;
-	 display: block;
+	margin: 10px;
 }
 
 .novo-btn-primary-modal,.novo-btn-secondary-modal{
