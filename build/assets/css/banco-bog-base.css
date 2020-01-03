@@ -1011,6 +1011,7 @@ textarea.form-control {
 .btn-outline:disabled,
 .btn-outline.is-disabled {
 	opacity: .5;
+	pointer-events: none;
 	cursor: default;
 }
 
@@ -3285,7 +3286,7 @@ a.ui-button:active,
 }
 .ui-dialog .ui-dialog-content p {
 	display: flex;
-	padding: 1.5em 1em;
+	padding: 1.2em 1em 1em;
 	min-height: 80px;
 	margin-bottom: 0;
 	padding: 1.5em 1em;
@@ -3295,7 +3296,7 @@ a.ui-button:active,
 }
 .ui-dialog .ui-dialog-buttonpane {
 	margin-bottom: 8px;
-	padding: 0 1em .5em;
+	padding: 0 1em .6em;
 	text-align: left;
 	border-width: 1px 0 0 0;
 	background-image: none;

@@ -25,7 +25,7 @@
 		<span id="system-msg" class="system-msg"><?= lang('RESP_MESSAGE_SYSTEM'); ?></span>
 	</p>
 	<div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix mb-1">
-		<div class="ui-dialog-buttonset novo-dialog-buttonset">
+		<div class="ui-dialog-buttonset novo-dialog-buttonset flex">
 			<button type="button" id="cancel" class="btn-modal btn btn-small btn-link"><?= lang('GEN_BTN_CANCEL'); ?></button>
 			<button type="button" id="accept" class="btn-modal btn btn-small btn-loading btn-primary"><?= lang('GEN_BTN_ACCEPT'); ?></button>
 		</div>
