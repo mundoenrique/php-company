@@ -77,9 +77,9 @@ function validateForms(form) {
 	}
 
 	$.validator.methods.requiredTypeBulk = function(value, element, param) {
-		var eval1 = alphanum.test($(element).find('option:selected').attr('format'));
-		var eval2 = longPhrase.test($(element).find('option:selected').text());
-		var eval3 = alphanum.test($(element).find('option:selected').val());
+		var eval1 = alphanum.test($(element).find('option:selected').attr('format').trim());
+		var eval2 = longPhrase.test($(element).find('option:selected').text().trim());
+		var eval3 = alphanum.test($(element).find('option:selected').val().trim());
 		return eval1 && eval2 && eval3;
 	}
 
