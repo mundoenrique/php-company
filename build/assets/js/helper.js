@@ -183,8 +183,9 @@ function insertFormInput(disabled, form = false,) {
 		notDisabled = false;
 	}
 
-	$('form button, form select, form input[type=file], .flex button')
+	$('form button, form select, form input[type=file], button')
 	.not(notDisabled)
+	.not('.btn-modal')
 	.prop('disabled', disabled);
 
 	if(form) {
