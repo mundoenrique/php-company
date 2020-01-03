@@ -249,7 +249,7 @@ function SignDeleteBulk(currentForm, action, btnId, passwordInput, modalReq) {
 			}
 	}
 
-		bulkData = tableSelected.rows({ selected: true }).data();
+	bulkData = tableSelected.rows({ selected: true }).data();
 
 	if(bulkData.length == 0 ) {
 		currentForm.validate().resetForm();
@@ -277,6 +277,10 @@ function SignDeleteBulk(currentForm, action, btnId, passwordInput, modalReq) {
 			pass: inputPass
 		}
 
+		if(currentForm.attr('id') == 'auth-bulk-form') {
+			data['typeOrder'] = $('#type-order').val()
+		}
+
 		if(modalReq.active) {
 			btnAction
 			.off('click')
@@ -293,7 +297,7 @@ function SignDeleteBulk(currentForm, action, btnId, passwordInput, modalReq) {
 				where = 'SignBulkList';
 				break;
 			case lang.GEN_BTN_AUTHORIZE:
-				where = 'AuthorizeBulkList';
+				where = 'AuthorizeBulk';
 				break;
 			case lang.GEN_BTN_DELETE:
 				where = 'DeleteConfirmBulk';

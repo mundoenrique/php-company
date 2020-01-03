@@ -127,8 +127,8 @@ class Novo_Bulk_Model extends NOVO_Model {
 					if($select) {
 						$branch['key'] = $response->lista[$pos]->cod;
 						$branch['text'] = ucfirst(mb_strtolower($response->lista[$pos]->nomb_cia));
-							$branchOffice[] = (object) $branch;
-							continue;
+						$branchOffice[] = (object) $branch;
+						continue;
 					}
 					$branch['idFiscal'] = $response->lista[$pos]->rif;
 					$branch['name'] = mb_strtoupper($response->lista[$pos]->nomb_cia);
@@ -710,5 +710,74 @@ class Novo_Bulk_Model extends NOVO_Model {
 		}
 
 		return $this->responseToTheView(lang('GEN_DELETE_BULK'));
+	}
+	/**
+	 * @info Firma lista de lotes
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date December 28th, 2019
+	 */
+	public function callWs_AuthorizeBulk_Bulk($dataRequest)
+	{
+		log_message('INFO', 'NOVO Bulk Model: AuthorizeBulk Method Initialized');
+
+		$this->className = 'com.novo.objects.TOs.OrdenServicioTO';
+		$this->dataAccessLog->modulo = 'Lotes';
+		$this->dataAccessLog->function = 'Autorización de lotes';
+		$this->dataAccessLog->operation = 'Calcular orden de servicio';
+
+		$signListBulk = [];
+
+		foreach($dataRequest->bulk AS $bulkInfo) {
+			$bulkInfo = json_decode($bulkInfo);
+			$bulkList  = [
+				'acidlote' => $bulkInfo->bulkId
+			];
+			$signListBulk[] = $bulkList;
+		}
+
+		$password = json_decode(base64_decode($dataRequest->pass));
+		$password = $this->cryptography->decrypt(
+			base64_decode($password->plot),
+			utf8_encode($password->password)
+		);
+		$this->dataRequest->idOperation = 'calcularOS';
+		$this->dataRequest->datosEmpresa = [
+			'acrif' => $this->session->enterpriseInf->idFiscal
+		];
+		$this->dataRequest->acprefix = $this->session->productInf->productPrefix;
+		$this->dataRequest->acUsuario = $this->userName;
+		$this->dataRequest->tipoOrdeServicio = $dataRequest->typeOrder;
+		$this->dataRequest->nuevoIva = FALSE;
+		$this->dataRequest->medioPago = [
+			'idPago' => '',
+			'descripcion' => 'Deposito y Transferencia'
+		];
+		$this->dataRequest->lotes = $signListBulk;
+		$this->dataRequest->usuario = [
+			'userName' => $this->userName,
+			'password' => md5($password)
+		];
+
+		$this->sendToService(lang('GEN_AUTH_BULK'));
+
+		switch ($this->isResponseRc) {
+			case 0:
+				$this->response->title = lang('BULK_AUTH_TITLE');
+				$this->response->msg = 'Lote firmado exitosamente';
+				$this->response->data['btn1']['link'] = 'lotes-autorizacion';
+				break;
+			case -1:
+				$this->response->title = lang('BULK_AUTH_TITLE');
+				$this->response->msg = lang('RESP_PASSWORD_NO_VALID');
+				$this->response->data['btn1']['action'] = 'close';
+				break;
+			case -59:
+				$this->response->title = lang('BULK_AUTH_TITLE');
+				$this->response->msg = lang('RESP_AUTH_ORDER_SERV');
+				$this->response->data['btn1']['action'] = 'close';
+				break;
+		}
+
+		return $this->responseToTheView(lang('GEN_AUTH_BULK'));
 	}
 }

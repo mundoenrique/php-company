@@ -71,6 +71,7 @@ $lang['GEN_CONFIRM_BULK'] = 'confirmBulk';
 $lang['GEN_CONFIRM_BULK_TITLE'] = 'Confirmar lote';
 $lang['GEN_AUTHORIZE_BULK_LIST'] = 'authorizeBulkList';
 $lang['GEN_SIGN_BULK_LIST'] = 'SignBulkList';
+$lang['GEN_AUTH_BULK'] = 'AuthorizeBulk';
 $lang['GEN_DELETE_BULK'] = 'DeleteConfirmBulk';
 $lang['GEN_AUTHORIZE_BULK_TITLE'] = 'Autorizar lote';
 //MODAL STYLES

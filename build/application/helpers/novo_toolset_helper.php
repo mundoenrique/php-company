@@ -165,6 +165,8 @@ if(!function_exists('languajeLoad')) {
 					'confirmBulk'	=> ['bulk'],
 					'getDetailBulk'	=> ['bulk'],
 					'authorizeBulkList'	=> ['bulk'],
+					'authorizeBulk'	=> ['bulk'],
+					'deleteConfirmBulk'	=> ['bulk'],
 				];
 				break;
 			case 'co':
@@ -213,6 +215,7 @@ if(!function_exists('languajeLoad')) {
 					'confirmBulk'	=> ['bulk'],
 					'getDetailBulk'	=> ['bulk'],
 					'authorizeBulkList'	=> ['bulk'],
+					'authorizeBulk'	=> ['bulk'],
 					'deleteConfirmBulk'	=> ['bulk'],
 				];
 		}

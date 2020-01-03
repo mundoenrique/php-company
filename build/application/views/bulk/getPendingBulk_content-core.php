@@ -88,7 +88,7 @@
 										<span class="pl-1 uppercase"><?= $bulk->statusText ?></span>
 									</div>
 								</td>
-								<td>
+								<td class="p-0">
 									<?php if($bulk->status == 1 || $bulk->status == 6): ?>
 									<button class="btn mx-1 px-0 big-modal" title="Confirmar" data-toggle="tooltip">
 										<i class="icon icon-ok" aria-hidden="true"></i>

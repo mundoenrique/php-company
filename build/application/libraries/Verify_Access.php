@@ -162,6 +162,7 @@ class Verify_Access {
 				break;
 			case 'authorizeBulkList':
 			case 'signBulkList':
+			case 'authorizeBulk':
 				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBAUT'));
 				break;
 			case 'deleteConfirmBulk':

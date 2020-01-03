@@ -33,6 +33,7 @@ $lang['BULK_CONFIRM_SUCCESS'] = 'EL lote fue confirmado exitosamente';
 $lang['BULK_CONFIRM_FAIL'] = 'No fue posible confirmar el lote por favor intentalo más tarde';
 $lang['BULK_CONFIRM'] = 'Confirmación';
 $lang['BULK_SIGN_TITLE'] = 'Firma de lote';
+$lang['BULK_AUTH_TITLE'] = 'Autorizar lote';
 $lang['BULK_DELETE_TITLE'] = 'Eliminar lote';
 $lang['BULK_TOTAL_RECORDS'] = 'Cantidad de registros';
 $lang['BULK_AMOUNT'] = 'Monto total';

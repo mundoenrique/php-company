@@ -72,7 +72,7 @@ class Encrypt_Connect {
 		}
 
 		$this->logMessage->rc = $response->rc;
-		$this->logMessage->msg = $response->msg;
+		$this->logMessage->msg = isset($response->msg) ? $response->msg : 'Sin mensaje del servicio';
 		$this->logMessage->response = $response;
 		$this->logMessage->pais = $this->CI->config->item('country');
 		$this->logMessage->model = $model;

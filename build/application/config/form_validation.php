@@ -196,6 +196,18 @@ $config = [
 			'rules' => 'regex_match[/^([\w{}":,]*)+$/i]|required'
 		]
 	],
+	'authorizeBulk' => [
+		[
+			'field' => 'pass',
+			'label' => 'pass',
+			'rules' => 'trim|required'
+		],
+		[
+			'field' => 'bulk[]',
+			'label' => 'bulk',
+			'rules' => 'regex_match[/^([\w{}":,]*)+$/i]|required'
+		]
+	],
 	'deleteConfirmBulk' => [
 		[
 			'field' => 'pass',

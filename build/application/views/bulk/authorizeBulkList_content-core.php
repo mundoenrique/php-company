@@ -49,7 +49,7 @@
 								<td><?= $bulk->idType; ?></td>
 								<td><?= $bulk->records; ?></td>
 								<td><?= $bulk->amount; ?></td>
-								<td class="flex justify-center">
+								<td class="flex justify-center p-0">
 									<button class="btn mx-1 px-0" title="<?= lang('GEN_BTN_SEE') ?>" data-toggle="tooltip"
 										onclick="window.location.href = 'ceo_auth_see_lot.php'">
 										<i class="icon icon-find" aria-hidden="true"></i>
@@ -114,7 +114,7 @@
 								<td><?= $bulk->idType; ?></td>
 								<td><?= $bulk->records; ?></td>
 								<td><?= $bulk->amount; ?></td>
-								<td class="flex justify-center">
+								<td class="flex justify-center p-0">
 									<button class="btn mx-1 px-0" title="<?= lang('GEN_BTN_SEE') ?>" data-toggle="tooltip">
 										<i class="icon icon-find" aria-hidden="true"></i>
 									</button>
