@@ -119,8 +119,6 @@ function format (bulk) {
 	table+= 			'<td>Monto de comisión</td>';
 	table+= 			'<td>Monto de depósito</td>';
 	table+= 		'</tr>';
-	//table+= 	'</thead>';
-	//table+= 	'<tbody>';
 	table+= 		body;
 	table+= 	'</tbody>';
 	table+= '</table>';
