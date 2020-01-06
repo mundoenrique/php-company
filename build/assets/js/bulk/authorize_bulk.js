@@ -288,8 +288,6 @@ function SignDeleteBulk(currentForm, action, btnId, passwordInput, modalReq) {
 			.attr('id', modalReq.oldId);
 		}
 
-		passwordInput.val('');
-		tableSelected.rows().deselect();
 		insertFormInput(true);
 
 		switch(action) {
@@ -306,9 +304,16 @@ function SignDeleteBulk(currentForm, action, btnId, passwordInput, modalReq) {
 
 		verb = 'POST'; who = 'Bulk';
 		callNovoCore(verb, who, where, data, function(response) {
-			btnAction.html(btnText);
-			insertFormInput(false);
-			notiSystem(response.title, response.msg, response.icon, response.data);
+
+			if(response.code == 0 && where == 'AuthorizeBulk') {
+				$(location).attr('href', response.data);
+			} else {
+				notiSystem(response.title, response.msg, response.icon, response.data);
+				btnAction.html(btnText);
+				insertFormInput(false);
+				passwordInput.val('');
+				tableSelected.rows().deselect();
+			}
 		});
 	}
 }

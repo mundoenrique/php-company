@@ -478,6 +478,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 				$this->response->code = 0;
 				$this->response->title = lang('BULK_CONFIRM_TITLE');
 				$this->response->msg = lang('BULK_CONFIRM_SUCCESS');
+				$this->response->icon = lang('GEN_ICON_SUCCESS');
 				$this->response->data['btn1']['link'] = base_url(lang('GEN_LINK_BULK_AUTH'));
 				break;
 			case -1:
@@ -758,13 +759,90 @@ class Novo_Bulk_Model extends NOVO_Model {
 			'password' => md5($password)
 		];
 
-		$this->sendToService(lang('GEN_AUTH_BULK'));
+		$response = $this->sendToService(lang('GEN_AUTH_BULK'));
 
 		switch ($this->isResponseRc) {
 			case 0:
-				$this->response->title = lang('BULK_AUTH_TITLE');
-				$this->response->msg = 'Lote firmado exitosamente';
-				$this->response->data['btn1']['link'] = 'lotes-autorizacion';
+				$this->response->code = 0;
+				$this->response->data = base_url('lotes-calcular-orden');
+				$serviceOrdersList = [];
+
+				foreach($response->lista AS $dataOrder) {
+					$bulkList = [];
+					foreach($dataOrder AS $key => $value) {
+						switch ($key) {
+							case 'idOrdenTemp':
+								$serviceOrders['tempOrderId'] = $value;
+								break;
+							case 'montoComision':
+								$serviceOrders['commisAmount'] = $value;
+								break;
+							case 'montoIVA':
+								$serviceOrders['VatAmount'] = $value;
+								break;
+							case 'montoOS':
+								$serviceOrders['soAmount'] = $value;
+								break;
+							case 'montoTotal':
+								$serviceOrders['totalAmount'] = $value;
+								break;
+							case 'montoDeposito':
+								$serviceOrders['depositedAmount'] = $value;
+								break;
+							case 'lotes':
+								$serviceOrders['bulk'] = [];
+								foreach($value AS $bulk) {
+									$bulkList['bulkNumber'] = $bulk->acnumlote;
+									$bulkList['bulkLoadDate'] = $bulk->dtfechorcarga;
+									$bulkList['bulkLoadType'] = ucfirst(mb_strtolower($bulk->acnombre));
+									$bulkList['bulkRecords'] = $bulk->ncantregs;
+									$bulkList['bulkStatus'] = ucfirst(mb_strtolower($bulk->status));
+									$bulkList['bulkAmount'] = floatval($bulk->montoRecarga);
+									$bulkList['bulkCommisAmount'] = floatval($bulk->montoComision);
+									$bulkList['bulkTotalAmount'] = floatval($bulk->montoRecarga) + floatval($bulk->montoComision);
+									$serviceOrders['bulk'][] = (object) $bulkList;
+								}
+								//$serviceOrders['bulk'] = new stdClass();
+								break;
+						}
+					}
+
+					$serviceOrdersList[] = (object) $serviceOrders;
+				}
+
+				$bulkNotBillable = [];
+				if(count($response->lotesNF) > 0) {
+					foreach($response->lotesNF AS $notBillable) {
+						$bulkList = [];
+						foreach($notBillable AS $key => $value) {
+							switch ($value) {
+								case 'acidlote':
+									$bulkList['bulkId'] = $value;
+									break;
+								case 'acnumlote':
+									$bulkList['bulkNumber'] = $value;
+									break;
+								case 'dtfechorcarga':
+									$bulkList['bulkLoadDate'] = $value;
+									break;
+								case 'acnombre':
+									$bulkList['bulkLoadType'] = ucfirst(mb_strtolower($value));
+									break;
+								case 'ncantregs':
+									$bulkList['bulkRecords'] = $value;
+									break;
+								case 'status':
+									$bulkList['bulkStatus'] = ucfirst(mb_strtolower($value));
+									break;
+							}
+						}
+
+						$bulkNotBillable[] = (object) $bulkList;
+					}
+				}
+
+				$this->session->set_flashdata('serviceOrdersList', $serviceOrdersList);
+				$this->session->set_flashdata('bulkNotBillable', $bulkNotBillable);
 				break;
 			case -1:
 				$this->response->title = lang('BULK_AUTH_TITLE');
@@ -779,5 +857,25 @@ class Novo_Bulk_Model extends NOVO_Model {
 		}
 
 		return $this->responseToTheView(lang('GEN_AUTH_BULK'));
+	}
+	/**
+	 * @info Firma lista de lotes
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date January 05th, 2019
+	 */
+	public function callWs_ServiceOrder_Bulk($dataRequest)
+	{
+		log_message('INFO', 'NOVO Bulk Model: ServiceOrder Method Initialized');
+
+		$this->className = 'com.novo.objects.MO.ListadoOrdenServicioMO';
+		$this->dataAccessLog->modulo = 'Lotes';
+		$this->dataAccessLog->function = 'Orden de servicio';
+		$this->dataAccessLog->operation = 'Generar orden de servicio';
+
+		$this->dataRequest->idOperation = 'generarOS';
+
+		$response = $this->sendToService('ServiceOrder');
+
+		return $this->responseToTheView('ServiceOrder');
 	}
 }

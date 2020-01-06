@@ -74,6 +74,8 @@ $lang['GEN_SIGN_BULK_LIST'] = 'SignBulkList';
 $lang['GEN_AUTH_BULK'] = 'AuthorizeBulk';
 $lang['GEN_DELETE_BULK'] = 'DeleteConfirmBulk';
 $lang['GEN_AUTHORIZE_BULK_TITLE'] = 'Autorizar lote';
+$lang['GEN_CACULATE_SERVICE_ORDER'] = 'calculateServiceOrder';
+$lang['GEN_CACULATE_ORDER_TITLE'] = 'Calcular Orden';
 //MODAL STYLES
 $lang['GEN_MODAL_WIDTH'] = 310;
 $lang['GEN_ICON'] = 'ui-icon';

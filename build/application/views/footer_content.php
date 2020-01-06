@@ -63,10 +63,10 @@
 	</p>
 	<div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
 		<div class="ui-dialog-buttonset novo-dialog-buttonset">
-			<button type="button" id="cancel" class="cancel-button novo-btn-secondary-modal dialog-buttons">
+			<button type="button" id="cancel" class="btn-modal cancel-button novo-btn-secondary-modal dialog-buttons">
 				<?= lang('GEN_BTN_CANCEL'); ?>
 			</button>
-			<button type="button" id="accept" class="novo-btn-primary-modal dialog-buttons">
+			<button type="button" id="accept" class="btn-modal novo-btn-primary-modal dialog-buttons">
 				<?= lang('GEN_BTN_ACCEPT'); ?>
 			</button>
 		</div>

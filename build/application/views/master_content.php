@@ -36,7 +36,7 @@
 	<?= ($module == lang('GEN_LOGIN') && $activeRecaptcha) ?  $scriptCaptcha : ''; ?>
 	<?= $this->asset->insertJs(); ?>
 	<script>
-		var lang = <? print_r(json_encode($this->lang->language)); ?>;
+		var lang = <?php print_r(json_encode($this->lang->language)); ?>;
 		var baseURL = '<?= base_url(); ?>';
 		var assetUrl = '<?= assetUrl(); ?>';
 		var country = '<?= $countryUri; ?>';

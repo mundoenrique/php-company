@@ -231,7 +231,7 @@ if(!function_exists('languajeLoad')) {
 		}
 
 		if(in_array($client, $lanValidate)) {
-			array_unshift($languagesFile, 'validate');
+			array_unshift($languagesFile, 'validate', 'response');
 			$loadLanguages = TRUE;
 		}
 

@@ -136,4 +136,43 @@ class Bulk extends NOVO_Controller {
 		$this->views = ['bulk/'.$view];
 		$this->loadView($view);
 	}
+	/**
+	 * @info Método para calcular la orden de severvicio
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date January 04th, 2019
+	 */
+	public function calculateServiceOrder()
+	{
+		log_message('INFO', 'NOVO Bulk: calculateServiceOrder Method Initialized');
+
+		/* if(!$this->session->flashdata('serviceOrdersList') || !$this->session->flashdata('bulkNotBillable')) {
+			redirect(base_url('lotes-autorizacion'), 'location');
+		} */
+
+		$view = lang('GEN_CACULATE_SERVICE_ORDER');
+		array_push(
+			$this->includeAssets->cssFiles,
+			"third_party/datatables"
+		);
+		array_push(
+			$this->includeAssets->jsFiles,
+			"third_party/datatables",
+			"third_party/jquery.validate",
+			"validate".$this->render->newViews."-forms",
+			"third_party/additional-methods",
+			"bulk/calculate_service_order"
+		);
+		$serviceOrdersList = $this->session->flashdata('serviceOrdersList');
+		$bulkNotBillable = $this->session->flashdata('bulkNotBillable');
+		$this->session->set_flashdata('serviceOrdersList', $serviceOrdersList);
+		$this->session->set_flashdata('bulkNotBillable', $bulkNotBillable);
+		$this->render->serviceOrdersList = $serviceOrdersList;
+		$this->render->bulkNotBillable = $bulkNotBillable;
+		$this->render->tempOrdersId = '';
+		$this->render->bulknotBill = '';
+		$this->render->titlePage = lang('GEN_CACULATE_ORDER_TITLE');
+		$this->views = ['bulk/'.$view];
+		$this->loadView($view);
+	}
+
 }
