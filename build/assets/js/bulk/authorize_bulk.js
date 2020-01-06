@@ -74,9 +74,10 @@ $(function () {
 
   authorizeBulk = $('#authorize-bulk').DataTable({
 		drawCallback: function(d) {
-			/* $('#pre-loader').remove();
-			$('.visible').removeClass('visible'); */
+			$('#pre-loader').remove();
+			$('.hide').removeClass('hide');
 		},
+		"autoWidth": false,
     "ordering": false,
     "pagingType": "full_numbers",
     "columnDefs": [
@@ -104,7 +105,6 @@ $(function () {
         "visible": false
       }
 		],
-		"autoWidth": false,
 		"select": {
       "style": lang.GEN_TABLE_SELECT_AUTH,
       "info": false,
