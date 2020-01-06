@@ -224,24 +224,24 @@ $config = [
 		[
 			'field' => 'tempOrders',
 			'label' => 'tempOrders',
-			'rules' => 'trim|regex_match[/^([\w,]*)+$/i]|required'
+			'rules' => 'trim|regex_match[/^([\w,]*)+$/i]'
 		],
 		[
 			'field' => 'bulkNoBill',
 			'label' => 'bulkNoBill',
-			'rules' => 'trim|regex_match[/^([\w,]*)+$/i]|required'
+			'rules' => 'trim|regex_match[/^([\w,]*)+$/i]'
 		]
 	],
 	'cancelServiceOrder' => [
 		[
 			'field' => 'tempOrders',
 			'label' => 'tempOrders',
-			'rules' => 'trim|regex_match[/^([\w,]*)+$/i]|required'
+			'rules' => 'trim|regex_match[/^([\w,]*)+$/i]'
 		],
 		[
 			'field' => 'bulkNoBill',
 			'label' => 'bulkNoBill',
-			'rules' => 'trim|regex_match[/^([\w,]*)+$/i]|required'
+			'rules' => 'trim|regex_match[/^([\w,]*)+$/i]'
 		]
 	],
 	'dash-products' => [

@@ -859,7 +859,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 		return $this->responseToTheView(lang('GEN_AUTH_BULK'));
 	}
 	/**
-	 * @info Firma lista de lotes
+	 * @info Genera orden de servicio
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date January 05th, 2019
 	 */
@@ -872,10 +872,81 @@ class Novo_Bulk_Model extends NOVO_Model {
 		$this->dataAccessLog->function = 'Orden de servicio';
 		$this->dataAccessLog->operation = 'Generar orden de servicio';
 
+		$listTemp = [];
+		$listTempNoBill = [];
+
+		if(isset($dataRequest->tempOrders)) {
+			$tempOrders = explode(',', $dataRequest->tempOrders);
+			array_pop($tempOrders);
+			foreach($tempOrders AS $temp) {
+				$list['idOrdenTemp'] = $temp;
+				$list['acprefix'] = $this->session->productInf->productPrefix;
+				$listTemp[] = (object) $list;
+			}
+		}
+
+		if(isset($dataRequest->bulkNoBill)) {
+			$bulkNoBill = explode(',', $dataRequest->bulkNoBill);
+			array_pop($bulkNoBill);
+			foreach($bulkNoBill AS $temp) {
+				$listNoBill['acidlote'] = $temp;
+				$listNoBill['acprefix'] = $this->session->productInf->productPrefix;
+				$listTempNoBill[] = (object) $listNoBill;
+			}
+		}
+
 		$this->dataRequest->idOperation = 'generarOS';
+		$this->dataRequest->rifEmpresa = $this->session->enterpriseInf->idFiscal;
+		$this->dataRequest->lista = $listTemp;
+		$this->dataRequest->lotesNF = $listTempNoBill;
+		$this->dataRequest->usuario = [
+			'userName' => $this->userName,
+			'codigoGrupo' => $this->session->enterpriseInf->enterpriseGroup
+		];
 
 		$response = $this->sendToService('ServiceOrder');
 
+		switch ($this->isResponseRc) {
+			case 0:
+				$this->response->title = 'Generar orden de servicio';
+				$this->response->msg = 'Orden generada exitosamente';
+				$this->response->icon = lang('GEN_ICON_SUCCESS');
+				$this->response->data['btn1']['action'] = 'close';
+				break;
+
+			case -5:
+			$this->response->title = 'Generar orden de servicio';
+			$this->response->msg = 'No fue posible generar la orden de servicio';
+			$this->response->icon = lang('GEN_ICON_WARNING');
+			$this->response->data['btn1']['action'] = 'close';
+				break;
+		}
+
+		$serviceOrdersList = $this->session->flashdata('serviceOrdersList');
+		$bulkNotBillable = $this->session->flashdata('bulkNotBillable');
+		$this->session->set_flashdata('serviceOrdersList', $serviceOrdersList);
+		$this->session->set_flashdata('bulkNotBillable', $bulkNotBillable);
+
 		return $this->responseToTheView('ServiceOrder');
+	}
+	/**
+	 * @info Cancela calculo de orden de servicio
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date January 05th, 2019
+	 */
+	public function callWs_cancelServiceOrder_Bulk($dataRequest)
+	{
+		log_message('INFO', 'NOVO Bulk Model: cancelServiceOrder Method Initialized');
+
+		$this->className = 'com.novo.objects.MO.ListadoOrdenServicioMO';
+		$this->dataAccessLog->modulo = 'Lotes';
+		$this->dataAccessLog->function = 'Orden de servicio';
+		$this->dataAccessLog->operation = 'Generar orden de servicio';
+
+		$this->dataRequest->idOperation = 'generarOS';
+
+		$response = $this->sendToService('cancelServiceOrder');
+
+		return $this->responseToTheView('cancelServiceOrder');
 	}
 }

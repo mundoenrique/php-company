@@ -127,8 +127,8 @@
 						<div class="flex row mt-3 mb-2 mx-2 justify-end">
 							<div class="col-4 col-lg-3 h6 regular form-group">
 								<select id="type-order" name="type-order" class="select-box custom-select h6">
-									<option value="0">Procesar por lote</option>
-									<option value="1" selected>Procesar por tipo de lote</option>
+									<option value="0" selected>Procesar por lote</option>
+									<option value="1">Procesar por tipo de lote</option>
 								</select>
 								<div class="help-block"></div>
 							</div>

@@ -64,16 +64,27 @@ $(function() {
 
 		if($(this).attr('id') == 'auth-bulk-btn') {
 			where = 'ServiceOrder'
+			var btnAction = $(this);
+			btnText = $(this).text();
+			$(this).html(loader);
+			insertFormInput(true)
 		}
 
-		if($(this).attr('id') == 'auth-bulk-btn') {
+		if($(this).attr('id') == 'cancel-bulk-btn') {
 			where = 'CancelServiceOrder'
+		}
+
+		data = {
+			tempOrders: $('#temp-orders').val(),
+			bulkNoBill: $('#bulk-no-bil').val()
 		}
 
 		verb = 'POST'; who = 'Bulk';
 		callNovoCore(verb, who, where, data, function(response) {
 
 			notiSystem(response.title, response.msg, response.icon, response.data);
+			btnAction.html(btnText);
+			insertFormInput(false);
 
 		});
 	});

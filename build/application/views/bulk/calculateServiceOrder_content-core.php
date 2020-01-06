@@ -91,7 +91,8 @@
 						</div>
 						<div class="flex flex-row">
 							<div class="mb-3 mr-4">
-								<button id="cancel-bulk-btn" class="btn btn-link btn-small">Cancelar</button>
+								<!-- <button id="cancel-bulk-btn" class="btn btn-link btn-small">Cancelar</button> -->
+								<a href="<?= base_url('lotes-autorizacion') ?>" class="btn btn-link btn-small big-modal"><?= lang('GEN_BTN_CANCEL'); ?></a>
 							</div>
 							<div class="mb-3 mr-1">
 								<button id="auth-bulk-btn" class="btn btn-primary  btn-loading btn-small">Autorizar</button>
