@@ -18,7 +18,7 @@
 		<div id="pre-loader" class="mt-2 mx-auto">
 			<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
 		</div>
-		<div class="hide">
+		<div class="w-100 hide">
 			<div class="flex flex-auto flex-column <?= $widget ? '' : 'max-width-6'; ?>">
 				<?php if($signBulk != new stdClass()): ?>
 				<div class="flex pb-5 flex-column">
