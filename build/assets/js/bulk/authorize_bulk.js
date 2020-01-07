@@ -29,7 +29,7 @@ $(function () {
 		"autoWidth": false,
     "select": {
       "style": lang.GEN_TABLE_SELECT_SIGN,
-			selector: ':not(.no-select-checkbox, td:nth-child(-n+65))'
+			selector: ':not(td:nth-child(-n+6))'
     },
     "language": {
       "sProcessing": "Procesando...",
@@ -75,7 +75,7 @@ $(function () {
   authorizeBulk = $('#authorize-bulk').DataTable({
 		drawCallback: function(d) {
 			$('#pre-loader').remove();
-			$('.hide').removeClass('hide');
+			$('.hide-out').removeClass('hide');
 		},
 		"autoWidth": false,
     "ordering": false,
@@ -89,7 +89,7 @@ $(function () {
       	render: function (data, type, row) {
 					var content = '';
 					if(data != '') {
-						content = '<button class="btn px-0" title="En espera de autorización" data-toggle="tooltip">';
+						content = '<button class="btn px-0" title="'+lang.GEN_BTN_DISASS_AUTH+'" data-toggle="tooltip">';
 						content+= 	'<i class="icon icon-user" aria-hidden="true"></i>';
 						content+= '</button>';
 					}
@@ -108,7 +108,7 @@ $(function () {
 		"select": {
       "style": lang.GEN_TABLE_SELECT_AUTH,
       "info": false,
-      selector: ':not(.no-select-checkbox, td:nth-child(-n+65))'
+      selector: ':not(td:nth-child(-n+6))'
     },
     "language": {
       "sProcessing": "Procesando...",
@@ -165,18 +165,22 @@ $(function () {
 		e.preventDefault();
 		var event = $(e.currentTarget);
 		var action = event.attr('title');
-		$(this).closest('tr').addClass('selected');
+		var submitForm = false;
+		$(this).closest('tr').addClass('select');
 
 		switch(action) {
 			case lang.GEN_BTN_SEE:
 				/* form.attr('action', baseURL+'detalle-lote');
-				form.append('<input type="hidden" name="bulkView" value="detail">'); */
+				form.append('<input type="hidden" name="bulkView" value="detail">');
+				submitForm = true; */
 				break;
 			case lang.GEN_BTN_CONFIRM:
 				/* form.attr('action', baseURL+'confirmar-lote');
-				form.append('<input type="hidden" name="bulkView" value="confirm">'); */
+				form.append('<input type="hidden" name="bulkView" value="confirm">');
+				submitForm = true; */
 				break;
 			case lang.GEN_BTN_DELETE:
+			case lang.GEN_BTN_DISASS_SIGN:
 				var oldId = $('#accept').attr('id');
 				var currentIdBtn = 'delete-bulk-btn';
 				var cancelDelete = $('#cancel');
@@ -216,9 +220,9 @@ $(function () {
 				break;
 		}
 
-		/* if(action != lang.GEN_BTN_DELETE) {
+		if(submitForm) {
 			form.submit();
-		}*/
+		}
 
 	});
 });
@@ -232,6 +236,7 @@ function SignDeleteBulk(currentForm, action, btnId, passwordInput, modalReq) {
 	validateForms(currentForm);
 	var bulkData;
 	var tableSelected
+	var classSelect = '.selected:not(.no-select-checkbox)'
 	switch(currentForm.attr('id')) {
 		case 'sign-bulk-form':
 			tableSelected = signBulk;
@@ -240,6 +245,8 @@ function SignDeleteBulk(currentForm, action, btnId, passwordInput, modalReq) {
 			tableSelected = authorizeBulk;
 			break;
 		default:
+			classSelect = '.select';
+
 			if(modalReq.table.attr('id') == 'sign-bulk') {
 				tableSelected = signBulk;
 			}
@@ -249,7 +256,7 @@ function SignDeleteBulk(currentForm, action, btnId, passwordInput, modalReq) {
 			}
 	}
 
-	bulkData = tableSelected.rows({ selected: true }).data();
+	bulkData = tableSelected.rows(classSelect).data();
 
 	if(bulkData.length == 0 ) {
 		currentForm.validate().resetForm();
@@ -299,6 +306,9 @@ function SignDeleteBulk(currentForm, action, btnId, passwordInput, modalReq) {
 				break;
 			case lang.GEN_BTN_DELETE:
 				where = 'DeleteConfirmBulk';
+				break;
+			case lang.GEN_BTN_DISASS_SIGN:
+				where = 'DisassConfirmBulk';
 				break;
 		}
 

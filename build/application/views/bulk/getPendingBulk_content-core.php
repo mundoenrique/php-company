@@ -89,19 +89,21 @@
 									</div>
 								</td>
 								<td class="p-0">
-									<?php if($bulk->status == 1 || $bulk->status == 6): ?>
-									<button class="btn mx-1 px-0 big-modal" title="Confirmar" data-toggle="tooltip">
+									<?php if($bulk->status == 1 || $bulk->status == 6 && $this->verify_access->verifyAuthorization('TEBCAR', 'TEBCON')): ?>
+									<button class="btn mx-1 px-0 big-modal" title="<?= lang('GEN_BTN_CONFIRM'); ?>" data-toggle="tooltip">
 										<i class="icon icon-ok" aria-hidden="true"></i>
 									</button>
 									<?php endif; ?>
-									<?php if($bulk->status == 5 || $bulk->status == 6): ?>
-									<button class="btn mx-1 px-0 big-modal" title="Ver" data-toggle="tooltip">
+									<?php if($bulk->status == 5 || $bulk->status == 6 && $this->verify_access->verifyAuthorization('TEBCAR')): ?>
+									<button class="btn mx-1 px-0 big-modal" title="<?= lang('GEN_BTN_SEE'); ?>" data-toggle="tooltip">
 										<i class="icon icon-find" aria-hidden="true"></i>
 									</button>
 									<?php endif; ?>
-									<button class="btn mx-1 px-0" title="Eliminar" data-toggle="tooltip">
+									<?php if($this->verify_access->verifyAuthorization('TEBCAR', 'TEBELC')): ?>
+									<button class="btn mx-1 px-0" title="<?= lang('GEN_BTN_DELETE'); ?>" data-toggle="tooltip">
 										<i class="icon icon-remove" aria-hidden="true"></i>
 									</button>
+									<?php endif; ?>
 									<form id="bulk-<?= $bulk->ticketId; ?>" method="POST">
 										<input type="hidden" name="bulkStatus" value="<?= $bulk->status; ?>">
 										<input type="hidden" name="bulkId" value="<?= $bulk->bulkId; ?>">

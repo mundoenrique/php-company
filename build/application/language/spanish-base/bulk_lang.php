@@ -41,4 +41,5 @@ $lang['BULK_OBSERVATIONS'] = 'Observaciones';
 $lang['BULK_SEE'] = 'Ver lote';
 $lang['BULK_DETAIL'] = 'Detalle del lote';
 $lang['BULK_DELETE'] = 'Por favor ingresa la contraseña para eliminar el lote';
+$lang['BULK_DELETE_DATE'] = 'Por favor ingresa la contraseña para eliminar el lote fecha';
 $lang['BULK_SELECT'] = 'Selecciona al menos un lote';

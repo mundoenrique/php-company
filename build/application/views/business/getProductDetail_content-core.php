@@ -29,21 +29,17 @@
 				</div>
 
 				<div class="flex mt-3 flex-column items-start">
-					<?php if($this->verify_access->verifyAuthorization('TEBCAR')): ?>
-					<a class="btn btn-link btn-small-xs mx-4 px-0 big-modal" href="<?= lang('GEN_LINK_BULK_LOAD') ?>"><?= lang('GEN_MENU_BULK_LOAD') ?></a>
-					<?php endif; ?>
-					<?php if($this->verify_access->verifyAuthorization('TEBAUT')): ?>
-					<a class="btn btn-link btn-small-xs mx-4 px-0 big-modal" href="<?= lang('GEN_LINK_BULK_AUTH'); ?>">
+					<a class="btn btn-link btn-small-xs mx-4 px-0 big-modal <?= $loadDisabled; ?>" href="<?= $loadBulkLink; ?>">
+						<?= lang('GEN_MENU_BULK_LOAD') ?>
+					</a>
+					<a class="btn btn-link btn-small-xs mx-4 px-0 big-modal <?= $authDisabled; ?>" href="<?= $bulkAuthLink; ?>">
 						<?= novoLang(lang('PRODUCTS_LOTS_TOTAL'), [$lotsTotal, $toSign, $toAuthorize]) ?>
 					</a>
-					<?php endif; ?>
-					<?php if($viewSomeAttr && $this->verify_access->verifyAuthorization('TEBORS')): ?>
-					<a class="btn btn-link btn-small-xs mx-4 px-0" href="#">
+					<a class="btn btn-link btn-small-xs mx-4 px-0 <?= $orderDisabled; ?>" href="<?= $OrderServLink; ?>">
 						<?= novoLang(lang('PRODUCTS_ORDERSERV_TOTAL'), [$serviceOrders, $serviceOrdersNoCon, $serviceOrdersCon]) ?>
 					</a>
-					<?php endif; ?>
 					<?php if($viewSomeAttr): ?>
-					<a class="btn btn-link btn-small-xs mx-4 px-0" href="<?= $masterTransLink; ?>">
+					<a class="btn btn-link btn-small-xs mx-4 px-0 <?= $masterTransDisabled ?>" href="<?= $masterTransLink; ?>">
 						<?= novoLang(lang('PRODUCTS_CARDS_TOTAL'), [$totalCards, $activeCards, $inactiveCards]) ?>
 					</a>
 					<?php endif; ?>

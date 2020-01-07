@@ -241,3 +241,22 @@ if(!function_exists('languajeLoad')) {
 
 	}
 }
+
+if(!function_exists('setCurrentPage')) {
+	function setCurrentPage($currentClass, $menu) {
+		$cssClass = '';
+		switch ($currentClass) {
+			case 'business':
+				if($menu == lang('GEN_MENU_ENTERPRISE')) {
+					$cssClass = 'page-current';
+				}
+				break;
+			case 'bulk':
+				if($menu == lang('GEN_MENU_LOTS')) {
+					$cssClass = 'page-current';
+				}
+				break;
+		}
+		return $cssClass;
+	}
+}

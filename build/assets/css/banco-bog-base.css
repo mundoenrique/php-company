@@ -2718,6 +2718,7 @@ table.dataTable thead th.select-checkbox:before {
   border: 1px solid var(--secondary);
   border-radius: 3px;
 }
+
 table.dataTable tr.selected th.select-checkbox:after {
   content: '\2714';
   margin-top: -11px !important;
@@ -2757,6 +2758,14 @@ table.dataTable tr.selected td.select-checkbox::after {
 	text-shadow: none !important;
 	color: var(--primary);
 	font-size: var(--h4);
+}
+
+table.dataTable tbody tr.no-select-checkbox {
+	background-color: #ffffff !important;
+}
+
+table.dataTable.display tbody tr.odd.no-select-checkbox {
+	background-color: #f9f9f9 !important;
 }
 
 table.dataTable tbody tr td {

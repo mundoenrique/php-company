@@ -18,7 +18,7 @@
 		<div id="pre-loader" class="mt-2 mx-auto">
 			<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
 		</div>
-		<div class="w-100 hide">
+		<div class="w-100 hide-out hide">
 			<div class="flex flex-auto flex-column <?= $widget ? '' : 'max-width-6'; ?>">
 				<?php if($signBulk != new stdClass()): ?>
 				<div class="flex pb-5 flex-column">
@@ -127,10 +127,14 @@
 						<form id="auth-bulk-form" method="post">
 							<div class="flex row mt-3 mb-2 mx-2 justify-end">
 								<div class="col-4 col-lg-3 h6 regular form-group">
+									<?php if(verifyDisplay('body', $module,  lang('GEN_TAG_ORDER_TYPE'))): ?>
 									<select id="type-order" name="type-order" class="select-box custom-select h6">
-										<option value="0" selected>Procesar por lote</option>
-										<option value="1">Procesar por tipo de lote</option>
+										<option value="0">Procesar por lote</option>
+										<option value="1" selected>Procesar por tipo de lote</option>
 									</select>
+									<?php else: ?>
+										<input type="hidden" id="type-order" name="type-order" value="0">
+									<?php endif; ?>
 									<div class="help-block"></div>
 								</div>
 								<div class="col-6 col-lg-auto form-group">

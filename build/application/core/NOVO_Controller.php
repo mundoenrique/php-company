@@ -246,6 +246,7 @@ class NOVO_Controller extends CI_Controller {
 		$userMenu = new stdClass();
 		$userMenu->userAccess = $this->session->user_access;
 		$userMenu->enterpriseUrl = lang('GEN_ENTERPRISE_LIST');
+		$userMenu->currentClass = $this->router->fetch_class();
 		$this->render->settingsMenu = $userMenu;
 		$this->render->goOut = ($this->render->logged || $this->session->flashdata('changePassword'))
 			? 'cerrar-sesion' : 'inicio';

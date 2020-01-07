@@ -1,15 +1,16 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 <nav class="navbar-secondary line-main-nav flex bg-secondary items-center">
 	<ul class="main-nav-user flex my-0 list-style-none">
-		<li class="nav-item mr-1 inline page-current big-modal">
+		<li class="nav-item mr-1 inline big-modal <?= setCurrentPage($currentClass, lang('GEN_MENU_ENTERPRISE')); ?>">
 			<a class="nav-link pr-2 semibold primary" href="<?= base_url($enterpriseUrl); ?>">
 				<?= lang('GEN_MENU_ENTERPRISE') ?>
 			</a>
 		</li>
 		<?php if($this->session->has_userdata('user_access')): ?>
 		<?php foreach($userAccess AS $firstLevel): ?>
-		<li class="nav-item mr-1 inline">
-			<a class="nav-link px-2 semibold primary"><?= $this->create_menu->mainMenu($firstLevel->idPerfil) ?></a>
+		<?php $textMenu = $this->create_menu->mainMenu($firstLevel->idPerfil); ?>
+		<li class="nav-item mr-1 inline <?= setCurrentPage($currentClass, $textMenu); ?>">
+			<a class="nav-link px-2 semibold primary"><?= $textMenu; ?></a>
 			<ul class="dropdown-user pl-0 regular tertiary bg-secondary list-style-none list-inline">
 				<?php $secondLevel = $this->create_menu->secondaryMenu($firstLevel) ?>
 				<?php foreach($secondLevel->second AS $submenu): ?>

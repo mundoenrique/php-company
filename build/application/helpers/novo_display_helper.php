@@ -115,6 +115,9 @@ if ( ! function_exists('verifyBody'))
 			case lang('GEN_TAG_ALL_BULK'):
 				$display = (in_array($client, $showUs) || $country == 'bp');
 				break;
+			case lang('GEN_TAG_ORDER_TYPE'):
+				$display = (in_array($client, $showUs) || $country != 've' && $country != 'bdb');
+				break;
 		}
 
 		return $display;

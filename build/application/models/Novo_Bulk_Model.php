@@ -234,6 +234,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 				'codCia' => $this->session->enterpriseInf->enterpriseCode,
 				'sucursal' => isset($dataRequest->branchOffice) ? $dataRequest->branchOffice : '',
 				'idTipoLote' => $dataRequest->typeBulk,
+				'usuario' => $this->userName,
 				'formatoLote' => $dataRequest->formatBulk,
 			];
 			$this->dataRequest->usuario = [
@@ -491,6 +492,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 				$this->response->code = 0;
 				$this->response->title = lang('BULK_CONFIRM_TITLE');
 				$this->response->msg = lang('BULK_CONFIRM_FAIL');
+				$this->response->data['btn1']['link'] = 'cargar-lotes';
 				break;
 		}
 
