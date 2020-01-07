@@ -6,6 +6,7 @@ $(function() {
 	var enterpriseWidgetBtn = $('#enterprise-widget-btn');
 	var formAction = enterpriseWidgetForm.attr('form-action');
 	var prefix = getPropertyOfElement('prefix-prod', '#detail-product');
+	var currentIdFiscal = getPropertyOfElement('fiscal-reg', '#fiscal-reg');
 	var enterpriseCode;
 	var enterpriseGroup;
 	var idFiscal;
@@ -53,7 +54,7 @@ $(function() {
 			WidgetSelcetP.find('option:selected').text(lang.GEN_SELECT_PRODUCTS);
 			goToDetail = true;
 			$.each(response.data, function(index, prod) {
-				if(prod.id == prefix) {
+				if(prod.id == prefix && currentIdFiscal == idFiscal) {
 					return;
 				}
 				WidgetSelcetP.append(`<option value="${prod.id}">${prod.desc}</option>`);

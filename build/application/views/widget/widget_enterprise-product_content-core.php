@@ -3,7 +3,9 @@
 	<div class="widget optional mx-4 p-3">
 		<div class="flex flex-column items-center">
 			<span class="h5 semibold center primary truncate"><?= $enterpriseData->enterpriseName ?></span>
-			<span class="my-2 h5 regular text"><?= lang('GEN_FISCAL_REGISTRY').' '.$enterpriseData->idFiscal ?></span>
+			<span id="fiscal-reg" class="my-2 h5 regular text" fiscal-reg="<?= $enterpriseData->idFiscal ?>">
+				<?= lang('GEN_FISCAL_REGISTRY').' '.$enterpriseData->idFiscal ?>
+			</span>
 			<form id="enterprise-widget-form" action="<?= base_url($actionForm) ?>" method="POST" form-action="<?= $actionForm ?>">
 				<select id="enterprise-select" class="select-box custom-select mt-3 mb-4 h6 w-100">
 					<option selected disabled><?= lang('GEN_SELECT_ENTERPRISE'); ?></option>

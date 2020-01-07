@@ -24,11 +24,11 @@ class Bulk extends NOVO_Controller {
 		$view = lang('GEN_GET_PEN_BULK');
 		array_push(
 			$this->includeAssets->cssFiles,
-			"third_party/datatables"
+			"third_party/dataTables-1.10.20"
 		);
 		array_push(
 			$this->includeAssets->jsFiles,
-			"third_party/datatables",
+			"third_party/dataTables-1.10.20",
 			"third_party/fileupload-10.4.0",
 			"third_party/jquery.validate",
 			"validate".$this->render->newViews."-forms",
@@ -117,11 +117,11 @@ class Bulk extends NOVO_Controller {
 		$view = lang('GEN_AUTHORIZE_BULK_LIST');
 		array_push(
 			$this->includeAssets->cssFiles,
-			"third_party/datatables"
+			"third_party/dataTables-1.10.20"
 		);
 		array_push(
 			$this->includeAssets->jsFiles,
-			"third_party/datatables",
+			"third_party/dataTables-1.10.20",
 			"third_party/jquery.validate",
 			"validate".$this->render->newViews."-forms",
 			"third_party/additional-methods",
@@ -152,11 +152,11 @@ class Bulk extends NOVO_Controller {
 		$view = lang('GEN_CACULATE_SERVICE_ORDER');
 		array_push(
 			$this->includeAssets->cssFiles,
-			"third_party/datatables"
+			"third_party/dataTables-1.10.20"
 		);
 		array_push(
 			$this->includeAssets->jsFiles,
-			"third_party/datatables",
+			"third_party/dataTables-1.10.20",
 			"third_party/jquery.validate",
 			"validate".$this->render->newViews."-forms",
 			"third_party/additional-methods",
