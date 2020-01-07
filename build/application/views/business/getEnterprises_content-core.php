@@ -5,7 +5,7 @@
 		<div class="flex tertiary">
 			<nav class="main-nav nav-inferior">
 				<ul class="mb-0 light h6 tertiary list-style-none list-inline ">
-					<li class="inline"><a class="tertiary" href="#">Empresas</a></li>
+					<li class="inline"><a class="tertiary" href="javascript:">Empresas</a></li>
 				</ul>
 			</nav>
 		</div>
@@ -71,9 +71,7 @@
 	<div id="enterprise-pages" class="visible">
 		<div class="pagination page-number flex mb-5 py-5 flex-auto justify-center">
 			<nav class="h4">
-				<?php if($recordsPage >= 4): ?>
 				<a href="javascript:" position="first"><?= lang('ENTERPRISE_FIRST_PAGE'); ?></a>
-				<?php endif; ?>
 				<a href="javascript:" position="prev">«</a>
 			</nav>
 			<div id="show-page" class="h4 flex justify-center ">
@@ -85,9 +83,7 @@
 			</div>
 			<nav class="h4">
 				<a href="javascript:" position="next">»</a>
-				<?php if($recordsPage >= 4): ?>
 				<a href="javascript:" position="last"><?= lang('ENTERPRISE_LAST_PAGE'); ?></a>
-				<?php endif; ?>
 			</nav>
 		</div>
 	</div>

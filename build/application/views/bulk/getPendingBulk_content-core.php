@@ -9,7 +9,7 @@
 					<li class="inline"><a class="tertiary big-modal" href="<?= base_url('empresas') ?>">Empresas</a></li> /
 					<li class="inline"><a class="tertiary big-modal" href="<?= base_url('productos') ?>">Productos</a></li> /
 					<li class="inline"><a class="tertiary big-modal" href="<?= base_url('detalle-producto') ?>">Detalle del producto</a></li> /
-					<li class="inline"><a class="tertiary" href="#"><?= lang('BULK_TITLE'); ?></a></li>
+					<li class="inline"><a class="tertiary" href="javascript:"><?= lang('BULK_TITLE'); ?></a></li>
 				</ul>
 			</nav>
 		</div>
@@ -69,11 +69,11 @@
 					<table id="pending-bulk" class="cell-border h6 display">
 						<thead class="regular secondary bg-primary">
 							<tr>
-								<th><?= lang('BULK_NUMBER'); ?></th>
-								<th><?= lang('BULK_FILE_NAME'); ?></th>
-								<th><?= lang('BULK_LOAD_DATE'); ?></th>
-								<th><?= lang('BULK_STATUS'); ?></th>
-								<th><?= lang('BULK_OPTIONS'); ?></th>
+								<th><?= lang('GEN_TABLE_BULK_NUMBER'); ?></th>
+								<th><?= lang('GEN_TABLE_FILE_NAME'); ?></th>
+								<th><?= lang('GEN_TABLE_BULK_DATE'); ?></th>
+								<th><?= lang('GEN_TABLE_BULK_STATUS'); ?></th>
+								<th><?= lang('GEN_TABLE_BULK_OPTIONS'); ?></th>
 							</tr>
 						</thead>
 						<tbody>

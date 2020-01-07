@@ -22,20 +22,20 @@
 			<div class="flex flex-auto flex-column <?= $widget ? '' : 'max-width-6'; ?>">
 				<?php if($signBulk != new stdClass()): ?>
 				<div class="flex pb-5 flex-column">
-					<span class="line-text mb-2 h4 semibold primary">Lotes pendientes por firmar</span>
+					<span class="line-text mb-2 h4 semibold primary"><?= lang('BULK_PENDING_SIGN') ?></span>
 					<div class="center mx-1">
 						<table id="sign-bulk" class="cell-border h6 display" sign="<?= $authorizeAttr->sign; ?>">
 							<thead class="regular secondary bg-primary">
 								<tr id="headerRow">
 									<th class="toggle-all"></th>
-									<th>Nro. Lote</th>
-									<th>Id de lote</th>
-									<th>Fecha de carga</th>
-									<th>Tipo</th>
-									<th>Id Tipo</th>
-									<th>Registros</th>
-									<th>Monto</th>
-									<th>Opciones</th>
+									<th><?= lang('GEN_TABLE_BULK_NUMBER'); ?></th>
+									<th><?= lang('GEN_TABLE_BULK_ID'); ?></th>
+									<th><?= lang('GEN_TABLE_BULK_DATE'); ?></th>
+									<th><?= lang('GEN_TABLE_BULK_TYPE'); ?></th>
+									<th><?= lang('GEN_TABLE_BULK_TYPE_ID'); ?></th>
+									<th><?= lang('GEN_TABLE_BULK_RECORDS'); ?></th>
+									<th><?= lang('GEN_TABLE_BULK_AMOUNT'); ?></th>
+									<th><?= lang('GEN_TABLE_BULK_OPTIONS'); ?></th>
 								</tr>
 							</thead>
 							<tbody>
@@ -50,11 +50,11 @@
 									<td><?= $bulk->records; ?></td>
 									<td><?= $bulk->amount; ?></td>
 									<td class="flex justify-center p-0">
-										<button class="btn mx-1 px-0" title="<?= lang('GEN_BTN_SEE') ?>" data-toggle="tooltip"
+										<button class="btn mx-1 px-0" title="<?= lang('GEN_BTN_SEE'); ?>" data-toggle="tooltip"
 											onclick="window.location.href = 'ceo_auth_see_lot.php'">
 											<i class="icon icon-find" aria-hidden="true"></i>
 										</button>
-										<button class="btn mx-1 px-0" title="<?= lang('GEN_BTN_DELETE') ?>" data-toggle="tooltip">
+										<button class="btn mx-1 px-0" title="<?= lang('GEN_BTN_DELETE'); ?>" data-toggle="tooltip">
 											<i class="icon icon-remove mr-1" aria-hidden="true"></i>
 										</button>
 									</td>
@@ -85,20 +85,20 @@
 				</div>
 				<?php endif; ?>
 				<div class="flex pb-5 flex-column">
-					<span class="line-text mb-2 h4 semibold primary">Lotes pendientes por autorizar</span>
+					<span class="line-text mb-2 h4 semibold primary"><?= lang('BULK_PENDING_AUTH'); ?></span>
 					<div class="center mx-1">
 						<table id="authorize-bulk" class="cell-border h6 display" auth="<?= $authorizeAttr->auth; ?>" order-to-pay="<?= $authorizeAttr->toPAy; ?>">
 							<thead class="bg-primary secondary regular">
 								<tr>
 									<th class="<?= $authorizeAttr->allBulk; ?>"></th>
-									<th>Nro. Lote</th>
-									<th>Id de lote</th>
-									<th>Fecha de carga</th>
-									<th>Tipo</th>
-									<th>Id Tipo</th>
-									<th>Registros</th>
-									<th>Monto</th>
-									<th>Opciones</th>
+									<th><?= lang('GEN_TABLE_BULK_NUMBER'); ?></th>
+									<th><?= lang('GEN_TABLE_BULK_ID'); ?></th>
+									<th><?= lang('GEN_TABLE_BULK_DATE'); ?></th>
+									<th><?= lang('GEN_TABLE_BULK_TYPE'); ?></th>
+									<th><?= lang('GEN_TABLE_BULK_TYPE_ID'); ?></th>
+									<th><?= lang('GEN_TABLE_BULK_RECORDS'); ?></th>
+									<th><?= lang('GEN_TABLE_BULK_AMOUNT'); ?></th>
+									<th><?= lang('GEN_TABLE_BULK_OPTIONS'); ?></th>
 								</tr>
 							</thead>
 							<tbody>
@@ -129,8 +129,8 @@
 								<div class="col-4 col-lg-3 h6 regular form-group">
 									<?php if(verifyDisplay('body', $module,  lang('GEN_TAG_ORDER_TYPE'))): ?>
 									<select id="type-order" name="type-order" class="select-box custom-select h6">
-										<option value="0">Procesar por lote</option>
-										<option value="1" selected>Procesar por tipo de lote</option>
+										<option value="0"><?= lang('BULK_PROCESS_BY_BULK'); ?></option>
+										<option value="1" selected><?= lang('BULK_PROCESS_TYPE_BULK') ?></option>
 									</select>
 									<?php else: ?>
 										<input type="hidden" id="type-order" name="type-order" value="0">
@@ -158,7 +158,7 @@
 					</div>
 
 					<div class="my-5 py-4 center none">
-						<span class="h4">No fue posible obtener el listado</span>
+						<span class="h4"><?= lang('RESP_NO_LIST'); ?></span>
 					</div>
 
 				</div>

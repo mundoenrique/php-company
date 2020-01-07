@@ -114,6 +114,21 @@ $lang['GEN_TAG_ORDER_TYPE'] = 'Tipo de orden de servicio';
 //DATATABLES
 $lang['GEN_TABLE_SELECT_SIGN'] = 'multi';
 $lang['GEN_TABLE_SELECT_AUTH'] = 'multi';
+$lang['GEN_TABLE_BULK_NUMBER'] = 'Nro. Lote';
+$lang['GEN_TABLE_BULK_ID'] = 'Id de lote';
+$lang['GEN_TABLE_BULK_DATE'] = 'Fecha de carga';
+$lang['GEN_TABLE_FILE_NAME'] = 'Nombre de archivo';
+$lang['GEN_TABLE_BULK_TYPE'] = 'Tipo';
+$lang['GEN_TABLE_BULK_TYPE_ID'] = 'Id Tipo';
+$lang['GEN_TABLE_BULK_STATUS'] = 'Estado';
+$lang['GEN_TABLE_BULK_RECORDS'] = 'Registros';
+$lang['GEN_TABLE_BULK_AMOUNT'] = 'Monto';
+$lang['GEN_TABLE_COMMISSION'] = 'Monto Comisión';
+$lang['GEN_TABLE_VAT'] = 'Monto Iva';
+$lang['GEN_TABLE_AMOUNT_SO'] = 'Monto OS';
+$lang['GEN_TABLE_TOTAL_AMOUNT'] = 'Monto Total';
+$lang['GEN_TABLE_DEPOSIT_AMOUNT'] = 'Monto depósito';
+$lang['GEN_TABLE_BULK_OPTIONS'] = 'Opciones';
 //GENERAL LANGUAGE
 $lang['GEN_SYSTEM_NAME']= 'Conexión Empresas Online';
 $lang['GEN_WELCOME_TEXT'] = 'Bienvenido(a)';

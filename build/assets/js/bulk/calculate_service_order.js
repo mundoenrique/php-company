@@ -2,6 +2,10 @@
 var serviceOrder;
 $(function() {
 	serviceOrder = $('#resultServiceOrders').DataTable({
+		drawCallback: function(d) {
+			$('#pre-loader').remove();
+			$('.hide-out').removeClass('hide');
+		},
     "ordering": false,
     "pagingType": "full_numbers",
     "columnDefs": [
@@ -110,14 +114,14 @@ function format (bulk) {
 	table = '<table class="detailLot h6 cell-border primary semibold" style="width:100%">';
 	table+= 	'<tbody>';
 	table+= 		'<tr class="bold" style="margin-left: 0px;">';
-	table+= 			'<td>Lote nro.</td>';
-	table+= 			'<td>Fecha</td>';
-	table+= 			'<td>Tipo</td>';
-	table+= 			'<td>Cantidad</td>';
-	table+= 			'<td>Estado</td>';
-	table+= 			'<td>Monto de recarga</td>';
-	table+= 			'<td>Monto de comisión</td>';
-	table+= 			'<td>Monto de depósito</td>';
+	table+= 			'<td>'+lang.GEN_TABLE_BULK_NUMBER+'</td>';
+	table+= 			'<td>'+lang.GEN_TABLE_BULK_DATE+'</td>';
+	table+= 			'<td>'+lang.GEN_TABLE_BULK_TYPE+'</td>';
+	table+= 			'<td>'+lang.GEN_TABLE_BULK_RECORDS+'</td>';
+	table+= 			'<td>'+lang.GEN_TABLE_BULK_STATUS+'</td>';
+	table+= 			'<td>'+lang.GEN_TABLE_BULK_AMOUNT+'</td>';
+	table+= 			'<td>'+lang.GEN_TABLE_COMMISSION+'</td>';
+	table+= 			'<td>'+lang.GEN_TABLE_DEPOSIT_AMOUNT+'</td>';
 	table+= 		'</tr>';
 	table+= 		body;
 	table+= 	'</tbody>';

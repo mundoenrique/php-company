@@ -6,7 +6,7 @@
 			<nav class="main-nav nav-inferior">
 				<ul class="mb-0 h6 light tertiary list-style-none list-inline">
 					<li class="inline"><a class="tertiary big-modal" href="<?= base_url('empresas') ?>">Empresas /</a></li>
-					<li class="inline"><a class="tertiary" href="#">Productos</a></li>
+					<li class="inline"><a class="tertiary" href="javascript:">Productos</a></li>
 				</ul>
 			</nav>
 		</div>
