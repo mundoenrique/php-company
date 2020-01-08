@@ -159,6 +159,7 @@ if(!function_exists('languajeLoad')) {
 				$languages = [
 					'login' => ['login'],
 					'validatecaptcha' => ['login'],
+					'getProductDetail'	=> ['products'],
 					'getPendingBulk'	=> ['bulk'],
 					'loadBulk'	=> ['bulk'],
 					'deleteNoConfirmBulk'	=> ['bulk'],

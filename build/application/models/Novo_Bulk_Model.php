@@ -590,7 +590,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 			case -38:
 				$this->response->code = 3;
 				$this->response->title = 'Autorización de lotes';
-				$this->response->msg = 'No fue posible obtener el listado';
+				$this->response->msg = lang('RESP_NO_LIST');
 				break;
 		}
 
