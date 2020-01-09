@@ -9,7 +9,7 @@
 					<li class="inline"><a class="tertiary big-modal" href="<?= base_url('empresas') ?>">Empresas</a></li> /
 					<li class="inline"><a class="tertiary big-modal" href="<?= base_url('productos') ?>">Productos</a></li> /
 					<li class="inline"><a class="tertiary big-modal" href="<?= base_url('detalle-producto') ?>">Detalle del producto</a></li> /
-					<li class="inline"><a class="tertiary" href="javascript:"><?= lang('BULK_TITLE'); ?></a></li>
+					<li class="inline"><a class="tertiary not-pointer" href="javascript:"><?= lang('BULK_TITLE'); ?></a></li>
 				</ul>
 			</nav>
 		</div>
@@ -81,14 +81,14 @@
 							<tr ticket-id="<?= $bulk->ticketId ?>" bulk-id="<?= $bulk->bulkId ?>">
 								<td><?= $bulk->lotNum ?></td>
 								<td><?= $bulk->fileName ?></td>
-								<td><?= $bulk->loadDate ?></td>
+								<td class="tool-ellipsis"><?= $bulk->loadDate ?></td>
 								<td>
 									<div class="<?= $bulk->statusPr ?> flex items-center justify-center">
 										<div class="icon-circle <?= $bulk->statusColor ?>" alt=""></div>
 										<span class="pl-1 uppercase"><?= $bulk->statusText ?></span>
 									</div>
 								</td>
-								<td class="p-0">
+								<td class="p-0 flex justify-center items-center">
 									<?php if($bulk->status == 1 || $bulk->status == 6 && $this->verify_access->verifyAuthorization('TEBCAR', 'TEBCON')): ?>
 									<button class="btn mx-1 px-0 big-modal" title="<?= lang('GEN_BTN_CONFIRM'); ?>" data-toggle="tooltip">
 										<i class="icon icon-ok" aria-hidden="true"></i>

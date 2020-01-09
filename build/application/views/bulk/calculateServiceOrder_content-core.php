@@ -10,7 +10,7 @@
 					<li class="inline"><a class="tertiary big-modal" href="<?= base_url('productos') ?>">Productos</a></li> /
 					<li class="inline"><a class="tertiary big-modal" href="<?= base_url('detalle-producto') ?>">Detalle del producto</a></li> /
 					<li class="inline"><a class="tertiary big-modal" href="<?= base_url('lotes-autorizacion') ?>">Autorizar lote</a></li> /
-					<li class="inline"><a class="tertiary" href="javascript:">Calcular orden de servicio</a></li>
+					<li class="inline"><a class="tertiary not-pointer" href="javascript:">Calcular orden de servicio</a></li>
 				</ul>
 			</nav>
 		</div>
@@ -46,7 +46,7 @@
 									<td><?= $serviceOrders->soAmount; ?></td>
 									<td><?= $serviceOrders->totalAmount; ?></td>
 									<td><?= $serviceOrders->depositedAmount; ?></td>
-									<td class="flex justify-center items-center">
+									<td class="p-0 flex justify-center items-center">
 										<button class="btn px-0 details-control" title="Ver" data-toggle="tooltip">
 											<i class="icon icon-find mr-1" aria-hidden="true"></i>
 										</button>
@@ -87,8 +87,8 @@
 						<div class="line my-2"></div>
 					</div>
 					<form id="auth-bulk-form">
-						<div class="flex flex-column mb-4 mt-4 px-5 justify-center items-center">
-							<div class="form-group mb-3 mb-3 col-4 col-lg-3">
+						<div class="flex flex-column mb-4 px-5 justify-center items-center">
+							<div class="form-group col-4 col-lg-3">
 								<input id="temp-orders" name="temp-orders" type="hidden" value="<?= $tempOrdersId; ?>">
 								<input id="bulk-no-bill" name="bulk-no-bill" type="hidden" value="<?= $bulknotBill; ?>">
 								<div class="help-block"></div>

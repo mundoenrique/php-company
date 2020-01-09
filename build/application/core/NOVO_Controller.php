@@ -142,8 +142,7 @@ class NOVO_Controller extends CI_Controller {
 			$this->includeAssets->cssFiles = [
 				//"$structure-structure",
 				//"$this->skin-appearance",
-				"$this->skin-base",
-				"$this->skin-validate",
+				"$this->skin-base"
 			];
 
 			if($this->render->newViews === '-core') {

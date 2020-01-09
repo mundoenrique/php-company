@@ -10,7 +10,7 @@
 					<li class="inline"><a class="tertiary big-modal" href="<?= base_url('productos') ?>">Productos</a></li> /
 					<li class="inline"><a class="tertiary big-modal" href="<?= base_url('detalle-producto') ?>">Detalle del producto</a></li> /
 					<li class="inline"><a class="tertiary big-modal" href="<?= base_url('cargar-lotes') ?>">Cargar lotes</a></li> /
-					<li class="inline"><a class="tertiary" href="javascript:">Ver lote</a></li>
+					<li class="inline"><a class="tertiary not-pointer" href="javascript:">Ver lote</a></li>
 				</ul>
 			</nav>
 		</div>

@@ -113,7 +113,7 @@ function format (bulk) {
 		body+= 	'<td>'+value.bulkTotalAmount+'</td>';
 		body+= '</tr>';
 	})
-	table = '<table class="detailLot h6 cell-border primary semibold" style="width:100%">';
+	table = '<table class="detail-lot h6 cell-border primary semibold" style="width:100%">';
 	table+= 	'<tbody>';
 	table+= 		'<tr class="bold" style="margin-left: 0px;">';
 	table+= 			'<td>'+lang.GEN_TABLE_BULK_NUMBER+'</td>';

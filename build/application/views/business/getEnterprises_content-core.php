@@ -5,7 +5,7 @@
 		<div class="flex tertiary">
 			<nav class="main-nav nav-inferior">
 				<ul class="mb-0 light h6 tertiary list-style-none list-inline ">
-					<li class="inline"><a class="tertiary" href="javascript:">Empresas</a></li>
+					<li class="inline"><a class="tertiary not-pointer" href="javascript:">Empresas</a></li>
 				</ul>
 			</nav>
 		</div>

@@ -92,7 +92,7 @@
 									<td><?= $list->OrderTax; ?></td>
 									<td><?= $list->OrderAmount; ?></td>
 									<td><?= $list->OrderDeposit; ?></td>
-									<td class="flex justify-center p-0">
+									<td class="p-0 flex justify-center">
 										<button class="btn px-0 details-control" title="Ver" data-toggle="tooltip">
 											<i class="icon icon-find mr-1" aria-hidden="true"></i>
 										</button>
@@ -110,14 +110,12 @@
 						<div class="line my-2"></div>
 					</div>
 
-
 					<div class="my-5 py-4 center none">
 						<span class="h4">No tiene Órdenes de servicio</span>
 					</div>
 				</div>
 			</div>
 			<?php endif; ?>
-
 
 		</div>
 		<?php if($widget): ?>

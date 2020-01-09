@@ -10,7 +10,7 @@
 					<li class="inline"><a class="tertiary big-modal" href="<?= base_url('productos') ?>">Productos</a></li> /
 					<li class="inline"><a class="tertiary big-modal" href="<?= base_url('detalle-producto') ?>">Detalle del producto</a></li> /
 					<li class="inline"><a class="tertiary big-modal" href="<?= base_url('cargar-lotes') ?>">Cargar lotes</a></li> /
-					<li class="inline"><a class="tertiary" href="javascript:">Confirmar lote</a></li>
+					<li class="inline"><a class="tertiary not-pointer" href="javascript:">Confirmar lote</a></li>
 				</ul>
 			</nav>
 		</div>
@@ -70,16 +70,16 @@
 
 				<form id="confirm-bulk-btn" method="post">
 					<div class="flex flex-column mb-4 mt-4 px-5 justify-center items-center">
-						<div class="form-group mb-3 mb-3 col-4 col-lg-3">
+						<div class="form-group mb-3 col-5 col-lg-4 col-xl-3">
 							<input id="bulkTicked" name="bulkTicked" type="hidden" value="<?= $detailBulk->bulkTicked ?>">
 							<input id="password" name="password" class="form-control" type="password" placeholder="<?= lang('GEN_PLACE_PASSWORD'); ?>">
 							<div class="help-block"></div>
 						</div>
 						<div class="flex flex-row">
-							<div class="mb-3 mr-4">
+							<div class="mb-3 mr-2">
 								<a href="<?= base_url('cargar-lotes') ?>" class="btn btn-link btn-small big-modal"><?= lang('GEN_BTN_CANCEL'); ?></a>
 							</div>
-							<div class="mb-3 mr-1">
+							<div class="mb-3 mr-2">
 								<button id="confirm-bulk" class="btn btn-primary  btn-loading btn-small"><?= lang('GEN_BTN_CONFIRM'); ?></button>
 							</div>
 						</div>
