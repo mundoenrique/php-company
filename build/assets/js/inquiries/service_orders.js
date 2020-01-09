@@ -1,7 +1,7 @@
 'use strict'
-var serviceOrder;
+var resultServiceOrders;
 $(function() {
-	serviceOrder = $('#resultServiceOrders').DataTable({
+	resultServiceOrders = $('#resultServiceOrders').DataTable({
 		drawCallback: function(d) {
 			$('#pre-loader').remove();
 			$('.hide-out').removeClass('hide');
@@ -15,7 +15,7 @@ $(function() {
 				  data.substr( 0, 20 ) +'…' :
 				  data;
         }
-      },
+      }
     ],
     "language": {
       "sProcessing": "Procesando...",
@@ -45,11 +45,9 @@ $(function() {
       }
     }
 	});
-
-
-  $('#resultServiceOrders tbody').on('click', 'button.details-control', function(){
+	$('#resultServiceOrders tbody').on('click', 'button.details-control', function(){
     var tr = $(this).closest('tr');
-		var row = serviceOrder.row( tr );
+		var row = resultServiceOrders.row( tr );
 		var bulk = $(this).closest('tr').attr('bulk')
 
     if(row.child.isShown()){
@@ -60,43 +58,7 @@ $(function() {
 			tr.addClass('shown');
     }
 	});
-
-	$('#auth-bulk-btn, #cancel-bulk-btn').on('click', function(e) {
-		e.preventDefault();
-
-		if($(this).attr('id') == 'auth-bulk-btn') {
-			where = 'ServiceOrder'
-			var btnAction = $(this);
-			btnText = $(this).text();
-			$(this).html(loader);
-		}
-
-		if($(this).attr('id') == 'cancel-bulk-btn') {
-			where = 'CancelServiceOrder'
-		}
-
-		data = {
-			tempOrders: $('#temp-orders').val(),
-			bulkNoBill: $('#bulk-no-bil').val()
-		}
-
-		insertFormInput(true)
-
-		verb = 'POST'; who = 'Bulk';
-		callNovoCore(verb, who, where, data, function(response) {
-
-			if(response.code == 0) {
-				$(location).attr('href', response.data);
-			} else {
-				notiSystem(response.title, response.msg, response.icon, response.data);
-				btnAction.html(btnText);
-				insertFormInput(false);
-				$('.cover-spin').hide()
-			}
-
-		});
-	});
-});
+})
 
 function format (bulk) {
 	var table, body = '';

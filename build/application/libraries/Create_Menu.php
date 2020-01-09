@@ -108,7 +108,7 @@ class Create_Menu {
 				break;
 			case 'TEBORS':
 				$subMenuLang->text = lang('GEN_MENU_CONS_ORDERS_SERV');
-				$subMenuLang->link = 'javascript:';
+				$subMenuLang->link = lang('GEN_LINK_CONS_ORDERS_SERV');
 				break;
 			case 'TEBPOL':
 				$subMenuLang->text = lang('GEN_MENU_CONS_DATA_UPGRADE');

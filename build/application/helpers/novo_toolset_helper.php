@@ -258,6 +258,11 @@ if(!function_exists('setCurrentPage')) {
 					$cssClass = 'page-current';
 				}
 				break;
+			case 'inquiries':
+				if($menu == lang('GEN_MENU_CONSULTATIONS')) {
+					$cssClass = 'page-current';
+				}
+				break;
 		}
 		return $cssClass;
 	}

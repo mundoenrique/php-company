@@ -74,6 +74,8 @@ $route['(:any)/detalle-lote'] = "bulk/getDetailBulk";
 $route['(:any)/confirmar-lote'] = "bulk/confirmBulk";
 $route['(:any)/lotes-autorizacion'] = "bulk/authorizeBulkList";
 $route['(:any)/lotes-calcular-orden'] = "bulk/calculateServiceOrder";
+//Inquiries
+$route['(:any)/consultas-orden-de-servicio'] = "inquiries/serviceOrders";
 
 
 //old routes

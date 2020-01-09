@@ -18,7 +18,7 @@ $lang['GEN_MENU_LOT_UNNAMED_REQ'] = 'Solicitud';//TICARG
 $lang['GEN_MENU_LOT_UNNAMED_AFFIL'] = 'Afiliación';//TIINVN
 $lang['GEN_MENU_LOT_REPROCESS'] = 'Reproceso de datos';//TEBGUR
 $lang['GEN_MENU_CONS_ORDERS_SERV'] = 'Órdenes de servicio';//TEBORS
-$lang['GEN_LINK_ORDERS_SERV'] = 'ordenes-servicio';//TEBORS
+$lang['GEN_LINK_CONS_ORDERS_SERV'] = 'consultas-orden-de-servicio';//TEBORS
 $lang['GEN_MENU_CONS_DATA_UPGRADE'] = 'Actulización de datos';//TEBPOL
 $lang['GEN_MENU_SERV_MASTER_TRANSFER'] = 'Transferencia maestra';//TRAMAE
 $lang['GEN_LINK_MASTER_TRANSFER'] = 'transferencia-maestra';//TRAMAE
@@ -81,6 +81,8 @@ $lang['GEN_DELETE_BULK'] = 'DeleteConfirmBulk';
 $lang['GEN_AUTHORIZE_BULK_TITLE'] = 'Autorizar lote';
 $lang['GEN_CACULATE_SERVICE_ORDER'] = 'calculateServiceOrder';
 $lang['GEN_CACULATE_ORDER_TITLE'] = 'Calcular Orden';
+$lang['GEN_SERVICE_ORDERS'] = 'serviceOrders';
+$lang['GEN_SERVICE_ORDERS_TITLE'] = 'Órdenes de servicio';
 //MODAL STYLES
 $lang['GEN_MODAL_WIDTH'] = 310;
 $lang['GEN_ICON'] = 'ui-icon';

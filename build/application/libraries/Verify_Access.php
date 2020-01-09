@@ -173,6 +173,9 @@ class Verify_Access {
 			case 'cancelServiceOrder':
 				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBAUT') && $this->verifyAuthorization('TEBORS'));
 				break;
+			case 'serviceOrders':
+				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBORS'));
+				break;
 		}
 
 		log_message('INFO', 'NOVO ['.$user.'] accessAuthorization '.$module.': '.json_encode($auth, JSON_UNESCAPED_UNICODE));

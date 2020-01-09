@@ -203,13 +203,17 @@ class NOVO_Controller extends CI_Controller {
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date Auguts 22nd, 2019
 	 */
-	protected function responseAttr($responseView, $active = TRUE)
+	protected function responseAttr($responseView = 0, $active = TRUE)
 	{
 		log_message('INFO', 'NOVO Controller: responseAttr Method Initialized');
 
-		$this->render->code = $responseView->code;
+		$this->render->code = $responseView;
 
-		if($responseView->code == 0  && $active) {
+		if(is_object($responseView)) {
+			$this->render->code = $responseView->code;
+		}
+
+		if($this->render->code == 0  && $active) {
 			$this->load->model('Novo_Business_Model', 'Business');
 			$enterpriseList = $this->Business->callWs_getEnterprises_Business(TRUE);
 

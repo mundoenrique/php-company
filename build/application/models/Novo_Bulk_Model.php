@@ -748,7 +748,6 @@ class Novo_Bulk_Model extends NOVO_Model {
 									$bulkList['bulkTotalAmount'] = floatval($bulk->montoRecarga) + floatval($bulk->montoComision);
 									$serviceOrders['bulk'][] = (object) $bulkList;
 								}
-								//$serviceOrders['bulk'] = new stdClass();
 								break;
 						}
 					}
@@ -854,10 +853,52 @@ class Novo_Bulk_Model extends NOVO_Model {
 
 		switch ($this->isResponseRc) {
 			case 0:
-				$this->response->title = 'Generar orden de servicio';
-				$this->response->msg = 'Orden generada exitosamente';
-				$this->response->icon = lang('GEN_ICON_SUCCESS');
-				$this->response->data['btn1']['action'] = 'close';
+				$this->response->code = 0;
+				$this->response->data = lang('GEN_LINK_CONS_ORDERS_SERV');
+
+				foreach($response->lista AS $list) {
+					$orderList = [];
+					foreach($list AS $key => $value) {
+						switch ($key) {
+							case 'idOrden':
+								$serviceOrders['OrderNumber'] = $value;
+								break;
+							case 'fechaGeneracion':
+								$serviceOrders['Orderdate'] = $value;
+								break;
+							case 'montoComision':
+								$serviceOrders['OrderCommission'] = $value;
+								break;
+							case 'montoIVA':
+								$serviceOrders['OrderTax'] = $value;
+								break;
+							case 'montoOS':
+								$serviceOrders['OrderAmount'] = $value;
+								break;
+							case 'montoDeposito':
+								$serviceOrders['OrderDeposit'] = $value;
+								break;
+							case 'lotes':
+								$serviceOrders['bulk'] = [];
+								foreach($value AS $bulk) {
+									$bulkList['bulkNumber'] = $bulk->acnumlote;
+									$bulkList['bulkLoadDate'] = $bulk->dtfechorcarga;
+									$bulkList['bulkLoadType'] = ucfirst(mb_strtolower($bulk->acnombre));
+									$bulkList['bulkRecords'] = $bulk->ncantregs;
+									$bulkList['bulkStatus'] = ucfirst(mb_strtolower($bulk->status));
+									$bulkList['bulkAmount'] = floatval($bulk->montoRecarga);
+									$bulkList['bulkCommisAmount'] = floatval($bulk->montoComision);
+									$bulkList['bulkTotalAmount'] = floatval($bulk->montoRecarga) + floatval($bulk->montoComision);
+									$serviceOrders['bulk'][] = (object) $bulkList;
+								}
+								break;
+						}
+					}
+
+					$serviceOrdersList[] = (object) $serviceOrders;
+				}
+
+				$this->session->set_flashdata('serviceOrdersList', $serviceOrdersList);
 				break;
 
 			case -5:

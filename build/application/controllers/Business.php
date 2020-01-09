@@ -132,7 +132,7 @@ class Business extends NOVO_Controller {
 		$this->render->lotsTotal = $detailList->data->productSummary->lots;
 		$this->render->toSign = $detailList->data->productSummary->toSign;
 		$this->render->toAuthorize = $detailList->data->productSummary->toAuthorize;
-		$this->render->OrderServLink = $this->verify_access->verifyAuthorization('TEBORS') ? lang('GEN_LINK_ORDERS_SERV') : lang('GEN_NO_LINK');
+		$this->render->OrderServLink = $this->verify_access->verifyAuthorization('TEBORS') ? lang('GEN_LINK_CONS_ORDERS_SERV') : lang('GEN_NO_LINK');
 		$this->render->orderDisabled = $this->render->OrderServLink == lang('GEN_NO_LINK') ? 'is-disabled' : '';
 		$this->render->serviceOrders = $detailList->data->productSummary->serviceOrders;
 		$this->render->serviceOrdersNoCon = $detailList->data->productSummary->serviceOrdersNoCon;
