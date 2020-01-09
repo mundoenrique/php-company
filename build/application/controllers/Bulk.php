@@ -127,7 +127,13 @@ class Bulk extends NOVO_Controller {
 			"third_party/additional-methods",
 			"bulk/authorize_bulk"
 		);
-		$responseList = $this->loadModel();
+
+		if($this->session->flashdata('bulkList')) {
+			$responseList = $this->session->flashdata('bulkList');
+		} else {
+			$responseList = $this->loadModel();
+		}
+
 		$this->responseAttr($responseList);
 		$this->render->signBulk = $responseList->data->signBulk;
 		$this->render->authorizeBulk = $responseList->data->authorizeBulk;

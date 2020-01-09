@@ -525,67 +525,11 @@ class Novo_Bulk_Model extends NOVO_Model {
 
 
 		$response = $this->sendToService(lang('GEN_AUTHORIZE_BULK_LIST'));
-		$signBulk = [];
-		$authorizeBulk = [];
-		$authorizeAttr = [];
-		$allBulk = 'no-select-checkbox';
-
-		if(verifyDisplay('body', lang('GEN_AUTHORIZE_BULK_LIST'), lang('GEN_TAG_ALL_BULK'))) {
-			$allBulk = 'toggle-all';
-		}
-
-		$sign = TRUE;
-		$auth = TRUE;
 
 		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
-				$order = (int) $response->usuario->orden;
-
-				if($order == 1) {
-					$auth = FALSE;
-				}
-
-				if($order > 1) {
-					$sign = FALSE;
-				}
-
-				if(!empty($response->listaPorFirmar)) {
-					foreach($response->listaPorFirmar AS $bulk) {
-						$detailBulk['idBulk'] = $bulk->acidlote;
-						$detailBulk['bulkNumber'] = $bulk->acnumlote;
-						$detailBulk['loadDate'] = $bulk->dtfechorcarga;
-						$detailBulk['idType'] = $bulk->ctipolote;
-						$detailBulk['type'] = ucwords(mb_strtolower(substr($bulk->acnombre, 0, 20)));
-						$detailBulk['records'] = $bulk->ncantregs;
-						$detailBulk['amount'] = $bulk->nmonto;
-						$detailBulk['selectBulk'] = $sign ? '' : 'no-select-checkbox';
-						$signBulk[] = (object) $detailBulk;
-					}
-				}
-
-				if(!empty($response->listaPorAutorizar)) {
-					foreach($response->listaPorAutorizar AS $bulk) {
-						$detailBulk['idBulk'] = $bulk->acidlote;
-						$detailBulk['bulkNumber'] = $bulk->acnumlote;
-						$detailBulk['loadDate'] = $bulk->dtfechorcarga;
-						$detailBulk['idType'] = $bulk->ctipolote;
-						$detailBulk['type'] = ucwords(mb_strtolower(substr($bulk->acnombre, 0, 20)));
-						$detailBulk['records'] = $bulk->ncantregs;
-						$detailBulk['amount'] = $bulk->nmonto;
-						$detailBulk['selectBulk'] = $auth ? '' : 'no-select-checkbox';
-						$detailBulk['selectRow'] = mb_strtoupper($bulk->accodusuarioa) == $this->userName ? 'no-select-checkbox' : '';
-						$detailBulk['selectRowContent'] = mb_strtoupper($bulk->accodusuarioa) == $this->userName ? 'TRUE' : '';
-						$authorizeBulk[] = (object) $detailBulk;
-					}
-				}
-
-				$authorizeAttr = (object) [
-					'toPAy' => $response->ordenXPagar,
-					'allBulk' => $allBulk,
-					'sign' => $sign,
-					'auth' => $auth
-				];
+				$response = $this->callWs_MakeBulkList_Bulk($response);
 				break;
 			case -38:
 				$this->response->code = 3;
@@ -594,9 +538,9 @@ class Novo_Bulk_Model extends NOVO_Model {
 				break;
 		}
 
-		$this->response->data->signBulk = (object) $signBulk;
-		$this->response->data->authorizeBulk = (object) $authorizeBulk;
-		$this->response->data->authorizeAttr = $authorizeAttr;
+		$this->response->data->signBulk = (object) $response->signBulk;
+		$this->response->data->authorizeBulk = (object) $response->authorizeBulk;
+		$this->response->data->authorizeAttr = $response->authorizeAttr;
 
 		return $this->responseToTheView(lang('GEN_AUTHORIZE_BULK_LIST'));
 	}
@@ -936,19 +880,130 @@ class Novo_Bulk_Model extends NOVO_Model {
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date January 05th, 2019
 	 */
-	public function callWs_cancelServiceOrder_Bulk($dataRequest)
+	public function callWs_CancelServiceOrder_Bulk($dataRequest)
 	{
 		log_message('INFO', 'NOVO Bulk Model: cancelServiceOrder Method Initialized');
 
 		$this->className = 'com.novo.objects.MO.ListadoOrdenServicioMO';
 		$this->dataAccessLog->modulo = 'Lotes';
 		$this->dataAccessLog->function = 'Orden de servicio';
-		$this->dataAccessLog->operation = 'Generar orden de servicio';
+		$this->dataAccessLog->operation = 'Cancelar orden de servicio';
 
-		$this->dataRequest->idOperation = 'generarOS';
+		$listTemp = [];
+		$listTempNoBill = [];
+
+		if(isset($dataRequest->tempOrders)) {
+			$tempOrders = explode(',', $dataRequest->tempOrders);
+			array_pop($tempOrders);
+			foreach($tempOrders AS $temp) {
+				$list['idOrdenTemp'] = $temp;
+				$listTemp[] = (object) $list;
+			}
+		}
+
+		$this->dataRequest->idOperation = 'cancelarOS';
+		$this->dataRequest->lista = $listTemp;
+		$this->dataRequest->lotesNF[] = [
+			'accodcia' => $this->session->enterpriseInf->enterpriseCode,
+			'accodgrupo' => $this->session->enterpriseInf->enterpriseGroup,
+			'acrif' => $this->session->enterpriseInf->idFiscal,
+			'actipoproducto' => $this->session->productInf->productPrefix,
+			'accodusuarioc' => $this->userName
+		];
 
 		$response = $this->sendToService('cancelServiceOrder');
 
+		switch ($this->isResponseRc) {
+			case 0:
+				$this->response->code = 0;
+				$responseList = new stdClass();
+				$responseList->code = 0;
+				$responseList->data = $this->callWs_MakeBulkList_Bulk($response);
+				$this->session->set_flashdata('bulkList', $responseList);
+				$this->response->data = base_url('lotes-autorizacion');
+				break;
+		}
+
+		if($this->isResponseRc != 0) {
+			$serviceOrdersList = $this->session->flashdata('serviceOrdersList');
+			$bulkNotBillable = $this->session->flashdata('bulkNotBillable');
+			$this->session->set_flashdata('serviceOrdersList', $serviceOrdersList);
+			$this->session->set_flashdata('bulkNotBillable', $bulkNotBillable);
+		}
+
 		return $this->responseToTheView('cancelServiceOrder');
+	}
+	/**
+	 * @info Arma la respuesta para la lista de lotes por autorizar
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date January 08th, 2019
+	 */
+	private function callWs_MakeBulkList_Bulk($bulkList)
+	{
+		log_message('INFO', 'NOVO Bulk Model: MakeBulkList Method Initialized');
+
+		$signBulk = [];
+		$authorizeBulk = [];
+		$authorizeAttr = [];
+		$allBulk = 'no-select-checkbox';
+
+		if(verifyDisplay('body', lang('GEN_AUTHORIZE_BULK_LIST'), lang('GEN_TAG_ALL_BULK'))) {
+			$allBulk = 'toggle-all';
+		}
+
+		$sign = TRUE;
+		$auth = TRUE;
+		$order = (int) $bulkList->usuario->orden;
+
+		if($order == 1) {
+			$auth = FALSE;
+		}
+
+		if($order > 1) {
+			$sign = FALSE;
+		}
+
+		if(!empty($bulkList->listaPorFirmar)) {
+			foreach($bulkList->listaPorFirmar AS $bulk) {
+				$detailBulk['idBulk'] = $bulk->acidlote;
+				$detailBulk['bulkNumber'] = $bulk->acnumlote;
+				$detailBulk['loadDate'] = $bulk->dtfechorcarga;
+				$detailBulk['idType'] = $bulk->ctipolote;
+				$detailBulk['type'] = ucwords(mb_strtolower(substr($bulk->acnombre, 0, 20)));
+				$detailBulk['records'] = $bulk->ncantregs;
+				$detailBulk['amount'] = $bulk->nmonto;
+				$detailBulk['selectBulk'] = $sign ? '' : 'no-select-checkbox';
+				$signBulk[] = (object) $detailBulk;
+			}
+		}
+
+		if(!empty($bulkList->listaPorAutorizar)) {
+			foreach($bulkList->listaPorAutorizar AS $bulk) {
+				$detailBulk['idBulk'] = $bulk->acidlote;
+				$detailBulk['bulkNumber'] = $bulk->acnumlote;
+				$detailBulk['loadDate'] = $bulk->dtfechorcarga;
+				$detailBulk['idType'] = $bulk->ctipolote;
+				$detailBulk['type'] = ucwords(mb_strtolower(substr($bulk->acnombre, 0, 20)));
+				$detailBulk['records'] = $bulk->ncantregs;
+				$detailBulk['amount'] = $bulk->nmonto;
+				$detailBulk['selectBulk'] = $auth ? '' : 'no-select-checkbox';
+				$detailBulk['selectRow'] = mb_strtoupper($bulk->accodusuarioa) == $this->userName ? 'no-select-checkbox' : '';
+				$detailBulk['selectRowContent'] = mb_strtoupper($bulk->accodusuarioa) == $this->userName ? 'TRUE' : '';
+				$authorizeBulk[] = (object) $detailBulk;
+			}
+		}
+
+		$authorizeAttr = (object) [
+			'toPAy' => $bulkList->ordenXPagar,
+			'allBulk' => $allBulk,
+			'sign' => $sign,
+			'auth' => $auth
+		];
+		$response = new stdClass();
+		$response->signBulk = (object) $signBulk;
+		$response->authorizeBulk = (object) $authorizeBulk;
+		$response->authorizeAttr = $authorizeAttr;
+
+		return $response;
 	}
 }

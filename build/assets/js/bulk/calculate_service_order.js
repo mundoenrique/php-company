@@ -71,7 +71,6 @@ $(function() {
 			var btnAction = $(this);
 			btnText = $(this).text();
 			$(this).html(loader);
-			insertFormInput(true)
 		}
 
 		if($(this).attr('id') == 'cancel-bulk-btn') {
@@ -83,20 +82,25 @@ $(function() {
 			bulkNoBill: $('#bulk-no-bil').val()
 		}
 
+		insertFormInput(true)
+
 		verb = 'POST'; who = 'Bulk';
 		callNovoCore(verb, who, where, data, function(response) {
 
-			notiSystem(response.title, response.msg, response.icon, response.data);
-			btnAction.html(btnText);
-			insertFormInput(false);
+			if(response.code == 0) {
+				$(location).attr('href', response.data);
+			} else {
+				notiSystem(response.title, response.msg, response.icon, response.data);
+				btnAction.html(btnText);
+				insertFormInput(false);
+				$('.cover-spin').hide()
+			}
 
 		});
 	});
 });
 
 function format (bulk) {
-	// `d` is the original data object for the row
-
 	var table, body = '';
 	bulk = JSON.parse(bulk)
 	$.each(bulk, function(key, value){
