@@ -218,6 +218,7 @@ if(!function_exists('languajeLoad')) {
 					'authorizeBulkList'	=> ['bulk'],
 					'authorizeBulk'	=> ['bulk'],
 					'deleteConfirmBulk'	=> ['bulk'],
+					'calculateServiceOrder'	=> ['bulk'],
 				];
 		}
 
