@@ -31,9 +31,9 @@ $(document).ready(function () {
 	})
 	options = {
 		pattern: 'mm/yyyy',
-		selectedYear: 2019,
+		selectedYear: new Date().getFullYear(),
 		startYear: 2008,
-		finalYear: 2019,
+		finalYear: new Date().getFullYear(),
 		monthNames: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic']
 	};
 
