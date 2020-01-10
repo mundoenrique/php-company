@@ -35,11 +35,11 @@
 					<a class="btn btn-link btn-small-xs mx-4 px-0 big-modal <?= $authDisabled; ?>" href="<?= $bulkAuthLink; ?>">
 						<?= novoLang(lang('PRODUCTS_LOTS_TOTAL'), [$lotsTotal, $toSign, $toAuthorize]) ?>
 					</a>
-					<a class="btn btn-link btn-small-xs mx-4 px-0 <?= $orderDisabled; ?>" href="<?= $OrderServLink; ?>">
+					<a class="btn btn-link btn-small-xs mx-4 px-0 big-modal <?= $orderDisabled; ?>" href="<?= $OrderServLink; ?>">
 						<?= novoLang(lang('PRODUCTS_ORDERSERV_TOTAL'), [$serviceOrders, $serviceOrdersNoCon, $serviceOrdersCon]) ?>
 					</a>
 					<?php if($viewSomeAttr): ?>
-					<a class="btn btn-link btn-small-xs mx-4 px-0 <?= $masterTransDisabled ?>" href="<?= $masterTransLink; ?>">
+					<a class="btn btn-link btn-small-xs mx-4 px-0 big-modal <?= $masterTransDisabled ?>" href="<?= $masterTransLink; ?>">
 						<?= novoLang(lang('PRODUCTS_CARDS_TOTAL'), [$totalCards, $activeCards, $inactiveCards]) ?>
 					</a>
 					<?php endif; ?>

@@ -1,6 +1,9 @@
 'use strict'
 var resultServiceOrders;
 $(function() {
+	var firstDate;
+	var lastdate
+	form = $('#service-orders-form');
 	resultServiceOrders = $('#resultServiceOrders').DataTable({
 		drawCallback: function(d) {
 			$('#pre-loader').remove();
@@ -8,15 +11,6 @@ $(function() {
 		},
     "ordering": false,
     "pagingType": "full_numbers",
-    "columnDefs": [
-      {"targets": 3,
-      render: function ( data, type, row ) {
-        return data.length > 20 ?
-				  data.substr( 0, 20 ) +'…' :
-				  data;
-        }
-      }
-    ],
     "language": {
       "sProcessing": "Procesando...",
       "sLengthMenu": "Mostrar _MENU_ registros",
@@ -57,6 +51,78 @@ $(function() {
 			row.child(format(bulk)).show();
 			tr.addClass('shown');
     }
+	});
+
+	$('#datepicker_start, #datepicker_end').datepicker({
+		onSelect: function(selectedDate) {
+			var dateSelected = selectedDate.split('/');
+			dateSelected = dateSelected[1]+'/'+dateSelected[0]+'/'+dateSelected[2]
+			var inputDate = $(this).attr('id');
+			var maxTime = new Date(dateSelected);
+
+			if(inputDate == 'datepicker_start'){
+				$('#datepicker_end').datepicker('option', 'minDate', selectedDate);
+				maxTime.setDate(maxTime.getDate() - 1);
+				maxTime.setMonth(maxTime.getMonth() + 3);
+
+				if(currentDate > maxTime) {
+					$('#datepicker_end').datepicker('option', 'maxDate', maxTime);
+				}
+			}
+
+			if(inputDate == 'datepicker_end'){
+				$('#datepicker_start').datepicker('option', 'maxDate', selectedDate);
+			}
+
+			if($('#datepicker_start').val() != '' && $('#datepicker_end').val() != '') {
+				$('input:radio').prop('checked', false);
+				firstDate = $('#datepicker_start').val();
+				lastdate = $('#datepicker_end').val();
+			}
+		}
+  });
+
+	$(":radio").on("change", function() {
+		$('#datepicker_start, #datepicker_end').datepicker('setDate', null);
+		$('.help-block').text('');
+		form.validate().resetForm();
+		var timeBefore = parseInt($(this).val());
+		var initDate = new Date();
+		var finalDate = new Date();
+		initDate.setDate(initDate.getDate() - timeBefore);
+		initDate = initDate.getDate()+'/'+(initDate.getMonth()+1)+'/'+initDate.getFullYear();
+		finalDate = finalDate.getDate()+'/'+(finalDate.getMonth()+1)+'/'+finalDate.getFullYear();
+		firstDate = initDate;
+		lastdate = finalDate;
+	});
+
+	$('#service-orders-btn').on('click', function(e) {
+		e.preventDefault();
+		var btnAction = $(this);
+		btnText = btnAction.text().trim();
+		formInputTrim(form);
+		validateForms(form);
+
+		if(form.valid()) {
+			btnAction.html(loader);
+			data = {
+				initialDate: firstDate,
+				finalDate: lastdate,
+				status: $('#status-order').val()
+			}
+			insertFormInput(true);
+			verb = 'POST'; who = 'Inquiries'; where = 'GetServiceOrders';
+			callNovoCore(verb, who, where, data, function(response) {
+				if(response.code == 0) {
+					$(location).attr('href', response.data);
+				} else {
+					notiSystem(response.title, response.msg, response.icon, response.data);
+					btnAction.html(btnText);
+					insertFormInput(false);
+				}
+			});
+		}
+
 	});
 })
 

@@ -6,8 +6,8 @@ function validateForms(form) {
 	var validNickName = /^([a-z]{2,}[0-9_]*)$/i;
 	var regNumberValid = /^['a-z0-9']{6,45}$/i;
 	var shortPhrase = /^['a-z0-9ñáéíóú ().']{4,25}$/i;
-	var middlePhrase = /^['a-z0-9ñáéíóú ().']{7,45}$/i;
-	var longPhrase = /^['a-z0-9ñáéíóú ().']{10,70}$/i;
+	var middlePhrase = /^['a-z0-9ñáéíóú ().']{5,45}$/i;
+	var longPhrase = /^[a-z0-9ñáéíóú ().-]{8,70}$/i;
 	var emailValid = /^([a-zA-Z]+[0-9_.+-]*)+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 	var alphanumunder = /^([\w.\-+&ñÑ ]+)+$/i;
 	var alphanum = /^[a-z0-9]+$/i;
@@ -49,7 +49,24 @@ function validateForms(form) {
 			"type-bulk": 	{requiredTypeBulk: true},
 			"file-bulk":	{required: true, extension: "xls|xlsx|txt"},
 			"password": {required: true, pattern: userPassword},
-			"type-order": {required: true}
+			"type-order": {required: true},
+			"datepicker_start": {
+				required:{
+					depends: function(element) {
+						return !($('#five-days').is(':checked') || $('#ten-days').is(':checked'));
+					}
+				},
+				pattern: date.dmy
+			},
+			"datepicker_end": {
+				required:{
+					depends: function(element) {
+						return !($('#five-days').is(':checked') || $('#ten-days').is(':checked'));
+					}
+				},
+				pattern: date.dmy
+			},
+			"status-order": {required: true, requiredTypeOrder: true}
 		},
 		messages: {
 			"user_login": lang.VALIDATE_USERLOGIN,
@@ -62,6 +79,9 @@ function validateForms(form) {
 			"file-bulk": lang.VALIDATE_BULK_FILE,
 			"password": lang.VALIDATE_PASS,
 			"type-order": 'Selecciona un tipo de orden',
+			"datepicker_start": 'Indica fecha inicial',
+			"datepicker_end": 'Indica fecha final',
+			"status-order": 'Selecciona un estado de orden',
 		},
 		errorPlacement: function(error, element) {
 			$(element).closest('.form-group').find('.help-block').html(error.html());
@@ -98,6 +118,12 @@ function validateForms(form) {
 	$.validator.methods.differs = function(value, element, param) {
 		var target = $(param);
 		return value !== target.val();
+	}
+
+	$.validator.methods.requiredTypeOrder = function(value, element, param) {
+		var eval1 = longPhrase.test($(element).find('option:selected').text().trim());
+		var eval2 = alphanum.test($(element).find('option:selected').val().trim());
+		return eval1 && eval2;
 	}
 
 	form.validate().resetForm();

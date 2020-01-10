@@ -42,6 +42,9 @@ class Inquiries extends NOVO_Controller {
 		}
 
 		$this->responseAttr();
+		$this->load->model('Novo_Inquiries_Model', 'Inquiries');
+		$responseList = $this->Inquiries->callWs_ServiceOrderStatus_Inquiries();
+		$this->render->orderStatus = $responseList->data->orderStatus;
 		$this->render->renderOrderList = $renderOrderList;
 		$this->render->orderList = $orderList;
 		$this->render->titlePage = lang('GEN_SERVICE_ORDERS_TITLE');

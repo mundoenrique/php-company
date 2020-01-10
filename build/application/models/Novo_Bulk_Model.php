@@ -184,7 +184,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 
 				foreach($response->lista AS $pos => $types) {
 					$type = [];
-					$type['key'] = ucfirst(mb_strtolower($response->lista[$pos]->idTipoLote));
+					$type['key'] = mb_strtoupper($response->lista[$pos]->idTipoLote);
 					$type['format'] = ucfirst(mb_strtolower($response->lista[$pos]->formato));
 					$type['text'] = ucfirst(mb_strtolower($response->lista[$pos]->tipoLote));
 					$typesLot[] = (object) $type;

@@ -244,6 +244,23 @@ $config = [
 			'rules' => 'trim|regex_match[/^([\w,]*)+$/i]'
 		]
 	],
+	'getServiceOrders' => [
+		[
+			'field' => 'initialDate',
+			'label' => 'initialDate',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+		],
+		[
+			'field' => 'finalDate',
+			'label' => 'finalDate',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+		],
+		[
+			'field' => 'status',
+			'label' => 'status',
+			'rules' => 'trim|regex_match[/^[a-z0-9]+$/i]'
+		]
+	],
 	'dash-products' => [
 		[
 			'field' => 'data-accodgrupoe',

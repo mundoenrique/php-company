@@ -20,41 +20,42 @@
 			<div class="search-criteria-order flex pb-3 flex-column w-100">
 				<span class="line-text mb-2 h4 semibold primary">Criterio de búsqueda</span>
 				<div class="flex my-2 px-5">
-					<form method="post" class="w-100">
+					<form id="service-orders-form" method="post" class="w-100">
 						<div class="row">
 							<div class="form-group mr-auto col-3 col-lg-auto col-xl-auto">
 								<div class="custom-option-c custom-radio custom-control-inline">
-									<input type="radio" id="fiveDays" name="days" class="custom-option-input">
-									<label class="custom-option-label nowrap" for="fiveDays">5 días</label>
+									<input type="radio" id="five-days" name="days" class="custom-option-input" value="5">
+									<label class="custom-option-label nowrap" for="five-days">5 días</label>
 								</div>
 								<div class="custom-option-c custom-radio custom-control-inline">
-									<input type="radio" id="tenDays" name="days" class="custom-option-input">
-									<label class="custom-option-label nowrap" for="tenDays">10 días</label>
+									<input type="radio" id="ten-days" name="days" class="custom-option-input" value="10">
+									<label class="custom-option-label nowrap" for="ten-days">10 días</label>
 								</div>
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-4 col-lg-3 col-xl-auto">
 								<label for="datepicker_start">Fecha inicial</label>
-								<input id="datepicker_start" class="form-control" name="datepicker" type="text">
+								<input id="datepicker_start" name="datepicker_start" class="form-control" name="datepicker" type="text" placeholder="DD/MM/AAA">
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-4 col-lg-3 col-xl-auto">
 								<label for="datepicker_end">Fecha final</label>
-								<input id="datepicker_end" class="form-control" name="datepicker" type="text">
+								<input id="datepicker_end" name="datepicker_end" class="form-control" name="datepicker" type="text" placeholder="DD/MM/AAA">
 								<div class="help-block "></div>
 							</div>
 							<div class="form-group col-4 col-lg-2 col-xl-3">
-								<label>Estatus de Lote</label>
-								<select class="select-box custom-select flex h6 w-100">
-									<option selected disabled>Seleccionar</option>
-									<option>Option 1</option>
-									<option>Option 2</option>
-									<option>Option 3</option>
+								<label>Estado</label>
+								<select id="status-order" name="status-order" class="select-box custom-select flex h6 w-100 form-control">
+									<?php foreach($orderStatus AS $pos => $value): ?>
+									<option value="<?= $value->key; ?>" <?= $pos != 0 ? '' : 'selected disabled' ?>>
+										<?= $value->text; ?>
+									</option>
+									<?php endforeach; ?>
 								</select>
 								<div class="help-block"></div>
 							</div>
 							<div class="col-xl-auto flex items-center ml-auto">
-								<button class="btn btn-primary btn-small">
+								<button id="service-orders-btn" class="btn btn-primary btn-small btn-loading">
 									Buscar
 								</button>
 							</div>

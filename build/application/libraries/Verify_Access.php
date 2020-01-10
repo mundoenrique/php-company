@@ -174,6 +174,7 @@ class Verify_Access {
 				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBAUT') && $this->verifyAuthorization('TEBORS'));
 				break;
 			case 'serviceOrders':
+			case 'getServiceOrders':
 				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBORS'));
 				break;
 		}
