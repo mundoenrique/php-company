@@ -470,12 +470,12 @@ $(".table-text-service").on('click', '#RECIBIR_EN_BANCO', function() {
 	serv_var.lote.push($(this).parents('tr').attr('num_lote'));
 
 	alerta = 'la acción de recibir en banco,'
-	op = "recibir_banco"
+	op = "Recibido en Banco"
 	url = "/servicios/cambiarEstadoemision"
 	procesar('Recibir en banco',url,op,alerta)
 });
 
-// ACCION EVENTO ICON->RECIBIR EN BANCO
+// ACCION EVENTO ICON->CONSULTA DE SALDO
 $(".table-text-service").on('click', '#CONSULTA_SALDO_TARJETA', function() {
 
 	resett();
@@ -502,7 +502,7 @@ $(".table-text-service").on('click', '#RECIBIR_EN_EMPRESA', function() {
 	serv_var.lote.push($(this).parents('tr').attr('num_lote'));
 
 	alerta = 'la acción de recibir en empresa,'
-	op = "recibir_empresa"
+	op = "Recibido en empresa"
 	url = "/servicios/cambiarEstadoemision";
 	procesar('Recibir tarjeta en empresa',url,op,alerta)
 
@@ -517,7 +517,6 @@ $(".table-text-service").on('click', '#BLOQUEO_TARJETA', function() {
 	serv_var.estado_nuevo = 'Bloqueada';
 	serv_var.estado_anterior = ['Desbloqueada'];
 	serv_var.lote.push($(this).parents('tr').attr('num_lote'));
-
 	op = 'bloqueo'
 	url = '/servicios/cambiarEstadotarjeta'
 
@@ -534,7 +533,6 @@ $(".table-text-service").on('click', '#DESBLOQUEO', function() {
 	serv_var.estado_nuevo = 'Desbloqueada';
 	serv_var.estado_anterior = ['Bloqueada'];
 	serv_var.lote.push($(this).parents('tr').attr('num_lote'));
-
 	op = 'desbloqueo'
 	url = '/servicios/cambiarEstadotarjeta'
 
@@ -554,7 +552,7 @@ $(".table-text-service").on('click', '#ENVIAR_A_EMPRESA', function() {
 	serv_var.lote.push($(this).parents('tr').attr('num_lote'));
 
 	alerta = 'el envío a empresa,'
-	op = "enviar_empresa"
+	op = "Enviado a Empresa"
 	url = "/servicios/cambiarEstadoemision"
 	procesar('Enviar tarjeta a empresa',url,op,alerta)
 
@@ -571,7 +569,7 @@ $(".table-text-service").on('click', '#ENTREGAR_A_TARJETAHABIENTE', function() {
 	serv_var.lote.push($(this).parents('tr').attr('num_lote'));
 
 	alerta = 'la entrega a tarjetahabiente,'
-	op = "entregar_tarjetahabiente"
+	op = "Entregada a Tarjetahabiente / Activa"
 	url = "/servicios/cambiarEstadoemision"
 	procesar('Entregar tarjeta',url,op,alerta)
 
@@ -1000,10 +998,10 @@ function llamarWSCambio(pass,mensaje,url,op,alerta) {
 				}
 				switch(op){
 					case 'saldo':
-					case 'recibir_banco':
-					case 'enviar_empresa':
-					case 'recibir_empresa':
-					case 'entregar_tarjetahabiente':
+					case 'Recibido en Banco':
+					case 'Enviado a Empresa':
+					case 'Recibido en empresa':
+					case 'Entregada a Tarjetahabiente / Activa':
 					nota = 'Proceso realizado correctamente';
 						break;
 					case 'bloqueo':
@@ -1078,6 +1076,24 @@ $('#button-masivo').click(function() {
 	var clamasivo = $('#claveMasivo')
 	var errmasivo=''
 
+	switch(serv_var.estado_nuevo){
+		case 'saldo':
+			alerta = 'la consulta de saldo,';
+			break;
+		case 'Recibido en Banco':
+			alerta = 'la acción de recibir en banco,';
+			break;
+		case 'Recibido en empresa':
+			alerta = 'la acción de recibir en empresa,'
+			break;
+		case 'Enviado a Empresa':
+			alerta = 'el envío a empresa,'
+			break;
+		case 'Entregada a Tarjetahabiente / Activa':
+			alerta = 'la entrega a tarjetahabiente,'
+			break;
+		}
+
 	url = (urlproc[1] == 1) ? '/servicios/cambiarEstadoemision' : '/servicios/cambiarEstadotarjeta';
 
 	if(serv_var.noTarjetas.length == 0)
@@ -1096,7 +1112,7 @@ $('#button-masivo').click(function() {
 	}
 	else
 	{
-		llamarWSCambio(clamasivo.val(), 'Proceso Masivo',url,urlproc[0]);
+		llamarWSCambio(clamasivo.val(), 'Proceso Masivo',url,urlproc[0],alerta);
 	}
 });
 
