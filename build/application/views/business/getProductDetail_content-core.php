@@ -18,7 +18,7 @@
 			<div class="flex mb-3 mx-4 justify-center">
 				<div class="product-presentation relative">
 					<img class="card-image" src="<?= $this->asset->insertFile('programs/'.$productImg); ?>" alt="<?= $productName; ?>" />
-					<img class="item-network" src="<?= $this->asset->insertFile('brands/'.$productImgBrand); ?>" alt=<?= $productName; ?> />
+					<img class="item-network" src="<?= $this->asset->insertFile('brands/'.$productImgBrand); ?>" alt="<?= $productImgBrand; ?>" />
 				</div>
 			</div>
 

@@ -1,4 +1,5 @@
 'use strict'
+var pendingBulk;
 $(function () {
 	if(code > 2 ) {
 		$('#content-datatable').addClass('none');
@@ -90,7 +91,7 @@ $(function () {
 		}
 	}
 
-  $('#pending-bulk').DataTable({
+  pendingBulk = $('#pending-bulk').DataTable({
 		drawCallback: function(d) {
 			$('#pre-loader').remove();
 			$('#content-datatable').removeClass('hide');
@@ -153,6 +154,7 @@ $(function () {
 				break;
 			case lang.GEN_BTN_DELETE:
 				var oldID = $('#accept').attr('id');
+				$(this).closest('tr').addClass('select');
 				$('#accept').attr('id', 'delete-bulk-btn');
 				var inputModal;
 				data = {
@@ -164,14 +166,19 @@ $(function () {
 						action: 'close'
 					}
 				}
-				var bulkNum = $(this).closest('tr').find('td:nth-child(3)').text();
+				var bulkFile = $(this).closest('tr').find('td:nth-child(3)').text();
 				inputModal = '<form id="delete-bulk-form" class="form-group">';
-				inputModal+= '<span class="regular"> '+lang.BULK_DELETE+': '+bulkNum+'</span>';
+				inputModal+= '<span class="regular"> '+lang.BULK_DELETE_DATE+': '+bulkFile+'</span>';
 				inputModal+= 		'<input id="password" class="form-control mt-2 h6 col-9" name="password" type="password" autocomplete="off" placeholder="'+lang.GEN_PLACE_PASSWORD+'">';
 				inputModal+= 		'<div class="help-block"></div>';
 				inputModal+= '</form>';
 				notiSystem(lang.BULK_DELETE_TITLE, inputModal, lang.GEN_ICON_INFO, data);
 				deleteBulk(oldID);
+				$('#cancel').on('click', function(e){
+					e.preventDefault();
+					$('#pending-bulk').find('tr').removeClass('select');
+					$('#delete-bulk-btn').attr('id', oldID);
+				});
 				break;
 		}
 
@@ -215,7 +222,10 @@ function deleteBulk(oldID) {
 			}
 			verb = 'POST'; who = 'Bulk'; where = 'DeleteNoConfirmBulk';
 			callNovoCore(verb, who, where, data, function(response) {
-				notiSystem(response.title, response.msg, response.icon, response.data);
+
+				if(response.cod == 0) {
+					pendingBulk.row('.select').remove().draw(false);
+				}
 			});
 		}
 	});

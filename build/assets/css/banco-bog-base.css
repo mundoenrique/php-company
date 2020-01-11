@@ -3737,3 +3737,8 @@ td > table.detail-lot {
 	max-width:12em;
 	overflow:hidden;
 }
+
+.img-brand-list {
+	width: 68px;
+	height: 40px;
+}

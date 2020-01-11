@@ -48,20 +48,25 @@ class Novo_Bulk_Model extends NOVO_Model {
 					$bulktatus = $response->lista[$pos]->estatus;
 
 					switch ($bulktatus) {
+						case '0':
+							$bulk['statusPr'] = '';
+							$bulk['statusColor'] = ' bg-yellow';
+							$bulk['statusText'] = lang('BULK_VALIDATING');
+							break;
 						case '1':
 							$bulk['statusPr'] = 'status-pr ';
 							$bulk['statusColor'] = ' bg-vista-blue';
-							$bulk['statusText'] = 'Válido';
+							$bulk['statusText'] = lang('BULK_VALID');
 							break;
 						case '5':
 							$bulk['statusPr'] = '';
 							$bulk['statusColor'] = ' bg-pink-salmon';
-							$bulk['statusText'] = 'Con errores';
+							$bulk['statusText'] = lang('BULK_NO_VALID');
 							break;
 						case '6':
 							$bulk['statusPr'] = 'status-pr ';
 							$bulk['statusColor'] = ' bg-trikemaster';
-							$bulk['statusText'] = 'Válido';
+							$bulk['statusText'] = lang('BULK_VALID');
 							break;
 					}
 
@@ -246,7 +251,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 
 			switch ($this->isResponseRc) {
 				case 0:
-					$this->response->msg = lang('BULK_SUCCESS');
+					$this->response->msg = novoLang(lang('BULK_SUCCESS'), substr($dataRequest->rawName, 0, 15).'...');
 					$this->response->icon = lang('GEN_ICON_SUCCESS');
 					$this->response->data['btn1']['link'] = base_url('cargar-lotes');
 					$respLoadBulk = TRUE;
@@ -265,7 +270,6 @@ class Novo_Bulk_Model extends NOVO_Model {
 					break;
 				case -128:
 					$code = 3;
-					$title = lang('BULK_NO_LOAD_TITLE');
 					$errorsHeader = $response->erroresFormato->erroresEncabezado->errores;
 					$errorsFields = $response->erroresFormato->erroresRegistros;
 					$errorsList = [];
@@ -293,24 +297,16 @@ class Novo_Bulk_Model extends NOVO_Model {
 
 			if($respLoadBulk) {
 				$this->response->code = isset($code) ? $code : 2;
-				$this->response->title = isset($code) ? $title : lang('BULK_TITLE');
+				$this->response->title = lang('BULK_TITLE_PAGE');
 				if($this->isResponseRc != 0) {
-					$this->response->data = [
-						'btn1'=> [
-							'action'=> 'close'
-						]
-					];
+					$this->response->data['btn1']['action'] = 'close';
 				}
 			}
 		} else {
 			$this->response->code = 2;
-			$this->response->title = lang('BULK_TITLE');
+			$this->response->title = lang('BULK_TITLE_PAGE');
 			$this->response->msg = lang('BULK_FILE_NO_MOVE');
-			$this->response->data = [
-				'btn1'=> [
-					'action'=> 'close'
-				]
-			];
+			$this->response->data['btn1']['action'] = 'close';
 		}
 
 		return $this->responseToTheView(lang('GEN_LOAD_BULK'));
@@ -349,20 +345,19 @@ class Novo_Bulk_Model extends NOVO_Model {
 
 		switch ($this->isResponseRc) {
 			case 0:
-				$this->response->code = 0;
+				$this->response->cod = 0;
 				$this->response->title = lang('BULK_DELETE_TITLE');
-				$this->response->msg = lang('BULK_DELETE_SUCCESS');
+				$this->response->msg = novoLang(lang('BULK_DELETE_SUCCESS'), $dataRequest->bulkTicked);
 				$this->response->icon = lang('GEN_ICON_SUCCESS');
 				$this->response->data['btn1'] = [
 					'text' => lang('GEN_BTN_ACCEPT'),
-					'link' => base_url('cargar-lotes'),
-					'action' => 'redirect'
+					'action' => 'close'
 				];
 				break;
 			case -1:
-				$this->response->code = 0;
 				$this->response->title = lang('BULK_DELETE_TITLE');
 				$this->response->msg = lang('RESP_PASSWORD_NO_VALID');
+				$this->response->icon = lang('GEN_ICON_WARNING');
 				$this->response->data['btn1'] = [
 					'text' => lang('GEN_BTN_ACCEPT'),
 					'action' => 'close'
@@ -478,7 +473,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 			case 0:
 				$this->response->code = 0;
 				$this->response->title = lang('BULK_CONFIRM_TITLE');
-				$this->response->msg = lang('BULK_CONFIRM_SUCCESS');
+				$this->response->msg = novolang(lang('BULK_CONFIRM_SUCCESS'), $bulkConfirmInfo->numLote);
 				$this->response->icon = lang('GEN_ICON_SUCCESS');
 				$this->response->data['btn1']['link'] = base_url(lang('GEN_LINK_BULK_AUTH'));
 				break;

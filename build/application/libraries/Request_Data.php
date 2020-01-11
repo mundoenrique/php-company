@@ -289,7 +289,7 @@ class Request_Data {
 						$programImg = url_title(mb_strtolower($value)).'.svg';
 
 						if(!file_exists(assetPath('images/programs/'.$programImg))) {
-							$programImg = 'default.svg';
+							$programImg = $this->CI->session->countryUri.'_default.svg';
 						}
 
 						$products->programImg = $programImg;

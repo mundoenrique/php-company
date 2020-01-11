@@ -131,11 +131,18 @@ function notiSystem(title, message, icon, data) {
     },
 		open: function (event, ui) {
 			$('.ui-dialog-titlebar-close').hide();
+			var classIcon = $('#system-icon').attr('class').split(' ');
+			classIcon = classIcon.pop();
+
+			if(classIcon != 'mt-0') {
+				$('#system-icon').removeClass(classIcon);
+			}
+
 			$('#system-icon').addClass(icon);
 			$('#system-msg').html(message);
 			$('#accept, #cancel').removeClass("ui-button ui-corner-all ui-widget");
-
 			createButton(dialogMoldal, btnAccept, btn1);
+
 			if(!btn2) {
 				btnCancel.hide();
 				btnAccept.addClass('modal-btn-primary');

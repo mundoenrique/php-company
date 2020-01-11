@@ -77,7 +77,7 @@ class CallModels extends Novo_Controller {
 		$pattern[0] = '/\s/';
 		$pattern[1] = '/\(/';
 		$replace[0] = '';
-		$replace[1] = '/_/';
+		$replace[1] = '_';
 		$filename = '_'.substr(preg_replace($pattern, $replace, $_POST['typeBulkText']), 0, 17);
 		$filenameT = time().'_'.date('s').$this->countryUri.$filename;
 		$filenameT = mb_strtolower($filenameT.'.'.$ext);

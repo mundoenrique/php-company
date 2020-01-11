@@ -194,7 +194,7 @@ class Novo_Business_Model extends NOVO_Model {
 			'name' => '--',
 			'imgProgram' => 'default.svg',
 			'brand' => '',
-			'imgBrand' => 'default.png',
+			'imgBrand' => 'default.svg',
 			'viewSomeAttr' => TRUE,
 			'prefix' => $productPrefix
 		];
@@ -219,13 +219,13 @@ class Novo_Business_Model extends NOVO_Model {
 					$imgBrand = url_title(trim(mb_strtolower($response->estadistica->producto->marca))).'_card.svg';
 
 					if(!file_exists(assetPath('images/brands/'.$imgBrand))) {
-						$imgBrand = 'default.png';
+						$imgBrand = 'default.svg';
 					}
 
 					$imgProgram = url_title(trim(mb_strtolower($response->estadistica->producto->nombre))).'.svg';
 
 					if(!file_exists(assetPath('images/programs/'.$imgProgram))) {
-						$imgProgram = 'default.svg';
+						$imgProgram = $this->countryUri.'_default.svg';
 					}
 
 					$productName = ucwords(mb_strtolower($response->estadistica->producto->descripcion));

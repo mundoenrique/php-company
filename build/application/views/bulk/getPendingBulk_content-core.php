@@ -117,6 +117,10 @@
 					</table>
 					<div class="mx-3 h3">
 						<div class="flex mt-4 items-center">
+							<div class="icon-square bg-yellow" alt=""></div>
+							<span class="pl-1 h6"><?= lang('BULK_VALIDATING_RECORDS'); ?></span>
+						</div>
+						<div class="flex mt-2 items-center">
 							<div class="icon-square bg-vista-blue" alt=""></div>
 							<span class="pl-1 h6"><?= lang('BULK_ALL_RECORDS'); ?></span>
 						</div>

@@ -42,8 +42,8 @@
 			<?php foreach($productList AS $pos => $products): ?>
 			<div class="select-product flex mb-1 pl-3 pr-4 py-1 bg-white justify-between items-center">
 				<div class="flex mr-3 mx-1 items-center">
-					<img src="<?= $this->asset->insertFile('programs/'.$products->programImg); ?>" alt="" />
-					<img class="mx-2" src="<?= $this->asset->insertFile('brands/'.$products->imgBrand); ?>" alt="" />
+					<img src="<?= $this->asset->insertFile('programs/'.$products->programImg); ?>" alt="<?= $products->programImg; ?>">
+					<img class="mx-2 img-brand-list" src="<?= $this->asset->insertFile('brands/'.$products->imgBrand); ?>" alt="<?= $products->imgBrand; ?>">
 					<div class="flex flex-column">
 						<span class="semibold primary"><?= $products->descripcion; ?></span>
 						<span class="h6 light text">
