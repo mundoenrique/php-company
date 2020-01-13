@@ -47,6 +47,17 @@ $(function () {
 		}
 	});
 
+	$('#search').on('keyup', function(){
+		if($(this).val().length >= 3) {
+			searchByText($(this).val())
+		} else {
+			enterpriseList.isotope({filter: '.page_1'});
+			$("#enterprise-list .card").removeClass(function (index, className) {
+				return (className.match (/(^|\s)search_\S+/g) || []).join(' ');
+			});
+		}
+	});
+
 	enterprisePages.on('click', function(e) {
 		e.preventDefault();
 		var event = $(e.target)
@@ -130,7 +141,28 @@ $(function () {
 			}
 		})
 		$('#show-page > span:first').addClass('page-current');
-	};
+	}
+
+	var searchByText = function(text) {
+		let count = 1;
+		let page = 1;
+		$('#enterprise-list').children('.card').each(function(index, element){
+			var enterpriseAttr = $(this).find('.product > span').text()
+
+			if(enterpriseAttr.indexOf(text.toUpperCase()) !== -1) {
+				if(count > 10) {
+					page++;
+					count = 1;
+				}
+				$(this).addClass('search_'+page)
+				count++;
+			}
+		});
+
+		orderPage('search_1', 1);
+		paginateList('search_1');
+		enterpriseList.isotope({ filter: '.search_1' });
+	}
 
 	SelectEnterprise.hover(function() {
 		if ($(this).find('span.danger').length) {

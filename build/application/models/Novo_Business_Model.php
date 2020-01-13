@@ -64,12 +64,11 @@ class Novo_Business_Model extends NOVO_Model {
 				}
 				break;
 			case -6:
-				$this->response->title = lang('ENTERPRISE_TITLE');
 				$this->response->code = 1;
+				$this->response->title = lang('ENTERPRISE_TITLE');
 				$this->response->data->text = lang('ENTERPRISE_NOT_ASSIGNED');
 			break;
 			default:
-				$this->response->title = lang('ENTERPRISE_TITLE');
 				$this->response->data->text = lang('GEN_ENTERPRISE_NOT_OBTEIN');
 				$this->response->data->resp['btn1']['link'] = base_url('cerrar-sesion');
 		}
