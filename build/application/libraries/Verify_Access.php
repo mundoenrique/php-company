@@ -121,7 +121,7 @@ class Verify_Access {
 
 		$auth = FALSE;
 		$user = $user ?: $this->user;
-		$freeAccess = ['login', 'finishSession', 'terms'];
+		$freeAccess = ['login', 'validateCaptcha', 'finishSession', 'terms'];
 		$auth = in_array($module, $freeAccess);
 
 		switch($module) {
