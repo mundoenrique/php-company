@@ -794,6 +794,11 @@ class Novo_Bulk_Model extends NOVO_Model {
 				$this->response->msg = lang('RESP_AUTH_ORDER_SERV');
 				$this->response->data['btn1']['action'] = 'close';
 				break;
+			case 100:
+				$this->response->title = lang('BULK_AUTH_TITLE');
+				$this->response->msg = novoLang(lang('BULK_AUTH_SUCCESS'), $this->userName);
+				$this->response->data['btn1']['link'] = 'lotes-autorizacion';
+				break;
 		}
 
 		return $this->responseToTheView(lang('GEN_AUTH_BULK'));
@@ -897,10 +902,10 @@ class Novo_Bulk_Model extends NOVO_Model {
 				break;
 
 			case -5:
-			$this->response->title = 'Generar orden de servicio';
-			$this->response->msg = 'No fue posible generar la orden de servicio';
-			$this->response->icon = lang('GEN_ICON_WARNING');
-			$this->response->data['btn1']['action'] = 'close';
+				$this->response->title = 'Generar orden de servicio';
+				$this->response->msg = 'No fue posible generar la orden de servicio';
+				$this->response->icon = lang('GEN_ICON_WARNING');
+				$this->response->data['btn1']['action'] = 'close';
 				break;
 		}
 
@@ -1023,8 +1028,10 @@ class Novo_Bulk_Model extends NOVO_Model {
 				$detailBulk['records'] = $bulk->ncantregs;
 				$detailBulk['amount'] = $bulk->nmonto;
 				$detailBulk['selectBulk'] = $auth ? '' : 'no-select-checkbox';
-				$detailBulk['selectRow'] = mb_strtoupper($bulk->accodusuarioa) == $this->userName ? 'no-select-checkbox' : '';
-				$detailBulk['selectRowContent'] = mb_strtoupper($bulk->accodusuarioa) == $this->userName ? 'TRUE' : '';
+				$listAth = mb_strtoupper($bulk->accodusuarioa);
+				$listAth = explode(',', $listAth);
+				$detailBulk['selectRow'] = in_array($this->userName, $listAth) ? 'no-select-checkbox' : '';
+				$detailBulk['selectRowContent'] = in_array($this->userName, $listAth) ? 'TRUE' : '';
 				$authorizeBulk[] = (object) $detailBulk;
 			}
 		}
