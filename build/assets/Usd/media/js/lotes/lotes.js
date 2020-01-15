@@ -5,6 +5,17 @@ $(function() { // Document ready
 	var ceo_cook;
 	 $('#lotes-2').show();
 	 $(".aviso").removeClass("elem-hidden");
+
+	 var top = ($('#sidebar-products').offset().top - 100) - parseFloat($('#sidebar-products').css('marginTop').replace(/auto/, 0));
+	 $(window).scroll(function (event) {
+		 var y = $(this).scrollTop();
+			if (y >= top) {       
+				$('#sidebar-products').css("margin-left", "0px");
+		} else {      
+				$('#sidebar-products').removeAttr("style")
+		 }
+	});
+
 		actualizarLote();
 
 	// Cargar archivo

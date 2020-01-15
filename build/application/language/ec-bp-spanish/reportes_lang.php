@@ -19,6 +19,15 @@ $lang['TOTAL_TARJETAS']= "Total";
 $lang['REPORTES_RADIO_ABONO']= "Abono";
 $lang['REPORTES_RADIO_CARGO']= "Cargo";
 $lang['TITULO_REPORTES_PROCEDIMIENTO']= "Procedimiento";
+$lang['FECHA_EMISION']= "Fecha emision";
+$lang['NUMERO_LOTE'] = "Número Lote";
+$lang['NUMERO_TARJETA'] = "Número de tarjeta";
+$lang['CEDULA'] = "Cedula";
+$lang['NOMBRE'] = "Nombre";
+$lang['APELLIDO'] = "Apellido";
+$lang['UBICACIÓN'] = "Ubicación";
+$lang['ESTADO_EMISION'] = "Estado Emision";
+$lang['ESTADO_PLASTICO'] = "Estado Plastico";
 
 //GRAFICO TARJETAS EMITIDAS
 $lang['CATEGORIA_UNO']= "Principal";
@@ -31,6 +40,7 @@ $lang['GRAFICO_TITULO_TEXT_TARJETAS']= "Tarjetas Emitidas";
 // CONTENEDOR DE CONSULTA - GENERAL DE TODOS LOS REPORTES
 $lang['REPORTES_SELECCION_EMPRESA']= "Empresa";
 $lang['TITULO_REPORTES_RANGO']= "Rango";
+$lang['TITULO_REPORTES_FECHAMES']= "Mes/Año";
 $lang['TITULO_REPORTES_FECHAINI']= "Fecha inicial";
 $lang['TITULO_REPORTES_FECHAFIN']= "Fecha final";
 $lang['CRITERIOS_BUSQUEDA']= "Criterio de búsqueda";
@@ -129,6 +139,9 @@ $lang['CUENTA_ESTADOS_DE_CUENTA'] = "Cuenta: ";
 $lang['CLIENTE_ESTADOS_DE_CUENTA'] = "Cliente: ";
 $lang['TARJETA_ESTADO_DE_CUENTA'] = "Tarjeta";
 $lang['FECHA_ESTADO_DE_CUENTA'] = "Fecha";
+$lang['FID_ESTADO_DE_CUENTA'] = "Fid";
+$lang['TERMINALTRANSACCION_ESTADO_DE_CUENTA'] = "Terminal";
+$lang['SECUENCIA_ESTADO_DE_CUENTA'] = "Secuencia";
 $lang['REFERENCIA_ESTADO_DE_CUENTA'] = "Referencia";
 $lang['DESCRIPCION_ESTADO_DE_CUENTA'] = "Descripción";
 

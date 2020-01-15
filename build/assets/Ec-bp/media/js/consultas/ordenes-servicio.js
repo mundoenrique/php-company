@@ -109,7 +109,7 @@ $(function () {
 					notificacion('Buscar orden de servicio', 'Rango de fecha Incoherente');
 				}
 			} else {
-				notificacion("Buscar orden de servicio", "Verifiqua los datos ingresados e intenta nuevamente");
+				notificacion("Buscar orden de servicio", "Verifica los datos ingresados e intenta nuevamente");
 			}
 		} else {
 			notificacion("Buscar orden de servicio", "<h2>Verifica que:</h2><h6>1. Has seleccionado un rango de fechas.</h6><h6>2. Has seleccionado un estatus de lote.</h6>")
@@ -251,11 +251,11 @@ $(function () {
 			"oLanguage": {
 				"sProcessing": "Procesando...",
 				"sLengthMenu": "Mostrar _MENU_ registros",
-				"sZeroRecords": "No se encontraron resultados",
-				"sEmptyTable": "Ningún dato disponible en esta tabla",
-				"sInfo": "Mostrando registros del _START_ al _END_, de un total de _TOTAL_ registros",
-				"sInfoEmpty": "Mostrando registros del 0 al 0, de un total de 0 registros",
-				"sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+				"sZeroRecords": "No se encontraron resultados.",
+				"sEmptyTable": "Ningún dato disponible en esta tabla.",
+				"sInfo": "Mostrando registros del _START_ al _END_, de un total de _TOTAL_ registro(s).",
+				"sInfoEmpty": "Mostrando registros del 0 al 0, de un total de 0 registro(s).",
+				"sInfoFiltered": "(filtrado de un total de _MAX_ registro(s))",
 				"sInfoPostFix": "",
 				"sSearch": "Buscar:",
 				"sUrl": "",

@@ -16,9 +16,9 @@ $lang['BREADCRUMB_DETALLE'] = "Detalle";
 $lang['BREADCRUMB_PAYMENTS'] = "Pago a proveedores";
 
 // Mensajes
-$lang['VISA_NON_RESULT'] = "No se encontraron resultados, por favor intente de nuevo.";
-$lang['VISA_COUNT_NO_FOUND'] = "La cuenta no está registrada, por favor intente de nuevo.";
-$lang['VISA_ERROR_CONTROLS'] = "No fue posible obtener a lista de controles, por favor intente de nuevo.";
+$lang['VISA_NON_RESULT'] = "No se encontraron resultados, por favor intenta de nuevo.";
+$lang['VISA_COUNT_NO_FOUND'] = "La cuenta no está registrada, por favor intenta de nuevo.";
+$lang['VISA_ERROR_CONTROLS'] = "No fué posible obtener a lista de controles, por favor intenta de nuevo.";
 $lang['VISA_UPDATE_SUCCESS'] = "Los controles fueron actulizados exitosamente.";
 $lang['VISA_NON_BALANCE'] = "La empresa no tiene saldo disponible.";
 
@@ -45,7 +45,7 @@ $lang['VISA_CTRL_JEWL'] = "Bloquear compras en joyerías.";
 $lang['VISA_CTRL_ELEC'] = "Bloquear compras en comercios de equipos electrónicos.";
 $lang['VISA_CTRL_ALC'] = "Bloquear compras en comercios de tabaco y bebidas alcohólicas.";
 $lang['VISA_CTRL_GTM'] = "Bloquear compras en comercios de transporte terrestre (incluye taxis, trenes, y peajes).";
-$lang['VISA_CTRL_OSS'] = "Bloquear compras en comercios de articulos de oficina..";
+$lang['VISA_CTRL_OSS'] = "Bloquear compras en comercios de artículos de oficina..";
 $lang['VISA_CTRL_GROC'] = "Bloquear compras en comercios de víveres y droguerías.";
 $lang['VISA_CTRL_ENT'] = "Bloquear compras en comercios de entretenimiento y deportes (incluye cines, teatros, comercios musicales y comercios de artículos deportivos).";
 $lang['VISA_CTRL_UTIL'] = "Bloquear pagos de servicios públicos (incluye cable, teléfono y compañías eléctricas).";

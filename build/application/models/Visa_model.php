@@ -139,7 +139,7 @@ class Visa_model extends CI_Model {
 				case -235:
 					$this->code = 2;
 					$this->title = lang('CONVIS');
-					$this->msg = 'El servicio no está disponible, por favor intente más tarde';
+					$this->msg = 'El servicio no está disponible, por favor intenta más tarde';
 					break;
 
 				default:

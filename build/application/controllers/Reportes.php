@@ -59,7 +59,7 @@ class Reportes extends CI_Controller {
 							'breadcrum'=>'',
 							'lastSession'=>$lastSessionD,
 							),TRUE);
-					$sidebarLotes= $this->parser->parse('widgets/widget-publi-4',array('sidebarActive'=>TRUE),TRUE);
+					$sidebarLotes= ($urlCountry == 'Ec-bp') ? '' :  $this->parser->parse('widgets/widget-publi-4',array('sidebarActive'=>TRUE),TRUE);
 
 					$datos = array(
 							'header'       =>$header,
@@ -114,7 +114,7 @@ class Reportes extends CI_Controller {
 							$_POST['fechaFin'] = $dataRequest->fechaFin;
 
 							$this->form_validation->set_rules('empresa', 'Empresa', 'trim|xss_clean|required');
-					$this->form_validation->set_rules('fechaInicial', 'Fecha Inicio', 'trim|xss_clean|regex_match[/^[0-9\/]+$/]');
+							$this->form_validation->set_rules('fechaInicial', 'Fecha Inicio', 'trim|xss_clean|regex_match[/^[0-9\/]+$/]');
 							$this->form_validation->set_rules('fechaFin', 'Fecha Fin', 'trim|xss_clean|regex_match[/^[0-9\/]+$/]');
 							$this->form_validation->set_rules('paginaActual', 'paginaActual', 'trim|xss_clean|required');
 
@@ -322,7 +322,7 @@ class Reportes extends CI_Controller {
 															<input type='hidden'>
 															<input type='hidden' name='$ceo_name' value='$ceo_cook'>
 															</form>
-													<script> alert('La descarga del archivo presenta inconvenientes en estos momentos.');
+													<script> alert('La descarga del archivo presenta inconvenientes en éstos momentos.');
 													document.getElementById('formu').action='".$this->config->item('base_url')."$urlCountry/reportes/cuenta-concentradora';
 															document.getElementById('formu').submit();
 													</script>";
@@ -338,7 +338,7 @@ class Reportes extends CI_Controller {
 									<input type='hidden'>
 									<input type='hidden' name='$ceo_name' value='$ceo_cook'>
 								</form>
-								<script> alert('La descarga del archivo presenta inconvenientes en estos momentos.');          document.getElementById('formu').action='".$this->config->item('base_url')."$urlCountry/reportes/cuenta-concentradora';
+								<script> alert('La descarga del archivo presenta inconvenientes en éstos momentos.');          document.getElementById('formu').action='".$this->config->item('base_url')."$urlCountry/reportes/cuenta-concentradora';
 										document.getElementById('formu').submit();
 								</script>";
 					}
@@ -425,7 +425,7 @@ class Reportes extends CI_Controller {
 
 									if($response->rc==-61 || $response->rc==-29){
 											$this->session->sess_destroy();
-											echo "<script>alert('usuario actualmente desconectado');
+											echo "<script>alert('Usuario actualmente desconectado');
 											window.history.back(-1);</script>";
 
 									}else{
@@ -658,7 +658,7 @@ class Reportes extends CI_Controller {
 
 									if($response->rc==-61 || $response->rc==-29){
 											$this->session->sess_destroy();
-											echo "<script>alert('usuario actualmente desconectado');
+											echo "<script>alert('Usuario actualmente desconectado');
 											window.history.back(-1);</script>";
 
 									}else{
@@ -767,7 +767,7 @@ class Reportes extends CI_Controller {
 
 									if($response->rc==-61 || $response->rc==-29){
 											$this->session->sess_destroy();
-											echo "<script>alert('usuario actualmente desconectado');
+											echo "<script>alert('Usuario actualmente desconectado');
 											window.history.back(-1);</script>";
 
 									}else{
@@ -833,7 +833,7 @@ class Reportes extends CI_Controller {
 					$lastSessionD = $this->session->userdata('lastSession');
 					$jsRte = '../../../js/';
 					$thirdsJsRte = '../../../js/third_party/';
-					$FooterCustomInsertJS=["jquery-3.4.0.min.js", "jquery-ui-1.12.1.min.js","jquery.dataTables.min.js","aes.min.js","aes-json-format.min.js","reportes/tarjetasemitidas.js","kendo.dataviz.min.js","header.js","jquery.balloon.min.js","routes.js",$thirdsJsRte."jquery.validate.min.js",$jsRte."validate-forms.js",$thirdsJsRte."additional-methods.min.js"];
+					$FooterCustomInsertJS=["jquery-3.4.0.min.js", "jquery-ui-1.12.1.min.js","jquery.dataTables.min.js","aes.min.js","aes-json-format.min.js","jquery.mtz.monthpicker.js","reportes/tarjetasemitidas.js","kendo.dataviz.min.js","header.js","jquery.balloon.min.js","routes.js",$thirdsJsRte."jquery.validate.min.js",$jsRte."validate-forms.js",$thirdsJsRte."additional-methods.min.js"];
 					$FooterCustomJS="";
 					$titlePage="Conexión Empresas Online - Reportes";
 					$menuHeader = $this->parser->parse('widgets/widget-menuHeader',array(),TRUE);
@@ -845,7 +845,7 @@ class Reportes extends CI_Controller {
 							'breadcrum'=>'',
 							'lastSession'=>$lastSessionD,
 							),TRUE);
-					$sidebarLotes= $this->parser->parse('widgets/widget-publi-4',array('sidebarActive'=>TRUE),TRUE);
+					$sidebarLotes= ($urlCountry == 'Ec-bp') ? '' : $this->parser->parse('widgets/widget-publi-4',array('sidebarActive'=>TRUE),TRUE);
 
 					$datos = array(
 							'header'=>$header,
@@ -895,16 +895,20 @@ class Reportes extends CI_Controller {
 							)
 						);
 						$_POST['empresa'] = $dataRequest->empresa;
-						$_POST['fechaInicial'] = $dataRequest->fechaInicial;
-						$_POST['fechaFin']  = $dataRequest->fechaFin;
+						$_POST['fechaMes'] = (isset($dataRequest->fechaMes))?$dataRequest->fechaMes:'';
+						$_POST['fechaInicial'] = (isset($dataRequest->fechaInicial))?$dataRequest->fechaInicial:"";
+						$_POST['fechaFin']  = (isset($dataRequest->fechaFin))?$dataRequest->fechaFin:"";
+
 						$this->form_validation->set_rules('empresa', 'Empresa', 'trim|xss_clean|required');
-						$this->form_validation->set_rules('fechaInicial', 'Fecha Inicio', 'trim|xss_clean|required|regex_match[/^[0-9\/]+$/]');
-						$this->form_validation->set_rules('fechaFin', 'Fecha Fin', 'trim|xss_clean|required|regex_match[/^[0-9\/]+$/]');
+						$this->form_validation->set_rules('fechaMes', 'Fecha Mes', 'trim|xss_clean|regex_match[/^[0-9\/]+$/]');
+						$this->form_validation->set_rules('fechaInicial', 'Fecha Inicio', 'trim|xss_clean|regex_match[/^[0-9\/]+$/]');
+						$this->form_validation->set_rules('fechaFin', 'Fecha Fin', 'trim|xss_clean|regex_match[/^[0-9\/]+$/]');
 						$this->form_validation->set_error_delimiters('', '---');
+						}
 							if ($this->form_validation->run() == FALSE)
 							{
 								log_message('DEBUG', 'NOVO VALIDATION ERRORS: '.json_encode(validation_errors()));
-								$responseError = 'La combinacion de caracteres es invalido';
+								$responseError = 'La combinación de caracteres es inválida';
 								$responseError = $this->cryptography->encrypt($responseError);
 								$this->output->set_content_type('application/json')->set_output(json_encode($responseError));
 								return $responseError;
@@ -912,17 +916,18 @@ class Reportes extends CI_Controller {
 							else
 							{
 								$empresa = $dataRequest->empresa;
-								$fechaInicial = $dataRequest->fechaInicial;
-								$fechaFin = $dataRequest->fechaFin;
+								$fechaMes = (isset($dataRequest->fechaMes))?$dataRequest->fechaMes:"";
+								$fechaInicial = (isset($dataRequest->fechaInicial))?$dataRequest->fechaInicial: "";
+								$fechaFin = (isset($dataRequest->fechaFin))?$dataRequest->fechaFin: "";
 								$tipoConsulta = $dataRequest->radioGeneral;
 								$username = $this->session->userdata('userName');
 								$token = $this->session->userdata('token');
-								unset($_POST['empresa'], $_POST['fechaInicial'], $_POST['fechaFin']);
-								$pruebaTabla = $this->callWSTarjetasEmitidas($urlCountry,$token,$username,$empresa,$fechaInicial,$fechaFin,$tipoConsulta);
+								unset($_POST['empresa'], $_POST['fechaMes'], $_POST['fechaInicial'], $_POST['fechaFin']);
+								$pruebaTabla = $this->callWSTarjetasEmitidas($urlCountry,$token,$username,$empresa,$fechaMes,$fechaInicial,$fechaFin,$tipoConsulta);
 								$pruebaTabla = $this->cryptography->encrypt($pruebaTabla);
 								$this->output->set_content_type('application/json')->set_output(json_encode($pruebaTabla));
 							}
-					}
+
 			}else{
 					$this->session->sess_destroy();
 					$responseError = ['ERROR' => lang('ERROR_(-29)'), "rc"=> "-29"];
@@ -938,7 +943,7 @@ class Reportes extends CI_Controller {
 	 * @param  string $urlCountry
 	 * @return JSON
 	 */
-	private function callWSTarjetasEmitidas($urlCountry,$token,$username,$empresa,$fechaInicial,$fechaFin,$tipoConsulta){
+	private function callWSTarjetasEmitidas($urlCountry,$token,$username,$empresa,$fechaMes,$fechaInicial,$fechaFin, $tipoConsulta){
 			$this->lang->load('erroreseol');//HOJA DE ERRORES;
 			$canal = "ceo";
 			$modulo="reportes";
@@ -954,6 +959,7 @@ class Reportes extends CI_Controller {
 					"idOperation"=>$operation,
 					"className"=> $className,
 					"accodcia"=> $empresa,
+					"fechaMes"=> $fechaMes,
 					"fechaIni"=> $fechaInicial,
 					"fechaFin"=> $fechaFin,
 					"tipoConsulta"=> $tipoConsulta,
@@ -1033,9 +1039,12 @@ class Reportes extends CI_Controller {
 					$idEmpresa = $this->input->post('idEmpresa');
 					$nomEmpresa = $this->input->post('nomEmpresa');
 					$empresa = $this->input->post('empresa');
+					$fechaMes = $this->input->post('fechaMes');
 					$fechaInicial = $this->input->post('fechaInicial');
 					$fechaFin = $this->input->post('fechaFin');
 					$tipoConsulta = $this->input->post('radioGeneral');
+					$tipoDetalle = $this->input->post('tipoDetalle');
+					$posicionDetalle = $this->input->post('posicionDetalle');
 
 
 					$data = array(
@@ -1045,9 +1054,13 @@ class Reportes extends CI_Controller {
 							"idExtEmp"=> $idEmpresa,
 							"nombreEmpresa"=> $nomEmpresa,
 							"accodcia"=> $empresa,
+							"fechaMes"=> $fechaMes,
 							"fechaIni"=> $fechaInicial,
 							"fechaFin"=> $fechaFin,
 							"tipoConsulta"=> $tipoConsulta,
+							"tipoDetalle" => $tipoDetalle,
+							"posicionDetalle" => $posicionDetalle,
+							"opcion" => "CARD_EMI",
 							"logAccesoObject" => $logAcceso,
 							"token"=> $token,
 							);
@@ -1069,7 +1082,7 @@ class Reportes extends CI_Controller {
 
 									if($response->rc==-61 || $response->rc==-29){
 											$this->session->sess_destroy();
-											echo "<script>alert('usuario actualmente desconectado');
+											echo "<script>alert('Usuario actualmente desconectado');
 											window.history.back(-1);</script>";
 
 									}else{
@@ -1474,7 +1487,7 @@ class Reportes extends CI_Controller {
 
 									if($response->rc==-61 || $response->rc==-29){
 											$this->session->sess_destroy();
-											echo "<script>alert('usuario actualmente desconectado');
+											echo "<script>alert('Usuario actualmente desconectado');
 											window.history.back(-1);</script>";
 									}else{
 											$codigoError = lang('ERROR_('.$response->rc.')');
@@ -1547,7 +1560,7 @@ class Reportes extends CI_Controller {
 							'breadcrum'=>'',
 							'lastSession'=>$lastSessionD,
 							),TRUE);
-					$sidebarLotes= $this->parser->parse('widgets/widget-publi-4',array('sidebarActive'=>TRUE),TRUE);
+					$sidebarLotes= ($urlCountry == 'Ec-bp') ? '' : $this->parser->parse('widgets/widget-publi-4',array('sidebarActive'=>TRUE),TRUE);
 					$datos = array(
 							'header'=>$header,
 							'content'=>$content,
@@ -1569,8 +1582,6 @@ class Reportes extends CI_Controller {
 	public function getEstatusTarjetasHabientes($urlCountry){
 			np_hoplite_countryCheck($urlCountry);
 
-
-
 			$logged_in = $this->session->userdata('logged_in');
 
 			$paisS = $this->session->userdata('pais');
@@ -1591,32 +1602,31 @@ class Reportes extends CI_Controller {
 									)
 								)
 							)
-						);
-						$_POST['nombreEmpresa'] = $dataRequest->nombreEmpresa;
-						$_POST['lotes_producto'] = $dataRequest->lotes_producto;
-						$this->form_validation->set_rules('nombreEmpresa', 'nombreEmpresa',  'trim|xss_clean|required');
-						$this->form_validation->set_rules('lotes_producto', 'tarjeta',  'trim|xss_clean|required');
-							if ($this->form_validation->run() == FALSE)
-							{
-								log_message('DEBUG', 'NOVO VALIDATION ERRORS: '.json_encode(validation_errors()));
-								$responseError = 'La combinacion de caracteres es invalido';
-								$responseError = $this->cryptography->encrypt($responseError);
-								$this->output->set_content_type('application/json')->set_output(json_encode($responseError));
-								return $responseError;
-							}
-							else
-							{
-
-									$paginaActual = $dataRequest->paginaActual;
-									$loteproducto = $dataRequest->lotes_producto;
-									$acrif = $dataRequest->acrif;
-									$username = $this->session->userdata('userName');
-									$token = $this->session->userdata('token');
-									unset($_POST['paginaActual'], $_POST['lotes_producto']);
-									$pruebaTabla = $this->callWSEstatusTarjetasHabientes($urlCountry,$token,$username,$acrif, $loteproducto, $paginaActual );
-									$pruebaTabla = $this->cryptography->encrypt($pruebaTabla);
-									$this->output->set_content_type('application/json')->set_output(json_encode($pruebaTabla));
-							}
+            );
+						if($dataRequest !== null){
+							$_POST['nombreEmpresa'] = $dataRequest->nombreEmpresa;
+              $_POST['lotes_producto'] = $dataRequest->lotes_producto;
+							$this->form_validation->set_rules('nombreEmpresa', 'nombreEmpresa',  'trim|xss_clean|required');
+							$this->form_validation->set_rules('lotes_producto', 'tarjeta',  'trim|xss_clean|required');
+								if ($this->form_validation->run() == FALSE)
+								{
+									log_message('DEBUG', 'NOVO VALIDATION ERRORS: '.json_encode(validation_errors()));
+									$responseError = 'La combinación de caracteres es inválida';
+									$responseError = $this->cryptography->encrypt($responseError);
+									$this->output->set_content_type('application/json')->set_output(json_encode($responseError));
+									return $responseError;
+								}else{
+								  $paginaActual = $dataRequest->paginaActual;
+								  $loteproducto = $dataRequest->lotes_producto;
+								  $acrif = $dataRequest->acrif;
+								  $username = $this->session->userdata('userName');
+								  $token = $this->session->userdata('token');
+                  unset($_POST['paginaActual'], $_POST['lotes_producto']);
+								  $pruebaTabla = $this->callWSEstatusTarjetasHabientes($urlCountry,$token,$username,$acrif, $loteproducto, $paginaActual );
+								  $pruebaTabla = $this->cryptography->encrypt($pruebaTabla);
+								  $this->output->set_content_type('application/json')->set_output(json_encode($pruebaTabla));
+								}
+						}
 					}
 			}else{
 					$this->session->sess_destroy();
@@ -1674,22 +1684,21 @@ class Reportes extends CI_Controller {
 					if($response->rc==0){
 							return $response;
 					}else{
-
-									if($response->rc==-61 || $response->rc==-29){
-											$codigoError = array('mensaje' => lang('ERROR_(-29)'), "rc"=> "-29");
-											$this->session->sess_destroy();
-											return $codigoError;
-
-									}else{
-											$codigoError = lang('ERROR_('.$response->rc.')');
-											if(strpos($codigoError, 'Error')!==false){
-													$codigoError = array('mensaje' => lang('ERROR_GENERICO_USER'), "rc"=> $response->rc);
-											}else{
-													$codigoError = array('mensaje' => lang('ERROR_('.$response->rc.')'), "rc"=> $response->rc);
-											}
-
-											return $codigoError;
-									}
+						if($response->rc==-61 || $response->rc==-29){
+							$codigoError = array('mensaje' => lang('ERROR_(-29)'), "rc"=> "-29");
+							$this->session->sess_destroy();
+							return $codigoError;
+						}else{
+              $codigoError = lang('ERROR_('.$response->rc.')');
+            if($response->rc==-20){
+              $codigoError = array('ERROR' => lang('ERROR_GENERAL'), "rc"=> $response->rc);
+						}else if(strpos($codigoError, 'Error')!==false){
+							$codigoError = array('mensaje' => lang('ERROR_GENERICO_USER'), "rc"=> $response->rc);
+						}else{
+							$codigoError = array('mensaje' => lang('ERROR_('.$response->rc.')'), "rc"=> $response->rc);
+						}
+							return $codigoError;
+						}
 					}
 
 			}else{
@@ -1901,7 +1910,7 @@ class Reportes extends CI_Controller {
 
 									if($response->rc==-61 || $response->rc==-29){
 											$this->session->sess_destroy();
-											echo "<script>alert('usuario actualmente desconectado');
+											echo "<script>alert('Usuario actualmente desconectado');
 											window.history.back(-1);</script>";
 
 									}else{
@@ -1997,7 +2006,7 @@ class Reportes extends CI_Controller {
 
 									if($response->rc==-61 || $response->rc==-29){
 											$this->session->sess_destroy();
-											echo "<script>alert('usuario actualmente desconectado');
+											echo "<script>alert('Usuario actualmente desconectado');
 											window.history.back(-1);</script>";
 
 									}else{
@@ -2100,7 +2109,7 @@ class Reportes extends CI_Controller {
 
 									if($response->rc==-61 || $response->rc==-29){
 											$this->session->sess_destroy();
-											echo "<script>alert('usuario actualmente desconectado');
+											echo "<script>alert('Usuario actualmente desconectado');
 											window.history.back(-1);</script>";
 
 									}else{
@@ -2203,7 +2212,7 @@ class Reportes extends CI_Controller {
 
 									if($response->rc==-61 || $response->rc==-29){
 											$this->session->sess_destroy();
-											echo "<script>alert('usuario actualmente desconectado');
+											echo "<script>alert('Usuario actualmente desconectado');
 											window.history.back(-1);</script>";
 
 									}else{
@@ -2569,7 +2578,7 @@ class Reportes extends CI_Controller {
 							'breadcrum'=>'',
 							'lastSession'=>$lastSessionD,
 							),TRUE);
-					$sidebarLotes= $this->parser->parse('widgets/widget-publi-4',array('sidebarActive'=>TRUE),TRUE);
+					$sidebarLotes= ($urlCountry == 'Ec-bp')? '': $this->parser->parse('widgets/widget-publi-4',array('sidebarActive'=>TRUE),TRUE);
 
 					$datos = array(
 							'header'=>$header,
@@ -2628,7 +2637,7 @@ class Reportes extends CI_Controller {
 							if ($this->form_validation->run() == FALSE)
 							{
 								log_message('DEBUG', 'NOVO VALIDATION ERRORS: '.json_encode(validation_errors()));
-								$responseError = 'La combinacion de caracteres es invalido';
+								$responseError = 'La combinación de caracteres es inválida';
 								$responseError = $this->cryptography->encrypt($responseError);
 								$this->output->set_content_type('application/json')->set_output(json_encode($responseError));
 								return $responseError;
@@ -2796,7 +2805,7 @@ class Reportes extends CI_Controller {
 
 									if($response->rc==-61 || $response->rc==-29){
 											$this->session->sess_destroy();
-											echo "<script>alert('usuario actualmente desconectado');
+											echo "<script>alert('Usuario actualmente desconectado');
 											window.history.back(-1);</script>";
 
 									}else{
@@ -2893,7 +2902,7 @@ class Reportes extends CI_Controller {
 
 									if($response->rc==-61 || $response->rc==-29){
 											$this->session->sess_destroy();
-											echo "<script>alert('usuario actualmente desconectado');
+											echo "<script>alert('Usuario actualmente desconectado');
 											window.history.back(-1);</script>";
 
 									}else{
@@ -3190,7 +3199,7 @@ class Reportes extends CI_Controller {
 
 									if($response->rc==-61 || $response->rc==-29){
 											$this->session->sess_destroy();
-											echo "<script>alert('usuario actualmente desconectado');
+											echo "<script>alert('Usuario actualmente desconectado');
 											window.history.back(-1);</script>";
 									}else{
 											$codigoError = lang('ERROR_('.$response->rc.')');
@@ -3289,7 +3298,7 @@ class Reportes extends CI_Controller {
 
 									if($response->rc==-61 || $response->rc==-29){
 											$this->session->sess_destroy();
-											echo "<script>alert('usuario actualmente desconectado');
+											echo "<script>alert('Usuario actualmente desconectado');
 											window.history.back(-1);</script>";
 									}
 
@@ -3426,7 +3435,7 @@ class Reportes extends CI_Controller {
 
 							if ($this->form_validation->run() == FALSE)
 							{
-								$responseError = 'La combinacion de caracteres es invalido';
+								$responseError = 'La combinación de caracteres es inválida';
 								$responseError = $this->cryptography->encrypt($responseError);
 								$this->output->set_content_type('application/json')->set_output(json_encode($responseError));
 								return $responseError;
@@ -3607,7 +3616,7 @@ class Reportes extends CI_Controller {
 
 									if($response->rc==-61 || $response->rc==-29){
 											$this->session->sess_destroy();
-											echo "<script>alert('usuario actualmente desconectado');
+											echo "<script>alert('Usuario actualmente desconectado');
 											window.history.back(-1);</script>";
 
 									}else{
@@ -3707,7 +3716,7 @@ class Reportes extends CI_Controller {
 
 									if($response->rc==-61 || $response->rc==-29){
 											$this->session->sess_destroy();
-											echo "<script>alert('usuario actualmente desconectado');
+											echo "<script>alert('Usuario actualmente desconectado');
 											window.history.back(-1);</script>";
 
 									}else{
@@ -3782,7 +3791,7 @@ class Reportes extends CI_Controller {
 							'breadcrum'=>'',
 							'lastSession'=>$lastSessionD,
 							),TRUE);
-					$sidebarLotes= $this->parser->parse('widgets/widget-publi-4',array('sidebarActive'=>TRUE),TRUE);
+					$sidebarLotes= ($urlCountry =='Ec-bp') ? '' : $this->parser->parse('widgets/widget-publi-4',array('sidebarActive'=>TRUE),TRUE);
 
 					$datos = array(
 						'header'=>$header,
@@ -3844,7 +3853,7 @@ class Reportes extends CI_Controller {
 							if ($this->form_validation->run() == FALSE)
 							{
 								log_message('DEBUG', 'NOVO VALIDATION ERRORS: '.json_encode(validation_errors()));
-								$responseError = 'La combinacion de caracteres es invalido';
+								$responseError = 'La combinación de caracteres es inválida';
 								$responseError = $this->cryptography->encrypt($responseError);
 								$this->output->set_content_type('application/json')->set_output(json_encode($responseError));
 								return $responseError;
@@ -4034,7 +4043,7 @@ class Reportes extends CI_Controller {
 									if($response->rc==-61 || $response->rc==-29){
 											$this->session->sess_destroy();
 
-											echo "<script>alert('usuario actualmente desconectado');
+											echo "<script>alert('Usuario actualmente desconectado');
 											window.history.back(-1);</script>";
 
 									}else{
@@ -4140,7 +4149,7 @@ class Reportes extends CI_Controller {
 									if($response->rc==-61 || $response->rc==-29){
 											$this->session->sess_destroy();
 
-											echo "<script>alert('usuario actualmente desconectado');
+											echo "<script>alert('Usuario actualmente desconectado');
 											window.history.back(-1);</script>";
 
 									}else{
@@ -4262,7 +4271,7 @@ class Reportes extends CI_Controller {
 									if($response->rc==-61 || $response->rc==-29){
 											$this->session->sess_destroy();
 
-											echo "<script>alert('usuario actualmente desconectado');
+											echo "<script>alert('Usuario actualmente desconectado');
 											window.history.back(-1);</script>";
 
 									}else{
@@ -4371,7 +4380,7 @@ class Reportes extends CI_Controller {
 
 									if($response->rc==-61 || $response->rc==-29){
 										$this->session->sess_destroy();
-										echo "<script>alert('usuario actualmente desconectado');
+										echo "<script>alert('Usuario actualmente desconectado');
 										window.history.back(-1);</script>";
 
 										}else{
@@ -4819,7 +4828,7 @@ class Reportes extends CI_Controller {
 
 									if($response->rc==-61 || $response->rc==-29){
 											$this->session->sess_destroy();
-											echo "<script>alert('usuario actualmente desconectado');
+											echo "<script>alert('Usuario actualmente desconectado');
 											window.history.back(-1);</script>";
 
 									}else{
@@ -4916,7 +4925,7 @@ class Reportes extends CI_Controller {
 
 									if($response->rc==-61 || $response->rc==-29){
 											$this->session->sess_destroy();
-											echo "<script>alert('usuario actualmente desconectado');
+											echo "<script>alert('Usuario actualmente desconectado');
 											window.history.back(-1);</script>";
 									}else{
 											$codigoError = lang('ERROR_('.$response->rc.')');

@@ -202,7 +202,7 @@ $(function () {
 				});
 				// resetValuesAuth();
 			} else {
-				notificacion('Autorización de lotes', 'Verifiqua los datos ingresados e intenta nuevamente.');
+				notificacion('Autorización de lotes', 'Verifica los datos ingresados e intenta nuevamente.');
 			}
     }else{
         notificacion("Autorizando lotes","<h2>Verifica que: </h2><h3>1. Has seleccionado al menos un lote.</h3><h3>2. Has ingresado tu contraseña.</h4><h3>3. Has seleccionado el tipo orden de servicio.</h3>");
@@ -227,7 +227,7 @@ $(function () {
 			// resetValuesAuth();
 
 			} else {
-				notificacion('Autorización de lotes', 'Verifiqua los datos ingresados e intenta nuevamente.');
+				notificacion('Autorización de lotes', 'Verifica los datos ingresados e intenta nuevamente.');
 			}
     }else{
       notificacion("Autorizando lotes","Selecciona al menos un lote e ingresa tu contraseña");
@@ -408,7 +408,7 @@ $(function () {
 						pass = hex_md5($('#claveAuth').val());
 						eliminarLotes(idlote,acnumlote,ctipolote,pass);
 					} else
-						notificacion('Autorización de lotes', 'Verifiqua los datos ingresados e intenta nuevamente.');
+						notificacion('Autorización de lotes', 'Verifica los datos ingresados e intenta nuevamente.');
         }
 
 
@@ -473,11 +473,11 @@ $(function () {
 			"sPaginationType": "full_numbers",
 			"oLanguage": {
 				"sProcessing": "Procesando...",
-				"sLengthMenu": "Mostrar _MENU_ registros",
-				"sZeroRecords": "No se encontraron resultados",
-				"sEmptyTable": "Ningún dato disponible en esta tabla",
-				"sInfo": "Mostrando registros del _START_ al _END_, de un total de _TOTAL_ registros",
-				"sInfoEmpty": "Mostrando registros del 0 al 0, de un total de 0 registros",
+				"sLengthMenu": "Mostrar _MENU_ registros.",
+				"sZeroRecords": "No se encontraron resultados.",
+				"sEmptyTable": "No se encontraron registros.",
+				"sInfo": "Mostrando registros del _START_ al _END_, de un total de _TOTAL_ registro(s).",
+				"sInfoEmpty": "Mostrando registros del 0 al 0, de un total de 0 registro(s).",
 				"sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
 				"sInfoPostFix": "",
 				"sSearch": "Buscar:",
