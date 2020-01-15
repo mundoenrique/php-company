@@ -1075,26 +1075,35 @@ $("#select-tipo-proceso").on("change", function () {
 $('#button-masivo').click(function() {
 
 	serv_var.estado_nuevo = $("#select-tipo-proceso").val();
+
 	urlproc = serv_var.estado_nuevo.split(' # ');
 	serv_var.estado_nuevo = urlproc[0]
 	var clamasivo = $('#claveMasivo')
 	var errmasivo=''
+	var alerta=''
 
 	switch(serv_var.estado_nuevo){
-		case 'saldo':
-			alerta = 'la consulta de saldo,';
-			break;
+
 		case 'Recibido en Banco':
 			alerta = 'la acción de recibir en banco,';
-			break;
-		case 'Recibido en empresa':
-			alerta = 'la acción de recibir en empresa,'
 			break;
 		case 'Enviado a Empresa':
 			alerta = 'el envío a empresa,'
 			break;
+		case 'Recibido en empresa':
+			alerta = 'la acción de recibir en empresa,'
+			break;
 		case 'Entregada a Tarjetahabiente / Activa':
 			alerta = 'la entrega a tarjetahabiente,'
+			break;
+		case 'saldo':
+			alerta = 'la consulta de saldo,';
+			break;
+		case 'bloqueo':
+			alerta = 'bloqueo de tarjeta,';
+			break;
+		case 'desbloqueo':
+			alerta = 'desbloqueo de tarjeta,';
 			break;
 		}
 
