@@ -1421,6 +1421,7 @@ class Lotes extends CI_Controller {
 		$data = json_encode($data);
 		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
 		$jsonResponse = np_Hoplite_Decrypt($response,'callWSconsultarTipoLote');
+		log_message('DEBUG', 'NOVO ['.$username.'] RESPONSE: callWSconsultarTipoLote: ' . $jsonResponse);
 		$response = json_decode($jsonResponse);
 
 		if($response){
@@ -1714,7 +1715,7 @@ class Lotes extends CI_Controller {
 				$URL_TEMPLOTES = $this->config->item('URL_TEMPLOTES');
 				$LOTES_USERPASS = $this->config->item('LOTES_USERPASS');
 
-				log_message('DEBUG', ' ROUTE: ' . $URL_TEMPLOTES);
+				log_message('INFO', 'NOVO UPLOAD FILE BY: '.$URL_TEMPLOTES.' AND: '.$LOTES_USERPASS);
 
 				curl_setopt($ch, CURLOPT_URL, $URL_TEMPLOTES.$nombreArchivoNuevo);
 				curl_setopt($ch, CURLOPT_USERPWD, $LOTES_USERPASS);
@@ -1727,6 +1728,7 @@ class Lotes extends CI_Controller {
 				curl_close ($ch);
 
 				if ($error_no == 0) {
+					fclose($fp);
 					unlink("$localfile");	//BORRAR ARCHIVO
 					$error = 'Archivo Movido.';
 					//COLOCAR LLAMADO DE LA FUNCION CUANDO ESTE CORRECTO
@@ -2825,6 +2827,7 @@ class Lotes extends CI_Controller {
 				curl_close ($ch);
 
 				if ($error_no == 0) {
+					fclose($fp);
 					unlink("$localfile"); //BORRAR ARCHIVO
 					$error = 'Archivo Movido.';
 					//COLOCAR LLAMADO DE LA FUNCION CUANDO ESTE CORRECTO

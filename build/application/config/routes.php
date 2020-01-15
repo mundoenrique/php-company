@@ -52,20 +52,31 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'user/login';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
-
+//Asynchronous
 $route['(:any)/async-call'] = "callModels";
-
+//User
 $route['(:any)/inicio'] = "user/login";
 $route['(:any)/inicio/(:any)'] = "user/login";
-$route['(:any)/recuperar-clave'] = "user/recoveryPass";
-$route['(:any)/cambiar-clave'] = "user/changePassword";
 $route['(:any)/cerrar-sesion'] = "user/finishSession";
-
+$route['(:any)/recuperar-clave'] = "user/recoverPass";
+$route['(:any)/cambiar-clave'] = "user/changePassword";
+//Information
 $route['(:any)/inf-beneficios'] = "information/benefits";
 $route['(:any)/inf-condiciones'] = "information/terms";
 $route['(:any)/inf-tarifas'] = "information/rates";
-
+//Business
 $route['(:any)/empresas'] = "business/getEnterprises";
+$route['(:any)/productos'] = "business/getProducts";
+$route['(:any)/detalle-producto'] = "business/getProductDetail";
+//Bulk
+$route['(:any)/cargar-lotes'] = "bulk/getPendingBulk";
+$route['(:any)/detalle-lote'] = "bulk/getDetailBulk";
+$route['(:any)/confirmar-lote'] = "bulk/confirmBulk";
+$route['(:any)/lotes-autorizacion'] = "bulk/authorizeBulkList";
+$route['(:any)/lotes-calcular-orden'] = "bulk/calculateServiceOrder";
+//Inquiries
+$route['(:any)/consultas-orden-de-servicio'] = "inquiries/serviceOrders";
+
 
 //old routes
 $route['(:any)/login'] = "users/login/$1";

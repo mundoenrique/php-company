@@ -1,5 +1,5 @@
 <div id="content-beneficioss">
-	<h1>Tarifas</h1>
+	<h1><?= lang('SUBMENU_TARIFAS'); ?></h1>
 	<div class="content-beneficios">
 		<div class="content-tarifas">
 			<?php
@@ -62,119 +62,119 @@
 			?>
 			<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400&display=swap">
 			<style>
-				.content-tarifas * {
-					box-sizing: border-box;
-				}
+			.content-tarifas * {
+				box-sizing: border-box;
+			}
 
-				.background-brand-novopayment {
-					background-color: #0b5ea9;
-				}
+			.background-brand-novopayment {
+				background-color: #0b5ea9;
+			}
 
-				.background-brand-bonus {
-					background-color: #7bc143;
-				}
+			.background-brand-bonus {
+				background-color: #7bc143;
+			}
 
-				.background-brand-plata {
-					background-color: #8d9197;
-				}
+			.background-brand-plata {
+				background-color: #8d9197;
+			}
 
-				.table-rates {
-					border: 0;
-					border-collapse: separate;
-					border-spacing: 20px 0;
-					width: 100%;
-				}
+			.table-rates {
+				border: 0;
+				border-collapse: separate;
+				border-spacing: 20px 0;
+				width: 100%;
+			}
 
-				.table-caption {
-					caption-side: bottom;
-					color: #444;
-					font-family: "Open Sans", sans-serif;
-					font-size: 13px;
-					font-weight: 300;
-					padding: 10px 35px 0;
-					text-align: left;
-				}
+			.table-caption {
+				caption-side: bottom;
+				color: #444;
+				font-family: "Open Sans", sans-serif;
+				font-size: 13px;
+				font-weight: 300;
+				padding: 10px 35px 0;
+				text-align: left;
+			}
 
-				.table-caption p {
-					line-height: 1.6;
-					margin: 0;
-					padding: 0;
-				}
+			.table-caption p {
+				line-height: 1.6;
+				margin: 0;
+				padding: 0;
+			}
 
-				.table-header {
-					color: #fff;
-					font-family: "Open Sans", sans-serif;
-					font-size: 20px;
-					font-weight: 400;
-					height: 150px;
-					line-height: 1.3;
-					padding: 15px 15px 10px;
-					position: relative;
-					text-align: left;
-					vertical-align: baseline;
-				}
+			.table-header {
+				color: #fff;
+				font-family: "Open Sans", sans-serif;
+				font-size: 20px;
+				font-weight: 400;
+				height: 150px;
+				line-height: 1.3;
+				padding: 15px 15px 10px;
+				position: relative;
+				text-align: left;
+				vertical-align: baseline;
+			}
 
-				.table-header-padded {
-					padding-left: 100px;
-				}
+			.table-header-padded {
+				padding-left: 100px;
+			}
 
-				.table-header img {
-					border: 0;
-					bottom: 15px;
-					height: 70px;
-					position: absolute;
-					right: 20px;
-					width: auto;
-				}
+			.table-header img {
+				border: 0;
+				bottom: 15px;
+				height: 70px;
+				position: absolute;
+				right: 20px;
+				width: auto;
+			}
 
-				.table-rates tbody td {
-					background-color: #fff;
-					border-left: 1px solid #e6e6e6;
-					border-right: 1px solid #e6e6e6;
-					border-top: 1px solid #e6e6e6;
-					color: #444;
-					empty-cells: show;
-					font-family: "Open Sans", sans-serif;
-					font-size: 13px;
-					font-weight: 300;
-					line-height: 1.4;
-					padding: 10px 15px;
-					vertical-align: center;
-				}
+			.table-rates tbody td {
+				background-color: #fff;
+				border-left: 1px solid #e6e6e6;
+				border-right: 1px solid #e6e6e6;
+				border-top: 1px solid #e6e6e6;
+				color: #444;
+				empty-cells: show;
+				font-family: "Open Sans", sans-serif;
+				font-size: 13px;
+				font-weight: 300;
+				line-height: 1.4;
+				padding: 10px 15px;
+				vertical-align: center;
+			}
 
-				.text-section {
-					background-color: #b6bac0 !important;
-					border: 0 !important;
-					font-size: 14px !important;
-					font-weight: 400 !important;
-				}
+			.text-section {
+				background-color: #b6bac0 !important;
+				border: 0 !important;
+				font-size: 14px !important;
+				font-weight: 400 !important;
+			}
 
-				.text-subsection {
-					background-color: #e6e6e6 !important;
-					border: 0 !important;
-					font-weight: 400 !important;
-				}
+			.text-subsection {
+				background-color: #e6e6e6 !important;
+				border: 0 !important;
+				font-weight: 400 !important;
+			}
 
-				.text-description {
-					color: #888;
-					line-height: inherit;
-					margin: 0;
-					padding: 0;
-				}
+			.text-description {
+				color: #888;
+				line-height: inherit;
+				margin: 0;
+				padding: 0;
+			}
 
-				.text-currency {
-					font-size: 16px !important;
-					font-weight: 400 !important;
-					text-align: center;
-				}
+			.text-currency {
+				font-size: 16px !important;
+				font-weight: 400 !important;
+				text-align: center;
+			}
 
-				.text-tag {
-					display: inline-block;
-					font-weight: 400 !important;
-					margin-right: 5px;
-					text-align: right;
-					width: 15px;
-				}
+			.text-tag {
+				display: inline-block;
+				font-weight: 400 !important;
+				margin-right: 5px;
+				text-align: right;
+				width: 15px;
+			}
 			</style>
 			<table cellpadding="0" cellspacing="0" class="table-rates">
 				<?php if ($rates_refs): ?>
@@ -212,7 +212,7 @@
 						<td class="text-section"></td>
 						<td class="text-section"></td>
 					</tr>
-						<?php if ($parent->items):
+					<?php if ($parent->items):
 							foreach ($parent->items as $child):
 								if ($child->rates): ?>
 					<tr>
@@ -229,15 +229,15 @@
 							<?php echo convert_rate($child->rates[1], $format_params); ?>
 						</td>
 					</tr>
-								<?php else: ?>
+					<?php else: ?>
 					<tr>
 						<td class="text-subsection">
-								<?php echo $child->name; ?>
+							<?php echo $child->name; ?>
 						</td>
 						<td class="text-subsection"></td>
 						<td class="text-subsection"></td>
 					</tr>
-								<?php endif;
+					<?php endif;
 							endforeach;
 						endif;
 					endforeach; ?>

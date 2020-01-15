@@ -22,9 +22,4 @@ $(function() {
 		notiSystem(title, msg, icon, data);
 
 	});
-
-	/* $('#cancel, #signup').on('click', function() {
-		verb = 'POST'; who = 'User'; where = 'FinishSession'; data = { user: 'noUser' };
-			callNovoCore (verb, who, where, data);
-	}); */
 });

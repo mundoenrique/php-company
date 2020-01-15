@@ -1,11 +1,16 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed');
 
 $config = [
-	'validatecaptcha' => [
+	'validateCaptcha' => [
 		[
 			'field' => 'user',
 			'label' => 'user',
 			'rules' => 'trim|regex_match[/^([\wñÑ.\-+&]+)+$/i]|required'
+		],
+		[
+			'field' => 'pass',
+			'label' => 'pass',
+			'rules' => 'trim|required'
 		],
 		[
 			'field' => 'token',
@@ -22,20 +27,20 @@ $config = [
 		[
 			'field' => 'pass',
 			'label' => 'pass',
-			'rules' => 'trim|regex_match[/^([\w!@\*\-\?¡¿+\/.,#]+)+$/i]|required'
+			'rules' => 'trim|required'
 		]
 	],
-	'finishsession' => [
+	'finishSession' => [
 		[
 			'field' => 'user',
 			'label' => 'user',
 			'rules' => 'trim|regex_match[/^([\wñÑ]+)+$/i]|required'
 		]
 	],
-	'recoverypass' => [
+	'recoverPass' => [
 		[
-			'field' => 'userName',
-			'label' => 'userName',
+			'field' => 'user',
+			'label' => 'user',
 			'rules' => 'trim|regex_match[/^([\wñÑ]+)+$/i]|required'
 		],
 		[
@@ -49,7 +54,7 @@ $config = [
 			'rules' => 'trim|regex_match[/^([a-zA-Z]+[0-9_.+-]*)+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/]|required'
 		]
 	],
-	'changepassword' => [
+	'changePassword' => [
 		[
 			'field' => 'currentPass',
 			'label' => 'currentPass',
@@ -64,6 +69,196 @@ $config = [
 			'field' => 'confirmPass',
 			'label' => 'confirmPass',
 			'rules' => 'trim|regex_match[/^([\w!@\*\-\?¡¿+\/.,#]+)+$/i]|matches[newPass]|required'
+		]
+	],
+	'getProducts' => [
+		[
+			'field' => 'enterpriseCode',
+			'label' => 'enterpriseCode',
+			'rules' => 'trim|regex_match[/^([\w]+)+$/i]'
+		],
+		[
+			'field' => 'enterpriseGroup',
+			'label' => 'enterpriseGroup',
+			'rules' => 'trim|regex_match[/^([\w-]+)+$/i]'
+		],
+		[
+			'field' => 'idFiscal',
+			'label' => 'idFiscal',
+			'rules' => 'trim|regex_match[/^([\w-:.]+[\s]*)+$/i]|required'
+		],
+		[
+			'field' => 'enterpriseName',
+			'label' => 'enterpriseName',
+			'rules' => 'trim|regex_match[/^([\w-.,#ñÑáéíóúÑÁÉÍÓÚ\(\)&:\+]+[\s]*)+$/i]|required'
+		]
+
+	],
+	'getProductDetail' => [
+		[
+			'field' => 'productPrefix',
+			'label' => 'productPrefix',
+			'rules' => 'trim|regex_match[/^([\w]+)+$/i]|required',
+		],
+		[
+			'field' => 'goToDetail',
+			'label' => 'goToDetail',
+			'rules' => 'trim|regex_match[/active/]',
+		],
+		[
+			'field' => 'enterpriseCode',
+			'label' => 'enterpriseCode',
+			'rules' => 'trim|regex_match[/^([\w]+)+$/i]'
+		],
+		[
+			'field' => 'enterpriseGroup',
+			'label' => 'enterpriseGroup',
+			'rules' => 'trim|regex_match[/^([\w-]+)+$/i]'
+		],
+		[
+			'field' => 'idFiscal',
+			'label' => 'idFiscal',
+			'rules' => 'trim|regex_match[/^([\w-:.]+[\s]*)+$/i]'
+		],
+		[
+			'field' => 'enterpriseName',
+			'label' => 'enterpriseName',
+			'rules' => 'trim|regex_match[/^([\w-.,#ñÑáéíóúÑÁÉÍÓÚ\(\)&:\+]+[\s]*)+$/i]'
+		]
+	],
+	'loadBulk'  => [
+		[
+			'field' => 'branchOffice',
+			'label' => 'branchOffice',
+			'rules' => 'trim|regex_match[/^[a-z0-9]+$/i]'
+		],
+		[
+			'field' => 'typeBulk',
+			'label' => 'typeBulk',
+			'rules' => 'trim|regex_match[/^[a-z0-9]+$/i]'
+		],
+		[
+			'field' => 'formatBulk',
+			'label' => 'formatBulk',
+			'rules' => 'trim|regex_match[/^[a-z0-9]+$/i]'
+		],
+		[
+			'field' => 'typeBulkText',
+			'label' => 'typeBulkText',
+			'rules' => 'trim|regex_match[/^[a-z0-9ñáéíóú ().]{10,70}$/i]'
+		]
+	],
+	'getDetailBulk' => [
+		[
+			'field' => 'bulkTicked',
+			'label' => 'bulkTicked',
+			'rules' => 'trim|regex_match[/^([\w]+)+$/i]|required'
+		]
+	],
+	'confirmBulk' => [
+		[
+			'field' => 'bulkTicked',
+			'label' => 'bulkTicked',
+			'rules' => 'trim|regex_match[/^([\w]+)+$/i]|required'
+		]
+	],
+	'deleteNoConfirmBulk' => [
+		[
+			'field' => 'bulkId',
+			'label' => 'bulkId',
+			'rules' => 'trim|regex_match[/^([\w]+)+$/i]'
+		],
+		[
+			'field' => 'bulkTicked',
+			'label' => 'bulkTicked',
+			'rules' => 'trim|regex_match[/^([\w]+)+$/i]|required'
+		],
+		[
+			'field' => 'bulkStatus',
+			'label' => 'bulkStatus',
+			'rules' => 'trim|regex_match[/^([\w]+)+$/i]|required'
+		],
+		[
+			'field' => 'pass',
+			'label' => 'pass',
+			'rules' => 'trim|required'
+		]
+	],
+	'signBulkList' => [
+		[
+			'field' => 'pass',
+			'label' => 'pass',
+			'rules' => 'trim|required'
+		],
+		[
+			'field' => 'bulk[]',
+			'label' => 'bulk',
+			'rules' => 'regex_match[/^([\w{}":,]*)+$/i]|required'
+		]
+	],
+	'authorizeBulk' => [
+		[
+			'field' => 'pass',
+			'label' => 'pass',
+			'rules' => 'trim|required'
+		],
+		[
+			'field' => 'bulk[]',
+			'label' => 'bulk',
+			'rules' => 'regex_match[/^([\w{}":,]*)+$/i]|required'
+		]
+	],
+	'deleteConfirmBulk' => [
+		[
+			'field' => 'pass',
+			'label' => 'pass',
+			'rules' => 'trim|required'
+		],
+		[
+			'field' => 'bulk[]',
+			'label' => 'bulk',
+			'rules' => 'regex_match[/^([\w{}":,]*)+$/i]|required'
+		]
+	],
+	'serviceOrder' => [
+		[
+			'field' => 'tempOrders',
+			'label' => 'tempOrders',
+			'rules' => 'trim|regex_match[/^([\w,]*)+$/i]'
+		],
+		[
+			'field' => 'bulkNoBill',
+			'label' => 'bulkNoBill',
+			'rules' => 'trim|regex_match[/^([\w,]*)+$/i]'
+		]
+	],
+	'cancelServiceOrder' => [
+		[
+			'field' => 'tempOrders',
+			'label' => 'tempOrders',
+			'rules' => 'trim|regex_match[/^([\w,]*)+$/i]'
+		],
+		[
+			'field' => 'bulkNoBill',
+			'label' => 'bulkNoBill',
+			'rules' => 'trim|regex_match[/^([\w,]*)+$/i]'
+		]
+	],
+	'getServiceOrders' => [
+		[
+			'field' => 'initialDate',
+			'label' => 'initialDate',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+		],
+		[
+			'field' => 'finalDate',
+			'label' => 'finalDate',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+		],
+		[
+			'field' => 'status',
+			'label' => 'status',
+			'rules' => 'trim|regex_match[/^[a-z0-9]+$/i]'
 		]
 	],
 	'dash-products' => [

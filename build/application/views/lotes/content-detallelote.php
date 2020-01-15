@@ -41,7 +41,9 @@ $info;
 			$info = $data[0]->lotesTO;
 	?>
 	<div id="top-batchs">
+		<?php if($pais != 'Ec-bp'): ?>
 		<span aria-hidden="true" class="icon" data-icon="&#xe03c;"></span>
+		<?php endif; ?>
 		<?php echo lang('TITULO_LOTES_DETALLE'); ?>
 	</div>
 	<div id="lotes-contenedor">

@@ -1,146 +1,242 @@
 'use strict'
-//icons
-var iconSuccess = 'ui-icon-circle-check';
-var iconInfo = 'ui-icon-info';
-var iconWarning = 'ui-icon-alert';
-var iconDanger = 'ui-icon-closethick';
 //app
-var baseURL = $('body').attr('base-url');
-var baseAssets = $('body').attr('asset-url');
-var country = $('body').attr('country');
-var pais = $('body').attr('pais');
-var isoPais = pais;
+var currenTime;
+var screenSize;
+var verb, who, where, dataResponse, ceo_cook, btnText, form, cypherPass;
 var loader = $('#loader').html();
-var verb;
-var who;
-var where;
-var data;
-var title;
-var msg;
-var icon;
-var data;
-var dataResponse;
-var strCountry;
-var prefixCountry = 'Empresas Online ';
-switch(country) {
-	case 'bp':
-		strCountry = 'Conexión Empresas';
-		prefixCountry = '';
-		break;
-	case 'co':
-		strCountry = 'Colombia';
-		break;
-	case 'pe':
-	case 'us':
-		strCountry = 'Perú';
-		break;
-	case 've':
-		strCountry = 'Venezuela';
-		break;
-}
+var validatePass = /^[\w!@\*\-\?¡¿+\/.,#]+$/;
+var searchEnterprise = $('#sb-search');
+var inputPass = $('#password');
 
-$('input[type=text], input[type=password], input[type=textarea]').attr('autocomplete','off');
+$(function () {
+	$('input[type=text], input[type=password], input[type=email]').attr('autocomplete', 'off');
+	/**
+ * @info Maneja llamado del modal para petiociones submit
+ * @author J. Enrique Peñaloza Piñero
+ * @date November 22nd, 2019
+ */
+	if(code > 2) {
+		notiSystem(title, msg, icon, data)
+	}
 
-function callNovoCore (verb, who, where, data, _response_) {
-	var ceo_cook = decodeURIComponent(
-		document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-	);
+	$('.big-modal').on('click', function(){
+		$('.cover-spin').show(0)
+	});
+});
+/**
+ * @info Llama al core del servidor
+ * @author J. Enrique Peñaloza Piñero
+ * @date 15/04/2019
+ */
+function callNovoCore(verb, who, where, request, _response_) {
+	ceo_cook = getCookieValue();
+	request.currenTime = new Date();
+	request.screenSize = screen.width;
 	var dataRequest = JSON.stringify({
 		who: who,
 		where: where,
-		data: data
+		data: request
 	});
-
-	dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
+	var codeResp = parseInt(lang.RESP_DEFAULT_CODE);
+	var formData = new FormData();
+	dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, { format: CryptoJSAesJson }).toString();
+	if(request.file) {
+		formData.append('file', request.file);
+		delete request.file;
+	}
+	formData.append('request', dataRequest);
+	formData.append('ceo_name', ceo_cook);
+	formData.append('plot', btoa(ceo_cook));
 
 	$.ajax({
 		method: verb,
 		url: baseURL + 'async-call',
-		data: {request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)},
+		data: formData,
 		context: document.body,
-		dataType: 'json',
-	}).done(function(response, status) {
-		response = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
-		switch(response.code) {
-			case 303:
-				notiSystem(response.title, response.msg, response.icon, response.data);
-				response.code = 'unanswered';
-				_response_(response);
-				break;
-			default:
-				if(response.data !== 'finishSession') {
-					_response_(response);
-				}
+		cache: false,
+		contentType: false,
+		processData: false,
+		dataType: 'json'
+	}).done(function (response, status, jqXHR) {
+
+		if(request.modalReq) {
+			$('#accept').prop('disabled', false)
+			$('#system-info').dialog('destroy');
 		}
 
-	}).fail(function(xrh, status, response) {
-		title = prefixCountry + strCountry;
-		msg = 'En estos momentos no podemos atender tu solicitud, por favor intenta en unos minutos';
-		icon = iconWarning;
-		data = {
-			btn1: {
-				text: 'Aceptar',
-				class: 'novo-btn-primary-modal',
-				link: false,
-				action: 'close'
+		response = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, { format: CryptoJSAesJson }).toString(CryptoJS.enc.Utf8))
+
+		if(response.code === codeResp) {
+			notiSystem(response.title, response.msg, response.icon, response.data);
+		}
+
+		_response_(response);
+
+	}).fail(function (jqXHR, textStatus, errorThrown ) {
+
+		if(request.modalReq) {
+			$('#accept').prop('disabled', false)
+			$('#system-info').dialog('destroy');
+		}
+
+		var response = {
+			code: codeResp,
+			title: lang.GEN_SYSTEM_NAME,
+			icon: lang.GEN_ICON_DANGER,
+			data: {
+				btn1: {
+					link: baseURL+lang.GEN_ENTERPRISE_LIST,
+					action: 'redirect'
+				}
 			}
 		};
-		notiSystem(title, msg, icon, data);
-		var resp = {
-			code: 'unanswered'
-		}
-		_response_(resp);
+		notiSystem(response.title, response.msg, response.icon, response.data);
+		_response_(response);
 	});
 }
-
-function formatterDate(date) {
-	var	dateArray = date.split('/');
-	var dateStr = dateArray[1] + '/' + dateArray[0] + '/' + dateArray[2];
-
-	return new Date(dateStr);
+/**
+ * @info Obtiene valor de cookie
+ * @author J. Enrique Peñaloza Piñero
+ * @date December 18th, 2019
+ */
+function getCookieValue() {
+	return decodeURIComponent(
+		document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+	);
 }
-
+/**
+ * @info Uso del modal informativo
+ * @author J. Enrique Peñaloza Piñero
+ * @date 05/03/2019
+ */
 function notiSystem(title, message, icon, data) {
+	var btnAccept = $('#accept');
+	var btnCancel = $('#cancel');
+	var dialogMoldal = $('#system-info');
 	var btn1 = data.btn1;
 	var btn2 = data.btn2;
-	if(!btn2) {
-		$('#accept').css('margin', '0')
-		$('.novo-dialog-buttonset').css('width', '80px')
-	}
-	var dialogMoldal = $('#system-info');
+
 	dialogMoldal.dialog({
-		title: title,
+		title: title || lang.GEN_SYSTEM_NAME,
 		modal: 'true',
 		minHeight: 100,
 		draggable: false,
 		resizable: false,
 		closeOnEscape: false,
-		open: function(event, ui) {
-			$('.ui-dialog-titlebar-close', ui.dialog).hide();
-			$('#system-type').addClass(icon);
+		minWidth: lang.GEN_MODAL_WIDTH,
+		maxHeight: 350,
+		dialogClass: "border-none",
+    classes: {
+      "ui-dialog-titlebar": "border-none",
+    },
+		open: function (event, ui) {
+			$('.ui-dialog-titlebar-close').hide();
+			var classIcon = $('#system-icon').attr('class').split(' ');
+			classIcon = classIcon.pop();
+
+			if(classIcon != 'mt-0') {
+				$('#system-icon').removeClass(classIcon);
+			}
+
+			$('#system-icon').addClass(icon);
 			$('#system-msg').html(message);
-			$('#accept')
-			.text(btn1.text)
-			.on('click', function(e) {
-				dialogMoldal.dialog('close');
-				if(btn1.action === 'redirect') {
-					$(location).attr('href', btn1.link);
-				}
-				$(this).off('click');
-			});
-			$('#cancel').hide();
-			if (btn2) {
-				$('#cancel')
-				.text(btn2.text)
-				.on('click', function(e) {
-					dialogMoldal.dialog('close');
-					if(btn2.action === 'redirect') {
-						$(location).attr('href', btn2.link);
-					}
-					$(this).off('click');
-				})
-				.show();
+			$('#accept, #cancel').removeClass("ui-button ui-corner-all ui-widget");
+			createButton(dialogMoldal, btnAccept, btn1);
+
+			if(!btn2) {
+				btnCancel.hide();
+				btnAccept.addClass('modal-btn-primary');
+				$('.novo-dialog-buttonset').addClass('modal-buttonset');
+			} else {
+				createButton(dialogMoldal, btnCancel, btn2);
 			}
 		}
 	});
+}
+/**
+ * @info Crea botones para modal informativo
+ * @author Pedro Torres
+ * @date 16/09/2019
+ */
+function createButton(dialogMoldal, elementButton, valuesButton) {
+	valuesButton.text && elementButton.text(valuesButton.text);
+	elementButton.show();
+	elementButton.on('click', function (e) {
+		if (valuesButton.action === 'redirect') {
+			$(this).html(loader);
+			$(this).children('span').addClass('spinner-border-sm');
+			if($(this).attr('id') == 'cancel') {
+				$(this).children('span')
+				.removeClass('secondary')
+				.addClass('primary');
+			}
+			$(location).attr('href', valuesButton.link);
+		}
+		if (valuesButton.action !== 'redirect') {
+			dialogMoldal.dialog('close');
+		}
+		$(this).off('click');
+	});
+}
+/**
+ * @info Incorpora inputs a formularios
+ * @author J. Enrique Peñaloza
+ * @date November 18th, 2019
+ */
+function insertFormInput(disabled, form = false,) {
+	var notDisabled = '#product-select, #enterprise-widget-btn'
+
+	if(disabled) {
+		notDisabled = false;
+	}
+
+	$('form button, form select, form input[type=file], button')
+	.not(notDisabled)
+	.not('.btn-modal')
+	.prop('disabled', disabled);
+
+	if(form) {
+		ceo_cook = getCookieValue();
+		currenTime = new Date();
+		screenSize = screen.width;
+		form.append(`<input type="hidden" name="ceo_name" value="${ceo_cook}"></input>`);
+		form.append(`<input type="hidden" name="currenTime" value="${currenTime}"></input>`);
+		form.append(`<input type="hidden" name="screenSize" value="${screenSize}"></input>`);
+	}
+}
+/**
+ * @info lee una propiedad especifica de un elemento html,
+ * de no indicarse el elemento se toma por defecto el body
+ * @author Pedro Torres
+ * @date 27/08/2019
+ */
+function getPropertyOfElement(property, element) {
+	var element = element || 'body';
+	return $(element).attr(property);
+}
+/**
+ * @info quita espacios en blanco de los campos input
+ * @author J. Enrique Peñaloza Piñero
+ * @date November 18th, 2019
+ */
+function formInputTrim(form) {
+	form.find('input').each(function() {
+		var trimVal = $(this).val().trim()
+		$(this).val(trimVal)
+	});
+}
+/**
+ * @info Cifra la contraseña del usuario
+ * @author J. Enrique Peñaloza Piñero
+ * @date December 27th, 2019
+ */
+function crytoPass(password) {
+	ceo_cook = getCookieValue();
+	cypherPass = CryptoJS.AES.encrypt(password, ceo_cook, { format: CryptoJSAesJson }).toString();
+	password = btoa(JSON.stringify({
+		password: cypherPass,
+		plot: btoa(ceo_cook)
+	}));
+
+	return password;
 }

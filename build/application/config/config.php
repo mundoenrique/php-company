@@ -28,7 +28,6 @@ $config['asset_url'] = BASE_CDN_URL;
 $config['asset_path'] = BASE_CDN_PATH;
 $config['favicon'] = 'favicon-novo';
 $config['channel'] = 'ceo';
-$config['app_lang'] = LANGUAGE;
 // Main web service access
 $config['urlWS'] = WS_URL;
 $config['keyNovo'] = base64_decode(WS_KEY);
@@ -40,11 +39,15 @@ $config['urlServ'] = SERVICE_URL;
 $config['client_id'] = SERVICE_CLIENT_ID;
 $config['client_secret'] = SERVICE_CLIENT_SECRET;
 // Bulk upload management
+$config['upload_bulk'] = BULK_LOCAL_PATH.'bulk/';
+$config['userpass_bulk'] = BULK_FTP_USERNAME.':'.BULK_FTP_PASSWORD;
 $config['LOTES_USERPASS'] = BULK_FTP_USERNAME.':'.BULK_FTP_PASSWORD;
 $config['format_date'] = 'j/m/Y';
 $config['format_time'] = 'g:i A';
 $config['cypher_base'] = CYPHER_BASE;
-
+$config['active_recaptcha'] = ACTIVE_RECAPTCHA;
+$config['new-views'] = '';
+$config['client'] = 'novo';
 /*
 |--------------------------------------------------------------------------
 | Index File
@@ -96,7 +99,7 @@ $config['url_suffix'] = '';
 | than english.
 |
 */
-$config['language']	= 'pe-spanish';
+$config['language']	= 'spanish-base';
 
 /*
 |--------------------------------------------------------------------------
@@ -474,6 +477,10 @@ $config['csrf_cookie_name'] = 'cook';
 $config['csrf_expire'] = 7200;
 $config['csrf_regenerate'] = TRUE;
 $config['csrf_exclude_uris'] = array(
+	'[\w\-]+/productos',
+	'[\w\-]+/detalle-producto',
+	'[\w\-]+/detalle-lote',
+	'[\w\-]+/confirmar-lote',
 	'[\w\-]+/dashboard/productos',
 	'[\w\-]+/dashboard/productos/detalle',
 	'[\w\-]+/consulta/ordenes-de-servicio',
