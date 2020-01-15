@@ -983,11 +983,15 @@ function llamarWSCambio(pass,mensaje,url,op,alerta) {
 			$aux.dialog("destroy");
 			if(data.result.rc == -1){
 				notificacion(mensaje, 'La contraseña es incorrecta. Por favor verifícala e intenta de nuevo.', reload);
-			} else if(data.result.rc == -450){
+			}else if(data.result.rc == -416){
+				notificacion(mensaje,data.result.msg, reload);
+			}else if(data.result.rc == -450){
 				notificacion(mensaje,data.result.msg, reload);
 			} else if(data.result.rc == -451){
 				notificacion(mensaje,data.result.msg, reload);
 			} else if(data.result.rc == -452){
+				notificacion(mensaje,data.result.msg, reload);
+			}else if(data.result.rc == -177){
 				notificacion(mensaje,data.result.msg, reload);
 			}else if (!data.result.ERROR) {
 				var reload = 1;
