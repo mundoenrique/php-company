@@ -297,7 +297,13 @@ class Novo_User_Model extends NOVO_Model {
 		$this->response->msg = lang('GEN_BTN_ACCEPT');
 		$this->response->data = FALSE;
 
-		$this->session->sess_destroy();
+		session_destroy();
+		$access = [
+			'user_access',
+			'logged',
+			'userId'
+		];
+		$this->session->unset_userdata($access);
 
 		return $this->responseToTheView(lang('GEN_FINISH_SESSION'));
 	}

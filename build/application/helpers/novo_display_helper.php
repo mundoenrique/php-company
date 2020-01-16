@@ -118,6 +118,9 @@ if ( ! function_exists('verifyBody'))
 			case lang('GEN_TAG_ORDER_TYPE'):
 				$display = (in_array($client, $showUs) || $country != 've' && $country != 'bdb');
 				break;
+			case lang('GEN_TAG_REDIRECT_FINISH'):
+				$display = (in_array($client, $showThem) && $country != 'bp');
+				break;
 		}
 
 		return $display;

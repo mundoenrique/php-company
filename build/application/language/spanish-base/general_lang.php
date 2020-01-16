@@ -83,6 +83,8 @@ $lang['GEN_CACULATE_SERVICE_ORDER'] = 'calculateServiceOrder';
 $lang['GEN_CACULATE_ORDER_TITLE'] = 'Calcular Orden';
 $lang['GEN_SERVICE_ORDERS'] = 'serviceOrders';
 $lang['GEN_SERVICE_ORDERS_TITLE'] = 'Órdenes de servicio';
+//links
+$lang['GEN_LINK_LOGIN'] = 'inicio';
 //MODAL STYLES
 $lang['GEN_MODAL_WIDTH'] = 310;
 $lang['GEN_ICON'] = 'ui-icon';
@@ -113,6 +115,7 @@ $lang['GEN_TAG_BRANCHOFFICE'] = 'ver select de sucursales';
 $lang['GEN_TAG_SEARCH_CAT'] = 'Buscar por categoría';
 $lang['GEN_TAG_ALL_BULK'] = 'Seleccionar todos los lotes';
 $lang['GEN_TAG_ORDER_TYPE'] = 'Tipo de orden de servicio';
+$lang['GEN_TAG_REDIRECT_FINISH'] = 'Redirección para fin de sesión';
 //DATATABLES
 $lang['GEN_TABLE_SELECT_SIGN'] = 'multi';
 $lang['GEN_TABLE_SELECT_AUTH'] = 'multi';
@@ -158,3 +161,4 @@ $lang['GEN_SELECT_ENTERPRISE']= 'Selecciona otra empresa';
 $lang['GEN_MUST_SELECT_ENTERPRISE']= 'Selecciona una empresa';
 $lang['GEN_WAIT_PRODUCTS']= 'Esperando productos...';
 $lang['GEN_SELECT_PRODUCTS']= 'Selecciona un producto';
+$lang['GEN_FINISH_TITLE']= 'Cierre de sesión';
