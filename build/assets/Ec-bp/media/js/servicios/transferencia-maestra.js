@@ -23,7 +23,7 @@ var parametrosRecarga;
 var masterTransferBalanace, dailyOper, weeklyOper;
 
 var codeCtas, titleCtas, msgCtas, numberAccount
-$(function() {
+$(function () {
 	// VARIABLES GLOBALESx
 	var valido = true;
 
@@ -31,83 +31,83 @@ $(function() {
 	$("#dni").attr("maxlength", "12");
 	$("#loadingData").show();
 
-	$.get( baseURL + api + isoPais + '/servicios/transferencia-maestra/consultarSaldo',
-	function(response) {
-		var data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
-		var Amountmsg = " - ",
+	$.get(baseURL + api + isoPais + '/servicios/transferencia-maestra/consultarSaldo',
+		function (response) {
+			var data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {
+				format: CryptoJSAesJson
+			}).toString(CryptoJS.enc.Utf8))
+			var Amountmsg = " - ",
 				numberaccount = ' - ';
 
-		$("#loadingData").hide();
+			$("#loadingData").hide();
 
-		if (data.rc == 0) {
+			if (data.rc == 0) {
 
-			masterTransferBalanace = data.maestroDeposito.saldoDisponible;
-			parametrosRecarga = data.maestroDeposito.parametrosRecarga;
-			dailyOper = data.maestroDeposito.cantidadTranxDia.lista[0];
-			weeklyOper = data.maestroDeposito.cantidadTranxSemana.lista[0];
-			Amountmsg = toFormatShow(masterTransferBalanace);
-			numberaccount = data.maestroDeposito.cuentaFondeo;
-			$("#amount, #description, #charge, #credit, #recargar, #claveTranferencia").prop("disabled", false);
+				masterTransferBalanace = data.maestroDeposito.saldoDisponible;
+				parametrosRecarga = data.maestroDeposito.parametrosRecarga;
+				dailyOper = data.maestroDeposito.cantidadTranxDia.lista[0];
+				weeklyOper = data.maestroDeposito.cantidadTranxSemana.lista[0];
+				Amountmsg = toFormatShow(masterTransferBalanace);
+				numberaccount = data.maestroDeposito.cuentaFondeo;
+				$("#amount, #description, #charge, #credit, #recargar, #claveTranferencia").prop("disabled", false);
 
-		} else if(data.rc == -402)
-		{
-			var rta = JSON.parse(data.bean)
-			masterTransferBalanace = rta.saldoDisponible;
-			Amountmsg = toFormatShow(masterTransferBalanace);
-			numberaccount = ' No tiene cuenta asociada ';
-			$("#amount, #description, #charge, #credit, #recargar, #claveTranferencia").prop("display", false);
-		} else if (data.rc == -233) {
-			Amountmsg = "La empresa no posee saldo.";
-			$("#amount, #description, #charge, #credit, #recargar, #claveTranferencia").prop("disabled", true);
-		} else if (data.rc == -61) {
-			window.location.replace(baseURL+isoPais+'/finsesion');
-		}else if(data.rc == -251) {
-			msgCtas = "No existen parámetros definidos para la empresa sobre éste producto.";
-		} else {
-			$("#amount, #description, #charge, #credit, #recargar", "#claveTranferencia").prop("disabled", true);
-		}
-		$("#saldoEmpresa").text('Saldo disponible: ' + Amountmsg);
-		$("#disponible").val(Amountmsg);
-		$("#numberaccount").html("<div style='float: left'>"+ numberaccount +"</div>");
+			} else if (data.rc == -402) {
+				var rta = JSON.parse(data.bean)
+				masterTransferBalanace = rta.saldoDisponible;
+				Amountmsg = toFormatShow(masterTransferBalanace);
+				numberaccount = ' No tiene cuenta asociada ';
+				$("#amount, #description, #charge, #credit, #recargar, #claveTranferencia").prop("display", false);
+			} else if (data.rc == -233) {
+				Amountmsg = "La empresa no posee saldo.";
+				$("#amount, #description, #charge, #credit, #recargar, #claveTranferencia").prop("disabled", true);
+			} else if (data.rc == -61) {
+				window.location.replace(baseURL + isoPais + '/finsesion');
+			} else if (data.rc == -251) {
+				msgCtas = "No existen parámetros definidos para la empresa sobre éste producto.";
+			} else {
+				$("#amount, #description, #charge, #credit, #recargar", "#claveTranferencia").prop("disabled", true);
+			}
+			$("#saldoEmpresa").text('Saldo disponible: ' + Amountmsg);
+			$("#disponible").val(Amountmsg);
+			$("#numberaccount").html("<div style='float: left'>" + numberaccount + "</div>");
 
-	});
+		});
 
-	$('input:radio[name=type]').on('change', function(){
+	$('input:radio[name=type]').on('change', function () {
 		$('#charge-or-credit').removeAttr('style');
 	})
 
-	$('#recarga_concetradora').on('click','#recargar', function(e) {
+
+	$('#recarga_concetradora').on('click', '#recargar', function (e) {
 		e.preventDefault();
 		$(this).find($('#amount').removeAttr('style'));
 		$(this).find($('#description').removeAttr('style'));
 
 		var RE = /^\d*\.?\d*$/,
-				decimal = /^[0-9]*([.][0-9]{2})?$/,
-				descRegExp = /^['a-z0-9ñáéíóú ,.:()']+$/i,
-				camposValid = '<div id="validar">',
-				validInput = true,
-				amount = $('#amount'),
-				disponible = $('#disponible'),
-				descrip = $('#description'),
+			decimal = /^[0-9]*([.][0-9]{2})?$/,
+			descRegExp = /^['a-z0-9ñáéíóú ,.:()']+$/i,
+			camposValid = '<div id="validar">',
+			validInput = true,
+			amount = $('#amount'),
+			disponible = $('#disponible'),
+			descrip = $('#description'),
+			account = $('#account-transfer'),
+			clave = $('#claveTranferencia'),
+			type = $('input:radio[name=type]:checked'),
+			valAmount = (amount == '' || !RE.test(amount)) ? false : true,
+			valdescript = (descrip == '') ? false : true,
+			valAccount = (account == '') ? false : true,
+			valtype = (type == undefined) ? 'border: 1px solid #cd0a0a' : 'border: none';
 
-				account = $('#account-transfer'),
-				clave = $('#claveTranferencia'),
-				type = $('input:radio[name=type]:checked'),
-				valAmount = (amount == ''  || !RE.test(amount)) ? false : true,
-				valdescript = (descrip == '') ?  false : true,
-				valAccount = (account == '') ? false : true,
-				valtype = (type == undefined) ? 'border: 1px solid #cd0a0a' : 'border: none';
-
-		if(amount.val() === ''|| !RE.test(amount.val())) {
+		if (amount.val() === '' || !RE.test(amount.val())) {
 			camposValid += '<p>* El monto debe ser numérico</p>';
 			validInput = false;
 			amount.css('border-color', '#cd0a0a')
-		}else if(!decimal.test(amount.val())){
+		} else if (!decimal.test(amount.val())) {
 			camposValid += '<p>* El monto debe contener dos decimales</p>';
 			validInput = false;
 			amount.css('border-color', '#cd0a0a')
-		}
-		else if(parseInt(amount.val()) > parseInt(disponible.val()) && type.val() !== 'abono'){
+		} else if (parseInt(amount.val()) > parseInt(disponible.val()) && type.val() !== 'abono') {
 			camposValid += '<p>* El monto no debe superar el saldo disponible</p>';
 			validInput = false;
 			amount.css('border-color', '#cd0a0a')
@@ -115,23 +115,25 @@ $(function() {
 			amount.removeAttr('style');
 		}
 
-		if(descrip.val() === '') {
+		if (descrip.val() === '') {
 			camposValid += '<p>* La descripción es necesaria</p>';
 			validInput = false;
 			descrip.css('border-color', '#cd0a0a')
-		} else if ( !descRegExp.test(descrip.val())  ) {
+		} else if (!descRegExp.test(descrip.val())) {
 			camposValid += '<p>* No se admiten caracteres especiales en la descripción</p>';
 			validInput = false;
 			descrip.css('border-color', '#cd0a0a');
-		} else if ( descrip.val().trim()  ) {
-			camposValid += '<p>* No se admiten espacios en blanco</p>';
+		} else if (/\s/.test(descrip.val())) {
+			camposValid += '<p>* No se admiten espacios en blancos</p>';
 			validInput = false;
 			descrip.css('border-color', '#cd0a0a');
 		} else {
 			descrip.removeAttr('style');
 		}
 
-		if(type.val() === undefined) {
+
+
+		if (type.val() === undefined) {
 			camposValid += '<p>* Selecciona cargo o abono</p>';
 			validInput = false;
 			$('#charge-or-credit').css('border', '1px solid #cd0a0a');
@@ -141,33 +143,35 @@ $(function() {
 		// }
 
 
-		if(clave.val() === '')
-		{
+		if (clave.val() === '') {
 			camposValid += '<p>* La clave es necesaria</p>';
 			validInput = false;
 			clave.css('border-color', '#cd0a0a')
-		}else {
+		} else {
 			clave.removeAttr('style');
 		}
 
 
 		camposValid += '</div>';
-		if(!validInput) {
-			$(camposValid).dialog ({
+		if (!validInput) {
+			$(camposValid).dialog({
 
 				dialogClass: "hide-close",
 				title: 'Campos inválidos',
 				modal: true,
-				resizable:false,
+				resizable: false,
 				draggable: false,
-				open: function(event, ui) {
+				open: function (event, ui) {
 					$('.ui-dialog-titlebar-close', ui.dialog).hide();
 				},
 				buttons: {
-					"Aceptar": { text: 'Aceptar', class: 'novo-btn-primary-modal',
-				click: function () {
-					$(this).dialog("destroy"); }
-				}
+					"Aceptar": {
+						text: 'Aceptar',
+						class: 'novo-btn-primary-modal',
+						click: function () {
+							$(this).dialog("destroy");
+						}
+					}
 				}
 			});
 		} else {
@@ -176,13 +180,14 @@ $(function() {
 			if (form.valid()) {
 				/*Incia validación de transacciones diarias*/
 				if (paramsValidate(type.val())) {
+
 					pass = clave.val()
 					dataSend = {
 						"amount": amount.val(),
-						"descript": descrip.val(),
+						"descript": descrip.val().trim(),
 						"account": account.val(),
 						"type": type.val(),
-						"pass": hex_md5( pass )
+						"pass": hex_md5(pass)
 					};
 
 					$("#recargar").replaceWith('<h3 id="confirm">Procesando...</h3>');
@@ -192,30 +197,38 @@ $(function() {
 						document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 					);
 					var dataRequest = JSON.stringify(dataSend);
-					dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
-					$.post(baseURL + api + isoPais + '/servicios/transferencia-maestra/RegargaTMProcede', {request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)})
-					.done(function (response) {
-						var data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
+					dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {
+						format: CryptoJSAesJson
+					}).toString();
+					$.post(baseURL + api + isoPais + '/servicios/transferencia-maestra/RegargaTMProcede', {
+							request: dataRequest,
+							ceo_name: ceo_cook,
+							plot: btoa(ceo_cook)
+						})
+						.done(function (response) {
+							var data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {
+								format: CryptoJSAesJson
+							}).toString(CryptoJS.enc.Utf8));
 
-						switch (data.code) {
-							case 0:
-								notiPagOS(data.title, data.msg, 'ok');
-								break;
-							case 1:
+							switch (data.code) {
+								case 0:
+									notiPagOS(data.title, data.msg, 'ok');
+									break;
+								case 1:
 									$("#confirm").replaceWith("<button id='recargar' class='novo-btn-primary'>Transferir</button>");
-								notiPagOS(data.title, data.msg, 'error');
-								break;
-							case 2:
-							case 3:
+									notiPagOS(data.title, data.msg, 'error');
+									break;
+								case 2:
+								case 3:
 									clave.val('');
 									$("#confirm").replaceWith("<button id='recargar' class='novo-btn-primary'>Transferir</button>");
 									notiPagOS(data.title, data.msg, 'error');
 									break;
-							default:
+								default:
 									$("#confirm").replaceWith("<button id='recargar' class='novo-btn-primary'>Transferir</button>");
-								notiPagOS(data.title, data.msg, 'close');
-						}
-					});
+									notiPagOS(data.title, data.msg, 'close');
+							}
+						});
 				} /*Finaliza validación de transacciones diarias*/
 			} else {
 				notiPagOS('Campos inválidos', 'Verifica los datos ingresados e intenta nuevamente.');
@@ -223,97 +236,97 @@ $(function() {
 		}
 	});
 
-function paramsValidate(type){
+	function paramsValidate(type) {
 
-	var amountTransfer = parseFloat($('#amount').val());
-	var commission = parseFloat(parametrosRecarga.costoComisionTrans);
-	var minAmount = parseFloat(parametrosRecarga.montoMinTransDia);
-	var maxAmount = parseFloat(parametrosRecarga.montoMaxTransaccion);
-	var accumTransweekly = parseInt(weeklyOper.idCuenta);
-	var maxAmountTransweekly = parseFloat(parametrosRecarga.montoMaxTransSemanal);
-	var accumAmountweekly = parseFloat(weeklyOper.montoOperacion);
-	var maxQuanTransDaily = parseInt(parametrosRecarga.cantidadMaxTransDia);
-	var accumTransDaily = parseInt(dailyOper.idCuenta);
-	var maxAmountTransDaily = parseFloat(parametrosRecarga.montoMaxTransDia);
-	var accumAmountDaily = parseFloat(dailyOper.montoOperacion);
-	var valid = true;
-	codeCtas = 'deft';
-	titleCtas = 'Recarga cuenta.'
+		var amountTransfer = parseFloat($('#amount').val());
+		var commission = parseFloat(parametrosRecarga.costoComisionTrans);
+		var minAmount = parseFloat(parametrosRecarga.montoMinTransDia);
+		var maxAmount = parseFloat(parametrosRecarga.montoMaxTransaccion);
+		var accumTransweekly = parseInt(weeklyOper.idCuenta);
+		var maxAmountTransweekly = parseFloat(parametrosRecarga.montoMaxTransSemanal);
+		var accumAmountweekly = parseFloat(weeklyOper.montoOperacion);
+		var maxQuanTransDaily = parseInt(parametrosRecarga.cantidadMaxTransDia);
+		var accumTransDaily = parseInt(dailyOper.idCuenta);
+		var maxAmountTransDaily = parseFloat(parametrosRecarga.montoMaxTransDia);
+		var accumAmountDaily = parseFloat(dailyOper.montoOperacion);
+		var valid = true;
+		codeCtas = 'deft';
+		titleCtas = 'Recarga cuenta.'
 
-	if(type == 'abono') {
-		var saldo = $('#account option:selected').text().split(':');
-		masterTransferBalanace = parseFloat(saldo[1]);
+		if (type == 'abono') {
+			var saldo = $('#account option:selected').text().split(':');
+			masterTransferBalanace = parseFloat(saldo[1]);
+		}
+
+		if ((amountTransfer + commission) > masterTransferBalanace) {
+			valid = false;
+			msgCtas = "El saldo disponible no es suficiente para realizar la transacción.";
+		}
+
+		if ((maxQuanTransDaily > 0) && (maxQuanTransDaily < (accumTransDaily + 1)) && valid) {
+			valid = false;
+			msgCtas = "Has excedido la cantidad de transacciones por día.";
+		}
+
+		if ((minAmount > 0) && (amountTransfer < minAmount) && valid) {
+			valid = false;
+			msgCtas = "El monto a transferir debe ser mayor al monto mínimo por transacción";
+		}
+
+		if ((maxAmount > 0) && (amountTransfer > maxAmount) && valid) {
+			valid = false;
+			msgCtas = "El monto a transferir no debe superar el monto máximo por transacción.";
+		}
+
+		if ((maxAmountTransweekly > 0) && ((amountTransfer + accumAmountweekly) > maxAmountTransweekly) && valid) {
+			valid = false;
+			msgCtas = "El monto a transferir no debe superar el monto máximo semanal.";
+		}
+
+		if ((maxAmountTransDaily > 0) && ((amountTransfer + accumAmountDaily) > maxAmountTransDaily) && valid) {
+			valid = false;
+			msgCtas = "El monto a transferir no debe superar el monto máximo diario.";
+		}
+
+		if (!valid) {
+			notiPagOS(titleCtas, msgCtas, codeCtas);
+		}
+
+		return valid;
 	}
-
-	if ((amountTransfer + commission) > masterTransferBalanace) {
-		valid = false;
-		msgCtas = "El saldo disponible no es suficiente para realizar la transacción.";
-	}
-
-	if ((maxQuanTransDaily > 0) && (maxQuanTransDaily < (accumTransDaily + 1)) && valid) {
-		valid = false;
-		msgCtas = "Has excedido la cantidad de transacciones por día.";
-	}
-
-	if ((minAmount > 0) && (amountTransfer < minAmount) && valid) {
-		valid = false;
-		msgCtas = "El monto a transferir debe ser mayor al monto mínimo por transacción";
-	}
-
-	if ((maxAmount > 0) && (amountTransfer > maxAmount) && valid) {
-		valid = false;
-		msgCtas = "El monto a transferir no debe superar el monto máximo por transacción.";
-	}
-
-	if ((maxAmountTransweekly > 0) && ((amountTransfer + accumAmountweekly) > maxAmountTransweekly) && valid) {
-		valid = false;
-		msgCtas = "El monto a transferir no debe superar el monto máximo semanal.";
-	}
-
-	if ((maxAmountTransDaily > 0) && ((amountTransfer + accumAmountDaily) > maxAmountTransDaily) && valid) {
-		valid = false;
-		msgCtas = "El monto a transferir no debe superar el monto máximo diario.";
-	}
-
-	if(!valid) {
-		notiPagOS(titleCtas, msgCtas, codeCtas);
-	}
-
-	return valid;
-}
 	// ACCION DEL EVENTO PARA BUSCAR TARJETAS TM
-	$('#buscar').on('click', function() {
+	$('#buscar').on('click', function () {
 		var errElem = $('#mensajeErrorbp');
 		var form = $('#form-criterio-busqueda');
 		errElem.fadeOut('fast');
 		validateForms(form);
-		if(form.valid()) {
+		if (form.valid()) {
 			serv_var.busk = true;
 			serv_var.TotalTjts = 0;
 			buscar(1);
 		} else {
 			$('.div_tabla_detalle').fadeOut('fast');
-      errElem.html('Debe ingresar datos numéricos');
+			errElem.html('Debe ingresar datos numéricos');
 			errElem.fadeIn('fast');
 		}
 	});
 
 	// ACCION EVENTO ICON->CONSULTAR SALDO
-	$(".table-text-aut").on('click', '#consulta_saldo', function() {
+	$(".table-text-aut").on('click', '#consulta_saldo', function () {
 
 		serv_var.noTarjetas = [$(this).parents('tr').attr('tjta')];
 		serv_var.dni_tarjetas = [$(this).parents('tr').attr('id_ext_per')];
 		var op = '30';
 		verif = calcularConsulta();
 		if (verif && $('#clave').val() !== '') {
-			var form= $('#clave').closest('form');
+			var form = $('#clave').closest('form');
 			validateForms(form);
-			if (form.valid()){
+			if (form.valid()) {
 				llamarWS(
 					$('#clave').val(), baseURL + api + isoPais + '/servicios/transferencia-maestra/consultar', op, 'Consultando...'
 				);
 			} else {
-				notificacion ('Consultando...','Usuario o contraseña inválido');
+				notificacion('Consultando...', 'Usuario o contraseña inválido');
 			}
 		} else if (verif) {
 			confirmar(
@@ -323,7 +336,7 @@ function paramsValidate(type){
 	});
 
 	// ACCION EVENTO ICON->ABONAR TARJETA
-	$(".table-text-aut").on('click', '#abono_tarjeta', function() {
+	$(".table-text-aut").on('click', '#abono_tarjeta', function () {
 		var op = '20';
 		resettOp($(this).parents('tr').attr('tjta'));
 		verif = calcularTrans(op);
@@ -339,9 +352,9 @@ function paramsValidate(type){
 	});
 
 	// ACCION EVENTO "SELECCIONAR TODOS"
-	$('#select-allR').on('click', function() {
+	$('#select-allR').on('click', function () {
 		if ($(this).is(':checked')) {
-			$(':checkbox').each(function() {
+			$(':checkbox').each(function () {
 				this.checked = 1;
 				if ($(this).parents('tr').attr('tjta') != undefined) {
 					serv_var.noTarjetas += $(this).parents('tr').attr('tjta') + ",";
@@ -349,7 +362,7 @@ function paramsValidate(type){
 				}
 			});
 		} else {
-			$(':checkbox').each(function() {
+			$(':checkbox').each(function () {
 				this.checked = 0;
 			});
 			resett();
@@ -357,7 +370,7 @@ function paramsValidate(type){
 	});
 
 	// ACCIÓN EVENTO CHECK UNITARIO
-	$('.table-text-aut').on('click', '#check-oneTM', function() {
+	$('.table-text-aut').on('click', '#check-oneTM', function () {
 		var tjts = $(this).parents('tr').attr('tjta');
 		var dnis = $(this).parents('tr').attr('id_ext_per');
 
@@ -372,7 +385,7 @@ function paramsValidate(type){
 	});
 
 	// ACCION EVENTO ICON->CARGAR TARJETA
-	$(".table-text-aut").on('click', '#cargo_tarjeta', function() {
+	$(".table-text-aut").on('click', '#cargo_tarjeta', function () {
 		var op = '40';
 		resettOp($(this).parents('tr').attr('tjta'));
 		verif = calcularTrans(op);
@@ -385,12 +398,12 @@ function paramsValidate(type){
 
 
 	//ACCION EVENTO BOTON->CONSULTAR SALDO
-	$('#consultar-tjta').on('click', function() {
+	$('#consultar-tjta').on('click', function () {
 		if (!(serv_var.noTarjetas instanceof Array)) {
-				serv_var.noTarjetas = serv_var.noTarjetas.substr(0, serv_var.noTarjetas.lastIndexOf(','));
-				serv_var.noTarjetas = serv_var.noTarjetas.split(',');
-				serv_var.dni_tarjetas = serv_var.dni_tarjetas.substr(0, serv_var.dni_tarjetas.lastIndexOf(','));
-				serv_var.dni_tarjetas = serv_var.dni_tarjetas.split(',');
+			serv_var.noTarjetas = serv_var.noTarjetas.substr(0, serv_var.noTarjetas.lastIndexOf(','));
+			serv_var.noTarjetas = serv_var.noTarjetas.split(',');
+			serv_var.dni_tarjetas = serv_var.dni_tarjetas.substr(0, serv_var.dni_tarjetas.lastIndexOf(','));
+			serv_var.dni_tarjetas = serv_var.dni_tarjetas.split(',');
 		}
 
 		if ($('#clave').val() != '' && serv_var.noTarjetas != "") {
@@ -408,7 +421,7 @@ function paramsValidate(type){
 	});
 
 	//ACCION EVENTO BOTON->ABONAR A TARJETA
-	$('#abonar-tjta').on('click', function() {
+	$('#abonar-tjta').on('click', function () {
 		if ($('#clave').val() != '' && calcularTrans('20')) {
 			var form = $(this).closest('form');
 			validateForms(form);
@@ -422,7 +435,7 @@ function paramsValidate(type){
 	});
 
 	//ACCION EVENTO BOTON->CARGAR A TARJETA
-	$('#cargo-tjta').on('click', function() {
+	$('#cargo-tjta').on('click', function () {
 		if ($('#clave').val() != '' && calcularTrans('40')) {
 			var form = $(this).closest('form');
 			validateForms(form);
@@ -436,11 +449,11 @@ function paramsValidate(type){
 	});
 
 	//MARCAR CHECKBOX CUANDO INGRESA MONTO
-	$('#resultado-tarjetas').on('keyup', '.monto', function() {
+	$('#resultado-tarjetas').on('keyup', '.monto', function () {
 
 		if ($(this).val() != '') {
 
-			$.each($(this).parents('tr').find(':checkbox'), function() {
+			$.each($(this).parents('tr').find(':checkbox'), function () {
 				this.checked = 1;
 			});
 
@@ -451,15 +464,15 @@ function paramsValidate(type){
 				});
 			} else if (((isoPais == 'Pe' || isoPais == 'Usd') && !$(this).val().match(/^-?[0-9]+([\.][0-9]{0,2})?$/)) || ((isoPais == 'Ve' || isoPais == 'Co') && !$(this).val().match(/^-?[0-9]+([\,][0-9]{0,2})?$/))) { // validacion solo numeros reales
 				$(this).val("");
-				$.each($(this).parents('tr').find(':checkbox'), function() {
-						this.checked = 0;
+				$.each($(this).parents('tr').find(':checkbox'), function () {
+					this.checked = 0;
 				});
 			} else {
 				$(this).hideBalloon();
 			}
 		} else {
 			$(this).hideBalloon();
-			$.each($(this).parents('tr').find(':checkbox'), function() {
+			$.each($(this).parents('tr').find(':checkbox'), function () {
 				this.checked = 0;
 			});
 		}
@@ -467,9 +480,9 @@ function paramsValidate(type){
 
 }); //FIN DOCUMENT READY
 
-function toFormatShow (valor) {
+function toFormatShow(valor) {
 	valor = valor.toString();
-	if (isoPais == 'Pe' || isoPais == 'Usd'  || isoPais == 'Ec-bp') {
+	if (isoPais == 'Pe' || isoPais == 'Usd' || isoPais == 'Ec-bp') {
 		return valor;
 	}
 	if (isoPais == 'Ve' || isoPais == 'Co') {
@@ -478,28 +491,30 @@ function toFormatShow (valor) {
 	}
 }
 
-function notiPagOS (titu, msg, type) {
+function notiPagOS(titu, msg, type) {
 	var canvas = "<div style='text-align: center;'>" + msg + "</div>";
 	$(canvas).dialog({
 
 		dialogClass: "hide-close",
-		title : titu,
-		modal:true,
-		resizable:false,
+		title: titu,
+		modal: true,
+		resizable: false,
 		draggable: false,
-		open: function(event, ui) {
+		open: function (event, ui) {
 			$('.ui-dialog-titlebar-close', ui.dialog).hide();
 		},
-		buttons:{
-			"Aceptar": { text: 'Aceptar', class: 'novo-btn-primary-modal',
-			click: function () {
-				$(this).dialog('destroy');
-				if (type == 'close') {
-					window.location.replace(baseURL + isoPais+'/logout');
-				} else if (type == 'ok') {
-					location.reload(true);
+		buttons: {
+			"Aceptar": {
+				text: 'Aceptar',
+				class: 'novo-btn-primary-modal',
+				click: function () {
+					$(this).dialog('destroy');
+					if (type == 'close') {
+						window.location.replace(baseURL + isoPais + '/logout');
+					} else if (type == 'ok') {
+						location.reload(true);
+					}
 				}
-			}
 			}
 		}
 	});
@@ -515,7 +530,7 @@ function buscar(pgSgt) {
 		modal: true,
 		resizable: false,
 		dialogClass: 'hide-close',
-		close: function() {
+		close: function () {
 			$aux.dialog('close');
 		},
 		position: {
@@ -526,39 +541,47 @@ function buscar(pgSgt) {
 		document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 	);
 
-	var dataRequest = JSON.stringify ({
+	var dataRequest = JSON.stringify({
 		data_dni: $('#dni').val(),
 		data_tjta: $('#nroTjta').val(),
 		data_pg: pgSgt,
 		data_paginas: serv_var.paginas,
 		data_paginar: serv_var.paginar
+	})
+	dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {
+		format: CryptoJSAesJson
+	}).toString();
+	$.post(baseURL + api + isoPais + "/servicios/transferencia-maestra/buscar", {
+			request: dataRequest,
+			ceo_name: ceo_cook,
+			plot: btoa(ceo_cook)
 		})
-		dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
-		$.post(baseURL + api + isoPais + "/servicios/transferencia-maestra/buscar", {request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)} )
-		.done(function(response){
-		data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
+		.done(function (response) {
+			data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {
+				format: CryptoJSAesJson
+			}).toString(CryptoJS.enc.Utf8))
 
-		$aux.dialog('destroy');
-		if (!data.result.ERROR) {
-			$('#resultado-tarjetas').show();
-			$.inArray('trasal', data.funciones) !== -1 ? $('#consultar-tjta').show() : serv_var.consulta = 'hidden';
-			$.inArray('tracar', data.funciones) !== -1 ? $('#cargo-tjta').show() : serv_var.cargo = 'hidden';
-			$.inArray('traabo', data.funciones) !== -1 ? $('#abonar-tjta').show() : serv_var.abono = 'hidden';
+			$aux.dialog('destroy');
+			if (!data.result.ERROR) {
+				$('#resultado-tarjetas').show();
+				$.inArray('trasal', data.funciones) !== -1 ? $('#consultar-tjta').show() : serv_var.consulta = 'hidden';
+				$.inArray('tracar', data.funciones) !== -1 ? $('#cargo-tjta').show() : serv_var.cargo = 'hidden';
+				$.inArray('traabo', data.funciones) !== -1 ? $('#abonar-tjta').show() : serv_var.abono = 'hidden';
 
-			cargarResultado(data);
-			$('#resultado-tarjetas').find('.jPag-sprevious').attr('title', "anterior");
-			$('#resultado-tarjetas').find('.jPag-snext').attr('title', "siguiente");
+				cargarResultado(data);
+				$('#resultado-tarjetas').find('.jPag-sprevious').attr('title', "anterior");
+				$('#resultado-tarjetas').find('.jPag-snext').attr('title', "siguiente");
 
-		} else {
-			$('#resultado-tarjetas').hide();
-			if (data.result.ERROR == '-29') {
-				alert('Usuario actualmente desconectado');
-				location.reload();
 			} else {
-				notificacion("Buscando tarjetas", data.result.ERROR);
+				$('#resultado-tarjetas').hide();
+				if (data.result.ERROR == '-29') {
+					alert('Usuario actualmente desconectado');
+					location.reload();
+				} else {
+					notificacion("Buscando tarjetas", data.result.ERROR);
+				}
 			}
-		}
-	});
+		});
 }
 
 // CARGAR-MOSTRAR TARJETAS OBTENIDAS DE LA PETICION DE BÚSQUEDA
@@ -590,13 +613,13 @@ function cargarResultado(data) {
 		$('.table-text-aut thead th').css('min-width', '75px');
 		$('.table-text-aut tbody td').css('min-width', '75px');
 
-		$.each(data.result.listadoTarjetas.lista, function(k, v) {
+		$.each(data.result.listadoTarjetas.lista, function (k, v) {
 			tr = '<tr class="' + data.result.listaTarjetas[0].paginaActual + '" tjta="' + v.noTarjetaConMascara + '" id_ext_per="' + v.id_ext_per + '"><td class="checkbox-select"><input id="check-oneTM" type="checkbox" value=""/></td>';
 			tr += '<td id="td-nombre-2" class="bp-min-width">' + v.noTarjetaConMascara + '</td>';
 			tr += '<td id="estatus' + v.noTarjetaConMascara.replace(/[*]/g, "") + '" class="bp-min-width">-</td>'; //estatus
-			tr += '<td id="td-nombre-2" class="bp-min-width">' + v.NombreCliente.toLowerCase().replace(/(^| )(\w)/g, function(x) {
-							return x.toUpperCase();
-					}) + '</td>';
+			tr += '<td id="td-nombre-2" class="bp-min-width">' + v.NombreCliente.toLowerCase().replace(/(^| )(\w)/g, function (x) {
+				return x.toUpperCase();
+			}) + '</td>';
 			tr += '<td class="bp-min-width">' + v.id_ext_per + '</td>';
 			tr += '<td id="saldo' + v.noTarjetaConMascara.replace(/[*]/g, "") + '" class="bp-min-width">-</td>'; //saldo
 			tr += '<td class="bp-min-width"><a id="consulta_saldo" title="consulta saldo" ' + serv_var.consulta + '><span class="icon" data-icon="&#xe072;"></span></a>';
@@ -627,11 +650,11 @@ function paginar() {
 		text_hover_color: '#2573AF',
 		background_hover_color: 'none',
 		images: false,
-		onChange: function(page) {
+		onChange: function (page) {
 			if (!$('.table-text-aut').find($('.' + page)).hasClass(page)) {
 				$('.table-text-aut tbody tr').hide();
 				if ($('#select-allR').is(':checked')) {
-					$(':checkbox').each(function() {
+					$(':checkbox').each(function () {
 						this.checked = 0;
 					});
 					serv_var.noTarjetas = "";
@@ -671,7 +694,7 @@ function calcularTrans(operacion) {
 			break;
 	}
 
-	$.each($('.monto'), function(k, v) {
+	$.each($('.monto'), function (k, v) {
 		if ($(this).val().length > 0) {
 			v = toFormat($(this).val());
 		}
@@ -684,20 +707,20 @@ function calcularTrans(operacion) {
 			else
 				sum = v;
 
-		serv_var.monto.push(v);
-		serv_var.noTarjetas += $(this).parents('tr').attr('tjta') + ",";
-		serv_var.dni_tarjetas += $(this).parents('tr').attr('id_ext_per') + ",";
+			serv_var.monto.push(v);
+			serv_var.noTarjetas += $(this).parents('tr').attr('tjta') + ",";
+			serv_var.dni_tarjetas += $(this).parents('tr').attr('id_ext_per') + ",";
 
 		} else {
 			$(this).val('');
-			$.each($(this).parents('tr').find(':checkbox'), function() {
+			$.each($(this).parents('tr').find(':checkbox'), function () {
 				this.checked = 0;
 			});
 		}
 
 	});
 
-	if(sum) {
+	if (sum) {
 		serv_var.noTarjetas = serv_var.noTarjetas.substr(0, serv_var.noTarjetas.lastIndexOf(','));
 		serv_var.noTarjetas = serv_var.noTarjetas.split(',');
 		serv_var.dni_tarjetas = serv_var.dni_tarjetas.substr(0, serv_var.dni_tarjetas.lastIndexOf(','));
@@ -706,16 +729,16 @@ function calcularTrans(operacion) {
 
 		var cantxdia = 0;
 		var tjtas = serv_var.noTarjetas.length;
-		serv_var.cantXdia.filter(function(op) {
+		serv_var.cantXdia.filter(function (op) {
 			if (op.operacion == operacion) {
-					cantxdia = parseInt(op.idCuenta, 10)
+				cantxdia = parseInt(op.idCuenta, 10)
 			}
 		});
 
 		var maxTransDia = parseInt(serv_var.maestroParam.cantidadMaxTransDia, 10);
 		var acumSem = 0; // monto acumulado en la semana
 
-		serv_var.acumXsem.filter(function(op) {
+		serv_var.acumXsem.filter(function (op) {
 			if (op.operacion == operacion) {
 				acumSem = toFormat(op.montoOperacion);
 			}
@@ -754,7 +777,7 @@ function calcularTrans(operacion) {
 			return false;
 
 		} else {
-				return true;
+			return true;
 		}
 	} else {
 		notificacion(trans + ' a tarjeta', 'Ingresa el monto');
@@ -771,7 +794,7 @@ function llamarWS(pass, url, operacion, mensaje) {
 		modal: true,
 		bgiframe: true,
 		dialogClass: 'hide-close',
-		close: function() {
+		close: function () {
 			$aux.dialog('close');
 		},
 		position: {
@@ -785,7 +808,7 @@ function llamarWS(pass, url, operacion, mensaje) {
 		document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 	);
 
-	var dataRequest = JSON.stringify ({
+	var dataRequest = JSON.stringify({
 		data_tarjeta: serv_var.noTarjetas,
 		data_id_ext_per: serv_var.dni_tarjetas,
 		data_pass: pass,
@@ -793,52 +816,60 @@ function llamarWS(pass, url, operacion, mensaje) {
 		data_pg: 1,
 		data_paginas: 1,
 		data_paginar: false
+	})
+	dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {
+		format: CryptoJSAesJson
+	}).toString();
+	$.post(url, {
+			request: dataRequest,
+			ceo_name: ceo_cook,
+			plot: btoa(ceo_cook)
 		})
-		dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, {format: CryptoJSAesJson}).toString();
-		$.post(url, {request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook)} )
-		.done(function(response){
-			data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
+		.done(function (response) {
+			data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {
+				format: CryptoJSAesJson
+			}).toString(CryptoJS.enc.Utf8))
 
-		$aux.dialog("destroy");
+			$aux.dialog("destroy");
 
-		if (!data.ERROR) {
-			serv_var.cantXdia = data.cantXDia.lista;
-			serv_var.saldoDispon = data.maestroDeposito.saldoDisponible;
-			serv_var.maestroParam = data.maestroParametros;
-			serv_var.acumXsem = data.acumXSemana.lista;
+			if (!data.ERROR) {
+				serv_var.cantXdia = data.cantXDia.lista;
+				serv_var.saldoDispon = data.maestroDeposito.saldoDisponible;
+				serv_var.maestroParam = data.maestroParametros;
+				serv_var.acumXsem = data.acumXSemana.lista;
 
-			$("#saldoEmpresa").text('Saldo disponible: ' + toFormatShow(serv_var.saldoDispon));
-			$('#resultado-tarjetas').find('#saldoDisponible').text('Saldo disponible: ' + toFormatShow(serv_var.saldoDispon));
-			$('#resultado-tarjetas').find('#comisionTrans').text('Comisión por transacción: ' + toFormatShow(serv_var.maestroParam.costoComisionTrans));
-			$('#resultado-tarjetas').find('#comisionCons').text('Comisión por consulta saldo: ' + toFormatShow(serv_var.maestroParam.costoComisionCons));
+				$("#saldoEmpresa").text('Saldo disponible: ' + toFormatShow(serv_var.saldoDispon));
+				$('#resultado-tarjetas').find('#saldoDisponible').text('Saldo disponible: ' + toFormatShow(serv_var.saldoDispon));
+				$('#resultado-tarjetas').find('#comisionTrans').text('Comisión por transacción: ' + toFormatShow(serv_var.maestroParam.costoComisionTrans));
+				$('#resultado-tarjetas').find('#comisionCons').text('Comisión por consulta saldo: ' + toFormatShow(serv_var.maestroParam.costoComisionCons));
 
-			if (operacion == 30) {
-				mostrar_saldo(data);
-			}
+				if (operacion == 30) {
+					mostrar_saldo(data);
+				}
 
-			mostrar_estatus(data);
-			notificacion(
-				mensaje,
-				'<h4>Proceso exitoso</h4><h5>' + serv_var.fallidas + ' tarjetas fallidas</h5><h5>Verifica estatus y/o saldo de las tarjetas</h5>'
-			);
-		} else {
-			if (data.ERROR == '-29') {
-				alert('Usuario actualmente desconectado');
-				location.reload();
+				mostrar_estatus(data);
+				notificacion(
+					mensaje,
+					'<h4>Proceso exitoso</h4><h5>' + serv_var.fallidas + ' tarjetas fallidas</h5><h5>Verifica estatus y/o saldo de las tarjetas</h5>'
+				);
 			} else {
-				notificacion(mensaje, data.ERROR);
+				if (data.ERROR == '-29') {
+					alert('Usuario actualmente desconectado');
+					location.reload();
+				} else {
+					notificacion(mensaje, data.ERROR);
+				}
 			}
-		}
-		resett();
-	});
+			resett();
+		});
 }
 
-$('#form-password').on('keyup keypress', function(e) {
+$('#form-password').on('keyup keypress', function (e) {
 	var keyCode = e.keyCode || e.which;
-  if (keyCode === 13) {
-    e.preventDefault();
-    return false;
-  }
+	if (keyCode === 13) {
+		e.preventDefault();
+		return false;
+	}
 });
 
 // CONFIRMAR OPERACION
@@ -860,20 +891,24 @@ function confirmar(titulo, url, operacion, mensaje) {
 			my: "center top",
 			at: "center 500"
 		},
-		close: function() {
+		close: function () {
 			resett();
 			$(this).dialog("destroy");
 		},
 		buttons: {
-			"Cancelar": { text: 'Cancelar', class: 'novo-btn-secondary-modal', style: 'border-color: #ffdd00 !important;background:white !important;',
-			click: function () {
-			$(this).dialog("close"); }
+			"Cancelar": {
+				text: 'Cancelar',
+				class: 'novo-btn-secondary-modal',
+				style: 'border-color: #ffdd00 !important;background:white !important;',
+				click: function () {
+					$(this).dialog("close");
+				}
 			},
-			Aceptar: function() {
+			Aceptar: function () {
 				pass = $(this).find('#pass').val();
 
 				if (pass !== '') {
-					var form= $(this).find('form');
+					var form = $(this).find('form');
 					validateForms(form);
 					if (form.valid()) {
 						llamarWS(pass, url, operacion, mensaje);
@@ -908,34 +943,36 @@ function notificacion(titulo, mensaje) {
 		position: {
 			my: "top"
 		},
-		close: function() {
+		close: function () {
 			resett();
 			$(this).dialog("close");
 		},
 		buttons: {
-			"Aceptar": { text: 'Aceptar', class: 'novo-btn-primary-modal',
+			"Aceptar": {
+				text: 'Aceptar',
+				class: 'novo-btn-primary-modal',
 				click: function () {
 
-				resett();
-				$(this).dialog("close");
-				 }
+					resett();
+					$(this).dialog("close");
 				}
+			}
 		}
 	});
 }
 
 // LIMPIAR LOS CHECK Y CAMPO CLAVE
 function resett() {
-	$(':checkbox').each(function() {
-			this.checked = 0;
+	$(':checkbox').each(function () {
+		this.checked = 0;
 	});
 
-	$(':input').each(function() {
-			$(this).val('');
+	$(':input').each(function () {
+		$(this).val('');
 	});
 
-	$.each($('.monto'), function() {
-			$(this).hideBalloon();
+	$.each($('.monto'), function () {
+		$(this).hideBalloon();
 	});
 
 	serv_var.noTarjetas = "";
@@ -945,7 +982,7 @@ function resett() {
 }
 
 function resettOp(selected) {
-	$('.monto').each(function() {
+	$('.monto').each(function () {
 		este = $(this).parents('tr').attr('tjta');
 		if (este !== selected) {
 			$(this).val('');
@@ -955,14 +992,14 @@ function resettOp(selected) {
 
 // MOSTRAR EL SALDO DISPONIBLE PARA CADA TARJETA LUEGO DE CONSULTAR
 function mostrar_saldo(data) {
-	$.each(data.listadoTarjetas.lista, function(k, t) {
+	$.each(data.listadoTarjetas.lista, function (k, t) {
 		if (t.saldos !== undefined)
 			$('#saldo' + t.noTarjetaConMascara.replace(/[*]/g, "")).text((t.saldos.disponible));
 	});
 }
 
 function mostrar_estatus(data) {
-	$.each(data.listadoTarjetas.lista, function(k, t) {
+	$.each(data.listadoTarjetas.lista, function (k, t) {
 		if (t.rc == "0") {
 			t.rc = 'OK';
 		} else {
@@ -985,7 +1022,7 @@ function calcularConsulta() {
 
 	// validar cantidad de consultas al dia
 	var cantxdia = 0; // cantidad de consultas acumuladas en el día.
-	serv_var.cantXdia.filter(function(op) {
+	serv_var.cantXdia.filter(function (op) {
 		if (op.operacion == '30') {
 			cantxdia = parseInt(op.idCuenta, 10)
 		}
@@ -1015,10 +1052,10 @@ function toFormat(valor) {
 			return parseFloat(valor.replace(',', ''));
 
 		} else if (isoPais == 'Ve' || isoPais == 'Co') {
-			if(valor.lastIndexOf(",") == (valor.length - 2)) {
+			if (valor.lastIndexOf(",") == (valor.length - 2)) {
 				valor += '0';
 			}
-			if(valor.lastIndexOf(".") == (valor.length - 2)) {
+			if (valor.lastIndexOf(".") == (valor.length - 2)) {
 				valor += '0';
 			}
 			if (valor.substr(-3, 1) == ",")
@@ -1038,26 +1075,26 @@ function toFormat(valor) {
 }
 
 /**
-* Da formato a un número para su visualización
-*
-* @param {(number|string)} numero Número que se mostrará
-* @param {number} [decimales=null] Nº de decimales (por defecto, auto); admite valores negativos
-* @param {string} [separadorDecimal=","] Separador decimal
-* @param {string} [separadorMiles=""] Separador de miles
-* @returns {string} Número formateado o cadena vacía si no es un número
-*
-* @version 2014-07-18
-*/
+ * Da formato a un número para su visualización
+ *
+ * @param {(number|string)} numero Número que se mostrará
+ * @param {number} [decimales=null] Nº de decimales (por defecto, auto); admite valores negativos
+ * @param {string} [separadorDecimal=","] Separador decimal
+ * @param {string} [separadorMiles=""] Separador de miles
+ * @returns {string} Número formateado o cadena vacía si no es un número
+ *
+ * @version 2014-07-18
+ */
 function formatoNumero(numero, decimales, separadorDecimal, separadorMiles) {
 	var partes, array;
 	if (!isFinite(numero) || isNaN(numero = parseFloat(numero))) {
-			return "";
+		return "";
 	}
 	if (typeof separadorDecimal === "undefined") {
-			separadorDecimal = ",";
+		separadorDecimal = ",";
 	}
 	if (typeof separadorMiles === "undefined") {
-			separadorMiles = "";
+		separadorMiles = "";
 	} // Redondeamos
 	if (!isNaN(parseInt(decimales))) {
 		if (decimales >= 0) {
@@ -1068,7 +1105,7 @@ function formatoNumero(numero, decimales, separadorDecimal, separadorMiles) {
 	} else {
 		numero = numero.toString();
 	}
-	 // Damos formato
+	// Damos formato
 	partes = numero.split(".", 2);
 	array = partes[0].split("");
 	for (var i = array.length - 3; i > 0 && array[i - 1] !== "-"; i -= 3) {
