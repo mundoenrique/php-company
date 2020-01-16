@@ -146,10 +146,20 @@ class User extends NOVO_Controller {
 	public function finishSession()
 	{
 		log_message('INFO', 'NOVO User: finishSession Method Initialized');
+
 		if($this->render->userId || $this->render->logged) {
 			$this->load->model('Novo_User_Model', 'finishSession');
 			$this->finishSession->callWs_FinishSession_User();
 		}
-		redirect(base_url('inicio'), 'location');
+		log_message('info', '-----------------'.json_encode($this->session->has_userdata('logged')));
+		$view = 'finish';
+		if(verifyDisplay('body', $view,  lang('GEN_TAG_REDIRECT_FINISH'))) {
+			$this->render->titlePage = LANG('GEN_FINISH_TITLE');
+			$this->views = ['user/'.$view];
+			$this->loadView($view);
+		} else {
+			redirect(base_url(lang('GEN_LINK_LOGIN')), 'location');
+		}
+
 	}
 }
