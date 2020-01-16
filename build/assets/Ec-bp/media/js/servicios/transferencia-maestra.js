@@ -72,10 +72,15 @@ $(function() {
 
 	});
 
+	$('input:radio[name=type]').on('change', function(){
+		$('#charge-or-credit').removeAttr('style');
+	})
+
 	$('#recarga_concetradora').on('click','#recargar', function(e) {
 		e.preventDefault();
 		$(this).find($('#amount').removeAttr('style'));
 		$(this).find($('#description').removeAttr('style'));
+
 		var RE = /^\d*\.?\d*$/,
 				decimal = /^[0-9]*([.][0-9]{2})?$/,
 				descRegExp = /^['a-z0-9ñáéíóú ,.:()']+$/i,
@@ -84,13 +89,14 @@ $(function() {
 				amount = $('#amount'),
 				disponible = $('#disponible'),
 				descrip = $('#description'),
+
 				account = $('#account-transfer'),
 				clave = $('#claveTranferencia'),
 				type = $('input:radio[name=type]:checked'),
 				valAmount = (amount == ''  || !RE.test(amount)) ? false : true,
 				valdescript = (descrip == '') ?  false : true,
 				valAccount = (account == '') ? false : true,
-				valtype = (type == undefined) ? false : true;
+				valtype = (type == undefined) ? 'border: 1px solid #cd0a0a' : 'border: none';
 
 		if(amount.val() === ''|| !RE.test(amount.val())) {
 			camposValid += '<p>* El monto debe ser numérico</p>';
@@ -113,8 +119,12 @@ $(function() {
 			camposValid += '<p>* La descripción es necesaria</p>';
 			validInput = false;
 			descrip.css('border-color', '#cd0a0a')
-		} else if ( !descRegExp.test(descrip.val()) ) {
+		} else if ( !descRegExp.test(descrip.val())  ) {
 			camposValid += '<p>* No se admiten caracteres especiales en la descripción</p>';
+			validInput = false;
+			descrip.css('border-color', '#cd0a0a');
+		} else if ( descrip.val().trim()  ) {
+			camposValid += '<p>* No se admiten espacios en blanco</p>';
 			validInput = false;
 			descrip.css('border-color', '#cd0a0a');
 		} else {
@@ -125,9 +135,11 @@ $(function() {
 			camposValid += '<p>* Selecciona cargo o abono</p>';
 			validInput = false;
 			$('#charge-or-credit').css('border', '1px solid #cd0a0a');
-		} else {
-			$('#charge-or-credit').removeAttr('style');
 		}
+		// else {
+		// 	$('#charge-or-credit')removeAttr('style');
+		// }
+
 
 		if(clave.val() === '')
 		{
