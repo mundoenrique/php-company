@@ -143,7 +143,7 @@ class User extends NOVO_Controller {
 	 * @info Método para el cierre de sesión
 	 * @author J. Enrique Peñaloza Piñero.
 	 */
-	public function finishSession()
+	public function finishSession($redirect)
 	{
 		log_message('INFO', 'NOVO User: finishSession Method Initialized');
 
@@ -151,9 +151,24 @@ class User extends NOVO_Controller {
 			$this->load->model('Novo_User_Model', 'finishSession');
 			$this->finishSession->callWs_FinishSession_User();
 		}
-		log_message('info', '-----------------'.json_encode($this->session->has_userdata('logged')));
+
 		$view = 'finish';
-		if(verifyDisplay('body', $view,  lang('GEN_TAG_REDIRECT_FINISH'))) {
+
+		if($redirect == 'fin' || AUTO_LOGIN) {
+			$pos = array_search('menu-datepicker', $this->includeAssets->jsFiles);
+			$this->render->action = base_url('inicio');
+			$this->render->showBtn = TRUE;
+			$this->render->sessionEnd = novoLang(lang('GEN_EXPIRED_SESSION'), lang('GEN_SYSTEM_NAME'));
+
+			if(AUTO_LOGIN) {
+				$this->render->showBtn = FALSE;
+			}
+
+			if($redirect == 'inicio') {
+				$this->render->sessionEnd = novoLang(lang('GEN_FINISHED_SESSION'), lang('GEN_SYSTEM_NAME'));
+			}
+
+			unset($this->includeAssets->jsFiles[$pos]);
 			$this->render->titlePage = LANG('GEN_FINISH_TITLE');
 			$this->views = ['user/'.$view];
 			$this->loadView($view);

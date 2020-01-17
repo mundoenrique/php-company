@@ -124,59 +124,62 @@ class Verify_Access {
 		$freeAccess = ['login', 'validateCaptcha', 'finishSession', 'terms'];
 		$auth = in_array($module, $freeAccess);
 
-		switch($module) {
-			case 'recoverPass':
-			case 'benefits':
-				$clients = ['novo', 'pichincha'];
-				$auth = in_array($this->CI->config->item('client'), $clients);
-				break;
-			case 'terms':
-				$clients = ['pichincha', 'banco-bog'];
-				if(in_array($this->CI->config->item('client'), $clients)) {
-					$auth = $this->CI->session->flashdata('changePassword');
-				}
-				break;
-			case 'changePassword':
-				$auth = ($this->CI->session->flashdata('changePassword') != NULL);
-				break;
-			case 'rates':
-				$auth = ($this->CI->session->has_userdata('logged') && $countryUri === 've');
-				break;
-			case 'getEnterprises':
-			case 'getProducts':
-				$auth = ($this->CI->session->has_userdata('logged') && $countryUri === 'bdb');
-				break;
-			case 'getProductDetail':
-				$auth = ($this->CI->session->has_userdata('enterpriseInf') && $countryUri === 'bdb');
-				break;
-			case 'getPendingBulk':
-			case 'loadBulk':
-			case 'getDetailBulk':
-				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBCAR'));
-				break;
-			case 'confirmBulk':
-				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBCAR', 'TEBCON'));
-				break;
-			case 'deleteNoConfirmBulk':
-				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBCAR', 'TEBELC'));
-				break;
-			case 'authorizeBulkList':
-			case 'signBulkList':
-			case 'authorizeBulk':
-			case 'calculateServiceOrder':
-				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBAUT'));
-				break;
-			case 'deleteConfirmBulk':
-				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBAUT', 'TEBELI'));
-				break;
-			case 'serviceOrder':
-			case 'cancelServiceOrder':
-				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBAUT') && $this->verifyAuthorization('TEBORS'));
-				break;
-			case 'serviceOrders':
-			case 'getServiceOrders':
-				$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBORS'));
-				break;
+		if(!$auth) {
+			switch($module) {
+				case 'recoverPass':
+				case 'benefits':
+					$clients = ['novo', 'pichincha'];
+					$auth = in_array($this->CI->config->item('client'), $clients);
+					break;
+				case 'terms':
+					$clients = ['pichincha', 'banco-bog'];
+					if(in_array($this->CI->config->item('client'), $clients)) {
+						$auth = $this->CI->session->flashdata('changePassword');
+					}
+					break;
+				case 'changePassword':
+					$auth = ($this->CI->session->flashdata('changePassword') != NULL);
+					break;
+				case 'rates':
+					$auth = ($this->CI->session->has_userdata('logged') && $countryUri === 've');
+					break;
+				case 'getEnterprises':
+				case 'getProducts':
+				case 'keepSession':
+					$auth = ($this->CI->session->has_userdata('logged'));
+					break;
+				case 'getProductDetail':
+					$auth = ($this->CI->session->has_userdata('enterpriseInf'));
+					break;
+				case 'getPendingBulk':
+				case 'loadBulk':
+				case 'getDetailBulk':
+					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBCAR'));
+					break;
+				case 'confirmBulk':
+					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBCAR', 'TEBCON'));
+					break;
+				case 'deleteNoConfirmBulk':
+					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBCAR', 'TEBELC'));
+					break;
+				case 'authorizeBulkList':
+				case 'signBulkList':
+				case 'authorizeBulk':
+				case 'calculateServiceOrder':
+					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBAUT'));
+					break;
+				case 'deleteConfirmBulk':
+					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBAUT', 'TEBELI'));
+					break;
+				case 'serviceOrder':
+				case 'cancelServiceOrder':
+					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBAUT') && $this->verifyAuthorization('TEBORS'));
+					break;
+				case 'serviceOrders':
+				case 'getServiceOrders':
+					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBORS'));
+					break;
+			}
 		}
 
 		log_message('INFO', 'NOVO ['.$user.'] accessAuthorization '.$module.': '.json_encode($auth, JSON_UNESCAPED_UNICODE));

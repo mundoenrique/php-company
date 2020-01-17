@@ -274,6 +274,22 @@ class Novo_User_Model extends NOVO_Model {
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date May 1st, 2019
 	 */
+	public function callWs_KeepSession_User($dataRequest = FALSE)
+	{
+		log_message('INFO', 'NOVO User Model: KeepSession Method Initialized');
+		$response = new stdClass();
+		$response->rc =  0;
+		$this->makeAnswer($response);
+		$this->response->code = 0;
+
+
+		return $this->responseToTheView('KeepSession');
+	}
+	/**
+	 * @info Método para el cierre de sesión
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date May 1st, 2019
+	 */
 	public function callWs_FinishSession_User($dataRequest = FALSE)
 	{
 		log_message('INFO', 'NOVO User Model: FinishSession Method Initialized');

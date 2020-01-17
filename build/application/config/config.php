@@ -407,6 +407,10 @@ $config['sess_save_path'] = SESS_SAVE_PATH;
 $config['sess_match_ip'] = SESS_MATCH_IP;
 $config['sess_time_to_update'] = 300;
 $config['sess_regenerate_destroy'] = TRUE;
+/*
+| Configura control de tiempo de sesión
+*/
+$config['session_time'] = $config['sess_expiration'] * 1000;
 
 /*
 |--------------------------------------------------------------------------

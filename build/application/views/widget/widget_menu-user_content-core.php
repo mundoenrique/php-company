@@ -7,7 +7,7 @@
 			</a>
 			<ul class="dropdown regular tertiary bg-secondary">
 				<li><a class="pl-2 pr-1 h6 big-modal" href="javascript:">Configuración</a></li>
-				<li><a class="pl-2 pr-1 h6 big-modal" href="<?= base_url('cerrar-sesion') ?>">Cerrar Sesión</a></li>
+				<li><a class="pl-2 pr-1 h6 big-modal" href="<?= base_url('cerrar-sesion/inicio') ?>">Cerrar Sesión</a></li>
 			</ul>
 			<span></span>
 		</li>
