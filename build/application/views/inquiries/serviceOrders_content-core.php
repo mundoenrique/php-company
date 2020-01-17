@@ -94,14 +94,14 @@
 									<td><?= $list->OrderAmount; ?></td>
 									<td><?= $list->OrderDeposit; ?></td>
 									<td class="p-0 flex justify-center">
-										<button class="btn px-0 details-control" title="Ver" data-toggle="tooltip">
-											<i class="icon icon-find mr-1" aria-hidden="true"></i>
+										<button class="btn mx-1 px-0 details-control" title="Ver" data-toggle="tooltip">
+											<i class="icon icon-find" aria-hidden="true"></i>
 										</button>
-										<button class="btn px-1" title="Descargar PDF" data-toggle="tooltip">
-											<i class="icon icon-download mr-1" aria-hidden="true"></i>
+										<button class="btn mx-1 px-0" title="Descargar PDF" data-toggle="tooltip">
+											<i class="icon icon-download" aria-hidden="true"></i>
 										</button>
-										<button class="btn px-0" title="Eliminar" data-toggle="tooltip">
-											<i class="icon icon-remove mr-1" aria-hidden="true"></i>
+										<button class="btn mx-1 px-0" title="Eliminar" data-toggle="tooltip">
+											<i class="icon icon-remove" aria-hidden="true"></i>
 										</button>
 									</td>
 								</tr>
