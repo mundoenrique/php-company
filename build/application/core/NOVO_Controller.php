@@ -49,8 +49,8 @@ class NOVO_Controller extends CI_Controller {
 		$this->render->widget =  FALSE;
 		$this->greeting = (int) $this->session->greeting;
 		$this->render->sessionTime = $this->config->item('session_time');
-		$this->render->callModal = ceil($this->render->sessionTime * 7 / 100);
-		$this->render->callServer = ceil($this->render->callModal * 55 / 100);
+		$this->render->callModal = $this->render->sessionTime < 180000 ? ceil($this->render->sessionTime * 50 / 100) : 20000;
+		$this->render->callServer = $this->render->sessionTime < 180000 ? ceil($this->render->callModal * 50 / 100) : 15000;
 		$this->optionsCheck();
 	}
 	/**
