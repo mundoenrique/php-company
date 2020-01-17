@@ -231,7 +231,7 @@ $(function () {
 						});
 				} /*Finaliza validación de transacciones diarias*/
 			} else {
-				notiPagOS('Campos inválidos', 'Verifica los datos ingresados e intenta nuevamente.');
+				notiPagOS('Campos inválidos', 'La contraseña es incorrecta. Por favor verifícala e intenta de nuevo.');
 			}
 		}
 	});
