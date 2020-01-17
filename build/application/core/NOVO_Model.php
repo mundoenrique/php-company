@@ -72,7 +72,7 @@ class NOVO_Model extends CI_Model {
 	 * @author J. Enrique Peñaloza Piñero.
 	 * @date December 11th, 2019
 	 */
-	private function makeAnswer($responseModel)
+	protected function makeAnswer($responseModel)
 	{
 		log_message('INFO', 'NOVO Model: makeAnswer Method Initialized');
 

@@ -145,6 +145,10 @@ define('THRESHOLD', $_SERVER['CI_ENV'] === 'development' ? 4 : 2);
 define('CYPHER_BASE', isset($_SERVER['CYPHER_BASE']) ?
 	$_SERVER['CYPHER_BASE'] : ''
 );
+define('AUTO_LOGIN', isset($_SERVER['AUTO_LOGIN'])
+&& filter_var($_SERVER['AUTO_LOGIN'], FILTER_VALIDATE_BOOLEAN) ?
+	boolval($_SERVER['AUTO_LOGIN']) : FALSE
+);
 define('ACTIVE_RECAPTCHA', isset($_SERVER['ACTIVE_RECAPTCHA'])
 && filter_var($_SERVER['ACTIVE_RECAPTCHA'], FILTER_VALIDATE_BOOLEAN) ?
 	boolval($_SERVER['ACTIVE_RECAPTCHA']) : FALSE

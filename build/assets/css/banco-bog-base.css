@@ -3364,6 +3364,9 @@ a.ui-button:active,
 .ui-dialog-buttonpane .btn {
 	width: 5.75rem;
 }
+.ui-dialog-buttonpane .btn-large-xl {
+	width: 9.75rem;
+}
 .ui-draggable .ui-dialog-titlebar {
 	cursor: move;
 }

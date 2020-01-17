@@ -46,6 +46,7 @@
 		var msg = '<?= isset($msg) ? $msg : ''; ?>';
 		var icon = '<?= isset($icon) ? $icon : ''; ?>';
 		var data = <?= isset($data) ? $data : 0; ?>;
+		var sessionTime = <?= $sessionTime; ?>;
 	</script>
 </body>
 </html>

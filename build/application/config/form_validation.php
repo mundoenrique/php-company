@@ -261,6 +261,13 @@ $config = [
 			'rules' => 'trim|regex_match[/^[a-z0-9]+$/i]'
 		]
 	],
+	'keepSession' => [
+		[
+			'field' => 'modalReq',
+			'label' => 'modalReq',
+			'rules' => 'trim|required'
+		]
+	],
 	'dash-products' => [
 		[
 			'field' => 'data-accodgrupoe',

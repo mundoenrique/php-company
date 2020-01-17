@@ -48,6 +48,7 @@ class NOVO_Controller extends CI_Controller {
 		$this->render->activeRecaptcha = $this->config->item('active_recaptcha');
 		$this->render->widget =  FALSE;
 		$this->greeting = (int) $this->session->greeting;
+		$this->render->sessionTime = $this->config->item('session_time');
 		$this->optionsCheck();
 	}
 	/**
@@ -140,8 +141,6 @@ class NOVO_Controller extends CI_Controller {
 			}
 
 			$this->includeAssets->cssFiles = [
-				//"$structure-structure",
-				//"$this->skin-appearance",
 				"$this->skin-base"
 			];
 
