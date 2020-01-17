@@ -34,7 +34,7 @@ function sessionExpire() {
 	if(sessionTime > 0) {
 		setTimeout(function() {
 			finishSession()
-		}, (sessionTime - 20000));
+		}, (sessionTime - callModal));
 	}
 }
 
@@ -53,7 +53,7 @@ function finishSession() {
 	$('#accept').attr('id', 'keep-session');
 	var setTimesession = setTimeout(function() {
 		$(location).attr('href', baseURL+'cerrar-sesion/fin');
-	}, 17000);
+	}, callServer);
 
 	$('#keep-session').on('click', function() {
 		$(this)

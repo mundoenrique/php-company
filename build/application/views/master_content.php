@@ -47,6 +47,8 @@
 		var icon = '<?= isset($icon) ? $icon : ''; ?>';
 		var data = <?= isset($data) ? $data : 0; ?>;
 		var sessionTime = <?= $sessionTime; ?>;
+		var callModal = <?= $callModal; ?>;
+		var callServer = <?= $callServer; ?>;
 	</script>
 </body>
 </html>
