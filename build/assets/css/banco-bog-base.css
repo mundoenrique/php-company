@@ -1250,6 +1250,7 @@ textarea.form-control {
 .bg-vista-blue { background-color: var(--vista-blue) !important }
 .bg-trikemaster  { background-color: var(--trikemaster) !important }
 .bg-pink-salmon   { background-color: var(--pink-salmon) !important }
+.bg-gold-sand   { background-color: var(--gold-sand) !important }
 
 .bg-transparent { background-color: transparent !important }
 
@@ -3013,6 +3014,7 @@ ul.steps li.step-item i {
 	background: var(--text-color);
 	opacity: .6;
 	filter: Alpha(Opacity=30); /* support: IE8 */
+	z-index: 999;
 }
 .ui-button {
 	display: inline-flex;
@@ -3548,9 +3550,9 @@ a.ui-button:active,
 
 /* Others */
 
-.status-pr {
+/* .status-pr {
   padding-right: 38px;
-}
+} */
 
 @media (min-width: 1200px) {
   .search-criteria-order {

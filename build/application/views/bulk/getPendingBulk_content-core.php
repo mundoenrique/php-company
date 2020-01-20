@@ -83,12 +83,12 @@
 								<td><?= $bulk->fileName ?></td>
 								<td class="tool-ellipsis"><?= $bulk->loadDate ?></td>
 								<td>
-									<div class="<?= $bulk->statusPr ?> flex items-center justify-center">
-										<div class="icon-circle <?= $bulk->statusColor ?>" alt=""></div>
+									<div class="<?= $bulk->statusPr ?>flex items-center">
+										<div class="icon-circle <?= $bulk->statusColor ?> mx-1" alt=""></div>
 										<span class="pl-1 uppercase"><?= $bulk->statusText ?></span>
 									</div>
 								</td>
-								<td class="p-0 flex justify-center items-center">
+								<td class="py-0 px-1 flex justify-center items-center">
 									<?php if($bulk->status == 1 || $bulk->status == 6 && $this->verify_access->verifyAuthorization('TEBCAR', 'TEBCON')): ?>
 									<button class="btn mx-1 px-0 big-modal" title="<?= lang('GEN_BTN_CONFIRM'); ?>" data-toggle="tooltip">
 										<i class="icon icon-ok" aria-hidden="true"></i>
@@ -117,7 +117,7 @@
 					</table>
 					<div class="mx-3 h3">
 						<div class="flex mt-4 items-center">
-							<div class="icon-square bg-yellow" alt=""></div>
+							<div class="icon-square bg-gold-sand" alt=""></div>
 							<span class="pl-1 h6"><?= lang('BULK_VALIDATING_RECORDS'); ?></span>
 						</div>
 						<div class="flex mt-2 items-center">

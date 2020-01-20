@@ -98,6 +98,13 @@ $(function () {
 		},
     "ordering": false,
 		"pagingType": "full_numbers",
+		"columns": [
+			null,
+			null,
+			null,
+			{ "width": "160px" },
+			{ "width": "130px" },
+		],
 		"columnDefs": [{
 			"targets": 1,
 			render: function ( data, type, row ) {
@@ -106,7 +113,7 @@ $(function () {
         	data;
       }
 		}],
-		"table-layout": "fixed",
+		"autoWidth": false,
     "language": {
       "sProcessing": "Procesando...",
       "sLengthMenu": "Mostrar _MENU_ registros",

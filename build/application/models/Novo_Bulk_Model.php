@@ -50,7 +50,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 					switch ($bulktatus) {
 						case '0':
 							$bulk['statusPr'] = '';
-							$bulk['statusColor'] = ' bg-yellow';
+							$bulk['statusColor'] = ' bg-gold-sand';
 							$bulk['statusText'] = lang('BULK_VALIDATING');
 							break;
 						case '1':

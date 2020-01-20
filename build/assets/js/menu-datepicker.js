@@ -39,6 +39,10 @@ function sessionExpire() {
 }
 
 function finishSession() {
+	var oldID = $('#accept').attr('id');
+	var setTimesession;
+
+	$('#system-info').dialog('close');
 	$('#accept').addClass('btn-large-xl')
 	data = {
 		btn1: {
@@ -46,12 +50,9 @@ function finishSession() {
 			action: 'close'
 		}
 	}
-	notiSystem(lang.GEN_SYSTEM_NAME, 'No se ha detectado actividad en la página, tu sesión está próxima a expirar.', lang.GEN_ICON_INFO, data);
-
-	var oldID = $('#accept').attr('id');
-
+	notiSystem(lang.GEN_SYSTEM_NAME, lang.GEN_FINISH_TEXT, lang.GEN_ICON_INFO, data);
 	$('#accept').attr('id', 'keep-session');
-	var setTimesession = setTimeout(function() {
+	setTimesession = setTimeout(function() {
 		$(location).attr('href', baseURL+'cerrar-sesion/fin');
 	}, callServer);
 
@@ -64,7 +65,9 @@ function finishSession() {
 			modalReq: true,
 		}
 		callNovoCore(verb, who, where, data, function(response) {
-			$('#accept').removeClass('btn-large-xl')
+			$('#accept')
+			.text(lang.GEN_BTN_ACCEPT)
+			.removeClass('btn-large-xl')
 			clearTimeout(setTimesession);
 			sessionExpire();
 		})
