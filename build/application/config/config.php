@@ -402,7 +402,7 @@ $config['encryption_key'] = ENCRYPTION_KEY;
 */
 $config['sess_driver'] = 'files';
 $config['sess_cookie_name'] = SESS_COOKIE_NAME;
-$config['sess_expiration'] = SESS_EXPIRATION;
+$config['sess_expiration'] = SESS_EXPIRATION + 10;
 $config['sess_save_path'] = SESS_SAVE_PATH;
 $config['sess_match_ip'] = SESS_MATCH_IP;
 $config['sess_time_to_update'] = 300;
@@ -410,7 +410,7 @@ $config['sess_regenerate_destroy'] = TRUE;
 /*
 | Configura control de tiempo de sesión
 */
-$config['session_time'] = $config['sess_expiration'] * 1000;
+$config['session_time'] = SESS_EXPIRATION * 1000;
 
 /*
 |--------------------------------------------------------------------------
