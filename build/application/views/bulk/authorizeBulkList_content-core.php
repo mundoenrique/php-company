@@ -87,7 +87,8 @@
 				<div class="flex pb-5 flex-column">
 					<span class="line-text mb-2 h4 semibold primary"><?= lang('BULK_PENDING_AUTH'); ?></span>
 					<div class="center mx-1">
-						<table id="authorize-bulk" class="cell-border h6 display" auth="<?= $authorizeAttr->auth; ?>" order-to-pay="<?= $authorizeAttr->toPAy; ?>">
+						<table id="authorize-bulk" class="cell-border h6 display" auth="<?= $authorizeAttr->auth; ?>"
+							order-to-pay="<?= $authorizeAttr->toPAy; ?>">
 							<thead class="bg-primary secondary regular">
 								<tr>
 									<th class="<?= $authorizeAttr->allBulk; ?>"></th>
@@ -124,6 +125,7 @@
 								<?php endforeach; ?>
 							</tbody>
 						</table>
+						<?php if($authorizeBulk != new stdClass()): ?>
 						<form id="auth-bulk-form" method="post">
 							<div class="flex row mt-3 mb-2 mx-2 justify-end">
 								<div class="col-4 col-lg-3 h6 regular form-group">
@@ -133,7 +135,7 @@
 										<option value="1" selected><?= lang('BULK_PROCESS_TYPE_BULK') ?></option>
 									</select>
 									<?php else: ?>
-										<input type="hidden" id="type-order" name="type-order" value="0">
+									<input type="hidden" id="type-order" name="type-order" value="0">
 									<?php endif; ?>
 									<div class="help-block"></div>
 								</div>
@@ -153,7 +155,7 @@
 								</div>
 							</div>
 						</form>
-
+						<?php endif; ?>
 						<div class="line mb-2"></div>
 					</div>
 

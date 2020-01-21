@@ -1,5 +1,7 @@
 'use strict'
-var currentDate
+var currentDate;
+var setTimesession;
+var resetTimesession;
 $(function() {
 	currentDate = new Date();
 
@@ -26,13 +28,14 @@ $(function() {
     yearSuffix: ''
   };
 	$.datepicker.setDefaults($.datepicker.regional['es']);
-
+	clearTimeout(resetTimesession);
+	clearTimeout(setTimesession);
 	sessionExpire();
 });
 
 function sessionExpire() {
 	if(sessionTime > 0) {
-		setTimeout(function() {
+		setTimesession = setTimeout(function() {
 			finishSession()
 		}, (sessionTime - callModal));
 	}
@@ -40,9 +43,11 @@ function sessionExpire() {
 
 function finishSession() {
 	var oldID = $('#accept').attr('id');
-	var setTimesession;
 
-	$('#system-info').dialog('close');
+	if ($('#system-info').parents('.ui-dialog:visible').length) {
+		$('#system-info').dialog('close');
+	}
+
 	$('#accept').addClass('btn-large-xl')
 	data = {
 		btn1: {
@@ -52,7 +57,7 @@ function finishSession() {
 	}
 	notiSystem(lang.GEN_SYSTEM_NAME, lang.GEN_FINISH_TEXT, lang.GEN_ICON_INFO, data);
 	$('#accept').attr('id', 'keep-session');
-	setTimesession = setTimeout(function() {
+	resetTimesession = setTimeout(function() {
 		$(location).attr('href', baseURL+'cerrar-sesion/fin');
 	}, callServer);
 
@@ -67,9 +72,7 @@ function finishSession() {
 		callNovoCore(verb, who, where, data, function(response) {
 			$('#accept')
 			.text(lang.GEN_BTN_ACCEPT)
-			.removeClass('btn-large-xl')
-			clearTimeout(setTimesession);
-			sessionExpire();
+			.removeClass('btn-large-xl');
 		})
 
 

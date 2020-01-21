@@ -48,6 +48,12 @@ function callNovoCore(verb, who, where, request, _response_) {
 	formData.append('ceo_name', ceo_cook);
 	formData.append('plot', btoa(ceo_cook));
 
+	if(logged) {
+		clearTimeout(resetTimesession);
+		clearTimeout(setTimesession);
+		sessionExpire();
+	}
+
 	$.ajax({
 		method: verb,
 		url: baseURL + 'async-call',
