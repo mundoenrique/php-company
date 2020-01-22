@@ -47,7 +47,6 @@ class NOVO_Controller extends CI_Controller {
 			$this->session->productInf->productName.' / '.$this->session->productInf->brand;
 		$this->render->activeRecaptcha = $this->config->item('active_recaptcha');
 		$this->render->widget =  FALSE;
-		$this->greeting = (int) $this->session->greeting;
 		$this->render->sessionTime = $this->config->item('session_time');
 		$this->render->callModal = $this->render->sessionTime < 180000 ? ceil($this->render->sessionTime * 50 / 100) : 15000;
 		$this->render->callServer = $this->render->callModal;
@@ -70,6 +69,23 @@ class NOVO_Controller extends CI_Controller {
 		$this->form_validation->set_error_delimiters('', '---');
 		$this->config->set_item('language', 'spanish-base');
 
+		if($this->session->has_userdata('time')) {
+			log_message('info', '- Hora: session '.json_encode($this->session->time));
+			$customerTime = $this->session->time->customerTime;
+			$serverTime = $this->session->time->serverTime;
+			$currentTime = (int) date("H");
+			$currentTime2 = date("Y-d-m H:i:s");
+			log_message('info', '- Hora: customerTime '.$customerTime.' -- serverTime '.$serverTime.' -- current '.$currentTime.' -- '.$currentTime2);
+			$serverelapsed = $currentTime - $serverTime;
+			log_message('info', '- Hora: diff '.$serverelapsed);
+			$serverelapsed = $serverelapsed >= 0 ? $serverelapsed : $serverelapsed + 24;
+			log_message('info', '- Hora: diff '.$serverelapsed);
+			$elapsed = $customerTime + $serverelapsed;
+			log_message('info', '- Hora: elapsed '.$elapsed);
+			$this->greeting = $elapsed < 24 ? $elapsed : $elapsed - 24;
+			log_message('info', '- Hora: elapsed2 '.$elapsed);
+		}
+		log_message('info', '- Hora: greeting '.$this->greeting);
 		switch ($this->greeting) {
 			case $this->greeting >= 19 && $this->greeting <= 23:
 				$this->render->greeting = lang('GEN_EVENING');

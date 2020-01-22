@@ -90,6 +90,7 @@ $(function() {
 			user: userCred.user,
 			pass: userCred.pass,
 			active: userCred.active,
+			currentTime: Math.floor(Date.now() / 1000),
 			token: token || ''
 		}
 		callNovoCore(verb, who, where, data, function(response) {

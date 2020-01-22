@@ -37,7 +37,6 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataRequest->userName = $userName;
 		$this->dataRequest->password = md5($password);
 		$this->dataRequest->ctipo = $dataRequest->active;
-
 		$response = $this->sendToService(lang('GEN_LOGIN'));
 
 		switch($this->isResponseRc) {
@@ -51,6 +50,10 @@ class Novo_User_Model extends NOVO_Model {
 						str_replace('/', '-', $response->usuario->fechaUltimaConexion)
 					)
 				);
+				$time = (object) [
+					'customerTime' => (int) date("H", $dataRequest->currentTime),
+					'serverTime' => (int) date("H")
+				];
 				$userData = [
 					'sessionId' => $response->logAccesoObject->sessionId,
 					'logged' => TRUE,
@@ -60,6 +63,7 @@ class Novo_User_Model extends NOVO_Model {
 					'codigoGrupo' => $response->usuario->codigoGrupo,
 					'lastSession' => $lastSession,
 					'token' => $response->token,
+					'time' => $time,
 					'cl_addr' => $this->encrypt_connect->encode($_SERVER['REMOTE_ADDR'], $userName, 'REMOTE_ADDR'),
 					'countrySess' => $this->config->item('country'),
 					'idUsuario' => $response->usuario->idUsuario,
