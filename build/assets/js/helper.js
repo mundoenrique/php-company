@@ -30,7 +30,7 @@ $(function () {
  */
 function callNovoCore(verb, who, where, request, _response_) {
 	ceo_cook = getCookieValue();
-	request.currenTime = new Date();
+	//request.currenTime = new Date();
 	request.screenSize = screen.width;
 	var dataRequest = JSON.stringify({
 		who: who,

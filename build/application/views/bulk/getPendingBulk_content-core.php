@@ -130,7 +130,7 @@
 						</div>
 						<div class="flex mt-2 items-center">
 							<div class="icon-square bg-pink-salmon" alt=""></div>
-							<span class="pl-1 h6"><?= lang('BULK_SOME_RECORDS'); ?></span>
+							<span class="pl-1 h6"><?= lang('BULK_NO_RECORDS'); ?></span>
 						</div>
 					</div>
 				</div>
