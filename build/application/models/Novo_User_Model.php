@@ -33,10 +33,12 @@ class Novo_User_Model extends NOVO_Model {
 			base64_decode($password->plot),
 			utf8_encode($password->passWord)
 		);
+
 		$this->dataRequest->idOperation = 'loginFull';
 		$this->dataRequest->userName = $userName;
 		$this->dataRequest->password = md5($password);
 		$this->dataRequest->ctipo = $dataRequest->active;
+
 		$response = $this->sendToService(lang('GEN_LOGIN'));
 
 		switch($this->isResponseRc) {
@@ -51,7 +53,7 @@ class Novo_User_Model extends NOVO_Model {
 					)
 				);
 				$time = (object) [
-					'customerTime' => (int) date("H", $dataRequest->currentTime),
+					'customerTime' => (int) $dataRequest->currentTime,
 					'serverTime' => (int) date("H")
 				];
 				$userData = [
