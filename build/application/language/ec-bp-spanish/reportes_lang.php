@@ -19,6 +19,7 @@ $lang['TOTAL_TARJETAS']= "Total";
 $lang['REPORTES_RADIO_ABONO']= "Abono";
 $lang['REPORTES_RADIO_CARGO']= "Cargo";
 $lang['TITULO_REPORTES_PROCEDIMIENTO']= "Procedimiento";
+$lang['TITULO_TARJETA_HABIENTE']= "Tarjetahabiente";
 $lang['FECHA_EMISION']= "Fecha emision";
 $lang['NUMERO_LOTE'] = "Número Lote";
 $lang['NUMERO_TARJETA'] = "Número de tarjeta";
