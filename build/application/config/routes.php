@@ -55,6 +55,7 @@ $route['translate_uri_dashes'] = FALSE;
 //Asynchronous
 $route['(:any)/async-call'] = "callModels";
 //User
+$route['(:any)/sugerencia'] = "user/suggestion";
 $route['(:any)/inicio'] = "user/login";
 $route['(:any)/inicio/(:any)'] = "user/login";
 $route['(:any)/cerrar-sesion/(:any)'] = "user/finishSession/$2";

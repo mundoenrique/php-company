@@ -3,9 +3,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * @info Libreria peticiones get de la aplicación
  * @author J. Enrique Peñaloza Piñero
- *
+ * @date November 21st, 2019
  */
-
 class Request_Data {
 	private $CI;
 	private $NOVO_Model;
