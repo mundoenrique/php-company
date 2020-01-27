@@ -265,7 +265,7 @@ class Novo_User_Model extends NOVO_Model {
 			$this->session->set_flashdata('changePassword', $changePassType);
 			$this->session->set_flashdata('userType', $this->session->flashdata('userType'));
 			$this->response->title = lang('GEN_PASSWORD_CHANGE_TITLE');
-			$this->response->icon = lan('GEN_ICON_WARNING');
+			$this->response->icon = lang('GEN_ICON_WARNING');
 			$this->response->data = [
 				'btn1'=> [
 					'action'=> 'close'
