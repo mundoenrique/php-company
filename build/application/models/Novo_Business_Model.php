@@ -191,7 +191,7 @@ class Novo_Business_Model extends NOVO_Model {
 		$response = $this->sendToService(lang('GEN_GET_PRODUCTS_DETAIL'));
 		$productDetail = [
 			'name' => '--',
-			'imgProgram' => 'default.svg',
+			'imgProgram' => $this->countryUri.'_default.svg',
 			'brand' => '',
 			'imgBrand' => 'default.svg',
 			'viewSomeAttr' => TRUE,

@@ -169,6 +169,7 @@ class User extends NOVO_Controller {
 			}
 
 			unset($this->includeAssets->jsFiles[$pos]);
+			$this->render->activeHeader = TRUE;
 			$this->render->titlePage = LANG('GEN_FINISH_TITLE');
 			$this->views = ['user/'.$view];
 			$this->loadView($view);
@@ -176,5 +177,38 @@ class User extends NOVO_Controller {
 			redirect(base_url(lang('GEN_LINK_LOGIN')), 'location');
 		}
 
+	}
+	/**
+	 * @info Método que renderiza la vista de segerencias de navegador
+	 * @author J. Enrique Peñaloza Piñero.
+	 * @date November 25th, 2020
+	 */
+	public function suggestion()
+	{
+		log_message('INFO', 'NOVO User: suggestion Method Initialized');
+
+		if(!$this->session->flashdata('messageBrowser')) {
+			redirect(base_url('inicio'), 'location', 301);
+			exit();
+		}
+
+		$view = 'suggestion';
+		$views = ['staticpages/content-browser'];
+
+		if($this->render->newViews != '') {
+			$this->includeAssets->cssFiles = [
+				"$this->skin-browser"
+			];
+		}
+
+		$messageBrowser = $this->session->flashdata('messageBrowser');
+		$this->render->activeHeader = TRUE;
+		$this->render->platform = $messageBrowser->platform;
+		$this->render->title = $messageBrowser->title;
+		$this->render->msg1 = $messageBrowser->msg1;
+		$this->render->msg2 = $messageBrowser->msg2;
+		$this->render->titlePage = lang('GEN_SYSTEM_NAME');
+		$this->views = $views;
+		$this->loadView($view);
 	}
 }

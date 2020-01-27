@@ -15,9 +15,9 @@
 <body>
 	<?php $this->load->view('header_content'.$newViews) ?>
 
-	<?php if($newViews != ''): ?>
+	<?php if($newViews != '' && $module != 'suggestion'): ?>
 		<main class="content bg-content">
-	<?php else: ?>
+	<?php elseif($newViews == ''): ?>
 		<div id="wrapper">
 	<?php endif; ?>
 		<?php
@@ -25,9 +25,9 @@
 				$this->load->view($views.'_content'.$newViews);
 			}
 		?>
-	<?php if($newViews != ''): ?>
+	<?php if($newViews != '' && $module != 'suggestion'): ?>
 		</main>
-	<?php else: ?>
+	<?php elseif($newViews == ''): ?>
 		</div>
 	<?php endif; ?>
 

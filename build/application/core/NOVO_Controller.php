@@ -69,6 +69,10 @@ class NOVO_Controller extends CI_Controller {
 		$this->form_validation->set_error_delimiters('', '---');
 		$this->config->set_item('language', 'spanish-base');
 
+		if(in_array($this->rule, ['login', 'recoverPass'])) {
+			$this->checkBrowser();
+		}
+
 		if($this->session->has_userdata('time')) {
 			$customerTime = $this->session->time->customerTime;
 			$serverTime = $this->session->time->serverTime;
@@ -249,13 +253,29 @@ class NOVO_Controller extends CI_Controller {
 		}
 	}
 	/**
+	 * Método para validar la versión de browser
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date January 23nd, 2019
+	 */
+	protected function checkBrowser()
+	{
+		log_message('INFO', 'NOVO Controller: checkBrowser Method Initialized');
+		$this->load->library('tool_browser');
+
+		$valid = $this->tool_browser->validBrowser($this->skin);
+
+		if(!$valid) {
+			redirect(base_url('sugerencia'),'location', 301);
+		}
+	}
+	/**
 	 * Método para renderizar una vista
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date May 14th, 2019
 	 */
 	protected function loadView($module)
 	{
-		log_message('INFO', 'NOVO Controller: loadView Method Initialized. Model loaded: '.$module);
+		log_message('INFO', 'NOVO Controller: loadView Method Initialized. Module loaded: '.$module);
 
 		$userMenu = new stdClass();
 		$userMenu->userAccess = $this->session->user_access;

@@ -60,11 +60,6 @@ class Verify_Access {
 				case 'plot':
 				case 'ceo_name':
 					continue;
-				case 'currenTime':
-					$time = strtotime($value.' UTC');
-					$dateInLocal = date("H", $time);
-					$this->CI->session->set_userdata('greeting', $dateInLocal);
-					continue;
 				case 'screenSize':
 					$this->CI->session->set_userdata('screenSize', $value);
 					continue;
@@ -121,7 +116,7 @@ class Verify_Access {
 
 		$auth = FALSE;
 		$user = $user ?: $this->user;
-		$freeAccess = ['login', 'validateCaptcha', 'finishSession', 'terms'];
+		$freeAccess = ['login', 'suggestion', 'validateCaptcha', 'finishSession', 'terms'];
 		$auth = in_array($module, $freeAccess);
 
 		if(!$auth) {
