@@ -1,9 +1,9 @@
 'use strict'
 $(function() {
 	$('#terms').on('click', function() {
-		title = prefixCountry + strCountry;
+		title = lang.GEN_SYSTEM_NAME;
 		msg = 'Al presionar "Aceptar" declaras que has leído y aceptado los términos de uso de nuestra plataforma..';
-		icon = iconInfo;
+		icon = lang.GEN_ICON_INFO;
 		data = {
 			btn1: {
 				text: 'Aceptar',
