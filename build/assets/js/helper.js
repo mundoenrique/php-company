@@ -30,7 +30,6 @@ $(function () {
  */
 function callNovoCore(verb, who, where, request, _response_) {
 	ceo_cook = getCookieValue();
-	//request.currenTime = new Date();
 	request.screenSize = screen.width;
 	var dataRequest = JSON.stringify({
 		who: who,
@@ -178,7 +177,7 @@ function createButton(dialogMoldal, elementButton, valuesButton) {
 			}
 			$(location).attr('href', valuesButton.link);
 		}
-		if (valuesButton.action !== 'redirect') {
+		if (valuesButton.action === 'close') {
 			dialogMoldal.dialog('close');
 		}
 		$(this).off('click');
@@ -189,25 +188,24 @@ function createButton(dialogMoldal, elementButton, valuesButton) {
  * @author J. Enrique Peñaloza
  * @date November 18th, 2019
  */
-function insertFormInput(disabled, form = false,) {
+function insertFormInput(disabled, form) {
+	form = form == undefined ? false : form;
 	var notDisabled = '#product-select, #enterprise-widget-btn'
 
 	if(disabled) {
 		notDisabled = false;
 	}
 
-	$('form button, form select, form input[type=file], button')
+	$('form button, form select, form input:not([type=hidden]), button')
 	.not(notDisabled)
 	.not('.btn-modal')
 	.prop('disabled', disabled);
 
 	if(form) {
 		ceo_cook = getCookieValue();
-		currenTime = new Date();
 		screenSize = screen.width;
-		form.append(`<input type="hidden" name="ceo_name" value="${ceo_cook}"></input>`);
-		form.append(`<input type="hidden" name="currenTime" value="${currenTime}"></input>`);
-		form.append(`<input type="hidden" name="screenSize" value="${screenSize}"></input>`);
+		form.append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'"></input>');
+		form.append('<input type="hidden" name="screenSize" value="'+screenSize+'"></input>');
 	}
 }
 /**
