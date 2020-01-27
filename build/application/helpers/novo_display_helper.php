@@ -141,7 +141,7 @@ if ( ! function_exists('verifyFooter'))
 		$client = $CI->config->item('client');
 		$country = $CI->config->item('country-uri');
 		$logged = $CI->session->has_userdata('logged');
-		$show = ['novo'];
+		$show = ['novo', 'pichincha'];
 
 		switch ($link) {
 			case lang('GEN_FOTTER_START'):
@@ -150,11 +150,11 @@ if ( ! function_exists('verifyFooter'))
 				break;
 			case lang('GEN_FOTTER_BENEFITS'):
 				$display = ($module !== 'benefits' && $module !== 'change-password');
-				$display = (in_array($client, $show) && $display);
+				$display = (in_array($client, $show) && $display && $country != 'bp');
 				break;
 			case lang('GEN_FOTTER_TERMS'):
 				$display = ($module !== 'terms' && $module !== 'change-password');
-				$display = (in_array($client, $show) && $display);
+				$display = (in_array($client, $show) && $display && $country != 'bp');
 				break;
 			case lang('GEN_FOTTER_RATES'):
 				$display = ($module !== 'rates' && $logged && $country == 've');
@@ -164,7 +164,7 @@ if ( ! function_exists('verifyFooter'))
 				$display = ($logged && in_array($client, $show));
 				break;
 			case lang('GEN_FOTTER_OWNERSHIP'):
-				$display = (in_array($client, $show));
+				$display = (in_array($client, $show) && $country != 'bp');
 				break;
 		}
 

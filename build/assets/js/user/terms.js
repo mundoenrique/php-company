@@ -12,7 +12,7 @@ $(function() {
 			},
 			btn2: {
 				text: 'Cancelar',
-				link: baseURL + 'inicio',
+				link: baseURL + 'cerrar-sesion/inicio',
 				action: 'redirect'
 			}
 		};
