@@ -260,7 +260,7 @@ class NOVO_Controller extends CI_Controller {
 	protected function checkBrowser()
 	{
 		log_message('INFO', 'NOVO Controller: checkBrowser Method Initialized');
-		$this->load->library('tool_browser');
+		$this->load->library('Tool_Browser');
 
 		$valid = $this->tool_browser->validBrowser($this->skin);
 
