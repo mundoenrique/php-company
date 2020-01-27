@@ -372,6 +372,9 @@ class Request_Data {
 					case 'idProducto':
 						$productList['id'] = trim($value);
 						break;
+					case 'marca':
+						$productList['brand'] = trim($value);
+						break;
 				}
 			}
 

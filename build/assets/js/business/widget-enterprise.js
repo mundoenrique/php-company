@@ -12,6 +12,8 @@ $(function() {
 	var idFiscal;
 	var enterpriseName;
 	var productPrefix;
+	var productName;
+	var productBrand;
 	var goToDetail = false;
 
 	enterpriseWidgetForm.on('change', '#enterprise-select', function() {
@@ -57,14 +59,16 @@ $(function() {
 				if(prod.id == prefix && currentIdFiscal == idFiscal) {
 					return;
 				}
-				WidgetSelcetP.append(`<option value="${prod.id}">${prod.desc}</option>`);
+				WidgetSelcetP.append(`<option value="${prod.id}" brand="${prod.brand}">${prod.desc}</option>`);
 			});
 			WidgetSelcetP.prop('disabled', false);
 		}
 	}
 
 	enterpriseWidgetForm.on('change', '#product-select', function() {
-		productPrefix = WidgetSelcetP.val()
+		productPrefix = WidgetSelcetP.find('option:selected').val();
+		productName = WidgetSelcetP.find('option:selected').text();
+		productBrand = WidgetSelcetP.find('option:selected').attr('brand');
 		enterpriseWidgetBtn
 		.prop('disabled', false)
 		.removeAttr('title');
@@ -85,6 +89,8 @@ $(function() {
 
 		if(goToDetail) {
 			enterpriseWidgetForm.append(`<input type="hidden" name="productPrefix" value="${productPrefix}">`);
+			enterpriseWidgetForm.append(`<input type="hidden" name="productName" value="${productName}">`);
+			enterpriseWidgetForm.append(`<input type="hidden" name="productBrand" value="${productBrand}">`);
 			enterpriseWidgetForm.append(`<input type="hidden" name="goToDetail" value="active">`);
 		}
 

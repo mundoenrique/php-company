@@ -58,6 +58,8 @@
 					</button>
 					<form id="product-<?= $products->idProducto; ?>" action="<?= base_url('detalle-producto') ?>" method="POST">
 						<input type="hidden" name="productPrefix" value="<?= $products->idProducto; ?>">
+						<input type="hidden" name="productName" value="<?= $products->descripcion; ?>">
+						<input type="hidden" name="productBrand" value="<?= $products->marca; ?>">
 					</form>
 				</div>
 			</div>
