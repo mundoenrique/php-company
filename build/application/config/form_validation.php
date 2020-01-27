@@ -101,6 +101,16 @@ $config = [
 			'rules' => 'trim|regex_match[/^([\w]+)+$/i]|required',
 		],
 		[
+			'field' => 'productName',
+			'label' => 'productName',
+			'rules' => 'trim|regex_match[/^([\w ]+)+$/i]',
+		],
+		[
+			'field' => 'productBrand',
+			'label' => 'productBrand',
+			'rules' => 'trim|regex_match[/^([\w]+)+$/i]',
+		],
+		[
 			'field' => 'goToDetail',
 			'label' => 'goToDetail',
 			'rules' => 'trim|regex_match[/active/]',
