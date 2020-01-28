@@ -193,7 +193,7 @@ class Novo_Business_Model extends NOVO_Model {
 			'name' => $dataRequest->productName,
 			'imgProgram' => $this->countryUri.'_default.svg',
 			'brand' => $dataRequest->productBrand,
-			'imgBrand' => 'default.svg',
+			'imgBrand' => $dataRequest->productBrand.'_card.svg',
 			'viewSomeAttr' => TRUE,
 			'prefix' => $productPrefix
 		];

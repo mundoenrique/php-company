@@ -51,27 +51,33 @@ if ( ! function_exists('verifyheader'))
 
 		$CI = &get_instance();
 		$client = $CI->config->item('client');
-		$country = $CI->config->item('country-uri');
+		$countryUri = $CI->config->item('country-uri');
 		$logged = $CI->session->has_userdata('logged');
 		$showUs = ['novo'];
 		$showThem = ['pichincha'];
 
 		switch ($link) {
 			case lang('GEN_SHOW_HEADER'):
-				$display = ($module !== lang('GEN_LOGIN') && in_array($client, $showThem));
-				$display = (in_array($client, $showUs) || $display);
+				$show = ['pichincha'];
+				$display = ($module !== lang('GEN_LOGIN') && in_array($client, $show));
+				$show = ['novo'];
+				$display = (in_array($client, $show) || $display);
 				break;
 			case lang('GEN_SHOW_HEADER_LOGO'):
-				$display = (in_array($client, $showThem));
+				$show = ['pichincha'];
+				$display = (in_array($client, $show));
 				break;
 			case lang('GEN_TAG_GOUT_MENU'):
-				$display = (in_array($client, $showUs));
+				$show = ['novo'];
+				$display = (in_array($client, $show));
 				break;
 			case lang('GEN_TAG_LINK_UNIC'):
-				$display = (in_array($client, $showUs));
+				$show = ['novo'];
+				$display = (in_array($client, $show));
 				break;
 			case lang('GEN_TAG_HELPER'):
-				$display = (in_array($client, $showUs) && $country == 've');
+				$show = ['novo'];
+				$display = (in_array($client, $show) && $countryUri == 've');
 				break;
 		}
 
@@ -92,34 +98,35 @@ if ( ! function_exists('verifyBody'))
 		$CI = &get_instance();
 		$client = $CI->config->item('client');
 		$country = $CI->config->item('country-uri');
-		$logged = $CI->session->has_userdata('logged');
-		$showUs = ['novo'];
-		$showThem = ['pichincha', 'banco-bog'];
 
 		switch ($link) {
 			case lang('GEN_SIGNIN_TOP'):
-				$display = (in_array($client, $showThem));
+				$show = ['pichincha', 'banco-bog'];
+				$display = (in_array($client, $show));
 				break;
 			case lang('GEN_SIGNIN_HEADER'):
-				$display = (in_array($client, $showUs));
+				$show = ['novo'];
+				$display = (in_array($client, $show));
 				break;
 			case lang('GEN_TAG_WELCOME_MESSAGE'):
-				$display = (in_array($client, $showThem));
+				$show = ['pichincha'];
+				$display = (in_array($client, $show));
 				break;
 			case lang('GEN_TAG_SEARCH_CAT'):
-				$display = (in_array($client, $showUs));
+				$show = ['novo', 'pichincha'];
+				$display = (in_array($client, $show));
 				break;
 			case lang('GEN_TAG_BRANCHOFFICE'):
-				$display = (in_array($client, $showThem) && $country == 'bdb');
+				$show = ['banco-bog'];
+				$display = (in_array($client, $show));
 				break;
 			case lang('GEN_TAG_ALL_BULK'):
-				$display = (in_array($client, $showUs) || $country == 'bp');
+				$show = ['novo', 'pichincha'];
+				$display = (in_array($client, $show));
 				break;
 			case lang('GEN_TAG_ORDER_TYPE'):
-				$display = (in_array($client, $showUs) || $country != 've' && $country != 'bdb');
-				break;
-			case lang('GEN_TAG_REDIRECT_FINISH'):
-				$display = (in_array($client, $showThem) && $country != 'bp');
+				$show = ['novo', 'pichincha'];
+				$display = (in_array($client, $show) || $country != 've');
 				break;
 		}
 
@@ -139,32 +146,35 @@ if ( ! function_exists('verifyFooter'))
 
 		$CI = &get_instance();
 		$client = $CI->config->item('client');
-		$country = $CI->config->item('country-uri');
+		$countryUri = $CI->config->item('country-uri');
 		$logged = $CI->session->has_userdata('logged');
-		$show = ['novo', 'pichincha'];
 
 		switch ($link) {
 			case lang('GEN_FOTTER_START'):
+				$show = ['novo', 'pichincha'];
 				$display = ($module !== lang('GEN_LOGIN') && !$logged);
 				$display = (in_array($client, $show) && $display);
 				break;
 			case lang('GEN_FOTTER_BENEFITS'):
+				$show = ['novo', 'pichincha'];
 				$display = ($module !== 'benefits' && $module !== 'change-password');
-				$display = (in_array($client, $show) && $display && $country != 'bp');
+				$display = (in_array($client, $show) && $display && $countryUri != 'bp');
 				break;
 			case lang('GEN_FOTTER_TERMS'):
+				$show = ['novo', 'pichincha'];
 				$display = ($module !== 'terms' && $module !== 'change-password');
-				$display = (in_array($client, $show) && $display && $country != 'bp');
+				$display = (in_array($client, $show) && $display && $countryUri != 'bp');
 				break;
 			case lang('GEN_FOTTER_RATES'):
-				$display = ($module !== 'rates' && $logged && $country == 've');
-				$display = (in_array($client, $show) && $display);
+				$display = ($module !== 'rates' && $logged && $countryUri == 've');
 				break;
 			case lang('GEN_FOTTER_LOGOUT'):
+				$show = ['novo'];
 				$display = ($logged && in_array($client, $show));
 				break;
 			case lang('GEN_FOTTER_OWNERSHIP'):
-				$display = (in_array($client, $show) && $country != 'bp');
+				$show = ['novo'];
+				$display = (in_array($client, $show));
 				break;
 		}
 
