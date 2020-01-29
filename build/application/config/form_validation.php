@@ -103,7 +103,7 @@ $config = [
 		[
 			'field' => 'productName',
 			'label' => 'productName',
-			'rules' => 'trim|regex_match[/^([\w ]+)+$/i]',
+			'rules' => 'trim|regex_match[/^([\wñÑáéíóúÑÁÉÍÓÚ ]+)+$/i]',
 		],
 		[
 			'field' => 'productBrand',

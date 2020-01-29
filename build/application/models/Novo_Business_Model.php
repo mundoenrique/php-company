@@ -70,7 +70,7 @@ class Novo_Business_Model extends NOVO_Model {
 			break;
 			default:
 				$this->response->data->text = lang('GEN_ENTERPRISE_NOT_OBTEIN');
-				$this->response->data->resp['btn1']['link'] = base_url('cerrar-sesion');
+				$this->response->data->resp['btn1']['link'] = base_url('cerrar-sesion/inicio');
 		}
 
 		if($this->response->code != 0) {
