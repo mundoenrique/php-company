@@ -146,6 +146,9 @@ $(function () {
 	var searchByText = function(text) {
 		let count = 1;
 		let page = 1;
+		$("#enterprise-list .card").removeClass(function (index, className) {
+			return (className.match (/(^|\s)search_\S+/g) || []).join(' ');
+		});
 		$('#enterprise-list').children('.card').each(function(index, element){
 			var enterpriseAttr = $(this).find('.product > span').text()
 
