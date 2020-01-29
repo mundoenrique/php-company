@@ -190,10 +190,10 @@ class Novo_Business_Model extends NOVO_Model {
 
 		$response = $this->sendToService(lang('GEN_GET_PRODUCTS_DETAIL'));
 		$productDetail = [
-			'name' => $dataRequest->productName,
+			'name' => isset($dataRequest->productName) ? $dataRequest->productName : '',
 			'imgProgram' => $this->countryUri.'_default.svg',
-			'brand' => $dataRequest->productBrand,
-			'imgBrand' => $dataRequest->productBrand.'_card.svg',
+			'brand' => isset($dataRequest->productBrand) ? $dataRequest->productBrand : '',
+			'imgBrand' => isset($dataRequest->productBrand) ? $dataRequest->productBrand.'_card.svg' : '',
 			'viewSomeAttr' => TRUE,
 			'prefix' => $productPrefix
 		];

@@ -82,6 +82,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 		$this->dataRequest->fechaIni = $dataRequest->initialDate;
 		$this->dataRequest->fechaFin = $dataRequest->finalDate;
 		$this->dataRequest->status = $dataRequest->status;
+		$statusText = $dataRequest->statusText;
 
 		$response = $this->sendToService('ServiceOrderStatus');
 
@@ -96,6 +97,13 @@ class Novo_Inquiries_Model extends NOVO_Model {
 						switch ($key) {
 							case 'idOrden':
 								$serviceOrders['OrderNumber'] = $value;
+								break;
+							case 'estatus':
+								$serviceOrders['OrderStatus'] = $value;
+								$serviceOrders['OrderVoidable'] = FALSE;
+								if($value == '0') {
+									$serviceOrders['OrderVoidable'] = $list->nofactura != '' && $list->fechafactura != '' ?: TRUE;
+								}
 								break;
 							case 'fechaGeneracion':
 								$serviceOrders['Orderdate'] = $value;
@@ -136,10 +144,16 @@ class Novo_Inquiries_Model extends NOVO_Model {
 				break;
 
 			case -5:
-			$this->response->title = 'Generar orden de servicio';
-			$this->response->msg = 'No fue posible generar la orden de servicio';
-			$this->response->icon = lang('GEN_ICON_WARNING');
-			$this->response->data['btn1']['action'] = 'close';
+				$this->response->title = 'Generar orden de servicio';
+				$this->response->msg = 'No fue posible generar la orden de servicio';
+				$this->response->icon = lang('GEN_ICON_WARNING');
+				$this->response->data['btn1']['action'] = 'close';
+				break;
+			case -150:
+				$this->response->title = 'Ordenes de servicio';
+				$this->response->msg = novoLang(lang('RESP_SERVICE_ORDES'), $statusText);
+				$this->response->icon = lang('GEN_ICON_INFO');
+				$this->response->data['btn1']['action'] = 'close';
 				break;
 		}
 

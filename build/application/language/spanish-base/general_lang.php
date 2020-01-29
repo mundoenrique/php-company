@@ -18,7 +18,7 @@ $lang['GEN_MENU_LOT_UNNAMED_REQ'] = 'Solicitud';//TICARG
 $lang['GEN_MENU_LOT_UNNAMED_AFFIL'] = 'Afiliación';//TIINVN
 $lang['GEN_MENU_LOT_REPROCESS'] = 'Reproceso de datos';//TEBGUR
 $lang['GEN_MENU_CONS_ORDERS_SERV'] = 'Órdenes de servicio';//TEBORS
-$lang['GEN_LINK_CONS_ORDERS_SERV'] = 'consultas-orden-de-servicio';//TEBORS
+$lang['GEN_LINK_CONS_ORDERS_SERV'] = 'consulta-orden-de-servicio';//TEBORS
 $lang['GEN_MENU_CONS_DATA_UPGRADE'] = 'Actulización de datos';//TEBPOL
 $lang['GEN_MENU_SERV_MASTER_TRANSFER'] = 'Transferencia maestra';//TRAMAE
 $lang['GEN_LINK_MASTER_TRANSFER'] = 'transferencia-maestra';//TRAMAE
@@ -56,6 +56,8 @@ $lang['GEN_BTN_SELECT'] = 'Seleccionar';
 $lang['GEN_BTN_SIGN'] = 'Firmar';
 $lang['GEN_BTN_DISASS_AUTH'] = 'Desasociar';
 $lang['GEN_BTN_DISASS_SIGN'] = 'Desasociar';
+$lang['GEN_BTN_DOWN_PDF'] = 'Descargar PDF';
+$lang['GEN_BTN_CANCEL_ORDER'] = 'Anular Orden';
 //MODULES
 $lang['GEN_LOGIN'] = 'Login';
 $lang['GEN_VALIDATE_CAPTCHA'] = 'validateCaptcha';

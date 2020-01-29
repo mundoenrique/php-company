@@ -35,12 +35,12 @@
 							</div>
 							<div class="form-group col-4 col-lg-3 col-xl-auto">
 								<label for="datepicker_start">Fecha inicial</label>
-								<input id="datepicker_start" name="datepicker_start" class="form-control" name="datepicker" type="text" placeholder="DD/MM/AAA">
+								<input id="datepicker_start" name="datepicker_start" class="form-control" name="datepicker" type="text" placeholder="DD/MM/AAA" readonly>
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-4 col-lg-3 col-xl-auto">
 								<label for="datepicker_end">Fecha final</label>
-								<input id="datepicker_end" name="datepicker_end" class="form-control" name="datepicker" type="text" placeholder="DD/MM/AAA">
+								<input id="datepicker_end" name="datepicker_end" class="form-control" name="datepicker" type="text" placeholder="DD/MM/AAA" readonly>
 								<div class="help-block "></div>
 							</div>
 							<div class="form-group col-4 col-lg-2 col-xl-3">
@@ -94,15 +94,17 @@
 									<td><?= $list->OrderAmount; ?></td>
 									<td><?= $list->OrderDeposit; ?></td>
 									<td class="p-0 flex justify-center">
-										<button class="btn mx-1 px-0 details-control" title="Ver" data-toggle="tooltip">
+										<button class="btn mx-1 px-0 details-control" title="<?= lang('GEN_BTN_SEE'); ?>" data-toggle="tooltip">
 											<i class="icon icon-find" aria-hidden="true"></i>
 										</button>
-										<button class="btn mx-1 px-0" title="Descargar PDF" data-toggle="tooltip">
-											<i class="icon icon-download" aria-hidden="true"></i>
+										<button class="btn mx-1 px-0" title="<?= lang('GEN_BTN_DOWN_PDF'); ?>" data-toggle="tooltip">
+											<i class="icon icon-file-pdf" aria-hidden="true"></i>
 										</button>
-										<button class="btn mx-1 px-0" title="Eliminar" data-toggle="tooltip">
+										<?php if($this->verify_access->verifyAuthorization('TEBORS', 'TEBANU') && $list->OrderVoidable): ?>
+										<button class="btn mx-1 px-0" title="<?= lang('GEN_BTN_CANCEL_ORDER'); ?>" data-toggle="tooltip">
 											<i class="icon icon-remove" aria-hidden="true"></i>
 										</button>
+										<?php endif; ?>
 									</td>
 								</tr>
 								<?php endforeach; ?>
@@ -112,7 +114,7 @@
 					</div>
 
 					<div class="my-5 py-4 center none">
-						<span class="h4">No tiene Órdenes de servicio</span>
+						<span class="h4">No fue posible obtener las ordenes de servicio asociadas</span>
 					</div>
 				</div>
 			</div>
