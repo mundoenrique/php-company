@@ -1,8 +1,9 @@
 'use strict'
 var resultServiceOrders;
 $(function() {
+	var serviceOrdersBtn = $('#service-orders-btn');
 	var firstDate;
-	var lastdate
+	var lastdate;
 	form = $('#service-orders-form');
 	resultServiceOrders = $('#resultServiceOrders').DataTable({
 		drawCallback: function(d) {
@@ -96,9 +97,10 @@ $(function() {
 		lastdate = finalDate;
 	});
 
-	$('#service-orders-btn').on('click', function(e) {
+	serviceOrdersBtn.on('click', function(e) {
 		e.preventDefault();
 		var btnAction = $(this);
+		var statusOrder = $('#status-order');
 		btnText = btnAction.text().trim();
 		formInputTrim(form);
 		validateForms(form);
@@ -108,7 +110,8 @@ $(function() {
 			data = {
 				initialDate: firstDate,
 				finalDate: lastdate,
-				status: $('#status-order').val()
+				status: statusOrder.val(),
+				statusText: statusOrder.find('option:selected').text()
 			}
 			insertFormInput(true);
 			verb = 'POST'; who = 'Inquiries'; where = 'GetServiceOrders';

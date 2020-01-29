@@ -317,7 +317,7 @@ footer.main-footer {
 	opacity: 1;
 }
 
-.form-control[readonly] {
+.form-control[readonly]:not(.hasDatepicker) {
 	background-color: transparent;
 	border: none;
 }

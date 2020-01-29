@@ -14,7 +14,9 @@
 
 	<div class="flex mt-3 items-center">
 		<div class="flex h6 flex-auto justify-end">
+			<?php if(count($brands) > 1): ?>
 			<button class="btn btn-outline btn-small btn-rounded-left bg-white"><?= lang('PRODUCTS_ALL') ?></button>
+			<?php endif; ?>
 			<?php if(verifyDisplay('body', $module,  lang('GEN_TAG_SEARCH_CAT'))): ?>
 			<select class="select-box custom-select mr-0 h6">
 				<option selected disabled><?= lang('PRODUCTS_SEARCH_CATEGORY'); ?></option>
@@ -23,12 +25,14 @@
 				<?php endforeach; ?>
 			</select>
 			<?php endif; ?>
+			<?php if(count($brands) > 1): ?>
 			<select class="select-box custom-select h6">
 				<option selected disabled><?= lang('PRODUCTS_SEARCH_BRAND'); ?></option>
 				<?php foreach($brands AS $brand): ?>
 				<option value="<?= $brand->idMarca; ?>"><?= $brand->nombre; ?></option>
 				<?php endforeach; ?>
 			</select>
+			<?php endif; ?>
 			<div id="sb-search" class="sb-search">
 				<input id="search" class="sb-search-input" type="search" name="search" value="" placeholder="Buscar...">
 				<span class="sb-icon-search"><i class="icon icon-find"></i></span>
