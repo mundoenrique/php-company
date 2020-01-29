@@ -126,7 +126,7 @@ if ( ! function_exists('verifyBody'))
 				break;
 			case lang('GEN_TAG_ORDER_TYPE'):
 				$show = ['novo', 'pichincha'];
-				$display = (in_array($client, $show) || $country != 've');
+				$display = (in_array($client, $show) && $country != 've');
 				break;
 		}
 
