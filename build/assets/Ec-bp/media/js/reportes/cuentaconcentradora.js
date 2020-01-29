@@ -482,6 +482,7 @@ $(document).ready(function () {
 	}
 	/***********************Paginacion inicio***********************/
 	function paginacion(total, inicial) {
+
 		var texHtml = "";
 		$("#list_pagination").html("");
 		for (var i = 1; i <= total; ++i) {
@@ -506,7 +507,10 @@ $(document).ready(function () {
 			id = id.split("_");
 			BuscarDepositos(id[1]);
 		});
-
+		$("#anterior-1").attr('href','javascript:');
+		$("#anterior-2").attr('href','javascript:');
+		$("#siguiente-1").attr('href','javascript:');
+		$("#siguiente-2").attr('href','javascript:');
 		$("#anterior-1").unbind("mouseover");
 		$("#anterior-1").unbind("mouseout");
 		$("#anterior-1").mouseover(function () {

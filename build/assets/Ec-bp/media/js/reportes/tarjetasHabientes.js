@@ -157,7 +157,7 @@ function buscarStatusTarjetasHambientes(paginaActual){
 				//$('#tabla-estatus-lotes tbody tr:even').addClass('even');
 
 				    paginacion(data.totalPaginas, data.paginaActual);
-				}else{ 
+				}else{
 					if(data.rc =="-29"){
 			      alert(data.mensaje);
             $(location).attr('href',baseURL+isoPais+'/login');
@@ -313,6 +313,11 @@ function paginacion(total, inicial){
 				id = id.split("_");
 			buscarStatusTarjetasHambientes(id[1]);
 		});
+
+		$("#anterior-1").attr('href','javascript:');
+		$("#anterior-2").attr('href','javascript:');
+		$("#siguiente-1").attr('href','javascript:');
+		$("#siguiente-2").attr('href','javascript:');
 
 		$("#anterior-1").unbind("mouseover");
 		$("#anterior-1").unbind("mouseout");
