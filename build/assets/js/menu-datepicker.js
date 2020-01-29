@@ -58,6 +58,9 @@ function finishSession() {
 	notiSystem(lang.GEN_SYSTEM_NAME, lang.GEN_FINISH_TEXT, lang.GEN_ICON_INFO, data);
 	$('#accept').attr('id', 'keep-session');
 	resetTimesession = setTimeout(function() {
+		$('#keep-session')
+		.html(loader)
+		.prop('disabled', true);
 		$(location).attr('href', baseURL+'cerrar-sesion/fin');
 	}, callServer);
 
