@@ -47,7 +47,7 @@ function validateForms(form) {
 			"user_pass": 	{verifyRequired: '#user_login', verifyPattern: '#user_login'},
 			"branch-office": 	{requiredBranchOffice: true},
 			"type-bulk": 	{requiredTypeBulk: true},
-			"file-bulk":	{required: true, extension: "xls|xlsx|txt"},
+			"file-bulk":	{required: true, extension: lang.VALIDATE_FILES_EXTENSION, sizeFile: true},
 			"password": {required: true, pattern: userPassword},
 			"type-order": {required: true},
 			"datepicker_start": {
@@ -76,7 +76,11 @@ function validateForms(form) {
 			},
 			"branch-office": lang.VALIDATE_BRANCH_OFFICE,
 			"type-bulk": lang.VALIDATE_BULK_TYPE,
-			"file-bulk": lang.VALIDATE_BULK_FILE,
+			"file-bulk": {
+				required: lang.VALIDATE_FILE_TYPE,
+				extension: lang.VALIDATE_FILE_TYPE,
+				sizeFile: lang.VALIDATE_FILE_SIZE
+			},
 			"password": lang.VALIDATE_PASS,
 			"type-order": 'Selecciona un tipo de orden',
 			"datepicker_start": 'Indica fecha inicial',
@@ -111,7 +115,7 @@ function validateForms(form) {
 		return fiscalReg[validCountry].test(value);
 	}
 
-	$.validator.methods.validatePass	= function(value, element, param) {
+	$.validator.methods.validatePass = function(value, element, param) {
 		return passStrength(value);
 	}
 
@@ -124,6 +128,10 @@ function validateForms(form) {
 		var eval1 = longPhrase.test($(element).find('option:selected').text().trim());
 		var eval2 = alphanum.test($(element).find('option:selected').val().trim());
 		return eval1 && eval2;
+	}
+
+	$.validator.methods.sizeFile = function(value, element, param) {
+		return element.files[0].size > 0;
 	}
 
 	form.validate().resetForm();

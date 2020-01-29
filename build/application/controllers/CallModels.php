@@ -83,7 +83,7 @@ class CallModels extends Novo_Controller {
 		$filenameT = mb_strtolower($filenameT.'.'.$ext);
 		$config['file_name'] = $filenameT;
 		$config['upload_path'] = $this->config->item('upload_bulk');
-		$config['allowed_types'] = 'xls|txt|xlsx';
+		$config['allowed_types'] = lang('VALIDATE_FILES_EXTENSION');
 		$this->load->library('upload', $config);
 
 		if(!$this->upload->do_upload('file')) {
