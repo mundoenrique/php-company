@@ -164,5 +164,5 @@ $lang['GEN_WAIT_PRODUCTS']= 'Esperando productos...';
 $lang['GEN_SELECT_PRODUCTS']= 'Selecciona un producto';
 $lang['GEN_FINISH_TITLE']= 'Cierre de sesión';
 $lang['GEN_FINISH_TEXT']= 'No se ha detectado actividad en la página, tu sesión está próxima a expirar.';
-$lang['GEN_EXPIRED_SESSION']= 'Tu sesión en %s ha caducado';
-$lang['GEN_FINISHED_SESSION']= 'Tu sesión en %s ha sido cerrada exitosamente';
+$lang['GEN_EXPIRED_SESSION']= 'Tu sesión en %s ha caducado.';
+$lang['GEN_FINISHED_SESSION']= 'Tu sesión en %s ha sido cerrada exitosamente.';

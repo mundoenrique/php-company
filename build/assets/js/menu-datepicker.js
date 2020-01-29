@@ -4,7 +4,6 @@ var setTimesession;
 var resetTimesession;
 $(function() {
 	currentDate = new Date();
-
   $.datepicker.regional['es'] = {
     closeText: 'Cerrar',
     prevText: '<Ant',
