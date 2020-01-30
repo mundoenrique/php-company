@@ -9,7 +9,7 @@
 		<img class="order-1" src="<?= $this->asset->insertFile($countryUri.'/img-pci_compliance.svg'); ?>"
 			alt="Logo PCI">
 		<span class="copyright-footer mt-1 nowrap flex-auto lg-flex-none order-1 order-lg-0 center h6">© Todos los derechos
-			reservados. Banco de Bogotá - 2019.</span>
+			reservados. Banco de Bogotá - <?= date("Y") ?>.</span>
 	</div>
 </footer>
 

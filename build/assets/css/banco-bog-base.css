@@ -2297,11 +2297,22 @@ i[class*=" icon-"]:before {
   margin-bottom: 12px;
 }
 
+.main-nav ul li:last-child {
+	font-weight: var(--regular-font-weight);
+	text-shadow: 0 0 .1px var(--tertiary);
+	color: var(--primary);
+}
+
+.main-nav ul li:hover:not(:last-child) {
+	text-shadow: .3px -0.5px .3px var(--tertiary);
+}
+
 .main-nav ul li span {
   display: block;
   height: 4px;
   background: var(--yellow);
-  position: relative;
+	position: relative;
+	margin: -1px;
 }
 
 .main-nav-dropdown {
