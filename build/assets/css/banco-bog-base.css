@@ -1079,11 +1079,13 @@ textarea.form-control {
 /* Btn-Link */
 
 .btn-link {
+	color: var(--primary);
 	text-decoration: underline;
 }
 
 .btn-link:hover {
-	color: var(--tertiary);
+	color: var(--primary);
+	text-shadow: 0 0 var(--primary);
 	text-decoration: underline;
 }
 
@@ -2568,7 +2570,7 @@ td > button > i{
 }
 
 td > button > i:hover{
-	text-shadow: 3px 1px 2px #7b7b7b;
+	text-shadow: 3px 1px 2px var(--text-color);
 }
 
 .dataTables_empty {
@@ -3689,7 +3691,7 @@ a.ui-button:active,
 }
 .slide-slow > .icon-chevron-down:hover{
 	color: var(--primary) !important;
-	text-shadow: 3px 1px 2px #7b7b7b;
+	text-shadow: 3px 1px 2px var(--text-color);
 }
 
 .files{
