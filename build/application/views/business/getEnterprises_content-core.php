@@ -15,7 +15,7 @@
 	</div>
 
 	<div class="flex mt-3 light items-center">
-		<div class="flex">
+		<div class="flex col-3">
 			<span><?= lang('ENTERPRISE_TOTAL') ?>: <?= $enterprisesTotal ?></span>
 		</div>
 		<div id="alphabetical" class="flex h6 flex-auto justify-end">

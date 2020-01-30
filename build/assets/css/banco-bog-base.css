@@ -862,7 +862,7 @@ textarea.form-control {
 }
 
 .sb-search-input {
-	position: absolute;
+	position: inherit;
 	top: 0;
 	right: 0;
 	outline: none;
@@ -3199,7 +3199,7 @@ a.ui-button:active,
 }
 .ui-priority-secondary, .ui-widget-content .ui-priority-secondary, .ui-widget-header .ui-priority-secondary {
 	font-weight: normal;
-	opacity: .2 !important;
+	opacity: .2
 }
 .ui-state-disabled,
 .ui-widget-content .ui-state-disabled,
@@ -3305,6 +3305,23 @@ a.ui-button:active,
 	padding: .2em;
 	text-align: right;
 	text-decoration: none;
+}
+
+.ui-datepicker-month-year .ui-datepicker-calendar {
+	display: none;
+}
+
+.ui-datepicker-month-year .ui-datepicker-buttonpane {
+	display: flex;
+	justify-content: space-between;
+	margin: 0 var(--space-4);
+}
+
+.ui-datepicker-month-year .ui-datepicker-current {
+	border: 1px solid var(--shadows-color);
+	background: var(--bg-color) !important;
+	color: var(--text-color) !important;
+	opacity: 1;
 }
 
 /* Dialog */
@@ -3528,7 +3545,7 @@ a.ui-button:active,
 	position: absolute;
 	z-index: 2;
 	width: 55px;
-	height: 18.6px;
+	/* height: 18.6px; */
 }
 .product-presentation .item-network {
 	right: 20px;
