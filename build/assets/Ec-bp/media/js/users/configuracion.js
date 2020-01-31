@@ -1057,7 +1057,7 @@ $(function () {
 				$('#cargando_masivo').replaceWith('<button id="btn-new-mas" >Subir Archivo</button>');
 			},
 			error: function (e) {
-				notificacion("Cargar archivo", "No fué posible cargar el archivo");
+				notificacion("Cargar archivo", "No fue posible cargar el archivo");
 				$('#userfile').val(""); $('#archivo').val("");
 				$('#cargando_masivo').replaceWith('<button id="btn-new-mas" >Subir Archivo</button>');
 			}
