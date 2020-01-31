@@ -2319,7 +2319,7 @@ class Lotes extends CI_Controller {
 					break;
 				case -51:
 					$code = 2;
-					$msgVE = 'No fué posible obtener los datos de la empresa para la Orden de Servicio. ';
+					$msgVE = 'No fue posible obtener los datos de la empresa para la Orden de Servicio. ';
 					$msgVE .= 'Por favor envíe ésta pantalla y su usuario al correo ';
 					$msgVE .= '<strong>soporteempresas@tebca.com</strong>';
 					$msg = $urlCountry =="Ve" ? $msgVE : $response->msg;
