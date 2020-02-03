@@ -1079,11 +1079,13 @@ textarea.form-control {
 /* Btn-Link */
 
 .btn-link {
+	color: var(--primary);
 	text-decoration: underline;
 }
 
 .btn-link:hover {
-	color: var(--tertiary);
+	color: var(--primary);
+	text-shadow: 0 0 var(--primary);
 	text-decoration: underline;
 }
 
@@ -2295,11 +2297,22 @@ i[class*=" icon-"]:before {
   margin-bottom: 12px;
 }
 
+.main-nav ul li:last-child {
+	font-weight: var(--regular-font-weight);
+	text-shadow: 0 0 .1px var(--tertiary);
+	color: var(--primary);
+}
+
+.main-nav ul li:hover:not(:last-child) {
+	text-shadow: .3px -0.5px .3px var(--tertiary);
+}
+
 .main-nav ul li span {
   display: block;
   height: 4px;
   background: var(--yellow);
-  position: relative;
+	position: relative;
+	margin: -1px;
 }
 
 .main-nav-dropdown {
@@ -2568,7 +2581,7 @@ td > button > i{
 }
 
 td > button > i:hover{
-	text-shadow: 3px 1px 2px #7b7b7b;
+	text-shadow: 3px 1px 2px var(--text-color);
 }
 
 .dataTables_empty {
@@ -3689,7 +3702,7 @@ a.ui-button:active,
 }
 .slide-slow > .icon-chevron-down:hover{
 	color: var(--primary) !important;
-	text-shadow: 3px 1px 2px #7b7b7b;
+	text-shadow: 3px 1px 2px var(--text-color);
 }
 
 .files{
