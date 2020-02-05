@@ -152,6 +152,7 @@ if(!function_exists('languajeLoad')) {
 					'login' => ['login'],
 					'validatecaptcha' => ['login'],
 					'recoverPass'	=> ['password-recover'],
+					'changePassword'	=> ['password-change'],
 					'terms'	=> ['terms'],
 				];
 				break;
