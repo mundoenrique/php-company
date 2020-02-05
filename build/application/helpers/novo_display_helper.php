@@ -53,8 +53,6 @@ if ( ! function_exists('verifyheader'))
 		$client = $CI->config->item('client');
 		$countryUri = $CI->config->item('country-uri');
 		$logged = $CI->session->has_userdata('logged');
-		$showUs = ['novo'];
-		$showThem = ['pichincha'];
 
 		switch ($link) {
 			case lang('GEN_SHOW_HEADER'):
@@ -69,6 +67,10 @@ if ( ! function_exists('verifyheader'))
 				break;
 			case lang('GEN_TAG_GOUT_MENU'):
 				$show = ['novo'];
+				$display = (in_array($client, $show));
+				break;
+			case lang('GEN_TAG_REPORT_MENU'):
+				$show = ['banco-bog'];
 				$display = (in_array($client, $show));
 				break;
 			case lang('GEN_TAG_LINK_UNIC'):

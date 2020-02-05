@@ -73,7 +73,7 @@ $(function () {
 			$.each(response.msg, function(item, content) {
 				if(item == 'header') {
 					$.each(content, function(index, value) {
-						msgModal+= '<h5>'+value+'</h5>';
+						msgModal+= '<h5 class="regular mr-1">'+value+'</h5>';
 					});
 				}
 
@@ -114,33 +114,7 @@ $(function () {
       }
 		}],
 		"autoWidth": false,
-    "language": {
-      "sProcessing": "Procesando...",
-      "sLengthMenu": "Mostrar _MENU_ registros",
-      "sZeroRecords": "No se encontraron resultados",
-      "sEmptyTable": "Ningún dato disponible en esta tabla",
-      "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-      "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
-      "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
-      "sInfoPostFix": "",
-      "slengthMenu": "Mostrar _MENU_ registros por pagina",
-      "sSearch": "",
-      "sSearchPlaceholder": "Buscar...",
-      "sUrl": "",
-      "sInfoThousands": ",",
-      "sLoadingRecords": "Cargando...",
-      "sprocessing": "Procesando ...",
-      "oPaginate": {
-        "sFirst": "Primera",
-        "sLast": "Última",
-        "sNext": "»",
-        "sPrevious": "«"
-      },
-      "oAria": {
-        "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
-        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
-      }
-    }
+    "language": dataTableLang
 	});
 
 	$('#pending-bulk').on('click', 'button', function(e) {
