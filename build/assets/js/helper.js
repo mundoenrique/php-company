@@ -7,6 +7,7 @@ var loader = $('#loader').html();
 var validatePass = /^[\w!@\*\-\?¡¿+\/.,#]+$/;
 var searchEnterprise = $('#sb-search');
 var inputPass = $('#password');
+var dataTableLang;
 
 $(function () {
 	$('input[type=text], input[type=password], input[type=email]').attr('autocomplete', 'off');
@@ -22,6 +23,33 @@ $(function () {
 	$('.big-modal').on('click', function(){
 		$('.cover-spin').show(0)
 	});
+	//dataTale lang
+	dataTableLang = {
+		"sLengthMenu": lang.GEN_TABLE_SLENGTHMENU,
+		"sZeroRecords": lang.GEN_TABLE_SZERORECORDS,
+		"sEmptyTable": lang.GEN_TABLE_SEMPTYTABLE,
+		"sInfo": lang.GEN_TABLE_SINFO,
+		"sInfoEmpty": lang.GEN_TABLE_SINFOEMPTY,
+		"sInfoFiltered": lang.GEN_TABLE_SINFOFILTERED,
+		"sInfoPostFix": lang.GEN_TABLE_SINFOPOSTFIX,
+		"slengthMenu": lang.GEN_TABLE_SLENGTHMENU,
+		"sSearch": lang.GEN_TABLE_SSEARCH,
+		"sSearchPlaceholder": lang.GEN_TABLE_SSEARCHPLACEHOLDER,
+		"sUrl": lang.GEN_TABLE_SSEARCH,
+		"sInfoThousands": lang.GEN_TABLE_SINFOTHOUSANDS,
+		"sProcessing": lang.GEN_TABLE_SPROCESSING,
+		"sloadingrecords": lang.SLOADINGRECORDS,
+		"oPaginate": {
+			"sFirst": lang.GEN_TABLE_SFIRST,
+			"sLast": lang.GEN_TABLE_SLAST,
+			"sNext": lang.GEN_TABLE_SNEXT,
+			"sPrevious": lang.GEN_TABLE_SPREVIOUS
+		},
+		"oAria": {
+			"sSortAscending": lang.GEN_TABLE_SSORTASCENDING,
+			"sSortDescending": lang.GEN_TABLE_SSORTDESCENDING
+		}
+	}
 });
 /**
  * @info Llama al core del servidor
