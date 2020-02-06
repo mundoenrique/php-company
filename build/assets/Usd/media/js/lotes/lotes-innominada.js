@@ -59,11 +59,6 @@ var datatable;
         close: function(){
         	$(this).dialog("destroy");
         },
-        buttons: {
-		  Aceptar: function(){
-			$(this).dialog("destroy");
-          }
-        }
       });
 
     }
