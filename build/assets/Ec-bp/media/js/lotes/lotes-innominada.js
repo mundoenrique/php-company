@@ -65,15 +65,6 @@ var datatable;
         close: function(){
         	$(this).dialog("destroy");
         },
-        buttons: {
-					"Aceptar": {
-						text: 'Aceptar',
-						class: 'novo-btn-primary-modal',
-						click: function () {
-							$(this).dialog("destroy");
-						}
-					}
-        }
       });
 
     }
