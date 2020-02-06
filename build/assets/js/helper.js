@@ -262,7 +262,7 @@ function formInputTrim(form) {
  * @author J. Enrique Peñaloza Piñero
  * @date December 27th, 2019
  */
-function crytoPass(password) {
+function cryptoPass(password) {
 	ceo_cook = getCookieValue();
 	cypherPass = CryptoJS.AES.encrypt(password, ceo_cook, { format: CryptoJSAesJson }).toString();
 	password = btoa(JSON.stringify({

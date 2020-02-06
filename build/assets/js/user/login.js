@@ -72,14 +72,11 @@ $(function() {
 
 	function getCredentialsUser(){
 		ceo_cook = getCookieValue();
-		cypherPass = CryptoJS.AES.encrypt(userPass.val(), ceo_cook, { format: CryptoJSAesJson }).toString();
+		cypherPass = cryptoPass(userPass.val());
 
 		return {
 			user: userLogin.val(),
-			pass: btoa(JSON.stringify({
-				passWord: cypherPass,
-				plot: btoa(ceo_cook)
-			})),
+			pass: cypherPass,
 			active: ''
 		}
 	};

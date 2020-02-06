@@ -5,7 +5,7 @@ $(function() {
 	var WidgetSelcetP = $('#product-select');
 	var enterpriseWidgetBtn = $('#enterprise-widget-btn');
 	var formAction = enterpriseWidgetForm.attr('form-action');
-	var prefix = getPropertyOfElement('prefix-prod', '#detail-product');
+	var prefix = getPropertyOfElement('prefix-prod', '#product-info');
 	var currentIdFiscal = getPropertyOfElement('fiscal-reg', '#fiscal-reg');
 	var enterpriseCode;
 	var enterpriseGroup;
@@ -56,6 +56,8 @@ $(function() {
 			WidgetSelcetP.find('option:selected').text(lang.GEN_SELECT_PRODUCTS);
 			goToDetail = true;
 			$.each(response.data, function(index, prod) {
+				console.log(prod)
+				console.log(currentIdFiscal, prefix)
 				if(prod.id == prefix && currentIdFiscal == idFiscal) {
 					return;
 				}
