@@ -31,7 +31,7 @@ class Novo_User_Model extends NOVO_Model {
 		$password = json_decode(base64_decode($dataRequest->pass));
 		$password = $this->cryptography->decrypt(
 			base64_decode($password->plot),
-			utf8_encode($password->passWord)
+			utf8_encode($password->password)
 		);
 
 		$this->dataRequest->idOperation = 'loginFull';

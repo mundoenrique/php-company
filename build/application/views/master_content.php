@@ -17,6 +17,9 @@
 
 	<?php if($newViews != '' && $module != 'suggestion'): ?>
 		<main class="content bg-content">
+		<?php if($module != 'Login'): ?>
+			<div id="product-info" class="pt-3 px-5 pb-5" prefix-prod="<?= $prefix ?>">
+		<?php endif; ?>
 	<?php elseif($newViews == ''): ?>
 		<div id="wrapper">
 	<?php endif; ?>
@@ -26,6 +29,9 @@
 			}
 		?>
 	<?php if($newViews != '' && $module != 'suggestion'): ?>
+		<?php if($module != 'Login'): ?>
+			</div>
+		<?php endif; ?>
 		</main>
 	<?php elseif($newViews == ''): ?>
 		</div>

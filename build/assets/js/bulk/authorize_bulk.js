@@ -219,7 +219,7 @@ function SignDeleteBulk(currentForm, action, btnId, passwordInput, modalReq) {
 			bulkInfo.push(JSON.stringify(info));
 		}
 
-		inputPass = crytoPass(passwordInput.val());
+		inputPass = cryptoPass(passwordInput.val());
 		data = {
 			modalReq: modalReq.active,
 			bulk: bulkInfo,

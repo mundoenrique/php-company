@@ -141,7 +141,7 @@ $(function () {
 				data = {
 					btn1: {
 						text: lang.GEN_BTN_DELETE,
-						action: 'close'
+						action: 'none'
 					},
 					btn2: {
 						action: 'close'
