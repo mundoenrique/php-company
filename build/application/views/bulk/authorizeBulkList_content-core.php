@@ -53,9 +53,11 @@
 										onclick="window.location.href = 'ceo_auth_see_lot.php'">
 										<i class="icon icon-find" aria-hidden="true"></i>
 									</button>
+									<?php if($this->verify_access->verifyAuthorization('TEBAUT', 'TEBELI')): ?>
 									<button class="btn mx-1 px-0" title="<?= lang('GEN_BTN_DELETE'); ?>" data-toggle="tooltip">
 										<i class="icon icon-remove mr-1" aria-hidden="true"></i>
 									</button>
+									<?php endif; ?>
 								</td>
 							</tr>
 							<?php endforeach; ?>
@@ -72,11 +74,13 @@
 									<?= lang('GEN_BTN_SIGN'); ?>
 								</button>
 							</div>
+							<?php if($this->verify_access->verifyAuthorization('TEBAUT', 'TEBELI')): ?>
 							<div class="col-auto">
 								<button id="del-sign-bulk-btn" class="btn btn-primary btn-small btn-loading flex mx-auto">
 									<?= lang('GEN_BTN_DELETE'); ?>
 								</button>
 							</div>
+							<?php endif; ?>
 						</div>
 					</form>
 					<div class="line mb-2"></div>
@@ -115,9 +119,11 @@
 									<button class="btn mx-1 px-0" title="<?= lang('GEN_BTN_SEE') ?>" data-toggle="tooltip">
 										<i class="icon icon-find" aria-hidden="true"></i>
 									</button>
+									<?php if($this->verify_access->verifyAuthorization('TEBAUT', 'TEBELI')): ?>
 									<button class="btn mx-1 px-0" title="<?= lang('GEN_BTN_DELETE') ?>" data-toggle="tooltip">
 										<i class="icon icon-remove mr-1" aria-hidden="true"></i>
 									</button>
+									<?php endif; ?>
 								</td>
 							</tr>
 							<?php endforeach; ?>
@@ -146,11 +152,13 @@
 									<?= lang('GEN_BTN_AUTHORIZE'); ?>
 								</button>
 							</div>
+							<?php if($this->verify_access->verifyAuthorization('TEBAUT', 'TEBELI')): ?>
 							<div class="col-3 col-lg-auto">
 								<button id="del-auth-bulk-btn" class="btn btn-primary btn-small btn-loading flex mx-auto">
 									<?= lang('GEN_BTN_DELETE'); ?>
 								</button>
 							</div>
+							<?php endif; ?>
 						</div>
 					</form>
 					<?php endif; ?>
