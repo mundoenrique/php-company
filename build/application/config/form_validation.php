@@ -242,6 +242,13 @@ $config = [
 			'rules' => 'trim|regex_match[/^([\w,]*)+$/i]'
 		]
 	],
+	'confirmBulkdetail' => [
+		[
+			'field' => 'bulk-id',
+			'label' => 'bulk-id',
+			'rules' => 'trim|regex_match[/^([\w]*)+$/i]'
+		]
+	],
 	'cancelServiceOrder' => [
 		[
 			'field' => 'tempOrders',
