@@ -654,9 +654,9 @@ class Novo_Bulk_Model extends NOVO_Model {
 		return $this->responseToTheView(lang('GEN_DELETE_BULK'));
 	}
 	/**
-	 * @info Firma lista de lotes
+	 * @info Ver el detalle de los lotes confirmados
 	 * @author J. Enrique Peñaloza Piñero
-	 * @date December 28th, 2019
+	 * @date February 09th, 2020
 	 */
 	public function callWs_ConfirmBulkdetail_Bulk($dataRequest)
 	{
@@ -693,14 +693,20 @@ class Novo_Bulk_Model extends NOVO_Model {
 				$detailInfo['fiscalId'] = $response->acrif;
 				$detailInfo['enterpriseName'] = mb_strtoupper(mb_strtolower($response->acnomcia));
 				$detailInfo['bulkType'] = $response->ctipolote;
-				$detailInfo['bulkTypeText'] = $response->acnombre;
+				$detailInfo['bulkTypeText'] = mb_strtoupper(mb_strtolower($response->acnombre));
 				$detailInfo['bulkNumber'] = $response->acnumlote;
 				$detailInfo['totalRecords'] = $response->ncantregs;
-				$detailInfo['loadUserName'] = $response->accodusuarioc;
+				$detailInfo['loadUserName'] = mb_strtoupper(mb_strtolower($response->accodusuarioc));
 				$detailInfo['bulkDate'] = $response->dtfechorcarga;
 				$detailInfo['bulkStatus'] = $response->cestatus;
-				$detailInfo['bulkStatusText'] = $response->status;
+				$detailInfo['bulkStatusText'] = ucfirst(mb_strtolower($response->status));
 				$detailInfo['bulkAmount'] = $response->montoNeto;
+
+				if(isset($response->registrosLoteEmision) && count($response->registrosLoteEmision) > 0) {
+					foreach($response->registrosLoteEmision AS $pos => $records) {
+						log_message('INFO', '---------------------'.json_encode($records));
+					}
+				}
 				break;
 		}
 

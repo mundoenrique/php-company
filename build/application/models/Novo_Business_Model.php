@@ -284,6 +284,7 @@ class Novo_Business_Model extends NOVO_Model {
 			case -99:
 				$this->response->code = 3;
 				$this->response->msg = novoLang(lang('RESP_NO_ACCESS'), $this->userName);
+				$this->response->data->resp['btn1']['link'] = base_url('productos');
 				break;
 		}
 

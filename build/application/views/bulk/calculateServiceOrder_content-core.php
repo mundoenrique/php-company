@@ -20,7 +20,7 @@
 		<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
 	</div>
 	<div class="w-100 hide-out hide">
-		<div class="flex flex-auto flex-column">
+		<div class="flex flex-auto flex-column <?= $widget ? '' : 'max-width-6'; ?>">
 			<div class="flex pb-5 flex-column">
 				<?php if(count($serviceOrdersList) > 0): ?>
 				<span class="line-text mb-2 h4 semibold primary"></span>

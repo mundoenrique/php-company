@@ -49,8 +49,10 @@
 								<td><?= $bulk->records; ?></td>
 								<td><?= $bulk->amount; ?></td>
 								<td class="p-0 flex justify-center items-center">
-									<button class="btn mx-1 px-0" title="<?= lang('GEN_BTN_SEE'); ?>" data-toggle="tooltip"
-										onclick="window.location.href = 'ceo_auth_see_lot.php'">
+									<form id="id-<?= $bulk->idBulk; ?>" action="<?= base_url('detalle-confirmado') ?>" method="post">
+										<input type="hidden" name="bulkId" value="<?= $bulk->idBulk; ?>">
+									</form>
+									<button class="btn mx-1 px-0 big-modal" title="<?= lang('GEN_BTN_SEE'); ?>" data-toggle="tooltip">
 										<i class="icon icon-find" aria-hidden="true"></i>
 									</button>
 									<?php if($this->verify_access->verifyAuthorization('TEBAUT', 'TEBELI')): ?>
@@ -119,7 +121,7 @@
 									<form id="id-<?= $bulk->idBulk; ?>" action="<?= base_url('detalle-confirmado') ?>" method="post">
 										<input type="hidden" name="bulkId" value="<?= $bulk->idBulk; ?>">
 									</form>
-									<button class="btn mx-1 px-0" title="<?= lang('GEN_BTN_SEE') ?>" data-toggle="tooltip">
+									<button class="btn mx-1 px-0 big-modal" title="<?= lang('GEN_BTN_SEE') ?>" data-toggle="tooltip">
 										<i class="icon icon-find" aria-hidden="true"></i>
 									</button>
 									<?php if($this->verify_access->verifyAuthorization('TEBAUT', 'TEBELI')): ?>

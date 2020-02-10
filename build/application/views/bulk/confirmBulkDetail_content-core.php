@@ -15,7 +15,7 @@
 	</div>
 </div>
 <div class="flex mt-1 mb-5 bg-color flex-nowrap justify-between">
-	<div class="flex flex-auto flex-column">
+	<div class="flex flex-auto flex-column <?= $widget ? '' : 'max-width-6'; ?>">
 		<div class="flex flex-column">
 			<span class="line-text mb-2 h4 semibold primary">Detalles</span>
 			<div class="row mb-2 px-5">
@@ -77,7 +77,6 @@
 						<button class="btn px-1" title="Exportar a PDF" data-toggle="tooltip">
 							<i class="icon icon-file-pdf" aria-hidden="true"></i>
 						</button>
-
 					</div>
 				</div>
 				<table id="authLotDetail" class="cell-border h6 display responsive w-100">

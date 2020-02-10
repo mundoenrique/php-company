@@ -170,7 +170,7 @@ class Bulk extends NOVO_Controller {
 		foreach($response->data->bulkInfo AS $row => $info) {
 			$this->render->$row = $info;
 		}
-		log_message('info', '-------------------------------------------'.json_encode($this->render));
+
 		$this->render->titlePage = 'Detalle del lote';
 		$this->views = ['bulk/'.$view];
 		$this->loadView($view);
