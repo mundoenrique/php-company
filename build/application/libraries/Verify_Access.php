@@ -160,6 +160,7 @@ class Verify_Access {
 				case 'authorizeBulkList':
 				case 'signBulkList':
 				case 'authorizeBulk':
+				case 'confirmBulkdetail':
 				case 'calculateServiceOrder':
 					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBAUT'));
 					break;
@@ -173,6 +174,9 @@ class Verify_Access {
 				case 'serviceOrders':
 				case 'getServiceOrders':
 					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBORS'));
+					break;
+				case 'getReportsList':
+					$auth = ($this->CI->session->has_userdata('productInf'));
 					break;
 			}
 		}

@@ -74,9 +74,12 @@ $route['(:any)/cargar-lotes'] = "bulk/getPendingBulk";
 $route['(:any)/detalle-lote'] = "bulk/getDetailBulk";
 $route['(:any)/confirmar-lote'] = "bulk/confirmBulk";
 $route['(:any)/lotes-autorizacion'] = "bulk/authorizeBulkList";
+$route['(:any)/detalle-confirmado'] = "bulk/confirmBulkdetail";
 $route['(:any)/lotes-calcular-orden'] = "bulk/calculateServiceOrder";
 //Inquiries
 $route['(:any)/consulta-orden-de-servicio'] = "inquiries/serviceOrders";
+//Reports
+$route['(:any)/reportes'] = "novo_reports/getReportsList";
 
 
 //old routes

@@ -116,6 +116,9 @@
 								<td><?= $bulk->records; ?></td>
 								<td><?= $bulk->amount; ?></td>
 								<td class="p-0 flex justify-center items-center">
+									<form id="id-<?= $bulk->idBulk; ?>" action="<?= base_url('detalle-confirmado') ?>" method="post">
+										<input type="hidden" name="bulkId" value="<?= $bulk->idBulk; ?>">
+									</form>
 									<button class="btn mx-1 px-0" title="<?= lang('GEN_BTN_SEE') ?>" data-toggle="tooltip">
 										<i class="icon icon-find" aria-hidden="true"></i>
 									</button>

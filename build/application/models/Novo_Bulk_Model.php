@@ -658,6 +658,62 @@ class Novo_Bulk_Model extends NOVO_Model {
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date December 28th, 2019
 	 */
+	public function callWs_ConfirmBulkdetail_Bulk($dataRequest)
+	{
+		log_message('INFO', 'NOVO Bulk Model: ConfirmBulkdetail Method Initialized');
+
+		$this->className = 'com.novo.objects.MO.AutorizarLoteMO';
+		$this->dataAccessLog->modulo = 'Lotes';
+		$this->dataAccessLog->function = 'Autorización de lotes';
+		$this->dataAccessLog->operation = 'Ver detalle del lote';
+
+		$this->dataRequest->idOperation = 'detalleLote';
+		$this->dataRequest->acidlote = $dataRequest->bulkId;
+
+		$response = $this->sendToService('ConfirmBulkdetail');
+
+		$detailInfo = [
+			'fiscalId' => '--',
+			'enterpriseName' => '--',
+			'bulkType' => '--',
+			'bulkTypeText' => '--',
+			'bulkNumber' => '--',
+			'totalRecords' => '--',
+			'loadUserName' => '--',
+			'bulkDate' => '--',
+			'bulkStatus' => '--',
+			'bulkStatusText' => '--',
+			'bulkAmount' => '--',
+			'bulkRecords' => [],
+		];
+
+		switch ($this->isResponseRc) {
+			case 0:
+				$this->response->code = 0;
+				$detailInfo['fiscalId'] = $response->acrif;
+				$detailInfo['enterpriseName'] = mb_strtoupper(mb_strtolower($response->acnomcia));
+				$detailInfo['bulkType'] = $response->ctipolote;
+				$detailInfo['bulkTypeText'] = $response->acnombre;
+				$detailInfo['bulkNumber'] = $response->acnumlote;
+				$detailInfo['totalRecords'] = $response->ncantregs;
+				$detailInfo['loadUserName'] = $response->accodusuarioc;
+				$detailInfo['bulkDate'] = $response->dtfechorcarga;
+				$detailInfo['bulkStatus'] = $response->cestatus;
+				$detailInfo['bulkStatusText'] = $response->status;
+				$detailInfo['bulkAmount'] = $response->montoNeto;
+				break;
+		}
+
+		$this->response->data->bulkInfo = (object) $detailInfo;
+
+		return $this->responseToTheView('ConfirmBulkdetail');
+
+	}
+	/**
+	 * @info Firma lista de lotes
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date December 28th, 2019
+	 */
 	public function callWs_AuthorizeBulk_Bulk($dataRequest)
 	{
 		log_message('INFO', 'NOVO Bulk Model: AuthorizeBulk Method Initialized');

@@ -112,14 +112,9 @@ $(function () {
 
 		switch(action) {
 			case lang.GEN_BTN_SEE:
-				/* form.attr('action', baseURL+'detalle-lote');
-				form.append('<input type="hidden" name="bulkView" value="detail">');
-				submitForm = true; */
-				break;
-			case lang.GEN_BTN_CONFIRM:
-				/* form.attr('action', baseURL+'confirmar-lote');
-				form.append('<input type="hidden" name="bulkView" value="confirm">');
-				submitForm = true; */
+				form = $(this).siblings('form');
+				insertFormInput(true, form)
+				$(this).siblings('form').submit();
 				break;
 			case lang.GEN_BTN_DELETE:
 			case lang.GEN_BTN_DISASS_SIGN:
