@@ -118,6 +118,7 @@ $lang['GEN_TAG_BRANCHOFFICE'] = 'ver select de sucursales';
 $lang['GEN_TAG_SEARCH_CAT'] = 'Buscar por categoría';
 $lang['GEN_TAG_ALL_BULK'] = 'Seleccionar todos los lotes';
 $lang['GEN_TAG_ORDER_TYPE'] = 'Tipo de orden de servicio';
+$lang['GEN_TAG_CANCEL_BUTTON'] = 'Botón cancelar generar orden de servicio';
 //DATATABLES
 $lang['GEN_TABLE_SELECT_SIGN'] = 'multi';
 $lang['GEN_TABLE_SELECT_AUTH'] = 'multi';

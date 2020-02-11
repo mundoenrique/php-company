@@ -93,9 +93,11 @@
 							<div class="help-block"></div>
 						</div>
 						<div class="flex flex-row">
+							<?php if(verifyDisplay('body', $module, lang('GEN_TAG_CANCEL_BUTTON'))): ?>
 							<div class="mb-3 mr-4">
 								<button id="cancel-bulk-btn" class="btn btn-link btn-small big-modal"><?= lang('GEN_BTN_CANCEL'); ?></button>
 							</div>
+							<?php endif; ?>
 							<div class="mb-3 mr-1">
 								<button id="auth-bulk-btn" class="btn btn-primary  btn-loading btn-small"><?= lang('GEN_BTN_AUTHORIZE'); ?></button>
 							</div>

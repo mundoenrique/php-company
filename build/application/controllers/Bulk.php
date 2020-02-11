@@ -164,7 +164,8 @@ class Bulk extends NOVO_Controller {
 		);
 		array_push(
 			$this->includeAssets->jsFiles,
-			"third_party/dataTables-1.10.20"
+			"third_party/dataTables-1.10.20",
+			"bulk/bulk-detail"
 		);
 
 		foreach($response->data->bulkInfo AS $row => $info) {
