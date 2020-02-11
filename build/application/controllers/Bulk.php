@@ -164,13 +164,14 @@ class Bulk extends NOVO_Controller {
 		);
 		array_push(
 			$this->includeAssets->jsFiles,
-			"third_party/dataTables-1.10.20"
+			"third_party/dataTables-1.10.20",
+			"bulk/bulk-detail"
 		);
 
 		foreach($response->data->bulkInfo AS $row => $info) {
 			$this->render->$row = $info;
 		}
-		log_message('info', '-------------------------------------------'.json_encode($this->render));
+
 		$this->render->titlePage = 'Detalle del lote';
 		$this->views = ['bulk/'.$view];
 		$this->loadView($view);

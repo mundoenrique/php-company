@@ -97,6 +97,7 @@
 									<button class="btn mx-1 px-0 details-control" title="<?= lang('GEN_BTN_SEE'); ?>" data-toggle="tooltip">
 										<i class="icon icon-find" aria-hidden="true"></i>
 									</button>
+									<?php if(!TRUE): ?>
 									<button class="btn mx-1 px-0" title="<?= lang('GEN_BTN_DOWN_PDF'); ?>" data-toggle="tooltip">
 										<i class="icon icon-file-pdf" aria-hidden="true"></i>
 									</button>
@@ -104,6 +105,7 @@
 									<button class="btn mx-1 px-0" title="<?= lang('GEN_BTN_CANCEL_ORDER'); ?>" data-toggle="tooltip">
 										<i class="icon icon-remove" aria-hidden="true"></i>
 									</button>
+									<?php endif; ?>
 									<?php endif; ?>
 								</td>
 							</tr>

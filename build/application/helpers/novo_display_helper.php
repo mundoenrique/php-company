@@ -130,6 +130,10 @@ if ( ! function_exists('verifyBody'))
 				$show = ['novo', 'pichincha'];
 				$display = (in_array($client, $show) && $country != 've');
 				break;
+			case lang('GEN_TAG_CANCEL_BUTTON'):
+				$show = ['novo', 'pichincha'];
+				$display = (in_array($client, $show));
+				break;
 		}
 
 		return $display;

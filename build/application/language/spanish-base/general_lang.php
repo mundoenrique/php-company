@@ -118,6 +118,7 @@ $lang['GEN_TAG_BRANCHOFFICE'] = 'ver select de sucursales';
 $lang['GEN_TAG_SEARCH_CAT'] = 'Buscar por categoría';
 $lang['GEN_TAG_ALL_BULK'] = 'Seleccionar todos los lotes';
 $lang['GEN_TAG_ORDER_TYPE'] = 'Tipo de orden de servicio';
+$lang['GEN_TAG_CANCEL_BUTTON'] = 'Botón cancelar generar orden de servicio';
 //DATATABLES
 $lang['GEN_TABLE_SELECT_SIGN'] = 'multi';
 $lang['GEN_TABLE_SELECT_AUTH'] = 'multi';
@@ -144,7 +145,7 @@ $lang['GEN_TABLE_SINFO'] = 'Mostrando registro(s) del _START_ al _END_ de un tot
 $lang['GEN_TABLE_SINFOEMPTY'] = 'Sin registros que mostrar';
 $lang['GEN_TABLE_SINFOFILTERED'] = '(filtrado de un total de _MAX_ registro(s))';
 $lang['GEN_TABLE_SINFOPOSTFIX'] = '';
-$lang['GEN_TABLE_SLENGTHMENU'] = 'Mostrar _MENU_ registro(s) por página';
+$lang['GEN_TABLE_SLENGTHMENU'] = 'Mostrar _MENU_ registros por página';
 $lang['GEN_TABLE_SSEARCH'] = '';
 $lang['GEN_TABLE_SSEARCHPLACEHOLDER'] = 'Buscar...';
 $lang['GEN_TABLE_SURL'] = '';

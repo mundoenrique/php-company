@@ -60,7 +60,7 @@ class Novo_Business_Model extends NOVO_Model {
 					$this->response->data->filters = $enterpriseList->filters;
 					$this->response->data->enterprisesTotal = $response->listadoEmpresas->totalRegistros;
 					$this->response->data->recordsPage = ceil($this->response->data->enterprisesTotal/$sizePage);
-					$this->response->data->text = '';
+					$this->response->data->text = $this->response->data->enterprisesTotal > 0 ? '' : 'Usuario sin empresas asignadas';
 				}
 				break;
 			case -6:
@@ -284,6 +284,7 @@ class Novo_Business_Model extends NOVO_Model {
 			case -99:
 				$this->response->code = 3;
 				$this->response->msg = novoLang(lang('RESP_NO_ACCESS'), $this->userName);
+				$this->response->data->resp['btn1']['link'] = base_url('productos');
 				break;
 		}
 

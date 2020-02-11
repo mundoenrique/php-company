@@ -15,7 +15,7 @@
 	</div>
 </div>
 <div class="flex mt-1 mb-5 bg-color flex-nowrap justify-between">
-	<div class="flex flex-auto flex-column">
+	<div class="flex flex-auto flex-column <?= $widget ? '' : 'max-width-6'; ?>">
 		<div class="flex flex-column">
 			<span class="line-text mb-2 h4 semibold primary">Detalles</span>
 			<div class="row mb-2 px-5">
@@ -68,7 +68,11 @@
 		<?php if(count($bulkRecords) > 0): ?>
 		<div class="flex pb-5 flex-column">
 			<span class="line-text mb-2 h4 semibold primary">Registros del lote</span>
-			<div class="center mx-1">
+			<div id="pre-loader" class="mt-2 mx-auto">
+				<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
+			</div>
+			<div class="center mx-1 hide">
+				<?php if(!TRUE): ?>
 				<div class="flex justify-end items-center">
 					<div class="mr-3 py-1">
 						<button class="btn px-1" title="Exportar a EXCEL" data-toggle="tooltip">
@@ -77,26 +81,27 @@
 						<button class="btn px-1" title="Exportar a PDF" data-toggle="tooltip">
 							<i class="icon icon-file-pdf" aria-hidden="true"></i>
 						</button>
-
 					</div>
 				</div>
-				<table id="authLotDetail" class="cell-border h6 display responsive w-100">
+				<?php endif; ?>
+				<table id="auth-bulk-detail" class="cell-border h6 display responsive w-100">
 					<thead class="bg-primary secondary regular">
 						<tr>
-							<th>Cédula de identidad</th>
-							<th>Cuenta</th>
+							<?php foreach($bulkHeader AS $header): ?>
+							<th><?= $header ?></th>
+							<?php endforeach; ?>
 						</tr>
 					</thead>
 					<tbody>
+						<?php foreach($bulkRecords AS $body): ?>
 						<tr>
-							<td>1725234379</td>
-							<td>*************5621</td>
+						<?php foreach($body AS $pos => $value): ?>
+						<th><?= $value ?></th>
+						<?php endforeach; ?>
 						</tr>
+						<?php endforeach; ?>
 					</tbody>
 				</table>
-			</div>
-			<div class="my-5 py-4 center none">
-				<span class="h4">No se encontraron registros</span>
 			</div>
 		</div>
 		<?php endif; ?>

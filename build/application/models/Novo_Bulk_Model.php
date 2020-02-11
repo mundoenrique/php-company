@@ -654,9 +654,9 @@ class Novo_Bulk_Model extends NOVO_Model {
 		return $this->responseToTheView(lang('GEN_DELETE_BULK'));
 	}
 	/**
-	 * @info Firma lista de lotes
+	 * @info Ver el detalle de los lotes confirmados
 	 * @author J. Enrique Peñaloza Piñero
-	 * @date December 28th, 2019
+	 * @date February 09th, 2020
 	 */
 	public function callWs_ConfirmBulkdetail_Bulk($dataRequest)
 	{
@@ -684,6 +684,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 			'bulkStatus' => '--',
 			'bulkStatusText' => '--',
 			'bulkAmount' => '--',
+			'bulkHeader' => [],
 			'bulkRecords' => [],
 		];
 
@@ -693,14 +694,108 @@ class Novo_Bulk_Model extends NOVO_Model {
 				$detailInfo['fiscalId'] = $response->acrif;
 				$detailInfo['enterpriseName'] = mb_strtoupper(mb_strtolower($response->acnomcia));
 				$detailInfo['bulkType'] = $response->ctipolote;
-				$detailInfo['bulkTypeText'] = $response->acnombre;
+				$detailInfo['bulkTypeText'] = mb_strtoupper(mb_strtolower($response->acnombre));
 				$detailInfo['bulkNumber'] = $response->acnumlote;
 				$detailInfo['totalRecords'] = $response->ncantregs;
-				$detailInfo['loadUserName'] = $response->accodusuarioc;
+				$detailInfo['loadUserName'] = mb_strtoupper(mb_strtolower($response->accodusuarioc));
 				$detailInfo['bulkDate'] = $response->dtfechorcarga;
 				$detailInfo['bulkStatus'] = $response->cestatus;
-				$detailInfo['bulkStatusText'] = $response->status;
+				$detailInfo['bulkStatusText'] = ucfirst(mb_strtolower($response->status));
 				$detailInfo['bulkAmount'] = $response->montoNeto;
+
+				$response->ctipolote = 'L';
+				switch($response->ctipolote) {
+					case '1':
+						if(isset($response->registrosLoteEmision) && count($response->registrosLoteEmision) > 0) {
+							$bulkRecordsHeader = ['DNI', 'Nombres y apellidos', 'Estado'];
+							$detailInfo['bulkHeader'] = $bulkRecordsHeader;
+
+							foreach($response->registrosLoteEmision AS $records) {
+								$record = new stdClass();
+								foreach($records AS $pos => $value) {
+									switch ($pos) {
+										case 'idExtPer':
+											$record->cardHoldId = $value;
+											break;
+										case 'nombres':
+											$record->cardHoldName = ucwords(mb_strtolower($value));
+											break;
+										case 'apellidos':
+											$record->cardHoldLastName = ucwords(mb_strtolower($value));
+											break;
+										case 'status':
+											$status = [
+												'0' => 'En proceso',
+												'1' => 'Procesado',
+												'7' => 'Rechazado',
+											];
+											$record->bulkstatus = $status[$value];
+											break;
+									}
+								}
+								$record->cardHoldName = $record->cardHoldName.' '.$record->cardHoldLastName;
+								unset($record->cardHoldLastName);
+								array_push(
+									$detailInfo['bulkRecords'],
+									$record
+								);
+							}
+						}
+						break;
+					case '2':
+					case '5':
+					case 'L':
+						if(isset($response->registrosLoteRecarga) && count($response->registrosLoteRecarga) > 0) {
+							$bulkRecordsHeader = ['DNI', 'Monto', 'Número de cuenta'];
+
+							if($response->ctipolote == '5' || $response->ctipolote == 'L') {
+								$bulkRecordsHeader = ['DNI', 'Monto', 'Número de cuenta', 'Estado'];
+							}
+
+							$detailInfo['bulkHeader'] = $bulkRecordsHeader;
+
+							foreach($response->registrosLoteRecarga AS $records) {
+								$record = new stdClass();
+								foreach($records AS $pos => $value) {
+									switch ($pos) {
+										case 'id_ext_per':
+											$record->cardHoldId = $value;
+											break;
+											case 'monto':
+												$record->cardHoldAmount = $value;
+											break;
+										case 'nro_cuenta':
+											$record->cardHoldAccount = $value;
+											break;
+										case 'status':
+											if($response->ctipolote == '5') {
+												$status = [
+													'3' => 'En proceso',
+													'6' => 'Procesada',
+													'7' => 'Rechazado',
+												];
+											}
+
+											if($response->ctipolote == 'L') {
+												$status = [
+													'0' => 'Pendiente',
+													'1' => 'Procesada',
+													'2' => 'Inválida',
+													'7' => 'Rechazado',
+												];
+											}
+											$record->bulkstatus = $status[$value];
+											break;
+									}
+								}
+								array_push(
+									$detailInfo['bulkRecords'],
+									$record
+								);
+							}
+						}
+						break;
+				}
 				break;
 		}
 
