@@ -185,9 +185,9 @@ class Bulk extends NOVO_Controller {
 	{
 		log_message('INFO', 'NOVO Bulk: calculateServiceOrder Method Initialized');
 
-		/* if(!$this->session->flashdata('serviceOrdersList') || !$this->session->flashdata('bulkNotBillable')) {
+		if(!$this->session->flashdata('serviceOrdersList')) {
 			redirect(base_url('lotes-autorizacion'), 'location');
-		} */
+		}
 
 		$view = lang('GEN_CACULATE_SERVICE_ORDER');
 		array_push(
