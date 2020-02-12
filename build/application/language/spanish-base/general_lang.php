@@ -107,6 +107,7 @@ $lang['GEN_FOTTER_RIGHTS'] = 'NovoPayment Inc. All rights reserved.';
 //HTML TAG DISPLAY
 $lang['GEN_SHOW_HEADER'] = 'Mostrar encabezado';
 $lang['GEN_SHOW_HEADER_LOGO'] = 'Mostrar logo en el encabezado';
+$lang['GEN_SHOW_CONFIG'] = 'ver configuracion';
 $lang['GEN_SIGNIN_TOP'] = 'widget superior';
 $lang['GEN_SIGNIN_HEADER'] = 'widget Cabecera';
 $lang['GEN_TAG_WELCOME_MESSAGE'] = 'Mensaje de bienvenida';

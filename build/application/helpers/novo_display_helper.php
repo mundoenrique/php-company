@@ -65,6 +65,10 @@ if ( ! function_exists('verifyheader'))
 				$show = ['pichincha'];
 				$display = (in_array($client, $show));
 				break;
+			case lang('GEN_SHOW_CONFIG'):
+				$show = ['novo', 'pichincha'];
+				$display = (in_array($client, $show));
+				break;
 			case lang('GEN_TAG_GOUT_MENU'):
 				$show = ['novo'];
 				$display = (in_array($client, $show));
