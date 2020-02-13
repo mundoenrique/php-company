@@ -2049,7 +2049,7 @@ class Lotes extends CI_Controller {
 			if($response->rc==0){
 				$response->linkAut=$linkAut;
 				log_message('info','confirmarlote dataDecrip '.$jsonResponse);
-				if($idTipoLote=='L'){
+				if($idTipoLote=='L' && $urlCountry!='Ec-bp'){
 					return array("ordenes"=>serialize($response));
 				}else{
 					return $response;
