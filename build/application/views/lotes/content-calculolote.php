@@ -98,6 +98,7 @@ $reten = ($reten == NULL) ? "nonEmpty" : trim($reten, ', ');
 						$tempidOrdenLotes=array();
 
 						foreach ($data->lista as $value) {
+
 							array_push($tempidOrdenLotes, $value->idOrdenTemp);
 							$comision = "<td>".lang('TABLA_OS_COMISION')."</td>";
 							if($pais == 'Ec-bp') {
@@ -157,6 +158,7 @@ $reten = ($reten == NULL) ? "nonEmpty" : trim($reten, ', ');
 									$monComision = '';
 								}
 								echo "
+
 								<tr class='tr-calculo' id='$value->idOrdenTemp'>
 									<td class='OS-icon'>
 										<a id='ver_lotes' title='Ver lotes'>
@@ -164,12 +166,13 @@ $reten = ($reten == NULL) ? "nonEmpty" : trim($reten, ', ');
 										</a>
 									</td>
 									$monComision
-									<td>$value->montoIVA</td>
-									<td class='th-empresa'>$value->montoOS</td>
+									<td>".amount_format($value->montoIVA)."</td>
+									<td class='th-empresa bueno'>".amount_format($value->montoOS)."</td>
 									<td>".amount_format($value->montoTotal)."</td>
 									<td>".amount_format($value->montoDeposito)."</td>
 									<td style='float:left; padding:0; '><table><tbody>$ltr</tbody></table></td>
 								</tr>";
+
 							}
 						}
 						$tempIdOrdenL=serialize($tempidOrdenLotes);

@@ -26,6 +26,7 @@ $(function () {
 
 		$lotes.is(":visible") ? $lotes.fadeOut("slow") : $lotes.fadeIn("slow");
 		$('.OSinfo').not("." + OS).hide();
+		showOptions();
 
 	});
 
@@ -281,8 +282,9 @@ $(function () {
 	});
 
 	function showOptions() {
-		$('#tbody-datos-general tr').css('margin-left', 0);
-		$("#tbody-datos-general table").css('margin-left', 31, 'important');
+		$("#tbody-datos-general table").css('margin-left', 30, 'important');
+		//$('#tbody-datos-general tr').css('margin-left', 0);
+
 
 	}
 
