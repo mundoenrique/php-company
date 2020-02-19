@@ -14,3 +14,7 @@ $lang['GEN_BTN_AUTHORIZE'] = 'Aceptar';
 $lang['GEN_MODAL_WIDTH'] = 370;
 //DATATABLES
 $lang['GEN_TABLE_SELECT_AUTH'] = 'single';
+$lang['GEN_TABLE_COMMISSION'] = 'Monto comisión';
+$lang['GEN_TABLE_VAT'] = 'Monto IVA';
+$lang['GEN_TABLE_AMOUNT_SO'] = 'Monto OS';
+$lang['GEN_TABLE_DEPOSIT_AMOUNT'] = 'Monto depositado';
