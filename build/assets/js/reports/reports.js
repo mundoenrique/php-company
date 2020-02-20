@@ -5,6 +5,9 @@ $(function () {
 	$('#reports option').each(function () {
 		optionValues.push($(this).val());
 	});
+
+	$(".reports-form").delay(2000).removeClass('none');
+
 	optionValues.splice(0, 2);
 
 	for (i = 0; i < optionValues.length; i++) {

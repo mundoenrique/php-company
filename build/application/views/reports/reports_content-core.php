@@ -50,7 +50,7 @@
 		<div class="flex pb-5 flex-column">
 			<span id="search-criteria" class=" none line-text mb-2 h4 semibold primary">Criterio de búsqueda</span>
 			<div class="flex my-2 px-5">
-				<form method="post" class="w-100">
+				<form method="post" class="reports-form w-100 none">
 					<div id="customer-card-movements" class="row">
 						<div class="form-group col-4">
 							<label for="datepicker_start">Fecha inicio</label>
