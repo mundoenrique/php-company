@@ -18,3 +18,4 @@ $lang['GEN_TABLE_COMMISSION'] = 'Valor comisión';
 $lang['GEN_TABLE_VAT'] = 'Valor IVA';
 $lang['GEN_TABLE_AMOUNT_SO'] = 'Valor OS';
 $lang['GEN_TABLE_DEPOSIT_AMOUNT'] = 'Valor depositado';
+$lang['GEN_TABLE_BULK_AMOUNT'] = 'Valor';
