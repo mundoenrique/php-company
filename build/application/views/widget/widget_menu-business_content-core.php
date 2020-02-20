@@ -11,7 +11,8 @@
 		<?php foreach($userAccess AS $firstLevel): ?>
 		<?php $textMenu = $this->create_menu->mainMenu($firstLevel->idPerfil); ?>
 		<li class="nav-item mr-1 inline <?= setCurrentPage($currentClass, $textMenu); ?>">
-			<a class="nav-link px-2 semibold primary"><?= $textMenu; ?></a>
+			<?php $href = ($firstLevel->idPerfil) == 'GESREPORT' ? 'href="reportes"' : ''; ?>
+			<a <?= $href; ?> class="nav-link px-2 semibold primary"><?= $textMenu; ?></a>
 			<ul class="dropdown-user pl-0 regular tertiary bg-secondary list-style-none list-inline">
 				<?php $secondLevel = $this->create_menu->secondaryMenu($firstLevel) ?>
 				<?php foreach($secondLevel->second AS $submenu): ?>
