@@ -551,14 +551,14 @@ $(document).ready(function () {
 								th.html($("#fecha").attr("data"));
 								th.attr("id", "Datos2-med");
 								th = $(document.createElement("th")).appendTo(tr);
-								th.html($("#fid").attr("data"));
+								/* th.html($("#fid").attr("data"));
 								th.attr("id", "Datos2-med");
 								th = $(document.createElement("th")).appendTo(tr);
 								th.html($("#terminalTransaccion").attr("data"));
 								th.attr("id", "Datos2-med");
 								th = $(document.createElement("th")).appendTo(tr);
 								th.html($("#secuencia").attr("data"));
-								th.attr("id", "Datos2-med");
+								th.attr("id", "Datos2-med"); */
 								th = $(document.createElement("th")).appendTo(tr);
 								th.html($("#referencia").attr("data"));
 								th.attr("id", "Datos2-med");
@@ -584,7 +584,7 @@ $(document).ready(function () {
 									td.html(item.fecha);
 									td.attr("id", "Datos2-med");
 									td = $(document.createElement("td")).appendTo(tr);
-									td.html(item.fid);
+									/* td.html(item.fid);
 									td.attr("id", "Datos2-med");
 									td = $(document.createElement("td")).appendTo(tr);
 									td.html(item.terminalTransaccion);
@@ -592,7 +592,7 @@ $(document).ready(function () {
 									td = $(document.createElement("td")).appendTo(tr);
 									td.html(item.secuencia);
 									td.attr("id", "Datos2-med");
-									td = $(document.createElement("td")).appendTo(tr);
+									td = $(document.createElement("td")).appendTo(tr); */
 									td.html(item.referencia);
 									td.attr("id", "Datos2-med");
 									td = $(document.createElement("td")).appendTo(tr);
