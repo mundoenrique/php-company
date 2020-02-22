@@ -15,9 +15,9 @@ $lang['BREADCRUMB_DETALLE'] = "Detalle";
 $lang['BREADCRUMB_PAYMENTS'] = "Pago a proveedores";
 
 // Mensajes
-$lang['VISA_NON_RESULT'] = "No se encontraron resultados, por favor intente de nuevo.";
-$lang['VISA_COUNT_NO_FOUND'] = "La cuenta no está registrada, por favor intente de nuevo.";
-$lang['VISA_ERROR_CONTROLS'] = "No fue posible obtener a lista de controles, por favor intente de nuevo.";
+$lang['VISA_NON_RESULT'] = "No se encontraron resultados, por favor intenta de nuevo.";
+$lang['VISA_COUNT_NO_FOUND'] = "La cuenta no está registrada, por favor intenta de nuevo.";
+$lang['VISA_ERROR_CONTROLS'] = "No fué posible obtener a lista de controles, por favor intenta de nuevo.";
 $lang['VISA_UPDATE_SUCCESS'] = "Los controles fueron actulizados exitosamente.";
 $lang['VISA_NON_BALANCE'] = "La empresa no tiene saldo disponible.";
 

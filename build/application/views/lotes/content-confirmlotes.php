@@ -87,7 +87,7 @@ log_message('info',json_encode($data));
 						<?php
 							if( count($info->mensajes) > 0 ){
 								foreach ($info->mensajes as $errores) {
-									echo "<p>Linea: $errores->linea, $errores->mensaje ($errores->detalle)</p>";
+									echo "<p>Línea: $errores->linea, $errores->mensaje ($errores->detalle)</p>";
 								}
 							}else{
 								echo "<p>".$data[0]->msg."</p>";
