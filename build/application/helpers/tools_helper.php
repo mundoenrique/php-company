@@ -190,6 +190,7 @@ if(!function_exists('menuRoute')) {
 			case 'TEBTHA': return base_url($country."/reportes/tarjetahabientes");
 			case 'TEBORS': return base_url($country."/consulta/ordenes-de-servicio");
 			case 'TRAMAE': return base_url($country."/servicios/transferencia-maestra");
+			case 'COPELO': return base_url($country."/servicios/consulta-tarjetas");
 			case 'CONVIS': return base_url($country."/controles/visa");
 			case 'PAGPRO': return base_url($country."/pagos");
 			case 'TEBPOL': return base_url($country."/servicios/actualizar-datos");
@@ -422,6 +423,9 @@ if(!function_exists('menuRoute')) {
 								break;
 							case 'TRAMAE':
 								$ruta=$urlBase."/servicios/transferencia-maestra";
+								break;
+								case 'COPELO':
+								$ruta=$urlBase."/servicios/consulta-tarjetas";
 								break;
 							case 'CONVIS':
 								$ruta=$urlBase."/controles/visa";

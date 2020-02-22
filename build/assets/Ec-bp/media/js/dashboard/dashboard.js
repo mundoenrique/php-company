@@ -80,6 +80,7 @@ $(function () {
 
 	var scroll_interval;
 	var ancho = 0;
+	var pasa = 1;
 
 	var dash_var = {
 		paginar: false,
@@ -457,9 +458,63 @@ $("#listCompanies").on('mouseleave','.space-companies',function(){
 
 
 	} //Fin paginar    /***********************Paginacion inicio***********************/
+
+	function paginateArrow( accion, filtro)
+  {
+      if(accion == 'next')
+      {
+        pasa = (dash_var.pgActual == dash_var.pgTotal)? dash_var.pgTotal :  parseInt(pasa) + 1;
+      }
+      else
+      {
+
+        if(pasa == 2)
+        {
+          pasa = parseInt(pasa) - 1;
+           $('#anterior-1, #anterior-22').attr("style","color:grey !important; pointer-events: none")
+        }
+        else
+        {
+          pasa = parseInt(pasa) - 1;
+          $('#anterior-1, #anterior-22').removeAttr("style")
+        }
+      }
+
+    if(parseInt(dash_var.pgTotal) == pasa )
+      {
+        $('#siguiente-1, #siguiente-22').attr("style","color:grey !important; pointer-events: none")
+        $('#anterior-1, #anterior-22').removeAttr("style")
+			}
+			else
+			{
+				$('#siguiente-1, #siguiente-22').removeAttr("style")
+			}
+
+      //buscarReposiciones(id[1]);
+      $(".isotope-item").show();
+      $('#listCompanies').find('.style-companies-item-activa').removeClass('style-companies-item-activa');
+      $("span#more-info").fadeOut("fast");
+      $(".isotope-item").css('z-index', '2');
+
+      $container.isotope({ filter: filtro + pasa });
+      $(".isotope-hidden").hide();
+
+      $(".num-pagina").css('text-decoration', 'none');
+      $("#page_" + pasa).css('text-decoration', 'underline');
+  }
+
+
 	function paginacion(total, filtro) {
+
+		if(dash_var.pgActual == 1)
+      {
+        $('#anterior-1, #anterior-22').attr("style","color:grey !important; pointer-events: none")
+			}
+
 		var texHtml = "";
 		$("#list_pagination").html("");
+		$("#list_pagination").css("max-width","80px");
+		$("#anterior-2, #siguiente-2").hide();
 		for (var i = 1; i <= total; ++i) {
 			texHtml += '<span class="cajonNum"><a href="javascript:" id="page_' + i + '" class="num-pagina">' + i + '</a></span>';
 		}
@@ -481,6 +536,24 @@ $("#listCompanies").on('mouseleave','.space-companies',function(){
 			var id = this.id;
 			id = id.split("_");
 			//buscarReposiciones(id[1]);
+			pasa = id[1]
+
+			if(pasa == total)
+			{
+				$('#siguiente-1, #siguiente-22').attr("style","color:grey !important; pointer-events: none")
+				$('#anterior-1, #anterior-22').removeAttr('style')
+			}
+			else if(pasa == 1)
+			{
+				$('#anterior-1, #anterior-22').attr("style","color:grey !important; pointer-events: none")
+				$('#siguiente-1, #siguiente-22').removeAttr('style')
+
+			}
+			else
+			{
+				$('#anterior-1, #siguiente-1, #anterior-22, #siguiente-22').removeAttr('style')
+			}
+
 			$(".isotope-item").show();
 			$('#listCompanies').find('.style-companies-item-activa').removeClass('style-companies-item-activa');
 			$("span#more-info").fadeOut("fast");
@@ -494,61 +567,32 @@ $("#listCompanies").on('mouseleave','.space-companies',function(){
 
 		});
 
-		$("#anterior-1").unbind("mouseover");
-		$("#anterior-1").unbind("mouseout");
-		$("#anterior-1").mouseover(function () {
-			scroll_interval = setInterval(
-				function () {
-					if ($("#list_pagination").scrollLeft() > 0) {
-						ancho = $("#list_pagination").scrollLeft() - 1
-						$("#list_pagination").scrollLeft(ancho);
-					}
-				}, 20);
-		}).mouseout(function () {
-			clearInterval(scroll_interval);
+		$("#anterior-1").click(function () {
+			if (pasa > 4) {
+				ancho = $("#list_pagination").scrollLeft() - 15
+				$("#list_pagination").scrollLeft(ancho);
+			}
+			paginateArrow('after', filtro)
 		});
-		$("#anterior-2").unbind("mouseover");
-		$("#anterior-2").unbind("mouseout");
-		$("#anterior-2").mouseover(function () {
-			scroll_interval = setInterval(
-				function () {
-					if ($("#list_pagination").scrollLeft() > 0) {
-						ancho = $("#list_pagination").scrollLeft() - 1
-						$("#list_pagination").scrollLeft(ancho);
-					}
-				}, 1);
-		}).mouseout(function () {
-			clearInterval(scroll_interval);
-		});
-		$("#siguiente-1").unbind("mouseover");
-		$("#siguiente-1").unbind("mouseout");
-		$("#siguiente-1").mouseover(function () {
-			scroll_interval = setInterval(
-				function () {
-					ancho = $("#list_pagination").scrollLeft() + 1
-					$("#list_pagination").scrollLeft(ancho);
-				},
-				20
-			);
-		}).mouseout(function () {
-			clearInterval(scroll_interval);
-		});
-		$("#siguiente-2").unbind("mouseover");
-		$("#siguiente-2").unbind("mouseout");
-		$("#siguiente-2").mouseover(function () {
-			scroll_interval = setInterval(
-				function () {
-					ancho = $("#list_pagination").scrollLeft() + 1
-					$("#list_pagination").scrollLeft(ancho);
-				},
-				1
-			);
-		}).mouseout(function () {
-			clearInterval(scroll_interval);
-		});
+		$("#siguiente-1").click(function () {
 
+			if (pasa > 4) {
+				ancho = $("#list_pagination").scrollLeft() + 20
+				$("#list_pagination").scrollLeft(ancho);
+			}
+
+			paginateArrow('next', filtro)
+
+		}).mouseout(function () {
+			clearInterval(scroll_interval);
+		});
 		$("#anterior-22").unbind("click");
 		$("#anterior-22").click(function () {
+			pasa = 1;
+			$('#anterior-22').attr("style","color:grey !important; pointer-events: none")
+			$('#anterior-1').attr("style","color:grey !important; pointer-events: none")
+			$("#siguiente-1").removeAttr('style')
+			$("#siguiente-22").removeAttr('style')
 			//buscarReposiciones(1);
 			$(".isotope-item").show();
 			$('#listCompanies').find('.style-companies-item-activa').removeClass('style-companies-item-activa');
@@ -561,10 +605,17 @@ $("#listCompanies").on('mouseleave','.space-companies',function(){
 			$(".num-pagina").css('text-decoration', 'none');
 			$("#page_1").css('text-decoration', 'underline');
 
+			$("#list_pagination").scrollLeft(0);
+
 		});
 
 		$("#siguiente-22").unbind("click");
 		$("#siguiente-22").click(function () {
+			pasa = total;
+			$('#siguiente-22').attr("style","color:grey !important; pointer-events: none")
+			$('#siguiente-1').attr("style","color:grey !important; pointer-events: none")
+			$("#anterior-1").removeAttr('style')
+			$("#anterior-22").removeAttr('style')
 			//buscarReposiciones(total);
 			$(".isotope-item").show();
 			$('#listCompanies').find('.style-companies-item-activa').removeClass('style-companies-item-activa');
@@ -576,6 +627,8 @@ $("#listCompanies").on('mouseleave','.space-companies',function(){
 
 			$(".num-pagina").css('text-decoration', 'none');
 			$("#page_" + total).css('text-decoration', 'underline');
+
+			$("#list_pagination").scrollLeft(250);
 		});
 
 	}

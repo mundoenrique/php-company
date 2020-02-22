@@ -7,6 +7,7 @@ $ceo_cook = $this->security->get_csrf_hash();
 
 $data = unserialize($data);
 
+$this->session->set_userdata('authToken', $data->tokenOTP->authToken);
 //Verifica si existen lotes sin retenciones asociadas si aplica
 $reten = NULL;
 for ($i = 0; $i < count($data->lista); $i++){
@@ -97,6 +98,7 @@ $reten = ($reten == NULL) ? "nonEmpty" : trim($reten, ', ');
 						$tempidOrdenLotes=array();
 
 						foreach ($data->lista as $value) {
+
 							array_push($tempidOrdenLotes, $value->idOrdenTemp);
 							$comision = "<td>".lang('TABLA_OS_COMISION')."</td>";
 							if($pais == 'Ec-bp') {
@@ -156,19 +158,21 @@ $reten = ($reten == NULL) ? "nonEmpty" : trim($reten, ', ');
 									$monComision = '';
 								}
 								echo "
-								<tr id='$value->idOrdenTemp'>
+
+								<tr class='tr-calculo' id='$value->idOrdenTemp'>
 									<td class='OS-icon'>
 										<a id='ver_lotes' title='Ver lotes'>
 											<span aria-hidden='true' class='icon' data-icon='&#xe003;'></span>
 										</a>
 									</td>
 									$monComision
-									<td>$value->montoIVA</td>
-									<td class='th-empresa'>$value->montoOS</td>
+									<td>".amount_format($value->montoIVA)."</td>
+									<td class='th-empresa bueno'>".amount_format($value->montoOS)."</td>
 									<td>".amount_format($value->montoTotal)."</td>
 									<td>".amount_format($value->montoDeposito)."</td>
 									<td style='float:left; padding:0; '><table><tbody>$ltr</tbody></table></td>
 								</tr>";
+
 							}
 						}
 						$tempIdOrdenL=serialize($tempidOrdenLotes);
@@ -179,6 +183,10 @@ $reten = ($reten == NULL) ? "nonEmpty" : trim($reten, ', ');
 						<?php
 							if($pais=='Ec-bp'){
 								?>
+								<div class="recepcion-tcs">
+									<p class="t-center">Ingresa el código de seguridad enviado a tu correo</p>
+									<input type="text" id="passOtp" name="passOtp" value="">
+								</div>
 									<div class="botones-OS">
 										<button id="confirmarPreOSL" style="display: none" class="novo-btn-primary">
 											<?php echo lang('BTN_CONFIRMAR_OS') ?></button>
