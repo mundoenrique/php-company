@@ -1522,8 +1522,9 @@ class Servicios extends CI_Controller {
 			"idExtEmp"=>$idEmpresa,
 			"saldo"=> round($amount,2),
 			"descrip"=> $descript,
-			/* "cuentaCliente"=> $account, */
 			"type"=> $type,
+			"tokenCliente"=> $password,
+			"authToken"=> $bean,
 			"idProducto"=> $idProducto,
 			"usuario" => $usuario
 		];
@@ -2226,4 +2227,3 @@ public function consultaTarjetas($urlCountry)
 
 
 }
-
