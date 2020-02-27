@@ -75,7 +75,7 @@ function callNovoCore (verb, who, where, data, _response_) {
 
 	}).fail(function(xrh, status, response) {
 		title = prefixCountry + strCountry;
-		msg = 'En estos momentos no podemos atender tu solicitud, por favor intenta en unos minutos';
+		msg = 'En este momento no podemos atender tu solicitud, por favor intenta de nuevo.';
 		icon = iconWarning;
 		data = {
 			btn1: {
