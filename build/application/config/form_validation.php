@@ -261,6 +261,25 @@ $config = [
 			'rules' => 'trim|regex_match[/^([\w,]*)+$/i]'
 		]
 	],
+	'clearServiceOrders' => [
+		[
+			'field' => 'idOS',
+			'label' => 'idOS',
+			'rules' => 'trim|regex_match[/^([\w]+)+$/i]'
+		],
+		[
+			'field' => 'pass',
+			'label' => 'pass',
+			'rules' => 'trim|required'
+		]
+	],
+	'detailServiceOrders' => [
+		[
+			'field' => 'numberOrden',
+			'label' => 'numberOrden',
+			'rules' => 'trim|required'
+		]
+	],
 	'getServiceOrders' => [
 		[
 			'field' => 'initialDate',

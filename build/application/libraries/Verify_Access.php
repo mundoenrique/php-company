@@ -169,6 +169,8 @@ class Verify_Access {
 					break;
 				case 'serviceOrder':
 				case 'cancelServiceOrder':
+				case 'clearServiceOrders':
+				case 'detailServiceOrders':
 					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBAUT') && $this->verifyAuthorization('TEBORS'));
 					break;
 				case 'serviceOrders':
@@ -181,7 +183,7 @@ class Verify_Access {
 			}
 		}
 
-		log_message('INFO', 'NOVO ['.$user.'] accessAuthorization '.$module.': '.json_encode($auth, JSON_UNESCAPED_UNICODE));
+		log_message('INFO', 'NOVO ['.$user.'] accessAuthorization'.$module.': '.json_encode($auth, JSON_UNESCAPED_UNICODE));
 
 		return $auth;
 	}

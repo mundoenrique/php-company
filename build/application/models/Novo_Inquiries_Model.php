@@ -131,6 +131,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 									$bulkList['bulkAmount'] = floatval($bulk->montoRecarga);
 									$bulkList['bulkCommisAmount'] = floatval($bulk->montoComision);
 									$bulkList['bulkTotalAmount'] = floatval($bulk->montoRecarga) + floatval($bulk->montoComision);
+									$bulkList['bulkacidlote'] = $bulk->acidlote;
 									$serviceOrders['bulk'][] = (object) $bulkList;
 								}
 								break;
@@ -163,5 +164,107 @@ class Novo_Inquiries_Model extends NOVO_Model {
 		$this->session->set_flashdata('bulkNotBillable', $bulkNotBillable);
 
 		return $this->responseToTheView('ServiceOrder');
+	}
+
+	/**
+	 * @info Elimina un lote
+	 * @author Luis Molina
+	 * @date febrero 20 th, 2020
+	 */
+	public function callWs_ClearServiceOrders_Inquiries($dataRequest)
+	{
+		log_message('INFO', 'NOVO Bulk Model: ClearServiceOrders Method Initialized');
+
+		$this->className = 'com.novo.objects.TOs.OrdenServicioTO';
+		$this->dataAccessLog->modulo = 'anularOS';
+		$this->dataAccessLog->function = 'anularOS';
+		$this->dataAccessLog->operation = 'Anular orden de servicio';
+
+		$rifEmpresa=$this->session->userdata('acrifS');
+
+		unset($dataRequest->modalReq);
+
+		$this->dataRequest->idOperation = 'desconciliarOS';
+		$this->dataRequest->idOS = $dataRequest->idOS;
+		$this->dataRequest->rifEmpresa = $rifEmpresa;
+
+		$password = json_decode(base64_decode($dataRequest->pass));
+		$password = $this->cryptography->decrypt(
+			base64_decode($password->plot),
+			utf8_encode($password->passWord)
+		);
+		$this->dataRequest->usuario = [
+			'userName' => $this->userName,
+			'password' => md5($password)
+		];
+
+		$response = $this->sendToService('ClearServiceOrders');
+
+		switch ($this->isResponseRc) {
+			case 0:
+				$this->response->cod = 0;
+				$this->response->title = 'Anular Orden';
+				//$this->response->msg = novoLang(lang('BULK_DELETE_SUCCESS'), $dataRequest->bulkTicked);
+				$this->response->msg = 'La orden fue anulada exitosamente';
+				$this->response->icon = lang('GEN_ICON_SUCCESS');
+				$this->response->data['btn1'] = [
+					'text' => lang('GEN_BTN_ACCEPT'),
+					'action' => 'close'
+				];
+				break;
+			case -1:
+				$this->response->title = lang('BULK_DELETE_TITLE');
+				$this->response->msg = lang('RESP_PASSWORD_NO_VALID');
+				$this->response->icon = lang('GEN_ICON_WARNING');
+				$this->response->data['btn1'] = [
+					'text' => lang('GEN_BTN_ACCEPT'),
+					'action' => 'close'
+				];
+				break;
+		}
+
+		return $this->responseToTheView('ClearServiceOrders');
+	}
+
+		/**
+	 * @info Elimina un lote
+	 * @author Luis Molina
+	 * @date febrero 27 th, 2020
+	 */
+	public function callWs_DetailServiceOrders_Inquiries($dataRequest)
+	{
+
+		log_message('INFO', 'NOVO Bulk Model: DetailServiceOrders Method Initialized');
+
+		$this->dataAccessLog->modulo = 'lotes';
+		$this->dataAccessLog->function = 'verdetallelote';
+		$this->dataAccessLog->operation = 'Ver detalle Lote';
+
+		$this->dataRequest->idOperation = 'detalleLote';
+		$this->dataRequest->className = 'com.novo.objects.TOs.LoteTO';
+		$this->dataRequest->acidlote =$dataRequest->numberOrden;
+
+		$response = $this->sendToService('DetailServiceOrders');
+
+		switch ($this->isResponseRc) {
+			case 0:
+				$this->response->code = 0;
+				$this->response->data=$response;
+				$this->session->set_flashdata('detailServiceOrdersList',$this->response);
+			//	$this->response->data = $this->session->flashdata('detailServiceOrdersList');
+				break;
+			case -29:
+			case -61:
+				$this->response->title = "Error al consultar detalle";
+				$this->response->msg = lang('ERROR_GENERICO_USER');
+				$this->response->icon = lang('GEN_ICON_WARNING');
+				$this->response->data['btn1'] = [
+					'text' => lang('GEN_BTN_ACCEPT'),
+					'action' => 'close'
+				];
+				break;
+		}
+
+		return $this->responseToTheView('DetailServiceOrders');
 	}
 }
