@@ -57,9 +57,9 @@ class Tool_Browser {
 		if(!$valid) {
 			switch ($platform) {
 				case 'browser':
-					$title = 'Actualiza tu navegador';
-					$msg1 = 'Esta aplicación no es compatible con la versión de tu navegador.';
-					$msg2 = 'Para una mejor experiencia accede con';
+					$title = 'Algunos componentes de esta página podrían no funcionar correctamente.';
+					$msg1 = 'Para mejorar la experiencia en nuestro sitio asegúrate que estés usando:';
+
 
 					if(!$browser) {
 						$title = '';
