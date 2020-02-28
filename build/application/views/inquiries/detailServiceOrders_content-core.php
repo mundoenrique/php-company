@@ -25,47 +25,47 @@
         <div class="row mb-2 px-5">
           <div class="form-group mb-3 col-4">
             <label for="confirmNIT" id="confirmNIT">NIT</label>
-            <span id="confirmNIT" class="form-control px-1" readonly="readonly"><?= $data->data->acrif; ?></span>
+            <span id="confirmNIT" class="form-control px-1" readonly="readonly"><?= $detail->data->acrif; ?></span>
           </div>
 
           <div class="form-group mb-3 col-4">
             <label for="confirmName" id="confirmName">Nombre de la empresa</label>
-            <span id="confirmName" class="form-control px-1" readonly="readonly"><?= $data->data->acnomcia; ?></span>
+            <span id="confirmName" class="form-control px-1" readonly="readonly"><?= $detail->data->acnomcia; ?></span>
           </div>
 
           <div class="form-group mb-3 col-4">
             <label for="typeLot" id="typeLot">Tipo de lote</label>
-            <span id="typeLotName" class="form-control px-1 bold pink-salmon" readonly="readonly"><?= $data->data->acnombre; ?></span>
+            <span id="typeLotName" class="form-control px-1 bold pink-salmon" readonly="readonly"><?= $detail->data->acnombre; ?></span>
           </div>
 
           <div class="form-group mb-3 col-4">
             <label for="lot" id="lot">Lote nro.</label>
-            <span id="numLot" class="form-control px-1" readonly="readonly"><?= $data->data->acnumlote; ?></span>
+            <span id="numLot" class="form-control px-1" readonly="readonly"><?= $detail->data->acnumlote; ?></span>
           </div>
 
           <div class="form-group mb-3 col-4">
             <label for="regNumber" id="regNumber">Cantidad de registros</label>
-            <span id="amountNumber" class="form-control px-1 " readonly="readonly"><?= $data->data->ncantregs; ?></span>
+            <span id="amountNumber" class="form-control px-1 " readonly="readonly"><?= $detail->data->ncantregs; ?></span>
           </div>
 
           <div class="form-group mb-3 col-4">
             <label for="regNumber" id="regNumber">Usuario carga</label>
-            <span id="amountNumber" class="form-control px-1 " readonly="readonly"><?= $data->data->accodusuarioc; ?></span>
+            <span id="amountNumber" class="form-control px-1 " readonly="readonly"><?= $detail->data->accodusuarioc; ?></span>
           </div>
 
           <div class="form-group mb-3 col-4">
             <label for="regNumber" id="regNumber">Fecha de carga</label>
-            <span id="amountNumber" class="form-control px-1 " readonly="readonly"><?= $data->data->dtfechorcarga; ?></span>
+            <span id="amountNumber" class="form-control px-1 " readonly="readonly"><?= $detail->data->dtfechorcarga; ?></span>
           </div>
 
           <div class="form-group mb-3 col-4">
             <label for="regNumber" id="regNumber">Estatus</label>
-            <span id="amountNumber" class="form-control px-1 " readonly="readonly"><?= $data->data->status; ?></span>
+            <span id="amountNumber" class="form-control px-1 " readonly="readonly"><?= $detail->data->status; ?></span>
           </div>
 
           <div class="form-group mb-3 col-4">
             <label for="amount" id="amount">Monto total</label>
-            <span id="totalAmount" class="form-control px-1" readonly="readonly"><?= amount_format($data->data->nmonto); ?></span>
+            <span id="totalAmount" class="form-control px-1" readonly="readonly"><?= amount_format($detail->data->nmonto); ?></span>
           </div>
         </div>
       </div>
@@ -93,7 +93,7 @@
               </tr>
             </thead>
             <tbody>
-						<?php foreach($data->data->registrosLoteRecarga AS $lotes): ?>
+						<?php foreach($detail->data->registrosLoteRecarga AS $lotes): ?>
               <tr>
                 <td><?= $lotes->id_ext_per; ?></td>
                 <td><?= substr_replace($lotes->nro_cuenta,'*************',0,-4); ?></td>

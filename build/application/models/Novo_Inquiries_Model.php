@@ -253,16 +253,6 @@ class Novo_Inquiries_Model extends NOVO_Model {
 				$this->session->set_flashdata('detailServiceOrdersList',$this->response);
 			//	$this->response->data = $this->session->flashdata('detailServiceOrdersList');
 				break;
-			case -29:
-			case -61:
-				$this->response->title = "Error al consultar detalle";
-				$this->response->msg = lang('ERROR_GENERICO_USER');
-				$this->response->icon = lang('GEN_ICON_WARNING');
-				$this->response->data['btn1'] = [
-					'text' => lang('GEN_BTN_ACCEPT'),
-					'action' => 'close'
-				];
-				break;
 		}
 
 		return $this->responseToTheView('DetailServiceOrders');

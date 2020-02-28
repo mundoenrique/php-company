@@ -81,7 +81,7 @@ class Inquiries extends NOVO_Controller {
 			"business/widget-enterprise"
 		);
 
-		$this->render->data = $response;
+		$this->render->detail = $response;
 		$this->render->titlePage = lang('GEN_DETAIL_SERVICE_ORDERS_TITLE');
 		$this->views = ['inquiries/'.$view];
 		$this->loadView($view);
