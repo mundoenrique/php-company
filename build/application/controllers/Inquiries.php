@@ -52,9 +52,19 @@ class Inquiries extends NOVO_Controller {
 		$this->loadView($view);
 	}
 
+
+	/**
+	 * @info Método para renderizar el detalle de consulta de lotes
+	 * @author Luis Molina
+	 * @date Febrero 29Sat, 2020
+	 */
 	public function detailServiceOrders()
 	{
 		log_message('INFO', 'NOVO Inquiries: detailServiceOrders Method Initialized');
+
+		if(!isset($this->request->numberOrden)) {
+			redirect(base_url('detalle-producto'), 'location');
+		}
 
 		$view = lang('GEN_DETAIL_SERVICE_ORDERS');
 
@@ -65,7 +75,7 @@ class Inquiries extends NOVO_Controller {
 			$response = $this->loadModel($this->request);
 		}
 
-		$this->responseAttr();
+		$this->responseAttr($response);
 
 		array_push(
 			$this->includeAssets->cssFiles,
@@ -74,10 +84,7 @@ class Inquiries extends NOVO_Controller {
 		array_push(
 			$this->includeAssets->jsFiles,
 			"third_party/dataTables-1.10.20",
-			"third_party/jquery.validate",
-			"validate".$this->render->newViews."-forms",
-			"third_party/additional-methods",
-			"inquiries/service_orders",
+			"inquiries/detail_service_orders",
 			"business/widget-enterprise"
 		);
 

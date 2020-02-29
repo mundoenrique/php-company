@@ -173,7 +173,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 	 */
 	public function callWs_ClearServiceOrders_Inquiries($dataRequest)
 	{
-		log_message('INFO', 'NOVO Bulk Model: ClearServiceOrders Method Initialized');
+		log_message('INFO', 'NOVO Inquiries Model: ClearServiceOrders Method Initialized');
 
 		$this->className = 'com.novo.objects.TOs.OrdenServicioTO';
 		$this->dataAccessLog->modulo = 'anularOS';
@@ -204,7 +204,6 @@ class Novo_Inquiries_Model extends NOVO_Model {
 			case 0:
 				$this->response->cod = 0;
 				$this->response->title = 'Anular Orden';
-				//$this->response->msg = novoLang(lang('BULK_DELETE_SUCCESS'), $dataRequest->bulkTicked);
 				$this->response->msg = 'La orden fue anulada exitosamente';
 				$this->response->icon = lang('GEN_ICON_SUCCESS');
 				$this->response->data['btn1'] = [
@@ -234,24 +233,41 @@ class Novo_Inquiries_Model extends NOVO_Model {
 	public function callWs_DetailServiceOrders_Inquiries($dataRequest)
 	{
 
-		log_message('INFO', 'NOVO Bulk Model: DetailServiceOrders Method Initialized');
+		log_message('INFO', 'NOVO Inquiries Model: DetailServiceOrders Method Initialized');
 
 		$this->dataAccessLog->modulo = 'lotes';
 		$this->dataAccessLog->function = 'verdetallelote';
 		$this->dataAccessLog->operation = 'Ver detalle Lote';
-
 		$this->dataRequest->idOperation = 'detalleLote';
 		$this->dataRequest->className = 'com.novo.objects.TOs.LoteTO';
 		$this->dataRequest->acidlote =$dataRequest->numberOrden;
 
 		$response = $this->sendToService('DetailServiceOrders');
 
+		$definitive['acrif'] = $response->acrif;
+		$definitive['acnomcia'] = $response->acnomcia;
+		$definitive['acnombre'] = $response->acnombre;
+		$definitive['acnumlote'] = $response->acnumlote;
+		$definitive['ncantregs'] = $response->ncantregs;
+		$definitive['accodusuarioc'] = $response->accodusuarioc;
+		$definitive['dtfechorcarga'] = $response->dtfechorcarga;
+		$definitive['status'] = $response->status;
+		$definitive['nmonto'] = $response->nmonto;
+
+		foreach($response->registrosLoteRecarga AS $key => $final) {
+			$final_2['id_ext_per']=$final->id_ext_per;
+			$final_2['nro_cuenta']=$final->nro_cuenta;
+			$final_2['monto']=$final->monto;
+			$definitive_2[]= (object) $final_2;
+		}
+
+		$definitive['registrosLoteRecarga'] = $definitive_2;
+
 		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
-				$this->response->data=$response;
+				$this->response->detail= (object) $definitive;
 				$this->session->set_flashdata('detailServiceOrdersList',$this->response);
-			//	$this->response->data = $this->session->flashdata('detailServiceOrdersList');
 				break;
 		}
 

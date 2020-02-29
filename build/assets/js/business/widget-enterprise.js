@@ -56,7 +56,6 @@ $(function() {
 			WidgetSelcetP.find('option:selected').text(lang.GEN_SELECT_PRODUCTS);
 			goToDetail = true;
 			$.each(response.data, function(index, prod) {
-				console.log(currentIdFiscal, prefix)
 				if(prod.id == prefix && currentIdFiscal == idFiscal) {
 					return;
 				}
