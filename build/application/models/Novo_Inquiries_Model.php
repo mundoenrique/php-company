@@ -238,8 +238,8 @@ class Novo_Inquiries_Model extends NOVO_Model {
 		$this->dataAccessLog->modulo = 'lotes';
 		$this->dataAccessLog->function = 'verdetallelote';
 		$this->dataAccessLog->operation = 'Ver detalle Lote';
+		$this->className = 'com.novo.objects.TOs.LoteTO';
 		$this->dataRequest->idOperation = 'detalleLote';
-		$this->dataRequest->className = 'com.novo.objects.TOs.LoteTO';
 		$this->dataRequest->acidlote =$dataRequest->numberOrden;
 
 		$response = $this->sendToService('DetailServiceOrders');

@@ -169,17 +169,19 @@ class Verify_Access {
 					break;
 				case 'serviceOrder':
 				case 'cancelServiceOrder':
-				case 'clearServiceOrders':
-				case 'detailServiceOrders':
 					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBAUT') && $this->verifyAuthorization('TEBORS'));
 					break;
 				case 'serviceOrders':
 				case 'getServiceOrders':
+				case 'detailServiceOrders':
 					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBORS'));
 					break;
 				case 'getReportsList':
 					$auth = ($this->CI->session->has_userdata('productInf'));
 					break;
+				case 'clearServiceOrders':
+						$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBORS', 'TEBANU'));
+						break;
 			}
 		}
 
