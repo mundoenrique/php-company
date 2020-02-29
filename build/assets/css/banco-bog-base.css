@@ -3777,3 +3777,8 @@ td > table.detail-lot {
 	width: 68px;
 	height: 40px;
 }
+
+a#numberid {
+	cursor: pointer;
+	font-weight: bold;
+}

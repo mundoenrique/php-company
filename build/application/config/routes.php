@@ -78,6 +78,7 @@ $route['(:any)/detalle-confirmado'] = "bulk/confirmBulkdetail";
 $route['(:any)/lotes-calcular-orden'] = "bulk/calculateServiceOrder";
 //Inquiries
 $route['(:any)/consulta-orden-de-servicio'] = "inquiries/serviceOrders";
+$route['(:any)/detalle-orden-de-servicio'] = "inquiries/detailServiceOrders";
 //Reports
 $route['(:any)/reportes'] = "novo_reports/getReportsList";
 

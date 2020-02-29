@@ -486,6 +486,7 @@ $config['csrf_exclude_uris'] = array(
 	'[\w\-]+/detalle-lote',
 	'[\w\-]+/confirmar-lote',
 	'[\w\-]+/detalle-confirmado',
+	'[\w\-]+/detalle-orden-de-servicio',
 	'[\w\-]+/dashboard/productos',
 	'[\w\-]+/dashboard/productos/detalle',
 	'[\w\-]+/consulta/ordenes-de-servicio',
