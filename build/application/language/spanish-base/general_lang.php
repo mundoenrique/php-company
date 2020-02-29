@@ -86,6 +86,8 @@ $lang['GEN_CACULATE_SERVICE_ORDER'] = 'calculateServiceOrder';
 $lang['GEN_CACULATE_ORDER_TITLE'] = 'Calcular Orden';
 $lang['GEN_SERVICE_ORDERS'] = 'serviceOrders';
 $lang['GEN_SERVICE_ORDERS_TITLE'] = 'Órdenes de servicio';
+$lang['GEN_DETAIL_SERVICE_ORDERS'] = 'detailServiceOrders';
+$lang['GEN_DETAIL_SERVICE_ORDERS_TITLE'] = 'Detalle Órdenes de servicio';
 //links
 $lang['GEN_LINK_LOGIN'] = 'inicio';
 //MODAL STYLES

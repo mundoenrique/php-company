@@ -85,7 +85,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							<?php foreach($orderList AS $list): ?>
+							<?php	foreach($orderList AS $list): ?>
 							<tr bulk="<?= htmlspecialchars(json_encode($list->bulk), ENT_QUOTES, 'UTF-8'); ?>">
 								<td><?= $list->OrderNumber; ?></td>
 								<td><?= $list->Orderdate; ?></td>
@@ -94,19 +94,22 @@
 								<td><?= $list->OrderAmount; ?></td>
 								<td><?= $list->OrderDeposit; ?></td>
 								<td class="p-0 flex justify-center">
+								  <?php if($this->verify_access->verifyAuthorization('TEBORS')):?>
 									<button class="btn mx-1 px-0 details-control" title="<?= lang('GEN_BTN_SEE'); ?>" data-toggle="tooltip">
 										<i class="icon icon-find" aria-hidden="true"></i>
 									</button>
-									<?php if(!TRUE): ?>
-									<button class="btn mx-1 px-0" title="<?= lang('GEN_BTN_DOWN_PDF'); ?>" data-toggle="tooltip">
+								  <?php endif; ?>
+									<!--<button class="btn mx-1 px-0" title="<?= lang('GEN_BTN_DOWN_PDF'); ?>" data-toggle="tooltip">
 										<i class="icon icon-file-pdf" aria-hidden="true"></i>
-									</button>
+									</button>-->
 									<?php if($this->verify_access->verifyAuthorization('TEBORS', 'TEBANU') && $list->OrderVoidable): ?>
 									<button class="btn mx-1 px-0" title="<?= lang('GEN_BTN_CANCEL_ORDER'); ?>" data-toggle="tooltip">
 										<i class="icon icon-remove" aria-hidden="true"></i>
 									</button>
 									<?php endif; ?>
-									<?php endif; ?>
+									<form id="bulk-<?= $list->OrderNumber; ?>" method="POST">
+										<input type="hidden" name="idOS" value="<?= $list->OrderNumber; ?>">
+								  </form>
 								</td>
 							</tr>
 							<?php endforeach; ?>
@@ -121,7 +124,6 @@
 			</div>
 		</div>
 		<?php endif; ?>
-
 	</div>
 	<?php if($widget): ?>
 	<?php $this->load->view('widget/widget_enterprise-product_content'.$newViews, $widget) ?>

@@ -25,8 +25,18 @@ $(function() {
     } else {
 			row.child(format(bulk)).show();
 			tr.addClass('shown');
+
+			$('#detailServiceOrders').on('click','#numberid',function(){
+
+				insertFormInput(true, $("#detail-orders-form"));
+
+				$("#detail-orders-form").submit();
+
+			})
     }
 	});
+
+
 
 	$('#datepicker_start, #datepicker_end').datepicker({
 		onSelect: function(selectedDate) {
@@ -101,24 +111,71 @@ $(function() {
 		}
 
 	});
+
+	$('#resultServiceOrders').on('click', 'button', function(e) {
+		e.preventDefault();
+		var event = $(e.currentTarget);
+		var action = event.attr('title');
+		form = $(this).parent().find('form')
+		insertFormInput(true, form);
+
+		switch(action) {
+			case lang.GEN_BTN_CONFIRM:
+				form.attr('action', baseURL+'confirmar-lote');
+				form.append('<input type="hidden" name="bulkView" value="confirm">');
+				break;
+			case lang.GEN_BTN_CANCEL_ORDER:
+				var oldID = $('#accept').attr('id');
+				$(this).closest('tr').addClass('select');
+				$('#accept').attr('id', 'delete-bulk-btn');
+				var inputModal;
+				data = {
+					btn1: {
+						text: lang.GEN_BTN_CANCEL_ORDER,
+						action: 'none'
+					},
+					btn2: {
+						action: 'close'
+					}
+				}
+				inputModal = '<form id="delete-bulk-form" class="form-group">';
+				inputModal+= '<span class="regular"> Por favor ingresa la contraseña para anular la orden de servicio </span>';
+				inputModal+= 		'<input id="password" class="form-control mt-2 h6 col-9" name="password" type="password" autocomplete="off" placeholder="'+lang.GEN_PLACE_PASSWORD+'">';
+				inputModal+= 		'<div class="help-block"></div>';
+				inputModal+= '</form>';
+				notiSystem('Anular orden de servicio', inputModal, lang.GEN_ICON_INFO, data);
+				deleteBulk(oldID);
+				$('#cancel').on('click', function(e){
+					e.preventDefault();
+					$('#pending-bulk').find('tr').removeClass('select');
+					$('#delete-bulk-btn').attr('id', oldID);
+				});
+				break;
+		}
+
+		insertFormInput(false);
+	});
+
 })
 
 function format (bulk) {
+
 	var table, body = '';
 	bulk = JSON.parse(bulk)
 	$.each(bulk, function(key, value){
 		body+= '<tr>';
-		body+= 	'<td>'+value.bulkNumber+'</td>';
+		body+= 	'<td ><a id=numberid>'+value.bulkNumber+'</a></td>';
 		body+= 	'<td>'+value.bulkLoadDate+'</td>';
 		body+= 	'<td>'+value.bulkLoadType+'</td>';
 		body+= 	'<td>'+value.bulkRecords+'</td>';
 		body+= 	'<td>'+value.bulkStatus+'</td>';
 		body+= 	'<td>'+value.bulkAmount+'</td>';
 		body+= 	'<td>'+value.bulkCommisAmount+'</td>';
-		body+= 	'<td>'+value.bulkTotalAmount+'</td>';
+		body+= 	'<td>'+value.bulkTotalAmount+'<form id="detail-orders-form" class="form-group" action="'+baseURL+'detalle-orden-de-servicio" method="post"><input type="hidden" id="numberOrden" name="numberOrden" value='+value.bulkacidlote+'></form></td>';
 		body+= '</tr>';
+
 	})
-	table = '<table class="detail-lot h6 cell-border primary semibold" style="width:100%">';
+	table = '<table id="detailServiceOrders" class="detail-lot h6 cell-border primary semibold" style="width:100%">';
 	table+= 	'<tbody>';
 	table+= 		'<tr class="bold" style="margin-left: 0px;">';
 	table+= 			'<td>'+lang.GEN_TABLE_BULK_NUMBER+'</td>';
@@ -135,4 +192,46 @@ function format (bulk) {
 	table+= '</table>';
 
 	return table;
+
+
+
+}
+
+/**
+ * @info Elimina un lote
+ * @author J. Enrique Peñaloza Piñero
+ * @date December 18th, 2019
+ */
+function deleteBulk(oldID) {
+	var deleteBulkBtn = $('#delete-bulk-btn')
+	var formDeleteBulk = $('#delete-bulk-form');
+	deleteBulkBtn.on('click', function() {
+		formInputTrim(formDeleteBulk);
+		validateForms(formDeleteBulk);
+
+		if(formDeleteBulk.valid()) {
+			$(this)
+			.off('click')
+			.html(loader)
+			.prop('disabled', true)
+			.attr('id', oldID);
+			ceo_cook = getCookieValue();
+			cypherPass = CryptoJS.AES.encrypt($('#password').val(), ceo_cook, { format: CryptoJSAesJson }).toString();
+			data = {
+				modalReq: true,
+				idOS: form.find('input[name="idOS"]').val(),
+				pass: btoa(JSON.stringify({
+					passWord: cypherPass,
+					plot: btoa(ceo_cook)
+				}))
+			}
+			verb = 'POST'; who = 'Inquiries'; where = 'ClearServiceOrders';
+			callNovoCore(verb, who, where, data, function(response) {
+
+				if(response.cod == 0) {
+					resultServiceOrders.row('.select').remove().draw(false);
+				}
+			});
+		}
+	});
 }
