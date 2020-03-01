@@ -656,7 +656,9 @@ class Lotes extends CI_Controller {
 				}
 				else{
 					$codigoError = lang('ERROR_('.$response->rc.')');
-					if(strpos($codigoError, 'Error')!==false){
+				if($response->rc==-1){
+					$codigoError = array('ERROR' => lang('MSG_INVALID_PASS'), "rc"=> $response->rc);
+				}else if(strpos($codigoError, 'Error')!==false){
 						$codigoError = array('ERROR' => lang('ERROR_GENERICO_USER') );
 					}else{
 						$codigoError = array('ERROR' => lang('ERROR_('.$response->rc.')') );
@@ -1126,7 +1128,7 @@ class Lotes extends CI_Controller {
 
         $paisS = $this->session->userdata('pais');
 
-        $menuP =$this->session->userdata('menuArrayPorProducto');
+				$menuP =$this->session->userdata('menuArrayPorProducto');
 				$moduloAct = np_hoplite_existeLink($menuP,"TEBAUT");
 				if($urlCountry == 'Ec-bp') {
 					$moduloActTebAut = np_hoplite_existeLink($menuP,"TEBAUT");
@@ -1204,6 +1206,7 @@ class Lotes extends CI_Controller {
      * @return bytes
      */
     public function expdetalleLoteAuthPDF($urlCountry){
+
         np_hoplite_countryCheck($urlCountry);
         $this->lang->load('erroreseol');//HOJA DE ERRORES;
         $canal = "ceo";
@@ -1596,10 +1599,11 @@ class Lotes extends CI_Controller {
 				if($response->rc==-61 || $response->rc==-29){
 					$this->session->sess_destroy();
 					return array('ERROR' => '-29');
-				}
-				else{
+				}else{
 					$codigoError = lang('ERROR_('.$response->rc.')');
-					if(strpos($codigoError, 'Error')!==false){
+					if($response->rc==-1){
+					$codigoError = array('ERROR' => lang('MSG_INVALID_PASS'), "rc"=> $response->rc);
+					}else if(strpos($codigoError, 'Error')!==false){
 						$codigoError = array('ERROR' => lang('ERROR_GENERICO_USER') );
 					}else{
 						$codigoError = array('ERROR' => lang('ERROR_('.$response->rc.')') );
@@ -1680,7 +1684,7 @@ class Lotes extends CI_Controller {
 			//VERIFICAR SI NO SUBIO ARCHIVO
 
 			if ( ! $this->upload->do_upload()){
-					$responseError = ['ERROR' => 'No se puede cargar el archivo. Verifiquelo e intente de nuevo'];
+					$responseError = ['ERROR' => 'No se puede cargar el archivo. Verifícalo e intenta de nuevo'];
 					$responseError = $this->cryptography->encrypt($responseError);
 					$this->output->set_content_type('application/json')->set_output(json_encode($responseError));
 				//$error = array('ERROR' => 'No se puede cargar el archivo. Verifiquelo e intente de nuevo');// $this->upload->display_errors());
@@ -1737,7 +1741,7 @@ class Lotes extends CI_Controller {
 					 //echo json_encode($cargaLote);
 
 				} else {
-					$responseError = ['ERROR' =>'Falla Al mover archivo.'];
+					$responseError = ['ERROR' =>'Falla al mover archivo.'];
 					$responseError = $this->cryptography->encrypt($responseError);
 					$this->output->set_content_type('application/json')->set_output(json_encode($responseError));
 
@@ -2045,7 +2049,7 @@ class Lotes extends CI_Controller {
 			if($response->rc==0){
 				$response->linkAut=$linkAut;
 				log_message('info','confirmarlote dataDecrip '.$jsonResponse);
-				if($idTipoLote=='L'){
+				if($idTipoLote=='L' && $urlCountry!='Ec-bp'){
 					return array("ordenes"=>serialize($response));
 				}else{
 					return $response;
@@ -2057,17 +2061,15 @@ class Lotes extends CI_Controller {
 				}
 				else if($response->rc==-142){
 					$codigoError = array('ERROR' => $response->msg );
-				}
-				else{
-
+				}else if($response->rc==-1){
+					$codigoError = array('ERROR' => lang('MSG_INVALID_PASS'), "rc"=> $response->rc);
+				}else{
 					$codigoError = lang('ERROR_('.$response->rc.')');
 					if(strpos($codigoError, 'Error')!==false){
 						$codigoError = array('ERROR' => lang('ERROR_GENERICO_USER') );
-					}
-					else{
+					}else{
 						$codigoError = array('ERROR' => lang('ERROR_('.$response->rc.')') );
 					}
-
 				}
 				return $codigoError;
 			}
@@ -2311,10 +2313,14 @@ class Lotes extends CI_Controller {
 					$code = 2;
 					$msg = 'Por favor verifica tu contraseña e intentalo de nuevo';
 					break;
+				case -3:
+					$code = 2;
+					$msg = lang('ERROR_(-39)');
+					break;
 				case -51:
 					$code = 2;
 					$msgVE = 'No fue posible obtener los datos de la empresa para la Orden de Servicio. ';
-					$msgVE .= 'Por favor envíe esta pantalla y su usuario al correo ';
+					$msgVE .= 'Por favor envíe ésta pantalla y su usuario al correo ';
 					$msgVE .= '<strong>soporteempresas@tebca.com</strong>';
 					$msg = $urlCountry =="Ve" ? $msgVE : $response->msg;
 					break;
@@ -2362,7 +2368,7 @@ class Lotes extends CI_Controller {
 	 * @param  string $acrifS
 	 * @return array
 	 */
-	private function callWSgenerarOS($urlCountry,$token,$username,$listaTemp,$tempIdOrdenLNF,$acrifS,$moduloOS){
+	private function callWSgenerarOS($urlCountry,$token,$username,$listaTemp,$tempIdOrdenLNF, $tokenOTP, $acrifS, $moduloOS){
 		$this->lang->load('erroreseol');
 		$this->lang->load('dashboard');
 		$operacion = "generarOS";
@@ -2418,10 +2424,11 @@ class Lotes extends CI_Controller {
 			"rifEmpresa"=>$acrifS,
 			"lista"=> $lista,
 			"lotesNF"=>$listaNF,
+			"tokenOTP"=> $tokenOTP,
 			"usuario"=> $usuario,
 			"logAccesoObject"=> $logAcceso,
 			"token"=> $token
-			);
+		);
 
 		$data = json_encode($data,JSON_UNESCAPED_UNICODE);
 
@@ -2444,6 +2451,7 @@ class Lotes extends CI_Controller {
 						"costoLog" => ($response->lista[0]->aplicaCostD === 'D'),
 						"ordenes"=>serialize($response)
 					];
+					$this->session->unset_userdata('authToken');
 					break;
 					case -29:
 					case -61:
@@ -2458,6 +2466,17 @@ class Lotes extends CI_Controller {
 						$response = [
 							'ERROR' => $response->rc,
 							'msg' => lang('ERROR_(-56)')
+						];
+					case -231:
+						$response = [
+							'ERROR' => $response->rc,
+							'msg' => lang('ERROR_(-231)')
+						];
+						break;
+					case -286:
+						$response = [
+							'ERROR' => $response->rc,
+							'msg' => lang('ERROR_(-286)')
 						];
 						break;
 					default:
@@ -2497,6 +2516,7 @@ class Lotes extends CI_Controller {
 		);
 		$tempIdOrdenL = isset($dataRequest->tempIdOrdenL) ? $dataRequest->tempIdOrdenL : FALSE;
 		$tempIdOrdenLNF = isset($dataRequest->tempIdOrdenLNF) ? $dataRequest->tempIdOrdenLNF : FALSE;
+		$autorizacionOtp = isset($dataRequest->autorizacionOtp) ? $dataRequest->autorizacionOtp : FALSE;
 
 		$token = $this->session->userdata('token');
 		$username = $this->session->userdata('userName');
@@ -2511,7 +2531,12 @@ class Lotes extends CI_Controller {
 
 		if($paisS==$urlCountry && $logged_in){
 			if ( $moduloAct!==false) {
-				$t = $this->callWSgenerarOS($urlCountry,$token,$username,$tempIdOrdenL,$tempIdOrdenLNF,$acrifS,$moduloOS);
+				$tokenOTP = [
+					'authToken' => $this->session->userdata('authToken'),
+					'tokenCliente' => $autorizacionOtp
+				];
+				$t = $this->callWSgenerarOS($urlCountry,$token,$username,$tempIdOrdenL,$tempIdOrdenLNF, $tokenOTP, $acrifS, $moduloOS);
+
 			}else{
 				$t = ['ERROR' => lang('SIN_FUNCION')];
 				//$t = json_encode(array("ERROR"=>lang('SIN_FUNCION')));
@@ -2773,7 +2798,7 @@ class Lotes extends CI_Controller {
 			//VERIFICAR SI NO SUBIO ARCHIVO
 			if ( ! $this->upload->do_upload()){
 				//ERROR
-				$error = array('ERROR' => 'No se puede cargar el archivo. Verifiquelo e intente de nuevo');// $this->upload->display_errors());
+				$error = array('ERROR' => 'No se puede cargar el archivo. Verifícalo e intenta de nuevo');// $this->upload->display_errors());
 				$this->output->set_content_type('application/json')->set_output(json_encode($error));
 			}else{
 				//VALIDO
