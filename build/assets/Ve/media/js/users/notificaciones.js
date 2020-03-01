@@ -179,7 +179,7 @@
 									$('#mensaje').html("");
 									HtmlRows( data );
 								}else{
-									notificacion( titulo, 'En estos momentos no podemos procesar tu solicitud' );
+									notificacion( titulo, 'En este momento no podemos procesar tu solicitud' );
 								}
 						}
 						else{
