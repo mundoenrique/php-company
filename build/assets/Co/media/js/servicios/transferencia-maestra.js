@@ -944,7 +944,7 @@ $(function () {
 												amount: amount,
 												descript: descrip,
 												type: 'abono',
-												codeToken: codeToken
+												pass: codeToken
 											})
 											dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, { format: CryptoJSAesJson }).toString();
 											$.post(baseURL + api + isoPais + '/servicios/transferencia-maestra/RegargaTMProcede', { request: dataRequest, ceo_name: ceo_cook, plot: btoa(ceo_cook) })

@@ -73,6 +73,7 @@ $lang['SELECT_OPTION_XLOTE'] = 'Procesar por lote';
 $lang['SELECT_OPTION_XTIPO_lOTE'] = 'Procesar por tipo de lote';
 $lang['MSG_INGRESE_CLAVE'] = "Ingresa tu clave";
 $lang['MSG_2DA_FIRMA'] = 'La primera firma ha sido ingresada correctamente, se requiere segunda firma  para autorizar el lote';
+$lang['MSG_CLAVE_INVALIDA'] = "Código de seguridad invalida";
 
 
 //DETALLE LOTE AUTORIZACION
