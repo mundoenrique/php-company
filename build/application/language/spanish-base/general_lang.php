@@ -58,6 +58,7 @@ $lang['GEN_BTN_DISASS_AUTH'] = 'Desasociar';
 $lang['GEN_BTN_DISASS_SIGN'] = 'Desasociar';
 $lang['GEN_BTN_DOWN_PDF'] = 'Descargar PDF';
 $lang['GEN_BTN_CANCEL_ORDER'] = 'Anular Orden';
+$lang['GEN_BTN_SEARCH'] = 'Buscar';
 //MODULES
 $lang['GEN_LOGIN'] = 'Login';
 $lang['GEN_VALIDATE_CAPTCHA'] = 'validateCaptcha';
@@ -85,6 +86,8 @@ $lang['GEN_CACULATE_SERVICE_ORDER'] = 'calculateServiceOrder';
 $lang['GEN_CACULATE_ORDER_TITLE'] = 'Calcular Orden';
 $lang['GEN_SERVICE_ORDERS'] = 'serviceOrders';
 $lang['GEN_SERVICE_ORDERS_TITLE'] = 'Órdenes de servicio';
+$lang['GEN_DETAIL_SERVICE_ORDERS'] = 'detailServiceOrders';
+$lang['GEN_DETAIL_SERVICE_ORDERS_TITLE'] = 'Detalle Órdenes de servicio';
 //links
 $lang['GEN_LINK_LOGIN'] = 'inicio';
 //MODAL STYLES
@@ -132,12 +135,14 @@ $lang['GEN_TABLE_BULK_TYPE_ID'] = 'Id Tipo';
 $lang['GEN_TABLE_BULK_STATUS'] = 'Estado';
 $lang['GEN_TABLE_BULK_RECORDS'] = 'Registros';
 $lang['GEN_TABLE_BULK_AMOUNT'] = 'Monto';
-$lang['GEN_TABLE_COMMISSION'] = 'Monto Comisión';
-$lang['GEN_TABLE_VAT'] = 'Monto Iva';
+$lang['GEN_TABLE_COMMISSION'] = 'Monto comisión';
+$lang['GEN_TABLE_VAT'] = 'Monto IVA';
 $lang['GEN_TABLE_AMOUNT_SO'] = 'Monto OS';
 $lang['GEN_TABLE_TOTAL_AMOUNT'] = 'Monto Total';
-$lang['GEN_TABLE_DEPOSIT_AMOUNT'] = 'Monto depósito';
+$lang['GEN_TABLE_DEPOSIT_AMOUNT'] = 'Monto depositado';
 $lang['GEN_TABLE_BULK_OPTIONS'] = 'Opciones';
+$lang['GEN_TABLE_BULK_ORDER_NRO'] = 'Orden nro.';
+$lang['GEN_TABLE_BULK_DATE_2'] = 'Fecha';
 //DATATABLES LANG
 $lang['GEN_TABLE_SLENGTHMENU'] = 'Mostrar _MENU_ registros';
 $lang['GEN_TABLE_SZERORECORDS'] = 'No se encontraron resultados';
@@ -190,3 +195,9 @@ $lang['GEN_FINISH_TITLE']= 'Cierre de sesión';
 $lang['GEN_FINISH_TEXT']= 'No se ha detectado actividad en la página, tu sesión está próxima a expirar.';
 $lang['GEN_EXPIRED_SESSION']= 'Tu sesión en %s ha caducado.';
 $lang['GEN_FINISHED_SESSION']= 'Tu sesión en %s ha sido cerrada exitosamente.';
+$lang['GEN_SEARCH_CRITERIA']= 'Criterio de búsqueda';
+$lang['GEN_RANGE_ONE_DAYS']= '5 días';
+$lang['GEN_RANGE_TWO_DAYS']= '10 días';
+$lang['GEN_START_DAY']= 'Fecha inicial';
+$lang['GEN_END_DAY']= 'Fecha final';
+$lang['GEN_STATE']= 'Estado';
