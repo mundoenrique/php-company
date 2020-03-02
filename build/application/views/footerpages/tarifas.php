@@ -141,7 +141,7 @@
 					font-size: 13px;
 					font-weight: 300;
 					line-height: 1.4;
-					padding: 10px 15px;
+					padding: 10px 13px;
 					vertical-align: center;
 				}
 
