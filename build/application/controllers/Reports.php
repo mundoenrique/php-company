@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @author J. Enrique Peñaloza Piñero
  * @date December 7th, 2019
 */
-class Novo_Reports extends NOVO_Controller {
+class Reports extends NOVO_Controller {
 
 	public function __construct()
 	{
@@ -34,8 +34,8 @@ class Novo_Reports extends NOVO_Controller {
 			"third_party/additional-methods",
 			"reports/reports"
 		);
-		//$responseDetail = $this->loadModel($this->request);
-		//$this->responseAttr($responseDetail);
+		$responseReports = $this->loadModel($this->request);
+		$this->responseAttr($responseReports);
 		//$this->render->detailBulk = $responseDetail->data->detailBulk;
 		$this->render->titlePage = 'Reportes';
 		$this->views = ['reports/'.$view];

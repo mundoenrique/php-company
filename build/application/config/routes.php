@@ -80,7 +80,7 @@ $route['(:any)/lotes-calcular-orden'] = "bulk/calculateServiceOrder";
 $route['(:any)/consulta-orden-de-servicio'] = "inquiries/serviceOrders";
 $route['(:any)/detalle-orden-de-servicio'] = "inquiries/detailServiceOrders";
 //Reports
-$route['(:any)/reportes'] = "novo_reports/getReportsList";
+$route['(:any)/reportes'] = "reports/getReportsList";
 
 
 //old routes
