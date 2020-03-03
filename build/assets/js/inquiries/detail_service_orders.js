@@ -12,4 +12,22 @@ $(function() {
     "language": dataTableLang
 	});
 
+	$('#downXLS').on('click', function(){
+		exportFileType('xls');
+		});
+
+	$('#downPDF').on('click', function(){
+		exportFileType('pdf');
+	});
+
+	function exportFileType($fileType){
+
+		insertFormInput(true, $('#exportTo'));
+		$('#exportTo').attr('action', baseURL + "descargar-archivo-dos");
+		$('#data_lote').val($("#data_lote").val());
+		$('#file_type').val($fileType);
+		$('#exportTo').submit();
+
+	}
+
 })

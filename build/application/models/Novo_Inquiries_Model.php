@@ -173,6 +173,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 	 */
 	public function callWs_ClearServiceOrders_Inquiries($dataRequest)
 	{
+
 		log_message('INFO', 'NOVO Inquiries Model: ClearServiceOrders Method Initialized');
 
 		$this->className = 'com.novo.objects.TOs.OrdenServicioTO';
@@ -180,7 +181,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 		$this->dataAccessLog->function = 'anularOS';
 		$this->dataAccessLog->operation = 'Anular orden de servicio';
 
-		$rifEmpresa=$this->session->userdata('acrifS');
+		$rifEmpresa=$this->session->userdata('enterpriseInf')->idFiscal;
 
 		unset($dataRequest->modalReq);
 
@@ -253,6 +254,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 		$definitive['dtfechorcarga'] = $response->dtfechorcarga;
 		$definitive['status'] = $response->status;
 		$definitive['nmonto'] = $response->nmonto;
+		$definitive['acidlote'] = $response->acidlote;
 
 		foreach($response->registrosLoteRecarga AS $key => $final) {
 			$final_2['id_ext_per']=$final->id_ext_per;
@@ -273,4 +275,5 @@ class Novo_Inquiries_Model extends NOVO_Model {
 
 		return $this->responseToTheView('DetailServiceOrders');
 	}
+
 }
