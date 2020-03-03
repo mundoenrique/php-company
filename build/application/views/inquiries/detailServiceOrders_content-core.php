@@ -76,16 +76,16 @@
 			<div class="flex pb-5 flex-column">
 				<span class="line-text mb-2 h4 semibold primary"><?= lang('GEN_SERVICE_ORDERS_TITLE'); ?></span>
 				<div class="center mx-1">
-			<!--<div class="flex justify-end items-center">
+			<div class="flex justify-end items-center">
             <div class="mr-3 py-1">
-              <button class="btn px-1" title="Exportar a EXCEL" data-toggle="tooltip">
+              <a id="downXLS" class="btn px-1" title="Exportar a EXCEL" data-toggle="tooltip">
                 <i class="icon icon-file-excel" aria-hidden="true"></i>
-              </button>
-              <button class="btn px-1" title="Exportar a PDF" data-toggle="tooltip">
+              </a>
+              <a id="downPDF" class="btn px-1" title="Exportar a PDF" data-toggle="tooltip">
                 <i class="icon icon-file-pdf" aria-hidden="true"></i>
-              </button>
+              </a>
             </div>
-          </div>-->
+          </div>
 					<table id="authLotDetail" class="cell-border h6 display">
 						<thead class="bg-primary secondary regular">
 							<tr>
@@ -113,9 +113,9 @@
 
 				<div class="flex flex-column mb-4 mt-4 px-5 justify-center items-center">
 					<div class="flex flex-row">
-					  <div class="mb-3 mr-4">
-						<a href="<?= base_url('consulta-orden-de-servicio') ?>" class="btn btn-link btn-small">Volver</a>
-					  </div>
+						<div class="mb-3 mr-4">
+							<a href="<?= base_url('consulta-orden-de-servicio') ?>" class="btn btn-link btn-small big-modal"><?= lang('GEN_BTN_BACK') ?></a>
+						</div>
 					</div>
 				</div>
 
@@ -128,3 +128,7 @@
 	<?php endif; ?>
   </div>
 </div>
+<form id='exportTo' method='post'>
+ <input type='hidden' id='data_lote' name='data_lote' value="<?= $detail->detail->acidlote; ?>"/>
+ <input type='hidden' id='file_type' name='file_type' value=""/>
+</form>

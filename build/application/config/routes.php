@@ -79,6 +79,9 @@ $route['(:any)/lotes-calcular-orden'] = "bulk/calculateServiceOrder";
 //Inquiries
 $route['(:any)/consulta-orden-de-servicio'] = "inquiries/serviceOrders";
 $route['(:any)/detalle-orden-de-servicio'] = "inquiries/detailServiceOrders";
+//DownloadFile
+$route['(:any)/descargar-archivo-dos'] = "downloadFiles/exportDetailServiceOrders";
+$route['(:any)/descargar-archivo-os'] = "downloadFiles/exportServiceOrders";
 //Reports
 $route['(:any)/reportes'] = "reports/getReportsList";
 
