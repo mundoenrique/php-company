@@ -37,7 +37,7 @@ class Tool_Browser {
 			];
 
 			if(array_key_exists($this->CI->agent->browser(), $validBrowser)) {
-				if(in_array($client, ['novo', 'pichincha'])) {
+				if(in_array($client, ['novo', 'pichincha', 'banco-bog'])) {
 					$validBrowser['Internet Explorer'] = 10;
 				}
 

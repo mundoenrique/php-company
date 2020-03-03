@@ -1,9 +1,71 @@
+SetEnv CI_ENV development
+SetEnv BASE_URL http://localhost/site-conexionempresas/build/
+SetEnv BASE_CDN_URL http://localhost/site-conexionempresas/build/assets/
+SetEnv BASE_CDN_PATH C:/xampp/htdocs/site-conexionempresas/build/assets/
+SetEnv SESS_SAVE_PATH C:/xampp/htdocs/sessions/ceo
+SetEnv BULK_LOCAL_PATH C:/xampp/htdocs/site-conexionempresas/build/assets/
+SetEnv COOKIE_SECURE FALSE
+SetEnv COOKIE_DOMAIN localhost
+#PARA ACTULIZAR COPIAR DES AQUÍ
+SetEnv WS_KEY dGVzdDEyMzQ=
+SetEnv ENCRYPTION_KEY N0V02013
+SetEnv SESS_MATCH_IP TRUE
+SetEnv SESS_COOKIE_NAME ceo_session
+SetEnv SESS_EXPIRATION 0
+SetEnv COOKIE_PREFIX 'ceo_'
+SetEnv COOKIE_PATH /
+SetEnv BULK_FTP_USERNAME npdaemon
+SetEnv BULK_FTP_PASSWORD npd43m0n
+SetEnv BULK_FTP_URL sftp://172.24.6.112:22/opt/npdaemon/
+SetEnv API_CONTENT_URL 172.24.6.123:3000/
+SetEnv CYPHER_BASE 0123456789=abcdefghijklmnopqrstuvwxyz?ABCDEFGHIJKLMNOPQRSTUVWXYZ=
+SetEnv AUTO_LOGIN FALSE
+SetEnv ACTIVE_RECAPTCHA FALSE
+SetEnv RESPONSE_SERV_COMPLETE TRUE
+		# development
+SetEnv WS_URL https://d-web-service.novopayment.net/NovoEolWebInterfaceWS/webresources/
+#SetEnv WS_URL http://172.24.6.78:10003/NovoEolWebInterfaceWS/webresources/
+SetEnv API_URL http://172.24.6.78:8005/ceo-fuel/1.0/
+SetEnv SERVICE_URL http://172.24.6.78:9008/
+SetEnv SERVICE_CLIENT_ID b08e4d54638385d6987af8989a01f30e
+SetEnv SERVICE_CLIENT_SECRET f2ca416fb52cdf4f21406a5d9ca6b16f
+		#TESTING
+#SetEnv WS_URL https://t-web-service.novopayment.net/NovoEolWebInterfaceWS/webresources/
+#SetEnv WS_URL http://172.24.6.77:9005/NovoEolWebInterfaceWS/webresources/
+#SetEnv API_URL http://172.24.6.77:8005/ceo-fuel/1.0/
+#SetEnv SERVICE_URL http://172.24.6.77:9008/
+#SetEnv SERVICE_CLIENT_ID b08e4d54638385d6987af8989a01f30e
+#SetEnv SERVICE_CLIENT_SECRET f2ca416fb52cdf4f21406a5d9ca6b16f
+		#UAT
+#SetEnv WS_URL https://uat-web-service.novopayment.net/NovoEolWebInterfaceWS/webresources/
+#SetEnv WS_URL http://172.24.6.79/NovoEolWebInterfaceWS/webresources/
+#SetEnv WS_URL http://172.24.6.73:9005/NovoEolWebInterfaceWS/webresources/
+#SetEnv API_URL http://172.24.6.73:8005/ceo-fuel/1.0/
+#SetEnv SERVICE_URL http://172.24.6.73:9008/
+#SetEnv SERVICE_CLIENT_ID b08e4d54638385d6987af8989a01f30e
+#SetEnv SERVICE_CLIENT_SECRET f2ca416fb52cdf4f21406a5d9ca6b16f
+		#production
+#SetEnv WS_URL https://web-service.novopayment.net/NovoEolWebInterfaceWS/webresources/
+#SetEnv WS_URL http://172.24.6.75:9005/NovoEolWebInterfaceWS/webresources/
+#SetEnv WS_URL http://172.24.6.76:9005/NovoEolWebInterfaceWS/webresources/
+#SetEnv API_URL http://172.24.6.75:8005/ceo-fuel/1.0/
+#SetEnv API_URL http://172.24.6.76:8005/ceo-fuel/1.0/
+#SetEnv SERVICE_URL http://172.24.6.76:9008/
+#SetEnv SERVICE_URL http://172.24.6.75:9008/
+#SetEnv SERVICE_CLIENT_ID b08e4d54638385d6987af8989a01f30e
+#SetEnv SERVICE_CLIENT_SECRET f2ca416fb52cdf4f21406a5d9ca6b16f
+
+<ifmodule mod_headers.c>
+	Header always edit Set-Cookie (.*) "$1; SameSite=strict"
+	Header onsuccess edit Set-Cookie (.*) "$1; SameSite=strict"
+	Header edit Set-Cookie ^(.*);\s?SameSite=strict;?\s?(.*);\s?SameSite=strict;?\s?(.*)$ "$1; $2; $3; SameSite=strict"
+	Header edit Set-Cookie ^(.*);\s?;\s?(.*)$ "$1; $2"
+</ifmodule>
 
 <IfModule mod_rewrite.c>
 	RewriteEngine On
-	RewriteBase /
+	#RewriteBase /
 	RewriteCond %{REQUEST_FILENAME} !-f
 	RewriteCond %{REQUEST_FILENAME} !-d
 	RewriteRule ^(.*)$ index.php?/$1 [L]
 </IfModule>
-
