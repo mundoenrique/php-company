@@ -29,6 +29,7 @@ class Verify_Access {
 	 */
 	public function validateForm($rule, $countryUri, $user)
 	{
+
 		log_message('INFO', 'NOVO Verify_Access: validateForm method initialized');
 
 		$result = $this->CI->form_validation->run($rule);
@@ -169,6 +170,8 @@ class Verify_Access {
 					break;
 				case 'serviceOrder':
 				case 'cancelServiceOrder':
+				case 'exportDetailServiceOrders':
+				case 'exportServiceOrders':
 					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBAUT') && $this->verifyAuthorization('TEBORS'));
 					break;
 				case 'serviceOrders':
@@ -185,7 +188,7 @@ class Verify_Access {
 			}
 		}
 
-		log_message('INFO', 'NOVO ['.$user.'] accessAuthorization'.$module.': '.json_encode($auth, JSON_UNESCAPED_UNICODE));
+		log_message('INFO', 'NOVO ['.$user.'] accessAuthorization '. $module.': '.json_encode($auth, JSON_UNESCAPED_UNICODE));
 
 		return $auth;
 	}

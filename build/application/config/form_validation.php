@@ -280,6 +280,25 @@ $config = [
 			'rules' => 'trim|required'
 		]
 	],
+	'exportDetailServiceOrders' => [
+		[
+			'field' => 'data_lote',
+			'label' => 'data_lote',
+			'rules' => 'trim|required'
+		],
+		[
+			'field' => 'file_type',
+			'label' => 'file_type',
+			'rules' => 'trim|required'
+		],
+	],
+	'exportServiceOrders' => [
+		[
+			'field' => 'idOS',
+			'label' => 'idOS',
+			'rules' => 'trim|regex_match[/^([\w]+)+$/i]'
+		]
+	],
 	'getServiceOrders' => [
 		[
 			'field' => 'initialDate',
