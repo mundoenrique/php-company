@@ -4853,9 +4853,9 @@ tr.GC-first th {
 	font-size: 18px;
 }
 
-/* .estado-cuenta #top-batchs{
+.estado-cuenta #top-batchs{
 	width: 925px;
-} */
+}
 
 #top-batchs span {
 	margin-right: 5px;
@@ -5255,7 +5255,7 @@ li#select-empresa select {
 }
 
 #search-2 select {
-	max-width: 256px;
+	max-width: 257px;
 }
 
 #table-estadosdeCuenta {
@@ -5302,9 +5302,9 @@ li#select-empresa select {
 	border-bottom: 1px solid #DFE0E2;
 }
 
-/* .estado-cuenta #Datos2 {
+.estado-cuenta #Datos2 {
 	width: 945px;
-} */
+}
 
 #Datos2 td {
 	padding: 5px;
@@ -5596,7 +5596,7 @@ center {
 }
 
 #div_tablaDetalle {
-	width: 660px;
+	width: 945px;
 	height: auto;
 	float: left;
 	background-color: #FFFFFF;
@@ -5604,29 +5604,29 @@ center {
 	border-bottom-left-radius: 30px;
 }
 
-/* #div_tablaDetalle.estado-cuenta {
-	width: 660px;
+#div_tablaDetalle.estado-cuenta {
+	width: 945px;
 	height: auto;
 	float: left;
 	background-color: #FFFFFF;
 	border: 1px solid #DFE0E2;
 	border-bottom-left-radius: 30px;
-} */
+}
 
-/* #tbody-datos-general {
+#tbody-datos-general {
 	border-right:	1px solid #DFE0E2;
 	border-left: 1px solid #DFE0E2;
-} */
+}
 
 .tabla-reportes {
 	width: 660px;
 	border: none;
 }
 
-/* .estado-cuenta{
+.estado-cuenta{
 	width: 950px;
 	border: none;
-} */
+}
 
 .tabla-reportes::after,
 .estado-cuenta::after {
@@ -6183,9 +6183,9 @@ span.jPag-snext-img {
 	color: #10133f !important;
 }
 
-/* .estado-cuenta #Datos2 {
+.estado-cuenta #Datos2 {
 	width: 945px;
-} */
+}
 
 .thead-edc #Datos2 td {
 	padding: 5px;
