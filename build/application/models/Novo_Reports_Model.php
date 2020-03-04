@@ -32,16 +32,44 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->dataRequest->rif = $this->session->enterpriseInf->idFiscal;
 		$this->dataRequest->nombre = $this->session->enterpriseInf->enterpriseName;
 
-		$response = $this->sendToService('ServiceOrderStatus');
+		$response = $this->sendToService('GetReportsList');
 
 		switch($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
-				log_message('DEBUG', 'NOVO ['.$this->userName.'] RESPONSE: ReporstList: ' . json_encode($response));
+				$reportsList[] = (object) [
+					'key' => '',
+					'text' => 'Selecciona un reporte'
+				];
 
+				foreach ($response->listaConfigReportesCEO AS $index => $reports) {
+					$report = [];
+					foreach ($reports AS $key => $value) {
+						switch ($key) {
+							case 'idOperation':
+								$report['key'] = $value;
+								break;
+							case 'description':
+								$report['text'] = $value;
+								break;
+							case 'result':
+								$report['type'] = $value;
+								break;
+						}
+					}
+					$reportsList[] = (object) $report;
+				}
 				break;
 		}
 
-		return $this->responseToTheView('ServiceOrderStatus');
+		if($this->isResponseRc != 0) {
+			$reportsList[] = (object) [
+				'key' => '',
+				'text' => lang('RESP_TRY_AGAIN')
+			];
+		}
+
+		$this->response->data->reportsList = (object) $reportsList;
+		return $this->responseToTheView('GetReportsList');
 	}
 }
