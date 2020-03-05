@@ -84,32 +84,54 @@ class Novo_Reports_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO Reports Model: GetReport Method Initialized');
 
+		$this->dataAccessLog->modulo = 'Reportes';
+		$this->dataRequest->idOperation = $dataRequest->operation;
+
 		switch ($dataRequest->operation) {
+			case 'repListadoTarjetas':
+				$this->ListadoTarjetas($dataRequest);
+			break;
+			case 'repMovimientoPorEmpresa':
+				$this->className = 'ReporteCEOTO.class';
+			break;
+			case 'repComprobantesVisaVale':
+				$this->className = 'ReporteCEOTO.class';
+			break;
 			case 'repTarjeta':
 				$this->className = 'TarjetaTO.class';
 			break;
-			default:
-				$this->className = 'ReporteCEOTO.class';
-				break;
+			case 'repTarjetasPorPersona':
+				$this->className = 'TarjetahabienteTO.class';
+			break;
 		}
 
-		$this->dataAccessLog->modulo = 'Reportes';
-		$this->dataAccessLog->function = 'Obtener un reporte';
-		$this->dataAccessLog->operation = 'Reporte seleccionado';
-
-		$this->dataRequest->idOperation = $dataRequest->operation;
-		$this->dataRequest->empresa = [
-			'rif' => $this->session->enterpriseInf->idFiscal
-		];
 		$this->dataRequest->rutaArchivo = DOWNLOAD_ROUTE;
 
-		$response = $this->sendToService('GetReport');
+		$response = $this->sendToService('GetReport: '.$dataRequest->operation);
 
 		switch($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
 				break;
 		}
-		return $this->responseToTheView('GetReport');
+		return $this->responseToTheView('GetReport: '.$dataRequest->operation);
+	}
+	/**
+	 * @info Método para obtener el listado de tarjetas de una empresa
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date Janury 05th, 2020
+	 */
+	private function ListadoTarjetas($dataRequest)
+	{
+		log_message('INFO', 'NOVO Reports Model: repListadoTarjetas Method Initialized');
+
+		$this->dataAccessLog->function = 'Listado de tarjetas';
+		$this->dataAccessLog->operation = 'Descargar archivo';
+
+		$this->className = 'ReporteCEOTO.class';
+		$this->dataRequest->empresaCliente = [
+			'rif' => $this->session->enterpriseInf->idFiscal
+		];
+
 	}
 }
