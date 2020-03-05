@@ -54,6 +54,9 @@ class Novo_Reports_Model extends NOVO_Model {
 								break;
 							case 'result':
 								$report['type'] = $value;
+								if(count($reports->listFilter) > 0 && $value === 'DOWNLOAD') {
+									$report['type'] = 'FILTER';
+								}
 								break;
 						}
 					}
