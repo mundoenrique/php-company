@@ -13,9 +13,9 @@ class Novo_Reports_Model extends NOVO_Model {
 		log_message('INFO', 'NOVO Reports Model Class Initialized');
 	}
 	/**
-	 * @info Método para obtener las ordenes de servicio
+	 * @info Método para obtener la lista de reportes
 	 * @author J. Enrique Peñaloza Piñero
-	 * @date Janury 09th, 2019
+	 * @date March 02nd, 2020
 	 */
 	public function callWs_GetReportsList_Reports()
 	{
@@ -74,5 +74,44 @@ class Novo_Reports_Model extends NOVO_Model {
 
 		$this->response->data->reportsList = (object) $reportsList;
 		return $this->responseToTheView('GetReportsList');
+	}
+	/**
+	 * @info Método para obtener un reporte selecionado por el usuario
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date Janury 04th, 2020
+	 */
+	public function callWs_GetReport_Reports($dataRequest)
+	{
+		log_message('INFO', 'NOVO Reports Model: GetReport Method Initialized');
+
+		switch ($dataRequest->operation) {
+			case 'repTarjeta':
+				$this->className = 'TarjetaTO.class';
+			break;
+			default:
+				$this->className = 'ReporteCEOTO.class';
+				break;
+		}
+
+		$this->dataAccessLog->modulo = 'Reportes';
+		$this->dataAccessLog->function = 'Obtener un reporte';
+		$this->dataAccessLog->operation = 'Reporte seleccionado';
+
+		$this->dataRequest->idOperation = $dataRequest->operation;
+		$this->dataRequest->listadoTarjetas = [
+			'empresa' => [
+				'rif' => $this->session->enterpriseInf->idFiscal
+			]
+		];
+		$this->dataRequest->rutaArchivo = DOWNLOAD_ROUTE;
+
+		$response = $this->sendToService('GetReport');
+
+		switch($this->isResponseRc) {
+			case 0:
+				$this->response->code = 0;
+				break;
+		}
+		return $this->responseToTheView('GetReport');
 	}
 }

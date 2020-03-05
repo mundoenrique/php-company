@@ -40,7 +40,7 @@
 						</div>
 						<div id="div-download" class="no-select none">
 							<div class="flex items-start justify-end">
-								<button class="flex items-baseline btn btn-link btn-small">
+								<button id="btn-download" class="flex items-baseline btn btn-link btn-small big-modal">
 									<i aria-hidden="true" class="icon icon-download"></i>
 									&nbsp;Descargar
 								</button>

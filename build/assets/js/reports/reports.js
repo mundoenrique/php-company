@@ -102,5 +102,24 @@ $(function () {
 			},
 		],
 		"language": dataTableLang
-	});
+	})
+
+	$('#btn-download').on('click', function (e) {
+		e.preventDefault();
+		var reportSelected = $('#reports').val()
+		data = {
+			operation: reportSelected
+		}
+		getReport(data)
+	})
 })
+
+function getReport(data) {
+	insertFormInput(true);
+	verb = 'POST'; who = 'Reports'; where = 'getReport';
+	callNovoCore(verb, who, where, data, function (response) {
+		$('.cover-spin').hide()
+		insertFormInput(false);
+
+	})
+}
