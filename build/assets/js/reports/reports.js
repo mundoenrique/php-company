@@ -1,6 +1,6 @@
+'use strict'
 $(function () {
-	//Reports
-	var optionValues = [];
+	/* var optionValues = [];
 	var prevOption;
 	$('#reports option').each(function () {
 		optionValues.push($(this).val());
@@ -12,23 +12,49 @@ $(function () {
 
 	for (i = 0; i < optionValues.length; i++) {
 		$(`#${optionValues[i]}`).hide();
-	};
+	}; */
 
 	$("#reports").change(function () {
-		if ($(this).val() == "customer-movements") {
+		$('.no-select').addClass('none')
+		var type = $(this).find('option:selected').attr('type')
+
+		if (type !== 'DOWNLOAD') {
+			$('#search-criteria, #line-reports, #form-report').removeClass('none')
+		}
+
+		switch (type) {
+			case 'DOWNLOAD':
+				$("#div-download").removeClass('none');
+				$("#div-download").fadeIn(700, 'linear');
+				break;
+			case 'FILTER':
+
+				break;
+			case 'TABLE':
+
+				break;
+			case 'QUERY':
+
+				break;
+		}
+
+
+
+
+		/* if ($(this).val() == "customer-movements") {
 			$("#search-criteria").addClass('none');
 			$("#line-reports").addClass('none');
-			$("#btn-download").removeClass('none');
-			$("#btn-download").fadeIn(700, 'linear');;
+			$("#div-download").removeClass('none');
+			$("#div-download").fadeIn(700, 'linear');;
 		} else {
 			$("#search-criteria").removeClass('none');
 			$("#line-reports").removeClass('none');
-			$("#btn-download").addClass('none');
+			$("#div-download").addClass('none');
 		}
 		$('#' + $(this).val()).fadeIn(700, 'linear');
 		$(prevOption).hide();
 		$('#' + $(this).val()).show();
-		prevOption = '#' + $(this).val();
+		prevOption = '#' + $(this).val(); */
 	});
 
 	$("#datepicker_start, #datepicker_end").datepicker({
@@ -76,5 +102,24 @@ $(function () {
 			},
 		],
 		"language": dataTableLang
-	});
+	})
+
+	$('#btn-download').on('click', function (e) {
+		e.preventDefault();
+		var reportSelected = $('#reports').val()
+		data = {
+			operation: reportSelected
+		}
+		getReport(data)
+	})
 })
+
+function getReport(data) {
+	insertFormInput(true);
+	verb = 'POST'; who = 'Reports'; where = 'getReport';
+	callNovoCore(verb, who, where, data, function (response) {
+		$('.cover-spin').hide()
+		insertFormInput(false);
+
+	})
+}

@@ -22,20 +22,25 @@
 						<div class="form-group col-6 col-xl-6">
 							<label>Tipo de reporte</label>
 							<select id="reports" class="select-box custom-select flex h6 w-100">
-								<option disabled selected>Seleccionar</option>
+								<?php foreach($reportsList AS $pos => $value): ?>
+								<option value="<?= $value->key; ?>" <?= $pos != 0 ? '' : 'selected disabled' ?> type="<?= !isset($value->type) ?: $value->type; ?>">
+									<?= $value->text; ?>
+								</option>
+								<?php endforeach; ?>
+								<!-- <option disabled selected>Seleccionar</option>
 								<option value="customer-movements">Movimientos de clientes</option>
 								<option value="customer-card-movements">Movimientos de tarjetas clientes</option>
 								<option value="card-inquiry">Consulta de tarjetas</option>
 								<option value="proof-food">Comprobante alimentación</option>
 								<option value="customer-extract">Extracto de cliente</option>
 								<option value="lock-query">Consulta de Desbloqueo/Bloqueos</option>
-								<option value="GMF-certificate">Certificado de GMF</option value="">
+								<option value="GMF-certificate">Certificado de GMF</option value=""> -->
 							</select>
 							<div class="help-block"></div>
 						</div>
-						<div id="btn-download" class="none">
+						<div id="div-download" class="no-select none">
 							<div class="flex items-start justify-end">
-								<button class="flex items-baseline btn btn-link btn-small">
+								<button id="btn-download" class="flex items-baseline btn btn-link btn-small big-modal">
 									<i aria-hidden="true" class="icon icon-download"></i>
 									&nbsp;Descargar
 								</button>
@@ -48,10 +53,10 @@
 		</div>
 
 		<div class="flex pb-5 flex-column">
-			<span id="search-criteria" class=" none line-text mb-2 h4 semibold primary">Criterio de búsqueda</span>
+			<span id="search-criteria" class="no-select none line-text mb-2 h4 semibold primary">Criterio de búsqueda</span>
 			<div class="flex my-2 px-5">
-				<form method="post" class="reports-form w-100 none">
-					<div id="customer-card-movements" class="row">
+				<form id="form-report" method="post" class="no-select reports-form w-100 none">
+					<div id="customer-card-movements" class="no-select row">
 						<div class="form-group col-4">
 							<label for="datepicker_start">Fecha inicio</label>
 							<input id="datepicker_start" class="form-control" name="datepicker" type="text" readonly placeholder="DD/MM/AAAA">
@@ -69,7 +74,7 @@
 						</div>
 					</div>
 
-					<div id="card-inquiry" class="row">
+					<div id="card-inquiry" class="no-select row">
 						<div class="form-group col-4">
 							<label>Tipo de identificacion</label>
 							<select class="select-box custom-select flex h6 w-100">
@@ -110,7 +115,7 @@
 						</div>
 					</div>
 
-					<div id="proof-food">
+					<div id="proof-food" class="no-select">
 						<div class="row">
 							<div class="form-group col-6 col-lg-4">
 								<label for="card-number">Numero de tarjeta</label>
@@ -163,7 +168,7 @@
 
 					</div>
 
-					<div id="customer-extract" class="row">
+					<div id="customer-extract" class="no-select row">
 						<div class="form-group col-6 col-lg-4">
 							<label for="datepicker">Fecha</label>
 							<input class="form-control month-year" name="datepicker" type="text" readonly placeholder="MMMM AAAA">
@@ -176,7 +181,7 @@
 						</div>
 					</div>
 
-					<div id="lock-query" class="row">
+					<div id="lock-query" class="no-select row">
 						<div class="form-group col-4">
 							<label>Tipo de tarjeta</label>
 							<select class="select-box custom-select flex h6 w-100">
@@ -202,7 +207,7 @@
 
 					</div>
 
-					<div id="GMF-certificate" class="row">
+					<div id="GMF-certificate" class="no-select row">
 						<div class="form-group col-3">
 							<label>Tipo de consulta</label>
 							<select class="select-box custom-select flex h6 w-100">
@@ -239,7 +244,7 @@
 				</form>
 			</div>
 
-			<div id="line-reports" class="line mb-2 none"></div>
+			<div id="line-reports" class="no-select line mb-2 none"></div>
 
 			<div class="none">
 				<div class="flex items-start justify-center mt-5">
@@ -248,10 +253,6 @@
 						&nbsp;Descargar
 					</button>
 				</div>
-			</div>
-
-			<div class="my-5 pt-4 center none">
-				<span class="h4">No se encontraron reportes</span>
 			</div>
 		</div>
 	</div>

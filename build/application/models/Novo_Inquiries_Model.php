@@ -20,7 +20,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 	public function callWs_ServiceOrderStatus_Inquiries()
 	{
 		log_message('INFO', 'NOVO Inquiries Model: ServiceOrderStatus Method Initialized');
-		$this->className = '';
+		$this->className = 'com.novo.objects.MO.EstatusLotesMO';
 
 		$this->dataAccessLog->modulo = 'Consultas';
 		$this->dataAccessLog->function = 'Lista de ordenes de servicio';
@@ -34,7 +34,6 @@ class Novo_Inquiries_Model extends NOVO_Model {
 		switch($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
-				log_message('DEBUG', 'NOVO ['.$this->userName.'] RESPONSE: ServiceOrderStatus: ' . json_encode($response));
 				$orderStatus[] = (object) [
 					'key' => '',
 					'text' => 'Selecciona un estado'

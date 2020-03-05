@@ -166,6 +166,26 @@ $lang['GEN_TABLE_SNEXT'] = '»';
 $lang['GEN_TABLE_SPREVIOUS'] = '«';
 $lang['GEN_TABLE_SSORTASCENDING'] = ': Activar para ordenar la columna de manera ascendente';
 $lang['GEN_TABLE_SSORTDESCENDING'] = ': Activar para ordenar la columna de manera descendente';
+//DATEPICKER
+$lang['GEN_PICKER_CLOSETEXT'] = 'Cerrar';
+$lang['GEN_PICKER_PREVTEXT'] = '<Ant';
+$lang['GEN_PICKER_NEXTTEXT'] = 'Sig>';
+$lang['GEN_PICKER_CURRENTTEXT'] = 'Hoy';
+$lang['GEN_PICKER_MONTHNAMES'] = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+$lang['GEN_PICKER_MONTHNAMESSHORT'] = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
+$lang['GEN_PICKER_DAYNAMES'] = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+$lang['GEN_PICKER_DAYNAMESSHORT'] = ['Dom', 'Lun', 'Mar', 'Mié', 'Juv', 'Vie', 'Sáb'];
+$lang['GEN_PICKER_DAYNAMESMIN'] = ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá'];
+$lang['GEN_PICKER_WEEKHEADER'] = 'Sm';
+$lang['GEN_PICKER_DATEFORMAT'] = 'dd/mm/yy';
+$lang['GEN_PICKER_FIRSTDATE'] = 1;
+$lang['GEN_PICKER_ISRLT'] = FALSE;
+$lang['GEN_PICKER_SHOWMONTHAFTERYEAR'] = FALSE;
+$lang['GEN_PICKER_YEARRANGE'] = '-20:';
+$lang['GEN_PICKER_CHANGEMONTH'] = TRUE;
+$lang['GEN_PICKER_CHANGEYEAR'] = TRUE;
+$lang['GEN_PICKER_SHOWANIM'] = 'slideDown';
+$lang['GEN_PICKER_YEARSUFFIX'] = '';
 //GENERAL LANGUAGE
 $lang['GEN_SYSTEM_NAME']= 'Conexión Empresas Online';
 $lang['GEN_WELCOME_TEXT'] = 'Bienvenido(a)';
