@@ -71,8 +71,8 @@
 							<th><?= lang('GEN_TABLE_BULK_NUMBER'); ?></th>
 							<th><?= lang('GEN_TABLE_FILE_NAME'); ?></th>
 							<th><?= lang('GEN_TABLE_BULK_DATE'); ?></th>
-							<th><?= lang('GEN_TABLE_BULK_STATUS'); ?></th>
-							<th><?= lang('GEN_TABLE_BULK_OPTIONS'); ?></th>
+							<th><?= lang('GEN_TABLE_STATUS'); ?></th>
+							<th><?= lang('GEN_TABLE_OPTIONS'); ?></th>
 						</tr>
 					</thead>
 					<tbody>
