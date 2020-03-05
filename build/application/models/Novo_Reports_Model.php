@@ -98,10 +98,8 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->dataAccessLog->operation = 'Reporte seleccionado';
 
 		$this->dataRequest->idOperation = $dataRequest->operation;
-		$this->dataRequest->listadoTarjetas = [
-			'empresa' => [
-				'rif' => $this->session->enterpriseInf->idFiscal
-			]
+		$this->dataRequest->empresa = [
+			'rif' => $this->session->enterpriseInf->idFiscal
 		];
 		$this->dataRequest->rutaArchivo = DOWNLOAD_ROUTE;
 
