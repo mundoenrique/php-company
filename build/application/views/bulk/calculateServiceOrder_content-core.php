@@ -33,7 +33,7 @@
 								<th><?= lang('GEN_TABLE_AMOUNT_SO'); ?></th>
 								<th><?= lang('GEN_TABLE_TOTAL_AMOUNT'); ?></th>
 								<th><?= lang('GEN_TABLE_DEPOSIT_AMOUNT'); ?></th>
-								<th><?= lang('GEN_TABLE_BULK_OPTIONS'); ?></th>
+								<th><?= lang('GEN_TABLE_OPTIONS'); ?></th>
 							</tr>
 						</thead>
 						<tbody>
@@ -64,9 +64,9 @@
 							<tr>
 								<th><?= lang('GEN_TABLE_BULK_NUMBER'); ?></th>
 								<th><?= lang('GEN_TABLE_BULK_DATE'); ?></th>
-								<th><?= lang('GEN_TABLE_BULK_TYPE'); ?></th>
-								<th><?= lang('GEN_TABLE_BULK_RECORDS'); ?></th>
-								<th><?= lang('GEN_TABLE_BULK_STATUS'); ?></th>
+								<th><?= lang('GEN_TABLE_TYPE'); ?></th>
+								<th><?= lang('GEN_TABLE_RECORDS'); ?></th>
+								<th><?= lang('GEN_TABLE_STATUS'); ?></th>
 							</tr>
 						</thead>
 						<tbody>
