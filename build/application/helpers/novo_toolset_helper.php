@@ -220,6 +220,7 @@ if(!function_exists('languajeLoad')) {
 					'authorizeBulk'	=> ['bulk'],
 					'deleteConfirmBulk'	=> ['bulk'],
 					'calculateServiceOrder'	=> ['bulk'],
+					'getReport'	=> ['reports'],
 				];
 		}
 
@@ -280,7 +281,6 @@ if ( ! function_exists('exportFile')) {
 	 */
 	function exportFile($file, $typeFile, $filename, $bytes = TRUE)
 	{
-		$CI =& get_instance();
 
 		switch ($typeFile) {
 			case 'pdf':
