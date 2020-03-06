@@ -122,10 +122,12 @@ $(function() {
 		switch(action) {
 			case lang.GEN_BTN_DOWN_PDF:
 				form.attr('action', baseURL+'descargar-archivo-os');
+				form.append('<input type="hidden" name="views" value="serviceOrders">');
+				form.append('<input type="hidden" name="who" value="Inquiries">');
+				form.append('<input type="hidden" name="where" value="exportFiles">');
 				break;
 			case lang.GEN_BTN_CONFIRM:
 				form.attr('action', baseURL+'confirmar-lote');
-				form.append('<input type="hidden" name="bulkView" value="confirm">');
 				break;
 			case lang.GEN_BTN_CANCEL_ORDER:
 				var oldID = $('#accept').attr('id');
@@ -179,7 +181,7 @@ function format (bulk) {
 		body+= 	'<td>'+value.bulkStatus+'</td>';
 		body+= 	'<td>'+value.bulkAmount+'</td>';
 		body+= 	'<td>'+value.bulkCommisAmount+'</td>';
-		body+= 	'<td>'+value.bulkTotalAmount+'<form id="detail-orders-form" class="form-group" action="'+baseURL+'detalle-orden-de-servicio" method="post"><input type="hidden" id="numberOrden" name="numberOrden" value='+value.bulkacidlote+'></form></td>';
+		body+= 	'<td>'+value.bulkTotalAmount+'<form id="detail-orders-form" class="form-group" action="'+baseURL+'detalle-orden-de-servicio" method="post"><input type="hidden" id="numberOrder" name="numberOrder" value='+value.bulkacidlote+'></form></td>';
 		body+= '</tr>';
 
 	})
