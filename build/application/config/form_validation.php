@@ -275,12 +275,12 @@ $config = [
 	],
 	'detailServiceOrders' => [
 		[
-			'field' => 'numberOrden',
-			'label' => 'numberOrden',
+			'field' => 'numberOrder',
+			'label' => 'numberOrder',
 			'rules' => 'trim|required'
 		]
 	],
-	'exportDetailServiceOrders' => [
+	'exportDetailServiceOrderssss' => [
 		[
 			'field' => 'data_lote',
 			'label' => 'data_lote',
@@ -292,13 +292,23 @@ $config = [
 			'rules' => 'trim|required'
 		],
 	],
-	'exportServiceOrders' => [
+	'exportFiles' => [
 		[
 			'field' => 'idOS',
 			'label' => 'idOS',
 			'rules' => 'trim|regex_match[/^([\w]+)+$/i]'
+		],
+		[
+			'field' => 'who',
+			'label' => 'who',
+			'rules' => 'trim|regex_match[/^([\w]+)+$/i]'
+		],
+		[
+			'field' => 'where',
+			'label' => 'where',
+			'rules' => 'trim|regex_match[/^([\w]+)+$/i]'
 		]
-	],
+		],
 	'getServiceOrders' => [
 		[
 			'field' => 'initialDate',

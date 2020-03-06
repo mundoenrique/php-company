@@ -36,7 +36,7 @@
 	<?php elseif($newViews == ''): ?>
 		</div>
 	<?php endif; ?>
-
+	<a id="download-file" href="javascript:" download></a>
 	<?php $this->load->view('footer_content'.$newViews) ?>
 
 	<?= ($module == lang('GEN_LOGIN') && $activeRecaptcha) ?  $scriptCaptcha : ''; ?>

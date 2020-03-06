@@ -132,6 +132,9 @@ class Novo_Reports_Model extends NOVO_Model {
 		switch($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
+				$this->response->data = [
+					'file' => assetUrl('downloads/'.$response->bean)
+				];
 				break;
 			case -30:
 				$this->response->icon = lang('GEN_ICON_INFO');

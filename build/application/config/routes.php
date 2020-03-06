@@ -81,7 +81,7 @@ $route['(:any)/consulta-orden-de-servicio'] = "inquiries/serviceOrders";
 $route['(:any)/detalle-orden-de-servicio'] = "inquiries/detailServiceOrders";
 //DownloadFile
 $route['(:any)/descargar-archivo-dos'] = "downloadFiles/exportDetailServiceOrders";
-$route['(:any)/descargar-archivo-os'] = "downloadFiles/exportServiceOrders";
+$route['(:any)/descargar-archivo-os'] = "downloadFiles/exportFiles";
 //Reports
 $route['(:any)/reportes'] = "reports/getReportsList";
 

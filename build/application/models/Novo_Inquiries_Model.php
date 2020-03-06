@@ -225,7 +225,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 		return $this->responseToTheView('ClearServiceOrders');
 	}
 
-		/**
+	/**
 	 * @info Elimina un lote
 	 * @author Luis Molina
 	 * @date febrero 27 th, 2020
@@ -240,7 +240,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 		$this->dataAccessLog->operation = 'Ver detalle Lote';
 		$this->className = 'com.novo.objects.TOs.LoteTO';
 		$this->dataRequest->idOperation = 'detalleLote';
-		$this->dataRequest->acidlote =$dataRequest->numberOrden;
+		$this->dataRequest->acidlote =$dataRequest->numberOrder;
 
 		$response = $this->sendToService('DetailServiceOrders');
 
@@ -273,6 +273,88 @@ class Novo_Inquiries_Model extends NOVO_Model {
 		}
 
 		return $this->responseToTheView('DetailServiceOrders');
+	}
+
+	/**
+	 * @info Elimina un lote
+	 * @author Luis Molina
+	 * @date febrero 27 th, 2020
+	 */
+	public function callWs_exportFiles_Inquiries($dataRequest)
+	{
+
+		log_message('INFO', 'NOVO DownloadFiles Model: exportFiles Method Initialized');
+
+		$rifEmpresa = $this->session->userdata('enterpriseInf')->idFiscal;
+		$accodciaS = $this->session->userdata('enterpriseInf')->enterpriseCode;
+		$acprefix = $this->session->userdata('productInf')->productPrefix;
+
+		$this->dataAccessLog->modulo = 'descargarPDFOS';
+		$this->dataAccessLog->function = 'descargarPDFOS';
+		$this->dataAccessLog->operation = 'visualizarOS';
+
+		$this->className = 'com.novo.objects.TOs.OrdenServicioTO';
+		$this->dataRequest->idOperation = 'visualizarOS';
+		$this->dataRequest->rifEmpresa = $rifEmpresa;
+		$this->dataRequest->acCodCia = $accodciaS;
+		$this->dataRequest->acprefix = $acprefix;
+		$this->dataRequest->idOrden =$dataRequest->idOS;
+
+		$response = $this->sendToService('exportFiles');
+
+		$this->isResponseRc=-3;
+
+		switch ($this->isResponseRc) {
+			case 0:
+		  exportFile($response->archivo,'pdf',str_replace(' ', '_', 'OrdenServicio'.date("d/m/Y H:i")));
+		  break;
+			case -3:
+			$this->response->code = 3;
+			$this->response->title = 'Descarga de Archivos';
+			$this->response->msg = 'No fue posible descargar el archivo';
+			$this->response->data->resp['btn1']['link'] = base_url('consulta-orden-de-servicio');
+		}
+		return $this->responseToTheView('exportFiles');
+	}
+
+	/**
+	 * @info Elimina un lote
+	 * @author Luis Molina
+	 * @date febrero 27 th, 2020
+	 */
+	public function callWs_DetailExportFiles_Inquiries($dataRequest)
+	{
+
+		log_message('INFO', 'NOVO Inquiries Model: DetailExportFiles Method Initialized');
+
+		$operation='';
+
+		if($dataRequest->file_type=='xls'){
+			$operation='detalleLoteExcel';
+		}else if ($dataRequest->file_type=='pdf'){
+			$operation='detalleLotePDF';
+		}
+
+		$this->dataAccessLog->modulo = 'lotes';
+		$this->dataAccessLog->function = 'verdetallelote';
+		$this->dataAccessLog->operation = 'Ver detalle Lote';
+		$this->className = 'com.novo.objects.TOs.LoteTO';
+		$this->dataRequest->idOperation = $operation;
+		$this->dataRequest->acidlote =$dataRequest->data_lote;
+
+		$response = $this->sendToService('DetailExportFiles');
+
+		switch ($this->isResponseRc) {
+			case 0:
+				exportFile($response->archivo,$dataRequest->file_type,$response->nombre);
+		  break;
+			case -3:
+			$this->response->code = 3;
+			$this->response->title = 'Descarga de Archivos';
+			$this->response->msg = 'No fue posible descargar el archivo';
+			$this->response->data->resp['btn1']['link'] = base_url('detalle-orden-de-servicio');
+		}
+		return $this->responseToTheView('exportFiles');
 	}
 
 }

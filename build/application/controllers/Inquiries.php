@@ -37,6 +37,7 @@ class Inquiries extends NOVO_Controller {
 		$orderList = [];
 
 		if($this->session->flashdata('serviceOrdersList')) {
+			$this->session->set_flashdata('serviceOrdersList',$this->session->flashdata('serviceOrdersList'));
 			$orderList = $this->session->flashdata('serviceOrdersList');
 			$renderOrderList = TRUE;
 		}
@@ -62,7 +63,7 @@ class Inquiries extends NOVO_Controller {
 	{
 		log_message('INFO', 'NOVO Inquiries: detailServiceOrders Method Initialized');
 
-		if(!isset($this->request->numberOrden)) {
+		if(!isset($this->request->numberOrder)) {
 			redirect(base_url('detalle-producto'), 'location');
 		}
 

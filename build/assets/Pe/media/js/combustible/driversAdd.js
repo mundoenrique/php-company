@@ -73,7 +73,6 @@ $(function() {
                         break;
                 }
             });
-
     });
 
     //habilitar click del formulario
