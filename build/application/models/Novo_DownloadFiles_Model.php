@@ -18,7 +18,7 @@ class Novo_DownloadFiles_Model extends NOVO_Model {
 	 * @author Luis Molina
 	 * @date febrero 27 th, 2020
 	 */
-	public function callWs_exportDetailServiceOrders_downloadFiles($dataRequest)
+	public function callWs_exportDetailServiceOrders_downloadFiles_x($dataRequest)
 	{
 
 		log_message('INFO', 'NOVO Inquiries Model: exportDetailServiceOrders Method Initialized');
@@ -50,7 +50,7 @@ class Novo_DownloadFiles_Model extends NOVO_Model {
 	 * @author Luis Molina
 	 * @date febrero 27 th, 2020
 	 */
-	public function callWs_exportServiceOrders_downloadFiles($dataRequest)
+	public function callWs_exportServiceOrders_downloadFiles_x($dataRequest)
 	{
 
 		log_message('INFO', 'NOVO DownloadFiles Model: exportServiceOrders Method Initialized');
@@ -71,10 +71,21 @@ class Novo_DownloadFiles_Model extends NOVO_Model {
 		$this->dataRequest->idOrden =$dataRequest->idOS;
 
 		$response = $this->sendToService('exportDetailServiceOrders');
+		$this->isResponseRc=-3;
 
-		if($response->rc==0){
-			exportFile($response->archivo,'pdf',str_replace(' ', '_', 'OrdenServicio'.date("d/m/Y H:i")));
+		switch ($this->isResponseRc) {
+			case 0:
+		  exportFile($response->archivo,'pdf',str_replace(' ', '_', 'OrdenServicio'.date("d/m/Y H:i")));
+		  break;
+			case -3:
+			$this->response->code = 3;
+			$this->response->title = 'Descarga de Archivos';
+			$this->response->msg = 'No fue posible descargar el archivo';
+			$this->response->data->resp['btn1']['link'] = base_url('consulta-orden-de-servicio');
 		}
+		return $this->responseToTheView('exportServiceOrders');
 	}
+
+
 
 }
