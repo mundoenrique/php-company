@@ -86,10 +86,11 @@ class Novo_Reports_Model extends NOVO_Model {
 
 		$this->dataAccessLog->modulo = 'Reportes';
 		$this->dataRequest->idOperation = $dataRequest->operation;
+		$this->dataRequest->rutaArchivo = DOWNLOAD_ROUTE;
 
 		switch ($dataRequest->operation) {
 			case 'repListadoTarjetas':
-				$this->ListadoTarjetas($dataRequest);
+				$this->cardsList($dataRequest);
 			break;
 			case 'repMovimientoPorEmpresa':
 				$this->className = 'ReporteCEOTO.class';
@@ -105,15 +106,8 @@ class Novo_Reports_Model extends NOVO_Model {
 			break;
 		}
 
-		$this->dataRequest->rutaArchivo = DOWNLOAD_ROUTE;
 
-		$response = $this->sendToService('GetReport: '.$dataRequest->operation);
 
-		switch($this->isResponseRc) {
-			case 0:
-				$this->response->code = 0;
-				break;
-		}
 		return $this->responseToTheView('GetReport: '.$dataRequest->operation);
 	}
 	/**
@@ -121,7 +115,7 @@ class Novo_Reports_Model extends NOVO_Model {
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date Janury 05th, 2020
 	 */
-	private function ListadoTarjetas($dataRequest)
+	private function cardsList($dataRequest)
 	{
 		log_message('INFO', 'NOVO Reports Model: repListadoTarjetas Method Initialized');
 
@@ -133,5 +127,20 @@ class Novo_Reports_Model extends NOVO_Model {
 			'rif' => $this->session->enterpriseInf->idFiscal
 		];
 
+		$response = $this->sendToService('GetReport: '.$dataRequest->operation);
+
+		switch($this->isResponseRc) {
+			case 0:
+				$this->response->code = 0;
+				break;
+			case -30:
+				$this->response->icon = lang('GEN_ICON_INFO');
+				$this->response->title = lang('REPORTS_TITLE');
+				$this->response->msg = lang('REPORTS_NO_CARDS');
+				$this->response->data['btn1']['action'] = 'close';
+				break;
+		}
+
+		return $this->response;
 	}
 }
