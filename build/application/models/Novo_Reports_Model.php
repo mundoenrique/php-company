@@ -131,10 +131,18 @@ class Novo_Reports_Model extends NOVO_Model {
 
 		switch($this->isResponseRc) {
 			case 0:
-				$this->response->code = 0;
-				$this->response->data = [
-					'file' => assetUrl('downloads/'.$response->bean)
-				];
+				$this->response->icon = lang('GEN_ICON_DANGER');
+				$this->response->title = lang('REPORTS_TITLE');
+				$this->response->msg = lang('REPORTS_NO_FILE_EXIST');
+				$this->response->data['btn1']['action'] = 'close';
+
+				if(file_exists(assetPath('downloads/'.$response->bean))) {
+					$this->response->code = 0;
+					$this->response->data = [
+						'file' => assetUrl('downloads/'.$response->bean),
+						'name' => $response->bean
+					];
+				}
 				break;
 			case -30:
 				$this->response->icon = lang('GEN_ICON_INFO');

@@ -103,7 +103,6 @@ $lang['GEN_FOTTER_BENEFITS'] = 'Beneficios';
 $lang['GEN_FOTTER_TERMS'] = 'Condiciones';
 $lang['GEN_FOTTER_RATES'] = 'Tarifas';
 $lang['GEN_FOTTER_LOGOUT'] = 'Salir';
-$lang['GEN_FOTTER_LOGOUT'] = 'Salir';
 $lang['GEN_FOTTER_OWNERSHIP'] = 'Powered by NovoPayment, Inc.';
 $lang['GEN_FOTTER_OWNER_URL'] = 'https://www.novopayment.com';
 $lang['GEN_FOTTER_RIGHTS'] = 'NovoPayment Inc. All rights reserved.';
