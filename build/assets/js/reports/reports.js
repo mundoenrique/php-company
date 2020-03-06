@@ -120,7 +120,7 @@ function getReport(data) {
 	var downloadFile = $('#download-file');
 	callNovoCore(verb, who, where, data, function (response) {
 		insertFormInput(false);
-		if(response.code !== '') {
+		if(response.code == 0) {
 			switch (data.operation) {
 				case 'repListadoTarjetas':
 					downloadFile.attr('href', response.data.file)

@@ -95,6 +95,6 @@ class Novo_DownloadFiles_Model extends NOVO_Model {
 		unlink(assetPath('downloads/'.$dataRequest->fileName));
 		$this->response->code = 0;
 		$this->response->data = '';
-		return $this->responseToTheView('exportServiceOrders');
+		return $this->responseToTheView('DeleteFile');
 	}
 }

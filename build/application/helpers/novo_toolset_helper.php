@@ -221,6 +221,7 @@ if(!function_exists('languajeLoad')) {
 					'deleteConfirmBulk'	=> ['bulk'],
 					'calculateServiceOrder'	=> ['bulk'],
 					'getReport'	=> ['reports'],
+					'deleteFile'	=> ['reports'],
 				];
 		}
 
