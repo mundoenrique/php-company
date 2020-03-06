@@ -12,7 +12,6 @@ class Novo_DownloadFiles_Model extends NOVO_Model {
 		parent:: __construct();
 		log_message('INFO', 'NOVO DownloadFiles Model Class Initialized');
 	}
-
 	/**
 	 * @info Elimina un lote
 	 * @author Luis Molina
@@ -20,14 +19,13 @@ class Novo_DownloadFiles_Model extends NOVO_Model {
 	 */
 	public function callWs_exportDetailServiceOrders_downloadFiles_x($dataRequest)
 	{
-
 		log_message('INFO', 'NOVO Inquiries Model: exportDetailServiceOrders Method Initialized');
 
 		$operation='';
 
-		if($dataRequest->file_type=='xls'){
+		if($dataRequest->file_type=='xls') {
 			$operation='detalleLoteExcel';
-		}else if ($dataRequest->file_type=='pdf'){
+		} else if ($dataRequest->file_type=='pdf') {
 			$operation='detalleLotePDF';
 		}
 
@@ -85,7 +83,18 @@ class Novo_DownloadFiles_Model extends NOVO_Model {
 		}
 		return $this->responseToTheView('exportServiceOrders');
 	}
+	/**
+	 * @info Elimina archivos descargados
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date March 06th, 2020
+	 */
+	public function callWs_DeleteFile_DownloadFiles($dataRequest)
+	{
+		log_message('INFO', 'NOVO DownloadFiles Model: DeleteFile Method Initialized');
 
-
-
+		unlink(assetPath('downloads/'.$dataRequest->fileName));
+		$this->response->code = 0;
+		$this->response->data = '';
+		return $this->responseToTheView('exportServiceOrders');
+	}
 }

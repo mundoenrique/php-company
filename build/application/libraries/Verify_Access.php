@@ -184,6 +184,7 @@ class Verify_Access {
 					break;
 				case 'getReportsList':
 				case 'getReport':
+				case 'deleteFile':
 					$auth = ($this->CI->session->has_userdata('productInf'));
 					break;
 			}

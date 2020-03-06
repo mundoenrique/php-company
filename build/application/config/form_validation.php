@@ -338,6 +338,13 @@ $config = [
 			'rules' => 'trim|regex_match[/^[\w]+$/i]'
 		]
 	],
+	'deleteFile' => [
+		[
+			'field' => 'fileName',
+			'label' => 'fileName',
+			'rules' => 'trim|regex_match[/^[\w.]+$/i]'
+		]
+	],
 	'keepSession' => [
 		[
 			'field' => 'modalReq',

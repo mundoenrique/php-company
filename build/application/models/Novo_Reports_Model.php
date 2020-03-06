@@ -128,12 +128,14 @@ class Novo_Reports_Model extends NOVO_Model {
 		];
 
 		$response = $this->sendToService('GetReport: '.$dataRequest->operation);
-
+		$this->isResponseRc = 0;
+		$response->bean = 'casa.xlsx';
 		switch($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
 				$this->response->data = [
-					'file' => assetUrl('downloads/'.$response->bean)
+					'file' => assetUrl('downloads/'.$response->bean),
+					'name' => $response->bean
 				];
 				break;
 			case -30:

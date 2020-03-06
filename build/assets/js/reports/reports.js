@@ -125,6 +125,11 @@ function getReport(data) {
 				case 'repListadoTarjetas':
 					downloadFile.attr('href', response.data.file)
 					document.getElementById('download-file').click()
+					who = 'DownloadFiles'; where = 'DeleteFile';
+					data = {
+						fileName: response.data.name
+					}
+					callNovoCore(verb, who, where, data, function (response) {})
 					break;
 
 				default:
