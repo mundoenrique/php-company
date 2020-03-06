@@ -117,9 +117,20 @@ $(function () {
 function getReport(data) {
 	insertFormInput(true);
 	verb = 'POST'; who = 'Reports'; where = 'getReport';
+	var downloadFile = $('#download-file');
 	callNovoCore(verb, who, where, data, function (response) {
-		$('.cover-spin').hide()
 		insertFormInput(false);
+		if(response.code !== '') {
+			switch (data.operation) {
+				case 'repListadoTarjetas':
+					downloadFile.attr('href', response.data.file)
+					document.getElementById('download-file').click()
+					break;
 
+				default:
+					break;
+			}
+		}
+		$('.cover-spin').hide();
 	})
 }
