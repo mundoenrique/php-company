@@ -136,7 +136,7 @@ $(function () {
 			classElement = classElement.substring(init, finish + 2);
 			if(filterOrder == substr && classU !== classElement) {
 				classU = classElement;
-				showPage.append("<span class='mx-1'><a href='javascript:' position='page' filter-page=" + filterOrder + "_>" + page + "</a></span>");
+				showPage.append('<span class="mx-1"><a href="javascript:" position="page" filter-page="'+filterOrder+'_">'+page+'</a></span>');
 				page++;
 			}
 		})
