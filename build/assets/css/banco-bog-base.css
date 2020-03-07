@@ -2312,7 +2312,7 @@ i[class*=" icon-"]:before {
   height: 4px;
   background: var(--yellow);
 	position: relative;
-	margin: -1px;
+	margin-top: -1.4px;
 }
 
 .main-nav-dropdown {
@@ -2372,6 +2372,13 @@ i[class*=" icon-"]:before {
   border-bottom: 1px solid var(--shadows-color);
 }
 
+.main-nav-dropdown li ul li:only-child {
+	border-bottom: none;
+	box-shadow: 1px 1px 3px 1px var(--primary-shade);
+	border-bottom-left-radius: 5px 5px;
+	border-bottom-right-radius: 5px 5px;
+}
+
 .main-nav-dropdown > ul {
   margin-top: 0;
   margin-bottom: 0;
@@ -2387,6 +2394,12 @@ i[class*=" icon-"]:before {
 .dropdown li a:hover {
    background: var(--primary-tint) !important;
    color: var(--secondary) !important;
+}
+
+.dropdown li:last-child a:hover,
+.main-nav ul li:last-child {
+  border-bottom-left-radius: 5px 5px;
+  border-bottom-right-radius: 5px 5px;
 }
 
 .dropdown li:nth-child(2) a:hover {
@@ -3778,3 +3791,7 @@ td > table.detail-lot {
 	height: 40px;
 }
 
+a#numberid {
+	cursor: pointer;
+	font-weight: bold;
+}

@@ -220,6 +220,8 @@ if(!function_exists('languajeLoad')) {
 					'authorizeBulk'	=> ['bulk'],
 					'deleteConfirmBulk'	=> ['bulk'],
 					'calculateServiceOrder'	=> ['bulk'],
+					'getReport'	=> ['reports'],
+					'deleteFile'	=> ['reports'],
 				];
 		}
 
@@ -266,5 +268,50 @@ if(!function_exists('setCurrentPage')) {
 				break;
 		}
 		return $cssClass;
+	}
+}
+
+
+if ( ! function_exists('exportFile')) {
+	/**
+	 * Helper que lanza al navegador la descarga de un documento.
+	 * Recibe como parametros los bytes del documento, el nombre y tipo de archivo.
+	 *
+	 * @param  byte $bytes
+	 * @return document
+	 */
+	function exportFile($file, $typeFile, $filename, $bytes = TRUE)
+	{
+
+		switch ($typeFile) {
+			case 'pdf':
+				header('Content-type: application/pdf');
+				header('Content-Disposition: attachment; filename='.$filename.'.pdf');
+				header('Pragma: no-cache');
+				header('Expires: 0');
+				break;
+			case 'xls':
+				header('Content-type: application/vnd.ms-excel');
+				header('Content-Disposition: attachment; filename='.$filename.'.xls');
+				header('Pragma: no-cache');
+				header('Expires: 0');
+				break;
+			case 'xlsx':
+				header('Content-type: application/vnd.ms-excel');
+				header('Content-Disposition: attachment; filename='.$filename.'.xlsx');
+				header('Pragma: no-cache');
+				header('Expires: 0');
+				break;
+			default:
+				break;
+		}
+
+		if($bytes) {
+			foreach ($file as $chr) {
+				echo chr($chr);
+			}
+		} else {
+			echo $file;
+		}
 	}
 }

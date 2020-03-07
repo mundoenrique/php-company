@@ -1,4 +1,5 @@
 <?php defined('BASEPATH') OR exit('No direct script access alloewd'); ?>
+
 <h1 class="primary h3 regular inline"><?= lang('GEN_SERVICE_ORDERS_TITLE'); ?></h1>
 <span class="ml-2 regular tertiary"><?= $productName ?></span>
 <div class="flex mb-2 items-center">
@@ -44,7 +45,7 @@
 							<div class="help-block "></div>
 						</div>
 						<div class="form-group col-4 col-lg-2 col-xl-3">
-							<label><?= lang('GEN_STATE'); ?></label>
+							<label><?= lang('GEN_TABLE_STATUS'); ?></label>
 							<select id="status-order" name="status-order" class="select-box custom-select flex h6 w-100 form-control">
 								<?php foreach($orderStatus AS $pos => $value): ?>
 								<option value="<?= $value->key; ?>" <?= $pos != 0 ? '' : 'selected disabled' ?>>
@@ -75,17 +76,17 @@
 					<table id="resultServiceOrders" class="cell-border h6 display">
 						<thead class="bg-primary secondary regular">
 							<tr>
-								<th><?= lang('GEN_TABLE_BULK_ORDER_NRO'); ?></th>
-								<th><?= lang('GEN_TABLE_BULK_DATE_2'); ?></th>
+								<th><?= lang('GEN_TABLE_ORDER_NRO'); ?></th>
+								<th><?= lang('GEN_TABLE_DATE'); ?></th>
 								<th><?= lang('GEN_TABLE_COMMISSION'); ?></th>
 								<th><?= lang('GEN_TABLE_VAT'); ?></th>
 								<th><?= lang('GEN_TABLE_AMOUNT_SO'); ?></th>
 								<th><?= lang('GEN_TABLE_DEPOSIT_AMOUNT'); ?></th>
-								<th><?= lang('GEN_TABLE_BULK_OPTIONS'); ?></th>
+								<th><?= lang('GEN_TABLE_OPTIONS'); ?></th>
 							</tr>
 						</thead>
 						<tbody>
-							<?php foreach($orderList AS $list): ?>
+							<?php	foreach($orderList AS $list): ?>
 							<tr bulk="<?= htmlspecialchars(json_encode($list->bulk), ENT_QUOTES, 'UTF-8'); ?>">
 								<td><?= $list->OrderNumber; ?></td>
 								<td><?= $list->Orderdate; ?></td>
@@ -94,10 +95,11 @@
 								<td><?= $list->OrderAmount; ?></td>
 								<td><?= $list->OrderDeposit; ?></td>
 								<td class="p-0 flex justify-center">
+								  <?php if($this->verify_access->verifyAuthorization('TEBORS')):?>
 									<button class="btn mx-1 px-0 details-control" title="<?= lang('GEN_BTN_SEE'); ?>" data-toggle="tooltip">
 										<i class="icon icon-find" aria-hidden="true"></i>
 									</button>
-									<?php if(!TRUE): ?>
+								  <?php endif; ?>
 									<button class="btn mx-1 px-0" title="<?= lang('GEN_BTN_DOWN_PDF'); ?>" data-toggle="tooltip">
 										<i class="icon icon-file-pdf" aria-hidden="true"></i>
 									</button>
@@ -106,7 +108,9 @@
 										<i class="icon icon-remove" aria-hidden="true"></i>
 									</button>
 									<?php endif; ?>
-									<?php endif; ?>
+									<form id="bulk-<?= $list->OrderNumber; ?>" method="POST">
+										<input type="hidden" name="idOS" value="<?= $list->OrderNumber; ?>">
+								  </form>
 								</td>
 							</tr>
 							<?php endforeach; ?>
@@ -121,7 +125,6 @@
 			</div>
 		</div>
 		<?php endif; ?>
-
 	</div>
 	<?php if($widget): ?>
 	<?php $this->load->view('widget/widget_enterprise-product_content'.$newViews, $widget) ?>

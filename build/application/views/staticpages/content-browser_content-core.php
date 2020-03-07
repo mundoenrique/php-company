@@ -4,7 +4,7 @@
 		<h2><?= $msg1 ?></h2>
 		<h2><?= $msg2 ?></h2>
 		<?php if($platform == 'browser'): ?>
-		<ul class="list-inline flex justify-between">
+		<ul class="list-inline w-list flex justify-between">
 			<li class="list-inline-item">
 				<img class="browser-img" src="<?= $this->asset->insertFile('icon-chrome.svg','images'); ?>" alt="Icono chrome">
 				<span class="browser-name">Google Chrome</span>
@@ -21,9 +21,14 @@
 				<span class="browser-version">Version 10+</span>
 			</li>
 			<li class="list-inline-item">
-				<img class="browser-img" src="<?= $this->asset->insertFile('icon-edge.svg','images'); ?>" alt="Icono safari">
+				<img class="browser-img" src="<?= $this->asset->insertFile('icon-edge.svg','images'); ?>" alt="Icono edge">
 				<span class="browser-name">Microsoft Edge</span>
 				<span class="browser-version">Version 14+</span>
+			</li>
+			<li class="list-inline-item">
+				<img class="browser-img" src="<?= $this->asset->insertFile('icon-explorer.svg','images'); ?>" alt="Icono explorer">
+				<span class="browser-name">Internet Explorer</span>
+				<span class="browser-version">Version 11+</span>
 			</li>
 		</ul>
 		<?php endif; ?>

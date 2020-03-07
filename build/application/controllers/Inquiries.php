@@ -37,6 +37,7 @@ class Inquiries extends NOVO_Controller {
 		$orderList = [];
 
 		if($this->session->flashdata('serviceOrdersList')) {
+			$this->session->set_flashdata('serviceOrdersList',$this->session->flashdata('serviceOrdersList'));
 			$orderList = $this->session->flashdata('serviceOrdersList');
 			$renderOrderList = TRUE;
 		}
@@ -51,4 +52,47 @@ class Inquiries extends NOVO_Controller {
 		$this->views = ['inquiries/'.$view];
 		$this->loadView($view);
 	}
+
+
+	/**
+	 * @info Método para renderizar el detalle de consulta de lotes
+	 * @author Luis Molina
+	 * @date Febrero 29Sat, 2020
+	 */
+	public function detailServiceOrders()
+	{
+		log_message('INFO', 'NOVO Inquiries: detailServiceOrders Method Initialized');
+
+		if(!isset($this->request->numberOrder)) {
+			redirect(base_url('detalle-producto'), 'location');
+		}
+
+		$view = lang('GEN_DETAIL_SERVICE_ORDERS');
+
+		if($this->session->flashdata('detailServiceOrdersList')) {
+			$this->session->set_flashdata('detailServiceOrdersList',$this->session->flashdata('detailServiceOrdersList'));
+			$response = $this->session->flashdata('detailServiceOrdersList');
+		} else {
+			$response = $this->loadModel($this->request);
+		}
+
+		$this->responseAttr($response);
+
+		array_push(
+			$this->includeAssets->cssFiles,
+			"third_party/dataTables-1.10.20"
+		);
+		array_push(
+			$this->includeAssets->jsFiles,
+			"third_party/dataTables-1.10.20",
+			"inquiries/detail_service_orders",
+			"business/widget-enterprise"
+		);
+
+		$this->render->detail = $response;
+		$this->render->titlePage = lang('GEN_DETAIL_SERVICE_ORDERS_TITLE');
+		$this->views = ['inquiries/'.$view];
+		$this->loadView($view);
+	}
+
 }

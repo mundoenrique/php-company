@@ -261,6 +261,54 @@ $config = [
 			'rules' => 'trim|regex_match[/^([\w,]*)+$/i]'
 		]
 	],
+	'clearServiceOrders' => [
+		[
+			'field' => 'idOS',
+			'label' => 'idOS',
+			'rules' => 'trim|regex_match[/^([\w]+)+$/i]'
+		],
+		[
+			'field' => 'pass',
+			'label' => 'pass',
+			'rules' => 'trim|required'
+		]
+	],
+	'detailServiceOrders' => [
+		[
+			'field' => 'numberOrder',
+			'label' => 'numberOrder',
+			'rules' => 'trim|required'
+		]
+	],
+	'exportDetailServiceOrderssss' => [
+		[
+			'field' => 'data_lote',
+			'label' => 'data_lote',
+			'rules' => 'trim|required'
+		],
+		[
+			'field' => 'file_type',
+			'label' => 'file_type',
+			'rules' => 'trim|required'
+		],
+	],
+	'exportFiles' => [
+		[
+			'field' => 'idOS',
+			'label' => 'idOS',
+			'rules' => 'trim|regex_match[/^([\w]+)+$/i]'
+		],
+		[
+			'field' => 'who',
+			'label' => 'who',
+			'rules' => 'trim|regex_match[/^([\w]+)+$/i]'
+		],
+		[
+			'field' => 'where',
+			'label' => 'where',
+			'rules' => 'trim|regex_match[/^([\w]+)+$/i]'
+		]
+		],
 	'getServiceOrders' => [
 		[
 			'field' => 'initialDate',
@@ -281,6 +329,20 @@ $config = [
 			'field' => 'statusText',
 			'label' => 'statusText',
 			'rules' => 'trim|regex_match[/^[\w -]+$/i]'
+		]
+	],
+	'getReport' => [
+		[
+			'field' => 'operation',
+			'label' => 'operation',
+			'rules' => 'trim|regex_match[/^[\w]+$/i]'
+		]
+	],
+	'deleteFile' => [
+		[
+			'field' => 'fileName',
+			'label' => 'fileName',
+			'rules' => 'trim|regex_match[/^[\w.]+$/i]'
 		]
 	],
 	'keepSession' => [
