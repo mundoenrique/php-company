@@ -43,6 +43,10 @@ class Tool_Browser {
 
 				$browser = TRUE;
 				$valid = floatval($this->CI->agent->version()) > $validBrowser[$this->CI->agent->browser()];
+
+				if($valid && $client === 'banco-bog' && $this->CI->agent->browser() === 'Internet Explorer') {
+					$valid = 'ie11';
+				}
 			}
 		}
 
@@ -93,7 +97,6 @@ class Tool_Browser {
 
 			$this->CI->session->set_flashdata('messageBrowser', $message);
 		}
-
 
 		return $valid;
 	}
