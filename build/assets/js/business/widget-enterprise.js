@@ -59,7 +59,8 @@ $(function() {
 				if(prod.id == prefix && currentIdFiscal == idFiscal) {
 					return;
 				}
-				WidgetSelcetP.append(`<option value="${prod.id}" brand="${prod.brand}">${prod.desc}</option>`);
+				WidgetSelcetP.append("<option value=" + prod.id + " brand=" + prod.brand + ">" + prod.desc + "</option>");
+				// WidgetSelcetP.append(`<option value="${prod.id}" brand="${prod.brand}">${prod.desc}</option>`);
 			});
 			WidgetSelcetP.prop('disabled', false);
 		}
@@ -82,16 +83,24 @@ $(function() {
 		insertFormInput(true, enterpriseWidgetForm);
 		$(this).html(loader);
 		$(this).find('span').addClass('spinner-border-sm');
-		enterpriseWidgetForm.append(`<input type="hidden" name="enterpriseCode" value="${enterpriseCode}">`);
-		enterpriseWidgetForm.append(`<input type="hidden" name="enterpriseGroup" value="${enterpriseGroup}">`);
-		enterpriseWidgetForm.append(`<input type="hidden" name="idFiscal" value="${idFiscal}">`);
-		enterpriseWidgetForm.append(`<input type="hidden" name="enterpriseName" value="${enterpriseName}">`);
+		// enterpriseWidgetForm.append(`<input type="hidden" name="enterpriseCode" value="${enterpriseCode}">`);
+		// enterpriseWidgetForm.append(`<input type="hidden" name="enterpriseGroup" value="${enterpriseGroup}">`);
+		// enterpriseWidgetForm.append(`<input type="hidden" name="idFiscal" value="${idFiscal}">`);
+		// enterpriseWidgetForm.append(`<input type="hidden" name="enterpriseName" value="${enterpriseName}">`);
+		enterpriseWidgetForm.append("<input type='hidden' name='enterpriseCode' value=" + enterpriseCode + ">");
+		enterpriseWidgetForm.append("<input type='hidden' name='enterpriseGroup' value=" + enterpriseGroup + ">");
+		enterpriseWidgetForm.append("<input type='hidden' name='idFiscal' value=" + idFiscal + ">");
+		enterpriseWidgetForm.append("<input type='hidden' name='enterpriseName' value=" + enterpriseName + ">");
 
 		if(goToDetail) {
-			enterpriseWidgetForm.append(`<input type="hidden" name="productPrefix" value="${productPrefix}">`);
-			enterpriseWidgetForm.append(`<input type="hidden" name="productName" value="${productName}">`);
-			enterpriseWidgetForm.append(`<input type="hidden" name="productBrand" value="${productBrand}">`);
-			enterpriseWidgetForm.append(`<input type="hidden" name="goToDetail" value="active">`);
+			// enterpriseWidgetForm.append(`<input type="hidden" name="productPrefix" value="${productPrefix}">`);
+			// enterpriseWidgetForm.append(`<input type="hidden" name="productName" value="${productName}">`);
+			// enterpriseWidgetForm.append(`<input type="hidden" name="productBrand" value="${productBrand}">`);
+			// enterpriseWidgetForm.append(`<input type="hidden" name="goToDetail" value="active">`);
+			enterpriseWidgetForm.append("<input type='hidden' name='productPrefix' value=" + productPrefix + ">");
+			enterpriseWidgetForm.append("<input type='hidden' name='productName' value=" + productName + ">");
+			enterpriseWidgetForm.append("<input type='hidden' name='productBrand' value=" + productBrand + ">");
+			enterpriseWidgetForm.append("<input type='hidden' name='goToDetail' value='active'>");
 		}
 
 		enterpriseWidgetForm.submit();
