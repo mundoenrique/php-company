@@ -929,7 +929,7 @@ textarea.form-control {
 	display: block;
 	position: absolute;
 	right: 0;
-	top: 0;
+	top: 1;
 	padding: 0;
 	margin: 0;
 	line-height: 21px;
@@ -963,10 +963,10 @@ textarea.form-control {
 }
 
 
-.sb-search.sb-search-open,
+/* .sb-search.sb-search-open,
 .no-js .sb-search {
 	width: 100%;
-}
+} */
 
 .sb-search.sb-search-open .sb-icon-search,
 .no-js .sb-search .sb-icon-search {
