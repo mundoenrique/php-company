@@ -2889,7 +2889,7 @@ table#resultsAccount thead th:nth-child(7){
 
 .widget {
 	background-color: #f4f4f4;
-	box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
+	box-shadow: 0 2px 4px 1px rgba(0,0,0,.2);
 	padding: 24px;
     width: 255px;
     z-index: 1;
