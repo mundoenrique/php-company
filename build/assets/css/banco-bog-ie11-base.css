@@ -385,7 +385,7 @@ textarea.form-control {
 /* Select */
 
 .custom-select {
-	display: inline-block;
+	display: block;
 	padding-right: 1.75rem;
 	background: rgba(255,255,255,1) url("../images/bdb/icon-chevron_down_gray.svg") right .75rem center / 14px 14px no-repeat;
   -webkit-appearance: none;
@@ -395,7 +395,7 @@ textarea.form-control {
 }
 
 .custom-select:hover:not(:disabled) {
-	display: inline-block;
+	display: block;
 	padding-right: 1.75rem;
 	background: rgba(255,255,255,1) url("../images/bdb/icon-chevron_down_blue.svg") right .75rem center / 14px 14px no-repeat;
   -webkit-appearance: none;
