@@ -174,7 +174,6 @@ class NOVO_Controller extends CI_Controller {
 				"third_party/jquery-3.4.0",
 				"third_party/jquery-ui-1.12.1",
 				"third_party/aes",
-				"third_party/modernizr",
 				"aes-json-format",
 				"helper"
 			];
