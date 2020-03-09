@@ -20,7 +20,9 @@ class Inquiries extends NOVO_Controller {
 	public function serviceOrders()
 	{
 		log_message('INFO', 'NOVO Inquiries: serviceOrders Method Initialized');
+
 		$view = lang('GEN_SERVICE_ORDERS');
+
 		array_push(
 			$this->includeAssets->cssFiles,
 			"third_party/dataTables-1.10.20"
@@ -37,7 +39,7 @@ class Inquiries extends NOVO_Controller {
 		$orderList = [];
 
 		if($this->session->flashdata('serviceOrdersList')) {
-			$this->session->set_flashdata('serviceOrdersList',$this->session->flashdata('serviceOrdersList'));
+			//$this->session->set_flashdata('serviceOrdersList',$this->session->flashdata('serviceOrdersList'));
 			$orderList = $this->session->flashdata('serviceOrdersList');
 			$renderOrderList = TRUE;
 		}
@@ -63,15 +65,14 @@ class Inquiries extends NOVO_Controller {
 	{
 		log_message('INFO', 'NOVO Inquiries: detailServiceOrders Method Initialized');
 
-		if(!isset($this->request->numberOrder)) {
+		/*if(!isset($this->request->numberOrder)) {
 			redirect(base_url('detalle-producto'), 'location');
-		}
+		}*/
 
 		$view = lang('GEN_DETAIL_SERVICE_ORDERS');
 
-		if($this->session->flashdata('detailServiceOrdersList')) {
-			$this->session->set_flashdata('detailServiceOrdersList',$this->session->flashdata('detailServiceOrdersList'));
-			$response = $this->session->flashdata('detailServiceOrdersList');
+		if($this->session->flashdata('detail')) {
+			$response = $this->session->flashdata('detail');
 		} else {
 			$response = $this->loadModel($this->request);
 		}
