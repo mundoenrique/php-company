@@ -19,7 +19,10 @@ $(function () {
 
 	$("#reports").change(function () {
 		$('#form-report').trigger("reset")
-		$('#form-report input, #form-report select').prop('disabled', true);
+		$('#form-report input, #form-report select')
+		.removeClass('has-error')
+		.prop('disabled', true);
+		$('.help-block').text('');
 		reportSelected = $(this).val()
 
 		if ($(this).val() == "repListadoTarjetas") {
