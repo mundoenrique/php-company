@@ -97,6 +97,7 @@ $(function() {
 				status: statusOrder.val(),
 				statusText: statusOrder.find('option:selected').text()
 			}
+
 			insertFormInput(true);
 			verb = 'POST'; who = 'Inquiries'; where = 'GetServiceOrders';
 			callNovoCore(verb, who, where, data, function(response) {
@@ -125,9 +126,6 @@ $(function() {
 				form.append('<input type="hidden" name="views" value="serviceOrders">');
 				form.append('<input type="hidden" name="who" value="Inquiries">');
 				form.append('<input type="hidden" name="where" value="exportFiles">');
-				break;
-			case lang.GEN_BTN_CONFIRM:
-				form.attr('action', baseURL+'confirmar-lote');
 				break;
 			case lang.GEN_BTN_CANCEL_ORDER:
 				var oldID = $('#accept').attr('id');
