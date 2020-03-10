@@ -13,10 +13,9 @@ $(document).click(function () {
 });
 
 searchBox.click(function () {
-	event.stopPropagation();
 });
 
 searchIcon.click(function () {
-	event.stopPropagation();
 	searchBox.toggleClass('sb-search-open');
 });
+
