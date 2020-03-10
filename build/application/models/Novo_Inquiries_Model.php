@@ -233,13 +233,12 @@ class Novo_Inquiries_Model extends NOVO_Model {
 	}
 
 	/**
-	 * @info Elimina un lote
+	 * @info Consulta detalle ordenes de servicios
 	 * @author Luis Molina
-	 * @date febrero 27 th, 2020
+	 * @date Mar 10 Tue, 2020
 	 */
 	public function callWs_DetailServiceOrders_Inquiries($dataRequest)
 	{
-
 		log_message('INFO', 'NOVO Inquiries Model: DetailServiceOrders Method Initialized');
 
 		$this->dataAccessLog->modulo = 'lotes';
@@ -256,9 +255,6 @@ class Novo_Inquiries_Model extends NOVO_Model {
 		if(isset($dataRequest->refresh)){
 			$refresh=$dataRequest->refresh;
 		}
-
-		echo 'refresh'.$refresh;
-		//exit;
 
 		$definitive['acrif'] = $response->acrif;
 		$definitive['acnomcia'] = $response->acnomcia;
@@ -282,13 +278,11 @@ class Novo_Inquiries_Model extends NOVO_Model {
 
 		switch ($this->isResponseRc) {
 			case 0:
-
 				if($refresh==FALSE){
 					$this->response->code = 0;
 				}
-
 				$this->response->detail= (object) $definitive;
-				$this->session->set_flashdata('detail',$this->response);
+				$this->session->set_flashdata('detailServiceOrders',$this->response);
 				break;
 		}
 			if($refresh==FALSE){
@@ -297,9 +291,9 @@ class Novo_Inquiries_Model extends NOVO_Model {
 	}
 
 	/**
-	 * @info Elimina un lote
+	 * @info Exporta archivo .pdf en ordenes de servicios
 	 * @author Luis Molina
-	 * @date febrero 27 th, 2020
+	 * @date Mar 10 Tue, 2020
 	 */
 	public function callWs_exportFiles_Inquiries($dataRequest)
 	{
@@ -322,6 +316,12 @@ class Novo_Inquiries_Model extends NOVO_Model {
 
 		$response = $this->sendToService('exportFiles');
 
+		$this->dataRequest->initialDate =$dataRequest->initialDate;
+		$this->dataRequest->finalDate = $dataRequest->finalDate;
+		$this->dataRequest->status = $dataRequest->status;
+		$this->dataRequest->statusText = $dataRequest->statusText;
+		$this->callWs_GetServiceOrdersRefresh_Inquiries($this->dataRequest);
+
 		$this->isResponseRc=-3;
 
 		switch ($this->isResponseRc) {
@@ -329,29 +329,23 @@ class Novo_Inquiries_Model extends NOVO_Model {
 			exportFile($response->archivo,'pdf',str_replace(' ', '_', 'OrdenServicio'.date("d/m/Y H:i")));
 			break;
 			default:
-			$this->dataRequest->initialDate =$dataRequest->initialDate;
-			$this->dataRequest->finalDate = $dataRequest->finalDate;
-			$this->dataRequest->status = $dataRequest->status;
-			$this->dataRequest->statusText = $dataRequest->statusText;
-			$this->callWs_GetServiceOrdersRefresh_Inquiries($this->dataRequest);
-
 			$this->response->code = 3;
-			$this->response->title = 'Descarga de Archivos';
-			$this->response->msg = 'No fue posible descargar el archivo';
-			$this->response->data->resp['btn1']['link'] = base_url('consulta-orden-de-servicio');
+			$this->response->title = lang('GEN_DOWNLOAD_FILE');
+			$this->response->msg = lang('GEN_WARNING_DOWNLOAD_FILE');
+			$this->response->icon = lang('GEN_ICON_WARNING');
+			$this->response->data->resp['btn1']['action'] = 'close';
+			$this->session->set_flashdata('response-order',$this->response);
+			redirect(base_url('consulta-orden-de-servicio'), 'location');
 		}
-
-		return $this->responseToTheView('exportFiles');
 	}
 
 	/**
-	 * @info Elimina un lote
+	 * @info Exporta archivo .pdf,.xls en detalle ordenes de servicios
 	 * @author Luis Molina
-	 * @date febrero 27 th, 2020
+	 * @date Mar 10 Tue, 2020
 	 */
 	public function callWs_DetailExportFiles_Inquiries($dataRequest)
 	{
-
 		log_message('INFO', 'NOVO Inquiries Model: DetailExportFiles Method Initialized');
 
 		$operation='';
@@ -368,26 +362,28 @@ class Novo_Inquiries_Model extends NOVO_Model {
 		$this->className = 'com.novo.objects.TOs.LoteTO';
 		$this->dataRequest->idOperation = $operation;
 		$this->dataRequest->acidlote =$dataRequest->data_lote;
+		$this->dataRequest->numberOrder=$dataRequest->data_lote;
+		$this->dataRequest->refresh=TRUE;
 
 		$response = $this->sendToService('DetailExportFiles');
 
-		//$this->isResponseRc=-1;
+		$this->callWs_DetailServiceOrders_Inquiries($this->dataRequest);
+
+		$this->isResponseRc=-3;
 
 		switch ($this->isResponseRc) {
 			case 0:
-				exportFile($response->archivo,$dataRequest->file_type,$response->nombre);
+			exportFile($response->archivo,$dataRequest->file_type,$response->nombre);
 			break;
 			default:
-			$this->dataRequest->numberOrder = $dataRequest->data_lote;
-			//$this->dataRequest->refresh = TRUE;
-			//$this->callWs_DetailServiceOrders_Inquiries($this->dataRequest);
-
 			$this->response->code = 3;
-			$this->response->title = 'Descarga de Archivos';
-			$this->response->msg = 'No fue posible descargar el archivo';
-			$this->response->data->resp['btn1']['link'] = base_url('detalle-orden-de-servicio');
+			$this->response->title = lang('GEN_DOWNLOAD_FILE');
+			$this->response->msg = lang('GEN_WARNING_DOWNLOAD_FILE');
+			$this->response->icon = lang('GEN_ICON_WARNING');
+			$this->response->data->resp['btn1']['action'] = 'close';
+			$this->session->set_flashdata('response-msg-detail-order',$this->response);
+			redirect(base_url('detalle-orden-de-servicio'), 'location');
 		}
-		return $this->responseToTheView('exportFiles');
 	}
 
 	/**
@@ -397,7 +393,6 @@ class Novo_Inquiries_Model extends NOVO_Model {
 	 */
 	public function callWs_GetServiceOrdersRefresh_Inquiries($dataRequest)
 	{
-
 		log_message('INFO', 'NOVO Inquiries Model: ServiceOrderStatus Method Initialized');
 		$this->className = 'com.novo.objects.MO.ListadoOrdenServicioMO';
 
@@ -467,10 +462,8 @@ class Novo_Inquiries_Model extends NOVO_Model {
 								break;
 						}
 					}
-
 					$serviceOrdersList[] = (object) $serviceOrders;
 				}
-
 				$this->session->set_flashdata('serviceOrdersList', $serviceOrdersList);
 	}
 }
