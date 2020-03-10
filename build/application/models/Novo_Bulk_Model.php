@@ -707,7 +707,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 				switch($response->ctipolote) {
 					case '1':
 						if(isset($response->registrosLoteEmision) && count($response->registrosLoteEmision) > 0) {
-							$bulkRecordsHeader = ['DNI', 'Nombres y apellidos', 'Estado'];
+							$bulkRecordsHeader = [lang('GEN_TABLE_DNI'), 'Nombres y apellidos', 'Estado'];
 							$detailInfo['bulkHeader'] = $bulkRecordsHeader;
 
 							foreach($response->registrosLoteEmision AS $records) {
@@ -746,10 +746,10 @@ class Novo_Bulk_Model extends NOVO_Model {
 					case '5':
 					case 'L':
 						if(isset($response->registrosLoteRecarga) && count($response->registrosLoteRecarga) > 0) {
-							$bulkRecordsHeader = ['DNI', 'Monto', 'Número de cuenta'];
+							$bulkRecordsHeader = [lang('GEN_TABLE_DNI'), lang('GEN_TABLE_AMOUNT'), lang('GEN_TABLE_ACCOUNT_NUMBER')];
 
 							if($response->ctipolote == '5' || $response->ctipolote == 'L') {
-								$bulkRecordsHeader = ['DNI', 'Monto', 'Número de cuenta', 'Estado'];
+								$bulkRecordsHeader = [lang('GEN_TABLE_DNI'), lang('GEN_TABLE_AMOUNT'), lang('GEN_TABLE_ACCOUNT_NUMBER'), lang('GEN_TABLE_STATUS')];
 							}
 
 							$detailInfo['bulkHeader'] = $bulkRecordsHeader;

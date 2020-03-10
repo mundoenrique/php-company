@@ -120,6 +120,9 @@ $(function() {
 		insertFormInput(true, form);
 
 		switch(action) {
+			case lang.GEN_BTN_DOWN_PDF:
+				form.attr('action', baseURL+'descargar-archivo-os');
+				break;
 			case lang.GEN_BTN_CONFIRM:
 				form.attr('action', baseURL+'confirmar-lote');
 				form.append('<input type="hidden" name="bulkView" value="confirm">');
@@ -154,6 +157,11 @@ $(function() {
 		}
 
 		insertFormInput(false);
+
+		if(action == lang.GEN_BTN_DOWN_PDF) {
+			form.submit();
+		}
+
 	});
 
 })
@@ -164,7 +172,7 @@ function format (bulk) {
 	bulk = JSON.parse(bulk)
 	$.each(bulk, function(key, value){
 		body+= '<tr>';
-		body+= 	'<td ><a id=numberid>'+value.bulkNumber+'</a></td>';
+		body+= 	'<td ><a id=numberid class="btn-link">'+value.bulkNumber+'</a></td>';
 		body+= 	'<td>'+value.bulkLoadDate+'</td>';
 		body+= 	'<td>'+value.bulkLoadType+'</td>';
 		body+= 	'<td>'+value.bulkRecords+'</td>';
@@ -180,10 +188,10 @@ function format (bulk) {
 	table+= 		'<tr class="bold" style="margin-left: 0px;">';
 	table+= 			'<td>'+lang.GEN_TABLE_BULK_NUMBER+'</td>';
 	table+= 			'<td>'+lang.GEN_TABLE_BULK_DATE+'</td>';
-	table+= 			'<td>'+lang.GEN_TABLE_BULK_TYPE+'</td>';
-	table+= 			'<td>'+lang.GEN_TABLE_BULK_RECORDS+'</td>';
-	table+= 			'<td>'+lang.GEN_TABLE_BULK_STATUS+'</td>';
-	table+= 			'<td>'+lang.GEN_TABLE_BULK_AMOUNT+'</td>';
+	table+= 			'<td>'+lang.GEN_TABLE_TYPE+'</td>';
+	table+= 			'<td>'+lang.GEN_TABLE_RECORDS+'</td>';
+	table+= 			'<td>'+lang.GEN_TABLE_STATUS+'</td>';
+	table+= 			'<td>'+lang.GEN_TABLE_AMOUNT+'</td>';
 	table+= 			'<td>'+lang.GEN_TABLE_COMMISSION+'</td>';
 	table+= 			'<td>'+lang.GEN_TABLE_DEPOSIT_AMOUNT+'</td>';
 	table+= 		'</tr>';
