@@ -24,6 +24,7 @@ class NOVO_Controller extends CI_Controller {
 	protected $appUserName;
 	protected $greeting;
 	protected $products;
+	private $ValidateBrowser;
 
 	public function __construct()
 	{
@@ -51,6 +52,7 @@ class NOVO_Controller extends CI_Controller {
 		$this->render->sessionTime = $this->config->item('session_time');
 		$this->render->callModal = $this->render->sessionTime < 180000 ? ceil($this->render->sessionTime * 50 / 100) : 15000;
 		$this->render->callServer = $this->render->callModal;
+		$this->ValidateBrowser = FALSE;
 		$this->optionsCheck();
 	}
 	/**
@@ -69,10 +71,7 @@ class NOVO_Controller extends CI_Controller {
 		$this->render->newViews = $this->config->item('new-views');
 		$this->form_validation->set_error_delimiters('', '---');
 		$this->config->set_item('language', 'spanish-base');
-
-		if(in_array($this->rule, ['login', 'recoverPass'])) {
-			$this->checkBrowser();
-		}
+		$this->ValidateBrowser = $this->checkBrowser();
 
 		if($this->session->has_userdata('time')) {
 			$customerTime = $this->session->time->customerTime;
@@ -145,21 +144,16 @@ class NOVO_Controller extends CI_Controller {
 			$this->render->novoCook = $this->security->get_csrf_hash();
 			$this->session->set_userdata('countryUri', $this->countryUri);
 
-			switch($this->countryUri) {
-				case 'bp':
-					$structure = 'pichincha';
-					break;
-				default:
-					$structure = 'novo';
-			}
-
-			if($this->skin !== 'pichincha') {
-				$structure = 'novo';
-			}
-
 			$this->includeAssets->cssFiles = [
 				"$this->skin-base"
 			];
+
+			if(gettype($this->ValidateBrowser) !== 'boolean') {
+				array_push(
+					$this->includeAssets->cssFiles,
+					"$this->skin-$this->ValidateBrowser-base"
+				);
+			}
 
 			if($this->render->newViews === '-core') {
 				array_unshift(
@@ -271,7 +265,10 @@ class NOVO_Controller extends CI_Controller {
 
 		if(!$valid) {
 			redirect(base_url('sugerencia'),'location', 301);
+			exit();
 		}
+
+		return $valid;
 	}
 	/**
 	 * Método para renderizar una vista
