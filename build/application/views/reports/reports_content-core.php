@@ -21,16 +21,13 @@
 					<div class="row flex items-center justify-between">
 						<div class="form-group col-6 col-xl-6">
 							<label>Tipo de reporte</label>
-							<select id="reports" class="select-box custom-select flex h6 w-100">
+							<select id="reports" name="reports" class="select-box custom-select flex h6 w-100">
 								<?php foreach($reportsList AS $pos => $value): ?>
 								<option value="<?= $value->key; ?>" <?= $pos != 0 ? '' : 'selected disabled' ?> type="<?= !isset($value->type) ?: $value->type; ?>">
 									<?= $value->text; ?>
 								</option>
 								<?php endforeach; ?>
-								<!-- <option disabled selected>Seleccionar</option>
-								<option value="customer-movements">Movimientos de clientes</option>
-								<option value="customer-card-movements">Movimientos de tarjetas clientes</option>
-								<option value="card-inquiry">Consulta de tarjetas</option>
+								<!-- <option value="card-inquiry">Consulta de tarjetas</option>
 								<option value="proof-food">Comprobante alimentación</option>
 								<option value="customer-extract">Extracto de cliente</option>
 								<option value="lock-query">Consulta de Desbloqueo/Bloqueos</option>
@@ -42,7 +39,7 @@
 							<div class="flex items-start justify-end">
 								<button id="btn-download" class="flex items-baseline btn btn-link btn-small big-modal">
 									<i aria-hidden="true" class="icon icon-download"></i>
-									&nbsp;Descargar
+									&nbsp;<?= lang('GEN_BTN_DOWNLOAD'); ?>
 								</button>
 							</div>
 						</div>
@@ -53,28 +50,84 @@
 		</div>
 
 		<div class="flex pb-5 flex-column">
-			<span id="search-criteria" class="no-select none line-text mb-2 h4 semibold primary">Criterio de búsqueda</span>
+			<span id="search-criteria" class="no-select none line-text mb-2 h4 semibold primary"><?= lang('GEN_SEARCH_CRITERIA') ?></span>
 			<div class="flex my-2 px-5">
 				<form id="form-report" method="post" class="no-select reports-form w-100 none">
-					<div id="customer-card-movements" class="no-select row">
+					<div id="repMovimientoPorEmpresa" class="no-select row">
 						<div class="form-group col-4">
-							<label for="datepicker_start">Fecha inicio</label>
-							<input id="datepicker_start" class="form-control" name="datepicker" type="text" readonly placeholder="DD/MM/AAAA">
+							<label for="enterpriseDateBegin"><?= lang('GEN_START_DAY'); ?></label>
+							<input id="enterpriseDateBegin" class="form-control date-picker" name="datepicker_start" type="text" readonly placeholder="DD/MM/AAAA"
+								disabled>
 							<div class="help-block"></div>
 						</div>
 						<div class="form-group col-4">
-							<label for="datepicker_end">Fecha fin</label>
-							<input id="datepicker_end" class="form-control" name="datepicker" type="text" readonly placeholder="DD/MM/AAAA">
+							<label for="enterpriseDateEnd"><?= lang('GEN_END_DAY'); ?></label>
+							<input id="enterpriseDateEnd" class="form-control date-picker" name="datepicker_end" type="text" readonly placeholder="DD/MM/AAAA"
+								disabled>
 							<div class="help-block"></div>
 						</div>
 						<div class="flex items-center justify-end col-4">
-							<button class="btn btn-primary btn-small btn-loading">
+							<button class="btn-report btn btn-primary btn-small btn-loading">
+								<?= lang('GEN_BTN_SEARCH'); ?>
+							</button>
+						</div>
+					</div>
+
+					<div id="repTarjetasPorPersona" class="no-select row" style="">
+						<div class="form-group col-4">
+							<label>Tipo de identificacion</label>
+							<select name="id-type" class="select-box custom-select flex h6 w-100" disabled>
+								<?php foreach($IdTypeList AS $pos => $value): ?>
+								<option value="<?= $value->key; ?>" <?= $pos != 0 ? '' : 'selected disabled' ?>>
+									<?= $value->text; ?>
+								</option>
+								<?php endforeach; ?>
+							</select>
+							<div class="help-block"></div>
+						</div>
+
+						<div class="form-group col-4">
+							<label for="idNumber">Número de identificación</label>
+							<input id="idNumber" name="id-number" class="form-control" type="text" autocomplete="off"	disabled>
+							<div class="help-block"></div>
+						</div>
+
+						<div class="flex items-center justify-end col-4">
+							<button class="btn-report btn btn-primary btn-small btn-loading">
 								Buscar
 							</button>
 						</div>
 					</div>
 
-					<div id="card-inquiry" class="no-select row">
+					<div id="repTarjeta" class="no-select row" style="">
+
+						<div class="form-group col-4">
+							<label for="numbercard">Número de tarjeta</label>
+							<input id="numberCard" name="number-card" class="form-control" type="text" autocomplete="off"	disabled>
+							<div class="help-block"></div>
+						</div>
+
+						<div class="flex items-center justify-end col-8">
+							<button class="btn-report btn btn-primary btn-small btn-loading">
+								Buscar
+							</button>
+						</div>
+					</div>
+
+					<div id="repComprobantesVisaVale" class="no-select row">
+						<div class="form-group col-6 col-lg-4">
+							<label for="datepicker">Fecha</label>
+							<input id="date" class="form-control month-year" name="selected-date" type="text" readonly placeholder="MMMM AAAA" disabled>
+							<div class="help-block"></div>
+						</div>
+						<div class="flex items-center justify-end col-6 col-lg-8">
+							<button class="btn-report btn btn-primary btn-small btn-loading">
+								Buscar
+							</button>
+						</div>
+					</div>
+
+					<!-- <div id="card-inquiry" class="no-select row">
 						<div class="form-group col-4">
 							<label>Tipo de identificacion</label>
 							<select class="select-box custom-select flex h6 w-100">
@@ -88,24 +141,24 @@
 
 						<div class="form-group col-4">
 							<label for="id-number">Numero de identificación</label>
-							<input id="id-number" name="id-number" class="form-control" type="text">
+							<input id="id-number" name="id-number" class="form-control" type="text" disabled>
 							<div class="help-block"></div>
 						</div>
 
 						<div class="form-group col-4">
 							<label for="card-number">Numero de tarjeta</label>
-							<input id="card-number" name="card-number" class="form-control" type="text">
+							<input id="card-number" name="card-number" class="form-control" type="text" disabled>
 							<div class="help-block"></div>
 						</div>
 
 						<div class="form-group col-4">
 							<label for="datepicker_start">Fecha inicio</label>
-							<input id="datepicker_start" class="form-control" name="datepicker" type="text" readonly placeholder="DD/MM/AAAA">
+							<input id="datepicker_start" class="form-control date-picker" name="datepicker" type="text" readonly placeholder="DD/MM/AAAA" disabled>
 							<div class="help-block"></div>
 						</div>
 						<div class="form-group col-4">
 							<label for="datepicker_end">Fecha fin</label>
-							<input id="datepicker_end" class="form-control" name="datepicker" type="text" readonly placeholder="DD/MM/AAAA">
+							<input id="datepicker_end" class="form-control date-picker" name="datepicker" type="text" readonly placeholder="DD/MM/AAAA" disabled>
 							<div class="help-block"></div>
 						</div>
 						<div class="flex items-center justify-end col-4">
@@ -119,7 +172,7 @@
 						<div class="row">
 							<div class="form-group col-6 col-lg-4">
 								<label for="card-number">Numero de tarjeta</label>
-								<input id="card-number" name="card-number" class="form-control" type="text">
+								<input id="card-number" name="card-number" class="form-control" type="text" disabled>
 								<div class="help-block"></div>
 							</div>
 
@@ -240,7 +293,8 @@
 								Buscar
 							</button>
 						</div>
-					</div>
+					</div> -->
+
 				</form>
 			</div>
 

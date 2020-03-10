@@ -36,7 +36,13 @@ class Reports extends NOVO_Controller {
 		);
 		$responseReports = $this->loadModel($this->request);
 		$this->responseAttr($responseReports);
-		$this->render->reportsList = $responseReports->data->reportsList;
+
+		foreach($responseReports->data AS $index => $render) {
+			if($index !== 'resp') {
+				$this->render->$index = $render;
+			}
+		}
+
 		$this->render->titlePage = 'Reportes';
 		$this->views = ['reports/'.$view];
 		$this->loadView($view);

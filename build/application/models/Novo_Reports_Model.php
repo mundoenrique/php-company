@@ -20,6 +20,7 @@ class Novo_Reports_Model extends NOVO_Model {
 	public function callWs_GetReportsList_Reports()
 	{
 		log_message('INFO', 'NOVO Reports Model: ReporstList Method Initialized');
+
 		$this->className = 'com.novo.objects.TOs.EmpresaTO';
 
 		$this->dataAccessLog->modulo = 'Reportes';
@@ -33,6 +34,7 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->dataRequest->nombre = $this->session->enterpriseInf->enterpriseName;
 
 		$response = $this->sendToService('GetReportsList');
+		$headerCardsRep = [];
 
 		switch($this->isResponseRc) {
 			case 0:
@@ -41,8 +43,12 @@ class Novo_Reports_Model extends NOVO_Model {
 					'key' => '',
 					'text' => 'Selecciona un reporte'
 				];
+				$IdTypeList[] = (object) [
+					'key' => '',
+					'text' => 'Selecciona el tipo de identificación'
+				];
 
-				foreach ($response->listaConfigReportesCEO AS $index => $reports) {
+				foreach ($response->listaConfigReportesCEO AS $reports) {
 					$report = [];
 					foreach ($reports AS $key => $value) {
 						switch ($key) {
@@ -58,6 +64,23 @@ class Novo_Reports_Model extends NOVO_Model {
 									$report['type'] = 'FILTER';
 								}
 								break;
+							case 'listFilter':
+								if(count($value) > 0 && $value[0]->idFilter == '3') {
+									foreach($value[0]->listDataSelection AS $IdTypeObject) {
+										$idType = [];
+										$idType['key'] = $IdTypeObject->codData;
+										$idType['text'] = $IdTypeObject->description;
+										$IdTypeList[] = (object) $idType;
+									}
+								}
+								break;
+							case 'listTableHeader':
+								if(count($value) > 0 && $reports->idReporte == '5') {
+									foreach($value AS $tableHeader) {
+										$headerCardsRep[] = $tableHeader->description;
+									}
+								}
+								break;
 						}
 					}
 					$reportsList[] = (object) $report;
@@ -70,9 +93,15 @@ class Novo_Reports_Model extends NOVO_Model {
 				'key' => '',
 				'text' => lang('RESP_TRY_AGAIN')
 			];
+			$IdTypeList[] = (object) [
+				'key' => '',
+				'text' => lang('RESP_TRY_AGAIN')
+			];
 		}
 
 		$this->response->data->reportsList = (object) $reportsList;
+		$this->response->data->IdTypeList = (object) $IdTypeList;
+		$this->response->data->headerCardsRep = $headerCardsRep;
 		return $this->responseToTheView('GetReportsList');
 	}
 	/**
@@ -91,12 +120,9 @@ class Novo_Reports_Model extends NOVO_Model {
 		switch ($dataRequest->operation) {
 			case 'repListadoTarjetas':
 				$this->cardsList($dataRequest);
-			break;
+				break;
 			case 'repMovimientoPorEmpresa':
-				$this->className = 'ReporteCEOTO.class';
-			break;
-			case 'repComprobantesVisaVale':
-				$this->className = 'ReporteCEOTO.class';
+				$this->movementsByEnterprise($dataRequest);
 			break;
 			case 'repTarjeta':
 				$this->className = 'TarjetaTO.class';
@@ -104,6 +130,9 @@ class Novo_Reports_Model extends NOVO_Model {
 			case 'repTarjetasPorPersona':
 				$this->className = 'TarjetahabienteTO.class';
 			break;
+			case 'repComprobantesVisaVale':
+				$this->VISAproofpayment($dataRequest);
+				break;
 		}
 
 
@@ -138,6 +167,7 @@ class Novo_Reports_Model extends NOVO_Model {
 
 				if(file_exists(assetPath('downloads/'.$response->bean))) {
 					$this->response->code = 0;
+					$this->response->msg = lang('RESP_RC_0');
 					$this->response->data = [
 						'file' => assetUrl('downloads/'.$response->bean),
 						'name' => $response->bean
@@ -148,6 +178,107 @@ class Novo_Reports_Model extends NOVO_Model {
 				$this->response->icon = lang('GEN_ICON_INFO');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_NO_CARDS');
+				$this->response->data['btn1']['action'] = 'close';
+				break;
+		}
+
+		return $this->response;
+	}
+	/**
+	 * @info Método para obtener el de movimientos por empresa
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date Janury 08th, 2020
+	 */
+	private function movementsByEnterprise($dataRequest)
+	{
+		log_message('INFO', 'NOVO Reports Model: movementsByEnterprise Method Initialized');
+
+		$this->dataAccessLog->function = 'Moviminetos por empresa';
+		$this->dataAccessLog->operation = 'Descargar archivo';
+
+		$this->className = 'ReporteCEOTO.class';
+
+		$this->dataRequest->movPorEmpresa = [
+			'empresa' => [
+				'rif' => $this->session->enterpriseInf->idFiscal
+			],
+			'fechaDesde' => convertDate($dataRequest->enterpriseDateBegin),
+			'fechaHasta' => convertDate($dataRequest->enterpriseDateEnd)
+		];
+
+		$response = $this->sendToService('GetReport: '.$dataRequest->operation);
+
+		switch($this->isResponseRc) {
+			case 0:
+				$this->response->icon = lang('GEN_ICON_DANGER');
+				$this->response->title = lang('REPORTS_TITLE');
+				$this->response->msg = lang('REPORTS_NO_FILE_EXIST');
+				$this->response->data['btn1']['action'] = 'close';
+
+				if(file_exists(assetPath('downloads/'.$response->bean))) {
+					$this->response->code = 0;
+					$this->response->msg = lang('RESP_RC_0');
+					$this->response->data = [
+						'file' => assetUrl('downloads/'.$response->bean),
+						'name' => $response->bean
+					];
+				}
+				break;
+			case -30:
+				$this->response->icon = lang('GEN_ICON_INFO');
+				$this->response->title = lang('REPORTS_TITLE');
+				$this->response->msg = lang('REPORTS_NO_MOVES_ENTERPRISE');
+				$this->response->data['btn1']['action'] = 'close';
+				break;
+		}
+
+		return $this->response;
+	}
+	/**
+	 * @info Método para obtener el listado de tarjetas de una empresa
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date Janury 05th, 2020
+	 */
+	private function VISAproofpayment($dataRequest)
+	{
+		log_message('INFO', 'NOVO Reports Model: VISAproofpayment Method Initialized');
+
+		$this->dataAccessLog->function = 'Comprobante de pago VISA';
+		$this->dataAccessLog->operation = 'Descargar archivo';
+
+		$this->className = 'ReporteCEOTO.class';
+		$date = explode('/', $dataRequest->date);
+		$this->dataRequest->movPorEmpresa = [
+			'empresa' => [
+				'rif' => $this->session->enterpriseInf->idFiscal
+			],
+			'mes' => $date[0],
+			'anio' => $date[1]
+		];
+
+		$response = $this->sendToService('GetReport: '.$dataRequest->operation);
+
+		switch($this->isResponseRc) {
+			case 0:
+				$this->response->icon = lang('GEN_ICON_DANGER');
+				$this->response->title = lang('REPORTS_TITLE');
+				$this->response->msg = lang('REPORTS_NO_FILE_EXIST');
+				$this->response->data['btn1']['action'] = 'close';
+
+				if(file_exists(assetPath('downloads/'.$response->bean))) {
+					$this->response->code = 0;
+					$this->response->msg = lang('RESP_RC_0');
+					$this->response->data = [
+						'file' => assetUrl('downloads/'.$response->bean),
+						'name' => $response->bean
+					];
+				}
+				break;
+			case -30:
+			case -150:
+				$this->response->icon = lang('GEN_ICON_INFO');
+				$this->response->title = lang('REPORTS_TITLE');
+				$this->response->msg = lang('REPORTS_NO_MOVES_ENTERPRISE');
 				$this->response->data['btn1']['action'] = 'close';
 				break;
 		}

@@ -302,8 +302,6 @@ if ( ! function_exists('exportFile')) {
 				header('Pragma: no-cache');
 				header('Expires: 0');
 				break;
-			default:
-				break;
 		}
 
 		if($bytes) {
@@ -313,5 +311,14 @@ if ( ! function_exists('exportFile')) {
 		} else {
 			echo $file;
 		}
+	}
+}
+
+if(!function_exists('convertDate')) {
+	function convertDate($date) {
+		$date = explode('/', $date);
+		$date = $date[2].'-'.$date[1].'-'.$date[0];
+
+		return $date;
 	}
 }

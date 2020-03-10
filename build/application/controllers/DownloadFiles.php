@@ -31,13 +31,18 @@ class DownloadFiles extends NOVO_Controller {
 
 		$response=$this->loadModel($this->request);
 
+
+		/*if($this->session->flashdata('serviceOrdersList')) {
+			//$this->session->set_flashdata('serviceOrdersList',$this->session->flashdata('serviceOrdersList'));
+			$orderList = $this->session->flashdata('serviceOrdersList');
+			$renderOrderList = TRUE;
+		}*/
+
 		$this->responseAttr($response);
 
 		$this->render->renderOrderList = $renderOrderList;
-		$this->render->titlePage = 'Ordenes de servicios luis';
+		$this->render->titlePage = 'Ordenes de servicios';
 		$this->views = [$this->request->who.'/'.$view];
 		$this->loadView($view);
-
 	}
-
 }

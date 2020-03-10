@@ -59,6 +59,7 @@ $lang['GEN_BTN_DISASS_SIGN'] = 'Desasociar';
 $lang['GEN_BTN_DOWN_PDF'] = 'Descargar PDF';
 $lang['GEN_BTN_CANCEL_ORDER'] = 'Anular Orden';
 $lang['GEN_BTN_SEARCH'] = 'Buscar';
+$lang['GEN_BTN_DOWNLOAD'] = 'Descargar';
 //MODULES
 $lang['GEN_LOGIN'] = 'Login';
 $lang['GEN_VALIDATE_CAPTCHA'] = 'validateCaptcha';
