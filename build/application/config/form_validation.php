@@ -299,6 +299,26 @@ $config = [
 			'rules' => 'trim|regex_match[/^([\w]+)+$/i]'
 		],
 		[
+			'field' => 'initialDate',
+			'label' => 'initialDate',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]'
+		],
+		[
+			'field' => 'finalDate',
+			'label' => 'finalDate',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]'
+		],
+		[
+			'field' => 'status',
+			'label' => 'status',
+			'rules' => 'trim|regex_match[/^[a-z0-9]+$/i]'
+		],
+		[
+			'field' => 'statusText',
+			'label' => 'statusText',
+			'rules' => 'trim|regex_match[/^[\w -]+$/i]'
+		],
+		[
 			'field' => 'who',
 			'label' => 'who',
 			'rules' => 'trim|regex_match[/^([\w]+)+$/i]'
