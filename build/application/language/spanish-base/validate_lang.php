@@ -22,3 +22,6 @@ $lang['VALIDATE_INITIAL_DATE'] = 'Indica fecha inicial';
 $lang['VALIDATE_FINAL_DATE'] = 'Indica fecha final';
 $lang['VALIDATE_ORDER_STATUS'] = 'Selecciona un estado de orden';
 $lang['VALIDATE_SELECTED_DATE'] = 'Selecciona una fecha válida mm/aa';
+$lang['VALIDATE_ID_TYPE'] = 'Selecciona un tipo de identificación';
+$lang['VALIDATE_ID_NUMBER'] = 'Indica un número de identificación válido, solo dígitos';
+$lang['VALIDATE_CARD_NUMBER'] = 'Indica un número de tarjeta válido 16 dígitos';
