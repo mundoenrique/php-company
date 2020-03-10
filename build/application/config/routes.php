@@ -280,6 +280,12 @@ $route['api/v1/(:any)/servicios/transferencia-maestra/cargar'] = "servicios/carg
 $route['api/v1/(:any)/servicios/transferencia-maestra/consultarSaldo'] = "servicios/consultarSaldo/$1";
 $route['api/v1/(:any)/servicios/transferencia-maestra/pagoTM'] = "servicios/RegargaTM/$1";
 $route['api/v1/(:any)/servicios/transferencia-maestra/RegargaTMProcede'] = "servicios/RegargaTMProcede/$1";
+$route['(:any)/servicios/consulta-tarjetas'] = "servicios/consultaTarjetas/$1";
+$route['api/v1/(:any)/servicios/transferencia-maestra/buscarTarjetas'] = "servicios/buscarTarjetas/$1";
+$route['api/v1/(:any)/servicios/consultaTarjetasExpXLS'] = "servicios/expConsultaTarejtasXLS/$1";
+$route['api/v1/(:any)/servicios/cambiarEstadoemision'] = "servicios/cambiarEstadoemision/$1";
+$route['api/v1/(:any)/servicios/cambiarEstadotarjeta'] = "servicios/cambiarEstadotarjeta/$1";
+
 
 $route['(:any)/servicios/actualizar-datos'] = "servicios/actualizarDatos/$1";
 $route['api/v1/(:any)/servicios/actualizar-datos/cargarArchivo'] = "servicios/cargarArchivo/$1";

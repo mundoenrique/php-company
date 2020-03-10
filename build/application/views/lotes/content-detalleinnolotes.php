@@ -1,6 +1,7 @@
 <?php
 
 $pais = $this->uri->segment(1);
+log_message('DEBUG', '****************'.$pais);
 $urlBaseA = $this->config->item('base_url');
 $urlBase = $urlBaseA.$pais;
 
@@ -39,7 +40,7 @@ $info;
 			</li>
 			/
 			<li class="breadcrumb-item-current">
-				<a><?php echo "Detalle del Lote";//echo lang('POSITION_INVENINNO'); ?></a>
+				<a><?php echo "Detalle del lote";//echo lang('POSITION_INVENINNO'); ?></a>
 			</li>
 		</ol>
 
@@ -47,7 +48,7 @@ $info;
 
 		<div id="top-batchs">
 			<span aria-hidden="true" class="icon" data-icon="&#xe03c;"></span>
-			<?php echo "Detalle del Lote";//echo lang('TITULO_LOTES_DETALLE'); ?>
+			<?php echo "Detalle del lote";//echo lang('TITULO_LOTES_DETALLE'); ?>
 		</div>
 
 		<div id="lotes-contenedor">
@@ -133,7 +134,7 @@ $info;
 										</td>
 										<td class="nro_cuenta" style="text-align:center; font-size:11px">' . $value->nroTarjeta . '</td>
 										<td class="ci" style="text-align:center; font-size:11px">' . $value->idExtPer . '</td>
-										<td class="nombre-persona" style="text-align:center; font-size:11px; word-wrap: break-word; overflow:hidden">' . $value->nombre . '</td>
+										<td class="nombre-persona" style="text-align:center; font-size:11px; word-wrap: break-word; overflow:hidden">' . $value->nombre .' '. (($pais == 'Ec-bp') ? $value->apellido : '') . '</td>
 										<td class="fecha-carga" style="text-align:center; font-size:11px">' . $value->fechaRegistro . '</td>
 										<td class="estatus-lote-td" style="font-size:11px">' . (($value->estatus=='0') ? 'NO AFILIADO' : 'AFILIADO') . '</td>
 									</tr>
