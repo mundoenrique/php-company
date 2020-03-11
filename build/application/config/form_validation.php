@@ -277,14 +277,14 @@ $config = [
 		[
 			'field' => 'numberOrder',
 			'label' => 'numberOrder',
-			'rules' => 'trim|required'
+			'rules' => 'trim|regex_match[/^([\w]+)+$/i]'
 		]
 	],
 	'exportDetailServiceOrderssss' => [
 		[
 			'field' => 'data_lote',
 			'label' => 'data_lote',
-			'rules' => 'trim|required'
+			'rules' => 'trim|regex_match[/^([\w]+)+$/i]'
 		],
 		[
 			'field' => 'file_type',

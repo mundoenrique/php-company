@@ -220,6 +220,7 @@ if(!function_exists('languajeLoad')) {
 					'authorizeBulk'	=> ['bulk'],
 					'deleteConfirmBulk'	=> ['bulk'],
 					'calculateServiceOrder'	=> ['bulk'],
+					'getReportsList'	=> ['reports'],
 					'getReport'	=> ['reports'],
 					'deleteFile'	=> ['reports'],
 				];

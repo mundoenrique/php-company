@@ -80,21 +80,6 @@ $(function () {
 		}
 	});
 
-	$('#reports-results').DataTable({
-		"ordering": false,
-		"pagingType": "full_numbers",
-		"columnDefs": [
-			{
-				"targets": 3,
-				render: function (data, type, row) {
-					return data.length > 20 ?
-						data.substr(0, 20) + '…' :
-						data;
-				}
-			},
-		],
-		"language": dataTableLang
-	})
 
 	$('#btn-download').on('click', function (e) {
 		e.preventDefault();
@@ -113,7 +98,9 @@ $(function () {
 			var tempVal;
 			btnAction.html(loader);
 			insertFormInput(true);
-			$('#'+reportSelected+' input').each(function(index, element) {
+			$('#'+reportSelected+' input, #'+reportSelected+' select')
+			.not('[type=search]')
+			.each(function(index, element) {
 				tempId = $(element).attr('id')
 				tempVal = $(element).val()
 				data[tempId] = tempVal
@@ -133,6 +120,7 @@ function getReport(data, btn) {
 			switch (data.operation) {
 				case 'repListadoTarjetas':
 				case 'repMovimientoPorEmpresa':
+					case 'repTarjetasPorPersona':
 				case 'repComprobantesVisaVale':
 					downloadFile.attr('href', response.data.file)
 					document.getElementById('download-file').click()
@@ -142,8 +130,27 @@ function getReport(data, btn) {
 					}
 					callNovoCore(verb, who, where, data, function (response) {})
 					break;
+				case 'repTarjeta':
+					$('#reports-results').DataTable({
+						drawCallback: function(d) {
+							$('input[type=search]').attr('name', 'search')
+							$('#repTarjeta-result').removeClass('none');
+						},
+						"ordering": false,
+						"pagingType": "full_numbers",
+						"columnDefs": [
+							{
+								"targets": 3,
+								render: function (data, type, row) {
+									return data.length > 20 ?
+										data.substr(0, 20) + '…' :
+										data;
+								}
+							},
+						],
+						"language": dataTableLang
+					})
 
-				default:
 					break;
 			}
 		}
