@@ -303,13 +303,12 @@ footer.main-footer {
 
 /* Forms
 ========================================================================== */
-#confirm-bulk-btn.form-control{
-	width: 57%;
-	margin: 0 auto;
+#confirm-bulk-btn .form-control{
+	width: 57% !important;
+	margin: 0 auto !important;
 }
 
-#confirm-bulk-btn.form-group{
-	width: 57%;
+#confirm-bulk-btn .form-group{
 	margin-bottom: 4.5rem !important;
 }
 
