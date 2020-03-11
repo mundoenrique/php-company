@@ -1,7 +1,10 @@
 'use strict'
 $(function () {
-	/* var optionValues = [];
+	var optionValues = [];
 	var prevOption;
+	var reportSelected;
+	form = $('#form-report')
+
 	$('#reports option').each(function () {
 		optionValues.push($(this).val());
 	});
@@ -10,38 +13,19 @@ $(function () {
 
 	optionValues.splice(0, 2);
 
-	for (i = 0; i < optionValues.length; i++) {
+	for (var i = 0; i < optionValues.length; i++) {
 		$(`#${optionValues[i]}`).hide();
-	}; */
+	}
 
 	$("#reports").change(function () {
-		$('.no-select').addClass('none')
-		var type = $(this).find('option:selected').attr('type')
+		$('#form-report').trigger("reset")
+		$('#form-report input, #form-report select')
+		.removeClass('has-error')
+		.prop('disabled', true);
+		$('.help-block').text('');
+		reportSelected = $(this).val()
 
-		if (type !== 'DOWNLOAD') {
-			$('#search-criteria, #line-reports, #form-report').removeClass('none')
-		}
-
-		switch (type) {
-			case 'DOWNLOAD':
-				$("#div-download").removeClass('none');
-				$("#div-download").fadeIn(700, 'linear');
-				break;
-			case 'FILTER':
-
-				break;
-			case 'TABLE':
-
-				break;
-			case 'QUERY':
-
-				break;
-		}
-
-
-
-
-		/* if ($(this).val() == "customer-movements") {
+		if ($(this).val() == "repListadoTarjetas") {
 			$("#search-criteria").addClass('none');
 			$("#line-reports").addClass('none');
 			$("#div-download").removeClass('none');
@@ -51,13 +35,20 @@ $(function () {
 			$("#line-reports").removeClass('none');
 			$("#div-download").addClass('none');
 		}
-		$('#' + $(this).val()).fadeIn(700, 'linear');
+
+		$('#' + $(this).val())
+		.fadeIn(700, 'linear')
+		.find('input, select')
+		.prop('disabled', false)
 		$(prevOption).hide();
 		$('#' + $(this).val()).show();
-		prevOption = '#' + $(this).val(); */
+		prevOption = '#' + $(this).val();
+		data = {
+			operation: reportSelected
+		}
 	});
 
-	$("#datepicker_start, #datepicker_end").datepicker({
+	$(".date-picker").datepicker({
 		changeMonth: true,
 		changeYear: true,
 		maxDate: currentDate,
@@ -74,7 +65,8 @@ $(function () {
 		showButtonPanel: true,
 		yearRange: "-20:+0",
 		maxDate: '-M',
-		dateFormat: 'MM yy',
+		dateFormat: 'mm/yy',
+		closeText: 'Aceptar',
 		onClose: function (dateText, inst) {
 			var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
 			var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
@@ -88,41 +80,48 @@ $(function () {
 		}
 	});
 
-	$('#reports-results').DataTable({
-		"ordering": false,
-		"pagingType": "full_numbers",
-		"columnDefs": [
-			{
-				"targets": 3,
-				render: function (data, type, row) {
-					return data.length > 20 ?
-						data.substr(0, 20) + '…' :
-						data;
-				}
-			},
-		],
-		"language": dataTableLang
-	})
 
 	$('#btn-download').on('click', function (e) {
 		e.preventDefault();
-		var reportSelected = $('#reports').val()
-		data = {
-			operation: reportSelected
-		}
 		getReport(data)
+	})
+
+	$('.btn-report').on('click', function(e) {
+		e.preventDefault()
+
+		var btnAction = $(this);
+		btnText = btnAction.text().trim();
+		validateForms(form);
+
+		if(form.valid()) {
+			var tempId;
+			var tempVal;
+			btnAction.html(loader);
+			insertFormInput(true);
+			$('#'+reportSelected+' input, #'+reportSelected+' select')
+			.not('[type=search]')
+			.each(function(index, element) {
+				tempId = $(element).attr('id')
+				tempVal = $(element).val()
+				data[tempId] = tempVal
+			})
+			getReport(data, btnAction)
+		}
 	})
 })
 
-function getReport(data) {
+function getReport(data, btn) {
+	btn = btn == undefined ? false : btn
 	insertFormInput(true);
 	verb = 'POST'; who = 'Reports'; where = 'getReport';
 	var downloadFile = $('#download-file');
 	callNovoCore(verb, who, where, data, function (response) {
-		insertFormInput(false);
 		if(response.code == 0) {
 			switch (data.operation) {
 				case 'repListadoTarjetas':
+				case 'repMovimientoPorEmpresa':
+					case 'repTarjetasPorPersona':
+				case 'repComprobantesVisaVale':
 					downloadFile.attr('href', response.data.file)
 					document.getElementById('download-file').click()
 					who = 'DownloadFiles'; where = 'DeleteFile';
@@ -131,11 +130,39 @@ function getReport(data) {
 					}
 					callNovoCore(verb, who, where, data, function (response) {})
 					break;
+				case 'repTarjeta':
+					$('#reports-results').DataTable({
+						drawCallback: function(d) {
+							$('input[type=search]').attr('name', 'search')
+							$('#repTarjeta-result').removeClass('none');
+						},
+						"ordering": false,
+						"pagingType": "full_numbers",
+						"columnDefs": [
+							{
+								"targets": 3,
+								render: function (data, type, row) {
+									return data.length > 20 ?
+										data.substr(0, 20) + '…' :
+										data;
+								}
+							},
+						],
+						"language": dataTableLang
+					})
 
-				default:
 					break;
 			}
 		}
+		if(btn) {
+			btn.html(btnText)
+		}
+		insertFormInput(false);
+		$('.help-block').text('');
+		$('#form-report').validate().resetForm();
+		$('#form-report input, #form-report select')
+		.not('#'+data.operation+' input', '#'+data.operation+' select')
+		.prop('disabled', true);
 		$('.cover-spin').hide();
 	})
 }

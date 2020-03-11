@@ -67,6 +67,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 	 */
 	public function callWs_GetServiceOrders_Inquiries($dataRequest)
 	{
+
 		log_message('INFO', 'NOVO Inquiries Model: ServiceOrderStatus Method Initialized');
 		$this->className = 'com.novo.objects.MO.ListadoOrdenServicioMO';
 
@@ -81,9 +82,10 @@ class Novo_Inquiries_Model extends NOVO_Model {
 		$this->dataRequest->fechaIni = $dataRequest->initialDate;
 		$this->dataRequest->fechaFin = $dataRequest->finalDate;
 		$this->dataRequest->status = $dataRequest->status;
+		$this->dataRequest->statusText = $dataRequest->statusText;
 		$statusText = $dataRequest->statusText;
 
-		$response = $this->sendToService('ServiceOrderStatus');
+   	$response = $this->sendToService('ServiceOrderStatus');
 
 		switch ($this->isResponseRc) {
 			case 0:
@@ -92,6 +94,12 @@ class Novo_Inquiries_Model extends NOVO_Model {
 
 				foreach($response->lista AS $list) {
 					$orderList = [];
+
+						$serviceOrders['initialDate'] = $dataRequest->initialDate;
+						$serviceOrders['finalDate'] = $dataRequest->finalDate;
+						$serviceOrders['status'] = $dataRequest->status;
+						$serviceOrders['statusText'] = $dataRequest->statusText;
+
 					foreach($list AS $key => $value) {
 						switch ($key) {
 							case 'idOrden':
@@ -136,7 +144,6 @@ class Novo_Inquiries_Model extends NOVO_Model {
 								break;
 						}
 					}
-
 					$serviceOrdersList[] = (object) $serviceOrders;
 				}
 
@@ -157,12 +164,12 @@ class Novo_Inquiries_Model extends NOVO_Model {
 				break;
 		}
 
-		$serviceOrdersList = $this->session->flashdata('serviceOrdersList');
-		$bulkNotBillable = $this->session->flashdata('bulkNotBillable');
-		$this->session->set_flashdata('serviceOrdersList', $serviceOrdersList);
-		$this->session->set_flashdata('bulkNotBillable', $bulkNotBillable);
+			$serviceOrdersList = $this->session->flashdata('serviceOrdersList');
+			$bulkNotBillable = $this->session->flashdata('bulkNotBillable');
+			$this->session->set_flashdata('serviceOrdersList', $serviceOrdersList);
+			$this->session->set_flashdata('bulkNotBillable', $bulkNotBillable);
 
-		return $this->responseToTheView('ServiceOrder');
+			return $this->responseToTheView('ServiceOrder');
 	}
 
 	/**
@@ -226,13 +233,12 @@ class Novo_Inquiries_Model extends NOVO_Model {
 	}
 
 	/**
-	 * @info Elimina un lote
+	 * @info Consulta detalle ordenes de servicios
 	 * @author Luis Molina
-	 * @date febrero 27 th, 2020
+	 * @date Mar 10 Tue, 2020
 	 */
 	public function callWs_DetailServiceOrders_Inquiries($dataRequest)
 	{
-
 		log_message('INFO', 'NOVO Inquiries Model: DetailServiceOrders Method Initialized');
 
 		$this->dataAccessLog->modulo = 'lotes';
@@ -243,6 +249,12 @@ class Novo_Inquiries_Model extends NOVO_Model {
 		$this->dataRequest->acidlote =$dataRequest->numberOrder;
 
 		$response = $this->sendToService('DetailServiceOrders');
+
+		$refresh=FALSE;
+
+		if(isset($dataRequest->refresh)){
+			$refresh=$dataRequest->refresh;
+		}
 
 		$definitive['acrif'] = $response->acrif;
 		$definitive['acnomcia'] = $response->acnomcia;
@@ -266,23 +278,25 @@ class Novo_Inquiries_Model extends NOVO_Model {
 
 		switch ($this->isResponseRc) {
 			case 0:
-				$this->response->code = 0;
+				if($refresh==FALSE){
+					$this->response->code = 0;
+				}
 				$this->response->detail= (object) $definitive;
-				$this->session->set_flashdata('detailServiceOrdersList',$this->response);
+				$this->session->set_flashdata('detailServiceOrders',$this->response);
 				break;
 		}
-
-		return $this->responseToTheView('DetailServiceOrders');
+			if($refresh==FALSE){
+			return $this->responseToTheView('DetailServiceOrders');
+			}
 	}
 
 	/**
-	 * @info Elimina un lote
+	 * @info Exporta archivo .pdf en ordenes de servicios
 	 * @author Luis Molina
-	 * @date febrero 27 th, 2020
+	 * @date Mar 10 Tue, 2020
 	 */
 	public function callWs_exportFiles_Inquiries($dataRequest)
 	{
-
 		log_message('INFO', 'NOVO DownloadFiles Model: exportFiles Method Initialized');
 
 		$rifEmpresa = $this->session->userdata('enterpriseInf')->idFiscal;
@@ -302,29 +316,36 @@ class Novo_Inquiries_Model extends NOVO_Model {
 
 		$response = $this->sendToService('exportFiles');
 
+		$this->dataRequest->initialDate =$dataRequest->initialDate;
+		$this->dataRequest->finalDate = $dataRequest->finalDate;
+		$this->dataRequest->status = $dataRequest->status;
+		$this->dataRequest->statusText = $dataRequest->statusText;
+		$this->callWs_GetServiceOrdersRefresh_Inquiries($this->dataRequest);
+
 		$this->isResponseRc=-3;
 
 		switch ($this->isResponseRc) {
 			case 0:
-		  exportFile($response->archivo,'pdf',str_replace(' ', '_', 'OrdenServicio'.date("d/m/Y H:i")));
-		  break;
-			case -3:
+			exportFile($response->archivo,'pdf',str_replace(' ', '_', 'OrdenServicio'.date("d/m/Y H:i")));
+			break;
+			default:
 			$this->response->code = 3;
-			$this->response->title = 'Descarga de Archivos';
-			$this->response->msg = 'No fue posible descargar el archivo';
-			$this->response->data->resp['btn1']['link'] = base_url('consulta-orden-de-servicio');
+			$this->response->title = lang('GEN_DOWNLOAD_FILE');
+			$this->response->msg = lang('GEN_WARNING_DOWNLOAD_FILE');
+			$this->response->icon = lang('GEN_ICON_WARNING');
+			$this->response->data->resp['btn1']['action'] = 'close';
+			$this->session->set_flashdata('response-order',$this->response);
+			redirect(base_url('consulta-orden-de-servicio'), 'location');
 		}
-		return $this->responseToTheView('exportFiles');
 	}
 
 	/**
-	 * @info Elimina un lote
+	 * @info Exporta archivo .pdf,.xls en detalle ordenes de servicios
 	 * @author Luis Molina
-	 * @date febrero 27 th, 2020
+	 * @date Mar 10 Tue, 2020
 	 */
 	public function callWs_DetailExportFiles_Inquiries($dataRequest)
 	{
-
 		log_message('INFO', 'NOVO Inquiries Model: DetailExportFiles Method Initialized');
 
 		$operation='';
@@ -341,20 +362,108 @@ class Novo_Inquiries_Model extends NOVO_Model {
 		$this->className = 'com.novo.objects.TOs.LoteTO';
 		$this->dataRequest->idOperation = $operation;
 		$this->dataRequest->acidlote =$dataRequest->data_lote;
+		$this->dataRequest->numberOrder=$dataRequest->data_lote;
+		$this->dataRequest->refresh=TRUE;
 
 		$response = $this->sendToService('DetailExportFiles');
 
+		$this->callWs_DetailServiceOrders_Inquiries($this->dataRequest);
+
+		$this->isResponseRc=-3;
+
 		switch ($this->isResponseRc) {
 			case 0:
-				exportFile($response->archivo,$dataRequest->file_type,$response->nombre);
-		  break;
-			case -3:
+			exportFile($response->archivo,$dataRequest->file_type,$response->nombre);
+			break;
+			default:
 			$this->response->code = 3;
-			$this->response->title = 'Descarga de Archivos';
-			$this->response->msg = 'No fue posible descargar el archivo';
-			$this->response->data->resp['btn1']['link'] = base_url('detalle-orden-de-servicio');
+			$this->response->title = lang('GEN_DOWNLOAD_FILE');
+			$this->response->msg = lang('GEN_WARNING_DOWNLOAD_FILE');
+			$this->response->icon = lang('GEN_ICON_WARNING');
+			$this->response->data->resp['btn1']['action'] = 'close';
+			$this->session->set_flashdata('response-msg-detail-order',$this->response);
+			redirect(base_url('detalle-orden-de-servicio'), 'location');
 		}
-		return $this->responseToTheView('exportFiles');
 	}
 
+	/**
+	 * @info Método para obtener las ordenes de servicio
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date Janury 09th, 2019
+	 */
+	public function callWs_GetServiceOrdersRefresh_Inquiries($dataRequest)
+	{
+		log_message('INFO', 'NOVO Inquiries Model: ServiceOrderStatus Method Initialized');
+		$this->className = 'com.novo.objects.MO.ListadoOrdenServicioMO';
+
+		$this->dataAccessLog->modulo = 'Consultas';
+		$this->dataAccessLog->function = 'Lista de ordenes de servicio';
+		$this->dataAccessLog->operation = 'Ordenes de servicios';
+
+		$this->dataRequest->idOperation = 'buscarOrdenServicio';
+		$this->dataRequest->rifEmpresa = $this->session->enterpriseInf->idFiscal;
+		$this->dataRequest->acCodCia = $this->session->enterpriseInf->enterpriseCode;
+		$this->dataRequest->idProducto = $this->session->productInf->productPrefix;
+		$this->dataRequest->fechaIni = $dataRequest->initialDate;
+		$this->dataRequest->fechaFin = $dataRequest->finalDate;
+		$this->dataRequest->status = $dataRequest->status;
+
+		$response = $this->sendToService('ServiceOrderStatus');
+
+				foreach($response->lista AS $list) {
+					$orderList = [];
+
+					$serviceOrders['initialDate'] = $dataRequest->initialDate;
+					$serviceOrders['finalDate'] = $dataRequest->finalDate;
+					$serviceOrders['status'] = $dataRequest->status;
+					$serviceOrders['statusText'] = $dataRequest->statusText;
+
+					foreach($list AS $key => $value) {
+						switch ($key) {
+							case 'idOrden':
+								$serviceOrders['OrderNumber'] = $value;
+								break;
+							case 'estatus':
+								$serviceOrders['OrderStatus'] = $value;
+								$serviceOrders['OrderVoidable'] = FALSE;
+								if($value == '0') {
+									$serviceOrders['OrderVoidable'] = $list->nofactura != '' && $list->fechafactura != '' ?: TRUE;
+								}
+								break;
+							case 'fechaGeneracion':
+								$serviceOrders['Orderdate'] = $value;
+								break;
+							case 'montoComision':
+								$serviceOrders['OrderCommission'] = $value;
+								break;
+							case 'montoIVA':
+								$serviceOrders['OrderTax'] = $value;
+								break;
+							case 'montoOS':
+								$serviceOrders['OrderAmount'] = $value;
+								break;
+							case 'montoDeposito':
+								$serviceOrders['OrderDeposit'] = $value;
+								break;
+							case 'lotes':
+								$serviceOrders['bulk'] = [];
+								foreach($value AS $bulk) {
+									$bulkList['bulkNumber'] = $bulk->acnumlote;
+									$bulkList['bulkLoadDate'] = $bulk->dtfechorcarga;
+									$bulkList['bulkLoadType'] = ucfirst(mb_strtolower($bulk->acnombre));
+									$bulkList['bulkRecords'] = $bulk->ncantregs;
+									$bulkList['bulkStatus'] = ucfirst(mb_strtolower($bulk->status));
+									$bulkList['bulkAmount'] = floatval($bulk->montoRecarga);
+									$bulkList['bulkCommisAmount'] = floatval($bulk->montoComision);
+									$bulkList['bulkTotalAmount'] = floatval($bulk->montoRecarga) + floatval($bulk->montoComision);
+									$bulkList['bulkacidlote'] = $bulk->acidlote;
+									$serviceOrders['bulk'][] = (object) $bulkList;
+								}
+								break;
+						}
+					}
+					$serviceOrdersList[] = (object) $serviceOrders;
+				}
+				$this->session->set_flashdata('serviceOrdersList', $serviceOrdersList);
+	}
 }

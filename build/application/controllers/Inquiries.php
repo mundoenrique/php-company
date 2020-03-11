@@ -20,7 +20,9 @@ class Inquiries extends NOVO_Controller {
 	public function serviceOrders()
 	{
 		log_message('INFO', 'NOVO Inquiries: serviceOrders Method Initialized');
+
 		$view = lang('GEN_SERVICE_ORDERS');
+
 		array_push(
 			$this->includeAssets->cssFiles,
 			"third_party/dataTables-1.10.20"
@@ -35,14 +37,20 @@ class Inquiries extends NOVO_Controller {
 		);
 		$renderOrderList = FALSE;
 		$orderList = [];
+		$result_order=FALSE;
 
 		if($this->session->flashdata('serviceOrdersList')) {
-			$this->session->set_flashdata('serviceOrdersList',$this->session->flashdata('serviceOrdersList'));
 			$orderList = $this->session->flashdata('serviceOrdersList');
 			$renderOrderList = TRUE;
 		}
 
-		$this->responseAttr();
+		if($this->session->flashdata('response-order')) {
+			$result_order = $this->session->flashdata('response-order');
+			$this->responseAttr($result_order);
+		}else{
+			$this->responseAttr();
+		}
+
 		$this->load->model('Novo_Inquiries_Model', 'Inquiries');
 		$responseList = $this->Inquiries->callWs_ServiceOrderStatus_Inquiries();
 		$this->render->orderStatus = $responseList->data->orderStatus;
@@ -53,7 +61,6 @@ class Inquiries extends NOVO_Controller {
 		$this->loadView($view);
 	}
 
-
 	/**
 	 * @info Método para renderizar el detalle de consulta de lotes
 	 * @author Luis Molina
@@ -63,20 +70,24 @@ class Inquiries extends NOVO_Controller {
 	{
 		log_message('INFO', 'NOVO Inquiries: detailServiceOrders Method Initialized');
 
-		if(!isset($this->request->numberOrder)) {
+		if(!isset($this->request->numberOrder) && !$this->session->flashdata('detailServiceOrders'))  {
 			redirect(base_url('detalle-producto'), 'location');
 		}
 
 		$view = lang('GEN_DETAIL_SERVICE_ORDERS');
 
-		if($this->session->flashdata('detailServiceOrdersList')) {
-			$this->session->set_flashdata('detailServiceOrdersList',$this->session->flashdata('detailServiceOrdersList'));
-			$response = $this->session->flashdata('detailServiceOrdersList');
+		if($this->session->flashdata('detailServiceOrders')) {
+			$response = $this->session->flashdata('detailServiceOrders');
 		} else {
 			$response = $this->loadModel($this->request);
 		}
 
-		$this->responseAttr($response);
+		if($this->session->flashdata('response-msg-detail-order')) {
+			$result_detail_order = $this->session->flashdata('response-msg-detail-order');
+			$this->responseAttr($result_detail_order);
+		}else{
+			$this->responseAttr();
+		}
 
 		array_push(
 			$this->includeAssets->cssFiles,
@@ -94,5 +105,4 @@ class Inquiries extends NOVO_Controller {
 		$this->views = ['inquiries/'.$view];
 		$this->loadView($view);
 	}
-
 }

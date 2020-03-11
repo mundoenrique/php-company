@@ -7,6 +7,7 @@
 			<ul class="mb-0 h6 light tertiary list-style-none list-inline">
 				<li class="inline"><a class="tertiary big-modal" href="<?= base_url('empresas') ?>">Empresas</a></li> /
 				<li class="inline"><a class="tertiary big-modal" href="<?= base_url('productos') ?>">Productos</a></li> /
+				<li class="inline"><a class="tertiary big-modal" href="<?= base_url('detalle-producto') ?>">Detalle del producto</a></li> /
 				<li class="inline"><a class="tertiary not-pointer" href="javascript:">Reportes</a></li>
 			</ul>
 		</nav>
@@ -21,16 +22,13 @@
 					<div class="row flex items-center justify-between">
 						<div class="form-group col-6 col-xl-6">
 							<label>Tipo de reporte</label>
-							<select id="reports" class="select-box custom-select flex h6 w-100">
+							<select id="reports" name="reports" class="select-box custom-select flex h6 w-100">
 								<?php foreach($reportsList AS $pos => $value): ?>
 								<option value="<?= $value->key; ?>" <?= $pos != 0 ? '' : 'selected disabled' ?> type="<?= !isset($value->type) ?: $value->type; ?>">
 									<?= $value->text; ?>
 								</option>
 								<?php endforeach; ?>
-								<!-- <option disabled selected>Seleccionar</option>
-								<option value="customer-movements">Movimientos de clientes</option>
-								<option value="customer-card-movements">Movimientos de tarjetas clientes</option>
-								<option value="card-inquiry">Consulta de tarjetas</option>
+								<!-- <option value="card-inquiry">Consulta de tarjetas</option>
 								<option value="proof-food">Comprobante alimentación</option>
 								<option value="customer-extract">Extracto de cliente</option>
 								<option value="lock-query">Consulta de Desbloqueo/Bloqueos</option>
@@ -42,7 +40,7 @@
 							<div class="flex items-start justify-end">
 								<button id="btn-download" class="flex items-baseline btn btn-link btn-small big-modal">
 									<i aria-hidden="true" class="icon icon-download"></i>
-									&nbsp;Descargar
+									&nbsp;<?= lang('GEN_BTN_DOWNLOAD'); ?>
 								</button>
 							</div>
 						</div>
@@ -53,28 +51,175 @@
 		</div>
 
 		<div class="flex pb-5 flex-column">
-			<span id="search-criteria" class="no-select none line-text mb-2 h4 semibold primary">Criterio de búsqueda</span>
+			<span id="search-criteria" class="no-select none line-text mb-2 h4 semibold primary"><?= lang('GEN_SEARCH_CRITERIA') ?></span>
 			<div class="flex my-2 px-5">
 				<form id="form-report" method="post" class="no-select reports-form w-100 none">
-					<div id="customer-card-movements" class="no-select row">
+					<div id="repMovimientoPorEmpresa" class="no-select row">
 						<div class="form-group col-4">
-							<label for="datepicker_start">Fecha inicio</label>
-							<input id="datepicker_start" class="form-control" name="datepicker" type="text" readonly placeholder="DD/MM/AAAA">
+							<label for="enterpriseDateBegin"><?= lang('GEN_START_DAY'); ?></label>
+							<input id="enterpriseDateBegin" class="form-control date-picker" name="datepicker_start" type="text" readonly placeholder="DD/MM/AAAA"
+								disabled>
 							<div class="help-block"></div>
 						</div>
 						<div class="form-group col-4">
-							<label for="datepicker_end">Fecha fin</label>
-							<input id="datepicker_end" class="form-control" name="datepicker" type="text" readonly placeholder="DD/MM/AAAA">
+							<label for="enterpriseDateEnd"><?= lang('GEN_END_DAY'); ?></label>
+							<input id="enterpriseDateEnd" class="form-control date-picker" name="datepicker_end" type="text" readonly placeholder="DD/MM/AAAA"
+								disabled>
 							<div class="help-block"></div>
 						</div>
 						<div class="flex items-center justify-end col-4">
-							<button class="btn btn-primary btn-small btn-loading">
-								Buscar
+							<button class="btn-report btn btn-primary btn-small btn-loading">
+								<?= lang('GEN_BTN_SEARCH'); ?>
 							</button>
 						</div>
 					</div>
 
-					<div id="card-inquiry" class="no-select row">
+					<div id="repTarjetasPorPersona" class="no-select row" style="">
+						<div class="form-group col-4">
+							<label><?= lang('REPORTS_ID_TYPE'); ?></label>
+							<select id="idType" name="id-type" class="select-box custom-select flex h6 w-100 form-control" disabled>
+								<?php foreach($IdTypeList AS $pos => $value): ?>
+								<option value="<?= $value->key; ?>" <?= $pos != 0 ? '' : 'selected disabled' ?>>
+									<?= $value->text; ?>
+								</option>
+								<?php endforeach; ?>
+							</select>
+							<div class="help-block"></div>
+						</div>
+
+						<div class="form-group col-4">
+							<label for="idNumber"><?= lang('REPORTS_ID_NUMBER') ?></label>
+							<input id="idNumber" name="id-number" class="form-control" type="text" autocomplete="off" disabled>
+							<div class="help-block"></div>
+						</div>
+
+						<div class="form-group col-4">
+							<label for="cardNumberId"><?= lang('REPORTS_CARD_NUMBER') ?></label>
+							<input id="cardNumberId" name="card-number" class="form-control" type="text" disabled>
+							<div class="help-block"></div>
+						</div>
+						<div class="form-group col-4">
+							<label for="peopleDateBegin"><?= lang('GEN_START_DAY'); ?></label>
+							<input id="peopleDateBegin" class="form-control date-picker" name="datepicker_start" type="text" readonly placeholder="DD/MM/AAAA"
+								disabled>
+							<div class="help-block"></div>
+						</div>
+
+						<div class="form-group col-4">
+							<label for="peopleDateEnd"><?= lang('GEN_END_DAY'); ?></label>
+							<input id="peopleDateEnd" class="form-control date-picker" name="datepicker_end" type="text" readonly placeholder="DD/MM/AAAA"
+								disabled>
+							<div class="help-block"></div>
+						</div>
+
+						<div class="flex items-center justify-end col-4">
+							<button class="btn-report btn btn-primary btn-small btn-loading">
+								<?= lang('GEN_BTN_SEARCH'); ?>
+							</button>
+						</div>
+					</div>
+
+					<div id="repTarjeta" class="no-select">
+						<div class="row">
+							<div class="form-group col-6 col-lg-4">
+								<label for="cardNumber"><?= lang('REPORTS_CARD_NUMBER') ?></label>
+								<input id="cardNumber" name="card-number" class="form-control" type="text" disabled>
+								<div class="help-block"></div>
+							</div>
+
+							<div class="flex items-center justify-end col-8">
+								<button class="btn-report btn btn-primary btn-small btn-loading">
+									<?= lang('GEN_BTN_SEARCH'); ?>
+								</button>
+							</div>
+						</div>
+
+						<div id="repTarjeta-result" class="none">
+							<div class="flex pb-5 flex-column">
+								<span class="line-text mb-2 h4 semibold primary"></span>
+								<div class="center mx-1">
+									<table id="reports-results" class="cell-border h6 display">
+										<thead class="bg-primary secondary regular">
+											<tr>
+												<?php foreach($headerCardsRep AS $header): ?>
+												<th><?= $header; ?></th>
+												<?php endforeach; ?>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>10363</td>
+												<td>2019-09-26 09:53:12</td>
+												<td>1792067782001</td>
+												<td>Directv Colombia C. Ltd</td>
+												<td>10363</td>
+												<td>2019-09-26 09:53:12</td>
+												<td>1792067782001</td>
+												<td>Directv Colombia C. Ltd</td>
+												<td>10363</td>
+												<td>2019-09-26 09:53:12</td>
+												<td>1792067782001</td>
+												<td>Directv Colombia C. Ltd</td>
+												<td>2019-09-26 09:53:12</td>
+												<td>1792067782001</td>
+												<td>Directv Colombia C. Ltd</td>
+											</tr>
+											<tr>
+												<td>10363</td>
+												<td>2019-09-26 09:53:12</td>
+												<td>1792067782001</td>
+												<td>Directv Colombia C. Ltd</td>
+												<td>10363</td>
+												<td>2019-09-26 09:53:12</td>
+												<td>1792067782001</td>
+												<td>Directv Colombia C. Ltd</td>
+												<td>10363</td>
+												<td>2019-09-26 09:53:12</td>
+												<td>1792067782001</td>
+												<td>Directv Colombia C. Ltd</td>
+												<td>2019-09-26 09:53:12</td>
+												<td>1792067782001</td>
+												<td>Directv Colombia C. Ltd</td>
+											</tr>
+											<tr>
+												<td>10363</td>
+												<td>2019-09-26 09:53:12</td>
+												<td>1792067782001</td>
+												<td>Directv Colombia C. Ltd</td>
+												<td>10363</td>
+												<td>2019-09-26 09:53:12</td>
+												<td>1792067782001</td>
+												<td>Directv Colombia C. Ltd</td>
+												<td>10363</td>
+												<td>2019-09-26 09:53:12</td>
+												<td>1792067782001</td>
+												<td>Directv Colombia C. Ltd</td>
+												<td>2019-09-26 09:53:12</td>
+												<td>1792067782001</td>
+												<td>Directv Colombia C. Ltd</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div id="repComprobantesVisaVale" class="no-select row">
+						<div class="form-group col-6 col-lg-4">
+							<label for="datepicker">Fecha</label>
+							<input id="date" class="form-control month-year" name="selected-date" type="text" readonly placeholder="MMMM AAAA" disabled>
+							<div class="help-block"></div>
+						</div>
+
+						<div class="flex items-center justify-end col-6 col-lg-8">
+							<button class="btn-report btn btn-primary btn-small btn-loading">
+								<?= lang('GEN_BTN_SEARCH'); ?>
+							</button>
+						</div>
+					</div>
+
+					<!--<div id="card-inquiry" class="no-select row">
 						<div class="form-group col-4">
 							<label>Tipo de identificacion</label>
 							<select class="select-box custom-select flex h6 w-100">
@@ -88,24 +233,24 @@
 
 						<div class="form-group col-4">
 							<label for="id-number">Numero de identificación</label>
-							<input id="id-number" name="id-number" class="form-control" type="text">
+							<input id="id-number" name="id-number" class="form-control" type="text" disabled>
 							<div class="help-block"></div>
 						</div>
 
 						<div class="form-group col-4">
 							<label for="card-number">Numero de tarjeta</label>
-							<input id="card-number" name="card-number" class="form-control" type="text">
+							<input id="card-number" name="card-number" class="form-control" type="text" disabled>
 							<div class="help-block"></div>
 						</div>
 
 						<div class="form-group col-4">
 							<label for="datepicker_start">Fecha inicio</label>
-							<input id="datepicker_start" class="form-control" name="datepicker" type="text" readonly placeholder="DD/MM/AAAA">
+							<input id="datepicker_start" class="form-control date-picker" name="datepicker" type="text" readonly placeholder="DD/MM/AAAA" disabled>
 							<div class="help-block"></div>
 						</div>
 						<div class="form-group col-4">
 							<label for="datepicker_end">Fecha fin</label>
-							<input id="datepicker_end" class="form-control" name="datepicker" type="text" readonly placeholder="DD/MM/AAAA">
+							<input id="datepicker_end" class="form-control date-picker" name="datepicker" type="text" readonly placeholder="DD/MM/AAAA" disabled>
 							<div class="help-block"></div>
 						</div>
 						<div class="flex items-center justify-end col-4">
@@ -119,7 +264,7 @@
 						<div class="row">
 							<div class="form-group col-6 col-lg-4">
 								<label for="card-number">Numero de tarjeta</label>
-								<input id="card-number" name="card-number" class="form-control" type="text">
+								<input id="card-number" name="card-number" class="form-control" type="text" disabled>
 								<div class="help-block"></div>
 							</div>
 
@@ -165,7 +310,6 @@
 								</table>
 							</div>
 						</div>
-
 					</div>
 
 					<div id="customer-extract" class="no-select row">
@@ -240,20 +384,13 @@
 								Buscar
 							</button>
 						</div>
-					</div>
+					</div> -->
+
 				</form>
 			</div>
 
 			<div id="line-reports" class="no-select line mb-2 none"></div>
 
-			<div class="none">
-				<div class="flex items-start justify-center mt-5">
-					<button class="flex items-baseline btn btn-link btn-small">
-						<i aria-hidden="true" class="icon icon-download"></i>
-						&nbsp;Descargar
-					</button>
-				</div>
-			</div>
 		</div>
 	</div>
 	<?php if($widget): ?>

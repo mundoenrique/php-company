@@ -59,6 +59,7 @@ $lang['GEN_BTN_DISASS_SIGN'] = 'Desasociar';
 $lang['GEN_BTN_DOWN_PDF'] = 'Descargar PDF';
 $lang['GEN_BTN_CANCEL_ORDER'] = 'Anular Orden';
 $lang['GEN_BTN_SEARCH'] = 'Buscar';
+$lang['GEN_BTN_DOWNLOAD'] = 'Descargar';
 //MODULES
 $lang['GEN_LOGIN'] = 'Login';
 $lang['GEN_VALIDATE_CAPTCHA'] = 'validateCaptcha';
@@ -88,6 +89,8 @@ $lang['GEN_SERVICE_ORDERS'] = 'serviceOrders';
 $lang['GEN_SERVICE_ORDERS_TITLE'] = 'Órdenes de servicio';
 $lang['GEN_DETAIL_SERVICE_ORDERS'] = 'detailServiceOrders';
 $lang['GEN_DETAIL_SERVICE_ORDERS_TITLE'] = 'Detalle Órdenes de servicio';
+$lang['GEN_DOWNLOAD_FILE'] = 'Descarga de Archivos';
+$lang['GEN_WARNING_DOWNLOAD_FILE'] = 'No fue posible descargar el archivo';
 //links
 $lang['GEN_LINK_LOGIN'] = 'inicio';
 //MODAL STYLES

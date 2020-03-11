@@ -108,7 +108,7 @@ $(function() {
 				restartFormLogin();
 			}
 		},
-		1: function(response, textBtn){
+		1: function(response){
 			userLogin.showBalloon({
 				html: true,
 				classname: response.className,
