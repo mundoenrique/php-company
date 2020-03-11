@@ -33,8 +33,8 @@ var top = ($('.filter').offset().top-100) - parseFloat($('.filter').css('marginT
 function resetTimer(){
 	clearTimeout(head_var.idleTimer);
 	head_var.idleTimer = setTimeout(function(){whenUserIdle()},600000); // 10 minutos de inactividad
-
 }
+
 $(document.body).bind('mousemove',resetTimer);
 $(document.body).bind('keydown',resetTimer);
 $(document.body).bind('click',resetTimer);
