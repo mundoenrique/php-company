@@ -30,7 +30,6 @@ header.main-head {
 	background-color: #012c71;
 	font-weight: 300;
 }
-
 code,
 kbd,
 samp {
@@ -385,7 +384,7 @@ textarea.form-control {
 /* Select */
 
 .custom-select {
-	display: inline-block;
+	display: block;
 	padding-right: 1.75rem;
 	background: rgba(255,255,255,1) url("../images/bdb/icon-chevron_down_gray.svg") right .75rem center / 14px 14px no-repeat;
   -webkit-appearance: none;
@@ -395,7 +394,7 @@ textarea.form-control {
 }
 
 .custom-select:hover:not(:disabled) {
-	display: inline-block;
+	display: block;
 	padding-right: 1.75rem;
 	background: rgba(255,255,255,1) url("../images/bdb/icon-chevron_down_blue.svg") right .75rem center / 14px 14px no-repeat;
   -webkit-appearance: none;
@@ -929,7 +928,7 @@ textarea.form-control {
 	display: block;
 	position: absolute;
 	right: 0;
-	top: 0;
+	top: 1px;
 	padding: 0;
 	margin: 0;
 	line-height: 21px;
@@ -963,10 +962,10 @@ textarea.form-control {
 }
 
 
-.sb-search.sb-search-open,
+/* .sb-search.sb-search-open,
 .no-js .sb-search {
 	width: 100%;
-}
+} */
 
 .sb-search.sb-search-open .sb-icon-search,
 .no-js .sb-search .sb-icon-search {
@@ -2889,7 +2888,7 @@ table#resultsAccount thead th:nth-child(7){
 
 .widget {
 	background-color: #f4f4f4;
-	box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
+	box-shadow: 0 2px 4px 1px rgba(0,0,0,.2);
 	padding: 24px;
     width: 255px;
     z-index: 1;
@@ -3587,6 +3586,10 @@ a.ui-button:active,
 
 .select-product:hover {
 	box-shadow: 1px 1px 2px 0 #7b7b7b;
+}
+
+select::-ms-expand {
+	display: none;
 }
 
 @media (min-width: 1024px) {

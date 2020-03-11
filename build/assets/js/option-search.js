@@ -12,11 +12,12 @@ $(document).click(function () {
 	searchInput.val('')
 });
 
-searchBox.click(function () {
-	event.stopPropagation();
+searchBox.click(function (e) {
+	e.stopPropagation();
 });
 
-searchIcon.click(function () {
-	event.stopPropagation();
+searchIcon.click(function (e) {
+	e.stopPropagation();
 	searchBox.toggleClass('sb-search-open');
 });
+
