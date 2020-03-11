@@ -219,14 +219,16 @@ $(document).ready(function () {
 						td.attr("style", "text-align: center");
 
 
-
 						$("#grafica").click(function () {
 
+							var titleRecargar = $("#div_tablaDetalle").find("#op-batchs").prevObject[0].firstElementChild
 							// SE OBTIENE LAS SERIES
 							var arrayseries = []
 							$.each(data.listaGrafico[0].series, function (posSeries, itemSeries) {
 								var serie = {};
-								let nuevo = [itemSeries.nombreSerie, itemSeries.valores[0]];
+								var totalR = itemSeries.valores.reduce((a, b) => a + b, 0)
+
+								let nuevo = [itemSeries.nombreSerie, totalR];
 								arrayseries.push(nuevo);
 							});
 							// GRAFICA
@@ -243,7 +245,7 @@ $(document).ready(function () {
 									}
 								},
 								title: {
-									text: data.recargas[0].producto
+									text: titleRecargar.innerText
 								},
 								xAxis: {
 									type: 'category'
@@ -310,7 +312,7 @@ $(document).ready(function () {
 
 				});
 			} else {
-				showErrMsg('Verifiqua los datos ingresados e intenta nuevamente.');
+				showErrMsg('Verifica los datos ingresados e intenta nuevamente.');
 			}
 		}
 

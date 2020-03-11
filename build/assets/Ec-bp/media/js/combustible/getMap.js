@@ -298,7 +298,7 @@ function initMap() {
 				notiSystemMap ( "Viajes", 0, Mensaje );
 				break;
 			case error.UNKNOWN_ERROR:
-				var Mensaje =  "La ubicación no está disponible, por favor intente mas tarde.";
+				var Mensaje =  "La ubicación no está disponible, por favor intenta más tarde.";
 				notiSystemMap ( "Viajes", 0, Mensaje );
 				break;
 		}

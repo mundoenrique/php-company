@@ -146,7 +146,18 @@
 					if(!in_array($registros->status, $statusEmision)) {
 						$statusEmisionText = 'N/A';
 					}
-					echo '
+					if($pais == 'Ec-bp'){
+						echo '
+						<tr>
+							<td class="cedu_bp">'.$registros->idExtPer.'</td>
+							<td class="width-td">'.$registros->nombres.'</td>
+							<td class="width-td">'.$registros->apellidos.'</td>
+							<td class="width-td">'.$registros->ubicacion.'</td>
+							<td class="width-td">'.$statusEmisionText.'</td>
+						</tr>
+					';
+					}else {
+						echo '
 						<tr>
 							<td id="td-width-80">'.$registros->idExtPer.'</td>
 							<td class="width-td">'.$registros->nombres.'</td>
@@ -155,6 +166,7 @@
 							<td class="width-td">'.$statusEmisionText.'</td>
 						</tr>
 					';
+					}
 				}
 				echo '</table></tbody>';
 			}elseif ($data[0]->ctipolote=='1') {
