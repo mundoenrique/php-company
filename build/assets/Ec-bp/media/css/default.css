@@ -379,6 +379,11 @@ span.icon:before {
 	speak: none;
 }
 
+#filtroOS #top-batchs span.icon:before,
+#lotes-general #top-batchs span.icon:before {
+	display: none;
+}
+
 .separator {
 	border-bottom: 1px solid #FFF;
 	clear: both;
@@ -482,7 +487,7 @@ textarea {
 	margin: 0 auto;
 	overflow: hidden;
 	width: 960px;
-	font-size: 14px;
+	font-size: 13px;
 }
 
 #head-wrapper {
@@ -1561,6 +1566,27 @@ button.ui-button::-moz-focus-inner {
 select.ui-datepicker-month,
 select.ui-datepicker-year {
 	border: none;
+}
+
+#repTarjetasEmitidas_fecha_mes > .monthpicker {
+	display: none;
+}
+
+table.mtz-monthpicker {
+	display: table !important;
+	width: 100% !important;
+	text-transform: none !important;
+}
+
+.monthpicker-border {
+	padding: 0;
+	border: none !important;
+	position: relative;
+	z-index: 998 !important;
+}
+
+td.mtz-monthpicker-month {
+	cursor: pointer !important;
 }
 
 .ui-datepicker table {
@@ -4138,6 +4164,50 @@ ul#brands li p img {
 	height: 38px;
 }
 
+.table-text-service tbody tr {
+	margin-bottom: 10px;
+	background: #FFFFFF;
+	border-bottom: 1px solid #DFE0E2;
+	color:#72787A;
+}
+
+.table-text-service tbody tr span {
+	font-size: 20px;
+}
+
+.table-text-service tbody tr:hover {
+	background: #FFF;
+}
+
+.table-text-service thead tr {
+	font-family: 'prelo-semibold', sans-serif;
+	color: #0F265C;
+	font-size: 14px;
+	border-bottom: 1px solid #DFE0E2;
+}
+
+.table-text-service thead th {
+	padding: 4px;
+	text-align: center;
+}
+
+.table-text-service tbody td#icon-batchs {
+	font-size: 32px;
+}
+
+.table-text-service #icons-options {
+	font-size: 20px;
+}
+
+.table-text-service td {
+	padding: 3px;
+	text-align: center;
+	font-size: 14px;
+	height: 35px;
+	line-height: 18px;
+}
+
+
 .table-text-aut tbody tr {
 	margin-bottom: 10px;
 	background: #FFFFFF;
@@ -4146,7 +4216,7 @@ ul#brands li p img {
 	border-bottom: 1px solid #DFE0E2;
 	/* border: 1px solid #dddddd; */
 	line-height: 35px;
-	margin-left: 7px;
+	margin-left: 4px;
 	color:#72787A;
 }
 
@@ -4187,8 +4257,8 @@ ul#brands li p img {
 
 .table-text-aut #icons-options {
 	font-size: 20px;
-	max-width: 58px;
-	min-width: 58px;
+	max-width: 60px;
+	min-width: 50px;
 	float: left;
 }
 
@@ -4198,7 +4268,7 @@ ul#brands li p img {
 	float: left;
 	padding: 3px;
 	text-align: center;
-	font-size: 14px;
+	font-size: 11px;
 	height: 35px;
 	line-height: 18px;
 }
@@ -4328,9 +4398,15 @@ ul#brands li p img {
 #table-lote-detail thead th {
 	max-width: 70px;
 	min-width: 70px;
-	padding: 3px;
+	padding: 5px;
 	text-align: center;
 	font-size: 14px;
+}
+
+td.cedu_bp {
+
+	max-width: 100px!important;
+	min-width: 90px!important;
 }
 
 #table-lote-detail tbody td#icon-batchs {
@@ -4351,9 +4427,9 @@ ul#brands li p img {
 	max-width: 70px;
 	min-width: 70px;
 	float: left;
-	padding: 3px;
+	padding: 4px;
 	text-align: center;
-	font-size: 14px;
+	font-size: 12px;
 }
 
 #table-lote-detail>#td-nombre-2 {
@@ -4736,6 +4812,10 @@ tr.GC-first th {
 	margin: 10px;
 }
 
+.button-process {
+	text-align: center;
+}
+
 .ordenes_ser {
 	border-bottom: 1px solid #CFCFCF;
 	border-bottom-left-radius: 30px;
@@ -4768,6 +4848,10 @@ tr.GC-first th {
 	color: #0F265C;
 	font-size: 18px;
 }
+
+/* .estado-cuenta #top-batchs{
+	width: 925px;
+} */
 
 #top-batchs span {
 	margin-right: 5px;
@@ -5212,8 +5296,11 @@ li#select-empresa select {
 	width: 660px;
 	background: white;
 	border-bottom: 1px solid #DFE0E2;
-
 }
+
+/* .estado-cuenta #Datos2 {
+	width: 945px;
+} */
 
 #Datos2 td {
 	padding: 5px;
@@ -5229,10 +5316,18 @@ li#select-empresa select {
 	min-width: 147px;
 }
 
+.estado-cuenta #Datos2-long{
+	width: 147px;
+}
+
 #Datos2-med {
 	width: 90px;
 	max-width: 90px;
 	min-width: 90px;
+}
+
+.estado-cuenta #Datos2-med{
+	width: 90px;
 }
 
 #Datos2-short {
@@ -5240,6 +5335,11 @@ li#select-empresa select {
 	max-width: 60px;
 	min-width: 60px;
 }
+
+.estado-cuenta #Datos2-short{
+	width: 60px;
+}
+
 #Datos2-short a {
 	color:#72787A!important;
 	font-weight: bold;
@@ -5248,6 +5348,12 @@ li#select-empresa select {
 #Datos3 {
 	float: left;
 	width: 660px;
+	color: #0F265C;
+}
+
+.estado-cuenta #Datos3 {
+	float: left;
+	width: 945px;
 	color: #0F265C;
 }
 
@@ -5434,11 +5540,6 @@ center {
 	padding-top:20px;
 }
 
-center a.novo-btn-secondary,
-center button.novo-btn-secondary {
-	margin-right: 45px;
-}
-
 .b-rs>.botones-OS {
 	padding-top: 40px;
 }
@@ -5499,6 +5600,15 @@ center button.novo-btn-secondary {
 	border-bottom-left-radius: 30px;
 }
 
+/* #div_tablaDetalle.estado-cuenta {
+	width: 660px;
+	height: auto;
+	float: left;
+	background-color: #FFFFFF;
+	border: 1px solid #DFE0E2;
+	border-bottom-left-radius: 30px;
+} */
+
 /* #tbody-datos-general {
 	border-right:	1px solid #DFE0E2;
 	border-left: 1px solid #DFE0E2;
@@ -5509,7 +5619,13 @@ center button.novo-btn-secondary {
 	border: none;
 }
 
-.tabla-reportes::after {
+/* .estado-cuenta{
+	width: 950px;
+	border: none;
+} */
+
+.tabla-reportes::after,
+.estado-cuenta::after {
 	content: " ";
 	display: block;
 	width: 100%;
@@ -5518,18 +5634,24 @@ center button.novo-btn-secondary {
 	border-bottom-left-radius: 30px;
 }
 
-.tabla-reportes thead {
+.tabla-reportes thead,
+.estado-cuenta thead {
 	color: white;
 	float: left;
 }
 
 .tabla-reportes thead th {
 	border-left: 1px solid white;
-
 	padding: 5px;
 	text-align: center;
 	min-width: 115px;
 	max-width: 115px;
+}
+
+.estado-cuenta thead th {
+	border-left: 1px solid white;
+	padding: 5px;
+	text-align: center;
 }
 
 .tbody-reportes tr {
@@ -5770,10 +5892,24 @@ center button.novo-btn-secondary {
 
 .tbody-reportes-OS tr td {
 	text-align: center;
-	padding: 5px;
 	color: #555;
-	/* max-width: 95px; */
-	min-width: 80px;
+	min-width: 90px;
+}
+ tr.tr-calculo > td{
+	 padding-left: 9px;
+ }
+
+.tabla-detalles {
+	width: 950px;
+}
+
+.datos-detalles th{
+	padding: 10px;
+}
+
+.tbody-detalles tr td.info-detal{
+	text-align: center;
+	padding: 5px;
 }
 
 .botones-OS {
@@ -5829,6 +5965,14 @@ center button.novo-btn-secondary {
 	margin-left: 730px;
 	width: 230px;
 }
+
+.sub-widget-2 {
+	position: fixed;
+	top: 250px;
+	margin-left: 0px;
+	width: 230px;
+}
+
 #lotes-general>#ui-id-2,
 #lotes-general>#ui-id-1{
 	border:1px solid #dfe0e2;
@@ -6015,6 +6159,10 @@ span.jPag-snext-img {
 	font-family: "prelo-semibold", sans-serif;
 }
 
+.estado-cuenta #Datos1 {
+	width: 945px;
+}
+
 .thead-edc #Datos2 {
 	float: left;
 	width: 660px;
@@ -6031,6 +6179,10 @@ span.jPag-snext-img {
 	color: #10133f !important;
 }
 
+/* .estado-cuenta #Datos2 {
+	width: 945px;
+} */
+
 .thead-edc #Datos2 td {
 	padding: 5px;
 	text-align: center;
@@ -6046,16 +6198,34 @@ span.jPag-snext-img {
 	min-width: 147px !important;
 }
 
+.thead-edc #Datos2-long .estado-cuenta{
+	width: 147px !important;
+}
+
+.estado-cuenta th#Datos2-long:first-child,
+.estado-cuenta td#Datos2-long:first-child {
+	width: 105px !important;
+	min-width: 105px !important;
+}
+
 .thead-edc #Datos2-med {
 	width: 90px !important;
 	max-width: 90px !important;
 	min-width: 90px !important;
 }
 
+.thead-edc #Datos2-med .estado-cuenta{
+	width: 90px !important;
+}
+
 .thead-edc #Datos2-short {
 	width: 60px !important;
 	max-width: 60px !important;
 	min-width: 60px !important;
+}
+
+.thead-edc #Datos2-short .estado-cuenta{
+	width: 60px !important;
 }
 
 .error-mensaje-reportes {
@@ -6082,8 +6252,8 @@ span.jPag-snext-img {
 
 .OSinfo td {
 	color: #0F265C!important;
-	max-width: 65px !important;
-	min-width: 65px !important;
+	max-width: 75px !important;
+	min-width: 75px !important;
 }
 
 .OShead-2 {
@@ -6248,7 +6418,7 @@ span.jPag-snext-img {
 }
 
 .jslista tr {
-	margin-left: 31px;
+	margin-left: 0px;
 }
 
 #search-3 {
@@ -6807,6 +6977,43 @@ button.green:hover {
 	border-bottom: 1px solid #bbb;
 }
 
+#campos-transfer {
+	background: none;
+	font-size: 12px;
+	color: #555555;
+	width: 500px;
+	height: auto;
+	margin: 5px;
+	float: left;
+}
+
+#campos-transfer span {
+	width: 245px;
+	float: left;
+}
+
+#campos-transfer span p {
+	padding: 5px;
+	vertical-align: middle;
+	font-size: 13px;
+}
+
+#campos-transfer span input {
+	float: left;
+	padding: 5px;
+	background: none;
+	padding: 8px;
+	width: 180px;
+	border: 1px solid #dddddd;
+}
+
+#campos-transfer li {
+	float: left;
+	color: #cd0a0a;
+	list-style: none;
+}
+
+
 #suc_cuidad {
 	width: 130px;
 	border: none;
@@ -6962,6 +7169,18 @@ button.green:hover {
 .input4 {
 	width: 116px;
 	padding: 11px;
+}
+
+.input5 {
+	width: 110px;
+	border-color: rgb(221, 221, 221);
+}
+
+.text-center {
+	border-left: solid 1px #DFE0E2;
+	padding-left: 270px;
+	border-right: solid 1px #DFE0E2;
+	margin-right: 28px;
 }
 
 .select_sucursales {
@@ -7215,6 +7434,16 @@ button.green:hover {
 	height: 38px;
 }
 
+#tabla-detalles-general_wrapper > .dataTables_length, #tabla-detalles-general_wrapper > .dataTables_filter {
+	display: none;
+}
+
+.title-detalles-tabla{
+	padding: 10px;
+	margin-left: 10px;
+	font-size: 18px;
+}
+
 .prueba_fuego {
 	position: absolute;
 	background-color: green;
@@ -7446,8 +7675,9 @@ button:active {
 	width:120px;
 	padding-left:15px;
 	padding-right:15px;
-	 display: block;
+	margin: 10px;
 }
+
 .novo-btn-primary-modal,.novo-btn-secondary-modal{
 	width:68px;
 	padding-left:15px;
@@ -7500,9 +7730,19 @@ button:active {
 	border: 1px solid #ffdd00;
 }
 
-#filtroOS #top-batchs span.icon:before,
-#lotes-general #top-batchs span.icon:before {
-	display: none;
+.recepcion-tcs,
+.t-center{
+	margin-top: 140px;
+	width: auto;
+	text-align: center
+}
+
+.textbox-transfer{
+  border-color: rgb(205, 10, 10) !important;
+}
+
+.view-results a span {
+	font-size: 20px;
 }
 
 .input5 {

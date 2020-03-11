@@ -63,7 +63,7 @@ $info;
 				<h5><?php echo lang('TABLA_LOTESPA_OBSERVACIONES') ?></h5>
 				<?php
 					foreach ($info->mensajes as $errores) {
-						echo "<p>Linea: $errores->linea, $errores->mensaje ($errores->detalle)</p>";
+						echo "<p>Línea: $errores->linea, $errores->mensaje ($errores->detalle)</p>";
 					}
 				?>
 			</div>

@@ -73,7 +73,7 @@ $(function(){
 								}
 						});
 					} else {
-						notificacion("Confirmación","Verifiqua los datos ingresados e intenta nuevamente",null);
+						notificacion("Confirmación","Verifica los datos ingresados e intenta nuevamente",null);
 					}
         }else{
           notificacion("Confirmación","Debes ingresar tu contraseña",null);

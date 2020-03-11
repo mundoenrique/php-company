@@ -52,6 +52,17 @@ $urlCdn = get_cdn();
 					</div>
 					<div id="search-1">
 						<h5><?php echo lang('TITULO_REPORTES_RANGO'); ?></h5>
+						<?php
+							if ( $pais == 'Ec-bp'):
+						?>
+						<span>
+							<p><?php echo lang('TITULO_REPORTES_FECHAMES'); ?></p>
+							<input id = "repTarjetasEmitidas_fecha_mes"  class="required login fecha monthpicker" type="text" name="start-my-date" placeholder="MM/AAAA" value="" onFocus="javascript:this.value=''"/>
+						</span>
+						<?php endif; ?>
+						<?php
+							if ( $pais !== 'Ec-bp'):
+						?>
 						<span>
 							<p><?php echo lang('TITULO_REPORTES_FECHAINI'); ?></p>
 							<input id = "repTarjetasEmitidas_fecha_in"  class="required login fecha" type="text" name="start-dmy-date" placeholder="DD/MM/AA" value="" onFocus="javascript:this.value=''"/>
@@ -60,13 +71,18 @@ $urlCdn = get_cdn();
 							<p><?php echo lang('TITULO_REPORTES_FECHAFIN'); ?></p>
 							<input id = "repTarjetasEmitidas_fecha_fin" class="required login fecha" type="text" name="end-dmy-date" placeholder="DD/MM/AA" value="" onFocus="javascript:this.value=''"/>
 						</span>
+						<?php endif; ?>
 					</div>
 					<div id="search-2">
 						<h5><?php echo lang('TITULO_REPORTES_RESULTADOS'); ?></h5>
+						<?php
+							if ( $pais !== 'Ec-bp'):
+						?>
 						<span>
 							<input type="radio" name="radio" id='radio-general' class="required" value = "0"/>
 							<p><?php echo lang('REPORTES_RADIO_GENERAL'); ?></p>
 						</span>
+						<?php endif; ?>
 						<span>
 							<input type="radio" name="radio" id='radio-producto' class="required" value = "1"/>
 							<p><?php echo lang('REPORTES_RADIO_PRODUCTO'); ?></p>
@@ -134,6 +150,15 @@ $urlCdn = get_cdn();
 			<input id="categoria_dos" type='hidden' data='<?php echo lang('CATEGORIAL_DOS'); ?>'/>
 			<input id="titulografico" type='hidden' data='<?php echo lang('GRAFICO_TITULO_TARJETAS'); ?>'/>
 			<input id="titulograficotext" type='hidden' data='<?php echo lang('GRAFICO_TITULO_TEXT_TARJETAS'); ?>'/>
+			<input id="fecha_emision" type='hidden' data='<?php echo lang('FECHA_EMISION'); ?>'/>
+			<input id="numero_lote" type='hidden' data='<?php echo lang('NUMERO_LOTE'); ?>'/>
+			<input id="numero_tarjeta" type='hidden' data='<?php echo lang('NUMERO_TARJETA'); ?>'/>
+			<input id="cedula" type='hidden' data='<?php echo lang('CEDULA'); ?>'/>
+			<input id="nombre" type='hidden' data='<?php echo lang('NOMBRE'); ?>'/>
+			<input id="apellido" type='hidden' data='<?php echo lang('APELLIDO'); ?>'/>
+			<input id="ubicación" type='hidden' data='<?php echo lang('UBICACIÓN'); ?>'/>
+			<input id="estado_emision" type='hidden' data='<?php echo lang('ESTADO_EMISION'); ?>'/>
+			<input id="estado_plastico" type='hidden' data='<?php echo lang('ESTADO_PLASTICO'); ?>'/>
 
 		</div>
 

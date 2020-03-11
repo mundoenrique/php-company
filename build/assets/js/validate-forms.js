@@ -108,6 +108,7 @@ function validateForms(form, options) {
 			"user-password-1": {pattern: userPassword},
 			"user-password-2": {pattern: userPassword},
 			"id-persona": {pattern: numeric},
+			"start-my-date": {pattern: date.my},
 			"start-dmy-date": {pattern: date.dmy},
 			"end-dmy-date": {pattern: date.dmy},
 			"tarjeta": {pattern: numeric},
@@ -128,6 +129,7 @@ function validateForms(form, options) {
 			"text": {pattern: text},
 			"type": {pattern: alphabetical},
 			"account": {pattern: numeric},
+			"account-transfer": {pattern: alphanum},
 			"pass": {pattern: userPassword},
 			"idTipoLote": {pattern: numeric},
 			"id-document": {pattern: numeric},
@@ -146,7 +148,8 @@ function validateForms(form, options) {
 			"confirm-pass": {
 				required: "Confirme su nueva contraseña",
 				equalTo: 'Debe ser igual a su nueva contraseña'
-			}
+			},
+			"start-my-date": "Falla la fecha",
 		}
 	});
 
