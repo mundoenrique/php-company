@@ -312,6 +312,28 @@ footer.main-footer {
 	margin-bottom: 4.5rem !important;
 }
 
+#service-orders-form .row{
+	flex-wrap: nowrap !important;
+	width: 73% !important;
+}
+
+#service-orders-form .row > .ml-auto{
+	display: block !important;
+	margin-top: 22px;
+}
+
+@media (max-width: 1024px) {
+	#service-orders-form .row{
+		flex-wrap: wrap !important;
+		width: auto;
+	}
+
+	#service-orders-form .row > .ml-auto{
+		display: none;
+		margin-top: auto;
+	}
+}
+
 .form-control {
 	display: block;
 	width: 100%;
