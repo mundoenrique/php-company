@@ -142,6 +142,7 @@ function getReport(data, btn) {
 						},
 						"ordering": false,
 						"pagingType": "full_numbers",
+						responsive: true,
 						"columnDefs": [
 							{
 								"targets": 3,
@@ -151,6 +152,15 @@ function getReport(data, btn) {
 										data;
 								}
 							},
+							{ "targets": 6,className: "none" },
+							{ "targets": 7,className: "none" },
+							{ "targets": 8,className: "none" },
+							{ "targets": 9,className: "none" },
+							{ "targets": 10,className: "none" },
+							{ "targets": 11,className: "none" },
+							{ "targets": 12,className: "none" },
+							{ "targets": 13,className: "none" },
+							{ "targets": 14,className: "none" }
 						],
 						"language": dataTableLang
 					})
