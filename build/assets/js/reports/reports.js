@@ -1,6 +1,7 @@
 'use strict'
 $(function () {
 	var optionValues = [];
+	var optiondiv = [];
 	var prevOption;
 	var reportSelected;
 	form = $('#form-report')
@@ -9,12 +10,15 @@ $(function () {
 		optionValues.push($(this).val());
 	});
 
-	$(".reports-form").delay(2000).removeClass('none');
+	$('#form-report > div').each(function () {
+		optiondiv.push($(this).attr('id'));
+	});
 
+	$(".reports-form").delay(2000).removeClass('none');
 	optionValues.splice(0, 2);
 
-	for (var i = 0; i < optionValues.length; i++) {
-		$(`#${optionValues[i]}`).hide();
+	for (var i = 0; i < optiondiv.length; i++) {
+		$(`#${optiondiv[i]}`).hide();
 	}
 
 	$("#reports").change(function () {
