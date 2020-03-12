@@ -322,13 +322,13 @@ footer.main-footer {
 	margin-top: 22px;
 }
 
-@media (max-width: 1024px) {
+@media only screen and (max-width : 1024px) {
 	#service-orders-form .row{
 		flex-wrap: wrap !important;
 		width: auto;
 	}
 
-	#service-orders-form .row > .ml-auto{
+	#service-orders-form .row .ml-auto{
 		display: none;
 		margin-top: auto;
 	}
