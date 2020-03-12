@@ -313,25 +313,13 @@ footer.main-footer {
 }
 
 #service-orders-form .row{
-	flex-wrap: nowrap !important;
-	width: 73% !important;
+	flex-wrap: nowrap;
+	width: 73%;
 }
 
 #service-orders-form .row > .ml-auto{
 	display: block !important;
 	margin-top: 22px;
-}
-
-@media only screen and (max-width : 1024px) {
-	#service-orders-form .row{
-		flex-wrap: wrap !important;
-		width: auto;
-	}
-
-	#service-orders-form .row .ml-auto{
-		display: none;
-		margin-top: auto;
-	}
 }
 
 .form-control {
@@ -3855,4 +3843,16 @@ td > table.detail-lot {
 	height: 40px;
 }
 
+}
+
+@media (max-width: 1024px) {
+	#service-orders-form .row{
+		flex-wrap: wrap;
+		width: auto;
+	}
+
+	#service-orders-form .row > .ml-auto{
+		display: none;
+		margin-top: auto;
+	}
 }
