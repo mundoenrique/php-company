@@ -143,7 +143,7 @@
 							<div class="flex pb-5 flex-column">
 								<span class="line-text mb-2 h4 semibold primary"></span>
 								<div class="center mx-1">
-									<table id="reports-results" class="cell-border h6 display">
+									<table id="reports-results" class="cell-border h6 display responsive w-100">
 										<thead class="bg-primary secondary regular">
 											<tr>
 												<?php foreach($headerCardsRep AS $header): ?>
