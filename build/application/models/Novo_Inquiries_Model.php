@@ -148,8 +148,8 @@ class Novo_Inquiries_Model extends NOVO_Model {
 				}
 
 				$this->session->set_flashdata('serviceOrdersList', $serviceOrdersList);
+				$this->session->set_userdata('serviceOrdersListMemory', $serviceOrdersList);
 				break;
-
 			case -5:
 				$this->response->title = 'Generar orden de servicio';
 				$this->response->msg = 'No fue posible generar la orden de servicio';
@@ -163,7 +163,6 @@ class Novo_Inquiries_Model extends NOVO_Model {
 				$this->response->data['btn1']['action'] = 'close';
 				break;
 		}
-
 			$serviceOrdersList = $this->session->flashdata('serviceOrdersList');
 			$bulkNotBillable = $this->session->flashdata('bulkNotBillable');
 			$this->session->set_flashdata('serviceOrdersList', $serviceOrdersList);
@@ -250,12 +249,6 @@ class Novo_Inquiries_Model extends NOVO_Model {
 
 		$response = $this->sendToService('DetailServiceOrders');
 
-		$refresh=FALSE;
-
-		if(isset($dataRequest->refresh)){
-			$refresh=$dataRequest->refresh;
-		}
-
 		$definitive['acrif'] = $response->acrif;
 		$definitive['acnomcia'] = $response->acnomcia;
 		$definitive['acnombre'] = $response->acnombre;
@@ -278,16 +271,12 @@ class Novo_Inquiries_Model extends NOVO_Model {
 
 		switch ($this->isResponseRc) {
 			case 0:
-				if($refresh==FALSE){
-					$this->response->code = 0;
-				}
 				$this->response->detail= (object) $definitive;
 				$this->session->set_flashdata('detailServiceOrders',$this->response);
+				$this->session->set_userdata('detailServiceOrdersMemory', $this->response);
 				break;
 		}
-			if($refresh==FALSE){
 			return $this->responseToTheView('DetailServiceOrders');
-			}
 	}
 
 	/**
@@ -316,25 +305,21 @@ class Novo_Inquiries_Model extends NOVO_Model {
 
 		$response = $this->sendToService('exportFiles');
 
-		$this->dataRequest->initialDate =$dataRequest->initialDate;
-		$this->dataRequest->finalDate = $dataRequest->finalDate;
-		$this->dataRequest->status = $dataRequest->status;
-		$this->dataRequest->statusText = $dataRequest->statusText;
-		$this->callWs_GetServiceOrdersRefresh_Inquiries($this->dataRequest);
-
-		$this->isResponseRc=-3;
-
 		switch ($this->isResponseRc) {
 			case 0:
 			exportFile($response->archivo,'pdf',str_replace(' ', '_', 'OrdenServicio'.date("d/m/Y H:i")));
+			exit;
 			break;
 			default:
 			$this->response->code = 3;
+			$this->response->downloadModel = TRUE;
 			$this->response->title = lang('GEN_DOWNLOAD_FILE');
 			$this->response->msg = lang('GEN_WARNING_DOWNLOAD_FILE');
 			$this->response->icon = lang('GEN_ICON_WARNING');
 			$this->response->data->resp['btn1']['action'] = 'close';
 			$this->session->set_flashdata('response-order',$this->response);
+			$this->session->set_flashdata('serviceOrdersList',$this->session->userdata('serviceOrdersListMemory'));
+			$this->session->unset_userdata('serviceOrdersListMemory');
 			redirect(base_url('consulta-orden-de-servicio'), 'location');
 		}
 	}
@@ -348,11 +333,9 @@ class Novo_Inquiries_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO Inquiries Model: DetailExportFiles Method Initialized');
 
-		$operation='';
+		$operation='detalleLoteExcel';
 
-		if($dataRequest->file_type=='xls'){
-			$operation='detalleLoteExcel';
-		}else if ($dataRequest->file_type=='pdf'){
+    if ($dataRequest->file_type=='pdf'){
 			$operation='detalleLotePDF';
 		}
 
@@ -363,13 +346,8 @@ class Novo_Inquiries_Model extends NOVO_Model {
 		$this->dataRequest->idOperation = $operation;
 		$this->dataRequest->acidlote =$dataRequest->data_lote;
 		$this->dataRequest->numberOrder=$dataRequest->data_lote;
-		$this->dataRequest->refresh=TRUE;
 
 		$response = $this->sendToService('DetailExportFiles');
-
-		$this->callWs_DetailServiceOrders_Inquiries($this->dataRequest);
-
-		$this->isResponseRc=-3;
 
 		switch ($this->isResponseRc) {
 			case 0:
@@ -377,93 +355,15 @@ class Novo_Inquiries_Model extends NOVO_Model {
 			break;
 			default:
 			$this->response->code = 3;
+			$this->response->downloadModel = TRUE;
 			$this->response->title = lang('GEN_DOWNLOAD_FILE');
 			$this->response->msg = lang('GEN_WARNING_DOWNLOAD_FILE');
 			$this->response->icon = lang('GEN_ICON_WARNING');
 			$this->response->data->resp['btn1']['action'] = 'close';
+			$this->session->set_flashdata('detailServiceOrders',$this->session->userdata('detailServiceOrdersMemory'));
+			$this->session->unset_userdata('detailServiceOrdersMemory');
 			$this->session->set_flashdata('response-msg-detail-order',$this->response);
 			redirect(base_url('detalle-orden-de-servicio'), 'location');
 		}
-	}
-
-	/**
-	 * @info Método para obtener las ordenes de servicio
-	 * @author J. Enrique Peñaloza Piñero
-	 * @date Janury 09th, 2019
-	 */
-	public function callWs_GetServiceOrdersRefresh_Inquiries($dataRequest)
-	{
-		log_message('INFO', 'NOVO Inquiries Model: ServiceOrderStatus Method Initialized');
-		$this->className = 'com.novo.objects.MO.ListadoOrdenServicioMO';
-
-		$this->dataAccessLog->modulo = 'Consultas';
-		$this->dataAccessLog->function = 'Lista de ordenes de servicio';
-		$this->dataAccessLog->operation = 'Ordenes de servicios';
-
-		$this->dataRequest->idOperation = 'buscarOrdenServicio';
-		$this->dataRequest->rifEmpresa = $this->session->enterpriseInf->idFiscal;
-		$this->dataRequest->acCodCia = $this->session->enterpriseInf->enterpriseCode;
-		$this->dataRequest->idProducto = $this->session->productInf->productPrefix;
-		$this->dataRequest->fechaIni = $dataRequest->initialDate;
-		$this->dataRequest->fechaFin = $dataRequest->finalDate;
-		$this->dataRequest->status = $dataRequest->status;
-
-		$response = $this->sendToService('ServiceOrderStatus');
-
-				foreach($response->lista AS $list) {
-					$orderList = [];
-
-					$serviceOrders['initialDate'] = $dataRequest->initialDate;
-					$serviceOrders['finalDate'] = $dataRequest->finalDate;
-					$serviceOrders['status'] = $dataRequest->status;
-					$serviceOrders['statusText'] = $dataRequest->statusText;
-
-					foreach($list AS $key => $value) {
-						switch ($key) {
-							case 'idOrden':
-								$serviceOrders['OrderNumber'] = $value;
-								break;
-							case 'estatus':
-								$serviceOrders['OrderStatus'] = $value;
-								$serviceOrders['OrderVoidable'] = FALSE;
-								if($value == '0') {
-									$serviceOrders['OrderVoidable'] = $list->nofactura != '' && $list->fechafactura != '' ?: TRUE;
-								}
-								break;
-							case 'fechaGeneracion':
-								$serviceOrders['Orderdate'] = $value;
-								break;
-							case 'montoComision':
-								$serviceOrders['OrderCommission'] = $value;
-								break;
-							case 'montoIVA':
-								$serviceOrders['OrderTax'] = $value;
-								break;
-							case 'montoOS':
-								$serviceOrders['OrderAmount'] = $value;
-								break;
-							case 'montoDeposito':
-								$serviceOrders['OrderDeposit'] = $value;
-								break;
-							case 'lotes':
-								$serviceOrders['bulk'] = [];
-								foreach($value AS $bulk) {
-									$bulkList['bulkNumber'] = $bulk->acnumlote;
-									$bulkList['bulkLoadDate'] = $bulk->dtfechorcarga;
-									$bulkList['bulkLoadType'] = ucfirst(mb_strtolower($bulk->acnombre));
-									$bulkList['bulkRecords'] = $bulk->ncantregs;
-									$bulkList['bulkStatus'] = ucfirst(mb_strtolower($bulk->status));
-									$bulkList['bulkAmount'] = floatval($bulk->montoRecarga);
-									$bulkList['bulkCommisAmount'] = floatval($bulk->montoComision);
-									$bulkList['bulkTotalAmount'] = floatval($bulk->montoRecarga) + floatval($bulk->montoComision);
-									$bulkList['bulkacidlote'] = $bulk->acidlote;
-									$serviceOrders['bulk'][] = (object) $bulkList;
-								}
-								break;
-						}
-					}
-					$serviceOrdersList[] = (object) $serviceOrders;
-				}
-				$this->session->set_flashdata('serviceOrdersList', $serviceOrdersList);
 	}
 }

@@ -100,7 +100,7 @@
 										<i class="icon icon-find" aria-hidden="true"></i>
 									</button>
 								  <?php endif; ?>
-									<button class="btn mx-1 px-0" title="<?= lang('GEN_BTN_DOWN_PDF'); ?>" data-toggle="tooltip">
+									<button class="btn mx-1 px-0 big-modal" title="<?= lang('GEN_BTN_DOWN_PDF'); ?>" data-toggle="tooltip">
 										<i class="icon icon-file-pdf" aria-hidden="true"></i>
 									</button>
 									<?php if($this->verify_access->verifyAuthorization('TEBORS', 'TEBANU') && $list->OrderVoidable): ?>

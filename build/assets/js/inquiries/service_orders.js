@@ -28,6 +28,8 @@ $(function() {
 
 			$('#detailServiceOrders').on('click','#numberid',function(){
 
+				$('.cover-spin').show(0);
+
 				insertFormInput(true, $("#detail-orders-form"));
 
 				$("#detail-orders-form").submit();
@@ -161,9 +163,11 @@ $(function() {
 		if(action == lang.GEN_BTN_DOWN_PDF) {
 			form.submit();
 		}
+		setTimeout(function() {
+			$('.cover-spin').hide();
+		},lang.GEN_TIME_DOWNLOAD_FILE);
 
 	});
-
 })
 
 function format (bulk) {
@@ -172,7 +176,7 @@ function format (bulk) {
 	bulk = JSON.parse(bulk)
 	$.each(bulk, function(key, value){
 		body+= '<tr>';
-		body+= 	'<td ><a id=numberid class="btn-link">'+value.bulkNumber+'</a></td>';
+		body+= 	'<td ><a id=numberid class="btn-link big-modal">'+value.bulkNumber+'</a></td>';
 		body+= 	'<td>'+value.bulkLoadDate+'</td>';
 		body+= 	'<td>'+value.bulkLoadType+'</td>';
 		body+= 	'<td>'+value.bulkRecords+'</td>';
