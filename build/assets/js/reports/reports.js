@@ -1,6 +1,7 @@
 'use strict'
 $(function () {
 	var optionValues = [];
+	var optiondiv = [];
 	var prevOption;
 	var reportSelected;
 	form = $('#form-report')
@@ -9,12 +10,15 @@ $(function () {
 		optionValues.push($(this).val());
 	});
 
-	$(".reports-form").delay(2000).removeClass('none');
+	$('#form-report > div').each(function () {
+		optiondiv.push($(this).attr('id'));
+	});
 
+	$(".reports-form").delay(2000).removeClass('none');
 	optionValues.splice(0, 2);
 
-	for (var i = 0; i < optionValues.length; i++) {
-		$(`#${optionValues[i]}`).hide();
+	for (var i = 0; i < optiondiv.length; i++) {
+		$(`#${optiondiv[i]}`).hide();
 	}
 
 	$("#reports").change(function () {
@@ -80,21 +84,6 @@ $(function () {
 		}
 	});
 
-	$('#reports-results').DataTable({
-		"ordering": false,
-		"pagingType": "full_numbers",
-		"columnDefs": [
-			{
-				"targets": 3,
-				render: function (data, type, row) {
-					return data.length > 20 ?
-						data.substr(0, 20) + '…' :
-						data;
-				}
-			},
-		],
-		"language": dataTableLang
-	})
 
 	$('#btn-download').on('click', function (e) {
 		e.preventDefault();
@@ -111,12 +100,16 @@ $(function () {
 		if(form.valid()) {
 			var tempId;
 			var tempVal;
+			var cardsPeople = btnAction.attr('cards')
+			data.operation = cardsPeople || data.operation
 			btnAction.html(loader);
 			insertFormInput(true);
-			$('#'+reportSelected+' input').each(function(index, element) {
+			$('#'+reportSelected+' input, #'+reportSelected+' select')
+			.not('[type=search]')
+			.each(function(index, element) {
 				tempId = $(element).attr('id')
 				tempVal = $(element).val()
-				data[tempId] = tempVal
+				data[tempId] = tempVal;
 			})
 			getReport(data, btnAction)
 		}
@@ -133,6 +126,7 @@ function getReport(data, btn) {
 			switch (data.operation) {
 				case 'repListadoTarjetas':
 				case 'repMovimientoPorEmpresa':
+				case 'repMovimientoPorTarjeta':
 				case 'repComprobantesVisaVale':
 					downloadFile.attr('href', response.data.file)
 					document.getElementById('download-file').click()
@@ -142,8 +136,40 @@ function getReport(data, btn) {
 					}
 					callNovoCore(verb, who, where, data, function (response) {})
 					break;
+				case 'repTarjetasPorPersona':
 
-				default:
+					break;
+				case 'repTarjeta':
+					$('#reports-results').DataTable({
+						drawCallback: function(d) {
+							$('input[type=search]').attr('name', 'search')
+							$('#repTarjeta-result').removeClass('none');
+						},
+						"ordering": false,
+						"pagingType": "full_numbers",
+						responsive: true,
+						"columnDefs": [
+							{
+								"targets": 3,
+								render: function (data, type, row) {
+									return data.length > 20 ?
+										data.substr(0, 20) + '…' :
+										data;
+								}
+							},
+							{ "targets": 6,className: "none" },
+							{ "targets": 7,className: "none" },
+							{ "targets": 8,className: "none" },
+							{ "targets": 9,className: "none" },
+							{ "targets": 10,className: "none" },
+							{ "targets": 11,className: "none" },
+							{ "targets": 12,className: "none" },
+							{ "targets": 13,className: "none" },
+							{ "targets": 14,className: "none" }
+						],
+						"language": dataTableLang
+					})
+
 					break;
 			}
 		}

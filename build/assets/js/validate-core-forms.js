@@ -77,7 +77,10 @@ function validateForms(form) {
 				pattern: date.dmy
 			},
 			"status-order": {required: true, requiredTypeOrder: true},
-			"selected-date": {required: true, pattern: date.my}
+			"selected-date": {required: true, pattern: date.my},
+			"id-type": {requiredSelect: true},
+			"id-number": {required: true, pattern: numeric},
+			"card-number": {required: true, pattern: numeric, maxlength: 16, minlength: 16}
 		},
 		messages: {
 			"user_login": lang.VALIDATE_USERLOGIN,
@@ -98,6 +101,9 @@ function validateForms(form) {
 			"datepicker_end": lang.VALIDATE_FINAL_DATE,
 			"status-order": lang.VALIDATE_ORDER_STATUS,
 			"selected-date": lang.VALIDATE_SELECTED_DATE,
+			"id-type": lang.VALIDATE_ID_TYPE,
+			"id-number": lang.VALIDATE_ID_NUMBER,
+			"card-number": lang.VALIDATE_CARD_NUMBER,
 		},
 		errorPlacement: function(error, element) {
 			$(element).closest('.form-group').find('.help-block').html(error.html());
@@ -144,6 +150,10 @@ function validateForms(form) {
 
 	$.validator.methods.sizeFile = function(value, element, param) {
 		return element.files[0].size > 0;
+	}
+
+	$.validator.methods.requiredSelect = function(value, element, param) {
+		return alphanum.test($(element).find('option:selected').val().trim());
 	}
 
 	form.validate().resetForm();

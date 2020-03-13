@@ -125,10 +125,10 @@ class Novo_Reports_Model extends NOVO_Model {
 				$this->movementsByEnterprise($dataRequest);
 			break;
 			case 'repTarjeta':
-				$this->className = 'TarjetaTO.class';
+				$this->cardReport($dataRequest);
 			break;
 			case 'repTarjetasPorPersona':
-				$this->className = 'TarjetahabienteTO.class';
+				$this->cardsPeople($dataRequest);
 			break;
 			case 'repComprobantesVisaVale':
 				$this->VISAproofpayment($dataRequest);
@@ -254,6 +254,143 @@ class Novo_Reports_Model extends NOVO_Model {
 			],
 			'mes' => $date[0],
 			'anio' => $date[1]
+		];
+
+		$response = $this->sendToService('GetReport: '.$dataRequest->operation);
+
+		switch($this->isResponseRc) {
+			case 0:
+				$this->response->icon = lang('GEN_ICON_DANGER');
+				$this->response->title = lang('REPORTS_TITLE');
+				$this->response->msg = lang('REPORTS_NO_FILE_EXIST');
+				$this->response->data['btn1']['action'] = 'close';
+
+				if(file_exists(assetPath('downloads/'.$response->bean))) {
+					$this->response->code = 0;
+					$this->response->msg = lang('RESP_RC_0');
+					$this->response->data = [
+						'file' => assetUrl('downloads/'.$response->bean),
+						'name' => $response->bean
+					];
+				}
+				break;
+			case -30:
+			case -150:
+				$this->response->icon = lang('GEN_ICON_INFO');
+				$this->response->title = lang('REPORTS_TITLE');
+				$this->response->msg = lang('REPORTS_NO_MOVES_ENTERPRISE');
+				$this->response->data['btn1']['action'] = 'close';
+				break;
+		}
+
+		return $this->response;
+	}
+	/**
+	 * @info Método para obtener el detalle de una tarjeta
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date March 10th, 2020
+	 */
+	private function cardReport($dataRequest)
+	{
+		log_message('INFO', 'NOVO Reports Model: cardReport Method Initialized');
+
+		$this->dataAccessLog->function = 'Reporte de tarjetas';
+		$this->dataAccessLog->operation = 'Lista de tarjetas';
+
+		$this->className = 'TarjetaTO.class';
+
+		$this->dataRequest->noTarjeta = $dataRequest->cardNumber;
+		$this->dataRequest->rif = $this->session->enterpriseInf->idFiscal;
+
+
+		$response = $this->sendToService('GetReport: '.$dataRequest->operation);
+
+		switch($this->isResponseRc) {
+			case 0:
+				$this->response->code = 0;
+
+				break;
+			case -30:
+			case -150:
+				$this->response->icon = lang('GEN_ICON_INFO');
+				$this->response->title = lang('REPORTS_TITLE');
+				$this->response->msg = lang('REPORTS_NO_MOVES_ENTERPRISE');
+				$this->response->data['btn1']['action'] = 'close';
+				break;
+		}
+
+		return $this->response;
+	}
+	/**
+	 * @info Método para obtener el listado de tarjetas por persona
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date March 10th, 2020
+	 */
+	private function cardsPeople($dataRequest)
+	{
+		log_message('INFO', 'NOVO Reports Model: cardsPeople Method Initialized');
+
+		$this->dataAccessLog->function = 'Tarjetas por persona';
+		$this->dataAccessLog->operation = 'Lista de tarjetas';
+
+		$this->className = 'TarjetahabienteTO.class';
+
+		$this->dataRequest->tarjetaHabiente = [
+			'id_ext_per' => $dataRequest->idType.'_'.$dataRequest->idNumber,
+			'id_ext_emp' => $this->session->enterpriseInf->idFiscal
+		];
+
+		$response = $this->sendToService('GetReport: '.$dataRequest->operation);
+
+		switch($this->isResponseRc) {
+			case 0:
+				$this->response->icon = lang('GEN_ICON_DANGER');
+				$this->response->title = lang('REPORTS_TITLE');
+				$this->response->msg = lang('REPORTS_NO_FILE_EXIST');
+				$this->response->data['btn1']['action'] = 'close';
+
+				if(file_exists(assetPath('downloads/'.$response->bean))) {
+					$this->response->code = 0;
+					$this->response->msg = lang('RESP_RC_0');
+					$this->response->data = [
+						'file' => assetUrl('downloads/'.$response->bean),
+						'name' => $response->bean
+					];
+				}
+				break;
+			case -30:
+			case -150:
+				$this->response->icon = lang('GEN_ICON_INFO');
+				$this->response->title = lang('REPORTS_TITLE');
+				$this->response->msg = lang('REPORTS_NO_MOVES_ENTERPRISE');
+				$this->response->data['btn1']['action'] = 'close';
+				break;
+		}
+
+		return $this->response;
+	}
+	/**
+	 * @info Método para obtener el listado de tarjetas por persona
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date March 10th, 2020
+	 */
+	private function movementsByCards($dataRequest)
+	{
+		log_message('INFO', 'NOVO Reports Model: movementsByCards Method Initialized');
+
+		$this->dataAccessLog->function = 'Movimientos por tarjeta';
+		$this->dataAccessLog->operation = 'Descargar archivo';
+
+		$this->className = 'ReporteCEOTO.class';
+
+		$this->dataRequest->movTarjeta = [
+			'tarjeta' => [
+				'noTarjeta' => $dataRequest->cardNumberId,
+				'id_ext_per' => $dataRequest->idType.'_'.$dataRequest->idNumber,
+				'rif' => $this->session->enterpriseInf->idFiscal
+			],
+			'fechaInicio' => convertDate($dataRequest->peopleDateBegin),
+			'fechaFin' => convertDate($dataRequest->peopleDateEnd)
 		];
 
 		$response = $this->sendToService('GetReport: '.$dataRequest->operation);
