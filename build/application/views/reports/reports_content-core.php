@@ -96,7 +96,7 @@
 
 					</div>
 
-					<div id="result-repMovimientoPorTarjeta">
+					<div id="result-repMovimientoPorTarjeta" class="row">
 						<div class="form-group col-3">
 							<label><?= lang('REPORTS_ID_NUMBER'); ?></label>
 							<select id="cardNumberId" name="card-number" class="select-box custom-select flex h6 w-100 form-control" disabled>
@@ -151,59 +151,7 @@
 												<?php endforeach; ?>
 											</tr>
 										</thead>
-										<tbody>
-											<tr>
-												<td>10363</td>
-												<td>2019-09-26 09:53:12</td>
-												<td>1792067782001</td>
-												<td>Directv Colombia C. Ltd</td>
-												<td>10363</td>
-												<td>2019-09-26 09:53:12</td>
-												<td>1792067782001</td>
-												<td>Directv Colombia C. Ltd</td>
-												<td>10363</td>
-												<td>2019-09-26 09:53:12</td>
-												<td>1792067782001</td>
-												<td>Directv Colombia C. Ltd</td>
-												<td>2019-09-26 09:53:12</td>
-												<td>1792067782001</td>
-												<td>Directv Colombia C. Ltd</td>
-											</tr>
-											<tr>
-												<td>10363</td>
-												<td>2019-09-26 09:53:12</td>
-												<td>1792067782001</td>
-												<td>Directv Colombia C. Ltd</td>
-												<td>10363</td>
-												<td>2019-09-26 09:53:12</td>
-												<td>1792067782001</td>
-												<td>Directv Colombia C. Ltd</td>
-												<td>10363</td>
-												<td>2019-09-26 09:53:12</td>
-												<td>1792067782001</td>
-												<td>Directv Colombia C. Ltd</td>
-												<td>2019-09-26 09:53:12</td>
-												<td>1792067782001</td>
-												<td>Directv Colombia C. Ltd</td>
-											</tr>
-											<tr>
-												<td>10363</td>
-												<td>2019-09-26 09:53:12</td>
-												<td>1792067782001</td>
-												<td>Directv Colombia C. Ltd</td>
-												<td>10363</td>
-												<td>2019-09-26 09:53:12</td>
-												<td>1792067782001</td>
-												<td>Directv Colombia C. Ltd</td>
-												<td>10363</td>
-												<td>2019-09-26 09:53:12</td>
-												<td>1792067782001</td>
-												<td>Directv Colombia C. Ltd</td>
-												<td>2019-09-26 09:53:12</td>
-												<td>1792067782001</td>
-												<td>Directv Colombia C. Ltd</td>
-											</tr>
-										</tbody>
+										<tbody></tbody>
 									</table>
 								</div>
 							</div>

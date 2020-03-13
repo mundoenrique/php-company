@@ -65,7 +65,7 @@ class Novo_Reports_Model extends NOVO_Model {
 								}
 								break;
 							case 'listFilter':
-								if(count($value) > 0 && $value[0]->idFilter == '3') {
+								if(count($value) > 0 && isset($value[0]->listDataSelection)) {
 									foreach($value[0]->listDataSelection AS $IdTypeObject) {
 										$idType = [];
 										$idType['key'] = $IdTypeObject->codData;
@@ -333,7 +333,7 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->dataAccessLog->function = 'Tarjetas por persona';
 		$this->dataAccessLog->operation = 'Lista de tarjetas';
 
-		$this->className = 'TarjetahabienteTO.class';
+		$this->className = 'ReporteCEOTO.class';
 
 		$this->dataRequest->tarjetaHabiente = [
 			'id_ext_per' => $dataRequest->idType.'_'.$dataRequest->idNumber,
