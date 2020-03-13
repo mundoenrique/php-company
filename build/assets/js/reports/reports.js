@@ -100,6 +100,8 @@ $(function () {
 		if(form.valid()) {
 			var tempId;
 			var tempVal;
+			var cardsPeople = btnAction.attr('cards')
+			data.operation = cardsPeople || data.operation
 			btnAction.html(loader);
 			insertFormInput(true);
 			$('#'+reportSelected+' input, #'+reportSelected+' select')
@@ -107,7 +109,7 @@ $(function () {
 			.each(function(index, element) {
 				tempId = $(element).attr('id')
 				tempVal = $(element).val()
-				data[tempId] = tempVal
+				data[tempId] = tempVal;
 			})
 			getReport(data, btnAction)
 		}
@@ -124,7 +126,7 @@ function getReport(data, btn) {
 			switch (data.operation) {
 				case 'repListadoTarjetas':
 				case 'repMovimientoPorEmpresa':
-					case 'repTarjetasPorPersona':
+				case 'repMovimientoPorTarjeta':
 				case 'repComprobantesVisaVale':
 					downloadFile.attr('href', response.data.file)
 					document.getElementById('download-file').click()
@@ -133,6 +135,9 @@ function getReport(data, btn) {
 						fileName: response.data.name
 					}
 					callNovoCore(verb, who, where, data, function (response) {})
+					break;
+				case 'repTarjetasPorPersona':
+
 					break;
 				case 'repTarjeta':
 					$('#reports-results').DataTable({

@@ -294,8 +294,8 @@ class Novo_Reports_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO Reports Model: cardReport Method Initialized');
 
-		$this->dataAccessLog->function = 'Listado de tarjetas';
-		$this->dataAccessLog->operation = 'Renderizar lista de tarjetas';
+		$this->dataAccessLog->function = 'Reporte de tarjetas';
+		$this->dataAccessLog->operation = 'Lista de tarjetas';
 
 		$this->className = 'TarjetaTO.class';
 
@@ -330,10 +330,58 @@ class Novo_Reports_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO Reports Model: cardsPeople Method Initialized');
 
-		$this->dataAccessLog->function = 'Listado de tarjetas por persona';
-		$this->dataAccessLog->operation = 'Descargar archivo';
+		$this->dataAccessLog->function = 'Tarjetas por persona';
+		$this->dataAccessLog->operation = 'Lista de tarjetas';
 
 		$this->className = 'TarjetahabienteTO.class';
+
+		$this->dataRequest->tarjetaHabiente = [
+			'id_ext_per' => $dataRequest->idType.'_'.$dataRequest->idNumber,
+			'id_ext_emp' => $this->session->enterpriseInf->idFiscal
+		];
+
+		$response = $this->sendToService('GetReport: '.$dataRequest->operation);
+
+		switch($this->isResponseRc) {
+			case 0:
+				$this->response->icon = lang('GEN_ICON_DANGER');
+				$this->response->title = lang('REPORTS_TITLE');
+				$this->response->msg = lang('REPORTS_NO_FILE_EXIST');
+				$this->response->data['btn1']['action'] = 'close';
+
+				if(file_exists(assetPath('downloads/'.$response->bean))) {
+					$this->response->code = 0;
+					$this->response->msg = lang('RESP_RC_0');
+					$this->response->data = [
+						'file' => assetUrl('downloads/'.$response->bean),
+						'name' => $response->bean
+					];
+				}
+				break;
+			case -30:
+			case -150:
+				$this->response->icon = lang('GEN_ICON_INFO');
+				$this->response->title = lang('REPORTS_TITLE');
+				$this->response->msg = lang('REPORTS_NO_MOVES_ENTERPRISE');
+				$this->response->data['btn1']['action'] = 'close';
+				break;
+		}
+
+		return $this->response;
+	}
+	/**
+	 * @info Método para obtener el listado de tarjetas por persona
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date March 10th, 2020
+	 */
+	private function movementsByCards($dataRequest)
+	{
+		log_message('INFO', 'NOVO Reports Model: movementsByCards Method Initialized');
+
+		$this->dataAccessLog->function = 'Movimientos por tarjeta';
+		$this->dataAccessLog->operation = 'Descargar archivo';
+
+		$this->className = 'ReporteCEOTO.class';
 
 		$this->dataRequest->movTarjeta = [
 			'tarjeta' => [
