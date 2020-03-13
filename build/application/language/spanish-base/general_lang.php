@@ -91,6 +91,7 @@ $lang['GEN_DETAIL_SERVICE_ORDERS'] = 'detailServiceOrders';
 $lang['GEN_DETAIL_SERVICE_ORDERS_TITLE'] = 'Detalle Órdenes de servicio';
 $lang['GEN_DOWNLOAD_FILE'] = 'Descarga de Archivos';
 $lang['GEN_WARNING_DOWNLOAD_FILE'] = 'No fue posible descargar el archivo';
+$lang['GEN_TIME_DOWNLOAD_FILE'] = '7000';
 //links
 $lang['GEN_LINK_LOGIN'] = 'inicio';
 //MODAL STYLES

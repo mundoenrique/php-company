@@ -31,6 +31,8 @@ $(function() {
 		$('#file_type').val($fileType);
 		$('#exportTo').submit();
 
+		setTimeout(function() {
+			$('.cover-spin').hide();
+		},lang.GEN_TIME_DOWNLOAD_FILE);
 	}
-
 })

@@ -78,10 +78,10 @@
 				<div class="center mx-1">
 			<div class="flex justify-end items-center">
             <div class="mr-3 py-1">
-              <a id="downXLS" class="btn px-1" title="Exportar a EXCEL" data-toggle="tooltip">
+              <a id="downXLS" class="btn px-1 big-modal" title="Exportar a EXCEL" data-toggle="tooltip">
                 <i class="icon icon-file-excel" aria-hidden="true"></i>
               </a>
-              <a id="downPDF" class="btn px-1" title="Exportar a PDF" data-toggle="tooltip">
+              <a id="downPDF" class="btn px-1 big-modal" title="Exportar a PDF" data-toggle="tooltip">
                 <i class="icon icon-file-pdf" aria-hidden="true"></i>
               </a>
             </div>
@@ -114,7 +114,7 @@
 				<div class="flex flex-column mb-4 mt-4 px-5 justify-center items-center">
 					<div class="flex flex-row">
 						<div class="mb-3 mr-4">
-							<a href="<?= base_url('consulta-orden-de-servicio') ?>" class="btn btn-link btn-small"><?= lang('GEN_BTN_BACK') ?></a>
+							<a href="<?= base_url('consulta-orden-de-servicio') ?>" class="btn btn-link btn-small big-modal"><?= lang('GEN_BTN_BACK') ?></a>
 						</div>
 					</div>
 				</div>

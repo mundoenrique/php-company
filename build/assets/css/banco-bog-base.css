@@ -1081,6 +1081,7 @@ textarea.form-control {
 .btn-link {
 	color: var(--primary);
 	text-decoration: underline;
+	cursor: pointer;
 }
 
 .btn-link:hover {

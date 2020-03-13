@@ -8,7 +8,9 @@
 			</a>
 		</li>
 		<?php if($this->session->has_userdata('user_access')): ?>
-		<?php foreach($userAccess AS $firstLevel): ?>
+		<?php
+
+			foreach($userAccess AS $firstLevel): ?>
 		<?php $textMenu = $this->create_menu->mainMenu($firstLevel->idPerfil); ?>
 		<li class="nav-item mr-1 inline big-modal <?= setCurrentPage($currentClass, $textMenu); ?>">
 			<?php $href = ($firstLevel->idPerfil) == 'GESREPORT' ? 'href="reportes"' : ''; ?>
