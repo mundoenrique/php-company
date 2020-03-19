@@ -113,13 +113,13 @@ $(function () {
 
 	var orderPage = function(filterPage, newpage) {
 		var reg = $('.'+filterPage).length;
-		if(reg < 5) {
+		if(reg < 4) {
 			$('#enterprise-list').removeClass('mx-auto');
 		} else {
 			$('#enterprise-list').addClass('mx-auto');
 		}
 		enterprisePages.find('span').removeClass('page-current');
-		enterprisePages.find(`span > a:contains(${newpage})`).parent().addClass('page-current');
+		enterprisePages.find("span > a:contains("+ newpage +")").parent().addClass('page-current');
 		enterpriseList.isotope({ filter: '.'+filterPage });
 	}
 
@@ -136,7 +136,7 @@ $(function () {
 			classElement = classElement.substring(init, finish + 2);
 			if(filterOrder == substr && classU !== classElement) {
 				classU = classElement;
-				showPage.append(`<span class="mx-1"><a href="javascript:" position="page" filter-page="${filterOrder}_">${page}</a></span>`);
+				showPage.append('<span class="mx-1"><a href="javascript:" position="page" filter-page="'+filterOrder+'_">'+page+'</a></span>');
 				page++;
 			}
 		})

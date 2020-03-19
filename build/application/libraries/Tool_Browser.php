@@ -37,12 +37,16 @@ class Tool_Browser {
 			];
 
 			if(array_key_exists($this->CI->agent->browser(), $validBrowser)) {
-				if(in_array($client, ['novo', 'pichincha'])) {
+				if(in_array($client, ['novo', 'pichincha', 'banco-bog'])) {
 					$validBrowser['Internet Explorer'] = 10;
 				}
 
 				$browser = TRUE;
 				$valid = floatval($this->CI->agent->version()) > $validBrowser[$this->CI->agent->browser()];
+
+				if($valid && $client === 'banco-bog' && $this->CI->agent->browser() === 'Internet Explorer') {
+					$valid = 'ie11';
+				}
 			}
 		}
 
@@ -93,7 +97,6 @@ class Tool_Browser {
 
 			$this->CI->session->set_flashdata('messageBrowser', $message);
 		}
-
 
 		return $valid;
 	}
