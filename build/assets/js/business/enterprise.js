@@ -113,7 +113,7 @@ $(function () {
 
 	var orderPage = function(filterPage, newpage) {
 		var reg = $('.'+filterPage).length;
-		if(reg < 5) {
+		if(reg < 4) {
 			$('#enterprise-list').removeClass('mx-auto');
 		} else {
 			$('#enterprise-list').addClass('mx-auto');

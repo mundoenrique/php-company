@@ -22,7 +22,7 @@ body {
 
 /* Header */
 header.main-head {
-	position: sticky;
+	position: fixed;
 	top: 0;
 	z-index: 999;
 	width: 100%;
@@ -320,6 +320,14 @@ footer.main-footer {
 #service-orders-form .row > .ml-auto{
 	display: block !important;
 	margin-top: 22px;
+}
+
+#auth-bulk-form .justify-end div:nth-of-type(3){
+	flex: 0 11%;
+}
+
+#auth-bulk-form .justify-end div:nth-of-type(2){
+	flex: 0 0 25%;
 }
 
 .form-control {
@@ -2211,9 +2219,10 @@ i[class*=" icon-"]:before {
 }
 
 .navbar-secondary {
-	position: sticky;
+	position: fixed;
 	top: 3.75rem;
 	z-index: 998;
+	width: 100%;
 }
 
 .detail-filters-nav {
@@ -3478,7 +3487,9 @@ a.ui-button:active,
     margin: 0 auto;
     display: block !important;
 }
-
+#product-info {
+	margin-top: 6.5rem;
+}
 .login-content:before {
 	content: ' ';
 	display: block;
@@ -3547,6 +3558,7 @@ a.ui-button:active,
 .products {
 	min-height: 328px !important;
 	max-width: 1700px !important;
+	/* margin: 0 3rem; */
 }
 
 .product {
@@ -3845,7 +3857,7 @@ td > table.detail-lot {
 
 }
 
-@media (max-width: 1024px) {
+@media screen and (max-width: 1024px) {
 	#service-orders-form .row{
 		flex-wrap: wrap;
 		width: auto;
@@ -3854,5 +3866,27 @@ td > table.detail-lot {
 	#service-orders-form .row > .ml-auto{
 		display: none;
 		margin-top: auto;
+	}
+
+	#confirm-bulk-btn .form-control{
+		width: auto !important;
+	}
+
+	#upload-file-form .col-6{
+		flex: 0 0 50%;
+	}
+
+	#upload-file-form .col-6:nth-child(3){
+		flex: 0 0 50%;
+	}
+}
+
+@media screen and (min-width: 1400px){
+	#upload-file-form .col-6:nth-child(3){
+		flex: 0 0 50% !important;
+	}
+
+	#upload-file-form .col-6{
+		flex: 0 0 21.8% !important;
 	}
 }
