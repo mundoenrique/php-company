@@ -28,6 +28,8 @@ $(function() {
 
 			$('#detailServiceOrders').on('click','#numberid',function(){
 
+				$('.cover-spin').show(0);
+
 				insertFormInput(true, $("#detail-orders-form"));
 
 				$("#detail-orders-form").submit();
@@ -97,6 +99,7 @@ $(function() {
 				status: statusOrder.val(),
 				statusText: statusOrder.find('option:selected').text()
 			}
+
 			insertFormInput(true);
 			verb = 'POST'; who = 'Inquiries'; where = 'GetServiceOrders';
 			callNovoCore(verb, who, where, data, function(response) {
@@ -122,10 +125,9 @@ $(function() {
 		switch(action) {
 			case lang.GEN_BTN_DOWN_PDF:
 				form.attr('action', baseURL+'descargar-archivo-os');
-				break;
-			case lang.GEN_BTN_CONFIRM:
-				form.attr('action', baseURL+'confirmar-lote');
-				form.append('<input type="hidden" name="bulkView" value="confirm">');
+				form.append('<input type="hidden" name="views" value="serviceOrders">');
+				form.append('<input type="hidden" name="who" value="Inquiries">');
+				form.append('<input type="hidden" name="where" value="exportFiles">');
 				break;
 			case lang.GEN_BTN_CANCEL_ORDER:
 				var oldID = $('#accept').attr('id');
@@ -161,9 +163,11 @@ $(function() {
 		if(action == lang.GEN_BTN_DOWN_PDF) {
 			form.submit();
 		}
+		setTimeout(function() {
+			$('.cover-spin').hide();
+		},lang.GEN_TIME_DOWNLOAD_FILE);
 
 	});
-
 })
 
 function format (bulk) {
@@ -172,14 +176,14 @@ function format (bulk) {
 	bulk = JSON.parse(bulk)
 	$.each(bulk, function(key, value){
 		body+= '<tr>';
-		body+= 	'<td ><a id=numberid class="btn-link">'+value.bulkNumber+'</a></td>';
+		body+= 	'<td ><a id=numberid class="btn-link big-modal">'+value.bulkNumber+'</a></td>';
 		body+= 	'<td>'+value.bulkLoadDate+'</td>';
 		body+= 	'<td>'+value.bulkLoadType+'</td>';
 		body+= 	'<td>'+value.bulkRecords+'</td>';
 		body+= 	'<td>'+value.bulkStatus+'</td>';
 		body+= 	'<td>'+value.bulkAmount+'</td>';
 		body+= 	'<td>'+value.bulkCommisAmount+'</td>';
-		body+= 	'<td>'+value.bulkTotalAmount+'<form id="detail-orders-form" class="form-group" action="'+baseURL+'detalle-orden-de-servicio" method="post"><input type="hidden" id="numberOrden" name="numberOrden" value='+value.bulkacidlote+'></form></td>';
+		body+= 	'<td>'+value.bulkTotalAmount+'<form id="detail-orders-form" class="form-group" action="'+baseURL+'detalle-orden-de-servicio" method="post"><input type="hidden" id="numberOrder" name="numberOrder" value='+value.bulkacidlote+'></form></td>';
 		body+= '</tr>';
 
 	})

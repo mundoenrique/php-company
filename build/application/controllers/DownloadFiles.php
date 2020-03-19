@@ -14,29 +14,17 @@ class DownloadFiles extends NOVO_Controller {
 	}
 
 	/**
-	 * @info Método para exportar el detalle del lote a xls
+	 * @info Método Generico para exportar archivos .pdf
 	 ** @author Luis Molina
-	 * @date marzo 02Mon, 2020
+	 * @date Mar 10 Tue, 2020
 	 */
-	public function exportDetailServiceOrders()
+	public function exportFiles()
 	{
-		log_message('INFO', 'NOVO Inquiries: exportDetailServiceOrders Method Initialized');
+		log_message('INFO', 'NOVO Inquiries: exportFiles Method Initialized');
+
+		$this->model = 'Novo_'.ucfirst($this->request->who).'_Model';
+		$this->method = 'callWs_'.ucfirst($this->request->where).'_'.$this->request->who;
 
 		$this->loadModel($this->request);
-
 	}
-
-	/**
-	 * @info Método para exportar la orden de servicio a pdf
-	 ** @author Luis Molina
-	 * @date marzo 02Mon, 2020
-	 */
-	public function exportServiceOrders()
-	{
-		log_message('INFO', 'NOVO Inquiries: exportServiceOrders Method Initialized');
-
-		$this->loadModel($this->request);
-
-	}
-
 }

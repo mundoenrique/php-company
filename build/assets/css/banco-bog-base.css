@@ -317,7 +317,7 @@ footer.main-footer {
 	opacity: 1;
 }
 
-.form-control[readonly]:not(.hasDatepicker) {
+.form-control[readonly]:not(.hasDatepicker):not(.read-only) {
 	background-color: transparent;
 	border: none;
 }
@@ -1081,6 +1081,7 @@ textarea.form-control {
 .btn-link {
 	color: var(--primary);
 	text-decoration: underline;
+	cursor: pointer;
 }
 
 .btn-link:hover {
@@ -2312,7 +2313,7 @@ i[class*=" icon-"]:before {
   height: 4px;
   background: var(--yellow);
 	position: relative;
-	margin: -1px;
+	margin-top: -1.4px;
 }
 
 .main-nav-dropdown {
@@ -2372,6 +2373,13 @@ i[class*=" icon-"]:before {
   border-bottom: 1px solid var(--shadows-color);
 }
 
+.main-nav-dropdown li ul li:only-child {
+	border-bottom: none;
+	box-shadow: 1px 1px 3px 1px var(--primary-shade);
+	border-bottom-left-radius: 5px 5px;
+	border-bottom-right-radius: 5px 5px;
+}
+
 .main-nav-dropdown > ul {
   margin-top: 0;
   margin-bottom: 0;
@@ -2387,6 +2395,12 @@ i[class*=" icon-"]:before {
 .dropdown li a:hover {
    background: var(--primary-tint) !important;
    color: var(--secondary) !important;
+}
+
+.dropdown li:last-child a:hover,
+.main-nav ul li:last-child {
+  border-bottom-left-radius: 5px 5px;
+  border-bottom-right-radius: 5px 5px;
 }
 
 .dropdown li:nth-child(2) a:hover {
@@ -2647,6 +2661,10 @@ td > button > i:hover{
 	background-color: var(--disabled-color);
 }
 
+.dataTables_length select:disabled:hover {
+	background: var(--disabled-color) url("../images/bdb/icon-chevron_down_gray.svg") right .75rem center / 14px 14px no-repeat;
+}
+
 .dataTables_length select option {
 	color: var(--text-color);
 	background-color: var(--secondary);
@@ -2839,6 +2857,10 @@ table.dataTable > tbody > tr.child ul.dtr-details {
 
 table.dataTable > tbody > tr.child ul.dtr-details > li:first-child {
 	padding-top: .5em !important;
+}
+
+.dataTable tbody tr .child:hover {
+	background: #f6f6f6 !important;
 }
 
 table#resultsAccount thead th:nth-child(7){
@@ -3434,6 +3456,7 @@ a.ui-button:active,
 
 .invalid-user {
 	align-items: center;
+	background: rgb(253, 247, 246,1);
 	background-color: rgb(253, 247, 246,1);
 	border-radius: 5px;
 	border: 1px solid var(--danger);
@@ -3451,6 +3474,7 @@ a.ui-button:active,
 
 .inactive-user {
 	align-items: center;
+	background:rgba(255, 247, 230, 1);
 	background-color:rgba(255, 247, 230, 1);
 	border-radius: 5px;
 	border: 1px solid var(--warning);
@@ -3776,9 +3800,4 @@ td > table.detail-lot {
 .img-brand-list {
 	width: 68px;
 	height: 40px;
-}
-
-a#numberid {
-	cursor: pointer;
-	font-weight: bold;
 }

@@ -37,6 +37,9 @@ class Create_Menu {
 			case 'GESREP':
 				$mainMenuLang = lang('GEN_MENU_REPORTS');
 				break;
+			case 'GESREPORT':
+				$mainMenuLang = lang('GEN_MENU_REPORTS');
+				break;
 			case 'COMBUS':
 				$mainMenuLang = lang('GEN_MENU_TRAJECTS');
 				break;

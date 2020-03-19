@@ -220,6 +220,9 @@ if(!function_exists('languajeLoad')) {
 					'authorizeBulk'	=> ['bulk'],
 					'deleteConfirmBulk'	=> ['bulk'],
 					'calculateServiceOrder'	=> ['bulk'],
+					'getReportsList'	=> ['reports'],
+					'getReport'	=> ['reports'],
+					'deleteFile'	=> ['reports'],
 				];
 		}
 
@@ -280,7 +283,6 @@ if ( ! function_exists('exportFile')) {
 	 */
 	function exportFile($file, $typeFile, $filename, $bytes = TRUE)
 	{
-		$CI =& get_instance();
 
 		switch ($typeFile) {
 			case 'pdf':
@@ -301,8 +303,6 @@ if ( ! function_exists('exportFile')) {
 				header('Pragma: no-cache');
 				header('Expires: 0');
 				break;
-			default:
-				break;
 		}
 
 		if($bytes) {
@@ -312,5 +312,14 @@ if ( ! function_exists('exportFile')) {
 		} else {
 			echo $file;
 		}
+	}
+}
+
+if(!function_exists('convertDate')) {
+	function convertDate($date) {
+		$date = explode('/', $date);
+		$date = $date[2].'-'.$date[1].'-'.$date[0];
+
+		return $date;
 	}
 }

@@ -23,11 +23,16 @@ $(function() {
 	function exportFileType($fileType){
 
 		insertFormInput(true, $('#exportTo'));
-		$('#exportTo').attr('action', baseURL + "descargar-archivo-dos");
+		$('#exportTo').attr('action', baseURL + "descargar-archivo-os");
+		$('#exportTo').append('<input type="hidden" name="views" value="detailServiceOrders">');
+		$('#exportTo').append('<input type="hidden" name="who" value="Inquiries">');
+		$('#exportTo').append('<input type="hidden" name="where" value="DetailExportFiles">');
 		$('#data_lote').val($("#data_lote").val());
 		$('#file_type').val($fileType);
 		$('#exportTo').submit();
 
+		setTimeout(function() {
+			$('.cover-spin').hide();
+		},lang.GEN_TIME_DOWNLOAD_FILE);
 	}
-
 })

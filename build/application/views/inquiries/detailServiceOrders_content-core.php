@@ -78,10 +78,10 @@
 				<div class="center mx-1">
 			<div class="flex justify-end items-center">
             <div class="mr-3 py-1">
-              <a id="downXLS" class="btn px-1" title="Exportar a EXCEL" data-toggle="tooltip">
+              <a id="downXLS" class="btn px-1 big-modal" title="Exportar a EXCEL" data-toggle="tooltip">
                 <i class="icon icon-file-excel" aria-hidden="true"></i>
               </a>
-              <a id="downPDF" class="btn px-1" title="Exportar a PDF" data-toggle="tooltip">
+              <a id="downPDF" class="btn px-1 big-modal" title="Exportar a PDF" data-toggle="tooltip">
                 <i class="icon icon-file-pdf" aria-hidden="true"></i>
               </a>
             </div>

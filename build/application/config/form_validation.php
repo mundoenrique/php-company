@@ -275,16 +275,16 @@ $config = [
 	],
 	'detailServiceOrders' => [
 		[
-			'field' => 'numberOrden',
-			'label' => 'numberOrden',
-			'rules' => 'trim|required'
+			'field' => 'numberOrder',
+			'label' => 'numberOrder',
+			'rules' => 'trim|regex_match[/^([\w]+)+$/i]'
 		]
 	],
-	'exportDetailServiceOrders' => [
+	'exportDetailServiceOrderssss' => [
 		[
 			'field' => 'data_lote',
 			'label' => 'data_lote',
-			'rules' => 'trim|required'
+			'rules' => 'trim|regex_match[/^([\w]+)+$/i]'
 		],
 		[
 			'field' => 'file_type',
@@ -292,13 +292,43 @@ $config = [
 			'rules' => 'trim|required'
 		],
 	],
-	'exportServiceOrders' => [
+	'exportFiles' => [
 		[
 			'field' => 'idOS',
 			'label' => 'idOS',
 			'rules' => 'trim|regex_match[/^([\w]+)+$/i]'
+		],
+		[
+			'field' => 'initialDate',
+			'label' => 'initialDate',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]'
+		],
+		[
+			'field' => 'finalDate',
+			'label' => 'finalDate',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]'
+		],
+		[
+			'field' => 'status',
+			'label' => 'status',
+			'rules' => 'trim|regex_match[/^[a-z0-9]+$/i]'
+		],
+		[
+			'field' => 'statusText',
+			'label' => 'statusText',
+			'rules' => 'trim|regex_match[/^[\w -]+$/i]'
+		],
+		[
+			'field' => 'who',
+			'label' => 'who',
+			'rules' => 'trim|regex_match[/^([\w]+)+$/i]'
+		],
+		[
+			'field' => 'where',
+			'label' => 'where',
+			'rules' => 'trim|regex_match[/^([\w]+)+$/i]'
 		]
-	],
+		],
 	'getServiceOrders' => [
 		[
 			'field' => 'initialDate',
@@ -319,6 +349,20 @@ $config = [
 			'field' => 'statusText',
 			'label' => 'statusText',
 			'rules' => 'trim|regex_match[/^[\w -]+$/i]'
+		]
+	],
+	'getReport' => [
+		[
+			'field' => 'operation',
+			'label' => 'operation',
+			'rules' => 'trim|regex_match[/^[\w]+$/i]'
+		]
+	],
+	'deleteFile' => [
+		[
+			'field' => 'fileName',
+			'label' => 'fileName',
+			'rules' => 'trim|regex_match[/^[\w.]+$/i]'
 		]
 	],
 	'keepSession' => [

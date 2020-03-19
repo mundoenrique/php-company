@@ -86,7 +86,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							<?php	foreach($orderList AS $list): ?>
+							<?php foreach($orderList AS $list): ?>
 							<tr bulk="<?= htmlspecialchars(json_encode($list->bulk), ENT_QUOTES, 'UTF-8'); ?>">
 								<td><?= $list->OrderNumber; ?></td>
 								<td><?= $list->Orderdate; ?></td>
@@ -100,7 +100,7 @@
 										<i class="icon icon-find" aria-hidden="true"></i>
 									</button>
 								  <?php endif; ?>
-									<button class="btn mx-1 px-0" title="<?= lang('GEN_BTN_DOWN_PDF'); ?>" data-toggle="tooltip">
+									<button class="btn mx-1 px-0 big-modal" title="<?= lang('GEN_BTN_DOWN_PDF'); ?>" data-toggle="tooltip">
 										<i class="icon icon-file-pdf" aria-hidden="true"></i>
 									</button>
 									<?php if($this->verify_access->verifyAuthorization('TEBORS', 'TEBANU') && $list->OrderVoidable): ?>
@@ -110,6 +110,10 @@
 									<?php endif; ?>
 									<form id="bulk-<?= $list->OrderNumber; ?>" method="POST">
 										<input type="hidden" name="idOS" value="<?= $list->OrderNumber; ?>">
+										<input type="hidden" name="initialDate" value="<?= $list->initialDate; ?>">
+										<input type="hidden" name="finalDate" value="<?= $list->finalDate; ?>">
+										<input type="hidden" name="status" value="<?= $list->status; ?>">
+										<input type="hidden" name="statusText" value="<?= $list->statusText; ?>">
 								  </form>
 								</td>
 							</tr>
