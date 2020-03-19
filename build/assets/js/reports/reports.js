@@ -1,6 +1,9 @@
 'use strict'
+//4193280000300118
+//C_1234567890
 $(function () {
 	var optionValues = [];
+	var optiondiv = [];
 	var prevOption;
 	var reportSelected;
 	form = $('#form-report')
@@ -9,12 +12,15 @@ $(function () {
 		optionValues.push($(this).val());
 	});
 
-	$(".reports-form").delay(2000).removeClass('none');
+	$('#form-report > div').each(function () {
+		optiondiv.push($(this).attr('id'));
+	});
 
+	$(".reports-form").delay(2000).removeClass('none');
 	optionValues.splice(0, 2);
 
-	for (var i = 0; i < optionValues.length; i++) {
-		$(`#${optionValues[i]}`).hide();
+	for (var i = 0; i < optiondiv.length; i++) {
+		$(`#${optiondiv[i]}`).hide();
 	}
 
 	$("#reports").change(function () {
@@ -29,7 +35,7 @@ $(function () {
 			$("#search-criteria").addClass('none');
 			$("#line-reports").addClass('none');
 			$("#div-download").removeClass('none');
-			$("#div-download").fadeIn(700, 'linear');;
+			$("#div-download").fadeIn(700, 'linear');
 		} else {
 			$("#search-criteria").removeClass('none');
 			$("#line-reports").removeClass('none');
@@ -46,6 +52,15 @@ $(function () {
 		data = {
 			operation: reportSelected
 		}
+
+		if ($(this).val() == "repMovimientoPorTarjeta") {
+			$('#MovimientoPorTarjeta button').removeClass('none')
+			$('#idType option').attr('disabled', false)
+			$('#MovimientoPorTarjeta input').prop('readonly', false)
+			$('#result-repMovimientoPorTarjeta').addClass('none')
+			$('#result-repMovimientoPorTarjeta input, #result-repMovimientoPorTarjeta select').prop('disabled', true)
+		}
+		$('#cardNumberId').empty()
 	});
 
 	$(".date-picker").datepicker({
@@ -88,14 +103,16 @@ $(function () {
 
 	$('.btn-report').on('click', function(e) {
 		e.preventDefault()
-
 		var btnAction = $(this);
+		var cardsPeople = btnAction.attr('cards')
+		var tempId;
+		var tempVal;
 		btnText = btnAction.text().trim();
 		validateForms(form);
 
 		if(form.valid()) {
-			var tempId;
-			var tempVal;
+
+			data.operation = cardsPeople || data.operation
 			btnAction.html(loader);
 			insertFormInput(true);
 			$('#'+reportSelected+' input, #'+reportSelected+' select')
@@ -103,7 +120,7 @@ $(function () {
 			.each(function(index, element) {
 				tempId = $(element).attr('id')
 				tempVal = $(element).val()
-				data[tempId] = tempVal
+				data[tempId] = tempVal;
 			})
 			getReport(data, btnAction)
 		}
@@ -111,6 +128,7 @@ $(function () {
 })
 
 function getReport(data, btn) {
+	var disabledNot = false;
 	btn = btn == undefined ? false : btn
 	insertFormInput(true);
 	verb = 'POST'; who = 'Reports'; where = 'getReport';
@@ -120,7 +138,7 @@ function getReport(data, btn) {
 			switch (data.operation) {
 				case 'repListadoTarjetas':
 				case 'repMovimientoPorEmpresa':
-					case 'repTarjetasPorPersona':
+				case 'repMovimientoPorTarjeta':
 				case 'repComprobantesVisaVale':
 					downloadFile.attr('href', response.data.file)
 					document.getElementById('download-file').click()
@@ -130,7 +148,47 @@ function getReport(data, btn) {
 					}
 					callNovoCore(verb, who, where, data, function (response) {})
 					break;
+				case 'repTarjetasPorPersona':
+					var option;
+					data.operation = 'repMovimientoPorTarjeta';
+					$('#MovimientoPorTarjeta button').addClass('none')
+					$('#MovimientoPorTarjeta input').prop('readonly', true);
+					$('#idType option:not(:selected)').attr('disabled',true)
+
+					$.each(response.data, function(index, element) {
+						option = '<option value="'+element.key+'">'+element.cardMask+'</option>'
+						$('#cardNumberId').append(option)
+					});
+
+					disabledNot = '#result-repMovimientoPorTarjeta input, #result-repMovimientoPorTarjeta select'
+					$('#result-repMovimientoPorTarjeta')
+					.find('input, select')
+					.prop('disabled', false)
+					$('#result-repMovimientoPorTarjeta')
+					.removeClass('none')
+					break;
 				case 'repTarjeta':
+					var reportsResults = $("#reports-results").dataTable()
+					reportsResults.fnDestroy();
+
+					var file = '<tr class="select">';
+					file+= '<td>'+response.data.idType+'</td>';
+					file+= '<td>'+response.data.idNumber+'</td>';
+					file+= '<td>'+response.data.userName+'</td>';
+					file+= '<td>'+response.data.cardNumber+'</td>';
+					file+= '<td>'+response.data.product+'</td>';
+					file+= '<td>'+response.data.createDate+'</td>';
+					file+= '<td>'+response.data.Expirydate+'</td>';
+					file+= '<td>'+response.data.currentState+'</td>';
+					file+= '<td>'+response.data.activeDate+'</td>';
+					file+= '<td>'+response.data.reasonBlock+'</td>';
+					file+= '<td>'+response.data.dateBlock+'</td>';
+					file+= '<td>'+response.data.currentBalance+'</td>';
+					file+= '<td>'+response.data.lastCredit+'</td>';
+					file+= '<td>'+response.data.lastAmoutn+'</td>';
+					file+= '<td>'+response.data.chargeGMF+'</td>';
+					file+= '</tr>'
+					$('#reports-results').append(file)
 					$('#reports-results').DataTable({
 						drawCallback: function(d) {
 							$('input[type=search]').attr('name', 'search')
@@ -138,6 +196,7 @@ function getReport(data, btn) {
 						},
 						"ordering": false,
 						"pagingType": "full_numbers",
+						responsive: true,
 						"columnDefs": [
 							{
 								"targets": 3,
@@ -147,6 +206,15 @@ function getReport(data, btn) {
 										data;
 								}
 							},
+							{ "targets": 6,className: "none" },
+							{ "targets": 7,className: "none" },
+							{ "targets": 8,className: "none" },
+							{ "targets": 9,className: "none" },
+							{ "targets": 10,className: "none" },
+							{ "targets": 11,className: "none" },
+							{ "targets": 12,className: "none" },
+							{ "targets": 13,className: "none" },
+							{ "targets": 14,className: "none" }
 						],
 						"language": dataTableLang
 					})
@@ -160,8 +228,10 @@ function getReport(data, btn) {
 		insertFormInput(false);
 		$('.help-block').text('');
 		$('#form-report').validate().resetForm();
+		data.operation = data.operation == 'repTarjetasPorPersona' ? 'MovimientoPorTarjeta' : data.operation;
 		$('#form-report input, #form-report select')
-		.not('#'+data.operation+' input', '#'+data.operation+' select')
+		.not('#'+data.operation+' input, #'+data.operation+' select')
+		.not(disabledNot)
 		.prop('disabled', true);
 		$('.cover-spin').hide();
 	})

@@ -69,6 +69,7 @@ class CallModels extends Novo_Controller {
 	private function manageFile()
 	{
 		log_message('INFO', 'NOVO CallModels: manageFile Method Initialized');
+		log_message('DEBUG', 'NOVO UPLOAD FILE MIMETYPE: '.$_FILES['file']['type']);
 
 		$ext =  explode('.', $_FILES['file']['name']);
 		$ext = end($ext);

@@ -317,7 +317,7 @@ footer.main-footer {
 	opacity: 1;
 }
 
-.form-control[readonly]:not(.hasDatepicker) {
+.form-control[readonly]:not(.hasDatepicker):not(.read-only) {
 	background-color: transparent;
 	border: none;
 }
@@ -1081,6 +1081,7 @@ textarea.form-control {
 .btn-link {
 	color: var(--primary);
 	text-decoration: underline;
+	cursor: pointer;
 }
 
 .btn-link:hover {
@@ -2660,6 +2661,10 @@ td > button > i:hover{
 	background-color: var(--disabled-color);
 }
 
+.dataTables_length select:disabled:hover {
+	background: var(--disabled-color) url("../images/bdb/icon-chevron_down_gray.svg") right .75rem center / 14px 14px no-repeat;
+}
+
 .dataTables_length select option {
 	color: var(--text-color);
 	background-color: var(--secondary);
@@ -2852,6 +2857,10 @@ table.dataTable > tbody > tr.child ul.dtr-details {
 
 table.dataTable > tbody > tr.child ul.dtr-details > li:first-child {
 	padding-top: .5em !important;
+}
+
+.dataTable tbody tr .child:hover {
+	background: #f6f6f6 !important;
 }
 
 table#resultsAccount thead th:nth-child(7){
@@ -3447,6 +3456,7 @@ a.ui-button:active,
 
 .invalid-user {
 	align-items: center;
+	background: rgb(253, 247, 246,1);
 	background-color: rgb(253, 247, 246,1);
 	border-radius: 5px;
 	border: 1px solid var(--danger);
@@ -3464,6 +3474,7 @@ a.ui-button:active,
 
 .inactive-user {
 	align-items: center;
+	background:rgba(255, 247, 230, 1);
 	background-color:rgba(255, 247, 230, 1);
 	border-radius: 5px;
 	border: 1px solid var(--warning);

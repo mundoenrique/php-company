@@ -91,6 +91,7 @@ $lang['GEN_DETAIL_SERVICE_ORDERS'] = 'detailServiceOrders';
 $lang['GEN_DETAIL_SERVICE_ORDERS_TITLE'] = 'Detalle Órdenes de servicio';
 $lang['GEN_DOWNLOAD_FILE'] = 'Descarga de Archivos';
 $lang['GEN_WARNING_DOWNLOAD_FILE'] = 'No fue posible descargar el archivo';
+$lang['GEN_TIME_DOWNLOAD_FILE'] = '7000';
 //links
 $lang['GEN_LINK_LOGIN'] = 'inicio';
 //MODAL STYLES
@@ -224,3 +225,5 @@ $lang['GEN_RANGE_ONE_DAYS']= '5 días';
 $lang['GEN_RANGE_TWO_DAYS']= '10 días';
 $lang['GEN_START_DAY']= 'Fecha inicial';
 $lang['GEN_END_DAY']= 'Fecha final';
+$lang['GEN_PLACE_DATE_COMPLETTE']= 'DD/MM/AAAA';
+$lang['GEN_PLACE_DATE_PARTIAL']= 'DD/MM/AAAA';
