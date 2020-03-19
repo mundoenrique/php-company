@@ -52,6 +52,15 @@ $(function () {
 		data = {
 			operation: reportSelected
 		}
+
+		if ($(this).val() == "repMovimientoPorTarjeta") {
+			$('#MovimientoPorTarjeta button').removeClass('none')
+			$('#idType option').attr('disabled', false)
+			$('#MovimientoPorTarjeta input').prop('readonly', false)
+			$('#result-repMovimientoPorTarjeta').addClass('none')
+			$('#result-repMovimientoPorTarjeta input, #result-repMovimientoPorTarjeta select').prop('disabled', true)
+		}
+		$('#cardNumberId').empty()
 	});
 
 	$(".date-picker").datepicker({
@@ -94,18 +103,15 @@ $(function () {
 
 	$('.btn-report').on('click', function(e) {
 		e.preventDefault()
-
 		var btnAction = $(this);
+		var cardsPeople = btnAction.attr('cards')
+		var tempId;
+		var tempVal;
 		btnText = btnAction.text().trim();
 		validateForms(form);
-		var cardsPeople = btnAction.attr('cards')
-		if(cardsPeople) {
-			$('#result-repMovimientoPorTarjeta input, #result-repMovimientoPorTarjeta select').prop('disabled', true)
-		}
 
 		if(form.valid()) {
-			var tempId;
-			var tempVal;
+
 			data.operation = cardsPeople || data.operation
 			btnAction.html(loader);
 			insertFormInput(true);
