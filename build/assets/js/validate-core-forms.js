@@ -80,7 +80,8 @@ function validateForms(form) {
 			"selected-date": {required: true, pattern: date.my},
 			"id-type": {requiredSelect: true},
 			"id-number": {required: true, pattern: numeric},
-			"card-number": {required: true, pattern: numeric, maxlength: 16, minlength: 16}
+			"card-number": {required: true, pattern: numeric, maxlength: 16, minlength: 16},
+			"card-number-sel": {requiredSelect: true}
 		},
 		messages: {
 			"user_login": lang.VALIDATE_USERLOGIN,
@@ -104,6 +105,7 @@ function validateForms(form) {
 			"id-type": lang.VALIDATE_ID_TYPE,
 			"id-number": lang.VALIDATE_ID_NUMBER,
 			"card-number": lang.VALIDATE_CARD_NUMBER,
+			"card-number-sel": lang.VALIDATE_CARD_NUMBER_SEL,
 		},
 		errorPlacement: function(error, element) {
 			$(element).closest('.form-group').find('.help-block').html(error.html());
@@ -153,7 +155,11 @@ function validateForms(form) {
 	}
 
 	$.validator.methods.requiredSelect = function(value, element, param) {
-		return alphanum.test($(element).find('option:selected').val().trim());
+		var valid = true;
+		if($(element).find('option').length > 0 ) {
+			valid = alphanum.test($(element).find('option:selected').val().trim());
+		}
+		return valid
 	}
 
 	form.validate().resetForm();

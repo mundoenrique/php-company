@@ -25,3 +25,4 @@ $lang['VALIDATE_SELECTED_DATE'] = 'Selecciona una fecha válida mm/aa';
 $lang['VALIDATE_ID_TYPE'] = 'Selecciona un tipo de identificación';
 $lang['VALIDATE_ID_NUMBER'] = 'Indica un número de identificación válido, solo dígitos';
 $lang['VALIDATE_CARD_NUMBER'] = 'Indica un número de tarjeta válido 16 dígitos';
+$lang['VALIDATE_CARD_NUMBER_SEL'] = 'Selecciona una tarjeta';

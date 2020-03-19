@@ -69,61 +69,64 @@
 						</div>
 					</div>
 
-					<div id="repMovimientoPorTarjeta" class="no-select row" style="">
-						<div class="form-group col-3">
-							<label><?= lang('REPORTS_ID_TYPE'); ?></label>
-							<select id="idType" name="id-type" class="select-box custom-select flex h6 w-100 form-control" disabled>
-								<?php foreach($IdTypeList AS $pos => $value): ?>
-								<option value="<?= $value->key; ?>" <?= $pos != 0 ? '' : 'selected disabled' ?>>
-									<?= $value->text; ?>
-								</option>
-								<?php endforeach; ?>
-							</select>
-							<div class="help-block"></div>
+					<div id="repMovimientoPorTarjeta">
+						<div id="MovimientoPorTarjeta" class="no-select row">
+							<div class="form-group col-3">
+								<label><?= lang('REPORTS_ID_TYPE'); ?></label>
+								<select id="idType" name="id-type" class="select-box custom-select flex h6 w-100 form-control" disabled>
+									<?php foreach($IdTypeList AS $pos => $value): ?>
+									<option value="<?= $value->key; ?>" <?= $pos != 0 ? '' : 'selected disabled' ?>>
+										<?= $value->text; ?>
+									</option>
+									<?php endforeach; ?>
+								</select>
+								<div class="help-block"></div>
+							</div>
+
+							<div class="form-group col-3">
+								<label for="idNumber"><?= lang('REPORTS_ID_NUMBER') ?></label>
+								<input id="idNumber" name="id-number" class="form-control read-only" type="text" autocomplete="off" disabled>
+								<div class="help-block"></div>
+							</div>
+
+							<div class="flex items-center justify-end col-6">
+								<button class="btn-report btn btn-primary btn-small btn-loading" cards="repTarjetasPorPersona">
+									<?= lang('GEN_BTN_SEARCH'); ?>
+								</button>
+							</div>
 						</div>
 
-						<div class="form-group col-3">
-							<label for="idNumber"><?= lang('REPORTS_ID_NUMBER') ?></label>
-							<input id="idNumber" name="id-number" class="form-control" type="text" autocomplete="off" disabled>
-							<div class="help-block"></div>
-						</div>
+						<div id="result-repMovimientoPorTarjeta" class="row none">
+							<div class="form-group col-3">
+								<label><?= lang('REPORTS_CARD_NUMBER'); ?></label>
+								<select id="cardNumberId" name="card-number-sel" class="select-box custom-select flex h6 w-100 form-control" disabled>
+								</select>
+								<div class="help-block"></div>
+							</div>
 
-						<div class="flex items-center justify-end col-6">
-							<button class="btn-report btn btn-primary btn-small btn-loading" cards="repTarjetasPorPersona">
-								<?= lang('GEN_BTN_SEARCH'); ?>
-							</button>
-						</div>
+							<div class="form-group col-3">
+								<label for="peopleDateBegin"><?= lang('GEN_START_DAY'); ?></label>
+								<input id="peopleDateBegin" class="form-control date-picker" name="datepicker_start" type="text" readonly
+									placeholder="<?= lang('GEN_PLACE_DATE_COMPLETTE'); ?>" disabled>
+								<div class="help-block"></div>
+							</div>
 
+							<div class="form-group col-3">
+								<label for="peopleDateEnd"><?= lang('GEN_END_DAY'); ?></label>
+								<input id="peopleDateEnd" class="form-control date-picker" name="datepicker_end" type="text" readonly
+									placeholder="<?= lang('GEN_PLACE_DATE_COMPLETTE'); ?>" disabled>
+								<div class="help-block"></div>
+							</div>
+
+							<div class="flex items-center justify-end col-3">
+								<button class="btn-report btn btn-primary btn-small btn-loading">
+									<?= lang('GEN_BTN_SEARCH'); ?>
+								</button>
+							</div>
+						</div>
 					</div>
 
-					<div id="result-repMovimientoPorTarjeta" class="row">
-						<div class="form-group col-3">
-							<label><?= lang('REPORTS_ID_NUMBER'); ?></label>
-							<select id="cardNumberId" name="card-number" class="select-box custom-select flex h6 w-100 form-control" disabled>
-							</select>
-							<div class="help-block"></div>
-						</div>
 
-						<div class="form-group col-3">
-							<label for="peopleDateBegin"><?= lang('GEN_START_DAY'); ?></label>
-							<input id="peopleDateBegin" class="form-control date-picker" name="datepicker_start" type="text" readonly
-								placeholder="<?= lang('GEN_PLACE_DATE_COMPLETTE'); ?>" disabled>
-							<div class="help-block"></div>
-						</div>
-
-						<div class="form-group col-3">
-							<label for="peopleDateEnd"><?= lang('GEN_END_DAY'); ?></label>
-							<input id="peopleDateEnd" class="form-control date-picker" name="datepicker_end" type="text" readonly
-								placeholder="<?= lang('GEN_PLACE_DATE_COMPLETTE'); ?>" disabled>
-							<div class="help-block"></div>
-						</div>
-
-						<div class="flex items-center justify-end col-3">
-							<button class="btn-report btn btn-primary btn-small btn-loading">
-								<?= lang('GEN_BTN_SEARCH'); ?>
-							</button>
-						</div>
-					</div>
 					<div id="repTarjeta" class="no-select">
 						<div class="row">
 							<div class="form-group col-6 col-lg-4">

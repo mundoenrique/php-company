@@ -1,4 +1,6 @@
 'use strict'
+//4193280000300118
+//C_1234567890
 $(function () {
 	var optionValues = [];
 	var optiondiv = [];
@@ -33,7 +35,7 @@ $(function () {
 			$("#search-criteria").addClass('none');
 			$("#line-reports").addClass('none');
 			$("#div-download").removeClass('none');
-			$("#div-download").fadeIn(700, 'linear');;
+			$("#div-download").fadeIn(700, 'linear');
 		} else {
 			$("#search-criteria").removeClass('none');
 			$("#line-reports").removeClass('none');
@@ -96,11 +98,14 @@ $(function () {
 		var btnAction = $(this);
 		btnText = btnAction.text().trim();
 		validateForms(form);
+		var cardsPeople = btnAction.attr('cards')
+		if(cardsPeople) {
+			$('#result-repMovimientoPorTarjeta input, #result-repMovimientoPorTarjeta select').prop('disabled', true)
+		}
 
 		if(form.valid()) {
 			var tempId;
 			var tempVal;
-			var cardsPeople = btnAction.attr('cards')
 			data.operation = cardsPeople || data.operation
 			btnAction.html(loader);
 			insertFormInput(true);
@@ -117,6 +122,7 @@ $(function () {
 })
 
 function getReport(data, btn) {
+	var disabledNot = false;
 	btn = btn == undefined ? false : btn
 	insertFormInput(true);
 	verb = 'POST'; who = 'Reports'; where = 'getReport';
@@ -137,9 +143,46 @@ function getReport(data, btn) {
 					callNovoCore(verb, who, where, data, function (response) {})
 					break;
 				case 'repTarjetasPorPersona':
+					var option;
+					data.operation = 'repMovimientoPorTarjeta';
+					$('#MovimientoPorTarjeta button').addClass('none')
+					$('#MovimientoPorTarjeta input').prop('readonly', true);
+					$('#idType option:not(:selected)').attr('disabled',true)
 
+					$.each(response.data, function(index, element) {
+						option = '<option value="'+element.key+'">'+element.cardMask+'</option>'
+						$('#cardNumberId').append(option)
+					});
+
+					disabledNot = '#result-repMovimientoPorTarjeta input, #result-repMovimientoPorTarjeta select'
+					$('#result-repMovimientoPorTarjeta')
+					.find('input, select')
+					.prop('disabled', false)
+					$('#result-repMovimientoPorTarjeta')
+					.removeClass('none')
 					break;
 				case 'repTarjeta':
+					var reportsResults = $("#reports-results").dataTable()
+					reportsResults.fnDestroy();
+
+					var file = '<tr class="select">';
+					file+= '<td>'+response.data.idType+'</td>';
+					file+= '<td>'+response.data.idNumber+'</td>';
+					file+= '<td>'+response.data.userName+'</td>';
+					file+= '<td>'+response.data.cardNumber+'</td>';
+					file+= '<td>'+response.data.product+'</td>';
+					file+= '<td>'+response.data.createDate+'</td>';
+					file+= '<td>'+response.data.Expirydate+'</td>';
+					file+= '<td>'+response.data.currentState+'</td>';
+					file+= '<td>'+response.data.activeDate+'</td>';
+					file+= '<td>'+response.data.reasonBlock+'</td>';
+					file+= '<td>'+response.data.dateBlock+'</td>';
+					file+= '<td>'+response.data.currentBalance+'</td>';
+					file+= '<td>'+response.data.lastCredit+'</td>';
+					file+= '<td>'+response.data.lastAmoutn+'</td>';
+					file+= '<td>'+response.data.chargeGMF+'</td>';
+					file+= '</tr>'
+					$('#reports-results').append(file)
 					$('#reports-results').DataTable({
 						drawCallback: function(d) {
 							$('input[type=search]').attr('name', 'search')
@@ -179,8 +222,10 @@ function getReport(data, btn) {
 		insertFormInput(false);
 		$('.help-block').text('');
 		$('#form-report').validate().resetForm();
+		data.operation = data.operation == 'repTarjetasPorPersona' ? 'MovimientoPorTarjeta' : data.operation;
 		$('#form-report input, #form-report select')
-		.not('#'+data.operation+' input', '#'+data.operation+' select')
+		.not('#'+data.operation+' input, #'+data.operation+' select')
+		.not(disabledNot)
 		.prop('disabled', true);
 		$('.cover-spin').hide();
 	})
