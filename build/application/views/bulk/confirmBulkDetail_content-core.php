@@ -71,7 +71,7 @@
 			<div id="pre-loader" class="mt-2 mx-auto">
 				<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
 			</div>
-			<div class="center mx-1 hide">
+			<div class="center mx-1 hide-out hide">
 				<?php if(!TRUE): ?>
 				<div class="flex justify-end items-center">
 					<div class="mr-3 py-1">
@@ -96,7 +96,7 @@
 						<?php foreach($bulkRecords AS $body): ?>
 						<tr>
 						<?php foreach($body AS $pos => $value): ?>
-						<th><?= $value ?></th>
+						<td><?= $value ?></td>
 						<?php endforeach; ?>
 						</tr>
 						<?php endforeach; ?>
