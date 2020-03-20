@@ -36,8 +36,6 @@ class Novo_Reports_Model extends NOVO_Model {
 		$response = $this->sendToService('GetReportsList');
 		$headerCardsRep = [];
 
-		//$this->isResponseRc = 0;
-		//$response = json_decode('{"listaConfigReportesCEO":[{"idReporte":"1","idOperation":"repListadoTarjetas","description":"Listado Tarjeta","result":"DOWNLOAD","listDownloadFormat":[{"idFormat":"1","descripFormat":"CSV"}],"listFilter":[],"listTableHeader":[]},{"idReporte":"2","idOperation":"repMovimientoPorEmpresa","description":"Movimiento por Empresa","result":"DOWNLOAD","listDownloadFormat":[{"idFormat":"1","descripFormat":"CSV"}],"listFilter":[{"idFilter":"1","orderFilter":1,"typeFiltter":"D","nameFilter":"Fecha Inicial (AAAA-MM-DD)","minValue":"2020-01-01","maxValue":"2999-01-01"},{"idFilter":"2","orderFilter":2,"typeFiltter":"D","nameFilter":"Fecha Final (AAAA-MM-DD)","minValue":"2020-01-01","maxValue":"2999-01-01"}],"listTableHeader":[]},{"idReporte":"4","idOperation":"repMovimientoPorTarjeta","description":"Movimiento por Tarjeta","result":"DOWNLOAD","listDownloadFormat":[{"idFormat":"1","descripFormat":"CSV"}],"listFilter":[{"idFilter":"3","orderFilter":1,"typeFiltter":"S","nameFilter":"Tipo Identificación","minValue":"","maxValue":"","listDataSelection":[{"idData":"1","codData":"C","description":"Cédula de Ciudadanía"},{"idData":"2","codData":"E","description":"Cédula de Extranjería"},{"idData":"3","codData":"P","description":"Pasaporte"},{"idData":"4","codData":"T","description":"Tarjeta de identidad"},{"idData":"5","codData":"N","description":"NIT Persona Jurídica"},{"idData":"6","codData":"L","description":"NIT Persona Natural"},{"idData":"7","codData":"I","description":"NIT Persona Extranjera"}]}],"listTableHeader":[]},{"idReporte":"5","idOperation":"repTarjeta","description":"Tarjeta","result":"TABLE","listDownloadFormat":[],"listFilter":[],"listTableHeader":[{"idHeader":"1","description":"Tipo Identificación"},{"idHeader":"2","description":"Número Identificación"},{"idHeader":"3","description":"Nombre"},{"idHeader":"4","description":"Tarjeta"},{"idHeader":"5","description":"Producto"},{"idHeader":"6","description":"Fecha creación tarjeta"},{"idHeader":"7","description":"Fecha vencimiento tarjeta"},{"idHeader":"8","description":"Estado actual"},{"idHeader":"9","description":"Fecha activación"},{"idHeader":"10","description":"Motivo bloqueo"},{"idHeader":"11","description":"Fecha bloqueo"},{"idHeader":"12","description":"Saldo actual"},{"idHeader":"13","description":"Fecha último cargue"},{"idHeader":"14","description":"Último valor cargado"},{"idHeader":"15","description":"Cobra GMF"}]},{"idReporte":"6","idOperation":"repComprobantesVisaVale","description":"Comprobantes Visa Vale","result":"DOWNLOAD","listDownloadFormat":[],"listFilter":[],"listTableHeader":[]}],"rc":0,"msg":"Proceso OK","pais":"Bdb"}');
 		switch($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
@@ -322,8 +320,8 @@ class Novo_Reports_Model extends NOVO_Model {
 							$cardsMove['idType'] = $value[0];
 							$cardsMove['idNumber'] = $value[1];
 							break;
-						case 'montoComisionTransaccion':
-							$cardsMove['userName'] = '$value';
+						case 'NombreCliente':
+							$cardsMove['userName'] = $value;
 							break;
 						case 'noTarjeta':
 							$cardsMove['cardNumber'] = $value;
@@ -355,8 +353,8 @@ class Novo_Reports_Model extends NOVO_Model {
 						case 'fechaUltimoCargue':
 							$cardsMove['lastCredit'] = $value;
 							break;
-						case 'condicion':
-							$cardsMove['lastAmoutn'] = '$value';
+						case 'montoUltimoCargue':
+							$cardsMove['lastAmoutn'] = $value;
 							break;
 						case 'gmf':
 							$cardsMove['chargeGMF'] = $value;
@@ -398,8 +396,6 @@ class Novo_Reports_Model extends NOVO_Model {
 
 		$response = $this->sendToService('GetReport: '.$dataRequest->operation);
 
-		//$this->isResponseRc = 0;
-		//$response = json_decode('{"lista":[{"noTarjeta":"00004193280000300118","montoComisionTransaccion":0,"montoComisionThTransaccion":0,"numLote":0,"paginaActual":"1","tamanoPagina":"0","paginar":false,"idAsignacion":0,"condicion":0,"pinGeneradoUsuario":false,"rc":0},{"noTarjeta":"00004193280000300120","montoComisionTransaccion":0,"montoComisionThTransaccion":0,"numLote":0,"paginaActual":"1","tamanoPagina":"0","paginar":false,"idAsignacion":0,"condicion":0,"pinGeneradoUsuario":false,"rc":0}],"rc":0,"msg":"Proceso OK","pais":"Bdb"}');
 		switch($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
