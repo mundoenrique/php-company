@@ -496,6 +496,7 @@ class Novo_Reports_Model extends NOVO_Model {
 				break;
 			case -30:
 			case -150:
+				$this->session->set_flashdata('cardsPeople', $this->session->flashdata('cardsPeople'));
 				$this->response->icon = lang('GEN_ICON_INFO');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_NO_MOVES_ENTERPRISE');

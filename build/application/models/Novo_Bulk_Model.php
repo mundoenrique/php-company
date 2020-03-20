@@ -703,12 +703,11 @@ class Novo_Bulk_Model extends NOVO_Model {
 				$detailInfo['bulkStatusText'] = ucfirst(mb_strtolower($response->status));
 				$detailInfo['bulkAmount'] = $response->montoNeto;
 
-				$response->ctipolote = 'L';
 				switch($response->ctipolote) {
 					case '1':
+					case '10':
 						if(isset($response->registrosLoteEmision) && count($response->registrosLoteEmision) > 0) {
-							$bulkRecordsHeader = [lang('GEN_TABLE_DNI'), 'Nombres y apellidos', 'Estado'];
-							$detailInfo['bulkHeader'] = $bulkRecordsHeader;
+							$bulkRecordsHeader = [lang('GEN_TABLE_DNI'), lang('GEN_TABLE_NAME_LASTNAME'), lang('GEN_TABLE_STATUS')];
 
 							foreach($response->registrosLoteEmision AS $records) {
 								$record = new stdClass();
@@ -716,6 +715,12 @@ class Novo_Bulk_Model extends NOVO_Model {
 									switch ($pos) {
 										case 'idExtPer':
 											$record->cardHoldId = $value;
+											break;
+										case 'idExtEmp':
+											if(!isset($records->idExtPer)) {
+												$bulkRecordsHeader[0] = lang('GEN_FISCAL_REGISTRY');
+												$record->cardHoldId = $value;
+											}
 											break;
 										case 'nombres':
 											$record->cardHoldName = ucwords(mb_strtolower($value));
@@ -729,7 +734,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 												'1' => 'Procesado',
 												'7' => 'Rechazado',
 											];
-											$record->bulkstatus = $status[$value];
+											$record->bulkstatus = is_numeric($value) ? $status[$value] : $value;
 											break;
 									}
 								}
@@ -745,14 +750,13 @@ class Novo_Bulk_Model extends NOVO_Model {
 					case '2':
 					case '5':
 					case 'L':
+					case 'M':
 						if(isset($response->registrosLoteRecarga) && count($response->registrosLoteRecarga) > 0) {
 							$bulkRecordsHeader = [lang('GEN_TABLE_DNI'), lang('GEN_TABLE_AMOUNT'), lang('GEN_TABLE_ACCOUNT_NUMBER')];
 
-							if($response->ctipolote == '5' || $response->ctipolote == 'L') {
+							if($response->ctipolote == '5' || $response->ctipolote == 'L' || $response->ctipolote == 'M') {
 								$bulkRecordsHeader = [lang('GEN_TABLE_DNI'), lang('GEN_TABLE_AMOUNT'), lang('GEN_TABLE_ACCOUNT_NUMBER'), lang('GEN_TABLE_STATUS')];
 							}
-
-							$detailInfo['bulkHeader'] = $bulkRecordsHeader;
 
 							foreach($response->registrosLoteRecarga AS $records) {
 								$record = new stdClass();
@@ -765,7 +769,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 												$record->cardHoldAmount = $value;
 											break;
 										case 'nro_cuenta':
-											$record->cardHoldAccount = $value;
+											$record->cardHoldAccount = maskString($value, 6, 4);
 											break;
 										case 'status':
 											if($response->ctipolote == '5') {
@@ -776,7 +780,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 												];
 											}
 
-											if($response->ctipolote == 'L') {
+											if($response->ctipolote == 'L' || $response->ctipolote == 'M') {
 												$status = [
 													'0' => 'Pendiente',
 													'1' => 'Procesada',
@@ -784,7 +788,8 @@ class Novo_Bulk_Model extends NOVO_Model {
 													'7' => 'Rechazado',
 												];
 											}
-											$record->bulkstatus = $status[$value];
+
+											$record->bulkstatus = is_numeric($value) ? $status[$value] : $value;
 											break;
 									}
 								}
@@ -799,6 +804,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 				break;
 		}
 
+		$detailInfo['bulkHeader'] = $bulkRecordsHeader;
 		$this->response->data->bulkInfo = (object) $detailInfo;
 
 		return $this->responseToTheView('ConfirmBulkdetail');

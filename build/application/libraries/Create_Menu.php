@@ -37,9 +37,6 @@ class Create_Menu {
 			case 'GESREP':
 				$mainMenuLang = lang('GEN_MENU_REPORTS');
 				break;
-			case 'GESREPORT':
-				$mainMenuLang = lang('GEN_MENU_REPORTS');
-				break;
 			case 'COMBUS':
 				$mainMenuLang = lang('GEN_MENU_TRAJECTS');
 				break;
@@ -201,10 +198,17 @@ class Create_Menu {
 				$subMenuLang->text = lang('GEN_MENU_REP_LOTS_BILLED');
 				$subMenuLang->link = 'javascript:';
 				break;
+			case 'REPALL':
+				$subMenuLang->text = lang('GEN_MENU_REP_ALL');
+				$subMenuLang->link = lang('GEN_LINK_REP_ALL');
+				break;
 			case 'UNNAMED':
 				$subMenuLang->text = lang('GEN_MENU_LOT_UNNAMED');
 				$subMenuLang->link = 'javascript:';
 				break;
+			default:
+				$subMenuLang->text = '---';
+				$subMenuLang->link = 'javascript:';
 		}
 
 		return $subMenuLang;

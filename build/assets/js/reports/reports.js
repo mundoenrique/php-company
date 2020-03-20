@@ -136,9 +136,14 @@ function getReport(data, btn) {
 	callNovoCore(verb, who, where, data, function (response) {
 		if(response.code == 0) {
 			switch (data.operation) {
+				case 'repMovimientoPorTarjeta':
+					$('#MovimientoPorTarjeta button').removeClass('none')
+					$('#idType option').attr('disabled', false)
+					$('#MovimientoPorTarjeta input').prop('readonly', false)
+					$('#result-repMovimientoPorTarjeta').addClass('none')
+					$('#result-repMovimientoPorTarjeta input, #result-repMovimientoPorTarjeta select').prop('disabled', true)
 				case 'repListadoTarjetas':
 				case 'repMovimientoPorEmpresa':
-				case 'repMovimientoPorTarjeta':
 				case 'repComprobantesVisaVale':
 					downloadFile.attr('href', response.data.file)
 					document.getElementById('download-file').click()
