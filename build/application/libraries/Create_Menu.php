@@ -40,6 +40,8 @@ class Create_Menu {
 			case 'COMBUS':
 				$mainMenuLang = lang('GEN_MENU_TRAJECTS');
 				break;
+			default:
+				$mainMenuLang = '';
 		}
 
 		return $mainMenuLang;
