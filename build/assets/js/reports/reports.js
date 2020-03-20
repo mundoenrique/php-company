@@ -1,6 +1,7 @@
 'use strict'
 //4193280000300118
 //C_1234567890
+var reportsResults;
 $(function () {
 	var optionValues = [];
 	var optiondiv = [];
@@ -61,6 +62,8 @@ $(function () {
 			$('#result-repMovimientoPorTarjeta input, #result-repMovimientoPorTarjeta select').prop('disabled', true)
 		}
 		$('#cardNumberId').empty()
+		$('#repTarjeta-result').addClass('none');
+		reportsResults.row('tr').remove().draw( false );
 	});
 
 	$(".date-picker").datepicker({
@@ -108,6 +111,8 @@ $(function () {
 		var tempId;
 		var tempVal;
 		btnText = btnAction.text().trim();
+		$('#repTarjeta-result').addClass('none');
+		reportsResults.row('tr').remove().draw( false );
 		validateForms(form);
 
 		if(form.valid()) {
@@ -125,6 +130,28 @@ $(function () {
 			getReport(data, btnAction)
 		}
 	})
+
+	reportsResults = $('#reports-results').DataTable({
+		drawCallback: function(d) {
+			$('input[type=search]').attr('name', 'search')
+		},
+		"ordering": false,
+		"pagingType": "full_numbers",
+		responsive: true,
+		"columnDefs": [
+			{ "targets": 6, className: "none" },
+			{ "targets": 7, className: "none" },
+			{ "targets": 8, className: "none" },
+			{ "targets": 9, className: "none" },
+			{ "targets": 10, className: "none" },
+			{ "targets": 11, className: "none" },
+			{ "targets": 12, className: "none" },
+			{ "targets": 13, className: "none" },
+			{ "targets": 14, className: "none" }
+		],
+		"language": dataTableLang
+	})
+
 })
 
 function getReport(data, btn) {
@@ -137,11 +164,12 @@ function getReport(data, btn) {
 		if(response.code == 0) {
 			switch (data.operation) {
 				case 'repMovimientoPorTarjeta':
+					$('#result-repMovimientoPorTarjeta').addClass('none')
+					$('#result-repMovimientoPorTarjeta input, #result-repMovimientoPorTarjeta select').prop('disabled', true)
+					$('#cardNumberId').empty()
 					$('#MovimientoPorTarjeta button').removeClass('none')
 					$('#idType option').attr('disabled', false)
 					$('#MovimientoPorTarjeta input').prop('readonly', false)
-					$('#result-repMovimientoPorTarjeta').addClass('none')
-					$('#result-repMovimientoPorTarjeta input, #result-repMovimientoPorTarjeta select').prop('disabled', true)
 				case 'repListadoTarjetas':
 				case 'repMovimientoPorEmpresa':
 				case 'repComprobantesVisaVale':
@@ -173,57 +201,25 @@ function getReport(data, btn) {
 					.removeClass('none')
 					break;
 				case 'repTarjeta':
-					var reportsResults = $("#reports-results").dataTable()
-					reportsResults.fnDestroy();
+					$('#repTarjeta-result').removeClass('none');
 
-					var file = '<tr class="select">';
-					file+= '<td>'+response.data.idType+'</td>';
-					file+= '<td>'+response.data.idNumber+'</td>';
-					file+= '<td>'+response.data.userName+'</td>';
-					file+= '<td>'+response.data.cardNumber+'</td>';
-					file+= '<td>'+response.data.product+'</td>';
-					file+= '<td>'+response.data.createDate+'</td>';
-					file+= '<td>'+response.data.Expirydate+'</td>';
-					file+= '<td>'+response.data.currentState+'</td>';
-					file+= '<td>'+response.data.activeDate+'</td>';
-					file+= '<td>'+response.data.reasonBlock+'</td>';
-					file+= '<td>'+response.data.dateBlock+'</td>';
-					file+= '<td>'+response.data.currentBalance+'</td>';
-					file+= '<td>'+response.data.lastCredit+'</td>';
-					file+= '<td>'+response.data.lastAmoutn+'</td>';
-					file+= '<td>'+response.data.chargeGMF+'</td>';
-					file+= '</tr>'
-					$('#reports-results').append(file)
-					$('#reports-results').DataTable({
-						drawCallback: function(d) {
-							$('input[type=search]').attr('name', 'search')
-							$('#repTarjeta-result').removeClass('none');
-						},
-						"ordering": false,
-						"pagingType": "full_numbers",
-						responsive: true,
-						"columnDefs": [
-							{
-								"targets": 3,
-								render: function (data, type, row) {
-									return data.length > 20 ?
-										data.substr(0, 20) + '…' :
-										data;
-								}
-							},
-							{ "targets": 6,className: "none" },
-							{ "targets": 7,className: "none" },
-							{ "targets": 8,className: "none" },
-							{ "targets": 9,className: "none" },
-							{ "targets": 10,className: "none" },
-							{ "targets": 11,className: "none" },
-							{ "targets": 12,className: "none" },
-							{ "targets": 13,className: "none" },
-							{ "targets": 14,className: "none" }
-						],
-						"language": dataTableLang
-					})
-
+					reportsResults.row.add([
+						response.data.idType,
+						response.data.idNumber,
+						response.data.userName,
+						response.data.cardNumber,
+						response.data.product,
+						response.data.createDate,
+						response.data.Expirydate,
+						response.data.currentState,
+						response.data.activeDate,
+						response.data.reasonBlock,
+						response.data.dateBlock,
+						response.data.currentBalance,
+						response.data.lastCredit,
+						response.data.lastAmoutn,
+						response.data.chargeGMF
+					]).draw(false);
 					break;
 			}
 		}

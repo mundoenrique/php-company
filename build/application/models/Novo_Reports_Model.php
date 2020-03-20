@@ -254,11 +254,11 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->className = 'ReporteCEOTO.class';
 		$date = explode('/', $dataRequest->date);
 		$this->dataRequest->movPorEmpresa = [
-			'empresa' => [
-				'rif' => $this->session->enterpriseInf->idFiscal
-			],
 			'mes' => $date[0],
 			'anio' => $date[1]
+		];
+		$this->dataRequest->empresaCliente = [
+			'rif' => $this->session->enterpriseInf->idFiscal
 		];
 
 		$response = $this->sendToService('GetReport: '.$dataRequest->operation);
@@ -317,11 +317,10 @@ class Novo_Reports_Model extends NOVO_Model {
 				$cardsMove = [];
 				foreach ($response as $key => $value) {
 					switch ($key) {
-						case 'noTarjeta':
-							$cardsMove['idType'] = '$value';
-							break;
-						case 'nombre_producto':
-							$cardsMove['idNumber'] = '$value';
+						case 'id_ext_per':
+							$value = explode('_', $value);
+							$cardsMove['idType'] = $value[0];
+							$cardsMove['idNumber'] = $value[1];
 							break;
 						case 'montoComisionTransaccion':
 							$cardsMove['userName'] = '$value';
@@ -347,11 +346,11 @@ class Novo_Reports_Model extends NOVO_Model {
 						case 'bloque':
 							$cardsMove['reasonBlock'] = $value;
 							break;
-						case 'bloque':
+						case 'fechaBloqueo':
 							$cardsMove['dateBlock'] = $value;
 							break;
-						case 'fechaBloqueo':
-							$cardsMove['currentBalance'] = $value;
+						case 'saldos':
+							$cardsMove['currentBalance'] = $value->actual;
 							break;
 						case 'fechaUltimoCargue':
 							$cardsMove['lastCredit'] = $value;
@@ -371,7 +370,7 @@ class Novo_Reports_Model extends NOVO_Model {
 			case -150:
 				$this->response->icon = lang('GEN_ICON_INFO');
 				$this->response->title = lang('REPORTS_TITLE');
-				$this->response->msg = lang('REPORTS_NO_MOVES_ENTERPRISE');
+				$this->response->msg = lang('REPORTS_FOUND_CARD');
 				$this->response->data['btn1']['action'] = 'close';
 				break;
 		}
