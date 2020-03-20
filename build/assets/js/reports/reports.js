@@ -21,7 +21,7 @@ $(function () {
 	optionValues.splice(0, 2);
 
 	for (var i = 0; i < optiondiv.length; i++) {
-		$(`#${optiondiv[i]}`).hide();
+		$('#'+optiondiv[i]+'').hide();
 	}
 
 	$("#reports").change(function () {
