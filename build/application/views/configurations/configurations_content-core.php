@@ -1,4 +1,6 @@
-<?php //include('ceo_header.php') ?>
+<?php
+$assetUrl = $this->config->item('asset_url');
+?>
 <div class="bg-color">
   <div class="pt-3 pb-5 px-5 bg-content-config">
     <h1 class="primary h3 regular inline">Configuración</h1>
@@ -16,7 +18,8 @@
                 </div>
               </a>
             </li>
-            <li id="enterprise" class="nav-item-config"><a href="#">
+            <li id="enterprise" class="nav-item-config">
+              <a href="#">
                 <img class="icon-config" src="<?= $this->asset->insertFile($countryUri.'/icon-briefcase.svg');?>">
                 <h5>Empresas</h5>
                 <div class="box up left">
@@ -35,7 +38,7 @@
               </a>
             </li>
             <li id="downloads" class="nav-item-config active">
-                <a href="#">
+              <a href="#">
                 <img class="icon-config" src="<?= $this->asset->insertFile($countryUri.'/icon-download.svg');?>">
                 <h5>Descargas</h5>
                 <div class="box up left">
@@ -481,7 +484,7 @@
               <div class="container">
                 <div class="row">
                   <div class="mb-3 col-auto col-lg-6 col-xl-5">
-                    <a href="#">
+                    <a id="download-file" href="<?= $assetUrl.'downloads/banco-bogota.pdf' ?>" download>
                       <div class="files btn-link flex items-center">
                         <div class="file">
                           <img src="<?= $this->asset->insertFile($countryUri.'/icon-pdf.svg');?>" />
@@ -496,7 +499,9 @@
                   <div class="row">
                     <div class="col-sm-12 col-lg-11 col-xl-12 py-2">
                       <div class="manual-video">
-                        <iframe src="https://www.youtube.com/embed/AWdA7hdP4ZA?rel=0&showinfo=0" frameborder="0" allowfullscreen></iframe>
+                        <video controls>
+                          <source src="<?= $assetUrl.'downloads/video.mp4'?>" type="video/mp4">
+                        </video>
                       </div>
                     </div>
                   </div>
@@ -510,4 +515,3 @@
   </div>
 </div>
 </div>
-<?php //include('ceo_footer.php') ?>

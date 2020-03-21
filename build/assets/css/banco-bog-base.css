@@ -3808,7 +3808,7 @@ td > table.detail-lot {
 	padding-bottom: 56.25%;
 }
 
-.manual-video iframe {
+.manual-video video {
 	position: absolute;
 	left: 0;
 	top: 0;

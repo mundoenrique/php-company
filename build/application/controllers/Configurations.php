@@ -35,7 +35,7 @@ class Configurations extends NOVO_Controller {
 			"configurations/configurations"
 		);
 
-		$this->render->titlePage ='DESCARGAS';
+		$this->render->titlePage ='Configuración';
 		$this->views = ['configurations/'.$view];
 		$this->loadView($view);
 	}
