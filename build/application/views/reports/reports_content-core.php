@@ -175,6 +175,21 @@
 							</button>
 						</div>
 					</div>
+
+					<div id="repExtractoCliente" class="no-select row">
+						<div class="form-group col-6 col-lg-4">
+							<label for="datepicker">Fecha</label>
+							<input id="dateEx" class="form-control month-year" name="selected-date" type="text" readonly
+								placeholder="<?= lang('GEN_PLACE_DATE_PARTIAL') ?>" disabled>
+							<div class="help-block"></div>
+						</div>
+
+						<div class="flex items-center justify-end col-6 col-lg-8">
+							<button class="btn-report btn btn-primary btn-small btn-loading">
+								<?= lang('GEN_BTN_SEARCH'); ?>
+							</button>
+						</div>
+					</div>
 				</form>
 			</div>
 

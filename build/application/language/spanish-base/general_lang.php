@@ -229,4 +229,4 @@ $lang['GEN_RANGE_TWO_DAYS']= '10 días';
 $lang['GEN_START_DAY']= 'Fecha inicial';
 $lang['GEN_END_DAY']= 'Fecha final';
 $lang['GEN_PLACE_DATE_COMPLETTE']= 'DD/MM/AAAA';
-$lang['GEN_PLACE_DATE_PARTIAL']= 'DD/MM/AAAA';
+$lang['GEN_PLACE_DATE_PARTIAL']= 'MMMM/AAAA';

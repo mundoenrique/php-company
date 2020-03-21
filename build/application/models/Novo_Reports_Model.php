@@ -134,6 +134,7 @@ class Novo_Reports_Model extends NOVO_Model {
 				$this->movementsByCards($dataRequest);
 			break;
 			case 'repComprobantesVisaVale':
+			case 'repExtractoCliente':
 				$this->VISAproofpayment($dataRequest);
 				break;
 		}
@@ -250,7 +251,8 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->dataAccessLog->operation = 'Descargar archivo';
 
 		$this->className = 'ReporteCEOTO.class';
-		$date = explode('/', $dataRequest->date);
+		$date = isset($dataRequest->date) ? $dataRequest->date : $dataRequest->dateEx;
+		$date = explode('/', $date);
 		$this->dataRequest->movPorEmpresa = [
 			'mes' => $date[0],
 			'anio' => $date[1]
