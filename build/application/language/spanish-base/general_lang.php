@@ -42,6 +42,8 @@ $lang['GEN_MENU_REP_MASTER_ACCOUNT'] = 'Cuenta maestra';//REPCON
 $lang['GEN_MENU_REP_KISGARDEN_PAY'] = 'Pagos de guardería';//REPPGE
 $lang['GEN_MENU_REP_RECHARGE_FEE'] = 'Comisión por recarga';//REPRTH
 $lang['GEN_MENU_REP_LOTS_BILLED'] = 'Lotes por facturar';//LOTFAC
+$lang['GEN_MENU_REP_ALL'] = 'Todos los reportes';//REPALL
+$lang['GEN_LINK_REP_ALL'] = 'reportes';//REPALL
 //BUTTONS
 $lang['GEN_BTN_ACCEPT'] = 'Aceptar';
 $lang['GEN_BTN_CANCEL'] = 'Cancelar';
@@ -136,6 +138,7 @@ $lang['GEN_TABLE_FILE_NAME'] = 'Nombre de archivo';
 $lang['GEN_TABLE_TYPE'] = 'Tipo';
 $lang['GEN_TABLE_TYPE_ID'] = 'Id Tipo';
 $lang['GEN_TABLE_STATUS'] = 'Estado';
+$lang['GEN_TABLE_NAME_LASTNAME'] = 'Nombres y apellidos';
 $lang['GEN_TABLE_RECORDS'] = 'Registros';
 $lang['GEN_TABLE_AMOUNT'] = 'Monto';
 $lang['GEN_TABLE_COMMISSION'] = 'Monto comisión';

@@ -8,3 +8,4 @@ $lang['REPORTS_NO_FILE_EXIST'] = 'No fue posible generar el archivo, por favor i
 $lang['REPORTS_ID_TYPE'] = 'Tipo de identificacion';
 $lang['REPORTS_ID_NUMBER'] = 'Número de identificación';
 $lang['REPORTS_CARD_NUMBER'] = 'Número de tarjeta';
+$lang['REPORTS_FOUND_CARD'] = 'la tarjeta no fue encontrada';
