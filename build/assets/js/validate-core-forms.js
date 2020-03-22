@@ -81,7 +81,8 @@ function validateForms(form) {
 			"id-type": {requiredSelect: true},
 			"id-number": {required: true, pattern: numeric},
 			"card-number": {required: true, pattern: numeric, maxlength: 16, minlength: 16},
-			"card-number-sel": {requiredSelect: true}
+			"card-number-sel": {requiredSelect: true},
+			"inquiry-type": {requiredSelect: true}
 		},
 		messages: {
 			"user_login": lang.VALIDATE_USERLOGIN,
@@ -106,6 +107,7 @@ function validateForms(form) {
 			"id-number": lang.VALIDATE_ID_NUMBER,
 			"card-number": lang.VALIDATE_CARD_NUMBER,
 			"card-number-sel": lang.VALIDATE_CARD_NUMBER_SEL,
+			"inquiry-type": lang.VALIDATE_INQUIRY_TYPE_SEL,
 		},
 		errorPlacement: function(error, element) {
 			$(element).closest('.form-group').find('.help-block').html(error.html());

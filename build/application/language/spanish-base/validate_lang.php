@@ -26,3 +26,4 @@ $lang['VALIDATE_ID_TYPE'] = 'Selecciona un tipo de identificación';
 $lang['VALIDATE_ID_NUMBER'] = 'Indica un número de identificación válido, solo dígitos';
 $lang['VALIDATE_CARD_NUMBER'] = 'Indica un número de tarjeta válido 16 dígitos';
 $lang['VALIDATE_CARD_NUMBER_SEL'] = 'Selecciona una tarjeta';
+$lang['VALIDATE_INQUIRY_TYPE_SEL'] = 'Selecciona un tipo de consulta';
