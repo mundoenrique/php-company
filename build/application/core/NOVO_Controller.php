@@ -236,6 +236,7 @@ class NOVO_Controller extends CI_Controller {
 			if(count($enterpriseList->data->list) > 1 || $this->products) {
 				array_push(
 					$this->includeAssets->jsFiles,
+					"third_party/jplist-1.2.0",
 					"business/widget-enterprise"
 				);
 				$this->render->widget =  new stdClass();
