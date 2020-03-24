@@ -173,6 +173,8 @@ function getReport(data, btn) {
 				case 'repListadoTarjetas':
 				case 'repMovimientoPorEmpresa':
 				case 'repComprobantesVisaVale':
+				case 'repExtractoCliente':
+				case 'repCertificadoGmf':
 					downloadFile.attr('href', response.data.file)
 					document.getElementById('download-file').click()
 					who = 'DownloadFiles'; where = 'DeleteFile';
