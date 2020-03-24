@@ -267,6 +267,11 @@ if(!function_exists('setCurrentPage')) {
 					$cssClass = 'page-current';
 				}
 				break;
+			case 'reports':
+				if($menu == lang('GEN_MENU_REPORTS')) {
+					$cssClass = 'page-current';
+				}
+				break;
 		}
 		return $cssClass;
 	}

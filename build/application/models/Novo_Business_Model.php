@@ -211,19 +211,9 @@ class Novo_Business_Model extends NOVO_Model {
 
 		switch($this->isResponseRc) {
 			case 0:
-				$this->response->code = 0;
-
-				if(verifyDisplay('header', 'all', lang('GEN_TAG_REPORT_MENU'))) {
-					$reports = (object) [
-						'idPerfil' => 'GESREPORT',
-						'modulos' => []
-					];
-					array_push(
-						$response->lista,
-						$reports
-					);
-				}
 				log_message('INFO', 'NOVO ['.$this->userName.'] '.lang('GEN_GET_PRODUCTS_DETAIL').' USER_ACCESS LIST: '.json_encode($response->lista));
+
+				$this->response->code = 0;
 
 				if(isset($response->estadistica->producto->idProducto)) {
 					$imgBrand = url_title(trim(mb_strtolower($response->estadistica->producto->marca))).'_card.svg';
