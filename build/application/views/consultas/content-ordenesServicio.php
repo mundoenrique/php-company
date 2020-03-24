@@ -56,7 +56,7 @@ if($osConfirmV){
     </li>
     /
     <li>
-      <a rel="section"><?php echo lang('BREADCRUMB_ORDEN_SERVICIO'); ?>xxx</a>
+      <a rel="section"><?php echo lang('BREADCRUMB_ORDEN_SERVICIO'); ?></a>
     </li>
   </ol>
 
