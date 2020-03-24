@@ -138,6 +138,14 @@ if ( ! function_exists('verifyBody'))
 				$show = ['novo', 'pichincha'];
 				$display = (in_array($client, $show));
 				break;
+			case lang('GEN_GL_USER_MANUAL'):
+				$show = ['novo','pichincha'];
+				$display = (in_array($client, $show));
+				break;
+			case lang('GEN_APPLICATIONS'):
+				$show = ['novo','pichincha'];
+				$display = (in_array($client, $show));
+				break;
 		}
 
 		return $display;

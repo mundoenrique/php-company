@@ -14,9 +14,9 @@ class Configurations extends NOVO_Controller {
 	}
 
 	/**
-	 * @info Método para renderizar las empresas asociadas al usuario
-	 * @author J. Enrique Peñaloza Piñero
-	 * @date November 05th, 2019
+	 * @info Método para renderizar el modulo de reportes
+	 * @author Luis Molina
+	 * @date Mar 23Mon, 2020
 	 */
 	public function configurationDownloads()
 	{

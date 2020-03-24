@@ -1,6 +1,7 @@
 <?php
-$assetUrl = $this->config->item('asset_url');
+//echo $countryUri='co';
 ?>
+
 <div class="bg-color">
   <div class="pt-3 pb-5 px-5 bg-content-config">
     <h1 class="primary h3 regular inline">Configuración</h1>
@@ -168,7 +169,7 @@ $assetUrl = $this->config->item('asset_url');
                     </div>
                     <div class="row">
                       <div class="col-6 flex justify-end">
-                        <button id="changesSave" class="btn btn-primary btn-small" type="submit">Guardar cambios</button>
+                        <button id="changesSave1" class="btn btn-primary btn-small" type="submit">Guardar cambios</button>
                       </div>
                     </div>
                   </div>
@@ -250,7 +251,7 @@ $assetUrl = $this->config->item('asset_url');
 
                   <div class="row">
                     <div class="flex mb-2 justify-end col-12">
-                      <button id="changesSave" class="btn btn-primary btn-small" type="submit">Guardar cambios</button>
+                      <button id="changesSave2" class="btn btn-primary btn-small" type="submit">Guardar cambios</button>
                     </div>
                   </div>
                 </form>
@@ -461,7 +462,7 @@ $assetUrl = $this->config->item('asset_url');
 
                     <div class="row flex mb-4 mt-2 pl-5 justify-end items-center">
                       <div class="col-7 col-lg-4 col-xl-3">
-                        <input id="password" class="form-control" type="password" placeholder="Ingresa tu contraseña">
+                        <input id="password1" class="form-control" type="password" placeholder="Ingresa tu contraseña">
                       </div>
                         <div class="col-auto">
                           <button class="btn btn-primary btn-small flex mx-auto">Agregar</button>
@@ -475,35 +476,88 @@ $assetUrl = $this->config->item('asset_url');
         </div>
         <div id="downloadsView" style="display:none">
           <div class="flex mb-1 mx-4 flex-column">
-            <span class="line-text mb-2 h4 semibold primary">Descargas</span>
+            <span class="line-text mb-2 h4 semibold primary"><?= lang('GEN_DOWNLOADS') ?></span>
             <div class="px-5">
               <div class="my-2 tertiary h4 semibold">
-                <span>Manuales</span>
+                <span><?= lang('GEN_MANUALS') ?></span>
               </div>
-
               <div class="container">
                 <div class="row">
                   <div class="mb-3 col-auto col-lg-6 col-xl-5">
-                    <a id="download-file" href="<?= $assetUrl.'downloads/banco-bogota.pdf' ?>" download>
+                    <a id="download-file" href="<?= $this->asset->insertFile($countryUri.'/archivo.pdf','downloads');?>" download>
                       <div class="files btn-link flex items-center">
                         <div class="file">
                           <img src="<?= $this->asset->insertFile($countryUri.'/icon-pdf.svg');?>" />
                         </div>
-                        <span class="ml-2 flex justify-center">Manual de Usuario Conexión Empresas
-                          Online</span>
+                        <span class="ml-2 flex justify-center"><?= lang('GEN_CEO_USER_MANUAL')?></span>
                       </div>
                     </a>
                   </div>
-              </div>           
+                  <?php if(verifyDisplay('body','configuration', lang('GEN_GL_USER_MANUAL'))): ?>
+                  <div class="mb-3 col-auto col-lg-6 col-xl-5">
+                    <a id="download-file" href="<?= $this->asset->insertFile($countryUri.'/archivo.pdf','downloads');?>" download>
+                      <div class="files btn-link flex items-center">
+                        <div class="file">
+                          <img src="<?= $this->asset->insertFile($countryUri.'/icon-pdf.svg');?>" />
+                        </div>
+                        <span class="ml-2 flex justify-center"><?= lang('GEN_GL_USER_MANUAL')?></span>
+                      </div>
+                    </a>
+                  </div>
+				        <?php endif; ?>  
+                </div>
                 <div class="container">
                   <div class="row">
                     <div class="col-sm-12 col-lg-11 col-xl-12 py-2">
                       <div class="manual-video">
-                        <video controls>
-                          <source src="<?= $assetUrl.'downloads/video.mp4'?>" type="video/mp4">
+                        <video controls preload>
+                          <source src="<?= $this->asset->insertFile($countryUri.'/video.mp4','downloads');?>" type="video/mp4">
                         </video>
                       </div>
                     </div>
+                  </div>
+                </div>
+				<?php if(verifyDisplay('body','configuration', lang('GEN_GL_USER_MANUAL'))): ?>
+			        	<div class="my-2 tertiary h4 semibold">
+                  <span><?= lang('GEN_APPLICATIONS') ?></span>
+                </div>
+                <div class="row">
+                  <div class="mb-3 col-auto col-lg-6 col-xl-5">
+                    <a href="#">
+                      <div class="files btn-link flex items-center">
+                        <div class="file">
+                          <img src="<?= $this->asset->insertFile($countryUri.'/icon-zip.svg');?>"/>
+                        </div>
+                        <span class="ml-2 flex justify-center">Gestor de lotes (1.759kb)</span>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="mb-3 col-auto col-lg-6 col-xl-5">
+                    <a href="#">
+                      <div class="files btn-link flex items-center">
+                        <div class="file">
+                          <img src="<?= $this->asset->insertFile($countryUri.'/icon-zip.svg');?>" />
+                        </div>
+                        <span class="ml-2 flex justify-center">Java JRE 1.6 (14.226kb)</span>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+                <?php endif; ?>
+                
+								<div class="my-2 tertiary h4 semibold">
+                  <span>Archivos de gestión Conexión Empresas Online</span>
+                </div>
+                <div class="row">
+                  <div class="form-group col-auto mb-3 col-xl-5">
+                    <a href="#">
+                      <div class="files btn-link flex items-center">
+                        <div class="file">
+                          <img src=<?= $this->asset->insertFile($countryUri.'/icon-rar.svg');?> />
+                        </div>
+                        <span class="ml-2 flex justify-center">Archivos lotes operativos (194kb)</span>
+                      </div>
+                    </a>
                   </div>
                 </div>
               </div>
@@ -513,5 +567,4 @@ $assetUrl = $this->config->item('asset_url');
       </div>
     </div>
   </div>
-</div>
 </div>
