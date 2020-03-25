@@ -2526,6 +2526,10 @@ i[class*=" icon-"]:before {
 	display: inline-block;
 }
 
+.page-number.jplist-items-number-0 > nav {
+	display: none;
+}
+
 .page-number span {
 	position: relative;
 	-webkit-transition: all .4s ease;

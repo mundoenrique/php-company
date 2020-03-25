@@ -70,6 +70,10 @@
 				</div>
 			</div>
 			<?php endforeach; ?>
+			<!-- no results control -->
+			<div class="flex-auto my-5 py-4 center" style="display: none" data-jplist-control="no-results" data-group="group-filter-pagination" data-name="no-results">
+				<span class="h4">No se han encontrado resultados</span>
+			</div>
 		</div>
 
 		<!-- pagination control -->
