@@ -14,7 +14,7 @@ class Configurations extends NOVO_Controller {
 	}
 
 	/**
-	 * @info Método para renderizar el modulo de reportes
+	 * @info Método para renderizar el modulo de configuración
 	 * @author Luis Molina
 	 * @date Mar 23Mon, 2020
 	 */
@@ -22,7 +22,7 @@ class Configurations extends NOVO_Controller {
 	{
 		log_message('INFO', 'NOVO Configurations: configurationDownloads Method Initialized');
 
-		$view = 'configurations';
+		$view = lang('GEN_CONFIGURATIONS_VIEW');
 
 		array_push(
 			$this->includeAssets->cssFiles,
@@ -35,7 +35,7 @@ class Configurations extends NOVO_Controller {
 			"configurations/configurations"
 		);
 
-		$this->render->titlePage ='Configuración';
+		$this->render->titlePage =lang('GEN_CONFIGURATIONS_TITLE');
 		$this->views = ['configurations/'.$view];
 		$this->loadView($view);
 	}

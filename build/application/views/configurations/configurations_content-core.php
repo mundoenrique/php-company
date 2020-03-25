@@ -1,60 +1,65 @@
-<?php
-//echo $countryUri='co';
-?>
-
 <div class="bg-color">
   <div class="pt-3 pb-5 px-5 bg-content-config">
-    <h1 class="primary h3 regular inline">Configuración</h1>
+    <h1 class="primary h3 regular inline"><?= lang('GEN_CONFIGURATIONS_TITLE') ?></h1>
     <div class="flex mt-3 bg-color justify-between">
       <div class="flex mx-2">
         <nav class="nav-config">
           <ul class="nav-config-box">
-            <li id="user" class="nav-item-config ">
-              <a href="#">
+          <?php if(verifyDisplay('body','configuration', lang('GEN_BTN_USER'))): ?>
+            <li id="user" class="nav-item-config">
+              <a href="javascript:">
                 <img class="icon-config" src="<?= $this->asset->insertFile($countryUri.'/icon-user.svg');?>">
-                <h5>Usuario</h5>
+                <h5><?= lang('GEN_BTN_USER') ?></h5>
                 <div class="box up left">
                   <img src="<?= $this->asset->insertFile($countryUri.'/icon-user.svg');?>" class="bg">
-                  <h4>Usuario</h4>
+                  <h4><?= lang('GEN_BTN_USER') ?></h4>
                 </div>
               </a>
             </li>
+            <?php endif; ?>
+            <?php if(verifyDisplay('body','configuration', lang('GEN_BTN_ENTERPRISE'))): ?>
             <li id="enterprise" class="nav-item-config">
-              <a href="#">
+              <a href="javascript:">
                 <img class="icon-config" src="<?= $this->asset->insertFile($countryUri.'/icon-briefcase.svg');?>">
-                <h5>Empresas</h5>
+                <h5><?= lang('GEN_BTN_ENTERPRISE') ?></h5>
                 <div class="box up left">
                   <img src="<?= $this->asset->insertFile($countryUri.'/icon-briefcase.svg');?>" class="bg">
-                  <h4>Empresas</h4>
+                  <h4><?= lang('GEN_BTN_ENTERPRISE') ?></h4>
                 </div>
               </a>
             </li>
-            <li id="branch" class="nav-item-config"><a href="#">
+            <?php endif; ?>
+            <?php if(verifyDisplay('body','configuration', lang('GEN_BTN_BRANCH'))): ?>
+            <li id="branch" class="nav-item-config">
+              <a href="javascript:">
                 <img class="icon-config" src="<?= $this->asset->insertFile($countryUri.'/icon-building.svg');?>">
-                <h5>Sucursales</h5>
+                <h5><?= lang('GEN_BTN_BRANCH') ?></h5>
                 <div class="box up left">
                   <img src="<?= $this->asset->insertFile($countryUri.'/icon-building.svg');?>" class="bg">
-                  <h4>Sucursales</h4>
+                  <h4><?= lang('GEN_BTN_BRANCH') ?></h4>
                 </div>
               </a>
             </li>
-            <li id="downloads" class="nav-item-config active">
-              <a href="#">
+            <?php endif; ?>
+            <?php if(verifyDisplay('body','configuration', lang('GEN_BTN_DOWNLOADS'))): ?>
+            <li id="downloads" class="nav-item-config">
+              <a href="javascript:">
                 <img class="icon-config" src="<?= $this->asset->insertFile($countryUri.'/icon-download.svg');?>">
-                <h5>Descargas</h5>
+                <h5><?= lang('GEN_BTN_DOWNLOADS') ?></h5>
                 <div class="box up left">
                   <img src="<?= $this->asset->insertFile($countryUri.'/icon-download.svg');?>" class="bg ">
-                  <h4>Descargas</h4>
+                  <h4><?= lang('GEN_BTN_DOWNLOADS') ?></h4>
                 </div>
               </a>
             </li>
+            <?php endif; ?>
           </ul>
         </nav>
       </div>
         <div class="flex flex-auto flex-column" style="display:none">
         <div id="userView" style="display:none">
           <div class="flex mb-1 mx-4 flex-column">
-            <span class="line-text mb-2 h4 semibold primary">Configuración de usuario</span>
+            <span class="line-text mb-2 h4 semibold primary"><?= lang('GEN_CONFIG_USER') ?></span>
             <div class="px-5">
               <div class="container">
                 <div class="row my-2">
@@ -103,7 +108,7 @@
           </div>
           <div class="flex flex-auto flex-column">
             <div class="flex mb-5 mx-4 flex-column ">
-              <span class="line-text slide-slow flex mb-2 h4 semibold primary">Cambio de contraseña
+              <span class="line-text slide-slow flex mb-2 h4 semibold primary"><?= lang('GEN_CHANGE_PASS') ?>
                 <i class="flex mr-1 pl-2 icon icon-chevron-down flex-auto" aria-hidden="true"></i>
               </span>
               <div class="section my-2 px-5">
@@ -180,7 +185,7 @@
         </div>
         <div id="enterpriseView" style="display:none">
           <div class="flex mb-1 mx-4 flex-column">
-            <span class="line-text mb-2 h4 semibold primary">Configuración de la empresa</span>
+            <span class="line-text mb-2 h4 semibold primary"><?= lang('GEN_CONFIG_ENTERPRISE') ?></span>
             <div class="px-5">
 
               <div class="container">
@@ -260,7 +265,7 @@
           </div>
           <div class="flex flex-auto flex-column">
             <div class="flex flex-column mx-4 mb-5">
-              <span class="line-text slide-slow flex mb-2 h4 semibold primary">Agregar contacto
+              <span class="line-text slide-slow flex mb-2 h4 semibold primary"><?= lang('GEN_ADD_CONTACT') ?>
                 <i class="flex mr-1 pl-2 icon icon-chevron-down flex-auto" aria-hidden="true"></i>
               </span>
               <div class="section my-2 px-5">
@@ -323,7 +328,7 @@
         </div>
         <div id="branchView" style="display:none">
           <div class="flex mb-1 mx-4 flex-column">
-            <span class="line-text mb-2 h4 semibold primary">Configuración de sucursales</span>
+            <span class="line-text mb-2 h4 semibold primary"><?= lang('GEN_CONFIG_BRANCH') ?></span>
             <div class="px-5">
               <div class="container">
                 <div class="row">
@@ -359,7 +364,7 @@
           </div>
           <div class="flex flex-auto flex-column">
             <div class="flex flex-column mx-4 mb-5">
-              <span class="line-text slide-slow flex mb-2 h4 semibold primary">Agregar nueva sucursal
+              <span class="line-text slide-slow flex mb-2 h4 semibold primary"><?= lang('GEN_ADD_BRANCH') ?>
                 <i class="flex mr-1 pl-2 icon icon-chevron-down flex-auto" aria-hidden="true"></i>
               </span>
               <div class="section my-2 px-5">
@@ -476,7 +481,7 @@
         </div>
         <div id="downloadsView" style="display:none">
           <div class="flex mb-1 mx-4 flex-column">
-            <span class="line-text mb-2 h4 semibold primary"><?= lang('GEN_DOWNLOADS') ?></span>
+            <span class="line-text mb-2 h4 semibold primary"><?= lang('GEN_BTN_DOWNLOADS') ?></span>
             <div class="px-5">
               <div class="my-2 tertiary h4 semibold">
                 <span><?= lang('GEN_MANUALS') ?></span>
@@ -517,7 +522,7 @@
                     </div>
                   </div>
                 </div>
-				<?php if(verifyDisplay('body','configuration', lang('GEN_GL_USER_MANUAL'))): ?>
+				        <?php if(verifyDisplay('body','configuration', lang('GEN_GL_USER_MANUAL'))): ?>
 			        	<div class="my-2 tertiary h4 semibold">
                   <span><?= lang('GEN_APPLICATIONS') ?></span>
                 </div>
@@ -528,7 +533,7 @@
                         <div class="file">
                           <img src="<?= $this->asset->insertFile($countryUri.'/icon-zip.svg');?>"/>
                         </div>
-                        <span class="ml-2 flex justify-center">Gestor de lotes (1.759kb)</span>
+                        <span class="ml-2 flex justify-center"><?= lang('GEN_BATCH_MANAGER') ?></span>
                       </div>
                     </a>
                   </div>
@@ -538,15 +543,15 @@
                         <div class="file">
                           <img src="<?= $this->asset->insertFile($countryUri.'/icon-zip.svg');?>" />
                         </div>
-                        <span class="ml-2 flex justify-center">Java JRE 1.6 (14.226kb)</span>
+                        <span class="ml-2 flex justify-center"><?= lang('GEN_JAVA_JRE') ?></span>
                       </div>
                     </a>
                   </div>
                 </div>
                 <?php endif; ?>
-                
-								<div class="my-2 tertiary h4 semibold">
-                  <span>Archivos de gestión Conexión Empresas Online</span>
+                <?php if(verifyDisplay('body','configuration', lang('GEN_FILE'))): ?>
+                <div class="my-2 tertiary h4 semibold">
+                <span><?= lang('GEN_FILE') ?></span>
                 </div>
                 <div class="row">
                   <div class="form-group col-auto mb-3 col-xl-5">
@@ -555,11 +560,12 @@
                         <div class="file">
                           <img src=<?= $this->asset->insertFile($countryUri.'/icon-rar.svg');?> />
                         </div>
-                        <span class="ml-2 flex justify-center">Archivos lotes operativos (194kb)</span>
+                        <span class="ml-2 flex justify-center"><?= lang('GEN_FILE_OPERATIONAL_BATCH') ?></span>
                       </div>
                     </a>
                   </div>
                 </div>
+              <?php endif; ?>
               </div>
             </div>
           </div>
