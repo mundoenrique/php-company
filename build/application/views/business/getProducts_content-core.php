@@ -14,7 +14,7 @@
 <div class="flex mt-3 items-center">
 	<div class="flex h6 flex-auto justify-end">
 		<?php if(count($brands) > 1): ?>
-		<button class="btn btn-outline btn-small btn-rounded-left bg-white"><?= lang('PRODUCTS_ALL') ?></button>
+		<button class="btn btn-outline btn-small btn-rounded-left bg-white" data-jplist-control="reset" data-group="group-filter-pagination" data-name="reset"><?= lang('PRODUCTS_ALL') ?></button>
 		<?php endif; ?>
 		<?php if(verifyDisplay('body', $module,  lang('GEN_TAG_SEARCH_CAT'))): ?>
 		<select class="select-box custom-select mr-0 h6">
@@ -49,7 +49,7 @@
 			<div data-jplist-item class="select-product flex mb-1 pl-3 pr-4 py-1 bg-white justify-between items-center">
 				<div class="flex mr-3 mx-1 items-center">
 					<img src="<?= $this->asset->insertFile('programs/'.$products->programImg); ?>" alt="<?= $products->programImg; ?>">
-					<img class="mx-2 img-brand-list" src="<?= $this->asset->insertFile('brands/'.$products->imgBrand); ?>" alt="<?= $products->imgBrand; ?>">
+					<img class="filter-<?= strtolower($products->marca); ?> mx-2 img-brand-list" src="<?= $this->asset->insertFile('brands/'.$products->imgBrand); ?>" alt="<?= $products->imgBrand; ?>">
 					<div class="flex flex-column">
 						<span class="product-description semibold primary"><?= $products->descripcion; ?></span>
 						<span class="h6 light text">
