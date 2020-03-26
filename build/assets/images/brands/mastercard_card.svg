@@ -1,27 +1,23 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Inkscape (http://www.inkscape.org/) -->
-<svg width="200" height="123.63" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
- <metadata>
-  <rdf:RDF>
-   <cc:Work rdf:about="">
-    <dc:format>image/svg+xml</dc:format>
-    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:title/>
-   </cc:Work>
-  </rdf:RDF>
- </metadata>
- <g transform="translate(1565.7 -1106.8)">
-  <g transform="matrix(3.1437 0 0 3.1437 -4835.7 -1027.6)">>
-   <g transform="matrix(1.25 0 0 -1.25 1103.2 710.77)">
-    <path d="m0 0v0.61h-0.159l-0.184-0.419-0.183 0.419h-0.16v-0.61h0.113v0.46l0.172-0.397h0.117l0.172 0.398v-0.461zm-1.009 0v0.506h0.204v0.103h-0.52v-0.103h0.204v-0.506z" fill="#f79410"/>
-   </g>
-   <path d="m1080.6 714.05h-17.202v-30.915h17.202z" fill="#ff5f00"/>
-   <g transform="matrix(1.25 0 0 -1.25 1064.5 698.59)">
-    <path d="m0 0c0 5.017 2.349 9.486 6.007 12.366-2.675 2.106-6.051 3.363-9.72 3.363-8.686 0-15.727-7.042-15.727-15.729s7.041-15.729 15.727-15.729c3.669 0 7.045 1.257 9.72 3.363-3.658 2.88-6.007 7.349-6.007 12.366" fill="#eb001b"/>
-   </g>
-   <g transform="matrix(1.25 0 0 -1.25 1103.8 698.59)">
-    <path d="m0 0c0-8.687-7.041-15.729-15.727-15.729-3.669 0-7.045 1.257-9.721 3.363 3.659 2.88 6.008 7.349 6.008 12.366s-2.349 9.486-6.008 12.366c2.676 2.106 6.052 3.363 9.721 3.363 8.686 0 15.727-7.042 15.727-15.729" fill="#f79e1b"/>
-   </g>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="25" height="15" viewBox="0 0 25 15">
+  <defs>
+    <clipPath id="clip-Mesa_de_trabajo_1">
+      <rect width="25" height="15"/>
+    </clipPath>
+  </defs>
+  <g id="Mesa_de_trabajo_1" data-name="Mesa de trabajo – 1" clip-path="url(#clip-Mesa_de_trabajo_1)">
+    <g id="mastercard_card" transform="translate(1566.623 -1106.248)">
+      <g id="Grupo_12" data-name="Grupo 12" transform="translate(-1565.623 1106.748)">
+        <g id="Grupo_9" data-name="Grupo 9" transform="translate(21.84 11.065)">
+          <path id="Trazado_9" data-name="Trazado 9" d="M-4.617-2.126V-2.4h-.071l-.082.186L-4.851-2.4h-.071v.271h.05v-.2l.077.177h.052l.077-.177v.205Zm-.449,0v-.225h.091V-2.4h-.231v.046h.091v.225Z" transform="translate(5.207 2.397)" fill="#f79410"/>
+        </g>
+        <path id="Trazado_10" data-name="Trazado 10" d="M3349.128,2158.578H3343v-11.007h6.125Z" transform="translate(-3334.745 -2146.074)" fill="#ff5f00"/>
+        <g id="Grupo_10" data-name="Grupo 10" transform="translate(0 0)">
+          <path id="Trazado_11" data-name="Trazado 11" d="M-67.74-54.809a6.988,6.988,0,0,1,2.673-5.5,6.969,6.969,0,0,0-4.326-1.5,7,7,0,0,0-7,7,7,7,0,0,0,7,7,6.969,6.969,0,0,0,4.326-1.5,6.988,6.988,0,0,1-2.673-5.5" transform="translate(76.392 61.809)" fill="#eb001b"/>
+        </g>
+        <g id="Grupo_11" data-name="Grupo 11" transform="translate(11.318 0)">
+          <path id="Trazado_12" data-name="Trazado 12" d="M-88.676-54.809a7,7,0,0,1-7,7,6.972,6.972,0,0,1-4.326-1.5,6.987,6.987,0,0,0,2.674-5.5,6.987,6.987,0,0,0-2.674-5.5,6.971,6.971,0,0,1,4.326-1.5,7,7,0,0,1,7,7" transform="translate(100.001 61.809)" fill="#f79e1b"/>
+        </g>
+      </g>
+    </g>
   </g>
- </g>
 </svg>
