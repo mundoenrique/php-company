@@ -142,7 +142,7 @@ class Verify_Access {
 				case 'getEnterprises':
 				case 'getProducts':
 				case 'keepSession':
-				case 'configurationDownloads':
+				case 'options':
 					$auth = ($this->CI->session->has_userdata('logged'));
 					break;
 				case 'getProductDetail':

@@ -84,7 +84,7 @@ $route['(:any)/descargar-archivo-os'] = "downloadFiles/exportFiles";
 //Reports
 $route['(:any)/reportes'] = "reports/getReportsList";
 //settings
-$route['(:any)/configuracion'] = "configurations/configurationDownloads";
+$route['(:any)/configuracion'] = "settings/options";
 
 
 //old routes

@@ -1,11 +1,11 @@
 <div class="bg-color">
 	<div class="pt-3 pb-5 px-5 bg-content-config">
-		<h1 class="primary h3 regular inline"><?= lang('GEN_CONFIGURATIONS_TITLE') ?></h1>
+		<h1 class="primary h3 regular inline"><?= lang('GEN_SETTINGS_TITLE') ?></h1>
 		<div class="flex mt-3 bg-color justify-between">
 			<div class="flex mx-2">
 				<nav class="nav-config">
 					<ul class="nav-config-box">
-						<?php if(verifyDisplay('body','configuration', lang('GEN_BTN_USER'))): ?>
+						<?php if(verifyDisplay('body','settings', lang('GEN_BTN_USER'))): ?>
 						<li id="user" class="nav-item-config">
 							<a href="javascript:">
 								<img class="icon-config" src="<?= $this->asset->insertFile($countryUri.'/icon-user.svg');?>">
@@ -17,7 +17,7 @@
 							</a>
 						</li>
 						<?php endif; ?>
-						<?php if(verifyDisplay('body','configuration', lang('GEN_BTN_ENTERPRISE'))): ?>
+						<?php if(verifyDisplay('body','settings', lang('GEN_BTN_ENTERPRISE'))): ?>
 						<li id="enterprise" class="nav-item-config">
 							<a href="javascript:">
 								<img class="icon-config" src="<?= $this->asset->insertFile($countryUri.'/icon-briefcase.svg');?>">
@@ -29,7 +29,7 @@
 							</a>
 						</li>
 						<?php endif; ?>
-						<?php if(verifyDisplay('body','configuration', lang('GEN_BTN_BRANCH'))): ?>
+						<?php if(verifyDisplay('body','settings', lang('GEN_BTN_BRANCH'))): ?>
 						<li id="branch" class="nav-item-config">
 							<a href="javascript:">
 								<img class="icon-config" src="<?= $this->asset->insertFile($countryUri.'/icon-building.svg');?>">
@@ -41,7 +41,7 @@
 							</a>
 						</li>
 						<?php endif; ?>
-						<?php if(verifyDisplay('body','configuration', lang('GEN_BTN_DOWNLOADS'))): ?>
+						<?php if(verifyDisplay('body','settings', lang('GEN_BTN_DOWNLOADS'))): ?>
 						<li id="downloads" class="nav-item-config">
 							<a href="javascript:">
 								<img class="icon-config" src="<?= $this->asset->insertFile($countryUri.'/icon-download.svg');?>">
@@ -59,7 +59,7 @@
 			<div class="flex flex-auto flex-column" style="display:none">
 				<div id="userView" style="display:none">
 					<div class="flex mb-1 mx-4 flex-column">
-						<span class="line-text mb-2 h4 semibold primary"><?= lang('GEN_CONFIG_USER') ?></span>
+						<span class="line-text mb-2 h4 semibold primary"><?= lang('GEN_SETTINGS_USER') ?></span>
 						<div class="px-5">
 							<div class="container">
 								<div class="row my-2">
@@ -185,7 +185,7 @@
 				</div>
 				<div id="enterpriseView" style="display:none">
 					<div class="flex mb-1 mx-4 flex-column">
-						<span class="line-text mb-2 h4 semibold primary"><?= lang('GEN_CONFIG_ENTERPRISE') ?></span>
+						<span class="line-text mb-2 h4 semibold primary"><?= lang('GEN_SETTINGS_ENTERPRISE') ?></span>
 						<div class="px-5">
 
 							<div class="container">
@@ -328,7 +328,7 @@
 				</div>
 				<div id="branchView" style="display:none">
 					<div class="flex mb-1 mx-4 flex-column">
-						<span class="line-text mb-2 h4 semibold primary"><?= lang('GEN_CONFIG_BRANCH') ?></span>
+						<span class="line-text mb-2 h4 semibold primary"><?= lang('GEN_SETTINGS_BRANCH') ?></span>
 						<div class="px-5">
 							<div class="container">
 								<div class="row">
@@ -490,7 +490,7 @@
 											</div>
 										</a>
 									</div>
-									<?php if(verifyDisplay('body','configuration', lang('GEN_GL_USER_MANUAL'))): ?>
+									<?php if(verifyDisplay('body','settings', lang('GEN_GL_USER_MANUAL'))): ?>
 									<div class="mb-3 col-auto col-lg-6 col-xl-5">
 										<a id="download-file" href="<?= $this->asset->insertFile($countryUri.'/archivo.pdf','downloads');?>" download>
 											<div class="files btn-link flex items-center">
@@ -514,7 +514,7 @@
 										</div>
 									</div>
 								</div>
-								<?php if(verifyDisplay('body','configuration', lang('GEN_GL_USER_MANUAL'))): ?>
+								<?php if(verifyDisplay('body','settings', lang('GEN_GL_USER_MANUAL'))): ?>
 								<div class="my-2 tertiary h4 semibold">
 									<span><?= lang('GEN_APPLICATIONS') ?></span>
 								</div>
@@ -541,7 +541,7 @@
 									</div>
 								</div>
 								<?php endif; ?>
-								<?php if(verifyDisplay('body','configuration', lang('GEN_FILE'))): ?>
+								<?php if(verifyDisplay('body','settings', lang('GEN_FILE'))): ?>
 								<div class="my-2 tertiary h4 semibold">
 									<span><?= lang('GEN_FILE') ?></span>
 								</div>

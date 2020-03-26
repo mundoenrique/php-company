@@ -5,12 +5,12 @@ defined('BASEPATH') OR  exit('No direct script access allowed');
  * @author Luis Molina
  * @date Marz 20Fri, 2020
 */
-class Configurations extends NOVO_Controller {
+class Settings extends NOVO_Controller {
 
 	public function __construct()
 	{
 		parent :: __construct();
-		log_message('INFO', 'NOVO Configurations Controller Class Initialized');
+		log_message('INFO', 'NOVO Settings Controller Class Initialized');
 	}
 
 	/**
@@ -18,11 +18,11 @@ class Configurations extends NOVO_Controller {
 	 * @author Luis Molina
 	 * @date Mar 23Mon, 2020
 	 */
-	public function configurationDownloads()
+	public function options()
 	{
-		log_message('INFO', 'NOVO Configurations: configurationDownloads Method Initialized');
+		log_message('INFO', 'NOVO Settings: options Method Initialized');
 
-		$view = lang('GEN_CONFIGURATIONS_VIEW');
+		$view = lang('GEN_SETTINGS_VIEW');
 
 		array_push(
 			$this->includeAssets->cssFiles,
@@ -31,12 +31,12 @@ class Configurations extends NOVO_Controller {
 		array_push(
 			$this->includeAssets->jsFiles,
 			"third_party/dataTables-1.10.20",
-			"configurations/ceo_load_lots",
-			"configurations/configurations"
+			"settings/ceo_load_lots",
+			"settings/settings"
 		);
 
-		$this->render->titlePage =lang('GEN_CONFIGURATIONS_TITLE');
-		$this->views = ['configurations/'.$view];
+		$this->render->titlePage =lang('GEN_SETTINGS_TITLE');
+		$this->views = ['settings/'.$view];
 		$this->loadView($view);
 	}
 }
