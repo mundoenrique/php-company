@@ -25,10 +25,10 @@
 		</select>
 		<?php endif; ?>
 		<?php if(count($brands) > 1): ?>
-		<select class="select-box custom-select h6">
-			<option selected disabled><?= lang('PRODUCTS_SEARCH_BRAND'); ?></option>
+		<select class="select-box custom-select h6" data-jplist-control="select-filter" data-group="group-filter-pagination" data-name="brand">
+			<option selected disabled data-path="default"><?= lang('PRODUCTS_SEARCH_BRAND'); ?></option>
 			<?php foreach($brands AS $brand): ?>
-			<option value="<?= $brand->idMarca; ?>"><?= $brand->nombre; ?></option>
+			<option value="<?= $brand->idMarca; ?>" data-path=".filter-<?= strtolower($brand->nombre); ?>"><?= $brand->nombre; ?></option>
 			<?php endforeach; ?>
 		</select>
 		<?php endif; ?>
@@ -77,7 +77,7 @@
 		</div>
 
 		<!-- pagination control -->
-		<div class="pagination page-number flex mb-5 py-5 flex-auto justify-center" data-jplist-control="pagination" data-group="group-filter-pagination" data-items-per-page="5" data-current-page="0" data-disabled-class="disabled" data-selected-class="page-current" data-name="pagination1">
+		<div class="pagination page-number flex mb-5 py-5 flex-auto justify-center" data-jplist-control="pagination" data-group="group-filter-pagination" data-items-per-page="5" data-current-page="0" data-disabled-class="disabled" data-selected-class="page-current" data-name="pagination">
 			<nav class="h4">
 				<a href="#" data-type="first">Primera</a>
 				<a href="#" data-type="prev">«</a>
