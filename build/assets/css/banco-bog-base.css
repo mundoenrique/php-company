@@ -3563,7 +3563,7 @@ a.ui-button:active,
 
 /* Product */
 .select-product {
-	max-width: 815px;
+	width: 624px;
   height: 70px;
 	box-shadow: 1px 1px 2px 0 rgba(0,0,0,.2);
 	transition: all .6s ease-in-out;
@@ -3575,6 +3575,7 @@ a.ui-button:active,
 
 @media (min-width: 1024px) {
 	.select-product {
+		width: 760px;
 		margin-right: var(--space-3);
 	}
 }

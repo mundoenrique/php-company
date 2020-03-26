@@ -47,12 +47,12 @@
 		<div data-jplist-group="group-filter-pagination" id="product-list" class="flex-auto">
 			<?php foreach($productList AS $pos => $products): ?>
 			<div data-jplist-item class="select-product flex mb-1 pl-3 pr-4 py-1 bg-white justify-between items-center">
-				<div class="flex mr-3 mx-1 items-center">
+				<div class="flex mr-3 mx-1 items-center flex-auto">
 					<img src="<?= $this->asset->insertFile('programs/'.$products->programImg); ?>" alt="<?= $products->programImg; ?>">
 					<img class="filter-<?= strtolower($products->marca); ?> mx-2 img-brand-list" src="<?= $this->asset->insertFile('brands/'.$products->imgBrand); ?>" alt="<?= $products->imgBrand; ?>">
-					<div class="flex flex-column">
+					<div class="flex flex-column flex-auto">
 						<span class="product-description semibold primary"><?= $products->descripcion; ?></span>
-						<span class="h6 light text">
+						<span class="h6 light text truncate">
 							<?php $category = isset($products->categoria) ? ' / '.$products->categoria : ''; ?>
 							<?= $products->filial.$category ?>
 						</span>
