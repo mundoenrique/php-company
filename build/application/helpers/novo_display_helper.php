@@ -66,8 +66,8 @@ if ( ! function_exists('verifyheader'))
 				$display = (in_array($client, $show));
 				break;
 			case lang('GEN_SHOW_CONFIG'):
-				$show = ['novo', 'pichincha'];
-				$display = (in_array($client, $show));
+				$show = ['novo', 'pichincha','banco-bog'];
+				$display = ($logged && in_array($client, $show));
 				break;
 			case lang('GEN_TAG_GOUT_MENU'):
 				$show = ['novo'];
@@ -136,6 +136,34 @@ if ( ! function_exists('verifyBody'))
 				break;
 			case lang('GEN_TAG_CANCEL_BUTTON'):
 				$show = ['novo', 'pichincha'];
+				$display = (in_array($client, $show));
+				break;
+			case lang('GEN_BTN_USER'):
+				$show = ['novo','pichincha'];
+				$display = (in_array($client, $show));
+				break;
+			case lang('GEN_BTN_ENTERPRISE'):
+				$show = ['novo','pichincha'];
+				$display = (in_array($client, $show));
+				break;
+			case lang('GEN_BTN_BRANCH'):
+				$show = ['novo','pichincha'];
+				$display = (in_array($client, $show));
+				break;
+			case lang('GEN_BTN_DOWNLOADS'):
+				$show = ['novo','pichincha','banco-bog'];
+				$display = (in_array($client, $show));
+				break;
+			case lang('GEN_GL_USER_MANUAL'):
+				$show = ['novo','pichincha'];
+				$display = (in_array($client, $show));
+				break;
+			case lang('GEN_APPLICATIONS'):
+				$show = ['novo','pichincha'];
+				$display = (in_array($client, $show));
+				break;
+			case lang('GEN_FILE'):
+				$show = ['novo','pichincha'];
 				$display = (in_array($client, $show));
 				break;
 		}

@@ -2298,15 +2298,6 @@ i[class*=" icon-"]:before {
   margin-bottom: 12px;
 }
 
-.main-nav ul li:last-child {
-	font-weight: var(--regular-font-weight);
-	text-shadow: 0 0 .1px var(--tertiary);
-	color: var(--primary);
-}
-
-.main-nav ul li:hover:not(:last-child) {
-	text-shadow: .3px -0.5px .3px var(--tertiary);
-}
 
 .main-nav ul li span {
   display: block;
@@ -3800,4 +3791,18 @@ td > table.detail-lot {
 .img-brand-list {
 	width: 68px;
 	height: 40px;
+}
+
+.manual-video {
+	height: 0;
+	position: relative;
+	padding-bottom: 56.25%;
+}
+
+.manual-video video {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
 }
