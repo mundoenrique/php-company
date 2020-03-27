@@ -1,5 +1,7 @@
 'use strict'
 $(function() {
+	jplist.init();
+
 	var productDetail = $('.product-detail');
 	var noProduct = $('#no-product');
 	var productList = $('#product-list');

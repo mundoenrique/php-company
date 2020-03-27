@@ -14,7 +14,7 @@
 <div class="flex mt-3 items-center">
 	<div class="flex h6 flex-auto justify-end">
 		<?php if(count($brands) > 1): ?>
-		<button class="btn btn-outline btn-small btn-rounded-left bg-white"><?= lang('PRODUCTS_ALL') ?></button>
+		<button class="btn btn-outline btn-small btn-rounded-left bg-white" data-jplist-control="reset" data-group="group-filter-pagination" data-name="reset"><?= lang('PRODUCTS_ALL') ?></button>
 		<?php endif; ?>
 		<?php if(verifyDisplay('body', $module,  lang('GEN_TAG_SEARCH_CAT'))): ?>
 		<select class="select-box custom-select mr-0 h6">
@@ -25,15 +25,16 @@
 		</select>
 		<?php endif; ?>
 		<?php if(count($brands) > 1): ?>
-		<select class="select-box custom-select h6">
-			<option selected disabled><?= lang('PRODUCTS_SEARCH_BRAND'); ?></option>
+		<select class="select-box custom-select h6" data-jplist-control="select-filter" data-group="group-filter-pagination" data-name="brand">
+			<option selected disabled data-path="default"><?= lang('PRODUCTS_SEARCH_BRAND'); ?></option>
 			<?php foreach($brands AS $brand): ?>
-			<option value="<?= $brand->idMarca; ?>"><?= $brand->nombre; ?></option>
+			<option value="<?= $brand->idMarca; ?>" data-path=".filter-<?= strtolower($brand->nombre); ?>"><?= $brand->nombre; ?></option>
 			<?php endforeach; ?>
 		</select>
 		<?php endif; ?>
 		<div id="sb-search" class="sb-search">
-			<input id="search" class="sb-search-input" type="search" name="search" value="" placeholder="Buscar...">
+			<!-- text filter -->
+			<input data-jplist-control="textbox-filter" data-group="group-filter-pagination" data-name="description" data-path=".product-description" id="search" class="sb-search-input" type="search" name="search" value="" placeholder="Buscar...">
 			<span class="sb-icon-search"><i class="icon icon-find"></i></span>
 		</div>
 	</div>
@@ -41,36 +42,60 @@
 <div class="line mt-1"></div>
 
 <div class="flex mx-4 my-5 pt-2 flex-wrap justify-between">
-	<div id="product-list" class="flex-auto">
-		<?php foreach($productList AS $pos => $products): ?>
-		<div class="select-product flex mb-1 pl-3 pr-4 py-1 bg-white justify-between items-center">
-			<div class="flex mr-3 mx-1 items-center">
-				<img src="<?= $this->asset->insertFile('programs/'.$products->programImg); ?>" alt="<?= $products->programImg; ?>">
-				<img class="mx-2 img-brand-list" src="<?= $this->asset->insertFile('brands/'.$products->imgBrand); ?>" alt="<?= $products->imgBrand; ?>">
-				<div class="flex flex-column">
-					<span class="semibold primary"><?= $products->descripcion; ?></span>
-					<span class="h6 light text">
-						<?php $category = isset($products->categoria) ? ' / '.$products->categoria : ''; ?>
-						<?= $products->filial.$category ?>
-					</span>
+	<div class="flex flex-column">
+		<!-- content to filter -->
+		<div data-jplist-group="group-filter-pagination" id="product-list" class="flex-auto">
+			<?php foreach($productList AS $pos => $products): ?>
+			<div data-jplist-item class="select-product flex mb-1 pl-3 pr-4 py-1 bg-white justify-between items-center">
+				<div class="flex mr-3 mx-1 items-center flex-auto">
+					<img src="<?= $this->asset->insertFile('programs/'.$products->programImg); ?>" alt="<?= $products->programImg; ?>">
+					<img class="filter-<?= strtolower($products->marca); ?> mx-2 img-brand-list" src="<?= $this->asset->insertFile('brands/'.$products->imgBrand); ?>" alt="<?= $products->imgBrand; ?>">
+					<div class="flex flex-column flex-auto">
+						<span class="product-description semibold primary"><?= $products->descripcion; ?></span>
+						<span class="h6 light text truncate">
+							<?php $category = isset($products->categoria) ? ' / '.$products->categoria : ''; ?>
+							<?= $products->filial.$category ?>
+						</span>
+					</div>
+				</div>
+				<div>
+					<button class="product-detail btn btn-primary btn-small btn-loading flex mx-auto justify-center">
+						<?= lang('GEN_BTN_SELECT') ?>
+					</button>
+					<form id="product-<?= $products->idProducto; ?>" action="<?= base_url('detalle-producto') ?>" method="POST">
+						<input type="hidden" name="productPrefix" value="<?= $products->idProducto; ?>">
+						<input type="hidden" name="productName" value="<?= $products->descripcion; ?>">
+						<input type="hidden" name="productBrand" value="<?= $products->marca; ?>">
+					</form>
 				</div>
 			</div>
-			<div>
-				<button class="product-detail btn btn-primary btn-small btn-loading flex mx-auto justify-center">
-					<?= lang('GEN_BTN_SELECT') ?>
-				</button>
-				<form id="product-<?= $products->idProducto; ?>" action="<?= base_url('detalle-producto') ?>" method="POST">
-					<input type="hidden" name="productPrefix" value="<?= $products->idProducto; ?>">
-					<input type="hidden" name="productName" value="<?= $products->descripcion; ?>">
-					<input type="hidden" name="productBrand" value="<?= $products->marca; ?>">
-				</form>
+			<?php endforeach; ?>
+			<!-- no results control -->
+			<div class="flex-auto my-5 py-4 center" style="display: none" data-jplist-control="no-results" data-group="group-filter-pagination" data-name="no-results">
+				<span class="h4">No se han encontrado resultados</span>
 			</div>
 		</div>
-		<?php endforeach; ?>
+
+		<!-- pagination control -->
+		<div class="pagination page-number flex mb-5 py-5 flex-auto justify-center" data-jplist-control="pagination" data-group="group-filter-pagination" data-items-per-page="5" data-current-page="0" data-disabled-class="disabled" data-selected-class="page-current" data-name="pagination">
+			<nav class="h4">
+				<a href="#" data-type="first">Primera</a>
+				<a href="#" data-type="prev">«</a>
+			</nav>
+			<div class="h4 flex justify-center" data-type="pages">
+				<span class="mx-1" data-type="page"><a href="#">{pageNumber}</a></span>
+			</div>
+			<nav class="h4">
+				<a href="#" data-type="next">»</a>
+				<a href="#" data-type="last">Última</a>
+			</nav>
+		</div>
+
+		<div id="no-product" class="flex-auto my-5 py-4 center none">
+			<span class="h4">No fue posible obtener la lista de productos asociados</span>
+		</div>
 	</div>
-	<div id="no-product" class="flex-auto my-5 py-4 center none">
-		<span class="h4">No fue posible obtener la lista de productos asociados</span>
-	</div>
+
 	<?php if($widget): ?>
 	<?php $this->load->view('widget/widget_enterprise-product_content'.$newViews, $widget) ?>
 	<?php endif; ?>
