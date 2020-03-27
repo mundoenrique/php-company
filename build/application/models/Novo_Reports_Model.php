@@ -47,6 +47,10 @@ class Novo_Reports_Model extends NOVO_Model {
 					'key' => '',
 					'text' => 'Selecciona el tipo de identificación'
 				];
+				$inquiryType[] = (object) [
+					'key' => '',
+					'text' => 'Selecciona el tipo de consulta'
+				];
 
 				foreach ($response->listaConfigReportesCEO AS $reports) {
 					$report = [];
@@ -73,6 +77,15 @@ class Novo_Reports_Model extends NOVO_Model {
 										$IdTypeList[] = (object) $idType;
 									}
 								}
+
+								if(count($value) > 0 && $value[0]->idFilter == '5' && isset($value[0]->listDataSelection)) {
+									foreach($value[0]->listDataSelection AS $IdTypeObject) {
+										$idType = [];
+										$idType['key'] = $IdTypeObject->codData;
+										$idType['text'] = $IdTypeObject->description;
+										$inquiryType[] = (object) $idType;
+									}
+								}
 								break;
 							case 'listTableHeader':
 								if(count($value) > 0 && $reports->idReporte == '5') {
@@ -97,10 +110,15 @@ class Novo_Reports_Model extends NOVO_Model {
 				'key' => '',
 				'text' => lang('RESP_TRY_AGAIN')
 			];
+			$inquiryType[] = (object) [
+				'key' => '',
+				'text' => lang('RESP_TRY_AGAIN')
+			];
 		}
 
 		$this->response->data->reportsList = (object) $reportsList;
 		$this->response->data->IdTypeList = (object) $IdTypeList;
+		$this->response->data->inquiryType = (object) $inquiryType;
 		$this->response->data->headerCardsRep = $headerCardsRep;
 		return $this->responseToTheView('GetReportsList');
 	}
@@ -123,18 +141,24 @@ class Novo_Reports_Model extends NOVO_Model {
 				break;
 			case 'repMovimientoPorEmpresa':
 				$this->movementsByEnterprise($dataRequest);
-			break;
+				break;
 			case 'repTarjeta':
 				$this->cardReport($dataRequest);
-			break;
+				break;
 			case 'repTarjetasPorPersona':
 				$this->cardsPeople($dataRequest);
-			break;
+				break;
 			case 'repMovimientoPorTarjeta':
 				$this->movementsByCards($dataRequest);
-			break;
+				break;
 			case 'repComprobantesVisaVale':
 				$this->VISAproofpayment($dataRequest);
+				break;
+			case 'repExtractoCliente':
+				$this->clientStatement($dataRequest);
+				break;
+			case 'repCertificadoGmf':
+				$this->GMPCertificate($dataRequest);
 				break;
 		}
 
@@ -282,6 +306,57 @@ class Novo_Reports_Model extends NOVO_Model {
 				$this->response->icon = lang('GEN_ICON_INFO');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_NO_MOVES_ENTERPRISE');
+				$this->response->data['btn1']['action'] = 'close';
+				break;
+		}
+
+		return $this->response;
+	}
+	/**
+	 * @info Método para obtener el listado de tarjetas de una empresa
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date Janury 05th, 2020
+	 */
+	private function clientStatement($dataRequest)
+	{
+		log_message('INFO', 'NOVO Reports Model: clientStatement Method Initialized');
+
+		$this->dataAccessLog->function = 'Extracto del cliente';
+		$this->dataAccessLog->operation = 'Descargar archivo';
+
+		$this->className = 'ReporteCEOTO.class';
+		$date = explode('/', $dataRequest->dateEx);
+		$this->dataRequest->extractoEmpresa = [
+			'mes' => $date[0],
+			'anio' => $date[1],
+			'producto' => $this->session->productInf->productPrefix
+		];
+		$this->dataRequest->empresaCliente = [
+			'rif' => $this->session->enterpriseInf->idFiscal
+		];
+
+		$response = $this->sendToService('GetReport: '.$dataRequest->operation);
+
+		switch($this->isResponseRc) {
+			case 0:
+				$this->response->icon = lang('GEN_ICON_DANGER');
+				$this->response->title = lang('REPORTS_TITLE');
+				$this->response->msg = lang('REPORTS_NO_FILE_EXIST');
+				$this->response->data['btn1']['action'] = 'close';
+
+				if(file_exists(assetPath('downloads/'.$response->bean))) {
+					$this->response->code = 0;
+					$this->response->msg = lang('RESP_RC_0');
+					$this->response->data = [
+						'file' => assetUrl('downloads/'.$response->bean),
+						'name' => $response->bean
+					];
+				}
+				break;
+			case -423:
+				$this->response->icon = lang('GEN_ICON_INFO');
+				$this->response->title = lang('REPORTS_TITLE');
+				$this->response->msg = lang('REPORTS_NO_CLIENT_STATEMENT');
 				$this->response->data['btn1']['action'] = 'close';
 				break;
 		}
@@ -492,6 +567,59 @@ class Novo_Reports_Model extends NOVO_Model {
 			case -30:
 			case -150:
 				$this->session->set_flashdata('cardsPeople', $this->session->flashdata('cardsPeople'));
+				$this->response->icon = lang('GEN_ICON_INFO');
+				$this->response->title = lang('REPORTS_TITLE');
+				$this->response->msg = lang('REPORTS_NO_MOVES_ENTERPRISE');
+				$this->response->data['btn1']['action'] = 'close';
+				break;
+		}
+
+		return $this->response;
+	}
+	/**
+	 * @info Método para obtener el listado de tarjetas por persona
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date March 10th, 2020
+	 */
+	private function GMPCertificate($dataRequest)
+	{
+		log_message('INFO', 'NOVO Reports Model: GMPCertificate Method Initialized');
+
+		$this->dataAccessLog->function = 'Obtener certificado GMF';
+		$this->dataAccessLog->operation = 'Descargar archivo';
+
+		$this->className = 'ReporteCEOTO.class';
+		$date = explode('/', $dataRequest->dateG);
+		$this->dataRequest->certificadoGmf = [
+			'tipoConsulta' => $dataRequest->inquiryType,
+			'mes' => $date[0],
+			'anio' => $date[1],
+			'id_ext_per' => $dataRequest->idTypeG.'_'.$dataRequest->idNumberG,
+		];
+		$this->dataRequest->empresaCliente = [
+			'rif' => $this->session->enterpriseInf->idFiscal
+		];
+
+		$response = $this->sendToService('GetReport: '.$dataRequest->operation);
+
+		switch($this->isResponseRc) {
+			case 0:
+				$this->response->icon = lang('GEN_ICON_DANGER');
+				$this->response->title = lang('REPORTS_TITLE');
+				$this->response->msg = lang('REPORTS_NO_FILE_EXIST');
+				$this->response->data['btn1']['action'] = 'close';
+
+				if(file_exists(assetPath('downloads/'.$response->bean))) {
+					$this->response->code = 0;
+					$this->response->msg = lang('RESP_RC_0');
+					$this->response->data = [
+						'file' => assetUrl('downloads/'.$response->bean),
+						'name' => $response->bean
+					];
+				}
+				break;
+			case -30:
+			case -150:
 				$this->response->icon = lang('GEN_ICON_INFO');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_NO_MOVES_ENTERPRISE');

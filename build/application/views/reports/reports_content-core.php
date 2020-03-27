@@ -31,7 +31,7 @@
 							</select>
 							<div class="help-block"></div>
 						</div>
-						<div id="div-download" class="no-select none">
+						<div id="div-download" class="none">
 							<div class="flex items-start justify-end">
 								<button id="btn-download" class="flex items-baseline btn btn-link btn-small big-modal">
 									<i aria-hidden="true" class="icon icon-download"></i>
@@ -46,10 +46,10 @@
 		</div>
 
 		<div class="flex pb-5 flex-column">
-			<span id="search-criteria" class="no-select none line-text mb-2 h4 semibold primary"><?= lang('GEN_SEARCH_CRITERIA') ?></span>
+			<span id="search-criteria" class="none line-text mb-2 h4 semibold primary"><?= lang('GEN_SEARCH_CRITERIA') ?></span>
 			<div class="flex my-2 px-5">
-				<form id="form-report" method="post" class="no-select reports-form w-100 none">
-					<div id="repMovimientoPorEmpresa" class="no-select row">
+				<form id="form-report" method="post" class="reports-form w-100 none">
+					<div id="repMovimientoPorEmpresa" class="row">
 						<div class="form-group col-4">
 							<label for="enterpriseDateBegin"><?= lang('GEN_START_DAY'); ?></label>
 							<input id="enterpriseDateBegin" class="form-control date-picker" name="datepicker_start" type="text" readonly placeholder="DD/MM/AAAA"
@@ -70,7 +70,7 @@
 					</div>
 
 					<div id="repMovimientoPorTarjeta">
-						<div id="MovimientoPorTarjeta" class="no-select row">
+						<div id="MovimientoPorTarjeta" class="row">
 							<div class="form-group col-3">
 								<label><?= lang('REPORTS_ID_TYPE'); ?></label>
 								<select id="idType" name="id-type" class="select-box custom-select flex h6 w-100 form-control" disabled>
@@ -161,9 +161,9 @@
 						</div>
 					</div>
 
-					<div id="repComprobantesVisaVale" class="no-select row">
+					<div id="repComprobantesVisaVale" class="row">
 						<div class="form-group col-6 col-lg-4">
-							<label for="datepicker">Fecha</label>
+							<label for="datepicker"><?= lang('GEN_TABLE_DATE') ?></label>
 							<input id="date" class="form-control month-year" name="selected-date" type="text" readonly
 								placeholder="<?= lang('GEN_PLACE_DATE_PARTIAL') ?>" disabled>
 							<div class="help-block"></div>
@@ -175,10 +175,69 @@
 							</button>
 						</div>
 					</div>
+
+					<div id="repExtractoCliente" class="row">
+						<div class="form-group col-6 col-lg-4">
+							<label for="datepicker"><?= lang('GEN_TABLE_DATE') ?></label>
+							<input id="dateEx" class="form-control month-year" name="selected-date" type="text" readonly
+								placeholder="<?= lang('GEN_PLACE_DATE_PARTIAL') ?>" disabled>
+							<div class="help-block"></div>
+						</div>
+
+						<div class="flex items-center justify-end col-6 col-lg-8">
+							<button class="btn-report btn btn-primary btn-small btn-loading">
+								<?= lang('GEN_BTN_SEARCH'); ?>
+							</button>
+						</div>
+					</div>
+
+					<div id="repCertificadoGmf" class="row">
+						<div class="form-group col-4">
+							<label><?= lang('REPORTS_ID_TYPE'); ?></label>
+							<select id="idTypeG" name="id-type" class="select-box custom-select flex h6 w-100 form-control" disabled>
+								<?php foreach($IdTypeList AS $pos => $value): ?>
+								<option value="<?= $value->key; ?>" <?= $pos != 0 ? '' : 'selected disabled' ?>>
+									<?= $value->text; ?>
+								</option>
+								<?php endforeach; ?>
+							</select>
+							<div class="help-block"></div>
+						</div>
+
+						<div class="form-group col-4">
+							<label for="idNumberG"><?= lang('REPORTS_ID_NUMBER') ?></label>
+							<input id="idNumberG" name="id-number" class="form-control read-only" type="text" autocomplete="off" disabled>
+							<div class="help-block"></div>
+						</div>
+
+						<div class="form-group col-3 col-lg-4">
+							<label for="datepicker"><?= lang('GEN_TABLE_DATE') ?></label>
+							<input id="dateG" class="form-control month-year" name="selected-date" type="text" readonly
+								placeholder="<?= lang('GEN_PLACE_DATE_PARTIAL') ?>" disabled>
+							<div class="help-block"></div>
+						</div>
+
+						<div class="form-group col-4">
+							<label><?= lang('REPORTS_INQUIRY_TYPE'); ?></label>
+							<select id="inquiryType" name="inquiry-type" class="select-box custom-select flex h6 w-100 form-control" disabled>
+								<?php foreach($inquiryType AS $pos => $value): ?>
+								<option value="<?= $value->key; ?>" <?= $pos != 0 ? '' : 'selected disabled' ?>>
+									<?= $value->text; ?>
+								</option>
+								<?php endforeach; ?>
+							</select>
+							<div class="help-block"></div>
+						</div>
+
+						<div class="flex items-center justify-end col-8">
+							<button class="btn-report btn btn-primary btn-small btn-loading">
+								<?= lang('GEN_BTN_SEARCH'); ?>
+							</button>
+						</div>
+					</div>
 				</form>
 			</div>
-
-			<div id="line-reports" class="no-select line mb-2 none"></div>
+			<div id="line-reports" class="line mb-2 none"></div>
 
 		</div>
 	</div>
