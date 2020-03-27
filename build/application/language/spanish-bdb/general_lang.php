@@ -20,3 +20,10 @@ $lang['GEN_TABLE_AMOUNT_SO'] = 'Valor OS';
 $lang['GEN_TABLE_DEPOSIT_AMOUNT'] = 'Valor depositado';
 $lang['GEN_TABLE_AMOUNT'] = 'Valor';
 $lang['GEN_TABLE_DNI'] = 'Cédula';
+//CONFIGURATIONS
+$lang['GEN_DOWNLOADS'] = 'Descargas';
+$lang['GEN_MANUALS'] = 'Manuales';
+$lang['GEN_APPLICATIONS'] = 'Aplicaciones';
+$lang['GEN_FILE'] = 'Archivos de gestión Conexión Empresas Online';
+$lang['GEN_CEO_USER_MANUAL'] = 'Manual de Usuario Conexión Empresas Online';
+$lang['GEN_GL_USER_MANUAL'] = 'Manual de Usuario Gestor de Lotes';

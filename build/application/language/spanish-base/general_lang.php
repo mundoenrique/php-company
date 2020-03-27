@@ -62,6 +62,10 @@ $lang['GEN_BTN_DOWN_PDF'] = 'Descargar PDF';
 $lang['GEN_BTN_CANCEL_ORDER'] = 'Anular Orden';
 $lang['GEN_BTN_SEARCH'] = 'Buscar';
 $lang['GEN_BTN_DOWNLOAD'] = 'Descargar';
+$lang['GEN_BTN_USER'] = 'Usuario';
+$lang['GEN_BTN_ENTERPRISE'] = 'Empresas';
+$lang['GEN_BTN_BRANCH'] = 'Sucursales';
+$lang['GEN_BTN_DOWNLOADS'] = 'Descargas';
 //MODULES
 $lang['GEN_LOGIN'] = 'Login';
 $lang['GEN_VALIDATE_CAPTCHA'] = 'validateCaptcha';
@@ -94,6 +98,22 @@ $lang['GEN_DETAIL_SERVICE_ORDERS_TITLE'] = 'Detalle Órdenes de servicio';
 $lang['GEN_DOWNLOAD_FILE'] = 'Descarga de Archivos';
 $lang['GEN_WARNING_DOWNLOAD_FILE'] = 'No fue posible descargar el archivo';
 $lang['GEN_TIME_DOWNLOAD_FILE'] = '7000';
+$lang['GEN_SETTINGS_VIEW'] = 'Settings';
+$lang['GEN_SETTINGS_TITLE'] = 'Configuración';
+$lang['GEN_SETTINGS_USER'] = 'Configuración de usuario';
+$lang['GEN_CHANGE_PASS'] = 'Cambio de contraseña';
+$lang['GEN_SETTINGS_ENTERPRISE'] = 'Configuración de la empresa';
+$lang['GEN_ADD_CONTACT'] = 'Agregar contacto';
+$lang['GEN_SETTINGS_BRANCH'] = 'Configuración de sucursales';
+$lang['GEN_ADD_BRANCH'] = 'Agregar nueva sucursal';
+$lang['GEN_MANUALS'] = 'Manuales';
+$lang['GEN_CEO_USER_MANUAL'] = 'Manual de Usuario Conexión Empresas Online';
+$lang['GEN_GL_USER_MANUAL'] = 'Manual de Usuario Gestor de Lotes';
+$lang['GEN_APPLICATIONS'] = 'Aplicaciones';
+$lang['GEN_BATCH_MANAGER'] = 'Gestor de lotes (1.759kb)';
+$lang['GEN_JAVA_JRE'] = 'Java JRE 1.6 (14.226kb)';
+$lang['GEN_FILE'] = 'Archivos de gestión Conexión Empresas Online';
+$lang['GEN_FILE_OPERATIONAL_BATCH'] = 'Archivos lotes operativos (194kb)';
 //links
 $lang['GEN_LINK_LOGIN'] = 'inicio';
 //MODAL STYLES
