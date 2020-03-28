@@ -62,6 +62,8 @@ class Business extends NOVO_Controller {
 		$view = lang('GEN_GET_PRODUCTS');
 		array_push(
 			$this->includeAssets->jsFiles,
+			"third_party/polyfill-6.26.0",
+			"third_party/jplist-1.2.0",
 			"option-search",
 			"business/products"
 		);
