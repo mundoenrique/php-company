@@ -49,3 +49,4 @@ $lang['BULK_DELETE_DATE'] = 'Por favor ingresa la contraseña para eliminar el l
 $lang['BULK_SELECT'] = 'Selecciona al menos un lote';
 $lang['BULK_NO_BILLABLE'] = 'Lotes no facturables';
 $lang['BULK_CALCULATE_ORDER'] = 'Calcular Orden de servicio';
+$lang['BULK_NOT_DELETED'] = 'No fue posible borrar el lote: %d, por favor intentalo de nuevo';

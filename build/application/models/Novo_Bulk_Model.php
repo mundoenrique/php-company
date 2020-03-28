@@ -636,13 +636,18 @@ class Novo_Bulk_Model extends NOVO_Model {
 			'password' => md5($password)
 		];
 
-		$this->sendToService(lang('GEN_DELETE_BULK'));
+		$this->sendToService('DeleteConfirmBulk');
 
 		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->title = lang('BULK_DELETE_TITLE');
 				$this->response->msg = 'Lote eliminado exitosamente';
 				$this->response->data['btn1']['link'] = 'lotes-autorizacion';
+				break;
+			case -16:
+				$this->response->title = lang('BULK_DELETE_TITLE');
+				$this->response->msg = novoLang(lang('BULK_NOT_DELETED'), $bulkInfo->bulkNumber);
+				$this->response->data['btn1']['action'] = 'close';
 				break;
 			case -22:
 				$this->response->title = lang('BULK_DELETE_TITLE');
@@ -651,7 +656,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 				break;
 		}
 
-		return $this->responseToTheView(lang('GEN_DELETE_BULK'));
+		return $this->responseToTheView('DeleteConfirmBulk');
 	}
 	/**
 	 * @info Ver el detalle de los lotes confirmados
