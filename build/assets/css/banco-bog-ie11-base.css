@@ -2374,16 +2374,6 @@ i[class*=" icon-"]:before {
   margin-bottom: 12px;
 }
 
-.main-nav ul li:last-child {
-	font-weight: 400;
-	text-shadow: 0 0 .1px #435168;
-	color: #012c71;
-}
-
-.main-nav ul li:hover:not(:last-child) {
-	text-shadow: .3px -0.5px .3px #435168;
-}
-
 .main-nav ul li span {
   display: block;
   height: 4px;
@@ -3525,7 +3515,7 @@ a.ui-button:active,
 
 .invalid-user {
 	align-items: center;
-	background-color: rgb(253, 247, 246,1);
+	background: rgba(253, 247, 246,1);
 	border-radius: 5px;
 	border: 1px solid #cc0000;
 	box-shadow: 2px 2px 3px 0px #cc0000;
@@ -3542,7 +3532,7 @@ a.ui-button:active,
 
 .inactive-user {
 	align-items: center;
-	background-color:rgba(255, 247, 230, 1);
+	background:rgba(255, 247, 230, 1);
 	border-radius: 5px;
 	border: 1px solid #ff8800;
 	box-shadow: 2px 2px 3px 0px #ff8800;

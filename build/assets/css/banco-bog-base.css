@@ -3451,8 +3451,7 @@ a.ui-button:active,
 
 .invalid-user {
 	align-items: center;
-	background: rgb(253, 247, 246,1);
-	background-color: rgb(253, 247, 246,1);
+	background: rgba(253, 247, 246,1);
 	border-radius: 5px;
 	border: 1px solid var(--danger);
 	box-shadow: 2px 2px 3px 0px var(--danger);
@@ -3470,7 +3469,6 @@ a.ui-button:active,
 .inactive-user {
 	align-items: center;
 	background:rgba(255, 247, 230, 1);
-	background-color:rgba(255, 247, 230, 1);
 	border-radius: 5px;
 	border: 1px solid var(--warning);
 	box-shadow: 2px 2px 3px 0px var(--warning);
