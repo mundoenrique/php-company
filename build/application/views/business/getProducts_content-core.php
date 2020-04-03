@@ -77,7 +77,7 @@
 		</div>
 
 		<!-- pagination control -->
-		<div class="pagination page-number flex mb-5 py-5 flex-auto justify-center" data-jplist-control="pagination" data-group="group-filter-pagination" data-items-per-page="5" data-current-page="0" data-disabled-class="disabled" data-selected-class="page-current" data-name="pagination">
+		<div id="pagination-control" class="pagination page-number mb-5 py-5 flex-auto justify-center hide" data-jplist-control="pagination" data-group="group-filter-pagination" data-items-per-page="5" data-current-page="0" data-disabled-class="disabled" data-selected-class="page-current" data-name="pagination">
 			<nav class="h4">
 				<a href="#" data-type="first">Primera</a>
 				<a href="#" data-type="prev">«</a>
