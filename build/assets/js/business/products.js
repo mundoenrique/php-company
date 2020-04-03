@@ -6,8 +6,12 @@ $(function() {
 	var productList = $('#product-list');
 
 	jplist.init();
-	paginationControl.addClass('flex');
-	paginationControl.removeClass('hide');
+	if (!paginationControl.hasClass("jplist-pages-number-1")) {
+		paginationControl.addClass('flex');
+		paginationControl.removeClass('hide');
+	}
+	$('#pre-loader').remove();
+	$('.hide-out').removeClass('hide');
 
 	if(code > 2) {
 		noProduct.removeClass('none');
