@@ -5,11 +5,11 @@
 	<div class="flex tertiary">
 		<nav class="main-nav nav-inferior">
 			<ul class="mb-0 h6 light tertiary list-style-none list-inline">
-				<li class="inline"><a class="tertiary big-modal" href="<?= base_url('empresas') ?>">Empresas</a></li> /
-				<li class="inline"><a class="tertiary big-modal" href="<?= base_url('productos') ?>">Productos</a></li> /
-				<li class="inline"><a class="tertiary big-modal" href="<?= base_url('detalle-producto') ?>">Detalle del producto</a></li> /
-				<li class="inline"><a class="tertiary big-modal" href="<?= base_url('cargar-lotes') ?>">Cargar lotes</a></li> /
-				<li class="inline"><a class="tertiary not-pointer" href="javascript:">Confirmar lote</a></li>
+				<li class="inline"><a class="tertiary big-modal" href="<?= base_url('empresas') ?>"><?= lang('GEN_MENU_ENTERPRISE') ?></a></li> /
+				<li class="inline"><a class="tertiary big-modal" href="<?= base_url('productos') ?>"><?= lang('GEN_PRODUCTS') ?></a></li> /
+				<li class="inline"><a class="tertiary big-modal" href="<?= base_url('detalle-producto') ?>"><?= lang('GEN_PRODUCTS_DETAILS') ?></a></li> /
+				<li class="inline"><a class="tertiary big-modal" href="<?= base_url('cargar-lotes') ?>"><?= lang('GEN_MENU_BULK_LOAD') ?></a></li> /
+				<li class="inline"><a class="tertiary not-pointer" href="javascript:"><?= lang('GEN_CONFIRM_BULK_TITLE') ?></a></li>
 			</ul>
 		</nav>
 	</div>
