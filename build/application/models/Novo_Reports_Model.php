@@ -30,7 +30,9 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->dataRequest->idOperation = 'listadoReportesCEO';
 		$this->dataRequest->enterpriseCode = $this->session->enterpriseInf->enterpriseCode;
 		$this->dataRequest->enterpriseGroup = $this->session->enterpriseInf->enterpriseGroup;
-		$this->dataRequest->empresaCliente = $this->session->enterpriseInf->idFiscal;
+		$this->dataRequest->empresaCliente = [
+			'rif' => $this->session->enterpriseInf->idFiscal
+		];
 		$this->dataRequest->nombre = $this->session->enterpriseInf->enterpriseName;
 
 		$response = $this->sendToService('GetReportsList');
