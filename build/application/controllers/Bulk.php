@@ -172,7 +172,7 @@ class Bulk extends NOVO_Controller {
 			$this->render->$row = $info;
 		}
 
-		$this->render->titlePage = 'Detalle del lote';
+		$this->render->titlePage = lang('GEN_DETAIL_BULK_TITLE');
 		$this->views = ['bulk/'.$view];
 		$this->loadView($view);
 	}

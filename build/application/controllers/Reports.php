@@ -43,7 +43,7 @@ class Reports extends NOVO_Controller {
 			}
 		}
 
-		$this->render->titlePage = 'Reportes';
+		$this->render->titlePage =lang('GEN_MENU_REPORTS');
 		$this->views = ['reports/'.$view];
 		$this->loadView($view);
 	}
