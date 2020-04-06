@@ -16,7 +16,7 @@
 <div class="flex mt-1 bg-color flex-nowrap justify-between">
 	<div class="flex flex-auto flex-column">
 		<div class="search-criteria-order flex pb-3 flex-column w-100">
-			<span class="line-text mb-2 h4 semibold primary">Selección de reporte</span>
+			<span class="line-text mb-2 h4 semibold primary"><?= lang('REPORTS_SELECT'); ?></span>
 			<div class="flex my-2 px-5">
 				<form method="post" class="w-100">
 					<div class="row flex items-center justify-between">

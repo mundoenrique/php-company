@@ -1,6 +1,4 @@
 'use strict'
-//4193280000300118
-//C_1234567890
 var reportsResults;
 $(function () {
 	var optionValues = [];
@@ -263,6 +261,7 @@ function getReport(data, btn) {
 		$('#form-report').validate().resetForm();
 		data.operation = data.operation == 'repTarjetasPorPersona' ? 'MovimientoPorTarjeta' : data.operation;
 		$('#form-report input, #form-report select')
+		console.log(data.operation)
 		.not('#'+data.operation+' input, #'+data.operation+' select')
 		.not(disabledNot)
 		.prop('disabled', true);

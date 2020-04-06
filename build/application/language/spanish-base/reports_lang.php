@@ -1,6 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 $lang['REPORTS_TITLE'] = 'Reportes';
+$lang['REPORTS_SELECT'] = 'Selección de reporte';
 $lang['REPORTS_NO_CARDS'] = 'Empresa sin tarjetas asociadas';
 $lang['REPORTS_NO_CARDS_PEOPLE'] = 'No se encontraron tarjetas para el número de identificación indicado';
 $lang['REPORTS_NO_MOVES_ENTERPRISE'] = 'No se encontraron movimentos en el rango de fecha seleccionado';
