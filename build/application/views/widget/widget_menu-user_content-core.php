@@ -8,11 +8,11 @@
 			<ul class="dropdown regular tertiary bg-secondary">
 				<?php if(verifyDisplay('header', 'all', lang('GEN_SHOW_CONFIG'))): ?>
 				<li>
-				<a class="pl-2 pr-1 h6 big-modal" href="<?= base_url('configuracion') ?>">Configuración</a>
+				<a class="pl-2 pr-1 h6 big-modal" href="<?= base_url('configuracion') ?>"><?= lang('GEN_SETTINGS_TITLE'); ?></a>
 				</li>
 				<?php endif; ?>
 				<li>
-				<a class="pl-2 pr-1 h6 big-modal" href="<?= base_url('cerrar-sesion/inicio') ?>">Cerrar Sesión</a>
+				<a class="pl-2 pr-1 h6 big-modal" href="<?= base_url('cerrar-sesion/inicio') ?>"><?= lang('GEN_MENU_SIGN_OFF'); ?></a>
 				</li>
 			</ul>
 			<span></span>

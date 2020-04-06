@@ -7,28 +7,28 @@
 		<ul class="list-inline w-list flex justify-between">
 			<li class="list-inline-item">
 				<img class="browser-img" src="<?= $this->asset->insertFile('icon-chrome.svg','images'); ?>" alt="Icono chrome">
-				<span class="browser-name">Google Chrome</span>
-				<span class="browser-version">Version 48+</span>
+				<span class="browser-name"><?= lang('GEN_BROWSER_GOOGLE_CHROME'); ?></span>
+				<span class="browser-version"><?= lang('GEN_BROWSER_GOOGLE_CHROME_VERSION'); ?></span>
 			</li>
 			<li class="list-inline-item">
 				<img class="browser-img" src="<?= $this->asset->insertFile('icon-firefox.svg','images'); ?>" alt="Icono firefox">
-				<span class="browser-name">Mozilla Firefox</span>
-				<span class="browser-version">Version 30+</span>
+				<span class="browser-name"><?= lang('GEN_BROWSER_MOZILLA_FIREFOX'); ?></span>
+				<span class="browser-version"><?= lang('GEN_BROWSER_MOZILLA_FIREFOX_VERSION'); ?></span>
 			</li>
 			<li class="list-inline-item">
 				<img class="browser-img" src="<?= $this->asset->insertFile('icon-safari.svg','images'); ?>" alt="Icono safari">
-				<span class="browser-name">Apple Safari</span>
-				<span class="browser-version">Version 10+</span>
+				<span class="browser-name"><?= lang('GEN_BROWSER_APPLE_SAFARI'); ?></span>
+				<span class="browser-version"><?= lang('GEN_BROWSER_APPLE_SAFARI_VERSION'); ?></span>
 			</li>
 			<li class="list-inline-item">
 				<img class="browser-img" src="<?= $this->asset->insertFile('icon-edge.svg','images'); ?>" alt="Icono edge">
-				<span class="browser-name">Microsoft Edge</span>
-				<span class="browser-version">Version 14+</span>
+				<span class="browser-name"><?= lang('GEN_BROWSER_MICROSOFT_EDGE'); ?></span>
+				<span class="browser-version"><?= lang('GEN_BROWSER_MICROSOFT_EDGE_VERSION'); ?></span>
 			</li>
 			<li class="list-inline-item">
 				<img class="browser-img" src="<?= $this->asset->insertFile('icon-explorer.svg','images'); ?>" alt="Icono explorer">
-				<span class="browser-name">Internet Explorer</span>
-				<span class="browser-version">Version 11+</span>
+				<span class="browser-name"><?= lang('GEN_BROWSER_INTERNET_EXPLORER'); ?></span>
+				<span class="browser-version"><?= lang('GEN_BROWSER_INTERNET_EXPLORER_VERSION'); ?></span>
 			</li>
 		</ul>
 		<?php endif; ?>
