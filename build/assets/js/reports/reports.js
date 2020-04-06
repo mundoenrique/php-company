@@ -1,12 +1,11 @@
 'use strict'
-//4193280000300118
-//C_1234567890
 var reportsResults;
 $(function () {
 	var optionValues = [];
 	var optiondiv = [];
 	var prevOption;
 	var reportSelected;
+	var firsrYear = getPropertyOfElement('firts-year', '#repCertificadoGmf');
 	form = $('#form-report')
 
 	$('#reports option').each(function () {
@@ -32,7 +31,7 @@ $(function () {
 		$('.help-block').text('');
 		reportSelected = $(this).val()
 
-		if ($(this).val() == "repListadoTarjetas") {
+		if (reportSelected == "repListadoTarjetas") {
 			$("#search-criteria").addClass('none');
 			$("#line-reports").addClass('none');
 			$("#div-download").removeClass('none');
@@ -43,18 +42,18 @@ $(function () {
 			$("#div-download").addClass('none');
 		}
 
-		$('#' + $(this).val())
+		$('#' + reportSelected)
 		.fadeIn(700, 'linear')
 		.find('input, select')
 		.prop('disabled', false)
 		$(prevOption).hide();
-		$('#' + $(this).val()).show();
-		prevOption = '#' + $(this).val();
+		$('#' + reportSelected).show();
+		prevOption = '#' + reportSelected;
 		data = {
 			operation: reportSelected
 		}
 
-		if ($(this).val() == "repMovimientoPorTarjeta") {
+		if (reportSelected == "repMovimientoPorTarjeta") {
 			$('#MovimientoPorTarjeta button').removeClass('none')
 			$('#idType option').attr('disabled', false)
 			$('#MovimientoPorTarjeta input').prop('readonly', false)
@@ -64,6 +63,17 @@ $(function () {
 		$('#cardNumberId').empty()
 		$('#repTarjeta-result').addClass('none');
 		reportsResults.row('tr').remove().draw( false );
+
+		if(reportSelected == 'repCertificadoGmf' && !firsrYear) {
+			data = {
+				btn1: {
+					text: lang.GEN_BTN_ACCEPT,
+					link: baseURL + 'reportes',
+					action: 'redirect'
+				}
+			}
+			notiSystem(lang.REPORTS_TITLE, lang.REPORTS_NO_GMF, lang.GEN_ICON_INFO, data);
+		}
 	});
 
 	$(".date-picker").datepicker({
@@ -95,6 +105,24 @@ $(function () {
 			var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
 			inst.dpDiv.addClass("ui-datepicker-month-year");
 			$(this).datepicker('option', 'defaultDate', new Date(year, month, 1));
+		}
+	});
+
+	$('.year').datepicker({
+		changeMonth: false,
+		changeYear: true,
+		showButtonPanel: true,
+		yearRange: firsrYear+':'+currentDate.getFullYear(),
+		dateFormat: 'yy',
+		closeText: 'Aceptar',
+		onClose: function (dateText, inst) {
+			var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+			$(this).datepicker('setDate', new Date(year, 1));
+		},
+		beforeShow: function (input, inst) {
+			var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+			inst.dpDiv.addClass("ui-datepicker-month-year");
+			$(this).datepicker('option', 'defaultDate', new Date(year, 1));
 		}
 	});
 
@@ -178,9 +206,7 @@ function getReport(data, btn) {
 					downloadFile.attr('href', response.data.file)
 					document.getElementById('download-file').click()
 					who = 'DownloadFiles'; where = 'DeleteFile';
-					data = {
-						fileName: response.data.name
-					}
+					data.fileName = response.data.name
 					callNovoCore(verb, who, where, data, function (response) {})
 					break;
 				case 'repTarjetasPorPersona':
@@ -233,6 +259,7 @@ function getReport(data, btn) {
 		$('#form-report').validate().resetForm();
 		data.operation = data.operation == 'repTarjetasPorPersona' ? 'MovimientoPorTarjeta' : data.operation;
 		$('#form-report input, #form-report select')
+		console.log(data.operation)
 		.not('#'+data.operation+' input, #'+data.operation+' select')
 		.not(disabledNot)
 		.prop('disabled', true);

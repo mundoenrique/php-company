@@ -1,10 +1,17 @@
 'use strict'
 $(function() {
-	jplist.init();
-
+	var paginationControl = $('#pagination-control');
 	var productDetail = $('.product-detail');
 	var noProduct = $('#no-product');
 	var productList = $('#product-list');
+
+	jplist.init();
+	if (!paginationControl.hasClass("jplist-pages-number-1")) {
+		paginationControl.addClass('flex');
+		paginationControl.removeClass('hide');
+	}
+	$('#pre-loader').remove();
+	$('.hide-out').removeClass('hide');
 
 	if(code > 2) {
 		noProduct.removeClass('none');

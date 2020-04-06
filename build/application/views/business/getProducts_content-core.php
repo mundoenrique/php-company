@@ -42,7 +42,10 @@
 <div class="line mt-1"></div>
 
 <div class="flex mx-4 my-5 pt-2 flex-wrap justify-between">
-	<div class="flex flex-column">
+	<div id="pre-loader" class="mt-2 mx-auto">
+		<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
+	</div>
+	<div class="flex-column hide-out hide">
 		<!-- content to filter -->
 		<div data-jplist-group="group-filter-pagination" id="product-list" class="flex-auto">
 			<?php foreach($productList AS $pos => $products): ?>
@@ -77,7 +80,7 @@
 		</div>
 
 		<!-- pagination control -->
-		<div class="pagination page-number flex mb-5 py-5 flex-auto justify-center" data-jplist-control="pagination" data-group="group-filter-pagination" data-items-per-page="5" data-current-page="0" data-disabled-class="disabled" data-selected-class="page-current" data-name="pagination">
+		<div id="pagination-control" class="pagination page-number mb-5 py-5 flex-auto justify-center hide" data-jplist-control="pagination" data-group="group-filter-pagination" data-items-per-page="5" data-current-page="0" data-disabled-class="disabled" data-selected-class="page-current" data-name="pagination">
 			<nav class="h4">
 				<a href="#" data-type="first">Primera</a>
 				<a href="#" data-type="prev">«</a>
