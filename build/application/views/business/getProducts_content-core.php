@@ -4,8 +4,8 @@
 	<div class="flex tertiary">
 		<nav class="main-nav nav-inferior">
 			<ul class="mb-0 h6 light tertiary list-style-none list-inline">
-				<li class="inline"><a class="tertiary big-modal" href="<?= base_url('empresas') ?>">Empresas /</a></li>
-				<li class="inline"><a class="tertiary not-pointer" href="javascript:">Productos</a></li>
+				<li class="inline"><a class="tertiary big-modal" href="<?= base_url('empresas') ?>"><?= lang('GEN_MENU_ENTERPRISE') ?> /</a></li>
+				<li class="inline"><a class="tertiary not-pointer" href="javascript:"><?= lang('GEN_PRODUCTS') ?></a></li>
 			</ul>
 		</nav>
 	</div>
@@ -75,14 +75,14 @@
 			<?php endforeach; ?>
 			<!-- no results control -->
 			<div class="flex-auto my-5 py-4 center" style="display: none" data-jplist-control="no-results" data-group="group-filter-pagination" data-name="no-results">
-				<span class="h4">No se han encontrado resultados</span>
+				<span class="h4"><?= lang('GEN_TABLE_SZERORECORDS') ?></span>
 			</div>
 		</div>
 
 		<!-- pagination control -->
 		<div id="pagination-control" class="pagination page-number mb-5 py-5 flex-auto justify-center hide" data-jplist-control="pagination" data-group="group-filter-pagination" data-items-per-page="5" data-current-page="0" data-disabled-class="disabled" data-selected-class="page-current" data-name="pagination">
 			<nav class="h4">
-				<a href="#" data-type="first">Primera</a>
+				<a href="#" data-type="first"><?= lang('GEN_TABLE_SFIRST') ?></a>
 				<a href="#" data-type="prev">«</a>
 			</nav>
 			<div class="h4 flex justify-center" data-type="pages">
@@ -90,12 +90,12 @@
 			</div>
 			<nav class="h4">
 				<a href="#" data-type="next">»</a>
-				<a href="#" data-type="last">Última</a>
+				<a href="#" data-type="last"><?= lang('GEN_TABLE_SLAST') ?></a>
 			</nav>
 		</div>
 
 		<div id="no-product" class="flex-auto my-5 py-4 center none">
-			<span class="h4">No fue posible obtener la lista de productos asociados</span>
+			<span class="h4"><?= lang('GEN_WARNING_PRODUCTS_LIST') ?></span>
 		</div>
 	</div>
 

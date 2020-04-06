@@ -27,3 +27,5 @@ $lang['GEN_APPLICATIONS'] = 'Aplicaciones';
 $lang['GEN_FILE'] = 'Archivos de gestión Conexión Empresas Online';
 $lang['GEN_CEO_USER_MANUAL'] = 'Manual de Usuario Conexión Empresas Online';
 $lang['GEN_GL_USER_MANUAL'] = 'Manual de Usuario Gestor de Lotes';
+//FOOTER
+$lang['GEN_FOTTER_RIGHTS'] = '© Todos los derechos reservados. Banco de Bogotá - ';

@@ -17,7 +17,7 @@ class Information extends NOVO_Controller {
 		$view = 'benefits';
 
 		log_message('INFO', 'NOVO Information: benefits Method Initialized');
-		$this->render->titlePage = 'Beneficios';
+		$this->render->titlePage =lang('GEN_FOTTER_BENEFITS');
 		$this->views = ['information/'.$view];
 		$this->loadView($view);
 	}
@@ -45,7 +45,7 @@ class Information extends NOVO_Controller {
 			$this->session->set_flashdata('userType', $this->session->flashdata('userType'));
 			$this->render->message = lang('TERM_MESSAGE');
 		}
-		$this->render->titlePage = 'Condiciones';
+		$this->render->titlePage =lang('GEN_FOTTER_TERMS');
 		$this->render->referer = $this->input->server('HTTP_REFERER');
 		$baseReferer = substr($this->render->referer, 0, strlen(base_url()));
 		$this->render->newUser = $newUser;
@@ -57,7 +57,7 @@ class Information extends NOVO_Controller {
 	public function rates()
 	{
 		log_message('INFO', 'NOVO Information: rates Method Initialized');
-		$this->render->titlePage = 'Tarifas';
+		$this->render->titlePage =lang('GEN_FOTTER_RATES');
 		$this->render->referer = $this->input->server('HTTP_REFERER');
 		$baseReferer = substr($this->render->referer, 0, strlen(base_url()));
 		$this->render->goBack = $baseReferer === base_url();

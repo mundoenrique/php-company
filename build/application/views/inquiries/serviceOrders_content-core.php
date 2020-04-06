@@ -6,10 +6,10 @@
 	<div class="flex tertiary">
 		<nav class="main-nav nav-inferior">
 			<ul class="mb-0 h6 light tertiary list-style-none list-inline">
-				<li class="inline"><a class="tertiary big-modal" href="<?= base_url('empresas') ?>">Empresas</a></li> /
-				<li class="inline"><a class="tertiary big-modal" href="<?= base_url('productos') ?>">Productos</a></li> /
-				<li class="inline"><a class="tertiary big-modal" href="<?= base_url('detalle-producto') ?>">Detalle del producto</a></li> /
-				<li class="inline"><a class="tertiary not-pointer" href="javascript:">Ordenes de servicio</a></li>
+				<li class="inline"><a class="tertiary big-modal" href="<?= base_url('empresas') ?>"><?= lang('GEN_MENU_ENTERPRISE'); ?></a></li> /
+				<li class="inline"><a class="tertiary big-modal" href="<?= base_url('productos') ?>"><?= lang('GEN_PRODUCTS'); ?></a></li> /
+				<li class="inline"><a class="tertiary big-modal" href="<?= base_url('detalle-producto') ?>"><?= lang('PRODUCTS_DETAIL_TITLE'); ?></a></li> /
+				<li class="inline"><a class="tertiary not-pointer" href="javascript:"><?= lang('GEN_MENU_CONS_ORDERS_SERV'); ?></a></li>
 			</ul>
 		</nav>
 	</div>
@@ -124,7 +124,7 @@
 				</div>
 
 				<div class="my-5 py-4 center none">
-					<span class="h4">No fue posible obtener las ordenes de servicio asociadas</span>
+					<span class="h4"><?= lang('GEN_WARNING_SERVICE_ORDERS'); ?>"</span>
 				</div>
 			</div>
 		</div>

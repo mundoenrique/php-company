@@ -1,14 +1,14 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
-<h1 class="primary h3 regular inline">Reportes</h1>
+<h1 class="primary h3 regular inline"><?= lang('GEN_MENU_REPORTS'); ?></h1>
 <span class="ml-2 regular tertiary"><?= $productName ?></span>
 <div class="mb-2 flex items-center">
 	<div class="flex tertiary">
 		<nav class="main-nav nav-inferior">
 			<ul class="mb-0 h6 light tertiary list-style-none list-inline">
-				<li class="inline"><a class="tertiary big-modal" href="<?= base_url('empresas') ?>">Empresas</a></li> /
-				<li class="inline"><a class="tertiary big-modal" href="<?= base_url('productos') ?>">Productos</a></li> /
-				<li class="inline"><a class="tertiary big-modal" href="<?= base_url('detalle-producto') ?>">Detalle del producto</a></li> /
-				<li class="inline"><a class="tertiary not-pointer" href="javascript:">Reportes</a></li>
+				<li class="inline"><a class="tertiary big-modal" href="<?= base_url('empresas') ?>"><?= lang('GEN_MENU_ENTERPRISE'); ?></a></li> /
+				<li class="inline"><a class="tertiary big-modal" href="<?= base_url('productos') ?>"><?= lang('GEN_PRODUCTS'); ?></a></li> /
+				<li class="inline"><a class="tertiary big-modal" href="<?= base_url('detalle-producto') ?>"><?= lang('PRODUCTS_DETAIL_TITLE'); ?></a></li> /
+				<li class="inline"><a class="tertiary not-pointer" href="javascript:"><?= lang('GEN_MENU_REPORTS'); ?></a></li>
 			</ul>
 		</nav>
 	</div>
@@ -16,7 +16,7 @@
 <div class="flex mt-1 bg-color flex-nowrap justify-between">
 	<div class="flex flex-auto flex-column">
 		<div class="search-criteria-order flex pb-3 flex-column w-100">
-			<span class="line-text mb-2 h4 semibold primary"><?= lang('REPORTS_SELECT'); ?></span>
+			<span class="line-text mb-2 h4 semibold primary"><?= lang('GEN_SELECTION_REPORTS'); ?></span>
 			<div class="flex my-2 px-5">
 				<form method="post" class="w-100">
 					<div class="row flex items-center justify-between">
@@ -209,7 +209,6 @@
 				</form>
 			</div>
 			<div id="line-reports" class="line mb-2 none"></div>
-
 		</div>
 	</div>
 	<?php if($widget): ?>
