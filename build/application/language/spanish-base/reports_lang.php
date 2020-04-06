@@ -11,3 +11,5 @@ $lang['REPORTS_ID_NUMBER'] = 'Número de identificación';
 $lang['REPORTS_CARD_NUMBER'] = 'Número de tarjeta';
 $lang['REPORTS_FOUND_CARD'] = 'la tarjeta no fue encontrada';
 $lang['REPORTS_NO_CLIENT_STATEMENT'] = 'No fue posible generar el extracto del mes seleccionado';
+$lang['REPORTS_NO_GMF'] = 'No existen certificados GMF disponibles';
+$lang['REPORTS_NO_GMF_FOR_YEAR'] = 'El certificado GMF para el año %s, no esta disponible';

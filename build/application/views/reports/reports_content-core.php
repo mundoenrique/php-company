@@ -165,7 +165,7 @@
 						<div class="form-group col-6 col-lg-4">
 							<label for="datepicker"><?= lang('GEN_TABLE_DATE') ?></label>
 							<input id="date" class="form-control month-year" name="selected-date" type="text" readonly
-								placeholder="<?= lang('GEN_PLACE_DATE_PARTIAL') ?>" disabled>
+								placeholder="<?= lang('GEN_PLACE_DATE_MEDIUM') ?>" disabled>
 							<div class="help-block"></div>
 						</div>
 
@@ -180,7 +180,7 @@
 						<div class="form-group col-6 col-lg-4">
 							<label for="datepicker"><?= lang('GEN_TABLE_DATE') ?></label>
 							<input id="dateEx" class="form-control month-year" name="selected-date" type="text" readonly
-								placeholder="<?= lang('GEN_PLACE_DATE_PARTIAL') ?>" disabled>
+								placeholder="<?= lang('GEN_PLACE_DATE_MEDIUM') ?>" disabled>
 							<div class="help-block"></div>
 						</div>
 
@@ -191,41 +191,12 @@
 						</div>
 					</div>
 
-					<div id="repCertificadoGmf" class="row">
-						<div class="form-group col-4">
-							<label><?= lang('REPORTS_ID_TYPE'); ?></label>
-							<select id="idTypeG" name="id-type" class="select-box custom-select flex h6 w-100 form-control" disabled>
-								<?php foreach($IdTypeList AS $pos => $value): ?>
-								<option value="<?= $value->key; ?>" <?= $pos != 0 ? '' : 'selected disabled' ?>>
-									<?= $value->text; ?>
-								</option>
-								<?php endforeach; ?>
-							</select>
-							<div class="help-block"></div>
-						</div>
-
-						<div class="form-group col-4">
-							<label for="idNumberG"><?= lang('REPORTS_ID_NUMBER') ?></label>
-							<input id="idNumberG" name="id-number" class="form-control read-only" type="text" autocomplete="off" disabled>
-							<div class="help-block"></div>
-						</div>
+					<div id="repCertificadoGmf" class="row" firts-year="<?= $mindateGmfReport; ?>">
 
 						<div class="form-group col-3 col-lg-4">
-							<label for="datepicker"><?= lang('GEN_TABLE_DATE') ?></label>
-							<input id="dateG" class="form-control month-year" name="selected-date" type="text" readonly
-								placeholder="<?= lang('GEN_PLACE_DATE_PARTIAL') ?>" disabled>
-							<div class="help-block"></div>
-						</div>
-
-						<div class="form-group col-4">
-							<label><?= lang('REPORTS_INQUIRY_TYPE'); ?></label>
-							<select id="inquiryType" name="inquiry-type" class="select-box custom-select flex h6 w-100 form-control" disabled>
-								<?php foreach($inquiryType AS $pos => $value): ?>
-								<option value="<?= $value->key; ?>" <?= $pos != 0 ? '' : 'selected disabled' ?>>
-									<?= $value->text; ?>
-								</option>
-								<?php endforeach; ?>
-							</select>
+							<label for="datepicker"><?= lang('GEN_TAXABLE_YEAR') ?></label>
+							<input id="dateG" class="form-control year" name="selected-year" type="text" readonly
+								placeholder="<?= lang('GEN_PLACE_DATE_SHORT') ?>" disabled>
 							<div class="help-block"></div>
 						</div>
 

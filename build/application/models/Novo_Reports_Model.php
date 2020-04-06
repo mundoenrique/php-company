@@ -47,10 +47,6 @@ class Novo_Reports_Model extends NOVO_Model {
 					'key' => '',
 					'text' => 'Selecciona el tipo de identificación'
 				];
-				$inquiryType[] = (object) [
-					'key' => '',
-					'text' => 'Selecciona el tipo de consulta'
-				];
 
 				foreach ($response->listaConfigReportesCEO AS $reports) {
 					$report = [];
@@ -78,13 +74,8 @@ class Novo_Reports_Model extends NOVO_Model {
 									}
 								}
 
-								if(count($value) > 0 && $value[0]->idFilter == '5' && isset($value[0]->listDataSelection)) {
-									foreach($value[0]->listDataSelection AS $IdTypeObject) {
-										$idType = [];
-										$idType['key'] = $IdTypeObject->codData;
-										$idType['text'] = $IdTypeObject->description;
-										$inquiryType[] = (object) $idType;
-									}
+								if(count($value) > 0 && $value[0]->idFilter == '7') {
+									$mindateGmfReport = $value[0]->minValue;
 								}
 								break;
 							case 'listTableHeader':
@@ -110,15 +101,12 @@ class Novo_Reports_Model extends NOVO_Model {
 				'key' => '',
 				'text' => lang('RESP_TRY_AGAIN')
 			];
-			$inquiryType[] = (object) [
-				'key' => '',
-				'text' => lang('RESP_TRY_AGAIN')
-			];
+			$mindateGmfReport = '';
 		}
 
 		$this->response->data->reportsList = (object) $reportsList;
 		$this->response->data->IdTypeList = (object) $IdTypeList;
-		$this->response->data->inquiryType = (object) $inquiryType;
+		$this->response->data->mindateGmfReport = $mindateGmfReport;
 		$this->response->data->headerCardsRep = $headerCardsRep;
 		return $this->responseToTheView('GetReportsList');
 	}
@@ -577,7 +565,7 @@ class Novo_Reports_Model extends NOVO_Model {
 		return $this->response;
 	}
 	/**
-	 * @info Método para obtener el listado de tarjetas por persona
+	 * @info Método para obtener el certificado GMF
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date March 10th, 2020
 	 */
@@ -589,12 +577,8 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->dataAccessLog->operation = 'Descargar archivo';
 
 		$this->className = 'ReporteCEOTO.class';
-		$date = explode('/', $dataRequest->dateG);
 		$this->dataRequest->certificadoGmf = [
-			'tipoConsulta' => $dataRequest->inquiryType,
-			'mes' => $date[0],
-			'anio' => $date[1],
-			'id_ext_per' => $dataRequest->idTypeG.'_'.$dataRequest->idNumberG,
+			'anio' => $dataRequest->dateG
 		];
 		$this->dataRequest->empresaCliente = [
 			'rif' => $this->session->enterpriseInf->idFiscal
@@ -622,7 +606,7 @@ class Novo_Reports_Model extends NOVO_Model {
 			case -150:
 				$this->response->icon = lang('GEN_ICON_INFO');
 				$this->response->title = lang('REPORTS_TITLE');
-				$this->response->msg = lang('REPORTS_NO_MOVES_ENTERPRISE');
+				$this->response->msg = novoLang(lang('REPORTS_NO_GMF_FOR_YEAR'), $dataRequest->dateG);
 				$this->response->data['btn1']['action'] = 'close';
 				break;
 		}

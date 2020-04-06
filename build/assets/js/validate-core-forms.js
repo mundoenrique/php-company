@@ -26,6 +26,7 @@ function validateForms(form) {
 	var date = {
 		dmy: /^(0?[1-9]|[12][0-9]|3[01])\/(0?[1-9]|1[012])\/[0-9]{4}$/,
 		my: /^(0?[1-9]|1[012])\/[0-9]{4}$/,
+		y: /^[0-9]{4}$/,
 	};
 	var amount = {
 		'bp': usdAmount
@@ -78,6 +79,7 @@ function validateForms(form) {
 			},
 			"status-order": {required: true, requiredTypeOrder: true},
 			"selected-date": {required: true, pattern: date.my},
+			"selected-year": {required: true, pattern: date.y},
 			"id-type": {requiredSelect: true},
 			"id-number": {required: true, pattern: numeric},
 			"card-number": {required: true, pattern: numeric, maxlength: 16, minlength: 16},
@@ -103,6 +105,7 @@ function validateForms(form) {
 			"datepicker_end": lang.VALIDATE_FINAL_DATE,
 			"status-order": lang.VALIDATE_ORDER_STATUS,
 			"selected-date": lang.VALIDATE_SELECTED_DATE,
+			"selected-year": lang.VALIDATE_SELECTED_YEAR,
 			"id-type": lang.VALIDATE_ID_TYPE,
 			"id-number": lang.VALIDATE_ID_NUMBER,
 			"card-number": lang.VALIDATE_CARD_NUMBER,
