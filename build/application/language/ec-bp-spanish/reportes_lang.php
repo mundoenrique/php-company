@@ -20,15 +20,15 @@ $lang['REPORTES_RADIO_ABONO']= "Abono";
 $lang['REPORTES_RADIO_CARGO']= "Cargo";
 $lang['TITULO_REPORTES_PROCEDIMIENTO']= "Procedimiento";
 $lang['TITULO_TARJETA_HABIENTE']= "Tarjetahabiente";
-$lang['FECHA_EMISION']= "Fecha emision";
+$lang['FECHA_EMISION']= "Fecha emisión";
 $lang['NUMERO_LOTE'] = "Número Lote";
 $lang['NUMERO_TARJETA'] = "Número de tarjeta";
-$lang['CEDULA'] = "Cedula";
+$lang['CEDULA'] = "Cédula";
 $lang['NOMBRE'] = "Nombre";
 $lang['APELLIDO'] = "Apellido";
 $lang['UBICACIÓN'] = "Ubicación";
-$lang['ESTADO_EMISION'] = "Estado Emision";
-$lang['ESTADO_PLASTICO'] = "Estado Plastico";
+$lang['ESTADO_EMISION'] = "Estado emisión";
+$lang['ESTADO_PLASTICO'] = "Estado plástico";
 
 //GRAFICO TARJETAS EMITIDAS
 $lang['CATEGORIA_UNO']= "Principal";

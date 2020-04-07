@@ -252,6 +252,10 @@ $(document).ready(function () {
 
 							$.each(data.lista, function (posLista, itemLista) {
 
+								if(posLista > 0) {
+									div = $(document.createElement("div")).appendTo(contenedor);
+									div.attr("id", "top-batchs");
+								}
 								div = $(document.createElement("div")).appendTo(contenedor);
 								div.attr("id", "view-results");
 								a = $(document.createElement("a")).appendTo(div);
