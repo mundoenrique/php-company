@@ -259,7 +259,6 @@ function getReport(data, btn) {
 		$('#form-report').validate().resetForm();
 		data.operation = data.operation == 'repTarjetasPorPersona' ? 'MovimientoPorTarjeta' : data.operation;
 		$('#form-report input, #form-report select')
-		console.log(data.operation)
 		.not('#'+data.operation+' input, #'+data.operation+' select')
 		.not(disabledNot)
 		.prop('disabled', true);
