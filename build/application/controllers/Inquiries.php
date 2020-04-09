@@ -21,7 +21,7 @@ class Inquiries extends NOVO_Controller {
 	{
 		log_message('INFO', 'NOVO Inquiries: serviceOrders Method Initialized');
 
-		$view = lang('GEN_SERVICE_ORDERS');
+		$view = 'serviceOrders';
 
 		array_push(
 			$this->includeAssets->cssFiles,
@@ -74,7 +74,7 @@ class Inquiries extends NOVO_Controller {
 			redirect(base_url('detalle-producto'), 'location');
 		}
 
-		$view = lang('GEN_DETAIL_SERVICE_ORDERS');
+		$view = 'detailServiceOrders';
 
 		if($this->session->flashdata('detailServiceOrders')) {
 			$response = $this->session->flashdata('detailServiceOrders');

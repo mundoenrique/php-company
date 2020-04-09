@@ -110,10 +110,6 @@
 									<?php endif; ?>
 									<form id="bulk-<?= $list->OrderNumber; ?>" method="POST">
 										<input type="hidden" name="idOS" value="<?= $list->OrderNumber; ?>">
-										<input type="hidden" name="initialDate" value="<?= $list->initialDate; ?>">
-										<input type="hidden" name="finalDate" value="<?= $list->finalDate; ?>">
-										<input type="hidden" name="status" value="<?= $list->status; ?>">
-										<input type="hidden" name="statusText" value="<?= $list->statusText; ?>">
 								  </form>
 								</td>
 							</tr>

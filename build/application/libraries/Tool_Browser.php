@@ -46,7 +46,7 @@ class Tool_Browser {
 					$validBrowser['Internet Explorer'] = 10;
 				}
 
-				log_message('DEBUG', 'NOVO validBrowser: browser access: '.$browser.' version '.$version);
+				log_message('DEBUG', 'NOVO validBrowser: browser access '.$browser.' version '.$version);
 
 				$browsersIn = TRUE;
 				$valid = $version > $validBrowser[$browser];
@@ -73,7 +73,7 @@ class Tool_Browser {
 
 					if(!$browsersIn) {
 						$msg1 = 'Aún no hemos validado la compatibilidad de nuestra aplicación con tu navegador.';
-						$msg2 = 'Por el momento te sugerimos acceder con';
+						$msg2 = 'Por el momento te sugerimos acceder con:';
 					}
 					break;
 				case 'mobile':
@@ -98,7 +98,7 @@ class Tool_Browser {
 			$this->CI->session->set_flashdata('messageBrowser', $message);
 		}
 
-		log_message('DEBUG', 'NOVO validBrowser: platform access: '.$platform);
+		log_message('DEBUG', 'NOVO validBrowser: platform access '.$platform);
 
 		return $valid;
 	}

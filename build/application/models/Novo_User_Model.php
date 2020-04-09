@@ -41,6 +41,10 @@ class Novo_User_Model extends NOVO_Model {
 
 		$response = $this->sendToService(lang('GEN_LOGIN'));
 
+		if(in_array($this->config->item('client'), ['banco-bog']) && ($this->isResponseRc == -2 || $this->isResponseRc == -185)) {
+			$this->isResponseRc = 0;
+		}
+
 		switch($this->isResponseRc) {
 			case 0:
 				$fullName = mb_strtolower($response->usuario->primerNombre).' ';

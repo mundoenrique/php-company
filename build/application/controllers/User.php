@@ -19,7 +19,7 @@ class User extends NOVO_Controller {
 	{
 		log_message('INFO', 'NOVO User: index Method Initialized');
 
-		$view = lang('GEN_LOGIN');
+		$view = 'Login';
 
 		if($this->session->has_userdata('logged')) {
 			$oldUrl = str_replace($this->countryUri.'/', $this->config->item('country').'/', base_url('dashboard'));
@@ -77,8 +77,8 @@ class User extends NOVO_Controller {
 	public function recoverPass()
 	{
 		log_message('INFO', 'NOVO User: passwordRecovery Method Initialized');
-		$view = 'pass-recovery';
 
+		$view = 'pass-recovery';
 		array_push(
 			$this->includeAssets->jsFiles,
 			"user/pass-recovery",
@@ -139,12 +139,13 @@ class User extends NOVO_Controller {
 	{
 		log_message('INFO', 'NOVO User: finishSession Method Initialized');
 
+		$view = 'finish';
+
 		if($this->render->userId || $this->render->logged) {
 			$this->load->model('Novo_User_Model', 'finishSession');
 			$this->finishSession->callWs_FinishSession_User();
 		}
 
-		$view = 'finish';
 
 		if($redirect == 'fin' || AUTO_LOGIN) {
 			$pos = array_search('menu-datepicker', $this->includeAssets->jsFiles);
@@ -179,17 +180,18 @@ class User extends NOVO_Controller {
 	{
 		log_message('INFO', 'NOVO User: suggestion Method Initialized');
 
+		$view = 'suggestion';
+
 		if(!$this->session->flashdata('messageBrowser')) {
 			redirect(base_url('inicio'), 'location', 301);
 			exit();
 		}
 
-		$view = 'suggestion';
 		$views = ['staticpages/content-browser'];
 
 		if($this->render->newViews != '') {
 			$this->includeAssets->cssFiles = [
-				"$this->skin-browser"
+				"$this->folder"."$this->skin-browser"
 			];
 		}
 

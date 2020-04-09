@@ -24,6 +24,7 @@ class NOVO_Controller extends CI_Controller {
 	protected $appUserName;
 	protected $greeting;
 	protected $products;
+	protected $folder;
 	private $ValidateBrowser;
 
 	public function __construct()
@@ -71,7 +72,7 @@ class NOVO_Controller extends CI_Controller {
 		$this->render->newViews = $this->config->item('new-views');
 		$this->form_validation->set_error_delimiters('', '---');
 		$this->config->set_item('language', 'spanish-base');
-		if(in_array($this->rule, ['login', 'recoverPass'])) {
+		if($this->rule !== 'suggestion') {
 			$this->ValidateBrowser = $this->checkBrowser();
 		}
 
@@ -145,23 +146,23 @@ class NOVO_Controller extends CI_Controller {
 			$this->render->novoName = $this->security->get_csrf_token_name();
 			$this->render->novoCook = $this->security->get_csrf_hash();
 			$this->session->set_userdata('countryUri', $this->countryUri);
-
+			$this->folder = $this->render->newViews === '-core' ? $this->countryUri.'/' : '';
 			$this->includeAssets->cssFiles = [
-				"$this->skin-base"
+				"$this->folder"."$this->skin-base"
 			];
 
 			if(gettype($this->ValidateBrowser) !== 'boolean') {
 				array_push(
 					$this->includeAssets->cssFiles,
-					"$this->skin-$this->ValidateBrowser-base"
+					"$this->countryUri/$this->skin-$this->ValidateBrowser-base"
 				);
 			}
 
 			if($this->render->newViews === '-core') {
 				array_unshift(
 					$this->includeAssets->cssFiles,
-					"format/root-$this->skin",
-					"format/reboot-$this->skin"
+					"$this->countryUri/root-$this->skin",
+					"reboot"
 				);
 			} else {
 				array_unshift(

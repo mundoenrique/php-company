@@ -36,7 +36,7 @@ class Novo_Business_Model extends NOVO_Model {
 		$this->dataRequest->tamanoPagina = $sizePage;
 		$this->dataRequest->filtroEmpresas = '';
 
-		$response = $this->sendToService(lang('GEN_GET_ENTERPRISES'));
+		$response = $this->sendToService('getEnterprises');
 		$filters = FALSE;
 
 		if(!$dataRequest) {
@@ -84,7 +84,7 @@ class Novo_Business_Model extends NOVO_Model {
 			$this->response->data->list = [];
 		}
 
-		return $this->responseToTheView(lang('GEN_GET_ENTERPRISES'));
+		return $this->responseToTheView('getEnterprises');
 	}
 	/**
 	 * @info Método para obtener lista de productos para una empresa
@@ -116,7 +116,7 @@ class Novo_Business_Model extends NOVO_Model {
 		$this->dataRequest->userName = $this->userName;
 		$this->dataRequest->idEmpresa = $dataRequest->idFiscal;
 
-		$response = $this->sendToService(lang('GEN_GET_PRODUCTS'));
+		$response = $this->sendToService('getProducts');
 
 		switch($this->isResponseRc) {
 			case 0:
@@ -146,7 +146,7 @@ class Novo_Business_Model extends NOVO_Model {
 			$this->response->data->productList = [];
 		}
 
-		return $this->responseToTheView(lang('GEN_GET_PRODUCTS'));
+		return $this->responseToTheView('getProducts');
 	}
 	/**
 	 * @info Método para obtener lista de productos para una empresa
@@ -188,7 +188,7 @@ class Novo_Business_Model extends NOVO_Model {
 			]
 		];
 
-		$response = $this->sendToService(lang('GEN_GET_PRODUCTS_DETAIL'));
+		$response = $this->sendToService('getProductDetail');
 		$productDetail = [
 			'name' => isset($dataRequest->productName) ? $dataRequest->productName : '',
 			'imgProgram' => $this->countryUri.'_default.svg',
@@ -211,7 +211,7 @@ class Novo_Business_Model extends NOVO_Model {
 
 		switch($this->isResponseRc) {
 			case 0:
-				log_message('INFO', 'NOVO ['.$this->userName.'] '.lang('GEN_GET_PRODUCTS_DETAIL').' USER_ACCESS LIST: '.json_encode($response->lista));
+				log_message('INFO', 'NOVO ['.$this->userName.'] '.'getProductDetail'.' USER_ACCESS LIST: '.json_encode($response->lista));
 
 				$this->response->code = 0;
 
@@ -292,6 +292,6 @@ class Novo_Business_Model extends NOVO_Model {
 		$this->response->data->productDetail = (object) $productDetail;
 		$this->response->data->productSummary = (object) $productSummary;
 
-		return $this->responseToTheView(lang('GEN_GET_PRODUCTS_DETAIL'));
+		return $this->responseToTheView('getProductDetail');
 	}
 }

@@ -95,11 +95,6 @@ class Novo_Inquiries_Model extends NOVO_Model {
 				foreach($response->lista AS $list) {
 					$orderList = [];
 
-						$serviceOrders['initialDate'] = $dataRequest->initialDate;
-						$serviceOrders['finalDate'] = $dataRequest->finalDate;
-						$serviceOrders['status'] = $dataRequest->status;
-						$serviceOrders['statusText'] = $dataRequest->statusText;
-
 					foreach($list AS $key => $value) {
 						switch ($key) {
 							case 'idOrden':
@@ -361,7 +356,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 			$this->response->msg = lang('GEN_WARNING_DOWNLOAD_FILE');
 			$this->response->icon = lang('GEN_ICON_WARNING');
 			$this->response->data->resp['btn1']['action'] = 'close';
-			$this->session->set_flashdata('detailServiceOrders',$this->session->userdata('detailServiceOrdersMemory'));
+			$this->session->set_flashdata('detailServiceOrders', $this->session->userdata('detailServiceOrdersMemory'));
 			$this->session->unset_userdata('detailServiceOrdersMemory');
 			$this->session->set_flashdata('response-msg-detail-order',$this->response);
 			redirect(base_url('detalle-orden-de-servicio'), 'location');

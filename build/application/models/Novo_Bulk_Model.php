@@ -35,7 +35,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 			'userName' => $this->userName
 		];
 
-		$response = $this->sendToService(lang('GEN_GET_PEN_BULK'));
+		$response = $this->sendToService('getPendingBulk');
 		$pendingBulkList = [];
 
 		switch($this->isResponseRc) {
@@ -85,7 +85,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 
 		$this->response->data->pendingBulk = (object) $pendingBulkList;
 
-		return $this->responseToTheView(lang('GEN_GET_PEN_BULK'));
+		return $this->responseToTheView('getPendingBulk');
 	}
 	/**
 	 * @info obtiene lista de sucursales
@@ -176,7 +176,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 			'userName' => $this->userName
 		];
 
-		$response = $this->sendToService(lang('GEN_GET_TYPE_LOT'));
+		$response = $this->sendToService('getTypeLots');
 
 		switch($this->isResponseRc) {
 			case 0:
@@ -209,7 +209,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 
 		$this->response->data->typesLot = (object) $typesLot;
 
-		return $this->responseToTheView(lang('GEN_GET_TYPE_LOT'));
+		return $this->responseToTheView('getTypeLots');
 	}
 	/**
 	 * @info Método para cargar lotes
@@ -221,7 +221,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 		log_message('INFO', 'NOVO Bulk Model: LoadBulk Method Initialized');
 
 		$moveFile = TRUE;
-		$this->sendFile($dataRequest->fileName, lang('GEN_LOAD_BULK'));
+		$this->sendFile($dataRequest->fileName, 'LoadBulk');
 
 		if ($this->isResponseRc === 0) {
 			$this->className = 'com.novo.objects.MO.ConfirmarLoteMO';
@@ -246,7 +246,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 				'userName' => $this->userName
 			];
 
-			$response = $this->sendToService(lang('GEN_LOAD_BULK'));
+			$response = $this->sendToService('LoadBulk');
 			$respLoadBulk = FALSE;
 
 			switch ($this->isResponseRc) {
@@ -309,7 +309,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 			$this->response->data['btn1']['action'] = 'close';
 		}
 
-		return $this->responseToTheView(lang('GEN_LOAD_BULK'));
+		return $this->responseToTheView('LoadBulk');
 	}
 	/**
 	 * @info Elimina un lote
@@ -389,7 +389,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 			'userName' => $this->userName
 		];
 
-		$response = $this->sendToService(lang('GEN_DETAIL_BULK'));
+		$response = $this->sendToService('GetDetailBulk');
 		$respLoadBulk = FALSE;
 		$detailBulk = [
 			'idFiscal' => '',
@@ -432,7 +432,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 
 		$this->response->data->detailBulk = (object) $detailBulk;
 
-		return $this->responseToTheView(lang('GEN_DETAIL_BULK'));
+		return $this->responseToTheView('GetDetailBulk');
 	}
 	/**
 	 * @info Confirma un lote
@@ -467,7 +467,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 			'codigoGrupo' => $this->session->enterpriseInf->enterpriseGroup
 		];
 
-		$response = $this->sendToService(lang('GEN_CONFIRM_BULK'));
+		$response = $this->sendToService('ConfirmBulk');
 
 		switch ($this->isResponseRc) {
 			case 0:
@@ -495,7 +495,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 			$this->session->set_flashdata('bulkConfirmInfo', $bulkConfirmInfo);
 		}
 
-		return $this->responseToTheView(lang('GEN_CONFIRM_BULK'));
+		return $this->responseToTheView('ConfirmBulk');
 	}
 	/**
 	 * @info Obtiene la lista de lotes por autorizar
@@ -519,7 +519,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 		$this->dataRequest->accodusuarioc = $this->userName;
 
 
-		$response = $this->sendToService(lang('GEN_AUTHORIZE_BULK_LIST'));
+		$response = $this->sendToService('AuthorizeBulkList');
 
 		switch ($this->isResponseRc) {
 			case 0:
@@ -537,7 +537,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 		$this->response->data->authorizeBulk = (object) $response->authorizeBulk;
 		$this->response->data->authorizeAttr = $response->authorizeAttr;
 
-		return $this->responseToTheView(lang('GEN_AUTHORIZE_BULK_LIST'));
+		return $this->responseToTheView('AuthorizeBulkList');
 	}
 	/**
 	 * @info Firma lista de lotes
@@ -578,7 +578,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 			'password' => md5($password)
 		];
 
-		$this->sendToService(lang('GEN_SIGN_BULK_LIST'));
+		$this->sendToService('SignBulkList');
 
 		switch ($this->isResponseRc) {
 			case 0:
@@ -593,7 +593,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 				break;
 		}
 
-		return $this->responseToTheView(lang('GEN_SIGN_BULK_LIST'));
+		return $this->responseToTheView('SignBulkList');
 	}
 	/**
 	 * @info Firma lista de lotes
@@ -707,6 +707,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 				$detailInfo['bulkStatus'] = $response->cestatus;
 				$detailInfo['bulkStatusText'] = ucfirst(mb_strtolower($response->status));
 				$detailInfo['bulkAmount'] = $response->montoNeto;
+				$bulkRecordsHeader = [];
 
 				switch($response->ctipolote) {
 					case '1':
@@ -862,7 +863,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 			'password' => md5($password)
 		];
 
-		$response = $this->sendToService(lang('GEN_AUTH_BULK'));
+		$response = $this->sendToService('AuthorizeBulk');
 
 		switch ($this->isResponseRc) {
 			case 0:
@@ -964,7 +965,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 				break;
 		}
 
-		return $this->responseToTheView(lang('GEN_AUTH_BULK'));
+		return $this->responseToTheView('AuthorizeBulk');
 	}
 	/**
 	 * @info Genera orden de servicio
@@ -1028,6 +1029,13 @@ class Novo_Bulk_Model extends NOVO_Model {
 								break;
 							case 'fechaGeneracion':
 								$serviceOrders['Orderdate'] = $value;
+								break;
+							case 'estatus':
+								$serviceOrders['OrderStatus'] = $value;
+								$serviceOrders['OrderVoidable'] = FALSE;
+								if($value == '0') {
+									$serviceOrders['OrderVoidable'] = $list->nofactura != '' && $list->fechafactura != '' ?: TRUE;
+								}
 								break;
 							case 'montoComision':
 								$serviceOrders['OrderCommission'] = $value;
@@ -1151,7 +1159,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 		$authorizeAttr = [];
 		$allBulk = 'no-select-checkbox';
 
-		if(verifyDisplay('body', lang('GEN_AUTHORIZE_BULK_LIST'), lang('GEN_TAG_ALL_BULK'))) {
+		if(verifyDisplay('body', 'AuthorizeBulkList', lang('GEN_TAG_ALL_BULK'))) {
 			$allBulk = 'toggle-all';
 		}
 

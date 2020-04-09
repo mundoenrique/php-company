@@ -21,7 +21,7 @@ class Business extends NOVO_Controller {
 	{
 		log_message('INFO', 'NOVO Business: getEnterprises Method Initialized');
 
-		$view = lang('GEN_GET_ENTERPRISES');
+		$view = 'getEnterprises';
 		array_push(
 			$this->includeAssets->jsFiles,
 			"third_party/isotope.pkgd-3.0.6",
@@ -59,7 +59,7 @@ class Business extends NOVO_Controller {
 			redirect(base_url('inicio'), 'location');
 		}
 
-		$view = lang('GEN_GET_PRODUCTS');
+		$view = 'getProducts';
 		array_push(
 			$this->includeAssets->jsFiles,
 			"third_party/polyfill-6.26.0",
@@ -106,13 +106,13 @@ class Business extends NOVO_Controller {
 	{
 		log_message('INFO', 'NOVO Business: getProductDetail Method Initialized');
 
-		$requestArray = (array)$this->request;
+		$requestArray = (array) $this->request;
 
 		if(empty($requestArray) && !$this->session->has_userdata('productInf')) {
 			redirect(base_url('inicio'), 'location');
 		}
 
-		$view = lang('GEN_GET_PRODUCTS_DETAIL');
+		$view = 'getProductDetail';
 
 		if(empty($requestArray)) {
 			$request = $this->session->productInf;

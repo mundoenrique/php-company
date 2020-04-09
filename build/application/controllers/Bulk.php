@@ -21,7 +21,7 @@ class Bulk extends NOVO_Controller {
 	{
 		log_message('INFO', 'NOVO Bulk: getPendingBulk Method Initialized');
 
-		$view = lang('GEN_GET_PEN_BULK');
+		$view = 'getPendingBulk';
 		array_push(
 			$this->includeAssets->cssFiles,
 			"third_party/dataTables-1.10.20"
@@ -64,7 +64,7 @@ class Bulk extends NOVO_Controller {
 			redirect(base_url('detalle-producto'), 'location');
 		}
 
-		$view = lang('GEN_DETAIL_BULK');
+		$view = 'seeBulkDetail';
 		$responseDetail = $this->loadModel($this->request);
 		$this->responseAttr($responseDetail);
 		$this->render->detailBulk = $responseDetail->data->detailBulk;
@@ -85,7 +85,7 @@ class Bulk extends NOVO_Controller {
 			redirect(base_url('detalle-producto'), 'location');
 		}
 
-		$view = lang('GEN_CONFIRM_BULK');
+		$view = 'confirmBulk';
 		array_push(
 			$this->includeAssets->jsFiles,
 			"third_party/jquery.validate",
@@ -114,7 +114,7 @@ class Bulk extends NOVO_Controller {
 			redirect(base_url('detalle-producto'), 'location');
 		} */
 
-		$view = lang('GEN_AUTHORIZE_BULK_LIST');
+		$view = 'authorizeBulkList';
 		array_push(
 			$this->includeAssets->cssFiles,
 			"third_party/dataTables-1.10.20"
@@ -189,7 +189,7 @@ class Bulk extends NOVO_Controller {
 			redirect(base_url('lotes-autorizacion'), 'location');
 		}
 
-		$view = lang('GEN_CACULATE_SERVICE_ORDER');
+		$view = 'calculateServiceOrder';
 		array_push(
 			$this->includeAssets->cssFiles,
 			"third_party/dataTables-1.10.20"

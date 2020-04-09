@@ -22,7 +22,7 @@ class Settings extends NOVO_Controller {
 	{
 		log_message('INFO', 'NOVO Settings: options Method Initialized');
 
-		$view = lang('GEN_SETTINGS_VIEW');
+		$view = 'settings';
 
 		array_push(
 			$this->includeAssets->cssFiles,

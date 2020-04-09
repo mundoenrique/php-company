@@ -38,7 +38,7 @@ class Information extends NOVO_Controller {
 			}
 			array_push(
 				$this->includeAssets->jsFiles,
-				"user/".$view
+				"user/terms"
 			);
 			$newUser = TRUE;
 			$this->session->set_flashdata('changePassword', $this->session->flashdata('changePassword'));
@@ -57,6 +57,7 @@ class Information extends NOVO_Controller {
 	public function rates()
 	{
 		log_message('INFO', 'NOVO Information: rates Method Initialized');
+
 		$this->render->titlePage =lang('GEN_FOTTER_RATES');
 		$this->render->referer = $this->input->server('HTTP_REFERER');
 		$baseReferer = substr($this->render->referer, 0, strlen(base_url()));
