@@ -254,6 +254,10 @@ footer.main-footer div:nth-child(1) {
   text-align: center;
 }
 
+.hide {
+	display: none
+}
+
 @media (min-width: 992px) {
 	footer.main-footer div:nth-child(1) {
     padding-right: 0;

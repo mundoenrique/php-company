@@ -20,6 +20,7 @@ if ( ! function_exists('verifyDisplay'))
 	function verifyDisplay($partialView, $module, $link)
 	{
 		log_message('INFO', 'NOVO verifyDisplay HELPER Initialized');
+		log_message('INFO', 'NOVO verifyDisplay partialView= '.$partialView.' module= '.$module.' link= '.$link);
 
 		switch ($partialView) {
 			case 'header' :
@@ -190,17 +191,17 @@ if ( ! function_exists('verifyFooter'))
 		switch ($link) {
 			case lang('GEN_FOTTER_START'):
 				$show = ['novo', 'pichincha'];
-				$display = ($module !== lang('GEN_LOGIN') && !$logged);
+				$display = ($module !== lang('GEN_LOGIN') && $module !== 'suggestion' && !$logged);
 				$display = (in_array($client, $show) && $display);
 				break;
 			case lang('GEN_FOTTER_BENEFITS'):
 				$show = ['novo', 'pichincha'];
-				$display = ($module !== 'benefits' && $module !== 'change-password');
+				$display = ($module !== 'benefits' && $module !== 'change-password' && $module !== 'suggestion');
 				$display = (in_array($client, $show) && $display && $countryUri != 'bp');
 				break;
 			case lang('GEN_FOTTER_TERMS'):
 				$show = ['novo', 'pichincha'];
-				$display = ($module !== 'terms' && $module !== 'change-password');
+				$display = ($module !== 'terms' && $module !== 'change-password' && $module !== 'suggestion');
 				$display = (in_array($client, $show) && $display && $countryUri != 'bp');
 				break;
 			case lang('GEN_FOTTER_RATES'):

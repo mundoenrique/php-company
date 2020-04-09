@@ -30,23 +30,15 @@ class User extends NOVO_Controller {
 
 		$this->session->sess_destroy();
 
-		$this->load->library('user_agent');
 		if($this->render->activeRecaptcha) {
 			$this->load->library('recaptcha');
 			$this->render->scriptCaptcha = $this->recaptcha->getScriptTag();
 		}
 
-		$browser = strtolower($this->agent->browser());
-		$version = (float) $this->agent->version();
-		$noBrowser = "internet explorer";
 		$views = ['user/login', 'user/signin'];
 
 		if($this->skin !== 'novo') {
 			$views = ['user/signin'];
-		}
-
-		if($browser == $noBrowser && $version < 11.0) {
-			$views = ['staticpages/content-browser'];
 		}
 
 		array_push(
@@ -59,7 +51,7 @@ class User extends NOVO_Controller {
 			"user/login"
 		);
 
-		if($this->skin === 'pichincha') {
+		if($this->skin !== 'pichincha') {
 			array_push(
 				$this->includeAssets->jsFiles,
 				"third_party/jquery.kwicks",

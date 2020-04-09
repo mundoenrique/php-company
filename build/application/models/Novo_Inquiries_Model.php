@@ -240,12 +240,13 @@ class Novo_Inquiries_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO Inquiries Model: DetailServiceOrders Method Initialized');
 
-		$this->dataAccessLog->modulo = 'lotes';
-		$this->dataAccessLog->function = 'verdetallelote';
-		$this->dataAccessLog->operation = 'Ver detalle Lote';
 		$this->className = 'com.novo.objects.TOs.LoteTO';
+		$this->dataAccessLog->modulo = 'Ordenes de servicio';
+		$this->dataAccessLog->function = 'Detalle de la orden de servicio';
+		$this->dataAccessLog->operation = 'Detalle Lote';
+
 		$this->dataRequest->idOperation = 'detalleLote';
-		$this->dataRequest->acidlote =$dataRequest->numberOrder;
+		$this->dataRequest->acidlote = $dataRequest->numberOrder;
 
 		$response = $this->sendToService('DetailServiceOrders');
 

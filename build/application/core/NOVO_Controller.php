@@ -71,7 +71,9 @@ class NOVO_Controller extends CI_Controller {
 		$this->render->newViews = $this->config->item('new-views');
 		$this->form_validation->set_error_delimiters('', '---');
 		$this->config->set_item('language', 'spanish-base');
-		$this->ValidateBrowser = $this->checkBrowser();
+		if(in_array($this->rule, ['login', 'recoverPass'])) {
+			$this->ValidateBrowser = $this->checkBrowser();
+		}
 
 		if($this->session->has_userdata('time')) {
 			$customerTime = $this->session->time->customerTime;

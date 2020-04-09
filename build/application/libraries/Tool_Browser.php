@@ -20,31 +20,38 @@ class Tool_Browser {
 	 */
 	public function validBrowser($client)
 	{
+		log_message('INFO', 'NOVO Tool_Browser: validBrowser Method Initialized');
+
 		$this->CI->load->library('user_agent');
 		$valid = FALSE;
 		$platform = 'Unidentified';
-		$browser = FALSE;
+		$browsersIn = FALSE;
 
-		if($this->CI->agent->is_browser()) {
-			$platform = 'browser';
+		if($this->CI->agent->is_browser() && !$this->CI->agent->is_mobile()) {
+			$platform = 'desktop';
 			$validBrowser = [
 				'Chrome' => 47,
 				'Firefox' => 29,
-				'Opera' => 36,
+				'Opera' => 34,
 				'Safari' => 9,
 				'Edge' => 13,
 				'Internet Explorer' => 11
 			];
 
-			if(array_key_exists($this->CI->agent->browser(), $validBrowser)) {
+			$browser = $this->CI->agent->browser();
+			$version = floatval($this->CI->agent->version());
+
+			if(array_key_exists($browser, $validBrowser)) {
 				if(in_array($client, ['novo', 'pichincha', 'banco-bog'])) {
 					$validBrowser['Internet Explorer'] = 10;
 				}
 
-				$browser = TRUE;
-				$valid = floatval($this->CI->agent->version()) > $validBrowser[$this->CI->agent->browser()];
+				log_message('DEBUG', 'NOVO validBrowser: browser access: '.$browser.' version '.$version);
 
-				if($valid && $client === 'banco-bog' && $this->CI->agent->browser() === 'Internet Explorer') {
+				$browsersIn = TRUE;
+				$valid = $version > $validBrowser[$browser];
+
+				if($valid && $client === 'banco-bog' && $browser === 'Internet Explorer') {
 					$valid = 'ie11';
 				}
 			}
@@ -60,29 +67,23 @@ class Tool_Browser {
 
 		if(!$valid) {
 			switch ($platform) {
-				case 'browser':
+				case 'desktop':
 					$title = 'Algunos componentes de esta página podrían no funcionar correctamente.';
 					$msg1 = 'Para mejorar la experiencia en nuestro sitio asegúrate que estés usando:';
 
-
-					if(!$browser) {
-						$title = '';
+					if(!$browsersIn) {
 						$msg1 = 'Aún no hemos validado la compatibilidad de nuestra aplicación con tu navegador.';
 						$msg2 = 'Por el momento te sugerimos acceder con';
 					}
 					break;
 				case 'mobile':
-					$title = '';
 					$msg1 = 'Nuestra aplicación no es compatible con tu dispositivo.';
-					$msg2 = '';
+					$msg2 = 'Por favor intenta desde una PC o MAC';
 					break;
 				case 'robot':
-					$title = '';
 					$msg1 = 'No está permitodo el acceso de robots a nuestra aplicación.';
-					$msg2 = '';
 					break;
 				default:
-					$title = '';
 					$msg1 = 'No fue posible validar desde que plataforma intentas acceder.';
 					$msg2 = 'Por favor intenta desde una PC o MAC';
 					break;
@@ -90,13 +91,14 @@ class Tool_Browser {
 
 			$message = (object) [
 				'platform' => $platform,
-				'title' => $title,
+				'title' => isset($title) ? $title : '',
 				'msg1' => $msg1,
-				'msg2' => $msg2
+				'msg2' => isset($msg2) ? $msg2 : ''
 			];
-
 			$this->CI->session->set_flashdata('messageBrowser', $message);
 		}
+
+		log_message('DEBUG', 'NOVO validBrowser: platform access: '.$platform);
 
 		return $valid;
 	}
