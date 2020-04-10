@@ -48,7 +48,7 @@ $config['cypher_base'] = CYPHER_BASE;
 $config['active_recaptcha'] = ACTIVE_RECAPTCHA;
 $config['new-views'] = '';
 $config['client'] = 'novo';
-$config['access_url'] = ['pe', 'co', 'us', 've'];
+$config['access_url'] = explode(',', ACCESS_URL);
 /*
 |--------------------------------------------------------------------------
 | Index File

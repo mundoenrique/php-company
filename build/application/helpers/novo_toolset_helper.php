@@ -25,13 +25,15 @@ if(!function_exists('assetUrl')) {
 if(!function_exists('countryCheck')) {
 	function countryCheck($country) {
 		$CI = &get_instance();
-		$CI->config->load('config-'.$country);
-		if($_SERVER['SERVER_ADDR'] !== '127.0.0.1' && !$CI->input->is_ajax_request()) {
-			if(!in_array($country, $CI->config->item('access_url'))) {
-				$country = reset($CI->config->item('access_url'));
-				redirec(base_usrl($country.'inicio'));
-			}
+		$accessUrl = $CI->config->item('access_url');
+		array_walk($accessUrl, 'arrayTrim');
+
+		if(!in_array($country, $accessUrl)) {
+			$country = current($accessUrl);
+			redirect(base_url($country.'/inicio'));
 		}
+
+		$CI->config->load('config-'.$country);
 	}
 }
 
@@ -306,5 +308,13 @@ if(!function_exists('convertDate')) {
 		$date = $date[2].'-'.$date[1].'-'.$date[0];
 
 		return $date;
+	}
+}
+
+if(!function_exists('arrayTrim')) {
+	function arrayTrim(&$value) {
+		$value = trim($value);
+
+		return $value;
 	}
 }
