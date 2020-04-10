@@ -27,7 +27,7 @@ if(!function_exists('countryCheck')) {
 		$CI = &get_instance();
 		$accessUrl = $CI->config->item('access_url');
 		array_walk($accessUrl, 'arrayTrim');
-
+		reset($accessUrl);
 		if(!in_array($country, $accessUrl)) {
 			$country = current($accessUrl);
 			redirect(base_url($country.'/inicio'));
