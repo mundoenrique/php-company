@@ -25,33 +25,13 @@ if(!function_exists('assetUrl')) {
 if(!function_exists('countryCheck')) {
 	function countryCheck($country) {
 		$CI = &get_instance();
-
 		$CI->config->load('config-'.$country);
-
-		/*
-		switch ($country) {
-			case 'bdb':
-				$CI->config->load('config-bdb');
-				break;
-			case 'bp':
-				$CI->config->load('config-bp');
-				break;
-			case 'co':
-				$CI->config->load('config-co');
-				break;
-			case 'pe':
-				$CI->config->load('config-pe');
-				break;
-			case 'us':
-				$CI->config->load('config-us');
-				break;
-			case 've':
-				$CI->config->load('config-ve');
-				break;
-			default:
-				redirect('/pe/inicio');
+		if($_SERVER['SERVER_ADDR'] !== '127.0.0.1' && !$CI->input->is_ajax_request()) {
+			if(!in_array($country, $CI->config->item('access_url'))) {
+				$country = reset($CI->config->item('access_url'));
+				redirec(base_usrl($country.'inicio'));
+			}
 		}
-		*/
 	}
 }
 
