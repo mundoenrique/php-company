@@ -360,7 +360,7 @@ $(document).ready(function () {
 								td = $(document.createElement("td")).appendTo(tr);
 								if (itemLista.totalEmision != 0) {
 									td = $(document.createElement("a")).appendTo(td);
-									td.attr("title", "emision");
+									td.attr("title", "emisión");
 								}
 
 								td.attr("class", "ep");
@@ -389,7 +389,7 @@ $(document).ready(function () {
 								td = $(document.createElement("td")).appendTo(tr);
 								if (itemLista.emisionSuplementaria.totalEmision != 0) {
 									td = $(document.createElement("a")).appendTo(td);
-									td.attr("title", "emision suplementaria");
+									td.attr("title", "emisión suplementaria");
 								}
 								td.attr("id", posLista);
 								td.attr("class", "suplementario_emision");
