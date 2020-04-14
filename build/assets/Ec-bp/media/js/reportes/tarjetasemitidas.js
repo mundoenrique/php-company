@@ -370,7 +370,7 @@ $(document).ready(function () {
 								td = $(document.createElement("td")).appendTo(tr);
 								if (itemLista.totalReposicionTarjeta != 0) {
 									td = $(document.createElement("a")).appendTo(td);
-									td.attr("title", "reposicion");
+									td.attr("title", "reposición");
 								}
 								td.attr("class", "rp");
 								td.attr("id", posLista);
