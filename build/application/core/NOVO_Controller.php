@@ -68,16 +68,9 @@ class NOVO_Controller extends CI_Controller {
 		languageLoad('generic');
 		countryCheck($this->countryUri);
 		languageLoad('specific', $this->countryUri);
-		//log_message('INFO', 'verifyCountry'.json_encode(apache_request_headers()));
-		//log_message('INFO', 'verifyCountry'.json_encode($_SERVER));
-		log_message('INFO', 'verifyCountry*****  '.IP_PROXI);
 		if($this->session->userId) {
-			//log_message('INFO','verifyCountry ******************** countrySess: '.$this->session->countrySess.' country: '.$this->config->item('country'));
-			//log_message('INFO','verifyCountry ******************** countryUri sess: '.$this->session->countryUri.' countryuri: '.$this->countryUri);
 			if($this->session->countrySess !== $this->config->item('country')) {
-				//log_message('INFO','verifyCountry ******************** urlbase: '.base_url('cerrar-sesion/inicio'));
 				$urlRedirect = str_replace($this->countryUri.'/', $this->session->countryUri.'/', base_url('cerrar-sesion/inicio'));
-				//log_message('INFO','verifyCountry ******************** urlRedirect: '.$urlRedirect);
 				redirect($urlRedirect, 'location', 301);
 				exit();
 			}
@@ -159,7 +152,6 @@ class NOVO_Controller extends CI_Controller {
 			$this->render->countryUri = $this->countryUri;
 			$this->render->novoName = $this->security->get_csrf_token_name();
 			$this->render->novoCook = $this->security->get_csrf_hash();
-			//$this->session->set_userdata('countryUri', $this->countryUri);
 			$this->folder = $this->render->newViews === '-core' ? $this->countryUri.'/' : '';
 			$this->includeAssets->cssFiles = [
 				"$this->folder"."$this->skin-base"
