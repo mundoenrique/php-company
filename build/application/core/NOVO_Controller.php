@@ -69,7 +69,8 @@ class NOVO_Controller extends CI_Controller {
 		countryCheck($this->countryUri);
 		languageLoad('specific', $this->countryUri);
 		//log_message('INFO', 'verifyCountry'.json_encode(apache_request_headers()));
-		log_message('INFO', 'verifyCountry'.json_encode($_SERVER));
+		//log_message('INFO', 'verifyCountry'.json_encode($_SERVER));
+		log_message('INFO', 'verifyCountry*****  '.IP_PROXI);
 		if($this->session->userId) {
 			//log_message('INFO','verifyCountry ******************** countrySess: '.$this->session->countrySess.' country: '.$this->config->item('country'));
 			//log_message('INFO','verifyCountry ******************** countryUri sess: '.$this->session->countryUri.' countryuri: '.$this->countryUri);
