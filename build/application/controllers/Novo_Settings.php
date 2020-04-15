@@ -5,7 +5,7 @@ defined('BASEPATH') OR  exit('No direct script access allowed');
  * @author Luis Molina
  * @date Marz 20Fri, 2020
 */
-class Settings extends NOVO_Controller {
+class Novo_Settings extends NOVO_Controller {
 
 	public function __construct()
 	{

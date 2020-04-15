@@ -4,7 +4,7 @@
  * @author J. Enrique Peñaloza Piñero
  * @date April 20th, 2019
 */
-class CallModels extends Novo_Controller {
+class Novo_CallModels extends Novo_Controller {
 
 	public function __construct()
 	{

@@ -49,42 +49,42 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
-$route['default_controller'] = 'user/login';
+$route['default_controller'] = 'novo_user/login';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 //Asynchronous
-$route['(:any)/async-call'] = "callModels";
+$route['(:any)/async-call'] = "novo_callModels";
 //User
-$route['(:any)/sugerencia'] = "user/suggestion";
-$route['(:any)/inicio'] = "user/login";
-$route['(:any)/inicio/(:any)'] = "user/login";
-$route['(:any)/cerrar-sesion/(:any)'] = "user/finishSession/$2";
-$route['(:any)/recuperar-clave'] = "user/recoverPass";
-$route['(:any)/cambiar-clave'] = "user/changePassword";
+$route['(:any)/sugerencia'] = "novo_user/suggestion";
+$route['(:any)/inicio'] = "novo_user/login";
+$route['(:any)/inicio/(:any)'] = "novo_user/login";
+$route['(:any)/cerrar-sesion/(:any)'] = "novo_user/finishSession/$2";
+$route['(:any)/recuperar-clave'] = "novo_user/recoverPass";
+$route['(:any)/cambiar-clave'] = "novo_user/changePassword";
 //Information
-$route['(:any)/inf-beneficios'] = "information/benefits";
-$route['(:any)/inf-condiciones'] = "information/terms";
-$route['(:any)/inf-tarifas'] = "information/rates";
+$route['(:any)/inf-beneficios'] = "novo_information/benefits";
+$route['(:any)/inf-condiciones'] = "novo_information/terms";
+$route['(:any)/inf-tarifas'] = "novo_information/rates";
 //Business
-$route['(:any)/empresas'] = "business/getEnterprises";
-$route['(:any)/productos'] = "business/getProducts";
-$route['(:any)/detalle-producto'] = "business/getProductDetail";
+$route['(:any)/empresas'] = "novo_business/getEnterprises";
+$route['(:any)/productos'] = "novo_business/getProducts";
+$route['(:any)/detalle-producto'] = "novo_business/getProductDetail";
 //Bulk
-$route['(:any)/cargar-lotes'] = "bulk/getPendingBulk";
-$route['(:any)/detalle-lote'] = "bulk/getDetailBulk";
-$route['(:any)/confirmar-lote'] = "bulk/confirmBulk";
-$route['(:any)/lotes-autorizacion'] = "bulk/authorizeBulkList";
-$route['(:any)/detalle-confirmado'] = "bulk/confirmBulkdetail";
-$route['(:any)/lotes-calcular-orden'] = "bulk/calculateServiceOrder";
+$route['(:any)/cargar-lotes'] = "novo_bulk/getPendingBulk";
+$route['(:any)/detalle-lote'] = "novo_bulk/getDetailBulk";
+$route['(:any)/confirmar-lote'] = "novo_bulk/confirmBulk";
+$route['(:any)/lotes-autorizacion'] = "novo_bulk/authorizeBulkList";
+$route['(:any)/detalle-confirmado'] = "novo_bulk/confirmBulkdetail";
+$route['(:any)/lotes-calcular-orden'] = "novo_bulk/calculateServiceOrder";
 //Inquiries
-$route['(:any)/consulta-orden-de-servicio'] = "inquiries/serviceOrders";
-$route['(:any)/detalle-orden-de-servicio'] = "inquiries/detailServiceOrders";
+$route['(:any)/consulta-orden-de-servicio'] = "novo_inquiries/serviceOrders";
+$route['(:any)/detalle-orden-de-servicio'] = "novo_inquiries/detailServiceOrders";
 //DownloadFile
-$route['(:any)/descargar-archivo-os'] = "downloadFiles/exportFiles";
+$route['(:any)/descargar-archivo-os'] = "novo_downloadFiles/exportFiles";
 //Reports
-$route['(:any)/reportes'] = "reports/getReportsList";
+$route['(:any)/reportes'] = "novo_reports/getReportsList";
 //settings
-$route['(:any)/configuracion'] = "settings/options";
+$route['(:any)/configuracion'] = "novo_settings/options";
 
 
 //old routes

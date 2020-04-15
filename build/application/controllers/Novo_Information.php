@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @info Controlador para la vistas de información general alusuario
  * @author J. Enrique Peñaloza Piñero.
  */
-class Information extends NOVO_Controller {
+class Novo_Information extends NOVO_Controller {
 
 	public function __construct()
 	{

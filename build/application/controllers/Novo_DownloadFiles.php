@@ -5,7 +5,7 @@ defined('BASEPATH') OR  exit('No direct script access allowed');
  * @author J. Enrique Peñaloza Piñero
  * @date January 09th, 2019
 */
-class DownloadFiles extends NOVO_Controller {
+class Novo_DownloadFiles extends NOVO_Controller {
 
 	public function __construct()
 	{
