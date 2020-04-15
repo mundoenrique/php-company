@@ -8,8 +8,8 @@ class User extends NOVO_Controller {
 
 	public function __construct()
 	{
-		log_message('INFO', 'NOVO User Controller Class Initialized');
 		parent:: __construct();
+		log_message('INFO', 'NOVO User Controller Class Initialized');
 	}
 	/**
 	 * @info Método que renderiza la vista de login
@@ -23,7 +23,7 @@ class User extends NOVO_Controller {
 
 		if($this->session->has_userdata('logged')) {
 			$oldUrl = str_replace($this->countryUri.'/', $this->config->item('country').'/', base_url('dashboard'));
-			$urlRedirect = $this->countryUri != 'bdb' ? $oldUrl : base_url('empresas');
+			$urlRedirect = $this->render->newViews != '-core' ? $oldUrl : base_url('empresas');
 			redirect($urlRedirect, 'location');
 			exit();
 		}
