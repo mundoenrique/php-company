@@ -224,7 +224,7 @@ class Novo_Business_Model extends NOVO_Model {
 
 					$imgProgram = url_title(trim(mb_strtolower($response->estadistica->producto->nombre))).'.svg';
 
-					if(!file_exists(assetPath('images/programs/'.$imgProgram))) {
+					if(!file_exists(assetPath('images/programs/'.$this->session->countryUri.'/'.$imgProgram))) {
 						$imgProgram = $this->countryUri.'_default.svg';
 					}
 
