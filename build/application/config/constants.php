@@ -164,3 +164,6 @@ define('DOWNLOAD_ROUTE', isset($_SERVER['DOWNLOAD_ROUTE']) ?
 define('ACCESS_URL', isset($_SERVER['ACCESS_URL']) ?
 	$_SERVER['ACCESS_URL'] : ''
 );
+define('IP_PROXI', $_SERVER['REMOTE_ADDR'] != '127.0.0.1' ?
+	$_SERVER['HTTP_X_FORWARDED_FOR'] : ''
+);
