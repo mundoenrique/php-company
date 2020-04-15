@@ -3791,6 +3791,11 @@ td > table.detail-lot {
 	overflow:hidden;
 }
 
+.img-product-list {
+	width: 84px;
+	height: 55px;
+}
+
 .img-brand-list {
 	width: 68px;
 	height: 40px;

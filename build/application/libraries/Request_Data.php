@@ -287,7 +287,7 @@ class Request_Data {
 					case 'nombre':
 						$programImg = url_title(mb_strtolower($value)).'.svg';
 
-						if(!file_exists(assetPath('images/programs/'.$programImg))) {
+						if(!file_exists(assetPath('images/programs/'.$this->CI->session->countryUri.'/'.$programImg))) {
 							$programImg = $this->CI->session->countryUri.'_default.svg';
 						}
 
