@@ -53,7 +53,7 @@ $route['default_controller'] = 'Novo_User/login';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 //Asynchronous
-$route['(:any)/async-call'] = "novo_callModels";
+$route['(:any)/async-call'] = "novo_CallModels";
 //User
 $route['(:any)/sugerencia'] = "Novo_User/suggestion";
 $route['(:any)/inicio'] = "Novo_User/login";
