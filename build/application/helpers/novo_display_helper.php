@@ -128,11 +128,11 @@ if ( ! function_exists('verifyBody'))
 				$display = (in_array($client, $show));
 				break;
 			case lang('GEN_TAG_ALL_BULK'):
-				$show = ['novo', 'pichincha'];
+				$show = ['novo', 'pichincha', 'banorte'];
 				$display = (in_array($client, $show));
 				break;
 			case lang('GEN_TAG_ORDER_TYPE'):
-				$show = ['novo', 'pichincha'];
+				$show = ['novo', 'pichincha', 'banorte'];
 				$display = (in_array($client, $show) && $country != 've');
 				break;
 			case lang('GEN_TAG_CANCEL_BUTTON'):

@@ -51,6 +51,10 @@ if(!function_exists('getFaviconLoader')) {
 				$ext = 'ico';
 				$loader.= 'bdb.gif';
 				break;
+			case 'bnt':
+				$ext = 'ico';
+				$loader.= 'bdb.gif';
+				break;
 			default:
 				$ext = 'png';
 				$loader.= 'novo.gif';
@@ -122,8 +126,8 @@ if(!function_exists('languajeLoad')) {
 		$class = $CI->router->fetch_class();
 		$langFiles = $langFiles ?: $CI->router->fetch_method();
 		$languagesFile = [];
-		$lanGeneral = ['bdb', 'bp', 'co', 've'];
-		$lanValidate = ['bdb'];
+		$lanGeneral = ['bdb', 'bp', 'bnt', 'co', 've'];
+		$lanValidate = ['bdb', 'bnt'];
 		$loadLanguages = FALSE;
 		$client = !$client ? 'default_lang' : $client;
 		log_message('INFO', 'NOVO Language '.$call.', HELPER: languajeLoad Initialized for controller: '.$class. ' and method: '.$langFiles);
@@ -152,6 +156,9 @@ if(!function_exists('languajeLoad')) {
 					'authorizeBulk'	=> ['bulk'],
 					'deleteConfirmBulk'	=> ['bulk'],
 				];
+				break;
+			case 'bnt':
+				$languages = [];
 				break;
 			case 'co':
 				$languages = [
