@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 //GENERAL LANGUAGE
 $lang['GEN_ENTERPRISE_LIST'] = 'empresas';
 $lang['GEN-LOGO-HEADER'] = 'img-logo.svg';
-$lang['GEN-LOGO-BIG'] = 'img-banco_bogota.svg';
+$lang['GEN-LOGO-BIG'] = 'img-banorte.png';
 $lang['GEN_ALTERNATIVE_TEXT'] = 'Banorte';
 //MODAL STYLES
 $lang['GEN_MODAL_WIDTH'] = 370;

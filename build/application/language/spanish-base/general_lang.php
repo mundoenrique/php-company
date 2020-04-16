@@ -125,6 +125,7 @@ $lang['GEN_SHOW_HEADER_LOGO'] = 'Mostrar logo en el encabezado';
 $lang['GEN_SHOW_CONFIG'] = 'ver configuracion';
 $lang['GEN_SIGNIN_TOP'] = 'widget superior';
 $lang['GEN_SIGNIN_HEADER'] = 'widget Cabecera';
+$lang['GEN_TAG_RECOVER_PASS'] = 'Recuperar clave';
 $lang['GEN_TAG_WELCOME_MESSAGE'] = 'Mensaje de bienvenida';
 $lang['GEN_TAG_GOUT_MENU'] = 'Botón Salir';
 $lang['GEN_TAG_REPORT_MENU'] = 'Menú reportes';

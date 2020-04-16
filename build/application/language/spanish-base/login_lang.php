@@ -2,6 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 $lang['LOGIN_WELCOME_TITLE'] = 'Bienvenido a Conexión Empresas Online';
+$lang['LOGIN_RECOVER_PASS'] = '¿Olvidaste tu contraseña?';
 $lang['LOGIN_WELCOME_MESSAGE']='Con este sistema las gestiones de pago de tu empresa son más eficientes, seguras y rápidas. Empieza a disfrutar de todas las ventajas que te ofrece Conexión Empresas Online.';
 $lang['LOGIN_BTN'] = 'Ingresar';
 $lang['LOGIN_SECURE_OPER_TITLE'] = 'Operaciones seguras';
