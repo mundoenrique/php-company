@@ -8,7 +8,7 @@
 	<? endif; ?>
 	<div class="flex flex-auto flex-wrap justify-around items-center">
 
-		<img class="order-first" style="height: 100px; width:300px;" src="<?= $this->asset->insertFile($countryUri.'/'.lang('GEN_FOTTER_ICON_I')); ?>"
+		<img class="order-first" src="<?= $this->asset->insertFile($countryUri.'/'.lang('GEN_FOTTER_ICON_I')); ?>"
 		<?php $desc = lang('GEN-DESCR-BANCO')?>
 			alt="Logo Banco <?php echo $desc ?>">
 		<img class="order-1"  src="<?= $this->asset->insertFile($countryUri.'/'.lang('GEN_FOTTER_ICON_R')); ?>"
