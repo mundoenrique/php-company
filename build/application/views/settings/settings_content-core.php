@@ -481,7 +481,7 @@
 							<div class="container">
 								<div class="row">
 									<div class="mb-3 col-auto col-lg-6 col-xl-5">
-										<a id="download-file" href="<?= $this->asset->insertFile($countryUri.'/archivo.pdf','statics');?>" download>
+										<a href="<?= $this->asset->insertFile($countryUri.'/archivo.pdf','statics');?>" download>
 											<div class="files btn-link flex items-center">
 												<div class="file">
 													<img src="<?= $this->asset->insertFile($countryUri.'/icon-pdf.svg');?>" />
@@ -492,7 +492,7 @@
 									</div>
 									<?php if(verifyDisplay('body','settings', lang('GEN_GL_USER_MANUAL'))): ?>
 									<div class="mb-3 col-auto col-lg-6 col-xl-5">
-										<a id="download-file" href="<?= $this->asset->insertFile($countryUri.'/archivo.pdf','statics');?>" download>
+										<a href="<?= $this->asset->insertFile($countryUri.'/archivo.pdf','statics');?>" download>
 											<div class="files btn-link flex items-center">
 												<div class="file">
 													<img src="<?= $this->asset->insertFile($countryUri.'/icon-pdf.svg');?>" />
