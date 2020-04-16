@@ -220,7 +220,6 @@ class Novo_Bulk_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO Bulk Model: LoadBulk Method Initialized');
 
-		$moveFile = TRUE;
 		$this->sendFile($dataRequest->fileName, 'LoadBulk');
 
 		if ($this->isResponseRc === 0) {
@@ -481,6 +480,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 				$this->response->code = 0;
 				$this->response->title = lang('BULK_CONFIRM_TITLE');
 				$this->response->msg = lang('RESP_PASSWORD_NO_VALID');
+				$this->response->icon = lang('GEN_ICON_WARNING');
 				$this->response->data['btn1']['action'] = 'close';
 				break;
 			case -142:
@@ -528,7 +528,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 				break;
 			case -38:
 				$this->response->code = 3;
-				$this->response->title = 'Autorización de lotes';
+				$this->response->title = lang('BULK_AUTHORIZE');
 				$this->response->msg = lang('RESP_NO_LIST');
 				break;
 		}
@@ -582,13 +582,16 @@ class Novo_Bulk_Model extends NOVO_Model {
 
 		switch ($this->isResponseRc) {
 			case 0:
+				$msgREsp = count($signListBulk) > 1 ? lang('BULK_SIGNEDS') : lang('BULK_SIGNED');
 				$this->response->title = lang('BULK_SIGN_TITLE');
-				$this->response->msg = 'Lote firmado exitosamente';
+				$this->response->msg = $msgREsp;
+				$this->response->icon = lang('GEN_ICON_SUCCESS');
 				$this->response->data['btn1']['link'] = 'lotes-autorizacion';
 				break;
 			case -1:
 				$this->response->title = lang('BULK_SIGN_TITLE');
 				$this->response->msg = lang('RESP_PASSWORD_NO_VALID');
+				$this->response->icon = lang('GEN_ICON_WARNING');
 				$this->response->data['btn1']['action'] = 'close';
 				break;
 		}
@@ -641,7 +644,8 @@ class Novo_Bulk_Model extends NOVO_Model {
 		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->title = lang('BULK_DELETE_TITLE');
-				$this->response->msg = 'Lote eliminado exitosamente';
+				$this->response->msg = lang('BULK_DELETED');
+				$this->response->icon = lang('GEN_ICON_SUCCESS');
 				$this->response->data['btn1']['link'] = 'lotes-autorizacion';
 				break;
 			case -16:
@@ -652,11 +656,75 @@ class Novo_Bulk_Model extends NOVO_Model {
 			case -22:
 				$this->response->title = lang('BULK_DELETE_TITLE');
 				$this->response->msg = lang('RESP_PASSWORD_NO_VALID');
+				$this->response->icon = lang('GEN_ICON_WARNING');
 				$this->response->data['btn1']['action'] = 'close';
 				break;
 		}
 
 		return $this->responseToTheView('DeleteConfirmBulk');
+	}
+	/**
+	 * @info Firma lista de lotes
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date December 28th, 2019
+	 */
+	public function callWs_DisassConfirmBulk_Bulk($dataRequest)
+	{
+		log_message('INFO', 'NOVO Bulk Model: DisassConfirmBulk Method Initialized');
+
+		$this->className = 'com.novo.objects.MO.ListadoLotesMO';
+		$this->dataAccessLog->modulo = 'Lotes';
+		$this->dataAccessLog->function = 'Autorización de lotes';
+		$this->dataAccessLog->operation = 'Desasociar firma';
+
+		$disassListBulk = [];
+
+		foreach($dataRequest->bulk AS $bulkInfo) {
+			$bulkInfo = json_decode($bulkInfo);
+			$bulkList  = [
+				'acidlote' => $bulkInfo->bulkId,
+				'accodcia' => $this->session->enterpriseInf->enterpriseCode,
+				'accodgrupo' => $this->session->enterpriseInf->enterpriseGroup,
+				'actipoproducto' => $this->session->productInf->productPrefix
+			];
+			$disassListBulk[] = $bulkList;
+		}
+
+		$password = json_decode(base64_decode($dataRequest->pass));
+		$password = $this->cryptography->decrypt(
+			base64_decode($password->plot),
+			utf8_encode($password->password)
+		);
+		$this->dataRequest->idOperation = 'desasociarFirma';
+		$this->dataRequest->lista = $disassListBulk;
+		$this->dataRequest->usuario = [
+			'userName' => $this->userName,
+			'password' => md5($password)
+		];
+
+		$this->sendToService('DisassConfirmBulk');
+
+		switch ($this->isResponseRc) {
+			case 0:
+				$this->response->title = lang('BULK_DISASS_TITLE');
+				$this->response->msg = lang('BULK_DISASSOCIATED');
+				$this->response->icon = lang('GEN_ICON_SUCCESS');
+				$this->response->data['btn1']['link'] = 'lotes-autorizacion';
+				break;
+			case -16:
+				$this->response->title = lang('BULK_DISASS_TITLE');
+				$this->response->msg = novoLang(lang('BULK_NOT_DISASS'), $bulkInfo->bulkNumber);
+				$this->response->data['btn1']['action'] = 'close';
+				break;
+			case -22:
+				$this->response->title = lang('BULK_DISASS_TITLE');
+				$this->response->msg = lang('RESP_PASSWORD_NO_VALID');
+				$this->response->icon = lang('GEN_ICON_WARNING');
+				$this->response->data['btn1']['action'] = 'close';
+				break;
+		}
+
+		return $this->responseToTheView('DisassConfirmBulk');
 	}
 	/**
 	 * @info Ver el detalle de los lotes confirmados
@@ -950,6 +1018,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 			case -1:
 				$this->response->title = lang('BULK_AUTH_TITLE');
 				$this->response->msg = lang('RESP_PASSWORD_NO_VALID');
+				$this->response->icon = lang('GEN_ICON_WARNING');
 				$this->response->data['btn1']['action'] = 'close';
 				break;
 			case -59:
@@ -960,8 +1029,8 @@ class Novo_Bulk_Model extends NOVO_Model {
 			case 100:
 				$this->response->title = lang('BULK_AUTH_TITLE');
 				$this->response->msg = novoLang(lang('BULK_AUTH_SUCCESS'), $this->userName);
-				$this->response->data['btn1']['link'] = 'lotes-autorizacion';
 				$this->response->icon = lang('GEN_ICON_SUCCESS');
+				$this->response->data['btn1']['link'] = 'lotes-autorizacion';
 				break;
 		}
 
@@ -1075,7 +1144,6 @@ class Novo_Bulk_Model extends NOVO_Model {
 			case -5:
 				$this->response->title = 'Generar orden de servicio';
 				$this->response->msg = 'No fue posible generar la orden de servicio';
-				$this->response->icon = lang('GEN_ICON_WARNING');
 				$this->response->data['btn1']['action'] = 'close';
 				break;
 		}

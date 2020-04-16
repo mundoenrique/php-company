@@ -152,9 +152,11 @@ if(!function_exists('languajeLoad')) {
 					'deleteNoConfirmBulk'	=> ['bulk'],
 					'confirmBulk'	=> ['bulk'],
 					'getDetailBulk'	=> ['bulk'],
+					'signBulkList'	=> ['bulk'],
 					'authorizeBulkList'	=> ['bulk'],
 					'authorizeBulk'	=> ['bulk'],
 					'deleteConfirmBulk'	=> ['bulk'],
+					'disassConfirmBulk'	=> ['bulk'],
 				];
 				break;
 			case 'bnt':
@@ -205,9 +207,11 @@ if(!function_exists('languajeLoad')) {
 					'deleteNoConfirmBulk'	=> ['bulk'],
 					'confirmBulk'	=> ['bulk'],
 					'getDetailBulk'	=> ['bulk'],
+					'signBulkList'	=> ['bulk'],
 					'authorizeBulkList'	=> ['bulk'],
 					'authorizeBulk'	=> ['bulk'],
 					'deleteConfirmBulk'	=> ['bulk'],
+					'disassConfirmBulk'	=> ['bulk'],
 					'calculateServiceOrder'	=> ['bulk'],
 					'getReportsList'	=> ['reports'],
 					'getReport'	=> ['reports'],
