@@ -16,11 +16,11 @@ $(function () {
  * @author J. Enrique Peñaloza Piñero
  * @date November 22nd, 2019
  */
-	if(code > 2) {
+	if (code > 2) {
 		notiSystem(title, msg, icon, data)
 	}
 
-	$('.big-modal').on('click', function(){
+	$('.big-modal').on('click', function () {
 		$('.cover-spin').show(0)
 	});
 	//dataTale lang
@@ -48,6 +48,13 @@ $(function () {
 		"oAria": {
 			"sSortAscending": lang.GEN_TABLE_SSORTASCENDING,
 			"sSortDescending": lang.GEN_TABLE_SSORTDESCENDING
+		},
+		"select": {
+			"rows": {
+				_: lang.GEN_TABLE_ROWS_SELECTED,
+				0: lang.GEN_TABLE_ROWS_NO_SELECTED,
+				1: lang.GEN_TABLE_ROW_SELECTED
+			}
 		}
 	}
 });
@@ -67,7 +74,7 @@ function callNovoCore(verb, who, where, request, _response_) {
 	var codeResp = parseInt(lang.RESP_DEFAULT_CODE);
 	var formData = new FormData();
 	dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, { format: CryptoJSAesJson }).toString();
-	if(request.file) {
+	if (request.file) {
 		formData.append('file', request.file);
 		delete request.file;
 	}
@@ -75,7 +82,7 @@ function callNovoCore(verb, who, where, request, _response_) {
 	formData.append('ceo_name', ceo_cook);
 	formData.append('plot', btoa(ceo_cook));
 
-	if(logged) {
+	if (logged) {
 		clearTimeout(resetTimesession);
 		clearTimeout(setTimesession);
 		sessionExpire();
@@ -92,22 +99,22 @@ function callNovoCore(verb, who, where, request, _response_) {
 		dataType: 'json'
 	}).done(function (response, status, jqXHR) {
 
-		if(request.modalReq) {
+		if (request.modalReq) {
 			$('#accept').prop('disabled', false)
 			$('#system-info').dialog('destroy');
 		}
 
 		response = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, { format: CryptoJSAesJson }).toString(CryptoJS.enc.Utf8))
 
-		if(response.code === codeResp) {
+		if (response.code === codeResp) {
 			notiSystem(response.title, response.msg, response.icon, response.data);
 		}
 
 		_response_(response);
 
-	}).fail(function (jqXHR, textStatus, errorThrown ) {
+	}).fail(function (jqXHR, textStatus, errorThrown) {
 
-		if(request.modalReq) {
+		if (request.modalReq) {
 			$('#accept').prop('disabled', false)
 			$('#system-info').dialog('destroy');
 		}
@@ -118,7 +125,7 @@ function callNovoCore(verb, who, where, request, _response_) {
 			icon: lang.GEN_ICON_DANGER,
 			data: {
 				btn1: {
-					link: baseURL+lang.GEN_ENTERPRISE_LIST,
+					link: baseURL + lang.GEN_ENTERPRISE_LIST,
 					action: 'redirect'
 				}
 			}
@@ -159,15 +166,15 @@ function notiSystem(title, message, icon, data) {
 		minWidth: lang.GEN_MODAL_WIDTH,
 		maxHeight: 350,
 		dialogClass: "border-none",
-    classes: {
-      "ui-dialog-titlebar": "border-none",
-    },
+		classes: {
+			"ui-dialog-titlebar": "border-none",
+		},
 		open: function (event, ui) {
 			$('.ui-dialog-titlebar-close').hide();
 			var classIcon = $('#system-icon').attr('class').split(' ');
 			classIcon = classIcon.pop();
 
-			if(classIcon != 'mt-0') {
+			if (classIcon != 'mt-0') {
 				$('#system-icon').removeClass(classIcon);
 			}
 
@@ -176,7 +183,7 @@ function notiSystem(title, message, icon, data) {
 			$('#accept, #cancel').removeClass("ui-button ui-corner-all ui-widget");
 			createButton(dialogMoldal, btnAccept, btn1);
 
-			if(!btn2) {
+			if (!btn2) {
 				btnCancel.hide();
 				btnAccept.addClass('modal-btn-primary');
 				$('.novo-dialog-buttonset').addClass('modal-buttonset');
@@ -198,10 +205,10 @@ function createButton(dialogMoldal, elementButton, valuesButton) {
 		if (valuesButton.action === 'redirect') {
 			$(this).html(loader);
 			$(this).children('span').addClass('spinner-border-sm');
-			if($(this).attr('id') == 'cancel') {
+			if ($(this).attr('id') == 'cancel') {
 				$(this).children('span')
-				.removeClass('secondary')
-				.addClass('primary');
+					.removeClass('secondary')
+					.addClass('primary');
 			}
 			$(location).attr('href', valuesButton.link);
 		}
@@ -220,20 +227,20 @@ function insertFormInput(disabled, form) {
 	form = form == undefined ? false : form;
 	var notDisabled = '#product-select, #enterprise-widget-btn'
 
-	if(disabled) {
+	if (disabled) {
 		notDisabled = false;
 	}
 
 	$('form button, form select, form input:not([type=hidden]), button')
-	.not(notDisabled)
-	.not('.btn-modal')
-	.prop('disabled', disabled);
+		.not(notDisabled)
+		.not('.btn-modal')
+		.prop('disabled', disabled);
 
-	if(form) {
+	if (form) {
 		ceo_cook = getCookieValue();
 		screenSize = screen.width;
-		form.append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'"></input>');
-		form.append('<input type="hidden" name="screenSize" value="'+screenSize+'"></input>');
+		form.append('<input type="hidden" name="ceo_name" value="' + ceo_cook + '"></input>');
+		form.append('<input type="hidden" name="screenSize" value="' + screenSize + '"></input>');
 	}
 }
 /**
@@ -252,7 +259,7 @@ function getPropertyOfElement(property, element) {
  * @date November 18th, 2019
  */
 function formInputTrim(form) {
-	form.find('input').each(function() {
+	form.find('input').each(function () {
 		var trimVal = $(this).val().trim()
 		$(this).val(trimVal)
 	});

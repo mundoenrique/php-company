@@ -125,6 +125,7 @@ $lang['GEN_SHOW_HEADER_LOGO'] = 'Mostrar logo en el encabezado';
 $lang['GEN_SHOW_CONFIG'] = 'ver configuracion';
 $lang['GEN_SIGNIN_TOP'] = 'widget superior';
 $lang['GEN_SIGNIN_HEADER'] = 'widget Cabecera';
+$lang['GEN_TAG_RECOVER_PASS'] = 'Recuperar clave';
 $lang['GEN_TAG_WELCOME_MESSAGE'] = 'Mensaje de bienvenida';
 $lang['GEN_TAG_GOUT_MENU'] = 'Botón Salir';
 $lang['GEN_TAG_REPORT_MENU'] = 'Menú reportes';
@@ -179,6 +180,9 @@ $lang['GEN_TABLE_SNEXT'] = '»';
 $lang['GEN_TABLE_SPREVIOUS'] = '«';
 $lang['GEN_TABLE_SSORTASCENDING'] = ': Activar para ordenar la columna de manera ascendente';
 $lang['GEN_TABLE_SSORTDESCENDING'] = ': Activar para ordenar la columna de manera descendente';
+$lang['GEN_TABLE_ROWS_SELECTED'] = '%d Registros seleccionados';
+$lang['GEN_TABLE_ROWS_NO_SELECTED'] = '';
+$lang['GEN_TABLE_ROW_SELECTED'] = '1 Registro seleccionado';
 //DATEPICKER
 $lang['GEN_PICKER_CLOSETEXT'] = 'Cerrar';
 $lang['GEN_PICKER_PREVTEXT'] = '<Ant';

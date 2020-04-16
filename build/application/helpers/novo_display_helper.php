@@ -67,7 +67,7 @@ if ( ! function_exists('verifyheader'))
 				$display = (in_array($client, $show));
 				break;
 			case lang('GEN_SHOW_CONFIG'):
-				$show = ['novo', 'pichincha','banco-bog'];
+				$show = ['novo', 'pichincha', 'banco-bog', 'banorte'];
 				$display = ($logged && in_array($client, $show));
 				break;
 			case lang('GEN_TAG_GOUT_MENU'):
@@ -115,6 +115,10 @@ if ( ! function_exists('verifyBody'))
 				$show = ['novo'];
 				$display = (in_array($client, $show));
 				break;
+			case lang('GEN_TAG_RECOVER_PASS'):
+				$show = ['banco-bog'];
+				$display = (!in_array($client, $show));
+				break;
 			case lang('GEN_TAG_WELCOME_MESSAGE'):
 				$show = ['pichincha'];
 				$display = (in_array($client, $show));
@@ -128,43 +132,43 @@ if ( ! function_exists('verifyBody'))
 				$display = (in_array($client, $show));
 				break;
 			case lang('GEN_TAG_ALL_BULK'):
-				$show = ['novo', 'pichincha'];
+				$show = ['novo', 'pichincha', 'banorte'];
 				$display = (in_array($client, $show));
 				break;
 			case lang('GEN_TAG_ORDER_TYPE'):
-				$show = ['novo', 'pichincha'];
+				$show = ['novo', 'pichincha', 'banorte'];
 				$display = (in_array($client, $show) && $country != 've');
 				break;
 			case lang('GEN_TAG_CANCEL_BUTTON'):
-				$show = ['novo', 'pichincha'];
+				$show = ['novo', 'pichincha', 'banorte'];
 				$display = (in_array($client, $show));
 				break;
 			case lang('GEN_BTN_USER'):
-				$show = ['novo','pichincha'];
+				$show = ['novo', 'pichincha', 'banorte'];
 				$display = (in_array($client, $show));
 				break;
 			case lang('GEN_BTN_ENTERPRISE'):
-				$show = ['novo','pichincha'];
+				$show = ['novo', 'pichincha', 'banorte'];
 				$display = (in_array($client, $show));
 				break;
 			case lang('GEN_BTN_BRANCH'):
-				$show = ['novo','pichincha'];
+				$show = ['novo', 'pichincha', 'banorte'];
 				$display = (in_array($client, $show));
 				break;
 			case lang('GEN_BTN_DOWNLOADS'):
-				$show = ['novo','pichincha','banco-bog'];
+				$show = ['novo', 'pichincha', 'banco-bog', 'banorte'];
 				$display = (in_array($client, $show));
 				break;
 			case lang('GEN_GL_USER_MANUAL'):
-				$show = ['novo','pichincha'];
+				$show = ['novo', 'pichincha', 'banorte'];
 				$display = (in_array($client, $show));
 				break;
 			case lang('GEN_APPLICATIONS'):
-				$show = ['novo','pichincha'];
+				$show = ['novo', 'pichincha', 'banorte'];
 				$display = (in_array($client, $show));
 				break;
 			case lang('GEN_FILE'):
-				$show = ['novo','pichincha'];
+				$show = ['novo', 'pichincha', 'banorte'];
 				$display = (in_array($client, $show));
 				break;
 		}

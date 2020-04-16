@@ -118,6 +118,8 @@ $(function () {
 				break;
 			case lang.GEN_BTN_DELETE:
 			case lang.GEN_BTN_DISASS_SIGN:
+				var titleModal = action === lang.GEN_BTN_DELETE ? lang.BULK_DELETE_TITLE : lang.BULK_DISASS_TITLE;
+				var textModal = action === lang.GEN_BTN_DELETE ? lang.BULK_DELETE : lang.BULK_DISASS;
 				var oldId = $('#accept').attr('id');
 				var currentIdBtn = 'delete-bulk-btn';
 				var cancelDelete = $('#cancel');
@@ -135,12 +137,12 @@ $(function () {
 					}
 				}
 				inputModal = '<form id="delete-bulk-form" class="form-group">';
-				inputModal+= '<span class="regular"> '+lang.BULK_DELETE+': '+bulkNum+'</span>';
+				inputModal+= '<span class="regular"> '+textModal+': '+bulkNum+'</span>';
 				inputModal+= 		'<input id="password" class="form-control mt-2 h6 col-9" name="password" type="password" ';
 				inputModal+=		'autocomplete="off" placeholder="'+lang.GEN_PLACE_PASSWORD+'">';
 				inputModal+= 		'<div class="help-block"></div>';
 				inputModal+= '</form>';
-				notiSystem(lang.BULK_DELETE_TITLE, inputModal, lang.GEN_ICON_INFO, data);
+				notiSystem(titleModal, inputModal, lang.GEN_ICON_INFO, data);
 				$('#'+currentIdBtn).on('click', function(e) {
 					e.preventDefault();
 					form = $('#delete-bulk-form');

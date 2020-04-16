@@ -230,6 +230,18 @@ $config = [
 			'rules' => 'regex_match[/^([\w{}":,]*)+$/i]|required'
 		]
 	],
+	'disassConfirmBulk' => [
+		[
+			'field' => 'pass',
+			'label' => 'pass',
+			'rules' => 'trim|required'
+		],
+		[
+			'field' => 'bulk[]',
+			'label' => 'bulk',
+			'rules' => 'regex_match[/^([\w{}":,]*)+$/i]|required'
+		]
+	],
 	'serviceOrder' => [
 		[
 			'field' => 'tempOrders',
