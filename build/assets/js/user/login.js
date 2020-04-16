@@ -13,7 +13,7 @@ $(function() {
 		var captcha = lang.GEN_ACTIVE_RECAPTCHA;
 		form = $('#login-form');
 		userCred = getCredentialsUser();
-		btnText = $(this).text();
+		btnText = $(this).html();
 		formInputTrim(form);
 		validateForms(form, {handleMsg: false});
 

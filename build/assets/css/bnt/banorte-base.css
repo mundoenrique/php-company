@@ -347,7 +347,7 @@ textarea.form-control {
 .custom-select {
 	display: inline-block;
 	padding-right: 1.75rem;
-	background: rgba(255,255,255,1) url("../../images/bdb/icon-chevron_down_gray.svg") right .75rem center / 14px 14px no-repeat;
+	background: rgba(255,255,255,1) url("../../images/bnt/icon-chevron_down_gray.svg") right .75rem center / 14px 14px no-repeat;
   -webkit-appearance: none;
   -moz-appearance: none;
 	appearance: none;
@@ -357,7 +357,7 @@ textarea.form-control {
 .custom-select:hover:not(:disabled) {
 	display: inline-block;
 	padding-right: 1.75rem;
-	background: rgba(255,255,255,1) url("../../images/bdb/icon-chevron_down_blue.svg") right .75rem center / 14px 14px no-repeat;
+	background: rgba(255,255,255,1) url("../../images/bnt/icon-chevron_down_blue.svg") right .75rem center / 14px 14px no-repeat;
   -webkit-appearance: none;
   -moz-appearance: none;
 	appearance: none;
@@ -1198,7 +1198,7 @@ textarea.form-control {
 /* Btn Search */
 
 .btn-search {
-  background-image: url("../../images/bdb/icon-searcher_gray.svg");
+  background-image: url("../../images/bnt/icon-searcher_gray.svg");
   background-position: center;
   background-repeat: no-repeat;
   border-radius: 0 20px 20px 0;
@@ -1212,7 +1212,7 @@ textarea.form-control {
 
 .btn-search:hover {
   background-color: var(--primary) !important;
-  background-image: url("../../images/bdb/icon-searcher_white.svg");
+  background-image: url("../../images/bnt/icon-searcher_white.svg");
   background-position: center;
   background-repeat: no-repeat;
   border-radius: 0 20px 20px 0;
@@ -1262,7 +1262,7 @@ textarea.form-control {
       rgba(246,243,241,.6),
       rgba(246,243,241,.6)
     ),
-    url("../../images/bdb/bg-content.png");
+    url("../../images/bnt/bg-content.png");
   background-repeat: no-repeat;
   background-size: contain;
 }
@@ -1272,7 +1272,7 @@ textarea.form-control {
       rgba(246,243,241,.6),
       rgba(246,243,241,.6)
     ),
-    url("../../images/bdb/bg-content.png") !important;
+    url("../../images/bnt/bg-content.png") !important;
   background-repeat: no-repeat !important;
   background-size: 57em !important;
 
@@ -2641,7 +2641,7 @@ td > button > i:hover{
 .dataTables_length select {
 	display: inline-block;
 	padding-right: 1.75rem;
-	background: rgba(255,255,255,1) url("../../images/bdb/icon-chevron_down_gray.svg") right .75rem center / 14px 14px no-repeat;
+	background: rgba(255,255,255,1) url("../../images/bnt/icon-chevron_down_gray.svg") right .75rem center / 14px 14px no-repeat;
   -webkit-appearance: none;
   -moz-appearance: none;
 	appearance: none;
@@ -2649,7 +2649,7 @@ td > button > i:hover{
 }
 
 .dataTables_length select:hover {
-	background: rgba(255,255,255,1) url("../../images/bdb/icon-chevron_down_blue.svg") right .75rem center / 14px 14px no-repeat;
+	background: rgba(255,255,255,1) url("../../images/bnt/icon-chevron_down_blue.svg") right .75rem center / 14px 14px no-repeat;
 }
 
 .dataTables_length select:disabled {
@@ -2657,7 +2657,7 @@ td > button > i:hover{
 }
 
 .dataTables_length select:disabled:hover {
-	background: var(--disabled-color) url("../../images/bdb/icon-chevron_down_gray.svg") right .75rem center / 14px 14px no-repeat;
+	background: var(--disabled-color) url("../../images/bnt/icon-chevron_down_gray.svg") right .75rem center / 14px 14px no-repeat;
 }
 
 .dataTables_length select option {
@@ -3304,7 +3304,7 @@ a.ui-button:active,
   text-align: center;
 	color: var(--secondary);
 	border: 0;
-  background: transparent url("../../images/bdb/icon-white-triangle-2-n-s.svg") no-repeat right .25rem center / 8px 10px;
+  background: transparent url("../../images/bnt/icon-white-triangle-2-n-s.svg") no-repeat right .25rem center / 8px 10px;
   -webkit-appearance: none;
   -moz-appearance: none;
 	appearance: none;
@@ -3444,7 +3444,7 @@ a.ui-button:active,
 	height: 100%;
 	z-index: 0;
 	opacity: .4;
-	background-image: url("../../images/bdb/bg-content.png");
+	background-image: url("../../images/bnt/bg-content.png");
 	background-repeat: no-repeat;
 	background-size: 35%;
 }
@@ -3485,7 +3485,7 @@ a.ui-button:active,
 
 .bg-img {
   background-image: linear-gradient(rgba(0,0,0,.8), rgba(0,0,0,.8)),
-    url("../../images/bdb/bg-loading.jpg");
+    url("../../images/bnt/bg-loading.jpg");
   height: 100vh;
   background-position: center;
   background-repeat: no-repeat;
@@ -3537,7 +3537,7 @@ a.ui-button:active,
   -o-transition: all .4s ease-in-out;
   -ms-transition: all .4s ease-in-out;
   transition: all .4s ease-in-out;
-  background: #fff url("../../images/bdb/bg-product.png");
+  background: #fff url("../../images/bnt/bg-product.png");
   background-position: right;
   background-repeat: no-repeat;
   background-size: 40%;
@@ -3583,13 +3583,13 @@ a.ui-button:active,
 	bottom: 20px;
 }
 .item-network.maestro {
-	background: transparent url("../../images/bdb/logo_maestro.svg") no-repeat center / cover;
+	background: transparent url("../../images/bnt/logo_maestro.svg") no-repeat center / cover;
 }
 .item-network.mastercard {
-	background: transparent url("../../images/bdb/logo_mastercard.svg") no-repeat center / cover;
+	background: transparent url("../../images/bnt/logo_mastercard.svg") no-repeat center / cover;
 }
 .item-network.visa {
-	background: transparent url("../../images/bdb/logo_visa.svg") no-repeat center / cover;
+	background: transparent url("../../images/bnt/logo_visa.svg") no-repeat center / cover;
 }
 
 .card-image {
