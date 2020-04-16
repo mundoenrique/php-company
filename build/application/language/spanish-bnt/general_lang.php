@@ -19,3 +19,4 @@ $lang['GEN_FOTTER_RIGHTS'] = '© Todos los derechos reservados. BANORTE - ';
 $lang['GEN_FOTTER_ICON_I'] = 'banorte-blanco.png';
 $lang['GEN_FOTTER_ICON_R'] = 'img-pci_compliance.svg';
 $lang['GEN_FOTTER_MARK'] = 'img-ma.svg';
+$lang['GEN-DESCR-BANCO'] = 'Banorte';
