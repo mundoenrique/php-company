@@ -157,7 +157,7 @@
 									<?= lang('GEN_BTN_AUTHORIZE'); ?>
 								</button>
 							</div>
-							<?php if($this->verify_access->verifyAuthorization('TEBAUT', 'TEBELI')): ?>
+							<?php if($this->verify_access->verifyAuthorization('TEBAUT', 'TEBELI') && $authorizeAttr->allBulk == 'toggle-all'): ?>
 							<div class="col-3 col-lg-auto">
 								<button id="del-auth-bulk-btn" class="btn btn-primary btn-small btn-loading flex mx-auto">
 									<?= lang('GEN_BTN_DELETE'); ?>

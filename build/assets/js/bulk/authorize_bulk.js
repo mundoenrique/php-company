@@ -58,6 +58,7 @@ $(function () {
 				"checkboxes": {"selectRow": true},
 				'visible': auth != false,
       	render: function (data, type, row) {
+					console.log(data)
 					var content = '';
 					if(data != '') {
 						content = '<button class="btn px-0" title="'+lang.GEN_BTN_DISASS_AUTH+'" data-toggle="tooltip">';
