@@ -37,6 +37,17 @@
        url('../../fonts/novopayment-glyphs-webfont.svg') format('svg');
 }
 
+@font-face {
+  font-family: "novoglyphs";
+  font-weight: normal;
+	font-style: normal;
+	src: url('../../fonts/novoglyphs-webfont.eot?#iefix');
+  src: url('../../fonts/novoglyphs-webfont.eot?#iefix') format('eot'),
+       url('../../fonts/novoglyphs-webfont.woff') format('woff'),
+       url('../../fonts/novoglyphs-webfont.ttf') format('truetype'),
+       url('../../fonts/novoglyphs-webfont.svg') format('svg');
+}
+
 :root {
   /* Colors */
   --primary: #012c71;
@@ -88,6 +99,7 @@
 
   --font-family-base: 'Open Sans', sans-serif;
   --font-family-monospace: monospace, "Courier New";
+  --font-family-novoglyphs: 'novoglyphs';
   --font-size-base: .875rem;
   --font-weight-base: 400;
   --line-height-base: 1.5;

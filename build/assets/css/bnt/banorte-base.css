@@ -2005,6 +2005,13 @@ i[class*=" icon-"]:before {
 	vertical-align: middle;
 }
 
+span[class^="icon-"].novoglyphs,
+span[class*=" icon-"].novoglyphs,
+i[class^="icon-"].novoglyphs,
+i[class*=" icon-"].novoglyphs {
+	font-family: var(--font-family-novoglyphs)
+}
+
 .icon-view:before          { content: "\e000"; }
 .icon-edit:before          { content: "\e001"; }
 .icon-remove:before        { content: "\e002"; }
@@ -2014,16 +2021,9 @@ i[class*=" icon-"]:before {
 .icon-download:before      { content: "\e008"; }
 .icon-upload:before        { content: "\e009"; }
 .icon-user:before          { content: "\e015"; }
-.icon-key:before 					 { content: "\e01a"; }
-.icon-lock:before 				 { content: "\e01b"; }
-.icon-unlock:before 			 { content: "\e01c"; }
 .icon-card:before          { content: "\e029"; }
+.icon-credit-card:before	 { content: "\e031"; }
 .icon-thumbs-up:before     { content: "\e032"; }
-.icon-arrow-up:before      { content: "\e03b"; }
-.icon-arrow-down:before    { content: "\e03c"; }
-.icon-arrow-left:before    { content: "\e03d"; }
-.icon-arrow-right:before   { content: "\e03e"; }
-.icon-chevron-up:before    { content: "\e03f"; }
 .icon-chevron-down:before  { content: "\e040"; }
 .icon-chevron-left:before  { content: "\e041"; }
 .icon-chevron-right:before { content: "\e042"; }
@@ -2031,9 +2031,6 @@ i[class*=" icon-"]:before {
 .icon-hand-down:before     { content: "\e044"; }
 .icon-hand-left:before     { content: "\e045"; }
 .icon-hand-right:before    { content: "\e046"; }
-.icon-chart-pie:before  	 { content: "\e04c"; }
-.icon-car:before					 { content: "\e04e"; }
-.icon-bag:before 					 { content: "\e04f"; }
 .icon-food:before 				 { content: "\e050"; }
 .icon-film:before 				 { content: "\e051"; }
 .icon-lab:before 					 { content: "\e052"; }
@@ -2044,9 +2041,24 @@ i[class*=" icon-"]:before {
 .icon-file-blank:before 	 { content: "\e057"; }
 .icon-file-graph:before 	 { content: "\e058"; }
 .icon-file-pdf:before 		 { content: "\e059"; }
-.icon-file-word:before     { content: "\e05a"; }
-.icon-file-excel:before 	 { content: "\e05b"; }
 .icon-spinner:before 			 { content: "\e060"; }
+.icon-balance:before 			 { content: "\e072"; }
+.icon-key:before 					 { content: "\e01a"; }
+.icon-file-word:before     { content: "\e05a"; }
+.icon-lock:before 				 { content: "\e01b"; }
+.icon-arrow-up:before      { content: "\e03b"; }
+.icon-info:before        	 { content: "\e04b"; }
+.icon-file-excel:before 	 { content: "\e05b"; }
+.icon-unlock:before 			 { content: "\e01c"; }
+.icon-arrow-down:before    { content: "\e03c"; }
+.icon-chart-pie:before  	 { content: "\e04c"; }
+.icon-arrow-left:before    { content: "\e03d"; }
+.icon-card-fee:before			 { content: "\e08d"; }
+.icon-arrow-right:before   { content: "\e03e"; }
+.icon-car:before					 { content: "\e04e"; }
+.icon-chevron-up:before    { content: "\e03f"; }
+.icon-bag:before 					 { content: "\e04f"; }
+
 
 .icon-user{
 	color:  var(--tertiary);
@@ -2464,7 +2476,7 @@ i[class*=" icon-"]:before {
 	display: block;
 	position: relative;
 	line-height: 2.8em;
-	width: 13.1em !important;
+	width: 13.7em !important;
 	font-size: var(--h6);
 	-webkit-transition: all .25s linear;
 	-moz-transition: all .25s linear;
@@ -2483,7 +2495,7 @@ i[class*=" icon-"]:before {
 
 .dropdown-user li a {
 	display: block;
-	width: 10rem !important;
+	width: 10.3rem !important;
 	color: var(--tertiary);
 	padding: .1rem 1rem;
 }
@@ -3014,13 +3026,13 @@ ul.steps li.step-item i {
 .ui-icon,
 .ui-widget-content .ui-icon,
 .ui-widget-header .ui-icon {
-	background-image: url("../../images/ui-icons_444444_256x240.png");
+	background-image: url("../images/ui-icons_444444_256x240.png");
 }
 .ui-datepicker .ui-icon {
-	background-image: url("../../images/ui-icons_ffffff_256x240.png");
+	background-image: url("../images/ui-icons_ffffff_256x240.png");
 }
 .ui-button .ui-icon {
-	background-image: url("../../images/ui-icons_777777_256x240.png");
+	background-image: url("../images/ui-icons_777777_256x240.png");
 }
 .ui-icon-alert { background-position: 0 -144px; }
 .ui-icon-info { background-position: -16px -144px; }
@@ -3789,6 +3801,11 @@ td > table.detail-lot {
 	white-space:nowrap;
 	max-width:12em;
 	overflow:hidden;
+}
+
+.img-product-list {
+	width: 84px;
+	height: 55px;
 }
 
 .img-brand-list {
