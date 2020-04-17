@@ -183,7 +183,7 @@ function format (bulk) {
 		body+= 	'<td>'+value.bulkStatus+'</td>';
 		body+= 	'<td>'+value.bulkAmount+'</td>';
 		body+= 	'<td>'+value.bulkCommisAmount+'</td>';
-		body+= 	'<td>'+value.bulkTotalAmount+'<form id="detail-orders-form" class="form-group" action="'+baseURL+'detalle-orden-de-servicio" method="post"><input type="hidden" id="numberOrder" name="numberOrder" value='+value.bulkacidlote+'></form></td>';
+		body+= 	'<td>'+value.bulkTotalAmount+'<form id="detail-orders-form" class="form-group mb-0" action="'+baseURL+'detalle-orden-de-servicio" method="post"><input type="hidden" id="numberOrder" name="numberOrder" value='+value.bulkacidlote+'></form></td>';
 		body+= '</tr>';
 
 	})

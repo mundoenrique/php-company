@@ -44,7 +44,7 @@
 							<input id="datepicker_end" name="datepicker_end" class="form-control" name="datepicker" type="text" placeholder="DD/MM/AAA" readonly>
 							<div class="help-block "></div>
 						</div>
-						<div class="form-group col-4 col-lg-2 col-xl-3">
+						<div class="form-group col-4 col-lg-3 col-xl-3">
 							<label><?= lang('GEN_TABLE_STATUS'); ?></label>
 							<select id="status-order" name="status-order" class="select-box custom-select flex h6 w-100 form-control">
 								<?php foreach($orderStatus AS $pos => $value): ?>
@@ -94,7 +94,7 @@
 								<td><?= $list->OrderTax; ?></td>
 								<td><?= $list->OrderAmount; ?></td>
 								<td><?= $list->OrderDeposit; ?></td>
-								<td class="p-0 flex justify-center">
+								<td class="p-0 nowrap">
 								  <?php if($this->verify_access->verifyAuthorization('TEBORS')):?>
 									<button class="btn mx-1 px-0 details-control" title="<?= lang('GEN_BTN_SEE'); ?>" data-toggle="tooltip">
 										<i class="icon icon-find" aria-hidden="true"></i>
