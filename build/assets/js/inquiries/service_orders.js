@@ -145,7 +145,7 @@ $(function() {
 				}
 				inputModal = '<form id="delete-bulk-form" class="form-group">';
 				inputModal+= '<span class="regular"> Por favor ingresa la contraseña para anular la orden de servicio </span>';
-				inputModal+= 		'<input id="password" class="form-control mt-2 h6 col-9" name="password" type="password" autocomplete="off" placeholder="'+lang.GEN_PLACE_PASSWORD+'">';
+				inputModal+= 		'<input id="password" class="form-control mt-2 h6 col-9 pwd-input" name="password" type="password" autocomplete="off" placeholder="'+lang.GEN_PLACE_PASSWORD+'">';
 				inputModal+= 		'<div class="help-block"></div>';
 				inputModal+= '</form>';
 				notiSystem('Anular orden de servicio', inputModal, lang.GEN_ICON_INFO, data);

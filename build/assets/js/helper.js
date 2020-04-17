@@ -11,11 +11,23 @@ var dataTableLang;
 
 $(function () {
 	$('input[type=text], input[type=password], input[type=email]').attr('autocomplete', 'off');
-	/**
- * @info Maneja llamado del modal para petiociones submit
- * @author J. Enrique Peñaloza Piñero
- * @date November 22nd, 2019
- */
+	var pwdAction = $('.pwd-action');
+
+	pwdAction.on('click', function () {
+		var pwdInput = $(this).closest('div.form-group').find('.pwd-input')
+		var inputType = pwdInput.attr('type');
+
+		if (pwdInput.val() != '') {
+			if (inputType === 'password') {
+				pwdInput.attr('type', 'text');
+				$(this).attr('title', lang.GEN_HIDE_PASS);
+			} else {
+				pwdInput.attr('type', 'password');
+				$(this).attr('title', lang.GEN_SHOW_PASS);
+			}
+		}
+	});
+
 	if (code > 2) {
 		notiSystem(title, msg, icon, data)
 	}

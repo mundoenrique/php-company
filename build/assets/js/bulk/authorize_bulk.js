@@ -139,7 +139,7 @@ $(function () {
 				}
 				inputModal = '<form id="delete-bulk-form" class="form-group">';
 				inputModal+= '<span class="regular"> '+textModal+': '+bulkNum+'</span>';
-				inputModal+= 		'<input id="password" class="form-control mt-2 h6 col-9" name="password" type="password" ';
+				inputModal+= 		'<input id="password" class="form-control mt-2 h6 col-9 pwd-input" name="password" type="password" ';
 				inputModal+=		'autocomplete="off" placeholder="'+lang.GEN_PLACE_PASSWORD+'">';
 				inputModal+= 		'<div class="help-block"></div>';
 				inputModal+= '</form>';

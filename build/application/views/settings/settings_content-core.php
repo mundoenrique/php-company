@@ -120,9 +120,9 @@
 													<div class="form-group col-12 col-lg-12">
 														<label for="currentUserPwd">Contraseña actual</label>
 														<div class="input-group">
-															<input id="currentUserPwd" class="form-control" type="password" name="currentUserPwd">
+															<input id="currentUserPwd" class="form-control pwd-input" type="password" name="currentUserPwd">
 															<div class="input-group-append">
-																<span id="pwd-addon" class="input-group-text" title="Clic aquí para mostrar/ocultar contraseña"><i
+																<span id="pwd-addon" class="input-group-text pwd-action" title="Clic aquí para mostrar/ocultar contraseña"><i
 																		class="icon-view mr-0"></i></span>
 															</div>
 														</div>
@@ -131,9 +131,9 @@
 													<div class="form-group col-12 col-lg-6">
 														<label for="newUserPwd">Nueva Contraseña</label>
 														<div class="input-group">
-															<input id="newUserPwd" class="form-control" type="password" name="newUserPwd">
+															<input id="newUserPwd" class="form-control pwd-input" type="password" name="newUserPwd">
 															<div class="input-group-append">
-																<span id="pwd-addon" class="input-group-text" title="Clic aquí para mostrar/ocultar contraseña"><i
+																<span id="pwd-addon" class="input-group-text pwd-action" title="Clic aquí para mostrar/ocultar contraseña"><i
 																		class="icon-view mr-0"></i></span>
 															</div>
 														</div>
@@ -142,9 +142,9 @@
 													<div class="form-group col-12 col-lg-6">
 														<label for="confirmUserPwd">Confirmar Contraseña</label>
 														<div class="input-group">
-															<input id="confirmUserPwd" class="form-control" type="password" name="confirmUserPwd">
+															<input id="confirmUserPwd" class="form-control pwd-input" type="password" name="confirmUserPwd">
 															<div class="input-group-append">
-																<span id="pwd-addon" class="input-group-text" title="Clic aquí para mostrar/ocultar contraseña"><i
+																<span id="pwd-addon" class="input-group-text pwd-action" title="Clic aquí para mostrar/ocultar contraseña"><i
 																		class="icon-view mr-0"></i></span>
 															</div>
 														</div>
@@ -311,7 +311,7 @@
 
 										<div class="row flex mb-4 mt-2 justify-end items-center">
 											<div class="col-6 col-lg-4 col-xl-3">
-												<input id="password" class="form-control" type="password" placeholder="Ingresa tu contraseña">
+												<input id="password" class="form-control pwd-input" type="password" placeholder="Ingresa tu contraseña">
 											</div>
 											<div class="col-3 col-lg-2 col-xl-auto">
 												<button class="btn btn-primary btn-small flex mx-auto">Limpiar</button>
@@ -459,7 +459,7 @@
 
 										<div class="row flex mb-4 mt-2 pl-5 justify-end items-center">
 											<div class="col-7 col-lg-4 col-xl-3">
-												<input id="password1" class="form-control" type="password" placeholder="Ingresa tu contraseña">
+												<input id="password1" class="form-control pwd-input" type="password" placeholder="Ingresa tu contraseña">
 											</div>
 											<div class="col-auto">
 												<button class="btn btn-primary btn-small flex mx-auto">Agregar</button>
