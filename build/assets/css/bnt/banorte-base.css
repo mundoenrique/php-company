@@ -809,7 +809,8 @@ textarea.form-control {
 }
 
 .input-group-append {
-  margin-left: -1px;
+	margin-left: -1px;
+	cursor: pointer;
 }
 
 .input-group-text {
