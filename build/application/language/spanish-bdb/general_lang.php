@@ -17,6 +17,7 @@ $lang['GEN_TABLE_SELECT_AUTH'] = 'single';
 $lang['GEN_TABLE_COMMISSION'] = 'Valor comisión';
 $lang['GEN_TABLE_VAT'] = 'Valor IVA';
 $lang['GEN_TABLE_AMOUNT_SO'] = 'Valor OS';
+$lang['GEN_TABLE_TOTAL_AMOUNT'] = 'Valor Total';
 $lang['GEN_TABLE_DEPOSIT_AMOUNT'] = 'Valor depositado';
 $lang['GEN_TABLE_AMOUNT'] = 'Valor';
 $lang['GEN_TABLE_DNI'] = 'Cédula';
