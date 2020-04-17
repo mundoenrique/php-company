@@ -29,7 +29,6 @@ $lang['GEN_CEO_USER_MANUAL'] = 'Manual de Usuario Conexión Empresas Online';
 $lang['GEN_GL_USER_MANUAL'] = 'Manual de Usuario Gestor de Lotes';
 //FOOTER
 $lang['GEN_FOTTER_RIGHTS'] = '© Todos los derechos reservados. Banco de Bogotá - ';
-$lang['GEN_FOTTER_ICON_I'] = 'img-bogota_white.svg';
-$lang['GEN_FOTTER_ICON_R'] = 'img-pci_compliance.svg';
+$lang['GEN_FOTTER_IMAGE_L'] = 'img-bogota_white.svg';
+$lang['GEN_FOTTER_IMAGE_R'] = 'img-pci_compliance.svg';
 $lang['GEN_FOTTER_MARK'] = 'img-mark.svg';
-$lang['GEN-DESCR-BANCO'] = 'de Bogotá';

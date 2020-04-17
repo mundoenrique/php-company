@@ -18,7 +18,7 @@ $lang['GEN_GL_USER_MANUAL'] = 'Manual de Usuario Gestor de Lotes';
 $lang['GEN-IMAGEN-LOGIN'] = 'img-ref.jpg';
 //FOOTER
 $lang['GEN_FOTTER_RIGHTS'] = '© Todos los derechos reservados. Grupo Financiero Banorte - ';
-$lang['GEN_FOTTER_ICON_I'] = 'img-banorte_white.svg';
-$lang['GEN_FOTTER_ICON_R'] = 'img-pci_compliance.svg';
+$lang['GEN_FOTTER_IMAGE_L'] = 'img-banorte_white.svg';
+$lang['GEN_FOTTER_IMAGE_R'] = 'img-pci_compliance.svg';
 $lang['GEN_FOTTER_MARK'] = 'img-ma.svg';
-$lang['GEN-DESCR-BANCO'] = 'Banorte';
+
