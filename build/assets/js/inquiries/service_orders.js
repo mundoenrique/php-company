@@ -61,7 +61,7 @@ $(function() {
 				$('#datepicker_start').datepicker('option', 'maxDate', selectedDate);
 			}
 
-			if($('#datepicker_start').val() != '' && $('#datepicker_end').val() != '') {
+			if($('#datepicker_start').val() != '' || $('#datepicker_end').val() != '') {
 				$('input:radio').prop('checked', false);
 				firstDate = $('#datepicker_start').val();
 				lastdate = $('#datepicker_end').val();
@@ -71,8 +71,8 @@ $(function() {
 
 	$(":radio").on("change", function() {
 		$('#datepicker_start, #datepicker_end').datepicker('setDate', null);
+		form.find('.form-control').removeClass('has-error')
 		$('.help-block').text('');
-		form.validate().resetForm();
 		var timeBefore = parseInt($(this).val());
 		var initDate = new Date();
 		var finalDate = new Date();
@@ -85,12 +85,12 @@ $(function() {
 
 	serviceOrdersBtn.on('click', function(e) {
 		e.preventDefault();
+		form.removeAttr('novalidate')
 		var btnAction = $(this);
 		var statusOrder = $('#status-order');
 		btnText = btnAction.text().trim();
 		formInputTrim(form);
 		validateForms(form);
-
 		if(form.valid()) {
 			btnAction.html(loader);
 			data = {

@@ -13,7 +13,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 		log_message('INFO', 'NOVO Inquiries Model Class Initialized');
 	}
 	/**
-	 * @info Método para obtener las ordenes de servicio
+	 * @info Método para obtener la lista de estados de las ordenes de servicio
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date Janury 09th, 2019
 	 */

@@ -13,7 +13,7 @@ class Novo_Inquiries extends NOVO_Controller {
 		log_message('INFO', 'NOVO Inquiries Controller Class Initialized');
 	}
 	/**
-	 * @info Método para renderizar las empresas asociadas al usuario
+	 * @info Método para renderizar la lista de ordenes de servicio
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date November 05th, 2019
 	 */
@@ -22,7 +22,6 @@ class Novo_Inquiries extends NOVO_Controller {
 		log_message('INFO', 'NOVO Inquiries: serviceOrders Method Initialized');
 
 		$view = 'serviceOrders';
-
 		array_push(
 			$this->includeAssets->cssFiles,
 			"third_party/dataTables-1.10.20"
@@ -47,7 +46,7 @@ class Novo_Inquiries extends NOVO_Controller {
 		if($this->session->flashdata('response-order')) {
 			$result_order = $this->session->flashdata('response-order');
 			$this->responseAttr($result_order);
-		}else{
+		} else {
 			$this->responseAttr();
 		}
 
@@ -60,7 +59,6 @@ class Novo_Inquiries extends NOVO_Controller {
 		$this->views = ['inquiries/'.$view];
 		$this->loadView($view);
 	}
-
 	/**
 	 * @info Método para renderizar el detalle de consulta de lotes
 	 * @author Luis Molina
@@ -85,7 +83,7 @@ class Novo_Inquiries extends NOVO_Controller {
 		if($this->session->flashdata('response-msg-detail-order')) {
 			$result_detail_order = $this->session->flashdata('response-msg-detail-order');
 			$this->responseAttr($result_detail_order);
-		}else{
+		} else {
 			$this->responseAttr();
 		}
 
