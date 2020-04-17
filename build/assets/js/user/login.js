@@ -1,5 +1,5 @@
 'use strict'
-$(function() {
+$(function () {
 	var userCred, forWho, forWhere;
 	var userLogin = $('#user_login');
 	var userPass = $('#user_pass');
@@ -7,7 +7,7 @@ $(function() {
 	insertFormInput(false);
 	inputDisabled(false);
 
-	$('#login-btn').on('click', function(e) {
+	$('#login-btn').on('click', function (e) {
 		e.preventDefault();
 		$(".general-form-msg").html('');
 		var captcha = lang.GEN_ACTIVE_RECAPTCHA;
@@ -15,33 +15,33 @@ $(function() {
 		userCred = getCredentialsUser();
 		btnText = $(this).html();
 		formInputTrim(form);
-		validateForms(form, {handleMsg: false});
+		validateForms(form, { handleMsg: false });
 
-		if(form.valid()) {
+		if (form.valid()) {
 			insertFormInput(true);
 			inputDisabled(true);
 			$(this).html(loader);
-			if(captcha) {
-				grecaptcha.ready(function() {
+			if (captcha) {
+				grecaptcha.ready(function () {
 					grecaptcha
-					.execute('6Lejt6MUAAAAANd7KndpsZ2mRSQXuYHncIxFJDYf', {action: 'login'})
-					.then(function(token) {
-						if(token) {
-							validateLogin(token);
-						}
-					}, function(token) {
-						if(!token) {
-							icon = lan.GEN_ICON_WARNING;
-							data = {
-								btn1: {
-									link: baseURL+'inicio',
-									action: 'redirect'
-								}
-							};
-							notiSystem(false, false, icon, data);
-							restartFormLogin();
-						}
-					});
+						.execute('6Lejt6MUAAAAANd7KndpsZ2mRSQXuYHncIxFJDYf', { action: 'login' })
+						.then(function (token) {
+							if (token) {
+								validateLogin(token);
+							}
+						}, function (token) {
+							if (!token) {
+								icon = lan.GEN_ICON_WARNING;
+								data = {
+									btn1: {
+										link: baseURL + 'inicio',
+										action: 'redirect'
+									}
+								};
+								notiSystem(false, false, icon, data);
+								restartFormLogin();
+							}
+						});
 				});
 			} else {
 				validateLogin();
@@ -62,15 +62,15 @@ $(function() {
 		inputDisabled(false);
 		$('#login-btn').html(btnText);
 		userPass.val('');
-		if(country == 'bp') {
+		if (country == 'bp') {
 			userLogin.val('');
 		}
-		setTimeout(function() {
+		setTimeout(function () {
 			$("#user_login").hideBalloon();
 		}, 2000);
 	};
 
-	function getCredentialsUser(){
+	function getCredentialsUser() {
 		ceo_cook = getCookieValue();
 		cypherPass = cryptoPass(userPass.val());
 
@@ -90,25 +90,25 @@ $(function() {
 			currentTime: new Date().getHours(),
 			token: token || ''
 		}
-		callNovoCore(verb, who, where, data, function(response) {
+		callNovoCore(verb, who, where, data, function (response) {
 			responseCodeLogin[response.code](response);
 		})
 		forWho = null; forWhere = null
 	}
 
 	const responseCodeLogin = {
-		0: function(response) {
-			if(response.data) {
+		0: function (response) {
+			if (response.data) {
 				$(location).attr('href', response.data)
 			} else {
 				$('#system-info').dialog('close');
 				$('#accept')
-				.html(response.msg)
-				.attr('disabled', false);
+					.html(response.msg)
+					.attr('disabled', false);
 				restartFormLogin();
 			}
 		},
-		1: function(response){
+		1: function (response) {
 			userLogin.showBalloon({
 				html: true,
 				classname: response.className,
@@ -117,43 +117,43 @@ $(function() {
 			});
 			restartFormLogin();
 		},
-		2: function() {
+		2: function () {
 			userCred.active = 1; forWhere = lang.GEN_LOGIN;
 			validateLogin();
 		},
-		3: function(response) {
+		3: function (response) {
 			var btn = response.data.btn1;
-			if(btn.action == 'logout') {
+			if (btn.action == 'logout') {
 				var oldID = $('#accept').attr('id');
 				$('#accept').attr('id', 'closed-btn');
 			} else {
 				restartFormLogin();
 			}
 			notiSystem(response.title, response.msg, response.icon, response.data);
-			if(btn.action == 'logout') {
-				$('#closed-btn').on('click', function() {
+			if (btn.action == 'logout') {
+				$('#closed-btn').on('click', function () {
 					$(this)
-					.html(loader)
-					.attr('disabled', true)
-					.attr('id', oldID);
+						.html(loader)
+						.attr('disabled', true)
+						.attr('id', oldID);
 					forWho = btn.link.who; forWhere = btn.link.where;
 					validateLogin();
 				});
 				$('#login-btn').html(btnText);
 			}
 		},
-		4: function() {
+		4: function () {
 			$('#login-btn').html(btnText);
 		}
 	}
 
-	$('#user_login, #user_pass').on('focus keypress', function() {
+	$('#user_login, #user_pass').on('focus keypress', function () {
 		$(this).removeClass('validate-error');
 		verifyPassValidate();
 	});
 
 	function verifyPassValidate() {
-		if(userPass.val() != '' && validatePass.test(userPass.val())) {
+		if (userPass.val() != '' && validatePass.test(userPass.val())) {
 			userPass.removeClass('has-error');
 		}
 	}

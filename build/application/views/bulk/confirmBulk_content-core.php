@@ -71,7 +71,7 @@
 				<div class="flex flex-column mb-4 mt-4 px-5 justify-center items-center">
 					<div class="form-group mb-3 col-5 col-lg-4 col-xl-3">
 						<input id="bulkTicked" name="bulkTicked" type="hidden" value="<?= $detailBulk->bulkTicked ?>">
-						<input id="password" name="password" class="form-control" type="password" placeholder="<?= lang('GEN_PLACE_PASSWORD'); ?>">
+						<input id="password" name="password" class="form-control pwd-input" type="password" placeholder="<?= lang('GEN_PLACE_PASSWORD'); ?>">
 						<div class="help-block"></div>
 					</div>
 					<div class="flex flex-row">

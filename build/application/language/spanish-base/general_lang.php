@@ -271,3 +271,5 @@ $lang['GEN_BROWSER_INTERNET_EXPLORER'] = 'Internet Explorer';
 $lang['GEN_BROWSER_INTERNET_EXPLORER_VERSION'] = 'Version 11+';
 $lang['GEN_FINISH_MESSAGE'] = 'Gracias por usar nuestros servicios';
 $lang['PRODUCTS_DETAIL_TITLE']= 'Detalle del producto';
+$lang['GEN_SHOW_PASS'] = 'Mostrar contraseña';
+$lang['GEN_HIDE_PASS'] = 'Ocultar contraseña';
