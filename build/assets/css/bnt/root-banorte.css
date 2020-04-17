@@ -50,8 +50,8 @@
 
 :root {
   /* Colors */
-  --primary: #012c71;
-  --secondary: #ffffff;
+  --primary: #EB0029;
+  --secondary: #F1F1F1;
   --tertiary: #435168;
 
   --success: #007e33;
@@ -59,7 +59,7 @@
   --warning: #ff8800;
   --danger: #cc0000;
 
-  --yellow: #ffb400;
+  --yellow: #ffffff;
   --vista-blue: #7ed3b2;
   --trikemaster: #8b4f80;
 	--pink-salmon: #ff8c94;
@@ -67,17 +67,17 @@
   --black: #111111;
   --bg-color: #f6f3f1;
 
-	--widget-color: #f4f4f4;
+	--widget-color: #ffffff;
 	--shadows-color: #f2f2f2;
-  --border-color: #b5bac3;
-  --border-color-2: #d8d8d8;
-  --text-color: #7b7b7b;
+  --border-color: #DDDDDD;
+  --border-color-2: #DDDDDD;
+  --text-color: #DDDDDD;
   --placeholder-color: #bcc0c6;
 	--disabled-color: #ececec;
 
-  --label-color: #012c71;
+  --label-color: #4E4044;
   --primary-shade: #012c71a6;
-  --primary-tint: #1a417f;
+  --primary-tint: #D10024;
 
   /* Type Scale */
   --h00: 2.5rem;
@@ -127,8 +127,8 @@
 
   /* Border */
   --border-width: 1px;
-  --border-radius: 5px;
-  --btn-border-radius: 20px;
+  --border-radius: 0;
+  --btn-border-radius: 0;
 
   /* Buttons */
   --button-font-family: inherit;

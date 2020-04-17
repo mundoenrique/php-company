@@ -31,4 +31,9 @@
 			</form>
 		</div>
 	</div>
+	<? if ($countryUri == 'bnt'): ?>
+				<div class="flex pr-2 pr-lg-0 img-log">
+				<img  src="<?= $this->asset->insertFile($countryUri.'/'.lang('GEN-IMAGEN-LOGIN')); ?> " alt="Imagen de referencia">
+				</div>
+			<? endif; ?>
 </div>
