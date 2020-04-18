@@ -40,6 +40,7 @@ class Novo_Inquiries extends NOVO_Controller {
 
 		if($this->session->flashdata('serviceOrdersList')) {
 			$orderList = $this->session->flashdata('serviceOrdersList');
+			$this->session->set_flashdata('serviceOrdersList', $orderList);
 			$renderOrderList = TRUE;
 		}
 
@@ -60,6 +61,41 @@ class Novo_Inquiries extends NOVO_Controller {
 		$this->loadView($view);
 	}
 	/**
+	 * @info Método para autorizar un lote
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date December 25th, 2019
+	 */
+	public function bulkDetail()
+	{
+		log_message('INFO', 'NOVO Inquiries: bulkDetail Method Initialized');
+
+		/* if(!isset($this->request->bulkId) && !$this->session->flashdata('detailServiceOrders'))  {
+			redirect(base_url('detalle-producto'), 'location');
+		} */
+
+
+		$view = 'bulkDetail';
+		$response = $this->loadModel($this->request);
+		$this->responseAttr($response);
+		array_push(
+			$this->includeAssets->cssFiles,
+			"third_party/dataTables-1.10.20"
+		);
+		array_push(
+			$this->includeAssets->jsFiles,
+			"third_party/dataTables-1.10.20",
+			"inquiries/bulk-detail"
+		);
+
+		foreach($response->data->bulkInfo AS $row => $info) {
+			$this->render->$row = $info;
+		}
+
+		$this->render->titlePage = lang('GEN_DETAIL_BULK_TITLE');
+		$this->views = ['inquiries/'.$view];
+		$this->loadView($view);
+	}
+	/**
 	 * @info Método para renderizar el detalle de consulta de lotes
 	 * @author Luis Molina
 	 * @date Febrero 29Sat, 2020
@@ -68,7 +104,7 @@ class Novo_Inquiries extends NOVO_Controller {
 	{
 		log_message('INFO', 'NOVO Inquiries: detailServiceOrders Method Initialized');
 
-		if(!isset($this->request->numberOrder) && !$this->session->flashdata('detailServiceOrders'))  {
+		if(!isset($this->request->bulkId) && !$this->session->flashdata('detailServiceOrders'))  {
 			redirect(base_url('detalle-producto'), 'location');
 		}
 

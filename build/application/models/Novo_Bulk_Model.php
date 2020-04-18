@@ -252,7 +252,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 				case 0:
 					$this->response->msg = novoLang(lang('BULK_SUCCESS'), substr($dataRequest->rawName, 0, 15).'...');
 					$this->response->icon = lang('GEN_ICON_SUCCESS');
-					$this->response->data['btn1']['link'] = base_url('cargar-lotes');
+					$this->response->data['btn1']['link'] = 'cargar-lotes';
 					$respLoadBulk = TRUE;
 					break;
 				case -108:
@@ -260,7 +260,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 				case -256:
 				case -21:
 					$this->response->msg = lang('BULK_NO_LOAD');
-					$this->response->data['btn1']['link'] = base_url('cargar-lotes');
+					$this->response->data['btn1']['link'] = 'cargar-lotes';
 					$respLoadBulk = TRUE;
 					break;
 				case -280:
@@ -474,7 +474,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 				$this->response->title = lang('BULK_CONFIRM_TITLE');
 				$this->response->msg = novolang(lang('BULK_CONFIRM_SUCCESS'), $bulkConfirmInfo->numLote);
 				$this->response->icon = lang('GEN_ICON_SUCCESS');
-				$this->response->data['btn1']['link'] = base_url(lang('GEN_LINK_BULK_AUTH'));
+				$this->response->data['btn1']['link'] = lang('GEN_LINK_BULK_AUTH');
 				break;
 			case -1:
 				$this->response->code = 0;
@@ -725,164 +725,6 @@ class Novo_Bulk_Model extends NOVO_Model {
 		}
 
 		return $this->responseToTheView('DisassConfirmBulk');
-	}
-	/**
-	 * @info Ver el detalle de los lotes confirmados
-	 * @author J. Enrique Peñaloza Piñero
-	 * @date February 09th, 2020
-	 */
-	public function callWs_ConfirmBulkdetail_Bulk($dataRequest)
-	{
-		log_message('INFO', 'NOVO Bulk Model: ConfirmBulkdetail Method Initialized');
-
-		$this->className = 'com.novo.objects.MO.AutorizarLoteMO';
-		$this->dataAccessLog->modulo = 'Lotes';
-		$this->dataAccessLog->function = 'Autorización de lotes';
-		$this->dataAccessLog->operation = 'Ver detalle del lote';
-
-		$this->dataRequest->idOperation = 'detalleLote';
-		$this->dataRequest->acidlote = $dataRequest->bulkId;
-
-		$response = $this->sendToService('ConfirmBulkdetail');
-
-		$detailInfo = [
-			'fiscalId' => '--',
-			'enterpriseName' => '--',
-			'bulkType' => '--',
-			'bulkTypeText' => '--',
-			'bulkNumber' => '--',
-			'totalRecords' => '--',
-			'loadUserName' => '--',
-			'bulkDate' => '--',
-			'bulkStatus' => '--',
-			'bulkStatusText' => '--',
-			'bulkAmount' => '--',
-			'bulkHeader' => [],
-			'bulkRecords' => [],
-		];
-
-		switch ($this->isResponseRc) {
-			case 0:
-				$this->response->code = 0;
-				$detailInfo['fiscalId'] = $response->acrif;
-				$detailInfo['enterpriseName'] = mb_strtoupper(mb_strtolower($response->acnomcia));
-				$detailInfo['bulkType'] = $response->ctipolote;
-				$detailInfo['bulkTypeText'] = mb_strtoupper(mb_strtolower($response->acnombre));
-				$detailInfo['bulkNumber'] = $response->acnumlote;
-				$detailInfo['totalRecords'] = $response->ncantregs;
-				$detailInfo['loadUserName'] = mb_strtoupper(mb_strtolower($response->accodusuarioc));
-				$detailInfo['bulkDate'] = $response->dtfechorcarga;
-				$detailInfo['bulkStatus'] = $response->cestatus;
-				$detailInfo['bulkStatusText'] = ucfirst(mb_strtolower($response->status));
-				$detailInfo['bulkAmount'] = $response->montoNeto;
-				$bulkRecordsHeader = [];
-
-				switch($response->ctipolote) {
-					case '1':
-					case '10':
-						if(isset($response->registrosLoteEmision) && count($response->registrosLoteEmision) > 0) {
-							$bulkRecordsHeader = [lang('GEN_TABLE_DNI'), lang('GEN_TABLE_NAME_LASTNAME'), lang('GEN_TABLE_STATUS')];
-
-							foreach($response->registrosLoteEmision AS $records) {
-								$record = new stdClass();
-								foreach($records AS $pos => $value) {
-									switch ($pos) {
-										case 'idExtPer':
-											$record->cardHoldId = $value;
-											break;
-										case 'idExtEmp':
-											if(!isset($records->idExtPer)) {
-												$bulkRecordsHeader[0] = lang('GEN_FISCAL_REGISTRY');
-												$record->cardHoldId = $value;
-											}
-											break;
-										case 'nombres':
-											$record->cardHoldName = ucwords(mb_strtolower($value));
-											break;
-										case 'apellidos':
-											$record->cardHoldLastName = ucwords(mb_strtolower($value));
-											break;
-										case 'status':
-											$status = [
-												'0' => 'En proceso',
-												'1' => 'Procesado',
-												'7' => 'Rechazado',
-											];
-											$record->bulkstatus = is_numeric($value) ? $status[$value] : $value;
-											break;
-									}
-								}
-								$record->cardHoldName = $record->cardHoldName.' '.$record->cardHoldLastName;
-								unset($record->cardHoldLastName);
-								array_push(
-									$detailInfo['bulkRecords'],
-									$record
-								);
-							}
-						}
-						break;
-					case '2':
-					case '5':
-					case 'L':
-					case 'M':
-						if(isset($response->registrosLoteRecarga) && count($response->registrosLoteRecarga) > 0) {
-							$bulkRecordsHeader = [lang('GEN_TABLE_DNI'), lang('GEN_TABLE_AMOUNT'), lang('GEN_TABLE_ACCOUNT_NUMBER')];
-
-							if($response->ctipolote == '5' || $response->ctipolote == 'L' || $response->ctipolote == 'M') {
-								$bulkRecordsHeader = [lang('GEN_TABLE_DNI'), lang('GEN_TABLE_AMOUNT'), lang('GEN_TABLE_ACCOUNT_NUMBER'), lang('GEN_TABLE_STATUS')];
-							}
-
-							foreach($response->registrosLoteRecarga AS $records) {
-								$record = new stdClass();
-								foreach($records AS $pos => $value) {
-									switch ($pos) {
-										case 'id_ext_per':
-											$record->cardHoldId = $value;
-											break;
-											case 'monto':
-												$record->cardHoldAmount = $value;
-											break;
-										case 'nro_cuenta':
-											$record->cardHoldAccount = maskString($value, 6, 4);
-											break;
-										case 'status':
-											if($response->ctipolote == '5') {
-												$status = [
-													'3' => 'En proceso',
-													'6' => 'Procesada',
-													'7' => 'Rechazado',
-												];
-											}
-
-											if($response->ctipolote == 'L' || $response->ctipolote == 'M') {
-												$status = [
-													'0' => 'Pendiente',
-													'1' => 'Procesada',
-													'2' => 'Inválida',
-													'7' => 'Rechazado',
-												];
-											}
-
-											$record->bulkstatus = is_numeric($value) ? $status[$value] : $value;
-											break;
-									}
-								}
-								array_push(
-									$detailInfo['bulkRecords'],
-									$record
-								);
-							}
-						}
-						break;
-				}
-				break;
-		}
-
-		$detailInfo['bulkHeader'] = $bulkRecordsHeader;
-		$this->response->data->bulkInfo = (object) $detailInfo;
-
-		return $this->responseToTheView('ConfirmBulkdetail');
-
 	}
 	/**
 	 * @info Firma lista de lotes

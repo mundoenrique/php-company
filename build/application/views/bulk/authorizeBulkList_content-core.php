@@ -49,8 +49,9 @@
 								<td><?= $bulk->records; ?></td>
 								<td><?= $bulk->amount; ?></td>
 								<td class="p-0 flex justify-center items-center">
-									<form id="id-<?= $bulk->idBulk; ?>" action="<?= base_url('detalle-confirmado') ?>" method="post">
+									<form id="id-<?= $bulk->idBulk; ?>" action="<?= base_url('consulta-lote') ?>" method="post">
 										<input type="hidden" name="bulkId" value="<?= $bulk->idBulk; ?>">
+										<input type="hidden" name="bulkfunction" value="Autorización de lotes">
 									</form>
 									<button class="btn mx-1 px-0 big-modal" title="<?= lang('GEN_BTN_SEE'); ?>" data-toggle="tooltip">
 										<i class="icon icon-find" aria-hidden="true"></i>
@@ -118,8 +119,9 @@
 								<td><?= $bulk->records; ?></td>
 								<td><?= $bulk->amount; ?></td>
 								<td class="p-0 flex justify-center items-center">
-									<form id="id-<?= $bulk->idBulk; ?>" action="<?= base_url('detalle-confirmado') ?>" method="post">
+									<form id="id-<?= $bulk->idBulk; ?>" action="<?= base_url('consulta-lote') ?>" method="post">
 										<input type="hidden" name="bulkId" value="<?= $bulk->idBulk; ?>">
+										<input type="hidden" name="bulkfunction" value="Autorización de lotes">
 									</form>
 									<button class="btn mx-1 px-0 big-modal" title="<?= lang('GEN_BTN_SEE') ?>" data-toggle="tooltip">
 										<i class="icon icon-find" aria-hidden="true"></i>

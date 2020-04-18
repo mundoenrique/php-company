@@ -10,7 +10,4 @@ $(function() {
     "pagingType": "full_numbers",
     "language": dataTableLang
 	});
-
-
-
 });

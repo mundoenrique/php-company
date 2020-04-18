@@ -143,40 +143,6 @@ class Novo_Bulk extends NOVO_Controller {
 		$this->loadView($view);
 	}
 	/**
-	 * @info Método para autorizar un lote
-	 * @author J. Enrique Peñaloza Piñero
-	 * @date December 25th, 2019
-	 */
-	public function confirmBulkdetail()
-	{
-		log_message('INFO', 'NOVO Bulk: authorizeBulkList Method Initialized');
-
-		/* if(!isset($this->request->bulkView) || $this->request->bulkView != 'confirm') {
-			redirect(base_url('detalle-producto'), 'location');
-		} */
-
-		$view = 'confirmBulkDetail';
-		$response = $this->loadModel($this->request);
-		$this->responseAttr($response);
-		array_push(
-			$this->includeAssets->cssFiles,
-			"third_party/dataTables-1.10.20"
-		);
-		array_push(
-			$this->includeAssets->jsFiles,
-			"third_party/dataTables-1.10.20",
-			"bulk/bulk-detail"
-		);
-
-		foreach($response->data->bulkInfo AS $row => $info) {
-			$this->render->$row = $info;
-		}
-
-		$this->render->titlePage = lang('GEN_DETAIL_BULK_TITLE');
-		$this->views = ['bulk/'.$view];
-		$this->loadView($view);
-	}
-	/**
 	 * @info Método para calcular la orden de severvicio
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date January 04th, 2019

@@ -222,7 +222,7 @@ function createButton(dialogMoldal, elementButton, valuesButton) {
 					.removeClass('secondary')
 					.addClass('primary');
 			}
-			$(location).attr('href', valuesButton.link);
+			$(location).attr('href', baseURL+valuesButton.link);
 		}
 		if (valuesButton.action === 'close') {
 			dialogMoldal.dialog('close');

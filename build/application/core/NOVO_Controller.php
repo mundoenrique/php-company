@@ -230,7 +230,7 @@ class NOVO_Controller extends CI_Controller {
 
 		if(is_object($responseView)) {
 			$this->render->code = $responseView->code;
-			$downloadModel=isset($this->responseView->downloadModel)?FALSE:TRUE;
+			$downloadModel=isset($this->responseView->downloadModel) ? FALSE : TRUE;
 		}
 
 		if($this->session->has_userdata('productInf')) {
@@ -238,7 +238,7 @@ class NOVO_Controller extends CI_Controller {
 		}
 
 
-		if($this->render->code == 0  && $active || $this->render->code > 0  && $downloadModel==TRUE) {
+		if($this->render->code == 0  && $active || $this->render->code > 0  && $downloadModel == TRUE) {
 			$this->load->model('Novo_Business_Model', 'Business');
 			$enterpriseList = $this->Business->callWs_getEnterprises_Business(TRUE);
 

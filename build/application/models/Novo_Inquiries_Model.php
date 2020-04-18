@@ -133,7 +133,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 									$bulkList['bulkAmount'] = floatval($bulk->montoRecarga);
 									$bulkList['bulkCommisAmount'] = floatval($bulk->montoComision);
 									$bulkList['bulkTotalAmount'] = floatval($bulk->montoRecarga) + floatval($bulk->montoComision);
-									$bulkList['bulkacidlote'] = $bulk->acidlote;
+									$bulkList['bulkId'] = $bulk->acidlote;
 									$serviceOrders['bulk'][] = (object) $bulkList;
 								}
 								break;
@@ -225,7 +225,189 @@ class Novo_Inquiries_Model extends NOVO_Model {
 
 		return $this->responseToTheView('ClearServiceOrders');
 	}
+	/**
+	 * @info Ver el detalle de un lote
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date February 09th, 2020
+	 * @modified J. Enrique Peñaloza Piñero
+	 * @date April 17st, 2019
+	 */
+	public function callWs_BulkDetail_Inquiries($dataRequest)
+	{
+		log_message('INFO', 'NOVO Bulk Model: BulkDetail Method Initialized');
 
+		$this->className = 'com.novo.objects.MO.AutorizarLoteMO';
+		$this->dataAccessLog->modulo = 'Consultas';
+		$this->dataAccessLog->function = $dataRequest->bulkfunction;
+		$this->dataAccessLog->operation = 'Ver detalle del lote';
+
+		$this->dataRequest->idOperation = 'detalleLote';
+		$this->dataRequest->acidlote = $dataRequest->bulkId;
+
+		$response = $this->sendToService('BulkDetail');
+
+		$detailInfo = [
+			'fiscalId' => '--',
+			'enterpriseName' => '--',
+			'bulkType' => '--',
+			'bulkTypeText' => '--',
+			'bulkNumber' => '--',
+			'totalRecords' => '--',
+			'loadUserName' => '--',
+			'bulkDate' => '--',
+			'bulkStatus' => '--',
+			'bulkStatusText' => '--',
+			'bulkAmount' => '--',
+			'bulkHeader' => [],
+			'bulkRecords' => [],
+		];
+
+		switch ($this->isResponseRc) {
+			case 0:
+				$this->response->code = 0;
+				$detailInfo['fiscalId'] = $response->acrif;
+				$detailInfo['enterpriseName'] = mb_strtoupper(mb_strtolower($response->acnomcia));
+				$detailInfo['bulkType'] = $response->ctipolote;
+				$detailInfo['bulkTypeText'] = mb_strtoupper(mb_strtolower($response->acnombre));
+				$detailInfo['bulkNumber'] = $response->acnumlote;
+				$detailInfo['totalRecords'] = $response->ncantregs;
+				$detailInfo['loadUserName'] = mb_strtoupper(mb_strtolower($response->accodusuarioc));
+				$detailInfo['bulkDate'] = $response->dtfechorcarga;
+				$detailInfo['bulkStatus'] = $response->cestatus;
+				$detailInfo['bulkStatusText'] = ucfirst(mb_strtolower($response->status));
+				$detailInfo['bulkAmount'] = $response->montoNeto;
+				$bulkRecordsHeader = [];
+
+				switch($response->ctipolote) {
+					case '1':
+					case '10':
+						if(isset($response->registrosLoteEmision) && count($response->registrosLoteEmision) > 0) {
+							$bulkRecordsHeader = [lang('GEN_TABLE_DNI'), lang('GEN_TABLE_FULL_NAME'), lang('GEN_TABLE_STATUS')];
+							$detailInfo['bulkRecords'] = $this->buildEmisionRecords_Bulk($response->registrosLoteEmision);
+						}
+						break;
+					case '3':
+					case '6':
+					case 'A':
+						if(isset($response->registrosLoteEmision) && count($response->registrosLoteEmision) > 0) {
+							$bulkRecordsHeader = [lang('GEN_TABLE_DNI'), lang('GEN_TABLE_FULL_NAME'), lang('GEN_TABLE_CARD_NUMBER')];
+							$detailInfo['bulkRecords'] = $this->buildEmisionRecords_Bulk($response->registrosLoteEmision);
+						}
+						break;
+					case '2':
+					case '5':
+					case 'L':
+					case 'M':
+						if(isset($response->registrosLoteRecarga) && count($response->registrosLoteRecarga) > 0) {
+							$bulkRecordsHeader = [lang('GEN_TABLE_DNI'), lang('GEN_TABLE_AMOUNT'), lang('GEN_TABLE_ACCOUNT_NUMBER')];
+
+							if($response->ctipolote == '5' || $response->ctipolote == 'L' || $response->ctipolote == 'M') {
+								$bulkRecordsHeader = [lang('GEN_TABLE_DNI'), lang('GEN_TABLE_AMOUNT'), lang('GEN_TABLE_ACCOUNT_NUMBER'), lang('GEN_TABLE_STATUS')];
+							}
+
+							foreach($response->registrosLoteRecarga AS $records) {
+								$record = new stdClass();
+								foreach($records AS $pos => $value) {
+									switch ($pos) {
+										case 'id_ext_per':
+											$record->cardHoldId = $value;
+											break;
+											case 'monto':
+												$record->cardHoldAmount = $value;
+											break;
+										case 'nro_cuenta':
+											$record->cardHoldAccount = maskString($value, 6, 4);
+											break;
+										case 'status':
+											if($response->ctipolote == '5') {
+												$status = [
+													'3' => 'En proceso',
+													'6' => 'Procesada',
+													'7' => 'Rechazado',
+												];
+											}
+
+											if($response->ctipolote == 'L' || $response->ctipolote == 'M') {
+												$status = [
+													'0' => 'Pendiente',
+													'1' => 'Procesada',
+													'2' => 'Inválida',
+													'7' => 'Rechazado',
+												];
+											}
+
+											$record->bulkstatus = is_numeric($value) ? $status[$value] : $value;
+											break;
+									}
+								}
+								array_push(
+									$detailInfo['bulkRecords'],
+									$record
+								);
+							}
+						}
+						break;
+				}
+				break;
+		}
+
+		$detailInfo['bulkHeader'] = $bulkRecordsHeader;
+		$this->response->data->bulkInfo = (object) $detailInfo;
+
+		return $this->responseToTheView('BulkDetail');
+
+	}
+	/**
+	 * @info Construir el cuerpo de la table del detalle de un lote de emisión
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date April 17th, 2020
+	 * @modified
+	 * @date
+	 */
+	private function buildEmisionRecords_Bulk($emisionRecords)
+	{
+		log_message('INFO', 'NOVO Inquiries Model: buildEmisionRecords Method Initialized');
+
+		$detailRecords = [];
+		foreach($emisionRecords AS $records) {
+			$record = new stdClass();
+			foreach($records AS $pos => $value) {
+				switch ($pos) {
+					case 'idExtPer':
+						$record->cardHoldId = $value;
+						break;
+					case 'idExtEmp':
+						if(!isset($records->idExtPer)) {
+							$bulkRecordsHeader[0] = lang('GEN_FISCAL_REGISTRY');
+							$record->cardHoldId = $value;
+						}
+						break;
+					case 'nombres':
+						$record->cardHoldName = ucwords(mb_strtolower($value));
+						break;
+					case 'apellidos':
+						$record->cardHoldLastName = ucwords(mb_strtolower($value));
+						break;
+					case 'nroTarjeta':
+						$record->cardnumber = maskString($value, 6, 4);
+						break;
+					case 'status':
+						$status = [
+							'0' => 'En proceso',
+							'1' => 'Procesado',
+							'7' => 'Rechazado',
+						];
+						$record->bulkstatus = is_numeric($value) ? $status[$value] : $value;
+						break;
+				}
+			}
+			$record->cardHoldName = $record->cardHoldName.' '.$record->cardHoldLastName;
+			unset($record->cardHoldLastName);
+			$detailRecords[] = $record;
+		}
+
+		return $detailRecords;
+	}
 	/**
 	 * @info Consulta detalle ordenes de servicios
 	 * @author Luis Molina
@@ -241,7 +423,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 		$this->dataAccessLog->operation = 'Detalle Lote';
 
 		$this->dataRequest->idOperation = 'detalleLote';
-		$this->dataRequest->acidlote = $dataRequest->numberOrder;
+		$this->dataRequest->acidlote = $dataRequest->bulk_id;
 
 		$response = $this->sendToService('DetailServiceOrders');
 

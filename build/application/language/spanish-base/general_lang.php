@@ -146,7 +146,7 @@ $lang['GEN_TABLE_FILE_NAME'] = 'Nombre de archivo';
 $lang['GEN_TABLE_TYPE'] = 'Tipo';
 $lang['GEN_TABLE_TYPE_ID'] = 'Id Tipo';
 $lang['GEN_TABLE_STATUS'] = 'Estado';
-$lang['GEN_TABLE_NAME_LASTNAME'] = 'Nombres y apellidos';
+$lang['GEN_TABLE_FULL_NAME'] = 'Nombres y apellidos';
 $lang['GEN_TABLE_RECORDS'] = 'Registros';
 $lang['GEN_TABLE_AMOUNT'] = 'Monto';
 $lang['GEN_TABLE_COMMISSION'] = 'Monto comisión';
@@ -159,6 +159,7 @@ $lang['GEN_TABLE_ORDER_NRO'] = 'Orden nro.';
 $lang['GEN_TABLE_DATE'] = 'Fecha';
 $lang['GEN_TABLE_DNI'] = 'DNI';
 $lang['GEN_TABLE_ACCOUNT_NUMBER'] = 'Número de cuenta';
+$lang['GEN_TABLE_CARD_NUMBER'] = 'Número de tarjeta';
 //DATATABLES LANG
 $lang['GEN_TABLE_SLENGTHMENU'] = 'Mostrar _MENU_ registros';
 $lang['GEN_TABLE_SZERORECORDS'] = 'No se encontraron resultados';

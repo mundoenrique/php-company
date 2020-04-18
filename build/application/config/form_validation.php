@@ -103,7 +103,7 @@ $config = [
 		[
 			'field' => 'productName',
 			'label' => 'productName',
-			'rules' => 'trim|regex_match[/^([\wñÑáéíóúÑÁÉÍÓÚ ]+)+$/i]',
+			'rules' => 'trim|regex_match[/^([\wñÑáéíóúÑÁÉÍÓÚ() ]+)+$/i]',
 		],
 		[
 			'field' => 'productBrand',
@@ -254,11 +254,16 @@ $config = [
 			'rules' => 'trim|regex_match[/^([\w,]*)+$/i]'
 		]
 	],
-	'confirmBulkdetail' => [
+	'bulkDetail' => [
 		[
-			'field' => 'bulk-id',
-			'label' => 'bulk-id',
-			'rules' => 'trim|regex_match[/^([\w]*)+$/i]'
+			'field' => 'bulkId',
+			'label' => 'bulkId',
+			'rules' => 'trim|regex_match[/^([\w]*)+$/i]|required'
+		],
+		[
+			'field' => 'bulkfunction',
+			'label' => 'bulkfunction',
+			'rules' => 'trim|regex_match[/^([\wñáéíóú ]*)+$/i]|required'
 		]
 	],
 	'cancelServiceOrder' => [
