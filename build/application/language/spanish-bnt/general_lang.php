@@ -15,7 +15,7 @@ $lang['GEN_FILE'] = 'Archivos de gestión Conexión Empresas Online';
 $lang['GEN_CEO_USER_MANUAL'] = 'Manual de Usuario Conexión Empresas Online';
 $lang['GEN_GL_USER_MANUAL'] = 'Manual de Usuario Gestor de Lotes';
 //LOGIN IMAGE
-$lang['GEN-IMAGEN-LOGIN'] = 'img-ref.jpg';
+$lang['GEN_IMAGE_LOGIN'] = 'banorte-login.jpg';
 //FOOTER
 $lang['GEN_FOTTER_RIGHTS'] = '© Todos los derechos reservados. Grupo Financiero Banorte - ';
 $lang['GEN_FOTTER_IMAGE_L'] = 'img-banorte_white.svg';

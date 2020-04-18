@@ -96,6 +96,7 @@ $lang['GEN_ADD_BRANCH'] = 'Agregar nueva sucursal';
 $lang['GEN_MANUALS'] = 'Manuales';
 $lang['GEN_CEO_USER_MANUAL'] = 'Manual de Usuario Conexión Empresas Online';
 $lang['GEN_GL_USER_MANUAL'] = 'Manual de Usuario Gestor de Lotes';
+$lang['GEN_IMAGE_LOGIN'] = '';
 $lang['GEN_APPLICATIONS'] = 'Aplicaciones';
 $lang['GEN_BATCH_MANAGER'] = 'Gestor de lotes (1.759kb)';
 $lang['GEN_JAVA_JRE'] = 'Java JRE 1.6 (14.226kb)';

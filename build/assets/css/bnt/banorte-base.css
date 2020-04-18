@@ -15,6 +15,9 @@ header.main-head {
 	height: 3.75rem;
 	background-color: var(--primary);
 	font-weight: var(--light-font-weight);
+	background-repeat: repeat-x;
+	background-image: url(../../images/bnt/navigation.png);
+	background-size: 43.5px 64px;
 }
 
 /* Content */
@@ -276,6 +279,7 @@ footer.main-footer {
 	color: var(--text-color);
 	border: 1px solid var(--border-color);
 	transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+
 }
 
 .form-control:focus:not([readonly]):not(:disabled) {
@@ -344,6 +348,7 @@ textarea.form-control {
 #login-form a {
 	text-align: center;
 	color: var(--label-color) !important;
+	text-decoration: underline;
 
 }
 #login-form a:hover {
@@ -809,7 +814,6 @@ textarea.form-control {
 .input-group > .custom-select:not(:last-child) {
   border-top-right-radius: 0;
 	border-bottom-right-radius: 0;
-	border-right: none;
 }
 
 .input-group-prepend,
@@ -974,9 +978,14 @@ textarea.form-control {
 }
 
 .form-control.has-error {
-	border-color: var(--danger);
+	border-color: var(--danger) !important;
 }
 
+input[type=password]::-ms-reveal,
+input[type=password]::-ms-clear
+{
+    display: none !important;
+}
 /* Buttons
 ========================================================================== */
 
@@ -1118,6 +1127,7 @@ textarea.form-control {
 
 .btn-loading-lg {
 	height: 45px;
+	text-transform: uppercase;
 }
 
 /* sizes */
@@ -1247,7 +1257,7 @@ textarea.form-control {
 /* Backgrounds Colors
 ========================================================================== */
 
-.bg-primary   { background-color: var(--secondary) !important }
+.bg-primary   { background-color: var(--tertiary) !important }
 .bg-secondary { background-color: var(--secondary) !important }
 .bg-tertiary  { background-color: var(--tertiary) !important }
 
@@ -1963,9 +1973,9 @@ textarea.form-control {
 .capitalize { text-transform: capitalize !important }
 
 /* Font weight */
-.light      {font-weight: var(--light-font-weight) !important }
+.light      {font-weight: var(--regular-font-weight) !important }
 .regular    { font-weight: var(--regular-font-weight) !important }
-.semibold   { font-weight: var(--semibold-font-weight) !important }
+.semibold   { font-weight: var(--bold-font-weight) !important }
 .bold       { font-weight: var(--bold-font-weight) !important }
 
 /* Colors */
@@ -2324,13 +2334,13 @@ i[class*=" icon-"].novoglyphs {
 }
 
 
-.main-nav ul li span {
+/* .main-nav ul li span {
   display: block;
   height: 4px;
   background: var(--yellow);
 	position: relative;
 	margin-top: -1.4px;
-}
+} */
 
 .main-nav-dropdown {
 	height: 3.75rem;
@@ -2353,6 +2363,8 @@ i[class*=" icon-"].novoglyphs {
 
 .main-nav-dropdown a {
 	display: block;
+	text-transform: uppercase;
+	font-weight: 700 !important;
 	line-height: 3.41em;
 	-webkit-transition: all .25s ease;
 	-moz-transition: all .25s ease;
@@ -3549,6 +3561,10 @@ a.ui-button:active,
   cursor: pointer;
 }
 
+.product span{
+	color: var(--text-color) !important;
+}
+
 .product .mask,
 .product .content {
   position: absolute;
@@ -3560,7 +3576,8 @@ a.ui-button:active,
 }
 
 .product-pb {
-  padding-bottom: 4px;
+	padding-bottom: 4px;
+	color: var(--text-color);
 }
 
 /* clases para el primer producto  */
