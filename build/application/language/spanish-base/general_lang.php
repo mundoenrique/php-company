@@ -160,6 +160,9 @@ $lang['GEN_TABLE_DATE'] = 'Fecha';
 $lang['GEN_TABLE_DNI'] = 'DNI';
 $lang['GEN_TABLE_ACCOUNT_NUMBER'] = 'Número de cuenta';
 $lang['GEN_TABLE_CARD_NUMBER'] = 'Número de tarjeta';
+$lang['GEN_TABLE_EMPLOYEE'] = 'Empleado';
+$lang['GEN_TABLE_BENEFICIARY'] = 'Beneficiario';
+$lang['GEN_TABLE_ACCOUNT_BENEFICIARY'] = 'Cuenta del beneficiario';
 //DATATABLES LANG
 $lang['GEN_TABLE_SLENGTHMENU'] = 'Mostrar _MENU_ registros';
 $lang['GEN_TABLE_SZERORECORDS'] = 'No se encontraron resultados';

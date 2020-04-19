@@ -73,7 +73,6 @@ class Novo_Inquiries extends NOVO_Controller {
 			redirect(base_url('detalle-producto'), 'location');
 		} */
 
-
 		$view = 'bulkDetail';
 		$response = $this->loadModel($this->request);
 		$this->responseAttr($response);

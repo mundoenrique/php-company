@@ -58,7 +58,6 @@ $(function () {
 				"checkboxes": {"selectRow": true},
 				'visible': auth != false,
       	render: function (data, type, row) {
-					console.log(data)
 					var content = '';
 					if(data != '') {
 						content = '<button class="btn px-0" title="'+lang.GEN_BTN_DISASS_AUTH+'" data-toggle="tooltip">';
@@ -115,7 +114,7 @@ $(function () {
 			case lang.GEN_BTN_SEE:
 				form = $(this).siblings('form');
 				insertFormInput(true, form)
-				$(this).siblings('form').submit();
+				form.submit();
 				break;
 			case lang.GEN_BTN_DELETE:
 			case lang.GEN_BTN_DISASS_SIGN:

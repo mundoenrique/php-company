@@ -290,62 +290,39 @@ class Novo_Inquiries_Model extends NOVO_Model {
 					case '6':
 					case 'A':
 						if(isset($response->registrosLoteEmision) && count($response->registrosLoteEmision) > 0) {
-							$bulkRecordsHeader = [lang('GEN_TABLE_DNI'), lang('GEN_TABLE_FULL_NAME'), lang('GEN_TABLE_CARD_NUMBER')];
+							$bulkRecordsHeader = [lang('GEN_TABLE_DNI'), lang('GEN_TABLE_FULL_NAME'), lang('GEN_TABLE_ACCOUNT_NUMBER')];
 							$detailInfo['bulkRecords'] = $this->buildEmisionRecords_Bulk($response->registrosLoteEmision);
 						}
 						break;
 					case '2':
+						if(isset($response->registrosLoteRecarga) && count($response->registrosLoteRecarga) > 0) {
+							$bulkRecordsHeader = [lang('GEN_TABLE_DNI'), lang('GEN_TABLE_AMOUNT'), lang('GEN_TABLE_ACCOUNT_NUMBER')];
+							$detailInfo['bulkRecords'] = $this->buildCreditRecords_Bulk($response->registrosLoteRecarga, $response->ctipolote);
+						}
+						break;
 					case '5':
 					case 'L':
 					case 'M':
 						if(isset($response->registrosLoteRecarga) && count($response->registrosLoteRecarga) > 0) {
-							$bulkRecordsHeader = [lang('GEN_TABLE_DNI'), lang('GEN_TABLE_AMOUNT'), lang('GEN_TABLE_ACCOUNT_NUMBER')];
-
-							if($response->ctipolote == '5' || $response->ctipolote == 'L' || $response->ctipolote == 'M') {
-								$bulkRecordsHeader = [lang('GEN_TABLE_DNI'), lang('GEN_TABLE_AMOUNT'), lang('GEN_TABLE_ACCOUNT_NUMBER'), lang('GEN_TABLE_STATUS')];
-							}
-
-							foreach($response->registrosLoteRecarga AS $records) {
-								$record = new stdClass();
-								foreach($records AS $pos => $value) {
-									switch ($pos) {
-										case 'id_ext_per':
-											$record->cardHoldId = $value;
-											break;
-											case 'monto':
-												$record->cardHoldAmount = $value;
-											break;
-										case 'nro_cuenta':
-											$record->cardHoldAccount = maskString($value, 6, 4);
-											break;
-										case 'status':
-											if($response->ctipolote == '5') {
-												$status = [
-													'3' => 'En proceso',
-													'6' => 'Procesada',
-													'7' => 'Rechazado',
-												];
-											}
-
-											if($response->ctipolote == 'L' || $response->ctipolote == 'M') {
-												$status = [
-													'0' => 'Pendiente',
-													'1' => 'Procesada',
-													'2' => 'Inválida',
-													'7' => 'Rechazado',
-												];
-											}
-
-											$record->bulkstatus = is_numeric($value) ? $status[$value] : $value;
-											break;
-									}
-								}
-								array_push(
-									$detailInfo['bulkRecords'],
-									$record
-								);
-							}
+							$bulkRecordsHeader = [lang('GEN_TABLE_DNI'), lang('GEN_TABLE_AMOUNT'), lang('GEN_TABLE_ACCOUNT_NUMBER'), lang('GEN_TABLE_STATUS')];
+							$detailInfo['bulkRecords'] = $this->buildCreditRecords_Bulk($response->registrosLoteRecarga, $response->ctipolote);
 						}
+						break;
+					case 'E':
+						if(isset($response->registrosLoteGuarderia) && count($response->registrosLoteGuarderia) > 0) {
+							$bulkRecordsHeader = [lang('GEN_TABLE_DNI'), lang('GEN_TABLE_EMPLOYEE'), lang('GEN_TABLE_BENEFICIARY')];
+							$detailInfo['bulkRecords'] = $this->buildKindergartenRecords_Bulk($response->registrosLoteGuarderia, $response->ctipolote);
+						}
+						break;
+					case 'G':
+						if(isset($response->registrosLoteGuarderia) && count($response->registrosLoteGuarderia) > 0) {
+							$bulkRecordsHeader = [lang('GEN_TABLE_DNI'), lang('GEN_TABLE_EMPLOYEE'), lang('GEN_TABLE_BENEFICIARY'), lang('GEN_TABLE_ACCOUNT_BENEFICIARY')];
+							$detailInfo['bulkRecords'] = $this->buildKindergartenRecords_Bulk($response->registrosLoteGuarderia, $response->ctipolote);
+						}
+						break;
+					case 'R':
+					case 'C':
+					case 'N':
 						break;
 				}
 				break;
@@ -355,7 +332,6 @@ class Novo_Inquiries_Model extends NOVO_Model {
 		$this->response->data->bulkInfo = (object) $detailInfo;
 
 		return $this->responseToTheView('BulkDetail');
-
 	}
 	/**
 	 * @info Construir el cuerpo de la table del detalle de un lote de emisión
@@ -369,6 +345,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 		log_message('INFO', 'NOVO Inquiries Model: buildEmisionRecords Method Initialized');
 
 		$detailRecords = [];
+
 		foreach($emisionRecords AS $records) {
 			$record = new stdClass();
 			foreach($records AS $pos => $value) {
@@ -401,6 +378,109 @@ class Novo_Inquiries_Model extends NOVO_Model {
 						break;
 				}
 			}
+			$record->cardHoldName = $record->cardHoldName.' '.$record->cardHoldLastName;
+			unset($record->cardHoldLastName);
+			$detailRecords[] = $record;
+		}
+
+		return $detailRecords;
+	}
+	/**
+	 * @info Construir el cuerpo de la table del detalle de un lote de recarga
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date April 17th, 2020
+	 * @modified
+	 * @date
+	 */
+	private function buildCreditRecords_Bulk($creditRecords, $bulkType)
+	{
+		log_message('INFO', 'NOVO Inquiries Model: buildCreditRecords Method Initialized');
+
+		$detailRecords = [];
+
+		foreach($creditRecords AS $records) {
+			$record = new stdClass();
+			foreach($records AS $pos => $value) {
+				switch ($pos) {
+					case 'id_ext_per':
+						$record->cardHoldId = $value;
+						break;
+						case 'monto':
+							$record->cardHoldAmount = $value;
+						break;
+					case 'nro_cuenta':
+						$record->cardHoldAccount = maskString($value, 6, 4);
+						break;
+					case 'status':
+						if($bulkType == '2'){
+							continue;
+						}
+
+						if($bulkType == '5') {
+							$status = [
+								'3' => 'En proceso',
+								'6' => 'Procesada',
+								'7' => 'Rechazado',
+							];
+						}
+
+						if($bulkType == 'L' || $bulkType == 'M') {
+							$status = [
+								'0' => 'Pendiente',
+								'1' => 'Procesada',
+								'2' => 'Inválida',
+								'7' => 'Rechazado',
+							];
+						}
+
+						$record->bulkstatus = is_numeric($value) ? $status[$value] : $value;
+						break;
+				}
+			}
+			$detailRecords[] = $record;
+		}
+
+		return $detailRecords;
+	}
+	/**
+	 * @info Construir el cuerpo de la table del detalle de un lote de guardería
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date April 17th, 2020
+	 * @modified
+	 * @date
+	 */
+	private function buildKindergartenRecords_Bulk($gardenRecords, $bulkType)
+	{
+		log_message('INFO', 'NOVO Inquiries Model: buildKindergartenRecords Method Initialized');
+
+		$detailRecords = [];
+
+		foreach($gardenRecords AS $records) {
+			$record = new stdClass();
+			foreach($records AS $pos => $value) {
+				switch ($pos) {
+					case 'id_per':
+						$record->cardHoldId = $value;
+						break;
+					case 'nombre':
+						$record->cardHoldName = ucwords(mb_strtolower($value));
+						break;
+					case 'apellido':
+						$record->cardHoldLastName = ucwords(mb_strtolower($value));
+						break;
+						case 'beneficiario':
+							$record->cardHoldbeneficiary = $value;
+						break;
+					case 'nro_cuenta':
+						if($bulkType == 'G'){
+							continue;
+						}
+
+						$record->cardHoldAccount = maskString($value, 6, 4);
+						break;
+				}
+			}
+
 			$record->cardHoldName = $record->cardHoldName.' '.$record->cardHoldLastName;
 			unset($record->cardHoldLastName);
 			$detailRecords[] = $record;
