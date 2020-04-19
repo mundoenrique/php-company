@@ -272,7 +272,7 @@ function getPropertyOfElement(property, element) {
  * @date November 18th, 2019
  */
 function formInputTrim(form) {
-	form.find('input').each(function () {
+	form.find('input, select').each(function () {
 		var trimVal = $(this).val().trim()
 		$(this).val(trimVal)
 	});

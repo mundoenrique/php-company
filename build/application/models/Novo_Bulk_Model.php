@@ -929,7 +929,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
-				$this->response->data = lang('GEN_LINK_CONS_ORDERS_SERV');
+				$this->response->data = 'consulta-orden-de-servicio';
 				$serviceOrdersList = [];
 
 				foreach($response->lista AS $list) {
@@ -986,7 +986,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 
 			case -5:
 				$this->response->title = 'Generar orden de servicio';
-				$this->response->msg = 'No fue posible generar la orden de servicio';
+				$this->response->msg = 'No fue posible generar la orden de servicio, por favor intentalo de nuevo';
 				$this->response->data['btn1']['action'] = 'close';
 				break;
 		}

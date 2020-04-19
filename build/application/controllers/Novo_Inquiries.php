@@ -43,17 +43,7 @@ class Novo_Inquiries extends NOVO_Controller {
 			$renderOrderList = TRUE;
 		}
 
-		if($this->session->flashdata('OrdersListMemory')) {
-			$this->session->keep_flashdata('serviceOrdersList');
-		}
-
-		if($this->session->flashdata('response-order')) {
-			$result_order = $this->session->flashdata('response-order');
-			$this->responseAttr($result_order);
-		} else {
-			$this->responseAttr();
-		}
-
+		$this->responseAttr();
 		$this->load->model('Novo_Inquiries_Model', 'Inquiries');
 		$responseList = $this->Inquiries->callWs_ServiceOrderStatus_Inquiries();
 		$this->render->orderStatus = $responseList->data->orderStatus;
@@ -77,10 +67,6 @@ class Novo_Inquiries extends NOVO_Controller {
 		/* if(!isset($this->request->bulkId) && !$this->session->flashdata('detailServiceOrders'))  {
 			redirect(base_url('detalle-producto'), 'location');
 		} */
-
-		if($this->session->flashdata('serviceOrdersList')) {
-			$this->session->keep_flashdata('serviceOrdersList');
-		}
 
 		$view = 'bulkDetail';
 		$response = $this->loadModel($this->request);

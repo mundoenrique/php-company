@@ -90,7 +90,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
-				$this->response->data = lang('GEN_LINK_CONS_ORDERS_SERV');
+				$this->response->data = 'consulta-orden-de-servicio';
 
 				foreach($response->lista AS $list) {
 					$orderList = [];
@@ -143,10 +143,10 @@ class Novo_Inquiries_Model extends NOVO_Model {
 				}
 
 				$this->session->set_flashdata('serviceOrdersList', $serviceOrdersList);
-				$this->session->set_flashdata('OrdersListMemory', TRUE);
+				$this->session->set_flashdata('requestOrdersList', $dataRequest);
 				break;
 			case -5:
-				$this->response->title = 'Generar orden de servicio';
+				$this->response->title = 'Ordenes de servicio';
 				$this->response->msg = 'No fue posible obtener la orden de servicio';
 				$this->response->icon = lang('GEN_ICON_WARNING');
 				$this->response->data['btn1']['action'] = 'close';
@@ -158,12 +158,8 @@ class Novo_Inquiries_Model extends NOVO_Model {
 				$this->response->data['btn1']['action'] = 'close';
 				break;
 		}
-			$serviceOrdersList = $this->session->flashdata('serviceOrdersList');
-			$bulkNotBillable = $this->session->flashdata('bulkNotBillable');
-			$this->session->set_flashdata('serviceOrdersList', $serviceOrdersList);
-			$this->session->set_flashdata('bulkNotBillable', $bulkNotBillable);
-
-			return $this->responseToTheView('ServiceOrder');
+		log_message('INFO', '******************************'.json_encode($dataRequest));
+		return $this->responseToTheView('ServiceOrder');
 	}
 	/**
 	 * @info Elimina un lote
@@ -366,7 +362,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 		return $this->responseToTheView('BulkDetail');
 	}
 	/**
-	 * @info Construir el cuerpo de la tabla del detalle de un lote de emisión
+	 * @info Construye el cuerpo de la tabla del detalle de un lote de emisión
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date April 17th, 2020
 	 * @modified
@@ -418,7 +414,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 		return $detailRecords;
 	}
 	/**
-	 * @info Construir el cuerpo de la tabla del detalle de un lote de recarga
+	 * @info Construye el cuerpo de la tabla del detalle de un lote de recarga
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date April 17th, 2020
 	 * @modified
@@ -475,7 +471,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 		return $detailRecords;
 	}
 	/**
-	 * @info Construir el cuerpo de la table del detalle de un lote de guardería
+	 * @info Construye el cuerpo de la table del detalle de un lote de guardería
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date April 17th, 2020
 	 * @modified
@@ -565,14 +561,14 @@ class Novo_Inquiries_Model extends NOVO_Model {
 
 		$this->className = 'com.novo.objects.TOs.OrdenServicioTO';
 		$this->dataAccessLog->modulo = 'Consultas';
-		$this->dataAccessLog->function = 'Descarga de archivo';
-		$this->dataAccessLog->operation = 'Ver pdf de orden de servicio';
+		$this->dataAccessLog->function = 'Ordenes de servicio';
+		$this->dataAccessLog->operation = 'Descargar pdf orden de servicio';
 
-		$this->dataRequest->idOperation = 'visualizarOSs';
+		$this->dataRequest->idOperation = 'visualizarOS';
 		$this->dataRequest->rifEmpresa = $this->session->userdata('enterpriseInf')->idFiscal;
 		$this->dataRequest->acCodCia = $this->session->userdata('enterpriseInf')->enterpriseCode;
 		$this->dataRequest->acprefix = $this->session->userdata('productInf')->productPrefix;
-		$this->dataRequest->idOrden =$dataRequest->OrderNumber;
+		$this->dataRequest->idOrden = $dataRequest->OrderNumber;
 
 		$response = $this->sendToService('exportFiles');
 
@@ -583,7 +579,6 @@ class Novo_Inquiries_Model extends NOVO_Model {
 				exportFile($response->archivo, 'pdf', 'Orden_de_servicio'.$nameFile);
 				break;
 			default:
-				$this->session->keep_flashdata('serviceOrdersList');
 				$this->response->code = 3;
 				$this->response->title = lang('GEN_DOWNLOAD_FILE');
 				$this->response->msg = lang('GEN_WARNING_DOWNLOAD_FILE');
@@ -592,48 +587,6 @@ class Novo_Inquiries_Model extends NOVO_Model {
 				$this->response->downloadModel = TRUE;
 
 				return $this->responseToTheView('exportFiles');
-		}
-	}
-	/**
-	 * @info Exporta archivo .pdf,.xls en detalle ordenes de servicios
-	 * @author Luis Molina
-	 * @date Mar 10 Tue, 2020
-	 */
-	public function callWs_DetailExportFiles_Inquiries($dataRequest)
-	{
-		log_message('INFO', 'NOVO Inquiries Model: DetailExportFiles Method Initialized');
-
-		$operation='detalleLoteExcel';
-
-    if ($dataRequest->file_type=='pdf'){
-			$operation='detalleLotePDF';
-		}
-
-		$this->dataAccessLog->modulo = 'lotes';
-		$this->dataAccessLog->function = 'verdetallelote';
-		$this->dataAccessLog->operation = 'Ver detalle Lote';
-		$this->className = 'com.novo.objects.TOs.LoteTO';
-		$this->dataRequest->idOperation = $operation;
-		$this->dataRequest->acidlote =$dataRequest->data_lote;
-		$this->dataRequest->numberOrder=$dataRequest->data_lote;
-
-		$response = $this->sendToService('DetailExportFiles');
-
-		switch ($this->isResponseRc) {
-			case 0:
-			exportFile($response->archivo,$dataRequest->file_type,$response->nombre);
-			break;
-			default:
-			$this->response->code = 3;
-			$this->response->downloadModel = TRUE;
-			$this->response->title = lang('GEN_DOWNLOAD_FILE');
-			$this->response->msg = lang('GEN_WARNING_DOWNLOAD_FILE');
-			$this->response->icon = lang('GEN_ICON_WARNING');
-			$this->response->data->resp['btn1']['action'] = 'close';
-			$this->session->set_flashdata('detailServiceOrders', $this->session->userdata('detailServiceOrdersMemory'));
-			$this->session->unset_userdata('detailServiceOrdersMemory');
-			$this->session->set_flashdata('response-msg-detail-order',$this->response);
-			redirect(base_url('detalle-orden-de-servicio'), 'location');
 		}
 	}
 }
