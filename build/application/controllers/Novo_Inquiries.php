@@ -40,8 +40,11 @@ class Novo_Inquiries extends NOVO_Controller {
 
 		if($this->session->flashdata('serviceOrdersList')) {
 			$orderList = $this->session->flashdata('serviceOrdersList');
-			$this->session->set_flashdata('serviceOrdersList', $orderList);
 			$renderOrderList = TRUE;
+		}
+
+		if($this->session->flashdata('OrdersListMemory')) {
+			$this->session->keep_flashdata('serviceOrdersList');
 		}
 
 		if($this->session->flashdata('response-order')) {
@@ -64,6 +67,8 @@ class Novo_Inquiries extends NOVO_Controller {
 	 * @info Método para autorizar un lote
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date December 25th, 2019
+	 * @mofied J. Enrique Peñaloza Piñero
+	 * @date April 19th, 2019
 	 */
 	public function bulkDetail()
 	{
@@ -72,6 +77,10 @@ class Novo_Inquiries extends NOVO_Controller {
 		/* if(!isset($this->request->bulkId) && !$this->session->flashdata('detailServiceOrders'))  {
 			redirect(base_url('detalle-producto'), 'location');
 		} */
+
+		if($this->session->flashdata('serviceOrdersList')) {
+			$this->session->keep_flashdata('serviceOrdersList');
+		}
 
 		$view = 'bulkDetail';
 		$response = $this->loadModel($this->request);

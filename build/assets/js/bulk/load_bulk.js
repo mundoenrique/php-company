@@ -189,17 +189,13 @@ function deleteBulk(oldID) {
 			.html(loader)
 			.prop('disabled', true)
 			.attr('id', oldID);
-			ceo_cook = getCookieValue();
-			cypherPass = CryptoJS.AES.encrypt($('#password').val(), ceo_cook, { format: CryptoJSAesJson }).toString();
+			inputPass = cryptoPass($('#password').val());
 			data = {
 				modalReq: true,
 				bulkId: form.find('input[name="bulkId"]').val(),
 				bulkTicked: form.find('input[name="bulkTicked"]').val(),
 				bulkStatus: form.find('input[name="bulkStatus"]').val(),
-				pass: btoa(JSON.stringify({
-					passWord: cypherPass,
-					plot: btoa(ceo_cook)
-				}))
+				pass: inputPass
 			}
 			verb = 'POST'; who = 'Bulk'; where = 'DeleteNoConfirmBulk';
 			callNovoCore(verb, who, where, data, function(response) {

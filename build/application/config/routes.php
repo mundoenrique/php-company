@@ -80,7 +80,7 @@ $route['(:any)/consulta-orden-de-servicio'] = "Novo_Inquiries/serviceOrders";
 $route['(:any)/consulta-lote'] = "Novo_Inquiries/bulkDetail";
 $route['(:any)/detalle-orden-de-servicio'] = "Novo_Inquiries/detailServiceOrders";
 //DownloadFile
-$route['(:any)/descargar-archivo-os'] = "Novo_DownloadFiles/exportFiles";
+$route['(:any)/descargar-archivo'] = "Novo_DownloadFiles/exportFiles";
 //Reports
 $route['(:any)/reportes'] = "Novo_Reports/getReportsList";
 //settings

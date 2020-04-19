@@ -108,8 +108,10 @@
 										<i class="icon icon-remove" aria-hidden="true"></i>
 									</button>
 									<?php endif; ?>
-									<form id="bulk-<?= $list->OrderNumber; ?>" method="POST">
-										<input type="hidden" name="idOS" value="<?= $list->OrderNumber; ?>">
+									<form method="POST" action="<?= base_url('descargar-archivo'); ?>">
+										<input type="hidden" name="OrderNumber" value="<?= $list->OrderNumber; ?>">
+										<input type="hidden" name="who" value="Inquiries">
+										<input type="hidden" name="where" value="exportFiles">
 								  </form>
 								</td>
 							</tr>

@@ -42,9 +42,7 @@ $(function () {
 		insertFormInput(true, bulkdetail)
 		$('.cover-spin').show(0);
 		bulkdetail.submit();
-	})
-
-
+	});
 
 	$('#datepicker_start, #datepicker_end').datepicker({
 		onSelect: function (selectedDate) {
@@ -129,10 +127,10 @@ $(function () {
 
 		switch (action) {
 			case lang.GEN_BTN_DOWN_PDF:
-				form.attr('action', baseURL+'descargar-archivo-os');
-				form.append('<input type="hidden" name="views" value="serviceOrders">');
-				form.append('<input type="hidden" name="who" value="Inquiries">');
-				form.append('<input type="hidden" name="where" value="exportFiles">');
+				form.submit()
+				setTimeout(function () {
+					$('.cover-spin').hide();
+				}, lang.GEN_TIME_DOWNLOAD_FILE);
 				break;
 			case lang.GEN_BTN_CANCEL_ORDER:
 				var oldID = $('#accept').attr('id');
@@ -165,27 +163,19 @@ $(function () {
 		}
 
 		insertFormInput(false);
-
-		if (action == lang.GEN_BTN_DOWN_PDF) {
-			form.submit();
-		}
-		setTimeout(function () {
-			$('.cover-spin').hide();
-		}, lang.GEN_TIME_DOWNLOAD_FILE);
-
 	});
 })
 
 function format(bulk) {
-
 	var table, body = '';
 	bulk = JSON.parse(bulk)
 	$.each(bulk, function (key, value) {
 		body+=	'<tr>';
 		body+= 		'<td>';
 		body+=			'<a class="btn-link big-modal this-bulk">'+value.bulkNumber+'</a>';
-		body+= 			'<form class="form-group" action="'+baseURL+'detalle-orden-de-servicio" method="post">';
+		body+= 			'<form class="form-group" action="'+baseURL+'consulta-lote" method="post">';
 		body+= 				'<input type="hidden" name="bulkId" value='+value.bulkId+'>';
+		body+= 				'<input type="hidden" name="bulkfunction" value="Consulta de orden de servicio">';
 		body+=			'</form>';
 		body+=		'</td>';
 		body+= 		'<td>'+value.bulkLoadDate+'</td>';
@@ -215,9 +205,6 @@ function format(bulk) {
 	table+= '</table>';
 
 	return table;
-
-
-
 }
 
 /**
@@ -234,19 +221,15 @@ function deleteBulk(oldID) {
 
 		if (formDeleteBulk.valid()) {
 			$(this)
-				.off('click')
-				.html(loader)
-				.prop('disabled', true)
-				.attr('id', oldID);
-			ceo_cook = getCookieValue();
-			cypherPass = CryptoJS.AES.encrypt($('#password').val(), ceo_cook, { format: CryptoJSAesJson }).toString();
+			.off('click')
+			.html(loader)
+			.prop('disabled', true)
+			.attr('id', oldID);
+			inputPass = cryptoPass($('#password').val());
 			data = {
 				modalReq: true,
 				idOS: form.find('input[name="idOS"]').val(),
-				pass: btoa(JSON.stringify({
-					passWord: cypherPass,
-					plot: btoa(ceo_cook)
-				}))
+				pass: inputPass
 			}
 			verb = 'POST'; who = 'Inquiries'; where = 'ClearServiceOrders';
 			callNovoCore(verb, who, where, data, function (response) {

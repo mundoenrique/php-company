@@ -71,7 +71,6 @@ $(function () {
 	};
 
 	function getCredentialsUser() {
-		ceo_cook = getCookieValue();
 		cypherPass = cryptoPass(userPass.val());
 
 		return {

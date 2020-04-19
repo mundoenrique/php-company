@@ -108,7 +108,7 @@
 		<div class="flex flex-column mb-4 mt-4 px-5 justify-center items-center">
 			<div class="flex flex-row">
 				<div class="mb-3 mr-4">
-					<a href="<?= base_url('lotes-autorizacion') ?>" class="btn btn-link btn-small big-modal"><?= lang('GEN_BTN_BACK') ?></a>
+					<a href="<?= $this->agent->referrer(); ?>" class="btn btn-link btn-small big-modal"><?= lang('GEN_BTN_BACK') ?></a>
 				</div>
 			</div>
 		</div>
