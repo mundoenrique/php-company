@@ -157,6 +157,7 @@ if(!function_exists('languajeLoad')) {
 					'authorizeBulk'	=> ['bulk'],
 					'deleteConfirmBulk'	=> ['bulk'],
 					'disassConfirmBulk'	=> ['bulk'],
+					'serviceOrders'	=> ['bulk'],
 				];
 				break;
 			case 'bnt':
@@ -215,6 +216,7 @@ if(!function_exists('languajeLoad')) {
 					'deleteConfirmBulk'	=> ['bulk'],
 					'disassConfirmBulk'	=> ['bulk'],
 					'calculateServiceOrder'	=> ['bulk'],
+					'serviceOrders'	=> ['bulk'],
 					'getReportsList'	=> ['reports'],
 					'getReport'	=> ['reports'],
 					'deleteFile'	=> ['reports'],

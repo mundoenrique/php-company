@@ -61,7 +61,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 		return $this->responseToTheView('ServiceOrderStatus');
 	}
 	/**
-	 * @info Método para obtener las ordenes de servicio
+	 * @info Método para obtener lalista de ordenes de servicio en rango de fecha dado
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date Janury 09th, 2019
 	 */
@@ -176,8 +176,8 @@ class Novo_Inquiries_Model extends NOVO_Model {
 		log_message('INFO', 'NOVO Inquiries Model: ClearServiceOrders Method Initialized');
 
 		$this->className = 'com.novo.objects.TOs.OrdenServicioTO';
-		$this->dataAccessLog->modulo = 'anularOS';
-		$this->dataAccessLog->function = 'anularOS';
+		$this->dataAccessLog->modulo = 'Consultas';
+		$this->dataAccessLog->function = 'Ordenes de servicio';
 		$this->dataAccessLog->operation = 'Anular orden de servicio';
 
 		$rifEmpresa=$this->session->userdata('enterpriseInf')->idFiscal;
@@ -185,13 +185,13 @@ class Novo_Inquiries_Model extends NOVO_Model {
 		unset($dataRequest->modalReq);
 
 		$this->dataRequest->idOperation = 'desconciliarOS';
-		$this->dataRequest->idOS = $dataRequest->idOS;
-		$this->dataRequest->rifEmpresa = $rifEmpresa;
+		$this->dataRequest->idOS = $dataRequest->OrderNumber;
+		$this->dataRequest->rifEmpresa = $this->session->enterpriseInf->idFiscal;
 
 		$password = json_decode(base64_decode($dataRequest->pass));
 		$password = $this->cryptography->decrypt(
 			base64_decode($password->plot),
-			utf8_encode($password->passWord)
+			utf8_encode($password->password)
 		);
 		$this->dataRequest->usuario = [
 			'userName' => $this->userName,
@@ -568,7 +568,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 		$this->dataAccessLog->function = 'Descarga de archivo';
 		$this->dataAccessLog->operation = 'Ver pdf de orden de servicio';
 
-		$this->dataRequest->idOperation = 'visualizarOS';
+		$this->dataRequest->idOperation = 'visualizarOSs';
 		$this->dataRequest->rifEmpresa = $this->session->userdata('enterpriseInf')->idFiscal;
 		$this->dataRequest->acCodCia = $this->session->userdata('enterpriseInf')->enterpriseCode;
 		$this->dataRequest->acprefix = $this->session->userdata('productInf')->productPrefix;

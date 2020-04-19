@@ -149,7 +149,7 @@ $(function () {
 				}
 				var bulkFile = $(this).closest('tr').find('td:nth-child(3)').text();
 				inputModal = '<form id="delete-bulk-form" class="form-group">';
-				inputModal+= '<span class="regular"> '+lang.BULK_DELETE_DATE+': '+bulkFile+'</span>';
+				inputModal+= '<span class="regular">'+lang.BULK_DELETE_DATE+': '+bulkFile+'</span>';
 				inputModal+= 		'<input id="password" class="form-control mt-2 h6 col-9 pwd-input" name="password" type="password" autocomplete="off" placeholder="'+lang.GEN_PLACE_PASSWORD+'">';
 				inputModal+= 		'<div class="help-block"></div>';
 				inputModal+= '</form>';

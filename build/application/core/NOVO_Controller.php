@@ -127,12 +127,10 @@ class NOVO_Controller extends CI_Controller {
 				if($valid) {
 					$this->request = $this->verify_access->createRequest($this->rule, $this->appUserName);
 				}
-
 			}
 
 			$this->preloadView($access && $valid);
 		}
-
 	}
 	/**
 	 * Método para realizar la precarga de las vistas
@@ -226,19 +224,16 @@ class NOVO_Controller extends CI_Controller {
 		log_message('INFO', 'NOVO Controller: responseAttr Method Initialized');
 
 		$this->render->code = $responseView;
-		$downloadModel = FALSE;
 
 		if(is_object($responseView)) {
 			$this->render->code = $responseView->code;
-			$downloadModel = isset($this->responseView->downloadModel) ? FALSE : TRUE;
 		}
 
 		if($this->session->has_userdata('productInf')) {
 			$this->render->prefix = $this->session->productInf->productPrefix;
 		}
 
-
-		if(($this->render->code == 0  && $active) || ($this->render->code === 3  && $downloadModel == TRUE)) {
+		if($this->render->code == 0  && $active) {
 			$this->load->model('Novo_Business_Model', 'Business');
 			$enterpriseList = $this->Business->callWs_getEnterprises_Business(TRUE);
 

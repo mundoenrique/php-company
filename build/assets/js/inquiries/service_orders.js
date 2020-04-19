@@ -4,7 +4,6 @@ $(function () {
 	var serviceOrdersBtn = $('#service-orders-btn');
 	var firstDate;
 	var lastdate;
-	form = $('#service-orders-form');
 
 	resultServiceOrders = $('#resultServiceOrders').DataTable({
 		drawCallback: function (d) {
@@ -92,6 +91,7 @@ $(function () {
 		var btnAction = $(this);
 		var statusOrder = $('#status-order');
 		btnText = btnAction.text().trim();
+		form = $('#service-orders-form');
 		formInputTrim(form);
 		validateForms(form);
 
@@ -122,11 +122,11 @@ $(function () {
 		e.preventDefault();
 		var event = $(e.currentTarget);
 		var action = event.attr('title');
-		form = $(this).parent().find('form')
-		insertFormInput(true, form);
+		form = $(this).parent().find('form');
 
 		switch (action) {
 			case lang.GEN_BTN_DOWN_PDF:
+				insertFormInput(true, form);
 				form.submit()
 				setTimeout(function () {
 					$('.cover-spin').hide();
@@ -134,9 +134,10 @@ $(function () {
 				break;
 			case lang.GEN_BTN_CANCEL_ORDER:
 				var oldID = $('#accept').attr('id');
+				var inputModal;
+				var inputSelected = form.find('input[name="OrderNumber"]').val();
 				$(this).closest('tr').addClass('select');
 				$('#accept').attr('id', 'delete-bulk-btn');
-				var inputModal;
 				data = {
 					btn1: {
 						text: lang.GEN_BTN_CANCEL_ORDER,
@@ -147,12 +148,12 @@ $(function () {
 					}
 				}
 				inputModal = '<form id="delete-bulk-form" class="form-group">';
-				inputModal+= '<span class="regular">Por favor ingresa la contraseña para anular la orden de servicio </span>';
+				inputModal+= '<span class="regular">'+lang.BULK_DELETE_SO+' <strong>'+inputSelected+'</strong></span>';
 				inputModal+= 		'<input id="password" class="form-control mt-2 h6 col-9 pwd-input" name="password" type="password" autocomplete="off" placeholder="'+lang.GEN_PLACE_PASSWORD+'">';
 				inputModal+= 		'<div class="help-block"></div>';
 				inputModal+= '</form>';
 				notiSystem('Anular orden de servicio', inputModal, lang.GEN_ICON_INFO, data);
-				deleteBulk(oldID);
+				deleteBulk(oldID, inputSelected);
 
 				$('#cancel').on('click', function (e) {
 					e.preventDefault();
@@ -161,8 +162,6 @@ $(function () {
 				});
 				break;
 		}
-
-		insertFormInput(false);
 	});
 })
 
@@ -212,7 +211,7 @@ function format(bulk) {
  * @author J. Enrique Peñaloza Piñero
  * @date December 18th, 2019
  */
-function deleteBulk(oldID) {
+function deleteBulk(oldID, inputSelected) {
 	var deleteBulkBtn = $('#delete-bulk-btn')
 	var formDeleteBulk = $('#delete-bulk-form');
 	deleteBulkBtn.on('click', function () {
@@ -220,6 +219,7 @@ function deleteBulk(oldID) {
 		validateForms(formDeleteBulk);
 
 		if (formDeleteBulk.valid()) {
+			insertFormInput(true);
 			$(this)
 			.off('click')
 			.html(loader)
@@ -228,7 +228,7 @@ function deleteBulk(oldID) {
 			inputPass = cryptoPass($('#password').val());
 			data = {
 				modalReq: true,
-				idOS: form.find('input[name="idOS"]').val(),
+				OrderNumber: inputSelected,
 				pass: inputPass
 			}
 			verb = 'POST'; who = 'Inquiries'; where = 'ClearServiceOrders';
@@ -237,6 +237,8 @@ function deleteBulk(oldID) {
 				if (response.cod == 0) {
 					resultServiceOrders.row('.select').remove().draw(false);
 				}
+
+				insertFormInput(false);
 			});
 		}
 	});

@@ -333,7 +333,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 		$password = json_decode(base64_decode($dataRequest->pass));
 		$password = $this->cryptography->decrypt(
 			base64_decode($password->plot),
-			utf8_encode($password->passWord)
+			utf8_encode($password->password)
 		);
 		$this->dataRequest->usuario = [
 			'userName' => $this->userName,
@@ -458,7 +458,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 		$password = json_decode(base64_decode($dataRequest->pass));
 		$password = $this->cryptography->decrypt(
 			base64_decode($password->plot),
-			utf8_encode($password->passWord)
+			utf8_encode($password->password)
 		);
 		$this->dataRequest->usuario = [
 			'userName' => $this->userName,
@@ -930,6 +930,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 			case 0:
 				$this->response->code = 0;
 				$this->response->data = lang('GEN_LINK_CONS_ORDERS_SERV');
+				$serviceOrdersList = [];
 
 				foreach($response->lista AS $list) {
 					$orderList = [];

@@ -12,10 +12,10 @@ $(function () {
 		if(form.valid()) {
 			insertFormInput(true)
 			$(this).html(loader);
-			inputPass = cryptoPass(inputPass.val());
+			var pwd = cryptoPass(inputPass.val());
 			data = {
 				bulkTicked: $('#bulkTicked').val(),
-				pass: inputPass
+				pass: pwd
 			}
 			verb = 'POST'; who = 'Bulk'; where = 'ConfirmBulk';
 			callNovoCore(verb, who, where, data, function(response) {
