@@ -283,7 +283,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 					case '10':
 						if(isset($response->registrosLoteEmision) && count($response->registrosLoteEmision) > 0) {
 							$bulkRecordsHeader = [lang('GEN_TABLE_DNI'), lang('GEN_TABLE_FULL_NAME'), lang('GEN_TABLE_STATUS')];
-							$detailInfo['bulkRecords'] = $this->buildEmisionRecords_Bulk($response->registrosLoteEmision);
+							$detailInfo['bulkRecords'] = $this->buildEmisionRecords_Bulk($response->registrosLoteEmision, $response->ctipolote);
 						}
 						break;
 					case '3':
@@ -291,7 +291,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 					case 'A':
 						if(isset($response->registrosLoteEmision) && count($response->registrosLoteEmision) > 0) {
 							$bulkRecordsHeader = [lang('GEN_TABLE_DNI'), lang('GEN_TABLE_FULL_NAME'), lang('GEN_TABLE_ACCOUNT_NUMBER')];
-							$detailInfo['bulkRecords'] = $this->buildEmisionRecords_Bulk($response->registrosLoteEmision);
+							$detailInfo['bulkRecords'] = $this->buildEmisionRecords_Bulk($response->registrosLoteEmision, $response->ctipolote);
 						}
 						break;
 					case '2':
@@ -323,9 +323,42 @@ class Novo_Inquiries_Model extends NOVO_Model {
 					case 'R':
 					case 'C':
 					case 'N':
+						if(isset($response->registrosLoteReposicion) && count($response->registrosLoteReposicion) > 0) {
+							$bulkRecordsHeader = [lang('GEN_TABLE_DNI'), lang('GEN_TABLE_ACCOUNT_NUMBER')];
+							$detailInfo['bulkRecords'] = $this->buildReplacement_Bulk($response->registrosLoteReposicion, $response->ctipolote);
+						}
 						break;
+					default:
+						if(isset($response->registros) && count($response->registros) > 0) {
+							array_shift($response->registros->ordenAtributos);
+							$attrOrder = $response->registros->ordenAtributos;
+							array_shift($response->registros->nombresColumnas);
+							$headerName = $response->registros->nombresColumnas;
+
+							foreach ($response->registros->nombresColumnas as $key => $value) {
+								$value = ucfirst(mb_strtolower($value));
+								array_push(
+									$bulkRecordsHeader,
+									$value
+								);
+							}
+
+							foreach ($response->registros->detalle AS $key => $records) {
+								$record = new stdClass();
+								foreach ($attrOrder AS $attr) {
+									if($attr == 'NUMERO_CUENTA') {
+										$records->$attr = maskString($records->$attr, 4, 6);
+									}
+									$record->$attr = $records->$attr;
+								}
+								array_push(
+									$detailInfo['bulkRecords'],
+									$record
+								);
+							}
+						}
 				}
-				break;
+			break;
 		}
 
 		$detailInfo['bulkHeader'] = $bulkRecordsHeader;
@@ -334,13 +367,13 @@ class Novo_Inquiries_Model extends NOVO_Model {
 		return $this->responseToTheView('BulkDetail');
 	}
 	/**
-	 * @info Construir el cuerpo de la table del detalle de un lote de emisión
+	 * @info Construir el cuerpo de la tabla del detalle de un lote de emisión
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date April 17th, 2020
 	 * @modified
 	 * @date
 	 */
-	private function buildEmisionRecords_Bulk($emisionRecords)
+	private function buildEmisionRecords_Bulk($emisionRecords, $bulkType)
 	{
 		log_message('INFO', 'NOVO Inquiries Model: buildEmisionRecords Method Initialized');
 
@@ -483,6 +516,38 @@ class Novo_Inquiries_Model extends NOVO_Model {
 
 			$record->cardHoldName = $record->cardHoldName.' '.$record->cardHoldLastName;
 			unset($record->cardHoldLastName);
+			$detailRecords[] = $record;
+		}
+
+		return $detailRecords;
+	}
+	/**
+	 * @info Construir el cuerpo de la table del detalle de un lote de reposición
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date April 17th, 2020
+	 * @modified
+	 * @date
+	 */
+	private function buildReplacement_Bulk($replaceRecords, $bulkType)
+	{
+		log_message('INFO', 'NOVO Inquiries Model: buildreplacement Method Initialized');
+
+		$detailRecords = [];
+
+		foreach($replaceRecords AS $records) {
+			$record = new stdClass();
+			foreach($records AS $pos => $value) {
+				switch ($pos) {
+					case 'aced_rif':
+						$cardHoldId = $value != '' ? $value : '';
+						$record->cardHoldId = $value;
+						break;
+					case 'nocuenta':
+						$record->cardHoldAccount = maskString($value, 6, 4);
+						break;
+				}
+			}
+
 			$detailRecords[] = $record;
 		}
 

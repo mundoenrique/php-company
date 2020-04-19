@@ -181,7 +181,7 @@ class Novo_User_Model extends NOVO_Model {
 				$this->response->data = [
 					'btn1'=> [
 						'text'=> lang('GEN_BTN_CONTINUE'),
-						'link'=> base_url('inicio'),
+						'link'=> 'inicio',
 						'action'=> 'redirect'
 					]
 				];
@@ -251,7 +251,7 @@ class Novo_User_Model extends NOVO_Model {
 				$this->response->data = [
 					'btn1'=> [
 						'text'=> lang('GEN_BTN_CONTINUE'),
-						'link'=> base_url('inicio'),
+						'link'=> 'inicio',
 						'action'=> 'redirect'
 					]
 				];
@@ -362,7 +362,7 @@ class Novo_User_Model extends NOVO_Model {
 			$this->response->data = [
 				'btn1'=> [
 					'text'=> lang('GEN_BTN_ACCEPT'),
-					'link'=> base_url('inicio'),
+					'link'=> 'inicio',
 					'action'=> 'redirect'
 				]
 			];
