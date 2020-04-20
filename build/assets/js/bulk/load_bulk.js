@@ -10,7 +10,6 @@ $(function () {
 	var selectBranchOffice = $('#branch-office');
 	var selectTypeBulk = $('#type-bulk');
 	var uploadFileBtn = $('#upload-file-btn');
-	form = $('#upload-file-form');
 
 	$('.input-file').each(function () {
     var input = $(this);
@@ -38,6 +37,7 @@ $(function () {
 		e.preventDefault();
 		var btnAction = $(this);
 		btnText = btnAction.text().trim();
+		form = $('#upload-file-form');
 		validateForms(form);
 
 		if(form.valid()) {
@@ -121,15 +121,17 @@ $(function () {
 		e.preventDefault();
 		var event = $(e.currentTarget);
 		var action = event.attr('title');
-		form = $(this).parent().find('form')
-		insertFormInput(true, form);
 
 		switch(action) {
 			case lang.GEN_BTN_SEE:
+				form = $(this).parent().find('form')
+				insertFormInput(true, form);
 				form.attr('action', baseURL+'detalle-lote');
 				form.append('<input type="hidden" name="bulkView" value="detail">');
 				break;
 			case lang.GEN_BTN_CONFIRM:
+				form = $(this).parent().find('form')
+				insertFormInput(true, form);
 				form.attr('action', baseURL+'confirmar-lote');
 				form.append('<input type="hidden" name="bulkView" value="confirm">');
 				break;

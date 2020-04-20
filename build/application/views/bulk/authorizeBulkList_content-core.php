@@ -69,7 +69,14 @@
 					<form id="sign-bulk-form" method="post">
 						<div class="flex row mt-3 mb-2 mx-2 justify-end">
 							<div class="col-4 col-lg-3 col-xl-3 form-group">
-								<input id="password-sign" name="password" class="form-control h6 pwd-input" type="password" placeholder="<?= lang('GEN_PLACE_PASSWORD'); ?>">
+								<div class="input-group">
+									<input id="password-sign" name="password" class="form-control h6 pwd-input" type="password"
+										placeholder="<?= lang('GEN_PLACE_PASSWORD'); ?>">
+									<div class="input-group-append">
+										<span id="pwd_action" class="input-group-text pwd-action" title="<?= lang('GEN_SHOW_PASS') ?>"><i
+												class="icon-view mr-0"></i></span>
+									</div>
+								</div>
 								<div class="help-block bulk-select text-left"></div>
 							</div>
 							<div class="col-auto">
@@ -151,7 +158,14 @@
 								<div class="help-block"></div>
 							</div>
 							<div class="col-6 col-lg-auto form-group">
-								<input id="password-auth" name="password" class="form-control h6 pwd-input" type="password" placeholder="<?= lang('GEN_PLACE_PASSWORD'); ?>">
+								<div class="input-group">
+									<input id="password-auth" name="password" class="form-control h6 pwd-input" type="password"
+										placeholder="<?= lang('GEN_PLACE_PASSWORD'); ?>">
+									<div class="input-group-append">
+										<span id="pwd_action" class="input-group-text pwd-action" title="<?= lang('GEN_SHOW_PASS') ?>"><i
+												class="icon-view mr-0"></i></span>
+									</div>
+								</div>
 								<div class="help-block bulk-select text-left"></div>
 							</div>
 							<div class="col-3 col-lg-auto">
