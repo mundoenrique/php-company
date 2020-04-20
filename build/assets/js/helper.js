@@ -273,7 +273,11 @@ function getPropertyOfElement(property, element) {
  */
 function formInputTrim(form) {
 	form.find('input, select').each(function () {
-		var trimVal = $(this).val().trim()
+		var thisValInput = $(this).val();
+		if(thisValInput == null) {
+			return;
+		}
+		var trimVal = thisValInput.trim()
 		$(this).val(trimVal)
 	});
 }
