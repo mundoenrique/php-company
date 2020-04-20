@@ -58,8 +58,8 @@
   --border-color: #DDDDDD;
   --border-color-2: #DDDDDD;
   --text-color: #4E4044;
-  --placeholder-color: #bcc0c6;
-	--disabled-color: #ececec;
+  --placeholder-color: #DDDDDD;
+	--disabled-color: #DDDDDD;
 
   --label-color: #4E4044;
   --primary-shade: #012c71a6;
@@ -112,7 +112,7 @@
   /* Border */
   --border-width: 1px;
   --border-radius: 0;
-  --btn-border-radius: 0;
+  --btn-border-radius: 20px;
 
   /* Buttons */
   --button-font-family: inherit;
