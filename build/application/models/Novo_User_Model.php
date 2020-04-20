@@ -146,6 +146,20 @@ class Novo_User_Model extends NOVO_Model {
 					]
 				];
 				break;
+				case -424:
+				$this->response->code = 2;
+				$this->response->title = lang('GEN_LOGIN_IP_TITLE');
+				$this->response->assert = lang('GEN_LOGIN_IP_ASSERT');
+				$this->response->labelInput = lang('GEN_LOGIN_IP_LABEL_INPUT');
+				$this->response->icon = lang('GEN_ICON_WARNING');
+				$this->response->data = [
+					'btn1'=> [
+						'text'=> lang('GEN_BTN_ACCEPT'),
+						'link'=> base_url('login'),
+						'action'=> 'redirect'
+					]
+				]; 
+				break; 
 		}
 
 		return $this->responseToTheView(lang('GEN_LOGIN'));
