@@ -164,7 +164,6 @@ class Novo_Business_Model extends NOVO_Model {
 		$enterpriseInf = $this->session->enterpriseInf;
 		$productPrefix = $dataRequest->productPrefix;
 
-		log_message('INFO', '**********************'.json_encode($dataRequest));
 		if(isset($dataRequest->goToDetail)) {
 			unset($dataRequest->goToDetail, $dataRequest->productPrefix);
 			$enterpriseInf = $dataRequest;

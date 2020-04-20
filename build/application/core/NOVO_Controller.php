@@ -224,16 +224,18 @@ class NOVO_Controller extends CI_Controller {
 		log_message('INFO', 'NOVO Controller: responseAttr Method Initialized');
 
 		$this->render->code = $responseView;
+		$download = FALSE;
 
 		if(is_object($responseView)) {
 			$this->render->code = $responseView->code;
+			$download = !isset($responseView->download) ?: $responseView->download;
 		}
 
 		if($this->session->has_userdata('productInf')) {
 			$this->render->prefix = $this->session->productInf->productPrefix;
 		}
 
-		if($this->render->code == 0  && $active) {
+		if(($this->render->code == 0  && $active) || $download) {
 			$this->load->model('Novo_Business_Model', 'Business');
 			$enterpriseList = $this->Business->callWs_getEnterprises_Business(TRUE);
 

@@ -36,14 +36,24 @@ class Novo_Inquiries extends NOVO_Controller {
 		);
 		$renderOrderList = FALSE;
 		$orderList = [];
-		$result_order=FALSE;
 
-		if($this->session->flashdata('serviceOrdersList')) {
+		if ($this->session->flashdata('serviceOrdersList')) {
 			$orderList = $this->session->flashdata('serviceOrdersList');
 			$renderOrderList = TRUE;
 		}
 
-		$this->responseAttr();
+		if ($this->session->flashdata('requestOrdersList')) {
+			$requestOrdersList = $this->session->flashdata('requestOrdersList');
+			$this->session->set_flashdata('requestOrdersList', $requestOrdersList);
+		}
+
+		if ($this->session->flashdata('download')) {
+			$respDownload = $this->session->flashdata('download');
+			$this->responseAttr($respDownload);
+		} else {
+			$this->responseAttr();
+		}
+
 		$this->load->model('Novo_Inquiries_Model', 'Inquiries');
 		$responseList = $this->Inquiries->callWs_ServiceOrderStatus_Inquiries();
 		$this->render->orderStatus = $responseList->data->orderStatus;
@@ -64,9 +74,9 @@ class Novo_Inquiries extends NOVO_Controller {
 	{
 		log_message('INFO', 'NOVO Inquiries: bulkDetail Method Initialized');
 
-		/* if(!isset($this->request->bulkId) && !$this->session->flashdata('detailServiceOrders'))  {
+		if(!isset($this->request->bulkId))  {
 			redirect(base_url('detalle-producto'), 'location');
-		} */
+		}
 
 		$view = 'bulkDetail';
 		$response = $this->loadModel($this->request);
@@ -86,50 +96,6 @@ class Novo_Inquiries extends NOVO_Controller {
 		}
 
 		$this->render->titlePage = lang('GEN_DETAIL_BULK_TITLE');
-		$this->views = ['inquiries/'.$view];
-		$this->loadView($view);
-	}
-	/**
-	 * @info Método para renderizar el detalle de consulta de lotes
-	 * @author Luis Molina
-	 * @date Febrero 29Sat, 2020
-	 */
-	public function detailServiceOrders()
-	{
-		log_message('INFO', 'NOVO Inquiries: detailServiceOrders Method Initialized');
-
-		if(!isset($this->request->bulkId) && !$this->session->flashdata('detailServiceOrders'))  {
-			redirect(base_url('detalle-producto'), 'location');
-		}
-
-		$view = 'detailServiceOrders';
-
-		if($this->session->flashdata('detailServiceOrders')) {
-			$response = $this->session->flashdata('detailServiceOrders');
-		} else {
-			$response = $this->loadModel($this->request);
-		}
-
-		if($this->session->flashdata('response-msg-detail-order')) {
-			$result_detail_order = $this->session->flashdata('response-msg-detail-order');
-			$this->responseAttr($result_detail_order);
-		} else {
-			$this->responseAttr();
-		}
-
-		array_push(
-			$this->includeAssets->cssFiles,
-			"third_party/dataTables-1.10.20"
-		);
-		array_push(
-			$this->includeAssets->jsFiles,
-			"third_party/dataTables-1.10.20",
-			"inquiries/detail_service_orders",
-			"business/widget-enterprise"
-		);
-
-		$this->render->detail = $response;
-		$this->render->titlePage = lang('GEN_DETAIL_SERVICE_ORDERS_TITLE');
 		$this->views = ['inquiries/'.$view];
 		$this->loadView($view);
 	}

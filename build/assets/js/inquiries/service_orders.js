@@ -74,6 +74,7 @@ $(function () {
 
 	$(":radio").on("change", function () {
 		$('#datepicker_start, #datepicker_end').datepicker('setDate', null);
+		form = $('#service-orders-form');
 		form.find('.form-control').removeClass('has-error')
 		$('.help-block').text('');
 		var timeBefore = parseInt($(this).val());
@@ -101,7 +102,7 @@ $(function () {
 				initialDate: firstDate,
 				finalDate: lastdate,
 				status: statusOrder.val(),
-				statusText: statusOrder.find('option:selected').text()
+				statusText: statusOrder.find('option:selected').text().trim()
 			}
 
 			insertFormInput(true);
@@ -112,6 +113,9 @@ $(function () {
 				} else {
 					btnAction.html(btnText);
 					insertFormInput(false);
+					$('#resultServiceOrders').dataTable().fnClearTable();
+    			$('#resultServiceOrders').dataTable().fnDestroy();
+					$('.hide-out').addClass('hide');
 				}
 			});
 		}
@@ -131,6 +135,7 @@ $(function () {
 				setTimeout(function () {
 					$('.cover-spin').hide();
 				}, lang.GEN_TIME_DOWNLOAD_FILE);
+				insertFormInput(false);
 				break;
 			case lang.GEN_BTN_CANCEL_ORDER:
 				var oldID = $('#accept').attr('id');

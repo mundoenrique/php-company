@@ -61,7 +61,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 		return $this->responseToTheView('ServiceOrderStatus');
 	}
 	/**
-	 * @info Método para obtener lalista de ordenes de servicio en rango de fecha dado
+	 * @info Método para obtener la lista de ordenes de servicio en rango de fecha dado
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date Janury 09th, 2019
 	 */
@@ -72,8 +72,8 @@ class Novo_Inquiries_Model extends NOVO_Model {
 
 		$this->className = 'com.novo.objects.MO.ListadoOrdenServicioMO';
 		$this->dataAccessLog->modulo = 'Consultas';
-		$this->dataAccessLog->function = 'Lista de ordenes de servicio';
-		$this->dataAccessLog->operation = 'Ordenes de servicios';
+		$this->dataAccessLog->function = 'Ordenes de servicio';
+		$this->dataAccessLog->operation = 'Lista de ordenes de servicio';
 
 		$this->dataRequest->idOperation = 'buscarOrdenServicio';
 		$this->dataRequest->rifEmpresa = $this->session->enterpriseInf->idFiscal;
@@ -85,7 +85,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 		$this->dataRequest->statusText = $dataRequest->statusText;
 		$statusText = $dataRequest->statusText;
 
-   	$response = $this->sendToService('ServiceOrderStatus');
+   	$response = $this->sendToService('callWs_GetServiceOrders');
 
 		switch ($this->isResponseRc) {
 			case 0:
@@ -147,19 +147,27 @@ class Novo_Inquiries_Model extends NOVO_Model {
 				break;
 			case -5:
 				$this->response->title = 'Ordenes de servicio';
-				$this->response->msg = 'No fue posible obtener la orden de servicio';
+				$this->response->msg = 'No fue posible obtener las ordenes de servicio';
 				$this->response->icon = lang('GEN_ICON_WARNING');
-				$this->response->data['btn1']['action'] = 'close';
+				if($this->input->is_ajax_request()) {
+					$this->response->data['btn1']['action'] = 'close';
+				} else {
+					$this->response->data->resp['btn1']['action'] = 'close';
+				}
 				break;
 			case -150:
 				$this->response->title = 'Ordenes de servicio';
 				$this->response->msg = novoLang(lang('RESP_SERVICE_ORDES'), $statusText);
 				$this->response->icon = lang('GEN_ICON_INFO');
-				$this->response->data['btn1']['action'] = 'close';
+				if($this->input->is_ajax_request()) {
+					$this->response->data['btn1']['action'] = 'close';
+				} else {
+					$this->response->data->resp['btn1']['action'] = 'close';
+				}
 				break;
 		}
-		log_message('INFO', '******************************'.json_encode($dataRequest));
-		return $this->responseToTheView('ServiceOrder');
+
+		return $this->responseToTheView('callWs_GetServiceOrders');
 	}
 	/**
 	 * @info Elimina un lote
@@ -256,6 +264,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 			'bulkHeader' => [],
 			'bulkRecords' => [],
 		];
+		$bulkRecordsHeader = [];
 
 		switch ($this->isResponseRc) {
 			case 0:
@@ -271,7 +280,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 				$detailInfo['bulkStatus'] = $response->cestatus;
 				$detailInfo['bulkStatusText'] = ucfirst(mb_strtolower($response->status));
 				$detailInfo['bulkAmount'] = $response->montoNeto;
-				$bulkRecordsHeader = [];
+
 
 				switch($response->ctipolote) {
 					case '1':
@@ -500,7 +509,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 							$record->cardHoldbeneficiary = $value;
 						break;
 					case 'nro_cuenta':
-						if($bulkType == 'G'){
+						if ($bulkType == 'G') {
 							continue;
 						}
 
@@ -579,14 +588,18 @@ class Novo_Inquiries_Model extends NOVO_Model {
 				exportFile($response->archivo, 'pdf', 'Orden_de_servicio'.$nameFile);
 				break;
 			default:
-				$this->response->code = 3;
-				$this->response->title = lang('GEN_DOWNLOAD_FILE');
-				$this->response->msg = lang('GEN_WARNING_DOWNLOAD_FILE');
-				$this->response->icon = lang('GEN_ICON_WARNING');
-				$this->response->data->resp['btn1']['action'] = 'close';
-				$this->response->downloadModel = TRUE;
-
-				return $this->responseToTheView('exportFiles');
+				$requestOrdersList = $this->session->flashdata('requestOrdersList');
+				$this->load->model('Novo_inquiries_Model', 'getOrders');
+				$response = $this->getOrders->callWs_GetServiceOrders_Inquiries($requestOrdersList);
+				$this->response->code =  $response->code != 0 ? $response->code : 3;
+				$this->response->title = $response->code != 0 ? $response->title : lang('GEN_DOWNLOAD_FILE');
+				$this->response->msg = $response->code != 0 ? $response->msg : lang('GEN_WARNING_DOWNLOAD_FILE');
+				$this->response->icon =  $response->code != 0 ? $response->icon : lang('GEN_ICON_WARNING');
+				$this->response->download =  $response->data->resp['btn1']['action'] == 'redirect' ? FALSE : TRUE;
+				$this->response->data->resp['btn1']['text'] = lang('GEN_BTN_ACCEPT');
+				$this->response->data->resp['btn1']['action'] = $response->code != 0 ? $response->data->resp['btn1']['action'] : 'close';
+				$this->session->set_flashdata('download', $this->response);
+				redirect(base_url('consulta-orden-de-servicio'), 'location', 301);
 		}
 	}
 }

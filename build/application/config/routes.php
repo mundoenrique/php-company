@@ -78,7 +78,6 @@ $route['(:any)/lotes-calcular-orden'] = "Novo_Bulk/calculateServiceOrder";
 //Inquiries
 $route['(:any)/consulta-orden-de-servicio'] = "Novo_Inquiries/serviceOrders";
 $route['(:any)/consulta-lote'] = "Novo_Inquiries/bulkDetail";
-$route['(:any)/detalle-orden-de-servicio'] = "Novo_Inquiries/detailServiceOrders";
 //DownloadFile
 $route['(:any)/descargar-archivo'] = "Novo_DownloadFiles/exportFiles";
 //Reports

@@ -290,25 +290,6 @@ $config = [
 			'rules' => 'trim|required'
 		]
 	],
-	'detailServiceOrders' => [
-		[
-			'field' => 'numberOrder',
-			'label' => 'numberOrder',
-			'rules' => 'trim|regex_match[/^([\w]+)+$/i]'
-		]
-	],
-	'exportDetailServiceOrderssss' => [
-		[
-			'field' => 'data_lote',
-			'label' => 'data_lote',
-			'rules' => 'trim|regex_match[/^([\w]+)+$/i]'
-		],
-		[
-			'field' => 'file_type',
-			'label' => 'file_type',
-			'rules' => 'trim|required'
-		],
-	],
 	'exportFiles' => [
 		[
 			'field' => 'OrderNumber',
