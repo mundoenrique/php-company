@@ -76,7 +76,6 @@ $(function () {
  * @date 15/04/2019
  */
 function callNovoCore(verb, who, where, request, _response_) {
-	ceo_cook = getCookieValue();
 	request.screenSize = screen.width;
 	var dataRequest = JSON.stringify({
 		who: who,
@@ -85,7 +84,9 @@ function callNovoCore(verb, who, where, request, _response_) {
 	});
 	var codeResp = parseInt(lang.RESP_DEFAULT_CODE);
 	var formData = new FormData();
-	dataRequest = CryptoJS.AES.encrypt(dataRequest, ceo_cook, { format: CryptoJSAesJson }).toString();
+
+	dataRequest = cryptoPass(dataRequest, true);
+
 	if (request.file) {
 		formData.append('file', request.file);
 		delete request.file;
@@ -137,7 +138,7 @@ function callNovoCore(verb, who, where, request, _response_) {
 			icon: lang.GEN_ICON_DANGER,
 			data: {
 				btn1: {
-					link: baseURL + lang.GEN_ENTERPRISE_LIST,
+					link: lang.GEN_ENTERPRISE_LIST,
 					action: 'redirect'
 				}
 			}
@@ -222,7 +223,7 @@ function createButton(dialogMoldal, elementButton, valuesButton) {
 					.removeClass('secondary')
 					.addClass('primary');
 			}
-			$(location).attr('href', valuesButton.link);
+			$(location).attr('href', baseURL+valuesButton.link);
 		}
 		if (valuesButton.action === 'close') {
 			dialogMoldal.dialog('close');
@@ -271,7 +272,7 @@ function getPropertyOfElement(property, element) {
  * @date November 18th, 2019
  */
 function formInputTrim(form) {
-	form.find('input').each(function () {
+	form.find('input, select').each(function () {
 		var trimVal = $(this).val().trim()
 		$(this).val(trimVal)
 	});
@@ -281,13 +282,17 @@ function formInputTrim(form) {
  * @author J. Enrique Peñaloza Piñero
  * @date December 27th, 2019
  */
-function cryptoPass(password) {
+function cryptoPass(jsonObject, req) {
+	req = req == undefined ? false : req;
 	ceo_cook = getCookieValue();
-	cypherPass = CryptoJS.AES.encrypt(password, ceo_cook, { format: CryptoJSAesJson }).toString();
-	password = btoa(JSON.stringify({
-		password: cypherPass,
-		plot: btoa(ceo_cook)
-	}));
+	var cipherObject = CryptoJS.AES.encrypt(jsonObject, ceo_cook, { format: CryptoJSAesJson }).toString();
 
-	return password;
+	if(!req) {
+		cipherObject = btoa(JSON.stringify({
+			password: cipherObject,
+			plot: btoa(ceo_cook)
+		}));
+	}
+
+	return cipherObject;
 }

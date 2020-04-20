@@ -92,7 +92,7 @@ class Verify_Access {
 		$this->responseDefect->data = [
 			'btn1'=> [
 				'text'=> lang('GEN_BTN_ACCEPT'),
-				'link'=> base_url('inicio'),
+				'link'=> 'inicio',
 				'action'=> 'redirect'
 			]
 		];
@@ -162,7 +162,7 @@ class Verify_Access {
 				case 'authorizeBulkList':
 				case 'signBulkList':
 				case 'authorizeBulk':
-				case 'confirmBulkdetail':
+				case 'bulkDetail':
 				case 'calculateServiceOrder':
 					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBAUT'));
 					break;
@@ -172,13 +172,11 @@ class Verify_Access {
 					break;
 				case 'serviceOrder':
 				case 'cancelServiceOrder':
-				case 'exportDetailServiceOrders':
 				case 'exportFiles':
 					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBAUT') && $this->verifyAuthorization('TEBORS'));
 					break;
 				case 'serviceOrders':
 				case 'getServiceOrders':
-				case 'detailServiceOrders':
 					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBORS'));
 					break;
 				case 'clearServiceOrders':

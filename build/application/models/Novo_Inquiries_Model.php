@@ -61,7 +61,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 		return $this->responseToTheView('ServiceOrderStatus');
 	}
 	/**
-	 * @info Método para obtener las ordenes de servicio
+	 * @info Método para obtener la lista de ordenes de servicio en rango de fecha dado
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date Janury 09th, 2019
 	 */
@@ -69,11 +69,11 @@ class Novo_Inquiries_Model extends NOVO_Model {
 	{
 
 		log_message('INFO', 'NOVO Inquiries Model: ServiceOrderStatus Method Initialized');
-		$this->className = 'com.novo.objects.MO.ListadoOrdenServicioMO';
 
+		$this->className = 'com.novo.objects.MO.ListadoOrdenServicioMO';
 		$this->dataAccessLog->modulo = 'Consultas';
-		$this->dataAccessLog->function = 'Lista de ordenes de servicio';
-		$this->dataAccessLog->operation = 'Ordenes de servicios';
+		$this->dataAccessLog->function = 'Ordenes de servicio';
+		$this->dataAccessLog->operation = 'Lista de ordenes de servicio';
 
 		$this->dataRequest->idOperation = 'buscarOrdenServicio';
 		$this->dataRequest->rifEmpresa = $this->session->enterpriseInf->idFiscal;
@@ -85,12 +85,12 @@ class Novo_Inquiries_Model extends NOVO_Model {
 		$this->dataRequest->statusText = $dataRequest->statusText;
 		$statusText = $dataRequest->statusText;
 
-   	$response = $this->sendToService('ServiceOrderStatus');
+   	$response = $this->sendToService('callWs_GetServiceOrders');
 
 		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
-				$this->response->data = lang('GEN_LINK_CONS_ORDERS_SERV');
+				$this->response->data = 'consulta-orden-de-servicio';
 
 				foreach($response->lista AS $list) {
 					$orderList = [];
@@ -133,7 +133,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 									$bulkList['bulkAmount'] = floatval($bulk->montoRecarga);
 									$bulkList['bulkCommisAmount'] = floatval($bulk->montoComision);
 									$bulkList['bulkTotalAmount'] = floatval($bulk->montoRecarga) + floatval($bulk->montoComision);
-									$bulkList['bulkacidlote'] = $bulk->acidlote;
+									$bulkList['bulkId'] = $bulk->acidlote;
 									$serviceOrders['bulk'][] = (object) $bulkList;
 								}
 								break;
@@ -143,29 +143,32 @@ class Novo_Inquiries_Model extends NOVO_Model {
 				}
 
 				$this->session->set_flashdata('serviceOrdersList', $serviceOrdersList);
-				$this->session->set_userdata('serviceOrdersListMemory', $serviceOrdersList);
+				$this->session->set_flashdata('requestOrdersList', $dataRequest);
 				break;
 			case -5:
-				$this->response->title = 'Generar orden de servicio';
-				$this->response->msg = 'No fue posible generar la orden de servicio';
+				$this->response->title = 'Ordenes de servicio';
+				$this->response->msg = 'No fue posible obtener las ordenes de servicio';
 				$this->response->icon = lang('GEN_ICON_WARNING');
-				$this->response->data['btn1']['action'] = 'close';
+				if($this->input->is_ajax_request()) {
+					$this->response->data['btn1']['action'] = 'close';
+				} else {
+					$this->response->data->resp['btn1']['action'] = 'close';
+				}
 				break;
 			case -150:
 				$this->response->title = 'Ordenes de servicio';
 				$this->response->msg = novoLang(lang('RESP_SERVICE_ORDES'), $statusText);
 				$this->response->icon = lang('GEN_ICON_INFO');
-				$this->response->data['btn1']['action'] = 'close';
+				if($this->input->is_ajax_request()) {
+					$this->response->data['btn1']['action'] = 'close';
+				} else {
+					$this->response->data->resp['btn1']['action'] = 'close';
+				}
 				break;
 		}
-			$serviceOrdersList = $this->session->flashdata('serviceOrdersList');
-			$bulkNotBillable = $this->session->flashdata('bulkNotBillable');
-			$this->session->set_flashdata('serviceOrdersList', $serviceOrdersList);
-			$this->session->set_flashdata('bulkNotBillable', $bulkNotBillable);
 
-			return $this->responseToTheView('ServiceOrder');
+		return $this->responseToTheView('callWs_GetServiceOrders');
 	}
-
 	/**
 	 * @info Elimina un lote
 	 * @author Luis Molina
@@ -177,8 +180,8 @@ class Novo_Inquiries_Model extends NOVO_Model {
 		log_message('INFO', 'NOVO Inquiries Model: ClearServiceOrders Method Initialized');
 
 		$this->className = 'com.novo.objects.TOs.OrdenServicioTO';
-		$this->dataAccessLog->modulo = 'anularOS';
-		$this->dataAccessLog->function = 'anularOS';
+		$this->dataAccessLog->modulo = 'Consultas';
+		$this->dataAccessLog->function = 'Ordenes de servicio';
 		$this->dataAccessLog->operation = 'Anular orden de servicio';
 
 		$rifEmpresa=$this->session->userdata('enterpriseInf')->idFiscal;
@@ -186,13 +189,13 @@ class Novo_Inquiries_Model extends NOVO_Model {
 		unset($dataRequest->modalReq);
 
 		$this->dataRequest->idOperation = 'desconciliarOS';
-		$this->dataRequest->idOS = $dataRequest->idOS;
-		$this->dataRequest->rifEmpresa = $rifEmpresa;
+		$this->dataRequest->idOS = $dataRequest->OrderNumber;
+		$this->dataRequest->rifEmpresa = $this->session->enterpriseInf->idFiscal;
 
 		$password = json_decode(base64_decode($dataRequest->pass));
 		$password = $this->cryptography->decrypt(
 			base64_decode($password->plot),
-			utf8_encode($password->passWord)
+			utf8_encode($password->password)
 		);
 		$this->dataRequest->usuario = [
 			'userName' => $this->userName,
@@ -225,141 +228,378 @@ class Novo_Inquiries_Model extends NOVO_Model {
 
 		return $this->responseToTheView('ClearServiceOrders');
 	}
-
 	/**
-	 * @info Consulta detalle ordenes de servicios
-	 * @author Luis Molina
-	 * @date Mar 10 Tue, 2020
+	 * @info Ver el detalle de un lote
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date February 09th, 2020
+	 * @modified J. Enrique Peñaloza Piñero
+	 * @date April 17st, 2019
 	 */
-	public function callWs_DetailServiceOrders_Inquiries($dataRequest)
+	public function callWs_BulkDetail_Inquiries($dataRequest)
 	{
-		log_message('INFO', 'NOVO Inquiries Model: DetailServiceOrders Method Initialized');
+		log_message('INFO', 'NOVO Bulk Model: BulkDetail Method Initialized');
 
-		$this->className = 'com.novo.objects.TOs.LoteTO';
-		$this->dataAccessLog->modulo = 'Ordenes de servicio';
-		$this->dataAccessLog->function = 'Detalle de la orden de servicio';
-		$this->dataAccessLog->operation = 'Detalle Lote';
+		$this->className = 'com.novo.objects.MO.AutorizarLoteMO';
+		$this->dataAccessLog->modulo = 'Consultas';
+		$this->dataAccessLog->function = $dataRequest->bulkfunction;
+		$this->dataAccessLog->operation = 'Ver detalle del lote';
 
 		$this->dataRequest->idOperation = 'detalleLote';
-		$this->dataRequest->acidlote = $dataRequest->numberOrder;
+		$this->dataRequest->acidlote = $dataRequest->bulkId;
 
-		$response = $this->sendToService('DetailServiceOrders');
+		$response = $this->sendToService('BulkDetail');
 
-		$definitive['acrif'] = $response->acrif;
-		$definitive['acnomcia'] = $response->acnomcia;
-		$definitive['acnombre'] = $response->acnombre;
-		$definitive['acnumlote'] = $response->acnumlote;
-		$definitive['ncantregs'] = $response->ncantregs;
-		$definitive['accodusuarioc'] = $response->accodusuarioc;
-		$definitive['dtfechorcarga'] = $response->dtfechorcarga;
-		$definitive['status'] = $response->status;
-		$definitive['nmonto'] = $response->nmonto;
-		$definitive['acidlote'] = $response->acidlote;
-
-		foreach($response->registrosLoteRecarga AS $key => $final) {
-			$final_2['id_ext_per']=$final->id_ext_per;
-			$final_2['nro_cuenta']=$final->nro_cuenta;
-			$final_2['monto']=$final->monto;
-			$definitive_2[]= (object) $final_2;
-		}
-
-		$definitive['registrosLoteRecarga'] = $definitive_2;
+		$detailInfo = [
+			'fiscalId' => '--',
+			'enterpriseName' => '--',
+			'bulkType' => '--',
+			'bulkTypeText' => '--',
+			'bulkNumber' => '--',
+			'totalRecords' => '--',
+			'loadUserName' => '--',
+			'bulkDate' => '--',
+			'bulkStatus' => '--',
+			'bulkStatusText' => '--',
+			'bulkAmount' => '--',
+			'bulkHeader' => [],
+			'bulkRecords' => [],
+		];
+		$bulkRecordsHeader = [];
 
 		switch ($this->isResponseRc) {
 			case 0:
-				$this->response->detail= (object) $definitive;
-				$this->session->set_flashdata('detailServiceOrders',$this->response);
-				$this->session->set_userdata('detailServiceOrdersMemory', $this->response);
-				break;
-		}
-			return $this->responseToTheView('DetailServiceOrders');
-	}
+				$this->response->code = 0;
+				$detailInfo['fiscalId'] = $response->acrif;
+				$detailInfo['enterpriseName'] = mb_strtoupper(mb_strtolower($response->acnomcia));
+				$detailInfo['bulkType'] = $response->ctipolote;
+				$detailInfo['bulkTypeText'] = mb_strtoupper(mb_strtolower($response->acnombre));
+				$detailInfo['bulkNumber'] = $response->acnumlote;
+				$detailInfo['totalRecords'] = $response->ncantregs;
+				$detailInfo['loadUserName'] = mb_strtoupper(mb_strtolower($response->accodusuarioc));
+				$detailInfo['bulkDate'] = $response->dtfechorcarga;
+				$detailInfo['bulkStatus'] = $response->cestatus;
+				$detailInfo['bulkStatusText'] = ucfirst(mb_strtolower($response->status));
+				$detailInfo['bulkAmount'] = $response->montoNeto;
 
+
+				switch($response->ctipolote) {
+					case '1':
+					case '10':
+						if(isset($response->registrosLoteEmision) && count($response->registrosLoteEmision) > 0) {
+							$bulkRecordsHeader = [lang('GEN_TABLE_DNI'), lang('GEN_TABLE_FULL_NAME'), lang('GEN_TABLE_STATUS')];
+							$detailInfo['bulkRecords'] = $this->buildEmisionRecords_Bulk($response->registrosLoteEmision, $response->ctipolote);
+						}
+						break;
+					case '3':
+					case '6':
+					case 'A':
+						if(isset($response->registrosLoteEmision) && count($response->registrosLoteEmision) > 0) {
+							$bulkRecordsHeader = [lang('GEN_TABLE_DNI'), lang('GEN_TABLE_FULL_NAME'), lang('GEN_TABLE_ACCOUNT_NUMBER')];
+							$detailInfo['bulkRecords'] = $this->buildEmisionRecords_Bulk($response->registrosLoteEmision, $response->ctipolote);
+						}
+						break;
+					case '2':
+						if(isset($response->registrosLoteRecarga) && count($response->registrosLoteRecarga) > 0) {
+							$bulkRecordsHeader = [lang('GEN_TABLE_DNI'), lang('GEN_TABLE_AMOUNT'), lang('GEN_TABLE_ACCOUNT_NUMBER')];
+							$detailInfo['bulkRecords'] = $this->buildCreditRecords_Bulk($response->registrosLoteRecarga, $response->ctipolote);
+						}
+						break;
+					case '5':
+					case 'L':
+					case 'M':
+						if(isset($response->registrosLoteRecarga) && count($response->registrosLoteRecarga) > 0) {
+							$bulkRecordsHeader = [lang('GEN_TABLE_DNI'), lang('GEN_TABLE_AMOUNT'), lang('GEN_TABLE_ACCOUNT_NUMBER'), lang('GEN_TABLE_STATUS')];
+							$detailInfo['bulkRecords'] = $this->buildCreditRecords_Bulk($response->registrosLoteRecarga, $response->ctipolote);
+						}
+						break;
+					case 'E':
+						if(isset($response->registrosLoteGuarderia) && count($response->registrosLoteGuarderia) > 0) {
+							$bulkRecordsHeader = [lang('GEN_TABLE_DNI'), lang('GEN_TABLE_EMPLOYEE'), lang('GEN_TABLE_BENEFICIARY')];
+							$detailInfo['bulkRecords'] = $this->buildKindergartenRecords_Bulk($response->registrosLoteGuarderia, $response->ctipolote);
+						}
+						break;
+					case 'G':
+						if(isset($response->registrosLoteGuarderia) && count($response->registrosLoteGuarderia) > 0) {
+							$bulkRecordsHeader = [lang('GEN_TABLE_DNI'), lang('GEN_TABLE_EMPLOYEE'), lang('GEN_TABLE_BENEFICIARY'), lang('GEN_TABLE_ACCOUNT_BENEFICIARY')];
+							$detailInfo['bulkRecords'] = $this->buildKindergartenRecords_Bulk($response->registrosLoteGuarderia, $response->ctipolote);
+						}
+						break;
+					case 'R':
+					case 'C':
+					case 'N':
+						if(isset($response->registrosLoteReposicion) && count($response->registrosLoteReposicion) > 0) {
+							$bulkRecordsHeader = [lang('GEN_TABLE_DNI'), lang('GEN_TABLE_ACCOUNT_NUMBER')];
+							$detailInfo['bulkRecords'] = $this->buildReplacement_Bulk($response->registrosLoteReposicion, $response->ctipolote);
+						}
+						break;
+					default:
+						if(isset($response->registros) && count($response->registros) > 0) {
+							array_shift($response->registros->ordenAtributos);
+							$attrOrder = $response->registros->ordenAtributos;
+							array_shift($response->registros->nombresColumnas);
+							$headerName = $response->registros->nombresColumnas;
+
+							foreach ($response->registros->nombresColumnas as $key => $value) {
+								$value = ucfirst(mb_strtolower($value));
+								array_push(
+									$bulkRecordsHeader,
+									$value
+								);
+							}
+
+							foreach ($response->registros->detalle AS $key => $records) {
+								$record = new stdClass();
+								foreach ($attrOrder AS $attr) {
+									if($attr == 'NUMERO_CUENTA') {
+										$records->$attr = maskString($records->$attr, 4, 6);
+									}
+									$record->$attr = $records->$attr;
+								}
+								array_push(
+									$detailInfo['bulkRecords'],
+									$record
+								);
+							}
+						}
+				}
+			break;
+		}
+
+		$detailInfo['bulkHeader'] = $bulkRecordsHeader;
+		$this->response->data->bulkInfo = (object) $detailInfo;
+
+		return $this->responseToTheView('BulkDetail');
+	}
 	/**
-	 * @info Exporta archivo .pdf en ordenes de servicios
+	 * @info Construye el cuerpo de la tabla del detalle de un lote de emisión
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date April 17th, 2020
+	 * @modified
+	 * @date
+	 */
+	private function buildEmisionRecords_Bulk($emisionRecords, $bulkType)
+	{
+		log_message('INFO', 'NOVO Inquiries Model: buildEmisionRecords Method Initialized');
+
+		$detailRecords = [];
+
+		foreach($emisionRecords AS $records) {
+			$record = new stdClass();
+			foreach($records AS $pos => $value) {
+				switch ($pos) {
+					case 'idExtPer':
+						$record->cardHoldId = $value;
+						break;
+					case 'idExtEmp':
+						if(!isset($records->idExtPer)) {
+							$bulkRecordsHeader[0] = lang('GEN_FISCAL_REGISTRY');
+							$record->cardHoldId = $value;
+						}
+						break;
+					case 'nombres':
+						$record->cardHoldName = ucwords(mb_strtolower($value));
+						break;
+					case 'apellidos':
+						$record->cardHoldLastName = ucwords(mb_strtolower($value));
+						break;
+					case 'nroTarjeta':
+						$record->cardnumber = maskString($value, 6, 4);
+						break;
+					case 'status':
+						$status = [
+							'0' => 'En proceso',
+							'1' => 'Procesado',
+							'7' => 'Rechazado',
+						];
+						$record->bulkstatus = is_numeric($value) ? $status[$value] : $value;
+						break;
+				}
+			}
+			$record->cardHoldName = $record->cardHoldName.' '.$record->cardHoldLastName;
+			unset($record->cardHoldLastName);
+			$detailRecords[] = $record;
+		}
+
+		return $detailRecords;
+	}
+	/**
+	 * @info Construye el cuerpo de la tabla del detalle de un lote de recarga
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date April 17th, 2020
+	 * @modified
+	 * @date
+	 */
+	private function buildCreditRecords_Bulk($creditRecords, $bulkType)
+	{
+		log_message('INFO', 'NOVO Inquiries Model: buildCreditRecords Method Initialized');
+
+		$detailRecords = [];
+
+		foreach($creditRecords AS $records) {
+			$record = new stdClass();
+			foreach($records AS $pos => $value) {
+				switch ($pos) {
+					case 'id_ext_per':
+						$record->cardHoldId = $value;
+						break;
+						case 'monto':
+							$record->cardHoldAmount = $value;
+						break;
+					case 'nro_cuenta':
+						$record->cardHoldAccount = maskString($value, 6, 4);
+						break;
+					case 'status':
+						if($bulkType == '2'){
+							continue;
+						}
+
+						if($bulkType == '5') {
+							$status = [
+								'3' => 'En proceso',
+								'6' => 'Procesada',
+								'7' => 'Rechazado',
+							];
+						}
+
+						if($bulkType == 'L' || $bulkType == 'M') {
+							$status = [
+								'0' => 'Pendiente',
+								'1' => 'Procesada',
+								'2' => 'Inválida',
+								'7' => 'Rechazado',
+							];
+						}
+
+						$record->bulkstatus = is_numeric($value) ? $status[$value] : $value;
+						break;
+				}
+			}
+			$detailRecords[] = $record;
+		}
+
+		return $detailRecords;
+	}
+	/**
+	 * @info Construye el cuerpo de la table del detalle de un lote de guardería
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date April 17th, 2020
+	 * @modified
+	 * @date
+	 */
+	private function buildKindergartenRecords_Bulk($gardenRecords, $bulkType)
+	{
+		log_message('INFO', 'NOVO Inquiries Model: buildKindergartenRecords Method Initialized');
+
+		$detailRecords = [];
+
+		foreach($gardenRecords AS $records) {
+			$record = new stdClass();
+			foreach($records AS $pos => $value) {
+				switch ($pos) {
+					case 'id_per':
+						$record->cardHoldId = $value;
+						break;
+					case 'nombre':
+						$record->cardHoldName = ucwords(mb_strtolower($value));
+						break;
+					case 'apellido':
+						$record->cardHoldLastName = ucwords(mb_strtolower($value));
+						break;
+						case 'beneficiario':
+							$record->cardHoldbeneficiary = $value;
+						break;
+					case 'nro_cuenta':
+						if ($bulkType == 'G') {
+							continue;
+						}
+
+						$record->cardHoldAccount = maskString($value, 6, 4);
+						break;
+				}
+			}
+
+			$record->cardHoldName = $record->cardHoldName.' '.$record->cardHoldLastName;
+			unset($record->cardHoldLastName);
+			$detailRecords[] = $record;
+		}
+
+		return $detailRecords;
+	}
+	/**
+	 * @info Construir el cuerpo de la tabla del detalle de un lote de reposición
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date April 17th, 2020
+	 * @modified
+	 * @date
+	 */
+	private function buildReplacement_Bulk($replaceRecords, $bulkType)
+	{
+		log_message('INFO', 'NOVO Inquiries Model: buildreplacement Method Initialized');
+
+		$detailRecords = [];
+
+		foreach($replaceRecords AS $records) {
+			$record = new stdClass();
+			foreach($records AS $pos => $value) {
+				switch ($pos) {
+					case 'aced_rif':
+						$cardHoldId = $value != '' ? $value : '';
+						$record->cardHoldId = $value;
+						break;
+					case 'nocuenta':
+						$record->cardHoldAccount = maskString($value, 6, 4);
+						break;
+				}
+			}
+
+			$detailRecords[] = $record;
+		}
+
+		return $detailRecords;
+	}
+	/**
+	 * @info Exporta archivo .pdf de una orden de servicio
 	 * @author Luis Molina
-	 * @date Mar 10 Tue, 2020
+	 * @date March 10th, 2020
+	 * @mofied J. Enrique Peñaloza Piñero
+	 * @date March 19th, 2020
 	 */
 	public function callWs_exportFiles_Inquiries($dataRequest)
 	{
 		log_message('INFO', 'NOVO DownloadFiles Model: exportFiles Method Initialized');
 
-		$rifEmpresa = $this->session->userdata('enterpriseInf')->idFiscal;
-		$accodciaS = $this->session->userdata('enterpriseInf')->enterpriseCode;
-		$acprefix = $this->session->userdata('productInf')->productPrefix;
-
-		$this->dataAccessLog->modulo = 'descargarPDFOS';
-		$this->dataAccessLog->function = 'descargarPDFOS';
-		$this->dataAccessLog->operation = 'visualizarOS';
-
 		$this->className = 'com.novo.objects.TOs.OrdenServicioTO';
+		$this->dataAccessLog->modulo = 'Consultas';
+		$this->dataAccessLog->function = 'Ordenes de servicio';
+		$this->dataAccessLog->operation = 'Descargar pdf orden de servicio';
+
 		$this->dataRequest->idOperation = 'visualizarOS';
-		$this->dataRequest->rifEmpresa = $rifEmpresa;
-		$this->dataRequest->acCodCia = $accodciaS;
-		$this->dataRequest->acprefix = $acprefix;
-		$this->dataRequest->idOrden =$dataRequest->idOS;
+		$this->dataRequest->rifEmpresa = $this->session->userdata('enterpriseInf')->idFiscal;
+		$this->dataRequest->acCodCia = $this->session->userdata('enterpriseInf')->enterpriseCode;
+		$this->dataRequest->acprefix = $this->session->userdata('productInf')->productPrefix;
+		$this->dataRequest->idOrden = $dataRequest->OrderNumber;
 
 		$response = $this->sendToService('exportFiles');
 
 		switch ($this->isResponseRc) {
 			case 0:
-			exportFile($response->archivo,'pdf',str_replace(' ', '_', 'OrdenServicio'.date("d/m/Y H:i")));
-			exit;
-			break;
+				$nameFile = ltrim($response->nombre, 'OS');
+				$nameFile = rtrim($nameFile, '.pdf');
+				exportFile($response->archivo, 'pdf', 'Orden_de_servicio'.$nameFile);
+				break;
 			default:
-			$this->response->code = 3;
-			$this->response->downloadModel = TRUE;
-			$this->response->title = lang('GEN_DOWNLOAD_FILE');
-			$this->response->msg = lang('GEN_WARNING_DOWNLOAD_FILE');
-			$this->response->icon = lang('GEN_ICON_WARNING');
-			$this->response->data->resp['btn1']['action'] = 'close';
-			$this->session->set_flashdata('response-order',$this->response);
-			$this->session->set_flashdata('serviceOrdersList',$this->session->userdata('serviceOrdersListMemory'));
-			$this->session->unset_userdata('serviceOrdersListMemory');
-			redirect(base_url('consulta-orden-de-servicio'), 'location');
-		}
-	}
-
-	/**
-	 * @info Exporta archivo .pdf,.xls en detalle ordenes de servicios
-	 * @author Luis Molina
-	 * @date Mar 10 Tue, 2020
-	 */
-	public function callWs_DetailExportFiles_Inquiries($dataRequest)
-	{
-		log_message('INFO', 'NOVO Inquiries Model: DetailExportFiles Method Initialized');
-
-		$operation='detalleLoteExcel';
-
-    if ($dataRequest->file_type=='pdf'){
-			$operation='detalleLotePDF';
-		}
-
-		$this->dataAccessLog->modulo = 'lotes';
-		$this->dataAccessLog->function = 'verdetallelote';
-		$this->dataAccessLog->operation = 'Ver detalle Lote';
-		$this->className = 'com.novo.objects.TOs.LoteTO';
-		$this->dataRequest->idOperation = $operation;
-		$this->dataRequest->acidlote =$dataRequest->data_lote;
-		$this->dataRequest->numberOrder=$dataRequest->data_lote;
-
-		$response = $this->sendToService('DetailExportFiles');
-
-		switch ($this->isResponseRc) {
-			case 0:
-			exportFile($response->archivo,$dataRequest->file_type,$response->nombre);
-			break;
-			default:
-			$this->response->code = 3;
-			$this->response->downloadModel = TRUE;
-			$this->response->title = lang('GEN_DOWNLOAD_FILE');
-			$this->response->msg = lang('GEN_WARNING_DOWNLOAD_FILE');
-			$this->response->icon = lang('GEN_ICON_WARNING');
-			$this->response->data->resp['btn1']['action'] = 'close';
-			$this->session->set_flashdata('detailServiceOrders', $this->session->userdata('detailServiceOrdersMemory'));
-			$this->session->unset_userdata('detailServiceOrdersMemory');
-			$this->session->set_flashdata('response-msg-detail-order',$this->response);
-			redirect(base_url('detalle-orden-de-servicio'), 'location');
+				$requestOrdersList = $this->session->flashdata('requestOrdersList');
+				$this->load->model('Novo_inquiries_Model', 'getOrders');
+				$response = $this->getOrders->callWs_GetServiceOrders_Inquiries($requestOrdersList);
+				$this->response->code =  $response->code != 0 ? $response->code : 3;
+				$this->response->title = $response->code != 0 ? $response->title : lang('GEN_DOWNLOAD_FILE');
+				$this->response->msg = $response->code != 0 ? $response->msg : lang('GEN_WARNING_DOWNLOAD_FILE');
+				$this->response->icon =  $response->code != 0 ? $response->icon : lang('GEN_ICON_WARNING');
+				$this->response->download =  $response->data->resp['btn1']['action'] == 'redirect' ? FALSE : TRUE;
+				$this->response->data->resp['btn1']['text'] = lang('GEN_BTN_ACCEPT');
+				$this->response->data->resp['btn1']['action'] = $response->code != 0 ? $response->data->resp['btn1']['action'] : 'close';
+				$this->session->set_flashdata('download', $this->response);
+				redirect(base_url('consulta-orden-de-servicio'), 'location', 301);
 		}
 	}
 }

@@ -4227,7 +4227,7 @@ ul.filter-2 li a:hover {
 	border-left: 1px solid #dddddd;
 	max-width: 76px;
 	min-width: 76px;
-	float: left;
+	/* float: left; */
 	padding-right: 5px;
 	text-align: center;
 	font-size: 12px;

@@ -74,13 +74,12 @@ $route['(:any)/cargar-lotes'] = "Novo_Bulk/getPendingBulk";
 $route['(:any)/detalle-lote'] = "Novo_Bulk/getDetailBulk";
 $route['(:any)/confirmar-lote'] = "Novo_Bulk/confirmBulk";
 $route['(:any)/lotes-autorizacion'] = "Novo_Bulk/authorizeBulkList";
-$route['(:any)/detalle-confirmado'] = "Novo_Bulk/confirmBulkdetail";
 $route['(:any)/lotes-calcular-orden'] = "Novo_Bulk/calculateServiceOrder";
 //Inquiries
 $route['(:any)/consulta-orden-de-servicio'] = "Novo_Inquiries/serviceOrders";
-$route['(:any)/detalle-orden-de-servicio'] = "Novo_Inquiries/detailServiceOrders";
+$route['(:any)/consulta-lote'] = "Novo_Inquiries/bulkDetail";
 //DownloadFile
-$route['(:any)/descargar-archivo-os'] = "Novo_DownloadFiles/exportFiles";
+$route['(:any)/descargar-archivo'] = "Novo_DownloadFiles/exportFiles";
 //Reports
 $route['(:any)/reportes'] = "Novo_Reports/getReportsList";
 //settings

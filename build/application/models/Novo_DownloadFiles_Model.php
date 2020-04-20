@@ -2,8 +2,8 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * @info clase para obtener información relacionada con los lotes
- * @author
- *
+ * @author J. Enrique Peñaloza Piñero
+ * @date March 06th, 2020
  */
 class Novo_DownloadFiles_Model extends NOVO_Model {
 

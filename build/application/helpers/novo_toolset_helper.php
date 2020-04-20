@@ -157,6 +157,7 @@ if(!function_exists('languajeLoad')) {
 					'authorizeBulk'	=> ['bulk'],
 					'deleteConfirmBulk'	=> ['bulk'],
 					'disassConfirmBulk'	=> ['bulk'],
+					'serviceOrders'	=> ['bulk'],
 				];
 				break;
 			case 'bnt':
@@ -215,6 +216,7 @@ if(!function_exists('languajeLoad')) {
 					'deleteConfirmBulk'	=> ['bulk'],
 					'disassConfirmBulk'	=> ['bulk'],
 					'calculateServiceOrder'	=> ['bulk'],
+					'serviceOrders'	=> ['bulk'],
 					'getReportsList'	=> ['reports'],
 					'getReport'	=> ['reports'],
 					'deleteFile'	=> ['reports'],
@@ -247,22 +249,22 @@ if(!function_exists('setCurrentPage')) {
 	function setCurrentPage($currentClass, $menu) {
 		$cssClass = '';
 		switch ($currentClass) {
-			case 'business':
+			case 'Novo_Business':
 				if($menu == lang('GEN_MENU_ENTERPRISE')) {
 					$cssClass = 'page-current';
 				}
 				break;
-			case 'bulk':
+			case 'Novo_Bulk':
 				if($menu == lang('GEN_MENU_LOTS')) {
 					$cssClass = 'page-current';
 				}
 				break;
-			case 'inquiries':
+			case 'Novo_Inquiries':
 				if($menu == lang('GEN_MENU_CONSULTATIONS')) {
 					$cssClass = 'page-current';
 				}
 				break;
-			case 'reports':
+			case 'Novo_Reports':
 				if($menu == lang('GEN_MENU_REPORTS')) {
 					$cssClass = 'page-current';
 				}
@@ -273,14 +275,7 @@ if(!function_exists('setCurrentPage')) {
 }
 
 
-if ( ! function_exists('exportFile')) {
-	/**
-	 * Helper que lanza al navegador la descarga de un documento.
-	 * Recibe como parametros los bytes del documento, el nombre y tipo de archivo.
-	 *
-	 * @param  byte $bytes
-	 * @return document
-	 */
+if (!function_exists('exportFile')) {
 	function exportFile($file, $typeFile, $filename, $bytes = TRUE)
 	{
 
