@@ -17,7 +17,6 @@ $lang['GEN_TABLE_SELECT_AUTH'] = 'single';
 $lang['GEN_TABLE_COMMISSION'] = 'Valor comisión';
 $lang['GEN_TABLE_VAT'] = 'Valor IVA';
 $lang['GEN_TABLE_AMOUNT_SO'] = 'Valor OS';
-$lang['GEN_TABLE_TOTAL_AMOUNT'] = 'Valor Total';
 $lang['GEN_TABLE_DEPOSIT_AMOUNT'] = 'Valor depositado';
 $lang['GEN_TABLE_AMOUNT'] = 'Valor';
 $lang['GEN_TABLE_DNI'] = 'Cédula';
@@ -28,9 +27,25 @@ $lang['GEN_APPLICATIONS'] = 'Aplicaciones';
 $lang['GEN_FILE'] = 'Archivos de gestión Conexión Empresas Online';
 $lang['GEN_CEO_USER_MANUAL'] = 'Manual de Usuario Conexión Empresas Online';
 $lang['GEN_GL_USER_MANUAL'] = 'Manual de Usuario Gestor de Lotes';
+$lang['GEN_PDF_FILE'] = ['archivo.pdf', 'archivo.pdf'];
+$lang['GEN_PDF_FILE'] = 'archivo.pdf';
+$lang['GEN_PDF_ICON'] = 'icon-pdf.svg';
+$lang['GEN_RAR_ICON'] = 'icon-rar.svg';
+$lang['GEN_ZIP_ICON'] = 'icon-zip.svg';
+$lang['GEN_MP4_VIDEO'] = 'video.mp4';
+    //CONFIGURATIONS SWITCHES
+    $lang['GEN_MANUAL_BOOL'] = true;
+    $lang['GEN_VIDEO_BOOL'] = true;
+    $lang['GEN_APPS_BOOL'] = false;
+    $lang['GEN_FILES_MANAGMENT_BOOL'] = false;
+    $lang['GEN_CONF_USER_BOOL'] = false;
+    $lang['GEN_CONF_COMPANIES_BOOL'] = false;
+    $lang['GEN_CONF_BRANCHES_BOOL'] = false;
+    $lang['GEN_CONF_DOWNLOADS_BOOL'] = true;
+
+
 //FOOTER
 $lang['GEN_FOTTER_RIGHTS'] = '© Todos los derechos reservados. Banco de Bogotá - ';
-$lang['GEN_FOTTER_ICON_I'] = 'img-bogota_white.svg';
-$lang['GEN_FOTTER_ICON_R'] = 'img-pci_compliance.svg';
+$lang['GEN_FOTTER_IMAGE_L'] = 'img-bogota_white.svg';
+$lang['GEN_FOTTER_IMAGE_R'] = 'img-pci_compliance.svg';
 $lang['GEN_FOTTER_MARK'] = 'img-mark.svg';
-$lang['GEN-DESCR-BANCO'] = 'de Bogotá';
