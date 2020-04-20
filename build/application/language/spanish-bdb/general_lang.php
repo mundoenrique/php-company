@@ -34,14 +34,15 @@ $lang['GEN_RAR_ICON'] = 'icon-rar.svg';
 $lang['GEN_ZIP_ICON'] = 'icon-zip.svg';
 $lang['GEN_MP4_VIDEO'] = 'video.mp4';
     //CONFIGURATIONS SWITCHES
-    $lang['GEN_MANUAL_BOOL'] = true;
-    $lang['GEN_VIDEO_BOOL'] = true;
-    $lang['GEN_APPS_BOOL'] = false;
     $lang['GEN_FILES_MANAGMENT_BOOL'] = false;
     $lang['GEN_CONF_USER_BOOL'] = false;
     $lang['GEN_CONF_COMPANIES_BOOL'] = false;
     $lang['GEN_CONF_BRANCHES_BOOL'] = false;
     $lang['GEN_CONF_DOWNLOADS_BOOL'] = true;
+        //CONFIGURATIONS SWITCHES DOWNLOADS
+        $lang['GEN_MANUAL_BOOL'] = true;
+        $lang['GEN_VIDEO_BOOL'] = true;
+        $lang['GEN_APPS_BOOL'] = false;
 
 
 //FOOTER

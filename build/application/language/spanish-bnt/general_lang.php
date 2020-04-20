@@ -20,14 +20,15 @@ $lang['GEN_RAR_ICON'] = 'icon-rar.svg';
 $lang['GEN_ZIP_ICON'] = 'icon-zip.svg';
 $lang['GEN_MP4_VIDEO'] = '';
     //CONFIGURATIONS SWITCHES
-    $lang['GEN_MANUAL_BOOL'] = true;
-    $lang['GEN_VIDEO_BOOL'] = false;
-    $lang['GEN_APPS_BOOL'] = true;
     $lang['GEN_FILES_MANAGMENT_BOOL'] = true;
     $lang['GEN_CONF_USER_BOOL'] = true;
     $lang['GEN_CONF_COMPANIES_BOOL'] = true;
     $lang['GEN_CONF_BRANCHES_BOOL'] = true;
     $lang['GEN_CONF_DOWNLOADS_BOOL'] = true;
+        //CONFIGURATIONS SWITCHES DOWNLOADS
+        $lang['GEN_MANUAL_BOOL'] = true;
+        $lang['GEN_VIDEO_BOOL'] = false;
+        $lang['GEN_APPS_BOOL'] = true;
 
 //LOGIN IMAGE
 $lang['GEN-IMAGEN-LOGIN'] = 'img-ref.jpg';
