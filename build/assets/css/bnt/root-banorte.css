@@ -54,15 +54,12 @@
   --bg-color: #f6f3f1;
 
 	--widget-color: #ffffff;
-	--shadows-color: #f2f2f2;
+	--shadows-color: #DDDDDD;
   --border-color: #DDDDDD;
-  --border-color-2: #DDDDDD;
   --text-color: #4E4044;
   --placeholder-color: #DDDDDD;
 	--disabled-color: #DDDDDD;
 
-  --label-color: #4E4044;
-  --primary-shade: #012c71a6;
   --primary-tint: #D10024;
 
   /* Type Scale */
