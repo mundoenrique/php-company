@@ -108,6 +108,7 @@ $(function () {
 			}
 		},
 		1: function (response) {
+
 			userLogin.showBalloon({
 				html: true,
 				classname: response.className,
@@ -116,9 +117,40 @@ $(function () {
 			});
 			restartFormLogin();
 		},
-		2: function () {
-			userCred.active = 1; forWhere = lang.GEN_LOGIN;
-			validateLogin();
+		2: function (response) {
+
+			if(response.ipModal){
+				var loginIpMsg ;
+				data = {
+					btn1: {
+						text: lang.GEN_BTN_ACCEPT,
+						link: 'inicio',
+						action: 'redirect'
+					}
+				}
+				
+				loginIpMsg ='<form id="formVerificationOTP" class="mr-2" method="post">';
+				loginIpMsg+='<p>'+response.msg+'</p>';
+				loginIpMsg+='<div class="row">';
+				loginIpMsg+=	'<div class="form-group col-7">';
+				loginIpMsg+=	'<label for="codeOTP">'+response.labelInput+'<span class="danger">*</span></label>';
+				loginIpMsg+=	'<input id="codeOTP" class="form-control" type="text" name="codeOTP">';
+				loginIpMsg+=	'<div id="msgErrorCodeOTP" class="help-block"></div>';
+				loginIpMsg+=	'</div>';
+				loginIpMsg+='</div>';
+				loginIpMsg+='<div class="form-group custom-control custom-switch my-3">';
+				loginIpMsg+=	'<input id="acceptAssert" class="custom-control-input" type="checkbox" name="acceptAssert">';
+				loginIpMsg+=	'<label class="custom-control-label" for="acceptAssert">'+response.assert+'</label>';
+				loginIpMsg+=	'<div class="help-block"></div>';
+				loginIpMsg+='</div>';
+				loginIpMsg+='</form>';
+				
+				notiSystem(response.title, loginIpMsg, response.icon,data);
+
+				}else{
+					userCred.active = 1; forWhere = lang.GEN_LOGIN;
+					validateLogin();
+				}
 		},
 		3: function (response) {
 			var btn = response.data.btn1;
@@ -142,7 +174,9 @@ $(function () {
 			}
 		},
 		4: function () {
+
 			$('#login-btn').html(btnText);
+
 		}
 	}
 
