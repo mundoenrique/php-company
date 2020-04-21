@@ -43,7 +43,8 @@ class Novo_Bulk extends NOVO_Controller {
 		if(verifyDisplay('body', $view,  lang('GEN_TAG_BRANCHOFFICE'))) {
 			$this->request = new stdClass();
 			$this->request->select = true;
-			$branchOffices = $this->Bulk->callWs_GetBranchOffices_Bulk($this->request);
+			$this->load->model('Novo_Business_Model', 'Business');
+			$branchOffices = $this->Business->callWs_GetBranchOffices_Bulk($this->request);
 			$this->render->branchOffices = $branchOffices->data->branchOffices;
 		}
 		$this->render->pendingBulk = $responseList->data->pendingBulk;
