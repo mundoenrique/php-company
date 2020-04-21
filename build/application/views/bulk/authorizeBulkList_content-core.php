@@ -49,8 +49,9 @@
 								<td><?= $bulk->records; ?></td>
 								<td><?= $bulk->amount; ?></td>
 								<td class="p-0 flex justify-center items-center">
-									<form id="id-<?= $bulk->idBulk; ?>" action="<?= base_url('detalle-confirmado') ?>" method="post">
+									<form id="id-<?= $bulk->idBulk; ?>" action="<?= base_url('consulta-lote') ?>" method="post">
 										<input type="hidden" name="bulkId" value="<?= $bulk->idBulk; ?>">
+										<input type="hidden" name="bulkfunction" value="Autorización de lotes">
 									</form>
 									<button class="btn mx-1 px-0 big-modal" title="<?= lang('GEN_BTN_SEE'); ?>" data-toggle="tooltip">
 										<i class="icon icon-find" aria-hidden="true"></i>
@@ -68,7 +69,14 @@
 					<form id="sign-bulk-form" method="post">
 						<div class="flex row mt-3 mb-2 mx-2 justify-end">
 							<div class="col-4 col-lg-3 col-xl-3 form-group">
-								<input id="password-sign" name="password" class="form-control h6 pwd-input" type="password" placeholder="<?= lang('GEN_PLACE_PASSWORD'); ?>">
+								<div class="input-group">
+									<input id="password-sign" name="password" class="form-control h6 pwd-input" type="password"
+										placeholder="<?= lang('GEN_PLACE_PASSWORD'); ?>">
+									<div class="input-group-append">
+										<span id="pwd_action" class="input-group-text pwd-action" title="<?= lang('GEN_SHOW_PASS') ?>"><i
+												class="icon-view mr-0"></i></span>
+									</div>
+								</div>
 								<div class="help-block bulk-select text-left"></div>
 							</div>
 							<div class="col-auto">
@@ -118,8 +126,9 @@
 								<td><?= $bulk->records; ?></td>
 								<td><?= $bulk->amount; ?></td>
 								<td class="p-0 flex justify-center items-center">
-									<form id="id-<?= $bulk->idBulk; ?>" action="<?= base_url('detalle-confirmado') ?>" method="post">
+									<form id="id-<?= $bulk->idBulk; ?>" action="<?= base_url('consulta-lote') ?>" method="post">
 										<input type="hidden" name="bulkId" value="<?= $bulk->idBulk; ?>">
+										<input type="hidden" name="bulkfunction" value="Autorización de lotes">
 									</form>
 									<button class="btn mx-1 px-0 big-modal" title="<?= lang('GEN_BTN_SEE') ?>" data-toggle="tooltip">
 										<i class="icon icon-find" aria-hidden="true"></i>
@@ -149,7 +158,14 @@
 								<div class="help-block"></div>
 							</div>
 							<div class="col-6 col-lg-auto form-group">
-								<input id="password-auth" name="password" class="form-control h6 pwd-input" type="password" placeholder="<?= lang('GEN_PLACE_PASSWORD'); ?>">
+								<div class="input-group">
+									<input id="password-auth" name="password" class="form-control h6 pwd-input" type="password"
+										placeholder="<?= lang('GEN_PLACE_PASSWORD'); ?>">
+									<div class="input-group-append">
+										<span id="pwd_action" class="input-group-text pwd-action" title="<?= lang('GEN_SHOW_PASS') ?>"><i
+												class="icon-view mr-0"></i></span>
+									</div>
+								</div>
 								<div class="help-block bulk-select text-left"></div>
 							</div>
 							<div class="col-3 col-lg-auto">

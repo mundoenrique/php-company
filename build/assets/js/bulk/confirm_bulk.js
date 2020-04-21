@@ -12,14 +12,10 @@ $(function () {
 		if(form.valid()) {
 			insertFormInput(true)
 			$(this).html(loader);
-			ceo_cook = getCookieValue();
-			cypherPass = CryptoJS.AES.encrypt(inputPass.val(), ceo_cook, { format: CryptoJSAesJson }).toString();
+			var pwd = cryptoPass(inputPass.val());
 			data = {
 				bulkTicked: $('#bulkTicked').val(),
-				pass: btoa(JSON.stringify({
-					passWord: cypherPass,
-					plot: btoa(ceo_cook)
-				}))
+				pass: pwd
 			}
 			verb = 'POST'; who = 'Bulk'; where = 'ConfirmBulk';
 			callNovoCore(verb, who, where, data, function(response) {

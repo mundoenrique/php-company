@@ -72,7 +72,6 @@
 				<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
 			</div>
 			<div class="center mx-1 hide-out hide">
-				<?php if(!TRUE): ?>
 				<div class="flex justify-end items-center">
 					<div class="mr-3 py-1">
 						<button class="btn px-1" title="Exportar a EXCEL" data-toggle="tooltip">
@@ -83,7 +82,6 @@
 						</button>
 					</div>
 				</div>
-				<?php endif; ?>
 				<table id="auth-bulk-detail" class="cell-border h6 display responsive w-100">
 					<thead class="bg-primary secondary regular">
 						<tr>
@@ -95,9 +93,9 @@
 					<tbody>
 						<?php foreach($bulkRecords AS $body): ?>
 						<tr>
-						<?php foreach($body AS $pos => $value): ?>
-						<td><?= $value ?></td>
-						<?php endforeach; ?>
+							<?php foreach($body AS $pos => $value): ?>
+							<td><?= $value ?></td>
+							<?php endforeach; ?>
 						</tr>
 						<?php endforeach; ?>
 					</tbody>
@@ -110,7 +108,7 @@
 		<div class="flex flex-column mb-4 mt-4 px-5 justify-center items-center">
 			<div class="flex flex-row">
 				<div class="mb-3 mr-4">
-					<a href="<?= base_url('lotes-autorizacion') ?>" class="btn btn-link btn-small big-modal"><?= lang('GEN_BTN_BACK') ?></a>
+					<a href="<?= $this->agent->referrer(); ?>" class="btn btn-link btn-small big-modal"><?= lang('GEN_BTN_BACK') ?></a>
 				</div>
 			</div>
 		</div>

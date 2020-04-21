@@ -3082,13 +3082,13 @@ ul.steps li.step-item i {
 .ui-icon,
 .ui-widget-content .ui-icon,
 .ui-widget-header .ui-icon {
-	background-image: url("../images/ui-icons_444444_256x240.png");
+	background-image: url("../../images/ui-icons_444444_256x240.png");
 }
 .ui-datepicker .ui-icon {
-	background-image: url("../images/ui-icons_ffffff_256x240.png");
+	background-image: url("../../images/ui-icons_ffffff_256x240.png");
 }
 .ui-button .ui-icon {
-	background-image: url("../images/ui-icons_777777_256x240.png");
+	background-image: url("../../images/ui-icons_777777_256x240.png");
 }
 .ui-icon-alert { background-position: 0 -144px; }
 .ui-icon-info { background-position: -16px -144px; }

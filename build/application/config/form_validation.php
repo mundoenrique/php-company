@@ -103,7 +103,7 @@ $config = [
 		[
 			'field' => 'productName',
 			'label' => 'productName',
-			'rules' => 'trim|regex_match[/^([\wñÑáéíóúÑÁÉÍÓÚ ]+)+$/i]',
+			'rules' => 'trim|regex_match[/^([\wñÑáéíóúÑÁÉÍÓÚ() ]+)+$/i]',
 		],
 		[
 			'field' => 'productBrand',
@@ -254,11 +254,16 @@ $config = [
 			'rules' => 'trim|regex_match[/^([\w,]*)+$/i]'
 		]
 	],
-	'confirmBulkdetail' => [
+	'bulkDetail' => [
 		[
-			'field' => 'bulk-id',
-			'label' => 'bulk-id',
-			'rules' => 'trim|regex_match[/^([\w]*)+$/i]'
+			'field' => 'bulkId',
+			'label' => 'bulkId',
+			'rules' => 'trim|regex_match[/^([\w]*)+$/i]|required'
+		],
+		[
+			'field' => 'bulkfunction',
+			'label' => 'bulkfunction',
+			'rules' => 'trim|regex_match[/^([\wñáéíóú ]*)+$/i]|required'
 		]
 	],
 	'cancelServiceOrder' => [
@@ -285,60 +290,21 @@ $config = [
 			'rules' => 'trim|required'
 		]
 	],
-	'detailServiceOrders' => [
-		[
-			'field' => 'numberOrder',
-			'label' => 'numberOrder',
-			'rules' => 'trim|regex_match[/^([\w]+)+$/i]'
-		]
-	],
-	'exportDetailServiceOrderssss' => [
-		[
-			'field' => 'data_lote',
-			'label' => 'data_lote',
-			'rules' => 'trim|regex_match[/^([\w]+)+$/i]'
-		],
-		[
-			'field' => 'file_type',
-			'label' => 'file_type',
-			'rules' => 'trim|required'
-		],
-	],
 	'exportFiles' => [
 		[
-			'field' => 'idOS',
-			'label' => 'idOS',
-			'rules' => 'trim|regex_match[/^([\w]+)+$/i]'
-		],
-		[
-			'field' => 'initialDate',
-			'label' => 'initialDate',
-			'rules' => 'trim|regex_match[/^[0-9\/]+$/]'
-		],
-		[
-			'field' => 'finalDate',
-			'label' => 'finalDate',
-			'rules' => 'trim|regex_match[/^[0-9\/]+$/]'
-		],
-		[
-			'field' => 'status',
-			'label' => 'status',
-			'rules' => 'trim|regex_match[/^[a-z0-9]+$/i]'
-		],
-		[
-			'field' => 'statusText',
-			'label' => 'statusText',
-			'rules' => 'trim|regex_match[/^[\w -]+$/i]'
+			'field' => 'OrderNumber',
+			'label' => 'OrderNumber',
+			'rules' => 'trim|regex_match[/^([\w]+)+$/i]|required'
 		],
 		[
 			'field' => 'who',
 			'label' => 'who',
-			'rules' => 'trim|regex_match[/^([\w]+)+$/i]'
+			'rules' => 'trim|regex_match[/^([\w]+)+$/i]|required'
 		],
 		[
 			'field' => 'where',
 			'label' => 'where',
-			'rules' => 'trim|regex_match[/^([\w]+)+$/i]'
+			'rules' => 'trim|regex_match[/^([\w]+)+$/i]|required'
 		]
 		],
 	'getServiceOrders' => [

@@ -10,7 +10,6 @@ $(function () {
 	var selectBranchOffice = $('#branch-office');
 	var selectTypeBulk = $('#type-bulk');
 	var uploadFileBtn = $('#upload-file-btn');
-	form = $('#upload-file-form');
 
 	$('.input-file').each(function () {
     var input = $(this);
@@ -38,6 +37,7 @@ $(function () {
 		e.preventDefault();
 		var btnAction = $(this);
 		btnText = btnAction.text().trim();
+		form = $('#upload-file-form');
 		validateForms(form);
 
 		if(form.valid()) {
@@ -121,15 +121,17 @@ $(function () {
 		e.preventDefault();
 		var event = $(e.currentTarget);
 		var action = event.attr('title');
-		form = $(this).parent().find('form')
-		insertFormInput(true, form);
 
 		switch(action) {
 			case lang.GEN_BTN_SEE:
+				form = $(this).parent().find('form')
+				insertFormInput(true, form);
 				form.attr('action', baseURL+'detalle-lote');
 				form.append('<input type="hidden" name="bulkView" value="detail">');
 				break;
 			case lang.GEN_BTN_CONFIRM:
+				form = $(this).parent().find('form')
+				insertFormInput(true, form);
 				form.attr('action', baseURL+'confirmar-lote');
 				form.append('<input type="hidden" name="bulkView" value="confirm">');
 				break;
@@ -149,7 +151,7 @@ $(function () {
 				}
 				var bulkFile = $(this).closest('tr').find('td:nth-child(3)').text();
 				inputModal = '<form id="delete-bulk-form" class="form-group">';
-				inputModal+= '<span class="regular"> '+lang.BULK_DELETE_DATE+': '+bulkFile+'</span>';
+				inputModal+= '<span class="regular">'+lang.BULK_DELETE_DATE+': '+bulkFile+'</span>';
 				inputModal+= 		'<input id="password" class="form-control mt-2 h6 col-9 pwd-input" name="password" type="password" autocomplete="off" placeholder="'+lang.GEN_PLACE_PASSWORD+'">';
 				inputModal+= 		'<div class="help-block"></div>';
 				inputModal+= '</form>';
@@ -189,17 +191,13 @@ function deleteBulk(oldID) {
 			.html(loader)
 			.prop('disabled', true)
 			.attr('id', oldID);
-			ceo_cook = getCookieValue();
-			cypherPass = CryptoJS.AES.encrypt($('#password').val(), ceo_cook, { format: CryptoJSAesJson }).toString();
+			inputPass = cryptoPass($('#password').val());
 			data = {
 				modalReq: true,
 				bulkId: form.find('input[name="bulkId"]').val(),
 				bulkTicked: form.find('input[name="bulkTicked"]').val(),
 				bulkStatus: form.find('input[name="bulkStatus"]').val(),
-				pass: btoa(JSON.stringify({
-					passWord: cypherPass,
-					plot: btoa(ceo_cook)
-				}))
+				pass: inputPass
 			}
 			verb = 'POST'; who = 'Bulk'; where = 'DeleteNoConfirmBulk';
 			callNovoCore(verb, who, where, data, function(response) {
