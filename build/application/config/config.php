@@ -46,6 +46,11 @@ $config['format_date'] = 'j/m/Y';
 $config['format_time'] = 'g:i A';
 $config['cypher_base'] = CYPHER_BASE;
 $config['active_recaptcha'] = ACTIVE_RECAPTCHA;
+$config['score_recaptcha'] = [
+	'development' => 0,
+	'testing' => 0.2,
+	'production' => 0.3
+];
 $config['new-views'] = '';
 $config['client'] = 'novo';
 $config['access_url'] = explode(',', ACCESS_URL);
