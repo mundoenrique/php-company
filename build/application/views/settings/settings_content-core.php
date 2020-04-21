@@ -492,43 +492,38 @@
 							</div>
 								<div class="row">
 								<?php if (lang('GEN_PDF_FILE') != ''): ?>
+									<?php foreach(lang('GEN_PDF_FILE') as $value): ?>
 									<div class="mb-3 col-auto col-lg-6 col-xl-5">
-										<a href="<?= $this->asset->insertFile($countryUri.'/'.lang('GEN_PDF_FILE[0]'),'statics'); ?>" download>
+										<a href="<?= $this->asset->insertFile($countryUri.'/'.$value[0],'statics'); ?>" download>
 											<div class="files btn-link flex items-center">
 												<div class="file">
 													<img src="<?= $this->asset->insertFile($countryUri.'/'.lang('GEN_PDF_ICON'));?>" />
 												</div>
-												<span class="ml-2 flex justify-center"><?= lang('GEN_CEO_USER_MANUAL')?></span>
+												<span class="ml-2 flex justify-center"><?= $value[1]?></span>
 											</div>
 										</a>
 									</div>
-									<?php endif; ?>
-									<?php if(verifyDisplay('body','settings', lang('GEN_GL_USER_MANUAL'))): ?>
-									<div class="mb-3 col-auto col-lg-6 col-xl-5">
-										<a href="<?= $this->asset->insertFile($countryUri.'/'.lang('GEN_PDF_FILE[1]'),'statics'); ?>" download>
-											<div class="files btn-link flex items-center">
-												<div class="file">
-													<img src="<?= $this->asset->insertFile($countryUri.'/'.lang('GEN_PDF_ICON'));?>" />
-												</div>
-												<span class="ml-2 flex justify-center"><?= lang('GEN_GL_USER_MANUAL')?></span>
-											</div>
-										</a>
-									</div>
-									<?php endif; ?>
-								</div>
+									<?php endforeach; ?>
 								<?php endif; ?>
+								</div>
+							<?php endif; ?>
+
+
+
 								<?php if (lang('GEN_VIDEO_BOOL') == true):?>
+									<?php foreach(lang('GEN_MP4_VIDEO') as $value): ?>
 								<div class="container">
 									<div class="row">
 										<div class="col-sm-12 col-lg-11 col-xl-12 py-2">
 											<div class="manual-video">
 												<video controls preload>
-													<source src="<?= $this->asset->insertFile($countryUri.'/'.lang('GEN_MP4_VIDEO'),'statics');?>" type="video/mp4">
+													<source src="<?= $this->asset->insertFile($countryUri.'/'.$value,'statics');?>" type="video/mp4">
 												</video>
 											</div>
 										</div>
 									</div>
 								</div>
+								<?php endforeach; ?>
 								<?php endif; ?>
 
 								<?php if(verifyDisplay('body','settings', lang('GEN_GL_USER_MANUAL'))): ?>
@@ -537,26 +532,18 @@
 									<span><?= lang('GEN_APPLICATIONS') ?></span>
 								</div>
 								<div class="row">
+								<?php foreach(lang('GEN_ZIP_FILE') as $value): ?>
 									<div class="mb-3 col-auto col-lg-6 col-xl-5">
-										<a href="#">
+									<a href="<?= $this->asset->insertFile($countryUri.'/'.$value[0],'statics'); ?>" download>
 											<div class="files btn-link flex items-center">
 												<div class="file">
 													<img src="<?= $this->asset->insertFile($countryUri.'/'.lang('GEN_ZIP_ICON'));?>" />
 												</div>
-												<span class="ml-2 flex justify-center"><?= lang('GEN_BATCH_MANAGER') ?></span>
+												<span class="ml-2 flex justify-center"><?= $value[1] ?></span>
 											</div>
 										</a>
 									</div>
-									<div class="mb-3 col-auto col-lg-6 col-xl-5">
-										<a href="#">
-											<div class="files btn-link flex items-center">
-												<div class="file">
-													<img src="<?= $this->asset->insertFile($countryUri.'/'.lang('GEN_ZIP_ICON'));?>" />
-												</div>
-												<span class="ml-2 flex justify-center"><?= lang('GEN_JAVA_JRE') ?></span>
-											</div>
-										</a>
-									</div>
+									<?php endforeach; ?>
 								</div>
 								<?php endif; ?>
 								<?php endif; ?>
@@ -566,16 +553,18 @@
 									<span><?= lang('GEN_FILE') ?></span>
 								</div>
 								<div class="row">
+								<?php foreach(lang('GEN_RAR_FILE') as $value): ?>
 									<div class="form-group col-auto mb-3 col-xl-5">
-										<a href="#">
+									<a href="<?= $this->asset->insertFile($countryUri.'/'.$value[0],'statics'); ?>" download>
 											<div class="files btn-link flex items-center">
 												<div class="file">
 													<img src=<?= $this->asset->insertFile($countryUri.'/'.lang('GEN_RAR_ICON'));?> />
 												</div>
-												<span class="ml-2 flex justify-center"><?= lang('GEN_FILE_OPERATIONAL_BATCH') ?></span>
+												<span class="ml-2 flex justify-center"><?= $value[1]  ?></span>
 											</div>
 										</a>
 									</div>
+									<?php endforeach; ?>
 								</div>
 								<?php endif; ?>
 								<?php endif; ?>
