@@ -1,4 +1,3 @@
-
 <div class="bg-color">
 	<div class="pt-3 pb-5 px-5 bg-content-config">
 		<h1 class="primary h3 regular inline"><?= lang('GEN_SETTINGS_TITLE') ?></h1>
@@ -6,62 +5,63 @@
 			<div class="flex mx-2">
 				<nav class="nav-config">
 					<ul class="nav-config-box">
-						<?php if (verifyDisplay('body', 'settings', lang('GEN_BTN_USER'))) : ?>
-							<?php if (lang('GEN_CONF_USER_BOOL') == true) : ?>
-								<li id="user" class="nav-item-config active" aria-hidden="false">
-									<a href="javascript:" id="#btn_accion">
-										<img class="icon-config" src="<?= $this->asset->insertFile($countryUri . '/icon-user.svg'); ?>">
-										<h5><?= lang('GEN_BTN_USER') ?></h5>
-										<div class="box up left">
-											<img src="<?= $this->asset->insertFile($countryUri . '/icon-user.svg'); ?>" class="bg">
-											<h4><?= lang('GEN_BTN_USER') ?></h4>
-										</div>
-									</a>
-								</li>
-							<?php endif; ?>
-						<?php endif; ?>
-						<?php if (verifyDisplay('body', 'settings', lang('GEN_BTN_ENTERPRISE'))) : ?>
-							<?php if (lang('GEN_CONF_COMPANIES_BOOL') == true) : ?>
+						<?php if(verifyDisplay('body','settings', lang('GEN_BTN_USER'))): ?>
+							<?php if (lang('GEN_CONF_USER_BOOL') == true): ?>
 
-								<li id="enterprise" class="nav-item-config" aria-hidden="true">
-									<a href="javascript:">
-										<img class="icon-config" src="<?= $this->asset->insertFile($countryUri . '/icon-briefcase.svg'); ?>">
-										<h5><?= lang('GEN_BTN_ENTERPRISE') ?></h5>
-										<div class="box up left">
-											<img src="<?= $this->asset->insertFile($countryUri . '/icon-briefcase.svg'); ?>" class="bg">
-											<h4><?= lang('GEN_BTN_ENTERPRISE') ?></h4>
-										</div>
-									</a>
-								</li>
-							<?php endif; ?>
+						<li id="user" class="nav-item-config">
+							<a href="javascript:">
+								<img class="icon-config" src="<?= $this->asset->insertFile($countryUri.'/icon-user.svg');?>">
+								<h5><?= lang('GEN_BTN_USER') ?></h5>
+								<div class="box up left">
+									<img src="<?= $this->asset->insertFile($countryUri.'/icon-user.svg');?>" class="bg">
+									<h4><?= lang('GEN_BTN_USER') ?></h4>
+								</div>
+							</a>
+						</li>
 						<?php endif; ?>
-						<?php if (verifyDisplay('body', 'settings', lang('GEN_BTN_BRANCH'))) : ?>
-							<?php if (lang('GEN_CONF_BRANCHES_BOOL') == true) : ?>
-								<li id="branch" class="nav-item-config" aria-hidden="true">
-									<a href="javascript:">
-										<img class="icon-config" src="<?= $this->asset->insertFile($countryUri . '/icon-building.svg'); ?>">
-										<h5><?= lang('GEN_BTN_BRANCH') ?></h5>
-										<div class="box up left">
-											<img src="<?= $this->asset->insertFile($countryUri . '/icon-building.svg'); ?>" class="bg">
-											<h4><?= lang('GEN_BTN_BRANCH') ?></h4>
-										</div>
-									</a>
-								</li>
-							<?php endif; ?>
 						<?php endif; ?>
-						<?php if (verifyDisplay('body', 'settings', lang('GEN_BTN_DOWNLOADS'))) : ?>
-							<?php if (lang('GEN_CONF_DOWNLOADS_BOOL') == true) : ?>
-								<li id="downloads" class="nav-item-config" aria-hidden="true">
-									<a href="javascript:">
-										<img class="icon-config" src="<?= $this->asset->insertFile($countryUri . '/icon-download.svg'); ?>">
-										<h5><?= lang('GEN_BTN_DOWNLOADS') ?></h5>
-										<div class="box up left">
-											<img src="<?= $this->asset->insertFile($countryUri . '/icon-download.svg'); ?>" class="bg ">
-											<h4><?= lang('GEN_BTN_DOWNLOADS') ?></h4>
-										</div>
-									</a>
-								</li>
-							<?php endif; ?>
+						<?php if(verifyDisplay('body','settings', lang('GEN_BTN_ENTERPRISE'))): ?>
+							<?php if (lang('GEN_CONF_COMPANIES_BOOL') == true): ?>
+
+						<li id="enterprise" class="nav-item-config">
+							<a href="javascript:">
+								<img class="icon-config" src="<?= $this->asset->insertFile($countryUri.'/icon-briefcase.svg');?>">
+								<h5><?= lang('GEN_BTN_ENTERPRISE') ?></h5>
+								<div class="box up left">
+									<img src="<?= $this->asset->insertFile($countryUri.'/icon-briefcase.svg');?>" class="bg">
+									<h4><?= lang('GEN_BTN_ENTERPRISE') ?></h4>
+								</div>
+							</a>
+						</li>
+						<?php endif; ?>
+						<?php endif; ?>
+						<?php if(verifyDisplay('body','settings', lang('GEN_BTN_BRANCH'))): ?>
+							<?php if (lang('GEN_CONF_BRANCHES_BOOL') == true): ?>
+						<li id="branch" class="nav-item-config">
+							<a href="javascript:">
+								<img class="icon-config" src="<?= $this->asset->insertFile($countryUri.'/icon-building.svg');?>">
+								<h5><?= lang('GEN_BTN_BRANCH') ?></h5>
+								<div class="box up left">
+									<img src="<?= $this->asset->insertFile($countryUri.'/icon-building.svg');?>" class="bg">
+									<h4><?= lang('GEN_BTN_BRANCH') ?></h4>
+								</div>
+							</a>
+						</li>
+						<?php endif; ?>
+						<?php endif; ?>
+						<?php if(verifyDisplay('body','settings', lang('GEN_BTN_DOWNLOADS'))): ?>
+							<?php if (lang('GEN_CONF_DOWNLOADS_BOOL') == true): ?>
+						<li id="downloads" class="nav-item-config">
+							<a href="javascript:">
+								<img class="icon-config" src="<?= $this->asset->insertFile($countryUri.'/icon-download.svg');?>">
+								<h5><?= lang('GEN_BTN_DOWNLOADS') ?></h5>
+								<div class="box up left">
+									<img src="<?= $this->asset->insertFile($countryUri.'/icon-download.svg');?>" class="bg ">
+									<h4><?= lang('GEN_BTN_DOWNLOADS') ?></h4>
+								</div>
+							</a>
+						</li>
+						<?php endif; ?>
 						<?php endif; ?>
 					</ul>
 				</nav>
@@ -75,14 +75,13 @@
 								<div class="row my-2">
 									<div class="form-group col-12">
 										<span aria-hidden="true" class="icon icon-user"></span>
-										<span id="userName"></span>
+										<span id="userName">Pedro</span>
 									</div>
 								</div>
-
 								<div class="row mb-2">
 									<div class="form-group col-3">
 										<label for="firstName" id="firstName">Nombre</label>
-										<p id="nom_user"></p>
+										<span id="firstNameUser" class="form-control px-1" readonly="readonly">Pedro</span>
 									</div>
 
 									<div class="form-group col-3">
@@ -133,7 +132,8 @@
 														<div class="input-group">
 															<input id="currentUserPwd" class="form-control pwd-input" type="password" name="currentUserPwd">
 															<div class="input-group-append">
-																<span id="pwd-addon" class="input-group-text pwd-action" title="Clic aquí para mostrar/ocultar contraseña"><i class="icon-view mr-0"></i></span>
+																<span id="pwd-addon" class="input-group-text pwd-action" title="Clic aquí para mostrar/ocultar contraseña"><i
+																		class="icon-view mr-0"></i></span>
 															</div>
 														</div>
 														<div class="help-block"></div>
@@ -143,7 +143,8 @@
 														<div class="input-group">
 															<input id="newUserPwd" class="form-control pwd-input" type="password" name="newUserPwd">
 															<div class="input-group-append">
-																<span id="pwd-addon" class="input-group-text pwd-action" title="Clic aquí para mostrar/ocultar contraseña"><i class="icon-view mr-0"></i></span>
+																<span id="pwd-addon" class="input-group-text pwd-action" title="Clic aquí para mostrar/ocultar contraseña"><i
+																		class="icon-view mr-0"></i></span>
 															</div>
 														</div>
 														<div class="help-block"></div>
@@ -153,7 +154,8 @@
 														<div class="input-group">
 															<input id="confirmUserPwd" class="form-control pwd-input" type="password" name="confirmUserPwd">
 															<div class="input-group-append">
-																<span id="pwd-addon" class="input-group-text pwd-action" title="Clic aquí para mostrar/ocultar contraseña"><i class="icon-view mr-0"></i></span>
+																<span id="pwd-addon" class="input-group-text pwd-action" title="Clic aquí para mostrar/ocultar contraseña"><i
+																		class="icon-view mr-0"></i></span>
 															</div>
 														</div>
 													</div>
@@ -484,87 +486,87 @@
 						<span class="line-text mb-2 h4 semibold primary"><?= lang('GEN_BTN_DOWNLOADS') ?></span>
 						<div class="px-5">
 							<div class="container">
-								<?php if (lang('GEN_MANUAL_BOOL') == true) : ?>
-									<div class="my-2 tertiary h4 semibold">
-										<span><?= lang('GEN_MANUALS') ?></span>
-									</div>
-									<div class="row">
-										<?php if (lang('GEN_PDF_FILE') != '') : ?>
-											<?php foreach (lang('GEN_PDF_FILE') as $value) : ?>
-												<div class="mb-3 col-auto col-lg-6 col-xl-5">
-													<a href="<?= $this->asset->insertFile($countryUri . '/' . $value[0], 'statics'); ?>" download>
-														<div class="files btn-link flex items-center">
-															<div class="file">
-																<img src="<?= $this->asset->insertFile($countryUri . '/' . lang('GEN_PDF_ICON')); ?>" />
-															</div>
-															<span class="ml-2 flex justify-center"><?= $value[1] ?></span>
-														</div>
-													</a>
+							<?php if (lang('GEN_MANUAL_BOOL') == true): ?>
+							<div class="my-2 tertiary h4 semibold">
+								<span><?= lang('GEN_MANUALS') ?></span>
+							</div>
+								<div class="row">
+								<?php if (lang('GEN_PDF_FILE') != ''): ?>
+									<?php foreach(lang('GEN_PDF_FILE') as $value): ?>
+									<div class="mb-3 col-auto col-lg-6 col-xl-5">
+										<a href="<?= $this->asset->insertFile($countryUri.'/'.$value[0],'statics'); ?>" download>
+											<div class="files btn-link flex items-center">
+												<div class="file">
+													<img src="<?= $this->asset->insertFile($countryUri.'/'.lang('GEN_PDF_ICON'));?>" />
 												</div>
-											<?php endforeach; ?>
-										<?php endif; ?>
-									</div>
-								<?php endif; ?>
-
-
-
-								<?php if (lang('GEN_VIDEO_BOOL') == true) : ?>
-									<?php foreach (lang('GEN_MP4_VIDEO') as $value) : ?>
-										<div class="container">
-											<div class="row">
-												<div class="col-sm-12 col-lg-11 col-xl-12 py-2">
-													<div class="manual-video">
-														<video controls preload>
-															<source src="<?= $this->asset->insertFile($countryUri . '/' . $value, 'statics'); ?>" type="video/mp4">
-														</video>
-													</div>
-												</div>
+												<span class="ml-2 flex justify-center"><?= $value[1]?></span>
 											</div>
-										</div>
+										</a>
+									</div>
 									<?php endforeach; ?>
 								<?php endif; ?>
+								</div>
+							<?php endif; ?>
 
-								<?php if (verifyDisplay('body', 'settings', lang('GEN_GL_USER_MANUAL'))) : ?>
-									<?php if (lang('GEN_APPS_BOOL') == true) : ?>
-										<div class="my-2 tertiary h4 semibold">
-											<span><?= lang('GEN_APPLICATIONS') ?></span>
+
+
+								<?php if (lang('GEN_VIDEO_BOOL') == true):?>
+									<?php foreach(lang('GEN_MP4_VIDEO') as $value): ?>
+								<div class="container">
+									<div class="row">
+										<div class="col-sm-12 col-lg-11 col-xl-12 py-2">
+											<div class="manual-video">
+												<video controls preload>
+													<source src="<?= $this->asset->insertFile($countryUri.'/'.$value,'statics');?>" type="video/mp4">
+												</video>
+											</div>
 										</div>
-										<div class="row">
-											<?php foreach (lang('GEN_ZIP_FILE') as $value) : ?>
-												<div class="mb-3 col-auto col-lg-6 col-xl-5">
-													<a href="<?= $this->asset->insertFile($countryUri . '/' . $value[0], 'statics'); ?>" download>
-														<div class="files btn-link flex items-center">
-															<div class="file">
-																<img src="<?= $this->asset->insertFile($countryUri . '/' . lang('GEN_ZIP_ICON')); ?>" />
-															</div>
-															<span class="ml-2 flex justify-center"><?= $value[1] ?></span>
-														</div>
-													</a>
-												</div>
-											<?php endforeach; ?>
-										</div>
-									<?php endif; ?>
+									</div>
+								</div>
+								<?php endforeach; ?>
 								<?php endif; ?>
-								<?php if (verifyDisplay('body', 'settings', lang('GEN_FILE'))) : ?>
-									<?php if (lang('GEN_FILES_MANAGMENT_BOOL') == true) : ?>
-										<div class="my-2 tertiary h4 semibold">
-											<span><?= lang('GEN_FILE') ?></span>
-										</div>
-										<div class="row">
-											<?php foreach (lang('GEN_RAR_FILE') as $value) : ?>
-												<div class="form-group col-auto mb-3 col-xl-5">
-													<a href="<?= $this->asset->insertFile($countryUri . '/' . $value[0], 'statics'); ?>" download>
-														<div class="files btn-link flex items-center">
-															<div class="file">
-																<img src=<?= $this->asset->insertFile($countryUri . '/' . lang('GEN_RAR_ICON')); ?> />
-															</div>
-															<span class="ml-2 flex justify-center"><?= $value[1]  ?></span>
-														</div>
-													</a>
+
+								<?php if(verifyDisplay('body','settings', lang('GEN_GL_USER_MANUAL'))): ?>
+								<?php if (lang('GEN_APPS_BOOL') == true): ?>
+								<div class="my-2 tertiary h4 semibold">
+									<span><?= lang('GEN_APPLICATIONS') ?></span>
+								</div>
+								<div class="row">
+								<?php foreach(lang('GEN_ZIP_FILE') as $value): ?>
+									<div class="mb-3 col-auto col-lg-6 col-xl-5">
+									<a href="<?= $this->asset->insertFile($countryUri.'/'.$value[0],'statics'); ?>" download>
+											<div class="files btn-link flex items-center">
+												<div class="file">
+													<img src="<?= $this->asset->insertFile($countryUri.'/'.lang('GEN_ZIP_ICON'));?>" />
 												</div>
-											<?php endforeach; ?>
-										</div>
-									<?php endif; ?>
+												<span class="ml-2 flex justify-center"><?= $value[1] ?></span>
+											</div>
+										</a>
+									</div>
+									<?php endforeach; ?>
+								</div>
+								<?php endif; ?>
+								<?php endif; ?>
+								<?php if(verifyDisplay('body','settings', lang('GEN_FILE'))): ?>
+								<?php if (lang('GEN_FILES_MANAGMENT_BOOL') == true): ?>
+								<div class="my-2 tertiary h4 semibold">
+									<span><?= lang('GEN_FILE') ?></span>
+								</div>
+								<div class="row">
+								<?php foreach(lang('GEN_RAR_FILE') as $value): ?>
+									<div class="form-group col-auto mb-3 col-xl-5">
+									<a href="<?= $this->asset->insertFile($countryUri.'/'.$value[0],'statics'); ?>" download>
+											<div class="files btn-link flex items-center">
+												<div class="file">
+													<img src=<?= $this->asset->insertFile($countryUri.'/'.lang('GEN_RAR_ICON'));?> />
+												</div>
+												<span class="ml-2 flex justify-center"><?= $value[1]  ?></span>
+											</div>
+										</a>
+									</div>
+									<?php endforeach; ?>
+								</div>
+								<?php endif; ?>
 								<?php endif; ?>
 							</div>
 						</div>
@@ -574,3 +576,5 @@
 		</div>
 	</div>
 </div>
+
+
