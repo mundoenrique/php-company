@@ -137,6 +137,7 @@ $(function () {
 				break;
 			case lang.GEN_BTN_DELETE:
 				var oldID = $('#accept').attr('id');
+				form = $(this).parent().find('form')
 				$(this).closest('tr').addClass('select');
 				$('#accept').attr('id', 'delete-bulk-btn');
 				var inputModal;
