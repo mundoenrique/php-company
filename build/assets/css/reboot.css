@@ -30,6 +30,30 @@ html {
   line-height: 1.15; /* 3 */
 }
 
+/*Icon font
+============================================================================= */
+@font-face {
+	font-family: "NovoPayment Glyphs";
+	font-style: normal;
+	font-weight: normal;
+	src: url('../fonts/novopayment-glyphs-webfont.eot?#iefix');
+  src: url('../fonts/novopayment-glyphs-webfont.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/novopayment-glyphs-webfont.woff') format('woff'),
+       url('../fonts/novopayment-glyphs-webfont.ttf') format('truetype'),
+       url('../fonts/novopayment-glyphs-webfont.svg') format('svg');
+}
+
+@font-face {
+  font-family: "novoglyphs";
+  font-weight: normal;
+	font-style: normal;
+	src: url('../fonts/novoglyphs-webfont.eot?#iefix');
+  src: url('../fonts/novoglyphs-webfont.eot?#iefix') format('eot'),
+       url('../fonts/novoglyphs-webfont.woff') format('woff'),
+       url('../fonts/novoglyphs-webfont.ttf') format('truetype'),
+       url('../fonts/novoglyphs-webfont.svg') format('svg');
+}
+
 /* Sections
    ========================================================================== */
 
@@ -303,6 +327,14 @@ button:-moz-focusring,
 
 fieldset {
   padding: .35em .75em .625em;
+}
+
+/*
+*Delete the [X] in the search engine input
+*/
+
+input[type=search]::-webkit-search-cancel-button{
+	display: none !important;
 }
 
 /**
