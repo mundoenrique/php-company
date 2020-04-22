@@ -158,11 +158,13 @@ if(!function_exists('languajeLoad')) {
 					'deleteConfirmBulk'	=> ['bulk'],
 					'disassConfirmBulk'	=> ['bulk'],
 					'serviceOrders'	=> ['bulk'],
+					'options' => ['settings']
 				];
 				break;
 			case 'bnt':
 				$languages = [
 					'login' => ['login'],
+					'options' => ['settings']
 				];
 				break;
 			case 'co':
