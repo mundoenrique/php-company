@@ -31,6 +31,7 @@ $(function () {
 			searchIcon.off('click').css('cursor', 'default');
 			enterprisePages.addClass('none');
 		}
+		$('#pre-loader').remove();
 	});
 
 	enterpriseList.isotope({filter: '.page_1'});
