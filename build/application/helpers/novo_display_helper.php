@@ -171,6 +171,10 @@ if ( ! function_exists('verifyBody'))
 				$show = ['novo', 'pichincha', 'banorte'];
 				$display = (in_array($client, $show));
 				break;
+			case lang('GEN_IMAGE_LOGIN'):
+				$show = ['banorte'];
+				$display = (in_array($client, $show));
+				break;
 		}
 
 		return $display;
