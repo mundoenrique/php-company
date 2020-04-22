@@ -8,10 +8,9 @@
 	<? endif; ?>
 	<div class="flex flex-auto flex-wrap justify-around items-center">
 
-		<img class="order-first" src="<?= $this->asset->insertFile($countryUri.'/'.lang('GEN_FOTTER_ICON_I')); ?>"
-		<?php $desc = lang('GEN-DESCR-BANCO')?>
-			alt="Logo Banco <?php echo $desc ?>">
-		<img class="order-1"  src="<?= $this->asset->insertFile($countryUri.'/'.lang('GEN_FOTTER_ICON_R')); ?>"
+		<img class="order-first" src="<?= $this->asset->insertFile($countryUri.'/'.lang('GEN_FOTTER_IMAGE_L')); ?>"
+			alt="<?= lang('GEN_ALTERNATIVE_TEXT'); ?>">
+		<img class="order-1"  src="<?= $this->asset->insertFile($countryUri.'/'.lang('GEN_FOTTER_IMAGE_R')); ?>"
 			alt="Logo PCI">
 		<span class="copyright-footer mt-1 nowrap flex-auto lg-flex-none order-1 order-lg-0 center h6"><?= lang('GEN_FOTTER_RIGHTS'); ?><?= date("Y") ?></span>
 	</div>
