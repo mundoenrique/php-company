@@ -404,7 +404,7 @@ textarea.form-control {
   border-bottom: 1px solid var(--border-color);
 	transition: all .1ms ease-in-out;
 }
-option:hover{background-color:yellow;}
+
 .select-box {
 	/* border-radius: 2.55px; */
 	border: .85px solid var(--border-color);
@@ -993,16 +993,6 @@ option:hover{background-color:yellow;}
 
 .form-control.has-error {
 	border-color: var(--danger) !important;
-}
-
-input[type=password]::-ms-reveal,
-input[type=password]::-ms-clear
-{
-    display: none !important;
-}
-
-input[type=text]::-ms-clear {
-  display: none;
 }
 
 /* Buttons
@@ -2100,7 +2090,7 @@ i[class*=" icon-"].novoglyphs {
 
 
 .icon-user{
-	color:  var(--tertiary);
+	color: var(--disabled-color);
 	padding-right: 0 !important;
 }
 .icon-circle {
@@ -2707,7 +2697,7 @@ td > button > i:hover{
 }
 
 .dataTables_length select:hover {
-	background: rgba(255,255,255,1) url("../../images/bnt/icon-chevron_down_blue.svg") right .75rem center / 14px 14px no-repeat;
+	background: rgba(255,255,255,1) url("../../images/bnt/icon-chevron_down_gray.svg") right .75rem center / 14px 14px no-repeat;
 }
 
 .dataTables_length select:disabled {
@@ -2834,11 +2824,17 @@ table.dataTable thead th.select-checkbox:after {
   box-sizing: border-box;
 }
 table.dataTable thead th.select-checkbox:before {
-  content: ' ';
-  margin-top: -6px;
+  content: '';
+	margin-top: -6px;
   margin-left: -6px;
   border: 1px solid var(--secondary);
   border-radius: 3px;
+}
+
+@supports (-ms-ime-align:auto) {
+	table.dataTable thead th.select-checkbox:before {
+		margin-top: 2px;
+	}
 }
 
 table.dataTable tr.selected th.select-checkbox:after {

@@ -337,6 +337,17 @@ input[type=search]::-webkit-search-cancel-button{
 	display: none !important;
 }
 
+/*
+*Remove default browser icons like: clear field and show / hide password
+*/
+
+input[type=password]::-ms-reveal,
+input[type=password]::-ms-clear,
+input[type=text]::-ms-clear
+{
+    display: none !important;
+}
+
 /**
  * 1. Correct the text wrapping in Edge and IE.
  * 2. Correct the color inheritance from `fieldset` elements in IE.
