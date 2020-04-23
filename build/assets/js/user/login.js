@@ -81,7 +81,7 @@ $(function () {
 	};
 
 	function validateLogin(token) {
-		verb = 'POST'; who = forWho || 'User'; where = forWhere || lang.GEN_LOGIN_URI;
+		verb = 'POST'; who = forWho || 'User'; where = forWhere || lang.GEN_LOGIN;
 		data = {
 			user: userCred.user,
 			pass: userCred.pass,

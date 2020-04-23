@@ -71,7 +71,6 @@ $lang['GEN_BTN_DOWNLOADS'] = 'Descargas';
 $lang['GEN_LOGIN'] = 'Login';
 $lang['GEN_VALIDATE_CAPTCHA'] = 'validateCaptcha';
 $lang['GEN_ACTIVE_RECAPTCHA'] = ACTIVE_RECAPTCHA;
-$lang['GEN_LOGIN_URI'] = ACTIVE_RECAPTCHA ? $lang['GEN_VALIDATE_CAPTCHA'] : $lang['GEN_LOGIN'];
 $lang['GEN_RECOVER_PASS'] = 'RecoverPass';
 $lang['GEN_CHANGE_PASS'] = 'ChangePassword';
 $lang['GEN_FINISH_SESSION'] = 'FinishSession';
