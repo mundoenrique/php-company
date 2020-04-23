@@ -66,7 +66,7 @@ class NOVO_Controller extends CI_Controller {
 		log_message('INFO', 'NOVO Controller: optionsCheck Method Initialized');
 
 		languageLoad('generic');
-		countryCheck($this->countryUri);
+		clientUrlValidate($this->countryUri);
 		languageLoad('specific', $this->countryUri);
 		if($this->session->userId) {
 			if($this->session->countrySess !== $this->config->item('country')) {

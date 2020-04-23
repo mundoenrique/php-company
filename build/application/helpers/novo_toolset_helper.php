@@ -22,15 +22,15 @@ if(!function_exists('assetUrl')) {
 	}
 }
 
-if(!function_exists('countryCheck')) {
-	function countryCheck($country) {
+if(!function_exists('clientUrlValidate')) {
+	function clientUrlValidate($country) {
 		$CI = &get_instance();
 		$accessUrl = $CI->config->item('access_url');
 		array_walk($accessUrl, 'arrayTrim');
 		reset($accessUrl);
 		if(!in_array($country, $accessUrl)) {
 			$country = current($accessUrl);
-			redirect(base_url($country.'/inicio'));
+			redirect(base_url($country.'/inicio'), 'location', 301);
 		}
 
 		$CI->config->load('config-'.$country);
