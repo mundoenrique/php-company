@@ -161,24 +161,20 @@ class Novo_User_Model extends NOVO_Model {
 					]
 				];
 				break;
-				case -424:
+			case -424:
 				$this->response->code = 2;
 				$this->response->ipInvalid = TRUE;
 				$this->response->assert = lang('GEN_LOGIN_IP_ASSERT');
 				$this->response->labelInput = lang('GEN_LOGIN_IP_LABEL_INPUT');
 				$this->response->msg = lang('GEN_LOGIN_IP_TITLE');
 				$this->response->icon = lang('GEN_ICON_WARNING');
-<<<<<<< HEAD
-				//$this->session->set_flashdata('authToken', json_decode($response->codeOtp)->authToken);// TODO: descomentar
 				$this->session->set_flashdata('authToken', 'ABCDEFEHIJK');// TODO: descomentar
 				break; 
-
-				case -286:
+			case -286:
 				$this->response->code = 2;
 				$this->response->codeOtpInvalid = TRUE;
 				$this->response->msg = lang('GEN_RESP_CODE_OTP_INVALID');
 				$this->response->icon = lang('GEN_ICON_WARNING');
-=======
 				break;
 			case 'fail':
 				$this->response->code = 3;
@@ -192,7 +188,6 @@ class Novo_User_Model extends NOVO_Model {
 						'action'=> 'redirect'
 					]
 				];
->>>>>>> 08bc0fb96fe3729d148c76830bd21d3e3a21c44b
 				break;
 		}
 
