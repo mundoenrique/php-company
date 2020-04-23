@@ -71,6 +71,29 @@ class Novo_User extends NOVO_Controller {
 		$this->loadView($view);
 	}
 	/**
+	 * @info Método para el cierre de sesión
+	 * @author J. Enrique Peñaloza Piñero.
+	 */
+	public function singleSignin($tokenId)
+	{
+		log_message('INFO', 'NOVO User: singleSignin Method Initialized');
+
+		$view = 'finish';
+
+
+		$pos = array_search('menu-datepicker', $this->includeAssets->jsFiles);
+		$this->render->showBtn = FALSE;
+		$this->render->sessionEnd = 'No fue posible validar tus credenciales de acceso, por favor comunicate con el administrador';
+
+		unset($this->includeAssets->jsFiles[$pos]);
+		$this->render->activeHeader = TRUE;
+		$this->render->titlePage = LANG('GEN_FINISH_TITLE');
+		$this->views = ['user/'.$view];
+		$this->loadView($view);
+
+
+	}
+	/**
 	 * @info Método que renderiza la vista para recuperar la contraseña
 	 * @author J. Enrique Peñaloza Piñero.
 	 */
