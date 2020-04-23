@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="38" height="23" viewBox="0 0 38 23">
+  <defs>
+    <clipPath id="clip-iPhone_X_XS_11_Pro_1">
+      <rect width="38" height="23"/>
+    </clipPath>
+  </defs>
+  <g id="iPhone_X_XS_11_Pro_1" data-name="iPhone X/XS/11 Pro – 1" clip-path="url(#clip-iPhone_X_XS_11_Pro_1)">
+    <g id="mastercard_product" transform="translate(1565.623 -1106.748)">
+      <g id="Grupo_4" data-name="Grupo 4" transform="translate(-1565.623 1106.748)">
+        <g id="Grupo_1" data-name="Grupo 1" transform="translate(35.88 18.178)">
+          <path id="Trazado_1" data-name="Trazado 1" d="M-4.238-1.951V-2.4h-.116l-.135.306L-4.623-2.4H-4.74v.446h.083v-.336l.126.29h.086l.126-.291v.337Zm-.738,0v-.37h.149V-2.4h-.38v.075h.149v.37Z" transform="translate(5.207 2.397)" fill="#f79410"/>
+        </g>
+        <path id="Trazado_2" data-name="Trazado 2" d="M3353.065,2165.654H3343v-18.082h10.062Z" transform="translate(-3329.435 -2145.111)" fill="#ff5f00"/>
+        <g id="Grupo_2" data-name="Grupo 2" transform="translate(0 0)">
+          <path id="Trazado_3" data-name="Trazado 3" d="M-62.179-50.309a11.481,11.481,0,0,1,4.392-9.041,11.45,11.45,0,0,0-7.107-2.459,11.5,11.5,0,0,0-11.5,11.5,11.5,11.5,0,0,0,11.5,11.5,11.45,11.45,0,0,0,7.107-2.459,11.481,11.481,0,0,1-4.392-9.041" transform="translate(76.392 61.809)" fill="#eb001b"/>
+        </g>
+        <g id="Grupo_3" data-name="Grupo 3" transform="translate(18.594 0)">
+          <path id="Trazado_4" data-name="Trazado 4" d="M-81.4-50.309a11.5,11.5,0,0,1-11.5,11.5A11.453,11.453,0,0,1-100-41.268a11.479,11.479,0,0,0,4.393-9.041A11.479,11.479,0,0,0-100-59.35a11.453,11.453,0,0,1,7.107-2.459,11.5,11.5,0,0,1,11.5,11.5" transform="translate(100.001 61.809)" fill="#f79e1b"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

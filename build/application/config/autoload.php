@@ -59,13 +59,14 @@ $autoload['packages'] = array();
 |	$autoload['libraries'] = array('user_agent' => 'ua');
 */
 $autoload['libraries'] = array(
-	'encrypt',
 	'session',
 	'parser',
 	'form_validation',
 	'Asset',
 	'Encrypt_Connect',
-	'Cryptography'
+	'Cryptography',
+	'Verify_Access',
+	'Create_Menu'
 );
 
 
@@ -106,7 +107,10 @@ $autoload['helper'] = array(
 	'language',
 	'tools',
 	'form',
-	'cookie'
+	'cookie',
+	'novo_toolset',
+	'novo_language',
+	'novo_display'
 );
 
 /*
@@ -135,7 +139,11 @@ $autoload['config'] = array();
 | "codeigniter_lang.php" would be referenced as array('codeigniter');
 |
 */
-$autoload['language'] = array();
+$autoload['language'] = array(
+	'general',
+	'validate',
+	'response'
+);
 
 /*
 | -------------------------------------------------------------------

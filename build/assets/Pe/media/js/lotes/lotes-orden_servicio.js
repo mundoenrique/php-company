@@ -134,7 +134,11 @@ $(function(){
 	}
 
 	$('#cancelar-OS').on('click', function() {
+		var ceo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
 		$('form#viewAutorizar').append($('#tempIdOrdenL'));
+		$('#viewAutorizar').append('<input type="hidden" name="ceo_name" value="'+ceo_cook+'" />');
 		$("#viewAutorizar").submit();
 
 	});

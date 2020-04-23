@@ -49,23 +49,43 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
-$route['default_controller'] = 'user/login';
+$route['default_controller'] = 'Novo_User/login';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+//Asynchronous
+$route['(:any)/async-call'] = "novo_CallModels";
+//User
+$route['(:any)/ingresar/(:any)'] = "Novo_User/singleSignin/$2";
+$route['(:any)/sugerencia'] = "Novo_User/suggestion";
+$route['(:any)/inicio'] = "Novo_User/login";
+$route['(:any)/inicio/(:any)'] = "Novo_User/login";
+$route['(:any)/cerrar-sesion/(:any)'] = "Novo_User/finishSession/$2";
+$route['(:any)/recuperar-clave'] = "Novo_User/recoverPass";
+$route['(:any)/cambiar-clave'] = "Novo_User/changePassword";
+//Information
+$route['(:any)/inf-beneficios'] = "Novo_Information/benefits";
+$route['(:any)/inf-condiciones'] = "Novo_Information/terms";
+$route['(:any)/inf-tarifas'] = "Novo_Information/rates";
+//Business
+$route['(:any)/empresas'] = "Novo_Business/getEnterprises";
+$route['(:any)/productos'] = "Novo_Business/getProducts";
+$route['(:any)/detalle-producto'] = "Novo_Business/getProductDetail";
+//Bulk
+$route['(:any)/cargar-lotes'] = "Novo_Bulk/getPendingBulk";
+$route['(:any)/detalle-lote'] = "Novo_Bulk/getDetailBulk";
+$route['(:any)/confirmar-lote'] = "Novo_Bulk/confirmBulk";
+$route['(:any)/lotes-autorizacion'] = "Novo_Bulk/authorizeBulkList";
+$route['(:any)/lotes-calcular-orden'] = "Novo_Bulk/calculateServiceOrder";
+//Inquiries
+$route['(:any)/consulta-orden-de-servicio'] = "Novo_Inquiries/serviceOrders";
+$route['(:any)/consulta-lote'] = "Novo_Inquiries/bulkDetail";
+//DownloadFile
+$route['(:any)/descargar-archivo'] = "Novo_DownloadFiles/exportFiles";
+//Reports
+$route['(:any)/reportes'] = "Novo_Reports/getReportsList";
+//settings
+$route['(:any)/configuracion'] = "Novo_Settings/options";
 
-$route['(:any)/async-call'] = "callModels";
-
-$route['(:any)/inicio'] = "user/login";
-$route['(:any)/inicio/(:any)'] = "user/login";
-$route['(:any)/recuperar-clave'] = "user/recoveryPass";
-$route['(:any)/cambiar-clave'] = "user/changePassword";
-$route['(:any)/cerrar-sesion'] = "user/finishSession";
-
-$route['(:any)/inf-beneficios'] = "information/benefits";
-$route['(:any)/inf-condiciones'] = "information/terms";
-$route['(:any)/inf-tarifas'] = "information/rates";
-
-$route['(:any)/empresas'] = "business/getEnterprises";
 
 //old routes
 $route['(:any)/login'] = "users/login/$1";

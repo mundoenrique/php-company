@@ -14,6 +14,8 @@ RUN apt-get update -y \
 	&& a2ensite 000-default.conf \
 	&& mkdir -p assets/Co/bash assets/Pe/bash assets/Usd/bash assets/Ve/bash assets/Ec-bp/bash \
 	&& chmod 0755 assets/Co/bash assets/Pe/bash assets/Usd/bash assets/Ve/bash assets/Ec-bp/bash \
+	&& mkdir -p assets/bulk \
+	&& chmod 0755 assets/bulk \
 	&& mkdir -p ../sessions \
 	&& chmod 0700 ../sessions \
 	&& chown -R www-data:www-data ../ \

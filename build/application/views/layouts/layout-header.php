@@ -67,10 +67,11 @@ $style_css = $this->uri->segment(3);
 <?php
 	if($menuHeaderMainActive){
 		$menuP =$this->session->userdata('menuArrayPorProducto');
-		$menu = createMenu($menuP, $pais);
+		$menu = createMenu($menuP, TRUE);
 		$settingsMenu = new stdClass();
 		$settingsMenu->menu = $menu;
-		$settingsMenu->pais = $pais;
+		$settingsMenu->pais = $this->config->item('countryUri');
+		$settingsMenu->enterpriseList = $this->config->item('country').'/'.lang('GEN_ENTERPRISE_LIST');
 		$this->load->view('widget/widget_menu-business_content', $settingsMenu);
 	}
 ?>

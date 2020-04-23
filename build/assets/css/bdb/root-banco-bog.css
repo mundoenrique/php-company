@@ -1,0 +1,151 @@
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 300;
+  src: url('../../fonts/bdb/OpenSans-Light.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../../fonts/bdb/OpenSans-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 600;
+  src: url('../../fonts/bdb/OpenSans-SemiBold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 700;
+  src: url('../../fonts/bdb/OpenSans-Bold.ttf') format('truetype');
+}
+
+@font-face {
+	font-family: "NovoPayment Glyphs";
+	font-style: normal;
+	font-weight: normal;
+	src: url('../../fonts/novopayment-glyphs-webfont.eot?#iefix');
+  src: url('../../fonts/novopayment-glyphs-webfont.eot?#iefix') format('embedded-opentype'),
+       url('../../fonts/novopayment-glyphs-webfont.woff') format('woff'),
+       url('../../fonts/novopayment-glyphs-webfont.ttf') format('truetype'),
+       url('../../fonts/novopayment-glyphs-webfont.svg') format('svg');
+}
+
+@font-face {
+  font-family: "novoglyphs";
+  font-weight: normal;
+	font-style: normal;
+	src: url('../../fonts/novoglyphs-webfont.eot?#iefix');
+  src: url('../../fonts/novoglyphs-webfont.eot?#iefix') format('eot'),
+       url('../../fonts/novoglyphs-webfont.woff') format('woff'),
+       url('../../fonts/novoglyphs-webfont.ttf') format('truetype'),
+       url('../../fonts/novoglyphs-webfont.svg') format('svg');
+}
+
+:root {
+  /* Colors */
+  --primary: #012c71;
+  --secondary: #ffffff;
+  --tertiary: #435168;
+
+  --success: #007e33;
+  --info: #0099cc;
+  --warning: #ff8800;
+  --danger: #cc0000;
+
+  --yellow: #ffb400;
+  --vista-blue: #7ed3b2;
+  --trikemaster: #8b4f80;
+	--pink-salmon: #ff8c94;
+	--gold-sand: #ebc599;
+  --black: #111111;
+  --bg-color: #f6f3f1;
+
+	--widget-color: #f4f4f4;
+	--shadows-color: #f2f2f2;
+  --border-color: #b5bac3;
+  --border-color-2: #d8d8d8;
+  --text-color: #7b7b7b;
+  --placeholder-color: #bcc0c6;
+	--disabled-color: #ececec;
+
+  --label-color: #012c71;
+  --primary-shade: #012c71a6;
+  --primary-tint: #1a417f;
+
+  /* Type Scale */
+  --h00: 2.5rem;
+  --h0: 2rem;
+  --h1: 1.75rem;
+  --h2: 1.5rem;
+  --h3: 1.25rem;
+  --h4: 1rem;
+  --h5: .875rem;
+  --h6: .75rem;
+
+  /* Typography */
+  --caps-letter-spacing: .2em;
+
+  --light-font-weight: 300;
+  --regular-font-weight: 400;
+  --semibold-font-weight: 600;
+  --bold-font-weight: 700;
+
+  --font-family-base: 'Open Sans', sans-serif;
+  --font-family-monospace: monospace, "Courier New";
+  --font-family-novoglyphs: 'novoglyphs';
+  --font-size-base: .875rem;
+  --font-weight-base: 400;
+  --line-height-base: 1.5;
+
+  /* Layout */
+  --width-1: 24rem;
+  --width-2: 32rem;
+  --width-3: 48rem;
+  --width-4: 62rem;
+  --width-5: 64rem;
+  --width-6: 75rem;
+
+  /* Margin - Padding */
+  --space-1: .5rem;
+  --space-2: 1rem;
+  --space-3: 1.5rem;
+  --space-4: 2rem;
+  --space-5: 2.5rem;
+
+  /* Position */
+  --z1: 1;
+  --z2: 2;
+  --z3: 3;
+  --z4: 4;
+
+  /* Border */
+  --border-width: 1px;
+  --border-radius: 5px;
+  --btn-border-radius: 20px;
+
+  /* Buttons */
+  --button-font-family: inherit;
+  --button-font-size: 1rem;
+  --button-font-weight: 600;
+  --button-line-height: 1.5rem;
+  --button-padding-y: .375rem;
+  --button-padding-x: 1.75rem;
+
+  --button-small-padding-y: .125rem;
+  --button-small-padding-x: 1rem;
+  --button-large-padding-y: .5rem;
+  --button-large-padding-x: 1.75rem;
+
+  /* Responsive breakpoints */
+  /* Medium: 768px -> 48em | Large: 992px -> 62em | Extra large: 1200px -> 75em */
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 992px;
+  --breakpoint-xl: 1200px;
+}

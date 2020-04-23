@@ -12,6 +12,7 @@ class Cryptography {
 	public function __construct()
 	{
 		log_message('INFO', 'NOVO Cryptography Library Class Initialized');
+
 		$this->CI = &get_instance();
 		$this->CypherBase = $this->CI->config->item('cypher_base');
 	}
@@ -19,7 +20,7 @@ class Cryptography {
 	public function encrypt($object)
 	{
 		log_message('INFO', 'NOVO Cryptography: Encrypt Method Initialized');
-		log_message('DEBUG', 'NOVO DATA TO ENCRYPT: '.json_encode($object));
+
 		$keyStr = $this->generateKey();
 		$salt = openssl_random_pseudo_bytes(8);
     $salted = '';
@@ -30,7 +31,7 @@ class Cryptography {
     }
     $key = substr($salted, 0, 32);
     $iv  = substr($salted, 32,16);
-    $encrypted_data = openssl_encrypt(json_encode($object), 'aes-256-cbc', $key, true, $iv);
+    $encrypted_data = openssl_encrypt(json_encode($object, JSON_UNESCAPED_UNICODE), 'aes-256-cbc', $key, true, $iv);
 		$data = [
 			"res" => base64_encode($encrypted_data),
 			"str" => bin2hex($iv),
@@ -39,7 +40,7 @@ class Cryptography {
 
 		$response = [
 			'plot' => $keyStr,
-			'code' => urlencode(base64_encode(json_encode($data)))
+			'code' => urlencode(base64_encode(json_encode($data, JSON_UNESCAPED_UNICODE)))
 		];
 
     return $response;
@@ -63,7 +64,7 @@ class Cryptography {
     }
     $key = substr($result, 0, 32);
 		$data = openssl_decrypt($ct, 'aes-256-cbc', $key, true, $iv);
-		log_message('DEBUG', 'NOVO DECRYPT DATA: '.$data);
+
 		return $data;
 	}
 
@@ -71,10 +72,12 @@ class Cryptography {
 	{
 		$length = 32;
     $CypherBaseLength = strlen($this->CypherBase);
-    $randomString = '';
+		$randomString = '';
+
     for ($i = 0; $i < $length; $i++) {
 			$randomString .= $this->CypherBase[rand(0, $CypherBaseLength - 1)];
-    }
+		}
+
     return $randomString;
 	}
 }

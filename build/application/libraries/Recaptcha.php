@@ -27,6 +27,8 @@ class Recaptcha {
 	 */
 	public function __construct()
 	{
+		log_message('INFO', 'NOVO Recaptcha Library Class Initialized');
+
 		$this->_ci = & get_instance();
 		$this->_ci->load->config('recaptcha');
 		$this->_siteKey = $this->_ci->config->item('recaptcha_site_key');

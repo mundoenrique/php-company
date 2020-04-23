@@ -3,7 +3,7 @@ $pais = $this->uri->segment(1);
 ?>
 <h1>Descargas</h1>
 <div id="campos-config-descarga">
-	<div id="datos-1"><p id="user-name">Manuales</p></div>
+	<div id="datos-1"><p id="user-name" class="title1">Manuales</p></div>
 	<div id="campos-descarga">
 		<a href="<?= get_cdn() . "downloads/" . lang('DWL_MANUAL'); ?>" target="_blank">
 			<span>
@@ -31,7 +31,7 @@ $pais = $this->uri->segment(1);
 	<?php
 		endif;
 	?>
-		<div id="datos-1"><p id="user-name">Aplicaciones</p></div>
+		<div id="datos-1"><p id="user-name" class="title1">Aplicaciones</p></div>
 	<?php
 		if ($pais != 'Co' && $pais != 'Usd'  && $pais != 'Ec' && $pais != 'Ec-bp'):
 	?>
@@ -60,7 +60,7 @@ $pais = $this->uri->segment(1);
 	if ($pais == 'Co' || $pais == 'Pe' || $pais == 'Ec-bp'):
 	?>
     <div id="datos-1">
-			<p id="user-name">Archivos de gestión Conexión Empresas Online</p>
+			<p id="user-name" class="title1">Archivos de gestión Conexión Empresas Online</p>
     </div>
     <div id="campos-descarga">
 			<a href="<?php echo get_cdn() ?>downloads/ArchivosLotes.rar">
@@ -77,7 +77,7 @@ $pais = $this->uri->segment(1);
 	if($pais == 'Ve'):
 	?>
 		<div id="datos-1">
-			<p id="user-name">Archivos para emisión de Lotes</p>
+			<p id="user-name" class="title1">Archivos para emisión de Lotes</p>
 		</div>
 		<div id="campos-descarga">
 			<a href="<?php echo get_cdn() ?>downloads/Archivo_Lote_Guarderia.xls">

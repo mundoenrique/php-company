@@ -106,7 +106,7 @@ $urlCdn = get_cdn();
 		<div id='contactos'>
 
 	<div id="datos-1">
-		<p id="user-name">Listado de contactos asociados</p>
+		<p id="user-name" class="title1">Listado de contactos asociados</p>
 	</div>
 	<div id ="contenedor_contacts">
 
