@@ -280,4 +280,5 @@ $lang['GEN_HIDE_PASS'] = 'Ocultar contraseña';
 $lang['GEN_LOGIN_IP_TITLE'] = 'Estas ingresando desde un lugar no habitual, por seguridad vamos a enviarte un código de seguridad a la dirección de correo micorr*********ail.com, por favor indicalo a continuación.';
 $lang['GEN_LOGIN_IP_ASSERT'] = 'Estoy accediendo desde un sitio de confianza';
 $lang['GEN_LOGIN_IP_LABEL_INPUT'] = 'Ingrese el código de seguridad';
+$lang['GEN_RESP_CODE_OTP_INVALID'] = 'El código de seguridad que nos has indicado no es correcto, no podemos darte acceso a la plataforma por favor indica nuevamente tus credenciales de acceso.';
 

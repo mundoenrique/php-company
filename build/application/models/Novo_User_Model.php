@@ -39,6 +39,15 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataRequest->password = md5($password);
 		$this->dataRequest->ctipo = $dataRequest->active;
 
+		$authToken = $this->session->flashdata('authToken')?: FALSE;
+ 
+		$this->dataRequest->codigoOtp =[
+ 		'tokenCliente' => isset($dataRequest->codeOTP)?$dataRequest->codeOTP:'',
+ 		'authToken' => $authToken?:''
+		];
+
+		$this->dataRequest->guardaIp =isset($dataRequest->guardaIp)?$dataRequest->guardaIp:false;
+
 		$response = $this->sendToService(lang('GEN_LOGIN'));
 
 		if(in_array($this->config->item('client'), ['banco-bog']) && ($this->isResponseRc == -2 || $this->isResponseRc == -185)) {
@@ -148,13 +157,21 @@ class Novo_User_Model extends NOVO_Model {
 				break;
 				case -424:
 				$this->response->code = 2;
-				$this->response->ipModal = TRUE;
-				$this->response->title = lang('GEN_SYSTEM_NAME');
+				$this->response->ipInvalid = TRUE;
 				$this->response->assert = lang('GEN_LOGIN_IP_ASSERT');
 				$this->response->labelInput = lang('GEN_LOGIN_IP_LABEL_INPUT');
 				$this->response->msg = lang('GEN_LOGIN_IP_TITLE');
 				$this->response->icon = lang('GEN_ICON_WARNING');
+				//$this->session->set_flashdata('authToken', json_decode($response->codeOtp)->authToken);// TODO: descomentar
+				$this->session->set_flashdata('authToken', 'ABCDEFEHIJK');// TODO: descomentar
 				break; 
+
+				case -286:
+				$this->response->code = 2;
+				$this->response->codeOtpInvalid = TRUE;
+				$this->response->msg = lang('GEN_RESP_CODE_OTP_INVALID');
+				$this->response->icon = lang('GEN_ICON_WARNING');
+				break;
 		}
 
 		return $this->responseToTheView(lang('GEN_LOGIN'));

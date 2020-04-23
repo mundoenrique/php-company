@@ -108,7 +108,6 @@ $(function () {
 			}
 		},
 		1: function (response) {
-
 			userLogin.showBalloon({
 				html: true,
 				classname: response.className,
@@ -118,17 +117,21 @@ $(function () {
 			restartFormLogin();
 		},
 		2: function (response) {
-
-			if(response.ipModal){
+			if(response.ipInvalid){
 				var loginIpMsg ;
 				data = {
 					btn1: {
 						text: lang.GEN_BTN_ACCEPT,
+						link: 'false',
+						action: 'close'
+					},
+					btn2: {
+						text: lang.GEN_BTN_CANCEL,
 						link: 'inicio',
 						action: 'redirect'
 					}
 				}
-				
+
 				loginIpMsg ='<form id="formVerificationOTP" class="mr-2" method="post">';
 				loginIpMsg+='<p>'+response.msg+'</p>';
 				loginIpMsg+='<div class="row">';
@@ -147,10 +150,41 @@ $(function () {
 				
 				notiSystem(response.title, loginIpMsg, response.icon,data);
 
-				}else{
-					userCred.active = 1; forWhere = lang.GEN_LOGIN;
-					validateLogin();
+				var btn = data.btn1;
+
+				if(btn.action == 'close') {
+					$('#accept').on('click', function() {
+						data = {
+							user: userCred.user,
+							pass: userCred.pass,
+							active: userCred.active,
+							currentTime: new Date().getHours(),
+							token: '',
+							codeOTP: $('#codeOTP').val(),
+							guardaIp: $('#acceptAssert').prop('checked')
+						}
+						callNovoCore(verb, who, where, data, function (response) {
+							responseCodeLogin[response.code](response);
+						})
+
+					});
+				  }
+			} else if(response.codeOtpInvalid){
+
+				data = {
+					btn1: {
+						text: lang.GEN_BTN_ACCEPT,
+						link: 'inicio',
+						action: 'redirect'
+					}
 				}
+
+				notiSystem(false, response.msg, response.icon,data);
+
+			} else{
+				userCred.active = 1; forWhere = lang.GEN_LOGIN;
+				validateLogin();
+			}
 		},
 		3: function (response) {
 			var btn = response.data.btn1;
