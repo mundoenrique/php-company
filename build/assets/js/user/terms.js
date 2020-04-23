@@ -1,9 +1,9 @@
 'use strict'
 $(function() {
 	$('#terms').on('click', function() {
-		title = prefixCountry + strCountry;
+		title = lang.GEN_SYSTEM_NAME;
 		msg = 'Al presionar "Aceptar" declaras que has leído y aceptado los términos de uso de nuestra plataforma..';
-		icon = iconInfo;
+		icon = lang.GEN_ICON_INFO;
 		data = {
 			btn1: {
 				text: 'Aceptar',
@@ -12,7 +12,7 @@ $(function() {
 			},
 			btn2: {
 				text: 'Cancelar',
-				link: baseURL + 'inicio',
+				link: baseURL + 'cerrar-sesion/inicio',
 				action: 'redirect'
 			}
 		};
@@ -22,9 +22,4 @@ $(function() {
 		notiSystem(title, msg, icon, data);
 
 	});
-
-	/* $('#cancel, #signup').on('click', function() {
-		verb = 'POST'; who = 'User'; where = 'FinishSession'; data = { user: 'noUser' };
-			callNovoCore (verb, who, where, data);
-	}); */
 });

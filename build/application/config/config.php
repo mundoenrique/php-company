@@ -28,7 +28,6 @@ $config['asset_url'] = BASE_CDN_URL;
 $config['asset_path'] = BASE_CDN_PATH;
 $config['favicon'] = 'favicon-novo';
 $config['channel'] = 'ceo';
-$config['app_lang'] = LANGUAGE;
 // Main web service access
 $config['urlWS'] = WS_URL;
 $config['keyNovo'] = base64_decode(WS_KEY);
@@ -40,11 +39,21 @@ $config['urlServ'] = SERVICE_URL;
 $config['client_id'] = SERVICE_CLIENT_ID;
 $config['client_secret'] = SERVICE_CLIENT_SECRET;
 // Bulk upload management
+$config['upload_bulk'] = BULK_LOCAL_PATH.'bulk/';
+$config['userpass_bulk'] = BULK_FTP_USERNAME.':'.BULK_FTP_PASSWORD;
 $config['LOTES_USERPASS'] = BULK_FTP_USERNAME.':'.BULK_FTP_PASSWORD;
 $config['format_date'] = 'j/m/Y';
 $config['format_time'] = 'g:i A';
 $config['cypher_base'] = CYPHER_BASE;
-
+$config['active_recaptcha'] = ACTIVE_RECAPTCHA;
+$config['score_recaptcha'] = [
+	'development' => 0,
+	'testing' => 0.2,
+	'production' => 0.3
+];
+$config['new-views'] = '';
+$config['client'] = 'novo';
+$config['access_url'] = explode(',', ACCESS_URL);
 /*
 |--------------------------------------------------------------------------
 | Index File
@@ -96,7 +105,7 @@ $config['url_suffix'] = '';
 | than english.
 |
 */
-$config['language']	= 'pe-spanish';
+$config['language']	= 'spanish-base';
 
 /*
 |--------------------------------------------------------------------------
@@ -399,11 +408,15 @@ $config['encryption_key'] = ENCRYPTION_KEY;
 */
 $config['sess_driver'] = 'files';
 $config['sess_cookie_name'] = SESS_COOKIE_NAME;
-$config['sess_expiration'] = SESS_EXPIRATION;
+$config['sess_expiration'] = SESS_EXPIRATION > 0 ? SESS_EXPIRATION + 40 : SESS_EXPIRATION;
 $config['sess_save_path'] = SESS_SAVE_PATH;
 $config['sess_match_ip'] = SESS_MATCH_IP;
 $config['sess_time_to_update'] = 300;
 $config['sess_regenerate_destroy'] = TRUE;
+/*
+| Configura control de tiempo de sesión
+*/
+$config['session_time'] = SESS_EXPIRATION * 1000;
 
 /*
 |--------------------------------------------------------------------------
@@ -474,6 +487,12 @@ $config['csrf_cookie_name'] = 'cook';
 $config['csrf_expire'] = 7200;
 $config['csrf_regenerate'] = TRUE;
 $config['csrf_exclude_uris'] = array(
+	'[\w\-]+/productos',
+	'[\w\-]+/detalle-producto',
+	'[\w\-]+/detalle-lote',
+	'[\w\-]+/confirmar-lote',
+	'[\w\-]+/consulta-lote',
+	'[\w\-]+/detalle-orden-de-servicio',
 	'[\w\-]+/dashboard/productos',
 	'[\w\-]+/dashboard/productos/detalle',
 	'[\w\-]+/consulta/ordenes-de-servicio',
@@ -551,4 +570,4 @@ $config['rewrite_short_tags'] = TRUE;
 | Comma-separated:	'10.0.1.200,192.168.5.0/24'
 | Array:		array('10.0.1.200', '192.168.5.0/24')
 */
-$config['proxy_ips'] = '';
+$config['proxy_ips'] = IP_PROXI;

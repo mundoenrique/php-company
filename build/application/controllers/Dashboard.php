@@ -526,7 +526,6 @@ class Dashboard extends CI_Controller {
 				$acrifPost = $this->input->post('data-acrif');
 				$acnomciaPost = $this->input->post('data-acnomcia');
 				$acrazonsocialPost = $this->input->post('data-acrazonsocial');
-				$acdescPost = $this->input->post('data-acdesc');
 				$accodciaPost = $this->input->post('data-accodcia');
 				$accodgrupoePost = $this->input->post('data-accodgrupoe');
 
@@ -679,7 +678,8 @@ class Dashboard extends CI_Controller {
 				$OpcionesMenu = serialize($responseMenuPorProducto->lista);
 
 				$menu = [
-					'menuArrayPorProducto'=>$OpcionesMenu
+					'menuArrayPorProducto' => $OpcionesMenu,
+					'user_access' => $responseMenuPorProducto->lista
 				];
 				$this->session->set_userdata($menu);
 

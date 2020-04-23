@@ -6,16 +6,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  *
  */
 class Asset {
-	private $cssFiles = [];
-	private $jsFiles = [];
+	private $cssFiles;
+	private $jsFiles;
+	private $section;
 
 	public function __construct()
 	{
 		log_message('INFO', 'NOVO Assets Library Class Initialized');
+
+		$this->cssFiles = [];
+		$this->jsFiles = [];
+		$this->section = [];
 	}
 	/**
 	 * @info Método para inicializar los atributos de la librería
-	 * @author: J. Enrique Peñaloza P.
+	 * @author: J. Enrique Peñaloza Piñero.
 	 */
 	public function initialize($params = [])
 	{
@@ -26,11 +31,11 @@ class Asset {
 	}
 	/**
 	 * @info Método para insertar archivos css en el documento
-	 * @author: J. Enrique Peñaloza P.
+	 * @author: J. Enrique Peñaloza Piñero.
 	 */
 	public function insertCss()
 	{
-		log_message('INFO', 'NOVO Assets: insertCss method initialized');
+		log_message('INFO', 'NOVO Asset: insertCss method initialized');
 		$file_url = NULL;
 		foreach($this->cssFiles as $fileName) {
 			$file = assetPath('css/'.$fileName.'.css');
@@ -41,11 +46,11 @@ class Asset {
 	}
 	/**
 	 * @info Método para insertar archivos js en el documento
-	 * @author J. Enrique Peñaloza P.
+	 * @author J. Enrique Peñaloza Piñero.
 	 */
 	public function insertJs()
 	{
-		log_message('INFO', 'NOVO Assets: insertJs method initialized');
+		log_message('INFO', 'NOVO Asset: insertJs method initialized');
 		$file_url = NULL;
 		foreach($this->jsFiles as $fileName) {
 			$file = assetPath('js/'.$fileName.'.js');
@@ -56,20 +61,19 @@ class Asset {
 	}
 	/**
 	 * @info Método para insertar imagenes, json, etc
-	 * @author J. Enrique Peñaloza P.
+	 * @author J. Enrique Peñaloza Piñero.
 	 */
 	public function insertFile($fileName, $folder = 'images', $country = FALSE)
 	{
-		log_message('INFO', 'NOVO Assets: insertFile method initialized');
+		log_message('INFO', 'NOVO Asset: insertFile method initialized');
 		$country = $country ? $country.'/' : '';
 		$file = assetPath($folder.'/'.$country.$fileName);
 		$version = '?V'.date('Ymd-U', filemtime($file));
-		$file_url = assetUrl($folder.'/'.$country.$fileName.$version);
-		return $file_url;
+		return assetUrl($folder.'/'.$country.$fileName.$version);
 	}
 	/**
 	 * @info Método para versionar archivos
-	 * @author J. Enrique Peñaloza P.
+	 * @author J. Enrique Peñaloza Piñero.
 	 */
 	private function versionFiles($file, $fileName, $ext)
 	{
@@ -77,7 +81,6 @@ class Asset {
 		$thirdParty = strpos($fileName, 'third_party');
 		if($thirdParty === FALSE && file_exists($file)) {
 			$version = '?V'.date('Ymd-U', filemtime($file));
-			//$ext = (ENVIRONMENT === 'testing' || ENVIRONMENT === 'production') ? '.min'.$ext : $ext;
 		} else {
 			$ext = '.min'.$ext;
 		}

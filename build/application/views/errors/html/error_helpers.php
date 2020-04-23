@@ -1,5 +1,5 @@
 <?php
-function insert_js_cdn($filename = '') {
+function insert_js($filename = '') {
 	$fileurl = BASE_CDN_URL . 'js/' . $filename;
 	$filepath = BASE_CDN_PATH . 'js/' . $filename;
 	$version = '';
@@ -12,7 +12,7 @@ function insert_js_cdn($filename = '') {
 }
 
 
-function insert_css_cdn($filename = '', $media = 'screen') {
+function insert_css($filename = '', $media = 'screen') {
 	$fileurl = BASE_CDN_URL . 'css/' . $filename;
 	$filepath = BASE_CDN_PATH . 'css/' . $filename;
 	$version = '';
