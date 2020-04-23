@@ -1,15 +1,12 @@
 'use strict'
 $(function() {
-	var paginationControl = $('#pagination-control');
 	var productDetail = $('.product-detail');
 	var noProduct = $('#no-product');
 	var productList = $('#product-list');
 
 	jplist.init();
-	if (!paginationControl.hasClass("jplist-pages-number-1")) {
-		paginationControl.addClass('flex');
-		paginationControl.removeClass('hide');
-	}
+	resetPaginator($('#pagination-control'));
+
 	$('#pre-loader').remove();
 	$('.hide-out').removeClass('hide');
 
@@ -30,4 +27,17 @@ $(function() {
 		.addClass('sb-disabled');
 		getProductDetail.submit();
 	});
+
+	$('#resetBtn').on('click', function (e) {
+		e.preventDefault();
+		e.stopImmediatePropagation();
+		resetPaginator($('#pagination-control'));
+	});
 });
+
+function resetPaginator(element) {
+	if (!element.hasClass("jplist-pages-number-1")) {
+		element.addClass('flex');
+		element.removeClass('hide');
+	}
+}

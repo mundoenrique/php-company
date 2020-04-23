@@ -14,7 +14,9 @@
 <div class="flex mt-3 items-center">
 	<div class="flex h6 flex-auto justify-end">
 		<?php if(count($brands) > 1): ?>
-		<button class="btn btn-outline btn-small btn-rounded-left bg-white" data-jplist-control="reset" data-group="group-filter-pagination" data-name="reset"><?= lang('PRODUCTS_ALL') ?></button>
+		<div id="resetBtn">
+			<button class="btn btn-outline btn-small btn-rounded-left bg-white" data-jplist-control="reset" data-group="group-filter-pagination" data-name="reset"><?= lang('PRODUCTS_ALL') ?></button>
+		</div>
 		<?php endif; ?>
 		<?php if(verifyDisplay('body', $module,  lang('GEN_TAG_SEARCH_CAT'))): ?>
 		<select class="select-box custom-select mr-0 h6">
