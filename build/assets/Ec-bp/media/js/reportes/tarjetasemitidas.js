@@ -252,6 +252,10 @@ $(document).ready(function () {
 
 							$.each(data.lista, function (posLista, itemLista) {
 
+								if(posLista > 0) {
+									div = $(document.createElement("div")).appendTo(contenedor);
+									div.attr("id", "top-batchs");
+								}
 								div = $(document.createElement("div")).appendTo(contenedor);
 								div.attr("id", "view-results");
 								a = $(document.createElement("a")).appendTo(div);
@@ -356,7 +360,7 @@ $(document).ready(function () {
 								td = $(document.createElement("td")).appendTo(tr);
 								if (itemLista.totalEmision != 0) {
 									td = $(document.createElement("a")).appendTo(td);
-									td.attr("title", "emision");
+									td.attr("title", "emisión");
 								}
 
 								td.attr("class", "ep");
@@ -366,7 +370,7 @@ $(document).ready(function () {
 								td = $(document.createElement("td")).appendTo(tr);
 								if (itemLista.totalReposicionTarjeta != 0) {
 									td = $(document.createElement("a")).appendTo(td);
-									td.attr("title", "reposicion");
+									td.attr("title", "reposición");
 								}
 								td.attr("class", "rp");
 								td.attr("id", posLista);
@@ -385,7 +389,7 @@ $(document).ready(function () {
 								td = $(document.createElement("td")).appendTo(tr);
 								if (itemLista.emisionSuplementaria.totalEmision != 0) {
 									td = $(document.createElement("a")).appendTo(td);
-									td.attr("title", "emision suplementaria");
+									td.attr("title", "emisión suplementaria");
 								}
 								td.attr("id", posLista);
 								td.attr("class", "suplementario_emision");
