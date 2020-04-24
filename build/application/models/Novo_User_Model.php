@@ -60,7 +60,7 @@ class Novo_User_Model extends NOVO_Model {
 			$this->isResponseRc = 0;
 		}
 
-		switch(-424) {
+		switch($this->isResponseRc) {
 			case 0:
 				$fullName = mb_strtolower($response->usuario->primerNombre).' ';
 				$fullName.= mb_strtolower($response->usuario->primerApellido);
