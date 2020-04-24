@@ -464,6 +464,11 @@ class Novo_Bulk_Model extends NOVO_Model {
 				$this->response->title = lang('BULK_AUTHORIZE');
 				$this->response->msg = lang('RESP_NO_LIST');
 				break;
+			default:
+				$response = new stdClass();
+				$response->signBulk = [];
+				$response->authorizeBulk = [];
+				$response->authorizeAttr = [];
 		}
 
 		$this->response->data->signBulk = (object) $response->signBulk;
@@ -905,6 +910,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 									$bulkList['bulkAmount'] = floatval($bulk->montoRecarga);
 									$bulkList['bulkCommisAmount'] = floatval($bulk->montoComision);
 									$bulkList['bulkTotalAmount'] = floatval($bulk->montoRecarga) + floatval($bulk->montoComision);
+									$bulkList['bulkId'] = $bulk->acidlote;
 									$serviceOrders['bulk'][] = (object) $bulkList;
 								}
 								break;
