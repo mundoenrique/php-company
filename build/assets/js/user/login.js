@@ -3,6 +3,7 @@ $(function () {
 	var userCred, forWho, forWhere;
 	var userLogin = $('#user_login');
 	var userPass = $('#user_pass');
+	var btnTrigger,loginIpMsg,formcodeOTP,btn;
 	$.balloon.defaults.css = null;
 	insertFormInput(false);
 	inputDisabled(false);
@@ -117,20 +118,9 @@ $(function () {
 			restartFormLogin();
 		},
 		2: function (response) {
+
 			if(response.ipInvalid){
-				var loginIpMsg ;
-				data = {
-					btn1: {
-						text: lang.GEN_BTN_ACCEPT,
-						link: 'false',
-						action: 'close'
-					},
-					btn2: {
-						text: lang.GEN_BTN_CANCEL,
-						link: 'inicio',
-						action: 'redirect'
-					}
-				}
+				btn = response.data.btn1;
 
 				loginIpMsg ='<form id="formVerificationOTP" class="mr-2" method="post">';
 				loginIpMsg+='<p>'+response.msg+'</p>';
@@ -138,7 +128,7 @@ $(function () {
 				loginIpMsg+=	'<div class="form-group col-7">';
 				loginIpMsg+=	'<label for="codeOTP">'+response.labelInput+'<span class="danger">*</span></label>';
 				loginIpMsg+=	'<input id="codeOTP" class="form-control" type="text" name="codeOTP">';
-				loginIpMsg+=	'<div id="msgErrorCodeOTP" class="help-block"></div>';
+				loginIpMsg+=    '<div id="msgErrorCodeOTP" class="help-block"></div>';
 				loginIpMsg+=	'</div>';
 				loginIpMsg+='</div>';
 				loginIpMsg+='<div class="form-group custom-control custom-switch my-3">';
@@ -148,29 +138,31 @@ $(function () {
 				loginIpMsg+='</div>';
 				loginIpMsg+='</form>';
 				
-				notiSystem(response.title, loginIpMsg, response.icon,data);
+				notiSystem(response.title, loginIpMsg, response.icon,response.data);
+				
+				if(btn.action == 'wait') {
 
-				var btn = data.btn1;
+					formcodeOTP = $('#formVerificationOTP');
+					btnTrigger = document.getElementById('accept');
 
-				if(btn.action == 'close') {
-					$('#accept').on('click', function() {
-						data = {
-							user: userCred.user,
-							pass: userCred.pass,
-							active: userCred.active,
-							currentTime: new Date().getHours(),
-							token: '',
-							codeOTP: $('#codeOTP').val(),
-							guardaIp: $('#acceptAssert').prop('checked')
+					btnTrigger.addEventListener('click', function (e) {
+						
+						formInputTrim(formcodeOTP);
+						validateForms(formcodeOTP);
+
+						if(formcodeOTP.valid()){
+
+							data.codeOTP =$('#codeOTP').val();
+							data.saveIp = $('#acceptAssert').prop('checked');
+
+							callNovoCore(verb, who, where, data, function (response) {
+								responseCodeLogin[response.code](response);
+							})
+							$("#system-info").dialog('close');
 						}
-						callNovoCore(verb, who, where, data, function (response) {
-							responseCodeLogin[response.code](response);
-						})
-
 					});
 				  }
 			} else if(response.codeOtpInvalid){
-
 				data = {
 					btn1: {
 						text: lang.GEN_BTN_ACCEPT,
@@ -178,8 +170,7 @@ $(function () {
 						action: 'redirect'
 					}
 				}
-
-				notiSystem(false, response.msg, response.icon,data);
+			notiSystem(false, response.msg, response.icon,data);
 
 			} else{
 				userCred.active = 1; forWhere = lang.GEN_LOGIN;

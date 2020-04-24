@@ -34,7 +34,7 @@ class Novo_User_Model extends NOVO_Model {
 			utf8_encode($password->password)
 		);
 
-		$authToken = $this->session->flashdata('authToken')?:'';
+		$authToken = $this->session->flashdata('authToken')?$this->session->flashdata('authToken'):'';
 
 		$this->dataRequest->idOperation = 'loginFull';
 		$this->dataRequest->userName = $userName;
@@ -44,7 +44,7 @@ class Novo_User_Model extends NOVO_Model {
  		'tokenCliente' => isset($dataRequest->codeOTP)?$dataRequest->codeOTP:'',
  		'authToken' => $authToken
 		];
-		$this->dataRequest->guardaIp =isset($dataRequest->guardaIp)?$dataRequest->guardaIp:false;
+		$this->dataRequest->guardaIp =isset($dataRequest->saveIp)?$dataRequest->saveIp:false;
 
 		if($this->config->item('active_recaptcha')) {
 			$this->isResponseRc = $this->callWs_validateCaptcha_User($dataRequest);
@@ -60,7 +60,7 @@ class Novo_User_Model extends NOVO_Model {
 			$this->isResponseRc = 0;
 		}
 
-		switch($this->isResponseRc) {
+		switch(-424) {
 			case 0:
 				$fullName = mb_strtolower($response->usuario->primerNombre).' ';
 				$fullName.= mb_strtolower($response->usuario->primerApellido);
@@ -166,10 +166,23 @@ class Novo_User_Model extends NOVO_Model {
 				$this->response->ipInvalid = TRUE;
 				$this->response->assert = lang('GEN_LOGIN_IP_ASSERT');
 				$this->response->labelInput = lang('GEN_LOGIN_IP_LABEL_INPUT');
-				$this->response->msg = lang('GEN_LOGIN_IP_TITLE');
 				$this->response->icon = lang('GEN_ICON_WARNING');
-				$this->session->set_flashdata('authToken', 'ABCDEFEHIJK');// TODO: descomentar
-				break; 
+				$this->response->msg = lang('GEN_LOGIN_IP_TITLE');
+				$this->response->data = [
+					'btn1'=> [
+						'text'=> lang('GEN_BTN_ACCEPT'),
+						'link'=> false,
+						'action'=> 'wait'
+					],
+					'btn2'=> [
+						'text'=> lang('GEN_BTN_CANCEL'),
+						'link'=> 'inicio',
+						'action'=> 'redirect'
+					]
+				];
+				//$this->session->set_flashdata('authToken',$response->codeOtp->authToken);// TODO: descomentar
+				$this->session->set_flashdata('authToken', 'ABCDEFEHIJK');// TODO: eliminar
+				break;
 			case -286:
 				$this->response->code = 2;
 				$this->response->codeOtpInvalid = TRUE;
