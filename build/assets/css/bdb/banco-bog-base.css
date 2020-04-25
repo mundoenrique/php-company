@@ -268,7 +268,7 @@ footer.main-footer {
 .form-control {
 	display: block;
 	width: 100%;
-	height: calc(1.18em + .75rem + 2px);
+	height: calc(1.3em + .75rem + 2px);
 	padding: .375rem .75rem;
 	font-size: .875rem;
 	font-weight: var(--font-weight-base);
@@ -2794,7 +2794,7 @@ table.dataTable thead th.select-checkbox:before {
 
 table.dataTable tr.selected th.select-checkbox:after {
   content: '\2714';
-  margin-top: -11px !important;
+  margin-top: -11px;
 	margin-left: -6px !important;
 	text-align: center;
 	text-shadow: none !important;
@@ -2826,7 +2826,7 @@ table.dataTable tbody > tr.selected, table.dataTable tbody > tr > .selected {
 }
 
 table.dataTable tr.selected td.select-checkbox::after {
-	margin-top: -13px !important;
+	margin-top: -13px;
 	margin-left: -6px !important;
 	text-shadow: none !important;
 	color: var(--primary);
@@ -3826,4 +3826,34 @@ td > table.detail-lot {
 	top: 0;
 	width: 100%;
 	height: 100%;
+}
+
+/* adjustments in the data table checkbox and product filter */
+
+@supports (-ms-ime-align: auto) {
+  .sb-search-input {
+		padding: 6px 3.4rem 6px 8px;
+	}
+	.select-box{
+		height:calc(1.20em + 4px + 0.75rem);
+	}
+	.btn-rounded-left{
+		height: 29.9px !important;
+	}
+	table.dataTable thead th.select-checkbox:before {
+		margin-top: 2px !important;
+	}
+	table.dataTable tr.selected th.sorting_disabled:after{
+		content: '' !important;
+		margin-top: 1px !important;
+		background-image: url("../../images/bdb/check-white_table.svg");
+		background-size: cover;
+	}
+
+	table.dataTable tr.selected td.select-checkbox::after {
+		content: '' !important;
+		margin-top: -5px !important;
+		background-image: url("../../images/bdb/check_table.svg");
+		background-size: cover;
+	}
 }
