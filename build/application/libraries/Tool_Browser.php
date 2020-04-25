@@ -27,7 +27,7 @@ class Tool_Browser {
 		$platform = 'Unidentified';
 		$browsersIn = FALSE;
 
-		if($this->CI->agent->is_browser() && !$this->CI->agent->is_mobile()) {
+		if($this->CI->agent->is_browser()) {
 			$platform = 'desktop';
 			$validBrowser = [
 				'Chrome' => 47,
