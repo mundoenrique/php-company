@@ -6,6 +6,8 @@
 				<nav class="nav-config">
 					<ul class="nav-config-box">
 						<?php if(verifyDisplay('body','settings', lang('GEN_BTN_USER'))): ?>
+							<?php if (lang('GEN_CONF_USER_BOOL') == true): ?>
+							
 						<li id="user" class="nav-item-config">
 							<a href="javascript:">
 								<img class="icon-config" src="<?= $this->asset->insertFile($countryUri.'/icon-user.svg');?>">
@@ -17,7 +19,10 @@
 							</a>
 						</li>
 						<?php endif; ?>
+						<?php endif; ?>
 						<?php if(verifyDisplay('body','settings', lang('GEN_BTN_ENTERPRISE'))): ?>
+							<?php if (lang('GEN_CONF_COMPANIES_BOOL') == true): ?>
+							
 						<li id="enterprise" class="nav-item-config">
 							<a href="javascript:">
 								<img class="icon-config" src="<?= $this->asset->insertFile($countryUri.'/icon-briefcase.svg');?>">
@@ -29,7 +34,9 @@
 							</a>
 						</li>
 						<?php endif; ?>
+						<?php endif; ?>
 						<?php if(verifyDisplay('body','settings', lang('GEN_BTN_BRANCH'))): ?>
+							<?php if (lang('GEN_CONF_BRANCHES_BOOL') == true): ?>
 						<li id="branch" class="nav-item-config">
 							<a href="javascript:">
 								<img class="icon-config" src="<?= $this->asset->insertFile($countryUri.'/icon-building.svg');?>">
@@ -41,7 +48,9 @@
 							</a>
 						</li>
 						<?php endif; ?>
+						<?php endif; ?>
 						<?php if(verifyDisplay('body','settings', lang('GEN_BTN_DOWNLOADS'))): ?>
+							<?php if (lang('GEN_CONF_DOWNLOADS_BOOL') == true): ?>
 						<li id="downloads" class="nav-item-config">
 							<a href="javascript:">
 								<img class="icon-config" src="<?= $this->asset->insertFile($countryUri.'/icon-download.svg');?>">
@@ -52,6 +61,7 @@
 								</div>
 							</a>
 						</li>
+						<?php endif; ?>
 						<?php endif; ?>
 					</ul>
 				</nav>
@@ -475,27 +485,30 @@
 					<div class="flex mb-1 mx-4 flex-column">
 						<span class="line-text mb-2 h4 semibold primary"><?= lang('GEN_BTN_DOWNLOADS') ?></span>
 						<div class="px-5">
+							<div class="container">
+							<?php if (lang('GEN_MANUAL_BOOL') == true): ?>
 							<div class="my-2 tertiary h4 semibold">
 								<span><?= lang('GEN_MANUALS') ?></span>
 							</div>
-							<div class="container">
 								<div class="row">
+								<?php if (lang('GEN_PDF_FILE') != ''): ?>
 									<div class="mb-3 col-auto col-lg-6 col-xl-5">
-										<a href="<?= $this->asset->insertFile($countryUri.'/archivo.pdf','statics');?>" download>
+										<a href="<?= $this->asset->insertFile($countryUri.'/'.lang('GEN_PDF_FILE[0]'),'statics'); ?>" download>
 											<div class="files btn-link flex items-center">
 												<div class="file">
-													<img src="<?= $this->asset->insertFile($countryUri.'/icon-pdf.svg');?>" />
+													<img src="<?= $this->asset->insertFile($countryUri.'/'.lang('GEN_PDF_ICON'));?>" />
 												</div>
 												<span class="ml-2 flex justify-center"><?= lang('GEN_CEO_USER_MANUAL')?></span>
 											</div>
 										</a>
 									</div>
+									<?php endif; ?>
 									<?php if(verifyDisplay('body','settings', lang('GEN_GL_USER_MANUAL'))): ?>
 									<div class="mb-3 col-auto col-lg-6 col-xl-5">
-										<a href="<?= $this->asset->insertFile($countryUri.'/archivo.pdf','statics');?>" download>
+										<a href="<?= $this->asset->insertFile($countryUri.'/'.lang('GEN_PDF_FILE[1]'),'statics'); ?>" download>
 											<div class="files btn-link flex items-center">
 												<div class="file">
-													<img src="<?= $this->asset->insertFile($countryUri.'/icon-pdf.svg');?>" />
+													<img src="<?= $this->asset->insertFile($countryUri.'/'.lang('GEN_PDF_ICON'));?>" />
 												</div>
 												<span class="ml-2 flex justify-center"><?= lang('GEN_GL_USER_MANUAL')?></span>
 											</div>
@@ -503,18 +516,23 @@
 									</div>
 									<?php endif; ?>
 								</div>
+								<?php endif; ?>
+								<?php if (lang('GEN_VIDEO_BOOL') == true):?>
 								<div class="container">
 									<div class="row">
 										<div class="col-sm-12 col-lg-11 col-xl-12 py-2">
 											<div class="manual-video">
 												<video controls preload>
-													<source src="<?= $this->asset->insertFile($countryUri.'/video.mp4','statics');?>" type="video/mp4">
+													<source src="<?= $this->asset->insertFile($countryUri.'/'.lang('GEN_MP4_VIDEO'),'statics');?>" type="video/mp4">
 												</video>
 											</div>
 										</div>
 									</div>
 								</div>
+								<?php endif; ?>
+
 								<?php if(verifyDisplay('body','settings', lang('GEN_GL_USER_MANUAL'))): ?>
+								<?php if (lang('GEN_APPS_BOOL') == true): ?>
 								<div class="my-2 tertiary h4 semibold">
 									<span><?= lang('GEN_APPLICATIONS') ?></span>
 								</div>
@@ -523,7 +541,7 @@
 										<a href="#">
 											<div class="files btn-link flex items-center">
 												<div class="file">
-													<img src="<?= $this->asset->insertFile($countryUri.'/icon-zip.svg');?>" />
+													<img src="<?= $this->asset->insertFile($countryUri.'/'.lang('GEN_ZIP_ICON'));?>" />
 												</div>
 												<span class="ml-2 flex justify-center"><?= lang('GEN_BATCH_MANAGER') ?></span>
 											</div>
@@ -533,7 +551,7 @@
 										<a href="#">
 											<div class="files btn-link flex items-center">
 												<div class="file">
-													<img src="<?= $this->asset->insertFile($countryUri.'/icon-zip.svg');?>" />
+													<img src="<?= $this->asset->insertFile($countryUri.'/'.lang('GEN_ZIP_ICON'));?>" />
 												</div>
 												<span class="ml-2 flex justify-center"><?= lang('GEN_JAVA_JRE') ?></span>
 											</div>
@@ -541,7 +559,9 @@
 									</div>
 								</div>
 								<?php endif; ?>
+								<?php endif; ?>
 								<?php if(verifyDisplay('body','settings', lang('GEN_FILE'))): ?>
+								<?php if (lang('GEN_FILES_MANAGMENT_BOOL') == true): ?>
 								<div class="my-2 tertiary h4 semibold">
 									<span><?= lang('GEN_FILE') ?></span>
 								</div>
@@ -550,13 +570,14 @@
 										<a href="#">
 											<div class="files btn-link flex items-center">
 												<div class="file">
-													<img src=<?= $this->asset->insertFile($countryUri.'/icon-rar.svg');?> />
+													<img src=<?= $this->asset->insertFile($countryUri.'/'.lang('GEN_RAR_ICON'));?> />
 												</div>
 												<span class="ml-2 flex justify-center"><?= lang('GEN_FILE_OPERATIONAL_BATCH') ?></span>
 											</div>
 										</a>
 									</div>
 								</div>
+								<?php endif; ?>
 								<?php endif; ?>
 							</div>
 						</div>

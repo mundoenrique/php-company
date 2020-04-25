@@ -68,7 +68,7 @@ $(function () {
 			data = {
 				btn1: {
 					text: lang.GEN_BTN_ACCEPT,
-					link: baseURL + 'reportes',
+					link: 'reportes',
 					action: 'redirect'
 				}
 			}
