@@ -7,7 +7,7 @@
 					<ul class="nav-config-box">
 						<?php if(verifyDisplay('body','settings', lang('GEN_BTN_USER'))): ?>
 							<?php if (lang('GEN_CONF_USER_BOOL') == true): ?>
-							
+
 						<li id="user" class="nav-item-config">
 							<a href="javascript:">
 								<img class="icon-config" src="<?= $this->asset->insertFile($countryUri.'/icon-user.svg');?>">
@@ -22,7 +22,7 @@
 						<?php endif; ?>
 						<?php if(verifyDisplay('body','settings', lang('GEN_BTN_ENTERPRISE'))): ?>
 							<?php if (lang('GEN_CONF_COMPANIES_BOOL') == true): ?>
-							
+
 						<li id="enterprise" class="nav-item-config">
 							<a href="javascript:">
 								<img class="icon-config" src="<?= $this->asset->insertFile($countryUri.'/icon-briefcase.svg');?>">
@@ -319,9 +319,13 @@
 											</div>
 										</div>
 
-										<div class="row flex mb-4 mt-2 justify-end items-center">
-											<div class="col-6 col-lg-4 col-xl-3">
-												<input id="password" class="form-control pwd-input" type="password" placeholder="Ingresa tu contraseña">
+										<div class="row flex mb-4 mt-2 justify-end items-center form-group">
+											<div class="col-6 col-lg-4 col-xl-3 input-group">
+													<input id="password" class="form-control pwd-input" type="password" name="Ingresa tu contraseña" placeholder="Ingresa tu contraseña">
+													<div class="input-group-append">
+															<span id="pwd-addon" class="input-group-text pwd-action" title="Clic aquí para mostrar/ocultar contraseña"><i
+																	class="icon-view mr-0"></i></span>
+													</div>
 											</div>
 											<div class="col-3 col-lg-2 col-xl-auto">
 												<button class="btn btn-primary btn-small flex mx-auto">Limpiar</button>
@@ -464,16 +468,19 @@
 												<input id="branchCode" name="branchCode" type="text" class="form-control" value="" placeholder="Código de la sucursal" />
 												<div class="help-block"></div>
 											</div>
-
 										</div>
 
-										<div class="row flex mb-4 mt-2 pl-5 justify-end items-center">
-											<div class="col-7 col-lg-4 col-xl-3">
-												<input id="password1" class="form-control pwd-input" type="password" placeholder="Ingresa tu contraseña">
-											</div>
-											<div class="col-auto">
-												<button class="btn btn-primary btn-small flex mx-auto">Agregar</button>
-											</div>
+										<div class="row flex mb-4 mt-2 pl-5 justify-end items-center form-group">
+												<div class="col-7 col-lg-4 col-xl-3 input-group">
+													<input id="password1" class="form-control pwd-input" type="password" name="Ingresa tu contraseña" placeholder="Ingresa tu contraseña">
+													<div class="input-group-append">
+															<span id="pwd-addon" class="input-group-text pwd-action" title="Clic aquí para mostrar/ocultar contraseña"><i
+																class="icon-view mr-0"></i></span>
+													</div>
+												</div>
+												<div class="col-auto">
+													<button class="btn btn-primary btn-small flex mx-auto">Agregar</button>
+												</div>
 										</div>
 									</div>
 								</form>
@@ -492,43 +499,38 @@
 							</div>
 								<div class="row">
 								<?php if (lang('GEN_PDF_FILE') != ''): ?>
+									<?php foreach(lang('GEN_PDF_FILE') as $value): ?>
 									<div class="mb-3 col-auto col-lg-6 col-xl-5">
-										<a href="<?= $this->asset->insertFile($countryUri.'/'.lang('GEN_PDF_FILE[0]'),'statics'); ?>" download>
+										<a href="<?= $this->asset->insertFile($countryUri.'/'.$value[0],'statics'); ?>" download>
 											<div class="files btn-link flex items-center">
 												<div class="file">
 													<img src="<?= $this->asset->insertFile($countryUri.'/'.lang('GEN_PDF_ICON'));?>" />
 												</div>
-												<span class="ml-2 flex justify-center"><?= lang('GEN_CEO_USER_MANUAL')?></span>
+												<span class="ml-2 flex justify-center"><?= $value[1]?></span>
 											</div>
 										</a>
 									</div>
-									<?php endif; ?>
-									<?php if(verifyDisplay('body','settings', lang('GEN_GL_USER_MANUAL'))): ?>
-									<div class="mb-3 col-auto col-lg-6 col-xl-5">
-										<a href="<?= $this->asset->insertFile($countryUri.'/'.lang('GEN_PDF_FILE[1]'),'statics'); ?>" download>
-											<div class="files btn-link flex items-center">
-												<div class="file">
-													<img src="<?= $this->asset->insertFile($countryUri.'/'.lang('GEN_PDF_ICON'));?>" />
-												</div>
-												<span class="ml-2 flex justify-center"><?= lang('GEN_GL_USER_MANUAL')?></span>
-											</div>
-										</a>
-									</div>
-									<?php endif; ?>
-								</div>
+									<?php endforeach; ?>
 								<?php endif; ?>
+								</div>
+							<?php endif; ?>
+
+
+
 								<?php if (lang('GEN_VIDEO_BOOL') == true):?>
+									<?php foreach(lang('GEN_MP4_VIDEO') as $value): ?>
 								<div class="container">
 									<div class="row">
 										<div class="col-sm-12 col-lg-11 col-xl-12 py-2">
 											<div class="manual-video">
 												<video controls preload>
-													<source src="<?= $this->asset->insertFile($countryUri.'/'.lang('GEN_MP4_VIDEO'),'statics');?>" type="video/mp4">
+													<source src="<?= $this->asset->insertFile($countryUri.'/'.$value,'statics');?>" type="video/mp4">
 												</video>
 											</div>
 										</div>
 									</div>
 								</div>
+								<?php endforeach; ?>
 								<?php endif; ?>
 
 								<?php if(verifyDisplay('body','settings', lang('GEN_GL_USER_MANUAL'))): ?>
@@ -537,26 +539,18 @@
 									<span><?= lang('GEN_APPLICATIONS') ?></span>
 								</div>
 								<div class="row">
+								<?php foreach(lang('GEN_ZIP_FILE') as $value): ?>
 									<div class="mb-3 col-auto col-lg-6 col-xl-5">
-										<a href="#">
+									<a href="<?= $this->asset->insertFile($countryUri.'/'.$value[0],'statics'); ?>" download>
 											<div class="files btn-link flex items-center">
 												<div class="file">
 													<img src="<?= $this->asset->insertFile($countryUri.'/'.lang('GEN_ZIP_ICON'));?>" />
 												</div>
-												<span class="ml-2 flex justify-center"><?= lang('GEN_BATCH_MANAGER') ?></span>
+												<span class="ml-2 flex justify-center"><?= $value[1] ?></span>
 											</div>
 										</a>
 									</div>
-									<div class="mb-3 col-auto col-lg-6 col-xl-5">
-										<a href="#">
-											<div class="files btn-link flex items-center">
-												<div class="file">
-													<img src="<?= $this->asset->insertFile($countryUri.'/'.lang('GEN_ZIP_ICON'));?>" />
-												</div>
-												<span class="ml-2 flex justify-center"><?= lang('GEN_JAVA_JRE') ?></span>
-											</div>
-										</a>
-									</div>
+									<?php endforeach; ?>
 								</div>
 								<?php endif; ?>
 								<?php endif; ?>
@@ -566,16 +560,18 @@
 									<span><?= lang('GEN_FILE') ?></span>
 								</div>
 								<div class="row">
+								<?php foreach(lang('GEN_RAR_FILE') as $value): ?>
 									<div class="form-group col-auto mb-3 col-xl-5">
-										<a href="#">
+									<a href="<?= $this->asset->insertFile($countryUri.'/'.$value[0],'statics'); ?>" download>
 											<div class="files btn-link flex items-center">
 												<div class="file">
 													<img src=<?= $this->asset->insertFile($countryUri.'/'.lang('GEN_RAR_ICON'));?> />
 												</div>
-												<span class="ml-2 flex justify-center"><?= lang('GEN_FILE_OPERATIONAL_BATCH') ?></span>
+												<span class="ml-2 flex justify-center"><?= $value[1]  ?></span>
 											</div>
 										</a>
 									</div>
+									<?php endforeach; ?>
 								</div>
 								<?php endif; ?>
 								<?php endif; ?>
@@ -587,3 +583,5 @@
 		</div>
 	</div>
 </div>
+
+
