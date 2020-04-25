@@ -158,7 +158,6 @@ $(function() {
                 inputModal += '<span for="password" class="regular">' + lang.BULK_DELETE_DATE + ': ' + bulkFile + '</span>';
                 inputModal += '<div class="input-group">';
                 inputModal += '<input id="password" class="form-control pwd-input" type="password" name="password" autocomplete="off" placeholder="' + lang.GEN_PLACE_PASSWORD + '">';
-                inputModal += '<input id="passwordHide" style="display: none" class="form-control pwd-input" type="text" name="password" autocomplete="off" placeholder="' + lang.GEN_PLACE_PASSWORD + '">';
                 inputModal += '<div class="input-group-append">';
                 inputModal += '<span id="pwd_action" class="input-group-text pwd-action" title="Clic aquí para mostrar/ocultar contraseña">';
                 inputModal += '<i class="icon-view mr-0"></i></span>';

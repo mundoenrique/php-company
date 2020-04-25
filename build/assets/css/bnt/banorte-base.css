@@ -271,7 +271,7 @@ footer.main-footer {
 .form-control {
 	display: block;
 	width: 100%;
-	height: calc(1.4em + .75rem + 2px);
+	height: calc(1.386em + .75rem + 2px);
 	padding: .375rem .75rem;
 	font-size: .875rem;
 	font-weight: var(--font-weight-base);
@@ -759,8 +759,7 @@ textarea.form-control {
 	padding: 0;
 	display: block;
   border: .85px solid var(--border-color);
-  border-radius: 2.55px;
-  height: 30px;
+  height: 33.4px;
 	box-shadow: 1px 1px 2px 0 var(--shadows-color);
 	font-size: var(--button-font-size);
 	transition: .3s;
@@ -791,7 +790,7 @@ textarea.form-control {
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
-	padding: 0 10px;
+	padding: 3px 10px;
 	cursor: pointer;
 	margin-top: 29px;
 }
@@ -821,7 +820,8 @@ textarea.form-control {
   position: relative;
   flex: 1 1 auto;
   width: 1%;
-  margin-bottom: 0;
+	margin-bottom: 0;
+	height: 33.4px;
 }
 
 .input-group > .form-control:not(:last-child),
@@ -873,6 +873,9 @@ textarea.form-control {
   border-bottom-left-radius: 0;
 }
 
+.pwd-action .icon-view{
+	color: var(--border-color);
+}
 /* Search input */
 
 .sb-search {
@@ -979,7 +982,11 @@ textarea.form-control {
 		width: 20%;
 	}
 }
-
+@supports (-webkit-appearance:none) {
+	.sb-icon-search	.icon-find{
+		margin-top: 2px;
+	}
+}
 /* Validator */
 
 .help-block,
@@ -1064,6 +1071,7 @@ textarea.form-control {
 	color: var(--secondary);
 	background-color: var(--primary);
 	border-radius: var(--border-radius);
+	height: 33.4px;
 }
 
 .btn-primary:hover {
@@ -1133,7 +1141,7 @@ textarea.form-control {
 
 .btn-loading {
 	width: 120px;
-	height: 32px;
+	height: 33.4px;
 }
 
 .btn-loading-lg {
@@ -1185,7 +1193,7 @@ textarea.form-control {
 	border: .85px solid var(--border-color);
 	border-radius: var(--btn-border-radius) 0 0 var(--btn-border-radius);
 	background-color: var(--secondary);
-	/* box-shadow: 1px 1px 2px 0 var(--shadows-color); */
+	height: 33.4px;
 }
 
 /* Btn-Others */
@@ -2041,7 +2049,7 @@ i[class*=" icon-"].novoglyphs {
 	font-family: var(--font-family-novoglyphs)
 }
 
-.icon-view:before          { content: "\e000"; color: var(--border-color);}
+.icon-view:before          { content: "\e000"; }
 .icon-edit:before          { content: "\e001"; }
 .icon-remove:before        { content: "\e002"; }
 .icon-ok:before            { content: "\e003"; }
@@ -2432,7 +2440,7 @@ i[class*=" icon-"].novoglyphs {
 }
 
 .dropdown li a:hover {
-   background: var(--primary-tint) !important;
+   background: var(--primary) !important;
    color: var(--secondary) !important;
 }
 
@@ -2673,7 +2681,7 @@ td > button > i:hover{
   box-shadow: inset 1px 1px 0 0 var(--shadows-color);
   color: var(--text-color) !important;
   font-size: var(--h6);
-  height: 30px;
+  height: 33.4px;
   padding-left: 10px;
   width: 190px;
 }
@@ -2835,11 +2843,24 @@ table.dataTable thead th.select-checkbox:before {
 	table.dataTable thead th.select-checkbox:before {
 		margin-top: 2px;
 	}
+	table.dataTable tr.selected th.sorting_disabled:after{
+		content: '' !important;
+		margin-top: 1px !important;
+		background-image: url("../../images/bnt/check-white_table.svg");
+		background-size: cover;
+	}
+
+	table.dataTable tr.selected td.select-checkbox::after {
+		content: '' !important;
+		margin-top: -5px !important;
+		background-image: url("../../images/bnt/check_table.svg");
+		background-size: cover;
+	}
 }
 
 table.dataTable tr.selected th.select-checkbox:after {
   content: '\2714';
-  margin-top: -11px !important;
+  margin-top: -11px;
 	margin-left: -6px !important;
 	text-align: center;
 	text-shadow: none !important;
@@ -2871,7 +2892,7 @@ table.dataTable tbody > tr.selected, table.dataTable tbody > tr > .selected {
 }
 
 table.dataTable tr.selected td.select-checkbox::after {
-	margin-top: -13px !important;
+	margin-top: -13px;
 	margin-left: -6px !important;
 	text-shadow: none !important;
 	color: var(--primary);
@@ -3521,20 +3542,17 @@ a.ui-button:active,
 
 .invalid-user {
 	align-items: center;
-	background: rgba(253, 247, 246,1);
-	border-radius: 3px;
+	background: var(--primary);
 	border: 1px solid var(--primary);
-	box-shadow: 2px 2px 3px 0px var(--primary);
-	color: var(--text-color);
+	color: var(--secondary);
 	display: flex;
 	font-size: 12px;
 	font-weight: var(--bold-font-weight);
-	height: 22px;
+	height: 30px;
 	letter-spacing: .016em;
-	padding: 0px 2px;
+	padding: 5px 2px;
 	width: auto;
 	z-index: 1;
-	left: 8.1495px !important;
 }
 
 .inactive-user {
@@ -3701,6 +3719,10 @@ a.ui-button:active,
 
 .logout-content {
 	min-height: calc(100vh - 3.75rem - 2.75rem - 64px);
+}
+
+.logout-content h1{
+	color: var(--text-color) !important;
 }
 
 .section {

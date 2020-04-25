@@ -38,6 +38,7 @@
   --placeholder-color: #DDDDDD;
 	--disabled-color: #DDDDDD;
 
+	--label-color: #4E4044;
   --primary-tint: #D10024;
 
   /* Type Scale */
@@ -53,7 +54,9 @@
   /* Typography */
   --caps-letter-spacing: .2em;
 
+  --light-font-weight: 300;
   --regular-font-weight: 300;
+  --semibold-font-weight: 700;
   --bold-font-weight: 700;
 
   --font-family-base: 'Gotham Book', sans-serif;
