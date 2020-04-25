@@ -66,7 +66,7 @@ class NOVO_Controller extends CI_Controller {
 		log_message('INFO', 'NOVO Controller: optionsCheck Method Initialized');
 
 		languageLoad('generic');
-		countryCheck($this->countryUri);
+		clientUrlValidate($this->countryUri);
 		languageLoad('specific', $this->countryUri);
 		if($this->session->userId) {
 			if($this->session->countrySess !== $this->config->item('country')) {
@@ -127,12 +127,10 @@ class NOVO_Controller extends CI_Controller {
 				if($valid) {
 					$this->request = $this->verify_access->createRequest($this->rule, $this->appUserName);
 				}
-
 			}
 
 			$this->preloadView($access && $valid);
 		}
-
 	}
 	/**
 	 * Método para realizar la precarga de las vistas
@@ -226,19 +224,18 @@ class NOVO_Controller extends CI_Controller {
 		log_message('INFO', 'NOVO Controller: responseAttr Method Initialized');
 
 		$this->render->code = $responseView;
-		$downloadModel=FALSE;
+		$download = FALSE;
 
 		if(is_object($responseView)) {
 			$this->render->code = $responseView->code;
-			$downloadModel=isset($this->responseView->downloadModel)?FALSE:TRUE;
+			$download = !isset($responseView->download) ?: $responseView->download;
 		}
 
 		if($this->session->has_userdata('productInf')) {
 			$this->render->prefix = $this->session->productInf->productPrefix;
 		}
 
-
-		if($this->render->code == 0  && $active || $this->render->code > 0  && $downloadModel==TRUE) {
+		if(($this->render->code == 0  && $active) || $download) {
 			$this->load->model('Novo_Business_Model', 'Business');
 			$enterpriseList = $this->Business->callWs_getEnterprises_Business(TRUE);
 
@@ -247,6 +244,7 @@ class NOVO_Controller extends CI_Controller {
 					$this->includeAssets->jsFiles,
 					"business/widget-enterprise"
 				);
+
 				$this->render->widget =  new stdClass();
 				$this->render->widget->widgetBtnTitle = lang('GEN_MUST_SELECT_ENTERPRISE');
 				$this->render->widget->enterpriseData =  $this->session->enterpriseInf;

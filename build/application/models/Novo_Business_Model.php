@@ -70,7 +70,7 @@ class Novo_Business_Model extends NOVO_Model {
 			break;
 			default:
 				$this->response->data->text = lang('GEN_ENTERPRISE_NOT_OBTEIN');
-				$this->response->data->resp['btn1']['link'] = base_url('cerrar-sesion/inicio');
+				$this->response->data->resp['btn1']['link'] = 'cerrar-sesion/inicio';
 		}
 
 		if($this->response->code != 0) {
@@ -85,6 +85,73 @@ class Novo_Business_Model extends NOVO_Model {
 		}
 
 		return $this->responseToTheView('getEnterprises');
+	}
+	/**
+	 * @info obtiene lista de sucursales
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date December 19th, 2019
+	 */
+	public function callWs_GetBranchOffices_Bulk($dataRequest)
+	{
+		log_message('INFO', 'NOVO Bulk Model: GetBranchOffices Method Initialized');
+
+		$this->className = 'com.novo.objects.MO.ListadoSucursalesMO';
+		$this->dataAccessLog->modulo = 'Lotes';
+		$this->dataAccessLog->function = 'Carga de lotes';
+		$this->dataAccessLog->operation = 'Obtener sucursales';
+
+		$select = isset($dataRequest->select);
+		unset($dataRequest->select);
+		$this->dataRequest = new stdClass();
+		$this->dataRequest->idOperation = 'getConsultarSucursales';
+		$this->dataRequest->paginaActual = '1';
+		$this->dataRequest->tamanoPagina = 10;
+		$this->dataRequest->paginar = FALSE;
+		$this->dataRequest->lista = [
+			[
+				'rif' => $this->session->enterpriseInf->idFiscal
+			]
+		];
+
+		$response = $this->sendToService('GetBranchOffices');
+
+		switch($this->isResponseRc) {
+			case 0:
+				$this->response->code = 0;
+
+				if($select && count($response->lista) > 1) {
+					$branchOffice[] = (object) [
+						'key' => '',
+						'text' => lang('BULK_SELECT_BRANCH_OFFICE')
+					];
+				}
+
+				foreach($response->lista AS $pos => $branchs) {
+					$branch = [];
+					if($select) {
+						$branch['key'] = $response->lista[$pos]->cod;
+						$branch['text'] = ucfirst(mb_strtolower($response->lista[$pos]->nomb_cia));
+						$branchOffice[] = (object) $branch;
+						continue;
+					}
+					$branch['idFiscal'] = $response->lista[$pos]->rif;
+					$branch['name'] = mb_strtoupper($response->lista[$pos]->nomb_cia);
+					$branchOffice[] = (object) $branch;
+				}
+			break;
+		}
+
+		if($this->isResponseRc != 0) {
+			$this->response->code = 1;
+			$branchOffice[] = (object) [
+				'key' => '',
+				'text' => lang('RESP_TRY_AGAIN')
+			];
+		}
+
+		$this->response->data->branchOffices = (object) $branchOffice;
+
+		return $this->responseToTheView('GetBranchOffices');
 	}
 	/**
 	 * @info Método para obtener lista de productos para una empresa
@@ -252,6 +319,7 @@ class Novo_Business_Model extends NOVO_Model {
 					$this->response->code = 3;
 					$this->response->title = lang('PRODUCTS_DETAIL_TITLE');
 					$this->response->msg = lang('RESP_UNCONFIGURED_PRODUCT');
+					$this->response->data->resp['btn1']['link'] = 'productos';
 				}
 
 				$productSummary['lots'] = trim($response->estadistica->lote->total);
@@ -285,7 +353,7 @@ class Novo_Business_Model extends NOVO_Model {
 			case -99:
 				$this->response->code = 3;
 				$this->response->msg = novoLang(lang('RESP_NO_ACCESS'), $this->userName);
-				$this->response->data->resp['btn1']['link'] = base_url('productos');
+				$this->response->data->resp['btn1']['link'] = 'productos';
 				break;
 		}
 

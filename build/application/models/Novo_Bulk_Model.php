@@ -88,73 +88,6 @@ class Novo_Bulk_Model extends NOVO_Model {
 		return $this->responseToTheView('getPendingBulk');
 	}
 	/**
-	 * @info obtiene lista de sucursales
-	 * @author J. Enrique Peñaloza Piñero
-	 * @date December 19th, 2019
-	 */
-	public function callWs_GetBranchOffices_Bulk($dataRequest)
-	{
-		log_message('INFO', 'NOVO Bulk Model: GetBranchOffices Method Initialized');
-
-		$this->className = 'com.novo.objects.MO.ListadoSucursalesMO';
-		$this->dataAccessLog->modulo = 'Lotes';
-		$this->dataAccessLog->function = 'Carga de lotes';
-		$this->dataAccessLog->operation = 'Obtener sucursales';
-
-		$select = isset($dataRequest->select);
-		unset($dataRequest->select);
-		$this->dataRequest = new stdClass();
-		$this->dataRequest->idOperation = 'getConsultarSucursales';
-		$this->dataRequest->paginaActual = '1';
-		$this->dataRequest->tamanoPagina = 10;
-		$this->dataRequest->paginar = FALSE;
-		$this->dataRequest->lista = [
-			[
-				'rif' => $this->session->enterpriseInf->idFiscal
-			]
-		];
-
-		$response = $this->sendToService('GetBranchOffices');
-
-		switch($this->isResponseRc) {
-			case 0:
-				$this->response->code = 0;
-
-				if($select && count($response->lista) > 1) {
-					$branchOffice[] = (object) [
-						'key' => '',
-						'text' => lang('BULK_SELECT_BRANCH_OFFICE')
-					];
-				}
-
-				foreach($response->lista AS $pos => $branchs) {
-					$branch = [];
-					if($select) {
-						$branch['key'] = $response->lista[$pos]->cod;
-						$branch['text'] = ucfirst(mb_strtolower($response->lista[$pos]->nomb_cia));
-						$branchOffice[] = (object) $branch;
-						continue;
-					}
-					$branch['idFiscal'] = $response->lista[$pos]->rif;
-					$branch['name'] = mb_strtoupper($response->lista[$pos]->nomb_cia);
-					$branchOffice[] = (object) $branch;
-				}
-			break;
-		}
-
-		if($this->isResponseRc != 0) {
-			$this->response->code = 1;
-			$branchOffice[] = (object) [
-				'key' => '',
-				'text' => lang('RESP_TRY_AGAIN')
-			];
-		}
-
-		$this->response->data->branchOffices = (object) $branchOffice;
-
-		return $this->responseToTheView('GetBranchOffices');
-	}
-	/**
 	 * @info Método para obtener los tipos de lte asociados a un programa
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date December 8th, 2019
@@ -252,7 +185,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 				case 0:
 					$this->response->msg = novoLang(lang('BULK_SUCCESS'), substr($dataRequest->rawName, 0, 15).'...');
 					$this->response->icon = lang('GEN_ICON_SUCCESS');
-					$this->response->data['btn1']['link'] = base_url('cargar-lotes');
+					$this->response->data['btn1']['link'] = 'cargar-lotes';
 					$respLoadBulk = TRUE;
 					break;
 				case -108:
@@ -260,7 +193,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 				case -256:
 				case -21:
 					$this->response->msg = lang('BULK_NO_LOAD');
-					$this->response->data['btn1']['link'] = base_url('cargar-lotes');
+					$this->response->data['btn1']['link'] = 'cargar-lotes';
 					$respLoadBulk = TRUE;
 					break;
 				case -280:
@@ -333,7 +266,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 		$password = json_decode(base64_decode($dataRequest->pass));
 		$password = $this->cryptography->decrypt(
 			base64_decode($password->plot),
-			utf8_encode($password->passWord)
+			utf8_encode($password->password)
 		);
 		$this->dataRequest->usuario = [
 			'userName' => $this->userName,
@@ -458,7 +391,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 		$password = json_decode(base64_decode($dataRequest->pass));
 		$password = $this->cryptography->decrypt(
 			base64_decode($password->plot),
-			utf8_encode($password->passWord)
+			utf8_encode($password->password)
 		);
 		$this->dataRequest->usuario = [
 			'userName' => $this->userName,
@@ -474,7 +407,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 				$this->response->title = lang('BULK_CONFIRM_TITLE');
 				$this->response->msg = novolang(lang('BULK_CONFIRM_SUCCESS'), $bulkConfirmInfo->numLote);
 				$this->response->icon = lang('GEN_ICON_SUCCESS');
-				$this->response->data['btn1']['link'] = base_url(lang('GEN_LINK_BULK_AUTH'));
+				$this->response->data['btn1']['link'] = lang('GEN_LINK_BULK_AUTH');
 				break;
 			case -1:
 				$this->response->code = 0;
@@ -727,164 +660,6 @@ class Novo_Bulk_Model extends NOVO_Model {
 		return $this->responseToTheView('DisassConfirmBulk');
 	}
 	/**
-	 * @info Ver el detalle de los lotes confirmados
-	 * @author J. Enrique Peñaloza Piñero
-	 * @date February 09th, 2020
-	 */
-	public function callWs_ConfirmBulkdetail_Bulk($dataRequest)
-	{
-		log_message('INFO', 'NOVO Bulk Model: ConfirmBulkdetail Method Initialized');
-
-		$this->className = 'com.novo.objects.MO.AutorizarLoteMO';
-		$this->dataAccessLog->modulo = 'Lotes';
-		$this->dataAccessLog->function = 'Autorización de lotes';
-		$this->dataAccessLog->operation = 'Ver detalle del lote';
-
-		$this->dataRequest->idOperation = 'detalleLote';
-		$this->dataRequest->acidlote = $dataRequest->bulkId;
-
-		$response = $this->sendToService('ConfirmBulkdetail');
-
-		$detailInfo = [
-			'fiscalId' => '--',
-			'enterpriseName' => '--',
-			'bulkType' => '--',
-			'bulkTypeText' => '--',
-			'bulkNumber' => '--',
-			'totalRecords' => '--',
-			'loadUserName' => '--',
-			'bulkDate' => '--',
-			'bulkStatus' => '--',
-			'bulkStatusText' => '--',
-			'bulkAmount' => '--',
-			'bulkHeader' => [],
-			'bulkRecords' => [],
-		];
-
-		switch ($this->isResponseRc) {
-			case 0:
-				$this->response->code = 0;
-				$detailInfo['fiscalId'] = $response->acrif;
-				$detailInfo['enterpriseName'] = mb_strtoupper(mb_strtolower($response->acnomcia));
-				$detailInfo['bulkType'] = $response->ctipolote;
-				$detailInfo['bulkTypeText'] = mb_strtoupper(mb_strtolower($response->acnombre));
-				$detailInfo['bulkNumber'] = $response->acnumlote;
-				$detailInfo['totalRecords'] = $response->ncantregs;
-				$detailInfo['loadUserName'] = mb_strtoupper(mb_strtolower($response->accodusuarioc));
-				$detailInfo['bulkDate'] = $response->dtfechorcarga;
-				$detailInfo['bulkStatus'] = $response->cestatus;
-				$detailInfo['bulkStatusText'] = ucfirst(mb_strtolower($response->status));
-				$detailInfo['bulkAmount'] = $response->montoNeto;
-				$bulkRecordsHeader = [];
-
-				switch($response->ctipolote) {
-					case '1':
-					case '10':
-						if(isset($response->registrosLoteEmision) && count($response->registrosLoteEmision) > 0) {
-							$bulkRecordsHeader = [lang('GEN_TABLE_DNI'), lang('GEN_TABLE_NAME_LASTNAME'), lang('GEN_TABLE_STATUS')];
-
-							foreach($response->registrosLoteEmision AS $records) {
-								$record = new stdClass();
-								foreach($records AS $pos => $value) {
-									switch ($pos) {
-										case 'idExtPer':
-											$record->cardHoldId = $value;
-											break;
-										case 'idExtEmp':
-											if(!isset($records->idExtPer)) {
-												$bulkRecordsHeader[0] = lang('GEN_FISCAL_REGISTRY');
-												$record->cardHoldId = $value;
-											}
-											break;
-										case 'nombres':
-											$record->cardHoldName = ucwords(mb_strtolower($value));
-											break;
-										case 'apellidos':
-											$record->cardHoldLastName = ucwords(mb_strtolower($value));
-											break;
-										case 'status':
-											$status = [
-												'0' => 'En proceso',
-												'1' => 'Procesado',
-												'7' => 'Rechazado',
-											];
-											$record->bulkstatus = is_numeric($value) ? $status[$value] : $value;
-											break;
-									}
-								}
-								$record->cardHoldName = $record->cardHoldName.' '.$record->cardHoldLastName;
-								unset($record->cardHoldLastName);
-								array_push(
-									$detailInfo['bulkRecords'],
-									$record
-								);
-							}
-						}
-						break;
-					case '2':
-					case '5':
-					case 'L':
-					case 'M':
-						if(isset($response->registrosLoteRecarga) && count($response->registrosLoteRecarga) > 0) {
-							$bulkRecordsHeader = [lang('GEN_TABLE_DNI'), lang('GEN_TABLE_AMOUNT'), lang('GEN_TABLE_ACCOUNT_NUMBER')];
-
-							if($response->ctipolote == '5' || $response->ctipolote == 'L' || $response->ctipolote == 'M') {
-								$bulkRecordsHeader = [lang('GEN_TABLE_DNI'), lang('GEN_TABLE_AMOUNT'), lang('GEN_TABLE_ACCOUNT_NUMBER'), lang('GEN_TABLE_STATUS')];
-							}
-
-							foreach($response->registrosLoteRecarga AS $records) {
-								$record = new stdClass();
-								foreach($records AS $pos => $value) {
-									switch ($pos) {
-										case 'id_ext_per':
-											$record->cardHoldId = $value;
-											break;
-											case 'monto':
-												$record->cardHoldAmount = $value;
-											break;
-										case 'nro_cuenta':
-											$record->cardHoldAccount = maskString($value, 6, 4);
-											break;
-										case 'status':
-											if($response->ctipolote == '5') {
-												$status = [
-													'3' => 'En proceso',
-													'6' => 'Procesada',
-													'7' => 'Rechazado',
-												];
-											}
-
-											if($response->ctipolote == 'L' || $response->ctipolote == 'M') {
-												$status = [
-													'0' => 'Pendiente',
-													'1' => 'Procesada',
-													'2' => 'Inválida',
-													'7' => 'Rechazado',
-												];
-											}
-
-											$record->bulkstatus = is_numeric($value) ? $status[$value] : $value;
-											break;
-									}
-								}
-								array_push(
-									$detailInfo['bulkRecords'],
-									$record
-								);
-							}
-						}
-						break;
-				}
-				break;
-		}
-
-		$detailInfo['bulkHeader'] = $bulkRecordsHeader;
-		$this->response->data->bulkInfo = (object) $detailInfo;
-
-		return $this->responseToTheView('ConfirmBulkdetail');
-
-	}
-	/**
 	 * @info Firma lista de lotes
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date December 28th, 2019
@@ -1087,7 +862,8 @@ class Novo_Bulk_Model extends NOVO_Model {
 		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
-				$this->response->data = lang('GEN_LINK_CONS_ORDERS_SERV');
+				$this->response->data = 'consulta-orden-de-servicio';
+				$serviceOrdersList = [];
 
 				foreach($response->lista AS $list) {
 					$orderList = [];
@@ -1143,7 +919,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 
 			case -5:
 				$this->response->title = 'Generar orden de servicio';
-				$this->response->msg = 'No fue posible generar la orden de servicio';
+				$this->response->msg = 'No fue posible generar la orden de servicio, por favor intentalo de nuevo';
 				$this->response->data['btn1']['action'] = 'close';
 				break;
 		}

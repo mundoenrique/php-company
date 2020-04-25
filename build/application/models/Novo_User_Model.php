@@ -39,7 +39,15 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataRequest->password = md5($password);
 		$this->dataRequest->ctipo = $dataRequest->active;
 
-		$response = $this->sendToService(lang('GEN_LOGIN'));
+		if($this->config->item('active_recaptcha')) {
+			$this->isResponseRc = $this->callWs_validateCaptcha_User($dataRequest);
+
+			if ($this->isResponseRc == 'done') {
+				$response = $this->sendToService(lang('GEN_LOGIN'));
+			}
+		} else {
+			$response = $this->sendToService(lang('GEN_LOGIN'));
+		}
 
 		if(in_array($this->config->item('client'), ['banco-bog']) && ($this->isResponseRc == -2 || $this->isResponseRc == -185)) {
 			$this->isResponseRc = 0;
@@ -146,6 +154,19 @@ class Novo_User_Model extends NOVO_Model {
 					]
 				];
 				break;
+			case 'fail':
+				$this->response->code = 3;
+				$this->response->title = lang('GEN_SYSTEM_NAME');
+				$this->response->icon = lang('GEN_ICON_DANGER');
+				$this->response->msg = lang('RESP_RECAPTCHA_VALIDATION_FAILED');
+				$this->response->data = [
+					'btn1'=> [
+						'text'=> lang('GEN_BTN_ACCEPT'),
+						'link'=> 'inicio',
+						'action'=> 'redirect'
+					]
+				];
+				break;
 		}
 
 		return $this->responseToTheView(lang('GEN_LOGIN'));
@@ -181,7 +202,7 @@ class Novo_User_Model extends NOVO_Model {
 				$this->response->data = [
 					'btn1'=> [
 						'text'=> lang('GEN_BTN_CONTINUE'),
-						'link'=> base_url('inicio'),
+						'link'=> 'inicio',
 						'action'=> 'redirect'
 					]
 				];
@@ -251,7 +272,7 @@ class Novo_User_Model extends NOVO_Model {
 				$this->response->data = [
 					'btn1'=> [
 						'text'=> lang('GEN_BTN_CONTINUE'),
-						'link'=> base_url('inicio'),
+						'link'=> 'inicio',
 						'action'=> 'redirect'
 					]
 				];
@@ -353,23 +374,6 @@ class Novo_User_Model extends NOVO_Model {
 
 		log_message('DEBUG', $logMessage);
 
-		$this->response->title = lang('GEN_SYSTEM_NAME');
-
-		if($result["score"] <= 0) {
-			$this->response->code = 3;
-			$this->response->icon = lang('GEN_ICON_DANGER');
-			$this->response->msg = lang('RESP_RECAPTCHA_VALIDATION_FAILED');
-			$this->response->data = [
-				'btn1'=> [
-					'text'=> lang('GEN_BTN_ACCEPT'),
-					'link'=> base_url('inicio'),
-					'action'=> 'redirect'
-				]
-			];
-		} else {
-			$this->callWs_Login_User($dataRequest);
-		}
-
-		return $this->response;
+		return $result["score"] <= $this->config->item('score_recaptcha')[ENVIRONMENT] ? 'fail' : 'done';
 	}
 }

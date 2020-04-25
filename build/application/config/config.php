@@ -46,6 +46,11 @@ $config['format_date'] = 'j/m/Y';
 $config['format_time'] = 'g:i A';
 $config['cypher_base'] = CYPHER_BASE;
 $config['active_recaptcha'] = ACTIVE_RECAPTCHA;
+$config['score_recaptcha'] = [
+	'development' => 0,
+	'testing' => 0.2,
+	'production' => 0.3
+];
 $config['new-views'] = '';
 $config['client'] = 'novo';
 $config['access_url'] = explode(',', ACCESS_URL);
@@ -403,7 +408,7 @@ $config['encryption_key'] = ENCRYPTION_KEY;
 */
 $config['sess_driver'] = 'files';
 $config['sess_cookie_name'] = SESS_COOKIE_NAME;
-$config['sess_expiration'] = SESS_EXPIRATION > 0 ? SESS_EXPIRATION + 10 : SESS_EXPIRATION;
+$config['sess_expiration'] = SESS_EXPIRATION > 0 ? SESS_EXPIRATION + 40 : SESS_EXPIRATION;
 $config['sess_save_path'] = SESS_SAVE_PATH;
 $config['sess_match_ip'] = SESS_MATCH_IP;
 $config['sess_time_to_update'] = 300;
@@ -486,7 +491,7 @@ $config['csrf_exclude_uris'] = array(
 	'[\w\-]+/detalle-producto',
 	'[\w\-]+/detalle-lote',
 	'[\w\-]+/confirmar-lote',
-	'[\w\-]+/detalle-confirmado',
+	'[\w\-]+/consulta-lote',
 	'[\w\-]+/detalle-orden-de-servicio',
 	'[\w\-]+/dashboard/productos',
 	'[\w\-]+/dashboard/productos/detalle',

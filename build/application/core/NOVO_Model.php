@@ -85,7 +85,7 @@ class NOVO_Model extends CI_Model {
 		$arrayResponse = [
 			'btn1'=> [
 				'text'=> FALSE,
-				'link'=> base_url($linkredirect),
+				'link'=> $linkredirect,
 				'action'=> 'redirect'
 			]
 		];
@@ -93,7 +93,7 @@ class NOVO_Model extends CI_Model {
 
 		if(!$this->input->is_ajax_request()) {
 			$this->response->data = new stdClass();
-			$this->response->data->resp = $arrayResponse;;
+			$this->response->data->resp = $arrayResponse;
 		}
 
 		switch($this->isResponseRc) {

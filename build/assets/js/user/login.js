@@ -34,7 +34,7 @@ $(function () {
 								icon = lan.GEN_ICON_WARNING;
 								data = {
 									btn1: {
-										link: baseURL + 'inicio',
+										link: 'inicio',
 										action: 'redirect'
 									}
 								};
@@ -71,7 +71,6 @@ $(function () {
 	};
 
 	function getCredentialsUser() {
-		ceo_cook = getCookieValue();
 		cypherPass = cryptoPass(userPass.val());
 
 		return {
@@ -82,7 +81,7 @@ $(function () {
 	};
 
 	function validateLogin(token) {
-		verb = 'POST'; who = forWho || 'User'; where = forWhere || lang.GEN_LOGIN_URI;
+		verb = 'POST'; who = forWho || 'User'; where = forWhere || lang.GEN_LOGIN;
 		data = {
 			user: userCred.user,
 			pass: userCred.pass,

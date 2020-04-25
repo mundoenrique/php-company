@@ -144,16 +144,6 @@ function buscar(pgSgt) {
 		resizable: false,
 		position: {
 			my: "top"
-		},
-		buttons: {
-			"Aceptar": {
-				text: 'Aceptar',
-				class: 'novo-btn-primary-modal',
-				click: function () {
-					resett()
-					$(this).dialog("destroy");
-				}
-			}
 		}
 	});
 	var ceo_cook = decodeURIComponent(

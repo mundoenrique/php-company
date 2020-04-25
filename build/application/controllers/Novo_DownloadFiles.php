@@ -1,9 +1,9 @@
 <?php
 defined('BASEPATH') OR  exit('No direct script access allowed');
 /**
- * @info Controlador para manejar las peticiones referentes a consultas de ordenes de servicio
- * @author J. Enrique Peñaloza Piñero
- * @date January 09th, 2019
+ * @info Controlador para manejar las peticiones referentes a a descarga de archivos
+ * @author Luis Molina
+ * @date March 03rd, 2019
 */
 class Novo_DownloadFiles extends NOVO_Controller {
 
@@ -14,13 +14,13 @@ class Novo_DownloadFiles extends NOVO_Controller {
 	}
 
 	/**
-	 * @info Método Generico para exportar archivos .pdf
+	 * @info Método Generico para exportar decargar archivos
 	 ** @author Luis Molina
-	 * @date Mar 10 Tue, 2020
+	 * @date March 10th, 2020
 	 */
 	public function exportFiles()
 	{
-		log_message('INFO', 'NOVO Inquiries: exportFiles Method Initialized');
+		log_message('INFO', 'NOVO DownloadFiles: exportFiles Method Initialized');
 
 		$this->model = 'Novo_'.ucfirst($this->request->who).'_Model';
 		$this->method = 'callWs_'.ucfirst($this->request->where).'_'.$this->request->who;

@@ -56,7 +56,7 @@ class Novo_Plantilla_Model extends NOVO_Model {
 				$this->response->data = [
 					'btn1'=> [
 						'text'=> lang('BUTTON-ACCEPT'),
-						'link'=> base_url('inicio'),
+						'link'=> 'inicio',
 						'action'=> 'redirect'
 					],
 					'btn2'=> [

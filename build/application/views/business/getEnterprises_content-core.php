@@ -33,12 +33,15 @@
 </div>
 <div class="line mt-1"></div>
 
+<div id="pre-loader" class="mt-2 mx-auto flex justify-center">
+	<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
+</div>
+
 <div id="no-enterprise" class="bg-color mx-4 my-5">
 	<div class="flex justify-center">
 		<span class="my-5 py-5 h4 regular text"><?= $msgEnterprise ?></span>
 	</div>
 </div>
-
 <div id="enterprise-list" class="products my-5 <?= $enterprisesTotal < 5 ? '' : 'mx-auto';?> pt-2 visible">
 	<?php foreach($enterpriseList AS $enterpriseaAttr): ?>
 	<div class="card bg-white mb-2 <?= $enterpriseaAttr->page.' '.$enterpriseaAttr->albeticalPage ?>">
