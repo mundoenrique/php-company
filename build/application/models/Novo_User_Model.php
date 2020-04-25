@@ -33,7 +33,6 @@ class Novo_User_Model extends NOVO_Model {
 			base64_decode($password->plot),
 			utf8_encode($password->password)
 		);
-
 		$authToken = $this->session->flashdata('authToken')?$this->session->flashdata('authToken'):'';
 
 		$this->dataRequest->idOperation = 'loginFull';
@@ -167,27 +166,33 @@ class Novo_User_Model extends NOVO_Model {
 				$this->response->assert = lang('GEN_LOGIN_IP_ASSERT');
 				$this->response->labelInput = lang('GEN_LOGIN_IP_LABEL_INPUT');
 				$this->response->icon = lang('GEN_ICON_WARNING');
-				$this->response->msg = lang('GEN_LOGIN_IP_TITLE');
+				$this->response->email = 'info******mail.com';// TODO: eliminar 
+				$this->response->msg = str_replace('{$maskMail$}',$this->response->email,lang('GEN_LOGIN_IP_MSG'));
 				$this->response->data = [
 					'btn1'=> [
 						'text'=> lang('GEN_BTN_ACCEPT'),
 						'link'=> false,
-						'action'=> 'wait'
+						'action'=> 'none'
 					],
 					'btn2'=> [
 						'text'=> lang('GEN_BTN_CANCEL'),
-						'link'=> 'inicio',
-						'action'=> 'redirect'
+						'link'=> false,
+						'action'=> 'close'
 					]
 				];
 				//$this->session->set_flashdata('authToken',$response->codeOtp->authToken);// TODO: descomentar
 				$this->session->set_flashdata('authToken', 'ABCDEFEHIJK');// TODO: eliminar
 				break;
 			case -286:
-				$this->response->code = 2;
-				$this->response->codeOtpInvalid = TRUE;
+			case -287:
+			case -288:
+				$this->response->code = 4;
 				$this->response->msg = lang('GEN_RESP_CODE_OTP_INVALID');
 				$this->response->icon = lang('GEN_ICON_WARNING');
+				$this->response->data['btn1'] = [
+					'text' => lang('GEN_BTN_ACCEPT'),
+					'action' => 'close'
+				];
 				break;
 			case 'fail':
 				$this->response->code = 3;

@@ -86,7 +86,7 @@ function validateForms(form) {
 			"card-number": {required: true, pattern: numeric, maxlength: 16, minlength: 16},
 			"card-number-sel": {requiredSelect: true},
 			"inquiry-type": {requiredSelect: true},
-			"codeOTP": {required: true, pattern: validCode, maxlength: 8}
+			"codeOTP": {required: true, pattern: validCode}
 		},
 		messages: {
 			"user_login": lang.VALIDATE_USERLOGIN,

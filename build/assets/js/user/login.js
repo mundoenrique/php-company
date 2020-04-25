@@ -3,7 +3,7 @@ $(function () {
 	var userCred, forWho, forWhere;
 	var userLogin = $('#user_login');
 	var userPass = $('#user_pass');
-	var btnTrigger,loginIpMsg,formcodeOTP,btn;
+	var loginIpMsg, formcodeOTP, btn;
 	$.balloon.defaults.css = null;
 	insertFormInput(false);
 	inputDisabled(false);
@@ -77,7 +77,10 @@ $(function () {
 		return {
 			user: userLogin.val(),
 			pass: cypherPass,
-			active: ''
+			active: '',
+			codeotp: $('#codeOTP').val() ? $('#codeOTP').val() : '',
+			saveip : $('#acceptAssert').prop('checked') ? $('#acceptAssert').prop('checked') : '',
+			modalreq : $('#codeOTP').val() ? true : ''
 		}
 	};
 
@@ -88,7 +91,10 @@ $(function () {
 			pass: userCred.pass,
 			active: userCred.active,
 			currentTime: new Date().getHours(),
-			token: token || ''
+			token: token || '',
+			codeOTP: userCred.codeotp,
+			saveIP: userCred.saveip,
+			modalReq :userCred.modalreq
 		}
 		callNovoCore(verb, who, where, data, function (response) {
 			responseCodeLogin[response.code](response);
@@ -120,6 +126,10 @@ $(function () {
 		2: function (response) {
 
 			if(response.ipInvalid){
+
+				restartFormLogin();
+				var oldID = $('#accept').attr('id');
+				$('#accept').attr('id', 'send-otp-btn');
 				btn = response.data.btn1;
 
 				loginIpMsg ='<form id="formVerificationOTP" class="mr-2" method="post">';
@@ -139,39 +149,20 @@ $(function () {
 				loginIpMsg+='</form>';
 				
 				notiSystem(response.title, loginIpMsg, response.icon,response.data);
-				
-				if(btn.action == 'wait') {
+				formcodeOTP = $('#formVerificationOTP');
 
-					formcodeOTP = $('#formVerificationOTP');
-					btnTrigger = document.getElementById('accept');
-
-					btnTrigger.addEventListener('click', function (e) {
-						
-						formInputTrim(formcodeOTP);
-						validateForms(formcodeOTP);
-
-						if(formcodeOTP.valid()){
-
-							data.codeOTP =$('#codeOTP').val();
-							data.saveIp = $('#acceptAssert').prop('checked');
-
-							callNovoCore(verb, who, where, data, function (response) {
-								responseCodeLogin[response.code](response);
-							})
-							$("#system-info").dialog('close');
-						}
-					});
-				  }
-			} else if(response.codeOtpInvalid){
-				data = {
-					btn1: {
-						text: lang.GEN_BTN_ACCEPT,
-						link: 'inicio',
-						action: 'redirect'
+				$('#send-otp-btn').on('click', function() {
+					formInputTrim(formcodeOTP);
+					validateForms(formcodeOTP);
+					if(formcodeOTP.valid()){
+						$(this)
+						.off('click')
+						.html(loader)
+						.attr('id', oldID);
+						userCred = getCredentialsUser();
+						validateLogin();
 					}
-				}
-			notiSystem(false, response.msg, response.icon,data);
-
+				});
 			} else{
 				userCred.active = 1; forWhere = lang.GEN_LOGIN;
 				validateLogin();
@@ -201,7 +192,6 @@ $(function () {
 		4: function () {
 
 			$('#login-btn').html(btnText);
-
 		}
 	}
 
