@@ -7,12 +7,12 @@ $(function() {
 		data = {
 			btn1: {
 				text: 'Aceptar',
-				link: baseURL + 'cambiar-clave',
+				link: 'cambiar-clave',
 				action: 'redirect'
 			},
 			btn2: {
 				text: 'Cancelar',
-				link: baseURL + 'cerrar-sesion/inicio',
+				link: 'cerrar-sesion/inicio',
 				action: 'redirect'
 			}
 		};

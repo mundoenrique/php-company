@@ -35,7 +35,7 @@ $(function () {
 								icon = lan.GEN_ICON_WARNING;
 								data = {
 									btn1: {
-										link: baseURL + 'inicio',
+										link: 'inicio',
 										action: 'redirect'
 									}
 								};

@@ -55,6 +55,7 @@ $route['translate_uri_dashes'] = FALSE;
 //Asynchronous
 $route['(:any)/async-call'] = "novo_CallModels";
 //User
+$route['(:any)/ingresar/(:any)'] = "Novo_User/singleSignin/$2";
 $route['(:any)/sugerencia'] = "Novo_User/suggestion";
 $route['(:any)/inicio'] = "Novo_User/login";
 $route['(:any)/inicio/(:any)'] = "Novo_User/login";
