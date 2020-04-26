@@ -222,7 +222,6 @@ class Novo_User_Model extends NOVO_Model {
 					'cl_addr' => $this->encrypt_connect->encode($_SERVER['REMOTE_ADDR'], $this->country, 'REMOTE_ADDR'),
 					'countrySess' => $this->config->item('country'),
 					'countryUri' => $this->config->item('country-uri'),
-					'idUsuario' => $response->usuario->idUsuario,
 				];
 				$this->session->set_userdata($userData);
 				$this->response->code = 0;
