@@ -42,6 +42,9 @@ class Novo_Inquiries extends NOVO_Controller {
 			$renderOrderList = TRUE;
 		}
 
+		$this->load->model('Novo_Inquiries_Model', 'Inquiries');
+		$responseList = $this->Inquiries->callWs_ServiceOrderStatus_Inquiries();
+
 		if ($this->session->flashdata('requestOrdersList')) {
 			$requestOrdersList = $this->session->flashdata('requestOrdersList');
 			$this->session->set_flashdata('requestOrdersList', $requestOrdersList);
@@ -51,11 +54,9 @@ class Novo_Inquiries extends NOVO_Controller {
 			$respDownload = $this->session->flashdata('download');
 			$this->responseAttr($respDownload);
 		} else {
-			$this->responseAttr();
+			$this->responseAttr($responseList);
 		}
 
-		$this->load->model('Novo_Inquiries_Model', 'Inquiries');
-		$responseList = $this->Inquiries->callWs_ServiceOrderStatus_Inquiries();
 		$this->render->orderStatus = $responseList->data->orderStatus;
 		$this->render->renderOrderList = $renderOrderList;
 		$this->render->orderList = $orderList;
