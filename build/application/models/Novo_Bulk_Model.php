@@ -92,7 +92,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date December 8th, 2019
 	 */
-	public function callWs_getTypeLots_Bulk()
+	public function callWs_getTypeLots_Bulk($dataRequest)
 	{
 		log_message('INFO', 'NOVO Bulk Model: getTypeLots Method Initialized');
 
@@ -109,7 +109,13 @@ class Novo_Bulk_Model extends NOVO_Model {
 			'userName' => $this->userName
 		];
 
-		$response = $this->sendToService('getTypeLots');
+
+		if($dataRequest->newGet == 0) {
+			$response = $this->sendToService('callWs_getTypeLots');
+		} else {
+			$dataRequest->rc = $dataRequest->newGet;
+			$this->makeAnswer($dataRequest);
+		}
 
 		switch($this->isResponseRc) {
 			case 0:
@@ -142,7 +148,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 
 		$this->response->data->typesLot = (object) $typesLot;
 
-		return $this->responseToTheView('getTypeLots');
+		return $this->responseToTheView('callWs_getTypeLots');
 	}
 	/**
 	 * @info Método para cargar lotes
@@ -452,30 +458,25 @@ class Novo_Bulk_Model extends NOVO_Model {
 		$this->dataRequest->accodusuarioc = $this->userName;
 
 
-		$response = $this->sendToService('AuthorizeBulkList');
+		$response = $this->sendToService('callWs_AuthorizeBulkList');
+		$response = $this->callWs_MakeBulkList_Bulk($response);
 
 		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
-				$response = $this->callWs_MakeBulkList_Bulk($response);
 				break;
 			case -38:
 				$this->response->code = 3;
 				$this->response->title = lang('BULK_AUTHORIZE');
 				$this->response->msg = lang('RESP_NO_LIST');
 				break;
-			default:
-				$response = new stdClass();
-				$response->signBulk = [];
-				$response->authorizeBulk = [];
-				$response->authorizeAttr = [];
 		}
 
-		$this->response->data->signBulk = (object) $response->signBulk;
-		$this->response->data->authorizeBulk = (object) $response->authorizeBulk;
+		$this->response->data->signBulk = $response->signBulk;
+		$this->response->data->authorizeBulk = $response->authorizeBulk;
 		$this->response->data->authorizeAttr = $response->authorizeAttr;
 
-		return $this->responseToTheView('AuthorizeBulkList');
+		return $this->responseToTheView('callWs_AuthorizeBulkList');
 	}
 	/**
 	 * @info Firma lista de lotes
@@ -1015,7 +1016,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 
 		$sign = TRUE;
 		$auth = TRUE;
-		$order = (int) $bulkList->usuario->orden;
+		$order = isset($bulkList->usuario->orden) ? (int) $bulkList->usuario->orden : '';
 
 		if($order == 1) {
 			$auth = FALSE;
@@ -1025,7 +1026,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 			$sign = FALSE;
 		}
 
-		if(!empty($bulkList->listaPorFirmar)) {
+		if(isset($bulkList->listaPorFirmar) && !empty($bulkList->listaPorFirmar)) {
 			foreach($bulkList->listaPorFirmar AS $bulk) {
 				$detailBulk['idBulk'] = $bulk->acidlote;
 				$detailBulk['bulkNumber'] = $bulk->acnumlote;
@@ -1039,7 +1040,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 			}
 		}
 
-		if(!empty($bulkList->listaPorAutorizar)) {
+		if(isset($bulkList->listaPorAutorizar) && !empty($bulkList->listaPorAutorizar)) {
 			foreach($bulkList->listaPorAutorizar AS $bulk) {
 				$detailBulk['idBulk'] = $bulk->acidlote;
 				$detailBulk['bulkNumber'] = $bulk->acnumlote;
@@ -1058,7 +1059,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 		}
 
 		$authorizeAttr = (object) [
-			'toPAy' => $bulkList->ordenXPagar,
+			'toPAy' => isset($bulkList->ordenXPagar) ? $bulkList->ordenXPagar : 'N',
 			'allBulk' => $allBulk,
 			'sign' => $sign,
 			'auth' => $auth

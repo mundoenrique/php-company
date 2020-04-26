@@ -30,6 +30,13 @@ $config = [
 			'rules' => 'trim|required'
 		]
 	],
+	'singleSignon' => [
+		[
+			'field' => 'tokenId',
+			'label' => 'tokenId',
+			'rules' => 'trim|regex_match[/^([\w]+)+$/i]|required'
+		]
+	],
 	'finishSession' => [
 		[
 			'field' => 'user',

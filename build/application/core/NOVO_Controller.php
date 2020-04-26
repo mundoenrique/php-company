@@ -228,7 +228,7 @@ class NOVO_Controller extends CI_Controller {
 
 		if(is_object($responseView)) {
 			$this->render->code = $responseView->code;
-			$download = !isset($responseView->download) ?: $responseView->download;
+			$download = !isset($responseView->download) ? $download : $responseView->download;
 		}
 
 		if($this->session->has_userdata('productInf')) {

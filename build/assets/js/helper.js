@@ -300,3 +300,16 @@ function cryptoPass(jsonObject, req) {
 
 	return cipherObject;
 }
+/**
+ * @info Obtiene datos para el request
+ * @author J. Enrique Peñaloza Piñero
+ * @date April 25th, 2020
+ */
+function getDataform(form) {
+	var dataForm = {};
+	form.find('input, select').each(function (index, element) {
+		dataForm[$(element).attr('name')] = $(element).val()
+	})
+
+	return dataForm
+}
