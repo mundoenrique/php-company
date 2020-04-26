@@ -223,9 +223,7 @@ class Novo_User_Model extends NOVO_Model {
 					'countrySess' => $this->config->item('country'),
 					'countryUri' => $this->config->item('country-uri'),
 					'idUsuario' => $response->usuario->idUsuario,
-					'pais' => $this->config->item('country'),
-					'nombreCompleto' => $fullName,
-					'logged_in' => TRUE
+					'pais' => $this->config->item('country')
 				];
 				$this->session->set_userdata($userData);
 				$this->response->code = 0;
