@@ -112,8 +112,14 @@ class Novo_Business_Model extends NOVO_Model {
 				'rif' => $this->session->enterpriseInf->idFiscal
 			]
 		];
+		$newGet = isset($dataRequest->newGet) ? $dataRequest->newGet : 0;
 
-		$response = $this->sendToService('GetBranchOffices');
+		if ($newGet == 0) {
+			$response = $this->sendToService('callWs_GetBranchOffices');
+		} else {
+			$dataRequest->rc = $dataRequest->newGet;
+			$this->makeAnswer($dataRequest);
+		}
 
 		switch($this->isResponseRc) {
 			case 0:
@@ -151,7 +157,7 @@ class Novo_Business_Model extends NOVO_Model {
 
 		$this->response->data->branchOffices = (object) $branchOffice;
 
-		return $this->responseToTheView('GetBranchOffices');
+		return $this->responseToTheView('callWs_GetBranchOffices');
 	}
 	/**
 	 * @info Método para obtener lista de productos para una empresa

@@ -216,7 +216,6 @@ function format(bulk) {
 
 	return table;
 }
-
 /**
  * @info Elimina un lote
  * @author J. Enrique Peñaloza Piñero
