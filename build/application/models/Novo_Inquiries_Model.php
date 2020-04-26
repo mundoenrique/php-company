@@ -29,7 +29,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 		$this->dataRequest->idOperation = 'estatusLotes';
 		$this->dataRequest->tipoEstatus = 'TIPO_B';
 
-		$response = $this->sendToService('ServiceOrderStatus');
+		$response = $this->sendToService('callWs_ServiceOrderStatus');
 
 		switch($this->isResponseRc) {
 			case 0:
@@ -49,16 +49,16 @@ class Novo_Inquiries_Model extends NOVO_Model {
 		}
 
 		if($this->isResponseRc != 0) {
-			$this->response->code = 1;
+			//$this->response->code = 1;
 			$orderStatus[] = (object) [
-				'format' => '',
+				'key' => '',
 				'text' => lang('RESP_TRY_AGAIN')
 			];
 		}
 
 		$this->response->data->orderStatus = (object) $orderStatus;
 
-		return $this->responseToTheView('ServiceOrderStatus');
+		return $this->responseToTheView('callWs_ServiceOrderStatus');
 	}
 	/**
 	 * @info Método para obtener la lista de ordenes de servicio en rango de fecha dado

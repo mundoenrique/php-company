@@ -12,28 +12,6 @@
   src: url('../../fonts/bnt/Gotham-Bold.ttf') format('truetype');
 }
 
-@font-face {
-	font-family: "NovoPayment Glyphs";
-	font-style: normal;
-	font-weight: normal;
-	src: url('../../fonts/novopayment-glyphs-webfont.eot?#iefix');
-  src: url('../../fonts/novopayment-glyphs-webfont.eot?#iefix') format('embedded-opentype'),
-       url('../../fonts/novopayment-glyphs-webfont.woff') format('woff'),
-       url('../../fonts/novopayment-glyphs-webfont.ttf') format('truetype'),
-       url('../../fonts/novopayment-glyphs-webfont.svg') format('svg');
-}
-
-@font-face {
-  font-family: "novoglyphs";
-  font-weight: normal;
-	font-style: normal;
-	src: url('../../fonts/novoglyphs-webfont.eot?#iefix');
-  src: url('../../fonts/novoglyphs-webfont.eot?#iefix') format('eot'),
-       url('../../fonts/novoglyphs-webfont.woff') format('woff'),
-       url('../../fonts/novoglyphs-webfont.ttf') format('truetype'),
-       url('../../fonts/novoglyphs-webfont.svg') format('svg');
-}
-
 :root {
   /* Colors */
   --primary: #EB0029;
@@ -54,15 +32,13 @@
   --bg-color: #f6f3f1;
 
 	--widget-color: #ffffff;
-	--shadows-color: #f2f2f2;
+	--shadows-color: #DDDDDD;
   --border-color: #DDDDDD;
-  --border-color-2: #DDDDDD;
   --text-color: #4E4044;
   --placeholder-color: #DDDDDD;
 	--disabled-color: #DDDDDD;
 
-  --label-color: #4E4044;
-  --primary-shade: #012c71a6;
+	--label-color: #4E4044;
   --primary-tint: #D10024;
 
   /* Type Scale */
@@ -78,7 +54,9 @@
   /* Typography */
   --caps-letter-spacing: .2em;
 
+  --light-font-weight: 300;
   --regular-font-weight: 300;
+  --semibold-font-weight: 700;
   --bold-font-weight: 700;
 
   --font-family-base: 'Gotham Book', sans-serif;
