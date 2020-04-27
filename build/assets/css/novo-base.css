@@ -7685,3 +7685,7 @@ body .ui-tooltip {
 #ui-id-4 #wrapper {
 	padding: 0 !important;
 }
+
+.justify{
+	text-align: justify !important
+}

@@ -7523,3 +7523,7 @@ body .ui-tooltip {
 .modal-buttonset {
 	width: 80px !important;
 }
+
+.justify{
+	text-align: justify !important
+}

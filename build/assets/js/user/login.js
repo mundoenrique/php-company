@@ -133,7 +133,7 @@ $(function () {
 				btn = response.data.btn1;
 
 				loginIpMsg ='<form id="formVerificationOTP" class="mr-2" method="post">';
-				loginIpMsg+='<p>'+response.msg+'</p>';
+				loginIpMsg+='<p class="pt-0 pl-0 justify">'+response.msg+'</p>';
 				loginIpMsg+='<div class="row">';
 				loginIpMsg+=	'<div class="form-group col-7">';
 				loginIpMsg+=	'<label for="codeOTP">'+response.labelInput+'<span class="danger">*</span></label>';
@@ -141,14 +141,36 @@ $(function () {
 				loginIpMsg+=    '<div id="msgErrorCodeOTP" class="help-block"></div>';
 				loginIpMsg+=	'</div>';
 				loginIpMsg+='</div>';
-				loginIpMsg+='<div class="form-group custom-control custom-switch my-3">';
-				loginIpMsg+=	'<input id="acceptAssert" class="custom-control-input" type="checkbox" name="acceptAssert">';
+				loginIpMsg+='<div class="form-group custom-control custom-switch mb-0">';
+				loginIpMsg+=	'<input id="acceptAssert" class="custom-control-input" type="checkbox" name="acceptAssert"> ';
 				loginIpMsg+=	'<label class="custom-control-label" for="acceptAssert">'+response.assert+'</label>';
 				loginIpMsg+=	'<div class="help-block"></div>';
 				loginIpMsg+='</div>';
-				loginIpMsg+='</form>';
-				
+        loginIpMsg+='</form>';
+
 				notiSystem(response.title, loginIpMsg, response.icon,response.data);
+				$("#system-msg").width('auto');
+				$("#system-info").dialog("option", "minWidth", 480);
+				if (country == 'bp' | country == 'bdb') {
+					$("#system-info").dialog("option", "position", {
+						my: "center top+100",
+						at: "center top",
+						of: window
+					});
+
+					var styles = {
+						float : "none",
+						margin: "auto"
+					};
+					$("#system-info .ui-dialog-buttonpane").css(styles);
+				}
+				else {
+					$("#system-info").dialog("option", "position", {
+						my: "center top+160",
+						at: "center top",
+						of: window
+					});
+				}
 				formcodeOTP = $('#formVerificationOTP');
 
 				$('#send-otp-btn').on('click', function() {
