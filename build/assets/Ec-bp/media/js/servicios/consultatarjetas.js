@@ -107,7 +107,7 @@ $('#buscar').on('click', function () {
 	} else {
 		serv_var.busk = true;
 		serv_var.TotalTjts = 0;
-		buscar(1);
+		buscar(0);
 	}
 });
 
@@ -313,41 +313,23 @@ function cargarResultado(data) {
 	}
 }
 
+$.extend( true, $.fn.dataTable.defaults, {
+    "searching": false,
+    "ordering": false
+} );
+
 // PAGINACIÓN PARA LA TABLA DE RESULTADOS
 function paginar() {
-	$('#paginado-TM').paginate({
-		count: serv_var.pgTotal,
-		display: serv_var.paginas,
-		start: serv_var.pgActual,
-		border: false,
-		text_color: '#79B5E3',
-		background_color: 'none',
-		text_hover_color: '#2573AF',
-		background_hover_color: 'none',
-		images: false,
-		onChange: function (page) {
-			if (!$('.table-text-service').find($('.' + page)).hasClass(page)) {
-				$('.table-text-service tbody tr').hide();
-				if ($('#select-allR').is(':checked')) {
-					$(':checkbox').each(function () {
-						this.checked = 0;
-					});
-					serv_var.noTarjetas = [];
-					serv_var.dni_tarjetas = [];
-					serv_var.lote = [];
-					serv_var.estado_anterior = [];
-					serv_var.monto = [];
-					serv_var.fallidas = 0;
-				}
-				$("#resultado-tarjetas").hide();
-				buscar(page);
-			}
-			$('.table-text-service tbody tr').hide();
-			$('.table-text-service .' + page).show();
-			$('#paginado-TM .jPag-pages').css('width', '600px')
+	$('.table-text-service').DataTable( {
+        language: {
+			
+				paginate: {
+					previous: 'Anterior',
+					next:     'Siguiente'
+				},
+				"sInfo":"Mostrando registros del _START_ al _END_, de un total de _TOTAL_ registros",
 		}
-	});
-	$('#paginado-TM .jPag-pages').css('width', '600px')
+    } );
 }
 
 // LIMPIAR LOS CHECK Y CAMPO CLAVE
