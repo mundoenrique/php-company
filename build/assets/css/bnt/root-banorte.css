@@ -13,25 +13,17 @@
 }
 
 @font-face {
-	font-family: "NovoPayment Glyphs";
-	font-style: normal;
-	font-weight: normal;
-	src: url('../../fonts/novopayment-glyphs-webfont.eot?#iefix');
-  src: url('../../fonts/novopayment-glyphs-webfont.eot?#iefix') format('embedded-opentype'),
-       url('../../fonts/novopayment-glyphs-webfont.woff') format('woff'),
-       url('../../fonts/novopayment-glyphs-webfont.ttf') format('truetype'),
-       url('../../fonts/novopayment-glyphs-webfont.svg') format('svg');
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 300;
+  src: url('../../fonts/bnt/Roboto-Regular.ttf') format('truetype');
 }
 
 @font-face {
-  font-family: "novoglyphs";
-  font-weight: normal;
-	font-style: normal;
-	src: url('../../fonts/novoglyphs-webfont.eot?#iefix');
-  src: url('../../fonts/novoglyphs-webfont.eot?#iefix') format('eot'),
-       url('../../fonts/novoglyphs-webfont.woff') format('woff'),
-       url('../../fonts/novoglyphs-webfont.ttf') format('truetype'),
-       url('../../fonts/novoglyphs-webfont.svg') format('svg');
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  src: url('../../fonts/bnt/Roboto-Bold.ttf') format('truetype');
 }
 
 :root {
@@ -40,10 +32,10 @@
   --secondary: #ffffff;
   --tertiary: #f1f1f1;
 
-  --success: #007e33;
+  --success: #6CC04A;
   --info: #0099cc;
-  --warning: #ff8800;
-  --danger: #cc0000;
+  --warning: #FFA400;
+  --danger: #EB0029;
 
   --yellow: #ffffff;
   --vista-blue: #7ed3b2;
@@ -54,15 +46,13 @@
   --bg-color: #f6f3f1;
 
 	--widget-color: #ffffff;
-	--shadows-color: #f2f2f2;
-  --border-color: #DDDDDD;
-  --border-color-2: #DDDDDD;
+	--shadows-color: #D0D0D0;
+  --border-color: #D0D0D0;
   --text-color: #4E4044;
-  --placeholder-color: #DDDDDD;
-	--disabled-color: #DDDDDD;
+  --placeholder-color: #D0D0D0;
+	--disabled-color: #f1f1f1;
 
-  --label-color: #4E4044;
-  --primary-shade: #012c71a6;
+	--label-color: #4E4044;
   --primary-tint: #D10024;
 
   /* Type Scale */
@@ -78,10 +68,13 @@
   /* Typography */
   --caps-letter-spacing: .2em;
 
+  --light-font-weight: 300;
   --regular-font-weight: 300;
+  --semibold-font-weight: 700;
   --bold-font-weight: 700;
 
-  --font-family-base: 'Gotham Book', sans-serif;
+	--font-family-base-first: 'Gotham Book', sans-serif;
+	--font-family-base: 'Roboto', sans-serif;
   --font-family-monospace: monospace, "Courier New";
   --font-family-novoglyphs: 'novoglyphs';
   --font-size-base: .875rem;

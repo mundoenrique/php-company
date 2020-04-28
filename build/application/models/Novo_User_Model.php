@@ -43,10 +43,10 @@ class Novo_User_Model extends NOVO_Model {
 			$this->isResponseRc = $this->callWs_validateCaptcha_User($dataRequest);
 
 			if ($this->isResponseRc == 'done') {
-				$response = $this->sendToService(lang('GEN_LOGIN'));
+				$response = $this->sendToService('callWs_Login');
 			}
 		} else {
-			$response = $this->sendToService(lang('GEN_LOGIN'));
+			$response = $this->sendToService('callWs_Login');
 		}
 
 		if(in_array($this->config->item('client'), ['banco-bog']) && ($this->isResponseRc == -2 || $this->isResponseRc == -185)) {
@@ -170,6 +170,38 @@ class Novo_User_Model extends NOVO_Model {
 		}
 
 		return $this->responseToTheView(lang('GEN_LOGIN'));
+	}
+	/**
+	 * @info Método para el inicio de sesión único
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date May 14th, 2019
+	 */
+	public function callWs_SingleSignon_User($dataRequest)
+	{
+		log_message('INFO', 'NOVO User Model: SingleSignon Method Initialized');
+
+		$this->className = 'com.novo.objects.TOs.RequestTO';
+		$this->dataAccessLog->modulo = 'Usuario';
+		$this->dataAccessLog->function = 'Ingreso al sistema';
+		$this->dataAccessLog->operation = 'Inicio de sesión único';
+		$this->dataAccessLog->userName = $this->country;
+
+		$this->dataRequest->idOperation = 'userByToken';
+		$this->token = $dataRequest->tokenId;
+
+		$response = $this->sendToService('callWs_SingleSignon');
+		$this->response->code = 0;
+
+		switch ($this->isResponseRc) {
+			case 0:
+				$this->response->data = base_url(lang('GEN_ENTERPRISE_LIST'));
+				break;
+
+			default:
+				$this->response->data = base_url('ingresar/fin');
+				break;
+		}
+		return $this->responseToTheView('callWs_SingleSignon');
 	}
 	/**
 	 * @info Método para recuperar contraseña

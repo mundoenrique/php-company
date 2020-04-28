@@ -74,23 +74,37 @@ class Novo_User extends NOVO_Controller {
 	 * @info Método para el cierre de sesión
 	 * @author J. Enrique Peñaloza Piñero.
 	 */
-	public function singleSignin($tokenId)
+	public function singleSignon($tokenId = FALSE)
 	{
-		log_message('INFO', 'NOVO User: singleSignin Method Initialized');
+		log_message('INFO', 'NOVO User: singleSignon Method Initialized');
 
-		$view = 'finish';
+		$view = 'single-signin';
+		$this->render->send = FALSE;
 
+		if ($tokenId) {
+			$this->render->tokenId = $tokenId;
+			$this->render->send = TRUE;
+		} else {
+			$this->render->tokenId = $this->request->tokenId;
+		}
 
-		$pos = array_search('menu-datepicker', $this->includeAssets->jsFiles);
-		$this->render->showBtn = FALSE;
-		$this->render->sessionEnd = 'No fue posible validar tus credenciales de acceso, por favor comunicate con el administrador';
+		if ($tokenId != 'fin') {
+			array_push(
+				$this->includeAssets->jsFiles,
+				'user/single-signin'
+			);
+		}
 
-		unset($this->includeAssets->jsFiles[$pos]);
-		$this->render->activeHeader = TRUE;
-		$this->render->titlePage = LANG('GEN_FINISH_TITLE');
+		if($tokenId == 'fin') {
+			$view = 'finish';
+			$this->render->activeHeader = TRUE;
+			$this->render->showBtn = FALSE;
+			$this->render->sessionEnd = lang('RESP_DUPLICATED_SESSION');
+		}
+
+		$this->render->titlePage = lang('GEN_SYSTEM_NAME');
 		$this->views = ['user/'.$view];
 		$this->loadView($view);
-
 
 	}
 	/**

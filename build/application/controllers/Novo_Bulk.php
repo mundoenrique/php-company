@@ -36,17 +36,20 @@ class Novo_Bulk extends NOVO_Controller {
 			"bulk/load_bulk"
 		);
 		$responseList = $this->loadModel();
+		$this->request->newGet = $responseList->code;
 		$this->responseAttr($responseList);
 		$this->load->model('Novo_Bulk_Model', 'Bulk');
-		$typesLot = $this->Bulk->callWs_getTypeLots_Bulk();
+		$typesLot = $this->Bulk->callWs_getTypeLots_Bulk($this->request);
 		$this->render->typesLot = $typesLot->data->typesLot;
+
 		if(verifyDisplay('body', $view,  lang('GEN_TAG_BRANCHOFFICE'))) {
-			$this->request = new stdClass();
 			$this->request->select = true;
 			$this->load->model('Novo_Business_Model', 'Business');
+			$this->request->newGet = $typesLot->code;
 			$branchOffices = $this->Business->callWs_GetBranchOffices_Bulk($this->request);
 			$this->render->branchOffices = $branchOffices->data->branchOffices;
 		}
+
 		$this->render->pendingBulk = $responseList->data->pendingBulk;
 		$this->render->titlePage = lang('GEN_MENU_BULK_LOAD');
 		$this->views = ['bulk/'.$view];

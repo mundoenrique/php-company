@@ -319,9 +319,13 @@
 											</div>
 										</div>
 
-										<div class="row flex mb-4 mt-2 justify-end items-center">
-											<div class="col-6 col-lg-4 col-xl-3">
-												<input id="password" class="form-control pwd-input" type="password" placeholder="Ingresa tu contraseña">
+										<div class="row flex mb-4 mt-2 justify-end items-center form-group">
+											<div class="col-6 col-lg-4 col-xl-3 input-group">
+													<input id="password" class="form-control pwd-input" type="password" name="Ingresa tu contraseña" placeholder="Ingresa tu contraseña">
+													<div class="input-group-append">
+															<span id="pwd-addon" class="input-group-text pwd-action" title="Clic aquí para mostrar/ocultar contraseña"><i
+																	class="icon-view mr-0"></i></span>
+													</div>
 											</div>
 											<div class="col-3 col-lg-2 col-xl-auto">
 												<button class="btn btn-primary btn-small flex mx-auto">Limpiar</button>
@@ -464,16 +468,19 @@
 												<input id="branchCode" name="branchCode" type="text" class="form-control" value="" placeholder="Código de la sucursal" />
 												<div class="help-block"></div>
 											</div>
-
 										</div>
 
-										<div class="row flex mb-4 mt-2 pl-5 justify-end items-center">
-											<div class="col-7 col-lg-4 col-xl-3">
-												<input id="password1" class="form-control pwd-input" type="password" placeholder="Ingresa tu contraseña">
-											</div>
-											<div class="col-auto">
-												<button class="btn btn-primary btn-small flex mx-auto">Agregar</button>
-											</div>
+										<div class="row flex mb-4 mt-2 pl-5 justify-end items-center form-group">
+												<div class="col-7 col-lg-4 col-xl-3 input-group">
+													<input id="password1" class="form-control pwd-input" type="password" name="Ingresa tu contraseña" placeholder="Ingresa tu contraseña">
+													<div class="input-group-append">
+															<span id="pwd-addon" class="input-group-text pwd-action" title="Clic aquí para mostrar/ocultar contraseña"><i
+																class="icon-view mr-0"></i></span>
+													</div>
+												</div>
+												<div class="col-auto">
+													<button class="btn btn-primary btn-small flex mx-auto">Agregar</button>
+												</div>
 										</div>
 									</div>
 								</form>
