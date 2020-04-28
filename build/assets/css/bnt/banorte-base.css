@@ -30,7 +30,7 @@ main.content {
 /* Footer */
 footer.main-footer {
 	display: flex;
-	padding: 4rem 2.5rem;
+	padding: 2rem 2.5rem;
 	color: var(--secondary);
 	background-color: var(--primary);
 }
