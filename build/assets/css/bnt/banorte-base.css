@@ -286,9 +286,9 @@ footer.main-footer {
 .form-control:focus:not([readonly]):not(:disabled) {
 	border: 1px solid var(--border-color);
 	outline: 0;
-	-webkit-box-shadow: 0 0 2px var(--primary-tint);
-	-moz-box-shadow: 0 0 2px var(--primary-tint);
-	box-shadow: 0 0 2px var(--primary-tint);
+	-webkit-box-shadow: 0 0 2px var(--border-color);
+	-moz-box-shadow: 0 0 2px var(--border-color);
+	box-shadow: 0 0 2px var(--border-color);
 }
 
 .form-control::-webkit-input-placeholder {
