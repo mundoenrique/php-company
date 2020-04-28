@@ -321,13 +321,14 @@ $.extend( true, $.fn.dataTable.defaults, {
 // PAGINACIÓN PARA LA TABLA DE RESULTADOS
 function paginar() {
 	$('.table-text-service').DataTable( {
+		'bDestroy':true,
         language: {
-			
-				paginate: {
-					previous: 'Anterior',
-					next:     'Siguiente'
-				},
-				"sInfo":"Mostrando registros del _START_ al _END_, de un total de _TOTAL_ registros",
+		
+			paginate: {
+				previous: 'Anterior',
+				next:     'Siguiente'
+			},
+			"sInfo":"Mostrando registros del _START_ al _END_, de un total de _TOTAL_ registros",
 		}
     } );
 }
