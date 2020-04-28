@@ -4,6 +4,7 @@
 body {
 	display: flex;
 	flex-direction: column;
+	font-family: var(--font-family-base-first);
 }
 
 /* Header */
@@ -2098,7 +2099,7 @@ i[class*=" icon-"].novoglyphs {
 
 
 .icon-user{
-	color: var(--disabled-color);
+	color: var(--border-color);
 	padding-right: 0 !important;
 }
 .icon-circle {
@@ -2642,12 +2643,12 @@ i[class*=" icon-"].novoglyphs {
 /* Table */
 
 td > button > i{
-	color: var(--primary);
+	color: var(--border-color);
   transition: .5s;
 }
 
 td > button > i:hover{
-	text-shadow: 3px 1px 2px var(--text-color);
+	text-shadow: 1px 1px 1px var(--text-color);
 }
 
 .dataTables_empty {

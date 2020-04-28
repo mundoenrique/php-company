@@ -12,6 +12,20 @@
   src: url('../../fonts/bnt/Gotham-Bold.ttf') format('truetype');
 }
 
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 300;
+  src: url('../../fonts/bnt/Roboto-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  src: url('../../fonts/bnt/Roboto-Bold.ttf') format('truetype');
+}
+
 :root {
   /* Colors */
   --primary: #EB0029;
@@ -32,11 +46,11 @@
   --bg-color: #f6f3f1;
 
 	--widget-color: #ffffff;
-	--shadows-color: #DDDDDD;
-  --border-color: #DDDDDD;
+	--shadows-color: #D0D0D0;
+  --border-color: #D0D0D0;
   --text-color: #4E4044;
-  --placeholder-color: #DDDDDD;
-	--disabled-color: #DDDDDD;
+  --placeholder-color: #D0D0D0;
+	--disabled-color: #f1f1f1;
 
 	--label-color: #4E4044;
   --primary-tint: #D10024;
@@ -59,7 +73,8 @@
   --semibold-font-weight: 700;
   --bold-font-weight: 700;
 
-  --font-family-base: 'Gotham Book', sans-serif;
+	--font-family-base-first: 'Gotham Book', sans-serif;
+	--font-family-base: 'Roboto', sans-serif;
   --font-family-monospace: monospace, "Courier New";
   --font-family-novoglyphs: 'novoglyphs';
   --font-size-base: .875rem;
