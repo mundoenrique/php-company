@@ -4,7 +4,7 @@
 body {
 	display: flex;
 	flex-direction: column;
-	font-family: var(--font-family-base-first);
+	font-family: var(--font-family-base-first) !important;
 }
 
 /* Header */
@@ -796,10 +796,10 @@ textarea.form-control {
 	margin-top: 29px;
 }
 
-.input-file + .js-label-file.has-file{
+/* .input-file + .js-label-file.has-file{
   color: var(--tertiary);
   border: .85px solid var(--tertiary);
-}
+} */
 
 .icon-upload::before {
 	margin-top: 2px !important;
@@ -2690,9 +2690,9 @@ td > button > i:hover{
 .dataTables_filter input:focus {
   border: 1px solid var(--border-color);
   outline: 0;
-  -webkit-box-shadow: 0 0 2px var(--primary-tint);
-  -moz-box-shadow: 0 0 2px var(--primary-tint);
-  box-shadow: 0 0 2px var(--primary-tint);
+  -webkit-box-shadow: 0 0 2px var(--border-color);
+  -moz-box-shadow: 0 0 2px var(--border-color);
+  box-shadow: 0 0 2px var(--border-color);
 }
 
 .dataTables_length select {
@@ -3207,7 +3207,7 @@ button.ui-button::-moz-focus-inner {
 /* Component containers
 ----------------------------------*/
 .ui-widget {
-	font-family: var(--font-family-base);
+	font-family: var(--font-family-base-first);
 	font-size: 1em;
 }
 .ui-widget .ui-widget {
@@ -3217,7 +3217,7 @@ button.ui-button::-moz-focus-inner {
 .ui-widget select,
 .ui-widget textarea,
 .ui-widget button {
-	font-family: var(--font-family-base);
+	font-family: var(--font-family-base-first);
 	font-size: 1em;
 }
 .ui-widget-content {
@@ -3559,18 +3559,19 @@ a.ui-button:active,
 .inactive-user {
 	align-items: center;
 	background:rgba(255, 247, 230, 1);
-	border-radius: 5px;
 	border: 1px solid var(--warning);
-	box-shadow: 2px 2px 3px 0px var(--warning);
-	color: var(--tertiary) !important;
+	/* box-shadow: 2px 2px 3px 0px var(--warning); */
+	color: var(--text-color) !important;
 	display: flex;
 	font-size: 12px;
 	font-weight: var(--semibold-font-weight);
-	height: 22px;
+	height: 33px;
 	letter-spacing: .016em;
 	padding: 0px 8px;
 	width: auto;
 	z-index: 1;
+	width: 175px;
+	line-height: 1rem;
 }
 
 .img-log{
