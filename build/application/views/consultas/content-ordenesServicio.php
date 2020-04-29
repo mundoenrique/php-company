@@ -197,7 +197,7 @@ if($osConfirmV){
 																</tr>";
 
                                 foreach ($value->lotes as $l) {
-                                  print_r($l->ctipolote);
+                              
 
 																		$ltr.="<tr class='OSinfo $value->idOrden'>";
 																		$ltr.="<td><a id='$l->acidlote' class='viewLo' title='Detalle lote'>$l->acnumlote</a></td>";
