@@ -184,5 +184,43 @@ class Novo_Bulk extends NOVO_Controller {
 		$this->views = ['bulk/'.$view];
 		$this->loadView($view);
 	}
+	/**
+	 * @info Método la solicitud de innominadas
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date April 29, 2020
+	 */
+	public function unnamedRequest()
+	{
+		log_message('INFO', 'NOVO Bulk: unnamedRequest Method Initialized');
+		$view = 'unnamedRequest';
+		array_push(
+			$this->includeAssets->jsFiles,
+			'bulk/unnamed_request'
+		);
+
+		$this->responseAttr();
+		$this->render->titlePage = 'Solicitud de innominadas';
+		$this->views = ['bulk/'.$view];
+		$this->loadView($view);
+	}
+	/**
+	 * @info Método la afiliación de innominadas
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date April 29, 2020
+	 */
+	public function unnamedAffiliate()
+	{
+		log_message('INFO', 'NOVO Bulk: unnamedAffiliate Method Initialized');
+		$view = 'unnamedAffiliate';
+		array_push(
+			$this->includeAssets->jsFiles,
+			'bulk/unnamed_affiliate'
+		);
+
+		$this->responseAttr();
+		$this->render->titlePage = 'Inventario de innominadas';
+		$this->views = ['bulk/'.$view];
+		$this->loadView($view);
+	}
 
 }

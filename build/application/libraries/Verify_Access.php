@@ -153,6 +153,12 @@ class Verify_Access {
 				case 'getDetailBulk':
 					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBCAR'));
 					break;
+				case 'unnamedRequest':
+					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TICARG'));
+					break;
+				case 'unnamedAffiliate':
+					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TIINVN'));
+					break;
 				case 'confirmBulk':
 					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBCAR', 'TEBCON'));
 					break;
