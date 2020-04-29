@@ -321,7 +321,7 @@
 				echo "<h2>".lang('TABLA_REG_MSJ')."</h2>";
 			}
 
-			if($data[0]->ctipolote=='N' && count($data[0]->registrosLoteReposicion) > 0 ){
+			if(($data[0]->ctipolote=='N' || $data[0]->ctipolote=='Q') && count($data[0]->registrosLoteReposicion) > 0 ){
 				//LOTES RENOVACIÓN
 				echo $html_view_results;
 				echo '
@@ -340,7 +340,7 @@
 					';
 				}
 				echo '</table></tbody>';
-			}elseif($data[0]->ctipolote=='N' && count($data[0]->registrosLoteReposicion) == 0 ) {
+			}elseif(($data[0]->ctipolote=='N'  || $data[0]->ctipolote=='Q') && count($data[0]->registrosLoteReposicion) == 0 ) {
 				echo "<h2>".lang('TABLA_REG_MSJ')."</h2>";
 			}
 		?>
