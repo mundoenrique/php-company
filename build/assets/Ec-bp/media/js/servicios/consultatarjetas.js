@@ -207,6 +207,8 @@ function cargarResultado(data) {
 	 serv_var.pgActual = parseInt(data.result.pagina, 10);
 
 	if (data.result.detalleEmisiones.length > 0) {
+		$('.table-text-service').dataTable().fnClearTable();
+        $('.table-text-service').dataTable().fnDestroy();
 		serv_var.TotalTjts += data.result.detalleEmisiones.length;
 		$('#textS').empty();
 		$('#textS').append('<em>Seleccionar todo (' + serv_var.TotalTjts + ' de ' + data.result.totalRegistros + ')</em>');
@@ -328,6 +330,7 @@ function paginar() {
 				previous: 'Anterior',
 				next:     'Siguiente'
 			},
+			"sEmptyTable": "Ningún dato disponible en esta tabla.",
 			"sInfo":"Mostrando registros del _START_ al _END_, de un total de _TOTAL_ registros",
 		}
     } );
