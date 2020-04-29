@@ -343,6 +343,30 @@
 			}elseif(($data[0]->ctipolote=='N'  || $data[0]->ctipolote=='Q') && count($data[0]->registrosLoteReposicion) == 0 ) {
 				echo "<h2>".lang('TABLA_REG_MSJ')."</h2>";
 			}
+			if($data[0]->ctipolote=='B' && count($data[0]->registrosLoteRecarga) > 0 ){
+				//LOTES BLOQUEO
+				echo $html_view_results;
+				echo '
+					<table id="table-lote-detail">
+						<thead>
+							<th id="td-nombre-2">'.lang('ID_PERSONA').'</th>
+							<th id="td-nombre-2">'.lang('TABLA_REG_REPOS_CTA').'</th>
+							<th id="td-nombre-2">'.lang('DESCRIPCION').'</th>
+						</thead>
+						<tbody>';
+				foreach ($data[0]->registrosLoteRecarga as $registros) {
+					echo '
+						<tr>
+							<td id="td-nombre-2">'.$registros->id_ext_per.'</td>
+							<td id="td-nombre-2">'.substr_replace($registros->nro_cuenta,'*************',0,-4).'</td>							
+							<td id="td-nombre-2">'.$registros->descripcion.'</td>							
+						</tr>
+					';
+				}
+				echo '</table></tbody>';
+			}elseif($data[0]->ctipolote=='B' && count($data[0]->registrosLoteRecarga) == 0 ) {
+				echo "<h2>".lang('TABLA_REG_MSJ')."</h2>";
+			}
 		?>
 	</div>
 
