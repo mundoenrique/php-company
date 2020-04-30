@@ -57,11 +57,6 @@ class Novo_User_Model extends NOVO_Model {
 			case 0:
 				$fullName = mb_strtolower($response->usuario->primerNombre).' ';
 				$fullName.= mb_strtolower($response->usuario->primerApellido);
-				$name = $response->usuario->primerNombre;
-				$firstName = $response->usuario->primerApellido;
-				$job = $response->usuario->cargo;
-				$area = $response->usuario->area;
-				$email = $response->usuario->email;
 				$formatDate = $this->config->item('format_date');
 				$formatTime = $this->config->item('format_time');
 				$lastSession = date(
@@ -79,11 +74,6 @@ class Novo_User_Model extends NOVO_Model {
 					'userId' => $response->usuario->idUsuario,
 					'userName' => $response->usuario->userName,
 					'fullName' => ucwords(mb_strtolower($fullName)),
-					'name' => $name,
-					'job' => $job,
-					'area' => $area,
-					'email' => $email,
-					'firstName'=> $firstName,
 					'codigoGrupo' => $response->usuario->codigoGrupo,
 					'lastSession' => $lastSession,
 					'token' => $response->token,
@@ -108,11 +98,6 @@ class Novo_User_Model extends NOVO_Model {
 					'userId' => $response->usuario->idUsuario,
 					'userName' => $response->usuario->userName,
 					'fullName' => ucwords(mb_strtolower($fullName)),
-					'name' => $name,
-					'firstName'=> $firstName,
-					'job' => $job,
-					'area' => $area,
-					'email' => $email,
 					'codigoGrupo' => $response->usuario->codigoGrupo,
 					'token' => $response->token,
 					'cl_addr' => $this->encrypt_connect->encode($_SERVER['REMOTE_ADDR'], $dataRequest->user, 'REMOTE_ADDR'),
@@ -468,7 +453,7 @@ class Novo_User_Model extends NOVO_Model {
 						'action'=> 'close'
 					]
 				];
-				$_SESSION['email'] = $dataRequest->email;
+				$this->session->email = $dataRequest->email;
 				break;
 			case -4:
 				$this->response->code = 1;
