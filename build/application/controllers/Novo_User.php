@@ -66,6 +66,7 @@ class Novo_User extends NOVO_Controller {
 			);
 		}
 
+		$this->render->skipProductInf = TRUE;
 		$this->render->titlePage = lang('GEN_SYSTEM_NAME');
 		$this->views = $views;
 		$this->loadView($view);
@@ -103,6 +104,7 @@ class Novo_User extends NOVO_Controller {
 		}
 
 		$this->render->titlePage = lang('GEN_SYSTEM_NAME');
+		$this->render->skipProductInf = TRUE;
 		$this->views = ['user/'.$view];
 		$this->loadView($view);
 
@@ -200,6 +202,7 @@ class Novo_User extends NOVO_Controller {
 
 			unset($this->includeAssets->jsFiles[$pos]);
 			$this->render->activeHeader = TRUE;
+			$this->render->skipProductInf = TRUE;
 			$this->render->titlePage = LANG('GEN_FINISH_TITLE');
 			$this->views = ['user/'.$view];
 			$this->loadView($view);
