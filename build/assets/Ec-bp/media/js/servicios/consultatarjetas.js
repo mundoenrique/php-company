@@ -325,7 +325,7 @@ function paginar() {
 	$('.table-text-service').DataTable( {
 		'bDestroy':true,
         language: {
-		
+
 			paginate: {
 				previous: 'Anterior',
 				next:     'Siguiente'
@@ -496,7 +496,7 @@ $(".table-text-service").on('click', '#BLOQUEO_TARJETA', function() {
 	op = 'bloqueo'
 	url = '/servicios/cambiarEstadotarjeta'
 
-	procesar('Bloquear de tarjeta',url,op)
+	procesar('Bloquear tarjeta',url,op)
 
 })
 
@@ -512,7 +512,7 @@ $(".table-text-service").on('click', '#DESBLOQUEO', function() {
 	op = 'desbloqueo'
 	url = '/servicios/cambiarEstadotarjeta'
 
-	procesar('Desbloquear de tarjeta',url,op)
+	procesar('Desbloquear tarjeta',url,op)
 
 })
 
