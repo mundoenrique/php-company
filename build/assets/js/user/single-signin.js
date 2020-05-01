@@ -7,9 +7,9 @@ $(function() {
 		form.submit()
 	} else {
 		data = getDataform(form)
+		data.currentTime = new Date().getHours();
 		verb = 'POST'; who = 'User'; where = 'singleSignon';
 		callNovoCore(verb, who, where, data, function (response) {
-			console.log(response)
 			$(location).attr('href', response.data)
 		});
 	}

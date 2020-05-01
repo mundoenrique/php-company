@@ -194,13 +194,44 @@ class Novo_User_Model extends NOVO_Model {
 
 		switch ($this->isResponseRc) {
 			case 0:
+			case -2:
+			case -185:
+				$fullName = mb_strtolower($response->usuario->primerNombre).' ';
+				$fullName.= mb_strtolower($response->usuario->primerApellido);
+				$formatDate = $this->config->item('format_date');
+				$formatTime = $this->config->item('format_time');
+				$lastSession = date(
+					"$formatDate $formatTime", strtotime(
+						str_replace('/', '-', $response->usuario->fechaUltimaConexion)
+					)
+				);
+				$time = (object) [
+					'customerTime' => (int) $dataRequest->currentTime,
+					'serverTime' => (int) date("H")
+				];
+				$userData = [
+					'sessionId' => $response->logAccesoObject->sessionId,
+					'logged' => TRUE,
+					'userId' => $response->usuario->idUsuario,
+					'userName' => $response->usuario->userName,
+					'fullName' => ucwords(mb_strtolower($fullName)),
+					'codigoGrupo' => $response->usuario->codigoGrupo,
+					'lastSession' => $lastSession,
+					'token' => $response->token,
+					'time' => $time,
+					'cl_addr' => $this->encrypt_connect->encode($_SERVER['REMOTE_ADDR'], $this->country, 'REMOTE_ADDR'),
+					'countrySess' => $this->config->item('country'),
+					'countryUri' => $this->config->item('country-uri'),
+				];
+				$this->session->set_userdata($userData);
+				$this->response->code = 0;
 				$this->response->data = base_url(lang('GEN_ENTERPRISE_LIST'));
 				break;
-
 			default:
 				$this->response->data = base_url('ingresar/fin');
 				break;
 		}
+
 		return $this->responseToTheView('callWs_SingleSignon');
 	}
 	/**
