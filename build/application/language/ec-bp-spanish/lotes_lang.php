@@ -53,6 +53,7 @@ $lang['POSITION_AUTH'] = 'Autorización';
 $lang['POSITION_INNO'] = 'Innominadas';
 $lang['POSITION_INVENINNO'] = 'Afiliación';
 $lang['TITULO_TARJETA'] = 'Nro. Tarjeta';
+$lang['DESCRIPCION'] = 'Descripción';
 
 
 //AUTORIZACION DE LOTES
