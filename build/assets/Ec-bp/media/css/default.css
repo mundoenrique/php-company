@@ -7438,6 +7438,16 @@ button.green:hover {
 	display: none;
 }
 
+a.paginate_button:hover {
+	background: none;
+	color: #bbbbbb!important;
+  }
+   
+a.paginate_button.current {
+	background: none;
+	color: #bbbbbb!important;
+  }
+
 .title-detalles-tabla{
 	padding: 10px;
 	margin-left: 10px;
