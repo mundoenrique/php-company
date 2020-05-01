@@ -63,6 +63,7 @@ $route['(:any)/inicio/(:any)'] = "Novo_User/login";
 $route['(:any)/cerrar-sesion/(:any)'] = "Novo_User/finishSession/$2";
 $route['(:any)/recuperar-clave'] = "Novo_User/recoverPass";
 $route['(:any)/cambiar-clave'] = "Novo_User/changePassword";
+$route['(:any)/cambiar-email'] = "Novo_User/changeEmail";
 //Information
 $route['(:any)/inf-beneficios'] = "Novo_Information/benefits";
 $route['(:any)/inf-condiciones'] = "Novo_Information/terms";

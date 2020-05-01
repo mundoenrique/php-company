@@ -75,41 +75,41 @@
 								<div class="row my-2">
 									<div class="form-group col-12">
 										<span aria-hidden="true" class="icon icon-user"></span>
-										<span id="userName">Pedro</span>
+										<span id="userName"><?= $fullName ?></span>
 									</div>
 								</div>
 								<div class="row mb-2">
 									<div class="form-group col-3">
 										<label for="firstName" id="firstName">Nombre</label>
-										<span id="firstNameUser" class="form-control px-1" readonly="readonly">Pedro</span>
+										<span id="firstNameUser" class="form-control px-1" readonly="readonly"><?= $name ?></span>
 									</div>
 
 									<div class="form-group col-3">
 										<label for="lastName" id="lastName">Apellido</label>
-										<span id="firstNameUser" class="form-control px-1" readonly="readonly">Perez</span>
+										<span id="firstNameUser" class="form-control px-1" readonly="readonly"><?= $firstName ?></span>
 									</div>
 
 									<div class="form-group col-3">
 										<label for="ocupation" id="ocupation">Cargo</label>
-										<span id="ocupationUser" class="form-control px-1" readonly="readonly">Analista</span>
+										<span id="ocupationUser" class="form-control px-1" readonly="readonly"><?= $job ?></span>
 									</div>
 
 									<div class="form-group col-3">
 										<label for="area" id="area">Área</label>
-										<span id="areaUser" class="form-control px-1" readonly="readonly">Tecnologia</span>
+										<span id="areaUser" class="form-control px-1" readonly="readonly"><?= $area ?></span>
 									</div>
 								</div>
-								<form method="post">
+								<form id="formChangeEmail">
 									<div class="row">
 										<div class="form-group col-6 col-lg-5 col-xl-6">
-											<label for="emailUser" id="emailUser">Correo</label>
-											<input type="email" class="form-control" id="emailUser" name="emailUser">
+											<label for="email" id="email">Correo</label>
+											<input type="email" class="form-control" id="currentEmail" name="email" value="<?= $email ?>">
 											<div class="help-block"></div>
 										</div>
 									</div>
 									<div class="row">
 										<div class="col-6 flex justify-end">
-											<button id="changesSave" class="btn btn-primary btn-small" type="submit">Guardar cambios</button>
+											<button id="btnChangeEmail" class="btn btn-primary btn-small" type="submit">Guardar cambios</button>
 										</div>
 									</div>
 								</form>
@@ -122,7 +122,7 @@
 								<i class="flex mr-1 pl-2 icon icon-chevron-down flex-auto" aria-hidden="true"></i>
 							</span>
 							<div class="section my-2 px-5">
-								<form method="post">
+								<form id="formChangePass">
 									<div class="container">
 										<div class="row">
 											<div class="col-6">
@@ -130,7 +130,7 @@
 													<div class="form-group col-12 col-lg-12">
 														<label for="currentUserPwd">Contraseña actual</label>
 														<div class="input-group">
-															<input id="currentUserPwd" class="form-control pwd-input" type="password" name="currentUserPwd">
+															<input id="currentUserPwd" class="form-control pwd-input" type="password" name="currentPass" required>
 															<div class="input-group-append">
 																<span id="pwd-addon" class="input-group-text pwd-action" title="Clic aquí para mostrar/ocultar contraseña"><i
 																		class="icon-view mr-0"></i></span>
@@ -141,7 +141,7 @@
 													<div class="form-group col-12 col-lg-6">
 														<label for="newUserPwd">Nueva Contraseña</label>
 														<div class="input-group">
-															<input id="newUserPwd" class="form-control pwd-input" type="password" name="newUserPwd">
+															<input id="newUserPwd" class="form-control pwd-input" type="password" name="newPass" required>
 															<div class="input-group-append">
 																<span id="pwd-addon" class="input-group-text pwd-action" title="Clic aquí para mostrar/ocultar contraseña"><i
 																		class="icon-view mr-0"></i></span>
@@ -152,7 +152,7 @@
 													<div class="form-group col-12 col-lg-6">
 														<label for="confirmUserPwd">Confirmar Contraseña</label>
 														<div class="input-group">
-															<input id="confirmUserPwd" class="form-control pwd-input" type="password" name="confirmUserPwd">
+															<input id="confirmUserPwd" class="form-control pwd-input" type="password" name="confirmPass" required>
 															<div class="input-group-append">
 																<span id="pwd-addon" class="input-group-text pwd-action" title="Clic aquí para mostrar/ocultar contraseña"><i
 																		class="icon-view mr-0"></i></span>
@@ -184,7 +184,7 @@
 										</div>
 										<div class="row">
 											<div class="col-6 flex justify-end">
-												<button id="changesSave1" class="btn btn-primary btn-small" type="submit">Guardar cambios</button>
+												<button id="btnChangePass" class="btn btn-primary btn-small" type="button">Guardar cambios</button>
 											</div>
 										</div>
 									</div>
@@ -202,20 +202,17 @@
 								<div class="row mb-2">
 									<div class="form-group col-12 col-lg-8 col-xl-6">
 										<label class="mt-1">Empresa</label>
-										<select class="select-box custom-select mb-3 h6 w-100">
-											<option selected disabled>Seleccionar</option>
-											<option>Option 1</option>
-											<option>Option 2</option>
-											<option>Option 3</option>
-										</select>
+
 									</div>
 								</div>
-
-								<div class="row">
+								<div class="row" id="blockEnterprice">
 									<div class="form-group mb-3 col-6 col-lg-4 col-xl-4">
 										<label for="idNumber" id="idNumber">Nro. identificador</label>
-										<span id="idNumberUser" class="form-control px-1" readonly="readonly">20602985971</span>
+										<span id="idNumberUser" class="form-control px-1" readonly="readonly">
+
+										</span>
 									</div>
+
 
 									<div class="form-group mb-3 col-6 col-lg-4 col-xl-4">
 										<label for="compName" id="compName">Nombre</label>
@@ -243,6 +240,7 @@
 											amet</span>
 									</div>
 								</div>
+
 
 								<form action="post">
 									<div class="row">

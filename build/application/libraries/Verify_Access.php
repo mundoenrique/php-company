@@ -134,8 +134,11 @@ class Verify_Access {
 					}
 					break;
 				case 'changePassword':
-					$auth = ($this->CI->session->flashdata('changePassword') != NULL);
+					$auth = ($this->CI->session->flashdata('changePassword') != NULL || ($this->CI->session->has_userdata('logged')));
 					break;
+					case 'changeEmail':
+						$auth = (($this->CI->session->has_userdata('logged')));
+						break;
 				case 'rates':
 					$auth = ($this->CI->session->has_userdata('logged') && $countryUri === 've');
 					break;

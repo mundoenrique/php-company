@@ -278,6 +278,8 @@ class Novo_User_Model extends NOVO_Model {
 	 * @info Método para el cambio de Contraseña
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date April 29th, 2019
+	 * @modified Diego Acosta García
+	 * @date April 29th, 2020
 	 */
 	public function CallWs_ChangePassword_User($dataRequest)
 	{
@@ -287,13 +289,24 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataAccessLog->modulo = 'Usuario';
 		$this->dataAccessLog->function = 'Clave';
 		$this->dataAccessLog->operation = 'Cambiar Clave';
-
 		$this->dataRequest->idOperation = 'cambioClave';
 		$this->dataRequest->userName = $this->userName;
-		$this->dataRequest->passwordOld = $dataRequest->currentPass;
-		$this->dataRequest->password = $dataRequest->newPass;
+
+		$current = json_decode(base64_decode($dataRequest->currentPass));
+		$current = $this->cryptography->decrypt(
+			base64_decode($current->plot),
+			utf8_encode($current->password)
+		);
+		$new = json_decode(base64_decode($dataRequest->newPass));
+		$new = $this->cryptography->decrypt(
+			base64_decode($new->plot),
+			utf8_encode($new->password)
+		);
+
+		$this->dataRequest->passwordOld = md5($current);
+		$this->dataRequest->password = md5($new);
 		$changePassType = $this->session->flashdata('changePassword');
-		$response = $this->sendToService(lang('GEN_CHANGE_PASS'));
+		$this->sendToService('CallWs_ChangePassword');
 
 		switch($this->isResponseRc) {
 			case 0:
@@ -330,8 +343,7 @@ class Novo_User_Model extends NOVO_Model {
 				]
 			];
 		}
-
-		return $this->responseToTheView(lang('GEN_CHANGE_PASS'));
+		return $this->responseToTheView('CallWs_ChangePassword');
 	}
 	/**
 	 * @info Método para el cierre de sesión
@@ -408,4 +420,63 @@ class Novo_User_Model extends NOVO_Model {
 
 		return $result["score"] <= $this->config->item('score_recaptcha')[ENVIRONMENT] ? 'fail' : 'done';
 	}
+
+
+	/**
+	 * @info Método para el cambio de Email
+	 * @author Diego Acosta García
+	 * @date April 29th, 2020
+	 */
+	public function CallWs_ChangeEmail_User($dataRequest)
+	{
+		log_message('INFO', 'NOVO User Model: ChangeEmail Method Initialized');
+
+		$this->className = 'com.novo.objects.TOs.UsuarioTO';
+		$this->dataAccessLog->modulo = 'getActualizarUsuario';
+		$this->dataAccessLog->function = 'getActualizarUsuario';
+		$this->dataAccessLog->operation = 'getActualizarUsuario';
+		$this->dataRequest->idOperation = 'getActualizarUsuario';
+		$this->dataRequest->idUsuario = $this->userName;
+		$this->dataRequest->userName = $this->userName;
+		$this->dataRequest->email = $dataRequest->email;
+		$this->sendToService('CallWs_ChangeEmail');
+
+		switch($this->isResponseRc) {
+			case 0:
+				$this->response->code = 0;
+				$this->response->msg = lang('RESP_EMAIL_CHANGED');
+				$this->response->icon = lang('GEN_ICON_SUCCESS');
+				$this->response->data = [
+					'btn1'=> [
+						'text'=> lang('GEN_BTN_CONTINUE'),
+						'link'=> 'inicio',
+						'action'=> 'close'
+					]
+				];
+				$this->session->email = $dataRequest->email;
+				break;
+			case -4:
+				$this->response->code = 1;
+				$this->response->msg = lang('RESP_EMAIL_USED');
+				break;
+			case -22:
+				$this->response->code = 1;
+				$this->response->msg = lang('RESP_EMAIL_INCORRECT');
+				break;
+		}
+
+		if($this->isResponseRc != 0 && $this->response->code == 1) {
+			$this->response->title = lang('GEN_EMAIL_CHANGE_TITLE');
+			$this->response->icon = lang('GEN_ICON_WARNING');
+			$this->response->data = [
+				'btn1'=> [
+					'action'=> 'close'
+				]
+			];
+		}
+
+		return $this->responseToTheView('CallWs_ChangeEmail');
+	}
+
+
 }

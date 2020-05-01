@@ -16,7 +16,8 @@ class Novo_Settings extends NOVO_Controller {
 	/**
 	 * @info Método para renderizar el modulo de configuración
 	 * @author Luis Molina
-	 * @date Mar 23Mon, 2020
+	 * @modified Diego Acosta García
+	 * @date Mar 30/04/2020
 	 */
 	public function options()
 	{
@@ -32,11 +33,29 @@ class Novo_Settings extends NOVO_Controller {
 			$this->includeAssets->jsFiles,
 			"third_party/dataTables-1.10.20",
 			"settings/ceo_load_lots",
-			"settings/settings"
+			"third_party/jquery.validate",
+			"validate".$this->render->newViews."-forms",
+			"third_party/additional-methods",
+			"settings/settings",
+			"user/pass_validate"
 		);
+
+		$this->load->model('Novo_User_Model', 'User');
+		$this->render->fullName = $this->session->fullName;
+		$this->render->name = $this->session->name;
+		$this->render->firstName = $this->session->firstName;
+		$this->render->job = $this->session->job;
+		$this->render->area = $this->session->area;
+		$CI = &get_instance();
+		$this->render->email = $CI->session->userdata('email') ;
+
+		$this->load->model('Novo_Business_Model', 'Business');
+		$enterpriseList = $this->Business->callWs_getEnterprises_Business(TRUE);
+		$this->render->enterpriseList1 = $enterpriseList->data->list;
 
 		$this->render->titlePage =lang('GEN_SETTINGS_TITLE');
 		$this->views = ['settings/'.$view];
 		$this->loadView($view);
 	}
+
 }
