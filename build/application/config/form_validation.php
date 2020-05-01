@@ -65,17 +65,17 @@ $config = [
 		[
 			'field' => 'currentPass',
 			'label' => 'currentPass',
-			'rules' => 'trim|regex_match[/^([\w!@\*\-\?¡¿+\/.,#]+)+$/i]|required'
+			'rules' => 'trim|regex_match[/^([a-zA-Z0-9=]+)+$/i]|required'
 		],
 		[
 			'field' => 'newPass',
 			'label' => 'newPass',
-			'rules' => 'trim|regex_match[/^([\w!@\*\-\?¡¿+\/.,#]+)+$/i]|differs[currentPass]|required'
+			'rules' => 'trim|regex_match[/^([a-zA-Z0-9=]+)+$/i]|required'
 		],
 		[
 			'field' => 'confirmPass',
 			'label' => 'confirmPass',
-			'rules' => 'trim|regex_match[/^([\w!@\*\-\?¡¿+\/.,#]+)+$/i]|matches[newPass]|required'
+			'rules' => 'trim|regex_match[/^([a-zA-Z0-9=]+)+$/i]|required'
 		]
 	],
 	'getProducts' => [
