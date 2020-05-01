@@ -197,6 +197,7 @@ if($osConfirmV){
 																</tr>";
 
                                 foreach ($value->lotes as $l) {
+                              
 
 																		$ltr.="<tr class='OSinfo $value->idOrden'>";
 																		$ltr.="<td><a id='$l->acidlote' class='viewLo' title='Detalle lote'>$l->acnumlote</a></td>";
@@ -212,13 +213,20 @@ if($osConfirmV){
                                 }
                                 echo "
 									<tr id='$value->idOrden' aplica-costo='$value->aplicaCostD'>
-									<td class='OS-icon'>
-									<a id='ver_lotes' title='Ver lotes'>
-									<span aria-hidden='true' class='icon' data-icon='&#xe003;'></span>
-									</a>
-									<a id='dwnPDF' title='Descargar como PDF'>
-									<span aria-hidden='true' class='icon' data-icon='&#xe02e;'></span>
-									</a>";
+                  <td class='OS-icon'>";
+                  if($pais=='Ec-bp' && $l->ctipolote === 'Z'){
+                   echo "<a id='dwnPDF' title='Descargar como PDF'>
+                   <span aria-hidden='true' class='icon' data-icon='&#xe02e;'></span>
+                   </a>";
+                  }else{
+                    echo "<a id='ver_lotes' title='Ver lotes de detalles'>
+                    <span aria-hidden='true' class='icon' data-icon='&#xe003;'></span>
+                    </a>
+                    <a id='dwnPDF' title='Descargar como PDF'>
+                    <span aria-hidden='true' class='icon' data-icon='&#xe02e;'></span>
+                    </a>";
+                  }
+								
                                 if(($value->nofactura!=''&&$value->fechafactura!='')&&($pais=='Ve')){
 
                                     if($datos->facturacion){
