@@ -164,6 +164,7 @@ if(!function_exists('languajeLoad')) {
 			case 'bnt':
 				$languages = [
 					'login' => ['login'],
+					'recoverPass'	=> ['validate'],
 					'options' => ['settings']
 				];
 				break;

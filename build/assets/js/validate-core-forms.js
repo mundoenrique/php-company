@@ -17,20 +17,10 @@ function validateForms(form) {
 	var text = /^['a-z0-9ñáéíóú ,.:()']+$/i;
 	var usdAmount = /^[0-9]+(\.[0-9]*)?$/;
 	var fiscalReg = lang.VALIDATE_FISCAL_REGISTRY;
-	var rifName = {
-		'bp': /^(00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23|24)+(6|9)[\d]{5,6}[\d]{3,4}$/,
-		'co': /^([0-9]{9,17})/,
-		'pe': /^(10|15|16|17|20)[\d]{8}[\d]{1}$/,
-		'us': /^(10|15|16|17|20)[\d]{8}[\d]{1}$/,
-		've': /^([VEJPGvejpg]{1})-([0-9]{8})-([0-9]{1}$)/
-	};
 	var date = {
 		dmy: /^(0?[1-9]|[12][0-9]|3[01])\/(0?[1-9]|1[012])\/[0-9]{4}$/,
 		my: /^(0?[1-9]|1[012])\/[0-9]{4}$/,
 		y: /^[0-9]{4}$/,
-	};
-	var amount = {
-		'bp': usdAmount
 	};
 	var defaults = {
 		debug: true,
@@ -48,7 +38,8 @@ function validateForms(form) {
 			"user_login":	{required: true, pattern: alphanumunder},
 			"user_pass": 	{verifyRequired: '#user_login', verifyPattern: '#user_login'},
 			"user-name": 	{required: true, pattern: alphanumunder},
-			"id-company": 	{required: true, pattern: fiscalReg},
+			"id-company": 	{required: true, fiscalRegistry: true},
+			"email": 	{required: true, pattern: emailValid},
 			"branch-office": 	{requiredBranchOffice: true},
 			"type-bulk": 	{requiredTypeBulk: true},
 			"file-bulk":	{required: true, extension: lang.VALIDATE_FILES_EXTENSION, sizeFile: true},
@@ -95,6 +86,9 @@ function validateForms(form) {
 				verifyRequired: lang.VALIDATE_USERPASS_REQ,
 				verifyPattern: lang.VALIDATE_USERPASS_PATT
 			},
+			"user-name": lang.VALIDATE_USERNAME,
+			"id-company": lang.VALIDATE_ID_COMPANY,
+			"email": lang.VALIDATE_EMAIL,
 			"branch-office": lang.VALIDATE_BRANCH_OFFICE,
 			"type-bulk": lang.VALIDATE_BULK_TYPE,
 			"file-bulk": {
@@ -140,7 +134,8 @@ function validateForms(form) {
 	}
 
 	$.validator.methods.fiscalRegistry = function(value, element, param) {
-		return fiscalReg[validCountry].test(value);
+		var RegExpfiscalReg = new RegExp(fiscalReg, 'i')
+		return RegExpfiscalReg.test(value);
 	}
 
 	$.validator.methods.validatePass = function(value, element, param) {
