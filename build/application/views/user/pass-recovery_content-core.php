@@ -1,0 +1,40 @@
+<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
+
+<div class="pt-3 pb-5 bg-color">
+	<div class="logout-content max-width-4 mx-auto p-responsive py-4">
+		<h1 class="primary h0"><?= lang('GEN_RECOVER_PASS_TITLE'); ?></h1>
+		<section>
+			<hr class="separador-one">
+			<div class="pt-3">
+				<p><?= novoLang(lang('RECOVER_PASS_FORGOTTEN'), lang('GEN_SYSTEM_NAME')); ?></p>
+				<div class="max-width-1 fit-lg mx-auto pt-3">
+					<form id="form-pass-recovery">
+						<div class="row  mb-2">
+							<div class="form-group col-lg-auto">
+								<label for="idUser"><?= lang('GEN_USER'); ?></label>
+								<input id="user-name" name="user-name" class="form-control" type="text" maxlength="15">
+								<div class="help-block"></div>
+							</div>
+							<div class="form-group col-lg-auto">
+								<label for="id-company"><?= novoLang(lang('RECOVER_PASS_FISCAL_REGISTRY'), lang('GEN_FISCAL_REGISTRY')); ?></label>
+								<input id="id-company" name="id-company" class="form-control" type="text" maxlength="17"
+									placeholder="<?= lang('PLACE_HOLDER_FISCAL_REGISTER'); ?>">
+								<div class="help-block"></div>
+							</div>
+							<div class="form-group col-lg-auto">
+								<label for="email"><?= lang('GEN_EMAIL'); ?></label>
+								<input id="email" name="email" class="form-control" type="text" maxlength="64" placeholder="<?= lang('GEN_PLACE_HOLDER_EMAIL') ?>">
+								<div class="help-block"></div>
+							</div>
+						</div>
+						<hr class="separador-one">
+						<div class="flex items-center justify-end pt-3">
+							<a class="btn underline" href="<?= base_url('inicio') ?>"><?= lang('GEN_BTN_CANCEL'); ?></a>
+							<button id="btn-pass-recover" class="btn btn-primary btn-loading" type="submit"><?= lang('GEN_BTN_CONTINUE'); ?></button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</section>
+	</div>
+</div>

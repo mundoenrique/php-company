@@ -10,8 +10,6 @@ $lang['GEN_PLACE_PASSWORD'] = 'Código de seguridad';
 //BUTTONS
 $lang['GEN_BTN_DISASS_AUTH'] = 'En espera de autorización';
 $lang['GEN_BTN_AUTHORIZE'] = 'Aceptar';
-//MODAL STYLES
-$lang['GEN_MODAL_WIDTH'] = 370;
 //DATATABLES
 $lang['GEN_TABLE_SELECT_AUTH'] = 'single';
 $lang['GEN_TABLE_COMMISSION'] = 'Valor comisión';

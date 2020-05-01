@@ -126,6 +126,8 @@ class Novo_User extends NOVO_Controller {
 			"third_party/additional-methods"
 		);
 		$this->render->titlePage = lang('GEN_RECOVER_PASS_TITLE');
+		$this->render->activeHeader = TRUE;
+		$this->render->skipProductInf = TRUE;
 		$this->views = ['user/'.$view];
 		$this->loadView($view);
 	}

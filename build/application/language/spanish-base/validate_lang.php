@@ -1,16 +1,10 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 //VALIDATE FORMS
-$lang['VALIDATE_ERROR'] = 'validate-error';
-$lang['VALIDATE_VALID'] = 'success';
-$lang['VALIDATE_SUCCESS'] = ' ';
-$lang['VALIDATE_IGNORE'] = '.ignore';
-$lang['VALIDATE_ELEMENT'] = 'label';
 $lang['VALIDATE_USERLOGIN'] = '';
-$lang['VALIDATE_INVALID_USER'] = 'error-login-2';
-$lang['VALIDATE_INACTIVE_USER'] = 'login-inactive';
 $lang['VALIDATE_USERPASS_REQ'] = 'Ambos campos son requeridos';
 $lang['VALIDATE_USERPASS_PATT'] = 'Combinación incorrecta de usuario y contraseña';
+$lang['VALIDATE_FISCAL_REGISTRY'] = '/^(10|15|16|17|20)[\d]{8}[\d]{1}$/';
 $lang['VALIDATE_BRANCH_OFFICE'] = 'Selecciona una sucursal';
 $lang['VALIDATE_BULK_TYPE'] = 'Selecciona un tipo de lote';
 $lang['VALIDATE_FILES_EXTENSION'] = 'xls|xlsx|txt';

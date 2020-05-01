@@ -124,7 +124,7 @@ class Verify_Access {
 			switch($module) {
 				case 'recoverPass':
 				case 'benefits':
-					$clients = ['novo', 'pichincha'];
+					$clients = ['novo', 'pichincha', 'banorte'];
 					$auth = in_array($this->CI->config->item('client'), $clients);
 					break;
 				case 'terms':

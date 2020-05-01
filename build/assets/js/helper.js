@@ -176,7 +176,7 @@ function notiSystem(title, message, icon, data) {
 		draggable: false,
 		resizable: false,
 		closeOnEscape: false,
-		minWidth: lang.GEN_MODAL_WIDTH,
+		minWidth: lang.CONF_MODAL_WIDTH,
 		maxHeight: 350,
 		dialogClass: "border-none",
 		classes: {

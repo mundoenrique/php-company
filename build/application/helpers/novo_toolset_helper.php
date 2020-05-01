@@ -127,10 +127,10 @@ if(!function_exists('languajeLoad')) {
 		$langFiles = $langFiles ?: $CI->router->fetch_method();
 		$languagesFile = [];
 		$lanGeneral = ['bdb', 'bp', 'bnt', 'co', 've'];
-		$lanValidate = ['bdb', 'bnt'];
+		$lanValidate = ['bdb'];
 		$loadLanguages = FALSE;
 		$client = !$client ? 'default_lang' : $client;
-		log_message('INFO', 'NOVO Language '.$call.', HELPER: languajeLoad Initialized for controller: '.$class. ' and method: '.$langFiles);
+		log_message('INFO', 'NOVO Language '.$call.', HELPER: Language Load Initialized for controller: '.$class. ' and method: '.$langFiles);
 
 		switch($client) {
 			case 'bp':
