@@ -3,7 +3,7 @@ $(function () {
 	var userCred, forWho, forWhere;
 	var userLogin = $('#user_login');
 	var userPass = $('#user_pass');
-	var loginIpMsg, formcodeOTP, btn;
+	var loginIpMsg, formcodeOTP, btn, btnTextOtp;
 	$.balloon.defaults.css = null;
 	insertFormInput(false);
 	inputDisabled(false);
@@ -62,6 +62,7 @@ $(function () {
 		insertFormInput(false);
 		inputDisabled(false);
 		$('#login-btn').html(btnText);
+		$('#send-otp-btn').html(btnTextOtp);
 		userPass.val('');
 		if (country == 'bp') {
 			userLogin.val('');
@@ -124,19 +125,17 @@ $(function () {
 			restartFormLogin();
 		},
 		2: function (response) {
-
 			if(response.ipInvalid){
-
 				restartFormLogin();
 				var oldID = $('#accept').attr('id');
 				$('#accept').attr('id', 'send-otp-btn');
 				btn = response.data.btn1;
 
-				loginIpMsg ='<form id="formVerificationOTP" class="mr-2" method="post">';
+				loginIpMsg ='<form id="formVerificationOTP" name="formVerificationOTP" class="mr-2" method="post">';
 				loginIpMsg+='<p class="pt-0 pl-0 justify">'+response.msg+'</p>';
 				loginIpMsg+='<div class="row">';
 				loginIpMsg+=	'<div class="form-group col-7">';
-				loginIpMsg+=	'<label for="codeOTP">'+response.labelInput+'<span class="danger">*</span></label>';
+				loginIpMsg+=	'<label id="label_codeOTP" for="codeOTP">'+response.labelInput+'<span class="danger">*</span></label>';
 				loginIpMsg+=	'<input id="codeOTP" class="form-control" type="text" name="codeOTP">';
 				loginIpMsg+=    '<div id="msgErrorCodeOTP" class="help-block"></div>';
 				loginIpMsg+=	'</div>';
@@ -144,38 +143,18 @@ $(function () {
 				loginIpMsg+='<div class="form-group custom-control custom-switch mb-0">';
 				loginIpMsg+=	'<input id="acceptAssert" class="custom-control-input" type="checkbox" name="acceptAssert"> ';
 				loginIpMsg+=	'<label class="custom-control-label" for="acceptAssert">'+response.assert+'</label>';
-				loginIpMsg+=	'<div class="help-block"></div>';
 				loginIpMsg+='</div>';
-        loginIpMsg+='</form>';
+        		loginIpMsg+='</form>';
 
 				notiSystem(response.title, loginIpMsg, response.icon,response.data);
-				$("#system-msg").width('auto');
-				$("#system-info").dialog("option", "minWidth", 480);
-				if (country == 'bp' | country == 'bdb') {
-					$("#system-info").dialog("option", "position", {
-						my: "center top+100",
-						at: "center top",
-						of: window
-					});
+				windowsStyle();
 
-					var styles = {
-						float : "none",
-						margin: "auto"
-					};
-					$("#system-info .ui-dialog-buttonpane").css(styles);
-				}
-				else {
-					$("#system-info").dialog("option", "position", {
-						my: "center top+160",
-						at: "center top",
-						of: window
-					});
-				}
 				formcodeOTP = $('#formVerificationOTP');
 
 				$('#send-otp-btn').on('click', function() {
+					btnTextOtp = $('#send-otp-btn').html();
 					formInputTrim(formcodeOTP);
-					validateForms(formcodeOTP);
+					validateForms(formcodeOTP,{handleMsg: true, modal:true});
 					if(formcodeOTP.valid()){
 						$(this)
 						.off('click')
@@ -185,6 +164,7 @@ $(function () {
 						validateLogin();
 					}
 				});
+				restartFormLogin();
 			} else{
 				userCred.active = 1; forWhere = lang.GEN_LOGIN;
 				validateLogin();
@@ -212,8 +192,8 @@ $(function () {
 			}
 		},
 		4: function () {
-
 			$('#login-btn').html(btnText);
+			restartFormLogin();
 		}
 	}
 
@@ -231,4 +211,34 @@ $(function () {
 
 function inputDisabled(disable) {
 	$('#login-form input').attr('disabled', disable);
+}
+
+function windowsStyle(){
+	$("#system-msg").width('auto');
+	$("#system-info").dialog("option", "minWidth", 480);
+
+	if(country != 'bdb'){
+		$("#label_codeOTP").addClass("line-field");
+		$("#codeOTP").addClass("input-field");
+	}
+	
+	if (country == 'bp' | country == 'bdb') {
+		$("#system-info").dialog("option", "position", {
+			my: "center top+100",
+			at: "center top",
+			of: window
+		});
+		var styles = {
+			float : "none",
+			margin: "auto"
+		};
+		$("#system-info .ui-dialog-buttonpane").css(styles);
+	}
+	else {
+		$("#system-info").dialog("option", "position", {
+			my: "center top+160",
+			at: "center top",
+			of: window
+		});
+	}
 }

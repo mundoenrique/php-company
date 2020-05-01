@@ -40,10 +40,10 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataRequest->password = md5($password);
 		$this->dataRequest->ctipo = $dataRequest->active;
 		$this->dataRequest->codigoOtp =[
- 		'tokenCliente' => isset($dataRequest->codeOTP)?$dataRequest->codeOTP:'',
+ 		'tokenCliente' => $dataRequest->codeOTP !='' ? $dataRequest->codeOTP : '',
  		'authToken' => $authToken
 		];
-		$this->dataRequest->guardaIp =isset($dataRequest->saveIp)?$dataRequest->saveIp:false;
+		$this->dataRequest->guardaIp = $dataRequest->saveIP !='' ? $dataRequest->saveIP : false;
 
 		if($this->config->item('active_recaptcha')) {
 			$this->isResponseRc = $this->callWs_validateCaptcha_User($dataRequest);
