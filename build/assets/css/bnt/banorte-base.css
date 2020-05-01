@@ -3896,6 +3896,20 @@ td > table.detail-lot {
 	background-color: rgba(255, 255, 255, 1) !important;
 }
 
+ul.pwd-rules li.pwd-rules-item {
+	margin-bottom: .5rem;
+	font-size: 11px;
+	letter-spacing: .016em;
+}
+
+ul.pwd-rules li.pwd-rules-item.rule-valid {
+	color: #43b581;
+}
+
+ul.pwd-rules li.pwd-rules-item.rule-invalid {
+	color: var(--danger);
+}
+
 .tool-ellipsis {
 	text-overflow: ellipsis;
 	white-space:nowrap;
