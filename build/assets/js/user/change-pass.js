@@ -38,9 +38,9 @@ $(function() {
 			}
 
 			var passData = {
-				currentPass: $.md5(currentPass),
-				newPass: $.md5(newPass),
-				confirmPass: $.md5(confirmPass)
+				currentPass: cryptoPass(currentPass),
+				newPass: cryptoPass(newPass),
+				confirmPass: cryptoPass(confirmPass)
 			}
 
 			$('#form-change-pass input, #form-change-pass button').attr('disabled', true);
