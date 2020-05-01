@@ -4,6 +4,7 @@
 body {
 	display: flex;
 	flex-direction: column;
+	font-family: var(--font-family-base-first);
 }
 
 /* Header */
@@ -29,7 +30,7 @@ main.content {
 /* Footer */
 footer.main-footer {
 	display: flex;
-	padding: 4rem 2.5rem;
+	padding: 2rem 2.5rem;
 	color: var(--secondary);
 	background-color: var(--primary);
 }
@@ -285,9 +286,9 @@ footer.main-footer {
 .form-control:focus:not([readonly]):not(:disabled) {
 	border: 1px solid var(--border-color);
 	outline: 0;
-	-webkit-box-shadow: 0 0 2px var(--primary-tint);
-	-moz-box-shadow: 0 0 2px var(--primary-tint);
-	box-shadow: 0 0 2px var(--primary-tint);
+	-webkit-box-shadow: 0 0 2px var(--border-color);
+	-moz-box-shadow: 0 0 2px var(--border-color);
+	box-shadow: 0 0 2px var(--border-color);
 }
 
 .form-control::-webkit-input-placeholder {
@@ -2098,7 +2099,7 @@ i[class*=" icon-"].novoglyphs {
 
 
 .icon-user{
-	color: var(--disabled-color);
+	color: var(--border-color);
 	padding-right: 0 !important;
 }
 .icon-circle {
@@ -2642,12 +2643,12 @@ i[class*=" icon-"].novoglyphs {
 /* Table */
 
 td > button > i{
-	color: var(--primary);
+	color: var(--border-color);
   transition: .5s;
 }
 
 td > button > i:hover{
-	text-shadow: 3px 1px 2px var(--text-color);
+	text-shadow: 1px 1px 1px var(--text-color);
 }
 
 .dataTables_empty {
