@@ -57,7 +57,7 @@ class Novo_User_Model extends NOVO_Model {
 			'customerTime' => (int) $dataRequest->currentTime,
 			'serverTime' => (int) date("H")
 		];
-		$this->isResponseRc = -185;
+
 		switch($this->isResponseRc) {
 			case 0:
 				$fullName = mb_strtolower($response->usuario->primerNombre).' ';
