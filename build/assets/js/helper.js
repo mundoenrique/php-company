@@ -308,7 +308,7 @@ function cryptoPass(jsonObject, req) {
 function getDataform(form) {
 	var dataForm = {};
 	form.find('input, select').each(function (index, element) {
-		dataForm[$(element).attr('name')] = $(element).val()
+		dataForm[$(element).attr('id')] = $(element).val().trim()
 	})
 
 	return dataForm

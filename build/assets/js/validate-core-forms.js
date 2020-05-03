@@ -40,6 +40,9 @@ function validateForms(form) {
 			"user-name": 	{required: true, pattern: alphanumunder},
 			"id-company": 	{required: true, fiscalRegistry: true},
 			"email": 	{required: true, pattern: emailValid},
+			"current-pass": {required: true},
+			"new-pass": {required: true, differs: "#currentPass", validatePass: true},
+			"confirm-pass": {required: true, equalTo: "#newPass"},
 			"branch-office": 	{requiredBranchOffice: true},
 			"type-bulk": 	{requiredTypeBulk: true},
 			"file-bulk":	{required: true, extension: lang.VALIDATE_FILES_EXTENSION, sizeFile: true},
@@ -89,6 +92,16 @@ function validateForms(form) {
 			"user-name": lang.VALIDATE_USERNAME,
 			"id-company": lang.VALIDATE_ID_COMPANY,
 			"email": lang.VALIDATE_EMAIL,
+			"current-pass": lang.VALIDATE_CURRENT_PASS,
+			"new-pass": {
+				required: lang.VALIDATE_NEW_PASS,
+				differs: 'La nueva contraseña debe ser diferente a la actual',
+				validatePass: 'La contraseña debe cumplir los requisitos'
+			},
+			"confirm-pass": {
+				required: lang.VALIDATE_CONFIRM_PASS,
+				equalTo: 'Debe ser igual a la nueva contraseña'
+			},
 			"branch-office": lang.VALIDATE_BRANCH_OFFICE,
 			"type-bulk": lang.VALIDATE_BULK_TYPE,
 			"file-bulk": {

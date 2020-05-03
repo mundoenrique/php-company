@@ -21,7 +21,7 @@
 									placeholder="<?= lang('PLACE_HOLDER_FISCAL_REGISTER'); ?>">
 								<div class="help-block"></div>
 							</div>
-							<div class="form-group col-lg-auto">
+							<div class="form-group col-lg-4">
 								<label for="email"><?= lang('GEN_EMAIL'); ?></label>
 								<input id="email" name="email" class="form-control" type="text" maxlength="64" placeholder="<?= lang('GEN_PLACE_HOLDER_EMAIL') ?>">
 								<div class="help-block"></div>
@@ -29,7 +29,7 @@
 						</div>
 						<hr class="separador-one">
 						<div class="flex items-center justify-end pt-3">
-							<a class="btn underline" href="<?= base_url('inicio') ?>"><?= lang('GEN_BTN_CANCEL'); ?></a>
+							<a class="btn underline big-modal" href="<?= base_url('inicio') ?>"><?= lang('GEN_BTN_CANCEL'); ?></a>
 							<button id="btn-pass-recover" class="btn btn-primary btn-loading" type="submit"><?= lang('GEN_BTN_CONTINUE'); ?></button>
 						</div>
 					</form>

@@ -148,7 +148,8 @@ class Novo_User extends NOVO_Controller {
 
 		array_push(
 			$this->includeAssets->jsFiles,
-			"user/change-pass",
+			"user/change_pass".$this->render->newViews,
+			"user/pass_validate",
 			"third_party/jquery.md5",
 			"third_party/jquery.balloon",
 			"third_party/jquery.validate",
@@ -158,10 +159,10 @@ class Novo_User extends NOVO_Controller {
 
 		switch($this->session->flashdata('changePassword')) {
 			case 'newUser':
-			$this->render->message = lang("MSG_NEW_PASS_USER");
+			$this->render->message = novoLang(lang("PASSWORD_NEWUSER"), lang('GEN_SYSTEM_NAME'));
 			break;
 			case 'expiredPass':
-			$this->render->message = lang("MSG_NEW_PASS_CADU");
+			$this->render->message = novoLang(lang("PASSWORD_EXPIRED"), lang('GEN_SYSTEM_NAME'));
 			break;
 		}
 
@@ -169,6 +170,7 @@ class Novo_User extends NOVO_Controller {
 		$this->session->set_flashdata('changePassword', $this->session->flashdata('changePassword'));
 		$this->session->set_flashdata('userType', $this->session->flashdata('userType'));
 		$this->render->titlePage = LANG('GEN_PASSWORD_CHANGE_TITLE');
+		$this->render->activeHeader = TRUE;
 		$this->views = ['user/'.$view];
 		$this->loadView($view);
 	}
