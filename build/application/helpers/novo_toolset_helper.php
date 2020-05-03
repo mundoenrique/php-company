@@ -163,6 +163,7 @@ if(!function_exists('languajeLoad')) {
 				$languages = [
 					'login' => ['login', 'config-core'],
 					'recoverPass'	=> ['validate'],
+					'terms'	=> ['terms'],
 					'options' => ['settings']
 				];
 				break;
