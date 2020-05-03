@@ -29,23 +29,18 @@ class Novo_Information extends NOVO_Controller {
 		$view = 'terms';
 
 		if($this->session->flashdata('changePassword')) {
-			if($this->config->item('country') !== ($this->session->countrySess)) {
-				$urlRedirect = urlReplace($this->countryUri, $this->session->countrySess, base_url('inicio'));
-				$this->load->model('Novo_User_Model', 'finishSession');
-				$this->finishSession->callWs_FinishSession_User();
-				redirect($urlRedirect, 'location');
-				exit();
-			}
 			array_push(
 				$this->includeAssets->jsFiles,
 				"user/terms"
 			);
+
 			$newUser = TRUE;
 			$this->session->set_flashdata('changePassword', $this->session->flashdata('changePassword'));
 			$this->session->set_flashdata('userType', $this->session->flashdata('userType'));
-			$this->render->message = lang('TERM_MESSAGE');
+			$this->render->message = lang('TERMS_MESSAGE');
 		}
 		$this->render->titlePage =lang('GEN_FOTTER_TERMS');
+		$this->render->activeHeader = TRUE;
 		$this->render->referer = $this->input->server('HTTP_REFERER');
 		$baseReferer = substr($this->render->referer, 0, strlen(base_url()));
 		$this->render->newUser = $newUser;
