@@ -221,6 +221,7 @@ $lang['GEN_RECOVER_PASS_TITLE'] = 'Recuperar contraseña';
 $lang['GEN_FISCAL_REGISTRY'] = 'RUC.';
 $lang['GEN_PASSWORD_CHANGE_TITLE'] = 'Cambiar contraseña';
 $lang['GEN_EMAIL_CHANGE_TITLE'] = 'Cambiar email';
+$lang['GEN_USER_TITLE'] = 'Obtener usuario';
 $lang['GEN_ALTERNATIVE_TEXT'] = 'Novopayment';
 $lang['GEN_PRODUCTS'] = 'Productos';
 $lang['GEN_PRODUCT'] = 'Producto';

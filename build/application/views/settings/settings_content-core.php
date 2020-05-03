@@ -91,14 +91,14 @@
 
 									<div class="form-group col-3">
 										<label for="ocupation" id="ocupation">Cargo</label>
-										<span id="ocupationUser" class="form-control px-1" readonly="readonly"><?= $job ?></span>
+										<span id="ocupationUser" class="form-control px-1" readonly="readonly"><?= $position ?></span>
 									</div>
-
 									<div class="form-group col-3">
 										<label for="area" id="area">Área</label>
 										<span id="areaUser" class="form-control px-1" readonly="readonly"><?= $area ?></span>
 									</div>
 								</div>
+
 								<form id="formChangeEmail">
 									<div class="row">
 										<div class="form-group col-6 col-lg-5 col-xl-6">
@@ -202,42 +202,46 @@
 								<div class="row mb-2">
 									<div class="form-group col-12 col-lg-8 col-xl-6">
 										<label class="mt-1">Empresa</label>
+										<select class="select-box custom-select mb-3 h6 w-100" name="selecter" id="selecter">
+											<option selected disabled></option>
+											<?php foreach($enterpriseList1 AS $enterpriseaAttr): ?>
+
+												<option value="<?= $enterpriseaAttr->acnomcia; ?>"><?= $enterpriseaAttr->acnomcia; ?></option>
+
+												<?php endforeach; ?>
+										</select>
 
 									</div>
 								</div>
 								<div class="row" id="blockEnterprice">
 									<div class="form-group mb-3 col-6 col-lg-4 col-xl-4">
 										<label for="idNumber" id="idNumber">Nro. identificador</label>
-										<span id="idNumberUser" class="form-control px-1" readonly="readonly">
-
-										</span>
+										<span id="idNumberUser" class="form-control px-1" readonly="readonly"><?= $idSelection ?></span>
 									</div>
-
 
 									<div class="form-group mb-3 col-6 col-lg-4 col-xl-4">
 										<label for="compName" id="compName">Nombre</label>
-										<span id="compNameUser" class="form-control px-1" readonly="readonly">RAPPI SAC</span>
+										<span id="compNameUser" class="form-control px-1" readonly="readonly"><?= $nameSelection ?></span>
 									</div>
 
 									<div class="form-group mb-3 col-6 col-lg-4 col-xl-4">
 										<label for="busiName" id="busiName">Razón social</label>
-										<span id="busiNameUser" class="form-control px-1" readonly="readonly">RAPPI</span>
+										<span id="busiNameUser" class="form-control px-1" readonly="readonly"><?= $rfcSelection ?></span>
 									</div>
 
 									<div class="form-group mb-3 col-6 col-lg-4 col-xl-4">
 										<label for="contact" id="contact">Contacto</label>
-										<span id="contactUser" class="form-control px-1" readonly="readonly">EUGENIO LA ROSA SABA</span>
+										<span id="contactUser" class="form-control px-1" readonly="readonly"><?= $contactSelection ?></span>
 									</div>
 
 									<div class="form-group mb-3 col-6 col-lg-4 col-xl-4">
 										<label for="address" id="address">Dirección</label>
-										<span id="addressUser" class="form-control px-1" readonly="readonly">Lorem ipsum dolor sit amet</span>
+										<span id="addressUser" class="form-control px-1" readonly="readonly"><?= $directionSelection ?></span>
 									</div>
 
 									<div class="form-group mb-3 col-6 col-lg-4 col-xl-4">
 										<label for="TempAddress" id="TempAddress">Dirección de facturación</label>
-										<span id="TempAddressUser" class="form-control px-1" readonly="readonly">Lorem ipsum dolor sit
-											amet</span>
+										<span id="TempAddressUser" class="form-control px-1" readonly="readonly"><?= $factDirectionSelection ?></span>
 									</div>
 								</div>
 

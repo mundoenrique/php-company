@@ -7,10 +7,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	//CONFIGURATIONS SWITCHES
 	$lang['GEN_CONF_USER_BOOL'] = true;
 	$lang['GEN_CONF_COMPANIES_BOOL'] = true;
-	$lang['GEN_CONF_BRANCHES_BOOL'] = true;
+	$lang['GEN_CONF_BRANCHES_BOOL'] = '';
 	$lang['GEN_CONF_DOWNLOADS_BOOL'] = true;
   	//CONFIGURATIONS SWITCHES DOWNLOADS
-  	$lang['GEN_MANUAL_BOOL'] = true;
-  	$lang['GEN_VIDEO_BOOL'] = false;
+		$lang['GEN_MANUAL_BOOL'] = true;
+		$lang['GEN_VIDEO_BOOL'] = '';
 		$lang['GEN_APPS_BOOL'] = true;
 		$lang['GEN_FILES_MANAGMENT_BOOL'] = true;

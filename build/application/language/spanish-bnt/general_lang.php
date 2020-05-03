@@ -20,15 +20,13 @@ $lang['GEN_PDF_FILE'] = [
 ];
 $lang['GEN_ZIP_FILE'] = [
   ['euler.zip', 'Ecuación de Euler'],
-  ['bayes.zip', 'Teorema de Bayes'],
-  ['euler.zip', 'Ecuación de Euler'],
   ['bayes.zip', 'Teorema de Bayes']
 ];
 $lang['GEN_RAR_FILE'] = [
   ['proporcion-aurea.rar', 'Proporción aurea']
 
 ];
-$lang['GEN_MP4_VIDEO'] = ['video.mp4'];
+$lang['GEN_MP4_VIDEO'] = [''];
 
 //CONFIGURATIONS ICONS
 $lang['GEN_PDF_ICON'] = 'icon-pdf.svg';

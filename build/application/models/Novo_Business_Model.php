@@ -50,6 +50,7 @@ class Novo_Business_Model extends NOVO_Model {
 				$enterpriseArgs->sizePage = $sizePage;
 				$enterpriseList = $this->request_data->OrderEnterpriseList($enterpriseArgs, $filters, $dataRequest);
 				$this->response->data->list = $enterpriseList->list;
+				$this->response->data->listaa = $enterpriseList;
 				if(!$dataRequest) {
 					$access = [
 						'user_access',
@@ -169,6 +170,7 @@ class Novo_Business_Model extends NOVO_Model {
 		log_message('INFO', 'NOVO Business Model: getProducts Method Initialized');
 
 		$select = isset($dataRequest->select);
+		$this->session->set_userdata( 'hey', $dataRequest->select);
 		if(!$select) {
 			$access = [
 				'user_access',
@@ -178,6 +180,7 @@ class Novo_Business_Model extends NOVO_Model {
 			$this->session->unset_userdata($access);
 			unset($dataRequest->select);
 		}
+
 
 		$this->className = "com.novo.objects.TOs.UsuarioTO";
 		$this->dataAccessLog->modulo = 'Negocios';
@@ -367,5 +370,67 @@ class Novo_Business_Model extends NOVO_Model {
 		$this->response->data->productSummary = (object) $productSummary;
 
 		return $this->responseToTheView('getProductDetail');
+	}
+
+
+		/**
+	 * @info Método para Obtener los datos de empresa resumido
+	 * @author Diego Acosta García
+	 * @date May 2nd, 2020
+	 */
+	public function callWS_ListaEmpresas_Business()
+	{
+		log_message('INFO', 'NOVO Business Model: getEnterprise Method Initialized');
+
+		$this->className = 'com.novo.objects.MO.ListadoEmpresasMO';
+		$this->dataAccessLog->modulo = 'infoEmpresaConfig';
+		$this->dataAccessLog->function = 'infoEmpresaConfig';
+		$this->dataAccessLog->operation = 'getInfoEmpresaConfig';
+		$this->dataRequest->idOperation = 'getEmpresaXUsuario';
+
+		$this->dataRequest->accodusuario = $this->userName;
+		$response = $this->sendToService(' ListaEmpresas');
+
+		switch($this->isResponseRc) {
+			case 0:
+				$this->response->code = 0;
+				$this->response->msg = lang('RESP_EMAIL_CHANGED');
+				$this->response->icon = lang('GEN_ICON_SUCCESS');
+				$enter = $response;
+				$this->response->data = $enter;
+				break;
+			case -4:
+				$this->response->code = 1;
+				$this->response->msg = lang('RESP_USER_INCORRECT');
+				break;
+			case -22:
+				$this->response->code = 1;
+				$this->response->msg = lang('RESP_USER_INCORRECT');
+				break;
+		}
+
+		if($this->isResponseRc != 0 && $this->response->code == 1) {
+			$this->response->title = lang('GEN_USER_TITLE');
+			$this->response->icon = lang('GEN_ICON_WARNING');
+			$this->response->data = [
+				'btn1'=> [
+					'action'=> 'close'
+				]
+			];
+		}
+
+		return $this->responseToTheView(' ListaEmpresas');
+	}
+
+
+		/**
+	 * @info Método para Obtener Seleccion de
+	 * @author Diego Acosta García
+	 * @date May 2nd, 2020
+	 */
+	public function callWS_SelectionEnterprise_Business()
+	{
+		log_message('INFO', 'NOVO Business Model: selectorBusine Method Initialized');
+	($this->input->get_post('positionBusine'));
 	}
 }

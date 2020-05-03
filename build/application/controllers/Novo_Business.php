@@ -10,6 +10,7 @@ class Novo_Business extends NOVO_Controller {
 	public function __construct()
 	{
 		parent:: __construct();
+		$this->load->library('session');
 		log_message('INFO', 'NOVO Business Controller Class Initialized');
 	}
 	/**

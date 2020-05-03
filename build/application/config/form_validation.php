@@ -78,6 +78,20 @@ $config = [
 			'rules' => 'trim|regex_match[/^([a-zA-Z0-9=]+)+$/i]|required'
 		]
 	],
+	'changeEmail' => [
+		[
+			'field' => 'email',
+			'label' => 'email',
+			'rules' => 'trim|required'
+		]
+	],
+	'selectorBusine' => [
+		[
+			'field' => 'positionBusine',
+			'label' => 'positionBusine',
+			'rules' => 'trim'
+		]
+	],
 	'getProducts' => [
 		[
 			'field' => 'enterpriseCode',

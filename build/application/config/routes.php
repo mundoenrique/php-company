@@ -64,12 +64,15 @@ $route['(:any)/cerrar-sesion/(:any)'] = "Novo_User/finishSession/$2";
 $route['(:any)/recuperar-clave'] = "Novo_User/recoverPass";
 $route['(:any)/cambiar-clave'] = "Novo_User/changePassword";
 $route['(:any)/cambiar-email'] = "Novo_User/changeEmail";
+$route['(:any)/cambiar-email'] = "Novo_User/getUser";
 //Information
 $route['(:any)/inf-beneficios'] = "Novo_Information/benefits";
 $route['(:any)/inf-condiciones'] = "Novo_Information/terms";
 $route['(:any)/inf-tarifas'] = "Novo_Information/rates";
 //Business
 $route['(:any)/empresas'] = "Novo_Business/getEnterprises";
+$route['(:any)/empresa'] = "Novo_Business/getEnterprise";
+$route['(:any)/empresa'] = "Novo_Business/selectorBussine";
 $route['(:any)/productos'] = "Novo_Business/getProducts";
 $route['(:any)/detalle-producto'] = "Novo_Business/getProductDetail";
 //Bulk

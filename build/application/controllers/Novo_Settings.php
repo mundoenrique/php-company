@@ -16,8 +16,9 @@ class Novo_Settings extends NOVO_Controller {
 	/**
 	 * @info Método para renderizar el modulo de configuración
 	 * @author Luis Molina
-	 * @modified Diego Acosta García
 	 * @date Mar 30/04/2020
+	 * @modified Diego Acosta García
+	 * @date  02/04/2020
 	 */
 	public function options()
 	{
@@ -40,18 +41,42 @@ class Novo_Settings extends NOVO_Controller {
 			"user/pass_validate"
 		);
 
-		$this->load->model('Novo_User_Model', 'User');
-		$this->render->fullName = $this->session->fullName;
-		$this->render->name = $this->session->name;
-		$this->render->firstName = $this->session->firstName;
-		$this->render->job = $this->session->job;
-		$this->render->area = $this->session->area;
-		$CI = &get_instance();
-		$this->render->email = $CI->session->userdata('email') ;
+		//LLama datos del usuario
+		$this->load->model('Novo_User_Model', 'getUser');
+		$user = $this->getUser->CallWs_GetUser_User();
+		$this->render->name = $user->data->primerNombre;
+		$this->render->firstName = $user->data->primerApellido;
+		$this->render->position = $user->data->cargo;
+		$this->render->area = $user->data->area;
+		$this->render->email = $user->data->email;
 
+		//Cambio de contraseña
+		$this->load->model('Novo_User_Model', 'ChangeEmail');
+
+		//LLama lista de empresas
 		$this->load->model('Novo_Business_Model', 'Business');
 		$enterpriseList = $this->Business->callWs_getEnterprises_Business(TRUE);
 		$this->render->enterpriseList1 = $enterpriseList->data->list;
+		if($enterpriseSelection = $this->session->userdata('enterpriseInf') != NULL){
+			$enterpriseSelection = $this->session->userdata('enterpriseInf');
+			$name = $enterpriseSelection->enterpriseName;
+		}
+
+		$complementIdEnterprise = 1;
+
+
+		$this->render->nameSelection = $enterpriseList->data->listaa->list[$complementIdEnterprise]->accodcia;
+		$this->render->idSelection = $enterpriseList->data->listaa->list[$complementIdEnterprise]->acnomcia;
+		$this->render->rfcSelection = $enterpriseList->data->listaa->list[$complementIdEnterprise]->acrif;
+		$this->render->contactSelection = $enterpriseList->data->listaa->list[$complementIdEnterprise]->acpercontac;
+		$this->render->directionSelection = $enterpriseList->data->listaa->list[$complementIdEnterprise]->acdirenvio;
+		$this->render->factDirectionSelection = $enterpriseList->data->listaa->list[$complementIdEnterprise]->acdirenvio;
+
+		//LLama lista de empresas
+		$selection = $this->Business->callWS_SelectionEnterprise_Business();
+
+	// $this->load->model('Novo_Business_Model', 'getEnterprise');
+	// $enterprise = $this->Business->callWS_ListaEmpresas_Business();
 
 		$this->render->titlePage =lang('GEN_SETTINGS_TITLE');
 		$this->views = ['settings/'.$view];

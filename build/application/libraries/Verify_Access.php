@@ -143,6 +143,8 @@ class Verify_Access {
 					$auth = ($this->CI->session->has_userdata('logged') && $countryUri === 've');
 					break;
 				case 'getEnterprises':
+				case 'getEnterprise':
+				case 'selectorBusine':
 				case 'getProducts':
 				case 'keepSession':
 				case 'options':

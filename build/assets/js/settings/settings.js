@@ -54,12 +54,45 @@ $(function() {
         };
         changeEmail(passData);
     });
+
+    // Email Change End
+
+    // Selector empresas
+
+    $('#selecter').on('change', function(e) {
+        e.preventDefault();
+        var passData = {
+            positionBusine: $(this).val()
+        };
+        selectionBussine(passData);
+    });
+
+    // Selector empresas  End
+
+
 });
 
 function changeEmail(passData) {
     verb = "POST";
     who = 'User';
     where = 'changeEmail';
+    data = passData;
+    callNovoCore(verb, who, where, data, function(response) {
+        dataResponse = response.data
+        switch (response.code) {
+            case 0:
+            case 1:
+                notiSystem(response.title, response.msg, response.icon, response.data)
+                break;
+        }
+    })
+}
+
+
+function selectionBussine(passData) {
+    verb = "POST";
+    who = 'Business';
+    where = 'selectorBusine';
     data = passData;
     callNovoCore(verb, who, where, data, function(response) {
         dataResponse = response.data

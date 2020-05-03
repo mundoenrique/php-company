@@ -458,6 +458,54 @@ class Novo_User_Model extends NOVO_Model {
 		return $result["score"] <= $this->config->item('score_recaptcha')[ENVIRONMENT] ? 'fail' : 'done';
 	}
 
+	/**
+	 * @info Método para Obtener los datos del usuario
+	 * @author Diego Acosta García
+	 * @date April 29th, 2020
+	 */
+	public function CallWs_GetUser_User()
+	{
+		log_message('INFO', 'NOVO User Model: getUser Method Initialized');
+
+		$this->className = 'com.novo.objects.TOs.UsuarioTO';
+		$this->dataAccessLog->modulo = 'getPerfilUsuario';
+		$this->dataAccessLog->function = 'getPerfilUsuario';
+		$this->dataAccessLog->operation = 'getPerfilUsuario';
+		$this->dataRequest->idOperation = 'getPerfilUsuario';
+		$this->dataRequest->idUsuario = $this->userName;
+		$this->dataRequest->userName = $this->userName;
+		$response = $this->sendToService(' CallWs_GetUser');
+
+		switch($this->isResponseRc) {
+			case 0:
+				$this->response->code = 0;
+				$this->response->msg = lang('RESP_EMAIL_CHANGED');
+				$this->response->icon = lang('GEN_ICON_SUCCESS');
+				$user = $response;
+				$this->response->data = $user;
+				break;
+			case -4:
+				$this->response->code = 1;
+				$this->response->msg = lang('RESP_USER_INCORRECT');
+				break;
+			case -22:
+				$this->response->code = 1;
+				$this->response->msg = lang('RESP_USER_INCORRECT');
+				break;
+		}
+
+		if($this->isResponseRc != 0 && $this->response->code == 1) {
+			$this->response->title = lang('GEN_USER_TITLE');
+			$this->response->icon = lang('GEN_ICON_WARNING');
+			$this->response->data = [
+				'btn1'=> [
+					'action'=> 'close'
+				]
+			];
+		}
+
+		return $this->responseToTheView(' CallWs_GetUser');
+	}
 
 	/**
 	 * @info Método para el cambio de Email
@@ -466,6 +514,7 @@ class Novo_User_Model extends NOVO_Model {
 	 */
 	public function CallWs_ChangeEmail_User($dataRequest)
 	{
+
 		log_message('INFO', 'NOVO User Model: ChangeEmail Method Initialized');
 
 		$this->className = 'com.novo.objects.TOs.UsuarioTO';
@@ -490,7 +539,6 @@ class Novo_User_Model extends NOVO_Model {
 						'action'=> 'close'
 					]
 				];
-				$this->session->email = $dataRequest->email;
 				break;
 			case -4:
 				$this->response->code = 1;
@@ -514,6 +562,4 @@ class Novo_User_Model extends NOVO_Model {
 
 		return $this->responseToTheView('CallWs_ChangeEmail');
 	}
-
-
 }
