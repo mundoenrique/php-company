@@ -124,7 +124,7 @@ class Verify_Access {
 			switch($module) {
 				case 'recoverPass':
 				case 'benefits':
-					$clients = ['novo', 'pichincha'];
+					$clients = ['novo', 'pichincha', 'banorte'];
 					$auth = in_array($this->CI->config->item('client'), $clients);
 					break;
 				case 'terms':
@@ -152,6 +152,12 @@ class Verify_Access {
 				case 'loadBulk':
 				case 'getDetailBulk':
 					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBCAR'));
+					break;
+				case 'unnamedRequest':
+					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TICARG'));
+					break;
+				case 'unnamedAffiliate':
+					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TIINVN'));
 					break;
 				case 'confirmBulk':
 					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBCAR', 'TEBCON'));

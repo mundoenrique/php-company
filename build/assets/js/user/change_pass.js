@@ -1,8 +1,10 @@
 'use strict'
 $(function() {
+	var changePassBtn = $('#btn-change-pass');
+	var new_Pass = $('#new-pass');
 
 	$.balloon.defaults.css = null;
-	$('#new-pass')
+	new_Pass
 	.on('focus', function() {
 		$(this).showBalloon({
 			html: true,
@@ -14,43 +16,43 @@ $(function() {
 	.on('keyup focus', function() {
 		var pswd = $(this).val();
 
-		passStrength(pswd);
+		passWordStrength(pswd);
 
 	})
 	.on('blur', function() {
-		$("#new-pass").hideBalloon();
+		new_Pass.hideBalloon();
 	});
 
-	$('#btn-change-pass').on('click', function(e) {
+	changePassBtn.on('click', function(e) {
 		e.preventDefault();
-		var ChangeBtn = $(this);
+		changeBtn = $(this);
 		form = $('#form-change-pass');
 		validateForms(form, { handleMsg: true });
 		if(form.valid()) {
 			var userType = $('#user-type').val();
 			var currentPass = $('#current-pass').val();
-			var newPass = $('#new-pass').val();
+			var newPass = new_Pass.val();
 			var confirmPass = $('#confirm-pass').val();
-			var textBtn = ChangeBtn.text();
+			btnText = changeBtn.text().trim();
 
 			if(userType == '1') {
 				currentPass = currentPass.toUpperCase();
 			}
 
 			var passData = {
-				currentPass: $.md5(currentPass),
-				newPass: $.md5(newPass),
-				confirmPass: $.md5(confirmPass)
+				currentPass: cryptoPass(currentPass),
+				newPass: cryptoPass(newPass),
+				confirmPass: cryptoPass(confirmPass)
 			}
 
-			$('#form-change-pass input, #form-change-pass button').attr('disabled', true);
-			ChangeBtn.html(loader);
-			changePassword(passData, textBtn);
+			insertFormInput(true, form);
+			changeBtn.html(loader);
+			changePassword(passData, btnText);
 		}
 	});
 });
 
-function passStrength(pswd) {
+function passWordStrength(pswd) {
 	var valid;
 
 	if ( pswd.length < 8 || pswd.length > 15 ) {

@@ -52,7 +52,7 @@ function validateForms(form, options) {
 	}
 
 	$.validator.methods.validatePass	= function(value, element, param) {
-		return passStrength(value);
+		return passWordStrength(value);
 	}
 
 	$.validator.methods.differs = function(value, element, param) {

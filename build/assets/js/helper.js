@@ -176,7 +176,7 @@ function notiSystem(title, message, icon, data) {
 		draggable: false,
 		resizable: false,
 		closeOnEscape: false,
-		minWidth: lang.GEN_MODAL_WIDTH,
+		minWidth: lang.CONF_MODAL_WIDTH,
 		maxHeight: 350,
 		dialogClass: "border-none",
 		classes: {
@@ -308,7 +308,7 @@ function cryptoPass(jsonObject, req) {
 function getDataform(form) {
 	var dataForm = {};
 	form.find('input, select').each(function (index, element) {
-		dataForm[$(element).attr('name')] = $(element).val()
+		dataForm[$(element).attr('id')] = $(element).val().trim()
 	})
 
 	return dataForm

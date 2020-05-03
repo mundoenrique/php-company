@@ -111,7 +111,7 @@ $(function () {
 			userLogin.showBalloon({
 				html: true,
 				classname: response.className,
-				position: "left",
+				position: response.position,
 				contents: response.msg
 			});
 			restartFormLogin();
