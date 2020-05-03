@@ -5,5 +5,5 @@
 	</h3>
 </div>
 <form id="single-signin-form" action="<?= base_url('ingresar') ?>" method="post" send="<?= $send; ?>">
-	<input type="hidden" name="tokenId" value="<?= $tokenId ?>">
+	<input type="hidden" id="tokenId" name="tokenId" value="<?= $tokenId ?>">
 </form>

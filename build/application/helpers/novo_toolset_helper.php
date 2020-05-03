@@ -8,8 +8,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @author			J. Enrique Peñaloza P
  * @date				Novembre 23th, 2019
  */
-
-// ------------------------------------------------------------------------
 if(!function_exists('assetPath')) {
 	function assetPath($route = '') {
 		return get_instance()->config->item('asset_path').$route;
@@ -127,10 +125,10 @@ if(!function_exists('languajeLoad')) {
 		$langFiles = $langFiles ?: $CI->router->fetch_method();
 		$languagesFile = [];
 		$lanGeneral = ['bdb', 'bp', 'bnt', 'co', 've'];
-		$lanValidate = ['bdb', 'bnt'];
+		$lanValidate = ['bdb'];
 		$loadLanguages = FALSE;
 		$client = !$client ? 'default_lang' : $client;
-		log_message('INFO', 'NOVO Language '.$call.', HELPER: languajeLoad Initialized for controller: '.$class. ' and method: '.$langFiles);
+		log_message('INFO', 'NOVO Language '.$call.', HELPER: Language Load Initialized for controller: '.$class. ' and method: '.$langFiles);
 
 		switch($client) {
 			case 'bp':
@@ -163,7 +161,8 @@ if(!function_exists('languajeLoad')) {
 				break;
 			case 'bnt':
 				$languages = [
-					'login' => ['login'],
+					'login' => ['login', 'config-core'],
+					'recoverPass'	=> ['validate'],
 					'options' => ['settings']
 				];
 				break;
@@ -171,7 +170,6 @@ if(!function_exists('languajeLoad')) {
 				$languages = [
 					'login' => ['login'],
 					'validatecaptcha' => ['login'],
-					'recoverPass'	=> ['password-recover'],
 					'terms'	=> ['terms'],
 				];
 				break;
@@ -191,7 +189,6 @@ if(!function_exists('languajeLoad')) {
 				$languages = [
 					'login' => ['login'],
 					'validatecaptcha' => ['login'],
-					'recoverPass'	=> ['password-recover'],
 					'terms'	=> ['terms'],
 				];
 				break;
@@ -243,7 +240,6 @@ if(!function_exists('languajeLoad')) {
 		if($loadLanguages) {
 			$CI->lang->load($languagesFile);
 		}
-
 	}
 }
 
@@ -272,15 +268,14 @@ if(!function_exists('setCurrentPage')) {
 				}
 				break;
 		}
+
 		return $cssClass;
 	}
 }
 
 
 if (!function_exists('exportFile')) {
-	function exportFile($file, $typeFile, $filename, $bytes = TRUE)
-	{
-
+	function exportFile($file, $typeFile, $filename, $bytes = TRUE) {
 		switch ($typeFile) {
 			case 'pdf':
 				header('Content-type: application/pdf');

@@ -15,13 +15,20 @@
 </head>
 
 <body>
-	<?php $this->load->view('header_content') ?>
-	<div id="wrapper">
-		<?php foreach($viewPage as $views): ?>
-		<?php $this->load->view($views.'_content'); ?>
-		<?php endforeach; ?>
-	</div>
-	<?php $this->load->view('footer_content') ?>
+	<?php $this->load->view('header_content-core') ?>
+	<main class="content bg-content">
+		<?php if(!isset($skipProductInf)): ?>
+		<div id="product-info" class="pt-3 px-5 pb-5" prefix-prod="<?= $prefix ?>">
+		<?php endif; ?>
+			<?php foreach($viewPage as $views): ?>
+			<?php $this->load->view($views.'_content-core'); ?>
+			<?php endforeach; ?>
+		<?php if(!isset($skipProductInf)): ?>
+		</div>
+		<?php endif; ?>
+	</main>
+	<a id="download-file" href="javascript:" download></a>
+	<?php $this->load->view('footer_content-core') ?>
 	<?= ($module == lang('GEN_LOGIN') && $activeRecaptcha) ?  $scriptCaptcha : ''; ?>
 	<?= $this->asset->insertJs(); ?>
 	<?php $this->load->view('insert_variables') ?>

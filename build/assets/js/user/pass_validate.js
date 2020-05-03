@@ -1,73 +1,64 @@
+var changeBtn;
 function passStrength(pswd) {
-    var valid;
+	var valid;
 
-    if (pswd.length < 8 && pswd.length > 15) {
-        $('.pass-config #length').removeClass('valid').addClass('invalid');
-        valid = false;
-    } else {
-        $('.pass-config #length').removeClass('invalid').addClass('valid');
-        valid = true;
-    }
+	if (pswd.length < 8 || pswd.length > 15) {
+		$('.pwd-rules #length').removeClass('rule-valid').addClass('rule-invalid');
+		valid = false;
+	} else {
+		$('.pwd-rules #length').removeClass('rule-invalid').addClass('rule-valid');
+		valid = true;
+	}
 
-    if (pswd.match(/[a-z]/)) {
-        $('.pass-config #letter').removeClass('invalid').addClass('valid');
-        valid = !valid ? valid : true;
-    } else {
-        $('.pass-config #letter').removeClass('valid').addClass('invalid');
-        valid = false;
-    }
+	if (pswd.match(/[a-z]/)) {
+		$('.pwd-rules #letter').removeClass('rule-invalid').addClass('rule-valid');
+		valid = !valid ? valid : true;
+	} else {
+		$('.pwd-rules #letter').removeClass('rule-valid').addClass('rule-invalid');
+		valid = false;
+	}
 
-    if (pswd.match(/[A-Z]/)) {
-        $('.pass-config #capital').removeClass('invalid').addClass('valid');
-        valid = !valid ? valid : true;
-    } else {
-        $('.pass-config #capital').removeClass('valid').addClass('invalid');
-        valid = false;
-    }
+	if (pswd.match(/[A-Z]/)) {
+		$('.pwd-rules #capital').removeClass('rule-invalid').addClass('rule-valid');
+		valid = !valid ? valid : true;
+	} else {
+		$('.pwd-rules #capital').removeClass('rule-valid').addClass('rule-invalid');
+		valid = false;
+	}
 
-    if (pswd.split(/[0-9]/).length - 1 >= 1 && pswd.split(/[0-9]/).length - 1 <= 3) {
-        $('.pass-config #number').removeClass('invalid').addClass('valid');
-        valid = !valid ? valid : true;
-    } else {
-        $('.pass-config #number').removeClass('valid').addClass('invalid');
-        valid = false;
-    }
+	if (pswd.split(/[0-9]/).length - 1 >= 1 && pswd.split(/[0-9]/).length - 1 <= 3) {
+		$('.pwd-rules #number').removeClass('rule-invalid').addClass('rule-valid');
+		valid = !valid ? valid : true;
+	} else {
+		$('.pwd-rules #number').removeClass('rule-valid').addClass('rule-invalid');
+		valid = false;
+	}
 
-    if ((pswd.length > 0) && !pswd.match(/(.)\1{2,}/)) {
-        $('.pass-config #consecutivo').removeClass('invalid').addClass('valid');
-        valid = !valid ? valid : true;
-    } else {
-        $('.pass-config #consecutivo').removeClass('valid').addClass('invalid');
-        valid = false;
-    }
+	if ((pswd.length > 0) && !pswd.match(/(.)\1{2,}/)) {
+		$('.pwd-rules #consecutive').removeClass('rule-invalid').addClass('rule-valid');
+		valid = !valid ? valid : true;
+	} else {
+		$('.pwd-rules #consecutive').removeClass('rule-valid').addClass('rule-invalid');
+		valid = false;
+	}
 
-    if (pswd.match(/([!@\*\-\?¡¿+\/.,_#])/)) {
-        $('.pass-config #especial').removeClass('invalid').addClass('valid');
-        valid = !valid ? valid : true;
-    } else {
-        $('.pass-config #especial').removeClass('valid').addClass('invalid');
-        valid = false;
-    }
+	if (pswd.match(/([!@\*\-\?¡¿+\/.,_#])/)) {
+		$('.pwd-rules #special').removeClass('rule-invalid').addClass('rule-valid');
+		valid = !valid ? valid : true;
+	} else {
+		$('.pwd-rules #special').removeClass('rule-valid').addClass('rule-invalid');
+		valid = false;
+	}
 
-    valid = true;
-
-    return valid;
+	return valid;
 }
 
-function changePassword(passData) {
-    verb = "POST";
-    who = 'User';
-    where = 'ChangePassword';
-    data = passData;
+function changePassword(passData, textBtn) {
+	verb = "POST"; who = 'User'; where = 'ChangePassword'; data = passData;
+	callNovoCore(verb, who, where, data, function (response) {
 
-    callNovoCore(verb, who, where, data, function(response) {
-        dataResponse = response.data
-        switch (response.code) {
-            case 0:
-            case 1:
-                notiSystem(response.title, response.msg, response.icon, response.data)
-                break;
-        }
-    })
-
+		form[0].reset();
+		insertFormInput(false, form);
+		changeBtn.html(textBtn)
+	})
 }

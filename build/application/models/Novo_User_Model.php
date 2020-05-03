@@ -53,6 +53,11 @@ class Novo_User_Model extends NOVO_Model {
 			$this->isResponseRc = 0;
 		}
 
+		$time = (object) [
+			'customerTime' => (int) $dataRequest->currentTime,
+			'serverTime' => (int) date("H")
+		];
+		$this->isResponseRc = -185;
 		switch($this->isResponseRc) {
 			case 0:
 				$fullName = mb_strtolower($response->usuario->primerNombre).' ';
@@ -64,10 +69,6 @@ class Novo_User_Model extends NOVO_Model {
 						str_replace('/', '-', $response->usuario->fechaUltimaConexion)
 					)
 				);
-				$time = (object) [
-					'customerTime' => (int) $dataRequest->currentTime,
-					'serverTime' => (int) date("H")
-				];
 				$userData = [
 					'sessionId' => $response->logAccesoObject->sessionId,
 					'logged' => TRUE,
@@ -100,6 +101,7 @@ class Novo_User_Model extends NOVO_Model {
 					'fullName' => ucwords(mb_strtolower($fullName)),
 					'codigoGrupo' => $response->usuario->codigoGrupo,
 					'token' => $response->token,
+					'time' => $time,
 					'cl_addr' => $this->encrypt_connect->encode($_SERVER['REMOTE_ADDR'], $dataRequest->user, 'REMOTE_ADDR'),
 					'countrySess' => $this->config->item('country')
 				];
@@ -118,13 +120,15 @@ class Novo_User_Model extends NOVO_Model {
 			case -263:
 				$this->response->code = 1;
 				$this->response->msg = lang('RESP_INVALID_USER');
-				$this->response->className = lang('VALIDATE_INVALID_USER');
+				$this->response->className = lang('CONF_VALID_INVALID_USER');
+				$this->response->position = lang('CONF_VALID_POSITION');
 				break;
 			case -8:
 			case -35:
 				$this->response->code = 1;
 				$this->response->msg = lang('RESP_SUSPENDED_USER');
-				$this->response->className = lang('VALIDATE_INACTIVE_USER');
+				$this->response->className = lang('CONF_VALID_INACTIVE_USER');
+				$this->response->position = lang('CONF_VALID_POSITION');
 				break;
 			case -229:
 				$this->response->code = 2;
@@ -320,8 +324,6 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataAccessLog->modulo = 'Usuario';
 		$this->dataAccessLog->function = 'Clave';
 		$this->dataAccessLog->operation = 'Cambiar Clave';
-		$this->dataRequest->idOperation = 'cambioClave';
-		$this->dataRequest->userName = $this->userName;
 
 		$current = json_decode(base64_decode($dataRequest->currentPass));
 		$current = $this->cryptography->decrypt(
@@ -334,38 +336,43 @@ class Novo_User_Model extends NOVO_Model {
 			utf8_encode($new->password)
 		);
 
+		$this->dataRequest->idOperation = 'cambioClave';
+		$this->dataRequest->userName = $this->userName;
 		$this->dataRequest->passwordOld = md5($current);
 		$this->dataRequest->password = md5($new);
 		$changePassType = $this->session->flashdata('changePassword');
 		$this->sendToService('CallWs_ChangePassword');
+		$code = 0;
 
 		switch($this->isResponseRc) {
 			case 0:
 				$this->callWs_FinishSession_User();
-				$this->response->code = 0;
-				$this->response->msg = lang('RESP_PASSWORD_CHANGED');
+				$this->response->code = 4;
+				$goLogin = $this->session->has_userdata('logged') ? '' : lang('RESP_PASSWORD_LOGIN');
+				$this->response->msg = novoLang(lang('RESP_PASSWORD_CHANGED'), $goLogin);
 				$this->response->icon = lang('GEN_ICON_SUCCESS');
 				$this->response->data = [
 					'btn1'=> [
 						'text'=> lang('GEN_BTN_CONTINUE'),
 						'link'=> 'inicio',
-						'action'=> 'redirect'
+						'action'=> $this->session->has_userdata('logged') ? 'close' :  'redirect'
 					]
 				];
 				break;
 			case -4:
-				$this->response->code = 1;
+				$code = 1;
 				$this->response->msg = lang('RESP_PASSWORD_USED');
 				break;
 			case -22:
-				$this->response->code = 1;
+				$code = 1;
 				$this->response->msg = lang('RESP_PASSWORD_INCORRECT');
 				break;
 		}
 
-		if($this->isResponseRc != 0 && $this->response->code == 1) {
+		if($this->isResponseRc != 0 && $code == 1) {
 			$this->session->set_flashdata('changePassword', $changePassType);
 			$this->session->set_flashdata('userType', $this->session->flashdata('userType'));
+
 			$this->response->title = lang('GEN_PASSWORD_CHANGE_TITLE');
 			$this->response->icon = lang('GEN_ICON_WARNING');
 			$this->response->data = [
@@ -388,7 +395,6 @@ class Novo_User_Model extends NOVO_Model {
 		$response->rc =  0;
 		$this->makeAnswer($response);
 		$this->response->code = 0;
-
 
 		return $this->responseToTheView('KeepSession');
 	}

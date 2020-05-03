@@ -105,7 +105,6 @@ $lang['GEN_FILE_OPERATIONAL_BATCH'] = 'Archivos lotes operativos (194kb)';
 //links
 $lang['GEN_LINK_LOGIN'] = 'inicio';
 //MODAL STYLES
-$lang['GEN_MODAL_WIDTH'] = 310;
 $lang['GEN_ICON'] = 'ui-icon';
 $lang['GEN_ICON_SUCCESS'] = 'ui-icon-circle-check';
 $lang['GEN_ICON_INFO'] = 'ui-icon-info';
@@ -279,4 +278,3 @@ $lang['GEN_FINISH_MESSAGE'] = 'Gracias por usar nuestros servicios';
 $lang['PRODUCTS_DETAIL_TITLE']= 'Detalle del producto';
 $lang['GEN_SHOW_PASS'] = 'Mostrar contraseña';
 $lang['GEN_HIDE_PASS'] = 'Ocultar contraseña';
-
