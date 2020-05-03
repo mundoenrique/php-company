@@ -5,8 +5,7 @@ $lang['GEN_ENTERPRISE_LIST'] = 'empresas';
 $lang['GEN-LOGO-HEADER'] = 'img-logo.svg';
 $lang['GEN-LOGO-BIG'] = 'img-banorte.png';
 $lang['GEN_ALTERNATIVE_TEXT'] = 'Banorte';
-//MODAL STYLES
-$lang['GEN_MODAL_WIDTH'] = 370;
+$lang['GEN_FISCAL_REGISTRY'] = 'RFC.';
 //CONFIGURATIONS
 $lang['GEN_DOWNLOADS'] = 'Descargas';
 $lang['GEN_MANUALS'] = 'Manuales';
@@ -44,4 +43,3 @@ $lang['GEN_FOTTER_RIGHTS'] = '© Todos los derechos reservados. Grupo Financiero
 $lang['GEN_FOTTER_IMAGE_L'] = 'img-banorte_white.svg';
 $lang['GEN_FOTTER_IMAGE_R'] = 'img-pci_compliance.svg';
 $lang['GEN_FOTTER_MARK'] = 'img-ma.svg';
-

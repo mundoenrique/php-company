@@ -79,6 +79,7 @@ class NOVO_Controller extends CI_Controller {
 		$this->render->newViews = $this->config->item('new-views');
 		$this->form_validation->set_error_delimiters('', '---');
 		$this->config->set_item('language', 'spanish-base');
+		$this->lang->load('config'.$this->render->newViews);
 		if($this->rule !== 'suggestion') {
 			$this->ValidateBrowser = $this->checkBrowser();
 		}
@@ -299,6 +300,6 @@ class NOVO_Controller extends CI_Controller {
 		$this->render->module = $module;
 		$this->render->viewPage = $this->views;
 		$this->asset->initialize($this->includeAssets);
-		$this->load->view('master_content', $this->render);
+		$this->load->view('master_content'.$this->render->newViews, $this->render);
 	}
 }

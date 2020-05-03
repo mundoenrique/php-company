@@ -73,7 +73,7 @@ class Create_Menu {
 			}
 			$level->second[] = $this->menulang($module->idModulo);
 		}
-		log_message('INFO', 'secondaryMenu: '.json_encode($level, JSON_UNESCAPED_UNICODE));
+		log_message('INFO', 'NOVO secondaryMenu: '.json_encode($level, JSON_UNESCAPED_UNICODE));
 		return $level;
 	}
 	/**
@@ -98,11 +98,11 @@ class Create_Menu {
 				break;
 			case 'TICARG':
 				$subMenuLang->text = lang('GEN_MENU_LOT_UNNAMED_REQ');
-				$subMenuLang->link = 'javascript:';
+				$subMenuLang->link = 'solicitud-innominadas';
 				break;
 			case 'TIINVN':
 				$subMenuLang->text = lang('GEN_MENU_LOT_UNNAMED_AFFIL');
-				$subMenuLang->link = 'javascript:';
+				$subMenuLang->link = 'afiliacion-innominadas';
 				break;
 			case 'TEBGUR':
 				$subMenuLang->text = lang('GEN_MENU_LOT_REPROCESS');
