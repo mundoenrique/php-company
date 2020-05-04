@@ -522,7 +522,7 @@
 									<div class="row">
 										<div class="col-sm-12 col-lg-11 col-xl-12 py-2">
 											<div class="manual-video">
-												<video controls preload>
+												<video controls preload controlsList="nodownload">
 													<source src="<?= $this->asset->insertFile($countryUri.'/'.lang('GEN_MP4_VIDEO'),'statics');?>" type="video/mp4">
 												</video>
 											</div>
