@@ -491,7 +491,7 @@ textarea.form-control {
   left: -1.5rem;
   display: block;
   width: 1rem;
-  height: 1rem;
+  height: 1.1rem;
   pointer-events: none;
   content: "";
   background: var(--secondary);
@@ -670,13 +670,13 @@ textarea.form-control {
 
 .custom-switch .custom-control-label::before {
   left: -2.25rem;
-  width: 1.75rem;
+  width: 2rem;
   pointer-events: all;
   border-radius: .5rem;
 }
 
 .custom-switch .custom-control-label::after {
-  top: calc(.25rem + 1px);
+  top: calc(.25rem + 2px);
   left: calc(-2.25rem + 2px);
   width: calc(1rem - 4px);
   height: calc(1rem - 4px);
@@ -3913,7 +3913,7 @@ ul.pwd-rules li.pwd-rules-item {
 }
 
 ul.pwd-rules li.pwd-rules-item.rule-valid {
-	color: #43b581;
+	color: var(--success);
 }
 
 ul.pwd-rules li.pwd-rules-item.rule-invalid {
