@@ -60,5 +60,6 @@ $lang['BULK_NOT_DELETED'] = 'No fue posible borrar el lote: %d, por favor intent
 $lang['BULK_NOT_DISASS'] = 'No fue posible desasociar el lote: %d, por favor intentalo de nuevo';
 $lang['BULK_UNNA_REQUEST'] = 'Solicitud';
 $lang['BULK_UNNA_EXPIRED_DATE'] = 'Fecha de vencimiento';
+$lang['BULK_UNNA_MAX_CARDS'] = 'Cantidad de tarjetas';
 $lang['BULK_UNNA_STARTING_LINE1'] = 'Línea de embozo 1';
 $lang['BULK_UNNA_STARTING_LINE2'] = 'Línea de embozo 2';

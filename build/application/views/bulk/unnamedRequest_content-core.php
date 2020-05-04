@@ -25,13 +25,12 @@
 					<div class="flex px-5 pb-4 items-center row">
 						<div class="form-group col-4 col-xl-3">
 							<label><?= LANG('BULK_UNNA_EXPIRED_DATE'); ?></label>
-							<input type="text" class="form-control read-only h5" readonly value="05/20">
+							<input type="text" class="form-control read-only h5" <?= $editable; ?> value="<?= $expMaxMonths; ?>">
 							<div class="help-block"></div>
 						</div>
-						<div class="form-group col-6 col-lg-3 col-xl-3">
-							<label class="mt-1 h6"><?= lang('BULK_BRANCH_OFFICE'); ?></label>
-							<select class="select-box custom-select h6 w-100">
-							</select>
+						<div class="form-group col-4 col-xl-3">
+							<label><?= LANG('BULK_UNNA_MAX_CARDS'); ?></label>
+							<input type="text" class="form-control h5" max-cards="<?= $maxCards ?>">
 							<div class="help-block"></div>
 						</div>
 						<?php if(lang('CONF_UNNA_STARTING_LINE1')): ?>
@@ -41,10 +40,24 @@
 							<div class="help-block"></div>
 						</div>
 						<?php endif; ?>
-						<?php if(lang('CONF_UNNA_STARTING_LINE1')): ?>
+						<?php if(lang('CONF_UNNA_STARTING_LINE2')): ?>
 						<div class="form-group col-4 col-xl-3">
 							<label><?= lang('BULK_UNNA_STARTING_LINE2'); ?></label>
 							<input type="text" class="form-control h5">
+							<div class="help-block"></div>
+						</div>
+						<?php endif; ?>
+						<?php if(lang('CONF_UNNA_BRANCHOFFICE')): ?>
+						<div class="form-group col-4 col-xl-3">
+							<label class="mt-1 h6"><?= lang('BULK_BRANCH_OFFICE'); ?></label>
+							<select class="select-box custom-select h6 w-100">
+								<?php foreach($branchOffices AS $pos => $branchOffice): ?>
+								<?php $disabled = $branchOffice->text == lang('BULK_SELECT_BRANCH_OFFICE') ||  $branchOffice->text == lang('RESP_TRY_AGAIN') ? '  disabled' : '' ?>
+								<option value="<?= $branchOffice->key; ?>" <?= $pos != 0 ? '' : 'selected'.$disabled ?>>
+									<?= $branchOffice->text; ?>
+								</option>
+								<?php endforeach; ?>
+							</select>
 							<div class="help-block"></div>
 						</div>
 						<?php endif; ?>
