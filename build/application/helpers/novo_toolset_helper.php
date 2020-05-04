@@ -161,7 +161,7 @@ if(!function_exists('languajeLoad')) {
 				break;
 			case 'bnt':
 				$languages = [
-					'login' => ['login', 'config-core'],
+					'login' => ['login'],
 					'recoverPass'	=> ['validate'],
 					'terms'	=> ['terms'],
 					'options' => ['settings']
@@ -216,6 +216,7 @@ if(!function_exists('languajeLoad')) {
 					'deleteConfirmBulk'	=> ['bulk'],
 					'disassConfirmBulk'	=> ['bulk'],
 					'calculateServiceOrder'	=> ['bulk'],
+					'unnamedRequest'	=> ['bulk'],
 					'serviceOrders'	=> ['bulk'],
 					'getReportsList'	=> ['reports'],
 					'getReport'	=> ['reports'],

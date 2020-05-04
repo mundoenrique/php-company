@@ -32,7 +32,7 @@
 					<?php if(verifyDisplay('body', $module,  lang('GEN_TAG_BRANCHOFFICE'))): ?>
 					<div class="form-group col-6 col-lg-3 col-xl-3 hide">
 						<label class="mt-1 h6" for="branch-office"><?= lang('BULK_BRANCH_OFFICE'); ?></label>
-						<select id="branch-office" name="branch-office" class="select-box custom-select h6 w-100">
+						<select id="branch-office" name="branch-office" class="form-control select-box custom-select h6 w-100">
 							<?php foreach($branchOffices AS $pos => $branchOffice): ?>
 							<?php $disabled = $branchOffice->text == lang('BULK_SELECT_BRANCH_OFFICE') ||  $branchOffice->text == lang('RESP_TRY_AGAIN') ? '  disabled' : '' ?>
 							<option value="<?= $branchOffice->key; ?>" <?= $pos != 0 ? '' : 'selected'.$disabled ?>>
