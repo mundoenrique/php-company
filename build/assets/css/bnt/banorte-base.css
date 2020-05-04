@@ -2528,6 +2528,7 @@ i[class*=" icon-"].novoglyphs {
 	-ms-transition: all .25s linear;
 	-o-transition: all .25s linear;
 	transition: all .25s linear;
+	color: var(--text-color);
 }
 
 .dropdown-user li:hover {
@@ -2541,11 +2542,11 @@ i[class*=" icon-"].novoglyphs {
 .dropdown-user li a {
 	display: block;
 	width: 10.3rem !important;
-	color: var(--text-color);
+	/* color: var(--text-color); */
 	padding: .1rem 1rem;
 }
 
-.dropdown-user li:hover a {
+.dropdown-user li:hover {
 	color: var(--primary);
 }
 
@@ -2559,7 +2560,7 @@ i[class*=" icon-"].novoglyphs {
 .dropdown-user li ul {
 	display: none;
 	position: absolute;
-	right:-158px;
+	right:-162px;
 	top: 0;
 	box-shadow: 1px 2px 5px -1px rgba(0,0,0,.15), 0 4px 14px -1px rgba(0,0,0,.1);
 }
