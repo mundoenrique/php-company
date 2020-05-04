@@ -205,6 +205,9 @@ class Novo_Bulk extends NOVO_Controller {
 
 		array_push(
 			$this->includeAssets->jsFiles,
+			"third_party/jquery.validate",
+			"validate".$this->render->newViews."-forms",
+			"third_party/additional-methods",
 			'bulk/unnamed_request'
 		);
 

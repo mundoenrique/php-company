@@ -81,7 +81,11 @@ function validateForms(form) {
 			"id-number": {required: true, pattern: numeric},
 			"card-number": {required: true, pattern: numeric, maxlength: 16, minlength: 16},
 			"card-number-sel": {requiredSelect: true},
-			"inquiry-type": {requiredSelect: true}
+			"inquiry-type": {requiredSelect: true},
+			"expired-date": {required: true, pattern: date.my},
+			"max-cards": {required: true},
+			"starting-line1": {required: true},
+			"starting-line2": {required: true},
 		},
 		messages: {
 			"user_login": lang.VALIDATE_USERLOGIN,

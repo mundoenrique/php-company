@@ -21,36 +21,37 @@
 		<div class="flex flex-auto flex-column <?= $widget ? '' : 'max-width-6'; ?>">
 			<div class="flex pb-5 flex-column">
 				<span class="line-text mb-2 h4 semibold primary"><?= lang('BULK_UNNA_REQUEST'); ?></span>
-				<form method="post">
+				<form id="unnamed-request-form">
 					<div class="flex px-5 pb-4 items-center row">
 						<div class="form-group col-4 col-xl-3">
 							<label><?= LANG('BULK_UNNA_EXPIRED_DATE'); ?></label>
-							<input type="text" class="form-control read-only h5" <?= $editable; ?> value="<?= $expMaxMonths; ?>">
+							<input type="text" id="expiredDate" name="expired-date" class="form-control read-only h5" <?= $editable; ?>
+								value="<?= $expMaxMonths; ?>">
 							<div class="help-block"></div>
 						</div>
 						<div class="form-group col-4 col-xl-3">
 							<label><?= LANG('BULK_UNNA_MAX_CARDS'); ?></label>
-							<input type="text" class="form-control h5" max-cards="<?= $maxCards ?>">
+							<input type="text" id="maxCards" name="max-cards" class="form-control h5" max-cards="<?= $maxCards ?>">
 							<div class="help-block"></div>
 						</div>
 						<?php if(lang('CONF_UNNA_STARTING_LINE1')): ?>
 						<div class="form-group col-4 col-xl-3">
 							<label><?= lang('BULK_UNNA_STARTING_LINE1'); ?></label>
-							<input type="text" class="form-control h5">
+							<input type="text" id="startingLine1" name="starting-line1" class="form-control h5">
 							<div class="help-block"></div>
 						</div>
 						<?php endif; ?>
 						<?php if(lang('CONF_UNNA_STARTING_LINE2')): ?>
 						<div class="form-group col-4 col-xl-3">
 							<label><?= lang('BULK_UNNA_STARTING_LINE2'); ?></label>
-							<input type="text" class="form-control h5">
+							<input type="text" id="startingLine2" name="starting-line2" class="form-control h5">
 							<div class="help-block"></div>
 						</div>
 						<?php endif; ?>
 						<?php if(lang('CONF_UNNA_BRANCHOFFICE')): ?>
 						<div class="form-group col-4 col-xl-3">
 							<label class="mt-1 h6"><?= lang('BULK_BRANCH_OFFICE'); ?></label>
-							<select class="select-box custom-select h6 w-100">
+							<select id="branchOffice" name="branch-office" class="form-control select-box custom-select h6 w-100">
 								<?php foreach($branchOffices AS $pos => $branchOffice): ?>
 								<?php $disabled = $branchOffice->text == lang('BULK_SELECT_BRANCH_OFFICE') ||  $branchOffice->text == lang('RESP_TRY_AGAIN') ? '  disabled' : '' ?>
 								<option value="<?= $branchOffice->key; ?>" <?= $pos != 0 ? '' : 'selected'.$disabled ?>>
@@ -65,7 +66,7 @@
 						<div class="form-group col-4 col-xl-3">
 							<label><?= lang('GEN_PASSWORD');  ?></label>
 							<div class="input-group">
-								<input class="form-control pwd-input" type="password" autocomplete="off">
+								<input type="password" id="password" name="password" class="form-control pwd-input" type="password" autocomplete="off">
 								<div class="input-group-append">
 									<span class="input-group-text pwd-action" title="<?= lang('GEN_SHOW_PASS') ?>">
 										<i class="icon-view mr-0"></i>
@@ -76,7 +77,7 @@
 						</div>
 						<?php endif; ?>
 						<div class="col-auto mt-1 ml-auto">
-							<button id="upload-file-btn" class="btn btn-primary btn-small btn-loading flex ml-auto">
+							<button id="unnamed-request-btn" class="btn btn-primary btn-small btn-loading flex ml-auto">
 								<?= lang('GEN_BTN_PROCESS'); ?>
 							</button>
 						</div>
