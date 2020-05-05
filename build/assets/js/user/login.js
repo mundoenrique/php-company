@@ -58,11 +58,9 @@ $(function () {
 	});
 
 	function restartFormLogin() {
-
 		insertFormInput(false);
 		inputDisabled(false);
 		$('#login-btn').html(btnText);
-		$('#send-otp-btn').html(btnTextOtp);
 		userPass.val('');
 		if (country == 'bp') {
 			userLogin.val('');
@@ -126,7 +124,6 @@ $(function () {
 		},
 		2: function (response) {
 			if(response.ipInvalid){
-				restartFormLogin();
 				var oldID = $('#accept').attr('id');
 				$('#accept').attr('id', 'send-otp-btn');
 				btn = response.data.btn1;
@@ -164,7 +161,10 @@ $(function () {
 						validateLogin();
 					}
 				});
-				restartFormLogin();
+				$('#cancel').on('click', function() {
+					restartFormLogin();
+				});
+				$('#send-otp-btn').html(btnTextOtp);
 			} else{
 				userCred.active = 1; forWhere = lang.GEN_LOGIN;
 				validateLogin();
