@@ -50,7 +50,7 @@
 						<?php endif; ?>
 						<?php if(lang('CONF_UNNA_BRANCHOFFICE')): ?>
 						<div class="form-group col-4 col-xl-3">
-							<label class="mt-1 h6"><?= lang('BULK_BRANCH_OFFICE'); ?></label>
+							<label><?= lang('BULK_BRANCH_OFFICE'); ?></label>
 							<select id="branchOffice" name="branch-office" class="form-control select-box custom-select h6 w-100">
 								<?php foreach($branchOffices AS $pos => $branchOffice): ?>
 								<?php $disabled = $branchOffice->text == lang('BULK_SELECT_BRANCH_OFFICE') ||  $branchOffice->text == lang('RESP_TRY_AGAIN') ? '  disabled' : '' ?>
@@ -66,7 +66,7 @@
 						<div class="form-group col-4 col-xl-3">
 							<label><?= lang('GEN_PASSWORD');  ?></label>
 							<div class="input-group">
-								<input type="password" id="password" name="password" class="form-control pwd-input" type="password" autocomplete="off">
+								<input type="password" id="password" name="password" class="form-control pwd-input h5" type="password" autocomplete="off">
 								<div class="input-group-append">
 									<span class="input-group-text pwd-action" title="<?= lang('GEN_SHOW_PASS') ?>">
 										<i class="icon-view mr-0"></i>

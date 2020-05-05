@@ -63,3 +63,4 @@ $lang['BULK_UNNA_EXPIRED_DATE'] = 'Fecha de vencimiento';
 $lang['BULK_UNNA_MAX_CARDS'] = 'Cantidad de tarjetas';
 $lang['BULK_UNNA_STARTING_LINE1'] = 'Línea de embozo 1';
 $lang['BULK_UNNA_STARTING_LINE2'] = 'Línea de embozo 2';
+$lang['BULK_UNNA_PROCESS'] = 'Lotes procesados';

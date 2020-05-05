@@ -164,6 +164,8 @@ $lang['GEN_TABLE_CARD_NUMBER'] = 'Número de tarjeta';
 $lang['GEN_TABLE_EMPLOYEE'] = 'Empleado';
 $lang['GEN_TABLE_BENEFICIARY'] = 'Beneficiario';
 $lang['GEN_TABLE_ACCOUNT_BENEFICIARY'] = 'Cuenta del beneficiario';
+$lang['GEN_TABLE_NUMBER_CARDS'] = 'Cant. de tarjetas';
+$lang['GEN_TABLE_BULK_ISSUE_DATE'] = 'Fecha emisión';
 //DATATABLES LANG
 $lang['GEN_TABLE_SLENGTHMENU'] = 'Mostrar _MENU_ registros';
 $lang['GEN_TABLE_SZERORECORDS'] = 'No se encontraron resultados';

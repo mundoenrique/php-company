@@ -228,8 +228,18 @@ class Novo_Bulk extends NOVO_Controller {
 	{
 		log_message('INFO', 'NOVO Bulk: unnamedAffiliate Method Initialized');
 		$view = 'unnamedAffiliate';
+
+		array_push(
+			$this->includeAssets->cssFiles,
+			"third_party/dataTables-1.10.20"
+		);
+
 		array_push(
 			$this->includeAssets->jsFiles,
+			"third_party/dataTables-1.10.20",
+			"third_party/jquery.validate",
+			"validate-core-forms",
+			"third_party/additional-methods",
 			'bulk/unnamed_affiliate'
 		);
 
