@@ -217,6 +217,7 @@ if(!function_exists('languajeLoad')) {
 					'disassConfirmBulk'	=> ['bulk'],
 					'calculateServiceOrder'	=> ['bulk'],
 					'unnamedRequest'	=> ['bulk'],
+					'unnamedAffiliate'	=> ['bulk'],
 					'serviceOrders'	=> ['bulk'],
 					'getReportsList'	=> ['reports'],
 					'getReport'	=> ['reports'],
