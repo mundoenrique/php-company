@@ -68,13 +68,14 @@
 			<div class="line mb-2"></div>
 
 			<form id="confirm-bulk-btn" method="post">
-				<div class="flex flex-column mb-4 mt-4 px-5 justify-center items-center form-group">
-					<div class="form-group mb-3 col-5 col-lg-4 col-xl-3 input-group">
-						<input id="bulkTicked" name="bulkTicked" type="hidden" value="<?= $detailBulk->bulkTicked ?>">
-						<input id="password" name="password" class="form-control pwd-input" type="password" placeholder="<?= lang('GEN_PLACE_PASSWORD'); ?>">
-						<div class="input-group-append">
-            	<span id="pwd-addon" class="input-group-text pwd-action" title="Clic aquí para mostrar/ocultar contraseña"><i
-                class="icon-view mr-0"></i></span>
+			<div class="flex flex-column mb-4 mt-4 px-5 justify-center items-center form-group">
+					<div class="form-group mb-3 col-5 col-lg-4 col-xl-3">
+						<div class="input-group">
+							<input id="bulkTicked" name="bulkTicked" type="hidden" value="<?= $detailBulk->bulkTicked ?>">
+							<input id="password" name="password" class="form-control pwd-input" type="password" placeholder="<?= lang('GEN_PLACE_PASSWORD'); ?>">
+							<div class="input-group-append">
+								<span class="input-group-text pwd-action" title="<?= lang('GEN_SHOW_PASS') ?>"><i class="icon-view mr-0"></i></span>
+							</div>
 						</div>
 						<div class="help-block"></div>
 					</div>
