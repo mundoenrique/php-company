@@ -8,13 +8,13 @@
 			<form id="login-form">
 				<div class="form-group">
 					<label for="user_login"><?= lang('GEN_USER'); ?></label>
-					<input id="user_login" name="user_login" class="form-control" type="text" autocomplete="off" disabled>
+					<input id="user_login" name="user_login" class="form-control" type="text" autocomplete="off" maxlength="15" disabled>
 					<div class="help-block"></div>
 				</div>
 				<div class="form-group">
 					<label for="user_pass"><?= lang('GEN_PASSWORD'); ?></label>
 					<div class="input-group">
-						<input id="user_pass" name="user_pass" class="form-control pwd-input" type="password" autocomplete="off" disabled>
+						<input id="user_pass" name="user_pass" class="form-control pwd-input" type="password" autocomplete="off" maxlength="15" disabled>
 						<div class="input-group-append">
 							<span id="pwd_action" class="input-group-text pwd-action" title="<?= lang('GEN_SHOW_PASS') ?>"><i class="icon-view mr-0"></i></span>
 						</div>
