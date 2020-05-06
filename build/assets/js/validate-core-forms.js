@@ -113,7 +113,7 @@ function validateForms(form) {
 			"card-number": lang.VALIDATE_CARD_NUMBER,
 			"card-number-sel": lang.VALIDATE_CARD_NUMBER_SEL,
 			"inquiry-type": lang.VALIDATE_INQUIRY_TYPE_SEL,
-			"codeOTP": lang.GEN_CODE_OTP_REQUIRED,
+			"codeOTP": lang.GEN_CODE_OTP_REQUIRED
 		},
 		errorPlacement: function(error, element) {
 			$(element).closest('.form-group').find('.help-block').html(error.html());
