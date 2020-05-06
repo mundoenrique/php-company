@@ -145,7 +145,8 @@ function validateForms(form, options) {
 			"idTipoLote": {pattern: numeric},
 			"id-document": {pattern: numeric},
 			"card-number": {pattern: numeric},
-			"codeOTP": { required: true, pattern: validCode }
+			"codeOTP": {required: true, pattern: validCode },
+			"saveIP": {pattern: numeric}
 		},
 		messages: {
 			"user-name": "Debe indicar su nombre de usuario",
