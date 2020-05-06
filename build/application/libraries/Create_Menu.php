@@ -63,7 +63,7 @@ class Create_Menu {
 			if($module->idModulo === 'TICARG' || $module->idModulo === 'TIINVN') {
 				$levelThird = new stdClass();
 				if($control === 1) {
-					$levelThird->title = lang('GEN_MENU_LOT_UNNAMED');
+					$levelThird->title = lang('GEN_MENU_BULK_UNNAMED');
 					$level->third[] = $levelThird;
 					$level->second[] = $this->menulang('UNNAMED');
 				}
@@ -97,11 +97,11 @@ class Create_Menu {
 				$subMenuLang->link = lang('GEN_LINK_BULK_AUTH');
 				break;
 			case 'TICARG':
-				$subMenuLang->text = lang('GEN_MENU_LOT_UNNAMED_REQ');
+				$subMenuLang->text = lang('GEN_MENU_BULK_UNNAMED_REQ');
 				$subMenuLang->link = 'solicitud-innominadas';
 				break;
 			case 'TIINVN':
-				$subMenuLang->text = lang('GEN_MENU_LOT_UNNAMED_AFFIL');
+				$subMenuLang->text = lang('GEN_MENU_BULK_UNNAMED_AFFIL');
 				$subMenuLang->link = 'afiliacion-innominadas';
 				break;
 			case 'TEBGUR':
@@ -205,7 +205,7 @@ class Create_Menu {
 				$subMenuLang->link = lang('GEN_LINK_REP_ALL');
 				break;
 			case 'UNNAMED':
-				$subMenuLang->text = lang('GEN_MENU_LOT_UNNAMED');
+				$subMenuLang->text = lang('GEN_MENU_BULK_UNNAMED');
 				$subMenuLang->link = 'javascript:';
 				break;
 			default:

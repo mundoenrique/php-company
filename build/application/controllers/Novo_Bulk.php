@@ -185,26 +185,42 @@ class Novo_Bulk extends NOVO_Controller {
 		$this->loadView($view);
 	}
 	/**
-	 * @info Método la solicitud de innominadas
+	 * @info Método para solicitud de innominadas
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date April 29, 2020
 	 */
 	public function unnamedRequest()
 	{
 		log_message('INFO', 'NOVO Bulk: unnamedRequest Method Initialized');
+
 		$view = 'unnamedRequest';
+		$branchOffices = 0;
+
+		if(lang('CONF_UNNA_BRANCHOFFICE')) {
+			$this->request->select = true;
+			$this->load->model('Novo_Business_Model', 'Business');
+			$branchOffices = $this->Business->callWs_GetBranchOffices_Bulk($this->request);
+			$this->render->branchOffices = $branchOffices->data->branchOffices;
+		}
+
 		array_push(
 			$this->includeAssets->jsFiles,
+			"third_party/jquery.validate",
+			"validate".$this->render->newViews."-forms",
+			"third_party/additional-methods",
 			'bulk/unnamed_request'
 		);
 
-		$this->responseAttr();
-		$this->render->titlePage = 'Solicitud de innominadas';
+		$this->responseAttr($branchOffices);
+		$this->render->titlePage = lang('GEN_BULK_UNNAMED_REQUEST');
+		$this->render->expMaxMonths = $this->session->productInf->expMaxMonths;
+		$this->render->maxCards = $this->session->productInf->maxCards;
+		$this->render->editable = lang('CONF_UNNA_EXPIRED_DATE') ? '' : 'readonly';
 		$this->views = ['bulk/'.$view];
 		$this->loadView($view);
 	}
 	/**
-	 * @info Método la afiliación de innominadas
+	 * @info Método para afiliación de innominadas
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date April 29, 2020
 	 */
@@ -212,8 +228,18 @@ class Novo_Bulk extends NOVO_Controller {
 	{
 		log_message('INFO', 'NOVO Bulk: unnamedAffiliate Method Initialized');
 		$view = 'unnamedAffiliate';
+
+		array_push(
+			$this->includeAssets->cssFiles,
+			"third_party/dataTables-1.10.20"
+		);
+
 		array_push(
 			$this->includeAssets->jsFiles,
+			"third_party/dataTables-1.10.20",
+			"third_party/jquery.validate",
+			"validate-core-forms",
+			"third_party/additional-methods",
 			'bulk/unnamed_affiliate'
 		);
 

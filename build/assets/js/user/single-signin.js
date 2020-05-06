@@ -6,7 +6,7 @@ $(function() {
 		insertFormInput(true, form);
 		form.submit()
 	} else {
-		data = getDataform(form)
+		data = getDataForm(form)
 		data.currentTime = new Date().getHours();
 		verb = 'POST'; who = 'User'; where = 'singleSignon';
 		callNovoCore(verb, who, where, data, function (response) {

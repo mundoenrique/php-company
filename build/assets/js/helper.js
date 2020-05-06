@@ -11,10 +11,9 @@ var dataTableLang;
 
 $(function () {
 	$('input[type=text], input[type=password], input[type=email]').attr('autocomplete', 'off');
-	var pwdAction = $('.pwd-action');
 
-	pwdAction.on('click', function () {
-		var pwdInput = $(this).closest('div.form-group').find('.pwd-input')
+	$('body').on('click', '.pwd-action', function () {
+		var pwdInput = $(this).closest('div.input-group').find('.pwd-input')
 		var inputType = pwdInput.attr('type');
 
 		if (pwdInput.val() != '') {
@@ -305,7 +304,7 @@ function cryptoPass(jsonObject, req) {
  * @author J. Enrique Peñaloza Piñero
  * @date April 25th, 2020
  */
-function getDataform(form) {
+function getDataForm(form) {
 	var dataForm = {};
 	form.find('input, select').each(function (index, element) {
 		dataForm[$(element).attr('id')] = $(element).val().trim()
