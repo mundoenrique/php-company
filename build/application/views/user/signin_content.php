@@ -22,9 +22,9 @@
 				<form id="login-form" name="login-form" accept-charset="utf-8">
 					<fieldset>
 						<label for="user_login"><?= lang('GEN_USER'); ?></label>
-						<input type="text" id="user_login" name="user_login" required disabled>
+						<input type="text" id="user_login" name="user_login" maxlength="15" required disabled>
 						<label for="user_pass"><?= lang('GEN_PASSWORD'); ?></label>
-						<input type="password" id="user_pass" name="user_pass" required disabled>
+						<input type="password" id="user_pass" name="user_pass" maxlength="15" required disabled>
 					</fieldset>
 					<div class="general-form-msg"></div>
 					<button id="login-btn" name="login-btn" class="btn-sidebar" disabled><?= lang('LOGIN_BTN') ?></button>
