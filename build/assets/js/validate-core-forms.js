@@ -83,9 +83,9 @@ function validateForms(form) {
 			"card-number-sel": {requiredSelect: true},
 			"inquiry-type": {requiredSelect: true},
 			"expired-date": {required: true, pattern: date.my},
-			"max-cards": {required: true},
-			"starting-line1": {required: true},
-			"starting-line2": {required: true},
+			"max-cards": {required: true, pattern: numeric, maxcards: true},
+			"starting-line1": {required: true, pattern: alphanum},
+			"starting-line2": {required: true, pattern: alphanum},
 		},
 		messages: {
 			"user_login": lang.VALIDATE_USERLOGIN,
@@ -99,8 +99,8 @@ function validateForms(form) {
 			"current-pass": lang.VALIDATE_CURRENT_PASS,
 			"new-pass": {
 				required: lang.VALIDATE_NEW_PASS,
-				differs: 'La nueva contraseña debe ser diferente a la actual',
-				validatePass: 'La contraseña debe cumplir los requisitos'
+				differs: lang.VALIDATE_DIFFERS_PASS,
+				validatePass: lang.VALIDATE_REQUIREMENTS_PASS
 			},
 			"confirm-pass": {
 				required: lang.VALIDATE_CONFIRM_PASS,
@@ -125,6 +125,10 @@ function validateForms(form) {
 			"card-number": lang.VALIDATE_CARD_NUMBER,
 			"card-number-sel": lang.VALIDATE_CARD_NUMBER_SEL,
 			"inquiry-type": lang.VALIDATE_INQUIRY_TYPE_SEL,
+			"expired-date": lang.VALIDATE_SELECTED_DATE,
+			"max-cards": lang.VALIDATE_TOTAL_CARDS,
+			"starting-line1": lang.VALIDATE_STARTING_LINE,
+			"starting-line2": lang.VALIDATE_STARTING_LINE,
 		},
 		errorPlacement: function(error, element) {
 			$(element).closest('.form-group').find('.help-block').html(error.html());
@@ -147,7 +151,7 @@ function validateForms(form) {
 	}
 
 	$.validator.methods.requiredBranchOffice = function(value, element, param) {
-		return alphanum.test($(element).find('option:selected').val());;
+		return alphanum.test($(element).find('option:selected').val());
 	}
 
 	$.validator.methods.fiscalRegistry = function(value, element, param) {
@@ -179,6 +183,18 @@ function validateForms(form) {
 		if($(element).find('option').length > 0 ) {
 			valid = alphanum.test($(element).find('option:selected').val().trim());
 		}
+		return valid
+	}
+
+	$.validator.methods.maxcards = function(value, element, param) {
+		var valid = true;
+		var cardsMax = parseInt($(element).attr('max-cards'));
+		var cards = parseInt(value);
+
+		if (cardsMax > 0) {
+			valid = cardsMax > cards
+		}
+
 		return valid
 	}
 

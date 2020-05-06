@@ -350,6 +350,33 @@ $config = [
 			'rules' => 'trim|regex_match[/^[\w.]+$/i]'
 		]
 	],
+	'unnamedRequest' => [
+		[
+			'field' => 'expiredDate',
+			'label' => 'expiredDate',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+		],
+		[
+			'field' => 'maxCards',
+			'label' => 'maxCards',
+			'rules' => 'trim|integer|required'
+		],
+		[
+			'field' => 'startingLine1',
+			'label' => 'startingLine1',
+			'rules' => 'trim|alpha_numeric'
+		],
+		[
+			'field' => 'startingLine2',
+			'label' => 'startingLine2',
+			'rules' => 'trim|alpha_numeric'
+		],
+		[
+			'field' => 'branchOffice',
+			'label' => 'branchOffice',
+			'rules' => 'trim|regex_match[/^[a-z0-9]+$/i]'
+		]
+	],
 	'keepSession' => [
 		[
 			'field' => 'modalReq',
