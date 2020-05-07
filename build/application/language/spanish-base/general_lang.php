@@ -33,6 +33,7 @@ $lang['GEN_MENU_WAY_ACCOUNTS'] = 'Cuentas';//CMBCTA
 $lang['GEN_MENU_WAY_TRAVELS'] = 'Cuentas';//CMBVJE
 $lang['GEN_MENU_REP_CARDHOLDERS'] = 'Tarjetahabientes';//TEBTHA
 $lang['GEN_MENU_REP_CARD_REPLACE'] = 'Reposiciones';//REPREP
+$lang['GEN_LINK_REP_CARD_REPLACE'] = $lang['GEN_NO_LINK'];//'reposiciones' REPREP
 $lang['GEN_MENU_REP_ACCAOUNT_STATUS'] = 'Estado de cuenta';//REPEDO
 $lang['GEN_LINK_REP_ACCAOUNT_STATUS'] = $lang['GEN_NO_LINK']; //'estado-cuenta' REPEDO
 $lang['GEN_MENU_REP_CLOSING_BAKANCE'] = 'Saldo al cierre';//REPSAL

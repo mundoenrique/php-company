@@ -154,7 +154,7 @@ class Create_Menu {
 				break;
 			case 'REPREP':
 				$subMenuLang->text = lang('GEN_MENU_REP_CARD_REPLACE');
-				$subMenuLang->link = 'javascript:';
+				$subMenuLang->link = lang('GEN_LINK_REP_CARD_REPLACE');
 				break;
 			case 'REPEDO':
 				$subMenuLang->text = lang('GEN_MENU_REP_ACCAOUNT_STATUS');

@@ -89,6 +89,7 @@ $route['(:any)/descargar-archivo'] = "Novo_DownloadFiles/exportFiles";
 //Reports
 $route['(:any)/reportes'] = "Novo_Reports/getReportsList";
 $route['(:any)/estado-cuenta'] = "Novo_Reports/accountStatus";
+$route['(:any)/reposiciones'] = "Novo_Reports/replacement";
 //settings
 $route['(:any)/configuracion'] = "Novo_Settings/options";
 
