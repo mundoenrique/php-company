@@ -82,6 +82,8 @@ $route['(:any)/afiliacion-innominadas'] = "Novo_Bulk/unnamedAffiliate";
 //Inquiries
 $route['(:any)/consulta-orden-de-servicio'] = "Novo_Inquiries/serviceOrders";
 $route['(:any)/consulta-lote'] = "Novo_Inquiries/bulkDetail";
+//services
+$route['(:any)/cuenta-maestra'] = "Novo_Services/masterAccount";
 //DownloadFile
 $route['(:any)/descargar-archivo'] = "Novo_DownloadFiles/exportFiles";
 //Reports

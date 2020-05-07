@@ -194,10 +194,14 @@ class Verify_Access {
 				case 'clearServiceOrders':
 					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBORS', 'TEBANU'));
 					break;
+				case 'masterAccount':
+					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TRAMAE'));
+					break;
 				case 'getReportsList':
+					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPALL'));
 				case 'getReport':
 				case 'deleteFile':
-					$auth = ($this->CI->session->has_userdata('productInf'));
+					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPALL', 'REPALL'));
 					break;
 			}
 		}
