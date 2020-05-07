@@ -352,10 +352,9 @@ class Novo_Business_Model extends NOVO_Model {
 					$currentDate = date('Y-m');
 					$newDate = strtotime ('+'.$expMaxMonths.' month' , strtotime($currentDate));
 					$expireDate = date ('m/Y' , $newDate);
-					$expMax = new stdClass();
-					$expMax->expMaxMonths = $expireDate;
-					$expMax->maxCards = trim($response->estadistica->producto->maxTarjetas);
-					$this->session->set_userdata('expMax', $expMax);
+					$productInf->expMaxMonths = $expireDate;
+					$productInf->maxCards = trim($response->estadistica->producto->maxTarjetas);
+					$this->session->set_userdata('productInf', $productInf);
 				}
 				break;
 			case -99:

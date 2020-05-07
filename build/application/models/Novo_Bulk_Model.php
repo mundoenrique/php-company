@@ -1071,4 +1071,80 @@ class Novo_Bulk_Model extends NOVO_Model {
 
 		return $response;
 	}
+	/**
+	 * @info Método para la solicutd de cuentas innominadas
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date May 06th, 2020
+	 */
+	public function callWs_UnnamedRequest_Bulk($dataRequest)
+	{
+		log_message('INFO', 'NOVO Bulk Model: UnnamedRequest Method Initialized');
+
+		$this->className = 'com.novo.objects.MO.ListadoSucursalesMO';
+		$this->dataAccessLog->modulo = 'lotes';
+		$this->dataAccessLog->function = 'Innominadas';
+		$this->dataAccessLog->operation = 'Solictud de cuentas innominadas';
+
+		$expiredDate = explode('/', $dataRequest->expiredDate);
+		log_message('INFO', '**************'.json_encode($expiredDate));
+		$expiredDate = $expiredDate[0].substr($expiredDate[1], -2);
+		$password = '';
+
+		if (isset($dataRequest->password)) {
+			$password = json_decode(base64_decode($dataRequest->password));
+			$password = $this->cryptography->decrypt(
+				base64_decode($password->plot),
+				utf8_encode($password->password)
+			);
+		}
+
+		$this->dataRequest->idOperation = 'createCuentasInnominadas';
+		$this->dataRequest->lotesTO = [
+			'usuario' => $this->userName,
+			'idEmpresa' => $this->session->enterpriseInf->idFiscal,
+			'codCia' => $this->session->enterpriseInf->enterpriseCode,
+			'codGrupo' => $this->session->enterpriseInf->enterpriseGroup,
+			'codProducto' => $this->session->productInf->productPrefix,
+			'fechaExp' => $expiredDate,
+			'cantRegistros' => $dataRequest->maxCards,
+			'lineaEmbozo1' => isset($dataRequest->startingLine1) ? $dataRequest->startingLine1 : '',
+			'lineaEmbozo2' => isset($dataRequest->startingLine2) ? $dataRequest->startingLine2 : '',
+			'sucursalCod' => isset($dataRequest->branchOffice) ? $dataRequest->branchOffice : '',
+			'password' => md5($password),
+			'monto' => '0',
+			'idTipoLote' => "3",
+			'formato' => "00",
+			'tipoLote' => "INNOMINADAS",
+			'fechaValor' => date('d/m/Y h:i:s'),
+			'accanal' => "WEB",
+			'reproceso' => true,
+			"ubicacion" => "EM",
+			"destinoEmb" => "01"
+		];
+
+		$response = $this->sendToService('callWs_UnnamedRequest');
+
+		switch ($this->isResponseRc) {
+			case 0:
+				$this->response->title = lang('BULK_UNNA_ACCOUNT');
+				$this->response->msg = lang('BULK_UNNA_PROCESS_OK');
+				$this->response->icon = lang('GEN_ICON_SUCCESS');
+				$this->response->data['btn1']['link'] = 'lotes-autorizacion';
+				break;
+			case -1:
+				$this->response->title = lang('BULK_UNNA_ACCOUNT');
+				$this->response->msg = lang('RESP_PASSWORD_NO_VALID');
+				$this->response->icon = lang('GEN_ICON_WARNING');
+				$this->response->data['btn1']['action'] = 'close';
+				break;
+			case -142:
+				$this->response->title = lang('BULK_UNNA_ACCOUNT');
+				$this->response->msg = lang('BULK_NO_LOAD');
+				$this->response->icon = lang('GEN_ICON_WARNING');
+				$this->response->data['btn1']['action'] = 'close';
+				break;
+		}
+
+		return $this->responseTotheView('callWs_UnnamedRequest');
+	}
 }

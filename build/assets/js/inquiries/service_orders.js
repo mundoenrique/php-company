@@ -157,7 +157,7 @@ $(function () {
 				inputModal += '<div class="input-group">';
 				inputModal += '<input id="password" class="form-control pwd-input" type="password" name="password" autocomplete="off" placeholder="' + lang.GEN_PLACE_PASSWORD + '">';
 				inputModal += '<div class="input-group-append">';
-				inputModal += '<span id="pwd_action" class="input-group-text pwd-action" title="Clic aquí para mostrar/ocultar contraseña">';
+				inputModal += '<span id="pwd_action" class="input-group-text pwd-action" title="'+lang.GEN_SHOW_PASS+'">';
 				inputModal += '<i class="icon-view mr-0"></i></span>';
 				inputModal += '</div>';
 				inputModal += '</div>';

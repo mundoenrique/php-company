@@ -80,11 +80,12 @@ class NOVO_Controller extends CI_Controller {
 		$this->form_validation->set_error_delimiters('', '---');
 		$this->config->set_item('language', 'spanish-base');
 		$this->lang->load('config'.$this->render->newViews);
-		if($this->rule !== 'suggestion') {
+
+		if ($this->rule !== 'suggestion') {
 			$this->ValidateBrowser = $this->checkBrowser();
 		}
 
-		if($this->session->has_userdata('time')) {
+		if ($this->session->has_userdata('time')) {
 			$customerTime = $this->session->time->customerTime;
 			$serverTime = $this->session->time->serverTime;
 			$currentTime = (int) date("H");
@@ -107,7 +108,7 @@ class NOVO_Controller extends CI_Controller {
 				break;
 		}
 
-		if($this->input->is_ajax_request()) {
+		if ($this->input->is_ajax_request()) {
 			$this->dataRequest = json_decode(
 				$this->security->xss_clean(
 					strip_tags(
@@ -122,12 +123,15 @@ class NOVO_Controller extends CI_Controller {
 			$access = $this->verify_access->accessAuthorization($this->router->fetch_method(), $this->countryUri, $this->appUserName);
 			$valid = TRUE;
 
-			if($_POST && $access) {
+			if ($_POST && $access) {
 				$valid = $this->verify_access->validateForm($this->rule, $this->countryUri, $this->appUserName);
 
-				if($valid) {
+				if ($valid) {
 					$this->request = $this->verify_access->createRequest($this->rule, $this->appUserName);
 				}
+			} elseif ($access && $this->render->newViews != '') {
+				$this->config->set_item('language', 'spanish-'.$this->countryUri);
+				$this->lang->load('config'.$this->render->newViews);
 			}
 
 			$this->preloadView($access && $valid);

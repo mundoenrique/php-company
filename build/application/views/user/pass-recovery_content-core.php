@@ -1,6 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 
-<div class="pt-3 pb-5 bg-color">
+<div class="pt-3 pb-5">
 	<div class="logout-content max-width-4 mx-auto p-responsive py-4">
 		<h1 class="primary h0"><?= lang('GEN_RECOVER_PASS_TITLE'); ?></h1>
 		<section>
@@ -29,8 +29,8 @@
 						</div>
 						<hr class="separador-one">
 						<div class="flex items-center justify-end pt-3">
-							<a class="btn underline big-modal" href="<?= base_url('inicio') ?>"><?= lang('GEN_BTN_CANCEL'); ?></a>
-							<button id="btn-pass-recover" class="btn btn-primary btn-loading" type="submit"><?= lang('GEN_BTN_CONTINUE'); ?></button>
+							<a class="btn btn-link btn-small big-modal" href="<?= base_url('inicio') ?>"><?= lang('GEN_BTN_CANCEL'); ?></a>
+							<button id="btn-pass-recover" class="btn btn-small btn-primary btn-loading" type="submit"><?= lang('GEN_BTN_CONTINUE'); ?></button>
 						</div>
 					</form>
 				</div>
