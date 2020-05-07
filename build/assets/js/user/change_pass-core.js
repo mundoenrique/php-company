@@ -16,7 +16,7 @@ $(function() {
 		validateForms(form)
 
 		if(form.valid()) {
-			data = getDataform(form)
+			data = getDataForm(form)
 
 			if(data.userType == '1') {
 				data.currentPass = data.currentPass.toUpperCase();
