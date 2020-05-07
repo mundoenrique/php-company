@@ -199,9 +199,13 @@ class Verify_Access {
 					break;
 				case 'getReportsList':
 					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPALL'));
+					break;
 				case 'getReport':
 				case 'deleteFile':
 					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPALL', 'REPALL'));
+					break;
+				case 'accountStatus':
+					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPEDO'));
 					break;
 			}
 		}

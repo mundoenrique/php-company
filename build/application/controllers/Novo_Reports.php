@@ -47,4 +47,30 @@ class Novo_Reports extends NOVO_Controller {
 		$this->views = ['reports/'.$view];
 		$this->loadView($view);
 	}
+	/**
+	 * @info Método para renderizar la lista de reportes
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date February 6th, 2020
+	 */
+	public function accountStatus()
+	{
+		log_message('INFO', 'Novo_Reports: accountStatus Method Initialized');
+
+		$view = 'accountStatus';
+		array_push(
+			$this->includeAssets->cssFiles,
+			"third_party/dataTables-1.10.20"
+		);
+		array_push(
+			$this->includeAssets->jsFiles,
+			"third_party/dataTables-1.10.20",
+			"third_party/jquery.validate",
+			"validate-core-forms",
+			"third_party/additional-methods",
+			"reports/account_status"
+		);
+		$this->render->titlePage = lang('GEN_MENU_REP_ACCAOUNT_STATUS');
+		$this->views = ['reports/'.$view];
+		$this->loadView($view);
+	}
 }

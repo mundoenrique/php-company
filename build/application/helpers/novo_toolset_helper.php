@@ -265,6 +265,11 @@ if(!function_exists('setCurrentPage')) {
 					$cssClass = 'page-current';
 				}
 				break;
+			case 'Novo_services':
+				if($menu == lang('GEN_MENU_SERVICES')) {
+					$cssClass = 'page-current';
+				}
+				break;
 			case 'Novo_Reports':
 				if($menu == lang('GEN_MENU_REPORTS')) {
 					$cssClass = 'page-current';

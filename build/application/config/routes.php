@@ -88,6 +88,7 @@ $route['(:any)/cuenta-maestra'] = "Novo_Services/masterAccount";
 $route['(:any)/descargar-archivo'] = "Novo_DownloadFiles/exportFiles";
 //Reports
 $route['(:any)/reportes'] = "Novo_Reports/getReportsList";
+$route['(:any)/estado-cuenta'] = "Novo_Reports/accountStatus";
 //settings
 $route['(:any)/configuracion'] = "Novo_Settings/options";
 
