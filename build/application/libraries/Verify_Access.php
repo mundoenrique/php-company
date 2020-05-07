@@ -137,14 +137,23 @@ class Verify_Access {
 					$auth = ($this->CI->session->flashdata('changePassword') != NULL || ($this->CI->session->has_userdata('logged')));
 					break;
 					case 'changeEmail':
-						$auth = (($this->CI->session->has_userdata('logged')));
+						$auth = $this->CI->session->has_userdata('logged');
 						break;
+				case 'changeTelephones':
+					$auth = $this->CI->session->has_userdata('logged');
+				break;
+
+				case 'addContact':
+					$auth = $this->CI->session->has_userdata('logged');
+				break;
+
 				case 'rates':
 					$auth = ($this->CI->session->has_userdata('logged') && $countryUri === 've');
 					break;
 				case 'getEnterprises':
 				case 'getEnterprise':
-				case 'selectorBusine':
+
+				case 'obtainNumPosition':
 				case 'getProducts':
 				case 'keepSession':
 				case 'options':

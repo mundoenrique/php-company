@@ -203,6 +203,7 @@ if(!function_exists('languajeLoad')) {
 					'terms'	=> ['terms'],
 					'rates'	=> ['rates'],
 					'getEnterprises'	=> ['enterprise'],
+					'obtainNumPosition'	=>['settings'],
 					'getProducts'	=> ['products'],
 					'getProductDetail'	=> ['products'],
 					'getPendingBulk'	=> ['bulk'],

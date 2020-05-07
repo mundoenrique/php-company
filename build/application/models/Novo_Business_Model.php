@@ -170,7 +170,6 @@ class Novo_Business_Model extends NOVO_Model {
 		log_message('INFO', 'NOVO Business Model: getProducts Method Initialized');
 
 		$select = isset($dataRequest->select);
-		$this->session->set_userdata( 'hey', $dataRequest->select);
 		if(!$select) {
 			$access = [
 				'user_access',
@@ -422,15 +421,150 @@ class Novo_Business_Model extends NOVO_Model {
 		return $this->responseToTheView(' ListaEmpresas');
 	}
 
-
-		/**
-	 * @info Método para Obtener Seleccion de
+			/**
+	 * @info Método para Obtener la posicion de la empresa
 	 * @author Diego Acosta García
 	 * @date May 2nd, 2020
 	 */
-	public function callWS_SelectionEnterprise_Business()
+	public function callWS_obtainNumPosition_Business($dataRequest)
 	{
-		log_message('INFO', 'NOVO Business Model: selectorBusine Method Initialized');
-	($this->input->get_post('positionBusine'));
+		log_message('INFO', 'NOVO Business Model: obtainNumPosition Method Initialized');
+		$this->className = 'com.novo.objects.MO.ListadoEmpresasMO';
+		$this->dataAccessLog->modulo = 'infoSelectConfig';
+		$this->dataAccessLog->function = 'infoSelectConfig';
+		$this->dataAccessLog->operation = 'getInfoSelectConfig';
+		$this->dataRequest->idOperation = 'getSelectXUsuario';
+
+		$response = (array)$dataRequest;
+		$this->response->code = 0;
+		$user = $response;
+		$this->response->data = $user;
+
+		return $this->responseToTheView(' obtainNumPosition');
 	}
+
+		/**
+	 * @info Método para el cambio de telefonos
+	 * @author Diego Acosta García
+	 * @date April 29th, 2020
+	 */
+	public function CallWs_ChangeTelephones_Business($dataRequest)
+	{
+
+		log_message('INFO', 'NOVO Business Model: ChangeTelephones Method Initialized');
+
+		$this->className = 'com.novo.objects.TOs.EmpresaTO';
+		$this->dataAccessLog->modulo = 'getActualizarTLFEmpresa';
+		$this->dataAccessLog->function = 'getActualizarTLFEmpresa';
+		$this->dataAccessLog->operation = 'getActualizarTLFEmpresa';
+
+		$this->dataRequest->idOperation = 'getActualizarTLFEmpresa';
+		$this->dataRequest->acrif = $dataRequest->acrif;
+		$this->dataRequest->actel = $dataRequest->tlf1;
+		$this->dataRequest->actel2 = $dataRequest->tlf2;
+		$this->dataRequest->actel3 = $dataRequest->tlf3;
+
+		$this->sendToService('ChangeTelephones');
+
+		switch($this->isResponseRc) {
+			case 0:
+				$this->response->code = 0;
+				$this->response->msg = lang('RESP_EMAIL_CHANGED');
+				$this->response->icon = lang('GEN_ICON_SUCCESS');
+				$this->response->data = [
+					'btn1'=> [
+						'text'=> lang('GEN_BTN_CONTINUE'),
+						'link'=> 'inicio',
+						'action'=> 'close'
+					]
+				];
+				break;
+			case -4:
+				$this->response->code = 1;
+				$this->response->msg = lang('RESP_EMAIL_USED');
+				break;
+			case -22:
+				$this->response->code = 1;
+				$this->response->msg = lang('RESP_EMAIL_INCORRECT');
+				break;
+		}
+
+		if($this->isResponseRc != 0 && $this->response->code == 1) {
+			$this->response->title = lang('GEN_EMAIL_CHANGE_TITLE');
+			$this->response->icon = lang('GEN_ICON_WARNING');
+			$this->response->data = [
+				'btn1'=> [
+					'action'=> 'close'
+				]
+			];
+		}
+
+		return $this->responseToTheView('ChangeTelephones');
+	}
+
+	/**
+	 * @info Método para agregar contacto
+	 * @author Diego Acosta García
+	 * @date April 29th, 2020
+	 */
+	public function CallWs_AddContact_Business($dataRequest)
+	{
+
+		log_message('INFO', 'NOVO Business Model: AddContact Method Initialized');
+
+		$this->className = 'com.novo.objects.TOs.ContactoTO';
+		$this->dataAccessLog->modulo = 'insertarContactoEmpresa';
+		$this->dataAccessLog->function = 'insertarContactoEmpresa';
+		$this->dataAccessLog->operation = 'insertarContactoEmpresa';
+
+		$this->dataRequest->idOperation = 'insertarContactoEmpresa';
+		$this->dataRequest->acrif = $dataRequest->acrif;
+		$this->dataRequest->idExtPer = $dataRequest->idExtPer;
+		$this->dataRequest->nombres = $dataRequest->nombres;
+		$this->dataRequest->apellido = $dataRequest->apellido;
+		$this->dataRequest->cargo = $dataRequest->cargo;
+		$this->dataRequest->email = $dataRequest->email;
+		$this->dataRequest->tipoContacto = $dataRequest->tipoContacto;
+		$this->dataRequest->usuario = $dataRequest->usuario;
+
+		$this->sendToService('AddContact');
+
+		switch($this->isResponseRc) {
+			case 0:
+				$this->response->code = 0;
+				$this->response->msg = lang('RESP_EMAIL_CHANGED');
+				$this->response->icon = lang('GEN_ICON_SUCCESS');
+				$this->response->data = [
+					'btn1'=> [
+						'text'=> lang('GEN_BTN_CONTINUE'),
+						'link'=> 'inicio',
+						'action'=> 'close'
+					]
+				];
+				break;
+			case -4:
+				$this->response->code = 1;
+				$this->response->msg = lang('RESP_EMAIL_USED');
+				break;
+			case -22:
+				$this->response->code = 1;
+				$this->response->msg = lang('RESP_EMAIL_INCORRECT');
+				break;
+		}
+
+		if($this->isResponseRc != 0 && $this->response->code == 1) {
+			$this->response->title = lang('GEN_EMAIL_CHANGE_TITLE');
+			$this->response->icon = lang('GEN_ICON_WARNING');
+			$this->response->data = [
+				'btn1'=> [
+					'action'=> 'close'
+				]
+			];
+		}
+
+		return $this->responseToTheView('AddContact');
+	}
+
+
 }
+

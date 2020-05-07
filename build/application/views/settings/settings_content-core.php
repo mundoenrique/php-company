@@ -103,13 +103,16 @@
 									<div class="row">
 										<div class="form-group col-6 col-lg-5 col-xl-6">
 											<label for="email" id="email">Correo</label>
-											<input type="email" class="form-control" id="currentEmail" name="email" value="<?= $email ?>">
+											<input type="email" class="form-control" id="currentEmail" name="email" value="<?= $email ?>" >
 											<div class="help-block"></div>
 										</div>
 									</div>
-									<div class="row">
+									<div id="loader" class="none">
+									<span class="spinner-border secondary" role="status" aria-hidden="true"></span>
+									</div>
+									<div class="row" >
 										<div class="col-6 flex justify-end">
-											<button id="btnChangeEmail" class="btn btn-primary btn-small" type="submit">Guardar cambios</button>
+											<button id="btnChangeEmail" class="btn btn-primary btn-small " style="width: 159px" type="submit">Guardar cambios</button>
 										</div>
 									</div>
 								</form>
@@ -161,6 +164,8 @@
 													</div>
 												</div>
 											</div>
+
+										<div class="cover-spin" id=""></div>
 											<div class="col-6 flex justify-center">
 												<div class="field-meter" id="password-strength-meter">
 													<h4>Requerimientos de contraseña:</h4>
@@ -174,9 +179,9 @@
 																mayúscula</strong>
 														</li>
 														<li id="number" class="pwd-rules-item rule-invalid">De 1 a 3 <strong>números</strong></li>
-														<li id="especial" class="pwd-rules-item rule-invalid">Al menos un <strong>caracter
+														<li id="special" class="pwd-rules-item rule-invalid">Al menos un <strong>caracter
 																especial</strong><br>(ej: ! @ ? + - . , #)</li>
-														<li id="consecutivo" class="pwd-rules-item rule-invalid">No debe tener más de 2
+														<li id="consecutive" class="pwd-rules-item rule-invalid">No debe tener más de 2
 															<strong>caracteres</strong> iguales consecutivos</li>
 													</ul>
 												</div>
@@ -184,7 +189,7 @@
 										</div>
 										<div class="row">
 											<div class="col-6 flex justify-end">
-												<button id="btnChangePass" class="btn btn-primary btn-small" type="button">Guardar cambios</button>
+												<button id="btnChangePass" class="btn btn-primary btn-small " style="width: 159px" type="button" disabled>Guardar cambios</button>
 											</div>
 										</div>
 									</div>
@@ -199,79 +204,103 @@
 						<div class="px-5">
 
 							<div class="container">
+
 								<div class="row mb-2">
 									<div class="form-group col-12 col-lg-8 col-xl-6">
 										<label class="mt-1">Empresa</label>
-										<select class="select-box custom-select mb-3 h6 w-100" name="selecter" id="selecter">
-											<option selected disabled></option>
-											<?php foreach($enterpriseList1 AS $enterpriseaAttr): ?>
 
-												<option value="<?= $enterpriseaAttr->acnomcia; ?>"><?= $enterpriseaAttr->acnomcia; ?></option>
+							<form id="enterprise-widget-form" method="POST" >
+				<select id="enterprise-select" class="select-box custom-select mt-3 mb-4 h6 w-100">
+					<option selected disabled><?= lang('GEN_SELECT_ENTERPRISE'); ?></option>
+					<?php
+					$numpos = 0;
+					 foreach($enterpriseList1 AS $enterprise) : ?>
+					<option name="<?= $enterprise->acnomcia; ?>" acrif="<?= $enterprise->acrif ?>" numpos="<?= $numpos; ?>" razonSocial="<?= $enterprise->acrazonsocial; ?>" contacto="<?= $enterprise->acpercontac ?>" ubicacion="<?= $enterprise->acdirenvio ?>" fact="<?= $enterprise->acdirenvio ?>" tel1="<?= $enterprise->actel; ?>" tel2="<?= $enterprise->actel2; ?>" tel3="<?= $enterprise->actel3; ?>">
+						<?= $enterprise->acnomcia; ?>
+					</option>
+					<?php
+				$numpos++;
+				endforeach; ?>
+				</select>
 
-												<?php endforeach; ?>
-										</select>
+			</form>
+
+
 
 									</div>
 								</div>
-								<div class="row" id="blockEnterprice">
+								<div class="hide-out hide">
+								<div id="pre-loader" class="mt-2 mx-auto flex justify-center">
+									<span  class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
+							</div>
+								</div>
+								<div id="completeForm" style="display: none">
+
+								<div class="row" id="blockEnterprice" >
 									<div class="form-group mb-3 col-6 col-lg-4 col-xl-4">
 										<label for="idNumber" id="idNumber">Nro. identificador</label>
-										<span id="idNumberUser" class="form-control px-1" readonly="readonly"><?= $idSelection ?></span>
+										<span id="idNumberUser" class="form-control px-1" readonly="readonly"></span>
 									</div>
 
 									<div class="form-group mb-3 col-6 col-lg-4 col-xl-4">
 										<label for="compName" id="compName">Nombre</label>
-										<span id="compNameUser" class="form-control px-1" readonly="readonly"><?= $nameSelection ?></span>
+										<span id="compNameUser" class="form-control px-1" readonly="readonly"></span>
 									</div>
 
 									<div class="form-group mb-3 col-6 col-lg-4 col-xl-4">
 										<label for="busiName" id="busiName">Razón social</label>
-										<span id="busiNameUser" class="form-control px-1" readonly="readonly"><?= $rfcSelection ?></span>
+										<span id="busiNameUser" class="form-control px-1" readonly="readonly"></span>
 									</div>
 
 									<div class="form-group mb-3 col-6 col-lg-4 col-xl-4">
 										<label for="contact" id="contact">Contacto</label>
-										<span id="contactUser" class="form-control px-1" readonly="readonly"><?= $contactSelection ?></span>
+										<span id="contactUser" class="form-control px-1" readonly="readonly"></span>
 									</div>
 
 									<div class="form-group mb-3 col-6 col-lg-4 col-xl-4">
 										<label for="address" id="address">Dirección</label>
-										<span id="addressUser" class="form-control px-1" readonly="readonly"><?= $directionSelection ?></span>
+										<span id="addressUser" class="form-control px-1" readonly="readonly"></span>
 									</div>
 
 									<div class="form-group mb-3 col-6 col-lg-4 col-xl-4">
 										<label for="TempAddress" id="TempAddress">Dirección de facturación</label>
-										<span id="TempAddressUser" class="form-control px-1" readonly="readonly"><?= $factDirectionSelection ?></span>
+										<span id="TempAddressUser" class="form-control px-1" readonly="readonly"></span>
 									</div>
 								</div>
 
 
-								<form action="post">
+								<form id="formChangeTelephones">
 									<div class="row">
+									<div class="form-group mb-3 col-6 col-lg-4 col-xl-4" hidden>
+											<label for="acrif">Teléfono 1</label>
+											<input id="acrif" name="acrif" type="text" class="form-control"  value="<?= $rfcSelection ?>"/>
+											<div class="help-block"></div>
+										</div>
 										<div class="form-group mb-3 col-6 col-lg-4 col-xl-4">
 											<label for="phone">Teléfono 1</label>
-											<input id="phone1" name="phone1" type="text" class="form-control" value="" />
+											<input id="tlf1" name="phone1" type="text" class="form-control"  />
 											<div class="help-block"></div>
 										</div>
 
 										<div class="form-group mb-3 col-6 col-lg-4 col-xl-4">
 											<label for="phone">Teléfono 2</label>
-											<input id="phone2" name="phone2" type="text" class="form-control" value="" />
+											<input id="tlf2" name="phone2" type="text" class="form-control" />
 											<div class="help-block"></div>
 										</div>
 										<div class="form-group mb-3 col-6 col-lg-4 col-xl-4">
 											<label for="phone">Teléfono 3</label>
-											<input id="phone3" name="phone3" type="text" class="form-control" value="" />
+											<input id="tlf3" name="phone3" type="text" class="form-control"  />
 											<div class="help-block"></div>
 										</div>
 									</div>
 
 									<div class="row">
 										<div class="flex mb-2 justify-end col-12">
-											<button id="changesSave2" class="btn btn-primary btn-small" type="submit">Guardar cambios</button>
+											<button id="btnChangeTelephones" style="width: 159px" class="btn btn-primary btn-small " type="submit">Guardar cambios</button>
 										</div>
 									</div>
 								</form>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -281,12 +310,22 @@
 								<i class="flex mr-1 pl-2 icon icon-chevron-down flex-auto" aria-hidden="true"></i>
 							</span>
 							<div class="section my-2 px-5">
-								<form method="post">
+								<form id="formAddContact">
 									<div class="container">
 										<div class="row">
+										<div class="form-group mb-3 col-6 col-lg-4 col-xl-4" hidden>
+											<label for="contUser"></label>
+											<input id="contUser" name="contUser" type="text" class="form-control"  value="<?= $name; ?>"/>
+											<div class="help-block"></div>
+										</div>
+										<div class="form-group mb-3 col-6 col-lg-4 col-xl-4" hidden>
+											<label for="contAcrif"></label>
+											<input id="contAcrif" name="contAcrif" type="text" class="form-control"  value="<?= $rfcSelection ?>"/>
+											<div class="help-block"></div>
+										</div>
 											<div class="form-group mb-1 col-6 col-lg-4 col-xl-4">
 												<label for="contName">Nombre</label>
-												<input id="contName" name="contName" type="text" class="form-control" value="" />
+												<input id="contName" name="contName" type="text" class="form-control"  />
 												<div class="help-block"></div>
 											</div>
 											<div class="form-group mb-1 col-6 col-lg-4 col-xl-4">
@@ -311,8 +350,8 @@
 												<div class="help-block"></div>
 											</div>
 											<div class="form-group mb-1 col-6 col-lg-4 col-xl-4">
-												<label or="">Empresa</label>
-												<select class="select-box custom-select mb-3 h6 w-100">
+												<label for="contType">Empresa</label>
+												<select class="select-box custom-select mb-3 h6 w-100"name="contType" id="contType">
 													<option selected disabled>Seleccionar</option>
 													<option value="F">Contacto Administracion y finanzas</option>
 													<option value="H">Contacto RRHH</option>
@@ -323,17 +362,18 @@
 
 										<div class="row flex mb-4 mt-2 justify-end items-center form-group">
 											<div class="col-6 col-lg-4 col-xl-3 input-group">
-													<input id="password" class="form-control pwd-input" type="password" name="Ingresa tu contraseña" placeholder="Ingresa tu contraseña">
+											<label for="contPass"></label>
+													<input id="contPass" class="form-control pwd-input" type="password" name="Ingresa tu contraseña" placeholder="Ingresa tu contraseña">
 													<div class="input-group-append">
 															<span id="pwd-addon" class="input-group-text pwd-action" title="Clic aquí para mostrar/ocultar contraseña"><i
 																	class="icon-view mr-0"></i></span>
 													</div>
 											</div>
 											<div class="col-3 col-lg-2 col-xl-auto">
-												<button class="btn btn-primary btn-small flex mx-auto">Limpiar</button>
+												<button class="btn btn-primary btn-small flex mx-auto " style="width: 159px" id="btnLimpiar" type="button">Limpiar</button>
 											</div>
 											<div class="col-3 col-lg-2 col-xl-auto">
-												<button class="btn btn-primary btn-small flex mx-auto">Agregar</button>
+												<button class="btn btn-primary btn-small flex mx-auto " style="width: 159px" id="btnAddContact" type="submit">Agregar</button>
 											</div>
 										</div>
 									</div>

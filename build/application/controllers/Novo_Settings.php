@@ -53,30 +53,33 @@ class Novo_Settings extends NOVO_Controller {
 		//Cambio de contraseña
 		$this->load->model('Novo_User_Model', 'ChangeEmail');
 
+		//Select empresa
+		$this->load->model('Novo_Business_Model', 'obtainNumPosition');
+		$alter = $this->input->post('numpos');
+		$positionNum = $this->obtainNumPosition->callWS_obtainNumPosition_Business($alter);
+
 		//LLama lista de empresas
-		$this->load->model('Novo_Business_Model', 'Business');
-		$enterpriseList = $this->Business->callWs_getEnterprises_Business(TRUE);
+		$this->load->model('Novo_Business_Model', 'getEnterprises');
+		$enterpriseList = $this->getEnterprises->callWs_getEnterprises_Business(TRUE);
 		$this->render->enterpriseList1 = $enterpriseList->data->list;
+
 		if($enterpriseSelection = $this->session->userdata('enterpriseInf') != NULL){
 			$enterpriseSelection = $this->session->userdata('enterpriseInf');
-			$name = $enterpriseSelection->enterpriseName;
+			$enterpriseSelection->enterpriseName;
 		}
 
-		$complementIdEnterprise = 1;
+		$complementIdEnterprise = (int)$positionNum->data;
 
-
-		$this->render->nameSelection = $enterpriseList->data->listaa->list[$complementIdEnterprise]->accodcia;
-		$this->render->idSelection = $enterpriseList->data->listaa->list[$complementIdEnterprise]->acnomcia;
 		$this->render->rfcSelection = $enterpriseList->data->listaa->list[$complementIdEnterprise]->acrif;
-		$this->render->contactSelection = $enterpriseList->data->listaa->list[$complementIdEnterprise]->acpercontac;
-		$this->render->directionSelection = $enterpriseList->data->listaa->list[$complementIdEnterprise]->acdirenvio;
-		$this->render->factDirectionSelection = $enterpriseList->data->listaa->list[$complementIdEnterprise]->acdirenvio;
+		$this->render->tlf1Selection = $enterpriseList->data->listaa->list[$complementIdEnterprise]->actel;
+		$this->render->tlf2Selection = $enterpriseList->data->listaa->list[$complementIdEnterprise]->actel2;
+		$this->render->tlf3Selection = $enterpriseList->data->listaa->list[$complementIdEnterprise]->actel3;
 
-		//LLama lista de empresas
-		$selection = $this->Business->callWS_SelectionEnterprise_Business();
+		//Cambio de telefonos
+		$this->load->model('Novo_Business_Model', 'ChangeTelephones');
 
-	// $this->load->model('Novo_Business_Model', 'getEnterprise');
-	// $enterprise = $this->Business->callWS_ListaEmpresas_Business();
+		//Agregar Contacto
+		$this->load->model('Novo_Business_Model', 'AddContact');
 
 		$this->render->titlePage =lang('GEN_SETTINGS_TITLE');
 		$this->views = ['settings/'.$view];
