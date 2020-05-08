@@ -248,6 +248,7 @@ if(!function_exists('languajeLoad')) {
 
 if(!function_exists('setCurrentPage')) {
 	function setCurrentPage($currentClass, $menu) {
+		log_message('INFO', "***********************, $currentClass, $menu");
 		$cssClass = '';
 		switch ($currentClass) {
 			case 'Novo_Business':
@@ -265,7 +266,7 @@ if(!function_exists('setCurrentPage')) {
 					$cssClass = 'page-current';
 				}
 				break;
-			case 'Novo_services':
+			case 'Novo_Services':
 				if($menu == lang('GEN_MENU_SERVICES')) {
 					$cssClass = 'page-current';
 				}

@@ -210,7 +210,7 @@ class Novo_Reports extends NOVO_Controller {
 		$this->loadView($view);
 	}
 	/**
-	 * @info Método para accder al reporte de recargas realizadas
+	 * @info Método para accder al reporte de gastos por categoria
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date May 7th, 2020
 	 */
@@ -233,6 +233,33 @@ class Novo_Reports extends NOVO_Controller {
 		);
 		$this->responseAttr();
 		$this->render->titlePage = lang('GEN_MENU_REP_CATEGORY_EXPENSE');
+		$this->views = ['reports/'.$view];
+		$this->loadView($view);
+	}
+	/**
+	 * @info Método para accder al reporte de gastos por categoria
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date May 7th, 2020
+	 */
+	public function masterAccount()
+	{
+		log_message('INFO', 'Novo_Reports: masterAccount Method Initialized');
+
+		$view = 'masterAccount';
+		array_push(
+			$this->includeAssets->cssFiles,
+			"third_party/dataTables-1.10.20"
+		);
+		array_push(
+			$this->includeAssets->jsFiles,
+			"third_party/dataTables-1.10.20",
+			"third_party/jquery.validate",
+			"validate-core-forms",
+			"third_party/additional-methods",
+			"reports/master_account"
+		);
+		$this->responseAttr();
+		$this->render->titlePage = lang('GEN_MENU_REP_MASTER_ACCOUNT');
 		$this->views = ['reports/'.$view];
 		$this->loadView($view);
 	}

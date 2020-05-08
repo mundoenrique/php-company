@@ -16,11 +16,11 @@ Class Novo_Services extends Novo_Controller {
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date February 6th, 2020
 	 */
-	public function masterAccount()
+	public function transfMasterAccount()
 	{
-		log_message('INFO', 'Novo_Services: masterAccount Method Initialized');
+		log_message('INFO', 'Novo_Services: transfMasterAccount Method Initialized');
 
-		$view = 'masterAccount';
+		$view = 'transfMasterAccount';
 		array_push(
 			$this->includeAssets->cssFiles,
 			"third_party/dataTables-1.10.20"
@@ -31,10 +31,10 @@ Class Novo_Services extends Novo_Controller {
 			"third_party/jquery.validate",
 			"validate-core-forms",
 			"third_party/additional-methods",
-			'services/master_account'
+			'services/transf_master_account'
 		);
-
-		$this->render->titlePage = 'Cuenta maestra';
+		$this->responseAttr();
+		$this->render->titlePage = lang('GEN_MENU_SERV_MASTER_ACCOUNT');
 		$this->views = ['services/'.$view];
 		$this->loadView($view);
 	}

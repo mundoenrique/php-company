@@ -194,7 +194,7 @@ class Verify_Access {
 				case 'clearServiceOrders':
 					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBORS', 'TEBANU'));
 					break;
-				case 'masterAccount':
+				case 'transfMasterAccount':
 					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TRAMAE'));
 					break;
 				case 'getReportsList':
@@ -224,6 +224,9 @@ class Verify_Access {
 					break;
 				case 'categoryExpense':
 					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPCAT'));
+					break;
+				case 'masterAccount':
+					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPCON'));
 					break;
 			}
 		}

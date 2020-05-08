@@ -83,7 +83,7 @@ $route['(:any)/afiliacion-innominadas'] = "Novo_Bulk/unnamedAffiliate";
 $route['(:any)/consulta-orden-de-servicio'] = "Novo_Inquiries/serviceOrders";
 $route['(:any)/consulta-lote'] = "Novo_Inquiries/bulkDetail";
 //services
-$route['(:any)/cuenta-maestra'] = "Novo_Services/masterAccount";
+$route['(:any)/transf-cuenta-maestra'] = "Novo_Services/transfMasterAccount";
 //DownloadFile
 $route['(:any)/descargar-archivo'] = "Novo_DownloadFiles/exportFiles";
 //Reports
@@ -95,6 +95,7 @@ $route['(:any)/actividad-usuario'] = "Novo_Reports/userActivity";
 $route['(:any)/recargas-realizadas'] = "Novo_Reports/rechargeMade";
 $route['(:any)/tarjetas-emitidas'] = "Novo_Reports/issuedCards";
 $route['(:any)/gastos-catgoria'] = "Novo_Reports/categoryExpense";
+$route['(:any)/cuenta-maestra'] = "Novo_Reports/masterAccount";
 //settings
 $route['(:any)/configuracion'] = "Novo_Settings/options";
 

@@ -98,7 +98,7 @@ class Create_Menu {
 				break;
 			case 'TICARG':
 				$subMenuLang->text = lang('GEN_MENU_BULK_UNNAMED_REQ');
-				$subMenuLang->link = 'solicitud-innominadas';
+				$subMenuLang->link = lang('GEN_LINK_BULK_UNNAMED_REQ');
 				break;
 			case 'TIINVN':
 				$subMenuLang->text = lang('GEN_MENU_BULK_UNNAMED_AFFIL');
@@ -186,10 +186,10 @@ class Create_Menu {
 				break;
 			case 'REPCON':
 				$subMenuLang->text = lang('GEN_MENU_REP_MASTER_ACCOUNT');
-				$subMenuLang->link = 'javascript:';
+				$subMenuLang->link = lang('GEN_LINK_REP_MASTER_ACCOUNT');;
 				break;
 			case 'REPPGE':
-				$subMenuLang->text = lang('GEN_MENU_REP_KISGARDEN_PAY');
+				$subMenuLang->text = lang('GEN_MENU_REP_KIDGARDEN_PAY');
 				$subMenuLang->link = 'javascript:';
 				break;
 			case 'REPRTH':
