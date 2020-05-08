@@ -43,6 +43,7 @@ $lang['GEN_LINK_REP_USER_ACT'] = $lang['GEN_NO_LINK'];//'actividad-usuario' REPU
 $lang['GEN_MENU_REP_RECHARGE_MADE'] = 'Recargas realizadas';//REPPRO
 $lang['GEN_LINK_REP_RECHARGE_MADE'] = $lang['GEN_NO_LINK'];//'recargas-realizadas' REPPRO
 $lang['GEN_MENU_REP_ISSUED_CARDS'] = 'Tarjetas emitidas';//REPTAR
+$lang['GEN_LINK_REP_ISSUED_CARDS'] = $lang['GEN_NO_LINK'];//'tarjetas-emitidas' REPTAR
 $lang['GEN_MENU_REP_STATUS_LOT'] = 'Estado de lote';//REPLOT
 $lang['GEN_MENU_REP_CATEGORY_EXPENSE'] = 'Gastos por catgoría';//REPCAT
 $lang['GEN_MENU_REP_MASTER_ACCOUNT'] = 'Cuenta maestra';//REPCON

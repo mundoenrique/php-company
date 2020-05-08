@@ -219,6 +219,9 @@ class Verify_Access {
 				case 'rechargeMade':
 					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPPRO'));
 					break;
+				case 'issuedCards':
+					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPTAR'));
+					break;
 			}
 		}
 

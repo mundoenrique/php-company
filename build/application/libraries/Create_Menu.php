@@ -174,7 +174,7 @@ class Create_Menu {
 				break;
 			case 'REPTAR':
 				$subMenuLang->text = lang('GEN_MENU_REP_ISSUED_CARDS');
-				$subMenuLang->link = 'javascript:';
+				$subMenuLang->link = lang('GEN_LINK_REP_ISSUED_CARDS');
 				break;
 			case 'REPLOT':
 				$subMenuLang->text = lang('GEN_MENU_REP_STATUS_LOT');
