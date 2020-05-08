@@ -102,7 +102,7 @@ class Create_Menu {
 				break;
 			case 'TIINVN':
 				$subMenuLang->text = lang('GEN_MENU_BULK_UNNAMED_AFFIL');
-				$subMenuLang->link = 'afiliacion-innominadas';
+				$subMenuLang->link = lang('GEN_LINK_BULK_UNNAMED_AFFIL');
 				break;
 			case 'TEBGUR':
 				$subMenuLang->text = lang('GEN_MENU_LOT_REPROCESS');

@@ -142,7 +142,7 @@ class Novo_Bulk extends NOVO_Controller {
 		$this->render->signBulk = $responseList->data->signBulk;
 		$this->render->authorizeBulk = $responseList->data->authorizeBulk;
 		$this->render->authorizeAttr = $responseList->data->authorizeAttr;
-		$this->render->titlePage = lang('GEN_AUTHORIZE_BULK_TITLE');
+		$this->render->titlePage = lang('GEN_MENU_BULK_AUTH');
 		$this->views = ['bulk/'.$view];
 		$this->loadView($view);
 	}
@@ -212,7 +212,7 @@ class Novo_Bulk extends NOVO_Controller {
 		);
 
 		$this->responseAttr($branchOffices);
-		$this->render->titlePage = lang('GEN_BULK_UNNAMED_REQUEST');
+		$this->render->titlePage = lang('GEN_MENU_UNNAMED_REQUEST');
 		$this->render->expMaxMonths = $this->session->productInf->expMaxMonths;
 		$this->render->maxCards = $this->session->productInf->maxCards;
 		$this->render->editable = lang('CONF_UNNA_EXPIRED_DATE') ? '' : 'readonly';

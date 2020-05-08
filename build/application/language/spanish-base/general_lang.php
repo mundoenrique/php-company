@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-//MENU BUSINESS
+//MENU
 $lang['GEN_MENU_ENTERPRISE'] = 'Empresas';
 $lang['GEN_MENU_LOTS'] = 'Lotes';
 $lang['GEN_MENU_CONSULTATIONS'] = 'Consultas';
@@ -8,7 +8,7 @@ $lang['GEN_MENU_SERVICES'] = 'Servicios';
 $lang['GEN_MENU_TRAJECTS'] = 'Trayectos';
 $lang['GEN_MENU_REPORTS'] = 'Reportes';
 $lang['GEN_MENU_SIGN_OFF'] = 'Cerrar Sesión';
-//SUBMENU BUSINESS
+//SUBMENU
 $lang['GEN_NO_LINK'] = 'javascript:';
 $lang['GEN_MENU_BULK_LOAD'] = 'Cargar lotes';//TEBCAR
 $lang['GEN_LINK_BULK_LOAD'] = 'cargar-lotes';//TEBCAR
@@ -18,21 +18,15 @@ $lang['GEN_MENU_BULK_UNNAMED'] = 'Cuentas innominadas';
 $lang['GEN_MENU_BULK_UNNAMED_REQ'] = 'Solicitud';//TICARG
 $lang['GEN_LINK_BULK_UNNAMED_REQ'] = 'solicitud-innominadas';//TICARG
 $lang['GEN_MENU_BULK_UNNAMED_AFFIL'] = 'Afiliación';//TIINVN
-$lang['GEN_BULK_UNNAMED_REQUEST'] = 'Solicitud de innominadas';
-$lang['GEN_MENU_LOT_REPROCESS'] = 'Reproceso de datos';//TEBGUR
+$lang['GEN_LINK_BULK_UNNAMED_AFFIL'] = 'afiliacion-innominadas';//TIINVN
 $lang['GEN_MENU_CONS_ORDERS_SERV'] = 'Órdenes de servicio';//TEBORS
 $lang['GEN_LINK_CONS_ORDERS_SERV'] = 'consulta-orden-de-servicio';//TEBORS
-$lang['GEN_MENU_CONS_DATA_UPGRADE'] = 'Actulización de datos';//TEBPOL
 $lang['GEN_MENU_SERV_MASTER_ACCOUNT'] = 'Cuenta maestra';//TRAMAE
 $lang['GEN_LINK_SERV_MASTER_ACCOUNT'] = 'transf-cuenta-maestra'; //$lang['GEN_NO_LINK'] TRAMAE
-$lang['GEN_MENU_SERV_CARD_INQUIRY'] = 'Consulta de Tarjetas';//COPELO
-$lang['GEN_MENU_SERV_CONTROLS_PAY'] = 'Controles de pago';//CONVIS
-$lang['GEN_MENU_SERV_PROV_PAY'] = 'Pago a proveedores';//PAGPRO
-$lang['GEN_MENU_WAY_DRIVERS'] = 'Conductores';//CMBCON
-$lang['GEN_MENU_WAY_VEHICLES'] = 'Vehículos';//CMBVHI
-$lang['GEN_MENU_WAY_ACCOUNTS'] = 'Cuentas';//CMBCTA
-$lang['GEN_MENU_WAY_TRAVELS'] = 'Cuentas';//CMBVJE
-$lang['GEN_MENU_REP_CARDHOLDERS'] = 'Tarjetahabientes';//TEBTHA
+$lang['GEN_MENU_REP_CATEGORY_EXPENSE'] = 'Gastos por catgoría';//REPCAT
+$lang['GEN_LINK_REP_CATEGORY_EXPENSE'] = $lang['GEN_NO_LINK'];//'gastos-catgoria' REPCAT
+$lang['GEN_MENU_REP_ALL'] = 'Todos los reportes';//REPALL
+$lang['GEN_LINK_REP_ALL'] = 'reportes';//REPALL
 $lang['GEN_MENU_REP_CARD_REPLACE'] = 'Reposiciones';//REPREP
 $lang['GEN_LINK_REP_CARD_REPLACE'] = $lang['GEN_NO_LINK'];//'reposiciones' REPREP
 $lang['GEN_MENU_REP_ACCAOUNT_STATUS'] = 'Estado de cuenta';//REPEDO
@@ -45,16 +39,23 @@ $lang['GEN_MENU_REP_RECHARGE_MADE'] = 'Recargas realizadas';//REPPRO
 $lang['GEN_LINK_REP_RECHARGE_MADE'] = $lang['GEN_NO_LINK'];//'recargas-realizadas' REPPRO
 $lang['GEN_MENU_REP_ISSUED_CARDS'] = 'Tarjetas emitidas';//REPTAR
 $lang['GEN_LINK_REP_ISSUED_CARDS'] = $lang['GEN_NO_LINK'];//'tarjetas-emitidas' REPTAR
-$lang['GEN_MENU_REP_STATUS_LOT'] = 'Estado de lote';//REPLOT
-$lang['GEN_MENU_REP_CATEGORY_EXPENSE'] = 'Gastos por catgoría';//REPCAT
-$lang['GEN_LINK_REP_CATEGORY_EXPENSE'] = $lang['GEN_NO_LINK'];//'gastos-catgoria' REPCAT
 $lang['GEN_MENU_REP_MASTER_ACCOUNT'] = 'Cuenta maestra';//REPCON
 $lang['GEN_LINK_REP_MASTER_ACCOUNT'] = 'cuenta-maestra';//$lang['GEN_NO_LINK'] REPCON
+$lang['GEN_MENU_REP_STATUS_LOT'] = 'Estado de lote';//REPLOT
+$lang['GEN_MENU_UNNAMED_REQUEST'] = 'Solicitud de innominadas';
+$lang['GEN_MENU_LOT_REPROCESS'] = 'Reproceso de datos';//TEBGUR
+$lang['GEN_MENU_CONS_DATA_UPGRADE'] = 'Actulización de datos';//TEBPOL
+$lang['GEN_MENU_SERV_CARD_INQUIRY'] = 'Consulta de Tarjetas';//COPELO
+$lang['GEN_MENU_SERV_CONTROLS_PAY'] = 'Controles de pago';//CONVIS
+$lang['GEN_MENU_SERV_PROV_PAY'] = 'Pago a proveedores';//PAGPRO
+$lang['GEN_MENU_WAY_DRIVERS'] = 'Conductores';//CMBCON
+$lang['GEN_MENU_WAY_VEHICLES'] = 'Vehículos';//CMBVHI
+$lang['GEN_MENU_WAY_ACCOUNTS'] = 'Cuentas';//CMBCTA
+$lang['GEN_MENU_WAY_TRAVELS'] = 'Cuentas';//CMBVJE
+$lang['GEN_MENU_REP_CARDHOLDERS'] = 'Tarjetahabientes';//TEBTHA
 $lang['GEN_MENU_REP_KIDGARDEN_PAY'] = 'Pagos de guardería';//REPPGE
 $lang['GEN_MENU_REP_RECHARGE_FEE'] = 'Comisión por recarga';//REPRTH
 $lang['GEN_MENU_REP_LOTS_BILLED'] = 'Lotes por facturar';//LOTFAC
-$lang['GEN_MENU_REP_ALL'] = 'Todos los reportes';//REPALL
-$lang['GEN_LINK_REP_ALL'] = 'reportes';//REPALL
 //BUTTONS
 $lang['GEN_BTN_ACCEPT'] = 'Aceptar';
 $lang['GEN_BTN_CANCEL'] = 'Cancelar';
