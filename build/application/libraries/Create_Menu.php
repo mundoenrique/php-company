@@ -166,7 +166,7 @@ class Create_Menu {
 				break;
 			case 'REPUSU':
 				$subMenuLang->text = lang('GEN_MENU_REP_USER_ACT');
-				$subMenuLang->link = 'javascript:';
+				$subMenuLang->link = lang('GEN_LINK_REP_USER_ACT');
 				break;
 			case 'REPPRO':
 				$subMenuLang->text = lang('GEN_MENU_REP_RECHARGE_MADE');
