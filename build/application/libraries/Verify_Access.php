@@ -216,6 +216,9 @@ class Verify_Access {
 				case 'userActivity':
 					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPUSU'));
 					break;
+				case 'rechargeMade':
+					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPPRO'));
+					break;
 			}
 		}
 
