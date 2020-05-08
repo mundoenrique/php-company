@@ -248,7 +248,6 @@ if(!function_exists('languajeLoad')) {
 
 if(!function_exists('setCurrentPage')) {
 	function setCurrentPage($currentClass, $menu) {
-		log_message('INFO', "***********************, $currentClass, $menu");
 		$cssClass = '';
 		switch ($currentClass) {
 			case 'Novo_Business':

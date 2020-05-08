@@ -19,13 +19,89 @@
 	</div>
 	<div class="w-100 hide-out hide">
 		<div class="flex flex-auto flex-column <?= $widget ? '' : 'max-width-6'; ?>">
+			<div class="search-criteria-order flex pb-3 flex-column w-100">
+				<span class="line-text mb-2 h4 semibold primary">Criterio de búsqueda</span>
+				<div class="flex my-2 px-5">
+					<form method="post" class="w-100">
+						<div class="row flex ">
+							<div class="form-group col-4 col-lg-4 col-xl-3">
+								<label>Empresa</label>
+								<select class="select-box custom-select flex h6 w-100">
+									<option selected disabled>Seleccionar</option>
+									<option>Option 1</option>
+									<option>Option 2</option>
+									<option>Option 3</option>
+								</select>
+								<div class="help-block"></div>
+							</div>
 
+							<div class="form-group col-4 col-lg-4 col-xl-3">
+								<label for="datepicker_start">Fecha Inicial</label>
+								<input id="datepicker_start" class="form-control" name="datepicker" type="text">
+								<div class="help-block"></div>
+							</div>
+							<div class="form-group col-4 col-lg-4 col-xl-3">
+								<label for="datepicker_end">Fecha Final</label>
+								<input id="datepicker_end" class="form-control" name="datepicker" type="text">
+								<div class="help-block"></div>
+							</div>
+							<div class="flex items-center justify-end col-4 col-lg-4 col-xl-3 ml-auto">
+								<button class="btn btn-primary btn-small">
+									Buscar
+								</button>
+							</div>
+						</div>
 
+					</form>
+				</div>
+				<div class="line mb-2"></div>
+			</div>
 
+			<div class="flex pb-5 flex-column">
+				<span class="line-text mb-2 h4 semibold primary">Resultados Actividad por Usuario</span>
+				<div class="center mx-1">
+					<div class="flex">
 
-
-
-
+						<div class="flex mr-2 py-3 flex-auto justify-end items-center">
+							<button class="btn px-1" title="Exportar a EXCEL" data-toggle="tooltip">
+								<i class="icon icon-file-excel" aria-hidden="true"></i>
+							</button>
+							<button class="btn px-1" title="Exportar a PDF" data-toggle="tooltip">
+								<i class="icon icon-file-pdf" aria-hidden="true"></i>
+							</button>
+						</div>
+					</div>
+					<table id="concenAccount" class="detail-lot h6 cell-border primary semibold" style="width:100%">
+						<thead class="bg-primary secondary regular">
+							<tr>
+								<th>Usuario</th>
+								<th>Estatus</th>
+								<th>Última Conexión</th>
+								<th>Opciones</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>AFPRUEBAST</td>
+								<td>A</td>
+								<td>16/02/2016 07:01:34</td>
+								<td class="flex justify-center items-center">
+									<button class="btn px-0 details-user" title="Ver actividades" data-toggle="tooltip">
+										<i class="icon icon-find mr-1" aria-hidden="true"></i>
+									</button>
+									<button class="btn px-1" data-toggle="tooltip">
+										<i class="icon novoglyphs icon-info" aria-hidden="true"></i>
+									</button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					<div class="line my-2"></div>
+				</div>
+				<div class="my-5 py-4 center none">
+					<span class="h4">No se encontraron registros</span>
+				</div>
+			</div>
 		</div>
 	</div>
 	<?php if($widget): ?>

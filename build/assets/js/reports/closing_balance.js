@@ -4,7 +4,7 @@ $(function () {
 	$('#pre-loader').remove();
 	$('.hide-out').removeClass('hide');
 
-	$('#resultsAccount').DataTable({
+	$('#balancesClosing').DataTable({
 		"ordering": false,
 		"responsive": true,
 		"pagingType": "full_numbers",

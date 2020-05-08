@@ -19,13 +19,82 @@
 	</div>
 	<div class="w-100 hide-out hide">
 		<div class="flex flex-auto flex-column <?= $widget ? '' : 'max-width-6'; ?>">
+			<div class="search-criteria-order flex pb-3 flex-column w-100">
+				<span class="line-text mb-2 h4 semibold primary">Criterio de búsqueda</span>
+				<div class="flex my-2 px-5">
+					<form method="post" class="w-100">
+						<div class="row flex flex items-center justify-end col-sm-12">
+							<div class="form-group col-4 col-xl-3">
+								<label>Empresa</label>
+								<select class="select-box custom-select flex h6 w-100">
+									<option selected disabled>Seleccionar</option>
+									<option>Option 1</option>
+									<option>Option 2</option>
+									<option>Option 3</option>
+								</select>
+								<div class="help-block"></div>
+							</div>
+							<div class="form-group col-4 col-xl-3">
+								<label>Producto</label>
+								<select class="select-box custom-select flex h6 w-100">
+									<option selected disabled>Seleccionar</option>
+									<option>Option 1</option>
+									<option>Option 2</option>
+									<option>Option 3</option>
+								</select>
+								<div class="help-block"></div>
+							</div>
+							<div class="form-group col-4 col-xl-3">
+								<label>NIT. (Opcional)</label>
+								<input id="Nit" class="form-control h5" type="text" placeholder="Ingresar NIT">
+								<div class="help-block"></div>
+							</div>
 
+							<div class="flex items-center justify-end col-sm-12 col-xl-3">
+								<button class="btn btn-primary btn-small">
+									Buscar
+								</button>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="line mb-2"></div>
+			</div>
 
-
-
-
-
-
+			<div class="flex pb-5 flex-column">
+				<span class="line-text mb-2 h4 semibold primary">Resultados Saldos al cierre</span>
+				<div class="center mx-1">
+					<div class="flex mr-2 py-3 justify-end items-center">
+						<button class="btn px-1" title="Exportar a EXCEL" data-toggle="tooltip">
+							<i class="icon icon-file-excel" aria-hidden="true"></i>
+						</button>
+					</div>
+					<table id="balancesClosing" class="cell-border h6 display responsive w-100">
+						<thead class="bg-primary secondary regular">
+							<tr>
+								<th>Cuenta</th>
+								<th>NIT.</th>
+								<th>Tarjeta</th>
+								<th>Saldo inicial</th>
+								<th>Última actividad</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>PRUEBA UAT;SERVITEBCA1</td>
+								<td>010220189</td>
+								<td>************0110</td>
+								<td>0.00</td>
+								<td></td>
+							</tr>
+						</tbody>
+					</table>
+					<div class="line my-2"></div>
+				</div>
+				<div class="my-5 py-4 center none">
+					<span class="h4">No se encontraron registros</span>
+				</div>
+			</div>
 		</div>
 	</div>
 	<?php if($widget): ?>
