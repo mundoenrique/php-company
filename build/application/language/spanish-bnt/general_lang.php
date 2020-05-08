@@ -37,7 +37,7 @@ $lang['GEN_ZIP_ICON'] = 'icon-zip.svg';
 
 
 //LOGIN IMAGE
-$lang['GEN_IMAGE_LOGIN'] = 'banorte-login.jpg';
+$lang['GEN_IMAGE_LOGIN'] = 'banorte-login.svg';
 //FOOTER
 $lang['GEN_FOTTER_RIGHTS'] = '© Todos los derechos reservados. Grupo Financiero Banorte - ';
 $lang['GEN_FOTTER_IMAGE_L'] = 'img-banorte_white.svg';

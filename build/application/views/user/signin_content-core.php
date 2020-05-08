@@ -21,12 +21,12 @@
 					</div>
 					<div class="help-block"></div>
 				</div>
-				<button id="login-btn" class="btn btn-loading-lg btn-primary w-100 mt-3 mb-5">
+				<button id="login-btn" class="btn btn-loading-lg btn-primary w-100 mt-3 mb-5 login-btn">
 					<span class="icon-lock mr-1 h3 yellow" aria-hidden="true"></span>
 					<?= lang('LOGIN_BTN') ?>
 				</button>
 				<?php if(verifyDisplay('body', $module, lang('GEN_TAG_RECOVER_PASS'))): ?>
-				<a class="block mb-1 h5 primary" href="<?= base_url('recuperar-clave');?>"><?= lang('LOGIN_RECOVER_PASS'); ?></a>
+				<a class="block mb-1 h5 primary forgot-pass" href="<?= base_url('recuperar-clave');?>"><?= lang('LOGIN_RECOVER_PASS'); ?></a>
 				<?php endif; ?>
 			</form>
 		</div>
