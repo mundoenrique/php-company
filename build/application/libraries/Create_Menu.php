@@ -162,7 +162,7 @@ class Create_Menu {
 				break;
 			case 'REPSAL':
 				$subMenuLang->text = lang('GEN_MENU_REP_CLOSING_BAKANCE');
-				$subMenuLang->link = 'javascript:';
+				$subMenuLang->link = lang('GEN_LINK_REP_CLOSING_BAKANCE');
 				break;
 			case 'REPUSU':
 				$subMenuLang->text = lang('GEN_MENU_REP_USER_ACT');

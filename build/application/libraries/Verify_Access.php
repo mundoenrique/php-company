@@ -210,6 +210,9 @@ class Verify_Access {
 				case 'replacement':
 					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPREP'));
 					break;
+				case 'balanceClosing':
+					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPSAL'));
+					break;
 			}
 		}
 

@@ -37,6 +37,7 @@ $lang['GEN_LINK_REP_CARD_REPLACE'] = $lang['GEN_NO_LINK'];//'reposiciones' REPRE
 $lang['GEN_MENU_REP_ACCAOUNT_STATUS'] = 'Estado de cuenta';//REPEDO
 $lang['GEN_LINK_REP_ACCAOUNT_STATUS'] = $lang['GEN_NO_LINK']; //'estado-cuenta' REPEDO
 $lang['GEN_MENU_REP_CLOSING_BAKANCE'] = 'Saldo al cierre';//REPSAL
+$lang['GEN_LINK_REP_CLOSING_BAKANCE'] = $lang['GEN_NO_LINK'];//'saldo-al-cierre' REPSAL
 $lang['GEN_MENU_REP_USER_ACT'] = 'Actividad por usuario';//REPUSU
 $lang['GEN_MENU_REP_RECHARGE_MADE'] = 'Recargas realizadas';//REPPRO
 $lang['GEN_MENU_REP_ISSUED_CARDS'] = 'Tarjetas emitidas';//REPTAR
