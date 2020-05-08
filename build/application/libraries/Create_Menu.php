@@ -182,7 +182,7 @@ class Create_Menu {
 				break;
 			case 'REPCAT':
 				$subMenuLang->text = lang('GEN_MENU_REP_CATEGORY_EXPENSE');
-				$subMenuLang->link = 'javascript:';
+				$subMenuLang->link = lang('GEN_LINK_REP_CATEGORY_EXPENSE');
 				break;
 			case 'REPCON':
 				$subMenuLang->text = lang('GEN_MENU_REP_MASTER_ACCOUNT');

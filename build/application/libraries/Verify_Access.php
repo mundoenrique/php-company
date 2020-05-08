@@ -222,6 +222,9 @@ class Verify_Access {
 				case 'issuedCards':
 					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPTAR'));
 					break;
+				case 'categoryExpense':
+					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPCAT'));
+					break;
 			}
 		}
 
