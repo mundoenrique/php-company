@@ -79,6 +79,7 @@ $lang['GEN_BTN_USER'] = 'Usuario';
 $lang['GEN_BTN_ENTERPRISE'] = 'Empresas';
 $lang['GEN_BTN_BRANCH'] = 'Sucursales';
 $lang['GEN_BTN_DOWNLOADS'] = 'Descargas';
+$lang['GEN_BTN_ALL'] = 'Todos';
 //MODULES
 $lang['GEN_LOGIN'] = 'Login';
 $lang['GEN_VALIDATE_CAPTCHA'] = 'validateCaptcha';

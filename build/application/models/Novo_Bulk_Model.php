@@ -1086,7 +1086,6 @@ class Novo_Bulk_Model extends NOVO_Model {
 		$this->dataAccessLog->operation = 'Solictud de cuentas innominadas';
 
 		$expiredDate = explode('/', $dataRequest->expiredDate);
-		log_message('INFO', '**************'.json_encode($expiredDate));
 		$expiredDate = $expiredDate[0].substr($expiredDate[1], -2);
 		$password = '';
 
@@ -1146,5 +1145,78 @@ class Novo_Bulk_Model extends NOVO_Model {
 		}
 
 		return $this->responseTotheView('callWs_UnnamedRequest');
+	}
+	/**
+	 * @info Método para la afiliación de cuentas innominadas
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date May 06th, 2020
+	 */
+	public function callWs_unnamedAffiliate_Bulk($dataRequest)
+	{
+		log_message('INFO', 'NOVO Bulk Model: unnamedAffiliate Method Initialized');
+
+		$this->className = 'com.novo.objects.MO.ListadoLotesMO';
+		$this->dataAccessLog->modulo = 'lotes';
+		$this->dataAccessLog->function = 'Innominadas';
+		$this->dataAccessLog->operation = 'Afiliación de cuentas innominadas';
+
+		$initialDate = $dataRequest->initialDate != '' ? convertDate($dataRequest->initialDate) : '';
+		$finalDate = $dataRequest->finalDate != '' ? convertDate($dataRequest->finalDate) : '';
+
+		$this->dataRequest->idOperation = 'getListadoLotes';
+		$this->dataRequest->dtfechorcargaIni = $initialDate;
+		$this->dataRequest->dtfechorcargaFin = $finalDate;
+		$this->dataRequest->nombreEmpresa = '';
+		$this->dataRequest->acdir = '';
+		$this->dataRequest->rif = '';
+		$this->dataRequest->lista = [
+			[
+				"exonerado"=>'',
+				'ctipolote' => '3',
+				'cestatus' => '4',
+				'acprefix' => $this->session->productInf->productPrefix,
+				"rifEmpresa"=> $this->session->enterpriseInf->idFiscal,
+				"acnumlote"=> $dataRequest->bulkNumber,
+			]
+		];
+
+		$response = $this->sendToService('callWs_unnamedAffiliate');
+
+		$detailInfo = [
+			'bulkHeader' => [
+				lang('GEN_TABLE_BULK_NUMBER'),
+				lang('GEN_TABLE_NUMBER_CARDS'),
+				lang('GEN_TABLE_BULK_ISSUE_DATE'),
+				lang('GEN_TABLE_STATUS'),
+				lang('GEN_TABLE_OPTIONS')
+			],
+			'bulkRecords' => [],
+		];
+
+		switch ($this->isResponseRc) {
+			case 0:
+				$unnamedList = json_decode($response->bean);
+				$this->response->code = 0;
+
+				if(isset($unnamedList->lista) && count($unnamedList->lista) > 0) {
+					foreach ($unnamedList->lista AS $records) {
+						$record = new stdClass();
+						$record->bulkId = $records->acidlote;
+						$record->bulkNumber = $records->acnumlote;
+						$record->totalCards = $records->ncantregs;
+						$record->issuanDate = $records->dtfechorcarga;
+						$record->status = ucfirst(mb_strtolower($records->status));
+						array_push(
+							$detailInfo['bulkRecords'],
+							$record
+						);
+					}
+				}
+			break;
+		}
+
+		$this->response->data->bulkInfo = (object) $detailInfo;
+
+		return $this->responseToTheView('callWs_unnamedAffiliate');
 	}
 }

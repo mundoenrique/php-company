@@ -227,13 +227,13 @@ class Novo_Bulk extends NOVO_Controller {
 	public function unnamedAffiliate()
 	{
 		log_message('INFO', 'NOVO Bulk: unnamedAffiliate Method Initialized');
-		$view = 'unnamedAffiliate';
 
+		$requestArray = (array)$this->request;
+		$view = 'unnamedAffiliate';
 		array_push(
 			$this->includeAssets->cssFiles,
 			"third_party/dataTables-1.10.20"
 		);
-
 		array_push(
 			$this->includeAssets->jsFiles,
 			"third_party/dataTables-1.10.20",
@@ -243,7 +243,19 @@ class Novo_Bulk extends NOVO_Controller {
 			'bulk/unnamed_affiliate'
 		);
 
-		$this->responseAttr();
+		if (empty($requestArray)) {
+			$this->request->initialDate = '';
+			$this->request->finalDate = '';
+			$this->request->bulkNumber = '';
+		}
+
+		$unnamedList = $this->loadModel($this->request);
+
+		foreach($unnamedList->data->bulkInfo AS $row => $info) {
+			$this->render->$row = $info;
+		}
+
+		$this->responseAttr($unnamedList);
 		$this->render->titlePage = 'Inventario de innominadas';
 		$this->views = ['bulk/'.$view];
 		$this->loadView($view);

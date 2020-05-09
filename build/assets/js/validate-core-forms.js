@@ -56,6 +56,11 @@ function validateForms(form) {
 						if(form.attr('id') === 'service-orders-form') {
 							requireEl = !($('#five-days').is(':checked') || $('#ten-days').is(':checked'));
 						}
+
+						if(form.attr('id') === 'unna-list-form') {
+							requireEl = $('#bulkNumber').val() == '' && !$('#all-bulks').is(':checked');
+						}
+
 						return requireEl;
 					}
 				},
@@ -69,6 +74,11 @@ function validateForms(form) {
 						if(form.attr('id') === 'service-orders-form') {
 							requireEl = !($('#five-days').is(':checked') || $('#ten-days').is(':checked'));
 						}
+
+						if(form.attr('id') === 'unna-list-form') {
+							requireEl = $('#bulkNumber').val() == '' && !$('#all-bulks').is(':checked');
+						}
+
 						return requireEl;
 					}
 				},
@@ -86,6 +96,7 @@ function validateForms(form) {
 			"max-cards": {required: true, pattern: numeric, maxcards: true},
 			"starting-line1": {required: true, pattern: alphanum},
 			"starting-line2": {required: true, pattern: alphanum},
+			"bulk-number": {pattern: numeric},
 		},
 		messages: {
 			"user_login": lang.VALIDATE_USERLOGIN,
@@ -129,6 +140,7 @@ function validateForms(form) {
 			"max-cards": lang.VALIDATE_TOTAL_CARDS,
 			"starting-line1": lang.VALIDATE_STARTING_LINE,
 			"starting-line2": lang.VALIDATE_STARTING_LINE,
+			"bulk-number": lang.VALIDATE_BULK_NUMBER,
 		},
 		errorPlacement: function(error, element) {
 			$(element).closest('.form-group').find('.help-block').html(error.html());

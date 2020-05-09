@@ -1106,7 +1106,7 @@ textarea.form-control {
 	background-color: var(--tertiary);
 	border-radius: var(--border-radius);
 	border: 1px solid var(--border-color);
-	text-transform: uppercase;
+	/* text-transform: uppercase; */
 }
 
 .btn-secondary:hover {
