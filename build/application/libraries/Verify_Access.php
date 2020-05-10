@@ -163,6 +163,7 @@ class Verify_Access {
 					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TICARG'));
 					break;
 				case 'unnamedAffiliate':
+				case 'unnmamedDetail':
 					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TIINVN'));
 					break;
 				case 'confirmBulk':

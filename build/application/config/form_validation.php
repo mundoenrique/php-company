@@ -394,6 +394,23 @@ $config = [
 			'rules' => 'trim|regex_match[/^[0-9\/]+$/]'
 		]
 	],
+	'unnmamedDetail' => [
+		[
+			'field' => 'bulkNumber',
+			'label' => 'bulkNumber',
+			'rules' => 'trim|integer|required'
+		],
+		[
+			'field' => 'totalCards',
+			'label' => 'totalCards',
+			'rules' => 'trim|integer|required'
+		],
+		[
+			'field' => 'issuanDate',
+			'label' => 'issuanDate',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+		]
+	],
 	'keepSession' => [
 		[
 			'field' => 'modalReq',

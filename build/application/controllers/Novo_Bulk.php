@@ -260,5 +260,38 @@ class Novo_Bulk extends NOVO_Controller {
 		$this->views = ['bulk/'.$view];
 		$this->loadView($view);
 	}
+	/**
+	 * @info Método para ver el detalle del lote innominado
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date May 09, 2020
+	 */
+	public function unnmamedDetail()
+	{
+		log_message('INFO', 'NOVO Bulk: unnmamedDetail Method Initialized');
 
+		$view = 'unnmamedDetail';
+		array_push(
+			$this->includeAssets->cssFiles,
+			"third_party/dataTables-1.10.20"
+		);
+		array_push(
+			$this->includeAssets->jsFiles,
+			"third_party/dataTables-1.10.20",
+			"third_party/jquery.validate",
+			"validate-core-forms",
+			"third_party/additional-methods",
+			'bulk/unnamed_detail'
+		);
+
+		$unnamedDetail = $this->loadModel($this->request);
+
+		foreach($unnamedDetail->data->bulkInfo AS $row => $info) {
+			$this->render->$row = $info;
+		}
+
+		$this->responseAttr($unnamedDetail);
+		$this->render->titlePage = 'Innomindas detalle del lote';
+		$this->views = ['bulk/'.$view];
+		$this->loadView($view);
+	}
 }

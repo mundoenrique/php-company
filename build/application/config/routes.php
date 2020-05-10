@@ -79,6 +79,7 @@ $route['(:any)/lotes-autorizacion'] = "Novo_Bulk/authorizeBulkList";
 $route['(:any)/lotes-calcular-orden'] = "Novo_Bulk/calculateServiceOrder";
 $route['(:any)/solicitud-innominadas'] = "Novo_Bulk/unnamedRequest";
 $route['(:any)/afiliacion-innominadas'] = "Novo_Bulk/unnamedAffiliate";
+$route['(:any)/detalle-innominadas'] = "Novo_Bulk/unnmamedDetail";
 //Inquiries
 $route['(:any)/consulta-orden-de-servicio'] = "Novo_Inquiries/serviceOrders";
 $route['(:any)/consulta-lote'] = "Novo_Inquiries/bulkDetail";

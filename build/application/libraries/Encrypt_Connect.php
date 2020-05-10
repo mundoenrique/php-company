@@ -203,7 +203,11 @@ class Encrypt_Connect {
 		log_message('DEBUG', 'NOVO ['.$userName.'] RESPONSE '.$model.'= rc: '.$rc.', msg: '.$msg.', country: '.$country);
 
 		if(RESPONSE_SERV_COMPLETE) {
-			log_message('DEBUG', 'NOVO ['.$userName.'] COMPLETE RESPONSE '.$model.': '.json_encode($response, JSON_UNESCAPED_UNICODE));
+			if (!isset($response->bean)) {
+				log_message('DEBUG', 'NOVO ['.$userName.'] COMPLETE RESPONSE '.$model.': '.json_encode($response, JSON_UNESCAPED_UNICODE));
+			} else {
+				log_message('DEBUG', 'NOVO ['.$userName.'] COMPLETE RESPONSE '.$model.': '.$response->bean, JSON_UNESCAPED_UNICODE);
+			}
 		}
 	}
 }

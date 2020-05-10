@@ -5,7 +5,8 @@ $(function () {
 	$('#pre-loader').remove();
 	$('.hide-out').removeClass('hide');
 	var unnaListBtn = $('#unna-list-btn');
-	var bulkNumber = $('#bulkNumber')
+	var bulkNumber = $('#bulkNumber');
+	var unnaListTable = $('#inventoryBulkResults');
 
 	inventoryBulkResults = $('#inventoryBulkResults').DataTable({
 		drawCallback: function (d) {
@@ -50,6 +51,7 @@ $(function () {
 			form.validate().resetForm();
 			$('.help-block').text('');
 			$('input:radio').prop('checked', false);
+			$('#initialDate, #finalDate').datepicker('setDate', null);
 		}
 	});
 
@@ -57,6 +59,8 @@ $(function () {
 		form = $('#unna-list-form')
 		form.validate().resetForm();
 		$('.help-block').text('');
+		bulkNumber.val('')
+		$('#initialDate, #finalDate').datepicker('setDate', null);
 	});
 
 	unnaListBtn.on('click', function(e) {
@@ -77,4 +81,11 @@ $(function () {
 			form.submit()
 		}
 	})
+
+	unnaListTable.on('click', 'button', function(e) {
+		e.preventDefault();
+		form = $(this).parent().find('form')
+		insertFormInput(true, form);
+		form.submit();
+	});
 });

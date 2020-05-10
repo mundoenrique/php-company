@@ -20,7 +20,7 @@
 			<span class="line-text mb-2 h4 semibold primary"><?= lang('GEN_DETAILS') ?></span>
 			<div class="row mb-2 px-5">
 				<div class="form-group mb-3 col-4">
-					<label for="confirmNIT" id="confirmNIT"><?= lang('GEN_NIT') ?></label>
+					<label for="confirmNIT" id="confirmNIT"><?= lang('GEN_FISCAL_REGISTRY') ?></label>
 					<span id="confirmNIT" class="form-control px-1" readonly="readonly"><?= $fiscalId; ?></span>
 				</div>
 

@@ -17,7 +17,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date December 8th, 2019
 	 */
-	public function callWs_getPendingBulk_Bulk()
+	public function callWs_GetPendingBulk_Bulk()
 	{
 		log_message('INFO', 'NOVO Bulk Model: getPendingBulk Method Initialized');
 
@@ -92,7 +92,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date December 8th, 2019
 	 */
-	public function callWs_getTypeLots_Bulk($dataRequest)
+	public function callWs_GetTypeLots_Bulk($dataRequest)
 	{
 		log_message('INFO', 'NOVO Bulk Model: getTypeLots Method Initialized');
 
@@ -1151,7 +1151,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date May 06th, 2020
 	 */
-	public function callWs_unnamedAffiliate_Bulk($dataRequest)
+	public function callWs_UnnamedAffiliate_Bulk($dataRequest)
 	{
 		log_message('INFO', 'NOVO Bulk Model: unnamedAffiliate Method Initialized');
 
@@ -1205,7 +1205,81 @@ class Novo_Bulk_Model extends NOVO_Model {
 						$record->bulkNumber = $records->acnumlote;
 						$record->totalCards = $records->ncantregs;
 						$record->issuanDate = $records->dtfechorcarga;
+						$record->amount = $records->nmonto;
 						$record->status = ucfirst(mb_strtolower($records->status));
+						array_push(
+							$detailInfo['bulkRecords'],
+							$record
+						);
+					}
+				}
+			break;
+		}
+
+		$this->response->data->bulkInfo = (object) $detailInfo;
+
+		return $this->responseToTheView('callWs_unnamedAffiliate');
+	}
+	/**
+	 * @info Método para ver el detalle de un lote innominado
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date May 09th, 2020
+	 */
+	public function callWs_UnnmamedDetail_Bulk($dataRequest)
+	{
+		log_message('INFO', 'NOVO Bulk Model: unnmamedDetail Method Initialized');
+
+		$this->className = 'com.novo.objects.MO.ListadoLotesMO';
+		$this->dataAccessLog->modulo = 'lotes';
+		$this->dataAccessLog->function = 'Innominadas';
+		$this->dataAccessLog->operation = 'Detalle de lote';
+
+		$this->dataRequest->idOperation = 'getListadoTarjetasInnominadas';
+		$this->dataRequest->idProducto = $this->session->productInf->productPrefix;
+		$this->dataRequest->tarjetasInnominadas = [
+			[
+				'numLote' => $dataRequest->bulkNumber,
+				'idExtEmp' => $this->session->enterpriseInf->idFiscal,
+				'estatus' => '0',
+				'enmascarar' => TRUE
+			]
+		];
+
+		$response = $this->sendToService('callWs_unnmamedDetail');
+
+		$detailInfo = [
+			'fiscalId' => $this->session->enterpriseInf->idFiscal,
+			'enterpriseName' => $this->session->enterpriseInf->enterpriseName,
+			'issuanDate' => $dataRequest->issuanDate,
+			'bulkNumber' => $dataRequest->bulkNumber,
+			'ammount' => $dataRequest->amount,
+			'totalRecords' => $dataRequest->totalCards,
+			'bulkHeader' => [
+				lang('GEN_TABLE_CARD_NUMBER'),
+				lang('GEN_TABLE_ACCOUNT_NUMBER'),
+				lang('GEN_TABLE_ID_DOC'),
+				lang('GEN_TABLE_CARDHOLDER'),
+				lang('GEN_TABLE_STATUS'),
+			],
+			'bulkRecords' => [],
+		];
+
+		switch ($this->isResponseRc) {
+			case 0:
+				$unnamedDetail = json_decode($response->bean);
+				$this->response->code = 0;
+
+				if(isset($unnamedDetail->tarjetasInnominadas) && count($unnamedDetail->tarjetasInnominadas) > 0) {
+					foreach ($unnamedDetail->tarjetasInnominadas AS $records) {
+						$record = new stdClass();
+						$record->cardNumber = $records->nroTarjeta;
+						$record->accountNumber = maskString($records->nroCuenta, 6, 4);
+						$record->idDoc = $records->idExtPer;
+						$record->cardHolder = $records->nombre;
+						$record->cardHoldLastName = $records->apellido;
+						$record->status = $records->estatus == '0' ? 'No afiliado' : 'Afiliado';
+						$record->cardHolder = $record->cardHolder.' '.$record->cardHoldLastName;
+						unset($record->cardHoldLastName);
 						array_push(
 							$detailInfo['bulkRecords'],
 							$record
