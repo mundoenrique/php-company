@@ -111,7 +111,7 @@
 									<form method="POST" action="<?= base_url('descargar-archivo'); ?>">
 										<input type="hidden" name="OrderNumber" value="<?= $list->OrderNumber; ?>">
 										<input type="hidden" name="who" value="Inquiries">
-										<input type="hidden" name="where" value="exportFiles">
+										<input type="hidden" name="where" value="ExportFiles">
 								  </form>
 								</td>
 							</tr>

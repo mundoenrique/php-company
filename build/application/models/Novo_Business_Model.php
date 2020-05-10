@@ -19,7 +19,7 @@ class Novo_Business_Model extends NOVO_Model {
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date November 1st, 2019
 	 */
-	public function callWs_getEnterprises_Business($dataRequest)
+	public function callWs_GetEnterprises_Business($dataRequest)
 	{
 		log_message('INFO', 'NOVO Business Model: getEnterprises Method Initialized');
 
@@ -164,7 +164,7 @@ class Novo_Business_Model extends NOVO_Model {
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date November 12th, 2019
 	 */
-	public function callWs_getProducts_Business($dataRequest)
+	public function callWs_GetProducts_Business($dataRequest)
 	{
 		log_message('INFO', 'NOVO Business Model: getProducts Method Initialized');
 
@@ -226,7 +226,7 @@ class Novo_Business_Model extends NOVO_Model {
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date November 12th, 2019
 	 */
-	public function callWs_getProductDetail_Business($dataRequest)
+	public function callWs_GetProductDetail_Business($dataRequest)
 	{
 		log_message('INFO', 'NOVO Business Model: getProductDetail Method Initialized');
 

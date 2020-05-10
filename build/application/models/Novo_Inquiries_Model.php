@@ -564,7 +564,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 	 * @mofied J. Enrique Peñaloza Piñero
 	 * @date March 19th, 2020
 	 */
-	public function callWs_exportFiles_Inquiries($dataRequest)
+	public function callWs_ExportFiles_Inquiries($dataRequest)
 	{
 		log_message('INFO', 'NOVO DownloadFiles Model: exportFiles Method Initialized');
 

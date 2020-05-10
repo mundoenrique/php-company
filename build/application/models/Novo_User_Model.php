@@ -40,7 +40,7 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataRequest->ctipo = $dataRequest->active;
 
 		if($this->config->item('active_recaptcha')) {
-			$this->isResponseRc = $this->callWs_validateCaptcha_User($dataRequest);
+			$this->isResponseRc = $this->callWs_ValidateCaptcha_User($dataRequest);
 
 			if ($this->isResponseRc == 'done') {
 				$response = $this->sendToService('callWs_Login');
@@ -444,7 +444,7 @@ class Novo_User_Model extends NOVO_Model {
 	 * @modified J. Enrique Peñaloza Piñero
 	 * @date October 21st, 2019
 	 */
-	public function callWs_validateCaptcha_User($dataRequest)
+	public function callWs_ValidateCaptcha_User($dataRequest)
 	{
 		log_message('INFO', 'NOVO User Model: validateCaptcha Method Initialized');
 
