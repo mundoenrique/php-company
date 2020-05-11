@@ -283,13 +283,24 @@ class Novo_Bulk extends NOVO_Controller {
 			'bulk/unnamed_detail'
 		);
 
-		$unnamedDetail = $this->loadModel($this->request);
+		if ($this->session->flashdata('download')) {
+			$unnamedDetail = $this->session->flashdata('download');
+		} else {
+			$unnamedDetail = $this->loadModel($this->request);
+		}
 
 		foreach($unnamedDetail->data->bulkInfo AS $row => $info) {
 			$this->render->$row = $info;
 		}
 
 		$this->responseAttr($unnamedDetail);
+
+		if ($this->session->flashdata('download')) {
+			$unnamedDetail->code = 0;
+			unset($unnamedDetail->download);
+			$this->session->set_flashdata('download', $unnamedDetail);
+		}
+
 		$this->render->titlePage = 'Innomindas detalle del lote';
 		$this->views = ['bulk/'.$view];
 		$this->loadView($view);

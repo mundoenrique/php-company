@@ -58,9 +58,17 @@
 				<div class="center mx-1">
 					<div class="flex justify-end items-center">
 						<div class="mr-3 py-1">
-							<button class="btn px-1" title="Exportar a EXCEL" data-toggle="tooltip">
+							<button id="download-file" class="btn px-1 big-modal" title="Exportar a EXCEL" data-toggle="tooltip">
 								<i class="icon icon-file-excel" aria-hidden="true"></i>
 							</button>
+							<form method="POST" action="<?= base_url('descargar-archivo'); ?>">
+								<input type="hidden" name="bulkNumber" value="<?= $bulkNumber; ?>">
+								<input type="hidden" name="issuanDate" value="<?= $issuanDate; ?>">
+								<input type="hidden" name="amount" value="<?= $ammount; ?>">
+								<input type="hidden" name="totalCards" value="<?= $totalRecords; ?>">
+								<input type="hidden" name="who" value="DownloadFiles">
+								<input type="hidden" name="where" value="UnnmamedAffiliate">
+							</form>
 						</div>
 					</div>
 					<table id="unnamed-detail" class="cell-border h6 display responsive w-100">

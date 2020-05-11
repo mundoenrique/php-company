@@ -206,7 +206,7 @@ class Encrypt_Connect {
 			if (!isset($response->bean)) {
 				log_message('DEBUG', 'NOVO ['.$userName.'] COMPLETE RESPONSE '.$model.': '.json_encode($response, JSON_UNESCAPED_UNICODE));
 			} else {
-				log_message('DEBUG', 'NOVO ['.$userName.'] COMPLETE RESPONSE '.$model.': '.$response->bean, JSON_UNESCAPED_UNICODE);
+				log_message('DEBUG', 'NOVO ['.$userName.'] COMPLETE RESPONSE IN BEAN '.$model.': '.$response->bean, JSON_UNESCAPED_UNICODE);
 			}
 		}
 	}
