@@ -29,7 +29,7 @@ $(function () {
 
 function format(e) {
   // `d` is the original data object for the row
-  return '<table class="detailLot cell-border h6 semibold tertiary" style="width:100%">' +
+  return '<table class="detail-lot cell-border h6 semibold tertiary" style="width:100%">' +
     '<tbody>' +
     '<tr class="bold" style="margin-left: 0px;">' +
     '<td>Modulo</td>' +

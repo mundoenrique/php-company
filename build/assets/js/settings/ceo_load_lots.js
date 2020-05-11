@@ -1,6 +1,6 @@
 function format(d) {
   // `d` is the original data object for the row
-  return '<table class="detailLot cell-border h6 semibold tertiary" style="width:100%">' +
+  return '<table class="detail-lot cell-border h6 semibold tertiary" style="width:100%">' +
     '<tbody>' +
     '<tr class="bold" style="margin-left: 0px;">' +
     '<td>Lote nro.</td>' +
@@ -436,7 +436,7 @@ $(document).ready(function () {
     // selectOtherMonths: true,
     changeMonth: true,
     changeYear: true,
-    // minDate: 
+    // minDate:
     maxDate: maxBirthdayDate,
     yearRange: '-10:' + maxBirthdayDate.getFullYear(),
     // yearRange: '-90:-18',
@@ -507,7 +507,7 @@ $(document).ready(function () {
   });
 
   $(".reports-form").delay(2000).removeClass('none');
-  
+
   optionValues.splice(0, 2);
 
   for (i = 0; i < optionValues.length; i++) {
