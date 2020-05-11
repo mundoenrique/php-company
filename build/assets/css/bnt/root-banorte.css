@@ -40,7 +40,7 @@
   --yellow: #ffffff;
   --vista-blue: #7ed3b2;
   --trikemaster: #8b4f80;
-	--pink-salmon: #EB0029;
+	--pink-salmon: #ff8c94;
 	--gold-sand: #ebc599;
   --black: #111111;
 	--bg-color: #F1F1F1;
@@ -71,8 +71,8 @@
   --caps-letter-spacing: .2em;
 
   --light-font-weight: 300;
-  --regular-font-weight: 300;
-  --semibold-font-weight: 700;
+  --regular-font-weight: 400;
+  --semibold-font-weight: 600;
   --bold-font-weight: 700;
 
 	--font-family-base-first: 'Gotham Book', sans-serif;

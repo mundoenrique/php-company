@@ -913,7 +913,7 @@ textarea.form-control {
 	z-index: 10;
 	padding: 9px 3.4rem 9px 8px;
 	color: var(--text-color);
-	font-weight: var(--semibold-font-weight);
+	font-weight: var(--bold-font-weight);
 	background: var(--secondary);
 	border: .85px solid var(--border-color);
 }
@@ -1318,9 +1318,9 @@ textarea.form-control {
       rgba(246,243,241,.6),
       rgba(246,243,241,.6)
     ),
-    url("../../images/bnt/bg-content.png");
+    url("../../images/bnt/bg-content.svg");
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: cover;
 }
 
 /* Borders
@@ -1995,8 +1995,8 @@ textarea.form-control {
 .capitalize { text-transform: capitalize !important }
 
 /* Font weight */
-.light      {font-weight: var(--regular-font-weight) !important }
-.regular    { font-weight: var(--regular-font-weight); color: var(--text-color) !important; }
+.light      {font-weight: var(--light-font-weight) !important }
+.regular    { font-weight: var(--light-font-weight); color: var(--text-color) !important; }
 .semibold   { font-weight: var(--bold-font-weight) !important; color: var(--text-color) !important; }
 .bold       { font-weight: var(--bold-font-weight) !important }
 
@@ -2268,7 +2268,7 @@ i[class*=" icon-"].novoglyphs {
 .nav-item .nav-link {
 	display: block;
 	padding: .5rem 0;
-	font-weight: var(--regular-font-weight);
+	font-weight: var(--light-font-weight);
 	color: var(--secondary);
 	opacity: .5;
 	transition: all .5s ease;
@@ -2663,14 +2663,14 @@ td > button > i:hover{
   background-color: var(--bg-color);
   color: var(--text-color);
   font-size: var(--h6);
-  font-weight: var(--regular-font-weight);
+  font-weight: var(--light-font-weight);
 }
 
 .dataTables_info {
   background-color: var(--bg-color);
   color: var(--text-color) !important;
   font-size: var(--h6);
-  font-weight: var(--regular-font-weight);
+  font-weight: var(--light-font-weight);
   margin-bottom: var(--space-3);
 }
 
@@ -2769,7 +2769,7 @@ td > button > i:hover{
 .dataTables_wrapper .dataTables_paginate .paginate_button.current,
 .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
   color: var(--primary);
-  font-weight: var(--semibold-font-weight) !important;
+  font-weight: var(--bold-font-weight) !important;
   border: none !important;
   background-color: none;
   background: none !important;
@@ -2789,7 +2789,7 @@ td > button > i:hover{
 
 .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
   color: var(--primary) !important;
-  font-weight: var(--semibold-font-weight) !important;
+  font-weight: var(--bold-font-weight) !important;
   border: none !important;
   background-color: none !important;
   background: none !important;
@@ -3530,9 +3530,9 @@ a.ui-button:active,
 	height: 100%;
 	z-index: 0;
 	opacity: .4;
-	background-image: url("../../images/bnt/bg-content.png");
+	background-image: url("../../images/bnt/bg-content.svg");
 	background-repeat: no-repeat;
-	background-size: 35%;
+	background-size: cover;
 }
 
 .login-content .z1{
@@ -3563,7 +3563,7 @@ a.ui-button:active,
 	color: var(--text-color) !important;
 	display: flex;
 	font-size: 12px;
-	font-weight: var(--semibold-font-weight);
+	font-weight: var(--bold-font-weight);
 	height: 33px;
 	letter-spacing: .016em;
 	padding: 0px 8px;
@@ -3580,6 +3580,7 @@ a.ui-button:active,
 .img-log{
 	margin-left: 10%;
 	width: 673px;
+	z-index: 1;
 }
 
 .img-log img{
@@ -3720,7 +3721,7 @@ a.ui-button:active,
 
 .logout-content h1{
 	color: var(--text-color) !important;
-	font-weight: var(--regular-font-weight) !important;
+	font-weight: var(--light-font-weight) !important;
 }
 
 .section {
