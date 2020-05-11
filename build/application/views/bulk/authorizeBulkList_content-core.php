@@ -68,9 +68,9 @@
 					</table>
 					<form id="sign-bulk-form" method="post">
 						<div class="flex row mt-3 mb-2 mx-2 justify-end">
-							<div class="col-4 col-lg-3 col-xl-3 form-group">
+							<div class="col-5 col-lg-3 col-xl-3 form-group">
 								<div class="input-group">
-									<input id="password-sign" name="password" class="form-control h6 pwd-input" type="password"
+									<input id="password-sign" name="password" class="form-control pwd-input pr-0" type="password"
 										placeholder="<?= lang('GEN_PLACE_PASSWORD'); ?>">
 									<div class="input-group-append">
 										<span id="pwd_action" class="input-group-text pwd-action" title="<?= lang('GEN_SHOW_PASS') ?>"><i
@@ -157,9 +157,9 @@
 								<?php endif; ?>
 								<div class="help-block"></div>
 							</div>
-							<div class="col-6 col-lg-auto form-group">
+							<div class="col-5 col-lg-3 col-xl-3 form-group">
 								<div class="input-group">
-									<input id="password-auth" name="password" class="form-control h6 pwd-input" type="password"
+									<input id="password-auth" name="password" class="form-control pwd-input pr-0" type="password"
 										placeholder="<?= lang('GEN_PLACE_PASSWORD'); ?>">
 									<div class="input-group-append">
 										<span id="pwd_action" class="input-group-text pwd-action" title="<?= lang('GEN_SHOW_PASS') ?>"><i
