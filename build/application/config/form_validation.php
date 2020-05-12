@@ -301,7 +301,12 @@ $config = [
 		[
 			'field' => 'OrderNumber',
 			'label' => 'OrderNumber',
-			'rules' => 'trim|regex_match[/^([\w]+)+$/i]|required'
+			'rules' => 'trim|regex_match[/^([\w]+)+$/i]'
+		],
+		[
+			'field' => 'bulkNumber',
+			'label' => 'bulkNumber',
+			'rules' => 'trim|integer'
 		],
 		[
 			'field' => 'who',

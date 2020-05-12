@@ -3788,7 +3788,7 @@ a.ui-button:active,
 	background-color: var(--secondary) !important;
 }
 
-.detail-lot tbody tr td {
+table .detail-lot tbody tr td {
 	border: 0 !important;
 	background-color: var(--border-color-2) !important;
 }
