@@ -22,7 +22,7 @@
 					<div class="help-block"></div>
 				</div>
 				<button id="login-btn" class="btn btn-loading-lg btn-primary w-100 mt-3 mb-5 login-btn">
-					<span class="icon-lock mr-1 h3 yellow" aria-hidden="true"></span>
+					<span class="icon-lock mr-1 h3 bg-items" aria-hidden="true"></span>
 					<?= lang('LOGIN_BTN') ?>
 				</button>
 				<?php if(verifyDisplay('body', $module, lang('GEN_TAG_RECOVER_PASS'))): ?>

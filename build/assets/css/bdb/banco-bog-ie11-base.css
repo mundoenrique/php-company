@@ -1164,11 +1164,10 @@ textarea.form-control {
 .bg-danger  { background-color: #cc0000 !important }
 
 .bg-color  { background-color: #f6f3f1 !important }
-.bg-yellow   { background-color: #ffb400 !important }
-.bg-vista-blue { background-color: #7ed3b2 !important }
-.bg-trikemaster  { background-color: #8b4f80 !important }
-.bg-pink-salmon   { background-color: #ff8c94 !important }
-.bg-gold-sand   { background-color: #ebc599 !important }
+.bg-will-processed { background-color: #7ed3b2 !important }
+.bg-will-not-processed { background-color: #8b4f80 !important }
+.bg-not-processed { background-color: #ff8c94 !important }
+.bg-being-validated { background-color: #ebc599 !important }
 
 .bg-transparent { background-color: transparent !important }
 
@@ -1643,10 +1642,10 @@ textarea.form-control {
 .warning { color: #ff8800 !important }
 .danger  { color: #cc0000 !important }
 
-.yellow        { color: #ffb400 !important }
+.bg-items      { color: #ffb400 !important }
 .color-inherit { color: inherit !important }
 
-.pink-salmon   { color: #ff8c94 !important }
+.not-processed   { color: #ff8c94 !important }
 
 /* Decoration */
 .text-decoration-none { text-decoration: none !important }

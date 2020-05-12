@@ -116,19 +116,19 @@
 				</table>
 				<div class="mx-3 h3">
 					<div class="flex mt-4 items-center">
-						<div class="icon-square bg-gold-sand" alt=""></div>
+						<div class="icon-square bg-being-validated" alt=""></div>
 						<span class="pl-1 h6"><?= lang('BULK_VALIDATING_RECORDS'); ?></span>
 					</div>
 					<div class="flex mt-2 items-center">
-						<div class="icon-square bg-vista-blue" alt=""></div>
+						<div class="icon-square bg-will-processed" alt=""></div>
 						<span class="pl-1 h6"><?= lang('BULK_ALL_RECORDS'); ?></span>
 					</div>
 					<div class="flex mt-2 items-center">
-						<div class="icon-square bg-trikemaster" alt=""></div>
+						<div class="icon-square bg-will-not-processed" alt=""></div>
 						<span class="pl-1 h6"><?= lang('BULK_SOME_RECORDS'); ?></span>
 					</div>
 					<div class="flex mt-2 items-center">
-						<div class="icon-square bg-pink-salmon" alt=""></div>
+						<div class="icon-square bg-not-processed" alt=""></div>
 						<span class="pl-1 h6"><?= lang('BULK_NO_RECORDS'); ?></span>
 					</div>
 				</div>

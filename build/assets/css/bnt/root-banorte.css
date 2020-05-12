@@ -27,35 +27,29 @@
 }
 
 :root {
-  /* Colors */
-  --primary: #EB0029;
-  --secondary: #ffffff;
-  --tertiary: #f1f1f1;
 
-  --success: #6CC04A;
-  --info: #0099cc;
-  --warning: #FFA400;
-  --danger: #EB0029;
+	/*brand colors*/
+	--color-primary: #EB0029;
+	--color-secondary: #ffffff;
+	--color-tertiary: #f1f1f1;
+	--color-room: #E1E1E1;
+	--color-fifth: #707070;
+	--color-sixth: #4E4044;
+	--color-seventh:#D10024;
+	--color-eighth: #D0D0D0;
 
-  --yellow: #ffffff;
-  --vista-blue: #7ed3b2;
-  --trikemaster: #8b4f80;
-	--pink-salmon: #ff8c94;
-	--gold-sand: #ebc599;
-  --black: #111111;
-	--bg-color: #F1F1F1;
-	--bg-color-second: #e1e1e1;
-	--icon-color: #707070;
+	/*status bulk*/
+	--will-processed: #7ed3b2;
+	--will-not-processed: #8b4f80;
+	--not-processed: #ff8c94;
+	--being-validated: #ebc599;
+	--black: #111111;
 
-	--widget-color: #ffffff;
-	--shadows-color: #D0D0D0;
-  --border-color: #D0D0D0;
-  --text-color: #4E4044;
-  --placeholder-color: #D0D0D0;
-	--disabled-color: #f1f1f1;
-
-	--label-color: #4E4044;
-  --primary-tint: #D10024;
+	/*validation messages*/
+	--success: #6CC04A;
+	--info: #0099cc;
+	--warning: #FFA400;
+	--danger: #EB0029;
 
   /* Type Scale */
   --h00: 2.5rem;

@@ -1,5 +1,5 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
-<h1 class="primary h3 regular inline"><?= lang('GEN_DETAIL_BULK_TITLE') ?></h1>
+<h1 class="text-primary h3 regular inline"><?= lang('GEN_DETAIL_BULK_TITLE') ?></h1>
 <span class="ml-2 regular tertiary"><?= $productName ?></span>
 <div class="mb-2 flex items-center">
 	<div class="flex tertiary">
@@ -17,7 +17,7 @@
 <div class="flex mt-1 mb-5 bg-color flex-nowrap justify-between">
 	<div class="flex flex-auto flex-column <?= $widget ? '' : 'max-width-6'; ?>">
 		<div class="flex flex-column">
-			<span class="line-text mb-2 h4 semibold primary"><?= lang('GEN_DETAILS') ?></span>
+			<span class="line-text mb-2 h4 semibold text-primary"><?= lang('GEN_DETAILS') ?></span>
 			<div class="row mb-2 px-5">
 				<div class="form-group mb-3 col-4">
 					<label for="confirmNIT" id="confirmNIT"><?= lang('GEN_FISCAL_REGISTRY') ?></label>
@@ -31,7 +31,7 @@
 
 				<div class="form-group mb-3 col-4">
 					<label for="typeLot" id="typeLot"><?= lang('GEN_BULT_TYPE') ?></label>
-					<span id="typeLotName" class="form-control px-1 bold pink-salmon" readonly="readonly"><?= $bulkTypeText; ?></span>
+					<span id="typeLotName" class="form-control px-1 bold not-processed" readonly="readonly"><?= $bulkTypeText; ?></span>
 				</div>
 
 				<div class="form-group mb-3 col-4">
@@ -67,7 +67,7 @@
 		</div>
 		<?php if(count($bulkRecords) > 0): ?>
 		<div class="flex pb-5 flex-column">
-			<span class="line-text mb-2 h4 semibold primary"><?= lang('GEN_RECORDS_BULK') ?></span>
+			<span class="line-text mb-2 h4 semibold text-primary"><?= lang('GEN_RECORDS_BULK') ?></span>
 			<div id="pre-loader" class="mt-2 mx-auto">
 				<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
 			</div>
