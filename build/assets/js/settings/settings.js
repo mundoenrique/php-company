@@ -1,7 +1,18 @@
 $(function() {
 
     var enterpriseWidgetForm = $('#enterprise-widget-form');
+    var changePassForm = $('#formChangePass');
+    var changeEmailForm = $('#formChangeEmail');
+    var addContactForm = $("#formAddContact");
+    var changeTelephoneForm = $('#formChangeTelephones');
     var WidgetSelcet = $('#enterprise-select');
+    var buttonPassword = $('#btnChangePass');
+    var buttonEmail = $('#btnChangeEmail');
+    var currentEmail = $('#currentEmail');
+    var buttonTelephone = $('#btnChangeTelephones');
+    var buttonClean = $("#btnLimpiar");
+    var buttonContact = $('#btnAddContact');
+    var newPass = $('#newPass');
 
     switch (client) {
         case 'banco-bog':
@@ -17,68 +28,50 @@ $(function() {
     }
     // Password Change
 
-    $('#newUserPwd').on('keyup focus', function() {
+    newPass.on('keyup focus', function() {
         var pswd = $(this).val();
-        var validatePass = passStrength(pswd);
-        if (validatePass == true) {
-            $('#confirmUserPwd').on('keyup focus', function() {
-                if (($(this).val()) == ($('#newUserPwd').val())) {
-                    $('#currentUserPwd').on('keyup focus', function() {
-                        if (($(this).val()) != '') {
-                            $('#btnChangePass').removeAttr('disabled');
-                        }
-                    });
-                }
-            });
-        }
+        passStrength(pswd);
     });
-    $('#btnChangePass').on('click', function(e) {
+
+
+    buttonPassword.on('click', function(e) {
         e.preventDefault();
         changeBtn = $(this);
+        form = changePassForm;
         btnText = changeBtn.text().trim();
-        form = $('#formChangePass');
-        validateForms(form);
+        validateForms(form)
 
         if (form.valid()) {
-            var currentPass = cryptoPass($('#currentUserPwd').val());
-            var newPass = cryptoPass($('#newUserPwd').val());
-            var confirmPass = newPass;
-        }
+            data = getDataForm(form)
 
-        if (data.userType == '1') {
-            data.currentPass = data.currentPass.toUpperCase();
-        }
+            if (data.userType == '1') {
+                data.currentPass = data.currentPass.toUpperCase();
+            }
 
-        var passData = {
-            currentPass: currentPass,
-            newPass: newPass,
-            confirmPass: confirmPass
-        };
-        insertFormInput(true, form);
-        changeBtn.html(loader);
-        if (($('#currentUserPwd').val() != '') &&
-            ($('#newUserPwd').val() != '') &&
-            ($('#confirmUserPwd').val() != '')) {
-            $("#formAddContact")[0].reset();
-        } else {
-            changePassword1(passData, btnText);
+            data.currentPass = cryptoPass(data.currentPass);
+            data.newPass = cryptoPass(data.newPass);
+            data.confirmPass = cryptoPass(data.confirmPass);
+            insertFormInput(true, form);
+            changeBtn.html(loader);
+            changePassword(data, btnText);
         }
     });
+
 
     // Password Change End
 
     // Email Change
 
-    $('#btnChangeEmail').on('click', function(e) {
+    buttonEmail.on('click', function(e) {
         e.preventDefault();
         changeBtn = $(this);
-        form = $('#formChangeEmail');
+        form = changeEmailForm;
         btnText = changeBtn.text().trim();
-        validateForms(form)
+        validateForms(form);
 
         if (form.valid()) {
-            data = getDataform(form)
-            data.email = $('#currentEmail').val();
+            data = getDataForm(form);
+            data.email = currentEmail.val().toLowerCase();
             insertFormInput(true, form);
             changeBtn.html(loader);
             changeEmail(data, btnText);
@@ -89,15 +82,15 @@ $(function() {
 
     // Telephones Change
 
-    $('#btnChangeTelephones').on('click', function(e) {
+    buttonTelephone.on('click', function(e) {
         e.preventDefault();
         changeBtn = $(this);
-        form = $('#formChangeTelephones');
+        form = changeTelephoneForm;
         btnText = changeBtn.text().trim();
-        validateForms(form)
+        validateForms(form);
 
         if (form.valid()) {
-            data = getDataform(form)
+            data = getDataForm(form);
             tlf1 = $('#tlf1').val();
             tlf2 = $('#tlf2').val();
             tlf3 = $('#tlf3').val();
@@ -117,19 +110,19 @@ $(function() {
     // Telephones Change End
 
     // Add Contact
-    $("#btnLimpiar").click(function(e) {
-        $("#formAddContact")[0].reset();
+    buttonClean.click(function(e) {
+        addContactForm[0].reset();
     });
 
-    $('#btnAddContact').on('click', function(e) {
+    buttonContact.on('click', function(e) {
         e.preventDefault();
         changeBtn = $(this);
-        form = $('#formAddContact');
+        form = addContactForm;
         btnText = changeBtn.text().trim();
         validateForms(form)
 
         if (form.valid()) {
-            data = getDataform(form)
+            data = getDataForm(form)
             nombres = $('#contName').val();
             apellido = $('#surname').val();
             cargo = $('#contOcupation').val();
@@ -162,7 +155,7 @@ $(function() {
 
     // Selector empresas
 
-    $('#enterprise-widget-form').on('change', '#enterprise-select', function() {
+    enterpriseWidgetForm.on('change', '#enterprise-select', function() {
         numpos = WidgetSelcet.find('option:selected').attr('numpos');
         nameBusine = WidgetSelcet.find('option:selected').attr('name');
         acrif = WidgetSelcet.find('option:selected').attr('acrif');
