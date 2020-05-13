@@ -85,13 +85,24 @@ $route['(:any)/lotes-autorizacion'] = "Novo_Bulk/authorizeBulkList";
 $route['(:any)/lotes-calcular-orden'] = "Novo_Bulk/calculateServiceOrder";
 $route['(:any)/solicitud-innominadas'] = "Novo_Bulk/unnamedRequest";
 $route['(:any)/afiliacion-innominadas'] = "Novo_Bulk/unnamedAffiliate";
+$route['(:any)/detalle-innominadas'] = "Novo_Bulk/unnmamedDetail";
 //Inquiries
 $route['(:any)/consulta-orden-de-servicio'] = "Novo_Inquiries/serviceOrders";
 $route['(:any)/consulta-lote'] = "Novo_Inquiries/bulkDetail";
+//services
+$route['(:any)/transf-cuenta-maestra'] = "Novo_Services/transfMasterAccount";
 //DownloadFile
 $route['(:any)/descargar-archivo'] = "Novo_DownloadFiles/exportFiles";
 //Reports
 $route['(:any)/reportes'] = "Novo_Reports/getReportsList";
+$route['(:any)/estado-de-cuenta'] = "Novo_Reports/accountStatus";
+$route['(:any)/reposiciones'] = "Novo_Reports/replacement";
+$route['(:any)/saldo-al-cierre'] = "Novo_Reports/closingBalance";
+$route['(:any)/actividad-usuario'] = "Novo_Reports/userActivity";
+$route['(:any)/recargas-realizadas'] = "Novo_Reports/rechargeMade";
+$route['(:any)/tarjetas-emitidas'] = "Novo_Reports/issuedCards";
+$route['(:any)/gastos-catgoria'] = "Novo_Reports/categoryExpense";
+$route['(:any)/cuenta-maestra'] = "Novo_Reports/masterAccount";
 //settings
 $route['(:any)/configuracion'] = "Novo_Settings/options";
 

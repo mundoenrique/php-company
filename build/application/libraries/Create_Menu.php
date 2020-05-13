@@ -98,11 +98,11 @@ class Create_Menu {
 				break;
 			case 'TICARG':
 				$subMenuLang->text = lang('GEN_MENU_BULK_UNNAMED_REQ');
-				$subMenuLang->link = 'solicitud-innominadas';
+				$subMenuLang->link = lang('GEN_LINK_BULK_UNNAMED_REQ');
 				break;
 			case 'TIINVN':
 				$subMenuLang->text = lang('GEN_MENU_BULK_UNNAMED_AFFIL');
-				$subMenuLang->link = 'afiliacion-innominadas';
+				$subMenuLang->link = lang('GEN_LINK_BULK_UNNAMED_AFFIL');
 				break;
 			case 'TEBGUR':
 				$subMenuLang->text = lang('GEN_MENU_LOT_REPROCESS');
@@ -117,8 +117,8 @@ class Create_Menu {
 				$subMenuLang->link = 'javascript:';
 				break;
 			case 'TRAMAE':
-				$subMenuLang->text = lang('GEN_MENU_SERV_MASTER_TRANSFER');
-				$subMenuLang->link = 'javascript:';
+				$subMenuLang->text = lang('GEN_MENU_SERV_MASTER_ACCOUNT');
+				$subMenuLang->link = lang('GEN_LINK_SERV_MASTER_ACCOUNT');
 				break;
 			case 'COPELO':
 				$subMenuLang->text = lang('GEN_MENU_SERV_CARD_INQUIRY');
@@ -154,27 +154,27 @@ class Create_Menu {
 				break;
 			case 'REPREP':
 				$subMenuLang->text = lang('GEN_MENU_REP_CARD_REPLACE');
-				$subMenuLang->link = 'javascript:';
+				$subMenuLang->link = lang('GEN_LINK_REP_CARD_REPLACE');
 				break;
 			case 'REPEDO':
 				$subMenuLang->text = lang('GEN_MENU_REP_ACCAOUNT_STATUS');
-				$subMenuLang->link = 'javascript:';
+				$subMenuLang->link = lang('GEN_LINK_REP_ACCAOUNT_STATUS');
 				break;
 			case 'REPSAL':
 				$subMenuLang->text = lang('GEN_MENU_REP_CLOSING_BAKANCE');
-				$subMenuLang->link = 'javascript:';
+				$subMenuLang->link = lang('GEN_LINK_REP_CLOSING_BAKANCE');
 				break;
 			case 'REPUSU':
 				$subMenuLang->text = lang('GEN_MENU_REP_USER_ACT');
-				$subMenuLang->link = 'javascript:';
+				$subMenuLang->link = lang('GEN_LINK_REP_USER_ACT');
 				break;
 			case 'REPPRO':
 				$subMenuLang->text = lang('GEN_MENU_REP_RECHARGE_MADE');
-				$subMenuLang->link = 'javascript:';
+				$subMenuLang->link = lang('GEN_LINK_REP_RECHARGE_MADE');
 				break;
 			case 'REPTAR':
 				$subMenuLang->text = lang('GEN_MENU_REP_ISSUED_CARDS');
-				$subMenuLang->link = 'javascript:';
+				$subMenuLang->link = lang('GEN_LINK_REP_ISSUED_CARDS');
 				break;
 			case 'REPLOT':
 				$subMenuLang->text = lang('GEN_MENU_REP_STATUS_LOT');
@@ -182,14 +182,14 @@ class Create_Menu {
 				break;
 			case 'REPCAT':
 				$subMenuLang->text = lang('GEN_MENU_REP_CATEGORY_EXPENSE');
-				$subMenuLang->link = 'javascript:';
+				$subMenuLang->link = lang('GEN_LINK_REP_CATEGORY_EXPENSE');
 				break;
 			case 'REPCON':
 				$subMenuLang->text = lang('GEN_MENU_REP_MASTER_ACCOUNT');
-				$subMenuLang->link = 'javascript:';
+				$subMenuLang->link = lang('GEN_LINK_REP_MASTER_ACCOUNT');;
 				break;
 			case 'REPPGE':
-				$subMenuLang->text = lang('GEN_MENU_REP_KISGARDEN_PAY');
+				$subMenuLang->text = lang('GEN_MENU_REP_KIDGARDEN_PAY');
 				$subMenuLang->link = 'javascript:';
 				break;
 			case 'REPRTH':

@@ -7,7 +7,7 @@ $lang['GEN-LOGO-BIG'] = 'img-banorte.png';
 $lang['GEN_ALTERNATIVE_TEXT'] = 'Banorte';
 $lang['GEN_FISCAL_REGISTRY'] = 'RFC.';
 //LOGIN IMAGE
-$lang['GEN_IMAGE_LOGIN'] = 'banorte-login.jpg';
+$lang['GEN_IMAGE_LOGIN'] = 'banorte-login.svg';
 //FOOTER
 $lang['GEN_FOTTER_RIGHTS'] = '© Todos los derechos reservados. Grupo Financiero Banorte - ';
 $lang['GEN_FOTTER_IMAGE_L'] = 'img-banorte_white.svg';

@@ -13,11 +13,12 @@ $(function () {
 		validateForms(form)
 
 		if (form.valid()) {
+			formInputTrim(form);
 			data = getDataForm(form);
 			data.password = cryptoPass(data.password);
 			insertFormInput(true, form);
 			unnamedBtn.html(loader);
-			unnamedRequest();
+			unnamedRequest(unnamedBtn);
 		} else {
 			if (maxCards.hasClass('has-error')) {
 				var totalCards = parseInt(maxCards.attr('max-cards'));
@@ -32,9 +33,10 @@ $(function () {
 	});
 });
 
-function unnamedRequest() {
+function unnamedRequest(unnamedBtn) {
 	verb = 'POST'; who = 'Bulk'; where = 'UnnamedRequest'
 	callNovoCore(verb, who, where, data, function(response) {
-
+		insertFormInput(false)
+		unnamedBtn.text(btnText);
 	});
 }

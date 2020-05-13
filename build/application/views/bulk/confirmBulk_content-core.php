@@ -31,7 +31,7 @@
 
 				<div class="form-group mb-3 col-4">
 					<label for="typeLot" id="typeLot"><?= lang('BULK_TYPE'); ?></label>
-					<span id="typeLotName" class="form-control px-1 bold pink-salmon" readonly="readonly"><?= $detailBulk->bulkType ?></span>
+					<span id="typeLotName" class="form-control px-1 bold not-processed" readonly="readonly"><?= $detailBulk->bulkType ?></span>
 				</div>
 
 				<div class="form-group mb-3 col-4">

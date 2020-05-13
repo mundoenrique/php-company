@@ -177,6 +177,7 @@ class Verify_Access {
 					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TICARG'));
 					break;
 				case 'unnamedAffiliate':
+				case 'unnmamedDetail':
 					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TIINVN'));
 					break;
 				case 'confirmBulk':
@@ -208,10 +209,39 @@ class Verify_Access {
 				case 'clearServiceOrders':
 					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBORS', 'TEBANU'));
 					break;
+				case 'transfMasterAccount':
+					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TRAMAE'));
+					break;
 				case 'getReportsList':
+					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPALL'));
+					break;
 				case 'getReport':
 				case 'deleteFile':
-					$auth = ($this->CI->session->has_userdata('productInf'));
+					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPALL', 'REPALL'));
+					break;
+				case 'accountStatus':
+					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPEDO'));
+					break;
+				case 'replacement':
+					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPREP'));
+					break;
+				case 'closingBalance':
+					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPSAL'));
+					break;
+				case 'userActivity':
+					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPUSU'));
+					break;
+				case 'rechargeMade':
+					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPPRO'));
+					break;
+				case 'issuedCards':
+					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPTAR'));
+					break;
+				case 'categoryExpense':
+					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPCAT'));
+					break;
+				case 'masterAccount':
+					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPCON'));
 					break;
 			}
 		}
