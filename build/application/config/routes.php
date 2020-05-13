@@ -97,6 +97,7 @@ $route['(:any)/recargas-realizadas'] = "Novo_Reports/rechargeMade";
 $route['(:any)/tarjetas-emitidas'] = "Novo_Reports/issuedCards";
 $route['(:any)/gastos-catgoria'] = "Novo_Reports/categoryExpense";
 $route['(:any)/cuenta-maestra'] = "Novo_Reports/masterAccount";
+$route['(:any)/estado-lote'] = "Novo_Reports/statusBulk";
 //settings
 $route['(:any)/configuracion'] = "Novo_Settings/options";
 

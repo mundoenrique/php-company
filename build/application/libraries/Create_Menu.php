@@ -178,7 +178,7 @@ class Create_Menu {
 				break;
 			case 'REPLOT':
 				$subMenuLang->text = lang('GEN_MENU_REP_STATUS_LOT');
-				$subMenuLang->link = 'javascript:';
+				$subMenuLang->link = lang('GEN_LINK_REP_STATUS_LOT');
 				break;
 			case 'REPCAT':
 				$subMenuLang->text = lang('GEN_MENU_REP_CATEGORY_EXPENSE');
