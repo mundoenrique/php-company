@@ -229,6 +229,9 @@ class Verify_Access {
 				case 'masterAccount':
 					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPCON'));
 					break;
+				case 'cardHolders':
+					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBTHA'));
+					break;
 			}
 		}
 
