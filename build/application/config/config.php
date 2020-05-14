@@ -487,6 +487,7 @@ $config['csrf_cookie_name'] = 'cook';
 $config['csrf_expire'] = 7200;
 $config['csrf_regenerate'] = TRUE;
 $config['csrf_exclude_uris'] = array(
+	'[\w\-]+/ingresar',
 	'[\w\-]+/productos',
 	'[\w\-]+/detalle-producto',
 	'[\w\-]+/detalle-lote',
