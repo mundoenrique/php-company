@@ -1,5 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+//SIGNIN
+$lang['CONIFG_SIGIN_RECOVER_PASS'] = FALSE;
 //REQUEST UNNAMED
 $lang['CONF_UNNA_EXPIRED_DATE'] = FALSE;
 //FOOTER
