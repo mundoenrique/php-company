@@ -50,6 +50,7 @@ class Novo_Business_Model extends NOVO_Model {
 				$enterpriseArgs->sizePage = $sizePage;
 				$enterpriseList = $this->request_data->OrderEnterpriseList($enterpriseArgs, $filters, $dataRequest);
 				$this->response->data->list = $enterpriseList->list;
+				$this->response->data->listaa = $enterpriseList;
 				if(!$dataRequest) {
 					$access = [
 						'user_access',
@@ -178,6 +179,7 @@ class Novo_Business_Model extends NOVO_Model {
 			$this->session->unset_userdata($access);
 			unset($dataRequest->select);
 		}
+
 
 		$this->className = "com.novo.objects.TOs.UsuarioTO";
 		$this->dataAccessLog->modulo = 'Negocios';
@@ -368,3 +370,4 @@ class Novo_Business_Model extends NOVO_Model {
 		return $this->responseToTheView('getProductDetail');
 	}
 }
+
