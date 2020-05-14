@@ -1,3 +1,35 @@
+$(document).ready(function() {
+
+    //vars
+    var options = document.querySelectorAll(".nav-item-config");
+    var i;
+
+    $('.slide-slow').click(function() {
+        $(".section").slideToggle("slow");
+    });
+
+    $('.btns').click(function() {
+        var btnv = this.value;
+        $('#' + btnv).show('slideUp').siblings().hide('slideDown');
+    });
+    //core
+    for (i = 0; i < options.length; i++) {
+        $(`#${options[i].id}View`).hide();
+        options[i].addEventListener('click', function(e) {
+            var j, idNameCapitalize, idName;
+            idName = this.id;
+            idNameCapitalize = idName.charAt(0).toUpperCase() + idName.slice(1);
+
+            for (j = 0; j < options.length; j++) {
+                options[j].classList.remove("active");
+                $(`#${options[j].id}View`).hide();
+            }
+            this.classList.add("active");
+            $(`#${idName}View`).fadeIn(700, 'linear');
+        });
+    };
+});
+
 $(function() {
 
     var enterpriseWidgetForm = $('#enterprise-widget-form');
@@ -104,6 +136,7 @@ $(function() {
             insertFormInput(true, form);
             changeBtn.html(loader);
             changeTelephones(passData, btnText);
+
         }
     });
 
@@ -155,7 +188,8 @@ $(function() {
 
     // Selector empresas
 
-    enterpriseWidgetForm.on('change', '#enterprise-select', function() {
+    enterpriseWidgetForm.on('change', function() {
+        $("#completeForm").addClass("hide");
         numpos = WidgetSelcet.find('option:selected').attr('numpos');
         nameBusine = WidgetSelcet.find('option:selected').attr('name');
         acrif = WidgetSelcet.find('option:selected').attr('acrif');
@@ -182,16 +216,16 @@ $(function() {
         };
         $('.hide-out').removeClass("hide");
         selectionBussine(passData);
-        $('#completeForm').removeAttr("style");
     });
 
     // Selector empresas End
+
 
 });
 
 function changeEmail(passData, textBtn) {
     verb = "POST";
-    who = 'User';
+    who = 'Settings';
     where = 'changeEmail';
     data = passData;
     callNovoCore(verb, who, where, data, function(response) {
@@ -203,7 +237,7 @@ function changeEmail(passData, textBtn) {
 
 function changePassword1(passData, textBtn) {
     verb = "POST";
-    who = 'User';
+    who = 'Settings';
     where = 'ChangePassword';
     data = passData;
     callNovoCore(verb, who, where, data, function(response) {
@@ -215,7 +249,7 @@ function changePassword1(passData, textBtn) {
 
 function addContact(passData, textBtn) {
     verb = "POST";
-    who = 'Business';
+    who = 'Settings';
     where = 'addContact';
     data = passData;
     callNovoCore(verb, who, where, data, function(response) {
@@ -227,7 +261,7 @@ function addContact(passData, textBtn) {
 
 function changeTelephones(passData, textBtn) {
     verb = "POST";
-    who = 'Business';
+    who = 'Settings';
     where = 'changeTelephones';
     data = passData;
     callNovoCore(verb, who, where, data, function(response) {
@@ -235,17 +269,20 @@ function changeTelephones(passData, textBtn) {
         insertFormInput(false, form);
         changeBtn.html(textBtn)
     })
+
 }
 
 function selectionBussine(passData) {
     verb = "POST";
-    who = 'Business';
+    who = 'Settings';
     where = 'obtainNumPosition';
     data = passData;
     callNovoCore(verb, who, where, data, function(response) {
         dataResponse = response.data
         $('.hide-out').addClass("hide");
         var info = dataResponse;
+        $('#acrif').val(info.acrif);
+        $('#numpos').text(info.numpos);
         $('#idNumberUser').text(info.acrif);
         $('#compNameUser').text(info.nameBusine);
         $('#busiNameUser').text(info.razonSocial);
@@ -255,5 +292,14 @@ function selectionBussine(passData) {
         $('#tlf1').val(info.tel1);
         $('#tlf2').val(info.tel2);
         $('#tlf3').val(info.tel3);
+        $("#completeForm").removeClass("hide");
+    })
+}
+
+function spinnerScreen(screen) {
+    $(document).ajaxStart(function() {
+        screen.fadeIn();
+    }).ajaxStop(function() {
+        screen.fadeOut();
     })
 }

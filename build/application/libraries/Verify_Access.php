@@ -158,15 +158,13 @@ class Verify_Access {
 					break;
 				case 'getEnterprises':
 				case 'getEnterprise':
-
+				case 'getUser':
 				case 'obtainNumPosition':
 				case 'getProducts':
 				case 'keepSession':
 				case 'options':
-					$auth = ($this->CI->session->has_userdata('logged'));
-					break;
 				case 'getProductDetail':
-					$auth = ($this->CI->session->has_userdata('enterpriseInf'));
+					$auth = ($this->CI->session->has_userdata('logged'));
 					break;
 				case 'getPendingBulk':
 				case 'loadBulk':

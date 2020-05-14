@@ -6,7 +6,7 @@
 				<nav class="nav-config">
 					<ul class="nav-config-box">
 
-							<?php if (lang('CONF_USER_BOOL') == true): ?>
+							<?php if (lang('CONF_USER_BOOL') ): ?>
 
 						<li id="user" class="nav-item-config">
 							<a href="javascript:">
@@ -21,7 +21,7 @@
 						<?php endif; ?>
 
 
-							<?php if (lang('CONF_COMPANIES_BOOL') == true): ?>
+							<?php if (lang('CONF_COMPANIES_BOOL') ): ?>
 
 						<li id="enterprise" class="nav-item-config">
 							<a href="javascript:">
@@ -35,7 +35,7 @@
 						</li>
 						<?php endif; ?>
 
-							<?php if (lang('CONF_BRANCHES_BOOL') == true): ?>
+							<?php if (lang('CONF_BRANCHES_BOOL') ): ?>
 						<li id="branch" class="nav-item-config">
 							<a href="javascript:">
 								<img class="icon-config" src="<?= $this->asset->insertFile($countryUri.'/icon-building.svg');?>">
@@ -48,7 +48,7 @@
 						</li>
 						<?php endif; ?>
 
-							<?php if (lang('CONF_DOWNLOADS_BOOL') == true): ?>
+							<?php if (lang('CONF_DOWNLOADS_BOOL') ): ?>
 						<li id="downloads" class="nav-item-config">
 							<a href="javascript:">
 								<img class="icon-config" src="<?= $this->asset->insertFile($countryUri.'/icon-download.svg');?>">
@@ -66,7 +66,7 @@
 			</div>
 			<div class="flex flex-auto flex-column" style="display:none">
 				<div id="userView" style="display:none">
-				<?php if (lang('CONF_CHANGE_EMAIL_BOOL') == true): ?>
+				<?php if (lang('CONF_CHANGE_EMAIL_BOOL') ): ?>
 					<div class="flex mb-1 mx-4 flex-column">
 						<span class="line-text mb-2 h4 semibold primary"><?= lang('GEN_SETTINGS_USER') ?></span>
 						<div class="px-5">
@@ -119,7 +119,7 @@
 						</div>
 					</div>
 					<?php endif; ?>
-					<?php if (lang('CONF_CHANGE_PASSWORD_BOOL') == true): ?>
+					<?php if (lang('CONF_CHANGE_PASSWORD_BOOL') ): ?>
 					<div class="flex flex-auto flex-column">
 						<div class="flex mb-5 mx-4 flex-column ">
 							<span class="line-text slide-slow flex mb-2 h4 semibold primary"><?= lang('GEN_CHANGE_PASS') ?>
@@ -201,7 +201,7 @@
 					<?php endif; ?>
 				</div>
 				<div id="enterpriseView" style="display:none">
-				<?php if (lang('CONF_CHANGE_TELEPHONES_BOOL') == true): ?>
+				<?php if (lang('CONF_CHANGE_TELEPHONES_BOOL') ): ?>
 					<div class="flex mb-1 mx-4 flex-column">
 						<span class="line-text mb-2 h4 semibold primary"><?= lang('GEN_SETTINGS_ENTERPRISE') ?></span>
 						<div class="px-5">
@@ -226,7 +226,7 @@
 									<span  class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
 								</div>
 								</div>
-								<div id="completeForm" style="display: none">
+								<div id="completeForm" class="hide">
 
 								<div class="row" id="blockEnterprice" >
 									<div class="form-group mb-3 col-6 col-lg-4 col-xl-4">
@@ -265,7 +265,7 @@
 									<div class="row">
 									<div class="form-group mb-3 col-6 col-lg-4 col-xl-4" hidden>
 											<label for="acrif">Teléfono 1</label>
-											<input id="acrif" name="acrif" type="text" class="form-control"  value="<?= $rfcSelection ?>"/>
+											<input id="acrif" name="phone" class="form-control " type="text" />
 											<div class="help-block"></div>
 										</div>
 										<div class="form-group mb-3 col-6 col-lg-4 col-xl-4">
@@ -300,7 +300,7 @@
 
 					<div class="flex flex-auto flex-column">
 						<div class="flex flex-column mx-4 mb-5">
-						<?php if (lang('CONF_ADD_CONTACT_BOOL') == true): ?>
+						<?php if (lang('CONF_ADD_CONTACT_BOOL') ): ?>
 							<span class="line-text slide-slow flex mb-2 h4 semibold primary"><?= lang('GEN_ADD_CONTACT') ?>
 								<i class="flex mr-1 pl-2 icon icon-chevron-down flex-auto" aria-hidden="true"></i>
 							</span>
@@ -310,12 +310,12 @@
 										<div class="row">
 										<div class="form-group mb-3 col-6 col-lg-4 col-xl-4" hidden>
 											<label for="contUser"></label>
-											<input id="contUser" name="contUser" type="text" class="form-control"  value="<?= $name; ?>"/>
+											<input id="contUser" name="contUser" type="text" class="form-control"  />
 											<div class="help-block"></div>
 										</div>
 										<div class="form-group mb-3 col-6 col-lg-4 col-xl-4" hidden>
 											<label for="contAcrif"></label>
-											<input id="contAcrif" name="contAcrif" type="text" class="form-control"  value="<?= $rfcSelection ?>"/>
+											<input id="contAcrif" name="contAcrif" type="text" class="form-control"/>
 											<div class="help-block"></div>
 										</div>
 											<div class="form-group mb-1 col-6 col-lg-4 col-xl-4">
@@ -379,7 +379,7 @@
 					</div>
 				</div>
 				<div id="branchView" style="display:none">
-				<?php if (lang('CONF_ADD_FILE_BOOL') == true): ?>
+				<?php if (lang('CONF_ADD_FILE_BOOL') ): ?>
 					<div class="flex mb-1 mx-4 flex-column">
 						<span class="line-text mb-2 h4 semibold primary"><?= lang('GEN_SETTINGS_BRANCH') ?></span>
 						<div class="px-5">
@@ -416,7 +416,7 @@
 						</div>
 					</div>
 					<?php endif; ?>
-					<?php if (lang('CONF_ADD_BRANCH_BOOL') == true): ?>
+					<?php if (lang('CONF_ADD_BRANCH_BOOL')): ?>
 					<div class="flex flex-auto flex-column">
 						<div class="flex flex-column mx-4 mb-5">
 							<span class="line-text slide-slow flex mb-2 h4 semibold primary"><?= lang('GEN_ADD_BRANCH') ?>
@@ -535,7 +535,7 @@
 						<span class="line-text mb-2 h4 semibold primary"><?= lang('GEN_BTN_DOWNLOADS') ?></span>
 						<div class="px-5">
 							<div class="container">
-							<?php if (lang('CONF_MANUAL_BOOL') == true): ?>
+							<?php if (lang('CONF_MANUAL_BOOL')): ?>
 							<div class="my-2 tertiary h4 semibold">
 								<span><?= lang('GEN_MANUALS') ?></span>
 							</div>
@@ -559,7 +559,7 @@
 
 
 
-								<?php if (lang('CONF_VIDEO_BOOL') == true):?>
+								<?php if (lang('CONF_VIDEO_BOOL') ):?>
 									<?php foreach(lang('CONF_MP4_VIDEO') as $value): ?>
 								<div class="container">
 									<div class="row">
@@ -576,7 +576,7 @@
 								<?php endif; ?>
 
 
-								<?php if (lang('CONF_APPS_BOOL') == true): ?>
+								<?php if (lang('CONF_APPS_BOOL') ): ?>
 								<div class="my-2 tertiary h4 semibold">
 									<span><?= lang('CONF_APPLICATIONS') ?></span>
 								</div>
@@ -597,7 +597,7 @@
 								<?php endif; ?>
 
 
-								<?php if (lang('CONF_FILES_BOOL') == true): ?>
+								<?php if (lang('CONF_FILES_BOOL') ): ?>
 								<div class="my-2 tertiary h4 semibold">
 									<span><?= lang('CONF_FILE') ?></span>
 								</div>

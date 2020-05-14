@@ -33,7 +33,6 @@ class Novo_Settings extends NOVO_Controller {
 		array_push(
 			$this->includeAssets->jsFiles,
 			"third_party/dataTables-1.10.20",
-			"settings/ceo_load_lots",
 			"third_party/jquery.validate",
 			"validate".$this->render->newViews."-forms",
 			"third_party/additional-methods",
@@ -41,42 +40,24 @@ class Novo_Settings extends NOVO_Controller {
 			"user/pass_validate"
 		);
 
+
+		//LLama lista de empresas
+		$this->load->model('Novo_Business_Model', 'getEnterprises');
+		$enterpriseList = $this->getEnterprises->callWs_getEnterprises_Business(TRUE);
+		if ( lang('CONF_COMPANIES_BOOL') != FALSE ){
+		$this->render->enterpriseList1 = $enterpriseList->data->list;
+		}
+
 		//LLama datos del usuario
-		$this->load->model('Novo_User_Model', 'getUser');
-		$user = $this->getUser->CallWs_GetUser_User();
+		$this->load->model('Novo_Settings_Model', 'getUser');
+		$user = $this->getUser->CallWs_GetUser_Settings(TRUE);
 		if ( lang('CONF_USER_BOOL') != FALSE ){
 		$this->render->name = $user->data->primerNombre;
 		$this->render->firstName = $user->data->primerApellido;
 		$this->render->position = $user->data->cargo;
 		$this->render->area = $user->data->area;
 		$this->render->email = strtolower($user->data->email);
-		//Cambio de contraseña
-		$this->load->model('Novo_User_Model', 'ChangeEmail');
 		}
-
-		//Select empresa
-		$this->load->model('Novo_Business_Model', 'obtainNumPosition');
-		$alter = $this->input->post('numpos');
-		if ( lang('CONF_COMPANIES_BOOL') != FALSE ){
-		$positionNum = $this->obtainNumPosition->callWS_obtainNumPosition_Business($alter);
-		//LLama lista de empresas
-		$this->load->model('Novo_Business_Model', 'getEnterprises');
-		$enterpriseList = $this->getEnterprises->callWs_getEnterprises_Business(TRUE);
-		$this->render->enterpriseList1 = $enterpriseList->data->list;
-
-		if($enterpriseSelection = $this->session->userdata('enterpriseInf') != NULL){
-			$enterpriseSelection = $this->session->userdata('enterpriseInf');
-			$enterpriseSelection->enterpriseName;
-		}
-
-			$complementIdEnterprise = (int)$positionNum->data;
-			$this->render->rfcSelection = $enterpriseList->data->listaa->list[$complementIdEnterprise]->acrif;
-		}
-		//Cambio de telefonos
-		$this->load->model('Novo_Business_Model', 'ChangeTelephones');
-
-		//Agregar Contacto
-		$this->load->model('Novo_Business_Model', 'AddContact');
 
 		$this->render->titlePage =lang('GEN_SETTINGS_TITLE');
 		$this->views = ['settings/'.$view];
