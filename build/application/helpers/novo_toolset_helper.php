@@ -52,6 +52,9 @@ if(!function_exists('getFaviconLoader')) {
 			case 'bnt':
 				$ext = 'ico';
 				$loader.= 'bdb.gif';
+			case 'pb':
+				$ext = 'ico';
+				$loader.= 'bdb.gif';
 				break;
 			default:
 				$ext = 'png';
@@ -124,7 +127,7 @@ if(!function_exists('languajeLoad')) {
 		$class = $CI->router->fetch_class();
 		$langFiles = $langFiles ?: $CI->router->fetch_method();
 		$languagesFile = [];
-		$lanGeneral = ['bdb', 'bp', 'bnt', 'co', 've'];
+		$lanGeneral = ['bdb', 'bp', 'bnt', 'co', 've', 'pb'];
 		$lanValidate = ['bdb'];
 		$loadLanguages = FALSE;
 		$client = !$client ? 'default_lang' : $client;
@@ -193,6 +196,10 @@ if(!function_exists('languajeLoad')) {
 					'terms'	=> ['terms'],
 				];
 				break;
+			case 'pb':
+				$languages = [
+				];
+				break;
 			default:
 				$languages = [
 					'login' => ['login'],
@@ -203,6 +210,7 @@ if(!function_exists('languajeLoad')) {
 					'terms'	=> ['terms'],
 					'rates'	=> ['rates'],
 					'getEnterprises'	=> ['enterprise'],
+					'obtainNumPosition'	=>['settings'],
 					'getProducts'	=> ['products'],
 					'getProductDetail'	=> ['products'],
 					'getPendingBulk'	=> ['bulk'],

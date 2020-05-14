@@ -381,7 +381,6 @@ class Novo_User_Model extends NOVO_Model {
 				]
 			];
 		}
-
 		return $this->responseToTheView('CallWs_ChangePassword');
 	}
 	/**
