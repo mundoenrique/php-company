@@ -299,11 +299,3 @@ function selectionBussine(passData) {
         $("#completeForm").removeClass("hide");
     })
 }
-
-function spinnerScreen(screen) {
-    $(document).ajaxStart(function() {
-        screen.fadeIn();
-    }).ajaxStop(function() {
-        screen.fadeOut();
-    })
-}
