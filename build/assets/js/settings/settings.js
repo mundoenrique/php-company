@@ -6,6 +6,10 @@ $(document).ready(function() {
 
     $('.slide-slow').click(function() {
         $(".section").slideToggle("slow");
+        $(".help-block").text("");
+        $("#currentPass").removeClass("has-error");
+        $("#newPass").removeClass("has-error");
+        $("#confirmPass").removeClass("has-error");
     });
 
     $('.btns').click(function() {
@@ -293,13 +297,5 @@ function selectionBussine(passData) {
         $('#tlf2').val(info.tel2);
         $('#tlf3').val(info.tel3);
         $("#completeForm").removeClass("hide");
-    })
-}
-
-function spinnerScreen(screen) {
-    $(document).ajaxStart(function() {
-        screen.fadeIn();
-    }).ajaxStop(function() {
-        screen.fadeOut();
     })
 }
