@@ -20,12 +20,12 @@
 	<div class="w-100 hide-out hide">
 		<div class="flex flex-auto flex-column <?= $widget ? '' : 'max-width-6'; ?>">
 			<div class="search-criteria-order flex pb-3 flex-column w-100">
-				<span class="line-text mb-2 h4 semibold primary">Criterio de búsqueda</span>
+				<span class="line-text mb-2 h4 semibold primary"><?= lang('GEN_SEARCH_CRITERIA'); ?></span>
 				<div class="flex my-2 px-5">
 					<form method="post" class="w-100">
 						<div class="row flex justify-between">
 							<div class="form-group col-4 col-xl-4">
-								<label>Empresa</label>
+							<label><?= lang('GEN_ENTERPRISE'); ?></label>
 								<select class="select-box custom-select flex h6 w-100">
 									<option selected disabled>Seleccionar</option>
 									<option>Option 1</option>
@@ -35,7 +35,7 @@
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-4 col-xl-4">
-								<label>Producto</label>
+							<label><?= lang('GEN_PRODUCT'); ?></label>
 								<select class="select-box custom-select flex h6 w-100">
 									<option selected disabled>Seleccionar</option>
 									<option>Option 1</option>
@@ -44,29 +44,9 @@
 								</select>
 								<div class="help-block"></div>
 							</div>
-							<div class="form-group col-4 col-xl-3">
-								<label for="datepicker_start">Fecha</label>
-								<input id="datepicker_start" class="form-control" name="datepicker" type="text">
-								<div class="help-block"></div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="form-group col-9">
-								<label class="block">Resultados</label>
-								<div class="custom-control custom-radio custom-control-inline">
-									<input type="radio" id="allResults" name="results" class="custom-control-input" value="all">
-									<label class="custom-control-label mr-1" for="allResults">Todos</label>
-								</div>
-								<div class="custom-control custom-radio custom-control-inline">
-									<input type="radio" id="resultByNIT" name="results" class="custom-control-input">
-									<label class="custom-control-label mr-1" for="resultByNIT">NIT</label>
-									<input id="resultByNIT" name="results" type="text" class="form-control col-8 col-auto visible" />
-								</div>
-								<div class="help-block"></div>
-							</div>
 							<div class="flex items-center justify-end col-3">
-								<button class="btn btn-primary btn-small">
-									Buscar
+								<button class="btn btn-primary btn-small btn-loading">
+								<?= lang('GEN_BTN_SEARCH'); ?>
 								</button>
 							</div>
 						</div>
@@ -76,76 +56,37 @@
 			</div>
 
 			<div class="flex pb-5 flex-column">
-				<span class="line-text mb-2 h4 semibold primary">Resultados Estado de Cuenta</span>
+				<span class="line-text mb-2 h4 semibold primary">Resultados</span>
 				<div class="center mx-1">
 					<div class="flex">
-						<div class="flex ml-4 py-3 flex-auto">
-							<p class="mr-5 h5 semibold tertiary">Nombre: <span class="light text">Jhonatan Ortiz</span></p>
-							<p class="mr-5 h5 semibold tertiary">Cuenta: <span class="light text">**********270300</span></p>
-							<p class="mr-5 h5 semibold tertiary">Cédula: <span class="light text">1803752318</span></p>
-						</div>
-						<div class="flex mr-2 py-3 justify-end items-center">
+						<div class="flex mr-2 py-3 flex-auto justify-end items-center">
 							<button class="btn px-1" title="Exportar a EXCEL" data-toggle="tooltip">
 								<i class="icon icon-file-excel" aria-hidden="true"></i>
 							</button>
 							<button class="btn px-1" title="Exportar a PDF" data-toggle="tooltip">
 								<i class="icon icon-file-pdf" aria-hidden="true"></i>
 							</button>
-							<button class="btn px-1" title="Generar gráfica" data-toggle="tooltip">
-								<i class="icon icon-chart-pie" aria-hidden="true"></i>
-							</button>
-							<button class="btn px-1" title="Generar Comprobante Masivo" data-toggle="tooltip">
-								<i class="icon icon-file-blank" aria-hidden="true"></i>
-							</button>
 						</div>
 					</div>
 					<table id="resultscardHolders" class="cell-border h6 display responsive w-100">
 						<thead class="bg-primary secondary regular">
 							<tr>
-								<th>Tarjeta</th>
-								<th>Fecha</th>
-								<th>Fid</th>
-								<th>Terminal</th>
-								<th>Secuencia</th>
-								<th>Referencia</th>
-								<th>Descripción</th>
-								<th>ABONO</th>
-								<th>CARGO</th>
+								<th><?= lang('GEN_TABLE_ID_DOC'); ?></th>
+								<th><?= lang('GEN_TABLE_CARDHOLDER'); ?></th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr>
-								<td>**********270399</td>
-								<td>20/06/2019</td>
-								<td>10000000206</td>
-								<td>02060016</td>
-								<td>53000000000</td>
-								<td>5758</td>
-								<td>RETIRO ATM BP - LABORATORIO BANRED</td>
-								<td>0</td>
-								<td>20.00</td>
+								<td>0100951987</td>
+								<td>MARIA HERNANDEZ</td>
 							</tr>
 							<tr>
-								<td>**********270399</td>
-								<td>20/06/2019</td>
-								<td>72521001</td>
-								<td>00014601</td>
-								<td>37210</td>
-								<td>5758</td>
-								<td>RETIRO ATM BP - LABORATORIO BANRED</td>
-								<td>0</td>
-								<td>20.00</td>
+								<td>0102676434</td>
+								<td>LUIS VILLARREAL</td>
 							</tr>
 							<tr>
-								<td>**********270399</td>
-								<td>20/06/2019</td>
-								<td>10000000206</td>
-								<td>02060016</td>
-								<td>575400000000</td>
-								<td>5758</td>
-								<td>RETIRO ATM BP - LABORATORIO BANRED</td>
-								<td>0</td>
-								<td>20.00</td>
+								<td>0100967652</td>
+								<td>JOSE SANCHEZ</td>
 							</tr>
 						</tbody>
 					</table>
