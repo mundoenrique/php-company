@@ -96,7 +96,7 @@ $config = [
 		[
 			'field' => 'tlf1',
 			'label' => 'phone',
-			'rules' => 'trim'
+			'rules' => 'trim|required'
 		],
 		[
 			'field' => 'tlf2',
