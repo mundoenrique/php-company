@@ -1,6 +1,5 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 <h1 class="primary h3 regular inline"><?= lang('GEN_MENU_REP_STATUS_LOT'); ?></h1>
-<span class="ml-2 regular tertiary"><?= $productName ?></span>
 <div class="mb-2 flex items-center">
 	<div class="flex tertiary">
 		<nav class="main-nav nav-inferior">
@@ -27,39 +26,46 @@
 							<div class="form-group col-4 col-xl-3">
 								<label><?= lang('GEN_ENTERPRISE'); ?></label>
 								<select class="select-box custom-select flex h6 w-100">
-									<option selected disabled>Seleccionar</option>
-									<option>Option 1</option>
-									<option>Option 2</option>
-									<option>Option 3</option>
+									<?php foreach($enterpriseList AS $enterprise) : ?>
+									<?php if($enterprise->acrif == $enterpriseData->idFiscal): ?>
+									<?php endif;?>
+									<option value="<?= $enterprise->accodcia; ?>" <?= $enterprise->acrif == $enterpriseData->idFiscal ? 'selected' : '' ?>>
+										<?= $enterprise->acnomcia; ?>
+									</option>
+									<?php endforeach; ?>
 								</select>
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-4 col-xl-3">
 								<label><?= lang('GEN_PRODUCT'); ?></label>
 								<select class="select-box custom-select flex h6 w-100">
-									<option selected disabled>Seleccionar</option>
-									<option>Option 1</option>
-									<option>Option 2</option>
-									<option>Option 3</option>
+									<option selected disabled><?= $selectProducts ?></option>
+									<?php if($products): ?>
+									<?php foreach($products AS $product): ?>
+									<option value="<?= $product['id']; ?>" <?= $product['id'] == $currentProd ? 'selected' : ''; ?>><?= $product['desc'] ?></option>
+									<?php endforeach; ?>
+									<?php endif; ?>
 								</select>
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-4 col-lg-3 col-xl-3">
 								<label for="initialDate"><?= lang('GEN_START_DAY'); ?></label>
-								<input id="initialDate" name="initialDate" class="form-control" name="datepicker" type="text" placeholder="<?= lang('GEN_PLACE_DATE_COMPLETTE'); ?>" readonly>
+								<input id="initialDate" name="initialDate" class="form-control" name="datepicker" type="text"
+									placeholder="<?= lang('GEN_PLACE_DATE_COMPLETTE'); ?>" readonly>
 								<div class="help-block">
+								</div>
 							</div>
-						</div>
-						<div class="form-group col-4 col-lg-3 col-xl-3">
-							<label for="finalDate"><?= lang('GEN_END_DAY'); ?></label>
-							<input id="finalDate" name="finalDate" class="form-control" name="datepicker" type="text" placeholder="<?= lang('GEN_PLACE_DATE_COMPLETTE'); ?>" readonly>
-							<div class="help-block "></div>
-						</div>
+							<div class="form-group col-4 col-lg-3 col-xl-3">
+								<label for="finalDate"><?= lang('GEN_END_DAY'); ?></label>
+								<input id="finalDate" name="finalDate" class="form-control" name="datepicker" type="text"
+									placeholder="<?= lang('GEN_PLACE_DATE_COMPLETTE'); ?>" readonly>
+								<div class="help-block "></div>
+							</div>
 							<div class="col-xl-auto flex items-center ml-auto mr-2">
-							<button id="service-orders-btn" class="btn btn-primary btn-small btn-loading">
-							<?= lang('GEN_BTN_SEARCH'); ?>
-							</button>
-						</div>
+								<button id="service-orders-btn" class="btn btn-primary btn-small btn-loading">
+									<?= lang('GEN_BTN_SEARCH'); ?>
+								</button>
+							</div>
 						</div>
 					</form>
 				</div>
@@ -70,7 +76,7 @@
 				<span class="line-text mb-2 h4 semibold primary">Resultados</span>
 				<div class="center mx-1">
 					<div class="flex">
-					<div class="flex mr-2 py-3 flex-auto justify-end items-center">
+						<div class="flex mr-2 py-3 flex-auto justify-end items-center">
 							<button class="btn px-1" title="Exportar a EXCEL" data-toggle="tooltip">
 								<i class="icon icon-file-excel" aria-hidden="true"></i>
 							</button>
