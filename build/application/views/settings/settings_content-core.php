@@ -162,6 +162,7 @@
 																		class="icon-view mr-0"></i></span>
 															</div>
 														</div>
+														<div class="help-block"></div>
 													</div>
 												</div>
 											</div>
@@ -269,19 +270,19 @@
 											<div class="help-block"></div>
 										</div>
 										<div class="form-group mb-3 col-6 col-lg-4 col-xl-4">
-											<label for="phone">Teléfono 1</label>
-											<input id="tlf1" name="phone1" type="text" class="form-control"  />
+											<label for="tlf1">Teléfono 1</label>
+											<input id="tlf1" name="tlf1"  class="form-control"  required/>
 											<div class="help-block"></div>
 										</div>
 
 										<div class="form-group mb-3 col-6 col-lg-4 col-xl-4">
-											<label for="phone">Teléfono 2</label>
-											<input id="tlf2" name="phone2" type="text" class="form-control" />
+											<label for="tlf2">Teléfono 2</label>
+											<input id="tlf2" name="id-number1" class="form-control" />
 											<div class="help-block"></div>
 										</div>
 										<div class="form-group mb-3 col-6 col-lg-4 col-xl-4">
-											<label for="phone">Teléfono 3</label>
-											<input id="tlf3" name="phone3" type="text" class="form-control"  />
+											<label for="tlf3">Teléfono 3</label>
+											<input id="tlf3" name="id-number1"  class="form-control"  />
 											<div class="help-block"></div>
 										</div>
 									</div>

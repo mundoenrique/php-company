@@ -44,6 +44,7 @@ $lang['GEN_LINK_REP_ISSUED_CARDS'] = 'tarjetas-emitidas';// REPTAR
 $lang['GEN_MENU_REP_STATUS_LOT'] = 'Estado de lote';//REPLOT
 $lang['GEN_LINK_REP_STATUS_LOT'] = 'estado-lote';//REPLOT
 $lang['GEN_MENU_UNNAMED_REQUEST'] = 'Solicitud de innominadas';
+$lang['GEN_MENU_UNNAMED_AFFIL'] = 'Afiliación de innominadas';
 $lang['GEN_MENU_LOT_REPROCESS'] = 'Reproceso de datos';//TEBGUR
 $lang['GEN_MENU_CONS_DATA_UPGRADE'] = 'Actulización de datos';//TEBPOL
 $lang['GEN_MENU_SERV_CARD_INQUIRY'] = 'Consulta de Tarjetas';//COPELO

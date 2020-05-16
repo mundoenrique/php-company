@@ -89,6 +89,8 @@ function validateForms(form) {
 			"selected-year": {required: true, pattern: date.y},
 			"id-type": {requiredSelect: true},
 			"id-number": {required: true, pattern: numeric},
+			"id-number1": {pattern: numeric},
+			"tlf1": {required: true, pattern: numeric},
 			"card-number": {required: true, pattern: numeric, maxlength: 16, minlength: 16},
 			"card-number-sel": {requiredSelect: true},
 			"inquiry-type": {requiredSelect: true},
@@ -133,6 +135,11 @@ function validateForms(form) {
 			"selected-year": lang.VALIDATE_SELECTED_YEAR,
 			"id-type": lang.VALIDATE_ID_TYPE,
 			"id-number": lang.VALIDATE_ID_NUMBER,
+			"id-number1": lang.VALIDATE_ID_NUMBER,
+			"tlf1": {
+				pattern: lang.VALIDATE_ID_NUMBER,
+				required: lang.VALIDATE_PHONE_REQ
+			},
 			"card-number": lang.VALIDATE_CARD_NUMBER,
 			"card-number-sel": lang.VALIDATE_CARD_NUMBER_SEL,
 			"inquiry-type": lang.VALIDATE_INQUIRY_TYPE_SEL,
