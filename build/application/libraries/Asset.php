@@ -22,7 +22,6 @@ class Asset {
 		$CI =& get_instance();
 		$_SERVER['REMOTE_ADDR'] = $CI->input->ip_address();
 
-		log_message('INFO', '************************** '.IP_PROXI);
 	}
 	/**
 	 * @info Método para inicializar los atributos de la librería
