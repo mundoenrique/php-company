@@ -295,13 +295,15 @@ class Novo_Reports extends NOVO_Controller {
 		$this->request->select = TRUE;
 		$this->request->idFiscal = $this->session->enterpriseInf->idFiscal;
 		$this->load->model('Novo_Business_Model', 'getProducts');
-		$responseList = $this->getProducts->callWs_GetProducts_Business($this->request);
-		$this->render->selectProducts = $responseList->code === 0 ? lang('GEN_SELECT_PRODUCTS') : lang('RESP_TRY_AGAIN');
-		$this->render->productsSelect = $responseList->code !== 0 ? FALSE : $responseList->data;
+		$response = $this->getProducts->callWs_GetProducts_Business($this->request);
+		$this->render->selectProducts = $response->code === 0 ? lang('GEN_SELECT_PRODUCTS') : lang('RESP_TRY_AGAIN');
+		$this->render->productsSelect = $response->code !== 0 ? FALSE : $response->data;
+
 		if ($this->session->flashdata('download')) {
-			$download = $this->session->flashdata('download');
+			$response = $this->session->flashdata('download');
 		}
-		$this->responseAttr($products);
+
+		$this->responseAttr($response);
 		$this->render->currentProd = $this->session->productInf->productPrefix;
 		$this->render->titlePage = lang('GEN_MENU_REP_STATUS_BULK');
 		$this->views = ['reports/'.$view];
