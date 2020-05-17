@@ -131,8 +131,8 @@ $(function () {
 				loginIpMsg ='<form id="formVerificationOTP" name="formVerificationOTP" class="mr-2" method="post">';
 				loginIpMsg+='<p class="pt-0 pl-0 justify">'+response.msg+'</p>';
 				loginIpMsg+='<div class="row">';
-				loginIpMsg+=	'<div class="form-group col-7">';
-				loginIpMsg+=	'<label id="label_codeOTP" for="codeOTP">'+response.labelInput+'<span class="danger">*</span></label>';
+				loginIpMsg+=	'<div class="form-group col-6">';
+				loginIpMsg+=	'<label id="label_codeOTP" for="codeOTP">'+response.labelInput+'</label>';
 				loginIpMsg+=	'<input id="codeOTP" class="form-control" type="text" name="codeOTP">';
 				loginIpMsg+=    '<div id="msgErrorCodeOTP" class="help-block"></div>';
 				loginIpMsg+=	'</div>';
@@ -221,7 +221,7 @@ function windowsStyle(){
 		$("#label_codeOTP").addClass("line-field");
 		$("#codeOTP").addClass("input-field");
 	}
-	
+
 	if (country == 'bp' | country == 'bdb') {
 		$("#system-info").dialog("option", "position", {
 			my: "center top+100",

@@ -7524,6 +7524,26 @@ body .ui-tooltip {
 	width: 80px !important;
 }
 
+.form-group {
+    margin-bottom: .5rem;
+}
+
+.form-group:nth-child(1) {
+	margin-bottom: .7rem;
+}
+
+#codeOTP {
+margin-bottom: 0;
+}
+
 .justify{
-	text-align: justify !important
+text-align: justify !important
+}
+
+.help-block {
+height: 1rem;
+margin-left: 4px;
+font-size: 12px;
+letter-spacing: .016em;
+color: #e8446c;
 }

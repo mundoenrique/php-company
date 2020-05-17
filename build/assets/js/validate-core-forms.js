@@ -97,6 +97,7 @@ function validateForms(form) {
 			"card-number-sel": {requiredSelect: true},
 			"inquiry-type": {requiredSelect: true},
 			"codeOTP": {required: true, pattern: validCode},
+			"saveIP": {pattern: numeric},
 			"expired-date": {required: true, pattern: date.my},
 			"max-cards": {required: true, pattern: numeric, maxcards: true},
 			"starting-line1": {required: true, pattern: alphanum},
