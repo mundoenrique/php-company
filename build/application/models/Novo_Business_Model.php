@@ -191,7 +191,7 @@ class Novo_Business_Model extends NOVO_Model {
 		$this->dataRequest->userName = $this->userName;
 		$this->dataRequest->idEmpresa = $dataRequest->idFiscal;
 
-		$response = $this->sendToService('getProducts');
+		$response = $this->sendToService('callWs_GetProducts');
 
 		switch($this->isResponseRc) {
 			case 0:
@@ -221,7 +221,7 @@ class Novo_Business_Model extends NOVO_Model {
 			$this->response->data->productList = [];
 		}
 
-		return $this->responseToTheView('getProducts');
+		return $this->responseToTheView('callWs_GetProducts');
 	}
 	/**
 	 * @info Método para obtener lista de productos para una empresa
@@ -370,4 +370,3 @@ class Novo_Business_Model extends NOVO_Model {
 		return $this->responseToTheView('getProductDetail');
 	}
 }
-

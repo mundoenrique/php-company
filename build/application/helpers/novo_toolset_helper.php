@@ -332,6 +332,15 @@ if(!function_exists('convertDate')) {
 	}
 }
 
+if(!function_exists('convertDateMDY')) {
+	function convertDateMDY($date) {
+		$date = explode('/', $date);
+		$date = $date[1].'/'.$date[0].'/'.$date[2];
+
+		return $date;
+	}
+}
+
 if(!function_exists('arrayTrim')) {
 	function arrayTrim(&$value) {
 		$value = trim($value);

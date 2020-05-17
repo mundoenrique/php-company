@@ -189,7 +189,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 
 			switch ($this->isResponseRc) {
 				case 0:
-					$this->response->msg = novoLang(lang('BULK_SUCCESS'), substr($dataRequest->rawName, 0, 15).'...');
+					$this->response->msg = novoLang(lang('BULK_SUCCESS'), substr($dataRequest->rawName, 0, 16).'...');
 					$this->response->icon = lang('GEN_ICON_SUCCESS');
 					$this->response->data['btn1']['link'] = 'cargar-lotes';
 					$respLoadBulk = TRUE;
@@ -1008,6 +1008,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 		$signBulk = [];
 		$authorizeBulk = [];
 		$authorizeAttr = [];
+		$noSeeDetail = ['Z', 'Y'];
 		$allBulk = 'no-select-checkbox';
 
 		if(verifyDisplay('body', 'AuthorizeBulkList', lang('GEN_TAG_ALL_BULK'))) {
@@ -1041,6 +1042,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 		}
 
 		if(isset($bulkList->listaPorAutorizar) && !empty($bulkList->listaPorAutorizar)) {
+
 			foreach($bulkList->listaPorAutorizar AS $bulk) {
 				$detailBulk['idBulk'] = $bulk->acidlote;
 				$detailBulk['bulkNumber'] = $bulk->acnumlote;
@@ -1054,6 +1056,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 				$listAth = explode(',', $listAth);
 				$detailBulk['selectRow'] = in_array($this->userName, $listAth) ? 'no-select-checkbox' : '';
 				$detailBulk['selectRowContent'] = in_array($this->userName, $listAth) ? 'TRUE' : '';
+				$detailBulk['seeDetail'] = in_array($bulk->ctipolote, $noSeeDetail) ? FALSE : TRUE;
 				$authorizeBulk[] = (object) $detailBulk;
 			}
 		}
