@@ -55,13 +55,15 @@ $route['translate_uri_dashes'] = FALSE;
 //Asynchronous
 $route['(:any)/async-call'] = "novo_CallModels";
 //User
-$route['(:any)/ingresar/(:any)'] = "Novo_User/singleSignin/$2";
+$route['(:any)/ingresar/(:any)']['GET'] = "Novo_User/singleSignon/$2";
+$route['(:any)/ingresar']['POST'] = "Novo_User/singleSignon";
 $route['(:any)/sugerencia'] = "Novo_User/suggestion";
 $route['(:any)/inicio'] = "Novo_User/login";
 $route['(:any)/inicio/(:any)'] = "Novo_User/login";
 $route['(:any)/cerrar-sesion/(:any)'] = "Novo_User/finishSession/$2";
 $route['(:any)/recuperar-clave'] = "Novo_User/recoverPass";
 $route['(:any)/cambiar-clave'] = "Novo_User/changePassword";
+$route['(:any)/obtener-usuario'] = "Novo_Settings/getUser";
 //Information
 $route['(:any)/inf-beneficios'] = "Novo_Information/benefits";
 $route['(:any)/inf-condiciones'] = "Novo_Information/terms";
@@ -76,15 +78,34 @@ $route['(:any)/detalle-lote'] = "Novo_Bulk/getDetailBulk";
 $route['(:any)/confirmar-lote'] = "Novo_Bulk/confirmBulk";
 $route['(:any)/lotes-autorizacion'] = "Novo_Bulk/authorizeBulkList";
 $route['(:any)/lotes-calcular-orden'] = "Novo_Bulk/calculateServiceOrder";
+$route['(:any)/solicitud-innominadas'] = "Novo_Bulk/unnamedRequest";
+$route['(:any)/afiliacion-innominadas'] = "Novo_Bulk/unnamedAffiliate";
+$route['(:any)/detalle-innominadas'] = "Novo_Bulk/unnmamedDetail";
 //Inquiries
 $route['(:any)/consulta-orden-de-servicio'] = "Novo_Inquiries/serviceOrders";
 $route['(:any)/consulta-lote'] = "Novo_Inquiries/bulkDetail";
+//services
+$route['(:any)/transf-cuenta-maestra'] = "Novo_Services/transfMasterAccount";
 //DownloadFile
 $route['(:any)/descargar-archivo'] = "Novo_DownloadFiles/exportFiles";
 //Reports
 $route['(:any)/reportes'] = "Novo_Reports/getReportsList";
+$route['(:any)/estado-de-cuenta'] = "Novo_Reports/accountStatus";
+$route['(:any)/reposiciones'] = "Novo_Reports/replacement";
+$route['(:any)/saldo-al-cierre'] = "Novo_Reports/closingBalance";
+$route['(:any)/actividad-usuario'] = "Novo_Reports/userActivity";
+$route['(:any)/recargas-realizadas'] = "Novo_Reports/rechargeMade";
+$route['(:any)/tarjetas-emitidas'] = "Novo_Reports/issuedCards";
+$route['(:any)/gastos-catgoria'] = "Novo_Reports/categoryExpense";
+$route['(:any)/cuenta-maestra'] = "Novo_Reports/masterAccount";
+$route['(:any)/estado-lote'] = "Novo_Reports/statusBulk";
 //settings
 $route['(:any)/configuracion'] = "Novo_Settings/options";
+$route['(:any)/empresa'] = "Novo_Settings/getEnterprise";
+$route['(:any)/obtener-posicion'] = "Novo_Settings/obtainNumPosition";
+$route['(:any)/Contact'] = "Novo_Settings/addContact";
+$route['(:any)/cambiar-email'] = "Novo_Settings/changeEmail";
+$route['(:any)/cambiar-telefonos'] = "Novo_Settings/changeTelephones";
 
 
 //old routes

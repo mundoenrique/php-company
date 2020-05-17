@@ -31,7 +31,7 @@
 
 				<div class="form-group mb-3 col-4">
 					<label for="typeLot" id="typeLot"><?= lang('BULK_TYPE'); ?></label>
-					<span id="typeLotName" class="form-control px-1 bold pink-salmon" readonly="readonly"><?= $detailBulk->bulkType ?></span>
+					<span id="typeLotName" class="form-control px-1 bold not-processed" readonly="readonly"><?= $detailBulk->bulkType ?></span>
 				</div>
 
 				<div class="form-group mb-3 col-4">
@@ -68,10 +68,15 @@
 			<div class="line mb-2"></div>
 
 			<form id="confirm-bulk-btn" method="post">
-				<div class="flex flex-column mb-4 mt-4 px-5 justify-center items-center">
+			<div class="flex flex-column mb-4 mt-4 px-5 justify-center items-center form-group">
 					<div class="form-group mb-3 col-5 col-lg-4 col-xl-3">
-						<input id="bulkTicked" name="bulkTicked" type="hidden" value="<?= $detailBulk->bulkTicked ?>">
-						<input id="password" name="password" class="form-control pwd-input" type="password" placeholder="<?= lang('GEN_PLACE_PASSWORD'); ?>">
+						<div class="input-group">
+							<input id="bulkTicked" name="bulkTicked" type="hidden" value="<?= $detailBulk->bulkTicked ?>">
+							<input id="password" name="password" class="form-control pwd-input" type="password" placeholder="<?= lang('GEN_PLACE_PASSWORD'); ?>">
+							<div class="input-group-append">
+								<span class="input-group-text pwd-action" title="<?= lang('GEN_SHOW_PASS') ?>"><i class="icon-view mr-0"></i></span>
+							</div>
+						</div>
 						<div class="help-block"></div>
 					</div>
 					<div class="flex flex-row">

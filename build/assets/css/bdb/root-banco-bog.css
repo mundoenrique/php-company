@@ -26,58 +26,36 @@
   src: url('../../fonts/bdb/OpenSans-Bold.ttf') format('truetype');
 }
 
-@font-face {
-	font-family: "NovoPayment Glyphs";
-	font-style: normal;
-	font-weight: normal;
-	src: url('../../fonts/novopayment-glyphs-webfont.eot?#iefix');
-  src: url('../../fonts/novopayment-glyphs-webfont.eot?#iefix') format('embedded-opentype'),
-       url('../../fonts/novopayment-glyphs-webfont.woff') format('woff'),
-       url('../../fonts/novopayment-glyphs-webfont.ttf') format('truetype'),
-       url('../../fonts/novopayment-glyphs-webfont.svg') format('svg');
-}
-
-@font-face {
-  font-family: "novoglyphs";
-  font-weight: normal;
-	font-style: normal;
-	src: url('../../fonts/novoglyphs-webfont.eot?#iefix');
-  src: url('../../fonts/novoglyphs-webfont.eot?#iefix') format('eot'),
-       url('../../fonts/novoglyphs-webfont.woff') format('woff'),
-       url('../../fonts/novoglyphs-webfont.ttf') format('truetype'),
-       url('../../fonts/novoglyphs-webfont.svg') format('svg');
-}
-
 :root {
-  /* Colors */
-  --primary: #012c71;
-  --secondary: #ffffff;
-  --tertiary: #435168;
 
-  --success: #007e33;
-  --info: #0099cc;
-  --warning: #ff8800;
-  --danger: #cc0000;
+	/*brand colors*/
+	--color-primary: #012c71;
+	--color-secondary: #012c71a6;
+	--color-tertiary: #1a417f;
+	--color-room: #435168;
+	--color-fifth: #ffffff;
+	--color-sixth: #f4f4f4;
+	--color-seventh: #f2f2f2;
+	--color-eighth: #7b7b7b;
+	--color-nineth: #f6f3f1;
+	--color-tenth: #d8d8d8;
+	--color-eleventh: #b5bac3;
+	--color-twelfth: #bcc0c6;
+	--color-thirteenth: #ececec;
+	--color-fourteenth: #ffb400;
 
-  --yellow: #ffb400;
-  --vista-blue: #7ed3b2;
-  --trikemaster: #8b4f80;
-	--pink-salmon: #ff8c94;
-	--gold-sand: #ebc599;
-  --black: #111111;
-  --bg-color: #f6f3f1;
+	/*status bulk*/
+	--will-processed: #7ed3b2;
+	--will-not-processed: #8b4f80;
+	--not-processed: #ff8c94;
+	--being-validated: #ebc599;
+	--black: #111111;
 
-	--widget-color: #f4f4f4;
-	--shadows-color: #f2f2f2;
-  --border-color: #b5bac3;
-  --border-color-2: #d8d8d8;
-  --text-color: #7b7b7b;
-  --placeholder-color: #bcc0c6;
-	--disabled-color: #ececec;
-
-  --label-color: #012c71;
-  --primary-shade: #012c71a6;
-  --primary-tint: #1a417f;
+	/*validation messages*/
+	--success: #6CC04A;
+	--info: #0099cc;
+	--warning: #FFA400;
+	--danger: #EB0029;
 
   /* Type Scale */
   --h00: 2.5rem;

@@ -136,12 +136,17 @@ $(function () {
 						action: 'close'
 					}
 				}
-				inputModal = '<form id="delete-bulk-form" class="form-group">';
-				inputModal+= '<span class="regular"> '+textModal+': '+bulkNum+'</span>';
-				inputModal+= 		'<input id="password" class="form-control mt-2 h6 col-9 pwd-input" name="password" type="password" ';
-				inputModal+=		'autocomplete="off" placeholder="'+lang.GEN_PLACE_PASSWORD+'">';
+				inputModal = 	'<form id="delete-bulk-form" class="form-group">';
+				inputModal+= 		'<span class="regular"> '+textModal+': '+bulkNum+'</span>';
+				inputModal+= 		'<div class="input-group">';
+				inputModal+= 			'<input id="password" class="form-control pwd-input" type="password" name="password" autocomplete="off"';
+				inputModal+=			 	 'placeholder="'+lang.GEN_PLACE_PASSWORD+'">';
+				inputModal+= 			'<div class="input-group-append">';
+				inputModal+= 				'<span class="input-group-text pwd-action" title="'+lang.GEN_SHOW_PASS+'"><i class="icon-view mr-0"></i></span>';
+				inputModal+= 			'</div>';
+				inputModal+= 		'</div>';
 				inputModal+= 		'<div class="help-block"></div>';
-				inputModal+= '</form>';
+				inputModal+=	'</form>';
 				notiSystem(titleModal, inputModal, lang.GEN_ICON_INFO, data);
 				$('#'+currentIdBtn).on('click', function(e) {
 					e.preventDefault();

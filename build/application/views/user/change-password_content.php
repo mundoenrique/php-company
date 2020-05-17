@@ -11,22 +11,22 @@
 					<?php if($countryConf != 'Ec-bp'): ?>
 					<span aria-hidden="true" class="icon" data-icon="&#xe03f;"></span>
 					<?php endif; ?>
-					<?= lang('INFO_CHANGE_PASS'); ?>
+					<?= lang('PASSWORD_CHANGE'); ?>
 				</h2>
 				<div class="widget-content">
 					<form id="form-change-pass" name="form-change-pass" accept-charset="utf-8">
 						<input type="hidden" id="status-user" name="user-type" value="<?= $userType ?>">
 						<fieldset>
 							<div class="field-input">
-								<label for="current-pass"><?= lang('CURRENT_PASSWORD');?></label>
+								<label for="current-pass"><?= lang('PASSWORD_CURRENT'); ?></label>
 								<input type="password" id="current-pass" name="current-pass" class="input-middle" required>
 							</div>
 							<div class="field-input">
-								<label for="new-pass"><?= lang('NEW_PASSWORD');?></label>
+								<label for="new-pass"><?= lang('PASSWORD_NEW'); ?></label>
 								<input type="password" id="new-pass" name="new-pass" class="input-middle" required>
 							</div>
 							<div class="field-input">
-								<label for="confirm-pass"><?= lang('CONFIRM_PASSWORD');?></label>
+								<label for="confirm-pass"><?= lang('PASSWORD_CONFIRM'); ?></label>
 								<input type="password" id="confirm-pass" name="confirm-pass" class="input-middle" required>
 							</div>
 						</fieldset>
@@ -37,14 +37,14 @@
 		</div>
 	</div>
 	<div id="psw_info" style="display: none">
-		<h5><?= lang('PASSWORD_INFO_TITLE');?></h5>
+		<h5><?= lang('PASSWORD_INFO_TITLE'); ?></h5>
 		<ul>
-			<li id="length" class="invalid"><?= lang('PASSWORD_INFO_1');?></li>
-			<li id="letter" class="invalid"><?= lang('PASSWORD_INFO_2');?></li>
-			<li id="capital" class="invalid"><?= lang('PASSWORD_INFO_3');?></li>
-			<li id="number" class="invalid"><?= lang('PASSWORD_INFO_4');?></li>
-			<li id="especial" class="invalid"><?= lang('PASSWORD_INFO_5');?></li>
-			<li id="consecutivo" class="invalid"><?= lang('PASSWORD_INFO_6');?></li>
+			<li id="length" class="invalid"><?= lang('PASSWORD_INFO_1'); ?></li>
+			<li id="letter" class="invalid"><?= lang('PASSWORD_INFO_2'); ?></li>
+			<li id="capital" class="invalid"><?= lang('PASSWORD_INFO_3'); ?></li>
+			<li id="number" class="invalid"><?= lang('PASSWORD_INFO_4'); ?></li>
+			<li id="especial" class="invalid"><?= lang('PASSWORD_INFO_5'); ?></li>
+			<li id="consecutivo" class="invalid"><?= lang('PASSWORD_INFO_6'); ?></li>
 		</ul>
 	</div>
 </div>

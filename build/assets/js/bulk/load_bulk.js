@@ -151,11 +151,17 @@ $(function () {
 					}
 				}
 				var bulkFile = $(this).closest('tr').find('td:nth-child(3)').text();
-				inputModal = '<form id="delete-bulk-form" class="form-group">';
-				inputModal+= '<span class="regular">'+lang.BULK_DELETE_DATE+': '+bulkFile+'</span>';
-				inputModal+= 		'<input id="password" class="form-control mt-2 h6 col-9 pwd-input" name="password" type="password" autocomplete="off" placeholder="'+lang.GEN_PLACE_PASSWORD+'">';
+				inputModal =	'<form id="delete-bulk-form" class="form-group">';
+				inputModal+= 		'<span class="regular">'+lang.BULK_DELETE_DATE+': '+bulkFile+'</span>';
+				inputModal+=		'<div class="input-group">';
+				inputModal+= 			'<input id="password" class="form-control pwd-input" name="password" type="password" autocomplete="off"';
+				inputModal+=				'placeholder="'+lang.GEN_PLACE_PASSWORD+'">';
+				inputModal+=			'<div class="input-group-append">';
+				inputModal+=				'<span class="input-group-text pwd-action" title="'+lang.GEN_SHOW_PASS+'"><i class="icon-view mr-0"></i></span>';
+				inputModal+=			'</div>';
+				inputModal+=		'</div>';
 				inputModal+= 		'<div class="help-block"></div>';
-				inputModal+= '</form>';
+				inputModal+= 	'</form>';
 				notiSystem(lang.BULK_DELETE_TITLE, inputModal, lang.GEN_ICON_INFO, data);
 				deleteBulk(oldID);
 				$('#cancel').on('click', function(e){
@@ -200,12 +206,14 @@ function deleteBulk(oldID) {
 				bulkStatus: form.find('input[name="bulkStatus"]').val(),
 				pass: inputPass
 			}
+			insertFormInput(true, formDeleteBulk);
 			verb = 'POST'; who = 'Bulk'; where = 'DeleteNoConfirmBulk';
 			callNovoCore(verb, who, where, data, function(response) {
 
 				if(response.cod == 0) {
 					pendingBulk.row('.select').remove().draw(false);
 				}
+				insertFormInput(false);
 			});
 		}
 	});

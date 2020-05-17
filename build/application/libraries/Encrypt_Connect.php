@@ -92,6 +92,12 @@ class Encrypt_Connect {
 		log_message('INFO', 'NOVO Encrypt_Connect: connectWs Method Initialized');
 
 		$fail = FALSE;
+		$subFix = '_'.strtoupper($this->CI->config->item('country-uri'));
+
+		if(isset($_SERVER['WS_URL'.$subFix])) {
+			$this->CI->config->set_item('urlWS', $_SERVER['WS_URL'.$subFix]);
+		}
+
 		$urlWS = $this->CI->config->item('urlWS').'eolwebInterfaceWS';
 
 		log_message('DEBUG', 'NOVO ['.$userName.'] REQUEST BY COUNTRY: '.$request['pais'].', AND WEBSERVICE URL: '.$urlWS);
@@ -182,7 +188,7 @@ class Encrypt_Connect {
 		return $respUpload;
 	}
 	/**
-	 * @info Método para es cribir el log de la respuesta del servicio
+	 * @info Método para escribir el log de la respuesta del servicio
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date October 25th, 2019
 	 */
@@ -197,7 +203,26 @@ class Encrypt_Connect {
 		log_message('DEBUG', 'NOVO ['.$userName.'] RESPONSE '.$model.'= rc: '.$rc.', msg: '.$msg.', country: '.$country);
 
 		if(RESPONSE_SERV_COMPLETE) {
-			log_message('DEBUG', 'NOVO ['.$userName.'] COMPLETE RESPONSE '.$model.': '.json_encode($response, JSON_UNESCAPED_UNICODE));
+			$wirteLog = new stdClass();
+			$isBean = '';
+
+			if (isset($response->bean)) {
+				$isBean = 'IN BEAN ';
+				$response = json_decode($response->bean);
+			}
+
+			foreach ($response AS $pos => $responseAttr) {
+				if($pos == 'archivo') {
+					$wirteLog->archivo = 'OK';
+					if(!is_array($responseAttr)) {
+						$wirteLog->archivo = 'Sin arreglo binario';
+					}
+					continue;
+				}
+				$wirteLog->$pos = $responseAttr;
+			}
+
+			log_message('DEBUG', 'NOVO ['.$userName.'] COMPLETE RESPONSE '.$isBean.$model.': '.json_encode($wirteLog, JSON_UNESCAPED_UNICODE));
 		}
 	}
 }

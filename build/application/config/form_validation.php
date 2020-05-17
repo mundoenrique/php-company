@@ -30,6 +30,13 @@ $config = [
 			'rules' => 'trim|required'
 		]
 	],
+	'singleSignon' => [
+		[
+			'field' => 'tokenId',
+			'label' => 'tokenId',
+			'rules' => 'trim|regex_match[/^([\w]+)+$/i]|required'
+		]
+	],
 	'finishSession' => [
 		[
 			'field' => 'user',
@@ -58,18 +65,87 @@ $config = [
 		[
 			'field' => 'currentPass',
 			'label' => 'currentPass',
-			'rules' => 'trim|regex_match[/^([\w!@\*\-\?¡¿+\/.,#]+)+$/i]|required'
+			'rules' => 'trim|regex_match[/^([a-zA-Z0-9=]+)+$/i]|required'
 		],
 		[
 			'field' => 'newPass',
 			'label' => 'newPass',
-			'rules' => 'trim|regex_match[/^([\w!@\*\-\?¡¿+\/.,#]+)+$/i]|differs[currentPass]|required'
+			'rules' => 'trim|regex_match[/^([a-zA-Z0-9=]+)+$/i]|required'
 		],
 		[
 			'field' => 'confirmPass',
 			'label' => 'confirmPass',
-			'rules' => 'trim|regex_match[/^([\w!@\*\-\?¡¿+\/.,#]+)+$/i]|matches[newPass]|required'
+			'rules' => 'trim|regex_match[/^([a-zA-Z0-9=]+)+$/i]|required'
 		]
+	],
+	'changeEmail' => [
+		[
+			'field' => 'email',
+			'label' => 'email',
+			'rules' => 'trim|required'
+		]
+	],
+	'obtainNumPosition' => [
+		[
+			'field' => 'numpos',
+			'rules' => 'trim'
+		],
+
+	],
+	'changeTelephones' => [
+		[
+			'field' => 'tlf1',
+			'label' => 'phone',
+			'rules' => 'trim|required'
+		],
+		[
+			'field' => 'tlf2',
+			'label' => 'phone',
+			'rules' => 'trim'
+		],
+		[
+			'field' => 'tlf3',
+			'label' => 'phone',
+			'rules' => 'trim'
+		],
+	],
+	'addContact' => [
+		[
+			'field' => 'contName',
+			'label' => 'contName',
+			'rules' => 'trim'
+		],
+		[
+			'field' => 'password',
+			'label' => 'password',
+			'rules' => 'trim'
+		],
+		[
+			'field' => 'surname',
+			'label' => 'surname',
+			'rules' => 'trim'
+		],
+		[
+			'field' => 'contOcupation',
+			'label' => 'contOcupation',
+			'rules' => 'trim'
+		],
+		[
+			'field' => 'contNIT',
+			'label' => 'contNIT',
+			'rules' => 'trim'
+		],
+		[
+			'field' => 'contType',
+			'label' => 'contType',
+			'rules' => 'trim'
+		],
+		[
+			'field' => 'contEmail',
+			'label' => 'contEmail',
+			'rules' => 'trim'
+		]
+
 	],
 	'getProducts' => [
 		[
@@ -294,7 +370,12 @@ $config = [
 		[
 			'field' => 'OrderNumber',
 			'label' => 'OrderNumber',
-			'rules' => 'trim|regex_match[/^([\w]+)+$/i]|required'
+			'rules' => 'trim|regex_match[/^([\w]+)+$/i]'
+		],
+		[
+			'field' => 'bulkNumber',
+			'label' => 'bulkNumber',
+			'rules' => 'trim|integer'
 		],
 		[
 			'field' => 'who',
@@ -341,6 +422,89 @@ $config = [
 			'field' => 'fileName',
 			'label' => 'fileName',
 			'rules' => 'trim|regex_match[/^[\w.]+$/i]'
+		]
+	],
+	'unnamedRequest' => [
+		[
+			'field' => 'expiredDate',
+			'label' => 'expiredDate',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+		],
+		[
+			'field' => 'maxCards',
+			'label' => 'maxCards',
+			'rules' => 'trim|integer|required'
+		],
+		[
+			'field' => 'startingLine1',
+			'label' => 'startingLine1',
+			'rules' => 'trim|alpha_numeric'
+		],
+		[
+			'field' => 'startingLine2',
+			'label' => 'startingLine2',
+			'rules' => 'trim|alpha_numeric'
+		],
+		[
+			'field' => 'branchOffice',
+			'label' => 'branchOffice',
+			'rules' => 'trim|regex_match[/^[a-z0-9]+$/i]'
+		]
+	],
+	'unnamedAffiliate' => [
+		[
+			'field' => 'bulkNumber',
+			'label' => 'bulkNumber',
+			'rules' => 'trim|integer'
+		],
+		[
+			'field' => 'initialDate',
+			'label' => 'initialDate',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]'
+		],
+		[
+			'field' => 'finalDate',
+			'label' => 'finalDate',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]'
+		]
+	],
+	'unnmamedDetail' => [
+		[
+			'field' => 'bulkNumber',
+			'label' => 'bulkNumber',
+			'rules' => 'trim|integer|required'
+		],
+		[
+			'field' => 'totalCards',
+			'label' => 'totalCards',
+			'rules' => 'trim|integer|required'
+		],
+		[
+			'field' => 'issuanDate',
+			'label' => 'issuanDate',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+		]
+	],
+	'statusBulk' => [
+		[
+			'field' => 'enterpriseCode',
+			'label' => 'enterpriseCode',
+			'rules' => 'trim|regex_match[/^[a-z0-9]+$/i]|required'
+		],
+		[
+			'field' => 'productCode',
+			'label' => 'enterpriseCode',
+			'rules' => 'trim|regex_match[/^[a-z0-9]+$/i]|required'
+		],
+		[
+			'field' => 'initialDate',
+			'label' => 'initialDate',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+		],
+		[
+			'field' => 'finalDate',
+			'label' => 'finalDate',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
 		]
 	],
 	'keepSession' => [

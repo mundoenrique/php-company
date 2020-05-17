@@ -19,7 +19,7 @@
 	<div class="flex flex-auto flex-column <?= $widget ? '' : 'max-width-6';  ?>">
 		<div class="search-criteria-order flex pb-3 flex-column w-100">
 			<span class="line-text mb-2 h4 semibold primary"><?= lang('GEN_SEARCH_CRITERIA'); ?></span>
-			<div class="flex my-2 px-5">
+			<div class="flex mt-2 mb-3 px-5">
 				<form id="service-orders-form" method="post" class="w-100">
 					<div class="row">
 						<div class="form-group mr-auto col-3 col-lg-auto col-xl-auto">
@@ -55,7 +55,7 @@
 							</select>
 							<div class="help-block"></div>
 						</div>
-						<div class="col-xl-auto flex items-center ml-auto">
+						<div class="col-xl-auto flex items-center ml-auto mr-2">
 							<button id="service-orders-btn" class="btn btn-primary btn-small btn-loading">
 							<?= lang('GEN_BTN_SEARCH'); ?>
 							</button>
@@ -111,7 +111,7 @@
 									<form method="POST" action="<?= base_url('descargar-archivo'); ?>">
 										<input type="hidden" name="OrderNumber" value="<?= $list->OrderNumber; ?>">
 										<input type="hidden" name="who" value="Inquiries">
-										<input type="hidden" name="where" value="exportFiles">
+										<input type="hidden" name="where" value="ExportFiles">
 								  </form>
 								</td>
 							</tr>

@@ -1,9 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-$lang['ACCEPT_TERMS'] = 'Acepto los términos y condiciones.';
-$lang["TITULO_TERMINOS"]='TÉRMINOS Y CONDICIONES';
-$lang["TERMINOS"] = '<h2>USO DE CANALES ELECTRÓNICOS</h2>
+$lang["TERMS_TITLE"]='TÉRMINOS Y CONDICIONES';
+$lang["TERMS_CONTENT"] = '<h2>USO DE CANALES ELECTRÓNICOS</h2>
 <div class="box-term">
 <p>
 Este acuerdo contiene los términos y condiciones que rigen el acceso y uso de los canales electrónicos de Banco Pichincha C.A. (Banca Electrónica, Banca Móvil, Billetera Móvil, Aplicaciones Móviles y demás plataformas tecnológicas o canales que ponga a disposición), que permiten a sus clientes acceder a productos y servicios bancarios a través de Internet y de sus dispositivos móviles de manera ágil y segura.
@@ -261,5 +260,3 @@ e. El acceso a los canales electrónicos y el uso de las contraseñas en él que
 </p>
 </div>
 ';
-
-$lang['TERM_MESSAGE'] = 'Estimado usuario debes leer y aceptar los términos de uso y confidencialidad para comenzar a usar nuestra plataforma.';

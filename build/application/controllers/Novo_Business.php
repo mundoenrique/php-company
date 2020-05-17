@@ -10,6 +10,7 @@ class Novo_Business extends NOVO_Controller {
 	public function __construct()
 	{
 		parent:: __construct();
+		$this->load->library('session');
 		log_message('INFO', 'NOVO Business Controller Class Initialized');
 	}
 	/**
@@ -82,7 +83,7 @@ class Novo_Business extends NOVO_Controller {
 		$this->render->categories = $responseList->data->categoriesList;
 		$this->render->productList = $responseList->data->productList;
 
-		if($this->render->widget && count($this->render->widget->enterpriseList) < 2) {
+		if($this->render->widget && count($this->render->enterpriseList) < 2) {
 			$this->render->widget = FALSE;
 		}
 
@@ -138,7 +139,7 @@ class Novo_Business extends NOVO_Controller {
 		$this->render->serviceOrders = $detailList->data->productSummary->serviceOrders;
 		$this->render->serviceOrdersNoCon = $detailList->data->productSummary->serviceOrdersNoCon;
 		$this->render->serviceOrdersCon = $detailList->data->productSummary->serviceOrdersCon;
-		$this->render->masterTransLink = $this->verify_access->verifyAuthorization('TRAMAE') ? lang('GEN_LINK_MASTER_TRANSFER') : lang('GEN_NO_LINK');
+		$this->render->masterTransLink = $this->verify_access->verifyAuthorization('TRAMAE') ? lang('GEN_LINK_SERV_MASTER_ACCOUNT') : lang('GEN_NO_LINK');
 		$this->render->masterTransDisabled = $this->render->masterTransLink == lang('GEN_NO_LINK') ? 'is-disabled' : '';
 		$this->render->totalCards = $detailList->data->productSummary->totalCards;
 		$this->render->activeCards = $detailList->data->productSummary->activeCards;

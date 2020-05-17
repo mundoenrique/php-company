@@ -31,22 +31,25 @@ class Novo_Bulk extends NOVO_Controller {
 			"third_party/dataTables-1.10.20",
 			"third_party/fileupload-10.4.0",
 			"third_party/jquery.validate",
-			"validate".$this->render->newViews."-forms",
+			"validate-core-forms",
 			"third_party/additional-methods",
 			"bulk/load_bulk"
 		);
 		$responseList = $this->loadModel();
+		$this->request->newGet = $responseList->code;
 		$this->responseAttr($responseList);
 		$this->load->model('Novo_Bulk_Model', 'Bulk');
-		$typesLot = $this->Bulk->callWs_getTypeLots_Bulk();
+		$typesLot = $this->Bulk->callWs_getTypeLots_Bulk($this->request);
 		$this->render->typesLot = $typesLot->data->typesLot;
+
 		if(verifyDisplay('body', $view,  lang('GEN_TAG_BRANCHOFFICE'))) {
-			$this->request = new stdClass();
 			$this->request->select = true;
 			$this->load->model('Novo_Business_Model', 'Business');
+			$this->request->newGet = $typesLot->code;
 			$branchOffices = $this->Business->callWs_GetBranchOffices_Bulk($this->request);
 			$this->render->branchOffices = $branchOffices->data->branchOffices;
 		}
+
 		$this->render->pendingBulk = $responseList->data->pendingBulk;
 		$this->render->titlePage = lang('GEN_MENU_BULK_LOAD');
 		$this->views = ['bulk/'.$view];
@@ -124,7 +127,7 @@ class Novo_Bulk extends NOVO_Controller {
 			$this->includeAssets->jsFiles,
 			"third_party/dataTables-1.10.20",
 			"third_party/jquery.validate",
-			"validate".$this->render->newViews."-forms",
+			"validate-core-forms",
 			"third_party/additional-methods",
 			"bulk/authorize_bulk"
 		);
@@ -139,7 +142,7 @@ class Novo_Bulk extends NOVO_Controller {
 		$this->render->signBulk = $responseList->data->signBulk;
 		$this->render->authorizeBulk = $responseList->data->authorizeBulk;
 		$this->render->authorizeAttr = $responseList->data->authorizeAttr;
-		$this->render->titlePage = lang('GEN_AUTHORIZE_BULK_TITLE');
+		$this->render->titlePage = lang('GEN_MENU_BULK_AUTH');
 		$this->views = ['bulk/'.$view];
 		$this->loadView($view);
 	}
@@ -181,5 +184,125 @@ class Novo_Bulk extends NOVO_Controller {
 		$this->views = ['bulk/'.$view];
 		$this->loadView($view);
 	}
+	/**
+	 * @info Método para solicitud de innominadas
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date April 29, 2020
+	 */
+	public function unnamedRequest()
+	{
+		log_message('INFO', 'NOVO Bulk: unnamedRequest Method Initialized');
 
+		$view = 'unnamedRequest';
+		$branchOffices = 0;
+
+		if(lang('CONF_UNNA_BRANCHOFFICE')) {
+			$this->request->select = true;
+			$this->load->model('Novo_Business_Model', 'Business');
+			$branchOffices = $this->Business->callWs_GetBranchOffices_Bulk($this->request);
+			$this->render->branchOffices = $branchOffices->data->branchOffices;
+		}
+
+		array_push(
+			$this->includeAssets->jsFiles,
+			"third_party/jquery.validate",
+			"validate".$this->render->newViews."-forms",
+			"third_party/additional-methods",
+			'bulk/unnamed_request'
+		);
+
+		$this->responseAttr($branchOffices);
+		$this->render->titlePage = lang('GEN_MENU_UNNAMED_REQUEST');
+		$this->render->expMaxMonths = $this->session->productInf->expMaxMonths;
+		$this->render->maxCards = $this->session->productInf->maxCards;
+		$this->render->editable = lang('CONF_UNNA_EXPIRED_DATE') ? '' : 'readonly';
+		$this->views = ['bulk/'.$view];
+		$this->loadView($view);
+	}
+	/**
+	 * @info Método para afiliación de innominadas
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date April 29, 2020
+	 */
+	public function unnamedAffiliate()
+	{
+		log_message('INFO', 'NOVO Bulk: unnamedAffiliate Method Initialized');
+
+		$requestArray = (array)$this->request;
+		$view = 'unnamedAffiliate';
+		array_push(
+			$this->includeAssets->cssFiles,
+			"third_party/dataTables-1.10.20"
+		);
+		array_push(
+			$this->includeAssets->jsFiles,
+			"third_party/dataTables-1.10.20",
+			"third_party/jquery.validate",
+			"validate-core-forms",
+			"third_party/additional-methods",
+			'bulk/unnamed_affiliate'
+		);
+
+		if (empty($requestArray)) {
+			$this->request->initialDate = '';
+			$this->request->finalDate = '';
+			$this->request->bulkNumber = '';
+		}
+
+		$unnamedList = $this->loadModel($this->request);
+
+		foreach($unnamedList->data->bulkInfo AS $row => $info) {
+			$this->render->$row = $info;
+		}
+
+		$this->responseAttr($unnamedList);
+		$this->render->titlePage = lang('GEN_MENU_UNNAMED_AFFIL');
+		$this->views = ['bulk/'.$view];
+		$this->loadView($view);
+	}
+	/**
+	 * @info Método para ver el detalle del lote innominado
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date May 09, 2020
+	 */
+	public function unnmamedDetail()
+	{
+		log_message('INFO', 'NOVO Bulk: unnmamedDetail Method Initialized');
+
+		$view = 'unnmamedDetail';
+		array_push(
+			$this->includeAssets->cssFiles,
+			"third_party/dataTables-1.10.20"
+		);
+		array_push(
+			$this->includeAssets->jsFiles,
+			"third_party/dataTables-1.10.20",
+			"third_party/jquery.validate",
+			"validate-core-forms",
+			"third_party/additional-methods",
+			'bulk/unnamed_detail'
+		);
+
+		if ($this->session->flashdata('download')) {
+			$unnamedDetail = $this->session->flashdata('download');
+		} else {
+			$unnamedDetail = $this->loadModel($this->request);
+		}
+
+		foreach($unnamedDetail->data->bulkInfo AS $row => $info) {
+			$this->render->$row = $info;
+		}
+
+		$this->responseAttr($unnamedDetail);
+
+		if ($this->session->flashdata('download')) {
+			$unnamedDetail->code = 0;
+			unset($unnamedDetail->download);
+			$this->session->set_flashdata('download', $unnamedDetail);
+		}
+
+		$this->render->titlePage = 'Innomindas detalle del lote';
+		$this->views = ['bulk/'.$view];
+		$this->loadView($view);
+	}
 }

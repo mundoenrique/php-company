@@ -66,6 +66,7 @@ class Novo_User extends NOVO_Controller {
 			);
 		}
 
+		$this->render->skipProductInf = TRUE;
 		$this->render->titlePage = lang('GEN_SYSTEM_NAME');
 		$this->views = $views;
 		$this->loadView($view);
@@ -74,23 +75,38 @@ class Novo_User extends NOVO_Controller {
 	 * @info Método para el cierre de sesión
 	 * @author J. Enrique Peñaloza Piñero.
 	 */
-	public function singleSignin($tokenId)
+	public function singleSignon($tokenId = FALSE)
 	{
-		log_message('INFO', 'NOVO User: singleSignin Method Initialized');
+		log_message('INFO', 'NOVO User: singleSignon Method Initialized');
 
-		$view = 'finish';
+		$view = 'single-signin';
+		$this->render->send = FALSE;
 
+		if ($tokenId) {
+			$this->render->tokenId = $tokenId;
+			$this->render->send = TRUE;
+		} else {
+			$this->render->tokenId = $this->request->tokenId;
+		}
 
-		$pos = array_search('menu-datepicker', $this->includeAssets->jsFiles);
-		$this->render->showBtn = FALSE;
-		$this->render->sessionEnd = 'No fue posible validar tus credenciales de acceso, por favor comunicate con el administrador';
+		if ($tokenId != 'fin') {
+			array_push(
+				$this->includeAssets->jsFiles,
+				'user/single-signin'
+			);
+		}
 
-		unset($this->includeAssets->jsFiles[$pos]);
-		$this->render->activeHeader = TRUE;
-		$this->render->titlePage = LANG('GEN_FINISH_TITLE');
+		if($tokenId == 'fin') {
+			$view = 'finish';
+			$this->render->activeHeader = TRUE;
+			$this->render->showBtn = FALSE;
+			$this->render->sessionEnd = lang('RESP_DUPLICATED_SESSION');
+		}
+
+		$this->render->titlePage = lang('GEN_SYSTEM_NAME');
+		$this->render->skipProductInf = TRUE;
 		$this->views = ['user/'.$view];
 		$this->loadView($view);
-
 
 	}
 	/**
@@ -110,6 +126,8 @@ class Novo_User extends NOVO_Controller {
 			"third_party/additional-methods"
 		);
 		$this->render->titlePage = lang('GEN_RECOVER_PASS_TITLE');
+		$this->render->activeHeader = TRUE;
+		$this->render->skipProductInf = TRUE;
 		$this->views = ['user/'.$view];
 		$this->loadView($view);
 	}
@@ -130,7 +148,8 @@ class Novo_User extends NOVO_Controller {
 
 		array_push(
 			$this->includeAssets->jsFiles,
-			"user/change-pass",
+			"user/change_pass".$this->render->newViews,
+			"user/pass_validate",
 			"third_party/jquery.md5",
 			"third_party/jquery.balloon",
 			"third_party/jquery.validate",
@@ -140,10 +159,10 @@ class Novo_User extends NOVO_Controller {
 
 		switch($this->session->flashdata('changePassword')) {
 			case 'newUser':
-			$this->render->message = lang("MSG_NEW_PASS_USER");
+			$this->render->message = novoLang(lang("PASSWORD_NEWUSER"), lang('GEN_SYSTEM_NAME'));
 			break;
 			case 'expiredPass':
-			$this->render->message = lang("MSG_NEW_PASS_CADU");
+			$this->render->message = novoLang(lang("PASSWORD_EXPIRED"), lang('GEN_SYSTEM_NAME'));
 			break;
 		}
 
@@ -151,6 +170,7 @@ class Novo_User extends NOVO_Controller {
 		$this->session->set_flashdata('changePassword', $this->session->flashdata('changePassword'));
 		$this->session->set_flashdata('userType', $this->session->flashdata('userType'));
 		$this->render->titlePage = LANG('GEN_PASSWORD_CHANGE_TITLE');
+		$this->render->activeHeader = TRUE;
 		$this->views = ['user/'.$view];
 		$this->loadView($view);
 	}
@@ -186,6 +206,7 @@ class Novo_User extends NOVO_Controller {
 
 			unset($this->includeAssets->jsFiles[$pos]);
 			$this->render->activeHeader = TRUE;
+			$this->render->skipProductInf = TRUE;
 			$this->render->titlePage = LANG('GEN_FINISH_TITLE');
 			$this->views = ['user/'.$view];
 			$this->loadView($view);

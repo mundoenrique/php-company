@@ -1,0 +1,108 @@
+'use strict'
+var reportsResults;
+$(function () {
+	$('#pre-loader').remove();
+	$('.hide-out').removeClass('hide');
+	var datePicker = $('.date-picker');
+	var resultStatusBulk = $('#resultStatusBulk');
+	var statusBulkBtn = $('#status-bulk-btn');
+	var downLoad = $('.download');
+
+	datePicker.datepicker({
+		onSelect: function (selectedDate) {
+			var dateSelected = selectedDate.split('/');
+			dateSelected = dateSelected[1] + '/' + dateSelected[0] + '/' + dateSelected[2]
+			var inputDate = $(this).attr('id');
+			var maxTime = new Date(dateSelected);
+
+			if (inputDate == 'initialDate') {
+				$('#finalDate').datepicker('option', 'minDate', selectedDate);
+				maxTime.setDate(maxTime.getDate() - 1);
+				maxTime.setMonth(maxTime.getMonth() + 3);
+
+				if (currentDate > maxTime) {
+					$('#finalDate').datepicker('option', 'maxDate', maxTime);
+				}
+			}
+
+			if (inputDate == 'finalDate') {
+				$('#initialDate').datepicker('option', 'maxDate', selectedDate);
+			}
+		}
+	});
+
+	statusBulkBtn.on('click', function (e) {
+		form = $('#status-bulk-form');
+		btnText = $(this).text().trim()
+		validateForms(form);
+
+		if (form.valid()) {
+			data = getDataForm(form);
+			insertFormInput(true);
+			statusBulkBtn.html(loader);
+			$('.statusbulk-result').addClass('hide');
+			$('#pre-loade-result')
+				.removeClass('hide')
+				.html(loader);
+			resultStatusBulk.dataTable().fnClearTable();
+			resultStatusBulk.dataTable().fnDestroy();
+			verb = "POST"; who = 'Reports'; where = 'StatusBulk';
+			callNovoCore(verb, who, where, data, function (response) {
+				var table = resultStatusBulk.DataTable({
+					"ordering": false,
+					"responsive": true,
+					"pagingType": "full_numbers",
+					"language": dataTableLang
+				});
+
+				if (response.code == 0) {
+					$.each(response.data, function (index, value) {
+						table.row.add([
+							value.bulkType,
+							value.bulkNumber,
+							value.bulkStatus,
+							value.uploadDate,
+							value.valueDate,
+							value.records,
+							value.amount,
+						]).draw()
+					});
+					form = $('#download-status');
+					form.html('')
+					$.each(data, function(index, value) {
+						if(index != 'screenSize') {
+							form.append('<input type="hidden" name="'+index+'" value="'+value+'">')
+						}
+					});
+				}
+
+				insertFormInput(false);
+				statusBulkBtn.html(btnText);
+				$('#pre-loade-result')
+					.addClass('hide')
+					.html('');
+				$('.statusbulk-result').removeClass('hide');
+			})
+		}
+	});
+
+	downLoad.on('click', 'button', function(e) {
+		e.preventDefault();
+		var event = $(e.currentTarget);
+		var action = event.attr('title');
+		form = $('#download-status');
+		form.append('<input type="hidden" name="type" value="' + action + '"></input>');
+		form.append('<input type="hidden" name="who" value="DownloadFiles"></input>');
+		form.append('<input type="hidden" name="where" value="StatusBulkReport"></input>');
+		insertFormInput(true, form);
+		form.submit();
+		setTimeout(function () {
+			insertFormInput(false);
+			$('.cover-spin').hide();
+		}, lang.GEN_TIME_DOWNLOAD_FILE);
+	});
+});
+
+/* validator = $('#status-bulk-form').validate();
+validator.destroy();
+form.submit(); */
