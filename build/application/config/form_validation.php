@@ -78,6 +78,75 @@ $config = [
 			'rules' => 'trim|regex_match[/^([a-zA-Z0-9=]+)+$/i]|required'
 		]
 	],
+	'changeEmail' => [
+		[
+			'field' => 'email',
+			'label' => 'email',
+			'rules' => 'trim|required'
+		]
+	],
+	'obtainNumPosition' => [
+		[
+			'field' => 'numpos',
+			'rules' => 'trim'
+		],
+
+	],
+	'changeTelephones' => [
+		[
+			'field' => 'tlf1',
+			'label' => 'phone',
+			'rules' => 'trim|required'
+		],
+		[
+			'field' => 'tlf2',
+			'label' => 'phone',
+			'rules' => 'trim'
+		],
+		[
+			'field' => 'tlf3',
+			'label' => 'phone',
+			'rules' => 'trim'
+		],
+	],
+	'addContact' => [
+		[
+			'field' => 'contName',
+			'label' => 'contName',
+			'rules' => 'trim'
+		],
+		[
+			'field' => 'password',
+			'label' => 'password',
+			'rules' => 'trim'
+		],
+		[
+			'field' => 'surname',
+			'label' => 'surname',
+			'rules' => 'trim'
+		],
+		[
+			'field' => 'contOcupation',
+			'label' => 'contOcupation',
+			'rules' => 'trim'
+		],
+		[
+			'field' => 'contNIT',
+			'label' => 'contNIT',
+			'rules' => 'trim'
+		],
+		[
+			'field' => 'contType',
+			'label' => 'contType',
+			'rules' => 'trim'
+		],
+		[
+			'field' => 'contEmail',
+			'label' => 'contEmail',
+			'rules' => 'trim'
+		]
+
+	],
 	'getProducts' => [
 		[
 			'field' => 'enterpriseCode',
@@ -413,6 +482,28 @@ $config = [
 		[
 			'field' => 'issuanDate',
 			'label' => 'issuanDate',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+		]
+	],
+	'statusBulk' => [
+		[
+			'field' => 'enterpriseCode',
+			'label' => 'enterpriseCode',
+			'rules' => 'trim|regex_match[/^[a-z0-9]+$/i]|required'
+		],
+		[
+			'field' => 'productCode',
+			'label' => 'enterpriseCode',
+			'rules' => 'trim|regex_match[/^[a-z0-9]+$/i]|required'
+		],
+		[
+			'field' => 'initialDate',
+			'label' => 'initialDate',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+		],
+		[
+			'field' => 'finalDate',
+			'label' => 'finalDate',
 			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
 		]
 	],

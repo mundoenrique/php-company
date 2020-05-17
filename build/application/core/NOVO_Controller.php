@@ -230,6 +230,8 @@ class NOVO_Controller extends CI_Controller {
 
 		$this->render->code = $responseView;
 		$download = FALSE;
+		$this->render->enterpriseList = $this->session->enterpriseSelect->list;
+		$this->render->enterpriseData =  $this->session->enterpriseInf;
 
 		if(is_object($responseView)) {
 			$this->render->code = $responseView->code;
@@ -241,10 +243,8 @@ class NOVO_Controller extends CI_Controller {
 		}
 
 		if(($this->render->code == 0  && $active) || $download) {
-			$this->load->model('Novo_Business_Model', 'Business');
-			$enterpriseList = $this->Business->callWs_getEnterprises_Business(TRUE);
 
-			if(count($enterpriseList->data->list) > 1 || $this->products) {
+			if(count($this->render->enterpriseList) > 1 || $this->products) {
 				array_push(
 					$this->includeAssets->jsFiles,
 					"business/widget-enterprise"
@@ -252,8 +252,6 @@ class NOVO_Controller extends CI_Controller {
 
 				$this->render->widget =  new stdClass();
 				$this->render->widget->widgetBtnTitle = lang('GEN_MUST_SELECT_ENTERPRISE');
-				$this->render->widget->enterpriseData =  $this->session->enterpriseInf;
-				$this->render->widget->enterpriseList = $enterpriseList->data->list;
 				$this->render->widget->countProducts = $this->products;
 				$this->render->widget->actionForm = 'detalle-producto';
 			}

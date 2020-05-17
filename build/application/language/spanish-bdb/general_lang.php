@@ -18,26 +18,6 @@ $lang['GEN_TABLE_AMOUNT_SO'] = 'Valor OS';
 $lang['GEN_TABLE_DEPOSIT_AMOUNT'] = 'Valor depositado';
 $lang['GEN_TABLE_AMOUNT'] = 'Valor';
 $lang['GEN_TABLE_DNI'] = 'Cédula';
-//CONFIGURATIONS
-$lang['GEN_DOWNLOADS'] = 'Descargas';
-$lang['GEN_MANUALS'] = 'Manuales';
-$lang['GEN_APPLICATIONS'] = 'Aplicaciones';
-$lang['GEN_FILE'] = 'Archivos de gestión Conexión Empresas Online';
-$lang['GEN_CEO_USER_MANUAL'] = 'Manual de Usuario Conexión Empresas Online';
-$lang['GEN_GL_USER_MANUAL'] = 'Manual de Usuario Gestor de Lotes';
-$lang['GEN_PDF_FILE'] = [
-  ['archivo.pdf', 'Manual de Usuario Conexión Empresas Online'],
-  ['archivo.pdf', 'tyfvugybihujnokm']
-];
-$lang['GEN_ZIP_FILE'] = [''];
-$lang['GEN_RAR_FILE'] = [''];
-$lang['GEN_MP4_VIDEO'] = ['video.mp4'];
-$lang['GEN_PDF_ICON'] = 'icon-pdf.svg';
-$lang['GEN_RAR_ICON'] = 'icon-rar.svg';
-$lang['GEN_ZIP_ICON'] = 'icon-zip.svg';
-
-
-
 //FOOTER
 $lang['GEN_FOTTER_RIGHTS'] = '© Todos los derechos reservados. Banco de Bogotá - ';
 $lang['GEN_FOTTER_IMAGE_L'] = 'img-bogota_white.svg';

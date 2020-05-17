@@ -1,5 +1,5 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
-<h1 class="primary h3 regular inline"><?= lang('GEN_MENU_BULK_UNNAMED'); ?></h1>
+<h1 class="primary h3 regular inline"><?= lang('GEN_MENU_UNNAMED_REQUEST'); ?></h1>
 <span class="ml-2 regular tertiary"><?= $productName ?></span>
 <div class="mb-2 flex items-center">
 	<div class="flex tertiary">
@@ -8,7 +8,7 @@
 				<li class="inline"><a class="tertiary big-modal" href="<?= base_url('empresas') ?>"><?= lang('GEN_MENU_ENTERPRISE') ?></a></li> /
 				<li class="inline"><a class="tertiary big-modal" href="<?= base_url('productos') ?>"><?= lang('GEN_PRODUCTS') ?></a></li> /
 				<li class="inline"><a class="tertiary big-modal" href="<?= base_url('detalle-producto') ?>"><?= lang('PRODUCTS_DETAIL_TITLE') ?></a></li> /
-				<li class="inline"><a class="tertiary not-pointer" href="javascript:"><?= lang('GEN_MENU_UNNAMED_REQUEST') ?></a></li>
+				<li class="inline"><a class="tertiary not-pointer" href="javascript:"><?= lang('GEN_MENU_BULK_UNNAMED') ?></a></li>
 			</ul>
 		</nav>
 	</div>

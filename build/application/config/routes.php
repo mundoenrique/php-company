@@ -63,6 +63,7 @@ $route['(:any)/inicio/(:any)'] = "Novo_User/login";
 $route['(:any)/cerrar-sesion/(:any)'] = "Novo_User/finishSession/$2";
 $route['(:any)/recuperar-clave'] = "Novo_User/recoverPass";
 $route['(:any)/cambiar-clave'] = "Novo_User/changePassword";
+$route['(:any)/obtener-usuario'] = "Novo_Settings/getUser";
 //Information
 $route['(:any)/inf-beneficios'] = "Novo_Information/benefits";
 $route['(:any)/inf-condiciones'] = "Novo_Information/terms";
@@ -97,9 +98,15 @@ $route['(:any)/recargas-realizadas'] = "Novo_Reports/rechargeMade";
 $route['(:any)/tarjetas-emitidas'] = "Novo_Reports/issuedCards";
 $route['(:any)/gastos-catgoria'] = "Novo_Reports/categoryExpense";
 $route['(:any)/cuenta-maestra'] = "Novo_Reports/masterAccount";
+$route['(:any)/estado-lote'] = "Novo_Reports/statusBulk";
 $route['(:any)/tarjetahabientes'] = "Novo_Reports/cardHolders";
 //settings
 $route['(:any)/configuracion'] = "Novo_Settings/options";
+$route['(:any)/empresa'] = "Novo_Settings/getEnterprise";
+$route['(:any)/obtener-posicion'] = "Novo_Settings/obtainNumPosition";
+$route['(:any)/Contact'] = "Novo_Settings/addContact";
+$route['(:any)/cambiar-email'] = "Novo_Settings/changeEmail";
+$route['(:any)/cambiar-telefonos'] = "Novo_Settings/changeTelephones";
 
 
 //old routes

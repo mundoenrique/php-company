@@ -210,6 +210,7 @@ if(!function_exists('languajeLoad')) {
 					'terms'	=> ['terms'],
 					'rates'	=> ['rates'],
 					'getEnterprises'	=> ['enterprise'],
+					'obtainNumPosition'	=>['settings'],
 					'getProducts'	=> ['products'],
 					'getProductDetail'	=> ['products'],
 					'getPendingBulk'	=> ['bulk'],
@@ -326,6 +327,15 @@ if(!function_exists('convertDate')) {
 	function convertDate($date) {
 		$date = explode('/', $date);
 		$date = $date[2].'-'.$date[1].'-'.$date[0];
+
+		return $date;
+	}
+}
+
+if(!function_exists('convertDateMDY')) {
+	function convertDateMDY($date) {
+		$date = explode('/', $date);
+		$date = $date[1].'/'.$date[0].'/'.$date[2];
 
 		return $date;
 	}

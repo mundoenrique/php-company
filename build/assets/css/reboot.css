@@ -74,9 +74,7 @@ body {
   font-size: var(--font-size-base);
   font-weight: var(--font-weight-base);
   line-height: var(--line-height-base);
-  color: var(--text-color);
   text-align: left; /* 3 */
-  background-color:var(--bg-color); /* 3 */
 }
 
 /**

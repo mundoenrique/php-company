@@ -140,19 +140,31 @@ class Verify_Access {
 					}
 					break;
 				case 'changePassword':
-					$auth = ($this->CI->session->flashdata('changePassword') != NULL);
+					$auth = ($this->CI->session->flashdata('changePassword') != NULL || ($this->CI->session->has_userdata('logged')));
 					break;
+					case 'changeEmail':
+						$auth = $this->CI->session->has_userdata('logged');
+						break;
+				case 'changeTelephones':
+					$auth = $this->CI->session->has_userdata('logged');
+				break;
+
+				case 'addContact':
+					$auth = $this->CI->session->has_userdata('logged');
+				break;
+
 				case 'rates':
 					$auth = ($this->CI->session->has_userdata('logged') && $countryUri === 've');
 					break;
 				case 'getEnterprises':
+				case 'getEnterprise':
+				case 'getUser':
+				case 'obtainNumPosition':
 				case 'getProducts':
 				case 'keepSession':
 				case 'options':
-					$auth = ($this->CI->session->has_userdata('logged'));
-					break;
 				case 'getProductDetail':
-					$auth = ($this->CI->session->has_userdata('enterpriseInf'));
+					$auth = ($this->CI->session->has_userdata('logged'));
 					break;
 				case 'getPendingBulk':
 				case 'loadBulk':
@@ -229,9 +241,13 @@ class Verify_Access {
 				case 'masterAccount':
 					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPCON'));
 					break;
+				case 'statusBulk':
+					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPLOT'));
+				break;
 				case 'cardHolders':
 					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBTHA'));
-					break;
+				break;
+
 			}
 		}
 

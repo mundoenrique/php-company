@@ -50,6 +50,7 @@ class Novo_Business_Model extends NOVO_Model {
 				$enterpriseArgs->sizePage = $sizePage;
 				$enterpriseList = $this->request_data->OrderEnterpriseList($enterpriseArgs, $filters, $dataRequest);
 				$this->response->data->list = $enterpriseList->list;
+				$this->response->data->listaa = $enterpriseList;
 				if(!$dataRequest) {
 					$access = [
 						'user_access',
@@ -179,6 +180,7 @@ class Novo_Business_Model extends NOVO_Model {
 			unset($dataRequest->select);
 		}
 
+
 		$this->className = "com.novo.objects.TOs.UsuarioTO";
 		$this->dataAccessLog->modulo = 'Negocios';
 		$this->dataAccessLog->function = 'Productos';
@@ -189,7 +191,7 @@ class Novo_Business_Model extends NOVO_Model {
 		$this->dataRequest->userName = $this->userName;
 		$this->dataRequest->idEmpresa = $dataRequest->idFiscal;
 
-		$response = $this->sendToService('getProducts');
+		$response = $this->sendToService('callWs_GetProducts');
 
 		switch($this->isResponseRc) {
 			case 0:
@@ -219,7 +221,7 @@ class Novo_Business_Model extends NOVO_Model {
 			$this->response->data->productList = [];
 		}
 
-		return $this->responseToTheView('getProducts');
+		return $this->responseToTheView('callWs_GetProducts');
 	}
 	/**
 	 * @info Método para obtener lista de productos para una empresa
