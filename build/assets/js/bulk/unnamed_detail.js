@@ -18,8 +18,8 @@ $(function () {
 		insertFormInput(true, form);
 		form.submit();
 		setTimeout(function () {
+			insertFormInput(false);
 			$('.cover-spin').hide();
 		}, lang.GEN_TIME_DOWNLOAD_FILE);
-		insertFormInput(false);
 	})
 });

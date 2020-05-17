@@ -5,7 +5,7 @@ $lang['GEN_ENTERPRISE_LIST'] = 'empresas';
 $lang['GEN-LOGO-HEADER'] = 'img-logo.svg';
 $lang['GEN-LOGO-BIG'] = 'img-banorte.png';
 $lang['GEN_ALTERNATIVE_TEXT'] = 'Banorte';
-$lang['GEN_FISCAL_REGISTRY'] = 'RFC.';
+$lang['GEN_FISCAL_REGISTRY'] = 'Identificador de empresa';
 //LOGIN IMAGE
 $lang['GEN_IMAGE_LOGIN'] = 'banorte-login.svg';
 //FOOTER

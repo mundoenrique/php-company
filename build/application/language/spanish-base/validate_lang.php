@@ -35,3 +35,4 @@ $lang['VALIDATE_TOTAL_CARDS'] = 'Indica una cantidad de tarjetas';
 $lang['VALIDATE_MAXIMUM'] = 'máximo';
 $lang['VALIDATE_STARTING_LINE'] = 'Solo se admiten letras y números';
 $lang['VALIDATE_BULK_NUMBER'] = 'Solo se admiten números';
+$lang['VALIDATE_DATE_DMY'] = 'Indica una fecha válida dd/mm/aaaa';

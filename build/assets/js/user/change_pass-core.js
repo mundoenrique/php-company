@@ -10,7 +10,7 @@ $(function() {
 
 	changePassBtn.on('click', function(e) {
 		e.preventDefault();
-		changeBtn = $(this);
+		var changeBtn = $(this);
 		form = $('#change-pass-form');
 		btnText = changeBtn.text().trim();
 		validateForms(form)
