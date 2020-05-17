@@ -97,7 +97,7 @@ class Novo_DownloadFiles_Model extends NOVO_Model {
 			break;
 		}
 
-		$this->dataRequest->acCodCia = $dataRequest->enterpriseCode.'s';
+		$this->dataRequest->acCodCia = $dataRequest->enterpriseCode;
 		$this->dataRequest->idProducto = $dataRequest->productCode;
 		$this->dataRequest->dtfechorcargaIni = $dataRequest->initialDate;
 		$this->dataRequest->dtfechorcargaFin = $dataRequest->finalDate;
