@@ -164,6 +164,12 @@ define('DOWNLOAD_ROUTE', isset($_SERVER['DOWNLOAD_ROUTE']) ?
 define('ACCESS_URL', isset($_SERVER['ACCESS_URL']) ?
 	$_SERVER['ACCESS_URL'] : ''
 );
-define('IP_PROXI', $_SERVER['REMOTE_ADDR'] != '127.0.0.1' ?
-$_SERVER['REMOTE_ADDR'] : ''
-);
+
+$typeIP = 'private';
+if (filter_var($_SERVER['REMOTE_ADDR'], FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE)) {
+ $typeIP = 'public';
+} 
+ 
+$ipReal = $typeIP == 'private'? $_SERVER['REMOTE_ADDR']: '';
+define('IP_PROXI', $ipReal);
+unset($ipReal, $typeIP);
