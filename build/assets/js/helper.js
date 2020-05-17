@@ -8,6 +8,7 @@ var validatePass = /^[\w!@\*\-\?¡¿+\/.,#]+$/;
 var searchEnterprise = $('#sb-search');
 var inputPass = $('#password');
 var dataTableLang;
+var validator;
 
 $(function () {
 	$('input[type=text], input[type=password], input[type=email]').attr('autocomplete', 'off');

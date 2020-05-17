@@ -96,7 +96,7 @@ $config = [
 		[
 			'field' => 'tlf1',
 			'label' => 'phone',
-			'rules' => 'trim'
+			'rules' => 'trim|required'
 		],
 		[
 			'field' => 'tlf2',
@@ -482,6 +482,28 @@ $config = [
 		[
 			'field' => 'issuanDate',
 			'label' => 'issuanDate',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+		]
+	],
+	'statusBulk' => [
+		[
+			'field' => 'enterpriseCode',
+			'label' => 'enterpriseCode',
+			'rules' => 'trim|regex_match[/^[a-z0-9]+$/i]|required'
+		],
+		[
+			'field' => 'productCode',
+			'label' => 'enterpriseCode',
+			'rules' => 'trim|regex_match[/^[a-z0-9]+$/i]|required'
+		],
+		[
+			'field' => 'initialDate',
+			'label' => 'initialDate',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+		],
+		[
+			'field' => 'finalDate',
+			'label' => 'finalDate',
 			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
 		]
 	],

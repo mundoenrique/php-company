@@ -123,7 +123,14 @@ class Novo_Reports extends NOVO_Controller {
 			"third_party/additional-methods",
 			"reports/closing_balance"
 		);
-		$this->responseAttr();
+		$this->request->select = TRUE;
+		$this->request->idFiscal = $this->session->enterpriseInf->idFiscal;
+		$this->load->model('Novo_Business_Model', 'getProducts');
+		$products = $this->getProducts->callWs_GetProducts_Business($this->request);
+		$this->render->selectProducts = $products->code === 0 ? lang('GEN_SELECT_PRODUCTS') : lang('RESP_TRY_AGAIN');
+		$this->responseAttr($products);
+		$this->render->products = $products->code !== 0 ? FALSE : $products->data;
+		$this->render->currentProd = $this->session->productInf->productPrefix;
 		$this->render->titlePage = lang('GEN_MENU_REP_CLOSING_BAKANCE');
 		$this->views = ['reports/'.$view];
 		$this->loadView($view);
@@ -260,6 +267,47 @@ class Novo_Reports extends NOVO_Controller {
 		);
 		$this->responseAttr();
 		$this->render->titlePage = lang('GEN_MENU_REP_MASTER_ACCOUNT');
+		$this->views = ['reports/'.$view];
+		$this->loadView($view);
+	}
+	/**
+	 * @info Método para accder al reporte de gastos por categoria
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date May 7th, 2020
+	 */
+	public function statusBulk()
+	{
+		log_message('INFO', 'Novo_Reports: statusBulk Method Initialized');
+
+		$view = 'statusBulk';
+		$statusBulkList = FALSE;
+		array_push(
+			$this->includeAssets->cssFiles,
+			"third_party/dataTables-1.10.20"
+		);
+		array_push(
+			$this->includeAssets->jsFiles,
+			"third_party/dataTables-1.10.20",
+			"third_party/jquery.validate",
+			"validate-core-forms",
+			"third_party/additional-methods",
+			"reports/status_bulk"
+		);
+
+		$this->request->select = TRUE;
+		$this->request->idFiscal = $this->session->enterpriseInf->idFiscal;
+		$this->load->model('Novo_Business_Model', 'getProducts');
+		$response = $this->getProducts->callWs_GetProducts_Business($this->request);
+		$this->render->selectProducts = $response->code === 0 ? lang('GEN_SELECT_PRODUCTS') : lang('RESP_TRY_AGAIN');
+		$this->render->productsSelect = $response->code !== 0 ? FALSE : $response->data;
+
+		if ($this->session->flashdata('download')) {
+			$response = $this->session->flashdata('download');
+		}
+
+		$this->responseAttr($response);
+		$this->render->currentProd = $this->session->productInf->productPrefix;
+		$this->render->titlePage = lang('GEN_MENU_REP_STATUS_BULK');
 		$this->views = ['reports/'.$view];
 		$this->loadView($view);
 	}

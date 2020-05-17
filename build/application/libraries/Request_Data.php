@@ -199,6 +199,14 @@ class Request_Data {
 		$responseList->list = $enterpriseArgs->lista;
 
 		if(!$dataRequest) {
+			$enterpriseSelect = new stdClass();
+			$enterpriseSelect->list = $responseList->list;
+
+			foreach($delete AS $pos) {
+				unset($enterpriseSelect->list[$pos]);
+			}
+
+			$this->CI->session->set_userdata('enterpriseSelect', $enterpriseSelect);
 			$responseList->filters = $filters;
 		}
 

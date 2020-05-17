@@ -24,7 +24,7 @@ header.main-head {
 /* Content */
 main.content {
 	min-height: calc(100vh - 3.75rem - 2.75rem - 45px);
-	background-color: var(--color-tertiary);
+	background-color: var(--color-eighth) !important;
 }
 
 /* Footer */
@@ -1279,7 +1279,7 @@ textarea.form-control {
 /* Backgrounds Colors
 ========================================================================== */
 
-.bg-primary   { background-color: var(--color-tertiary) !important }
+/* .bg-primary   { background-color: var(--color-eighth) !important } */
 .bg-secondary { background-color: var(--color-secondary) !important }
 .bg-tertiary  { background-color: var(--color-tertiary) !important }
 
@@ -1293,7 +1293,7 @@ textarea.form-control {
 .bg-warning { background-color: var(--warning) !important }
 .bg-danger  { background-color: var(--danger) !important }
 
-.bg-color  { background-color: var(--color-tertiary) !important }
+.bg-color  { background-color: var(--color-eighth) !important }
 .bg-will-processed { background-color: var(--will-processed) !important }
 .bg-will-not-processed { background-color: var(--will-not-processed) !important }
 .bg-not-processed { background-color: var(--not-processed) !important }
@@ -1302,11 +1302,7 @@ textarea.form-control {
 .bg-transparent { background-color: transparent !important }
 
 .bg-content {
-  background: linear-gradient(
-      rgba(246,243,241,.6),
-      rgba(246,243,241,.6)
-    ),
-    url("../../images/bnt/bg-content.svg");
+  background: url("../../images/bnt/bg-content.svg");
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -2647,14 +2643,14 @@ td > button > i:hover{
 }
 
 .dataTables_length > label{
-  background-color: var(--color-tertiary);
+  /* background-color: var(--color-tertiary); */
   color: var(--color-sixth);
   font-size: var(--h6);
   font-weight: var(--light-font-weight);
 }
 
 .dataTables_info {
-  background-color: var(--color-tertiary);
+  /* background-color: var(--color-tertiary); */
   color: var(--color-sixth) !important;
   font-size: var(--h6);
   font-weight: var(--light-font-weight);

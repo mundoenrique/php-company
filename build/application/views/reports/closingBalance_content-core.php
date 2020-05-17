@@ -26,21 +26,27 @@
 						<div class="row flex flex items-center justify-end col-sm-12">
 							<div class="form-group col-4 col-xl-3">
 								<label>Empresa</label>
-								<select class="select-box custom-select flex h6 w-100">
-									<option selected disabled>Seleccionar</option>
-									<option>Option 1</option>
-									<option>Option 2</option>
-									<option>Option 3</option>
+								<select id="enterprise-report" class="select-box custom-select mt-1 mb-4 h6 w-100">
+								<?php foreach($enterpriseList AS $enterprise) : ?>
+									<?php if($enterprise->acrif == $enterpriseData->idFiscal): ?>
+									<?php endif;?>
+									<option value="<?= $enterprise->accodcia; ?>" <?= $enterprise->acrif == $enterpriseData->idFiscal ? 'selected' : '' ?>>
+										<?= $enterprise->acnomcia; ?>
+									</option>
+									<?php endforeach; ?>
 								</select>
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-4 col-xl-3">
 								<label>Producto</label>
 								<select class="select-box custom-select flex h6 w-100">
-									<option selected disabled>Seleccionar</option>
-									<option>Option 1</option>
-									<option>Option 2</option>
-									<option>Option 3</option>
+								<option selected disabled><?= $selectProducts ?></option>
+									<?php if($products): ?>
+									<?php foreach($products AS $product): ?>
+									<option value="<?= $product['id']; ?>" <?= $product['id'] == $currentProd ? 'selected' : ''; ?>><?= $product['desc'] ?></option>
+									<?php endforeach; ?>
+									<?php endif; ?>
+								</select>
 								</select>
 								<div class="help-block"></div>
 							</div>

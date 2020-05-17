@@ -256,7 +256,7 @@ class Novo_Bulk extends NOVO_Controller {
 		}
 
 		$this->responseAttr($unnamedList);
-		$this->render->titlePage = 'Inventario de innominadas';
+		$this->render->titlePage = lang('GEN_MENU_UNNAMED_AFFIL');
 		$this->views = ['bulk/'.$view];
 		$this->loadView($view);
 	}
