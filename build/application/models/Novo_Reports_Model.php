@@ -613,4 +613,57 @@ class Novo_Reports_Model extends NOVO_Model {
 
 		return $this->response;
 	}
+	/**
+	 * @info Método para obtener la lista de reportes
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date March 02nd, 2020
+	 */
+	public function callWs_StatusBulk_Reports($dataRequest)
+	{
+		log_message('INFO', 'NOVO Reports Model: StatusBulk Method Initialized');
+
+		$this->className = 'com.novo.objects.TOs.EmpresaTO';
+
+		$this->dataAccessLog->modulo = 'Reportes';
+		$this->dataAccessLog->function = 'Estado de lote';
+		$this->dataAccessLog->operation = 'Obtener lista lotes por estado';
+
+		$this->dataRequest->idOperation = 'buscarEstatusLotes';
+		$this->dataRequest->acCodCia = $dataRequest->enterpriseCode;
+		$this->dataRequest->idProducto = $dataRequest->productCode;
+		$this->dataRequest->dtfechorcargaIni = $dataRequest->initialDate;
+		$this->dataRequest->dtfechorcargaFin = $dataRequest->finalDate;
+
+		$response = $this->sendToService('callWs_StatusBulk');
+		$statusBulkList = [];
+
+
+		switch($this->isResponseRc) {
+			case 0:
+				$this->response->code = 0;
+				foreach($response->lista AS $statusBulk) {
+					$record = new stdClass();
+					$record->bulkType = ucfirst(mb_strtolower($statusBulk->acnombre));
+					$record->bulkNumber = $statusBulk->acnumlote;
+					$record->bulkStatus = ucfirst(mb_strtolower($statusBulk->status));
+					$record->uploadDate = $statusBulk->dtfechorcarga;
+					$record->valueDate = $statusBulk->dtfechorvalor;
+					$record->records = $statusBulk->ncantregs;
+					$record->amount = $statusBulk->nmonto;
+
+					array_push(
+						$statusBulkList,
+						$record
+					);
+				}
+
+			break;
+			case -150:
+				$this->response->code = 0;
+			break;
+		}
+		$this->response->data = $statusBulkList;
+
+		return $this->responseToTheView('callWs_StatusBulk');
+	}
 }

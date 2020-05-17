@@ -51,7 +51,7 @@ class Novo_DownloadFiles_Model extends NOVO_Model {
 			]
 		];
 
-		$response = $this->sendToService('callWs_unnmamedDetail');
+		$response = $this->sendToService('callWs_UnnmamedDetail');
 
 		switch ($this->isResponseRc) {
 			case 0:
@@ -67,6 +67,53 @@ class Novo_DownloadFiles_Model extends NOVO_Model {
 				$this->responseFail_DownloadFiles($response);
 				$this->session->set_flashdata('download', $this->response);
 				redirect(base_url('detalle-innominadas'), 'location', 301);
+		}
+
+
+		return $this->responseToTheView('callWs_UnnmamedAffiliate');
+	}
+	/**
+	 * @info descarga archivos xls y PDF de reporte estado de lote
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date May 16th, 2020
+	 */
+	public function callWs_StatusBulkReport_DownloadFiles($dataRequest)
+	{
+		log_message('INFO', 'NOVO DownloadFiles Model: StatusBulkReport Method Initialized');
+
+		$this->className = 'com.novo.objects.MO.ListadoLotesMO';
+		$this->dataAccessLog->modulo = 'Reportes';
+		$this->dataAccessLog->function = 'Estado de Lote';
+		$this->dataAccessLog->operation = 'Descarga de archivos';
+
+		switch ($dataRequest->type) {
+			case lang('GEN_BTN_DOWN_XLS'):
+				$this->dataRequest->idOperation = 'generarArchivoXlsEstatusLotes';
+				$FileType = 'xls';
+			break;
+			case lang('GEN_BTN_DOWN_PDF'):
+				$this->dataRequest->idOperation = 'generarPdfEstatusLotes';
+				$FileType = 'pdf';
+			break;
+		}
+
+		$this->dataRequest->acCodCia = $dataRequest->enterpriseCode.'s';
+		$this->dataRequest->idProducto = $dataRequest->productCode;
+		$this->dataRequest->dtfechorcargaIni = $dataRequest->initialDate;
+		$this->dataRequest->dtfechorcargaFin = $dataRequest->finalDate;
+
+
+		$response = $this->sendToService('callWs_StatusBulkReport');
+
+		switch ($this->isResponseRc) {
+			case 0:
+				exportFile($response->archivo, $FileType, 'Estado_de_lote');
+				break;
+			default:
+				$dataRequest->code = 0;
+				$this->responseFail_DownloadFiles($dataRequest);
+				$this->session->set_flashdata('download', $this->response);
+				redirect(base_url(lang('GEN_LINK_REP_STATUS_BULK')), 'location', 301);
 		}
 
 

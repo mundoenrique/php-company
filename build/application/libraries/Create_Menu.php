@@ -177,8 +177,8 @@ class Create_Menu {
 				$subMenuLang->link = lang('GEN_LINK_REP_ISSUED_CARDS');
 				break;
 			case 'REPLOT':
-				$subMenuLang->text = lang('GEN_MENU_REP_STATUS_LOT');
-				$subMenuLang->link = lang('GEN_LINK_REP_STATUS_LOT');
+				$subMenuLang->text = lang('GEN_MENU_REP_STATUS_BULK');
+				$subMenuLang->link = lang('GEN_LINK_REP_STATUS_BULK');
 				break;
 			case 'REPCAT':
 				$subMenuLang->text = lang('GEN_MENU_REP_CATEGORY_EXPENSE');

@@ -130,9 +130,11 @@
 										<input type="hidden" name="bulkId" value="<?= $bulk->idBulk; ?>">
 										<input type="hidden" name="bulkfunction" value="Autorización de lotes">
 									</form>
+									<?php if($bulk->seeDetail): ?>
 									<button class="btn mx-1 px-0 big-modal" title="<?= lang('GEN_BTN_SEE') ?>" data-toggle="tooltip">
 										<i class="icon icon-find" aria-hidden="true"></i>
 									</button>
+									<?php endif; ?>
 									<?php if($this->verify_access->verifyAuthorization('TEBAUT', 'TEBELI')): ?>
 									<button class="btn mx-1 px-0" title="<?= lang('GEN_BTN_DELETE') ?>" data-toggle="tooltip">
 										<i class="icon icon-remove mr-1" aria-hidden="true"></i>
