@@ -3,7 +3,9 @@ $(document).ready(function() {
     //vars
     var options = document.querySelectorAll(".nav-item-config");
     var i;
-
+		$('#tlf1').attr('maxlength', 15);
+		$('#tlf2').attr('maxlength', 15);
+		$('#tlf3').attr('maxlength', 15);
     $('.slide-slow').click(function() {
         $(".section").slideToggle("slow");
         $(".help-block").text("");
@@ -116,8 +118,16 @@ $(function() {
 
     // Email Change End
 
-    // Telephones Change
-
+		// Telephones Change
+		$('#tlf1').keyup(function (){
+			this.value = (this.value + '').replace(/[^0-9]+$/g, '');
+		 });
+		 $('#tlf2').keyup(function (){
+			this.value = (this.value + '').replace(/[^0-9]+$/g, '');
+		 });
+		 $('#tlf3').keyup(function (){
+			this.value = (this.value + '').replace(/[^0-9]+$/g, '');
+		 });
     buttonTelephone.on('click', function(e) {
         e.preventDefault();
         changeBtn = $(this);
