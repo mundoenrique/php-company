@@ -217,7 +217,9 @@ function validateForms(form) {
 		var cardsMax = parseInt($(element).attr('max-cards'));
 		var cards = parseInt(value);
 
-		if (cardsMax > 0) {
+		valid = cards > 0;
+
+		if (cardsMax > 0 && valid) {
 			valid = cardsMax > cards
 		}
 
