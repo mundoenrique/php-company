@@ -396,6 +396,10 @@ textarea.form-control {
 
 /* Checkboxes and radios */
 
+label {
+	color: var(--color-primary);
+}
+
 .custom-control {
 	position: relative;
 	display: block;

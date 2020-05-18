@@ -421,6 +421,10 @@ textarea.form-control {
 
 /* Checkboxes and radios */
 
+label {
+	color: var(--color-sixth);
+}
+
 .custom-control {
 	position: relative;
 	display: block;
@@ -546,7 +550,7 @@ textarea.form-control {
   -moz-appearance: none;
   -ms-appearance: none;
   -o-appearance: none;
-  appearance: none;
+	appearance: none;
 }
 
 .custom-option-input:hover ~ .custom-option-label::before {
@@ -569,7 +573,7 @@ textarea.form-control {
 }
 
 .custom-option-input:disabled ~ .custom-option-label {
-	color: var(--color-eighth)
+	color: var(--color-sixth)
 }
 
 .custom-option-input:disabled ~ .custom-option-label::before {
