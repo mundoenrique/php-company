@@ -146,7 +146,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 				$this->session->set_flashdata('requestOrdersList', $dataRequest);
 				break;
 			case -5:
-				$this->response->title = 'Ordenes de servicio';
+				$this->response->title = 'Órdenes de servicio';
 				$this->response->msg = 'No fue posible obtener las ordenes de servicio';
 				$this->response->icon = lang('GEN_ICON_WARNING');
 				if($this->input->is_ajax_request()) {
@@ -156,7 +156,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 				}
 				break;
 			case -150:
-				$this->response->title = 'Ordenes de servicio';
+				$this->response->title = 'Órdenes de servicio';
 				$this->response->msg = novoLang(lang('RESP_SERVICE_ORDES'), $statusText);
 				$this->response->icon = lang('GEN_ICON_INFO');
 				if($this->input->is_ajax_request()) {
