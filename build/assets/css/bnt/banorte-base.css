@@ -2943,10 +2943,6 @@ table#resultsAccount thead th:nth-child(7){
 	box-shadow: none;
 }
 
-.widget .text{
-	text-align: center;
-}
-
 @media (max-width: 1200px) {
 	.widget.optional {
 		display: none;
