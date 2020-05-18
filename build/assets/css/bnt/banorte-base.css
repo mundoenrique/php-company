@@ -2131,7 +2131,7 @@ i[class*=" icon-"].novoglyphs {
   display: inline-flex;
   width: 1.5rem;
   height: 1.5rem;
-	color: var(--color-eighth);
+	color: var(--color-sixth);
   border: .2em solid currentColor;
   border-right-color: transparent;
   border-radius: 50%;
@@ -2867,7 +2867,7 @@ table.dataTable tbody td.no-select-checkbox:after {
 }
 
 table.dataTable tbody > tr.selected, table.dataTable tbody > tr > .selected {
-	background-color: var(--color-tertiary-second) !important;
+	background-color: var(--color-tertiary) !important;
 	color: var(--color-sixth);
 }
 
@@ -3024,16 +3024,18 @@ ul.steps li.step-item i {
 }
 
 .line {
-  box-shadow: 0 2px 2px 1px rgba(227,217,201,.5),
-	inset 0 -3px 3px 0 rgba(227,217,201,.5);
+	box-shadow: 0 2px 2px 1px rgba(78,64,68,.15),
+	inset 0 -3px 3px 0 rgba(78,64,68,.1);
 }
 
 .line-main-nav {
-  box-shadow: -1px 0 1px 0 rgba(227,217,201,.5),
-	inset 0 -3px 3px 0 rgba(227,217,201,.5);
+	box-shadow: -1px 0 2px 0 rgba(78,64,68,.35),
+	inset 0 -1px 1px 0 rgba(78,64,68,0.3);
 }
+
 .line-text {
-  box-shadow: 0 2px 0 0 rgba(227,217,201,.35), inset 0 -2px 1px -1px rgba(227,217,201,.3);
+	box-shadow: 0 1px 0 0 rgba(78,64,68,.15),
+	inset 0 -2px 1px -1px rgba(78,64,68,.1);
   padding-bottom: 4px;
 }
 
