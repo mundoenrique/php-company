@@ -2887,6 +2887,10 @@ table#resultsAccount thead th:nth-child(7){
 	width: 255px;
 }
 
+.widget .text{
+	text-align: center;
+}
+
 @media (max-width: 1200px) {
 	.widget.optional {
 		display: none;
