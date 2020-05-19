@@ -6,6 +6,7 @@ $(document).ready(function() {
 		$('#tlf1').attr('maxlength', 15);
 		$('#tlf2').attr('maxlength', 15);
 		$('#tlf3').attr('maxlength', 15);
+		$('#currentEmail').attr('maxlength', 40);
     $('.slide-slow').click(function() {
         $(".section").slideToggle("slow");
         $(".help-block").text("");

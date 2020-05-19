@@ -11,6 +11,7 @@ function validateForms(form) {
 	var emailValid = /^([a-zA-Z]+[0-9_.+-]*)+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 	var alphanumunder = /^([\w.\-+&ñÑ ]+)+$/i;
 	var alphanum = /^[a-z0-9]+$/i;
+	var alphanumspace = /^([A-Za-z0-9 _]*[A-Za-z0-9][A-Za-z0-9 _]*)$/;
 	var userPassword = validatePass;
 	var numeric = /^[0-9]+$/;
 	var alphabetical = /^[a-z]+$/i;
@@ -97,8 +98,8 @@ function validateForms(form) {
 			"inquiry-type": {requiredSelect: true},
 			"expired-date": {required: true, pattern: date.my},
 			"max-cards": {required: true, pattern: numeric, maxcards: true},
-			"starting-line1": {required: true, pattern: alphanum},
-			"starting-line2": {required: true, pattern: alphanum},
+			"starting-line1": {required: true, pattern: alphanumspace},
+			"starting-line2": {required: true, pattern: alphanumspace},
 			"bulk-number": {pattern: numeric},
 			"enterpriseName": {required: true},
 			"productName": {required: true},
