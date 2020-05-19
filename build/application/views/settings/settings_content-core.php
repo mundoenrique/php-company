@@ -227,7 +227,7 @@
 									<span  class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
 								</div>
 								</div>
-								<div id="completeForm" class="hide">
+							<div id="completeForm" class="hide">
 
 								<div class="row" id="blockEnterprice" >
 									<div class="form-group mb-3 col-6 col-lg-4 col-xl-4">
@@ -261,7 +261,7 @@
 									</div>
 								</div>
 
-
+								<?php if (lang('CONF_TEL_BOOL') ): ?>
 								<form id="formChangeTelephones">
 									<div class="row">
 									<div class="form-group mb-3 col-6 col-lg-4 col-xl-4" hidden>
@@ -293,6 +293,7 @@
 										</div>
 									</div>
 								</form>
+								<?php endif; ?>
 								</div>
 							</div>
 						</div>

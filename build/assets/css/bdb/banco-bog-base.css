@@ -396,6 +396,10 @@ textarea.form-control {
 
 /* Checkboxes and radios */
 
+label {
+	color: var(--color-primary);
+}
+
 .custom-control {
 	position: relative;
 	display: block;
@@ -2881,6 +2885,10 @@ table#resultsAccount thead th:nth-child(7){
 	box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
 	padding: 24px;
 	width: 255px;
+}
+
+.widget .text{
+	text-align: center;
 }
 
 @media (max-width: 1200px) {

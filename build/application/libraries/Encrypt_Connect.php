@@ -220,8 +220,8 @@ class Encrypt_Connect {
 						}
 						continue;
 					}
-			}
-				$wirteLog->$pos = $responseAttr;
+					$wirteLog->$pos = $responseAttr;
+				}
 			}
 
 			log_message('DEBUG', 'NOVO ['.$userName.'] COMPLETE RESPONSE '.$isBean.$model.': '.json_encode($wirteLog, JSON_UNESCAPED_UNICODE));

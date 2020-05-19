@@ -16,7 +16,7 @@
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-lg-auto">
-								<label for="id-company"><?= novoLang(lang('RECOVER_PASS_FISCAL_REGISTRY'), lang('GEN_FISCAL_REGISTRY')); ?></label>
+								<label for="id-company"><?= lang('GEN_FISCAL_REGISTRY'); ?></label>
 								<input id="id-company" name="id-company" class="form-control" type="text" maxlength="18"
 									placeholder="<?= lang('PLACE_HOLDER_FISCAL_REGISTER'); ?>">
 								<div class="help-block"></div>
