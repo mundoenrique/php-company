@@ -280,7 +280,7 @@ class Novo_User_Model extends NOVO_Model {
 				break;
 			case -150:
 				$this->response->code = 1;
-				$this->response->msg = novoLang(lang('RESP_FISCAL_REGISTRY_NO_FOUND'), lang('GEN_FISCAL_REGISTRY1'));
+				$this->response->msg = novoLang(lang('RESP_FISCAL_REGISTRY_NO_FOUND'), [lang('RESP_FISCAL_REGISTRY_OF'), lang('GEN_FISCAL_REGISTRY'), lang('RESP_FISCAL_REGISTRY_OF_ENTERPRISE')]);
 				break;
 			case -159:
 				$this->response->code = 1;

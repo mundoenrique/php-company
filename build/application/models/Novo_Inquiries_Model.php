@@ -280,6 +280,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 				$detailInfo['bulkStatus'] = $response->cestatus;
 				$detailInfo['bulkStatusText'] = ucfirst(mb_strtolower($response->status));
 				$detailInfo['bulkAmount'] = $response->montoNeto;
+				$detailInfo['bulkId'] = $response->acidlote;
 
 				switch($response->ctipolote) {
 					case '1':
@@ -302,7 +303,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 						}
 						break;
 					case '2':
-						$acceptAttr = ['idExtPer', 'monto', 'nroTarjeta'];
+						$acceptAttr = ['id_ext_per', 'monto', 'nro_cuenta'];
 
 						if(isset($response->registrosLoteRecarga) && count($response->registrosLoteRecarga) > 0) {
 							$bulkRecordsHeader = [lang('GEN_TABLE_DNI'), lang('GEN_TABLE_AMOUNT'), lang('GEN_TABLE_ACCOUNT_NUMBER')];
@@ -430,6 +431,11 @@ class Novo_Inquiries_Model extends NOVO_Model {
 							$record->cardnumber = maskString($value, 6, 4);
 						}
 						break;
+				case 'nro_cuenta':
+					if (in_array($pos, $acceptAttr)) {
+						$record->cardnumber = maskString($value, 6, 4);
+					}
+					break;
 					case 'status':
 						if (in_array($pos, $acceptAttr)) {
 							$status = [
@@ -482,12 +488,12 @@ class Novo_Inquiries_Model extends NOVO_Model {
 							$record->cardHoldId = $value;
 						}
 						break;
-						case 'monto':
-							if (in_array($pos, $acceptAttr)) {
-								$value = $value != '' ? $value : '- -';
-								$record->cardHoldAmount = $value;
-							}
-						break;
+					case 'monto':
+						if (in_array($pos, $acceptAttr)) {
+							$value = $value != '' ? $value : '- -';
+							$record->cardHoldAmount = $value;
+						}
+					break;
 					case 'nro_cuenta':
 						if (in_array($pos, $acceptAttr)) {
 							$record->cardHoldAccount = maskString($value, 6, 4);
