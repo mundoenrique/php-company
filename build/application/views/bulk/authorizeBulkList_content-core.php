@@ -149,7 +149,7 @@
 					<form id="auth-bulk-form" method="post">
 						<div class="flex row mt-3 mb-2 mx-2 justify-end">
 							<div class="col-4 col-lg-3 h6 regular form-group">
-								<?php if(verifyDisplay('body', $module,  lang('GEN_TAG_ORDER_TYPE'))): ?>
+							<?php if( lang('CONF_BULK_AUTHORIZE') == 'on'): ?>
 								<select id="type-order" name="type-order" class="select-box custom-select h6">
 									<option value="0"><?= lang('BULK_PROCESS_BY_BULK'); ?></option>
 									<option value="1" ><?= lang('BULK_PROCESS_TYPE_BULK') ?></option>
