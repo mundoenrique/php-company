@@ -703,6 +703,7 @@ $(function () {
 		var inputsConMontoValidos = $("input[class='monto']").filter(function() {
 			return this.value >= serv_var.maestroParam.montoMinTransDia;
 		});
+		
 
 		if (sum = sumaMontosTransferencia(inputsConMontoValidos)) {
 
