@@ -200,7 +200,7 @@ function validateForms(form) {
 	}
 
 	$.validator.methods.requiredTypeOrder = function(value, element, param) {
-		var eval1 = longPhrase.test($(element).find('option:selected').text().trim());
+		var eval1 = namesValid.test($(element).find('option:selected').text().trim());
 		var eval2 = alphanum.test($(element).find('option:selected').val().trim());
 		return eval1 && eval2;
 	}
