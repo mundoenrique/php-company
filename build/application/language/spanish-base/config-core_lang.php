@@ -23,7 +23,7 @@ $lang['CONF_UNNA_EXPIRED_DATE'] = TRUE;
 $lang['CONF_FOOTER_NETWORKS'] = TRUE;
 $lang['CONF_FOOTER_LOGO'] = FALSE;
 //AUTHORIZE BULK LIST
-$lang['CONF_BULK_AUTHORIZE'] = 'on';
+$lang['CONF_BULK_AUTHORIZE'] = 'ON';
 //SUGGESTION
 $lang['CONF_SUGGESTION_IE'] = TRUE;
 //CONFIG OPTIONS FLAGS
@@ -52,4 +52,3 @@ $lang['CONF_APPLICATIONS'] = 'Aplicaciones';
 $lang['CONF_FILE'] = 'Archivos de gestión Conexión Empresas Online';
 $lang['CONF_CEO_USER_MANUAL'] = 'Manual de Usuario Conexión Empresas Online';
 $lang['CONF_GL_USER_MANUAL'] = 'Manual de Usuario Gestor de Lotes';
-
