@@ -2,13 +2,18 @@
 $(function () {
 	$('#startingLine1').attr('maxlength', 25);
 	$('#startingLine2').attr('maxlength', 25);
+	$('#startingLine2').attr('value', );
 	var unnamedReqBtn = $('#unnamed-request-btn');
 	var maxCards = $('#maxCards');
 	$('#pre-loader').remove();
 	$('.hide-out').removeClass('hide');
 	$('#maxCards').keyup(function (){
-		this.value = (this.value + '').replace(/[^1-9]/g, '');
+		if(this.value == 0){
+			this.value = (this.value + '').replace(0, '');
+		}
+		this.value = (this.value + '').replace(/[^0-9]]/g, '');
 	 });
+
 	 $('#startingLine1').keyup(function (){
 		this.value = (this.value + '').replace(/[^A-Za-z0-9\s]+$/g, '');
 	 });
