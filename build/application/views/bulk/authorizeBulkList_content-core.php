@@ -152,7 +152,7 @@
 							<?php if( lang('CONF_BULK_AUTHORIZE') == 'on'): ?>
 								<select id="type-order" name="type-order" class="select-box custom-select h6">
 									<option value="0"><?= lang('BULK_PROCESS_BY_BULK'); ?></option>
-									<option value="1" ><?= lang('BULK_PROCESS_TYPE_BULK') ?></option>
+									<option value="1" selected><?= lang('BULK_PROCESS_TYPE_BULK') ?></option>
 								</select>
 								<?php else: ?>
 								<input type="hidden" id="type-order" name="type-order" value="0">
