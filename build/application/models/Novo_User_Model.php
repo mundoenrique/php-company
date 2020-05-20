@@ -346,7 +346,9 @@ class Novo_User_Model extends NOVO_Model {
 
 		switch($this->isResponseRc) {
 			case 0:
-				$this->callWs_FinishSession_User();
+				if(!$this->session->has_userdata('logged')) {
+					$this->callWs_FinishSession_User();
+				}
 				$this->response->code = 4;
 				$goLogin = $this->session->has_userdata('logged') ? '' : lang('RESP_PASSWORD_LOGIN');
 				$this->response->msg = novoLang(lang('RESP_PASSWORD_CHANGED'), $goLogin);

@@ -8,7 +8,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Asset {
 	private $cssFiles;
 	private $jsFiles;
-	private $section;
 
 	public function __construct()
 	{
@@ -16,8 +15,6 @@ class Asset {
 
 		$this->cssFiles = [];
 		$this->jsFiles = [];
-		$this->section = [];
-		$this->CI = [];
 
 		$CI =& get_instance();
 		$_SERVER['REMOTE_ADDR'] = $CI->input->ip_address();
