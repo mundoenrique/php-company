@@ -2829,6 +2829,13 @@ table.dataTable thead th.select-checkbox:before {
   border-radius: 3px;
 }
 
+.inquiry{
+	padding: 0 !important;
+	border-bottom: 1px solid transparent;
+	padding-right: 0px !important;
+	padding-left: 0px !important;
+}
+
 @supports (-ms-ime-align:auto) {
 	table.dataTable thead th.select-checkbox:before {
 		margin-top: 2px;
@@ -2898,8 +2905,8 @@ table.dataTable.display tbody tr.odd.no-select-checkbox {
 }
 
 table.dataTable tbody tr td {
-	padding-right:  4px !important;
-	padding-left:  4px !important;
+	padding-right:  4px;
+	padding-left:  4px;
 }
 
 table.dataTable, table.dataTable th, table.dataTable td {
