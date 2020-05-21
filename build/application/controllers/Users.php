@@ -196,7 +196,7 @@ class Users extends CI_Controller {
 						'lastSession'=> $datos['lastSession'],
 						'token' => $datos['token'],
 						'sessionId' => $datos['sessionId'],
-						'cl_addr' => np_Hoplite_Encryption($_SERVER['REMOTE_ADDR']),
+						'cl_addr' => np_Hoplite_Encryption($this->input->ip_address()),
 						'pais' => $pais
 					);
 
