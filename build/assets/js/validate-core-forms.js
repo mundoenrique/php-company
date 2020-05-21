@@ -7,7 +7,7 @@ function validateForms(form) {
 	var regNumberValid = /^['a-z0-9']{6,45}$/i;
 	var shortPhrase = /^['a-z0-9ñáéíóú ().']{4,25}$/i;
 	var middlePhrase = /^['a-z0-9ñáéíóú ().']{5,45}$/i;
-	var longPhrase = /^[a-z0-9ñáéíóú ().-]{8,70}$/i;
+	var longPhrase = /^[a-z0-9ñáéíóú ().-]{6,70}$/i;
 	var emailValid = /^([a-zA-Z]+[0-9_.+-]*)+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 	var alphanumunder = /^([\w.\-+&ñÑ ]+)+$/i;
 	var alphanum = /^[a-z0-9]+$/i;
@@ -200,7 +200,7 @@ function validateForms(form) {
 	}
 
 	$.validator.methods.requiredTypeOrder = function(value, element, param) {
-		var eval1 = namesValid.test($(element).find('option:selected').text().trim());
+		var eval1 = alphanumunder.test($(element).find('option:selected').text().trim());
 		var eval2 = alphanum.test($(element).find('option:selected').val().trim());
 		return eval1 && eval2;
 	}

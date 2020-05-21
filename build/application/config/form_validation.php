@@ -402,12 +402,12 @@ $config = [
 		[
 			'field' => 'status',
 			'label' => 'status',
-			'rules' => 'trim|regex_match[/^[a-z0-9]+$/i]'
+			'rules' => 'trim|regex_match[/^[[\wñáéíóú ]*)+$/i]'
 		],
 		[
 			'field' => 'statusText',
 			'label' => 'statusText',
-			'rules' => 'trim|regex_match[/^[\w -]+$/i]'
+			'rules' => 'trim|regex_match[/^([\wñáéíóú ]*)+$/i]'
 		]
 	],
 	'getReport' => [
