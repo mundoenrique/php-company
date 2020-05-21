@@ -26,23 +26,17 @@ $lang['CONF_ADD_BRANCH_BOOL'] = FALSE;
 //DOWNLOADS OPTIONS FLAGS
 $lang['CONF_MANUAL_BOOL'] = TRUE;
 $lang['CONF_VIDEO_BOOL'] = FALSE;
-$lang['CONF_APPS_BOOL'] = TRUE;
+$lang['CONF_APPS_BOOL'] = FALSE;
 $lang['CONF_FILES_BOOL'] = TRUE;
 //FILES CONF
 $lang['CONF_PDF_FILE'] = [
-  ['entropia.pdf', 'Entropía: Revisión de concepto'],
-  ['losinfinitos.pdf', 'Los Inifinitos de George Cantor']
+  ['entropia.pdf', 'Entropía: Revisión de concepto']
 ];
-$lang['CONF_ZIP_FILE'] = [
-  ['euler.zip', 'Ecuación de Euler'],
-  ['bayes.zip', 'Teorema de Bayes']
-];
+$lang['CONF_ZIP_FILE'] = [];
 $lang['CONF_RAR_FILE'] = [
-  ['proporcion-aurea.rar', 'Proporción aurea']
-
+  ['lotes.rar', 'Gestión de Lotes']
 ];
 $lang['CONF_MP4_VIDEO'] = [''];
-
 //DOWNLOAD ICONS
 $lang['CONF_PDF_ICON'] = 'icon-pdf.svg';
 $lang['CONF_RAR_ICON'] = 'icon-rar.svg';
