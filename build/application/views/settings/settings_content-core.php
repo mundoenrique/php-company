@@ -10,10 +10,10 @@
 
 						<li id="user" class="nav-item-config">
 							<a href="javascript:">
-								<img class="icon-config" src="<?= $this->asset->insertFile($countryUri.'/icon-user.svg');?>">
+								<img class="icon-config" src="<?= $this->asset->insertFile('icon-user.svg', 'images/icons');?>">
 								<h5><?= lang('GEN_BTN_USER') ?></h5>
 								<div class="box up left">
-									<img src="<?= $this->asset->insertFile($countryUri.'/icon-user.svg');?>" class="bg">
+									<img src="<?= $this->asset->insertFile('icon-user.svg', 'images/icons');?>" class="bg">
 									<h4><?= lang('GEN_BTN_USER') ?></h4>
 								</div>
 							</a>
@@ -25,10 +25,10 @@
 
 						<li id="enterprise" class="nav-item-config">
 							<a href="javascript:">
-								<img class="icon-config" src="<?= $this->asset->insertFile($countryUri.'/icon-briefcase.svg');?>">
+								<img class="icon-config" src="<?= $this->asset->insertFile('icon-briefcase.svg', 'images/icons');?>">
 								<h5><?= lang('GEN_BTN_ENTERPRISE') ?></h5>
 								<div class="box up left">
-									<img src="<?= $this->asset->insertFile($countryUri.'/icon-briefcase.svg');?>" class="bg">
+									<img src="<?= $this->asset->insertFile('icon-briefcase.svg', 'images/icons');?>" class="bg">
 									<h4><?= lang('GEN_BTN_ENTERPRISE') ?></h4>
 								</div>
 							</a>
@@ -38,10 +38,10 @@
 							<?php if (lang('CONF_BRANCHES_BOOL') ): ?>
 						<li id="branch" class="nav-item-config">
 							<a href="javascript:">
-								<img class="icon-config" src="<?= $this->asset->insertFile($countryUri.'/icon-building.svg');?>">
+								<img class="icon-config" src="<?= $this->asset->insertFile('icon-building.svg', 'images/icons');?>">
 								<h5><?= lang('GEN_BTN_BRANCH') ?></h5>
 								<div class="box up left">
-									<img src="<?= $this->asset->insertFile($countryUri.'/icon-building.svg');?>" class="bg">
+									<img src="<?= $this->asset->insertFile('/icon-building.svg', 'images/icons');?>" class="bg">
 									<h4><?= lang('GEN_BTN_BRANCH') ?></h4>
 								</div>
 							</a>
@@ -51,10 +51,10 @@
 							<?php if (lang('CONF_DOWNLOADS_BOOL') ): ?>
 						<li id="downloads" class="nav-item-config">
 							<a href="javascript:">
-								<img class="icon-config" src="<?= $this->asset->insertFile($countryUri.'/icon-download.svg');?>">
+								<img class="icon-config" src="<?= $this->asset->insertFile('/icon-download.svg', 'images/icons');?>">
 								<h5><?= lang('GEN_BTN_DOWNLOADS') ?></h5>
 								<div class="box up left">
-									<img src="<?= $this->asset->insertFile($countryUri.'/icon-download.svg');?>" class="bg ">
+									<img src="<?= $this->asset->insertFile('/icon-download.svg', 'images/icons');?>" class="bg ">
 									<h4><?= lang('GEN_BTN_DOWNLOADS') ?></h4>
 								</div>
 							</a>
@@ -545,10 +545,10 @@
 								<?php if (lang('CONF_PDF_FILE') != ''): ?>
 									<?php foreach(lang('CONF_PDF_FILE') as $value): ?>
 									<div class="mb-3 col-auto col-lg-6 col-xl-5">
-										<a href="<?= $this->asset->insertFile($countryUri.'/'.$value[0],'statics'); ?>" download>
+										<a href="<?= $this->asset->insertFile($value[0], 'statics', $countryUri); ?>" download>
 											<div class="files btn-link flex items-center">
 												<div class="file">
-													<img src="<?= $this->asset->insertFile($countryUri.'/'.lang('CONF_PDF_ICON'));?>" />
+													<img src="<?= $this->asset->insertFile(lang('CONF_PDF_ICON'), 'images/icons');?>" />
 												</div>
 												<span class="ml-2 flex justify-center"><?= $value[1]?></span>
 											</div>
@@ -568,7 +568,7 @@
 										<div class="col-sm-12 col-lg-11 col-xl-12 py-2">
 											<div class="manual-video">
 												<video controls preload>
-													<source src="<?= $this->asset->insertFile($countryUri.'/'.$value,'statics');?>" type="video/mp4">
+													<source src="<?= $this->asset->insertFile($value, 'statics', $countryUri);?>" type="video/mp4">
 												</video>
 											</div>
 										</div>
@@ -585,10 +585,10 @@
 								<div class="row">
 								<?php foreach(lang('CONF_ZIP_FILE') as $value): ?>
 									<div class="mb-3 col-auto col-lg-6 col-xl-5">
-									<a href="<?= $this->asset->insertFile($countryUri.'/'.$value[0],'statics'); ?>" download>
+									<a href="<?= $this->asset->insertFile($value[0], 'statics', $countryUri); ?>" download>
 											<div class="files btn-link flex items-center">
 												<div class="file">
-													<img src="<?= $this->asset->insertFile($countryUri.'/'.lang('CONF_ZIP_ICON'));?>" />
+													<img src="<?= $this->asset->insertFile(lang('CONF_ZIP_ICON'), 'images/icons');?>" />
 												</div>
 												<span class="ml-2 flex justify-center"><?= $value[1] ?></span>
 											</div>
@@ -606,10 +606,10 @@
 								<div class="row">
 								<?php foreach(lang('CONF_RAR_FILE') as $value): ?>
 									<div class="form-group col-auto mb-3 col-xl-5">
-									<a href="<?= $this->asset->insertFile($countryUri.'/'.$value[0],'statics'); ?>" download>
+									<a href="<?= $this->asset->insertFile($value[0], 'statics', $countryUri); ?>" download>
 											<div class="files btn-link flex items-center">
 												<div class="file">
-													<img src=<?= $this->asset->insertFile($countryUri.'/'.lang('CONF_RAR_ICON'));?> />
+													<img src=<?= $this->asset->insertFile(lang('CONF_RAR_ICON'), 'images/icons');?> />
 												</div>
 												<span class="ml-2 flex justify-center"><?= $value[1]  ?></span>
 											</div>
@@ -627,5 +627,3 @@
 		</div>
 	</div>
 </div>
-
-
