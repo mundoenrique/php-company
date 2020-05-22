@@ -5,9 +5,13 @@ $lang['GEN_ENTERPRISE_LIST'] = 'empresas';
 $lang['GEN-LOGO-HEADER'] = 'img-logo.svg';
 $lang['GEN-LOGO-BIG'] = 'img-banorte.png';
 $lang['GEN_ALTERNATIVE_TEXT'] = 'Banorte';
-$lang['GEN_FISCAL_REGISTRY'] = 'Nro. Identificador';
+$lang['GEN_FISCAL_REGISTRY'] = 'Identificador de la empresa';
+$lang['RESP_FISCAL_REGISTRY_OF'] = '';
+$lang['RESP_FISCAL_REGISTRY_OF_ENTERPRISE'] = '';
 //LOGIN IMAGE
 $lang['GEN_IMAGE_LOGIN'] = 'banorte-login.svg';
+//BULK
+$lang['GEN_TABLE_DNI'] = 'CURP';
 //FOOTER
 $lang['GEN_FOTTER_RIGHTS'] = '© Todos los derechos reservados. Grupo Financiero Banorte - ';
 $lang['GEN_FOTTER_IMAGE_L'] = 'img-banorte_white.svg';
