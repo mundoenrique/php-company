@@ -25,9 +25,9 @@
 					<form method="post" class="w-100">
 						<div class="row flex flex items-center justify-end col-sm-12">
 							<div class="form-group col-4 col-xl-3">
-								<label>Empresa</label>
-								<select id="enterprise-report" class="select-box custom-select mt-1 mb-4 h6 w-100">
-								<?php foreach($enterpriseList AS $enterprise) : ?>
+								<label><?= lang('GEN_ENTERPRISE'); ?></label>
+								<select id="enterpriseCode" name="enterpriseCode" class="select-box custom-select flex h6 w-100">
+									<?php foreach($enterpriseList AS $enterprise) : ?>
 									<?php if($enterprise->acrif == $enterpriseData->idFiscal): ?>
 									<?php endif;?>
 									<option value="<?= $enterprise->accodcia; ?>" <?= $enterprise->acrif == $enterpriseData->idFiscal ? 'selected' : '' ?>>
