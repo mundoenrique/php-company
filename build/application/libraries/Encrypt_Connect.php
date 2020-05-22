@@ -206,20 +206,22 @@ class Encrypt_Connect {
 			$wirteLog = new stdClass();
 			$isBean = '';
 
-			if (isset($response->bean)) {
+			if (isset($response->bean) && is_object($response->bean)) {
 				$isBean = 'IN BEAN ';
 				$response = json_decode($response->bean);
 			}
 
-			foreach ($response AS $pos => $responseAttr) {
-				if($pos == 'archivo') {
-					$wirteLog->archivo = 'OK';
-					if(!is_array($responseAttr)) {
-						$wirteLog->archivo = 'Sin arreglo binario';
+			if(is_object($response)) {
+				foreach ($response AS $pos => $responseAttr) {
+					if($pos == 'archivo') {
+						$wirteLog->archivo = 'OK';
+						if(!is_array($responseAttr)) {
+							$wirteLog->archivo = 'Sin arreglo binario';
+						}
+						continue;
 					}
-					continue;
+					$wirteLog->$pos = $responseAttr;
 				}
-				$wirteLog->$pos = $responseAttr;
 			}
 
 			log_message('DEBUG', 'NOVO ['.$userName.'] COMPLETE RESPONSE '.$isBean.$model.': '.json_encode($wirteLog, JSON_UNESCAPED_UNICODE));
