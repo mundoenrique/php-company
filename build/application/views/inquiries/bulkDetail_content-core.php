@@ -71,14 +71,18 @@
 				<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
 			</div>
 			<div class="center mx-1 hide-out hide">
-				<div class="flex justify-end items-center">
+				<div class="flex justify-end items-center download">
 					<div class="mr-3 py-1">
-						<button class="btn px-1" title="Exportar a EXCEL" data-toggle="tooltip">
+						<button class="btn px-1 big-modal" title="<?= lang('GEN_BTN_DOWN_XLS'); ?>" data-toggle="tooltip">
 							<i class="icon icon-file-excel" aria-hidden="true"></i>
 						</button>
-						<button class="btn px-1" title="Exportar a PDF" data-toggle="tooltip">
+						<button class="btn px-1 big-modal" title="<?= lang('GEN_BTN_DOWN_PDF'); ?>" data-toggle="tooltip">
 							<i class="icon icon-file-pdf" aria-hidden="true"></i>
 						</button>
+						<form id="download-detail-bulk" action="<?= base_url('descargar-archivo'); ?>" method="post">
+							<input type="hidden" name="bulkId" value="<?= $bulkId; ?>">
+							<input type="hidden" name="bulkfunction" value="<?= $function; ?>">
+						</form>
 					</div>
 				</div>
 				<table id="auth-bulk-detail" class="cell-border h6 display responsive w-100">
