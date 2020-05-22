@@ -52,4 +52,4 @@
 		</div>
 	</div>
 </div>
-<div class="cover-spin" id=""></div>
+<div class="cover-spin"></div>

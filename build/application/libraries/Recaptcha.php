@@ -51,7 +51,7 @@ class Recaptcha {
 	 */
 	public function verifyResponse($captcha)
 	{
-		$ip = $_SERVER['REMOTE_ADDR'];
+		$ip = $this->_ci->input->ip_address();
 
 		// post request to server
 		$data = array('secret' => $this->_secretKey, 'response' => $captcha);
