@@ -402,7 +402,7 @@ $config = [
 		[
 			'field' => 'status',
 			'label' => 'status',
-			'rules' => 'trim|regex_match[/^[[\wñáéíóú ]*)+$/i]'
+			'rules' => 'trim|regex_match[/^([\wñáéíóú ]*)+$/i]'
 		],
 		[
 			'field' => 'statusText',

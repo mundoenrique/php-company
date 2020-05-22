@@ -377,7 +377,7 @@ textarea.form-control {
 .custom-select {
 	display: inline-block;
 	padding-right: 1.75rem;
-	background: rgba(255,255,255,1) url("../../images/bnt/icon-chevron_down_gray.svg") right .75rem center / 14px 14px no-repeat;
+	background: rgba(255,255,255,1) url("../../images/icons/icon-chevron_down_gray.svg") right .75rem center / 14px 14px no-repeat;
   -webkit-appearance: none;
   -moz-appearance: none;
 	appearance: none;
@@ -387,7 +387,7 @@ textarea.form-control {
 .custom-select:hover:not(:disabled) {
 	display: inline-block;
 	padding-right: 1.75rem;
-	background: rgba(255,255,255,1) url("../../images/bnt/icon-chevron_down_black.svg") right .75rem center / 14px 14px no-repeat;
+	background: rgba(255,255,255,1) url("../../images/icons/icon-chevron_down_black.svg") right .75rem center / 14px 14px no-repeat;
   -webkit-appearance: none;
   -moz-appearance: none;
 	appearance: none;
@@ -1246,7 +1246,7 @@ label {
 /* Btn Search */
 
 .btn-search {
-  background-image: url("../../images/bnt/icon-searcher_gray.svg");
+  background-image: url("../../images/icons/icon-searcher_gray.svg");
   background-position: center;
   background-repeat: no-repeat;
   border-radius: 0 20px 20px 0;
@@ -1260,7 +1260,7 @@ label {
 
 .btn-search:hover {
   background-color: var(--color-primary) !important;
-  background-image: url("../../images/bnt/icon-searcher_white.svg");
+  background-image: url("../../images/icons/icon-searcher_white.svg");
   background-position: center;
   background-repeat: no-repeat;
   border-radius: 0 20px 20px 0;
@@ -2682,7 +2682,7 @@ td > button > i:hover{
 .dataTables_length select {
 	display: inline-block;
 	padding-right: 1.75rem;
-	background: rgba(255,255,255,1) url("../../images/bnt/icon-chevron_down_gray.svg") right .75rem center / 14px 14px no-repeat;
+	background: rgba(255,255,255,1) url("../../images/icons/icon-chevron_down_gray.svg") right .75rem center / 14px 14px no-repeat;
   -webkit-appearance: none;
   -moz-appearance: none;
 	appearance: none;
@@ -2690,7 +2690,7 @@ td > button > i:hover{
 }
 
 .dataTables_length select:hover {
-	background: rgba(255,255,255,1) url("../../images/bnt/icon-chevron_down_gray.svg") right .75rem center / 14px 14px no-repeat;
+	background: rgba(255,255,255,1) url("../../images/icons/icon-chevron_down_gray.svg") right .75rem center / 14px 14px no-repeat;
 }
 
 .dataTables_length select:disabled {
@@ -2698,7 +2698,7 @@ td > button > i:hover{
 }
 
 .dataTables_length select:disabled:hover {
-	background: var(--color-tertiary) url("../../images/bnt/icon-chevron_down_gray.svg") right .75rem center / 14px 14px no-repeat;
+	background: var(--color-tertiary) url("../../images/icons/icon-chevron_down_gray.svg") right .75rem center / 14px 14px no-repeat;
 }
 
 .dataTables_length select option {
@@ -3384,7 +3384,7 @@ a.ui-button:active,
   text-align: center;
 	color: var(--color-secondary);
 	border: 0;
-  background: transparent url("../../images/bnt/icon-white-triangle-2-n-s.svg") no-repeat right .25rem center / 8px 10px;
+  background: transparent url("../../images/icons/icon-white-triangle-2-n-s.svg") no-repeat right .25rem center / 8px 10px;
   -webkit-appearance: none;
   -moz-appearance: none;
 	appearance: none;
