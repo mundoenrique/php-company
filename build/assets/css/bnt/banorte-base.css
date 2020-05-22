@@ -3014,7 +3014,8 @@ ul.steps li.step-item i {
 .separador-one {
 	height: 1px;
 	border: none;
-	background:var(--color-eighth);
+	box-shadow: 0 1px 1px 1px rgba(78,64,68,.15),
+	inset 0 -3px 3px 0 rgba(78,64,68,.1);
 }
 
 .separador-two {
