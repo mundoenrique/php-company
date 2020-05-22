@@ -73,12 +73,24 @@ class Novo_CallModels extends Novo_Controller {
 
 		$ext =  explode('.', $_FILES['file']['name']);
 		$ext = end($ext);
-		$pattern = [];
-		$replace = [];
-		$pattern[0] = '/\s/';
-		$pattern[1] = '/\(/';
-		$replace[0] = '';
-		$replace[1] = '_';
+		$pattern = [
+			'/\s/', '/\(/',
+			'/á/', '/à/', '/ä/', '/â/', '/ª/', '/Á/', '/À/', '/Â/', '/Ä/',
+			'/é/', '/è/', '/ë/', '/ê/', '/É/', '/È/', '/Ê/', '/Ë/',
+			'/í/', '/ì/', '/ï/', '/î/', '/Í/', '/Ì/', '/Ï/', '/Î/',
+			'/ó/', '/ò/', '/ö/', '/ô/', '/Ó/', '/Ò/', '/Ö/', '/Ô/',
+			'/ú/', '/ù/', '/ü/', '/û/', '/Ú/', '/Ù/', '/Û/', '/Ü/',
+			'/ñ/', '/Ñ/', '/ç/', '/Ç/'
+		];
+		$replace = [
+			'', '_',
+			'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a',
+			'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e',
+			'i', 'i', 'i', 'i', 'i', 'i', 'i', 'i',
+			'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o',
+			'u', 'u', 'u', 'u', 'u', 'u', 'u', 'u',
+			'n', 'N', 'c', 'C'
+		];
 		$filename = '_'.substr(preg_replace($pattern, $replace, $_POST['typeBulkText']), 0, 17);
 		$filenameT = time().'_'.date('s').$this->countryUri.$filename;
 		$filenameT = mb_strtolower($filenameT.'.'.$ext);
@@ -97,7 +109,7 @@ class Novo_CallModels extends Novo_Controller {
 			$uploadData = (object) $this->upload->data();
 			$_POST['fileName'] = $uploadData->file_name;
 			$_POST['filePath'] = $uploadData->file_path;
-			$_POST['rawName'] = $this->countryUri.$filename;
+			$_POST['rawName'] = mb_strtolower($this->countryUri.$filename);
 			$_POST['fileExt'] = substr($uploadData->file_ext, 1);
 			unset($_POST['typeBulkText'], $_POST['file']);
 
