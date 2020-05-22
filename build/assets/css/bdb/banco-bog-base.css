@@ -347,7 +347,7 @@ textarea.form-control {
 .custom-select {
 	display: inline-block;
 	padding-right: 1.75rem;
-	background: rgba(255,255,255,1) url("../../images/bdb/icon-chevron_down_gray.svg") right .75rem center / 14px 14px no-repeat;
+	background: rgba(255,255,255,1) url("../../images/icons/icon-chevron_down_gray.svg") right .75rem center / 14px 14px no-repeat;
   -webkit-appearance: none;
   -moz-appearance: none;
 	appearance: none;
@@ -357,7 +357,7 @@ textarea.form-control {
 .custom-select:hover:not(:disabled) {
 	display: inline-block;
 	padding-right: 1.75rem;
-	background: rgba(255,255,255,1) url("../../images/bdb/icon-chevron_down_blue.svg") right .75rem center / 14px 14px no-repeat;
+	background: rgba(255,255,255,1) url("../../images/icons/icon-chevron_down_blue.svg") right .75rem center / 14px 14px no-repeat;
   -webkit-appearance: none;
   -moz-appearance: none;
 	appearance: none;
@@ -395,6 +395,10 @@ textarea.form-control {
 }
 
 /* Checkboxes and radios */
+
+label {
+	color: var(--color-primary);
+}
 
 .custom-control {
 	position: relative;
@@ -1199,7 +1203,7 @@ textarea.form-control {
 /* Btn Search */
 
 .btn-search {
-  background-image: url("../../images/bdb/icon-searcher_gray.svg");
+  background-image: url("../../images/icons/icon-searcher_gray.svg");
   background-position: center;
   background-repeat: no-repeat;
   border-radius: 0 20px 20px 0;
@@ -1213,7 +1217,7 @@ textarea.form-control {
 
 .btn-search:hover {
   background-color: var(--color-primary) !important;
-  background-image: url("../../images/bdb/icon-searcher_white.svg");
+  background-image: url("../../images/icons/icon-searcher_white.svg");
   background-position: center;
   background-repeat: no-repeat;
   border-radius: 0 20px 20px 0;
@@ -2653,7 +2657,7 @@ td > button > i:hover{
 .dataTables_length select {
 	display: inline-block;
 	padding-right: 1.75rem;
-	background: rgba(255,255,255,1) url("../../images/bdb/icon-chevron_down_gray.svg") right .75rem center / 14px 14px no-repeat;
+	background: rgba(255,255,255,1) url("../../images/icons/icon-chevron_down_gray.svg") right .75rem center / 14px 14px no-repeat;
   -webkit-appearance: none;
   -moz-appearance: none;
 	appearance: none;
@@ -2661,7 +2665,7 @@ td > button > i:hover{
 }
 
 .dataTables_length select:hover {
-	background: rgba(255,255,255,1) url("../../images/bdb/icon-chevron_down_blue.svg") right .75rem center / 14px 14px no-repeat;
+	background: rgba(255,255,255,1) url("../../images/icons/icon-chevron_down_blue.svg") right .75rem center / 14px 14px no-repeat;
 }
 
 .dataTables_length select:disabled {
@@ -2669,7 +2673,7 @@ td > button > i:hover{
 }
 
 .dataTables_length select:disabled:hover {
-	background: var(--color-thirteenth) url("../../images/bdb/icon-chevron_down_gray.svg") right .75rem center / 14px 14px no-repeat;
+	background: var(--color-thirteenth) url("../../images/icons/icon-chevron_down_gray.svg") right .75rem center / 14px 14px no-repeat;
 }
 
 .dataTables_length select option {
@@ -2881,6 +2885,10 @@ table#resultsAccount thead th:nth-child(7){
 	box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
 	padding: 24px;
 	width: 255px;
+}
+
+.widget .text{
+	text-align: center;
 }
 
 @media (max-width: 1200px) {
@@ -3316,7 +3324,7 @@ a.ui-button:active,
   text-align: center;
 	color: var(--color-fifth);
 	border: 0;
-  background: transparent url("../../images/bdb/icon-white-triangle-2-n-s.svg") no-repeat right .25rem center / 8px 10px;
+  background: transparent url("../../images/icons/icon-white-triangle-2-n-s.svg") no-repeat right .25rem center / 8px 10px;
   -webkit-appearance: none;
   -moz-appearance: none;
 	appearance: none;

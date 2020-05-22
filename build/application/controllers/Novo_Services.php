@@ -38,4 +38,31 @@ Class Novo_Services extends Novo_Controller {
 		$this->views = ['services/'.$view];
 		$this->loadView($view);
 	}
+	/**
+	 * @info Método para la consulta de tarjetas
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date February 6th, 2020
+	 */
+	public function cardsInquiry()
+	{
+		log_message('INFO', 'Novo_Services: cardsInquiry Method Initialized');
+
+		$view = 'cardsInquiry';
+		array_push(
+			$this->includeAssets->cssFiles,
+			"third_party/dataTables-1.10.20"
+		);
+		array_push(
+			$this->includeAssets->jsFiles,
+			"third_party/dataTables-1.10.20",
+			"third_party/jquery.validate",
+			"validate-core-forms",
+			"third_party/additional-methods",
+			'services/cards_inquiry'
+		);
+		$this->responseAttr();
+		$this->render->titlePage = lang('GEN_MENU_SERV_CARD_INQUIRY');
+		$this->views = ['services/'.$view];
+		$this->loadView($view);
+	}
 }

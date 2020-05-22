@@ -75,13 +75,27 @@ class Novo_Inquiries extends NOVO_Controller {
 	{
 		log_message('INFO', 'NOVO Inquiries: bulkDetail Method Initialized');
 
-		if(!isset($this->request->bulkId))  {
+		if(!isset($this->request->bulkId) && !$this->session->flashdata('download'))  {
 			redirect(base_url('detalle-producto'), 'location');
 		}
 
+		$responseAttr = new stdClass();
+		$download = FALSE;
 		$view = 'bulkDetail';
+
+		if ($this->session->flashdata('download')) {
+			$download = $this->session->flashdata('download');
+			$this->request = $download->data->request;
+			$responseAttr = $download;
+		}
+
 		$response = $this->loadModel($this->request);
-		$this->responseAttr($response);
+
+		if(!$download) {
+			$responseAttr = $response;
+		}
+
+		$this->responseAttr($responseAttr);
 		array_push(
 			$this->includeAssets->cssFiles,
 			"third_party/dataTables-1.10.20"
@@ -97,6 +111,7 @@ class Novo_Inquiries extends NOVO_Controller {
 		}
 
 		$this->render->titlePage = lang('GEN_DETAIL_BULK_TITLE');
+		$this->render->function = $this->request->bulkfunction;
 		$this->views = ['inquiries/'.$view];
 		$this->loadView($view);
 	}

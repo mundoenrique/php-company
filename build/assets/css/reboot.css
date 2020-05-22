@@ -235,7 +235,6 @@ label {
   margin-bottom: .25rem;
   font-size: .875rem;
   font-weight: var(--semibold-font-weight);
-  color: var(--label-color);
 }
 
 /**

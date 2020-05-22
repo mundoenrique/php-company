@@ -1,3 +1,4 @@
+var changeBtn;
 function passStrength(pswd) {
 	var valid;
 

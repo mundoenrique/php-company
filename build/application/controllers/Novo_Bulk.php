@@ -200,6 +200,7 @@ class Novo_Bulk extends NOVO_Controller {
 			$this->request->select = true;
 			$this->load->model('Novo_Business_Model', 'Business');
 			$branchOffices = $this->Business->callWs_GetBranchOffices_Bulk($this->request);
+			$branchOffices->code = $branchOffices->code != 0 ? 3 : $branchOffices->code;
 			$this->render->branchOffices = $branchOffices->data->branchOffices;
 		}
 

@@ -77,6 +77,53 @@ class Novo_DownloadFiles_Model extends NOVO_Model {
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date May 16th, 2020
 	 */
+	public function callWs_BulkDetailExport_DownloadFiles($dataRequest)
+	{
+		log_message('INFO', 'NOVO DownloadFiles Model: StatusBulkReport Method Initialized');
+
+		$this->className = 'com.novo.objects.TOs.LoteTO';
+		$this->dataAccessLog->modulo = 'Consultas';
+		$this->dataAccessLog->function = 'Detalle de lote';
+		$this->dataAccessLog->operation = 'Descarga de archivos';
+
+		switch ($dataRequest->type) {
+			case lang('GEN_BTN_DOWN_XLS'):
+				$this->dataRequest->idOperation = 'detalleLoteExcel';
+				$FileType = 'xls';
+			break;
+			case lang('GEN_BTN_DOWN_PDF'):
+				$this->dataRequest->idOperation = 'detalleLotePDF';
+				$FileType = 'pdf';
+			break;
+		}
+
+		$this->dataRequest->acidlote = $dataRequest->bulkId;
+
+		$response = $this->sendToService('callWs_StatusBulkReport');
+
+		switch ($this->isResponseRc) {
+			case 0:
+				exportFile($response->archivo, $FileType, $response->nombre);
+				break;
+			default:
+				$dataRequest->code = 0;
+				$request = new stdClass();
+				$request->bulkId = $dataRequest->bulkId;
+				$request->bulkfunction = $dataRequest->bulkfunction;
+				$this->response->data->request = $request;
+				$this->responseFail_DownloadFiles($dataRequest);
+				$this->session->set_flashdata('download', $this->response);
+				redirect(base_url('consulta-lote'), 'location', 301);
+		}
+
+
+		return $this->responseToTheView('callWs_UnnmamedAffiliate');
+	}
+	/**
+	 * @info descarga archivos xls y PDF de reporte estado de lote
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date May 16th, 2020
+	 */
 	public function callWs_StatusBulkReport_DownloadFiles($dataRequest)
 	{
 		log_message('INFO', 'NOVO DownloadFiles Model: StatusBulkReport Method Initialized');

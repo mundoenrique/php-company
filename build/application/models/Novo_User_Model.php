@@ -48,7 +48,7 @@ class Novo_User_Model extends NOVO_Model {
 		if($this->config->item('active_recaptcha')) {
 			$this->isResponseRc = $this->callWs_ValidateCaptcha_User($dataRequest);
 
-			if ($this->isResponseRc == 'done') {
+			if ($this->isResponseRc === 0) {
 				$response = $this->sendToService('callWs_Login');
 			}
 		} else {
@@ -85,7 +85,7 @@ class Novo_User_Model extends NOVO_Model {
 					'lastSession' => $lastSession,
 					'token' => $response->token,
 					'time' => $time,
-					'cl_addr' => $this->encrypt_connect->encode($_SERVER['REMOTE_ADDR'], $userName, 'REMOTE_ADDR'),
+					'cl_addr' => $this->encrypt_connect->encode($this->input->ip_address(), $userName, 'REMOTE_ADDR'),
 					'countrySess' => $this->config->item('country'),
 					'countryUri' => $this->config->item('country-uri'),
 					'idUsuario' => $response->usuario->idUsuario,
@@ -108,7 +108,7 @@ class Novo_User_Model extends NOVO_Model {
 					'codigoGrupo' => $response->usuario->codigoGrupo,
 					'token' => $response->token,
 					'time' => $time,
-					'cl_addr' => $this->encrypt_connect->encode($_SERVER['REMOTE_ADDR'], $dataRequest->user, 'REMOTE_ADDR'),
+					'cl_addr' => $this->encrypt_connect->encode($this->input->ip_address(), $dataRequest->user, 'REMOTE_ADDR'),
 					'countrySess' => $this->config->item('country')
 				];
 				$this->session->set_userdata($userData);
@@ -170,7 +170,7 @@ class Novo_User_Model extends NOVO_Model {
 				$this->response->assert = lang('GEN_LOGIN_IP_ASSERT');
 				$this->response->labelInput = lang('GEN_LOGIN_IP_LABEL_INPUT');
 				$this->response->icon = lang('GEN_ICON_WARNING');
-				$this->response->email = 'info******mail.com';// TODO: eliminar 
+				$this->response->email = 'info******mail.com';// TODO: eliminar
 				$this->response->msg = str_replace('{$maskMail$}',$this->response->email,lang('GEN_LOGIN_IP_MSG'));
 				$this->response->data = [
 					'btn1'=> [
@@ -199,6 +199,7 @@ class Novo_User_Model extends NOVO_Model {
 				];
 				break;
 			case 'fail':
+			case 9999:
 				$this->response->code = 3;
 				$this->response->title = lang('GEN_SYSTEM_NAME');
 				$this->response->icon = lang('GEN_ICON_DANGER');
@@ -263,7 +264,7 @@ class Novo_User_Model extends NOVO_Model {
 					'lastSession' => $lastSession,
 					'token' => $response->token,
 					'time' => $time,
-					'cl_addr' => $this->encrypt_connect->encode($_SERVER['REMOTE_ADDR'], $this->country, 'REMOTE_ADDR'),
+					'cl_addr' => $this->encrypt_connect->encode($this->input->ip_address(), $this->country, 'REMOTE_ADDR'),
 					'countrySess' => $this->config->item('country'),
 					'countryUri' => $this->config->item('country-uri'),
 				];
@@ -320,7 +321,7 @@ class Novo_User_Model extends NOVO_Model {
 				break;
 			case -150:
 				$this->response->code = 1;
-				$this->response->msg = novoLang(lang('RESP_FISCAL_REGISTRY_NO_FOUND'), lang('GEN_FISCAL_REGISTRY'));
+				$this->response->msg = novoLang(lang('RESP_FISCAL_REGISTRY_NO_FOUND'), [lang('RESP_FISCAL_REGISTRY_OF'), lang('GEN_FISCAL_REGISTRY'), lang('RESP_FISCAL_REGISTRY_OF_ENTERPRISE')]);
 				break;
 			case -159:
 				$this->response->code = 1;
@@ -386,7 +387,9 @@ class Novo_User_Model extends NOVO_Model {
 
 		switch($this->isResponseRc) {
 			case 0:
-				$this->callWs_FinishSession_User();
+				if(!$this->session->has_userdata('logged')) {
+					$this->callWs_FinishSession_User();
+				}
 				$this->response->code = 4;
 				$goLogin = $this->session->has_userdata('logged') ? '' : lang('RESP_PASSWORD_LOGIN');
 				$this->response->msg = novoLang(lang('RESP_PASSWORD_CHANGED'), $goLogin);
@@ -495,6 +498,6 @@ class Novo_User_Model extends NOVO_Model {
 
 		log_message('DEBUG', $logMessage);
 
-		return $result["score"] <= $this->config->item('score_recaptcha')[ENVIRONMENT] ? 'fail' : 'done';
+		return $result["score"] <= $this->config->item('score_recaptcha')[ENVIRONMENT] ? 9999 : 0;
 	}
 }

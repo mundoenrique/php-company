@@ -184,12 +184,12 @@ class Novo_Bulk_Model extends NOVO_Model {
 				'userName' => $this->userName
 			];
 
-			$response = $this->sendToService('LoadBulk');
+			$response = $this->sendToService('callWs_LoadBulk');
 			$respLoadBulk = FALSE;
 
 			switch ($this->isResponseRc) {
 				case 0:
-					$this->response->msg = novoLang(lang('BULK_SUCCESS'), substr($dataRequest->rawName, 0, 16).'...');
+					$this->response->msg = novoLang(lang('BULK_SUCCESS'), substr($dataRequest->rawName, 0, 15).'...');
 					$this->response->icon = lang('GEN_ICON_SUCCESS');
 					$this->response->data['btn1']['link'] = 'cargar-lotes';
 					$respLoadBulk = TRUE;
@@ -247,7 +247,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 			$this->response->data['btn1']['action'] = 'close';
 		}
 
-		return $this->responseToTheView('LoadBulk');
+		return $this->responseToTheView('callWs_LoadBulk');
 	}
 	/**
 	 * @info Elimina un lote

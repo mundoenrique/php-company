@@ -644,8 +644,8 @@ $(function () {
 		trans = typeOperacion[operacion];
 
 		var inputsConMontoValidos = $("input[class='monto']").filter(function() {
-			return this.value >= serv_var.maestroParam.montoMinTransDia;
-		});
+			return this.value.replace(/(\.|\s)|(\,)/g,(m,p1,p2) => p1 ? "" : ".") >= serv_var.maestroParam.montoMinTransDia;
+		});	
 
 		if (sum = sumaMontosTransferencia(inputsConMontoValidos)) {
 
