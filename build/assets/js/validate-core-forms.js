@@ -7,10 +7,11 @@ function validateForms(form) {
 	var regNumberValid = /^['a-z0-9']{6,45}$/i;
 	var shortPhrase = /^['a-z0-9ñáéíóú ().']{4,25}$/i;
 	var middlePhrase = /^['a-z0-9ñáéíóú ().']{5,45}$/i;
-	var longPhrase = /^[a-z0-9ñáéíóú ().-]{8,70}$/i;
+	var longPhrase = /^[a-z0-9ñáéíóú ().-]{6,70}$/i;
 	var emailValid = /^([a-zA-Z]+[0-9_.+-]*)+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 	var alphanumunder = /^([\w.\-+&ñÑ ]+)+$/i;
 	var alphanum = /^[a-z0-9]+$/i;
+	var alphanumspace = /^([A-Za-z0-9 _]*[A-Za-z0-9][A-Za-z0-9 _]*)$/;
 	var userPassword = validatePass;
 	var numeric = /^[0-9]+$/;
 	var alphabetical = /^[a-z]+$/i;
@@ -90,15 +91,15 @@ function validateForms(form) {
 			"selected-year": {required: true, pattern: date.y},
 			"id-type": {requiredSelect: true},
 			"id-number": {required: true, pattern: numeric},
-			"id-number1": {pattern: numeric},
-			"tlf1": {required: true, pattern: numeric},
+			"id-number1": {pattern: numeric, maxlength: 15},
+			"tlf1": {required: true, pattern: numeric , maxlength: 15 },
 			"card-number": {required: true, pattern: numeric, maxlength: 16, minlength: 16},
 			"card-number-sel": {requiredSelect: true},
 			"inquiry-type": {requiredSelect: true},
 			"expired-date": {required: true, pattern: date.my},
 			"max-cards": {required: true, pattern: numeric, maxcards: true},
-			"starting-line1": {required: true, pattern: alphanum},
-			"starting-line2": {required: true, pattern: alphanum},
+			"starting-line1": {required: true, pattern: alphanumspace},
+			"starting-line2": {required: true, pattern: alphanumspace},
 			"bulk-number": {pattern: numeric},
 			"enterpriseName": {required: true},
 			"productName": {required: true},
@@ -140,10 +141,14 @@ function validateForms(form) {
 			"selected-year": lang.VALIDATE_SELECTED_YEAR,
 			"id-type": lang.VALIDATE_ID_TYPE,
 			"id-number": lang.VALIDATE_ID_NUMBER,
-			"id-number1": lang.VALIDATE_ID_NUMBER,
+			"id-number1": {
+				pattern: lang.VALIDATE_ID_NUMBER,
+				maxlength: lang.VALIDATE_LENGHT_NUMBER,
+			},
 			"tlf1": {
 				pattern: lang.VALIDATE_ID_NUMBER,
-				required: lang.VALIDATE_PHONE_REQ
+				required: lang.VALIDATE_PHONE_REQ,
+				maxlength: lang.VALIDATE_LENGHT_NUMBER
 			},
 			"card-number": lang.VALIDATE_CARD_NUMBER,
 			"card-number-sel": lang.VALIDATE_CARD_NUMBER_SEL,
@@ -195,7 +200,7 @@ function validateForms(form) {
 	}
 
 	$.validator.methods.requiredTypeOrder = function(value, element, param) {
-		var eval1 = longPhrase.test($(element).find('option:selected').text().trim());
+		var eval1 = alphanumunder.test($(element).find('option:selected').text().trim());
 		var eval2 = alphanum.test($(element).find('option:selected').val().trim());
 		return eval1 && eval2;
 	}
@@ -217,7 +222,9 @@ function validateForms(form) {
 		var cardsMax = parseInt($(element).attr('max-cards'));
 		var cards = parseInt(value);
 
-		if (cardsMax > 0) {
+		valid = cards > 0;
+
+		if (cardsMax > 0 && valid) {
 			valid = cardsMax > cards
 		}
 
