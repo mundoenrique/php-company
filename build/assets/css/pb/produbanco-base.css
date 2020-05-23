@@ -16,9 +16,6 @@ header.main-head {
 	height: 3.75rem;
 	background-color: var(--color-primary);
 	font-weight: var(--light-font-weight);
-	background-repeat: repeat-x;
-	background-image: url(../../images/bnt/navigation.png);
-	background-size: 43.5px 64px;
 }
 
 /* Content */
@@ -420,6 +417,10 @@ textarea.form-control {
 }
 
 /* Checkboxes and radios */
+
+.label {
+	color: var(--color-primary);
+}
 
 .custom-control {
 	position: relative;
