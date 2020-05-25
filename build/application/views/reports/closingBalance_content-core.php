@@ -70,15 +70,16 @@
 				<div class="line mb-2"></div>
 			</div>
 
-			<div class="flex pb-5 flex-column">
+			<div  class="flex pb-5 flex-column ">
 				<span class="line-text mb-2 h4 semibold primary">Resultados Saldos al cierre</span>
-				<div class="center mx-1">
-					<div class="flex mr-2 py-3 justify-end items-center">
-					<div id="hid2" class=" hide">
+				<div id="spinnerBlockBudget" class=" hide">
 									<div id="pre-loader" class="mt-2 mx-auto flex justify-center">
 										<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
 									</div>
 						</div>
+				<div id="blockBudgetResults" class="center mx-1 ">
+					<div id="block-btn-excel" class="flex mr-2 py-3 justify-end items-center hide">
+
 						<button id="export_excel" class="btn px-1" title="Exportar a EXCEL" data-toggle="tooltip">
 							<i class="icon icon-file-excel" aria-hidden="true"></i>
 						</button>

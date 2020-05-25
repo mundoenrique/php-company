@@ -49,6 +49,8 @@ $(function () {
 
 	 $('#export_excel').addClass("hide");
 	$('#closingBudgetsBtn').on('click', function(e){
+		$('#spinnerBlockBudget').removeClass("hide");
+		$('#blockBudgetResults').addClass("hide");
 		$('#export_excel').removeClass("hide");
 		e.preventDefault();
 		form = $('#closingBudgetForm');
@@ -81,7 +83,6 @@ $(function () {
 			paginar: paginar,
 			tamPg: tamPg
 		};
-		$('#hid2').removeClass("hide");
 		exportToExcel(passData)
 		});
 });
@@ -110,14 +111,14 @@ function exportToExcel(passData) {
 	where = 'exportToExcel';
 	data = passData;
 	callNovoCore(verb, who, where, data, function(response) {
-		$('#hid2').addClass("hide");
-			dataResponse = response.data
+			dataResponse = response.data;
 			code = response.code
 			var info = dataResponse;
 			if(code == 0){
 			var File = new Int8Array(info.archivo);
 			byteArrayFile([File], 'SaldoAlCierre.xls');
 		}
+
 		$('#export_excel').removeClass("hide");
 })
 }
@@ -157,7 +158,7 @@ function searchBudgets(){
 			paginar: paginar,
 			tamPg: tamPg
 		};
-		$('#hid').removeClass("hide");
+
 		closingBudgets(passData);
 
 }
@@ -168,7 +169,7 @@ function closingBudgets(passData) {
 	where = 'closingBudgets';
 	data = passData;
 	callNovoCore(verb, who, where, data, function(response) {
-		$('#hid').addClass("hide");
+		$('#spinnerBlockBudget').addClass("hide");
 		var table = $('#balancesClosing').DataTable();
 	table.destroy();
 			dataResponse = response.data
@@ -197,6 +198,8 @@ function closingBudgets(passData) {
 					"language": dataTableLang,
 				}).clear().draw();
 			}
+			$('#blockBudgetResults').removeClass("hide");
+
 })
 }
 
