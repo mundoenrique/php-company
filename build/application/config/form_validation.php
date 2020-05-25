@@ -99,10 +99,10 @@ $config = [
 		],
 
 	],
-	'saldosAmanecidos' => [
+	'closingBudgets' => [
 		[
 			'field' => 'Nit',
-			'rules' => 'trim'
+			'rules' => 'trim|regex_match[/^([0-9=]+)+$/i]|'
 		],
 	],
 	'exportToExcel' => [

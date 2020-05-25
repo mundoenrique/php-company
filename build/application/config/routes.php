@@ -101,8 +101,8 @@ $route['(:any)/gastos-catgoria'] = "Novo_Reports/categoryExpense";
 $route['(:any)/cuenta-maestra'] = "Novo_Reports/masterAccount";
 $route['(:any)/estado-lote'] = "Novo_Reports/statusBulk";
 $route['(:any)/id-empresa-ob'] = "Novo_Reports/obtenerIdEmpresa";
-$route['(:any)/saldos-amanecidos'] = "Novo_Reports/saldosAmanecidos";
-$route['(:any)/saldos-amanecidos-excel'] = "Novo_Reports/exportToExcel";
+$route['(:any)/closing-budgets'] = "Novo_Reports/closingBudgets";
+$route['(:any)/closing-budgets-excel'] = "Novo_Reports/exportToExcel";
 
 
 //settings

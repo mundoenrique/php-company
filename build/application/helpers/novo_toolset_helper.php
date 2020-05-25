@@ -212,7 +212,7 @@ if(!function_exists('languajeLoad')) {
 					'getEnterprises'	=> ['enterprise'],
 					'obtainNumPosition'	=>['settings'],
 					'obtenerIdEmpresa'	=>['reports'],
-					'saldosAmanecidos'	=>['reports'],
+					'closingBudgets'	=>['reports'],
 					'exportToExcel'	=>['reports'],
 					'getProducts'	=> ['products'],
 					'getProductDetail'	=> ['products'],

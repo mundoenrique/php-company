@@ -694,9 +694,9 @@ class Novo_Reports_Model extends NOVO_Model {
 	 * @author Diego Acosta García
 	 * @date May 21, 2020
 	 */
-	public function callWs_saldosAmanecidos_Reports($dataRequest)
+	public function callWs_closingBudgets_Reports($dataRequest)
 	{
-		log_message('INFO', 'NOVO Reports Model: saldosAmanecidos Method Initialized');
+		log_message('INFO', 'NOVO Reports Model: closingBudgets Method Initialized');
 
 		$this->className = 'com.novo.objects.MO.SaldosAmanecidosMO';
 
@@ -712,7 +712,7 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->dataRequest->paginaActual = $dataRequest->paginaActual;
 
 
-		$response = $this->sendToService('callWs_saldosAmanecidos');
+		$response = $this->sendToService('callWs_closingBudgets');
 
 		switch($this->isResponseRc) {
 			case 0:
@@ -726,7 +726,7 @@ class Novo_Reports_Model extends NOVO_Model {
 			break;
 		}
 
-		return $this->responseToTheView('callWs_saldosAmanecidos');
+		return $this->responseToTheView('callWs_closingBudgets');
 	}
 		/**
 	 * @info Método para obtener excel de tabla

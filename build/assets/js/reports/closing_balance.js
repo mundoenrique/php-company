@@ -12,11 +12,10 @@ var reportsResults;
 	var paginaActual;
 	var paginar;
 	var tamPg;
-	var message= "No tiene productos asociados a la empresa";
 	var table;
+
 $(function () {
 	$('#Nit').attr('maxlength', 10);
-
 	$('#pre-loader').remove();
 	$('.hide-out').removeClass('hide');
 
@@ -26,7 +25,6 @@ $(function () {
     "language": dataTableLang
 	}
 	);
-
 
 	$('#enterprise-report').on('change', function(){
 		$('#products-select').empty();
@@ -57,8 +55,7 @@ $(function () {
 		validateForms(form)
 
 		if (form.valid()) {
-
-		buscarSaldos();
+			searchBudgets();
 		}
 	})
 
@@ -102,7 +99,7 @@ function selectionBussine(passData) {
 				$('#products-select').append("<option value=" + info[index].id + " brand=" + info[index].brand + ">" + info[index].desc + "</option>");
 			}
 			if(code == 3){
-				$('#products-select').append("<option>"+ message +  "</option>");
+				$('#products-select').append("<option><?= lang('ERROR_(-138)'); ?></option>");
 			}
 })
 }
@@ -139,12 +136,12 @@ var byteArrayFile = (function () {
     };
 }());
 
-function buscarSaldos(){
+function searchBudgets(){
 	$('#enterprise-report').find('option:selected').attr('acrif');
 		empresa = $('#enterprise-report').find('option:selected').attr('acrif');
 		cedula =  $("#Nit").val().replace(/ /g, '');
 		producto = $("#products-select").val();
-		nomEmpresa = $('#enterprise-report').find('option:selected').text();
+		nomEmpresa = $('#enterprise-report').find('option:selected').attr('nomOf');
 		descProd = $("#products-select").attr("des");
 		paginaActual = 1;
 		paginar = true;
@@ -161,14 +158,14 @@ function buscarSaldos(){
 			tamPg: tamPg
 		};
 		$('#hid').removeClass("hide");
-		saldosAmanecidos(passData);
+		closingBudgets(passData);
 
 }
 
-function saldosAmanecidos(passData) {
+function closingBudgets(passData) {
 	verb = "POST";
 	who = 'Reports';
-	where = 'saldosAmanecidos';
+	where = 'closingBudgets';
 	data = passData;
 	callNovoCore(verb, who, where, data, function(response) {
 		$('#hid').addClass("hide");
