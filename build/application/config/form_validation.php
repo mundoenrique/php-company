@@ -92,6 +92,25 @@ $config = [
 		],
 
 	],
+	'obtenerIdEmpresa' => [
+		[
+			'field' => 'acrif',
+			'rules' => 'trim'
+		],
+
+	],
+	'saldosAmanecidos' => [
+		[
+			'field' => 'Nit',
+			'rules' => 'trim'
+		],
+	],
+	'exportToExcel' => [
+		[
+			'field' => 'empresa',
+			'rules' => 'trim'
+		],
+	],
 	'changeTelephones' => [
 		[
 			'field' => 'tlf1',

@@ -6,6 +6,7 @@ $lang['REPORTS_NO_CARDS'] = 'Empresa sin tarjetas asociadas';
 $lang['REPORTS_NO_CARDS_PEOPLE'] = 'No se encontraron tarjetas para el número de identificación indicado';
 $lang['REPORTS_NO_MOVES_ENTERPRISE'] = 'No se encontraron movimentos en el rango de fecha seleccionado';
 $lang['REPORTS_NO_FILE_EXIST'] = 'No fue posible generar el archivo, por favor intenta de nuevo';
+$lang['REPORTS_NO_BUDGET'] = 'No hay saldos disponibles para este producto';
 $lang['REPORTS_ID_TYPE'] = 'Tipo de identificacion';
 $lang['REPORTS_INQUIRY_TYPE'] = 'Tipo de consulta';
 $lang['REPORTS_ID_NUMBER'] = 'Número de identificación';

@@ -160,6 +160,9 @@ class Verify_Access {
 				case 'getEnterprise':
 				case 'getUser':
 				case 'obtainNumPosition':
+				case 'obtenerIdEmpresa':
+				case 'exportToExcel':
+				case 'saldosAmanecidos':
 				case 'getProducts':
 				case 'keepSession':
 				case 'options':

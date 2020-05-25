@@ -666,4 +666,116 @@ class Novo_Reports_Model extends NOVO_Model {
 
 		return $this->responseToTheView('callWs_StatusBulk');
 	}
+				/**
+	 * @info Método para Obtener la posicion de la empresa
+	 * @author Diego Acosta García
+	 * @date May 21, 2020
+	 */
+	public function callWs_obtenerIdEmpresa_Reports($dataRequest)
+	{
+		log_message('INFO', 'NOVO Reports Model: obtenerIdEmpresa Method Initialized');
+		$this->className = 'com.novo.objects.TOs.EmpresaTO';
+		$this->dataAccessLog->modulo = 'Reportes';
+		$this->dataAccessLog->function = 'Id empresa';
+		$this->dataAccessLog->operation = 'Obtener id de empresa';
+		$this->dataRequest->idOperation = 'buscarIdEmpresa';
+		$response =  $dataRequest;
+
+		switch($this->isResponseRc = 0) {
+			case 0:
+			$user = $response;
+			$this->response->data =  (array)$user;
+				}
+
+		return $this->response;
+	}
+		/**
+	 * @info Método para obtener la lista de saldos amanecidos
+	 * @author Diego Acosta García
+	 * @date May 21, 2020
+	 */
+	public function callWs_saldosAmanecidos_Reports($dataRequest)
+	{
+		log_message('INFO', 'NOVO Reports Model: saldosAmanecidos Method Initialized');
+
+		$this->className = 'com.novo.objects.MO.SaldosAmanecidosMO';
+
+		$this->dataAccessLog->modulo = 'Reportes';
+		$this->dataAccessLog->function = 'Estado de lote';
+		$this->dataAccessLog->operation = 'Obtener lista lotes por estado';
+		$this->dataRequest->idOperation = 'saldosAmanecidos';
+		$this->dataRequest->idExtPer = $dataRequest->cedula;
+		$this->dataRequest->producto =  $dataRequest->producto;
+		$this->dataRequest->idExtEmp =  $dataRequest->empresa;
+		$this->dataRequest->tamanoPagina = $dataRequest->tamPg;
+		$this->dataRequest->paginar = $dataRequest->paginar;
+		$this->dataRequest->paginaActual = $dataRequest->paginaActual;
+
+
+		$response = $this->sendToService('callWs_saldosAmanecidos');
+
+		switch($this->isResponseRc) {
+			case 0:
+				$this->response->code = 0;
+				$user = $response;
+				$this->response->data =  (array)$user;
+			break;
+			case -150:
+				$this->response->code = 1;
+
+			break;
+		}
+
+		return $this->responseToTheView('callWs_saldosAmanecidos');
+	}
+		/**
+	 * @info Método para obtener excel de tabla
+	 * @author Diego Acosta García
+	 * @date May 21, 2020
+	 */
+	public function callWs_exportToExcel_Reports($dataRequest)
+	{
+		log_message('INFO', 'NOVO Reports Model: exportToExcel Method Initialized');
+
+		$this->className = 'com.novo.objects.MO.SaldosAmanecidosMO';
+
+		$this->dataAccessLog->modulo = 'Reportes';
+		$this->dataAccessLog->function = 'Saldos amanecidos';
+		$this->dataAccessLog->operation = 'Obtener excel de tabla';
+		$this->dataRequest->idOperation = 'generaArchivoXls';
+		$this->dataRequest->idExtPer = $dataRequest->cedula;
+		$this->dataRequest->producto =  $dataRequest->producto;
+		$this->dataRequest->idExtEmp =  $dataRequest->empresa;
+		$this->dataRequest->tamanoPagina = $dataRequest->tamPg;
+		$this->dataRequest->paginar = $dataRequest->paginar;
+		$this->dataRequest->paginaActual = $dataRequest->paginaActual;
+		$this->dataRequest->descProd =  $dataRequest->descProd;
+
+
+		$response = $this->sendToService('callWs_exportToExcel');
+
+		switch($this->isResponseRc) {
+			case 0:
+				$this->response->code = 0;
+				$user = $response;
+				$this->response->data =  (array)$user;
+				$archivo = $response->archivo;
+
+
+			break;
+
+						case -3:
+				$this->response->code = 4;
+				$this->response->icon = lang('GEN_ICON_DANGER');
+				$this->response->title = lang('REPORTS_TITLE');
+				$this->response->msg = lang('REPORTS_NO_BUDGET');
+				$this->response->data['btn1']['action'] = 'close';
+
+			break;
+		}
+
+		return $this->response;
+	}
+
+
 }

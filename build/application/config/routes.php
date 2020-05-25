@@ -100,6 +100,11 @@ $route['(:any)/tarjetas-emitidas'] = "Novo_Reports/issuedCards";
 $route['(:any)/gastos-catgoria'] = "Novo_Reports/categoryExpense";
 $route['(:any)/cuenta-maestra'] = "Novo_Reports/masterAccount";
 $route['(:any)/estado-lote'] = "Novo_Reports/statusBulk";
+$route['(:any)/id-empresa-ob'] = "Novo_Reports/obtenerIdEmpresa";
+$route['(:any)/saldos-amanecidos'] = "Novo_Reports/saldosAmanecidos";
+$route['(:any)/saldos-amanecidos-excel'] = "Novo_Reports/exportToExcel";
+
+
 //settings
 $route['(:any)/configuracion'] = "Novo_Settings/options";
 $route['(:any)/empresa'] = "Novo_Settings/getEnterprise";
