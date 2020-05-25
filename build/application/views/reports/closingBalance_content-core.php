@@ -22,12 +22,12 @@
 			<div class="search-criteria-order flex pb-3 flex-column w-100">
 				<span class="line-text mb-2 h4 semibold primary">Criterio de búsqueda</span>
 				<div class="flex my-2 px-5">
-					<form id="amanecidosForm" class="w-100">
+					<form id="closingBudgetForm" class="w-100">
 						<div class="row flex flex items-center justify-end col-sm-12">
 							<div class="form-group col-4 col-xl-3">
 
 								<label>Empresa</label>
-								<select id="enterprise-report" name="entrep" class="select-box custom-select mt-1 mb-4 h6 w-100">
+								<select id="enterprise-report" name="entrep" class="select-box custom-select mt-1 mb-1 h6 w-100">
 								<?php foreach($enterpriseList AS $enterprise) : ?>
 									<?php if($enterprise->acrif == $enterpriseData->idFiscal): ?>
 									<?php endif;?>
@@ -60,7 +60,7 @@
 							</div>
 
 							<div class="flex items-center justify-end col-sm-12 col-xl-3">
-								<button type="button" id="amanecidos-bnt" class="btn btn-primary btn-small">
+								<button type="button" id="closingBudgetsBtn" class="btn btn-primary btn-small">
 									Buscar
 								</button>
 							</div>

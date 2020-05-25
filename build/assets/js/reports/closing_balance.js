@@ -48,10 +48,10 @@ $(function () {
 	 });
 
 	 $('#export_excel').addClass("hide");
-	$('#amanecidos-bnt').on('click', function(e){
+	$('#closingBudgetsBtn').on('click', function(e){
 		$('#export_excel').removeClass("hide");
 		e.preventDefault();
-		form = $('#amanecidosForm');
+		form = $('#closingBudgetForm');
 		validateForms(form)
 
 		if (form.valid()) {
