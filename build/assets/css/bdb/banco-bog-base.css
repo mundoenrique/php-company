@@ -3411,7 +3411,7 @@ a.ui-button:active,
 	background: none;
 	overflow: auto;
 }
-.ui-dialog .ui-dialog-content p {
+.ui-dialog .ui-dialog-content >	 p {
 	display: flex;
 	padding: 1.2em 1em 1em;
 	min-height: 80px;

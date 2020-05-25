@@ -129,7 +129,7 @@ $(function () {
 				btn = response.data.btn1;
 
 				loginIpMsg ='<form id="formVerificationOTP" name="formVerificationOTP" class="mr-2" method="post">';
-				loginIpMsg+='<p class="pt-0 pl-0 justify">'+response.msg+'</p>';
+				loginIpMsg+='<p class="pt-0 p-0 justify">'+response.msg+'</p>';
 				loginIpMsg+='<div class="row">';
 				loginIpMsg+=	'<div class="form-group col-6">';
 				loginIpMsg+=	'<label id="label_codeOTP" for="codeOTP">'+response.labelInput+'</label>';
@@ -214,8 +214,8 @@ function inputDisabled(disable) {
 }
 
 function windowsStyle(){
-	$("#system-msg").width('auto');
 	$("#system-info").dialog("option", "minWidth", 480);
+	$("#system-info").dialog("option", "maxHeight", false);
 
 	if(country != 'bdb'){
 		$("#label_codeOTP").addClass("line-field");

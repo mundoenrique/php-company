@@ -97,7 +97,7 @@ function validateForms(form) {
 			"card-number": {required: true, pattern: numeric, maxlength: 16, minlength: 16},
 			"card-number-sel": {requiredSelect: true},
 			"inquiry-type": {requiredSelect: true},
-			"codeOTP": {required: true, pattern: validCode},
+			"codeOTP": {required: true, pattern: validCode, maxlength: 8},
 			"saveIP": {pattern: numeric},
 			"expired-date": {required: true, pattern: date.my},
 			"max-cards": {required: true, pattern: numeric, maxcards: true},
@@ -156,7 +156,11 @@ function validateForms(form) {
 			"card-number": lang.VALIDATE_CARD_NUMBER,
 			"card-number-sel": lang.VALIDATE_CARD_NUMBER_SEL,
 			"inquiry-type": lang.VALIDATE_INQUIRY_TYPE_SEL,
-			"codeOTP": lang.GEN_CODE_OTP_REQUIRED,
+			"codeOTP": {
+				required: lang.GEN_CODE_OTP_REQUIRED,
+				pattern: lang.GEN_CODE_OTP_INVALID_FORMAT,
+				maxlength: lang.GEN_CODE_OTP_INVALID_FORMAT
+			},
 			"expired-date": lang.VALIDATE_SELECTED_DATE,
 			"max-cards": lang.VALIDATE_TOTAL_CARDS,
 			"starting-line1": lang.VALIDATE_STARTING_LINE,
