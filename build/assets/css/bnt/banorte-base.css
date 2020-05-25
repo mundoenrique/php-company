@@ -377,7 +377,7 @@ textarea.form-control {
 .custom-select {
 	display: inline-block;
 	padding-right: 1.75rem;
-	background: rgba(255,255,255,1) url("../../images/bnt/icon-chevron_down_gray.svg") right .75rem center / 14px 14px no-repeat;
+	background: rgba(255,255,255,1) url("../../images/icons/icon-chevron_down_gray.svg") right .75rem center / 14px 14px no-repeat;
   -webkit-appearance: none;
   -moz-appearance: none;
 	appearance: none;
@@ -387,7 +387,7 @@ textarea.form-control {
 .custom-select:hover:not(:disabled) {
 	display: inline-block;
 	padding-right: 1.75rem;
-	background: rgba(255,255,255,1) url("../../images/bnt/icon-chevron_down_black.svg") right .75rem center / 14px 14px no-repeat;
+	background: rgba(255,255,255,1) url("../../images/icons/icon-chevron_down_black.svg") right .75rem center / 14px 14px no-repeat;
   -webkit-appearance: none;
   -moz-appearance: none;
 	appearance: none;
@@ -420,6 +420,10 @@ textarea.form-control {
 }
 
 /* Checkboxes and radios */
+
+label {
+	color: var(--color-sixth);
+}
 
 .custom-control {
 	position: relative;
@@ -546,7 +550,7 @@ textarea.form-control {
   -moz-appearance: none;
   -ms-appearance: none;
   -o-appearance: none;
-  appearance: none;
+	appearance: none;
 }
 
 .custom-option-input:hover ~ .custom-option-label::before {
@@ -569,7 +573,7 @@ textarea.form-control {
 }
 
 .custom-option-input:disabled ~ .custom-option-label {
-	color: var(--color-eighth)
+	color: var(--color-sixth)
 }
 
 .custom-option-input:disabled ~ .custom-option-label::before {
@@ -1143,7 +1147,6 @@ textarea.form-control {
 
 .btn-loading-lg {
 	height: 45px;
-	text-transform: uppercase;
 }
 
 /* sizes */
@@ -1242,7 +1245,7 @@ textarea.form-control {
 /* Btn Search */
 
 .btn-search {
-  background-image: url("../../images/bnt/icon-searcher_gray.svg");
+  background-image: url("../../images/icons/icon-searcher_gray.svg");
   background-position: center;
   background-repeat: no-repeat;
   border-radius: 0 20px 20px 0;
@@ -1256,7 +1259,7 @@ textarea.form-control {
 
 .btn-search:hover {
   background-color: var(--color-primary) !important;
-  background-image: url("../../images/bnt/icon-searcher_white.svg");
+  background-image: url("../../images/icons/icon-searcher_white.svg");
   background-position: center;
   background-repeat: no-repeat;
   border-radius: 0 20px 20px 0;
@@ -2131,7 +2134,7 @@ i[class*=" icon-"].novoglyphs {
   display: inline-flex;
   width: 1.5rem;
   height: 1.5rem;
-	color: var(--color-eighth);
+	color: var(--color-sixth);
   border: .2em solid currentColor;
   border-right-color: transparent;
   border-radius: 50%;
@@ -2359,7 +2362,6 @@ i[class*=" icon-"].novoglyphs {
 
 .main-nav-dropdown a {
 	display: block;
-	text-transform: uppercase;
 	font-weight: 700 !important;
 	line-height: 3.41em;
 	-webkit-transition: all .25s ease;
@@ -2678,7 +2680,7 @@ td > button > i:hover{
 .dataTables_length select {
 	display: inline-block;
 	padding-right: 1.75rem;
-	background: rgba(255,255,255,1) url("../../images/bnt/icon-chevron_down_gray.svg") right .75rem center / 14px 14px no-repeat;
+	background: rgba(255,255,255,1) url("../../images/icons/icon-chevron_down_gray.svg") right .75rem center / 14px 14px no-repeat;
   -webkit-appearance: none;
   -moz-appearance: none;
 	appearance: none;
@@ -2686,7 +2688,7 @@ td > button > i:hover{
 }
 
 .dataTables_length select:hover {
-	background: rgba(255,255,255,1) url("../../images/bnt/icon-chevron_down_gray.svg") right .75rem center / 14px 14px no-repeat;
+	background: rgba(255,255,255,1) url("../../images/icons/icon-chevron_down_gray.svg") right .75rem center / 14px 14px no-repeat;
 }
 
 .dataTables_length select:disabled {
@@ -2694,7 +2696,7 @@ td > button > i:hover{
 }
 
 .dataTables_length select:disabled:hover {
-	background: var(--color-tertiary) url("../../images/bnt/icon-chevron_down_gray.svg") right .75rem center / 14px 14px no-repeat;
+	background: var(--color-tertiary) url("../../images/icons/icon-chevron_down_gray.svg") right .75rem center / 14px 14px no-repeat;
 }
 
 .dataTables_length select option {
@@ -2867,7 +2869,7 @@ table.dataTable tbody td.no-select-checkbox:after {
 }
 
 table.dataTable tbody > tr.selected, table.dataTable tbody > tr > .selected {
-	background-color: var(--color-tertiary-second) !important;
+	background-color: var(--color-tertiary) !important;
 	color: var(--color-sixth);
 }
 
@@ -2939,6 +2941,10 @@ table#resultsAccount thead th:nth-child(7){
 	box-shadow: none;
 }
 
+.widget .text{
+	text-align: center;
+}
+
 @media (max-width: 1200px) {
 	.widget.optional {
 		display: none;
@@ -3006,7 +3012,8 @@ ul.steps li.step-item i {
 .separador-one {
 	height: 1px;
 	border: none;
-	background:var(--color-eighth);
+	box-shadow: 0 1px 1px 1px rgba(78,64,68,.15),
+	inset 0 -3px 3px 0 rgba(78,64,68,.1);
 }
 
 .separador-two {
@@ -3024,16 +3031,18 @@ ul.steps li.step-item i {
 }
 
 .line {
-  box-shadow: 0 2px 2px 1px rgba(227,217,201,.5),
-	inset 0 -3px 3px 0 rgba(227,217,201,.5);
+	box-shadow: 0 2px 2px 1px rgba(78,64,68,.15),
+	inset 0 -3px 3px 0 rgba(78,64,68,.1);
 }
 
 .line-main-nav {
-  box-shadow: -1px 0 1px 0 rgba(227,217,201,.5),
-	inset 0 -3px 3px 0 rgba(227,217,201,.5);
+	box-shadow: -1px 0 2px 0 rgba(78,64,68,.35),
+	inset 0 -1px 1px 0 rgba(78,64,68,0.3);
 }
+
 .line-text {
-  box-shadow: 0 2px 0 0 rgba(227,217,201,.35), inset 0 -2px 1px -1px rgba(227,217,201,.3);
+	box-shadow: 0 1px 0 0 rgba(78,64,68,.15),
+	inset 0 -2px 1px -1px rgba(78,64,68,.1);
   padding-bottom: 4px;
 }
 
@@ -3374,7 +3383,7 @@ a.ui-button:active,
   text-align: center;
 	color: var(--color-secondary);
 	border: 0;
-  background: transparent url("../../images/bnt/icon-white-triangle-2-n-s.svg") no-repeat right .25rem center / 8px 10px;
+  background: transparent url("../../images/icons/icon-white-triangle-2-n-s.svg") no-repeat right .25rem center / 8px 10px;
   -webkit-appearance: none;
   -moz-appearance: none;
 	appearance: none;
