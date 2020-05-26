@@ -47,6 +47,7 @@ $lang['GEN_MENU_REP_STATUS_BULK'] = 'Estado de lote';//REPLOT
 $lang['GEN_LINK_REP_STATUS_BULK'] = 'estado-lote';//REPLOT
 $lang['GEN_MENU_REP_CARDHOLDERS'] = 'Tarjetahabientes';//TEBTHA
 $lang['GEN_MENU_LNK_CARDHOLDERS'] = 'tarjetahabientes';//TEBTHA
+$lang['GEN_LINK_REP_CARDHOLDERS'] = 'tarjetahabientes';//TEBTHA
 $lang['GEN_MENU_UNNAMED_REQUEST'] = 'Solicitud de innominadas';
 $lang['GEN_MENU_UNNAMED_AFFIL'] = 'Afiliación de innominadas';
 $lang['GEN_MENU_LOT_REPROCESS'] = 'Reproceso de datos';//TEBGUR

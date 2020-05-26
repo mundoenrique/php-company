@@ -507,6 +507,18 @@ $config = [
 			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
 		]
 	],
+	'cardHolders' => [
+		[
+			'field' => 'enterpriseCode',
+			'label' => 'enterpriseCode',
+			'rules' => 'trim|regex_match[/^[a-z0-9]+$/i]|required'
+		],
+		[
+			'field' => 'productCode',
+			'label' => 'enterpriseCode',
+			'rules' => 'trim|regex_match[/^[a-z0-9]+$/i]|required'
+		],
+	],
 	'keepSession' => [
 		[
 			'field' => 'modalReq',

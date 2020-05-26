@@ -22,30 +22,35 @@
 			<div class="search-criteria-order flex pb-3 flex-column w-100">
 				<span class="line-text mb-2 h4 semibold primary"><?= lang('GEN_SEARCH_CRITERIA'); ?></span>
 				<div class="flex my-2 px-5">
-					<form method="post" class="w-100">
+					<form id="card-holder-form" action="<?= base_url(lang('GEN_LINK_REP_CARDHOLDERS')); ?>" method="post" class="w-100">
 						<div class="row flex justify-between">
 							<div class="form-group col-4 col-xl-4">
 							<label><?= lang('GEN_ENTERPRISE'); ?></label>
-								<select class="select-box custom-select flex h6 w-100">
-									<option selected disabled>Seleccionar</option>
-									<option>Option 1</option>
-									<option>Option 2</option>
-									<option>Option 3</option>
+								<select id="enterpriseCode" name="enterpriseCode" class="select-box custom-select flex h6 w-100">
+									<?php foreach($enterpriseList AS $enterprise) : ?>
+										<?php if($enterprise->acrif == $enterpriseData->idFiscal): ?>
+										<?php endif;?>
+										<option value="<?= $enterprise->acrif; ?>" <?= $enterprise->acrif == $enterpriseData->idFiscal ? 'selected' : '' ?>>
+											<?= $enterprise->acnomcia; ?>
+										</option>
+									<?php endforeach; ?>
 								</select>
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-4 col-xl-4">
 							<label><?= lang('GEN_PRODUCT'); ?></label>
-								<select class="select-box custom-select flex h6 w-100">
-									<option selected disabled>Seleccionar</option>
-									<option>Option 1</option>
-									<option>Option 2</option>
-									<option>Option 3</option>
+								<select id="productCode" name="productCode" class="select-box custom-select flex h6 w-100">
+									<option selected disabled><?= $selectProducts ?></option>
+										<?php if($productsSelect): ?>
+										<?php foreach($productsSelect AS $product): ?>
+										<option value="<?= $product['id']; ?>" <?= $product['id'] == $currentProd ? 'selected' : ''; ?>><?= $product['desc'] ?></option>
+										<?php endforeach; ?>
+										<?php endif; ?>
 								</select>
 								<div class="help-block"></div>
 							</div>
 							<div class="flex items-center justify-end col-3">
-								<button class="btn btn-primary btn-small btn-loading">
+							<button type="submit" id="card-holder-btn" class="btn btn-primary btn-small btn-loading">
 								<?= lang('GEN_BTN_SEARCH'); ?>
 								</button>
 							</div>
@@ -55,17 +60,20 @@
 				<div class="line mb-2"></div>
 			</div>
 
+			<div id="pre-loade-result" class="mt-2 mx-auto hide"></div>
+			<div class="w-100 cardholders-result hide">
 			<div class="flex pb-5 flex-column">
 				<span class="line-text mb-2 h4 semibold primary">Resultados</span>
 				<div class="center mx-1">
 					<div class="flex">
-						<div class="flex mr-2 py-3 flex-auto justify-end items-center">
-							<button class="btn px-1" title="Exportar a EXCEL" data-toggle="tooltip">
+						<div class="flex mr-2 py-3 flex-auto justify-end items-center download">
+							<button class="btn px-1" title="<?= lang('GEN_BTN_DOWN_XLS'); ?>" data-toggle="tooltip">
 								<i class="icon icon-file-excel" aria-hidden="true"></i>
 							</button>
-							<button class="btn px-1" title="Exportar a PDF" data-toggle="tooltip">
+							<button class="btn px-1" title="<?= lang('GEN_BTN_DOWN_PDF'); ?>" data-toggle="tooltip">
 								<i class="icon icon-file-pdf" aria-hidden="true"></i>
 							</button>
+							<form id="download-cardholders" action="<?= base_url('descargar-archivo'); ?>" method="post"></form>
 						</div>
 					</div>
 					<table id="resultscardHolders" class="cell-border h6 display responsive w-100">
@@ -75,23 +83,11 @@
 								<th><?= lang('GEN_TABLE_CARDHOLDER'); ?></th>
 							</tr>
 						</thead>
-						<tbody>
-							<tr>
-								<td>0100951987</td>
-								<td>MARIA HERNANDEZ</td>
-							</tr>
-							<tr>
-								<td>0102676434</td>
-								<td>LUIS VILLARREAL</td>
-							</tr>
-							<tr>
-								<td>0100967652</td>
-								<td>JOSE SANCHEZ</td>
-							</tr>
-						</tbody>
+						<tbody></tbody>
 					</table>
 					<div class="line my-2"></div>
 				</div>
+			</div>
 			</div>
 		</div>
 	</div>
