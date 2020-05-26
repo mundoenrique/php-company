@@ -143,16 +143,20 @@ $(function () {
 				loginIpMsg+='</div>';
         		loginIpMsg+='</form>';
 
+				$('#formVerificationOTP input').attr('disabled', false);
 				notiSystem(response.title, loginIpMsg, response.icon,response.data);
 				windowsStyle();
 
 				formcodeOTP = $('#formVerificationOTP');
 
-				$('#send-otp-btn').on('click', function() {
+				$('#send-otp-btn').on('click', function(e) {
+					e.preventDefault();
+					e.stopImmediatePropagation();
 					btnTextOtp = $('#send-otp-btn').html();
 					formInputTrim(formcodeOTP);
 					validateForms(formcodeOTP,{handleMsg: true, modal:true});
 					if(formcodeOTP.valid()){
+						$('#formVerificationOTP input').attr('disabled', true);
 						$(this)
 						.off('click')
 						.html(loader)
@@ -216,6 +220,7 @@ function inputDisabled(disable) {
 function windowsStyle(){
 	$("#system-info").dialog("option", "minWidth", 480);
 	$("#system-info").dialog("option", "maxHeight", false);
+	$('#system-msg').css( "width", "auto" );
 
 	if(country != 'bdb'){
 		$("#label_codeOTP").addClass("line-field");
