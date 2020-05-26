@@ -18,6 +18,9 @@
 	<div class="flex flex-auto flex-column <?= $widget ? '' : 'max-width-6'; ?>">
 		<div class="flex flex-column">
 			<span class="line-text mb-2 h4 semibold primary"><?= LANG('BULK_CONFIRM'); ?></span>
+			<div id="pre-loader" class="mx-auto flex justify-center">
+				<span class="spinner-border spinner-border-lg mt-2 mb-3 none" role="status" aria-hidden="true"></span>
+			</div>
 			<div class="row px-5">
 				<div class="form-group mb-3 col-4">
 					<label for="confirmNIT" id="confirmNIT"><?= lang('GEN_FISCAL_REGISTRY') ?></label>

@@ -14,6 +14,9 @@
 
 <div class="flex mt-1 mb-5 flex-wrap justify-between">
 	<div class="flex flex-auto flex-column <?= $widget ? '' : 'max-width-6'; ?>">
+	<div id="pre-loader" class="mx-auto flex justify-center">
+		<span class="spinner-border spinner-border-lg my-2 none" role="status" aria-hidden="true"></span>
+	</div>
 		<div class="flex mb-3 mx-4 justify-center">
 			<div class="product-presentation relative">
 				<img class="card-image" src="<?= $this->asset->insertFile('programs/'.$countryUri.'/'.$productImg); ?>" alt="<?= $productName; ?>" />
