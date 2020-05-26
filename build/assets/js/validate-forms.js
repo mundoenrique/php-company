@@ -145,7 +145,7 @@ function validateForms(form, options) {
 			"idTipoLote": {pattern: numeric},
 			"id-document": {pattern: numeric},
 			"card-number": {pattern: numeric},
-			"codeOTP": {required: true, pattern: validCode },
+			"codeOTP": {required: true, pattern: validCode, maxlength: 8},
 			"saveIP": {pattern: numeric}
 		},
 		messages: {
@@ -163,7 +163,11 @@ function validateForms(form, options) {
 				equalTo: 'Debe ser igual a su nueva contraseña'
 			},
 			"start-my-date": "Falla la fecha",
-			"codeOTP": "El formato de código es inválido"
+			"codeOTP": {
+				required: lang.GEN_CODE_OTP_REQUIRED,
+				pattern: lang.GEN_CODE_OTP_INVALID_FORMAT,
+				maxlength: lang.GEN_CODE_OTP_INVALID_FORMAT
+			},
 		}
 	});
 }
