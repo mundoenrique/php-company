@@ -37,23 +37,21 @@
 									<?php endforeach; ?>
 								</select>
 								<div class="help-block"></div>
+								<input id="tamP" name="tam-p" class="hide" value="<?= $tamP ?>">
 							</div>
 							<div  class="form-group col-4 col-xl-3">
 								<label>Producto</label>
-								<div id="sad">
-								<select id="products-select" name="prodrep" class="select-box custom-select flex h6 w-100">
-
-									<?php if($products): ?>
-									<?php foreach($products AS $product): ?>
+								<select id="productCode" name = "product-code" class="select-box custom-select flex h6 w-100">
+									<?php if($productsSelect): ?>
+									<?php foreach($productsSelect AS $product): ?>
 									<option  value="<?= $product['id']; ?>" <?= $product['id'] == $currentProd ? 'selected' : ''; ?>><?= $product['desc'] ?></option>
 									<?php endforeach; ?>
 									<?php endif; ?>
 								</select>
-								</div>
+										<input id="errProd" name="err-prod" class="hide" value="<?= $prod ?>">
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-4 col-xl-3">
-
 								<label >NIT. (Opcional)</label>
 								<input id="Nit" class="form-control h5" name="nit" placeholder="Ingresar NIT">
 								<div class="help-block"></div>
@@ -70,7 +68,7 @@
 				<div class="line mb-2"></div>
 			</div>
 
-			<div  class="flex pb-5 flex-column ">
+			<div id="blockResult"  class="flex pb-5 flex-column ">
 				<span class="line-text mb-2 h4 semibold primary">Resultados Saldos al cierre</span>
 				<div id="spinnerBlockBudget" class=" hide">
 									<div id="pre-loader" class="mt-2 mx-auto flex justify-center">
@@ -79,8 +77,8 @@
 						</div>
 				<div id="blockBudgetResults" class="center mx-1 ">
 					<div id="block-btn-excel" class="flex mr-2 py-3 justify-end items-center hide">
-
-						<button id="export_excel" class="btn px-1" title="Exportar a EXCEL" data-toggle="tooltip">
+					<div class="cover-spin" ></div>
+						<button id="export_excel" class="btn px-1 big-modal" title="Exportar a EXCEL" data-toggle="tooltip">
 							<i class="icon icon-file-excel" aria-hidden="true"></i>
 						</button>
 					</div>

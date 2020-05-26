@@ -759,12 +759,10 @@ class Novo_Reports_Model extends NOVO_Model {
 				$this->response->code = 0;
 				$user = $response;
 				$this->response->data =  (array)$user;
-				$archivo = $response->archivo;
-
 
 			break;
 
-						case -3:
+			case -3:
 				$this->response->code = 4;
 				$this->response->icon = lang('GEN_ICON_DANGER');
 				$this->response->title = lang('REPORTS_TITLE');

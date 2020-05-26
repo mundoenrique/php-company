@@ -15,6 +15,7 @@ var reportsResults;
 	var table;
 
 $(function () {
+	$('#tbody-datos-general').addClass('hide');
 	$('#Nit').attr('maxlength', 10);
 	$('#pre-loader').remove();
 	$('.hide-out').removeClass('hide');
@@ -27,6 +28,8 @@ $(function () {
 	);
 
 	$('#enterprise-report').on('change', function(){
+		$('#closingBudgetsBtn').removeAttr('disabled');
+		$('#productCode').attr('disabled', 'disabled');
 		$('#products-select').empty();
 		enterpriseCode =  $('#enterprise-report').find('option:selected').attr('code');
 		enterpriseGroup =  $('#enterprise-report').find('option:selected').attr('group');
@@ -39,6 +42,7 @@ $(function () {
 			enterpriseName: enterpriseName,
 			select: true
 		};
+		var	error = $('#prad').val();
 		selectionBussine(passData)
 
 	})
@@ -47,7 +51,7 @@ $(function () {
 		this.value = (this.value + '').replace(/[^0-9]+$/i, '');
 	 });
 
-	 $('#export_excel').addClass("hide");
+	$('#export_excel').addClass("hide");
 	$('#closingBudgetsBtn').on('click', function(e){
 		$('#spinnerBlockBudget').removeClass("hide");
 		$('#blockBudgetResults').addClass("hide");
@@ -63,15 +67,16 @@ $(function () {
 
 
 	$("#export_excel").click(function(){
-		$('#export_excel').addClass("hide");
+
+
 		empresa = $('#enterprise-report').find('option:selected').attr('acrif');
 		cedula =  $("#Nit").val().replace(/ /g, '');
-		producto = $("#products-select").val();
+		producto = $("#productCode").val();
 		nomEmpresa = $('#enterprise-report').find('option:selected').attr('nomOf');
-		descProd = $("#products-select").find('option:selected').attr('value');
+		descProd = $("#productCode").find('option:selected').attr('value');
 		paginaActual = 1;
 		paginar = true;
-		tamPg = 1000;
+		tamPg = $("#tamP").val();
 
 		var passData = {
 			empresa: empresa,
@@ -83,33 +88,33 @@ $(function () {
 			paginar: paginar,
 			tamPg: tamPg
 		};
+
 		exportToExcel(passData)
 		});
 });
 
 function selectionBussine(passData) {
-	verb = "POST";
-	who = 'Business';
-	where = 'getProducts';
-	data = passData;
+	verb = "POST"; who = 'Business'; where = 'getProducts'; data = passData;
+	$("#productCode").html("");
 	callNovoCore(verb, who, where, data, function(response) {
 			dataResponse = response.data
 			code = response.code
+
 			var info = dataResponse;
-			for (var index = 0; index < info.length; index++) {
-				$('#products-select').append("<option value=" + info[index].id + " brand=" + info[index].brand + ">" + info[index].desc + "</option>");
-			}
 			if(code == 3){
-				$('#products-select').append("<option><?= lang('ERROR_(-138)'); ?></option>");
+				$('#productCode').append("<option>"+		$("#errProd").val() +"</option>");
+				$('#closingBudgetsBtn').attr('disabled', 'disabled');
+			}
+			$('#productCode').removeAttr('disabled');
+			for (var index = 0; index < info.length; index++) {
+				$('#productCode').append("<option value=" + info[index].id + " brand=" + info[index].brand + ">" + info[index].desc + "</option>");
 			}
 })
+
 }
 
 function exportToExcel(passData) {
-	verb = "POST";
-	who = 'Reports';
-	where = 'exportToExcel';
-	data = passData;
+	verb = "POST"; who = 'Reports'; where = 'exportToExcel'; data = passData;
 	callNovoCore(verb, who, where, data, function(response) {
 			dataResponse = response.data;
 			code = response.code
@@ -117,36 +122,35 @@ function exportToExcel(passData) {
 			if(code == 0){
 			var File = new Int8Array(info.archivo);
 			byteArrayFile([File], 'SaldoAlCierre.xls');
+			$('.cover-spin').removeAttr("style");
 		}
-
-		$('#export_excel').removeClass("hide");
 })
 }
 
 var byteArrayFile = (function () {
-    var a = document.createElement("a");
-    document.body.appendChild(a);
-    a.style = "display: none";
-    return function (data, name) {
-        var blob = new Blob(data, {type: "application/xls"}),
-            url = window.URL.createObjectURL(blob);
-        a.href = url;
-        a.download = name;
-        a.click();
-        window.URL.revokeObjectURL(url);
-    };
+  var a = document.createElement("a");
+  document.body.appendChild(a);
+  a.style = "display: none";
+  return function (data, name) {
+    var blob = new Blob(data, {type: "application/xls"}),
+    url = window.URL.createObjectURL(blob);
+    a.href = url;
+    a.download = name;
+    a.click();
+    window.URL.revokeObjectURL(url);
+  };
 }());
 
 function searchBudgets(){
 	$('#enterprise-report').find('option:selected').attr('acrif');
 		empresa = $('#enterprise-report').find('option:selected').attr('acrif');
 		cedula =  $("#Nit").val().replace(/ /g, '');
-		producto = $("#products-select").val();
+		producto = $("#productCode").val();
 		nomEmpresa = $('#enterprise-report').find('option:selected').attr('nomOf');
-		descProd = $("#products-select").attr("des");
+		descProd = $("#productCode").attr("des");
 		paginaActual = 1;
-		paginar = true;
-		tamPg = 20;
+		paginar = false;
+		tamPg = $("#tamP").val();
 
 		var passData = {
 			empresa: empresa,
@@ -164,18 +168,18 @@ function searchBudgets(){
 }
 
 function closingBudgets(passData) {
-	verb = "POST";
-	who = 'Reports';
-	where = 'closingBudgets';
-	data = passData;
+	verb = "POST"; who = 'Reports'; where = 'closingBudgets'; data = passData;
 	callNovoCore(verb, who, where, data, function(response) {
 		$('#spinnerBlockBudget').addClass("hide");
+		$('#tbody-datos-general').removeClass('hide');
 		var table = $('#balancesClosing').DataTable();
-	table.destroy();
+	  table.destroy();
 			dataResponse = response.data
 			code = response.code
 			if( code == 0){
 			var info = dataResponse.saldo.lista;
+
+
 			table = $('#balancesClosing').DataTable({
 				"responsive": true,
 				"ordering": false,
@@ -189,8 +193,8 @@ function closingBudgets(passData) {
 						{ data: 'saldo' },
 						{ data: 'fechaUltAct' }
 				]
-			})
-			} else{
+			})} else{
+
 				$('#balancesClosing').DataTable({
 					"responsive": true,
 					"ordering": false,
@@ -198,8 +202,8 @@ function closingBudgets(passData) {
 					"language": dataTableLang,
 				}).clear().draw();
 			}
-			$('#blockBudgetResults').removeClass("hide");
 
+			$('#blockBudgetResults').removeClass("hide");
 })
 }
 
