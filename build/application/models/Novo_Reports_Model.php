@@ -694,7 +694,7 @@ class Novo_Reports_Model extends NOVO_Model {
 				foreach($response->listadoTarjetaHabientes AS $cardHolders) {
 					$record = new stdClass();
 					$record->cardHoldersId = $cardHolders->idExtPer;
-					$record->cardHoldersName = ucfirst(mb_strtolower($cardHolders->Tarjetahabiente));
+					$record->cardHoldersName = ucwords(mb_strtolower($cardHolders->Tarjetahabiente));
 
 					array_push(
 						$cardHoldersList,
