@@ -59,7 +59,7 @@
 								</div>
 								<div class="custom-control custom-radio custom-control-inline">
 									<input type="radio" id="resultByNIT" name="results" class="custom-control-input">
-									<label class="custom-control-label mr-1" for="resultByNIT">NIT</label>
+									<label class="custom-control-label mr-1" for="resultByNIT">DNI</label>
 									<input id="resultByNIT" name="results" type="text" class="form-control col-8 col-auto visible" />
 								</div>
 								<div class="help-block"></div>
@@ -91,9 +91,11 @@
 							<button class="btn px-1" title="Exportar a PDF" data-toggle="tooltip">
 								<i class="icon icon-file-pdf" aria-hidden="true"></i>
 							</button>
+							<?php if(FALSE): ?>
 							<button class="btn px-1" title="Generar gráfica" data-toggle="tooltip">
 								<i class="icon icon-chart-pie" aria-hidden="true"></i>
 							</button>
+							<?php endif; ?>
 							<button class="btn px-1" title="Generar Comprobante Masivo" data-toggle="tooltip">
 								<i class="icon icon-file-blank" aria-hidden="true"></i>
 							</button>
