@@ -111,6 +111,42 @@ $config = [
 			'rules' => 'trim'
 		],
 	],
+	'exportToExcel' => [
+		[
+			'field' => 'idExtEmp',
+			'rules' => 'trim'
+		],
+	],
+	'exportToExcelMasterAccount' => [
+		[
+			'field' => 'idExtEmp',
+			'rules' => 'trim'
+		],
+	],
+	'exportToPDFMasterAccount' => [
+		[
+			'field' => 'idExtEmp',
+			'rules' => 'trim'
+		],
+	],
+	'exportToExcelMasterAccountConsolid' => [
+		[
+			'field' => 'idExtEmp',
+			'rules' => 'trim'
+		],
+	],
+	'exportToPDFMasterAccountConsolid' => [
+		[
+			'field' => 'idExtEmp',
+			'rules' => 'trim'
+		],
+	],
+	'masterAccount' => [
+		[
+			'field' => 'idExtEmp',
+			'rules' => 'trim'
+		],
+	],
 	'changeTelephones' => [
 		[
 			'field' => 'tlf1',

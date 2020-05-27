@@ -103,6 +103,11 @@ $route['(:any)/estado-lote'] = "Novo_Reports/statusBulk";
 $route['(:any)/id-empresa-ob'] = "Novo_Reports/obtenerIdEmpresa";
 $route['(:any)/closing-budgets'] = "Novo_Reports/closingBudgets";
 $route['(:any)/closing-budgets-excel'] = "Novo_Reports/exportToExcel";
+$route['(:any)/master-account-excel'] = "Novo_Reports/exportToExcelMasterAccount";
+$route['(:any)/master-account-pdf'] = "Novo_Reports/exportToPDFMasterAccount";
+$route['(:any)/master-account-excel-consolid'] = "Novo_Reports/exportToExcelMasterAccountConsolid";
+$route['(:any)/master-account-pdf-consolid'] = "Novo_Reports/exportToPDFMasterAccountConsolid";
+$route['(:any)/master-account'] = "Novo_Reports/masterAccount";
 
 
 //settings

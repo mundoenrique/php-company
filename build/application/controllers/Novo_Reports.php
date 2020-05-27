@@ -278,6 +278,7 @@ class Novo_Reports extends NOVO_Controller {
 			"third_party/additional-methods",
 			"reports/master_account"
 		);
+		$this->render->tamP = 1000000;
 		$this->responseAttr();
 		$this->render->titlePage = lang('GEN_MENU_REP_MASTER_ACCOUNT');
 		$this->views = ['reports/'.$view];
@@ -317,9 +318,6 @@ class Novo_Reports extends NOVO_Controller {
 		if ($this->session->flashdata('download')) {
 			$response = $this->session->flashdata('download');
 		}
-
-
-
 		$this->responseAttr($response);
 		$this->render->currentProd = $this->session->productInf->productPrefix;
 		$this->render->titlePage = lang('GEN_MENU_REP_STATUS_BULK');
