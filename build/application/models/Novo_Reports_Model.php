@@ -808,11 +808,6 @@ class Novo_Reports_Model extends NOVO_Model {
 
 			case -150:
 				$this->response->code = 1;
-				$this->response->icon = lang('GEN_ICON_DANGER');
-				$this->response->title = lang('REPORTS_TITLE');
-				$this->response->msg = lang('REPORTS_NO_BUDGET');
-				$this->response->data['btn1']['action'] = 'close';
-
 			break;
 		}
 
