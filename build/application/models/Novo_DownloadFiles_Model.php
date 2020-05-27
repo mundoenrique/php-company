@@ -166,6 +166,53 @@ class Novo_DownloadFiles_Model extends NOVO_Model {
 
 		return $this->responseToTheView('callWs_UnnmamedAffiliate');
 	}
+
+
+	public function callWs_CardHoldersReport_DownloadFiles($dataRequest)
+	{
+		log_message('INFO', 'NOVO DownloadFiles Model: CardHoldersReport Method Initialized');
+
+		$this->className = 'com.novo.objects.MO.ListadoTarjetaHabientesMO';
+		$this->dataAccessLog->modulo = 'Reportes';
+		$this->dataAccessLog->function = 'Reportes Tarjetahabiente';
+		$this->dataAccessLog->operation = 'Descarga de archivos';
+
+		switch ($dataRequest->type) {
+			case lang('GEN_BTN_DOWN_XLS'):
+				$this->dataRequest->idOperation = 'consultarTarjetaHabientesExcel';
+				$FileType = 'xls';
+			break;
+			case lang('GEN_BTN_DOWN_PDF'):
+				$this->dataRequest->idOperation = 'consultarTarjetaHabientesPDF';
+				$FileType = 'pdf';
+			break;
+		}
+
+		$this->dataRequest->paginaActual = 1;
+		$this->dataRequest->tamanoPagina = 10;
+		$this->dataRequest->paginar = false;
+		$this->dataRequest->rifEmpresa = $dataRequest->acrif;
+		$this->dataRequest->nombreEmpresa = $dataRequest->enterpriseName;
+		$this->dataRequest->idProducto = $dataRequest->productLots;
+		$this->dataRequest->nombreProducto = $dataRequest->productName;
+
+		$response = $this->sendToService('callWs_CardHoldersReport');
+
+		switch ($this->isResponseRc) {
+			case 0:
+				exportFile($response->archivo, $FileType, 'Tarjetas_habientes');
+				break;
+			default:
+				$dataRequest->code = 0;
+				$this->responseFail_DownloadFiles($dataRequest);
+				$this->session->set_flashdata('download', $this->response);
+				redirect(base_url(lang('GEN_LINK_REP_CARDHOLDERS')), 'location', 301);
+		}
+
+
+		return $this->responseToTheView('callWs_UnnmamedAffiliate');
+	}
+
 	/**
 	 * @info Arma respuesta en caso de falla de la descarga del archivo
 	 * @author J. Enrique Peñaloza Piñero

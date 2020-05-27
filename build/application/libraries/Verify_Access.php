@@ -246,7 +246,11 @@ class Verify_Access {
 					break;
 				case 'statusBulk':
 					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPLOT'));
-					break;
+				break;
+				case 'cardHolders':
+					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBTHA'));
+				break;
+
 			}
 		}
 
