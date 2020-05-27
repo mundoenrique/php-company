@@ -7536,9 +7536,28 @@ body .ui-tooltip {
 margin-bottom: 0;
 }
 
-.justify{
-text-align: justify !important
+#formVerificationOTP {
+	font-family: "Prelo Medium", sans-serif;
+	color: #72787A;
+	font-size: 16px;
 }
+
+input.form-control {
+	font-size: 12px;
+}
+
+.custom-control-label {
+	font-size: 14px;
+}
+
+.justify {
+	text-align: justify !important
+}
+
+.semibold {
+	font-weight: 700;
+}
+
 
 .help-block {
 height: 1rem;

@@ -237,7 +237,9 @@ function windowsStyle(){
 			float : "none",
 			margin: "auto"
 		};
-		$("#system-info .ui-dialog-buttonpane").css(styles);
+		$("#system-info .ui-dialog-buttonpane").css(styles).removeClass("modal-buttonset");
+		$("#system-info .ui-dialog-buttonset").removeClass("modal-buttonset");
+		$("#system-info .btn-modal").removeClass("modal-btn-primary");
 	}
 	else {
 		$("#system-info").dialog("option", "position", {
