@@ -67,10 +67,10 @@
 				<div class="center mx-1">
 					<div class="flex">
 						<div class="flex mr-2 py-3 flex-auto justify-end items-center download">
-							<button class="btn px-1" title="<?= lang('GEN_BTN_DOWN_XLS'); ?>" data-toggle="tooltip">
+							<button class="btn px-1 big-modal" title="<?= lang('GEN_BTN_DOWN_XLS'); ?>" data-toggle="tooltip">
 								<i class="icon icon-file-excel" aria-hidden="true"></i>
 							</button>
-							<button class="btn px-1" title="<?= lang('GEN_BTN_DOWN_PDF'); ?>" data-toggle="tooltip">
+							<button class="btn px-1 big-modal" title="<?= lang('GEN_BTN_DOWN_PDF'); ?>" data-toggle="tooltip">
 								<i class="icon icon-file-pdf" aria-hidden="true"></i>
 							</button>
 							<form id="download-cardholders" action="<?= base_url('descargar-archivo'); ?>" method="post"></form>
