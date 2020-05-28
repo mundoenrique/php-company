@@ -69,7 +69,8 @@
 								</div>
 								<div class="help-block"></div>
 							</div>
-							<div class="form-group col-4 col-lg-3 col-xl-3">
+
+							<div  class="form-group col-4 col-lg-3 col-xl-3">
 								<label for="initialDate"><?= lang('GEN_START_DAY'); ?></label>
 								<input id="initialDate" name="datepicker_start" class="form-control date-picker" type="text"
 									placeholder="<?= lang('GEN_PLACE_DATE_COMPLETTE'); ?>" readonly required>
@@ -82,6 +83,7 @@
 									placeholder="<?= lang('GEN_PLACE_DATE_COMPLETTE'); ?>" readonly required>
 								<div class="help-block "></div>
 							</div>
+
 							<div class="flex items-center justify-end col-4 col-lg-4 col-xl-6 ml-auto">
 								<button id="masterAc-btn" name ="masterAc_btn"class="btn btn-primary btn-small" type="button">
 									Buscar
@@ -117,10 +119,10 @@
 								<i class="icon icon-chart-pie" aria-hidden="true"></i>
 							</button>
 							<?php endif; ?>
-							<button id="export_excelCons" class="btn px-1" title="Exportar a EXCEL consolidado" data-toggle="tooltip">
+							<button id="export_excelCons" class="btn px-1 big-modal" title="Exportar a EXCEL consolidado" data-toggle="tooltip">
 								<i class="icon icon-file-excel" aria-hidden="true"></i>
 							</button>
-							<button id="export_pdfCons" class="btn px-1" title="Exportar a PDF consolidado" data-toggle="tooltip">
+							<button id="export_pdfCons" class="btn px-1 big-modal" title="Exportar a PDF consolidado" data-toggle="tooltip">
 								<i class="icon icon-file-pdf" aria-hidden="true"></i>
 							</button>
 						</div>
@@ -152,29 +154,7 @@
 	<?php $this->load->view('widget/widget_enterprise-product_content'.$newViews, $widget) ?>
 	<?php endif; ?>
 </div>
-<div id="dialogEx" title="Basic dialog" class="hide">
-			<div class="form-group ">
-								<label >Año</label>
-								<select name="anio-consolid-excel" class="date-picker-year select-box custom-select mt-1 mb-4 h6 items-center flex flex-column" id="anio-consolid-excel">
 
-								</select>
-							</div>
 
-							<div class="flex items-center justify-center col-sm-12 col-xl-3">
-								<button type="button" id="excelConsolidBtn" class="btn btn-primary btn-small big-modal">
-									Buscar
-								</button>
-		</div>
-		<div id="dialogPd" title="Basic dialog" class="hide">
-			<div class="form-group ">
-								<label >Año</label>
-								<select name="anio-consolid-pdf" class="date-picker-year" id="anio-consolid-pdf">
 
-								</select>
-							</div>
 
-							<div class="flex items-center justify-center col-sm-12 col-xl-3">
-								<button type="button" id="pdfConsolidBtn" class="btn btn-primary btn-small big-modal">
-									Buscar
-								</button>
-		</div>

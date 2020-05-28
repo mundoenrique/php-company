@@ -1,16 +1,12 @@
 'use strict'
 var table;
+var modalReq = {};
+var fecha = new Date();
+fecha = fecha.getFullYear();
+
 $(function () {
 
-	var fecha = new Date();
-	fecha = fecha.getFullYear();
-	var i=0;
-	var anio;
-	do{
-		anio= parseInt(fecha)-i;
-		$(".date-picker-year").append('<option value="'+anio.toString()+'">'+anio.toString()+'</option>');
-		i=i+1;
-	}while(i!=20);
+
 	$('#tbody-datos-general').addClass('hide');
 	$("#credit").val('');
 	$("#debit").val('');
@@ -18,7 +14,7 @@ $(function () {
 
 	if($("input[name='results']:checked").val() != 0){
 		$("#initialDate ").attr('required', 'required');
-			$("#finalDate ").attr('required', 'required');
+		$("#finalDate ").attr('required', 'required');
 	}
 
 	table = $('#balancesClosing').DataTable({
@@ -84,48 +80,170 @@ $(function () {
 		}
 });
 
-
 	$("#export_excel").click(function(){
 		excelExport();
 	});
 	$("#export_pdf").click(function(){
 		pdfExport();
 	});
-	$("#export_pdfCons").click(function(){
-		dialogPdf();
+	$("#export_pdfCons").click(function(e){
+		dialogPdf(e);
 	});
-	$("#export_excelCons").click(function(){
-		dialogExcel();
+	$("#export_excelCons").click(function(e){
+		dialogExcel(e);
 	});
-
 });
 
-function dialogExcel(){
-	$( "#dialogEx" ).dialog({
-		modal:true,
-		resizable: true,
-		title:"Selección de Año",
-		width:"250px",
-		maxheight:"200px",
-});
-}
+function dialogExcel(e){
 
-function dialogPdf(){
-	$( "#dialogPd" ).dialog({
-		modal:true,
-		resizable: true,
-		title:"Selección de Año",
-		width:"250px",
-		maxheight:"200px",
-});
-}
+	e.preventDefault();
+	var event = $(e.currentTarget);
+	var action = event.attr('title');
+	var submitForm = false;
+	$(this).closest('tr').addClass('select');
 
-$('#excelConsolidBtn').on('click', function(){
-	excelExportConsolid();
+	switch(action) {
+
+		case 'Exportar a EXCEL consolidado':
+			var titleModal = 'Exportar a EXCEL de consolidado';
+			var textModal = 'Selección de año';
+			var cancelDelete = $('#cancel');
+			var bulkNum = $(this).closest('tr').find('td:nth-child(2)').text();
+			var inputModal;
+			modalReq['table'] = $(this).closest('table');
+			data = {
+				btn1: {
+					text: lang.GEN_BTN_DOWNLOAD,
+					action:'close'
+				},
+				btn2: {
+					action: 'close'
+				}
+			}
+
+			inputModal = 	'<form id="delete-bulk-form" class="form-group">';
+			inputModal+= 		'<span class="regular"> '+textModal+': '+bulkNum+'</span>';
+			inputModal+= 		'<div class="input-group">';
+			inputModal+= 			'<select name="anio-consolid-excel"class="date-picker-year select-box custom-select ml-1 h6" id="anio-consolid-excel"><option selected disabled >"Selecccione año"</option></select>';
+			inputModal+= 		'</div>';
+			inputModal+= 		'<div class="help-block"></div>';
+			inputModal+=	'</form>';
+			notiSystem(titleModal, inputModal, lang.GEN_ICON_INFO, data);
+
+			var i=0;
+			var anioB;
+			do{
+				anioB= parseInt(fecha)-i;
+				$(".date-picker-year").append('<option value="'+anioB.toString()+'">'+anioB.toString()+'</option>');
+				i=i+1;
+			}while(i!=20);
+			break;
+	}
+
+	if(submitForm) {
+		form.submit();
+	}
+	$('#accept').addClass('big-modal');
+
+$('#accept').on('click', function(){
+	var anio = $('#anio-consolid-excel').find('option:selected').val();
+	var	idExtEmp = $('#enterprise-report').find('option:selected').attr('acrif');
+	var fechaIni = $("#initialDate").val();
+	var fechaFin = $("#finalDate").val();
+	var	filtroFecha = $("input[name='results']:checked").val();
+	var	nombreEmpresa = $('#enterprise-report').find('option:selected').attr('nomOf');
+	var	tamanoPagina = $("#tamP").val();
+	var	paginaActual = "1";
+		var passData = {
+			idExtEmp: idExtEmp,
+			anio: anio,
+			fechaIni: fechaIni,
+			fechaFin: fechaFin,
+			filtroFecha: filtroFecha,
+			nombreEmpresa: nombreEmpresa,
+			paginaActual: paginaActual,
+			tamanoPagina: tamanoPagina
+		};
+		exportToExcelConsolid(passData)
 })
-$('#pdfConsolidBtn').on('click', function(){
-	pdfExportConsolid();
+
+};
+
+
+function dialogPdf(e){
+
+	e.preventDefault();
+	var event = $(e.currentTarget);
+	var action = event.attr('title');
+	var submitForm = false;
+	$(this).closest('tr').addClass('select');
+
+	switch(action) {
+
+		case 'Exportar a PDF consolidado':
+			var titleModal = 'Exportar a PDF de consolidado';
+			var anio1;
+			var textModal = 'Selección de año';
+			var cancelDelete = $('#cancel');
+			var bulkNum = $(this).closest('tr').find('td:nth-child(2)').text();
+			var inputModal;
+			modalReq['table'] = $(this).closest('table');
+			data = {
+				btn1: {
+					text: lang.GEN_BTN_DOWNLOAD,
+					action: 'close'
+				},
+				btn2: {
+					action: 'close'
+				}
+			}
+			inputModal = 	'<form id="delete-bulk-form" class="form-group">';
+			inputModal+= 		'<span class="regular"> '+textModal+': '+bulkNum+'</span>';
+			inputModal+= 		'<div class="input-group">';
+			inputModal+= 			'<select name="anio-consolid-pdf" class="date-picker-year select-box custom-select ml-1 h6" id="anio-consolid-pdf"><option disabled selected>"Selecccione año"</option></select>';
+			inputModal+= 		'</div>';
+			inputModal+= 		'<div class="help-block"></div>';
+			inputModal+=	'</form>';
+			notiSystem(titleModal, inputModal, lang.GEN_ICON_INFO, data);
+			break;
+	}
+	var i=0;
+	var anio;
+	do{
+		anio= parseInt(fecha)-i;
+		$(".date-picker-year").append('<option value="'+anio.toString()+'">'+anio.toString()+'</option>');
+		i=i+1;
+	}while(i!=20);
+	if(submitForm) {
+		form.submit();
+	}
+
+$('#accept').on('click', function(){
+
+	var anio = $('#anio-consolid-pdf').find('option:selected').val();
+	var	idExtEmp = $('#enterprise-report').find('option:selected').attr('acrif');
+	var fechaIni = $("#initialDate").val();
+	var fechaFin = $("#finalDate").val();
+	var	filtroFecha = $("input[name='results']:checked").val();
+	var	nombreEmpresa = $('#enterprise-report').find('option:selected').attr('nomOf');
+	var	tamanoPagina = $("#tamP").val();
+	var	paginaActual = "1";
+
+		var passData = {
+			idExtEmp: idExtEmp,
+			anio: anio,
+			fechaIni: fechaIni,
+			fechaFin: fechaFin,
+			filtroFecha: filtroFecha,
+			nombreEmpresa: nombreEmpresa,
+			paginaActual: paginaActual,
+			tamanoPagina: tamanoPagina
+		};
+
+		exportToPDFConsolid(passData)
 })
+
+};
 
 function excelExport(){
 	var	idExtEmp = $('#enterprise-report').find('option:selected').attr('acrif');
@@ -147,31 +265,6 @@ function excelExport(){
 };
 
 		exportToExcel(passData)
-	};
-
-	function excelExportConsolid(){
-		$('#dialogEx').dialog('close');
-		var anio = $('#anio-consolid-excel').find('option:selected').val();
-		var	idExtEmp = $('#enterprise-report').find('option:selected').attr('acrif');
-		var fechaIni = $("#initialDate").val();
-		var fechaFin = $("#finalDate").val();
-		var	filtroFecha = $("input[name='results']:checked").val();
-		var	nombreEmpresa = $('#enterprise-report').find('option:selected').attr('nomOf');
-		var	tamanoPagina = $("#tamP").val();
-		var	paginaActual = "1";
-
-			var passData = {
-				idExtEmp: idExtEmp,
-				anio: anio,
-				fechaIni: fechaIni,
-				fechaFin: fechaFin,
-				filtroFecha: filtroFecha,
-				nombreEmpresa: nombreEmpresa,
-				paginaActual: paginaActual,
-				tamanoPagina: tamanoPagina
-			};
-
-			exportToExcelConsolid(passData)
 	};
 
 	function pdfExport(){
@@ -196,30 +289,7 @@ function excelExport(){
 			exportToPDF(passData)
 		};
 
-	function pdfExportConsolid(){
-			$('#dialogPd').dialog('close');
-			var anio = $('#anio-consolid-pdf').find('option:selected').val();
-			var	idExtEmp = $('#enterprise-report').find('option:selected').attr('acrif');
-			var fechaIni = $("#initialDate").val();
-			var fechaFin = $("#finalDate").val();
-			var	filtroFecha = $("input[name='results']:checked").val();
-			var	nombreEmpresa = $('#enterprise-report').find('option:selected').attr('nomOf');
-			var	tamanoPagina = $("#tamP").val();
-			var	paginaActual = "1";
 
-				var passData = {
-					idExtEmp: idExtEmp,
-					anio: anio,
-					fechaIni: fechaIni,
-					fechaFin: fechaFin,
-					filtroFecha: filtroFecha,
-					nombreEmpresa: nombreEmpresa,
-					paginaActual: paginaActual,
-					tamanoPagina: tamanoPagina
-				};
-
-				exportToPDFConsolid(passData)
-			};
 	var byteArrayFile = (function () {
 		var a = document.createElement("a");
 		document.body.appendChild(a);
@@ -414,3 +484,4 @@ function masterAccount(passData) {
 			$('#files-btn').removeClass("hide");
 })
 }
+

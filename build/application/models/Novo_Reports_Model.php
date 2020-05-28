@@ -811,7 +811,7 @@ class Novo_Reports_Model extends NOVO_Model {
 			break;
 		}
 
-		return $this->responseToTheView('callWs_masterAccount');
+		return $this->response;
 	}
 
 		/**
