@@ -166,7 +166,7 @@ $config = [
 		[
 			'field' => 'enterpriseName',
 			'label' => 'enterpriseName',
-			'rules' => 'trim|regex_match[/^([\w-.,#ñÑáéíóúÑÁÉÍÓÚ\(\)&:\+]+[\s]*)+$/i]|required'
+			'rules' => 'trim|regex_match[/^([\w-.,#ñÑáéíóúÑÁÉÍÓÚ\(\)&:\+]+[\s]*)+$/i]'
 		]
 
 	],

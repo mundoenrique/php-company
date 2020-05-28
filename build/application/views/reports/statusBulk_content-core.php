@@ -25,11 +25,12 @@
 						<div class="row flex justify-between">
 							<div class="form-group col-4 col-xl-3">
 								<label><?= lang('GEN_ENTERPRISE'); ?></label>
-								<select id="enterpriseCode" name="enterpriseCode" class="select-box custom-select flex h6 w-100">
+								<select id="enterpriseCode" name="enterpriseCode" class="select-box custom-select flex h6 w-100 enterprise-getprod">
 									<?php foreach($enterpriseList AS $enterprise) : ?>
 									<?php if($enterprise->acrif == $enterpriseData->idFiscal): ?>
 									<?php endif;?>
-									<option value="<?= $enterprise->accodcia; ?>" <?= $enterprise->acrif == $enterpriseData->idFiscal ? 'selected' : '' ?>>
+									<option value="<?= $enterprise->accodcia; ?>" <?= $enterprise->acrif == $enterpriseData->idFiscal ? 'selected' : '' ?>
+										id-fiscal="<?= $enterprise->acrif; ?>">
 										<?= $enterprise->acnomcia; ?>
 									</option>
 									<?php endforeach; ?>
@@ -39,7 +40,7 @@
 							<div class="form-group col-4 col-xl-3">
 								<label><?= lang('GEN_PRODUCT'); ?></label>
 								<select id="productCode" name="productCode" class="select-box custom-select flex h6 w-100">
-									<option selected disabled><?= $selectProducts ?></option>
+									<option disabled><?= $selectProducts ?></option>
 									<?php if($productsSelect): ?>
 									<?php foreach($productsSelect AS $product): ?>
 									<option value="<?= $product['id']; ?>" <?= $product['id'] == $currentProd ? 'selected' : ''; ?>><?= $product['desc'] ?></option>
@@ -71,19 +72,23 @@
 				</div>
 				<div class="line mb-2"></div>
 			</div>
-			<div id="pre-loade-result" class="mt-2 mx-auto hide"></div>
+			<div id="pre-loade-result" class="mt-2 mx-auto hide">
+				<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
+			</div>
 			<div class="w-100 statusbulk-result hide">
 				<div class="flex pb-5 flex-column">
 					<span class="line-text mb-2 h4 semibold primary">Resultados</span>
 					<div class="center mx-1">
 						<div class="flex">
 							<div class="flex mr-2 py-3 flex-auto justify-end items-center download">
-								<button class="btn px-1 big-modal" title="<?= lang('GEN_BTN_DOWN_XLS'); ?>" data-toggle="tooltip">
-									<i class="icon icon-file-excel" aria-hidden="true"></i>
-								</button>
-								<button class="btn px-1 big-modal" title="<?= lang('GEN_BTN_DOWN_PDF'); ?>" data-toggle="tooltip">
-									<i class="icon icon-file-pdf" aria-hidden="true"></i>
-								</button>
+								<div class="download-icons">
+									<button class="btn px-1 big-modal" title="<?= lang('GEN_BTN_DOWN_XLS'); ?>" data-toggle="tooltip">
+										<i class="icon icon-file-excel" aria-hidden="true"></i>
+									</button>
+									<button class="btn px-1 big-modal" title="<?= lang('GEN_BTN_DOWN_PDF'); ?>" data-toggle="tooltip">
+										<i class="icon icon-file-pdf" aria-hidden="true"></i>
+									</button>
+								</div>
 								<form id="download-status" action="<?= base_url('descargar-archivo'); ?>" method="post"></form>
 							</div>
 						</div>

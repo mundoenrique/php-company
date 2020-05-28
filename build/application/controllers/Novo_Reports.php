@@ -290,7 +290,8 @@ class Novo_Reports extends NOVO_Controller {
 			"third_party/jquery.validate",
 			"validate-core-forms",
 			"third_party/additional-methods",
-			"reports/status_bulk"
+			"reports/statusBulk",
+			"reports/getproductsReports"
 		);
 		$this->request->select = TRUE;
 		$this->request->idFiscal = $this->session->enterpriseInf->idFiscal;
@@ -329,7 +330,8 @@ class Novo_Reports extends NOVO_Controller {
 			"third_party/jquery.validate",
 			"validate-core-forms",
 			"third_party/additional-methods",
-			"reports/cardholders"
+			"reports/cardholders",
+			"reports/getproductsReports"
 		);
 
 		$this->request->select = TRUE;

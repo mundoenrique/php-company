@@ -15,11 +15,8 @@ $(function () {
 		if (form.valid()) {
 			data = getDataForm(form);
 			insertFormInput(true);
-			cardHolderBtn.html(loader);
 			$('.cardholders-result').addClass('hide');
-			$('#pre-loade-result')
-				.removeClass('hide')
-				.html(loader);
+			$('#pre-loade-result').removeClass('hide');
 			resultscardHolders.dataTable().fnClearTable();
 			resultscardHolders.dataTable().fnDestroy();
 			verb = "POST"; who = 'Reports'; where = 'CardHolders';
@@ -32,6 +29,12 @@ $(function () {
 				});
 
 				if (response.code == 0) {
+					if (response.data.length == 0) {
+						$('.download-icons').addClass('hide')
+					} else {
+						$('.download-icons').removeClass('hide')
+					}
+
 					$.each(response.data, function (index, value) {
 						table.row.add([
 							value.cardHoldersId,
@@ -40,8 +43,8 @@ $(function () {
 					});
 					form = $('#download-cardholders');
 					form.html('')
-					$.each(data, function(index, value) {
-						if(index != 'screenSize') {
+					$.each(data, function (index, value) {
+						if (index != 'screenSize') {
 							form.append('<input type="hidden" name="'+index+'" value="'+value+'">')
 						}
 					});
@@ -49,23 +52,21 @@ $(function () {
 
 				insertFormInput(false);
 				cardHolderBtn.html(btnText);
-				$('#pre-loade-result')
-					.addClass('hide')
-					.html('');
+				$('#pre-loade-result').addClass('hide')
 				$('.cardholders-result').removeClass('hide');
 			})
 		}
 	});
 
-	downLoad.on('click', 'button', function(e) {
+	downLoad.on('click', 'button', function (e) {
 		e.preventDefault();
 		var event = $(e.currentTarget);
 		var action = event.attr('title');
 
-		var enterpriseName = $('option:selected',"#enterpriseCode").text().trim();
-		var acrif = $('option:selected',"#enterpriseCode").val().trim();
-		var productName = $('option:selected',"#productCode").text().trim();
-		var productLots = $('option:selected',"#productCode").val().trim();
+		var enterpriseName = $('option:selected', "#enterpriseCode").text().trim();
+		var acrif = $('option:selected', "#enterpriseCode").val().trim();
+		var productName = $('option:selected', "#productCode").text().trim();
+		var productLots = $('option:selected', "#productCode").val().trim();
 
 		form = $('#download-cardholders');
 		form.append('<input type="hidden" name="type" value="' + action + '"></input>');
