@@ -144,6 +144,9 @@ function dialogExcel(e){
 		form.submit();
 	}
 	$('#accept').addClass('big-modal');
+	$('#cancel').on('click', function(){
+		$('.cover-spin').removeAttr("style");
+	})
 
 $('#accept').on('click', function(){
 	var anio = $('#anio-consolid-excel').find('option:selected').val();
@@ -205,18 +208,23 @@ function dialogPdf(e){
 			inputModal+= 		'<div class="help-block"></div>';
 			inputModal+=	'</form>';
 			notiSystem(titleModal, inputModal, lang.GEN_ICON_INFO, data);
+			var i=0;
+			var anio;
+			do{
+				anio= parseInt(fecha)-i;
+				$(".date-picker-year").append('<option value="'+anio.toString()+'">'+anio.toString()+'</option>');
+				i=i+1;
+			}while(i!=20);
 			break;
 	}
-	var i=0;
-	var anio;
-	do{
-		anio= parseInt(fecha)-i;
-		$(".date-picker-year").append('<option value="'+anio.toString()+'">'+anio.toString()+'</option>');
-		i=i+1;
-	}while(i!=20);
+
 	if(submitForm) {
 		form.submit();
 	}
+
+	$('#cancel').on('click', function(){
+		$('.cover-spin').removeAttr("style");
+	})
 
 $('#accept').on('click', function(){
 
