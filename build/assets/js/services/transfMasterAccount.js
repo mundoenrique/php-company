@@ -178,13 +178,13 @@ function dataTableBuild(dataForm) {
 						options+=		'</button>';
 					}
 
-					if (!access.TRABLQ) {
+					if (access.TRABLQ) {
 						options+=		'<button class="btn mx-1 px-0" title="Bloqueo tarjeta" data-toggle="tooltip">';
 						options+=			'<i class="icon novoglyphs icon-lock" aria-hidden="true"></i>';
 						options+=		'</button>';
 					}
 
-					if (!access.TRAASG) {
+					if (access.TRAASG) {
 						options+=		'<button class="btn mx-1 px-0" title="Asignación tarjeta" data-toggle="tooltip">';
 						options+=			'<i class="icon novoglyphs icon-arrow-left" aria-hidden="true"></i>';
 						options+=		'</button>';
