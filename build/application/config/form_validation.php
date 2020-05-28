@@ -407,7 +407,7 @@ $config = [
 		[
 			'field' => 'statusText',
 			'label' => 'statusText',
-			'rules' => 'trim|regex_match[/^([\wñáéíóú ]*)+$/i]'
+			'rules' => 'trim|regex_match[/^([\w-ñáéíóú ]+[\s]*)+$/i]'
 		]
 	],
 	'getReport' => [
@@ -483,6 +483,28 @@ $config = [
 			'field' => 'issuanDate',
 			'label' => 'issuanDate',
 			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+		]
+	],
+	'transfMasterAccount' => [
+		[
+			'field' => 'idNumber',
+			'label' => 'idNumber',
+			'rules' => 'trim|alpha_numeric'
+		],
+		[
+			'field' => 'cardNumber',
+			'label' => 'cardNumber',
+			'rules' => 'trim|integer'
+		],
+		[
+			'field' => 'draw',
+			'label' => 'draw',
+			'rules' => 'trim|integer|required'
+		],
+		[
+			'field' => 'length',
+			'label' => 'length',
+			'rules' => 'trim|integer|required'
 		]
 	],
 	'statusBulk' => [

@@ -18,6 +18,7 @@ function validateForms(form) {
 	var text = /^['a-z0-9ñáéíóú ,.:()']+$/i;
 	var usdAmount = /^[0-9]+(\.[0-9]*)?$/;
 	var fiscalReg = lang.VALIDATE_FISCAL_REGISTRY;
+	var idNumberReg = new RegExp(lang.VALIDATE_REG_ID_NUMBER, 'i');
 	var date = {
 		dmy: /^(0?[1-9]|[12][0-9]|3[01])\/(0?[1-9]|1[012])\/[0-9]{4}$/,
 		my: /^(0?[1-9]|1[012])\/[0-9]{4}$/,
@@ -105,6 +106,8 @@ function validateForms(form) {
 			"productName": {required: true},
 			"initialDate": {required: true, pattern: date.dmy},
 			"finalDate": {required: true, pattern: date.dmy},
+			"idNumber": {pattern: idNumberReg},
+			"cardNumber": {pattern: numeric, maxlength: 16, minlength: 16},
 		},
 		messages: {
 			"user_login": lang.VALIDATE_USERLOGIN,
@@ -160,6 +163,8 @@ function validateForms(form) {
 			"bulk-number": lang.VALIDATE_BULK_NUMBER,
 			"initialDate": lang.VALIDATE_DATE_DMY,
 			"finalDate": lang.VALIDATE_DATE_DMY,
+			"idNumber": lang.VALIDATE_ID_NUMBER,
+			"cardNumber": lang.VALIDATE_CARD_NUMBER,
 		},
 		errorPlacement: function(error, element) {
 			$(element).closest('.form-group').find('.help-block').html(error.html());

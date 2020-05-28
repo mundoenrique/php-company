@@ -26,6 +26,7 @@ $lang['VALIDATE_ORDER_STATUS'] = 'Selecciona un estado de orden';
 $lang['VALIDATE_SELECTED_DATE'] = 'Selecciona una fecha válida mm/aa';
 $lang['VALIDATE_SELECTED_YEAR'] = 'Selecciona un año disponible';
 $lang['VALIDATE_ID_TYPE'] = 'Selecciona un tipo de identificación';
+$lang['VALIDATE_REG_ID_NUMBER'] = '/^[0-9]+$/';
 $lang['VALIDATE_ID_NUMBER'] = 'Indica un número de identificación válido, solo dígitos';
 $lang['VALIDATE_LENGHT_NUMBER'] = 'El número es demasiado largo';
 $lang['VALIDATE_PHONE_REQ'] = 'Este teléfono es requerido';
