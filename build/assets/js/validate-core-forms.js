@@ -106,6 +106,7 @@ function validateForms(form) {
 			"productName": {required: true},
 			"initialDate": {required: true, pattern: date.dmy},
 			"finalDate": {required: true, pattern: date.dmy},
+			"anio-consolid": {required: true},
 		},
 		messages: {
 			"user_login": lang.VALIDATE_USERLOGIN,
@@ -116,6 +117,7 @@ function validateForms(form) {
 			"user-name": lang.VALIDATE_USERNAME,
 			"nit": lang.VALIDATE_USERNAME,
 			"id-company": lang.VALIDATE_ID_COMPANY,
+			"anio-consolid-pdf": lang.VALIDATE_SELECTED_YEAR,
 			"email": lang.VALIDATE_EMAIL,
 			"current-pass": lang.VALIDATE_CURRENT_PASS,
 			"new-pass": {

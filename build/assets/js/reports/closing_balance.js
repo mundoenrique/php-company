@@ -15,7 +15,7 @@ var reportsResults;
 	var table;
 
 $(function () {
-	$('#tbody-datos-general').addClass('hide');
+	$('#blockBudgetResults').addClass('hide');
 	$('#Nit').attr('maxlength', 10);
 	$('#pre-loader').remove();
 	$('.hide-out').removeClass('hide');
