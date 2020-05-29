@@ -221,7 +221,7 @@ $config = [
 		[
 			'field' => 'enterpriseName',
 			'label' => 'enterpriseName',
-			'rules' => 'trim|regex_match[/^([\w-.,#ñÑáéíóúÑÁÉÍÓÚ\(\)&:\+]+[\s]*)+$/i]|required'
+			'rules' => 'trim|regex_match[/^([\w-.,#ñÑáéíóúÑÁÉÍÓÚ\(\)&:\+]+[\s]*)+$/i]'
 		]
 
 	],
@@ -561,6 +561,18 @@ $config = [
 			'label' => 'finalDate',
 			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
 		]
+	],
+	'cardHolders' => [
+		[
+			'field' => 'enterpriseCode',
+			'label' => 'enterpriseCode',
+			'rules' => 'trim|regex_match[/^[a-z0-9]+$/i]|required'
+		],
+		[
+			'field' => 'productCode',
+			'label' => 'enterpriseCode',
+			'rules' => 'trim|regex_match[/^[a-z0-9]+$/i]|required'
+		],
 	],
 	'keepSession' => [
 		[

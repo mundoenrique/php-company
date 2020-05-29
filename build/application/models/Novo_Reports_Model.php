@@ -1010,4 +1010,40 @@ class Novo_Reports_Model extends NOVO_Model {
 	}
 
 
+
+	public function callWs_CardHolders_Reports($dataRequest)
+	{
+		log_message('INFO', 'NOVO Reports Model: CardHolders Method Initialized');
+		$this->dataAccessLog->modulo = 'Reportes';
+		$this->dataAccessLog->function = 'TarjetaHabientes';
+		$this->dataAccessLog->operation = 'Lista TarjetaHabientes';
+		$this->dataRequest->idOperation = 'getConsultarTarjetaHabientes';
+		$this->className = 'com.novo.objects.MO.TarjetaHabientesMO';
+		$this->dataRequest->paginaActual = 1;
+		$this->dataRequest->tamanoPagina = 10;
+		$this->dataRequest->paginar = true;
+		$this->dataRequest->rifEmpresa = $dataRequest->enterpriseCode;
+		$this->dataRequest->idProducto = $dataRequest->productCode;
+		$response = $this->sendToService('callWS_StatusCardHolders');
+		$cardHoldersList = [];
+		switch($this->isResponseRc) {
+			case 0:
+				$this->response->code = 0;
+				foreach($response->listadoTarjetaHabientes AS $cardHolders) {
+					$record = new stdClass();
+					$record->cardHoldersId = $cardHolders->idExtPer;
+					$record->cardHoldersName = ucwords(mb_strtolower($cardHolders->Tarjetahabiente));
+					array_push(
+						$cardHoldersList,
+						$record
+					);
+				}
+			break;
+			case -150:
+				$this->response->code = 0;
+			break;
+		}
+		$this->response->data = $cardHoldersList;
+		return $this->responseToTheView('callWS_StatusCardHolders');
+	}
 }
