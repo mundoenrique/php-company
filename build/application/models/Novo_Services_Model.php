@@ -57,6 +57,7 @@ class Novo_Services_Model extends NOVO_Model {
 					$record->cardNumber = $cards->noTarjetaConMascara;
 					$record->name = $cards->NombreCliente;
 					$record->idNumber = $cards->id_ext_per;
+					$record->amount = '0'.lang('GEN_DECIMAL').'00';
 					array_push(
 						$cardsList,
 						$record
@@ -106,5 +107,86 @@ class Novo_Services_Model extends NOVO_Model {
 		}
 
 		return $this->responseToTheView('callWs_TransfMasterAccount');
+	}
+	/**
+	 * @info Método para
+	 * @author
+	 */
+	public function callWs_ActionMasterAccount_Services($dataRequest)
+	{
+		log_message('INFO', 'NOVO Services Model: ActionMasterAccount Method Initialized');
+
+		$this->className = 'com.novo.objects.MO.TransferenciaMO';
+
+		$this->dataAccessLog->modulo = 'Servicios';
+		$this->dataAccessLog->function = 'Transferencia maestra';
+		$this->dataAccessLog->operation = 'Obtener lista de tarjetas';
+
+		$cardsList = [];
+
+		foreach($dataRequest->cards AS $cardsInfo) {
+			$cardsInfo = json_decode($cardsInfo);
+			$card  = [
+				'noTarjeta' => $cardsInfo->Cardnumber,
+				'id_ext_per' => $cardsInfo->idNumber,
+				'montoTransaccion' => $cardsInfo->amount
+			];
+			if ($dataRequest->action == 'Consulta saldo' || $dataRequest->action == 'consulta') {
+				unset($card['montoTransaccion']);
+			}
+			$cardsList[] = $card;
+		}
+
+		$this->dataRequest->rifEmpresa = $this->session->enterpriseInf->idFiscal;
+		$this->dataRequest->idProducto = $this->session->productInf->productPrefix;
+		$this->dataRequest->listaTarjetas = [
+			[
+				'paginaActual' => 1,
+				'tamanoPagina' => 1,
+				'paginar' => FALSE
+			]
+		];
+		$this->dataRequest->listadoTarjetas = [
+			'lista' => $cardsList
+		];
+		$password = json_decode(base64_decode($dataRequest->pass));
+		$password = $this->cryptography->decrypt(
+			base64_decode($password->plot),
+			utf8_encode($password->password)
+		);
+		$this->dataRequest->usuario = [
+			'userName' => $this->session->userName,
+			'password' => md5($password)
+		];
+
+		switch ($dataRequest->action) {
+			case 'Consulta saldo':
+			case 'consulta':
+				$this->dataRequest->idOperation = 'saldoTM';
+				break;
+			case 'Abono tarjeta':
+			case 'abono':
+				$this->dataRequest->idOperation = 'saldoTM';
+				break;
+			case 'Cargo tarjeta':
+			case 'cargo':
+				$this->dataRequest->idOperation = 'cargoTM';
+				break;
+			case 'Bloqueo tarjeta':
+				$this->dataRequest->idOperation = 'bloqueoTM';
+				break;
+			case 'Cargo tarjeta':
+				$this->dataRequest->idOperation = 'reasignacionTM';
+				break;
+		}
+
+		$response = $this->sendToService('callWs_ActionMasterAccount');
+
+		$this->response->msg = $response->msg;
+		$this->response->data['btn1']['text'] = lang('GEN_BTN_ACCEPT');
+		$this->response->data['btn1']['link'] = 'transf-cuenta-maestra';
+
+
+		return $this->responseToTheView('callWs_ActionMasterAccount');
 	}
 }

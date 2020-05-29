@@ -245,6 +245,8 @@ $lang['GEN_PICKER_YEARSUFFIX'] = '';
 //GENERAL LANGUAGE
 $lang['GEN_SYSTEM_NAME']= 'Conexión Empresas Online';
 $lang['GEN_CURRENCY'] = '$';
+$lang['GEN_DECIMAL'] = '.';
+$lang['GEN_THOUSANDS'] = ',';
 $lang['GEN_TRY_AGAIN']= 'Intenta de nuevo';
 $lang['GEN_WELCOME_TEXT'] = 'Bienvenido(a)';
 $lang['GEN_ENTERPRISE_LIST'] = 'dashboard';

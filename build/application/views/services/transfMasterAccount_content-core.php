@@ -93,7 +93,7 @@
 							</div>
 							<div class="form-group col-4 col-xl-4">
 								<label><?= lang('GEN_TABLE_CARD_NUMBER'); ?></label>
-								<input id="cardNumber"  name="cardNumber" class="form-control h5" type="text" autocomplete="off" disabled>
+								<input id="cardNumber" name="cardNumber" class="form-control h5" type="text" autocomplete="off" disabled>
 								<div class="help-block"></div>
 							</div>
 							<div class="flex items-center justify-end col-3">
@@ -134,12 +134,11 @@
 							<tbody></tbody>
 						</table>
 
-						<form id="sign-bulk-form" method="post">
+						<form id="password-table">
 							<div class="flex row mt-3 mb-2 mx-2 justify-end">
 								<div class="col-3 col-lg-3 col-xl-3 form-group">
 									<div class="input-group">
-										<input id="password-tranfer" name="password" class="form-control pwd-input pr-0" type="password"
-											placeholder="<?= lang('GEN_PLACE_PASSWORD'); ?>">
+										<input name="password" class="form-control pwd-input pr-0" type="password" placeholder="<?= lang('GEN_PLACE_PASSWORD'); ?>">
 										<div class="input-group-append">
 											<span id="pwd_action" class="input-group-text pwd-action" title="<?= lang('GEN_SHOW_PASS') ?>"><i
 													class="icon-view mr-0"></i></span>
@@ -147,28 +146,27 @@
 									</div>
 									<div class="help-block bulk-select text-left"></div>
 								</div>
+
 								<div class="col-auto">
-									<button id="consulta" class="btn btn-primary btn-small btn-loading flex mx-auto">Consultar
+									<button id="consulta" class="btn btn-primary btn-small btn-loading flex mx-auto" amount="0">Consultar
 									</button>
 								</div>
 
 								<div class="col-auto">
-									<button id="abono" class="btn btn-primary btn-small btn-loading flex mx-auto">Abono
+									<button id="abono" class="btn btn-primary btn-small btn-loading flex mx-auto" amount="1">Abono
 									</button>
 								</div>
 
 								<div class="col-auto">
-									<button id="cargo" class="btn btn-primary btn-small btn-loading flex mx-auto">Cargo
+									<button id="cargo" class="btn btn-primary btn-small btn-loading flex mx-auto" amount="1">Cargo
 									</button>
 								</div>
-
 							</div>
 						</form>
 						<div class="line my-2"></div>
 					</div>
 				</div>
 			</div>
-
 		</div>
 	</div>
 	<?php if($widget): ?>

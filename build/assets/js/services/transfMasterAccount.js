@@ -3,16 +3,19 @@ var table;
 var access;
 var params;
 var balance;
+var cardsData;
 $(function () {
+	var action;
+	var inputModal;
+	var getAmount;
+	var modalReq;
 	$('#pre-loader').remove();
 	$('.hide-out').removeClass('hide');
 	var masterAccountBtn = $('#masterAccountBtn');
 	insertFormInput(false);
 
-	masterAccountBtn.on('click', function (e) {
-		e.preventDefault();
-		$('#tableServicesMaster').dataTable().fnClearTable();
-		$('#tableServicesMaster').dataTable().fnDestroy();
+	masterAccountBtn.on('click', function (e) {		e.preventDefault();
+
 		form = $('#masterAccountForm');
 		btnText = $(this).text().trim()
 		validateForms(form);
@@ -20,6 +23,8 @@ $(function () {
 		if (form.valid()) {
 			var dataForm = getDataForm(form)
 			insertFormInput(true)
+			$('#tableServicesMaster').dataTable().fnClearTable();
+			$('#tableServicesMaster').dataTable().fnDestroy();
 			$('.hide-table').addClass('hide')
 			$('#pre-loader-table').removeClass('hide')
 			verb = 'POST'; who = "Services"; where = 'TransfMasterAccount';
@@ -38,17 +43,78 @@ $(function () {
 
 	$('#tableServicesMaster').on('click', 'button', function(e) {
 		var event = $(e.currentTarget);
-		var action = event.attr('title');
+		action = event.attr('title');
+		getAmount = event.attr('amount');
+		$('#tableServicesMaster').find('tr').removeClass('selected')
 		$(this).closest('tr').addClass('select');
-		sendRequest(action, 'select')
+		$('#accept').addClass('send-request');
+
+		if (amountValidate(getAmount, '.select')) {
+			data = {
+				btn1: {
+					text: lang.GEN_BTN_SEND,
+					action: 'none'
+				},
+				btn2: {
+					text: lang.GEN_BTN_CANCEL,
+					action: 'close'
+				}
+			}
+
+			inputModal = 	'<form id="password-modal" class="form-group">';
+			inputModal+= 		'<div class="input-group">';
+			inputModal+= 			'<input class="form-control pwd-input" type="password" name="password" autocomplete="off"';
+			inputModal+=			 	 'placeholder="'+lang.GEN_PLACE_PASSWORD+'">';
+			inputModal+= 			'<div class="input-group-append">';
+			inputModal+= 				'<span class="input-group-text pwd-action" title="'+lang.GEN_SHOW_PASS+'"><i class="icon-view mr-0"></i></span>';
+			inputModal+= 			'</div>';
+			inputModal+= 		'</div>';
+			inputModal+= 		'<div class="help-block"></div>';
+			inputModal+=	'</form>';
+
+			lang.CONF_MODAL_WIDTH = 200;
+			notiSystem(action, inputModal, lang.GEN_ICON_INFO, data);
+			lang.CONF_MODAL_WIDTH = 370;
+
+			$('.send-request').on('click', function() {
+				form = $('#password-modal')
+				modalReq = true
+				btnText = $(this).text().trim();
+				sendRequest(action, modalReq, $(this))
+			})
+		}
 	})
 
-	$('#consulta, #abono, #cargo,').on('click', function(e) {
+	$('#consulta, #abono, #cargo').on('click', function(e) {
 		e.preventDefault()
-		var event = $(e.currentTarget);
-		var action = event.text().trim();
-		var thisId = event.attr('id');
-		sendRequest(action, 'selected')
+		$('#tableServicesMaster').find('tr').removeClass('select');
+		action = $(this).attr('id');
+		getAmount = $(this).attr('amount');
+
+		if (amountValidate(getAmount, '.selected')) {
+			form = $('#password-table');
+			modalReq = false;
+			btnText = $(this).text().trim();
+			sendRequest(action, modalReq, $(this))
+		}
+	});
+
+	$('#system-info').on('click', '#cancel', function() {
+		$('#tableServicesMaster').find('tr').removeClass('select');
+		$('#tableServicesMaster').find('tr').removeClass('selected');
+	})
+
+	$("#tableServicesMaster").on({
+		"focus": function(event) {
+			$(event.target).select();
+		},
+		"keyup": function(event) {
+			$(event.target).val(function(index, value) {
+				return value.replace(/\D/g, "")
+					.replace(/([0-9])([0-9]{2})$/, '$1'+lang.GEN_DECIMAL+'$2')
+					.replace(/\B(?=(\d{3})+(?!\d)\.?)/g, lang.GEN_THOUSANDS);
+			}, 'input');
+		}
 	});
 })
 
@@ -71,8 +137,7 @@ function dataTableBuild(dataForm) {
 		"table-layout": "fixed",
 		"select": {
 			"style": "multi",
-			"info": false,
-			selector: ':not(td:nth-child(-n+6))'
+			"info": false
 		},
 		"language": dataTableLang,
 		"processing": true,
@@ -150,7 +215,7 @@ function dataTableBuild(dataForm) {
 				data: function (data) {
 						var ammount;
 						ammount = '<form>';
-						ammount+=		'<input class="form-control h6" type="text"></input>';
+						ammount+=		'<input class="form-control h6 text-right" type="text" placeholder="'+data.amount+'"></input>';
 						ammount+= '</form>';
 					return ammount
 				}
@@ -160,32 +225,32 @@ function dataTableBuild(dataForm) {
 					var options = '';
 
 					if(access.TRASAL) {
-						options+=		'<button class="btn mx-1 px-0" title="Consulta saldo" data-toggle="tooltip">';
+						options+=		'<button class="btn mx-1 px-0" title="Consulta saldo" data-toggle="tooltip" amount="0">';
 						options+=			'<i class="icon novoglyphs icon-balance" aria-hidden="true"></i>';
 						options+= 	'</button>';
 					}
 
 					if (access.TRACAR) {
-						options+=		'<button class="btn mx-1 px-0" title="Abono tarjeta" data-toggle="tooltip">';
+						options+=		'<button class="btn mx-1 px-0" title="Abono tarjeta" data-toggle="tooltip" amount="1">';
 						options+=			'<i class="icon novoglyphs icon-credit-card" aria-hidden="true"></i>';
 						options+=		'</button>';
 
 					}
 
 					if (access.TRAABO) {
-						options+=		'<button class="btn mx-1 px-0" title="Cargo tarjeta" data-toggle="tooltip">';
+						options+=		'<button class="btn mx-1 px-0" title="Cargo tarjeta" data-toggle="tooltip" amount="1">';
 						options+=			'<i class="icon novoglyphs icon-card-fee" aria-hidden="true"></i>';
 						options+=		'</button>';
 					}
 
 					if (access.TRABLQ) {
-						options+=		'<button class="btn mx-1 px-0" title="Bloqueo tarjeta" data-toggle="tooltip">';
+						options+=		'<button class="btn mx-1 px-0" title="Bloqueo tarjeta" data-toggle="tooltip" amount="0">';
 						options+=			'<i class="icon novoglyphs icon-lock" aria-hidden="true"></i>';
 						options+=		'</button>';
 					}
 
 					if (access.TRAASG) {
-						options+=		'<button class="btn mx-1 px-0" title="Asignación tarjeta" data-toggle="tooltip">';
+						options+=		'<button class="btn mx-1 px-0" title="Asignación tarjeta" data-toggle="tooltip" amount="0">';
 						options+=			'<i class="icon novoglyphs icon-arrow-left" aria-hidden="true"></i>';
 						options+=		'</button>';
 					}
@@ -197,45 +262,60 @@ function dataTableBuild(dataForm) {
 	});
 }
 
-function sendRequest(action, classSelect) {
-	var cardsData = table.rows(classSelect).data();
-	$('#accept').addClass('send-request');
-	data = {
-		btn1: {
-			text: lang.GEN_BTN_DELETE,
-			action: 'close'
-		},
-		btn2: {
-			text: lang.GEN_BTN_CANCEL,
-			action: 'close'
-		}
+function sendRequest(action, modalReq, btn) {
+	formInputTrim(form)
+	validateForms(form)
+	console.log(cardsData.length)
+	if(cardsData.length == 0) {
+		form.validate().resetForm();
+		form.find('.bulk-select').text('selecciona algo');
 	}
 
-	if (action === 'Abono tarjeta' || action === 'Cargo tarjeta') {
+	if (cardsData.length > 0 && form.valid()) {
+		console.log(cardsData)
+		var cardsInfo = [];
+		for(var i = 0; i < cardsData.length; i++) {
+			var info = {};
+			info['Cardnumber'] = cardsData[i].cardNumber;
+			info['idNumber'] = cardsData[i].idNumber;
+			info['amount'] = cardsData[i].amount;
+			cardsInfo.push(JSON.stringify(info));
+		}
 
-		console.log(cardsData.length)
-		for(var i = 0; i <= cardsData.length; i++) {
+		btn.html(loader);
+
+		console.log(cardsInfo)
+
+		data = {
+			modalReq: modalReq,
+			cards: cardsInfo,
+			action: action,
+			pass: cryptoPass(form.find('input[type=password]').val())
+		}
+
+		verb = 'POST'; who = 'Services'; where = 'ActionMasterAccount';
+
+		callNovoCore(verb, who, where, data, function(response) {
+			$('#tableServicesMaster').find('tr').removeClass('select');
+			$('#tableServicesMaster').find('tr').removeClass('selected');
+			btn.html(btnText)
+		})
+	}
+}
+
+function amountValidate(getAmount, classSelect) {
+	var valid = true
+	cardsData = table.rows(classSelect).data();
+
+	if (getAmount == '1') {
+		for(var i = 0; i < cardsData.length; i++) {
 			console.log(cardsData[i])
 		}
 	}
 
-	switch (action) {
-		case 'Consulta saldo':
-
-		break;
-		case 'Abono tarjeta':
-
-		break;
-		case 'Cargo tarjeta':
-
-		break;
-		case 'Bloqueo tarjeta':
-
-		break;
-		case 'Asignación tarjeta':
-
-		break;
+	if (!valid) {
+		console.log('alto')
 	}
 
-
+	return valid;
 }

@@ -410,6 +410,23 @@ $config = [
 			'rules' => 'trim|regex_match[/^([\w-ñáéíóú ]+[\s]*)+$/i]'
 		]
 	],
+	'actionMasterAccount' => [
+		[
+			'field' => 'pass',
+			'label' => 'pass',
+			'rules' => 'trim|required'
+		],
+		[
+			'field' => 'cards[]',
+			'label' => 'cards',
+			'rules' => 'regex_match[/^([\w{}"*:.,]*)+$/i]|required'
+		],
+		[
+			'field' => 'action',
+			'label' => 'action',
+			'rules' => 'trim|regex_match[/^([\w ]+)+$/i]|required'
+		]
+	],
 	'getReport' => [
 		[
 			'field' => 'operation',
