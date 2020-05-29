@@ -16,6 +16,7 @@ var reportsResults;
 
 $(function () {
 	$('#blockBudgetResults').addClass('hide');
+	$('#titleResults').addClass('hide');
 	$('#Nit').attr('maxlength', 10);
 	$('#pre-loader').remove();
 	$('.hide-out').removeClass('hide');
@@ -42,7 +43,6 @@ $(function () {
 			enterpriseName: enterpriseName,
 			select: true
 		};
-		var	error = $('#prad').val();
 		selectionBussine(passData)
 
 	})
@@ -70,7 +70,7 @@ $(function () {
 
 
 		empresa = $('#enterprise-report').find('option:selected').attr('acrif');
-		cedula =  $("#Nit").val().replace(/ /g, '');
+		cedula =  '';
 		producto = $("#productCode").val();
 		nomEmpresa = $('#enterprise-report').find('option:selected').attr('nomOf');
 		descProd = $("#productCode").find('option:selected').attr('value');
@@ -144,7 +144,7 @@ var byteArrayFile = (function () {
 function searchBudgets(){
 	$('#enterprise-report').find('option:selected').attr('acrif');
 		empresa = $('#enterprise-report').find('option:selected').attr('acrif');
-		cedula =  $("#Nit").val().replace(/ /g, '');
+		cedula =  '';
 		producto = $("#productCode").val();
 		nomEmpresa = $('#enterprise-report').find('option:selected').attr('nomOf');
 		descProd = $("#productCode").attr("des");
@@ -202,7 +202,7 @@ function closingBudgets(passData) {
 					"language": dataTableLang,
 				}).clear().draw();
 			}
-
+			$('#titleResults').removeClass('hide');
 			$('#blockBudgetResults').removeClass("hide");
 })
 }
