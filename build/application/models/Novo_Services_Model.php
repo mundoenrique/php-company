@@ -31,7 +31,7 @@ class Novo_Services_Model extends NOVO_Model {
 		$this->dataRequest->idProducto = $this->session->productInf->productPrefix;
 		$this->dataRequest->listaTarjetas = [
 			[
-				'paginaActual' => (int) '1',
+				'paginaActual' => (int) ($dataRequest->start / 10) + 1,
 				'tamanoPagina' => (int) $dataRequest->length,
 				'paginar' => TRUE
 			]
@@ -120,7 +120,6 @@ class Novo_Services_Model extends NOVO_Model {
 
 		$this->dataAccessLog->modulo = 'Servicios';
 		$this->dataAccessLog->function = 'Transferencia maestra';
-		$this->dataAccessLog->operation = 'Obtener lista de tarjetas';
 
 		$cardsList = [];
 
@@ -131,10 +130,45 @@ class Novo_Services_Model extends NOVO_Model {
 				'id_ext_per' => $cardsInfo->idNumber,
 				'montoTransaccion' => $cardsInfo->amount
 			];
-			if ($dataRequest->action == 'Consulta saldo' || $dataRequest->action == 'consulta') {
-				unset($card['montoTransaccion']);
+
+			switch ($dataRequest->action) {
+				case 'Consulta saldo':
+				case 'consulta':
+				case 'Bloqueo tarjeta':
+					unset($card['montoTransaccion']);
+				break;
+				case 'Asignación tarjeta':
+					unset($card['montoTransaccion']);
+					$card['noTarjetaAsig'] = $cardsInfo->cardNumberAs;
+				break;
 			}
+
 			$cardsList[] = $card;
+		}
+
+		switch ($dataRequest->action) {
+			case 'Consulta saldo':
+			case 'consulta':
+				$this->dataAccessLog->operation = 'Consultar saldo';
+				$this->dataRequest->idOperation = 'saldoTM';
+			break;
+			case 'Abono tarjeta':
+			case 'abono':
+				$this->dataAccessLog->operation = 'Abonar a tarjeta';
+				$this->dataRequest->idOperation = 'saldoTM';
+			break;
+			case 'Cargo tarjeta':
+			case 'cargo':
+				$this->dataRequest->idOperation = 'cargoTM';
+			break;
+			case 'Bloqueo tarjeta':
+				$this->dataAccessLog->operation = 'Bloquear tarjeta';
+				$this->dataRequest->idOperation = 'bloqueoTM';
+			break;
+			case 'Asignación tarjeta':
+				$this->dataAccessLog->operation = 'Reasignar tarjeta';
+				$this->dataRequest->idOperation = 'reasignacionTM';
+			break;
 		}
 
 		$this->dataRequest->rifEmpresa = $this->session->enterpriseInf->idFiscal;
@@ -159,33 +193,11 @@ class Novo_Services_Model extends NOVO_Model {
 			'password' => md5($password)
 		];
 
-		switch ($dataRequest->action) {
-			case 'Consulta saldo':
-			case 'consulta':
-				$this->dataRequest->idOperation = 'saldoTM';
-				break;
-			case 'Abono tarjeta':
-			case 'abono':
-				$this->dataRequest->idOperation = 'saldoTM';
-				break;
-			case 'Cargo tarjeta':
-			case 'cargo':
-				$this->dataRequest->idOperation = 'cargoTM';
-				break;
-			case 'Bloqueo tarjeta':
-				$this->dataRequest->idOperation = 'bloqueoTM';
-				break;
-			case 'Cargo tarjeta':
-				$this->dataRequest->idOperation = 'reasignacionTM';
-				break;
-		}
-
 		$response = $this->sendToService('callWs_ActionMasterAccount');
 
 		$this->response->msg = $response->msg;
 		$this->response->data['btn1']['text'] = lang('GEN_BTN_ACCEPT');
 		$this->response->data['btn1']['link'] = 'transf-cuenta-maestra';
-
 
 		return $this->responseToTheView('callWs_ActionMasterAccount');
 	}

@@ -107,7 +107,19 @@ function validateForms(form) {
 			"initialDate": {required: true, pattern: date.dmy},
 			"finalDate": {required: true, pattern: date.dmy},
 			"idNumber": {pattern: idNumberReg},
-			"cardNumber": {pattern: numeric, maxlength: 16, minlength: 16},
+			"cardNumber": {
+				required: {
+					depends: function (element) {
+						var validate = false;
+						if ($(element).attr('req') == 'yes') {
+							var validate = true;
+						}
+
+						return validate
+					}
+				},
+				pattern: numeric, maxlength: 16, minlength: 16
+			},
 		},
 		messages: {
 			"user_login": lang.VALIDATE_USERLOGIN,

@@ -168,7 +168,8 @@ class Novo_Reports_Model extends NOVO_Model {
 
 		$this->className = 'ReporteCEOTO.class';
 		$this->dataRequest->empresaCliente = [
-			'rif' => $this->session->enterpriseInf->idFiscal
+			'rif' => $this->session->enterpriseInf->idFiscal,
+			'accodcia' => $this->session->enterpriseInf->enterpriseCode
 		];
 
 		$response = $this->sendToService('GetReport: '.$dataRequest->operation);
@@ -218,7 +219,8 @@ class Novo_Reports_Model extends NOVO_Model {
 			'fechaHasta' => convertDate($dataRequest->enterpriseDateEnd)
 		];
 		$this->dataRequest->empresaCliente = [
-			'rif' => $this->session->enterpriseInf->idFiscal
+			'rif' => $this->session->enterpriseInf->idFiscal,
+			'accodcia' => $this->session->enterpriseInf->enterpriseCode
 		];
 
 		$response = $this->sendToService('GetReport: '.$dataRequest->operation);
@@ -268,7 +270,8 @@ class Novo_Reports_Model extends NOVO_Model {
 			'anio' => $date[1]
 		];
 		$this->dataRequest->empresaCliente = [
-			'rif' => $this->session->enterpriseInf->idFiscal
+			'rif' => $this->session->enterpriseInf->idFiscal,
+			'accodcia' => $this->session->enterpriseInf->enterpriseCode
 		];
 
 		$response = $this->sendToService('GetReport: '.$dataRequest->operation);
@@ -320,7 +323,8 @@ class Novo_Reports_Model extends NOVO_Model {
 			'producto' => $this->session->productInf->productPrefix
 		];
 		$this->dataRequest->empresaCliente = [
-			'rif' => $this->session->enterpriseInf->idFiscal
+			'rif' => $this->session->enterpriseInf->idFiscal,
+			'accodcia' => $this->session->enterpriseInf->enterpriseCode
 		];
 
 		$response = $this->sendToService('GetReport: '.$dataRequest->operation);
@@ -528,7 +532,8 @@ class Novo_Reports_Model extends NOVO_Model {
 			'tarjeta' => [
 				'noTarjeta' => $this->session->flashdata('cardsPeople')[$dataRequest->cardNumberId],
 				'id_ext_per' => $dataRequest->idType.'_'.$dataRequest->idNumber,
-				'rif' => $this->session->enterpriseInf->idFiscal
+				'rif' => $this->session->enterpriseInf->idFiscal,
+				'accodcia' => $this->session->enterpriseInf->enterpriseCode
 			],
 			'fechaInicio' => convertDate($dataRequest->peopleDateBegin),
 			'fechaFin' => convertDate($dataRequest->peopleDateEnd)
@@ -581,7 +586,8 @@ class Novo_Reports_Model extends NOVO_Model {
 			'anio' => $dataRequest->dateG
 		];
 		$this->dataRequest->empresaCliente = [
-			'rif' => $this->session->enterpriseInf->idFiscal
+			'rif' => $this->session->enterpriseInf->idFiscal,
+			'accodcia' => $this->session->enterpriseInf->enterpriseCode
 		];
 
 		$response = $this->sendToService('GetReport: '.$dataRequest->operation);

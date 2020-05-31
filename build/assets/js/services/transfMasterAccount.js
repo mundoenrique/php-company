@@ -14,8 +14,8 @@ $(function () {
 	var masterAccountBtn = $('#masterAccountBtn');
 	insertFormInput(false);
 
-	masterAccountBtn.on('click', function (e) {		e.preventDefault();
-
+	masterAccountBtn.on('click', function (e) {
+		e.preventDefault();
 		form = $('#masterAccountForm');
 		btnText = $(this).text().trim()
 		validateForms(form);
@@ -23,11 +23,8 @@ $(function () {
 		if (form.valid()) {
 			var dataForm = getDataForm(form)
 			insertFormInput(true)
-			$('#tableServicesMaster').dataTable().fnClearTable();
-			$('#tableServicesMaster').dataTable().fnDestroy();
 			$('.hide-table').addClass('hide')
 			$('#pre-loader-table').removeClass('hide')
-			verb = 'POST'; who = "Services"; where = 'TransfMasterAccount';
 			dataTableBuild(dataForm)
 		}
 	})
@@ -61,15 +58,28 @@ $(function () {
 				}
 			}
 
-			inputModal = 	'<form id="password-modal" class="form-group">';
-			inputModal+= 		'<div class="input-group">';
-			inputModal+= 			'<input class="form-control pwd-input" type="password" name="password" autocomplete="off"';
-			inputModal+=			 	 'placeholder="'+lang.GEN_PLACE_PASSWORD+'">';
-			inputModal+= 			'<div class="input-group-append">';
-			inputModal+= 				'<span class="input-group-text pwd-action" title="'+lang.GEN_SHOW_PASS+'"><i class="icon-view mr-0"></i></span>';
+			inputModal = 	'<form id="password-modal">';
+			inputModal+= 		'<div class="form-group col-auto">';
+			inputModal+= 			'<div class="input-group">';
+			inputModal+= 				'<input class="form-control pwd-input" type="password" name="password" autocomplete="off"';
+			inputModal+=			 		 'placeholder="'+lang.GEN_PLACE_PASSWORD+'">';
+			inputModal+= 				'<div class="input-group-append">';
+			inputModal+= 					'<span class="input-group-text pwd-action" title="'+lang.GEN_SHOW_PASS+'"><i class="icon-view mr-0"></i></span>';
+			inputModal+= 				'</div>';
 			inputModal+= 			'</div>';
+			inputModal+= 			'<div class="help-block"></div>';
 			inputModal+= 		'</div>';
-			inputModal+= 		'<div class="help-block"></div>';
+
+			if (action == 'Asignación tarjeta') {
+				inputModal+= 		'<div class="form-group col-auto">';
+				inputModal+= 			'<div class="input-group">';
+				inputModal+= 				'<input class="form-control" type="text" name="cardNumber" autocomplete="off"';
+				inputModal+=			 		 'placeholder="'+lang.GEN_TABLE_CARD_NUMBER+'" req="yes">';
+				inputModal+= 			'</div>';
+				inputModal+= 			'<div class="help-block"></div>';
+				inputModal+= 		'</div>';
+			}
+
 			inputModal+=	'</form>';
 
 			lang.CONF_MODAL_WIDTH = 200;
@@ -119,6 +129,8 @@ $(function () {
 })
 
 function dataTableBuild(dataForm) {
+	$('#tableServicesMaster').dataTable().fnClearTable();
+	$('#tableServicesMaster').dataTable().fnDestroy();
 	verb = 'POST'; who = "Services"; where = 'TransfMasterAccount';
 	table = $('#tableServicesMaster').DataTable({
 		drawCallback: function(d) {
@@ -146,6 +158,7 @@ function dataTableBuild(dataForm) {
 			url: baseURL + 'async-call',
 			method: 'POST',
 			dataType: 'json',
+			cache: false,
 			data: function (req) {
 				data = req
 				data.idNumber = dataForm.idNumber;
@@ -163,17 +176,18 @@ function dataTableBuild(dataForm) {
 					ceo_name: ceo_cook,
 					plot: btoa(ceo_cook)
 				}
-
 				return request
 			},
-			dataSrc: function (response) {
-				response = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, { format: CryptoJSAesJson }).toString(CryptoJS.enc.Utf8))
-				console.log(response)
-				access = response.access;
-				balance = response.balance;
-				params = response.params;
-				return response.data;
-			},
+			dataFilter: function (resp) {
+				var responseTable = jQuery.parseJSON(resp)
+				responseTable = JSON.parse(
+					CryptoJS.AES.decrypt(responseTable.code, responseTable.plot, { format: CryptoJSAesJson }).toString(CryptoJS.enc.Utf8)
+				);
+				access = responseTable.access;
+				balance = responseTable.balance;
+				params = responseTable.params;
+				return JSON.stringify(responseTable);
+			}
 		},
 		"columnDefs": [
 			{
@@ -265,27 +279,33 @@ function dataTableBuild(dataForm) {
 function sendRequest(action, modalReq, btn) {
 	formInputTrim(form)
 	validateForms(form)
-	console.log(cardsData.length)
 	if(cardsData.length == 0) {
 		form.validate().resetForm();
-		form.find('.bulk-select').text('selecciona algo');
+		form.find('.bulk-select').text(lang.VALIDATE_SELECT);
 	}
+
+	console.log(form.valid())
 
 	if (cardsData.length > 0 && form.valid()) {
 		console.log(cardsData)
 		var cardsInfo = [];
+
 		for(var i = 0; i < cardsData.length; i++) {
 			var info = {};
 			info['Cardnumber'] = cardsData[i].cardNumber;
 			info['idNumber'] = cardsData[i].idNumber;
 			info['amount'] = cardsData[i].amount;
+
+			if (action == 'Asignación tarjeta') {
+				info['cardNumberAs'] = form.find('input[name=cardNumber]').val()
+			}
+
 			cardsInfo.push(JSON.stringify(info));
 		}
 
-		btn.html(loader);
-
-		console.log(cardsInfo)
-
+		btn
+		.html(loader)
+		.prop('disabled', true);
 		data = {
 			modalReq: modalReq,
 			cards: cardsInfo,
@@ -298,7 +318,9 @@ function sendRequest(action, modalReq, btn) {
 		callNovoCore(verb, who, where, data, function(response) {
 			$('#tableServicesMaster').find('tr').removeClass('select');
 			$('#tableServicesMaster').find('tr').removeClass('selected');
-			btn.html(btnText)
+			btn
+			.html(btnText)
+			.prop('disabled', false);;
 		})
 	}
 }

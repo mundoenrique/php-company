@@ -424,7 +424,7 @@ $config = [
 		[
 			'field' => 'action',
 			'label' => 'action',
-			'rules' => 'trim|regex_match[/^([\w ]+)+$/i]|required'
+			'rules' => 'trim|regex_match[/^([\wñáéíóú ]+)+$/i]|required'
 		]
 	],
 	'getReport' => [

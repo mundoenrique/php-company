@@ -29,6 +29,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 		$this->dataRequest->idOperation = 'buscarLotesPorConfirmar';
 		$this->dataRequest->lotesTO = [
 			'idEmpresa' => $this->session->enterpriseInf->idFiscal,
+			'codCia' => $this->session->enterpriseInf->enterpriseCode,
 			'codProducto' => $this->session->productInf->productPrefix
 		];
 		$this->dataRequest->usuario = [

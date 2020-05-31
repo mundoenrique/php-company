@@ -190,6 +190,7 @@ class Novo_Business_Model extends NOVO_Model {
 		$this->dataRequest->ctipo = isset($dataRequest->type) ? $dataRequest->type : 'A';
 		$this->dataRequest->userName = $this->userName;
 		$this->dataRequest->idEmpresa = $dataRequest->idFiscal;
+		$this->dataRequest->acCodCia = $dataRequest->enterpriseCode;
 
 		$response = $this->sendToService('callWs_GetProducts');
 
