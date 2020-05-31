@@ -110,7 +110,8 @@ class Novo_Business_Model extends NOVO_Model {
 		$this->dataRequest->paginar = FALSE;
 		$this->dataRequest->lista = [
 			[
-				'rif' => $this->session->enterpriseInf->idFiscal
+				'rif' => $this->session->enterpriseInf->idFiscal,
+				'acCodCia' => $this->session->enterpriseInf->enterpriseCode
 			]
 		];
 		$newGet = isset($dataRequest->newGet) ? $dataRequest->newGet : 0;

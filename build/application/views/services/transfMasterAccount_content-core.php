@@ -116,7 +116,7 @@
 						<div class="flex ml-4 py-3 flex-auto justify-between">
 							<p class="mr-5 h5 semibold tertiary">Saldo disponible <span id="balance-aviable" class="light text"></span></p>
 							<p class="mr-5 mb-0 h5 semibold tertiary">Comisión por transacción <span id="cost-trans" class="light text">0</span></p>
-							<p class="mr-5 mb-0 h5 semibold tertiary">Comisión por consulta saldo <span id="cost-inquiry" class="light text">0</span></p>
+							<p class="mr-5 mb-0 h5 semibold tertiary">Comisión por Consultar saldo <span id="cost-inquiry" class="light text">0</span></p>
 						</div>
 
 						<table id="tableServicesMaster" class="cell-border h6 display w-100">
@@ -146,21 +146,24 @@
 									</div>
 									<div class="help-block bulk-select text-left"></div>
 								</div>
-
+								<?php if($this->verify_access->verifyAuthorization('TRAMAE', 'TRASAL')): ?>
 								<div class="col-auto">
 									<button id="consulta" class="btn btn-primary btn-small btn-loading flex mx-auto" amount="0">Consultar
 									</button>
 								</div>
-
+								<?php endif; ?>
+								<?php if($this->verify_access->verifyAuthorization('TRAMAE', 'TRAABO')): ?>
 								<div class="col-auto">
 									<button id="abono" class="btn btn-primary btn-small btn-loading flex mx-auto" amount="1">Abono
 									</button>
 								</div>
-
+								<?php endif; ?>
+								<?php if($this->verify_access->verifyAuthorization('TRAMAE', 'TRACAR')): ?>
 								<div class="col-auto">
 									<button id="cargo" class="btn btn-primary btn-small btn-loading flex mx-auto" amount="1">Cargo
 									</button>
 								</div>
+								<?php endif; ?>
 							</div>
 						</form>
 						<div class="line my-2"></div>

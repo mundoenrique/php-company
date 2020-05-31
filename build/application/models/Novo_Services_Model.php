@@ -57,6 +57,7 @@ class Novo_Services_Model extends NOVO_Model {
 					$record->cardNumber = $cards->noTarjetaConMascara;
 					$record->name = $cards->NombreCliente;
 					$record->idNumber = $cards->id_ext_per;
+					$record->status = isset($cards->codBloqueo) ? mb_strtolower($cards->codBloqueo) : '';
 					$record->amount = '0'.lang('GEN_DECIMAL').'00';
 					array_push(
 						$cardsList,
@@ -73,6 +74,7 @@ class Novo_Services_Model extends NOVO_Model {
 					'TRAABO' => $this->verify_access->verifyAuthorization('TRAMAE', 'TRAABO'),
 					'TRABLQ' => $this->verify_access->verifyAuthorization('TRAMAE', 'TRABLQ'),
 					'TRAASG' => $this->verify_access->verifyAuthorization('TRAMAE', 'TRAASG'),
+					'TRADBL' => $this->verify_access->verifyAuthorization('TRAMAE', 'TRADBL'),
 				];
 				$this->response->draw = (int) $dataRequest->draw;
 				$this->response->recordsTotal = (int) $response->listaTarjetas[0]->totalRegistros;
@@ -103,7 +105,8 @@ class Novo_Services_Model extends NOVO_Model {
 						'action'=> 'close'
 					]
 				];
-				break;
+			break;
+
 		}
 
 		return $this->responseToTheView('callWs_TransfMasterAccount');
@@ -132,9 +135,10 @@ class Novo_Services_Model extends NOVO_Model {
 			];
 
 			switch ($dataRequest->action) {
-				case 'Consulta saldo':
+				case lang('GEN_CHECK_BALANCE'):
 				case 'consulta':
-				case 'Bloqueo tarjeta':
+				case 'Bloqueo temporal':
+				case 'Desbloqueo tarjeta':
 					unset($card['montoTransaccion']);
 				break;
 				case 'Asignación tarjeta':
@@ -147,23 +151,28 @@ class Novo_Services_Model extends NOVO_Model {
 		}
 
 		switch ($dataRequest->action) {
-			case 'Consulta saldo':
+			case lang('GEN_CHECK_BALANCE'):
 			case 'consulta':
-				$this->dataAccessLog->operation = 'Consultar saldo';
+				$this->dataAccessLog->operation = lang('GEN_CHECK_BALANCE');
 				$this->dataRequest->idOperation = 'saldoTM';
 			break;
-			case 'Abono tarjeta':
+			case lang('GEN_CREDIT_TO_CARD'):
 			case 'abono':
-				$this->dataAccessLog->operation = 'Abonar a tarjeta';
+				$this->dataAccessLog->operation = lang('GEN_CREDIT_TO_CARD');
 				$this->dataRequest->idOperation = 'saldoTM';
 			break;
-			case 'Cargo tarjeta':
+			case lang('GEN_DEBIT_TO_CARD'):
 			case 'cargo':
+				$this->dataAccessLog->operation = lang('GEN_DEBIT_TO_CARD');
 				$this->dataRequest->idOperation = 'cargoTM';
 			break;
-			case 'Bloqueo tarjeta':
-				$this->dataAccessLog->operation = 'Bloquear tarjeta';
+			case 'Bloqueo temporal':
+				$this->dataAccessLog->operation = 'Bloqueo temporal';
 				$this->dataRequest->idOperation = 'bloqueoTM';
+			break;
+			case 'Desbloqueo tarjeta':
+				$this->dataAccessLog->operation = 'Desbloqueo tarjeta';
+				$this->dataRequest->idOperation = 'desbloqueoTM';
 			break;
 			case 'Asignación tarjeta':
 				$this->dataAccessLog->operation = 'Reasignar tarjeta';
@@ -197,7 +206,21 @@ class Novo_Services_Model extends NOVO_Model {
 
 		$this->response->msg = $response->msg;
 		$this->response->data['btn1']['text'] = lang('GEN_BTN_ACCEPT');
-		$this->response->data['btn1']['link'] = 'transf-cuenta-maestra';
+		$this->response->data['btn1']['action'] = 'close';
+
+		switch ($this->isResponseRc) {
+			case 0:
+				# code...
+			break;
+			case -33:
+			case -266:
+				log_message('info', '*******************   '.$response->bean);
+			break;
+
+			default:
+				# code...
+			break;
+		}
 
 		return $this->responseToTheView('callWs_ActionMasterAccount');
 	}

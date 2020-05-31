@@ -668,7 +668,7 @@ class Novo_Reports_Model extends NOVO_Model {
 				$this->response->code = 0;
 			break;
 		}
-		$this->response->data = $statusBulkList;
+		$this->response->data['statusBulkList'] = $statusBulkList;
 
 		return $this->responseToTheView('callWs_StatusBulk');
 	}
@@ -693,7 +693,6 @@ class Novo_Reports_Model extends NOVO_Model {
 		$response = $this->sendToService('callWS_StatusCardHolders');
 		$cardHoldersList = [];
 
-
 		switch($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
@@ -713,7 +712,7 @@ class Novo_Reports_Model extends NOVO_Model {
 				$this->response->code = 0;
 			break;
 		}
-		$this->response->data = $cardHoldersList;
+		$this->response->data['cardHoldersList'] = $cardHoldersList;
 
 		return $this->responseToTheView('callWS_StatusCardHolders');
 	}

@@ -85,14 +85,14 @@ $(function () {
 			lang.CONF_MODAL_WIDTH = 200;
 			notiSystem(action, inputModal, lang.GEN_ICON_INFO, data);
 			lang.CONF_MODAL_WIDTH = 370;
-
-			$('.send-request').on('click', function() {
-				form = $('#password-modal')
-				modalReq = true
-				btnText = $(this).text().trim();
-				sendRequest(action, modalReq, $(this))
-			})
 		}
+	})
+
+	$('#system-info').on('click', '.send-request', function() {
+		form = $('#password-modal')
+		modalReq = true
+		btnText = $(this).text().trim();
+		sendRequest(action, modalReq, $(this))
 	})
 
 	$('#consulta, #abono, #cargo').on('click', function(e) {
@@ -210,6 +210,10 @@ function dataTableBuild(dataForm) {
 				"targets": 5,
 				"width": "70px"
 			},
+			{
+				"targets": 6,
+				"width": "200px"
+			}
 		],
 		"columns": [
 			{
@@ -238,28 +242,34 @@ function dataTableBuild(dataForm) {
 				data: function (data) {
 					var options = '';
 
-					if(access.TRASAL) {
-						options+=		'<button class="btn mx-1 px-0" title="Consulta saldo" data-toggle="tooltip" amount="0">';
+					if(access.TRASAL && data.status == '') {
+						options+=		'<button class="btn mx-1 px-0" title="'+lang.GEN_CHECK_BALANCE+'" data-toggle="tooltip" amount="0">';
 						options+=			'<i class="icon novoglyphs icon-balance" aria-hidden="true"></i>';
 						options+= 	'</button>';
 					}
 
-					if (access.TRACAR) {
-						options+=		'<button class="btn mx-1 px-0" title="Abono tarjeta" data-toggle="tooltip" amount="1">';
+					if (access.TRACAR && data.status == '') {
+						options+=		'<button class="btn mx-1 px-0" title="'+lang.GEN_CREDIT_TO_CARD+'" data-toggle="tooltip" amount="1">';
 						options+=			'<i class="icon novoglyphs icon-credit-card" aria-hidden="true"></i>';
 						options+=		'</button>';
 
 					}
 
-					if (access.TRAABO) {
-						options+=		'<button class="btn mx-1 px-0" title="Cargo tarjeta" data-toggle="tooltip" amount="1">';
+					if (access.TRAABO && data.status == '') {
+						options+=		'<button class="btn mx-1 px-0" title="'+lang.GEN_DEBIT_TO_CARD+'" data-toggle="tooltip" amount="1">';
 						options+=			'<i class="icon novoglyphs icon-card-fee" aria-hidden="true"></i>';
 						options+=		'</button>';
 					}
 
-					if (access.TRABLQ) {
-						options+=		'<button class="btn mx-1 px-0" title="Bloqueo tarjeta" data-toggle="tooltip" amount="0">';
+					if (access.TRABLQ && data.status == '') {
+						options+=		'<button class="btn mx-1 px-0" title="Bloqueo temporal" data-toggle="tooltip" amount="0">';
 						options+=			'<i class="icon novoglyphs icon-lock" aria-hidden="true"></i>';
+						options+=		'</button>';
+					}
+
+					if (access.TRADBL && data.status == 'pb') {
+						options+=		'<button class="btn mx-1 px-0" title="Desbloqueo tarjeta" data-toggle="tooltip" amount="0">';
+						options+=			'<i class="icon novoglyphs icon-unlock" aria-hidden="true"></i>';
 						options+=		'</button>';
 					}
 
@@ -284,10 +294,7 @@ function sendRequest(action, modalReq, btn) {
 		form.find('.bulk-select').text(lang.VALIDATE_SELECT);
 	}
 
-	console.log(form.valid())
-
 	if (cardsData.length > 0 && form.valid()) {
-		console.log(cardsData)
 		var cardsInfo = [];
 
 		for(var i = 0; i < cardsData.length; i++) {
@@ -306,6 +313,7 @@ function sendRequest(action, modalReq, btn) {
 		btn
 		.html(loader)
 		.prop('disabled', true);
+		insertFormInput(true)
 		data = {
 			modalReq: modalReq,
 			cards: cardsInfo,
@@ -318,9 +326,11 @@ function sendRequest(action, modalReq, btn) {
 		callNovoCore(verb, who, where, data, function(response) {
 			$('#tableServicesMaster').find('tr').removeClass('select');
 			$('#tableServicesMaster').find('tr').removeClass('selected');
+			$('#accept').removeClass('send-request');
 			btn
 			.html(btnText)
-			.prop('disabled', false);;
+			.prop('disabled', false);
+			insertFormInput(false);
 		})
 	}
 }
@@ -331,7 +341,8 @@ function amountValidate(getAmount, classSelect) {
 
 	if (getAmount == '1') {
 		for(var i = 0; i < cardsData.length; i++) {
-			console.log(cardsData[i])
+			console.log(cardsData[i].amount)
+			var ammountText = parseFloat(cardsData[i].amount)
 		}
 	}
 

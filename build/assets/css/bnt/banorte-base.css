@@ -2091,15 +2091,16 @@ i[class*=" icon-"].novoglyphs {
 .icon-chevron-up:before    { content: "\e03f"; }
 .icon-bag:before 					 { content: "\e04f"; }
 
-
 .icon-user{
 	padding-right: 0 !important;
 }
+
 .icon-circle {
 	height: 20px;
 	width: 20px;
 	border-radius: 50%;
 }
+
 .icon-square {
 	width: 2em;
 	height: 1em;

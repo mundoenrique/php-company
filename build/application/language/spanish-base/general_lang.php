@@ -321,3 +321,6 @@ $lang['PRODUCTS_DETAIL_TITLE']= 'Detalle del producto';
 $lang['GEN_SHOW_PASS'] = 'Mostrar contraseña';
 $lang['GEN_HIDE_PASS'] = 'Ocultar contraseña';
 $lang['GEN_DETAIL_BARND_COLOR'] = '_card-white.svg';
+$lang['GEN_CHECK_BALANCE'] = 'Consultar saldo';
+$lang['GEN_CREDIT_TO_CARD'] = 'Abonar a tarjeta';
+$lang['GEN_DEBIT_TO_CARD'] = 'Cargo a tarjeta';
