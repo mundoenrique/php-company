@@ -4,9 +4,9 @@ var access;
 var params;
 var balance;
 var cardsData;
+var inputModal;
 $(function () {
 	var action;
-	var inputModal;
 	var getAmount;
 	var modalReq;
 	$('#pre-loader').remove();
@@ -82,9 +82,7 @@ $(function () {
 
 			inputModal+=	'</form>';
 
-			lang.CONF_MODAL_WIDTH = 200;
 			notiSystem(action, inputModal, lang.GEN_ICON_INFO, data);
-			lang.CONF_MODAL_WIDTH = 370;
 		}
 	})
 
@@ -341,6 +339,7 @@ function sendRequest(action, modalReq, btn) {
 			.html(btnText)
 			.prop('disabled', false);
 			insertFormInput(false);
+			form.find('input[type=password]').val('')
 
 			if (action == lang.GEN_CHECK_BALANCE || 'consulta') {
 				$.each(response.data.listResponse, function(key, value) {
@@ -355,6 +354,22 @@ function sendRequest(action, modalReq, btn) {
 						}
 					})
 				})
+			}
+
+			if (response.code == 2) {
+				data = {
+					btn1: {
+						text: lang.GEN_BTN_ACCEPT,
+						action: 'close'
+					}
+				}
+
+				inputModal = '<h5 class="regular mr-1">'+response.msg+'</h5>'
+				$.each(response.data.listFail, function(index, value) {
+					inputModal+= '<h6 class="light mr-1">'+value+'</h6>';
+				})
+
+				notiSystem(action, inputModal, lang.GEN_ICON_INFO, data);
 			}
 		})
 	}
