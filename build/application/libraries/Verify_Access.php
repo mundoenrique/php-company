@@ -218,6 +218,9 @@ class Verify_Access {
 				case 'transfMasterAccount':
 					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TRAMAE'));
 					break;
+				case 'actionMasterAccount':
+					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TRAMAE'));
+					break;
 				case 'cardsInquiry':
 					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('COPELO'));
 					break;

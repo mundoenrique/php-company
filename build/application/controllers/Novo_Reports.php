@@ -310,6 +310,7 @@ class Novo_Reports extends NOVO_Controller {
 		);
 		$this->request->select = TRUE;
 		$this->request->idFiscal = $this->session->enterpriseInf->idFiscal;
+		$this->request->enterpriseCode = $this->session->enterpriseInf->enterpriseCode;
 		$this->load->model('Novo_Business_Model', 'getProducts');
 		$response = $this->getProducts->callWs_GetProducts_Business($this->request);
 		$this->render->selectProducts = $response->code === 0 ? lang('GEN_SELECT_PRODUCTS') : lang('RESP_TRY_AGAIN');
@@ -351,6 +352,7 @@ class Novo_Reports extends NOVO_Controller {
 
 		$this->request->select = TRUE;
 		$this->request->idFiscal = $this->session->enterpriseInf->idFiscal;
+		$this->request->enterpriseCode = $this->session->enterpriseInf->enterpriseCode;
 		$this->load->model('Novo_Business_Model', 'getProducts');
 		$response = $this->getProducts->callWs_GetProducts_Business($this->request);
 		$this->render->selectProducts = $response->code === 0 ? lang('GEN_SELECT_PRODUCTS') : lang('RESP_TRY_AGAIN');

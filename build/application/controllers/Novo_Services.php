@@ -31,7 +31,7 @@ Class Novo_Services extends Novo_Controller {
 			"third_party/jquery.validate",
 			"validate-core-forms",
 			"third_party/additional-methods",
-			'services/transf_master_account'
+			'services/transfMasterAccount'
 		);
 		$this->responseAttr();
 		$this->render->titlePage = lang('GEN_MENU_SERV_MASTER_ACCOUNT');

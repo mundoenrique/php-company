@@ -28,9 +28,9 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->dataAccessLog->operation = 'Obtener lista de reportes';
 
 		$this->dataRequest->idOperation = 'listadoReportesCEO';
-		$this->dataRequest->enterpriseCode = $this->session->enterpriseInf->enterpriseCode;
 		$this->dataRequest->enterpriseGroup = $this->session->enterpriseInf->enterpriseGroup;
 		$this->dataRequest->rif = $this->session->enterpriseInf->idFiscal;
+		$this->dataRequest->accodcia = $this->session->enterpriseInf->enterpriseCode;
 		$this->dataRequest->nombre = $this->session->enterpriseInf->enterpriseName;
 
 		$response = $this->sendToService('GetReportsList');
@@ -168,7 +168,8 @@ class Novo_Reports_Model extends NOVO_Model {
 
 		$this->className = 'ReporteCEOTO.class';
 		$this->dataRequest->empresaCliente = [
-			'rif' => $this->session->enterpriseInf->idFiscal
+			'rif' => $this->session->enterpriseInf->idFiscal,
+			'accodcia' => $this->session->enterpriseInf->enterpriseCode
 		];
 
 		$response = $this->sendToService('GetReport: '.$dataRequest->operation);
@@ -218,7 +219,8 @@ class Novo_Reports_Model extends NOVO_Model {
 			'fechaHasta' => convertDate($dataRequest->enterpriseDateEnd)
 		];
 		$this->dataRequest->empresaCliente = [
-			'rif' => $this->session->enterpriseInf->idFiscal
+			'rif' => $this->session->enterpriseInf->idFiscal,
+			'accodcia' => $this->session->enterpriseInf->enterpriseCode
 		];
 
 		$response = $this->sendToService('GetReport: '.$dataRequest->operation);
@@ -268,7 +270,8 @@ class Novo_Reports_Model extends NOVO_Model {
 			'anio' => $date[1]
 		];
 		$this->dataRequest->empresaCliente = [
-			'rif' => $this->session->enterpriseInf->idFiscal
+			'rif' => $this->session->enterpriseInf->idFiscal,
+			'accodcia' => $this->session->enterpriseInf->enterpriseCode
 		];
 
 		$response = $this->sendToService('GetReport: '.$dataRequest->operation);
@@ -320,7 +323,8 @@ class Novo_Reports_Model extends NOVO_Model {
 			'producto' => $this->session->productInf->productPrefix
 		];
 		$this->dataRequest->empresaCliente = [
-			'rif' => $this->session->enterpriseInf->idFiscal
+			'rif' => $this->session->enterpriseInf->idFiscal,
+			'accodcia' => $this->session->enterpriseInf->enterpriseCode
 		];
 
 		$response = $this->sendToService('GetReport: '.$dataRequest->operation);
@@ -528,7 +532,8 @@ class Novo_Reports_Model extends NOVO_Model {
 			'tarjeta' => [
 				'noTarjeta' => $this->session->flashdata('cardsPeople')[$dataRequest->cardNumberId],
 				'id_ext_per' => $dataRequest->idType.'_'.$dataRequest->idNumber,
-				'rif' => $this->session->enterpriseInf->idFiscal
+				'rif' => $this->session->enterpriseInf->idFiscal,
+				'accodcia' => $this->session->enterpriseInf->enterpriseCode
 			],
 			'fechaInicio' => convertDate($dataRequest->peopleDateBegin),
 			'fechaFin' => convertDate($dataRequest->peopleDateEnd)
@@ -581,7 +586,8 @@ class Novo_Reports_Model extends NOVO_Model {
 			'anio' => $dataRequest->dateG
 		];
 		$this->dataRequest->empresaCliente = [
-			'rif' => $this->session->enterpriseInf->idFiscal
+			'rif' => $this->session->enterpriseInf->idFiscal,
+			'accodcia' => $this->session->enterpriseInf->enterpriseCode
 		];
 
 		$response = $this->sendToService('GetReport: '.$dataRequest->operation);
@@ -662,7 +668,7 @@ class Novo_Reports_Model extends NOVO_Model {
 				$this->response->code = 0;
 			break;
 		}
-		$this->response->data = $statusBulkList;
+		$this->response->data['statusBulkList'] = $statusBulkList;
 
 		return $this->responseToTheView('callWs_StatusBulk');
 	}
@@ -1026,24 +1032,26 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->dataRequest->idProducto = $dataRequest->productCode;
 		$response = $this->sendToService('callWS_StatusCardHolders');
 		$cardHoldersList = [];
-		switch($this->isResponseRc) {
-			case 0:
-				$this->response->code = 0;
-				foreach($response->listadoTarjetaHabientes AS $cardHolders) {
-					$record = new stdClass();
-					$record->cardHoldersId = $cardHolders->idExtPer;
-					$record->cardHoldersName = ucwords(mb_strtolower($cardHolders->Tarjetahabiente));
-					array_push(
-						$cardHoldersList,
-						$record
-					);
-				}
-			break;
-			case -150:
-				$this->response->code = 0;
-			break;
-		}
-		$this->response->data = $cardHoldersList;
-		return $this->responseToTheView('callWS_StatusCardHolders');
+
+    switch($this->isResponseRc) {
+      case 0:
+        $this->response->code = 0;
+        foreach($response->listadoTarjetaHabientes AS $cardHolders) {
+          $record = new stdClass();
+          $record->cardHoldersId = $cardHolders->idExtPer;
+          $record->cardHoldersName = ucwords(mb_strtolower($cardHolders->Tarjetahabiente));
+          array_push(
+            $cardHoldersList,
+            $record
+          );
+        }
+      break;
+      case -150:
+        $this->response->code = 0;
+      break;
+    }
+    $this->response->data['cardHoldersList'] = $cardHoldersList;
+
+    return $this->responseToTheView('callWS_StatusCardHolders');
 	}
 }
