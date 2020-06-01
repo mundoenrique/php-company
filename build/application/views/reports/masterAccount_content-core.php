@@ -1,6 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 <h1 class="primary h3 regular inline"><?= lang('GEN_MENU_REP_MASTER_ACCOUNT'); ?></h1>
-<span class="ml-2 regular tertiary"><?= $productName ?></span>
+
 <div class="mb-2 flex items-center">
 	<div class="flex tertiary">
 		<nav class="main-nav nav-inferior">
@@ -53,7 +53,7 @@
 							</div>
 							<input id="tamP" name="tam-p" class="hide" value="<?= $tamP ?>">
 							<div id="radio-form" class="form-group col-4 col-lg-4 col-xl-5">
-								<label class="block">Resultados</label>
+								<label  class="block">Resultados</label>
 								<div class="custom-control custom-radio custom-control-inline">
 									<input type="radio" id="trimester" name="results" class="custom-control-input" value="all">
 									<label class="custom-control-label mr-1" for="trimester">Trimestre</label>
@@ -97,7 +97,7 @@
 			</div>
 
 			<div class="flex pb-5 flex-column">
-				<span class="line-text mb-2 h4 semibold primary">Cuenta concentradora</span>
+				<span id="titleResults" class="line-text mb-2 h4 semibold primary">Resultados</span>
 
 				<div id="spinnerBlockMasterAccount" class=" hide">
 									<div id="pre-loader" class="mt-2 mx-auto flex justify-center">

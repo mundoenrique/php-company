@@ -127,6 +127,7 @@ class Novo_Reports extends NOVO_Controller {
 		);
 
 		$this->request->idFiscal = $this->session->enterpriseInf->idFiscal;
+		$this->request->enterpriseCode = $this->session->enterpriseInf->enterpriseCode;
 		if($this->session->has_userdata('idReportsBusiness') != null){
 			$this->load->model('Novo_Reports_Model', 'obtenerIdEmpresa');
 			$acrif = $this->obtenerIdEmpresa->callWs_obtenerIdEmpresa_Reports($this->session->idReportsBusiness->acrif);
