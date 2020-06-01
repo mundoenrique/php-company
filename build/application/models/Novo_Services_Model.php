@@ -50,6 +50,12 @@ class Novo_Services_Model extends NOVO_Model {
 
 		$response = $this->sendToService('callWs_TransfMasterAccount');
 		$cardsList = [];
+		$this->response->params['costoComisionTrans'] = '--';
+		$this->response->params['costoComisionCons'] = '--';
+		$this->response->balance = '';
+		$this->response->recordsTotal = 0;
+		$this->response->recordsFiltered = 0;
+
 		switch($this->isResponseRc) {
 			case 0:
 				foreach ($response->listadoTarjetas->lista AS $cards) {
@@ -79,10 +85,9 @@ class Novo_Services_Model extends NOVO_Model {
 				$this->response->draw = (int) $dataRequest->draw;
 				$this->response->recordsTotal = (int) $response->listaTarjetas[0]->totalRegistros;
 				$this->response->recordsFiltered = (int) $response->listaTarjetas[0]->totalRegistros;
-				$this->response->data = $cardsList;
 				break;
-			case -5000:
-				$this->response->code = 1;
+			case -150:
+
 
 				break;
 			case -6000:
@@ -108,6 +113,9 @@ class Novo_Services_Model extends NOVO_Model {
 			break;
 
 		}
+
+		$this->response->draw = (int) $dataRequest->draw;
+		$this->response->data = $cardsList;
 
 		return $this->responseToTheView('callWs_TransfMasterAccount');
 	}
@@ -137,11 +145,11 @@ class Novo_Services_Model extends NOVO_Model {
 			switch ($dataRequest->action) {
 				case lang('GEN_CHECK_BALANCE'):
 				case 'consulta':
-				case 'Bloqueo temporal':
-				case 'Desbloqueo tarjeta':
+				case lang('GEN_TEMPORARY_LOCK'):
+				case lang('GEN_UNLOCK_CARD'):
 					unset($card['montoTransaccion']);
 				break;
-				case 'Asignación tarjeta':
+				case lang('GEN_CARD_ASSIGNMENT'):
 					unset($card['montoTransaccion']);
 					$card['noTarjetaAsig'] = $cardsInfo->cardNumberAs;
 				break;
@@ -166,16 +174,16 @@ class Novo_Services_Model extends NOVO_Model {
 				$this->dataAccessLog->operation = lang('GEN_DEBIT_TO_CARD');
 				$this->dataRequest->idOperation = 'cargoTM';
 			break;
-			case 'Bloqueo temporal':
-				$this->dataAccessLog->operation = 'Bloqueo temporal';
+			case lang('GEN_TEMPORARY_LOCK'):
+				$this->dataAccessLog->operation = lang('GEN_TEMPORARY_LOCK');
 				$this->dataRequest->idOperation = 'bloqueoTM';
 			break;
-			case 'Desbloqueo tarjeta':
-				$this->dataAccessLog->operation = 'Desbloqueo tarjeta';
+			case lang('GEN_UNLOCK_CARD'):
+				$this->dataAccessLog->operation = lang('GEN_UNLOCK_CARD');
 				$this->dataRequest->idOperation = 'desbloqueoTM';
 			break;
-			case 'Asignación tarjeta':
-				$this->dataAccessLog->operation = 'Reasignar tarjeta';
+			case lang('GEN_CARD_ASSIGNMENT'):
+				$this->dataAccessLog->operation = lang('GEN_CARD_ASSIGNMENT');
 				$this->dataRequest->idOperation = 'reasignacionTM';
 			break;
 		}
@@ -203,18 +211,41 @@ class Novo_Services_Model extends NOVO_Model {
 		];
 
 		$response = $this->sendToService('callWs_ActionMasterAccount');
+		$listResopnse = [];
+		$listFail = [];
 
-		$this->response->msg = $response->msg;
-		$this->response->data['btn1']['text'] = lang('GEN_BTN_ACCEPT');
-		$this->response->data['btn1']['action'] = 'close';
+
 
 		switch ($this->isResponseRc) {
 			case 0:
-				# code...
+				$this->response->code = 0;
+				if ($dataRequest->action == lang('GEN_CHECK_BALANCE') || $dataRequest->action == 'consulta') {
+					foreach ($response->listadoTarjetas->lista as $key => $cards) {
+						$record = new stdClass();
+						$record->usersId = $cards->id_ext_per;
+						$record->cardNumber = $cards->noTarjetaConMascara;
+						$record->balance = isset($cards->saldos) ?  lang('GEN_CURRENCY').' '.$cards->saldos->disponible : '--';
+						$listResopnse[] = $record;
+
+						if ($record->balance == '--') {
+							$this->response->code = 4;
+							$listFail[] = $cards->noTarjetaConMascara;
+						}
+					}
+
+					if (count($listFail) > 0) {
+						$this->response->code = 2;
+						$this->response->title = $dataRequest->action;
+						$this->response->msg = 'No fue posible obtener el saldo para';
+					}
+
+					$this->response->data['listResponse'] = $listResopnse;
+					$this->response->data['listFail'] = $listFail;
+				}
 			break;
 			case -33:
 			case -266:
-				log_message('info', '*******************   '.$response->bean);
+
 			break;
 
 			default:

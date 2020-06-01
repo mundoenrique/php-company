@@ -324,3 +324,6 @@ $lang['GEN_DETAIL_BARND_COLOR'] = '_card-white.svg';
 $lang['GEN_CHECK_BALANCE'] = 'Consultar saldo';
 $lang['GEN_CREDIT_TO_CARD'] = 'Abonar a tarjeta';
 $lang['GEN_DEBIT_TO_CARD'] = 'Cargo a tarjeta';
+$lang['GEN_TEMPORARY_LOCK'] = 'Bloqueo temporal';
+$lang['GEN_UNLOCK_CARD'] = 'Desbloqueo tarjeta';
+$lang['GEN_CARD_ASSIGNMENT'] = 'Desbloqueo tarjeta';

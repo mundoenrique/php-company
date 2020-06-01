@@ -70,7 +70,7 @@ $(function () {
 			inputModal+= 			'<div class="help-block"></div>';
 			inputModal+= 		'</div>';
 
-			if (action == 'Asignación tarjeta') {
+			if (action == lang.GEN_CARD_ASSIGNMENT) {
 				inputModal+= 		'<div class="form-group col-auto">';
 				inputModal+= 			'<div class="input-group">';
 				inputModal+= 				'<input class="form-control" type="text" name="cardNumber" autocomplete="off"';
@@ -198,17 +198,27 @@ function dataTableBuild(dataForm) {
 				},
 			},
 			{
+				"targets": 1,
+				"className": "card-number",
+				"width": "200px"
+			},
+			{
+				"targets": 2,
+				"width": "200px",
+			},
+			{
 				"targets": 3,
-				"width": "auto",
-				render: function (data, type, row) {
-					return data.length > 20 ?
-						data.substr(0, 20) + '…' :
-						data;
-				}
+				"className": "user-id",
+				"width": "auto"
+			},
+			{
+				"targets": 4,
+				"className": "balance",
+				"width": "120px"
 			},
 			{
 				"targets": 5,
-				"width": "70px"
+				"width": "90px"
 			},
 			{
 				"targets": 6,
@@ -262,19 +272,19 @@ function dataTableBuild(dataForm) {
 					}
 
 					if (access.TRABLQ && data.status == '') {
-						options+=		'<button class="btn mx-1 px-0" title="Bloqueo temporal" data-toggle="tooltip" amount="0">';
+						options+=		'<button class="btn mx-1 px-0" title="'+lang.GEN_TEMPORARY_LOCK+'" data-toggle="tooltip" amount="0">';
 						options+=			'<i class="icon novoglyphs icon-lock" aria-hidden="true"></i>';
 						options+=		'</button>';
 					}
 
 					if (access.TRADBL && data.status == 'pb') {
-						options+=		'<button class="btn mx-1 px-0" title="Desbloqueo tarjeta" data-toggle="tooltip" amount="0">';
+						options+=		'<button class="btn mx-1 px-0" title="'+lang.GEN_UNLOCK_CARD+'" data-toggle="tooltip" amount="0">';
 						options+=			'<i class="icon novoglyphs icon-unlock" aria-hidden="true"></i>';
 						options+=		'</button>';
 					}
 
 					if (access.TRAASG) {
-						options+=		'<button class="btn mx-1 px-0" title="Asignación tarjeta" data-toggle="tooltip" amount="0">';
+						options+=		'<button class="btn mx-1 px-0" title="'+lang.GEN_CARD_ASSIGNMENT+'" data-toggle="tooltip" amount="0">';
 						options+=			'<i class="icon novoglyphs icon-arrow-left" aria-hidden="true"></i>';
 						options+=		'</button>';
 					}
@@ -303,7 +313,7 @@ function sendRequest(action, modalReq, btn) {
 			info['idNumber'] = cardsData[i].idNumber;
 			info['amount'] = cardsData[i].amount;
 
-			if (action == 'Asignación tarjeta') {
+			if (action == lang.GEN_CARD_ASSIGNMENT) {
 				info['cardNumberAs'] = form.find('input[name=cardNumber]').val()
 			}
 
@@ -331,6 +341,21 @@ function sendRequest(action, modalReq, btn) {
 			.html(btnText)
 			.prop('disabled', false);
 			insertFormInput(false);
+
+			if (action == lang.GEN_CARD_ASSIGNMENT || 'consulta') {
+				$.each(response.data.listResponse, function(key, value) {
+					$('#tableServicesMaster').find('tbody > tr').each(function(index, element) {
+						if(value.cardNumber == $(element).find('td.card-number').text()) {
+							$(element).find('td.balance').text(value.balance)
+							if (value.balance != '--') {
+								$(element).find('td.balance').addClass('text-right')
+							} else {
+								$(element).find('td.balance').removeClass('text-right')
+							}
+						}
+					})
+				})
+			}
 		})
 	}
 }
