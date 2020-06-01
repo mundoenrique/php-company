@@ -371,8 +371,7 @@ class Novo_Reports_Model extends NOVO_Model {
 
 		$this->dataRequest->noTarjeta = $dataRequest->cardNumber;
 		$this->dataRequest->rif = $this->session->enterpriseInf->idFiscal;
-		$this->dataRequest->acCodCia = $this->session->enterpriseInf->idFiscal;
-
+		$this->dataRequest->acCodCia = $this->session->enterpriseInf->enterpriseCode;
 
 		$response = $this->sendToService('GetReport: '.$dataRequest->operation);
 
@@ -535,7 +534,7 @@ class Novo_Reports_Model extends NOVO_Model {
 				'noTarjeta' => $this->session->flashdata('cardsPeople')[$dataRequest->cardNumberId],
 				'id_ext_per' => $dataRequest->idType.'_'.$dataRequest->idNumber,
 				'rif' => $this->session->enterpriseInf->idFiscal,
-				'accodcia' => $this->session->enterpriseInf->enterpriseCode
+				'acCodCia' => $this->session->enterpriseInf->enterpriseCode
 			],
 			'fechaInicio' => convertDate($dataRequest->peopleDateBegin),
 			'fechaFin' => convertDate($dataRequest->peopleDateEnd)
