@@ -43,6 +43,7 @@ function validateForms(form) {
 			"user-name": 	{required: true, pattern: alphanumunder},
 			"id-company": 	{required: true, fiscalRegistry: true},
 			"email": 	{required: true, pattern: emailValid},
+			"nit": 	{ pattern: numeric},
 			"current-pass": {required: true},
 			"new-pass": {required: true, differs: "#currentPass", validatePass: true},
 			"confirm-pass": {required: true, equalTo: "#newPass"},
@@ -107,6 +108,7 @@ function validateForms(form) {
 			"initialDate": {required: true, pattern: date.dmy},
 			"finalDate": {required: true, pattern: date.dmy},
 			"idNumber": {pattern: idNumberReg},
+			"anio-consolid": {required: true},
 			"cardNumber": {
 				required: {
 					depends: function (element) {
@@ -128,7 +130,9 @@ function validateForms(form) {
 				verifyPattern: lang.VALIDATE_USERPASS_PATT
 			},
 			"user-name": lang.VALIDATE_USERNAME,
+			"nit": lang.VALIDATE_USERNAME,
 			"id-company": lang.VALIDATE_ID_COMPANY,
+			"anio-consolid": lang.VALIDATE_SELECTED_YEAR,
 			"email": lang.VALIDATE_EMAIL,
 			"current-pass": lang.VALIDATE_CURRENT_PASS,
 			"new-pass": {

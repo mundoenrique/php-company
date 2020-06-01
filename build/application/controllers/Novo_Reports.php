@@ -105,6 +105,8 @@ class Novo_Reports extends NOVO_Controller {
 	 * @info Método para accder al reporte de saldo al cierre
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date May 7th, 2020
+	 * @modified Diego Acosta García
+	 * @date May 22th, 2020
 	 */
 	public function closingBalance()
 	{
@@ -123,17 +125,29 @@ class Novo_Reports extends NOVO_Controller {
 			"third_party/additional-methods",
 			"reports/closing_balance"
 		);
-		$this->request->select = TRUE;
+
 		$this->request->idFiscal = $this->session->enterpriseInf->idFiscal;
-		$this->load->model('Novo_Business_Model', 'getProducts');
-		$products = $this->getProducts->callWs_GetProducts_Business($this->request);
-		$this->render->selectProducts = $products->code === 0 ? lang('GEN_SELECT_PRODUCTS') : lang('RESP_TRY_AGAIN');
-		$this->responseAttr($products);
-		$this->render->products = $products->code !== 0 ? FALSE : $products->data;
-		$this->render->currentProd = $this->session->productInf->productPrefix;
+		$this->request->enterpriseCode = $this->session->enterpriseInf->enterpriseCode;
+		if($this->session->has_userdata('idReportsBusiness') != null){
+			$this->load->model('Novo_Reports_Model', 'obtenerIdEmpresa');
+			$acrif = $this->obtenerIdEmpresa->callWs_obtenerIdEmpresa_Reports($this->session->idReportsBusiness->acrif);
+			$this->request->idFiscal = $acrif->data[0];
+		}
+		if($this->session->has_userdata('enterpriseInf') != null){
+			$this->request->select = TRUE;
+			$this->load->model('Novo_Business_Model', 'getProducts');
+			$response = $this->getProducts->callWs_GetProducts_Business($this->request);
+			$this->render->selectProducts = $response->code === 0 ? lang('GEN_SELECT_PRODUCTS') : lang('RESP_TRY_AGAIN');
+			$this->responseAttr($response);
+			$this->render->productsSelect = $response->code !== 0 ? FALSE : $response->data;
+			$this->render->prod = lang('RESP_NO_PRODUCT');
+			$this->render->tamP = 1000000;
+			$this->render->currentProd = $this->session->productInf->productPrefix;
+		}
 		$this->render->titlePage = lang('GEN_MENU_REP_CLOSING_BAKANCE');
 		$this->views = ['reports/'.$view];
 		$this->loadView($view);
+
 	}
 	/**
 	 * @info Método para accder al reporte de actividad por usuario
@@ -265,6 +279,7 @@ class Novo_Reports extends NOVO_Controller {
 			"third_party/additional-methods",
 			"reports/master_account"
 		);
+		$this->render->tamP = 1000000;
 		$this->responseAttr();
 		$this->render->titlePage = lang('GEN_MENU_REP_MASTER_ACCOUNT');
 		$this->views = ['reports/'.$view];
@@ -304,13 +319,13 @@ class Novo_Reports extends NOVO_Controller {
 		if ($this->session->flashdata('download')) {
 			$response = $this->session->flashdata('download');
 		}
-
 		$this->responseAttr($response);
 		$this->render->currentProd = $this->session->productInf->productPrefix;
 		$this->render->titlePage = lang('GEN_MENU_REP_STATUS_BULK');
 		$this->views = ['reports/'.$view];
 		$this->loadView($view);
 	}
+
 	/**
 	 * @info Método para accder al reporte de tarjetahbientes
 	 * @author J. Enrique Peñaloza Piñero
@@ -353,3 +368,4 @@ class Novo_Reports extends NOVO_Controller {
 		$this->loadView($view);
 	}
 }
+

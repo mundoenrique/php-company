@@ -672,16 +672,357 @@ class Novo_Reports_Model extends NOVO_Model {
 
 		return $this->responseToTheView('callWs_StatusBulk');
 	}
+				/**
+	 * @info Método para Obtener la posicion de la empresa
+	 * @author Diego Acosta García
+	 * @date May 21, 2020
+	 */
+	public function callWs_obtenerIdEmpresa_Reports($dataRequest)
+	{
+		log_message('INFO', 'NOVO Reports Model: obtenerIdEmpresa Method Initialized');
+		$this->className = 'com.novo.objects.TOs.EmpresaTO';
+		$this->dataAccessLog->modulo = 'Reportes';
+		$this->dataAccessLog->function = 'Id empresa';
+		$this->dataAccessLog->operation = 'Obtener id de empresa';
+		$this->dataRequest->idOperation = 'buscarIdEmpresa';
+		$response =  $dataRequest;
+
+		switch($this->isResponseRc = 0) {
+			case 0:
+			$user = $response;
+			$this->response->data =  (array)$user;
+				}
+
+		return $this->response;
+	}
+		/**
+	 * @info Método para obtener la lista de saldos amanecidos
+	 * @author Diego Acosta García
+	 * @date May 21, 2020
+	 */
+	public function callWs_closingBudgets_Reports($dataRequest)
+	{
+		log_message('INFO', 'NOVO Reports Model: closingBudgets Method Initialized');
+
+		$this->className = 'com.novo.objects.MO.SaldosAmanecidosMO';
+
+		$this->dataAccessLog->modulo = 'Reportes';
+		$this->dataAccessLog->function = 'Estado de lote';
+		$this->dataAccessLog->operation = 'Obtener lista lotes por estado';
+		$this->dataRequest->idOperation = 'saldosAmanecidos';
+		$this->dataRequest->idExtPer = $dataRequest->cedula;
+		$this->dataRequest->producto =  $dataRequest->producto;
+		$this->dataRequest->idExtEmp =  $dataRequest->empresa;
+		$this->dataRequest->tamanoPagina = $dataRequest->tamPg;
+		$this->dataRequest->paginar = $dataRequest->paginar;
+		$this->dataRequest->paginaActual = $dataRequest->paginaActual;
+
+
+		$response = $this->sendToService('callWs_closingBudgets');
+
+		switch($this->isResponseRc) {
+			case 0:
+				$this->response->code = 0;
+				$user = $response;
+				$this->response->data =  (array)$user;
+			break;
+			case -150:
+				$this->response->code = 1;
+
+			break;
+		}
+
+		return $this->responseToTheView('callWs_closingBudgets');
+	}
+		/**
+	 * @info Método para obtener excel de tabla saldos al cierre
+	 * @author Diego Acosta García
+	 * @date May 21, 2020
+	 */
+	public function callWs_exportToExcel_Reports($dataRequest)
+	{
+		log_message('INFO', 'NOVO Reports Model: exportToExcel Method Initialized');
+
+		$this->className = 'com.novo.objects.MO.SaldosAmanecidosMO';
+
+		$this->dataAccessLog->modulo = 'Reportes';
+		$this->dataAccessLog->function = 'Saldos amanecidos';
+		$this->dataAccessLog->operation = 'Obtener excel de tabla';
+		$this->dataRequest->idOperation = 'generaArchivoXls';
+		$this->dataRequest->idExtPer = $dataRequest->cedula;
+		$this->dataRequest->producto =  $dataRequest->producto;
+		$this->dataRequest->idExtEmp =  $dataRequest->empresa;
+		$this->dataRequest->tamanoPagina = $dataRequest->tamPg;
+		$this->dataRequest->paginar = $dataRequest->paginar;
+		$this->dataRequest->paginaActual = $dataRequest->paginaActual;
+		$this->dataRequest->descProd =  $dataRequest->descProd;
+
+
+		$response = $this->sendToService('callWs_exportToExcel');
+
+		switch($this->isResponseRc) {
+			case 0:
+				$this->response->code = 0;
+				$user = $response;
+				$this->response->data =  (array)$user;
+
+			break;
+
+			case -3:
+				$this->response->code = 4;
+				$this->response->icon = lang('GEN_ICON_DANGER');
+				$this->response->title = lang('REPORTS_TITLE');
+				$this->response->msg = lang('REPORTS_NO_BUDGET');
+				$this->response->data['btn1']['action'] = 'close';
+
+			break;
+		}
+
+		return $this->response;
+	}
+
+		/**
+	 * @info Método para obtener resultados de cuenta maestra
+	 * @author Diego Acosta García
+	 * @date May 26, 2020
+	 */
+	public function callWs_masterAccount_Reports($dataRequest)
+	{
+		log_message('INFO', 'NOVO Reports Model: masterAccount Method Initialized');
+
+		$this->className = 'com.novo.objects.MO.DepositosGarantiaMO';
+		$this->dataAccessLog->modulo = 'Reportes';
+		$this->dataAccessLog->function = 'Obtener resultados de busqueda';
+		$this->dataAccessLog->operation = 'Cuenta maestra';
+		$this->dataRequest->idOperation = 'buscarDepositoGarantia';
+		$this->dataRequest->idExtEmp = $dataRequest->idExtEmp;
+		$this->dataRequest->fechaIni = $dataRequest->fechaIni;
+		$this->dataRequest->fechaFin =  $dataRequest->fechaFin;
+		$this->dataRequest->tipoNota =  $dataRequest->tipoNota;
+		$this->dataRequest->filtroFecha = $dataRequest->filtroFecha;
+		$this->dataRequest->tamanoPagina = $dataRequest->tamanoPagina;
+		$this->dataRequest->paginaActual = 1;
+
+		$response = $this->sendToService('callWs_masterAccount');
+
+		switch($this->isResponseRc) {
+			case 0:
+				$this->response->code = 0;
+				$user = $response;
+				$this->response->data =  (array)$user;
+			break;
+
+			case -150:
+				$this->response->code = 1;
+			break;
+		}
+
+		return $this->response;
+	}
+
+		/**
+	 * @info Método para obtener excel de tabla cuenta maestra
+	 * @author Diego Acosta García
+	 * @date May 21, 2020
+	 */
+	public function callWs_exportToExcelMasterAccount_Reports($dataRequest)
+	{
+		log_message('INFO', 'NOVO Reports Model: exportToExcelMasterAccount Method Initialized');
+
+		$this->className = 'com.novo.objects.MO.DepositosGarantiaMO';
+
+		$this->dataAccessLog->modulo = 'Reportes';
+		$this->dataAccessLog->function = 'cuenta maestra';
+		$this->dataAccessLog->operation = 'Obtener excel de tabla cuenta maestra';
+		$this->dataRequest->idOperation = 'generarDepositoGarantia';
+		$this->dataRequest->idExtEmp = $dataRequest->idExtEmp;
+		$this->dataRequest->fechaIni =  $dataRequest->fechaIni;
+		$this->dataRequest->fechaFin =  $dataRequest->fechaFin;
+		$this->dataRequest->filtroFecha = $dataRequest->filtroFecha;
+		$this->dataRequest->nombreEmpresa = $dataRequest->nombreEmpresa;
+		$this->dataRequest->paginaActual = $dataRequest->paginaActual;
+		$this->dataRequest->producto =  $this->session->userdata('productInf')->productPrefix;
+		$this->dataRequest->tamanoPagina =  $dataRequest->tamanoPagina;
+
+
+		$response = $this->sendToService('callWs_exportToExcelMasterAccount');
+
+		switch($this->isResponseRc) {
+			case 0:
+				$this->response->code = 0;
+				$user = $response;
+				$this->response->data =  (array)$user;
+
+			break;
+
+			case -3:
+				$this->response->code = 4;
+				$this->response->icon = lang('GEN_ICON_DANGER');
+				$this->response->title = lang('REPORTS_TITLE');
+				$this->response->msg = lang('REPORTS_NO_BUDGET');
+				$this->response->data['btn1']['action'] = 'close';
+
+			break;
+		}
+
+		return $this->response;
+	}
+
+		/**
+	 * @info Método para obtener excel de tabla cuenta maestra
+	 * @author Diego Acosta García
+	 * @date May 21, 2020
+	 */
+	public function callWs_exportToPDFMasterAccount_Reports($dataRequest)
+	{
+		log_message('INFO', 'NOVO Reports Model: exportToPDFMasterAccount Method Initialized');
+
+		$this->className = 'com.novo.objects.MO.DepositosGarantiaMO';
+
+		$this->dataAccessLog->modulo = 'Reportes';
+		$this->dataAccessLog->function = 'cuenta maestra';
+		$this->dataAccessLog->operation = 'Obtener pdf de tabla cuenta maestra';
+		$this->dataRequest->idOperation = 'generarDepositoGarantiaPdf';
+		$this->dataRequest->idExtEmp = $dataRequest->idExtEmp;
+		$this->dataRequest->fechaIni =  $dataRequest->fechaIni;
+		$this->dataRequest->fechaFin =  $dataRequest->fechaFin;
+		$this->dataRequest->filtroFecha = $dataRequest->filtroFecha;
+		$this->dataRequest->nombreEmpresa = $dataRequest->nombreEmpresa;
+		$this->dataRequest->paginaActual = $dataRequest->paginaActual;
+		$this->dataRequest->producto =  $this->session->userdata('productInf')->productPrefix;
+		$this->dataRequest->tamanoPagina =  $dataRequest->tamanoPagina;
+
+
+		$response = $this->sendToService('callWs_exportToPDFMasterAccount');
+
+		switch($this->isResponseRc) {
+			case 0:
+				$this->response->code = 0;
+				$user = $response;
+				$this->response->data =  (array)$user;
+
+			break;
+
+			case -3:
+				$this->response->code = 4;
+				$this->response->icon = lang('GEN_ICON_DANGER');
+				$this->response->title = lang('REPORTS_TITLE');
+				$this->response->msg = lang('REPORTS_NO_BUDGET');
+				$this->response->data['btn1']['action'] = 'close';
+
+			break;
+		}
+
+		return $this->response;
+	}
+
+
+			/**
+	 * @info Método para obtener excel de tabla cuenta maestra consolidado
+	 * @author Diego Acosta García
+	 * @date May 21, 2020
+	 */
+	public function callWs_exportToExcelMasterAccountConsolid_Reports($dataRequest)
+	{
+		log_message('INFO', 'NOVO Reports Model: exportToExcelMasterAccountConsolid Method Initialized');
+
+		$this->className = 'com.novo.objects.MO.DepositosGarantiaMO';
+
+		$this->dataAccessLog->modulo = 'Reportes';
+		$this->dataAccessLog->function = 'cuenta maestra';
+		$this->dataAccessLog->operation = 'Obtener excel de tabla cuenta maestra';
+		$this->dataRequest->idOperation = 'generaArchivoXlsConcil';
+		$this->dataRequest->anio = $dataRequest->anio;
+		$this->dataRequest->idExtEmp = $dataRequest->idExtEmp;
+		$this->dataRequest->fechaIni =  $dataRequest->fechaIni;
+		$this->dataRequest->fechaFin =  $dataRequest->fechaFin;
+		$this->dataRequest->filtroFecha = $dataRequest->filtroFecha;
+		$this->dataRequest->nombreEmpresa = $dataRequest->nombreEmpresa;
+		$this->dataRequest->paginaActual = $dataRequest->paginaActual;
+		$this->dataRequest->producto =  $this->session->userdata('productInf')->productPrefix;
+		$this->dataRequest->tamanoPagina =  $dataRequest->tamanoPagina;
+
+
+		$response = $this->sendToService('callWs_exportToExcelMasterAccountConsolid');
+
+		switch($this->isResponseRc) {
+			case 0:
+				$this->response->code = 0;
+				$user = $response;
+				$this->response->data =  (array)$user;
+
+			break;
+
+			case -3:
+				$this->response->code = 4;
+				$this->response->icon = lang('GEN_ICON_DANGER');
+				$this->response->title = lang('REPORTS_TITLE');
+				$this->response->msg = lang('REPORTS_NO_BUDGET');
+				$this->response->data['btn1']['action'] = 'close';
+
+			break;
+		}
+
+		return $this->response;
+	}
+
+		/**
+	 * @info Método para obtener excel de tabla cuenta maestra consolidado
+	 * @author Diego Acosta García
+	 * @date May 21, 2020
+	 */
+	public function callWs_exportToPDFMasterAccountConsolid_Reports($dataRequest)
+	{
+		log_message('INFO', 'NOVO Reports Model: exportToPDFMasterAccountConsolid Method Initialized');
+
+		$this->className = 'com.novo.objects.MO.DepositosGarantiaMO';
+
+		$this->dataAccessLog->modulo = 'Reportes';
+		$this->dataAccessLog->function = 'cuenta maestra';
+		$this->dataAccessLog->operation = 'Obtener pdf de tabla cuenta maestra consolidado';
+		$this->dataRequest->idOperation = 'generaArchivoConcilPdf';
+		$this->dataRequest->anio = $dataRequest->anio;
+		$this->dataRequest->idExtEmp = $dataRequest->idExtEmp;
+		$this->dataRequest->fechaIni =  $dataRequest->fechaIni;
+		$this->dataRequest->fechaFin =  $dataRequest->fechaFin;
+		$this->dataRequest->filtroFecha = $dataRequest->filtroFecha;
+		$this->dataRequest->nombreEmpresa = $dataRequest->nombreEmpresa;
+		$this->dataRequest->paginaActual = $dataRequest->paginaActual;
+		$this->dataRequest->producto =  $this->session->userdata('productInf')->productPrefix;
+		$this->dataRequest->tamanoPagina =  $dataRequest->tamanoPagina;
+
+
+		$response = $this->sendToService('callWs_exportToPDFMasterAccountConsolid');
+
+		switch($this->isResponseRc) {
+			case 0:
+				$this->response->code = 0;
+				$user = $response;
+				$this->response->data =  (array)$user;
+
+			break;
+
+			case -3:
+				$this->response->code = 4;
+				$this->response->icon = lang('GEN_ICON_DANGER');
+				$this->response->title = lang('REPORTS_TITLE');
+				$this->response->msg = lang('REPORTS_NO_BUDGET');
+				$this->response->data['btn1']['action'] = 'close';
+
+			break;
+		}
+
+		return $this->response;
+	}
+
 
 
 	public function callWs_CardHolders_Reports($dataRequest)
 	{
 		log_message('INFO', 'NOVO Reports Model: CardHolders Method Initialized');
-
 		$this->dataAccessLog->modulo = 'Reportes';
 		$this->dataAccessLog->function = 'TarjetaHabientes';
 		$this->dataAccessLog->operation = 'Lista TarjetaHabientes';
-
 		$this->dataRequest->idOperation = 'getConsultarTarjetaHabientes';
 		$this->className = 'com.novo.objects.MO.TarjetaHabientesMO';
 		$this->dataRequest->paginaActual = 1;
@@ -689,31 +1030,28 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->dataRequest->paginar = true;
 		$this->dataRequest->rifEmpresa = $dataRequest->enterpriseCode;
 		$this->dataRequest->idProducto = $dataRequest->productCode;
-
 		$response = $this->sendToService('callWS_StatusCardHolders');
 		$cardHoldersList = [];
 
-		switch($this->isResponseRc) {
-			case 0:
-				$this->response->code = 0;
-				foreach($response->listadoTarjetaHabientes AS $cardHolders) {
-					$record = new stdClass();
-					$record->cardHoldersId = $cardHolders->idExtPer;
-					$record->cardHoldersName = ucwords(mb_strtolower($cardHolders->Tarjetahabiente));
+    switch($this->isResponseRc) {
+      case 0:
+        $this->response->code = 0;
+        foreach($response->listadoTarjetaHabientes AS $cardHolders) {
+          $record = new stdClass();
+          $record->cardHoldersId = $cardHolders->idExtPer;
+          $record->cardHoldersName = ucwords(mb_strtolower($cardHolders->Tarjetahabiente));
+          array_push(
+            $cardHoldersList,
+            $record
+          );
+        }
+      break;
+      case -150:
+        $this->response->code = 0;
+      break;
+    }
+    $this->response->data['cardHoldersList'] = $cardHoldersList;
 
-					array_push(
-						$cardHoldersList,
-						$record
-					);
-				}
-
-			break;
-			case -150:
-				$this->response->code = 0;
-			break;
-		}
-		$this->response->data['cardHoldersList'] = $cardHoldersList;
-
-		return $this->responseToTheView('callWS_StatusCardHolders');
+    return $this->responseToTheView('callWS_StatusCardHolders');
 	}
 }

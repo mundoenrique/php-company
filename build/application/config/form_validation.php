@@ -92,6 +92,61 @@ $config = [
 		],
 
 	],
+	'obtenerIdEmpresa' => [
+		[
+			'field' => 'acrif',
+			'rules' => 'trim'
+		],
+
+	],
+	'closingBudgets' => [
+		[
+			'field' => 'Nit',
+			'rules' => 'trim|regex_match[/^([0-9=]+)+$/i]|'
+		],
+	],
+	'exportToExcel' => [
+		[
+			'field' => 'empresa',
+			'rules' => 'trim'
+		],
+	],
+	'exportToExcel' => [
+		[
+			'field' => 'idExtEmp',
+			'rules' => 'trim'
+		],
+	],
+	'exportToExcelMasterAccount' => [
+		[
+			'field' => 'idExtEmp',
+			'rules' => 'trim'
+		],
+	],
+	'exportToPDFMasterAccount' => [
+		[
+			'field' => 'idExtEmp',
+			'rules' => 'trim'
+		],
+	],
+	'exportToExcelMasterAccountConsolid' => [
+		[
+			'field' => 'idExtEmp',
+			'rules' => 'trim'
+		],
+	],
+	'exportToPDFMasterAccountConsolid' => [
+		[
+			'field' => 'idExtEmp',
+			'rules' => 'trim'
+		],
+	],
+	'masterAccount' => [
+		[
+			'field' => 'idExtEmp',
+			'rules' => 'trim'
+		],
+	],
 	'changeTelephones' => [
 		[
 			'field' => 'tlf1',

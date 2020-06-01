@@ -6,6 +6,7 @@ $lang['VALIDATE_USERPASS_REQ'] = 'Ambos campos son requeridos';
 $lang['VALIDATE_USERPASS_PATT'] = 'Combinación incorrecta de usuario y contraseña';
 $lang['VALIDATE_FISCAL_REGISTRY'] = '^(10|15|16|17|20)[\d]{8}[\d]{1}$';
 $lang['VALIDATE_USERNAME'] = 'indica un usuario válido';
+$lang['VALIDATE_NIT'] = 'indica un número válido';
 $lang['VALIDATE_ID_COMPANY'] = 'indica un RUC válido';
 $lang['VALIDATE_EMAIL'] = 'indica un correo válido';
 $lang['VALIDATE_CURRENT_PASS'] = 'indica tu contraseña actual';

@@ -1,6 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 <h1 class="primary h3 regular inline"><?= lang('GEN_MENU_REP_MASTER_ACCOUNT'); ?></h1>
-<span class="ml-2 regular tertiary"><?= $productName ?></span>
+
 <div class="mb-2 flex items-center">
 	<div class="flex tertiary">
 		<nav class="main-nav nav-inferior">
@@ -22,19 +22,23 @@
 			<div class="search-criteria-order flex pb-3 flex-column w-100">
 				<span class="line-text mb-2 h4 semibold primary">Criterio de búsqueda</span>
 				<div class="flex my-2 px-5">
-					<form method="post" class="w-100">
+
+					<form id="masterAcForm" class="w-100">
 						<div class="row flex ">
 							<div class="form-group col-4 col-lg-4 col-xl-3">
 								<label>Empresa</label>
-								<select class="select-box custom-select flex h6 w-100">
-									<option selected disabled>Seleccionar</option>
-									<option>Option 1</option>
-									<option>Option 2</option>
-									<option>Option 3</option>
+								<select id="enterprise-report" name="enterprise_report" class="select-box custom-select mt-1 mb-4 h6 w-100">
+								<?php foreach($enterpriseList AS $enterprise) : ?>
+									<?php if($enterprise->acrif == $enterpriseData->idFiscal): ?>
+									<?php endif;?>
+									<option code="<?= $enterprise->accodcia; ?>" group="<?= $enterprise->accodgrupoe; ?>" nomOf="<?= $enterprise->acnomcia; ?>" acrif="<?= $enterprise->acrif; ?>" value="<?= $enterprise->accodcia; ?>" <?= $enterprise->acrif == $enterpriseData->idFiscal ? 'selected' : '' ?>>
+										<?= $enterprise->acnomcia; ?>
+									</option>
+									<?php endforeach; ?>
 								</select>
 								<div class="help-block"></div>
 							</div>
-							<div class="form-group col-4 col-lg-4 col-xl-4">
+							<div id="checked-form" class="form-group col-4 col-lg-4 col-xl-4">
 								<label class="block">Procedimiento</label>
 								<div class="custom-control custom-switch custom-control-inline">
 									<input id="debit" class="custom-control-input" type="checkbox" name="debit">
@@ -47,8 +51,9 @@
 									</label>
 								</div>
 							</div>
-							<div class="form-group col-4 col-lg-4 col-xl-5">
-								<label class="block">Resultados</label>
+							<input id="tamP" name="tam-p" class="hide" value="<?= $tamP ?>">
+							<div id="radio-form" class="form-group col-4 col-lg-4 col-xl-5">
+								<label  class="block">Resultados</label>
 								<div class="custom-control custom-radio custom-control-inline">
 									<input type="radio" id="trimester" name="results" class="custom-control-input" value="all">
 									<label class="custom-control-label mr-1" for="trimester">Trimestre</label>
@@ -59,23 +64,28 @@
 								</div>
 
 								<div class="custom-control custom-radio custom-control-inline">
-									<input type="radio" id="range" name="results" class="custom-control-input" value="all">
+									<input type="radio" id="range" name="results" class="custom-control-input" value="all" >
 									<label class="custom-control-label mr-1" for="range">Rango</label>
 								</div>
 								<div class="help-block"></div>
 							</div>
-							<div class="form-group col-4 col-lg-4 col-xl-3">
-								<label for="datepicker_start">Fecha Inicial</label>
-								<input id="datepicker_start" class="form-control" name="datepicker" type="text">
-								<div class="help-block"></div>
+
+							<div  class="form-group col-4 col-lg-3 col-xl-3">
+								<label for="initialDate"><?= lang('GEN_START_DAY'); ?></label>
+								<input id="initialDate" name="datepicker_start" class="form-control date-picker" type="text"
+									placeholder="<?= lang('GEN_PLACE_DATE_COMPLETTE'); ?>" readonly required>
+								<div class="help-block">
+								</div>
 							</div>
-							<div class="form-group col-4 col-lg-4 col-xl-3">
-								<label for="datepicker_end">Fecha Final</label>
-								<input id="datepicker_end" class="form-control" name="datepicker" type="text">
-								<div class="help-block"></div>
+							<div class="form-group col-4 col-lg-3 col-xl-3">
+								<label for="finalDate"><?= lang('GEN_END_DAY'); ?></label>
+								<input id="finalDate" name="datepicker_end" class="form-control date-picker" type="text"
+									placeholder="<?= lang('GEN_PLACE_DATE_COMPLETTE'); ?>" readonly required>
+								<div class="help-block "></div>
 							</div>
+
 							<div class="flex items-center justify-end col-4 col-lg-4 col-xl-6 ml-auto">
-								<button class="btn btn-primary btn-small">
+								<button id="masterAc-btn" name ="masterAc_btn"class="btn btn-primary btn-small" type="button">
 									Buscar
 								</button>
 							</div>
@@ -87,20 +97,35 @@
 			</div>
 
 			<div class="flex pb-5 flex-column">
-				<span class="line-text mb-2 h4 semibold primary">Cuenta concentradora</span>
-				<div class="center mx-1">
-					<div class="flex">
+				<span id="titleResults" class="line-text mb-2 h4 semibold primary">Resultados</span>
 
-						<div class="flex mr-2 py-3 flex-auto justify-end items-center">
-							<button class="btn px-1" title="Exportar a EXCEL" data-toggle="tooltip">
+				<div id="spinnerBlockMasterAccount" class=" hide">
+									<div id="pre-loader" class="mt-2 mx-auto flex justify-center">
+										<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
+									</div>
+						</div>
+				<div id="blockMasterAccountResults" class="center mx-1">
+					<div class="flex">
+						<div class="flex mr-2 py-3 flex-auto justify-end items-center ">
+						<div id="files-btn" class="hide">
+							<button id="export_excel" class="btn px-1 big-modal" title="Exportar a EXCEL" data-toggle="tooltip">
 								<i class="icon icon-file-excel" aria-hidden="true"></i>
 							</button>
-							<button class="btn px-1" title="Exportar a PDF" data-toggle="tooltip">
+							<button id="export_pdf" class="btn px-1 big-modal" title="Exportar a PDF" data-toggle="tooltip">
 								<i class="icon icon-file-pdf" aria-hidden="true"></i>
 							</button>
+							<?php if(FALSE): ?>
 							<button class="btn px-1" title="Generar gráfica" data-toggle="tooltip">
 								<i class="icon icon-chart-pie" aria-hidden="true"></i>
 							</button>
+							<?php endif; ?>
+							<button id="export_excelCons" class="btn px-1 big-modal" title="Exportar a EXCEL consolidado" data-toggle="tooltip">
+								<i class="icon icon-file-excel" aria-hidden="true"></i>
+							</button>
+							<button id="export_pdfCons" class="btn px-1 big-modal" title="Exportar a PDF consolidado" data-toggle="tooltip">
+								<i class="icon icon-file-pdf" aria-hidden="true"></i>
+							</button>
+						</div>
 						</div>
 					</div>
 					<table id="concenAccount" class="cell-border h6 display responsive w-100">
@@ -114,32 +139,8 @@
 								<th>Saldo</th>
 							</tr>
 						</thead>
-						<tbody>
-							<tr>
-								<td>05/12/2019 10:51</td>
-								<td>Crédito por abono</td>
-								<td>******7336</td>
-								<td>- 200.00</td>
-								<td></td>
-								<td>4,100.00</td>
-							</tr>
-							<tr>
-								<td>02/12/2019 13:02</td>
-								<td>Cargo a Cuenta Maestra</td>
-								<td>******7336</td>
-								<td></td>
-								<td>+ 100.00</td>
-								<td>3,900.00</td>
-							</tr>
-							<tr>
-								<td>02/12/2019 11:00</td>
-								<td>Crédito por abono</td>
-								<td>******7336 </td>
-								<td>- 100.00</td>
-								<td></td>
-								<td>4,000.00</td>
-							</tr>
-						</tbody>
+						<tbody id="tbody-datos-general" class = "tbody-reportes">
+            </tbody>
 					</table>
 					<div class="line my-2"></div>
 				</div>
@@ -153,3 +154,7 @@
 	<?php $this->load->view('widget/widget_enterprise-product_content'.$newViews, $widget) ?>
 	<?php endif; ?>
 </div>
+
+
+
+
