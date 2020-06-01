@@ -326,4 +326,4 @@ $lang['GEN_CREDIT_TO_CARD'] = 'Abonar a tarjeta';
 $lang['GEN_DEBIT_TO_CARD'] = 'Cargo a tarjeta';
 $lang['GEN_TEMPORARY_LOCK'] = 'Bloqueo temporal';
 $lang['GEN_UNLOCK_CARD'] = 'Desbloqueo tarjeta';
-$lang['GEN_CARD_ASSIGNMENT'] = 'Desbloqueo tarjeta';
+$lang['GEN_CARD_ASSIGNMENT'] = 'Asignación tarjeta';

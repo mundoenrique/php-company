@@ -342,7 +342,7 @@ function sendRequest(action, modalReq, btn) {
 			.prop('disabled', false);
 			insertFormInput(false);
 
-			if (action == lang.GEN_CARD_ASSIGNMENT || 'consulta') {
+			if (action == lang.GEN_CHECK_BALANCE || 'consulta') {
 				$.each(response.data.listResponse, function(key, value) {
 					$('#tableServicesMaster').find('tbody > tr').each(function(index, element) {
 						if(value.cardNumber == $(element).find('td.card-number').text()) {
