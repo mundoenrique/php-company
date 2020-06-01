@@ -1,5 +1,5 @@
 <div class="bg-color">
-	<div class="pt-3 pb-5 px-5 bg-content-config">
+	<div class="pt-3 pb-5 px-5">
 		<h1 class="primary h3 regular inline"><?= lang('GEN_SETTINGS_TITLE') ?></h1>
 		<div class="flex mt-3 bg-color justify-between">
 			<div class="flex mx-2">
@@ -41,7 +41,7 @@
 								<img class="icon-config" src="<?= $this->asset->insertFile('icon-building.svg', 'images/icons');?>">
 								<h5><?= lang('GEN_BTN_BRANCH') ?></h5>
 								<div class="box up left">
-									<img src="<?= $this->asset->insertFile('/icon-building.svg', 'images/icons');?>" class="bg">
+									<img src="<?= $this->asset->insertFile('icon-building.svg', 'images/icons');?>" class="bg">
 									<h4><?= lang('GEN_BTN_BRANCH') ?></h4>
 								</div>
 							</a>
@@ -51,10 +51,10 @@
 						<?php if (lang('CONF_DOWNLOADS_BOOL') == 'ON'): ?>
 						<li id="downloads" class="nav-item-config">
 							<a href="javascript:">
-								<img class="icon-config" src="<?= $this->asset->insertFile('/icon-download.svg', 'images/icons');?>">
+								<img class="icon-config" src="<?= $this->asset->insertFile('icon-download.svg', 'images/icons');?>">
 								<h5><?= lang('GEN_BTN_DOWNLOADS') ?></h5>
 								<div class="box up left">
-									<img src="<?= $this->asset->insertFile('/icon-download.svg', 'images/icons');?>" class="bg ">
+									<img src="<?= $this->asset->insertFile('icon-download.svg', 'images/icons');?>" class="bg ">
 									<h4><?= lang('GEN_BTN_DOWNLOADS') ?></h4>
 								</div>
 							</a>
