@@ -371,6 +371,7 @@ class Novo_Reports_Model extends NOVO_Model {
 
 		$this->dataRequest->noTarjeta = $dataRequest->cardNumber;
 		$this->dataRequest->rif = $this->session->enterpriseInf->idFiscal;
+		$this->dataRequest->acCodCia = $this->session->enterpriseInf->idFiscal;
 
 
 		$response = $this->sendToService('GetReport: '.$dataRequest->operation);
@@ -458,7 +459,8 @@ class Novo_Reports_Model extends NOVO_Model {
 
 		$this->dataRequest->tarjetaHabiente = [
 			'id_ext_per' => $dataRequest->idType.'_'.$dataRequest->idNumber,
-			'id_ext_emp' => $this->session->enterpriseInf->idFiscal
+			'id_ext_emp' => $this->session->enterpriseInf->idFiscal,
+			'acCodCia' => $this->session->enterpriseInf->enterpriseCode
 		];
 
 		$response = $this->sendToService('GetReport: '.$dataRequest->operation);
