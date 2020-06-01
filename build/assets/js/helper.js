@@ -216,7 +216,9 @@ function createButton(dialogMoldal, elementButton, valuesButton) {
 	elementButton.show();
 	elementButton.on('click', function (e) {
 		if (valuesButton.action === 'redirect') {
-			$(this).html(loader);
+			$(this)
+			.html(loader)
+			.prop('disabled', true);
 			$(this).children('span').addClass('spinner-border-sm');
 			if ($(this).attr('id') == 'cancel') {
 				$(this).children('span')

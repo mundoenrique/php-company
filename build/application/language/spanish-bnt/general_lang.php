@@ -25,3 +25,4 @@ $lang['GEN_FOOTER_IMG_YOUTUBE'] = 'youtube.png';
 $lang['GEN_FOOTER_LINK_YOUTUBE'] = 'https://www.youtube.com/user/banortemovil/';
 $lang['GEN_FOOTER_IMG_INSTAGRAM'] = 'instagram.png';
 $lang['GEN_FOOTER_LINK_INSTAGRAM'] = 'https://www.instagram.com/banorte_mx/';
+$lang['GEN_DETAIL_BARND_COLOR'] = '_card-blue.svg';

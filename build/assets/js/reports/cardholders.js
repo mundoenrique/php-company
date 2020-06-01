@@ -28,27 +28,25 @@ $(function () {
 					"language": dataTableLang
 				});
 
-				if (response.code == 0) {
-					if (response.data.length == 0) {
-						$('.download-icons').addClass('hide')
-					} else {
-						$('.download-icons').removeClass('hide')
-					}
-
-					$.each(response.data, function (index, value) {
-						table.row.add([
-							value.cardHoldersId,
-							value.cardHoldersName,
-						]).draw()
-					});
-					form = $('#download-cardholders');
-					form.html('')
-					$.each(data, function (index, value) {
-						if (index != 'screenSize') {
-							form.append('<input type="hidden" name="'+index+'" value="'+value+'">')
-						}
-					});
+				if (response.data.cardHoldersList.length == 0) {
+					$('.download-icons').addClass('hide')
+				} else {
+					$('.download-icons').removeClass('hide')
 				}
+
+				$.each(response.data.cardHoldersList, function (index, value) {
+					table.row.add([
+						value.cardHoldersId,
+						value.cardHoldersName,
+					]).draw()
+				});
+				form = $('#download-cardholders');
+				form.html('')
+				$.each(data, function (index, value) {
+					if (index != 'screenSize') {
+						form.append('<input type="hidden" name="'+index+'" value="'+value+'">')
+					}
+				});
 
 				insertFormInput(false);
 				cardHolderBtn.html(btnText);
