@@ -227,26 +227,26 @@ $(function () {
 				}
 			}
 
-			inputModal = '<form id="password-modal">';
-			inputModal += '<div class="form-group col-auto">';
-			inputModal += '<div class="input-group">';
-			inputModal += '<input class="form-control pwd-input" type="password" name="password" autocomplete="off"';
-			inputModal += 'placeholder="' + lang.GEN_PLACE_PASSWORD + '">';
-			inputModal += '<div class="input-group-append">';
-			inputModal += '<span class="input-group-text pwd-action" title="' + lang.GEN_SHOW_PASS + '"><i class="icon-view mr-0"></i></span>';
-			inputModal += '</div>';
-			inputModal += '</div>';
-			inputModal += '<div class="help-block"></div>';
-			inputModal += '</div>';
+			inputModal =	'<form id="password-modal">';
+			inputModal +=		'<div class="form-group col-auto">';
+			inputModal += 		'<div class="input-group">';
+			inputModal += 			'<input class="form-control pwd-input" type="password" name="password" autocomplete="off"';
+			inputModal += 				'placeholder="' + lang.GEN_PLACE_PASSWORD + '">';
+			inputModal += 			'<div class="input-group-append">';
+			inputModal += 				'<span class="input-group-text pwd-action" title="' + lang.GEN_SHOW_PASS + '"><i class="icon-view mr-0"></i></span>';
+			inputModal += 			'</div>';
+			inputModal += 		'</div>';
+			inputModal += 		'<div class="help-block"></div>';
+			inputModal += 	'</div>';
 
 			if (action == lang.GEN_CARD_ASSIGNMENT) {
-				inputModal += '<div class="form-group col-auto">';
-				inputModal += '<div class="input-group">';
-				inputModal += '<input class="form-control" type="text" name="cardNumber" autocomplete="off"';
-				inputModal += 'placeholder="' + lang.GEN_TABLE_CARD_NUMBER + '" req="yes">';
-				inputModal += '</div>';
-				inputModal += '<div class="help-block"></div>';
-				inputModal += '</div>';
+				inputModal += 	'<div class="form-group col-auto">';
+				inputModal += 		'<div class="input-group">';
+				inputModal += 			'<input class="form-control" type="text" name="cardNumber" autocomplete="off"';
+				inputModal += 			'placeholder="' + lang.GEN_TABLE_CARD_NUMBER + '" req="yes">';
+				inputModal += 		'</div>';
+				inputModal += 		'<div class="help-block"></div>';
+				inputModal += 	'</div>';
 			}
 
 			inputModal += '</form>';
