@@ -329,3 +329,7 @@ $lang['GEN_DEBIT_TO_CARD'] = 'Cargo a tarjeta';
 $lang['GEN_TEMPORARY_LOCK'] = 'Bloqueo temporal';
 $lang['GEN_UNLOCK_CARD'] = 'Desbloqueo tarjeta';
 $lang['GEN_CARD_ASSIGNMENT'] = 'Asignación tarjeta';
+//DATATABLES LANG MASTER ACCOUNT
+$lang['GEN_TABLE_USERACT_MODULE'] = 'Módulo';
+$lang['GEN_TABLE_USERACT_FUNCTION'] = 'Función';
+$lang['GEN_TABLE_USERACT_DATE'] = 'Fecha';

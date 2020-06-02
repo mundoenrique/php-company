@@ -1055,4 +1055,122 @@ class Novo_Reports_Model extends NOVO_Model {
 
     return $this->responseToTheView('callWS_StatusCardHolders');
 	}
+
+		/**
+	 * @info Método para obtener actividad por ususario
+	 * @author Diego Acosta García
+	 * @date May 27, 2020
+	 */
+	public function callWs_userActivity_Reports($dataRequest)
+	{
+		log_message('INFO', 'NOVO Reports Model: userActivity Method Initialized');
+
+		$this->className = 'com.novo.objects.MO.ListadoEmpresasMO';
+		$this->dataAccessLog->modulo = 'Reportes';
+		$this->dataAccessLog->function = 'Actividad por usuario';
+		$this->dataAccessLog->operation = 'Obtener actividades por usuario';
+		$this->dataRequest->idOperation = 'buscarActividadesXUsuario';
+		$this->dataRequest->fechaIni =  $dataRequest->fechaIni;
+		$this->dataRequest->fechaFin =  $dataRequest->fechaFin;
+		$this->dataRequest->acCodCia = $dataRequest->acCodCia;
+
+		$response = $this->sendToService('callWs_userActivity');
+
+		switch($this->isResponseRc) {
+			case 0:
+				$this->response->code = 0;
+				$user = $response;
+				$this->response->data =  (array)$user;
+
+			break;
+
+			case -3:
+				$this->response->code = 4;
+				$this->response->icon = lang('GEN_ICON_DANGER');
+				$this->response->title = lang('REPORTS_TITLE');
+				$this->response->msg = lang('REPORTS_NO_BUDGET');
+				$this->response->data['btn1']['action'] = 'close';
+
+			break;
+		}
+
+		return $this->response;
+	}
+
+		/**
+	 * @info Método para obtener excel de tabla cuenta maestra
+	 * @author Diego Acosta García
+	 * @date May 27, 2020
+	 */
+	public function callWs_exportToExcelUserActivity_Reports($dataRequest)
+	{
+		log_message('INFO', 'NOVO Reports Model: exportToExcelUserActivity Method Initialized');
+
+		$this->className = 'com.novo.objects.MO.DepositosGarantiaMO';
+
+		$this->dataAccessLog->modulo = 'Reportes';
+		$this->dataAccessLog->function = 'Actividad por usuario';
+		$this->dataAccessLog->operation = 'Obtener actividad por usuario en excel';
+		$this->dataRequest->idOperation = 'generarArchivoXlsActividadesXUsuario';
+		$this->dataRequest->rifEmpresa = $dataRequest->rifEmpresa;
+		$this->dataRequest->fechaIni =  $dataRequest->fechaIni;
+		$this->dataRequest->fechaFin =  $dataRequest->fechaFin;
+		$this->dataRequest->acCodCia = $dataRequest->acCodCia;
+
+		$response = $this->sendToService('callWs_exportToExcelUserActivity');
+
+		switch($this->isResponseRc) {
+			case 0:
+				$this->response->code = 0;
+				$user = $response;
+				$this->response->data =  (array)$user;
+
+			break;
+
+			case -3:
+				$this->response->code = 4;
+				$this->response->icon = lang('GEN_ICON_DANGER');
+				$this->response->title = lang('REPORTS_TITLE');
+				$this->response->msg = lang('REPORTS_NO_BUDGET');
+				$this->response->data['btn1']['action'] = 'close';
+
+			break;
+		}
+
+		return $this->response;
+	}
+
+		/**
+	 * @info Método para obtener pdf de tabla cuenta maestra
+	 * @author Diego Acosta García
+	 * @date May 27, 2020
+	 */
+	public function callWs_exportToPDFUserActivity_Reports($dataRequest)
+	{
+		log_message('INFO', 'NOVO Reports Model: exportToPDFUserActivity Method Initialized');
+
+		$this->className = 'com.novo.objects.MO.DepositosGarantiaMO';
+
+		$this->dataAccessLog->modulo = 'Reportes';
+		$this->dataAccessLog->function = 'Actividad por usuario';
+		$this->dataAccessLog->operation = 'Obtener actividad por usuario en pdf';
+		$this->dataRequest->idOperation = 'generarPdfActividadesXUsuario';
+		$this->dataRequest->rifEmpresa = $dataRequest->rifEmpresa;
+		$this->dataRequest->fechaIni =  $dataRequest->fechaIni;
+		$this->dataRequest->fechaFin =  $dataRequest->fechaFin;
+		$this->dataRequest->acCodCia = $dataRequest->acCodCia;
+
+		$response = $this->sendToService('callWs_exportToPDFUserActivity');
+
+		switch($this->isResponseRc) {
+			case 0:
+				$this->response->code = 0;
+				$user = $response;
+				$this->response->data =  (array)$user;
+
+			break;
+		}
+
+		return $this->response;
+	}
 }
