@@ -1736,7 +1736,7 @@ select::-ms-expand {
 }
 
 .logout-content {
-	margin-top: 10rem;
+	padding-top: 10rem;
 }
 
 @media screen and (max-width: 1024px) {
