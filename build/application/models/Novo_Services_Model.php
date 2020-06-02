@@ -200,6 +200,10 @@ class Novo_Services_Model extends NOVO_Model {
 					$this->response->msg =  novoLang('La tarjeta %s ha sido %s.', [$cardsList[0]['noTarjeta'], $blockType]);
 				}
 
+				if ($dataRequest->action == lang('GEN_CARD_ASSIGNMENT')) {
+					$this->response->msg =  novoLang('La tarjeta %s ha sido reemplazada por %s.', [$cardsList[0]['noTarjeta'], $cardsList[0]['noTarjetaAsig']]);
+				}
+
 				if ($dataRequest->action == lang('GEN_CHECK_BALANCE') || $dataRequest->action == 'consulta') {
 					$this->response->code = 0;
 					foreach ($response->listadoTarjetas->lista as $key => $cards) {
