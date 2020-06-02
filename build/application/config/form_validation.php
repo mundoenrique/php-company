@@ -623,5 +623,23 @@ $config = [
 			'label' => 'marcProduc',
 			'rules' => 'trim|regex_match[/^([\w-.,#ñÑáéíóúÑÁÉÍÓÚ\(\)&:\+]+[\s]*)+$/i]|required'
 		]
-	]
+		],
+	'userActivity' => [
+		[
+			'field' => 'acCodCia',
+			'rules' => 'trim'
+		],
+	],
+	'exportToExcelUserActivity' => [
+		[
+			'field' => 'acCodCia',
+			'rules' => 'trim'
+		],
+	],
+	'exportToPDFUserActivity' => [
+		[
+			'field' => 'acCodCia',
+			'rules' => 'trim'
+		],
+	],
 ];

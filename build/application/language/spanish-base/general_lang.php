@@ -316,3 +316,7 @@ $lang['GEN_FINISH_MESSAGE'] = 'Gracias por usar nuestros servicios';
 $lang['PRODUCTS_DETAIL_TITLE']= 'Detalle del producto';
 $lang['GEN_SHOW_PASS'] = 'Mostrar contraseña';
 $lang['GEN_HIDE_PASS'] = 'Ocultar contraseña';
+//DATATABLES LANG MASTER ACCOUNT
+$lang['GEN_TABLE_USERACT_MODULE'] = 'Módulo';
+$lang['GEN_TABLE_USERACT_FUNCTION'] = 'Función';
+$lang['GEN_TABLE_USERACT_DATE'] = 'Fecha';

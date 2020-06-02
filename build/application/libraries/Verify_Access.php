@@ -185,6 +185,9 @@ class Verify_Access {
 					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBCAR', 'TEBELC'));
 					break;
 				case 'authorizeBulkList':
+				case 'userActivity':
+				case 'exportToExcelUserActivity':
+				case 'exportToPDFUserActivity':
 				case 'signBulkList':
 				case 'authorizeBulk':
 				case 'bulkDetail':

@@ -352,3 +352,8 @@ $route['(:any)/visa'] = "visa/callWSVisaModel/$1";
 $route['(:any)/controles/visa/configurar'] = "visa/setup/$1";
 $route['(:any)/pagos'] = "payment/payments/$1";
 $route['(:any)/payments'] = "payment/callAPImodel/$1";
+
+//cuenta maestra
+$route['(:any)/user-activity-excel'] = "Novo_Reports/exportToExcelUserActivity";
+$route['(:any)/user-activity-pdf'] = "Novo_Reports/exportToPDFUserActivity";
+$route['(:any)/user-activity'] = "Novo_Reports/userActivity";
