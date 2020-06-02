@@ -87,8 +87,9 @@ class Novo_Services_Model extends NOVO_Model {
 				$this->response->recordsFiltered = (int) $response->listaTarjetas[0]->totalRegistros;
 			break;
 			case -150:
+				$this->response->title = lang('GEN_MENU_SERV_MASTER_ACCOUNT');
 				$this->response->icon = lang('GEN_ICON_INFO');
-				$this->reponse->msg = 'Nose encontraron resultados para tu busqueda';
+				$this->response->msg = 'Nose encontraron resultados para tu busqueda';
 				$this->response->data['btn1']['action'] = 'close';
 			break;
 		}
