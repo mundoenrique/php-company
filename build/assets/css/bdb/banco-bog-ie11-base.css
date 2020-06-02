@@ -1735,6 +1735,10 @@ select::-ms-expand {
 	}
 }
 
+.logout-content {
+	margin-top: 10rem;
+}
+
 @media screen and (max-width: 1024px) {
 	#confirm-bulk-btn .form-control{
 		width: auto !important;
