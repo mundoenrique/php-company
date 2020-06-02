@@ -112,8 +112,10 @@ function callNovoCore(verb, who, where, request, _response_) {
 		dataType: 'json'
 	}).done(function (response, status, jqXHR) {
 
-		if (request.modalReq) {
-			$('#accept').prop('disabled', false)
+		if ($('#system-info').parents('.ui-dialog:visible').length) {
+			$('#accept')
+				.prop('disabled', false)
+				.text(lang.GEN_BTN_ACCEPT)
 			$('#system-info').dialog('destroy');
 		}
 
@@ -127,8 +129,10 @@ function callNovoCore(verb, who, where, request, _response_) {
 
 	}).fail(function (jqXHR, textStatus, errorThrown) {
 
-		if (request.modalReq) {
-			$('#accept').prop('disabled', false)
+		if ($('#system-info').parents('.ui-dialog:visible').length) {
+			$('#accept')
+				.prop('disabled', false)
+				.text(lang.GEN_BTN_ACCEPT)
 			$('#system-info').dialog('destroy');
 		}
 

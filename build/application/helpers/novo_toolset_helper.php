@@ -237,6 +237,9 @@ if(!function_exists('languajeLoad')) {
 					'getReportsList'	=> ['reports'],
 					'getReport'	=> ['reports'],
 					'deleteFile'	=> ['reports'],
+					'userActivity'	=>['reports'],
+					'exportToExcelUserActivity'	=>['reports'],
+					'exportToPDFUserActivity'	=>['reports'],
 				];
 		}
 

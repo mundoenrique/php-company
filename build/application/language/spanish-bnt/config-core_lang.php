@@ -22,6 +22,7 @@ $lang['CONF_ADD_BRANCH_BOOL'] = 'OFF';
 $lang['CONF_VIDEO_BOOL'] = 'OFF';
 $lang['CONF_APPS_BOOL'] = 'OFF';
 //FILES CONF
+$lang['CONF_MANUAL_BOOL'] = 'OFF';
 $lang['CONF_PDF_FILE'] = [
   ['entropia.pdf', 'Entropía: Revisión de concepto']
 ];

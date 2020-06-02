@@ -85,36 +85,17 @@ class Novo_Services_Model extends NOVO_Model {
 				$this->response->draw = (int) $dataRequest->draw;
 				$this->response->recordsTotal = (int) $response->listaTarjetas[0]->totalRegistros;
 				$this->response->recordsFiltered = (int) $response->listaTarjetas[0]->totalRegistros;
-				break;
-			case -150:
-
-
-				break;
-			case -6000:
-				$this->response->code = 2;
-
-				break;
-			case -7000:
-				$this->response->code = 3;
-				$this->response->msg = lang('REEMPLAZAR POR TRADUCCION DESDE RESPONSE-LANG');
-				$this->response->icon = 'ui-icon-info';
-				$this->response->data = [
-					'btn1'=> [
-						'text'=> lang('BUTTON-ACCEPT'),
-						'link'=> 'inicio',
-						'action'=> 'redirect'
-					],
-					'btn2'=> [
-						'text'=> lang('BUTTON-CANCEL'),
-						'link'=> FALSE,
-						'action'=> 'close'
-					]
-				];
 			break;
-
+			case -150:
+				$this->response->title = lang('GEN_MENU_SERV_MASTER_ACCOUNT');
+				$this->response->icon = lang('GEN_ICON_INFO');
+				$this->response->msg = 'Nose encontraron resultados para tu busqueda';
+				$this->response->data['btn1']['action'] = 'close';
+			break;
 		}
 
 		$this->response->draw = (int) $dataRequest->draw;
+		$this->response->dataResp = $this->response->data;
 		$this->response->data = $cardsList;
 
 		return $this->responseToTheView('callWs_TransfMasterAccount');
@@ -214,12 +195,23 @@ class Novo_Services_Model extends NOVO_Model {
 		$listResopnse = [];
 		$listFail = [];
 
-
-
 		switch ($this->isResponseRc) {
 			case 0:
-				$this->response->code = 0;
+				$this->response->title = $dataRequest->action;
+				$this->response->icon = lang('GEN_ICON_SUCCESS');
+				$this->response->data['btn1']['action'] = 'close';
+
+				if ($dataRequest->action == lang('GEN_TEMPORARY_LOCK') || $dataRequest->action == lang('GEN_UNLOCK_CARD')) {
+					$blockType = lang('GEN_TEMPORARY_LOCK') ? 'Bloqueda' : 'desbloqueda';
+					$this->response->msg =  novoLang('La tarjeta %s ha sido %s.', [$cardsList[0]['noTarjeta'], $blockType]);
+				}
+
+				if ($dataRequest->action == lang('GEN_CARD_ASSIGNMENT')) {
+					$this->response->msg =  novoLang('La tarjeta %s ha sido reemplazada por %s.', [$cardsList[0]['noTarjeta'], $cardsList[0]['noTarjetaAsig']]);
+				}
+
 				if ($dataRequest->action == lang('GEN_CHECK_BALANCE') || $dataRequest->action == 'consulta') {
+					$this->response->code = 0;
 					foreach ($response->listadoTarjetas->lista as $key => $cards) {
 						$record = new stdClass();
 						$record->usersId = $cards->id_ext_per;
@@ -235,7 +227,6 @@ class Novo_Services_Model extends NOVO_Model {
 
 					if (count($listFail) > 0) {
 						$this->response->code = 2;
-						$this->response->title = $dataRequest->action;
 						$this->response->msg = 'No fue posible obtener el saldo para';
 					}
 
@@ -243,13 +234,23 @@ class Novo_Services_Model extends NOVO_Model {
 					$this->response->data['listFail'] = $listFail;
 				}
 			break;
-			case -33:
-			case -266:
-
+			case -1:
+				$this->response->title = $dataRequest->action;
+				$this->response->msg = lang('RESP_PASSWORD_NO_VALID');
+				$this->response->icon = lang('GEN_ICON_INFO');
+				$this->response->data['btn1']['action'] = 'close';
 			break;
-
-			default:
-				# code...
+			case -33:
+				$this->response->title = $dataRequest->action;
+				$this->response->msg = 'El saldo no esta disponible';
+				$this->response->icon = lang('GEN_ICON_WARNING');
+				$this->response->data['btn1']['action'] = 'close';
+			break;
+			case -267:
+				$this->response->title = $dataRequest->action;
+				$this->response->msg = novoLang('La tarjeta %s ya se encunetra bloqueda.', $cardsList[0]['noTarjeta']);
+				$this->response->icon = lang('GEN_ICON_WARNING');
+				$this->response->data['btn1']['action'] = 'close';
 			break;
 		}
 
