@@ -29,6 +29,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 		$this->dataRequest->idOperation = 'buscarLotesPorConfirmar';
 		$this->dataRequest->lotesTO = [
 			'idEmpresa' => $this->session->enterpriseInf->idFiscal,
+			'codCia' => $this->session->enterpriseInf->enterpriseCode,
 			'codProducto' => $this->session->productInf->productPrefix
 		];
 		$this->dataRequest->usuario = [
@@ -285,7 +286,8 @@ class Novo_Bulk_Model extends NOVO_Model {
 			case 0:
 				$this->response->cod = 0;
 				$this->response->title = lang('BULK_DELETE_TITLE');
-				$this->response->msg = novoLang(lang('BULK_DELETE_SUCCESS'), $dataRequest->bulkTicked);
+				$idTicket = $dataRequest->bulkId != '' ? $dataRequest->bulkId : $dataRequest->bulkTicked;
+				$this->response->msg = novoLang(lang('BULK_DELETE_SUCCESS'), $idTicket);
 				$this->response->icon = lang('GEN_ICON_SUCCESS');
 				$this->response->data['btn1'] = [
 					'text' => lang('GEN_BTN_ACCEPT'),

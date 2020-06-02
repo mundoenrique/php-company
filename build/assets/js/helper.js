@@ -112,8 +112,10 @@ function callNovoCore(verb, who, where, request, _response_) {
 		dataType: 'json'
 	}).done(function (response, status, jqXHR) {
 
-		if (request.modalReq) {
-			$('#accept').prop('disabled', false)
+		if ($('#system-info').parents('.ui-dialog:visible').length) {
+			$('#accept')
+				.prop('disabled', false)
+				.text(lang.GEN_BTN_ACCEPT)
 			$('#system-info').dialog('destroy');
 		}
 
@@ -127,8 +129,10 @@ function callNovoCore(verb, who, where, request, _response_) {
 
 	}).fail(function (jqXHR, textStatus, errorThrown) {
 
-		if (request.modalReq) {
-			$('#accept').prop('disabled', false)
+		if ($('#system-info').parents('.ui-dialog:visible').length) {
+			$('#accept')
+				.prop('disabled', false)
+				.text(lang.GEN_BTN_ACCEPT)
 			$('#system-info').dialog('destroy');
 		}
 
@@ -216,7 +220,9 @@ function createButton(dialogMoldal, elementButton, valuesButton) {
 	elementButton.show();
 	elementButton.on('click', function (e) {
 		if (valuesButton.action === 'redirect') {
-			$(this).html(loader);
+			$(this)
+			.html(loader)
+			.prop('disabled', true);
 			$(this).children('span').addClass('spinner-border-sm');
 			if ($(this).attr('id') == 'cancel') {
 				$(this).children('span')

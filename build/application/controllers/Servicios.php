@@ -138,8 +138,6 @@ class Servicios extends CI_Controller {
 		$paginas = $dataRequest->data_paginas;
 		$paginar = $dataRequest->data_paginar;
 
-
-
 		$acodcia = $this->session->userdata('accodciaS');
 		$acgrupo = $this->session->userdata('accodgrupoeS');
 		$sessionId = $this->session->userdata('sessionId');

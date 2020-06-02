@@ -160,6 +160,14 @@ class Verify_Access {
 				case 'getEnterprise':
 				case 'getUser':
 				case 'obtainNumPosition':
+				case 'obtenerIdEmpresa':
+				case 'exportToExcel':
+				case 'exportToExcelMasterAccount':
+				case 'exportToPDFMasterAccount':
+				case 'exportToExcelMasterAccountConsolid':
+				case 'exportToPDFMasterAccountConsolid':
+				case 'masterAccount':
+				case 'closingBudgets':
 				case 'getProducts':
 				case 'keepSession':
 				case 'options':
@@ -211,6 +219,9 @@ class Verify_Access {
 					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBORS', 'TEBANU'));
 					break;
 				case 'transfMasterAccount':
+					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TRAMAE'));
+					break;
+				case 'actionMasterAccount':
 					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TRAMAE'));
 					break;
 				case 'cardsInquiry':

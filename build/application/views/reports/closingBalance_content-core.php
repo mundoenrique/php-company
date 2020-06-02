@@ -20,44 +20,48 @@
 	<div class="w-100 hide-out hide">
 		<div class="flex flex-auto flex-column <?= $widget ? '' : 'max-width-6'; ?>">
 			<div class="search-criteria-order flex pb-3 flex-column w-100">
-				<span class="line-text mb-2 h4 semibold primary">Criterio de búsqueda</span>
+				<span class="line-text mb-2 h4 semibold primary"><?= lang('GEN_SEARCH_CRITERIA') ?></span>
 				<div class="flex my-2 px-5">
-					<form method="post" class="w-100">
+					<form id="closingBudgetForm" class="w-100">
 						<div class="row flex flex items-center justify-end col-sm-12">
 							<div class="form-group col-4 col-xl-3">
-								<label>Empresa</label>
-								<select id="enterprise-report" class="select-box custom-select mt-1 mb-4 h6 w-100">
+								<label><?= lang('GEN_ENTERPRISE') ?></label>
+								<select id="enterprise-report" name="entrep" class="select-box custom-select mt-1 mb-1 h6 w-100">
 								<?php foreach($enterpriseList AS $enterprise) : ?>
 									<?php if($enterprise->acrif == $enterpriseData->idFiscal): ?>
 									<?php endif;?>
-									<option value="<?= $enterprise->accodcia; ?>" <?= $enterprise->acrif == $enterpriseData->idFiscal ? 'selected' : '' ?>>
+									<option code="<?= $enterprise->accodcia; ?>" group="<?= $enterprise->accodgrupoe; ?>" nomOf="<?= $enterprise->acnomcia; ?>" acrif="<?= $enterprise->acrif; ?>" value="<?= $enterprise->accodcia; ?>" <?= $enterprise->acrif == $enterpriseData->idFiscal ? 'selected' : '' ?>>
 										<?= $enterprise->acnomcia; ?>
 									</option>
 									<?php endforeach; ?>
 								</select>
 								<div class="help-block"></div>
+								<input id="tamP" name="tam-p" class="hide" value="<?= $tamP ?>">
 							</div>
-							<div class="form-group col-4 col-xl-3">
-								<label>Producto</label>
-								<select class="select-box custom-select flex h6 w-100">
-								<option selected disabled><?= $selectProducts ?></option>
-									<?php if($products): ?>
-									<?php foreach($products AS $product): ?>
-									<option value="<?= $product['id']; ?>" <?= $product['id'] == $currentProd ? 'selected' : ''; ?>><?= $product['desc'] ?></option>
+							<div  class="form-group col-4 col-xl-3">
+								<label><?= lang('GEN_PRODUCT') ?></label>
+								<select id="productCode" name = "product-code" class="select-box custom-select flex h6 w-100">
+									<?php if($productsSelect): ?>
+									<?php foreach($productsSelect AS $product): ?>
+									<option  value="<?= $product['id']; ?>" <?= $product['id'] == $currentProd ? 'selected' : ''; ?>><?= $product['desc'] ?></option>
 									<?php endforeach; ?>
 									<?php endif; ?>
 								</select>
-								</select>
-								<div class="help-block"></div>
-							</div>
-							<div class="form-group col-4 col-xl-3">
-								<label>NIT. (Opcional)</label>
-								<input id="Nit" class="form-control h5" type="text" placeholder="Ingresar NIT">
+										<input id="errProd" name="err-prod" class="hide" value="<?= $prod ?>">
 								<div class="help-block"></div>
 							</div>
 
+							<div class="form-group col-4 col-xl-3">
+							<?php if (lang('CONF_NIT_INPUT_BOOL') == 'ON' ): ?>
+								<label ><?= lang('REPORTS_ID_FISCAL') ?></label>
+								<input id="Nit" class="form-control h5" name="nit" placeholder="<?= lang('REPORTS_ID_FISCAL_INPUT') ?>Ingresar NIT">
+								<div class="help-block"></div>
+								<?php endif; ?>
+							</div>
+
+
 							<div class="flex items-center justify-end col-sm-12 col-xl-3">
-								<button class="btn btn-primary btn-small">
+								<button type="button" id="closingBudgetsBtn" class="btn btn-primary btn-small">
 									Buscar
 								</button>
 							</div>
@@ -67,34 +71,40 @@
 				<div class="line mb-2"></div>
 			</div>
 
-			<div class="flex pb-5 flex-column">
-				<span class="line-text mb-2 h4 semibold primary">Resultados Saldos al cierre</span>
-				<div class="center mx-1">
-					<div class="flex mr-2 py-3 justify-end items-center">
-						<button class="btn px-1" title="Exportar a EXCEL" data-toggle="tooltip">
+			<div id="blockResult"  class="flex pb-5 flex-column ">
+				<span id="titleResults" class="line-text mb-2 h4 semibold primary">Resultados</span>
+				<div id="spinnerBlockBudget" class=" hide">
+									<div id="pre-loader" class="mt-2 mx-auto flex justify-center">
+										<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
+									</div>
+						</div>
+				<div id="blockBudgetResults" class="center mx-1 ">
+					<div id="block-btn-excel" class="flex mr-2 py-3 justify-end items-center hide">
+					<div class="cover-spin" ></div>
+						<button id="export_excel" class="btn px-1 big-modal" title="Exportar a EXCEL" data-toggle="tooltip">
 							<i class="icon icon-file-excel" aria-hidden="true"></i>
 						</button>
 					</div>
+
 					<table id="balancesClosing" class="cell-border h6 display responsive w-100">
-						<thead class="bg-primary secondary regular">
-							<tr>
+					<thead class="bg-primary secondary regular">
+                    <tr  id="datos-principales" >
 								<th>Cuenta</th>
 								<th>NIT.</th>
 								<th>Tarjeta</th>
 								<th>Saldo inicial</th>
 								<th>Última actividad</th>
 							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>PRUEBA UAT;SERVITEBCA1</td>
-								<td>010220189</td>
-								<td>************0110</td>
-								<td>0.00</td>
-								<td></td>
-							</tr>
-						</tbody>
-					</table>
+												</thead>
+
+                        <tbody id="tbody-datos-general" class = "tbody-reportes">
+                        </tbody>
+										</table>
+										<div id="hid" class=" hide">
+									<div id="pre-loader" class="mt-2 mx-auto flex justify-center">
+										<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
+									</div>
+								</div>
 					<div class="line my-2"></div>
 				</div>
 				<div class="my-5 py-4 center none">
