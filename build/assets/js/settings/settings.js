@@ -20,12 +20,10 @@ $(document).ready(function() {
         $('#' + btnv).show('slideUp').siblings().hide('slideDown');
     });
     //core
-    $.each(options, function(key, val){
+		$.each(options, function(key, val){
 			$('#'+options[key].id+'View').hide();
 			options[key].addEventListener('click', function(e) {
-					var idName;
-					idName = this.id;
-					idNameCapitalize = idName.charAt(0).toUpperCase() + idName.slice(1);
+					var idName = this.id;
 					$.each(options, function(key, val){
 							options[key].classList.remove("active");
 							$('#'+options[key].id+'View').hide();
