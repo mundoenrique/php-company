@@ -29,6 +29,7 @@ $(function () {
 		.removeClass('has-error')
 		.prop('disabled', true);
 		$('.help-block').text('');
+		$("#idType").prop('selectedIndex',0);
 		reportSelected = $(this).val()
 
 		if (reportSelected == "repListadoTarjetas") {
