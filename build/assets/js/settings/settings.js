@@ -20,21 +20,20 @@ $(document).ready(function() {
         $('#' + btnv).show('slideUp').siblings().hide('slideDown');
     });
     //core
-    for (i = 0; i < options.length; i++) {
-        $(`#${options[i].id}View`).hide();
-        options[i].addEventListener('click', function(e) {
-            var j, idNameCapitalize, idName;
-            idName = this.id;
-            idNameCapitalize = idName.charAt(0).toUpperCase() + idName.slice(1);
-
-            for (j = 0; j < options.length; j++) {
-                options[j].classList.remove("active");
-                $(`#${options[j].id}View`).hide();
-            }
-            this.classList.add("active");
-            $(`#${idName}View`).fadeIn(700, 'linear');
-        });
-    };
+    $.each(options, function(key, val){
+			$('#'+options[key].id+'View').hide();
+			options[key].addEventListener('click', function(e) {
+					var idName;
+					idName = this.id;
+					idNameCapitalize = idName.charAt(0).toUpperCase() + idName.slice(1);
+					$.each(options, function(key, val){
+							options[key].classList.remove("active");
+							$('#'+options[key].id+'View').hide();
+					})
+					this.classList.add("active");
+					$('#'+idName+'View').fadeIn(700, 'linear');
+			});
+	});
 });
 
 $(function() {
