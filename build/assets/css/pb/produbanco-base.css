@@ -1144,7 +1144,6 @@ textarea.form-control {
 
 .btn-loading-lg {
 	height: 45px;
-	text-transform: uppercase;
 }
 
 /* sizes */
@@ -2364,7 +2363,6 @@ i[class*=" icon-"].novoglyphs {
 
 .main-nav-dropdown a {
 	display: block;
-	text-transform: uppercase;
 	font-weight: 700 !important;
 	line-height: 3.41em;
 	-webkit-transition: all .25s ease;
