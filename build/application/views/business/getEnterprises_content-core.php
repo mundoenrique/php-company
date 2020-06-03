@@ -33,7 +33,7 @@
 </div>
 <div class="line mt-1"></div>
 
-<div id="pre-loader" class="mt-2 mx-auto flex justify-center">
+<div id="pre-loader" class="mt-5 mx-auto flex justify-center">
 	<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
 </div>
 

@@ -18,6 +18,7 @@ function validateForms(form) {
 	var text = /^['a-z0-9ñáéíóú ,.:()']+$/i;
 	var usdAmount = /^[0-9]+(\.[0-9]*)?$/;
 	var fiscalReg = lang.VALIDATE_FISCAL_REGISTRY;
+	var idNumberReg = new RegExp(lang.VALIDATE_REG_ID_NUMBER, 'i');
 	var date = {
 		dmy: /^(0?[1-9]|[12][0-9]|3[01])\/(0?[1-9]|1[012])\/[0-9]{4}$/,
 		my: /^(0?[1-9]|1[012])\/[0-9]{4}$/,
@@ -42,6 +43,7 @@ function validateForms(form) {
 			"user-name": 	{required: true, pattern: alphanumunder},
 			"id-company": 	{required: true, fiscalRegistry: true},
 			"email": 	{required: true, pattern: emailValid},
+			"nit": 	{ pattern: numeric},
 			"current-pass": {required: true},
 			"new-pass": {required: true, differs: "#currentPass", validatePass: true},
 			"confirm-pass": {required: true, equalTo: "#newPass"},
@@ -105,6 +107,21 @@ function validateForms(form) {
 			"productName": {required: true},
 			"initialDate": {required: true, pattern: date.dmy},
 			"finalDate": {required: true, pattern: date.dmy},
+			"idNumber": {pattern: idNumberReg},
+			"anio-consolid": {required: true},
+			"cardNumber": {
+				required: {
+					depends: function (element) {
+						var validate = false;
+						if ($(element).attr('req') == 'yes') {
+							var validate = true;
+						}
+
+						return validate
+					}
+				},
+				pattern: numeric, maxlength: 16, minlength: 16
+			},
 		},
 		messages: {
 			"user_login": lang.VALIDATE_USERLOGIN,
@@ -113,7 +130,9 @@ function validateForms(form) {
 				verifyPattern: lang.VALIDATE_USERPASS_PATT
 			},
 			"user-name": lang.VALIDATE_USERNAME,
+			"nit": lang.VALIDATE_USERNAME,
 			"id-company": lang.VALIDATE_ID_COMPANY,
+			"anio-consolid": lang.VALIDATE_SELECTED_YEAR,
 			"email": lang.VALIDATE_EMAIL,
 			"current-pass": lang.VALIDATE_CURRENT_PASS,
 			"new-pass": {
@@ -160,6 +179,8 @@ function validateForms(form) {
 			"bulk-number": lang.VALIDATE_BULK_NUMBER,
 			"initialDate": lang.VALIDATE_DATE_DMY,
 			"finalDate": lang.VALIDATE_DATE_DMY,
+			"idNumber": lang.VALIDATE_ID_NUMBER,
+			"cardNumber": lang.VALIDATE_CARD_NUMBER,
 		},
 		errorPlacement: function(error, element) {
 			$(element).closest('.form-group').find('.help-block').html(error.html());

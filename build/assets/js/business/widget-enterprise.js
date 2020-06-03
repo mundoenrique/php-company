@@ -60,7 +60,6 @@ $(function() {
 					return;
 				}
 				WidgetSelcetP.append("<option value=" + prod.id + " brand=" + prod.brand + ">" + prod.desc + "</option>");
-				// WidgetSelcetP.append(`<option value="${prod.id}" brand="${prod.brand}">${prod.desc}</option>`);
 			});
 			WidgetSelcetP.prop('disabled', false);
 		}

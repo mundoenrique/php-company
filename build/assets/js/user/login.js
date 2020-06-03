@@ -100,7 +100,6 @@ $(function () {
 			if (response.data) {
 				$(location).attr('href', response.data)
 			} else {
-				$('#system-info').dialog('close');
 				$('#accept')
 					.html(response.msg)
 					.attr('disabled', false);

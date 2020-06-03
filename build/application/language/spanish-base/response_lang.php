@@ -37,6 +37,7 @@ $lang['RESP_PASSWORD_INCORRECT'] = 'La contraseña actual es incorrecta.<br>Por 
 $lang['RESP_UNCONFIGURED_PRODUCT'] = 'El producto no fue configurado correctamente, por favor comunícate con el administrador.';
 $lang['RESP_NO_ACCESS'] = '%s, no tienes privilegios suficientes para manipular este producto.';
 $lang['RESP_TRY_AGAIN'] = 'Intenta de nuevo';
+$lang['RESP_NO_PRODUCT'] = 'No hay productos asociados';
 $lang['RESP_PASSWORD_NO_VALID'] = 'Por favor verifica tu contraseña y vuelve a intentarlo';
 $lang['RESP_AUTH_ORDER_SERV'] = 'No fue posible obtener los datos para realizar el cálculo de la orden de servicio';
 $lang['RESP_NO_LIST'] = 'No fue posible obtener el listado';
