@@ -148,7 +148,7 @@ class Novo_Services_Model extends NOVO_Model {
 			case lang('GEN_CREDIT_TO_CARD'):
 			case 'abono':
 				$this->dataAccessLog->operation = lang('GEN_CREDIT_TO_CARD');
-				$this->dataRequest->idOperation = 'saldoTM';
+				$this->dataRequest->idOperation = 'abonarTM';
 			break;
 			case lang('GEN_DEBIT_TO_CARD'):
 			case 'cargo':
