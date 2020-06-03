@@ -341,7 +341,7 @@ function sendRequest(action, modalReq, btn) {
 			modalReq: modalReq,
 			cards: cardsInfo,
 			action: action,
-			pass: cryptoPass(form.find('input[type=password]').val())
+			pass: cryptoPass(form.find('input[type=password]').val().trim())
 		}
 
 		verb = 'POST'; who = 'Services'; where = 'ActionMasterAccount';
