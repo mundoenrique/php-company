@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 //TERMS_CONTENT
 $lang["TERMS_TITLE"]='Términos y condiciones de la Tarjeta de Débito Empresarial Banorte';
-$lang["TERMS_CONTENT"] = "
+$lang["TERMS_CONTENT"] = '
 <ol>
 	<li>
 		<p><b>Objeto</b></p>
@@ -16,28 +16,28 @@ $lang["TERMS_CONTENT"] = "
 	<li>
 		<p><b>Definiciones</b></p>
 		<ul>
-			<li type='disc'>
+			<li type="disc">
 				<p><b>Cliente:</b> La persona identificada en la Carátula de Activación y Datos Generales del Contrato de Prestación de Servicios de Tarjeta de Débito Empresarial, sus apoderados legales, o a quien esta designe para el uso del Servicio en su representación.</p>
 			</li>
-			<li type='disc'>
+			<li type="disc">
 				<p><b>Contrato de Prestación de Servicios de Tarjeta de Débito Empresarial:</b> Contrato a través del cual, Banorte proporciona el servicio de Tarjeta de Débito Empresarial al Cliente, sujeto a los términos y ahí expuestos.</p>
 			</li>
-			<li type='disc'>
+			<li type="disc">
 				<p><b>Cuenta Concentradora:</b> Cuenta de depósito bancario de dinero a la vista abierta a nombre del Cliente, a través de la cual el Cliente realizará las operaciones bancarias asociadas a las Tarjetas de Débito.</p>
 			</li>
-			<li type='disc'>
+			<li type="disc">
 				<p><b>Internet:</b> Enlace mundial de redes de ordenadores o sistemas de cómputo a través de estándares de transmisión (protocolos) que facilitan entre dichos sistemas la transmisión y recepción de datos, haciendo posible, entre otros conceptos, la prestación o intercambio de información, de servicios y la realización de transacciones comerciales.</p>
 			</li>
-			<li type='disc'>
+			<li type="disc">
 				<p><b>Medios Electrónicos:</b> Los equipos, programas o sistemas automatizados de procesamiento de datos, desarrollos tecnológicos y/o de telecomunicación que permiten al Cliente enviar instrucciones al Banco para la realización de operaciones.</p>
 			</li>
-			<li type='disc'>
+			<li type="disc">
 				<p><b>Servicio:</b> Consiste en la emisión de diversas Tarjetas de Débito asociadas a una Cuenta Concentradora, cuyos perfiles transaccionales, incluyendo los comercios donde podrá utilizarse el medio de disposición y los limites económicos periódicos, serán definidos por el Cliente a través de la Banca Electrónica que tenga contratada para tal efecto con el fin de cubrir sus gastos, incluidos los viáticos.</p>
 			</li>
-			<li type='disc'>
+			<li type="disc">
 				<p><b>Tarjeta de Débito:</b> al conjunto de datos integrados con independencia del medio en el que estén almacenados que, al procesarse mediante sistemas determinados, permiten iniciar una instrucción de cargo a la Cuenta Concentradora o, en su caso, un abono producto de la devolución relacionada con dicho cargo por reclamaciones.</p>
 			</li>
-			<li type='disc'>
+			<li type="disc">
 				<p><b>Tarjetahabiente Autorizado:</b> Cada una de las personas que son designados por el Cliente a quienes se les expide una Tarjeta de Débito con la cual podrá tener acceso a los servicios objeto del presente Contrato.</p>
 			</li>
 		</ul>
@@ -50,7 +50,7 @@ $lang["TERMS_CONTENT"] = "
 		<p>El Cliente y sus Tarjetahabientes Autorizados para todos los efectos legales a que haya lugar, expresamente reconocen y aceptan el carácter personal e intransferible de la Tarjeta de Débito, así como la confidencialidad del NIP asignado.</p>
 		<p>Por lo tanto, es exclusiva responsabilidad del Cliente cualquier quebranto que pudiera sufrir como consecuencia del uso indebido que llegara a hacerse de las referidas Tarjetas de Débito o del NIP.</p>
 		<p>El Cliente reconoce y acepta expresamente que las Tarjetas de Débito son propiedad exclusiva del Banco, haciéndose responsable el Cliente de:</p>
-		<ol type='a'>
+		<ol type="a">
 			<li>Recibir y custodiar las Tarjetas de Débito que le hayan sido entregadas.</li>
 			<li>Acusar de recibido por escrito, a través de la persona designada, la recepción de las Tarjetas de Débito.</li>
 			<li>Mantener registro de las Tarjetas de Débito que se encuentren bajo su custodia.</li>
@@ -63,7 +63,7 @@ $lang["TERMS_CONTENT"] = "
 	<li>
 		<p><b>Acceso a la Plataforma y control de usuarios</b></p>
 		<p>Para que el Cliente pueda utilizar la Plataforma, este deberá realizar lo siguiente:</p>
-		<ol type='a'>
+		<ol type="a">
 			<li>Tener contratada la Cuenta Concentradora para que Banorte pueda prestar el Servicio.</li>
 			<li>Tener celebrado con Banorte un Contrato de Banca a través de Medios Electrónicos.</li>
 			<li>Tener celebrado con Banorte un Contrato de Prestación de Servicios de Tarjeta de Débito Empresarial.</li>
@@ -98,4 +98,4 @@ $lang["TERMS_CONTENT"] = "
 		<p>Un mensaje de datos correctamente identificado con la combinación de los dispositivos de seguridad del usuario a Banorte, será considerada como una comunicación “escrita” o “por escrito” y como una manifestación expresa de la voluntad de su emisor. Cualquier mensaje de datos correctamente identificados con la combinación de dispositivos de seguridad (“documentos firmados”) se considerará para todos los efectos a que haya lugar como: (a) debidamente “firmado” y (b) ser una versión “original” cuando se imprima del archivo electrónica establecido y mantenido por Banorte y sus agentes dados en el curso ordinario de sus operaciones. El Cliente se obliga a no cuestionar la autorización para, o la validez o cumplimiento de los documentos firmados, o la admisión de copias de los mismos, bajo cualquier ley aplicable en relación con si ciertos contratos, archivos o registros electrónicos serán por escrito (en forma documental) o firmados por la parte que será obligada por los mismos. Si los registros electrónicos y documentos firmados, son presentados impresos en papel como pruebas en cualquier procedimiento judicial o cualquier otro, serán admisibles en la misma forma y bajo las mismas condiciones que otros registros de negocios documentales.</p>
 	</li>
 </ol>
-";
+';
