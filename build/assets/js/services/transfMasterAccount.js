@@ -108,6 +108,7 @@ $(function () {
 			},
 			{
 				"targets": 5,
+				"className": "amount-cc",
 				"width": "90px",
 			},
 			{
@@ -255,6 +256,12 @@ $(function () {
 		}
 	})
 
+	$('#tableServicesMaster').on( 'click', 'tbody td.amount-cc', function (e) {
+		var rowSelect = table.cell(this);
+		console.log(rowSelect)
+		console.log(rowSelect.data())
+} );
+
 	$('#system-info').on('click', '.send-request', function () {
 		form = $('#password-modal')
 		modalReq = true
@@ -367,14 +374,29 @@ function sendRequest(action, modalReq, btn) {
 function amountValidate(getAmount, classSelect) {
 	var valid = true
 	cardsData = table.rows(classSelect).data();
-
+	console.log(cardsData)
 	if (getAmount == '1') {
+		var currentamount
 		for (var i = 0; i < cardsData.length; i++) {
-			console.log(cardsData[i].amount)
+			$('#tableServicesMaster').find('tbody > tr'+classSelect).each(function (index, element) {
+				currentamount = $(element).find('td.amount-cc input').val();
+
+				currentamount = parseFloat(currentamount).toFixed(2)
+
+				if(currentamount == 'NaN' || currentamount <= 0) {
+					console.log(currentamount)
+				}
+
+				if (cardsData[i].idNumber == $(element).find('td.user-id').text()) {
+					cardsData[i].amount = currentamount
+				}
+			})
+
+			//console.log(cardsData[i].amount)
 			var ammountText = parseFloat(cardsData[i].amount)
 		}
 	}
-
+	console.log(cardsData)
 	if (!valid) {
 		console.log('alto')
 	}
@@ -414,7 +436,8 @@ function cardCheckBalance(response) {
 }
 
 function cardBlockUnblock(response) {
-	if (response.code == 0) {
+	console.log(response)
+	if (response.update) {
 		dataTableReload(false)
 	}
 }

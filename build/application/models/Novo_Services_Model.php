@@ -202,8 +202,9 @@ class Novo_Services_Model extends NOVO_Model {
 				$this->response->data['btn1']['action'] = 'close';
 
 				if ($dataRequest->action == lang('GEN_TEMPORARY_LOCK') || $dataRequest->action == lang('GEN_UNLOCK_CARD')) {
-					$blockType = lang('GEN_TEMPORARY_LOCK') ? 'Bloqueda' : 'desbloqueda';
+					$blockType = $dataRequest->action == lang('GEN_TEMPORARY_LOCK') ? 'Bloqueda' : 'desbloqueda';
 					$this->response->msg =  novoLang('La tarjeta %s ha sido %s.', [$cardsList[0]['noTarjeta'], $blockType]);
+					$this->response->update = TRUE;
 				}
 
 				if ($dataRequest->action == lang('GEN_CARD_ASSIGNMENT')) {
