@@ -33,6 +33,7 @@ $(function () {
 		"table-layout": "fixed",
 		"select": {
 			"style": "multi",
+			"selector": ':not(td:nth-child(-n+6))',
 			"info": false
 		},
 		"language": dataTableLang,
@@ -133,8 +134,9 @@ $(function () {
 			{
 				data: function (data) {
 					var ammount;
+					var disabeldInput = data.status == '' ? '' : 'disabled'
 					ammount = '<form>';
-					ammount += '<input class="form-control h6 text-right" type="text" placeholder="' + data.amount + '"></input>';
+					ammount += '<input class="form-control h6 text-right" type="text" placeholder="' + data.amount + '" '+disabeldInput+'></input>';
 					ammount += '</form>';
 
 					return ammount
@@ -212,11 +214,12 @@ $(function () {
 		var event = $(e.currentTarget);
 		action = event.attr('title');
 		getAmount = event.attr('amount');
-		$('#tableServicesMaster').find('tr').removeClass('selected')
+		table.rows().deselect();
 		$(this).closest('tr').addClass('select');
-		$('#accept').addClass('send-request');
 
-		if (amountValidate(getAmount, '.select')) {
+
+		if (amountValidate(getAmount, '.select', action)) {
+			$('#accept').addClass('send-request');
 			data = {
 				btn1: {
 					text: lang.GEN_BTN_SEND,
@@ -257,9 +260,7 @@ $(function () {
 	})
 
 	$('#tableServicesMaster').on( 'click', 'tbody td.amount-cc', function (e) {
-		var rowSelect = table.cell(this);
-		console.log(rowSelect)
-		console.log(rowSelect.data())
+		$(this).find('input').removeClass('has-error')
 } );
 
 	$('#system-info').on('click', '.send-request', function () {
@@ -275,7 +276,7 @@ $(function () {
 		action = $(this).attr('id');
 		getAmount = $(this).attr('amount');
 
-		if (amountValidate(getAmount, '.selected')) {
+		if (amountValidate(getAmount, '.selected', action)) {
 			form = $('#password-table');
 			modalReq = false;
 			btnText = $(this).text().trim();
@@ -302,11 +303,42 @@ $(function () {
 	});
 })
 
-function dataTableReload(resetPaging) {
-	$('.hide-table').addClass('hide')
-	$('#pre-loader-table').removeClass('hide')
-	$('#tableServicesMaster').DataTable().clear();
-	$('#tableServicesMaster').DataTable().ajax.reload(null, resetPaging);
+function amountValidate(getAmount, classSelect, action) {
+	var valid = true
+	cardsData = table.rows(classSelect).data();
+
+	if (getAmount == '1') {
+		var currentamount
+		for (var i = 0; i < cardsData.length; i++) {
+			$('#tableServicesMaster').find('tbody > tr'+classSelect).each(function (index, element) {
+				currentamount = $(element).find('td.amount-cc input').val();
+				currentamount = parseFloat(currentamount).toFixed(2)
+
+				if(currentamount == 'NaN' || currentamount <= 0) {
+					$(element).find('td.amount-cc input').addClass('has-error')
+					valid = false
+				}
+
+				if (cardsData[i].idNumber == $(element).find('td.user-id').text()) {
+					cardsData[i].amount = currentamount
+				}
+			})
+		}
+	}
+
+	if (!valid) {
+		data = {
+			btn1: {
+				text: lang.GEN_BTN_ACCEPT,
+				action: 'close'
+			}
+		}
+
+		notiSystem(action, lang.GEN_VALID_AMOUNT, lang.GEN_ICON_WARNING, data);
+		table.rows().deselect();
+	}
+
+	return valid;
 }
 
 function sendRequest(action, modalReq, btn) {
@@ -348,7 +380,7 @@ function sendRequest(action, modalReq, btn) {
 
 		callNovoCore(verb, who, where, data, function (response) {
 			$('#tableServicesMaster').find('tr').removeClass('select');
-			$('#tableServicesMaster').find('tr').removeClass('selected');
+			table.rows().deselect();
 			$('#accept').removeClass('send-request');
 
 			if(action == 'consulta' || action == 'consulta' || action == 'abono') {
@@ -369,39 +401,6 @@ function sendRequest(action, modalReq, btn) {
 
 		})
 	}
-}
-
-function amountValidate(getAmount, classSelect) {
-	var valid = true
-	cardsData = table.rows(classSelect).data();
-	console.log(cardsData)
-	if (getAmount == '1') {
-		var currentamount
-		for (var i = 0; i < cardsData.length; i++) {
-			$('#tableServicesMaster').find('tbody > tr'+classSelect).each(function (index, element) {
-				currentamount = $(element).find('td.amount-cc input').val();
-
-				currentamount = parseFloat(currentamount).toFixed(2)
-
-				if(currentamount == 'NaN' || currentamount <= 0) {
-					console.log(currentamount)
-				}
-
-				if (cardsData[i].idNumber == $(element).find('td.user-id').text()) {
-					cardsData[i].amount = currentamount
-				}
-			})
-
-			//console.log(cardsData[i].amount)
-			var ammountText = parseFloat(cardsData[i].amount)
-		}
-	}
-	console.log(cardsData)
-	if (!valid) {
-		console.log('alto')
-	}
-
-	return valid;
 }
 
 function cardCheckBalance(response) {
@@ -436,8 +435,17 @@ function cardCheckBalance(response) {
 }
 
 function cardBlockUnblock(response) {
-	console.log(response)
 	if (response.update) {
-		dataTableReload(false)
+		$('#accept').addClass('update')
+		$('.update').on('click', function() {
+			dataTableReload(false)
+		})
 	}
+}
+
+function dataTableReload(resetPaging) {
+	$('.hide-table').addClass('hide')
+	$('#pre-loader-table').removeClass('hide')
+	$('#tableServicesMaster').DataTable().clear();
+	$('#tableServicesMaster').DataTable().ajax.reload(null, resetPaging);
 }
