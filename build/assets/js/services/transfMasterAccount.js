@@ -392,7 +392,7 @@ function sendRequest(action, modalReq, btn) {
 			form.find('input[type=password]').val('')
 
 			if (action == lang.GEN_CHECK_BALANCE || 'consulta') {
-				cardCheckBalance(response)
+				cardCheckBalance(response, action)
 			}
 
 			if (action == lang.GEN_TEMPORARY_LOCK || action == lang.GEN_UNLOCK_CARD || action == lang.GEN_CARD_ASSIGNMENT) {
@@ -403,7 +403,7 @@ function sendRequest(action, modalReq, btn) {
 	}
 }
 
-function cardCheckBalance(response) {
+function cardCheckBalance(response, action) {
 	$.each(response.data.listResponse, function (key, value) {
 		$('#tableServicesMaster').find('tbody > tr').each(function (index, element) {
 			if (value.cardNumber == $(element).find('td.card-number').text()) {
