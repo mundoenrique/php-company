@@ -242,9 +242,34 @@ class Novo_Services_Model extends NOVO_Model {
 				$this->response->data['btn1']['action'] = 'close';
 			break;
 			case -33:
+			case -100:
 				$this->response->title = $dataRequest->action;
 				$this->response->msg = 'El saldo no esta disponible';
 				$this->response->icon = lang('GEN_ICON_WARNING');
+				$this->response->data['btn1']['action'] = 'close';
+			break;
+			case -152:
+				$this->response->title = $dataRequest->action;
+				$this->response->msg = 'La transacción no supera el monto mínimo por operación';
+				$this->response->icon = lang('GEN_ICON_INFO');
+				$this->response->data['btn1']['action'] = 'close';
+			break;
+			case -153:
+				$this->response->title = $dataRequest->action;
+				$this->response->msg = 'Alcanzaste el monto maximo de operaciones semenales';
+				$this->response->icon = lang('GEN_ICON_INFO');
+				$this->response->data['btn1']['action'] = 'close';
+			break;
+			case -154:
+				$this->response->title = $dataRequest->action;
+				$this->response->msg = 'Alcanzaste el monto maximo de operaciones diarias';
+				$this->response->icon = lang('GEN_ICON_INFO');
+				$this->response->data['btn1']['action'] = 'close';
+			break;
+			case -155:
+				$this->response->title = $dataRequest->action;
+				$this->response->msg = 'Tu saldo no es suficiente para realizar la transacción';
+				$this->response->icon = lang('GEN_ICON_INFO');
 				$this->response->data['btn1']['action'] = 'close';
 			break;
 			case -157:
