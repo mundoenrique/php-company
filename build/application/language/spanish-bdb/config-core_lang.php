@@ -23,14 +23,13 @@ $lang['CONF_BRANCHES_BOOL'] = 'OFF';
 	$lang['CONF_ADD_FILE_BOOL'] = 'OFF';
 	$lang['CONF_ADD_BRANCH_BOOL'] = 'OFF';
 	//DOWNLOADS OPTIONS FLAGS
+	$lang['CONF_APPS_BOOL'] = 'OFF';
 	$lang['CONF_FILES_MANAGMENT_BOOL'] = 'OFF';
 //FILES CONF
 $lang['CONF_PDF_FILE'] = [
   ['archivo.pdf', 'Manual de Usuario Conexión Empresas Online']
 ];
-$lang['CONF_ZIP_FILE'] = [
-	['archivo.zip', 'das']
-];
+$lang['CONF_ZIP_FILE'] = [''];
 $lang['CONF_RAR_FILE'] = [''];
 $lang['CONF_MP4_VIDEO'] = ['video.mp4'];
 //DOWNLOAD ICONS

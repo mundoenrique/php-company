@@ -605,6 +605,25 @@
 								</div>
 								<?php endif; ?>
 
+								<?php if (lang('CONF_FILE_SERVICE_BOOL') == 'ON'): ?>
+								<div class="my-2 tertiary h4 semibold">
+									<span>Aplicación</span>
+								</div>
+								<div class="row">
+
+									<div class="mb-3 col-auto col-lg-6 col-xl-5">
+										<a href="" download>
+											<div class="files btn-link flex items-center">
+												<div class="file">
+													<img src="<?= $this->asset->insertFile(lang('CONF_ZIP_ICON'), 'images/icons');?>" />
+												</div>
+												<span class="ml-2 flex justify-center">Archivo.ini</span>
+											</div>
+										</a>
+									</div>
+								</div>
+								<?php endif; ?>
+
 
 								<?php if (lang('CONF_FILES_MANAGMENT_BOOL') == 'ON'): ?>
 								<div class="my-2 tertiary h4 semibold">
