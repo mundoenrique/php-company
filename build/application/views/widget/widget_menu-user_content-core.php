@@ -6,7 +6,7 @@
 				<i class="ml-5 icon icon-chevron-down" aria-hidden="true"></i>
 			</a>
 			<ul class="dropdown regular tertiary bg-secondary">
-				<?php if(verifyDisplay('header', 'all', lang('GEN_SHOW_CONFIG'))): ?>
+				<?php if(lang('CONF_SETT_CONFIG') == 'ON'): ?>
 				<li>
 				<a class="pl-2 pr-1 h6 big-modal" href="<?= base_url('configuracion') ?>"><?= lang('GEN_SETTINGS_TITLE'); ?></a>
 				</li>
