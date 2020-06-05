@@ -89,7 +89,7 @@ class Novo_Services_Model extends NOVO_Model {
 			case -150:
 				$this->response->title = lang('GEN_MENU_SERV_MASTER_ACCOUNT');
 				$this->response->icon = lang('GEN_ICON_INFO');
-				$this->response->msg = 'Nose encontraron resultados para tu busqueda';
+				$this->response->msg = 'No se encontraron resultados para tu busqueda';
 				$this->response->data['btn1']['action'] = 'close';
 			break;
 		}
@@ -125,7 +125,7 @@ class Novo_Services_Model extends NOVO_Model {
 
 			switch ($dataRequest->action) {
 				case lang('GEN_CHECK_BALANCE'):
-				case 'consulta':
+				case 'Consulta':
 				case lang('GEN_TEMPORARY_LOCK'):
 				case lang('GEN_UNLOCK_CARD'):
 					unset($card['montoTransaccion']);
@@ -141,17 +141,17 @@ class Novo_Services_Model extends NOVO_Model {
 
 		switch ($dataRequest->action) {
 			case lang('GEN_CHECK_BALANCE'):
-			case 'consulta':
+			case 'Consulta':
 				$this->dataAccessLog->operation = lang('GEN_CHECK_BALANCE');
 				$this->dataRequest->idOperation = 'saldoTM';
 			break;
 			case lang('GEN_CREDIT_TO_CARD'):
-			case 'abono':
+			case 'Abono':
 				$this->dataAccessLog->operation = lang('GEN_CREDIT_TO_CARD');
 				$this->dataRequest->idOperation = 'abonarTM';
 			break;
 			case lang('GEN_DEBIT_TO_CARD'):
-			case 'cargo':
+			case 'Cargo':
 				$this->dataAccessLog->operation = lang('GEN_DEBIT_TO_CARD');
 				$this->dataRequest->idOperation = 'cargoTM';
 			break;

@@ -148,19 +148,19 @@
 								</div>
 								<?php if($this->verify_access->verifyAuthorization('TRAMAE', 'TRASAL')): ?>
 								<div class="col-auto">
-									<button id="consulta" class="btn btn-primary btn-small btn-loading flex mx-auto" amount="0">Consultar
+									<button id="Consulta" class="btn btn-primary btn-small btn-loading flex mx-auto" amount="0">Consultar
 									</button>
 								</div>
 								<?php endif; ?>
 								<?php if($this->verify_access->verifyAuthorization('TRAMAE', 'TRAABO')): ?>
 								<div class="col-auto">
-									<button id="abono" class="btn btn-primary btn-small btn-loading flex mx-auto" amount="1">Abono
+									<button id="Abono" class="btn btn-primary btn-small btn-loading flex mx-auto" amount="1">Abono
 									</button>
 								</div>
 								<?php endif; ?>
 								<?php if($this->verify_access->verifyAuthorization('TRAMAE', 'TRACAR')): ?>
 								<div class="col-auto">
-									<button id="cargo" class="btn btn-primary btn-small btn-loading flex mx-auto" amount="1">Cargo
+									<button id="Cargo" class="btn btn-primary btn-small btn-loading flex mx-auto" amount="1">Cargo
 									</button>
 								</div>
 								<?php endif; ?>

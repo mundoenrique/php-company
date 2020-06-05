@@ -270,7 +270,7 @@ $(function () {
 		sendRequest(action, modalReq, $(this))
 	})
 
-	$('#consulta, #abono, #cargo').on('click', function (e) {
+	$('#Consulta, #Abono, #Cargo').on('click', function (e) {
 		e.preventDefault()
 		$('#tableServicesMaster').find('tr').removeClass('select');
 		action = $(this).attr('id');
@@ -383,7 +383,7 @@ function sendRequest(action, modalReq, btn) {
 			table.rows().deselect();
 			$('#accept').removeClass('send-request');
 
-			if(action == 'consulta' || action == 'consulta' || action == 'abono') {
+			if(action == 'Consulta' || action == 'Cargo' || action == 'Abono') {
 				btn.html(btnText)
 			}
 
@@ -391,7 +391,7 @@ function sendRequest(action, modalReq, btn) {
 			insertFormInput(false);
 			form.find('input[type=password]').val('')
 
-			if (action == lang.GEN_CHECK_BALANCE || 'consulta') {
+			if (action == lang.GEN_CHECK_BALANCE || 'Consulta') {
 				cardCheckBalance(response, action)
 			}
 
