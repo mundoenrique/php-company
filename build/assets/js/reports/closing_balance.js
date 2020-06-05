@@ -1,18 +1,21 @@
 'use strict'
 var reportsResults;
-	var enterpriseCode;
-	var enterpriseGroup;
-	var idFiscal;
-	var enterpriseName;
-	var empresa;
-	var cedula;
-	var producto;
-	var nomEmpresa;
-	var descProd;
-	var paginaActual;
-	var paginar;
-	var tamPg;
-	var table;
+var enterpriseCode;
+var enterpriseGroup;
+var idFiscal;
+var enterpriseName;
+var empresa;
+var cedula;
+var producto;
+var nomEmpresa;
+var descProd;
+var paginaActual;
+var paginar;
+var tamPg;
+var table;
+var access;
+var params;
+var balance;
 
 $(function () {
 	$('#blockBudgetResults').addClass('hide');
@@ -21,21 +24,14 @@ $(function () {
 	$('#pre-loader').remove();
 	$('.hide-out').removeClass('hide');
 
-	table = $('#balancesClosing').DataTable({
-		"ordering": false,
-		"pagingType": "full_numbers",
-    "language": dataTableLang
-	}
-	);
-
-	$('#enterprise-report').on('change', function(){
+	$('#enterpriseReport').on('change', function(){
 		$('#closingBudgetsBtn').removeAttr('disabled');
 		$('#productCode').attr('disabled', 'disabled');
 		$('#products-select').empty();
-		enterpriseCode =  $('#enterprise-report').find('option:selected').attr('code');
-		enterpriseGroup =  $('#enterprise-report').find('option:selected').attr('group');
-		idFiscal =  $('#enterprise-report').find('option:selected').attr('acrif');
-		enterpriseName = $('#enterprise-report').find('option:selected').text();
+		enterpriseCode =  $('#enterpriseReport').find('option:selected').attr('code');
+		enterpriseGroup =  $('#enterpriseReport').find('option:selected').attr('group');
+		idFiscal =  $('#enterpriseReport').find('option:selected').attr('acrif');
+		enterpriseName = $('#enterpriseReport').find('option:selected').text();
 		var passData = {
 			enterpriseCode: enterpriseCode,
 			enterpriseGroup: enterpriseGroup,
@@ -44,7 +40,6 @@ $(function () {
 			select: true
 		};
 		selectionBussine(passData)
-
 	})
 
 	$('#Nit').keyup(function (){
@@ -61,18 +56,19 @@ $(function () {
 		validateForms(form)
 
 		if (form.valid()) {
-			searchBudgets();
+			insertFormInput(false);
+			form = $('#closingBudgetForm');
+			var dataForm = getDataForm(form)
+			searchBudgets(dataForm);
 		}
 	})
 
 
 	$("#export_excel").click(function(){
-
-
-		empresa = $('#enterprise-report').find('option:selected').attr('acrif');
-		cedula =  '';
+		empresa = $('#enterpriseReport').find('option:selected').attr('acrif');
+		cedula =  $('#enterpriseReport').find('option:selected').attr('acrif');
 		producto = $("#productCode").val();
-		nomEmpresa = $('#enterprise-report').find('option:selected').attr('nomOf');
+		nomEmpresa = $('#enterpriseReport').find('option:selected').attr('nomOf');
 		descProd = $("#productCode").find('option:selected').attr('value');
 		paginaActual = 1;
 		paginar = true;
@@ -141,12 +137,11 @@ var byteArrayFile = (function () {
   };
 }());
 
-function searchBudgets(){
-	$('#enterprise-report').find('option:selected').attr('acrif');
-		empresa = $('#enterprise-report').find('option:selected').attr('acrif');
+function searchBudgets(dataForm){
+		empresa = $('#enterpriseReport').find('option:selected').attr('acrif');
 		cedula =  '';
 		producto = $("#productCode").val();
-		nomEmpresa = $('#enterprise-report').find('option:selected').attr('nomOf');
+		nomEmpresa = $('#enterpriseReport').find('option:selected').attr('nomOf');
 		descProd = $("#productCode").attr("des");
 		paginaActual = 1;
 		paginar = false;
@@ -163,53 +158,103 @@ function searchBudgets(){
 			tamPg: tamPg
 		};
 
-		closingBudgets(passData);
-
+		closingBudgets(dataForm);
 }
 
-function closingBudgets(passData) {
-	verb = "POST"; who = 'Reports'; where = 'closingBudgets'; data = passData;
-	callNovoCore(verb, who, where, data, function(response) {
-		$('#spinnerBlockBudget').addClass("hide");
-		$('#tbody-datos-general').removeClass('hide');
-		var table = $('#balancesClosing').DataTable();
-	  table.destroy();
-			dataResponse = response.data
-			code = response.code
-			if( code == 0){
-			var info = dataResponse.saldo.lista;
+function closingBudgets(dataForm) {
 
-
-			table = $('#balancesClosing').DataTable({
-				"responsive": true,
-				"ordering": false,
-				"pagingType": "full_numbers",
-				"language": dataTableLang,
-				"data": info,
-				"columns": [
-						{ data: 'nombre' },
-						{ data: 'idExtPer' },
-						{ data: 'tarjeta' },
-						{ data: 'saldo' },
-						{ data: 'fechaUltAct' }
-				]
-			})} else{
-
-				$('#balancesClosing').DataTable({
-					"responsive": true,
-					"ordering": false,
-					"pagingType": "full_numbers",
-					"language": dataTableLang,
-				}).clear().draw();
-			}
+	table = $('#balancesClosing').DataTable({
+		drawCallback: function (d) {
+			insertFormInput(false)
+			$('#spinnerBlockBudget').addClass("hide");
+			$('#tbody-datos-general').removeClass('hide');
 			$('#titleResults').removeClass('hide');
 			$('#blockBudgetResults').removeClass("hide");
-})
+			$('#pre-loader-table').addClass('hide')
+			$('.hide-table').removeClass('hide')
+			$('#pre-loader').remove();
+			$('.hide-out').removeClass('hide');
+		},
+		"ordering": false,
+		"searching": false,
+		"info":     false,
+		"language": dataTableLang,
+		"processing": true,
+		"serverSide": true,
+		"columns": [
+			{ data: 'nombre' },
+			{ data: 'idExtPer' },
+			{ data: 'tarjeta' },
+			{ data: 'saldo' },
+			{ data: 'fechaUltAct' }
+	],
+	"columnDefs": [
+		{
+			"targets": 0,
+			"className": "nombre",
+		},
+		{
+			"targets": 1,
+			"className": "idExtPer",
+		},
+		{
+			"targets": 2,
+			"className": "tarjeta",
+		},
+		{
+			"targets": 3,
+			"className": "saldo",
+		},
+		{
+			"targets": 4,
+			"className": "fechaUltAct",
+		}
+	],
+	"lengthChange": false,
+	"pagelength": 10,
+	"pagingType": "full_numbers",
+		"ajax": {
+			url: baseURL + 'async-call',
+			method: 'POST',
+			dataType: 'json',
+			cache: false,
+			data: function (req) {
+				data = req
+				data.idExtPer = "";
+				data.producto = $("#productCode").val();
+				data.idExtEmp = $('#enterpriseReport').find('option:selected').attr('acrif');
+				data.tamanoPagina = 10;
+				data.paginar = true;
+				data.paginaActual = data.draw;
+				data.screenSize = screen.width;
+				var dataRequest = JSON.stringify({
+					who: 'Reports',
+					where: 'closingBudgets',
+					data: data
+				});
+
+				dataRequest = cryptoPass(dataRequest, true);
+				var request = {
+					request: dataRequest,
+					ceo_name: ceo_cook,
+					plot: btoa(ceo_cook)
+				}
+				return request
+			},
+			dataFilter: function (resp) {
+				var responseTable = jQuery.parseJSON(resp)
+				responseTable = JSON.parse(
+					CryptoJS.AES.decrypt(responseTable.code, responseTable.plot, { format: CryptoJSAesJson }).toString(CryptoJS.enc.Utf8)
+				);
+				var codeDefaul = parseInt(lang.RESP_DEFAULT_CODE);
+
+				if (responseTable.code === codeDefaul) {
+					notiSystem(responseTable.title, responseTable.msg, responseTable.icon, responseTable.dataResp);
+				}
+
+				return JSON.stringify(responseTable);
+			}
+		}
+	})
 }
-
-
-
-
-
-
 
