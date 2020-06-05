@@ -215,6 +215,7 @@ $(function () {
 		action = event.attr('title');
 		getAmount = event.attr('amount');
 		table.rows().deselect();
+		$('#tableServicesMaster').find('thead > tr').removeClass("selected")
 		$(this).closest('tr').addClass('select');
 
 
@@ -335,6 +336,7 @@ function amountValidate(getAmount, classSelect, action) {
 		}
 
 		notiSystem(action, lang.GEN_VALID_AMOUNT, lang.GEN_ICON_WARNING, data);
+		$('#tableServicesMaster').find('thead > tr').removeClass("selected")
 		table.rows().deselect();
 	}
 
@@ -380,7 +382,9 @@ function sendRequest(action, modalReq, btn) {
 
 		callNovoCore(verb, who, where, data, function (response) {
 			$('#tableServicesMaster').find('tr').removeClass('select');
+			$('#tableServicesMaster').find('thead > tr').removeClass("selected")
 			table.rows().deselect();
+			$('#tableServicesMaster').find('thead > tr').removeClass("selected")
 			$('#accept').removeClass('send-request');
 
 			if(action == 'Consulta' || action == 'Cargo' || action == 'Abono') {
