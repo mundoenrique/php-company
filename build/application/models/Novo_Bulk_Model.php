@@ -392,7 +392,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 		$bulkConfirmInfo->lineaEmbozo1 = !isset($dataRequest->enbLine1) ?: $dataRequest->enbLine1;
 		$bulkConfirmInfo->lineaEmbozo2 = !isset($dataRequest->enbLine2) ?: $dataRequest->enbLine2;
 		$bulkConfirmInfo->conceptoAbono = !isset($dataRequest->paymentConcept) ?: $dataRequest->paymentConcept;
-		$bulkConfirmInfo->codCia = $this->session->enterpriseInf->idFiscal;
+		$bulkConfirmInfo->codCia = $this->session->enterpriseInf->enterpriseCode;
 
 		$this->dataRequest->idOperation = $bulkConfirmInfo->idTipoLote == 'L' && $this->country != 'Ec-bp' ? 'reprocesarLoteGeneral' :'confirmarLote';
 		$this->dataRequest->lotesTO = $bulkConfirmInfo;
