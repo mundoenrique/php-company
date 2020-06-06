@@ -34,21 +34,21 @@
 							<input type="text" id="maxCards" name="max-cards" class="form-control h5" max-cards="<?= $maxCards ?>">
 							<div class="help-block"></div>
 						</div>
-						<?php if(lang('CONF_UNNA_STARTING_LINE1')): ?>
+						<?php if(lang('CONF_UNNA_STARTING_LINE1') == 'ON'): ?>
 						<div class="form-group col-4 col-xl-3">
 							<label><?= lang('BULK_UNNA_STARTING_LINE1'); ?></label>
 							<input type="text" id="startingLine1" name="starting-line1" class="form-control h5">
 							<div class="help-block"></div>
 						</div>
 						<?php endif; ?>
-						<?php if(lang('CONF_UNNA_STARTING_LINE2')): ?>
+						<?php if(lang('CONF_UNNA_STARTING_LINE2') == 'ON'): ?>
 						<div class="form-group col-4 col-xl-3">
 							<label><?= lang('BULK_UNNA_STARTING_LINE2'); ?></label>
 							<input type="text" id="startingLine2" name="starting-line2" class="form-control h5">
 							<div class="help-block"></div>
 						</div>
 						<?php endif; ?>
-						<?php if(lang('CONF_UNNA_BRANCHOFFICE')): ?>
+						<?php if(lang('CONF_UNNA_BRANCHOFFICE') == 'ON'): ?>
 						<div class="form-group col-4 col-xl-3">
 							<label><?= lang('BULK_BRANCH_OFFICE'); ?></label>
 							<select id="branchOffice" name="branch-office" class="form-control select-box custom-select h6 w-100">
@@ -62,7 +62,7 @@
 							<div class="help-block"></div>
 						</div>
 						<?php endif; ?>
-						<?php if(lang('CONF_UNNA_PASSWORD')): ?>
+						<?php if(lang('CONF_UNNA_PASSWORD') == 'ON'): ?>
 						<div class="form-group col-4 col-xl-3">
 							<label><?= lang('GEN_PASSWORD');  ?></label>
 							<div class="input-group">

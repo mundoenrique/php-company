@@ -477,8 +477,10 @@ function buildList(response, action) {
 			inputModal += '<h6 class="light mr-1">Tarjeta: ' + value.cardNumber + ' Monto: ' + value.amount + '</h6>';
 		})
 
-		console.log(inputModal)
-
 		notiSystem(action, inputModal, lang.GEN_ICON_INFO, data);
+		$('#accept').addClass('update')
+		$('.update').on('click', function() {
+			dataTableReload(false)
+		})
 	}
 }
