@@ -167,19 +167,19 @@ $(function () {
 
 					if (access.TRABLQ && data.status == '') {
 						options += '<button class="btn mx-1 px-0" title="' + lang.GEN_TEMPORARY_LOCK + '" data-toggle="tooltip" amount="0">';
-						options += '<i class="icon novoglyphs icon-lock" aria-hidden="true"></i>';
+						options += '<i class="icon icon-lock" aria-hidden="true"></i>';
 						options += '</button>';
 					}
 
 					if (access.TRADBL && data.status == 'pb') {
 						options += '<button class="btn mx-1 px-0" title="' + lang.GEN_UNLOCK_CARD + '" data-toggle="tooltip" amount="0">';
-						options += '<i class="icon novoglyphs icon-unlock" aria-hidden="true"></i>';
+						options += '<i class="icon icon-unlock" aria-hidden="true"></i>';
 						options += '</button>';
 					}
 
 					if (access.TRAASG) {
 						options += '<button class="btn mx-1 px-0" title="' + lang.GEN_CARD_ASSIGNMENT + '" data-toggle="tooltip" amount="0">';
-						options += '<i class="icon novoglyphs icon-arrow-left" aria-hidden="true"></i>';
+						options += '<i class="icon icon-arrow-left" aria-hidden="true"></i>';
 						options += '</button>';
 					}
 
@@ -394,13 +394,23 @@ function sendRequest(action, modalReq, btn) {
 			btn.prop('disabled', false);
 			insertFormInput(false);
 			form.find('input[type=password]').val('')
+			$('#tableServicesMaster').find('tbody > tr input').val('')
 
-			if (action == lang.GEN_CHECK_BALANCE || 'Consulta') {
+			if (response.data.balance) {
+				$('#balance-aviable').text(response.data.balance)
+			}
+
+			if (action == lang.GEN_CHECK_BALANCE || action == 'Consulta') {
+
 				cardCheckBalance(response, action)
 			}
 
 			if (action == lang.GEN_TEMPORARY_LOCK || action == lang.GEN_UNLOCK_CARD || action == lang.GEN_CARD_ASSIGNMENT) {
 				cardBlockUnblock(response)
+			}
+
+			if (action == lang.GEN_CREDIT_TO_CARD || action == 'Abono' || action == lang.GEN_DEBIT_TO_CARD || action == 'Cargo') {
+				buildList(response, action)
 			}
 
 		})
@@ -452,4 +462,23 @@ function dataTableReload(resetPaging) {
 	$('#pre-loader-table').removeClass('hide')
 	$('#tableServicesMaster').DataTable().clear();
 	$('#tableServicesMaster').DataTable().ajax.reload(null, resetPaging);
+}
+
+function buildList(response, action) {
+	if (response.code == 2) {
+		data = {
+			btn1: {
+				text: lang.GEN_BTN_ACCEPT,
+				action: 'close'
+			}
+		}
+		inputModal = '<h5 class="regular mr-1">' + response.msg + '</h5>'
+		$.each(response.data.listResponse, function (index, value) {
+			inputModal += '<h6 class="light mr-1">Tarjeta: ' + value.cardNumber + ' Monto: ' + value.amount + '</h6>';
+		})
+
+		console.log(inputModal)
+
+		notiSystem(action, inputModal, lang.GEN_ICON_INFO, data);
+	}
 }

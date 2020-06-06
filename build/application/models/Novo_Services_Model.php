@@ -211,7 +211,7 @@ class Novo_Services_Model extends NOVO_Model {
 					$this->response->msg =  novoLang('La tarjeta %s ha sido reemplazada por %s.', [$cardsList[0]['noTarjeta'], $cardsList[0]['noTarjetaAsig']]);
 				}
 
-				if ($dataRequest->action == lang('GEN_CHECK_BALANCE') || $dataRequest->action == 'consulta') {
+				if ($dataRequest->action == lang('GEN_CHECK_BALANCE') || $dataRequest->action == 'Consulta') {
 					$this->response->code = 0;
 					foreach ($response->listadoTarjetas->lista as $key => $cards) {
 						$record = new stdClass();
@@ -230,9 +230,26 @@ class Novo_Services_Model extends NOVO_Model {
 						$this->response->code = 2;
 						$this->response->msg = 'No fue posible obtener el saldo para';
 					}
+				}
 
-					$this->response->data['listResponse'] = $listResopnse;
-					$this->response->data['listFail'] = $listFail;
+				if ($dataRequest->action == lang('GEN_CREDIT_TO_CARD') || $dataRequest->action == 'Abono' || $dataRequest->action == lang('GEN_DEBIT_TO_CARD') || $dataRequest->action == 'Cargo') {
+					foreach ($response->listadoTarjetas->lista as $key => $cards) {
+						$record = new stdClass();
+						$record->usersId = $cards->id_ext_per;
+						$record->cardNumber = $cards->noTarjetaConMascara;
+						$record->amount = isset($cards->montoTransaccion) ?  lang('GEN_CURRENCY').' '.$cards->montoTransaccion : '--';
+						$listResopnse[] = $record;
+					}
+
+					$this->response->code = 2;
+					$this->response->msg = 'datos de la transacción';
+				}
+
+				$this->response->data['listResponse'] = $listResopnse;
+				$this->response->data['listFail'] = $listFail;
+
+				if (isset($response->maestroDeposito)) {
+					$this->response->data['balance'] = lang('GEN_CURRENCY').' '.$response->maestroDeposito->saldoDisponible;
 				}
 			break;
 			case -1:
