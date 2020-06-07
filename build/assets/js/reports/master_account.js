@@ -351,6 +351,8 @@ function exportToExcelConsolid(passData, textBtn) {
 		  var File = new Int8Array(info.archivo);
 		  byteArrayFile([File], 'cuentaMaestraConsolidado.xls');
 			$('.cover-spin').removeAttr("style");
+		}else if(code == 4){
+			$('.cover-spin').removeAttr("style");
 		}
   })
 }
@@ -458,7 +460,7 @@ function masterAccount(passData) {
 			dataResponse = response.data
 			code = response.code
 			if( code == 0){
-				$('#files-btn').removeClass('hide');
+				$('#files-btn').removeClass("hide");
 			var info = dataResponse.depositoGMO.lista;
 			$.each(info,function(posLista,itemLista){
 				if(itemLista.tipoNota == 'D'){
