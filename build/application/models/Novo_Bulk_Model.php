@@ -1101,7 +1101,10 @@ class Novo_Bulk_Model extends NOVO_Model {
 				utf8_encode($password->password)
 			);
 		}
-
+		$startingLine1 = isset($dataRequest->startingLine1) ?
+			implode(' ',array_filter(explode(' ', ucfirst(mb_strtolower($dataRequest->startingLine1))))) : '';
+		$startingLine2 = isset($dataRequest->startingLine2) ?
+			implode(' ',array_filter(explode(' ', ucfirst(mb_strtolower($dataRequest->startingLine2))))) : '';
 		$this->dataRequest->idOperation = 'createCuentasInnominadas';
 		$this->dataRequest->lotesTO = [
 			'usuario' => $this->userName,
@@ -1111,8 +1114,8 @@ class Novo_Bulk_Model extends NOVO_Model {
 			'codProducto' => $this->session->productInf->productPrefix,
 			'fechaExp' => $expiredDate,
 			'cantRegistros' => $dataRequest->maxCards,
-			'lineaEmbozo1' => isset($dataRequest->startingLine1) ? $dataRequest->startingLine1 : '',
-			'lineaEmbozo2' => isset($dataRequest->startingLine2) ? $dataRequest->startingLine2 : '',
+			'lineaEmbozo1' => $startingLine1,
+			'lineaEmbozo2' => $startingLine2,
 			'sucursalCod' => isset($dataRequest->branchOffice) ? $dataRequest->branchOffice : '',
 			'password' => md5($password),
 			'monto' => '0',

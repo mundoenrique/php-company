@@ -242,7 +242,7 @@ class Novo_Services_Model extends NOVO_Model {
 					}
 
 					$this->response->code = 2;
-					$this->response->msg = 'datos de la transacción';
+					$this->response->msg = 'Datos de la transacción';
 				}
 
 				$this->response->data['listResponse'] = $listResopnse;
@@ -256,6 +256,13 @@ class Novo_Services_Model extends NOVO_Model {
 				$this->response->title = $dataRequest->action;
 				$this->response->msg = lang('RESP_PASSWORD_NO_VALID');
 				$this->response->icon = lang('GEN_ICON_INFO');
+				$this->response->data['btn1']['action'] = 'close';
+			break;
+			case -21:
+			case -22:
+				$this->response->title = $dataRequest->action;
+				$this->response->msg = 'No fue posible realizar la trasacción, intentalo de nuevo';
+				$this->response->icon = lang('GEN_ICON_WARNING');
 				$this->response->data['btn1']['action'] = 'close';
 			break;
 			case -33:

@@ -135,9 +135,10 @@ $(function () {
 				data: function (data) {
 					var ammount;
 					var disabeldInput = data.status == '' ? '' : 'disabled'
-					ammount = '<form>';
-					ammount += '<input class="form-control h6 text-right" type="text" placeholder="' + data.amount + '" '+disabeldInput+'></input>';
-					ammount += '</form>';
+					ammount =	'<form>';
+					ammount+= 	'<input class="form-control h6 text-right" type="text" placeholder="';
+					ammount+=		 data.amount + '" '+disabeldInput+'">';
+					ammount+=	'</form>';
 
 					return ammount
 				}
@@ -296,9 +297,19 @@ $(function () {
 		},
 		"keyup": function (event) {
 			$(event.target).val(function (index, value) {
-				return value.replace(/\D/g, "")
+				if(value.indexOf('0') != -1 && value.indexOf('0') == 0) {
+					value = value.replace(0, '');
+				}
+
+				if (value.length == 1 && /^[0-9,.]+$/.test(value)) {
+					value = '00'+value
+				}
+
+				value = value.replace(/\D/g, "")
 					.replace(/([0-9])([0-9]{2})$/, '$1' + lang.GEN_DECIMAL + '$2')
 					.replace(/\B(?=(\d{3})+(?!\d)\.?)/g, lang.GEN_THOUSANDS);
+
+				return value
 			}, 'input');
 		}
 	});
@@ -313,6 +324,9 @@ function amountValidate(getAmount, classSelect, action) {
 		for (var i = 0; i < cardsData.length; i++) {
 			$('#tableServicesMaster').find('tbody > tr'+classSelect).each(function (index, element) {
 				currentamount = $(element).find('td.amount-cc input').val();
+				var amountArr =  currentamount.split(lang.GEN_DECIMAL);
+				amountArr[0] = amountArr[0].replace(/[,.]/g, '');
+				currentamount = amountArr[0]+'.'+amountArr[1];
 				currentamount = parseFloat(currentamount).toFixed(2)
 
 				if(currentamount == 'NaN' || currentamount <= 0) {

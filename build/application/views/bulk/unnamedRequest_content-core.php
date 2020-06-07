@@ -37,14 +37,14 @@
 						<?php if(lang('CONF_UNNA_STARTING_LINE1') == 'ON'): ?>
 						<div class="form-group col-4 col-xl-3">
 							<label><?= lang('BULK_UNNA_STARTING_LINE1'); ?></label>
-							<input type="text" id="startingLine1" name="starting-line1" class="form-control h5">
+							<input type="text" id="startingLine1" name="starting-line1" class="form-control h5" maxlength="25">
 							<div class="help-block"></div>
 						</div>
 						<?php endif; ?>
 						<?php if(lang('CONF_UNNA_STARTING_LINE2') == 'ON'): ?>
 						<div class="form-group col-4 col-xl-3">
 							<label><?= lang('BULK_UNNA_STARTING_LINE2'); ?></label>
-							<input type="text" id="startingLine2" name="starting-line2" class="form-control h5">
+							<input type="text" id="startingLine2" name="starting-line2" class="form-control h5" maxlength="25">
 							<div class="help-block"></div>
 						</div>
 						<?php endif; ?>
