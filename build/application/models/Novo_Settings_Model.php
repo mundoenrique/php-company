@@ -315,7 +315,7 @@ class Novo_Settings_Model extends NOVO_Model {
 	 */
 	public function CallWs_GetFileIni_Settings($dataRequest)
 	{
-		log_message('INFO', 'NOVO Reports Model: GetFileIni Method Initialized');
+		log_message('INFO', 'NOVO Setting Model: CallWs_GetFileIni Method Initialized');
 
 		$this->className = 'ReporteCEOTO.class';
 		$this->dataAccessLog->function = 'Listado de tarjetas';
@@ -330,7 +330,7 @@ class Novo_Settings_Model extends NOVO_Model {
 			'accodcia' => $this->session->userdata['enterpriseSelect']->list[0]->accodcia
 		];
 
-		$response = $this->sendToService('GetFileIni: '.$dataRequest->operation);
+		$response = $this->sendToService('CallWs_GetFileIni: '.$dataRequest->operation);
 
 		switch($this->isResponseRc) {
 			case 0:
@@ -350,6 +350,6 @@ class Novo_Settings_Model extends NOVO_Model {
 				break;
 		}
 
-		return $this->responseToTheView('GetFileIni: '.$dataRequest->operation);
+		return $this->responseToTheView('CallWs_GetFileIni: '.$dataRequest->operation);
 	}
 }
