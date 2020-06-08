@@ -610,17 +610,14 @@
 									<span>Aplicación</span>
 								</div>
 								<div class="row">
-
-									<div class="mb-3 col-auto col-lg-6 col-xl-5">
-										<a href="" download>
-											<div class="files btn-link flex items-center">
-												<div class="file">
-													<img src="<?= $this->asset->insertFile(lang('CONF_ZIP_ICON'), 'images/icons');?>" />
-												</div>
-												<span class="ml-2 flex justify-center">Archivo.ini</span>
-											</div>
-										</a>
+									<div id="div-download">
+										<div class="flex items-start justify-end">
+										<button id="btn-download" class="flex items-baseline btn btn-link btn-small big-modal">
+										<i aria-hidden="true" class="icon icon-download"></i>
+										&nbsp;Archivo.ini
+										</button>
 									</div>
+								</div>
 								</div>
 								<?php endif; ?>
 

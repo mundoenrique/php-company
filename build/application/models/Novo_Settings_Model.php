@@ -307,4 +307,49 @@ class Novo_Settings_Model extends NOVO_Model {
 
 		return $this->responseToTheView('AddContact');
 	}
+
+	/**
+	 * @info Método para obtener archivo de configuración .ini
+	 * @author Luis Molina
+	 * @date Jun 07Sun, 2020
+	 */
+	public function CallWs_GetFileIni_Settings($dataRequest)
+	{
+		log_message('INFO', 'NOVO Reports Model: GetFileIni Method Initialized');
+
+		$this->className = 'ReporteCEOTO.class';
+		$this->dataAccessLog->function = 'Listado de tarjetas';
+		$this->dataAccessLog->operation = 'Descargar archivo';
+		$this->dataAccessLog->modulo = 'Reportes';
+
+		$this->dataRequest->idOperation = $dataRequest->operation;
+		$this->dataRequest->rutaArchivo = DOWNLOAD_ROUTE;
+
+		$this->dataRequest->empresaCliente = [
+			'rif' => $this->session->userdata['enterpriseSelect']->list[0]->acrif,
+			'accodcia' => $this->session->userdata['enterpriseSelect']->list[0]->accodcia
+		];
+
+		$response = $this->sendToService('GetFileIni: '.$dataRequest->operation);
+
+		switch($this->isResponseRc) {
+			case 0:
+				$this->response->icon = lang('GEN_ICON_DANGER');
+				$this->response->title = lang('REPORTS_TITLE');
+				$this->response->msg = lang('REPORTS_NO_FILE_EXIST');
+				$this->response->data['btn1']['action'] = 'close';
+
+				if(file_exists(assetPath('downloads/'.$response->bean))) {
+					$this->response->code = 0;
+					$this->response->msg = lang('RESP_RC_0');
+					$this->response->data = [
+						'file' => assetUrl('downloads/'.$response->bean),
+						'name' => $response->bean
+					];
+				}
+				break;
+		}
+
+		return $this->responseToTheView('GetFileIni: '.$dataRequest->operation);
+	}
 }

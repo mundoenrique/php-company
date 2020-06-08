@@ -307,3 +307,28 @@ function selectionBussine(passData) {
         $("#completeForm").removeClass("hide");
     })
 }
+
+$('#btn-download').on('click', function (e) {
+    e.preventDefault();
+    data = {
+        operation: 216
+    }
+    getFileIni(data);
+})
+
+function getFileIni(data) {
+	insertFormInput(true);
+	verb = 'POST'; who = 'Settings'; where = 'getFileIni';
+	var downloadFile = $('#download-file');
+	callNovoCore(verb, who, where, data, function (response) {
+		if(response.code == 0) {
+            downloadFile.attr('href', response.data.file)
+            document.getElementById('download-file').click()
+            who = 'DownloadFiles'; where = 'DeleteFile';
+            data.fileName = response.data.name
+            callNovoCore(verb, who, where, data, function (response) {})
+        }
+        insertFormInput(false);
+		$('.cover-spin').hide();
+	})
+}

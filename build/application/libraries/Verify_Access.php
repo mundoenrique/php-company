@@ -172,6 +172,7 @@ class Verify_Access {
 				case 'keepSession':
 				case 'options':
 				case 'getProductDetail':
+				case 'getFileIni':
 					$auth = ($this->CI->session->has_userdata('logged'));
 					break;
 				case 'getPendingBulk':
