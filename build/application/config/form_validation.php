@@ -500,7 +500,7 @@ $config = [
 		[
 			'field' => 'operation',
 			'label' => 'operation',
-			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+			'rules' => 'null'
 		]
 	],
 	'unnamedRequest' => [

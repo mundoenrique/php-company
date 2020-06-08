@@ -310,9 +310,7 @@ function selectionBussine(passData) {
 
 $('#btn-download').on('click', function (e) {
     e.preventDefault();
-    data = {
-        operation: 216
-    }
+    data = {};
     getFileIni(data);
 })
 

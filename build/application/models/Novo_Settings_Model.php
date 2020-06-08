@@ -322,7 +322,7 @@ class Novo_Settings_Model extends NOVO_Model {
 		$this->dataAccessLog->operation = 'Descargar archivo';
 		$this->dataAccessLog->modulo = 'Reportes';
 
-		$this->dataRequest->idOperation = $dataRequest->operation;
+		$this->dataRequest->idOperation = 216;
 		$this->dataRequest->rutaArchivo = DOWNLOAD_ROUTE;
 
 		$this->dataRequest->empresaCliente = [
@@ -330,7 +330,7 @@ class Novo_Settings_Model extends NOVO_Model {
 			'accodcia' => $this->session->userdata['enterpriseSelect']->list[0]->accodcia
 		];
 
-		$response = $this->sendToService('CallWs_GetFileIni: '.$dataRequest->operation);
+		$response = $this->sendToService('CallWs_GetFileIni: '.$this->dataRequest->idOperation);
 
 		switch($this->isResponseRc) {
 			case 0:
@@ -350,6 +350,6 @@ class Novo_Settings_Model extends NOVO_Model {
 				break;
 		}
 
-		return $this->responseToTheView('CallWs_GetFileIni: '.$dataRequest->operation);
+		return $this->responseToTheView('CallWs_GetFileIni: '.$this->dataRequest->idOperation);
 	}
 }
