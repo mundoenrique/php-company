@@ -33,10 +33,6 @@ $(function () {
 
 	var concenAccount = $('#concenAccount').DataTable({
 		"ordering": false,
-		"responsive": true,
-		"oLanguage": {
-			"sEmptyTable": "No hay Funciones disponibles"
-	},
 		"pagingType": "full_numbers",
 		"language": dataTableLang
 	});
@@ -122,9 +118,9 @@ function userActivity(passData) {
 		var i = 0;
 		table = $('#concenAccount').DataTable({
 		"ordering": false,
-		"responsive": true,
 		"pagingType": "full_numbers",
 		"data": info,
+		"language": dataTableLang,
 		"createdRow": function( row, data, dataIndex ) {
 		 $(row).attr( 'numRuf', dataIndex );
 		},
