@@ -181,6 +181,7 @@ function closingBudgets(dataForm) {
 		"language": dataTableLang,
 		"processing": true,
 		"serverSide": true,
+		"lengthChange": false,
 		"columns": [
 			{ data: 'nombre' },
 			{ data: 'idExtPer' },
@@ -210,9 +211,7 @@ function closingBudgets(dataForm) {
 			"className": "fechaUltAct",
 		}
 	],
-	"lengthChange": false,
-	"pagelength": 10,
-	"pagingType": "full_numbers",
+
 		"ajax": {
 			url: baseURL + 'async-call',
 			method: 'POST',
