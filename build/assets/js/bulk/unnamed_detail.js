@@ -3,7 +3,6 @@ var reportsResults;
 $(function () {
 	$('#pre-loader').remove();
 	$('.hide-out').removeClass('hide');
-	var downloadFile = $('#download-file')
 
 	$('#unnamed-detail').DataTable({
 		"ordering": false,
@@ -12,7 +11,7 @@ $(function () {
 		"language": dataTableLang
 	});
 
-	downloadFile.on('click', function(e) {
+	$('#download-file').on('click', function(e) {
 		e.preventDefault();
 		form = $(this).parent().find('form');
 		insertFormInput(true, form);

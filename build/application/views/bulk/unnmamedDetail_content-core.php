@@ -83,7 +83,9 @@
 							<?php foreach($bulkRecords AS $records): ?>
 							<tr>
 								<td><?= $records->cardNumber ?></td>
+								<?php if (lang('CONF_UNNA_ACCOUNT_NUMBER') == 'ON'): ?>
 								<td><?= $records->accountNumber ?></td>
+								<?php endif; ?>
 								<td><?= $records->idDoc ?></td>
 								<td><?= $records->cardHolder ?></td>
 								<td><?= $records->status ?></td>

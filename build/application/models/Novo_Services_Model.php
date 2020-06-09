@@ -89,7 +89,7 @@ class Novo_Services_Model extends NOVO_Model {
 			case -150:
 				$this->response->title = lang('GEN_MENU_SERV_MASTER_ACCOUNT');
 				$this->response->icon = lang('GEN_ICON_INFO');
-				$this->response->msg = 'Nose encontraron resultados para tu busqueda';
+				$this->response->msg = 'No se encontraron resultados para tu busqueda';
 				$this->response->data['btn1']['action'] = 'close';
 			break;
 		}
@@ -125,7 +125,7 @@ class Novo_Services_Model extends NOVO_Model {
 
 			switch ($dataRequest->action) {
 				case lang('GEN_CHECK_BALANCE'):
-				case 'consulta':
+				case 'Consulta':
 				case lang('GEN_TEMPORARY_LOCK'):
 				case lang('GEN_UNLOCK_CARD'):
 					unset($card['montoTransaccion']);
@@ -141,17 +141,17 @@ class Novo_Services_Model extends NOVO_Model {
 
 		switch ($dataRequest->action) {
 			case lang('GEN_CHECK_BALANCE'):
-			case 'consulta':
+			case 'Consulta':
 				$this->dataAccessLog->operation = lang('GEN_CHECK_BALANCE');
 				$this->dataRequest->idOperation = 'saldoTM';
 			break;
 			case lang('GEN_CREDIT_TO_CARD'):
-			case 'abono':
+			case 'Abono':
 				$this->dataAccessLog->operation = lang('GEN_CREDIT_TO_CARD');
 				$this->dataRequest->idOperation = 'abonarTM';
 			break;
 			case lang('GEN_DEBIT_TO_CARD'):
-			case 'cargo':
+			case 'Cargo':
 				$this->dataAccessLog->operation = lang('GEN_DEBIT_TO_CARD');
 				$this->dataRequest->idOperation = 'cargoTM';
 			break;
@@ -211,7 +211,7 @@ class Novo_Services_Model extends NOVO_Model {
 					$this->response->msg =  novoLang('La tarjeta %s ha sido reemplazada por %s.', [$cardsList[0]['noTarjeta'], $cardsList[0]['noTarjetaAsig']]);
 				}
 
-				if ($dataRequest->action == lang('GEN_CHECK_BALANCE') || $dataRequest->action == 'consulta') {
+				if ($dataRequest->action == lang('GEN_CHECK_BALANCE') || $dataRequest->action == 'Consulta') {
 					$this->response->code = 0;
 					foreach ($response->listadoTarjetas->lista as $key => $cards) {
 						$record = new stdClass();
@@ -230,9 +230,26 @@ class Novo_Services_Model extends NOVO_Model {
 						$this->response->code = 2;
 						$this->response->msg = 'No fue posible obtener el saldo para';
 					}
+				}
 
-					$this->response->data['listResponse'] = $listResopnse;
-					$this->response->data['listFail'] = $listFail;
+				if ($dataRequest->action == lang('GEN_CREDIT_TO_CARD') || $dataRequest->action == 'Abono' || $dataRequest->action == lang('GEN_DEBIT_TO_CARD') || $dataRequest->action == 'Cargo') {
+					foreach ($response->listadoTarjetas->lista as $key => $cards) {
+						$record = new stdClass();
+						$record->usersId = $cards->id_ext_per;
+						$record->cardNumber = $cards->noTarjetaConMascara;
+						$record->amount = isset($cards->montoTransaccion) ?  lang('GEN_CURRENCY').' '.$cards->montoTransaccion : '--';
+						$listResopnse[] = $record;
+					}
+
+					$this->response->code = 2;
+					$this->response->msg = 'Datos de la transacción';
+				}
+
+				$this->response->data['listResponse'] = $listResopnse;
+				$this->response->data['listFail'] = $listFail;
+
+				if (isset($response->maestroDeposito)) {
+					$this->response->data['balance'] = lang('GEN_CURRENCY').' '.$response->maestroDeposito->saldoDisponible;
 				}
 			break;
 			case -1:
@@ -241,10 +258,42 @@ class Novo_Services_Model extends NOVO_Model {
 				$this->response->icon = lang('GEN_ICON_INFO');
 				$this->response->data['btn1']['action'] = 'close';
 			break;
+			case -21:
+			case -22:
+				$this->response->title = $dataRequest->action;
+				$this->response->msg = 'No fue posible realizar la trasacción, intentalo de nuevo';
+				$this->response->icon = lang('GEN_ICON_WARNING');
+				$this->response->data['btn1']['action'] = 'close';
+			break;
 			case -33:
+			case -100:
 				$this->response->title = $dataRequest->action;
 				$this->response->msg = 'El saldo no esta disponible';
 				$this->response->icon = lang('GEN_ICON_WARNING');
+				$this->response->data['btn1']['action'] = 'close';
+			break;
+			case -152:
+				$this->response->title = $dataRequest->action;
+				$this->response->msg = 'La transacción no supera el monto mínimo por operación';
+				$this->response->icon = lang('GEN_ICON_INFO');
+				$this->response->data['btn1']['action'] = 'close';
+			break;
+			case -153:
+				$this->response->title = $dataRequest->action;
+				$this->response->msg = 'Alcanzaste el monto maximo de operaciones semenales';
+				$this->response->icon = lang('GEN_ICON_INFO');
+				$this->response->data['btn1']['action'] = 'close';
+			break;
+			case -154:
+				$this->response->title = $dataRequest->action;
+				$this->response->msg = 'Alcanzaste el monto maximo de operaciones diarias';
+				$this->response->icon = lang('GEN_ICON_INFO');
+				$this->response->data['btn1']['action'] = 'close';
+			break;
+			case -155:
+				$this->response->title = $dataRequest->action;
+				$this->response->msg = 'Tu saldo no es suficiente para realizar la transacción';
+				$this->response->icon = lang('GEN_ICON_INFO');
 				$this->response->data['btn1']['action'] = 'close';
 			break;
 			case -157:

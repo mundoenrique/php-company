@@ -8,6 +8,7 @@ $(function () {
 
 	$('#blockMasterAccountResults').addClass("hide");
 	$('#titleResults').addClass('hide');
+	$('#files-btn').addClass('hide');
 	$("#credit").val('');
 	$("#debit").val('');
 	$("#debit").val('');
@@ -350,6 +351,8 @@ function exportToExcelConsolid(passData, textBtn) {
 		  var File = new Int8Array(info.archivo);
 		  byteArrayFile([File], 'cuentaMaestraConsolidado.xls');
 			$('.cover-spin').removeAttr("style");
+		}else if(code == 4){
+			$('.cover-spin').removeAttr("style");
 		}
   })
 }
@@ -457,6 +460,7 @@ function masterAccount(passData) {
 			dataResponse = response.data
 			code = response.code
 			if( code == 0){
+				$('#files-btn').removeClass("hide");
 			var info = dataResponse.depositoGMO.lista;
 			$.each(info,function(posLista,itemLista){
 				if(itemLista.tipoNota == 'D'){
@@ -482,7 +486,7 @@ function masterAccount(passData) {
 						{ data: 'saldoDisponible' }
 				]
 			})} else{
-
+				$('#files-btn').addClass('hide');
 				$('#concenAccount').DataTable({
 					"responsive": true,
 					"ordering": false,
@@ -499,7 +503,7 @@ function masterAccount(passData) {
 				$("#finalDate ").removeAttr('disabled');
 			}
 			$('#blockMasterAccountResults').removeClass("hide");
-			$('#files-btn').removeClass("hide");
+
   })
 }
 

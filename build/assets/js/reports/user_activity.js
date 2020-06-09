@@ -33,7 +33,6 @@ $(function () {
 
 	var concenAccount = $('#concenAccount').DataTable({
 		"ordering": false,
-		"responsive": true,
 		"pagingType": "full_numbers",
 		"language": dataTableLang
 	});
@@ -119,10 +118,9 @@ function userActivity(passData) {
 		var i = 0;
 		table = $('#concenAccount').DataTable({
 		"ordering": false,
-		"responsive": true,
 		"pagingType": "full_numbers",
-		"language": dataTableLang,
 		"data": info,
+		"language": dataTableLang,
 		"createdRow": function( row, data, dataIndex ) {
 		 $(row).attr( 'numRuf', dataIndex );
 		},
@@ -156,8 +154,11 @@ $('#tbody-datos-general').delegate('#seeActivity','click',function() {
 $('#tableAtivity').DataTable({
   "responsive": true,
   "ordering": false,
-  "pagingType": "full_numbers",
-  "language": dataTableLang,
+	"pagingType": "full_numbers",
+	"oLanguage": {
+		"sEmptyTable": "No hay registros disponibles"
+},
+	"language": dataTableLang,
   "data": info3,
   "columns": [
     { data: 'accodusuario' },
@@ -168,12 +169,16 @@ $('#tableAtivity').DataTable({
 
 $('#tbody-datos-general').delegate('.activity','click',function(e) {
 	dialogE(e);
+
 	$('#activityTable').DataTable({
 		"paging":   false,
 		"bFilter": false,
 		"info":     false,
 		"order": false,
 		"bDestroy": true,
+		"oLanguage": {
+			"sEmptyTable": "No hay Funciones disponibles"
+	},
 		"data": info3[$(this).parents('tr').attr('numRuf')],
 		"columns": [
 			{ data: 'acnomfuncion' },
