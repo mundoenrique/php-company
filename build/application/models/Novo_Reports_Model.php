@@ -711,10 +711,10 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->dataAccessLog->function = 'Estado de lote';
 		$this->dataAccessLog->operation = 'Obtener lista lotes por estado';
 		$this->dataRequest->idOperation = 'saldosAmanecidos';
-		$this->dataRequest->idExtPer = $dataRequest->cedula;
+		$this->dataRequest->idExtPer = $dataRequest->idExtPer;
 		$this->dataRequest->producto =  $dataRequest->producto;
-		$this->dataRequest->idExtEmp =  $dataRequest->empresa;
-		$this->dataRequest->tamanoPagina = $dataRequest->tamPg;
+		$this->dataRequest->idExtEmp =  $dataRequest->idExtEmp;
+		$this->dataRequest->tamanoPagina = $dataRequest->tamanoPagina;
 		$this->dataRequest->paginar = $dataRequest->paginar;
 		$this->dataRequest->paginaActual = $dataRequest->paginaActual;
 
@@ -724,7 +724,7 @@ class Novo_Reports_Model extends NOVO_Model {
 		switch($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
-				$user = $response;
+				$user = $response->saldo->lista;
 				$this->response->data =  (array)$user;
 			break;
 			case -150:
@@ -750,9 +750,8 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->dataAccessLog->function = 'Saldos amanecidos';
 		$this->dataAccessLog->operation = 'Obtener excel de tabla';
 		$this->dataRequest->idOperation = 'generaArchivoXls';
-		$this->dataRequest->idExtPer = $dataRequest->cedula;
 		$this->dataRequest->producto =  $dataRequest->producto;
-		$this->dataRequest->idExtEmp =  $dataRequest->empresa;
+		$this->dataRequest->idExtEmp =  $dataRequest->cedula;
 		$this->dataRequest->tamanoPagina = $dataRequest->tamPg;
 		$this->dataRequest->paginar = $dataRequest->paginar;
 		$this->dataRequest->paginaActual = $dataRequest->paginaActual;

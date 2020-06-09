@@ -139,16 +139,18 @@ function userActivity(passData) {
 })
 
 $('#tbody-datos-general').delegate('#seeActivity','click',function() {
-	var filaDeLaTabla = $(this).closest('tr');
-  var filaComplementaria = table.row(filaDeLaTabla);
-  var celdaDeIcono = $(this).closest('#seeActivity');
-  var data;
+	var rowTable = $(this).closest('tr');
+  var complementaryRow = table.row(rowTable);
 
-	if (filaComplementaria.child.isShown() ) {
-    filaComplementaria.child.hide();
-	} else {
-		filaComplementaria.child(format(info5[$(this).parents('tr').attr('numRuf')])).show();
+
+	if (complementaryRow.child.isShown() ) {
+		$('.complementary').parents('tr').remove();
+		complementaryRow.child(format(info5[$(this).parents('tr').attr('numRuf')])).hide();
+}
+	if($('.complementary').parents('tr')){
+		$('.complementary').parents('tr').remove();
 	}
+	complementaryRow.child(format(info5[$(this).parents('tr').attr('numRuf')])).show();
 })
 
 $('#tableAtivity').DataTable({
@@ -313,7 +315,7 @@ function format(user) {
 		body+= 		'<td>'+ user[key].dttimesstamp +'</td>';
 		body+=	'</tr>';
 	})
-		table= 	'<table class="detail-lot h6 cell-border primary semibold" style="width:100%">';
+		table= 	'<table class="complementary h6 cell-border primary semibold" style="width:100%">';
 		table+= 	'<tbody>';
 		table+= 		'<tr class="bold" style="margin-left: 0px;">';
 		table+= 			'<td>' + lang.GEN_TABLE_USERACT_MODULE + '</td>';
