@@ -392,7 +392,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 		$bulkConfirmInfo->lineaEmbozo1 = !isset($dataRequest->enbLine1) ?: $dataRequest->enbLine1;
 		$bulkConfirmInfo->lineaEmbozo2 = !isset($dataRequest->enbLine2) ?: $dataRequest->enbLine2;
 		$bulkConfirmInfo->conceptoAbono = !isset($dataRequest->paymentConcept) ?: $dataRequest->paymentConcept;
-		$bulkConfirmInfo->codCia = $this->session->enterpriseInf->idFiscal;
+		$bulkConfirmInfo->codCia = $this->session->enterpriseInf->enterpriseCode;
 
 		$this->dataRequest->idOperation = $bulkConfirmInfo->idTipoLote == 'L' && $this->country != 'Ec-bp' ? 'reprocesarLoteGeneral' :'confirmarLote';
 		$this->dataRequest->lotesTO = $bulkConfirmInfo;
@@ -1101,7 +1101,10 @@ class Novo_Bulk_Model extends NOVO_Model {
 				utf8_encode($password->password)
 			);
 		}
-
+		$startingLine1 = isset($dataRequest->startingLine1) ?
+			implode(' ',array_filter(explode(' ', ucfirst(mb_strtolower($dataRequest->startingLine1))))) : '';
+		$startingLine2 = isset($dataRequest->startingLine2) ?
+			implode(' ',array_filter(explode(' ', ucfirst(mb_strtolower($dataRequest->startingLine2))))) : '';
 		$this->dataRequest->idOperation = 'createCuentasInnominadas';
 		$this->dataRequest->lotesTO = [
 			'usuario' => $this->userName,
@@ -1111,8 +1114,8 @@ class Novo_Bulk_Model extends NOVO_Model {
 			'codProducto' => $this->session->productInf->productPrefix,
 			'fechaExp' => $expiredDate,
 			'cantRegistros' => $dataRequest->maxCards,
-			'lineaEmbozo1' => isset($dataRequest->startingLine1) ? $dataRequest->startingLine1 : '',
-			'lineaEmbozo2' => isset($dataRequest->startingLine2) ? $dataRequest->startingLine2 : '',
+			'lineaEmbozo1' => $startingLine1,
+			'lineaEmbozo2' => $startingLine2,
 			'sucursalCod' => isset($dataRequest->branchOffice) ? $dataRequest->branchOffice : '',
 			'password' => md5($password),
 			'monto' => '0',
@@ -1269,6 +1272,10 @@ class Novo_Bulk_Model extends NOVO_Model {
 			'bulkRecords' => [],
 		];
 
+		if (lang('CONF_UNNA_ACCOUNT_NUMBER') == 'OFF') {
+			unset($detailInfo['bulkHeader'][1]);
+		}
+
 		switch ($this->isResponseRc) {
 			case 0:
 				$unnamedDetail = json_decode($response->bean);
@@ -1278,7 +1285,11 @@ class Novo_Bulk_Model extends NOVO_Model {
 					foreach ($unnamedDetail->tarjetasInnominadas AS $records) {
 						$record = new stdClass();
 						$record->cardNumber = $records->nroTarjeta;
-						$record->accountNumber = maskString($records->nroCuenta, 6, 4);
+
+						if (lang('CONF_UNNA_ACCOUNT_NUMBER') == 'ON') {
+							$record->accountNumber = maskString($records->nroCuenta, 6, 4);
+						}
+
 						$record->idDoc = $records->idExtPer;
 						$record->cardHolder = $records->nombre;
 						$record->cardHoldLastName = $records->apellido;
@@ -1291,6 +1302,12 @@ class Novo_Bulk_Model extends NOVO_Model {
 						);
 					}
 				}
+			break;
+			case -150:
+				$this->response->title = 'Cuentas Innominadas';
+				$this->response->msg = 'Todas las tarjetas del lote han sido afiliadas';
+				$this->response->icon = lang('GEN_ICON_INFO');
+				$this->response->data->resp['btn1']['link'] = lang('GEN_LINK_BULK_UNNAMED_AFFIL');
 			break;
 		}
 

@@ -135,9 +135,10 @@ $(function () {
 				data: function (data) {
 					var ammount;
 					var disabeldInput = data.status == '' ? '' : 'disabled'
-					ammount = '<form>';
-					ammount += '<input class="form-control h6 text-right" type="text" placeholder="' + data.amount + '" '+disabeldInput+'></input>';
-					ammount += '</form>';
+					ammount =	'<form>';
+					ammount+= 	'<input class="form-control h6 text-right" type="text" placeholder="';
+					ammount+=		 data.amount + '" '+disabeldInput+'">';
+					ammount+=	'</form>';
 
 					return ammount
 				}
@@ -167,19 +168,19 @@ $(function () {
 
 					if (access.TRABLQ && data.status == '') {
 						options += '<button class="btn mx-1 px-0" title="' + lang.GEN_TEMPORARY_LOCK + '" data-toggle="tooltip" amount="0">';
-						options += '<i class="icon novoglyphs icon-lock" aria-hidden="true"></i>';
+						options += '<i class="icon icon-lock" aria-hidden="true"></i>';
 						options += '</button>';
 					}
 
 					if (access.TRADBL && data.status == 'pb') {
 						options += '<button class="btn mx-1 px-0" title="' + lang.GEN_UNLOCK_CARD + '" data-toggle="tooltip" amount="0">';
-						options += '<i class="icon novoglyphs icon-unlock" aria-hidden="true"></i>';
+						options += '<i class="icon icon-unlock" aria-hidden="true"></i>';
 						options += '</button>';
 					}
 
 					if (access.TRAASG) {
 						options += '<button class="btn mx-1 px-0" title="' + lang.GEN_CARD_ASSIGNMENT + '" data-toggle="tooltip" amount="0">';
-						options += '<i class="icon novoglyphs icon-arrow-left" aria-hidden="true"></i>';
+						options += '<i class="icon icon-arrow-left" aria-hidden="true"></i>';
 						options += '</button>';
 					}
 
@@ -215,6 +216,7 @@ $(function () {
 		action = event.attr('title');
 		getAmount = event.attr('amount');
 		table.rows().deselect();
+		$('#tableServicesMaster').find('thead > tr').removeClass("selected")
 		$(this).closest('tr').addClass('select');
 
 
@@ -270,7 +272,7 @@ $(function () {
 		sendRequest(action, modalReq, $(this))
 	})
 
-	$('#consulta, #abono, #cargo').on('click', function (e) {
+	$('#Consulta, #Abono, #Cargo').on('click', function (e) {
 		e.preventDefault()
 		$('#tableServicesMaster').find('tr').removeClass('select');
 		action = $(this).attr('id');
@@ -295,9 +297,19 @@ $(function () {
 		},
 		"keyup": function (event) {
 			$(event.target).val(function (index, value) {
-				return value.replace(/\D/g, "")
+				if(value.indexOf('0') != -1 && value.indexOf('0') == 0) {
+					value = value.replace(0, '');
+				}
+
+				if (value.length == 1 && /^[0-9,.]+$/.test(value)) {
+					value = '00'+value
+				}
+
+				value = value.replace(/\D/g, "")
 					.replace(/([0-9])([0-9]{2})$/, '$1' + lang.GEN_DECIMAL + '$2')
 					.replace(/\B(?=(\d{3})+(?!\d)\.?)/g, lang.GEN_THOUSANDS);
+
+				return value
 			}, 'input');
 		}
 	});
@@ -312,6 +324,9 @@ function amountValidate(getAmount, classSelect, action) {
 		for (var i = 0; i < cardsData.length; i++) {
 			$('#tableServicesMaster').find('tbody > tr'+classSelect).each(function (index, element) {
 				currentamount = $(element).find('td.amount-cc input').val();
+				var amountArr =  currentamount.split(lang.GEN_DECIMAL);
+				amountArr[0] = amountArr[0].replace(/[,.]/g, '');
+				currentamount = amountArr[0]+'.'+amountArr[1];
 				currentamount = parseFloat(currentamount).toFixed(2)
 
 				if(currentamount == 'NaN' || currentamount <= 0) {
@@ -335,6 +350,7 @@ function amountValidate(getAmount, classSelect, action) {
 		}
 
 		notiSystem(action, lang.GEN_VALID_AMOUNT, lang.GEN_ICON_WARNING, data);
+		$('#tableServicesMaster').find('thead > tr').removeClass("selected")
 		table.rows().deselect();
 	}
 
@@ -380,23 +396,35 @@ function sendRequest(action, modalReq, btn) {
 
 		callNovoCore(verb, who, where, data, function (response) {
 			$('#tableServicesMaster').find('tr').removeClass('select');
+			$('#tableServicesMaster').find('thead > tr').removeClass("selected")
 			table.rows().deselect();
+			$('#tableServicesMaster').find('thead > tr').removeClass("selected")
 			$('#accept').removeClass('send-request');
 
-			if(action == 'consulta' || action == 'consulta' || action == 'abono') {
+			if(action == 'Consulta' || action == 'Cargo' || action == 'Abono') {
 				btn.html(btnText)
 			}
 
 			btn.prop('disabled', false);
 			insertFormInput(false);
 			form.find('input[type=password]').val('')
+			$('#tableServicesMaster').find('tbody > tr input').val('')
 
-			if (action == lang.GEN_CHECK_BALANCE || 'consulta') {
+			if (response.data.balance) {
+				$('#balance-aviable').text(response.data.balance)
+			}
+
+			if (action == lang.GEN_CHECK_BALANCE || action == 'Consulta') {
+
 				cardCheckBalance(response, action)
 			}
 
 			if (action == lang.GEN_TEMPORARY_LOCK || action == lang.GEN_UNLOCK_CARD || action == lang.GEN_CARD_ASSIGNMENT) {
 				cardBlockUnblock(response)
+			}
+
+			if (action == lang.GEN_CREDIT_TO_CARD || action == 'Abono' || action == lang.GEN_DEBIT_TO_CARD || action == 'Cargo') {
+				buildList(response, action)
 			}
 
 		})
@@ -448,4 +476,25 @@ function dataTableReload(resetPaging) {
 	$('#pre-loader-table').removeClass('hide')
 	$('#tableServicesMaster').DataTable().clear();
 	$('#tableServicesMaster').DataTable().ajax.reload(null, resetPaging);
+}
+
+function buildList(response, action) {
+	if (response.code == 2) {
+		data = {
+			btn1: {
+				text: lang.GEN_BTN_ACCEPT,
+				action: 'close'
+			}
+		}
+		inputModal = '<h5 class="regular mr-1">' + response.msg + '</h5>'
+		$.each(response.data.listResponse, function (index, value) {
+			inputModal += '<h6 class="light mr-1">Tarjeta: ' + value.cardNumber + ' Monto: ' + value.amount + '</h6>';
+		})
+
+		notiSystem(action, inputModal, lang.GEN_ICON_INFO, data);
+		$('#accept').addClass('update')
+		$('.update').on('click', function() {
+			dataTableReload(false)
+		})
+	}
 }

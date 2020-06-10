@@ -1,6 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 <h1 class="primary h3 regular inline"><?= lang('GEN_MENU_REP_CLOSING_BAKANCE'); ?></h1>
-<span class="ml-2 regular tertiary"><?= $productName ?></span>
+
 <div class="mb-2 flex items-center">
 	<div class="flex tertiary">
 		<nav class="main-nav nav-inferior">
@@ -26,7 +26,7 @@
 						<div class="row flex flex items-center justify-end col-sm-12">
 							<div class="form-group col-4 col-xl-3">
 								<label><?= lang('GEN_ENTERPRISE') ?></label>
-								<select id="enterprise-report" name="entrep" class="select-box custom-select mt-1 mb-1 h6 w-100">
+								<select id="enterpriseReport" name="enterpriseReport" class="select-box custom-select mt-1 mb-1 h6 w-100">
 								<?php foreach($enterpriseList AS $enterprise) : ?>
 									<?php if($enterprise->acrif == $enterpriseData->idFiscal): ?>
 									<?php endif;?>
@@ -40,7 +40,7 @@
 							</div>
 							<div  class="form-group col-4 col-xl-3">
 								<label><?= lang('GEN_PRODUCT') ?></label>
-								<select id="productCode" name = "product-code" class="select-box custom-select flex h6 w-100">
+								<select id="productCode" name = "productCode" class="select-box custom-select flex h6 w-100">
 									<?php if($productsSelect): ?>
 									<?php foreach($productsSelect AS $product): ?>
 									<option  value="<?= $product['id']; ?>" <?= $product['id'] == $currentProd ? 'selected' : ''; ?>><?= $product['desc'] ?></option>
