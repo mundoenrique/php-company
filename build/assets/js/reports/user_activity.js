@@ -94,7 +94,7 @@ function userActivity(passData) {
 		$('#files-btn').removeClass("hide");
     var table = $('#concenAccount').DataTable();
     table.destroy();
-      dataResponse = response.data
+			dataResponse = response.data
       code = response.code
       // if( code == 0){
         var info = response.data.lista;
@@ -126,7 +126,7 @@ function userActivity(passData) {
 		},
     "columns": [
       { data: 'userName' },
-      { data: 'conectado' },
+      { data: 'estatus' },
       { data: 'fechaUltimaConexion' },
         {
           "className":    'TableButtons',

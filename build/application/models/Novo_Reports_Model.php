@@ -714,9 +714,9 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->dataRequest->idExtPer = $dataRequest->idExtPer;
 		$this->dataRequest->producto =  $dataRequest->producto;
 		$this->dataRequest->idExtEmp =  $dataRequest->idExtEmp;
-		$this->dataRequest->tamanoPagina = $dataRequest->tamanoPagina;
-		$this->dataRequest->paginar = $dataRequest->paginar;
-		$this->dataRequest->paginaActual = $dataRequest->paginaActual;
+		$this->dataRequest->tamanoPagina = (int) $dataRequest->length;
+		$this->dataRequest->paginar = TRUE;
+		$this->dataRequest->paginaActual = (int) ($dataRequest->start / 10) + 1;
 
 
 		$response = $this->sendToService('callWs_closingBudgets');

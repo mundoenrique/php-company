@@ -89,11 +89,13 @@
 					<table id="balancesClosing" class="cell-border h6 display responsive w-100">
 					<thead class="bg-primary secondary regular">
                     <tr  id="datos-principales" >
-								<th>Cuenta</th>
-								<th>NIT.</th>
+								<th><?= lang('GEN_ACCOUNT_CLOSING_BALANCE') ?></th>
+								<th><?= lang('GEN_FISCAL_CLOSING_BALANCE') ?></th>
 								<th>Tarjeta</th>
 								<th>Saldo inicial</th>
+								<?php if (lang('CONF_CLOSING_BALANCE_BOOL') == 'ON' ): ?>
 								<th>Última actividad</th>
+								<?php endif; ?>
 							</tr>
 												</thead>
 
