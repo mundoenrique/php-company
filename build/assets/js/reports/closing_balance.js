@@ -252,89 +252,94 @@ if(URLactual.substring(0, URLactual.length - 16) == 'bnt'){
 			}
 		}
 	})
-}else{
-	table = $('#balancesClosing').DataTable({
-		drawCallback: function (d) {
-			insertFormInput(false)
-			$('#spinnerBlockBudget').addClass("hide");
-			$('#tbody-datos-general').removeClass('hide');
-			$('#titleResults').removeClass('hide');
-			$('#blockBudgetResults').removeClass("hide");
-			$('#pre-loader-table').addClass('hide')
-			$('.hide-table').removeClass('hide')
-			$('#pre-loader').remove();
-			$('.hide-out').removeClass('hide');
-		},
-		"ordering": false,
-		"searching": false,
-		"info":     false,
-		"language": dataTableLang,
-		"processing": true,
-		"serverSide": true,
-		"lengthChange": false,
-		"columns": [
-			{ data: 'nombre' },
-			{ data: 'idExtPer' },
-			{ data: 'tarjeta' },
-			{ data: 'saldo' },
-			{ data: 'fechaUltAct' }
-	],
-	"columnDefs": [
-		{
-			"targets": 0,
-			"className": "nombre",
-		},
-		{
-			"targets": 1,
-			"className": "idExtPer",
-		},
-		{
-			"targets": 2,
-			"className": "tarjeta",
-		},
-		{
-			"targets": 3,
-			"className": "saldo",
-		},
-		{
-			"targets": 4,
-			"className": "fechaUltAct",
-		}
-	],
-
-		"ajax": {
-			url: baseURL + 'async-call',
-			method: 'POST',
-			dataType: 'json',
-			cache: false,
-			data: function (req) {
-				data = req
-				data.idExtPer = "";
-				data.producto = $("#productCode").val();
-				data.idExtEmp = $('#enterpriseReport').find('option:selected').attr('acrif');
-				data.tamanoPagina = 10;
-				data.paginar = true;
-				data.paginaActual = data.draw;
-				data.screenSize = screen.width;
-				var dataRequest = JSON.stringify({
-					who: 'Reports',
-					where: 'closingBudgets',
-					data: data
-				});
-
-				dataRequest = cryptoPass(dataRequest, true);
-				var request = {
-					request: dataRequest,
-					ceo_name: ceo_cook,
-					plot: btoa(ceo_cook)
-				}
-				return request
+	}else{
+		table = $('#balancesClosing').DataTable({
+			drawCallback: function (d) {
+				insertFormInput(false)
+				$('#spinnerBlockBudget').addClass("hide");
+				$('#tbody-datos-general').removeClass('hide');
+				$('#titleResults').removeClass('hide');
+				$('#blockBudgetResults').removeClass("hide");
+				$('#pre-loader-table').addClass('hide')
+				$('.hide-table').removeClass('hide')
+				$('#pre-loader').remove();
+				$('.hide-out').removeClass('hide');
 			},
-			dataFilter: function (resp) {
-				var responseTable = jQuery.parseJSON(resp)
-				responseTable = JSON.parse(
+			"ordering": false,
+			"searching": false,
+			"info":     false,
+			"language": dataTableLang,
+			"processing": true,
+			"serverSide": true,
+			"lengthChange": false,
+			"columns": [
+				{ data: 'nombre' },
+				{ data: 'idExtPer' },
+				{ data: 'tarjeta' },
+				{ data: 'saldo' },
+				{ data: 'fechaUltAct' }
+			],
+			"columnDefs": [
+				{
+					"targets": 0,
+					"className": "nombre",
+				},
+				{
+					"targets": 1,
+					"className": "idExtPer",
+				},
+				{
+					"targets": 2,
+					"className": "tarjeta",
+				},
+				{
+					"targets": 3,
+					"className": "saldo",
+				},
+				{
+					"targets": 4,
+					"className": "fechaUltAct",
+				}
+			],
+			"ajax": {
+				url: baseURL + 'async-call',
+				method: 'POST',
+				dataType: 'json',
+				cache: false,
+				data: function (req) {
+					data = req
+					data.idExtPer = "";
+					data.producto = $("#productCode").val();
+					data.idExtEmp = $('#enterpriseReport').find('option:selected').attr('acrif');
+					data.tamanoPagina = 10;
+					data.paginar = true;
+					data.paginaActual = data.draw;
+					data.screenSize = screen.width;
+
+					var dataRequest = JSON.stringify({
+						who: 'Reports',
+						where: 'closingBudgets',
+						data: data
+					});
+
+					dataRequest = cryptoPass(dataRequest, true);
+
+					var request = {
+						request: dataRequest,
+						ceo_name: ceo_cook,
+						plot: btoa(ceo_cook)
+					}
+
+					return request
+				},
+				dataFilter: function (resp) {
+
+					var responseTable = jQuery.parseJSON(resp)
+
+					responseTable = JSON.parse(
 					CryptoJS.AES.decrypt(responseTable.code, responseTable.plot, { format: CryptoJSAesJson }).toString(CryptoJS.enc.Utf8)
 				);
+
 				var codeDefaul = parseInt(lang.RESP_DEFAULT_CODE);
 
 				if (responseTable.code === codeDefaul) {
@@ -342,9 +347,9 @@ if(URLactual.substring(0, URLactual.length - 16) == 'bnt'){
 				}
 
 				return JSON.stringify(responseTable);
+				}
 			}
-		}
-	})
+		})
 	}
 }
 
