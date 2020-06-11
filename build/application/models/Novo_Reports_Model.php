@@ -1013,10 +1013,16 @@ class Novo_Reports_Model extends NOVO_Model {
 				$this->response->code = 4;
 				$this->response->icon = lang('GEN_ICON_DANGER');
 				$this->response->title = lang('REPORTS_TITLE');
-				$this->response->msg = lang('REPORTS_NO_BUDGET');
+				$this->response->msg = lang('REPORTS_NO_FILE');
 				$this->response->data['btn1']['action'] = 'close';
-
 			break;
+
+			default:
+			$this->response->code = 4;
+			$this->response->icon = lang('GEN_ICON_DANGER');
+			$this->response->title = lang('REPORTS_TITLE');
+			$this->response->msg = lang('REPORTS_NO_FILE_CONSOLID');
+			$this->response->data['btn1']['action'] = 'close';
 		}
 
 		return $this->response;
