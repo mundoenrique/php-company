@@ -345,13 +345,6 @@ if(URLactual.substring(0, URLactual.length - 16) == 'bnt'){
 			}
 		}
 	})
-
-}
-
-
-
-
-
-
+	}
 }
 
