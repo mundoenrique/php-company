@@ -28,3 +28,7 @@ $lang['GEN_FOOTER_LINK_YOUTUBE'] = 'https://www.youtube.com/user/banortemovil/';
 $lang['GEN_FOOTER_IMG_INSTAGRAM'] = 'instagram.png';
 $lang['GEN_FOOTER_LINK_INSTAGRAM'] = 'https://www.instagram.com/banorte_mx/';
 $lang['GEN_DETAIL_BARND_COLOR'] = '_card-blue.svg';
+//Datables
+$lang['GEN_FISCAL_CLOSING_BALANCE'] = 'CURP';
+$lang['GEN_ACCOUNT_CLOSING_BALANCE'] = 'Tarjetahabiente';
+
