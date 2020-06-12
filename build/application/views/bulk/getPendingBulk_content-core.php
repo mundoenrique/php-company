@@ -1,5 +1,5 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
-<h1 class="primary h3 regular inline"><?= lang('BULK_TITLE_PAGE'); ?></h1>
+<h1 class="primary h3 regular inline"><?= lang('GEN_MENU_BULK_LOAD'); ?></h1>
 <span class="ml-2 regular tertiary"><?= $productName ?></span>
 <div class="mb-2 flex items-center">
 	<div class="flex tertiary">
@@ -8,7 +8,7 @@
 				<li class="inline"><a class="tertiary big-modal" href="<?= base_url('empresas') ?>"><?= lang('GEN_MENU_ENTERPRISE') ?></a></li> /
 				<li class="inline"><a class="tertiary big-modal" href="<?= base_url('productos') ?>"><?= lang('GEN_PRODUCTS') ?></a></li> /
 				<li class="inline"><a class="tertiary big-modal" href="<?= base_url('detalle-producto') ?>"><?= lang('PRODUCTS_DETAIL_TITLE') ?></a></li> /
-				<li class="inline"><a class="tertiary not-pointer" href="javascript:"><?= lang('BULK_TITLE'); ?></a></li>
+				<li class="inline"><a class="tertiary not-pointer" href="javascript:"><?= lang('GEN_MENU_LOTS'); ?></a></li>
 			</ul>
 		</nav>
 	</div>
@@ -32,7 +32,7 @@
 					<?php if(verifyDisplay('body', $module,  lang('GEN_TAG_BRANCHOFFICE'))): ?>
 					<div class="form-group col-6 col-lg-3 col-xl-3 hide">
 						<label class="mt-1 h6" for="branch-office"><?= lang('BULK_BRANCH_OFFICE'); ?></label>
-						<select id="branch-office" name="branch-office" class="select-box custom-select h6 w-100">
+						<select id="branch-office" name="branch-office" class="form-control select-box custom-select h6 w-100">
 							<?php foreach($branchOffices AS $pos => $branchOffice): ?>
 							<?php $disabled = $branchOffice->text == lang('BULK_SELECT_BRANCH_OFFICE') ||  $branchOffice->text == lang('RESP_TRY_AGAIN') ? '  disabled' : '' ?>
 							<option value="<?= $branchOffice->key; ?>" <?= $pos != 0 ? '' : 'selected'.$disabled ?>>
@@ -116,19 +116,19 @@
 				</table>
 				<div class="mx-3 h3">
 					<div class="flex mt-4 items-center">
-						<div class="icon-square bg-gold-sand" alt=""></div>
+						<div class="icon-square bg-being-validated" alt=""></div>
 						<span class="pl-1 h6"><?= lang('BULK_VALIDATING_RECORDS'); ?></span>
 					</div>
 					<div class="flex mt-2 items-center">
-						<div class="icon-square bg-vista-blue" alt=""></div>
+						<div class="icon-square bg-will-processed" alt=""></div>
 						<span class="pl-1 h6"><?= lang('BULK_ALL_RECORDS'); ?></span>
 					</div>
 					<div class="flex mt-2 items-center">
-						<div class="icon-square bg-trikemaster" alt=""></div>
+						<div class="icon-square bg-will-not-processed" alt=""></div>
 						<span class="pl-1 h6"><?= lang('BULK_SOME_RECORDS'); ?></span>
 					</div>
 					<div class="flex mt-2 items-center">
-						<div class="icon-square bg-pink-salmon" alt=""></div>
+						<div class="icon-square bg-not-processed" alt=""></div>
 						<span class="pl-1 h6"><?= lang('BULK_NO_RECORDS'); ?></span>
 					</div>
 				</div>

@@ -152,11 +152,17 @@ $(function () {
 						action: 'close'
 					}
 				}
-				inputModal = '<form id="delete-bulk-form" class="form-group">';
-				inputModal+= '<span class="regular">'+lang.BULK_DELETE_SO+' <strong>'+inputSelected+'</strong></span>';
-				inputModal+= 		'<input id="password" class="form-control mt-2 h6 col-9 pwd-input" name="password" type="password" autocomplete="off" placeholder="'+lang.GEN_PLACE_PASSWORD+'">';
+				inputModal =	'<form id="delete-bulk-form" class="form-group">';
+				inputModal+= 		'<span class="regular">'+lang.BULK_DELETE_SO+': '+inputSelected+'</span>';
+				inputModal+=		'<div class="input-group">';
+				inputModal+= 			'<input id="password" class="form-control pwd-input" name="password" type="password" autocomplete="off"';
+				inputModal+=				'placeholder="'+lang.GEN_PLACE_PASSWORD+'">';
+				inputModal+=			'<div class="input-group-append">';
+				inputModal+=				'<span class="input-group-text pwd-action" title="'+lang.GEN_SHOW_PASS+'"><i class="icon-view mr-0"></i></span>';
+				inputModal+=			'</div>';
+				inputModal+=		'</div>';
 				inputModal+= 		'<div class="help-block"></div>';
-				inputModal+= '</form>';
+				inputModal+= 	'</form>';
 				notiSystem('Anular orden de servicio', inputModal, lang.GEN_ICON_INFO, data);
 				deleteBulk(oldID, inputSelected);
 
@@ -210,7 +216,6 @@ function format(bulk) {
 
 	return table;
 }
-
 /**
  * @info Elimina un lote
  * @author J. Enrique Peñaloza Piñero

@@ -24,30 +24,26 @@ class Novo_Plantilla_Model extends NOVO_Model {
 		$this->dataAccessLog->modulo = '';
 		$this->dataAccessLog->function = '';
 		$this->dataAccessLog->operation = '';
+		//usar de ser necesario
 		$this->dataAccessLog->userName = $dataRequest->user;
 
-		$this->dataRequest->idOperation = 'generarOS';
-		$this->dataRequest->userName = mb_strtoupper($dataRequest->user);
+		$this->dataRequest->idOperation = 'id-optation';
 
-		$response = $this->sendToService('Plantilla');
+		$response = $this->sendToService('callWs_Plantilla');
 
 		switch($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
-				log_message('DEBUG', 'NOVO ['.$dataRequest->user.'] RESPONSE: Login: ' . json_encode($response->usuario));
+
 
 				break;
 			case -5000:
 				$this->response->code = 1;
-				$this->response->title = lang('REEMPLAZAR POR TRADUCCION DESDE RESPONSE-LANG');
-				$this->response->className = 'error-login-2';
-				$this->response->msg = lang('REEMPLAZAR POR TRADUCCION DESDE RESPONSE-LANG');
+
 				break;
 			case -6000:
 				$this->response->code = 2;
-				$this->response->title = lang('REEMPLAZAR POR TRADUCCION DESDE RESPONSE-LANG');
-				$this->response->className = 'error-login-2';
-				$this->response->msg = lang('REEMPLAZAR POR TRADUCCION DESDE RESPONSE-LANG');
+
 				break;
 			case -7000:
 				$this->response->code = 3;
@@ -68,6 +64,6 @@ class Novo_Plantilla_Model extends NOVO_Model {
 				break;
 		}
 
-		return $this->response;
+		return $this->responseToTheView('callWs_Plantilla');
 	}
 }

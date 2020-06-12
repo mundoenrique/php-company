@@ -17,7 +17,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date December 8th, 2019
 	 */
-	public function callWs_getPendingBulk_Bulk()
+	public function callWs_GetPendingBulk_Bulk()
 	{
 		log_message('INFO', 'NOVO Bulk Model: getPendingBulk Method Initialized');
 
@@ -29,6 +29,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 		$this->dataRequest->idOperation = 'buscarLotesPorConfirmar';
 		$this->dataRequest->lotesTO = [
 			'idEmpresa' => $this->session->enterpriseInf->idFiscal,
+			'codCia' => $this->session->enterpriseInf->enterpriseCode,
 			'codProducto' => $this->session->productInf->productPrefix
 		];
 		$this->dataRequest->usuario = [
@@ -50,22 +51,22 @@ class Novo_Bulk_Model extends NOVO_Model {
 					switch ($bulktatus) {
 						case '0':
 							$bulk['statusPr'] = '';
-							$bulk['statusColor'] = ' bg-gold-sand';
+							$bulk['statusColor'] = ' bg-being-validated';
 							$bulk['statusText'] = lang('BULK_VALIDATING');
 							break;
 						case '1':
 							$bulk['statusPr'] = 'status-pr ';
-							$bulk['statusColor'] = ' bg-vista-blue';
+							$bulk['statusColor'] = ' bg-will-processed';
 							$bulk['statusText'] = lang('BULK_VALID');
 							break;
 						case '5':
 							$bulk['statusPr'] = '';
-							$bulk['statusColor'] = ' bg-pink-salmon';
+							$bulk['statusColor'] = 'bg-not-processed';
 							$bulk['statusText'] = lang('BULK_NO_VALID');
 							break;
 						case '6':
 							$bulk['statusPr'] = 'status-pr ';
-							$bulk['statusColor'] = ' bg-trikemaster';
+							$bulk['statusColor'] = ' bg-will-not-processed';
 							$bulk['statusText'] = lang('BULK_VALID');
 							break;
 					}
@@ -92,7 +93,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date December 8th, 2019
 	 */
-	public function callWs_getTypeLots_Bulk()
+	public function callWs_GetTypeLots_Bulk($dataRequest)
 	{
 		log_message('INFO', 'NOVO Bulk Model: getTypeLots Method Initialized');
 
@@ -109,7 +110,13 @@ class Novo_Bulk_Model extends NOVO_Model {
 			'userName' => $this->userName
 		];
 
-		$response = $this->sendToService('getTypeLots');
+
+		if($dataRequest->newGet == 0) {
+			$response = $this->sendToService('callWs_getTypeLots');
+		} else {
+			$dataRequest->rc = $dataRequest->newGet;
+			$this->makeAnswer($dataRequest);
+		}
 
 		switch($this->isResponseRc) {
 			case 0:
@@ -142,7 +149,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 
 		$this->response->data->typesLot = (object) $typesLot;
 
-		return $this->responseToTheView('getTypeLots');
+		return $this->responseToTheView('callWs_getTypeLots');
 	}
 	/**
 	 * @info Método para cargar lotes
@@ -178,7 +185,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 				'userName' => $this->userName
 			];
 
-			$response = $this->sendToService('LoadBulk');
+			$response = $this->sendToService('callWs_LoadBulk');
 			$respLoadBulk = FALSE;
 
 			switch ($this->isResponseRc) {
@@ -241,7 +248,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 			$this->response->data['btn1']['action'] = 'close';
 		}
 
-		return $this->responseToTheView('LoadBulk');
+		return $this->responseToTheView('callWs_LoadBulk');
 	}
 	/**
 	 * @info Elimina un lote
@@ -279,7 +286,8 @@ class Novo_Bulk_Model extends NOVO_Model {
 			case 0:
 				$this->response->cod = 0;
 				$this->response->title = lang('BULK_DELETE_TITLE');
-				$this->response->msg = novoLang(lang('BULK_DELETE_SUCCESS'), $dataRequest->bulkTicked);
+				$idTicket = $dataRequest->bulkId != '' ? $dataRequest->bulkId : $dataRequest->bulkTicked;
+				$this->response->msg = novoLang(lang('BULK_DELETE_SUCCESS'), $idTicket);
 				$this->response->icon = lang('GEN_ICON_SUCCESS');
 				$this->response->data['btn1'] = [
 					'text' => lang('GEN_BTN_ACCEPT'),
@@ -384,7 +392,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 		$bulkConfirmInfo->lineaEmbozo1 = !isset($dataRequest->enbLine1) ?: $dataRequest->enbLine1;
 		$bulkConfirmInfo->lineaEmbozo2 = !isset($dataRequest->enbLine2) ?: $dataRequest->enbLine2;
 		$bulkConfirmInfo->conceptoAbono = !isset($dataRequest->paymentConcept) ?: $dataRequest->paymentConcept;
-		$bulkConfirmInfo->codCia = $this->session->enterpriseInf->idFiscal;
+		$bulkConfirmInfo->codCia = $this->session->enterpriseInf->enterpriseCode;
 
 		$this->dataRequest->idOperation = $bulkConfirmInfo->idTipoLote == 'L' && $this->country != 'Ec-bp' ? 'reprocesarLoteGeneral' :'confirmarLote';
 		$this->dataRequest->lotesTO = $bulkConfirmInfo;
@@ -452,12 +460,12 @@ class Novo_Bulk_Model extends NOVO_Model {
 		$this->dataRequest->accodusuarioc = $this->userName;
 
 
-		$response = $this->sendToService('AuthorizeBulkList');
+		$response = $this->sendToService('callWs_AuthorizeBulkList');
+		$response = $this->callWs_MakeBulkList_Bulk($response);
 
 		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
-				$response = $this->callWs_MakeBulkList_Bulk($response);
 				break;
 			case -38:
 				$this->response->code = 3;
@@ -466,11 +474,11 @@ class Novo_Bulk_Model extends NOVO_Model {
 				break;
 		}
 
-		$this->response->data->signBulk = (object) $response->signBulk;
-		$this->response->data->authorizeBulk = (object) $response->authorizeBulk;
+		$this->response->data->signBulk = $response->signBulk;
+		$this->response->data->authorizeBulk = $response->authorizeBulk;
 		$this->response->data->authorizeAttr = $response->authorizeAttr;
 
-		return $this->responseToTheView('AuthorizeBulkList');
+		return $this->responseToTheView('callWs_AuthorizeBulkList');
 	}
 	/**
 	 * @info Firma lista de lotes
@@ -905,6 +913,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 									$bulkList['bulkAmount'] = floatval($bulk->montoRecarga);
 									$bulkList['bulkCommisAmount'] = floatval($bulk->montoComision);
 									$bulkList['bulkTotalAmount'] = floatval($bulk->montoRecarga) + floatval($bulk->montoComision);
+									$bulkList['bulkId'] = $bulk->acidlote;
 									$serviceOrders['bulk'][] = (object) $bulkList;
 								}
 								break;
@@ -1001,6 +1010,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 		$signBulk = [];
 		$authorizeBulk = [];
 		$authorizeAttr = [];
+		$noSeeDetail = ['Z', 'Y'];
 		$allBulk = 'no-select-checkbox';
 
 		if(verifyDisplay('body', 'AuthorizeBulkList', lang('GEN_TAG_ALL_BULK'))) {
@@ -1009,7 +1019,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 
 		$sign = TRUE;
 		$auth = TRUE;
-		$order = (int) $bulkList->usuario->orden;
+		$order = isset($bulkList->usuario->orden) ? (int) $bulkList->usuario->orden : '';
 
 		if($order == 1) {
 			$auth = FALSE;
@@ -1019,7 +1029,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 			$sign = FALSE;
 		}
 
-		if(!empty($bulkList->listaPorFirmar)) {
+		if(isset($bulkList->listaPorFirmar) && !empty($bulkList->listaPorFirmar)) {
 			foreach($bulkList->listaPorFirmar AS $bulk) {
 				$detailBulk['idBulk'] = $bulk->acidlote;
 				$detailBulk['bulkNumber'] = $bulk->acnumlote;
@@ -1033,7 +1043,8 @@ class Novo_Bulk_Model extends NOVO_Model {
 			}
 		}
 
-		if(!empty($bulkList->listaPorAutorizar)) {
+		if(isset($bulkList->listaPorAutorizar) && !empty($bulkList->listaPorAutorizar)) {
+
 			foreach($bulkList->listaPorAutorizar AS $bulk) {
 				$detailBulk['idBulk'] = $bulk->acidlote;
 				$detailBulk['bulkNumber'] = $bulk->acnumlote;
@@ -1047,12 +1058,13 @@ class Novo_Bulk_Model extends NOVO_Model {
 				$listAth = explode(',', $listAth);
 				$detailBulk['selectRow'] = in_array($this->userName, $listAth) ? 'no-select-checkbox' : '';
 				$detailBulk['selectRowContent'] = in_array($this->userName, $listAth) ? 'TRUE' : '';
+				$detailBulk['seeDetail'] = in_array($bulk->ctipolote, $noSeeDetail) ? FALSE : TRUE;
 				$authorizeBulk[] = (object) $detailBulk;
 			}
 		}
 
 		$authorizeAttr = (object) [
-			'toPAy' => $bulkList->ordenXPagar,
+			'toPAy' => isset($bulkList->ordenXPagar) ? $bulkList->ordenXPagar : 'N',
 			'allBulk' => $allBulk,
 			'sign' => $sign,
 			'auth' => $auth
@@ -1063,5 +1075,244 @@ class Novo_Bulk_Model extends NOVO_Model {
 		$response->authorizeAttr = $authorizeAttr;
 
 		return $response;
+	}
+	/**
+	 * @info Método para la solicutd de cuentas innominadas
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date May 06th, 2020
+	 */
+	public function callWs_UnnamedRequest_Bulk($dataRequest)
+	{
+		log_message('INFO', 'NOVO Bulk Model: UnnamedRequest Method Initialized');
+
+		$this->className = 'com.novo.objects.MO.ListadoSucursalesMO';
+		$this->dataAccessLog->modulo = 'lotes';
+		$this->dataAccessLog->function = 'Innominadas';
+		$this->dataAccessLog->operation = 'Solictud de cuentas innominadas';
+
+		$expiredDate = explode('/', $dataRequest->expiredDate);
+		$expiredDate = $expiredDate[0].substr($expiredDate[1], -2);
+		$password = '';
+
+		if (isset($dataRequest->password)) {
+			$password = json_decode(base64_decode($dataRequest->password));
+			$password = $this->cryptography->decrypt(
+				base64_decode($password->plot),
+				utf8_encode($password->password)
+			);
+		}
+		$startingLine1 = isset($dataRequest->startingLine1) ?
+			implode(' ',array_filter(explode(' ', ucfirst(mb_strtolower($dataRequest->startingLine1))))) : '';
+		$startingLine2 = isset($dataRequest->startingLine2) ?
+			implode(' ',array_filter(explode(' ', ucfirst(mb_strtolower($dataRequest->startingLine2))))) : '';
+		$this->dataRequest->idOperation = 'createCuentasInnominadas';
+		$this->dataRequest->lotesTO = [
+			'usuario' => $this->userName,
+			'idEmpresa' => $this->session->enterpriseInf->idFiscal,
+			'codCia' => $this->session->enterpriseInf->enterpriseCode,
+			'codGrupo' => $this->session->enterpriseInf->enterpriseGroup,
+			'codProducto' => $this->session->productInf->productPrefix,
+			'fechaExp' => $expiredDate,
+			'cantRegistros' => $dataRequest->maxCards,
+			'lineaEmbozo1' => $startingLine1,
+			'lineaEmbozo2' => $startingLine2,
+			'sucursalCod' => isset($dataRequest->branchOffice) ? $dataRequest->branchOffice : '',
+			'password' => md5($password),
+			'monto' => '0',
+			'idTipoLote' => "3",
+			'formato' => "00",
+			'tipoLote' => "INNOMINADAS",
+			'fechaValor' => date('d/m/Y h:i:s'),
+			'accanal' => "WEB",
+			'reproceso' => true,
+			"ubicacion" => "EM",
+			"destinoEmb" => "01"
+		];
+
+		$response = $this->sendToService('callWs_UnnamedRequest');
+
+		switch ($this->isResponseRc) {
+			case 0:
+				$this->response->title = lang('BULK_UNNA_ACCOUNT');
+				$this->response->msg = lang('BULK_UNNA_PROCESS_OK');
+				$this->response->icon = lang('GEN_ICON_SUCCESS');
+				$this->response->data['btn1']['link'] = 'lotes-autorizacion';
+				break;
+			case -1:
+				$this->response->title = lang('BULK_UNNA_ACCOUNT');
+				$this->response->msg = lang('RESP_PASSWORD_NO_VALID');
+				$this->response->icon = lang('GEN_ICON_WARNING');
+				$this->response->data['btn1']['action'] = 'close';
+				break;
+			case -142:
+				$this->response->title = lang('BULK_UNNA_ACCOUNT');
+				$this->response->msg = lang('BULK_NO_LOAD');
+				$this->response->icon = lang('GEN_ICON_WARNING');
+				$this->response->data['btn1']['action'] = 'close';
+				break;
+		}
+
+		return $this->responseTotheView('callWs_UnnamedRequest');
+	}
+	/**
+	 * @info Método para la afiliación de cuentas innominadas
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date May 06th, 2020
+	 */
+	public function callWs_UnnamedAffiliate_Bulk($dataRequest)
+	{
+		log_message('INFO', 'NOVO Bulk Model: unnamedAffiliate Method Initialized');
+
+		$this->className = 'com.novo.objects.MO.ListadoLotesMO';
+		$this->dataAccessLog->modulo = 'lotes';
+		$this->dataAccessLog->function = 'Innominadas';
+		$this->dataAccessLog->operation = 'Afiliación de cuentas innominadas';
+
+		$initialDate = $dataRequest->initialDate != '' ? convertDate($dataRequest->initialDate) : '';
+		$finalDate = $dataRequest->finalDate != '' ? convertDate($dataRequest->finalDate) : '';
+
+		$this->dataRequest->idOperation = 'getListadoLotes';
+		$this->dataRequest->dtfechorcargaIni = $initialDate;
+		$this->dataRequest->dtfechorcargaFin = $finalDate;
+		$this->dataRequest->nombreEmpresa = '';
+		$this->dataRequest->acdir = '';
+		$this->dataRequest->rif = '';
+		$this->dataRequest->lista = [
+			[
+				"exonerado"=>'',
+				'ctipolote' => '3',
+				'cestatus' => '4',
+				'acprefix' => $this->session->productInf->productPrefix,
+				"rifEmpresa"=> $this->session->enterpriseInf->idFiscal,
+				"acnumlote"=> $dataRequest->bulkNumber,
+			]
+		];
+
+		$response = $this->sendToService('callWs_unnamedAffiliate');
+
+		$detailInfo = [
+			'bulkHeader' => [
+				lang('GEN_TABLE_BULK_NUMBER'),
+				lang('GEN_TABLE_NUMBER_CARDS'),
+				lang('GEN_TABLE_BULK_ISSUE_DATE'),
+				lang('GEN_TABLE_STATUS'),
+				lang('GEN_TABLE_OPTIONS')
+			],
+			'bulkRecords' => [],
+		];
+
+		switch ($this->isResponseRc) {
+			case 0:
+				$unnamedList = json_decode($response->bean);
+				$this->response->code = 0;
+
+				if(isset($unnamedList->lista) && count($unnamedList->lista) > 0) {
+					foreach ($unnamedList->lista AS $records) {
+						$record = new stdClass();
+						$record->bulkId = $records->acidlote;
+						$record->bulkNumber = $records->acnumlote;
+						$record->totalCards = $records->ncantregs;
+						$record->issuanDate = $records->dtfechorcarga;
+						$record->amount = $records->nmonto;
+						$record->status = ucfirst(mb_strtolower($records->status));
+						array_push(
+							$detailInfo['bulkRecords'],
+							$record
+						);
+					}
+				}
+			break;
+		}
+
+		$this->response->data->bulkInfo = (object) $detailInfo;
+
+		return $this->responseToTheView('callWs_unnamedAffiliate');
+	}
+	/**
+	 * @info Método para ver el detalle de un lote innominado
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date May 09th, 2020
+	 */
+	public function callWs_UnnmamedDetail_Bulk($dataRequest)
+	{
+		log_message('INFO', 'NOVO Bulk Model: unnmamedDetail Method Initialized');
+
+		$this->className = 'com.novo.objects.MO.ListadoLotesMO';
+		$this->dataAccessLog->modulo = 'lotes';
+		$this->dataAccessLog->function = 'Innominadas';
+		$this->dataAccessLog->operation = 'Detalle de lote';
+
+		$this->dataRequest->idOperation = 'getListadoTarjetasInnominadas';
+		$this->dataRequest->idProducto = $this->session->productInf->productPrefix;
+		$this->dataRequest->tarjetasInnominadas = [
+			[
+				'numLote' => $dataRequest->bulkNumber,
+				'idExtEmp' => $this->session->enterpriseInf->idFiscal,
+				'estatus' => '0',
+				'enmascarar' => TRUE
+			]
+		];
+
+		$response = $this->sendToService('callWs_unnmamedDetail');
+
+		$detailInfo = [
+			'fiscalId' => $this->session->enterpriseInf->idFiscal,
+			'enterpriseName' => $this->session->enterpriseInf->enterpriseName,
+			'issuanDate' => $dataRequest->issuanDate,
+			'bulkNumber' => $dataRequest->bulkNumber,
+			'ammount' => $dataRequest->amount,
+			'totalRecords' => $dataRequest->totalCards,
+			'bulkHeader' => [
+				lang('GEN_TABLE_CARD_NUMBER'),
+				lang('GEN_TABLE_ACCOUNT_NUMBER'),
+				lang('GEN_TABLE_ID_DOC'),
+				lang('GEN_TABLE_CARDHOLDER'),
+				lang('GEN_TABLE_STATUS'),
+			],
+			'bulkRecords' => [],
+		];
+
+		if (lang('CONF_UNNA_ACCOUNT_NUMBER') == 'OFF') {
+			unset($detailInfo['bulkHeader'][1]);
+		}
+
+		switch ($this->isResponseRc) {
+			case 0:
+				$unnamedDetail = json_decode($response->bean);
+				$this->response->code = 0;
+
+				if(isset($unnamedDetail->tarjetasInnominadas) && count($unnamedDetail->tarjetasInnominadas) > 0) {
+					foreach ($unnamedDetail->tarjetasInnominadas AS $records) {
+						$record = new stdClass();
+						$record->cardNumber = $records->nroTarjeta;
+
+						if (lang('CONF_UNNA_ACCOUNT_NUMBER') == 'ON') {
+							$record->accountNumber = maskString($records->nroCuenta, 6, 4);
+						}
+
+						$record->idDoc = $records->idExtPer;
+						$record->cardHolder = $records->nombre;
+						$record->cardHoldLastName = $records->apellido;
+						$record->status = $records->estatus == '0' ? 'No afiliado' : 'Afiliado';
+						$record->cardHolder = $record->cardHolder.' '.$record->cardHoldLastName;
+						unset($record->cardHoldLastName);
+						array_push(
+							$detailInfo['bulkRecords'],
+							$record
+						);
+					}
+				}
+			break;
+			case -150:
+				$this->response->title = 'Cuentas Innominadas';
+				$this->response->msg = 'Todas las tarjetas del lote han sido afiliadas';
+				$this->response->icon = lang('GEN_ICON_INFO');
+				$this->response->data->resp['btn1']['link'] = lang('GEN_LINK_BULK_UNNAMED_AFFIL');
+			break;
+		}
+
+		$this->response->data->bulkInfo = (object) $detailInfo;
+
+		return $this->responseToTheView('callWs_unnamedAffiliate');
 	}
 }

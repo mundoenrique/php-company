@@ -21,7 +21,9 @@
 					<?php unset($secondLevel->third[0]) ?>
 					<ul class="pl-0 regular tertiary bg-secondary list-style-none list-inline">
 						<?php foreach($secondLevel->third AS $levelThird): ?>
-						<li><a href="<?= $levelThird->link ?>"><?= $levelThird->text ?></a></li>
+						<li <?= $levelThird->link != 'javascript:' ? 'class="big-modal"' : ''; ?>>
+							<a href="<?= $levelThird->link ?>"><?= $levelThird->text ?></a>
+						</li>
 						<?php endforeach; ?>
 					</ul>
 					<?php endif; ?>

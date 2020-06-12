@@ -19,7 +19,7 @@ class Novo_Business_Model extends NOVO_Model {
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date November 1st, 2019
 	 */
-	public function callWs_getEnterprises_Business($dataRequest)
+	public function callWs_GetEnterprises_Business($dataRequest)
 	{
 		log_message('INFO', 'NOVO Business Model: getEnterprises Method Initialized');
 
@@ -50,6 +50,7 @@ class Novo_Business_Model extends NOVO_Model {
 				$enterpriseArgs->sizePage = $sizePage;
 				$enterpriseList = $this->request_data->OrderEnterpriseList($enterpriseArgs, $filters, $dataRequest);
 				$this->response->data->list = $enterpriseList->list;
+				$this->response->data->listaa = $enterpriseList;
 				if(!$dataRequest) {
 					$access = [
 						'user_access',
@@ -109,11 +110,18 @@ class Novo_Business_Model extends NOVO_Model {
 		$this->dataRequest->paginar = FALSE;
 		$this->dataRequest->lista = [
 			[
-				'rif' => $this->session->enterpriseInf->idFiscal
+				'rif' => $this->session->enterpriseInf->idFiscal,
+				'acCodCia' => $this->session->enterpriseInf->enterpriseCode
 			]
 		];
+		$newGet = isset($dataRequest->newGet) ? $dataRequest->newGet : 0;
 
-		$response = $this->sendToService('GetBranchOffices');
+		if ($newGet == 0) {
+			$response = $this->sendToService('callWs_GetBranchOffices');
+		} else {
+			$dataRequest->rc = $dataRequest->newGet;
+			$this->makeAnswer($dataRequest);
+		}
 
 		switch($this->isResponseRc) {
 			case 0:
@@ -151,14 +159,14 @@ class Novo_Business_Model extends NOVO_Model {
 
 		$this->response->data->branchOffices = (object) $branchOffice;
 
-		return $this->responseToTheView('GetBranchOffices');
+		return $this->responseToTheView('callWs_GetBranchOffices');
 	}
 	/**
 	 * @info Método para obtener lista de productos para una empresa
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date November 12th, 2019
 	 */
-	public function callWs_getProducts_Business($dataRequest)
+	public function callWs_GetProducts_Business($dataRequest)
 	{
 		log_message('INFO', 'NOVO Business Model: getProducts Method Initialized');
 
@@ -173,6 +181,7 @@ class Novo_Business_Model extends NOVO_Model {
 			unset($dataRequest->select);
 		}
 
+
 		$this->className = "com.novo.objects.TOs.UsuarioTO";
 		$this->dataAccessLog->modulo = 'Negocios';
 		$this->dataAccessLog->function = 'Productos';
@@ -182,8 +191,9 @@ class Novo_Business_Model extends NOVO_Model {
 		$this->dataRequest->ctipo = isset($dataRequest->type) ? $dataRequest->type : 'A';
 		$this->dataRequest->userName = $this->userName;
 		$this->dataRequest->idEmpresa = $dataRequest->idFiscal;
+		$this->dataRequest->acCodCia = $dataRequest->enterpriseCode;
 
-		$response = $this->sendToService('getProducts');
+		$response = $this->sendToService('callWs_GetProducts');
 
 		switch($this->isResponseRc) {
 			case 0:
@@ -213,14 +223,14 @@ class Novo_Business_Model extends NOVO_Model {
 			$this->response->data->productList = [];
 		}
 
-		return $this->responseToTheView('getProducts');
+		return $this->responseToTheView('callWs_GetProducts');
 	}
 	/**
 	 * @info Método para obtener lista de productos para una empresa
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date November 12th, 2019
 	 */
-	public function callWs_getProductDetail_Business($dataRequest)
+	public function callWs_GetProductDetail_Business($dataRequest)
 	{
 		log_message('INFO', 'NOVO Business Model: getProductDetail Method Initialized');
 
@@ -260,7 +270,7 @@ class Novo_Business_Model extends NOVO_Model {
 			'name' => isset($dataRequest->productName) ? $dataRequest->productName : '',
 			'imgProgram' => $this->countryUri.'_default.svg',
 			'brand' => isset($dataRequest->productBrand) ? $dataRequest->productBrand : '',
-			'imgBrand' => isset($dataRequest->productBrand) ? $dataRequest->productBrand.'_card.svg' : '',
+			'imgBrand' => isset($dataRequest->productBrand) ? $dataRequest->productBrand.'_card-blue' : '',
 			'viewSomeAttr' => TRUE,
 			'prefix' => $productPrefix
 		];
@@ -283,7 +293,7 @@ class Novo_Business_Model extends NOVO_Model {
 				$this->response->code = 0;
 
 				if(isset($response->estadistica->producto->idProducto)) {
-					$imgBrand = url_title(trim(mb_strtolower($response->estadistica->producto->marca))).'_card.svg';
+					$imgBrand = url_title(trim(mb_strtolower($response->estadistica->producto->marca))).lang('GEN_DETAIL_BARND_COLOR');
 
 					if(!file_exists(assetPath('images/brands/'.$imgBrand))) {
 						$imgBrand = 'default.svg';
@@ -344,10 +354,9 @@ class Novo_Business_Model extends NOVO_Model {
 					$currentDate = date('Y-m');
 					$newDate = strtotime ('+'.$expMaxMonths.' month' , strtotime($currentDate));
 					$expireDate = date ('m/Y' , $newDate);
-					$expMax = new stdClass();
-					$expMax->expMaxMonths = $expireDate;
-					$expMax->maxCards = trim($response->estadistica->producto->maxTarjetas);
-					$this->session->set_userdata('expMax', $expMax);
+					$productInf->expMaxMonths = $expireDate;
+					$productInf->maxCards = trim($response->estadistica->producto->maxTarjetas);
+					$this->session->set_userdata('productInf', $productInf);
 				}
 				break;
 			case -99:

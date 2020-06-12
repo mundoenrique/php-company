@@ -8,8 +8,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @author			J. Enrique Peñaloza P
  * @date				Novembre 23th, 2019
  */
-
-// ------------------------------------------------------------------------
 if(!function_exists('assetPath')) {
 	function assetPath($route = '') {
 		return get_instance()->config->item('asset_path').$route;
@@ -52,6 +50,9 @@ if(!function_exists('getFaviconLoader')) {
 				$loader.= 'bdb.gif';
 				break;
 			case 'bnt':
+				$ext = 'ico';
+				$loader.= 'bdb.gif';
+			case 'pb':
 				$ext = 'ico';
 				$loader.= 'bdb.gif';
 				break;
@@ -126,11 +127,11 @@ if(!function_exists('languajeLoad')) {
 		$class = $CI->router->fetch_class();
 		$langFiles = $langFiles ?: $CI->router->fetch_method();
 		$languagesFile = [];
-		$lanGeneral = ['bdb', 'bp', 'bnt', 'co', 've'];
+		$lanGeneral = ['bdb', 'bp', 'bnt', 'co', 've', 'pb'];
 		$lanValidate = ['bdb', 'bnt'];
 		$loadLanguages = FALSE;
 		$client = !$client ? 'default_lang' : $client;
-		log_message('INFO', 'NOVO Language '.$call.', HELPER: languajeLoad Initialized for controller: '.$class. ' and method: '.$langFiles);
+		log_message('INFO', 'NOVO Language '.$call.', HELPER: Language Load Initialized for controller: '.$class. ' and method: '.$langFiles);
 
 		switch($client) {
 			case 'bp':
@@ -158,18 +159,20 @@ if(!function_exists('languajeLoad')) {
 					'deleteConfirmBulk'	=> ['bulk'],
 					'disassConfirmBulk'	=> ['bulk'],
 					'serviceOrders'	=> ['bulk'],
+					'options' => ['settings']
 				];
 				break;
 			case 'bnt':
 				$languages = [
 					'login' => ['login'],
+					'terms'	=> ['terms'],
+					'options' => ['settings']
 				];
 				break;
 			case 'co':
 				$languages = [
 					'login' => ['login'],
 					'validatecaptcha' => ['login'],
-					'recoverPass'	=> ['password-recover'],
 					'terms'	=> ['terms'],
 				];
 				break;
@@ -189,8 +192,11 @@ if(!function_exists('languajeLoad')) {
 				$languages = [
 					'login' => ['login'],
 					'validatecaptcha' => ['login'],
-					'recoverPass'	=> ['password-recover'],
 					'terms'	=> ['terms'],
+				];
+				break;
+			case 'pb':
+				$languages = [
 				];
 				break;
 			default:
@@ -203,6 +209,15 @@ if(!function_exists('languajeLoad')) {
 					'terms'	=> ['terms'],
 					'rates'	=> ['rates'],
 					'getEnterprises'	=> ['enterprise'],
+					'obtainNumPosition'	=>['settings'],
+					'obtenerIdEmpresa'	=>['reports'],
+					'closingBudgets'	=>['reports'],
+					'exportToExcel'	=>['reports'],
+					'exportToExcelMasterAccount'	=>['reports'],
+					'exportToPDFMasterAccount'	=>['reports'],
+					'exportToExcelMasterAccountConsolid'	=>['reports'],
+					'exportToPDFMasterAccountConsolid'	=>['reports'],
+					'masterAccount'	=>['reports'],
 					'getProducts'	=> ['products'],
 					'getProductDetail'	=> ['products'],
 					'getPendingBulk'	=> ['bulk'],
@@ -216,10 +231,15 @@ if(!function_exists('languajeLoad')) {
 					'deleteConfirmBulk'	=> ['bulk'],
 					'disassConfirmBulk'	=> ['bulk'],
 					'calculateServiceOrder'	=> ['bulk'],
+					'unnamedRequest'	=> ['bulk'],
+					'unnamedAffiliate'	=> ['bulk'],
 					'serviceOrders'	=> ['bulk'],
 					'getReportsList'	=> ['reports'],
 					'getReport'	=> ['reports'],
 					'deleteFile'	=> ['reports'],
+					'userActivity'	=>['reports'],
+					'exportToExcelUserActivity'	=>['reports'],
+					'exportToPDFUserActivity'	=>['reports'],
 				];
 		}
 
@@ -241,7 +261,6 @@ if(!function_exists('languajeLoad')) {
 		if($loadLanguages) {
 			$CI->lang->load($languagesFile);
 		}
-
 	}
 }
 
@@ -264,21 +283,25 @@ if(!function_exists('setCurrentPage')) {
 					$cssClass = 'page-current';
 				}
 				break;
+			case 'Novo_Services':
+				if($menu == lang('GEN_MENU_SERVICES')) {
+					$cssClass = 'page-current';
+				}
+				break;
 			case 'Novo_Reports':
 				if($menu == lang('GEN_MENU_REPORTS')) {
 					$cssClass = 'page-current';
 				}
 				break;
 		}
+
 		return $cssClass;
 	}
 }
 
 
 if (!function_exists('exportFile')) {
-	function exportFile($file, $typeFile, $filename, $bytes = TRUE)
-	{
-
+	function exportFile($file, $typeFile, $filename, $bytes = TRUE) {
 		switch ($typeFile) {
 			case 'pdf':
 				header('Content-type: application/pdf');
@@ -314,6 +337,15 @@ if(!function_exists('convertDate')) {
 	function convertDate($date) {
 		$date = explode('/', $date);
 		$date = $date[2].'-'.$date[1].'-'.$date[0];
+
+		return $date;
+	}
+}
+
+if(!function_exists('convertDateMDY')) {
+	function convertDateMDY($date) {
+		$date = explode('/', $date);
+		$date = $date[1].'/'.$date[0].'/'.$date[2];
 
 		return $date;
 	}
