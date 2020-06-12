@@ -1,5 +1,5 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
-<h1 class="primary h3 regular inline"><?= lang('GEN_AUTHORIZE_BULK_TITLE') ?></h1>
+<h1 class="primary h3 regular inline"><?= lang('GEN_MENU_BULK_AUTH') ?></h1>
 <span class="ml-2 regular tertiary"><?= $productName ?></span>
 <div class="mb-2 flex items-center">
 	<div class="flex tertiary">
@@ -8,7 +8,7 @@
 				<li class="inline"><a class="tertiary big-modal" href="<?= base_url('empresas') ?>"><?= lang('GEN_MENU_ENTERPRISE') ?></a></li> /
 				<li class="inline"><a class="tertiary big-modal" href="<?= base_url('productos') ?>"><?= lang('GEN_PRODUCTS') ?></a></li> /
 				<li class="inline"><a class="tertiary big-modal" href="<?= base_url('detalle-producto') ?>"><?= lang('PRODUCTS_DETAIL_TITLE') ?></a></li> /
-				<li class="inline"><a class="tertiary not-pointer" href="javascript:"><?= lang('GEN_AUTHORIZE_BULK_TITLE') ?></a></li>
+				<li class="inline"><a class="tertiary not-pointer" href="javascript:"><?= lang('GEN_MENU_LOTS') ?></a></li>
 			</ul>
 		</nav>
 	</div>
@@ -68,9 +68,9 @@
 					</table>
 					<form id="sign-bulk-form" method="post">
 						<div class="flex row mt-3 mb-2 mx-2 justify-end">
-							<div class="col-4 col-lg-3 col-xl-3 form-group">
+							<div class="col-5 col-lg-3 col-xl-3 form-group">
 								<div class="input-group">
-									<input id="password-sign" name="password" class="form-control h6 pwd-input" type="password"
+									<input id="password-sign" name="password" class="form-control pwd-input pr-0" type="password"
 										placeholder="<?= lang('GEN_PLACE_PASSWORD'); ?>">
 									<div class="input-group-append">
 										<span id="pwd_action" class="input-group-text pwd-action" title="<?= lang('GEN_SHOW_PASS') ?>"><i
@@ -130,9 +130,11 @@
 										<input type="hidden" name="bulkId" value="<?= $bulk->idBulk; ?>">
 										<input type="hidden" name="bulkfunction" value="Autorización de lotes">
 									</form>
+									<?php if($bulk->seeDetail): ?>
 									<button class="btn mx-1 px-0 big-modal" title="<?= lang('GEN_BTN_SEE') ?>" data-toggle="tooltip">
 										<i class="icon icon-find" aria-hidden="true"></i>
 									</button>
+									<?php endif; ?>
 									<?php if($this->verify_access->verifyAuthorization('TEBAUT', 'TEBELI')): ?>
 									<button class="btn mx-1 px-0" title="<?= lang('GEN_BTN_DELETE') ?>" data-toggle="tooltip">
 										<i class="icon icon-remove mr-1" aria-hidden="true"></i>
@@ -147,7 +149,7 @@
 					<form id="auth-bulk-form" method="post">
 						<div class="flex row mt-3 mb-2 mx-2 justify-end">
 							<div class="col-4 col-lg-3 h6 regular form-group">
-								<?php if(verifyDisplay('body', $module,  lang('GEN_TAG_ORDER_TYPE'))): ?>
+							<?php if( lang('CONF_BULK_AUTHORIZE') == 'on'): ?>
 								<select id="type-order" name="type-order" class="select-box custom-select h6">
 									<option value="0"><?= lang('BULK_PROCESS_BY_BULK'); ?></option>
 									<option value="1" selected><?= lang('BULK_PROCESS_TYPE_BULK') ?></option>
@@ -157,9 +159,9 @@
 								<?php endif; ?>
 								<div class="help-block"></div>
 							</div>
-							<div class="col-6 col-lg-auto form-group">
+							<div class="col-5 col-lg-3 col-xl-3 form-group">
 								<div class="input-group">
-									<input id="password-auth" name="password" class="form-control h6 pwd-input" type="password"
+									<input id="password-auth" name="password" class="form-control pwd-input pr-0" type="password"
 										placeholder="<?= lang('GEN_PLACE_PASSWORD'); ?>">
 									<div class="input-group-append">
 										<span id="pwd_action" class="input-group-text pwd-action" title="<?= lang('GEN_SHOW_PASS') ?>"><i

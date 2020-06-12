@@ -29,7 +29,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 		$this->dataRequest->idOperation = 'estatusLotes';
 		$this->dataRequest->tipoEstatus = 'TIPO_B';
 
-		$response = $this->sendToService('ServiceOrderStatus');
+		$response = $this->sendToService('callWs_ServiceOrderStatus');
 
 		switch($this->isResponseRc) {
 			case 0:
@@ -49,16 +49,16 @@ class Novo_Inquiries_Model extends NOVO_Model {
 		}
 
 		if($this->isResponseRc != 0) {
-			$this->response->code = 1;
+			//$this->response->code = 1;
 			$orderStatus[] = (object) [
-				'format' => '',
+				'key' => '',
 				'text' => lang('RESP_TRY_AGAIN')
 			];
 		}
 
 		$this->response->data->orderStatus = (object) $orderStatus;
 
-		return $this->responseToTheView('ServiceOrderStatus');
+		return $this->responseToTheView('callWs_ServiceOrderStatus');
 	}
 	/**
 	 * @info Método para obtener la lista de ordenes de servicio en rango de fecha dado
@@ -146,8 +146,8 @@ class Novo_Inquiries_Model extends NOVO_Model {
 				$this->session->set_flashdata('requestOrdersList', $dataRequest);
 				break;
 			case -5:
-				$this->response->title = 'Ordenes de servicio';
-				$this->response->msg = 'No fue posible obtener las ordenes de servicio';
+				$this->response->title = 'Órdenes de servicio';
+				$this->response->msg = 'No fue posible obtener las órdenes de servicio';
 				$this->response->icon = lang('GEN_ICON_WARNING');
 				if($this->input->is_ajax_request()) {
 					$this->response->data['btn1']['action'] = 'close';
@@ -156,7 +156,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 				}
 				break;
 			case -150:
-				$this->response->title = 'Ordenes de servicio';
+				$this->response->title = 'Órdenes de servicio';
 				$this->response->msg = novoLang(lang('RESP_SERVICE_ORDES'), $statusText);
 				$this->response->icon = lang('GEN_ICON_INFO');
 				if($this->input->is_ajax_request()) {
@@ -280,56 +280,70 @@ class Novo_Inquiries_Model extends NOVO_Model {
 				$detailInfo['bulkStatus'] = $response->cestatus;
 				$detailInfo['bulkStatusText'] = ucfirst(mb_strtolower($response->status));
 				$detailInfo['bulkAmount'] = $response->montoNeto;
-
+				$detailInfo['bulkId'] = $response->acidlote;
 
 				switch($response->ctipolote) {
 					case '1':
 					case '10':
+						$acceptAttr = ['idExtPer', 'nombres', 'apellidos', 'status'];
+
 						if(isset($response->registrosLoteEmision) && count($response->registrosLoteEmision) > 0) {
 							$bulkRecordsHeader = [lang('GEN_TABLE_DNI'), lang('GEN_TABLE_FULL_NAME'), lang('GEN_TABLE_STATUS')];
-							$detailInfo['bulkRecords'] = $this->buildEmisionRecords_Bulk($response->registrosLoteEmision, $response->ctipolote);
+							$detailInfo['bulkRecords'] = $this->buildEmisionRecords_Bulk($response->registrosLoteEmision, $acceptAttr);
 						}
 						break;
 					case '3':
 					case '6':
 					case 'A':
+						$acceptAttr = ['idExtPer', 'nombres', 'apellidos', 'nroTarjeta'];
+
 						if(isset($response->registrosLoteEmision) && count($response->registrosLoteEmision) > 0) {
 							$bulkRecordsHeader = [lang('GEN_TABLE_DNI'), lang('GEN_TABLE_FULL_NAME'), lang('GEN_TABLE_ACCOUNT_NUMBER')];
-							$detailInfo['bulkRecords'] = $this->buildEmisionRecords_Bulk($response->registrosLoteEmision, $response->ctipolote);
+							$detailInfo['bulkRecords'] = $this->buildEmisionRecords_Bulk($response->registrosLoteEmision, $acceptAttr);
 						}
 						break;
 					case '2':
+						$acceptAttr = ['id_ext_per', 'monto', 'nro_cuenta'];
+
 						if(isset($response->registrosLoteRecarga) && count($response->registrosLoteRecarga) > 0) {
 							$bulkRecordsHeader = [lang('GEN_TABLE_DNI'), lang('GEN_TABLE_AMOUNT'), lang('GEN_TABLE_ACCOUNT_NUMBER')];
-							$detailInfo['bulkRecords'] = $this->buildCreditRecords_Bulk($response->registrosLoteRecarga, $response->ctipolote);
+							$detailInfo['bulkRecords'] = $this->buildCreditRecords_Bulk($response->registrosLoteRecarga, $acceptAttr);
 						}
 						break;
 					case '5':
 					case 'L':
 					case 'M':
+						$acceptAttr = ['idExtPer', 'id_ext_emp', 'monto', 'nro_cuenta', 'status'];
+
 						if(isset($response->registrosLoteRecarga) && count($response->registrosLoteRecarga) > 0) {
 							$bulkRecordsHeader = [lang('GEN_TABLE_DNI'), lang('GEN_TABLE_AMOUNT'), lang('GEN_TABLE_ACCOUNT_NUMBER'), lang('GEN_TABLE_STATUS')];
-							$detailInfo['bulkRecords'] = $this->buildCreditRecords_Bulk($response->registrosLoteRecarga, $response->ctipolote);
+							$detailInfo['bulkRecords'] = $this->buildCreditRecords_Bulk($response->registrosLoteRecarga, $acceptAttr);
 						}
 						break;
 					case 'E':
+						$acceptAttr = ['idExtPer', 'nombre', 'apellido', 'beneficiario'];
+
 						if(isset($response->registrosLoteGuarderia) && count($response->registrosLoteGuarderia) > 0) {
 							$bulkRecordsHeader = [lang('GEN_TABLE_DNI'), lang('GEN_TABLE_EMPLOYEE'), lang('GEN_TABLE_BENEFICIARY')];
-							$detailInfo['bulkRecords'] = $this->buildKindergartenRecords_Bulk($response->registrosLoteGuarderia, $response->ctipolote);
+							$detailInfo['bulkRecords'] = $this->buildKindergartenRecords_Bulk($response->registrosLoteGuarderia, $acceptAttr);
 						}
 						break;
 					case 'G':
+						$acceptAttr = ['idExtPer', 'nombre', 'apellido', 'beneficiario', 'nro_cuenta'];
+
 						if(isset($response->registrosLoteGuarderia) && count($response->registrosLoteGuarderia) > 0) {
 							$bulkRecordsHeader = [lang('GEN_TABLE_DNI'), lang('GEN_TABLE_EMPLOYEE'), lang('GEN_TABLE_BENEFICIARY'), lang('GEN_TABLE_ACCOUNT_BENEFICIARY')];
-							$detailInfo['bulkRecords'] = $this->buildKindergartenRecords_Bulk($response->registrosLoteGuarderia, $response->ctipolote);
+							$detailInfo['bulkRecords'] = $this->buildKindergartenRecords_Bulk($response->registrosLoteGuarderia, $acceptAttr);
 						}
 						break;
 					case 'R':
 					case 'C':
 					case 'N':
+						$acceptAttr = ['aced_rif', 'nocuenta'];
+
 						if(isset($response->registrosLoteReposicion) && count($response->registrosLoteReposicion) > 0) {
-							$bulkRecordsHeader = [lang('GEN_TABLE_DNI'), lang('GEN_TABLE_ACCOUNT_NUMBER')];
-							$detailInfo['bulkRecords'] = $this->buildReplacement_Bulk($response->registrosLoteReposicion, $response->ctipolote);
+							$bulkRecordsHeader = [lang('GEN_TABLE_ACCOUNT_NUMBER'), lang('GEN_TABLE_DNI')];
+							$detailInfo['bulkRecords'] = $this->buildReplacement_Bulk($response->registrosLoteReposicion, $acceptAttr);
 						}
 						break;
 					default:
@@ -377,7 +391,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 	 * @modified
 	 * @date
 	 */
-	private function buildEmisionRecords_Bulk($emisionRecords, $bulkType)
+	private function buildEmisionRecords_Bulk($emisionRecords, $acceptAttr)
 	{
 		log_message('INFO', 'NOVO Inquiries Model: buildEmisionRecords Method Initialized');
 
@@ -388,35 +402,58 @@ class Novo_Inquiries_Model extends NOVO_Model {
 			foreach($records AS $pos => $value) {
 				switch ($pos) {
 					case 'idExtPer':
-						$record->cardHoldId = $value;
-						break;
-					case 'idExtEmp':
-						if(!isset($records->idExtPer)) {
-							$bulkRecordsHeader[0] = lang('GEN_FISCAL_REGISTRY');
+						if (in_array($pos, $acceptAttr)) {
+							$value = $value != '' ? $value : '- -';
 							$record->cardHoldId = $value;
 						}
 						break;
+					case 'idExtEmp':
+						if (in_array('idExtPer', $acceptAttr)) {
+							if(!isset($records->idExtPer)) {
+								$record->cardHoldId = '- -';
+							}
+						}
+						break;
 					case 'nombres':
-						$record->cardHoldName = ucwords(mb_strtolower($value));
+						if (in_array($pos, $acceptAttr)) {
+							$value = $value != '' ? ucwords(mb_strtolower($value)) : '- -';
+							$record->cardHoldName = $value;
+						}
 						break;
 					case 'apellidos':
-						$record->cardHoldLastName = ucwords(mb_strtolower($value));
+						if (in_array($pos, $acceptAttr)) {
+							$value = $value != '' ? ucwords(mb_strtolower($value)) : '- -';
+							$record->cardHoldLastName = $value;
+						}
 						break;
 					case 'nroTarjeta':
-						$record->cardnumber = maskString($value, 6, 4);
+						if (in_array($pos, $acceptAttr)) {
+							$record->cardnumber = maskString($value, 6, 4);
+						}
 						break;
+				case 'nro_cuenta':
+					if (in_array($pos, $acceptAttr)) {
+						$record->cardnumber = maskString($value, 6, 4);
+					}
+					break;
 					case 'status':
-						$status = [
-							'0' => 'En proceso',
-							'1' => 'Procesado',
-							'7' => 'Rechazado',
-						];
-						$record->bulkstatus = is_numeric($value) ? $status[$value] : $value;
+						if (in_array($pos, $acceptAttr)) {
+							$status = [
+								'0' => 'En proceso',
+								'1' => 'Procesado',
+								'7' => 'Rechazado',
+							];
+							$record->bulkstatus = is_numeric($value) ? $status[$value] : $value;
+						}
 						break;
 				}
 			}
-			$record->cardHoldName = $record->cardHoldName.' '.$record->cardHoldLastName;
-			unset($record->cardHoldLastName);
+
+			if (in_array('nombres', $acceptAttr) && in_array('apellidos', $acceptAttr)) {
+				$record->cardHoldName = $record->cardHoldName.' '.$record->cardHoldLastName;
+				unset($record->cardHoldLastName);
+			}
+
 			$detailRecords[] = $record;
 		}
 
@@ -429,7 +466,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 	 * @modified
 	 * @date
 	 */
-	private function buildCreditRecords_Bulk($creditRecords, $bulkType)
+	private function buildCreditRecords_Bulk($creditRecords, $acceptAttr)
 	{
 		log_message('INFO', 'NOVO Inquiries Model: buildCreditRecords Method Initialized');
 
@@ -440,37 +477,40 @@ class Novo_Inquiries_Model extends NOVO_Model {
 			foreach($records AS $pos => $value) {
 				switch ($pos) {
 					case 'id_ext_per':
-						$record->cardHoldId = $value;
+						if (in_array($pos, $acceptAttr)) {
+							$value = $value != '' ? $value : '- -';
+							$record->cardHoldId = $value;
+						}
 						break;
-						case 'monto':
+					case 'id_ext_emp':
+						if (in_array($pos, $acceptAttr)) {
+							$value = $value != '' ? $value : '- -';
+							$record->cardHoldId = $value;
+						}
+						break;
+					case 'monto':
+						if (in_array($pos, $acceptAttr)) {
+							$value = $value != '' ? $value : '- -';
 							$record->cardHoldAmount = $value;
-						break;
+						}
+					break;
 					case 'nro_cuenta':
-						$record->cardHoldAccount = maskString($value, 6, 4);
+						if (in_array($pos, $acceptAttr)) {
+							$record->cardHoldAccount = maskString($value, 6, 4);
+						}
 						break;
 					case 'status':
-						if($bulkType == '2'){
-							continue;
-						}
-
-						if($bulkType == '5') {
-							$status = [
-								'3' => 'En proceso',
-								'6' => 'Procesada',
-								'7' => 'Rechazado',
-							];
-						}
-
-						if($bulkType == 'L' || $bulkType == 'M') {
+						if (in_array($pos, $acceptAttr)) {
 							$status = [
 								'0' => 'Pendiente',
 								'1' => 'Procesada',
 								'2' => 'Inválida',
+								'3' => 'En proceso',
+								'6' => 'Procesada',
 								'7' => 'Rechazado',
 							];
+							$record->bulkstatus = is_numeric($value) ? $status[$value] : $value;
 						}
-
-						$record->bulkstatus = is_numeric($value) ? $status[$value] : $value;
 						break;
 				}
 			}
@@ -486,7 +526,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 	 * @modified
 	 * @date
 	 */
-	private function buildKindergartenRecords_Bulk($gardenRecords, $bulkType)
+	private function buildKindergartenRecords_Bulk($gardenRecords, $acceptAttr)
 	{
 		log_message('INFO', 'NOVO Inquiries Model: buildKindergartenRecords Method Initialized');
 
@@ -497,29 +537,38 @@ class Novo_Inquiries_Model extends NOVO_Model {
 			foreach($records AS $pos => $value) {
 				switch ($pos) {
 					case 'id_per':
-						$record->cardHoldId = $value;
+						if (in_array($pos, $acceptAttr)) {
+							$record->cardHoldId = $value;
+						}
 						break;
 					case 'nombre':
-						$record->cardHoldName = ucwords(mb_strtolower($value));
+						if (in_array($pos, $acceptAttr)) {
+							$record->cardHoldName = ucwords(mb_strtolower($value));
+						}
 						break;
 					case 'apellido':
-						$record->cardHoldLastName = ucwords(mb_strtolower($value));
+						if (in_array($pos, $acceptAttr)) {
+							$record->cardHoldLastName = ucwords(mb_strtolower($value));
+						}
 						break;
 						case 'beneficiario':
-							$record->cardHoldbeneficiary = $value;
+							if (in_array($pos, $acceptAttr)) {
+								$record->cardHoldbeneficiary = $value;
+							}
 						break;
 					case 'nro_cuenta':
-						if ($bulkType == 'G') {
-							continue;
+						if (in_array($pos, $acceptAttr)) {
+							$record->cardHoldAccount = maskString($value, 6, 4);
 						}
-
-						$record->cardHoldAccount = maskString($value, 6, 4);
 						break;
 				}
 			}
 
-			$record->cardHoldName = $record->cardHoldName.' '.$record->cardHoldLastName;
-			unset($record->cardHoldLastName);
+			if (in_array('nombres', $acceptAttr) && in_array('apellidos', $acceptAttr)) {
+				$record->cardHoldName = $record->cardHoldName.' '.$record->cardHoldLastName;
+				unset($record->cardHoldLastName);
+			}
+
 			$detailRecords[] = $record;
 		}
 
@@ -532,7 +581,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 	 * @modified
 	 * @date
 	 */
-	private function buildReplacement_Bulk($replaceRecords, $bulkType)
+	private function buildReplacement_Bulk($replaceRecords, $acceptAttr)
 	{
 		log_message('INFO', 'NOVO Inquiries Model: buildreplacement Method Initialized');
 
@@ -542,17 +591,22 @@ class Novo_Inquiries_Model extends NOVO_Model {
 			$record = new stdClass();
 			foreach($records AS $pos => $value) {
 				switch ($pos) {
-					case 'aced_rif':
-						$cardHoldId = $value != '' ? $value : '';
-						$record->cardHoldId = $value;
-						break;
 					case 'nocuenta':
-						$record->cardHoldAccount = maskString($value, 6, 4);
-						break;
+						if (in_array($pos, $acceptAttr)) {
+							$record->cardHoldAccount = maskString($value, 6, 4);
+						}
+					break;
+					case 'aced_rif':
+						if (in_array($pos, $acceptAttr)) {
+							$cardHoldId = $value != '' ? $value : '- -';
+							$record->cardHoldId = $value;
+						}
+					break;
 				}
 			}
 
 			$detailRecords[] = $record;
+
 		}
 
 		return $detailRecords;
@@ -564,7 +618,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 	 * @mofied J. Enrique Peñaloza Piñero
 	 * @date March 19th, 2020
 	 */
-	public function callWs_exportFiles_Inquiries($dataRequest)
+	public function callWs_ExportFiles_Inquiries($dataRequest)
 	{
 		log_message('INFO', 'NOVO DownloadFiles Model: exportFiles Method Initialized');
 

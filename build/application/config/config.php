@@ -49,7 +49,7 @@ $config['active_recaptcha'] = ACTIVE_RECAPTCHA;
 $config['score_recaptcha'] = [
 	'development' => 0,
 	'testing' => 0.2,
-	'production' => 0.3
+	'production' => 0.4
 ];
 $config['new-views'] = '';
 $config['client'] = 'novo';
@@ -408,7 +408,7 @@ $config['encryption_key'] = ENCRYPTION_KEY;
 */
 $config['sess_driver'] = 'files';
 $config['sess_cookie_name'] = SESS_COOKIE_NAME;
-$config['sess_expiration'] = SESS_EXPIRATION > 0 ? SESS_EXPIRATION + 40 : SESS_EXPIRATION;
+$config['sess_expiration'] = SESS_EXPIRATION > 0 ? SESS_EXPIRATION + 50 : SESS_EXPIRATION;
 $config['sess_save_path'] = SESS_SAVE_PATH;
 $config['sess_match_ip'] = SESS_MATCH_IP;
 $config['sess_time_to_update'] = 300;
@@ -487,12 +487,16 @@ $config['csrf_cookie_name'] = 'cook';
 $config['csrf_expire'] = 7200;
 $config['csrf_regenerate'] = TRUE;
 $config['csrf_exclude_uris'] = array(
+	'[\w\-]+/ingresar',
 	'[\w\-]+/productos',
 	'[\w\-]+/detalle-producto',
 	'[\w\-]+/detalle-lote',
 	'[\w\-]+/confirmar-lote',
 	'[\w\-]+/consulta-lote',
 	'[\w\-]+/detalle-orden-de-servicio',
+	'[\w\-]+/afiliacion-innominadas',
+	'[\w\-]+/detalle-innominadas',
+	'[\w\-]+/estado-lote',
 	'[\w\-]+/dashboard/productos',
 	'[\w\-]+/dashboard/productos/detalle',
 	'[\w\-]+/consulta/ordenes-de-servicio',
@@ -502,7 +506,8 @@ $config['csrf_exclude_uris'] = array(
 	'[\w\-]+/lotes/calculo',
 	'[\w\-]+/lotes/innominada/detalle',
 	'[\w\-]+/lotes/innominada/generarReporteTarjetasInnominadas',
-	'[\w\-]+/reportes/saldosamanecidosExpXLS'
+	'[\w\-]+/reportes/saldosamanecidosExpXLS',
+	'[\w\-]+/lotes/innominada/afiliacion',
 );
 
 /*

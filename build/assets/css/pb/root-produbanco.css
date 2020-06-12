@@ -1,0 +1,124 @@
+@font-face {
+  font-family: 'Gotham Book';
+  font-style: normal;
+  font-weight: 300;
+  src: url('../../fonts/bnt/Gotham-Book.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Gotham Book';
+  font-style: normal;
+  font-weight: 700;
+  src: url('../../fonts/bnt/Gotham-Bold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 300;
+  src: url('../../fonts/bnt/Roboto-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  src: url('../../fonts/bnt/Roboto-Bold.ttf') format('truetype');
+}
+
+:root {
+
+	/*brand colors*/
+	--color-primary: #006937;
+	--color-secondary: #ffffff;
+	--color-tertiary: #f1f1f1;
+	--color-room: #E1E1E1;
+	--color-fifth: #707070;
+	--color-sixth: #4E4044;
+	--color-seventh:#76bc21;
+	--color-eighth: #D0D0D0;
+
+	/*status bulk*/
+	--will-processed: #7ed3b2;
+	--will-not-processed: #8b4f80;
+	--not-processed: #ff8c94;
+	--being-validated: #ebc599;
+	--black: #111111;
+
+	/*validation messages*/
+	--success: #6CC04A;
+	--info: #0099cc;
+	--warning: #FFA400;
+	--danger: #EB0029;
+
+  /* Type Scale */
+  --h00: 2.5rem;
+  --h0: 2rem;
+  --h1: 1.75rem;
+  --h2: 1.5rem;
+  --h3: 1.25rem;
+  --h4: 1rem;
+  --h5: .875rem;
+  --h6: .75rem;
+
+  /* Typography */
+  --caps-letter-spacing: .2em;
+
+  --light-font-weight: 300;
+  --regular-font-weight: 400;
+  --semibold-font-weight: 600;
+  --bold-font-weight: 700;
+
+	--font-family-base-first: 'Gotham Book', sans-serif;
+	--font-family-base: 'Roboto', sans-serif;
+  --font-family-monospace: monospace, "Courier New";
+  --font-family-novoglyphs: 'novoglyphs';
+  --font-size-base: .875rem;
+  --font-weight-base: 400;
+  --line-height-base: 1.5;
+
+  /* Layout */
+  --width-1: 24rem;
+  --width-2: 32rem;
+  --width-3: 48rem;
+  --width-4: 62rem;
+  --width-5: 64rem;
+  --width-6: 75rem;
+
+  /* Margin - Padding */
+  --space-1: .5rem;
+  --space-2: 1rem;
+  --space-3: 1.5rem;
+  --space-4: 2rem;
+  --space-5: 2.5rem;
+
+  /* Position */
+  --z1: 1;
+  --z2: 2;
+  --z3: 3;
+  --z4: 4;
+
+  /* Border */
+  --border-width: 1px;
+  --border-radius: 0;
+  --btn-border-radius: 20px;
+
+  /* Buttons */
+  --button-font-family: inherit;
+  --button-font-size: 1rem;
+  --button-font-weight: 600;
+  --button-line-height: 1.5rem;
+  --button-padding-y: .375rem;
+  --button-padding-x: 1.75rem;
+
+  --button-small-padding-y: .125rem;
+  --button-small-padding-x: 1rem;
+  --button-large-padding-y: .5rem;
+  --button-large-padding-x: 1.75rem;
+
+  /* Responsive breakpoints */
+  /* Medium: 768px -> 48em | Large: 992px -> 62em | Extra large: 1200px -> 75em */
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 992px;
+  --breakpoint-xl: 1200px;
+}

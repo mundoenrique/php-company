@@ -84,7 +84,7 @@ class NOVO_Model extends CI_Model {
 		$linkredirect = $this->session->has_userdata('productInf') ? 'detalle-producto' : lang('GEN_ENTERPRISE_LIST');
 		$arrayResponse = [
 			'btn1'=> [
-				'text'=> FALSE,
+				'text'=> lang('GEN_BTN_ACCEPT'),
 				'link'=> $linkredirect,
 				'action'=> 'redirect'
 			]

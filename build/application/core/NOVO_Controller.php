@@ -79,11 +79,13 @@ class NOVO_Controller extends CI_Controller {
 		$this->render->newViews = $this->config->item('new-views');
 		$this->form_validation->set_error_delimiters('', '---');
 		$this->config->set_item('language', 'spanish-base');
-		if($this->rule !== 'suggestion') {
+		$this->lang->load('config'.$this->render->newViews);
+
+		if ($this->rule !== 'suggestion') {
 			$this->ValidateBrowser = $this->checkBrowser();
 		}
 
-		if($this->session->has_userdata('time')) {
+		if ($this->session->has_userdata('time')) {
 			$customerTime = $this->session->time->customerTime;
 			$serverTime = $this->session->time->serverTime;
 			$currentTime = (int) date("H");
@@ -106,7 +108,7 @@ class NOVO_Controller extends CI_Controller {
 				break;
 		}
 
-		if($this->input->is_ajax_request()) {
+		if ($this->input->is_ajax_request()) {
 			$this->dataRequest = json_decode(
 				$this->security->xss_clean(
 					strip_tags(
@@ -121,12 +123,15 @@ class NOVO_Controller extends CI_Controller {
 			$access = $this->verify_access->accessAuthorization($this->router->fetch_method(), $this->countryUri, $this->appUserName);
 			$valid = TRUE;
 
-			if($_POST && $access) {
+			if ($_POST && $access) {
 				$valid = $this->verify_access->validateForm($this->rule, $this->countryUri, $this->appUserName);
 
-				if($valid) {
+				if ($valid) {
 					$this->request = $this->verify_access->createRequest($this->rule, $this->appUserName);
 				}
+			} elseif ($access && $this->render->newViews != '') {
+				$this->config->set_item('language', 'spanish-'.$this->countryUri);
+				$this->lang->load('config'.$this->render->newViews);
 			}
 
 			$this->preloadView($access && $valid);
@@ -225,10 +230,12 @@ class NOVO_Controller extends CI_Controller {
 
 		$this->render->code = $responseView;
 		$download = FALSE;
+		$this->render->enterpriseList = $this->session->enterpriseSelect->list;
+		$this->render->enterpriseData =  $this->session->enterpriseInf;
 
 		if(is_object($responseView)) {
 			$this->render->code = $responseView->code;
-			$download = !isset($responseView->download) ?: $responseView->download;
+			$download = !isset($responseView->download) ? $download : $responseView->download;
 		}
 
 		if($this->session->has_userdata('productInf')) {
@@ -236,10 +243,8 @@ class NOVO_Controller extends CI_Controller {
 		}
 
 		if(($this->render->code == 0  && $active) || $download) {
-			$this->load->model('Novo_Business_Model', 'Business');
-			$enterpriseList = $this->Business->callWs_getEnterprises_Business(TRUE);
 
-			if(count($enterpriseList->data->list) > 1 || $this->products) {
+			if(count($this->render->enterpriseList) > 1 || $this->products) {
 				array_push(
 					$this->includeAssets->jsFiles,
 					"business/widget-enterprise"
@@ -247,8 +252,6 @@ class NOVO_Controller extends CI_Controller {
 
 				$this->render->widget =  new stdClass();
 				$this->render->widget->widgetBtnTitle = lang('GEN_MUST_SELECT_ENTERPRISE');
-				$this->render->widget->enterpriseData =  $this->session->enterpriseInf;
-				$this->render->widget->enterpriseList = $enterpriseList->data->list;
 				$this->render->widget->countProducts = $this->products;
 				$this->render->widget->actionForm = 'detalle-producto';
 			}
@@ -299,6 +302,6 @@ class NOVO_Controller extends CI_Controller {
 		$this->render->module = $module;
 		$this->render->viewPage = $this->views;
 		$this->asset->initialize($this->includeAssets);
-		$this->load->view('master_content', $this->render);
+		$this->load->view('master_content'.$this->render->newViews, $this->render);
 	}
 }

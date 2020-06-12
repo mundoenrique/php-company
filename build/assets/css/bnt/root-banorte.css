@@ -13,57 +13,43 @@
 }
 
 @font-face {
-	font-family: "NovoPayment Glyphs";
-	font-style: normal;
-	font-weight: normal;
-	src: url('../../fonts/novopayment-glyphs-webfont.eot?#iefix');
-  src: url('../../fonts/novopayment-glyphs-webfont.eot?#iefix') format('embedded-opentype'),
-       url('../../fonts/novopayment-glyphs-webfont.woff') format('woff'),
-       url('../../fonts/novopayment-glyphs-webfont.ttf') format('truetype'),
-       url('../../fonts/novopayment-glyphs-webfont.svg') format('svg');
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 300;
+  src: url('../../fonts/bnt/Roboto-Regular.ttf') format('truetype');
 }
 
 @font-face {
-  font-family: "novoglyphs";
-  font-weight: normal;
-	font-style: normal;
-	src: url('../../fonts/novoglyphs-webfont.eot?#iefix');
-  src: url('../../fonts/novoglyphs-webfont.eot?#iefix') format('eot'),
-       url('../../fonts/novoglyphs-webfont.woff') format('woff'),
-       url('../../fonts/novoglyphs-webfont.ttf') format('truetype'),
-       url('../../fonts/novoglyphs-webfont.svg') format('svg');
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  src: url('../../fonts/bnt/Roboto-Bold.ttf') format('truetype');
 }
 
 :root {
-  /* Colors */
-  --primary: #EB0029;
-  --secondary: #ffffff;
-  --tertiary: #f1f1f1;
 
-  --success: #007e33;
-  --info: #0099cc;
-  --warning: #ff8800;
-  --danger: #cc0000;
+	/*brand colors*/
+	--color-primary: #EB0029;
+	--color-secondary: #ffffff;
+	--color-tertiary: #f1f1f1;
+	--color-room: #E1E1E1;
+	--color-fifth: #707070;
+	--color-sixth: #4E4044;
+	--color-seventh:#D10024;
+	--color-eighth: #DDDDDD;
 
-  --yellow: #ffffff;
-  --vista-blue: #7ed3b2;
-  --trikemaster: #8b4f80;
-	--pink-salmon: #ff8c94;
-	--gold-sand: #ebc599;
-  --black: #111111;
-  --bg-color: #f6f3f1;
+	/*status bulk*/
+	--will-processed: #7ed3b2;
+	--will-not-processed: #8b4f80;
+	--not-processed: #ff8c94;
+	--being-validated: #ebc599;
+	--black: #111111;
 
-	--widget-color: #ffffff;
-	--shadows-color: #f2f2f2;
-  --border-color: #DDDDDD;
-  --border-color-2: #DDDDDD;
-  --text-color: #4E4044;
-  --placeholder-color: #DDDDDD;
-	--disabled-color: #DDDDDD;
-
-  --label-color: #4E4044;
-  --primary-shade: #012c71a6;
-  --primary-tint: #D10024;
+	/*validation messages*/
+	--success: #6CC04A;
+	--info: #0099cc;
+	--warning: #FFA400;
+	--danger: #EB0029;
 
   /* Type Scale */
   --h00: 2.5rem;
@@ -78,10 +64,13 @@
   /* Typography */
   --caps-letter-spacing: .2em;
 
-  --regular-font-weight: 300;
+  --light-font-weight: 300;
+  --regular-font-weight: 400;
+  --semibold-font-weight: 600;
   --bold-font-weight: 700;
 
-  --font-family-base: 'Gotham Book', sans-serif;
+	--font-family-base-first: 'Gotham Book', sans-serif;
+	--font-family-base: 'Roboto', sans-serif;
   --font-family-monospace: monospace, "Courier New";
   --font-family-novoglyphs: 'novoglyphs';
   --font-size-base: .875rem;
