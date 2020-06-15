@@ -250,11 +250,19 @@ if(URLactual.substring(0, URLactual.length - 16) == 'bnt'){
 					notiSystem(responseTable.title, responseTable.msg, responseTable.icon, responseTable.dataResp);
 				}
 
-				if(responseTable.code == 1){
-					$('.dataTables_paginate').hide();
-					$('#export_excel').addClass('hide');
+				switch (responseTable.code) {
+					case 0:
+						if(responseTable.data.length < 10 ){
+							$('.dataTables_paginate').hide();
+						}
+						break;
+						case 1:
+							$('.dataTables_paginate').hide();
+							$('#export_excel').addClass('hide');
+						break;
+					default:
+						break;
 				}
-
 				return JSON.stringify(responseTable);
 			}
 		}
@@ -356,11 +364,19 @@ if(URLactual.substring(0, URLactual.length - 16) == 'bnt'){
 					notiSystem(responseTable.title, responseTable.msg, responseTable.icon, responseTable.dataResp);
 				}
 
-				if(responseTable.code == 1){
-					$('.dataTables_paginate').hide();
-					$('#export_excel').addClass('hide');
+				switch (responseTable.code) {
+					case 0:
+						if(responseTable.data.length < 10 ){
+							$('.dataTables_paginate').hide();
+						}
+						break;
+						case 1:
+							$('.dataTables_paginate').hide();
+							$('#export_excel').addClass('hide');
+						break;
+					default:
+						break;
 				}
-
 				return JSON.stringify(responseTable);
 				}
 			}
