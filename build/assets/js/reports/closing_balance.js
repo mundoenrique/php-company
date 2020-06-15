@@ -162,9 +162,11 @@ function searchBudgets(dataForm){
 }
 
 function closingBudgets(dataForm) {
-	var URLactual = window.location.pathname.substr(1);
+var URLactual = window.location.pathname.substr(1);
 
 if(URLactual.substring(0, URLactual.length - 16) == 'bnt'){
+	var table = $('#balancesClosing').DataTable();
+	table.destroy();
 	table = $('#balancesClosing').DataTable({
 		drawCallback: function (d) {
 			insertFormInput(false)
@@ -248,11 +250,19 @@ if(URLactual.substring(0, URLactual.length - 16) == 'bnt'){
 					notiSystem(responseTable.title, responseTable.msg, responseTable.icon, responseTable.dataResp);
 				}
 
+				if(responseTable.code == 1){
+					$('.dataTables_paginate').hide();
+					$('#export_excel').addClass('hide');
+				}
+
 				return JSON.stringify(responseTable);
 			}
 		}
 	})
 	}else{
+		var table = $('#balancesClosing').DataTable();
+		table.destroy();
+
 		table = $('#balancesClosing').DataTable({
 			drawCallback: function (d) {
 				insertFormInput(false)
@@ -344,6 +354,11 @@ if(URLactual.substring(0, URLactual.length - 16) == 'bnt'){
 
 				if (responseTable.code === codeDefaul) {
 					notiSystem(responseTable.title, responseTable.msg, responseTable.icon, responseTable.dataResp);
+				}
+
+				if(responseTable.code == 1){
+					$('.dataTables_paginate').hide();
+					$('#export_excel').addClass('hide');
 				}
 
 				return JSON.stringify(responseTable);
