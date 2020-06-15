@@ -176,7 +176,6 @@ if(URLactual.substring(0, URLactual.length - 16) == 'bnt'){
 			$('#blockBudgetResults').removeClass("hide");
 			$('#pre-loader-table').addClass('hide')
 			$('.hide-table').removeClass('hide')
-			$('#pre-loader').remove();
 			$('.hide-out').removeClass('hide');
 		},
 		"ordering": false,
@@ -280,7 +279,6 @@ if(URLactual.substring(0, URLactual.length - 16) == 'bnt'){
 				$('#blockBudgetResults').removeClass("hide");
 				$('#pre-loader-table').addClass('hide')
 				$('.hide-table').removeClass('hide')
-				$('#pre-loader').remove();
 				$('.hide-out').removeClass('hide');
 			},
 			"ordering": false,
