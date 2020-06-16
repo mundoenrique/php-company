@@ -334,6 +334,8 @@ $lang['GEN_VALID_AMOUNT'] = 'Indica un monto válido';
 $lang['GEN_TABLE_USERACT_MODULE'] = 'Módulo';
 $lang['GEN_TABLE_USERACT_FUNCTION'] = 'Función';
 $lang['GEN_TABLE_USERACT_DATE'] = 'Fecha';
-
 $lang['REPORTS_TITLE'] = 'Configuración';
 $lang['REPORTS_NO_FILE_EXIST'] = 'No fue posible generar el archivo, por favor intenta de nuevo';
+//DATATABLES LANG CLOSING BALANCE
+$lang['GEN_FISCAL_CLOSING_BALANCE'] = 'NIT';
+$lang['GEN_ACCOUNT_CLOSING_BALANCE'] = 'Cuenta';

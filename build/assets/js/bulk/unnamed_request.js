@@ -1,8 +1,5 @@
 'use strict'
 $(function () {
-	$('#startingLine1').attr('maxlength', 25);
-	$('#startingLine2').attr('maxlength', 25);
-	$('#startingLine2').attr('value', );
 	var unnamedReqBtn = $('#unnamed-request-btn');
 	var maxCards = $('#maxCards');
 	$('#pre-loader').remove();
@@ -11,15 +8,7 @@ $(function () {
 		if(this.value == 0){
 			this.value = (this.value + '').replace(0, '');
 		}
-		this.value = (this.value + '').replace(/[^0-9]]/g, '');
-	 });
-
-	 $('#startingLine1').keyup(function (){
-		this.value = (this.value + '').replace(/[^A-Za-z0-9\s]+$/g, '');
-	 });
-	 $('#startingLine2').keyup(function (){
-		this.value = (this.value + '').replace(/[^A-Za-z0-9\s]+$/g, '');
-	 });
+	});
 
 	unnamedReqBtn.on('click', function(e) {
 		e.preventDefault();

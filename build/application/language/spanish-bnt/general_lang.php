@@ -1,5 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+//MENU
+$lang['GEN_MENU_ENTERPRISE'] = 'Empresa';
 //GENERAL LANGUAGE
 $lang['GEN_ENTERPRISE_LIST'] = 'empresas';
 $lang['GEN-LOGO-HEADER'] = 'img-logo.svg';
@@ -26,3 +28,7 @@ $lang['GEN_FOOTER_LINK_YOUTUBE'] = 'https://www.youtube.com/user/banortemovil/';
 $lang['GEN_FOOTER_IMG_INSTAGRAM'] = 'instagram.png';
 $lang['GEN_FOOTER_LINK_INSTAGRAM'] = 'https://www.instagram.com/banorte_mx/';
 $lang['GEN_DETAIL_BARND_COLOR'] = '_card-blue.svg';
+//Datables
+$lang['GEN_FISCAL_CLOSING_BALANCE'] = 'CURP';
+$lang['GEN_ACCOUNT_CLOSING_BALANCE'] = 'Tarjetahabiente';
+

@@ -517,12 +517,12 @@ $config = [
 		[
 			'field' => 'startingLine1',
 			'label' => 'startingLine1',
-			'rules' => 'trim|alpha_numeric'
+			'rules' => 'trim|regex_match[/^[a-z0-9 ]+$/i]'
 		],
 		[
 			'field' => 'startingLine2',
 			'label' => 'startingLine2',
-			'rules' => 'trim|alpha_numeric'
+			'rules' => 'trim|regex_match[/^[a-z0-9 ]+$/i]'
 		],
 		[
 			'field' => 'branchOffice',
