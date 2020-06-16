@@ -1,6 +1,5 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 <h1 class="primary h3 regular inline"><?= lang('GEN_MENU_REP_USER_ACT'); ?></h1>
-<span class="ml-2 regular tertiary"><?= $productName ?></span>
 <div class="mb-2 flex items-center">
 	<div class="flex tertiary">
 		<nav class="main-nav nav-inferior">
@@ -22,31 +21,35 @@
 			<div class="search-criteria-order flex pb-3 flex-column w-100">
 				<span class="line-text mb-2 h4 semibold primary">Criterio de búsqueda</span>
 				<div class="flex my-2 px-5">
-					<form method="post" class="w-100">
+					<form id="userActivityForm" class="w-100">
 						<div class="row flex ">
 							<div class="form-group col-4 col-lg-4 col-xl-3">
 								<label>Empresa</label>
-								<select class="select-box custom-select flex h6 w-100">
-									<option selected disabled>Seleccionar</option>
-									<option>Option 1</option>
-									<option>Option 2</option>
-									<option>Option 3</option>
+								<select id="enterprise-report" name="enterprise_report" class="select-box custom-select mb-4 h6 w-100">
+								<?php foreach($enterpriseList AS $enterprise) : ?>
+									<?php if($enterprise->acrif == $enterpriseData->idFiscal): ?>
+									<?php endif;?>
+									<option code="<?= $enterprise->accodcia; ?>" group="<?= $enterprise->accodgrupoe; ?>" nomOf="<?= $enterprise->acnomcia; ?>" acrif="<?= $enterprise->acrif; ?>" value="<?= $enterprise->accodcia; ?>" <?= $enterprise->acrif == $enterpriseData->idFiscal ? 'selected' : '' ?>>
+										<?= $enterprise->acnomcia; ?>
+									</option>
+									<?php endforeach; ?>
 								</select>
 								<div class="help-block"></div>
 							</div>
 
-							<div class="form-group col-4 col-lg-4 col-xl-3">
-								<label for="datepicker_start">Fecha Inicial</label>
-								<input id="datepicker_start" class="form-control" name="datepicker" type="text">
-								<div class="help-block"></div>
+							<div  class="form-group col-4 col-lg-3 col-xl-3">
+								<label for="initialDateAct"><?= lang('GEN_START_DAY'); ?></label>
+								<input id="initialDateAct" name="datepicker_start" class="form-control date-picker " type="text" placeholder="DD/MM/AAAA" readonly="" autocomplete="off">
+								<div class="help-block">
+								</div>
 							</div>
-							<div class="form-group col-4 col-lg-4 col-xl-3">
-								<label for="datepicker_end">Fecha Final</label>
-								<input id="datepicker_end" class="form-control" name="datepicker" type="text">
-								<div class="help-block"></div>
+							<div class="form-group col-4 col-lg-3 col-xl-3">
+								<label for="finalDateAct"><?= lang('GEN_END_DAY'); ?></label>
+								<input id="finalDateAct" name="datepicker_end" class="form-control date-picker " type="text" placeholder="DD/MM/AAAA" readonly="" required="required" autocomplete="off" >
+								<div class="help-block "></div>
 							</div>
 							<div class="flex items-center justify-end col-4 col-lg-4 col-xl-3 ml-auto">
-								<button class="btn btn-primary btn-small">
+								<button id="userActivity-Btn" name="userActivity_Btn" class="btn btn-primary btn-small" type="button">
 									Buscar
 								</button>
 							</div>
@@ -58,20 +61,30 @@
 			</div>
 
 			<div class="flex pb-5 flex-column">
-				<span class="line-text mb-2 h4 semibold primary">Resultados Actividad por Usuario</span>
-				<div class="center mx-1">
+				<span id="titleResults" class="line-text mb-2 h4 semibold primary">Resultados</span>
+				<div id="spinnerBlockBudget" class=" hide">
+									<div id="pre-loader" class="mt-2 mx-auto flex justify-center">
+										<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
+									</div>
+						</div>
+						<div id="spinnerBlockMasterAccount" class=" hide">
+									<div id="pre-loader" class="mt-2 mx-auto flex justify-center">
+										<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
+									</div>
+						</div>
+				<div id="blockResultsUser" class="center mx-1 hide">
 					<div class="flex">
 
 						<div class="flex mr-2 py-3 flex-auto justify-end items-center">
-							<button class="btn px-1" title="Exportar a EXCEL" data-toggle="tooltip">
+							<button id="export_excel" class="btn px-1 big-modal" title="Exportar a EXCEL" data-toggle="tooltip">
 								<i class="icon icon-file-excel" aria-hidden="true"></i>
 							</button>
-							<button class="btn px-1" title="Exportar a PDF" data-toggle="tooltip">
+							<button id="export_pdf" class="btn px-1 big-modal" title="Exportar a PDF" data-toggle="tooltip">
 								<i class="icon icon-file-pdf" aria-hidden="true"></i>
 							</button>
 						</div>
 					</div>
-					<table id="concenAccount" class="detail-lot h6 cell-border primary semibold" style="width:100%">
+					<table id="concenAccount" class="cell-border h6 display" >
 						<thead class="bg-primary secondary regular">
 							<tr>
 								<th>Usuario</th>
@@ -80,22 +93,10 @@
 								<th>Opciones</th>
 							</tr>
 						</thead>
-						<tbody>
-							<tr>
-								<td>AFPRUEBAST</td>
-								<td>A</td>
-								<td>16/02/2016 07:01:34</td>
-								<td class="flex justify-center items-center">
-									<button class="btn px-0 details-user" title="Ver actividades" data-toggle="tooltip">
-										<i class="icon icon-find mr-1" aria-hidden="true"></i>
-									</button>
-									<button class="btn px-1" data-toggle="tooltip">
-										<i class="icon novoglyphs icon-info" aria-hidden="true"></i>
-									</button>
-								</td>
-							</tr>
-						</tbody>
+						<tbody id="tbody-datos-general"></tbody>
+
 					</table>
+
 					<div class="line my-2"></div>
 				</div>
 				<div class="my-5 py-4 center none">

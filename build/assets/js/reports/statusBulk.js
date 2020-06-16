@@ -39,11 +39,8 @@ $(function () {
 		if (form.valid()) {
 			data = getDataForm(form);
 			insertFormInput(true);
-			statusBulkBtn.html(loader);
 			$('.statusbulk-result').addClass('hide');
-			$('#pre-loade-result')
-				.removeClass('hide')
-				.html(loader);
+			$('#pre-loade-result').removeClass('hide')
 			resultStatusBulk.dataTable().fnClearTable();
 			resultStatusBulk.dataTable().fnDestroy();
 			verb = "POST"; who = 'Reports'; where = 'StatusBulk';
@@ -55,32 +52,34 @@ $(function () {
 					"language": dataTableLang
 				});
 
-				if (response.code == 0) {
-					$.each(response.data, function (index, value) {
-						table.row.add([
-							value.bulkType,
-							value.bulkNumber,
-							value.bulkStatus,
-							value.uploadDate,
-							value.valueDate,
-							value.records,
-							value.amount,
-						]).draw()
-					});
-					form = $('#download-status');
-					form.html('')
-					$.each(data, function(index, value) {
-						if(index != 'screenSize') {
-							form.append('<input type="hidden" name="'+index+'" value="'+value+'">')
-						}
-					});
+				if (response.data.statusBulkList.length == 0) {
+					$('.download-icons').addClass('hide')
+				} else {
+					$('.download-icons').removeClass('hide')
 				}
+
+				$.each(response.data.statusBulkList, function (index, value) {
+					table.row.add([
+						value.bulkType,
+						value.bulkNumber,
+						value.bulkStatus,
+						value.uploadDate,
+						value.valueDate,
+						value.records,
+						value.amount,
+					]).draw()
+				});
+				form = $('#download-status');
+				form.html('')
+				$.each(data, function(index, value) {
+					if(index != 'screenSize') {
+						form.append('<input type="hidden" name="'+index+'" value="'+value+'">')
+					}
+				});
 
 				insertFormInput(false);
 				statusBulkBtn.html(btnText);
-				$('#pre-loade-result')
-					.addClass('hide')
-					.html('');
+				$('#pre-loade-result').addClass('hide')
 				$('.statusbulk-result').removeClass('hide');
 			})
 		}

@@ -29,6 +29,7 @@ $(function () {
 		.removeClass('has-error')
 		.prop('disabled', true);
 		$('.help-block').text('');
+		$("#idType").prop('selectedIndex',0);
 		reportSelected = $(this).val()
 
 		if (reportSelected == "repListadoTarjetas") {
@@ -55,7 +56,6 @@ $(function () {
 
 		if (reportSelected == "repMovimientoPorTarjeta") {
 			$('#MovimientoPorTarjeta button').removeClass('none')
-			$('#idType option').attr('disabled', false)
 			$('#MovimientoPorTarjeta input').prop('readonly', false)
 			$('#result-repMovimientoPorTarjeta').addClass('none')
 			$('#result-repMovimientoPorTarjeta input, #result-repMovimientoPorTarjeta select').prop('disabled', true)
@@ -159,6 +159,15 @@ $(function () {
 		}
 	})
 
+	$("#idType").change(function () {
+
+		$('#result-repMovimientoPorTarjeta').find('input, select').prop('disabled', true).val("");
+		$('#result-repMovimientoPorTarjeta').removeClass('has-error').addClass('none');
+		$('#cardNumberId').empty();
+		$('#MovimientoPorTarjeta input').prop('readonly', false).val("");
+		$('#MovimientoPorTarjeta button').removeClass('none');
+	});
+
 	reportsResults = $('#reports-results').DataTable({
 		drawCallback: function(d) {
 			$('input[type=search]').attr('name', 'search')
@@ -196,7 +205,6 @@ function getReport(data, btn) {
 					$('#result-repMovimientoPorTarjeta input, #result-repMovimientoPorTarjeta select').prop('disabled', true)
 					$('#cardNumberId').empty()
 					$('#MovimientoPorTarjeta button').removeClass('none')
-					$('#idType option').attr('disabled', false)
 					$('#MovimientoPorTarjeta input').prop('readonly', false)
 				case 'repListadoTarjetas':
 				case 'repMovimientoPorEmpresa':
@@ -214,7 +222,6 @@ function getReport(data, btn) {
 					data.operation = 'repMovimientoPorTarjeta';
 					$('#MovimientoPorTarjeta button').addClass('none')
 					$('#MovimientoPorTarjeta input').prop('readonly', true);
-					$('#idType option:not(:selected)').attr('disabled',true)
 
 					$.each(response.data, function(index, element) {
 						option = '<option value="'+element.key+'">'+element.cardMask+'</option>'

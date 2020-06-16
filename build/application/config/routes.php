@@ -100,6 +100,16 @@ $route['(:any)/tarjetas-emitidas'] = "Novo_Reports/issuedCards";
 $route['(:any)/gastos-catgoria'] = "Novo_Reports/categoryExpense";
 $route['(:any)/cuenta-maestra'] = "Novo_Reports/masterAccount";
 $route['(:any)/estado-lote'] = "Novo_Reports/statusBulk";
+$route['(:any)/id-empresa-ob'] = "Novo_Reports/obtenerIdEmpresa";
+$route['(:any)/closing-budgets'] = "Novo_Reports/closingBudgets";
+$route['(:any)/closing-budgets-excel'] = "Novo_Reports/exportToExcel";
+$route['(:any)/master-account-excel'] = "Novo_Reports/exportToExcelMasterAccount";
+$route['(:any)/master-account-pdf'] = "Novo_Reports/exportToPDFMasterAccount";
+$route['(:any)/master-account-excel-consolid'] = "Novo_Reports/exportToExcelMasterAccountConsolid";
+$route['(:any)/master-account-pdf-consolid'] = "Novo_Reports/exportToPDFMasterAccountConsolid";
+$route['(:any)/master-account'] = "Novo_Reports/masterAccount";
+$route['(:any)/tarjetahabientes'] = "Novo_Reports/cardHolders";
+
 //settings
 $route['(:any)/configuracion'] = "Novo_Settings/options";
 $route['(:any)/empresa'] = "Novo_Settings/getEnterprise";
@@ -351,3 +361,8 @@ $route['(:any)/visa'] = "visa/callWSVisaModel/$1";
 $route['(:any)/controles/visa/configurar'] = "visa/setup/$1";
 $route['(:any)/pagos'] = "payment/payments/$1";
 $route['(:any)/payments'] = "payment/callAPImodel/$1";
+
+//cuenta maestra
+$route['(:any)/user-activity-excel'] = "Novo_Reports/exportToExcelUserActivity";
+$route['(:any)/user-activity-pdf'] = "Novo_Reports/exportToPDFUserActivity";
+$route['(:any)/user-activity'] = "Novo_Reports/userActivity";

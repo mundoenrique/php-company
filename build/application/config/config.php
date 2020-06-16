@@ -49,7 +49,7 @@ $config['active_recaptcha'] = ACTIVE_RECAPTCHA;
 $config['score_recaptcha'] = [
 	'development' => 0,
 	'testing' => 0.2,
-	'production' => 0.3
+	'production' => 0.4
 ];
 $config['new-views'] = '';
 $config['client'] = 'novo';

@@ -1,5 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
-<h1 class="primary h3 regular inline"><?= lang('GEN_MENU_REP_STATUS_BULK'); ?></h1>
+<h1 class="primary h3 regular inline"><?= lang('GEN_MENU_REP_CARDHOLDERS'); ?></h1>
+<span class="ml-2 regular tertiary"><?= $productName ?></span>
 <div class="mb-2 flex items-center">
 	<div class="flex tertiary">
 		<nav class="main-nav nav-inferior">
@@ -20,16 +21,16 @@
 		<div class="flex flex-auto flex-column <?= $widget ? '' : 'max-width-6'; ?>">
 			<div class="search-criteria-order flex pb-3 flex-column w-100">
 				<span class="line-text mb-2 h4 semibold primary"><?= lang('GEN_SEARCH_CRITERIA'); ?></span>
-				<div class="flex mt-2 mb-3 px-5">
-					<form id="status-bulk-form" action="<?= base_url(lang('GEN_LINK_REP_STATUS_BULK')); ?>" method="post" class="w-100">
+				<div class="flex my-2 px-5">
+					<form id="card-holder-form" action="<?= base_url(lang('GEN_LINK_REP_CARDHOLDERS')); ?>" method="post" class="w-100">
 						<div class="row flex justify-between">
-							<div class="form-group col-4 col-xl-3">
+							<div class="form-group col-4 col-xl-4">
 								<label><?= lang('GEN_ENTERPRISE'); ?></label>
 								<select id="enterpriseCode" name="enterpriseCode" class="select-box custom-select flex h6 w-100 enterprise-getprod">
 									<?php foreach($enterpriseList AS $enterprise) : ?>
 									<?php if($enterprise->acrif == $enterpriseData->idFiscal): ?>
 									<?php endif;?>
-									<option value="<?= $enterprise->accodcia; ?>" <?= $enterprise->acrif == $enterpriseData->idFiscal ? 'selected' : '' ?>
+									<option value="<?= $enterprise->acrif; ?>" <?= $enterprise->acrif == $enterpriseData->idFiscal ? 'selected' : '' ?>
 										id-fiscal="<?= $enterprise->acrif; ?>">
 										<?= $enterprise->acnomcia; ?>
 									</option>
@@ -37,10 +38,10 @@
 								</select>
 								<div class="help-block"></div>
 							</div>
-							<div class="form-group col-4 col-xl-3">
+							<div class="form-group col-4 col-xl-4">
 								<label><?= lang('GEN_PRODUCT'); ?></label>
 								<select id="productCode" name="productCode" class="select-box custom-select flex h6 w-100">
-									<option disabled><?= $selectProducts ?></option>
+									<option selected disabled><?= $selectProducts ?></option>
 									<?php if($productsSelect): ?>
 									<?php foreach($productsSelect AS $product): ?>
 									<option value="<?= $product['id']; ?>" <?= $product['id'] == $currentProd ? 'selected' : ''; ?>><?= $product['desc'] ?></option>
@@ -49,21 +50,8 @@
 								</select>
 								<div class="help-block"></div>
 							</div>
-							<div class="form-group col-4 col-lg-3 col-xl-3">
-								<label for="initialDate"><?= lang('GEN_START_DAY'); ?></label>
-								<input id="initialDate" name="initialDate" class="form-control date-picker" type="text"
-									placeholder="<?= lang('GEN_PLACE_DATE_COMPLETTE'); ?>" readonly>
-								<div class="help-block">
-								</div>
-							</div>
-							<div class="form-group col-4 col-lg-3 col-xl-3">
-								<label for="finalDate"><?= lang('GEN_END_DAY'); ?></label>
-								<input id="finalDate" name="finalDate" class="form-control date-picker" type="text"
-									placeholder="<?= lang('GEN_PLACE_DATE_COMPLETTE'); ?>" readonly>
-								<div class="help-block "></div>
-							</div>
-							<div class="col-xl-auto flex items-center ml-auto mr-2">
-								<button type="submit" id="status-bulk-btn" class="btn btn-primary btn-small btn-loading">
+							<div class="flex items-center justify-end col-3">
+								<button type="submit" id="card-holder-btn" class="btn btn-primary btn-small btn-loading">
 									<?= lang('GEN_BTN_SEARCH'); ?>
 								</button>
 							</div>
@@ -72,10 +60,11 @@
 				</div>
 				<div class="line mb-2"></div>
 			</div>
+
 			<div id="pre-loade-result" class="mt-2 mx-auto hide">
 				<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
 			</div>
-			<div class="w-100 statusbulk-result hide">
+			<div class="w-100 cardholders-result hide">
 				<div class="flex pb-5 flex-column">
 					<span class="line-text mb-2 h4 semibold primary">Resultados</span>
 					<div class="center mx-1">
@@ -89,19 +78,14 @@
 										<i class="icon icon-file-pdf" aria-hidden="true"></i>
 									</button>
 								</div>
-								<form id="download-status" action="<?= base_url('descargar-archivo'); ?>" method="post"></form>
+								<form id="download-cardholders" action="<?= base_url('descargar-archivo'); ?>" method="post"></form>
 							</div>
 						</div>
-						<table id="resultStatusBulk" class="cell-border h6 display responsive w-100">
+						<table id="resultscardHolders" class="cell-border h6 display responsive w-100">
 							<thead class="bg-primary secondary regular">
 								<tr>
-									<th><?= lang('GEN_BULT_TYPE'); ?></th>
-									<th><?= lang('GEN_TABLE_BULK_NUMBER'); ?></th>
-									<th><?= lang('GEN_STATUS'); ?></th>
-									<th><?= lang('GEN_TABLE_BULK_DATE'); ?></th>
-									<th><?= lang('GEN_TABLE_BULK_DATE_VALUE'); ?></th>
-									<th><?= lang('GEN_TABLE_RECORDS'); ?></th>
-									<th><?= lang('GEN_TABLE_AMOUNT'); ?></th>
+									<th><?= lang('GEN_TABLE_ID_DOC'); ?></th>
+									<th><?= lang('GEN_TABLE_CARDHOLDER'); ?></th>
 								</tr>
 							</thead>
 							<tbody></tbody>
@@ -110,7 +94,6 @@
 					</div>
 				</div>
 			</div>
-
 		</div>
 	</div>
 	<?php if($widget): ?>
