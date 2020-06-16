@@ -334,20 +334,14 @@ class Novo_Settings_Model extends NOVO_Model {
 
 		switch($this->isResponseRc) {
 			case 0:
-				$this->response->icon = lang('GEN_ICON_DANGER');
-				$this->response->title = lang('REPORTS_TITLE');
-				$this->response->msg = lang('REPORTS_NO_FILE_EXIST');
-				$this->response->data['btn1']['action'] = 'close';
-
-				if(file_exists(assetPath('downloads/'.$response->bean))) {
 					$this->response->code = 0;
-					$this->response->msg = lang('RESP_RC_0');
-					$this->response->data = [
-						'file' => assetUrl('downloads/'.$response->bean),
-						'name' => $response->bean
-					];
-				}
-				break;
+					$file = $response->archivo;
+				    $name = $response->nombre;
+				    $ext =  mb_strtolower($response->formatoArchivo);
+					$this->response->data['file'] = $file;
+					$this->response->data['name'] = $name.'.'.$ext;
+					$this->response->data['ext'] = $ext;
+			break;
 		}
 
 		return $this->responseToTheView('CallWs_GetFileIni: '.$this->dataRequest->idOperation);

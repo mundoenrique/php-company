@@ -317,14 +317,18 @@ $('#btn-download').on('click', function (e) {
 function getFileIni(data) {
 	insertFormInput(true);
 	verb = 'POST'; who = 'Settings'; where = 'getFileIni';
-	var downloadFile = $('#download-file');
+	$('.cover-spin').show(0);
 	callNovoCore(verb, who, where, data, function (response) {
 		if(response.code == 0) {
-            downloadFile.attr('href', response.data.file)
-            document.getElementById('download-file').click()
-            who = 'DownloadFiles'; where = 'DeleteFile';
-            data.fileName = response.data.name
-            callNovoCore(verb, who, where, data, function (response) {})
+		   	var File = new Int8Array(response.data.file);
+			var blob = new Blob([File], {type: "application/"+response.data.ext});
+			var url = window.URL.createObjectURL(blob);
+			$('#download-file').attr('href', url)
+			$('#download-file').attr('download',response.data.name)
+			document.getElementById('download-file').click()
+			window.URL.revokeObjectURL(url);
+			$('#download-file').attr('href', 'javascript:')
+			$('#download-file').attr('download', '')
         }
         insertFormInput(false);
 		$('.cover-spin').hide();
