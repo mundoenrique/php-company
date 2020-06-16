@@ -1271,17 +1271,6 @@ label {
   background-size: contain;
 }
 
-.bg-content-config {
-	background: linear-gradient(
-      rgba(246,243,241,.6),
-      rgba(246,243,241,.6)
-    ),
-    url("../../images/bdb/bg-content.png") !important;
-  background-repeat: no-repeat !important;
-  background-size: 57em !important;
-
-}
-
 /* Borders
 ========================================================================== */
 
@@ -3690,7 +3679,7 @@ a.ui-button:active,
 }
 
 .nav-config .nav-config-box .nav-item-config .bg {
-	width: 35%
+	width: 35%;
 }
 
 .nav-config .nav-config-box .nav-item-config h4 {

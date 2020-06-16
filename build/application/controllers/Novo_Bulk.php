@@ -196,7 +196,7 @@ class Novo_Bulk extends NOVO_Controller {
 		$view = 'unnamedRequest';
 		$branchOffices = 0;
 
-		if(lang('CONF_UNNA_BRANCHOFFICE')) {
+		if(lang('CONF_UNNA_BRANCHOFFICE') == 'ON') {
 			$this->request->select = true;
 			$this->load->model('Novo_Business_Model', 'Business');
 			$branchOffices = $this->Business->callWs_GetBranchOffices_Bulk($this->request);
@@ -216,7 +216,7 @@ class Novo_Bulk extends NOVO_Controller {
 		$this->render->titlePage = lang('GEN_MENU_UNNAMED_REQUEST');
 		$this->render->expMaxMonths = $this->session->productInf->expMaxMonths;
 		$this->render->maxCards = $this->session->productInf->maxCards;
-		$this->render->editable = lang('CONF_UNNA_EXPIRED_DATE') ? '' : 'readonly';
+		$this->render->editable = lang('CONF_UNNA_EXPIRED_DATE') == 'ON' ? '' : 'readonly';
 		$this->views = ['bulk/'.$view];
 		$this->loadView($view);
 	}

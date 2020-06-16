@@ -19,12 +19,12 @@
 	</div>
 	<div class="w-100 hide-out hide">
 		<div class="flex flex-auto flex-column <?= $widget ? '' : 'max-width-6'; ?>">
-
+			<?php if (lang('CONF_PAY_ACCOUNT') == 'ON'): ?>
 			<div class="flex pb-3 flex-column w-100">
 				<span class="line-text mb-2 h4 semibold primary">Recarga cuenta/tarjeta concentradora </span>
 				<div class="flex my-2 px-5">
 					<form id="#" method="post" class="w-100">
-					<p class="mr-5 mb-3 sh5 semibold tertiary">Saldo disponible <span class="light text">10,393,054.68</span></p>
+						<p class="mr-5 mb-3 sh5 semibold tertiary">Saldo disponible <span class="light text">10,393,054.68</span></p>
 
 						<div class="row">
 							<div class="form-group col-3">
@@ -79,25 +79,26 @@
 				</div>
 				<div class="line mb-2"></div>
 			</div>
+			<?php endif; ?>
 
 			<div class="search-criteria-order flex pb-3 flex-column w-100">
 				<span class="line-text mb-2 h4 semibold primary"><?= lang('GEN_SEARCH_CRITERIA'); ?></span>
 				<div class="flex my-2 px-5">
-					<form method="post" class="w-100">
+					<form id="masterAccountForm" method="post" class="w-100">
 						<div class="row flex justify-between">
 							<div class="form-group col-4 col-xl-4">
-								<label><?= lang('GEN_NIT'); ?></label>
-								<input id="Nit" class="form-control h5" type="text" placeholder="Ingresar <?= lang('GEN_NIT'); ?>">
+								<label><?= lang('GEN_TABLE_DNI'); ?></label>
+								<input id="idNumber" name="idNumber" class="form-control h5" type="text" autocomplete="off" disabled>
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-4 col-xl-4">
 								<label><?= lang('GEN_TABLE_CARD_NUMBER'); ?></label>
-								<input id="card-number" class="form-control h5" type="text" placeholder="Ingresar número">
+								<input id="cardNumber" name="cardNumber" class="form-control h5" type="text" autocomplete="off" disabled>
 								<div class="help-block"></div>
 							</div>
 							<div class="flex items-center justify-end col-3">
-								<button class="btn btn-primary btn-small btn-loading">
-								<?= lang('GEN_BTN_SEARCH'); ?>
+								<button id="masterAccountBtn" class="btn btn-primary btn-small btn-loading">
+									<?= lang('GEN_BTN_SEARCH'); ?>
 								</button>
 							</div>
 						</div>
@@ -105,88 +106,68 @@
 				</div>
 				<div class="line mb-2"></div>
 			</div>
-
-			<div class="flex pb-5 flex-column">
-				<span class="line-text mb-2 h4 semibold primary">Resultados</span>
-				<div class="center mx-1">
-					<div class="flex ml-4 py-3 flex-auto justify-between">
-						<p class="mr-5 h5 semibold tertiary">Saldo disponible <span class="light text">10,393,054.68</span></p>
-						<p class="mr-5 mb-0 h5 semibold tertiary">Comisión por transacción <span class="light text">0</span></p>
-						<p class="mr-5 mb-0 h5 semibold tertiary">Comisión por consulta saldo <span class="light text">0</span></p>
-					</div>
-
-					<table id="tableServicesMaster" class="cell-border h6 display w-100">
-						<thead class="bg-primary secondary regular">
-							<tr>
-								<th class="toggle-all"></th>
-								<th>Número de tarjeta</th>
-								<th>Estatus</th>
-								<th>Nombre</th>
-								<th>NIT.</th>
-								<th>Saldo</th>
-								<th>Monto</th>
-								<th>Opciones</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td></td>
-								<td> ************9117</td>
-								<td>-</td>
-								<td>Juan Gonzalez</td>
-								<td class="tool-ellipsis"> 43865838</td>
-								<td>-</td>
-								<td>
-									<input id="Nit" class="form-control h6" type="text">
-								</td>
-
-								<td class="pb-0 px-1 flex justify-center items-center">
-									<button id="consulta_saldo" class="btn mx-1 px-0" title="Consulta saldo" data-toggle="tooltip">
-										<i class="icon novoglyphs icon-balance" aria-hidden="true"></i>
-									</button>
-									<button id="abono_tarjeta" class="btn mx-1 px-0" title="Abono tarjeta" data-toggle="tooltip">
-										<i class="icon novoglyphs icon-credit-card" aria-hidden="true"></i>
-									</button>
-									<button id="cargo_tarjeta" class="btn mx-1 px-0" title="Cargo tarjeta" data-toggle="tooltip">
-										<i class="icon novoglyphs icon-card-fee" aria-hidden="true"></i>
-									</button>
-								</td>
-							</tr>
-
-						</tbody>
-					</table>
-
-					<form id="sign-bulk-form" method="post">
-						<div class="flex row mt-3 mb-2 mx-2 justify-end">
-						<div class="col-3 col-lg-3 col-xl-3 form-group">
-								<div class="input-group">
-									<input id="password-tranfer" name="password" class="form-control pwd-input pr-0" type="password"
-										placeholder="<?= lang('GEN_PLACE_PASSWORD'); ?>">
-									<div class="input-group-append">
-										<span id="pwd_action" class="input-group-text pwd-action" title="<?= lang('GEN_SHOW_PASS') ?>"><i
-												class="icon-view mr-0"></i></span>
-									</div>
-								</div>
-								<div class="help-block bulk-select text-left"></div>
-							</div>
-							<div class="col-auto">
-								<button id="sign-bulk-btn" class="btn btn-primary btn-small btn-loading flex mx-auto">Consultar
-								</button>
-							</div>
-
-							<div class="col-auto">
-								<button id="del-sign-bulk-btn" class="btn btn-primary btn-small btn-loading flex mx-auto">Abono
-								</button>
-							</div>
-
-							<div class="col-auto">
-								<button id="del-sign-bulk-btn" class="btn btn-primary btn-small btn-loading flex mx-auto">Cargo
-								</button>
-							</div>
-
+			<div id="pre-loader-table" class="mt-2 mx-auto hide">
+				<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
+			</div>
+			<div class="hide-table hide">
+				<div class="flex pb-5 flex-column">
+					<span class="line-text mb-2 h4 semibold primary">Resultados</span>
+					<div class="center mx-1">
+						<div class="flex ml-4 py-3 flex-auto justify-between">
+							<p class="mr-5 h5 semibold tertiary">Saldo disponible <span id="balance-aviable" class="light text"></span></p>
+							<p class="mr-5 mb-0 h5 semibold tertiary">Comisión por transacción <span id="cost-trans" class="light text">0</span></p>
+							<p class="mr-5 mb-0 h5 semibold tertiary">Comisión por Consultar saldo <span id="cost-inquiry" class="light text">0</span></p>
 						</div>
-					</form>
-					<div class="line my-2"></div>
+
+						<table id="tableServicesMaster" class="cell-border h6 display w-100">
+							<thead class="bg-primary secondary regular">
+								<tr>
+									<th class="toggle-all"></th>
+									<th><?= lang('GEN_TABLE_CARD_NUMBER'); ?></th>
+									<th><?= lang('GEN_TABLE_FULL_NAME') ?></th>
+									<th><?= lang('GEN_TABLE_DNI') ?></th>
+									<th><?= lang('GEN_TABLE_BALANCE_AVIABLE'); ?></th>
+									<th><?= lang('GEN_TABLE_AMOUNT'); ?></th>
+									<th><?= lang('GEN_TABLE_OPTIONS') ?></th>
+								</tr>
+							</thead>
+							<tbody></tbody>
+						</table>
+
+						<form id="password-table">
+							<div class="flex row mt-3 mb-2 mx-2 justify-end">
+								<div class="col-3 col-lg-3 col-xl-3 form-group">
+									<div class="input-group">
+										<input name="password" class="form-control pwd-input pr-0" type="password" placeholder="<?= lang('GEN_PLACE_PASSWORD'); ?>">
+										<div class="input-group-append">
+											<span id="pwd_action" class="input-group-text pwd-action" title="<?= lang('GEN_SHOW_PASS') ?>"><i
+													class="icon-view mr-0"></i></span>
+										</div>
+									</div>
+									<div class="help-block bulk-select text-left"></div>
+								</div>
+								<?php if($this->verify_access->verifyAuthorization('TRAMAE', 'TRASAL')): ?>
+								<div class="col-auto">
+									<button id="Consulta" class="btn btn-primary btn-small btn-loading flex mx-auto" amount="0">Consultar
+									</button>
+								</div>
+								<?php endif; ?>
+								<?php if($this->verify_access->verifyAuthorization('TRAMAE', 'TRAABO')): ?>
+								<div class="col-auto">
+									<button id="Abono" class="btn btn-primary btn-small btn-loading flex mx-auto" amount="1">Abono
+									</button>
+								</div>
+								<?php endif; ?>
+								<?php if($this->verify_access->verifyAuthorization('TRAMAE', 'TRACAR')): ?>
+								<div class="col-auto">
+									<button id="Cargo" class="btn btn-primary btn-small btn-loading flex mx-auto" amount="1">Cargo
+									</button>
+								</div>
+								<?php endif; ?>
+							</div>
+						</form>
+						<div class="line my-2"></div>
+					</div>
 				</div>
 			</div>
 		</div>

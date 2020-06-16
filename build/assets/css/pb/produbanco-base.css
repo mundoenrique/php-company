@@ -16,9 +16,6 @@ header.main-head {
 	height: 3.75rem;
 	background-color: var(--color-primary);
 	font-weight: var(--light-font-weight);
-	background-repeat: repeat-x;
-	background-image: url(../../images/bnt/navigation.png);
-	background-size: 43.5px 64px;
 }
 
 /* Content */
@@ -346,13 +343,13 @@ textarea.form-control {
 	padding-left: 5px;
 }
 
-.forgot-pass {
+.hyper-link {
 	text-align: center;
 	color: var(--color-sixth) !important;
 	text-decoration: underline;
 }
 
-.forgot-pass:hover {
+.hyper-link:hover {
 	color: var(--color-seventh) !important;
 }
 
@@ -420,6 +417,10 @@ textarea.form-control {
 }
 
 /* Checkboxes and radios */
+
+.label {
+	color: var(--color-primary);
+}
 
 .custom-control {
 	position: relative;
@@ -1143,7 +1144,6 @@ textarea.form-control {
 
 .btn-loading-lg {
 	height: 45px;
-	text-transform: uppercase;
 }
 
 /* sizes */
@@ -1306,7 +1306,7 @@ textarea.form-control {
       rgba(246,243,241,.6),
       rgba(246,243,241,.6)
     ),
-    url("../../images/bnt/bg-content.svg");
+    url("../../images/pb/bg-content.svg");
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -2363,7 +2363,6 @@ i[class*=" icon-"].novoglyphs {
 
 .main-nav-dropdown a {
 	display: block;
-	text-transform: uppercase;
 	font-weight: 700 !important;
 	line-height: 3.41em;
 	-webkit-transition: all .25s ease;
@@ -2830,14 +2829,14 @@ table.dataTable thead th.select-checkbox:before {
 	table.dataTable tr.selected th.sorting_disabled:after{
 		content: '' !important;
 		margin-top: 1px !important;
-		background-image: url("../../images/bnt/check-white_table.svg");
+		background-image: url("../../images/pb/check-white_table.svg");
 		background-size: cover;
 	}
 
 	table.dataTable tr.selected td.select-checkbox::after {
 		content: '' !important;
 		margin-top: -5px !important;
-		background-image: url("../../images/bnt/check_table.svg");
+		background-image: url("../../images/pb/check_table.svg");
 		background-size: cover;
 	}
 }
@@ -3518,7 +3517,7 @@ a.ui-button:active,
 	height: 100%;
 	z-index: 0;
 	opacity: .4;
-	background-image: url("../../images/bnt/bg-content.svg");
+	background-image: url("../../images/pb/bg-content.svg");
 	background-repeat: no-repeat;
 	background-size: cover;
 }
@@ -3578,7 +3577,7 @@ a.ui-button:active,
 
 .bg-img {
   background-image: linear-gradient(rgba(0,0,0,.8), rgba(0,0,0,.8)),
-    url("../../images/bnt/bg-loading.jpg");
+    url("../../images/pb/bg-loading.jpg");
   height: 100vh;
   background-position: center;
   background-repeat: no-repeat;
@@ -3635,7 +3634,7 @@ a.ui-button:active,
   -o-transition: all .4s ease-in-out;
   -ms-transition: all .4s ease-in-out;
   transition: all .4s ease-in-out;
-  background: #fff url("../../images/bnt/bg-product.png");
+  background: #fff url("../../images/pb/bg-product.png");
   background-position: right;
   background-repeat: no-repeat;
   background-size: 25%;
@@ -3690,13 +3689,13 @@ a.ui-button:active,
 	bottom: 20px;
 }
 .item-network.maestro {
-	background: transparent url("../../images/bnt/logo_maestro.svg") no-repeat center / cover;
+	background: transparent url("../../images/pb/logo_maestro.svg") no-repeat center / cover;
 }
 .item-network.mastercard {
-	background: transparent url("../../images/bnt/logo_mastercard.svg") no-repeat center / cover;
+	background: transparent url("../../images/pb/logo_mastercard.svg") no-repeat center / cover;
 }
 .item-network.visa {
-	background: transparent url("../../images/bnt/logo_visa.svg") no-repeat center / cover;
+	background: transparent url("../../images/pb/logo_visa.svg") no-repeat center / cover;
 }
 
 .card-image {
