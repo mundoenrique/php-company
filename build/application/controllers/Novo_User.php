@@ -100,7 +100,7 @@ class Novo_User extends NOVO_Controller {
 			$view = 'finish';
 			$this->render->activeHeader = TRUE;
 			$this->render->showBtn = FALSE;
-			$this->render->sessionEnd = lang('RESP_DUPLICATED_SESSION');
+			$this->render->sessionEnd = lang('RESP_SINGLE_SIGNON');
 		}
 
 		$this->render->titlePage = lang('GEN_SYSTEM_NAME');

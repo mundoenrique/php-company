@@ -34,7 +34,7 @@ $config = [
 		[
 			'field' => 'tokenId',
 			'label' => 'tokenId',
-			'rules' => 'trim|regex_match[/^([\w]+)+$/i]|required'
+			'rules' => 'trim|required'
 		]
 	],
 	'finishSession' => [
