@@ -114,6 +114,10 @@ class Novo_Business extends NOVO_Controller {
 		}
 
 		$view = 'getProductDetail';
+		array_push(
+			$this->includeAssets->jsFiles,
+			"business/getProductDetail"
+		);
 
 		if(empty($requestArray)) {
 			$request = $this->session->productInf;

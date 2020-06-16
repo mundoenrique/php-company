@@ -31,4 +31,3 @@ $lang['GEN_DETAIL_BARND_COLOR'] = '_card-blue.svg';
 //Datables
 $lang['GEN_FISCAL_CLOSING_BALANCE'] = 'CURP';
 $lang['GEN_ACCOUNT_CLOSING_BALANCE'] = 'Tarjetahabiente';
-

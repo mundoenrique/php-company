@@ -166,7 +166,8 @@ if(!function_exists('languajeLoad')) {
 				$languages = [
 					'login' => ['login'],
 					'terms'	=> ['terms'],
-					'options' => ['settings']
+					'options' => ['settings'],
+					'getProductDetail'	=> ['products'],
 				];
 				break;
 			case 'co':

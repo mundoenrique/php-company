@@ -19,6 +19,9 @@
 	<div class="flex flex-auto flex-column <?= $widget ? '' : 'max-width-6';  ?>">
 		<div class="search-criteria-order flex pb-3 flex-column w-100">
 			<span class="line-text mb-2 h4 semibold primary"><?= lang('GEN_SEARCH_CRITERIA'); ?></span>
+			<div id="pre-loader2" class="mx-auto flex justify-center">
+				<span class="spinner-border spinner-border-lg my-2 none" role="status" aria-hidden="true"></span>
+			</div>
 			<div class="flex mt-2 mb-3 px-5">
 				<form id="service-orders-form" method="post" class="w-100">
 					<div class="row">
