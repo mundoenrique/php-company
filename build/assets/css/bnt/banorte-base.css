@@ -468,7 +468,7 @@ label {
 }
 
 .custom-control-input:disabled ~ .custom-control-label {
-	color: var(--color-eighth);
+	color: var(--color-sixth);
 }
 
 .custom-control-input:disabled ~ .custom-control-label::before {
@@ -476,11 +476,12 @@ label {
 }
 
 .custom-control-input:disabled:hover ~ .custom-control-label::before {
-	border-color: var(--color-eighth);
+	border-color: var(--color-sixth);
 }
 
 .custom-control-label {
 	position: relative;
+	cursor: pointer;
   margin-bottom: 0;
 	margin-top: .25rem;
 	font-weight: var(--font-weight-base);
@@ -2785,7 +2786,7 @@ td > button > i:hover{
 }
 
 .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
-  color: var(--color-primary) !important;
+  color: var(--color-primary);
   font-weight: var(--bold-font-weight) !important;
   border: none !important;
   background-color: none !important;

@@ -24,24 +24,24 @@
 				<div class="flex my-2 px-5">
 					<form id="unna-list-form" class="w-100">
 						<div class="row">
-							<div class="form-group col-4 col-xl-1">
+							<div class="form-group col-1 col-lg-1">
 								<div class="custom-option-c custom-radio custom-control-inline">
 									<input type="radio" id="all-bulks" name="all-bulks" class="custom-option-input ignore">
 									<label class="custom-option-label nowrap" for="all-bulks"><?= lang('GEN_BTN_ALL'); ?></label>
 								</div>
 								<div class="help-block"></div>
 							</div>
-							<div class="form-group col-4 col-xl-2">
+							<div class="form-group col-4 col-lg-2">
 								<label for="bulkNumber"><?= LANG('BULK_NUMBER'); ?></label>
 								<input type="text" id="bulkNumber" name="bulk-number" class="form-control h5">
 								<div class="help-block"></div>
 							</div>
-							<div class="form-group col-4 col-lg-3 col-xl-auto">
+							<div class="form-group col-4 col-lg-3">
 								<label for="initialDate"><?= lang('GEN_START_DAY'); ?></label>
 								<input id="initialDate" name="datepicker_start" class="form-control" name="datepicker" type="text" placeholder="DD/MM/AAA" readonly>
 								<div class="help-block"></div>
 							</div>
-							<div class="form-group col-4 col-lg-3 col-xl-auto">
+							<div class="form-group col-4 col-lg-3">
 								<label for="finalDate"><?= lang('GEN_END_DAY'); ?></label>
 								<input id="finalDate" name="datepicker_end" class="form-control" name="datepicker" type="text" placeholder="DD/MM/AAA" readonly>
 								<div class="help-block "></div>
