@@ -84,7 +84,7 @@ class Novo_CallModels extends Novo_Controller {
 		];
 		$replace = [
 			'', '_',
-			'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a',
+			'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a',
 			'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e',
 			'i', 'i', 'i', 'i', 'i', 'i', 'i', 'i',
 			'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o',

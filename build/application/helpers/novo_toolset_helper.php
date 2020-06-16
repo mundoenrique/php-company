@@ -128,7 +128,7 @@ if(!function_exists('languajeLoad')) {
 		$langFiles = $langFiles ?: $CI->router->fetch_method();
 		$languagesFile = [];
 		$lanGeneral = ['bdb', 'bp', 'bnt', 'co', 've', 'pb'];
-		$lanValidate = ['bdb'];
+		$lanValidate = ['bdb', 'bnt'];
 		$loadLanguages = FALSE;
 		$client = !$client ? 'default_lang' : $client;
 		log_message('INFO', 'NOVO Language '.$call.', HELPER: Language Load Initialized for controller: '.$class. ' and method: '.$langFiles);
@@ -165,7 +165,6 @@ if(!function_exists('languajeLoad')) {
 			case 'bnt':
 				$languages = [
 					'login' => ['login'],
-					'recoverPass'	=> ['validate'],
 					'terms'	=> ['terms'],
 					'options' => ['settings']
 				];
@@ -211,6 +210,14 @@ if(!function_exists('languajeLoad')) {
 					'rates'	=> ['rates'],
 					'getEnterprises'	=> ['enterprise'],
 					'obtainNumPosition'	=>['settings'],
+					'obtenerIdEmpresa'	=>['reports'],
+					'closingBudgets'	=>['reports'],
+					'exportToExcel'	=>['reports'],
+					'exportToExcelMasterAccount'	=>['reports'],
+					'exportToPDFMasterAccount'	=>['reports'],
+					'exportToExcelMasterAccountConsolid'	=>['reports'],
+					'exportToPDFMasterAccountConsolid'	=>['reports'],
+					'masterAccount'	=>['reports'],
 					'getProducts'	=> ['products'],
 					'getProductDetail'	=> ['products'],
 					'getPendingBulk'	=> ['bulk'],
@@ -230,6 +237,9 @@ if(!function_exists('languajeLoad')) {
 					'getReportsList'	=> ['reports'],
 					'getReport'	=> ['reports'],
 					'deleteFile'	=> ['reports'],
+					'userActivity'	=>['reports'],
+					'exportToExcelUserActivity'	=>['reports'],
+					'exportToPDFUserActivity'	=>['reports'],
 				];
 		}
 

@@ -92,6 +92,61 @@ $config = [
 		],
 
 	],
+	'obtenerIdEmpresa' => [
+		[
+			'field' => 'acrif',
+			'rules' => 'trim'
+		],
+
+	],
+	'closingBudgets' => [
+		[
+			'field' => 'Nit',
+			'rules' => 'trim|regex_match[/^([0-9=]+)+$/i]|'
+		],
+	],
+	'exportToExcel' => [
+		[
+			'field' => 'empresa',
+			'rules' => 'trim'
+		],
+	],
+	'exportToExcel' => [
+		[
+			'field' => 'idExtEmp',
+			'rules' => 'trim'
+		],
+	],
+	'exportToExcelMasterAccount' => [
+		[
+			'field' => 'idExtEmp',
+			'rules' => 'trim'
+		],
+	],
+	'exportToPDFMasterAccount' => [
+		[
+			'field' => 'idExtEmp',
+			'rules' => 'trim'
+		],
+	],
+	'exportToExcelMasterAccountConsolid' => [
+		[
+			'field' => 'idExtEmp',
+			'rules' => 'trim'
+		],
+	],
+	'exportToPDFMasterAccountConsolid' => [
+		[
+			'field' => 'idExtEmp',
+			'rules' => 'trim'
+		],
+	],
+	'masterAccount' => [
+		[
+			'field' => 'idExtEmp',
+			'rules' => 'trim'
+		],
+	],
 	'changeTelephones' => [
 		[
 			'field' => 'tlf1',
@@ -166,7 +221,7 @@ $config = [
 		[
 			'field' => 'enterpriseName',
 			'label' => 'enterpriseName',
-			'rules' => 'trim|regex_match[/^([\w-.,#ñÑáéíóúÑÁÉÍÓÚ\(\)&:\+]+[\s]*)+$/i]|required'
+			'rules' => 'trim|regex_match[/^([\w-.,#ñÑáéíóúÑÁÉÍÓÚ\(\)&:\+]+[\s]*)+$/i]'
 		]
 
 	],
@@ -407,7 +462,24 @@ $config = [
 		[
 			'field' => 'statusText',
 			'label' => 'statusText',
-			'rules' => 'trim|regex_match[/^([\wñáéíóú ]*)+$/i]'
+			'rules' => 'trim|regex_match[/^([\w-ñáéíóú ]+[\s]*)+$/i]'
+		]
+	],
+	'actionMasterAccount' => [
+		[
+			'field' => 'pass',
+			'label' => 'pass',
+			'rules' => 'trim|required'
+		],
+		[
+			'field' => 'cards[]',
+			'label' => 'cards',
+			'rules' => 'regex_match[/^([\w{}"*:.,]*)+$/i]|required'
+		],
+		[
+			'field' => 'action',
+			'label' => 'action',
+			'rules' => 'trim|regex_match[/^([\wñáéíóú ]+)+$/i]|required'
 		]
 	],
 	'getReport' => [
@@ -438,12 +510,12 @@ $config = [
 		[
 			'field' => 'startingLine1',
 			'label' => 'startingLine1',
-			'rules' => 'trim|alpha_numeric'
+			'rules' => 'trim|regex_match[/^[a-z0-9 ]+$/i]'
 		],
 		[
 			'field' => 'startingLine2',
 			'label' => 'startingLine2',
-			'rules' => 'trim|alpha_numeric'
+			'rules' => 'trim|regex_match[/^[a-z0-9 ]+$/i]'
 		],
 		[
 			'field' => 'branchOffice',
@@ -485,6 +557,28 @@ $config = [
 			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
 		]
 	],
+	'transfMasterAccount' => [
+		[
+			'field' => 'idNumber',
+			'label' => 'idNumber',
+			'rules' => 'trim|alpha_numeric'
+		],
+		[
+			'field' => 'cardNumber',
+			'label' => 'cardNumber',
+			'rules' => 'trim|integer'
+		],
+		[
+			'field' => 'draw',
+			'label' => 'draw',
+			'rules' => 'trim|integer|required'
+		],
+		[
+			'field' => 'length',
+			'label' => 'length',
+			'rules' => 'trim|integer|required'
+		]
+	],
 	'statusBulk' => [
 		[
 			'field' => 'enterpriseCode',
@@ -506,6 +600,18 @@ $config = [
 			'label' => 'finalDate',
 			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
 		]
+	],
+	'cardHolders' => [
+		[
+			'field' => 'enterpriseCode',
+			'label' => 'enterpriseCode',
+			'rules' => 'trim|regex_match[/^[a-z0-9]+$/i]|required'
+		],
+		[
+			'field' => 'productCode',
+			'label' => 'enterpriseCode',
+			'rules' => 'trim|regex_match[/^[a-z0-9]+$/i]|required'
+		],
 	],
 	'keepSession' => [
 		[
@@ -611,5 +717,23 @@ $config = [
 			'label' => 'marcProduc',
 			'rules' => 'trim|regex_match[/^([\w-.,#ñÑáéíóúÑÁÉÍÓÚ\(\)&:\+]+[\s]*)+$/i]|required'
 		]
-	]
+		],
+	'userActivity' => [
+		[
+			'field' => 'acCodCia',
+			'rules' => 'trim'
+		],
+	],
+	'exportToExcelUserActivity' => [
+		[
+			'field' => 'acCodCia',
+			'rules' => 'trim'
+		],
+	],
+	'exportToPDFUserActivity' => [
+		[
+			'field' => 'acCodCia',
+			'rules' => 'trim'
+		],
+	],
 ];

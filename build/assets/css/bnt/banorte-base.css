@@ -346,14 +346,14 @@ textarea.form-control {
 	padding-left: 5px;
 }
 
-.forgot-pass {
+.hyper-link {
 	text-align: center;
 	color: var(--color-sixth) !important;
 	text-decoration: underline;
 }
 
-.forgot-pass:hover {
-	color: var(--color-seventh) !important;
+.hyper-link:hover {
+	color: var(--color-primary) !important;
 }
 
 .form-control[type="text"], .form-control[type="password"], .form-control::placeholder {
@@ -573,7 +573,7 @@ label {
 }
 
 .custom-option-input:disabled ~ .custom-option-label {
-	color: var(--color-sixth)
+	color: var(--color-sixth);
 }
 
 .custom-option-input:disabled ~ .custom-option-label::before {
@@ -2044,6 +2044,7 @@ i[class*=" icon-"].novoglyphs {
 	font-family: var(--font-family-novoglyphs)
 }
 
+.icon-phone:before         { content: "\e06c"; }
 .icon-view:before          { content: "\e000"; }
 .icon-edit:before          { content: "\e001"; }
 .icon-remove:before        { content: "\e002"; }
@@ -2053,6 +2054,7 @@ i[class*=" icon-"].novoglyphs {
 .icon-download:before      { content: "\e008"; }
 .icon-upload:before        { content: "\e009"; }
 .icon-user:before          { content: "\e015"; }
+.icon-notification:before  { content: "\e025"; }
 .icon-card:before          { content: "\e029"; }
 .icon-credit-card:before	 { content: "\e031"; }
 .icon-thumbs-up:before     { content: "\e032"; }
@@ -2088,18 +2090,21 @@ i[class*=" icon-"].novoglyphs {
 .icon-card-fee:before			 { content: "\e08d"; }
 .icon-arrow-right:before   { content: "\e03e"; }
 .icon-car:before					 { content: "\e04e"; }
+.icon-book:before    			 { content: "\e02f"; }
 .icon-chevron-up:before    { content: "\e03f"; }
 .icon-bag:before 					 { content: "\e04f"; }
-
+.icon-email:before         { content: "\e007"; }
 
 .icon-user{
 	padding-right: 0 !important;
 }
+
 .icon-circle {
 	height: 20px;
 	width: 20px;
 	border-radius: 50%;
 }
+
 .icon-square {
 	width: 2em;
 	height: 1em;
