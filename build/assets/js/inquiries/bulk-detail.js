@@ -1,12 +1,14 @@
 'use strict'
 var authBulkDetail;
 $(function() {
+	$('#pre-loader').remove();
+	$('.hide-out').removeClass('hide');
 	var downLoad = $('.download');
 
 	authBulkDetail = $('#auth-bulk-detail').DataTable({
 		drawCallback: function(d) {
-			$('#pre-loader').remove();
-			$('.hide-out').removeClass('hide');
+			$('#loader-table').remove();
+			$('.hide-table').removeClass('hide');
 		},
     "ordering": false,
     "pagingType": "full_numbers",

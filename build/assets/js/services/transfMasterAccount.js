@@ -64,6 +64,7 @@ $(function () {
 				return request
 			},
 			dataFilter: function (resp) {
+				$('#tableServicesMaster').find('thead > tr').removeClass("selected")
 				var responseTable = jQuery.parseJSON(resp)
 				responseTable = JSON.parse(
 					CryptoJS.AES.decrypt(responseTable.code, responseTable.plot, { format: CryptoJSAesJson }).toString(CryptoJS.enc.Utf8)
