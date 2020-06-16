@@ -20,7 +20,7 @@
 		<div class="flex flex-auto flex-column <?= $widget ? '' : 'max-width-6'; ?>">
 			<div class="search-criteria-order flex pb-3 flex-column w-100">
 				<span class="line-text mb-2 h4 semibold primary">Criterio de búsqueda</span>
-				<div class="flex my-2 px-5">
+				<div class="flex mt-2 px-5">
 					<form id="userActivityForm" class="w-100">
 						<div class="row flex ">
 							<div class="form-group col-4 col-lg-4 col-xl-3">
@@ -48,8 +48,8 @@
 								<input id="finalDateAct" name="datepicker_end" class="form-control date-picker " type="text" placeholder="DD/MM/AAAA" readonly="" required="required" autocomplete="off" >
 								<div class="help-block "></div>
 							</div>
-							<div class="flex items-center justify-end col-4 col-lg-4 col-xl-3 ml-auto">
-								<button id="userActivity-Btn" name="userActivity_Btn" class="btn btn-primary btn-small" type="button">
+							<div class="flex items-center justify-end col-4 col-lg-4 col-xl-3 ml-auto mb-1">
+								<button id="userActivity-Btn" name="userActivity_Btn" class="btn btn-primary btn-small mb-5" type="button">
 									Buscar
 								</button>
 							</div>

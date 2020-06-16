@@ -93,7 +93,7 @@
 							<div class="help-block"></div>
 						</div>
 						<div class="flex flex-row">
-							<?php if(verifyDisplay('body', $module, lang('GEN_TAG_CANCEL_BUTTON'))): ?>
+							<?php if(lang('CONF_SERVICE_ORDER_CANCEL') == 'ON'): ?>
 							<div class="mb-3 mr-4">
 								<button id="cancel-bulk-btn" class="btn btn-link btn-small big-modal"><?= lang('GEN_BTN_CANCEL'); ?></button>
 							</div>

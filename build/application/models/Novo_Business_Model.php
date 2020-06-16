@@ -265,7 +265,7 @@ class Novo_Business_Model extends NOVO_Model {
 			]
 		];
 
-		$response = $this->sendToService('getProductDetail');
+		$response = $this->sendToService('callWs_GetProductDetail');
 		$productDetail = [
 			'name' => isset($dataRequest->productName) ? $dataRequest->productName : '',
 			'imgProgram' => $this->countryUri.'_default.svg',
@@ -293,7 +293,13 @@ class Novo_Business_Model extends NOVO_Model {
 				$this->response->code = 0;
 
 				if(isset($response->estadistica->producto->idProducto)) {
-					$imgBrand = url_title(trim(mb_strtolower($response->estadistica->producto->marca))).lang('GEN_DETAIL_BARND_COLOR');
+					$imgBrand = url_title(trim(mb_strtolower($response->estadistica->producto->marca)));
+
+					if ($imgBrand == 'visa') {
+						$imgBrand.= lang('GEN_DETAIL_BARND_COLOR');
+					} else {
+						$imgBrand.= '_card.svg';
+					}
 
 					if(!file_exists(assetPath('images/brands/'.$imgBrand))) {
 						$imgBrand = 'default.svg';
@@ -369,6 +375,6 @@ class Novo_Business_Model extends NOVO_Model {
 		$this->response->data->productDetail = (object) $productDetail;
 		$this->response->data->productSummary = (object) $productSummary;
 
-		return $this->responseToTheView('getProductDetail');
+		return $this->responseToTheView('callWs_GetProductDetail');
 	}
 }

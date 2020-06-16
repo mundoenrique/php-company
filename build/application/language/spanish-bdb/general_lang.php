@@ -11,7 +11,6 @@ $lang['GEN_PLACE_PASSWORD'] = 'Código de seguridad';
 $lang['GEN_BTN_DISASS_AUTH'] = 'En espera de autorización';
 $lang['GEN_BTN_AUTHORIZE'] = 'Aceptar';
 //DATATABLES
-$lang['GEN_TABLE_SELECT_AUTH'] = 'single';
 $lang['GEN_TABLE_COMMISSION'] = 'Valor comisión';
 $lang['GEN_TABLE_VAT'] = 'Valor IVA';
 $lang['GEN_TABLE_AMOUNT_SO'] = 'Valor OS';
