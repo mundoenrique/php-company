@@ -36,6 +36,7 @@ $lang['CONF_PAY_ACCOUNT'] = 'OFF';
 $lang['CONF_SETT_CONFIG'] = 'ON';
 //CONFIG OPTIONS FLAGS
 $lang['CONF_USER_BOOL'] = 'ON';
+$lang['CONF_CLOSING_BALANCE_BOOL'] = 'ON';
 $lang['CONF_COMPANIES_BOOL'] = 'ON';
 $lang['CONF_BRANCHES_BOOL'] = 'ON';
 $lang['CONF_DOWNLOADS_BOOL'] = 'ON';

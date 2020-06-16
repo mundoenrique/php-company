@@ -113,22 +113,25 @@ $('#buscar').on('click', function () {
 
 // ACCION EVENTO "SELECCIONAR TODOS"
 $('#select-allR').on('click', function () {
-	if ($(this).is(':checked')) {
-		$(':checkbox').each(function () {
-			this.checked = 1;
+
+	tabla = $('.table-text-service').DataTable();   
+	tabla.column(0).nodes().to$().find('[type=checkbox]').each(function(index) { 
+
+    if ($('#select-allR').prop('checked')){
+			
+      $(this).prop('checked','checked')
+
 			if ($(this).parents('tr').attr('tjta') != undefined) {
 				serv_var.lote.push($(this).parents('tr').attr('num_lote'));
 				serv_var.noTarjetas.push($(this).parents('tr').attr('tjta'));
 				serv_var.dni_tarjetas.push($(this).parents('tr').attr('id_ext_per'));
 				serv_var.estado_anterior.push($(this).parents('tr').attr('edo_anterior'));
 			}
-		});
-	} else {
-		$(':checkbox').each(function () {
-			this.checked = 0;
-		});
-		resett();
-	}
+		
+		}else{
+				$(this).prop('checked','')
+    }
+  });
 
 });
 
