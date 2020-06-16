@@ -162,9 +162,11 @@ function searchBudgets(dataForm){
 }
 
 function closingBudgets(dataForm) {
-	var URLactual = window.location.pathname.substr(1);
+var URLactual = window.location.pathname.substr(1);
 
 if(URLactual.substring(0, URLactual.length - 16) == 'bnt'){
+	var table = $('#balancesClosing').DataTable();
+	table.destroy();
 	table = $('#balancesClosing').DataTable({
 		drawCallback: function (d) {
 			insertFormInput(false)
@@ -174,7 +176,6 @@ if(URLactual.substring(0, URLactual.length - 16) == 'bnt'){
 			$('#blockBudgetResults').removeClass("hide");
 			$('#pre-loader-table').addClass('hide')
 			$('.hide-table').removeClass('hide')
-			$('#pre-loader').remove();
 			$('.hide-out').removeClass('hide');
 		},
 		"ordering": false,
@@ -248,11 +249,27 @@ if(URLactual.substring(0, URLactual.length - 16) == 'bnt'){
 					notiSystem(responseTable.title, responseTable.msg, responseTable.icon, responseTable.dataResp);
 				}
 
+				switch (responseTable.code) {
+					case 0:
+						if(responseTable.data.length < 10 ){
+							$('.dataTables_paginate').hide();
+						}
+						break;
+						case 1:
+							$('.dataTables_paginate').hide();
+							$('#export_excel').addClass('hide');
+						break;
+					default:
+						break;
+				}
 				return JSON.stringify(responseTable);
 			}
 		}
 	})
 	}else{
+		var table = $('#balancesClosing').DataTable();
+		table.destroy();
+
 		table = $('#balancesClosing').DataTable({
 			drawCallback: function (d) {
 				insertFormInput(false)
@@ -262,7 +279,6 @@ if(URLactual.substring(0, URLactual.length - 16) == 'bnt'){
 				$('#blockBudgetResults').removeClass("hide");
 				$('#pre-loader-table').addClass('hide')
 				$('.hide-table').removeClass('hide')
-				$('#pre-loader').remove();
 				$('.hide-out').removeClass('hide');
 			},
 			"ordering": false,
@@ -346,6 +362,19 @@ if(URLactual.substring(0, URLactual.length - 16) == 'bnt'){
 					notiSystem(responseTable.title, responseTable.msg, responseTable.icon, responseTable.dataResp);
 				}
 
+				switch (responseTable.code) {
+					case 0:
+						if(responseTable.data.length < 10 ){
+							$('.dataTables_paginate').hide();
+						}
+						break;
+						case 1:
+							$('.dataTables_paginate').hide();
+							$('#export_excel').addClass('hide');
+						break;
+					default:
+						break;
+				}
 				return JSON.stringify(responseTable);
 				}
 			}
