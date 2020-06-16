@@ -1,4 +1,8 @@
 $(function() {
+	$('#pre-loader').remove();
+	$('.hide-out').removeClass('hide');
+	insertFormInput(false)
+
 	$('#btn-pass-recover').on('click', function(e){
 		e.preventDefault();
 		var recoverBtn = $(this);

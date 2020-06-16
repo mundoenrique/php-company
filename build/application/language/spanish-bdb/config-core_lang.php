@@ -3,10 +3,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 //SIGNIN
 $lang['CONIFG_SIGIN_RECOVER_PASS'] = 'OFF';
 //FOOTER
-$lang['CONF_FOOTER_NETWORKS'] = FALSE;
-$lang['CONF_FOOTER_LOGO'] = TRUE;
+$lang['CONF_FOOTER_NETWORKS'] = 'OFF';
+$lang['CONF_FOOTER_LOGO'] = 'ON';
+//SUGGESTION
+$lang['CONF_SUGGESTION_IE'] = 'ON';
 //AUTHORIZE BULK LIST
 $lang['CONF_BULK_AUTHORIZE'] = 'OFF';
+$lang['CONF_BULK_SELECT_ALL_AUTH'] = 'OFF';
 //CONFIG OPTIONS FLAGS
 $lang['CONF_USER_BOOL'] = 'OFF';
 $lang['CONF_COMPANIES_BOOL'] = 'OFF';

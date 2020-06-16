@@ -1013,7 +1013,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 		$noSeeDetail = ['Z', 'Y'];
 		$allBulk = 'no-select-checkbox';
 
-		if(verifyDisplay('body', 'AuthorizeBulkList', lang('GEN_TAG_ALL_BULK'))) {
+		if(lang('CONF_BULK_SELECT_ALL_AUTH') == 'ON') {
 			$allBulk = 'toggle-all';
 		}
 

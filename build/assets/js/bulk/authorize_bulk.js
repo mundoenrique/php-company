@@ -28,7 +28,7 @@ $(function () {
 		],
 		"autoWidth": false,
     "select": {
-      "style": lang.GEN_TABLE_SELECT_SIGN,
+      "style": lang.CONF_BULK_SELECT_ALL_SIGN == 'ON' ? 'multi' : 'single',
 			selector: ':not(td:nth-child(-n+6))'
     },
     "language": dataTableLang
@@ -77,7 +77,7 @@ $(function () {
       }
 		],
 		"select": {
-      "style": lang.GEN_TABLE_SELECT_AUTH,
+      "style": lang.CONF_BULK_SELECT_ALL_AUTH == 'ON' ? 'multi' : 'single',
       "info": false,
       selector: ':not(td:nth-child(-n+6))'
     },

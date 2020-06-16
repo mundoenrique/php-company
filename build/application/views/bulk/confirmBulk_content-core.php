@@ -19,79 +19,81 @@
 		<div class="flex flex-column">
 			<span class="line-text mb-2 h4 semibold primary"><?= LANG('BULK_CONFIRM'); ?></span>
 			<div id="pre-loader" class="mx-auto flex justify-center">
-				<span class="spinner-border spinner-border-lg mt-2 mb-3 none" role="status" aria-hidden="true"></span>
+				<span class="spinner-border spinner-border-lg mt-2 mb-3" role="status" aria-hidden="true"></span>
 			</div>
-			<div class="row px-5">
-				<div class="form-group mb-3 col-4">
-					<label for="confirmNIT" id="confirmNIT"><?= lang('GEN_FISCAL_REGISTRY') ?></label>
-					<span id="confirmNIT" class="form-control px-1" readonly="readonly"><?= $detailBulk->idFiscal ?></span>
+			<div class="hide-out hide">
+				<div class="row px-5">
+					<div class="form-group mb-3 col-4">
+						<label for="confirmNIT" id="confirmNIT"><?= lang('GEN_FISCAL_REGISTRY') ?></label>
+						<span id="confirmNIT" class="form-control px-1" readonly="readonly"><?= $detailBulk->idFiscal ?></span>
+					</div>
+
+					<div class="form-group mb-3 col-4">
+						<label for="confirmName" id="confirmName"><?= lang('BULK_ENTERPRISE_NAME') ?></label>
+						<span id="confirmName" class="form-control px-1" readonly="readonly"><?= $detailBulk->enterpriseName ?></span>
+					</div>
+
+					<div class="form-group mb-3 col-4">
+						<label for="typeLot" id="typeLot"><?= lang('BULK_TYPE'); ?></label>
+						<span id="typeLotName" class="form-control px-1 bold not-processed" readonly="readonly"><?= $detailBulk->bulkType ?></span>
+					</div>
+
+					<div class="form-group mb-3 col-4">
+						<label for="regNumber" id="regNumber"><?= lang('BULK_TOTAL_RECORDS'); ?></label>
+						<span id="amountNumber" class="form-control px-1 " readonly="readonly"><?= $detailBulk->totaRecords ?></span>
+					</div>
+
+					<div class="form-group mb-3 col-4">
+						<label for="amount" id="amount"><?= LANG('BULK_AMOUNT'); ?></label>
+						<span id="totalAmount" class="form-control px-1" readonly="readonly"><?= $detailBulk->amount ?></span>
+					</div>
+
+					<div class="form-group mb-3 col-4">
+						<label for="lot" id="lot"><?= lang('BULK_NUMBER'); ?></label>
+						<span id="numLot" class="form-control px-1" readonly="readonly"><?= $detailBulk->bulkNumber ?></span>
+					</div>
+
+					<div class="form-group mb-3 col-12">
+						<label for="obsConfirm" id="obsConfirm"><?= lang('BULK_OBSERVATIONS'); ?></label>
+						<?php if(!empty($detailBulk->errors)): ?>
+						<?php foreach($detailBulk->errors AS $pos => $error): ?>
+						<span id="comment" class="form-control px-1" readonly="readonly">
+							<?= $error->line; ?>, <?= $error->msg; ?> <?= $error->detail; ?>
+						</span>
+						<?php endforeach; ?>
+						<?php else: ?>
+						<span id="comment" class="form-control px-1" readonly="readonly">
+							<?= $detailBulk->success; ?>
+						</span>
+						<?php endif; ?>
+					</div>
 				</div>
 
-				<div class="form-group mb-3 col-4">
-					<label for="confirmName" id="confirmName"><?= lang('BULK_ENTERPRISE_NAME') ?></label>
-					<span id="confirmName" class="form-control px-1" readonly="readonly"><?= $detailBulk->enterpriseName ?></span>
-				</div>
+				<div class="line mb-2"></div>
 
-				<div class="form-group mb-3 col-4">
-					<label for="typeLot" id="typeLot"><?= lang('BULK_TYPE'); ?></label>
-					<span id="typeLotName" class="form-control px-1 bold not-processed" readonly="readonly"><?= $detailBulk->bulkType ?></span>
-				</div>
-
-				<div class="form-group mb-3 col-4">
-					<label for="regNumber" id="regNumber"><?= lang('BULK_TOTAL_RECORDS'); ?></label>
-					<span id="amountNumber" class="form-control px-1 " readonly="readonly"><?= $detailBulk->totaRecords ?></span>
-				</div>
-
-				<div class="form-group mb-3 col-4">
-					<label for="amount" id="amount"><?= LANG('BULK_AMOUNT'); ?></label>
-					<span id="totalAmount" class="form-control px-1" readonly="readonly"><?= $detailBulk->amount ?></span>
-				</div>
-
-				<div class="form-group mb-3 col-4">
-					<label for="lot" id="lot"><?= lang('BULK_NUMBER'); ?></label>
-					<span id="numLot" class="form-control px-1" readonly="readonly"><?= $detailBulk->bulkNumber ?></span>
-				</div>
-
-				<div class="form-group mb-3 col-12">
-					<label for="obsConfirm" id="obsConfirm"><?= lang('BULK_OBSERVATIONS'); ?></label>
-					<?php if(!empty($detailBulk->errors)): ?>
-					<?php foreach($detailBulk->errors AS $pos => $error): ?>
-					<span id="comment" class="form-control px-1" readonly="readonly">
-						<?= $error->line; ?>, <?= $error->msg; ?> <?= $error->detail; ?>
-					</span>
-					<?php endforeach; ?>
-					<?php else: ?>
-					<span id="comment" class="form-control px-1" readonly="readonly">
-						<?= $detailBulk->success; ?>
-					</span>
-					<?php endif; ?>
-				</div>
-			</div>
-
-			<div class="line mb-2"></div>
-
-			<form id="confirm-bulk-btn" method="post">
-			<div class="flex flex-column mb-4 mt-4 px-5 justify-center items-center form-group">
-					<div class="form-group mb-3 col-5 col-lg-4 col-xl-3">
-						<div class="input-group">
-							<input id="bulkTicked" name="bulkTicked" type="hidden" value="<?= $detailBulk->bulkTicked ?>">
-							<input id="password" name="password" class="form-control pwd-input" type="password" placeholder="<?= lang('GEN_PLACE_PASSWORD'); ?>">
-							<div class="input-group-append">
-								<span class="input-group-text pwd-action" title="<?= lang('GEN_SHOW_PASS') ?>"><i class="icon-view mr-0"></i></span>
+				<form id="confirm-bulk-btn" method="post">
+					<div class="flex flex-column mb-4 mt-4 px-5 justify-center items-center form-group">
+						<div class="form-group mb-3 col-5 col-lg-4 col-xl-3">
+							<div class="input-group">
+								<input id="bulkTicked" name="bulkTicked" type="hidden" value="<?= $detailBulk->bulkTicked ?>">
+								<input id="password" name="password" class="form-control pwd-input" type="password" placeholder="<?= lang('GEN_PLACE_PASSWORD'); ?>">
+								<div class="input-group-append">
+									<span class="input-group-text pwd-action" title="<?= lang('GEN_SHOW_PASS') ?>"><i class="icon-view mr-0"></i></span>
+								</div>
+							</div>
+							<div class="help-block"></div>
+						</div>
+						<div class="flex flex-row">
+							<div class="mb-3 mr-2">
+								<a href="<?= base_url('cargar-lotes') ?>" class="btn btn-link btn-small big-modal"><?= lang('GEN_BTN_CANCEL'); ?></a>
+							</div>
+							<div class="mb-3 mr-2">
+								<button id="confirm-bulk" class="btn btn-primary  btn-loading btn-small"><?= lang('GEN_BTN_CONFIRM'); ?></button>
 							</div>
 						</div>
-						<div class="help-block"></div>
 					</div>
-					<div class="flex flex-row">
-						<div class="mb-3 mr-2">
-							<a href="<?= base_url('cargar-lotes') ?>" class="btn btn-link btn-small big-modal"><?= lang('GEN_BTN_CANCEL'); ?></a>
-						</div>
-						<div class="mb-3 mr-2">
-							<button id="confirm-bulk" class="btn btn-primary  btn-loading btn-small"><?= lang('GEN_BTN_CONFIRM'); ?></button>
-						</div>
-					</div>
-				</div>
-			</form>
+				</form>
+			</div>
 		</div>
 	</div>
 	<?php if($widget): ?>

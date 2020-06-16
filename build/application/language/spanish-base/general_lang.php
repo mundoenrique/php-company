@@ -168,8 +168,6 @@ $lang['GEN_TAG_ALL_BULK'] = 'Seleccionar todos los lotes';
 $lang['GEN_TAG_ORDER_TYPE'] = 'Tipo de orden de servicio';
 $lang['GEN_TAG_CANCEL_BUTTON'] = 'Botón cancelar generar orden de servicio';
 //DATATABLES
-$lang['GEN_TABLE_SELECT_SIGN'] = 'multi';
-$lang['GEN_TABLE_SELECT_AUTH'] = 'multi';
 $lang['GEN_TABLE_BULK_NUMBER'] = 'Nro. Lote';
 $lang['GEN_TABLE_BULK_ID'] = 'Id de lote';
 $lang['GEN_TABLE_BULK_DATE'] = 'Fecha de carga';
