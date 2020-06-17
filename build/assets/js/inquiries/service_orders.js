@@ -115,7 +115,7 @@ $(function () {
 					insertFormInput(false);
 					$('#resultServiceOrders').dataTable().fnClearTable();
     			$('#resultServiceOrders').dataTable().fnDestroy();
-					$('.hide-out').addClass('hide');
+					$('.hide-table').addClass('hide');
 				}
 			});
 		}
