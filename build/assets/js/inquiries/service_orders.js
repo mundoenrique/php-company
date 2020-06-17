@@ -1,14 +1,16 @@
 'use strict'
 var resultServiceOrders;
 $(function () {
+	$('#pre-loader').remove();
+	$('.hide-out').removeClass('hide');
 	var serviceOrdersBtn = $('#service-orders-btn');
 	var firstDate;
 	var lastdate;
 
 	resultServiceOrders = $('#resultServiceOrders').DataTable({
 		drawCallback: function (d) {
-			$('#pre-loader').remove();
-			$('.hide-out').removeClass('hide');
+			$('#loader-table').remove();
+			$('.hide-table').removeClass('hide');
 		},
 		"ordering": false,
 		"pagingType": "full_numbers",
@@ -43,7 +45,7 @@ $(function () {
 		bulkdetail.submit();
 	});
 
-	$('#datepicker_start, #datepicker_end').datepicker({
+	$('.date-picker').datepicker({
 		onSelect: function (selectedDate) {
 			var dateSelected = selectedDate.split('/');
 			dateSelected = dateSelected[1] + '/' + dateSelected[0] + '/' + dateSelected[2]
@@ -57,11 +59,9 @@ $(function () {
 
 				if (currentDate > maxTime) {
 					$('#datepicker_end').datepicker('option', 'maxDate', maxTime);
+				} else {
+					$('#datepicker_end').datepicker('option', 'maxDate', currentDate);
 				}
-			}
-
-			if (inputDate == 'datepicker_end') {
-				$('#datepicker_start').datepicker('option', 'maxDate', selectedDate);
 			}
 
 			if ($('#datepicker_start').val() != '' || $('#datepicker_end').val() != '') {
