@@ -189,7 +189,6 @@ class Novo_User extends NOVO_Controller {
 			$this->finishSession->callWs_FinishSession_User();
 		}
 
-
 		if($redirect == 'fin' || AUTO_LOGIN) {
 			$pos = array_search('menu-datepicker', $this->includeAssets->jsFiles);
 			$this->render->action = base_url('inicio');
@@ -198,6 +197,10 @@ class Novo_User extends NOVO_Controller {
 
 			if(AUTO_LOGIN) {
 				$this->render->showBtn = FALSE;
+			}
+
+			if ($this->session->flashdata('unauthorized') != NULL) {
+				$this->render->sessionEnd = $this->session->flashdata('unauthorized');
 			}
 
 			if($redirect == 'inicio') {

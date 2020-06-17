@@ -430,7 +430,7 @@ class Novo_User_Model extends NOVO_Model {
 		$this->response->msg = lang('GEN_BTN_ACCEPT');
 		$this->response->data = FALSE;
 
-		session_destroy();
+		$this->session->sess_destroy();
 		$access = [
 			'user_access',
 			'logged',
