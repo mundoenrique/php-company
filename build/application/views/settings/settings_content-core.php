@@ -1,3 +1,11 @@
+<?php
+/*
+$valor=count($this->session->userdata('enterpriseSelect')->list) > 1 ? $this->session->userdata('enterpriseInf')->enterpriseCode : $this->session->userdata('enterpriseSelect')->list[0]->accodcia;
+echo '<pre>';
+
+print_r($this->session->userdata());*/
+?>
+
 <div class="bg-color">
 	<div class="pt-3 pb-5 px-5">
 		<h1 class="primary h3 regular inline"><?= lang('GEN_SETTINGS_TITLE') ?></h1>
@@ -612,7 +620,7 @@
 								<div class="row">
 									<div id="div-download">
 										<div class="flex items-start justify-end">
-										<button id="btn-download" class="flex items-baseline btn btn-link btn-small big-modal">
+										<button id="btn-download" class="flex items-baseline btn btn-link btn-small big-modal" disabled>
 										<i aria-hidden="true" class="icon icon-download"></i>
 										&nbsp;Archivo.ini
 										</button>
