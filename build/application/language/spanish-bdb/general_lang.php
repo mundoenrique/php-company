@@ -22,3 +22,5 @@ $lang['GEN_FOTTER_RIGHTS'] = '© Todos los derechos reservados. Banco de Bogotá
 $lang['GEN_FOTTER_IMAGE_L'] = 'img-bogota_white.svg';
 $lang['GEN_FOTTER_IMAGE_R'] = 'img-pci_compliance.svg';
 $lang['GEN_FOTTER_MARK'] = 'img-mark.svg';
+//SUPPORT IE 11
+$lang['CONF_SUPPORT_IE'] = 'ON';
