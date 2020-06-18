@@ -176,7 +176,7 @@ class Verify_Access {
 				break;
 				case 'exportToExcel':
 				case 'closingBudgets':
-					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPL'));
+					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPSAL'));
 				break;
 				case 'getPendingBulk':
 				case 'loadBulk':
