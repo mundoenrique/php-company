@@ -134,7 +134,7 @@ footer.main-footer {
 
 .select-box {
 	border: .85px solid #DDDDDD;
-	text-shadow: 0 0 0 #4E4044;
+	color:#4E4044;
 }
 
 /* Checkboxes and radios */
@@ -1099,6 +1099,7 @@ table.dataTable.dtr-inline.collapsed > tbody > tr.parent > td:first-child::befor
 
 .widget {
 	background-color: #ffffff;
+	padding: 20px 35px 0 35px;
 	-webkit-box-shadow: 3px 3px 10px 0px #DDDDDD;
 	-moz-box-shadow: 3px 3px 10px 0px #DDDDDD;
 	box-shadow: 3px 3px 10px 0px #DDDDDD;
@@ -1243,12 +1244,17 @@ a.ui-button:active,
 
 /* Loading */
 /* Background para vista loading */
+
 #product-info {
 	margin-top: 6.5rem;
 }
 
 #product-info span{
   color: #4e4044;
+}
+
+.login-content {
+	padding: 5.75rem 0;
 }
 
 .login-content:before {
