@@ -383,6 +383,11 @@ $config = [
 			'field' => 'bulkNoBill',
 			'label' => 'bulkNoBill',
 			'rules' => 'trim|regex_match[/^([\w,]*)+$/i]'
+		],
+		[
+			'field' => 'otpCode',
+			'label' => 'otpCode',
+			'rules' => 'trim|alpha_numeric'
 		]
 	],
 	'bulkDetail' => [

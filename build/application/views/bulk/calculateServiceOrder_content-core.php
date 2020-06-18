@@ -8,7 +8,8 @@
 				<li class="inline"><a class="tertiary big-modal" href="<?= base_url('empresas') ?>"><?= lang('GEN_MENU_ENTERPRISE') ?></a></li> /
 				<li class="inline"><a class="tertiary big-modal" href="<?= base_url('productos') ?>"><?= lang('GEN_PRODUCTS') ?></a></li> /
 				<li class="inline"><a class="tertiary big-modal" href="<?= base_url('detalle-producto') ?>"><?= lang('PRODUCTS_DETAIL_TITLE') ?></a></li> /
-				<li class="inline"><a class="tertiary big-modal" href="<?= base_url('lotes-autorizacion') ?>"><?= lang('GEN_AUTHORIZE_BULK_TITLE') ?></a></li> /
+				<li class="inline"><a class="tertiary big-modal" href="<?= base_url('lotes-autorizacion') ?>"><?= lang('GEN_AUTHORIZE_BULK_TITLE') ?></a></li>
+				/
 				<li class="inline"><a class="tertiary not-pointer" href="javascript:"><?= lang('GEN_CACULATE_SERVICE_ORDERS') ?></a></li>
 			</ul>
 		</nav>
@@ -88,10 +89,17 @@
 				<form id="auth-bulk-form">
 					<div class="flex flex-column mb-4 px-5 justify-center items-center">
 						<div class="form-group col-4 col-lg-3">
-							<input id="temp-orders" name="temp-orders" type="hidden" value="<?= $tempOrdersId; ?>">
-							<input id="bulk-no-bill" name="bulk-no-bill" type="hidden" value="<?= $bulknotBill; ?>">
+							<input id="tempOrders" name="tempOrders" type="hidden" value="<?= $tempOrdersId; ?>">
+							<input id="bulkNoBill" name="bulkNoBill" type="hidden" value="<?= $bulknotBill; ?>">
 							<div class="help-block"></div>
 						</div>
+						<?php if (lang('CONF_SERVICE_ORDER_OTP') == 'ON'): ?>
+						<div class="form-group">
+							<label for="otpCode"><?= lang('GEN_USER'); ?></label>
+							<input id="otpCode" name="otpCode" class="form-control" type="text" autocomplete="off">
+							<div class="help-block"></div>
+						</div>
+						<?PHP endif; ?>
 						<div class="flex flex-row">
 							<?php if(lang('CONF_SERVICE_ORDER_CANCEL') == 'ON'): ?>
 							<div class="mb-3 mr-4">

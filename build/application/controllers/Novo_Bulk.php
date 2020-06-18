@@ -174,6 +174,13 @@ class Novo_Bulk extends NOVO_Controller {
 		);
 		$serviceOrdersList = $this->session->flashdata('serviceOrdersList');
 		$bulkNotBillable = $this->session->flashdata('bulkNotBillable');
+		$authToken = '';
+
+		if ($this->session->flashdata('authToken') != NULL) {
+			$authToken = $this->session->flashdata('authToken');
+			$this->session->set_flashdata('authToken', $authToken);
+		}
+
 		$this->session->set_flashdata('serviceOrdersList', $serviceOrdersList);
 		$this->session->set_flashdata('bulkNotBillable', $bulkNotBillable);
 		$this->render->serviceOrdersList = $serviceOrdersList;
