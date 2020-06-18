@@ -936,20 +936,20 @@ class Novo_Bulk_Model extends NOVO_Model {
 
 			case -5:
 			case -56:
-				$this->response->title = 'Generar orden de servicio';
-				$this->response->msg = 'No fue posible generar la orden de servicio, por favor intentalo de nuevo';
+				$this->response->title = lang('BULK_SO_CREATE_TITLE');
+				$this->response->msg = lang('BULK_SO_CREATE_FAILED');
 				$this->response->data['btn1']['action'] = 'close';
 			break;
 			case -286:
-				$this->response->title = 'Generar orden de servicio';
-				$this->response->msg = 'El código de seguridad es incorrecto, verifícalo e intenta de nuevo';
+				$this->response->title = lang('BULK_SO_CREATE_TITLE');
+				$this->response->msg = lang('BULK_SO_CREATE_INCORRECT');
 				$this->response->icon = lang('GEN_ICON_INFO');
 				$this->response->data['btn1']['action'] = 'close';
 			break;
 			case -287:
 			case -288:
-				$this->response->title = 'Generar orden de servicio';
-				$this->response->msg = 'El código de seguridad expiró o fue usado';
+				$this->response->title = lang('BULK_SO_CREATE_TITLE');
+				$this->response->msg = lang('BULK_SO_CREATE_EXPIRED');
 				$this->response->icon = lang('GEN_ICON_INFO');
 				$this->response->data['btn1']['link'] = 'lotes-autorizacion';
 				$this->response->data['btn1']['action'] = 'redirect';
