@@ -142,7 +142,7 @@ class Verify_Access {
 				case 'changePassword':
 					$auth = ($this->CI->session->flashdata('changePassword') != NULL || ($this->CI->session->has_userdata('logged')));
 					break;
-					case 'changeEmail':
+				case 'changeEmail':
 						$auth = $this->CI->session->has_userdata('logged');
 						break;
 				case 'changeTelephones':
@@ -161,19 +161,23 @@ class Verify_Access {
 				case 'getUser':
 				case 'obtainNumPosition':
 				case 'obtenerIdEmpresa':
-				case 'exportToExcel':
-				case 'exportToExcelMasterAccount':
-				case 'exportToPDFMasterAccount':
-				case 'exportToExcelMasterAccountConsolid':
-				case 'exportToPDFMasterAccountConsolid':
-				case 'masterAccount':
-				case 'closingBudgets':
 				case 'getProducts':
 				case 'keepSession':
 				case 'options':
 				case 'getProductDetail':
 					$auth = ($this->CI->session->has_userdata('logged'));
 					break;
+				case 'exportToExcelMasterAccount':
+				case 'exportToPDFMasterAccount':
+				case 'exportToExcelMasterAccountConsolid':
+				case 'exportToPDFMasterAccountConsolid':
+				case 'masterAccount':
+					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPCON'));
+				break;
+				case 'exportToExcel':
+				case 'closingBudgets':
+					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPL'));
+				break;
 				case 'getPendingBulk':
 				case 'loadBulk':
 				case 'getDetailBulk':
@@ -196,6 +200,8 @@ class Verify_Access {
 				case 'userActivity':
 				case 'exportToExcelUserActivity':
 				case 'exportToPDFUserActivity':
+					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPUSU'));
+				break;
 				case 'signBulkList':
 				case 'authorizeBulk':
 				case 'bulkDetail':
