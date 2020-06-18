@@ -496,6 +496,13 @@ $config = [
 			'rules' => 'trim|regex_match[/^[\w.]+$/i]'
 		]
 	],
+	'getFileIni' => [
+		[
+			'field' => 'operation',
+			'label' => 'operation',
+			'rules' => 'null'
+		]
+	],
 	'unnamedRequest' => [
 		[
 			'field' => 'expiredDate',

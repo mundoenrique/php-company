@@ -307,4 +307,46 @@ class Novo_Settings_Model extends NOVO_Model {
 
 		return $this->responseToTheView('AddContact');
 	}
+
+	/**
+	 * @info Método para obtener archivo de configuración .ini
+	 * @author Luis Molina
+	 * @date Jun 07Sun, 2020
+	 */
+	public function CallWs_GetFileIni_Settings($dataRequest)
+	{
+		log_message('INFO', 'NOVO Setting Model: CallWs_GetFileIni Method Initialized');
+
+		$this->className = 'ReporteCEOTO.class';
+		$this->dataAccessLog->function = 'Listado de tarjetas';
+		$this->dataAccessLog->operation = 'Descargar archivo';
+		$this->dataAccessLog->modulo = 'Reportes';
+
+		$this->dataRequest->idOperation = 216;
+		$this->dataRequest->rutaArchivo = DOWNLOAD_ROUTE;
+
+		$rif = count($this->session->userdata('enterpriseSelect')->list) > 1 ? $this->session->userdata('enterpriseInf')->idFiscal : $this->session->userdata('enterpriseSelect')->list[0]->acrif;
+		$accodcia = count($this->session->userdata('enterpriseSelect')->list) > 1 ? $this->session->userdata('enterpriseInf')->enterpriseCode : $this->session->userdata('enterpriseSelect')->list[0]->accodcia;
+		
+		$this->dataRequest->empresaCliente = [
+			'rif' => $rif,
+			'accodcia' => $accodcia
+		];
+
+		$response = $this->sendToService('CallWs_GetFileIni: '.$this->dataRequest->idOperation);
+
+		switch($this->isResponseRc) {
+			case 0:
+					$this->response->code = 0;
+					$file = $response->archivo;
+				    $name = $response->nombre;
+				    $ext =  mb_strtolower($response->formatoArchivo);
+					$this->response->data['file'] = $file;
+					$this->response->data['name'] = $name.'.'.$ext;
+					$this->response->data['ext'] = $ext;
+			break;
+		}
+
+		return $this->responseToTheView('CallWs_GetFileIni: '.$this->dataRequest->idOperation);
+	}
 }

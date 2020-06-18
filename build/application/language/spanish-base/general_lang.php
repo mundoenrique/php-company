@@ -125,6 +125,7 @@ $lang['GEN_BATCH_MANAGER'] = 'Gestor de lotes (1.759kb)';
 $lang['GEN_JAVA_JRE'] = 'Java JRE 1.6 (14.226kb)';
 $lang['GEN_FILE'] = 'Archivos de gestión Conexión Empresas Online';
 $lang['GEN_FILE_OPERATIONAL_BATCH'] = 'Archivos lotes operativos (194kb)';
+$lang['GEN_BTN_INI'] = 'Debe seleccionar una empresa para poder realizar la descarga';
 //links
 $lang['GEN_LINK_LOGIN'] = 'inicio';
 //MODAL STYLES
@@ -341,6 +342,8 @@ $lang['GEN_VALID_AMOUNT'] = 'Indica un monto válido';
 $lang['GEN_TABLE_USERACT_MODULE'] = 'Módulo';
 $lang['GEN_TABLE_USERACT_FUNCTION'] = 'Función';
 $lang['GEN_TABLE_USERACT_DATE'] = 'Fecha';
+$lang['REPORTS_TITLE'] = 'Configuración';
+$lang['REPORTS_NO_FILE_EXIST'] = 'No fue posible generar el archivo, por favor intenta de nuevo';
 //DATATABLES LANG CLOSING BALANCE
 $lang['GEN_FISCAL_CLOSING_BALANCE'] = 'NIT';
 $lang['GEN_ACCOUNT_CLOSING_BALANCE'] = 'Cuenta';
