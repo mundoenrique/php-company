@@ -11,3 +11,5 @@ $lang['CONF_VALID_INACTIVE_USER'] = 'login-inactive';
 $lang['CONF_VALID_POSITION'] = 'left';
 //MODAL STYLES
 $lang['CONF_MODAL_WIDTH'] = 310;
+//SUPPORT IE 11
+$lang['CONF_SUPPORT_IE'] = 'ON';
