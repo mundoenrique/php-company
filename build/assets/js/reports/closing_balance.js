@@ -117,24 +117,27 @@ function exportToExcel(passData) {
 			var info = dataResponse;
 			if(code == 0){
 			var File = new Int8Array(info.archivo);
-			byteArrayFile([File], 'SaldoAlCierre.xls');
+			byteArrayFile([File], 'saldosAlCierre.xls');
 			$('.cover-spin').removeAttr("style");
 		}
 })
 }
 
 var byteArrayFile = (function () {
-  var a = document.createElement("a");
-  document.body.appendChild(a);
-  a.style = "display: none";
-  return function (data, name) {
-    var blob = new Blob(data, {type: "application/xls"}),
-    url = window.URL.createObjectURL(blob);
-    a.href = url;
-    a.download = name;
-    a.click();
-    window.URL.revokeObjectURL(url);
-  };
+	var a = document.createElement("a");
+	document.body.appendChild(a);
+	return function (data, name) {
+		var blob = new Blob(data, {type: "application/xls"})
+		if( window.navigator.msSaveOrOpenBlob ) {
+			window.navigator.msSaveBlob(blob,'saldosAlCierre.xls')
+		} else {
+			url = window.URL.createObjectURL(blob);
+			a.href = url;
+			a.download = name;
+			a.click();
+			window.URL.revokeObjectURL(url);
+		}
+	};
 }());
 
 function searchBudgets(dataForm){
