@@ -324,6 +324,11 @@ footer.main-footer {
 }
 
 .sb-icon-search {
+	height: 31px;
+	padding-top: 3px;
+}
+
+.sb-icon-search {
 	background: #012c71;
 	color: #ffffff;
 	font-size: 1.25rem;

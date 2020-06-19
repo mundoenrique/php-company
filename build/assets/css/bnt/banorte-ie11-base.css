@@ -55,6 +55,33 @@ footer.main-footer {
 /* Forms
 ========================================================================== */
 
+#confirm-bulk-btn .form-group{
+	margin-bottom: 4.5rem !important;
+}
+
+#auth-bulk-form .justify-end div:nth-of-type(3){
+	flex: 0 11%;
+}
+
+#auth-bulk-form .justify-end div:nth-of-type(2){
+	flex: 0 0 25%;
+}
+
+#repTarjeta .row div:nth-of-type(1){
+	flex: 0 0 30%;
+}
+#repComprobantesVisaVale div:nth-of-type(1){
+	flex: 0 0 30%;
+}
+#repComprobantesVisaVale div:nth-of-type(2){
+	flex: 0 0 66.6%;
+	max-width: 66.6%;
+}
+#resultByNIT{
+	padding: 0 !important;
+	height: 0 !important;
+}
+
 .form-control {
 	font-weight: 400;
 	color: #4E4044;
@@ -404,6 +431,13 @@ footer.main-footer {
 .btn-link:hover {
 	color: #EB0029;
 	text-shadow: 0 0 #EB0029;
+}
+
+/* Btn-Loading */
+
+.btn-loading {
+	width: 124px;
+	height: 33.4px;
 }
 
 /* sizes */
@@ -962,6 +996,11 @@ td > button > i{
 
 td > button > i:hover{
 	text-shadow: 3px 1px 2px #DDDDDD;
+}
+
+.dataTables_length, .dataTables_filter {
+  margin-top: .5rem;
+  margin-bottom: 1.5rem;
 }
 
 .dataTables_empty {
