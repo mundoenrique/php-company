@@ -229,7 +229,7 @@ $(function() {
         selectionBussine(passData);
     });
 
- 
+
     //Download file.ini
     if(countEnterprise==1){
         $('#btn-download').removeAttr("disabled");
@@ -241,7 +241,7 @@ $(function() {
         $('#btn-download').removeClass("btn-link");
         $('#btn-download').attr('title',lang.GEN_BTN_INI);
     };
-    
+
     function btnDownload(){
         $('#btn-download').on('click', function (e) {
             e.preventDefault();
@@ -252,14 +252,18 @@ $(function() {
             callNovoCore(verb, who, where, data, function (response) {
                 if(response.code == 0) {
                        var File = new Int8Array(response.data.file);
-                    var blob = new Blob([File], {type: "application/"+response.data.ext});
-                    var url = window.URL.createObjectURL(blob);
-                    $('#download-file').attr('href', url)
-                    $('#download-file').attr('download',response.data.name)
-                    document.getElementById('download-file').click()
-                    window.URL.revokeObjectURL(url);
-                    $('#download-file').attr('href', 'javascript:')
-                    $('#download-file').attr('download', '')
+										var blob = new Blob([File], {type: "application/"+response.data.ext});
+										if (window.navigator.msSaveOrOpenBlob) {
+											window.navigator.msSaveBlob(blob, response.data.name)
+										} else {
+											var url = window.URL.createObjectURL(blob);
+											$('#download-file').attr('href', url)
+											$('#download-file').attr('download',response.data.name)
+											document.getElementById('download-file').click()
+											window.URL.revokeObjectURL(url);
+											$('#download-file').attr('href', 'javascript:')
+											$('#download-file').attr('download', '')
+										}
                 }
                 insertFormInput(false);
                 $('.cover-spin').hide();
