@@ -88,18 +88,18 @@
 				</div>
 				<form id="auth-bulk-form">
 					<div class="flex flex-column mb-4 px-5 justify-center items-center">
+						<?php if (lang('CONF_SERVICE_ORDER_OTP') == 'ON'): ?>
+						<div class="form-group col-6 col-xl-4 center">
+							<label for="otpCode" class="pb-1 regular"><?= lang('GEN_OTP'); ?></label>
+							<input id="otpCode" name="otpCode" class="form-control col-6 block m-auto" type="text" autocomplete="off">
+							<div class="help-block center"></div>
+						</div>
+						<?PHP endif; ?>
 						<div class="form-group col-4 col-lg-3">
 							<input id="tempOrders" name="tempOrders" type="hidden" value="<?= $tempOrdersId; ?>">
 							<input id="bulkNoBill" name="bulkNoBill" type="hidden" value="<?= $bulknotBill; ?>">
 							<div class="help-block"></div>
 						</div>
-						<?php if (lang('CONF_SERVICE_ORDER_OTP') == 'ON'): ?>
-						<div class="form-group">
-							<label for="otpCode"><?= lang('GEN_USER'); ?></label>
-							<input id="otpCode" name="otpCode" class="form-control" type="text" autocomplete="off">
-							<div class="help-block"></div>
-						</div>
-						<?PHP endif; ?>
 						<div class="flex flex-row">
 							<?php if(lang('CONF_SERVICE_ORDER_CANCEL') == 'ON'): ?>
 							<div class="mb-3 mr-4">
