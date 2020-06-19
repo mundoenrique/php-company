@@ -319,3 +319,20 @@ function getDataForm(form) {
 
 	return dataForm
 }
+
+function downLoadfiles (data) {
+	var File = new Int8Array(data.file);
+	var blob = new Blob([File], {type: "application/"+data.ext});
+	if (window.navigator.msSaveOrOpenBlob) {
+		window.navigator.msSaveBlob(blob, data.name)
+	} else {
+		var url = window.URL.createObjectURL(blob);
+		$('#download-file').attr('href', url)
+		$('#download-file').attr('download', data.name)
+		document.getElementById('download-file').click()
+		window.URL.revokeObjectURL(url);
+		$('#download-file').attr('href', lang.GEN_NO_LINK)
+		$('#download-file').attr('download', '')
+	}
+	$('.cover-spin').hide()
+}
