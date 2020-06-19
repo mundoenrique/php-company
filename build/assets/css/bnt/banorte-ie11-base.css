@@ -794,7 +794,7 @@ footer.main-footer {
 
 .bg-items      { color: #ffffff !important }
 
-.not-processed   { color: var(--not-processed) !important }
+.not-processed   { color: #ff8c94 !important }
 
 /* Icons, Logos
 ========================================================================== */
@@ -864,7 +864,7 @@ i[class*=" icon-"].novoglyphs {
 /* Spinner */
 
 .spinner-border {
-	color: #4E4044;
+	color: #4E4044 !important;
 }
 
 .cover-spin::after {
@@ -1348,7 +1348,7 @@ select::-ms-expand {
 
 /* Others */
 .logout-content {
-	padding-top: 10rem;
+	padding-top: 7rem !important;
 }
 
 .logout-content h1{
