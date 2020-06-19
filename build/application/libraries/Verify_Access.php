@@ -172,6 +172,8 @@ class Verify_Access {
 				case 'keepSession':
 				case 'options':
 				case 'getProductDetail':
+				case 'getFileIni':
+				case 'deleteFile':
 					$auth = ($this->CI->session->has_userdata('logged'));
 					break;
 				case 'getPendingBulk':
@@ -231,7 +233,6 @@ class Verify_Access {
 					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPALL'));
 					break;
 				case 'getReport':
-				case 'deleteFile':
 					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPALL', 'REPALL'));
 					break;
 				case 'accountStatus':

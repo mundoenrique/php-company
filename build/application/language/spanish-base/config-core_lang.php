@@ -23,6 +23,7 @@ $lang['CONF_UNNA_EXPIRED_DATE'] = 'ON';
 $lang['CONF_UNNA_ACCOUNT_NUMBER_HEADER'] = 'ON';
 //CALCULATE SERVICE ORDER
 $lang['CONF_SERVICE_ORDER_CANCEL'] = 'ON';
+$lang['CONF_SERVICE_ORDER_OTP'] = 'OFF';
 //FOOTER
 $lang['CONF_FOOTER_NETWORKS'] = 'ON';
 $lang['CONF_FOOTER_LOGO'] = 'OFF';
@@ -56,6 +57,8 @@ $lang['CONF_MANUAL_BOOL'] = 'ON';
 $lang['CONF_VIDEO_BOOL'] = 'ON';
 $lang['CONF_APPS_BOOL'] = 'ON';
 $lang['CONF_FILES_MANAGMENT_BOOL'] = 'ON';
+$lang['CONF_FILE_SERVICE_BOOL'] = 'ON';
+
 //TEXT CONF
 $lang['CONF_DOWNLOADS'] = 'Descargas';
 $lang['CONF_MANUALS'] = 'Manuales';

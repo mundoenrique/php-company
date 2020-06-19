@@ -32,6 +32,8 @@ $(function () {
 
 				if (currentDate > maxTime) {
 					$('#finalDate').datepicker('option', 'maxDate', maxTime);
+				} else {
+					$('#finalDate').datepicker('option', 'maxDate', currentDate);
 				}
 			}
 

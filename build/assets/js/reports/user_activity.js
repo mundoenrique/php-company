@@ -7,23 +7,22 @@ $(function () {
 	$('#titleResults').addClass('hide');
 
 	datePicker.datepicker({
-	onSelect: function (selectedDate) {
-		var dateSelected = selectedDate.split('/');
-		dateSelected = dateSelected[1] + '/' + dateSelected[0] + '/' + dateSelected[2]
-		var inputDate = $(this).attr('id');
-		var maxTime = new Date(dateSelected);
+		onSelect: function (selectedDate) {
+			var dateSelected = selectedDate.split('/');
+			dateSelected = dateSelected[1] + '/' + dateSelected[0] + '/' + dateSelected[2]
+			var inputDate = $(this).attr('id');
+			var maxTime = new Date(dateSelected);
 
-		if (inputDate == 'initialDateAct') {
-			$('#finalDateAct').datepicker('option', 'minDate', selectedDate);
-			maxTime.setDate(maxTime.getDate() - 1);
-			maxTime.setMonth(maxTime.getMonth() + 3);
+			if (inputDate == 'initialDateAct') {
+				$('#finalDateAct').datepicker('option', 'minDate', selectedDate);
+				maxTime.setDate(maxTime.getDate() - 1);
+				maxTime.setMonth(maxTime.getMonth() + 3);
 
-			if (currentDate > maxTime) {
-				$('#finalDateAct').datepicker('option', 'maxDate', maxTime);
-			}
-		}
-			if (inputDate == 'finalDateAct') {
-			$('#initialDateAct').datepicker('option', 'maxDate', selectedDate);
+				if (currentDate > maxTime) {
+					$('#finalDateAct').datepicker('option', 'maxDate', maxTime);
+				} else {
+					$('#finalDateAct').datepicker('option', 'maxDate', currentDate);
+				}
 			}
 		}
 	});

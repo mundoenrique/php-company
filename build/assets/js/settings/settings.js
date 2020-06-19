@@ -1,5 +1,4 @@
 $(document).ready(function() {
-
     //vars
     var options = document.querySelectorAll(".nav-item-config");
     var i;
@@ -230,8 +229,43 @@ $(function() {
         selectionBussine(passData);
     });
 
-    // Selector empresas End
-
+ 
+    //Download file.ini
+    if(countEnterprise==1){
+        $('#btn-download').removeAttr("disabled");
+        btnDownload();
+    }else if(countEnterprise > 1 && enterpriseInf != 0){
+        $('#btn-download').removeAttr("disabled");
+        btnDownload();
+    } else {
+        $('#btn-download').removeClass("btn-link");
+        $('#btn-download').attr('title',lang.GEN_BTN_INI);
+    };
+    
+    function btnDownload(){
+        $('#btn-download').on('click', function (e) {
+            e.preventDefault();
+            data = {};
+            insertFormInput(true);
+            verb = 'POST'; who = 'Settings'; where = 'getFileIni';
+            $('.cover-spin').show(0);
+            callNovoCore(verb, who, where, data, function (response) {
+                if(response.code == 0) {
+                       var File = new Int8Array(response.data.file);
+                    var blob = new Blob([File], {type: "application/"+response.data.ext});
+                    var url = window.URL.createObjectURL(blob);
+                    $('#download-file').attr('href', url)
+                    $('#download-file').attr('download',response.data.name)
+                    document.getElementById('download-file').click()
+                    window.URL.revokeObjectURL(url);
+                    $('#download-file').attr('href', 'javascript:')
+                    $('#download-file').attr('download', '')
+                }
+                insertFormInput(false);
+                $('.cover-spin').hide();
+            })
+        })
+    };
 
 });
 

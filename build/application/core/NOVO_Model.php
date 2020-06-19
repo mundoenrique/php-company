@@ -6,6 +6,7 @@ class NOVO_Model extends CI_Model {
 	public $className;
 	public $accessLog;
 	public $token;
+	public $autoLogin;
 	public $country;
 	public $countryUri;
 	public $dataRequest;
@@ -24,6 +25,7 @@ class NOVO_Model extends CI_Model {
 		$this->country = $this->session->has_userdata('countrySess') ? $this->session->countrySess : $this->config->item('country');
 		$this->countryUri = $this->session->countryUri;
 		$this->token = $this->session->token ?: '';
+		$this->autoLogin = $this->session->autoLogin ?: '';
 		$this->userName = $this->session->userName;
 	}
 	/**
@@ -41,6 +43,7 @@ class NOVO_Model extends CI_Model {
 		$this->dataRequest->className = $this->className;
 		$this->dataRequest->logAccesoObject = $this->accessLog;
 		$this->dataRequest->token = $this->token;
+		$this->dataRequest->autoLogin = $this->autoLogin;
 		$this->dataRequest->pais = $this->country;
 		$encryptData = $this->encrypt_connect->encode($this->dataRequest, $this->userName, $model);
 		$request = ['bean'=> $encryptData, 'pais'=> $this->country];
