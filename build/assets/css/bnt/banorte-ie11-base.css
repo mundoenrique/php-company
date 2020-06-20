@@ -31,7 +31,7 @@ header.main-head {
 
 /* Content */
 main.content {
-	min-height: 100vh;
+	min-height: calc(100vh - 3.75rem);
 	background-color: #DDDDDD !important;
 }
 
