@@ -259,7 +259,7 @@ var byteArrayFile = (function () {
 		if( window.navigator.msSaveOrOpenBlob ) {
 			window.navigator.msSaveBlob(blob,'actividadUsuario.xls')
 		} else {
-			url = window.URL.createObjectURL(blob);
+			var url = window.URL.createObjectURL(blob);
 			a.href = url;
 			a.download = name;
 			a.click();
@@ -276,7 +276,7 @@ var byteArrayPDFFile = (function () {
 		if( window.navigator.msSaveOrOpenBlob ) {
 			window.navigator.msSaveBlob(blob,'actividadUsuario.pdf')
 		} else {
-			url = window.URL.createObjectURL(blob);
+			var url = window.URL.createObjectURL(blob);
 			a.href = url;
 			a.download = name;
 			a.click();

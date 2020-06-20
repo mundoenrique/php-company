@@ -131,7 +131,7 @@ var byteArrayFile = (function () {
 		if( window.navigator.msSaveOrOpenBlob ) {
 			window.navigator.msSaveBlob(blob,'saldosAlCierre.xls')
 		} else {
-			url = window.URL.createObjectURL(blob);
+			var url = window.URL.createObjectURL(blob);
 			a.href = url;
 			a.download = name;
 			a.click();
