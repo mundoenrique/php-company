@@ -2149,7 +2149,7 @@ i[class*=" icon-"].novoglyphs {
   display: inline-flex;
   width: 1.5rem;
   height: 1.5rem;
-	color: var(--color-sixth) !important;
+	color: var(--color-sixth);
   border: .2em solid currentColor;
   border-right-color: transparent;
   border-radius: 50%;

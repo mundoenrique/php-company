@@ -31,6 +31,7 @@ header.main-head {
 
 /* Content */
 main.content {
+	min-height: 100vh;
 	background-color: #DDDDDD !important;
 }
 
@@ -182,7 +183,7 @@ footer.main-footer {
 }
 
 .custom-control-input:disabled ~ .custom-control-label {
-	color: #DDDDDD;
+	color: #4E4044;
 }
 
 .custom-control-input:disabled ~ .custom-control-label::before {
@@ -806,57 +807,6 @@ i[class*=" icon-"].novoglyphs {
 	font-family: 'novoglyphs'
 }
 
-.icon-phone:before         { content: "\e06c"; }
-.icon-view:before          { content: "\e000"; }
-.icon-edit:before          { content: "\e001"; }
-.icon-remove:before        { content: "\e002"; }
-.icon-ok:before            { content: "\e003"; }
-.icon-cancel:before        { content: "\e004"; }
-.icon-find:before          { content: "\e005"; }
-.icon-download:before      { content: "\e008"; }
-.icon-upload:before        { content: "\e009"; }
-.icon-user:before          { content: "\e015"; }
-.icon-notification:before  { content: "\e025"; }
-.icon-card:before          { content: "\e029"; }
-.icon-credit-card:before	 { content: "\e031"; }
-.icon-thumbs-up:before     { content: "\e032"; }
-.icon-chevron-down:before  { content: "\e040"; }
-.icon-chevron-left:before  { content: "\e041"; }
-.icon-chevron-right:before { content: "\e042"; }
-.icon-hand-up:before       { content: "\e043"; }
-.icon-hand-down:before     { content: "\e044"; }
-.icon-hand-left:before     { content: "\e045"; }
-.icon-hand-right:before    { content: "\e046"; }
-.icon-food:before 				 { content: "\e050"; }
-.icon-film:before 				 { content: "\e051"; }
-.icon-lab:before 					 { content: "\e052"; }
-.icon-suitcase:before 		 { content: "\e053"; }
-.icon-plane:before 				 { content: "\e054"; }
-.icon-medkit:before 			 { content: "\e055"; }
-.icon-asterisk:before 		 { content: "\e056"; }
-.icon-file-blank:before 	 { content: "\e057"; }
-.icon-file-graph:before 	 { content: "\e058"; }
-.icon-file-pdf:before 		 { content: "\e059"; }
-.icon-spinner:before 			 { content: "\e060"; }
-.icon-balance:before 			 { content: "\e072"; }
-.icon-key:before 					 { content: "\e01a"; }
-.icon-file-word:before     { content: "\e05a"; }
-.icon-lock:before 				 { content: "\e01b"; }
-.icon-arrow-up:before      { content: "\e03b"; }
-.icon-info:before        	 { content: "\e04b"; }
-.icon-file-excel:before 	 { content: "\e05b"; }
-.icon-unlock:before 			 { content: "\e01c"; }
-.icon-arrow-down:before    { content: "\e03c"; }
-.icon-chart-pie:before  	 { content: "\e04c"; }
-.icon-arrow-left:before    { content: "\e03d"; }
-.icon-card-fee:before			 { content: "\e08d"; }
-.icon-arrow-right:before   { content: "\e03e"; }
-.icon-car:before					 { content: "\e04e"; }
-.icon-book:before    			 { content: "\e02f"; }
-.icon-chevron-up:before    { content: "\e03f"; }
-.icon-bag:before 					 { content: "\e04f"; }
-.icon-email:before         { content: "\e007"; }
-
 .icon-chevron-down:hover {
   color: #ffffff !important;
 }
@@ -864,7 +814,7 @@ i[class*=" icon-"].novoglyphs {
 /* Spinner */
 
 .spinner-border {
-	color: #4E4044 !important;
+	color: #4E4044;
 }
 
 .cover-spin::after {
@@ -1298,6 +1248,10 @@ a.ui-button:active,
 
 .login-content:before {
 	content: none !important;
+}
+
+.ui-dialog-buttonpane .btn {
+	width: 6.75rem;
 }
 
 .login-content .z1{
