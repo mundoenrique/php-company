@@ -40,3 +40,4 @@ $lang['VALIDATE_STARTING_LINE'] = 'Solo se admiten letras, números y espacios';
 $lang['VALIDATE_BULK_NUMBER'] = 'Solo se admiten números';
 $lang['VALIDATE_DATE_DMY'] = 'Indica una fecha válida dd/mm/aaaa';
 $lang['VALIDATE_SELECT'] = 'Selecciona al menos un registro';
+$lang['VALIDATE_OS_OTP'] = 'Indica un código de seguridad válido';

@@ -241,6 +241,7 @@ if(!function_exists('languajeLoad')) {
 					'userActivity'	=>['reports'],
 					'exportToExcelUserActivity'	=>['reports'],
 					'exportToPDFUserActivity'	=>['reports'],
+					'serviceOrder' => ['bulk'],
 				];
 		}
 

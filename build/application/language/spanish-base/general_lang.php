@@ -1,5 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+//SUPPORT IE 11
+$lang['CONF_SUPPORT_IE'] = 'OFF';
 //MENU
 $lang['GEN_MENU_ENTERPRISE'] = 'Empresas';
 $lang['GEN_MENU_LOTS'] = 'Lotes';
@@ -125,6 +127,7 @@ $lang['GEN_BATCH_MANAGER'] = 'Gestor de lotes (1.759kb)';
 $lang['GEN_JAVA_JRE'] = 'Java JRE 1.6 (14.226kb)';
 $lang['GEN_FILE'] = 'Archivos de gestión Conexión Empresas Online';
 $lang['GEN_FILE_OPERATIONAL_BATCH'] = 'Archivos lotes operativos (194kb)';
+$lang['GEN_BTN_INI'] = 'Debe seleccionar una empresa para poder realizar la descarga';
 //links
 $lang['GEN_LINK_LOGIN'] = 'inicio';
 //MODAL STYLES
@@ -182,7 +185,7 @@ $lang['GEN_TABLE_AMOUNT'] = 'Monto';
 $lang['GEN_TABLE_COMMISSION'] = 'Monto comisión';
 $lang['GEN_TABLE_VAT'] = 'Monto IVA';
 $lang['GEN_TABLE_AMOUNT_SO'] = 'Monto OS';
-$lang['GEN_TABLE_TOTAL_AMOUNT'] = 'Monto Total';
+$lang['GEN_TABLE_TOTAL_AMOUNT'] = 'Monto total';
 $lang['GEN_TABLE_BALANCE_AVIABLE'] = 'Saldo';
 $lang['GEN_TABLE_DEPOSIT_AMOUNT'] = 'Monto depositado';
 $lang['GEN_TABLE_OPTIONS'] = 'Opciones';
@@ -337,10 +340,13 @@ $lang['GEN_TEMPORARY_LOCK'] = 'Bloqueo temporal';
 $lang['GEN_UNLOCK_CARD'] = 'Desbloqueo tarjeta';
 $lang['GEN_CARD_ASSIGNMENT'] = 'Asignación tarjeta';
 $lang['GEN_VALID_AMOUNT'] = 'Indica un monto válido';
+$lang['GEN_OTP'] = 'Ingresa el código de verificación enviado a tu correo';
 //DATATABLES LANG MASTER ACCOUNT
 $lang['GEN_TABLE_USERACT_MODULE'] = 'Módulo';
 $lang['GEN_TABLE_USERACT_FUNCTION'] = 'Función';
 $lang['GEN_TABLE_USERACT_DATE'] = 'Fecha';
+$lang['REPORTS_TITLE'] = 'Configuración';
+$lang['REPORTS_NO_FILE_EXIST'] = 'No fue posible generar el archivo, por favor intenta de nuevo';
 //DATATABLES LANG CLOSING BALANCE
 $lang['GEN_FISCAL_CLOSING_BALANCE'] = 'NIT';
 $lang['GEN_ACCOUNT_CLOSING_BALANCE'] = 'Cuenta';

@@ -619,6 +619,11 @@ $config = [
 			'field' => 'bulkNoBill',
 			'label' => 'bulkNoBill',
 			'rules' => 'trim|regex_match[/^([\w,]*)+$/i]'
+		],
+		[
+			'field' => 'otpCode',
+			'label' => 'otpCode',
+			'rules' => 'trim|alpha_numeric'
 		]
 	],
 	'bulkDetail' => [
@@ -730,6 +735,13 @@ $config = [
 			'field' => 'fileName',
 			'label' => 'fileName',
 			'rules' => 'trim|regex_match[/^[\w.]+$/i]'
+		]
+	],
+	'getFileIni' => [
+		[
+			'field' => 'operation',
+			'label' => 'operation',
+			'rules' => 'null'
 		]
 	],
 	'unnamedRequest' => [

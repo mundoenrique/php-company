@@ -1,5 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+//SUPPORT IE 11
+$lang['CONF_SUPPORT_IE'] = 'ON';
 //MENU
 $lang['GEN_MENU_ENTERPRISE'] = 'Empresa';
 //GENERAL LANGUAGE

@@ -82,6 +82,7 @@ class Novo_User_Model extends NOVO_Model {
 					'cl_addr' => $this->encrypt_connect->encode($this->input->ip_address(), $userName, 'REMOTE_ADDR'),
 					'countrySess' => $this->config->item('country'),
 					'countryUri' => $this->config->item('country-uri'),
+					'autoLogin' => 'false',
 					'idUsuario' => $response->usuario->idUsuario,
 					'pais' => $this->config->item('country'),
 					'nombreCompleto' => $fullName,
@@ -226,6 +227,7 @@ class Novo_User_Model extends NOVO_Model {
 					'cl_addr' => $this->encrypt_connect->encode($this->input->ip_address(), $this->country, 'REMOTE_ADDR'),
 					'countrySess' => $this->config->item('country'),
 					'countryUri' => $this->config->item('country-uri'),
+					'autoLogin' => 'true',
 				];
 				$this->session->set_userdata($userData);
 				$this->response->code = 0;
@@ -428,7 +430,7 @@ class Novo_User_Model extends NOVO_Model {
 		$this->response->msg = lang('GEN_BTN_ACCEPT');
 		$this->response->data = FALSE;
 
-		session_destroy();
+		$this->session->sess_destroy();
 		$access = [
 			'user_access',
 			'logged',
