@@ -1,15 +1,17 @@
 @font-face {
   font-family: 'Gotham Book';
   font-style: normal;
-  font-weight: 300;
-  src: url('../../fonts/bnt/Gotham-Book.ttf') format('truetype');
+	font-weight: 300;
+	src: url('../../fonts/bnt/Gotham-Book.eot');
+  src: url('../../fonts/bnt/Gotham-Book.woff') format('woff'), url('../../fonts/bnt/Gotham-Book.ttf') format('truetype');
 }
 
 @font-face {
   font-family: 'Gotham Book';
   font-style: normal;
-  font-weight: 700;
-  src: url('../../fonts/bnt/Gotham-Bold.ttf') format('truetype');
+	font-weight: 700;
+	src: url('../../fonts/bnt/Gotham-Bold.eot');
+  src: url('../../fonts/bnt/Gotham-Bold.woff') format('woff'), url('../../fonts/bnt/Gotham-Bold.ttf') format('truetype');
 }
 
 @font-face {
@@ -24,21 +26,6 @@
   font-style: normal;
   font-weight: 700;
   src: url('../../fonts/bnt/Roboto-Bold.ttf') format('truetype');
-}
-
-@font-face {
-	font-family: "NovoPayment Glyphs";
-	font-style: normal;
-	font-weight: normal;
-	src: url('../../fonts/novopayment-glyphs-webfont.eot?#iefix');
-	src: url(../fonts/novopayment-glyphs-webfont.eot?#iefix),
-			 url('../../fonts/novopayment-glyphs-webfont.eot?#iefix') format('embedded-opentype'),
-			 url(../fonts/novopayment-glyphs-webfont.eot?#iefix) format('embedded-opentype'),
-       url('../../fonts/novopayment-glyphs-webfont.woff') format('woff'),
-			 url('../../fonts/novopayment-glyphs-webfont.ttf') format('truetype'),
-			 url(../fonts/novopayment-glyphs-webfont.ttf) format('truetype'),
-       url('../../fonts/novopayment-glyphs-webfont.svg') format('svg'),
-       url(../fonts/novopayment-glyphs-webfont.svg) format('svg');
 }
 
 *, ::before, ::after {

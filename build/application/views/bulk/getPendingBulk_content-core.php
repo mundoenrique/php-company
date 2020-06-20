@@ -64,8 +64,10 @@
 		</div>
 		<div class="flex flex-column">
 			<span class="line-text mb-2 h4 semibold primary"><?= lang('BULK_PENDING'); ?></span>
-			<div id="pre-loader" class="mt-2 mx-auto">
-				<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
+			<div class="flex">
+				<div id="pre-loader" class="mt-2 mx-auto">
+					<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
+				</div>
 			</div>
 			<div id="content-datatable" class="center mx-1 hide">
 				<table id="pending-bulk" class="cell-border h6 display">

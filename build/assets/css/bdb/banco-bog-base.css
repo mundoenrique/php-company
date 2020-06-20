@@ -920,7 +920,7 @@ label {
 	color: var(--color-fifth);
 	z-index: 90;
 	font-size: var(--h3);
-	height: 29.6px;
+	height: 31.5px;
 	-webkit-padding-before: 2px;
 }
 
@@ -940,7 +940,7 @@ label {
 	background: var(--color-primary);
 	color: var(--color-fifth);
 	z-index: 11;
-	height: 29.7px;
+	height: 31.5px;
 }
 
 @media (min-width: 768px) {
@@ -952,6 +952,12 @@ label {
 @media (min-width: 1024px) {
 	.sb-search.sb-search-open, .no-js .sb-search {
 		width: 20%;
+	}
+}
+
+@supports (-webkit-appearance:none) {
+	.sb-icon-search	.icon-find {
+		margin-top: 2px;
 	}
 }
 

@@ -81,7 +81,7 @@ $(function() {
 		e.preventDefault();
 		insertFormInput(true, enterpriseWidgetForm);
 		$(this).html(loader);
-		$(this).find('span').addClass('spinner-border-sm');
+		$(this).find('span').addClass('spinner-border-sm text');
 		enterpriseWidgetForm.append("<input type='hidden' name='enterpriseCode' value=" + enterpriseCode + ">");
 		enterpriseWidgetForm.append("<input type='hidden' name='enterpriseGroup' value=" + enterpriseGroup + ">");
 		enterpriseWidgetForm.append("<input type='hidden' name='idFiscal' value=" + idFiscal + ">");

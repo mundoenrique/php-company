@@ -106,17 +106,19 @@
 				</div>
 				<div class="line mb-2"></div>
 			</div>
-			<div id="pre-loader-table" class="mt-2 mx-auto hide">
-				<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
+			<div class="flex">
+				<div id="pre-loader-table" class="mt-2 mb-4 mx-auto hide">
+					<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
+				</div>
 			</div>
 			<div class="hide-table hide">
 				<div class="flex pb-5 flex-column">
 					<span class="line-text mb-2 h4 semibold primary">Resultados</span>
 					<div class="center mx-1">
 						<div class="flex ml-4 py-3 flex-auto justify-between">
-							<p class="mr-5 h5 semibold tertiary">Saldo disponible <span id="balance-aviable" class="light text"></span></p>
-							<p class="mr-5 mb-0 h5 semibold tertiary">Comisión por transacción <span id="cost-trans" class="light text">0</span></p>
-							<p class="mr-5 mb-0 h5 semibold tertiary">Comisión por Consultar saldo <span id="cost-inquiry" class="light text">0</span></p>
+							<p class="mr-5 h5 semibold tertiary">Saldo disponible: <span id="balance-aviable" class="light text"></span></p>
+							<p class="mr-5 mb-0 h5 semibold tertiary">Comisión por transacción: <span id="cost-trans" class="light text">0</span></p>
+							<p class="mr-5 mb-0 h5 semibold tertiary">Comisión por Consultar saldo: <span id="cost-inquiry" class="light text">0</span></p>
 						</div>
 
 						<table id="tableServicesMaster" class="cell-border h6 display w-100">
