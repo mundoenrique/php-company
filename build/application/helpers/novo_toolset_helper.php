@@ -251,16 +251,6 @@ if(!function_exists('languageLoad')) {
 			$loadLanguages = TRUE;
 		}
 
-		/* if(in_array($client, $lanGeneral)) {
-			array_unshift($languagesFile, 'general');
-			$loadLanguages = TRUE;
-		}
-
-		if(in_array($client, $lanValidate)) {
-			array_unshift($languagesFile, 'validate');
-			$loadLanguages = TRUE;
-		} */
-
 		if (file_exists($pathLang.'config'.$CI->config->item('new-views').'_lang.php')) {
 			array_unshift($languagesFile, 'config'.$CI->config->item('new-views'));
 			$loadLanguages = TRUE;
@@ -277,7 +267,6 @@ if(!function_exists('languageLoad')) {
 			}
 		}
 
-		log_message('info', '******************************Language '.json_encode($languagesFile));
 		if($loadLanguages) {
 			$CI->lang->load($languagesFile);
 		}
