@@ -42,12 +42,6 @@ class Verify_Access {
 
 		languageLoad('generic', NULL, $rule);
 		$this->CI->config->set_item('language', 'spanish-'.$countryUri);
-		$newViews = $this->CI->config->item('new-views');
-
-		if($newViews != '') {
-			$this->CI->lang->load('config'.$newViews);
-		}
-
 		languageLoad('specific', $countryUri, $rule);
 
 		return $result;

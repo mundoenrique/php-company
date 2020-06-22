@@ -1,7 +1,5 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-//SUPPORT IE 11
-$lang['CONF_SUPPORT_IE'] = 'ON';
 //GENERAL LANGUAGE
 $lang['GEN_ENTERPRISE_LIST'] = 'empresas';
 $lang['GEN-LOGO-HEADER'] = 'img-logo.svg';
@@ -24,3 +22,4 @@ $lang['GEN_FOTTER_RIGHTS'] = '© Todos los derechos reservados. Banco de Bogotá
 $lang['GEN_FOTTER_IMAGE_L'] = 'img-bogota_white.svg';
 $lang['GEN_FOTTER_IMAGE_R'] = 'img-pci_compliance.svg';
 $lang['GEN_FOTTER_MARK'] = 'img-mark.svg';
+$lang['RESP_PASSWORD_NO_VALID'] = 'Por favor verifica el código de seguridad y vuelve a intentarlo';

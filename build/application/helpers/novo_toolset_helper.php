@@ -121,7 +121,7 @@ if(!function_exists('maskString')) {
 	}
 }
 
-if(!function_exists('languajeLoad')) {
+if(!function_exists('languageLoad')) {
 	function languageLoad($call, $client = 'default_lang', $langFiles = FALSE) {
 		$CI = &get_instance();
 		$class = $CI->router->fetch_class();
@@ -131,6 +131,7 @@ if(!function_exists('languajeLoad')) {
 		$lanValidate = ['bdb', 'bnt'];
 		$loadLanguages = FALSE;
 		$client = !$client ? 'default_lang' : $client;
+		$pathLang = APPPATH.'language'.DIRECTORY_SEPARATOR.$CI->config->item('language').DIRECTORY_SEPARATOR;
 		log_message('INFO', 'NOVO Language '.$call.', HELPER: Language Load Initialized for controller: '.$class. ' and method: '.$langFiles);
 
 		switch($client) {
@@ -142,7 +143,7 @@ if(!function_exists('languajeLoad')) {
 					'changePassword'	=> ['password-change'],
 					'terms'	=> ['terms'],
 				];
-				break;
+			break;
 			case 'bdb':
 				$languages = [
 					'login' => ['login'],
@@ -161,7 +162,7 @@ if(!function_exists('languajeLoad')) {
 					'serviceOrders'	=> ['bulk'],
 					'options' => ['settings']
 				];
-				break;
+			break;
 			case 'bnt':
 				$languages = [
 					'login' => ['login'],
@@ -169,37 +170,37 @@ if(!function_exists('languajeLoad')) {
 					'options' => ['settings'],
 					'getProductDetail'	=> ['products'],
 				];
-				break;
+			break;
 			case 'co':
 				$languages = [
 					'login' => ['login'],
 					'validatecaptcha' => ['login'],
 					'terms'	=> ['terms'],
 				];
-				break;
+			break;
 			case 'pe':
 				$languages = [
 					'login' => ['login'],
 					'validatecaptcha' => ['login'],
 				];
-				break;
+			break;
 			case 'us':
 				$languages = [
 					'login' => ['login'],
 					'validatecaptcha' => ['login'],
 				];
-				break;
+			break;
 			case 've':
 				$languages = [
 					'login' => ['login'],
 					'validatecaptcha' => ['login'],
 					'terms'	=> ['terms'],
 				];
-				break;
+			break;
 			case 'pb':
 				$languages = [
 				];
-				break;
+			break;
 			default:
 				$languages = [
 					'login' => ['login'],
@@ -250,16 +251,33 @@ if(!function_exists('languajeLoad')) {
 			$loadLanguages = TRUE;
 		}
 
-		if(in_array($client, $lanGeneral)) {
+		/* if(in_array($client, $lanGeneral)) {
 			array_unshift($languagesFile, 'general');
 			$loadLanguages = TRUE;
 		}
 
 		if(in_array($client, $lanValidate)) {
-			array_unshift($languagesFile, 'validate', 'response');
+			array_unshift($languagesFile, 'validate');
+			$loadLanguages = TRUE;
+		} */
+
+		if (file_exists($pathLang.'config'.$CI->config->item('new-views').'_lang.php')) {
+			array_unshift($languagesFile, 'config'.$CI->config->item('new-views'));
 			$loadLanguages = TRUE;
 		}
 
+		if ($call == 'specific') {
+			if (file_exists($pathLang.'validate_lang.php')) {
+				array_unshift($languagesFile, 'validate');
+				$loadLanguages = TRUE;
+			}
+			if (file_exists($pathLang.'general_lang.php')) {
+				array_unshift($languagesFile, 'general');
+				$loadLanguages = TRUE;
+			}
+		}
+
+		log_message('info', '******************************Language '.json_encode($languagesFile));
 		if($loadLanguages) {
 			$CI->lang->load($languagesFile);
 		}
