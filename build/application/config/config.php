@@ -51,7 +51,7 @@ $config['score_recaptcha'] = [
 	'testing' => 0.2,
 	'production' => 0.4
 ];
-$config['new-views'] = '';
+$config['new-views'] = '-core';
 $config['client'] = 'novo';
 $config['access_url'] = explode(',', ACCESS_URL);
 /*
