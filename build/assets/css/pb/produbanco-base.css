@@ -3524,7 +3524,7 @@ a.ui-button:active,
 
 .login-content .z1{
 	background: var(--color-primary);
-	border: 1.5px solid var(--color-primary);
+	border: 1px solid var(--color-primary);
 }
 
 .invalid-user {

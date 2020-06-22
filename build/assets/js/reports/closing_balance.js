@@ -117,24 +117,27 @@ function exportToExcel(passData) {
 			var info = dataResponse;
 			if(code == 0){
 			var File = new Int8Array(info.archivo);
-			byteArrayFile([File], 'SaldoAlCierre.xls');
+			byteArrayFile([File], 'saldosAlCierre.xls');
 			$('.cover-spin').removeAttr("style");
 		}
 })
 }
 
 var byteArrayFile = (function () {
-  var a = document.createElement("a");
-  document.body.appendChild(a);
-  a.style = "display: none";
-  return function (data, name) {
-    var blob = new Blob(data, {type: "application/xls"}),
-    url = window.URL.createObjectURL(blob);
-    a.href = url;
-    a.download = name;
-    a.click();
-    window.URL.revokeObjectURL(url);
-  };
+	var a = document.createElement("a");
+	document.body.appendChild(a);
+	return function (data, name) {
+		var blob = new Blob(data, {type: "application/xls"})
+		if( window.navigator.msSaveOrOpenBlob ) {
+			window.navigator.msSaveBlob(blob,'saldosAlCierre.xls')
+		} else {
+			var url = window.URL.createObjectURL(blob);
+			a.href = url;
+			a.download = name;
+			a.click();
+			window.URL.revokeObjectURL(url);
+		}
+	};
 }());
 
 function searchBudgets(dataForm){
@@ -162,9 +165,11 @@ function searchBudgets(dataForm){
 }
 
 function closingBudgets(dataForm) {
-	var URLactual = window.location.pathname.substr(1);
+var URLactual = window.location.pathname.substr(1);
 
 if(URLactual.substring(0, URLactual.length - 16) == 'bnt'){
+	var table = $('#balancesClosing').DataTable();
+	table.destroy();
 	table = $('#balancesClosing').DataTable({
 		drawCallback: function (d) {
 			insertFormInput(false)
@@ -174,7 +179,6 @@ if(URLactual.substring(0, URLactual.length - 16) == 'bnt'){
 			$('#blockBudgetResults').removeClass("hide");
 			$('#pre-loader-table').addClass('hide')
 			$('.hide-table').removeClass('hide')
-			$('#pre-loader').remove();
 			$('.hide-out').removeClass('hide');
 		},
 		"ordering": false,
@@ -248,11 +252,27 @@ if(URLactual.substring(0, URLactual.length - 16) == 'bnt'){
 					notiSystem(responseTable.title, responseTable.msg, responseTable.icon, responseTable.dataResp);
 				}
 
+				switch (responseTable.code) {
+					case 0:
+						if(responseTable.data.length < 10 ){
+							$('.dataTables_paginate').hide();
+						}
+						break;
+						case 1:
+							$('.dataTables_paginate').hide();
+							$('#export_excel').addClass('hide');
+						break;
+					default:
+						break;
+				}
 				return JSON.stringify(responseTable);
 			}
 		}
 	})
 	}else{
+		var table = $('#balancesClosing').DataTable();
+		table.destroy();
+
 		table = $('#balancesClosing').DataTable({
 			drawCallback: function (d) {
 				insertFormInput(false)
@@ -262,7 +282,6 @@ if(URLactual.substring(0, URLactual.length - 16) == 'bnt'){
 				$('#blockBudgetResults').removeClass("hide");
 				$('#pre-loader-table').addClass('hide')
 				$('.hide-table').removeClass('hide')
-				$('#pre-loader').remove();
 				$('.hide-out').removeClass('hide');
 			},
 			"ordering": false,
@@ -346,6 +365,19 @@ if(URLactual.substring(0, URLactual.length - 16) == 'bnt'){
 					notiSystem(responseTable.title, responseTable.msg, responseTable.icon, responseTable.dataResp);
 				}
 
+				switch (responseTable.code) {
+					case 0:
+						if(responseTable.data.length < 10 ){
+							$('.dataTables_paginate').hide();
+						}
+						break;
+						case 1:
+							$('.dataTables_paginate').hide();
+							$('#export_excel').addClass('hide');
+						break;
+					default:
+						break;
+				}
 				return JSON.stringify(responseTable);
 				}
 			}

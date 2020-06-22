@@ -17,6 +17,9 @@
 	<div class="flex flex-auto flex-column <?= $widget ? '' : 'max-width-6';  ?>">
 		<div class="flex flex-column">
 			<span class="line-text mb-2 h4 semibold primary"><?= lang('BULK_NEW'); ?></span>
+			<div id="pre-loader2" class="mx-auto flex justify-center">
+				<span class="spinner-border spinner-border-lg mt-2 none" role="status" aria-hidden="true"></span>
+			</div>
 			<form id="upload-file-form">
 				<div class="flex px-5 pb-4 items-center row">
 					<div class="form-group col-6 col-lg-3 col-xl-3">
@@ -61,8 +64,10 @@
 		</div>
 		<div class="flex flex-column">
 			<span class="line-text mb-2 h4 semibold primary"><?= lang('BULK_PENDING'); ?></span>
-			<div id="pre-loader" class="mt-2 mx-auto">
-				<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
+			<div class="flex">
+				<div id="pre-loader" class="mt-2 mx-auto">
+					<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
+				</div>
 			</div>
 			<div id="content-datatable" class="center mx-1 hide">
 				<table id="pending-bulk" class="cell-border h6 display">

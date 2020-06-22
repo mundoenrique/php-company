@@ -57,11 +57,9 @@ $(function () {
 
 				if (currentDate > maxTime) {
 					$('#finalDate').datepicker('option', 'maxDate', maxTime);
+				} else {
+					$('#finalDate').datepicker('option', 'maxDate', currentDate);
 				}
-			}
-
-			if (inputDate == 'finalDate') {
-				$('#initialDate').datepicker('option', 'maxDate', selectedDate);
 			}
 		}
 	});
@@ -301,28 +299,34 @@ function pdfExport(){
 var byteArrayFile = (function () {
 	var a = document.createElement("a");
 	document.body.appendChild(a);
-	a.style = "display: none";
 	return function (data, name) {
-		var blob = new Blob(data, {type: "application/xls"}),
-		url = window.URL.createObjectURL(blob);
-		a.href = url;
-		a.download = name;
-		a.click();
-		window.URL.revokeObjectURL(url);
+		var blob = new Blob(data, {type: "application/xls"})
+		if( window.navigator.msSaveOrOpenBlob ) {
+			window.navigator.msSaveBlob(blob,'cuentaMaestra.xls')
+		} else {
+			var url = window.URL.createObjectURL(blob);
+			a.href = url;
+			a.download = name;
+			a.click();
+			window.URL.revokeObjectURL(url);
+		}
 	};
 }());
 
 var byteArrayPDFFile = (function () {
 	var a = document.createElement("a");
 	document.body.appendChild(a);
-	a.style = "display: none";
 	return function (data, name) {
-		var blob = new Blob(data, {type: "application/pdf"}),
-		url = window.URL.createObjectURL(blob);
-		a.href = url;
-		a.download = name;
-		a.click();
-		window.URL.revokeObjectURL(url);
+		var blob = new Blob(data, {type: "application/pdf"})
+		if( window.navigator.msSaveOrOpenBlob ) {
+			window.navigator.msSaveBlob(blob,'cuentaMaestra.pdf')
+		} else {
+			var url = window.URL.createObjectURL(blob);
+			a.href = url;
+			a.download = name;
+			a.click();
+			window.URL.revokeObjectURL(url);
+		}
 	};
 }());
 
@@ -506,4 +510,3 @@ function masterAccount(passData) {
 
   })
 }
-

@@ -11,7 +11,6 @@ $lang['GEN_PLACE_PASSWORD'] = 'Código de seguridad';
 $lang['GEN_BTN_DISASS_AUTH'] = 'En espera de autorización';
 $lang['GEN_BTN_AUTHORIZE'] = 'Aceptar';
 //DATATABLES
-$lang['GEN_TABLE_SELECT_AUTH'] = 'single';
 $lang['GEN_TABLE_COMMISSION'] = 'Valor comisión';
 $lang['GEN_TABLE_VAT'] = 'Valor IVA';
 $lang['GEN_TABLE_AMOUNT_SO'] = 'Valor OS';
@@ -23,3 +22,4 @@ $lang['GEN_FOTTER_RIGHTS'] = '© Todos los derechos reservados. Banco de Bogotá
 $lang['GEN_FOTTER_IMAGE_L'] = 'img-bogota_white.svg';
 $lang['GEN_FOTTER_IMAGE_R'] = 'img-pci_compliance.svg';
 $lang['GEN_FOTTER_MARK'] = 'img-mark.svg';
+$lang['RESP_PASSWORD_NO_VALID'] = 'Por favor verifica el código de seguridad y vuelve a intentarlo';

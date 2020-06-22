@@ -69,6 +69,21 @@ class Novo_Business_Model extends NOVO_Model {
 				$this->response->title = lang('ENTERPRISE_TITLE');
 				$this->response->data->text = lang('ENTERPRISE_NOT_ASSIGNED');
 			break;
+			case -430:
+			case -431:
+				$this->session->set_flashdata('unauthorized', lang('RESP_SINGLE_SIGNON'));
+				redirect(base_url('cerrar-sesion/fin'), 'localtion', 301);
+			break;
+			case -432:
+			case -433:
+				$this->session->set_flashdata('unauthorized', lang('RESP_NO_PERMISSIONS'));
+				redirect(base_url('cerrar-sesion/fin'), 'localtion', 301);
+			break;
+			case -434:
+			case -435:
+				$this->session->set_flashdata('unauthorized', lang('ENTERPRISE_NOT_ASSIGNED'));
+				redirect(base_url('cerrar-sesion/fin'), 'localtion', 301);
+			break;
 			default:
 				$this->response->data->text = lang('GEN_ENTERPRISE_NOT_OBTEIN');
 				$this->response->data->resp['btn1']['link'] = 'cerrar-sesion/inicio';
@@ -265,7 +280,7 @@ class Novo_Business_Model extends NOVO_Model {
 			]
 		];
 
-		$response = $this->sendToService('getProductDetail');
+		$response = $this->sendToService('callWs_GetProductDetail');
 		$productDetail = [
 			'name' => isset($dataRequest->productName) ? $dataRequest->productName : '',
 			'imgProgram' => $this->countryUri.'_default.svg',
@@ -293,7 +308,13 @@ class Novo_Business_Model extends NOVO_Model {
 				$this->response->code = 0;
 
 				if(isset($response->estadistica->producto->idProducto)) {
-					$imgBrand = url_title(trim(mb_strtolower($response->estadistica->producto->marca))).lang('GEN_DETAIL_BARND_COLOR');
+					$imgBrand = url_title(trim(mb_strtolower($response->estadistica->producto->marca)));
+
+					if ($imgBrand == 'visa') {
+						$imgBrand.= lang('GEN_DETAIL_BARND_COLOR');
+					} else {
+						$imgBrand.= '_card.svg';
+					}
 
 					if(!file_exists(assetPath('images/brands/'.$imgBrand))) {
 						$imgBrand = 'default.svg';
@@ -369,6 +390,6 @@ class Novo_Business_Model extends NOVO_Model {
 		$this->response->data->productDetail = (object) $productDetail;
 		$this->response->data->productSummary = (object) $productSummary;
 
-		return $this->responseToTheView('getProductDetail');
+		return $this->responseToTheView('callWs_GetProductDetail');
 	}
 }

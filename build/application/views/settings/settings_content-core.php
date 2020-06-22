@@ -1,3 +1,11 @@
+<?php
+/*
+$valor=count($this->session->userdata('enterpriseSelect')->list) > 1 ? $this->session->userdata('enterpriseInf')->enterpriseCode : $this->session->userdata('enterpriseSelect')->list[0]->accodcia;
+echo '<pre>';
+
+print_r($this->session->userdata());*/
+?>
+
 <div class="bg-color">
 	<div class="pt-3 pb-5 px-5">
 		<h1 class="primary h3 regular inline"><?= lang('GEN_SETTINGS_TITLE') ?></h1>
@@ -112,7 +120,7 @@
 									</div>
 									<div class="row">
 										<div class="col-6 flex justify-end">
-											<button id="btnChangeEmail" class="btn btn-primary btn-small " style="width: 159px" type="submit">Guardar cambios</button>
+											<button id="btnChangeEmail" class="btn btn-primary btn-small " type="submit">Guardar cambios</button>
 										</div>
 									</div>
 								</form>
@@ -192,7 +200,7 @@
 										</div>
 										<div class="row">
 											<div class="col-6 flex justify-end">
-												<button id="btnChangePass" class="btn btn-primary btn-small " style="width: 159px" type="button">Guardar cambios</button>
+												<button id="btnChangePass" class="btn btn-primary btn-small " type="button">Guardar cambios</button>
 											</div>
 										</div>
 									</div>
@@ -293,7 +301,7 @@
 
 										<div class="row">
 											<div class="flex mb-2 justify-end col-12">
-												<button id="btnChangeTelephones" style="width: 159px" class="btn btn-primary btn-small " type="submit">Guardar
+												<button id="btnChangeTelephones" class="btn btn-primary btn-small " type="submit">Guardar
 													cambios</button>
 											</div>
 										</div>
@@ -373,10 +381,10 @@
 												</div>
 											</div>
 											<div class="col-3 col-lg-2 col-xl-auto">
-												<button class="btn btn-primary btn-small flex mx-auto " style="width: 159px" id="btnLimpiar" type="button">Limpiar</button>
+												<button class="btn btn-primary btn-small flex mx-auto " id="btnLimpiar" type="button">Limpiar</button>
 											</div>
 											<div class="col-3 col-lg-2 col-xl-auto">
-												<button class="btn btn-primary btn-small flex mx-auto " style="width: 159px" id="btnAddContact" type="submit">Agregar</button>
+												<button class="btn btn-primary btn-small flex mx-auto " id="btnAddContact" type="submit">Agregar</button>
 											</div>
 										</div>
 									</div>
@@ -602,6 +610,22 @@
 										</a>
 									</div>
 									<?php endforeach; ?>
+								</div>
+								<?php endif; ?>
+
+								<?php if (lang('CONF_FILE_SERVICE_BOOL') == 'ON'): ?>
+								<div class="my-2 tertiary h4 semibold">
+									<span>Aplicación</span>
+								</div>
+								<div class="row">
+									<div id="div-download">
+										<div class="flex items-start justify-end">
+										<button id="btn-download" class="flex items-baseline btn btn-link btn-small big-modal" disabled>
+										<i aria-hidden="true" class="icon icon-download"></i>
+										&nbsp;Archivo.ini
+										</button>
+									</div>
+								</div>
 								</div>
 								<?php endif; ?>
 

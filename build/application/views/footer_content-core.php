@@ -8,7 +8,7 @@
 	<? endif; ?>
 	<div class="flex flex-auto flex-wrap justify-around items-center">
 
-	<?php if(lang('CONF_FOOTER_NETWORKS')): ?>
+	<?php if(lang('CONF_FOOTER_NETWORKS') == 'ON'): ?>
 		<div class="order-first networks">
 			<a href="<?= lang('GEN_FOOTER_LINK_FACEBOOK'); ?>" target="_blank">
 				<img src="<?= $this->asset->insertFile($countryUri.'/'.lang('GEN_FOOTER_IMG_FACEBOOK')); ?>"
@@ -24,7 +24,7 @@
 					alt="<?= lang('GEN_ALTERNATIVE_TEXT'); ?>"></a>
 		</div>
 	<?php endif; ?>
-	<?php if(lang('CONF_FOOTER_LOGO')):?>
+	<?php if(lang('CONF_FOOTER_LOGO') == 'ON'):?>
 		<img class="order-first" src="<?= $this->asset->insertFile($countryUri.'/'.lang('GEN_FOTTER_IMAGE_L')); ?>"
 				alt="<?= lang('GEN_ALTERNATIVE_TEXT'); ?>">
 	<?php endif; ?>

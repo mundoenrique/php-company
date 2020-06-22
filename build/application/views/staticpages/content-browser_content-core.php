@@ -25,7 +25,7 @@
 				<span class="browser-name"><?= lang('GEN_BROWSER_MICROSOFT_EDGE'); ?></span>
 				<span class="browser-version"><?= lang('GEN_BROWSER_MICROSOFT_EDGE_VERSION'); ?></span>
 			</li>
-			<?php if(lang('CONF_SUGGESTION_IE')): ?>
+			<?php if(lang('CONF_SUPPORT_IE') == 'ON'): ?>
 			<li class="list-inline-item">
 				<img class="browser-img" src="<?= $this->asset->insertFile('icon-explorer.svg','images'); ?>" alt="Icono explorer">
 				<span class="browser-name"><?= lang('GEN_BROWSER_INTERNET_EXPLORER'); ?></span>

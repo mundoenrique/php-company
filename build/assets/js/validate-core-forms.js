@@ -125,6 +125,7 @@ function validateForms(form) {
 				},
 				pattern: numeric, maxlength: 16, minlength: 16
 			},
+			"otpCode": {required: true, pattern: alphanum}
 		},
 		messages: {
 			"user_login": lang.VALIDATE_USERLOGIN,
@@ -189,6 +190,7 @@ function validateForms(form) {
 			"finalDate": lang.VALIDATE_DATE_DMY,
 			"idNumber": lang.VALIDATE_ID_NUMBER,
 			"cardNumber": lang.VALIDATE_CARD_NUMBER,
+			"otpCode": lang.VALIDATE_OS_OTP,
 		},
 		errorPlacement: function(error, element) {
 			$(element).closest('.form-group').find('.help-block').html(error.html());
