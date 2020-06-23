@@ -327,13 +327,15 @@ class Novo_Settings_Model extends NOVO_Model {
 
 		$rif = count($this->session->enterpriseSelect->list) > 1 ? $this->session->enterpriseInf->idFiscal : $this->session->enterpriseSelect->list[0]->acrif;
 		$accodcia = count($this->session->enterpriseSelect->list) > 1 ? $this->session->enterpriseInf->enterpriseCode : $this->session->enterpriseSelect->list[0]->accodcia;
-		
+
 		$this->dataRequest->empresaCliente = [
 			'rif' => $rif,
 			'accodcia' => $accodcia
 		];
 
 		$response = $this->sendToService('CallWs_GetFileIni: '.$this->dataRequest->idOperation);
+
+		$this->isResponseRc=4;
 
 		switch($this->isResponseRc) {
 			case 0:
@@ -344,6 +346,18 @@ class Novo_Settings_Model extends NOVO_Model {
 					$this->response->data['file'] = $file;
 					$this->response->data['name'] = $name.'.'.$ext;
 					$this->response->data['ext'] = $ext;
+			break;
+			default:
+					$this->response->code = 4;
+					$this->response->icon = lang('GEN_ICON_WARNING');
+					$this->response->msg = lang('GEN_WARNING_DOWNLOAD_FILE');
+					$this->response->data = [
+						'btn1'=> [
+							'text'=> lang('GEN_BTN_ACCEPT'),
+							'link'=> 'configuracion',
+							'action'=> 'redirect'
+						]
+					];
 			break;
 		}
 
