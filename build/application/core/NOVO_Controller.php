@@ -79,7 +79,6 @@ class NOVO_Controller extends CI_Controller {
 		$this->render->newViews = $this->config->item('new-views');
 		$this->form_validation->set_error_delimiters('', '---');
 		$this->config->set_item('language', 'spanish-base');
-		$this->lang->load('config'.$this->render->newViews);
 
 		if ($this->rule !== 'suggestion') {
 			$this->ValidateBrowser = $this->checkBrowser();
@@ -129,9 +128,6 @@ class NOVO_Controller extends CI_Controller {
 				if ($valid) {
 					$this->request = $this->verify_access->createRequest($this->rule, $this->appUserName);
 				}
-			} elseif ($access && $this->render->newViews != '') {
-				$this->config->set_item('language', 'spanish-'.$this->countryUri);
-				$this->lang->load('config'.$this->render->newViews);
 			}
 
 			$this->preloadView($access && $valid);

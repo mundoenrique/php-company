@@ -58,6 +58,7 @@ $(function() {
             break;
         case 'pichincha':
         case 'novo':
+        case 'produbanco':
         case 'banorte':
             $('#user').addClass('active');
             $('#userView').show();

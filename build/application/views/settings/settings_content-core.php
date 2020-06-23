@@ -113,7 +113,7 @@
 									</div>
 									<div class="row">
 										<div class="col-6 flex justify-end">
-											<button id="btnChangeEmail" class="btn btn-primary btn-small " style="width: 159px" type="submit">Guardar cambios</button>
+											<button id="btnChangeEmail" class="btn btn-primary btn-small " type="submit">Guardar cambios</button>
 										</div>
 									</div>
 								</form>
@@ -193,7 +193,7 @@
 										</div>
 										<div class="row">
 											<div class="col-6 flex justify-end">
-												<button id="btnChangePass" class="btn btn-primary btn-small " style="width: 159px" type="button">Guardar cambios</button>
+												<button id="btnChangePass" class="btn btn-primary btn-small " type="button">Guardar cambios</button>
 											</div>
 										</div>
 									</div>
@@ -294,7 +294,7 @@
 
 										<div class="row">
 											<div class="flex mb-2 justify-end col-12">
-												<button id="btnChangeTelephones" style="width: 159px" class="btn btn-primary btn-small " type="submit">Guardar
+												<button id="btnChangeTelephones" class="btn btn-primary btn-small " type="submit">Guardar
 													cambios</button>
 											</div>
 										</div>
@@ -374,10 +374,10 @@
 												</div>
 											</div>
 											<div class="col-3 col-lg-2 col-xl-auto">
-												<button class="btn btn-primary btn-small flex mx-auto " style="width: 159px" id="btnLimpiar" type="button">Limpiar</button>
+												<button class="btn btn-primary btn-small flex mx-auto " id="btnLimpiar" type="button">Limpiar</button>
 											</div>
 											<div class="col-3 col-lg-2 col-xl-auto">
-												<button class="btn btn-primary btn-small flex mx-auto " style="width: 159px" id="btnAddContact" type="submit">Agregar</button>
+												<button class="btn btn-primary btn-small flex mx-auto " id="btnAddContact" type="submit">Agregar</button>
 											</div>
 										</div>
 									</div>

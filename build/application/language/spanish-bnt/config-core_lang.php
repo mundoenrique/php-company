@@ -1,13 +1,13 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+//SUPPORT IE 11
+$lang['CONF_SUPPORT_IE'] = 'ON';
 //VALIDATE FORMS
 $lang['CONF_VALID_POSITION'] = 'right';
 //REQUEST UNNAMED
 $lang['CONF_UNNA_EXPIRED_DATE'] = 'OFF';
 //REQUEST UNNAMED
 $lang['CONF_UNNA_ACCOUNT_NUMBER'] = 'OFF';
-//SUGGESTION
-$lang['CONF_SUGGESTION_IE'] = 'ON';
 //AUTHORIZE BULK LIST
 $lang['CONF_BULK_AUTHORIZE'] = 'OFF';
 $lang['CONF_BULK_SELECT_ALL_AUTH'] = 'OFF';

@@ -67,11 +67,8 @@ header.main-head {
 	z-index: 999;
 	width: 100%;
 	height: 3.75rem;
-	background-color: #EB0029;
+	background-color: #006937;
 	font-weight: 300;
-	background-repeat: repeat-x;
-	background-image: url(../../images/bnt/navigation.png);
-	background-size: 43.5px 64px;
 }
 
 .order-first {
@@ -244,7 +241,7 @@ footer.main-footer {
 	display: flex;
 	padding: 1.825rem 2.5rem;
 	color: #fff;
-	background-color: #EB0029;
+	background-color: #006937;
 }
 
 footer.main-footer div:nth-child(1) {
