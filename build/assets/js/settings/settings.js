@@ -233,30 +233,30 @@ $(function() {
     });
 
 
-    //Download file.ini
-    if( (countEnterprise ==1 && enterpriseInf == 0) || (countEnterprise > 1 && enterpriseInf != 0)){
-        btnDownload();
-    } else {
-        $('#btn-download').attr('disabled','true');
-        $('#btn-download').removeClass("btn-link");
-        $('#btn-download').attr('title',lang.GEN_BTN_INI);
-    };
+//Download file.ini
+if( (countEnterprise ==1 && enterpriseInf == 0) || (countEnterprise > 1 && enterpriseInf != 0)){
+		btnDownload();
+} else {
+		$('#btn-download').attr('disabled','true');
+		$('#btn-download').removeClass("btn-link");
+		$('#btn-download').attr('title',lang.GEN_BTN_INI);
+};
 
-    function btnDownload(){
-        $('#btn-download').on('click', function (e) {
-            e.preventDefault();
-            data = {};
-            insertFormInput(true);
-            verb = 'POST'; who = 'Settings'; where = 'getFileIni';
-            $('.cover-spin').show(0);
-            callNovoCore(verb, who, where, data, function (response) {
-                if(response.code == 0) {
-                    downLoadfiles (response.data);
-                }
-                insertFormInput(false);
-            })
-        })
-    };
+function btnDownload(){
+		$('#btn-download').on('click', function (e) {
+		e.preventDefault();
+		data = {};
+		insertFormInput(true);
+		verb = 'POST'; who = 'Settings'; where = 'getFileIni';
+		$('.cover-spin').show(0);
+		callNovoCore(verb, who, where, data, function (response) {
+				if(response.code == 0) {
+						downLoadfiles (response.data);
+				}
+				insertFormInput(false);
+		})
+		})
+};
 
 });
 
