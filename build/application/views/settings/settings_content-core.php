@@ -1,10 +1,3 @@
-<?php
-/*
-$valor=count($this->session->userdata('enterpriseSelect')->list) > 1 ? $this->session->userdata('enterpriseInf')->enterpriseCode : $this->session->userdata('enterpriseSelect')->list[0]->accodcia;
-echo '<pre>';
-
-print_r($this->session->userdata());*/
-?>
 
 <div class="bg-color">
 	<div class="pt-3 pb-5 px-5">
@@ -620,9 +613,9 @@ print_r($this->session->userdata());*/
 								<div class="row">
 									<div id="div-download">
 										<div class="flex items-start justify-end">
-										<button id="btn-download" class="flex items-baseline btn btn-link btn-small big-modal" disabled>
+										<button id="btn-download" countEnterp=<?=$countEnterprise?> enterpriseI=<?=$enterpriseInf?> class="flex items-baseline btn btn-link btn-small big-modal">
 										<i aria-hidden="true" class="icon icon-download"></i>
-										&nbsp;Archivo.ini
+										&nbsp;<?= lang('GEN_DOWNLOAD_FILE_INI') ?>
 										</button>
 									</div>
 								</div>

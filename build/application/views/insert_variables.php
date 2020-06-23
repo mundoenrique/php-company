@@ -15,6 +15,4 @@
 	var sessionTime = <?= $sessionTime; ?> ;
 	var callModal = <?= $callModal; ?> ;
 	var callServer = <?= $callServer; ?> ;
-	var countEnterprise = <?= $this->session->has_userdata('enterpriseSelect') ? count($this->session->userdata('enterpriseSelect')->list): 0; ?> ;
-	var enterpriseInf = <?= $this->session->has_userdata('enterpriseInf') ? $this->session->userdata('enterpriseInf')->idFiscal: 0; ?> ;
 </script>

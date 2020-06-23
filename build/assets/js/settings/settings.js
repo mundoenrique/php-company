@@ -48,6 +48,8 @@ $(function() {
     var buttonClean = $("#btnLimpiar");
     var buttonContact = $('#btnAddContact');
     var newPass = $('#newPass');
+    var countEnterprise = $("button").attr("countEnterp");
+    var enterpriseInf = $("button").attr("enterpriseI");
 
     switch (client) {
         case 'banco-bog':
@@ -231,13 +233,10 @@ $(function() {
 
 
     //Download file.ini
-    if(countEnterprise==1){
-        $('#btn-download').removeAttr("disabled");
-        btnDownload();
-    }else if(countEnterprise > 1 && enterpriseInf != 0){
-        $('#btn-download').removeAttr("disabled");
+    if( (countEnterprise ==1 && enterpriseInf == 0) || (countEnterprise > 1 && enterpriseInf != 0)){
         btnDownload();
     } else {
+        $('#btn-download').attr('disabled','true');
         $('#btn-download').removeClass("btn-link");
         $('#btn-download').attr('title',lang.GEN_BTN_INI);
     };
@@ -251,22 +250,9 @@ $(function() {
             $('.cover-spin').show(0);
             callNovoCore(verb, who, where, data, function (response) {
                 if(response.code == 0) {
-                       var File = new Int8Array(response.data.file);
-										var blob = new Blob([File], {type: "application/"+response.data.ext});
-										if (window.navigator.msSaveOrOpenBlob) {
-											window.navigator.msSaveBlob(blob, response.data.name)
-										} else {
-											var url = window.URL.createObjectURL(blob);
-											$('#download-file').attr('href', url)
-											$('#download-file').attr('download',response.data.name)
-											document.getElementById('download-file').click()
-											window.URL.revokeObjectURL(url);
-											$('#download-file').attr('href', 'javascript:')
-											$('#download-file').attr('download', '')
-										}
+                    downLoadfiles (response.data);
                 }
                 insertFormInput(false);
-                $('.cover-spin').hide();
             })
         })
     };

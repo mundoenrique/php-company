@@ -325,8 +325,8 @@ class Novo_Settings_Model extends NOVO_Model {
 		$this->dataRequest->idOperation = 216;
 		$this->dataRequest->rutaArchivo = DOWNLOAD_ROUTE;
 
-		$rif = count($this->session->userdata('enterpriseSelect')->list) > 1 ? $this->session->userdata('enterpriseInf')->idFiscal : $this->session->userdata('enterpriseSelect')->list[0]->acrif;
-		$accodcia = count($this->session->userdata('enterpriseSelect')->list) > 1 ? $this->session->userdata('enterpriseInf')->enterpriseCode : $this->session->userdata('enterpriseSelect')->list[0]->accodcia;
+		$rif = count($this->session->enterpriseSelect->list) > 1 ? $this->session->enterpriseInf->idFiscal : $this->session->enterpriseSelect->list[0]->acrif;
+		$accodcia = count($this->session->enterpriseSelect->list) > 1 ? $this->session->enterpriseInf->enterpriseCode : $this->session->enterpriseSelect->list[0]->accodcia;
 		
 		$this->dataRequest->empresaCliente = [
 			'rif' => $rif,
