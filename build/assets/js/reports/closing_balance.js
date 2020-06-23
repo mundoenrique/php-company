@@ -117,27 +117,24 @@ function exportToExcel(passData) {
 			var info = dataResponse;
 			if(code == 0){
 			var File = new Int8Array(info.archivo);
-			byteArrayFile([File], 'saldosAlCierre.xls');
+			byteArrayFile([File], 'SaldoAlCierre.xls');
 			$('.cover-spin').removeAttr("style");
 		}
 })
 }
 
 var byteArrayFile = (function () {
-	var a = document.createElement("a");
-	document.body.appendChild(a);
-	return function (data, name) {
-		var blob = new Blob(data, {type: "application/xls"})
-		if( window.navigator.msSaveOrOpenBlob ) {
-			window.navigator.msSaveBlob(blob,'saldosAlCierre.xls')
-		} else {
-			var url = window.URL.createObjectURL(blob);
-			a.href = url;
-			a.download = name;
-			a.click();
-			window.URL.revokeObjectURL(url);
-		}
-	};
+  var a = document.createElement("a");
+  document.body.appendChild(a);
+  a.style = "display: none";
+  return function (data, name) {
+    var blob = new Blob(data, {type: "application/xls"}),
+    url = window.URL.createObjectURL(blob);
+    a.href = url;
+    a.download = name;
+    a.click();
+    window.URL.revokeObjectURL(url);
+  };
 }());
 
 function searchBudgets(dataForm){
@@ -183,11 +180,18 @@ if(URLactual.substring(0, URLactual.length - 16) == 'bnt'){
 		},
 		"ordering": false,
 		"searching": false,
-		"info":     false,
+		"lengthChange": false,
+		"length": 10,
+		"pagingType": "full_numbers",
+		"table-layout": "fixed",
+		"select": {
+			"style": "multi",
+			"selector": ':not(td:nth-child(-n+6))',
+			"info": false
+		},
 		"language": dataTableLang,
 		"processing": true,
 		"serverSide": true,
-		"lengthChange": false,
 		"columns": [
 			{ data: 'nombre' },
 			{ data: 'idExtPer' },
@@ -223,10 +227,8 @@ if(URLactual.substring(0, URLactual.length - 16) == 'bnt'){
 				data.idExtPer = "";
 				data.producto = $("#productCode").val();
 				data.idExtEmp = $('#enterpriseReport').find('option:selected').attr('acrif');
-				data.tamanoPagina = 10;
-				data.paginar = true;
-				data.paginaActual = data.draw;
 				data.screenSize = screen.width;
+				data.paginar = true;
 				var dataRequest = JSON.stringify({
 					who: 'Reports',
 					where: 'closingBudgets',
@@ -243,6 +245,7 @@ if(URLactual.substring(0, URLactual.length - 16) == 'bnt'){
 			},
 			dataFilter: function (resp) {
 				var responseTable = jQuery.parseJSON(resp)
+
 				responseTable = JSON.parse(
 					CryptoJS.AES.decrypt(responseTable.code, responseTable.plot, { format: CryptoJSAesJson }).toString(CryptoJS.enc.Utf8)
 				);
@@ -252,19 +255,7 @@ if(URLactual.substring(0, URLactual.length - 16) == 'bnt'){
 					notiSystem(responseTable.title, responseTable.msg, responseTable.icon, responseTable.dataResp);
 				}
 
-				switch (responseTable.code) {
-					case 0:
-						if(responseTable.data.length < 10 ){
-							$('.dataTables_paginate').hide();
-						}
-						break;
-						case 1:
-							$('.dataTables_paginate').hide();
-							$('#export_excel').addClass('hide');
-						break;
-					default:
-						break;
-				}
+				access = responseTable.access;
 				return JSON.stringify(responseTable);
 			}
 		}
@@ -286,7 +277,15 @@ if(URLactual.substring(0, URLactual.length - 16) == 'bnt'){
 			},
 			"ordering": false,
 			"searching": false,
-			"info":     false,
+			"lengthChange": false,
+			"length": 10,
+			"pagingType": "full_numbers",
+			"table-layout": "fixed",
+			"select": {
+				"style": "multi",
+				"selector": ':not(td:nth-child(-n+6))',
+				"info": false
+			},
 			"language": dataTableLang,
 			"processing": true,
 			"serverSide": true,
@@ -365,19 +364,7 @@ if(URLactual.substring(0, URLactual.length - 16) == 'bnt'){
 					notiSystem(responseTable.title, responseTable.msg, responseTable.icon, responseTable.dataResp);
 				}
 
-				switch (responseTable.code) {
-					case 0:
-						if(responseTable.data.length < 10 ){
-							$('.dataTables_paginate').hide();
-						}
-						break;
-						case 1:
-							$('.dataTables_paginate').hide();
-							$('#export_excel').addClass('hide');
-						break;
-					default:
-						break;
-				}
+				access = responseTable.access;
 				return JSON.stringify(responseTable);
 				}
 			}

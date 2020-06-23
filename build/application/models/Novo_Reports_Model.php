@@ -708,24 +708,33 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->className = 'com.novo.objects.MO.SaldosAmanecidosMO';
 
 		$this->dataAccessLog->modulo = 'Reportes';
-		$this->dataAccessLog->function = 'Estado de lote';
-		$this->dataAccessLog->operation = 'Obtener lista lotes por estado';
+		$this->dataAccessLog->function = 'Saldos Amanecidos';
+		$this->dataAccessLog->operation = 'Obtener saldos';
 		$this->dataRequest->idOperation = 'saldosAmanecidos';
 		$this->dataRequest->idExtPer = $dataRequest->idExtPer;
 		$this->dataRequest->producto =  $dataRequest->producto;
 		$this->dataRequest->idExtEmp =  $dataRequest->idExtEmp;
-		$this->dataRequest->tamanoPagina = (int) $dataRequest->length;
+		$this->dataRequest->tamanoPagina = 10;
 		$this->dataRequest->paginar = TRUE;
 		$this->dataRequest->paginaActual = (int) ($dataRequest->start / 10) + 1;
 
 
 		$response = $this->sendToService('callWs_closingBudgets');
+		$this->response->recordsTotal = 0;
+		$this->response->recordsFiltered = 0;
 
 		switch($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
 				$user = $response->saldo->lista;
 				$this->response->data =  (array)$user;
+				$this->response->access = [
+					'RESPSAL' => $this->verify_access->verifyAuthorization('REPSAL'),
+				];
+				$this->response->draw = (int) $dataRequest->draw;
+				$this->response->recordsTotal = $response->totalSaldos;
+				$this->response->recordsFiltered =  $response->totalSaldos;
+
 			break;
 			case -150:
 				$this->response->code = 1;
