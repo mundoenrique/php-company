@@ -51,7 +51,7 @@ class Tool_Browser {
 				$browsersIn = TRUE;
 				$valid = $version > $validBrowser[$browser];
 
-				if($valid && lang('CONF_SUPPORT_IE') == 'ON' && $browser === 'Internet Explorer') {
+				if($valid && $browser === 'Internet Explorer') {
 					$valid = 'ie11';
 				}
 			}
