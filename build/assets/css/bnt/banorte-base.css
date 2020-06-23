@@ -952,7 +952,7 @@ label {
 	color: var(--color-secondary);
 	z-index: 90;
 	font-size: var(--h3);
-	height: 33px;
+	height: 34px;
 	-webkit-padding-before: 2px;
 }
 
@@ -972,7 +972,7 @@ label {
 	background: var(--color-primary);
 	color: var(--color-secondary);
 	z-index: 11;
-	height: 33px;
+	height: 34px;
 }
 
 @media (min-width: 768px) {
@@ -988,7 +988,7 @@ label {
 }
 @supports (-webkit-appearance:none) {
 	.sb-icon-search	.icon-find{
-		margin-top: 2px;
+		margin-top: 5px;
 	}
 }
 /* Validator */
@@ -1098,25 +1098,25 @@ label {
 
 .btn-secondary {
 	color: var(--color-sixth);
-	background-color: var(--color-tertiary);
+	background-color: var(--color-room);
 	border-radius: var(--border-radius);
 	border: 1px solid var(--color-eighth);
 }
 
 .btn-secondary:hover {
-	background-color: var(--color-tertiary);
+	background-color: var(--color-room);
 	/* box-shadow: inset 0 -2px 0 rgba(31,45,61,.15); */
 }
 
 .btn-secondary:active {
-	background-color: var(--color-secondary);
+	background-color: var(--color-room);
 	/* box-shadow: inset 0 2px 0 rgba(31,45,61,.15); */
 }
 
 .btn-secondary:disabled {
 	opacity: .5;
 	pointer-events: none;
-  cursor: default;
+	cursor: default;
 }
 
 /* Btn-Link */
@@ -2160,7 +2160,7 @@ i[class*=" icon-"].novoglyphs {
 
 .spinner-border-sm {
   width: 1.3rem;
-  height: 1.3rem;
+	height: 1.3rem;
 }
 
 .spinner-border-lg {

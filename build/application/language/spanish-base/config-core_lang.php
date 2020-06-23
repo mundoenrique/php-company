@@ -1,5 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+//SUPPORT IE 11
+$lang['CONF_SUPPORT_IE'] = 'OFF';
 //VALIDATE FORMS
 $lang['CONF_VALID_ERROR'] = 'has-error';
 $lang['CONF_VALID_VALID'] = 'has-success';
@@ -33,8 +35,6 @@ $lang['CONF_BULK_SELECT_ALL_SIGN'] = 'ON';
 $lang['CONF_BULK_SELECT_ALL_AUTH'] = 'ON';
 //REPORT CLOSING BALANCE
 $lang['CONF_NIT_INPUT_BOOL'] = 'ON';
-//SUGGESTION
-$lang['CONF_SUGGESTION_IE'] = 'OFF';
 //SERVICES TRANSFER MASTER ACCOUNT
 $lang['CONF_PAY_ACCOUNT'] = 'OFF';
 //SETTINGS
