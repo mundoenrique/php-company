@@ -33,7 +33,7 @@ $(function () {
 			},
 			"language": dataTableLang
 		});
-	} else{
+	} else {
 		var table = $('#tableCardInquiry').DataTable({
 			"ordering": false,
 			"pagingType": "full_numbers",
