@@ -113,21 +113,6 @@
 										<button id="desbloqueo" class="btn mx-1 px-0" title="Desbloqueo" data-toggle="tooltip">
 												<i class="icon novoglyphs icon-chevron-up" aria-hidden="true"></i>
 											</button>
-										<button id="entregar_a_tarjetahabiente" class="btn mx-1 px-0" title="Entregar a tarjetahabiente" data-toggle="tooltip">
-												<i class="icon novoglyphs icon-arrow-right" aria-hidden="true"></i>
-											</button>
-										<button id="enviar_a_empresa" class="btn mx-1 px-0" title="Enviar a empresa" data-toggle="tooltip">
-												<i class="icon novoglyphs icon-user-card" aria-hidden="true"></i>
-											</button>
-										<button id="recibir_en_empresa" class="btn mx-1 px-0" title="Recibir en empresa" data-toggle="tooltip">
-												<i class="icon novoglyphs icon-building" aria-hidden="true"></i>
-											</button>
-										<button id="recibir_en_banco" class="btn mx-1 px-0" title="Recibir en banco" data-toggle="tooltip">
-												<i class="icon novoglyphs icon-user-building" aria-hidden="true"></i>
-											</button>
-										<span id="cargo_tarjeta" class="btn mx-1 px-0" title="Cargo tarjeta" data-toggle="tooltip">
-												-
-											</span>
 									</div>
 								</td>
 							</tr>

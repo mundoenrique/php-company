@@ -5,7 +5,7 @@ $(function () {
 	$('#pre-loader').remove();
 	$('.hide-out').removeClass('hide');
 
-	if (widthBrowser < 1024) {
+	if (widthBrowser <= 1040) {
 		var table = $('#tableCardInquiry').DataTable({
 			"ordering": false,
 			"pagingType": "full_numbers",
@@ -66,13 +66,5 @@ $(function () {
 				table.rows().deselect();
 			}
 		});
-		$(document).ready(function(){
-			$("td:first-child").before(function(){
-				$(this).css({
-					"border-radius":"5px !important",
-					"background":"blue",
-				})
-			})
-		})
 	};
 });
