@@ -1,6 +1,4 @@
 'use strict'
-var widthBrowser =$(window).innerWidth();
-
 $(function () {
 	$('#pre-loader').remove();
 	$('.hide-out').removeClass('hide');
