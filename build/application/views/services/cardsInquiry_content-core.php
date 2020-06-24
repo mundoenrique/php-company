@@ -24,7 +24,7 @@
 		<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
 	</div>
 	<div class="w-100 hide-out hide">
-		<div class="flex flex-auto flex-column">
+		<div class="flex flex-auto flex-column <?= $widget ? '' : 'max-width-6'; ?>">
 
 			<div class="search-criteria-order flex pb-3 flex-column w-100">
 				<span class="line-text mb-2 h4 semibold primary"><?= lang('GEN_SEARCH_CRITERIA'); ?></span>
@@ -94,25 +94,52 @@
 								<td>********001091</td>
 								<td>10442</td>
 								<td>19102300</td>
-								<td class="tool-ellipsis">Entregada a Tarjetahabiente </td>
+								<td>Entregada a Tarjetahabiente </td>
 								<td>Cambio de Pin</td>
 								<td>Rojas Jose</td>
 								<td>1719708404</td>
-								<td>100.000 $</td>
-								<td class="pb-0 px-0">
+								<td>-</td>
+								<td class="pb-0 px-1">
 									<div class="flex justify-center items-center">
 										<button id="actualizar_datos" class="btn mx-1 px-0" title="Actualizar datos" data-toggle="tooltip">
-											<i class="icon novoglyphs icon-user-edit" aria-hidden="true"></i>
-										</button>
+												<i class="icon novoglyphs icon-user-edit" aria-hidden="true"></i>
+											</button>
 										<button id="consulta_saldo_tarjeta" class="btn mx-1 px-0" title="Consulta saldo tarjeta" data-toggle="tooltip">
-											<i class="icon novoglyphs icon-envelope-open" aria-hidden="true"></i>
-										</button>
+												<i class="icon novoglyphs icon-envelope-open" aria-hidden="true"></i>
+											</button>
 										<button id="bloqueo_tarjeta" class="btn mx-1 px-0" title="Bloqueo tarjeta" data-toggle="tooltip">
-											<i class="icon novoglyphs icon-lock" aria-hidden="true"></i>
-										</button>
+												<i class="icon novoglyphs icon-lock" aria-hidden="true"></i>
+											</button>
 										<button id="desbloqueo" class="btn mx-1 px-0" title="Desbloqueo" data-toggle="tooltip">
-											<i class="icon novoglyphs icon-chevron-up" aria-hidden="true"></i>
-										</button>
+												<i class="icon novoglyphs icon-chevron-up" aria-hidden="true"></i>
+											</button>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td></td>
+								<td>********001091</td>
+								<td>10442</td>
+								<td>19102300</td>
+								<td>Entregada a Tarjetahabiente </td>
+								<td>Cambio de Pin</td>
+								<td>Rojas Jose</td>
+								<td>1719708404</td>
+								<td>-</td>
+								<td class="pb-0 px-1">
+									<div class="flex justify-center items-center">
+										<button id="actualizar_datos" class="btn mx-1 px-0" title="Actualizar datos" data-toggle="tooltip">
+												<i class="icon novoglyphs icon-user-edit" aria-hidden="true"></i>
+											</button>
+										<button id="consulta_saldo_tarjeta" class="btn mx-1 px-0" title="Consulta saldo tarjeta" data-toggle="tooltip">
+												<i class="icon novoglyphs icon-envelope-open" aria-hidden="true"></i>
+											</button>
+										<button id="bloqueo_tarjeta" class="btn mx-1 px-0" title="Bloqueo tarjeta" data-toggle="tooltip">
+												<i class="icon novoglyphs icon-lock" aria-hidden="true"></i>
+											</button>
+										<button id="desbloqueo" class="btn mx-1 px-0" title="Desbloqueo" data-toggle="tooltip">
+												<i class="icon novoglyphs icon-chevron-up" aria-hidden="true"></i>
+											</button>
 									</div>
 								</td>
 							</tr>
@@ -155,4 +182,7 @@
 
 		</div>
 	</div>
+	<?php if($widget): ?>
+	<?php $this->load->view('widget/widget_enterprise-product_content'.$newViews, $widget) ?>
+	<?php endif; ?>
 </div>
