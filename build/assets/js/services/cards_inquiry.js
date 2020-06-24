@@ -24,13 +24,13 @@ $(function () {
 		selector: ':not(td:nth-child(-n+7))'
 	},
 	"language": dataTableLang
-});
-$('#tableCardInquiry').on('click', '.toggle-all', function () {
-	$(this).closest("tr").toggleClass("selected");
-	if ($(this).closest("tr").hasClass("selected")) {
-		table.rows().select();
-	} else {
-		table.rows().deselect();
-	}
-});
+	});
+	$('#tableCardInquiry').on('click', '.toggle-all', function () {
+		$(this).closest("tr").toggleClass("selected");
+		if ($(this).closest("tr").hasClass("selected")) {
+			table.rows().select();
+		} else {
+			table.rows().deselect();
+		}
+	});
 });
