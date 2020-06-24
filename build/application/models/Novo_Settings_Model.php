@@ -335,8 +335,6 @@ class Novo_Settings_Model extends NOVO_Model {
 
 		$response = $this->sendToService('CallWs_GetFileIni: '.$this->dataRequest->idOperation);
 
-		$this->isResponseRc=4;
-
 		switch($this->isResponseRc) {
 			case 0:
 					$this->response->code = 0;
