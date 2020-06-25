@@ -63,6 +63,14 @@ class Novo_Business_Model extends NOVO_Model {
 					$this->response->data->recordsPage = ceil($this->response->data->enterprisesTotal/$sizePage);
 					$this->response->data->text = $this->response->data->enterprisesTotal > 0 ? '' : 'Usuario sin empresas asignadas';
 				}
+
+				if (isset($enterpriseArgs->listaCuentasCBP_BDB) || isset($enterpriseArgs->listaCuentasICBS_BDB)) {
+					$thirdEnterprise = new stdClass();
+					$thirdEnterprise->cbpAccounts = $enterpriseArgs->listaCuentasCBP_BDB;
+					$thirdEnterprise->icbsAccounts = $enterpriseArgs->listaCuentasICBS_BDB;
+
+					$this->session->set_userdata('thirdEnterprise', $thirdEnterprise);
+				}
 				break;
 			case -6:
 				$this->response->code = 1;
@@ -207,6 +215,11 @@ class Novo_Business_Model extends NOVO_Model {
 		$this->dataRequest->userName = $this->userName;
 		$this->dataRequest->idEmpresa = $dataRequest->idFiscal;
 		$this->dataRequest->acCodCia = $dataRequest->enterpriseCode;
+		if($this->session->has_userdata('thirdEnterprise')) {
+			$this->dataRequest->listaCuentasCBP_BDB = $this->session->thirdEnterprise->cbpAccounts;
+			$this->dataRequest->listaCuentasICBS_BDB = $this->session->thirdEnterprise->icbsAccounts;
+
+		}
 
 		$response = $this->sendToService('callWs_GetProducts');
 
