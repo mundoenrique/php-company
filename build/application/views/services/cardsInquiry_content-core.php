@@ -102,44 +102,32 @@
 								<td class="pb-0 px-1">
 									<div class="flex justify-center items-center">
 										<button id="actualizar_datos" class="btn mx-1 px-0" title="Actualizar datos" data-toggle="tooltip">
-												<i class="icon novoglyphs icon-user-edit" aria-hidden="true"></i>
-											</button>
+											<i class="icon novoglyphs icon-user-edit" aria-hidden="true"></i>
+										</button>
 										<button id="consulta_saldo_tarjeta" class="btn mx-1 px-0" title="Consulta saldo tarjeta" data-toggle="tooltip">
-												<i class="icon novoglyphs icon-envelope-open" aria-hidden="true"></i>
-											</button>
+											<i class="icon novoglyphs icon-envelope-open" aria-hidden="true"></i>
+										</button>
 										<button id="bloqueo_tarjeta" class="btn mx-1 px-0" title="Bloqueo tarjeta" data-toggle="tooltip">
-												<i class="icon novoglyphs icon-lock" aria-hidden="true"></i>
-											</button>
+											<i class="icon novoglyphs icon-lock" aria-hidden="true"></i>
+										</button>
 										<button id="desbloqueo" class="btn mx-1 px-0" title="Desbloqueo" data-toggle="tooltip">
-												<i class="icon novoglyphs icon-chevron-up" aria-hidden="true"></i>
-											</button>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<td></td>
-								<td>********001091</td>
-								<td>10442</td>
-								<td>19102300</td>
-								<td>Entregada a Tarjetahabiente </td>
-								<td>Cambio de Pin</td>
-								<td>Rojas Jose</td>
-								<td>1719708404</td>
-								<td>-</td>
-								<td class="pb-0 px-1">
-									<div class="flex justify-center items-center">
-										<button id="actualizar_datos" class="btn mx-1 px-0" title="Actualizar datos" data-toggle="tooltip">
-												<i class="icon novoglyphs icon-user-edit" aria-hidden="true"></i>
-											</button>
-										<button id="consulta_saldo_tarjeta" class="btn mx-1 px-0" title="Consulta saldo tarjeta" data-toggle="tooltip">
-												<i class="icon novoglyphs icon-envelope-open" aria-hidden="true"></i>
-											</button>
-										<button id="bloqueo_tarjeta" class="btn mx-1 px-0" title="Bloqueo tarjeta" data-toggle="tooltip">
-												<i class="icon novoglyphs icon-lock" aria-hidden="true"></i>
-											</button>
-										<button id="desbloqueo" class="btn mx-1 px-0" title="Desbloqueo" data-toggle="tooltip">
-												<i class="icon novoglyphs icon-chevron-up" aria-hidden="true"></i>
-											</button>
+											<i class="icon novoglyphs icon-chevron-up" aria-hidden="true"></i>
+										</button>
+										<!-- <button id="entregar_a_tarjetahabiente" class="btn mx-1 px-0" title="Entregar a tarjetahabiente" data-toggle="tooltip">
+											<i class="icon novoglyphs icon-arrow-right" aria-hidden="true"></i>
+										</button>
+										<button id="enviar_a_empresa" class="btn mx-1 px-0" title="Enviar a empresa" data-toggle="tooltip">
+											<i class="icon novoglyphs icon-user-card" aria-hidden="true"></i>
+										</button>
+										<button id="recibir_en_empresa" class="btn mx-1 px-0" title="Recibir en empresa" data-toggle="tooltip">
+											<i class="icon novoglyphs icon-building" aria-hidden="true"></i>
+										</button>
+										<button id="recibir_en_banco" class="btn mx-1 px-0" title="Recibir en banco" data-toggle="tooltip">
+											<i class="icon novoglyphs icon-user-building" aria-hidden="true"></i>
+										</button>
+										<span id="cargo_tarjeta" class="btn mx-1 px-0" title="Cargo tarjeta" data-toggle="tooltip">
+											-
+										</span> -->
 									</div>
 								</td>
 							</tr>
