@@ -47,7 +47,7 @@
 	<div id="pre-loader" class="mt-2 mx-auto">
 		<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
 	</div>
-	<div class="flex-column hide-out hide">
+	<div class="flex-column mx-auto hide-out hide">
 		<!-- content to filter -->
 		<div data-jplist-group="group-filter-pagination" id="product-list" class="flex-auto">
 			<?php foreach($productList AS $pos => $products): ?>
