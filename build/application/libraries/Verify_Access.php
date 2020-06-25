@@ -228,9 +228,6 @@ class Verify_Access {
 				case 'closingBudgets':
 					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPSAL'));
 				break;
-				case 'userActivity':
-					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPUSU'));
-				break;
 				case 'rechargeMade':
 					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPPRO'));
 				break;
