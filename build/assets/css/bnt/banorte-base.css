@@ -2836,13 +2836,6 @@ table.dataTable thead th.select-checkbox:before {
   border-radius: 3px;
 }
 
-.inquiry{
-	padding: 0 !important;
-	border-bottom: 1px solid transparent;
-	padding-right: 0px !important;
-	padding-left: 0px !important;
-}
-
 @supports (-ms-ime-align:auto) {
 	table.dataTable thead th.select-checkbox:before {
 		margin-top: 2px;
@@ -2860,6 +2853,17 @@ table.dataTable thead th.select-checkbox:before {
 		background-image: url("../../images/bnt/check_table.svg");
 		background-size: cover;
 	}
+}
+
+table.dataTable.dtr-inline.collapsed>tbody>tr[role="row"]>td:first-child:before, table.dataTable.dtr-inline.collapsed>tbody>tr[role="row"]>th:first-child:before{
+	border: 2px solid white !important;
+}
+
+table.dataTable.dtr-inline.collapsed>tbody>tr.parent>td:first-child:before, table.dataTable.dtr-inline.collapsed>tbody>tr.parent>th:first-child:before{
+	background-color: var(--color-primary) !important;
+}
+.check-table{
+	width: 20px !important;
 }
 
 table.dataTable tr.selected th.select-checkbox:after {
@@ -2926,7 +2930,7 @@ table.dataTable.dtr-inline.collapsed > tbody > tr[role="row"] > td:first-child::
 }
 
 table.dataTable.dtr-inline.collapsed > tbody > tr.parent > td:first-child::before, table.dataTable.dtr-inline.collapsed > tbody > tr.parent > th:first-child::before {
-	background-color:	var(--color-secondary) !important;
+	background-color:	var(--color-secondary);
 }
 
 table.dataTable > tbody > tr.child ul.dtr-details {

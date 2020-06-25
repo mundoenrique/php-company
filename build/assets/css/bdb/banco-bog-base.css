@@ -2798,6 +2798,17 @@ table.dataTable thead th.select-checkbox:before {
   border-radius: 3px;
 }
 
+table.dataTable.dtr-inline.collapsed>tbody>tr[role="row"]>td:first-child:before, table.dataTable.dtr-inline.collapsed>tbody>tr[role="row"]>th:first-child:before{
+	border: 2px solid white !important;
+}
+
+table.dataTable.dtr-inline.collapsed>tbody>tr.parent>td:first-child:before, table.dataTable.dtr-inline.collapsed>tbody>tr.parent>th:first-child:before{
+	background-color: var(--color-primary) !important;
+}
+.check-table{
+	width: 20px !important;
+}
+
 table.dataTable tr.selected th.select-checkbox:after {
   content: '\2714';
   margin-top: -11px;
