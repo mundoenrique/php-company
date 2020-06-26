@@ -21,7 +21,7 @@
 		<div class="flex flex-auto flex-column <?= $widget ? '' : 'max-width-6'; ?>">
 			<div class="flex pb-5 flex-column">
 				<span class="line-text mb-2 h4 semibold primary"><?= lang('BULK_UNNA_REQUEST'); ?></span>
-				<form id="unnamed-request-form">
+				<form id="unnamed-request-form" name="unnamed-request-form">
 					<div class="flex px-5 pb-4 items-center row">
 						<div class="form-group col-4 col-xl-3">
 							<label><?= LANG('BULK_UNNA_EXPIRED_DATE'); ?></label>

@@ -213,9 +213,16 @@ function exportToExcel(passData) {
       dataResponse = response.data;
       code = response.code
       var info = dataResponse;
-      if(code == 0){
-      var File = new Int8Array(info.archivo);
-      byteArrayFile([File], 'actividadUsuario.xls');
+			if(info.formatoArchivo == 'excel'){
+				info.formatoArchivo = '.xls'
+			}
+			if(code == 0){
+				data = {
+					"name": info.nombre.replace(/ /g, "")+info.formatoArchivo,
+					"ext": info.formatoArchivo,
+					"file": info.archivo
+				}
+				downLoadfiles (data);
       $('.cover-spin').removeAttr("style");
     }
 })
@@ -242,49 +249,21 @@ function exportToPDF(passData) {
   callNovoCore(verb, who, where, data, function(response) {
       dataResponse = response.data;
       code = response.code
-      var info = dataResponse;
-      if(code == 0){
-      var File = new Int8Array(info.archivo);
-      byteArrayPDFFile([File], 'actividadUsuario.pdf');
+			var info = dataResponse;
+			if(info.formatoArchivo == 'PDF'){
+				info.formatoArchivo = '.pdf'
+			}
+			if(code == 0){
+				data = {
+					"name": info.nombre.replace(/ /g, "")+info.formatoArchivo,
+					"ext": info.formatoArchivo,
+					"file": info.archivo
+				}
+				downLoadfiles (data);
       $('.cover-spin').removeAttr("style");
     }
 })
 }
-
-var byteArrayFile = (function () {
-	var a = document.createElement("a");
-	document.body.appendChild(a);
-	return function (data, name) {
-		var blob = new Blob(data, {type: "application/xls"})
-		if( window.navigator.msSaveOrOpenBlob ) {
-			window.navigator.msSaveBlob(blob,'actividadUsuario.xls')
-		} else {
-			var url = window.URL.createObjectURL(blob);
-			a.href = url;
-			a.download = name;
-			a.click();
-			window.URL.revokeObjectURL(url);
-		}
-	};
-}());
-
-var byteArrayPDFFile = (function () {
-	var a = document.createElement("a");
-	document.body.appendChild(a);
-	return function (data, name) {
-		var blob = new Blob(data, {type: "application/pdf"})
-		if( window.navigator.msSaveOrOpenBlob ) {
-			window.navigator.msSaveBlob(blob,'actividadUsuario.pdf')
-		} else {
-			var url = window.URL.createObjectURL(blob);
-			a.href = url;
-			a.download = name;
-			a.click();
-			window.URL.revokeObjectURL(url);
-		}
-	};
-}());
-
 
 function dialogE(e){
 

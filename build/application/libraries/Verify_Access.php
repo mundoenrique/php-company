@@ -172,6 +172,7 @@ class Verify_Access {
 				case 'signBulkList':
 				case 'authorizeBulk':
 				case 'bulkDetail':
+				case 'authorizeBulkList':
 				case 'calculateServiceOrder':
 					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBAUT'));
 				break;
@@ -211,7 +212,6 @@ class Verify_Access {
 				case 'masterAccount':
 					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPCON'));
 				break;
-				case 'authorizeBulkList':
 				case 'userActivity':
 				case 'exportToExcelUserActivity':
 				case 'exportToPDFUserActivity':
@@ -227,9 +227,6 @@ class Verify_Access {
 				case 'exportToExcel':
 				case 'closingBudgets':
 					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPSAL'));
-				break;
-				case 'userActivity':
-					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPUSU'));
 				break;
 				case 'rechargeMade':
 					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPPRO'));

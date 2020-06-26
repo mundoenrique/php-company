@@ -95,12 +95,10 @@
 				<a href="#" data-type="last"><?= lang('GEN_TABLE_SLAST') ?></a>
 			</nav>
 		</div>
-
-		<div id="no-product" class="flex-auto my-5 py-4 center none">
-			<span class="h4"><?= lang('GEN_WARNING_PRODUCTS_LIST') ?></span>
-		</div>
 	</div>
-
+	<div id="no-product" class="flex-auto my-5 py-4 center none">
+		<span class="h4"><?= lang('GEN_WARNING_PRODUCTS_LIST') ?></span>
+	</div>
 	<?php if($widget): ?>
 	<?php $this->load->view('widget/widget_enterprise-product_content'.$newViews, $widget) ?>
 	<?php endif; ?>
