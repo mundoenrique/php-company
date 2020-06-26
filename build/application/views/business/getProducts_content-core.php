@@ -47,7 +47,7 @@
 	<div id="pre-loader" class="mt-2 mx-auto">
 		<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
 	</div>
-	<div class="flex-column mx-auto hide-out hide">
+	<div class="flex-column hide-out hide">
 		<!-- content to filter -->
 		<div data-jplist-group="group-filter-pagination" id="product-list" class="flex-auto">
 			<?php foreach($productList AS $pos => $products): ?>
@@ -95,12 +95,10 @@
 				<a href="#" data-type="last"><?= lang('GEN_TABLE_SLAST') ?></a>
 			</nav>
 		</div>
-
-		<div id="no-product" class="flex-auto my-5 py-4 center none">
-			<span class="h4"><?= lang('GEN_WARNING_PRODUCTS_LIST') ?></span>
-		</div>
 	</div>
-
+	<div id="no-product" class="flex-auto my-5 py-4 center none">
+		<span class="h4"><?= lang('GEN_WARNING_PRODUCTS_LIST') ?></span>
+	</div>
 	<?php if($widget): ?>
 	<?php $this->load->view('widget/widget_enterprise-product_content'.$newViews, $widget) ?>
 	<?php endif; ?>
