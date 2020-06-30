@@ -3,6 +3,9 @@ $(function () {
 	var userCred, forWho, forWhere;
 	var userLogin = $('#user_login');
 	var userPass = $('#user_pass');
+	$('#user_pass').on('keyup', function() {
+		$(this).attr('type', 'password')
+	})
 	$.balloon.defaults.css = null;
 	insertFormInput(false);
 	inputDisabled(false);

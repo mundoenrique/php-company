@@ -4,6 +4,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $lang['CONF_SUPPORT_IE'] = 'ON';
 //VALIDATE FORMS
 $lang['CONF_VALID_POSITION'] = 'right';
+//SIGNIN
+$lang['CONF_SIGNIN_IMG'] = 'ON';
 //REQUEST UNNAMED
 $lang['CONF_UNNA_EXPIRED_DATE'] = 'OFF';
 //REQUEST UNNAMED
