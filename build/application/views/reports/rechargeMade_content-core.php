@@ -35,7 +35,7 @@
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-4 col-xl-4">
-								<label for="initialDate">Fecha</label>
+								<label for="initialDate"><?= lang('GEN_TABLE_DATE') ?></label>
 								<input id="initialDate" class="form-control" name="datepicker" type="text">
 								<div class="help-block"></div>
 							</div>
@@ -66,10 +66,6 @@
 								<button class="btn px-1 big-modal" title="<?= lang('GEN_BTN_SEE_GRAPH'); ?>" data-toggle="tooltip">
 									<i class="icon novoglyphs icon-food" aria-hidden="true"></i>
 								</button>
-
-								<a>
-						<span id = "grafica"  title="Ver Grafica" aria-hidden="true" class="icon grafica" data-icon="&#xe050;"></span>
-						</a>
 							</div>
 							<form id="download-cardholders" action="<?= base_url('descargar-archivo'); ?>" method="post"></form>
 						</div>
