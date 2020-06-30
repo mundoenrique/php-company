@@ -125,7 +125,18 @@ class NOVO_Model extends CI_Model {
 	public function responseToTheView($model)
 	{
 		log_message('INFO', 'NOVO Model: responseToView Method Initialized');
-		log_message('DEBUG', 'NOVO ['.$this->userName.'] RESULT '.$model.' SENT TO THE VIEW '.json_encode($this->response));
+		$responsetoView = new stdClass();
+
+		foreach ($this->response AS $pos => $response) {
+			if (is_array($response) && isset($response['file'])) {
+				continue;
+			}
+			$responsetoView->$pos = $response;
+		}
+
+		log_message('DEBUG', 'NOVO ['.$this->userName.'] RESULT '.$model.' SENT TO THE VIEW '.json_encode($responsetoView));
+
+		unset($responsetoView);
 
 		return $this->response;
 	}

@@ -1,10 +1,3 @@
-<?php
-/*
-$valor=count($this->session->userdata('enterpriseSelect')->list) > 1 ? $this->session->userdata('enterpriseInf')->enterpriseCode : $this->session->userdata('enterpriseSelect')->list[0]->accodcia;
-echo '<pre>';
-
-print_r($this->session->userdata());*/
-?>
 
 <div class="bg-color">
 	<div class="pt-3 pb-5 px-5">
@@ -143,9 +136,9 @@ print_r($this->session->userdata());*/
 													<div class="form-group col-12 col-lg-12">
 														<label for="currentPass">Contraseña actual</label>
 														<div class="input-group">
-															<input id="currentPass" class="form-control pwd-input" type="password" name="current-pass" required>
+															<input id="currentPass" class="form-control pwd-input" type="password" autocomplete="off" name="current-pass" required>
 															<div class="input-group-append">
-																<span id="pwd-addon" class="input-group-text pwd-action" title="Clic aquí para mostrar/ocultar contraseña"><i
+																<span id="pwd-addon" class="input-group-text pwd-action" title="<?= lang('GEN_SHOW_PASS') ?>"><i
 																		class="icon-view mr-0"></i></span>
 															</div>
 														</div>
@@ -154,9 +147,9 @@ print_r($this->session->userdata());*/
 													<div class="form-group col-12 col-lg-6">
 														<label for="newPass">Nueva Contraseña</label>
 														<div class="input-group">
-															<input id="newPass" class="form-control pwd-input" type="password" name="new-pass" required>
+															<input id="newPass" class="form-control pwd-input" type="password" autocomplete="off" name="new-pass" required>
 															<div class="input-group-append">
-																<span id="pwd-addon" class="input-group-text pwd-action" title="Clic aquí para mostrar/ocultar contraseña"><i
+																<span id="pwd-addon" class="input-group-text pwd-action" title="<?= lang('GEN_SHOW_PASS') ?>"><i
 																		class="icon-view mr-0"></i></span>
 															</div>
 														</div>
@@ -165,9 +158,9 @@ print_r($this->session->userdata());*/
 													<div class="form-group col-12 col-lg-6">
 														<label for="confirmPass">Confirmar Contraseña</label>
 														<div class="input-group">
-															<input id="confirmPass" class="form-control pwd-input" type="password" name="confirm-pass" required>
+															<input id="confirmPass" class="form-control pwd-input" type="password" autocomplete="off" name="confirm-pass" required>
 															<div class="input-group-append">
-																<span id="pwd-addon" class="input-group-text pwd-action" title="Clic aquí para mostrar/ocultar contraseña"><i
+																<span id="pwd-addon" class="input-group-text pwd-action" title="<?= lang('GEN_SHOW_PASS') ?>"><i
 																		class="icon-view mr-0"></i></span>
 															</div>
 														</div>
@@ -373,10 +366,10 @@ print_r($this->session->userdata());*/
 										<div class="row flex mb-4 mt-2 justify-end items-center form-group">
 											<div class="col-6 col-lg-4 col-xl-3 input-group">
 												<label for="contPass"></label>
-												<input id="contPass" class="form-control pwd-input" type="password" name="Ingresa tu contraseña"
+												<input id="contPass" class="form-control pwd-input" autocomplete="new-password" name="Ingresa tu contraseña"
 													placeholder="Ingresa tu contraseña">
 												<div class="input-group-append">
-													<span id="pwd-addon" class="input-group-text pwd-action" title="Clic aquí para mostrar/ocultar contraseña"><i
+													<span id="pwd-addon" class="input-group-text pwd-action" title="<?= lang('GEN_SHOW_PASS') ?>"><i
 															class="icon-view mr-0"></i></span>
 												</div>
 											</div>
@@ -529,10 +522,10 @@ print_r($this->session->userdata());*/
 
 										<div class="row flex mb-4 mt-2 pl-5 justify-end items-center form-group">
 											<div class="col-7 col-lg-4 col-xl-3 input-group">
-												<input id="password1" class="form-control pwd-input" type="password" name="Ingresa tu contraseña"
+												<input id="password1" class="form-control pwd-input" type="password" autocomplete="off" name="Ingresa tu contraseña"
 													placeholder="Ingresa tu contraseña">
 												<div class="input-group-append">
-													<span id="pwd-addon" class="input-group-text pwd-action" title="Clic aquí para mostrar/ocultar contraseña"><i
+													<span id="pwd-addon" class="input-group-text pwd-action" title="<?= lang('GEN_SHOW_PASS') ?>"><i
 															class="icon-view mr-0"></i></span>
 												</div>
 											</div>
@@ -620,9 +613,9 @@ print_r($this->session->userdata());*/
 								<div class="row">
 									<div id="div-download">
 										<div class="flex items-start justify-end">
-										<button id="btn-download" class="flex items-baseline btn btn-link btn-small big-modal" disabled>
+										<button id="btn-download" countEnterp=<?=$countEnterprise?> enterpriseI=<?=$enterpriseInf?> class="flex items-baseline btn btn-link btn-small big-modal">
 										<i aria-hidden="true" class="icon icon-download"></i>
-										&nbsp;Archivo.ini
+										&nbsp;<?= lang('GEN_DOWNLOAD_FILE_INI') ?>
 										</button>
 									</div>
 								</div>

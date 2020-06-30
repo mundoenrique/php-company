@@ -325,9 +325,9 @@ class Novo_Settings_Model extends NOVO_Model {
 		$this->dataRequest->idOperation = 216;
 		$this->dataRequest->rutaArchivo = DOWNLOAD_ROUTE;
 
-		$rif = count($this->session->userdata('enterpriseSelect')->list) > 1 ? $this->session->userdata('enterpriseInf')->idFiscal : $this->session->userdata('enterpriseSelect')->list[0]->acrif;
-		$accodcia = count($this->session->userdata('enterpriseSelect')->list) > 1 ? $this->session->userdata('enterpriseInf')->enterpriseCode : $this->session->userdata('enterpriseSelect')->list[0]->accodcia;
-		
+		$rif = count($this->session->enterpriseSelect->list) > 1 ? $this->session->enterpriseInf->idFiscal : $this->session->enterpriseSelect->list[0]->acrif;
+		$accodcia = count($this->session->enterpriseSelect->list) > 1 ? $this->session->enterpriseInf->enterpriseCode : $this->session->enterpriseSelect->list[0]->accodcia;
+
 		$this->dataRequest->empresaCliente = [
 			'rif' => $rif,
 			'accodcia' => $accodcia
@@ -344,6 +344,18 @@ class Novo_Settings_Model extends NOVO_Model {
 					$this->response->data['file'] = $file;
 					$this->response->data['name'] = $name.'.'.$ext;
 					$this->response->data['ext'] = $ext;
+			break;
+			default:
+					$this->response->code = 4;
+					$this->response->icon = lang('GEN_ICON_WARNING');
+					$this->response->msg = lang('GEN_WARNING_DOWNLOAD_FILE');
+					$this->response->data = [
+						'btn1'=> [
+							'text'=> lang('GEN_BTN_ACCEPT'),
+							'link'=> 'configuracion',
+							'action'=> 'redirect'
+						]
+					];
 			break;
 		}
 

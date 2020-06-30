@@ -70,7 +70,7 @@
 						<div class="flex row mt-3 mb-2 mx-2 justify-end">
 							<div class="col-5 col-lg-3 col-xl-3 form-group">
 								<div class="input-group">
-									<input id="password-sign" name="password" class="form-control pwd-input pr-0" type="password"
+									<input id="password-sign" name="password" class="form-control pwd-input pr-0" type="password" autocomplete="off"
 										placeholder="<?= lang('GEN_PLACE_PASSWORD'); ?>">
 									<div class="input-group-append">
 										<span id="pwd_action" class="input-group-text pwd-action" title="<?= lang('GEN_SHOW_PASS') ?>"><i
@@ -149,7 +149,7 @@
 					<form id="auth-bulk-form" method="post">
 						<div class="flex row mt-3 mb-2 mx-2 justify-end">
 							<div class="col-4 col-lg-3 h6 regular form-group">
-							<?php if( lang('CONF_BULK_AUTHORIZE') == 'ON'): ?>
+								<?php if( lang('CONF_BULK_AUTHORIZE') == 'ON'): ?>
 								<select id="type-order" name="type-order" class="select-box custom-select h6">
 									<option value="0"><?= lang('BULK_PROCESS_BY_BULK'); ?></option>
 									<option value="1" selected><?= lang('BULK_PROCESS_TYPE_BULK') ?></option>
@@ -161,7 +161,7 @@
 							</div>
 							<div class="col-5 col-lg-3 col-xl-3 form-group">
 								<div class="input-group">
-									<input id="password-auth" name="password" class="form-control pwd-input pr-0" type="password"
+									<input id="password-auth" name="password" class="form-control pwd-input pr-0" type="password" autocomplete="new-password"
 										placeholder="<?= lang('GEN_PLACE_PASSWORD'); ?>">
 									<div class="input-group-append">
 										<span id="pwd_action" class="input-group-text pwd-action" title="<?= lang('GEN_SHOW_PASS') ?>"><i

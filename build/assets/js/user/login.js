@@ -4,6 +4,9 @@ $(function () {
 	var userLogin = $('#user_login');
 	var userPass = $('#user_pass');
 	var loginIpMsg, formcodeOTP, btn, btnTextOtp;
+	$('#user_pass').on('keyup', function() {
+		$(this).attr('type', 'password')
+	})
 	$.balloon.defaults.css = null;
 	insertFormInput(false);
 	inputDisabled(false);

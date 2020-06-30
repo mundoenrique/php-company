@@ -125,7 +125,8 @@ $lang['GEN_BATCH_MANAGER'] = 'Gestor de lotes (1.759kb)';
 $lang['GEN_JAVA_JRE'] = 'Java JRE 1.6 (14.226kb)';
 $lang['GEN_FILE'] = 'Archivos de gestión Conexión Empresas Online';
 $lang['GEN_FILE_OPERATIONAL_BATCH'] = 'Archivos lotes operativos (194kb)';
-$lang['GEN_BTN_INI'] = 'Debe seleccionar una empresa para poder realizar la descarga';
+$lang['GEN_DOWNLOAD_FILE_INI'] = 'Archivo.ini';
+$lang['GEN_BTN_INI'] = 'Debes seleccionar una empresa para poder realizar la descarga';
 //links
 $lang['GEN_LINK_LOGIN'] = 'inicio';
 //MODAL STYLES
