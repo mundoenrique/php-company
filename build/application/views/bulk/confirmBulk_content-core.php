@@ -76,7 +76,7 @@
 						<div class="form-group mb-3 col-5 col-lg-4 col-xl-3">
 							<div class="input-group">
 								<input id="bulkTicked" name="bulkTicked" type="hidden" value="<?= $detailBulk->bulkTicked ?>">
-								<input id="password" name="password" class="form-control pwd-input" type="password" placeholder="<?= lang('GEN_PLACE_PASSWORD'); ?>">
+								<input id="password" name="password" class="form-control pwd-input" type="password" autocomplete="off" placeholder="<?= lang('GEN_PLACE_PASSWORD'); ?>">
 								<div class="input-group-append">
 									<span class="input-group-text pwd-action" title="<?= lang('GEN_SHOW_PASS') ?>"><i class="icon-view mr-0"></i></span>
 								</div>

@@ -21,30 +21,30 @@
 		<div class="flex flex-auto flex-column <?= $widget ? '' : 'max-width-6'; ?>">
 			<div class="flex pb-5 flex-column">
 				<span class="line-text mb-2 h4 semibold primary"><?= lang('BULK_UNNA_REQUEST'); ?></span>
-				<form id="unnamed-request-form" name="unnamed-request-form">
+				<form id="unnamed-request-form" name="unnamed-request-form" autocomplete="off">
 					<div class="flex px-5 pb-4 items-center row">
 						<div class="form-group col-4 col-xl-3">
 							<label><?= LANG('BULK_UNNA_EXPIRED_DATE'); ?></label>
 							<input type="text" id="expiredDate" name="expired-date" class="form-control read-only h5" <?= $editable; ?>
-								value="<?= $expMaxMonths; ?>">
+								value="<?= $expMaxMonths; ?>" autocomplete="off">
 							<div class="help-block"></div>
 						</div>
 						<div class="form-group col-4 col-xl-3">
 							<label><?= LANG('BULK_UNNA_MAX_CARDS'); ?></label>
-							<input type="text" id="maxCards" name="max-cards" class="form-control h5" max-cards="<?= $maxCards ?>">
+							<input type="text" id="maxCards" name="max-cards" class="form-control h5" max-cards="<?= $maxCards ?>" autocomplete="off">
 							<div class="help-block"></div>
 						</div>
 						<?php if(lang('CONF_UNNA_STARTING_LINE1') == 'ON'): ?>
 						<div class="form-group col-4 col-xl-3">
-							<label><?= lang('BULK_UNNA_STARTING_LINE1'); ?></label>
-							<input type="text" id="startingLine1" name="starting-line1" class="form-control h5" maxlength="25">
+							<label for="startingLine1"><?= lang('BULK_UNNA_STARTING_LINE1'); ?></label>
+							<input type="text" id="startingLine1" name="starting-line1" class="form-control h5" maxlength="25" autocomplete="off">
 							<div class="help-block"></div>
 						</div>
 						<?php endif; ?>
 						<?php if(lang('CONF_UNNA_STARTING_LINE2') == 'ON'): ?>
 						<div class="form-group col-4 col-xl-3">
-							<label><?= lang('BULK_UNNA_STARTING_LINE2'); ?></label>
-							<input type="text" id="startingLine2" name="starting-line2" class="form-control h5" maxlength="25">
+							<label for="startingLine2"><?= lang('BULK_UNNA_STARTING_LINE2'); ?></label>
+							<input type="text" id="startingLine2" name="starting-line2" class="form-control h5" maxlength="25" autocomplete="off">
 							<div class="help-block"></div>
 						</div>
 						<?php endif; ?>
@@ -64,9 +64,9 @@
 						<?php endif; ?>
 						<?php if(lang('CONF_UNNA_PASSWORD') == 'ON'): ?>
 						<div class="form-group col-4 col-xl-3">
-							<label><?= lang('GEN_PASSWORD');  ?></label>
+							<label for="password"><?= lang('GEN_PASSWORD');  ?></label>
 							<div class="input-group">
-								<input type="password" id="password" name="password" class="form-control pwd-input h5" type="password" autocomplete="off">
+								<input id="password" name="password" class="form-control pwd-input h5" type="text" autocomplete="off">
 								<div class="input-group-append">
 									<span class="input-group-text pwd-action" title="<?= lang('GEN_SHOW_PASS') ?>">
 										<i class="icon-view mr-0"></i>
@@ -77,7 +77,7 @@
 						</div>
 						<?php endif; ?>
 						<div class="col-auto mt-1 ml-auto">
-							<button id="unnamed-request-btn" class="btn btn-primary btn-small btn-loading flex ml-auto">
+							<button type="button" id="unnamed-request-btn" class="btn btn-primary btn-small btn-loading flex ml-auto">
 								<?= lang('GEN_BTN_PROCESS'); ?>
 							</button>
 						</div>

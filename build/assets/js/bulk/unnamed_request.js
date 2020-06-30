@@ -4,6 +4,9 @@ $(function () {
 	var maxCards = $('#maxCards');
 	$('#pre-loader').remove();
 	$('.hide-out').removeClass('hide');
+	$('#password').on('keyup', function() {
+		$(this).attr('type', 'password')
+	})
 	$('#maxCards').keyup(function (){
 		if(this.value == 0){
 			this.value = (this.value + '').replace(0, '');
