@@ -7,7 +7,7 @@ var nameEnterprise;
 var enterprise;
 var nit;
 var product;
-var enterpriceName;
+var enterpriseName;
 var descProd;
 var actualPage;
 var paging;
