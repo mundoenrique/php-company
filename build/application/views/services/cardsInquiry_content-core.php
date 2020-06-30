@@ -24,7 +24,7 @@
 		<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
 	</div>
 	<div class="w-100 hide-out hide">
-		<div class="flex flex-auto flex-column <?= $widget ? '' : 'max-width-6'; ?>">
+		<div class="flex flex-auto flex-column">
 
 			<div class="search-criteria-order flex pb-3 flex-column w-100">
 				<span class="line-text mb-2 h4 semibold primary"><?= lang('GEN_SEARCH_CRITERIA'); ?></span>
@@ -170,7 +170,4 @@
 
 		</div>
 	</div>
-	<?php if($widget): ?>
-	<?php $this->load->view('widget/widget_enterprise-product_content'.$newViews, $widget) ?>
-	<?php endif; ?>
 </div>

@@ -60,7 +60,7 @@ Class Novo_Services extends Novo_Controller {
 			"third_party/additional-methods",
 			'services/cards_inquiry'
 		);
-		$this->responseAttr();
+		$this->responseAttr(0, FALSE);
 		$this->render->titlePage = lang('GEN_MENU_SERV_CARD_INQUIRY');
 		$this->views = ['services/'.$view];
 		$this->loadView($view);
