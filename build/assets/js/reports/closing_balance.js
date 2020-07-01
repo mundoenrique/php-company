@@ -57,7 +57,7 @@ $(function () {
 			insertFormInput(false);
 			form = $('#closingBudgetForm');
 			var dataForm = getDataForm(form)
-			searchBudgets(dataForm);
+			closingBudgets(dataForm)
 		}
 	})
 
@@ -128,30 +128,6 @@ function exportToExcel(passData) {
 })
 }
 
-function searchBudgets(dataForm){
-		enterprise = $('#enterpriseReport').find('option:selected').attr('acrif');
-		nit =  '';
-		product = $("#productCode").val();
-		nameEnterprise = $('#enterpriseReport').find('option:selected').attr('nomOf');
-		descProd = $("#productCode").attr("des");
-		actualPage = 1;
-		paging = false;
-		tamPg = $("#tamP").val();
-
-		var passData = {
-			empresa: enterprise,
-			cedula: nit,
-			producto: product,
-			nomEmpresa: nameEnterprise,
-			descProd: descProd,
-			paginaActual: actualPage,
-			paginar: paging,
-			tamPg: tamPg
-		};
-
-		closingBudgets(dataForm);
-}
-
 function closingBudgets(dataForm) {
 var URLactual = window.location.pathname.substr(1);
 
@@ -215,9 +191,13 @@ if(URLactual.substring(0, URLactual.length - 16) == 'bnt'){
 			cache: false,
 			data: function (req) {
 				data = req
-				data.idExtPer = "";
-				data.producto = $("#productCode").val();
-				data.idExtEmp = $('#enterpriseReport').find('option:selected').attr('acrif');
+				if (lang.CONF_NIT_INPUT_BOOL == 'ON' ){
+					data.idExtPer = $('#Nit').val();
+				}else{
+					data.idExtPer = '';
+				}
+				data.product = $("#productCode").val();
+				data.idExt = $('#enterpriseReport').find('option:selected').attr('acrif');
 				data.screenSize = screen.width;
 				data.paginar = true;
 				var dataRequest = JSON.stringify({
@@ -250,8 +230,7 @@ if(URLactual.substring(0, URLactual.length - 16) == 'bnt'){
 				return JSON.stringify(responseTable);
 			}
 		}
-	})
-	}else{
+	})}else{
 		var table = $('#balancesClosing').DataTable();
 		table.destroy();
 
@@ -316,7 +295,11 @@ if(URLactual.substring(0, URLactual.length - 16) == 'bnt'){
 				cache: false,
 				data: function (req) {
 					data = req
-					data.idExtPer = "";
+					if (lang.CONF_NIT_INPUT_BOOL == 'ON' ){
+						data.idExtPer = $('#Nit').val();
+					}else{
+						data.idExtPer = '';
+					}
 					data.producto = $("#productCode").val();
 					data.idExtEmp = $('#enterpriseReport').find('option:selected').attr('acrif');
 					data.tamanoPagina = 10;
