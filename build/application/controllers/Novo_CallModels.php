@@ -5,6 +5,7 @@
  * @date April 20th, 2019
 */
 class Novo_CallModels extends Novo_Controller {
+	public $class;
 
 	public function __construct()
 	{
@@ -12,6 +13,7 @@ class Novo_CallModels extends Novo_Controller {
 		log_message('INFO', 'NOVO CallModels Controller Class Initialized');
 
 		if($this->input->is_ajax_request()) {
+			$this->class = lcfirst($this->dataRequest->who);
 			$this->rule = lcfirst($this->dataRequest->where);
 			$this->model = 'Novo_'.ucfirst($this->dataRequest->who).'_Model';
 			$this->method = 'callWs_'.ucfirst($this->dataRequest->where).'_'.$this->dataRequest->who;
