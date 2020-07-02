@@ -16,6 +16,7 @@ header.main-head {
 	height: 3.75rem;
 	background-color: var(--color-primary);
 	font-weight: var(--light-font-weight);
+	border-bottom: 3px solid var(--color-seventh);
 }
 
 /* Content */
@@ -27,9 +28,10 @@ main.content {
 /* Footer */
 footer.main-footer {
 	display: flex;
-	padding: 2rem 2.5rem;
+	padding: 1rem 1rem;
 	color: var(--color-secondary);
 	background-color: var(--color-primary);
+	border-top: 3px solid var(--color-seventh);
 }
 
 /* Type Scale
@@ -418,8 +420,8 @@ textarea.form-control {
 
 /* Checkboxes and radios */
 
-.label {
-	color: var(--color-primary);
+label {
+	color: var(--color-sixth);
 }
 
 .custom-control {
@@ -478,6 +480,7 @@ textarea.form-control {
 
 .custom-control-label {
 	position: relative;
+	cursor:pointer;
   margin-bottom: 0;
 	margin-top: .25rem;
 	font-weight: var(--font-weight-base);
@@ -1300,16 +1303,6 @@ textarea.form-control {
 .bg-being-validated { background-color: var(--being-validated) !important }
 
 .bg-transparent { background-color: transparent !important }
-
-.bg-content {
-  background: linear-gradient(
-      rgba(246,243,241,.6),
-      rgba(246,243,241,.6)
-    ),
-    url("../../images/pb/bg-content.svg");
-  background-repeat: no-repeat;
-  background-size: cover;
-}
 
 /* Borders
 ========================================================================== */
@@ -3528,9 +3521,6 @@ a.ui-button:active,
 	height: 100%;
 	z-index: 0;
 	opacity: .4;
-	background-image: url("../../images/pb/bg-content.svg");
-	background-repeat: no-repeat;
-	background-size: cover;
 }
 
 .login-content .z1{
