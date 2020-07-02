@@ -32,8 +32,8 @@ $config = [
 	],
 	'singleSignon' => [
 		[
-			'field' => 'tokenId',
-			'label' => 'tokenId',
+			'field' => 'sessionId',
+			'label' => 'sessionId',
 			'rules' => 'trim|required'
 		]
 	],

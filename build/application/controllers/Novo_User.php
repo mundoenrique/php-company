@@ -75,28 +75,28 @@ class Novo_User extends NOVO_Controller {
 	 * @info Método para el cierre de sesión
 	 * @author J. Enrique Peñaloza Piñero.
 	 */
-	public function singleSignon($tokenId = FALSE)
+	public function singleSignon($sessionId = FALSE)
 	{
 		log_message('INFO', 'NOVO User: singleSignon Method Initialized');
 
 		$view = 'single-signin';
 		$this->render->send = FALSE;
 
-		if ($tokenId) {
-			$this->render->tokenId = $tokenId;
+		if ($sessionId) {
+			$this->render->sessionId = $sessionId;
 			$this->render->send = TRUE;
 		} else {
-			$this->render->tokenId = $this->request->tokenId;
+			$this->render->sessionId = $this->request->sessionId;
 		}
 
-		if ($tokenId != 'fin') {
+		if ($sessionId != 'fin') {
 			array_push(
 				$this->includeAssets->jsFiles,
 				'user/single-signin'
 			);
 		}
 
-		if($tokenId == 'fin') {
+		if($sessionId == 'fin') {
 			$view = 'finish';
 			$this->render->activeHeader = TRUE;
 			$this->render->showBtn = FALSE;
