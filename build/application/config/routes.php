@@ -109,7 +109,6 @@ $route['(:any)/master-account-excel-consolid'] = "Novo_Reports/exportToExcelMast
 $route['(:any)/master-account-pdf-consolid'] = "Novo_Reports/exportToPDFMasterAccountConsolid";
 $route['(:any)/master-account'] = "Novo_Reports/masterAccount";
 $route['(:any)/tarjetahabientes'] = "Novo_Reports/cardHolders";
-
 //settings
 $route['(:any)/configuracion'] = "Novo_Settings/options";
 $route['(:any)/empresa'] = "Novo_Settings/getEnterprise";
