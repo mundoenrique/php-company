@@ -237,7 +237,7 @@ $(function () {
 			inputModal =	'<form id="password-modal">';
 			inputModal +=		'<div class="form-group col-auto">';
 			inputModal += 		'<div class="input-group">';
-			inputModal += 			'<input class="form-control pwd-input" type="password" name="password" autocomplete="off"';
+			inputModal += 			'<input class="form-control pwd-input pwd" type="password" name="password" autocomplete="off"';
 			inputModal += 				'placeholder="' + lang.GEN_PLACE_PASSWORD + '">';
 			inputModal += 			'<div class="input-group-append">';
 			inputModal += 				'<span class="input-group-text pwd-action" title="' + lang.GEN_SHOW_PASS + '"><i class="icon-view mr-0"></i></span>';
@@ -390,7 +390,7 @@ function sendRequest(action, modalReq, btn) {
 			modalReq: modalReq,
 			cards: cardsInfo,
 			action: action,
-			pass: cryptoPass(form.find('input[type=password]').val().trim())
+			pass: cryptoPass(form.find('input.pwd').val().trim())
 		}
 
 		verb = 'POST'; who = 'Services'; where = 'ActionMasterAccount';
@@ -408,7 +408,7 @@ function sendRequest(action, modalReq, btn) {
 
 			btn.prop('disabled', false);
 			insertFormInput(false);
-			form.find('input[type=password]').val('')
+			form.find('input.pwd').val('')
 			$('#tableServicesMaster').find('tbody > tr input').val('')
 
 			if (response.data.balance) {
