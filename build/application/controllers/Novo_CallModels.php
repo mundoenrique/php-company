@@ -48,7 +48,7 @@ class Novo_CallModels extends Novo_Controller {
 		}
 
 		if($valid) {
-			$valid = $this->verify_access->validateForm($this->rule, $this->countryUri, $this->appUserName);
+			$valid = $this->verify_access->validateForm($this->rule, $this->countryUri, $this->appUserName, $this->class);
 		}
 
 		if($valid) {

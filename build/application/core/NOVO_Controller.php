@@ -123,7 +123,7 @@ class NOVO_Controller extends CI_Controller {
 			$valid = TRUE;
 
 			if ($_POST && $access) {
-				$valid = $this->verify_access->validateForm($this->rule, $this->countryUri, $this->appUserName, $this->class);
+				$valid = $this->verify_access->validateForm($this->rule, $this->countryUri, $this->appUserName);
 
 				if ($valid) {
 					$this->request = $this->verify_access->createRequest($this->rule, $this->appUserName);
