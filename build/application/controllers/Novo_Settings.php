@@ -37,7 +37,7 @@ class Novo_Settings extends NOVO_Controller {
 			"validate".$this->render->newViews."-forms",
 			"third_party/additional-methods",
 			"settings/settings",
-			"user/pass_validate"
+			"user/passValidate"
 		);
 
 		//LLama lista de empresas

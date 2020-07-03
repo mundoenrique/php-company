@@ -6,14 +6,16 @@
 		<nav class="main-nav nav-inferior">
 			<ul class="mb-0 h6 light tertiary list-style-none list-inline">
 				<li class="inline">
-					<a class="tertiary big-modal" href="<?= base_url('empresas') ?>"><?= lang('GEN_MENU_ENTERPRISE'); ?></a></li>
-				/
+					<a class="tertiary big-modal" href="<?= base_url('empresas') ?>"><?= lang('GEN_MENU_ENTERPRISE'); ?></a>
+				</li> /
 				<li class="inline">
-					<a class="tertiary big-modal" href="<?= base_url('productos') ?>"><?= lang('GEN_PRODUCTS'); ?></a></li> /
+					<a class="tertiary big-modal" href="<?= base_url('productos') ?>"><?= lang('GEN_PRODUCTS'); ?></a>
+				</li> /
 				<li class="inline">
 					<a class="tertiary big-modal" href="<?= base_url('detalle-producto') ?>"><?= lang('PRODUCTS_DETAIL_TITLE'); ?></a>
 				</li> /
-				<li class="inline"><a class="tertiary not-pointer" href="javascript:"><?= lang('GEN_MENU_CONSULTATIONS'); ?></a>
+				<li class="inline">
+					<a class="tertiary not-pointer" href="javascript:"><?= lang('GEN_MENU_SERVICES'); ?></a>
 				</li>
 			</ul>
 		</nav>
@@ -24,36 +26,36 @@
 		<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
 	</div>
 	<div class="w-100 hide-out hide">
-		<div class="flex flex-auto flex-column <?= $widget ? '' : 'max-width-6'; ?>">
+		<div class="flex flex-auto flex-column">
 
 			<div class="search-criteria-order flex pb-3 flex-column w-100">
 				<span class="line-text mb-2 h4 semibold primary"><?= lang('GEN_SEARCH_CRITERIA'); ?></span>
 				<div class="flex mt-2 mb-3 px-5">
-					<form method="post" class="w-100">
+					<form id="searchCardsForm" class="w-100">
 						<div class="row flex justify-between">
 							<div class="form-group col-4 col-xl-3">
-								<label><?= lang('GEN_ORDER_TITLE'); ?></label>
-								<input id="Nit" class="form-control h5" type="text" placeholder="Ingresar <?= lang('GEN_NIT'); ?>">
+								<label for="orderNumber"><?= lang('GEN_ORDER_TITLE'); ?></label>
+								<input id="orderNumber" name="orderNumber" class="form-control h5 select-group" type="text">
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-4 col-xl-3">
-								<label><?= lang('GEN_TABLE_BULK_NUMBER'); ?></label>
-								<input id="card-number" class="form-control h5" type="text" placeholder="Ingresar número">
+								<label for="bulkNumber"><?= lang('GEN_TABLE_BULK_NUMBER'); ?></label>
+								<input id="bulkNumber" name="bulkNumber" class="form-control h5 select-group" type="text">
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-4 col-xl-3">
-								<label><?= lang('GEN_DOCUMENT_TITLE'); ?></label>
-								<input id="Nit" class="form-control h5" type="text" placeholder="Ingresar <?= lang('GEN_NIT'); ?>">
+								<label for="idNumberP"><?= lang('GEN_TABLE_DNI'); ?></label>
+								<input id="idNumberP" name="idNumberP" class="form-control h5 select-group" type="text">
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-4 col-xl-3">
-								<label><?= lang('GEN_CARD_NUMBER'); ?></label>
-								<input id="card-number" class="form-control h5" type="text" placeholder="Ingresar número">
+								<label for="cardNumberP"><?= lang('GEN_CARD_NUMBER'); ?></label>
+								<input id="cardNumberP" name="cardNumberP" class="form-control h5 select-group" type="text">
 								<div class="help-block"></div>
 							</div>
 							<div class="flex col-xl-auto items-center ml-auto mr-2">
-								<button class="btn btn-primary btn-small btn-loading">
-								<?= lang('GEN_BTN_SEARCH'); ?>
+								<button id="searchCardsBtn" class="btn btn-primary btn-small btn-loading">
+									<?= lang('GEN_BTN_SEARCH'); ?>
 								</button>
 							</div>
 						</div>
@@ -108,7 +110,7 @@
 											<i class="icon novoglyphs icon-envelope-open" aria-hidden="true"></i>
 										</button>
 										<button id="bloqueo_tarjeta" class="btn mx-1 px-0" title="Bloqueo tarjeta" data-toggle="tooltip">
-											<i class="icon novoglyphs icon-lock" aria-hidden="true"></i>
+											<i class="icon icon-lock" aria-hidden="true"></i>
 										</button>
 										<button id="desbloqueo" class="btn mx-1 px-0" title="Desbloqueo" data-toggle="tooltip">
 											<i class="icon novoglyphs icon-chevron-up" aria-hidden="true"></i>
@@ -134,11 +136,11 @@
 						</tbody>
 					</table>
 
-					<form id="sign-bulk-form" method="post">
+					<form id="actionCArdsForm" method="post">
 						<div class="flex row mt-3 mb-2 mx-2 justify-end">
 							<div class="col-4 col-lg-3 h6 regular form-group">
 								<select id="" name="" class="select-box custom-select flex h6 w-100">
-									<option selected disabled >Seleccionar</option>
+									<option selected disabled>Seleccionar</option>
 									<option value="0">Bloqueo tarjeta</option>
 									<option value="1">Consulta saldo trajeta</option>
 									<option>Option 3</option>
@@ -147,19 +149,19 @@
 							</div>
 							<div class="col-4 col-lg-3 col-xl-3 form-group">
 								<div class="input-group">
-									<input id="" name="password" class="form-control pwd-input pr-0" type="password" autocomplete="off"
+									<input id="passAction" name="password" class="form-control pwd-input pr-0 pwd" type="password" autocomplete="off"
 									placeholder="<?= lang('GEN_PLACE_PASSWORD'); ?>">
 									<div class="input-group-append">
 										<span id="pwd_action" class="input-group-text pwd-action" title="<?= lang('GEN_SHOW_PASS') ?>"><i
-											class="icon-view mr-0"></i></span>
+												class="icon-view mr-0"></i></span>
 									</div>
 								</div>
 								<div class="help-block bulk-select text-left"></div>
 							</div>
 							<div class="col-3 col-lg-auto">
-								<button id="" class="btn btn-primary btn-small btn-loading flex mx-auto">
-								<?= lang('GEN_BTN_PROCESS'); ?>
-							</button>
+								<button id="actionCArdsBtn" class="btn btn-primary btn-small btn-loading flex mx-auto">
+									<?= lang('GEN_BTN_PROCESS'); ?>
+								</button>
 							</div>
 
 						</div>
@@ -170,7 +172,4 @@
 
 		</div>
 	</div>
-	<?php if($widget): ?>
-	<?php $this->load->view('widget/widget_enterprise-product_content'.$newViews, $widget) ?>
-	<?php endif; ?>
 </div>

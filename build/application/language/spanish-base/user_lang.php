@@ -1,6 +1,30 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
+//LOGIN
+$lang['LOGIN_WELCOME_TITLE'] = 'Conexión Empresas Online';
+$lang['LOGIN_RECOVER_PASS'] = '¿Olvidaste tu contraseña?';
+$lang['LOGIN_WELCOME_MESSAGE']='Con este sistema las gestiones de pago de tu empresa son más eficientes, seguras y rápidas. Empieza a disfrutar de todas las ventajas que te ofrece Conexión Empresas Online.';
+$lang['LOGIN_BTN'] = 'Ingresar';
+$lang['LOGIN_SECURE_OPER_TITLE'] = 'Operaciones seguras';
+$lang['LOGIN_SECURE_OPER_MSG'] = 'Resguardamos la integridad y la privacidad de la información cumpliendo los más altos estándares internacionales de seguridad.';
+$lang['LOGIN_ACCESS_TITLE'] = 'Accesibilidad 7x24';
+$lang['LOGIN_ACCESS_MSG'] = 'La plataforma está disponible las 24 horas del día, los 7 días de la semana y te ofrece conexión directa vía Internet para realizar las operaciones de tu empresa.';
+$lang['LOGIN_AUTOMATIC_UPGRADE_TITLE'] = 'Actualización automática';
+$lang['LOGIN_AUTOMATIC_UPGRADE_MSG'] = 'Las actualizaciones y mejoras de la plataforma se ejecutarán de forma automática, permitiéndole a tu empresa estar siempre al día con las nuevas funcionalidades que se desarrollen.';
+$lang['LOGIN_ONLINE_REPORTS_TITLE'] = 'Reportes Online';
+$lang['LOGIN_ONLINE_REPORTS_MSG'] = 'Obtenga información sobre las operaciones realizadas y gestiona en línea la emisión de reportes y gráficos que facilitan auditorías y controles sobre los gastos realizados por tu empresa.';
+$lang['LOGIN_OPERATIONS_TITLE'] = 'Operaciones';
+$lang['LOGIN_OPERATIONS_MSG'] = 'Consulta, autoriza o anula Lotes de Emisión y Recarga de tarjetas con mayor facilidad y obten la Orden de Servicio para facilitar el pago de operaciones';
+$lang['LOGIN_NEED_HELP_TITLE'] = '¿Necesitas ayuda?';
+$lang['LOGIN_NEED_HELP_MSG'] = 'Nuestros Ejecutivos del Centro de Soporte a  Empresas están a tu orden para ofrecerte mayor información o aclararte cualquier duda.';
+$lang['LOGIN_INFO'] = 'Ventas e información a empresas';
+$lang['LOGIN_INFO-1'] = 'Teléfono: (51-1) 619-8900';
+$lang['LOGIN_INFO-2'] = 'Fax: (51-1) 619-8900 anexo 200';
+$lang['LOGIN_INFO-3'] = 'E-mail: ventas@tebca.com.pe';
+$lang['LOGIN_WIDGET_TITLE'] = 'Cliente afiliado Perú';
+$lang['LOGIN_SIGNIN'] = 'Ingresar';
+$lang['LOGIN_RECOVERY_PASSWORD'] = 'Restablecer contraseña';
+$lang['LOGIN_RECOVERY_PASS_LINK'] = '¿Olvidaste o bloqueaste tu<br>clave de acceso?';
 //TERMS_CONTENT
 $lang['TERMS_MESSAGE'] = 'Estimado usuario debes leer y aceptar los términos de uso y confidencialidad para comenzar a usar nuestra plataforma.';
 $lang["TERMS_TITLE"]='Condiciones Generales, Términos de Uso y Confidencialidad';
@@ -19,3 +43,21 @@ $lang["TERMS_CONTENT"] = "<p><strong>Tebca Perú, Transferencia Electrónica de 
 	<p>La Empresa se reserva a su total discreción, emplear todos los medios necesarios a su alcance para retirar de forma inmediata al usuario que infrinja cualquiera de las condiciones de seguridad  y privacidad de La Plataforma , lo cual incluye que los Usuarios hayan enviado información falsa que no sea susceptible de verificarla en cuanto a su autenticidad.</p>
 	<p>Igualmente, La Empresa, tiene el derecho de cambiar las políticas de seguridad y privacidad, siendo que todo cambio será publicado en La Plataforma  a los fines de notificar a sus Usuarios.</p>
 	<p>Así pues, en caso de cualquier violación a las condiciones de seguridad y privacidad, a los sistemas que utilizan tecnología de la información, a la privacidad de las personas y comunicaciones y a la propiedad intelectual que estén vinculados a La Plataforma , se le aplicará lo dispuesto en el Código Penal sobre Delitos Informáticos y demás normas vigentes y aplicables del ordenamiento jurídico del Perú.</p>";
+//PASS-RECOVER
+$lang['RECOVER_PASS_FORGOTTEN']= "Si olvidaste o bloqueaste tu contraseña de acceso a <strong>%s</strong>, por favor ingresa los datos que se solicitan a continuación.";
+$lang['RECOVER_PASS_FISCAL_REGISTRY']= '%s de la Empresa';
+$lang['PLACE_HOLDER_FISCAL_REGISTER'] = "00000000000";
+//PASS-CHANGE
+$lang['PASSWORD_NEWUSER'] = 'Por motivos de seguridad es necesario que cambies tu contraseña la primera vez que ingresas a nuestro sistema "<strong>%s</strong>".';
+$lang['PASSWORD_EXPIRED'] = 'Tu contraseña está vencida. Por motivos de seguridad es necesario que la cambies antes de continuar en nuestro sistema "<strong>%s</strong>".';
+$lang['PASSWORD_CHANGE']= "Cambio de contraseña";
+$lang['PASSWORD_CURRENT'] = 'Contraseña actual';
+$lang['PASSWORD_NEW'] = 'Contraseña nueva';
+$lang['PASSWORD_CONFIRM'] = 'Confirma la contraseña';
+$lang['PASSWORD_INFO_TITLE'] = 'Requisitos para crear la contraseña:';
+$lang['PASSWORD_INFO_1'] = 'De 8 a 15 <strong>Caracteres</strong>';
+$lang['PASSWORD_INFO_2'] = 'Al menos una <strong>letra minúscula</strong>';
+$lang['PASSWORD_INFO_3'] = 'Al menos una <strong>letra mayúscula</strong>';
+$lang['PASSWORD_INFO_4'] = 'De 1 a 3 <strong>números</strong>';
+$lang['PASSWORD_INFO_5'] = 'Al menos un <strong>caracter especial</strong> (ej: ! @ * - ? ¡ ¿ + / . , _ #)';
+$lang['PASSWORD_INFO_6'] = 'No debe tener más de 2 <strong>caracteres</strong> iguales consecutivos';

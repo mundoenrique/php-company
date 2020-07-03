@@ -1,4 +1,4 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
-$lang['PLACE_HOLDER_FISCAL_REGISTER'] = "J-00000000-0";
+//PRODUCTS
+$lang['PRODUCTS_LOTS_TOTAL']= 'Lotes por autorizar: %s';

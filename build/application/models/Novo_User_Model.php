@@ -192,7 +192,7 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataAccessLog->userName = $this->country;
 
 		$this->dataRequest->idOperation = 'userByToken';
-		$this->token = $dataRequest->tokenId;
+		$this->token = $dataRequest->sessionId;
 
 		$response = $this->sendToService('callWs_SingleSignon');
 		$this->response->code = 0;

@@ -32,7 +32,7 @@ class Novo_Inquiries extends NOVO_Controller {
 			"third_party/jquery.validate",
 			"validate-core-forms",
 			"third_party/additional-methods",
-			"inquiries/service_orders"
+			"inquiries/serviceOrders"
 		);
 		$renderOrderList = FALSE;
 		$orderList = [];
@@ -103,7 +103,7 @@ class Novo_Inquiries extends NOVO_Controller {
 		array_push(
 			$this->includeAssets->jsFiles,
 			"third_party/dataTables-1.10.20",
-			"inquiries/bulk-detail"
+			"inquiries/bulkDetail"
 		);
 
 		foreach($response->data->bulkInfo AS $row => $info) {

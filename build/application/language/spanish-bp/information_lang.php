@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
+//TERMS
 $lang["TERMS_TITLE"]='TÉRMINOS Y CONDICIONES';
 $lang["TERMS_CONTENT"] = '<h2>USO DE CANALES ELECTRÓNICOS</h2>
 <div class="box-term">
