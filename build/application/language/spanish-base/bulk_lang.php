@@ -48,7 +48,6 @@ $lang['BULK_DETAIL'] = 'Detalle del lote';
 $lang['BULK_DELETE'] = 'Por favor ingresa la contraseña para eliminar el lote';
 $lang['BULK_DISASS'] = 'Por favor ingresa la contraseña para desasociar el lote';
 $lang['BULK_DELETE_DATE'] = 'Por favor ingresa la contraseña para eliminar el lote de fecha';
-$lang['BULK_DELETE_SO'] = 'Por favor ingresa la contraseña para anular la orden de servicio: ';
 $lang['BULK_SELECT'] = 'Selecciona al menos un lote';
 $lang['BULK_NO_BILLABLE'] = 'Lotes no facturables';
 $lang['BULK_CALCULATE_ORDER'] = 'Calcular Orden de servicio';

@@ -117,10 +117,10 @@ class Novo_User extends NOVO_Controller {
 	{
 		log_message('INFO', 'NOVO User: passwordRecovery Method Initialized');
 
-		$view = 'pass-recovery';
+		$view = 'recoverPass';
 		array_push(
 			$this->includeAssets->jsFiles,
-			"user/pass-recovery",
+			"user/recoverPass",
 			"third_party/jquery.validate",
 			"validate".$this->render->newViews."-forms",
 			"third_party/additional-methods"
@@ -139,7 +139,7 @@ class Novo_User extends NOVO_Controller {
 	{
 		log_message('INFO', 'NOVO User: changePassword Method Initialized');
 
-		$view = 'change-password';
+		$view = 'changePassword';
 
 		if(!$this->session->flashdata('changePassword')) {
 			redirect(base_url('inicio'), 'location');
@@ -148,8 +148,8 @@ class Novo_User extends NOVO_Controller {
 
 		array_push(
 			$this->includeAssets->jsFiles,
-			"user/change_pass".$this->render->newViews,
-			"user/pass_validate",
+			"user/changePassword".$this->render->newViews,
+			"user/passValidate",
 			"third_party/jquery.md5",
 			"third_party/jquery.balloon",
 			"third_party/jquery.validate",

@@ -1,6 +1,5 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
 //TERMS_CONTENT
 $lang["TERMS_TITLE"]='Términos y condiciones de la Tarjeta de Débito Empresarial Banorte';
 $lang["TERMS_CONTENT"] = '
