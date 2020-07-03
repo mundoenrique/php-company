@@ -101,8 +101,9 @@ class Novo_Services_Model extends NOVO_Model {
 		return $this->responseToTheView('callWs_TransfMasterAccount');
 	}
 	/**
-	 * @info Método para
-	 * @author
+	 * @info Método para realizar acciones de cuenta maestra
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date May 29th, 2020
 	 */
 	public function callWs_ActionMasterAccount_Services($dataRequest)
 	{
@@ -311,5 +312,51 @@ class Novo_Services_Model extends NOVO_Model {
 		}
 
 		return $this->responseToTheView('callWs_ActionMasterAccount');
+	}
+
+	public function callWs_CardsInquiry_Services ($dataRequest)
+	{
+		log_message('INFO', 'Novo Services Model: CardsInquiry Method Initialized');
+
+		$this->className = 'com.novo.objects.MO.ListadoEmisionesMO';
+
+		$this->dataAccessLog->modulo = 'Servicios';
+		$this->dataAccessLog->function = 'Consulta de tarjetas';
+		$this->dataAccessLog->operation = 'Obtener lista de tarjetas';
+
+		$this->dataRequest->idOperation = 'buscarTarjetasEmitidas';
+		$this->dataRequest->rifEmpresa = $this->session->enterpriseInf->idFiscal;
+		$this->dataRequest->accodcia = $this->session->enterpriseInf->enterpriseCode;
+		$this->dataRequest->idProducto = $this->session->productInf->productPrefix;
+		$this->dataRequest->usuario = [
+			'userName' => $this->session->userName
+		];
+		$this->dataRequest->nrOrdenServicio = $dataRequest->orderNumber;
+		$this->dataRequest->nroLote = $dataRequest->bulkNumber;
+		$this->dataRequest->tipoDocumento = isset($dataRequest->idType) ? $dataRequest->idType : '';
+		$this->dataRequest->cedula = $dataRequest->idNumberP;
+		$this->dataRequest->nroTarjeta = $dataRequest->cardNumberP;
+		$this->dataRequest->opcion = 'opcion';
+		$this->dataRequest->pagina = 0;
+
+		$response = $this->sendToService('callWs_CardsInquiry');
+
+		switch ($this->isResponseRc) {
+			case 0:
+				$this->response->title = 'Recepción de tarjetas';
+				$this->response->msg = 'Cosulta existosa, en poco tiempo estaremos mostrando los resultados';
+				$this->response->icon = lang('GEN_ICON_INFO');
+				$this->response->data['btn1']['action'] = 'close';
+			break;
+			case -150:
+				$this->response->title = 'Recepción de tarjetas';
+				$this->response->msg = lang('GEN_TABLE_SEMPTYTABLE');
+				$this->response->icon = lang('GEN_ICON_INFO');
+				$this->response->data['btn1']['action'] = 'close';
+			break;
+
+		}
+
+		return $this->responseToTheView('callWs_CardsInquiry');
 	}
 }

@@ -45,8 +45,14 @@ $(function () {
 
 		if (form.valid()) {
 			data = getDataForm(form);
-			/* $(this).html(loader);
-			insertFormInput(true); */
+			$(this).html(loader);
+			insertFormInput(true);
+
+			verb = 'POST'; who = 'services', where = 'CardsInquiry'
+			callNovoCore(verb, who, where, data, function(response) {
+				$('#searchCardsBtn').text(btnText);
+				insertFormInput(false);
+			})
 		}
 
 	})

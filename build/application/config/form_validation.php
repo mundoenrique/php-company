@@ -827,6 +827,28 @@ $config = [
 			'rules' => 'trim|integer|required'
 		]
 	],
+	'cardsInquiry' => [
+		[
+			'field' => 'orderNumber',
+			'label' => 'orderNumber',
+			'rules' => 'trim|numeric'
+		],
+		[
+			'field' => 'bulkNumber',
+			'label' => 'bulkNumber',
+			'rules' => 'trim|numeric'
+		],
+		[
+			'field' => 'idNumberP',
+			'label' => 'idNumberP',
+			'rules' => 'trim|alpha_numeric'
+		],
+		[
+			'field' => 'cardNumberP',
+			'label' => 'cardNumberP',
+			'rules' => 'trim|integer'
+		],
+	],
 	'statusBulk' => [
 		[
 			'field' => 'enterpriseCode',
