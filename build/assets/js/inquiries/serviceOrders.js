@@ -153,7 +153,7 @@ $(function () {
 					}
 				}
 				inputModal =	'<form id="delete-bulk-form" class="form-group">';
-				inputModal+= 		'<span class="regular">'+lang.BULK_DELETE_SO+': '+inputSelected+'</span>';
+				inputModal+= 		'<span class="regular">'+lang.GEN_BULK_DELETE_SO+': '+inputSelected+'</span>';
 				inputModal+=		'<div class="input-group">';
 				inputModal+= 			'<input id="password" class="form-control pwd-input" name="password" type="password" autocomplete="off"';
 				inputModal+=				'placeholder="'+lang.GEN_PLACE_PASSWORD+'">';

@@ -712,8 +712,8 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->dataAccessLog->operation = 'Obtener saldos';
 		$this->dataRequest->idOperation = 'saldosAmanecidos';
 		$this->dataRequest->idExtPer = $dataRequest->idExtPer;
-		$this->dataRequest->producto =  $dataRequest->producto;
-		$this->dataRequest->idExtEmp =  $dataRequest->idExtEmp;
+		$this->dataRequest->producto =  $dataRequest->product;
+		$this->dataRequest->idExtEmp =  $dataRequest->idExt;
 		$this->dataRequest->tamanoPagina = 10;
 		$this->dataRequest->paginar = TRUE;
 		$this->dataRequest->paginaActual = (int) ($dataRequest->start / 10) + 1;

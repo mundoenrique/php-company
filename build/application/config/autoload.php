@@ -141,7 +141,8 @@ $autoload['config'] = array();
 */
 $autoload['language'] = array(
 	'general',
-	'validate'
+	'validate',
+	'config-core'
 );
 
 /*

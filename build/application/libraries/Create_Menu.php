@@ -6,6 +6,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @date October 31th, 2019
  */
 class Create_Menu {
+	private $CI;
+	private $requestServ;
+	private $responseDefect;
 
 	public function __construct()
 	{
@@ -55,6 +58,10 @@ class Create_Menu {
 	{
 		log_message('INFO', 'NOVO Create_Menu: secondaryMenu method initialized');
 
+		/* if ($firstLevel->idPerfil == 'SERVIC') {
+			$firstLevel->modulos = json_decode('[{"idModulo":"TRAMAE","descripcion":"TRANSFERENCIA MAESTRA","status":"A","funciones":[{"accodfuncion":"TRADBL","acnomfuncion":"DESBLOQUEO A TARJETA"},{"accodfuncion":"TRABLQ","acnomfuncion":"BLOQUEO A TARJETAS"},{"accodfuncion":"TRAPGO","acnomfuncion":"ABONAR CUENTA CONCENTRADORA"},{"accodfuncion":"TRASAL","acnomfuncion":"CONSULTA A TARJETAS"},{"accodfuncion":"TRAASG","acnomfuncion":"REASIGNACION DE TARJETA"},{"accodfuncion":"TRAABO","acnomfuncion":"ABONOS A TARJETAS"},{"accodfuncion":"TRACAR","acnomfuncion":"CARGOS A TARJETAS"}],"rc":0},{"idModulo":"COPELO","descripcion":"ENTREGA DE TARJETA","status":"A","funciones":[{"accodfuncion":"OPCONL","acnomfuncion":"CONSULTA DE ESTADO\/OPERACION TARJETAS"},{"accodfuncion":"OPCONL","acnomfuncion":"CONSULTA DE ESTADO\/OPERACION TARJETAS"}],"rc":0},{"idModulo":"GIRCOM","descripcion":"GIROS COMERCIALES","status":"A","funciones":[{"accodfuncion":"CONSUL","acnomfuncion":"CONSULTA A TARJETAS"},{"accodfuncion":"ACTGIR","acnomfuncion":"ACTUALIZACION DE TARJETA"}],"rc":0},{"idModulo":"LIMTRX","descripcion":"LIMITES TRANSACCIONALES","status":"A","funciones":[{"accodfuncion":"CONSUL","acnomfuncion":"CONSULTA A TARJETAS"},{"accodfuncion":"ACTLIM","acnomfuncion":"ACTUALIZACION DE TARJETA"}],"rc":0}]');
+		} */
+
 		$level = new stdClass();
 		$level->second = [];
 		$level->third = [];
@@ -73,7 +80,9 @@ class Create_Menu {
 			}
 			$level->second[] = $this->menulang($module->idModulo);
 		}
+
 		log_message('INFO', 'NOVO secondaryMenu: '.json_encode($level, JSON_UNESCAPED_UNICODE));
+
 		return $level;
 	}
 	/**
@@ -123,6 +132,14 @@ class Create_Menu {
 			case 'COPELO':
 				$subMenuLang->text = lang('GEN_MENU_SERV_CARD_INQUIRY');
 				$subMenuLang->link = lang('GEN_LINK_SERV_CARD_INQUIRY');
+				break;
+			case 'GIRCOM':
+				$subMenuLang->text = lang('GEN_MENU_SERV_COMM_MONEY_ORDERS');
+				$subMenuLang->link = lang('GEN_LINK_SERV_COMM_MONEY_ORDERS');
+				break;
+			case 'LIMTRX':
+				$subMenuLang->text = lang('GEN_MENU_SERV_TRANS_LIMITS');
+				$subMenuLang->link = lang('GEN_LINK_SERV_TRANS_LIMITS');
 				break;
 			case 'CONVIS':
 				$subMenuLang->text = lang('GEN_MENU_SERV_CONTROLS_PAY');

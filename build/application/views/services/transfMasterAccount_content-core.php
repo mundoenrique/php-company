@@ -61,8 +61,8 @@
 						<div class="row flex justify-end my-3">
 							<div class="col-4 col-lg-3 col-xl-3 form-group">
 								<div class="input-group">
-									<input id="password-tranfer" name="password" class="form-control pwd-input pr-0" type="password" autocomplete="new-password"
-										placeholder="<?= lang('GEN_PLACE_PASSWORD'); ?>">
+									<input id="password-tranfer" name="password" class="form-control pwd-input pr-0 pwd" type="password"
+										autocomplete="off" placeholder="<?= lang('GEN_PLACE_PASSWORD'); ?>">
 									<div class="input-group-append">
 										<span id="pwd_action" class="input-group-text pwd-action" title="<?= lang('GEN_SHOW_PASS') ?>"><i
 												class="icon-view mr-0"></i></span>
@@ -140,7 +140,8 @@
 							<div class="flex row mt-3 mb-2 mx-2 justify-end">
 								<div class="col-3 col-lg-3 col-xl-3 form-group">
 									<div class="input-group">
-										<input name="password" class="form-control pwd-input pr-0" type="password" autocomplete="off" placeholder="<?= lang('GEN_PLACE_PASSWORD'); ?>">
+										<input name="password" class="form-control pwd-input pr-0 pwd" type="password" autocomplete="off"
+											placeholder="<?= lang('GEN_PLACE_PASSWORD'); ?>">
 										<div class="input-group-append">
 											<span id="pwd_action" class="input-group-text pwd-action" title="<?= lang('GEN_SHOW_PASS') ?>"><i
 													class="icon-view mr-0"></i></span>
