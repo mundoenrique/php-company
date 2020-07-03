@@ -336,7 +336,7 @@ class Novo_Services_Model extends NOVO_Model {
 		$this->dataRequest->tipoDocumento = isset($dataRequest->idType) ? $dataRequest->idType : '';
 		$this->dataRequest->cedula = $dataRequest->idNumberP;
 		$this->dataRequest->nroTarjeta = $dataRequest->cardNumberP;
-		$this->dataRequest->opcion = 'opcion';
+		$this->dataRequest->opcion = 'EMI_REC';
 		$this->dataRequest->pagina = 0;
 
 		$response = $this->sendToService('callWs_CardsInquiry');
