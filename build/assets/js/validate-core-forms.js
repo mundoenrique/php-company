@@ -18,7 +18,7 @@ function validateForms(form) {
 	var text = /^['a-z0-9ñáéíóú ,.:()']+$/i;
 	var usdAmount = /^[0-9]+(\.[0-9]*)?$/;
 	var fiscalReg = lang.VALIDATE_FISCAL_REGISTRY;
-	var idNumberReg = new RegExp(lang.VALIDATE_REG_ID_NUMBER, 'i');
+	var idNumberReg = new RegExp(lang.VALIDATE_REG_ID_NUMBER, 'gi');
 	var date = {
 		dmy: /^(0?[1-9]|[12][0-9]|3[01])\/(0?[1-9]|1[012])\/[0-9]{4}$/,
 		my: /^(0?[1-9]|1[012])\/[0-9]{4}$/,
@@ -122,7 +122,11 @@ function validateForms(form) {
 				},
 				pattern: numeric, maxlength: 16, minlength: 16
 			},
-			"otpCode": {required: true, pattern: alphanum}
+			"otpCode": {required: true, pattern: alphanum},
+			"orderNumber": {pattern: numeric, require_from_group: [1, '.select-group']},
+			"bulkNumber": {pattern: numeric, require_from_group: [1, '.select-group']},
+			"idNumberP": {pattern: idNumberReg, require_from_group: [1, '.select-group']},
+			"cardNumberP": {pattern: numeric, require_from_group: [1, '.select-group']},
 		},
 		messages: {
 			"user_login": lang.VALIDATE_USERLOGIN,
@@ -183,6 +187,23 @@ function validateForms(form) {
 			"idNumber": lang.VALIDATE_ID_NUMBER,
 			"cardNumber": lang.VALIDATE_CARD_NUMBER,
 			"otpCode": lang.VALIDATE_OS_OTP,
+			"orderNumber": {
+				pattern: lang.VALIDATE_BULK_NUMBER,
+				require_from_group: lang.VALIDATE_SELECT_GROUP
+
+			},
+			"bulkNumber": {
+				pattern: lang.VALIDATE_BULK_NUMBER,
+				require_from_group: lang.VALIDATE_SELECT_GROUP
+
+			},"idNumberP": {
+				pattern: lang.VALIDATE_ID_NUMBER,
+				require_from_group: lang.VALIDATE_SELECT_GROUP
+			},
+			"cardNumberP": {
+				pattern: lang.VALIDATE_CARD_NUMBER,
+				require_from_group: lang.VALIDATE_SELECT_GROUP
+			},
 		},
 		errorPlacement: function(error, element) {
 			$(element).closest('.form-group').find('.help-block').html(error.html());

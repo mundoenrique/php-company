@@ -27,7 +27,7 @@ class Verify_Access {
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date October 31th, 2019
 	 */
-	public function validateForm($rule, $countryUri, $user)
+	public function validateForm($rule, $countryUri, $user, $class = FALSE)
 	{
 
 		log_message('INFO', 'NOVO Verify_Access: validateForm method initialized');
@@ -40,9 +40,11 @@ class Verify_Access {
 			log_message('DEBUG', 'NOVO  ['.$user.'] VALIDATION '.$rule.' ERRORS: '.json_encode(validation_errors(), JSON_UNESCAPED_UNICODE));
 		}
 
-		languageLoad('generic', NULL, $rule);
-		$this->CI->config->set_item('language', 'spanish-'.$countryUri);
-		languageLoad('specific', $countryUri, $rule);
+		if ($class) {
+			languageLoad('generic', $class);
+			$this->CI->config->set_item('language', 'spanish-'.$countryUri);
+			languageLoad('specific', $class);
+		}
 
 		return $result;
 	}

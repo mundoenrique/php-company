@@ -49,7 +49,6 @@ class Novo_Inquiries_Model extends NOVO_Model {
 		}
 
 		if($this->isResponseRc != 0) {
-			//$this->response->code = 1;
 			$orderStatus[] = (object) [
 				'key' => '',
 				'text' => lang('RESP_TRY_AGAIN')
@@ -216,7 +215,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 				];
 				break;
 			case -1:
-				$this->response->title = lang('BULK_DELETE_TITLE');
+				$this->response->title = 'Anular Orden';
 				$this->response->msg = lang('RESP_PASSWORD_NO_VALID');
 				$this->response->icon = lang('GEN_ICON_WARNING');
 				$this->response->data['btn1'] = [

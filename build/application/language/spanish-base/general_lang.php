@@ -104,6 +104,7 @@ $lang['GEN_EXPORT_EXCEL'] = 'exportToExcel';
 $lang['GEN_FINISH_SESSION'] = 'FinishSession';
 $lang['GEN_DETAIL_BULK_TITLE'] = 'Detalle del lote';
 $lang['GEN_CONFIRM_BULK_TITLE'] = 'Confirmar lote';
+$lang['GEN_BULK_DELETE_SO'] = 'Por favor ingresa la contraseña para anular la orden de servicio: ';
 $lang['GEN_AUTH_BULK'] = 'AuthorizeBulk';
 $lang['GEN_DELETE_BULK'] = 'DeleteConfirmBulk';
 $lang['GEN_AUTHORIZE_BULK_TITLE'] = 'Autorizar lote';

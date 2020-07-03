@@ -58,7 +58,7 @@ Class Novo_Services extends Novo_Controller {
 			"third_party/jquery.validate",
 			"validate-core-forms",
 			"third_party/additional-methods",
-			'services/cards_inquiry'
+			'services/cardsInquiry'
 		);
 		$this->responseAttr(0, FALSE);
 		$this->render->titlePage = lang('GEN_MENU_SERV_CARD_INQUIRY');

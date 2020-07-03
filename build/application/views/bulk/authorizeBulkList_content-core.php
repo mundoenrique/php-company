@@ -161,7 +161,7 @@
 							</div>
 							<div class="col-5 col-lg-3 col-xl-3 form-group">
 								<div class="input-group">
-									<input id="password-auth" name="password" class="form-control pwd-input pr-0" type="password" autocomplete="new-password"
+									<input id="password-auth" name="password" class="form-control pwd-input pr-0 pwd" type="password" autocomplete="new-password"
 										placeholder="<?= lang('GEN_PLACE_PASSWORD'); ?>">
 									<div class="input-group-append">
 										<span id="pwd_action" class="input-group-text pwd-action" title="<?= lang('GEN_SHOW_PASS') ?>"><i

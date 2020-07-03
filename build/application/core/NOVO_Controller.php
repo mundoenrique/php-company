@@ -65,9 +65,9 @@ class NOVO_Controller extends CI_Controller {
 	{
 		log_message('INFO', 'NOVO Controller: optionsCheck Method Initialized');
 
-		languageLoad('generic');
+		languageLoad('generic', $this->router->fetch_class());
 		clientUrlValidate($this->countryUri);
-		languageLoad('specific', $this->countryUri);
+		languageLoad('specific', $this->router->fetch_class());
 		if($this->session->userId) {
 			if($this->session->countrySess !== $this->config->item('country')) {
 				$urlRedirect = str_replace($this->countryUri.'/', $this->session->countryUri.'/', base_url('cerrar-sesion/inicio'));
