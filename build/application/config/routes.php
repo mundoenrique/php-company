@@ -87,6 +87,7 @@ $route['(:any)/consulta-lote'] = "Novo_Inquiries/bulkDetail";
 //services
 $route['(:any)/transf-cuenta-maestra'] = "Novo_Services/transfMasterAccount";
 $route['(:any)/consulta-tarjetas'] = "Novo_Services/cardsInquiry";
+$route['(:any)/limites-transaccionales'] = "Novo_Services/transactionalLimits";
 //DownloadFile
 $route['(:any)/descargar-archivo'] = "Novo_DownloadFiles/exportFiles";
 //Reports
