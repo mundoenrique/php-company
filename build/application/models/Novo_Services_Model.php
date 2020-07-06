@@ -314,7 +314,7 @@ class Novo_Services_Model extends NOVO_Model {
 		return $this->responseToTheView('callWs_ActionMasterAccount');
 	}
 
-	public function callWs_CardsInquiry_Services ($dataRequest)
+	public function callWs_CardsInquiry_Services($dataRequest)
 	{
 		log_message('INFO', 'Novo Services Model: CardsInquiry Method Initialized');
 
@@ -341,7 +341,8 @@ class Novo_Services_Model extends NOVO_Model {
 
 		$response = $this->sendToService('callWs_CardsInquiry');
 		$cardsList = [];
-		$operList = ['consulta_saldo_tarjeta' => FALSE];
+		$operList = ['INQUIRY_BALANCE' => FALSE];
+		$massiveOptions = [];
 
 		switch ($this->isResponseRc) {
 			case 0:
@@ -362,24 +363,29 @@ class Novo_Services_Model extends NOVO_Model {
 					$record->name = ucwords(mb_strtolower($cards->nombre));
 					$record->idNumber = $cards->cedula;
 					$options = [
-						'no_oper' => '--'
+						'NO_OPER' => '--'
 					];
 
 					foreach ($response->operacioneTarjeta AS $status) {
 						if ($status->edoTarjeta == $cards->edoEmision) {
 							foreach ($status->operacion AS $oper) {
-								$key = mb_strtolower(str_replace(' ', '_', $oper));
-								$options[$key] = ucfirst(mb_strtolower($oper));
+								$key = mb_strtoupper(str_replace(' ', '_', $oper));
+								$options[lang('SERVICES_INQUIRY_OPTIONS')[$key]] = ucfirst(mb_strtolower($oper));
+								$massiveOptions[lang('SERVICES_INQUIRY_OPTIONS')[$key]] = lang('SERVICES_INQUIRY_'.lang('SERVICES_INQUIRY_OPTIONS')[$key]);
 							}
-							unset($options['no_oper']);
+							unset($options['NO_OPER']);
 						}
 					}
 
 					$record->options = $options;
 					array_push($cardsList, $record);
 
-					if (array_key_exists('consulta_saldo_tarjeta', $options)) {
-						$operList['consulta_saldo_tarjeta'] =  TRUE;
+					if (array_key_exists('INQUIRY_BALANCE', $options)) {
+						$operList['INQUIRY_BALANCE'] =  TRUE;
+					}
+
+					if (array_key_exists('UPDATE_DATA', $massiveOptions)) {
+						unset($massiveOptions['UPDATE_DATA']);
 					}
 				}
 
@@ -392,6 +398,7 @@ class Novo_Services_Model extends NOVO_Model {
 
 		$this->response->data['cardsList'] = $cardsList;
 		$this->response->data['operList'] = $operList;
+		$this->response->data['massiveOptions'] = $massiveOptions;
 
 		return $this->responseToTheView('callWs_CardsInquiry');
 	}

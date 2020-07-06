@@ -99,12 +99,7 @@
 						<form id="actionCArdsForm" method="post">
 							<div class="flex row mt-3 mb-2 mx-2 justify-end">
 								<div class="col-4 col-lg-3 h6 regular form-group">
-									<select id="" name="" class="select-box custom-select flex h6 w-100">
-										<option selected disabled>Seleccionar</option>
-										<option value="0">Bloqueo tarjeta</option>
-										<option value="1">Consulta saldo trajeta</option>
-										<option>Option 3</option>
-									</select>
+									<select id="masiveOptions" name="masiveOptions" class="select-box custom-select flex h6 w-100"></select>
 									<div class="help-block"></div>
 								</div>
 								<div class="col-4 col-lg-3 col-xl-3 form-group">
