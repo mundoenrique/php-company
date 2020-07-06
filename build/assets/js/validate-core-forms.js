@@ -100,8 +100,21 @@ function validateForms(form) {
 			"inquiry-type": {requiredSelect: true},
 			"expired-date": {required: true, pattern: date.my},
 			"max-cards": {required: true, pattern: numeric, maxcards: true},
-			"starting-line1": {required: true, pattern: alphanumspace},
-			"starting-line2": {required: true, pattern: alphanumspace},
+			"starting-line1": {required: {
+				depends: function() {
+				if( lang.CONF_OUTLINE_ONE_REQUIRED == 'ON'){
+					return true
+				}else{
+					return false
+				}}}, pattern: alphanumspace},
+			"starting-line2": {required: {
+        depends: function() {
+					if( lang.CONF_OUTLINE_TWO_REQUIRED == 'ON'){
+						return true
+					}else{
+						return false
+					}
+        }}, 	pattern: alphanumspace},
 			"bulk-number": {pattern: numeric},
 			"enterpriseName": {required: true},
 			"productName": {required: true},

@@ -42,3 +42,5 @@ $lang['CONF_MP4_VIDEO'] = [''];
 $lang['CONF_PDF_ICON'] = 'icon-pdf.svg';
 $lang['CONF_RAR_ICON'] = 'icon-rar.svg';
 $lang['CONF_ZIP_ICON'] = 'icon-zip.svg';
+//UNAMED CARDS FLAGS
+$lang['CONF_OUTLINE_TWO_REQUIRED'] = 'OFF';
