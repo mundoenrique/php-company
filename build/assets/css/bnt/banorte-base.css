@@ -1283,7 +1283,7 @@ label {
 /* Backgrounds Colors
 ========================================================================== */
 
-/* .bg-primary   { background-color: var(--color-eighth) !important } */
+/* .bg-primary   { background-color: var(--color-primary) !important } */
 .bg-secondary { background-color: var(--color-secondary) !important }
 .bg-tertiary  { background-color: var(--color-tertiary) !important }
 
@@ -1302,6 +1302,8 @@ label {
 .bg-will-not-processed { background-color: var(--will-not-processed) !important }
 .bg-not-processed { background-color: var(--not-processed) !important }
 .bg-being-validated { background-color: var(--being-validated) !important }
+.bg-option-active { background-color: var(--option-active) !important }
+.bg-option-not-active { background-color: var(--option-not-active) !important }
 
 .bg-transparent { background-color: transparent !important }
 

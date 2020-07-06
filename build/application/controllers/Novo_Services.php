@@ -89,6 +89,8 @@ Class Novo_Services extends Novo_Controller {
 		);
 		$this->responseAttr();
 		$this->render->titlePage = lang('GEN_MENU_SERV_TRANS_LIMITS');
+		$this->views = ['services/'.$view];
+		$this->loadView($view);
 	}
 
 	/**

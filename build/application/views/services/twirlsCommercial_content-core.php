@@ -99,13 +99,6 @@
 						</div>
 					</div>
 					<div id="checked-form" class="form-group col-4 col-lg-4 col-xl-3 pb-3">
-						<label class="block">Colegios y universidades</label>
-						<div class="custom-control custom-switch custom-control-inline">
-							<input id="collegesUniversities" class="custom-control-input" type="checkbox" name="collegesUniversities">
-							<label class="custom-control-label" for="collegesUniversities"></label>
-						</div>
-					</div>
-					<div id="checked-form" class="form-group col-4 col-lg-4 col-xl-3 pb-3">
 						<label class="block">Entretenimiento</label>
 						<div class="custom-control custom-switch custom-control-inline">
 							<input id="entertainment" class="custom-control-input" type="checkbox" name="entertainment">
@@ -190,18 +183,36 @@
 						</div>
 					</div>
 					<div id="checked-form" class="form-group col-4 col-lg-4 col-xl-3 pb-3">
-						<label class="block">Transporte terrestre de pasajeros</label>
+						<label class="block">Colegios y universidades</label>
+						<div class="custom-control custom-switch custom-control-inline">
+							<input id="collegesUniversities" class="custom-control-input" type="checkbox" name="collegesUniversities">
+							<label class="custom-control-label" for="collegesUniversities"></label>
+						</div>
+					</div>
+					<div id="checked-form" class="form-group col-4 col-lg-4 col-xl-3 pb-3">
+					<label class="block">Ventas al detalle (retail)</label>
+						<div class="custom-control custom-switch custom-control-inline">
+							<input id="retailSales" class="custom-control-input" type="checkbox" name="retailSales">
+							<label class="custom-control-label" for="retailSales"></label>
+						</div>
+					</div>
+					<div id="checked-form" class="form-group col-4 col-lg-4 col-xl-3 pb-3">
+					<label class="block">Transporte terrestre de pasajeros</label>
 						<div class="custom-control custom-switch custom-control-inline">
 							<input id="passengerTransportation" class="custom-control-input" type="checkbox" name="passengerTransportation">
 							<label class="custom-control-label" for="passengerTransportation"></label>
 						</div>
 					</div>
-					<div id="checked-form" class="form-group col-4 col-lg-4 col-xl-3 pb-3">
-						<label class="block">Ventas al detalle (retail)</label>
-						<div class="custom-control custom-switch custom-control-inline">
-							<input id="retailSales" class="custom-control-input" type="checkbox" name="retailSales">
-							<label class="custom-control-label" for="retailSales"></label>
-						</div>
+				</div>
+
+				<div class="mx-3 h3">
+					<div class="flex mt-4 items-center">
+						<div class="icon-square bg-option-active" alt=""></div>
+						<span class="pl-1 h6">Opción activa.</span>
+					</div>
+					<div class="flex mt-2 items-center">
+						<div class="icon-square bg-option-not-active" alt=""></div>
+						<span class="pl-1 h6">Opción no activa.</span>
 					</div>
 				</div>
 
