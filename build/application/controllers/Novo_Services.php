@@ -89,6 +89,28 @@ Class Novo_Services extends Novo_Controller {
 		);
 		$this->responseAttr();
 		$this->render->titlePage = lang('GEN_MENU_SERV_TRANS_LIMITS');
+	}
+
+	/**
+	 * @info Método para la consulta de tarjetas
+	 * @author G. Jennifer Carolina Cádiz
+	 * @date July 3th, 2020
+	 */
+
+	public function twirlsCommercial()
+	{
+		log_message('INFO', 'Novo_Services: twirlsCommercial Method Initialized');
+
+		$view = 'twirlsCommercial';
+		array_push(
+			$this->includeAssets->jsFiles,
+			"third_party/jquery.validate",
+			"validate-core-forms",
+			"third_party/additional-methods",
+			'services/twirlsCommercial'
+		);
+		$this->responseAttr();
+		$this->render->titlePage = lang('GEN_MENU_SERV_COMM_MONEY_ORDERS');
 		$this->views = ['services/'.$view];
 		$this->loadView($view);
 	}

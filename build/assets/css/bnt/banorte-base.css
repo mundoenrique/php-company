@@ -680,7 +680,7 @@ label {
 
 .custom-switch .custom-control-label::after {
   top: calc(.25rem + 1px);
-  left: calc(-2.25rem + 2px);
+  left: calc(-2.25rem + 4px);
   width: calc(1rem - 4px);
   height: calc(1rem - 4px);
   background-color: var(--color-eighth);
