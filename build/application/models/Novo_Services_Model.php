@@ -340,22 +340,58 @@ class Novo_Services_Model extends NOVO_Model {
 		$this->dataRequest->pagina = 0;
 
 		$response = $this->sendToService('callWs_CardsInquiry');
+		$cardsList = [];
+		$operList = ['consulta_saldo_tarjeta' => FALSE];
 
 		switch ($this->isResponseRc) {
 			case 0:
-				$this->response->title = 'Recepción de tarjetas';
-				$this->response->msg = 'Cosulta existosa, en poco tiempo estaremos mostrando los resultados';
-				$this->response->icon = lang('GEN_ICON_INFO');
-				$this->response->data['btn1']['action'] = 'close';
+				$this->response->code = 0;
+				foreach ($response->detalleEmisiones AS $cards) {
+					$record = new stdClass();
+					$record->cardNumber = $cards->nroTarjeta;
+					$record->orderNumber = $cards->ordenS;
+					$record->bulkNumber = $cards->nroLote;
+					$issueStatus = ucfirst(mb_strtolower($cards->edoEmision));
+
+					if (strpos($cards->edoEmision, '/') !== FALSE) {
+						$issueStatus = strstr($issueStatus, '/', TRUE);
+					}
+
+					$record->issueStatus = trim($issueStatus);
+					$record->cardStatus = trim(ucfirst(mb_strtolower($cards->edoPlastico)));
+					$record->name = ucwords(mb_strtolower($cards->nombre));
+					$record->idNumber = $cards->cedula;
+					$options = [
+						'no_oper' => '--'
+					];
+
+					foreach ($response->operacioneTarjeta AS $status) {
+						if ($status->edoTarjeta == $cards->edoEmision) {
+							foreach ($status->operacion AS $oper) {
+								$key = mb_strtolower(str_replace(' ', '_', $oper));
+								$options[$key] = ucfirst(mb_strtolower($oper));
+							}
+							unset($options['no_oper']);
+						}
+					}
+
+					$record->options = $options;
+					array_push($cardsList, $record);
+
+					if (array_key_exists('consulta_saldo_tarjeta', $options)) {
+						$operList['consulta_saldo_tarjeta'] =  TRUE;
+					}
+				}
+
 			break;
 			case -150:
-				$this->response->title = 'Recepción de tarjetas';
-				$this->response->msg = lang('GEN_TABLE_SEMPTYTABLE');
-				$this->response->icon = lang('GEN_ICON_INFO');
-				$this->response->data['btn1']['action'] = 'close';
+				$this->response->code = 1;
 			break;
 
 		}
+
+		$this->response->data['cardsList'] = $cardsList;
+		$this->response->data['operList'] = $operList;
 
 		return $this->responseToTheView('callWs_CardsInquiry');
 	}
