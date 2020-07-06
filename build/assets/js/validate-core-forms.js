@@ -102,19 +102,12 @@ function validateForms(form) {
 			"max-cards": {required: true, pattern: numeric, maxcards: true},
 			"starting-line1": {required: {
 				depends: function() {
-				if( lang.CONF_OUTLINE_ONE_REQUIRED == 'ON'){
-					return true
-				}else{
-					return false
-				}}}, pattern: alphanumspace},
+				return lang.CONF_OUTLINE_ONE_REQUIRED == 'ON' ? true : false;
+				}}, pattern: alphanumspace},
 			"starting-line2": {required: {
-        depends: function() {
-					if( lang.CONF_OUTLINE_TWO_REQUIRED == 'ON'){
-						return true
-					}else{
-						return false
-					}
-        }}, 	pattern: alphanumspace},
+				depends: function() {
+				return lang.CONF_OUTLINE_TWO_REQUIRED == 'ON' ? true : false;
+				}}, pattern: alphanumspace},
 			"bulk-number": {pattern: numeric},
 			"enterpriseName": {required: true},
 			"productName": {required: true},
