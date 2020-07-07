@@ -100,14 +100,24 @@ function validateForms(form) {
 			"inquiry-type": {requiredSelect: true},
 			"expired-date": {required: true, pattern: date.my},
 			"max-cards": {required: true, pattern: numeric, maxcards: true},
-			"starting-line1": {required: {
-				depends: function() {
-				return lang.CONF_OUTLINE_ONE_REQUIRED == 'ON' ? true : false;
-				}}, pattern: alphanumspace},
-			"starting-line2": {required: {
-				depends: function() {
-				return lang.CONF_OUTLINE_TWO_REQUIRED == 'ON' ? true : false;
-				}}, pattern: alphanumspace},
+			"starting-line1": {
+				required: {
+					depends: function() {
+
+						return lang.CONF_STARTING_LINE1_REQUIRED == 'ON';
+					}
+				},
+				pattern: alphanumspace
+			},
+			"starting-line2": {
+				required: {
+					depends: function() {
+
+						return lang.CONF_STARTING_LINE2_REQUIRED == 'ON';
+					}
+				},
+				pattern: alphanumspace
+			},
 			"bulk-number": {pattern: numeric},
 			"enterpriseName": {required: true},
 			"productName": {required: true},

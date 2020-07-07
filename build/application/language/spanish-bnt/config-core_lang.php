@@ -8,7 +8,8 @@ $lang['CONF_VALID_POSITION'] = 'right';
 $lang['CONF_SIGNIN_IMG'] = 'ON';
 //REQUEST UNNAMED
 $lang['CONF_UNNA_EXPIRED_DATE'] = 'OFF';
-//REQUEST UNNAMED
+$lang['CONF_STARTING_LINE2_REQUIRED'] = 'OFF';
+//DETAIL UNNAMED
 $lang['CONF_UNNA_ACCOUNT_NUMBER'] = 'OFF';
 //AUTHORIZE BULK LIST
 $lang['CONF_BULK_AUTHORIZE'] = 'OFF';
@@ -43,4 +44,3 @@ $lang['CONF_PDF_ICON'] = 'icon-pdf.svg';
 $lang['CONF_RAR_ICON'] = 'icon-rar.svg';
 $lang['CONF_ZIP_ICON'] = 'icon-zip.svg';
 //UNAMED CARDS FLAGS
-$lang['CONF_OUTLINE_TWO_REQUIRED'] = 'OFF';
