@@ -504,11 +504,11 @@ function buildList(response, action) {
 function verifyOperations() {
 	if (!access.TRASAL) {
 		var column = table.column('4');
-		column.visible(!column.visible());
+		column.visible(false);
 	}
 
-	if (!access.TRACAR || !access.TRAABO) {
+	if (!access.TRACAR && !access.TRAABO) {
 		var column = table.column('5');
-		column.visible(!column.visible());
+		column.visible(false);
 	}
 }

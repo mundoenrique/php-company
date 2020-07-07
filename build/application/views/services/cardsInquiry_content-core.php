@@ -82,6 +82,10 @@
 							<thead class="bg-primary secondary regular">
 								<tr>
 									<th class="toggle-all"></th>
+									<th><?= lang('GEN_EMAIL'); ?></th>
+									<th>Celular</th>
+									<th>nombre</th>
+									<th>Apellido</th>
 									<th><?= lang('GEN_TABLE_CARD_NUMBER'); ?></th>
 									<th><?= lang('GEN_TABLE_ORDER_NRO'); ?></th>
 									<th><?= lang('GEN_TABLE_BULK_NUMBER'); ?></th>
@@ -96,11 +100,11 @@
 							<tbody></tbody>
 						</table>
 
-						<form id="actionCArdsForm" method="post">
+						<form id="cardsInquiryForm" name="cardsInquiryForm">
 							<div class="flex row mt-3 mb-2 mx-2 justify-end">
 								<div class="col-4 col-lg-3 h6 regular form-group">
-									<select id="masiveOptions" name="masiveOptions" class="select-box custom-select flex h6 w-100"></select>
-									<div class="help-block"></div>
+									<select id="masiveOptions" name="masiveOptions" class="form-control select-box custom-select flex h6 w-100"></select>
+									<div class="help-block item-select text-left"></div>
 								</div>
 								<div class="col-4 col-lg-3 col-xl-3 form-group">
 									<div class="input-group">
@@ -112,10 +116,10 @@
 											</span>
 										</div>
 									</div>
-									<div class="help-block bulk-select text-left"></div>
+									<div class="help-block text-left"></div>
 								</div>
 								<div class="col-3 col-lg-auto">
-									<button id="actionCArdsBtn" class="btn btn-primary btn-small btn-loading flex mx-auto">
+									<button id="cardsInquiryBtn" class="btn btn-primary btn-small btn-loading flex mx-auto">
 										<?= lang('GEN_BTN_PROCESS'); ?>
 									</button>
 								</div>

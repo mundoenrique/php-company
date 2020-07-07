@@ -127,6 +127,7 @@ function validateForms(form) {
 			"bulkNumber": {pattern: numeric, require_from_group: [1, '.select-group']},
 			"idNumberP": {pattern: idNumberReg, require_from_group: [1, '.select-group']},
 			"cardNumberP": {pattern: numeric, require_from_group: [1, '.select-group']},
+			"masiveOptions": {requiredSelect: true},
 		},
 		messages: {
 			"user_login": lang.VALIDATE_USERLOGIN,
@@ -204,6 +205,7 @@ function validateForms(form) {
 				pattern: lang.VALIDATE_CARD_NUMBER,
 				require_from_group: lang.VALIDATE_SELECT_GROUP
 			},
+			"masiveOptions": lang.VALIDATE_OPTION,
 		},
 		errorPlacement: function(error, element) {
 			$(element).closest('.form-group').find('.help-block').html(error.html());
@@ -255,9 +257,11 @@ function validateForms(form) {
 
 	$.validator.methods.requiredSelect = function(value, element, param) {
 		var valid = true;
+
 		if($(element).find('option').length > 0 ) {
-			valid = alphanum.test($(element).find('option:selected').val().trim());
+			valid = alphanumunder.test($(element).find('option:selected').val().trim());
 		}
+
 		return valid
 	}
 

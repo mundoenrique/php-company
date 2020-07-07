@@ -362,6 +362,10 @@ class Novo_Services_Model extends NOVO_Model {
 					$record->cardStatus = trim(ucfirst(mb_strtolower($cards->edoPlastico)));
 					$record->name = ucwords(mb_strtolower($cards->nombre));
 					$record->idNumber = $cards->cedula;
+					$record->email = $cards->email;
+					$record->movilNumber = $cards->numCelular;
+					$record->names = $cards->nombres;
+					$record->lastName = $cards->apellidos;
 					$options = [
 						'NO_OPER' => '--'
 					];
@@ -370,7 +374,7 @@ class Novo_Services_Model extends NOVO_Model {
 						if ($status->edoTarjeta == $cards->edoEmision) {
 							foreach ($status->operacion AS $oper) {
 								$key = mb_strtoupper(str_replace(' ', '_', $oper));
-								$options[lang('SERVICES_INQUIRY_OPTIONS')[$key]] = ucfirst(mb_strtolower($oper));
+								$options[lang('SERVICES_INQUIRY_OPTIONS')[$key]] = lang('SERVICES_INQUIRY_OPTIONS')[$key];
 								$massiveOptions[lang('SERVICES_INQUIRY_OPTIONS')[$key]] = lang('SERVICES_INQUIRY_'.lang('SERVICES_INQUIRY_OPTIONS')[$key]);
 							}
 							unset($options['NO_OPER']);
