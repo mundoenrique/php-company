@@ -407,7 +407,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 			'codigoGrupo' => $this->session->enterpriseInf->enterpriseGroup
 		];
 
-		$response = $this->sendToService('ConfirmBulk');
+		$response = $this->sendToService('callWs_ConfirmBulk');
 
 		switch ($this->isResponseRc) {
 			case 0:
@@ -430,13 +430,19 @@ class Novo_Bulk_Model extends NOVO_Model {
 				$this->response->msg = lang('BULK_CONFIRM_FAIL');
 				$this->response->data['btn1']['link'] = 'cargar-lotes';
 				break;
+			case -436:
+				$this->response->code = 0;
+				$this->response->title = lang('BULK_CONFIRM_TITLE');
+				$this->response->msg = lang('BULK_CONFIRM_FAIL_BANK_RESPONSE');
+				$this->response->data['btn1']['link'] = 'cargar-lotes';
+				break;
 		}
 
 		if($this->isResponseRc != 0) {
 			$this->session->set_flashdata('bulkConfirmInfo', $bulkConfirmInfo);
 		}
 
-		return $this->responseToTheView('ConfirmBulk');
+		return $this->responseToTheView('callWs_ConfirmBulk');
 	}
 	/**
 	 * @info Obtiene la lista de lotes por autorizar

@@ -34,6 +34,7 @@ $lang['BULK_DELETE_SUCCESS'] = 'El lote con el <strong>id: %s</strong> fue elimi
 $lang['BULK_CONFIRM_TITLE'] = 'Confirmación de lote';
 $lang['BULK_CONFIRM_SUCCESS'] = 'El lote Nro: <strong>%s</strong> fue confirmado exitosamente';
 $lang['BULK_CONFIRM_FAIL'] = 'No fue posible confirmar el lote, existen registros confirmados en otro lote';
+$lang['BULK_CONFIRM_FAIL_BANK_RESPONSE'] = 'No fue posible confirmar el lote, no se obtuvo autorización del banco';
 $lang['BULK_AUTH_SUCCESS'] = '%s, tu autorización fue incluida satisfactoriamente';
 $lang['BULK_CONFIRM'] = 'Confirmación';
 $lang['BULK_SIGN_TITLE'] = 'Firma de lote';
