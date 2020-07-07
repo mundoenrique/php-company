@@ -849,6 +849,23 @@ $config = [
 			'rules' => 'trim|integer'
 		],
 	],
+	'inquiriesActions' => [
+		[
+			'field' => 'cards[]',
+			'label' => 'cards',
+			'rules' => 'regex_match[/^([\w{}"*:.,@ ]*)+$/i]|required'
+		],
+		[
+			'field' => 'action',
+			'label' => 'action',
+			'rules' => 'trim|regex_match[/^([\w ]*)+$/i]|required'
+		],
+		[
+			'field' => 'pass',
+			'label' => 'pass',
+			'rules' => 'trim|regex_match[/^([a-zA-Z0-9=]+)+$/i]|required'
+		]
+	],
 	'statusBulk' => [
 		[
 			'field' => 'enterpriseCode',

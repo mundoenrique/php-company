@@ -19,3 +19,12 @@ $lang['SERVICES_INQUIRY_DELIVER_TO_CARDHOLDER'] = 'Entregar a tarjetahabiente';
 $lang['SERVICES_INQUIRY_SEND_TO_ENTERPRISE'] = 'Enviar a empresa';
 $lang['SERVICES_INQUIRY_RECEIVE_IN_ENTERPRISE'] = 'Recibir en empresa';
 $lang['SERVICES_INQUIRY_RECEIVE_IN_BANK'] = 'Recibir en banco';
+//INQUIRY ACTIONS
+$lang['SERVICES_ACTION_UPDATE_DATA'] = 'act_datos';
+$lang['SERVICES_ACTION_INQUIRY_BALANCE'] = 'saldo';
+$lang['SERVICES_ACTION_LOCK_CARD'] = 'bloqueo';
+$lang['SERVICES_ACTION_UNLOCK_CARD'] = 'desbloqueo';
+$lang['SERVICES_ACTION_DELIVER_TO_CARDHOLDER'] = 'Entregada a Tarjetahabiente / Activa';
+$lang['SERVICES_ACTION_SEND_TO_ENTERPRISE'] = 'Enviar a empresa';
+$lang['SERVICES_ACTION_RECEIVE_IN_ENTERPRISE'] = 'Recibido en empresa';
+$lang['SERVICES_ACTION_RECEIVE_IN_BANK'] = 'Recibido en Banco';

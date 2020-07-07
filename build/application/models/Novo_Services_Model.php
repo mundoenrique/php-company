@@ -313,7 +313,11 @@ class Novo_Services_Model extends NOVO_Model {
 
 		return $this->responseToTheView('callWs_ActionMasterAccount');
 	}
-
+	/**
+	 * @info Método para obtener lista de tarjetas
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date July 03rd, 2020
+	 */
 	public function callWs_CardsInquiry_Services($dataRequest)
 	{
 		log_message('INFO', 'Novo Services Model: CardsInquiry Method Initialized');
@@ -405,5 +409,89 @@ class Novo_Services_Model extends NOVO_Model {
 		$this->response->data['massiveOptions'] = $massiveOptions;
 
 		return $this->responseToTheView('callWs_CardsInquiry');
+	}
+	/**
+	 * @info Método para realizar acciones de consulta de tarjetas
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date July 06th, 2020
+	 */
+	public function callWs_InquiriesActions_Services($dataRequest)
+	{
+		log_message('INFO', 'NOVO Services Model: InquiriesActions Method Initialized');
+
+		$this->className = 'com.novo.objects.MO.SeguimientoLoteMO';
+
+		$this->dataAccessLog->modulo = 'Servicios';
+		$this->dataAccessLog->function = 'Consulta de tarjetas';
+		$this->dataAccessLog->operation = lang('SERVICES_INQUIRY_'.$dataRequest->action);
+
+		switch ($dataRequest->action) {
+			case 'INQUIRY_BALANCE':
+			case 'LOCK_CARD':
+			case 'UNLOCK_CARD':
+				$this->className = 'com.novo.business.lote.seguimiento.resources.NovoBusinessOperacionSeguimientoWS';
+			break;
+			case 'UPDATE_DATA':
+			case 'DELIVER_TO_CARDHOLDER':
+			case 'SEND_TO_ENTERPRISE':
+			case 'RECEIVE_IN_ENTERPRISE':
+			case 'RECEIVE_IN_BANK':
+			break;
+		}
+
+		$dataList = [];
+
+		foreach ($dataRequest->cards AS $list) {
+			$list = json_decode($list);
+			$data = [
+				'idLote' => $list->bulkNumber,
+				'edoNuevo' => lang('SERVICES_INQUIRY_'.$dataRequest->action),
+				'edoAnterior' => $list->issueStatus,
+				'numeroTarjeta' => $list->cardNumber,
+				'idExtPer' => $list->idNumber,
+				'idExtEmp' => $this->session->enterpriseInf->idFiscal,
+				'accodcia' => $this->session->enterpriseInf->enterpriseCode,
+			];
+			$dataList[] = $data;
+		}
+
+		$password = json_decode(base64_decode($dataRequest->pass));
+		$password = $this->cryptography->decrypt(
+			base64_decode($password->plot),
+			utf8_encode($password->password)
+		);
+		$this->dataRequest->idOperation = 'operacionSeguimientoLoteCeo';
+		$this->dataRequest->items = $dataList;
+		$this->dataRequest->usuario = [
+			'userName' => $this->session->userName,
+			'password' => md5($password),
+			'idProducto' => $this->session->productInf->productPrefix
+		];
+		$this->dataRequest->opcion = lang('SERVICES_ACTION_'.$dataRequest->action);
+
+		$response = $this->sendToService('callWs_InquiriesActions');
+
+		switch ($this->isResponseRc) {
+			case 0:
+				$this->response->title = lang('SERVICES_INQUIRY_'.$dataRequest->action);
+				$this->response->icon = lang('GEN_ICON_SUCCESS');
+				$this->response->data['btn1'] = [
+					'text' => lang('GEN_BTN_ACCEPT'),
+					'action' => 'close'
+				];
+				$this->response->success = TRUE;
+			break;
+			case -1:
+				$this->response->title = lang('SERVICES_INQUIRY_'.$dataRequest->action);
+				$this->response->msg = lang('RESP_PASSWORD_NO_VALID');
+				$this->response->icon = lang('GEN_ICON_WARNING');
+				$this->response->data['btn1'] = [
+					'text' => lang('GEN_BTN_ACCEPT'),
+					'action' => 'close'
+				];
+			break;
+		}
+
+		return $this->responseToTheView('callWs_InquiriesActions');
 	}
 }
