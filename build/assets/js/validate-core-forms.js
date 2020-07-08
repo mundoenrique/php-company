@@ -142,7 +142,7 @@ function validateForms(form) {
 			"orderNumber": {pattern: numeric, require_from_group: [1, '.select-group']},
 			"bulkNumber": {pattern: numeric, require_from_group: [1, '.select-group']},
 			"idNumberP": {pattern: idNumberReg, require_from_group: [1, '.select-group']},
-			"cardNumberP": {pattern: numeric, require_from_group: [1, '.select-group']},
+			"cardNumberP": {pattern: numeric, minlength: lang.VALIDATE_MINLENGTH, require_from_group: [1, '.select-group']},
 			"masiveOptions": {requiredSelect: true},
 		},
 		messages: {
@@ -218,7 +218,8 @@ function validateForms(form) {
 				require_from_group: lang.VALIDATE_SELECT_GROUP
 			},
 			"cardNumberP": {
-				pattern: lang.VALIDATE_CARD_NUMBER,
+				pattern: lang.VALIDATE_CARD_NUMBER_MIN,
+				minlength: lang.VALIDATE_CARD_NUMBER_MIN,
 				require_from_group: lang.VALIDATE_SELECT_GROUP
 			},
 			"masiveOptions": lang.VALIDATE_OPTION,
