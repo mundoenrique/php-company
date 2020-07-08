@@ -139,7 +139,7 @@ class Novo_User_Model extends NOVO_Model {
 				$this->response->position = lang('CONF_VALID_POSITION');
 				break;
 			case -229:
-				$this->response->code = 2;
+				$this->response->code = 3;
 				$this->response->msg = lang('RESP_OLD_USER');
 				break;
 			case -262:
