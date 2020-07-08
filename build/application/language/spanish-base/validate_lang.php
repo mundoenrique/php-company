@@ -41,4 +41,5 @@ $lang['VALIDATE_BULK_NUMBER'] = 'Solo se admiten números';
 $lang['VALIDATE_DATE_DMY'] = 'Indica una fecha válida dd/mm/aaaa';
 $lang['VALIDATE_SELECT'] = 'Selecciona al menos un registro';
 $lang['VALIDATE_OS_OTP'] = 'Indica un código de seguridad válido';
-$lang['VALIDATE_SELECT_GROUP'] = 'Selecciona alguno de estos criterios';
+$lang['VALIDATE_SELECT_GROUP'] = 'Completa alguno de estos campos';
+$lang['VALIDATE_OPTION'] = 'Selecciona una opción';

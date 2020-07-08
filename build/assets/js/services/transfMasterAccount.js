@@ -20,6 +20,7 @@ $(function () {
 			$('#cost-trans').text(lang.GEN_CURRENCY + ' ' + params.costoComisionTrans)
 			$('#cost-inquiry').text(lang.GEN_CURRENCY + ' ' + params.costoComisionCons)
 			insertFormInput(false)
+			verifyOperations()
 			$('#pre-loader-table').addClass('hide')
 			$('.hide-table').removeClass('hide')
 			$('#pre-loader').remove();
@@ -497,5 +498,17 @@ function buildList(response, action) {
 		$('.update').on('click', function() {
 			dataTableReload(false)
 		})
+	}
+}
+
+function verifyOperations() {
+	if (!access.TRASAL) {
+		var column = table.column('4');
+		column.visible(false);
+	}
+
+	if (!access.TRACAR && !access.TRAABO) {
+		var column = table.column('5');
+		column.visible(false);
 	}
 }

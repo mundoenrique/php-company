@@ -199,6 +199,7 @@ class Verify_Access {
 					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TRAMAE'));
 				break;
 				case 'cardsInquiry':
+				case 'inquiriesActions':
 					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('COPELO'));
 				break;
 				case 'getReportsList':
