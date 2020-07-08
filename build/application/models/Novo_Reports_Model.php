@@ -1077,6 +1077,63 @@ class Novo_Reports_Model extends NOVO_Model {
     return $this->responseToTheView('callWS_StatusCardHolders');
 	}
 
+	public function callWs_RechargeMade_Reports($dataRequest)
+	{
+		log_message('INFO', 'NOVO Reports Model: RechargeMade Method Initialized');
+		$this->dataAccessLog->modulo = 'Reportes';
+		$this->dataAccessLog->function = 'recargasRealizadas';
+		$this->dataAccessLog->operation = 'recargasRealizadas';
+		$this->dataRequest->idOperation = 'recargasRealizadas';
+		$this->className = 'com.novo.objects.TOs.RecargasRealizadasTO';
+		$this->dataRequest->paginaActual = 1;
+		$this->dataRequest->tamanoPagina = 10;
+		$this->dataRequest->fecha = '';
+		$this->dataRequest->fecha1 = '';
+		$this->dataRequest->fecha2 = '';
+		$this->dataRequest->accodcia = $dataRequest->enterpriseCode;
+    $fecha=$dataRequest->initialDatemy;
+    $arreglo=explode ("/",$fecha);
+    $mes=$arreglo[0];
+    $anio=$arreglo[1];
+
+		$this->dataRequest->mesSeleccionado = $mes;
+		$this->dataRequest->anoSeleccionado = $anio;
+		$response = $this->sendToService('callWs_RechargeMadeReport');
+		$rechargeMadeList = [];
+
+    switch($this->isResponseRc) {
+      case 0:
+        $this->response->code = 0;
+
+          $record = new stdClass();
+					$record->mesRecarga1 = $response->mesRecarga1;
+					$record->mesRecarga2 = $response->mesRecarga2;
+					$record->mesRecarga3 =$response->mesRecarga3;
+					$record->recargas = $response->recargas;
+          array_push(
+            $rechargeMadeList,
+            $record
+          );
+
+      break;
+      case -150:
+					$this->response->icon = lang('GEN_ICON_INFO');
+					$this->response->title = lang('REPORTS_TITLE');
+					$this->response->msg = lang('REPORTS_NO_MOVES_ENTERPRISE');
+					$this->response->data = [
+						'btn1'=> [
+							'text'=> lang('GEN_BTN_CONTINUE'),
+							'link'=> 'recargas-realizadas',
+							'action'=> 'redirect'
+						]
+					];
+      break;
+    }
+    $this->response->data['rechargeMadeList'] = $rechargeMadeList;
+
+    return $this->responseToTheView('callWS_RechargeMadeReport');
+	}
+
 		/**
 	 * @info Método para obtener actividad por ususario
 	 * @author Diego Acosta García

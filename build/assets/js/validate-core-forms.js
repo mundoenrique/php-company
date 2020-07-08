@@ -107,6 +107,8 @@ function validateForms(form) {
 			"productName": {required: true},
 			"initialDate": {required: true, pattern: date.dmy},
 			"finalDate": {required: true, pattern: date.dmy},
+			"initialDatemy": {required: true, pattern: date.my},
+			"finalDatemy": {required: true, pattern: date.my},
 			"idNumber": {pattern: idNumberReg},
 			"anio-consolid": {required: true},
 			"cardNumber": {
@@ -184,6 +186,7 @@ function validateForms(form) {
 			"bulk-number": lang.VALIDATE_BULK_NUMBER,
 			"initialDate": lang.VALIDATE_DATE_DMY,
 			"finalDate": lang.VALIDATE_DATE_DMY,
+			"initialDatemy": lang.VALIDATE_DATE_MY,
 			"idNumber": lang.VALIDATE_ID_NUMBER,
 			"cardNumber": lang.VALIDATE_CARD_NUMBER,
 			"otpCode": lang.VALIDATE_OS_OTP,

@@ -201,6 +201,7 @@ $lang['GEN_TABLE_ACCOUNT_NUMBER'] = 'Número de cuenta';
 $lang['GEN_TABLE_CARD_NUMBER'] = 'Número de tarjeta';
 $lang['GEN_TABLE_ID_DOC'] = 'Documento de identidad';
 $lang['GEN_TABLE_CARDHOLDER'] = 'Tarjetahabiente';
+$lang['GEN_TABLE_TOTAL'] = 'Total';
 $lang['GEN_TABLE_EMPLOYEE'] = 'Empleado';
 $lang['GEN_TABLE_BENEFICIARY'] = 'Beneficiario';
 $lang['GEN_TABLE_ACCOUNT_BENEFICIARY'] = 'Cuenta del beneficiario';

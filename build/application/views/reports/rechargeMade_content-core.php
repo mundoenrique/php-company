@@ -22,26 +22,33 @@
 			<div class="search-criteria-order flex pb-3 flex-column w-100">
 				<span class="line-text mb-2 h4 semibold primary"><?= lang('GEN_SEARCH_CRITERIA'); ?></span>
 				<div class="flex my-2 px-5">
-					<form method="post" class="w-100">
+					<form  id="recharge-made-form" action="<?= base_url(lang('GEN_LINK_REP_RECHARGE_MADE')); ?>" method="post" class="w-100">
 						<div class="row flex justify-between">
 							<div class="form-group col-4 col-xl-4">
 								<label><?= lang('GEN_ENTERPRISE') ?></label>
-								<select class="select-box custom-select flex h6 w-100">
-									<option selected disabled>Seleccionar</option>
-									<option>Option 1</option>
-									<option>Option 2</option>
-									<option>Option 3</option>
+								<select id="enterpriseCode" name="enterpriseCode" class="select-box custom-select flex h6 w-100 enterprise-getprod">
+									<?php print_r($enterpriseList); foreach($enterpriseList AS $enterprise) : ?>
+									<?php if($enterprise->acrif == $enterpriseData->idFiscal): ?>
+									<?php endif;?>
+									<option value="<?= $enterprise->accodcia; ?>" <?= $enterprise->acrif == $enterpriseData->idFiscal ? 'selected' : '' ?>
+										id-fiscal="<?= $enterprise->acrif; ?>">
+										<?= $enterprise->acnomcia; ?>
+									</option>
+									<?php endforeach; ?>
 								</select>
 								<div class="help-block"></div>
 							</div>
-							<div class="form-group col-4 col-xl-4">
-								<label for="initialDate"><?= lang('GEN_TABLE_DATE') ?></label>
-								<input id="initialDate" class="form-control" name="datepicker" type="text">
+
+							<div class="form-group col-4 col-lg-3 col-xl-3">
+								<label for="initialDatemy"><?= lang('GEN_TABLE_DATE'); ?></label>
+								<input id="initialDatemy" name="initialDatemy" class="form-control" name="datepicker" type="text"
+									placeholder="<?= lang('GEN_PLACE_DATE_MEDIUM'); ?>" readonly>
+								<input id="endDate" name="endDate" class="form-control date-picker" type="hidden">
 								<div class="help-block"></div>
 							</div>
 
 							<div class="flex items-center justify-end col-3">
-								<button type="submit" id="card-holder-btn" class="btn btn-primary btn-small btn-loading">
+								<button type="submit" id="recharge-made-btn" class="btn btn-primary btn-small btn-loading">
 									<?= lang('GEN_BTN_SEARCH'); ?>
 								</button>
 							</div>
@@ -51,6 +58,12 @@
 				<div class="line mb-2"></div>
 			</div>
 
+			<div class="flex">
+				<div id="pre-loade-result" class="mt-2 mx-auto hide">
+					<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
+				</div>
+			</div>
+			<div class="w-100 rechargeMade-result hide">
 			<div class="flex pb-5 flex-column">
 				<span class="line-text mb-2 h4 semibold primary">Recargas realizadas </span>
 				<div class="center mx-1">
@@ -63,42 +76,29 @@
 								<button class="btn px-1 big-modal" title="<?= lang('GEN_BTN_DOWN_PDF'); ?>" data-toggle="tooltip">
 									<i class="icon icon-file-pdf" aria-hidden="true"></i>
 								</button>
-								<button class="btn px-1 big-modal" title="<?= lang('GEN_BTN_SEE_GRAPH'); ?>" data-toggle="tooltip">
-									<i class="icon novoglyphs icon-food" aria-hidden="true"></i>
-								</button>
+						<a>
+							<span id = "grafica"  title="Ver Grafica" aria-hidden="true" class="icon grafica" data-icon="&#xe050;"></span>
+						</a>
 							</div>
-							<form id="download-cardholders" action="<?= base_url('descargar-archivo'); ?>" method="post"></form>
+							<form id="download-rechargemade" action="<?= base_url('descargar-archivo'); ?>" method="post"></form>
 						</div>
 					</div>
-					<table id="resultsAccount" class="cell-border h6 display responsive w-100">
+					<table id="resultsRecharge" class="cell-border h6 display responsive w-100">
 						<thead class="bg-primary secondary regular">
 							<tr>
 								<th><?= lang('GEN_PRODUCT'); ?></th>
-								<th>Abril</th>
-								<th>Mayo</th>
-								<th>Junio</th>
-								<th>Total</th>
+								<th id="mes1"></th>
+								<th id="mes2"></th>
+								<th id="mes3"></th>
+								<th><?= lang('GEN_TABLE_TOTAL'); ?></th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td>PREPAID PICHINCHA IN</td>
-								<td>1.00</td>
-								<td>0.00</td>
-								<td>0.00</td>
-								<td>1.00</td>
-							</tr>
-							<tr>
-								<td>Totales </td>
-								<td>1.00</td>
-								<td>0.00</td>
-								<td>0.00</td>
-								<td>1.00</td>
-							</tr>
 						</tbody>
 					</table>
 					<div class="line my-2"></div>
 				</div>
+			</div>
 			</div>
 		</div>
 	</div>
