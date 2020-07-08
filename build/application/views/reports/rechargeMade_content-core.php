@@ -76,6 +76,11 @@
 								<button class="btn px-1 big-modal" title="<?= lang('GEN_BTN_DOWN_PDF'); ?>" data-toggle="tooltip">
 									<i class="icon icon-file-pdf" aria-hidden="true"></i>
 								</button>
+								<?php if(FALSE): ?>
+								<button class="btn px-1 big-modal" title="<?= lang('GEN_BTN_SEE_GRAPH'); ?>" data-toggle="tooltip">
+									<i class="icon novoglyphs icon-food" aria-hidden="true"></i>
+								</button>
+								<?php endif; ?>
 						<a>
 							<span id = "grafica"  title="Ver Grafica" aria-hidden="true" class="icon grafica" data-icon="&#xe050;"></span>
 						</a>
