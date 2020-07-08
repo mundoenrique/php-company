@@ -216,23 +216,22 @@
 					</div>
 				</div>
 
-				<form id="auth-bulk-form" method="post">
-					<div class="flex row mx-2 justify-end">
+				<form id="sign-bulk-form" method="post">
+					<div class="flex row mt-3 mb-2 mx-2 justify-end">
 						<div class="col-5 col-lg-3 col-xl-3 form-group">
 							<div class="input-group">
-								<input id="password-auth" name="password" class="form-control pwd-input pr-0 pwd" type="password" autocomplete="new-password"
+							<input id="password-auth" name="password" class="form-control pwd-input pr-0 pwd" type="password" autocomplete="new-password"
 									placeholder="<?= lang('GEN_PLACE_PASSWORD'); ?>">
 								<div class="input-group-append">
-									<span id="pwd_action" class="input-group-text pwd-action" title="<?= lang('GEN_SHOW_PASS') ?>"><i
-											class="icon-view mr-0"></i></span>
+									<span id="pwd_action" class="input-group-text pwd-action" title="<?= lang('GEN_SHOW_PASS') ?>">
+									<i class="icon-view mr-0"></i></span>
 								</div>
 							</div>
 							<div class="help-block bulk-select text-left"></div>
 						</div>
-						<div class="col-3 col-lg-auto">
-							<button id="auth-bulk-btn" class="btn btn-primary btn-small btn-loading flex mx-auto">
-								Actualizar
-							</button>
+						<div class="col-auto">
+							<button id="sign-bulk-btn" class="btn btn-primary btn-small btn-loading flex mx-auto">
+								Actualizar</button>
 						</div>
 					</div>
 				</form>
