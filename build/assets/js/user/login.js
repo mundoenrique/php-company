@@ -74,10 +74,10 @@ $(function () {
 	};
 
 	function getCredentialsUser() {
-		cypherPass = cryptoPass(userPass.val());
+		cypherPass = userCred ? userCred.pass : cryptoPass(userPass.val());
 
 		return {
-			user: userLogin.val(),
+			user: userCred ? userCred.user : userLogin.val(),
 			pass: cypherPass,
 			active: '',
 			codeotp: $('#codeOTP').val() ? $('#codeOTP').val() : '',
@@ -125,6 +125,7 @@ $(function () {
 			restartFormLogin();
 		},
 		2: function (response) {
+			restartFormLogin();
 			if(response.ipInvalid){
 				var oldID = $('#accept').attr('id');
 				$('#accept').attr('id', 'send-otp-btn');
@@ -135,7 +136,7 @@ $(function () {
 				loginIpMsg+='<div class="row">';
 				loginIpMsg+=	'<div class="form-group col-6">';
 				loginIpMsg+=	'<label id="label_codeOTP" for="codeOTP">'+response.labelInput+'</label>';
-				loginIpMsg+=	'<input id="codeOTP" class="form-control" type="text" name="codeOTP">';
+				loginIpMsg+=	'<input id="codeOTP" class="form-control" type="text" name="codeOTP" autocomplete="off">';
 				loginIpMsg+=    '<div id="msgErrorCodeOTP" class="help-block"></div>';
 				loginIpMsg+=	'</div>';
 				loginIpMsg+='</div>';
@@ -198,7 +199,6 @@ $(function () {
 			}
 		},
 		4: function () {
-			$('#login-btn').html(btnText);
 			restartFormLogin();
 		}
 	}
