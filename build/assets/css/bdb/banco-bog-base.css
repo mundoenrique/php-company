@@ -2060,7 +2060,7 @@ i[class*=" icon-"].novoglyphs {
 .icon-user-edit:before     { content: "\e02d"; }
 .icon-arrow-left:before    { content: "\e03d"; }
 .icon-card-fee:before			 { content: "\e08d"; }
-.icon-arrow-right:before   { content: "\e03e"; }
+/* .icon-arrow-right:before   { content: "\e03e"; } */
 .icon-car:before					 { content: "\e04e"; }
 .icon-user-card:before		 { content: "\e05e"; }
 .icon-chevron-up:before    { content: "\e03f"; }
