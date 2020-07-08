@@ -2,6 +2,8 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 //MENU
 $lang['GEN_MENU_ENTERPRISE'] = 'Empresa';
+//SUBMENU
+$lang['GEN_MENU_SERV_CARD_INQUIRY'] = 'Entrega de Tarjetas';//COPELO
 //GENERAL LANGUAGE
 $lang['GEN_ENTERPRISE_LIST'] = 'empresas';
 $lang['GEN-LOGO-HEADER'] = 'img-logo.svg';
