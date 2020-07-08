@@ -326,9 +326,9 @@ class Novo_Services_Model extends NOVO_Model {
 
 		$this->dataAccessLog->modulo = 'Servicios';
 		$this->dataAccessLog->function = 'Consulta de tarjetas';
-		$this->dataAccessLog->operation = 'Obtener lista de tarjetas';
+		$this->dataAccessLog->operation = isset($dataRequest->action) ? 'Descargar archivo' : 'Obtener lista de tarjetas';
 
-		$this->dataRequest->idOperation = 'buscarTarjetasEmitidas';
+		$this->dataRequest->idOperation = isset($dataRequest->action) ? 'buscarTarjetasEmitidasExcel' : 'buscarTarjetasEmitidas';
 		$this->dataRequest->rifEmpresa = $this->session->enterpriseInf->idFiscal;
 		$this->dataRequest->accodcia = $this->session->enterpriseInf->enterpriseCode;
 		$this->dataRequest->idProducto = $this->session->productInf->productPrefix;
@@ -351,57 +351,68 @@ class Novo_Services_Model extends NOVO_Model {
 		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
-				foreach ($response->detalleEmisiones AS $cards) {
-					$record = new stdClass();
-					$record->cardNumber = $cards->nroTarjeta;
-					$record->orderNumber = $cards->ordenS;
-					$record->bulkNumber = $cards->nroLote;
-					$issueStatus = ucfirst(mb_strtolower($cards->edoEmision));
+				if (isset($dataRequest->action)) {
+					$this->response->data['file'] = $response->archivo;
+					$this->response->data['name'] = $response->nombre.'.xls';
+					$this->response->data['ext'] = 'xls';
+				} else {
+					foreach ($response->detalleEmisiones AS $cards) {
+						$record = new stdClass();
+						$record->cardNumber = $cards->nroTarjeta;
+						$record->orderNumber = $cards->ordenS;
+						$record->bulkNumber = $cards->nroLote;
+						$issueStatus = ucfirst(mb_strtolower($cards->edoEmision));
 
-					if (strpos($cards->edoEmision, '/') !== FALSE) {
-						$issueStatus = strstr($issueStatus, '/', TRUE);
-					}
+						if (strpos($cards->edoEmision, '/') !== FALSE) {
+							$issueStatus = strstr($issueStatus, '/', TRUE);
+						}
 
-					$record->issueStatus = trim($issueStatus);
-					$record->cardStatus = trim(ucfirst(mb_strtolower($cards->edoPlastico)));
-					$record->name = ucwords(mb_strtolower($cards->nombre));
-					$record->idNumber = $cards->cedula;
-					$record->email = $cards->email;
-					$record->movilNumber = $cards->numCelular;
-					$record->names = $cards->nombres;
-					$record->lastName = $cards->apellidos;
-					$options = [
-						'NO_OPER' => '--'
-					];
+						$record->issueStatus = trim($issueStatus);
+						$record->cardStatus = trim(ucfirst(mb_strtolower($cards->edoPlastico)));
+						$record->name = ucwords(mb_strtolower($cards->nombre));
+						$record->idNumber = $cards->cedula;
+						$record->email = $cards->email;
+						$record->movilNumber = $cards->numCelular;
+						$record->names = $cards->nombres;
+						$record->lastName = $cards->apellidos;
+						$options = [
+							'NO_OPER' => '--'
+						];
 
-					foreach ($response->operacioneTarjeta AS $status) {
-						if ($status->edoTarjeta == $cards->edoEmision) {
-							foreach ($status->operacion AS $oper) {
-								$key = mb_strtoupper(str_replace(' ', '_', $oper));
-								$options[lang('SERVICES_INQUIRY_OPTIONS')[$key]] = lang('SERVICES_INQUIRY_OPTIONS')[$key];
-								$massiveOptions[lang('SERVICES_INQUIRY_OPTIONS')[$key]] = lang('SERVICES_INQUIRY_'.lang('SERVICES_INQUIRY_OPTIONS')[$key]);
+						foreach ($response->operacioneTarjeta AS $status) {
+							if ($status->edoTarjeta == $cards->edoEmision) {
+								foreach ($status->operacion AS $oper) {
+									$key = mb_strtoupper(str_replace(' ', '_', $oper));
+									$options[lang('SERVICES_INQUIRY_OPTIONS')[$key]] = lang('SERVICES_INQUIRY_OPTIONS')[$key];
+									$massiveOptions[lang('SERVICES_INQUIRY_OPTIONS')[$key]] = lang('SERVICES_INQUIRY_'.lang('SERVICES_INQUIRY_OPTIONS')[$key]);
+								}
+								unset($options['NO_OPER']);
 							}
-							unset($options['NO_OPER']);
+						}
+
+						$record->options = $options;
+						array_push($cardsList, $record);
+
+						if (array_key_exists('INQUIRY_BALANCE', $options)) {
+							$operList['INQUIRY_BALANCE'] =  TRUE;
+						}
+
+						if (array_key_exists('UPDATE_DATA', $massiveOptions)) {
+							unset($massiveOptions['UPDATE_DATA']);
 						}
 					}
-
-					$record->options = $options;
-					array_push($cardsList, $record);
-
-					if (array_key_exists('INQUIRY_BALANCE', $options)) {
-						$operList['INQUIRY_BALANCE'] =  TRUE;
-					}
-
-					if (array_key_exists('UPDATE_DATA', $massiveOptions)) {
-						unset($massiveOptions['UPDATE_DATA']);
-					}
 				}
-
 			break;
 			case -150:
 				$this->response->code = 1;
 			break;
-
+			default:
+				if (isset($dataRequest->action) && $this->isResponseRc != -29 && $this->isResponseRc != -61) {
+					$this->response->title = lang('GEN_DOWNLOAD_FILE');
+					$this->response->icon =  lang('GEN_ICON_WARNING');
+					$this->response->msg = lang('GEN_WARNING_DOWNLOAD_FILE');
+					$this->response->data['btn1']['action'] = 'close';
+				}
 		}
 
 		$this->response->data['cardsList'] = $cardsList;

@@ -35,22 +35,22 @@
 						<div class="row flex justify-between">
 							<div class="form-group col-4 col-xl-3">
 								<label for="orderNumber"><?= lang('GEN_ORDER_TITLE'); ?></label>
-								<input id="orderNumber" name="orderNumber" class="form-control h5 select-group" type="text" autocomplete="off">
+								<input id="orderNumber" name="orderNumber" class="form-control h5 select-group" type="text" autocomplete="off" disabled>
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-4 col-xl-3">
 								<label for="bulkNumber"><?= lang('GEN_TABLE_BULK_NUMBER'); ?></label>
-								<input id="bulkNumber" name="bulkNumber" class="form-control h5 select-group" type="text" autocomplete="off">
+								<input id="bulkNumber" name="bulkNumber" class="form-control h5 select-group" type="text" autocomplete="off" disabled>
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-4 col-xl-3">
 								<label for="idNumberP"><?= lang('GEN_TABLE_DNI'); ?></label>
-								<input id="idNumberP" name="idNumberP" class="form-control h5 select-group" type="text" autocomplete="off">
+								<input id="idNumberP" name="idNumberP" class="form-control h5 select-group" type="text" autocomplete="off" disabled>
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-4 col-xl-3">
 								<label for="cardNumberP"><?= lang('GEN_CARD_NUMBER'); ?></label>
-								<input id="cardNumberP" name="cardNumberP" class="form-control h5 select-group" type="text" autocomplete="off">
+								<input id="cardNumberP" name="cardNumberP" class="form-control h5 select-group" type="text" autocomplete="off" disabled>
 								<div class="help-block"></div>
 							</div>
 							<div class="flex col-xl-auto items-center ml-auto mr-2">
@@ -70,9 +70,9 @@
 				<div class="flex pb-5 flex-column">
 					<span class="line-text mb-2 h4 semibold primary">Resultados</span>
 					<div class="center mx-1">
-						<div class="flex">
+						<div class="download-icons">
 							<div class="flex mr-2 py-3 flex-auto justify-end items-center">
-								<button class="btn px-1" title="Exportar a EXCEL" data-toggle="tooltip">
+								<button class="btn px-1" title="<?= lang('GEN_BTN_DOWN_XLS') ?>" data-toggle="tooltip">
 									<i class="icon icon-file-excel" aria-hidden="true"></i>
 								</button>
 							</div>
@@ -84,15 +84,15 @@
 									<th class="toggle-all"></th>
 									<th><?= lang('GEN_EMAIL'); ?></th>
 									<th>Celular</th>
-									<th>nombre</th>
-									<th>Apellido</th>
+									<th><?= lang('GEN_TABLE_NAME'); ?></th>
+									<th><?= lang('GEN_TABLE_LASTNAME') ?></th>
 									<th><?= lang('GEN_TABLE_CARD_NUMBER'); ?></th>
 									<th><?= lang('GEN_TABLE_ORDER_NRO'); ?></th>
 									<th><?= lang('GEN_TABLE_BULK_NUMBER'); ?></th>
 									<th><?= lang('GEN_TABLE_EMISSION_STATUS'); ?></th>
 									<th><?= lang('GEN_TABLE_PLASTIC_STATUS'); ?></th>
 									<th><?= lang('GEN_TABLE_NAME'); ?></th>
-									<th><?= lang('GEN_TABLE_ID_PERSON'); ?></th>
+									<th><?= lang('GEN_TABLE_DNI'); ?></th>
 									<th><?= lang('GEN_TABLE_BALANCE'); ?></th>
 									<th><?= lang('GEN_TABLE_OPTIONS'); ?></th>
 								</tr>

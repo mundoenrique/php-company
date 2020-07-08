@@ -6,6 +6,7 @@ var dataRquest;
 $(function () {
 	$('#pre-loader').remove();
 	$('.hide-out').removeClass('hide');
+	insertFormInput(false);
 
 	$('#tableCardInquiry').on('click', '.toggle-all', function () {
 		$(this).closest("tr").toggleClass("selected");
@@ -28,7 +29,13 @@ $(function () {
 		}
 	})
 
-	$('#tableCardInquiry').on('click', 'button', function (e) {
+	$('.download-icons').on('click', 'button', function(e) {
+		var event = $(e.currentTarget);
+		action = event.attr('title').trim();
+		fileDownload(action);
+	})
+
+	$('#tableCardInquiry').on('click', 'button', function(e) {
 		var event = $(e.currentTarget);
 		var title = event.attr('title').trim();
 		action = event.attr('action');
@@ -97,6 +104,13 @@ function getCardList(request) {
 	callNovoCore(verb, who, where, request, function (response) {
 		dataRquest = request;
 		insertFormInput(false);
+
+		if (response.data.cardsList.length == 0) {
+			$('.download-icons').addClass('hide')
+		} else {
+			$('.download-icons').removeClass('hide')
+		}
+
 		table = $('#tableCardInquiry').DataTable({
 			"ordering": false,
 			"pagingType": "full_numbers",
@@ -299,4 +313,18 @@ function applyActions(currentAction, currentForm, currentBtn) {
 			currentForm.find('input.pwd').val('')
 		})
 	}
+}
+
+function fileDownload(currentAction) {
+	verb = 'POST'; who = 'Services'; where = 'CardsInquiry'
+	data = dataRquest;
+	data.action = currentAction
+	$('.cover-spin').show(0)
+	callNovoCore(verb, who, where, data, function(response) {
+		delete (data.action);
+		if (response.code == 0) {
+			delete (response.data.btn1)
+			downLoadfiles(response.data)
+		}
+	})
 }
