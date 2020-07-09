@@ -100,8 +100,24 @@ function validateForms(form) {
 			"inquiry-type": {requiredSelect: true},
 			"expired-date": {required: true, pattern: date.my},
 			"max-cards": {required: true, pattern: numeric, maxcards: true},
-			"starting-line1": {required: true, pattern: alphanumspace},
-			"starting-line2": {required: true, pattern: alphanumspace},
+			"starting-line1": {
+				required: {
+					depends: function() {
+
+						return lang.CONF_STARTING_LINE1_REQUIRED == 'ON';
+					}
+				},
+				pattern: alphanumspace
+			},
+			"starting-line2": {
+				required: {
+					depends: function() {
+
+						return lang.CONF_STARTING_LINE2_REQUIRED == 'ON';
+					}
+				},
+				pattern: alphanumspace
+			},
 			"bulk-number": {pattern: numeric},
 			"enterpriseName": {required: true},
 			"productName": {required: true},
@@ -126,7 +142,8 @@ function validateForms(form) {
 			"orderNumber": {pattern: numeric, require_from_group: [1, '.select-group']},
 			"bulkNumber": {pattern: numeric, require_from_group: [1, '.select-group']},
 			"idNumberP": {pattern: idNumberReg, require_from_group: [1, '.select-group']},
-			"cardNumberP": {pattern: numeric, require_from_group: [1, '.select-group']},
+			"cardNumberP": {pattern: numeric, minlength: lang.VALIDATE_MINLENGTH, require_from_group: [1, '.select-group']},
+			"masiveOptions": {requiredSelect: true},
 		},
 		messages: {
 			"user_login": lang.VALIDATE_USERLOGIN,
@@ -201,9 +218,11 @@ function validateForms(form) {
 				require_from_group: lang.VALIDATE_SELECT_GROUP
 			},
 			"cardNumberP": {
-				pattern: lang.VALIDATE_CARD_NUMBER,
+				pattern: lang.VALIDATE_CARD_NUMBER_MIN,
+				minlength: lang.VALIDATE_CARD_NUMBER_MIN,
 				require_from_group: lang.VALIDATE_SELECT_GROUP
 			},
+			"masiveOptions": lang.VALIDATE_OPTION,
 		},
 		errorPlacement: function(error, element) {
 			$(element).closest('.form-group').find('.help-block').html(error.html());
@@ -255,9 +274,11 @@ function validateForms(form) {
 
 	$.validator.methods.requiredSelect = function(value, element, param) {
 		var valid = true;
+
 		if($(element).find('option').length > 0 ) {
-			valid = alphanum.test($(element).find('option:selected').val().trim());
+			valid = alphanumunder.test($(element).find('option:selected').val().trim());
 		}
+
 		return valid
 	}
 

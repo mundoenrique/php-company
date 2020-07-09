@@ -216,7 +216,7 @@ function notiSystem(title, message, icon, data) {
  * @date 16/09/2019
  */
 function createButton(dialogMoldal, elementButton, valuesButton) {
-	valuesButton.text && elementButton.text(valuesButton.text);
+	valuesButton.text || elementButton.text(valuesButton.text);
 	elementButton.show();
 	elementButton.on('click', function (e) {
 		if (valuesButton.action === 'redirect') {
