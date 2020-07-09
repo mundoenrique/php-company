@@ -74,10 +74,10 @@ $(function () {
 	};
 
 	function getCredentialsUser() {
-		cypherPass = userCred ? userCred.pass : cryptoPass(userPass.val());
+		cypherPass = (userPass.val() === '' && userCred) ? userCred.pass : cryptoPass(userPass.val());
 
 		return {
-			user: userCred ? userCred.user : userLogin.val(),
+			user: userLogin.val(),
 			pass: cypherPass,
 			active: '',
 			codeotp: $('#codeOTP').val() ? $('#codeOTP').val() : '',
