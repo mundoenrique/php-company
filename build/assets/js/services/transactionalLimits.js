@@ -7,7 +7,5 @@ $(function () {
 		$(this).next(".section").slideToggle("slow");
 		$(".help-block").text("");
 	});
-	$('input').on('input', function () {
-    this.value = this.value.replace(/[^0-9]/g,'');
-	});
+	$('.money').mask('000.000.000.000.000,00', {reverse: true});
 })
