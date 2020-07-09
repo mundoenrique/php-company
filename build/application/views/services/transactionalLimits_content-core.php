@@ -70,7 +70,7 @@
 						<span class="line-text slide-slow flex mb-2 h4 semibold primary">Con tarjeta presente
 							<i class="flex mr-1 pl-2 icon icon-chevron-down flex-auto" aria-hidden="true"></i>
 						</span>
-						<div class="card-present my-2 px-5">
+						<div class="section my-2 px-5">
 							<form id="">
 								<div class="container">
 									<div class="row">
@@ -79,49 +79,49 @@
 												<div class="form-group col-12 col-lg-4">
 													<label class ="pr-3" for="numberDayPurchasesCtp">Número de compras diarias</label>
 													<div class="input-group">
-														<input id="numberDayPurchasesCtp" class="form-control pwd-input" type="text" autocomplete="off" name="" required>
+														<input id="numberDayPurchasesCtp" class="form-control pwd-input text-right" value="" type="text" autocomplete="off" name="" required>
 													</div>
 													<div class="help-block"></div>
 												</div>
 												<div class="form-group col-12 col-lg-4">
 													<label for="numberWeeklyPurchasesCtp">Número de compras semanales</label>
 													<div class="input-group">
-														<input id="numberWeeklyPurchasesCtp" class="form-control pwd-input" type="text" autocomplete="off" name="" required>
+														<input id="numberWeeklyPurchasesCtp" class="form-control pwd-input text-right" type="text" autocomplete="off" name="" required>
 													</div>
 													<div class="help-block"></div>
 												</div>
 												<div class="form-group col-12 col-lg-4">
 													<label for="numberMonthlyPurchasesCtp">Número de compras mensuales</label>
 													<div class="input-group">
-														<input id="numberMonthlyPurchasesCtp" class="form-control pwd-input" type="text" autocomplete="off" name="" required>
+														<input id="numberMonthlyPurchasesCtp" class="form-control pwd-input text-right" type="text" autocomplete="off" name="" required>
 													</div>
 													<div class="help-block"></div>
 												</div>
 												<div class="form-group col-12 col-lg-4">
 													<label class ="pr-3" for="dailyPurchaseamountCtp">Monto diario de compras</label>
 													<div class="input-group">
-														<input id="dailyPurchaseamountCtp" class="form-control pwd-input" type="text" autocomplete="off" name="" required>
+														<input id="dailyPurchaseamountCtp" class="form-control pwd-input text-right" type="text" autocomplete="off" name="" required>
 													</div>
 													<div class="help-block"></div>
 												</div>
 												<div class="form-group col-12 col-lg-4">
 													<label for="weeklyAmountPurchasesCtp">Monto semanal de compras</label>
 													<div class="input-group">
-														<input id="weeklyAmountPurchasesCtp" class="form-control pwd-input" type="text" autocomplete="off" name="" required>
+														<input id="weeklyAmountPurchasesCtp" class="form-control pwd-input text-right" type="text" autocomplete="off" name="" required>
 													</div>
 													<div class="help-block"></div>
 												</div>
 												<div class="form-group col-12 col-lg-4">
 													<label for="monthlyPurchasesAmountCtp">Monto mensual de compras</label>
 													<div class="input-group">
-														<input id="monthlyPurchasesAmountCtp" class="form-control pwd-input" type="text" autocomplete="off" name="" required>
+														<input id="monthlyPurchasesAmountCtp" class="form-control pwd-input text-right" type="text" autocomplete="off" name="" required>
 													</div>
 													<div class="help-block"></div>
 												</div>
 												<div class="form-group col-12 col-lg-4">
 													<label for="purchaseTransactionCtp">Monto por transacción de compras</label>
 													<div class="input-group">
-														<input id="purchaseTransactionCtp" class="form-control pwd-input" type="text" autocomplete="off" name="" required>
+														<input id="purchaseTransactionCtp" class="form-control pwd-input text-right" type="text" autocomplete="off" name="" required>
 													</div>
 													<div class="help-block"></div>
 												</div>
@@ -136,7 +136,7 @@
 						<span class="line-text slide-slow flex mb-2 h4 semibold primary">Sin tarjeta presente
 							<i class="flex mr-1 pl-2 icon icon-chevron-down flex-auto" aria-hidden="true"></i>
 						</span>
-						<div class="my-2 px-5">
+						<div class="section my-2 px-5">
 							<form id="">
 								<div class="container">
 									<div class="row">
@@ -145,49 +145,49 @@
 												<div class="form-group col-12 col-lg-4">
 													<label class ="pr-3" for="numberDayPurchasesStp">Número de compras diarias</label>
 													<div class="input-group">
-														<input id="numberDayPurchasesStp" class="form-control pwd-input" type="text" autocomplete="off" name="" required>
+														<input id="numberDayPurchasesStp" class="form-control pwd-input text-right" type="text" autocomplete="off" name="" required>
 													</div>
 													<div class="help-block"></div>
 												</div>
 												<div class="form-group col-12 col-lg-4">
 													<label for="numberWeeklyPurchasesStp">Número de compras semanales</label>
 													<div class="input-group">
-														<input id="numberWeeklyPurchasesStp" class="form-control pwd-input" type="text" autocomplete="off" name="" required>
+														<input id="numberWeeklyPurchasesStp" class="form-control pwd-input text-right" type="text" autocomplete="off" name="" required>
 													</div>
 													<div class="help-block"></div>
 												</div>
 												<div class="form-group col-12 col-lg-4">
 													<label for="numberMonthlyPurchasesStp">Número de compras mensuales</label>
 													<div class="input-group">
-														<input id="numberMonthlyPurchasesStp" class="form-control pwd-input" type="text" autocomplete="off" name="" required>
+														<input id="numberMonthlyPurchasesStp" class="form-control pwd-input text-right" type="text" autocomplete="off" name="" required>
 													</div>
 													<div class="help-block"></div>
 												</div>
 												<div class="form-group col-12 col-lg-4">
 													<label class ="pr-3" for="dailyPurchaseamountStp">Monto diario de compras</label>
 													<div class="input-group">
-														<input id="dailyPurchaseamountStp" class="form-control pwd-input" type="text" autocomplete="off" name="" required>
+														<input id="dailyPurchaseamountStp" class="form-control pwd-input text-right" type="text" autocomplete="off" name="" required>
 													</div>
 													<div class="help-block"></div>
 												</div>
 												<div class="form-group col-12 col-lg-4">
 													<label for="weeklyAmountPurchasesStp">Monto semanal de compras</label>
 													<div class="input-group">
-														<input id="weeklyAmountPurchasesStp" class="form-control pwd-input" type="text" autocomplete="off" name="" required>
+														<input id="weeklyAmountPurchasesStp" class="form-control pwd-input text-right" type="text" autocomplete="off" name="" required>
 													</div>
 													<div class="help-block"></div>
 												</div>
 												<div class="form-group col-12 col-lg-4">
 													<label for="monthlyPurchasesAmountStp">Monto mensual de compras</label>
 													<div class="input-group">
-														<input id="monthlyPurchasesAmountStp" class="form-control pwd-input" type="text" autocomplete="off" name="" required>
+														<input id="monthlyPurchasesAmountStp" class="form-control pwd-input text-right" type="text" autocomplete="off" name="" required>
 													</div>
 													<div class="help-block"></div>
 												</div>
 												<div class="form-group col-12 col-lg-4">
 													<label for="purchaseTransactionStp">Monto por transacción de compras</label>
 													<div class="input-group">
-														<input id="purchaseTransactionStp" class="form-control pwd-input" type="text" autocomplete="off" name="" required>
+														<input id="purchaseTransactionStp" class="form-control pwd-input text-right" type="text" autocomplete="off" name="" required>
 													</div>
 													<div class="help-block"></div>
 												</div>
@@ -202,7 +202,7 @@
 						<span class="line-text slide-slow flex mb-2 h4 semibold primary">Retiros
 							<i class="flex mr-1 pl-2 icon icon-chevron-down flex-auto" aria-hidden="true"></i>
 						</span>
-						<div class="my-2 px-5">
+						<div class="section my-2 px-5">
 							<form id="">
 								<div class="container">
 									<div class="row">
@@ -211,49 +211,49 @@
 												<div class="form-group col-12 col-lg-4">
 													<label class ="pr-3" for="dailyNumberWithdraw">Número diario de retiros</label>
 													<div class="input-group">
-														<input id="dailyNumberWithdraw" class="form-control pwd-input" type="text" autocomplete="off" name="" required>
+														<input id="dailyNumberWithdraw" class="form-control pwd-input text-right" type="text" autocomplete="off" name="" required>
 													</div>
 													<div class="help-block"></div>
 												</div>
 												<div class="form-group col-12 col-lg-4">
 													<label for="weeklyNumberWithdraw">Número semanal de retiros</label>
 													<div class="input-group">
-														<input id="weeklyNumberWithdraw" class="form-control pwd-input" type="text" autocomplete="off" name="" required>
+														<input id="weeklyNumberWithdraw" class="form-control pwd-input text-right" type="text" autocomplete="off" name="" required>
 													</div>
 													<div class="help-block"></div>
 												</div>
 												<div class="form-group col-12 col-lg-4">
 													<label for="monthlyNumberWithdraw">Número mensual de retiros</label>
 													<div class="input-group">
-														<input id="monthlyNumberWithdraw" class="form-control pwd-input" type="text" autocomplete="off" name="" required>
+														<input id="monthlyNumberWithdraw" class="form-control pwd-input text-right" type="text" autocomplete="off" name="" required>
 													</div>
 													<div class="help-block"></div>
 												</div>
 												<div class="form-group col-12 col-lg-4">
 													<label class ="pr-3" for="dailyAmountWithdraw">Monto diario de retiros</label>
 													<div class="input-group">
-														<input id="dailyAmountWithdraw" class="form-control pwd-input" type="text" autocomplete="off" name="" required>
+														<input id="dailyAmountWithdraw" class="form-control pwd-input text-right" type="text" autocomplete="off" name="" required>
 													</div>
 													<div class="help-block"></div>
 												</div>
 												<div class="form-group col-12 col-lg-4">
 													<label for="weeklyAmountWithdraw">Monto semanal de retiros</label>
 													<div clxs="input-group">
-														<input id="weeklyAmountWithdraw" class="form-control pwd-input" type="text" autocomplete="off" name="" required>
+														<input id="weeklyAmountWithdraw" class="form-control pwd-input text-right" type="text" autocomplete="off" name="" required>
 													</div>
 													<div class="help-block"></div>
 												</div>
 												<div class="form-group col-12 col-lg-4">
 													<label for="monthlyAmountwithdraw">Monto mensual de retiros</label>
 													<div class="input-group">
-														<input id="monthlyAmountwithdraw" class="form-control pwd-input" type="text" autocomplete="off" name="" required>
+														<input id="monthlyAmountwithdraw" class="form-control pwd-input text-right" type="text" autocomplete="off" name="" required>
 													</div>
 													<div class="help-block"></div>
 												</div>
 												<div class="form-group col-12 col-lg-4">
 													<label for="WithdrawTransaction">Monto por transacción de retiros</label>
 													<div class="input-group">
-														<input id="WithdrawTransaction" class="form-control pwd-input" type="text" autocomplete="off" name="" required>
+														<input id="WithdrawTransaction" class="form-control pwd-input text-right" type="text" autocomplete="off" name="" required>
 													</div>
 													<div class="help-block"></div>
 												</div>
@@ -265,10 +265,10 @@
 						</div>
 					</div>
 					<div class="flex mb-5 flex-column ">
-						<span class="line-text slide-slow flex mb-2 h4 semibold primary">créditos
+						<span class="line-text slide-slow flex mb-2 h4 semibold primary">Créditos
 							<i class="flex mr-1 pl-2 icon icon-chevron-down flex-auto" aria-hidden="true"></i>
 						</span>
-						<div class="my-2 px-5">
+						<div class="section my-2 px-5">
 							<form id="">
 								<div class="container">
 									<div class="row">
@@ -277,49 +277,49 @@
 												<div class="form-group col-12 col-lg-4">
 													<label class="pr-3" for="dailyNumberCredit">Número diario de créditos</label>
 													<div class="input-group">
-														<input id="dailyNumberCredit" class="form-control pwd-input" type="text" autocomplete="off" name="" required>
+														<input id="dailyNumberCredit" class="form-control pwd-input text-right" type="text" autocomplete="off" name="" required>
 													</div>
 													<div class="help-block"></div>
 												</div>
 												<div class="form-group col-12 col-lg-4">
 													<label for="weeklyNumberCredit">Número semanal de créditos</label>
 													<div class="input-group">
-														<input id="weeklyNumberCredit" class="form-control pwd-input" type="text" autocomplete="off" name="" required>
+														<input id="weeklyNumberCredit" class="form-control pwd-input text-right" type="text" autocomplete="off" name="" required>
 													</div>
 													<div class="help-block"></div>
 												</div>
 												<div class="form-group col-12 col-lg-4">
 													<label for="monthlyNumberCredit">Número mensual de créditos</label>
 													<div class="input-group">
-														<input id="monthlyNumberCredit" class="form-control pwd-input" type="text" autocomplete="off" name="" required>
+														<input id="monthlyNumberCredit" class="form-control pwd-input text-right" type="text" autocomplete="off" name="" required>
 													</div>
 													<div class="help-block"></div>
 												</div>
 												<div class="form-group col-12 col-lg-4">
 													<label class="pr-3" for="dailyAmountCredit">Monto diario de créditos</label>
 													<div class="input-group">
-														<input id="dailyAmountCredit" class="form-control pwd-input" type="text" autocomplete="off" name="" required>
+														<input id="dailyAmountCredit" class="form-control pwd-input text-right" type="text" autocomplete="off" name="" required>
 													</div>
 													<div class="help-block"></div>
 												</div>
 												<div class="form-group col-12 col-lg-4">
 													<label for="weeklyAmountCredit">Monto semanal de créditos</label>
 													<div clxs="input-group">
-														<input id="weeklyAmountCredit" class="form-control pwd-input" type="text" autocomplete="off" name="" required>
+														<input id="weeklyAmountCredit" class="form-control pwd-input text-right" type="text" autocomplete="off" name="" required>
 													</div>
 													<div class="help-block"></div>
 												</div>
 												<div class="form-group col-12 col-lg-4">
 													<label for="monthlyAmountCredit">Monto mensual de créditos</label>
 													<div class="input-group">
-														<input id="monthlyAmountCredit" class="form-control pwd-input" type="text" autocomplete="off" name="" required>
+														<input id="monthlyAmountCredit" class="form-control pwd-input text-right" type="text" autocomplete="off" name="" required>
 													</div>
 													<div class="help-block"></div>
 												</div>
 												<div class="form-group col-12 col-lg-4">
 													<label for="CreditTransaction">Monto por transacción de créditos</label>
 													<div class="input-group">
-														<input id="CreditTransaction" class="form-control pwd-input" type="text" autocomplete="off" name="" required>
+														<input id="CreditTransaction" class="form-control pwd-input text-right" type="text" autocomplete="off" name="" required>
 													</div>
 													<div class="help-block"></div>
 												</div>
