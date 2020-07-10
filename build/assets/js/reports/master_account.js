@@ -109,8 +109,10 @@ function dialogExcel(e){
 		case 'Exportar a EXCEL consolidado':
 			lang.CONF_MODAL_WIDTH = 200;
 			var titleModal = 'Exportar a EXCEL de consolidado';
+			var oldID = $('#accept').attr('id');
 			var inputModal;
 			modalReq['table'] = $(this).closest('table');
+			$('#accept').attr('id', 'download-consolid');
 			data = {
 				btn1: {
 					text: lang.GEN_BTN_DOWNLOAD,
@@ -123,7 +125,7 @@ function dialogExcel(e){
 
 			inputModal = 	'<form id="excel-user-form" class="form-group">';
 			inputModal+= 		'<div class="input-group">';
-			inputModal+= 			'<select name="anio-consolid"class="date-picker-year select-box custom-select ml-1 h6" id="anio-consolid-excel"><option selected disabled >"Selecccione año"</option></select>';
+			inputModal+= 			'<select name="anio-consolid"class="date-picker-year select-box custom-select ml-1 h6" id="anio-consolid-excel"><option selected disabled >Selecccione año</option></select>';
 			inputModal+= 		'</div>';
 			inputModal+= 		'<div class="help-block"></div>';
 			inputModal+=	'</form>';
@@ -139,13 +141,16 @@ function dialogExcel(e){
 			break;
 	}
 
-	$('#accept').addClass('big-modal');
 	$('#cancel').on('click', function(){
 
 		$('.cover-spin').removeAttr("style");
 		modalReq['active'] = false;
 	})
-	$('#accept').on('click', function(){
+  $('#download-consolid').on('click', function(){
+		$(this)
+		.off('click')
+		.html(loader)
+		.attr('id', oldID);
 		var form = $('#excel-user-form');
 		var anio = $('#anio-consolid-excel').find('option:selected').val();
 		var	idExtEmp = $('#enterprise-report').find('option:selected').attr('acrif');
@@ -167,7 +172,7 @@ function dialogExcel(e){
 				tamanoPagina: tamanoPagina
 			};
 			validateForms(form);
-
+			insertFormInput(true, form);
 			if (form.valid()) {
 			exportToExcelConsolid(passData)
 			}
@@ -187,11 +192,14 @@ function dialogPdf(e){
 
 	case 'Exportar a PDF consolidado':
 	var titleModal = 'Exportar a PDF de consolidado';
+	var oldID = $('#accept').attr('id');
 	var inputModal;
 	modalReq['table'] = $(this).closest('table');
+	$('#accept').attr('id', 'download-consolid');
 	data = {
 		btn1: {
 			text: lang.GEN_BTN_DOWNLOAD,
+			action: 'close'
 		  },
 		btn2: {
 			action: 'close'
@@ -199,7 +207,7 @@ function dialogPdf(e){
 		}
 	inputModal = 	'<form id="pdf-user-form" class="form-group">';
 	inputModal+= 	'<div class="input-group">';
-	inputModal+= 	'<select id="anio-consolid-pdf" name="anio-consolid"class="date-picker-year select-box custom-select ml-1 h6" ><option selected disabled >"Selecccione año"</option></select>';
+	inputModal+= 	'<select id="anio-consolid-pdf" name="anio-consolid"class="date-picker-year select-box custom-select ml-1 h6" ><option selected disabled >Selecccione año</option></select>';
 	inputModal+= 	'</div>';
 	inputModal+= 	'<div class="help-block"></div>';
 	inputModal+=	'</form>';
@@ -218,12 +226,16 @@ function dialogPdf(e){
 	if(submitForm) {
 		form.submit();
 	}
-	$('#accept').addClass('big-modal');
+
 	$('#cancel').on('click', function(){
 		$('.cover-spin').removeAttr("style");
   })
 
-  $('#accept').on('click', function(){
+  $('#download-consolid').on('click', function(){
+		$(this)
+		.off('click')
+		.html(loader)
+		.attr('id', oldID);
 	  var form = $('#pdf-user-form');
 	  var anio = $('#anio-consolid-pdf').find('option:selected').val();
 	  var	idExtEmp = $('#enterprise-report').find('option:selected').attr('acrif');
@@ -246,9 +258,8 @@ function dialogPdf(e){
 		};
 
 		validateForms(form);
-		insertFormInput(false, form);
+		insertFormInput(true, form);
 		if (form.valid()) {
-
 		exportToPDFConsolid(passData)
 		}
   })

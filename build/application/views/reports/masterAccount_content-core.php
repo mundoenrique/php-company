@@ -119,10 +119,10 @@
 								<i class="icon icon-chart-pie" aria-hidden="true"></i>
 							</button>
 							<?php endif; ?>
-							<button id="export_excelCons" class="btn px-1 big-modal" title="Exportar a EXCEL consolidado" data-toggle="tooltip">
+							<button id="export_excelCons" class="btn px-1 " title="Exportar a EXCEL consolidado" data-toggle="tooltip">
 								<i class="icon icon-file-excel" aria-hidden="true"></i>
 							</button>
-							<button id="export_pdfCons" class="btn px-1 big-modal" title="Exportar a PDF consolidado" data-toggle="tooltip">
+							<button id="export_pdfCons" class="btn px-1 " title="Exportar a PDF consolidado" data-toggle="tooltip">
 								<i class="icon icon-file-pdf" aria-hidden="true"></i>
 							</button>
 						</div>
