@@ -2,6 +2,7 @@
 $(function () {
 	$('#pre-loader').remove();
 	$('.hide-out').removeClass('hide');
+	insertFormInput(false);
 
 	$('.slide-slow').click(function() {
 		$(this).next(".section").slideToggle("slow");

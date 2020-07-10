@@ -30,12 +30,12 @@
 						<div class="row flex justify-between">
 							<div class="form-group col-4 col-xl-4">
 								<label for="idNumberP"><?= lang('GEN_TABLE_DNI'); ?></label>
-								<input id="idNumberP" name="idNumberP" class="form-control h5 select-group" type="text">
+								<input id="idNumberP" name="idNumberP" class="form-control h5 select-group" type="text" autocomplete="off" disabled>
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-4 col-xl-4">
 								<label for="cardNumberP"><?= lang('GEN_CARD_NUMBER'); ?></label>
-								<input id="cardNumberP" name="cardNumberP" class="form-control h5 select-group" type="text">
+								<input id="cardNumberP" name="cardNumberP" class="form-control h5 select-group" type="text" autocomplete="off" disabled>
 								<div class="help-block"></div>
 							</div>
 
@@ -62,15 +62,15 @@
 
 				<div class="row flex justify-between my-3">
 					<div class="form-group col-4 center">
-						<p class="mr-5 h5 semibold tertiary"><?= lang('GEN_CARD_NUMBER'); ?>:
+						<p class="h5 semibold tertiary"><?= lang('GEN_CARD_NUMBER'); ?>:
 							<span class="light text">**********270300</span></p>
 					</div>
 					<div class="form-group col-4 center">
-						<p class="mr-5 h5 semibold tertiary"><?= lang('GEN_TABLE_NAME'); ?>:
+						<p class="h5 semibold tertiary"><?= lang('GEN_TABLE_NAME'); ?>:
 							<span class="light text">Jhonatan Ortiz</span></p>
 					</div>
 					<div class="form-group col-4 center">
-						<p class="mr-5 h5 semibold tertiary"><?= lang('GEN_TABLE_DNI'); ?>:
+						<p class="h5 semibold tertiary"><?= lang('GEN_TABLE_DNI'); ?>:
 							<span class="light text">1803752318</span></p>
 					</div>
 				</div>
