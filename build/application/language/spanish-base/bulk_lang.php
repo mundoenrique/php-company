@@ -66,6 +66,7 @@ $lang['BULK_UNNA_STARTING_LINE2'] = 'Línea de embozo 2';
 $lang['BULK_UNNA_ACCOUNT'] = 'Tarjetas innominadas';
 $lang['BULK_UNNA_PROCESS_OK'] = 'El lote fue procesado de forma exitosa';
 $lang['BULK_UNNA_PROCESS'] = 'Lotes procesados';
+$lang['BULK_UNNA_REQ_NONCARDS'] = 'Todas las tarjetas del lote han sido afiliadas';
 $lang['BULK_SO_CREATE_TITLE'] = 'Generar orden de servicio';
 $lang['BULK_SO_CREATE_FAILED'] = 'No fue posible generar la orden de servicio, por favor intentalo de nuevo';
 $lang['BULK_SO_CREATE_INCORRECT'] = 'El código de verificación es incorrecto, verifícalo e intenta de nuevo';
