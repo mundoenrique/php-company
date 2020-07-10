@@ -131,12 +131,12 @@
 					<table id="concenAccount" class="cell-border h6 display responsive w-100">
 						<thead class="bg-primary secondary regular">
 							<tr>
-								<th>Fecha</th>
-								<th>Descripción</th>
-								<th>Ref.</th>
-								<th>Débito</th>
-								<th>Crédito</th>
-								<th>Saldo</th>
+								<th><?= lang('REPORTS_TABLE_DATE'); ?></th>
+								<th><?= lang('REPORTS_TABLE_DESCRIPTION'); ?></th>
+								<th><?= lang('REPORTS_TABLE_REFERENCE'); ?></th>
+								<th><?= lang('REPORTS_TABLE_DEBIT'); ?></th>
+								<th><?= lang('REPORTS_TABLE_CREDIT'); ?></th>
+								<th><?= lang('REPORTS_TABLE_BALANCE'); ?></th>
 							</tr>
 						</thead>
 						<tbody id="tbody-datos-general" class = "tbody-reportes">

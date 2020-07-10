@@ -378,10 +378,12 @@ function exportToPDFConsolid(passData) {
 				"ext": info.formatoArchivo,
 				"file": info.archivo
 			}
-			downLoadfiles (data);
+		downLoadfiles (data);
+		$('.cover-spin').removeAttr("style");
+		}else if(code == 4){
 			$('.cover-spin').removeAttr("style");
 		}
-  })
+	})
 }
 
 $("#masterAc-btn").on('click', function(e){
