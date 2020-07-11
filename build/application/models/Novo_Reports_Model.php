@@ -1080,11 +1080,14 @@ class Novo_Reports_Model extends NOVO_Model {
 	public function callWs_RechargeMade_Reports($dataRequest)
 	{
 		log_message('INFO', 'NOVO Reports Model: RechargeMade Method Initialized');
-		$this->dataAccessLog->modulo = 'Reportes';
-		$this->dataAccessLog->function = 'recargasRealizadas';
-		$this->dataAccessLog->operation = 'recargasRealizadas';
-		$this->dataRequest->idOperation = 'recargasRealizadas';
+
 		$this->className = 'com.novo.objects.TOs.RecargasRealizadasTO';
+
+		$this->dataAccessLog->modulo = 'Reportes';
+		$this->dataAccessLog->function = 'Reportes Recargas Realizadas';
+		$this->dataAccessLog->operation = 'Recargas Realizadas';
+
+		$this->dataRequest->idOperation = 'recargasRealizadas';
 		$this->dataRequest->paginaActual = 1;
 		$this->dataRequest->tamanoPagina = 10;
 		$this->dataRequest->fecha = '';
@@ -1095,7 +1098,6 @@ class Novo_Reports_Model extends NOVO_Model {
     $arreglo=explode ("/",$fecha);
     $mes=$arreglo[0];
     $anio=$arreglo[1];
-
 		$this->dataRequest->mesSeleccionado = $mes;
 		$this->dataRequest->anoSeleccionado = $anio;
 		$response = $this->sendToService('callWs_RechargeMadeReport');
@@ -1106,10 +1108,10 @@ class Novo_Reports_Model extends NOVO_Model {
         $this->response->code = 0;
 
           $record = new stdClass();
-					$record->mesRecarga1 = $response->mesRecarga1;
-					$record->mesRecarga2 = $response->mesRecarga2;
-					$record->mesRecarga3 =$response->mesRecarga3;
-					$record->recargas = $response->recargas;
+					$record->monthRecharge1 = $response->mesRecarga1;
+					$record->monthRecharge2 = $response->mesRecarga2;
+					$record->monthRecharge3 =$response->mesRecarga3;
+					$record->recharge = $response->recargas;
           array_push(
             $rechargeMadeList,
             $record
@@ -1117,16 +1119,7 @@ class Novo_Reports_Model extends NOVO_Model {
 
       break;
       case -150:
-					$this->response->icon = lang('GEN_ICON_INFO');
-					$this->response->title = lang('REPORTS_TITLE');
-					$this->response->msg = lang('REPORTS_NO_MOVES_ENTERPRISE');
-					$this->response->data = [
-						'btn1'=> [
-							'text'=> lang('GEN_BTN_CONTINUE'),
-							'link'=> 'recargas-realizadas',
-							'action'=> 'redirect'
-						]
-					];
+        $this->response->code = 0;
       break;
     }
     $this->response->data['rechargeMadeList'] = $rechargeMadeList;

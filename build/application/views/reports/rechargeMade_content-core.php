@@ -92,9 +92,9 @@
 						<thead class="bg-primary secondary regular">
 							<tr>
 								<th><?= lang('GEN_PRODUCT'); ?></th>
-								<th id="mes1"></th>
-								<th id="mes2"></th>
-								<th id="mes3"></th>
+								<th id="month1"></th>
+								<th id="month2"></th>
+								<th id="month3"></th>
 								<th><?= lang('GEN_TABLE_TOTAL'); ?></th>
 							</tr>
 						</thead>

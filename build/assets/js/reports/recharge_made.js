@@ -12,22 +12,22 @@ $(function () {
 		dateFormat: 'mm/yy',
 		changeMonth: true,
 		changeYear: true,
+		showButtonPanel: true,
 		maxDate: "+0D",
-		yearRange: '-10:' + currentDate.getFullYear(),
+		closeText: 'Aceptar',
+		yearRange: '-12:' + currentDate.getFullYear(),
 
 		onClose: function (dateText, inst) {
 			var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
 			var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
 			$(this).datepicker('setDate', new Date(year, month, 1));
+		},
+		beforeShow: function (input, inst) {
+			var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
+			var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+			inst.dpDiv.addClass("ui-datepicker-month-year");
+			$(this).datepicker('option', 'defaultDate', new Date(year, month, 1));
 		}
-	});
-
-	$("#initialDatemy").focus(function () {
-		$("#ui-datepicker-div").position({
-			my: "center top",
-			at: "center bottom",
-			of: $(this)
-		});
 	});
 
 	rechargeMadeBtn.on('click', function (e) {
@@ -44,9 +44,6 @@ $(function () {
 			resultsRecharge.dataTable().fnDestroy();
 			verb = "POST"; who = 'Reports'; where = 'RechargeMade';
 			callNovoCore(verb, who, where, data, function (response) {
-				$("#mes1").text(response.data.rechargeMadeList[0].mesRecarga1);
-				$("#mes2").text(response.data.rechargeMadeList[0].mesRecarga2);
-				$("#mes3").text(response.data.rechargeMadeList[0].mesRecarga3);
 				var table = resultsRecharge.DataTable({
 					"ordering": false,
 					"responsive": true,
@@ -57,18 +54,20 @@ $(function () {
 				if (response.data.rechargeMadeList.length == 0) {
 					$('.download-icons').addClass('hide')
 				} else {
-					$('.download-icons').removeClass('hide')
+					$('.download-icons').removeClass('hide');
+					$("#month1").text(response.data.rechargeMadeList[0].monthRecharge1);
+					$("#month2").text(response.data.rechargeMadeList[0].monthRecharge2);
+					$("#month3").text(response.data.rechargeMadeList[0].monthRecharge3);
+					$.each(response.data.rechargeMadeList[0].recharge, function (index, value) {
+						table.row.add([
+							value.producto,
+							value.montoRecarga1,
+							value.montoRecarga2,
+							value.montoRecarga3,
+							value.totalProducto
+						]).draw()
+					});
 				}
-
-				$.each(response.data.rechargeMadeList[0].recargas, function (index, value) {
-					table.row.add([
-						value.producto,
-						value.montoRecarga1,
-						value.montoRecarga2,
-						value.montoRecarga3,
-						value.totalProducto
-					]).draw()
-				});
 
 				form = $('#download-rechargemade');
         	form.html('')
