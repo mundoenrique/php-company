@@ -9,6 +9,7 @@ $(function () {
 	$('#blockMasterAccountResults').addClass("hide");
 	$('#titleResults').addClass('hide');
 	$('#files-btn').addClass('hide');
+	$('.btn').removeAttr('disabled');
 	$("#credit").val('');
 	$("#debit").val('');
 	$("#debit").val('');
@@ -345,6 +346,10 @@ function exportToExcelConsolid(passData, textBtn) {
 				"file": info.archivo
 			}
 			downLoadfiles (data);
+			if($("input[name='results']:checked").val() != 0){
+				$("#initialDate").attr("disabled", "disabled");
+				$("#finalDate").attr("disabled", "disabled");
+			}
 			$('.cover-spin').removeAttr("style");
 		}else if(code == 4){
 			$('.cover-spin').removeAttr("style");
@@ -390,6 +395,10 @@ function exportToPDFConsolid(passData) {
 				"file": info.archivo
 			}
 		downLoadfiles (data);
+		if($("input[name='results']:checked").val() != 0){
+			$("#initialDate").attr("disabled", "disabled");
+			$("#finalDate").attr("disabled", "disabled");
+		}
 		$('.cover-spin').removeAttr("style");
 		}else if(code == 4){
 			$('.cover-spin').removeAttr("style");
@@ -437,7 +446,8 @@ function info(){
 			resultadoCheck = '';
 		}
 	}
-
+	var form= $('#masterAcForm');
+	insertFormInput(true, form);
 	var idExtEmp = $('#enterprise-report').find('option:selected').attr('acrif');
 	var fechaIni =  $("#initialDate").val();
 	var fechaFin = $("#finalDate").val();
@@ -475,10 +485,10 @@ function masterAccount(passData) {
 			var info = dataResponse.depositoGMO.lista;
 			$.each(info,function(posLista,itemLista){
 				if(itemLista.tipoNota == 'D'){
-					itemLista.montoDeposito = '+' + itemLista.montoDeposito;
+					itemLista.montoDeposito = '-' + itemLista.montoDeposito;
 					itemLista.tipoNota = '';
 				}else if(itemLista.tipoNota == 'C'){
-					itemLista.tipoNota = '-' + itemLista.montoDeposito;
+					itemLista.tipoNota = '+' + itemLista.montoDeposito;
 					itemLista.montoDeposito = ''
 				}
 			});
