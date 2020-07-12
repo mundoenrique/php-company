@@ -4,6 +4,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $lang['CONF_SUPPORT_IE'] = 'ON';
 //SIGNIN
 $lang['CONIFG_SIGIN_RECOVER_PASS'] = 'OFF';
+//LOAD BULK
+$lang['CONF_BULK_LOAD'] = 'OFF';
 //FOOTER
 $lang['CONF_FOOTER_NETWORKS'] = 'OFF';
 $lang['CONF_FOOTER_LOGO'] = 'ON';

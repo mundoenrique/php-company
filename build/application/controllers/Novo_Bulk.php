@@ -50,6 +50,7 @@ class Novo_Bulk extends NOVO_Controller {
 			$this->render->branchOffices = $branchOffices->data->branchOffices;
 		}
 
+		$this->render->loadBulk = $this->verify_access->verifyAuthorization('TEBCAR', 'TEBCAR') || lang('CONF_BULK_LOAD') == 'ON';
 		$this->render->pendingBulk = $responseList->data->pendingBulk;
 		$this->render->titlePage = lang('GEN_MENU_BULK_LOAD');
 		$this->views = ['bulk/'.$view];

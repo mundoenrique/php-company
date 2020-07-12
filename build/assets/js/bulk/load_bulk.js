@@ -5,8 +5,10 @@ $(function () {
 		$('#content-datatable').addClass('none');
 		$('#no-bulk').removeClass('none');
 	}
+
+	var LoadBulk = getPropertyOfElement('loadbulk', '.loadbulk');
 	var file = $('#file-bulk');
-	var inputFile = file.next('.js-label-file').html().trim();
+	var inputFile = LoadBulk ? file.next('.js-label-file').html().trim() : '';
 	var selectBranchOffice = $('#branch-office');
 	var selectTypeBulk = $('#type-bulk');
 	var uploadFileBtn = $('#upload-file-btn');
