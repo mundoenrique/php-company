@@ -107,6 +107,9 @@ class NOVO_Model extends CI_Model {
 					$this->session->sess_destroy();
 				}
 				break;
+			case -29:
+				$this->response->msg = lang('GEN_FAILED_THIRD PARTY');
+				break;
 			default:
 				$this->response->msg = lang('RESP_MESSAGE_SYSTEM');
 				$this->response->icon = lang('GEN_ICON_DANGER');
