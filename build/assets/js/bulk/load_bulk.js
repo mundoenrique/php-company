@@ -138,10 +138,9 @@ $(function () {
 				form.append('<input type="hidden" name="bulkView" value="confirm">');
 				break;
 			case lang.GEN_BTN_DELETE:
-				var oldID = $('#accept').attr('id');
 				form = $(this).parent().find('form')
 				$(this).closest('tr').addClass('select');
-				$('#accept').attr('id', 'delete-bulk-btn');
+				$('#accept').addClass('delete-bulk-btn');
 				var inputModal;
 				data = {
 					btn1: {
@@ -153,7 +152,7 @@ $(function () {
 					}
 				}
 				var bulkFile = $(this).closest('tr').find('td:nth-child(3)').text();
-				inputModal =	'<form id="delete-bulk-form" class="form-group">';
+				inputModal =	'<form id="delete-bulk-form" name="delete-bulk-form" class="form-group" onsubmit="return false;">';
 				inputModal+= 		'<span class="regular">'+lang.BULK_DELETE_DATE+': '+bulkFile+'</span>';
 				inputModal+=		'<div class="input-group">';
 				inputModal+= 			'<input id="password" class="form-control pwd-input" name="password" type="password" autocomplete="off"';
@@ -165,11 +164,9 @@ $(function () {
 				inputModal+= 		'<div class="help-block"></div>';
 				inputModal+= 	'</form>';
 				notiSystem(lang.BULK_DELETE_TITLE, inputModal, lang.GEN_ICON_INFO, data);
-				deleteBulk(oldID);
-				$('#cancel').on('click', function(e){
+				$('#cancel').on('click', function(e) {
 					e.preventDefault();
 					$('#pending-bulk').find('tr').removeClass('select');
-					$('#delete-bulk-btn').attr('id', oldID);
 				});
 				break;
 		}
@@ -179,18 +176,11 @@ $(function () {
 		}
 
 		insertFormInput(false);
-	});
+	})
 
-});
-/**
- * @info Elimina un lote
- * @author J. Enrique Peñaloza Piñero
- * @date December 18th, 2019
- */
-function deleteBulk(oldID) {
-	var deleteBulkBtn = $('#delete-bulk-btn')
-	var formDeleteBulk = $('#delete-bulk-form');
-	deleteBulkBtn.on('click', function() {
+	$('#system-info').on('click', '.delete-bulk-btn', function(e) {
+		e.preventDefault();
+		var formDeleteBulk = $('#delete-bulk-form');
 		formInputTrim(formDeleteBulk);
 		validateForms(formDeleteBulk);
 
@@ -199,10 +189,9 @@ function deleteBulk(oldID) {
 			.off('click')
 			.html(loader)
 			.prop('disabled', true)
-			.attr('id', oldID);
+			.removeClass('delete-bulk-btn');
 			inputPass = cryptoPass($('#password').val());
 			data = {
-				modalReq: true,
 				bulkId: form.find('input[name="bulkId"]').val(),
 				bulkTicked: form.find('input[name="bulkTicked"]').val(),
 				bulkStatus: form.find('input[name="bulkStatus"]').val(),
@@ -219,4 +208,5 @@ function deleteBulk(oldID) {
 			});
 		}
 	});
-}
+
+})

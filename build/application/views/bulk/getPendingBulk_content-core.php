@@ -22,7 +22,7 @@
 				<div class="flex px-5 pb-4 items-center row">
 					<div class="form-group col-6 col-lg-3 col-xl-3">
 						<label class="mt-1 h6" for="type-bulk"><?= lang('BULK_TYPE'); ?></label>
-						<select id="type-bulk" name="type-bulk" class="select-box custom-select h6 w-100">
+						<select id="type-bulk" name="type-bulk" class="form-control select-box custom-select h6 w-100">
 							<?php foreach($typesLot AS $pos => $type): ?>
 							<option value="<?= $type->key; ?>" format="<?= $type->format; ?>" <?= $pos != 0 ? '' : 'selected disabled' ?>><?= $type->text; ?>
 							</option>

@@ -121,7 +121,7 @@ function dialogExcel(e){
 				}
 			}
 
-			inputModal = 	'<form id="excel-user-form" class="form-group">';
+			inputModal = 	'<form id="excel-user-form" name="excel-user-form" class="form-group"> onsubmit="return false;">';
 			inputModal+= 		'<div class="input-group">';
 			inputModal+= 			'<select name="anio-consolid"class="date-picker-year select-box custom-select ml-1 h6" id="anio-consolid-excel"><option selected disabled >"Selecccione año"</option></select>';
 			inputModal+= 		'</div>';
@@ -197,7 +197,7 @@ function dialogPdf(e){
 			action: 'close'
 			}
 		}
-	inputModal = 	'<form id="pdf-user-form" class="form-group">';
+	inputModal = 	'<form id="pdf-user-form" name="pdf-user-form" class="form-group"> onsubmit="return false;">';
 	inputModal+= 	'<div class="input-group">';
 	inputModal+= 	'<select id="anio-consolid-pdf" name="anio-consolid"class="date-picker-year select-box custom-select ml-1 h6" ><option selected disabled >"Selecccione año"</option></select>';
 	inputModal+= 	'</div>';
