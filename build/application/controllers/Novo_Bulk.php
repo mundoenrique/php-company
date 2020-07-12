@@ -140,6 +140,7 @@ class Novo_Bulk extends NOVO_Controller {
 		}
 
 		$this->responseAttr($responseList);
+		$this->render->authBulk = $this->verify_access->verifyAuthorization('TEBAUT', 'TEBAUT') || lang('CONF_BULK_AUTH') == 'ON';
 		$this->render->signBulk = $responseList->data->signBulk;
 		$this->render->authorizeBulk = $responseList->data->authorizeBulk;
 		$this->render->authorizeAttr = $responseList->data->authorizeAttr;

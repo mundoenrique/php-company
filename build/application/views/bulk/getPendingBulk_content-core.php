@@ -30,7 +30,7 @@
 						</select>
 						<div class="help-block"></div>
 					</div>
-					<?php if(verifyDisplay('body', $module,  lang('GEN_TAG_BRANCHOFFICE'))): ?>
+					<?php if(lang('CONF_BULK_BRANCHOFFICE') == 'ON'): ?>
 					<div class="form-group col-6 col-lg-3 col-xl-3 hide">
 						<label class="mt-1 h6" for="branch-office"><?= lang('BULK_BRANCH_OFFICE'); ?></label>
 						<select id="branch-office" name="branch-office" class="form-control select-box custom-select h6 w-100">

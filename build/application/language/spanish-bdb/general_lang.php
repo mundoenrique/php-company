@@ -5,7 +5,7 @@ $lang['GEN_ENTERPRISE_LIST'] = 'empresas';
 $lang['GEN-LOGO-HEADER'] = 'img-logo.svg';
 $lang['GEN-LOGO-BIG'] = 'img-banco_bogota.svg';
 $lang['GEN_ALTERNATIVE_TEXT'] = 'Banco de Bogotá';
-$lang['GEN_FISCAL_REGISTRY'] = 'NIT.';
+$lang['GEN_FISCAL_REGISTRY'] = 'Identificación';
 $lang['GEN_PLACE_PASSWORD'] = 'Código de seguridad';
 //BUTTONS
 $lang['GEN_BTN_DISASS_AUTH'] = 'En espera de autorización';
