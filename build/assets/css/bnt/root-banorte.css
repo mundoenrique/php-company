@@ -45,6 +45,8 @@
 	--will-not-processed: #8b4f80;
 	--not-processed: #ff8c94;
 	--being-validated: #ebc599;
+	--option-not-active: #ffffff;
+	--option-active: #EB0029;
 	--black: #111111;
 
 	/*validation messages*/
