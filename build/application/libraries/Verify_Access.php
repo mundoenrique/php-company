@@ -125,9 +125,13 @@ class Verify_Access {
 		if(!$auth) {
 			switch($module) {
 				case 'recoverPass':
+					$auth = lang('CONF_RECOV_PASS') == 'ON';
+				break;
+				case 'recoverAccess':
+					$auth = lang('CONF_RECOV_ACCESS') == 'ON';
+				break;
 				case 'benefits':
-					$clients = ['novo', 'pichincha', 'banorte', 'produbanco'];
-					$auth = in_array($this->CI->config->item('client'), $clients);
+					$auth = lang('CONF_BENEFITS') == 'ON';
 				break;
 				case 'changeEmail':
 				case 'changeTelephones':

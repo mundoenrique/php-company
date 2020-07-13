@@ -132,8 +132,9 @@ $lang['GEN_FILE'] = 'Archivos de gestión Conexión Empresas Online';
 $lang['GEN_FILE_OPERATIONAL_BATCH'] = 'Archivos lotes operativos (194kb)';
 $lang['GEN_DOWNLOAD_FILE_INI'] = 'Archivo.ini';
 $lang['GEN_BTN_INI'] = 'Debes seleccionar una empresa para poder realizar la descarga';
-//links
+//LINKS
 $lang['GEN_LINK_LOGIN'] = 'inicio';
+$lang['GEN_LINK_RECOVER_ACCESS'] = 'recuperar-clave';
 //MODAL STYLES
 $lang['GEN_ICON'] = 'ui-icon';
 $lang['GEN_ICON_SUCCESS'] = 'ui-icon-circle-check';
@@ -273,6 +274,8 @@ $lang['GEN_RECOVER_PASS_TITLE'] = 'Recuperar contraseña';
 $lang['GEN_FISCAL_REGISTRY'] = 'RUC.';
 $lang['GEN_PASSWORD_CHANGE_TITLE'] = 'Cambiar contraseña';
 $lang['GEN_EMAIL_CHANGE_TITLE'] = 'Cambiar email';
+$lang['GEN_DOCUMENT_TYPE'] = 'Tipo de documento';
+$lang['GEN_DOCUMENT_ID'] = 'Documento de identidad';
 $lang['GEN_USER_TITLE'] = 'Obtener usuario';
 $lang['GEN_ALTERNATIVE_TEXT'] = 'Novopayment';
 $lang['GEN_PRODUCTS'] = 'Productos';
