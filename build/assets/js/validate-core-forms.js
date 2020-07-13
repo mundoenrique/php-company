@@ -19,7 +19,7 @@ function validateForms(form) {
 	var usdAmount = /^[0-9]+(\.[0-9]*)?$/;
 	var validCode = /^[a-z0-9]+$/i;
 	var fiscalReg = lang.VALIDATE_FISCAL_REGISTRY;
-	var idNumberReg = new RegExp(lang.VALIDATE_REG_ID_NUMBER, 'gi');
+	var idNumberReg = new RegExp(lang.VALIDATE_REG_ID_NUMBER, 'i');
 	var date = {
 		dmy: /^(0?[1-9]|[12][0-9]|3[01])\/(0?[1-9]|1[012])\/[0-9]{4}$/,
 		my: /^(0?[1-9]|1[012])\/[0-9]{4}$/,
