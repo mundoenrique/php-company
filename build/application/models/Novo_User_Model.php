@@ -33,11 +33,18 @@ class Novo_User_Model extends NOVO_Model {
 			base64_decode($password->plot),
 			utf8_encode($password->password)
 		);
+		$authToken = $this->session->flashdata('authToken') ? $this->session->flashdata('authToken') : '';
+		$authToken_str=str_replace('"','', $authToken);
 
 		$this->dataRequest->idOperation = 'loginFull';
 		$this->dataRequest->userName = $userName;
 		$this->dataRequest->password = md5($password);
 		$this->dataRequest->ctipo = $dataRequest->active;
+		$this->dataRequest->codigoOtp =[
+ 		'tokenCliente' => $dataRequest->codeOTP !='' ? $dataRequest->codeOTP : '',
+ 		'authToken' => $authToken_str
+		];
+		$this->dataRequest->guardaIp = $dataRequest->saveIP !='' ? true : false;
 
 		if($this->config->item('active_recaptcha')) {
 			$this->isResponseRc = $this->callWs_ValidateCaptcha_User($dataRequest);
@@ -132,7 +139,7 @@ class Novo_User_Model extends NOVO_Model {
 				$this->response->position = lang('CONF_VALID_POSITION');
 				break;
 			case -229:
-				$this->response->code = 2;
+				$this->response->code = 3;
 				$this->response->msg = lang('RESP_OLD_USER');
 				break;
 			case -262:
@@ -159,6 +166,40 @@ class Novo_User_Model extends NOVO_Model {
 					]
 				];
 				break;
+			case -424:
+				$this->response->code = 2;
+				$this->response->ipInvalid = TRUE;
+				$this->response->assert = lang('GEN_LOGIN_IP_ASSERT');
+				$this->response->labelInput = lang('GEN_LOGIN_IP_LABEL_INPUT');
+				$this->response->icon = lang('GEN_ICON_WARNING');
+				$this->response->email = $response->usuario->emailEnc;
+				$this->response->msg = str_replace('{$maskMail$}',$this->response->email,lang('GEN_LOGIN_IP_MSG'));
+				$this->response->data = [
+					'btn1'=> [
+						'text'=> lang('GEN_BTN_ACCEPT'),
+						'link'=> false,
+						'action'=> 'none'
+					],
+					'btn2'=> [
+						'text'=> lang('GEN_BTN_CANCEL'),
+						'link'=> false,
+						'action'=> 'close'
+					]
+				];
+				$this->session->set_flashdata('authToken',$response->usuario->codigoOtp->access_token);
+				break;
+			case -286:
+			case -287:
+			case -288:
+				$this->response->code = 4;
+				$this->response->msg = lang('GEN_RESP_CODE_OTP_INVALID');
+				$this->response->icon = lang('GEN_ICON_WARNING');
+				$this->response->data['btn1'] = [
+					'text' => lang('GEN_BTN_ACCEPT'),
+					'action' => 'close'
+				];
+				break;
+			case 'fail':
 			case 9999:
 				$this->response->code = 3;
 				$this->response->title = lang('GEN_SYSTEM_NAME');
