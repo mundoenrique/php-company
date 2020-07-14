@@ -91,7 +91,7 @@
 									<th><?= lang('GEN_TABLE_BULK_NUMBER'); ?></th>
 									<th><?= lang('GEN_TABLE_EMISSION_STATUS'); ?></th>
 									<th><?= lang('GEN_TABLE_PLASTIC_STATUS'); ?></th>
-									<th><?= lang('GEN_TABLE_NAME'); ?></th>
+									<th><?= lang('GEN_TABLE_FULL_NAME'); ?></th>
 									<th><?= lang('GEN_TABLE_DNI'); ?></th>
 									<th><?= lang('GEN_TABLE_BALANCE'); ?></th>
 									<th><?= lang('GEN_TABLE_OPTIONS'); ?></th>

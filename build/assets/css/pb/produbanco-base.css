@@ -1301,6 +1301,8 @@ label {
 .bg-will-not-processed { background-color: var(--will-not-processed) !important }
 .bg-not-processed { background-color: var(--not-processed) !important }
 .bg-being-validated { background-color: var(--being-validated) !important }
+.bg-option-active { background-color: var(--option-active) !important }
+.bg-option-not-active { background-color: var(--option-not-active) !important }
 
 .bg-transparent { background-color: transparent !important }
 

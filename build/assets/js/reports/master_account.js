@@ -453,10 +453,10 @@ function masterAccount(passData) {
 					"language": dataTableLang,
 				}).clear().draw();
 			}
-			if ($("input[name='results']:checked").val() != 0) {
+			if ($("input[name='results']:checked").val() != 0){
 				$("#initialDate ").attr('disabled', 'disabled');
 				$("#finalDate ").attr('disabled', 'disabled');
-			} else if ($("input[name='results']:checked").val() == 0) {
+			} else if($("input[name='results']:checked").val() == 0){
 
 				$("#initialDate ").removeAttr('disabled');
 				$("#finalDate ").removeAttr('disabled');

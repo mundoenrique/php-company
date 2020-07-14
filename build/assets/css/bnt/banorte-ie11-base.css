@@ -529,6 +529,8 @@ footer.main-footer {
 .bg-will-not-processed { background-color: #8b4f80 !important }
 .bg-not-processed { background-color: #ff8c94 !important }
 .bg-being-validated { background-color: #ebc599 !important }
+.bg-option-active { background-color: #EB0029 !important }
+.bg-option-not-active { background-color: #ffffff !important }
 
 /* Borders
 ========================================================================== */

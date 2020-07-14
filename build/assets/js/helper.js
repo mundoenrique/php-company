@@ -235,7 +235,7 @@ function createButton(dialogMoldal, elementButton, valuesButton) {
 			dialogMoldal.dialog('close');
 		}
 		$(this).off('click');
-	});
+	})
 }
 /**
  * @info Incorpora inputs a formularios

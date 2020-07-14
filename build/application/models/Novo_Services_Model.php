@@ -303,6 +303,12 @@ class Novo_Services_Model extends NOVO_Model {
 				$this->response->icon = lang('GEN_ICON_INFO');
 				$this->response->data['btn1']['action'] = 'close';
 			break;
+			case -242:
+				$this->response->title = $dataRequest->action;
+				$this->response->msg = 'Alcanzaste el límite de transacciones';
+				$this->response->icon = lang('GEN_ICON_INFO');
+				$this->response->data['btn1']['action'] = 'close';
+			break;
 			case -267:
 				$this->response->title = $dataRequest->action;
 				$this->response->msg = novoLang('La tarjeta %s ya se encunetra bloqueda.', $cardsList[0]['noTarjeta']);

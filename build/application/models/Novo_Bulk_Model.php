@@ -1339,7 +1339,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 			break;
 			case -150:
 				$this->response->title = 'Cuentas Innominadas';
-				$this->response->msg = 'Todas las tarjetas del lote han sido afiliadas';
+				$this->response->msg = lang('BULK_UNNA_REQ_NONCARDS');
 				$this->response->icon = lang('GEN_ICON_INFO');
 				$this->response->data->resp['btn1']['link'] = lang('GEN_LINK_BULK_UNNAMED_AFFIL');
 			break;

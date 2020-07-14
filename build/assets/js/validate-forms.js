@@ -16,6 +16,7 @@ function validateForms(form, options) {
 	var alphabetical = /^[a-z]+$/i;
 	var text = /^['a-z0-9ñáéíóú ,.:()']+$/i;
 	var usdAmount = /^[0-9]+(\.[0-9]*)?$/;
+	var validCode = /^[a-z0-9]+$/i;
 	var fiscalReg = {
 		'bp': /^(00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23|24)+(6|9)[\d]{5,6}[\d]{3,4}$/,
 		'co': /^([0-9]{9,17})/,
@@ -60,19 +61,29 @@ function validateForms(form, options) {
 		return value !== target.val();
 	}
 
+	if(typeof options!=='undefined') {
+		if(options.handleMsg===false){
+			ignoreMsgHandling();
+		}
+		if(options.handleStyle===false){
+			errorClass = '';
+		}
+		if(options.modal===true){
+			defaults.onfocusout=function(element) { $(element).valid(); },
+			defaults.onkeyup=function(element) { $(element).valid(); },
+			defaults.errorPlacement=function(error, element) {
+				$(element).closest('.form-group').find('.help-block').html(error.html());
+			};
+		}
+	} else {
+		ignoreMsgHandling();
+	}
+
 	function ignoreMsgHandling() {
 		defaults.onfocusout = false;
 		defaults.onkeyup = function() {};
-		defaults.errorPlacement = function(error, element) {}
-	}
-
-	if(typeof options!=='undefined') {
-		if(options.handleMsg===false)
-			ignoreMsgHandling();
-		if(options.handleStyle===false)
-			errorClass = '';
-	} else {
-		ignoreMsgHandling();
+		defaults.errorPlacement = function(error, element) {
+		}
 	}
 
 	jQuery.validator.setDefaults(defaults);
@@ -133,7 +144,9 @@ function validateForms(form, options) {
 			"pass": {pattern: userPassword},
 			"idTipoLote": {pattern: numeric},
 			"id-document": {pattern: numeric},
-			"card-number": {pattern: numeric}
+			"card-number": {pattern: numeric},
+			"codeOTP": {required: true, pattern: validCode, maxlength: 8},
+			"saveIP": {pattern: numeric}
 		},
 		messages: {
 			"user-name": "Debe indicar su nombre de usuario",
@@ -150,7 +163,11 @@ function validateForms(form, options) {
 				equalTo: 'Debe ser igual a su nueva contraseña'
 			},
 			"start-my-date": "Falla la fecha",
+			"codeOTP": {
+				required: lang.GEN_CODE_OTP_REQUIRED,
+				pattern: lang.GEN_CODE_OTP_INVALID_FORMAT,
+				maxlength: lang.GEN_CODE_OTP_INVALID_FORMAT
+			},
 		}
 	});
-
 }

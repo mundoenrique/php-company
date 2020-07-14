@@ -145,11 +145,11 @@
 							<?php endforeach; ?>
 						</tbody>
 					</table>
-					<?php if($authorizeBulk != new stdClass()): ?>
-					<form id="auth-bulk-form" method="post">
+					<?php if ($authorizeBulk != new stdClass()): ?>
+					<form id="auth-bulk-form" name="auth-bulk-form" method="post">
 						<div class="flex row mt-3 mb-2 mx-2 justify-end">
 							<div class="col-4 col-lg-3 h6 regular form-group">
-								<?php if( lang('CONF_BULK_AUTHORIZE') == 'ON'): ?>
+								<?php if(lang('CONF_BULK_AUTHORIZE') == 'ON'): ?>
 								<select id="type-order" name="type-order" class="select-box custom-select h6">
 									<option value="0"><?= lang('BULK_PROCESS_BY_BULK'); ?></option>
 									<option value="1" selected><?= lang('BULK_PROCESS_TYPE_BULK') ?></option>
@@ -159,9 +159,10 @@
 								<?php endif; ?>
 								<div class="help-block"></div>
 							</div>
+							<?php if($authBulk || $authorizeAttr->allBulk == 'toggle-all'): ?>
 							<div class="col-5 col-lg-3 col-xl-3 form-group">
 								<div class="input-group">
-									<input id="password-auth" name="password" class="form-control pwd-input pr-0 pwd" type="password" autocomplete="new-password"
+									<input id="password-auth" name="password" class="form-control pwd-input pr-0 pwd" type="password" autocomplete="off"
 										placeholder="<?= lang('GEN_PLACE_PASSWORD'); ?>">
 									<div class="input-group-append">
 										<span id="pwd_action" class="input-group-text pwd-action" title="<?= lang('GEN_SHOW_PASS') ?>"><i
@@ -170,11 +171,14 @@
 								</div>
 								<div class="help-block bulk-select text-left"></div>
 							</div>
+							<?php endif; ?>
+							<?php if($authBulk): ?>
 							<div class="col-3 col-lg-auto">
 								<button id="auth-bulk-btn" class="btn btn-primary btn-small btn-loading flex mx-auto">
 									<?= lang('GEN_BTN_AUTHORIZE'); ?>
 								</button>
 							</div>
+							<?php endif; ?>
 							<?php if($this->verify_access->verifyAuthorization('TEBAUT', 'TEBELI') && $authorizeAttr->allBulk == 'toggle-all'): ?>
 							<div class="col-3 col-lg-auto">
 								<button id="del-auth-bulk-btn" class="btn btn-primary btn-small btn-loading flex mx-auto">
