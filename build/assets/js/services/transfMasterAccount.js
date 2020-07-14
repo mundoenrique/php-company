@@ -194,6 +194,9 @@ $(function () {
 
 	$('#masterAccountBtn').on('click', function (e) {
 		e.preventDefault();
+		$('#tableServicesMaster').find('thead > tr').removeClass("selected");
+		$('.help-block').text('');
+		$('input, select').removeClass('has-error');
 		form = $('#masterAccountForm');
 		validateForms(form);
 
