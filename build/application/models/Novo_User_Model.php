@@ -340,28 +340,29 @@ class Novo_User_Model extends NOVO_Model {
 			]
 		];
 		$maskMail = maskString($dataRequest->email, 4, $end = 6, '@');
+		$map = 0;
 
 		$response = $this->sendToService('callWs_RecoverAccess');
-		$this->isResponseRc = 0;
 
 		switch($this->isResponseRc) {
-			case 0:
-				$this->response->msg = novoLang(lang('RESP_TEMP_PASS'), [$this->dataRequest->userName, $maskMail]);
+			case 200:
+				$this->response->code = 0;
+				$this->response->msg = novoLang(lang('RESP_SEND_OTP'), [$maskMail]);
 				$this->response->icon = lang('GEN_ICON_SUCCESS');
 				$this->response->data = [
 					'btn1'=> [
-						'text'=> lang('GEN_BTN_CONTINUE'),
-						'link'=> 'inicio',
-						'action'=> 'redirect'
+						'text'=> lang('GEN_BTN_ACCEPT'),
+						'action'=> 'none'
 					]
 				];
 				break;
 			case -159:
+				$map = 1;
 				$this->response->msg = novoLang(lang('RESP_EMAIL_NO_FOUND'), $maskMail);
 				break;
 		}
 
-		if($this->isResponseRc != 0 && $this->response->code == 1) {
+		if($this->isResponseRc != 0 && $map == 1) {
 			$this->response->title = lang('GEN_RECOVER_PASS_TITLE');
 			$this->response->icon = lang('GEN_ICON_INFO');
 			$this->response->data = [

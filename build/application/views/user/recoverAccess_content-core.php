@@ -1,5 +1,4 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
-
 <div class="pt-3 pb-5">
 	<div class="logout-content max-width-4 mx-auto p-responsive py-4">
 		<h1 class="primary h0"><?= lang('GEN_RECOVER_PASS_TITLE'); ?></h1>
@@ -12,7 +11,7 @@
 				<p><?= novoLang(lang('RECOVER_PASS_FORGOTTEN'), lang('GEN_SYSTEM_NAME')); ?></p>
 				<div class="max-width-1 fit-lg mx-auto pt-3">
 					<form id="form-access-recovery">
-						<div class="row  mb-2">
+						<div class="row mb-2">
 							<div class="form-group col-lg-4">
 								<label for="email"><?= lang('GEN_EMAIL'); ?></label>
 								<input id="email" name="email" class="form-control" type="text" maxlength="64" placeholder="<?= lang('GEN_PLACE_HOLDER_EMAIL') ?>"

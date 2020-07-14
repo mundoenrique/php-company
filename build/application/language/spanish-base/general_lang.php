@@ -377,6 +377,7 @@ $lang['RESP_SUPPORT_MAIL'] = '';
 $lang['RESP_SUPPORT_TELF'] = '';
 $lang['RESP_INCORRECTLY_CLOSED'] = '<div><h5 class="regular">Tu última sesión se cerró de manera incorrecta. Ten en cuenta que para salir de la aplicación debes seleccionar <strong>"Cerrar Sesión"</strong>.</h5></div>';
 $lang['RESP_NO_PERMISSIONS'] = 'Estimado usuario no tienes permiso para usar la aplicación, por favor comunícate con el administrador';
+$lang['RESP_SEND_OTP'] = 'enviamos un correo a %s, con una código de seguridad, indicalo a continuación.';
 $lang['RESP_TEMP_PASS'] = '%s, enviamos un correo a %s, con una contraseña temporal.';
 $lang['RESP_COMPANNY_NOT_ASSIGNED'] = 'El usuario %s no está asignado a la empresa.';
 $lang['RESP_FISCAL_REGISTRY_NO_FOUND'] = 'Por favor verifica el número %s %s %s';
