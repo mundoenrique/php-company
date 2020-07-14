@@ -312,6 +312,68 @@ class Novo_User_Model extends NOVO_Model {
 		return $this->responseToTheView(lang('GEN_RECOVER_PASS'));
 	}
 	/**
+	 * @info Método para recuperar acceso con OTP
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date July 13th, 2019
+	 */
+	public function callWs_RecoverAccess_User($dataRequest)
+	{
+		log_message('INFO', 'NOVO User Model: RecoverAccess Method Initialized');
+
+		$this->className = 'com.novo.objects.MO.GenericBusinessObject';
+		$this->dataAccessLog->modulo = 'Usuario';
+		$this->dataAccessLog->function = 'Recuperar Acceso';
+		$this->dataAccessLog->operation = 'Obtener código OTP';
+		$userName = isset($dataRequest->user) ? mb_strtoupper($dataRequest->user) : '';
+		$this->dataAccessLog->userName = $userName;
+
+		$this->dataRequest->idOperation = 'genericBusiness';
+		$this->dataRequest->userName = $userName;
+		$this->dataRequest->tipoDocumento = $dataRequest->documentType;
+		$this->dataRequest->cedula = $dataRequest->documentId;
+		$this->dataRequest->email = $dataRequest->email;
+		$this->dataRequest->opcion = 'generarOTP';
+		$this->dataRequest->subOpciones = [
+			[
+				'subOpcion' => 'validarDatosRecuperar',
+      	'orden' => '1'
+			]
+		];
+		$maskMail = maskString($dataRequest->email, 4, $end = 6, '@');
+
+		$response = $this->sendToService('callWs_RecoverAccess');
+		$this->isResponseRc = 0;
+
+		switch($this->isResponseRc) {
+			case 0:
+				$this->response->msg = novoLang(lang('RESP_TEMP_PASS'), [$this->dataRequest->userName, $maskMail]);
+				$this->response->icon = lang('GEN_ICON_SUCCESS');
+				$this->response->data = [
+					'btn1'=> [
+						'text'=> lang('GEN_BTN_CONTINUE'),
+						'link'=> 'inicio',
+						'action'=> 'redirect'
+					]
+				];
+				break;
+			case -159:
+				$this->response->msg = novoLang(lang('RESP_EMAIL_NO_FOUND'), $maskMail);
+				break;
+		}
+
+		if($this->isResponseRc != 0 && $this->response->code == 1) {
+			$this->response->title = lang('GEN_RECOVER_PASS_TITLE');
+			$this->response->icon = lang('GEN_ICON_INFO');
+			$this->response->data = [
+				'btn1'=> [
+					'action'=> 'close'
+				]
+			];
+		}
+
+		return $this->responseToTheView(lang('GEN_RECOVER_ACCESS'));
+	}
+	/**
 	 * @info Método para el cambio de Contraseña
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date April 29th, 2019

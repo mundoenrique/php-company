@@ -95,6 +95,7 @@ $lang['GEN_LOGIN'] = 'Login';
 $lang['GEN_VALIDATE_CAPTCHA'] = 'validateCaptcha';
 $lang['GEN_ACTIVE_RECAPTCHA'] = ACTIVE_RECAPTCHA;
 $lang['GEN_RECOVER_PASS'] = 'RecoverPass';
+$lang['GEN_RECOVER_ACCESS'] = 'RecoverAccess';
 $lang['GEN_CHANGE_PASS'] = 'ChangePassword';
 $lang['GEN_CHANGE_EMAIL'] = 'changeEmail';
 $lang['GEN_CHANGE_TELEPHONES'] = 'changeTelephones';
