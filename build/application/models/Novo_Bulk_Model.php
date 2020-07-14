@@ -1299,7 +1299,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 			'bulkHeader' => [
 				lang('GEN_TABLE_CARD_NUMBER'),
 				lang('GEN_TABLE_ACCOUNT_NUMBER'),
-				lang('GEN_TABLE_ID_DOC'),
+				lang('GEN_TABLE_DNI'),
 				lang('GEN_TABLE_CARDHOLDER'),
 				lang('GEN_TABLE_STATUS'),
 			],

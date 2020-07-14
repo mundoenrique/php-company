@@ -127,7 +127,7 @@ function validateForms(form) {
 			"initialDate": {required: true, pattern: date.dmy},
 			"finalDate": {required: true, pattern: date.dmy},
 			"idNumber": {pattern: idNumberReg},
-			"anio-consolid": {required: true},
+			"anio-consolid": { requiredSelect: true, min: 1, pattern: date.y},
 			"cardNumber": {
 				required: {
 					depends: function (element) {

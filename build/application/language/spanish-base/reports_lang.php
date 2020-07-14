@@ -17,8 +17,19 @@ $lang['REPORTS_FOUND_CARD'] = 'la tarjeta no fue encontrada';
 $lang['REPORTS_NO_CLIENT_STATEMENT'] = 'No fue posible generar el extracto del mes seleccionado';
 $lang['REPORTS_NO_GMF'] = 'No existen certificados GMF disponibles';
 $lang['REPORTS_NO_GMF_FOR_YEAR'] = 'El certificado GMF para el año %s, no esta disponible';
-
 $lang['REPORTS_ID_FISCAL']= "NIT. (Opcional)";
 $lang['REPORTS_ID_FISCAL_INPUT']= "Ingresa NIT.";
+//MASTER ACCOUNT
+$lang['REPORTS_TABLE_DATE']="Fecha";
+$lang['REPORTS_TABLE_DESCRIPTION']="Descripción";
+$lang['REPORTS_TABLE_REFERENCE']="Ref.";
+$lang['REPORTS_TABLE_DEBIT']="Crédito";
+$lang['REPORTS_TABLE_CREDIT']="Débito";
+$lang['REPORTS_TABLE_BALANCE']="Saldo";
+//CLOSING BALANCE
+$lang['REPORTS_TABLE_CARD']="Tarjeta";
+$lang['REPORTS_TABLE_CARDHOLDER']="Tarjetahabiente";
+$lang['REPORTS_TABLE_DNI']="NIT";
+$lang['REPORTS_TABLE_LAST_ACTIVITY']="Última actividad";
 
 
