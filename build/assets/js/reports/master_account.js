@@ -1,11 +1,8 @@
 'use strict'
 var table;
 var modalReq = {};
-var fecha = new Date();
-fecha = fecha.getFullYear();
 
 $(function () {
-
 	$('#blockMasterAccountResults').addClass("hide");
 	$('#titleResults').addClass('hide');
 	$('#files-btn').addClass('hide');
@@ -14,7 +11,7 @@ $(function () {
 	$("#debit").val('');
 	$("#debit").val('');
 
-	if($("input[name='results']:checked").val() != 0){
+	if ($("input[name='results']:checked").val() != 0) {
 		$("#initialDate ").attr('required', 'required');
 		$("#finalDate ").attr('required', 'required');
 	}
@@ -69,46 +66,43 @@ $(function () {
 		$('#finalDate').removeClass('has-error');
 		$('#initialDate').removeClass('has-error');
 		$(".help-block").text("");
-		if($("input[name='results']:checked").val() != 0){
+		if ($("input[name='results']:checked").val() != 0) {
 			$("#initialDate ").datepicker('setDate', null);
 			$("#finalDate").datepicker('setDate', null);
 			$("#initialDate ").attr('disabled', 'disabled');
 			$("#finalDate", ).attr('disabled', 'disabled');
-		} else if($("input[name='results']:checked").val() == 0){
+		} else if ($("input[name='results']:checked").val() == 0 ){
 			$("#initialDate ").removeAttr('disabled');
 			$("#finalDate ").removeAttr('disabled');
 		}
 });
 
-	$("#export_excel").click(function(){
-
-		excelExport();
+	$("#export_excel").click(function(e){
+		exportFile(e);
 	});
-	$("#export_pdf").click(function(){
-		pdfExport();
+	$("#export_pdf").click(function(e){
+		exportFile(e);
 	});
 	$("#export_pdfCons").click(function(e){
-
-		dialogPdf(e);
+		dialog(e);
 	});
 	$("#export_excelCons").click(function(e){
-
-		dialogExcel(e);
+		dialog(e);
 	});
 });
 
-function dialogExcel(e){
+function dialog(e){
 	e.preventDefault();
 	var event = $(e.currentTarget);
 	var action = event.attr('title');
 	var submitForm = false;
 	$(this).closest('tr').addClass('select');
 
-	switch(action) {
+	switch (action) {
 
 		case 'Exportar a EXCEL consolidado':
 			lang.CONF_MODAL_WIDTH = 200;
-			var titleModal = 'Exportar a EXCEL de consolidado';
+			var titleModalExcel = 'Exportar a EXCEL de consolidado';
 			var oldID = $('#accept').attr('id');
 			var inputModal;
 			modalReq['table'] = $(this).closest('table');
@@ -125,180 +119,137 @@ function dialogExcel(e){
 
 			inputModal = 	'<form id="excel-user-form" class="form-group">';
 			inputModal+= 		'<div class="input-group">';
-			inputModal+= 			'<select name="anio-consolid"class="date-picker-year select-box custom-select ml-1 h6" id="anio-consolid-excel"><option selected value="0">Seleccione año</option></select>';
+			inputModal+= 			'<select name="anio-consolid"class="date-picker-year select-box custom-select ml-1 h6" id="anio-consolid"><option selected value="0">Seleccione año</option></select>';
 			inputModal+= 		'</div>';
 			inputModal+= 		'<div class="help-block"></div>';
 			inputModal+=	'</form>';
-			notiSystem(titleModal, inputModal, lang.GEN_ICON_INFO, data);
+			notiSystem(titleModalExcel, inputModal, lang.GEN_ICON_INFO, data);
 
 			var i=0;
 			var anioB;
-			do{
-				anioB= parseInt(fecha)-i;
+			do {
+				var dateGetYear = new Date();
+				var date = dateGetYear.getFullYear();
+				anioB= parseInt(date)-i;
 				$(".date-picker-year").append('<option value="'+anioB.toString()+'">'+anioB.toString()+'</option>');
 				i=i+1;
-			}while(i!=20);
+			} while (i!=20);
+			downloadConsolid(oldID);
 			break;
+
+			case 'Exportar a PDF consolidado':
+				var titleModalPdf = 'Exportar a PDF consolidado';
+				var oldID = $('#accept').attr('id');
+				var inputModal;
+				modalReq['table'] = $(this).closest('table');
+				$('#accept').attr('id', 'download-consolidpdf');
+				data = {
+					btn1: {
+						text: lang.GEN_BTN_DOWNLOAD,
+						action: 'close'
+						},
+					btn2: {
+						action: 'close'
+						}
+					}
+				inputModal = 	'<form id="pdf-user-form" class="form-group">';
+				inputModal+= 		'<div class="input-group">';
+				inputModal+= 			'<select name="anio-consolid"class="date-picker-year select-box custom-select ml-1 h6" id="anio-consolid"><option selected value="0">Seleccione año</option></select>';
+				inputModal+= 		'</div>';
+				inputModal+= 		'<div class="help-block"></div>';
+				inputModal+=	'</form>';
+				notiSystem(titleModalPdf, inputModal, lang.GEN_ICON_INFO, data);
+
+				var i=0;
+				var anioB;
+				do {
+					var dateGetYear = new Date();
+					var date = dateGetYear.getFullYear();
+					anioB= parseInt(date)-i;
+					$(".date-picker-year").append('<option value="'+anioB.toString()+'">'+anioB.toString()+'</option>');
+					i=i+1;
+				}while(i!=20);
+				break;
 	}
-	downloadfileexcel(oldID);
+	if(action == titleModalPdf ){
+		var type = 'pdf';
+		downloadConsolid(type, oldID);
+	}else{
+		var type = 'excel';
+		downloadConsolid(type, oldID);
+	}
+
 	$('#cancel').on('click', function(){
 	$('.cover-spin').removeAttr("style");
 	modalReq['active'] = false;
 	})
 }
 
-function downloadfileexcel(oldID){
-	var button = $('#download-consolid');
-	var form = $('#excel-user-form');
+function downloadConsolid(type, oldID){
+	if ( type == "excel" ) {
+		var button = $('#download-consolid');
+		var form = $('#excel-user-form');
+	} else {
+		var button = $('#download-consolidpdf');
+		var form = $('#pdf-user-form');
+	}
 	button.on('click', function() {
 		validateForms(form);
 		if (form.valid()) {
 			button.off('click').html(loader).attr('id', oldID);
 			button.attr('disabled', 'disabled');
 			insertFormInput(true, form);
-			var anio = $('#anio-consolid-excel').find('option:selected').val();
-			var	idExtEmp = $('#enterprise-report').find('option:selected').attr('acrif');
-			var fechaIni = $("#initialDate").val();
-			var fechaFin = $("#finalDate").val();
-			var	filtroFecha = $("input[name='results']:checked").val();
-			var	nombreEmpresa = $('#enterprise-report').find('option:selected').attr('nomOf');
-			var	tamanoPagina = $("#tamP").val();
-			var	paginaActual = "1";
 			var passData = {
 				modalReq: true,
-				idExtEmp: idExtEmp,
-				anio: anio,
-				fechaIni: fechaIni,
-				fechaFin: fechaFin,
-				filtroFecha: filtroFecha,
-				nombreEmpresa: nombreEmpresa,
-				paginaActual: paginaActual,
-				tamanoPagina: tamanoPagina
+				year: $('#anio-consolid').find('option:selected').val(),
+				idExtEmp: $('#enterprise-report').find('option:selected').attr('acrif'),
+				dateStart: $("#initialDate").val(),
+				dateEnd: $("#finalDate").val(),
+				dateFilter: $("input[name='results']:checked").val(),
+				nameEnterprise: $('#enterprise-report').find('option:selected').attr('nomOf'),
+				actualPage: "1",
+				pageSize: $("#tamP").val()
 			};
-			exportToExcelConsolid(passData)
-		}
-	})
-};
-
-function dialogPdf(e){
-	e.preventDefault();
-	var event = $(e.currentTarget);
-	var action = event.attr('title');
-	var submitForm = false;
-	$(this).closest('tr').addClass('select');
-
-	switch(action) {
-	case 'Exportar a PDF consolidado':
-	var titleModal = 'Exportar a PDF de consolidado';
-	var oldID = $('#accept').attr('id');
-	var inputModal;
-	modalReq['table'] = $(this).closest('table');
-	$('#accept').attr('id', 'download-consolidpdf');
-	data = {
-		btn1: {
-			text: lang.GEN_BTN_DOWNLOAD,
-			action: 'close'
-		  },
-		btn2: {
-			action: 'close'
+			if (type == "excel") {
+				exportToExcelConsolid(passData);
+			} else {
+				exportToPDFConsolid(passData);
 			}
 		}
-	inputModal = 	'<form id="pdf-user-form" class="form-group">';
-	inputModal+= 		'<div class="input-group">';
-	inputModal+= 			'<select name="anio-consolid"class="date-picker-year select-box custom-select ml-1 h6" id="anio-consolid-pdf"><option selected value="0">Seleccione año</option></select>';
-	inputModal+= 		'</div>';
-	inputModal+= 		'<div class="help-block"></div>';
-	inputModal+=	'</form>';
-	notiSystem(titleModal, inputModal, lang.GEN_ICON_INFO, data);
-
-	var i=0;
-	var anioB;
-	do{
-		anioB= parseInt(fecha)-i;
-		$(".date-picker-year").append('<option value="'+anioB.toString()+'">'+anioB.toString()+'</option>');
-		i=i+1;
-	}while(i!=20);
-	break;
-	}
-	downloadConsolidpdf(oldID);
-	$('#cancel').on('click', function(){
-		$('.cover-spin').removeAttr("style");
-  })
-}
-
-function downloadConsolidpdf(oldID){
-	var button = $('#download-consolidpdf');
-	var form = $('#pdf-user-form');
-	button.on('click', function() {
-		validateForms(form);
-		if (form.valid()) {
-			button.off('click').html(loader).attr('id', oldID);
-			button.attr('disabled', 'disabled');
-			insertFormInput(true, form);
-			var anio = $('#anio-consolid-pdf').find('option:selected').val();
-			var	idExtEmp = $('#enterprise-report').find('option:selected').attr('acrif');
-			var fechaIni = $("#initialDate").val();
-			var fechaFin = $("#finalDate").val();
-			var	filtroFecha = $("input[name='results']:checked").val();
-			var	nombreEmpresa = $('#enterprise-report').find('option:selected').attr('nomOf');
-			var	tamanoPagina = $("#tamP").val();
-			var	paginaActual = "1";
-			var passData = {
-				modalReq: true,
-				idExtEmp: idExtEmp,
-				anio: anio,
-				fechaIni: fechaIni,
-				fechaFin: fechaFin,
-				filtroFecha: filtroFecha,
-				nombreEmpresa: nombreEmpresa,
-				paginaActual: paginaActual,
-				tamanoPagina: tamanoPagina
-			};
-			exportToPDFConsolid(passData)
-		}
 	})
 };
 
-function excelExport(){
-	var	idExtEmp = $('#enterprise-report').find('option:selected').attr('acrif');
-	var fechaIni = $("#initialDate").val();
-	var fechaFin = $("#finalDate").val();
-	var	filtroFecha = $("input[name='results']:checked").val();
-	var	nombreEmpresa = $('#enterprise-report').find('option:selected').attr('nomOf');
-	var	tamanoPagina = $("#tamP").val();
-	var	paginaActual = "1";
 
-  var passData = {
-		idExtEmp: idExtEmp,
-		fechaIni: fechaIni,
-		fechaFin: fechaFin,
-		filtroFecha: filtroFecha,
-		nombreEmpresa: nombreEmpresa,
-		paginaActual: paginaActual,
-		tamanoPagina: tamanoPagina
-  };
-  exportToExcel(passData)
-};
+function exportFile(e){
+		e.preventDefault();
+		var event = $(e.currentTarget);
+		var action = event.attr('title');
+		var form = $('#masterAcForm');
 
-function pdfExport(){
-	var	idExtEmp = $('#enterprise-report').find('option:selected').attr('acrif');
-	var fechaIni = $("#initialDate").val();
-	var fechaFin = $("#finalDate").val();
-	var	filtroFecha = $("input[name='results']:checked").val();
-	var	nombreEmpresa = $('#enterprise-report').find('option:selected').attr('nomOf');
-	var	tamanoPagina = $("#tamP").val();
-	var	paginaActual = "1";
-	var passData = {
-		idExtEmp: idExtEmp,
-		fechaIni: fechaIni,
-		fechaFin: fechaFin,
-		filtroFecha: filtroFecha,
-		nombreEmpresa: nombreEmpresa,
-		paginaActual: paginaActual,
-		tamanoPagina: tamanoPagina
-	};
+  	var passData = {
+			idExtEmp: $('#enterprise-report').find('option:selected').attr('acrif'),
+			dateStart: $("#initialDate").val(),
+			dateEnd: $("#finalDate").val(),
+			dateFilter: $("input[name='results']:checked").val(),
+			nameEnterprise: $('#enterprise-report').find('option:selected').attr('nomOf'),
+			actualPage: "1",
+			pageSize: $("#tamP").val()
+		};
 
-	exportToPDF(passData)
+		switch(action) {
+			case 'Exportar a EXCEL':
+				validateForms(form);
+				if (form.valid()) {
+					exportToExcel(passData);
+				}
+				break;
+			case 'Exportar a PDF':
+				validateForms(form);
+				if (form.valid()) {
+					exportToPDF(passData);
+				}
+				break;
+		}
 };
 
 function exportToExcel(passData) {
@@ -307,10 +258,10 @@ function exportToExcel(passData) {
 		dataResponse = response.data;
 		code = response.code
 		var info = dataResponse;
-		if(info.formatoArchivo == 'excel'){
+		if (info.formatoArchivo == 'excel') {
 			info.formatoArchivo = '.xls'
 		}
-		if(code == 0){
+		if (code == 0) {
 			data = {
 				"name": info.nombre.replace(/ /g, "")+info.formatoArchivo,
 				"ext": info.formatoArchivo,
@@ -329,22 +280,22 @@ function exportToExcelConsolid(passData, textBtn) {
 		dataResponse = response.data;
 		code = response.code
 		var info = dataResponse;
-		if(info.formatoArchivo == 'excel'){
+		if (info.formatoArchivo == 'excel') {
 			info.formatoArchivo = '.xls'
 		}
-		if(code == 0){
+		if (code == 0) {
 			data = {
 				"name": info.nombre.replace(/ /g, "")+info.formatoArchivo,
 				"ext": info.formatoArchivo,
 				"file": info.archivo
 			}
 			downLoadfiles (data);
-			if($("input[name='results']:checked").val() != 0){
+			if ($("input[name='results']:checked").val() != 0) {
 				$("#initialDate").attr("disabled", "disabled");
 				$("#finalDate").attr("disabled", "disabled");
 			}
 			$('.cover-spin').removeAttr("style");
-		}else if(code == 4){
+		} else if (code == 4) {
 			$('.cover-spin').removeAttr("style");
 		}
   })
@@ -356,10 +307,10 @@ function exportToPDF(passData) {
 		dataResponse = response.data;
 		code = response.code
 		var info = dataResponse;
-		if(info.formatoArchivo == 'PDF'){
+		if (info.formatoArchivo == 'PDF') {
 			info.formatoArchivo = '.pdf'
 		}
-		if(code == 0){
+		if (code == 0) {
 			data = {
 				"name": 'cuentaMaestra'+info.formatoArchivo,
 				"ext": info.formatoArchivo,
@@ -378,22 +329,22 @@ function exportToPDFConsolid(passData) {
 	  dataResponse = response.data;
 		code = response.code
 		var info = dataResponse;
-		if(info.formatoArchivo == 'PDF'){
+		if (info.formatoArchivo == 'PDF') {
 			info.formatoArchivo = '.pdf'
 		}
-		if(code == 0){
+		if (code == 0) {
 			data = {
 				"name": 'cuentaMaestraConsolidado'+info.formatoArchivo,
 				"ext": info.formatoArchivo,
 				"file": info.archivo
 			}
 		downLoadfiles (data);
-		if($("input[name='results']:checked").val() != 0){
+		if ($("input[name='results']:checked").val() != 0) {
 			$("#initialDate").attr("disabled", "disabled");
 			$("#finalDate").attr("disabled", "disabled");
 		}
 		$('.cover-spin').removeAttr("style");
-		}else if(code == 4){
+		}  else if (code == 4) {
 			$('.cover-spin').removeAttr("style");
 		}
 	})
@@ -416,46 +367,40 @@ function info(){
 	var resultadoCheck;
 	var checkDebit;
 	var checkCredit;
-	if($("#debit").is(":checked")) {
+	if ($("#debit").is(":checked")) {
 		resultadoCheck = $("#debit").val();
-		if($("#credit").is(":checked")) {
+		if ($("#credit").is(":checked")) {
 			resultadoCheck = $("#credit").val();
 			} else {
 				checkCredit = false;
 			}
-	}else {
+	} else {
 		checkDebit = false;
-			if($("#credit").is(":checked")) {
+			if ($("#credit").is(":checked")) {
 				resultadoCheck = $("#credit").val();
 				} else {
 				checkCredit = false;
 				}
 		}
-		if(checkDebit == false && checkCredit == false){
+		if (checkDebit == false && checkCredit == false) {
 			resultadoCheck = '';
 	}
-	if(checkDebit != false){
-		if(checkCredit != false){
+	if (checkDebit != false) {
+		if (checkCredit != false) {
 			resultadoCheck = '';
 		}
 	}
 	var form= $('#masterAcForm');
 	insertFormInput(true, form);
-	var idExtEmp = $('#enterprise-report').find('option:selected').attr('acrif');
-	var fechaIni =  $("#initialDate").val();
-	var fechaFin = $("#finalDate").val();
-	var tipoNota = resultadoCheck;
-	var filtroFecha = $("input[name='results']:checked").val();
-	var paginaActual = 1;
-	var tamPg = $("#tamP").val();
+
 	var passData = {
-		idExtEmp: idExtEmp,
-		fechaIni: fechaIni,
-		fechaFin: fechaFin,
-		tipoNota: tipoNota,
-		filtroFecha: filtroFecha,
-		paginaActual: paginaActual,
-		tamanoPagina: tamPg
+		idExtEmp: $('#enterprise-report').find('option:selected').attr('acrif'),
+		dateStart: $("#initialDate").val(),
+		dateEnd:  $("#finalDate").val(),
+		typeNote: resultadoCheck,
+		dateFilter: $("input[name='results']:checked").val(),
+		actualPage: 1,
+		pageSize: $("#tamP").val()
 	};
 
 	masterAccount(passData);
@@ -473,14 +418,14 @@ function masterAccount(passData) {
 		table.destroy();
 			dataResponse = response.data
 			code = response.code
-			if( code == 0){
+			if ( code == 0) {
 				$('#files-btn').removeClass("hide");
 			var info = dataResponse.depositoGMO.lista;
 			$.each(info,function(posLista,itemLista){
-				if(itemLista.tipoNota == 'D'){
+				if (itemLista.tipoNota == 'D') {
 					itemLista.montoDeposito = '-' + itemLista.montoDeposito;
 					itemLista.tipoNota = '';
-				}else if(itemLista.tipoNota == 'C'){
+				} else if (itemLista.tipoNota == 'C') {
 					itemLista.tipoNota = '+' + itemLista.montoDeposito;
 					itemLista.montoDeposito = ''
 				}
@@ -499,7 +444,7 @@ function masterAccount(passData) {
 						{ data: 'tipoNota' },
 						{ data: 'saldoDisponible' }
 				]
-			})} else{
+			})} else {
 				$('#files-btn').addClass('hide');
 				$('#concenAccount').DataTable({
 					"responsive": true,
@@ -508,10 +453,10 @@ function masterAccount(passData) {
 					"language": dataTableLang,
 				}).clear().draw();
 			}
-			if($("input[name='results']:checked").val() != 0){
+			if ($("input[name='results']:checked").val() != 0) {
 				$("#initialDate ").attr('disabled', 'disabled');
 				$("#finalDate ").attr('disabled', 'disabled');
-			} else if($("input[name='results']:checked").val() == 0){
+			} else if ($("input[name='results']:checked").val() == 0) {
 
 				$("#initialDate ").removeAttr('disabled');
 				$("#finalDate ").removeAttr('disabled');
