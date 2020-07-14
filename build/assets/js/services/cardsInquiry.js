@@ -19,6 +19,9 @@ $(function () {
 
 	$('#searchCardsBtn').on('click', function (e) {
 		e.preventDefault();
+		$('.help-block').text('');
+		$('input, select').removeClass('has-error');
+		$('#tableCardInquiry').find('thead > tr').removeClass('selected');
 		form = $('#searchCardsForm');
 		formInputTrim(form);
 		validateForms(form);
