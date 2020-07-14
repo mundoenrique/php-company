@@ -20,8 +20,8 @@
 		<div class="hide-out hide">
 			<div class="flex mb-3 mx-4 justify-center">
 				<div class="product-presentation relative">
-					<img class="card-image" src="<?= $this->asset->insertFile('programs/'.$countryUri.'/'.$productImg); ?>" alt="<?= $productName; ?>" />
-					<img class="item-network" src="<?= $this->asset->insertFile('brands/'.$productImgBrand); ?>" alt="<?= $productImgBrand; ?>" />
+					<img class="card-image" src="<?= $this->asset->insertFile($productImg, 'images/programs/'.$countryUri.'/'); ?>" alt="<?= $productName; ?>" />
+					<img class="item-network" src="<?= $this->asset->insertFile($productImgBrand, 'images/brands/'); ?>" alt="<?= $productImgBrand; ?>" />
 				</div>
 			</div>
 
