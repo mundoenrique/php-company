@@ -5,7 +5,7 @@ $lang['GEN_MENU_ENTERPRISE'] = 'Empresa';
 //SUBMENU
 $lang['GEN_MENU_SERV_CARD_INQUIRY'] = 'Entrega de tarjetas';//COPELO
 //GENERAL LANGUAGE
-$lang['GEN-LOGO-HEADER'] = 'img-logo.svg';
+$lang['GEN_LOGO_HEADER'] = 'img-logo.svg';
 $lang['GEN-LOGO-BIG'] = 'img-banorte.png';
 $lang['GEN_ALTERNATIVE_TEXT'] = 'Banorte';
 $lang['GEN_FISCAL_REGISTRY'] = 'Identificador de la empresa';

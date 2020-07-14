@@ -263,6 +263,7 @@ $lang['GEN_PICKER_SHOWANIM'] = 'slideDown';
 $lang['GEN_PICKER_YEARSUFFIX'] = '';
 //GENERAL LANGUAGE
 $lang['GEN_SYSTEM_NAME']= 'Conexión Empresas Online';
+$lang['GEN_LOGO_HEADER'] = 'img-logo.svg';
 $lang['GEN_CURRENCY'] = '$';
 $lang['GEN_DECIMAL'] = '.';
 $lang['GEN_THOUSANDS'] = ',';

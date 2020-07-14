@@ -204,7 +204,6 @@ class Novo_Business_Model extends NOVO_Model {
 			unset($dataRequest->select);
 		}
 
-
 		$this->className = "com.novo.objects.TOs.UsuarioTO";
 		$this->dataAccessLog->modulo = 'Negocios';
 		$this->dataAccessLog->function = 'Productos';
@@ -215,10 +214,10 @@ class Novo_Business_Model extends NOVO_Model {
 		$this->dataRequest->userName = $this->userName;
 		$this->dataRequest->idEmpresa = $dataRequest->idFiscal;
 		$this->dataRequest->acCodCia = $dataRequest->enterpriseCode;
+
 		if($this->session->has_userdata('thirdEnterprise')) {
 			$this->dataRequest->listaCuentasCBP_BDB = $this->session->thirdEnterprise->cbpAccounts;
 			$this->dataRequest->listaCuentasICBS_BDB = $this->session->thirdEnterprise->icbsAccounts;
-
 		}
 
 		$response = $this->sendToService('callWs_GetProducts');
@@ -337,6 +336,10 @@ class Novo_Business_Model extends NOVO_Model {
 
 					if(!file_exists(assetPath('images/programs/'.$this->session->countryUri.'/'.$imgProgram))) {
 						$imgProgram = $this->countryUri.'_default.svg';
+
+						if(!file_exists(assetPath('images/programs/'.$this->session->countryUri.'/'.$imgProgram))) {
+							$imgProgram = 'default.svg';
+						}
 					}
 
 					$productName = ucwords(mb_strtolower($response->estadistica->producto->descripcion));

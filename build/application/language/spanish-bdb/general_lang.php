@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 //GENERAL LANGUAGE
-$lang['GEN-LOGO-HEADER'] = 'img-logo.svg';
+$lang['GEN_LOGO_HEADER'] = 'img-logo.svg';
 $lang['GEN-LOGO-BIG'] = 'img-banco_bogota.svg';
 $lang['GEN_ALTERNATIVE_TEXT'] = 'Banco de Bogotá';
 $lang['GEN_FISCAL_REGISTRY'] = 'Identificación';

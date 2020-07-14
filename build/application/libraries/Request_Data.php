@@ -297,6 +297,10 @@ class Request_Data {
 
 						if(!file_exists(assetPath('images/programs/'.$this->CI->session->countryUri.'/'.$programImg))) {
 							$programImg = $this->CI->session->countryUri.'_default.svg';
+
+							if(!file_exists(assetPath('images/programs/'.$this->CI->session->countryUri.'/'.$programImg))) {
+								$programImg = 'default.svg';
+							}
 						}
 
 						$products->programImg = $programImg;
@@ -317,7 +321,7 @@ class Request_Data {
 						$imgBrand = mb_strtolower($value).'_product.svg';
 
 						if(!file_exists(assetPath('images/brands/'.$imgBrand))) {
-							$imgBrand = 'default.png';
+							$imgBrand = '';
 						}
 
 						$products->imgBrand = $imgBrand;
