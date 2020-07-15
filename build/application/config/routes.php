@@ -87,6 +87,8 @@ $route['(:any)/consulta-lote'] = "Novo_Inquiries/bulkDetail";
 //services
 $route['(:any)/transf-cuenta-maestra'] = "Novo_Services/transfMasterAccount";
 $route['(:any)/consulta-tarjetas'] = "Novo_Services/cardsInquiry";
+$route['(:any)/limites-transaccionales'] = "Novo_Services/transactionalLimits";
+$route['(:any)/giros-comerciales'] = "Novo_Services/twirlsCommercial";
 //DownloadFile
 $route['(:any)/descargar-archivo'] = "Novo_DownloadFiles/exportFiles";
 //Reports
@@ -109,7 +111,6 @@ $route['(:any)/master-account-excel-consolid'] = "Novo_Reports/exportToExcelMast
 $route['(:any)/master-account-pdf-consolid'] = "Novo_Reports/exportToPDFMasterAccountConsolid";
 $route['(:any)/master-account'] = "Novo_Reports/masterAccount";
 $route['(:any)/tarjetahabientes'] = "Novo_Reports/cardHolders";
-
 //settings
 $route['(:any)/configuracion'] = "Novo_Settings/options";
 $route['(:any)/empresa'] = "Novo_Settings/getEnterprise";

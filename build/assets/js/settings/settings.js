@@ -1,5 +1,4 @@
 $(document).ready(function() {
-
     //vars
     var options = document.querySelectorAll(".nav-item-config");
     var i;
@@ -49,6 +48,8 @@ $(function() {
     var buttonClean = $("#btnLimpiar");
     var buttonContact = $('#btnAddContact');
     var newPass = $('#newPass');
+    var countEnterprise = $("button").attr("countEnterp");
+    var enterpriseInf = $("button").attr("enterpriseI");
 
     switch (client) {
         case 'banco-bog':
@@ -57,6 +58,7 @@ $(function() {
             break;
         case 'pichincha':
         case 'novo':
+        case 'produbanco':
         case 'banorte':
             $('#user').addClass('active');
             $('#userView').show();
@@ -230,8 +232,31 @@ $(function() {
         selectionBussine(passData);
     });
 
-    // Selector empresas End
 
+//Download file.ini
+if( (countEnterprise ==1 && enterpriseInf == 0) || (countEnterprise > 1 && enterpriseInf != 0)){
+		btnDownload();
+} else {
+		$('#btn-download').attr('disabled','true');
+		$('#btn-download').removeClass("btn-link");
+		$('#btn-download').attr('title',lang.GEN_BTN_INI);
+};
+
+function btnDownload(){
+		$('#btn-download').on('click', function (e) {
+		e.preventDefault();
+		data = {};
+		insertFormInput(true);
+		verb = 'POST'; who = 'Settings'; where = 'getFileIni';
+		$('.cover-spin').show(0);
+		callNovoCore(verb, who, where, data, function (response) {
+				if(response.code == 0) {
+						downLoadfiles (response.data);
+				}
+				insertFormInput(false);
+		})
+		})
+};
 
 });
 

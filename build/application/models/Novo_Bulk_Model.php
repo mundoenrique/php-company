@@ -407,7 +407,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 			'codigoGrupo' => $this->session->enterpriseInf->enterpriseGroup
 		];
 
-		$response = $this->sendToService('ConfirmBulk');
+		$response = $this->sendToService('callWs_ConfirmBulk');
 
 		switch ($this->isResponseRc) {
 			case 0:
@@ -430,13 +430,19 @@ class Novo_Bulk_Model extends NOVO_Model {
 				$this->response->msg = lang('BULK_CONFIRM_FAIL');
 				$this->response->data['btn1']['link'] = 'cargar-lotes';
 				break;
+			case -436:
+				$this->response->code = 0;
+				$this->response->title = lang('BULK_CONFIRM_TITLE');
+				$this->response->msg = lang('BULK_CONFIRM_FAIL_BANK_RESPONSE');
+				$this->response->data['btn1']['link'] = 'cargar-lotes';
+				break;
 		}
 
 		if($this->isResponseRc != 0) {
 			$this->session->set_flashdata('bulkConfirmInfo', $bulkConfirmInfo);
 		}
 
-		return $this->responseToTheView('ConfirmBulk');
+		return $this->responseToTheView('callWs_ConfirmBulk');
 	}
 	/**
 	 * @info Obtiene la lista de lotes por autorizar
@@ -714,7 +720,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 			'password' => md5($password)
 		];
 
-		$response = $this->sendToService('AuthorizeBulk');
+		$response = $this->sendToService('callWs_AuthorizeBulk');
 
 		switch ($this->isResponseRc) {
 			case 0:
@@ -795,6 +801,10 @@ class Novo_Bulk_Model extends NOVO_Model {
 					}
 				}
 
+				if (isset($response->tokenOTP->authToken)) {
+					$this->session->set_flashdata('authToken', $response->tokenOTP->authToken);
+				}
+
 				$this->session->set_flashdata('serviceOrdersList', $serviceOrdersList);
 				$this->session->set_flashdata('bulkNotBillable', $bulkNotBillable);
 				break;
@@ -817,7 +827,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 				break;
 		}
 
-		return $this->responseToTheView('AuthorizeBulk');
+		return $this->responseToTheView('callWs_AuthorizeBulk');
 	}
 	/**
 	 * @info Genera orden de servicio
@@ -860,12 +870,16 @@ class Novo_Bulk_Model extends NOVO_Model {
 		$this->dataRequest->rifEmpresa = $this->session->enterpriseInf->idFiscal;
 		$this->dataRequest->lista = $listTemp;
 		$this->dataRequest->lotesNF = $listTempNoBill;
+		$this->dataRequest->tokenOTP = [
+			'authToken' => $this->session->flashdata('authToken'),
+			'tokenCliente' => isset($dataRequest->otpCode) ? $dataRequest->otpCode : ''
+		];
 		$this->dataRequest->usuario = [
 			'userName' => $this->userName,
 			'codigoGrupo' => $this->session->enterpriseInf->enterpriseGroup
 		];
 
-		$response = $this->sendToService('ServiceOrder');
+		$response = $this->sendToService('callWs_ServiceOrder');
 
 		switch ($this->isResponseRc) {
 			case 0:
@@ -924,13 +938,28 @@ class Novo_Bulk_Model extends NOVO_Model {
 				}
 
 				$this->session->set_flashdata('serviceOrdersList', $serviceOrdersList);
-				break;
+			break;
 
 			case -5:
-				$this->response->title = 'Generar orden de servicio';
-				$this->response->msg = 'No fue posible generar la orden de servicio, por favor intentalo de nuevo';
+			case -56:
+				$this->response->title = lang('BULK_SO_CREATE_TITLE');
+				$this->response->msg = lang('BULK_SO_CREATE_FAILED');
 				$this->response->data['btn1']['action'] = 'close';
-				break;
+			break;
+			case -286:
+				$this->response->title = lang('BULK_SO_CREATE_TITLE');
+				$this->response->msg = lang('BULK_SO_CREATE_INCORRECT');
+				$this->response->icon = lang('GEN_ICON_INFO');
+				$this->response->data['btn1']['action'] = 'close';
+			break;
+			case -287:
+			case -288:
+				$this->response->title = lang('BULK_SO_CREATE_TITLE');
+				$this->response->msg = lang('BULK_SO_CREATE_EXPIRED');
+				$this->response->icon = lang('GEN_ICON_INFO');
+				$this->response->data['btn1']['link'] = 'lotes-autorizacion';
+				$this->response->data['btn1']['action'] = 'redirect';
+			break;
 		}
 
 		$serviceOrdersList = $this->session->flashdata('serviceOrdersList');
@@ -938,7 +967,12 @@ class Novo_Bulk_Model extends NOVO_Model {
 		$this->session->set_flashdata('serviceOrdersList', $serviceOrdersList);
 		$this->session->set_flashdata('bulkNotBillable', $bulkNotBillable);
 
-		return $this->responseToTheView('ServiceOrder');
+		if ($this->session->flashdata('authToken') != NULL) {
+			$authToken = $this->session->flashdata('authToken');
+			$this->session->set_flashdata('authToken', $authToken);
+		}
+
+		return $this->responseToTheView('callWs_ServiceOrder');
 	}
 	/**
 	 * @info Cancela calculo de orden de servicio
@@ -1013,7 +1047,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 		$noSeeDetail = ['Z', 'Y'];
 		$allBulk = 'no-select-checkbox';
 
-		if(verifyDisplay('body', 'AuthorizeBulkList', lang('GEN_TAG_ALL_BULK'))) {
+		if(lang('CONF_BULK_SELECT_ALL_AUTH') == 'ON') {
 			$allBulk = 'toggle-all';
 		}
 
@@ -1265,7 +1299,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 			'bulkHeader' => [
 				lang('GEN_TABLE_CARD_NUMBER'),
 				lang('GEN_TABLE_ACCOUNT_NUMBER'),
-				lang('GEN_TABLE_ID_DOC'),
+				lang('GEN_TABLE_DNI'),
 				lang('GEN_TABLE_CARDHOLDER'),
 				lang('GEN_TABLE_STATUS'),
 			],
@@ -1305,7 +1339,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 			break;
 			case -150:
 				$this->response->title = 'Cuentas Innominadas';
-				$this->response->msg = 'Todas las tarjetas del lote han sido afiliadas';
+				$this->response->msg = lang('BULK_UNNA_REQ_NONCARDS');
 				$this->response->icon = lang('GEN_ICON_INFO');
 				$this->response->data->resp['btn1']['link'] = lang('GEN_LINK_BULK_UNNAMED_AFFIL');
 			break;

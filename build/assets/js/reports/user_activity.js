@@ -7,23 +7,22 @@ $(function () {
 	$('#titleResults').addClass('hide');
 
 	datePicker.datepicker({
-	onSelect: function (selectedDate) {
-		var dateSelected = selectedDate.split('/');
-		dateSelected = dateSelected[1] + '/' + dateSelected[0] + '/' + dateSelected[2]
-		var inputDate = $(this).attr('id');
-		var maxTime = new Date(dateSelected);
+		onSelect: function (selectedDate) {
+			var dateSelected = selectedDate.split('/');
+			dateSelected = dateSelected[1] + '/' + dateSelected[0] + '/' + dateSelected[2]
+			var inputDate = $(this).attr('id');
+			var maxTime = new Date(dateSelected);
 
-		if (inputDate == 'initialDateAct') {
-			$('#finalDateAct').datepicker('option', 'minDate', selectedDate);
-			maxTime.setDate(maxTime.getDate() - 1);
-			maxTime.setMonth(maxTime.getMonth() + 3);
+			if (inputDate == 'initialDateAct') {
+				$('#finalDateAct').datepicker('option', 'minDate', selectedDate);
+				maxTime.setDate(maxTime.getDate() - 1);
+				maxTime.setMonth(maxTime.getMonth() + 3);
 
-			if (currentDate > maxTime) {
-				$('#finalDateAct').datepicker('option', 'maxDate', maxTime);
-			}
-		}
-			if (inputDate == 'finalDateAct') {
-			$('#initialDateAct').datepicker('option', 'maxDate', selectedDate);
+				if (currentDate > maxTime) {
+					$('#finalDateAct').datepicker('option', 'maxDate', maxTime);
+				} else {
+					$('#finalDateAct').datepicker('option', 'maxDate', currentDate);
+				}
 			}
 		}
 	});
@@ -214,9 +213,16 @@ function exportToExcel(passData) {
       dataResponse = response.data;
       code = response.code
       var info = dataResponse;
-      if(code == 0){
-      var File = new Int8Array(info.archivo);
-      byteArrayFile([File], 'actividadUsuario.xls');
+			if(info.formatoArchivo == 'excel'){
+				info.formatoArchivo = '.xls'
+			}
+			if(code == 0){
+				data = {
+					"name": info.nombre.replace(/ /g, "")+info.formatoArchivo,
+					"ext": info.formatoArchivo,
+					"file": info.archivo
+				}
+				downLoadfiles (data);
       $('.cover-spin').removeAttr("style");
     }
 })
@@ -243,43 +249,21 @@ function exportToPDF(passData) {
   callNovoCore(verb, who, where, data, function(response) {
       dataResponse = response.data;
       code = response.code
-      var info = dataResponse;
-      if(code == 0){
-      var File = new Int8Array(info.archivo);
-      byteArrayFile([File], 'actividadUsuario.pdf');
+			var info = dataResponse;
+			if(info.formatoArchivo == 'PDF'){
+				info.formatoArchivo = '.pdf'
+			}
+			if(code == 0){
+				data = {
+					"name": info.nombre.replace(/ /g, "")+info.formatoArchivo,
+					"ext": info.formatoArchivo,
+					"file": info.archivo
+				}
+				downLoadfiles (data);
       $('.cover-spin').removeAttr("style");
     }
 })
 }
-
-var byteArrayFile = (function () {
-  var a = document.createElement("a");
-  document.body.appendChild(a);
-  a.style = "display: none";
-  return function (data, name) {
-    var blob = new Blob(data, {type: "application/xls"}),
-    url = window.URL.createObjectURL(blob);
-    a.href = url;
-    a.download = name;
-    a.click();
-    window.URL.revokeObjectURL(url);
-  };
-}());
-
-var byteArrayPDFFile = (function () {
-  var a = document.createElement("a");
-  document.body.appendChild(a);
-  a.style = "display: none";
-  return function (data, name) {
-    var blob = new Blob(data, {type: "application/pdf"}),
-    url = window.URL.createObjectURL(blob);
-    a.href = url;
-    a.download = name;
-    a.click();
-    window.URL.revokeObjectURL(url);
-  };
-}());
-
 
 function dialogE(e){
 

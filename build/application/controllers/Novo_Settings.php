@@ -37,9 +37,8 @@ class Novo_Settings extends NOVO_Controller {
 			"validate".$this->render->newViews."-forms",
 			"third_party/additional-methods",
 			"settings/settings",
-			"user/pass_validate"
+			"user/passValidate"
 		);
-
 
 		//LLama lista de empresas
 		$this->load->model('Novo_Business_Model', 'getEnterprises');
@@ -59,6 +58,12 @@ class Novo_Settings extends NOVO_Controller {
 		$this->render->email = strtolower($user->data->email);
 		}
 
+		//Parámetros para validar descarga de archivo.ini
+		$countEnterprise = count($enterpriseList->data->list);
+		$enterpriseInf = $this->session->has_userdata('enterpriseInf') ? 1 : 0;
+
+		$this->render->countEnterprise = $countEnterprise;
+		$this->render->enterpriseInf = $enterpriseInf;
 		$this->render->titlePage =lang('GEN_SETTINGS_TITLE');
 		$this->views = ['settings/'.$view];
 		$this->loadView($view);

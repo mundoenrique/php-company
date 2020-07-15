@@ -2,20 +2,18 @@
 var reportsResults;
 var enterpriseCode;
 var enterpriseGroup;
-var idFiscal;
+var idFis;
+var nameEnterprise;
+var enterprise;
+var nit;
+var product;
 var enterpriseName;
-var empresa;
-var cedula;
-var producto;
-var nomEmpresa;
 var descProd;
-var paginaActual;
-var paginar;
+var actualPage;
+var paging;
 var tamPg;
 var table;
 var access;
-var params;
-var balance;
 
 $(function () {
 	$('#blockBudgetResults').addClass('hide');
@@ -30,12 +28,12 @@ $(function () {
 		$('#products-select').empty();
 		enterpriseCode =  $('#enterpriseReport').find('option:selected').attr('code');
 		enterpriseGroup =  $('#enterpriseReport').find('option:selected').attr('group');
-		idFiscal =  $('#enterpriseReport').find('option:selected').attr('acrif');
+		idFis =  $('#enterpriseReport').find('option:selected').attr('acrif');
 		enterpriseName = $('#enterpriseReport').find('option:selected').text();
 		var passData = {
 			enterpriseCode: enterpriseCode,
 			enterpriseGroup: enterpriseGroup,
-			idFiscal: idFiscal,
+			idFiscal: idFis,
 			enterpriseName: enterpriseName,
 			select: true
 		};
@@ -59,29 +57,29 @@ $(function () {
 			insertFormInput(false);
 			form = $('#closingBudgetForm');
 			var dataForm = getDataForm(form)
-			searchBudgets(dataForm);
+			closingBudgets(dataForm)
 		}
 	})
 
 
 	$("#export_excel").click(function(){
-		empresa = $('#enterpriseReport').find('option:selected').attr('acrif');
-		cedula =  $('#enterpriseReport').find('option:selected').attr('acrif');
-		producto = $("#productCode").val();
-		nomEmpresa = $('#enterpriseReport').find('option:selected').attr('nomOf');
+		enterprise = $('#enterpriseReport').find('option:selected').attr('acrif');
+		nit =  $('#enterpriseReport').find('option:selected').attr('acrif');
+		product = $("#productCode").val();
+		nameEnterprise = $('#enterpriseReport').find('option:selected').attr('nomOf');
 		descProd = $("#productCode").find('option:selected').attr('value');
-		paginaActual = 1;
-		paginar = true;
+		actualPage = 1;
+		paging = true;
 		tamPg = $("#tamP").val();
 
 		var passData = {
-			empresa: empresa,
-			cedula: cedula,
-			producto: producto,
-			nomEmpresa: nomEmpresa,
+			empresa: enterprise,
+			cedula: nit,
+			producto: product,
+			nomEmpresa: nameEnterprise,
 			descProd: descProd,
-			paginaActual: paginaActual,
-			paginar: paginar,
+			paginaActual: actualPage,
+			paginar: paging,
 			tamPg: tamPg
 		};
 
@@ -115,50 +113,19 @@ function exportToExcel(passData) {
 			dataResponse = response.data;
 			code = response.code
 			var info = dataResponse;
+			if(info.formatoArchivo == 'excel'){
+				info.formatoArchivo = '.xls'
+			}
 			if(code == 0){
-			var File = new Int8Array(info.archivo);
-			byteArrayFile([File], 'SaldoAlCierre.xls');
+				data = {
+					"name": info.nombre.replace(/ /g, "")+info.formatoArchivo,
+					"ext": info.formatoArchivo,
+					"file": info.archivo
+				}
+				downLoadfiles (data);
 			$('.cover-spin').removeAttr("style");
 		}
 })
-}
-
-var byteArrayFile = (function () {
-  var a = document.createElement("a");
-  document.body.appendChild(a);
-  a.style = "display: none";
-  return function (data, name) {
-    var blob = new Blob(data, {type: "application/xls"}),
-    url = window.URL.createObjectURL(blob);
-    a.href = url;
-    a.download = name;
-    a.click();
-    window.URL.revokeObjectURL(url);
-  };
-}());
-
-function searchBudgets(dataForm){
-		empresa = $('#enterpriseReport').find('option:selected').attr('acrif');
-		cedula =  '';
-		producto = $("#productCode").val();
-		nomEmpresa = $('#enterpriseReport').find('option:selected').attr('nomOf');
-		descProd = $("#productCode").attr("des");
-		paginaActual = 1;
-		paginar = false;
-		tamPg = $("#tamP").val();
-
-		var passData = {
-			empresa: empresa,
-			cedula: cedula,
-			producto: producto,
-			nomEmpresa: nomEmpresa,
-			descProd: descProd,
-			paginaActual: paginaActual,
-			paginar: paginar,
-			tamPg: tamPg
-		};
-
-		closingBudgets(dataForm);
 }
 
 function closingBudgets(dataForm) {
@@ -180,29 +147,38 @@ if(URLactual.substring(0, URLactual.length - 16) == 'bnt'){
 		},
 		"ordering": false,
 		"searching": false,
-		"info":     false,
+		"lengthChange": false,
+		"length": 10,
+		"pagingType": "full_numbers",
+		"table-layout": "fixed",
+		"select": {
+			"style": "multi",
+			"selector": ':not(td:nth-child(-n+6))',
+			"info": false
+		},
 		"language": dataTableLang,
 		"processing": true,
 		"serverSide": true,
-		"lengthChange": false,
 		"columns": [
+			{ data: 'tarjeta' },
 			{ data: 'nombre' },
 			{ data: 'idExtPer' },
-			{ data: 'tarjeta' },
 			{ data: 'saldo' }
 	],
 	"columnDefs": [
 		{
 			"targets": 0,
-			"className": "nombre",
+			"className": "tarjeta",
+
 		},
 		{
 			"targets": 1,
-			"className": "idExtPer",
+			"className": "nombre",
+
 		},
 		{
 			"targets": 2,
-			"className": "tarjeta",
+			"className": "idExtPer",
 		},
 		{
 			"targets": 3,
@@ -217,13 +193,15 @@ if(URLactual.substring(0, URLactual.length - 16) == 'bnt'){
 			cache: false,
 			data: function (req) {
 				data = req
-				data.idExtPer = "";
-				data.producto = $("#productCode").val();
-				data.idExtEmp = $('#enterpriseReport').find('option:selected').attr('acrif');
-				data.tamanoPagina = 10;
-				data.paginar = true;
-				data.paginaActual = data.draw;
+				if (lang.CONF_NIT_INPUT_BOOL == 'ON' ){
+					data.idExtPer = $('#Nit').val();
+				}else{
+					data.idExtPer = '';
+				}
+				data.product = $("#productCode").val();
+				data.idExt = $('#enterpriseReport').find('option:selected').attr('acrif');
 				data.screenSize = screen.width;
+				data.paginar = true;
 				var dataRequest = JSON.stringify({
 					who: 'Reports',
 					where: 'closingBudgets',
@@ -240,6 +218,7 @@ if(URLactual.substring(0, URLactual.length - 16) == 'bnt'){
 			},
 			dataFilter: function (resp) {
 				var responseTable = jQuery.parseJSON(resp)
+
 				responseTable = JSON.parse(
 					CryptoJS.AES.decrypt(responseTable.code, responseTable.plot, { format: CryptoJSAesJson }).toString(CryptoJS.enc.Utf8)
 				);
@@ -249,24 +228,11 @@ if(URLactual.substring(0, URLactual.length - 16) == 'bnt'){
 					notiSystem(responseTable.title, responseTable.msg, responseTable.icon, responseTable.dataResp);
 				}
 
-				switch (responseTable.code) {
-					case 0:
-						if(responseTable.data.length < 10 ){
-							$('.dataTables_paginate').hide();
-						}
-						break;
-						case 1:
-							$('.dataTables_paginate').hide();
-							$('#export_excel').addClass('hide');
-						break;
-					default:
-						break;
-				}
+				access = responseTable.access;
 				return JSON.stringify(responseTable);
 			}
 		}
-	})
-	}else{
+	})}else{
 		var table = $('#balancesClosing').DataTable();
 		table.destroy();
 
@@ -283,30 +249,39 @@ if(URLactual.substring(0, URLactual.length - 16) == 'bnt'){
 			},
 			"ordering": false,
 			"searching": false,
-			"info":     false,
+			"lengthChange": false,
+			"length": 10,
+			"pagingType": "full_numbers",
+			"table-layout": "fixed",
+			"select": {
+				"style": "multi",
+				"selector": ':not(td:nth-child(-n+6))',
+				"info": false
+			},
 			"language": dataTableLang,
 			"processing": true,
 			"serverSide": true,
-			"lengthChange": false,
 			"columns": [
+				{ data: 'tarjeta' },
 				{ data: 'nombre' },
 				{ data: 'idExtPer' },
-				{ data: 'tarjeta' },
 				{ data: 'saldo' },
 				{ data: 'fechaUltAct' }
 			],
 			"columnDefs": [
 				{
 					"targets": 0,
-					"className": "nombre",
+					"className": "tarjeta",
+
 				},
 				{
 					"targets": 1,
-					"className": "idExtPer",
+					"className": "nombre",
+
 				},
 				{
 					"targets": 2,
-					"className": "tarjeta",
+					"className": "idExtPer",
 				},
 				{
 					"targets": 3,
@@ -324,7 +299,11 @@ if(URLactual.substring(0, URLactual.length - 16) == 'bnt'){
 				cache: false,
 				data: function (req) {
 					data = req
-					data.idExtPer = "";
+					if (lang.CONF_NIT_INPUT_BOOL == 'ON' ){
+						data.idExtPer = $('#Nit').val();
+					}else{
+						data.idExtPer = '';
+					}
 					data.producto = $("#productCode").val();
 					data.idExtEmp = $('#enterpriseReport').find('option:selected').attr('acrif');
 					data.tamanoPagina = 10;
@@ -362,23 +341,10 @@ if(URLactual.substring(0, URLactual.length - 16) == 'bnt'){
 					notiSystem(responseTable.title, responseTable.msg, responseTable.icon, responseTable.dataResp);
 				}
 
-				switch (responseTable.code) {
-					case 0:
-						if(responseTable.data.length < 10 ){
-							$('.dataTables_paginate').hide();
-						}
-						break;
-						case 1:
-							$('.dataTables_paginate').hide();
-							$('#export_excel').addClass('hide');
-						break;
-					default:
-						break;
-				}
+				access = responseTable.access;
 				return JSON.stringify(responseTable);
 				}
 			}
 		})
 	}
 }
-

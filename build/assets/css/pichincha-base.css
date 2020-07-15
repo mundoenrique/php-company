@@ -7523,3 +7523,46 @@ body .ui-tooltip {
 .modal-buttonset {
 	width: 80px !important;
 }
+
+.form-group {
+    margin-bottom: .5rem;
+}
+
+.form-group:nth-child(1) {
+	margin-bottom: .7rem;
+}
+
+#codeOTP {
+margin-bottom: 0;
+}
+
+#formVerificationOTP {
+	font-family: "Prelo Medium", sans-serif;
+	color: #72787A;
+	font-size: 16px;
+}
+
+input.form-control {
+	font-size: 12px;
+}
+
+.custom-control-label {
+	font-size: 14px;
+}
+
+.justify {
+	text-align: justify !important
+}
+
+.semibold {
+	font-weight: 700;
+}
+
+
+.help-block {
+height: 1rem;
+margin-left: 4px;
+font-size: 12px;
+letter-spacing: .016em;
+color: #e8446c;
+}

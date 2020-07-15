@@ -6,6 +6,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @date October 31th, 2019
  */
 class Create_Menu {
+	private $CI;
+	private $requestServ;
+	private $responseDefect;
 
 	public function __construct()
 	{
@@ -73,7 +76,9 @@ class Create_Menu {
 			}
 			$level->second[] = $this->menulang($module->idModulo);
 		}
+
 		log_message('INFO', 'NOVO secondaryMenu: '.json_encode($level, JSON_UNESCAPED_UNICODE));
+
 		return $level;
 	}
 	/**
@@ -123,6 +128,14 @@ class Create_Menu {
 			case 'COPELO':
 				$subMenuLang->text = lang('GEN_MENU_SERV_CARD_INQUIRY');
 				$subMenuLang->link = lang('GEN_LINK_SERV_CARD_INQUIRY');
+				break;
+			case 'GIRCOM':
+				$subMenuLang->text = lang('GEN_MENU_SERV_COMM_MONEY_ORDERS');
+				$subMenuLang->link = lang('GEN_LINK_SERV_COMM_MONEY_ORDERS');
+				break;
+			case 'LIMTRX':
+				$subMenuLang->text = lang('GEN_MENU_SERV_TRANS_LIMITS');
+				$subMenuLang->link = lang('GEN_LINK_SERV_TRANS_LIMITS');
 				break;
 			case 'CONVIS':
 				$subMenuLang->text = lang('GEN_MENU_SERV_CONTROLS_PAY');

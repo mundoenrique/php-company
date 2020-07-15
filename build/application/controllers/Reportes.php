@@ -1387,6 +1387,8 @@ class Reportes extends CI_Controller {
 			$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
 			$jsonResponse = np_Hoplite_Decrypt($response, 'callWSSaldosAmanecidos');
 
+			log_message('info', 'RESPONSE callWSSaldosAmanecidos'.$jsonResponse);
+
 			$response =  json_decode($jsonResponse);
 
 			if($response){

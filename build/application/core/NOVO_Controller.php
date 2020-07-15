@@ -65,9 +65,9 @@ class NOVO_Controller extends CI_Controller {
 	{
 		log_message('INFO', 'NOVO Controller: optionsCheck Method Initialized');
 
-		languageLoad('generic');
+		languageLoad('generic', $this->router->fetch_class());
 		clientUrlValidate($this->countryUri);
-		languageLoad('specific', $this->countryUri);
+		languageLoad('specific', $this->router->fetch_class());
 		if($this->session->userId) {
 			if($this->session->countrySess !== $this->config->item('country')) {
 				$urlRedirect = str_replace($this->countryUri.'/', $this->session->countryUri.'/', base_url('cerrar-sesion/inicio'));
@@ -79,7 +79,6 @@ class NOVO_Controller extends CI_Controller {
 		$this->render->newViews = $this->config->item('new-views');
 		$this->form_validation->set_error_delimiters('', '---');
 		$this->config->set_item('language', 'spanish-base');
-		$this->lang->load('config'.$this->render->newViews);
 
 		if ($this->rule !== 'suggestion') {
 			$this->ValidateBrowser = $this->checkBrowser();
@@ -129,9 +128,6 @@ class NOVO_Controller extends CI_Controller {
 				if ($valid) {
 					$this->request = $this->verify_access->createRequest($this->rule, $this->appUserName);
 				}
-			} elseif ($access && $this->render->newViews != '') {
-				$this->config->set_item('language', 'spanish-'.$this->countryUri);
-				$this->lang->load('config'.$this->render->newViews);
 			}
 
 			$this->preloadView($access && $valid);
@@ -199,7 +195,8 @@ class NOVO_Controller extends CI_Controller {
 			}
 
 		} else {
-			redirect(base_url('inicio'), 'location');
+			$linkredirect = AUTO_LOGIN ? 'ingresar/fin' : 'inicio';
+			redirect(base_url($linkredirect), 'location');
 		}
 
 	}

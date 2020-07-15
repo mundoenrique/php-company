@@ -8,7 +8,8 @@
 				<li class="inline"><a class="tertiary big-modal" href="<?= base_url('empresas') ?>"><?= lang('GEN_MENU_ENTERPRISE') ?></a></li> /
 				<li class="inline"><a class="tertiary big-modal" href="<?= base_url('productos') ?>"><?= lang('GEN_PRODUCTS') ?></a></li> /
 				<li class="inline"><a class="tertiary big-modal" href="<?= base_url('detalle-producto') ?>"><?= lang('PRODUCTS_DETAIL_TITLE') ?></a></li> /
-				<li class="inline"><a class="tertiary big-modal" href="<?= base_url('lotes-autorizacion') ?>"><?= lang('GEN_AUTHORIZE_BULK_TITLE') ?></a></li> /
+				<li class="inline"><a class="tertiary big-modal" href="<?= base_url('lotes-autorizacion') ?>"><?= lang('GEN_AUTHORIZE_BULK_TITLE') ?></a></li>
+				/
 				<li class="inline"><a class="tertiary not-pointer" href="javascript:"><?= lang('GEN_CACULATE_SERVICE_ORDERS') ?></a></li>
 			</ul>
 		</nav>
@@ -87,13 +88,20 @@
 				</div>
 				<form id="auth-bulk-form">
 					<div class="flex flex-column mb-4 px-5 justify-center items-center">
+						<?php if (lang('CONF_SERVICE_ORDER_OTP') == 'ON'): ?>
+						<div class="form-group col-6 col-xl-4 center">
+							<label for="otpCode" class="pb-1 regular"><?= lang('GEN_OTP'); ?></label>
+							<input id="otpCode" name="otpCode" class="form-control col-6 block m-auto" type="text" autocomplete="off">
+							<div class="help-block center"></div>
+						</div>
+						<?PHP endif; ?>
 						<div class="form-group col-4 col-lg-3">
-							<input id="temp-orders" name="temp-orders" type="hidden" value="<?= $tempOrdersId; ?>">
-							<input id="bulk-no-bill" name="bulk-no-bill" type="hidden" value="<?= $bulknotBill; ?>">
+							<input id="tempOrders" name="tempOrders" type="hidden" value="<?= $tempOrdersId; ?>">
+							<input id="bulkNoBill" name="bulkNoBill" type="hidden" value="<?= $bulknotBill; ?>">
 							<div class="help-block"></div>
 						</div>
 						<div class="flex flex-row">
-							<?php if(verifyDisplay('body', $module, lang('GEN_TAG_CANCEL_BUTTON'))): ?>
+							<?php if(lang('CONF_SERVICE_ORDER_CANCEL') == 'ON'): ?>
 							<div class="mb-3 mr-4">
 								<button id="cancel-bulk-btn" class="btn btn-link btn-small big-modal"><?= lang('GEN_BTN_CANCEL'); ?></button>
 							</div>

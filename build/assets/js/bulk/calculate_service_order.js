@@ -35,42 +35,47 @@ $(function() {
     }
 	});
 
-	$('#auth-bulk-btn, #cancel-bulk-btn').on('click', function(e) {
+	$('#auth-bulk-btn').on('click', function(e) {
 		e.preventDefault();
+		where = 'ServiceOrder'
+		var btnAction = $(this);
+		btnText = $(this).text();
 
-		if($(this).attr('id') == 'auth-bulk-btn') {
-			where = 'ServiceOrder'
-			var btnAction = $(this);
-			btnText = $(this).text();
+		form = $('#auth-bulk-form');
+		formInputTrim(form);
+		validateForms(form);
+
+		if (form.valid()) {
 			$(this).html(loader);
+			getServiceREsponse(btnAction);
 		}
+	})
 
-		if($(this).attr('id') == 'cancel-bulk-btn') {
-			where = 'CancelServiceOrder'
+	$('#cancel-bulk-btn').on('click', function(e) {
+		e.preventDefault();
+		where = 'CancelServiceOrder';
+		form = $('#auth-bulk-form');
+		getServiceREsponse();
+	})
+})
+
+function getServiceREsponse(btn) {
+	data = getDataForm(form);
+	insertFormInput(true);
+	verb = 'POST'; who = 'Bulk';
+	callNovoCore(verb, who, where, data, function(response) {
+
+		if(response.code == 0) {
+			$(location).attr('href', response.data);
+		} else {
+			notiSystem(response.title, response.msg, response.icon, response.data);
+			btn.html(btnText);
+			insertFormInput(false);
+			$('#otpCode').val('')
+			$('.cover-spin').hide()
 		}
-
-		data = {
-			tempOrders: $('#temp-orders').val(),
-			bulkNoBill: $('#bulk-no-bil').val()
-		}
-
-		insertFormInput(true)
-
-		verb = 'POST'; who = 'Bulk';
-		callNovoCore(verb, who, where, data, function(response) {
-
-			if(response.code == 0) {
-				$(location).attr('href', response.data);
-			} else {
-				notiSystem(response.title, response.msg, response.icon, response.data);
-				btnAction.html(btnText);
-				insertFormInput(false);
-				$('.cover-spin').hide()
-			}
-
-		});
-	});
-});
+	})
+}
 
 function format (bulk) {
 	var table, body = '';

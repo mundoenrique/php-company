@@ -50,6 +50,7 @@ class Novo_Bulk extends NOVO_Controller {
 			$this->render->branchOffices = $branchOffices->data->branchOffices;
 		}
 
+		$this->render->loadBulk = $this->verify_access->verifyAuthorization('TEBCAR', 'TEBCAR') || lang('CONF_BULK_LOAD') == 'ON';
 		$this->render->pendingBulk = $responseList->data->pendingBulk;
 		$this->render->titlePage = lang('GEN_MENU_BULK_LOAD');
 		$this->views = ['bulk/'.$view];
@@ -139,6 +140,7 @@ class Novo_Bulk extends NOVO_Controller {
 		}
 
 		$this->responseAttr($responseList);
+		$this->render->authBulk = $this->verify_access->verifyAuthorization('TEBAUT', 'TEBAUT') || lang('CONF_BULK_AUTH') == 'ON';
 		$this->render->signBulk = $responseList->data->signBulk;
 		$this->render->authorizeBulk = $responseList->data->authorizeBulk;
 		$this->render->authorizeAttr = $responseList->data->authorizeAttr;
@@ -174,6 +176,13 @@ class Novo_Bulk extends NOVO_Controller {
 		);
 		$serviceOrdersList = $this->session->flashdata('serviceOrdersList');
 		$bulkNotBillable = $this->session->flashdata('bulkNotBillable');
+		$authToken = '';
+
+		if ($this->session->flashdata('authToken') != NULL) {
+			$authToken = $this->session->flashdata('authToken');
+			$this->session->set_flashdata('authToken', $authToken);
+		}
+
 		$this->session->set_flashdata('serviceOrdersList', $serviceOrdersList);
 		$this->session->set_flashdata('bulkNotBillable', $bulkNotBillable);
 		$this->render->serviceOrdersList = $serviceOrdersList;

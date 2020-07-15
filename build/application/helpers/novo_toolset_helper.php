@@ -121,140 +121,39 @@ if(!function_exists('maskString')) {
 	}
 }
 
-if(!function_exists('languajeLoad')) {
-	function languageLoad($call, $client = 'default_lang', $langFiles = FALSE) {
+if(!function_exists('languageLoad')) {
+	function languageLoad($call, $class) {
 		$CI = &get_instance();
-		$class = $CI->router->fetch_class();
-		$langFiles = $langFiles ?: $CI->router->fetch_method();
 		$languagesFile = [];
-		$lanGeneral = ['bdb', 'bp', 'bnt', 'co', 've', 'pb'];
-		$lanValidate = ['bdb', 'bnt'];
 		$loadLanguages = FALSE;
-		$client = !$client ? 'default_lang' : $client;
-		log_message('INFO', 'NOVO Language '.$call.', HELPER: Language Load Initialized for controller: '.$class. ' and method: '.$langFiles);
+		$pathLang = APPPATH.'language'.DIRECTORY_SEPARATOR.$CI->config->item('language').DIRECTORY_SEPARATOR;
+		$class = lcfirst(str_replace('Novo_', '', $class));
+		log_message('INFO', 'NOVO Language '.$call.', HELPER: Language Load Initialized for class: '.$class);
 
-		switch($client) {
-			case 'bp':
-				$languages = [
-					'login' => ['login'],
-					'validatecaptcha' => ['login'],
-					'recoverPass'	=> ['password-recover'],
-					'changePassword'	=> ['password-change'],
-					'terms'	=> ['terms'],
-				];
-				break;
-			case 'bdb':
-				$languages = [
-					'login' => ['login'],
-					'validatecaptcha' => ['login'],
-					'getProductDetail'	=> ['products'],
-					'getPendingBulk'	=> ['bulk'],
-					'loadBulk'	=> ['bulk'],
-					'deleteNoConfirmBulk'	=> ['bulk'],
-					'confirmBulk'	=> ['bulk'],
-					'getDetailBulk'	=> ['bulk'],
-					'signBulkList'	=> ['bulk'],
-					'authorizeBulkList'	=> ['bulk'],
-					'authorizeBulk'	=> ['bulk'],
-					'deleteConfirmBulk'	=> ['bulk'],
-					'disassConfirmBulk'	=> ['bulk'],
-					'serviceOrders'	=> ['bulk'],
-					'options' => ['settings']
-				];
-				break;
-			case 'bnt':
-				$languages = [
-					'login' => ['login'],
-					'terms'	=> ['terms'],
-					'options' => ['settings']
-				];
-				break;
-			case 'co':
-				$languages = [
-					'login' => ['login'],
-					'validatecaptcha' => ['login'],
-					'terms'	=> ['terms'],
-				];
-				break;
-			case 'pe':
-				$languages = [
-					'login' => ['login'],
-					'validatecaptcha' => ['login'],
-				];
-				break;
-			case 'us':
-				$languages = [
-					'login' => ['login'],
-					'validatecaptcha' => ['login'],
-				];
-				break;
-			case 've':
-				$languages = [
-					'login' => ['login'],
-					'validatecaptcha' => ['login'],
-					'terms'	=> ['terms'],
-				];
-				break;
-			case 'pb':
-				$languages = [
-				];
-				break;
-			default:
-				$languages = [
-					'login' => ['login'],
-					'validatecaptcha' => ['login'],
-					'recoverPass'	=> ['password-recover'],
-					'changePassword'	=> ['password-change'],
-					'benefits'	=> ['benefits'],
-					'terms'	=> ['terms'],
-					'rates'	=> ['rates'],
-					'getEnterprises'	=> ['enterprise'],
-					'obtainNumPosition'	=>['settings'],
-					'obtenerIdEmpresa'	=>['reports'],
-					'closingBudgets'	=>['reports'],
-					'exportToExcel'	=>['reports'],
-					'exportToExcelMasterAccount'	=>['reports'],
-					'exportToPDFMasterAccount'	=>['reports'],
-					'exportToExcelMasterAccountConsolid'	=>['reports'],
-					'exportToPDFMasterAccountConsolid'	=>['reports'],
-					'masterAccount'	=>['reports'],
-					'getProducts'	=> ['products'],
-					'getProductDetail'	=> ['products'],
-					'getPendingBulk'	=> ['bulk'],
-					'loadBulk'	=> ['bulk'],
-					'deleteNoConfirmBulk'	=> ['bulk'],
-					'confirmBulk'	=> ['bulk'],
-					'getDetailBulk'	=> ['bulk'],
-					'signBulkList'	=> ['bulk'],
-					'authorizeBulkList'	=> ['bulk'],
-					'authorizeBulk'	=> ['bulk'],
-					'deleteConfirmBulk'	=> ['bulk'],
-					'disassConfirmBulk'	=> ['bulk'],
-					'calculateServiceOrder'	=> ['bulk'],
-					'unnamedRequest'	=> ['bulk'],
-					'unnamedAffiliate'	=> ['bulk'],
-					'serviceOrders'	=> ['bulk'],
-					'getReportsList'	=> ['reports'],
-					'getReport'	=> ['reports'],
-					'deleteFile'	=> ['reports'],
-					'userActivity'	=>['reports'],
-					'exportToExcelUserActivity'	=>['reports'],
-					'exportToPDFUserActivity'	=>['reports'],
-				];
+		if ($call == 'specific') {
+			if (file_exists($pathLang.'general_lang.php')) {
+				array_push($languagesFile, 'general');
+				$loadLanguages = TRUE;
+			}
+
+			if (file_exists($pathLang.'validate_lang.php')) {
+				array_push($languagesFile, 'validate');
+				$loadLanguages = TRUE;
+			}
+
+			if (file_exists($pathLang.'config-core_lang.php')) {
+				array_push($languagesFile, 'config-core');
+				$loadLanguages = TRUE;
+			}
+
+			if (file_exists($pathLang.'config_lang.php')) {
+				array_push($languagesFile, 'config');
+				$loadLanguages = TRUE;
+			}
 		}
 
-		if(array_key_exists($langFiles, $languages)) {
-			$languagesFile = $languages[$langFiles];
-			$loadLanguages = TRUE;
-		}
-
-		if(in_array($client, $lanGeneral)) {
-			array_unshift($languagesFile, 'general');
-			$loadLanguages = TRUE;
-		}
-
-		if(in_array($client, $lanValidate)) {
-			array_unshift($languagesFile, 'validate', 'response');
+		if (file_exists($pathLang.$class.'_lang.php')) {
+			array_push($languagesFile, $class);
 			$loadLanguages = TRUE;
 		}
 
