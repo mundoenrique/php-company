@@ -366,6 +366,7 @@ $lang['GEN_LOGIN_IP_MSG'] = 'Estás ingresando desde un equipo no habitual, por 
 $lang['GEN_LOGIN_IP_ASSERT'] = 'Confirmo que estoy ingresando desde un equipo de uso frecuente.';
 $lang['GEN_LOGIN_IP_LABEL_INPUT'] = 'Código recibido';
 $lang['GEN_RESP_CODE_OTP_INVALID'] = 'No fue posible validar el código de seguridad, por favor vuelve a intentarlo.';
+$lang['GEN_RESP_CODE_INVALID'] = 'El código de seguridad recibido es inválido, por favor vuelve a intentarlo.';
 $lang['GEN_CODE_OTP_REQUIRED'] = 'Este campo es obligatorio.';
 $lang['GEN_CODE_OTP_INVALID_FORMAT'] = 'El formato de código es inválido.';
 $lang['RESP_RC_DEFAULT'] = -9999;

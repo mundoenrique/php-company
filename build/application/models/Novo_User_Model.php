@@ -188,7 +188,6 @@ class Novo_User_Model extends NOVO_Model {
 				];
 				$this->session->set_flashdata('authToken',$response->usuario->codigoOtp->access_token);
 				break;
-			case -286:
 			case -287:
 			case -288:
 				$this->response->code = 4;
@@ -198,7 +197,16 @@ class Novo_User_Model extends NOVO_Model {
 					'text' => lang('GEN_BTN_ACCEPT'),
 					'action' => 'close'
 				];
-				break;
+			break;
+			case -286:
+					$this->response->code = 4;
+					$this->response->msg = lang('GEN_RESP_CODE_INVALID');
+					$this->response->icon = lang('GEN_ICON_WARNING');
+					$this->response->data['btn1'] = [
+						'text' => lang('GEN_BTN_ACCEPT'),
+						'action' => 'close'
+					];
+			break;
 			case 'fail':
 			case 9999:
 				$this->response->code = 3;
