@@ -101,9 +101,11 @@ function callNovoCore(verb, who, where, request, _response_) {
 		sessionExpire();
 	}
 
+	var uri = data.route || 'async-call'
+
 	$.ajax({
 		method: verb,
-		url: baseURL + 'async-call',
+		url: baseURL + uri,
 		data: formData,
 		context: document.body,
 		cache: false,
