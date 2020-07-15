@@ -57,7 +57,7 @@ $(function () {
 				action: 'close'
 			}
 		}
-		inputModal =	'<form id="modalCardsInquiryForm" name="modalCardsInquiryForm"> onsubmit="return false;">';
+		inputModal =	'<form id="modalCardsInquiryForm" name="modalCardsInquiryForm" onsubmit="return false;">';
 		inputModal +=		'<div class="form-group col-auto">';
 		inputModal += 		'<div class="input-group">';
 		inputModal += 			'<input class="form-control pwd-input pwd" type="password" name="password" autocomplete="off"';
