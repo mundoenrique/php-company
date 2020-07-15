@@ -708,24 +708,33 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->className = 'com.novo.objects.MO.SaldosAmanecidosMO';
 
 		$this->dataAccessLog->modulo = 'Reportes';
-		$this->dataAccessLog->function = 'Estado de lote';
-		$this->dataAccessLog->operation = 'Obtener lista lotes por estado';
+		$this->dataAccessLog->function = 'Saldos Amanecidos';
+		$this->dataAccessLog->operation = 'Obtener saldos';
 		$this->dataRequest->idOperation = 'saldosAmanecidos';
 		$this->dataRequest->idExtPer = $dataRequest->idExtPer;
-		$this->dataRequest->producto =  $dataRequest->producto;
-		$this->dataRequest->idExtEmp =  $dataRequest->idExtEmp;
-		$this->dataRequest->tamanoPagina = (int) $dataRequest->length;
+		$this->dataRequest->producto =  $dataRequest->product;
+		$this->dataRequest->idExtEmp =  $dataRequest->idExt;
+		$this->dataRequest->tamanoPagina = 10;
 		$this->dataRequest->paginar = TRUE;
 		$this->dataRequest->paginaActual = (int) ($dataRequest->start / 10) + 1;
 
 
 		$response = $this->sendToService('callWs_closingBudgets');
+		$this->response->recordsTotal = 0;
+		$this->response->recordsFiltered = 0;
 
 		switch($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
 				$user = $response->saldo->lista;
 				$this->response->data =  (array)$user;
+				$this->response->access = [
+					'RESPSAL' => $this->verify_access->verifyAuthorization('REPSAL'),
+				];
+				$this->response->draw = (int) $dataRequest->draw;
+				$this->response->recordsTotal = $response->totalSaldos;
+				$this->response->recordsFiltered =  $response->totalSaldos;
+
 			break;
 			case -150:
 				$this->response->code = 1;
@@ -796,11 +805,11 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->dataAccessLog->operation = 'Cuenta maestra';
 		$this->dataRequest->idOperation = 'buscarDepositoGarantia';
 		$this->dataRequest->idExtEmp = $dataRequest->idExtEmp;
-		$this->dataRequest->fechaIni = $dataRequest->fechaIni;
-		$this->dataRequest->fechaFin =  $dataRequest->fechaFin;
-		$this->dataRequest->tipoNota =  $dataRequest->tipoNota;
-		$this->dataRequest->filtroFecha = $dataRequest->filtroFecha;
-		$this->dataRequest->tamanoPagina = $dataRequest->tamanoPagina;
+		$this->dataRequest->fechaIni = $dataRequest->dateStart;
+		$this->dataRequest->fechaFin =  $dataRequest->dateEnd;
+		$this->dataRequest->tipoNota =  $dataRequest->typeNote;
+		$this->dataRequest->filtroFecha = $dataRequest->dateFilter;
+		$this->dataRequest->tamanoPagina = $dataRequest->pageSize;
 		$this->dataRequest->paginaActual = 1;
 
 		$response = $this->sendToService('callWs_masterAccount');
@@ -836,13 +845,13 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->dataAccessLog->operation = 'Obtener excel de tabla cuenta maestra';
 		$this->dataRequest->idOperation = 'generarDepositoGarantia';
 		$this->dataRequest->idExtEmp = $dataRequest->idExtEmp;
-		$this->dataRequest->fechaIni =  $dataRequest->fechaIni;
-		$this->dataRequest->fechaFin =  $dataRequest->fechaFin;
-		$this->dataRequest->filtroFecha = $dataRequest->filtroFecha;
-		$this->dataRequest->nombreEmpresa = $dataRequest->nombreEmpresa;
-		$this->dataRequest->paginaActual = $dataRequest->paginaActual;
+		$this->dataRequest->fechaIni =  $dataRequest->dateStart;
+		$this->dataRequest->fechaFin =  $dataRequest->dateEnd;
+		$this->dataRequest->filtroFecha = $dataRequest->dateFilter;
+		$this->dataRequest->nombreEmpresa = $dataRequest->nameEnterprise;
+		$this->dataRequest->paginaActual = $dataRequest->actualPage;
 		$this->dataRequest->producto =  $this->session->userdata('productInf')->productPrefix;
-		$this->dataRequest->tamanoPagina =  $dataRequest->tamanoPagina;
+		$this->dataRequest->tamanoPagina =  $dataRequest->pageSize;
 
 
 		$response = $this->sendToService('callWs_exportToExcelMasterAccount');
@@ -884,13 +893,13 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->dataAccessLog->operation = 'Obtener pdf de tabla cuenta maestra';
 		$this->dataRequest->idOperation = 'generarDepositoGarantiaPdf';
 		$this->dataRequest->idExtEmp = $dataRequest->idExtEmp;
-		$this->dataRequest->fechaIni =  $dataRequest->fechaIni;
-		$this->dataRequest->fechaFin =  $dataRequest->fechaFin;
-		$this->dataRequest->filtroFecha = $dataRequest->filtroFecha;
-		$this->dataRequest->nombreEmpresa = $dataRequest->nombreEmpresa;
-		$this->dataRequest->paginaActual = $dataRequest->paginaActual;
+		$this->dataRequest->fechaIni =  $dataRequest->dateStart;
+		$this->dataRequest->fechaFin =  $dataRequest->dateEnd;
+		$this->dataRequest->filtroFecha = $dataRequest->dateFilter;
+		$this->dataRequest->nombreEmpresa = $dataRequest->nameEnterprise;
+		$this->dataRequest->paginaActual = $dataRequest->actualPage;
 		$this->dataRequest->producto =  $this->session->userdata('productInf')->productPrefix;
-		$this->dataRequest->tamanoPagina =  $dataRequest->tamanoPagina;
+		$this->dataRequest->tamanoPagina =  $dataRequest->pageSize;
 
 
 		$response = $this->sendToService('callWs_exportToPDFMasterAccount');
@@ -932,15 +941,15 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->dataAccessLog->function = 'cuenta maestra';
 		$this->dataAccessLog->operation = 'Obtener excel de tabla cuenta maestra';
 		$this->dataRequest->idOperation = 'generaArchivoXlsConcil';
-		$this->dataRequest->anio = $dataRequest->anio;
+		$this->dataRequest->anio = $dataRequest->year;
 		$this->dataRequest->idExtEmp = $dataRequest->idExtEmp;
-		$this->dataRequest->fechaIni =  $dataRequest->fechaIni;
-		$this->dataRequest->fechaFin =  $dataRequest->fechaFin;
-		$this->dataRequest->filtroFecha = $dataRequest->filtroFecha;
-		$this->dataRequest->nombreEmpresa = $dataRequest->nombreEmpresa;
-		$this->dataRequest->paginaActual = $dataRequest->paginaActual;
+		$this->dataRequest->fechaIni =  $dataRequest->dateStart;
+		$this->dataRequest->fechaFin =  $dataRequest->dateEnd;
+		$this->dataRequest->filtroFecha = $dataRequest->dateFilter;
+		$this->dataRequest->nombreEmpresa = $dataRequest->nameEnterprise;
+		$this->dataRequest->paginaActual = $dataRequest->actualPage;
 		$this->dataRequest->producto =  $this->session->userdata('productInf')->productPrefix;
-		$this->dataRequest->tamanoPagina =  $dataRequest->tamanoPagina;
+		$this->dataRequest->tamanoPagina =  $dataRequest->pageSize;
 
 
 		$response = $this->sendToService('callWs_exportToExcelMasterAccountConsolid');
@@ -988,15 +997,15 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->dataAccessLog->function = 'cuenta maestra';
 		$this->dataAccessLog->operation = 'Obtener pdf de tabla cuenta maestra consolidado';
 		$this->dataRequest->idOperation = 'generaArchivoConcilPdf';
-		$this->dataRequest->anio = $dataRequest->anio;
+		$this->dataRequest->anio = $dataRequest->year;
 		$this->dataRequest->idExtEmp = $dataRequest->idExtEmp;
-		$this->dataRequest->fechaIni =  $dataRequest->fechaIni;
-		$this->dataRequest->fechaFin =  $dataRequest->fechaFin;
-		$this->dataRequest->filtroFecha = $dataRequest->filtroFecha;
-		$this->dataRequest->nombreEmpresa = $dataRequest->nombreEmpresa;
-		$this->dataRequest->paginaActual = $dataRequest->paginaActual;
+		$this->dataRequest->fechaIni =  $dataRequest->dateStart;
+		$this->dataRequest->fechaFin =  $dataRequest->dateEnd;
+		$this->dataRequest->filtroFecha = $dataRequest->dateFilter;
+		$this->dataRequest->nombreEmpresa = $dataRequest->nameEnterprise;
+		$this->dataRequest->paginaActual = $dataRequest->actualPage;
 		$this->dataRequest->producto =  $this->session->userdata('productInf')->productPrefix;
-		$this->dataRequest->tamanoPagina =  $dataRequest->tamanoPagina;
+		$this->dataRequest->tamanoPagina =  $dataRequest->pageSize;
 
 
 		$response = $this->sendToService('callWs_exportToPDFMasterAccountConsolid');

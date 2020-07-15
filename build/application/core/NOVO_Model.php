@@ -6,6 +6,7 @@ class NOVO_Model extends CI_Model {
 	public $className;
 	public $accessLog;
 	public $token;
+	public $autoLogin;
 	public $country;
 	public $countryUri;
 	public $dataRequest;
@@ -24,6 +25,7 @@ class NOVO_Model extends CI_Model {
 		$this->country = $this->session->has_userdata('countrySess') ? $this->session->countrySess : $this->config->item('country');
 		$this->countryUri = $this->session->countryUri;
 		$this->token = $this->session->token ?: '';
+		$this->autoLogin = $this->session->autoLogin ?: '';
 		$this->userName = $this->session->userName;
 	}
 	/**
@@ -41,6 +43,7 @@ class NOVO_Model extends CI_Model {
 		$this->dataRequest->className = $this->className;
 		$this->dataRequest->logAccesoObject = $this->accessLog;
 		$this->dataRequest->token = $this->token;
+		$this->dataRequest->autoLogin = $this->autoLogin;
 		$this->dataRequest->pais = $this->country;
 		$encryptData = $this->encrypt_connect->encode($this->dataRequest, $this->userName, $model);
 		$request = ['bean'=> $encryptData, 'pais'=> $this->country];
@@ -82,6 +85,7 @@ class NOVO_Model extends CI_Model {
 		$this->response->msg = '';
 		$this->response->icon = lang('GEN_ICON_WARNING');
 		$linkredirect = $this->session->has_userdata('productInf') ? 'detalle-producto' : lang('GEN_ENTERPRISE_LIST');
+		$linkredirect = AUTO_LOGIN ? 'ingresar/fin' : $linkredirect;
 		$arrayResponse = [
 			'btn1'=> [
 				'text'=> lang('GEN_BTN_ACCEPT'),
@@ -104,6 +108,9 @@ class NOVO_Model extends CI_Model {
 					$this->session->sess_destroy();
 				}
 				break;
+			case -437:
+				$this->response->msg = lang('GEN_FAILED_THIRD PARTY');
+				break;
 			default:
 				$this->response->msg = lang('RESP_MESSAGE_SYSTEM');
 				$this->response->icon = lang('GEN_ICON_DANGER');
@@ -122,7 +129,18 @@ class NOVO_Model extends CI_Model {
 	public function responseToTheView($model)
 	{
 		log_message('INFO', 'NOVO Model: responseToView Method Initialized');
-		log_message('DEBUG', 'NOVO ['.$this->userName.'] RESULT '.$model.' SENT TO THE VIEW '.json_encode($this->response));
+		$responsetoView = new stdClass();
+
+		foreach ($this->response AS $pos => $response) {
+			if (is_array($response) && isset($response['file'])) {
+				continue;
+			}
+			$responsetoView->$pos = $response;
+		}
+
+		log_message('DEBUG', 'NOVO ['.$this->userName.'] RESULT '.$model.' SENT TO THE VIEW '.json_encode($responsetoView));
+
+		unset($responsetoView);
 
 		return $this->response;
 	}

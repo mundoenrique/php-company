@@ -114,11 +114,11 @@ $('#buscar').on('click', function () {
 // ACCION EVENTO "SELECCIONAR TODOS"
 $('#select-allR').on('click', function () {
 
-	tabla = $('.table-text-service').DataTable();   
-	tabla.column(0).nodes().to$().find('[type=checkbox]').each(function(index) { 
+	tabla = $('.table-text-service').DataTable();
+	tabla.column(0).nodes().to$().find('[type=checkbox]').each(function(index) {
 
     if ($('#select-allR').prop('checked')){
-			
+
       $(this).prop('checked','checked')
 
 			if ($(this).parents('tr').attr('tjta') != undefined) {
@@ -127,7 +127,7 @@ $('#select-allR').on('click', function () {
 				serv_var.dni_tarjetas.push($(this).parents('tr').attr('id_ext_per'));
 				serv_var.estado_anterior.push($(this).parents('tr').attr('edo_anterior'));
 			}
-		
+
 		}else{
 				$(this).prop('checked','')
     }

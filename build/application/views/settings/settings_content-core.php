@@ -1,3 +1,4 @@
+
 <div class="bg-color">
 	<div class="pt-3 pb-5 px-5">
 		<h1 class="primary h3 regular inline"><?= lang('GEN_SETTINGS_TITLE') ?></h1>
@@ -112,7 +113,7 @@
 									</div>
 									<div class="row">
 										<div class="col-6 flex justify-end">
-											<button id="btnChangeEmail" class="btn btn-primary btn-small " style="width: 159px" type="submit">Guardar cambios</button>
+											<button id="btnChangeEmail" class="btn btn-primary btn-small " type="submit">Guardar cambios</button>
 										</div>
 									</div>
 								</form>
@@ -135,9 +136,9 @@
 													<div class="form-group col-12 col-lg-12">
 														<label for="currentPass">Contraseña actual</label>
 														<div class="input-group">
-															<input id="currentPass" class="form-control pwd-input" type="password" name="current-pass" required>
+															<input id="currentPass" class="form-control pwd-input" type="password" autocomplete="off" name="current-pass" required>
 															<div class="input-group-append">
-																<span id="pwd-addon" class="input-group-text pwd-action" title="Clic aquí para mostrar/ocultar contraseña"><i
+																<span id="pwd-addon" class="input-group-text pwd-action" title="<?= lang('GEN_SHOW_PASS') ?>"><i
 																		class="icon-view mr-0"></i></span>
 															</div>
 														</div>
@@ -146,9 +147,9 @@
 													<div class="form-group col-12 col-lg-6">
 														<label for="newPass">Nueva Contraseña</label>
 														<div class="input-group">
-															<input id="newPass" class="form-control pwd-input" type="password" name="new-pass" required>
+															<input id="newPass" class="form-control pwd-input" type="password" autocomplete="off" name="new-pass" required>
 															<div class="input-group-append">
-																<span id="pwd-addon" class="input-group-text pwd-action" title="Clic aquí para mostrar/ocultar contraseña"><i
+																<span id="pwd-addon" class="input-group-text pwd-action" title="<?= lang('GEN_SHOW_PASS') ?>"><i
 																		class="icon-view mr-0"></i></span>
 															</div>
 														</div>
@@ -157,9 +158,9 @@
 													<div class="form-group col-12 col-lg-6">
 														<label for="confirmPass">Confirmar Contraseña</label>
 														<div class="input-group">
-															<input id="confirmPass" class="form-control pwd-input" type="password" name="confirm-pass" required>
+															<input id="confirmPass" class="form-control pwd-input" type="password" autocomplete="off" name="confirm-pass" required>
 															<div class="input-group-append">
-																<span id="pwd-addon" class="input-group-text pwd-action" title="Clic aquí para mostrar/ocultar contraseña"><i
+																<span id="pwd-addon" class="input-group-text pwd-action" title="<?= lang('GEN_SHOW_PASS') ?>"><i
 																		class="icon-view mr-0"></i></span>
 															</div>
 														</div>
@@ -192,7 +193,7 @@
 										</div>
 										<div class="row">
 											<div class="col-6 flex justify-end">
-												<button id="btnChangePass" class="btn btn-primary btn-small " style="width: 159px" type="button">Guardar cambios</button>
+												<button id="btnChangePass" class="btn btn-primary btn-small " type="button">Guardar cambios</button>
 											</div>
 										</div>
 									</div>
@@ -293,7 +294,7 @@
 
 										<div class="row">
 											<div class="flex mb-2 justify-end col-12">
-												<button id="btnChangeTelephones" style="width: 159px" class="btn btn-primary btn-small " type="submit">Guardar
+												<button id="btnChangeTelephones" class="btn btn-primary btn-small " type="submit">Guardar
 													cambios</button>
 											</div>
 										</div>
@@ -365,18 +366,18 @@
 										<div class="row flex mb-4 mt-2 justify-end items-center form-group">
 											<div class="col-6 col-lg-4 col-xl-3 input-group">
 												<label for="contPass"></label>
-												<input id="contPass" class="form-control pwd-input" type="password" name="Ingresa tu contraseña"
+												<input id="contPass" class="form-control pwd-input" autocomplete="new-password" name="Ingresa tu contraseña"
 													placeholder="Ingresa tu contraseña">
 												<div class="input-group-append">
-													<span id="pwd-addon" class="input-group-text pwd-action" title="Clic aquí para mostrar/ocultar contraseña"><i
+													<span id="pwd-addon" class="input-group-text pwd-action" title="<?= lang('GEN_SHOW_PASS') ?>"><i
 															class="icon-view mr-0"></i></span>
 												</div>
 											</div>
 											<div class="col-3 col-lg-2 col-xl-auto">
-												<button class="btn btn-primary btn-small flex mx-auto " style="width: 159px" id="btnLimpiar" type="button">Limpiar</button>
+												<button class="btn btn-primary btn-small flex mx-auto " id="btnLimpiar" type="button">Limpiar</button>
 											</div>
 											<div class="col-3 col-lg-2 col-xl-auto">
-												<button class="btn btn-primary btn-small flex mx-auto " style="width: 159px" id="btnAddContact" type="submit">Agregar</button>
+												<button class="btn btn-primary btn-small flex mx-auto " id="btnAddContact" type="submit">Agregar</button>
 											</div>
 										</div>
 									</div>
@@ -521,10 +522,10 @@
 
 										<div class="row flex mb-4 mt-2 pl-5 justify-end items-center form-group">
 											<div class="col-7 col-lg-4 col-xl-3 input-group">
-												<input id="password1" class="form-control pwd-input" type="password" name="Ingresa tu contraseña"
+												<input id="password1" class="form-control pwd-input" type="password" autocomplete="off" name="Ingresa tu contraseña"
 													placeholder="Ingresa tu contraseña">
 												<div class="input-group-append">
-													<span id="pwd-addon" class="input-group-text pwd-action" title="Clic aquí para mostrar/ocultar contraseña"><i
+													<span id="pwd-addon" class="input-group-text pwd-action" title="<?= lang('GEN_SHOW_PASS') ?>"><i
 															class="icon-view mr-0"></i></span>
 												</div>
 											</div>
@@ -602,6 +603,22 @@
 										</a>
 									</div>
 									<?php endforeach; ?>
+								</div>
+								<?php endif; ?>
+
+								<?php if (lang('CONF_FILE_SERVICE_BOOL') == 'ON'): ?>
+								<div class="my-2 tertiary h4 semibold">
+									<span>Aplicación</span>
+								</div>
+								<div class="row">
+									<div id="div-download">
+										<div class="flex items-start justify-end">
+										<button id="btn-download" countEnterp=<?=$countEnterprise?> enterpriseI=<?=$enterpriseInf?> class="flex items-baseline btn btn-link btn-small big-modal">
+										<i aria-hidden="true" class="icon icon-download"></i>
+										&nbsp;<?= lang('GEN_DOWNLOAD_FILE_INI') ?>
+										</button>
+									</div>
+								</div>
 								</div>
 								<?php endif; ?>
 

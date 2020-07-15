@@ -61,8 +61,10 @@
 				<div class="line mb-2"></div>
 			</div>
 
-			<div id="pre-loade-result" class="mt-2 mx-auto hide">
-				<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
+			<div class="flex">
+				<div id="pre-loade-result" class="mt-2 mx-auto hide">
+					<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
+				</div>
 			</div>
 			<div class="w-100 cardholders-result hide">
 				<div class="flex pb-5 flex-column">
@@ -84,7 +86,7 @@
 						<table id="resultscardHolders" class="cell-border h6 display responsive w-100">
 							<thead class="bg-primary secondary regular">
 								<tr>
-									<th><?= lang('GEN_TABLE_ID_DOC'); ?></th>
+									<th><?= lang('GEN_TABLE_DNI'); ?></th>
 									<th><?= lang('GEN_TABLE_CARDHOLDER'); ?></th>
 								</tr>
 							</thead>

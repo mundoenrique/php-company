@@ -456,6 +456,7 @@ label {
 
 .custom-control-label {
 	position: relative;
+	cursor: pointer;
   margin-bottom: 0;
 	margin-top: .25rem;
 	font-weight: var(--font-weight-base);
@@ -919,7 +920,7 @@ label {
 	color: var(--color-fifth);
 	z-index: 90;
 	font-size: var(--h3);
-	height: 29.6px;
+	height: 31.5px;
 	-webkit-padding-before: 2px;
 }
 
@@ -939,7 +940,7 @@ label {
 	background: var(--color-primary);
 	color: var(--color-fifth);
 	z-index: 11;
-	height: 29.7px;
+	height: 31.5px;
 }
 
 @media (min-width: 768px) {
@@ -951,6 +952,12 @@ label {
 @media (min-width: 1024px) {
 	.sb-search.sb-search-open, .no-js .sb-search {
 		width: 20%;
+	}
+}
+
+@supports (-webkit-appearance:none) {
+	.sb-icon-search	.icon-find {
+		margin-top: 2px;
 	}
 }
 
@@ -2013,7 +2020,10 @@ i[class*=" icon-"].novoglyphs {
 .icon-find:before          { content: "\e005"; }
 .icon-download:before      { content: "\e008"; }
 .icon-upload:before        { content: "\e009"; }
+.icon-arrow-right:before   { content: "\e011"; }
 .icon-user:before          { content: "\e015"; }
+.icon-envelope-open:before { content: "\e022"; }
+.icon-lock:before 			   { content: "\e028"; }
 .icon-card:before          { content: "\e029"; }
 .icon-credit-card:before	 { content: "\e031"; }
 .icon-thumbs-up:before     { content: "\e032"; }
@@ -2035,6 +2045,7 @@ i[class*=" icon-"].novoglyphs {
 .icon-file-graph:before 	 { content: "\e058"; }
 .icon-file-pdf:before 		 { content: "\e059"; }
 .icon-spinner:before 			 { content: "\e060"; }
+.icon-building:before 	   { content: "\e062"; }
 .icon-balance:before 			 { content: "\e072"; }
 .icon-key:before 					 { content: "\e01a"; }
 .icon-file-word:before     { content: "\e05a"; }
@@ -2045,10 +2056,13 @@ i[class*=" icon-"].novoglyphs {
 .icon-unlock:before 			 { content: "\e01c"; }
 .icon-arrow-down:before    { content: "\e03c"; }
 .icon-chart-pie:before  	 { content: "\e04c"; }
+.icon-user-building:before { content: "\e09c"; }
+.icon-user-edit:before     { content: "\e02d"; }
 .icon-arrow-left:before    { content: "\e03d"; }
 .icon-card-fee:before			 { content: "\e08d"; }
-.icon-arrow-right:before   { content: "\e03e"; }
+/* .icon-arrow-right:before   { content: "\e03e"; } */
 .icon-car:before					 { content: "\e04e"; }
+.icon-user-card:before		 { content: "\e05e"; }
 .icon-chevron-up:before    { content: "\e03f"; }
 .icon-bag:before 					 { content: "\e04f"; }
 
@@ -2784,6 +2798,17 @@ table.dataTable thead th.select-checkbox:before {
   border-radius: 3px;
 }
 
+table.dataTable.dtr-inline.collapsed>tbody>tr[role="row"]>td:first-child:before, table.dataTable.dtr-inline.collapsed>tbody>tr[role="row"]>th:first-child:before{
+	border: 2px solid white !important;
+}
+
+table.dataTable.dtr-inline.collapsed>tbody>tr.parent>td:first-child:before, table.dataTable.dtr-inline.collapsed>tbody>tr.parent>th:first-child:before{
+	background-color: var(--color-primary) !important;
+}
+.check-table{
+	width: 20px !important;
+}
+
 table.dataTable tr.selected th.select-checkbox:after {
   content: '\2714';
   margin-top: -11px;
@@ -3400,7 +3425,7 @@ a.ui-button:active,
 	background: none;
 	overflow: auto;
 }
-.ui-dialog .ui-dialog-content p {
+.ui-dialog .ui-dialog-content >	 p {
 	display: flex;
 	padding: 1.2em 1em 1em;
 	min-height: 80px;

@@ -53,8 +53,8 @@
 			<?php foreach($productList AS $pos => $products): ?>
 			<div data-jplist-item class="select-product flex mb-1 pl-3 pr-4 py-1 bg-white justify-between items-center">
 				<div class="flex mr-3 mx-1 items-center flex-auto">
-					<img class="img-product-list" src="<?= $this->asset->insertFile('programs/'.$countryUri.'/'.$products->programImg); ?>" alt="<?= $products->programImg; ?>">
-					<img class="filter-<?= strtolower($products->marca); ?> mx-2 img-brand-list" src="<?= $this->asset->insertFile('brands/'.$products->imgBrand); ?>" alt="<?= $products->imgBrand; ?>">
+					<img class="img-product-list" src="<?= $this->asset->insertFile($products->programImg, 'images/programs', $countryUri); ?>" alt="<?= $products->programImg; ?>">
+					<img class="filter-<?= strtolower($products->marca); ?> mx-2 img-brand-list" src="<?= $this->asset->insertFile($products->imgBrand, 'images/brands'); ?>" alt="<?= $products->imgBrand; ?>">
 					<div class="flex flex-column flex-auto">
 						<span class="product-description semibold primary"><?= $products->descripcion; ?></span>
 						<span class="h6 light text truncate">
@@ -95,12 +95,10 @@
 				<a href="#" data-type="last"><?= lang('GEN_TABLE_SLAST') ?></a>
 			</nav>
 		</div>
-
-		<div id="no-product" class="flex-auto my-5 py-4 center none">
-			<span class="h4"><?= lang('GEN_WARNING_PRODUCTS_LIST') ?></span>
-		</div>
 	</div>
-
+	<div id="no-product" class="flex-auto my-5 py-4 center none">
+		<span class="h4"><?= lang('GEN_WARNING_PRODUCTS_LIST') ?></span>
+	</div>
 	<?php if($widget): ?>
 	<?php $this->load->view('widget/widget_enterprise-product_content'.$newViews, $widget) ?>
 	<?php endif; ?>

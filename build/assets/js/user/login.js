@@ -3,6 +3,10 @@ $(function () {
 	var userCred, forWho, forWhere;
 	var userLogin = $('#user_login');
 	var userPass = $('#user_pass');
+	var loginIpMsg, formcodeOTP, btn, btnTextOtp;
+	$('#user_pass').on('keyup', function() {
+		$(this).attr('type', 'password')
+	})
 	$.balloon.defaults.css = null;
 	insertFormInput(false);
 	inputDisabled(false);
@@ -57,7 +61,6 @@ $(function () {
 	});
 
 	function restartFormLogin() {
-
 		insertFormInput(false);
 		inputDisabled(false);
 		$('#login-btn').html(btnText);
@@ -71,12 +74,15 @@ $(function () {
 	};
 
 	function getCredentialsUser() {
-		cypherPass = cryptoPass(userPass.val());
+		cypherPass = (userPass.val() === '' && userCred) ? userCred.pass : cryptoPass(userPass.val());
 
 		return {
 			user: userLogin.val(),
 			pass: cypherPass,
-			active: ''
+			active: '',
+			codeotp: $('#codeOTP').val() ? $('#codeOTP').val() : '',
+			saveip : $('#acceptAssert').prop('checked') ? $('#acceptAssert').prop('checked') : '',
+			modalreq : $('#codeOTP').val() ? true : ''
 		}
 	};
 
@@ -87,7 +93,10 @@ $(function () {
 			pass: userCred.pass,
 			active: userCred.active,
 			currentTime: new Date().getHours(),
-			token: token || ''
+			token: token || '',
+			codeOTP: userCred.codeotp,
+			saveIP: userCred.saveip,
+			modalReq :userCred.modalreq
 		}
 		callNovoCore(verb, who, where, data, function (response) {
 			responseCodeLogin[response.code](response);
@@ -115,9 +124,58 @@ $(function () {
 			});
 			restartFormLogin();
 		},
-		2: function () {
-			userCred.active = 1; forWhere = lang.GEN_LOGIN;
-			validateLogin();
+		2: function (response) {
+			restartFormLogin();
+			if(response.ipInvalid){
+				var oldID = $('#accept').attr('id');
+				$('#accept').attr('id', 'send-otp-btn');
+				btn = response.data.btn1;
+
+				loginIpMsg ='<form id="formVerificationOTP" name="formVerificationOTP" class="mr-2" method="post">';
+				loginIpMsg+='<p class="pt-0 p-0 justify">'+response.msg+'</p>';
+				loginIpMsg+='<div class="row">';
+				loginIpMsg+=	'<div class="form-group col-6">';
+				loginIpMsg+=	'<label id="label_codeOTP" for="codeOTP">'+response.labelInput+'</label>';
+				loginIpMsg+=	'<input id="codeOTP" class="form-control" type="text" name="codeOTP" autocomplete="off">';
+				loginIpMsg+=    '<div id="msgErrorCodeOTP" class="help-block"></div>';
+				loginIpMsg+=	'</div>';
+				loginIpMsg+='</div>';
+				loginIpMsg+='<div class="form-group custom-control custom-switch mb-0">';
+				loginIpMsg+=	'<input id="acceptAssert" class="custom-control-input" type="checkbox" name="acceptAssert"> ';
+				loginIpMsg+=	'<label class="custom-control-label" for="acceptAssert">'+response.assert+'</label>';
+				loginIpMsg+='</div>';
+        		loginIpMsg+='</form>';
+
+				$('#formVerificationOTP input').attr('disabled', false);
+				notiSystem(response.title, loginIpMsg, response.icon,response.data);
+				windowsStyle();
+
+				formcodeOTP = $('#formVerificationOTP');
+
+				$('#send-otp-btn').on('click', function(e) {
+					e.preventDefault();
+					e.stopImmediatePropagation();
+					btnTextOtp = $('#send-otp-btn').html();
+					formInputTrim(formcodeOTP);
+					validateForms(formcodeOTP,{handleMsg: true, modal:true});
+					if(formcodeOTP.valid()){
+						$('#formVerificationOTP input').attr('disabled', true);
+						$(this)
+						.off('click')
+						.html(loader)
+						.attr('id', oldID);
+						userCred = getCredentialsUser();
+						validateLogin();
+					}
+				});
+				$('#cancel').on('click', function() {
+					restartFormLogin();
+				});
+				$('#send-otp-btn').html(btnTextOtp);
+			} else{
+				userCred.active = 1; forWhere = lang.GEN_LOGIN;
+				validateLogin();
+			}
 		},
 		3: function (response) {
 			var btn = response.data.btn1;
@@ -141,7 +199,7 @@ $(function () {
 			}
 		},
 		4: function () {
-			$('#login-btn').html(btnText);
+			restartFormLogin();
 		}
 	}
 
@@ -159,4 +217,37 @@ $(function () {
 
 function inputDisabled(disable) {
 	$('#login-form input').attr('disabled', disable);
+}
+
+function windowsStyle(){
+	$("#system-info").dialog("option", "minWidth", 480);
+	$("#system-info").dialog("option", "maxHeight", false);
+	$('#system-msg').css( "width", "auto" );
+
+	if(country != 'bdb'){
+		$("#label_codeOTP").addClass("line-field");
+		$("#codeOTP").addClass("input-field");
+	}
+
+	if (country == 'bp' | country == 'bdb') {
+		$("#system-info").dialog("option", "position", {
+			my: "center top+100",
+			at: "center top",
+			of: window
+		});
+		var styles = {
+			float : "none",
+			margin: "auto"
+		};
+		$("#system-info .ui-dialog-buttonpane").css(styles).removeClass("modal-buttonset");
+		$("#system-info .ui-dialog-buttonset").removeClass("modal-buttonset");
+		$("#system-info .btn-modal").removeClass("modal-btn-primary");
+	}
+	else {
+		$("#system-info").dialog("option", "position", {
+			my: "center top+160",
+			at: "center top",
+			of: window
+		});
+	}
 }

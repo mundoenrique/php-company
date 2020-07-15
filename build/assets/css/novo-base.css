@@ -7685,3 +7685,23 @@ body .ui-tooltip {
 #ui-id-4 #wrapper {
 	padding: 0 !important;
 }
+
+.form-group:nth-child(1) {
+    margin-bottom: .7rem;
+}
+
+#codeOTP {
+	margin-bottom: 0;
+}
+
+.justify{
+	text-align: justify !important
+}
+
+.help-block {
+	height: 1rem;
+	margin-left: 4px;
+	font-size: 11px;
+	letter-spacing: .016em;
+	color: #fb483a;
+}

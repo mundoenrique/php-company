@@ -28,13 +28,23 @@ $config = [
 			'field' => 'pass',
 			'label' => 'pass',
 			'rules' => 'trim|required'
+		],
+		[
+			'field' => 'codeOTP',
+			'label' => 'codeOTP',
+			'rules' => 'trim|regex_match[/^[a-z0-9]+$/i]'
+		],
+		[
+			'field' => 'saveIP',
+			'label' => 'saveIP',
+			'rules' => 'trim'
 		]
 	],
 	'singleSignon' => [
 		[
-			'field' => 'tokenId',
-			'label' => 'tokenId',
-			'rules' => 'trim|regex_match[/^([\w]+)+$/i]|required'
+			'field' => 'sessionId',
+			'label' => 'sessionId',
+			'rules' => 'trim|required'
 		]
 	],
 	'finishSession' => [
@@ -82,86 +92,322 @@ $config = [
 		[
 			'field' => 'email',
 			'label' => 'email',
-			'rules' => 'trim|required'
+			'rules' => 'trim|regex_match[/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix]|required'
 		]
 	],
 	'obtainNumPosition' => [
 		[
-			'field' => 'numpos',
-			'rules' => 'trim'
-		],
-
-	],
-	'obtenerIdEmpresa' => [
-		[
 			'field' => 'acrif',
-			'rules' => 'trim'
+			'rules' => 'trim|regex_match[/^[0-9]*$/i]|required'
 		],
-
+		[
+			'field' => 'numpos',
+			'rules' => 'trim|regex_match[/^[0-9]*$/i]'
+		],
+		[
+			'field' => 'nameBusine',
+			'rules' => 'trim|regex_match[/^[a-zA-Z0-9 .,]*$/i]|required'
+		],
+		[
+			'field' => 'razonSocial',
+			'rules' => 'trim|regex_match[/^[a-zA-Z0-9 .,]*$/i]|required'
+		],
+		[
+			'field' => 'contacto',
+			'rules' => 'trim|regex_match[/^[a-zA-Z0-9 ]*$/i]'
+		],
+		[
+			'field' => 'fact',
+			'rules' => 'trim|regex_match[/^[a-zA-Z0-9,.´ ]*$/i]'
+		],
+		[
+			'field' => 'ubicacion',
+			'rules' => 'trim|regex_match[/^[a-zA-Z 0-9.,´ ]*$/i]'
+		],
+		[
+			'field' => 'tel1',
+			'rules' => 'trim|regex_match[/^[0-9]*$/i]'
+		],
+		[
+			'field' => 'tel2',
+			'rules' => 'trim|regex_match[/^[0-9]*$/i]'
+		],
+		[
+			'field' => 'tel3',
+			'rules' => 'trim|regex_match[/^[0-9]*$/i]'
+		]
 	],
+
 	'closingBudgets' => [
 		[
-			'field' => 'Nit',
-			'rules' => 'trim|regex_match[/^([0-9=]+)+$/i]|'
+			'field' => 'idExtPer',
+			'rules' => 'trim|regex_match[/^[0-9]*$/i]'
 		],
-	],
-	'exportToExcel' => [
 		[
-			'field' => 'empresa',
-			'rules' => 'trim'
+			'field' => 'producto',
+			'rules' => 'trim|regex_match[/^[a-zA-Z0-9]*$/i]'
+		],
+		[
+			'field' => 'idExtEmp',
+			'rules' => 'trim|regex_match[/^[0-9]*$/i]'
+		],
+		[
+			'field' => 'paginaActual',
+			'rules' => 'trim|regex_match[/^[0-9]*$/i]'
+		],
+		[
+			'field' => 'tamanoPagina',
+			'rules' => 'trim|regex_match[/^[0-9]*$/i]'
 		],
 	],
 	'exportToExcel' => [
 		[
 			'field' => 'idExtEmp',
-			'rules' => 'trim'
+			'rules' => 'trim|regex_match[/^[0-9]*$/i]'
+		],
+		[
+			'field' => 'producto',
+			'rules' => 'trim|regex_match[/^[a-zA-Z0-9]*$/i]'
+		],
+		[
+			'field' => 'tamanoPagina',
+			'rules' => 'trim|regex_match[/^[0-9]*$/i]'
+		],
+		[
+			'field' => 'paginaActual',
+			'rules' => 'trim|regex_match[/^[0-9]*$/i]'
+		],
+		[
+			'field' => 'descProd',
+			'rules' => 'trim|regex_match[/^[a-zA-Z0-9]*$/i]'
+		],
+	],
+	'exportToExcel' => [
+		[
+			'field' => 'idExtEmp',
+			'rules' => 'trim|regex_match[/^[0-9]*$/i]'
+		],
+		[
+			'field' => 'producto',
+			'rules' => 'trim|regex_match[/^[a-zA-Z0-9]*$/i]'
+		],
+		[
+			'field' => 'tamanoPagina',
+			'rules' => 'trim|regex_match[/^[0-9]*$/i]'
+		],
+		[
+			'field' => 'paginaActual',
+			'rules' => 'trim|regex_match[/^[0-9]*$/i]'
+		],
+		[
+			'field' => 'descProd',
+			'rules' => 'trim|regex_match[/^[a-zA-Z0-9]*$/i]'
 		],
 	],
 	'exportToExcelMasterAccount' => [
 		[
 			'field' => 'idExtEmp',
-			'rules' => 'trim'
+			'rules' => 'trim|regex_match[/^[0-9]*$/i]'
 		],
+		[
+			'field' => 'producto',
+			'rules' => 'trim|regex_match[/^[a-zA-Z0-9]*$/i]'
+		],
+		[
+			'field' => 'tamanoPagina',
+			'rules' => 'trim|regex_match[/^[0-9]*$/i]'
+		],
+		[
+			'field' => 'paginaActual',
+			'rules' => 'trim|regex_match[/^[0-9]*$/i]'
+		],
+		[
+			'field' => 'descProd',
+			'rules' => 'trim|regex_match[/^[a-zA-Z0-9]*$/i]'
+		],
+	],
+	'exportToExcelMasterAccount' => [
+		[
+			'field' => 'idExtEmp',
+			'rules' => 'trim|regex_match[/^[0-9]*$/i]'
+		],
+		[
+			'field' => 'filtroFecha',
+			'rules' => 'trim|regex_match[/^[0|3|6]*$/i]'
+		],
+		[
+			'field' => 'fechaIni',
+			'rules' => 'trim|regex_match[/^[0-9\/]*$/i]'
+		],
+		[
+			'field' => 'fechaFin',
+			'rules' => 'trim|regex_match[/^[0-9\/]*$/i]'
+		],
+		[
+			'field' => 'tamanoPagina',
+			'rules' => 'trim|regex_match[/^[0-9]*$/i]'
+		],
+		[
+			'field' => 'paginaActual',
+			'rules' => 'trim|regex_match[/^[0-9]*$/i]'
+		],
+		[
+			'field' => 'producto',
+			'rules' => 'trim|regex_match[/^[a-zA-Z0-9]*$/i]'
+		],
+		[
+			'field' => 'nombreEmpresa',
+			'rules' => 'trim|regex_match[/^[a-zA-Z0-9., ]*$/i]'
+		]
 	],
 	'exportToPDFMasterAccount' => [
 		[
 			'field' => 'idExtEmp',
-			'rules' => 'trim'
+			'rules' => 'trim|regex_match[/^[0-9]*$/i]'
 		],
+		[
+			'field' => 'filtroFecha',
+			'rules' => 'trim|regex_match[/^[0|3|6]*$/i]'
+		],
+		[
+			'field' => 'fechaIni',
+			'rules' => 'trim|regex_match[/^[0-9\/]*$/i]'
+		],
+		[
+			'field' => 'fechaFin',
+			'rules' => 'trim|regex_match[/^[0-9\/]*$/i]'
+		],
+		[
+			'field' => 'tamanoPagina',
+			'rules' => 'trim|regex_match[/^[0-9]*$/i]'
+		],
+		[
+			'field' => 'paginaActual',
+			'rules' => 'trim|regex_match[/^[0-9]*$/i]'
+		],
+		[
+			'field' => 'producto',
+			'rules' => 'trim|regex_match[/^[a-zA-Z0-9]*$/i]'
+		],
+		[
+			'field' => 'nombreEmpresa',
+			'rules' => 'trim|regex_match[/^[a-zA-Z0-9., ]*$/i]'
+		]
 	],
 	'exportToExcelMasterAccountConsolid' => [
 		[
 			'field' => 'idExtEmp',
-			'rules' => 'trim'
+			'rules' => 'trim|regex_match[/^[0-9]*$/i]'
 		],
+		[
+			'field' => 'anio',
+			'rules' => 'trim|regex_match[/^[0-9]*$/i]'
+		],
+		[
+			'field' => 'fechaIni',
+			'rules' => 'trim|regex_match[/^[0-9\/]*$/i]'
+		],
+		[
+			'field' => 'fechaFin',
+			'rules' => 'trim|regex_match[/^[0-9\/]*$/i]'
+		],
+		[
+			'field' => 'nombreEmpresa',
+			'rules' => 'trim|regex_match[/^[a-zA-Z0-9 ]*$/i]'
+		],
+		[
+			'field' => 'paginaActual',
+			'rules' => 'trim|regex_match[/^[0-9]*$/i]'
+		],
+		[
+			'field' => 'producto',
+			'rules' => 'trim|regex_match[/^[a-zA-Z0-9]*$/i]'
+		],
+		[
+			'field' => 'tamanoPagina',
+			'rules' => 'trim|regex_match[/^[0-9]*$/i]'
+		]
+
 	],
 	'exportToPDFMasterAccountConsolid' => [
 		[
 			'field' => 'idExtEmp',
-			'rules' => 'trim'
+			'rules' => 'trim|regex_match[/^[0-9]*$/i]'
 		],
+		[
+			'field' => 'anio',
+			'rules' => 'trim|regex_match[/^[0-9]*$/i]'
+		],
+		[
+			'field' => 'fechaIni',
+			'rules' => 'trim|regex_match[/^[0-9\/]*$/i]'
+		],
+		[
+			'field' => 'fechaFin',
+			'rules' => 'trim|regex_match[/^[0-9\/]*$/i]'
+		],
+		[
+			'field' => 'nombreEmpresa',
+			'rules' => 'trim|regex_match[/^[a-zA-Z0-9 ]*$/i]'
+		],
+		[
+			'field' => 'paginaActual',
+			'rules' => 'trim|regex_match[/^[0-9]*$/i]'
+		],
+		[
+			'field' => 'producto',
+			'rules' => 'trim|regex_match[/^[a-zA-Z0-9]*$/i]'
+		],
+		[
+			'field' => 'tamanoPagina',
+			'rules' => 'trim|regex_match[/^[0-9]*$/i]'
+		]
 	],
 	'masterAccount' => [
 		[
 			'field' => 'idExtEmp',
-			'rules' => 'trim'
+			'rules' => 'trim|regex_match[/^[0-9]*$/i]'
 		],
+		[
+			'field' => 'tipoNota',
+			'rules' => 'trim|regex_match[/^[D|C]*$/i]'
+		],
+		[
+			'field' => 'fechaIni',
+			'rules' => 'trim|regex_match[/^[0-9\/]*$/i]'
+		],
+		[
+			'field' => 'fechaFin',
+			'rules' => 'trim|regex_match[/^[0-9\/]*$/i]'
+		],
+		[
+			'field' => 'filtroFecha',
+			'rules' => 'trim|regex_match[/^[0|3|6]*$/i]'
+		],
+		[
+			'field' => 'paginaActual',
+			'rules' => 'trim|regex_match[/^[0-9]*$/i]'
+		],
+		[
+			'field' => 'tamanoPagina',
+			'rules' => 'trim|regex_match[/^[0-9]*$/i]'
+		]
 	],
 	'changeTelephones' => [
 		[
 			'field' => 'tlf1',
 			'label' => 'phone',
-			'rules' => 'trim|required'
+			'rules' => 'trim|regex_match[/^[0-9]*$/i]|required'
 		],
 		[
 			'field' => 'tlf2',
 			'label' => 'phone',
-			'rules' => 'trim'
+			'rules' => 'trim|regex_match[/^[0-9]*$/i]'
 		],
 		[
 			'field' => 'tlf3',
 			'label' => 'phone',
-			'rules' => 'trim'
+			'rules' => 'trim|regex_match[/^[0-9]*$/i]'
 		],
 	],
 	'addContact' => [
@@ -383,6 +629,11 @@ $config = [
 			'field' => 'bulkNoBill',
 			'label' => 'bulkNoBill',
 			'rules' => 'trim|regex_match[/^([\w,]*)+$/i]'
+		],
+		[
+			'field' => 'otpCode',
+			'label' => 'otpCode',
+			'rules' => 'trim|alpha_numeric'
 		]
 	],
 	'bulkDetail' => [
@@ -496,6 +747,13 @@ $config = [
 			'rules' => 'trim|regex_match[/^[\w.]+$/i]'
 		]
 	],
+	'getFileIni' => [
+		[
+			'field' => 'operation',
+			'label' => 'operation',
+			'rules' => 'null'
+		]
+	],
 	'unnamedRequest' => [
 		[
 			'field' => 'expiredDate',
@@ -577,6 +835,45 @@ $config = [
 			'field' => 'length',
 			'label' => 'length',
 			'rules' => 'trim|integer|required'
+		]
+	],
+	'cardsInquiry' => [
+		[
+			'field' => 'orderNumber',
+			'label' => 'orderNumber',
+			'rules' => 'trim|numeric'
+		],
+		[
+			'field' => 'bulkNumber',
+			'label' => 'bulkNumber',
+			'rules' => 'trim|numeric'
+		],
+		[
+			'field' => 'idNumberP',
+			'label' => 'idNumberP',
+			'rules' => 'trim|alpha_numeric'
+		],
+		[
+			'field' => 'cardNumberP',
+			'label' => 'cardNumberP',
+			'rules' => 'trim|integer'
+		],
+	],
+	'inquiriesActions' => [
+		[
+			'field' => 'cards[]',
+			'label' => 'cards',
+			'rules' => 'regex_match[/^([\w{}"*:.,@ ]*)+$/i]|required'
+		],
+		[
+			'field' => 'action',
+			'label' => 'action',
+			'rules' => 'trim|regex_match[/^([\w ]*)+$/i]|required'
+		],
+		[
+			'field' => 'pass',
+			'label' => 'pass',
+			'rules' => 'trim|regex_match[/^([a-zA-Z0-9=]+)+$/i]|required'
 		]
 	],
 	'statusBulk' => [
@@ -720,20 +1017,52 @@ $config = [
 		],
 	'userActivity' => [
 		[
-			'field' => 'acCodCia',
-			'rules' => 'trim'
+			'field' => 'fechaIni',
+			'rules' => 'trim|regex_match[/^[0-9\/]*$/i]'
 		],
+		[
+			'field' => 'fechaFin',
+			'rules' => 'trim|regex_match[/^[0-9\/]*$/i]'
+		],
+		[
+			'field' => 'acCodCia',
+			'rules' => 'trim|regex_match[/^[0-9]*$/i]'
+		]
 	],
 	'exportToExcelUserActivity' => [
 		[
-			'field' => 'acCodCia',
-			'rules' => 'trim'
+			'field' => 'rifEmpresa',
+			'rules' => 'trim|regex_match[/^[0-9]*$/i]'
 		],
+		[
+			'field' => 'fechaIni',
+			'rules' => 'trim|regex_match[/^[0-9\/]*$/i]'
+		],
+		[
+			'field' => 'fechaFin',
+			'rules' => 'trim|regex_match[/^[0-9\/]*$/i]'
+		],
+		[
+			'field' => 'acCodCia',
+			'rules' => 'trim|regex_match[/^[0-9]*$/i]'
+		]
 	],
 	'exportToPDFUserActivity' => [
 		[
-			'field' => 'acCodCia',
-			'rules' => 'trim'
+			'field' => 'rifEmpresa',
+			'rules' => 'trim|regex_match[/^[0-9]*$/i]'
 		],
+		[
+			'field' => 'fechaIni',
+			'rules' => 'trim|regex_match[/^[0-9\/]*$/i]'
+		],
+		[
+			'field' => 'fechaFin',
+			'rules' => 'trim|regex_match[/^[0-9\/]*$/i]'
+		],
+		[
+			'field' => 'acCodCia',
+			'rules' => 'trim|regex_match[/^[0-9]*$/i]'
+		]
 	],
 ];

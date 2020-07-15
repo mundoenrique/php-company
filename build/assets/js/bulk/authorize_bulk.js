@@ -28,7 +28,7 @@ $(function () {
 		],
 		"autoWidth": false,
     "select": {
-      "style": lang.GEN_TABLE_SELECT_SIGN,
+      "style": lang.CONF_BULK_SELECT_ALL_SIGN == 'ON' ? 'multi' : 'single',
 			selector: ':not(td:nth-child(-n+6))'
     },
     "language": dataTableLang
@@ -77,7 +77,7 @@ $(function () {
       }
 		],
 		"select": {
-      "style": lang.GEN_TABLE_SELECT_AUTH,
+      "style": lang.CONF_BULK_SELECT_ALL_AUTH == 'ON' ? 'multi' : 'single',
       "info": false,
       selector: ':not(td:nth-child(-n+6))'
     },
@@ -97,7 +97,7 @@ $(function () {
 		e.preventDefault()
 		var action = $(this).text().trim();
 		var thisId = $(this).attr('id');
-		var passwordSignAuht = $(this).closest('form').find('input[type=password]');
+		var passwordSignAuht = $(this).closest('form').find('input.pwd');
 		form = $(this).closest('form');
 		modalReq['active'] = false;
 		SignDeleteBulk(form, action, thisId, passwordSignAuht, modalReq)
@@ -136,10 +136,10 @@ $(function () {
 						action: 'close'
 					}
 				}
-				inputModal = 	'<form id="delete-bulk-form" class="form-group">';
+				inputModal = 	'<form id="delete-bulk-form" name="delete-bulk-form" class="form-group" onsubmit="return false;">';
 				inputModal+= 		'<span class="regular"> '+textModal+': '+bulkNum+'</span>';
 				inputModal+= 		'<div class="input-group">';
-				inputModal+= 			'<input id="password" class="form-control pwd-input" type="password" name="password" autocomplete="off"';
+				inputModal+= 			'<input id="password" class="form-control pwd-input pwd" type="password" name="password" autocomplete="off"';
 				inputModal+=			 	 'placeholder="'+lang.GEN_PLACE_PASSWORD+'">';
 				inputModal+= 			'<div class="input-group-append">';
 				inputModal+= 				'<span class="input-group-text pwd-action" title="'+lang.GEN_SHOW_PASS+'"><i class="icon-view mr-0"></i></span>';

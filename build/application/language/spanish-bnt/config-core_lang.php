@@ -1,15 +1,19 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+//SUPPORT IE 11
+$lang['CONF_SUPPORT_IE'] = 'ON';
 //VALIDATE FORMS
 $lang['CONF_VALID_POSITION'] = 'right';
+//SIGNIN
+$lang['CONF_SIGNIN_IMG'] = 'ON';
 //REQUEST UNNAMED
 $lang['CONF_UNNA_EXPIRED_DATE'] = 'OFF';
-//REQUEST UNNAMED
+$lang['CONF_STARTING_LINE2_REQUIRED'] = 'OFF';
+//DETAIL UNNAMED
 $lang['CONF_UNNA_ACCOUNT_NUMBER'] = 'OFF';
-//SUGGESTION
-$lang['CONF_SUGGESTION_IE'] = FALSE;
 //AUTHORIZE BULK LIST
 $lang['CONF_BULK_AUTHORIZE'] = 'OFF';
+$lang['CONF_BULK_SELECT_ALL_AUTH'] = 'OFF';
 //REPORT CLOSING BALANCE
 $lang['CONF_NIT_INPUT_BOOL'] = 'OFF';
 $lang['CONF_CLOSING_BALANCE_BOOL'] = 'OFF';
@@ -23,6 +27,7 @@ $lang['CONF_ADD_FILE_BOOL'] = 'OFF';
 $lang['CONF_ADD_BRANCH_BOOL'] = 'OFF';
 //DOWNLOADS OPTIONS FLAGS
 $lang['CONF_VIDEO_BOOL'] = 'OFF';
+$lang['CONF_FILE_SERVICE_BOOL'] = 'OFF';
 $lang['CONF_APPS_BOOL'] = 'OFF';
 //FILES CONF
 $lang['CONF_MANUAL_BOOL'] = 'OFF';
@@ -38,3 +43,4 @@ $lang['CONF_MP4_VIDEO'] = [''];
 $lang['CONF_PDF_ICON'] = 'icon-pdf.svg';
 $lang['CONF_RAR_ICON'] = 'icon-rar.svg';
 $lang['CONF_ZIP_ICON'] = 'icon-zip.svg';
+//UNAMED CARDS FLAGS

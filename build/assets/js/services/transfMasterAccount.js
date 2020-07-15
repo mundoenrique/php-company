@@ -20,6 +20,7 @@ $(function () {
 			$('#cost-trans').text(lang.GEN_CURRENCY + ' ' + params.costoComisionTrans)
 			$('#cost-inquiry').text(lang.GEN_CURRENCY + ' ' + params.costoComisionCons)
 			insertFormInput(false)
+			verifyOperations()
 			$('#pre-loader-table').addClass('hide')
 			$('.hide-table').removeClass('hide')
 			$('#pre-loader').remove();
@@ -64,6 +65,7 @@ $(function () {
 				return request
 			},
 			dataFilter: function (resp) {
+				$('#tableServicesMaster').find('thead > tr').removeClass("selected")
 				var responseTable = jQuery.parseJSON(resp)
 				responseTable = JSON.parse(
 					CryptoJS.AES.decrypt(responseTable.code, responseTable.plot, { format: CryptoJSAesJson }).toString(CryptoJS.enc.Utf8)
@@ -192,6 +194,9 @@ $(function () {
 
 	$('#masterAccountBtn').on('click', function (e) {
 		e.preventDefault();
+		$('#tableServicesMaster').find('thead > tr').removeClass("selected");
+		$('.help-block').text('');
+		$('input, select').removeClass('has-error');
 		form = $('#masterAccountForm');
 		validateForms(form);
 
@@ -233,10 +238,10 @@ $(function () {
 				}
 			}
 
-			inputModal =	'<form id="password-modal">';
+			inputModal =	'<form id="password-modal" name="password-modal" onsubmit="return false;">';
 			inputModal +=		'<div class="form-group col-auto">';
 			inputModal += 		'<div class="input-group">';
-			inputModal += 			'<input class="form-control pwd-input" type="password" name="password" autocomplete="off"';
+			inputModal += 			'<input class="form-control pwd-input pwd" type="password" name="password" autocomplete="off"';
 			inputModal += 				'placeholder="' + lang.GEN_PLACE_PASSWORD + '">';
 			inputModal += 			'<div class="input-group-append">';
 			inputModal += 				'<span class="input-group-text pwd-action" title="' + lang.GEN_SHOW_PASS + '"><i class="icon-view mr-0"></i></span>';
@@ -389,7 +394,7 @@ function sendRequest(action, modalReq, btn) {
 			modalReq: modalReq,
 			cards: cardsInfo,
 			action: action,
-			pass: cryptoPass(form.find('input[type=password]').val().trim())
+			pass: cryptoPass(form.find('input.pwd').val().trim())
 		}
 
 		verb = 'POST'; who = 'Services'; where = 'ActionMasterAccount';
@@ -407,7 +412,7 @@ function sendRequest(action, modalReq, btn) {
 
 			btn.prop('disabled', false);
 			insertFormInput(false);
-			form.find('input[type=password]').val('')
+			form.find('input.pwd').val('')
 			$('#tableServicesMaster').find('tbody > tr input').val('')
 
 			if (response.data.balance) {
@@ -496,5 +501,17 @@ function buildList(response, action) {
 		$('.update').on('click', function() {
 			dataTableReload(false)
 		})
+	}
+}
+
+function verifyOperations() {
+	if (!access.TRASAL) {
+		var column = table.column('4');
+		column.visible(false);
+	}
+
+	if (!access.TRACAR && !access.TRAABO) {
+		var column = table.column('5');
+		column.visible(false);
 	}
 }

@@ -58,10 +58,62 @@ Class Novo_Services extends Novo_Controller {
 			"third_party/jquery.validate",
 			"validate-core-forms",
 			"third_party/additional-methods",
-			'services/cards_inquiry'
+			'services/cardsInquiry'
+		);
+		$this->responseAttr(0, FALSE);
+		$this->render->titlePage = lang('GEN_MENU_SERV_CARD_INQUIRY');
+		$this->views = ['services/'.$view];
+		$this->loadView($view);
+	}
+		/**
+	 * @info Método para limites transaccionales
+	 * @author Hector D. Corredor
+	 * @date July 3th, 2020
+	 */
+	public function transactionalLimits()
+	{
+		log_message('INFO', 'Novo_Services: transactionalLimits Method Initialized');
+
+		$view = 'transactionalLimits';
+		array_push(
+			$this->includeAssets->cssFiles,
+			"third_party/dataTables-1.10.20"
+		);
+		array_push(
+			$this->includeAssets->jsFiles,
+			"third_party/dataTables-1.10.20",
+			"third_party/jquery.validate",
+			"validate-core-forms",
+			"third_party/additional-methods",
+			"third_party/jquery.mask",
+			'services/transactionalLimits'
 		);
 		$this->responseAttr();
-		$this->render->titlePage = lang('GEN_MENU_SERV_CARD_INQUIRY');
+		$this->render->titlePage = lang('GEN_MENU_SERV_TRANS_LIMITS');
+		$this->views = ['services/'.$view];
+		$this->loadView($view);
+	}
+
+	/**
+	 * @info Método para la consulta de tarjetas
+	 * @author G. Jennifer Carolina Cádiz
+	 * @date July 3th, 2020
+	 */
+
+	public function twirlsCommercial()
+	{
+		log_message('INFO', 'Novo_Services: twirlsCommercial Method Initialized');
+
+		$view = 'twirlsCommercial';
+		array_push(
+			$this->includeAssets->jsFiles,
+			"third_party/jquery.validate",
+			"validate-core-forms",
+			"third_party/additional-methods",
+			'services/twirlsCommercial'
+		);
+		$this->responseAttr();
+		$this->render->titlePage = lang('GEN_MENU_SERV_COMM_MONEY_ORDERS');
 		$this->views = ['services/'.$view];
 		$this->loadView($view);
 	}

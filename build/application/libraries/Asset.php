@@ -8,6 +8,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Asset {
 	private $cssFiles;
 	private $jsFiles;
+	private $CI;
 
 	public function __construct()
 	{
@@ -16,8 +17,8 @@ class Asset {
 		$this->cssFiles = [];
 		$this->jsFiles = [];
 
-		$CI =& get_instance();
-		$_SERVER['REMOTE_ADDR'] = $CI->input->ip_address();
+		$this->CI = &get_instance();
+		$_SERVER['REMOTE_ADDR'] = $this->CI->input->ip_address();
 
 	}
 	/**
@@ -41,9 +42,21 @@ class Asset {
 		$file_url = NULL;
 		foreach($this->cssFiles as $fileName) {
 			$file = assetPath('css/'.$fileName.'.css');
+
+			if(!file_exists($file)) {
+				$countriUri = $this->CI->config->item('country-uri').'/';
+				$rootCss = '-'.$this->CI->config->item('client');
+				$baseCss = $this->CI->config->item('client').'-';
+				$search = [$countriUri, $rootCss, $baseCss];
+				$replace = ['default/', '-default', 'default-'];
+				$file = str_replace($search, $replace, $file);
+				$fileName = str_replace($search, $replace, $fileName);
+			}
+
 			$file = $this->versionFiles($file, $fileName, '.css');
 			$file_url .= '<link rel="stylesheet" href="'.assetUrl('css/'.$file).'"/>'.PHP_EOL;
 		}
+
 		return $file_url;
 	}
 	/**
@@ -54,11 +67,13 @@ class Asset {
 	{
 		log_message('INFO', 'NOVO Asset: insertJs method initialized');
 		$file_url = NULL;
+
 		foreach($this->jsFiles as $fileName) {
 			$file = assetPath('js/'.$fileName.'.js');
 			$file = $this->versionFiles($file, $fileName, '.js');
 			$file_url .= '<script src="'.assetUrl('js/'.$file).'"></script>'.PHP_EOL;
 		}
+
 		return $file_url;
 	}
 	/**
@@ -70,7 +85,14 @@ class Asset {
 		log_message('INFO', 'NOVO Asset: insertFile method initialized');
 		$country = $country ? $country.'/' : '';
 		$file = assetPath($folder.'/'.$country.$fileName);
+
+		if (!file_exists($file)) {
+			$file = assetPath($folder.'/default'.'/'.$fileName);
+			$country = 'default/';
+		}
+
 		$version = '?V'.date('Ymd-U', filemtime($file));
+
 		return assetUrl($folder.'/'.$country.$fileName.$version);
 	}
 	/**
@@ -81,11 +103,13 @@ class Asset {
 	{
 		$version = '';
 		$thirdParty = strpos($fileName, 'third_party');
+
 		if($thirdParty === FALSE && file_exists($file)) {
 			$version = '?V'.date('Ymd-U', filemtime($file));
 		} else {
 			$ext = '.min'.$ext;
 		}
+
 		return $fileName.$ext.$version;
 	}
 }

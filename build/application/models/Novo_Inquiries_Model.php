@@ -49,7 +49,6 @@ class Novo_Inquiries_Model extends NOVO_Model {
 		}
 
 		if($this->isResponseRc != 0) {
-			//$this->response->code = 1;
 			$orderStatus[] = (object) [
 				'key' => '',
 				'text' => lang('RESP_TRY_AGAIN')
@@ -216,7 +215,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 				];
 				break;
 			case -1:
-				$this->response->title = lang('BULK_DELETE_TITLE');
+				$this->response->title = 'Anular Orden';
 				$this->response->msg = lang('RESP_PASSWORD_NO_VALID');
 				$this->response->icon = lang('GEN_ICON_WARNING');
 				$this->response->data['btn1'] = [
@@ -275,7 +274,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 				$detailInfo['bulkTypeText'] = mb_strtoupper(mb_strtolower($response->acnombre));
 				$detailInfo['bulkNumber'] = $response->acnumlote;
 				$detailInfo['totalRecords'] = $response->ncantregs;
-				$detailInfo['loadUserName'] = mb_strtoupper(mb_strtolower($response->accodusuarioc));
+				$detailInfo['loadUserName'] = trim($response->accodusuarioc);
 				$detailInfo['bulkDate'] = $response->dtfechorcarga;
 				$detailInfo['bulkStatus'] = $response->cestatus;
 				$detailInfo['bulkStatusText'] = ucfirst(mb_strtolower($response->status));
@@ -291,7 +290,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 							$bulkRecordsHeader = [lang('GEN_TABLE_DNI'), lang('GEN_TABLE_FULL_NAME'), lang('GEN_TABLE_STATUS')];
 							$detailInfo['bulkRecords'] = $this->buildEmisionRecords_Bulk($response->registrosLoteEmision, $acceptAttr);
 						}
-						break;
+					break;
 					case '3':
 					case '6':
 					case 'A':
@@ -301,7 +300,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 							$bulkRecordsHeader = [lang('GEN_TABLE_DNI'), lang('GEN_TABLE_FULL_NAME'), lang('GEN_TABLE_ACCOUNT_NUMBER')];
 							$detailInfo['bulkRecords'] = $this->buildEmisionRecords_Bulk($response->registrosLoteEmision, $acceptAttr);
 						}
-						break;
+					break;
 					case '2':
 						$acceptAttr = ['id_ext_per', 'monto', 'nro_cuenta'];
 
@@ -309,7 +308,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 							$bulkRecordsHeader = [lang('GEN_TABLE_DNI'), lang('GEN_TABLE_AMOUNT'), lang('GEN_TABLE_ACCOUNT_NUMBER')];
 							$detailInfo['bulkRecords'] = $this->buildCreditRecords_Bulk($response->registrosLoteRecarga, $acceptAttr);
 						}
-						break;
+					break;
 					case '5':
 					case 'L':
 					case 'M':
@@ -319,7 +318,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 							$bulkRecordsHeader = [lang('GEN_TABLE_DNI'), lang('GEN_TABLE_AMOUNT'), lang('GEN_TABLE_ACCOUNT_NUMBER'), lang('GEN_TABLE_STATUS')];
 							$detailInfo['bulkRecords'] = $this->buildCreditRecords_Bulk($response->registrosLoteRecarga, $acceptAttr);
 						}
-						break;
+					break;
 					case 'E':
 						$acceptAttr = ['idExtPer', 'nombre', 'apellido', 'beneficiario'];
 
@@ -327,7 +326,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 							$bulkRecordsHeader = [lang('GEN_TABLE_DNI'), lang('GEN_TABLE_EMPLOYEE'), lang('GEN_TABLE_BENEFICIARY')];
 							$detailInfo['bulkRecords'] = $this->buildKindergartenRecords_Bulk($response->registrosLoteGuarderia, $acceptAttr);
 						}
-						break;
+					break;
 					case 'G':
 						$acceptAttr = ['idExtPer', 'nombre', 'apellido', 'beneficiario', 'nro_cuenta'];
 
@@ -335,7 +334,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 							$bulkRecordsHeader = [lang('GEN_TABLE_DNI'), lang('GEN_TABLE_EMPLOYEE'), lang('GEN_TABLE_BENEFICIARY'), lang('GEN_TABLE_ACCOUNT_BENEFICIARY')];
 							$detailInfo['bulkRecords'] = $this->buildKindergartenRecords_Bulk($response->registrosLoteGuarderia, $acceptAttr);
 						}
-						break;
+					break;
 					case 'R':
 					case 'C':
 					case 'N':
@@ -345,7 +344,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 							$bulkRecordsHeader = [lang('GEN_TABLE_ACCOUNT_NUMBER'), lang('GEN_TABLE_DNI')];
 							$detailInfo['bulkRecords'] = $this->buildReplacement_Bulk($response->registrosLoteReposicion, $acceptAttr);
 						}
-						break;
+					break;
 					default:
 						if(isset($response->registros) && count($response->registros) > 0) {
 							array_shift($response->registros->ordenAtributos);
