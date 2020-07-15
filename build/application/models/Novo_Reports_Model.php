@@ -1111,6 +1111,10 @@ class Novo_Reports_Model extends NOVO_Model {
 					$record->monthRecharge1 = $response->mesRecarga1;
 					$record->monthRecharge2 = $response->mesRecarga2;
 					$record->monthRecharge3 =$response->mesRecarga3;
+					$record->totalRecharge1 = $response->totalRecargas1;
+					$record->totalRecharge2 = $response->totalRecargas2;
+					$record->totalRecharge3 =$response->totalRecargas3;
+					$record->totalRecharge =$response->totalRecargas;
 					$record->recharge = $response->recargas;
           array_push(
             $rechargeMadeList,

@@ -67,6 +67,13 @@ $(function () {
 							value.totalProducto
 						]).draw()
 					});
+					table.row.add([
+						lang.GEN_TABLE_TOTALES,
+						response.data.rechargeMadeList[0].totalRecharge1,
+						response.data.rechargeMadeList[0].totalRecharge2,
+						response.data.rechargeMadeList[0].totalRecharge3,
+						response.data.rechargeMadeList[0].totalRecharge
+					]).draw()
 				}
 
 				form = $('#download-rechargemade');
