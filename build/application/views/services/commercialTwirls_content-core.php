@@ -26,21 +26,21 @@
 			<div class="search-criteria-order flex pb-3 flex-column w-100">
 				<span class="line-text mb-2 h4 semibold primary"><?= lang('GEN_SEARCH_CRITERIA'); ?></span>
 				<div class="flex my-2 px-5">
-					<form method="post" class="w-100">
+					<form id="formTwirls" class="w-100">
 						<div class="row flex justify-between">
 							<div class="form-group col-4 col-xl-4">
 								<label for="idNumberP"><?= lang('GEN_TABLE_DNI'); ?></label>
-								<input id="idNumberP" name="idNumberP" class="form-control h5 select-group" type="text" autocomplete="off" disabled>
+								<input id="idNumberP" name="idNumberP" class="form-control h5 select-group" type="text" autocomplete="off" >
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-4 col-xl-4">
 								<label for="cardNumberP"><?= lang('GEN_CARD_NUMBER'); ?></label>
-								<input id="cardNumberP" name="cardNumberP" class="form-control h5 select-group" type="text" autocomplete="off" disabled>
+								<input id="cardNumberP" name="cardNumberP" class="form-control h5 select-group" type="text" autocomplete="off" >
 								<div class="help-block"></div>
 							</div>
 
 							<div class="flex items-center justify-end col-3">
-								<button type="submit" id="card-holder-btn" class="btn btn-primary btn-small btn-loading">
+								<button type="button" id="card-holder-btn" class="btn btn-primary btn-small btn-loading">
 									<?= lang('GEN_BTN_SEARCH'); ?>
 								</button>
 							</div>
@@ -49,8 +49,12 @@
 				</div>
 				<div class="line mb-2"></div>
 			</div>
-
-			<div class="flex pb-5 flex-column">
+			<div id="spinnerBlockBudget" class="hide">
+				<div id="pre-loader" class="mt-2 mx-auto flex justify-center">
+					<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
+				</div>
+			</div>
+			<div class="flex pb-5 flex-column" id="blockResults">
 				<div class="flex light items-center line-text mb-5">
 					<div class="flex tertiary">
 						<span class="inline h4 semibold primary">Resultados</span>

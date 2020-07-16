@@ -511,4 +511,38 @@ class Novo_Services_Model extends NOVO_Model {
 
 		return $this->responseToTheView('callWs_InquiriesActions');
 	}
+
+		/**
+	 * @info Método perteneciente a funcionalidad de giros comerciales
+	 * @author Diego Acosta García
+	 * @date July 15th, 2020
+	 */
+
+	public function callWs_commercialTwirls_Services($dataRequest)
+	{
+		log_message('INFO', 'NOVO Services Model: commercialTwirls Method Initialized');
+
+		$this->className = 'com.novo.objects.MO.TransferenciaMO';
+
+		$this->dataAccessLog->modulo = 'Servicios';
+		$this->dataAccessLog->function = 'Giros Comerciales';
+		$this->dataAccessLog->operation = 'Agregar giros comerciales';
+
+		$this->dataRequest->idOperation = '';
+
+		$this->isResponseRc = 0;
+		switch($this->isResponseRc) {
+			case 0:
+
+				$this->response->code = 0;
+				$this->response->access = [
+					'GIRCOM' => $this->verify_access->verifyAuthorization('GIRCOM')
+				];
+				$this->response->data = [];
+
+			break;
+		}
+
+		return $this->responseToTheView('callWs_commercialTwirls');
+	}
 }
