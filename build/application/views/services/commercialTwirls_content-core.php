@@ -78,7 +78,7 @@
 							<span class="light text">1803752318</span></p>
 					</div>
 				</div>
-
+				<form id="formChecks">
 				<div class="row mx-3">
 					<div id="checked-form" class="form-group col-4 col-lg-4 col-xl-3 pb-3">
 						<label class="block">Agencia de viajes</label>
@@ -208,7 +208,7 @@
 						</div>
 					</div>
 				</div>
-
+				</form>
 				<div class="mx-3 h3">
 					<div class="flex mt-4 items-center">
 						<div class="icon-square bg-option-active" alt=""></div>
@@ -234,7 +234,7 @@
 							<div class="help-block bulk-select text-left"></div>
 						</div>
 						<div class="col-auto">
-							<button id="sign-bulk-btn" class="btn btn-primary btn-small btn-loading flex mx-auto">
+							<button type="button" id="sign-bulk-btn" class="btn btn-primary btn-small btn-loading flex mx-auto">
 								Actualizar</button>
 						</div>
 					</div>

@@ -6,16 +6,31 @@ $(function () {
 	insertFormInput(false);
 
 	$('#card-holder-btn').on('click', function(){
-		var	passData = {
-			idNumberP: $('#idNumberP').val(),
-			cardNumberP: $('#cardNumberP').val()
-		}
+		$('#blockResults').addClass('hidden');
 		var form = $('#formTwirls');
-		validateForms(form)
+		var passData = getDataForm(form);
+
+		validateForms(form);
+
 		if (form.valid()) {
 			$('#spinnerBlockBudget').removeClass("hide");
 			insertFormInput(false);
 			getSwitchTwirls(passData);
+		}
+	});
+
+	$('#sign-bulk-btn').on('click', function(){
+
+		var form = $('#formChecks');
+		var passData = getDataForm(form);
+
+		validateForms(form)
+
+		if (form.valid()) {
+			$('#spinnerBlockBudget').removeClass("hide");
+			insertFormInput(false);
+			console.log(passData);
+			// updateTwirlsCard(passData);
 		}
 	});
 });
@@ -33,5 +48,20 @@ function getSwitchTwirls(passData) {
 				$('#blockResults').removeClass('hidden');
 			}, 3000);
 		}
-})
+	})
+}
+
+function updateTwirlsCard(passData) {
+	verb = "POST"; who = 'Services'; where = 'updateCommercialTwirls'; data = passData;
+	callNovoCore(verb, who, where, data, function(response) {
+			dataResponse = response.data;
+			code = response.code
+			var info = dataResponse;
+
+			if(code == 0){
+				setTimeout(function(){ // Esto es solo para simular el tiempo de ejecucion del serivico y se vea el spinner.
+
+			}, 3000);
+		}
+	})
 }
