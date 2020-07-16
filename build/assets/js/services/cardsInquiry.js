@@ -76,7 +76,6 @@ $(function () {
 	$('#system-info').on('click', '.send-request', function () {
 		form = $('#modalCardsInquiryForm')
 		btnText = $(this).text().trim();
-		$('#accept').removeClass('send-request');
 		applyActions(action, form, $(this));
 	})
 
@@ -146,10 +145,6 @@ function getCardList(request) {
 				{
 					"targets": 12,
 					"visible": response.data.operList.INQUIRY_BALANCE
-				},
-				{
-					"targets": 13,
-					"className": "pb-0 px-1",
 				}
 			],
 			"columns": [
@@ -283,6 +278,7 @@ function applyActions(currentAction, currentForm, currentBtn) {
 
 	if (cardsData.length > 0 && currentForm.valid()) {
 		var cardsInfo = [];
+		$('#accept').removeClass('send-request');
 		$.each(cardsData, function(key, data) {
 			var info = {};
 
