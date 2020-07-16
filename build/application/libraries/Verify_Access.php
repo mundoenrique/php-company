@@ -206,7 +206,7 @@ class Verify_Access {
 				case 'transactionalLimits':
 					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('LIMTRX'));
 				break;
-				case 'twirlsCommercial':
+				case 'commercialTwirls':
 					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('GIRCOM'));
 				break;
 				case 'getReportsList':
