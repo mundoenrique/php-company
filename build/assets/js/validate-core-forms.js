@@ -145,7 +145,8 @@ function validateForms(form) {
 			"cardNumberP": {pattern: numeric, minlength: lang.VALIDATE_MINLENGTH, require_from_group: [1, '.select-group']},
 			"masiveOptions": {requiredSelect: true},
 			"documentId": {required: true, pattern: alphanum},
-			"documentType": {requiredSelect: true}
+			"documentType": {requiredSelect: true},
+			"optCode": {required: true, pattern: alphanum},
 		},
 		messages: {
 			"user_login": lang.VALIDATE_USERLOGIN,
@@ -227,6 +228,7 @@ function validateForms(form) {
 			"masiveOptions": lang.VALIDATE_OPTION,
 			"documentId": lang.VALIDATE_DOCUMENT_ID,
 			"documentType": lang.VALIDATE_SELECT_DOCTYPE,
+			"optCode": lang.VALIDATE_OTP_CODE,
 		},
 		errorPlacement: function(error, element) {
 			$(element).closest('.form-group').find('.help-block').html(error.html());

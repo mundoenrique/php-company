@@ -128,6 +128,7 @@ class Verify_Access {
 					$auth = lang('CONF_RECOV_PASS') == 'ON';
 				break;
 				case 'recoverAccess':
+				case 'validateOtp':
 					$auth = lang('CONF_RECOV_ACCESS') == 'ON';
 				break;
 				case 'benefits':

@@ -6,6 +6,7 @@ $lang['GEN-LOGO-HEADER'] = 'logo-menu.svg';
 $lang['GEN-LOGO-BIG'] = 'logo-signin.png';
 $lang['GEN_ALTERNATIVE_TEXT'] = 'Produbanco';
 $lang['GEN_RECOVER_PASS_TITLE'] = 'Recuperar acceso';
+$lang['GEN_OTP'] = 'Enviamos un correo a %s con tu código de seguridad, indicalo a continuación.';
 //LINKS
 $lang['GEN_LINK_RECOVER_ACCESS'] = 'recuperar-acceso';
 //FOOTER

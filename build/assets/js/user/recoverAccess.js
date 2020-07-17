@@ -19,9 +19,10 @@ $(function() {
 			callNovoCore(verb, who, where, data, function(response) {
 
 				if (response.code == 0) {
+					$('#accept').addClass('send-otp');
 					var inputModal;
 					inputModal = response.msg;
-					inputModal +=	'<form id="otpModal" name="otpModal" onsubmit="return false">';
+					inputModal +=	'<form id="otpModal" name="otpModal" onsubmit="return false" class="pt-2">';
 					inputModal +=		'<div class="form-group col-auto">';
 					inputModal += 		'<div class="input-group">';
 					inputModal += 			'<input class="form-control" type="text" id="optCode" name="optCode" autocomplete="off">';
@@ -40,13 +41,14 @@ $(function() {
 		}
 	})
 
-	$('#accept').on('click', function(e) {
+	$('#system-info').on('click', '.send-otp', function(e) {
 		e.preventDefault();
 		form = $('#otpModal');
 		formInputTrim(form);
 		validateForms(form);
 
 		if (form.valid()) {
+			$('#accept').removeClass('send-otp');
 			btnText = $(this).text();
 			data = getDataForm(form);
 			data.email = $('#email').val();
@@ -54,13 +56,12 @@ $(function() {
 			.html(loader)
 			.prop('disabled', true)
 			insertFormInput(true);
-			verb = 'POST'; who = 'User'; where = '';
+			verb = 'POST'; who = 'User'; where = 'ValidateOtp';
 			callNovoCore(verb, who, where, data, function(response) {
 				response.code == 0 ? $('form')[0].reset() : '';
 				insertFormInput(false)
 			})
 		}
-
-	})
+	});
 
 })

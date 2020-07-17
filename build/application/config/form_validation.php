@@ -78,6 +78,13 @@ $config = [
 			'rules' => 'trim|regex_match[/^([a-zA-Z]+[0-9_.+-]*)+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/]|required'
 		]
 	],
+	'validateOtp' => [
+		[
+			'field' => 'optCode',
+			'label' => 'optCode',
+			'rules' => 'trim|alpha_numeric|required'
+		]
+	],
 	'changePassword' => [
 		[
 			'field' => 'currentPass',

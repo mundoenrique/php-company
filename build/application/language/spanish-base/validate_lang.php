@@ -48,3 +48,4 @@ $lang['VALIDATE_MINLENGTH'] = 1;
 $lang['VALIDATE_SELECT_GROUP'] = 'Selecciona alguno de estos criterios';
 $lang['VALIDATE_DOCUMENT_ID'] = 'Indica un número de identificación válido';
 $lang['VALIDATE_SELECT_DOCTYPE'] = 'Selecciona un tipo de documento de identidad';
+$lang['VALIDATE_OTP_CODE'] = 'Ingresa un código de seguridad válido, letras y números';
