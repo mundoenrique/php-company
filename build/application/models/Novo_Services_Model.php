@@ -376,7 +376,7 @@ class Novo_Services_Model extends NOVO_Model {
 						$record->issueStatus = trim($issueStatus);
 						$record->cardStatus = trim(ucfirst(mb_strtolower($cards->edoPlastico)));
 						$record->name = ucwords(mb_strtolower($cards->nombre));
-						$record->idNumber = $cards->cedula;
+						$record->idNumber = substr($cards->cedula, -6) == substr($cards->nroTarjeta, -6) ? '' : $cards->cedula;
 						$record->email = $cards->email;
 						$record->movilNumber = $cards->numCelular;
 						$record->names = $cards->nombres;
