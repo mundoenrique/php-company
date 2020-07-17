@@ -83,9 +83,10 @@
 								<tr>
 									<th class="toggle-all"></th>
 									<th><?= lang('GEN_EMAIL'); ?></th>
-									<th>Celular</th>
+									<th><?= lang('GEN_TABLE_MOVIL_NUMBER') ?></th>
 									<th><?= lang('GEN_TABLE_NAME'); ?></th>
 									<th><?= lang('GEN_TABLE_LASTNAME') ?></th>
+									<th><?= lang('GEN_TABLE_DNI') ?></th>
 									<th><?= lang('GEN_TABLE_CARD_NUMBER'); ?></th>
 									<th><?= lang('GEN_TABLE_ORDER_NRO'); ?></th>
 									<th><?= lang('GEN_TABLE_BULK_NUMBER'); ?></th>

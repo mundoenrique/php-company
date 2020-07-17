@@ -377,6 +377,7 @@ class Novo_Services_Model extends NOVO_Model {
 						$record->cardStatus = trim(ucfirst(mb_strtolower($cards->edoPlastico)));
 						$record->name = ucwords(mb_strtolower($cards->nombre));
 						$record->idNumber = substr($cards->cedula, -6) == substr($cards->nroTarjeta, -6) ? '' : $cards->cedula;
+						$record->idNumberSend = $cards->cedula;
 						$record->email = $cards->email;
 						$record->movilNumber = $cards->numCelular;
 						$record->names = $cards->nombres;
@@ -465,7 +466,7 @@ class Novo_Services_Model extends NOVO_Model {
 				'edoNuevo' => lang('SERVICES_INQUIRY_'.$dataRequest->action),
 				'edoAnterior' => $list->issueStatus,
 				'numeroTarjeta' => $list->cardNumber,
-				'idExtPer' => $list->idNumber,
+				'idExtPer' => $list->idNumberSend,
 				'idExtEmp' => $this->session->enterpriseInf->idFiscal,
 				'accodcia' => $this->session->enterpriseInf->enterpriseCode,
 			];

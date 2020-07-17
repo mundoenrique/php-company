@@ -143,7 +143,11 @@ function getCardList(request) {
 					"visible": false
 				},
 				{
-					"targets": 12,
+					"targets": 5,
+					"visible": false
+				},
+				{
+					"targets": 13,
 					"visible": response.data.operList.INQUIRY_BALANCE
 				}
 			],
@@ -157,6 +161,7 @@ function getCardList(request) {
 				{ data: 'movilNumber' },
 				{ data: 'names' },
 				{ data: 'lastName' },
+				{ data: 'idNumberSend' },
 				{ data: 'cardNumber' },
 				{ data: 'orderNumber' },
 				{ data: 'bulkNumber' },
