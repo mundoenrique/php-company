@@ -54,6 +54,7 @@ $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 //Asynchronous
 $route['(:any)/async-call'] = "novo_CallModels";
+$route['(:any)/single'] = "novo_CallModels";
 //User
 $route['(:any)/ingresar/(:any)']['GET'] = "Novo_User/singleSignon/$2";
 $route['(:any)/ingresar']['POST'] = "Novo_User/singleSignon";
@@ -87,6 +88,8 @@ $route['(:any)/consulta-lote'] = "Novo_Inquiries/bulkDetail";
 //services
 $route['(:any)/transf-cuenta-maestra'] = "Novo_Services/transfMasterAccount";
 $route['(:any)/consulta-tarjetas'] = "Novo_Services/cardsInquiry";
+$route['(:any)/limites-transaccionales'] = "Novo_Services/transactionalLimits";
+$route['(:any)/giros-comerciales'] = "Novo_Services/twirlsCommercial";
 //DownloadFile
 $route['(:any)/descargar-archivo'] = "Novo_DownloadFiles/exportFiles";
 //Reports

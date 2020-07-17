@@ -407,7 +407,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 			'codigoGrupo' => $this->session->enterpriseInf->enterpriseGroup
 		];
 
-		$response = $this->sendToService('ConfirmBulk');
+		$response = $this->sendToService('callWs_ConfirmBulk');
 
 		switch ($this->isResponseRc) {
 			case 0:
@@ -430,13 +430,19 @@ class Novo_Bulk_Model extends NOVO_Model {
 				$this->response->msg = lang('BULK_CONFIRM_FAIL');
 				$this->response->data['btn1']['link'] = 'cargar-lotes';
 				break;
+			case -436:
+				$this->response->code = 0;
+				$this->response->title = lang('BULK_CONFIRM_TITLE');
+				$this->response->msg = lang('BULK_CONFIRM_FAIL_BANK_RESPONSE');
+				$this->response->data['btn1']['link'] = 'cargar-lotes';
+				break;
 		}
 
 		if($this->isResponseRc != 0) {
 			$this->session->set_flashdata('bulkConfirmInfo', $bulkConfirmInfo);
 		}
 
-		return $this->responseToTheView('ConfirmBulk');
+		return $this->responseToTheView('callWs_ConfirmBulk');
 	}
 	/**
 	 * @info Obtiene la lista de lotes por autorizar
@@ -1293,7 +1299,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 			'bulkHeader' => [
 				lang('GEN_TABLE_CARD_NUMBER'),
 				lang('GEN_TABLE_ACCOUNT_NUMBER'),
-				lang('GEN_TABLE_ID_DOC'),
+				lang('GEN_TABLE_DNI'),
 				lang('GEN_TABLE_CARDHOLDER'),
 				lang('GEN_TABLE_STATUS'),
 			],
@@ -1333,7 +1339,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 			break;
 			case -150:
 				$this->response->title = 'Cuentas Innominadas';
-				$this->response->msg = 'Todas las tarjetas del lote han sido afiliadas';
+				$this->response->msg = lang('BULK_UNNA_REQ_NONCARDS');
 				$this->response->icon = lang('GEN_ICON_INFO');
 				$this->response->data->resp['btn1']['link'] = lang('GEN_LINK_BULK_UNNAMED_AFFIL');
 			break;

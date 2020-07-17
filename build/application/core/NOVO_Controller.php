@@ -195,7 +195,8 @@ class NOVO_Controller extends CI_Controller {
 			}
 
 		} else {
-			redirect(base_url('inicio'), 'location');
+			$linkredirect = AUTO_LOGIN ? 'ingresar/fin' : 'inicio';
+			redirect(base_url($linkredirect), 'location');
 		}
 
 	}

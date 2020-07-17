@@ -79,7 +79,7 @@ class Novo_User extends NOVO_Controller {
 	{
 		log_message('INFO', 'NOVO User: singleSignon Method Initialized');
 
-		$view = 'single-signin';
+		$view = 'singleSignon';
 		$this->render->send = FALSE;
 
 		if ($sessionId) {
@@ -92,7 +92,7 @@ class Novo_User extends NOVO_Controller {
 		if ($sessionId != 'fin') {
 			array_push(
 				$this->includeAssets->jsFiles,
-				'user/single-signin'
+				'user/singleSignon'
 			);
 		}
 
@@ -192,12 +192,8 @@ class Novo_User extends NOVO_Controller {
 		if($redirect == 'fin' || AUTO_LOGIN) {
 			$pos = array_search('menu-datepicker', $this->includeAssets->jsFiles);
 			$this->render->action = base_url('inicio');
-			$this->render->showBtn = TRUE;
+			$this->render->showBtn = AUTO_LOGIN ? FALSE : TRUE;
 			$this->render->sessionEnd = novoLang(lang('GEN_EXPIRED_SESSION'), lang('GEN_SYSTEM_NAME'));
-
-			if(AUTO_LOGIN) {
-				$this->render->showBtn = FALSE;
-			}
 
 			if ($this->session->flashdata('unauthorized') != NULL) {
 				$this->render->sessionEnd = $this->session->flashdata('unauthorized');

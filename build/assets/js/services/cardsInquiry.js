@@ -19,6 +19,9 @@ $(function () {
 
 	$('#searchCardsBtn').on('click', function (e) {
 		e.preventDefault();
+		$('.help-block').text('');
+		$('input, select').removeClass('has-error');
+		$('#tableCardInquiry').find('thead > tr').removeClass('selected');
 		form = $('#searchCardsForm');
 		formInputTrim(form);
 		validateForms(form);
@@ -54,7 +57,7 @@ $(function () {
 				action: 'close'
 			}
 		}
-		inputModal =	'<form id="modalCardsInquiryForm" name="modalCardsInquiryForm">';
+		inputModal =	'<form id="modalCardsInquiryForm" name="modalCardsInquiryForm" onsubmit="return false;">';
 		inputModal +=		'<div class="form-group col-auto">';
 		inputModal += 		'<div class="input-group">';
 		inputModal += 			'<input class="form-control pwd-input pwd" type="password" name="password" autocomplete="off"';
@@ -73,7 +76,6 @@ $(function () {
 	$('#system-info').on('click', '.send-request', function () {
 		form = $('#modalCardsInquiryForm')
 		btnText = $(this).text().trim();
-		$('#accept').removeClass('send-request');
 		applyActions(action, form, $(this));
 	})
 
@@ -141,12 +143,12 @@ function getCardList(request) {
 					"visible": false
 				},
 				{
-					"targets": 12,
-					"visible": response.data.operList.INQUIRY_BALANCE
+					"targets": 5,
+					"visible": false
 				},
 				{
 					"targets": 13,
-					"className": "pb-0 px-1",
+					"visible": response.data.operList.INQUIRY_BALANCE
 				}
 			],
 			"columns": [
@@ -159,6 +161,7 @@ function getCardList(request) {
 				{ data: 'movilNumber' },
 				{ data: 'names' },
 				{ data: 'lastName' },
+				{ data: 'idNumberSend' },
 				{ data: 'cardNumber' },
 				{ data: 'orderNumber' },
 				{ data: 'bulkNumber' },
@@ -280,6 +283,7 @@ function applyActions(currentAction, currentForm, currentBtn) {
 
 	if (cardsData.length > 0 && currentForm.valid()) {
 		var cardsInfo = [];
+		$('#accept').removeClass('send-request');
 		$.each(cardsData, function(key, data) {
 			var info = {};
 

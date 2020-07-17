@@ -28,6 +28,16 @@ $config = [
 			'field' => 'pass',
 			'label' => 'pass',
 			'rules' => 'trim|required'
+		],
+		[
+			'field' => 'codeOTP',
+			'label' => 'codeOTP',
+			'rules' => 'trim|regex_match[/^[a-z0-9]+$/i]'
+		],
+		[
+			'field' => 'saveIP',
+			'label' => 'saveIP',
+			'rules' => 'trim'
 		]
 	],
 	'singleSignon' => [

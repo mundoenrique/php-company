@@ -59,7 +59,7 @@ class Novo_CallModels extends Novo_Controller {
 		}
 
 		$data = $this->dataResponse->data;
-		$this->dataResponse->data = $this->verify_access->validateRedirect($data, $this->countryUri, $this->appUserName);
+		$this->dataResponse->data = $this->verify_access->validateRedirect($data, $this->countryUri);
 		$dataResponse = $this->cryptography->encrypt($this->dataResponse);
 		$this->output->set_content_type('application/json')->set_output(json_encode($dataResponse, JSON_UNESCAPED_UNICODE));
 	}

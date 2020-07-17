@@ -17,8 +17,9 @@ function validateForms(form) {
 	var alphabetical = /^[a-z]+$/i;
 	var text = /^['a-z0-9ñáéíóú ,.:()']+$/i;
 	var usdAmount = /^[0-9]+(\.[0-9]*)?$/;
+	var validCode = /^[a-z0-9]+$/i;
 	var fiscalReg = lang.VALIDATE_FISCAL_REGISTRY;
-	var idNumberReg = new RegExp(lang.VALIDATE_REG_ID_NUMBER, 'gi');
+	var idNumberReg = new RegExp(lang.VALIDATE_REG_ID_NUMBER, 'i');
 	var date = {
 		dmy: /^(0?[1-9]|[12][0-9]|3[01])\/(0?[1-9]|1[012])\/[0-9]{4}$/,
 		my: /^(0?[1-9]|1[012])\/[0-9]{4}$/,
@@ -98,17 +99,35 @@ function validateForms(form) {
 			"card-number": {required: true, pattern: numeric, maxlength: 16, minlength: 16},
 			"card-number-sel": {requiredSelect: true},
 			"inquiry-type": {requiredSelect: true},
+			"codeOTP": {required: true, pattern: validCode, maxlength: 8},
+			"saveIP": {pattern: numeric},
 			"expired-date": {required: true, pattern: date.my},
 			"max-cards": {required: true, pattern: numeric, maxcards: true},
-			"starting-line1": {required: true, pattern: alphanumspace},
-			"starting-line2": {required: true, pattern: alphanumspace},
+			"starting-line1": {
+				required: {
+					depends: function() {
+
+						return lang.CONF_STARTING_LINE1_REQUIRED == 'ON';
+					}
+				},
+				pattern: alphanumspace
+			},
+			"starting-line2": {
+				required: {
+					depends: function() {
+
+						return lang.CONF_STARTING_LINE2_REQUIRED == 'ON';
+					}
+				},
+				pattern: alphanumspace
+			},
 			"bulk-number": {pattern: numeric},
 			"enterpriseName": {required: true},
 			"productName": {required: true},
 			"initialDate": {required: true, pattern: date.dmy},
 			"finalDate": {required: true, pattern: date.dmy},
 			"idNumber": {pattern: idNumberReg},
-			"anio-consolid": {required: true},
+			"anio-consolid": { requiredSelect: true, min: 1, pattern: date.y},
 			"cardNumber": {
 				required: {
 					depends: function (element) {
@@ -178,6 +197,11 @@ function validateForms(form) {
 			"card-number": lang.VALIDATE_CARD_NUMBER,
 			"card-number-sel": lang.VALIDATE_CARD_NUMBER_SEL,
 			"inquiry-type": lang.VALIDATE_INQUIRY_TYPE_SEL,
+			"codeOTP": {
+				required: lang.GEN_CODE_OTP_REQUIRED,
+				pattern: lang.GEN_CODE_OTP_INVALID_FORMAT,
+				maxlength: lang.GEN_CODE_OTP_INVALID_FORMAT
+			},
 			"expired-date": lang.VALIDATE_SELECTED_DATE,
 			"max-cards": lang.VALIDATE_TOTAL_CARDS,
 			"starting-line1": lang.VALIDATE_STARTING_LINE,

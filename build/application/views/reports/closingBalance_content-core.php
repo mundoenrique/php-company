@@ -85,27 +85,26 @@
 						</button>
 					</div>
 
-					<table id="balancesClosing" class="cell-border h6 display responsive w-100">
+				<table id="balancesClosing" class="cell-border h6 display responsive w-100">
 					<thead class="bg-primary secondary regular">
-                    <tr  id="datos-principales" >
-								<th><?= lang('GEN_ACCOUNT_CLOSING_BALANCE') ?></th>
-								<th><?= lang('GEN_FISCAL_CLOSING_BALANCE') ?></th>
-								<th>Tarjeta</th>
-								<th>Saldo inicial</th>
-								<?php if (lang('CONF_CLOSING_BALANCE_BOOL') == 'ON' ): ?>
-								<th>Última actividad</th>
-								<?php endif; ?>
-							</tr>
-												</thead>
-
-                        <tbody id="tbody-datos-general" class = "tbody-reportes">
-                        </tbody>
-										</table>
-										<div id="hid" class=" hide">
-									<div id="pre-loader" class="mt-2 mx-auto flex justify-center">
-										<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
-									</div>
-								</div>
+            <tr  id="datos-principales" >
+							<th><?= lang('REPORTS_TABLE_CARD') ?></th>
+							<th><?= lang('REPORTS_TABLE_CARDHOLDER') ?></th>
+							<th><?= lang('REPORTS_TABLE_DNI') ?></th>
+							<th><?= lang('REPORTS_TABLE_BALANCE') ?></th>
+							<?php if (lang('CONF_CLOSING_BALANCE_BOOL') == 'ON' ): ?>
+								<th><?= lang('REPORTS_TABLE_LAST_ACTIVITY') ?></th>
+							<?php endif; ?>
+						</tr>
+					</thead>
+          <tbody id="tbody-datos-general" class = "tbody-reportes">
+          </tbody>
+				</table>
+					<div id="hid" class=" hide">
+						<div id="pre-loader" class="mt-2 mx-auto flex justify-center">
+							<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
+						</div>
+					</div>
 					<div class="line my-2"></div>
 				</div>
 				<div class="my-5 py-4 center none">
