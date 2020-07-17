@@ -164,9 +164,9 @@ function validateForms(form, options) {
 			},
 			"start-my-date": "Falla la fecha",
 			"codeOTP": {
-				required: lang.GEN_CODE_OTP_REQUIRED,
-				pattern: lang.GEN_CODE_OTP_INVALID_FORMAT,
-				maxlength: lang.GEN_CODE_OTP_INVALID_FORMAT
+				required: 'Este campo es obligatorio.',
+				pattern: 'El formato de código es inválido.',
+				maxlength: 'El formato de código es inválido.'
 			},
 		}
 	});
