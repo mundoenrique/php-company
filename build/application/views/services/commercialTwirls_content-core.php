@@ -40,16 +40,18 @@
 							</div>
 
 							<div class="flex items-center justify-end col-3">
-								<button type="button" id="card-holder-btn" class="btn btn-primary btn-small btn-loading">
+								<?php if($this->verify_access->verifyAuthorization('GIRCOM', 	'ACTGIR')): ?>
+									<button type="button" id="card-holder-btn" class="btn btn-primary btn-small btn-loading">
 									<?= lang('GEN_BTN_SEARCH'); ?>
-								</button>
+									</button>
+								<?php endif; ?>
 							</div>
 						</div>
 					</form>
 				</div>
 				<div class="line mb-2"></div>
 			</div>
-			<div id="spinnerBlockBudget" class="hide">
+			<div id="spinnerBlock" class="hide">
 				<div id="pre-loader" class="mt-2 mx-auto flex justify-center">
 					<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
 				</div>
@@ -78,149 +80,146 @@
 							<span class="light text">1803752318</span></p>
 					</div>
 				</div>
-				<form id="formChecks">
-				<div class="row mx-3">
-					<div id="checked-form" class="form-group col-4 col-lg-4 col-xl-3 pb-3">
-						<label class="block">Agencia de viajes</label>
-						<div class="custom-control custom-switch custom-control-inline">
-							<input id="travelAgency" class="custom-control-input" type="checkbox" name="travelAgency">
-							<label class="custom-control-label" for="travelAgency"></label>
-						</div>
+				<form id="sign-form" >
+					<div class="row mx-3">
+						<div id="checked-form" class="form-group col-4 col-lg-4 col-xl-3 pb-3">
+							<label class="block">Agencia de viajes</label>
+							<div class="custom-control custom-switch custom-control-inline">
+								<input id="travelAgency" class="custom-control-input" type="checkbox" name="travelAgency" value="off">
+								<label class="custom-control-label" for="travelAgency"></label>
+							</div>
 
-					</div>
-					<div id="checked-form" class="form-group col-4 col-lg-4 col-xl-3 pb-3">
-						<label class="block">Aseguradoras</label>
-						<div class="custom-control custom-switch custom-control-inline">
-							<input id="insurers" class="custom-control-input" type="checkbox" name="insurers">
-							<label class="custom-control-label" for="insurers"></label>
+						</div>
+						<div id="checked-form" class="form-group col-4 col-lg-4 col-xl-3 pb-3">
+							<label class="block">Aseguradoras</label>
+							<div class="custom-control custom-switch custom-control-inline">
+								<input id="insurers" class="custom-control-input" type="checkbox" name="insurers" value="off">
+								<label class="custom-control-label" for="insurers"></label>
+							</div>
+						</div>
+						<div id="checked-form" class="form-group col-4 col-lg-4 col-xl-3 pb-3">
+							<label class="block">Beneficiencia</label>
+							<div class="custom-control custom-switch custom-control-inline">
+								<input id="charity" class="custom-control-input" type="checkbox" name="charity" value="off">
+								<label class="custom-control-label" for="charity"></label>
+							</div>
+						</div>
+						<div id="checked-form" class="form-group col-4 col-lg-4 col-xl-3 pb-3">
+							<label class="block">Entretenimiento</label>
+							<div class="custom-control custom-switch custom-control-inline">
+								<input id="entertainment" class="custom-control-input" type="checkbox" name="entertainment" value="off">
+								<label class="custom-control-label" for="entertainment"></label>
+							</div>
+						</div>
+						<div id="checked-form" class="form-group col-4 col-lg-4 col-xl-3 pb-3">
+							<label class="block">Estacionamientos</label>
+							<div class="custom-control custom-switch custom-control-inline">
+								<input id="parking" class="custom-control-input" type="checkbox" name="parking" value="off">
+								<label class="custom-control-label" for="parking"></label>
+							</div>
+						</div>
+						<div id="checked-form" class="form-group col-4 col-lg-4 col-xl-3 pb-3">
+							<label class="block">Gasolineras</label>
+							<div class="custom-control custom-switch custom-control-inline">
+								<input id="gaStations" class="custom-control-input" type="checkbox" name="gaStations" value="off">
+								<label class="custom-control-label" for="gaStations"></label>
+							</div>
+						</div>
+						<div id="checked-form" class="form-group col-4 col-lg-4 col-xl-3 pb-3">
+							<label class="block">Gobiernos</label>
+							<div class="custom-control custom-switch custom-control-inline">
+								<input id="governments" class="custom-control-input" type="checkbox" name="governments" value="off">
+								<label class="custom-control-label" for="governments"></label>
+							</div>
+						</div>
+						<div id="checked-form" class="form-group col-4 col-lg-4 col-xl-3 pb-3">
+							<label class="block">Hospitales</label>
+							<div class="custom-control custom-switch custom-control-inline">
+								<input id="hospitals" class="custom-control-input" type="checkbox" name="hospitals" value="off">
+								<label class="custom-control-label" for="hospitals"></label>
+							</div>
+						</div>
+						<div id="checked-form" class="form-group col-4 col-lg-4 col-xl-3 pb-3">
+							<label class="block">Hoteles</label>
+							<div class="custom-control custom-switch custom-control-inline">
+								<input id="hotels"  class="custom-control-input" type="checkbox" name="hotels" value="off">
+								<label class="custom-control-label" for="hotels"></label>
+							</div>
+						</div>
+						<div id="checked-form" class="form-group col-4 col-lg-4 col-xl-3 pb-3">
+							<label class="block">Peaje</label>
+							<div class="custom-control custom-switch custom-control-inline">
+								<input id="debit" class="custom-control-input" type="checkbox" name="debit" value="off">
+								<label class="custom-control-label" for="debit"></label>
+							</div>
+						</div>
+						<div id="checked-form" class="form-group col-4 col-lg-4 col-xl-3 pb-3">
+							<label class="block">Renta de autos</label>
+							<div class="custom-control custom-switch custom-control-inline">
+								<input id="toll" class="custom-control-input" type="checkbox" name="toll" value="off">
+								<label class="custom-control-label" for="toll"></label>
+							</div>
+						</div>
+						<div id="checked-form" class="form-group col-4 col-lg-4 col-xl-3 pb-3">
+							<label class="block">Restaurantes</label>
+							<div class="custom-control custom-switch custom-control-inline">
+								<input id="restaurants" class="custom-control-input" type="checkbox" name="restaurants" value="off">
+								<label class="custom-control-label" for="restaurants"></label>
+							</div>
+						</div>
+						<div id="checked-form" class="form-group col-4 col-lg-4 col-xl-3 pb-3">
+							<label class="block">Supermercados</label>
+							<div class="custom-control custom-switch custom-control-inline">
+								<input id="supermarkets" class="custom-control-input" type="checkbox" name="supermarkets" value="off">
+								<label class="custom-control-label" for="supermarkets"></label>
+							</div>
+						</div>
+						<div id="checked-form" class="form-group col-4 col-lg-4 col-xl-3 pb-3">
+							<label class="block">Telecomunicaciones</label>
+							<div class="custom-control custom-switch custom-control-inline">
+								<input id="telecommunication" class="custom-control-input" type="checkbox" name="telecommunication" value="off">
+								<label class="custom-control-label" for="telecommunication"></label>
+							</div>
+						</div>
+						<div id="checked-form" class="form-group col-4 col-lg-4 col-xl-3 pb-3">
+							<label class="block">Transporte aéreo</label>
+							<div class="custom-control custom-switch custom-control-inline">
+								<input id="airTransport" class="custom-control-input" type="checkbox" name="airTransport" value="off">
+								<label class="custom-control-label" for="airTransport"></label>
+							</div>
+						</div>
+						<div id="checked-form" class="form-group col-4 col-lg-4 col-xl-3 pb-3">
+							<label class="block">Colegios y universidades</label>
+							<div class="custom-control custom-switch custom-control-inline">
+								<input id="collegesUniversities" class="custom-control-input" type="checkbox" name="collegesUniversities" value="off">
+								<label class="custom-control-label" for="collegesUniversities"></label>
+							</div>
+						</div>
+						<div id="checked-form" class="form-group col-4 col-lg-4 col-xl-3 pb-3">
+						<label class="block">Ventas al detalle (retail)</label>
+							<div class="custom-control custom-switch custom-control-inline">
+								<input id="retailSales" class="custom-control-input" type="checkbox" name="retailSales" value="off">
+								<label class="custom-control-label" for="retailSales"></label>
+							</div>
+						</div>
+						<div id="checked-form" class="form-group col-4 col-lg-4 col-xl-3 pb-3">
+						<label class="block">Transporte terrestre de pasajeros</label>
+							<div class="custom-control custom-switch custom-control-inline">
+								<input id="passengerTransportation" class="custom-control-input" type="checkbox" name="passengerTransportation" value="off">
+								<label class="custom-control-label" for="passengerTransportation"></label>
+							</div>
 						</div>
 					</div>
-					<div id="checked-form" class="form-group col-4 col-lg-4 col-xl-3 pb-3">
-						<label class="block">Beneficiencia</label>
-						<div class="custom-control custom-switch custom-control-inline">
-							<input id="charity" class="custom-control-input" type="checkbox" name="charity">
-							<label class="custom-control-label" for="charity"></label>
+					<div class="mx-3 h3">
+						<div class="flex mt-4 items-center">
+							<div class="icon-square bg-option-active" alt=""></div>
+							<span class="pl-1 h6">Opción activa.</span>
+						</div>
+						<div class="flex mt-2 items-center">
+							<div class="icon-square bg-option-not-active" alt=""></div>
+							<span class="pl-1 h6">Opción no activa.</span>
 						</div>
 					</div>
-					<div id="checked-form" class="form-group col-4 col-lg-4 col-xl-3 pb-3">
-						<label class="block">Entretenimiento</label>
-						<div class="custom-control custom-switch custom-control-inline">
-							<input id="entertainment" class="custom-control-input" type="checkbox" name="entertainment">
-							<label class="custom-control-label" for="entertainment"></label>
-						</div>
-					</div>
-					<div id="checked-form" class="form-group col-4 col-lg-4 col-xl-3 pb-3">
-						<label class="block">Estacionamientos</label>
-						<div class="custom-control custom-switch custom-control-inline">
-							<input id="parking" class="custom-control-input" type="checkbox" name="parking">
-							<label class="custom-control-label" for="parking"></label>
-						</div>
-					</div>
-					<div id="checked-form" class="form-group col-4 col-lg-4 col-xl-3 pb-3">
-						<label class="block">Gasolineras</label>
-						<div class="custom-control custom-switch custom-control-inline">
-							<input id="gaStations" class="custom-control-input" type="checkbox" name="gaStations">
-							<label class="custom-control-label" for="gaStations"></label>
-						</div>
-					</div>
-					<div id="checked-form" class="form-group col-4 col-lg-4 col-xl-3 pb-3">
-						<label class="block">Gobiernos</label>
-						<div class="custom-control custom-switch custom-control-inline">
-							<input id="governments" class="custom-control-input" type="checkbox" name="governments">
-							<label class="custom-control-label" for="governments"></label>
-						</div>
-					</div>
-					<div id="checked-form" class="form-group col-4 col-lg-4 col-xl-3 pb-3">
-						<label class="block">Hospitales</label>
-						<div class="custom-control custom-switch custom-control-inline">
-							<input id="hospitals" class="custom-control-input" type="checkbox" name="hospitals">
-							<label class="custom-control-label" for="hospitals"></label>
-						</div>
-					</div>
-					<div id="checked-form" class="form-group col-4 col-lg-4 col-xl-3 pb-3">
-						<label class="block">Hoteles</label>
-						<div class="custom-control custom-switch custom-control-inline">
-							<input id="hotels" class="custom-control-input" type="checkbox" name="hotels">
-							<label class="custom-control-label" for="hotels"></label>
-						</div>
-					</div>
-					<div id="checked-form" class="form-group col-4 col-lg-4 col-xl-3 pb-3">
-						<label class="block">Peaje</label>
-						<div class="custom-control custom-switch custom-control-inline">
-							<input id="debit" class="custom-control-input" type="checkbox" name="debit">
-							<label class="custom-control-label" for="debit"></label>
-						</div>
-					</div>
-					<div id="checked-form" class="form-group col-4 col-lg-4 col-xl-3 pb-3">
-						<label class="block">Renta de autos</label>
-						<div class="custom-control custom-switch custom-control-inline">
-							<input id="toll" class="custom-control-input" type="checkbox" name="toll">
-							<label class="custom-control-label" for="toll"></label>
-						</div>
-					</div>
-					<div id="checked-form" class="form-group col-4 col-lg-4 col-xl-3 pb-3">
-						<label class="block">Restaurantes</label>
-						<div class="custom-control custom-switch custom-control-inline">
-							<input id="restaurants" class="custom-control-input" type="checkbox" name="restaurants">
-							<label class="custom-control-label" for="restaurants"></label>
-						</div>
-					</div>
-					<div id="checked-form" class="form-group col-4 col-lg-4 col-xl-3 pb-3">
-						<label class="block">Supermercados</label>
-						<div class="custom-control custom-switch custom-control-inline">
-							<input id="supermarkets" class="custom-control-input" type="checkbox" name="supermarkets">
-							<label class="custom-control-label" for="supermarkets"></label>
-						</div>
-					</div>
-					<div id="checked-form" class="form-group col-4 col-lg-4 col-xl-3 pb-3">
-						<label class="block">Telecomunicaciones</label>
-						<div class="custom-control custom-switch custom-control-inline">
-							<input id="telecommunication" class="custom-control-input" type="checkbox" name="telecommunication">
-							<label class="custom-control-label" for="telecommunication"></label>
-						</div>
-					</div>
-					<div id="checked-form" class="form-group col-4 col-lg-4 col-xl-3 pb-3">
-						<label class="block">Transporte aéreo</label>
-						<div class="custom-control custom-switch custom-control-inline">
-							<input id="airTransport" class="custom-control-input" type="checkbox" name="airTransport">
-							<label class="custom-control-label" for="airTransport"></label>
-						</div>
-					</div>
-					<div id="checked-form" class="form-group col-4 col-lg-4 col-xl-3 pb-3">
-						<label class="block">Colegios y universidades</label>
-						<div class="custom-control custom-switch custom-control-inline">
-							<input id="collegesUniversities" class="custom-control-input" type="checkbox" name="collegesUniversities">
-							<label class="custom-control-label" for="collegesUniversities"></label>
-						</div>
-					</div>
-					<div id="checked-form" class="form-group col-4 col-lg-4 col-xl-3 pb-3">
-					<label class="block">Ventas al detalle (retail)</label>
-						<div class="custom-control custom-switch custom-control-inline">
-							<input id="retailSales" class="custom-control-input" type="checkbox" name="retailSales">
-							<label class="custom-control-label" for="retailSales"></label>
-						</div>
-					</div>
-					<div id="checked-form" class="form-group col-4 col-lg-4 col-xl-3 pb-3">
-					<label class="block">Transporte terrestre de pasajeros</label>
-						<div class="custom-control custom-switch custom-control-inline">
-							<input id="passengerTransportation" class="custom-control-input" type="checkbox" name="passengerTransportation">
-							<label class="custom-control-label" for="passengerTransportation"></label>
-						</div>
-					</div>
-				</div>
-				</form>
-				<div class="mx-3 h3">
-					<div class="flex mt-4 items-center">
-						<div class="icon-square bg-option-active" alt=""></div>
-						<span class="pl-1 h6">Opción activa.</span>
-					</div>
-					<div class="flex mt-2 items-center">
-						<div class="icon-square bg-option-not-active" alt=""></div>
-						<span class="pl-1 h6">Opción no activa.</span>
-					</div>
-				</div>
-
-				<form id="sign-bulk-form" method="post">
 					<div class="flex row mt-3 mb-2 mx-2 justify-end">
 						<div class="col-5 col-lg-3 col-xl-3 form-group">
 							<div class="input-group">
@@ -234,8 +233,10 @@
 							<div class="help-block bulk-select text-left"></div>
 						</div>
 						<div class="col-auto">
-							<button type="button" id="sign-bulk-btn" class="btn btn-primary btn-small btn-loading flex mx-auto">
+						<?php if($this->verify_access->verifyAuthorization('GIRCOM', 'ACTGIR')): ?>
+							<button type="button" id="sign-btn" class="btn btn-primary btn-small btn-loading flex mx-auto">
 								Actualizar</button>
+						<?php endif; ?>
 						</div>
 					</div>
 				</form>

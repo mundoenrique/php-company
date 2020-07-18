@@ -1074,5 +1074,11 @@ $config = [
 			'field' => 'cardNumberP',
 			'rules' => 'trim|regex_match[/^[0-9]*$/i]|required'
 		],
+	],
+	'updateCommercialTwirls' => [
+		[
+			'field' => 'password-auth',
+			'rules' => 'trim|required'
+		]
 	]
 ];

@@ -13,24 +13,37 @@ $(function () {
 		validateForms(form);
 
 		if (form.valid()) {
-			$('#spinnerBlockBudget').removeClass("hide");
+			$('#spinnerBlock').removeClass("hide");
 			insertFormInput(false);
 			getSwitchTwirls(passData);
 		}
 	});
 
-	$('#sign-bulk-btn').on('click', function(){
-
-		var form = $('#formChecks');
+	$('#sign-btn').on('click', function(){
+		$('#spinnerBlock').addClass("hide");
+		var form = $('#sign-form');
 		var passData = getDataForm(form);
+		var changeBtn = $(this);
+		var btnText = changeBtn.text().trim();
 
 		validateForms(form)
 
+		var vars = Object.getOwnPropertyNames(passData);
+
+		$.each (vars, function(i) {
+			var password = $("#password-auth").val();
+			if( $( "#" + vars[i]).is(':checked') == true ){
+				$( "#" + vars[i]).val('on');
+			} else {
+				$( "#" + vars[i]).val('off');
+				$( "#password-auth").val(password);
+			}
+		});
+
 		if (form.valid()) {
-			$('#spinnerBlockBudget').removeClass("hide");
-			insertFormInput(false);
-			console.log(passData);
-			// updateTwirlsCard(passData);
+			insertFormInput(true, form);
+			changeBtn.html(loader);
+			updateTwirlsCard(passData, btnText);
 		}
 	});
 });
@@ -43,15 +56,15 @@ function getSwitchTwirls(passData) {
 			var info = dataResponse;
 
 			if(code == 0){
-				setTimeout(function(){ // Esto es solo para simular el tiempo de ejecucion del serivico y se vea el spinner.
-				$('#spinnerBlockBudget').addClass("hide");
-				$('#blockResults').removeClass('hidden');
+				setTimeout(function(){ // Esto es solo para simular el tiempo de ejecucion del servicio y se vea el spinner.
+					$('#spinnerBlock').addClass("hide");
+					$('#blockResults').removeClass('hidden');
 			}, 3000);
 		}
 	})
 }
 
-function updateTwirlsCard(passData) {
+function updateTwirlsCard(passData, btnText) {
 	verb = "POST"; who = 'Services'; where = 'updateCommercialTwirls'; data = passData;
 	callNovoCore(verb, who, where, data, function(response) {
 			dataResponse = response.data;
@@ -60,7 +73,9 @@ function updateTwirlsCard(passData) {
 
 			if(code == 0){
 				setTimeout(function(){ // Esto es solo para simular el tiempo de ejecucion del serivico y se vea el spinner.
-
+					$('#password-auth').val('');
+					insertFormInput(false);
+        	$('#sign-btn').html(btnText);
 			}, 3000);
 		}
 	})
