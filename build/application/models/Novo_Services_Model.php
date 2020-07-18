@@ -513,7 +513,7 @@ class Novo_Services_Model extends NOVO_Model {
 	}
 
 		/**
-	 * @info Método perteneciente a funcionalidad de giros comerciales
+	 * @info Método para consulta tarjetas en giros comerciales
 	 * @author Diego Acosta García
 	 * @date July 15th, 2020
 	 */
@@ -544,5 +544,36 @@ class Novo_Services_Model extends NOVO_Model {
 		}
 
 		return $this->responseToTheView('callWs_commercialTwirls');
+	}
+
+		/**
+	 * @info Método actualización de tarjetas en giros comerciales
+	 * @author Diego Acosta García
+	 * @date July 16th, 2020
+	 */
+
+	public function callWs_updateCommercialTwirls_Services($dataRequest)
+	{
+		log_message('INFO', 'NOVO Services Model: updateCommercialTwirls Method Initialized');
+
+		$this->className = 'com.novo.objects.MO.TransferenciaMO';
+
+		$this->dataAccessLog->modulo = 'Servicios';
+		$this->dataAccessLog->function = 'Actualizar Giros Comerciales';
+		$this->dataAccessLog->operation = 'Actualizar giros comerciales';
+
+		$this->dataRequest->idOperation = '';
+
+		$this->isResponseRc = 0;
+		switch($this->isResponseRc) {
+			case 0:
+
+				$this->response->code = 0;
+				$this->response->data = [];
+
+			break;
+		}
+
+		return $this->responseToTheView('callWs_updateCommercialTwirls');
 	}
 }

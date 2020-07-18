@@ -129,9 +129,8 @@ function exportToExcel(passData) {
 }
 
 function closingBudgets(dataForm) {
-var URLactual = window.location.pathname.substr(1);
-
-if(URLactual.substring(0, URLactual.length - 16) == 'bnt'){
+	var columns = JSON.stringify(JSON.parse(lang.REPORTS_COLUMNS));
+	var columnsRefs = JSON.stringify(JSON.parse(lang.REPORTS_COLUMNS_REFS));
 	var table = $('#balancesClosing').DataTable();
 	table.destroy();
 	table = $('#balancesClosing').DataTable({
@@ -159,33 +158,8 @@ if(URLactual.substring(0, URLactual.length - 16) == 'bnt'){
 		"language": dataTableLang,
 		"processing": true,
 		"serverSide": true,
-		"columns": [
-			{ data: 'tarjeta' },
-			{ data: 'nombre' },
-			{ data: 'idExtPer' },
-			{ data: 'saldo' }
-	],
-	"columnDefs": [
-		{
-			"targets": 0,
-			"className": "tarjeta",
-
-		},
-		{
-			"targets": 1,
-			"className": "nombre",
-
-		},
-		{
-			"targets": 2,
-			"className": "idExtPer",
-		},
-		{
-			"targets": 3,
-			"className": "saldo",
-		}
-	],
-
+		"columns": JSON.parse(columns),
+		"columnDefs": JSON.parse(columnsRefs),
 		"ajax": {
 			url: baseURL + 'async-call',
 			method: 'POST',
@@ -232,119 +206,5 @@ if(URLactual.substring(0, URLactual.length - 16) == 'bnt'){
 				return JSON.stringify(responseTable);
 			}
 		}
-	})}else{
-		var table = $('#balancesClosing').DataTable();
-		table.destroy();
-
-		table = $('#balancesClosing').DataTable({
-			drawCallback: function (d) {
-				insertFormInput(false)
-				$('#spinnerBlockBudget').addClass("hide");
-				$('#tbody-datos-general').removeClass('hide');
-				$('#titleResults').removeClass('hide');
-				$('#blockBudgetResults').removeClass("hide");
-				$('#pre-loader-table').addClass('hide')
-				$('.hide-table').removeClass('hide')
-				$('.hide-out').removeClass('hide');
-			},
-			"ordering": false,
-			"searching": false,
-			"lengthChange": false,
-			"length": 10,
-			"pagingType": "full_numbers",
-			"table-layout": "fixed",
-			"select": {
-				"style": "multi",
-				"selector": ':not(td:nth-child(-n+6))',
-				"info": false
-			},
-			"language": dataTableLang,
-			"processing": true,
-			"serverSide": true,
-			"columns": [
-				{ data: 'tarjeta' },
-				{ data: 'nombre' },
-				{ data: 'idExtPer' },
-				{ data: 'saldo' },
-				{ data: 'fechaUltAct' }
-			],
-			"columnDefs": [
-				{
-					"targets": 0,
-					"className": "tarjeta",
-
-				},
-				{
-					"targets": 1,
-					"className": "nombre",
-
-				},
-				{
-					"targets": 2,
-					"className": "idExtPer",
-				},
-				{
-					"targets": 3,
-					"className": "saldo",
-				},
-				{
-					"targets": 4,
-					"className": "fechaUltAct",
-				}
-			],
-			"ajax": {
-				url: baseURL + 'async-call',
-				method: 'POST',
-				dataType: 'json',
-				cache: false,
-				data: function (req) {
-					data = req
-					if (lang.CONF_NIT_INPUT_BOOL == 'ON' ){
-						data.idExtPer = $('#Nit').val();
-					}else{
-						data.idExtPer = '';
-					}
-					data.producto = $("#productCode").val();
-					data.idExtEmp = $('#enterpriseReport').find('option:selected').attr('acrif');
-					data.tamanoPagina = 10;
-					data.paginar = true;
-					data.paginaActual = data.draw;
-					data.screenSize = screen.width;
-
-					var dataRequest = JSON.stringify({
-						who: 'Reports',
-						where: 'closingBudgets',
-						data: data
-					});
-
-					dataRequest = cryptoPass(dataRequest, true);
-
-					var request = {
-						request: dataRequest,
-						ceo_name: ceo_cook,
-						plot: btoa(ceo_cook)
-					}
-
-					return request
-				},
-				dataFilter: function (resp) {
-
-					var responseTable = jQuery.parseJSON(resp)
-
-					responseTable = JSON.parse(
-					CryptoJS.AES.decrypt(responseTable.code, responseTable.plot, { format: CryptoJSAesJson }).toString(CryptoJS.enc.Utf8)
-				);
-
-				var codeDefaul = parseInt(lang.RESP_DEFAULT_CODE);
-
-				if (responseTable.code === codeDefaul) {
-					notiSystem(responseTable.title, responseTable.msg, responseTable.icon, responseTable.dataResp);
-				}
-
-				access = responseTable.access;
-				return JSON.stringify(responseTable);
-				}
-			}
-		})
-	}
+	});
 }
