@@ -4,6 +4,10 @@ $(function () {
 	var userLogin = $('#user_login');
 	var userPass = $('#user_pass');
 	var loginIpMsg, formcodeOTP, btn, btnTextOtp;
+	var captcha = lang.GEN_ACTIVE_RECAPTCHA;
+	var skinbdb = country == 'bdb' ? true : false ;
+	var skinbp = country == 'bp' ? true : false ;
+
 	$('#user_pass').on('keyup', function() {
 		$(this).attr('type', 'password')
 	})
@@ -14,58 +18,60 @@ $(function () {
 	$('#login-btn').on('click', function (e) {
 		e.preventDefault();
 		$(".general-form-msg").html('');
-		var captcha = lang.GEN_ACTIVE_RECAPTCHA;
 		form = $('#login-form');
 		userCred = getCredentialsUser();
 		btnText = $(this).html();
 		formInputTrim(form);
 		validateForms(form, { handleMsg: false });
-
-		if (form.valid()) {
-			insertFormInput(true);
-			inputDisabled(true);
-			$(this).html(loader);
-			if (captcha) {
-				grecaptcha.ready(function () {
-					grecaptcha
-						.execute('6Lejt6MUAAAAANd7KndpsZ2mRSQXuYHncIxFJDYf', { action: 'login' })
-						.then(function (token) {
-							if (token) {
-								validateLogin(token);
-							}
-						}, function (token) {
-							if (!token) {
-								icon = lan.GEN_ICON_WARNING;
-								data = {
-									btn1: {
-										link: 'inicio',
-										action: 'redirect'
-									}
-								};
-								notiSystem(false, false, icon, data);
-								restartFormLogin();
-							}
-						});
-				});
-			} else {
-				validateLogin();
+			if (form.valid()) {
+				insertFormInput(true);
+				inputDisabled(true);
+				$(this).html(loader);
+				recaptcha();
+			}else {
+				if (userLogin.val() == '' || userPass.val() == '') {
+					$(".general-form-msg").html('Todos los campos son requeridos');
+				} else {
+					$(".general-form-msg").html('Combinación incorrecta de usuario y contraseña');
+				}
+				verifyPassValidate()
 			}
-		} else {
-			if (userLogin.val() == '' || userPass.val() == '') {
-				$(".general-form-msg").html('Todos los campos son requeridos');
-			} else {
-				$(".general-form-msg").html('Combinación incorrecta de usuario y contraseña');
-			}
-			verifyPassValidate()
-		}
 	});
+
+	function recaptcha(){
+		if (captcha) {
+			grecaptcha.ready(function () {
+				grecaptcha
+					.execute('6Lejt6MUAAAAANd7KndpsZ2mRSQXuYHncIxFJDYf', { action: 'login' })
+					.then(function (token) {
+						if (token) {
+							validateLogin(token);
+						}
+					}, function (token) {
+						if (!token) {
+							icon = lan.GEN_ICON_WARNING;
+							data = {
+								btn1: {
+									link: 'inicio',
+									action: 'redirect'
+								}
+							};
+							notiSystem(false, false, icon, data);
+							restartFormLogin();
+						}
+					});
+			});
+		} else {
+			validateLogin();
+		}
+	};
 
 	function restartFormLogin() {
 		insertFormInput(false);
 		inputDisabled(false);
 		$('#login-btn').html(btnText);
 		userPass.val('');
-		if (country == 'bp') {
+		if (skinbp) {
 			userLogin.val('');
 		}
 		setTimeout(function () {
@@ -75,7 +81,6 @@ $(function () {
 
 	function getCredentialsUser() {
 		cypherPass = (userPass.val() === '' && userCred) ? userCred.pass : cryptoPass(userPass.val());
-
 		return {
 			user: userLogin.val(),
 			pass: cypherPass,
@@ -144,7 +149,7 @@ $(function () {
 				loginIpMsg+=	'<input id="acceptAssert" class="custom-control-input" type="checkbox" name="acceptAssert"> ';
 				loginIpMsg+=	'<label class="custom-control-label" for="acceptAssert">'+response.assert+'</label>';
 				loginIpMsg+='</div>';
-        		loginIpMsg+='</form>';
+        loginIpMsg+='</form>';
 
 				$('#formVerificationOTP input').attr('disabled', false);
 				notiSystem(response.title, loginIpMsg, response.icon,response.data);
@@ -165,7 +170,8 @@ $(function () {
 						.html(loader)
 						.attr('id', oldID);
 						userCred = getCredentialsUser();
-						validateLogin();
+						modalClose = false;
+						recaptcha();
 					}
 				});
 				$('#cancel').on('click', function() {
@@ -213,41 +219,41 @@ $(function () {
 			userPass.removeClass('has-error');
 		}
 	}
+
+	function inputDisabled(disable) {
+		$('#login-form input').attr('disabled', disable);
+	}
+
+	function windowsStyle(){
+		$("#system-info").dialog("option", "minWidth", 480);
+		$("#system-info").dialog("option", "maxHeight", false);
+		$('#system-msg').css( "width", "auto" );
+
+		if(skinbdb!=true){
+			$("#label_codeOTP").addClass("line-field");
+			$("#codeOTP").addClass("input-field");
+		}
+
+		if (skinbp | skinbdb) {
+			$("#system-info").dialog("option", "position", {
+				my: "center top+100",
+				at: "center top",
+				of: window
+			});
+			var styles = {
+				float : "none",
+				margin: "auto"
+			};
+			$("#system-info .ui-dialog-buttonpane").css(styles).removeClass("modal-buttonset");
+			$("#system-info .ui-dialog-buttonset").removeClass("modal-buttonset");
+			$("#system-info .btn-modal").removeClass("modal-btn-primary");
+		}
+		else {
+			$("#system-info").dialog("option", "position", {
+				my: "center top+160",
+				at: "center top",
+				of: window
+			});
+		}
+	}
 })
-
-function inputDisabled(disable) {
-	$('#login-form input').attr('disabled', disable);
-}
-
-function windowsStyle(){
-	$("#system-info").dialog("option", "minWidth", 480);
-	$("#system-info").dialog("option", "maxHeight", false);
-	$('#system-msg').css( "width", "auto" );
-
-	if(country != 'bdb'){
-		$("#label_codeOTP").addClass("line-field");
-		$("#codeOTP").addClass("input-field");
-	}
-
-	if (country == 'bp' | country == 'bdb') {
-		$("#system-info").dialog("option", "position", {
-			my: "center top+100",
-			at: "center top",
-			of: window
-		});
-		var styles = {
-			float : "none",
-			margin: "auto"
-		};
-		$("#system-info .ui-dialog-buttonpane").css(styles).removeClass("modal-buttonset");
-		$("#system-info .ui-dialog-buttonset").removeClass("modal-buttonset");
-		$("#system-info .btn-modal").removeClass("modal-btn-primary");
-	}
-	else {
-		$("#system-info").dialog("option", "position", {
-			my: "center top+160",
-			at: "center top",
-			of: window
-		});
-	}
-}

@@ -9,6 +9,7 @@ var searchEnterprise = $('#sb-search');
 var inputPass = $('#password');
 var dataTableLang;
 var validator;
+var modalClose = true;
 
 $(function () {
 	$('input[type=text], input[type=password], input[type=email]').attr('autocomplete', 'off');
@@ -112,14 +113,16 @@ function callNovoCore(verb, who, where, request, _response_) {
 		dataType: 'json'
 	}).done(function (response, status, jqXHR) {
 
-		if ($('#system-info').parents('.ui-dialog:visible').length) {
+		response = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, { format: CryptoJSAesJson }).toString(CryptoJS.enc.Utf8))
+
+		modalClose = response.code != 0 ? true : modalClose;
+
+		if ($('#system-info').parents('.ui-dialog').length && modalClose) {
 			$('#accept')
 				.prop('disabled', false)
 				.text(lang.GEN_BTN_ACCEPT)
 			$('#system-info').dialog('destroy');
 		}
-
-		response = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, { format: CryptoJSAesJson }).toString(CryptoJS.enc.Utf8))
 
 		if (response.code === codeResp) {
 			notiSystem(response.title, response.msg, response.icon, response.data);
@@ -129,7 +132,7 @@ function callNovoCore(verb, who, where, request, _response_) {
 
 	}).fail(function (jqXHR, textStatus, errorThrown) {
 
-		if ($('#system-info').parents('.ui-dialog:visible').length) {
+		if ($('#system-info').parents('.ui-dialog').length) {
 			$('#accept')
 				.prop('disabled', false)
 				.text(lang.GEN_BTN_ACCEPT)
