@@ -40,17 +40,16 @@
 							</div>
 							<div class="form-group col-4 col-xl-3">
 								<label for="bulkNumber"><?= lang('GEN_TABLE_BULK_NUMBER'); ?></label>
-								<input id="bulkNumber" name="bulkNumber" class="form-control h5 select-group text-right" type="text" autocomplete="off" disabled>
+								<input id="bulkNumber" name="bulkNumber" class="form-control h5 select-group" type="text" autocomplete="off" disabled>
 								<div class="help-block"></div>
 							</div>
 							<?php if(lang('CONF_INQUIRY_DOCTYPE') == 'ON'): ?>
 							<div class="form-group col-4 col-xl-3">
 								<label>Tipo de documento</label>
-								<select class="select-box custom-select flex h6 w-100">
-									<option selected disabled>Seleccionar</option>
-									<option>Option 1</option>
-									<option>Option 2</option>
-									<option>Option 3</option>
+								<select id="documentType" name="documentType" class="form-control select-box custom-select flex h6 w-100">
+									<option value="" selected>Seleccionar</option>
+									<option value="CC">Cédula</option>
+									<option value="PP">Pasaporte</option>
 								</select>
 								<div class="help-block"></div>
 							</div>

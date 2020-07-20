@@ -71,7 +71,8 @@ $lang['CONF_VIDEO_BOOL'] = 'ON';
 $lang['CONF_APPS_BOOL'] = 'ON';
 $lang['CONF_FILES_MANAGMENT_BOOL'] = 'ON';
 $lang['CONF_FILE_SERVICE_BOOL'] = 'ON';
-
+//CARDS INQUIRY
+$lang['CONF_CARDS_INQUIRY_ISSUE_STATUS'] = 'ON';
 //TEXT CONF
 $lang['CONF_DOWNLOADS'] = 'Descargas';
 $lang['CONF_MANUALS'] = 'Manuales';

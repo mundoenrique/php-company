@@ -13,6 +13,8 @@ $lang['CONF_VIDEO_BOOL'] = 'OFF';
 $lang['CONF_APPS_BOOL'] = 'OFF';
 $lang['CONF_FILES_MANAGMENT_BOOL'] = 'OFF';
 $lang['CONF_FILE_SERVICE_BOOL'] = 'OFF';
+//CARDS INQUIRY
+$lang['CONF_CARDS_INQUIRY_ISSUE_STATUS'] = 'OFF';
 $lang['CONF_PDF_FILE'] = [
   ['']
 ];

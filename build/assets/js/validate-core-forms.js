@@ -144,7 +144,28 @@ function validateForms(form) {
 			"otpCode": {required: true, pattern: alphanum},
 			"orderNumber": {pattern: numeric, require_from_group: [1, '.select-group']},
 			"bulkNumber": {pattern: numeric, require_from_group: [1, '.select-group']},
-			"idNumberP": {pattern: idNumberReg, require_from_group: [1, '.select-group']},
+			"idNumberP": {
+				required: {
+					depends: function (element) {
+						var valid = false;
+
+						if (lang.CONF_INQUIRY_DOCTYPE == 'ON') {
+							valid = alphabetical.test($('#documentType').val()) && $('#documentType').val() != '';
+						}
+
+						return valid;
+					}
+				},
+				pattern: idNumberReg, require_from_group: [1, '.select-group']
+			},
+			"documentType": {
+				required: {
+					depends: function (element) {
+						return numeric.test($('#idNumberP').val())
+					}
+				},
+				pattern: alphabetical
+			},
 			"cardNumberP": {pattern: numeric, minlength: lang.VALIDATE_MINLENGTH, require_from_group: [1, '.select-group']},
 			"masiveOptions": {requiredSelect: true},
 		},
@@ -221,7 +242,14 @@ function validateForms(form) {
 				pattern: lang.VALIDATE_BULK_NUMBER,
 				require_from_group: lang.VALIDATE_SELECT_GROUP
 
-			},"idNumberP": {
+			},
+			"idNumberP": {
+				required: lang.VALIDATE_ID_NUMBER,
+				pattern: lang.VALIDATE_ID_NUMBER,
+				require_from_group: lang.VALIDATE_SELECT_GROUP
+			},
+			"documentType": {
+				required: lang.VALIDATE_ID_NUMBER,
 				pattern: lang.VALIDATE_ID_NUMBER,
 				require_from_group: lang.VALIDATE_SELECT_GROUP
 			},
