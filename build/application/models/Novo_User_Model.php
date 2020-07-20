@@ -380,7 +380,6 @@ class Novo_User_Model extends NOVO_Model {
       	'orden' => '1'
 			]
 		];
-		$maskMail = maskString($dataRequest->email, 4, $end = 6, '@');
 		$map = 0;
 
 		$response = $this->sendToService('callWs_RecoverAccess');
@@ -391,7 +390,7 @@ class Novo_User_Model extends NOVO_Model {
 					$this->session->set_flashdata('authToken', $response->bean->TokenTO->authToken);
 				}
 				$this->response->code = 0;
-				$this->response->msg = novoLang(lang('GEN_OTP'), [$maskMail]);
+				$this->response->msg = lang('GEN_OTP');
 				$this->response->icon = lang('GEN_ICON_SUCCESS');
 				$this->response->data = [
 					'btn1'=> [
