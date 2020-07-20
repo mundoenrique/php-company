@@ -46,6 +46,11 @@ $lang['CONF_NIT_INPUT_BOOL'] = 'ON';
 $lang['CONF_PAY_ACCOUNT'] = 'OFF';
 //SETTINGS
 $lang['CONF_SETT_CONFIG'] = 'ON';
+//INPUT CARDS INQUIRY
+$lang['CONF_INQUIRY_DOCTYPE'] = 'OFF';
+$lang['CONF_CARDS_INQUIRY_ISSUE_STATUS'] = 'ON';
+//STYLE FORM
+$lang['CONF_SETT_STYLE_SKIN'] = 'col-3';
 //CONFIG OPTIONS FLAGS
 $lang['CONF_USER_BOOL'] = 'ON';
 $lang['CONF_CLOSING_BALANCE_BOOL'] = 'ON';
@@ -67,7 +72,6 @@ $lang['CONF_VIDEO_BOOL'] = 'ON';
 $lang['CONF_APPS_BOOL'] = 'ON';
 $lang['CONF_FILES_MANAGMENT_BOOL'] = 'ON';
 $lang['CONF_FILE_SERVICE_BOOL'] = 'ON';
-
 //TEXT CONF
 $lang['CONF_DOWNLOADS'] = 'Descargas';
 $lang['CONF_MANUALS'] = 'Manuales';

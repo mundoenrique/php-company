@@ -3,6 +3,7 @@ var table;
 var action;
 var inputModal;
 var dataRquest;
+var cardsData;
 $(function () {
 	$('#pre-loader').remove();
 	$('.hide-out').removeClass('hide');
@@ -22,6 +23,7 @@ $(function () {
 		$('.help-block').text('');
 		$('input, select').removeClass('has-error');
 		$('#tableCardInquiry').find('thead > tr').removeClass('selected');
+		$('#documentType').find('option:first').val('');
 		form = $('#searchCardsForm');
 		formInputTrim(form);
 		validateForms(form);
@@ -57,7 +59,45 @@ $(function () {
 				action: 'close'
 			}
 		}
-		inputModal =	'<form id="modalCardsInquiryForm" name="modalCardsInquiryForm" onsubmit="return false;">';
+		inputModal =	'<form id="modalCardsInquiryForm" name="modalCardsInquiryForm" class="w-100" onsubmit="return false;">';
+
+		if (action == 'UPDATE_DATA') {
+			data.maxHeight = 520
+			$(this).closest('tr').addClass('update');
+			cardsData = table.rows('.update').data();
+
+			inputModal +=		'<div class="form-group col-auto">';
+			inputModal += 		'<label>Nombre(s)</label>';
+			inputModal += 		'<div class="input-group">';
+			inputModal += 			'<input class="form-control" type="text" id="firstName" name="firstName" autocomplete="off" ';
+			inputModal +=					'value="'+cardsData[0].names+'">';
+			inputModal += 		'</div>';
+			inputModal += 		'<div class="help-block"></div>';
+			inputModal += 	'</div>';
+			inputModal +=		'<div class="form-group col-auto">';
+			inputModal += 		'<label>Apellido(s)</label>';
+			inputModal += 		'<div class="input-group">';
+			inputModal += 			'<input class="form-control" type="text" id="lastName" name="lastName" autocomplete="off" ';
+			inputModal += 				'value="'+cardsData[0].lastName+'">';
+			inputModal += 		'</div>';
+			inputModal += 		'<div class="help-block"></div>';
+			inputModal += 	'</div>';
+			inputModal +=		'<div class="form-group col-auto">';
+			inputModal += 		'<label>Correo</label>';
+			inputModal += 		'<div class="input-group">';
+			inputModal += 			'<input class="form-control" type="text" id="email" name="email" autocomplete="off" value="'+cardsData[0].email+'">';
+			inputModal += 		'</div>';
+			inputModal += 		'<div class="help-block"></div>';
+			inputModal += 	'</div>';
+			inputModal +=		'<div class="form-group col-auto">';
+			inputModal += 		'<label>Número movil</label>';
+			inputModal += 		'<div class="input-group">';
+			inputModal += 			'<input class="form-control" type="text" id="movil" name="movil" autocomplete="off" value="'+cardsData[0].celPhone+'">';
+			inputModal += 		'</div>';
+			inputModal += 		'<div class="help-block"></div>';
+			inputModal += 	'</div>';
+		}
+
 		inputModal +=		'<div class="form-group col-auto">';
 		inputModal += 		'<div class="input-group">';
 		inputModal += 			'<input class="form-control pwd-input pwd" type="password" name="password" autocomplete="off"';
@@ -68,8 +108,8 @@ $(function () {
 		inputModal += 		'</div>';
 		inputModal += 		'<div class="help-block"></div>';
 		inputModal += 	'</div>';
-
 		inputModal += '</form>';
+
 		notiSystem(title, inputModal, lang.GEN_ICON_INFO, data);
 	})
 
@@ -88,10 +128,15 @@ $(function () {
 	$('#cardsInquiryBtn').on('click', function (e) {
 		e.preventDefault();
 		action = $('#masiveOptions').val();
-		form = $('#cardsInquiryForm')
+		form = $('#cardsInquiryForm');
 		btnText = $(this).text().trim();
-		$('.help-block').text('')
-		$('input, select').removeClass('has-error')
+		$('.help-block').text('');
+		$('input, select').removeClass('has-error');
+		/* cardsData = table.rows('.selected').data();
+		console.log(cardsData[0].options)
+		console.log($('#tableCardInquiry tbody').find('tr.selected'))
+
+		return false */
 		applyActions(action, form, $(this));
 	})
 })
@@ -147,7 +192,12 @@ function getCardList(request) {
 					"visible": false
 				},
 				{
+					"targets": 6,
+					"className": 'card-number'
+				},
+				{
 					"targets": 13,
+					"className": 'balance',
 					"visible": response.data.operList.INQUIRY_BALANCE
 				}
 			],
@@ -158,7 +208,7 @@ function getCardList(request) {
 					}
 				},
 				{ data: 'email' },
-				{ data: 'movilNumber' },
+				{ data: 'celPhone' },
 				{ data: 'names' },
 				{ data: 'lastName' },
 				{ data: 'idNumberSend' },
@@ -178,7 +228,7 @@ function getCardList(request) {
 					data: function (data) {
 						var options = '<div class="flex justify-center items-center">';
 						if (data.options.UPDATE_DATA) {
-							options += '<button class="btn mx-1 px-0" title="'+lang.SERVICES_INQUIRY_UPDATE_DATA+'" data-toggle="tooltip" ';
+							options += '<button class="btn mx-1 px-0 update" title="'+lang.SERVICES_INQUIRY_UPDATE_DATA+'" data-toggle="tooltip" ';
 							options += 'action="'+data.options.UPDATE_DATA+'">';
 							options += 	'<i class="icon novoglyphs icon-user-edit" aria-hidden="true"></i>';
 							options += '</button>';
@@ -267,6 +317,11 @@ function verifymassiveOptions(massiveOptions) {
 		$.each(massiveOptions, function(key, value) {
 			$('#masiveOptions').append('<option value="'+key+'">'+value+'</option>')
 		})
+
+		if (lang.CONF_CARDS_INQUIRY_ISSUE_STATUS == 'OFF') {
+			var column = table.column('9');
+			column.visible(false);
+		}
 	}
 
 	$('#loader-table').addClass('hide');
@@ -274,9 +329,10 @@ function verifymassiveOptions(massiveOptions) {
 }
 
 function applyActions(currentAction, currentForm, currentBtn) {
-	var cardsData = table.rows('.selected').data();
-	formInputTrim(currentForm)
-	validateForms(currentForm)
+	cardsData = table.rows('.selected').data();
+	formInputTrim(currentForm);
+	validateForms(currentForm);
+
 	if (cardsData.length == 0) {
 		currentForm.find('.item-select').text(lang.VALIDATE_SELECT);
 	}
@@ -293,6 +349,14 @@ function applyActions(currentAction, currentForm, currentBtn) {
 				}
 				info[pos] = value
 			})
+
+			if (action == 'UPDATE_DATA') {
+				info['names'] = $('#firstName').val();
+				info['lastName'] = $('#lastName').val();
+				info['email'] = $('#email').val();
+				info['celPhone'] = $('#movil').val();
+			}
+
 			cardsInfo.push(JSON.stringify(info));
 		})
 
@@ -310,11 +374,15 @@ function applyActions(currentAction, currentForm, currentBtn) {
 			if (response.success) {
 				$('#accept').addClass('reload-req');
 			}
+
+			table.rows().deselect();
+			$('#tableCardInquiry').find('thead > tr').removeClass('selected');
+			evalResult(response, currentAction);
 			currentBtn
 				.text(btnText)
-				.prop('disabled', false)
-			insertFormInput(false)
-			currentForm.find('input.pwd').val('')
+				.prop('disabled', false);
+			insertFormInput(false);
+			currentForm.find('input.pwd').val('');
 		})
 	}
 }
@@ -331,4 +399,38 @@ function fileDownload(currentAction) {
 			downLoadfiles(response.data)
 		}
 	})
+}
+
+function evalResult(response, currentAction) {
+	if (currentAction == 'INQUIRY_BALANCE') {
+		$.each(response.data.balanceList, function(key, value) {
+			$('#tableCardInquiry').find('tbody > tr').each(function(index, element) {
+				var cardnumber = $(element).find('td.card-number').text().trim().replace(/[*]/g, '');
+				if (value.cardNumber == cardnumber) {
+					$(element).find('td.balance').text(value.balance);
+					if (value.balance == '--') {
+						$(element).find('td.balance').removeClass('text-right')
+					} else {
+						$(element).find('td.balance').addClass('text-right')
+					}
+				}
+			})
+		})
+	}
+
+	if (response.data.failList.length > 0) {
+		data = {
+			btn1: {
+				text: lang.GEN_BTN_ACCEPT,
+				action: 'close'
+			}
+		}
+		inputModal = '<h5 class="regular mr-1">' + response.msg + '</h5>';
+
+		$.each(response.data.failList, function (index, value) {
+			inputModal += '<h6 class="light mr-1">' + value + '</h6>';
+		})
+
+		notiSystem(response.title, inputModal, lang.GEN_ICON_INFO, data);
+	}
 }
