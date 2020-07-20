@@ -52,6 +52,12 @@ $lang['CONF_CLOSING_BALANCE_BOOL'] = 'ON';
 $lang['CONF_COMPANIES_BOOL'] = 'ON';
 $lang['CONF_BRANCHES_BOOL'] = 'ON';
 $lang['CONF_DOWNLOADS_BOOL'] = 'ON';
+//CLOSING BALANCE
+$lang['CONF_CARD_COLUMN']= 'ON';
+$lang['CONF_NAME_COLUMN']= 'ON';
+$lang['CONF_ID_COLUMN']= 'ON';
+$lang['CONF_BALANCE_COLUMN']= 'ON';
+$lang['CONF_LAST_UPDATE_COLUMN']= 'ON';
 //ENTERPRICES OPTIONS FLAGS
 $lang['CONF_CHANGE_TELEPHONES_BOOL'] = 'ON';
 $lang['CONF_ADD_CONTACT_BOOL'] = 'ON';
@@ -67,7 +73,6 @@ $lang['CONF_VIDEO_BOOL'] = 'ON';
 $lang['CONF_APPS_BOOL'] = 'ON';
 $lang['CONF_FILES_MANAGMENT_BOOL'] = 'ON';
 $lang['CONF_FILE_SERVICE_BOOL'] = 'ON';
-
 //TEXT CONF
 $lang['CONF_DOWNLOADS'] = 'Descargas';
 $lang['CONF_MANUALS'] = 'Manuales';
@@ -75,7 +80,6 @@ $lang['CONF_APPLICATIONS'] = 'Aplicaciones';
 $lang['CONF_FILE'] = 'Archivos de gestión Conexión Empresas Online';
 $lang['CONF_CEO_USER_MANUAL'] = 'Manual de Usuario Conexión Empresas Online';
 $lang['CONF_GL_USER_MANUAL'] = 'Manual de Usuario Gestor de Lotes';
-
 //FILES CONF
 $lang['CONF_PDF_FILE'] = [''];
 $lang['CONF_ZIP_FILE'] = [''];

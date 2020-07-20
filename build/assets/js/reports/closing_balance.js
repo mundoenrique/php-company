@@ -141,27 +141,27 @@ function closingBudgets(dataForm) {
 			{
 				"targets": 0,
 				"className": "tarjeta",
-				"visible": lang.REPORTS_CARD_COLUMN == "ON"
+				"visible": lang.CONFIG_CARD_COLUMN == "ON"
 			},
 			{
 				"targets": 1,
 				"className": "nombre",
-				"visible": lang.REPORTS_NAME_COLUMN == "ON"
+				"visible": lang.CONFIG_NAME_COLUMN == "ON"
 			},
 			{
 				"targets": 2,
 				"className": "idExtPer",
-				"visible": lang.REPORTS_ID_COLUMN == "ON"
+				"visible": lang.CONFIG_ID_COLUMN == "ON"
 			},
 			{
 				"targets": 3,
 				"className": "saldo",
-				"visible": lang.REPORTS_BALANCE_COLUMN == "ON"
+				"visible": lang.CONFIG_BALANCE_COLUMN == "ON"
 			},
 			{
 				"targets": 4,
 				"className": "fechaUltAct",
-				"visible": lang.REPORTS_LAST_UPDATE_COLUMN == "ON"
+				"visible": lang.CONFIG_LAST_UPDATE_COLUMN == "ON"
 			}
 		],
 		"ajax": {

@@ -31,11 +31,7 @@ $lang['REPORTS_TABLE_CARD']="Tarjeta";
 $lang['REPORTS_TABLE_CARDHOLDER']="Tarjetahabiente";
 $lang['REPORTS_TABLE_DNI']="NIT";
 $lang['REPORTS_TABLE_LAST_ACTIVITY']="Última actividad";
-$lang['REPORTS_CARD_COLUMN']= 'ON';
-$lang['REPORTS_NAME_COLUMN']= 'ON';
-$lang['REPORTS_ID_COLUMN']= 'ON';
-$lang['REPORTS_BALANCE_COLUMN']= 'ON';
-$lang['REPORTS_LAST_UPDATE_COLUMN']= 'ON';
+
 
 
 

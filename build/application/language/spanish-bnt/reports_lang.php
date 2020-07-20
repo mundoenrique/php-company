@@ -14,4 +14,4 @@ $lang['REPORTS_TABLE_BALANCE']="Saldo";
 $lang['REPORTS_TABLE_CARD']="Tarjeta";
 $lang['REPORTS_TABLE_CARDHOLDER']="Tarjetahabiente";
 $lang['REPORTS_TABLE_DNI']="CURP";
-$lang['REPORTS_LAST_UPDATE_COLUMN']= 'OFF';
+
