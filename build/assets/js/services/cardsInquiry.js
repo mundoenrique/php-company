@@ -196,6 +196,10 @@ function getCardList(request) {
 					"className": 'card-number'
 				},
 				{
+					"targets": 9,
+					"visible": lang.CONF_CARDS_INQUIRY_ISSUE_STATUS == 'ON'
+				},
+				{
 					"targets": 13,
 					"className": 'balance',
 					"visible": response.data.operList.INQUIRY_BALANCE
@@ -317,11 +321,6 @@ function verifymassiveOptions(massiveOptions) {
 		$.each(massiveOptions, function(key, value) {
 			$('#masiveOptions').append('<option value="'+key+'">'+value+'</option>')
 		})
-
-		if (lang.CONF_CARDS_INQUIRY_ISSUE_STATUS == 'OFF') {
-			var column = table.column('9');
-			column.visible(false);
-		}
 	}
 
 	$('#loader-table').addClass('hide');
