@@ -1,7 +1,7 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 <div class="login-content flex items-center justify-center bg-primary">
 	<div class="flex flex-column items-center z1">
-		<img class="logo-banco mb-2" src="<?= $this->asset->insertFile($countryUri.'/'.lang('GEN-LOGO-BIG')); ?>"
+		<img class="logo-banco mb-2" src="<?= $this->asset->insertFile(lang('GEN-LOGO-BIG'), 'images', $countryUri); ?>"
 			alt="<?= lang('GEN_ALTERNATIVE_TEXT'); ?>">
 		<span class="mb-2 secondary center h3"><?= lang('LOGIN_WELCOME_TITLE') ?></span>
 		<div id="widget-signin" class="widget rounded">

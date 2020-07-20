@@ -86,7 +86,7 @@
 						<table id="resultscardHolders" class="cell-border h6 display responsive w-100">
 							<thead class="bg-primary secondary regular">
 								<tr>
-									<th><?= lang('GEN_TABLE_ID_DOC'); ?></th>
+									<th><?= lang('GEN_TABLE_DNI'); ?></th>
 									<th><?= lang('GEN_TABLE_CARDHOLDER'); ?></th>
 								</tr>
 							</thead>

@@ -32,6 +32,8 @@ $lang['CONF_ADD_BRANCH_BOOL'] = 'OFF';
 $lang['CONF_VIDEO_BOOL'] = 'OFF';
 $lang['CONF_FILE_SERVICE_BOOL'] = 'OFF';
 $lang['CONF_APPS_BOOL'] = 'OFF';
+//STYLE FORM
+$lang['CONF_SETT_STYLE_SKIN'] = 'col-4';
 //FILES CONF
 $lang['CONF_MANUAL_BOOL'] = 'OFF';
 $lang['CONF_PDF_FILE'] = [

@@ -85,21 +85,22 @@ class Verify_Access {
 	{
 		log_message('INFO', 'NOVO Verify_Access: ResponseByDefect method initialized');
 
+		$linkredirect = AUTO_LOGIN ? 'ingresar/fin' : 'inicio';
 		$this->responseDefect = new stdClass();
 		$this->responseDefect->code = lang('RESP_DEFAULT_CODE');
 		$this->responseDefect->title = lang('GEN_SYSTEM_NAME');
 		$this->responseDefect->msg = lang('RESP_VALIDATION_INPUT');
-		$this->responseDefect->data = base_url('inicio');
 		$this->responseDefect->icon = lang('GEN_ICON_WARNING');
 		$this->responseDefect->data = [
 			'btn1'=> [
 				'text'=> lang('GEN_BTN_ACCEPT'),
-				'link'=> 'inicio',
+				'link'=> $linkredirect,
 				'action'=> 'redirect'
 			]
 		];
 
 		if($this->CI->session->has_userdata('logged')) {
+			$this->responseDefect->msg = lang('RESP_VALIDATION_INPUT_LOGGED');
 			$this->CI->load->model('Novo_User_Model', 'finishSession');
 			$this->CI->finishSession->callWs_FinishSession_User();
 		}

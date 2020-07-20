@@ -85,6 +85,7 @@ class NOVO_Model extends CI_Model {
 		$this->response->msg = '';
 		$this->response->icon = lang('GEN_ICON_WARNING');
 		$linkredirect = $this->session->has_userdata('productInf') ? 'detalle-producto' : lang('GEN_ENTERPRISE_LIST');
+		$linkredirect = AUTO_LOGIN ? 'ingresar/fin' : $linkredirect;
 		$arrayResponse = [
 			'btn1'=> [
 				'text'=> lang('GEN_BTN_ACCEPT'),
@@ -106,6 +107,9 @@ class NOVO_Model extends CI_Model {
 				if($this->session->has_userdata('logged') || $this->session->has_userdata('userId')) {
 					$this->session->sess_destroy();
 				}
+				break;
+			case -437:
+				$this->response->msg = lang('GEN_FAILED_THIRD PARTY');
 				break;
 			default:
 				$this->response->msg = lang('RESP_MESSAGE_SYSTEM');

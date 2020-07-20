@@ -1,8 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 //GENERAL LANGUAGE
-$lang['GEN_ENTERPRISE_LIST'] = 'empresas';
-$lang['GEN-LOGO-HEADER'] = 'logo-menu.svg';
+$lang['GEN_LOGO_HEADER'] = 'logo-menu.svg';
 $lang['GEN-LOGO-BIG'] = 'logo-signin.png';
 $lang['GEN_ALTERNATIVE_TEXT'] = 'Produbanco';
 $lang['GEN_RECOVER_PASS_TITLE'] = 'Recuperar acceso';

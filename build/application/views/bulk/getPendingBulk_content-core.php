@@ -14,17 +14,15 @@
 	</div>
 </div>
 <div class="flex mt-1 mb-5 bg-color flex-nowrap justify-between">
-	<div class="flex flex-auto flex-column <?= $widget ? '' : 'max-width-6';  ?>">
+	<div class="flex flex-auto flex-column <?= $widget ? '' : 'max-width-6';  ?> loadbulk" loadbulk="<?= $loadBulk; ?>">
+		<?php if ($loadBulk): ?>
 		<div class="flex flex-column">
 			<span class="line-text mb-2 h4 semibold primary"><?= lang('BULK_NEW'); ?></span>
-			<div id="pre-loader2" class="mx-auto flex justify-center">
-				<span class="spinner-border spinner-border-lg mt-2 none" role="status" aria-hidden="true"></span>
-			</div>
 			<form id="upload-file-form">
 				<div class="flex px-5 pb-4 items-center row">
 					<div class="form-group col-6 col-lg-3 col-xl-3">
 						<label class="mt-1 h6" for="type-bulk"><?= lang('BULK_TYPE'); ?></label>
-						<select id="type-bulk" name="type-bulk" class="select-box custom-select h6 w-100">
+						<select id="type-bulk" name="type-bulk" class="form-control select-box custom-select h6 w-100">
 							<?php foreach($typesLot AS $pos => $type): ?>
 							<option value="<?= $type->key; ?>" format="<?= $type->format; ?>" <?= $pos != 0 ? '' : 'selected disabled' ?>><?= $type->text; ?>
 							</option>
@@ -32,7 +30,7 @@
 						</select>
 						<div class="help-block"></div>
 					</div>
-					<?php if(verifyDisplay('body', $module,  lang('GEN_TAG_BRANCHOFFICE'))): ?>
+					<?php if(lang('CONF_BULK_BRANCHOFFICE') == 'ON'): ?>
 					<div class="form-group col-6 col-lg-3 col-xl-3 hide">
 						<label class="mt-1 h6" for="branch-office"><?= lang('BULK_BRANCH_OFFICE'); ?></label>
 						<select id="branch-office" name="branch-office" class="form-control select-box custom-select h6 w-100">
@@ -62,6 +60,7 @@
 				</div>
 			</form>
 		</div>
+		<?php endif; ?>
 		<div class="flex flex-column">
 			<span class="line-text mb-2 h4 semibold primary"><?= lang('BULK_PENDING'); ?></span>
 			<div class="flex">

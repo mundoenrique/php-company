@@ -1308,7 +1308,7 @@ label {
 .bg-transparent { background-color: transparent !important }
 
 .bg-content {
-  background: url("../../images/bnt/bg-content.svg");
+  background: url("../../images/bnt/bg-content.png");
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -3551,7 +3551,7 @@ a.ui-button:active,
 	height: 100%;
 	z-index: 0;
 	opacity: .4;
-	background-image: url("../../images/bnt/bg-content.svg");
+	background-image: url("../../images/bnt/bg-content.png");
 	background-repeat: no-repeat;
 	background-size: cover;
 }

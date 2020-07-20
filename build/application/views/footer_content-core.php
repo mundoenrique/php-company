@@ -1,36 +1,29 @@
-
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 <footer class="main-footer">
 	<? if ($countryUri == 'bdb'): ?>
 	<div class="flex pr-2 pr-lg-0">
-	<img  src="<?= $this->asset->insertFile($countryUri.'/'.lang('GEN_FOTTER_MARK')); ?> " alt="Logo Superintendencia">
+		<img src="<?= $this->asset->insertFile(lang('GEN_FOTTER_MARK'), 'images', $countryUri); ?> " alt="Logo Superintendencia">
 	</div>
 	<? endif; ?>
 	<div class="flex flex-auto flex-wrap justify-around items-center">
 
-	<?php if(lang('CONF_FOOTER_NETWORKS') == 'ON'): ?>
+		<?php if(lang('CONF_FOOTER_NETWORKS') == 'ON'): ?>
 		<div class="order-first networks">
-			<a href="<?= lang('GEN_FOOTER_LINK_FACEBOOK'); ?>" target="_blank">
-				<img src="<?= $this->asset->insertFile($countryUri.'/'.lang('GEN_FOOTER_IMG_FACEBOOK')); ?>"
-					alt="<?= lang('GEN_ALTERNATIVE_TEXT'); ?>"></a>
-			<a href="<?= lang('GEN_FOOTER_LINK_TWITTER'); ?>" target="_blank">
-			<img src="<?= $this->asset->insertFile($countryUri.'/'.lang('GEN_FOOTER_IMG_TWITTER')); ?>"
-					alt="<?= lang('GEN_ALTERNATIVE_TEXT'); ?>"></a>
-			<a href="<?= lang('GEN_FOOTER_LINK_YOUTUBE'); ?>" target="_blank">
-				<img src="<?= $this->asset->insertFile($countryUri.'/'.lang('GEN_FOOTER_IMG_YOUTUBE')); ?>"
-					alt="<?= lang('GEN_ALTERNATIVE_TEXT'); ?>"></a>
-			<a href="<?= lang('GEN_FOOTER_LINK_INSTAGRAM'); ?>" target="_blank">
-				<img src="<?= $this->asset->insertFile($countryUri.'/'.lang('GEN_FOOTER_IMG_INSTAGRAM')); ?>"
-					alt="<?= lang('GEN_ALTERNATIVE_TEXT'); ?>"></a>
+			<?php foreach(lang('GEN_FOTTER_NETWORKS_IMG') AS $key => $value): ?>
+			<a href="<?= lang('GEN_FOTTER_NETWORKS_LINK')[$key]; ?>" target="_blank">
+				<img src="<?= $this->asset->insertFile($value, 'images/networks'); ?>"
+					alt="<?= $key; ?>">
+				</a>
+			<?php endforeach; ?>
 		</div>
-	<?php endif; ?>
-	<?php if(lang('CONF_FOOTER_LOGO') == 'ON'):?>
-		<img class="order-first" src="<?= $this->asset->insertFile($countryUri.'/'.lang('GEN_FOTTER_IMAGE_L')); ?>"
-				alt="<?= lang('GEN_ALTERNATIVE_TEXT'); ?>">
-	<?php endif; ?>
-		<img class="order-1"  src="<?= $this->asset->insertFile($countryUri.'/'.lang('GEN_FOTTER_IMAGE_R')); ?>"
-				alt="Logo PCI">
-		<span class="copyright-footer mt-1 nowrap flex-auto lg-flex-none order-1 order-lg-0 center h6"><?= lang('GEN_FOTTER_RIGHTS'); ?><?= date("Y") ?></span>
+		<?php endif; ?>
+		<?php if(lang('CONF_FOOTER_LOGO') == 'ON'):?>
+		<img class="order-first" src="<?= $this->asset->insertFile(lang('GEN_FOTTER_IMAGE_L'), 'images', $countryUri); ?>"
+			alt="<?= lang('GEN_ALTERNATIVE_TEXT'); ?>">
+		<?php endif; ?>
+		<img class="order-1" src="<?= $this->asset->insertFile(lang('GEN_FOTTER_IMAGE_R'), 'images'); ?>" alt="Logo PCI">
+		<span
+			class="copyright-footer mt-1 nowrap flex-auto lg-flex-none order-1 order-lg-0 center h6"><?= lang('GEN_FOTTER_RIGHTS'); ?><?= date("Y") ?></span>
 	</div>
 </footer>
 
