@@ -6,6 +6,9 @@ $lang['CONF_SUPPORT_IE'] = 'ON';
 $lang['CONF_VALID_POSITION'] = 'right';
 //SIGNIN
 $lang['CONF_SIGNIN_IMG'] = 'ON';
+//RECOVER ACCESS
+$lang['CONF_RECOV_PASS'] = 'OFF';
+$lang['CONF_RECOV_ACCESS'] = 'OFF';
 //REQUEST UNNAMED
 $lang['CONF_UNNA_EXPIRED_DATE'] = 'OFF';
 $lang['CONF_STARTING_LINE2_REQUIRED'] = 'OFF';
@@ -45,4 +48,4 @@ $lang['CONF_MP4_VIDEO'] = [''];
 $lang['CONF_PDF_ICON'] = 'icon-pdf.svg';
 $lang['CONF_RAR_ICON'] = 'icon-rar.svg';
 $lang['CONF_ZIP_ICON'] = 'icon-zip.svg';
-//UNAMED CARDS FLAGS
+
