@@ -21,7 +21,7 @@
 							<div class="form-group col-lg-3">
 								<label for="documentType"><?= lang('GEN_DOCUMENT_TYPE'); ?></label>
 								<select id="documentType" name="documentType" class="custom-select form-control" disabled autocomplete="off">
-									<?php foreach (lang('RECOVER_ACCESS_DOC_TYPE') AS $key => $value): ?>
+									<?php foreach (lang('GEN_RECOVER_DOC_TYPE') AS $key => $value): ?>
 									<option value="<?= $key ?>" <?= $key == '' ? 'selected disabled' : '' ?>><?= $value ?></option>
 									<?php endforeach; ?>
 								</select>

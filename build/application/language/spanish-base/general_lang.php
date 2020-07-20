@@ -352,10 +352,16 @@ $lang['GEN_CARD_ASSIGNMENT'] = 'Asignación tarjeta';
 $lang['GEN_VALID_AMOUNT'] = 'Indica un monto válido';
 $lang['GEN_OTP'] = 'Ingresa el código de verificación enviado a tu correo';
 $lang['GEN_SEND_ACCESS'] = 'Enviamos un correo a %s, con tus datos de acceso.';
-$lang['GEN_INVALID_OTP'] = 'No fué posible verificar tu código de seguridad, intenta nuevamente.';
-$lang['GEN_INVALID_DATA'] = 'Uno de los datos es incorrecto, por favor verifícalo e intenta de nuevo.';
-$lang['GEN_SO_CREATE_INCORRECT'] = 'El código de seguridad es incorrecto, verifícalo e intenta de nuevo';
-$lang['GEN_SO_CREATE_EXPIRED'] = 'El código de seguridad expiró o fue usado';
+$lang['GEN_INVALID_OTP'] = 'No fué posible verificar el código de seguridad, intenta nuevamente.';
+$lang['GEN_INVALID_DATA'] = 'Uno de los datos es incorrecto, por favor verifícalo e intenta nuevamente.';
+$lang['GEN_SO_CREATE_INCORRECT'] = 'El código de seguridad es incorrecto, verifícalo e intenta de nuevo.';
+$lang['GEN_SO_CREATE_EXPIRED'] = 'El código de seguridad expiró o fue usado.';
+// RECOVER ACCESS
+$lang['GEN_RECOVER_DOC_TYPE'] = [
+	'' => 'Selecciona',
+	'CC' => 'Cédula de ciudadania',
+	'PP' => 'Pasaporte',
+];
 //DATATABLES LANG MASTER ACCOUNT
 $lang['GEN_TABLE_USERACT_MODULE'] = 'Módulo';
 $lang['GEN_TABLE_USERACT_FUNCTION'] = 'Función';

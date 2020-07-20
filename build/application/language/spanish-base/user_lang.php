@@ -61,9 +61,3 @@ $lang['PASSWORD_INFO_3'] = 'Al menos una <strong>letra mayúscula</strong>';
 $lang['PASSWORD_INFO_4'] = 'De 1 a 3 <strong>números</strong>';
 $lang['PASSWORD_INFO_5'] = 'Al menos un <strong>caracter especial</strong> (ej: ! @ * - ? ¡ ¿ + / . , _ #)';
 $lang['PASSWORD_INFO_6'] = 'No debe tener más de 2 <strong>caracteres</strong> iguales consecutivos';
-// RECOVER ACCESS
-$lang['RECOVER_ACCESS_DOC_TYPE'] = [
-	'' => 'Selecciona',
-	'CC' => 'Cédula de ciudadania',
-	'PP' => 'Pasaporte',
-];
