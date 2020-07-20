@@ -212,6 +212,7 @@ $lang['GEN_TABLE_NUMBER_CARDS'] = 'Cant. de tarjetas';
 $lang['GEN_TABLE_BULK_ISSUE_DATE'] = 'Fecha de emisión';
 $lang['GEN_TABLE_EMISSION_STATUS'] = 'Estado de emisión';
 $lang['GEN_TABLE_PLASTIC_STATUS'] = 'Estado del plástico';
+$lang['GEN_TABLE_MOVIL_NUMBER'] = 'Número movil';
 $lang['GEN_TABLE_NAME']='Nombre';
 $lang['GEN_TABLE_LASTNAME']='Apellido';
 $lang['GEN_TABLE_ID_PERSON']= "Cédula nro.";

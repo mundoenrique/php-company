@@ -863,7 +863,7 @@ $config = [
 		[
 			'field' => 'cards[]',
 			'label' => 'cards',
-			'rules' => 'regex_match[/^([\w{}"*:.,@ ]*)+$/i]|required'
+			'rules' => 'regex_match[/^([\w{}"*:.,@ñÑáéíóúÑÁÉÍÓÚ ]*)+$/i]|required'
 		],
 		[
 			'field' => 'action',

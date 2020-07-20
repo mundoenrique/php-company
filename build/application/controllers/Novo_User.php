@@ -79,7 +79,7 @@ class Novo_User extends NOVO_Controller {
 	{
 		log_message('INFO', 'NOVO User: singleSignon Method Initialized');
 
-		$view = 'single-signin';
+		$view = 'singleSignon';
 		$this->render->send = FALSE;
 
 		if ($sessionId) {
@@ -92,7 +92,7 @@ class Novo_User extends NOVO_Controller {
 		if ($sessionId != 'fin') {
 			array_push(
 				$this->includeAssets->jsFiles,
-				'user/single-signin'
+				'user/singleSignon'
 			);
 		}
 
