@@ -759,11 +759,11 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->dataAccessLog->function = 'Saldos amanecidos';
 		$this->dataAccessLog->operation = 'Obtener excel de tabla';
 		$this->dataRequest->idOperation = 'generaArchivoXls';
-		$this->dataRequest->producto =  $dataRequest->producto;
-		$this->dataRequest->idExtEmp =  $dataRequest->cedula;
-		$this->dataRequest->tamanoPagina = $dataRequest->tamPg;
-		$this->dataRequest->paginar = $dataRequest->paginar;
-		$this->dataRequest->paginaActual = $dataRequest->paginaActual;
+		$this->dataRequest->producto =  $dataRequest->product;
+		$this->dataRequest->idExtEmp =  $dataRequest->identificationCard;
+		$this->dataRequest->tamanoPagina = $dataRequest->pageLenght;
+		$this->dataRequest->paginar = $dataRequest->paged;
+		$this->dataRequest->paginaActual = $dataRequest->actualPage;
 		$this->dataRequest->descProd =  $dataRequest->descProd;
 
 

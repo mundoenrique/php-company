@@ -47,14 +47,12 @@ $(function () {
 	$("#export_excel").click(function(){
 		var form = $('#closingBudgetForm');
 		var data = {
-			empresa: $('#enterpriseReport').find('option:selected').attr('acrif'),
-			cedula: $('#enterpriseReport').find('option:selected').attr('acrif'),
-			producto: $("#productCode").val(),
-			nomEmpresa: $('#enterpriseReport').find('option:selected').attr('nomOf'),
+			identificationCard: $('#enterpriseReport').find('option:selected').attr('acrif'),
+			product: $("#productCode").val(),
 			descProd: $("#productCode").find('option:selected').attr('value'),
-			paginaActual: 1,
-			paginar: true,
-			tamPg: $("#tamP").val()
+			actualPage: 1,
+			paged: true,
+			pageLenght: $("#tamP").val()
 		};
 		validateForms(form);
 		if (form.valid()) {
