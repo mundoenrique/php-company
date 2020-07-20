@@ -1,50 +1,33 @@
 'use strict'
-var reportsResults;
-var enterpriseCode;
-var enterpriseGroup;
-var idFis;
-var nameEnterprise;
-var enterprise;
-var nit;
-var product;
-var enterpriseName;
-var descProd;
-var actualPage;
-var paging;
-var tamPg;
-var table;
 var access;
 
 $(function () {
+
 	$('#blockBudgetResults').addClass('hide');
 	$('#titleResults').addClass('hide');
 	$('#Nit').attr('maxlength', 10);
 	$('#pre-loader').remove();
 	$('.hide-out').removeClass('hide');
+	$('#export_excel').addClass('hide');
 
 	$('#enterpriseReport').on('change', function(){
+		var form = $('#closingBudgetForm')
 		$('#closingBudgetsBtn').removeAttr('disabled');
 		$('#productCode').attr('disabled', 'disabled');
 		$('#products-select').empty();
-		enterpriseCode =  $('#enterpriseReport').find('option:selected').attr('code');
-		enterpriseGroup =  $('#enterpriseReport').find('option:selected').attr('group');
-		idFis =  $('#enterpriseReport').find('option:selected').attr('acrif');
-		enterpriseName = $('#enterpriseReport').find('option:selected').text();
-		var passData = {
-			enterpriseCode: enterpriseCode,
-			enterpriseGroup: enterpriseGroup,
-			idFiscal: idFis,
-			enterpriseName: enterpriseName,
+		var data = {
+			enterpriseCode: $('#enterpriseReport').find('option:selected').attr('code'),
+			enterpriseGroup: $('#enterpriseReport').find('option:selected').attr('group'),
+			idFiscal: $('#enterpriseReport').find('option:selected').attr('acrif'),
+			enterpriseName: $('#enterpriseReport').find('option:selected').text(),
 			select: true
 		};
-		selectionBussine(passData)
-	})
+		if (form.valid()) {
+			insertFormInput(true, form);
+			selectionBussine(data);
+		}
+	});
 
-	$('#Nit').keyup(function (){
-		this.value = (this.value + '').replace(/[^0-9]+$/i, '');
-	 });
-
-	$('#export_excel').addClass("hide");
 	$('#closingBudgetsBtn').on('click', function(e){
 		$('#spinnerBlockBudget').removeClass("hide");
 		$('#blockBudgetResults').addClass("hide");
@@ -59,78 +42,69 @@ $(function () {
 			var dataForm = getDataForm(form)
 			closingBudgets(dataForm)
 		}
-	})
-
+	});
 
 	$("#export_excel").click(function(){
-		enterprise = $('#enterpriseReport').find('option:selected').attr('acrif');
-		nit =  $('#enterpriseReport').find('option:selected').attr('acrif');
-		product = $("#productCode").val();
-		nameEnterprise = $('#enterpriseReport').find('option:selected').attr('nomOf');
-		descProd = $("#productCode").find('option:selected').attr('value');
-		actualPage = 1;
-		paging = true;
-		tamPg = $("#tamP").val();
-
-		var passData = {
-			empresa: enterprise,
-			cedula: nit,
-			producto: product,
-			nomEmpresa: nameEnterprise,
-			descProd: descProd,
-			paginaActual: actualPage,
-			paginar: paging,
-			tamPg: tamPg
+		var form = $('#closingBudgetForm');
+		var data = {
+			empresa: $('#enterpriseReport').find('option:selected').attr('acrif'),
+			cedula: $('#enterpriseReport').find('option:selected').attr('acrif'),
+			producto: $("#productCode").val(),
+			nomEmpresa: $('#enterpriseReport').find('option:selected').attr('nomOf'),
+			descProd: $("#productCode").find('option:selected').attr('value'),
+			paginaActual: 1,
+			paginar: true,
+			tamPg: $("#tamP").val()
 		};
-
-		exportToExcel(passData)
-		});
+		validateForms(form);
+		if (form.valid()) {
+			exportToExcel(data)
+		}
+	});
 });
 
 function selectionBussine(passData) {
 	verb = "POST"; who = 'Business'; where = 'getProducts'; data = passData;
 	$("#productCode").html("");
 	callNovoCore(verb, who, where, data, function(response) {
-			dataResponse = response.data
-			code = response.code
-
-			var info = dataResponse;
-			if(code == 3){
-				$('#productCode').append("<option>"+		$("#errProd").val() +"</option>");
-				$('#closingBudgetsBtn').attr('disabled', 'disabled');
-			}
-			$('#productCode').removeAttr('disabled');
-			for (var index = 0; index < info.length; index++) {
-				$('#productCode').append("<option value=" + info[index].id + " brand=" + info[index].brand + ">" + info[index].desc + "</option>");
-			}
-})
-
-}
+		dataResponse = response.data
+		code = response.code
+		var info = dataResponse;
+		if (code == 3) {
+			$('#productCode').append("<option>"+		$("#errProd").val() +"</option>");
+			$('#closingBudgetsBtn').attr('disabled', 'disabled');
+		} else if (code == 0) {
+			insertFormInput(false);
+		}
+		$('#productCode').removeAttr('disabled');
+		for (var index = 0; index < info.length; index++) {
+			$('#productCode').append("<option value=" + info[index].id + " brand=" + info[index].brand + ">" + info[index].desc + "</option>");
+		}
+	})
+};
 
 function exportToExcel(passData) {
 	verb = "POST"; who = 'Reports'; where = 'exportToExcel'; data = passData;
 	callNovoCore(verb, who, where, data, function(response) {
-			dataResponse = response.data;
-			code = response.code
-			var info = dataResponse;
-			if(info.formatoArchivo == 'excel'){
-				info.formatoArchivo = '.xls'
+		dataResponse = response.data;
+		code = response.code
+		var info = dataResponse;
+		if(info.formatoArchivo == 'excel'){
+			info.formatoArchivo = '.xls'
+		}
+		if(code == 0){
+			data = {
+				"name": info.nombre.replace(/ /g, "")+info.formatoArchivo,
+				"ext": info.formatoArchivo,
+				"file": info.archivo
 			}
-			if(code == 0){
-				data = {
-					"name": info.nombre.replace(/ /g, "")+info.formatoArchivo,
-					"ext": info.formatoArchivo,
-					"file": info.archivo
-				}
-				downLoadfiles (data);
+			downLoadfiles (data);
 			$('.cover-spin').removeAttr("style");
 		}
-})
-}
+	})
+};
 
 function closingBudgets(dataForm) {
-	var columns = JSON.stringify(JSON.parse(lang.REPORTS_COLUMNS));
-	var columnsRefs = JSON.stringify(JSON.parse(lang.REPORTS_COLUMNS_REFS));
 	var table = $('#balancesClosing').DataTable();
 	table.destroy();
 	table = $('#balancesClosing').DataTable({
@@ -158,8 +132,40 @@ function closingBudgets(dataForm) {
 		"language": dataTableLang,
 		"processing": true,
 		"serverSide": true,
-		"columns": JSON.parse(columns),
-		"columnDefs": JSON.parse(columnsRefs),
+		"columns": [
+			{ "data": "tarjeta"},
+			{ "data": "nombre"},
+			{ "data": "idExtPer"},
+			{ "data": "saldo"},
+			{ "data": "fechaUltAct"}
+		],
+		"columnDefs": [
+			{
+				"targets": 0,
+				"className": "tarjeta",
+				"visible": lang.REPORTS_CARD_COLUMN == "ON"
+			},
+			{
+				"targets": 1,
+				"className": "nombre",
+				"visible": lang.REPORTS_NAME_COLUMN == "ON"
+			},
+			{
+				"targets": 2,
+				"className": "idExtPer",
+				"visible": lang.REPORTS_ID_COLUMN == "ON"
+			},
+			{
+				"targets": 3,
+				"className": "saldo",
+				"visible": lang.REPORTS_BALANCE_COLUMN == "ON"
+			},
+			{
+				"targets": 4,
+				"className": "fechaUltAct",
+				"visible": lang.REPORTS_LAST_UPDATE_COLUMN == "ON"
+			}
+		],
 		"ajax": {
 			url: baseURL + 'async-call',
 			method: 'POST',
@@ -201,7 +207,6 @@ function closingBudgets(dataForm) {
 				if (responseTable.code === codeDefaul) {
 					notiSystem(responseTable.title, responseTable.msg, responseTable.icon, responseTable.dataResp);
 				}
-
 				access = responseTable.access;
 				return JSON.stringify(responseTable);
 			}
