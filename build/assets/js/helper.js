@@ -9,7 +9,6 @@ var searchEnterprise = $('#sb-search');
 var inputPass = $('#password');
 var dataTableLang;
 var validator;
-var modalClose = true;
 
 $(function () {
 	$('input[type=text], input[type=password], input[type=email]').attr('autocomplete', 'off');
@@ -117,7 +116,7 @@ function callNovoCore(verb, who, where, request, _response_) {
 
 		response = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, { format: CryptoJSAesJson }).toString(CryptoJS.enc.Utf8))
 
-		modalClose = response.code != 0 ? true : modalClose;
+		var modalClose = response.modal ? false : true;
 
 		if ($('#system-info').parents('.ui-dialog').length && modalClose) {
 			$('#accept')

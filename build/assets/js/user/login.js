@@ -170,7 +170,6 @@ $(function () {
 						.html(loader)
 						.attr('id', oldID);
 						userCred = getCredentialsUser();
-						modalClose = false;
 						recaptcha();
 					}
 				});
