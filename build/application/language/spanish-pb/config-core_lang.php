@@ -3,9 +3,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 //RECOVER ACCESS
 $lang['CONF_RECOV_PASS'] = 'OFF';
 $lang['CONF_RECOV_ACCESS'] = 'ON';
-//FOOTER
-$lang['CONF_FOOTER_NETWORKS'] = 'OFF';
-$lang['CONF_FOOTER_LOGO'] = 'ON';
 //CALCULATE SERVICE ORDER
 $lang['CONF_SERVICE_ORDER_OTP'] = 'ON';
 //INPUT CARDS INQUIRY
