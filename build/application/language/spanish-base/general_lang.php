@@ -134,6 +134,15 @@ $lang['GEN_FILE'] = 'Archivos de gestión Conexión Empresas Online';
 $lang['GEN_FILE_OPERATIONAL_BATCH'] = 'Archivos lotes operativos (194kb)';
 $lang['GEN_DOWNLOAD_FILE_INI'] = 'Archivo.ini';
 $lang['GEN_BTN_INI'] = 'Debes seleccionar una empresa para poder realizar la descarga';
+$lang['GEN_CONTACTS_TITLE_HELP'] = '¿Necesitas ayuda?';
+$lang['GEN_CONTACTS_TITLE'] = 'Líneas de atención a nivel nacional';
+$lang['GEN_CONTACTS_CITY'] = 'CIUDAD';
+$lang['GEN_CONTACTS_CONTACT'] = 'CONTACTO';
+$lang['GEN_CONTACTS_REST_COUNTRY'] = 'RESTO DEL PAÍS';
+$lang['GEN_CONTACTS'] = [
+	'city' => '(XX) XXX XXXX',
+];
+$lang['GEN_CONTACTS_REST_COUNTRY_NUMBER'] = 'XXX (XXXXXX)';
 //LINKS
 $lang['GEN_LINK_LOGIN'] = 'inicio';
 $lang['GEN_LINK_RECOVER_ACCESS'] = 'recuperar-clave';

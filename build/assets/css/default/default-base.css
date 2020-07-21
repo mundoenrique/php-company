@@ -2046,7 +2046,7 @@ i[class^="icon-"].novoglyphs,
 i[class*=" icon-"].novoglyphs {
 	font-family: var(--font-family-novoglyphs)
 }
-
+.icon-phone:before         { content: "\e06c"; }
 .icon-view:before          { content: "\e000"; }
 .icon-edit:before          { content: "\e001"; }
 .icon-remove:before        { content: "\e002"; }
@@ -2055,7 +2055,11 @@ i[class*=" icon-"].novoglyphs {
 .icon-find:before          { content: "\e005"; }
 .icon-download:before      { content: "\e008"; }
 .icon-upload:before        { content: "\e009"; }
+.icon-arrow-right:before   { content: "\e011"; }
 .icon-user:before          { content: "\e015"; }
+.icon-envelope-open:before { content: "\e022"; }
+.icon-lock:before 			   { content: "\e028"; }
+.icon-notification:before  { content: "\e025"; }
 .icon-card:before          { content: "\e029"; }
 .icon-credit-card:before	 { content: "\e031"; }
 .icon-thumbs-up:before     { content: "\e032"; }
@@ -2077,6 +2081,7 @@ i[class*=" icon-"].novoglyphs {
 .icon-file-graph:before 	 { content: "\e058"; }
 .icon-file-pdf:before 		 { content: "\e059"; }
 .icon-spinner:before 			 { content: "\e060"; }
+.icon-building:before 	   { content: "\e062"; }
 .icon-balance:before 			 { content: "\e072"; }
 .icon-key:before 					 { content: "\e01a"; }
 .icon-file-word:before     { content: "\e05a"; }
@@ -2087,13 +2092,19 @@ i[class*=" icon-"].novoglyphs {
 .icon-unlock:before 			 { content: "\e01c"; }
 .icon-arrow-down:before    { content: "\e03c"; }
 .icon-chart-pie:before  	 { content: "\e04c"; }
+.icon-user-building:before { content: "\e09c"; }
+.icon-user-edit:before     { content: "\e02d"; }
 .icon-arrow-left:before    { content: "\e03d"; }
 .icon-card-fee:before			 { content: "\e08d"; }
 /* .icon-arrow-right:before   { content: "\e03e"; } */
 .icon-car:before					 { content: "\e04e"; }
+.icon-user-card:before		 { content: "\e05e"; }
 .icon-chevron-up:before    { content: "\e03f"; }
 .icon-bag:before 					 { content: "\e04f"; }
-
+.icon-book:before    			 { content: "\e02f"; }
+.icon-chevron-up:before    { content: "\e03f"; }
+.icon-bag:before 					 { content: "\e04f"; }
+.icon-email:before         { content: "\e007"; }
 
 .icon-user{
 	padding-right: 0 !important;
@@ -2964,6 +2975,48 @@ table#resultsAccount thead th:nth-child(7){
 	}
 }
 
+/* widget support login */
+
+.widget-support {
+	position: fixed;
+	bottom: 90px;
+	right: -255px;
+	padding-top: 12px;
+	padding-bottom: 20px;
+	overflow: hidden;
+	transition: all .3s ease 0s;
+	background-color: rgb(249, 249, 249);
+	z-index: 9;
+	border: 1px solid var(--color-primary);
+}
+
+.widget-support:hover {
+	right: 2px;
+}
+
+.login-content .widget-support{
+	width: 255px !important;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+}
+
+.widget-support-btn{
+	width: 72px;
+	height: 64px;
+	background-color: rgb(249, 249, 249);
+	border: 1px solid var(--color-primary);
+	border-right: 0px;
+	border-radius: 3px 0 0 3px;
+	transform: translate(-107px, -42.5px);
+	position: fixed;
+	color: var(--color-sixth);
+}
+
+.widget-support:hover .widget-support-btn{
+	opacity: 0;
+}
+
 /* Lista de pasos con iconos */
 
 ul.steps li.step-item {
@@ -3535,7 +3588,7 @@ a.ui-button:active,
 
 .login-content .z1{
 	background: var(--color-primary);
-	border: 1px solid var(--color-primary);
+	border: .5px solid var(--color-primary);
 	border-radius: var(--border-radius);
 }
 

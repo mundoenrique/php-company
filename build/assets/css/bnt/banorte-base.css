@@ -2046,7 +2046,6 @@ i[class^="icon-"].novoglyphs,
 i[class*=" icon-"].novoglyphs {
 	font-family: var(--font-family-novoglyphs)
 }
-
 .icon-phone:before         { content: "\e06c"; }
 .icon-view:before          { content: "\e000"; }
 .icon-edit:before          { content: "\e001"; }

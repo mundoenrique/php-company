@@ -6,6 +6,7 @@ $lang['CONF_SUPPORT_IE'] = 'ON';
 $lang['CONF_VALID_POSITION'] = 'right';
 //SIGNIN
 $lang['CONF_SIGNIN_IMG'] = 'ON';
+$lang['CONF_SIGNIN_WIDGET_CONTACT'] = 'OFF';
 //RECOVER ACCESS
 $lang['CONF_RECOV_PASS'] = 'OFF';
 $lang['CONF_RECOV_ACCESS'] = 'OFF';
