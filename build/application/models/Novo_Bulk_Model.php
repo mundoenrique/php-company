@@ -948,14 +948,14 @@ class Novo_Bulk_Model extends NOVO_Model {
 			break;
 			case -286:
 				$this->response->title = lang('BULK_SO_CREATE_TITLE');
-				$this->response->msg = lang('BULK_SO_CREATE_INCORRECT');
+				$this->response->msg = lang('GEN_SO_CREATE_INCORRECT');
 				$this->response->icon = lang('GEN_ICON_INFO');
 				$this->response->data['btn1']['action'] = 'close';
 			break;
 			case -287:
 			case -288:
 				$this->response->title = lang('BULK_SO_CREATE_TITLE');
-				$this->response->msg = lang('BULK_SO_CREATE_EXPIRED');
+				$this->response->msg = lang('GEN_SO_CREATE_EXPIRED');
 				$this->response->icon = lang('GEN_ICON_INFO');
 				$this->response->data['btn1']['link'] = 'lotes-autorizacion';
 				$this->response->data['btn1']['action'] = 'redirect';

@@ -296,8 +296,8 @@ class Novo_Business_Model extends NOVO_Model {
 		$productDetail = [
 			'name' => isset($dataRequest->productName) ? $dataRequest->productName : '',
 			'imgProgram' => $this->countryUri.'_default.svg',
-			'brand' => isset($dataRequest->productBrand) ? $dataRequest->productBrand : '',
-			'imgBrand' => isset($dataRequest->productBrand) ? $dataRequest->productBrand.'_card-blue' : '',
+			'brand' => isset($dataRequest->productBrand) ? url_title(trim(mb_strtolower($dataRequest->productBrand))) : '',
+			'imgBrand' => isset($dataRequest->productBrand) ? $dataRequest->productBrand.lang('GEN_DETAIL_BARND_COLOR') : '',
 			'viewSomeAttr' => TRUE,
 			'prefix' => $productPrefix
 		];

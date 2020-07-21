@@ -26,7 +26,7 @@
 					<?= lang('LOGIN_BTN') ?>
 				</button>
 				<?php if(lang('CONIFG_SIGIN_RECOVER_PASS') == 'ON'): ?>
-				<a class="block mb-1 h5 primary hyper-link" href="<?= base_url('recuperar-clave');?>"><?= lang('LOGIN_RECOVER_PASS'); ?></a>
+				<a class="block mb-1 h5 primary hyper-link" href="<?= base_url(lang('GEN_LINK_RECOVER_ACCESS'));?>"><?= lang('LOGIN_RECOVER_PASS'); ?></a>
 				<?php endif; ?>
 			</form>
 		</div>
