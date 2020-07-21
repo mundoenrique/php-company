@@ -70,7 +70,7 @@ $(function () {
 			$("#initialDate ").datepicker('setDate', null);
 			$("#finalDate").datepicker('setDate', null);
 			$("#initialDate ").attr('disabled', 'disabled');
-			$("#finalDate", ).attr('disabled', 'disabled');
+			$("#finalDate").attr('disabled', 'disabled');
 		} else if ($("input[name='results']:checked").val() == 0 ){
 			$("#initialDate ").removeAttr('disabled');
 			$("#finalDate ").removeAttr('disabled');
