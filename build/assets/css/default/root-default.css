@@ -1,29 +1,9 @@
 @font-face {
-  font-family: 'Gotham Book';
-  font-style: normal;
-  font-weight: 300;
-  src: url('../../fonts/bnt/Gotham-Book.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: 'Gotham Book';
-  font-style: normal;
-  font-weight: 700;
-  src: url('../../fonts/bnt/Gotham-Bold.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: 'Roboto';
-  font-style: normal;
-  font-weight: 300;
-  src: url('../../fonts/bnt/Roboto-Regular.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: 'Roboto';
-  font-style: normal;
-  font-weight: 700;
-  src: url('../../fonts/bnt/Roboto-Bold.ttf') format('truetype');
+	font-family: "sourcesanspro-regular";
+	src: url('../../fonts/sourcesanspro-regular-webfont.eot');
+	src: url('../../fonts/sourcesanspro-regular-webfont.eot?#iefix') format('eot'), url('../../fonts/sourcesanspro-regular-webfont.woff') format('woff'), url('../../fonts/sourcesanspro-regular-webfont.ttf') format('truetype'), url('../../fonts/sourcesanspro-regular-webfont.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
 }
 
 :root {
@@ -70,8 +50,8 @@
   --semibold-font-weight: 600;
   --bold-font-weight: 700;
 
-	--font-family-base-first: 'Gotham Book', sans-serif;
-	--font-family-base: 'Roboto', sans-serif;
+	--font-family-base-first: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	--font-family-base: 'sourcesanspro-regular', sans-serif;
   --font-family-monospace: monospace, "Courier New";
   --font-family-novoglyphs: 'novoglyphs';
   --font-size-base: .875rem;
