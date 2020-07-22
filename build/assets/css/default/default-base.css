@@ -3741,6 +3741,13 @@ a.ui-button:active,
 	}
 }
 
+@media (min-width: 1200px) and (max-width: 1263px) {
+	.select-product {
+		width: 730px;
+		margin-right: 0;
+	}
+}
+
 .product-presentation {
 	width: 250px;
 }
