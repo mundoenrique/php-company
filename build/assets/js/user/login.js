@@ -49,7 +49,7 @@ $(function () {
 						}
 					}, function (token) {
 						if (!token) {
-							icon = lan.GEN_ICON_WARNING;
+							icon = lang.GEN_ICON_WARNING;
 							data = {
 								btn1: {
 									link: 'inicio',
