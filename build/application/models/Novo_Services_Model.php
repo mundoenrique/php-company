@@ -196,9 +196,14 @@ class Novo_Services_Model extends NOVO_Model {
 			base64_decode($password->plot),
 			utf8_encode($password->password)
 		);
+
+		if (lang('CONF_HASH_PASS') == 'ON') {
+			$password = md5($password);
+		}
+
 		$this->dataRequest->usuario = [
 			'userName' => $this->session->userName,
-			'password' => md5($password)
+			'password' => $password
 		];
 
 		$response = $this->sendToService('callWs_ActionMasterAccount');
@@ -495,11 +500,16 @@ class Novo_Services_Model extends NOVO_Model {
 			base64_decode($password->plot),
 			utf8_encode($password->password)
 		);
+
+		if (lang('CONF_HASH_PASS') == 'ON') {
+			$password = md5($password);
+		}
+
 		$this->dataRequest->idOperation = 'operacionSeguimientoLoteCeo';
 		$this->dataRequest->items = $dataList;
 		$this->dataRequest->usuario = [
 			'userName' => $this->session->userName,
-			'password' => md5($password),
+			'password' => $password,
 			'idProducto' => $this->session->productInf->productPrefix
 		];
 		$this->dataRequest->opcion = lang('SERVICES_ACTION_'.$dataRequest->action);
