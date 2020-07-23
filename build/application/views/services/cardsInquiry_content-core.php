@@ -45,11 +45,11 @@
 							</div>
 							<?php if(lang('CONF_INQUIRY_DOCTYPE') == 'ON'): ?>
 							<div class="form-group col-4 col-xl-3">
-								<label>Tipo de documento</label>
-								<select id="documentType" name="documentType" class="form-control select-box custom-select flex h6 w-100">
-									<option value="" selected>Seleccionar</option>
-									<option value="CC">Cédula</option>
-									<option value="PP">Pasaporte</option>
+								<label for="docType"><?= lang('GEN_DOCUMENT_TYPE'); ?></label>
+								<select id="docType" name="docType" class="form-control select-box custom-select flex h6 w-100">
+								<?php foreach (lang('GEN_RECOVER_DOC_TYPE') AS $key => $value): ?>
+									<option value="<?= $key ?>"><?= $value ?></option>
+									<?php endforeach; ?>
 								</select>
 								<div class="help-block"></div>
 							</div>

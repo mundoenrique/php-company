@@ -20,6 +20,9 @@ class Encrypt_Connect {
 		$this->keyNovo = $this->CI->config->item('keyNovo');
 		$this->iv = "\0\0\0\0\0\0\0\0";
 		$this->logMessage = new stdClass();
+		if (ENVIRONMENT == 'development') {
+			error_reporting(E_ALL & ~E_DEPRECATED);
+		}
 	}
 	/**
 	 * @info método para cifrar las petiones al servicio

@@ -1,4 +1,4 @@
-FROM php:7.0-apache
+FROM php:7.4-apache
 
 WORKDIR /var/www/html
 
@@ -7,9 +7,10 @@ COPY src/httpd/default.conf /etc/apache2/sites-available/000-default.conf
 
 RUN apt-get update -y \
 	&& apt-get install -y curl libmcrypt-dev libssh2-1-dev nano \
-	&& docker-php-ext-install -j$(nproc) mcrypt \
 	&& pecl install ssh2-1.0 \
 	&& docker-php-ext-enable ssh2 \
+	&& pecl install mcrypt-1.0.3 \
+	&& docker-php-ext-enable mcrypt \
 	&& a2enmod headers rewrite \
 	&& a2ensite 000-default.conf \
 	&& mkdir -p assets/Co/bash assets/Pe/bash assets/Usd/bash assets/Ve/bash assets/Ec-bp/bash \

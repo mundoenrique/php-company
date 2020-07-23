@@ -52,9 +52,17 @@ class Novo_Services_Model extends NOVO_Model {
 		$cardsList = [];
 		$this->response->params['costoComisionTrans'] = '--';
 		$this->response->params['costoComisionCons'] = '--';
-		$this->response->balance = '';
+		$this->response->balance = '--';
 		$this->response->recordsTotal = 0;
 		$this->response->recordsFiltered = 0;
+		$this->response->access = [
+			'TRASAL' => FALSE,
+			'TRACAR' => FALSE,
+			'TRAABO' => FALSE,
+			'TRABLQ' => FALSE,
+			'TRAASG' => FALSE,
+			'TRADBL' => FALSE,
+		];
 
 		switch($this->isResponseRc) {
 			case 0:
@@ -87,6 +95,7 @@ class Novo_Services_Model extends NOVO_Model {
 				$this->response->recordsFiltered = (int) $response->listaTarjetas[0]->totalRegistros;
 			break;
 			case -150:
+				$this->response->code = 1;
 				$this->response->title = lang('GEN_MENU_SERV_MASTER_ACCOUNT');
 				$this->response->icon = lang('GEN_ICON_INFO');
 				$this->response->msg = 'No se encontraron resultados para tu busqueda';
