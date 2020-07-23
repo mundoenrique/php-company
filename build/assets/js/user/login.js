@@ -133,6 +133,7 @@ $(function () {
 			restartFormLogin();
 			if(response.ipInvalid){
 				var oldID = $('#accept').attr('id');
+				var optionsData = response.data;
 				$('#accept').attr('id', 'send-otp-btn');
 				btn = response.data.btn1;
 
@@ -152,7 +153,19 @@ $(function () {
         loginIpMsg+='</form>';
 
 				$('#formVerificationOTP input').attr('disabled', false);
-				notiSystem(response.title, loginIpMsg, response.icon,response.data);
+
+				optionsData.minWidth = 480;
+				optionsData.maxHeight = 'none';
+
+				if (skinbp | skinbdb) {
+					optionsData.posMy = "center top+100";
+					optionsData.posAt = "center top";
+				} else {
+					optionsData.posMy = "center top+160";
+					optionsData.posAt = "center top";
+				}
+
+				notiSystem(response.title, loginIpMsg, response.icon, optionsData);
 				windowsStyle();
 
 				formcodeOTP = $('#formVerificationOTP');
@@ -224,8 +237,6 @@ $(function () {
 	}
 
 	function windowsStyle(){
-		$("#system-info").dialog("option", "minWidth", 480);
-		$("#system-info").dialog("option", "maxHeight", false);
 		$('#system-msg').css( "width", "auto" );
 
 		if(skinbdb!=true){
@@ -234,11 +245,6 @@ $(function () {
 		}
 
 		if (skinbp | skinbdb) {
-			$("#system-info").dialog("option", "position", {
-				my: "center top+100",
-				at: "center top",
-				of: window
-			});
 			var styles = {
 				float : "none",
 				margin: "auto"
@@ -246,13 +252,6 @@ $(function () {
 			$("#system-info .ui-dialog-buttonpane").css(styles).removeClass("modal-buttonset");
 			$("#system-info .ui-dialog-buttonset").removeClass("modal-buttonset");
 			$("#system-info .btn-modal").removeClass("modal-btn-primary");
-		}
-		else {
-			$("#system-info").dialog("option", "position", {
-				my: "center top+160",
-				at: "center top",
-				of: window
-			});
 		}
 	}
 })
