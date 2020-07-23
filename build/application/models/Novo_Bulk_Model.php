@@ -586,7 +586,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 			'password' => md5($password)
 		];
 
-		$this->sendToService('DeleteConfirmBulk');
+		$this->sendToService('callWs_DeleteConfirmBulk');
 
 		switch ($this->isResponseRc) {
 			case 0:
@@ -600,6 +600,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 				$this->response->msg = novoLang(lang('BULK_NOT_DELETED'), $bulkInfo->bulkNumber);
 				$this->response->data['btn1']['action'] = 'close';
 				break;
+			case -1:
 			case -22:
 				$this->response->title = lang('BULK_DELETE_TITLE');
 				$this->response->msg = lang('RESP_PASSWORD_NO_VALID');
@@ -608,7 +609,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 				break;
 		}
 
-		return $this->responseToTheView('DeleteConfirmBulk');
+		return $this->responseToTheView('callWs_DeleteConfirmBulk');
 	}
 	/**
 	 * @info Firma lista de lotes
@@ -649,7 +650,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 			'password' => md5($password)
 		];
 
-		$this->sendToService('DisassConfirmBulk');
+		$this->sendToService('callWs_DisassConfirmBulk');
 
 		switch ($this->isResponseRc) {
 			case 0:
@@ -663,6 +664,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 				$this->response->msg = novoLang(lang('BULK_NOT_DISASS'), $bulkInfo->bulkNumber);
 				$this->response->data['btn1']['action'] = 'close';
 				break;
+			case -1:
 			case -22:
 				$this->response->title = lang('BULK_DISASS_TITLE');
 				$this->response->msg = lang('RESP_PASSWORD_NO_VALID');
@@ -671,7 +673,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 				break;
 		}
 
-		return $this->responseToTheView('DisassConfirmBulk');
+		return $this->responseToTheView('callWs_DisassConfirmBulk');
 	}
 	/**
 	 * @info Firma lista de lotes

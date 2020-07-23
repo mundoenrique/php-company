@@ -792,6 +792,7 @@ class Lotes extends CI_Controller {
 					$this->session->sess_destroy();
 					$response = array('ERROR' => '-29' );
 					break;
+				case -1:
 				case -22:
 					$response = array('ERROR' => lang('MSG_INVALID_PASS') );
 					break;
