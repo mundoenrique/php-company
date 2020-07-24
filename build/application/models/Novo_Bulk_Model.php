@@ -276,7 +276,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 			utf8_encode($password->password)
 		);
 
-		if (lang('CONF_HASH_PASS') == 'ON') {
+		if (lang('CONF_HASH_PASS') == 'ON' || $this->session->autoLogin == 'true') {
 			$password = md5($password);
 		}
 
@@ -407,7 +407,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 			utf8_encode($password->password)
 		);
 
-		if (lang('CONF_HASH_PASS') == 'ON') {
+		if (lang('CONF_HASH_PASS') == 'ON' || $this->session->autoLogin == 'true') {
 			$password = md5($password);
 		}
 
@@ -529,7 +529,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 			utf8_encode($password->password)
 		);
 
-		if (lang('CONF_HASH_PASS') == 'ON') {
+		if (lang('CONF_HASH_PASS') == 'ON' || $this->session->autoLogin == 'true') {
 			$password = md5($password);
 		}
 
@@ -593,7 +593,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 			utf8_encode($password->password)
 		);
 
-		if (lang('CONF_HASH_PASS') == 'ON') {
+		if (lang('CONF_HASH_PASS') == 'ON' || $this->session->autoLogin == 'true') {
 			$password = md5($password);
 		}
 
@@ -664,7 +664,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 			utf8_encode($password->password)
 		);
 
-		if (lang('CONF_HASH_PASS') == 'ON') {
+		if (lang('CONF_HASH_PASS') == 'ON' || $this->session->autoLogin == 'true') {
 			$password = md5($password);
 		}
 
@@ -730,7 +730,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 			utf8_encode($password->password)
 		);
 
-		if (lang('CONF_HASH_PASS') == 'ON') {
+		if (lang('CONF_HASH_PASS') == 'ON' || $this->session->autoLogin == 'true') {
 			$password = md5($password);
 		}
 
@@ -1168,7 +1168,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 			);
 		}
 
-		if (lang('CONF_HASH_PASS') == 'ON') {
+		if (lang('CONF_HASH_PASS') == 'ON' || $this->session->autoLogin == 'true') {
 			$password = md5($password);
 		}
 
