@@ -197,7 +197,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 			utf8_encode($password->password)
 		);
 
-		if (lang('CONF_HASH_PASS') == 'ON' || $this->session->autoLogin == 'true') {
+		if (lang('CONF_HASH_PASS') == 'ON' || $this->session->autoLogin == 'false') {
 			$password = md5($password);
 		}
 
