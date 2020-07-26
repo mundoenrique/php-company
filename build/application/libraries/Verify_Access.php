@@ -62,10 +62,10 @@ class Verify_Access {
 				case 'request':
 				case 'plot':
 				case 'ceo_name':
-					continue;
+					break;
 				case 'screenSize':
 					$this->CI->session->set_userdata('screenSize', $value);
-					continue;
+					break;
 				default:
 				$this->requestServ->$key = $value;
 			}

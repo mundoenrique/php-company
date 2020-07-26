@@ -544,6 +544,7 @@ class Novo_User_Model extends NOVO_Model {
 				$code = 1;
 				$this->response->msg = lang('RESP_PASSWORD_USED');
 				break;
+			case -1:
 			case -22:
 				$code = 1;
 				$this->response->msg = lang('RESP_PASSWORD_INCORRECT');
