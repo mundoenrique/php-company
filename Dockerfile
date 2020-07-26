@@ -7,7 +7,7 @@ COPY src/httpd/default.conf /etc/apache2/sites-available/000-default.conf
 
 RUN apt-get update -y \
 	&& apt-get install -y curl libmcrypt-dev libssh2-1-dev nano \
-	&& pecl install ssh2-1.0 \
+	&& pecl install ssh2-1.2 \
 	&& docker-php-ext-enable ssh2 \
 	&& pecl install mcrypt-1.0.3 \
 	&& docker-php-ext-enable mcrypt \
