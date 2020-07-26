@@ -69,5 +69,3 @@ $lang['BULK_UNNA_PROCESS'] = 'Lotes procesados';
 $lang['BULK_UNNA_REQ_NONCARDS'] = 'Todas las tarjetas del lote han sido afiliadas';
 $lang['BULK_SO_CREATE_TITLE'] = 'Generar orden de servicio';
 $lang['BULK_SO_CREATE_FAILED'] = 'No fue posible generar la orden de servicio, por favor intentalo de nuevo';
-$lang['BULK_SO_CREATE_INCORRECT'] = 'El código de verificación es incorrecto, verifícalo e intenta de nuevo';
-$lang['BULK_SO_CREATE_EXPIRED'] = 'El código de verificación expiró o fue usado';
