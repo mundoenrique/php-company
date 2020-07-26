@@ -63,12 +63,12 @@ $config = [
 		[
 			'field' => 'idEmpresa',
 			'label' => 'idEmpresa',
-			'rules' => 'trim|regex_match[/^([\w-]+[\s]*)+$/i]|required'
+			'rules' => 'trim|regex_match[/^([\w\-]+[\s]*)+$/i]|required'
 		],
 		[
 			'field' => 'email',
 			'label' => 'email',
-			'rules' => 'trim|regex_match[/^([a-zA-Z]+[0-9_.+-]*)+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/]|required'
+			'rules' => 'trim|regex_match[/^([a-zA-Z]+[0-9_.+\-]*)+\@(([a-zA-Z0-9])+\.)+([a-zA-Z0-9]{2,4})+$/]|required'
 		]
 	],
 	'recoverAccess' => [
@@ -85,7 +85,7 @@ $config = [
 		[
 			'field' => 'email',
 			'label' => 'email',
-			'rules' => 'trim|regex_match[/^([a-zA-Z]+[0-9_.+-]*)+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/]|required'
+			'rules' => 'trim|regex_match[/^([a-zA-Z]+[0-9_.+\-]*)+\@(([a-zA-Z0-9])+\.)+([a-zA-Z0-9]{2,4})+$/]|required'
 		]
 	],
 	'validateOtp' => [
@@ -116,7 +116,7 @@ $config = [
 		[
 			'field' => 'email',
 			'label' => 'email',
-			'rules' => 'trim|regex_match[/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix]|required'
+			'rules' => 'trim|regex_match[/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9]+\.)+[a-z]{2,6}$/ix]|required'
 		]
 	],
 	'obtainNumPosition' => [
@@ -481,17 +481,17 @@ $config = [
 		[
 			'field' => 'enterpriseGroup',
 			'label' => 'enterpriseGroup',
-			'rules' => 'trim|regex_match[/^([\w-]+)+$/i]'
+			'rules' => 'trim|regex_match[/^([\w\-]+)+$/i]'
 		],
 		[
 			'field' => 'idFiscal',
 			'label' => 'idFiscal',
-			'rules' => 'trim|regex_match[/^([\w-:.]+[\s]*)+$/i]|required'
+			'rules' => 'trim|regex_match[/^([\w\-:.]+[\s]*)+$/i]|required'
 		],
 		[
 			'field' => 'enterpriseName',
 			'label' => 'enterpriseName',
-			'rules' => 'trim|regex_match[/^([\w-.,#ñÑáéíóúÑÁÉÍÓÚ\(\)&:\+]+[\s]*)+$/i]'
+			'rules' => 'trim|regex_match[/^([\w\-.,#ñÑáéíóúÑÁÉÍÓÚ\(\)&:\+]+[\s]*)+$/i]'
 		]
 
 	],
@@ -504,7 +504,7 @@ $config = [
 		[
 			'field' => 'productName',
 			'label' => 'productName',
-			'rules' => 'trim|regex_match[/^([\wñÑáéíóúÑÁÉÍÓÚ() ]+)+$/i]',
+			'rules' => 'trim|regex_match[/^([\wñÑáéíóúÑÁÉÍÓÚ\(\) ]+)+$/i]',
 		],
 		[
 			'field' => 'productBrand',
@@ -529,12 +529,12 @@ $config = [
 		[
 			'field' => 'idFiscal',
 			'label' => 'idFiscal',
-			'rules' => 'trim|regex_match[/^([\w-:.]+[\s]*)+$/i]'
+			'rules' => 'trim|regex_match[/^([\w\-:.]+[\s]*)+$/i]'
 		],
 		[
 			'field' => 'enterpriseName',
 			'label' => 'enterpriseName',
-			'rules' => 'trim|regex_match[/^([\w-.,#ñÑáéíóúÑÁÉÍÓÚ\(\)&:\+]+[\s]*)+$/i]'
+			'rules' => 'trim|regex_match[/^([\w\-.,#ñÑáéíóúÑÁÉÍÓÚ\(\)&:\+]+[\s]*)+$/i]'
 		]
 	],
 	'loadBulk'  => [
@@ -556,7 +556,7 @@ $config = [
 		[
 			'field' => 'typeBulkText',
 			'label' => 'typeBulkText',
-			'rules' => 'trim|regex_match[/^[a-z0-9ñáéíóú ().]{10,70}$/i]'
+			'rules' => 'trim|regex_match[/^[a-z0-9ñáéíóú \(\).]{10,70}$/i]'
 		]
 	],
 	'getDetailBulk' => [
@@ -737,7 +737,7 @@ $config = [
 		[
 			'field' => 'statusText',
 			'label' => 'statusText',
-			'rules' => 'trim|regex_match[/^([\w-ñáéíóú ]+[\s]*)+$/i]'
+			'rules' => 'trim|regex_match[/^([\w\-ñáéíóú ]+[\s]*)+$/i]'
 		]
 	],
 	'actionMasterAccount' => [
@@ -945,27 +945,27 @@ $config = [
 		[
 			'field' => 'data-accodgrupoe',
 			'label' => 'data-accodgrupoe',
-			'rules' => 'trim|regex_match[/^([\w-]+)+$/i]|required'
+			'rules' => 'trim|regex_match[/^([\w\-]+)+$/i]|required'
 		],
 		[
 			'field' => 'data-acrif',
 			'label' => 'data-acrif',
-			'rules' => 'trim|regex_match[/^([\w-]+[\s]*)+$/i]|required'
+			'rules' => 'trim|regex_match[/^([\w\-]+[\s]*)+$/i]|required'
 		],
 		[
 			'field' => 'data-acnomcia',
 			'label' => 'data-acnomcia',
-			'rules' => 'trim|regex_match[/^([\w-.,#ñÑáéíóúÑÁÉÍÓÚ\(\)&:\+]+[\s]*)+$/i]|required'
+			'rules' => 'trim|regex_match[/^([\w\-.,#ñÑáéíóúÑÁÉÍÓÚ\(\)&:\+]+[\s]*)+$/i]|required'
 		],
 		[
 			'field' => 'data-acrazonsocial',
 			'label' => 'data-acrazonsocial',
-			'rules' => 'trim|regex_match[/^([\w-.,#ñÑáéíóúÑÁÉÍÓÚ\(\)&:\+]+[\s]*)+$/i]|required'
+			'rules' => 'trim|regex_match[/^([\w\-.,#ñÑáéíóúÑÁÉÍÓÚ\(\)&:\+]+[\s]*)+$/i]|required'
 		],
 		[
 			'field' => 'data-acdesc',
 			'label' => 'data-acdesc',
-			'rules' => 'trim|regex_match[/^([\w-.,#ñÑáéíóúÑÁÉÍÓÚ\(\)&:\+]+[\s]*)+$/i]'
+			'rules' => 'trim|regex_match[/^([\w\-.,#ñÑáéíóúÑÁÉÍÓÚ\(\)&:\+]+[\s]*)+$/i]'
 		],
 		[
 			'field' => 'data-accodcia',
@@ -977,12 +977,12 @@ $config = [
 		[
 			'field' => 'data-marcaProducto',
 			'label' => 'data-marcaProducto',
-			'rules' => 'trim|regex_match[/^([\w-.,#ñÑáéíóúÑÁÉÍÓÚ\(\)&:\+]+[\s]*)+$/i]|required'
+			'rules' => 'trim|regex_match[/^([\w\-.,#ñÑáéíóúÑÁÉÍÓÚ\(\)&:\+]+[\s]*)+$/i]|required'
 		],
 		[
 			'field' => 'data-nombreProducto',
 			'label' => 'data-nombreProducto',
-			'rules' => 'trim|regex_match[/^([\w-.,#ñÑáéíóúÑÁÉÍÓÚ\(\)&:\+]+[\s]*)+$/i]|required'
+			'rules' => 'trim|regex_match[/^([\w\-.,#ñÑáéíóúÑÁÉÍÓÚ\(\)&:\+]+[\s]*)+$/i]|required'
 		],
 		[
 			'field' => 'data-idproducto',
@@ -994,27 +994,27 @@ $config = [
 		[
 			'field' => 'group',
 			'label' => 'group',
-			'rules' => 'trim|regex_match[/^([\w-]+)+$/i]|required'
+			'rules' => 'trim|regex_match[/^([\w\-]+)+$/i]|required'
 		],
 		[
 			'field' => 'fiscal-inf',
 			'label' => 'fiscal-inf',
-			'rules' => 'trim|regex_match[/^([\w-]+[\s]*)+$/i]|required'
+			'rules' => 'trim|regex_match[/^([\w\-]+[\s]*)+$/i]|required'
 		],
 		[
 			'field' => 'name',
 			'label' => 'name',
-			'rules' => 'trim|regex_match[/^([\w-.,#ñÑáéíóúÑÁÉÍÓÚ\(\)&:\+]+[\s]*)+$/i]|required'
+			'rules' => 'trim|regex_match[/^([\w\-.,#ñÑáéíóúÑÁÉÍÓÚ\(\)&:\+]+[\s]*)+$/i]|required'
 		],
 		[
 			'field' => 'business-name',
 			'label' => 'business-name',
-			'rules' => 'trim|regex_match[/^([\w-.,#ñÑáéíóúÑÁÉÍÓÚ\(\)&:\+]+[\s]*)+$/i]|required'
+			'rules' => 'trim|regex_match[/^([\w\-.,#ñÑáéíóúÑÁÉÍÓÚ\(\)&:\+]+[\s]*)+$/i]|required'
 		],
 		[
 			'field' => 'description',
 			'label' => 'description',
-			'rules' => 'trim|regex_match[/^([\w-.,#ñÑáéíóúÑÁÉÍÓÚ\(\)&:\+]+[\s]*)+$/i]'
+			'rules' => 'trim|regex_match[/^([\w\-.,#ñÑáéíóúÑÁÉÍÓÚ\(\)&:\+]+[\s]*)+$/i]'
 		],
 		[
 			'field' => 'code',
@@ -1026,17 +1026,17 @@ $config = [
 		[
 			'field' => 'idProductoPost',
 			'label' => 'idProductoPost',
-			'rules' => 'trim|regex_match[/^([\w-]+)+$/i]|required'
+			'rules' => 'trim|regex_match[/^([\w\-]+)+$/i]|required'
 		],
 		[
 			'field' => 'nomProduc',
 			'label' => 'nomProduc',
-			'rules' => 'trim|regex_match[/^([\w-.,#ñÑáéíóúÑÁÉÍÓÚ\(\)&:\+]+[\s]*)+$/i]|required'
+			'rules' => 'trim|regex_match[/^([\w\-.,#ñÑáéíóúÑÁÉÍÓÚ\(\)&:\+]+[\s]*)+$/i]|required'
 		],
 		[
 			'field' => 'marcProduc',
 			'label' => 'marcProduc',
-			'rules' => 'trim|regex_match[/^([\w-.,#ñÑáéíóúÑÁÉÍÓÚ\(\)&:\+]+[\s]*)+$/i]|required'
+			'rules' => 'trim|regex_match[/^([\w\-.,#ñÑáéíóúÑÁÉÍÓÚ\(\)&:\+]+[\s]*)+$/i]|required'
 		]
 		],
 	'userActivity' => [
