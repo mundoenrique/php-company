@@ -176,18 +176,19 @@ function notiSystem(title, message, icon, data) {
 	var dialogMoldal = $('#system-info');
 	var btn1 = data.btn1;
 	var btn2 = data.btn2;
+	var maxHeight = data.maxHeight || 350;
 
 	dialogMoldal.dialog({
 		title: title || lang.GEN_SYSTEM_NAME,
 		modal: 'true',
-		position: { my: data.posMy || 'center', at: data.posAt || 'center'},
+		position: { my: data.posMy || 'center', at: data.posAt || 'center' },
 		draggable: false,
 		resizable: false,
 		closeOnEscape: false,
 		width: data.width || 370,
-		minWidth: lang.CONF_MODAL_WIDTH,
+		minWidth: data.minWidth || lang.CONF_MODAL_WIDTH,
 		minHeight: 100,
-		maxHeight: data.maxHeight || 350,
+		maxHeight: maxHeight !== 'none' ? maxHeight : false,
 		dialogClass: "border-none",
 		classes: {
 			"ui-dialog-titlebar": "border-none",
