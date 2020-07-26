@@ -1,9 +1,9 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
+$lang['GEN_ENTERPRISE_LIST'] = 'dashboard';
 $lang['GEN_SYSTEM_NAME']= 'Conexión Empresas';
 $lang['GEN_WELCOME_TEXT'] = 'Bienvenido/a';
-$lang['GEN-LOGO-HEADER'] = 'logo-pichincha-azul.png';
+$lang['GEN_LOGO_HEADER'] = 'logo-pichincha-azul.png';
 $lang['GEN_ALTERNATIVE_TEXT'] = 'Banco Pichincha';
 //MODAL STYLES
 $lang['GEN_ICON'] = '';

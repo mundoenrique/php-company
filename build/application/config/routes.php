@@ -54,6 +54,7 @@ $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 //Asynchronous
 $route['(:any)/async-call'] = "novo_CallModels";
+$route['(:any)/single'] = "novo_CallModels";
 //User
 $route['(:any)/ingresar/(:any)']['GET'] = "Novo_User/singleSignon/$2";
 $route['(:any)/ingresar']['POST'] = "Novo_User/singleSignon";
@@ -62,6 +63,7 @@ $route['(:any)/inicio'] = "Novo_User/login";
 $route['(:any)/inicio/(:any)'] = "Novo_User/login";
 $route['(:any)/cerrar-sesion/(:any)'] = "Novo_User/finishSession/$2";
 $route['(:any)/recuperar-clave'] = "Novo_User/recoverPass";
+$route['(:any)/recuperar-acceso'] = "Novo_User/recoverAccess";
 $route['(:any)/cambiar-clave'] = "Novo_User/changePassword";
 $route['(:any)/obtener-usuario'] = "Novo_Settings/getUser";
 //Information
@@ -87,6 +89,8 @@ $route['(:any)/consulta-lote'] = "Novo_Inquiries/bulkDetail";
 //services
 $route['(:any)/transf-cuenta-maestra'] = "Novo_Services/transfMasterAccount";
 $route['(:any)/consulta-tarjetas'] = "Novo_Services/cardsInquiry";
+$route['(:any)/limites-transaccionales'] = "Novo_Services/transactionalLimits";
+$route['(:any)/giros-comerciales'] = "Novo_Services/twirlsCommercial";
 //DownloadFile
 $route['(:any)/descargar-archivo'] = "Novo_DownloadFiles/exportFiles";
 //Reports

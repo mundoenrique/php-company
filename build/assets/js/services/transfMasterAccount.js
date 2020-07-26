@@ -20,6 +20,7 @@ $(function () {
 			$('#cost-trans').text(lang.GEN_CURRENCY + ' ' + params.costoComisionTrans)
 			$('#cost-inquiry').text(lang.GEN_CURRENCY + ' ' + params.costoComisionCons)
 			insertFormInput(false)
+			verifyOperations()
 			$('#pre-loader-table').addClass('hide')
 			$('.hide-table').removeClass('hide')
 			$('#pre-loader').remove();
@@ -193,6 +194,9 @@ $(function () {
 
 	$('#masterAccountBtn').on('click', function (e) {
 		e.preventDefault();
+		$('#tableServicesMaster').find('thead > tr').removeClass("selected");
+		$('.help-block').text('');
+		$('input, select').removeClass('has-error');
 		form = $('#masterAccountForm');
 		validateForms(form);
 
@@ -234,7 +238,7 @@ $(function () {
 				}
 			}
 
-			inputModal =	'<form id="password-modal">';
+			inputModal =	'<form id="password-modal" name="password-modal" onsubmit="return false;">';
 			inputModal +=		'<div class="form-group col-auto">';
 			inputModal += 		'<div class="input-group">';
 			inputModal += 			'<input class="form-control pwd-input pwd" type="password" name="password" autocomplete="off"';
@@ -497,5 +501,29 @@ function buildList(response, action) {
 		$('.update').on('click', function() {
 			dataTableReload(false)
 		})
+	}
+}
+
+function verifyOperations() {
+	var column
+
+	if (!access.TRASAL) {
+		column = table.column('4');
+		column.visible(false);
+	}
+
+	if (!access.TRACAR && !access.TRAABO) {
+		column = table.column('5');
+		column.visible(false);
+	}
+
+	if (!access.TRASAL && !access.TRACAR && !access.TRAABO && !access.TRABLQ && !access.TRAASG && !access.TRADBL) {
+		$('#password-table').addClass('hide');
+		column = table.column('0');
+		column.visible(false);
+	} else {
+		$('#password-table').removeClass('hide')
+		column = table.column('0');
+		column.visible(true);
 	}
 }

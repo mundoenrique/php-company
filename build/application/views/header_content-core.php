@@ -7,7 +7,7 @@
 		<nav class="navbar navbar-expand-lg flex-auto">
 		<?php endif; ?>
 		<a class="navbar-brand">
-			<img src="<?= $this->asset->insertFile($countryUri.'/'.lang('GEN-LOGO-HEADER')); ?>"
+			<img src="<?= $this->asset->insertFile(lang('GEN_LOGO_HEADER'), 'images', $countryUri); ?>"
 				alt=<?= lang('GEN_ALTERNATIVE_TEXT'); ?>>
 		</a>
 		<?php if($this->session->logged): ?>

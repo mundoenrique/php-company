@@ -52,9 +52,17 @@ class Novo_Services_Model extends NOVO_Model {
 		$cardsList = [];
 		$this->response->params['costoComisionTrans'] = '--';
 		$this->response->params['costoComisionCons'] = '--';
-		$this->response->balance = '';
+		$this->response->balance = '--';
 		$this->response->recordsTotal = 0;
 		$this->response->recordsFiltered = 0;
+		$this->response->access = [
+			'TRASAL' => FALSE,
+			'TRACAR' => FALSE,
+			'TRAABO' => FALSE,
+			'TRABLQ' => FALSE,
+			'TRAASG' => FALSE,
+			'TRADBL' => FALSE,
+		];
 
 		switch($this->isResponseRc) {
 			case 0:
@@ -87,6 +95,7 @@ class Novo_Services_Model extends NOVO_Model {
 				$this->response->recordsFiltered = (int) $response->listaTarjetas[0]->totalRegistros;
 			break;
 			case -150:
+				$this->response->code = 1;
 				$this->response->title = lang('GEN_MENU_SERV_MASTER_ACCOUNT');
 				$this->response->icon = lang('GEN_ICON_INFO');
 				$this->response->msg = 'No se encontraron resultados para tu busqueda';
@@ -101,8 +110,9 @@ class Novo_Services_Model extends NOVO_Model {
 		return $this->responseToTheView('callWs_TransfMasterAccount');
 	}
 	/**
-	 * @info Método para
-	 * @author
+	 * @info Método para realizar acciones de cuenta maestra
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date May 29th, 2020
 	 */
 	public function callWs_ActionMasterAccount_Services($dataRequest)
 	{
@@ -186,9 +196,14 @@ class Novo_Services_Model extends NOVO_Model {
 			base64_decode($password->plot),
 			utf8_encode($password->password)
 		);
+
+		if (lang('CONF_HASH_PASS') == 'ON' || $this->session->autoLogin == 'false') {
+			$password = md5($password);
+		}
+
 		$this->dataRequest->usuario = [
 			'userName' => $this->session->userName,
-			'password' => md5($password)
+			'password' => $password
 		];
 
 		$response = $this->sendToService('callWs_ActionMasterAccount');
@@ -302,6 +317,12 @@ class Novo_Services_Model extends NOVO_Model {
 				$this->response->icon = lang('GEN_ICON_INFO');
 				$this->response->data['btn1']['action'] = 'close';
 			break;
+			case -242:
+				$this->response->title = $dataRequest->action;
+				$this->response->msg = 'Alcanzaste el límite de transacciones';
+				$this->response->icon = lang('GEN_ICON_INFO');
+				$this->response->data['btn1']['action'] = 'close';
+			break;
 			case -267:
 				$this->response->title = $dataRequest->action;
 				$this->response->msg = novoLang('La tarjeta %s ya se encunetra bloqueda.', $cardsList[0]['noTarjeta']);
@@ -311,5 +332,246 @@ class Novo_Services_Model extends NOVO_Model {
 		}
 
 		return $this->responseToTheView('callWs_ActionMasterAccount');
+	}
+	/**
+	 * @info Método para obtener lista de tarjetas
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date July 03rd, 2020
+	 */
+	public function callWs_CardsInquiry_Services($dataRequest)
+	{
+		log_message('INFO', 'Novo Services Model: CardsInquiry Method Initialized');
+
+		$this->className = 'com.novo.objects.MO.ListadoEmisionesMO';
+
+		$this->dataAccessLog->modulo = 'Servicios';
+		$this->dataAccessLog->function = 'Consulta de tarjetas';
+		$this->dataAccessLog->operation = isset($dataRequest->action) ? 'Descargar archivo' : 'Obtener lista de tarjetas';
+
+		$this->dataRequest->idOperation = isset($dataRequest->action) ? 'buscarTarjetasEmitidasExcel' : 'buscarTarjetasEmitidas';
+		$this->dataRequest->rifEmpresa = $this->session->enterpriseInf->idFiscal;
+		$this->dataRequest->accodcia = $this->session->enterpriseInf->enterpriseCode;
+		$this->dataRequest->idProducto = $this->session->productInf->productPrefix;
+		$this->dataRequest->usuario = [
+			'userName' => $this->session->userName
+		];
+		$this->dataRequest->nrOrdenServicio = $dataRequest->orderNumber;
+		$this->dataRequest->nroLote = $dataRequest->bulkNumber;
+		$this->dataRequest->tipoDocumento = isset($dataRequest->documentType) ? $dataRequest->documentType : '';
+		$this->dataRequest->cedula = $dataRequest->idNumberP;
+		$this->dataRequest->nroTarjeta = $dataRequest->cardNumberP;
+		$this->dataRequest->opcion = 'EMI_REC';
+		$this->dataRequest->pagina = 0;
+
+		$response = $this->sendToService('callWs_CardsInquiry');
+		$cardsList = [];
+		$operList = ['INQUIRY_BALANCE' => FALSE];
+		$massiveOptions = [];
+
+		switch ($this->isResponseRc) {
+			case 0:
+				$this->response->code = 0;
+				if (isset($dataRequest->action)) {
+					$this->response->data['file'] = $response->archivo;
+					$this->response->data['name'] = $response->nombre.'.xls';
+					$this->response->data['ext'] = 'xls';
+				} else {
+					foreach ($response->detalleEmisiones AS $cards) {
+						$record = new stdClass();
+						$record->cardNumber = $cards->nroTarjeta;
+						$record->orderNumber = $cards->ordenS;
+						$record->bulkNumber = $cards->nroLote;
+						$issueStatus = ucfirst(mb_strtolower($cards->edoEmision));
+
+						if (strpos($cards->edoEmision, '/') !== FALSE) {
+							$issueStatus = strstr($issueStatus, '/', TRUE);
+						}
+
+						$record->issueStatus = trim($issueStatus);
+						$record->cardStatus = trim(ucfirst(mb_strtolower($cards->edoPlastico)));
+						$record->name = ucwords(mb_strtolower($cards->nombre));
+						$record->idNumber = substr($cards->cedula, -6) == substr($cards->nroTarjeta, -6) ? '' : $cards->cedula;
+						$record->idNumberSend = $cards->cedula;
+						$record->email = $cards->email;
+						$record->celPhone = $cards->numCelular;
+						$record->names = $cards->nombres;
+						$record->lastName = $cards->apellidos;
+						$options = [
+							'NO_OPER' => '--'
+						];
+
+						foreach ($response->operacioneTarjeta AS $status) {
+							if ($status->edoTarjeta == $cards->edoEmision) {
+								foreach ($status->operacion AS $oper) {
+									$key = mb_strtoupper(str_replace(' ', '_', $oper));
+									$options[lang('SERVICES_INQUIRY_OPTIONS')[$key]] = lang('SERVICES_INQUIRY_OPTIONS')[$key];
+									$massiveOptions[lang('SERVICES_INQUIRY_OPTIONS')[$key]] = lang('SERVICES_INQUIRY_'.lang('SERVICES_INQUIRY_OPTIONS')[$key]);
+								}
+								unset($options['NO_OPER']);
+							}
+						}
+
+						$record->options = $options;
+						array_push($cardsList, $record);
+
+						if (array_key_exists('INQUIRY_BALANCE', $options)) {
+							$operList['INQUIRY_BALANCE'] =  TRUE;
+						}
+
+						if (array_key_exists('UPDATE_DATA', $massiveOptions)) {
+							unset($massiveOptions['UPDATE_DATA']);
+						}
+					}
+				}
+			break;
+			case -150:
+				$this->response->code = 1;
+			break;
+			default:
+				if (isset($dataRequest->action) && $this->isResponseRc != -29 && $this->isResponseRc != -61) {
+					$this->response->title = lang('GEN_DOWNLOAD_FILE');
+					$this->response->icon =  lang('GEN_ICON_WARNING');
+					$this->response->msg = lang('GEN_WARNING_DOWNLOAD_FILE');
+					$this->response->data['btn1']['action'] = 'close';
+				}
+		}
+
+		$this->response->data['cardsList'] = $cardsList;
+		$this->response->data['operList'] = $operList;
+		$this->response->data['massiveOptions'] = $massiveOptions;
+
+		return $this->responseToTheView('callWs_CardsInquiry');
+	}
+	/**
+	 * @info Método para realizar acciones de consulta de tarjetas
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date July 06th, 2020
+	 */
+	public function callWs_InquiriesActions_Services($dataRequest)
+	{
+		log_message('INFO', 'NOVO Services Model: InquiriesActions Method Initialized');
+
+		$this->className = 'com.novo.objects.MO.SeguimientoLoteMO';
+
+		$this->dataAccessLog->modulo = 'Servicios';
+		$this->dataAccessLog->function = 'Consulta de tarjetas';
+		$this->dataAccessLog->operation = lang('SERVICES_INQUIRY_'.$dataRequest->action);
+
+		switch ($dataRequest->action) {
+			case 'INQUIRY_BALANCE':
+			case 'LOCK_CARD':
+			case 'UNLOCK_CARD':
+				$this->className = 'com.novo.business.lote.seguimiento.resources.NovoBusinessOperacionSeguimientoWS';
+			break;
+			case 'UPDATE_DATA':
+			case 'DELIVER_TO_CARDHOLDER':
+			case 'SEND_TO_ENTERPRISE':
+			case 'RECEIVE_IN_ENTERPRISE':
+			case 'RECEIVE_IN_BANK':
+			break;
+		}
+
+		$dataList = [];
+
+		foreach ($dataRequest->cards AS $list) {
+			$list = json_decode($list);
+			$data = [
+				'idLote' => $list->bulkNumber,
+				'edoNuevo' => lang('SERVICES_INQUIRY_'.$dataRequest->action),
+				'edoAnterior' => $list->issueStatus,
+				'numeroTarjeta' => $list->cardNumber,
+				'idExtPer' => $list->idNumberSend,
+				'idExtEmp' => $this->session->enterpriseInf->idFiscal,
+				'accodcia' => $this->session->enterpriseInf->enterpriseCode,
+			];
+
+			if ($dataRequest->action == 'UPDATE_DATA') {
+				$data['firstName'] = $list->names;
+				$data['lastName'] = $list->lastName;
+				$data['email'] = $list->email;
+				$data['phone'] = $list->celPhone;
+			}
+
+			$dataList[] = $data;
+		}
+
+		$password = json_decode(base64_decode($dataRequest->pass));
+		$password = $this->cryptography->decrypt(
+			base64_decode($password->plot),
+			utf8_encode($password->password)
+		);
+
+		if (lang('CONF_HASH_PASS') == 'ON' || $this->session->autoLogin == 'false') {
+			$password = md5($password);
+		}
+
+		$this->dataRequest->idOperation = 'operacionSeguimientoLoteCeo';
+		$this->dataRequest->items = $dataList;
+		$this->dataRequest->usuario = [
+			'userName' => $this->session->userName,
+			'password' => $password,
+			'idProducto' => $this->session->productInf->productPrefix
+		];
+		$this->dataRequest->opcion = lang('SERVICES_ACTION_'.$dataRequest->action);
+
+		$response = $this->sendToService('callWs_InquiriesActions');
+		$balanceList = [];
+		$failList = [];
+
+		switch ($this->isResponseRc) {
+			case 0:
+				$this->response->title = lang('SERVICES_INQUIRY_'.$dataRequest->action);
+				$this->response->icon = lang('GEN_ICON_SUCCESS');
+				$this->response->data['btn1'] = [
+					'text' => lang('GEN_BTN_ACCEPT'),
+					'action' => 'close'
+				];
+				$this->response->success = TRUE;
+				$responseList = isset($response->bean) ? json_decode($response->bean) : FALSE;
+
+				if ($responseList && is_array($responseList)) {
+					foreach ($responseList AS $cards) {
+						$record = new stdClass();
+						$record->cardNumber = substr($cards->numeroTarjeta, -6);
+						$record->balance = isset($cards->saldo) ?  lang('GEN_CURRENCY').' '.$cards->saldo : '--';
+						$balanceList[] = $record;
+
+						if ($cards->rcNovoTrans != '0') {
+							$this->response->code = 1;
+							$failList[] = $cards->numeroTarjeta;
+							$this->response->msg = 'No fue posible realizar la acción para';
+						}
+					}
+				}
+
+				if ($dataRequest->action == 'INQUIRY_BALANCE') {
+					$this->response->code = 1;
+					$this->response->success = false;
+				}
+			break;
+			case -1:
+				$this->response->title = lang('SERVICES_INQUIRY_'.$dataRequest->action);
+				$this->response->msg = lang('RESP_PASSWORD_NO_VALID');
+				$this->response->icon = lang('GEN_ICON_WARNING');
+				$this->response->data['btn1'] = [
+					'text' => lang('GEN_BTN_ACCEPT'),
+					'action' => 'close'
+				];
+			break;
+			case -450:
+				$this->response->title = lang('SERVICES_INQUIRY_'.$dataRequest->action);
+				$this->response->msg = 'Alcanzaste el límite de consultas diarias';
+				$this->response->icon = lang('GEN_ICON_INFO');
+				$this->response->data['btn1'] = [
+					'text' => lang('GEN_BTN_ACCEPT'),
+					'action' => 'close'
+				];
+			break;
+		}
+
+		$this->response->data['balanceList'] = $balanceList;
+		$this->response->data['failList'] = $failList;
+
+		return $this->responseToTheView('callWs_InquiriesActions');
 	}
 }

@@ -160,23 +160,25 @@ if(URLactual.substring(0, URLactual.length - 16) == 'bnt'){
 		"processing": true,
 		"serverSide": true,
 		"columns": [
+			{ data: 'tarjeta' },
 			{ data: 'nombre' },
 			{ data: 'idExtPer' },
-			{ data: 'tarjeta' },
 			{ data: 'saldo' }
 	],
 	"columnDefs": [
 		{
 			"targets": 0,
-			"className": "nombre",
+			"className": "tarjeta",
+
 		},
 		{
 			"targets": 1,
-			"className": "idExtPer",
+			"className": "nombre",
+
 		},
 		{
 			"targets": 2,
-			"className": "tarjeta",
+			"className": "idExtPer",
 		},
 		{
 			"targets": 3,
@@ -260,24 +262,26 @@ if(URLactual.substring(0, URLactual.length - 16) == 'bnt'){
 			"processing": true,
 			"serverSide": true,
 			"columns": [
+				{ data: 'tarjeta' },
 				{ data: 'nombre' },
 				{ data: 'idExtPer' },
-				{ data: 'tarjeta' },
 				{ data: 'saldo' },
 				{ data: 'fechaUltAct' }
 			],
 			"columnDefs": [
 				{
 					"targets": 0,
-					"className": "nombre",
+					"className": "tarjeta",
+
 				},
 				{
 					"targets": 1,
-					"className": "idExtPer",
+					"className": "nombre",
+
 				},
 				{
 					"targets": 2,
-					"className": "tarjeta",
+					"className": "idExtPer",
 				},
 				{
 					"targets": 3,

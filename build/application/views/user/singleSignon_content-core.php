@@ -4,6 +4,7 @@
 	<h3 class="mt-2">Ingresando ...
 	</h3>
 </div>
-<form id="single-signin-form" action="<?= base_url('ingresar') ?>" method="post" send="<?= $send; ?>">
+<form id="single-signin-form" action="<?= base_url('ingresar') ?>" method="POST" send="<?= $send; ?>">
 	<input type="hidden" id="sessionId" name="sessionId" value="<?= $sessionId ?>">
+	<input type="hidden" id="route" name="route" value="single">
 </form>

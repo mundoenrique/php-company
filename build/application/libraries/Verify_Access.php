@@ -62,10 +62,10 @@ class Verify_Access {
 				case 'request':
 				case 'plot':
 				case 'ceo_name':
-					continue;
+					break;
 				case 'screenSize':
 					$this->CI->session->set_userdata('screenSize', $value);
-					continue;
+					break;
 				default:
 				$this->requestServ->$key = $value;
 			}
@@ -85,21 +85,22 @@ class Verify_Access {
 	{
 		log_message('INFO', 'NOVO Verify_Access: ResponseByDefect method initialized');
 
+		$linkredirect = AUTO_LOGIN ? 'ingresar/fin' : 'inicio';
 		$this->responseDefect = new stdClass();
 		$this->responseDefect->code = lang('RESP_DEFAULT_CODE');
 		$this->responseDefect->title = lang('GEN_SYSTEM_NAME');
 		$this->responseDefect->msg = lang('RESP_VALIDATION_INPUT');
-		$this->responseDefect->data = base_url('inicio');
 		$this->responseDefect->icon = lang('GEN_ICON_WARNING');
 		$this->responseDefect->data = [
 			'btn1'=> [
 				'text'=> lang('GEN_BTN_ACCEPT'),
-				'link'=> 'inicio',
+				'link'=> $linkredirect,
 				'action'=> 'redirect'
 			]
 		];
 
 		if($this->CI->session->has_userdata('logged')) {
+			$this->responseDefect->msg = lang('RESP_VALIDATION_INPUT_LOGGED');
 			$this->CI->load->model('Novo_User_Model', 'finishSession');
 			$this->CI->finishSession->callWs_FinishSession_User();
 		}
@@ -125,9 +126,14 @@ class Verify_Access {
 		if(!$auth) {
 			switch($module) {
 				case 'recoverPass':
+					$auth = lang('CONF_RECOV_PASS') == 'ON';
+				break;
+				case 'recoverAccess':
+				case 'validateOtp':
+					$auth = lang('CONF_RECOV_ACCESS') == 'ON';
+				break;
 				case 'benefits':
-					$clients = ['novo', 'pichincha', 'banorte', 'produbanco'];
-					$auth = in_array($this->CI->config->item('client'), $clients);
+					$auth = lang('CONF_BENEFITS') == 'ON';
 				break;
 				case 'changeEmail':
 				case 'changeTelephones':
@@ -199,7 +205,14 @@ class Verify_Access {
 					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TRAMAE'));
 				break;
 				case 'cardsInquiry':
+				case 'inquiriesActions':
 					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('COPELO'));
+				break;
+				case 'transactionalLimits':
+					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('LIMTRX'));
+				break;
+				case 'twirlsCommercial':
+					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('GIRCOM'));
 				break;
 				case 'getReportsList':
 					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPALL'));

@@ -152,7 +152,7 @@ $(function () {
 						action: 'close'
 					}
 				}
-				inputModal =	'<form id="delete-bulk-form" class="form-group">';
+				inputModal =	'<form id="delete-bulk-form" name="delete-bulk-form" class="form-group"> onsubmit="return false;">';
 				inputModal+= 		'<span class="regular">'+lang.GEN_BULK_DELETE_SO+': '+inputSelected+'</span>';
 				inputModal+=		'<div class="input-group">';
 				inputModal+= 			'<input id="password" class="form-control pwd-input" name="password" type="password" autocomplete="off"';

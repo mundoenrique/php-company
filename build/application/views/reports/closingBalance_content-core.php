@@ -24,7 +24,7 @@
 				<div class="flex my-2 px-5">
 					<form id="closingBudgetForm" class="w-100">
 						<div class="row flex flex items-center justify-end col-sm-12">
-							<div class="form-group col-4 col-xl-3">
+							<div class="form-group <?= lang('CONF_SETT_STYLE_SKIN') ?>">
 								<label><?= lang('GEN_ENTERPRISE') ?></label>
 								<select id="enterpriseReport" name="enterpriseReport" class="select-box custom-select mt-1 mb-1 h6 w-100">
 								<?php foreach($enterpriseList AS $enterprise) : ?>
@@ -38,7 +38,7 @@
 								<div class="help-block"></div>
 								<input id="tamP" name="tam-p" class="hide" value="<?= $tamP ?>">
 							</div>
-							<div  class="form-group col-4 col-xl-3">
+							<div  class="form-group <?= lang('CONF_SETT_STYLE_SKIN') ?>">
 								<label><?= lang('GEN_PRODUCT') ?></label>
 								<select id="productCode" name = "productCode" class="select-box custom-select flex h6 w-100">
 									<?php if($productsSelect): ?>
@@ -51,16 +51,15 @@
 								<div class="help-block"></div>
 							</div>
 
-							<div class="form-group col-4 col-xl-3">
 							<?php if (lang('CONF_NIT_INPUT_BOOL') == 'ON' ): ?>
+							<div class="form-group <?= lang('CONF_SETT_STYLE_SKIN') ?>">
 								<label ><?= lang('REPORTS_ID_FISCAL') ?></label>
-								<input id="Nit" class="form-control h5" name="nit" placeholder="<?= lang('REPORTS_ID_FISCAL_INPUT') ?>Ingresar NIT">
+								<input id="Nit" class="form-control h5" name="nit" placeholder="<?= lang('REPORTS_ID_FISCAL_INPUT') ?>">
 								<div class="help-block"></div>
-								<?php endif; ?>
 							</div>
+							<?php endif; ?>
 
-
-							<div class="flex items-center justify-end col-sm-12 col-xl-3">
+							<div class="flex items-center justify-end col-auto ml-auto">
 								<button type="button" id="closingBudgetsBtn" class="btn btn-primary btn-small">
 									Buscar
 								</button>
@@ -86,27 +85,26 @@
 						</button>
 					</div>
 
-					<table id="balancesClosing" class="cell-border h6 display responsive w-100">
+				<table id="balancesClosing" class="cell-border h6 display responsive w-100">
 					<thead class="bg-primary secondary regular">
-                    <tr  id="datos-principales" >
-								<th><?= lang('GEN_ACCOUNT_CLOSING_BALANCE') ?></th>
-								<th><?= lang('GEN_FISCAL_CLOSING_BALANCE') ?></th>
-								<th>Tarjeta</th>
-								<th>Saldo inicial</th>
-								<?php if (lang('CONF_CLOSING_BALANCE_BOOL') == 'ON' ): ?>
-								<th>Última actividad</th>
-								<?php endif; ?>
-							</tr>
-												</thead>
-
-                        <tbody id="tbody-datos-general" class = "tbody-reportes">
-                        </tbody>
-										</table>
-										<div id="hid" class=" hide">
-									<div id="pre-loader" class="mt-2 mx-auto flex justify-center">
-										<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
-									</div>
-								</div>
+            <tr  id="datos-principales" >
+							<th><?= lang('REPORTS_TABLE_CARD') ?></th>
+							<th><?= lang('REPORTS_TABLE_CARDHOLDER') ?></th>
+							<th><?= lang('REPORTS_TABLE_DNI') ?></th>
+							<th><?= lang('REPORTS_TABLE_BALANCE') ?></th>
+							<?php if (lang('CONF_CLOSING_BALANCE_BOOL') == 'ON' ): ?>
+								<th><?= lang('REPORTS_TABLE_LAST_ACTIVITY') ?></th>
+							<?php endif; ?>
+						</tr>
+					</thead>
+          <tbody id="tbody-datos-general" class = "tbody-reportes">
+          </tbody>
+				</table>
+					<div id="hid" class=" hide">
+						<div id="pre-loader" class="mt-2 mx-auto flex justify-center">
+							<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
+						</div>
+					</div>
 					<div class="line my-2"></div>
 				</div>
 				<div class="my-5 py-4 center none">
