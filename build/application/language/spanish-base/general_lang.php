@@ -1,5 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+$lang['GEN_SYSTEM_NAME']= 'Conexión Empresas Online';
 //MENU
 $lang['GEN_MENU_ENTERPRISE'] = 'Empresas';
 $lang['GEN_MENU_LOTS'] = 'Lotes';
@@ -274,7 +275,6 @@ $lang['GEN_PICKER_CHANGEYEAR'] = TRUE;
 $lang['GEN_PICKER_SHOWANIM'] = 'slideDown';
 $lang['GEN_PICKER_YEARSUFFIX'] = '';
 //GENERAL LANGUAGE
-$lang['GEN_SYSTEM_NAME']= 'Conexión Empresas Online';
 $lang['GEN_LOGO_HEADER'] = 'img-logo.svg';
 $lang['GEN_CURRENCY'] = '$';
 $lang['GEN_DECIMAL'] = '.';
