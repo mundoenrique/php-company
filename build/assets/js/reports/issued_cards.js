@@ -89,7 +89,7 @@ $(function () {
 					});
 
 						tabla = $(document.createElement("table")).appendTo(contenedor);
-						tabla.attr("class", "cell-border h6 display responsive w-100 py-3");
+						tabla.attr("class", "cell-border h6 display responsive w-100");
 						tabla.attr("id", "resultsIssued");
 
 						thead = $(document.createElement("thead")).appendTo(tabla);
@@ -115,7 +115,8 @@ $(function () {
 					$.each(response.data.issuedCardsList[0].lista, function (index, value) {
 
 						$(document).ready(function() {
-							$('#resultsIssued' + index).DataTable({ "bPaginate": false, "bFilter": false, "bInfo": false });
+							$('#resultsIssued' + index).DataTable({ "bPaginate": false, "bFilter": false, "bInfo": false,
+							"columnDefs": [{ "width": "30%", "targets": 0 }] });
 						});
 
 						if(index > 0) {
@@ -124,7 +125,7 @@ $(function () {
 						}
 
 						tabla = $(document.createElement("table")).appendTo(contenedor);
-						tabla.attr("class", "cell-border h6 display responsive w-100");
+						tabla.attr("class", "cell-border h6 display responsive w-100 my-5");
 						tabla.attr("id", "resultsIssued" + index);
 
 						thead = $(document.createElement("thead")).appendTo(tabla);

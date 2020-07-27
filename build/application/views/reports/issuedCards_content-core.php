@@ -81,7 +81,7 @@
 			<span class="line-text mb-2 h4 semibold primary">Resultados</span>
 			<div class="center mx-1">
 				<div class="flex">
-					<div class="flex mr-2 py-3 flex-auto justify-end items-center download">
+					<div class="flex mr-2 pt-3 flex-auto justify-end items-center download">
 						<div class="download-icons">
 							<button class="btn px-1 big-modal" title="<?= lang('GEN_BTN_DOWN_XLS'); ?>" data-toggle="tooltip">
 								<i class="icon icon-file-excel" aria-hidden="true"></i>
