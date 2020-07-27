@@ -946,6 +946,18 @@ $config = [
 			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
 		]
 	],
+	'issuedCards' => [
+		[
+			'field' => 'enterpriseCode',
+			'label' => 'enterpriseCode',
+			'rules' => 'trim|required'
+		],
+		[
+			'field' => 'monthYear',
+			'label' => 'monthYear',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+		]
+	],
 	'keepSession' => [
 		[
 			'field' => 'modalReq',

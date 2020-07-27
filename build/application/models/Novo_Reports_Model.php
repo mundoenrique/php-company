@@ -1131,6 +1131,51 @@ class Novo_Reports_Model extends NOVO_Model {
     return $this->responseToTheView('callWS_RechargeMadeReport');
 	}
 
+	public function callWs_IssuedCards_Reports($dataRequest)
+	{
+		log_message('INFO', 'NOVO Reports Model: IssuedCards Method Initialized');
+		$this->className = 'com.novo.objects.MO.ListadoEmisionesMO';
+
+		$this->dataAccessLog->modulo = 'Reportes';
+		$this->dataAccessLog->function = 'buscarTarjetasEmitidas';
+		$this->dataAccessLog->operation = 'buscarTarjetasEmitidas';
+
+		$enterpriseCode=explode("/",$dataRequest->enterpriseCode);
+		$accodcia=$enterpriseCode[0];
+
+		$this->dataRequest->idOperation = 'buscarTarjetasEmitidas';
+		$this->dataRequest->tipoConsulta = $dataRequest->radioButton;
+		$this->dataRequest->fechaMes = $dataRequest->monthYear;
+		$this->dataRequest->accodcia = $accodcia;
+		$this->dataRequest->fechaIni = '';
+		$this->dataRequest->fechaFin = '';
+		$response = $this->sendToService('callWs_IssuedCardsReport');
+		$issuedCardsList = [];
+
+    switch($this->isResponseRc) {
+      case 0:
+        $this->response->code = 0;
+
+          $record = new stdClass();
+					$record->lista = $response->lista;
+          array_push(
+            $issuedCardsList,
+            $record
+          );
+
+      break;
+      case -150:
+        $this->response->code = 0;
+      break;
+    }
+    $this->response->data['issuedCardsList'] = $issuedCardsList;
+
+    return $this->responseToTheView('callWS_IssuedCardsReport');
+	}
+
+
+
+
 		/**
 	 * @info Método para obtener actividad por ususario
 	 * @author Diego Acosta García
