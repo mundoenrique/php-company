@@ -1293,7 +1293,7 @@ label {
 .bg-warning { background-color: var(--warning) !important }
 .bg-danger  { background-color: var(--danger) !important }
 
-.bg-color  { background-image: linear-gradient(var(--color-tertiary), transparent) !important; padding: .5rem 0 0 .5rem; }
+.bg-color  { background-image: linear-gradient(var(--color-tertiary), transparent) !important }
 .bg-will-processed { background-color: var(--will-processed) !important }
 .bg-will-not-processed { background-color: var(--will-not-processed) !important }
 .bg-not-processed { background-color: var(--not-processed) !important }
@@ -2842,14 +2842,14 @@ table.dataTable thead th.select-checkbox:before {
 	table.dataTable tr.selected th.sorting_disabled:after{
 		content: '' !important;
 		margin-top: 1px !important;
-		background-image: url("../../images/pb/check-white_table.svg");
+		background-image: url("../../images/icons/check-white_table.svg");
 		background-size: cover;
 	}
 
 	table.dataTable tr.selected td.select-checkbox::after {
 		content: '' !important;
 		margin-top: -5px !important;
-		background-image: url("../../images/pb/check_table.svg");
+		background-image: url("../../images/default/check_table.svg");
 		background-size: cover;
 	}
 }
@@ -2986,7 +2986,7 @@ table#resultsAccount thead th:nth-child(7){
 	right: -255px;
 	padding-top: 12px;
 	padding-bottom: 20px;
-	overflow: hidden;
+	overflow: visible;
 	transition: all .3s ease 0s;
 	background-color: rgb(249, 249, 249);
 	z-index: 9;
@@ -3743,7 +3743,7 @@ a.ui-button:active,
 
 @media (min-width: 1200px) and (max-width: 1263px) {
 	.select-product {
-		width: 730px;
+		width: 718px;
 		margin-right: 0;
 	}
 }
