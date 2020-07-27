@@ -195,7 +195,8 @@ class NOVO_Controller extends CI_Controller {
 			}
 
 		} else {
-			$linkredirect = AUTO_LOGIN ? 'ingresar/fin' : 'inicio';
+			$linkredirect = $this->session->has_userdata('productInf') ? 'detalle-producto' : lang('GEN_ENTERPRISE_LIST');
+			$linkredirect = AUTO_LOGIN && !$this->session->has_userdata('logged') ? 'ingresar/fin' : $linkredirect;
 			redirect(base_url($linkredirect), 'location');
 		}
 
