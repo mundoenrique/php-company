@@ -1610,7 +1610,7 @@ public function consultaTarjetas($urlCountry)
 
 		$paisS = $this->session->userdata('pais');
 		$menuP =$this->session->userdata('menuArrayPorProducto');
-		$moduloAct = np_hoplite_existeLink($menuP,"REPEDO");
+		$moduloAct = np_hoplite_existeLink($menuP,"COPELO");
 
 		if($paisS==$urlCountry && $logged_in && $moduloAct!==false){
 				$nombreCompleto = $this->session->userdata('nombreCompleto');
