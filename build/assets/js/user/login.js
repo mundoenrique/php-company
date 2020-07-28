@@ -5,8 +5,6 @@ $(function () {
 	var userPass = $('#user_pass');
 	var loginIpMsg, formcodeOTP, btn, btnTextOtp;
 	var captcha = lang.GEN_ACTIVE_RECAPTCHA;
-	var skinbdb = country == 'bdb' ? true : false ;
-	var skinbp = country == 'bp' ? true : false ;
 
 	$('#user_pass').on('keyup', function() {
 		$(this).attr('type', 'password')
@@ -71,7 +69,7 @@ $(function () {
 		inputDisabled(false);
 		$('#login-btn').html(btnText);
 		userPass.val('');
-		if (skinbp) {
+		if (restartLogin) {
 			userLogin.val('');
 		}
 		setTimeout(function () {
@@ -150,20 +148,14 @@ $(function () {
 				loginIpMsg+=	'<input id="acceptAssert" class="custom-control-input" type="checkbox" name="acceptAssert"> ';
 				loginIpMsg+=	'<label class="custom-control-label" for="acceptAssert">'+response.assert+'</label>';
 				loginIpMsg+='</div>';
-        loginIpMsg+='</form>';
+				loginIpMsg+='</form>';
 
 				$('#formVerificationOTP input').attr('disabled', false);
 
-				optionsData.minWidth = 480;
+				optionsData.minWidth = lang.MIN_WIDTH_OTP;
 				optionsData.maxHeight = 'none';
-
-				if (skinbp | skinbdb) {
-					optionsData.posMy = "center top+100";
-					optionsData.posAt = "center top";
-				} else {
-					optionsData.posMy = "center top+160";
-					optionsData.posAt = "center top";
-				}
+				optionsData.posAt = "center top";
+				optionsData.posMy = lang.POSTMY_OTP;
 
 				notiSystem(response.title, loginIpMsg, response.icon, optionsData);
 				windowsStyle();
@@ -238,13 +230,7 @@ $(function () {
 
 	function windowsStyle(){
 		$('#system-msg').css( "width", "auto" );
-
-		if(skinbdb!=true){
-			$("#label_codeOTP").addClass("line-field");
-			$("#codeOTP").addClass("input-field");
-		}
-
-		if (skinbp | skinbdb) {
+		if (modalOtp) {
 			var styles = {
 				float : "none",
 				margin: "auto"
@@ -252,6 +238,9 @@ $(function () {
 			$("#system-info .ui-dialog-buttonpane").css(styles).removeClass("modal-buttonset");
 			$("#system-info .ui-dialog-buttonset").removeClass("modal-buttonset");
 			$("#system-info .btn-modal").removeClass("modal-btn-primary");
+		} else {
+			$("#label_codeOTP").addClass("line-field");
+			$("#codeOTP").addClass("input-field");
 		}
 	}
 })

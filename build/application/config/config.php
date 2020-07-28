@@ -54,6 +54,8 @@ $config['score_recaptcha'] = [
 $config['new-views'] = '-core';
 $config['client'] = 'novo';
 $config['access_url'] = explode(',', ACCESS_URL);
+$config['modalOtp'] = false;
+$config['restartLogin'] = false;
 /*
 |--------------------------------------------------------------------------
 | Index File
