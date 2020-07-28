@@ -585,22 +585,33 @@ class Novo_Services_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO Services Model: commercialTwirls Method Initialized');
 
-		$this->className = 'com.novo.objects.MO.TransferenciaMO';
+		$this->className = 'com.novo.objects.MO.GiroComercialMO';
 
-		$this->dataAccessLog->modulo = 'Servicios';
-		$this->dataAccessLog->function = 'Giros Comerciales';
-		$this->dataAccessLog->operation = 'Agregar giros comerciales';
+		$this->dataAccessLog->modulo = 'servicios';
+		$this->dataAccessLog->function = 'custom_mcc';
+		$this->dataAccessLog->operation = 'customMcc';
+		$this->dataRequest->opcion = 'find_mcc';
+		$this->dataRequest->companyId = $this->session->enterpriseInf->idFiscal;
+		$this->dataRequest->product = $this->session->productInf->productPrefix;
+		$this->dataRequest->cards = [
+			['numberCard' =>  $dataRequest->cardNumberP,
+			'rc' => 0]
+		];
+		$this->dataRequest->usuario = [
+		'userName' => $this->session->userName,
+		'envioCorreoLogin'=> false,
+		'guardaIp' => false,
+		'rc' => 0
+	];
 
-		$this->dataRequest->idOperation = '';
+		$this->dataRequest->idOperation = 'customMcc';
 
-		$this->isResponseRc = 0;
+		$response = json_encode($this->sendToService('callWs_commercialTwirls'));
+
 		switch($this->isResponseRc) {
 			case 0:
 
 				$this->response->code = 0;
-				$this->response->access = [
-					'GIRCOM' => $this->verify_access->verifyAuthorization('GIRCOM')
-				];
 				$this->response->data = [];
 
 			break;
@@ -638,5 +649,63 @@ class Novo_Services_Model extends NOVO_Model {
 		}
 
 		return $this->responseToTheView('callWs_updateCommercialTwirls');
+	}
+		/**
+	 * @info Método para obtener formulario limites transaccionales
+	 * @author Diego Acosta García
+	 * @date July 21th, 2020
+	 */
+
+	public function callWs_transactionalLimits_Services($dataRequest)
+	{
+		log_message('INFO', 'NOVO Services Model: transactionalLimits Method Initialized');
+
+		$this->className = 'com.novo.objects.MO.TransferenciaMO';
+
+		$this->dataAccessLog->modulo = 'servicios';
+		$this->dataAccessLog->function = 'custom_mcc';
+		$this->dataAccessLog->operacion = 'customMcc';
+
+		$this->isResponseRc = 0;
+		switch($this->isResponseRc) {
+			case 0:
+
+				$this->response->code = 0;
+				$this->response->data = [];
+
+			break;
+		}
+
+		return $this->responseToTheView('callWs_transactionalLimits');
+	}
+		/**
+	 * @info Método para la actualizacion de limites transaccionales
+	 * @author Diego Acosta García
+	 * @date July 21th, 2020
+	 */
+
+	public function callWs_updateTransactionalLimits_Services($dataRequest)
+	{
+		log_message('INFO', 'NOVO Services Model: updateTransactionalLimits Method Initialized');
+
+		$this->className = 'com.novo.objects.MO.TransferenciaMO';
+
+		$this->dataAccessLog->modulo = 'Servicios';
+		$this->dataAccessLog->function = 'Actualizar limites transaccionales';
+		$this->dataAccessLog->operation = 'Actualizar limites transaccionales';
+
+		$this->dataRequest->idOperation = '';
+
+		$this->isResponseRc = 0;
+		switch($this->isResponseRc) {
+			case 0:
+
+				$this->response->code = 0;
+				$this->response->data = [];
+
+			break;
+		}
+
+		return $this->responseToTheView('callWs_updateTransactionalLimits');
 	}
 }

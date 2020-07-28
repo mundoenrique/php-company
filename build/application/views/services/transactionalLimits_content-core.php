@@ -26,7 +26,7 @@
 								<div class="row flex justify-between">
 									<div class="form-group col-4 col-xl-4">
 									<label for="cardNumberP"><?= lang('GEN_CARD_NUMBER'); ?></label>
-									<input id="cardNumberP" name="cardNumberP" class="form-control h5 select-group" type="text" autocomplete="off" disabled>
+									<input id="cardNumberP" name="card-number" class="form-control h5 select-group" type="text" autocomplete="off" disabled>
 									<div class="help-block"></div>
 								</div>
 								<div class="form-group col-4 col-xl-4">

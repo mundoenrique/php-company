@@ -30,7 +30,7 @@
 						<div class="row flex justify-between">
 							<div class="form-group col-4 col-xl-4">
 							<label for="cardNumberP"><?= lang('GEN_CARD_NUMBER'); ?></label>
-								<input id="cardNumberP" name="cardNumber" class="form-control h5 select-group" type="text" autocomplete="off" value="4189281060000010">
+								<input id="cardNumberP" name="card-number" class="form-control h5 select-group" type="text" autocomplete="off" >
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-4 col-xl-4">
