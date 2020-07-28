@@ -89,6 +89,7 @@ Class Novo_Services extends Novo_Controller {
 			'services/transactionalLimits'
 		);
 		$this->responseAttr();
+		$this->render->limitsInf = 0;
 		$this->render->titlePage = lang('GEN_MENU_SERV_TRANS_LIMITS');
 		$this->views = ['services/'.$view];
 		$this->loadView($view);

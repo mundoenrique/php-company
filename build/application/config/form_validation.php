@@ -1091,10 +1091,6 @@ $config = [
 	],
 	'commercialTwirls' => [
 		[
-			'field' => 'idNumberP',
-			'rules' => 'trim|regex_match[/^[a-z0-9]*$/i]|required'
-		],
-		[
 			'field' => 'cardNumberP',
 			'rules' => 'trim|regex_match[/^[0-9]*$/i]|required'
 		],
@@ -1102,6 +1098,18 @@ $config = [
 	'updateCommercialTwirls' => [
 		[
 			'field' => 'password-auth',
+			'rules' => 'trim|required'
+		]
+	],
+	'transactionalLimits' => [
+		[
+			'field' => 'cardNumberP',
+			'rules' => 'trim|regex_match[/^[0-9]*$/i]|required'
+		]
+	],
+	'updateTransactionalLimits' => [
+		[
+			'field' => 'password-sign',
 			'rules' => 'trim|required'
 		]
 	]
