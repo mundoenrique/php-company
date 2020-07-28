@@ -285,14 +285,13 @@ class Novo_Bulk_Model extends NOVO_Model {
 			'password' => $password
 		];
 
-		$response = $this->sendToService('DeleteNoConfirmBulk');
+		$response = $this->sendToService('callWs_DeleteNoConfirmBulk');
 
 		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->cod = 0;
 				$this->response->title = lang('BULK_DELETE_TITLE');
-				$idTicket = $dataRequest->bulkId != '' ? $dataRequest->bulkId : $dataRequest->bulkTicked;
-				$this->response->msg = novoLang(lang('BULK_DELETE_SUCCESS'), $idTicket);
+				$this->response->msg = novoLang(lang('BULK_DELETE_SUCCESS'), $dataRequest->bulkname);
 				$this->response->icon = lang('GEN_ICON_SUCCESS');
 				$this->response->data['btn1'] = [
 					'text' => lang('GEN_BTN_ACCEPT'),
@@ -310,7 +309,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 				break;
 		}
 
-		return $this->responseToTheView('DeleteNoConfirmBulk');
+		return $this->responseToTheView('callWs_DeleteNoConfirmBulk');
 	}
 	/**
 	 * @info obtener el detalle de un lote
