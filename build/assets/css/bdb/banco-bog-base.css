@@ -3892,7 +3892,7 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 	table.dataTable tr.selected th.sorting_disabled:after{
 		content: '' !important;
 		margin-top: 1px !important;
-		background-image: url("../../images/bdb/check-white_table.svg");
+		background-image: url("../../images/icons/check-white_table.svg");
 		background-size: cover;
 	}
 

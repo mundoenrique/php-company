@@ -163,7 +163,7 @@ footer.main-footer {
 
 .select-box {
 	border: .85px solid #BCBEC0;
-	text-shadow: 0 0 0 #58595B;
+	color:#4E4044;
 }
 
 /* Checkboxes and radios */
@@ -331,8 +331,9 @@ label {
 
 .sb-icon-search {
 	background: #005AA9;
-	color: #ffffff;
+	color: #ffffff !important;
 	font-size: 1.25rem;
+	padding-top: 5px;
 }
 
 .sb-icon-search i:hover {
@@ -525,7 +526,7 @@ label {
 .bg-warning { background-color: #FFA400 !important }
 .bg-danger  { background-color: #EB0029 !important }
 
-.bg-color  { background-image: linear-gradient(#E6E7E8, transparent) !important; padding: .5rem 0 0 .5rem; }
+.bg-color  { background-image: linear-gradient(#E6E7E8, transparent) !important }
 .bg-will-processed { background-color: #7ed3b2 !important }
 .bg-will-not-processed { background-color: #8b4f80 !important }
 .bg-not-processed { background-color: #ff8c94 !important }
@@ -781,7 +782,7 @@ label {
 
 /* Font weight */
 .light      {font-weight: 300 !important }
-.regular    { font-weight: 300; color: #58595B !important; }
+.regular    { font-weight: 300; color: #58595B; }
 .semibold   { font-weight: 700 !important; color: #58595B !important; }
 .bold       { font-weight: 700 !important }
 
@@ -833,6 +834,11 @@ i[class*=" icon-"].novoglyphs {
 
 .navbar-secondary {
 	position: fixed;
+	width: 100%;
+}
+
+main.content .primary{
+	color: #58595B !important;
 }
 
 .detail-filters-nav {
@@ -1035,6 +1041,7 @@ table.dataTable.no-footer {
 }
 
 table.dataTable thead th.select-checkbox:before {
+	margin-top: 2px !important;
   border: 1px solid #ffffff;
 }
 
@@ -1045,6 +1052,10 @@ table.dataTable.dtr-inline.collapsed>tbody>tr.parent>td:first-child:before, tabl
 table.dataTable tr.selected th.select-checkbox:after {
   color: #ffffff;
 	font-size: .875rem;
+}
+
+table.dataTable tr.selected td.select-checkbox::after, table.dataTable tr.selected th.select-checkbox::after{
+	margin-top: -4px !important;
 }
 
 table.dataTable tbody td.select-checkbox::before {
@@ -1058,11 +1069,10 @@ table.dataTable tbody > tr.selected, table.dataTable tbody > tr > .selected {
 
 table.dataTable tr.selected td.select-checkbox::after {
 	color: #005AA9;
-	font-size: 1rem;
+	font-size: .8rem;
 }
 
 table.dataTable.dtr-inline.collapsed > tbody > tr[role="row"] > td:first-child::before, table.dataTable.dtr-inline.collapsed > tbody > tr[role="row"] > th:first-child::before {
-	left: -24px !important;
 	background-color: #005AA9 !important;
 }
 
@@ -1250,12 +1260,9 @@ a.ui-button:active,
   color: #58595B;
 }
 
-.login-content {
-	padding: 5.75rem 0;
-}
-
 .login-content:before {
-	content: none !important;
+	top: 0;
+	left: 0;
 }
 
 .ui-dialog-buttonpane .btn {
@@ -1266,6 +1273,11 @@ a.ui-button:active,
 	background: #005AA9;
 	border: .5px solid #005AA9;
 	border-radius: 5px;
+	margin-top: 3rem;
+}
+
+.login-content .widget .hyper-link{
+	margin-bottom: 0 !important;
 }
 
 .invalid-user {
