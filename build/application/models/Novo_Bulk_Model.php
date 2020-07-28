@@ -425,26 +425,38 @@ class Novo_Bulk_Model extends NOVO_Model {
 				$this->response->msg = novolang(lang('BULK_CONFIRM_SUCCESS'), $bulkConfirmInfo->numLote);
 				$this->response->icon = lang('GEN_ICON_SUCCESS');
 				$this->response->data['btn1']['link'] = lang('GEN_LINK_BULK_AUTH');
-				break;
+			break;
 			case -1:
 				$this->response->code = 0;
 				$this->response->title = lang('BULK_CONFIRM_TITLE');
 				$this->response->msg = lang('RESP_PASSWORD_NO_VALID');
 				$this->response->icon = lang('GEN_ICON_WARNING');
 				$this->response->data['btn1']['action'] = 'close';
-				break;
+			break;
+			case -19:
+				$this->response->code = 0;
+				$this->response->title = lang('BULK_CONFIRM_TITLE');
+				$this->response->msg = lang('BULK_CONFIRM_NO_DEAIL');
+				$this->response->data['btn1']['link'] = 'cargar-lotes';
+			break;
 			case -142:
 				$this->response->code = 0;
 				$this->response->title = lang('BULK_CONFIRM_TITLE');
 				$this->response->msg = lang('BULK_CONFIRM_FAIL');
 				$this->response->data['btn1']['link'] = 'cargar-lotes';
-				break;
+			break;
 			case -436:
 				$this->response->code = 0;
 				$this->response->title = lang('BULK_CONFIRM_TITLE');
 				$this->response->msg = lang('BULK_CONFIRM_FAIL_BANK_RESPONSE');
 				$this->response->data['btn1']['link'] = 'cargar-lotes';
-				break;
+			break;
+			case -438:
+				$this->response->code = 0;
+				$this->response->title = lang('BULK_CONFIRM_TITLE');
+				$this->response->msg = lang('BULK_CONFIRM_DUPLICATE');
+				$this->response->data['btn1']['link'] = 'cargar-lotes';
+			break;
 		}
 
 		if($this->isResponseRc != 0) {
