@@ -47,9 +47,9 @@ $(function () {
 			data = {
 				file: file[0].files[0],
 				branchOffice: selectBranchOffice.val(),
-				typeBulk: selectTypeBulk.val(),
+				typeBulk: selectTypeBulk.val().trim(),
 				formatBulk: $('#type-bulk option:selected').attr('format'),
-				typeBulkText: $('#type-bulk option:selected').text()
+				typeBulkText: $('#type-bulk option:selected').text().trim()
 			}
 			insertFormInput(true);
 			verb = 'POST'; who = 'Bulk'; where = 'LoadBulk';

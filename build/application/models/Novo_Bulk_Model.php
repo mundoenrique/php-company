@@ -72,7 +72,8 @@ class Novo_Bulk_Model extends NOVO_Model {
 					}
 
 					$bulk['status'] = $bulktatus;
-					$bulk['fileName'] = $response->lista[$pos]->nombreArchivo;
+					$fileName = explode('.', $response->lista[$pos]->nombreArchivo);
+					$bulk['fileName'] = substr_replace($fileName[0], '', 0, strlen($this->countryUri.'_'));
 					$bulk['ticketId'] = $response->lista[$pos]->idTicket;
 					$bulk['bulkId'] = $response->lista[$pos]->idLote;
 					$bulk['loadDate'] = $response->lista[$pos]->fechaCarga;
@@ -190,7 +191,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 
 			switch ($this->isResponseRc) {
 				case 0:
-					$this->response->msg = novoLang(lang('BULK_SUCCESS'), substr($dataRequest->rawName, 0, 15).'...');
+					$this->response->msg = lang('BULK_SUCCESS');
 					$this->response->icon = lang('GEN_ICON_SUCCESS');
 					$this->response->data['btn1']['link'] = 'cargar-lotes';
 					$respLoadBulk = TRUE;
