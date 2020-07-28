@@ -1157,7 +1157,7 @@ class Novo_Reports_Model extends NOVO_Model {
         $this->response->code = 0;
 
           $record = new stdClass();
-					$record->lista = $response->lista;
+					$record->lista = isset($response->lista) ? $response->lista : '';
           array_push(
             $issuedCardsList,
             $record
@@ -1168,7 +1168,8 @@ class Novo_Reports_Model extends NOVO_Model {
         $this->response->code = 0;
       break;
     }
-    $this->response->data['issuedCardsList'] = $issuedCardsList;
+		$this->response->data['issuedCardsList'] = $issuedCardsList;
+		$this->response->data['tipoConsulta'] = $this->dataRequest->tipoConsulta;
 
     return $this->responseToTheView('callWS_IssuedCardsReport');
 	}
