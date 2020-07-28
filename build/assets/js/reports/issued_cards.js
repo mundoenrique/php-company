@@ -109,81 +109,82 @@ $(function () {
 
 					$('.download-icons').removeClass('hide');
 
-				if(response.data.tipoConsulta == 1){
-					$.each(response.data.issuedCardsList[0].lista, function (index, value) {
+				  if(response.data.tipoConsulta == 1){
+					  $.each(response.data.issuedCardsList[0].lista, function (index, value) {
 
-						$(document).ready(function() {
-							$('#resultsIssued' + index).DataTable({ "bPaginate": false, "bFilter": false, "bInfo": false,
-							"columnDefs": [{ "width": "30%", "targets": 0 }] });
-						});
+						  $(document).ready(function() {
+							  $('#resultsIssued' + index).DataTable({ "bPaginate": false, "bFilter": false, "bInfo": false,
+							  "columnDefs": [{ "width": "30%", "targets": 0 }] });
+						  });
 
-						if(index > 0) {
-							div = $(document.createElement("div")).appendTo(contenedor);
-							div.attr("id", "top-batchs");
-						}
+						  if(index > 0) {
+							  div = $(document.createElement("div")).appendTo(contenedor);
+							  div.attr("id", "top-batchs");
+						  }
+
+						  tabla = $(document.createElement("table")).appendTo(contenedor);
+						  tabla.attr("class", "cell-border h6 display responsive w-100 my-5");
+						  tabla.attr("id", "resultsIssued" + index);
+
+						  thead = $(document.createElement("thead")).appendTo(tabla);
+						  thead.attr("class", "bg-primary secondary regular");
+						  tbody = $(document.createElement("tbody")).appendTo(tabla);
+
+						  tr = $(document.createElement("tr")).appendTo(thead);
+						  th = $(document.createElement("th")).appendTo(tr);
+						  th.html(value.nomProducto);
+						  th = $(document.createElement("th")).appendTo(tr);
+						  th.html(lang.GEN_TABLE_EMISSION);
+						  th = $(document.createElement("th")).appendTo(tr);
+						  th.html(lang.GEN_TABLE_REP_TARJETA);
+						  th = $(document.createElement("th")).appendTo(tr);
+						  th.html(lang.GEN_TABLE_REP_CLAVE);
+						  th = $(document.createElement("th")).appendTo(tr);
+						  th.html(lang.GEN_TABLE_TOTAL);
+
+						  tr = $(document.createElement("tr")).appendTo(tbody);
+						  td = $(document.createElement("td")).appendTo(tr);
+						  td.html(lang.GEN_TABLE_PRINCIPAL);
+						  td = $(document.createElement("td")).appendTo(tr);
+						  td.html(value.totalEmision);
+						  td = $(document.createElement("td")).appendTo(tr);
+						  td.html(value.totalReposicionTarjeta);
+						  td = $(document.createElement("td")).appendTo(tr);
+						  td.html(value.totalReposicionClave);
+						  td = $(document.createElement("td")).appendTo(tr);
+						  td.html(value.totalProducto);
+
+						  tr = $(document.createElement("tr")).appendTo(tbody);
+						  td = $(document.createElement("td")).appendTo(tr);
+						  td.html(lang.GEN_TABLE_SUPLEMENTARIA);
+						  td = $(document.createElement("td")).appendTo(tr);
+						  td.html(value.emisionSuplementaria.totalEmision);
+						  td = $(document.createElement("td")).appendTo(tr);
+						  td.html(value.emisionSuplementaria.totalReposicionTarjeta);
+						  td = $(document.createElement("td")).appendTo(tr);
+						  td.html(value.emisionSuplementaria.totalReposicionClave);
+						  td = $(document.createElement("td")).appendTo(tr);
+						  td.html(value.emisionSuplementaria.totalProducto);
+
+						  tr = $(document.createElement("tr")).appendTo(tbody);
+						  td = $(document.createElement("td")).appendTo(tr);
+						  td.html(lang.GEN_TABLE_TOTAL);
+						  td = $(document.createElement("td")).appendTo(tr);
+						  td.html(value.totalEmision);
+						  td = $(document.createElement("td")).appendTo(tr);
+						  td.html(value.totalReposicionTarjeta);
+						  td = $(document.createElement("td")).appendTo(tr);
+						  td.html(value.totalReposicionClave);
+						  td = $(document.createElement("td")).appendTo(tr);
+						  td.html(value.totalProducto)
+					  });
+
+				  }else if(response.data.tipoConsulta == 0){
+
+						(!response.data.issuedCardsList[0].lista) ? $('.icon-file-excel').hide() : $('.icon-file-excel').show();
 
 						tabla = $(document.createElement("table")).appendTo(contenedor);
 						tabla.attr("class", "cell-border h6 display responsive w-100 my-5");
-						tabla.attr("id", "resultsIssued" + index);
-
-						thead = $(document.createElement("thead")).appendTo(tabla);
-						thead.attr("class", "bg-primary secondary regular");
-						tbody = $(document.createElement("tbody")).appendTo(tabla);
-
-						tr = $(document.createElement("tr")).appendTo(thead);
-						th = $(document.createElement("th")).appendTo(tr);
-						th.html(value.nomProducto);
-						th = $(document.createElement("th")).appendTo(tr);
-						th.html(lang.GEN_TABLE_EMISSION);
-						th = $(document.createElement("th")).appendTo(tr);
-						th.html(lang.GEN_TABLE_REP_TARJETA);
-						th = $(document.createElement("th")).appendTo(tr);
-						th.html(lang.GEN_TABLE_REP_CLAVE);
-						th = $(document.createElement("th")).appendTo(tr);
-						th.html(lang.GEN_TABLE_TOTAL);
-
-						tr = $(document.createElement("tr")).appendTo(tbody);
-						td = $(document.createElement("td")).appendTo(tr);
-						td.html(lang.GEN_TABLE_PRINCIPAL);
-						td = $(document.createElement("td")).appendTo(tr);
-						td.html(value.totalEmision);
-						td = $(document.createElement("td")).appendTo(tr);
-						td.html(value.totalReposicionTarjeta);
-						td = $(document.createElement("td")).appendTo(tr);
-						td.html(value.totalReposicionClave);
-						td = $(document.createElement("td")).appendTo(tr);
-						td.html(value.totalProducto);
-
-						tr = $(document.createElement("tr")).appendTo(tbody);
-						td = $(document.createElement("td")).appendTo(tr);
-						td.html(lang.GEN_TABLE_SUPLEMENTARIA);
-						td = $(document.createElement("td")).appendTo(tr);
-						td.html(value.emisionSuplementaria.totalEmision);
-						td = $(document.createElement("td")).appendTo(tr);
-						td.html(value.emisionSuplementaria.totalReposicionTarjeta);
-						td = $(document.createElement("td")).appendTo(tr);
-						td.html(value.emisionSuplementaria.totalReposicionClave);
-						td = $(document.createElement("td")).appendTo(tr);
-						td.html(value.emisionSuplementaria.totalProducto);
-
-						tr = $(document.createElement("tr")).appendTo(tbody);
-						td = $(document.createElement("td")).appendTo(tr);
-						td.html(lang.GEN_TABLE_TOTAL);
-						/* td.attr("style", "pr-5 text-right") */
-						td = $(document.createElement("td")).appendTo(tr);
-						td.html(value.totalEmision);
-						td = $(document.createElement("td")).appendTo(tr);
-						td.html(value.totalReposicionTarjeta);
-						td = $(document.createElement("td")).appendTo(tr);
-						td.html(value.totalReposicionClave);
-						td = $(document.createElement("td")).appendTo(tr);
-						td.html(value.totalProducto)
-					});
-
-				}else if(response.data.tipoConsulta == 0){
-
-						tabla = $(document.createElement("table")).appendTo(contenedor);
-						tabla.attr("class", "cell-border h6 display responsive w-100");
 						tabla.attr("id", "resultsIssued");
 
 						thead = $(document.createElement("thead")).appendTo(tabla);
@@ -205,19 +206,19 @@ $(function () {
 
 						$.each(response.data.issuedCardsList[0].lista, function (index, value) {
 
-								tr = $(document.createElement("tr")).appendTo(tbody);
-								td = $(document.createElement("td")).appendTo(tr);
-								td.html(value.nomProducto);
-								td = $(document.createElement("td")).appendTo(tr);
-								td.html(value.totalEmision);
-								td = $(document.createElement("td")).appendTo(tr);
-								td.html(value.totalReposicionTarjeta);
-								td = $(document.createElement("td")).appendTo(tr);
-								td.html(value.totalReposicionClave);
-								td = $(document.createElement("td")).appendTo(tr);
-								td.html(value.totalProducto);
-							});
-				}
+							tr = $(document.createElement("tr")).appendTo(tbody);
+							td = $(document.createElement("td")).appendTo(tr);
+							td.html(value.nomProducto);
+							td = $(document.createElement("td")).appendTo(tr);
+							td.html(value.totalEmision);
+							td = $(document.createElement("td")).appendTo(tr);
+							td.html(value.totalReposicionTarjeta);
+							td = $(document.createElement("td")).appendTo(tr);
+							td.html(value.totalReposicionClave);
+							td = $(document.createElement("td")).appendTo(tr);
+							td.html(value.totalProducto);
+						});
+				  }
 				}
 
 				form = $('#download-issuedcards');
