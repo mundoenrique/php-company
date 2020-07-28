@@ -212,7 +212,7 @@ class Encrypt_Connect {
 
 			if (isset($response->bean) && is_object($response->bean)) {
 				$isBean = 'IN BEAN ';
-				$response = json_decode($response->bean);
+				$response->bean = gettype($response->bean) != 'object'  ? json_decode($response->bean) : $response->bean;
 			}
 
 			if(is_object($response)) {

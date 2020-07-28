@@ -47,9 +47,9 @@ $(function () {
 			data = {
 				file: file[0].files[0],
 				branchOffice: selectBranchOffice.val(),
-				typeBulk: selectTypeBulk.val(),
+				typeBulk: selectTypeBulk.val().trim(),
 				formatBulk: $('#type-bulk option:selected').attr('format'),
-				typeBulkText: $('#type-bulk option:selected').text()
+				typeBulkText: $('#type-bulk option:selected').text().trim()
 			}
 			insertFormInput(true);
 			verb = 'POST'; who = 'Bulk'; where = 'LoadBulk';
@@ -151,9 +151,9 @@ $(function () {
 						action: 'close'
 					}
 				}
-				var bulkFile = $(this).closest('tr').find('td:nth-child(3)').text();
+				var bulkFile = $(this).closest('tr').find('td:nth-child(2)').text();
 				inputModal =	'<form id="delete-bulk-form" name="delete-bulk-form" class="form-group" onsubmit="return false;">';
-				inputModal+= 		'<span class="regular">'+lang.BULK_DELETE_DATE+': '+bulkFile+'</span>';
+				inputModal+= 		'<span class="regular">'+lang.BULK_DELETE_NAME+': '+bulkFile+'</span>';
 				inputModal+=		'<div class="input-group">';
 				inputModal+= 			'<input id="password" class="form-control pwd-input" name="password" type="password" autocomplete="off"';
 				inputModal+=				'placeholder="'+lang.GEN_PLACE_PASSWORD+'">';
@@ -195,6 +195,7 @@ $(function () {
 				bulkId: form.find('input[name="bulkId"]').val(),
 				bulkTicked: form.find('input[name="bulkTicked"]').val(),
 				bulkStatus: form.find('input[name="bulkStatus"]').val(),
+				bulkname: form.find('input[name="bulkFile"]').val(),
 				pass: inputPass
 			}
 			insertFormInput(true, formDeleteBulk);
