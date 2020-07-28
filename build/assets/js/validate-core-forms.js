@@ -150,7 +150,7 @@ function validateForms(form) {
 						var valid = false;
 
 						if (lang.CONF_INQUIRY_DOCTYPE == 'ON') {
-							valid = alphabetical.test($('#documentType').val()) && $('#documentType').val() != '';
+							valid = alphabetical.test($('#docType').val()) && $('#docType').val() != '';
 						}
 
 						return valid;
@@ -158,10 +158,10 @@ function validateForms(form) {
 				},
 				pattern: idNumberReg, require_from_group: [1, '.select-group']
 			},
-			"documentType": {
+			"docType": {
 				required: {
 					depends: function (element) {
-						return numeric.test($('#idNumberP').val())
+						return idNumberReg.test($('#idNumberP').val())
 					}
 				},
 				pattern: alphabetical
@@ -251,10 +251,9 @@ function validateForms(form) {
 				pattern: lang.VALIDATE_ID_NUMBER,
 				require_from_group: lang.VALIDATE_SELECT_GROUP
 			},
-			"documentType": {
-				required: lang.VALIDATE_ID_NUMBER,
-				pattern: lang.VALIDATE_ID_NUMBER,
-				require_from_group: lang.VALIDATE_SELECT_GROUP
+			"docType": {
+				required: lang.VALIDATE_SELECT_DOCTYPE,
+				pattern: lang.VALIDATE_SELECT_DOCTYPE
 			},
 			"cardNumberP": {
 				pattern: lang.VALIDATE_CARD_NUMBER_MIN,
