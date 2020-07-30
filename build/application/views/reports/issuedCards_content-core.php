@@ -54,7 +54,7 @@
 								<label class="custom-control-label mr-1" for="allResults"><?= lang('GEN_BTN_ALL') ?></label>
 							</div>
 							<div class="custom-control custom-radio custom-control-inline">
-								<input type="radio" id="resultByProduct" name="results" class="custom-control-input" value="1">
+								<input type="radio" id="resultByProduct" name="results" class="custom-control-input" value="1" checked="checked">
 								<label class="custom-control-label mr-1" for="resultByProduct"><?= lang('GEN_PRODUCTS') ?></label>
 							</div>
 						</div>

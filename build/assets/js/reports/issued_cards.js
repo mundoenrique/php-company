@@ -113,7 +113,7 @@ $(function () {
 					  $.each(response.data.issuedCardsList[0].lista, function (index, value) {
 
 						  $(document).ready(function() {
-							  $('#resultsIssued' + index).DataTable({ "bPaginate": false, "bFilter": false, "bInfo": false,
+							  $('#resultsIssued' + index).DataTable({ "bPaginate": false, "bFilter": false, "bInfo": false, "ordering": false,
 							  "columnDefs": [{ "width": "30%", "targets": 0 }] });
 						  });
 
