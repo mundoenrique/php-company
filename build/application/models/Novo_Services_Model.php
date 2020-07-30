@@ -357,7 +357,7 @@ class Novo_Services_Model extends NOVO_Model {
 		];
 		$this->dataRequest->nrOrdenServicio = $dataRequest->orderNumber;
 		$this->dataRequest->nroLote = $dataRequest->bulkNumber;
-		$this->dataRequest->tipoDocumento = isset($dataRequest->documentType) ? $dataRequest->documentType : '';
+		$this->dataRequest->tipoDocumento = isset($dataRequest->docType) ? $dataRequest->docType : '';
 		$this->dataRequest->cedula = $dataRequest->idNumberP;
 		$this->dataRequest->nroTarjeta = $dataRequest->cardNumberP;
 		$this->dataRequest->opcion = 'EMI_REC';
