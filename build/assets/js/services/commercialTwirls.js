@@ -1,44 +1,43 @@
 'use strict'
 $(function () {
-	$('#pre-loader').remove();
 	$('.hide-out').removeClass('hide');
 	$('#blockResults').addClass('hidden');
 	insertFormInput(false);
 
 	$('#card-holder-btn').on('click', function(){
-		$('#blockResults').addClass('hidden');
 		var form = $('#formTwirls');
 		var passData = getDataForm(form);
 
 		validateForms(form);
 
 		if (form.valid()) {
-			$('#spinnerBlock').removeClass("hide");
-			insertFormInput(false);
+			$('#blockResults').addClass('hidden');
+			$('#spinnerBlock').removeClass('hide');
+			insertFormInput(true);
 			getSwitchTwirls(passData);
 		}
 	});
 
+	$('input[type=checkbox]').on('change', function(){
+		var password = $('#passwordAuth').val();
+		if( $(this).is(':checked') == false ){
+			$( this).val(0);
+			$( '#passwordAuth').val(password);
+		}else{
+			$( this).val(1);
+		}
+	});
+
 	$('#sign-btn').on('click', function(){
-		$('#spinnerBlock').addClass("hide");
+		$('#spinnerBlock').addClass('hide');
 		var form = $('#sign-form');
 		var passData = getDataForm(form);
+		delete passData.passwordAuth;
+		passData.passwordAuth = cryptoPass(form.find('input.pwd').val().trim());
 		var changeBtn = $(this);
 		var btnText = changeBtn.text().trim();
 
 		validateForms(form)
-
-		var vars = Object.getOwnPropertyNames(passData);
-
-		$.each (vars, function(i) {
-			var password = $("#password-auth").val();
-			if( $( "#" + vars[i]).is(':checked') == true ){
-				$( "#" + vars[i]).val('on');
-			} else {
-				$( "#" + vars[i]).val('off');
-				$( "#password-auth").val(password);
-			}
-		});
 
 		if (form.valid()) {
 			insertFormInput(true, form);
@@ -49,34 +48,56 @@ $(function () {
 });
 
 function getSwitchTwirls(passData) {
-	verb = "POST"; who = 'Services'; where = 'commercialTwirls'; data = passData;
+	verb = 'POST'; who = 'Services'; where = 'commercialTwirls'; data = passData;
 	callNovoCore(verb, who, where, data, function(response) {
-			dataResponse = response.data;
-			code = response.code
-			var info = dataResponse;
+		dataResponse = response.data;
+		code = response.code
+		var info = dataResponse;
 
-			if(code == 0){
-				setTimeout(function(){ // Esto es solo para simular el tiempo de ejecucion del servicio y se vea el spinner.
-					$('#spinnerBlock').addClass("hide");
-					$('#blockResults').removeClass('hidden');
-			}, 3000);
+		if (code == 0) {
+			var obj = JSON.parse(JSON.parse(info).bean);
+			var properties = obj.cards[0].mccItems;
+			insertFormInput(false);
+			$('#spinnerBlock').addClass('hide');
+			$('#blockResults').removeClass('hidden');
+			$('#cardNumber').text(obj.cards[0].numberCard);
+			$('#dateTimeAct').text(obj.cards[0].datetimeLastUpdate);
+			$('#personalId').text(obj.cards[0].personId);
+			$('#nameUser').text(obj.cards[0].personName);
+
+			$.each (lang.SERVICES_NAMES_PROPERTIES, function(key){
+				properties[lang.SERVICES_NAMES_PROPERTIES[key]]= properties[key];
+				delete properties[key];
+			})
+
+			$.each (properties, function(key, val, i) {
+				$('#' + key).val(val);
+				if ($('#' + key).val() == 1){
+					$('#' + key).prop('checked', true);
+				}else if ($('#' + key).val() == 0) {
+					$('#' + key).prop('checked', false);
+				}
+			});
+		} else {
+			insertFormInput(false);
+			$('#spinnerBlock').addClass('hide');
 		}
-	})
-}
+	});
+};
 
 function updateTwirlsCard(passData, btnText) {
-	verb = "POST"; who = 'Services'; where = 'updateCommercialTwirls'; data = passData;
+	verb = 'POST'; who = 'Services'; where = 'updateCommercialTwirls'; data = passData;
 	callNovoCore(verb, who, where, data, function(response) {
 			dataResponse = response.data;
-			code = response.code
-			var info = dataResponse;
-
-			if(code == 0){
-				setTimeout(function(){ // Esto es solo para simular el tiempo de ejecucion del serivico y se vea el spinner.
-					$('#password-auth').val('');
-					insertFormInput(false);
-        	$('#sign-btn').html(btnText);
-			}, 3000);
+			code = response.code;
+			if (code == 0) {
+				$('#passwordAuth').val('');
+				insertFormInput(false);
+				$('#sign-btn').html(btnText);
+		} else {
+			insertFormInput(false);
+			$('#sign-btn').html(btnText);
+			$('#passwordAuth').val('');
 		}
-	})
-}
+	});
+};

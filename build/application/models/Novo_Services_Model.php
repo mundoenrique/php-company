@@ -610,11 +610,19 @@ class Novo_Services_Model extends NOVO_Model {
 
 		switch($this->isResponseRc) {
 			case 0:
-
 				$this->response->code = 0;
-				$this->response->data = [];
-
+				$data = $response;
+				$this->response->data =  (array)$data;
 			break;
+			case -438:
+        $this->response->title = lang('GEN_COMMERCIAL_TWIRLS_TITTLE');
+        $this->response->icon =  lang('GEN_ICON_WARNING');
+        $this->response->msg = lang('RESP_NO_CARD_FOUND');
+        $this->response->data['btn1']['action'] = 'close';
+      break;
+			default:
+				$this->response->title = lang('GEN_COMMERCIAL_TWIRLS_TITTLE');
+				$this->response->icon =  lang('GEN_ICON_WARNING');
 		}
 
 		return $this->responseToTheView('callWs_commercialTwirls');
@@ -630,22 +638,67 @@ class Novo_Services_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO Services Model: updateCommercialTwirls Method Initialized');
 
-		$this->className = 'com.novo.objects.MO.TransferenciaMO';
+		$this->className = 'com.novo.objects.MO.GiroComercialMO';
 
-		$this->dataAccessLog->modulo = 'Servicios';
-		$this->dataAccessLog->function = 'Actualizar Giros Comerciales';
-		$this->dataAccessLog->operation = 'Actualizar giros comerciales';
+		$this->dataAccessLog->modulo = 'servicios';
+		$this->dataAccessLog->function = 'custom_mcc';
+		$this->dataAccessLog->operation = 'customMcc';
+		$this->dataRequest->opcion = 'act_mcc';
+		$this->dataRequest->companyId = $this->session->enterpriseInf->idFiscal;
+		$this->dataRequest->product = $this->session->productInf->productPrefix;
+		foreach ((object)lang('SERVICES_NAMES_PROPERTIES') as $key => $value) {
+    	$valor[$key] = $dataRequest->$value;
+		}
+		$this->dataRequest->cards = [
+			['numberCard' => '4189281080003016',
+			'mccItems' =>
+				$valor
+			,
+			'rc' => 0]
+		];
+		$password = json_decode(base64_decode($dataRequest->passwordAuth));
+		$password = $this->cryptography->decrypt(
+			base64_decode($password->plot),
+			utf8_encode($password->password)
+		);
 
-		$this->dataRequest->idOperation = '';
+		if (lang('CONF_HASH_PASS') == 'ON' || $this->session->autoLogin == 'false') {
+			$password = md5($password);
+		}
 
-		$this->isResponseRc = 0;
+		$this->dataRequest->usuario = [
+		'userName' => $this->session->userName,
+		'password' => $password,
+		'envioCorreoLogin'=> false,
+		'guardaIp' => false,
+		'isDriver' => 0,
+		'rc' => 0
+	];
+
+		$this->dataRequest->idOperation = 'customMcc';
+
+		$response = json_encode($this->sendToService('callWs_updateCommercialTwirls'));
+
 		switch($this->isResponseRc) {
 			case 0:
-
 				$this->response->code = 0;
-				$this->response->data = [];
-
+				$this->response->data = $response;
 			break;
+			case -1:
+				$this->response->title = lang('GEN_COMMERCIAL_TWIRLS_TITTLE');
+				$this->response->icon =  lang('GEN_ICON_WARNING');
+				$this->response->msg = lang('RESP_PASSWORD_NO_VALID');
+				$this->response->data['btn1']['action'] = 'close';
+			break;
+			case -146:
+				$this->response->title = lang('GEN_COMMERCIAL_TWIRLS_TITTLE');
+				$this->response->icon =  lang('GEN_ICON_WARNING');
+				$this->response->msg = lang('RESP_NO_UPDATE_REGISTRY');
+				$this->response->data['btn1']['action'] = 'close';
+			break;
+			default:
+				$this->response->title = lang('GEN_COMMERCIAL_TWIRLS_TITTLE');
+				$this->response->icon =  lang('GEN_ICON_WARNING');
 		}
 
 		return $this->responseToTheView('callWs_updateCommercialTwirls');

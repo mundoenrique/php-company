@@ -1094,11 +1094,99 @@ $config = [
 			'field' => 'cardNumberP',
 			'rules' => 'trim|regex_match[/^[0-9]*$/i]|required'
 		],
+		[
+			'field' => 'companyId',
+			'rules' => 'trim|regex_match[/^[0-9]*$/i]'
+		],
+		[
+			'field' => 'product',
+			'rules' => 'trim|regex_match[/^[a-zA-Z0-9]*$/i]'
+		]
 	],
 	'updateCommercialTwirls' => [
 		[
-			'field' => 'password-auth',
+			'field' => 'passwordAuth',
 			'rules' => 'trim|required'
+		],
+		[
+			'field' => 'companyId',
+			'rules' => 'trim|regex_match[/^[0-9]*$/i]'
+		],
+		[
+			'field' => 'product',
+			'rules' => 'trim|regex_match[/^[a-zA-Z0-9]*$/i]'
+		],
+		[
+			'field' => 'travelAgency',
+			'rules' => 'trim|regex_match[/^[0-1]*$/i]|required'
+		],
+		[
+			'field' => 'insurers',
+			'rules' => 'trim|regex_match[/^[0-1]*$/i]|required'
+		],
+		[
+			'field' => 'charity',
+			'rules' => 'trim|regex_match[/^[0-1]*$/i]|required'
+		],
+		[
+			'field' => 'collegesUniversities',
+			'rules' => 'trim|regex_match[/^[0-1]*$/i]|required'
+		],
+		[
+			'field' => 'entertainment',
+			'rules' => 'trim|regex_match[/^[0-1]*$/i]|required'
+		],
+		[
+			'field' => 'parking',
+			'rules' => 'trim|regex_match[/^[0-1]*$/i]|required'
+		],
+		[
+			'field' => 'gaStations',
+			'rules' => 'trim|regex_match[/^[0-1]*$/i]|required'
+		],
+		[
+			'field' => 'governments',
+			'rules' => 'trim|regex_match[/^[0-1]*$/i]|required'
+		],
+		[
+			'field' => 'hospitals',
+			'rules' => 'trim|regex_match[/^[0-1]*$/i]|required'
+		],
+		[
+			'field' => 'hotels',
+			'rules' => 'trim|regex_match[/^[0-1]*$/i]|required'
+		],
+		[
+			'field' => 'debit',
+			'rules' => 'trim|regex_match[/^[0-1]*$/i]|required'
+		],
+		[
+			'field' => 'toll',
+			'rules' => 'trim|regex_match[/^[0-1]*$/i]|required'
+		],
+		[
+			'field' => 'restaurants',
+			'rules' => 'trim|regex_match[/^[0-1]*$/i]|required'
+		],
+		[
+			'field' => 'supermarkets',
+			'rules' => 'trim|regex_match[/^[0-1]*$/i]|required'
+		],
+		[
+			'field' => 'telecommunication',
+			'rules' => 'trim|regex_match[/^[0-1]*$/i]|required'
+		],
+		[
+			'field' => 'airTransport',
+			'rules' => 'trim|regex_match[/^[0-1]*$/i]|required'
+		],
+		[
+			'field' => 'passengerTransportation',
+			'rules' => 'trim|regex_match[/^[0-1]*$/i]|required'
+		],
+		[
+			'field' => 'retailSales',
+			'rules' => 'trim|regex_match[/^[0-1]*$/i]|required'
 		]
 	],
 	'transactionalLimits' => [

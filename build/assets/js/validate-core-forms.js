@@ -25,6 +25,7 @@ function validateForms(form) {
 		my: /^(0?[1-9]|1[012])\/[0-9]{4}$/,
 		y: /^[0-9]{4}$/,
 	};
+	var binary = /^[0-1]+$/;
 	var defaults = {
 		debug: true,
 		errorClass: lang.CONF_VALID_ERROR,
@@ -124,6 +125,7 @@ function validateForms(form) {
 			"bulk-number": {pattern: numeric},
 			"enterpriseName": {required: true},
 			"productName": {required: true},
+			"checkbox": {pattern: binary},
 			"initialDate": {required: true, pattern: date.dmy},
 			"finalDate": {required: true, pattern: date.dmy},
 			"idNumber": {pattern: idNumberReg},
