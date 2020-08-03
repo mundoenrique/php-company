@@ -33,7 +33,7 @@ if ( ! function_exists('np_Hoplite_GetWS')) {
 		$dataPost = $cryptDataBase64;
 		curl_setopt($ch, CURLOPT_URL, $urlcurlWS);
 		curl_setopt($ch, CURLOPT_POST, TRUE);
-		curl_setopt($ch, CURLOPT_TIMEOUT, 1);
+		curl_setopt($ch, CURLOPT_TIMEOUT, 59);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $dataPost);
 		curl_setopt($ch, CURLOPT_HTTPHEADER, array(
