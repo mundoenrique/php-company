@@ -29,7 +29,7 @@ $(function () {
 	});
 
 	$('#closingBudgetsBtn').on('click', function(e){
-		$('#spinnerBlockBudget').removeClass("hide");
+		$('#spinnerBlock').removeClass("hide");
 		$('#blockBudgetResults').addClass("hide");
 		$('#export_excel').removeClass("hide");
 		e.preventDefault();
@@ -108,7 +108,7 @@ function closingBudgets(dataForm) {
 	table = $('#balancesClosing').DataTable({
 		drawCallback: function (d) {
 			insertFormInput(false)
-			$('#spinnerBlockBudget').addClass("hide");
+			$('#spinnerBlock').addClass("hide");
 			$('#tbody-datos-general').removeClass('hide');
 			$('#titleResults').removeClass('hide');
 			$('#blockBudgetResults').removeClass("hide");
@@ -141,27 +141,27 @@ function closingBudgets(dataForm) {
 			{
 				"targets": 0,
 				"className": "tarjeta",
-				"visible": lang.CONFIG_CARD_COLUMN == "ON"
+				"visible": lang.CONF_CARD_COLUMN == "ON"
 			},
 			{
 				"targets": 1,
 				"className": "nombre",
-				"visible": lang.CONFIG_NAME_COLUMN == "ON"
+				"visible": lang.CONF_NAME_COLUMN == "ON"
 			},
 			{
 				"targets": 2,
 				"className": "idExtPer",
-				"visible": lang.CONFIG_ID_COLUMN == "ON"
+				"visible": lang.CONF_ID_COLUMN == "ON"
 			},
 			{
 				"targets": 3,
 				"className": "saldo",
-				"visible": lang.CONFIG_BALANCE_COLUMN == "ON"
+				"visible": lang.CONF_BALANCE_COLUMN == "ON"
 			},
 			{
 				"targets": 4,
 				"className": "fechaUltAct",
-				"visible": lang.CONFIG_LAST_UPDATE_COLUMN == "ON"
+				"visible": lang.CONF_LAST_UPDATE_COLUMN == "ON"
 			}
 		],
 		"ajax": {

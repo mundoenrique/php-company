@@ -31,8 +31,8 @@
 					<form id="formTwirls" class="w-100">
 						<div class="row flex justify-between">
 							<div class="form-group col-4 col-xl-4">
-							<label for="cardNumberP"><?= lang('GEN_CARD_NUMBER'); ?></label>
-								<input id="cardNumberP" name="card-number" class="form-control h5 select-group" type="text" autocomplete="off">
+							<label for="cardNumber"><?= lang('GEN_CARD_NUMBER'); ?></label>
+								<input id="cardNumber" name="card-number" class="form-control h5 select-group" type="text" autocomplete="off">
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-4 col-xl-4">
@@ -81,7 +81,7 @@
 							<span class="light text"  id="personalId"></span></p>
 					</div>
 				</div>
-				<form id="sign-form" >
+				<form id="check-form" >
 					<div class="row mx-3">
 						<div id="checked-form" class="form-group col-4 col-lg-4 col-xl-3 pb-3">
 							<label class="block">Agencia de viajes</label>
@@ -225,7 +225,7 @@
 						<div class="col-5 col-lg-3 col-xl-3 form-group">
 							<div class="input-group">
 							<input id="passwordAuth" name="password" class="form-control pwd-input pr-0 pwd" type="password" autocomplete="new-password"
-									placeholder="<?= lang('GEN_PLACE_PASSWORD'); ?>" required>
+									placeholder="<?= lang('GEN_PLACE_PASSWORD'); ?>" >
 								<div class="input-group-append">
 									<span id="pwd_action" class="input-group-text pwd-action" title="<?= lang('GEN_SHOW_PASS') ?>">
 									<i class="icon-view mr-0"></i></span>

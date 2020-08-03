@@ -4,18 +4,15 @@ $(function () {
 	$('#blockResults').addClass('hidden');
 	insertFormInput(false);
 
-	$('#card-holder-btn').on('click', function(){
-		var form = $('#formTwirls');
-		var passData = getDataForm(form);
-
-		validateForms(form);
-
-		if (form.valid()) {
-			$('#blockResults').addClass('hidden');
-			$('#spinnerBlock').removeClass('hide');
-			insertFormInput(true);
-			getSwitchTwirls(passData);
+	$('#cardNumber').on('keypress', function (e) {
+		if(e.which == 13) {
+			searchTwirl();
 		}
+	});
+
+	$('#card-holder-btn').on('click', function (e) {
+		e.preventDefault();
+		searchTwirl();
 	});
 
 	$('input[type=checkbox]').on('change', function(){
@@ -28,24 +25,50 @@ $(function () {
 		}
 	});
 
-	$('#sign-btn').on('click', function(){
-		$('#spinnerBlock').addClass('hide');
-		var form = $('#sign-form');
-		var passData = getDataForm(form);
-		delete passData.passwordAuth;
-		passData.passwordAuth = cryptoPass(form.find('input.pwd').val().trim());
-		var changeBtn = $(this);
-		var btnText = changeBtn.text().trim();
-
-		validateForms(form)
-
-		if (form.valid()) {
-			insertFormInput(true, form);
-			changeBtn.html(loader);
-			updateTwirlsCard(passData, btnText);
+	$('#passwordAuth').on('keypress', function (e) {
+		if(e.which == 13) {
+			var changeBtn = 	$('#sign-btn');
+			var btnText = changeBtn.text().trim();
+			updateTwirl(changeBtn, btnText);
 		}
 	});
+
+	$('#sign-btn').on('click', function(e){
+		var changeBtn = $(this);
+		var btnText = changeBtn.text().trim();
+		updateTwirl(changeBtn, btnText);
+	});
+
 });
+
+function searchTwirl(){
+	var form = $('#formTwirls');
+	validateForms(form);
+
+	if (form.valid()) {
+		$('#blockResults').addClass('hidden');
+		$('#spinnerBlock').removeClass('hide');
+		insertFormInput(true);
+		getSwitchTwirls(getDataForm(form));
+	}
+};
+
+function updateTwirl(changeBtn, btnText){
+	$('#spinnerBlock').addClass('hide');
+	var form = $('#check-form');
+	var passData = getDataForm(form);
+	delete passData.passwordAuth;
+	passData.passwordAuth = cryptoPass(form.find('input.pwd').val().trim());
+	passData.cardNumber = $('#cardNumber').val();
+
+	validateForms(form)
+
+	if (form.valid()) {
+		insertFormInput(true, form);
+		changeBtn.html(loader);
+		updateTwirlsCard(passData, btnText);
+	}
+};
 
 function getSwitchTwirls(passData) {
 	verb = 'POST'; who = 'Services'; where = 'commercialTwirls'; data = passData;
@@ -55,15 +78,15 @@ function getSwitchTwirls(passData) {
 		var info = dataResponse;
 
 		if (code == 0) {
-			var obj = JSON.parse(JSON.parse(info).bean);
-			var properties = obj.cards[0].mccItems;
+			var obj = JSON.parse(JSON.parse(info)).cards[0];
+			var properties = obj.mccItems;
 			insertFormInput(false);
 			$('#spinnerBlock').addClass('hide');
 			$('#blockResults').removeClass('hidden');
-			$('#cardNumber').text(obj.cards[0].numberCard);
-			$('#dateTimeAct').text(obj.cards[0].datetimeLastUpdate);
-			$('#personalId').text(obj.cards[0].personId);
-			$('#nameUser').text(obj.cards[0].personName);
+			$('#cardNumber').text(obj.numberCard);
+			$('#dateTimeAct').text(obj.datetimeLastUpdate);
+			$('#personalId').text(obj.personId);
+			$('#nameUser').text(obj.personName);
 
 			$.each (lang.SERVICES_NAMES_PROPERTIES, function(key){
 				properties[lang.SERVICES_NAMES_PROPERTIES[key]]= properties[key];

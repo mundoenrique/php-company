@@ -594,7 +594,7 @@ class Novo_Services_Model extends NOVO_Model {
 		$this->dataRequest->companyId = $this->session->enterpriseInf->idFiscal;
 		$this->dataRequest->product = $this->session->productInf->productPrefix;
 		$this->dataRequest->cards = [
-			['numberCard' =>  $dataRequest->cardNumberP,
+			['numberCard' =>  $dataRequest->cardNumber,
 			'rc' => 0]
 		];
 		$this->dataRequest->usuario = [
@@ -611,17 +611,15 @@ class Novo_Services_Model extends NOVO_Model {
 		switch($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
-				$data = $response;
-				$this->response->data =  (array)$data;
+				$this->response->data =  json_encode(json_decode(((array)$response)[0])->bean);
 			break;
 			case -438:
         $this->response->title = lang('GEN_COMMERCIAL_TWIRLS_TITTLE');
-        $this->response->icon =  lang('GEN_ICON_WARNING');
-        $this->response->msg = lang('RESP_NO_CARD_FOUND');
+				$this->response->icon =  lang('GEN_ICON_WARNING');
+        $this->response->msg = 	novoLang(lang('RESP_NO_CARD_FOUND'), maskString( $dataRequest->cardNumber, 5, 6));
         $this->response->data['btn1']['action'] = 'close';
       break;
 			default:
-				$this->response->title = lang('GEN_COMMERCIAL_TWIRLS_TITTLE');
 				$this->response->icon =  lang('GEN_ICON_WARNING');
 		}
 
@@ -650,7 +648,7 @@ class Novo_Services_Model extends NOVO_Model {
     	$valor[$key] = $dataRequest->$value;
 		}
 		$this->dataRequest->cards = [
-			['numberCard' => '4189281080003016',
+			['numberCard' => $dataRequest->cardNumber,
 			'mccItems' =>
 				$valor
 			,

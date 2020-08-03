@@ -1091,16 +1091,8 @@ $config = [
 	],
 	'commercialTwirls' => [
 		[
-			'field' => 'cardNumberP',
+			'field' => 'cardNumber',
 			'rules' => 'trim|regex_match[/^[0-9]*$/i]|required'
-		],
-		[
-			'field' => 'companyId',
-			'rules' => 'trim|regex_match[/^[0-9]*$/i]'
-		],
-		[
-			'field' => 'product',
-			'rules' => 'trim|regex_match[/^[a-zA-Z0-9]*$/i]'
 		]
 	],
 	'updateCommercialTwirls' => [

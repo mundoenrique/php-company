@@ -62,16 +62,11 @@
 
 			<div class="flex pb-5 flex-column">
 				<span id="titleResults" class="line-text mb-2 h4 semibold primary">Resultados</span>
-				<div id="spinnerBlockBudget" class=" hide">
-									<div id="pre-loader" class="mt-2 mx-auto flex justify-center">
-										<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
-									</div>
-						</div>
-						<div id="spinnerBlockMasterAccount" class=" hide">
-									<div id="pre-loader" class="mt-2 mx-auto flex justify-center">
-										<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
-									</div>
-						</div>
+				<div id="spinnerBlock" class=" hide">
+					<div id="pre-loader" class="mt-2 mx-auto flex justify-center">
+						<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
+					</div>
+				</div>
 				<div id="blockResultsUser" class="center mx-1 hide">
 					<div class="flex">
 
