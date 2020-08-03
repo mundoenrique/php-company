@@ -43,8 +43,19 @@
 								<input id="bulkNumber" name="bulkNumber" class="form-control h5 select-group" type="text" autocomplete="off" disabled>
 								<div class="help-block"></div>
 							</div>
+							<?php if(lang('CONF_INQUIRY_DOCTYPE') == 'ON'): ?>
 							<div class="form-group col-4 col-xl-3">
-								<label for="idNumberP"><?= lang('GEN_TABLE_DNI'); ?></label>
+								<label for="docType"><?= lang('GEN_DOCUMENT_TYPE'); ?></label>
+								<select id="docType" name="docType" class="form-control select-box custom-select flex h6 w-100">
+								<?php foreach (lang('GEN_RECOVER_DOC_TYPE') AS $key => $value): ?>
+									<option value="<?= $key ?>"><?= $value ?></option>
+									<?php endforeach; ?>
+								</select>
+								<div class="help-block"></div>
+							</div>
+							<?php endif;?>
+							<div class="form-group col-4 col-xl-3">
+								<label for="idNumberP">Nro documento</label>
 								<input id="idNumberP" name="idNumberP" class="form-control h5 select-group" type="text" autocomplete="off" disabled>
 								<div class="help-block"></div>
 							</div>
@@ -83,9 +94,10 @@
 								<tr>
 									<th class="toggle-all"></th>
 									<th><?= lang('GEN_EMAIL'); ?></th>
-									<th>Celular</th>
+									<th><?= lang('GEN_TABLE_MOVIL_NUMBER') ?></th>
 									<th><?= lang('GEN_TABLE_NAME'); ?></th>
 									<th><?= lang('GEN_TABLE_LASTNAME') ?></th>
+									<th><?= lang('GEN_TABLE_DNI') ?></th>
 									<th><?= lang('GEN_TABLE_CARD_NUMBER'); ?></th>
 									<th><?= lang('GEN_TABLE_ORDER_NRO'); ?></th>
 									<th><?= lang('GEN_TABLE_BULK_NUMBER'); ?></th>

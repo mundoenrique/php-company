@@ -20,6 +20,10 @@ class Encrypt_Connect {
 		$this->keyNovo = $this->CI->config->item('keyNovo');
 		$this->iv = "\0\0\0\0\0\0\0\0";
 		$this->logMessage = new stdClass();
+
+		if (ENVIRONMENT == 'development') {
+			error_reporting(E_ALL & ~E_DEPRECATED);
+		}
 	}
 	/**
 	 * @info método para cifrar las petiones al servicio
@@ -208,7 +212,7 @@ class Encrypt_Connect {
 
 			if (isset($response->bean) && is_object($response->bean)) {
 				$isBean = 'IN BEAN ';
-				$response = json_decode($response->bean);
+				$response->bean = gettype($response->bean) != 'object'  ? json_decode($response->bean) : $response->bean;
 			}
 
 			if(is_object($response)) {

@@ -79,7 +79,7 @@ class Novo_User extends NOVO_Controller {
 	{
 		log_message('INFO', 'NOVO User: singleSignon Method Initialized');
 
-		$view = 'single-signin';
+		$view = 'singleSignon';
 		$this->render->send = FALSE;
 
 		if ($sessionId) {
@@ -92,7 +92,7 @@ class Novo_User extends NOVO_Controller {
 		if ($sessionId != 'fin') {
 			array_push(
 				$this->includeAssets->jsFiles,
-				'user/single-signin'
+				'user/singleSignon'
 			);
 		}
 
@@ -121,6 +121,28 @@ class Novo_User extends NOVO_Controller {
 		array_push(
 			$this->includeAssets->jsFiles,
 			"user/recoverPass",
+			"third_party/jquery.validate",
+			"validate".$this->render->newViews."-forms",
+			"third_party/additional-methods"
+		);
+		$this->render->titlePage = lang('GEN_RECOVER_PASS_TITLE');
+		$this->render->activeHeader = TRUE;
+		$this->render->skipProductInf = TRUE;
+		$this->views = ['user/'.$view];
+		$this->loadView($view);
+	}
+	/**
+	 * @info Método que renderiza la vista para recuperar los datos de acceso
+	 * @author Jhonnatan Vega.
+	 */
+	public function recoverAccess()
+	{
+		log_message('INFO', 'NOVO User: recoverAccess Method Initialized');
+
+		$view = 'recoverAccess';
+		array_push(
+			$this->includeAssets->jsFiles,
+			"user/recoverAccess",
 			"third_party/jquery.validate",
 			"validate".$this->render->newViews."-forms",
 			"third_party/additional-methods"

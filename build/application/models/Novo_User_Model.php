@@ -353,6 +353,134 @@ class Novo_User_Model extends NOVO_Model {
 		return $this->responseToTheView(lang('GEN_RECOVER_PASS'));
 	}
 	/**
+	 * @info Método para recuperar acceso con OTP
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date July 14th, 2020
+	 */
+	public function callWs_RecoverAccess_User($dataRequest)
+	{
+		log_message('INFO', 'NOVO User Model: RecoverAccess Method Initialized');
+
+		$this->className = 'com.novo.objects.MO.GenericBusinessObject';
+		$this->dataAccessLog->modulo = 'Usuario';
+		$this->dataAccessLog->function = 'Recuperar Acceso';
+		$this->dataAccessLog->operation = 'Generar código OTP';
+		$userName = isset($dataRequest->user) ? mb_strtoupper($dataRequest->user) : '';
+		$this->dataAccessLog->userName = $userName;
+
+		$this->dataRequest->idOperation = 'genericBusiness';
+		$this->dataRequest->userName = $userName;
+		$this->dataRequest->tipoDocumento = $dataRequest->documentType;
+		$this->dataRequest->cedula = $dataRequest->documentId;
+		$this->dataRequest->email = $dataRequest->email;
+		$this->dataRequest->opcion = 'generarOTP';
+		$this->dataRequest->subOpciones = [
+			[
+				'subOpcion' => 'validarDatosRecuperar',
+      	'orden' => '1'
+			]
+		];
+		$map = 0;
+
+		$response = $this->sendToService('callWs_RecoverAccess');
+
+		switch($this->isResponseRc) {
+			case 200:
+				if (isset($response->bean->TokenTO->authToken)) {
+					$this->session->set_flashdata('authToken', $response->bean->TokenTO->authToken);
+				}
+				$this->response->code = 0;
+				$this->response->msg = lang('GEN_OTP');
+				$this->response->icon = lang('GEN_ICON_SUCCESS');
+				$this->response->data = [
+					'btn1'=> [
+						'text'=> lang('GEN_BTN_ACCEPT'),
+						'action'=> 'none'
+					]
+				];
+			break;
+			case -100:
+			case -101:
+			case -102:
+			case -103:
+				$map = 1;
+				$this->response->msg = lang('GEN_INVALID_DATA');
+			break;
+		}
+
+		if($this->isResponseRc != 0 && $map == 1) {
+			$this->response->title = lang('GEN_RECOVER_PASS_TITLE');
+			$this->response->icon = lang('GEN_ICON_INFO');
+			$this->response->data = [
+				'btn1'=> [
+					'action'=> 'close'
+				]
+			];
+		}
+
+		return $this->responseToTheView(lang('GEN_RECOVER_ACCESS'));
+	}
+		/**
+	 * @info Método para recuperar acceso con OTP
+	 * @author Jhonnatan Vega
+	 * @date July 14th, 2020
+	 */
+	public function callWs_ValidateOtp_User($dataRequest)
+	{
+		log_message('INFO', 'NOVO User Model: ValidateOtp Method Initialized');
+
+		$this->className = 'com.novo.objects.MO.GenericBusinessObject';
+		$this->dataAccessLog->modulo = 'Usuario';
+		$this->dataAccessLog->function = 'Recuperar Acceso';
+		$this->dataAccessLog->operation = 'Validar código OTP';
+		$userName = isset($dataRequest->user) ? mb_strtoupper($dataRequest->user) : '';
+		$this->dataAccessLog->userName = $userName;
+
+		$this->dataRequest->idOperation = 'genericBusiness';
+		$this->dataRequest->userName = $userName;
+		$this->dataRequest->opcion = 'validarOTP';
+		$this->dataRequest->TokenTO = [
+			'access_token' => $this->session->flashdata('authToken'),
+      'token' => $dataRequest->optCode,
+		];
+		$maskMail = maskString($dataRequest->email, 4, $end = 6, '@');
+		$map = 0;
+
+		$response = $this->sendToService('callWs_ValidateOtp');
+
+		switch($this->isResponseRc) {
+			case 0:
+				$this->response->msg = novoLang(lang('GEN_SEND_ACCESS'), [$maskMail]);
+				$this->response->icon = lang('GEN_ICON_SUCCESS');
+				$this->response->data = [
+					'btn1'=> [
+						'text'=> lang('GEN_BTN_ACCEPT'),
+						'link'=> 'inicio',
+						'action'=> 'redirect'
+					]
+				];
+			break;
+			case -286:
+			case -287:
+			case -288:
+				$map = 1;
+				$this->response->msg = lang('GEN_INVALID_OTP');
+			break;
+		}
+
+		if($this->isResponseRc != 0 && $map == 1) {
+			$this->response->title = lang('GEN_RECOVER_PASS_TITLE');
+			$this->response->icon = lang('GEN_ICON_INFO');
+			$this->response->data = [
+				'btn1'=> [
+					'action'=> 'close'
+				]
+			];
+		}
+
+		return $this->responseToTheView(lang('GEN_VALIDATE_OTP'));
+	}
+	/**
 	 * @info Método para el cambio de Contraseña
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date April 29th, 2019
@@ -408,6 +536,7 @@ class Novo_User_Model extends NOVO_Model {
 				$code = 1;
 				$this->response->msg = lang('RESP_PASSWORD_USED');
 				break;
+			case -1:
 			case -22:
 				$code = 1;
 				$this->response->msg = lang('RESP_PASSWORD_INCORRECT');
