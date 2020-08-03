@@ -389,6 +389,7 @@ $lang['RESP_RC_DEFAULT'] = -9999;
 $lang['RESP_DEFAULT_CODE'] = 4;
 $lang['RESP_RC_0'] = 'Proceso ejecutado exitosamente';
 $lang['RESP_DUPLICATED_SESSION'] = 'No fue posible validar tus credenciales de acceso, por favor vuelve a iniciar sesión, si continúas viendo este mensaje comunícate con el administrador.';
+$lang['RESP_TIMEOUT_RESPONSE'] = 'Tu solicitud continua procesandose, por favor espera.';
 $lang['GEN_FAILED_THIRD PARTY'] = 'No fue posible obtener respuesta del banco, si continuas viendo este mensaje comunícate con el administrador.';
 $lang['RESP_SINGLE_SIGNON'] = 'No fue posible validar tus credenciales de acceso, por favor vuelve a intentarlo, si continúas viendo este mensaje comunícate con el administrador.';
 $lang['RESP_MESSAGE_SYSTEM'] = 'En este momento no podemos atender tu solicitud, por favor intenta más tarde';

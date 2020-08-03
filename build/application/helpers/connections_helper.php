@@ -33,6 +33,7 @@ if ( ! function_exists('np_Hoplite_GetWS')) {
 		$dataPost = $cryptDataBase64;
 		curl_setopt($ch, CURLOPT_URL, $urlcurlWS);
 		curl_setopt($ch, CURLOPT_POST, TRUE);
+		curl_setopt($ch, CURLOPT_TIMEOUT, 1);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $dataPost);
 		curl_setopt($ch, CURLOPT_HTTPHEADER, array(
@@ -42,12 +43,23 @@ if ( ! function_exists('np_Hoplite_GetWS')) {
 		$response = curl_exec($ch);
 		$httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 		log_message("DEBUG","CURL HTTP CODE: " . $httpCode);
-		if(!$httpCode || $httpCode != 200) {
-			return FALSE;
+
+		if($response === FALSE) {
+			log_message("DEBUG","ERROR IN RESPONSE CURL: " .json_encode(curl_error($ch)));
+			$response = new stdClass();
+			$response->httpCode = $httpCode;
+			$response->msg = curl_error($ch);
+			$response->rc = curl_errno($ch);
+			curl_close($ch);
+			return json_encode($response);
+		}
+		log_message("DEBUG","RESPONSE CURL HTTP CODE: ".$httpCode);
+		curl_close($ch);
+		if($httpCode == 404 || !$response){
+			return '{"data": false}';
 		} else {
 			return $response;
 		}
-
 	}
 }
 
