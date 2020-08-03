@@ -2068,14 +2068,18 @@ public function consultaTarjetas($urlCountry)
 			}
 		} else {
 			$responseService = json_decode($originalResponse);
-			switch ($responseService->rc) {
-				case 28:
-					$msgError = lang('RESP_TIMEOUT_RESPONSE');
-					break;
+			$listErrorDefault = ["Enviado a Empresa"];
+			$msgError = lang('ERROR_GENERICO_USER');
+			if ( !in_array($opcion, $listErrorDefault) ){
+				switch ($responseService->rc) {
+					case 28:
+						$msgError = lang('RESP_TIMEOUT_RESPONSE');
+						break;
 
-				default:
-					$msgError = lang('ERROR_GENERICO_USER');
-					break;
+					default:
+						$msgError = lang('ERROR_GENERICO_USER');
+						break;
+				}
 			}
 			return $codigoError = ['ERROR'=> $msgError ];
 		}
