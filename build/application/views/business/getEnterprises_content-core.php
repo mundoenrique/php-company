@@ -37,7 +37,7 @@
 	<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
 </div>
 
-<div id="no-enterprise" class="bg-color mx-4 my-5">
+<div id="no-enterprise" class="mx-4 my-5">
 	<div class="flex justify-center">
 		<span class="my-5 py-5 h4 regular text"><?= $msgEnterprise ?></span>
 	</div>

@@ -36,4 +36,8 @@
 		<img src="<?= $this->asset->insertFile(lang('GEN_IMAGE_LOGIN'), 'images', $countryUri); ?> " alt="Imagen de referencia">
 	</div>
 	<?php endif; ?>
+
+	<?php if(lang('CONF_SIGNIN_WIDGET_CONTACT') == 'ON'): ?>
+	<?php $this->load->view('widget/widget_contacts_content-core') ?>
+	<?php endif; ?>
 </div>
