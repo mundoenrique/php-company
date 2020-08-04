@@ -967,6 +967,8 @@ function llamarWSCambio(pass,mensaje,url,op,alerta) {
 				notificacion(mensaje, 'La contraseña es incorrecta. Por favor verifícala e intenta de nuevo.', reload);
 			}else if(data.result.rc == -416){
 				notificacion(mensaje,data.result.msg, reload);
+			}else if(data.result.rc == -3){
+				notificacion(mensaje, data.result.ERROR, reload);
 			}else if(data.result.rc == -450){
 				notificacion(mensaje,data.result.msg, reload);
 			} else if(data.result.rc == -451){

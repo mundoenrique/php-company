@@ -2203,6 +2203,9 @@ public function consultaTarjetas($urlCountry)
 
 		  if($response) {
 				if($opcion == 'saldo'){
+						if($response->rc==-3){
+							$response = array('ERROR' => lang('ERROR_GENERICO_USER'), "rc"=> $response->rc);
+						}
 						return $response;
 				}else {
 				if($response->rc == 0) {
