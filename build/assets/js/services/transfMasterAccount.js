@@ -505,13 +505,25 @@ function buildList(response, action) {
 }
 
 function verifyOperations() {
+	var column
+
 	if (!access.TRASAL) {
-		var column = table.column('4');
+		column = table.column('4');
 		column.visible(false);
 	}
 
 	if (!access.TRACAR && !access.TRAABO) {
-		var column = table.column('5');
+		column = table.column('5');
 		column.visible(false);
+	}
+
+	if (!access.TRASAL && !access.TRACAR && !access.TRAABO && !access.TRABLQ && !access.TRAASG && !access.TRADBL) {
+		$('#password-table').addClass('hide');
+		column = table.column('0');
+		column.visible(false);
+	} else {
+		$('#password-table').removeClass('hide')
+		column = table.column('0');
+		column.visible(true);
 	}
 }

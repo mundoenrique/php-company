@@ -101,9 +101,11 @@ function callNovoCore(verb, who, where, request, _response_) {
 		sessionExpire();
 	}
 
+	var uri = data.route || 'async-call'
+
 	$.ajax({
 		method: verb,
-		url: baseURL + 'async-call',
+		url: baseURL + uri,
 		data: formData,
 		context: document.body,
 		cache: false,
@@ -176,12 +178,14 @@ function notiSystem(title, message, icon, data) {
 	dialogMoldal.dialog({
 		title: title || lang.GEN_SYSTEM_NAME,
 		modal: 'true',
-		minHeight: 100,
+		position: { my: data.posMy || 'center', at: data.posAt || 'center'},
 		draggable: false,
 		resizable: false,
 		closeOnEscape: false,
+		width: data.width || 370,
 		minWidth: lang.CONF_MODAL_WIDTH,
-		maxHeight: 350,
+		minHeight: 100,
+		maxHeight: data.maxHeight || 350,
 		dialogClass: "border-none",
 		classes: {
 			"ui-dialog-titlebar": "border-none",
