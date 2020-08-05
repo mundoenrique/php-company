@@ -1132,7 +1132,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 				$detailBulk['records'] = $bulk->ncantregs;
 				$detailBulk['amount'] = $bulk->nmonto;
 				$detailBulk['selectBulk'] = $auth ? '' : 'no-select-checkbox';
-				$listAth = mb_strtoupper($bulk->accodusuarioa);
+				$listAth = $bulk->accodusuarioa;
 				$listAth = explode(',', $listAth);
 				$detailBulk['selectRow'] = in_array($this->userName, $listAth) ? 'no-select-checkbox' : '';
 				$detailBulk['selectRowContent'] = in_array($this->userName, $listAth) ? 'TRUE' : '';

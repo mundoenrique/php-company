@@ -27,7 +27,6 @@
 	</div>
 	<div class="w-100 hide-out hide">
 		<div class="flex flex-auto flex-column">
-
 			<div class="search-criteria-order flex pb-3 flex-column w-100">
 				<span class="line-text mb-2 h4 semibold primary"><?= lang('GEN_SEARCH_CRITERIA'); ?></span>
 				<div class="flex mt-2 mb-3 px-5">
@@ -74,8 +73,10 @@
 				</div>
 				<div class="line mb-2"></div>
 			</div>
-			<div id="loader-table" class="mt-2 mx-auto hide">
-				<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
+			<div class="flex flex-nowrap justify-between">
+				<div id="loader-table" class="mt-2 mx-auto hide">
+					<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
+				</div>
 			</div>
 			<div class="w-100 hide-table hide">
 				<div class="flex pb-5 flex-column">
