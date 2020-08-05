@@ -869,6 +869,30 @@ class Novo_Bulk_Model extends NOVO_Model {
 				$this->response->icon = lang('GEN_ICON_SUCCESS');
 				$this->response->data['btn1']['link'] = 'lotes-autorizacion';
 				break;
+			case -439:
+				$this->response->title = lang('BULK_AUTH_TITLE');
+				$this->response->msg = lang('BULK_WITHOUT_AUTH_PENDING');
+				$this->response->icon = lang('GEN_ICON_WARNING');
+				$this->response->data['btn1']['action'] = 'close';
+				break;
+			case -440:
+				$this->response->title = lang('BULK_AUTH_TITLE');
+				$this->response->msg = lang('FILE_NOT_EXIST_ICBS');
+				$this->response->icon = lang('GEN_ICON_WARNING');
+				$this->response->data['btn1']['action'] = 'close';
+				break;
+			case -441:
+				$this->response->title = lang('BULK_AUTH_TITLE');
+				$this->response->msg = lang('AUTH_ALREADY_PERFORMED_BY_USER');
+				$this->response->icon = lang('GEN_ICON_WARNING');
+				$this->response->data['btn1']['action'] = 'close';
+				break;
+			case -442:
+				$this->response->title = lang('BULK_AUTH_TITLE');
+				$this->response->msg = lang('BULK_EXPIRED_TIME');
+				$this->response->icon = lang('GEN_ICON_WARNING');
+				$this->response->data['btn1']['action'] = 'close';
+				break;
 		}
 
 		return $this->responseToTheView('callWs_AuthorizeBulk');
