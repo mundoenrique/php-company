@@ -389,6 +389,9 @@ class Novo_User_Model extends NOVO_Model {
 				if (isset($response->bean->TokenTO->authToken)) {
 					$this->session->set_flashdata('authToken', $response->bean->TokenTO->authToken);
 				}
+				if (isset($response->logAccesoObject->userName)) {
+					$this->session->set_flashdata('userName', $response->logAccesoObject->userName);
+				}
 				$this->response->code = 0;
 				$this->response->msg = lang('GEN_OTP');
 				$this->response->icon = lang('GEN_ICON_SUCCESS');
@@ -433,15 +436,20 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataAccessLog->modulo = 'Usuario';
 		$this->dataAccessLog->function = 'Recuperar Acceso';
 		$this->dataAccessLog->operation = 'Validar código OTP';
-		$userName = isset($dataRequest->user) ? mb_strtoupper($dataRequest->user) : '';
-		$this->dataAccessLog->userName = $userName;
+		$this->dataAccessLog->userName = $this->session->flashdata('userName');
 
 		$this->dataRequest->idOperation = 'genericBusiness';
-		$this->dataRequest->userName = $userName;
+		$this->dataRequest->userName = $this->session->flashdata('userName');
 		$this->dataRequest->opcion = 'validarOTP';
 		$this->dataRequest->TokenTO = [
 			'access_token' => $this->session->flashdata('authToken'),
       'token' => $dataRequest->optCode,
+		];
+		$this->dataRequest->subOpciones = [
+			[
+				'subOpcion' => 'envioEmailProdubancoRecuperacion',
+      	'orden' => '1'
+			]
 		];
 		$maskMail = maskString($dataRequest->email, 4, $end = 6, '@');
 		$map = 0;
