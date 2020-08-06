@@ -136,7 +136,7 @@ $(function () {
 				btn = response.data.btn1;
 
 				loginIpMsg ='<form id="formVerificationOTP" name="formVerificationOTP" class="mr-2" method="post">';
-				loginIpMsg+='<p class="pt-0 p-0 justify">'+response.msg+'</p>';
+				loginIpMsg+='<p class="pt-0 p-0">'+response.msg+'</p>';
 				loginIpMsg+='<div class="row">';
 				loginIpMsg+=	'<div class="form-group col-6">';
 				loginIpMsg+=	'<label id="label_codeOTP" for="codeOTP">'+response.labelInput+'</label>';
