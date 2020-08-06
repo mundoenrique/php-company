@@ -30,9 +30,10 @@ $(function () {
 	$('#sign-btn').on('click', function(e){
 		var changeBtn = $(this);
 		var btnText = changeBtn.text().trim();
-		$('#spinnerBlock').addClass('hide');
 		var form = $('#check-form');
 		var passData = getDataForm(form);
+
+		$('#spinnerBlock').addClass('hide');
 		delete passData.passwordAuth;
 		passData.passwordAuth = cryptoPass(form.find('input.pwd').val().trim());
 		passData.cardNumber = $('#cardNumber').val();
@@ -52,30 +53,19 @@ function getSwitchTwirls(passData) {
 	callNovoCore(verb, who, where, data, function(response) {
 		dataResponse = response.data;
 		code = response.code
-		var info = dataResponse;
 		if (code == 0) {
-			var obj = (info).cards[0];
-			var properties = obj.mccItems;
 			insertFormInput(false);
 			$('#spinnerBlock').addClass('hide');
 			$('#blockResults').removeClass('hidden');
-			$('#cardNumberP').text(obj.numberCard);
-			$('#dateTimeAct').text(obj.datetimeLastUpdate);
-			$('#personalId').text(obj.personId);
-			$('#nameUser').text(obj.personName);
 
-			$.each (lang.SERVICES_NAMES_PROPERTIES, function(key){
-				properties[lang.SERVICES_NAMES_PROPERTIES[key]]= properties[key];
-				delete properties[key];
-			})
+			$.each (dataResponse.dataTwirls, function(key, val) {
+				$('#' + key).text(val);
+			});
 
-			$.each (properties, function(key, val, i) {
+			$.each (dataResponse.shops, function(key, val, i) {
 				$('#' + key).val(val);
-				if ($('#' + key).val() == 1){
-					$('#' + key).prop('checked', true);
-				}else if ($('#' + key).val() == 0) {
-					$('#' + key).prop('checked', false);
-				}
+				var markCheck = $('#' + key).val() == 1 ? true : false;
+				$('#' + key).prop('checked', markCheck);
 			});
 		} else {
 			insertFormInput(false);
@@ -87,16 +77,10 @@ function getSwitchTwirls(passData) {
 function updateTwirlsCard(passData, btnText) {
 	verb = 'POST'; who = 'Services'; where = 'updateCommercialTwirls'; data = passData;
 	callNovoCore(verb, who, where, data, function(response) {
-			dataResponse = response.data;
-			code = response.code;
-			if (code == 0) {
-				$('#passwordAuth').val('');
-				insertFormInput(false);
-				$('#sign-btn').html(btnText);
-		} else {
-			insertFormInput(false);
-			$('#sign-btn').html(btnText);
-			$('#passwordAuth').val('');
-		}
+		dataResponse = response.data;
+		code = response.code;
+		insertFormInput(false);
+		$('#sign-btn').html(btnText);
+		$('#passwordAuth').val('');
 	});
 };

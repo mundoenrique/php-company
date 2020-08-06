@@ -63,7 +63,7 @@
 					</div>
 					<div class="flex h6 flex-auto justify-end">
 					<p class="h5 semibold tertiary">Fecha de actualización:
-					<span id="dateTimeAct"></span></p>
+					<span id="updateDate"></span></p>
 					</div>
 				</div>
 
@@ -74,11 +74,11 @@
 					</div>
 					<div class="form-group col-4 center">
 						<p class="h5 semibold tertiary"><?= lang('GEN_TABLE_NAME'); ?>:
-							<span class="light text"  id="nameUser"></span></p>
+							<span class="light text"  id="customerName"></span></p>
 					</div>
 					<div class="form-group col-4 center">
 						<p class="h5 semibold tertiary"><?= lang('GEN_TABLE_DNI'); ?>:
-							<span class="light text"  id="personalId"></span></p>
+							<span class="light text"  id="documentId"></span></p>
 					</div>
 				</div>
 				<form id="check-form" >

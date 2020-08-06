@@ -611,9 +611,21 @@ class Novo_Services_Model extends NOVO_Model {
 		switch($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
-				$responseBean = json_decode($response->bean);
-				$responseBean->cards[0]->numberCard = maskString($responseBean->cards[0]->numberCard, 4, 6);
-				$this->response->data =  (array)$responseBean;
+				$responseBean = json_decode($response->bean)->cards[0];
+				$dataTwirls = new stdClass();
+				$shops = new stdClass();
+				$dataTwirls->updateDate =  $responseBean->datetimeLastUpdate;
+				$dataTwirls->cardNumberP =  maskString($responseBean->numberCard, 4, 6);
+				$dataTwirls->customerName =  $responseBean->personName;
+				$dataTwirls->documentId =  $responseBean->personId;
+				$shops = (array)$responseBean->mccItems;
+
+				foreach ($shops as $key => $value) {
+					 $shops[lang('SERVICES_NAMES_PROPERTIES')[$key]] = $value;
+				 };
+
+				$this->response->data['dataTwirls'] = (array)$dataTwirls;
+				$this->response->data['shops'] = (array)$shops;
 			break;
 			case -438:
         $this->response->title = lang('GEN_COMMERCIAL_TWIRLS_TITTLE');
@@ -647,13 +659,11 @@ class Novo_Services_Model extends NOVO_Model {
 		$this->dataRequest->companyId = $this->session->enterpriseInf->idFiscal;
 		$this->dataRequest->product = $this->session->productInf->productPrefix;
 		foreach ((object)lang('SERVICES_NAMES_PROPERTIES') as $key => $value) {
-    	$valor[$key] = $dataRequest->$value;
+    	$val[$key] = $dataRequest->$value;
 		}
 		$this->dataRequest->cards = [
 			['numberCard' => $dataRequest->cardNumber,
-			'mccItems' =>
-				$valor
-			,
+			'mccItems' => $val,
 			'rc' => 0]
 		];
 		$password = json_decode(base64_decode($dataRequest->passwordAuth));
@@ -673,7 +683,7 @@ class Novo_Services_Model extends NOVO_Model {
 		'guardaIp' => false,
 		'isDriver' => 0,
 		'rc' => 0
-	];
+		];
 
 		$this->dataRequest->idOperation = 'customMcc';
 
@@ -681,8 +691,10 @@ class Novo_Services_Model extends NOVO_Model {
 
 		switch($this->isResponseRc) {
 			case 0:
-				$this->response->code = 0;
-				$this->response->data = (array)$response;
+				$this->response->title = lang('GEN_COMMERCIAL_TWIRLS_TITTLE');
+				$this->response->icon =  lang('GEN_ICON_SUCCESS');
+        $this->response->msg = 	lang('RESP_SUCCESSFULL_UPDATE');
+        $this->response->data['btn1']['action'] = 'close';
 			break;
 			case -1:
 				$this->response->title = lang('GEN_COMMERCIAL_TWIRLS_TITTLE');
