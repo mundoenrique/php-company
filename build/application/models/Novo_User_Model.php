@@ -240,8 +240,6 @@ class Novo_User_Model extends NOVO_Model {
 
 		switch ($this->isResponseRc) {
 			case 0:
-			case -2:
-			case -185:
 				$fullName = mb_strtolower($response->usuario->primerNombre).' ';
 				$fullName.= mb_strtolower($response->usuario->primerApellido);
 				$formatDate = $this->config->item('format_date');
@@ -273,10 +271,12 @@ class Novo_User_Model extends NOVO_Model {
 				$this->session->set_userdata($userData);
 				$this->response->code = 0;
 				$this->response->data = base_url(lang('GEN_ENTERPRISE_LIST'));
-				break;
+			break;
+			case -28:
+				$this->session->set_flashdata('unauthorized', lang('RESP_SESSION_DUPLICATE'));
 			default:
 				$this->response->data = base_url('ingresar/fin');
-				break;
+			break;
 		}
 
 		return $this->responseToTheView('callWs_SingleSignon');

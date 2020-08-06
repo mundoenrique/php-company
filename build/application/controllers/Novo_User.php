@@ -101,6 +101,10 @@ class Novo_User extends NOVO_Controller {
 			$this->render->activeHeader = TRUE;
 			$this->render->showBtn = FALSE;
 			$this->render->sessionEnd = lang('RESP_SINGLE_SIGNON');
+
+			if ($this->session->flashdata('unauthorized') != NULL) {
+				$this->render->sessionEnd = $this->session->flashdata('unauthorized');
+			}
 		}
 
 		$this->render->titlePage = lang('GEN_SYSTEM_NAME');

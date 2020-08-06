@@ -446,6 +446,12 @@ class Novo_Bulk_Model extends NOVO_Model {
 				$this->response->msg = lang('BULK_CONFIRM_FAIL');
 				$this->response->data['btn1']['link'] = 'cargar-lotes';
 			break;
+			case -236:
+				$this->response->code = 0;
+				$this->response->title = lang('BULK_CONFIRM_TITLE');
+				$this->response->msg = lang('BULK_CONFIRM_FAIL_DULPICATE');
+				$this->response->data['btn1']['link'] = 'cargar-lotes';
+			break;
 			case -436:
 				$this->response->code = 0;
 				$this->response->title = lang('BULK_CONFIRM_TITLE');
