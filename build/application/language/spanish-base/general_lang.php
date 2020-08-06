@@ -373,6 +373,8 @@ $lang['GEN_INVALID_OTP'] = 'No fué posible verificar el código de seguridad, i
 $lang['GEN_INVALID_DATA'] = 'Uno de los datos es incorrecto, por favor verifícalo e intenta nuevamente.';
 $lang['GEN_SO_CREATE_INCORRECT'] = 'El código de seguridad es incorrecto, verifícalo e intenta de nuevo.';
 $lang['GEN_SO_CREATE_EXPIRED'] = 'El código de seguridad expiró o fue usado.';
+$lang['MIN_WIDTH_OTP'] = '480';
+$lang['POSTMY_OTP'] = 'center top+160';
 // RECOVER ACCESS
 $lang['GEN_RECOVER_DOC_TYPE'] = [
 	'' => 'Selecciona',
@@ -388,10 +390,11 @@ $lang['REPORTS_NO_FILE_EXIST'] = 'No fue posible generar el archivo, por favor i
 //DATATABLES LANG CLOSING BALANCE
 $lang['GEN_FISCAL_CLOSING_BALANCE'] = 'NIT';
 $lang['GEN_ACCOUNT_CLOSING_BALANCE'] = 'Cuenta';
-$lang['GEN_LOGIN_IP_MSG'] = 'Estás ingresando desde un equipo no habitual, por seguridad te enviaremos un código de verificación a la dirección de correo <span class="semibold">{$maskMail$}</span>, por favor indícalo a continuación.';
+$lang['GEN_LOGIN_IP_MSG'] = 'Estás ingresando desde un equipo no habitual, por seguridad te enviaremos un código de verificación a la dirección de correo <span class="semibold">%s</span>, por favor indícalo a continuación.';
 $lang['GEN_LOGIN_IP_ASSERT'] = 'Confirmo que estoy ingresando desde un equipo de uso frecuente.';
 $lang['GEN_LOGIN_IP_LABEL_INPUT'] = 'Código recibido';
 $lang['GEN_RESP_CODE_OTP_INVALID'] = 'No fue posible validar el código de seguridad, por favor vuelve a intentarlo.';
+$lang['GEN_RESP_CODE_INVALID'] = 'El código de seguridad recibido es inválido, por favor vuelve a intentarlo.';
 $lang['GEN_CODE_OTP_REQUIRED'] = 'Este campo es obligatorio.';
 $lang['GEN_CODE_OTP_INVALID_FORMAT'] = 'El formato de código es inválido.';
 $lang['RESP_RC_DEFAULT'] = -9999;

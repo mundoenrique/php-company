@@ -6,6 +6,7 @@ $lang['GEN-LOGO-BIG'] = 'img-banco_bogota.svg';
 $lang['GEN_ALTERNATIVE_TEXT'] = 'Banco de Bogotá';
 $lang['GEN_FISCAL_REGISTRY'] = 'Identificación';
 $lang['GEN_PLACE_PASSWORD'] = 'token';
+$lang['POSTMY_OTP'] = 'center top+100';
 //BUTTONS
 $lang['GEN_BTN_DISASS_AUTH'] = 'En espera de autorización';
 $lang['GEN_BTN_AUTHORIZE'] = 'Aceptar';
