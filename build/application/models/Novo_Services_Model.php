@@ -606,17 +606,19 @@ class Novo_Services_Model extends NOVO_Model {
 
 		$this->dataRequest->idOperation = 'customMcc';
 
-		$response = json_encode($this->sendToService('callWs_commercialTwirls'));
+		$response = $this->sendToService('callWs_commercialTwirls');
 
 		switch($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
-				$this->response->data =  json_encode(json_decode(((array)$response)[0])->bean);
+				$responseBean = json_decode($response->bean);
+				$responseBean->cards[0]->numberCard = maskString($responseBean->cards[0]->numberCard, 4, 6);
+				$this->response->data =  (array)$responseBean;
 			break;
 			case -438:
         $this->response->title = lang('GEN_COMMERCIAL_TWIRLS_TITTLE');
 				$this->response->icon =  lang('GEN_ICON_WARNING');
-        $this->response->msg = 	novoLang(lang('RESP_NO_CARD_FOUND'), maskString( $dataRequest->cardNumber, 5, 6));
+        $this->response->msg = 	novoLang(lang('RESP_NO_CARD_FOUND'), maskString( $dataRequest->cardNumber, 4, 6));
         $this->response->data['btn1']['action'] = 'close';
       break;
 			default:
@@ -675,12 +677,12 @@ class Novo_Services_Model extends NOVO_Model {
 
 		$this->dataRequest->idOperation = 'customMcc';
 
-		$response = json_encode($this->sendToService('callWs_updateCommercialTwirls'));
+		$response = $this->sendToService('callWs_updateCommercialTwirls');
 
 		switch($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
-				$this->response->data = $response;
+				$this->response->data = (array)$response;
 			break;
 			case -1:
 				$this->response->title = lang('GEN_COMMERCIAL_TWIRLS_TITTLE');
@@ -695,7 +697,6 @@ class Novo_Services_Model extends NOVO_Model {
 				$this->response->data['btn1']['action'] = 'close';
 			break;
 			default:
-				$this->response->title = lang('GEN_COMMERCIAL_TWIRLS_TITTLE');
 				$this->response->icon =  lang('GEN_ICON_WARNING');
 		}
 

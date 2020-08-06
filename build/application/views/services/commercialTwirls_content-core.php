@@ -32,7 +32,7 @@
 						<div class="row flex justify-between">
 							<div class="form-group col-4 col-xl-4">
 							<label for="cardNumber"><?= lang('GEN_CARD_NUMBER'); ?></label>
-								<input id="cardNumber" name="card-number" class="form-control h5 select-group" type="text" autocomplete="off">
+								<input id="cardNumber" name="card-number" class="form-control h5 select-group" type="text" autocomplete="off" disabled>
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-4 col-xl-4">
@@ -41,7 +41,7 @@
 
 							<div class="flex items-center justify-end col-3">
 								<?php if($this->verify_access->verifyAuthorization('GIRCOM', 	'CONGIR')): ?>
-									<button type="button" id="card-holder-btn" class="btn btn-primary btn-small btn-loading">
+									<button id="card-holder-btn" class="btn btn-primary btn-small btn-loading">
 									<?= lang('GEN_BTN_SEARCH'); ?>
 									</button>
 								<?php endif; ?>
@@ -70,7 +70,7 @@
 				<div class="row flex justify-between my-3">
 					<div class="form-group col-4 center">
 						<p class="h5 semibold tertiary"><?= lang('GEN_CARD_NUMBER'); ?>:
-							<span class="light text" id="cardNumber"></span></p>
+							<span class="light text" id="cardNumberP"></span></p>
 					</div>
 					<div class="form-group col-4 center">
 						<p class="h5 semibold tertiary"><?= lang('GEN_TABLE_NAME'); ?>:
@@ -225,7 +225,7 @@
 						<div class="col-5 col-lg-3 col-xl-3 form-group">
 							<div class="input-group">
 							<input id="passwordAuth" name="password" class="form-control pwd-input pr-0 pwd" type="password" autocomplete="new-password"
-									placeholder="<?= lang('GEN_PLACE_PASSWORD'); ?>" >
+									placeholder="<?= lang('GEN_PLACE_PASSWORD'); ?>" disabled>
 								<div class="input-group-append">
 									<span id="pwd_action" class="input-group-text pwd-action" title="<?= lang('GEN_SHOW_PASS') ?>">
 									<i class="icon-view mr-0"></i></span>
@@ -235,7 +235,7 @@
 						</div>
 						<div class="col-auto">
 						<?php if($this->verify_access->verifyAuthorization('GIRCOM', 'ACTGIR')): ?>
-							<button type="button" id="sign-btn" class="btn btn-primary btn-small btn-loading flex mx-auto">
+							<button id="sign-btn" class="btn btn-primary btn-small btn-loading flex mx-auto">
 								Actualizar</button>
 						<?php endif; ?>
 						</div>
