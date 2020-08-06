@@ -174,7 +174,7 @@ class Novo_User_Model extends NOVO_Model {
 				$this->response->labelInput = lang('GEN_LOGIN_IP_LABEL_INPUT');
 				$this->response->icon = lang('GEN_ICON_WARNING');
 				$this->response->email = $response->usuario->emailEnc;
-				$this->response->msg = str_replace('{$maskMail$}',$this->response->email,lang('GEN_LOGIN_IP_MSG'));
+				$this->response->msg = novoLang(lang('GEN_LOGIN_IP_MSG'), $this->response->email);
 				$this->response->data = [
 					'btn1'=> [
 						'text'=> lang('GEN_BTN_ACCEPT'),

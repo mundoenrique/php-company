@@ -381,7 +381,7 @@ $lang['REPORTS_NO_FILE_EXIST'] = 'No fue posible generar el archivo, por favor i
 //DATATABLES LANG CLOSING BALANCE
 $lang['GEN_FISCAL_CLOSING_BALANCE'] = 'NIT';
 $lang['GEN_ACCOUNT_CLOSING_BALANCE'] = 'Cuenta';
-$lang['GEN_LOGIN_IP_MSG'] = 'Estás ingresando desde un equipo no habitual, por seguridad te enviaremos un código de verificación a la dirección de correo <span class="semibold">{$maskMail$}</span>, por favor indícalo a continuación.';
+$lang['GEN_LOGIN_IP_MSG'] = 'Estás ingresando desde un equipo no habitual, por seguridad te enviaremos un código de verificación a la dirección de correo <span class="semibold">%s</span>, por favor indícalo a continuación.';
 $lang['GEN_LOGIN_IP_ASSERT'] = 'Confirmo que estoy ingresando desde un equipo de uso frecuente.';
 $lang['GEN_LOGIN_IP_LABEL_INPUT'] = 'Código recibido';
 $lang['GEN_RESP_CODE_OTP_INVALID'] = 'No fue posible validar el código de seguridad, por favor vuelve a intentarlo.';
