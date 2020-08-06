@@ -413,7 +413,7 @@ $lang['RESP_SUPPORT'] = '';
 $lang['RESP_SUPPORT_MAIL'] = '';
 $lang['RESP_SUPPORT_TELF'] = '';
 $lang['RESP_INCORRECTLY_CLOSED'] = '<div><h5 class="regular">Tu última sesión se cerró de manera incorrecta. Ten en cuenta que para salir de la aplicación debes seleccionar <strong>"Cerrar Sesión"</strong>.</h5></div>';
-$lang['RESP_SESSION_DUPLICATE'] = '<div><h5 class="regular">Se detecto que ya tienes una sesión abierta. Ten en cuenta que para salir de la aplicación debes seleccionar <strong>"Cerrar Sesión"</strong>.</h5></div>';
+$lang['RESP_SESSION_DUPLICATE'] = '<div><h5 class="regular">Se detectó que ya tienes una sesión abierta. Ten en cuenta que para salir de la aplicación debes seleccionar <strong>"Cerrar Sesión"</strong>.</h5></div>';
 $lang['RESP_NO_PERMISSIONS'] = 'Estimado usuario no tienes permiso para usar la aplicación, por favor comunícate con el administrador';
 $lang['RESP_TEMP_PASS'] = '%s, enviamos un correo a %s, con una contraseña temporal.';
 $lang['RESP_COMPANNY_NOT_ASSIGNED'] = 'El usuario %s no está asignado a la empresa.';

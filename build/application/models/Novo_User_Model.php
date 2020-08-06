@@ -274,6 +274,8 @@ class Novo_User_Model extends NOVO_Model {
 			break;
 			case -28:
 				$this->session->set_flashdata('unauthorized', lang('RESP_SESSION_DUPLICATE'));
+				$this->response->data = base_url('cerrar-sesion/fin');
+			break;
 			default:
 				$this->response->data = base_url('ingresar/fin');
 			break;

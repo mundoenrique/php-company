@@ -109,6 +109,7 @@ class Novo_User extends NOVO_Controller {
 
 		$this->render->titlePage = lang('GEN_SYSTEM_NAME');
 		$this->render->skipProductInf = TRUE;
+		$this->render->skipmenu = TRUE;
 		$this->views = ['user/'.$view];
 		$this->loadView($view);
 

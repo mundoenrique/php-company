@@ -1,5 +1,5 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
-<?php if($this->session->has_userdata('logged')): ?>
+<?php if($this->session->has_userdata('logged') && !isset($skipmenu)): ?>
 <nav class="navbar-secondary line-main-nav flex bg-secondary items-center">
 	<ul class="main-nav-user flex my-0 list-style-none">
 		<li class="nav-item mr-1 inline big-modal <?= setCurrentPage($currentClass, lang('GEN_MENU_ENTERPRISE')); ?>">
