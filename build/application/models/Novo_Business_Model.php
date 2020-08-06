@@ -237,11 +237,26 @@ class Novo_Business_Model extends NOVO_Model {
 					$this->response->data->brandList = $productList->brandList;
 					$this->response->data->productList = $productList->productList;
 				}
-				break;
+			break;
 			case -138:
 				$this->response->code = 3;
 				$this->response->msg = 'No fue posible obtener la lista de productos asociados, vuelve a intentarlo';
-				break;
+			break;
+			case -430:
+			case -431:
+				$this->session->set_flashdata('unauthorized', lang('RESP_SINGLE_SIGNON'));
+				redirect(base_url('cerrar-sesion/fin'), 'localtion', 301);
+			break;
+			case -432:
+			case -433:
+				$this->session->set_flashdata('unauthorized', lang('RESP_NO_PERMISSIONS'));
+				redirect(base_url('cerrar-sesion/fin'), 'localtion', 301);
+			break;
+			case -434:
+			case -435:
+				$this->session->set_flashdata('unauthorized', lang('ENTERPRISE_NOT_ASSIGNED'));
+				redirect(base_url('cerrar-sesion/fin'), 'localtion', 301);
+			break;
 		}
 
 		if($this->response->code != 0 && !$select) {

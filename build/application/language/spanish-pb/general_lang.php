@@ -6,6 +6,7 @@ $lang['GEN-LOGO-BIG'] = 'logo-signin.png';
 $lang['GEN_ALTERNATIVE_TEXT'] = 'Produbanco';
 $lang['GEN_RECOVER_PASS_TITLE'] = 'Recuperar acceso';
 $lang['GEN_OTP'] = 'Te enviamos un correo con un código de seguridad, indícalo a continuación.';
+$lang['GEN_LOGIN_IP_MSG'] = 'Estás ingresando desde un equipo no habitual, por seguridad te enviaremos un código de verificación a la dirección de correo <span class="semibold">{$maskMail$}</span>, indícalo a continuación.';
 //LINKS
 $lang['GEN_LINK_RECOVER_ACCESS'] = 'recuperar-acceso';
 //FOOTER

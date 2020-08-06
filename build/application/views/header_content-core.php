@@ -1,5 +1,5 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
-<?php if($this->session->logged || isset($activeHeader)): ?>
+<?php if(($this->session->logged || isset($activeHeader)) && !isset($skipmenu)): ?>
 <header class="main-head">
 	<?php if($this->session->logged): ?>
 	<nav class="navbar py-0 flex-auto">

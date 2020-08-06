@@ -1,5 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+$lang['GEN_SYSTEM_NAME']= 'Conexión Empresas Online';
 //MENU
 $lang['GEN_MENU_ENTERPRISE'] = 'Empresas';
 $lang['GEN_MENU_LOTS'] = 'Lotes';
@@ -134,6 +135,15 @@ $lang['GEN_FILE'] = 'Archivos de gestión Conexión Empresas Online';
 $lang['GEN_FILE_OPERATIONAL_BATCH'] = 'Archivos lotes operativos (194kb)';
 $lang['GEN_DOWNLOAD_FILE_INI'] = 'Archivo.ini';
 $lang['GEN_BTN_INI'] = 'Debes seleccionar una empresa para poder realizar la descarga';
+$lang['GEN_CONTACTS_TITLE_HELP'] = '¿Necesitas ayuda?';
+$lang['GEN_CONTACTS_TITLE'] = 'Líneas de atención a nivel nacional';
+$lang['GEN_CONTACTS_CITY'] = 'CIUDAD';
+$lang['GEN_CONTACTS_CONTACT'] = 'CONTACTO';
+$lang['GEN_CONTACTS_REST_COUNTRY'] = 'RESTO DEL PAÍS';
+$lang['GEN_CONTACTS'] = [
+	'city' => '(XX) XXX XXXX',
+];
+$lang['GEN_CONTACTS_REST_COUNTRY_NUMBER'] = 'XXX (XXXXXX)';
 //LINKS
 $lang['GEN_LINK_LOGIN'] = 'inicio';
 $lang['GEN_LINK_RECOVER_ACCESS'] = 'recuperar-clave';
@@ -149,7 +159,7 @@ $lang['GEN_FOTTER_BENEFITS'] = 'Beneficios';
 $lang['GEN_FOTTER_TERMS'] = 'Condiciones';
 $lang['GEN_FOTTER_RATES'] = 'Tarifas';
 $lang['GEN_FOTTER_LOGOUT'] = 'Salir';
-$lang['GEN_FOTTER_IMAGE_L'] = 'img-banorte_white.svg';
+$lang['GEN_FOTTER_IMAGE_L'] = 'img-default_white.svg';
 $lang['GEN_FOTTER_IMAGE_R'] = 'img-pci_compliance.svg';
 $lang['GEN_FOTTER_OWNERSHIP'] = 'Powered by NovoPayment, Inc.';
 $lang['GEN_FOTTER_OWNER_URL'] = 'https://www.novopayment.com';
@@ -265,7 +275,6 @@ $lang['GEN_PICKER_CHANGEYEAR'] = TRUE;
 $lang['GEN_PICKER_SHOWANIM'] = 'slideDown';
 $lang['GEN_PICKER_YEARSUFFIX'] = '';
 //GENERAL LANGUAGE
-$lang['GEN_SYSTEM_NAME']= 'Conexión Empresas Online';
 $lang['GEN_LOGO_HEADER'] = 'img-logo.svg';
 $lang['GEN_CURRENCY'] = '$';
 $lang['GEN_DECIMAL'] = '.';
@@ -407,6 +416,7 @@ $lang['RESP_SUPPORT'] = '';
 $lang['RESP_SUPPORT_MAIL'] = '';
 $lang['RESP_SUPPORT_TELF'] = '';
 $lang['RESP_INCORRECTLY_CLOSED'] = '<div><h5 class="regular">Tu última sesión se cerró de manera incorrecta. Ten en cuenta que para salir de la aplicación debes seleccionar <strong>"Cerrar Sesión"</strong>.</h5></div>';
+$lang['RESP_SESSION_DUPLICATE'] = '<div><h5 class="regular">Se detectó que ya tienes una sesión abierta. Ten en cuenta que para salir de la aplicación debes seleccionar <strong>"Cerrar Sesión"</strong>.</h5></div>';
 $lang['RESP_NO_PERMISSIONS'] = 'Estimado usuario no tienes permiso para usar la aplicación, por favor comunícate con el administrador';
 $lang['RESP_TEMP_PASS'] = '%s, enviamos un correo a %s, con una contraseña temporal.';
 $lang['RESP_COMPANNY_NOT_ASSIGNED'] = 'El usuario %s no está asignado a la empresa.';
