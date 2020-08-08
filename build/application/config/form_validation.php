@@ -1183,14 +1183,126 @@ $config = [
 	],
 	'transactionalLimits' => [
 		[
-			'field' => 'cardNumberP',
+			'field' => 'cardNumber',
 			'rules' => 'trim|regex_match[/^[0-9]*$/i]|required'
 		]
 	],
 	'updateTransactionalLimits' => [
 		[
-			'field' => 'password-sign',
+			'field' => 'passwordAuth',
 			'rules' => 'trim|required'
+		],
+		[
+			'field' => 'dailyNumberCredit',
+			'rules' => 'trim|regex_match[/^[0-9,.]*$/i]'
+		],
+		[
+			'field' => 'dailyAmountCredit',
+			'rules' => 'trim|regex_match[/^[0-9,.]*$/i]'
+		],
+		[
+			'field' => 'monthlyNumberCredit',
+			'rules' => 'trim|regex_match[/^[0-9,.]*$/i]'
+		],
+		[
+			'field' => 'monthlyAmountCredit',
+			'rules' => 'trim|regex_match[/^[0-9,.]*$/i]'
+		],
+		[
+			'field' => 'CreditTransaction',
+			'rules' => 'trim|regex_match[/^[0-9,.]*$/i]'
+		],
+		[
+			'field' => 'weeklyNumberCredit',
+			'rules' => 'trim|regex_match[/^[0-9,.]*$/i]'
+		],
+		[
+			'field' => 'weeklyAmountCredit',
+			'rules' => 'trim|regex_match[/^[0-9,.]*$/i]'
+		],
+		[
+			'field' => 'numberDayPurchasesCtp',
+			'rules' => 'trim|regex_match[/^[0-9,.]*$/i]'
+		],
+		[
+			'field' => 'dailyPurchaseamountCtp',
+			'rules' => 'trim|regex_match[/^[0-9,.]*$/i]'
+		],
+		[
+			'field' => 'numberMonthlyPurchasesCtp',
+			'rules' => 'trim|regex_match[/^[0-9,.]*$/i]'
+		],
+		[
+			'field' => 'monthlyPurchasesAmountCtp',
+			'rules' => 'trim|regex_match[/^[0-9,.]*$/i]'
+		],
+		[
+			'field' => 'purchaseTransactionCtp',
+			'rules' => 'trim|regex_match[/^[0-9,.]*$/i]'
+		],
+		[
+			'field' => 'numberDayPurchasesStp',
+			'rules' => 'trim|regex_match[/^[0-9,.]*$/i]'
+		],
+		[
+			'field' => 'dailyPurchaseamountStp',
+			'rules' => 'trim|regex_match[/^[0-9,.]*$/i]'
+		],
+		[
+			'field' => 'numberMonthlyPurchasesStp',
+			'rules' => 'trim|regex_match[/^[0-9,.]*$/i]'
+		],
+		[
+			'field' => 'monthlyPurchasesAmountStp',
+			'rules' => 'trim|regex_match[/^[0-9,.]*$/i]'
+		],
+		[
+			'field' => 'purchaseTransactionStp',
+			'rules' => 'trim|regex_match[/^[0-9,.]*$/i]'
+		],
+		[
+			'field' => 'numberWeeklyPurchasesStp',
+			'rules' => 'trim|regex_match[/^[0-9,.]*$/i]'
+		],
+		[
+			'field' => 'weeklyAmountPurchasesStp',
+			'rules' => 'trim|regex_match[/^[0-9,.]*$/i]'
+		],
+		[
+			'field' => 'numberWeeklyPurchasesCtp',
+			'rules' => 'trim|regex_match[/^[0-9,.]*$/i]'
+		],
+		[
+			'field' => 'weeklyAmountPurchasesCtp',
+			'rules' => 'trim|regex_match[/^[0-9,.]*$/i]'
+		],
+		[
+			'field' => 'dailyNumberWithdraw',
+			'rules' => 'trim|regex_match[/^[0-9,.]*$/i]'
+		],
+		[
+			'field' => 'dailyAmountWithdraw',
+			'rules' => 'trim|regex_match[/^[0-9,.]*$/i]'
+		],
+		[
+			'field' => 'monthlyNumberWithdraw',
+			'rules' => 'trim|regex_match[/^[0-9,.]*$/i]'
+		],
+		[
+			'field' => 'monthlyAmountwithdraw',
+			'rules' => 'trim|regex_match[/^[0-9,.]*$/i]'
+		],
+		[
+			'field' => 'WithdrawTransaction',
+			'rules' => 'trim|regex_match[/^[0-9,.]*$/i]'
+		],
+		[
+			'field' => 'weeklyNumberWithdraw',
+			'rules' => 'trim|regex_match[/^[0-9,.]*$/i]'
+		],
+		[
+			'field' => 'weeklyAmountWithdraw',
+			'rules' => 'trim|regex_match[/^[0-9,.]*$/i]'
 		]
 	]
 ];

@@ -12,24 +12,27 @@ $(function () {
 
 	$('.money').mask('000.000.000.000.000,00', {reverse: true});
 
-	$('#card-holder-btn').on('click', function(){
+	$('#card-holder-btn').on('click', function (e) {
+		e.preventDefault();
 		$('#blockResults').addClass('hidden');
-		$('#spinnerBlock').removeClass("hide");
 		var form = $('#limitsForm');
 		var passData = getDataForm(form);
 		validateForms(form);
 		if (form.valid()) {
+			$('#spinnerBlock').removeClass("hide");
 			insertFormInput(true);
 			getForm(passData);
 		}
 	});
 
-	$('#sign-bulk-btn').on('click', function(){
+	$('#sign-btn').on('click', function(e){
+		var changeBtn = $(this);
+		var btnText = changeBtn.text().trim();
 		var form = $('#limitsUpdateForm');
 		var passData = getDataForm(form);
-		var changeBtn = $('#sign-bulk-btn');
-		var btnText = changeBtn.text().trim();
+
 		validateForms(form);
+
 		if (form.valid()) {
 			changeBtn.html(loader);
 			insertFormInput(true, form);
@@ -42,15 +45,25 @@ function getForm(passData){
 	verb = "POST"; who = 'Services'; where = 'transactionalLimits'; data = passData;	callNovoCore(verb, who, where, data, function(response) {
 		dataResponse = response.data;
 		code = response.code
-		var info = dataResponse;
-		if(code == 0){
-			setTimeout(function(){ // Esto es solo para simular el tiempo de ejecucion del servicio y se vea el spinner.
-				insertFormInput(false);
-				$('#spinnerBlock').addClass("hide");
-				$('#blockResults').removeClass('hidden');
-			}, 3000);
+
+		if (code == 0) {
+			insertFormInput(false);
+			$('#spinnerBlock').addClass('hide');
+			$('#blockResults').removeClass('hidden');
+
+			$.each (dataResponse.dataLimits, function(key, val) {
+				$('#' + key).text(val);
+			});
+
+			$.each (dataResponse.limits, function(key, val) {
+				$('#' + key).val(val);
+			});
+
+		} else {
+			insertFormInput(false);
+			$('#spinnerBlock').addClass('hide');
 		}
-	})
+	});
 };
 
 function updateLimits(passData, btnText){
@@ -58,12 +71,8 @@ function updateLimits(passData, btnText){
 		dataResponse = response.data;
 		code = response.code
 		var info = dataResponse;
-		if(code == 0){
-			setTimeout(function(){ // Esto es solo para simular el tiempo de ejecucion del servicio y se vea el spinner.
-				insertFormInput(false);
-				$('input[type=password]').val('');
-				$('#sign-bulk-btn').html(btnText);
-		}, 3000);
-		}
+		insertFormInput(false);
+		$('input[type=password]').val('');
+		$('#sign-btn').html(btnText);
 	})
 };

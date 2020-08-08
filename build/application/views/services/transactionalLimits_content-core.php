@@ -25,15 +25,15 @@
 						<form id="limitsForm" class="w-100">
 								<div class="row flex justify-between">
 									<div class="form-group col-4 col-xl-4">
-									<label for="cardNumberP"><?= lang('GEN_CARD_NUMBER'); ?></label>
-									<input id="cardNumberP" name="card-number" class="form-control h5 select-group" type="text" autocomplete="off" disabled>
+									<label for="cardNumber"><?= lang('GEN_CARD_NUMBER'); ?></label>
+									<input id="cardNumber" name="card-number" class="form-control h5 select-group" type="text" autocomplete="off" disabled >
 									<div class="help-block"></div>
 								</div>
 								<div class="form-group col-4 col-xl-4">
 								</div>
 								<div class="flex items-center justify-end col-3">
 								<?php if($this->verify_access->verifyAuthorization('LIMTRX', 'CONLIM')): ?>
-								<button type="button" id="card-holder-btn" class="btn btn-primary btn-small btn-loading"><?= lang('GEN_BTN_SEARCH'); ?></button>
+								<button id="card-holder-btn" class="btn btn-primary btn-small btn-loading"><?= lang('GEN_BTN_SEARCH'); ?></button>
 								<?php endif; ?>
 								</div>
 							</div>
@@ -54,18 +54,19 @@
 								<span class="inline h4 semibold primary">Resultados</span>
 							</div>
 							<div class="flex h6 flex-auto justify-end">
-								<span>Fecha de actualización: 3/07/2020 5:36 PM</span>
+								<p class="h5 semibold tertiary">Fecha de actualización:
+									<span id="updateDate"></span></p>
 							</div>
 						</div>
 						<div class="row flex justify-between my-3">
 							<div class="form-group col-4 center">
-								<p class="h5 semibold tertiary"><?= lang('GEN_CARD_NUMBER'); ?>: <span class="light text">**********270300</span></p>
+								<p class="h5 semibold tertiary"><?= lang('GEN_CARD_NUMBER'); ?>: <span class="light text" id="cardNumberP"></span></p>
 							</div>
 							<div class="form-group col-4 center">
-								<p class="h5 semibold tertiary"><?= lang('GEN_TABLE_NAME'); ?>: <span class="light text">Jhonatan Ortiz</span></p>
+								<p class="h5 semibold tertiary"><?= lang('GEN_TABLE_NAME'); ?>: <span class="light text" id="customerName"></span></p>
 							</div>
 							<div class="form-group col-4 center">
-								<p class="h5 semibold tertiary"><?= lang('GEN_TABLE_DNI'); ?>: <span class="light text">1803752318</span></p>
+								<p class="h5 semibold tertiary"><?= lang('GEN_TABLE_DNI'); ?>: <span class="light text" id="documentId"></span></p>
 							</div>
 							<div class="form-group col-12 center">
               	<p class="h6 bold mb-0 mt-2">Nota: <span class="light text">Si el campo es igual a 0, se tomara como limite el valor configurado para el producto.</span></p>
@@ -84,49 +85,49 @@
 												<div class="form-group col-12 col-lg-4">
 													<label class ="pr-3" for="numberDayPurchasesCtp">Número de compras diarias</label>
 													<div class="input-group">
-														<input id="numberDayPurchasesCtp" class="money form-control pwd-input text-right"  type="text" autocomplete="off" name="limit" value="<?= $limitsInf ?>" disabled>
+														<input id="numberDayPurchasesCtp" class="money form-control pwd-input text-right"  type="text" autocomplete="off" name="limit"  disabled>
 													</div>
 													<div class="help-block"></div>
 												</div>
 												<div class="form-group col-12 col-lg-4">
 													<label for="numberWeeklyPurchasesCtp">Número de compras semanales</label>
 													<div class="input-group">
-														<input id="numberWeeklyPurchasesCtp" class="money form-control pwd-input text-right" type="text" autocomplete="off" name="limit" value="<?= $limitsInf ?>" disabled >
+														<input id="numberWeeklyPurchasesCtp" class="money form-control pwd-input text-right" type="text" autocomplete="off" name="limit"  disabled >
 													</div>
 													<div class="help-block"></div>
 												</div>
 												<div class="form-group col-12 col-lg-4">
 													<label for="numberMonthlyPurchasesCtp">Número de compras mensuales</label>
 													<div class="input-group">
-														<input id="numberMonthlyPurchasesCtp" class="money form-control pwd-input text-right" type="text" autocomplete="off" name="limit" value="<?= $limitsInf ?>" disabled>
+														<input id="numberMonthlyPurchasesCtp" class="money form-control pwd-input text-right" type="text" autocomplete="off" name="limit"  disabled>
 													</div>
 													<div class="help-block"></div>
 												</div>
 												<div class="form-group col-12 col-lg-4">
 													<label class ="pr-3" for="dailyPurchaseamountCtp">Monto diario de compras</label>
 													<div class="input-group">
-														<input id="dailyPurchaseamountCtp" class="money form-control pwd-input text-right" type="text" autocomplete="off" name="limit" value="<?= $limitsInf ?>" disabled>
+														<input id="dailyPurchaseamountCtp" class="money form-control pwd-input text-right" type="text" autocomplete="off" name="limit"  disabled>
 													</div>
 													<div class="help-block"></div>
 												</div>
 												<div class="form-group col-12 col-lg-4">
 													<label for="weeklyAmountPurchasesCtp">Monto semanal de compras</label>
 													<div class="input-group">
-														<input id="weeklyAmountPurchasesCtp" class="money form-control pwd-input text-right" type="text" autocomplete="off" name="limit" value="<?= $limitsInf ?>" disabled>
+														<input id="weeklyAmountPurchasesCtp" class="money form-control pwd-input text-right" type="text" autocomplete="off" name="limit"  disabled>
 													</div>
 													<div class="help-block"></div>
 												</div>
 												<div class="form-group col-12 col-lg-4">
 													<label for="monthlyPurchasesAmountCtp">Monto mensual de compras</label>
 													<div class="input-group">
-														<input id="monthlyPurchasesAmountCtp" class="money form-control pwd-input text-right" type="text" autocomplete="off" name="limit" value="<?= $limitsInf ?>" disabled>
+														<input id="monthlyPurchasesAmountCtp" class="money form-control pwd-input text-right" type="text" autocomplete="off" name="limit"  disabled>
 													</div>
 													<div class="help-block"></div>
 												</div>
 												<div class="form-group col-12 col-lg-4">
 													<label for="purchaseTransactionCtp">Monto por transacción de compras</label>
 													<div class="input-group">
-														<input id="purchaseTransactionCtp" class="money form-control pwd-input text-right" type="text" autocomplete="off" name="limit" value="<?= $limitsInf ?>" disabled>
+														<input id="purchaseTransactionCtp" class="money form-control pwd-input text-right" type="text" autocomplete="off" name="limit"  disabled>
 													</div>
 													<div class="help-block"></div>
 												</div>
@@ -148,49 +149,49 @@
 												<div class="form-group col-12 col-lg-4">
 													<label class ="pr-3" for="numberDayPurchasesStp">Número de compras diarias</label>
 													<div class="input-group">
-														<input id="numberDayPurchasesStp" class="money form-control pwd-input text-right" type="text" autocomplete="off" name="limit" value="<?= $limitsInf ?>" disabled>
+														<input id="numberDayPurchasesStp" class="money form-control pwd-input text-right" type="text" autocomplete="off" name="limit"  disabled>
 													</div>
 													<div class="help-block"></div>
 												</div>
 												<div class="form-group col-12 col-lg-4">
 													<label for="numberWeeklyPurchasesStp">Número de compras semanales</label>
 													<div class="input-group">
-														<input id="numberWeeklyPurchasesStp" class="money form-control pwd-input text-right" type="text" autocomplete="off" name="limit" value="<?= $limitsInf ?>" disabled>
+														<input id="numberWeeklyPurchasesStp" class="money form-control pwd-input text-right" type="text" autocomplete="off" name="limit"  disabled>
 													</div>
 													<div class="help-block"></div>
 												</div>
 												<div class="form-group col-12 col-lg-4">
 													<label for="numberMonthlyPurchasesStp">Número de compras mensuales</label>
 													<div class="input-group">
-														<input id="numberMonthlyPurchasesStp" class="money form-control pwd-input text-right" type="text" autocomplete="off" name="limit" value="<?= $limitsInf ?>" disabled>
+														<input id="numberMonthlyPurchasesStp" class="money form-control pwd-input text-right" type="text" autocomplete="off" name="limit"  disabled>
 													</div>
 													<div class="help-block"></div>
 												</div>
 												<div class="form-group col-12 col-lg-4">
 													<label class ="pr-3" for="dailyPurchaseamountStp">Monto diario de compras</label>
 													<div class="input-group">
-														<input id="dailyPurchaseamountStp" class="money form-control pwd-input text-right" type="text" autocomplete="off" name="limit" value="<?= $limitsInf ?>" disabled>
+														<input id="dailyPurchaseamountStp" class="money form-control pwd-input text-right" type="text" autocomplete="off" name="limit"  disabled>
 													</div>
 													<div class="help-block"></div>
 												</div>
 												<div class="form-group col-12 col-lg-4">
 													<label for="weeklyAmountPurchasesStp">Monto semanal de compras</label>
 													<div class="input-group">
-														<input id="weeklyAmountPurchasesStp" class="money form-control pwd-input text-right" type="text" autocomplete="off" name="limit" value="<?= $limitsInf ?>" disabled>
+														<input id="weeklyAmountPurchasesStp" class="money form-control pwd-input text-right" type="text" autocomplete="off" name="limit"  disabled>
 													</div>
 													<div class="help-block"></div>
 												</div>
 												<div class="form-group col-12 col-lg-4">
 													<label for="monthlyPurchasesAmountStp">Monto mensual de compras</label>
 													<div class="input-group">
-														<input id="monthlyPurchasesAmountStp" class="money form-control pwd-input text-right" type="text" autocomplete="off" name="limit" value="<?= $limitsInf ?>" disabled>
+														<input id="monthlyPurchasesAmountStp" class="money form-control pwd-input text-right" type="text" autocomplete="off" name="limit"  disabled>
 													</div>
 													<div class="help-block"></div>
 												</div>
 												<div class="form-group col-12 col-lg-4">
 													<label for="purchaseTransactionStp">Monto por transacción de compras</label>
 													<div class="input-group">
-														<input id="purchaseTransactionStp" class="money form-control pwd-input text-right" type="text" autocomplete="off" name="limit" value="<?= $limitsInf ?>" disabled>
+														<input id="purchaseTransactionStp" class="money form-control pwd-input text-right" type="text" autocomplete="off" name="limit"  disabled>
 													</div>
 													<div class="help-block"></div>
 												</div>
@@ -212,49 +213,49 @@
 												<div class="form-group col-12 col-lg-4">
 													<label class ="pr-3" for="dailyNumberWithdraw">Número diario de retiros</label>
 													<div class="input-group">
-														<input id="dailyNumberWithdraw" class="money form-control pwd-input text-right" type="text" autocomplete="off" name="limit" value="<?= $limitsInf ?>" disabled>
+														<input id="dailyNumberWithdraw" class="money form-control pwd-input text-right" type="text" autocomplete="off" name="limit"  disabled>
 													</div>
 													<div class="help-block"></div>
 												</div>
 												<div class="form-group col-12 col-lg-4">
 													<label for="weeklyNumberWithdraw">Número semanal de retiros</label>
 													<div class="input-group">
-														<input id="weeklyNumberWithdraw" class="money form-control pwd-input text-right" type="text" autocomplete="off" name="limit" value="<?= $limitsInf ?>" disabled>
+														<input id="weeklyNumberWithdraw" class="money form-control pwd-input text-right" type="text" autocomplete="off" name="limit"  disabled>
 													</div>
 													<div class="help-block"></div>
 												</div>
 												<div class="form-group col-12 col-lg-4">
 													<label for="monthlyNumberWithdraw">Número mensual de retiros</label>
 													<div class="input-group">
-														<input id="monthlyNumberWithdraw" class="money form-control pwd-input text-right" type="text" autocomplete="off" name="limit" value="<?= $limitsInf ?>" disabled>
+														<input id="monthlyNumberWithdraw" class="money form-control pwd-input text-right" type="text" autocomplete="off" name="limit"  disabled>
 													</div>
 													<div class="help-block"></div>
 												</div>
 												<div class="form-group col-12 col-lg-4">
 													<label class ="pr-3" for="dailyAmountWithdraw">Monto diario de retiros</label>
 													<div class="input-group">
-														<input id="dailyAmountWithdraw" class="money form-control pwd-input text-right" type="text" autocomplete="off" name="limit" value="<?= $limitsInf ?>" disabled>
+														<input id="dailyAmountWithdraw" class="money form-control pwd-input text-right" type="text" autocomplete="off" name="limit"  disabled>
 													</div>
 													<div class="help-block"></div>
 												</div>
 												<div class="form-group col-12 col-lg-4">
 													<label for="weeklyAmountWithdraw">Monto semanal de retiros</label>
 													<div clxs="input-group">
-														<input id="weeklyAmountWithdraw" class="money form-control pwd-input text-right" type="text" autocomplete="off" name="limit" value="<?= $limitsInf ?>" disabled>
+														<input id="weeklyAmountWithdraw" class="money form-control pwd-input text-right" type="text" autocomplete="off" name="limit"  disabled>
 													</div>
 													<div class="help-block"></div>
 												</div>
 												<div class="form-group col-12 col-lg-4">
 													<label for="monthlyAmountwithdraw">Monto mensual de retiros</label>
 													<div class="input-group">
-														<input id="monthlyAmountwithdraw" class="money form-control pwd-input text-right" type="text" autocomplete="off" name="limit" value="<?= $limitsInf ?>" disabled>
+														<input id="monthlyAmountwithdraw" class="money form-control pwd-input text-right" type="text" autocomplete="off" name="limit"  disabled>
 													</div>
 													<div class="help-block"></div>
 												</div>
 												<div class="form-group col-12 col-lg-4">
 													<label for="WithdrawTransaction">Monto por transacción de retiros</label>
 													<div class="input-group">
-														<input id="WithdrawTransaction" class="money form-control pwd-input text-right" type="text" autocomplete="off" name="limit" value="<?= $limitsInf ?>" disabled>
+														<input id="WithdrawTransaction" class="money form-control pwd-input text-right" type="text" autocomplete="off" name="limit"  disabled>
 													</div>
 													<div class="help-block"></div>
 												</div>
@@ -276,49 +277,49 @@
 												<div class="form-group col-12 col-lg-4">
 													<label class="pr-3" for="dailyNumberCredit">Número diario de créditos</label>
 													<div class="input-group">
-														<input id="dailyNumberCredit" class="money form-control pwd-input text-right" type="text" autocomplete="off" name="limit" value="<?= $limitsInf ?>" disabled>
+														<input id="dailyNumberCredit" class="money form-control pwd-input text-right" type="text" autocomplete="off" name="limit"  disabled>
 													</div>
 													<div class="help-block"></div>
 												</div>
 												<div class="form-group col-12 col-lg-4">
 													<label for="weeklyNumberCredit">Número semanal de créditos</label>
 													<div class="input-group">
-														<input id="weeklyNumberCredit" class="money form-control pwd-input text-right" type="text" autocomplete="off" name="limit" value="<?= $limitsInf ?>" disabled>
+														<input id="weeklyNumberCredit" class="money form-control pwd-input text-right" type="text" autocomplete="off" name="limit"  disabled>
 													</div>
 													<div class="help-block"></div>
 												</div>
 												<div class="form-group col-12 col-lg-4">
 													<label for="monthlyNumberCredit">Número mensual de créditos</label>
 													<div class="input-group">
-														<input id="monthlyNumberCredit" class="money form-control pwd-input text-right" type="text" autocomplete="off" name="limit" value="<?= $limitsInf ?>" disabled>
+														<input id="monthlyNumberCredit" class="money form-control pwd-input text-right" type="text" autocomplete="off" name="limit"  disabled>
 													</div>
 													<div class="help-block"></div>
 												</div>
 												<div class="form-group col-12 col-lg-4">
 													<label class="pr-3" for="dailyAmountCredit">Monto diario de créditos</label>
 													<div class="input-group">
-														<input id="dailyAmountCredit" class="money form-control pwd-input text-right" type="text" autocomplete="off" name="limit" value="<?= $limitsInf ?>" disabled>
+														<input id="dailyAmountCredit" class="money form-control pwd-input text-right" type="text" autocomplete="off" name="limit"  disabled>
 													</div>
 													<div class="help-block"></div>
 												</div>
 												<div class="form-group col-12 col-lg-4">
 													<label for="weeklyAmountCredit">Monto semanal de créditos</label>
 													<div clxs="input-group">
-														<input id="weeklyAmountCredit" class="money form-control pwd-input text-right" type="text" autocomplete="off" name="limit" value="<?= $limitsInf ?>" disabled>
+														<input id="weeklyAmountCredit" class="money form-control pwd-input text-right" type="text" autocomplete="off" name="limit"  disabled>
 													</div>
 													<div class="help-block"></div>
 												</div>
 												<div class="form-group col-12 col-lg-4">
 													<label for="monthlyAmountCredit">Monto mensual de créditos</label>
 													<div class="input-group">
-														<input id="monthlyAmountCredit" class="money form-control pwd-input text-right" type="text" autocomplete="off" name="limit" value="<?= $limitsInf ?>" disabled>
+														<input id="monthlyAmountCredit" class="money form-control pwd-input text-right" type="text" autocomplete="off" name="limit"  disabled>
 													</div>
 													<div class="help-block"></div>
 												</div>
 												<div class="form-group col-12 col-lg-4">
 													<label for="CreditTransaction">Monto por transacción de créditos</label>
 													<div class="input-group">
-														<input id="CreditTransaction" class="money form-control pwd-input text-right" type="text" autocomplete="off" name="limit" value="<?= $limitsInf ?>" disabled>
+														<input id="CreditTransaction" class="money form-control pwd-input text-right" type="text" autocomplete="off" name="limit"  disabled>
 													</div>
 													<div class="help-block"></div>
 												</div>
@@ -331,7 +332,7 @@
 						<div class="flex row mt-3 mb-2 mx-2 justify-end">
 							<div class="col-5 col-lg-3 col-xl-3 form-group">
 								<div class="input-group">
-									<input id="password-sign" name="password" class="form-control pwd-input pr-0" type="password" autocomplete="off" placeholder="Contraseña">
+									<input id="passwordAuth" name="password" class="form-control pwd-input pr-0" type="password" autocomplete="off" placeholder="Contraseña" disabled>
 									<div class="input-group-append">
 										<span id="pwd_action" class="input-group-text pwd-action" title="Mostrar contraseña"><i class="icon-view mr-0"></i></span>
 									</div>
@@ -340,7 +341,7 @@
 							</div>
 							<div class="col-auto">
 							<?php if($this->verify_access->verifyAuthorization('LIMTRX', 'ACTLIM')): ?>
-								<button id="sign-bulk-btn" type="button" class="btn btn-primary btn-small btn-loading flex mx-auto">Actualizar</button>
+								<button id="sign-btn"class="btn btn-primary btn-small btn-loading flex mx-auto">Actualizar</button>
 							<?php endif; ?>
 							</div>
 						</div>

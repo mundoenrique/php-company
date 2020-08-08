@@ -622,6 +622,7 @@ class Novo_Services_Model extends NOVO_Model {
 
 				foreach ($shops as $key => $value) {
 					 $shops[lang('SERVICES_NAMES_PROPERTIES')[$key]] = $value;
+					 unset($shops[$key]);
 				 };
 
 				$this->response->data['dataTwirls'] = (array)$dataTwirls;
@@ -693,7 +694,7 @@ class Novo_Services_Model extends NOVO_Model {
 			case 0:
 				$this->response->title = lang('GEN_COMMERCIAL_TWIRLS_TITTLE');
 				$this->response->icon =  lang('GEN_ICON_SUCCESS');
-        $this->response->msg = 	lang('RESP_SUCCESSFULL_UPDATE');
+        $this->response->msg = 	lang('RESP_SUCCESSFULL_UPDATE_TWIRLS');
         $this->response->data['btn1']['action'] = 'close';
 			break;
 			case -1:
@@ -724,20 +725,55 @@ class Novo_Services_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO Services Model: transactionalLimits Method Initialized');
 
-		$this->className = 'com.novo.objects.MO.TransferenciaMO';
+		$this->className = 'com.novo.objects.TO.LimitesTO';
 
-		$this->dataAccessLog->modulo = 'servicios';
-		$this->dataAccessLog->function = 'custom_mcc';
-		$this->dataAccessLog->operacion = 'customMcc';
+		$this->dataAccessLog->modulo = 'Servicios';
+		$this->dataAccessLog->function = 'Limites';
+		$this->dataAccessLog->operation = 'Consultar Limites de tarjeta';
+		$this->dataRequest->opcion = 'consultar';
+		$this->dataRequest->idEmpresa = $this->session->enterpriseInf->idFiscal;
+		$this->dataRequest->prefix = $this->session->productInf->productPrefix;
+		$this->dataRequest->cards = [
+			['card' =>  $dataRequest->cardNumber,
+			'personId' => '',
+			'personName' => '',
+			'lastUpdate' => ''
+			]
+		];
+		$this->dataRequest->usuario = [
+		'userName' => $this->session->userName
+	];
 
-		$this->isResponseRc = 0;
+		$this->dataRequest->idOperation = 'consultarLimites';
+
+		$response = $this->sendToService('callWs_transactionalLimits');
+
 		switch($this->isResponseRc) {
 			case 0:
-
 				$this->response->code = 0;
-				$this->response->data = [];
+				$responseBean = json_decode($response)->cards[0];
+				$dataLimits = new stdClass();
+				$limits = new stdClass();
+				$dataLimits->updateDate =  $responseBean->lastUpdate;
+				$dataLimits->cardNumberP =  maskString($responseBean->card, 4, 6);
+				$dataLimits->customerName =  $responseBean->personName;
+				$dataLimits->documentId =  $responseBean->personId;
+				$limits = (array)$responseBean->parameters;
+
+				foreach ($limits as $key => $value) {
+					 $limits[lang('SERVICES_NAMES_PROPERTIES_LIMITS')[$key]] = $value;
+					 unset($limits[$key]);
+				 };
+
+				$this->response->data['dataLimits'] = (array)$dataLimits;
+				$this->response->data['limits'] = (array)$limits;
 
 			break;
+			default:
+				$this->response->title = lang('GEN_TRANSACTIONAL_LIMITS_TITTLE');
+				$this->response->icon =  lang('GEN_ICON_WARNING');
+				$this->response->msg = novoLang(lang('RESP_NO_CARD_FOUND'), maskString( $dataRequest->cardNumber, 5, 6));
+				$this->response->data['btn1']['action'] = 'close';
 		}
 
 		return $this->responseToTheView('callWs_transactionalLimits');
@@ -752,21 +788,44 @@ class Novo_Services_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO Services Model: updateTransactionalLimits Method Initialized');
 
-		$this->className = 'com.novo.objects.MO.TransferenciaMO';
+		$this->className = 'com.novo.objects.TO.LimitesTO';
 
 		$this->dataAccessLog->modulo = 'Servicios';
-		$this->dataAccessLog->function = 'Actualizar limites transaccionales';
-		$this->dataAccessLog->operation = 'Actualizar limites transaccionales';
+		$this->dataAccessLog->function = 'Limites';
+		$this->dataAccessLog->operation = 'Actualizar Limites de tarjeta';
+		$this->dataRequest->opcion = 'actualizar';
+		$this->dataRequest->idEmpresa = $this->session->enterpriseInf->idFiscal;
+		$this->dataRequest->prefix = $this->session->productInf->productPrefix;
+		foreach ((array)lang('SERVICES_NAMES_PROPERTIES_LIMITS') as $key => $val) {
+			$cards[$key] = $dataRequest->$val;
+		};
+		foreach ($cards as &$valor) {
+			if ($valor == '') {
+				$valor = '0';
+			}
+		};
+		$this->dataRequest->cards = [
+			[
+				'card' =>  '4189281080003016',
+				'personId' => '',
+				'personName' => '',
+				'parameters' => [$cards]
+		]
+		];
+		$this->dataRequest->usuario = [
+		'userName' => $this->session->userName
+	];
 
-		$this->dataRequest->idOperation = '';
+		$this->dataRequest->idOperation = 'actualizarLimites';
 
-		$this->isResponseRc = 0;
+		$response = $this->sendToService('callWs_updateTransactionalLimits');
+
 		switch($this->isResponseRc) {
 			case 0:
-
-				$this->response->code = 0;
-				$this->response->data = [];
-
+				$this->response->title = lang('GEN_TRANSACTIONAL_LIMITS_TITTLE');
+				$this->response->icon =  lang('GEN_ICON_SUCCESS');
+        $this->response->msg = 	lang('RESP_SUCCESSFULL_UPDATE_LIMITS');
+        $this->response->data['btn1']['action'] = 'close';
 			break;
 		}
 
