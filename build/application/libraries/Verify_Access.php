@@ -179,10 +179,12 @@ class Verify_Access {
 				break;
 				case 'signBulkList':
 				case 'authorizeBulk':
-				case 'bulkDetail':
 				case 'authorizeBulkList':
 				case 'calculateServiceOrder':
 					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBAUT'));
+				break;
+				case 'bulkDetail':
+					$auth = ($this->CI->session->has_userdata('productInf') && ($this->verifyAuthorization('TEBAUT') || $this->verifyAuthorization('TEBORS')));
 				break;
 				case 'deleteConfirmBulk':
 				case 'disassConfirmBulk':
