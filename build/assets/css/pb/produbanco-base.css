@@ -3466,7 +3466,7 @@ a.ui-button:active,
 	background: none;
 	overflow: auto;
 }
-.ui-dialog .ui-dialog-content p {
+.ui-dialog .ui-dialog-content > p {
 	display: flex;
 	padding: 1.2em 1em 1em;
 	min-height: 80px;
@@ -3938,4 +3938,9 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 	top: 0;
 	width: 100%;
 	height: 100%;
+}
+
+#enterprise-widget-btn:hover {
+	color: var(--color-secondary);
+	background-color:var(--color-primary);
 }
