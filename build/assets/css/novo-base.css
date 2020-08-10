@@ -689,7 +689,7 @@ ul.acordion li:last-child {
 
 span.icon:before {
 	content: attr(data-icon);
-	font-family: "novoglyphs", "fontello";
+	font-family: "novoglyphs";
 	-webkit-font-smoothing: antialiased;
 	font-weight: normal;
 }

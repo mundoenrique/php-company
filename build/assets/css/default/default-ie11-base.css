@@ -806,11 +806,11 @@ label {
 /* Icons, Logos
 ========================================================================== */
 
-span[class^="icon-"].novoglyphs,
-span[class*=" icon-"].novoglyphs,
-i[class^="icon-"].novoglyphs,
-i[class*=" icon-"].novoglyphs {
-	font-family: 'novoglyphs'
+span[class^="icon-"],
+span[class*=" icon-"],
+i[class^="icon-"],
+i[class*=" icon-"] {
+	font-family: "novoglyphs";
 }
 
 .icon-chevron-down:hover {
