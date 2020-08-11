@@ -100,8 +100,9 @@ $lang['SERVICES_NAMES_PROPERTIES_LIMITS'] = [
 	'retiroSemanalMonto' => 'weeklyAmountWithdraw'
 ];
 
-$lang['SERVICES_TEMPORARY_BLOCKED_CARD'] = 'El número de tarjeta <strong>%s</strong> esta bloqueada temporalmente.';
-$lang['SERVICES_PERMANENT_BLOCKED_CARD'] = 'El número de tarjeta <strong>%s</strong> esta bloqueada permanente';
-$lang['SERVICES_NO_FOUND_REGISTRY'] = 'No ha sido encontrado el registro';
-$lang['SERVICES_EXPIRED_CARD'] = 'La tarjeta <strong>%s</strong> esta vencida';
-$lang['SERVICES_NO_AVAILABLE_CARD'] = 'El número de tarjeta <strong>%s</strong> no esta disponible para la activación de giros en comercios.';
+$lang['SERVICES_TWIRLS_TEMPORARY_BLOCKED_CARD'] = 'El número de tarjeta <strong>%s</strong> esta bloqueada temporalmente.';
+$lang['SERVICES_TWIRLS_PERMANENT_BLOCKED_CARD'] = 'El número de tarjeta <strong>%s</strong> esta bloqueada permanente';
+$lang['SERVICES_TWIRLS_NO_FOUND_REGISTRY'] = 'No ha sido encontrado el registro';
+$lang['SERVICES_TWIRLS_EXPIRED_CARD'] = 'La tarjeta <strong>%s</strong> esta vencida';
+$lang['SERVICES_TWIRLS_NO_AVAILABLE_CARD'] = 'El número de tarjeta <strong>%s</strong> no esta disponible para la activación de giros en comercios.';
+$lang['SERVICES_TWIRLS_NO_UPDATE'] = 'No fue posible actualizar la autorización de giros para:';

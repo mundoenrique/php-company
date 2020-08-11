@@ -636,20 +636,20 @@ class Novo_Services_Model extends NOVO_Model {
         $this->response->data['btn1']['action'] = 'close';
 				switch (json_decode($response->bean)->cards[0]->rc) {
 					case -266:
-						$this->response->msg = 	novoLang(lang('SERVICES_TEMPORARY_BLOCKED_CARD'), maskString( $dataRequest->cardNumber, 4, 6));
+						$this->response->msg = 	novoLang(lang('SERVICES_TWIRLS_TEMPORARY_BLOCKED_CARD'), maskString( $dataRequest->cardNumber, 4, 6));
 						break;
 					case -307:
-						$this->response->msg = 	novoLang(lang('SERVICES_PERMANENT_BLOCKED_CARD'), maskString( $dataRequest->cardNumber, 4, 6));
+						$this->response->msg = 	novoLang(lang('SERVICES_TWIRLS_PERMANENT_BLOCKED_CARD'), maskString( $dataRequest->cardNumber, 4, 6));
 						break;
 					case -439:
-						$this->response->msg = 	novoLang(lang('SERVICES_NO_FOUND_REGISTRY'), maskString( $dataRequest->cardNumber, 4, 6));
+						$this->response->msg = 	novoLang(lang('SERVICES_TWIRLS_NO_FOUND_REGISTRY'), maskString( $dataRequest->cardNumber, 4, 6));
 						break;
 					case -440:
 					case -441:
-						$this->response->msg = 	novoLang(lang('SERVICES_NO_AVAILABLE_CARD'), maskString( $dataRequest->cardNumber, 4, 6));
+						$this->response->msg = 	novoLang(lang('SERVICES_TWIRLS_NO_AVAILABLE_CARD'), maskString( $dataRequest->cardNumber, 4, 6));
 						break;
 					case -197:
-						$this->response->msg = 	novoLang(lang('SERVICES_EXPIRED_CARD'), maskString( $dataRequest->cardNumber, 4, 6));
+						$this->response->msg = 	novoLang(lang('SERVICES_TWIRLS_EXPIRED_CARD'), maskString( $dataRequest->cardNumber, 4, 6));
 						break;
 				}
       break;
@@ -731,7 +731,7 @@ class Novo_Services_Model extends NOVO_Model {
 			case -65:
 				$this->response->code = 2;
 				$this->response->title = lang('GEN_COMMERCIAL_TWIRLS_TITTLE');
-				$this->response->msg= 'No fue posible actualizar la autorización de giros en:';
+				$this->response->msg= 'SERVICES_TWIRLS_NO_UPDATE';
 
 				foreach ((array)json_decode($response->bean)->cards[0]->mccItems as $key => $value) {
 					$mcc[lang('SERVICES_NAME_PROPERTIES_VIEW')[$key]] = $value;
