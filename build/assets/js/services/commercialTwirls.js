@@ -1,4 +1,5 @@
 'use strict'
+var inputModal;
 $(function () {
 	$('.hide-out').removeClass('hide');
 	$('#blockResults').addClass('hidden');
@@ -79,8 +80,28 @@ function updateTwirlsCard(passData, btnText) {
 	callNovoCore(verb, who, where, data, function(response) {
 		dataResponse = response.data;
 		code = response.code;
+		msg = response.msg;
+		title = response.title
+		buildList(code, dataResponse, msg, title);
 		insertFormInput(false);
 		$('#sign-btn').html(btnText);
 		$('#passwordAuth').val('');
 	});
+};
+
+function buildList(code, dataResponse, msg, title) {
+	if (code == 2) {
+		data = {
+			btn1: {
+				text: lang.GEN_BTN_ACCEPT,
+				action: 'close'
+			}
+		}
+		inputModal = '<h5 class="regular mr-1">' + msg + '</h5>'
+		$.each(dataResponse, function (key) {
+			inputModal += '<h6 class="light mr-1">' + key + '</h6>';
+		})
+
+		notiSystem(title, inputModal, lang.GEN_ICON_INFO, data);
+	}
 };

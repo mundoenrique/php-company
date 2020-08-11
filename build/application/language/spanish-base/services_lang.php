@@ -48,6 +48,26 @@ $lang['SERVICES_NAMES_PROPERTIES'] = [
 	'transporteTerrestre' => 'passengerTransportation',
 	'ventasDetalle' => 'retailSales',
 ];
+$lang['SERVICES_NAME_PROPERTIES_VIEW'] = [
+	'agenciaViajes' => 'Agencia de viajes',
+	'aseguradoras' => 'Aseguradoras',
+	'beneficencia' => 'Beneficiencia',
+	'colegios' => 'Colegios',
+	'entretenimiento' => 'Entretenimiento',
+	'estacionamientos' => 'Estacionamientos',
+	'gasolineras' => 'Gasolineras',
+	'gobiernos' => 'Gobiernos',
+	'hospitales' => 'Hospitales',
+	'hoteles' => 'Hoteles',
+	'peajes' => 'Peajes',
+	'rentaAuto' => 'Renta de auto',
+	'restaurantes' => 'Restaurantes',
+	'supermercados' => 'Supermercados',
+	'telecomunicaciones' => 'Telecomunicaciones',
+	'transporteAereo' => 'Trasnporte aereo',
+	'transporteTerrestre' => 'Transporte terrestre',
+	'ventasDetalle' => 'Ventas a detalle',
+];
 
 $lang['SERVICES_NAMES_PROPERTIES_LIMITS'] = [
 	'abonoDiarioCant' => 'dailyNumberCredit',
@@ -79,3 +99,9 @@ $lang['SERVICES_NAMES_PROPERTIES_LIMITS'] = [
 	'retiroSemanalCant' => 'weeklyNumberWithdraw',
 	'retiroSemanalMonto' => 'weeklyAmountWithdraw'
 ];
+
+$lang['SERVICES_TEMPORARY_BLOCKED_CARD'] = 'El número de tarjeta <strong>%s</strong> esta bloqueada temporalmente.';
+$lang['SERVICES_PERMANENT_BLOCKED_CARD'] = 'El número de tarjeta <strong>%s</strong> esta bloqueada permanente';
+$lang['SERVICES_NO_FOUND_REGISTRY'] = 'No ha sido encontrado el registro';
+$lang['SERVICES_EXPIRED_CARD'] = 'La tarjeta <strong>%s</strong> esta vencida';
+$lang['SERVICES_NO_AVAILABLE_CARD'] = 'El número de tarjeta <strong>%s</strong> no esta disponible para la activación de giros en comercios.';
