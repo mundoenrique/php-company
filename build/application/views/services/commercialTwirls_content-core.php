@@ -89,7 +89,7 @@
             	<input class="custom-control-input" type="checkbox" disabled checked>
             	<label class="custom-control-label"></label>
           	</div>
-          	<span class="h6 light text">la opción esta activa.</span>
+          	<span class="h6 light text">las compras en este tipo de comercio están restringidas.</span>
           </div>
 				</div>
 				<form id="check-form" >

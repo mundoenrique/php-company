@@ -731,7 +731,7 @@ class Novo_Services_Model extends NOVO_Model {
 			case -65:
 				$this->response->code = 2;
 				$this->response->title = lang('GEN_COMMERCIAL_TWIRLS_TITTLE');
-				$this->response->msg= 'SERVICES_TWIRLS_NO_UPDATE';
+				$this->response->msg= lang('SERVICES_TWIRLS_NO_UPDATE');
 
 				foreach ((array)json_decode($response->bean)->cards[0]->mccItems as $key => $value) {
 					$mcc[lang('SERVICES_NAME_PROPERTIES_VIEW')[$key]] = $value;
