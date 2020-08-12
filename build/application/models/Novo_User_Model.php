@@ -276,6 +276,7 @@ class Novo_User_Model extends NOVO_Model {
 					'countrySess' => $this->config->item('country'),
 					'countryUri' => $this->config->item('country-uri'),
 					'autoLogin' => 'true',
+					'singleSignOn' => TRUE,
 				];
 				$this->session->set_userdata($userData);
 				$this->response->code = 0;
@@ -289,6 +290,8 @@ class Novo_User_Model extends NOVO_Model {
 				$this->response->data = base_url('ingresar/fin');
 			break;
 		}
+
+		$this->session->set_flashdata('singleSignOn', TRUE);
 
 		return $this->responseToTheView('callWs_SingleSignon');
 	}

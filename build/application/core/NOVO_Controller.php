@@ -26,7 +26,7 @@ class NOVO_Controller extends CI_Controller {
 	protected $products;
 	protected $folder;
 	private $ValidateBrowser;
-	public $singleSigOn;
+	public $singleSignOn;
 
 	public function __construct()
 	{
@@ -55,7 +55,7 @@ class NOVO_Controller extends CI_Controller {
 		$this->render->callModal = $this->render->sessionTime < 180000 ? ceil($this->render->sessionTime * 50 / 100) : 15000;
 		$this->render->callServer = $this->render->callModal;
 		$this->ValidateBrowser = FALSE;
-		$this->singleSigOn = $this->session->has_userdata('autoLogin');
+		$this->singleSignOn = $this->session->has_userdata('singleSignOn');
 		$this->optionsCheck();
 	}
 	/**
@@ -198,7 +198,7 @@ class NOVO_Controller extends CI_Controller {
 
 		} else {
 			$linkredirect = $this->session->has_userdata('productInf') ? 'detalle-producto' : 'inicio';
-			$linkredirect = AUTO_LOGIN && !$this->session->has_userdata('logged') ? 'ingresar/fin' : $linkredirect;
+			$linkredirect = $this->singleSignOn && !$this->session->has_userdata('logged') ? 'ingresar/fin' : $linkredirect;
 			redirect(base_url($linkredirect), 'location');
 		}
 

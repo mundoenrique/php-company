@@ -85,7 +85,7 @@ class Verify_Access {
 	{
 		log_message('INFO', 'NOVO Verify_Access: ResponseByDefect method initialized');
 
-		$linkredirect = AUTO_LOGIN ? 'ingresar/fin' : 'inicio';
+		$linkredirect = $this->CI->session->has_userdata('singleSignOn') ? 'ingresar/fin' : 'inicio';
 		$this->responseDefect = new stdClass();
 		$this->responseDefect->code = lang('RESP_DEFAULT_CODE');
 		$this->responseDefect->title = lang('GEN_SYSTEM_NAME');
@@ -120,7 +120,7 @@ class Verify_Access {
 
 		$auth = FALSE;
 		$user = $user ?: $this->user;
-		$freeAccess = ['login', 'suggestion', 'validateCaptcha', 'finishSession', 'terms', 'singleSignon'];
+		$freeAccess = ['login', 'suggestion', 'validateCaptcha', 'finishSession', 'terms', 'singleSignOn'];
 		$auth = in_array($module, $freeAccess);
 
 		if(!$auth) {
