@@ -283,6 +283,12 @@ class Novo_User_Model extends NOVO_Model {
 				$this->response->data = base_url(lang('GEN_ENTERPRISE_LIST'));
 			break;
 			case -28:
+				$userData = [
+					'userId' => $response->usuario->idUsuario,
+					'userName' => $response->usuario->userName,
+					'codigoGrupo' => $response->usuario->codigoGrupo,
+				];
+				$this->session->set_userdata($userData);
 				$this->session->set_flashdata('unauthorized', lang('RESP_SESSION_DUPLICATE'));
 				$this->response->data = base_url('cerrar-sesion/fin');
 			break;
