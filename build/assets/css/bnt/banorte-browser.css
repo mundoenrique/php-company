@@ -28,6 +28,17 @@
   src: url('../../fonts/bnt/Roboto-Bold.ttf') format('truetype');
 }
 
+@font-face {
+  font-family: "novoglyphs";
+  font-weight: normal;
+	font-style: normal;
+	src: url('../fonts/novoglyphs-webicons.eot?#iefix');
+  src: url('../fonts/novoglyphs-webicons.eot?#iefix') format('eot'),
+       url('../fonts/novoglyphs-webicons.woff') format('woff'),
+       url('../fonts/novoglyphs-webicons.ttf') format('truetype'),
+       url('../fonts/novoglyphs-webicons.svg') format('svg');
+}
+
 *, ::before, ::after {
   box-sizing: border-box;
   outline: none;
@@ -157,7 +168,7 @@ header.main-head {
   display: inline-flex;
 	height: auto;
 	width: auto;
-	font-family: "NovoPayment Glyphs";
+	font-family: "novoglyphs";
 	font-size: 5rem;
 	font-style: normal;
 	font-weight: normal;
@@ -166,7 +177,7 @@ header.main-head {
 	vertical-align: middle;
 }
 
-.icon-update::before { content: "\e00d"; }
+.icon-update::before { content: "\e0c0"; }
 
 h1, h2 {
   margin-top: 0;

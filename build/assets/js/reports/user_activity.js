@@ -131,7 +131,7 @@ function userActivity(passData) {
           "className":    'TableButtons',
 					"orderable":    false,
           render: function (data, type, full, meta) {
-            return'<tr><td class="flex justify-center items-center"><button id="seeActivity" class="btn px-0 details-user" title="Ver actividades" data-toggle="tooltip"><i class="icon icon-find mr-1" aria-hidden="true"></i></button><button  id="seeActivity2" class="activity btn px-1"  title="funciones"><i class="icon novoglyphs icon-info" aria-hidden="true"></i></button></td></tr>'
+            return'<tr><td class="flex justify-center items-center"><button id="seeActivity" class="btn px-0 details-user" title="Ver actividades" data-toggle="tooltip"><i class="icon icon-find mr-1" aria-hidden="true"></i></button><button  id="seeActivity2" class="activity btn px-1"  title="funciones"><i class="icon icon-info" aria-hidden="true"></i></button></td></tr>'
 					}
 				},
     ]

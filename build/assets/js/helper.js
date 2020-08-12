@@ -114,14 +114,16 @@ function callNovoCore(verb, who, where, request, _response_) {
 		dataType: 'json'
 	}).done(function (response, status, jqXHR) {
 
-		if ($('#system-info').parents('.ui-dialog:visible').length) {
+		response = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, { format: CryptoJSAesJson }).toString(CryptoJS.enc.Utf8))
+
+		var modalClose = response.modal ? false : true;
+
+		if ($('#system-info').parents('.ui-dialog').length && modalClose) {
 			$('#accept')
 				.prop('disabled', false)
 				.text(lang.GEN_BTN_ACCEPT)
 			$('#system-info').dialog('destroy');
 		}
-
-		response = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, { format: CryptoJSAesJson }).toString(CryptoJS.enc.Utf8))
 
 		if (response.code === codeResp) {
 			notiSystem(response.title, response.msg, response.icon, response.data);
@@ -131,7 +133,7 @@ function callNovoCore(verb, who, where, request, _response_) {
 
 	}).fail(function (jqXHR, textStatus, errorThrown) {
 
-		if ($('#system-info').parents('.ui-dialog:visible').length) {
+		if ($('#system-info').parents('.ui-dialog').length) {
 			$('#accept')
 				.prop('disabled', false)
 				.text(lang.GEN_BTN_ACCEPT)
@@ -174,18 +176,19 @@ function notiSystem(title, message, icon, data) {
 	var dialogMoldal = $('#system-info');
 	var btn1 = data.btn1;
 	var btn2 = data.btn2;
+	var maxHeight = data.maxHeight || 350;
 
 	dialogMoldal.dialog({
 		title: title || lang.GEN_SYSTEM_NAME,
 		modal: 'true',
-		position: { my: data.posMy || 'center', at: data.posAt || 'center'},
+		position: { my: data.posMy || 'center', at: data.posAt || 'center' },
 		draggable: false,
 		resizable: false,
 		closeOnEscape: false,
 		width: data.width || 370,
-		minWidth: lang.CONF_MODAL_WIDTH,
+		minWidth: data.minWidth || lang.CONF_MODAL_WIDTH,
 		minHeight: 100,
-		maxHeight: data.maxHeight || 350,
+		maxHeight: maxHeight !== 'none' ? maxHeight : false,
 		dialogClass: "border-none",
 		classes: {
 			"ui-dialog-titlebar": "border-none",

@@ -4,6 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $lang['CONF_SUPPORT_IE'] = 'ON';
 //SIGNIN
 $lang['CONIFG_SIGIN_RECOVER_PASS'] = 'OFF';
+$lang['CONF_SIGNIN_WIDGET_CONTACT'] = 'OFF';
 //RECOVER ACCESS
 $lang['CONF_RECOV_PASS'] = 'OFF';
 //BENEFITS
@@ -12,9 +13,6 @@ $lang['CONF_BENEFITS'] = 'OFF';
 $lang['CONF_BULK_LOAD'] = 'OFF';
 $lang['CONF_BULK_BRANCHOFFICE'] = 'ON';
 $lang['CONF_BULK_AUTH'] = 'OFF';
-//FOOTER
-$lang['CONF_FOOTER_NETWORKS'] = 'OFF';
-$lang['CONF_FOOTER_LOGO'] = 'ON';
 //AUTHORIZE BULK LIST
 $lang['CONF_BULK_AUTHORIZE'] = 'OFF';
 $lang['CONF_BULK_SELECT_ALL_AUTH'] = 'OFF';

@@ -75,11 +75,11 @@ class Novo_User extends NOVO_Controller {
 	 * @info Método para el cierre de sesión
 	 * @author J. Enrique Peñaloza Piñero.
 	 */
-	public function singleSignon($sessionId = FALSE)
+	public function singleSignOn($sessionId = FALSE)
 	{
-		log_message('INFO', 'NOVO User: singleSignon Method Initialized');
+		log_message('INFO', 'NOVO User: singleSignOn Method Initialized');
 
-		$view = 'singleSignon';
+		$view = 'singleSignOn';
 		$this->render->send = FALSE;
 
 		if ($sessionId) {
@@ -89,18 +89,21 @@ class Novo_User extends NOVO_Controller {
 			$this->render->sessionId = $this->request->sessionId;
 		}
 
-		if ($sessionId != 'fin') {
-			array_push(
-				$this->includeAssets->jsFiles,
-				'user/singleSignon'
-			);
-		}
-
 		if($sessionId == 'fin') {
 			$view = 'finish';
 			$this->render->activeHeader = TRUE;
 			$this->render->showBtn = FALSE;
 			$this->render->sessionEnd = lang('RESP_SINGLE_SIGNON');
+
+			if ($this->session->flashdata('unauthorized') != NULL) {
+				$this->render->sessionEnd = $this->session->flashdata('unauthorized');
+			}
+		} else {
+			array_push(
+				$this->includeAssets->jsFiles,
+				'user/singleSignOn'
+			);
+			$this->render->skipmenu = TRUE;
 		}
 
 		$this->render->titlePage = lang('GEN_SYSTEM_NAME');
@@ -205,16 +208,17 @@ class Novo_User extends NOVO_Controller {
 		log_message('INFO', 'NOVO User: finishSession Method Initialized');
 
 		$view = 'finish';
+		$singleSignOn = $this->singleSignOn || $this->session->flashdata('singleSignOn');
 
 		if($this->render->userId || $this->render->logged) {
 			$this->load->model('Novo_User_Model', 'finishSession');
 			$this->finishSession->callWs_FinishSession_User();
 		}
 
-		if($redirect == 'fin' || AUTO_LOGIN) {
+		if($redirect == 'fin' || $singleSignOn) {
 			$pos = array_search('menu-datepicker', $this->includeAssets->jsFiles);
 			$this->render->action = base_url('inicio');
-			$this->render->showBtn = AUTO_LOGIN ? FALSE : TRUE;
+			$this->render->showBtn = !$singleSignOn;
 			$this->render->sessionEnd = novoLang(lang('GEN_EXPIRED_SESSION'), lang('GEN_SYSTEM_NAME'));
 
 			if ($this->session->flashdata('unauthorized') != NULL) {
