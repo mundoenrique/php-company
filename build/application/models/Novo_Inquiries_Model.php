@@ -197,7 +197,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 			utf8_encode($password->password)
 		);
 
-		if (lang('CONF_HASH_PASS') == 'ON' || $this->session->has_userdata('singleSignOn')) {
+		if (lang('CONF_HASH_PASS') == 'ON' || !$this->session->has_userdata('singleSignOn')) {
 			$password = md5($password);
 		}
 
