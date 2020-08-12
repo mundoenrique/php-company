@@ -98,6 +98,7 @@ class Novo_User_Model extends NOVO_Model {
 				$this->session->set_userdata($userData);
 				$this->response->code = 0;
 				$this->response->data = base_url(lang('GEN_ENTERPRISE_LIST'));
+				$this->response->modal = TRUE;
 				break;
 			case -2:
 			case -185:
@@ -173,7 +174,7 @@ class Novo_User_Model extends NOVO_Model {
 				$this->response->labelInput = lang('GEN_LOGIN_IP_LABEL_INPUT');
 				$this->response->icon = lang('GEN_ICON_WARNING');
 				$this->response->email = $response->usuario->emailEnc;
-				$this->response->msg = str_replace('{$maskMail$}',$this->response->email,lang('GEN_LOGIN_IP_MSG'));
+				$this->response->msg = novoLang(lang('GEN_LOGIN_IP_MSG'), $this->response->email);
 				$this->response->data = [
 					'btn1'=> [
 						'text'=> lang('GEN_BTN_ACCEPT'),
@@ -189,6 +190,14 @@ class Novo_User_Model extends NOVO_Model {
 				$this->session->set_flashdata('authToken',$response->usuario->codigoOtp->access_token);
 				break;
 			case -286:
+					$this->response->code = 4;
+					$this->response->msg = lang('GEN_RESP_CODE_INVALID');
+					$this->response->icon = lang('GEN_ICON_WARNING');
+					$this->response->data['btn1'] = [
+						'text' => lang('GEN_BTN_ACCEPT'),
+						'action' => 'close'
+					];
+			break;
 			case -287:
 			case -288:
 				$this->response->code = 4;
@@ -198,7 +207,7 @@ class Novo_User_Model extends NOVO_Model {
 					'text' => lang('GEN_BTN_ACCEPT'),
 					'action' => 'close'
 				];
-				break;
+			break;
 			case 'fail':
 			case 9999:
 				$this->response->code = 3;
@@ -240,8 +249,6 @@ class Novo_User_Model extends NOVO_Model {
 
 		switch ($this->isResponseRc) {
 			case 0:
-			case -2:
-			case -185:
 				$fullName = mb_strtolower($response->usuario->primerNombre).' ';
 				$fullName.= mb_strtolower($response->usuario->primerApellido);
 				$formatDate = $this->config->item('format_date');
@@ -269,15 +276,22 @@ class Novo_User_Model extends NOVO_Model {
 					'countrySess' => $this->config->item('country'),
 					'countryUri' => $this->config->item('country-uri'),
 					'autoLogin' => 'true',
+					'singleSignOn' => TRUE,
 				];
 				$this->session->set_userdata($userData);
 				$this->response->code = 0;
 				$this->response->data = base_url(lang('GEN_ENTERPRISE_LIST'));
-				break;
+			break;
+			case -28:
+				$this->session->set_flashdata('unauthorized', lang('RESP_SESSION_DUPLICATE'));
+				$this->response->data = base_url('cerrar-sesion/fin');
+			break;
 			default:
 				$this->response->data = base_url('ingresar/fin');
-				break;
+			break;
 		}
+
+		$this->session->set_flashdata('singleSignOn', TRUE);
 
 		return $this->responseToTheView('callWs_SingleSignon');
 	}
@@ -389,6 +403,9 @@ class Novo_User_Model extends NOVO_Model {
 				if (isset($response->bean->TokenTO->authToken)) {
 					$this->session->set_flashdata('authToken', $response->bean->TokenTO->authToken);
 				}
+				if (isset($response->logAccesoObject->userName)) {
+					$this->session->set_flashdata('userName', $response->logAccesoObject->userName);
+				}
 				$this->response->code = 0;
 				$this->response->msg = lang('GEN_OTP');
 				$this->response->icon = lang('GEN_ICON_SUCCESS');
@@ -433,15 +450,20 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataAccessLog->modulo = 'Usuario';
 		$this->dataAccessLog->function = 'Recuperar Acceso';
 		$this->dataAccessLog->operation = 'Validar código OTP';
-		$userName = isset($dataRequest->user) ? mb_strtoupper($dataRequest->user) : '';
-		$this->dataAccessLog->userName = $userName;
+		$this->dataAccessLog->userName = $this->session->flashdata('userName');
 
 		$this->dataRequest->idOperation = 'genericBusiness';
-		$this->dataRequest->userName = $userName;
+		$this->dataRequest->userName = $this->session->flashdata('userName');
 		$this->dataRequest->opcion = 'validarOTP';
 		$this->dataRequest->TokenTO = [
 			'access_token' => $this->session->flashdata('authToken'),
       'token' => $dataRequest->optCode,
+		];
+		$this->dataRequest->subOpciones = [
+			[
+				'subOpcion' => 'envioEmailProdubancoRecuperacion',
+      	'orden' => '1'
+			]
 		];
 		$maskMail = maskString($dataRequest->email, 4, $end = 6, '@');
 		$map = 0;

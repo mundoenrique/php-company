@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 //SUPPORT IE 11
-$lang['CONF_SUPPORT_IE'] = 'OFF';
+$lang['CONF_SUPPORT_IE'] = 'ON';
 //VALIDATE FORMS
 $lang['CONF_VALID_ERROR'] = 'has-error';
 $lang['CONF_VALID_VALID'] = 'has-success';
@@ -16,6 +16,7 @@ $lang['CONF_MODAL_WIDTH'] = 370;
 //SIGNIN
 $lang['CONIFG_SIGIN_RECOVER_PASS'] = 'ON';
 $lang['CONF_SIGNIN_IMG'] = 'OFF';
+$lang['CONF_SIGNIN_WIDGET_CONTACT'] = 'ON';
 //RECOVER ACCESS
 $lang['CONF_RECOV_PASS'] = 'ON';
 $lang['CONF_RECOV_ACCESS'] = 'OFF';
@@ -39,8 +40,8 @@ $lang['CONF_UNNA_ACCOUNT_NUMBER'] = 'ON';
 $lang['CONF_SERVICE_ORDER_CANCEL'] = 'ON';
 $lang['CONF_SERVICE_ORDER_OTP'] = 'OFF';
 //FOOTER
-$lang['CONF_FOOTER_NETWORKS'] = 'ON';
-$lang['CONF_FOOTER_LOGO'] = 'OFF';
+$lang['CONF_FOOTER_NETWORKS'] = 'OFF';
+$lang['CONF_FOOTER_LOGO'] = 'ON';
 //AUTHORIZE BULK LIST
 $lang['CONF_BULK_AUTHORIZE'] = 'ON';
 $lang['CONF_BULK_SELECT_ALL_SIGN'] = 'ON';

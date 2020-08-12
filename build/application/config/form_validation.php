@@ -40,7 +40,7 @@ $config = [
 			'rules' => 'trim'
 		]
 	],
-	'singleSignon' => [
+	'singleSignOn' => [
 		[
 			'field' => 'sessionId',
 			'label' => 'sessionId',

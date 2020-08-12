@@ -56,8 +56,8 @@ $route['translate_uri_dashes'] = FALSE;
 $route['(:any)/async-call'] = "novo_CallModels";
 $route['(:any)/single'] = "novo_CallModels";
 //User
-$route['(:any)/ingresar/(:any)']['GET'] = "Novo_User/singleSignon/$2";
-$route['(:any)/ingresar']['POST'] = "Novo_User/singleSignon";
+$route['(:any)/ingresar/(:any)']['GET'] = "Novo_User/singleSignOn/$2";
+$route['(:any)/ingresar']['POST'] = "Novo_User/singleSignOn";
 $route['(:any)/sugerencia'] = "Novo_User/suggestion";
 $route['(:any)/inicio'] = "Novo_User/login";
 $route['(:any)/inicio/(:any)'] = "Novo_User/login";

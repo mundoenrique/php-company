@@ -85,7 +85,7 @@ class Verify_Access {
 	{
 		log_message('INFO', 'NOVO Verify_Access: ResponseByDefect method initialized');
 
-		$linkredirect = AUTO_LOGIN ? 'ingresar/fin' : 'inicio';
+		$linkredirect = $this->CI->session->has_userdata('singleSignOn') ? 'ingresar/fin' : 'inicio';
 		$this->responseDefect = new stdClass();
 		$this->responseDefect->code = lang('RESP_DEFAULT_CODE');
 		$this->responseDefect->title = lang('GEN_SYSTEM_NAME');
@@ -120,7 +120,7 @@ class Verify_Access {
 
 		$auth = FALSE;
 		$user = $user ?: $this->user;
-		$freeAccess = ['login', 'suggestion', 'validateCaptcha', 'finishSession', 'terms', 'singleSignon'];
+		$freeAccess = ['login', 'suggestion', 'validateCaptcha', 'finishSession', 'terms', 'singleSignOn'];
 		$auth = in_array($module, $freeAccess);
 
 		if(!$auth) {
@@ -179,10 +179,12 @@ class Verify_Access {
 				break;
 				case 'signBulkList':
 				case 'authorizeBulk':
-				case 'bulkDetail':
 				case 'authorizeBulkList':
 				case 'calculateServiceOrder':
 					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBAUT'));
+				break;
+				case 'bulkDetail':
+					$auth = ($this->CI->session->has_userdata('productInf') && ($this->verifyAuthorization('TEBAUT') || $this->verifyAuthorization('TEBORS')));
 				break;
 				case 'deleteConfirmBulk':
 				case 'disassConfirmBulk':
@@ -190,9 +192,9 @@ class Verify_Access {
 				break;
 				case 'serviceOrder':
 				case 'cancelServiceOrder':
-				case 'exportFiles':
-					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBAUT') && $this->verifyAuthorization('TEBORS'));
+					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBAUT'));
 				break;
+				case 'exportFiles':
 				case 'serviceOrders':
 				case 'getServiceOrders':
 					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBORS'));
