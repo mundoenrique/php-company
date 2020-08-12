@@ -87,7 +87,7 @@ class NOVO_Model extends CI_Model {
 		$this->response->msg = '';
 		$this->response->icon = lang('GEN_ICON_WARNING');
 		$linkredirect = $this->session->has_userdata('productInf') ? 'detalle-producto' : lang('GEN_ENTERPRISE_LIST');
-		$linkredirect = $this->singleSignOn && !$this->session->has_userdata('logged') ? 'ingresar/fin' : $linkredirect;
+		$linkredirect = AUTO_LOGIN && !$this->session->has_userdata('logged') ? 'ingresar/fin' : $linkredirect;
 		$arrayResponse = [
 			'btn1'=> [
 				'text'=> lang('GEN_BTN_ACCEPT'),

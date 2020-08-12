@@ -287,6 +287,8 @@ class Novo_User_Model extends NOVO_Model {
 					'userId' => $response->usuario->idUsuario,
 					'userName' => $response->usuario->userName,
 					'codigoGrupo' => $response->usuario->codigoGrupo,
+					'countrySess' => $this->config->item('country'),
+					'singleSignOn' => TRUE
 				];
 				$this->session->set_userdata($userData);
 				$this->session->set_flashdata('unauthorized', lang('RESP_SESSION_DUPLICATE'));

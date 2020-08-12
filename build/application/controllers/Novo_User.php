@@ -210,7 +210,7 @@ class Novo_User extends NOVO_Controller {
 		$view = 'finish';
 		$singleSignOn = $this->singleSignOn || $this->session->flashdata('singleSignOn');
 
-		if($this->session->has_userdata('userId') || $this->session->has_userdata('logged')) {
+		if($this->render->userId || $this->render->logged) {
 			$this->load->model('Novo_User_Model', 'finishSession');
 			$this->finishSession->callWs_FinishSession_User();
 		}
