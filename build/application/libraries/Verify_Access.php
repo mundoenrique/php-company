@@ -192,9 +192,9 @@ class Verify_Access {
 				break;
 				case 'serviceOrder':
 				case 'cancelServiceOrder':
-				case 'exportFiles':
-					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBAUT') && $this->verifyAuthorization('TEBORS'));
+					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBAUT'));
 				break;
+				case 'exportFiles':
 				case 'serviceOrders':
 				case 'getServiceOrders':
 					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBORS'));

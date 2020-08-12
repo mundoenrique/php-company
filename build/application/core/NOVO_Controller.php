@@ -26,6 +26,7 @@ class NOVO_Controller extends CI_Controller {
 	protected $products;
 	protected $folder;
 	private $ValidateBrowser;
+	public $singleSigOn;
 
 	public function __construct()
 	{
@@ -54,6 +55,7 @@ class NOVO_Controller extends CI_Controller {
 		$this->render->callModal = $this->render->sessionTime < 180000 ? ceil($this->render->sessionTime * 50 / 100) : 15000;
 		$this->render->callServer = $this->render->callModal;
 		$this->ValidateBrowser = FALSE;
+		$this->singleSigOn = $this->session->has_userdata('autoLogin');
 		$this->optionsCheck();
 	}
 	/**
