@@ -94,7 +94,6 @@ class Novo_Business_Model extends NOVO_Model {
 			break;
 			default:
 				$this->response->data->text = lang('GEN_ENTERPRISE_NOT_OBTEIN');
-				$this->response->data->resp['btn1']['link'] = 'cerrar-sesion/inicio';
 		}
 
 		if($this->response->code != 0) {
@@ -143,7 +142,7 @@ class Novo_Business_Model extends NOVO_Model {
 			$response = $this->sendToService('callWs_GetBranchOffices');
 		} else {
 			$dataRequest->rc = $dataRequest->newGet;
-			$this->makeAnswer($dataRequest);
+			$this->makeAnswer($dataRequest, 'callWs_GetBranchOffices');
 		}
 
 		switch($this->isResponseRc) {
@@ -286,6 +285,7 @@ class Novo_Business_Model extends NOVO_Model {
 		if(isset($dataRequest->goToDetail)) {
 			unset($dataRequest->goToDetail, $dataRequest->productPrefix);
 			$enterpriseInf = $dataRequest;
+			$this->session->unset_userdata('productInf');
 			$this->session->set_userdata('enterpriseInf', $dataRequest);
 		}
 

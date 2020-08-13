@@ -144,7 +144,7 @@ class NOVO_Controller extends CI_Controller {
 	{
 		log_message('INFO', 'NOVO Controller: preloadView Method Initialized');
 
-		if($auth) {
+		if ($auth) {
 			$faviconLoader = getFaviconLoader($this->countryUri);
 			$this->render->favicon = $faviconLoader->favicon;
 			$this->render->ext = $faviconLoader->ext;
@@ -158,14 +158,14 @@ class NOVO_Controller extends CI_Controller {
 				"$this->folder"."$this->skin-base"
 			];
 
-			if(gettype($this->ValidateBrowser) !== 'boolean') {
+			if (gettype($this->ValidateBrowser) !== 'boolean') {
 				array_push(
 					$this->includeAssets->cssFiles,
 					"$this->countryUri/$this->skin-$this->ValidateBrowser-base"
 				);
 			}
 
-			if($this->render->newViews === '-core') {
+			if ($this->render->newViews === '-core') {
 				array_unshift(
 					$this->includeAssets->cssFiles,
 					"$this->countryUri/root-$this->skin",
@@ -233,18 +233,18 @@ class NOVO_Controller extends CI_Controller {
 		$this->render->enterpriseList = $this->session->enterpriseSelect->list;
 		$this->render->enterpriseData =  $this->session->enterpriseInf;
 
-		if(is_object($responseView)) {
+		if (is_object($responseView)) {
 			$this->render->code = $responseView->code;
 			$download = !isset($responseView->download) ? $download : $responseView->download;
 		}
 
-		if($this->session->has_userdata('productInf')) {
+		if ($this->session->has_userdata('productInf')) {
 			$this->render->prefix = $this->session->productInf->productPrefix;
 		}
 
-		if(($this->render->code == 0  && $active) || $download) {
+		if (($this->render->code == 0  && $active) || $download) {
 
-			if(count($this->render->enterpriseList) > 1 || $this->products) {
+			if (count($this->render->enterpriseList) > 1 || $this->products) {
 				array_push(
 					$this->includeAssets->jsFiles,
 					"business/widget-enterprise"
@@ -257,7 +257,7 @@ class NOVO_Controller extends CI_Controller {
 			}
 		}
 
-		if($this->render->code > 2) {
+		if ($this->render->code > 2) {
 			$this->render->title = $responseView->title;
 			$this->render->msg = $responseView->msg;
 			$this->render->icon = $responseView->icon;
@@ -276,7 +276,7 @@ class NOVO_Controller extends CI_Controller {
 
 		$valid = $this->tool_browser->validBrowser($this->skin);
 
-		if(!$valid) {
+		if (!$valid) {
 			redirect(base_url('sugerencia'),'location', 301);
 			exit();
 		}

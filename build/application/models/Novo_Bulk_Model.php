@@ -116,7 +116,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 			$response = $this->sendToService('callWs_getTypeLots');
 		} else {
 			$dataRequest->rc = $dataRequest->newGet;
-			$this->makeAnswer($dataRequest);
+			$this->makeAnswer($dataRequest, 'callWs_getTypeLots');
 		}
 
 		switch($this->isResponseRc) {

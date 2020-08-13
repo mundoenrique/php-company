@@ -597,7 +597,7 @@ class Novo_User_Model extends NOVO_Model {
 		log_message('INFO', 'NOVO User Model: KeepSession Method Initialized');
 		$response = new stdClass();
 		$response->rc =  0;
-		$this->makeAnswer($response);
+		$this->makeAnswer($response, 'callWs_GetBranchOffices');
 		$this->response->code = 0;
 
 		return $this->responseToTheView('callWs_KeepSession');
