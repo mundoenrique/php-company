@@ -208,7 +208,7 @@ class Novo_User extends NOVO_Controller {
 		log_message('INFO', 'NOVO User: finishSession Method Initialized');
 
 		$view = 'finish';
-		$singleSignOn = $this->singleSignOn || $this->session->flashdata('singleSignOn');
+		$singleSignOn = $this->singleSignOn || $this->session->flashdata('singleSignOnFlash');
 
 		if($this->render->userId || $this->render->logged) {
 			$this->load->model('Novo_User_Model', 'finishSession');
