@@ -131,7 +131,7 @@ class Novo_Settings_Model extends NOVO_Model {
 		$this->dataRequest->idOperation = 'getEmpresaXUsuario';
 
 		$this->dataRequest->accodusuario = $this->userName;
-		$response = $this->sendToService(' ListaEmpresas');
+		$response = $this->sendToService('callWS_ListaEmpresas');
 
 		switch($this->isResponseRc) {
 			case 0:
@@ -161,7 +161,7 @@ class Novo_Settings_Model extends NOVO_Model {
 			];
 		}
 
-		return $this->responseToTheView(' ListaEmpresas');
+		return $this->responseToTheView('callWS_ListaEmpresas');
 	}
 
 			/**
@@ -207,7 +207,7 @@ class Novo_Settings_Model extends NOVO_Model {
 		$this->dataRequest->actel2 = $dataRequest->tlf2;
 		$this->dataRequest->actel3 = $dataRequest->tlf3;
 
-		$this->sendToService('ChangeTelephones');
+		$this->sendToService('CallWs_ChangeTelephones');
 
 		switch($this->isResponseRc) {
 			case 0:
@@ -242,7 +242,7 @@ class Novo_Settings_Model extends NOVO_Model {
 			];
 		}
 
-		return $this->responseToTheView('ChangeTelephones');
+		return $this->responseToTheView('CallWs_ChangeTelephones');
 	}
 
 	/**
@@ -270,7 +270,7 @@ class Novo_Settings_Model extends NOVO_Model {
 		$this->dataRequest->tipoContacto = $dataRequest->tipoContacto;
 		$this->dataRequest->usuario = $dataRequest->usuario;
 
-		$this->sendToService('AddContact');
+		$this->sendToService('CallWs_AddContact');
 
 		switch($this->isResponseRc) {
 			case 0:
@@ -305,7 +305,7 @@ class Novo_Settings_Model extends NOVO_Model {
 			];
 		}
 
-		return $this->responseToTheView('AddContact');
+		return $this->responseToTheView('CallWs_AddContact');
 	}
 
 	/**

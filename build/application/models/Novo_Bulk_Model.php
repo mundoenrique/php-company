@@ -36,7 +36,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 			'userName' => $this->userName
 		];
 
-		$response = $this->sendToService('getPendingBulk');
+		$response = $this->sendToService('callWs_GetPendingBulk');
 		$pendingBulkList = [];
 
 		switch($this->isResponseRc) {
@@ -87,7 +87,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 
 		$this->response->data->pendingBulk = (object) $pendingBulkList;
 
-		return $this->responseToTheView('getPendingBulk');
+		return $this->responseToTheView('callWs_GetPendingBulk');
 	}
 	/**
 	 * @info Método para obtener los tipos de lte asociados a un programa
@@ -558,7 +558,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 			'password' => $password
 		];
 
-		$this->sendToService('SignBulkList');
+		$this->sendToService('callWs_SignBulkList');
 
 		switch ($this->isResponseRc) {
 			case 0:
@@ -576,7 +576,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 				break;
 		}
 
-		return $this->responseToTheView('SignBulkList');
+		return $this->responseToTheView('callWs_SignBulkList');
 	}
 	/**
 	 * @info Firma lista de lotes

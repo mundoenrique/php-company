@@ -36,7 +36,7 @@ class Novo_Business_Model extends NOVO_Model {
 		$this->dataRequest->tamanoPagina = $sizePage;
 		$this->dataRequest->filtroEmpresas = '';
 
-		$response = $this->sendToService('getEnterprises');
+		$response = $this->sendToService('callWs_GetEnterprises');
 		$filters = FALSE;
 
 		if(!$dataRequest) {
@@ -108,7 +108,7 @@ class Novo_Business_Model extends NOVO_Model {
 			$this->response->data->list = [];
 		}
 
-		return $this->responseToTheView('getEnterprises');
+		return $this->responseToTheView('callWs_GetEnterprises');
 	}
 	/**
 	 * @info obtiene lista de sucursales

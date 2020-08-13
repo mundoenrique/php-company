@@ -206,7 +206,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 			'password' => $password
 		];
 
-		$response = $this->sendToService('ClearServiceOrders');
+		$response = $this->sendToService('callWs_ClearServiceOrders');
 
 		switch ($this->isResponseRc) {
 			case 0:
@@ -230,7 +230,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 				break;
 		}
 
-		return $this->responseToTheView('ClearServiceOrders');
+		return $this->responseToTheView('callWs_ClearServiceOrders');
 	}
 	/**
 	 * @info Ver el detalle de un lote
@@ -251,7 +251,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 		$this->dataRequest->idOperation = 'detalleLote';
 		$this->dataRequest->acidlote = $dataRequest->bulkId;
 
-		$response = $this->sendToService('BulkDetail');
+		$response = $this->sendToService('callWs_BulkDetail');
 
 		$detailInfo = [
 			'fiscalId' => '--',
@@ -386,7 +386,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 		$detailInfo['bulkHeader'] = $bulkRecordsHeader;
 		$this->response->data->bulkInfo = (object) $detailInfo;
 
-		return $this->responseToTheView('BulkDetail');
+		return $this->responseToTheView('callWs_BulkDetail');
 	}
 	/**
 	 * @info Construye el cuerpo de la tabla del detalle de un lote de emisión
@@ -637,7 +637,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 		$this->dataRequest->acprefix = $this->session->userdata('productInf')->productPrefix;
 		$this->dataRequest->idOrden = $dataRequest->OrderNumber;
 
-		$response = $this->sendToService('exportFiles');
+		$response = $this->sendToService('callWs_ExportFiles');
 
 		switch ($this->isResponseRc) {
 			case 0:
