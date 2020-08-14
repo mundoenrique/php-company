@@ -343,6 +343,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 			'bulkNumber' => '',
 			'totaRecords' => '',
 			'amount' => '',
+			'bulkTicked' => '',
 			'success' => 'Lote cargado exitosamente',
 			'errors' => [],
 		];
@@ -372,6 +373,11 @@ class Novo_Bulk_Model extends NOVO_Model {
 				$bulkConfirmInfo = $response->lotesTO;
 				$this->session->set_flashdata('bulkConfirmInfo', $bulkConfirmInfo);
 				$this->session->set_flashdata($dataRequest->bulkView, TRUE);
+			break;
+			case -443:
+				$this->response->title = lang('BULK_CONFIRM_TITLE');
+				$this->response->msg = lang('BULK_CONFIRM_EXCEED_LIMIT');
+				$this->response->data['bnt1']['link'] = 'cargar-lotes';
 			break;
 		}
 

@@ -121,14 +121,14 @@ class NOVO_Model extends CI_Model {
 				if($this->session->has_userdata('logged') || $this->session->has_userdata('userId')) {
 					$this->session->sess_destroy();
 				}
-				break;
+			break;
 			case -437:
-				$this->response->msg = lang('GEN_FAILED_THIRD PARTY');
-				break;
+				$this->response->msg = lang('GEN_FAILED_THIRD_PARTY');
+			break;
 			default:
 				$this->response->msg = lang('RESP_MESSAGE_SYSTEM');
 				$this->response->icon = lang('GEN_ICON_DANGER');
-				break;
+			break;
 		}
 
 		$this->response->msg = $this->isResponseRc == 0 ? lang('RESP_RC_0') : $this->response->msg;
