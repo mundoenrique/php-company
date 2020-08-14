@@ -69,7 +69,7 @@ $("#userActivity-Btn").on('click', function(e){
 })
 
 function info(e){
-	$('#spinnerBlockMasterAccount').removeClass("hide");
+	$('#spinnerBlock').removeClass("hide");
   var acCodCia = $('#enterprise-report').find('option:selected').attr('code');
   var fechaIni =  $("#initialDateAct").val();
   var fechaFin = $("#finalDateAct").val();
@@ -86,7 +86,7 @@ function info(e){
 function userActivity(passData) {
   verb = "POST"; who = 'Reports'; where = 'userActivity'; data = passData;
   callNovoCore(verb, who, where, data, function(response) {
-    $('#spinnerBlockMasterAccount').addClass("hide");
+    $('#spinnerBlock').addClass("hide");
 		$('#tbody-datos-general').removeClass('hide');
 		$('#blockResultsUser').removeClass("hide");
 		$('#titleResults').removeClass("hide");

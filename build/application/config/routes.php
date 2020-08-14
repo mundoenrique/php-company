@@ -90,7 +90,7 @@ $route['(:any)/consulta-lote'] = "Novo_Inquiries/bulkDetail";
 $route['(:any)/transf-cuenta-maestra'] = "Novo_Services/transfMasterAccount";
 $route['(:any)/consulta-tarjetas'] = "Novo_Services/cardsInquiry";
 $route['(:any)/limites-transaccionales'] = "Novo_Services/transactionalLimits";
-$route['(:any)/giros-comerciales'] = "Novo_Services/twirlsCommercial";
+$route['(:any)/giros-comerciales'] = "Novo_Services/commercialTwirls";
 //DownloadFile
 $route['(:any)/descargar-archivo'] = "Novo_DownloadFiles/exportFiles";
 //Reports

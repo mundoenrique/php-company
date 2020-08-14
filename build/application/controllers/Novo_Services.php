@@ -100,17 +100,17 @@ Class Novo_Services extends Novo_Controller {
 	 * @date July 3th, 2020
 	 */
 
-	public function twirlsCommercial()
+	public function commercialTwirls()
 	{
-		log_message('INFO', 'Novo_Services: twirlsCommercial Method Initialized');
+		log_message('INFO', 'Novo_Services: commercialTwirls Method Initialized');
 
-		$view = 'twirlsCommercial';
+		$view = 'commercialTwirls';
 		array_push(
 			$this->includeAssets->jsFiles,
 			"third_party/jquery.validate",
 			"validate-core-forms",
 			"third_party/additional-methods",
-			'services/twirlsCommercial'
+			'services/commercialTwirls'
 		);
 		$this->responseAttr();
 		$this->render->titlePage = lang('GEN_MENU_SERV_COMM_MONEY_ORDERS');

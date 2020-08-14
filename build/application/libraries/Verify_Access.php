@@ -211,10 +211,16 @@ class Verify_Access {
 					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('COPELO'));
 				break;
 				case 'transactionalLimits':
-					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('LIMTRX'));
+					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('LIMTRX', 'CONLIM'));
 				break;
-				case 'twirlsCommercial':
-					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('GIRCOM'));
+				case 'updateTransactionalLimits':
+					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('LIMTRX', 'ACTLIM'));
+				break;
+				case 'commercialTwirls':
+					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('GIRCOM', 'CONGIR'));
+				break;
+				case 'updateCommercialTwirls':
+					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('GIRCOM', 'ACTGIR'));
 				break;
 				case 'getReportsList':
 					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPALL'));
