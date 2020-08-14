@@ -95,7 +95,7 @@ class NOVO_Model extends CI_Model {
 				$linkredirect = 'empresas';
 			break;
 			default:
-			$linkredirect = lang('GEN_ENTERPRISE_LIST');
+				$linkredirect = lang('GEN_ENTERPRISE_LIST');
 		}
 
 		$linkredirect = $this->session->has_userdata('productInf') ? 'detalle-producto' : $linkredirect;
