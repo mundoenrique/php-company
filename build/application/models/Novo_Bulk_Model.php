@@ -377,7 +377,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 			case -443:
 				$this->response->title = lang('BULK_CONFIRM_TITLE');
 				$this->response->msg = lang('BULK_CONFIRM_EXCEED_LIMIT');
-				$this->response->data['bnt1']['link'] = 'cargar-lotes';
+				$this->response->data->resp['bnt1']['link'] = 'cargar-lotes';
 			break;
 		}
 
