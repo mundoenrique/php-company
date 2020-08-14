@@ -47,3 +47,5 @@ $lang['CONF_MP4_VIDEO'] = ['video.mp4'];
 $lang['CONF_PDF_ICON'] = 'icon-pdf.svg';
 $lang['CONF_RAR_ICON'] = 'icon-rar.svg';
 $lang['CONF_ZIP_ICON'] = 'icon-zip.svg';
+//MODAL OTP
+$lang['MODAL_OTP'] = 'ON';

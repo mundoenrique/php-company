@@ -13,3 +13,6 @@ $lang['CONF_VALID_INACTIVE_USER'] = 'login-inactive';
 $lang['CONF_VALID_POSITION'] = 'left';
 //MODAL STYLES
 $lang['CONF_MODAL_WIDTH'] = 310;
+//MODAL OTP
+$lang['MODAL_OTP'] = 'ON';
+$lang['RESTART_LOGIN'] = 'ON';
