@@ -3894,6 +3894,17 @@ a.ui-button:active,
 	border-radius: 5px;
 }
 
+.download {
+	transform: initial;
+  -moz-transform: initial;
+  -webkit-transform: initial;
+}
+
+.download:before {
+	box-shadow: none;
+	border: none;
+}
+
 .detail-lot tbody tr:first-child td {
 	border: 0 !important;
 	background-color: var(--color-secondary) !important;

@@ -1306,6 +1306,17 @@ select::-ms-expand {
 	border: 2px solid #b5bac3;
 }
 
+.download {
+	transform: initial;
+  -moz-transform: initial;
+  -webkit-transform: initial;
+}
+
+.download:before {
+	box-shadow: none;
+	border: none;
+}
+
 .detail-lot tbody tr:first-child td {
 	background-color: #ffffff !important;
 }
