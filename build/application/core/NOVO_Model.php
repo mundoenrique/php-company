@@ -13,7 +13,7 @@ class NOVO_Model extends CI_Model {
 	public $isResponseRc;
 	public $response;
 	public $userName;
-	public $singleSignOn;
+	public $singleSession;
 
 	public function __construct()
 	{
@@ -28,7 +28,7 @@ class NOVO_Model extends CI_Model {
 		$this->token = $this->session->token ?: '';
 		$this->autoLogin = $this->session->autoLogin ?: '';
 		$this->userName = $this->session->userName;
-		$this->singleSignOn = $this->session->has_userdata('singleSignOn');
+		$this->singleSession = base64_decode($this->input->cookie($this->config->item('cookie_prefix').'singleSession'));
 	}
 	/**
 	 * @info Método para comunicación con el servicio
@@ -99,7 +99,7 @@ class NOVO_Model extends CI_Model {
 		}
 
 		$linkredirect = $this->session->has_userdata('productInf') ? 'detalle-producto' : $linkredirect;
-		$linkredirect = $this->singleSignOn && ($this->isResponseRc == -29 || $this->isResponseRc == -61) ? 'ingresar/fin' : $linkredirect;
+		$linkredirect = $this->singleSession == 'yes' && ($this->isResponseRc == -29 || $this->isResponseRc == -61) ? 'ingresar/fin' : $linkredirect;
 		$arrayResponse = [
 			'btn1'=> [
 				'text'=> lang('GEN_BTN_ACCEPT'),

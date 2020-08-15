@@ -85,7 +85,8 @@ class Verify_Access {
 	{
 		log_message('INFO', 'NOVO Verify_Access: ResponseByDefect method initialized');
 
-		$linkredirect = $this->CI->session->has_userdata('singleSignOn') ? 'ingresar/fin' : 'inicio';
+		$singleSession = base64_decode($this->CI->input->cookie($this->CI->config->item('cookie_prefix').'singleSession'));
+		$linkredirect = $singleSession == 'yes' ? 'ingresar/fin' : 'inicio';
 		$this->responseDefect = new stdClass();
 		$this->responseDefect->code = lang('RESP_DEFAULT_CODE');
 		$this->responseDefect->title = lang('GEN_SYSTEM_NAME');

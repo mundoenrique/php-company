@@ -66,6 +66,14 @@ class Novo_User extends NOVO_Controller {
 			);
 		}
 
+		$singleSession = [
+			'name' => 'singleSession',
+			'value' => base64_encode('no'),
+			'expire' => 0
+		];
+
+		$this->input->set_cookie($singleSession);
+
 		$this->render->skipProductInf = TRUE;
 		$this->render->titlePage = lang('GEN_SYSTEM_NAME');
 		$this->views = $views;
@@ -105,6 +113,14 @@ class Novo_User extends NOVO_Controller {
 			);
 			$this->render->skipmenu = TRUE;
 		}
+
+		$singleSession = [
+			'name' => 'singleSession',
+			'value' => base64_encode('yes'),
+			'expire' => 0
+		];
+
+		$this->input->set_cookie($singleSession);
 
 		$this->render->titlePage = lang('GEN_SYSTEM_NAME');
 		$this->render->skipProductInf = TRUE;
@@ -208,17 +224,17 @@ class Novo_User extends NOVO_Controller {
 		log_message('INFO', 'NOVO User: finishSession Method Initialized');
 
 		$view = 'finish';
-		$singleSignOn = $this->singleSignOn || $this->session->flashdata('singleSignOnFlash');
+		$singleSession = $this->singleSession == 'yes';
 
 		if($this->render->userId || $this->render->logged) {
 			$this->load->model('Novo_User_Model', 'finishSession');
 			$this->finishSession->callWs_FinishSession_User();
 		}
 
-		if($redirect == 'fin' || $singleSignOn) {
+		if($redirect == 'fin' || $singleSession) {
 			$pos = array_search('menu-datepicker', $this->includeAssets->jsFiles);
 			$this->render->action = base_url('inicio');
-			$this->render->showBtn = !$singleSignOn;
+			$this->render->showBtn = !$singleSession;
 			$this->render->sessionEnd = novoLang(lang('GEN_EXPIRED_SESSION'), lang('GEN_SYSTEM_NAME'));
 
 			if ($this->session->flashdata('unauthorized') != NULL) {

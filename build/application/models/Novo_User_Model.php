@@ -275,8 +275,7 @@ class Novo_User_Model extends NOVO_Model {
 					'cl_addr' => $this->encrypt_connect->encode($this->input->ip_address(), $this->country, 'REMOTE_ADDR'),
 					'countrySess' => $this->config->item('country'),
 					'countryUri' => $this->config->item('country-uri'),
-					'autoLogin' => 'true',
-					'singleSignOn' => TRUE
+					'autoLogin' => 'true'
 				];
 				$this->session->set_userdata($userData);
 				$this->response->code = 0;
@@ -287,8 +286,7 @@ class Novo_User_Model extends NOVO_Model {
 					'userId' => $response->usuario->idUsuario,
 					'userName' => $response->usuario->userName,
 					'codigoGrupo' => $response->usuario->codigoGrupo,
-					'countrySess' => $this->config->item('country'),
-					'singleSignOn' => TRUE
+					'countrySess' => $this->config->item('country')
 				];
 				$this->session->set_userdata($userData);
 				$this->session->set_flashdata('unauthorized', lang('RESP_SESSION_DUPLICATE'));
@@ -298,8 +296,6 @@ class Novo_User_Model extends NOVO_Model {
 				$this->response->data = base_url('ingresar/fin');
 			break;
 		}
-
-		$this->session->set_flashdata('singleSignOnFlash', TRUE);
 
 		return $this->responseToTheView('callWs_SingleSignon');
 	}
