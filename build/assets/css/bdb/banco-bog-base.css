@@ -3519,7 +3519,7 @@ a.ui-button:active,
 
 .bg-img {
   background-image: linear-gradient(rgba(0,0,0,.8), rgba(0,0,0,.8)),
-    url("../../images/bdb/bg-loading.jpg");
+    url("../../images/default/bg-loading.jpg");
   height: 100vh;
   background-position: center;
   background-repeat: no-repeat;
@@ -3624,13 +3624,13 @@ a.ui-button:active,
 	bottom: 20px;
 }
 .item-network.maestro {
-	background: transparent url("../../images/bdb/logo_maestro.svg") no-repeat center / cover;
+	background: transparent url("../../images/brands/logo_maestro.svg") no-repeat center / cover;
 }
 .item-network.mastercard {
-	background: transparent url("../../images/bdb/logo_mastercard.svg") no-repeat center / cover;
+	background: transparent url("../../images/brands/logo_mastercard.svg") no-repeat center / cover;
 }
 .item-network.visa {
-	background: transparent url("../../images/bdb/logo_visa.svg") no-repeat center / cover;
+	background: transparent url("../../images/brands/logo_visa.svg") no-repeat center / cover;
 }
 
 .card-image {

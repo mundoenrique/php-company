@@ -21,34 +21,18 @@ $lang['CONF_UNNA_ACCOUNT_NUMBER'] = 'OFF';
 //AUTHORIZE BULK LIST
 $lang['CONF_BULK_AUTHORIZE'] = 'OFF';
 $lang['CONF_BULK_SELECT_ALL_AUTH'] = 'OFF';
-//CONFIG OPTIONS FLAGS
-$lang['CONF_BRANCHES_BOOL'] = 'OFF';
-//CLOSING BALANCE
-$lang['CONF_LAST_UPDATE_COLUMN']= 'OFF';
+//REPORT CLOSING BALANCE
 $lang['CONF_NIT_INPUT_BOOL'] = 'OFF';
-//ENTERPRICES OPTIONS FLAGS
-$lang['CONF_TEL_BOOL'] = 'OFF';
-$lang['CONF_ADD_CONTACT_BOOL'] = 'OFF';
-//BRANCHES OPTIONS FLAGS
-$lang['CONF_ADD_FILE_BOOL'] = 'OFF';
-$lang['CONF_ADD_BRANCH_BOOL'] = 'OFF';
-//DOWNLOADS OPTIONS FLAGS
-$lang['CONF_VIDEO_BOOL'] = 'OFF';
-$lang['CONF_FILE_SERVICE_BOOL'] = 'OFF';
-$lang['CONF_APPS_BOOL'] = 'OFF';
+$lang['CONF_CLOSING_BALANCE_BOOL'] = 'OFF';
+$lang['CONF_LAST_UPDATE_COLUMN']= 'OFF';
+//SETTINGS
+$lang['CONF_SETTINGS_BRANCHES'] = 'OFF';
+$lang['CONF_SETTINGS_TELEPHONES'] = 'OFF';
+$lang['CONF_SETTINGS_CONTACT'] = 'OFF';
 //STYLE FORM
 $lang['CONF_SETT_STYLE_SKIN'] = 'col-4';
 //FILES CONF
-$lang['CONF_MANUAL_BOOL'] = 'OFF';
-$lang['CONF_PDF_FILE'] = [
-  ['entropia.pdf', 'Entropía: Revisión de concepto']
-];
-$lang['CONF_ZIP_FILE'] = [];
-$lang['CONF_RAR_FILE'] = [
+$lang['CONF_MANUAL_FILE'] = [];
+$lang['CONF_FILES_MANAGMENT'] = [
   ['lotes.rar', 'Gestión de Lotes']
 ];
-$lang['CONF_MP4_VIDEO'] = [''];
-//DOWNLOAD ICONS
-$lang['CONF_PDF_ICON'] = 'icon-pdf.svg';
-$lang['CONF_RAR_ICON'] = 'icon-rar.svg';
-$lang['CONF_ZIP_ICON'] = 'icon-zip.svg';

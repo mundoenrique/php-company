@@ -119,49 +119,6 @@ $config = [
 			'rules' => 'trim|regex_match[/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9]+\.)+[a-z]{2,6}$/ix]|required'
 		]
 	],
-	'obtainNumPosition' => [
-		[
-			'field' => 'acrif',
-			'rules' => 'trim|regex_match[/^[0-9]*$/i]|required'
-		],
-		[
-			'field' => 'numpos',
-			'rules' => 'trim|regex_match[/^[0-9]*$/i]'
-		],
-		[
-			'field' => 'nameBusine',
-			'rules' => 'trim|regex_match[/^[a-zA-Z0-9 .,]*$/i]|required'
-		],
-		[
-			'field' => 'razonSocial',
-			'rules' => 'trim|regex_match[/^[a-zA-Z0-9 .,]*$/i]|required'
-		],
-		[
-			'field' => 'contacto',
-			'rules' => 'trim|regex_match[/^[a-zA-Z0-9 ]*$/i]'
-		],
-		[
-			'field' => 'fact',
-			'rules' => 'trim|regex_match[/^[a-zA-Z0-9,.´ ]*$/i]'
-		],
-		[
-			'field' => 'ubicacion',
-			'rules' => 'trim|regex_match[/^[a-zA-Z 0-9.,´ ]*$/i]'
-		],
-		[
-			'field' => 'tel1',
-			'rules' => 'trim|regex_match[/^[0-9]*$/i]'
-		],
-		[
-			'field' => 'tel2',
-			'rules' => 'trim|regex_match[/^[0-9]*$/i]'
-		],
-		[
-			'field' => 'tel3',
-			'rules' => 'trim|regex_match[/^[0-9]*$/i]'
-		]
-	],
-
 	'closingBudgets' => [
 		[
 			'field' => 'idExtPer',

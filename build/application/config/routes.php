@@ -116,7 +116,6 @@ $route['(:any)/tarjetahabientes'] = "Novo_Reports/cardHolders";
 //settings
 $route['(:any)/configuracion'] = "Novo_Settings/options";
 $route['(:any)/empresa'] = "Novo_Settings/getEnterprise";
-$route['(:any)/obtener-posicion'] = "Novo_Settings/obtainNumPosition";
 $route['(:any)/Contact'] = "Novo_Settings/addContact";
 $route['(:any)/cambiar-email'] = "Novo_Settings/changeEmail";
 $route['(:any)/cambiar-telefonos'] = "Novo_Settings/changeTelephones";

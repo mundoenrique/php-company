@@ -46,7 +46,7 @@ class Novo_User_Model extends NOVO_Model {
 		];
 		$this->dataRequest->guardaIp = $dataRequest->saveIP !='' ? true : false;
 
-		if($this->config->item('active_recaptcha')) {
+		if(ACTIVE_RECAPTCHA) {
 			$this->isResponseRc = $this->callWs_ValidateCaptcha_User($dataRequest);
 
 			if ($this->isResponseRc === 0) {
@@ -82,6 +82,7 @@ class Novo_User_Model extends NOVO_Model {
 					'userId' => $response->usuario->idUsuario,
 					'userName' => $response->usuario->userName,
 					'fullName' => ucwords(mb_strtolower($fullName)),
+					'userType' => $response->usuario->ctipo,
 					'codigoGrupo' => $response->usuario->codigoGrupo,
 					'lastSession' => $lastSession,
 					'token' => $response->token,
