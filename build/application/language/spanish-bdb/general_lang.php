@@ -7,6 +7,7 @@ $lang['GEN_ALTERNATIVE_TEXT'] = 'Banco de Bogotá';
 $lang['GEN_FISCAL_REGISTRY'] = 'Identificación';
 $lang['GEN_PLACE_PASSWORD'] = 'token';
 $lang['POSTMY_OTP'] = 'center top+100';
+$lang['GEN_BULK_DELETE_SO'] = 'Por favor el token para anular la orden de servicio: ';
 //BUTTONS
 $lang['GEN_BTN_DISASS_AUTH'] = 'En espera de autorización';
 $lang['GEN_BTN_AUTHORIZE'] = 'Aceptar';
