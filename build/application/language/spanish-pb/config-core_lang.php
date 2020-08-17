@@ -10,7 +10,3 @@ $lang['CONF_INQUIRY_DOCTYPE'] = 'ON';
 $lang['CONF_CARDS_INQUIRY_ISSUE_STATUS'] = 'OFF';
 //SIGNIN
 $lang['CONF_SIGNIN_WIDGET_CONTACT'] = 'OFF';
-//FILES
-$lang['CONF_APPS_DOWNLOAD'] = [
-  ['download-ini', 'Archivo.ini']
-];
