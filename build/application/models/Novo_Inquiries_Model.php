@@ -188,7 +188,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 		unset($dataRequest->modalReq);
 
 		$this->dataRequest->idOperation = 'desconciliarOS';
-		$this->dataRequest->idOS = $dataRequest->OrderNumber;
+		$this->dataRequest->idOrden = $dataRequest->OrderNumber;
 		$this->dataRequest->rifEmpresa = $this->session->enterpriseInf->idFiscal;
 
 		$password = json_decode(base64_decode($dataRequest->pass));
