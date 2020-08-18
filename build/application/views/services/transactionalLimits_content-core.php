@@ -266,7 +266,7 @@
 						</div>
 					</div>
 					<div class="flex mb-5 flex-column ">
-						<span class="line-text slide-slow flex mb-2 h4 semibold primary">Créditos
+						<span class="line-text slide-slow flex mb-2 h4 semibold primary">Abonos
 							<i class="flex mr-1 pl-2 icon icon-chevron-down flex-auto" aria-hidden="true"></i>
 						</span>
 						<div class="section my-2 px-5">
@@ -275,49 +275,49 @@
 										<div class="col-10 bolck mx-auto">
 											<div class="row">
 												<div class="form-group col-12 col-lg-4">
-													<label class="pr-3" for="dailyNumberCredit">Número diario de créditos</label>
+													<label class="pr-3" for="dailyNumberCredit">Número diario de abonos</label>
 													<div class="input-group">
 														<input id="dailyNumberCredit" class="money form-control pwd-input text-right" type="text" autocomplete="off" name="limit"  disabled>
 													</div>
 													<div class="help-block"></div>
 												</div>
 												<div class="form-group col-12 col-lg-4">
-													<label for="weeklyNumberCredit">Número semanal de créditos</label>
+													<label for="weeklyNumberCredit">Número semanal de abonos</label>
 													<div class="input-group">
 														<input id="weeklyNumberCredit" class="money form-control pwd-input text-right" type="text" autocomplete="off" name="limit"  disabled>
 													</div>
 													<div class="help-block"></div>
 												</div>
 												<div class="form-group col-12 col-lg-4">
-													<label for="monthlyNumberCredit">Número mensual de créditos</label>
+													<label for="monthlyNumberCredit">Número mensual de abonos</label>
 													<div class="input-group">
 														<input id="monthlyNumberCredit" class="money form-control pwd-input text-right" type="text" autocomplete="off" name="limit"  disabled>
 													</div>
 													<div class="help-block"></div>
 												</div>
 												<div class="form-group col-12 col-lg-4">
-													<label class="pr-3" for="dailyAmountCredit">Monto diario de créditos</label>
+													<label class="pr-3" for="dailyAmountCredit">Monto diario de abonos</label>
 													<div class="input-group">
 														<input id="dailyAmountCredit" class="money form-control pwd-input text-right" type="text" autocomplete="off" name="limit"  disabled>
 													</div>
 													<div class="help-block"></div>
 												</div>
 												<div class="form-group col-12 col-lg-4">
-													<label for="weeklyAmountCredit">Monto semanal de créditos</label>
+													<label for="weeklyAmountCredit">Monto semanal de abonos</label>
 													<div clxs="input-group">
 														<input id="weeklyAmountCredit" class="money form-control pwd-input text-right" type="text" autocomplete="off" name="limit"  disabled>
 													</div>
 													<div class="help-block"></div>
 												</div>
 												<div class="form-group col-12 col-lg-4">
-													<label for="monthlyAmountCredit">Monto mensual de créditos</label>
+													<label for="monthlyAmountCredit">Monto mensual de abonos</label>
 													<div class="input-group">
 														<input id="monthlyAmountCredit" class="money form-control pwd-input text-right" type="text" autocomplete="off" name="limit"  disabled>
 													</div>
 													<div class="help-block"></div>
 												</div>
 												<div class="form-group col-12 col-lg-4">
-													<label for="CreditTransaction">Monto por transacción de créditos</label>
+													<label for="CreditTransaction">Monto por transacción de abonos</label>
 													<div class="input-group">
 														<input id="CreditTransaction" class="money form-control pwd-input text-right" type="text" autocomplete="off" name="limit"  disabled>
 													</div>
