@@ -336,7 +336,7 @@ $lang['GEN_NUMBER_RECORDS'] = 'Cantidad de registros';
 $lang['GEN_USER_LOAD'] = 'Usuario carga';
 $lang['GEN_STATUS'] = 'Estatus';
 $lang['GEN_ACCOUNT'] = 'Cuenta';
-$lang['GEN_WARNING_PRODUCTS_LIST'] = 'No fue posible obtener la lista de productos asociados';
+$lang['GEN_WARNING_PRODUCTS_LIST'] = 'No fue posible obtener la lista de productos asociados.';
 $lang['GEN_CACULATE_SERVICE_ORDERS'] = 'Calcular orden de servicio';
 $lang['GEN_RECORDS_BULK'] = 'Registros del lote';
 $lang['GEN_SHOW_BULK'] = 'Ver lote';
@@ -373,6 +373,7 @@ $lang['GEN_INVALID_OTP'] = 'No fué posible verificar el código de seguridad, i
 $lang['GEN_INVALID_DATA'] = 'Uno de los datos es incorrecto, por favor verifícalo e intenta nuevamente.';
 $lang['GEN_SO_CREATE_INCORRECT'] = 'El código de seguridad es incorrecto, verifícalo e intenta de nuevo.';
 $lang['GEN_SO_CREATE_EXPIRED'] = 'El código de seguridad expiró o fue usado.';
+$lang['GEN_ACCEPT_TERMS'] = 'Al presionar "Aceptar" declaras que has leído y aceptado los términos de uso de nuestra plataforma.';
 $lang['MIN_WIDTH_OTP'] = '480';
 $lang['POSTMY_OTP'] = 'center top+160';
 // RECOVER ACCESS

@@ -480,10 +480,13 @@ class Novo_User_Model extends NOVO_Model {
 				];
 			break;
 			case -286:
+				$map = 1;
+				$this->response->msg = lang('GEN_SO_CREATE_INCORRECT');
+			break;
 			case -287:
 			case -288:
 				$map = 1;
-				$this->response->msg = lang('GEN_INVALID_OTP');
+				$this->response->msg = lang('GEN_SO_CREATE_EXPIRED');
 			break;
 		}
 

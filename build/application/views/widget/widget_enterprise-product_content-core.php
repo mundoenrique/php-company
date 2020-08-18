@@ -14,7 +14,7 @@
 					<?php continue; ?>
 					<?php endif;?>
 					<option value="<?= $enterprise->acrif; ?>" code="<?= $enterprise->accodcia; ?>" group="<?= $enterprise->accodgrupoe; ?>">
-						<?= $enterprise->acnomcia; ?>
+						<?= $enterprise->nameEnterprise; ?>
 					</option>
 					<?php endforeach; ?>
 				</select>
