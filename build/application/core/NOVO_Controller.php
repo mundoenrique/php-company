@@ -197,7 +197,8 @@ class NOVO_Controller extends CI_Controller {
 
 		} else {
 			$linkredirect = $this->session->has_userdata('productInf') ? 'detalle-producto' : 'empresas';
-			$linkredirect = $this->singleSession == 'SignThird' && !$this->session->has_userdata('logged') ? 'ingresar/fin' : $linkredirect;
+			$linkredirect = !$this->session->has_userdata('logged') ? 'inicio' : $linkredirect;
+			$linkredirect = AUTO_LOGIN ? 'ingresar/fin' : $linkredirect;
 			redirect(base_url($linkredirect), 'location');
 		}
 
