@@ -30,7 +30,7 @@ $(function () {
 		var btnText = changeBtn.text().trim();
 		var form = $('#limitsUpdateForm');
 		var passData = getDataForm(form);
-
+		passData.cardNumber = $('#cardNumber').val();
 		validateForms(form);
 
 		if (form.valid()) {

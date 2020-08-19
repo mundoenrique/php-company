@@ -849,11 +849,11 @@ class Novo_Services_Model extends NOVO_Model {
 		};
 		$this->dataRequest->cards = [
 			[
-				'card' =>  '4189281080003016',
+				'card' =>  $dataRequest->cardNumber,
 				'personId' => '',
 				'personName' => '',
-				'parameters' => [$cards]
-		]
+				'parameters' => $cards
+			]
 		];
 		$this->dataRequest->usuario = [
 		'userName' => $this->session->userName
