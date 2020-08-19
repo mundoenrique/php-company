@@ -209,7 +209,6 @@ $(function () {
 			nameBusine: nameBusine,
 			razonSocial: razonSocial,
 			contacto: contacto,
-			fact: fact,
 			ubicacion: ubicacion,
 			fact: fact,
 			tel1: tel1,

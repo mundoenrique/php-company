@@ -2108,7 +2108,7 @@ i[class*=" icon-"]:before {
 
 .logo-banco {
 	width: 260px;
-	height: auto;
+	height: 67px;
 }
 
 /* Spinner */
@@ -3790,12 +3790,12 @@ a.ui-button:active,
   visibility: visible;
 }
 
-.nav-config .nav-config-box .nav-item-config > a > img {
-	width: 30%;
+.nav-config .nav-config-box .nav-item-config > a > i {
+	font-size: 30px;
 }
 
 .nav-config .nav-config-box .nav-item-config .bg {
-	width: 35%
+	font-size: 35px;
 }
 
 .nav-config .nav-config-box .nav-item-config h4 {
