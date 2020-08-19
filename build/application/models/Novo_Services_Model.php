@@ -52,9 +52,17 @@ class Novo_Services_Model extends NOVO_Model {
 		$cardsList = [];
 		$this->response->params['costoComisionTrans'] = '--';
 		$this->response->params['costoComisionCons'] = '--';
-		$this->response->balance = '';
+		$this->response->balance = '--';
 		$this->response->recordsTotal = 0;
 		$this->response->recordsFiltered = 0;
+		$this->response->access = [
+			'TRASAL' => FALSE,
+			'TRACAR' => FALSE,
+			'TRAABO' => FALSE,
+			'TRABLQ' => FALSE,
+			'TRAASG' => FALSE,
+			'TRADBL' => FALSE,
+		];
 
 		switch($this->isResponseRc) {
 			case 0:
@@ -87,6 +95,7 @@ class Novo_Services_Model extends NOVO_Model {
 				$this->response->recordsFiltered = (int) $response->listaTarjetas[0]->totalRegistros;
 			break;
 			case -150:
+				$this->response->code = 1;
 				$this->response->title = lang('GEN_MENU_SERV_MASTER_ACCOUNT');
 				$this->response->icon = lang('GEN_ICON_INFO');
 				$this->response->msg = 'No se encontraron resultados para tu busqueda';
@@ -187,9 +196,14 @@ class Novo_Services_Model extends NOVO_Model {
 			base64_decode($password->plot),
 			utf8_encode($password->password)
 		);
+
+		if (lang('CONF_HASH_PASS') == 'ON' || $this->session->autoLogin == 'false') {
+			$password = md5($password);
+		}
+
 		$this->dataRequest->usuario = [
 			'userName' => $this->session->userName,
-			'password' => md5($password)
+			'password' => $password
 		];
 
 		$response = $this->sendToService('callWs_ActionMasterAccount');
@@ -343,7 +357,7 @@ class Novo_Services_Model extends NOVO_Model {
 		];
 		$this->dataRequest->nrOrdenServicio = $dataRequest->orderNumber;
 		$this->dataRequest->nroLote = $dataRequest->bulkNumber;
-		$this->dataRequest->tipoDocumento = isset($dataRequest->idType) ? $dataRequest->idType : '';
+		$this->dataRequest->tipoDocumento = isset($dataRequest->docType) ? $dataRequest->docType : '';
 		$this->dataRequest->cedula = $dataRequest->idNumberP;
 		$this->dataRequest->nroTarjeta = $dataRequest->cardNumberP;
 		$this->dataRequest->opcion = 'EMI_REC';
@@ -376,9 +390,10 @@ class Novo_Services_Model extends NOVO_Model {
 						$record->issueStatus = trim($issueStatus);
 						$record->cardStatus = trim(ucfirst(mb_strtolower($cards->edoPlastico)));
 						$record->name = ucwords(mb_strtolower($cards->nombre));
-						$record->idNumber = $cards->cedula;
+						$record->idNumber = substr($cards->cedula, -6) == substr($cards->nroTarjeta, -6) ? '' : $cards->cedula;
+						$record->idNumberSend = $cards->cedula;
 						$record->email = $cards->email;
-						$record->movilNumber = $cards->numCelular;
+						$record->celPhone = $cards->numCelular;
 						$record->names = $cards->nombres;
 						$record->lastName = $cards->apellidos;
 						$options = [
@@ -465,10 +480,18 @@ class Novo_Services_Model extends NOVO_Model {
 				'edoNuevo' => lang('SERVICES_INQUIRY_'.$dataRequest->action),
 				'edoAnterior' => $list->issueStatus,
 				'numeroTarjeta' => $list->cardNumber,
-				'idExtPer' => $list->idNumber,
+				'idExtPer' => $list->idNumberSend,
 				'idExtEmp' => $this->session->enterpriseInf->idFiscal,
 				'accodcia' => $this->session->enterpriseInf->enterpriseCode,
 			];
+
+			if ($dataRequest->action == 'UPDATE_DATA') {
+				$data['firstName'] = $list->names;
+				$data['lastName'] = $list->lastName;
+				$data['email'] = $list->email;
+				$data['phone'] = $list->celPhone;
+			}
+
 			$dataList[] = $data;
 		}
 
@@ -477,16 +500,23 @@ class Novo_Services_Model extends NOVO_Model {
 			base64_decode($password->plot),
 			utf8_encode($password->password)
 		);
+
+		if (lang('CONF_HASH_PASS') == 'ON' || $this->session->autoLogin == 'false') {
+			$password = md5($password);
+		}
+
 		$this->dataRequest->idOperation = 'operacionSeguimientoLoteCeo';
 		$this->dataRequest->items = $dataList;
 		$this->dataRequest->usuario = [
 			'userName' => $this->session->userName,
-			'password' => md5($password),
+			'password' => $password,
 			'idProducto' => $this->session->productInf->productPrefix
 		];
 		$this->dataRequest->opcion = lang('SERVICES_ACTION_'.$dataRequest->action);
 
 		$response = $this->sendToService('callWs_InquiriesActions');
+		$balanceList = [];
+		$failList = [];
 
 		switch ($this->isResponseRc) {
 			case 0:
@@ -497,6 +527,27 @@ class Novo_Services_Model extends NOVO_Model {
 					'action' => 'close'
 				];
 				$this->response->success = TRUE;
+				$responseList = isset($response->bean) ? json_decode($response->bean) : FALSE;
+
+				if ($responseList && is_array($responseList)) {
+					foreach ($responseList AS $cards) {
+						$record = new stdClass();
+						$record->cardNumber = substr($cards->numeroTarjeta, -6);
+						$record->balance = isset($cards->saldo) ?  lang('GEN_CURRENCY').' '.$cards->saldo : '--';
+						$balanceList[] = $record;
+
+						if ($cards->rcNovoTrans != '0') {
+							$this->response->code = 1;
+							$failList[] = $cards->numeroTarjeta;
+							$this->response->msg = 'No fue posible realizar la acción para';
+						}
+					}
+				}
+
+				if ($dataRequest->action == 'INQUIRY_BALANCE') {
+					$this->response->code = 1;
+					$this->response->success = false;
+				}
 			break;
 			case -1:
 				$this->response->title = lang('SERVICES_INQUIRY_'.$dataRequest->action);
@@ -507,7 +558,19 @@ class Novo_Services_Model extends NOVO_Model {
 					'action' => 'close'
 				];
 			break;
+			case -450:
+				$this->response->title = lang('SERVICES_INQUIRY_'.$dataRequest->action);
+				$this->response->msg = 'Alcanzaste el límite de consultas diarias';
+				$this->response->icon = lang('GEN_ICON_INFO');
+				$this->response->data['btn1'] = [
+					'text' => lang('GEN_BTN_ACCEPT'),
+					'action' => 'close'
+				];
+			break;
 		}
+
+		$this->response->data['balanceList'] = $balanceList;
+		$this->response->data['failList'] = $failList;
 
 		return $this->responseToTheView('callWs_InquiriesActions');
 	}

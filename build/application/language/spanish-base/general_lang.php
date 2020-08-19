@@ -1,5 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+$lang['GEN_SYSTEM_NAME']= 'Conexión Empresas Online';
 //MENU
 $lang['GEN_MENU_ENTERPRISE'] = 'Empresas';
 $lang['GEN_MENU_LOTS'] = 'Lotes';
@@ -95,6 +96,8 @@ $lang['GEN_LOGIN'] = 'Login';
 $lang['GEN_VALIDATE_CAPTCHA'] = 'validateCaptcha';
 $lang['GEN_ACTIVE_RECAPTCHA'] = ACTIVE_RECAPTCHA;
 $lang['GEN_RECOVER_PASS'] = 'RecoverPass';
+$lang['GEN_RECOVER_ACCESS'] = 'RecoverAccess';
+$lang['GEN_VALIDATE_OTP'] = 'ValidateOtp';
 $lang['GEN_CHANGE_PASS'] = 'ChangePassword';
 $lang['GEN_CHANGE_EMAIL'] = 'changeEmail';
 $lang['GEN_CHANGE_TELEPHONES'] = 'changeTelephones';
@@ -132,8 +135,18 @@ $lang['GEN_FILE'] = 'Archivos de gestión Conexión Empresas Online';
 $lang['GEN_FILE_OPERATIONAL_BATCH'] = 'Archivos lotes operativos (194kb)';
 $lang['GEN_DOWNLOAD_FILE_INI'] = 'Archivo.ini';
 $lang['GEN_BTN_INI'] = 'Debes seleccionar una empresa para poder realizar la descarga';
-//links
+$lang['GEN_CONTACTS_TITLE_HELP'] = '¿Necesitas ayuda?';
+$lang['GEN_CONTACTS_TITLE'] = 'Líneas de atención a nivel nacional';
+$lang['GEN_CONTACTS_CITY'] = 'CIUDAD';
+$lang['GEN_CONTACTS_CONTACT'] = 'CONTACTO';
+$lang['GEN_CONTACTS_REST_COUNTRY'] = 'RESTO DEL PAÍS';
+$lang['GEN_CONTACTS'] = [
+	'city' => '(XX) XXX XXXX',
+];
+$lang['GEN_CONTACTS_REST_COUNTRY_NUMBER'] = 'XXX (XXXXXX)';
+//LINKS
 $lang['GEN_LINK_LOGIN'] = 'inicio';
+$lang['GEN_LINK_RECOVER_ACCESS'] = 'recuperar-clave';
 //MODAL STYLES
 $lang['GEN_ICON'] = 'ui-icon';
 $lang['GEN_ICON_SUCCESS'] = 'ui-icon-circle-check';
@@ -146,7 +159,7 @@ $lang['GEN_FOTTER_BENEFITS'] = 'Beneficios';
 $lang['GEN_FOTTER_TERMS'] = 'Condiciones';
 $lang['GEN_FOTTER_RATES'] = 'Tarifas';
 $lang['GEN_FOTTER_LOGOUT'] = 'Salir';
-$lang['GEN_FOTTER_IMAGE_L'] = 'img-banorte_white.svg';
+$lang['GEN_FOTTER_IMAGE_L'] = 'img-default_white.svg';
 $lang['GEN_FOTTER_IMAGE_R'] = 'img-pci_compliance.svg';
 $lang['GEN_FOTTER_OWNERSHIP'] = 'Powered by NovoPayment, Inc.';
 $lang['GEN_FOTTER_OWNER_URL'] = 'https://www.novopayment.com';
@@ -212,6 +225,7 @@ $lang['GEN_TABLE_NUMBER_CARDS'] = 'Cant. de tarjetas';
 $lang['GEN_TABLE_BULK_ISSUE_DATE'] = 'Fecha de emisión';
 $lang['GEN_TABLE_EMISSION_STATUS'] = 'Estado de emisión';
 $lang['GEN_TABLE_PLASTIC_STATUS'] = 'Estado del plástico';
+$lang['GEN_TABLE_MOVIL_NUMBER'] = 'Número movil';
 $lang['GEN_TABLE_NAME']='Nombre';
 $lang['GEN_TABLE_LASTNAME']='Apellido';
 $lang['GEN_TABLE_ID_PERSON']= "Cédula nro.";
@@ -261,7 +275,6 @@ $lang['GEN_PICKER_CHANGEYEAR'] = TRUE;
 $lang['GEN_PICKER_SHOWANIM'] = 'slideDown';
 $lang['GEN_PICKER_YEARSUFFIX'] = '';
 //GENERAL LANGUAGE
-$lang['GEN_SYSTEM_NAME']= 'Conexión Empresas Online';
 $lang['GEN_LOGO_HEADER'] = 'img-logo.svg';
 $lang['GEN_CURRENCY'] = '$';
 $lang['GEN_DECIMAL'] = '.';
@@ -280,6 +293,8 @@ $lang['GEN_RECOVER_PASS_TITLE'] = 'Recuperar contraseña';
 $lang['GEN_FISCAL_REGISTRY'] = 'RUC.';
 $lang['GEN_PASSWORD_CHANGE_TITLE'] = 'Cambiar contraseña';
 $lang['GEN_EMAIL_CHANGE_TITLE'] = 'Cambiar email';
+$lang['GEN_DOCUMENT_TYPE'] = 'Tipo de documento';
+$lang['GEN_DOCUMENT_ID'] = 'Documento de identidad';
 $lang['GEN_USER_TITLE'] = 'Obtener usuario';
 $lang['GEN_ALTERNATIVE_TEXT'] = 'Novopayment';
 $lang['GEN_PRODUCTS'] = 'Productos';
@@ -353,6 +368,17 @@ $lang['GEN_UNLOCK_CARD'] = 'Desbloqueo tarjeta';
 $lang['GEN_CARD_ASSIGNMENT'] = 'Asignación tarjeta';
 $lang['GEN_VALID_AMOUNT'] = 'Indica un monto válido';
 $lang['GEN_OTP'] = 'Ingresa el código de verificación enviado a tu correo';
+$lang['GEN_SEND_ACCESS'] = 'Enviamos un correo a %s, con tus datos de acceso.';
+$lang['GEN_INVALID_OTP'] = 'No fué posible verificar el código de seguridad, intenta nuevamente.';
+$lang['GEN_INVALID_DATA'] = 'Uno de los datos es incorrecto, por favor verifícalo e intenta nuevamente.';
+$lang['GEN_SO_CREATE_INCORRECT'] = 'El código de seguridad es incorrecto, verifícalo e intenta de nuevo.';
+$lang['GEN_SO_CREATE_EXPIRED'] = 'El código de seguridad expiró o fue usado.';
+// RECOVER ACCESS
+$lang['GEN_RECOVER_DOC_TYPE'] = [
+	'' => 'Selecciona',
+	'CC' => 'Cédula de ciudadania',
+	'PP' => 'Pasaporte',
+];
 //DATATABLES LANG MASTER ACCOUNT
 $lang['GEN_TABLE_USERACT_MODULE'] = 'Módulo';
 $lang['GEN_TABLE_USERACT_FUNCTION'] = 'Función';

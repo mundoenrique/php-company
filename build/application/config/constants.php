@@ -168,8 +168,8 @@ define('ACCESS_URL', isset($_SERVER['ACCESS_URL']) ?
 $typeIP = 'private';
 if (filter_var($_SERVER['REMOTE_ADDR'], FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE)) {
  $typeIP = 'public';
-} 
- 
+}
+
 $ipReal = $typeIP == 'private'? $_SERVER['REMOTE_ADDR']: '';
 define('IP_PROXI', $ipReal);
 unset($ipReal, $typeIP);

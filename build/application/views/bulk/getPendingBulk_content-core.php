@@ -73,7 +73,7 @@
 					<thead class="regular secondary bg-primary">
 						<tr>
 							<th><?= lang('GEN_TABLE_BULK_NUMBER'); ?></th>
-							<th><?= lang('GEN_TABLE_FILE_NAME'); ?></th>
+							<th><?= lang('GEN_BULT_TYPE'); ?></th>
 							<th><?= lang('GEN_TABLE_BULK_DATE'); ?></th>
 							<th><?= lang('GEN_TABLE_STATUS'); ?></th>
 							<th><?= lang('GEN_TABLE_OPTIONS'); ?></th>
@@ -92,7 +92,7 @@
 								</div>
 							</td>
 							<td class="py-0 px-1 flex justify-center items-center">
-								<?php if($bulk->status == 1 || $bulk->status == 6 && $this->verify_access->verifyAuthorization('TEBCAR', 'TEBCON')): ?>
+								<?php if(($bulk->status == 1 || $bulk->status == 6) && $this->verify_access->verifyAuthorization('TEBCAR', 'TEBCON')): ?>
 								<button class="btn mx-1 px-0 big-modal" title="<?= lang('GEN_BTN_CONFIRM'); ?>" data-toggle="tooltip">
 									<i class="icon icon-ok" aria-hidden="true"></i>
 								</button>

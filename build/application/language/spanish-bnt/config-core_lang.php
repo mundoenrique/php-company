@@ -6,6 +6,13 @@ $lang['CONF_SUPPORT_IE'] = 'ON';
 $lang['CONF_VALID_POSITION'] = 'right';
 //SIGNIN
 $lang['CONF_SIGNIN_IMG'] = 'ON';
+$lang['CONF_SIGNIN_WIDGET_CONTACT'] = 'OFF';
+//RECOVER ACCESS
+$lang['CONF_RECOV_PASS'] = 'ON';
+$lang['CONF_RECOV_ACCESS'] = 'OFF';
+//FOOTER
+$lang['CONF_FOOTER_NETWORKS'] = 'ON';
+$lang['CONF_FOOTER_LOGO'] = 'OFF';
 //REQUEST UNNAMED
 $lang['CONF_UNNA_EXPIRED_DATE'] = 'OFF';
 $lang['CONF_STARTING_LINE2_REQUIRED'] = 'OFF';
@@ -29,6 +36,8 @@ $lang['CONF_ADD_BRANCH_BOOL'] = 'OFF';
 $lang['CONF_VIDEO_BOOL'] = 'OFF';
 $lang['CONF_FILE_SERVICE_BOOL'] = 'OFF';
 $lang['CONF_APPS_BOOL'] = 'OFF';
+//STYLE FORM
+$lang['CONF_SETT_STYLE_SKIN'] = 'col-4';
 //FILES CONF
 $lang['CONF_MANUAL_BOOL'] = 'OFF';
 $lang['CONF_PDF_FILE'] = [
@@ -43,4 +52,3 @@ $lang['CONF_MP4_VIDEO'] = [''];
 $lang['CONF_PDF_ICON'] = 'icon-pdf.svg';
 $lang['CONF_RAR_ICON'] = 'icon-rar.svg';
 $lang['CONF_ZIP_ICON'] = 'icon-zip.svg';
-//UNAMED CARDS FLAGS

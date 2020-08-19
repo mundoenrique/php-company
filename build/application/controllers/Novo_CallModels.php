@@ -76,7 +76,7 @@ class Novo_CallModels extends Novo_Controller {
 		$ext =  explode('.', $_FILES['file']['name']);
 		$ext = end($ext);
 		$pattern = [
-			'/\s/', '/\(/',
+			'/\s/', '/\(/', '/\)/',
 			'/á/', '/à/', '/ä/', '/â/', '/ª/', '/Á/', '/À/', '/Â/', '/Ä/',
 			'/é/', '/è/', '/ë/', '/ê/', '/É/', '/È/', '/Ê/', '/Ë/',
 			'/í/', '/ì/', '/ï/', '/î/', '/Í/', '/Ì/', '/Ï/', '/Î/',
@@ -85,7 +85,7 @@ class Novo_CallModels extends Novo_Controller {
 			'/ñ/', '/Ñ/', '/ç/', '/Ç/'
 		];
 		$replace = [
-			'', '_',
+			'_', '_', '',
 			'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a',
 			'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e',
 			'i', 'i', 'i', 'i', 'i', 'i', 'i', 'i',
@@ -93,7 +93,7 @@ class Novo_CallModels extends Novo_Controller {
 			'u', 'u', 'u', 'u', 'u', 'u', 'u', 'u',
 			'n', 'N', 'c', 'C'
 		];
-		$filename = '_'.substr(preg_replace($pattern, $replace, $_POST['typeBulkText']), 0, 17);
+		$filename = '_'.substr(preg_replace($pattern, $replace, $_POST['typeBulkText']), 0, 19);
 		$filenameT = time().'_'.date('s').$this->countryUri.$filename;
 		$filenameT = mb_strtolower($filenameT.'.'.$ext);
 		$config['file_name'] = $filenameT;
