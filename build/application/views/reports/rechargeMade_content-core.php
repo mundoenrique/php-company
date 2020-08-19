@@ -78,7 +78,7 @@
 								</button>
 								<?php if(FALSE): ?>
 								<button class="btn px-1 big-modal" title="<?= lang('GEN_BTN_SEE_GRAPH'); ?>" data-toggle="tooltip">
-									<i class="icon novoglyphs icon-food" aria-hidden="true"></i>
+									<i class="icon icon-graph" aria-hidden="true"></i>
 								</button>
 								<?php endif; ?>
 						<a>

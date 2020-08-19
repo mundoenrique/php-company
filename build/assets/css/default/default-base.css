@@ -1105,7 +1105,7 @@ label {
 }
 
 .btn-secondary:hover {
-	background-color: var(--color-tertiary);
+	background-color: var(--color-fifth);
 }
 
 .btn-secondary:active {
@@ -2042,6 +2042,7 @@ i[class*=" icon-"]:before {
 .icon-build-config:before	 	 { content: "\e001"; }
 .icon-downl-config:before	   { content: "\e002"; }
 .icon-user-config:before	   { content: "\e003"; }
+.icon-graph:before           { content: "\e054"; }
 .icon-phone:before           { content: "\e11f"; }
 .icon-view:before            { content: "\e0b3"; }
 .icon-remove:before          { content: "\e0b5"; }
