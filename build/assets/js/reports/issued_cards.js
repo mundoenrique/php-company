@@ -4,7 +4,6 @@ $(function () {
 	$('#pre-loader').remove();
 	$('.hide-out').removeClass('hide');
 	var issuedCardsBtn = $('#issued-cards-btn');
-	var resultsIssued = $('#resultsIssued');
 	var downLoad = $('.download');
 
 	$("#monthYear").datepicker({
@@ -51,176 +50,169 @@ $(function () {
 			$('#div_tablaDetalle').fadeOut("fast");
 			$('.issuedCards-result').addClass('hide');
 			$('#pre-loade-result').removeClass('hide');
-			resultsIssued.dataTable().fnClearTable();
-			resultsIssued.dataTable().fnDestroy();
 			verb = "POST"; who = 'Reports'; where = 'IssuedCards';
 			callNovoCore(verb, who, where, data, function (response) {
-
-				$("#view-results").attr("style", "");
 				$("#div_tablaDetalle").fadeIn("slow");
 				var contenedor = $("#div_tablaDetalle");
 				contenedor.empty();
-				var tbody;
-				var thead;
-				var tr;
-				var td;
-				var th;
-				var div;
-				var tabla;
-
-				div = $(document.createElement("div")).appendTo(contenedor);
-
-				$(document).ready(function() {
-					$('#resultsIssued').DataTable({
-						"ordering": false,
-						"responsive": true,
-						"pagingType": "full_numbers",
-						"language": dataTableLang,
-						"searching": false,
-						"paging": false,
-						"info": false
-					});
-				});
+				var FALSE = false;
 
 				if (response.data.issuedCardsList.length == 0) {
-					$('.download-icons').addClass('hide')
-
-						tabla = $(document.createElement("table")).appendTo(contenedor);
-						tabla.attr("class", "cell-border h6 display responsive w-100");
-						tabla.attr("id", "resultsIssued");
-
-						thead = $(document.createElement("thead")).appendTo(tabla);
-						thead.attr("class", "bg-primary secondary regular");
-						tbody = $(document.createElement("tbody")).appendTo(tabla);
-
-						tr = $(document.createElement("tr")).appendTo(thead);
-						th = $(document.createElement("th")).appendTo(tr);
-						th.html(lang.GEN_PRODUCT);
-						th = $(document.createElement("th")).appendTo(tr);
-						th.html(lang.GEN_TABLE_EMISSION);
-						th = $(document.createElement("th")).appendTo(tr);
-						th.html(lang.GEN_TABLE_REP_TARJETA);
-						th = $(document.createElement("th")).appendTo(tr);
-						th.html(lang.GEN_TABLE_REP_CLAVE);
-						th = $(document.createElement("th")).appendTo(tr);
-						th.html(lang.GEN_TABLE_TOTAL);
-
+					$('.download-icons').addClass('hide');
+					createTable();
 				} else {
-
 					$('.download-icons').removeClass('hide');
-
-				  if(response.data.tipoConsulta == 1){
-					  $.each(response.data.issuedCardsList[0].lista, function (index, value) {
-
-						  $(document).ready(function() {
-							  $('#resultsIssued' + index).DataTable({ "bPaginate": false, "bFilter": false, "bInfo": false, "ordering": false,
-							  "columnDefs": [{ "width": "30%", "targets": 0 }] });
-						  });
-
-						  if(index > 0) {
-							  div = $(document.createElement("div")).appendTo(contenedor);
-							  div.attr("id", "top-batchs");
-						  }
-
-						  tabla = $(document.createElement("table")).appendTo(contenedor);
-						  tabla.attr("class", "cell-border h6 display responsive w-100 my-5");
-						  tabla.attr("id", "resultsIssued" + index);
-
-						  thead = $(document.createElement("thead")).appendTo(tabla);
-						  thead.attr("class", "bg-primary secondary regular");
-						  tbody = $(document.createElement("tbody")).appendTo(tabla);
-
-						  tr = $(document.createElement("tr")).appendTo(thead);
-						  th = $(document.createElement("th")).appendTo(tr);
-						  th.html(value.nomProducto);
-						  th = $(document.createElement("th")).appendTo(tr);
-						  th.html(lang.GEN_TABLE_EMISSION);
-						  th = $(document.createElement("th")).appendTo(tr);
-						  th.html(lang.GEN_TABLE_REP_TARJETA);
-						  th = $(document.createElement("th")).appendTo(tr);
-						  th.html(lang.GEN_TABLE_REP_CLAVE);
-						  th = $(document.createElement("th")).appendTo(tr);
-						  th.html(lang.GEN_TABLE_TOTAL);
-
-						  tr = $(document.createElement("tr")).appendTo(tbody);
-						  td = $(document.createElement("td")).appendTo(tr);
-						  td.html(lang.GEN_TABLE_PRINCIPAL);
-						  td = $(document.createElement("td")).appendTo(tr);
-						  td.html(value.totalEmision);
-						  td = $(document.createElement("td")).appendTo(tr);
-						  td.html(value.totalReposicionTarjeta);
-						  td = $(document.createElement("td")).appendTo(tr);
-						  td.html(value.totalReposicionClave);
-						  td = $(document.createElement("td")).appendTo(tr);
-						  td.html(value.totalProducto);
-
-						  tr = $(document.createElement("tr")).appendTo(tbody);
-						  td = $(document.createElement("td")).appendTo(tr);
-						  td.html(lang.GEN_TABLE_SUPLEMENTARIA);
-						  td = $(document.createElement("td")).appendTo(tr);
-						  td.html(value.emisionSuplementaria.totalEmision);
-						  td = $(document.createElement("td")).appendTo(tr);
-						  td.html(value.emisionSuplementaria.totalReposicionTarjeta);
-						  td = $(document.createElement("td")).appendTo(tr);
-						  td.html(value.emisionSuplementaria.totalReposicionClave);
-						  td = $(document.createElement("td")).appendTo(tr);
-						  td.html(value.emisionSuplementaria.totalProducto);
-
-						  tr = $(document.createElement("tr")).appendTo(tbody);
-						  td = $(document.createElement("td")).appendTo(tr);
-						  td.html(lang.GEN_TABLE_TOTAL);
-						  td = $(document.createElement("td")).appendTo(tr);
-						  td.html(value.totalEmision);
-						  td = $(document.createElement("td")).appendTo(tr);
-						  td.html(value.totalReposicionTarjeta);
-						  td = $(document.createElement("td")).appendTo(tr);
-						  td.html(value.totalReposicionClave);
-						  td = $(document.createElement("td")).appendTo(tr);
-						  td.html(value.totalProducto)
-					  });
-
-				  }else if(response.data.tipoConsulta == 0){
-
-						(!response.data.issuedCardsList[0].lista) ? $('.icon-file-excel').hide() : $('.icon-file-excel').show();
-
-						tabla = $(document.createElement("table")).appendTo(contenedor);
-						tabla.attr("class", "cell-border h6 display responsive w-100 my-5");
-						tabla.attr("id", "resultsIssued");
-
-						thead = $(document.createElement("thead")).appendTo(tabla);
-						thead.attr("id", "thead-datos-principales");
-						thead.attr("class", "bg-primary secondary regular");
-						tbody = $(document.createElement("tbody")).appendTo(tabla);
-
-						tr = $(document.createElement("tr")).appendTo(thead);
-						th = $(document.createElement("th")).appendTo(tr);
-						th.html(lang.GEN_PRODUCT);
-						th = $(document.createElement("th")).appendTo(tr);
-						th.html(lang.GEN_TABLE_EMISSION);
-						th = $(document.createElement("th")).appendTo(tr);
-						th.html(lang.GEN_TABLE_REP_TARJETA);
-						th = $(document.createElement("th")).appendTo(tr);
-						th.html(lang.GEN_TABLE_REP_CLAVE);
-						th = $(document.createElement("th")).appendTo(tr);
-						th.html(lang.GEN_TABLE_TOTAL);
-
+					if(response.data.tipoConsulta == 1){
 						$.each(response.data.issuedCardsList[0].lista, function (index, value) {
+							(!response.data.issuedCardsList[0].lista) ? $('.icon-file-excel').hide() : $('.icon-file-excel').show();
+							(!response.data.issuedCardsList[0].lista) ? $('.icon-graph').hide() : $('.icon-graph').show();
+							var iconG1 = $(document.createElement("div")).appendTo(contenedor);
+							iconG1.attr("class", "center mx-1");
 
-							tr = $(document.createElement("tr")).appendTo(tbody);
-							td = $(document.createElement("td")).appendTo(tr);
-							td.html(value.nomProducto);
-							td = $(document.createElement("td")).appendTo(tr);
-							td.html(value.totalEmision);
-							td = $(document.createElement("td")).appendTo(tr);
-							td.html(value.totalReposicionTarjeta);
-							td = $(document.createElement("td")).appendTo(tr);
-							td.html(value.totalReposicionClave);
-							td = $(document.createElement("td")).appendTo(tr);
-							td.html(value.totalProducto);
+							var iconG2 = $(document.createElement("div")).appendTo(iconG1);
+							iconG2.attr("class", "flex");
+
+							var iconG3 = $(document.createElement("div")).appendTo(iconG2);
+							iconG3.attr("class", "flex mr-2 pt-3 flex-auto justify-end items-center download");
+
+							var iconG4 = $(document.createElement("div")).appendTo(iconG3);
+							iconG4.attr("class", "download-icons");
+
+							if (index == 0) {
+								var buttonExcel = $(document.createElement("button")).appendTo(iconG4);
+								buttonExcel.attr("class", "btn px-1 big-modal");
+								buttonExcel.attr("title", lang.GEN_BTN_DOWN_XLS);
+								buttonExcel.attr("data-toggle", "tooltip");
+
+								var iconButton = $(document.createElement("i")).appendTo(buttonExcel);
+								iconButton.attr("class", "icon icon-file-excel");
+								iconButton.attr("aria-hidden", "true");
+							}
+
+							if (FALSE) {
+								var buttonGraph = $(document.createElement("button")).appendTo(iconG4);
+								buttonGraph.attr("class", "btn px-1 big-modal");
+								buttonGraph.attr("title", lang.GEN_BTN_SEE_GRAPH);
+								buttonGraph.attr("data-toggle", "tooltip");
+
+								var iconButton = $(document.createElement("i")).appendTo(buttonGraph);
+								iconButton.attr("class", "icon icon-graph");
+								iconButton.attr("aria-hidden", "true");
+							}
+
+							var	tabla = $(document.createElement("table")).appendTo(contenedor);
+							tabla.attr("class", "cell-border h6 display responsive w-100 my-5");
+							tabla.attr("id", 'resultsIssued'+ index);
+
+							var	thead = $(document.createElement("thead")).appendTo(tabla);
+							thead.attr("class", "bg-primary secondary regular");
+
+							var table = $('#resultsIssued'+ index).DataTable({
+								"ordering": false,
+								"responsive": true,
+								"pagingType": "full_numbers",
+								"language": dataTableLang,
+								"searching": false,
+								"paging": false,
+								"info": false,
+								columns: [
+									{ title: value.nomProducto },
+									{ title: lang.GEN_TABLE_EMISSION },
+									{ title: lang.GEN_TABLE_REP_TARJETA },
+									{ title: lang.GEN_TABLE_REP_CLAVE },
+									{ title: lang.GEN_TABLE_TOTAL }
+								]
+							});
+							table.row.add([
+								lang.GEN_TABLE_PRINCIPAL,
+								value.totalEmision,
+								value.totalReposicionTarjeta,
+								value.totalReposicionClave,
+								value.totalProducto
+							]).draw();
+							table.row.add([
+								lang.GEN_TABLE_SUPLEMENTARIA,
+								value.emisionSuplementaria.totalEmision,
+								value.emisionSuplementaria.totalReposicionTarjeta,
+								value.emisionSuplementaria.totalReposicionClave,
+								value.emisionSuplementaria.totalProducto
+							]).draw();
+							table.row.add([
+								lang.GEN_TABLE_TOTAL,
+								value.totalEmision,
+								value.totalReposicionTarjeta,
+								value.totalReposicionClave,
+								value.totalProducto
+							]).draw()
 						});
-				  }
-				}
+					}else if(response.data.tipoConsulta == 0){
+						var iconG1 = $(document.createElement("div")).appendTo(contenedor);
+							iconG1.attr("class", "center mx-1");
 
+							var iconG2 = $(document.createElement("div")).appendTo(iconG1);
+							iconG2.attr("class", "flex");
+
+							var iconG3 = $(document.createElement("div")).appendTo(iconG2);
+							iconG3.attr("class", "flex mr-2 pt-3 flex-auto justify-end items-center download");
+
+							var iconG4 = $(document.createElement("div")).appendTo(iconG3);
+							iconG4.attr("class", "download-icons");
+
+							var buttonExcel = $(document.createElement("button")).appendTo(iconG4);
+							buttonExcel.attr("class", "btn px-1 big-modal");
+							buttonExcel.attr("title", lang.GEN_BTN_DOWN_XLS);
+							buttonExcel.attr("data-toggle", "tooltip");
+
+							var iconButton = $(document.createElement("i")).appendTo(buttonExcel);
+							iconButton.attr("class", "icon icon-file-excel");
+							iconButton.attr("aria-hidden", "true");
+
+							if (FALSE) {
+								var buttonGraph = $(document.createElement("button")).appendTo(iconG4);
+								buttonGraph.attr("class", "btn px-1 big-modal");
+								buttonGraph.attr("title", lang.GEN_BTN_SEE_GRAPH);
+								buttonGraph.attr("data-toggle", "tooltip");
+
+								var iconButton = $(document.createElement("i")).appendTo(buttonGraph);
+								iconButton.attr("class", "icon icon-graph");
+								iconButton.attr("aria-hidden", "true");
+							}
+						var	tabla = $(document.createElement("table")).appendTo(contenedor);
+						tabla.attr("class", "cell-border h6 display responsive w-100 my-5");
+						tabla.attr("id", 'resultsIssued');
+
+						var	thead = $(document.createElement("thead")).appendTo(tabla);
+						thead.attr("class", "bg-primary secondary regular");
+
+						var table = $('#resultsIssued').DataTable({
+							"ordering": false,
+							"responsive": true,
+							"pagingType": "full_numbers",
+							"language": dataTableLang,
+							"searching": false,
+							"paging": false,
+							"info": false,
+							columns: [
+								{ title: lang.GEN_PRODUCT },
+								{ title: lang.GEN_TABLE_EMISSION },
+								{ title: lang.GEN_TABLE_REP_TARJETA },
+								{ title: lang.GEN_TABLE_REP_CLAVE },
+								{ title: lang.GEN_TABLE_TOTAL }
+							]
+						});
+						(!response.data.issuedCardsList[0].lista) ? $('.icon-file-excel').hide() : $('.icon-file-excel').show();
+						(!response.data.issuedCardsList[0].lista) ? $('.icon-graph').hide() : $('.icon-graph').show();
+						$.each(response.data.issuedCardsList[0].lista, function (index, value) {
+							table.row.add([
+									value.nomProducto,
+									value.totalEmision,
+									value.totalReposicionTarjeta,
+									value.totalReposicionClave,
+									value.totalProducto
+							]).draw();
+						});
+					}
+				}
 				form = $('#download-issuedcards');
 				form.html('')
 					 $.each(data, function (index, value) {
@@ -233,7 +225,6 @@ $(function () {
           issuedCardsBtn.html(btnText);
           $('#pre-loade-result').addClass('hide')
         	$('.issuedCards-result').removeClass('hide');
-
 			});
 		}
 	});
@@ -264,3 +255,30 @@ $(function () {
 		}, lang.GEN_TIME_DOWNLOAD_FILE);
 	});
 });
+
+function createTable() {
+	var contenedor = $("#div_tablaDetalle");
+	var tabla = $(document.createElement("table")).appendTo(contenedor);
+	tabla.attr("class", "cell-border h6 display responsive w-100 my-5");
+	tabla.attr("id", "resultsIssued");
+
+	var thead = $(document.createElement("thead")).appendTo(tabla);
+	thead.attr("class", "bg-primary secondary regular");
+
+	var table = $("#resultsIssued").DataTable({
+		ordering: false,
+		responsive: true,
+		pagingType: "full_numbers",
+		language: dataTableLang,
+		searching: false,
+		paging: false,
+		info: false,
+		columns: [
+			{ title: lang.GEN_PRODUCT },
+			{ title: lang.GEN_TABLE_EMISSION },
+			{ title: lang.GEN_TABLE_REP_TARJETA },
+			{ title: lang.GEN_TABLE_REP_CLAVE },
+			{ title: lang.GEN_TABLE_TOTAL },
+		],
+	});
+}
