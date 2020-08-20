@@ -399,6 +399,7 @@ $lang['GEN_RESP_CODE_OTP_INVALID'] = 'No fue posible validar el código de segur
 $lang['GEN_RESP_CODE_INVALID'] = 'El código de seguridad recibido es inválido, por favor vuelve a intentarlo.';
 $lang['GEN_CODE_OTP_REQUIRED'] = 'Este campo es obligatorio.';
 $lang['GEN_CODE_OTP_INVALID_FORMAT'] = 'El formato de código es inválido.';
+$lang['GEN_WITHOUT_AUTHORIZATION'] = 'No tienes autorización para ejecutar esta acción.';
 $lang['PASSWORD_CHANGE']= "Cambio de contraseña";
 $lang['PASSWORD_CURRENT'] = 'Contraseña actual';
 $lang['PASSWORD_NEW'] = 'Contraseña nueva';

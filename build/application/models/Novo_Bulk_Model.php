@@ -465,6 +465,12 @@ class Novo_Bulk_Model extends NOVO_Model {
 				$this->response->msg = lang('BULK_CONFIRM_FAIL_DULPICATE');
 				$this->response->data['btn1']['link'] = lang('GEN_LINK_BULK_LOAD');
 			break;
+			case -259:
+				$this->response->code = 0;
+				$this->response->title = lang('BULK_CONFIRM_TITLE');
+				$this->response->msg = lang('GEN_WITHOUT_AUTHORIZATION');
+				$this->response->data['btn1']['link'] = lang('GEN_LINK_BULK_LOAD');
+			break;
 			case -436:
 				$this->response->code = 0;
 				$this->response->title = lang('BULK_CONFIRM_TITLE');
@@ -472,6 +478,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 				$this->response->data['btn1']['link'] = lang('GEN_LINK_BULK_LOAD');
 			break;
 			case -437:
+				$this->response->code = 0;
 				$this->response->title = lang('BULK_CONFIRM_TITLE');
 				$this->response->msg = novoLang(lang('BULK_CONFIRM_FAIL_COST'), $response->msg);
 				$this->response->data->resp['bnt1']['link'] = lang('GEN_LINK_BULK_LOAD');
