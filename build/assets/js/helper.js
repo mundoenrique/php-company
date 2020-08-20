@@ -4,7 +4,7 @@ var currenTime;
 var screenSize;
 var verb, who, where, dataResponse, ceo_cook, btnText, form, cypherPass;
 var loader = $('#loader').html();
-var validatePass = /^[\w!@\*\-\?¡¿+\/.,#]+$/;
+var validatePass = /^[\w!@\*\-\?¡¿+\/.,#ñÑ]+$/;
 var searchEnterprise = $('#sb-search');
 var inputPass = $('#password');
 var dataTableLang;

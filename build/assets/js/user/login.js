@@ -135,7 +135,7 @@ $(function () {
 				$('#accept').attr('id', 'send-otp-btn');
 				btn = response.data.btn1;
 
-				loginIpMsg ='<form id="formVerificationOTP" name="formVerificationOTP" class="mr-2" method="post">';
+				loginIpMsg ='<form id="formVerificationOTP" name="formVerificationOTP" class="mr-2" method="post" onsubmit="return false;">';
 				loginIpMsg+='<p class="pt-0 p-0">'+response.msg+'</p>';
 				loginIpMsg+='<div class="row">';
 				loginIpMsg+=	'<div class="form-group col-6">';

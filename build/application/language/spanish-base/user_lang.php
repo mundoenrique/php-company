@@ -61,3 +61,5 @@ $lang['PASSWORD_INFO_3'] = 'Al menos una <strong>letra mayúscula</strong>';
 $lang['PASSWORD_INFO_4'] = 'De 1 a 3 <strong>números</strong>';
 $lang['PASSWORD_INFO_5'] = 'Al menos un <strong>caracter especial</strong> (ej: ! @ * - ? ¡ ¿ + / . , _ #)';
 $lang['PASSWORD_INFO_6'] = 'No debe tener más de 2 <strong>caracteres</strong> iguales consecutivos';
+//SESSION EXPIRES
+$lang['SESSION_EXPIRE_TIME'] = 'El tiempo permitido para realizar la operación expiró, intenta nuevamente.';
