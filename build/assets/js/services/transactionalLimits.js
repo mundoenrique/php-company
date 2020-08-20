@@ -10,7 +10,6 @@ $(function () {
 		$(".help-block").text("");
 	});
 
-	$('.money').mask('000.000.000.000.000,00', {reverse: true});
 
 	$('#card-holder-btn').on('click', function (e) {
 		e.preventDefault();
