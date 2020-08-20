@@ -43,7 +43,7 @@ function sessionExpire() {
 function finishSession() {
 	var oldID = $('#accept').attr('id');
 
-	if ($('#system-info').parents('.ui-dialog:visible').length) {
+	if ($('#system-info').parents('.ui-dialog').length) {
 		$('#system-info').dialog('close');
 	}
 

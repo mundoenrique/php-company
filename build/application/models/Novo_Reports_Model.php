@@ -33,7 +33,7 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->dataRequest->accodcia = $this->session->enterpriseInf->enterpriseCode;
 		$this->dataRequest->nombre = $this->session->enterpriseInf->enterpriseName;
 
-		$response = $this->sendToService('GetReportsList');
+		$response = $this->sendToService('callWs_GetReportsList');
 		$headerCardsRep = [];
 
 		switch($this->isResponseRc) {
@@ -108,7 +108,7 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->response->data->IdTypeList = (object) $IdTypeList;
 		$this->response->data->mindateGmfReport = $mindateGmfReport;
 		$this->response->data->headerCardsRep = $headerCardsRep;
-		return $this->responseToTheView('GetReportsList');
+		return $this->responseToTheView('callWs_GetReportsList');
 	}
 	/**
 	 * @info Método para obtener un reporte selecionado por el usuario
@@ -759,11 +759,11 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->dataAccessLog->function = 'Saldos amanecidos';
 		$this->dataAccessLog->operation = 'Obtener excel de tabla';
 		$this->dataRequest->idOperation = 'generaArchivoXls';
-		$this->dataRequest->producto =  $dataRequest->producto;
-		$this->dataRequest->idExtEmp =  $dataRequest->cedula;
-		$this->dataRequest->tamanoPagina = $dataRequest->tamPg;
-		$this->dataRequest->paginar = $dataRequest->paginar;
-		$this->dataRequest->paginaActual = $dataRequest->paginaActual;
+		$this->dataRequest->producto =  $dataRequest->product;
+		$this->dataRequest->idExtEmp =  $dataRequest->identificationCard;
+		$this->dataRequest->tamanoPagina = $dataRequest->pageLenght;
+		$this->dataRequest->paginar = $dataRequest->paged;
+		$this->dataRequest->paginaActual = $dataRequest->actualPage;
 		$this->dataRequest->descProd =  $dataRequest->descProd;
 
 

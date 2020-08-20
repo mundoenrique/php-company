@@ -341,5 +341,5 @@ function downLoadfiles (data) {
 		$('#download-file').attr('href', lang.GEN_NO_LINK)
 		$('#download-file').attr('download', '')
 	}
-	$('.cover-spin').hide()
+	$('.cover-spin').hide();
 }

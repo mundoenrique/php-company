@@ -11,7 +11,7 @@
 					<?php if($countryConf != 'Ec-bp'): ?>
 					<span aria-hidden="true" class="icon" data-icon="&#xe03f;"></span>
 					<?php endif; ?>
-					<?= lang('PASSWORD_CHANGE'); ?>
+					<?= lang('GEN_CHANGE_PASS'); ?>
 				</h2>
 				<div class="widget-content">
 					<form id="form-change-pass" name="form-change-pass" accept-charset="utf-8">
@@ -30,7 +30,7 @@
 								<input type="password" id="confirm-pass" name="confirm-pass" class="input-middle" required>
 							</div>
 						</fieldset>
-						<button id="btn-change-pass" name="btn-change-pass" class="btn-middle btn-sidebar">Aceptar</button>
+						<button id="btn-change-pass" name="btn-change-pass" class="btn-middle btn-sidebar"><?= lang('GEN_BTN_ACCEPT') ?></button>
 					</form>
 				</div>
 			</div>

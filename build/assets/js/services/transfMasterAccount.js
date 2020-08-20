@@ -151,20 +151,20 @@ $(function () {
 
 					if (access.TRASAL && data.status == '') {
 						options += '<button class="btn mx-1 px-0" title="' + lang.GEN_CHECK_BALANCE + '" data-toggle="tooltip" amount="0">';
-						options += '<i class="icon novoglyphs icon-balance" aria-hidden="true"></i>';
+						options += '<i class="icon icon-balance" aria-hidden="true"></i>';
 						options += '</button>';
 					}
 
 					if (access.TRACAR && data.status == '') {
 						options += '<button class="btn mx-1 px-0" title="' + lang.GEN_CREDIT_TO_CARD + '" data-toggle="tooltip" amount="1">';
-						options += '<i class="icon novoglyphs icon-credit-card" aria-hidden="true"></i>';
+						options += '<i class="icon icon-credit-card" aria-hidden="true"></i>';
 						options += '</button>';
 
 					}
 
 					if (access.TRAABO && data.status == '') {
 						options += '<button class="btn mx-1 px-0" title="' + lang.GEN_DEBIT_TO_CARD + '" data-toggle="tooltip" amount="1">';
-						options += '<i class="icon novoglyphs icon-card-fee" aria-hidden="true"></i>';
+						options += '<i class="icon icon-card-fee" aria-hidden="true"></i>';
 						options += '</button>';
 					}
 
@@ -182,7 +182,7 @@ $(function () {
 
 					if (access.TRAASG) {
 						options += '<button class="btn mx-1 px-0" title="' + lang.GEN_CARD_ASSIGNMENT + '" data-toggle="tooltip" amount="0">';
-						options += '<i class="icon icon-arrow-left" aria-hidden="true"></i>';
+						options += '<i class="icon icon-card-allocation" aria-hidden="true"></i>';
 						options += '</button>';
 					}
 

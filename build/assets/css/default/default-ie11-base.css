@@ -806,11 +806,11 @@ label {
 /* Icons, Logos
 ========================================================================== */
 
-span[class^="icon-"].novoglyphs,
-span[class*=" icon-"].novoglyphs,
-i[class^="icon-"].novoglyphs,
-i[class*=" icon-"].novoglyphs {
-	font-family: 'novoglyphs'
+span[class^="icon-"],
+span[class*=" icon-"],
+i[class^="icon-"],
+i[class*=" icon-"] {
+	font-family: "novoglyphs";
 }
 
 .icon-chevron-down:hover {
@@ -1346,12 +1346,9 @@ select::-ms-expand {
 	margin-top: -80px;
 }
 
-.nav-config .nav-config-box .nav-item-config > a > img {
-	width: 35px;
-}
-
-.nav-config .nav-config-box .nav-item-config .bg {
-	width: 35px;
+.nav-config .nav-config-box .nav-item-config:hover .box:not(h4),
+.nav-config .nav-config-box .nav-item-config.active .box {
+	transform: translate(5px, -2px);
 }
 
 .nav-config .nav-config-box .nav-item-config h4 {
@@ -1367,6 +1364,17 @@ select::-ms-expand {
 	background-color: #E6E7E8;
 	box-shadow: 5px 5px 20px #BCBEC0;
 	border: 2px solid #BCBEC0;
+}
+
+.download {
+	transform: initial;
+  -moz-transform: initial;
+  -webkit-transform: initial;
+}
+
+.download:before {
+	box-shadow: none;
+	border: none;
 }
 
 .detail-lot tbody tr:first-child td {

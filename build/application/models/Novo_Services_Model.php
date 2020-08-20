@@ -197,7 +197,7 @@ class Novo_Services_Model extends NOVO_Model {
 			utf8_encode($password->password)
 		);
 
-		if (lang('CONF_HASH_PASS') == 'ON' || $this->session->autoLogin == 'false') {
+		if (lang('CONF_HASH_PASS') == 'ON' || $this->singleSession == 'signIn') {
 			$password = md5($password);
 		}
 
@@ -501,7 +501,7 @@ class Novo_Services_Model extends NOVO_Model {
 			utf8_encode($password->password)
 		);
 
-		if (lang('CONF_HASH_PASS') == 'ON' || $this->session->autoLogin == 'false') {
+		if (lang('CONF_HASH_PASS') == 'ON' || $this->singleSession == 'signIn') {
 			$password = md5($password);
 		}
 
@@ -573,5 +573,317 @@ class Novo_Services_Model extends NOVO_Model {
 		$this->response->data['failList'] = $failList;
 
 		return $this->responseToTheView('callWs_InquiriesActions');
+	}
+
+		/**
+	 * @info Método para consulta tarjetas en giros comerciales
+	 * @author Diego Acosta García
+	 * @date July 15th, 2020
+	 */
+
+	public function callWs_commercialTwirls_Services($dataRequest)
+	{
+		log_message('INFO', 'NOVO Services Model: commercialTwirls Method Initialized');
+
+		$this->className = 'com.novo.objects.MO.GiroComercialMO';
+
+		$this->dataAccessLog->modulo = 'servicios';
+		$this->dataAccessLog->function = 'custom_mcc';
+		$this->dataAccessLog->operation = 'customMcc';
+		$this->dataRequest->opcion = 'find_mcc';
+		$this->dataRequest->companyId = $this->session->enterpriseInf->idFiscal;
+		$this->dataRequest->product = $this->session->productInf->productPrefix;
+		$this->dataRequest->cards = [
+			['numberCard' =>  $dataRequest->cardNumber,
+			'rc' => 0]
+		];
+		$this->dataRequest->usuario = [
+		'userName' => $this->session->userName,
+		'envioCorreoLogin'=> false,
+		'guardaIp' => false,
+		'rc' => 0
+	];
+
+		$this->dataRequest->idOperation = 'customMcc';
+
+		$response = $this->sendToService('callWs_commercialTwirls');
+
+		switch($this->isResponseRc) {
+			case 0:
+				$this->response->code = 0;
+				$responseBean = json_decode($response->bean)->cards[0];
+				$dataTwirls = new stdClass();
+				$shops = new stdClass();
+				$dataTwirls->updateDate =  $responseBean->datetimeLastUpdate;
+				$dataTwirls->cardNumberP =  maskString($responseBean->numberCard, 4, 6);
+				$dataTwirls->customerName =  $responseBean->personName;
+				$dataTwirls->documentId =  $responseBean->personId;
+				$shops = (array)$responseBean->mccItems;
+
+				foreach ($shops as $key => $value) {
+					 $shops[lang('SERVICES_NAMES_PROPERTIES')[$key]] = $value;
+					 unset($shops[$key]);
+				 };
+
+				$this->response->data['dataTwirls'] = (array)$dataTwirls;
+				$this->response->data['shops'] = (array)$shops;
+			break;
+			case -438:
+				$shops = new stdClass();
+				$this->response->data['shops']= json_decode($response->bean)->cards[0];
+				$this->response->title = lang('GEN_COMMERCIAL_TWIRLS_TITTLE');
+				$this->response->icon =  lang('GEN_ICON_WARNING');
+        $this->response->data['btn1']['action'] = 'close';
+				switch (json_decode($response->bean)->cards[0]->rc) {
+					case -266:
+						$this->response->msg = 	novoLang(lang('SERVICES_TWIRLS_TEMPORARY_BLOCKED_CARD'), maskString( $dataRequest->cardNumber, 4, 6));
+						break;
+					case -307:
+						$this->response->msg = 	novoLang(lang('SERVICES_TWIRLS_PERMANENT_BLOCKED_CARD'), maskString( $dataRequest->cardNumber, 4, 6));
+						break;
+					case -439:
+						$this->response->msg = 	novoLang(lang('SERVICES_TWIRLS_NO_FOUND_REGISTRY'), maskString( $dataRequest->cardNumber, 4, 6));
+						break;
+					case -440:
+					case -441:
+						$this->response->msg = 	novoLang(lang('SERVICES_TWIRLS_NO_AVAILABLE_CARD'), maskString( $dataRequest->cardNumber, 4, 6));
+						break;
+					case -197:
+						$this->response->msg = 	novoLang(lang('SERVICES_TWIRLS_EXPIRED_CARD'), maskString( $dataRequest->cardNumber, 4, 6));
+						break;
+				}
+      break;
+			default:
+				$this->response->icon =  lang('GEN_ICON_WARNING');
+		}
+
+		return $this->responseToTheView('callWs_commercialTwirls');
+	}
+
+		/**
+	 * @info Método actualización de tarjetas en giros comerciales
+	 * @author Diego Acosta García
+	 * @date July 16th, 2020
+	 */
+
+	public function callWs_updateCommercialTwirls_Services($dataRequest)
+	{
+		log_message('INFO', 'NOVO Services Model: updateCommercialTwirls Method Initialized');
+
+		$this->className = 'com.novo.objects.MO.GiroComercialMO';
+
+		$this->dataAccessLog->modulo = 'servicios';
+		$this->dataAccessLog->function = 'custom_mcc';
+		$this->dataAccessLog->operation = 'customMcc';
+		$this->dataRequest->opcion = 'act_mcc';
+		$this->dataRequest->companyId = $this->session->enterpriseInf->idFiscal;
+		$this->dataRequest->product = $this->session->productInf->productPrefix;
+		foreach ((object)lang('SERVICES_NAMES_PROPERTIES') as $key => $value) {
+    	$val[$key] = $dataRequest->$value;
+		}
+		$this->dataRequest->cards = [
+			['numberCard' => $dataRequest->cardNumber,
+			'mccItems' => $val,
+			'rc' => 0]
+		];
+		$password = json_decode(base64_decode($dataRequest->passwordAuth));
+		$password = $this->cryptography->decrypt(
+			base64_decode($password->plot),
+			utf8_encode($password->password)
+		);
+
+		if (lang('CONF_HASH_PASS') == 'ON' || $this->singleSession == 'signIn') {
+			$password = md5($password);
+		}
+
+		$this->dataRequest->usuario = [
+		'userName' => $this->session->userName,
+		'password' => $password,
+		'envioCorreoLogin'=> false,
+		'guardaIp' => false,
+		'isDriver' => 0,
+		'rc' => 0
+		];
+
+		$this->dataRequest->idOperation = 'customMcc';
+
+		$response = $this->sendToService('callWs_updateCommercialTwirls');
+
+		switch($this->isResponseRc) {
+			case 0:
+				$this->response->title = lang('GEN_COMMERCIAL_TWIRLS_TITTLE');
+				$this->response->icon =  lang('GEN_ICON_SUCCESS');
+        $this->response->msg = 	lang('RESP_SUCCESSFULL_UPDATE_TWIRLS');
+        $this->response->data['btn1']['action'] = 'close';
+			break;
+			case -1:
+				$this->response->title = lang('GEN_COMMERCIAL_TWIRLS_TITTLE');
+				$this->response->icon =  lang('GEN_ICON_WARNING');
+				$this->response->msg = lang('RESP_PASSWORD_NO_VALID');
+				$this->response->data['btn1']['action'] = 'close';
+			break;
+			case -146:
+				$this->response->title = lang('GEN_COMMERCIAL_TWIRLS_TITTLE');
+				$this->response->icon =  lang('GEN_ICON_WARNING');
+				$this->response->msg = lang('RESP_NO_UPDATE_REGISTRY');
+				$this->response->data['btn1']['action'] = 'close';
+			break;
+			case -65:
+				$this->response->code = 2;
+				$this->response->title = lang('GEN_COMMERCIAL_TWIRLS_TITTLE');
+				$this->response->msg= lang('SERVICES_TWIRLS_NO_UPDATE');
+
+				foreach ((array)json_decode($response->bean)->cards[0]->mccItems as $key => $value) {
+					$mcc[lang('SERVICES_NAME_PROPERTIES_VIEW')[$key]] = $value;
+					unset($mcc[$key]);
+				};
+
+				$this->response->data= $mcc;
+			break;
+			default:
+				$this->response->icon =  lang('GEN_ICON_WARNING');
+		}
+
+		return $this->responseToTheView('callWs_updateCommercialTwirls');
+	}
+		/**
+	 * @info Método para obtener formulario limites transaccionales
+	 * @author Diego Acosta García
+	 * @date July 21th, 2020
+	 */
+
+	public function callWs_transactionalLimits_Services($dataRequest)
+	{
+		log_message('INFO', 'NOVO Services Model: transactionalLimits Method Initialized');
+
+		$this->className = 'com.novo.objects.TO.LimitesTO';
+
+		$this->dataAccessLog->modulo = 'Servicios';
+		$this->dataAccessLog->function = 'Limites';
+		$this->dataAccessLog->operation = 'Consultar Limites de tarjeta';
+		$this->dataRequest->opcion = 'consultar';
+		$this->dataRequest->idEmpresa = $this->session->enterpriseInf->idFiscal;
+		$this->dataRequest->prefix = $this->session->productInf->productPrefix;
+		$this->dataRequest->cards = [
+			['card' =>  $dataRequest->cardNumber,
+			'personId' => '',
+			'personName' => '',
+			'lastUpdate' => ''
+			]
+		];
+		$this->dataRequest->usuario = [
+		'userName' => $this->session->userName
+	];
+
+		$this->dataRequest->idOperation = 'consultarLimites';
+
+		$response = $this->sendToService('callWs_transactionalLimits');
+
+		switch($this->isResponseRc) {
+			case 0:
+				$this->response->code = 0;
+				$responseBean = json_decode($response->bean)->cards[0];
+				$dataLimits = new stdClass();
+				$limits = new stdClass();
+				$dataLimits->updateDate =  $responseBean->lastUpdate;
+				$dataLimits->cardNumberP =  maskString($responseBean->card, 4, 6);
+				$dataLimits->customerName =  $responseBean->personName;
+				$dataLimits->documentId =  $responseBean->personId;
+				$limits = (array)$responseBean->parameters;
+
+				foreach ($limits as $key => $value) {
+					 $limits[lang('SERVICES_NAMES_PROPERTIES_LIMITS')[$key]] = $value;
+					 unset($limits[$key]);
+				 };
+
+				$this->response->data['dataLimits'] = (array)$dataLimits;
+				$this->response->data['limits'] = (array)$limits;
+
+			break;
+			case -447:
+				$this->response->title = lang('GEN_TRANSACTIONAL_LIMITS_TITTLE');
+				$this->response->icon =  lang('GEN_ICON_WARNING');
+				$this->response->msg = lang('SERVICES_LIMITS_NO_REGISTRY');
+				$this->response->data['btn1']['action'] = 'close';
+			break;
+			case -448:
+				$this->response->title = lang('GEN_TRANSACTIONAL_LIMITS_TITTLE');
+				$this->response->icon =  lang('GEN_ICON_WARNING');
+				$this->response->msg = novoLang(lang('SERVICES_LIMITS_NO_CARDHOLDER'), maskString( $dataRequest->cardNumber, 5, 6));
+				$this->response->data['btn1']['action'] = 'close';
+			break;
+			default:
+				$this->response->title = lang('GEN_TRANSACTIONAL_LIMITS_TITTLE');
+				$this->response->icon =  lang('GEN_ICON_WARNING');
+				$this->response->msg = novoLang(lang('RESP_NO_CARD_FOUND'), maskString( $dataRequest->cardNumber, 5, 6));
+				$this->response->data['btn1']['action'] = 'close';
+		}
+
+		return $this->responseToTheView('callWs_transactionalLimits');
+	}
+		/**
+	 * @info Método para la actualizacion de limites transaccionales
+	 * @author Diego Acosta García
+	 * @date July 21th, 2020
+	 */
+
+	public function callWs_updateTransactionalLimits_Services($dataRequest)
+	{
+		log_message('INFO', 'NOVO Services Model: updateTransactionalLimits Method Initialized');
+
+		$this->className = 'com.novo.objects.TO.LimitesTO';
+
+		$this->dataAccessLog->modulo = 'Servicios';
+		$this->dataAccessLog->function = 'Limites';
+		$this->dataAccessLog->operation = 'Actualizar Limites de tarjeta';
+		$this->dataRequest->opcion = 'actualizar';
+		$this->dataRequest->idEmpresa = $this->session->enterpriseInf->idFiscal;
+		$this->dataRequest->prefix = $this->session->productInf->productPrefix;
+		foreach ((array)lang('SERVICES_NAMES_PROPERTIES_LIMITS') as $key => $val) {
+			$cards[$key] = $dataRequest->$val;
+		};
+		foreach ($cards as &$valor) {
+			if ($valor == '') {
+				$valor = '0';
+			}
+		};
+		$this->dataRequest->cards = [
+			[
+				'card' =>  $dataRequest->cardNumber,
+				'personId' => '',
+				'personName' => '',
+				'parameters' => $cards
+			]
+		];
+		$this->dataRequest->usuario = [
+		'userName' => $this->session->userName
+	];
+
+		$this->dataRequest->idOperation = 'actualizarLimites';
+
+		$response = $this->sendToService('callWs_updateTransactionalLimits');
+
+		switch($this->isResponseRc) {
+			case 0:
+				$this->response->title = lang('GEN_TRANSACTIONAL_LIMITS_TITTLE');
+				$this->response->icon =  lang('GEN_ICON_SUCCESS');
+        $this->response->msg = 	lang('RESP_SUCCESSFULL_UPDATE_LIMITS');
+        $this->response->data['btn1']['action'] = 'close';
+				break;
+			case -449:
+			case -450:
+				$this->response->title = lang('GEN_TRANSACTIONAL_LIMITS_TITTLE');
+				$this->response->icon =  lang('GEN_ICON_WARNING');
+				$this->response->msg = lang('SERVICES_LIMITS_NO_UPDATE');
+				$this->response->data['btn1']['action'] = 'close';
+				break;
+
+			default:
+				$this->response->icon =  lang('GEN_ICON_WARNING');
+		}
+
+
+
+		return $this->responseToTheView('callWs_updateTransactionalLimits');
 	}
 }

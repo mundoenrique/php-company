@@ -50,7 +50,7 @@ class Novo_User_Model extends NOVO_Model {
 			$this->isResponseRc = 998;
 		} else {
 
-			if($this->config->item('active_recaptcha')) {
+			if(ACTIVE_RECAPTCHA) {
 				$this->isResponseRc = $this->callWs_ValidateCaptcha_User($dataRequest);
 
 				if ($this->isResponseRc === 0) {
@@ -87,6 +87,7 @@ class Novo_User_Model extends NOVO_Model {
 					'userId' => $response->usuario->idUsuario,
 					'userName' => $response->usuario->userName,
 					'fullName' => ucwords(mb_strtolower($fullName)),
+					'userType' => $response->usuario->ctipo,
 					'codigoGrupo' => $response->usuario->codigoGrupo,
 					'lastSession' => $lastSession,
 					'token' => $response->token,
@@ -240,7 +241,7 @@ class Novo_User_Model extends NOVO_Model {
 				break;
 		}
 
-		return $this->responseToTheView(lang('GEN_LOGIN'));
+		return $this->responseToTheView('callWs_Login');
 	}
 	/**
 	 * @info Método para el inicio de sesión único
@@ -291,13 +292,20 @@ class Novo_User_Model extends NOVO_Model {
 					'cl_addr' => $this->encrypt_connect->encode($this->input->ip_address(), $this->country, 'REMOTE_ADDR'),
 					'countrySess' => $this->config->item('country'),
 					'countryUri' => $this->config->item('country-uri'),
-					'autoLogin' => 'true',
+					'autoLogin' => 'true'
 				];
 				$this->session->set_userdata($userData);
 				$this->response->code = 0;
 				$this->response->data = base_url(lang('GEN_ENTERPRISE_LIST'));
 			break;
 			case -28:
+				$userData = [
+					'userId' => $response->usuario->idUsuario,
+					'userName' => $response->usuario->userName,
+					'codigoGrupo' => $response->usuario->codigoGrupo,
+					'countrySess' => $this->config->item('country')
+				];
+				$this->session->set_userdata($userData);
 				$this->session->set_flashdata('unauthorized', lang('RESP_SESSION_DUPLICATE'));
 				$this->response->data = base_url('cerrar-sesion/fin');
 			break;
@@ -329,7 +337,7 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataRequest->idEmpresa = $dataRequest->idEmpresa;
 		$this->dataRequest->email = $dataRequest->email;
 		$maskMail = maskString($dataRequest->email, 4, $end = 6, '@');
-		$response = $this->sendToService(lang('GEN_RECOVER_PASS'));
+		$response = $this->sendToService('callWs_RecoverPass');
 
 		switch($this->isResponseRc) {
 			case 0:
@@ -377,7 +385,7 @@ class Novo_User_Model extends NOVO_Model {
 			];
 		}
 
-		return $this->responseToTheView(lang('GEN_RECOVER_PASS'));
+		return $this->responseToTheView('callWs_RecoverPass');
 	}
 	/**
 	 * @info Método para recuperar acceso con OTP
@@ -444,7 +452,7 @@ class Novo_User_Model extends NOVO_Model {
 			];
 		}
 
-		return $this->responseToTheView(lang('GEN_RECOVER_ACCESS'));
+		return $this->responseToTheView('callWs_RecoverAccess');
 	}
 		/**
 	 * @info Método para recuperar acceso con OTP
@@ -521,7 +529,7 @@ class Novo_User_Model extends NOVO_Model {
 			];
 		}
 
-		return $this->responseToTheView(lang('GEN_VALIDATE_OTP'));
+		return $this->responseToTheView('callWs_ValidateOtp');
 	}
 	/**
 	 * @info Método para el cambio de Contraseña
@@ -610,10 +618,10 @@ class Novo_User_Model extends NOVO_Model {
 		log_message('INFO', 'NOVO User Model: KeepSession Method Initialized');
 		$response = new stdClass();
 		$response->rc =  0;
-		$this->makeAnswer($response);
+		$this->makeAnswer($response, 'callWs_GetBranchOffices');
 		$this->response->code = 0;
 
-		return $this->responseToTheView('KeepSession');
+		return $this->responseToTheView('callWs_KeepSession');
 	}
 	/**
 	 * @info Método para el cierre de sesión
@@ -637,7 +645,7 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataRequest->idUsuario = $userName;
 		$this->dataRequest->codigoGrupo = $this->session->codigoGrupo;
 
-		$response = $this->sendToService(lang('GEN_FINISH_SESSION'));
+		$response = $this->sendToService('callWs_FinishSession');
 
 		$this->response->code = 0;
 		$this->response->msg = lang('GEN_BTN_ACCEPT');
@@ -651,7 +659,7 @@ class Novo_User_Model extends NOVO_Model {
 		];
 		$this->session->unset_userdata($access);
 
-		return $this->responseToTheView(lang('GEN_FINISH_SESSION'));
+		return $this->responseToTheView('callWs_FinishSession');
 	}
 	/**
 	 * @info Método validación recaptcha

@@ -28,9 +28,7 @@ class Novo_User extends NOVO_Controller {
 			exit();
 		}
 
-		$this->session->sess_destroy();
-
-		if($this->render->activeRecaptcha) {
+		if(ACTIVE_RECAPTCHA) {
 			$this->load->library('recaptcha');
 			$this->render->scriptCaptcha = $this->recaptcha->getScriptTag();
 		}
@@ -66,6 +64,14 @@ class Novo_User extends NOVO_Controller {
 			);
 		}
 
+		$singleSession = [
+			'name' => 'singleSession',
+			'value' => base64_encode('signIn'),
+			'expire' => 0
+		];
+
+		$this->input->set_cookie($singleSession);
+
 		$this->render->skipProductInf = TRUE;
 		$this->render->titlePage = lang('GEN_SYSTEM_NAME');
 		$this->views = $views;
@@ -75,11 +81,11 @@ class Novo_User extends NOVO_Controller {
 	 * @info Método para el cierre de sesión
 	 * @author J. Enrique Peñaloza Piñero.
 	 */
-	public function singleSignon($sessionId = FALSE)
+	public function singleSignOn($sessionId = FALSE)
 	{
-		log_message('INFO', 'NOVO User: singleSignon Method Initialized');
+		log_message('INFO', 'NOVO User: singleSignOn Method Initialized');
 
-		$view = 'singleSignon';
+		$view = 'singleSignOn';
 		$this->render->send = FALSE;
 
 		if ($sessionId) {
@@ -87,13 +93,6 @@ class Novo_User extends NOVO_Controller {
 			$this->render->send = TRUE;
 		} else {
 			$this->render->sessionId = $this->request->sessionId;
-		}
-
-		if ($sessionId != 'fin') {
-			array_push(
-				$this->includeAssets->jsFiles,
-				'user/singleSignon'
-			);
 		}
 
 		if($sessionId == 'fin') {
@@ -105,11 +104,24 @@ class Novo_User extends NOVO_Controller {
 			if ($this->session->flashdata('unauthorized') != NULL) {
 				$this->render->sessionEnd = $this->session->flashdata('unauthorized');
 			}
+		} else {
+			array_push(
+				$this->includeAssets->jsFiles,
+				'user/singleSignOn'
+			);
+			$this->render->skipmenu = TRUE;
 		}
+
+		$singleSession = [
+			'name' => 'singleSession',
+			'value' => base64_encode('SignThird'),
+			'expire' => 0
+		];
+
+		$this->input->set_cookie($singleSession);
 
 		$this->render->titlePage = lang('GEN_SYSTEM_NAME');
 		$this->render->skipProductInf = TRUE;
-		$this->render->skipmenu = TRUE;
 		$this->views = ['user/'.$view];
 		$this->loadView($view);
 
@@ -210,16 +222,17 @@ class Novo_User extends NOVO_Controller {
 		log_message('INFO', 'NOVO User: finishSession Method Initialized');
 
 		$view = 'finish';
+		$thirdPartySession = $this->singleSession == 'SignThird';
 
 		if($this->render->userId || $this->render->logged) {
 			$this->load->model('Novo_User_Model', 'finishSession');
 			$this->finishSession->callWs_FinishSession_User();
 		}
 
-		if($redirect == 'fin' || AUTO_LOGIN) {
+		if($redirect == 'fin' || $thirdPartySession) {
 			$pos = array_search('menu-datepicker', $this->includeAssets->jsFiles);
 			$this->render->action = base_url('inicio');
-			$this->render->showBtn = AUTO_LOGIN ? FALSE : TRUE;
+			$this->render->showBtn = !$thirdPartySession;
 			$this->render->sessionEnd = novoLang(lang('GEN_EXPIRED_SESSION'), lang('GEN_SYSTEM_NAME'));
 
 			if ($this->session->flashdata('unauthorized') != NULL) {

@@ -40,7 +40,7 @@ $config = [
 			'rules' => 'trim'
 		]
 	],
-	'singleSignon' => [
+	'singleSignOn' => [
 		[
 			'field' => 'sessionId',
 			'label' => 'sessionId',
@@ -119,49 +119,6 @@ $config = [
 			'rules' => 'trim|regex_match[/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9]+\.)+[a-z]{2,6}$/ix]|required'
 		]
 	],
-	'obtainNumPosition' => [
-		[
-			'field' => 'acrif',
-			'rules' => 'trim|regex_match[/^[0-9]*$/i]|required'
-		],
-		[
-			'field' => 'numpos',
-			'rules' => 'trim|regex_match[/^[0-9]*$/i]'
-		],
-		[
-			'field' => 'nameBusine',
-			'rules' => 'trim|regex_match[/^[a-zA-Z0-9 .,]*$/i]|required'
-		],
-		[
-			'field' => 'razonSocial',
-			'rules' => 'trim|regex_match[/^[a-zA-Z0-9 .,]*$/i]|required'
-		],
-		[
-			'field' => 'contacto',
-			'rules' => 'trim|regex_match[/^[a-zA-Z0-9 ]*$/i]'
-		],
-		[
-			'field' => 'fact',
-			'rules' => 'trim|regex_match[/^[a-zA-Z0-9,.´ ]*$/i]'
-		],
-		[
-			'field' => 'ubicacion',
-			'rules' => 'trim|regex_match[/^[a-zA-Z 0-9.,´ ]*$/i]'
-		],
-		[
-			'field' => 'tel1',
-			'rules' => 'trim|regex_match[/^[0-9]*$/i]'
-		],
-		[
-			'field' => 'tel2',
-			'rules' => 'trim|regex_match[/^[0-9]*$/i]'
-		],
-		[
-			'field' => 'tel3',
-			'rules' => 'trim|regex_match[/^[0-9]*$/i]'
-		]
-	],
-
 	'closingBudgets' => [
 		[
 			'field' => 'idExtPer',
@@ -1089,4 +1046,220 @@ $config = [
 			'rules' => 'trim|regex_match[/^[0-9]*$/i]'
 		]
 	],
+	'commercialTwirls' => [
+		[
+			'field' => 'cardNumber',
+			'rules' => 'trim|regex_match[/^[0-9]*$/i]|required'
+		]
+	],
+	'updateCommercialTwirls' => [
+		[
+			'field' => 'passwordAuth',
+			'rules' => 'trim|required'
+		],
+		[
+			'field' => 'companyId',
+			'rules' => 'trim|regex_match[/^[0-9]*$/i]'
+		],
+		[
+			'field' => 'product',
+			'rules' => 'trim|regex_match[/^[a-zA-Z0-9]*$/i]'
+		],
+		[
+			'field' => 'travelAgency',
+			'rules' => 'trim|regex_match[/^[0-1]*$/i]|required'
+		],
+		[
+			'field' => 'insurers',
+			'rules' => 'trim|regex_match[/^[0-1]*$/i]|required'
+		],
+		[
+			'field' => 'charity',
+			'rules' => 'trim|regex_match[/^[0-1]*$/i]|required'
+		],
+		[
+			'field' => 'collegesUniversities',
+			'rules' => 'trim|regex_match[/^[0-1]*$/i]|required'
+		],
+		[
+			'field' => 'entertainment',
+			'rules' => 'trim|regex_match[/^[0-1]*$/i]|required'
+		],
+		[
+			'field' => 'parking',
+			'rules' => 'trim|regex_match[/^[0-1]*$/i]|required'
+		],
+		[
+			'field' => 'gaStations',
+			'rules' => 'trim|regex_match[/^[0-1]*$/i]|required'
+		],
+		[
+			'field' => 'governments',
+			'rules' => 'trim|regex_match[/^[0-1]*$/i]|required'
+		],
+		[
+			'field' => 'hospitals',
+			'rules' => 'trim|regex_match[/^[0-1]*$/i]|required'
+		],
+		[
+			'field' => 'hotels',
+			'rules' => 'trim|regex_match[/^[0-1]*$/i]|required'
+		],
+		[
+			'field' => 'debit',
+			'rules' => 'trim|regex_match[/^[0-1]*$/i]|required'
+		],
+		[
+			'field' => 'toll',
+			'rules' => 'trim|regex_match[/^[0-1]*$/i]|required'
+		],
+		[
+			'field' => 'restaurants',
+			'rules' => 'trim|regex_match[/^[0-1]*$/i]|required'
+		],
+		[
+			'field' => 'supermarkets',
+			'rules' => 'trim|regex_match[/^[0-1]*$/i]|required'
+		],
+		[
+			'field' => 'telecommunication',
+			'rules' => 'trim|regex_match[/^[0-1]*$/i]|required'
+		],
+		[
+			'field' => 'airTransport',
+			'rules' => 'trim|regex_match[/^[0-1]*$/i]|required'
+		],
+		[
+			'field' => 'passengerTransportation',
+			'rules' => 'trim|regex_match[/^[0-1]*$/i]|required'
+		],
+		[
+			'field' => 'retailSales',
+			'rules' => 'trim|regex_match[/^[0-1]*$/i]|required'
+		]
+	],
+	'transactionalLimits' => [
+		[
+			'field' => 'cardNumber',
+			'rules' => 'trim|regex_match[/^[0-9]*$/i]|required'
+		]
+	],
+	'updateTransactionalLimits' => [
+		[
+			'field' => 'passwordAuth',
+			'rules' => 'trim|required'
+		],
+		[
+			'field' => 'dailyNumberCredit',
+			'rules' => 'trim|regex_match[/^[0-9,.]*$/i]'
+		],
+		[
+			'field' => 'dailyAmountCredit',
+			'rules' => 'trim|regex_match[/^[0-9,.]*$/i]'
+		],
+		[
+			'field' => 'monthlyNumberCredit',
+			'rules' => 'trim|regex_match[/^[0-9,.]*$/i]'
+		],
+		[
+			'field' => 'monthlyAmountCredit',
+			'rules' => 'trim|regex_match[/^[0-9,.]*$/i]'
+		],
+		[
+			'field' => 'CreditTransaction',
+			'rules' => 'trim|regex_match[/^[0-9,.]*$/i]'
+		],
+		[
+			'field' => 'weeklyNumberCredit',
+			'rules' => 'trim|regex_match[/^[0-9,.]*$/i]'
+		],
+		[
+			'field' => 'weeklyAmountCredit',
+			'rules' => 'trim|regex_match[/^[0-9,.]*$/i]'
+		],
+		[
+			'field' => 'numberDayPurchasesCtp',
+			'rules' => 'trim|regex_match[/^[0-9,.]*$/i]'
+		],
+		[
+			'field' => 'dailyPurchaseamountCtp',
+			'rules' => 'trim|regex_match[/^[0-9,.]*$/i]'
+		],
+		[
+			'field' => 'numberMonthlyPurchasesCtp',
+			'rules' => 'trim|regex_match[/^[0-9,.]*$/i]'
+		],
+		[
+			'field' => 'monthlyPurchasesAmountCtp',
+			'rules' => 'trim|regex_match[/^[0-9,.]*$/i]'
+		],
+		[
+			'field' => 'purchaseTransactionCtp',
+			'rules' => 'trim|regex_match[/^[0-9,.]*$/i]'
+		],
+		[
+			'field' => 'numberDayPurchasesStp',
+			'rules' => 'trim|regex_match[/^[0-9,.]*$/i]'
+		],
+		[
+			'field' => 'dailyPurchaseamountStp',
+			'rules' => 'trim|regex_match[/^[0-9,.]*$/i]'
+		],
+		[
+			'field' => 'numberMonthlyPurchasesStp',
+			'rules' => 'trim|regex_match[/^[0-9,.]*$/i]'
+		],
+		[
+			'field' => 'monthlyPurchasesAmountStp',
+			'rules' => 'trim|regex_match[/^[0-9,.]*$/i]'
+		],
+		[
+			'field' => 'purchaseTransactionStp',
+			'rules' => 'trim|regex_match[/^[0-9,.]*$/i]'
+		],
+		[
+			'field' => 'numberWeeklyPurchasesStp',
+			'rules' => 'trim|regex_match[/^[0-9,.]*$/i]'
+		],
+		[
+			'field' => 'weeklyAmountPurchasesStp',
+			'rules' => 'trim|regex_match[/^[0-9,.]*$/i]'
+		],
+		[
+			'field' => 'numberWeeklyPurchasesCtp',
+			'rules' => 'trim|regex_match[/^[0-9,.]*$/i]'
+		],
+		[
+			'field' => 'weeklyAmountPurchasesCtp',
+			'rules' => 'trim|regex_match[/^[0-9,.]*$/i]'
+		],
+		[
+			'field' => 'dailyNumberWithdraw',
+			'rules' => 'trim|regex_match[/^[0-9,.]*$/i]'
+		],
+		[
+			'field' => 'dailyAmountWithdraw',
+			'rules' => 'trim|regex_match[/^[0-9,.]*$/i]'
+		],
+		[
+			'field' => 'monthlyNumberWithdraw',
+			'rules' => 'trim|regex_match[/^[0-9,.]*$/i]'
+		],
+		[
+			'field' => 'monthlyAmountwithdraw',
+			'rules' => 'trim|regex_match[/^[0-9,.]*$/i]'
+		],
+		[
+			'field' => 'WithdrawTransaction',
+			'rules' => 'trim|regex_match[/^[0-9,.]*$/i]'
+		],
+		[
+			'field' => 'weeklyNumberWithdraw',
+			'rules' => 'trim|regex_match[/^[0-9,.]*$/i]'
+		],
+		[
+			'field' => 'weeklyAmountWithdraw',
+			'rules' => 'trim|regex_match[/^[0-9,.]*$/i]'
+		]
+	]
 ];

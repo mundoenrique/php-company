@@ -357,7 +357,7 @@ $("#masterAc-btn").on('click', function(e){
 	if (form.valid()) {
 		insertFormInput(true, form);
 	  $('#blockMasterAccountResults').addClass("hide");
-	  $('#spinnerBlockMasterAccount').removeClass("hide");
+	  $('#spinnerBlock').removeClass("hide");
 		info();
 
 	}
@@ -411,7 +411,7 @@ function masterAccount(passData) {
 	verb = "POST"; who = 'Reports'; where = 'masterAccount'; data = passData;
 	callNovoCore(verb, who, where, data, function(response) {
 		insertFormInput(false);
-		$('#spinnerBlockMasterAccount').addClass("hide");
+		$('#spinnerBlock').addClass("hide");
 		$('#tbody-datos-general').removeClass('hide');
 		$('#titleResults').removeClass('hide');
 		var table = $('#concenAccount').DataTable();

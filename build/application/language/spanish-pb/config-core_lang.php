@@ -10,23 +10,3 @@ $lang['CONF_INQUIRY_DOCTYPE'] = 'ON';
 $lang['CONF_CARDS_INQUIRY_ISSUE_STATUS'] = 'OFF';
 //SIGNIN
 $lang['CONF_SIGNIN_WIDGET_CONTACT'] = 'OFF';
-//FILES CONF
-$lang['CONF_MANUAL_BOOL'] = 'OFF';
-$lang['CONF_VIDEO_BOOL'] = 'OFF';
-$lang['CONF_APPS_BOOL'] = 'OFF';
-$lang['CONF_FILES_MANAGMENT_BOOL'] = 'OFF';
-$lang['CONF_FILE_SERVICE_BOOL'] = 'OFF';
-$lang['CONF_PDF_FILE'] = [
-  ['']
-];
-$lang['CONF_ZIP_FILE'] = [
-  ['']
-];
-$lang['CONF_RAR_FILE'] = [
-  ['']
-];
-$lang['CONF_MP4_VIDEO'] = [];
-//DOWNLOAD ICONS
-$lang['CONF_PDF_ICON'] = 'icon-pdf.svg';
-$lang['CONF_RAR_ICON'] = 'icon-rar.svg';
-$lang['CONF_ZIP_ICON'] = 'icon-zip.svg';

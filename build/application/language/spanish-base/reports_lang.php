@@ -33,3 +33,5 @@ $lang['REPORTS_TABLE_DNI']="NIT";
 $lang['REPORTS_TABLE_LAST_ACTIVITY']="Última actividad";
 
 
+
+

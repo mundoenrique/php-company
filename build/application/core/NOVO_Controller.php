@@ -26,6 +26,7 @@ class NOVO_Controller extends CI_Controller {
 	protected $products;
 	protected $folder;
 	private $ValidateBrowser;
+	public $singleSession;
 
 	public function __construct()
 	{
@@ -47,13 +48,13 @@ class NOVO_Controller extends CI_Controller {
 		$this->render->fullName = $this->session->fullName;
 		$this->render->productName = !$this->session->has_userdata('productInf') ?:
 			$this->session->productInf->productName.' / '.$this->session->productInf->brand;
-		$this->render->activeRecaptcha = $this->config->item('active_recaptcha');
 		$this->render->widget =  FALSE;
 		$this->render->prefix = '';
 		$this->render->sessionTime = $this->config->item('session_time');
 		$this->render->callModal = $this->render->sessionTime < 180000 ? ceil($this->render->sessionTime * 50 / 100) : 15000;
 		$this->render->callServer = $this->render->callModal;
 		$this->ValidateBrowser = FALSE;
+		$this->singleSession = base64_decode($this->input->cookie($this->config->item('cookie_prefix').'singleSession'));
 		$this->optionsCheck();
 	}
 	/**
@@ -142,7 +143,7 @@ class NOVO_Controller extends CI_Controller {
 	{
 		log_message('INFO', 'NOVO Controller: preloadView Method Initialized');
 
-		if($auth) {
+		if ($auth) {
 			$faviconLoader = getFaviconLoader($this->countryUri);
 			$this->render->favicon = $faviconLoader->favicon;
 			$this->render->ext = $faviconLoader->ext;
@@ -156,14 +157,14 @@ class NOVO_Controller extends CI_Controller {
 				"$this->folder"."$this->skin-base"
 			];
 
-			if(gettype($this->ValidateBrowser) !== 'boolean') {
+			if (gettype($this->ValidateBrowser) !== 'boolean') {
 				array_push(
 					$this->includeAssets->cssFiles,
 					"$this->countryUri/$this->skin-$this->ValidateBrowser-base"
 				);
 			}
 
-			if($this->render->newViews === '-core') {
+			if ($this->render->newViews === '-core') {
 				array_unshift(
 					$this->includeAssets->cssFiles,
 					"$this->countryUri/root-$this->skin",
@@ -195,8 +196,9 @@ class NOVO_Controller extends CI_Controller {
 			}
 
 		} else {
-			$linkredirect = $this->session->has_userdata('productInf') ? 'detalle-producto' : 'inicio';
-			$linkredirect = AUTO_LOGIN && !$this->session->has_userdata('logged') ? 'ingresar/fin' : $linkredirect;
+			$linkredirect = $this->session->has_userdata('productInf') ? 'detalle-producto' : 'empresas';
+			$linkredirect = !$this->session->has_userdata('logged') ? 'inicio' : $linkredirect;
+			$linkredirect = AUTO_LOGIN ? 'ingresar/fin' : $linkredirect;
 			redirect(base_url($linkredirect), 'location');
 		}
 
@@ -231,18 +233,18 @@ class NOVO_Controller extends CI_Controller {
 		$this->render->enterpriseList = $this->session->enterpriseSelect->list;
 		$this->render->enterpriseData =  $this->session->enterpriseInf;
 
-		if(is_object($responseView)) {
+		if (is_object($responseView)) {
 			$this->render->code = $responseView->code;
 			$download = !isset($responseView->download) ? $download : $responseView->download;
 		}
 
-		if($this->session->has_userdata('productInf')) {
+		if ($this->session->has_userdata('productInf')) {
 			$this->render->prefix = $this->session->productInf->productPrefix;
 		}
 
-		if(($this->render->code == 0  && $active) || $download) {
+		if (($this->render->code == 0  && $active) || $download) {
 
-			if(count($this->render->enterpriseList) > 1 || $this->products) {
+			if (count($this->render->enterpriseList) > 1 || $this->products) {
 				array_push(
 					$this->includeAssets->jsFiles,
 					"business/widget-enterprise"
@@ -255,7 +257,7 @@ class NOVO_Controller extends CI_Controller {
 			}
 		}
 
-		if($this->render->code > 2) {
+		if ($this->render->code > 2) {
 			$this->render->title = $responseView->title;
 			$this->render->msg = $responseView->msg;
 			$this->render->icon = $responseView->icon;
@@ -274,7 +276,7 @@ class NOVO_Controller extends CI_Controller {
 
 		$valid = $this->tool_browser->validBrowser($this->skin);
 
-		if(!$valid) {
+		if (!$valid) {
 			redirect(base_url('sugerencia'),'location', 301);
 			exit();
 		}
