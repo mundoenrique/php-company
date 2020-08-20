@@ -1194,4 +1194,149 @@ class Novo_Reports_Model extends NOVO_Model {
 
 		return $this->response;
 	}
+
+		/**
+	 * @info Método para obtener busqueda de estado de cuenta
+	 * @author Diego Acosta García
+	 * @date Aug 18, 2020
+	 */
+	public function callWs_searchStatusAccount_Reports($dataRequest)
+	{
+		log_message('INFO', 'NOVO Reports Model: searchStatusAccount Method Initialized');
+
+		$this->className = 'com.novo.objects.MO.EstadoCuentaMO';
+
+		$this->dataAccessLog->modulo = 'Reportes';
+		$this->dataAccessLog->function = 'movimientoEstadoCuentaDetalle';
+		$this->dataAccessLog->operation = 'movimientoEstadoCuentaDetalle';
+		$this->dataRequest->idOperation = 'movimientoEstadoCuentaDetalle';
+		if($dataRequest->resultByNIT === 'all'){
+			$dataRequest->resultByNIT = '';
+			$typeSearch = '0';
+		}else {
+			$typeSearch = '1';
+		}
+		$this->dataRequest->idExtEmp = $dataRequest->enterpriseCode;
+		$this->dataRequest->idExtPer = $dataRequest->resultByNIT;
+    $lastDayMonyh = date("t-m-Y", strtotime(str_replace( '/', '-', "1/".$dataRequest->initialDateAct)));
+		$this->dataRequest->fechaFin = str_replace( '-', '/', $lastDayMonyh);
+		// $data Request->initialDateAct= "1/"+ $dataRequest->initialDateAct;
+		$this->dataRequest->fechaIni = "1/".$dataRequest->initialDateAct;
+		$this->dataRequest->tamanoPagina = '10';
+		$this->dataRequest->tipoConsulta = $typeSearch;
+		$this->dataRequest->pagActual = '2';
+		$this->dataRequest->prefix = $dataRequest->productCode;
+		$this->dataRequest->paginar = false;
+
+		$response = $this->sendToService('callWs_searchStatusAccount');
+
+		switch($this->isResponseRc) {
+			case 0:
+				$table =[];
+				$this->response->code = 0;
+				foreach ((array)$response->listadoEstadosCuentas as $key => $val){
+					$table[$key] = $val;
+					$valor[$key]= $response->listadoEstadosCuentas[$key]->listaMovimientos;
+
+					$this->response->data['user'] =$valor;
+				}
+				$this->response->data['accounts'] = $table;
+
+			break;
+		}
+
+		return $this->responseToTheView('callWs_searchStatusAccount');
+	}
+
+			/**
+	 * @info Método para obtener EXCEL de estado de cuenta
+	 * @author Diego Acosta García
+	 * @date Aug 18, 2020
+	 */
+	public function callWs_statusAccountExcelFile_Reports($dataRequest)
+	{
+		log_message('INFO', 'NOVO Reports Model: statusAccountExcelFile Method Initialized');
+
+		$this->className = 'com.novo.objects.MO.EstadoCuentaMO';
+
+		$this->dataAccessLog->modulo = 'Reportes';
+		$this->dataAccessLog->function = 'generaArchivoXlsEdoCta';
+		$this->dataAccessLog->operation = 'generaArchivoXlsEdoCta';
+		$this->dataRequest->idOperation = 'generaArchivoXlsEdoCta';
+		if($dataRequest->resultByNIT === 'all'){
+			$dataRequest->resultByNIT = '';
+			$typeSearch = '0';
+		}else {
+			$typeSearch = '1';
+		}
+		$this->dataRequest->idExtEmp = $dataRequest->enterpriseCode;
+		$this->dataRequest->idExtPer = $dataRequest->resultByNIT;
+    $lastDayMonyh = date("t-m-Y", strtotime(str_replace( '/', '-', "1/".$dataRequest->initialDateAct)));
+		$this->dataRequest->fechaFin = str_replace( '-', '/', $lastDayMonyh);
+		$this->dataRequest->fechaIni = "1/".$dataRequest->initialDateAct;
+		$this->dataRequest->tamanoPagina = '5';
+		$this->dataRequest->tipoConsulta = $typeSearch;
+		$this->dataRequest->pagActual = '1';
+		$this->dataRequest->prefix = $dataRequest->productCode;
+		$this->dataRequest->paginar = false;
+		$this->dataRequest->nombreEmpresa = $dataRequest->enterpriseName;
+		$this->dataRequest->descProducto = $dataRequest->descProduct;
+
+		$response = $this->sendToService('callWs_statusAccountExcelFile');
+
+		switch($this->isResponseRc) {
+			case 0:
+				$this->response->code = 0;
+				$this->response->data = (array)$response;
+			break;
+		}
+
+		return $this->responseToTheView('callWs_statusAccountExcelFile');
+	}
+
+		/**
+	 * @info Método para obtener PDF de estado de cuenta
+	 * @author Diego Acosta García
+	 * @date Aug 18, 2020
+	 */
+	public function callWs_statusAccountpdfFile_Reports($dataRequest)
+	{
+		log_message('INFO', 'NOVO Reports Model: statusAccountpdfFile Method Initialized');
+
+		$this->className = 'com.novo.objects.MO.EstadoCuentaMO';
+
+		$this->dataAccessLog->modulo = 'Reportes';
+		$this->dataAccessLog->function = 'generarComprobante';
+		$this->dataAccessLog->operation = 'generarComprobante';
+		$this->dataRequest->idOperation = 'generarComprobante';
+		if($dataRequest->resultByNIT === 'all'){
+			$dataRequest->resultByNIT = '';
+			$typeSearch = '0';
+		}else {
+			$typeSearch = '1';
+		}
+		$this->dataRequest->idExtEmp = $dataRequest->enterpriseCode;
+		$this->dataRequest->idExtPer = $dataRequest->resultByNIT;
+    $lastDayMonyh = date("t-m-Y", strtotime(str_replace( '/', '-', "1/".$dataRequest->initialDateAct)));
+		$this->dataRequest->fechaFin = str_replace( '-', '/', $lastDayMonyh);
+		$this->dataRequest->fechaIni = "1/".$dataRequest->initialDateAct;
+		$this->dataRequest->tamanoPagina = '5';
+		$this->dataRequest->tipoConsulta = $typeSearch;
+		$this->dataRequest->pagActual = '1';
+		$this->dataRequest->prefix = $dataRequest->productCode;
+		$this->dataRequest->paginar = false;
+		$this->dataRequest->nombreEmpresa = $dataRequest->enterpriseName;
+		$this->dataRequest->descProducto = $dataRequest->descProduct;
+
+		$response = $this->sendToService('callWs_statusAccountPdfFile');
+
+		switch($this->isResponseRc) {
+			case 0:
+				$this->response->code = 0;
+				$this->response->data = (array)$response;
+			break;
+		}
+
+		return $this->responseToTheView('callWs_statusAccountpdfFile');
+	}
 }
