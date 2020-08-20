@@ -2099,7 +2099,7 @@ i[class*=" icon-"]:before {
 
 .logo-banco {
 	width: 260px;
-	height: auto;
+	height: 71px;
 }
 
 /* Spinner */
@@ -3739,7 +3739,7 @@ a.ui-button:active,
   height: 106px;
   margin-bottom: 12px;
 	background-color: var(--color-secondary);
-	color: var(--color-sixth);
+	color: var(--color-fifth);
 	border: .5px solid var(--color-tertiary);
 	box-shadow: 4px 4px 8px 0 rgba(0,0,0,.1);
 	border-radius: 5px;
@@ -3773,12 +3773,12 @@ a.ui-button:active,
   visibility: visible;
 }
 
-.nav-config .nav-config-box .nav-item-config > a > img {
-	width: 30%;
+.nav-config .nav-config-box .nav-item-config > a > i {
+	font-size: 30px;
 }
 
 .nav-config .nav-config-box .nav-item-config .bg {
-	width: 35%
+	font-size: 35px;
 }
 
 .nav-config .nav-config-box .nav-item-config h4 {

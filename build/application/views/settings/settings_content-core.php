@@ -9,10 +9,10 @@
 						<?php if (lang('CONF_SETTINGS_USER') == 'ON' ): ?>
 						<li id="user" class="nav-item-config">
 							<a href="javascript:">
-								<img class="icon-config" src="<?= $this->asset->insertFile('icon-user.svg', 'images/icons');?>">
+								<i class="icon-config icon-user-config"></i>
 								<h5><?= lang('GEN_BTN_USER') ?></h5>
 								<div class="box up left">
-									<img src="<?= $this->asset->insertFile('icon-user.svg', 'images/icons');?>" class="bg">
+									<i class="bg icon-user-config"></i>
 									<h4><?= lang('GEN_BTN_USER') ?></h4>
 								</div>
 							</a>
@@ -21,10 +21,10 @@
 						<?php if (lang('CONF_SETTINGS_ENTERPRISE') == 'ON'): ?>
 						<li id="enterprise" class="nav-item-config">
 							<a href="javascript:">
-								<img class="icon-config" src="<?= $this->asset->insertFile('icon-briefcase.svg', 'images/icons');?>">
+								<i class="icon-config icon-brief-config"></i>
 								<h5><?= lang('GEN_BTN_ENTERPRISE') ?></h5>
 								<div class="box up left">
-									<img src="<?= $this->asset->insertFile('icon-briefcase.svg', 'images/icons');?>" class="bg">
+								<i class="bg icon-brief-config"></i>
 									<h4><?= lang('GEN_BTN_ENTERPRISE') ?></h4>
 								</div>
 							</a>
@@ -33,10 +33,10 @@
 						<?php if (lang('CONF_SETTINGS_BRANCHES') == 'ON'): ?>
 						<li id="branch" class="nav-item-config">
 							<a href="javascript:">
-								<img class="icon-config" src="<?= $this->asset->insertFile('icon-building.svg', 'images/icons');?>">
+								<i class="icon-config icon-build-config"></i>
 								<h5><?= lang('GEN_BTN_BRANCH') ?></h5>
 								<div class="box up left">
-									<img src="<?= $this->asset->insertFile('icon-building.svg', 'images/icons');?>" class="bg">
+									<i class="bg icon-build-config"></i>
 									<h4><?= lang('GEN_BTN_BRANCH') ?></h4>
 								</div>
 							</a>
@@ -45,10 +45,10 @@
 						<?php if (lang('CONF_SETTINGS_DOWNLOADS') == 'ON'): ?>
 						<li id="downloads" class="nav-item-config">
 							<a href="javascript:">
-								<img class="icon-config" src="<?= $this->asset->insertFile('icon-download.svg', 'images/icons');?>">
+								<i class="icon-config icon-downl-config"></i>
 								<h5><?= lang('GEN_BTN_DOWNLOADS') ?></h5>
 								<div class="box up left">
-									<img src="<?= $this->asset->insertFile('icon-download.svg', 'images/icons');?>" class="bg ">
+									<i class="bg icon-downl-config"></i>
 									<h4><?= lang('GEN_BTN_DOWNLOADS') ?></h4>
 								</div>
 							</a>
