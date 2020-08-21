@@ -895,10 +895,8 @@ class Novo_Bulk_Model extends NOVO_Model {
 				$this->response->data['btn1']['link'] = 'lotes-autorizacion';
 			break;
 			case -259:
-				$this->response->code = 0;
-				$this->response->title = lang('BULK_CONFIRM_TITLE');
+				$this->response->title = lang('BULK_AUTH_TITLE');
 				$this->response->msg = lang('GEN_WITHOUT_AUTHORIZATION');
-				$this->response->data['btn1']['link'] = lang('GEN_LINK_BULK_LOAD');
 			break;
 			case -439:
 				$this->response->title = lang('BULK_AUTH_TITLE');
