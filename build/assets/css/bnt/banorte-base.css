@@ -2109,7 +2109,7 @@ i[class*=" icon-"]:before {
 
 .logo-banco {
 	width: 260px;
-	height: auto;
+	height: 67px;
 }
 
 /* Spinner */
@@ -3589,7 +3589,7 @@ a.ui-button:active,
 
 .bg-img {
   background-image: linear-gradient(rgba(0,0,0,.8), rgba(0,0,0,.8)),
-    url("../../images/bnt/bg-loading.jpg");
+    url("../../images/default/bg-loading.jpg");
   height: 100vh;
   background-position: center;
   background-repeat: no-repeat;
@@ -3708,13 +3708,13 @@ a.ui-button:active,
 	bottom: 20px;
 }
 .item-network.maestro {
-	background: transparent url("../../images/bnt/logo_maestro.svg") no-repeat center / cover;
+	background: transparent url("../../images/brands/logo_maestro.svg") no-repeat center / cover;
 }
 .item-network.mastercard {
-	background: transparent url("../../images/bnt/logo_mastercard.svg") no-repeat center / cover;
+	background: transparent url("../../images/brands/logo_mastercard.svg") no-repeat center / cover;
 }
 .item-network.visa {
-	background: transparent url("../../images/bnt/logo_visa.svg") no-repeat center / cover;
+	background: transparent url("../../images/brands/logo_visa.svg") no-repeat center / cover;
 }
 
 .card-image {
@@ -3791,12 +3791,12 @@ a.ui-button:active,
   visibility: visible;
 }
 
-.nav-config .nav-config-box .nav-item-config > a > img {
-	width: 30%;
+.nav-config .nav-config-box .nav-item-config > a > i {
+	font-size: 30px;
 }
 
 .nav-config .nav-config-box .nav-item-config .bg {
-	width: 35%
+	font-size: 35px;
 }
 
 .nav-config .nav-config-box .nav-item-config h4 {
@@ -3893,6 +3893,17 @@ a.ui-button:active,
 	border: 2px solid var(--color-eighth);
 	left: 4px;
 	border-radius: 5px;
+}
+
+.download {
+	transform: initial;
+  -moz-transform: initial;
+  -webkit-transform: initial;
+}
+
+.download:before {
+	box-shadow: none;
+	border: none;
 }
 
 .detail-lot tbody tr:first-child td {

@@ -45,7 +45,6 @@ $config['LOTES_USERPASS'] = BULK_FTP_USERNAME.':'.BULK_FTP_PASSWORD;
 $config['format_date'] = 'j/m/Y';
 $config['format_time'] = 'g:i A';
 $config['cypher_base'] = CYPHER_BASE;
-$config['active_recaptcha'] = ACTIVE_RECAPTCHA;
 $config['score_recaptcha'] = [
 	'development' => 0,
 	'testing' => 0.2,
@@ -54,8 +53,6 @@ $config['score_recaptcha'] = [
 $config['new-views'] = '-core';
 $config['client'] = 'novo';
 $config['access_url'] = explode(',', ACCESS_URL);
-$config['modalOtp'] = false;
-$config['restartLogin'] = false;
 /*
 |--------------------------------------------------------------------------
 | Index File

@@ -7,4 +7,3 @@ $config['language']	= 'spanish-bdb';
 $config['favicon'] = 'favicon-bdb';
 $config['client'] = 'banco-bog';
 $config['url_bulk_service'] = BULK_FTP_URL.$config['country'].'/';
-$config['modalOtp'] = true;

@@ -5,7 +5,7 @@
 		<hr class="separador-one">
 		<div class="pt-3">
 			<p><?= $message ?></p>
-			<form id="change-pass-form" class="mt-4" method="post">
+			<form id="passwordChangeForm" class="mt-4" method="post">
 				<input type="hidden" id="userType" name="user-type" value="<?= $userType ?>">
 				<div class="row">
 					<div class="col-6 col-lg-8 col-xl-6">
@@ -63,7 +63,7 @@
 				<hr class="separador-one mt-2 mb-4">
 				<div class="flex items-center justify-end">
 					<a class="btn btn-link btn-small big-modal" href="<?= base_url($goOut); ?>"><?= lang('GEN_BTN_CANCEL'); ?></a>
-					<button id="change-pass-btn" class="btn btn-small btn-loading btn-primary" type="submit">
+					<button id="passwordChangeBtn" class="btn btn-small btn-loading btn-primary" type="submit">
 						<?= lang('GEN_BTN_ACCEPT'); ?>
 					</button>
 				</div>

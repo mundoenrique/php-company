@@ -69,7 +69,7 @@ $(function () {
 		inputDisabled(false);
 		$('#login-btn').html(btnText);
 		userPass.val('');
-		if (restartLogin) {
+		if (lang.RESTART_LOGIN=='ON') {
 			userLogin.val('');
 		}
 		setTimeout(function () {
@@ -230,7 +230,7 @@ $(function () {
 
 	function windowsStyle(){
 		$('#system-msg').css( "width", "auto" );
-		if (modalOtp) {
+		if (lang.MODAL_OTP=='ON') {
 			var styles = {
 				float : "none",
 				margin: "auto"

@@ -13,7 +13,7 @@ class NOVO_Model extends CI_Model {
 	public $isResponseRc;
 	public $response;
 	public $userName;
-	public $singleSignOn;
+	public $singleSession;
 
 	public function __construct()
 	{
@@ -28,7 +28,7 @@ class NOVO_Model extends CI_Model {
 		$this->token = $this->session->token ?: '';
 		$this->autoLogin = $this->session->autoLogin ?: '';
 		$this->userName = $this->session->userName;
-		$this->singleSignOn = $this->session->has_userdata('singleSignOn');
+		$this->singleSession = base64_decode($this->input->cookie($this->config->item('cookie_prefix').'singleSession'));
 	}
 	/**
 	 * @info Método para comunicación con el servicio
@@ -57,7 +57,7 @@ class NOVO_Model extends CI_Model {
 			$responseDecrypt = $this->encrypt_connect->decode($response, $this->userName, $model);
 		}
 
-		return $this->makeAnswer($responseDecrypt);
+		return $this->makeAnswer($responseDecrypt, $model);
 	}
 	/**
 	 * @info Método para comunicación con el servicio
@@ -70,14 +70,14 @@ class NOVO_Model extends CI_Model {
 
 		$responseUpload = $this->encrypt_connect->moveFile($file, $this->userName, $model);
 
-		return $this->makeAnswer($responseUpload);
+		return $this->makeAnswer($responseUpload, $model);
 	}
 	/**
 	 * @info Método armar la respuesta a los modelos
 	 * @author J. Enrique Peñaloza Piñero.
 	 * @date December 11th, 2019
 	 */
-	protected function makeAnswer($responseModel)
+	protected function makeAnswer($responseModel, $model)
 	{
 		log_message('INFO', 'NOVO Model: makeAnswer Method Initialized');
 
@@ -86,8 +86,21 @@ class NOVO_Model extends CI_Model {
 		$this->response->title = lang('GEN_SYSTEM_NAME');
 		$this->response->msg = '';
 		$this->response->icon = lang('GEN_ICON_WARNING');
-		$linkredirect = $this->session->has_userdata('productInf') ? 'detalle-producto' : lang('GEN_ENTERPRISE_LIST');
-		$linkredirect = $this->singleSignOn && !$this->session->has_userdata('logged') ? 'ingresar/fin' : $linkredirect;
+
+		switch ($model) {
+			case 'callWs_GetProductDetail':
+				$linkredirect = 'productos';
+			break;
+			case 'callWs_GetProducts':
+				$linkredirect = 'empresas';
+			break;
+			default:
+				$linkredirect = lang('GEN_ENTERPRISE_LIST');
+		}
+
+		$linkredirect = $this->session->has_userdata('productInf') ? 'detalle-producto' : $linkredirect;
+		$linkredirect = $this->singleSession == 'SignThird' && ($this->isResponseRc == -29 || $this->isResponseRc == -61)
+			? 'ingresar/fin' : $linkredirect;
 		$arrayResponse = [
 			'btn1'=> [
 				'text'=> lang('GEN_BTN_ACCEPT'),
@@ -109,14 +122,14 @@ class NOVO_Model extends CI_Model {
 				if($this->session->has_userdata('logged') || $this->session->has_userdata('userId')) {
 					$this->session->sess_destroy();
 				}
-				break;
+			break;
 			case -437:
-				$this->response->msg = lang('GEN_FAILED_THIRD PARTY');
-				break;
+				$this->response->msg = lang('GEN_FAILED_THIRD_PARTY');
+			break;
 			default:
 				$this->response->msg = lang('RESP_MESSAGE_SYSTEM');
 				$this->response->icon = lang('GEN_ICON_DANGER');
-				break;
+			break;
 		}
 
 		$this->response->msg = $this->isResponseRc == 0 ? lang('RESP_RC_0') : $this->response->msg;

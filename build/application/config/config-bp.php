@@ -12,5 +12,3 @@ $config['score_recaptcha'] = [
 	'testing' => 0,
 	'production' => 0
 ];
-$config['modalOtp'] = true;
-$config['restartLogin'] = true;

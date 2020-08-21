@@ -15,6 +15,4 @@
 	var sessionTime = <?= $sessionTime; ?> ;
 	var callModal = <?= $callModal; ?> ;
 	var callServer = <?= $callServer; ?> ;
-	var modalOtp = '<?= $this->config->item('modalOtp'); ?>';
-	var restartLogin = '<?= $this->config->item('restartLogin'); ?>';
 </script>
