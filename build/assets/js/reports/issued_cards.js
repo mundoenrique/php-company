@@ -55,7 +55,7 @@ $(function () {
 				$("#div_tablaDetalle").fadeIn("slow");
 				var contenedor = $("#div_tablaDetalle");
 				contenedor.empty();
-				var FALSE = false;
+				var showButtonGrap = false;
 
 				if (response.data.issuedCardsList.length == 0) {
 					$('.download-icons').addClass('hide');
@@ -89,7 +89,7 @@ $(function () {
 								iconButton.attr("aria-hidden", "true");
 							}
 
-							if (FALSE) {
+							if (showButtonGrap) {
 								var buttonGraph = $(document.createElement("button")).appendTo(iconG4);
 								buttonGraph.attr("class", "btn px-1 big-modal");
 								buttonGraph.attr("title", lang.GEN_BTN_SEE_GRAPH);
@@ -167,7 +167,7 @@ $(function () {
 							iconButton.attr("class", "icon icon-file-excel");
 							iconButton.attr("aria-hidden", "true");
 
-							if (FALSE) {
+							if (showButtonGrap) {
 								var buttonGraph = $(document.createElement("button")).appendTo(iconG4);
 								buttonGraph.attr("class", "btn px-1 big-modal");
 								buttonGraph.attr("title", lang.GEN_BTN_SEE_GRAPH);
