@@ -40,30 +40,37 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataRequest->userName = $userName;
 		$this->dataRequest->password = md5($password);
 		$this->dataRequest->ctipo = $dataRequest->active;
-		$this->dataRequest->codigoOtp =[
- 		'tokenCliente' => $dataRequest->codeOTP !='' ? $dataRequest->codeOTP : '',
- 		'authToken' => $authToken_str
-		];
-		$this->dataRequest->guardaIp = $dataRequest->saveIP !='' ? true : false;
 
-		if(ACTIVE_RECAPTCHA) {
-			$this->isResponseRc = $this->callWs_ValidateCaptcha_User($dataRequest);
+		if (IP_VERIFY == 'ON') {
+			$this->dataRequest->codigoOtp =[
+				'tokenCliente' => $dataRequest->codeOTP != '' ? $dataRequest->codeOTP : '',
+				'authToken' => $authToken_str
+			];
+			$this->dataRequest->guardaIp = $dataRequest->saveIP !='' ? true : false;
+		}
 
-			if ($this->isResponseRc === 0) {
+		if($dataRequest->codeOTP != '' && $authToken == '') {
+			$this->isResponseRc = 998;
+		} else {
+			if(ACTIVE_RECAPTCHA) {
+				$this->isResponseRc = $this->callWs_ValidateCaptcha_User($dataRequest);
+
+				if ($this->isResponseRc === 0) {
+					$response = $this->sendToService('callWs_Login');
+				}
+			} else {
 				$response = $this->sendToService('callWs_Login');
 			}
-		} else {
-			$response = $this->sendToService('callWs_Login');
-		}
 
-		if(in_array($this->config->item('client'), ['banco-bog']) && ($this->isResponseRc == -2 || $this->isResponseRc == -185)) {
-			$this->isResponseRc = 0;
-		}
+			if(in_array($this->config->item('client'), ['banco-bog']) && ($this->isResponseRc == -2 || $this->isResponseRc == -185)) {
+				$this->isResponseRc = 0;
+			}
 
-		$time = (object) [
-			'customerTime' => (int) $dataRequest->currentTime,
-			'serverTime' => (int) date("H")
-		];
+			$time = (object) [
+				'customerTime' => (int) $dataRequest->currentTime,
+				'serverTime' => (int) date("H")
+			];
+		}
 
 		switch($this->isResponseRc) {
 			case 0:
@@ -100,7 +107,7 @@ class Novo_User_Model extends NOVO_Model {
 				$this->response->code = 0;
 				$this->response->data = base_url(lang('GEN_ENTERPRISE_LIST'));
 				$this->response->modal = TRUE;
-				break;
+			break;
 			case -2:
 			case -185:
 				$fullName = mb_strtolower($response->usuario->primerNombre.' '.$response->usuario->primerApellido);
@@ -125,25 +132,25 @@ class Novo_User_Model extends NOVO_Model {
 					$this->response->data = base_url('cambiar-clave');
 					$this->session->set_flashdata('changePassword', 'expiredPass');
 				}
-				break;
+			break;
 			case -1:
 			case -263:
 				$this->response->code = 1;
 				$this->response->msg = lang('RESP_INVALID_USER');
 				$this->response->className = lang('CONF_VALID_INVALID_USER');
 				$this->response->position = lang('CONF_VALID_POSITION');
-				break;
+			break;
 			case -8:
 			case -35:
 				$this->response->code = 1;
 				$this->response->msg = lang('RESP_SUSPENDED_USER');
 				$this->response->className = lang('CONF_VALID_INACTIVE_USER');
 				$this->response->position = lang('CONF_VALID_POSITION');
-				break;
+			break;
 			case -229:
 				$this->response->code = 3;
 				$this->response->msg = lang('RESP_OLD_USER');
-				break;
+			break;
 			case -262:
 				$this->response->code = 3;
 				$this->response->msg = lang('RESP_NO_PERMISSIONS');
@@ -153,7 +160,7 @@ class Novo_User_Model extends NOVO_Model {
 						'action'=> 'close'
 					]
 				];
-				break;
+			break;
 			case -28:
 				$this->response->code = 3;
 				$this->response->msg = lang('RESP_INCORRECTLY_CLOSED');
@@ -167,7 +174,7 @@ class Novo_User_Model extends NOVO_Model {
 						'action'=> 'logout'
 					]
 				];
-				break;
+			break;
 			case -424:
 				$this->response->code = 2;
 				$this->response->ipInvalid = TRUE;
@@ -189,7 +196,7 @@ class Novo_User_Model extends NOVO_Model {
 					]
 				];
 				$this->session->set_flashdata('authToken',$response->usuario->codigoOtp->access_token);
-				break;
+			break;
 			case -286:
 					$this->response->code = 4;
 					$this->response->msg = lang('GEN_RESP_CODE_INVALID');
@@ -209,7 +216,17 @@ class Novo_User_Model extends NOVO_Model {
 					'action' => 'close'
 				];
 			break;
-			case 'fail':
+			case 998:
+				$this->response->code = 4;
+				$this->response->msg = lang('SESSION_EXPIRE_TIME');
+				$this->response->title = lang('GEN_RECOVER_PASS_TITLE');
+				$this->response->icon = lang('GEN_ICON_INFO');
+				$this->response->data = [
+					'btn1'=> [
+						'action'=> 'close'
+					]
+				];
+			break;
 			case 9999:
 				$this->response->code = 3;
 				$this->response->title = lang('GEN_SYSTEM_NAME');
@@ -222,7 +239,7 @@ class Novo_User_Model extends NOVO_Model {
 						'action'=> 'redirect'
 					]
 				];
-				break;
+			break;
 		}
 
 		return $this->responseToTheView('callWs_Login');
@@ -405,12 +422,8 @@ class Novo_User_Model extends NOVO_Model {
 
 		switch($this->isResponseRc) {
 			case 200:
-				if (isset($response->bean->TokenTO->authToken)) {
-					$this->session->set_flashdata('authToken', $response->bean->TokenTO->authToken);
-				}
-				if (isset($response->logAccesoObject->userName)) {
-					$this->session->set_flashdata('userName', $response->logAccesoObject->userName);
-				}
+				$this->session->set_flashdata('authToken', $response->bean->TokenTO->authToken);
+				$this->session->set_flashdata('userName', $response->logAccesoObject->userName);
 				$this->response->code = 0;
 				$this->response->msg = lang('GEN_OTP');
 				$this->response->icon = lang('GEN_ICON_SUCCESS');
@@ -473,7 +486,11 @@ class Novo_User_Model extends NOVO_Model {
 		$maskMail = maskString($dataRequest->email, 4, $end = 6, '@');
 		$map = 0;
 
-		$response = $this->sendToService('callWs_ValidateOtp');
+		if ($this->session->flashdata('authToken') != NULL) {
+			$response = $this->sendToService('callWs_ValidateOtp');
+		} else {
+			$this->isResponseRc = 998;
+		}
 
 		switch($this->isResponseRc) {
 			case 0:
@@ -488,10 +505,18 @@ class Novo_User_Model extends NOVO_Model {
 				];
 			break;
 			case -286:
+				$map = 1;
+				$this->response->msg = lang('GEN_SO_CREATE_INCORRECT');
+			break;
 			case -287:
 			case -288:
 				$map = 1;
-				$this->response->msg = lang('GEN_INVALID_OTP');
+				$this->response->msg = lang('GEN_SO_CREATE_EXPIRED');
+			break;
+			case 998:
+				$map = 1;
+				$this->response->code = 4;
+				$this->response->msg = lang('SESSION_EXPIRE_TIME');
 			break;
 		}
 
@@ -656,6 +681,6 @@ class Novo_User_Model extends NOVO_Model {
 
 		log_message('DEBUG', $logMessage);
 
-		return $result["score"] <= $this->config->item('score_recaptcha')[ENVIRONMENT] ? 9999 : 0;
+		return $result["score"] <= lang('CONF_SCORE_CAPTCHA')[ENVIRONMENT] ? 9999 : 0;
 	}
 }

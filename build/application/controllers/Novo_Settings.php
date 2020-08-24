@@ -24,7 +24,7 @@ class Novo_Settings extends NOVO_Controller {
 	{
 		log_message('INFO', 'NOVO Settings: options Method Initialized');
 
-		$view = 'settings';
+		$view = 'options';
 
 		array_push(
 			$this->includeAssets->cssFiles,
@@ -36,7 +36,7 @@ class Novo_Settings extends NOVO_Controller {
 			"third_party/jquery.validate",
 			"validate-core-forms",
 			"third_party/additional-methods",
-			"settings/settings",
+			"settings/options",
 			"user/changePassword-core"
 		);
 		$userType = '';
@@ -60,14 +60,11 @@ class Novo_Settings extends NOVO_Controller {
 			foreach ($user->data->dataUser AS $index => $render) {
 				$this->render->$index = $render;
 			}
-
-
 		}
 
 		if (lang('CONF_SETTINGS_ENTERPRISE') == 'ON') {
 			$this->load->model('Novo_Business_Model', 'getEnterprises');
 			$enterpriseList = $this->getEnterprises->callWs_getEnterprises_Business(TRUE);
-			$this->render->enterpriseList1 = $enterpriseList->data->list;
 			$this->render->enterpriseSettList = $enterpriseList->data->list;
 			$this->render->countEnterpriseList = count($enterpriseList->data->list);
 
@@ -91,6 +88,8 @@ class Novo_Settings extends NOVO_Controller {
 
 		$this->render->titlePage = lang('GEN_SETTINGS_TITLE');
 		$this->render->userType = $userType;
+		$this->render->emailUpdate = lang('CONF_SETTINGS_EMAIL_UPDATE') == 'OFF' ? 'readonly' : '';
+		$this->render->phoneUpdate = lang('CONF_SETTINGS_PHONES_UPDATE') == 'OFF' ? 'readonly' : '';
 		$this->render->idFiscal = $idFiscal;
 		$this->render->name = $name;
 		$this->render->businessName = $businessName;
