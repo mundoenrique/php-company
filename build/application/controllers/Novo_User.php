@@ -19,7 +19,7 @@ class Novo_User extends NOVO_Controller {
 	{
 		log_message('INFO', 'NOVO User: index Method Initialized');
 
-		$view = 'Login';
+		$view = 'login';
 
 		if($this->session->has_userdata('logged')) {
 			$oldUrl = str_replace($this->countryUri.'/', $this->config->item('country').'/', base_url('dashboard'));
@@ -41,7 +41,6 @@ class Novo_User extends NOVO_Controller {
 
 		array_push(
 			$this->includeAssets->jsFiles,
-			"third_party/jquery.md5",
 			"third_party/jquery.balloon",
 			"third_party/jquery.validate",
 			"validate".$this->render->newViews."-forms",
@@ -189,7 +188,6 @@ class Novo_User extends NOVO_Controller {
 			$this->includeAssets->jsFiles,
 			"user/changePassword".$this->render->newViews,
 			"user/passValidate",
-			"third_party/jquery.md5",
 			"third_party/jquery.balloon",
 			"third_party/jquery.validate",
 			"validate".$this->render->newViews."-forms",

@@ -1251,7 +1251,8 @@ class Users extends CI_Controller {
         $data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
         $data = json_encode($data);
         $response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);	// ENVÍA LA PETICIÓN Y ALMACENA LA RESPUESTA EN $response
-        $jsonResponse = np_Hoplite_Decrypt($response, 'callWSInfoEmpresa');
+				$jsonResponse = np_Hoplite_Decrypt($response, 'callWSInfoEmpresa');
+				log_message('debug', 'RESPONSE callWSInfoEmpresa: '.$jsonResponse);
         $response = json_decode($jsonResponse);
 
         if($response){
