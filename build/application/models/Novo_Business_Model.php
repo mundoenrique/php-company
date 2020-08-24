@@ -37,11 +37,7 @@ class Novo_Business_Model extends NOVO_Model {
 		$this->dataRequest->filtroEmpresas = '';
 
 		$response = $this->sendToService('callWs_GetEnterprises');
-		$filters = FALSE;
-
-		if(!$dataRequest) {
-			$filters = $this->request_data->setFilters();
-		}
+		$filters = $this->request_data->setFilters();
 
 		switch($this->isResponseRc) {
 			case 0:
@@ -50,7 +46,6 @@ class Novo_Business_Model extends NOVO_Model {
 				$enterpriseArgs->sizePage = $sizePage;
 				$enterpriseList = $this->request_data->OrderEnterpriseList($enterpriseArgs, $filters, $dataRequest);
 				$this->response->data->list = $enterpriseList->list;
-				$this->response->data->listaa = $enterpriseList;
 				if(!$dataRequest) {
 					$access = [
 						'user_access',

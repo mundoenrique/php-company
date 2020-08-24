@@ -68,7 +68,7 @@ class Request_Data {
 
 			$string = (mb_strtoupper(trim($enterprises->acnomcia)));
 			$string = strlen($string) > 30 ? substr($string, 0, 30).'...' : $string;
-			$enterprises->nameEnterprise = $string;
+			$enterprises->enterpriseName = $string;
 
 			foreach($enterprises AS $key => $value) {
 				$enterpriseArgs->lista[$pos]->$key = trim($value);
