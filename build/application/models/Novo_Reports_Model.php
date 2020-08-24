@@ -1077,6 +1077,106 @@ class Novo_Reports_Model extends NOVO_Model {
     return $this->responseToTheView('callWS_StatusCardHolders');
 	}
 
+	public function callWs_RechargeMade_Reports($dataRequest)
+	{
+		log_message('INFO', 'NOVO Reports Model: RechargeMade Method Initialized');
+
+		$this->className = 'com.novo.objects.TOs.RecargasRealizadasTO';
+
+		$this->dataAccessLog->modulo = 'Reportes';
+		$this->dataAccessLog->function = 'Reportes Recargas Realizadas';
+		$this->dataAccessLog->operation = 'Recargas Realizadas';
+
+		$this->dataRequest->idOperation = 'recargasRealizadas';
+		$this->dataRequest->paginaActual = 1;
+		$this->dataRequest->tamanoPagina = 10;
+		$this->dataRequest->fecha = '';
+		$this->dataRequest->fecha1 = '';
+		$this->dataRequest->fecha2 = '';
+		$this->dataRequest->accodcia = $dataRequest->enterpriseCode;
+    $fecha=$dataRequest->initialDatemy;
+    $arreglo=explode ("/",$fecha);
+    $mes=$arreglo[0];
+    $anio=$arreglo[1];
+		$this->dataRequest->mesSeleccionado = $mes;
+		$this->dataRequest->anoSeleccionado = $anio;
+		$response = $this->sendToService('callWs_RechargeMadeReport');
+		$rechargeMadeList = [];
+
+    switch($this->isResponseRc) {
+      case 0:
+        $this->response->code = 0;
+
+          $record = new stdClass();
+					$record->monthRecharge1 = $response->mesRecarga1;
+					$record->monthRecharge2 = $response->mesRecarga2;
+					$record->monthRecharge3 =$response->mesRecarga3;
+					$record->totalRecharge1 = $response->totalRecargas1;
+					$record->totalRecharge2 = $response->totalRecargas2;
+					$record->totalRecharge3 =$response->totalRecargas3;
+					$record->totalRecharge =$response->totalRecargas;
+					$record->recharge = $response->recargas;
+          array_push(
+            $rechargeMadeList,
+            $record
+          );
+
+      break;
+      case -150:
+        $this->response->code = 0;
+      break;
+    }
+    $this->response->data['rechargeMadeList'] = $rechargeMadeList;
+
+    return $this->responseToTheView('callWS_RechargeMadeReport');
+	}
+
+	public function callWs_IssuedCards_Reports($dataRequest)
+	{
+		log_message('INFO', 'NOVO Reports Model: IssuedCards Method Initialized');
+		$this->className = 'com.novo.objects.MO.ListadoEmisionesMO';
+
+		$this->dataAccessLog->modulo = 'Reportes';
+		$this->dataAccessLog->function = 'buscarTarjetasEmitidas';
+		$this->dataAccessLog->operation = 'buscarTarjetasEmitidas';
+
+		$enterpriseCode=explode("/",$dataRequest->enterpriseCode);
+		$accodcia=$enterpriseCode[0];
+
+		$this->dataRequest->idOperation = 'buscarTarjetasEmitidas';
+		$this->dataRequest->tipoConsulta = $dataRequest->radioButton;
+		$this->dataRequest->fechaMes = $dataRequest->monthYear;
+		$this->dataRequest->accodcia = $accodcia;
+		$this->dataRequest->fechaIni = '';
+		$this->dataRequest->fechaFin = '';
+		$response = $this->sendToService('callWs_IssuedCardsReport');
+		$issuedCardsList = [];
+
+    switch($this->isResponseRc) {
+      case 0:
+        $this->response->code = 0;
+
+          $record = new stdClass();
+					$record->lista = isset($response->lista) ? $response->lista : '';
+          array_push(
+            $issuedCardsList,
+            $record
+          );
+
+      break;
+      case -150:
+        $this->response->code = 0;
+      break;
+    }
+		$this->response->data['issuedCardsList'] = $issuedCardsList;
+		$this->response->data['tipoConsulta'] = $this->dataRequest->tipoConsulta;
+
+    return $this->responseToTheView('callWS_IssuedCardsReport');
+	}
+
+
+
+
 		/**
 	 * @info Método para obtener actividad por ususario
 	 * @author Diego Acosta García
