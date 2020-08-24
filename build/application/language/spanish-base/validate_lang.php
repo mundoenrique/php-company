@@ -40,6 +40,7 @@ $lang['VALIDATE_MAXIMUM'] = 'máximo';
 $lang['VALIDATE_STARTING_LINE'] = 'Solo se admiten letras, números, espacios y mín 3 caracteres';
 $lang['VALIDATE_BULK_NUMBER'] = 'Solo se admiten números';
 $lang['VALIDATE_DATE_DMY'] = 'Indica una fecha válida dd/mm/aaaa';
+$lang['VALIDATE_DATE_MY'] = 'Indica una fecha válida mm/aaaa';
 $lang['VALIDATE_SELECT'] = 'Selecciona al menos un registro';
 $lang['VALIDATE_OS_OTP'] = 'Indica un código de seguridad válido';
 $lang['VALIDATE_SELECT_GROUP'] = 'Completa alguno de estos campos';

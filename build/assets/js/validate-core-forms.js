@@ -128,6 +128,9 @@ function validateForms(form) {
 			"checkbox": {pattern: binary},
 			"initialDate": {required: true, pattern: date.dmy},
 			"finalDate": {required: true, pattern: date.dmy},
+			"initialDatemy": {required: true, pattern: date.my},
+			"finalDatemy": {required: true, pattern: date.my},
+      "monthYear": {required: true, pattern: date.my},
 			"idNumber": {pattern: idNumberReg},
 			"anio-consolid": { requiredSelect: true, min: 1, pattern: date.y},
 			"cardNumber": {
@@ -235,6 +238,8 @@ function validateForms(form) {
 			"bulk-number": lang.VALIDATE_BULK_NUMBER,
 			"initialDate": lang.VALIDATE_DATE_DMY,
 			"finalDate": lang.VALIDATE_DATE_DMY,
+			"initialDatemy": lang.VALIDATE_DATE_MY,
+			"monthYear": lang.VALIDATE_DATE_MY,
 			"idNumber": lang.VALIDATE_ID_NUMBER,
 			"cardNumber": lang.VALIDATE_CARD_NUMBER,
 			"otpCode": lang.VALIDATE_OS_OTP,

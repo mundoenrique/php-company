@@ -891,6 +891,30 @@ $config = [
 			'rules' => 'trim|regex_match[/^[a-z0-9]+$/i]|required'
 		],
 	],
+	'rechargeMade' => [
+		[
+			'field' => 'enterpriseCode',
+			'label' => 'enterpriseCode',
+			'rules' => 'trim|regex_match[/^[a-z0-9]+$/i]|required'
+		],
+		[
+			'field' => 'initialDatemy',
+			'label' => 'initialDatemy',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+		]
+	],
+	'issuedCards' => [
+		[
+			'field' => 'enterpriseCode',
+			'label' => 'enterpriseCode',
+			'rules' => 'trim|required'
+		],
+		[
+			'field' => 'monthYear',
+			'label' => 'monthYear',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+		]
+	],
 	'keepSession' => [
 		[
 			'field' => 'modalReq',

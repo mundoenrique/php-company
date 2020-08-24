@@ -213,6 +213,99 @@ class Novo_DownloadFiles_Model extends NOVO_Model {
 		return $this->responseToTheView('callWs_UnnmamedAffiliate');
 	}
 
+	public function callWs_RechargeMadeReport_DownloadFiles($dataRequest)
+	{
+		log_message('INFO', 'NOVO DownloadFiles Model: RechargeMadeReport Method Initialized');
+
+		$this->className = 'com.novo.objects.TOs.RecargasRealizadasTO';
+		$this->dataAccessLog->modulo = 'Reportes';
+		$this->dataAccessLog->function = 'Reportes RecargasRealizadas';
+		$this->dataAccessLog->operation = 'Descarga de archivos';
+
+		switch ($dataRequest->type) {
+			case lang('GEN_BTN_DOWN_XLS'):
+				$this->dataRequest->idOperation = 'generarExcelRecargasRealizadas';
+				$FileType = 'xls';
+			break;
+			case lang('GEN_BTN_DOWN_PDF'):
+				$this->dataRequest->idOperation = 'generarPdfRecargasRealizadas';
+				$FileType = 'pdf';
+			break;
+		}
+
+    $fecha=$dataRequest->initialDatemy;
+    $arreglo=explode ("/",$fecha);
+    $mes=$arreglo[0];
+    $anio=$arreglo[1];
+
+		$this->dataRequest->paginaActual = 1;
+		$this->dataRequest->tamanoPagina = 10;
+		$this->dataRequest->fecha = '';
+		$this->dataRequest->fecha1 = '';
+		$this->dataRequest->fecha2 = '';
+		$this->dataRequest->accodcia = $dataRequest->enterpriseCode;
+		$this->dataRequest->mesSeleccionado = $mes;
+		$this->dataRequest->anoSeleccionado = $anio;
+
+		$response = $this->sendToService('callWs_RechargeMadeReport');
+
+		switch ($this->isResponseRc) {
+			case 0:
+				exportFile($response->archivo, $FileType, 'Recargas_realizadas');
+				break;
+			default:
+				$dataRequest->code = 0;
+				$this->responseFail_DownloadFiles($dataRequest);
+				$this->session->set_flashdata('download', $this->response);
+				redirect(base_url(lang('GEN_LINK_REP_RECHARGE_MADE')), 'location', 301);
+		}
+
+
+		return $this->responseToTheView('callWs_UnnmamedAffiliate');
+	}
+
+	public function callWs_IssuedCardsReport_DownloadFiles($dataRequest)
+	{
+		log_message('INFO', 'NOVO DownloadFiles Model: IssuedCardsReport Method Initialized');
+
+		$this->className = 'com.novo.objects.MO.SaldosAmanecidosMO';
+		$this->dataAccessLog->modulo = 'Reportes';
+		$this->dataAccessLog->function = 'Reportes TarjetasEmitidas';
+		$this->dataAccessLog->operation = 'Descarga de archivos';
+
+		switch ($dataRequest->type) {
+			case lang('GEN_BTN_DOWN_XLS'):
+				$this->dataRequest->idOperation = 'buscarTarjetasEmitidasExcel';
+				$FileType = 'xls';
+			break;
+		}
+
+		$enterpriseCode=explode("/",$dataRequest->enterpriseCode);
+		$accodcia=$enterpriseCode[0];
+		$rifEnterprise=$enterpriseCode[1];
+
+		$this->dataRequest->accodcia = $accodcia;
+		$this->dataRequest->tipoConsulta = $dataRequest->radioButton;
+		$this->dataRequest->idExtEmp = $rifEnterprise;
+		$this->dataRequest->nombreEmpresa = $dataRequest->nameEnterprise;
+		$this->dataRequest->fechaMes = $dataRequest->initialDatemy;
+
+		$response = $this->sendToService('callWs_IssuedCardsReport');
+
+		switch ($this->isResponseRc) {
+			case 0:
+				exportFile($response->archivo, $FileType, 'Tarjetas_emitidas');
+				break;
+			default:
+				$dataRequest->code = 0;
+				$this->responseFail_DownloadFiles($dataRequest);
+				$this->session->set_flashdata('download', $this->response);
+				redirect(base_url(lang('GEN_LINK_REP_ISSUED_CARDS')), 'location', 301);
+		}
+
+		return $this->responseToTheView('callWs_UnnmamedAffiliate');
+	}
+
 	/**
 	 * @info Arma respuesta en caso de falla de la descarga del archivo
 	 * @author J. Enrique Peñaloza Piñero
