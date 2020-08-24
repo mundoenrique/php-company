@@ -71,11 +71,11 @@ class Cryptography {
 	private function generateKey()
 	{
 		$length = 32;
-    $CypherBaseLength = strlen($this->CypherBase);
+    $CypherBaseLength = strlen(CYPHER_BASE);
 		$randomString = '';
 
     for ($i = 0; $i < $length; $i++) {
-			$randomString .= $this->CypherBase[rand(0, $CypherBaseLength - 1)];
+			$randomString .= CYPHER_BASE[rand(0, $CypherBaseLength - 1)];
 		}
 
     return $randomString;

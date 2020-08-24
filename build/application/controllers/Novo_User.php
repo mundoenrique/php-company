@@ -28,9 +28,7 @@ class Novo_User extends NOVO_Controller {
 			exit();
 		}
 
-		$this->session->sess_destroy();
-
-		if($this->render->activeRecaptcha) {
+		if(ACTIVE_RECAPTCHA) {
 			$this->load->library('recaptcha');
 			$this->render->scriptCaptcha = $this->recaptcha->getScriptTag();
 		}
@@ -65,6 +63,14 @@ class Novo_User extends NOVO_Controller {
 				"third_party/borders"
 			);
 		}
+
+		$singleSession = [
+			'name' => 'singleSession',
+			'value' => base64_encode('signIn'),
+			'expire' => 0
+		];
+
+		$this->input->set_cookie($singleSession);
 
 		$this->render->skipProductInf = TRUE;
 		$this->render->titlePage = lang('GEN_SYSTEM_NAME');
@@ -105,6 +111,14 @@ class Novo_User extends NOVO_Controller {
 			);
 			$this->render->skipmenu = TRUE;
 		}
+
+		$singleSession = [
+			'name' => 'singleSession',
+			'value' => base64_encode('SignThird'),
+			'expire' => 0
+		];
+
+		$this->input->set_cookie($singleSession);
 
 		$this->render->titlePage = lang('GEN_SYSTEM_NAME');
 		$this->render->skipProductInf = TRUE;
@@ -208,17 +222,17 @@ class Novo_User extends NOVO_Controller {
 		log_message('INFO', 'NOVO User: finishSession Method Initialized');
 
 		$view = 'finish';
-		$singleSignOn = $this->singleSignOn || $this->session->flashdata('singleSignOn');
+		$thirdPartySession = $this->singleSession == 'SignThird';
 
 		if($this->render->userId || $this->render->logged) {
 			$this->load->model('Novo_User_Model', 'finishSession');
 			$this->finishSession->callWs_FinishSession_User();
 		}
 
-		if($redirect == 'fin' || $singleSignOn) {
+		if($redirect == 'fin' || $thirdPartySession) {
 			$pos = array_search('menu-datepicker', $this->includeAssets->jsFiles);
 			$this->render->action = base_url('inicio');
-			$this->render->showBtn = !$singleSignOn;
+			$this->render->showBtn = !$thirdPartySession;
 			$this->render->sessionEnd = novoLang(lang('GEN_EXPIRED_SESSION'), lang('GEN_SYSTEM_NAME'));
 
 			if ($this->session->flashdata('unauthorized') != NULL) {

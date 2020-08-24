@@ -72,11 +72,11 @@
 
 			<div id="blockResult"  class="flex pb-5 flex-column ">
 				<span id="titleResults" class="line-text mb-2 h4 semibold primary">Resultados</span>
-				<div id="spinnerBlockBudget" class=" hide">
-									<div id="pre-loader" class="mt-2 mx-auto flex justify-center">
-										<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
-									</div>
-						</div>
+				<div id="spinnerBlock" class=" hide">
+					<div id="pre-loader" class="mt-2 mx-auto flex justify-center">
+						<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
+					</div>
+				</div>
 				<div id="blockBudgetResults" class="center mx-1 ">
 					<div id="block-btn-excel" class="flex mr-2 py-3 justify-end items-center hide">
 					<div class="cover-spin" ></div>

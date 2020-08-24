@@ -85,7 +85,8 @@ class Verify_Access {
 	{
 		log_message('INFO', 'NOVO Verify_Access: ResponseByDefect method initialized');
 
-		$linkredirect = $this->CI->session->has_userdata('singleSignOn') ? 'ingresar/fin' : 'inicio';
+		$singleSession = base64_decode($this->CI->input->cookie($this->CI->config->item('cookie_prefix').'singleSession'));
+		$linkredirect = $singleSession == 'SignThird' ? 'ingresar/fin' : 'inicio';
 		$this->responseDefect = new stdClass();
 		$this->responseDefect->code = lang('RESP_DEFAULT_CODE');
 		$this->responseDefect->title = lang('GEN_SYSTEM_NAME');
@@ -141,7 +142,6 @@ class Verify_Access {
 				case 'getEnterprises':
 				case 'getEnterprise':
 				case 'getUser':
-				case 'obtainNumPosition':
 				case 'obtenerIdEmpresa':
 				case 'keepSession':
 				case 'options':
@@ -211,10 +211,16 @@ class Verify_Access {
 					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('COPELO'));
 				break;
 				case 'transactionalLimits':
-					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('LIMTRX'));
+					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('LIMTRX', 'CONLIM'));
 				break;
-				case 'twirlsCommercial':
-					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('GIRCOM'));
+				case 'updateTransactionalLimits':
+					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('LIMTRX', 'ACTLIM'));
+				break;
+				case 'commercialTwirls':
+					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('GIRCOM', 'CONGIR'));
+				break;
+				case 'updateCommercialTwirls':
+					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('GIRCOM', 'ACTGIR'));
 				break;
 				case 'getReportsList':
 					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPALL'));
