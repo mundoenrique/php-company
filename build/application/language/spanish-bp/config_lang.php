@@ -2,6 +2,12 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 //SUPPORT IE 11
 $lang['CONF_SUPPORT_IE'] = 'ON';
+//SCORE RECAPTCHA
+$lang['CONF_SCORE_CAPTCHA'] = [
+	'development' => 0,
+	'testing' => 0,
+	'production' => 0
+];
 //VALIDATE FORMS
 $lang['CONF_VALID_ERROR'] = 'validate-error';
 $lang['CONF_VALID_VALID'] = 'success';

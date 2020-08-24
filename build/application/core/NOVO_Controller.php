@@ -23,7 +23,6 @@ class NOVO_Controller extends CI_Controller {
 	protected $dataResponse;
 	protected $appUserName;
 	protected $greeting;
-	protected $products;
 	protected $folder;
 	private $ValidateBrowser;
 	public $singleSession;
@@ -43,7 +42,6 @@ class NOVO_Controller extends CI_Controller {
 		$this->countryUri = $this->uri->segment(1, 0) ? $this->uri->segment(1, 0) : 'null';
 		$this->render->logged = $this->session->logged;
 		$this->appUserName = $this->session->userName;
-		$this->products = $this->session->has_userdata('products');
 		$this->render->userId = $this->session->userId;
 		$this->render->fullName = $this->session->fullName;
 		$this->render->productName = !$this->session->has_userdata('productInf') ?:
@@ -191,13 +189,14 @@ class NOVO_Controller extends CI_Controller {
 				array_push(
 					$this->includeAssets->jsFiles,
 					"third_party/jquery.balloon",
-					"menu-datepicker"
+					"sessionControl"
 				);
 			}
 
 		} else {
 			$linkredirect = $this->session->has_userdata('productInf') ? 'detalle-producto' : 'empresas';
-			$linkredirect = $this->singleSession == 'SignThird' && !$this->session->has_userdata('logged') ? 'ingresar/fin' : $linkredirect;
+			$linkredirect = !$this->session->has_userdata('logged') ? 'inicio' : $linkredirect;
+			$linkredirect = AUTO_LOGIN ? 'ingresar/fin' : $linkredirect;
 			redirect(base_url($linkredirect), 'location');
 		}
 
@@ -243,7 +242,7 @@ class NOVO_Controller extends CI_Controller {
 
 		if (($this->render->code == 0  && $active) || $download) {
 
-			if (count($this->render->enterpriseList) > 1 || $this->products) {
+			if (count($this->render->enterpriseList) > 1 || $this->session->has_userdata('products')) {
 				array_push(
 					$this->includeAssets->jsFiles,
 					"business/widget-enterprise"
@@ -251,7 +250,7 @@ class NOVO_Controller extends CI_Controller {
 
 				$this->render->widget =  new stdClass();
 				$this->render->widget->widgetBtnTitle = lang('GEN_MUST_SELECT_ENTERPRISE');
-				$this->render->widget->countProducts = $this->products;
+				$this->render->widget->countProducts = $this->session->has_userdata('products');
 				$this->render->widget->actionForm = 'detalle-producto';
 			}
 		}

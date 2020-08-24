@@ -99,7 +99,8 @@ class NOVO_Model extends CI_Model {
 		}
 
 		$linkredirect = $this->session->has_userdata('productInf') ? 'detalle-producto' : $linkredirect;
-		$linkredirect = $this->singleSession == 'SignThird' && ($this->isResponseRc == -29 || $this->isResponseRc == -61) ? 'ingresar/fin' : $linkredirect;
+		$linkredirect = $this->singleSession == 'SignThird' && ($this->isResponseRc == -29 || $this->isResponseRc == -61)
+			? 'ingresar/fin' : $linkredirect;
 		$arrayResponse = [
 			'btn1'=> [
 				'text'=> lang('GEN_BTN_ACCEPT'),

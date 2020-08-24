@@ -1,7 +1,13 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 //SUPPORT IE 11
-$lang['CONF_SUPPORT_IE'] = 'ON';
+$lang['CONF_SUPPORT_IE'] = 'OFF';
+//SCORE RECAPTCHA
+$lang['CONF_SCORE_CAPTCHA'] = [
+	'development' => 0,
+	'testing' => 0.2,
+	'production' => 0.5
+];
 //VALIDATE FORMS
 $lang['CONF_VALID_ERROR'] = 'has-error';
 $lang['CONF_VALID_VALID'] = 'has-success';
@@ -78,10 +84,12 @@ $lang['CONF_DEBIT_COLUMN']= 'ON';
 $lang['CONF_CREDIT_COLUMN']= 'ON';
 //SETTINGS
 $lang['CONF_SETTINGS_USER'] = 'ON';
+$lang['CONF_SETTINGS_EMAIL_UPDATE'] = 'ON';
 $lang['CONF_SETTINGS_ENTERPRISE'] = 'ON';
 $lang['CONF_SETTINGS_BRANCHES'] = 'ON';
 $lang['CONF_SETTINGS_DOWNLOADS'] = 'ON';
 $lang['CONF_SETTINGS_TELEPHONES'] = 'ON';
+$lang['CONF_SETTINGS_PHONES_UPDATE'] = 'ON';
 $lang['CONF_SETTINGS_CONTACT'] = 'ON';
 //USER OPTIONS
 $lang['CONF_SETTINGS_CHANGE_PASSWORD'] = 'ON';

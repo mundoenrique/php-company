@@ -188,7 +188,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 		unset($dataRequest->modalReq);
 
 		$this->dataRequest->idOperation = 'desconciliarOS';
-		$this->dataRequest->idOS = $dataRequest->OrderNumber;
+		$this->dataRequest->idOrden = $dataRequest->OrderNumber;
 		$this->dataRequest->rifEmpresa = $this->session->enterpriseInf->idFiscal;
 
 		$password = json_decode(base64_decode($dataRequest->pass));
@@ -316,8 +316,15 @@ class Novo_Inquiries_Model extends NOVO_Model {
 					break;
 					case '5':
 					case 'L':
-					case 'M':
 						$acceptAttr = ['idExtPer', 'id_ext_emp', 'monto', 'nro_cuenta', 'status'];
+
+						if(isset($response->registrosLoteRecarga) && count($response->registrosLoteRecarga) > 0) {
+							$bulkRecordsHeader = [lang('GEN_TABLE_DNI'), lang('GEN_TABLE_AMOUNT'), lang('GEN_TABLE_ACCOUNT_NUMBER'), lang('GEN_TABLE_STATUS')];
+							$detailInfo['bulkRecords'] = $this->buildCreditRecords_Bulk($response->registrosLoteRecarga, $acceptAttr);
+						}
+					break;
+					case 'M':
+						$acceptAttr = ['id_ext_per', 'id_ext_emp', 'monto', 'nro_cuenta', 'status'];
 
 						if(isset($response->registrosLoteRecarga) && count($response->registrosLoteRecarga) > 0) {
 							$bulkRecordsHeader = [lang('GEN_TABLE_DNI'), lang('GEN_TABLE_AMOUNT'), lang('GEN_TABLE_ACCOUNT_NUMBER'), lang('GEN_TABLE_STATUS')];
