@@ -123,6 +123,9 @@ class NOVO_Model extends CI_Model {
 					$this->session->sess_destroy();
 				}
 			break;
+			case -259:
+				$this->response->msg = lang('GEN_WITHOUT_AUTHORIZATION');
+			break;
 			case -437:
 				$this->response->msg = lang('GEN_FAILED_THIRD_PARTY');
 			break;
