@@ -36,7 +36,7 @@
 		<span class="dialog-icon">
 			<i id="system-icon" class="ui-icon mt-0"></i>
 		</span>
-		<span id="system-msg" class="system-msg"><?= lang('RESP_MESSAGE_SYSTEM'); ?></span>
+		<span id="system-msg" class="system-msg"><?= lang('GEN_MESSAGE_SYSTEM'); ?></span>
 	</p>
 	<div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix mb-1">
 		<div class="ui-dialog-buttonset novo-dialog-buttonset flex">

@@ -82,7 +82,7 @@ class NOVO_Model extends CI_Model {
 		log_message('INFO', 'NOVO Model: makeAnswer Method Initialized');
 
 		$this->isResponseRc = (int) $responseModel->rc;
-		$this->response->code = lang('RESP_DEFAULT_CODE');
+		$this->response->code = lang('GEN_DEFAULT_CODE');
 		$this->response->title = lang('GEN_SYSTEM_NAME');
 		$this->response->msg = '';
 		$this->response->icon = lang('GEN_ICON_WARNING');
@@ -126,13 +126,16 @@ class NOVO_Model extends CI_Model {
 			case -437:
 				$this->response->msg = lang('GEN_FAILED_THIRD_PARTY');
 			break;
+			case 504:
+				$this->response->msg = lang('GEN_TIMEOUT');
+			break;
 			default:
-				$this->response->msg = lang('RESP_MESSAGE_SYSTEM');
+				$this->response->msg = lang('GEN_MESSAGE_SYSTEM');
 				$this->response->icon = lang('GEN_ICON_DANGER');
 			break;
 		}
 
-		$this->response->msg = $this->isResponseRc == 0 ? lang('RESP_RC_0') : $this->response->msg;
+		$this->response->msg = $this->isResponseRc == 0 ? lang('GEN_RC_0') : $this->response->msg;
 
 		return $responseModel;
 	}

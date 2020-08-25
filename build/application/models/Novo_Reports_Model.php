@@ -183,7 +183,7 @@ class Novo_Reports_Model extends NOVO_Model {
 
 				if(file_exists(assetPath('downloads/'.$response->bean))) {
 					$this->response->code = 0;
-					$this->response->msg = lang('RESP_RC_0');
+					$this->response->msg = lang('GEN_RC_0');
 					$this->response->data = [
 						'file' => assetUrl('downloads/'.$response->bean),
 						'name' => $response->bean
@@ -234,7 +234,7 @@ class Novo_Reports_Model extends NOVO_Model {
 
 				if(file_exists(assetPath('downloads/'.$response->bean))) {
 					$this->response->code = 0;
-					$this->response->msg = lang('RESP_RC_0');
+					$this->response->msg = lang('GEN_RC_0');
 					$this->response->data = [
 						'file' => assetUrl('downloads/'.$response->bean),
 						'name' => $response->bean
@@ -285,7 +285,7 @@ class Novo_Reports_Model extends NOVO_Model {
 
 				if(file_exists(assetPath('downloads/'.$response->bean))) {
 					$this->response->code = 0;
-					$this->response->msg = lang('RESP_RC_0');
+					$this->response->msg = lang('GEN_RC_0');
 					$this->response->data = [
 						'file' => assetUrl('downloads/'.$response->bean),
 						'name' => $response->bean
@@ -338,7 +338,7 @@ class Novo_Reports_Model extends NOVO_Model {
 
 				if(file_exists(assetPath('downloads/'.$response->bean))) {
 					$this->response->code = 0;
-					$this->response->msg = lang('RESP_RC_0');
+					$this->response->msg = lang('GEN_RC_0');
 					$this->response->data = [
 						'file' => assetUrl('downloads/'.$response->bean),
 						'name' => $response->bean
@@ -551,7 +551,7 @@ class Novo_Reports_Model extends NOVO_Model {
 
 				if(file_exists(assetPath('downloads/'.$response->bean))) {
 					$this->response->code = 0;
-					$this->response->msg = lang('RESP_RC_0');
+					$this->response->msg = lang('GEN_RC_0');
 					$this->response->data = [
 						'file' => assetUrl('downloads/'.$response->bean),
 						'name' => $response->bean
@@ -602,7 +602,7 @@ class Novo_Reports_Model extends NOVO_Model {
 
 				if(file_exists(assetPath('downloads/'.$response->bean))) {
 					$this->response->code = 0;
-					$this->response->msg = lang('RESP_RC_0');
+					$this->response->msg = lang('GEN_RC_0');
 					$this->response->data = [
 						'file' => assetUrl('downloads/'.$response->bean),
 						'name' => $response->bean
