@@ -48,6 +48,7 @@ $lang['VALIDATE_MINLENGTH'] = 1;
 $lang['VALIDATE_SELECT_GROUP'] = 'Selecciona alguno de estos criterios';
 $lang['VALIDATE_DOCUMENT_ID'] = 'Indica un número de identificación válido';
 $lang['VALIDATE_SELECT_DOCTYPE'] = 'Selecciona un tipo de documento de identidad';
+$lang['VALIDATE_OTP_CODE'] = 'Ingresa un código de seguridad válido, letras y números';
 $lang['VALIDATE_MAX_WEEK'] = 'Monto diario no puede ser mayor al semanal';
 $lang['VALIDATE_MAX_MONTH'] = 'Monto semanal no puede ser mayor al mensual';
 $lang['VALIDATE_MAX_DAY'] = 'Monto de transacción no puede ser mayor al diario inicial';
