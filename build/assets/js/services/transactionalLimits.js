@@ -13,6 +13,8 @@ $(function () {
 
 	$('#card-holder-btn').on('click', function (e) {
 		e.preventDefault();
+		$('.section').css("display", "none");
+		$('.money').removeClass("has-error");
 		$('#blockResults').addClass('hidden');
 		var form = $('#limitsForm');
 		var passData = getDataForm(form);
@@ -73,5 +75,10 @@ function updateLimits(passData, btnText){
 		insertFormInput(false);
 		$('input[type=password]').val('');
 		$('#sign-btn').html(btnText);
+		if( code == 4){
+			$('#accept').on('click', function(){
+				$('#card-holder-btn').trigger('click');
+			});
+		}
 	})
 };

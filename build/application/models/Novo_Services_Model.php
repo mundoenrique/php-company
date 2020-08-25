@@ -865,6 +865,7 @@ class Novo_Services_Model extends NOVO_Model {
 
 		switch($this->isResponseRc) {
 			case 0:
+				$this->response->code= 4;
 				$this->response->title = lang('GEN_TRANSACTIONAL_LIMITS_TITTLE');
 				$this->response->icon =  lang('GEN_ICON_SUCCESS');
         $this->response->msg = 	lang('RESP_SUCCESSFULL_UPDATE_LIMITS');
