@@ -210,7 +210,7 @@ function notiSystem(title, message, icon, data) {
 		draggable: false,
 		resizable: false,
 		closeOnEscape: false,
-		width: data.width || 370,
+		width: data.width || lang.CONF_MODAL_WIDTH,
 		minWidth: data.minWidth || lang.CONF_MODAL_WIDTH,
 		minHeight: 100,
 		maxHeight: maxHeight !== 'none' ? maxHeight : false,
