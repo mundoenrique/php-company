@@ -4,3 +4,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $lang['CONF_SUPPORT_IE'] = 'ON';
 //SERVICES TRANSFER MASTER ACCOUNT
 $lang['CONF_PAY_ACCOUNT'] = 'OFF';
+//SETTINGS
+$lang['CONF_SETTINGS_EMAIL_UPDATE'] = 'OFF';
+$lang['CONF_SETTINGS_BRANCHES'] = 'OFF';
+$lang['CONF_SETTINGS_PHONES_UPDATE'] = 'OFF';
+$lang['CONF_SETTINGS_CONTACT'] = 'OFF';

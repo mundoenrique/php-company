@@ -22,7 +22,7 @@
 		<?php endforeach; ?>
 	</div>
 	<?php $this->load->view('footer_content') ?>
-	<?= ($module == lang('GEN_LOGIN') && ACTIVE_RECAPTCHA) ?  $scriptCaptcha : ''; ?>
+	<?= ($module == 'login' && ACTIVE_RECAPTCHA) ?  $scriptCaptcha : ''; ?>
 	<?= $this->asset->insertJs(); ?>
 	<?php $this->load->view('insert_variables') ?>
 </body>
