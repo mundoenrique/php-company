@@ -34,11 +34,11 @@ $(function () {
 		passData.cardNumber = $('#cardNumber').val();
 		validateForms(form);
 
-		// if (form.valid()) {
+		if (form.valid()) {
 			changeBtn.html(loader);
 			insertFormInput(true, form);
 			updateLimits(passData, btnText);
-		// }
+		}
 	});
 });
 

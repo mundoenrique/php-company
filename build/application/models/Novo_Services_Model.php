@@ -838,11 +838,6 @@ class Novo_Services_Model extends NOVO_Model {
 				$this->response->msg = novoLang(lang('SERVICES_TWIRLS_PERMANENT_BLOCKED_CARD'), maskString( $dataRequest->cardNumber, 5, 6));
 				$this->response->data['btn1']['action'] = 'close';
 			break;
-			default:
-				$this->response->title = lang('GEN_TRANSACTIONAL_LIMITS_TITTLE');
-				$this->response->icon =  lang('GEN_ICON_WARNING');
-				$this->response->msg = novoLang(lang('RESP_NO_CARD_FOUND'), maskString( $dataRequest->cardNumber, 5, 6));
-				$this->response->data['btn1']['action'] = 'close';
 		}
 
 		return $this->responseToTheView('callWs_transactionalLimits');
