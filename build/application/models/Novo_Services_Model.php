@@ -653,8 +653,6 @@ class Novo_Services_Model extends NOVO_Model {
 						break;
 				}
       break;
-			default:
-				$this->response->icon =  lang('GEN_ICON_WARNING');
 		}
 
 		return $this->responseToTheView('callWs_commercialTwirls');
@@ -740,8 +738,6 @@ class Novo_Services_Model extends NOVO_Model {
 
 				$this->response->data= $mcc;
 			break;
-			default:
-				$this->response->icon =  lang('GEN_ICON_WARNING');
 		}
 
 		return $this->responseToTheView('callWs_updateCommercialTwirls');
@@ -812,11 +808,36 @@ class Novo_Services_Model extends NOVO_Model {
 				$this->response->msg = novoLang(lang('SERVICES_LIMITS_NO_CARDHOLDER'), maskString( $dataRequest->cardNumber, 5, 6));
 				$this->response->data['btn1']['action'] = 'close';
 			break;
-			default:
+			case -455:
 				$this->response->title = lang('GEN_TRANSACTIONAL_LIMITS_TITTLE');
 				$this->response->icon =  lang('GEN_ICON_WARNING');
-				$this->response->msg = novoLang(lang('RESP_NO_CARD_FOUND'), maskString( $dataRequest->cardNumber, 5, 6));
+				$this->response->msg = novoLang(lang('SERVICES_TWIRLS_NO_AVAILABLE_CARD'), maskString( $dataRequest->cardNumber, 5, 6));
 				$this->response->data['btn1']['action'] = 'close';
+			break;
+			case -444:
+				$this->response->title = lang('GEN_TRANSACTIONAL_LIMITS_TITTLE');
+				$this->response->icon =  lang('GEN_ICON_WARNING');
+				$this->response->msg = lang('SERVICES_TWIRLS_NO_FOUND_REGISTRY');
+				$this->response->data['btn1']['action'] = 'close';
+			break;
+			case -454:
+				$this->response->title = lang('GEN_TRANSACTIONAL_LIMITS_TITTLE');
+				$this->response->icon =  lang('GEN_ICON_WARNING');
+				$this->response->msg = novoLang(lang('SERVICES_TWIRLS_TEMPORARY_BLOCKED_CARD'), maskString( $dataRequest->cardNumber, 5, 6));
+				$this->response->data['btn1']['action'] = 'close';
+			break;
+			case -330:
+				$this->response->title = lang('GEN_TRANSACTIONAL_LIMITS_TITTLE');
+				$this->response->icon =  lang('GEN_ICON_WARNING');
+				$this->response->msg = novoLang(lang('SERVICES_TWIRLS_EXPIRED_CARD'), maskString( $dataRequest->cardNumber, 5, 6));
+				$this->response->data['btn1']['action'] = 'close';
+			break;
+			case -307:
+				$this->response->title = lang('GEN_TRANSACTIONAL_LIMITS_TITTLE');
+				$this->response->icon =  lang('GEN_ICON_WARNING');
+				$this->response->msg = novoLang(lang('SERVICES_TWIRLS_PERMANENT_BLOCKED_CARD'), maskString( $dataRequest->cardNumber, 5, 6));
+				$this->response->data['btn1']['action'] = 'close';
+			break;
 		}
 
 		return $this->responseToTheView('callWs_transactionalLimits');
@@ -878,13 +899,19 @@ class Novo_Services_Model extends NOVO_Model {
 				$this->response->msg = lang('SERVICES_LIMITS_NO_UPDATE');
 				$this->response->data['btn1']['action'] = 'close';
 				break;
-
-			default:
+			case -456:
+				$this->response->title = lang('GEN_TRANSACTIONAL_LIMITS_TITTLE');
 				$this->response->icon =  lang('GEN_ICON_WARNING');
+				$this->response->msg = $response->msg;
+				$this->response->data['btn1']['action'] = 'close';
+				break;
+			case -457:
+				$this->response->title = lang('GEN_TRANSACTIONAL_LIMITS_TITTLE');
+				$this->response->icon =  lang('GEN_ICON_WARNING');
+				$this->response->msg = $response->msg;
+				$this->response->data['btn1']['action'] = 'close';
+				break;
 		}
-
-
-
 		return $this->responseToTheView('callWs_updateTransactionalLimits');
 	}
 }
