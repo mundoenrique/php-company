@@ -194,16 +194,16 @@ function validateForms(form) {
 			"weeklyAmountCredit": {required: true, pattern: numeric, max: function(){ return verifyMaxLimit('#monthlyAmountCredit')}},
 			"numberMonthlyPurchasesCtp": {pattern: numeric , required: true },
 			"monthlyPurchasesAmountCtp": {pattern: numeric , required: true },
-			"purchaseTransactionCtp": {pattern: numeric , required: true, max:function(){ return verifyDayLimit("#numberDayPurchasesCtp", "#dailyPurchaseamountCtp")}},
+			"purchaseTransactionCtp": {pattern: numeric , required: true, max:function(){ return verifyMaxLimit( "#dailyPurchaseamountCtp")}},
 			"numberMonthlyPurchasesStp": {pattern: numeric , required: true },
 			"monthlyPurchasesAmountStp": {pattern: numeric , required: true },
-			"purchaseTransactionStp": {pattern: numeric , required: true, max:function(){ return verifyDayLimit("#numberDayPurchasesStp", "#dailyPurchaseamountStp")}},
+			"purchaseTransactionStp": {pattern: numeric , required: true, max:function(){ return verifyMaxLimit("#dailyPurchaseamountStp")}},
 			"monthlyNumberWithdraw": {pattern: numeric , required: true },
 			"monthlyAmountwithdraw": {pattern: numeric , required: true },
-			"WithdrawTransaction": {pattern: numeric , required: true, max:function(){ return verifyDayLimit("#dailyNumberWithdraw", "#dailyAmountWithdraw")}},
+			"WithdrawTransaction": {pattern: numeric , required: true, max:function(){ return verifyMaxLimit("#dailyAmountWithdraw")}},
 			"monthlyNumberCredit": {pattern: numeric, required: true },
 			"monthlyAmountCredit": {pattern: numeric , required: true },
-			"CreditTransaction": {pattern: numeric , required: true, max:function(){ return verifyDayLimit("#dailyNumberCredit", "#dailyAmountCredit")}},
+			"CreditTransaction": {pattern: numeric , required: true, max:function(){ return verifyMaxLimit("#dailyAmountCredit")}},
 		},
 		messages: {
 			"user_login": lang.VALIDATE_USERLOGIN,
@@ -333,26 +333,6 @@ function validateForms(form) {
 		}
 	});
 
-function verifyMaxLimit(param) {
-		if (Number($(param).val()) == 0) {
-			return 999999;
-		} else {
-			return Number($(param).val())
-		}
-	}
-
-function verifyDayLimit(param1, param2){
-	var number;
-	var amount ;
-	number = verifyMaxLimit(param1);
-	amount = verifyMaxLimit(param2);
-	if(number > amount){
-		return amount;
-	} else {
-		return number;
-	}
-}
-
 	$.validator.methods.verifyRequired = function(value, element, param) {
 		return value != '' && $(param).val() != '';
 	}
@@ -420,5 +400,14 @@ function verifyDayLimit(param1, param2){
 		return valid
 	}
 
+function verifyMaxLimit(param) {
+	if (Number($(param).val()) == 0) {
+		return 999999;
+	} else {
+		return Number($(param).val())
+	}
+};
+
 	form.validate().resetForm();
 }
+-
