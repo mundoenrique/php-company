@@ -2,6 +2,7 @@
 $(function () {
 	$('#pre-loader').remove();
 	$('.hide-out').removeClass('hide');
+	$(".money").prop('maxLength', 9);
 	insertFormInput(false);
 	$('#blockResults').addClass('hidden');
 
