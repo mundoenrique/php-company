@@ -2,7 +2,6 @@
 $(function () {
 	$('#pre-loader').remove();
 	$('.hide-out').removeClass('hide');
-	$(".money").prop('maxLength', 9);
 	insertFormInput(false);
 	$('#blockResults').addClass('hidden');
 
@@ -35,11 +34,11 @@ $(function () {
 		passData.cardNumber = $('#cardNumber').val();
 		validateForms(form);
 
-		if (form.valid()) {
+		// if (form.valid()) {
 			changeBtn.html(loader);
 			insertFormInput(true, form);
 			updateLimits(passData, btnText);
-		}
+		// }
 	});
 });
 
