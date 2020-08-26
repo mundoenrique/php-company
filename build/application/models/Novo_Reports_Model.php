@@ -1140,13 +1140,10 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->dataAccessLog->function = 'buscarTarjetasEmitidas';
 		$this->dataAccessLog->operation = 'buscarTarjetasEmitidas';
 
-		$enterpriseCode=explode("/",$dataRequest->enterpriseCode);
-		$accodcia=$enterpriseCode[0];
-
 		$this->dataRequest->idOperation = 'buscarTarjetasEmitidas';
 		$this->dataRequest->tipoConsulta = $dataRequest->radioButton;
 		$this->dataRequest->fechaMes = $dataRequest->monthYear;
-		$this->dataRequest->accodcia = $accodcia;
+		$this->dataRequest->accodcia = $dataRequest->enterpriseCode;
 		$this->dataRequest->fechaIni = '';
 		$this->dataRequest->fechaFin = '';
 		$response = $this->sendToService('callWs_IssuedCardsReport');

@@ -27,10 +27,10 @@
 						<div class="form-group col-6 col-lg-4 col-xl-4">
 							<label><?= lang('GEN_ENTERPRISE') ?></label>
 							<select id="enterpriseCode" name="enterpriseCode" class="select-box custom-select flex h6 w-100 enterprise-getprod">
-									<?php print_r($enterpriseList); foreach($enterpriseList AS $enterprise) : ?>
+									<?php foreach($enterpriseList AS $enterprise) : ?>
 									<?php if($enterprise->acrif == $enterpriseData->idFiscal): ?>
 									<?php endif;?>
-									<option value="<?= $enterprise->accodcia.'/'.$enterprise->acrif; ?>" <?= $enterprise->acrif == $enterpriseData->idFiscal ? 'selected' : '' ?>
+									<option value="<?= $enterprise->accodcia ?>" <?= $enterprise->acrif == $enterpriseData->idFiscal ? 'selected' : '' ?>
 										id-fiscal="<?= $enterprise->acrif; ?>">
 										<?= $enterprise->acnomcia; ?>
 									</option>
