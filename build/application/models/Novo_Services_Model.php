@@ -911,21 +911,18 @@ class Novo_Services_Model extends NOVO_Model {
 			case -456:
 				$this->response->title = lang('GEN_TRANSACTIONAL_LIMITS_TITTLE');
 				$this->response->icon =  lang('GEN_ICON_WARNING');
-				$this->response->msg = lang('SERVICES_LIMITS_NOUPDATE_ELEMENT');
+				$this->response->msg = $response->msg;
 				$this->response->data['btn1']['action'] = 'close';
 				break;
 			case -457:
 				$this->response->title = lang('GEN_TRANSACTIONAL_LIMITS_TITTLE');
 				$this->response->icon =  lang('GEN_ICON_WARNING');
-				$this->response->msg = lang('SERVICES_LIMITS_MORE_THAN');
+				$this->response->msg = $response->msg;
 				$this->response->data['btn1']['action'] = 'close';
 				break;
 			default:
 				$this->response->icon =  lang('GEN_ICON_WARNING');
 		}
-
-
-
 		return $this->responseToTheView('callWs_updateTransactionalLimits');
 	}
 }
