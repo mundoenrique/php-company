@@ -653,8 +653,6 @@ class Novo_Services_Model extends NOVO_Model {
 						break;
 				}
       break;
-			default:
-				$this->response->icon =  lang('GEN_ICON_WARNING');
 		}
 
 		return $this->responseToTheView('callWs_commercialTwirls');
@@ -740,8 +738,6 @@ class Novo_Services_Model extends NOVO_Model {
 
 				$this->response->data= $mcc;
 			break;
-			default:
-				$this->response->icon =  lang('GEN_ICON_WARNING');
 		}
 
 		return $this->responseToTheView('callWs_updateCommercialTwirls');
@@ -920,8 +916,6 @@ class Novo_Services_Model extends NOVO_Model {
 				$this->response->msg = $response->msg;
 				$this->response->data['btn1']['action'] = 'close';
 				break;
-			default:
-				$this->response->icon =  lang('GEN_ICON_WARNING');
 		}
 		return $this->responseToTheView('callWs_updateTransactionalLimits');
 	}
