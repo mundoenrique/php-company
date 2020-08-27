@@ -1,5 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+$lang['GEN_FAVICON'] = 'favicon-bdb';
+$lang['GEN_FAVICON_EXT'] = 'ico';
 //GENERAL LANGUAGE
 $lang['GEN_LOGO_HEADER'] = 'img-logo.svg';
 $lang['GEN-LOGO-BIG'] = 'img-banco_bogota.svg';

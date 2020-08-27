@@ -1,6 +1,9 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 $lang['GEN_SYSTEM_NAME']= 'Conexión Empresas Online';
+$lang['GEN_FAVICON'] = 'favicon-novo';
+$lang['GEN_FAVICON_EXT'] = 'png';
+$lang['GEN_LOADER'] = 'loading-novo.gif';
 //MENU
 $lang['GEN_MENU_ENTERPRISE'] = 'Empresas';
 $lang['GEN_MENU_LOTS'] = 'Lotes';
