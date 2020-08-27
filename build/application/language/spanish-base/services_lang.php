@@ -108,4 +108,4 @@ $lang['SERVICES_TWIRLS_NO_AVAILABLE_CARD'] = 'El número de tarjeta <strong>%s</
 $lang['SERVICES_TWIRLS_NO_UPDATE'] = 'No fue posible actualizar la restricción de giros para:';
 $lang['SERVICES_LIMITS_NO_REGISTRY'] = 'No se han encontrado límites disponibles.';
 $lang['SERVICES_LIMITS_NO_CARDHOLDER'] = 'El número de tarjeta <strong>%s</strong> no se ha encontrado.';
-$lang['SERVICES_LIMITS_NO_UPDATE'] = 'No fue posible actualizar la restricción de límites para:';
+$lang['SERVICES_LIMITS_NO_UPDATE'] = 'No fue posible actualizar la restricción de límites';

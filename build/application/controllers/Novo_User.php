@@ -228,7 +228,7 @@ class Novo_User extends NOVO_Controller {
 		}
 
 		if($redirect == 'fin' || $thirdPartySession) {
-			$pos = array_search('menu-datepicker', $this->includeAssets->jsFiles);
+			$pos = array_search('sessionControl', $this->includeAssets->jsFiles);
 			$this->render->action = base_url('inicio');
 			$this->render->showBtn = !$thirdPartySession;
 			$this->render->sessionEnd = novoLang(lang('GEN_EXPIRED_SESSION'), lang('GEN_SYSTEM_NAME'));

@@ -178,165 +178,34 @@ function validateForms(form) {
 			"documentId": {required: true, pattern: alphanum},
 			"documentType": {requiredSelect: true},
 			"optCode": {required: true, pattern: alphanum},
-			"numberDayPurchasesCtp": {required: true, pattern: numeric, max:
-				function(){
-					if (Number($("#numberWeeklyPurchasesCtp").val()) == 0) {
-						return 999999;
-					} else {
-						return Number($("#numberWeeklyPurchasesCtp").val())
-					}
-				}
-			},
-			"numberWeeklyPurchasesCtp": {required: true, pattern: numeric, max: function(){
-					if (Number($("#numberMonthlyPurchasesCtp").val()) == 0) {
-						return 999999;
-					} else {
-						return Number($("#numberMonthlyPurchasesCtp").val())
-					}
-				}
-			},
-			"dailyPurchaseamountCtp": {required: true, pattern: numeric, max: function(){
-					if (Number($("#weeklyAmountPurchasesCtp").val()) == 0) {
-						return 999999;
-					} else {
-						return Number($("#weeklyAmountPurchasesCtp").val())
-					}
-				}
-			},
-			"weeklyAmountPurchasesCtp": {required: true, pattern: numeric, max: function(){
-					if (Number($("#monthlyPurchasesAmountCtp").val()) == 0) {
-						return 999999;
-					} else {
-						return Number($("#monthlyPurchasesAmountCtp").val())
-					}
-				}
-			},
-			"numberDayPurchasesStp": {required: true, pattern: numeric, max: function(){
-					if (Number($("#numberWeeklyPurchasesStp").val()) == 0) {
-						return 999999;
-					} else {
-						return Number($("#numberWeeklyPurchasesStp").val())
-					}
-				}
-			},
-			"numberWeeklyPurchasesStp": {required: true, pattern: numeric, max: function(){
-					if (Number($("#numberMonthlyPurchasesStp").val()) == 0) {
-						return 999999;
-					} else {
-						return Number($("#numberMonthlyPurchasesStp").val())
-					}
-				}
-			},
-			"dailyPurchaseamountStp": {required: true, pattern: numeric, max: function(){
-					if (Number($("#weeklyAmountPurchasesStp").val()) == 0) {
-						return 999999;
-					} else {
-						return Number($("#weeklyAmountPurchasesStp").val())
-					}
-				}
-			},
-			"weeklyAmountPurchasesStp": {required: true, pattern: numeric, max: function(){
-					if (Number($("#monthlyPurchasesAmountStp").val()) == 0) {
-						return 999999;
-					} else {
-						return Number($("#monthlyPurchasesAmountStp").val())
-					}
-				}
-			},
-			"dailyNumberWithdraw": {required: true, pattern: numeric, max: function(){
-					if (Number($("#weeklyNumberWithdraw").val()) == 0) {
-						return 999999;
-					} else {
-						return Number($("#weeklyNumberWithdraw").val())
-					}
-				}
-			},
-			"weeklyNumberWithdraw": {required: true, pattern: numeric, max: function(){
-					if (Number($("#monthlyNumberWithdraw").val()) == 0) {
-						return 999999;
-					} else {
-						return Number($("#monthlyNumberWithdraw").val())
-					}
-				}
-			},
-			"dailyAmountWithdraw": {required: true, pattern: numeric, max: function(){
-						if (Number($("#weeklyAmountWithdraw").val()) == 0) {
-						return 999999;
-					} else {
-						return Number($("#weeklyAmountWithdraw").val())
-					}
-				}
-			},
-			"weeklyAmountWithdraw": {required: true, pattern: numeric, max: function()	{
-					if (Number($("#monthlyAmountwithdraw").val()) == 0) {
-						return 999999;
-					} else {
-						return Number($("#monthlyAmountwithdraw").val())
-					}
-				}
-			},
-			"dailyNumberCredit": {required: true, pattern: numeric, max: function(){
-					if (Number($("#weeklyNumberCredit").val()) == 0) {
-						return 999999;
-					} else {
-						return Number($("#weeklyNumberCredit").val())
-					}
-				}
-			},
-			"weeklyNumberCredit": {required: true, pattern: numeric, max: function(){
-					if (Number($("#monthlyNumberCredit").val()) == 0) {
-						return 999999;
-					} else {
-						return Number($("#monthlyNumberCredit").val())
-					}
-				}
-			},
-			"dailyAmountCredit": {required: true, pattern: numeric, max: function(){
-					if (Number($("#weeklyAmountCredit").val()) == 0) {
-						return 999999;
-					} else {
-						return Number($("#weeklyAmountCredit").val())
-					}
-				}
-			},
-			"weeklyAmountCredit": {required: true, pattern: numeric, max: function(){
-					if (Number($("#monthlyAmountCredit").val()) == 0) {
-						return 999999;
-					} else {
-						return Number($("#monthlyAmountCredit").val())
-					}
-				}
-			},
+			"numberDayPurchasesCtp": {required: true, pattern: numeric, max: function(){ return verifyMaxLimit('#numberWeeklyPurchasesCtp')}},
+			"numberWeeklyPurchasesCtp": {required: true, pattern: numeric, max: function(){ return verifyMaxLimit('#numberMonthlyPurchasesCtp')}},
+			"dailyPurchaseamountCtp": {required: true, pattern: numeric, max: function(){ return verifyMaxLimit('#weeklyAmountPurchasesCtp')}},
+			"weeklyAmountPurchasesCtp": {required: true, pattern: numeric, max: function(){ return verifyMaxLimit('#monthlyPurchasesAmountCtp')}},
+			"numberDayPurchasesStp": {required: true, pattern: numeric, max: function(){ return verifyMaxLimit('#numberWeeklyPurchasesStp')}},
+			"numberWeeklyPurchasesStp": {required: true, pattern: numeric, max: function(){ return verifyMaxLimit('#numberMonthlyPurchasesStp')}},
+			"dailyPurchaseamountStp": {required: true, pattern: numeric, max: function(){ return verifyMaxLimit('#weeklyAmountPurchasesStp')}},
+			"weeklyAmountPurchasesStp": {required: true, pattern: numeric, max: function(){ return verifyMaxLimit('#monthlyPurchasesAmountStp')}},
+			"dailyNumberWithdraw": {required: true, pattern: numeric, max: function(){ return verifyMaxLimit('#weeklyNumberWithdraw')}},
+			"weeklyNumberWithdraw": {required: true, pattern: numeric, max: function(){ return verifyMaxLimit('#monthlyNumberWithdraw')}},
+			"dailyAmountWithdraw": {required: true, pattern: numeric, max: function(){ return verifyMaxLimit('#weeklyAmountWithdraw')}},
+			"weeklyAmountWithdraw": {required: true, pattern: numeric, max: function(){ return verifyMaxLimit('#monthlyAmountwithdraw')}},
+			"dailyNumberCredit": {required: true, pattern: numeric, max: function(){ return verifyMaxLimit('#weeklyNumberCredit')}},
+			"weeklyNumberCredit": {required: true, pattern: numeric, max: function(){ return verifyMaxLimit('#monthlyNumberCredit')}},
+			"dailyAmountCredit": {required: true, pattern: numeric, max: function(){ return verifyMaxLimit('#weeklyAmountCredit')}},
+			"weeklyAmountCredit": {required: true, pattern: numeric, max: function(){ return verifyMaxLimit('#monthlyAmountCredit')}},
 			"numberMonthlyPurchasesCtp": {pattern: numeric , required: true },
 			"monthlyPurchasesAmountCtp": {pattern: numeric , required: true },
-			"purchaseTransactionCtp": {pattern: numeric , required: true, max:
-				function(){
-					return Number($("#numberDayPurchasesCtp").val());
-				}
-			},
+			"purchaseTransactionCtp": {pattern: numeric , required: true, max:function(){ return verifyMaxLimit( "#dailyPurchaseamountCtp")}},
 			"numberMonthlyPurchasesStp": {pattern: numeric , required: true },
 			"monthlyPurchasesAmountStp": {pattern: numeric , required: true },
-			"purchaseTransactionStp": {pattern: numeric , required: true, max:
-				function(){
-					return Number($("#numberDayPurchasesStp").val());
-				}
-			},
-
+			"purchaseTransactionStp": {pattern: numeric , required: true, max:function(){ return verifyMaxLimit("#dailyPurchaseamountStp")}},
 			"monthlyNumberWithdraw": {pattern: numeric , required: true },
 			"monthlyAmountwithdraw": {pattern: numeric , required: true },
-			"WithdrawTransaction": {pattern: numeric , required: true, max:
-				function(){
-					return Number($("#dailyNumberWithdraw").val());
-				}
-			},
-
+			"WithdrawTransaction": {pattern: numeric , required: true, max:function(){ return verifyMaxLimit("#dailyAmountWithdraw")}},
 			"monthlyNumberCredit": {pattern: numeric, required: true },
 			"monthlyAmountCredit": {pattern: numeric , required: true },
-			"CreditTransaction": {pattern: numeric , required: true, max:
-				function(){
-					return Number($("#dailyNumberCredit").val());
-				}
-			},
+			"CreditTransaction": {pattern: numeric , required: true, max:function(){ return verifyMaxLimit("#dailyAmountCredit")}},
 		},
 		messages: {
 			"user_login": lang.VALIDATE_USERLOGIN,
@@ -534,6 +403,14 @@ function validateForms(form) {
 
 		return valid
 	}
+
+function verifyMaxLimit(param) {
+	if (Number($(param).val()) == 0) {
+		return 999999;
+	} else {
+		return Number($(param).val())
+	}
+};
 
 	form.validate().resetForm();
 }
