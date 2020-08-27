@@ -35,38 +35,11 @@ if(!function_exists('clientUrlValidate')) {
 	}
 }
 
-if(!function_exists('getFaviconLoader')) {
-	function getFaviconLoader($countryUri) {
-		$CI = &get_instance();
-		$favicon = $CI->config->item('favicon');
-		$loader = 'loading-';
-		switch($countryUri) {
-			case 'bp':
-				$ext = 'ico';
-				$loader.= 'bp.gif';
-				break;
-			case 'bdb':
-				$ext = 'ico';
-				$loader.= 'bdb.gif';
-				break;
-			case 'bnt':
-				$ext = 'ico';
-				$loader.= 'bdb.gif';
-			case 'pb':
-				$ext = 'ico';
-				$loader.= 'bdb.gif';
-				break;
-			default:
-				$ext = 'png';
-				$loader.= 'novo.gif';
-		}
+if(!function_exists('arrayTrim')) {
+	function arrayTrim(&$value) {
+		$value = trim($value);
 
-		$faviconLoader = new stdClass();
-		$faviconLoader->favicon = $favicon;
-		$faviconLoader->ext = $ext;
-		$faviconLoader->loader = $loader;
-
-		return $faviconLoader;
+		return $value;
 	}
 }
 
@@ -86,30 +59,6 @@ if(!function_exists('accessLog')) {
 			"dttimesstamp"=> date('m/d/Y H:i'),
 			"lenguaje"=> strtoupper(LANGUAGE)
 		];
-	}
-}
-
-if(!function_exists('urlReplace')) {
-	function urlReplace($countryUri, $countrySess, $url) {
-		$CI = &get_instance();
-		switch($countrySess) {
-			case 'Ec-bp':
-				$country = 'bp';
-				break;
-			case 'Co':
-				$country = 'co';
-				break;
-			case 'Pe':
-				$country = 'pe';
-				break;
-			case 'Usd':
-				$country = 'us';
-				break;
-			case 'Ve':
-				$country = 've';
-				break;
-		}
-		return str_replace($countryUri.'/', $country.'/', $url);
 	}
 }
 
@@ -207,19 +156,19 @@ if (!function_exists('exportFile')) {
 				header('Content-Disposition: attachment; filename='.$filename.'.pdf');
 				header('Pragma: no-cache');
 				header('Expires: 0');
-				break;
+			break;
 			case 'xls':
 				header('Content-type: application/vnd.ms-excel');
 				header('Content-Disposition: attachment; filename='.$filename.'.xls');
 				header('Pragma: no-cache');
 				header('Expires: 0');
-				break;
+			break;
 			case 'xlsx':
 				header('Content-type: application/vnd.ms-excel');
 				header('Content-Disposition: attachment; filename='.$filename.'.xlsx');
 				header('Pragma: no-cache');
 				header('Expires: 0');
-				break;
+			break;
 		}
 
 		if($bytes) {
@@ -247,13 +196,5 @@ if(!function_exists('convertDateMDY')) {
 		$date = $date[1].'/'.$date[0].'/'.$date[2];
 
 		return $date;
-	}
-}
-
-if(!function_exists('arrayTrim')) {
-	function arrayTrim(&$value) {
-		$value = trim($value);
-
-		return $value;
 	}
 }

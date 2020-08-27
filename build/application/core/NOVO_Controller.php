@@ -142,10 +142,9 @@ class NOVO_Controller extends CI_Controller {
 		log_message('INFO', 'NOVO Controller: preloadView Method Initialized');
 
 		if ($auth) {
-			$faviconLoader = getFaviconLoader($this->countryUri);
-			$this->render->favicon = $faviconLoader->favicon;
-			$this->render->ext = $faviconLoader->ext;
-			$this->render->loader = $faviconLoader->loader;
+			$this->render->favicon = lang('GEN_FAVICON');
+			$this->render->ext = lang('GEN_FAVICON_EXT');
+			$this->render->loader = lang('GEN_LOADER');
 			$this->render->countryConf = $this->config->item('country');
 			$this->render->countryUri = $this->countryUri;
 			$this->render->novoName = $this->security->get_csrf_token_name();
