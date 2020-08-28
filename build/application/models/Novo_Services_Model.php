@@ -527,7 +527,7 @@ class Novo_Services_Model extends NOVO_Model {
 					'action' => 'close'
 				];
 				$this->response->success = TRUE;
-				$responseList = isset($response->bean) ? json_decode($response->bean) : FALSE;
+				$responseList = $response->bean ?? FALSE;
 
 				if ($responseList && is_array($responseList)) {
 					foreach ($responseList AS $cards) {
@@ -611,7 +611,7 @@ class Novo_Services_Model extends NOVO_Model {
 		switch($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
-				$responseBean = json_decode($response->bean)->cards[0];
+				$responseBean = $response->bean->cards[0];
 				$dataTwirls = new stdClass();
 				$shops = new stdClass();
 				$dataTwirls->updateDate =  $responseBean->datetimeLastUpdate;
@@ -630,11 +630,11 @@ class Novo_Services_Model extends NOVO_Model {
 			break;
 			case -438:
 				$shops = new stdClass();
-				$this->response->data['shops']= json_decode($response->bean)->cards[0];
+				$this->response->data['shops']= $response->bean->cards[0];
 				$this->response->title = lang('GEN_COMMERCIAL_TWIRLS_TITTLE');
 				$this->response->icon =  lang('GEN_ICON_WARNING');
         $this->response->data['btn1']['action'] = 'close';
-				switch (json_decode($response->bean)->cards[0]->rc) {
+				switch ($response->bean->cards[0]->rc) {
 					case -266:
 						$this->response->msg = 	novoLang(lang('SERVICES_TWIRLS_TEMPORARY_BLOCKED_CARD'), maskString( $dataRequest->cardNumber, 4, 6));
 						break;
@@ -731,7 +731,7 @@ class Novo_Services_Model extends NOVO_Model {
 				$this->response->title = lang('GEN_COMMERCIAL_TWIRLS_TITTLE');
 				$this->response->msg= lang('SERVICES_TWIRLS_NO_UPDATE');
 
-				foreach ((array)json_decode($response->bean)->cards[0]->mccItems as $key => $value) {
+				foreach ((array)$response->bean->cards[0]->mccItems as $key => $value) {
 					$mcc[lang('SERVICES_NAME_PROPERTIES_VIEW')[$key]] = $value;
 					unset($mcc[$key]);
 				};
@@ -778,7 +778,7 @@ class Novo_Services_Model extends NOVO_Model {
 		switch($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
-				$responseBean = json_decode($response->bean)->cards[0];
+				$responseBean = $response->bean->cards[0];
 				$dataLimits = new stdClass();
 				$limits = new stdClass();
 				$dataLimits->updateDate =  $responseBean->lastUpdate;

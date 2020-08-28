@@ -102,7 +102,7 @@ class Novo_Settings_Model extends NOVO_Model {
 				$this->response->data = [
 					'btn1'=> [
 						'text'=> lang('GEN_BTN_CONTINUE'),
-						'link'=> 'inicio',
+						'link'=> 'empresas',
 						'action'=> 'close'
 					]
 				];
@@ -200,7 +200,7 @@ class Novo_Settings_Model extends NOVO_Model {
 				$this->response->data = [
 					'btn1'=> [
 						'text'=> lang('GEN_BTN_CONTINUE'),
-						'link'=> 'inicio',
+						'link'=> 'empresas',
 						'action'=> 'close'
 					]
 				];
@@ -262,7 +262,7 @@ class Novo_Settings_Model extends NOVO_Model {
 				$this->response->data = [
 					'btn1'=> [
 						'text'=> lang('GEN_BTN_CONTINUE'),
-						'link'=> 'inicio',
+						'link'=> 'empresas',
 						'action'=> 'close'
 					]
 				];

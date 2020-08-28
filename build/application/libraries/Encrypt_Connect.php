@@ -89,13 +89,14 @@ class Encrypt_Connect {
 					}
 				break;
 				case 'msg':
-					$this->logMessage->msg = isset($response->msg) || $response->msg != '' ? $response->msg : 'Sin mensaje del servicio';
+					$this->logMessage->msg = $responseAttr;
 				break;
 				default:
 					$this->logMessage->$pos = $responseAttr;
 			}
 		}
 
+		$this->logMessage->msg = $this->logMessage->msg ?? 'Sin mensaje del servicio';
 		$this->logMessage->model = $model;
 		$this->logMessage->userName = $userName;
 		$this->writeLog($this->logMessage);
