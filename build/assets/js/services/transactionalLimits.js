@@ -13,6 +13,7 @@ $(function () {
 
 	$('#card-holder-btn').on('click', function (e) {
 		e.preventDefault();
+		$('input[type=password]').val('');
 		$('.section').css("display", "none");
 		$('.money').removeClass("has-error");
 		$('#blockResults').addClass('hidden');
@@ -46,7 +47,6 @@ function getForm(passData){
 	verb = "POST"; who = 'Services'; where = 'transactionalLimits'; data = passData;	callNovoCore(verb, who, where, data, function(response) {
 		dataResponse = response.data;
 		code = response.code
-
 		if (code == 0) {
 			insertFormInput(false);
 			$('#spinnerBlock').addClass('hide');
@@ -70,8 +70,7 @@ function getForm(passData){
 function updateLimits(passData, btnText){
 	verb = "POST"; who = 'Services'; where = 'updateTransactionalLimits'; data = passData;	callNovoCore(verb, who, where, data, function(response) {
 		dataResponse = response.data;
-		code = response.code
-		var info = dataResponse;
+		code = response.code;
 		insertFormInput(false);
 		$('input[type=password]').val('');
 		$('#sign-btn').html(btnText);
