@@ -20,12 +20,6 @@ $lang['GEN_FOTTER_RIGHTS'] = '© Todos los derechos reservados. Grupo Financiero
 $lang['GEN_FOTTER_IMAGE_L'] = 'img-banorte_white.svg';
 $lang['GEN_FOTTER_IMAGE_R'] = 'img-pci_compliance.svg';
 $lang['GEN_FOTTER_MARK'] = 'img-ma.svg';
-$lang['GEN_FOTTER_NETWORKS_IMG'] = [
-	'facebook' => 'facebook.png',
-	'twitter' => 'twitter.png',
-	'youtube' => 'youtube.png',
-	'instagram' => 'instagram.png',
-];
 $lang['GEN_FOTTER_NETWORKS_LINK'] = [
 	'facebook' => 'https://www.facebook.com/banorte',
 	'twitter' => 'https://www.twitter.com/Banorte_mx',
