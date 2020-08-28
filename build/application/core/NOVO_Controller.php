@@ -40,12 +40,6 @@ class NOVO_Controller extends CI_Controller {
 		$this->model = ucfirst($this->router->fetch_class()).'_Model';
 		$this->method = 'callWs_'.ucfirst($this->router->fetch_method()).'_'.str_replace('Novo_', '', $this->router->fetch_class());
 		$this->countryUri = $this->uri->segment(1, 0) ? $this->uri->segment(1, 0) : 'null';
-		$this->render->logged = $this->session->logged;
-		$this->appUserName = $this->session->userName;
-		$this->render->userId = $this->session->userId;
-		$this->render->fullName = $this->session->fullName;
-		$this->render->productName = !$this->session->has_userdata('productInf') ?:
-			$this->session->productInf->productName.' / '.$this->session->productInf->brand;
 		$this->render->widget =  FALSE;
 		$this->render->prefix = '';
 		$this->render->sessionTime = $this->config->item('session_time');
@@ -67,7 +61,7 @@ class NOVO_Controller extends CI_Controller {
 		languageLoad('generic', $this->router->fetch_class());
 		clientUrlValidate($this->countryUri);
 		languageLoad('specific', $this->router->fetch_class());
-		if($this->session->userId) {
+		if($this->session->has_userdata('userId')) {
 			if($this->session->countrySess !== $this->config->item('country')) {
 				$urlRedirect = str_replace($this->countryUri.'/', $this->session->countryUri.'/', base_url('cerrar-sesion/inicio'));
 				redirect($urlRedirect, 'location', 301);
@@ -75,7 +69,6 @@ class NOVO_Controller extends CI_Controller {
 			}
 		}
 		$this->skin = $this->config->item('client');
-		$this->render->newViews = $this->config->item('new-views');
 		$this->form_validation->set_error_delimiters('', '---');
 		$this->config->set_item('language', 'spanish-base');
 
@@ -142,6 +135,11 @@ class NOVO_Controller extends CI_Controller {
 		log_message('INFO', 'NOVO Controller: preloadView Method Initialized');
 
 		if ($auth) {
+
+			if ($this->rule == 'login' && $this->session->has_userdata('userId')) {
+				clearSessionsVars();
+			}
+
 			$this->render->favicon = lang('GEN_FAVICON');
 			$this->render->ext = lang('GEN_FAVICON_EXT');
 			$this->render->loader = lang('GEN_LOADER');
@@ -149,7 +147,7 @@ class NOVO_Controller extends CI_Controller {
 			$this->render->countryUri = $this->countryUri;
 			$this->render->novoName = $this->security->get_csrf_token_name();
 			$this->render->novoCook = $this->security->get_csrf_hash();
-			$this->folder = $this->render->newViews === '-core' ? $this->countryUri.'/' : '';
+			$this->folder = lang('CONF_VIEW_SUFFIX') === '-core' ? $this->countryUri.'/' : '';
 			$this->includeAssets->cssFiles = [
 				"$this->folder"."$this->skin-base"
 			];
@@ -161,7 +159,7 @@ class NOVO_Controller extends CI_Controller {
 				);
 			}
 
-			if ($this->render->newViews === '-core') {
+			if (lang('CONF_VIEW_SUFFIX') === '-core') {
 				array_unshift(
 					$this->includeAssets->cssFiles,
 					"$this->countryUri/root-$this->skin",
@@ -184,7 +182,7 @@ class NOVO_Controller extends CI_Controller {
 				"helper"
 			];
 
-			if($this->render->logged) {
+			if($this->session->has_userdata('logged')) {
 				array_push(
 					$this->includeAssets->jsFiles,
 					"third_party/jquery.balloon",
@@ -193,9 +191,10 @@ class NOVO_Controller extends CI_Controller {
 			}
 
 		} else {
-			$linkredirect = $this->session->has_userdata('productInf') ? 'detalle-producto' : 'empresas';
+			/* $linkredirect = $this->session->has_userdata('productInf') ? 'detalle-producto' : 'empresas';
 			$linkredirect = !$this->session->has_userdata('logged') ? 'inicio' : $linkredirect;
-			$linkredirect = AUTO_LOGIN ? 'ingresar/fin' : $linkredirect;
+			$linkredirect = AUTO_LOGIN ? 'ingresar/fin' : $linkredirect; */
+			$linkredirect = uriRedirect(AUTO_LOGIN);
 			redirect(base_url($linkredirect), 'location');
 		}
 
@@ -293,12 +292,17 @@ class NOVO_Controller extends CI_Controller {
 		$userMenu->userAccess = $this->session->user_access;
 		$userMenu->enterpriseUrl = lang('GEN_ENTERPRISE_LIST');
 		$userMenu->currentClass = $this->router->fetch_class();
+		$this->render->logged = $this->session->has_userdata('logged');
+		$this->appUserName = $this->session->userName;
+		$this->render->fullName = $this->session->fullName;
+		$this->render->productName = !$this->session->has_userdata('productInf') ?:
+			$this->session->productInf->productName.' / '.$this->session->productInf->brand;
 		$this->render->settingsMenu = $userMenu;
-		$this->render->goOut = ($this->render->logged || $this->session->flashdata('changePassword'))
+		$this->render->goOut = ($this->session->has_userdata('logged') || $this->session->flashdata('changePassword'))
 			? 'cerrar-sesion/inicio' : 'inicio';
 		$this->render->module = $module;
 		$this->render->viewPage = $this->views;
 		$this->asset->initialize($this->includeAssets);
-		$this->load->view('master_content'.$this->render->newViews, $this->render);
+		$this->load->view('master_content'.lang('CONF_VIEW_SUFFIX'), $this->render);
 	}
 }
