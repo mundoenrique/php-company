@@ -30,7 +30,7 @@
 								<input type="password" id="confirm-pass" name="confirm-pass" class="input-middle" required>
 							</div>
 						</fieldset>
-						<button id="btn-change-pass" name="btn-change-pass" class="btn-middle btn-sidebar"><?= lang('GEN_BTN_ACCEPT') ?></button>
+						<button id="passwordChangeBtn" name="passwordChangeBtn" class="btn-middle btn-sidebar"><?= lang('GEN_BTN_ACCEPT') ?></button>
 					</form>
 				</div>
 			</div>
