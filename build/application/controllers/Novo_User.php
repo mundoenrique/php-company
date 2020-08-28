@@ -43,7 +43,7 @@ class Novo_User extends NOVO_Controller {
 			$this->includeAssets->jsFiles,
 			"third_party/jquery.balloon",
 			"third_party/jquery.validate",
-			"validate".$this->render->newViews."-forms",
+			"validate".lang('CONF_VIEW_SUFFIX')."-forms",
 			"third_party/additional-methods",
 			"user/login"
 		);
@@ -138,7 +138,7 @@ class Novo_User extends NOVO_Controller {
 			$this->includeAssets->jsFiles,
 			"user/recoverPass",
 			"third_party/jquery.validate",
-			"validate".$this->render->newViews."-forms",
+			"validate".lang('CONF_VIEW_SUFFIX')."-forms",
 			"third_party/additional-methods"
 		);
 		$this->render->titlePage = lang('GEN_RECOVER_PASS_TITLE');
@@ -160,7 +160,7 @@ class Novo_User extends NOVO_Controller {
 			$this->includeAssets->jsFiles,
 			"user/recoverAccess",
 			"third_party/jquery.validate",
-			"validate".$this->render->newViews."-forms",
+			"validate-core-forms",
 			"third_party/additional-methods"
 		);
 		$this->render->titlePage = lang('GEN_RECOVER_PASS_TITLE');
@@ -186,11 +186,11 @@ class Novo_User extends NOVO_Controller {
 
 		array_push(
 			$this->includeAssets->jsFiles,
-			"user/changePassword".$this->render->newViews,
+			"user/changePassword".lang('CONF_VIEW_SUFFIX'),
 			"user/passValidate",
 			"third_party/jquery.balloon",
 			"third_party/jquery.validate",
-			"validate".$this->render->newViews."-forms",
+			"validate".lang('CONF_VIEW_SUFFIX')."-forms",
 			"third_party/additional-methods"
 		);
 
@@ -222,7 +222,7 @@ class Novo_User extends NOVO_Controller {
 		$view = 'finish';
 		$thirdPartySession = $this->singleSession == 'SignThird';
 
-		if($this->render->userId || $this->render->logged) {
+		if($this->session->has_userdata('userId')) {
 			$this->load->model('Novo_User_Model', 'finishSession');
 			$this->finishSession->callWs_FinishSession_User();
 		}
@@ -264,13 +264,13 @@ class Novo_User extends NOVO_Controller {
 		$view = 'suggestion';
 
 		if(!$this->session->flashdata('messageBrowser')) {
-			redirect(base_url('inicio'), 'location', 301);
+			redirect(base_url('empresas'), 'location', 301);
 			exit();
 		}
 
 		$views = ['staticpages/content-browser'];
 
-		if($this->render->newViews != '') {
+		if(lang('CONF_VIEW_SUFFIX') != '') {
 			$this->includeAssets->cssFiles = [
 				"$this->folder"."$this->skin-browser"
 			];

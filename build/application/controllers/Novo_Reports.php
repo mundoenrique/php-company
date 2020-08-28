@@ -30,7 +30,7 @@ class Novo_Reports extends NOVO_Controller {
 			$this->includeAssets->jsFiles,
 			"third_party/dataTables-1.10.20",
 			"third_party/jquery.validate",
-			"validate".$this->render->newViews."-forms",
+			"validate-core-forms",
 			"third_party/additional-methods",
 			"reports/reports"
 		);

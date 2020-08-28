@@ -37,7 +37,8 @@ class Novo_Settings extends NOVO_Controller {
 			"validate-core-forms",
 			"third_party/additional-methods",
 			"settings/options",
-			"user/changePassword-core"
+			"user/changePassword-core",
+			"user/passValidate"
 		);
 		$userType = '';
 		$idFiscal = '';
