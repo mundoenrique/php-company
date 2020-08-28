@@ -21,13 +21,6 @@ class Novo_User extends NOVO_Controller {
 
 		$view = 'login';
 
-		if($this->session->has_userdata('logged')) {
-			$oldUrl = str_replace($this->countryUri.'/', $this->config->item('country').'/', base_url('dashboard'));
-			$urlRedirect = $this->render->newViews != '-core' ? $oldUrl : base_url('empresas');
-			redirect($urlRedirect, 'location');
-			exit();
-		}
-
 		if(ACTIVE_RECAPTCHA) {
 			$this->load->library('recaptcha');
 			$this->render->scriptCaptcha = $this->recaptcha->getScriptTag();
