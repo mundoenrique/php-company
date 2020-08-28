@@ -13,7 +13,7 @@ $(function () {
 
 	$('#card-holder-btn').on('click', function (e) {
 		e.preventDefault();
-		$('input[type=password]').val('');
+		$('#passwordAuth').val('');
 		$('.section').css("display", "none");
 		$('.money').removeClass("has-error");
 		$('#blockResults').addClass('hidden');
