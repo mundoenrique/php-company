@@ -178,34 +178,34 @@ function validateForms(form) {
 			"documentId": {required: true, pattern: alphanum},
 			"documentType": {requiredSelect: true},
 			"optCode": {required: true, pattern: alphanum},
-			"numberDayPurchasesCtp": {required: true, pattern: numeric, max: function(){ return verifyMaxLimit('#numberWeeklyPurchasesCtp')}},
-			"numberWeeklyPurchasesCtp": {required: true, pattern: numeric, max: function(){ return verifyMaxLimit('#numberMonthlyPurchasesCtp')}},
-			"dailyPurchaseamountCtp": {required: true, pattern: numeric, max: function(){ return verifyMaxLimit('#weeklyAmountPurchasesCtp')}},
-			"weeklyAmountPurchasesCtp": {required: true, pattern: numeric, max: function(){ return verifyMaxLimit('#monthlyPurchasesAmountCtp')}},
-			"numberDayPurchasesStp": {required: true, pattern: numeric, max: function(){ return verifyMaxLimit('#numberWeeklyPurchasesStp')}},
-			"numberWeeklyPurchasesStp": {required: true, pattern: numeric, max: function(){ return verifyMaxLimit('#numberMonthlyPurchasesStp')}},
-			"dailyPurchaseamountStp": {required: true, pattern: numeric, max: function(){ return verifyMaxLimit('#weeklyAmountPurchasesStp')}},
-			"weeklyAmountPurchasesStp": {required: true, pattern: numeric, max: function(){ return verifyMaxLimit('#monthlyPurchasesAmountStp')}},
-			"dailyNumberWithdraw": {required: true, pattern: numeric, max: function(){ return verifyMaxLimit('#weeklyNumberWithdraw')}},
-			"weeklyNumberWithdraw": {required: true, pattern: numeric, max: function(){ return verifyMaxLimit('#monthlyNumberWithdraw')}},
-			"dailyAmountWithdraw": {required: true, pattern: numeric, max: function(){ return verifyMaxLimit('#weeklyAmountWithdraw')}},
-			"weeklyAmountWithdraw": {required: true, pattern: numeric, max: function(){ return verifyMaxLimit('#monthlyAmountwithdraw')}},
-			"dailyNumberCredit": {required: true, pattern: numeric, max: function(){ return verifyMaxLimit('#weeklyNumberCredit')}},
-			"weeklyNumberCredit": {required: true, pattern: numeric, max: function(){ return verifyMaxLimit('#monthlyNumberCredit')}},
-			"dailyAmountCredit": {required: true, pattern: numeric, max: function(){ return verifyMaxLimit('#weeklyAmountCredit')}},
-			"weeklyAmountCredit": {required: true, pattern: numeric, max: function(){ return verifyMaxLimit('#monthlyAmountCredit')}},
+			"numberDayPurchasesCtp": {required: true, pattern: numeric, maxLimitZero:'#numberWeeklyPurchasesCtp', minLimitZero:'#numberWeeklyPurchasesCtp'},
+			"numberWeeklyPurchasesCtp": {required: true, pattern: numeric, maxLimitZero: '#numberMonthlyPurchasesCtp', minLimitZero: '#numberMonthlyPurchasesCtp'},
+			"dailyPurchaseamountCtp": {required: true, pattern: numeric, maxLimitZero:'#weeklyAmountPurchasesCtp', minLimitZero:'#weeklyAmountPurchasesCtp'},
+			"weeklyAmountPurchasesCtp": {required: true, pattern: numeric, maxLimitZero:'#monthlyPurchasesAmountCtp', minLimitZero:'#monthlyPurchasesAmountCtp'},
+			"numberDayPurchasesStp": {required: true, pattern: numeric, maxLimitZero:'#numberWeeklyPurchasesStp', minLimitZero:'#numberWeeklyPurchasesStp'},
+			"numberWeeklyPurchasesStp": {required: true, pattern: numeric, maxLimitZero:'#numberMonthlyPurchasesStp', minLimitZero:'#numberMonthlyPurchasesStp'},
+			"dailyPurchaseamountStp": {required: true, pattern: numeric, maxLimitZero:'#weeklyAmountPurchasesStp', minLimitZero:'#weeklyAmountPurchasesStp'},
+			"weeklyAmountPurchasesStp": {required: true, pattern: numeric, maxLimitZero:'#monthlyPurchasesAmountStp', minLimitZero:'#monthlyPurchasesAmountStp'},
+			"dailyNumberWithdraw": {required: true, pattern: numeric, maxLimitZero:'#weeklyNumberWithdraw', minLimitZero:'#weeklyNumberWithdraw'},
+			"weeklyNumberWithdraw": {required: true, pattern: numeric, maxLimitZero:'#monthlyNumberWithdraw', minLimitZero:'#monthlyNumberWithdraw'},
+			"dailyAmountWithdraw": {required: true, pattern: numeric, maxLimitZero:'#weeklyAmountWithdraw', minLimitZero:'#weeklyAmountWithdraw'},
+			"weeklyAmountWithdraw": {required: true, pattern: numeric, maxLimitZero:'#monthlyAmountwithdraw', minLimitZero:'#monthlyAmountwithdraw'},
+			"dailyNumberCredit": {required: true, pattern: numeric, maxLimitZero:'#weeklyNumberCredit', minLimitZero:'#weeklyNumberCredit'},
+			"weeklyNumberCredit": {required: true, pattern: numeric, maxLimitZero:'#monthlyNumberCredit', minLimitZero:'#monthlyNumberCredit'},
+			"dailyAmountCredit": {required: true, pattern: numeric, maxLimitZero:'#weeklyAmountCredit', minLimitZero:'#weeklyAmountCredit'},
+			"weeklyAmountCredit": {required: true, pattern: numeric, maxLimitZero:'#monthlyAmountCredit', minLimitZero:'#monthlyAmountCredit'},
 			"numberMonthlyPurchasesCtp": {pattern: numeric , required: true },
 			"monthlyPurchasesAmountCtp": {pattern: numeric , required: true },
-			"purchaseTransactionCtp": {pattern: numeric , required: true, max:function(){ return verifyMaxLimit( "#dailyPurchaseamountCtp")}},
+			"purchaseTransactionCtp": {pattern: numeric , required: true,minLimitZero:'#dailyPurchaseamountCtp', maxLimitZero: '#dailyPurchaseamountCtp'},
 			"numberMonthlyPurchasesStp": {pattern: numeric , required: true },
 			"monthlyPurchasesAmountStp": {pattern: numeric , required: true },
-			"purchaseTransactionStp": {pattern: numeric , required: true, max:function(){ return verifyMaxLimit("#dailyPurchaseamountStp")}},
+			"purchaseTransactionStp": {pattern: numeric , required: true, maxLimitZero:'#dailyPurchaseamountStp', minLimitZero:'#dailyPurchaseamountStp'},
 			"monthlyNumberWithdraw": {pattern: numeric , required: true },
 			"monthlyAmountwithdraw": {pattern: numeric , required: true },
-			"WithdrawTransaction": {pattern: numeric , required: true, max:function(){ return verifyMaxLimit("#dailyAmountWithdraw")}},
+			"WithdrawTransaction": {pattern: numeric , required: true, maxLimitZero:'#dailyAmountWithdraw', minLimitZero:'#dailyAmountWithdraw'},
 			"monthlyNumberCredit": {pattern: numeric, required: true },
 			"monthlyAmountCredit": {pattern: numeric , required: true },
-			"CreditTransaction": {pattern: numeric , required: true, max:function(){ return verifyMaxLimit("#dailyAmountCredit")}},
+			"CreditTransaction": {pattern: numeric , required: true, maxLimitZero:'#dailyAmountCredit', minLimitZero:'#dailyAmountCredit'},
 		},
 		messages: {
 			"user_login": lang.VALIDATE_USERLOGIN,
@@ -305,32 +305,32 @@ function validateForms(form) {
 			"optCode": lang.VALIDATE_OTP_CODE,
 			"numberMonthlyPurchasesCtp": {pattern: lang.VALIDATE_INVALID_NUMBER , required: lang.VALIDATE_NUMBER_REQ },
 			"monthlyPurchasesAmountCtp": {pattern: lang.VALIDATE_INVALID_NUMBER , required: lang.VALIDATE_NUMBER_REQ },
-			"purchaseTransactionCtp": {pattern: lang.VALIDATE_INVALID_NUMBER , required: lang.VALIDATE_NUMBER_REQ , max: lang.VALIDATE_MAX_DAY},
+			"purchaseTransactionCtp": {pattern: lang.VALIDATE_INVALID_NUMBER , required: lang.VALIDATE_NUMBER_REQ , minLimitZero: lang.VALIDATE_MAX_DAY},
 			"numberMonthlyPurchasesStp": {pattern: lang.VALIDATE_INVALID_NUMBER , required: lang.VALIDATE_NUMBER_REQ },
 			"monthlyPurchasesAmountStp": {pattern: lang.VALIDATE_INVALID_NUMBER , required: lang.VALIDATE_NUMBER_REQ },
-			"purchaseTransactionStp": {pattern: lang.VALIDATE_INVALID_NUMBER , required: lang.VALIDATE_NUMBER_REQ, max: lang.VALIDATE_MAX_DAY},
+			"purchaseTransactionStp": {pattern: lang.VALIDATE_INVALID_NUMBER , required: lang.VALIDATE_NUMBER_REQ, maxLimitZero: lang.VALIDATE_MAX_DAY},
 			"monthlyNumberWithdraw": {pattern: lang.VALIDATE_INVALID_NUMBER , required: lang.VALIDATE_NUMBER_REQ },
 			"monthlyAmountwithdraw": {pattern: lang.VALIDATE_INVALID_NUMBER , required: lang.VALIDATE_NUMBER_REQ },
-			"WithdrawTransaction": {pattern: lang.VALIDATE_INVALID_NUMBER , required: lang.VALIDATE_NUMBER_REQ, max: lang.VALIDATE_MAX_DAY},
+			"WithdrawTransaction": {pattern: lang.VALIDATE_INVALID_NUMBER , required: lang.VALIDATE_NUMBER_REQ, maxLimitZero: lang.VALIDATE_MAX_DAY, },
 			"monthlyNumberCredit": {pattern: lang.VALIDATE_INVALID_NUMBER , required: lang.VALIDATE_NUMBER_REQ },
 			"monthlyAmountCredit": {pattern: lang.VALIDATE_INVALID_NUMBER , required: lang.VALIDATE_NUMBER_REQ },
-			"CreditTransaction": {pattern: lang.VALIDATE_INVALID_NUMBER , required: lang.VALIDATE_NUMBER_REQ, max: lang.VALIDATE_MAX_DAY},
-			"numberDayPurchasesCtp": {max: lang.VALIDATE_MAX_WEEK, pattern: lang.VALIDATE_INVALID_NUMBER , required: lang.VALIDATE_NUMBER_REQ },
-			"numberWeeklyPurchasesCtp": {max: lang.VALIDATE_MAX_MONTH, pattern: lang.VALIDATE_INVALID_NUMBER, required:lang.VALIDATE_NUMBER_REQ},
-			"dailyPurchaseamountCtp": {max: lang.VALIDATE_MAX_WEEK, pattern: lang.VALIDATE_INVALID_NUMBER , required: lang.VALIDATE_NUMBER_REQ },
-			"weeklyAmountPurchasesCtp": {max: lang.VALIDATE_MAX_MONTH, pattern: lang.VALIDATE_INVALID_NUMBER, required:lang.VALIDATE_NUMBER_REQ},
-			"numberDayPurchasesStp": {max: lang.VALIDATE_MAX_WEEK, pattern: lang.VALIDATE_INVALID_NUMBER , required: lang.VALIDATE_NUMBER_REQ },
-			"numberWeeklyPurchasesStp": {max: lang.VALIDATE_MAX_MONTH, pattern: lang.VALIDATE_INVALID_NUMBER, required:lang.VALIDATE_NUMBER_REQ},
-			"dailyPurchaseamountStp": {max: lang.VALIDATE_MAX_WEEK, pattern: lang.VALIDATE_INVALID_NUMBER , required: lang.VALIDATE_NUMBER_REQ },
-			"weeklyAmountPurchasesStp": {max: lang.VALIDATE_MAX_MONTH, pattern: lang.VALIDATE_INVALID_NUMBER, required:lang.VALIDATE_NUMBER_REQ},
-			"dailyNumberWithdraw": {max: lang.VALIDATE_MAX_WEEK, pattern: lang.VALIDATE_INVALID_NUMBER , required: lang.VALIDATE_NUMBER_REQ },
-			"weeklyNumberWithdraw": {max: lang.VALIDATE_MAX_MONTH, pattern: lang.VALIDATE_INVALID_NUMBER, required:lang.VALIDATE_NUMBER_REQ},
-			"dailyAmountWithdraw": {max: lang.VALIDATE_MAX_WEEK, pattern: lang.VALIDATE_INVALID_NUMBER , required: lang.VALIDATE_NUMBER_REQ },
-			"weeklyAmountWithdraw": {max: lang.VALIDATE_MAX_MONTH, pattern: lang.VALIDATE_INVALID_NUMBER, required:lang.VALIDATE_NUMBER_REQ},
-			"dailyNumberCredit": {max: lang.VALIDATE_MAX_WEEK, pattern: lang.VALIDATE_INVALID_NUMBER , required: lang.VALIDATE_NUMBER_REQ },
-			"weeklyNumberCredit": {max: lang.VALIDATE_MAX_MONTH, pattern: lang.VALIDATE_INVALID_NUMBER, required:lang.VALIDATE_NUMBER_REQ},
-			"dailyAmountCredit": {max: lang.VALIDATE_MAX_WEEK, pattern: lang.VALIDATE_INVALID_NUMBER , required: lang.VALIDATE_NUMBER_REQ },
-			"weeklyAmountCredit": {max: lang.VALIDATE_MAX_MONTH, pattern: lang.VALIDATE_INVALID_NUMBER, required:lang.VALIDATE_NUMBER_REQ},
+			"CreditTransaction": {pattern: lang.VALIDATE_INVALID_NUMBER , required: lang.VALIDATE_NUMBER_REQ, maxLimitZero: lang.VALIDATE_MAX_DAY},
+			"numberDayPurchasesCtp": {maxLimitZero: lang.VALIDATE_MAX_WEEK, pattern: lang.VALIDATE_INVALID_NUMBER , required: lang.VALIDATE_NUMBER_REQ },
+			"numberWeeklyPurchasesCtp": {maxLimitZero: lang.VALIDATE_MAX_MONTH, pattern: lang.VALIDATE_INVALID_NUMBER, required:lang.VALIDATE_NUMBER_REQ},
+			"dailyPurchaseamountCtp": {maxLimitZero: lang.VALIDATE_MAX_WEEK, pattern: lang.VALIDATE_INVALID_NUMBER , required: lang.VALIDATE_NUMBER_REQ },
+			"weeklyAmountPurchasesCtp": {maxLimitZero: lang.VALIDATE_MAX_MONTH, pattern: lang.VALIDATE_INVALID_NUMBER, required:lang.VALIDATE_NUMBER_REQ},
+			"numberDayPurchasesStp": {maxLimitZero: lang.VALIDATE_MAX_WEEK, pattern: lang.VALIDATE_INVALID_NUMBER , required: lang.VALIDATE_NUMBER_REQ },
+			"numberWeeklyPurchasesStp": {maxLimitZero: lang.VALIDATE_MAX_MONTH, pattern: lang.VALIDATE_INVALID_NUMBER, required:lang.VALIDATE_NUMBER_REQ},
+			"dailyPurchaseamountStp": {maxLimitZero: lang.VALIDATE_MAX_WEEK, pattern: lang.VALIDATE_INVALID_NUMBER , required: lang.VALIDATE_NUMBER_REQ },
+			"weeklyAmountPurchasesStp": {maxLimitZero: lang.VALIDATE_MAX_MONTH, pattern: lang.VALIDATE_INVALID_NUMBER, required:lang.VALIDATE_NUMBER_REQ},
+			"dailyNumberWithdraw": {maxLimitZero: lang.VALIDATE_MAX_WEEK, pattern: lang.VALIDATE_INVALID_NUMBER , required: lang.VALIDATE_NUMBER_REQ },
+			"weeklyNumberWithdraw": {maxLimitZero: lang.VALIDATE_MAX_MONTH, pattern: lang.VALIDATE_INVALID_NUMBER, required:lang.VALIDATE_NUMBER_REQ},
+			"dailyAmountWithdraw": {maxLimitZero: lang.VALIDATE_MAX_WEEK, pattern: lang.VALIDATE_INVALID_NUMBER , required: lang.VALIDATE_NUMBER_REQ },
+			"weeklyAmountWithdraw": {maxLimitZero: lang.VALIDATE_MAX_MONTH, pattern: lang.VALIDATE_INVALID_NUMBER, required:lang.VALIDATE_NUMBER_REQ},
+			"dailyNumberCredit": {maxLimitZero: lang.VALIDATE_MAX_WEEK, pattern: lang.VALIDATE_INVALID_NUMBER , required: lang.VALIDATE_NUMBER_REQ },
+			"weeklyNumberCredit": {maxLimitZero: lang.VALIDATE_MAX_MONTH, pattern: lang.VALIDATE_INVALID_NUMBER, required:lang.VALIDATE_NUMBER_REQ},
+			"dailyAmountCredit": {maxLimitZero: lang.VALIDATE_MAX_WEEK, pattern: lang.VALIDATE_INVALID_NUMBER , required: lang.VALIDATE_NUMBER_REQ },
+			"weeklyAmountCredit": {maxLimitZero: lang.VALIDATE_MAX_MONTH, pattern: lang.VALIDATE_INVALID_NUMBER, required:lang.VALIDATE_NUMBER_REQ},
 		},
 		errorPlacement: function(error, element) {
 			$(element).closest('.form-group').find('.help-block').html(error.html());
@@ -404,13 +404,35 @@ function validateForms(form) {
 		return valid
 	}
 
-function verifyMaxLimit(param) {
-	if (Number($(param).val()) == 0) {
-		return 999999;
-	} else {
-		return Number($(param).val())
+	$.validator.methods.minLimitZero = function(value, element, param) {
+		var valid = true;
+		if (value == 0) {
+			if (Number($(param).val() == 0 )) {
+				valid = true;
+			}else{
+				valid = false;
+			}
+		}
+		return valid;
 	}
-};
+
+	$.validator.methods.maxLimitZero = function(value, element, param) {
+		var valid;
+		if (Number($(param).val()) == 0 ) {
+			if (value >= Number($(param).val()) ) {
+				valid = true
+			} else {
+				valid = false
+			}
+		}else if (Number($(param).val()) > 0 ) {
+			if (value <= Number($(param).val()) && value > 0) {
+				valid = true
+			} else {
+				valid = false
+			}
+		}
+		return valid;
+	}
 
 	form.validate().resetForm();
 }

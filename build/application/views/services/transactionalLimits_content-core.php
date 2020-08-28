@@ -69,7 +69,7 @@
 								<p class="h5 semibold tertiary"><?= lang('GEN_TABLE_DNI'); ?>: <span class="light text" id="documentId"></span></p>
 							</div>
 							<div class="form-group col-12 center">
-              	<p class="h6 bold mb-0 mt-2">Nota: <span class="light text">Si el campo es igual a 0, se tomara como limite el valor configurado para el producto.</span></p>
+              	<p class="h6 bold mb-0 mt-2">Nota: <span class="light text">Si el campo es igual a 0, se tomará como límite el valor configurado para el producto.</span><br><span class="light text">El valor para los números de compras, retiros y abonos es de 999.999 y para los montos de 99.999.999</span></p>
             	</div>
 						</div>
 					</div>

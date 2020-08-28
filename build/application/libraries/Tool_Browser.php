@@ -75,25 +75,25 @@ class Tool_Browser {
 						$msg1 = 'Aún no hemos validado la compatibilidad de nuestra aplicación con tu navegador.';
 						$msg2 = 'Por el momento te sugerimos acceder con:';
 					}
-					break;
+				break;
 				case 'mobile':
 					$msg1 = 'Nuestra aplicación no es compatible con tu dispositivo.';
 					$msg2 = 'Por favor intenta desde una PC o MAC';
-					break;
+				break;
 				case 'robot':
 					$msg1 = 'No está permitodo el acceso de robots a nuestra aplicación.';
-					break;
+				break;
 				default:
 					$msg1 = 'No fue posible validar desde que plataforma intentas acceder.';
 					$msg2 = 'Por favor intenta desde una PC o MAC';
-					break;
+				break;
 			}
 
 			$message = (object) [
 				'platform' => $platform,
-				'title' => isset($title) ? $title : '',
+				'title' => $title ?? $title,
 				'msg1' => $msg1,
-				'msg2' => isset($msg2) ? $msg2 : ''
+				'msg2' => $msg2 ?? ''
 			];
 			$this->CI->session->set_flashdata('messageBrowser', $message);
 		}
