@@ -14,12 +14,13 @@ $lang['GEN_BULK_DELETE_SO'] = 'Por favor ingresa el token para anular la orden d
 $lang['GEN_BTN_DISASS_AUTH'] = 'En espera de autorización';
 $lang['GEN_BTN_AUTHORIZE'] = 'Aceptar';
 //DATATABLES
-$lang['GEN_TABLE_COMMISSION'] = 'Valor comisión';
-$lang['GEN_TABLE_VAT'] = 'Valor IVA';
+$lang['GEN_TABLE_COMMISSION'] = 'Valor comisión + IVA';
+$lang['GEN_TABLE_VAT'] = 'GMF Total';
 $lang['GEN_TABLE_AMOUNT_SO'] = 'Valor OS';
-$lang['GEN_TABLE_DEPOSIT_AMOUNT'] = 'Valor depositado';
-$lang['GEN_TABLE_AMOUNT'] = 'Valor';
+$lang['GEN_TABLE_DEPOSIT_AMOUNT'] = 'Valor débito';
+$lang['GEN_TABLE_AMOUNT'] = 'Valor recarga';
 $lang['GEN_TABLE_DNI'] = 'Cédula';
+$lang['GEN_TABLE_ACCOUNT_NUMBER'] = 'Número de tarjeta';
 //FOOTER
 $lang['GEN_FOTTER_RIGHTS'] = '© Todos los derechos reservados. Banco de Bogotá - ';
 $lang['GEN_FOTTER_IMAGE_L'] = 'img-bogota_white.svg';
