@@ -59,7 +59,8 @@ class Novo_User extends NOVO_Controller {
 		$singleSession = [
 			'name' => 'singleSession',
 			'value' => base64_encode('signIn'),
-			'expire' => 0
+			'expire' => 0,
+			'httponly' => TRUE
 		];
 
 		$this->input->set_cookie($singleSession);
@@ -107,7 +108,8 @@ class Novo_User extends NOVO_Controller {
 		$singleSession = [
 			'name' => 'singleSession',
 			'value' => base64_encode('SignThird'),
-			'expire' => 0
+			'expire' => 0,
+			'httponly' => TRUE
 		];
 
 		$this->input->set_cookie($singleSession);
