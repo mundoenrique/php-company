@@ -211,6 +211,7 @@ $lang['GEN_TABLE_RECORDS'] = 'Registros';
 $lang['GEN_TABLE_AMOUNT'] = 'Monto';
 $lang['GEN_TABLE_FOR_DEBIT'] = 'Monto a debitar';
 $lang['GEN_TABLE_COMMISSION'] = 'Monto comisión';
+$lang['GEN_TABLE_COMMISSION_GMF'] = 'Monto comisión + GMF';
 $lang['GEN_TABLE_VAT'] = 'Monto IVA';
 $lang['GEN_TABLE_AMOUNT_SO'] = 'Monto OS';
 $lang['GEN_TABLE_TOTAL_AMOUNT'] = 'Monto total';

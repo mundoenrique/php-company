@@ -44,7 +44,7 @@
 					</div>
 
 					<div class="form-group mb-3 col-4">
-						<label for="amount" id="amount"><?= LANG('BULK_AMOUNT'); ?></label>
+						<label for="amount" id="amount"><?= LANG('GEN_TABLE_TOTAL_AMOUNT'); ?></label>
 						<span id="totalAmount" class="form-control px-1" readonly="readonly"><?= $detailBulk->amount ?></span>
 					</div>
 

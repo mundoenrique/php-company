@@ -15,6 +15,7 @@ $lang['GEN_BTN_DISASS_AUTH'] = 'En espera de autorización';
 $lang['GEN_BTN_AUTHORIZE'] = 'Aceptar';
 //DATATABLES
 $lang['GEN_TABLE_COMMISSION'] = 'Comisión + IVA';
+$lang['GEN_TABLE_COMMISSION_GMF'] = 'Comisión + IVA + GMF';
 $lang['GEN_TABLE_VAT'] = 'GMF Total';
 $lang['GEN_TABLE_AMOUNT_SO'] = 'Valor OS';
 $lang['GEN_TABLE_TOTAL_AMOUNT'] = 'Valor total';
