@@ -47,6 +47,9 @@ $(function () {
 
 	$('.date-picker').datepicker({
 		onSelect: function (selectedDate) {
+			$(this)
+				.focus()
+				.blur();
 			var dateSelected = selectedDate.split('/');
 			dateSelected = dateSelected[1] + '/' + dateSelected[0] + '/' + dateSelected[2]
 			var inputDate = $(this).attr('id');
