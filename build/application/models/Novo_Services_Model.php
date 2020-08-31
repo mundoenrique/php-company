@@ -861,7 +861,7 @@ class Novo_Services_Model extends NOVO_Model {
 		$this->dataRequest->idEmpresa = $this->session->enterpriseInf->idFiscal;
 		$this->dataRequest->prefix = $this->session->productInf->productPrefix;
 		foreach ((array)lang('SERVICES_NAMES_PROPERTIES_LIMITS') as $key => $val) {
-			$cards[$key] = $dataRequest->$val;
+			$cards[$key] = (int)$dataRequest->$val;
 		};
 		foreach ($cards as &$valor) {
 			if ($valor == '') {
