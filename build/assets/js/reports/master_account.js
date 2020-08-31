@@ -113,6 +113,7 @@ function dialog(e){
 					action: 'close'
 				},
 				btn2: {
+					text: lang.GEN_BTN_CANCEL,
 					action: 'close'
 				}
 			}
@@ -149,6 +150,7 @@ function dialog(e){
 						action: 'close'
 						},
 					btn2: {
+						text: lang.GEN_BTN_CANCEL,
 						action: 'close'
 						}
 					}
