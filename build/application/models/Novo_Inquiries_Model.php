@@ -221,7 +221,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 				break;
 			case -1:
 				$this->response->title = 'Anular Orden';
-				$this->response->msg = lang('RESP_PASSWORD_NO_VALID');
+				$this->response->msg = lang('GEN_PASSWORD_NO_VALID');
 				$this->response->icon = lang('GEN_ICON_WARNING');
 				$this->response->data['btn1'] = [
 					'text' => lang('GEN_BTN_ACCEPT'),
