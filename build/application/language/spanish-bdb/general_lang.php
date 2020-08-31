@@ -24,4 +24,4 @@ $lang['GEN_FOTTER_RIGHTS'] = '© Todos los derechos reservados. Banco de Bogotá
 $lang['GEN_FOTTER_IMAGE_L'] = 'img-bogota_white.svg';
 $lang['GEN_FOTTER_IMAGE_R'] = 'img-pci_compliance.svg';
 $lang['GEN_FOTTER_MARK'] = 'img-mark.svg';
-$lang['RESP_PASSWORD_NO_VALID'] = 'Por favor verifica el token y vuelve a intentarlo, si continuas viendo este mensaje comunícate con el administrador';
+$lang['GEN_PASSWORD_NO_VALID'] = 'Por favor verifica el token y vuelve a intentarlo, si continuas viendo este mensaje comunícate con el administrador';

@@ -301,7 +301,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 				break;
 			case -1:
 				$this->response->title = lang('BULK_DELETE_TITLE');
-				$this->response->msg = lang('RESP_PASSWORD_NO_VALID');
+				$this->response->msg = lang('GEN_PASSWORD_NO_VALID');
 				$this->response->icon = lang('GEN_ICON_WARNING');
 				$this->response->data['btn1'] = [
 					'text' => lang('GEN_BTN_ACCEPT'),
@@ -443,7 +443,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 			case -1:
 				$this->response->code = 0;
 				$this->response->title = lang('BULK_CONFIRM_TITLE');
-				$this->response->msg = lang('RESP_PASSWORD_NO_VALID');
+				$this->response->msg = lang('GEN_PASSWORD_NO_VALID');
 				$this->response->icon = lang('GEN_ICON_WARNING');
 				$this->response->data['btn1']['action'] = 'close';
 			break;
@@ -589,7 +589,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 				break;
 			case -1:
 				$this->response->title = lang('BULK_SIGN_TITLE');
-				$this->response->msg = lang('RESP_PASSWORD_NO_VALID');
+				$this->response->msg = lang('GEN_PASSWORD_NO_VALID');
 				$this->response->icon = lang('GEN_ICON_WARNING');
 				$this->response->data['btn1']['action'] = 'close';
 				break;
@@ -660,7 +660,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 			case -1:
 			case -22:
 				$this->response->title = lang('BULK_DELETE_TITLE');
-				$this->response->msg = lang('RESP_PASSWORD_NO_VALID');
+				$this->response->msg = lang('GEN_PASSWORD_NO_VALID');
 				$this->response->icon = lang('GEN_ICON_WARNING');
 				$this->response->data['btn1']['action'] = 'close';
 				break;
@@ -729,7 +729,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 			case -1:
 			case -22:
 				$this->response->title = lang('BULK_DISASS_TITLE');
-				$this->response->msg = lang('RESP_PASSWORD_NO_VALID');
+				$this->response->msg = lang('GEN_PASSWORD_NO_VALID');
 				$this->response->icon = lang('GEN_ICON_WARNING');
 				$this->response->data['btn1']['action'] = 'close';
 				break;
@@ -879,7 +879,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 			break;
 			case -1:
 				$this->response->title = lang('BULK_AUTH_TITLE');
-				$this->response->msg = lang('RESP_PASSWORD_NO_VALID');
+				$this->response->msg = lang('GEN_PASSWORD_NO_VALID');
 				$this->response->icon = lang('GEN_ICON_WARNING');
 				$this->response->data['btn1']['action'] = 'close';
 			break;
@@ -1290,7 +1290,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 				break;
 			case -1:
 				$this->response->title = lang('BULK_UNNA_ACCOUNT');
-				$this->response->msg = lang('RESP_PASSWORD_NO_VALID');
+				$this->response->msg = lang('GEN_PASSWORD_NO_VALID');
 				$this->response->icon = lang('GEN_ICON_WARNING');
 				$this->response->data['btn1']['action'] = 'close';
 				break;

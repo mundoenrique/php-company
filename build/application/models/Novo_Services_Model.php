@@ -269,7 +269,7 @@ class Novo_Services_Model extends NOVO_Model {
 			break;
 			case -1:
 				$this->response->title = $dataRequest->action;
-				$this->response->msg = lang('RESP_PASSWORD_NO_VALID');
+				$this->response->msg = lang('GEN_PASSWORD_NO_VALID');
 				$this->response->icon = lang('GEN_ICON_INFO');
 				$this->response->data['btn1']['action'] = 'close';
 			break;
@@ -551,7 +551,7 @@ class Novo_Services_Model extends NOVO_Model {
 			break;
 			case -1:
 				$this->response->title = lang('SERVICES_INQUIRY_'.$dataRequest->action);
-				$this->response->msg = lang('RESP_PASSWORD_NO_VALID');
+				$this->response->msg = lang('GEN_PASSWORD_NO_VALID');
 				$this->response->icon = lang('GEN_ICON_WARNING');
 				$this->response->data['btn1'] = [
 					'text' => lang('GEN_BTN_ACCEPT'),
@@ -717,7 +717,7 @@ class Novo_Services_Model extends NOVO_Model {
 			case -1:
 				$this->response->title = lang('GEN_COMMERCIAL_TWIRLS_TITTLE');
 				$this->response->icon =  lang('GEN_ICON_WARNING');
-				$this->response->msg = lang('RESP_PASSWORD_NO_VALID');
+				$this->response->msg = lang('GEN_PASSWORD_NO_VALID');
 				$this->response->data['btn1']['action'] = 'close';
 			break;
 			case -146:
