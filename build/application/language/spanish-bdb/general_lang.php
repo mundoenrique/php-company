@@ -12,7 +12,7 @@ $lang['GEN_BULK_DELETE_SO'] = 'Por favor ingresa el token para anular la orden d
 $lang['GEN_BTN_DISASS_AUTH'] = 'En espera de autorización';
 $lang['GEN_BTN_AUTHORIZE'] = 'Aceptar';
 //DATATABLES
-$lang['GEN_TABLE_COMMISSION'] = 'Valor comisión + IVA';
+$lang['GEN_TABLE_COMMISSION'] = 'Comisión + IVA + GMF';
 $lang['GEN_TABLE_VAT'] = 'GMF Total';
 $lang['GEN_TABLE_AMOUNT_SO'] = 'Valor OS';
 $lang['GEN_TABLE_DEPOSIT_AMOUNT'] = 'Valor débito';
