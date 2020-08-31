@@ -29,11 +29,10 @@ class Novo_Bulk extends NOVO_Controller {
 		array_push(
 			$this->includeAssets->jsFiles,
 			"third_party/dataTables-1.10.20",
-			"third_party/fileupload-10.4.0",
 			"third_party/jquery.validate",
 			"validate-core-forms",
 			"third_party/additional-methods",
-			"bulk/load_bulk"
+			"bulk/loadBulk"
 		);
 		$responseList = $this->loadModel();
 		$this->request->newGet = $responseList->code;

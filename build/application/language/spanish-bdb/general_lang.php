@@ -14,7 +14,7 @@ $lang['GEN_BULK_DELETE_SO'] = 'Por favor ingresa el token para anular la orden d
 $lang['GEN_BTN_DISASS_AUTH'] = 'En espera de autorización';
 $lang['GEN_BTN_AUTHORIZE'] = 'Aceptar';
 //DATATABLES
-$lang['GEN_TABLE_COMMISSION'] = 'Valor comisión + IVA';
+$lang['GEN_TABLE_COMMISSION'] = 'Comisión + IVA + GMF';
 $lang['GEN_TABLE_VAT'] = 'GMF Total';
 $lang['GEN_TABLE_AMOUNT_SO'] = 'Valor OS';
 $lang['GEN_TABLE_DEPOSIT_AMOUNT'] = 'Valor débito';
@@ -26,4 +26,4 @@ $lang['GEN_FOTTER_RIGHTS'] = '© Todos los derechos reservados. Banco de Bogotá
 $lang['GEN_FOTTER_IMAGE_L'] = 'img-bogota_white.svg';
 $lang['GEN_FOTTER_IMAGE_R'] = 'img-pci_compliance.svg';
 $lang['GEN_FOTTER_MARK'] = 'img-mark.svg';
-$lang['RESP_PASSWORD_NO_VALID'] = 'Por favor verifica el token y vuelve a intentarlo, si continuas viendo este mensaje comunícate con el administrador';
+$lang['GEN_PASSWORD_NO_VALID'] = 'Por favor verifica el token y vuelve a intentarlo, si continuas viendo este mensaje comunícate con el administrador';
