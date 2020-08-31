@@ -209,6 +209,7 @@ $lang['GEN_TABLE_STATUS'] = 'Estado';
 $lang['GEN_TABLE_FULL_NAME'] = 'Nombre y apellido';
 $lang['GEN_TABLE_RECORDS'] = 'Registros';
 $lang['GEN_TABLE_AMOUNT'] = 'Monto';
+$lang['GEN_TABLE_FOR_DEBIT'] = 'Monto a debitar';
 $lang['GEN_TABLE_COMMISSION'] = 'Monto comisión';
 $lang['GEN_TABLE_VAT'] = 'Monto IVA';
 $lang['GEN_TABLE_AMOUNT_SO'] = 'Monto OS';

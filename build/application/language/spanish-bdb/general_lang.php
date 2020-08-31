@@ -14,11 +14,13 @@ $lang['GEN_BULK_DELETE_SO'] = 'Por favor ingresa el token para anular la orden d
 $lang['GEN_BTN_DISASS_AUTH'] = 'En espera de autorización';
 $lang['GEN_BTN_AUTHORIZE'] = 'Aceptar';
 //DATATABLES
-$lang['GEN_TABLE_COMMISSION'] = 'Comisión + IVA + GMF';
+$lang['GEN_TABLE_COMMISSION'] = 'Comisión + IVA';
 $lang['GEN_TABLE_VAT'] = 'GMF Total';
 $lang['GEN_TABLE_AMOUNT_SO'] = 'Valor OS';
+$lang['GEN_TABLE_TOTAL_AMOUNT'] = 'Valor total';
 $lang['GEN_TABLE_DEPOSIT_AMOUNT'] = 'Valor débito';
 $lang['GEN_TABLE_AMOUNT'] = 'Valor recarga';
+$lang['GEN_TABLE_FOR_DEBIT'] = 'Valor a debitar';
 $lang['GEN_TABLE_DNI'] = 'Cédula';
 $lang['GEN_TABLE_ACCOUNT_NUMBER'] = 'Número de tarjeta';
 //FOOTER
