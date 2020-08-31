@@ -124,7 +124,7 @@ $(function () {
 			validInput = false;
 			descrip.css('border-color', '#cd0a0a');
 		} else if (/\s/.test(descrip.val())) {
-			camposValid += '<p>* No se admiten espacios en blancos</p>';
+			camposValid += '<p>* No se admiten espacios en blanco</p>';
 			validInput = false;
 			descrip.css('border-color', '#cd0a0a');
 		} else {

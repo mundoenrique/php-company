@@ -84,6 +84,11 @@ $(function () {
 		showAnim: "slideDown",
 		beforeShow: function (input, inst) {
 			inst.dpDiv.removeClass("ui-datepicker-month-year");
+		},
+		onSelect: function (selectDate) {
+			$(this)
+				.focus()
+				.blur();
 		}
 	});
 
@@ -105,6 +110,11 @@ $(function () {
 			var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
 			inst.dpDiv.addClass("ui-datepicker-month-year");
 			$(this).datepicker('option', 'defaultDate', new Date(year, month, 1));
+		},
+		onSelect: function (selectDate) {
+			$(this)
+				.focus()
+				.blur();
 		}
 	});
 

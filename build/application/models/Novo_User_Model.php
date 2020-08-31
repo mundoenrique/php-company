@@ -601,12 +601,9 @@ class Novo_User_Model extends NOVO_Model {
 
 			$this->response->title = lang('GEN_PASSWORD_CHANGE_TITLE');
 			$this->response->icon = lang('GEN_ICON_WARNING');
-			$this->response->data = [
-				'btn1'=> [
-					'action'=> 'close'
-				]
-			];
+			$this->response->data['btn1']['action'] = 'close';
 		}
+
 		return $this->responseToTheView('CallWs_ChangePassword');
 	}
 	/**
@@ -652,13 +649,11 @@ class Novo_User_Model extends NOVO_Model {
 		$this->response->msg = lang('GEN_BTN_ACCEPT');
 		$this->response->data = FALSE;
 
-		$this->session->sess_destroy();
-		$access = [
-			'user_access',
-			'logged',
-			'userId'
-		];
-		$this->session->unset_userdata($access);
+		if (!$this->input->is_ajax_request()) {
+			$this->session->sess_destroy();
+		}
+
+		clearSessionsVars();
 
 		return $this->responseToTheView('callWs_FinishSession');
 	}

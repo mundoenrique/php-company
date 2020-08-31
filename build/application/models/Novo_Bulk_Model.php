@@ -1353,7 +1353,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 
 		switch ($this->isResponseRc) {
 			case 0:
-				$unnamedList = json_decode($response->bean);
+				$unnamedList = $response->bean;
 				$this->response->code = 0;
 
 				if(isset($unnamedList->lista) && count($unnamedList->lista) > 0) {
@@ -1428,7 +1428,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 
 		switch ($this->isResponseRc) {
 			case 0:
-				$unnamedDetail = json_decode($response->bean);
+				$unnamedDetail = $response->bean;
 				$this->response->code = 0;
 
 				if(isset($unnamedDetail->tarjetasInnominadas) && count($unnamedDetail->tarjetasInnominadas) > 0) {

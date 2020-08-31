@@ -66,8 +66,8 @@ class Encrypt_Connect {
 		if(!$response) {
 			log_message('ERROR', 'NOVO ['.$userName.'] NO SERVICE RESPONSE');
 			$response = new stdClass();
-			$response->rc = lang('RESP_RC_DEFAULT');
-			$response->msg = lang('RESP_MESSAGE_SYSTEM');
+			$response->rc = lang('GEN_RC_DEFAULT');
+			$response->msg = lang('GEN_MESSAGE_SYSTEM');
 		}
 
 		if(!isset($response->pais)) {
@@ -75,16 +75,33 @@ class Encrypt_Connect {
 			$response->pais = $this->CI->config->item('country');
 		}
 
-		$this->logMessage->rc = $response->rc;
-		$this->logMessage->msg = isset($response->msg) ? $response->msg : 'Sin mensaje del servicio';
-		$this->logMessage->response = $response;
-		$this->logMessage->pais = $this->CI->config->item('country');
+		if (isset($response->bean)) {
+			$response->bean = gettype($response->bean) == 'object' ? $response->bean : json_decode($response->bean);
+			$this->logMessage->inBean = 'IN BEAN';
+		}
+
+		foreach ($response AS $pos => $responseAttr) {
+			switch ($pos) {
+				case 'archivo':
+					$this->logMessage->archivo = 'OK';
+					if(!is_array($responseAttr)) {
+						$this->logMessage->archivo = 'Sin arreglo binario';
+					}
+				break;
+				case 'msg':
+					$this->logMessage->msg = $responseAttr;
+				break;
+				default:
+					$this->logMessage->$pos = $responseAttr;
+			}
+		}
+
+		$this->logMessage->msg = $this->logMessage->msg ?? 'Sin mensaje del servicio';
 		$this->logMessage->model = $model;
 		$this->logMessage->userName = $userName;
 		$this->writeLog($this->logMessage);
 
 		return $response;
-
 	}
 	/**
 	 * @info método para realizar la petición al servicio
@@ -121,6 +138,7 @@ class Encrypt_Connect {
 		$response = curl_exec($ch);
 		$httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 		$CurlError = curl_error($ch);
+		$CurlErrorNo = curl_errno($ch);
 		curl_close($ch);
 
 		log_message('DEBUG','NOVO ['.$userName.'] RESPONSE CURL HTTP CODE: ' . $httpCode);
@@ -133,10 +151,20 @@ class Encrypt_Connect {
 		}
 
 		if($httpCode != 200 || !$response) {
-			log_message('ERROR','NOVO ['.$userName.'] ERROR CURL: '.json_encode($CurlError, JSON_UNESCAPED_UNICODE));
+			$CurlError = novoLang('ERROR CURL NUMBER: %s, MESSAGE: %s ', [$CurlErrorNo, json_encode($CurlError, JSON_UNESCAPED_UNICODE)]);
+
+			log_message('ERROR','NOVO ['.$userName.'] '.$CurlError);
+
 			$failResponse = new stdClass();
-			$failResponse->rc = lang('RESP_RC_DEFAULT');
-			$failResponse->msg = lang('RESP_MESSAGE_SYSTEM');
+
+			if ($CurlErrorNo == 28) {
+				$failResponse->rc = 504;
+				$failResponse->msg = lang('GEN_TIMEOUT');
+			} else {
+				$failResponse->rc = lang('GEN_RC_DEFAULT');
+				$failResponse->msg = lang('GEN_MESSAGE_SYSTEM');
+			}
+
 			$response = $failResponse;
 			$fail = TRUE;
 		}
@@ -198,37 +226,13 @@ class Encrypt_Connect {
 	 */
 	private function writeLog($logMessage)
 	{
-		$userName = $logMessage->userName;
-		$model = $logMessage->model;
-		$rc = $logMessage->rc;
-		$msg = $logMessage->msg;
-		$response = isset($logMessage->response) ? $logMessage->response : '';
-		$country = $logMessage->pais;
-		log_message('DEBUG', 'NOVO ['.$userName.'] RESPONSE '.$model.'= rc: '.$rc.', msg: '.$msg.', country: '.$country);
+		$writeLog = novoLang('%s = rc: %s, msg: %s, client: %s', [$logMessage->model, $logMessage->rc, $logMessage->msg, $logMessage->pais]);
+		$inBean = $logMessage->inBean ?? '';
 
-		if(RESPONSE_SERV_COMPLETE) {
-			$wirteLog = new stdClass();
-			$isBean = '';
+		log_message('DEBUG', 'NOVO ['.$logMessage->userName.'] RESPONSE '.$writeLog);
 
-			if (isset($response->bean) && is_object($response->bean)) {
-				$isBean = 'IN BEAN ';
-				$response->bean = gettype($response->bean) != 'object'  ? json_decode($response->bean) : $response->bean;
-			}
+		$writeLog = novoLang('%s %s: %s', [$inBean, $logMessage->model, json_encode($logMessage, JSON_UNESCAPED_UNICODE)]);
 
-			if(is_object($response)) {
-				foreach ($response AS $pos => $responseAttr) {
-					if($pos == 'archivo') {
-						$wirteLog->archivo = 'OK';
-						if(!is_array($responseAttr)) {
-							$wirteLog->archivo = 'Sin arreglo binario';
-						}
-						continue;
-					}
-					$wirteLog->$pos = $responseAttr;
-				}
-			}
-
-			log_message('DEBUG', 'NOVO ['.$userName.'] COMPLETE RESPONSE '.$isBean.$model.': '.json_encode($wirteLog, JSON_UNESCAPED_UNICODE));
-		}
+		log_message('DEBUG', 'NOVO ['.$logMessage->userName.'] COMPLETE RESPONSE '.$writeLog);
 	}
 }

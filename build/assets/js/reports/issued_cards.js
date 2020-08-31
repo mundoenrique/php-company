@@ -16,8 +16,9 @@ $(function () {
 		yearRange: '-12:' + currentDate.getFullYear(),
 
 		onSelect: function (selectDate) {
-			$(this).focus();
-			$('#allResults').focus();
+			$(this)
+				.focus()
+				.blur();
 		},
 
 		onClose: function (dateText, inst) {

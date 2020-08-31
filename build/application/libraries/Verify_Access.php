@@ -88,7 +88,7 @@ class Verify_Access {
 		$singleSession = base64_decode($this->CI->input->cookie($this->CI->config->item('cookie_prefix').'singleSession'));
 		$linkredirect = $singleSession == 'SignThird' ? 'ingresar/fin' : 'inicio';
 		$this->responseDefect = new stdClass();
-		$this->responseDefect->code = lang('RESP_DEFAULT_CODE');
+		$this->responseDefect->code = lang('GEN_DEFAULT_CODE');
 		$this->responseDefect->title = lang('GEN_SYSTEM_NAME');
 		$this->responseDefect->msg = lang('RESP_VALIDATION_INPUT');
 		$this->responseDefect->icon = lang('GEN_ICON_WARNING');
@@ -120,7 +120,7 @@ class Verify_Access {
 		log_message('INFO', 'NOVO Verify_Access: accessAuthorization method initialized');
 
 		$auth = FALSE;
-		$user = $user ?: $this->user;
+		$user = $user ?? $this->user;
 		$freeAccess = ['login', 'suggestion', 'validateCaptcha', 'finishSession', 'terms', 'singleSignOn'];
 		$auth = in_array($module, $freeAccess);
 

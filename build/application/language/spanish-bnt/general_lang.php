@@ -1,5 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+$lang['GEN_FAVICON'] = 'favicon-bnt';
+$lang['GEN_FAVICON_EXT'] = 'ico';
 //MENU
 $lang['GEN_MENU_ENTERPRISE'] = 'Empresa';
 //SUBMENU

@@ -272,7 +272,7 @@ footer.main-footer {
 	padding: .375rem .75rem;
 	font-size: .875rem;
 	font-weight: var(--font-weight-base);
-	line-height: 1.15;
+	line-height: inherit;
 	color: var(--color-eighth);
 	border: 1px solid var(--color-eleventh);
 	border-radius: .25rem;
@@ -973,7 +973,7 @@ label {
 }
 
 .form-control.has-error {
-	border-color: var(--danger);
+	border-color: var(--danger) !important;
 }
 
 /* Buttons
