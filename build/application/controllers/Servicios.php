@@ -2034,10 +2034,11 @@ public function consultaTarjetas($urlCountry)
 		$data = ['bean' => $dataEncry, 'pais' =>$urlCountry];
 		$data = json_encode($data);
 		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+		$originalResponse = $response;
 		$jsonResponse = np_Hoplite_Decrypt($response, 'callWScambiarEstadoemision');
 		$response = json_decode($jsonResponse);
 
-		  if($response) {
+		if($response) {
 			if($response->rc == 0) {
 				unset(
 					$response->rc, $response->msg, $response->className, $response->token, $response->idOperation,
@@ -2066,7 +2067,21 @@ public function consultaTarjetas($urlCountry)
 				return $codigoError;
 			}
 		} else {
-			return $codigoError = ['ERROR'=> lang('ERROR_GENERICO_USER')];
+			$responseService = json_decode($originalResponse);
+			$listErrorDefault = ["Enviado a Empresa"];
+			$msgError = lang('ERROR_GENERICO_USER');
+			if ( !in_array($opcion, $listErrorDefault) ){
+				switch ($responseService->rc) {
+					case 28:
+						$msgError = lang('RESP_TIMEOUT_RESPONSE');
+						break;
+
+					default:
+						$msgError = lang('ERROR_GENERICO_USER');
+						break;
+				}
+			}
+			return $codigoError = ['ERROR'=> $msgError ];
 		}
 	}
 
@@ -2182,11 +2197,15 @@ public function consultaTarjetas($urlCountry)
 		$data = ['bean' => $dataEncry, 'pais' =>$urlCountry];
 		$data = json_encode($data);
 		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+		$originalResponse = $response;
 		$jsonResponse = np_Hoplite_Decrypt($response, 'callWScambiarEstadotarjeta');
 		$response = json_decode($jsonResponse);
 
 		  if($response) {
 				if($opcion == 'saldo'){
+						if($response->rc==-3){
+							$response = array('ERROR' => lang('ERROR_GENERICO_USER'), "rc"=> $response->rc);
+						}
 						return $response;
 				}else {
 				if($response->rc == 0) {
@@ -2218,10 +2237,17 @@ public function consultaTarjetas($urlCountry)
 			}
 		}
 		} else {
-			return $codigoError = ['ERROR'=> lang('ERROR_GENERICO_USER')];
+			$responseService = json_decode($originalResponse);
+			switch ($responseService->rc) {
+				case 28:
+					$msgError = lang('RESP_TIMEOUT_RESPONSE');
+					break;
+
+				default:
+					$msgError = lang('ERROR_GENERICO_USER');
+					break;
+			}
+			return $codigoError = ['ERROR'=> $msgError ];
 		}
-
 	}
-
-
 }

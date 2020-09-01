@@ -405,6 +405,9 @@ function notificacion(titulo, mensaje, opcion) {
 						case 2:
 							$(this).dialog("close");
 							break
+						case 3:
+							document.location.reload();
+							break
 					}
 				}
 			}
@@ -895,7 +898,7 @@ function llamarActDatos(url, title){
 				alert('Usuario actualmente desconectado');
 				location.reload();
 			} else {
-				notificacion("mensaje", data.result.ERROR,2);
+				notificacion("mensaje", data.result.ERROR, 0);
 			}
 		}
 	})
@@ -964,6 +967,8 @@ function llamarWSCambio(pass,mensaje,url,op,alerta) {
 				notificacion(mensaje, 'La contraseña es incorrecta. Por favor verifícala e intenta de nuevo.', reload);
 			}else if(data.result.rc == -416){
 				notificacion(mensaje,data.result.msg, reload);
+			}else if(data.result.rc == -3){
+				notificacion(mensaje, data.result.ERROR, reload);
 			}else if(data.result.rc == -450){
 				notificacion(mensaje,data.result.msg, reload);
 			} else if(data.result.rc == -451){
@@ -1003,7 +1008,7 @@ function llamarWSCambio(pass,mensaje,url,op,alerta) {
 					alert('Usuario actualmente desconectado');
 					location.reload();
 				} else {
-					notificacion(mensaje, data.result.ERROR,2);
+					notificacion(mensaje, data.result.ERROR,3);
 				}
 			}
 			resett()
