@@ -62,7 +62,6 @@ function searchStatusAccount(passData){
 	callNovoCore(verb, who, where, data, function(response) {
 		dataResponse = response.data;
 		code = response.code
-
 		insertFormInput(false);
 
 		$('#spinnerBlock').addClass('hide');
@@ -74,7 +73,7 @@ function searchStatusAccount(passData){
 			$.each(dataResponse.accounts, function (key, value, index) {
 				var table, body = '';
 				table= '<div class=""><div class="flex ml-4 py-3 flex-auto">'
-				table+=	'<p class="mr-5 h5 semibold tertiary">Nombre: <span class="light text">'+dataResponse.accounts[key].cliente+'</span></p><p class="mr-5 h5 semibold tertiary">Tarjeta: <span class="light text">'+(dataResponse.user[key])[0].tarjeta+'</span></p><p class="mr-5 h5 semibold tertiary">Cédula: <span class="light text">'+dataResponse.accounts[key].idExtPer+'</span></p></div>'
+				table+=	'<p class="mr-5 h5 semibold tertiary">Nombre: <span class="light text">'+ dataResponse.accounts[key].client +'</span></p><p class="mr-5 h5 semibold tertiary">Tarjeta: <span class="light text">'+ dataResponse.accounts[key].account +'</span></p><p class="mr-5 h5 semibold tertiary">Cédula: <span class="light text">'+ dataResponse.accounts[key].id +'</span></p></div>'
 				table+= 	'<table id="resultsAccount'+  key + '" class="cell-border h6 display responsive w-100">';
 				table+= 	'<thead class="bg-primary secondary regular">';
 				table+= 		'<tr class="" style="margin-left: 0px;">';
@@ -95,20 +94,8 @@ function searchStatusAccount(passData){
 			})
 
 			$("#globalTable").html(personalizeRowsInfo);
-			$.each(dataResponse.user, function (key1, value, index) {
-				$.each(dataResponse.user[key1], function (key2, value, index) {
-				if((dataResponse.user[key1])[key2].tipoTransaccion == '-'){
-					(dataResponse.user[key1])[key2].abono = (dataResponse.user[key1])[key2].monto;
-					(dataResponse.user[key1])[key2].cargo = '0.00';
-				}else{
-					(dataResponse.user[key1])[key2].abono = '0.00';
-					(dataResponse.user[key1])[key2].cargo = (dataResponse.user[key1])[key2].monto;
-					}
-				})
-			})
-
-			$.each(dataResponse.user, function (key, value, index) {
-				createTable(dataResponse.user, key);
+			$.each(dataResponse.users, function (key, value, index) {
+				createTable(dataResponse.users, key);
 			})
 		}
 	});
@@ -122,19 +109,19 @@ function createTable(data, index){
 		"pagingType": "full_numbers",
 		"data": data[index],
 		"columns": [
-			{ data: 'fecha' },
+			{ data: 'date' },
 			{ data: 'fid' },
-			{ data: 'terminalTransaccion' },
-			{ data: 'secuencia' },
-			{ data: 'referencia' },
-			{ data: 'descripcion' },
-			{ data: 'abono' },
-			{ data: 'cargo' },
+			{ data: 'terminal' },
+			{ data: 'secuence' },
+			{ data: 'reference' },
+			{ data: 'description' },
+			{ data: 'debit' },
+			{ data: 'credit' },
 		],
 		"columnDefs": [
 			{
 				"targets": 0,
-				"className": "fecha",
+				"className": "date",
 				"visible": lang.CONF_DATE_COLUMN == "ON"
 			},
 			{
@@ -149,27 +136,27 @@ function createTable(data, index){
 			},
 			{
 				"targets": 3,
-				"className": "secuencia",
+				"className": "secuence",
 				"visible": lang.CONF_SECUENCE_COLUMN == "ON"
 			},
 			{
 				"targets": 4,
-				"className": "referencia",
+				"className": "reference",
 				"visible": lang.CONF_REFERENCE_COLUMN == "ON"
 			},
 			{
 				"targets": 5,
-				"className": "descripcion",
+				"className": "description",
 				"visible": lang.CONF_DESCRIPTION_COLUMN == "ON"
 			},
 			{
 				"targets": 6,
-				"className": "abono",
+				"className": "debit",
 				"visible": lang.CONF_DEBIT_COLUMN == "ON"
 			},
 			{
 				"targets": 7,
-				"className": "cargo",
+				"className": "credit",
 				"visible": lang.CONF_CREDIT_COLUMN == "ON"
 			}
 		],
@@ -214,6 +201,7 @@ function exportToExcel(passData) {
 		if (info.formatoArchivo == 'excel') {
 			info.formatoArchivo = '.xls'
 		}
+		$('#spinnerBlock').addClass('hide');
 		if (code == 0) {
 			data = {
 				"name": info.nombre.replace(/ /g, "")+info.formatoArchivo,
@@ -235,6 +223,7 @@ function exportToPDF(passData) {
 		if (info.formatoArchivo == 'PDF') {
 			info.formatoArchivo = '.pdf'
 		}
+		$('#spinnerBlock').addClass('hide');
 		if (code == 0) {
 			data = {
 				"name": info.nombre.replace(/ /g, "")+info.formatoArchivo,

@@ -1220,7 +1220,6 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->dataRequest->idExtPer = $dataRequest->resultByNIT;
     $lastDayMonyh = date("t-m-Y", strtotime(str_replace( '/', '-', "1/".$dataRequest->initialDateAct)));
 		$this->dataRequest->fechaFin = str_replace( '-', '/', $lastDayMonyh);
-		// $data Request->initialDateAct= "1/"+ $dataRequest->initialDateAct;
 		$this->dataRequest->fechaIni = "1/".$dataRequest->initialDateAct;
 		$this->dataRequest->tamanoPagina = '10';
 		$this->dataRequest->tipoConsulta = $typeSearch;
@@ -1236,12 +1235,69 @@ class Novo_Reports_Model extends NOVO_Model {
 				$this->response->code = 0;
 				foreach ((array)$response->listadoEstadosCuentas as $key => $val){
 					$table[$key] = $val;
-					$valor[$key]= $response->listadoEstadosCuentas[$key]->listaMovimientos;
-
-					$this->response->data['user'] =$valor;
+					$valAccountStatus[$key]= $response->listadoEstadosCuentas[$key]->listaMovimientos;
 				}
-				$this->response->data['accounts'] = $table;
+				$usersData = $valAccountStatus;
+				$usersTables = [];
+				$data = [];
 
+				foreach ($usersData as $key1 => $val){
+					$data[$key1] = $usersData[$key1];
+				}
+
+				foreach ($data as $key => $val){
+					foreach ($data[$key] as $key1 => $val){
+						$usersTables =(($data[$key])[$key1]);
+						$dataAccount = [];
+						$debit = '';
+						$credit = '';
+
+						if( lang('CONF_STATUS_ACCOUNT_ADD_COLUMNS') == 'ON' ){
+							$usersTables->secuencia = $usersTables->secuence;
+							$usersTables->terminal = $usersTables->terminal;
+							$usersTables->fid = $usersTables->fid;
+						}
+						if( $usersTables->tipoTransaccion == '+' ){
+							$debit = $usersTables->monto;
+							$credit = '0';
+						}else{
+							$credit = $usersTables->monto;
+							$debit = '0';
+						}
+						$objUserData[$key] =[
+							'secuence' => "",
+							'terminal' => "",
+							'fid' => "",
+							'reference' => $usersTables->referencia,
+							'description' => $usersTables->descripcion,
+							'date' => $usersTables->fecha,
+							'credit' => $credit,
+							'debit' => $debit,
+							'client' => $usersTables->cliente
+						];
+						($data[$key])[$key1]= $objUserData[$key];
+					}
+				}
+
+				foreach($response->listadoEstadosCuentas as $key => $value){
+					($dataAccount[$key])['account'] = $response->listadoEstadosCuentas[$key]->cuenta;
+					($dataAccount[$key])['client'] = $response->listadoEstadosCuentas[$key]->cliente;
+					($dataAccount[$key])['id'] = $response->listadoEstadosCuentas[$key]->idExtPer;
+				}
+				$this->response->data['users'] = $data;
+				$this->response->data['accounts'] = $dataAccount;
+			break;
+			case -444:
+				$this->response->icon = lang('GEN_ICON_DANGER');
+				$this->response->title = lang('REPORTS_TITLE');
+				$this->response->msg = "Registro no encontrado";
+				$this->response->data['btn1']['action'] = 'close';
+			break;
+			case -150:
+				$this->response->icon = lang('GEN_ICON_DANGER');
+				$this->response->title = lang('REPORTS_TITLE');
+				$this->response->msg = "No han sido encontrados registros existentes para la fecha";
+				$this->response->data['btn1']['action'] = 'close';
 			break;
 		}
 
@@ -1289,6 +1345,18 @@ class Novo_Reports_Model extends NOVO_Model {
 				$this->response->code = 0;
 				$this->response->data = (array)$response;
 			break;
+			case -444:
+				$this->response->icon = lang('GEN_ICON_DANGER');
+				$this->response->title = lang('REPORTS_TITLE');
+				$this->response->msg = "Registro no encontrado";
+				$this->response->data['btn1']['action'] = 'close';
+			break;
+			case -150:
+				$this->response->icon = lang('GEN_ICON_DANGER');
+				$this->response->title = lang('REPORTS_TITLE');
+				$this->response->msg = "No han sido encontrados registros existentes para la fecha";
+				$this->response->data['btn1']['action'] = 'close';
+			break;
 		}
 
 		return $this->responseToTheView('callWs_statusAccountExcelFile');
@@ -1334,6 +1402,18 @@ class Novo_Reports_Model extends NOVO_Model {
 			case 0:
 				$this->response->code = 0;
 				$this->response->data = (array)$response;
+			break;
+			case -444:
+				$this->response->icon = lang('GEN_ICON_DANGER');
+				$this->response->title = lang('REPORTS_TITLE');
+				$this->response->msg = "Registro no encontrado";
+				$this->response->data['btn1']['action'] = 'close';
+			break;
+			case -150:
+				$this->response->icon = lang('GEN_ICON_DANGER');
+				$this->response->title = lang('REPORTS_TITLE');
+				$this->response->msg = "No han sido encontrados registros existentes para la fecha";
+				$this->response->data['btn1']['action'] = 'close';
 			break;
 		}
 
