@@ -107,7 +107,7 @@ function callNovoCore(verb, who, where, request, _response_) {
 		where: where,
 		data: request
 	});
-	var codeResp = parseInt(lang.RESP_DEFAULT_CODE);
+	var codeResp = parseInt(lang.GEN_DEFAULT_CODE);
 	var formData = new FormData();
 
 	dataRequest = cryptoPass(dataRequest, true);
@@ -171,6 +171,7 @@ function callNovoCore(verb, who, where, request, _response_) {
 			icon: lang.GEN_ICON_DANGER,
 			data: {
 				btn1: {
+					text: lang.GEN_BTN_ACCEPT,
 					link: lang.GEN_ENTERPRISE_LIST,
 					action: 'redirect'
 				}
@@ -196,21 +197,18 @@ function getCookieValue() {
  * @date 05/03/2019
  */
 function notiSystem(title, message, icon, data) {
-	var btnAccept = $('#accept');
-	var btnCancel = $('#cancel');
-	var dialogMoldal = $('#system-info');
 	var btn1 = data.btn1;
 	var btn2 = data.btn2;
 	var maxHeight = data.maxHeight || 350;
 
-	dialogMoldal.dialog({
+	$('#system-info').dialog({
 		title: title || lang.GEN_SYSTEM_NAME,
 		modal: 'true',
 		position: { my: data.posMy || 'center', at: data.posAt || 'center' },
 		draggable: false,
 		resizable: false,
 		closeOnEscape: false,
-		width: data.width || 370,
+		width: data.width || lang.CONF_MODAL_WIDTH,
 		minWidth: data.minWidth || lang.CONF_MODAL_WIDTH,
 		minHeight: 100,
 		maxHeight: maxHeight !== 'none' ? maxHeight : false,
@@ -230,14 +228,19 @@ function notiSystem(title, message, icon, data) {
 			$('#system-icon').addClass(icon);
 			$('#system-msg').html(message);
 			$('#accept, #cancel').removeClass("ui-button ui-corner-all ui-widget");
-			createButton(dialogMoldal, btnAccept, btn1);
+
+			if (!btn1) {
+				$('#accept').hide();
+			} else {
+				createButton($('#accept'), btn1);
+			}
 
 			if (!btn2) {
-				btnCancel.hide();
-				btnAccept.addClass('modal-btn-primary');
+				$('#cancel').hide();
+				$('#accept').addClass('modal-btn-primary');
 				$('.novo-dialog-buttonset').addClass('modal-buttonset');
 			} else {
-				createButton(dialogMoldal, btnCancel, btn2);
+				createButton($('#cancel'), btn2);
 			}
 		}
 	});
@@ -247,25 +250,32 @@ function notiSystem(title, message, icon, data) {
  * @author Pedro Torres
  * @date 16/09/2019
  */
-function createButton(dialogMoldal, elementButton, valuesButton) {
-	valuesButton.text || elementButton.text(valuesButton.text);
+function createButton(elementButton, valuesButton) {
+	var textModalBtn = valuesButton.text || elementButton.text(valuesButton.text);
+	elementButton.text(textModalBtn);
 	elementButton.show();
 	elementButton.on('click', function (e) {
-		if (valuesButton.action === 'redirect') {
-			$(this)
-			.html(loader)
-			.prop('disabled', true);
-			$(this).children('span').addClass('spinner-border-sm');
-			if ($(this).attr('id') == 'cancel') {
-				$(this).children('span')
-					.removeClass('secondary')
-					.addClass('primary');
-			}
-			$(location).attr('href', baseURL+valuesButton.link);
+		switch (valuesButton.action) {
+			case 'redirect':
+				$(this)
+					.html(loader)
+					.prop('disabled', true);
+				$(this).children('span').addClass('spinner-border-sm');
+				if ($(this).attr('id') == 'cancel') {
+					$(this).children('span')
+						.removeClass('secondary')
+						.addClass('primary');
+				}
+				$(location).attr('href', baseURL + valuesButton.link);
+			break;
+			case 'close':
+				$('#system-info').dialog('close');
+			break;
+			case 'destroy':
+				$('#system-info').dialog('destroy');
+			break;
 		}
-		if (valuesButton.action === 'close') {
-			dialogMoldal.dialog('close');
-		}
+
 		$(this).off('click');
 	})
 }

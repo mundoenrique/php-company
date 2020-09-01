@@ -269,7 +269,7 @@ class Novo_Services_Model extends NOVO_Model {
 			break;
 			case -1:
 				$this->response->title = $dataRequest->action;
-				$this->response->msg = lang('RESP_PASSWORD_NO_VALID');
+				$this->response->msg = lang('GEN_PASSWORD_NO_VALID');
 				$this->response->icon = lang('GEN_ICON_INFO');
 				$this->response->data['btn1']['action'] = 'close';
 			break;
@@ -527,7 +527,7 @@ class Novo_Services_Model extends NOVO_Model {
 					'action' => 'close'
 				];
 				$this->response->success = TRUE;
-				$responseList = isset($response->bean) ? json_decode($response->bean) : FALSE;
+				$responseList = $response->bean ?? FALSE;
 
 				if ($responseList && is_array($responseList)) {
 					foreach ($responseList AS $cards) {
@@ -551,7 +551,7 @@ class Novo_Services_Model extends NOVO_Model {
 			break;
 			case -1:
 				$this->response->title = lang('SERVICES_INQUIRY_'.$dataRequest->action);
-				$this->response->msg = lang('RESP_PASSWORD_NO_VALID');
+				$this->response->msg = lang('GEN_PASSWORD_NO_VALID');
 				$this->response->icon = lang('GEN_ICON_WARNING');
 				$this->response->data['btn1'] = [
 					'text' => lang('GEN_BTN_ACCEPT'),
@@ -611,7 +611,7 @@ class Novo_Services_Model extends NOVO_Model {
 		switch($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
-				$responseBean = json_decode($response->bean)->cards[0];
+				$responseBean = $response->bean->cards[0];
 				$dataTwirls = new stdClass();
 				$shops = new stdClass();
 				$dataTwirls->updateDate =  $responseBean->datetimeLastUpdate;
@@ -630,11 +630,11 @@ class Novo_Services_Model extends NOVO_Model {
 			break;
 			case -438:
 				$shops = new stdClass();
-				$this->response->data['shops']= json_decode($response->bean)->cards[0];
+				$this->response->data['shops']= $response->bean->cards[0];
 				$this->response->title = lang('GEN_COMMERCIAL_TWIRLS_TITTLE');
 				$this->response->icon =  lang('GEN_ICON_WARNING');
         $this->response->data['btn1']['action'] = 'close';
-				switch (json_decode($response->bean)->cards[0]->rc) {
+				switch ($response->bean->cards[0]->rc) {
 					case -266:
 						$this->response->msg = 	novoLang(lang('SERVICES_TWIRLS_TEMPORARY_BLOCKED_CARD'), maskString( $dataRequest->cardNumber, 4, 6));
 						break;
@@ -653,8 +653,6 @@ class Novo_Services_Model extends NOVO_Model {
 						break;
 				}
       break;
-			default:
-				$this->response->icon =  lang('GEN_ICON_WARNING');
 		}
 
 		return $this->responseToTheView('callWs_commercialTwirls');
@@ -719,7 +717,7 @@ class Novo_Services_Model extends NOVO_Model {
 			case -1:
 				$this->response->title = lang('GEN_COMMERCIAL_TWIRLS_TITTLE');
 				$this->response->icon =  lang('GEN_ICON_WARNING');
-				$this->response->msg = lang('RESP_PASSWORD_NO_VALID');
+				$this->response->msg = lang('GEN_PASSWORD_NO_VALID');
 				$this->response->data['btn1']['action'] = 'close';
 			break;
 			case -146:
@@ -733,15 +731,13 @@ class Novo_Services_Model extends NOVO_Model {
 				$this->response->title = lang('GEN_COMMERCIAL_TWIRLS_TITTLE');
 				$this->response->msg= lang('SERVICES_TWIRLS_NO_UPDATE');
 
-				foreach ((array)json_decode($response->bean)->cards[0]->mccItems as $key => $value) {
+				foreach ((array)$response->bean->cards[0]->mccItems as $key => $value) {
 					$mcc[lang('SERVICES_NAME_PROPERTIES_VIEW')[$key]] = $value;
 					unset($mcc[$key]);
 				};
 
 				$this->response->data= $mcc;
 			break;
-			default:
-				$this->response->icon =  lang('GEN_ICON_WARNING');
 		}
 
 		return $this->responseToTheView('callWs_updateCommercialTwirls');
@@ -782,7 +778,7 @@ class Novo_Services_Model extends NOVO_Model {
 		switch($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
-				$responseBean = json_decode($response->bean)->cards[0];
+				$responseBean = $response->bean->cards[0];
 				$dataLimits = new stdClass();
 				$limits = new stdClass();
 				$dataLimits->updateDate =  $responseBean->lastUpdate;
@@ -812,11 +808,36 @@ class Novo_Services_Model extends NOVO_Model {
 				$this->response->msg = novoLang(lang('SERVICES_LIMITS_NO_CARDHOLDER'), maskString( $dataRequest->cardNumber, 5, 6));
 				$this->response->data['btn1']['action'] = 'close';
 			break;
-			default:
+			case -455:
 				$this->response->title = lang('GEN_TRANSACTIONAL_LIMITS_TITTLE');
 				$this->response->icon =  lang('GEN_ICON_WARNING');
-				$this->response->msg = novoLang(lang('RESP_NO_CARD_FOUND'), maskString( $dataRequest->cardNumber, 5, 6));
+				$this->response->msg = novoLang(lang('SERVICES_TWIRLS_NO_AVAILABLE_CARD'), maskString( $dataRequest->cardNumber, 5, 6));
 				$this->response->data['btn1']['action'] = 'close';
+			break;
+			case -444:
+				$this->response->title = lang('GEN_TRANSACTIONAL_LIMITS_TITTLE');
+				$this->response->icon =  lang('GEN_ICON_WARNING');
+				$this->response->msg = lang('SERVICES_TWIRLS_NO_FOUND_REGISTRY');
+				$this->response->data['btn1']['action'] = 'close';
+			break;
+			case -454:
+				$this->response->title = lang('GEN_TRANSACTIONAL_LIMITS_TITTLE');
+				$this->response->icon =  lang('GEN_ICON_WARNING');
+				$this->response->msg = novoLang(lang('SERVICES_TWIRLS_TEMPORARY_BLOCKED_CARD'), maskString( $dataRequest->cardNumber, 5, 6));
+				$this->response->data['btn1']['action'] = 'close';
+			break;
+			case -330:
+				$this->response->title = lang('GEN_TRANSACTIONAL_LIMITS_TITTLE');
+				$this->response->icon =  lang('GEN_ICON_WARNING');
+				$this->response->msg = novoLang(lang('SERVICES_TWIRLS_EXPIRED_CARD'), maskString( $dataRequest->cardNumber, 5, 6));
+				$this->response->data['btn1']['action'] = 'close';
+			break;
+			case -307:
+				$this->response->title = lang('GEN_TRANSACTIONAL_LIMITS_TITTLE');
+				$this->response->icon =  lang('GEN_ICON_WARNING');
+				$this->response->msg = novoLang(lang('SERVICES_TWIRLS_PERMANENT_BLOCKED_CARD'), maskString( $dataRequest->cardNumber, 5, 6));
+				$this->response->data['btn1']['action'] = 'close';
+			break;
 		}
 
 		return $this->responseToTheView('callWs_transactionalLimits');
@@ -840,7 +861,7 @@ class Novo_Services_Model extends NOVO_Model {
 		$this->dataRequest->idEmpresa = $this->session->enterpriseInf->idFiscal;
 		$this->dataRequest->prefix = $this->session->productInf->productPrefix;
 		foreach ((array)lang('SERVICES_NAMES_PROPERTIES_LIMITS') as $key => $val) {
-			$cards[$key] = $dataRequest->$val;
+			$cards[$key] = (int)$dataRequest->$val;
 		};
 		foreach ($cards as &$valor) {
 			if ($valor == '') {
@@ -865,6 +886,7 @@ class Novo_Services_Model extends NOVO_Model {
 
 		switch($this->isResponseRc) {
 			case 0:
+				$this->response->code= 4;
 				$this->response->title = lang('GEN_TRANSACTIONAL_LIMITS_TITTLE');
 				$this->response->icon =  lang('GEN_ICON_SUCCESS');
         $this->response->msg = 	lang('RESP_SUCCESSFULL_UPDATE_LIMITS');
@@ -877,13 +899,19 @@ class Novo_Services_Model extends NOVO_Model {
 				$this->response->msg = lang('SERVICES_LIMITS_NO_UPDATE');
 				$this->response->data['btn1']['action'] = 'close';
 				break;
-
-			default:
+			case -456:
+				$this->response->title = lang('GEN_TRANSACTIONAL_LIMITS_TITTLE');
 				$this->response->icon =  lang('GEN_ICON_WARNING');
+				$this->response->msg = $response->msg;
+				$this->response->data['btn1']['action'] = 'close';
+				break;
+			case -457:
+				$this->response->title = lang('GEN_TRANSACTIONAL_LIMITS_TITTLE');
+				$this->response->icon =  lang('GEN_ICON_WARNING');
+				$this->response->msg = $response->msg;
+				$this->response->data['btn1']['action'] = 'close';
+				break;
 		}
-
-
-
 		return $this->responseToTheView('callWs_updateTransactionalLimits');
 	}
 }

@@ -1,61 +1,57 @@
 'use strict'
-$(function() {
-	var changePassBtn = $('#btn-change-pass');
-	var new_Pass = $('#new-pass');
-
+$(function () {
 	$.balloon.defaults.css = null;
-	new_Pass
-	.on('focus', function() {
-		$(this).showBalloon({
-			html: true,
-			classname: 'pass-config',
-			position: "right",
-			contents: $('#psw_info').html()
+	$('#new-pass')
+		.on('focus', function () {
+			$(this).showBalloon({
+				html: true,
+				classname: 'pass-config',
+				position: "right",
+				contents: $('#psw_info').html()
+			});
+		})
+		.on('keyup focus', function () {
+			var pswd = $(this).val();
+			passWordStrength(pswd);
+
+		})
+		.on('blur', function () {
+			$('#new-pass').hideBalloon();
 		});
-	})
-	.on('keyup focus', function() {
-		var pswd = $(this).val();
 
-		passWordStrength(pswd);
-
-	})
-	.on('blur', function() {
-		new_Pass.hideBalloon();
-	});
-
-	changePassBtn.on('click', function(e) {
+	$('#passwordChangeBtn').on('click', function (e) {
 		e.preventDefault();
-		changeBtn = $(this);
 		form = $('#form-change-pass');
+		btnText = $(this).text().trim();
 		validateForms(form, { handleMsg: true });
-		if(form.valid()) {
+		if (form.valid()) {
 			var userType = $('#user-type').val();
 			var currentPass = $('#current-pass').val();
-			var newPass = new_Pass.val();
+			var newPass = $('#new-pass').val();
 			var confirmPass = $('#confirm-pass').val();
-			btnText = changeBtn.text().trim();
+			$(this).text().trim();
 
-			if(userType == '1') {
+			if (userType == '1') {
 				currentPass = currentPass.toUpperCase();
 			}
 
-			var passData = {
+			data = {
 				currentPass: cryptoPass(currentPass),
 				newPass: cryptoPass(newPass),
 				confirmPass: cryptoPass(confirmPass)
 			}
 
 			insertFormInput(true, form);
-			changeBtn.html(loader);
-			changePassword(passData, btnText);
+			$(this).html(loader);
+			changePassword();
 		}
-	});
-});
+	})
+})
 
 function passWordStrength(pswd) {
 	var valid;
 
-	if ( pswd.length < 8 || pswd.length > 15 ) {
+	if (pswd.length < 8 || pswd.length > 15) {
 		$('.pass-config #length').removeClass('valid').addClass('invalid');
 		valid = false;
 	} else {
@@ -63,17 +59,17 @@ function passWordStrength(pswd) {
 		valid = true;
 	}
 
-	if (pswd.match(/[a-z]/) ) {
+	if (pswd.match(/[a-z]/)) {
 		$('.pass-config #letter').removeClass('invalid').addClass('valid');
-		valid = !valid ?  valid : true;
+		valid = !valid ? valid : true;
 	} else {
 		$('.pass-config #letter').removeClass('valid').addClass('invalid');
 		valid = false;
 	}
 
-	if (pswd.match(/[A-Z]/) ) {
+	if (pswd.match(/[A-Z]/)) {
 		$('.pass-config #capital').removeClass('invalid').addClass('valid');
-		valid = !valid ?  valid : true;
+		valid = !valid ? valid : true;
 	} else {
 		$('.pass-config #capital').removeClass('valid').addClass('invalid');
 		valid = false;
@@ -89,7 +85,7 @@ function passWordStrength(pswd) {
 
 	if ((pswd.length > 0) && !pswd.match(/(.)\1{2,}/)) {
 		$('.pass-config #consecutivo').removeClass('invalid').addClass('valid');
-		valid = !valid ?  valid : true;
+		valid = !valid ? valid : true;
 	} else {
 		$('.pass-config #consecutivo').removeClass('valid').addClass('invalid');
 		valid = false;
@@ -97,27 +93,11 @@ function passWordStrength(pswd) {
 
 	if (pswd.match(/([!@\*\-\?¡¿+\/.,_#])/)) {
 		$('.pass-config #especial').removeClass('invalid').addClass('valid');
-		valid = !valid ?  valid : true;
+		valid = !valid ? valid : true;
 	} else {
 		$('.pass-config #especial').removeClass('valid').addClass('invalid');
 		valid = false;
 	}
 
 	return valid;
-}
-
-function changePassword(passData, textBtn) {
-	verb = "POST"; who = 'User'; where = 'ChangePassword'; data = passData;
-	callNovoCore(verb, who, where, data, function(response) {
-		dataResponse = response.data
-		switch(response.code) {
-			case 0:
-			case 1:
-				notiSystem(response.title, response.msg, response.icon, response.data)
-				break;
-		}
-		$('#form-change-pass')[0].reset();
-		$('#form-change-pass input, #form-change-pass button').attr('disabled', false);
-		$('#btn-change-pass').html(textBtn)
-	})
 }

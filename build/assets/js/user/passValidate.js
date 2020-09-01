@@ -1,6 +1,4 @@
 'use strict'
-var changeBtn;
-
 function passStrength(pswd) {
 	var valid;
 
@@ -55,12 +53,12 @@ function passStrength(pswd) {
 	return valid;
 }
 
-function changePassword(passData, textBtn) {
-	verb = "POST"; who = 'User'; where = 'ChangePassword'; data = passData;
+function changePassword() {
+	verb = "POST"; who = 'User'; where = 'ChangePassword';
 	callNovoCore(verb, who, where, data, function (response) {
 
 		form[0].reset();
-		insertFormInput(false, form);
-		changeBtn.html(textBtn)
+		insertFormInput(false);
+		$('#passwordChangeBtn').html(btnText)
 	})
 }

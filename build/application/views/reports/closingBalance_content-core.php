@@ -23,7 +23,7 @@
 				<span class="line-text mb-2 h4 semibold primary"><?= lang('GEN_SEARCH_CRITERIA') ?></span>
 				<div class="flex my-2 px-5">
 					<form id="closingBudgetForm" class="w-100">
-						<div class="row flex flex items-center justify-end col-sm-12">
+						<div class="row flex flex items-center justify-start col-sm-12">
 							<div class="form-group <?= lang('CONF_SETT_STYLE_SKIN') ?>">
 								<label><?= lang('GEN_ENTERPRISE') ?></label>
 								<select id="enterpriseReport" name="enterpriseReport" class="select-box custom-select mt-1 mb-1 h6 w-100">
@@ -114,6 +114,6 @@
 		</div>
 	</div>
 	<?php if($widget): ?>
-	<?php $this->load->view('widget/widget_enterprise-product_content'.$newViews, $widget) ?>
+	<?php $this->load->view('widget/widget_enterprise-product_content-core', $widget) ?>
 	<?php endif; ?>
 </div>

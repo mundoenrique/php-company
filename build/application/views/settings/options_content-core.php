@@ -100,13 +100,13 @@
                   <div id="loader" class="none">
                     <span class="spinner-border secondary" role="status" aria-hidden="true"></span>
                   </div>
-									<?php if (lang('CONF_SETTINGS_EMAIL_UPDATE') == 'ON'): ?>
+                  <?php if (lang('CONF_SETTINGS_EMAIL_UPDATE') == 'ON'): ?>
                   <div class="row">
                     <div class="col-6 flex justify-end">
                       <button id="userDataBtn" class="btn btn-primary btn-small btn-loading" type="submit"><?= lang('GEN_BTN_ACCEPT') ?></button>
                     </div>
                   </div>
-									<?php endif; ?>
+                  <?php endif; ?>
                 </form>
               </div>
             </div>
@@ -118,7 +118,7 @@
                 <i class="flex mr-1 pl-2 icon icon-chevron-down flex-auto" aria-hidden="true"></i>
               </span>
               <div class="section my-2 px-5">
-                <form id="passwordChangeForm">
+                <form id="passwordChangeForm" method="post">
                   <input type="hidden" id="userType" name="user-type" value="<?= $userType ?>">
                   <div class="container">
                     <div class="row">
@@ -177,8 +177,9 @@
                     </div>
                     <div class="row">
                       <div class="col-6 flex justify-end">
-                        <button id="passwordChangeBtn" class="btn btn-primary btn-small btn-loading"
-                          type="button"><?= lang('GEN_BTN_ACCEPT') ?></button>
+                        <button id="passwordChangeBtn" class="btn btn-primary btn-small btn-loading">
+                          <?= lang('GEN_BTN_ACCEPT') ?>
+                        </button>
                       </div>
                     </div>
                   </div>
@@ -260,22 +261,22 @@
                         <input type="text" id="phone1" name="phone1" class="form-control" value="<?= $phone1; ?>" maxlength="15" <?= $phoneUpdate; ?>>
                         <div class="help-block"></div>
                       </div>
-											<?php if ($phone2 != ''): ?>
+                      <?php if ($phone2 != ''): ?>
                       <div class="form-group mb-3 col-6 col-lg-4 col-xl-4">
                         <label for="phone2">Teléfono 2</label>
                         <input id="phone2" name="phone2" class="form-control" value="<?= $phone2; ?>" maxlength="15" <?= $phoneUpdate; ?>>
                         <div class="help-block"></div>
                       </div>
-											<?php endif; ?>
-											<?php if ($phone3 != ''): ?>
+                      <?php endif; ?>
+                      <?php if ($phone3 != ''): ?>
                       <div class="form-group mb-3 col-6 col-lg-4 col-xl-4">
                         <label for="phone3">Teléfono 3</label>
                         <input id="phone3" name="phone3" class="form-control" value="<?= $phone3; ?>" maxlength="15" <?= $phoneUpdate; ?>>
                         <div class="help-block"></div>
                       </div>
-											<?php endif; ?>
+                      <?php endif; ?>
                     </div>
-										<?php if (lang('CONF_SETTINGS_PHONES_UPDATE') == 'ON'): ?>
+                    <?php if (lang('CONF_SETTINGS_PHONES_UPDATE') == 'ON'): ?>
                     <div class="row">
                       <div class="flex mb-2 justify-end col-12">
                         <button id="btnChangeTelephones" class="btn btn-primary btn-small " type="submit">

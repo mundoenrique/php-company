@@ -12,10 +12,10 @@
 		</a>
 		<?php if($this->session->logged): ?>
 		<div class="flex flex-auto justify-end">
-			<?php $this->load->view('widget/widget_menu-user_content'.$newViews); ?>
+			<?php $this->load->view('widget/widget_menu-user_content-core'); ?>
 		</div>
 		<?php endif; ?>
 	</nav>
 </header>
-<?php $this->load->view('widget/widget_menu-business_content'.$newViews, $settingsMenu); ?>
+<?php $this->load->view('widget/widget_menu-business_content-core', $settingsMenu); ?>
 <?php endif; ?>

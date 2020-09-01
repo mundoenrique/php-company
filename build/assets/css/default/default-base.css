@@ -275,7 +275,7 @@ footer.main-footer {
 	padding: .375rem .75rem;
 	font-size: .875rem;
 	font-weight: var(--font-weight-base);
-	line-height: 1.15;
+	line-height: inherit;
 	color: var(--color-sixth);
 	border: 1px solid var(--color-eighth);
 	transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
@@ -1105,7 +1105,7 @@ label {
 }
 
 .btn-secondary:hover {
-	background-color: var(--color-tertiary);
+	background-color: var(--color-fifth);
 }
 
 .btn-secondary:active {
@@ -2042,6 +2042,7 @@ i[class*=" icon-"]:before {
 .icon-build-config:before	 	 { content: "\e001"; }
 .icon-downl-config:before	   { content: "\e002"; }
 .icon-user-config:before	   { content: "\e003"; }
+.icon-graph:before           { content: "\e054"; }
 .icon-phone:before           { content: "\e11f"; }
 .icon-view:before            { content: "\e0b3"; }
 .icon-remove:before          { content: "\e0b5"; }

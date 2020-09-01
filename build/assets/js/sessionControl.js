@@ -25,7 +25,7 @@ function finishSession() {
 	$('#accept').addClass('btn-large-xl')
 	data = {
 		btn1: {
-			text: 'Mantener sesión',
+			text: lang.GEN_BTN_KEEP_SESSION,
 			action: 'close'
 		}
 	}

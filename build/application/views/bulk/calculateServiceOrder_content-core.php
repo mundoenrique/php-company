@@ -32,7 +32,7 @@
 								<th><?= lang('GEN_TABLE_COMMISSION'); ?></th>
 								<th><?= lang('GEN_TABLE_VAT'); ?></th>
 								<th><?= lang('GEN_TABLE_AMOUNT_SO'); ?></th>
-								<th><?= lang('GEN_TABLE_TOTAL_AMOUNT'); ?></th>
+								<th><?= lang('GEN_TABLE_AMOUNT'); ?></th>
 								<th><?= lang('GEN_TABLE_DEPOSIT_AMOUNT'); ?></th>
 								<th><?= lang('GEN_TABLE_OPTIONS'); ?></th>
 							</tr>
