@@ -69,7 +69,6 @@ class Novo_Settings_Model extends NOVO_Model {
 
 		return $this->responseToTheView('CallWs_GetUser');
 	}
-
 	/**
 	 * @info Método para el cambio de Email
 	 * @author Diego Acosta García
@@ -103,7 +102,7 @@ class Novo_Settings_Model extends NOVO_Model {
 				$this->response->data = [
 					'btn1'=> [
 						'text'=> lang('GEN_BTN_CONTINUE'),
-						'link'=> 'inicio',
+						'link'=> 'empresas',
 						'action'=> 'close'
 					]
 				];
@@ -201,7 +200,7 @@ class Novo_Settings_Model extends NOVO_Model {
 				$this->response->data = [
 					'btn1'=> [
 						'text'=> lang('GEN_BTN_CONTINUE'),
-						'link'=> 'inicio',
+						'link'=> 'empresas',
 						'action'=> 'close'
 					]
 				];
@@ -228,7 +227,6 @@ class Novo_Settings_Model extends NOVO_Model {
 
 		return $this->responseToTheView('CallWs_ChangeTelephones');
 	}
-
 	/**
 	 * @info Método para agregar contacto
 	 * @author Diego Acosta García
@@ -264,7 +262,7 @@ class Novo_Settings_Model extends NOVO_Model {
 				$this->response->data = [
 					'btn1'=> [
 						'text'=> lang('GEN_BTN_CONTINUE'),
-						'link'=> 'inicio',
+						'link'=> 'empresas',
 						'action'=> 'close'
 					]
 				];

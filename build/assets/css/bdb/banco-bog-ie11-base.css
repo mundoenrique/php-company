@@ -991,13 +991,6 @@ table.dataTable tr.selected td.select-checkbox::after, table.dataTable tr.select
 	margin-top: -4px !important;
 }
 
-table.dataTable tr.selected td.select-checkbox::after {
-	content: '' !important;
-	margin-top: -5px !important;
-	background-image: url("../../images/bdb/check_table.svg");
-	background-size: cover;
-}
-
 .dataTables_wrapper .dataTables_paginate .paginate_button.disabled,
 .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:hover,
 .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:active {
@@ -1283,12 +1276,9 @@ select::-ms-expand {
 	top: 207px;
 }
 
-.nav-config .nav-config-box .nav-item-config > a > img {
-	width: 35px;
-}
-
-.nav-config .nav-config-box .nav-item-config .bg {
-	width: 35px;
+.nav-config .nav-config-box .nav-item-config:hover .box:not(h4),
+.nav-config .nav-config-box .nav-item-config.active .box {
+	transform: translate(5px, -2px);
 }
 
 .nav-config .nav-config-box .nav-item-config h4 {

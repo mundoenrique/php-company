@@ -275,7 +275,7 @@ footer.main-footer {
 	padding: .375rem .75rem;
 	font-size: .875rem;
 	font-weight: var(--font-weight-base);
-	line-height: 1.15;
+	line-height: inherit;
 	color: var(--color-sixth);
 	border: 1px solid var(--color-eighth);
 	transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
@@ -2023,6 +2023,7 @@ i[class*=" icon-"]:before {
 .icon-build-config:before	 	 { content: "\e001"; }
 .icon-downl-config:before	   { content: "\e002"; }
 .icon-user-config:before	   { content: "\e003"; }
+.icon-graph:before           { content: "\e054"; }
 .icon-phone:before           { content: "\e11f"; }
 .icon-view:before            { content: "\e0b3"; }
 .icon-remove:before          { content: "\e0b5"; }
@@ -2099,7 +2100,7 @@ i[class*=" icon-"]:before {
 
 .logo-banco {
 	width: 260px;
-	height: auto;
+	height: 71px;
 }
 
 /* Spinner */
@@ -3739,7 +3740,7 @@ a.ui-button:active,
   height: 106px;
   margin-bottom: 12px;
 	background-color: var(--color-secondary);
-	color: var(--color-sixth);
+	color: var(--color-fifth);
 	border: .5px solid var(--color-tertiary);
 	box-shadow: 4px 4px 8px 0 rgba(0,0,0,.1);
 	border-radius: 5px;
@@ -3773,12 +3774,12 @@ a.ui-button:active,
   visibility: visible;
 }
 
-.nav-config .nav-config-box .nav-item-config > a > img {
-	width: 30%;
+.nav-config .nav-config-box .nav-item-config > a > i {
+	font-size: 30px;
 }
 
 .nav-config .nav-config-box .nav-item-config .bg {
-	width: 35%
+	font-size: 35px;
 }
 
 .nav-config .nav-config-box .nav-item-config h4 {

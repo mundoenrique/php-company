@@ -1325,12 +1325,9 @@ select::-ms-expand {
 	margin-top: -80px;
 }
 
-.nav-config .nav-config-box .nav-item-config > a > img {
-	width: 35px;
-}
-
-.nav-config .nav-config-box .nav-item-config .bg {
-	width: 35px;
+.nav-config .nav-config-box .nav-item-config:hover .box:not(h4),
+.nav-config .nav-config-box .nav-item-config.active .box {
+	transform: translate(5px, -2px);
 }
 
 .nav-config .nav-config-box .nav-item-config h4 {

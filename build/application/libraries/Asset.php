@@ -16,10 +16,8 @@ class Asset {
 
 		$this->cssFiles = [];
 		$this->jsFiles = [];
-
 		$this->CI = &get_instance();
 		$_SERVER['REMOTE_ADDR'] = $this->CI->input->ip_address();
-
 	}
 	/**
 	 * @info Método para inicializar los atributos de la librería
@@ -44,10 +42,10 @@ class Asset {
 			$file = assetPath('css/'.$fileName.'.css');
 
 			if(!file_exists($file)) {
-				$countriUri = $this->CI->config->item('country-uri').'/';
+				$countryUri = $this->CI->config->item('country-uri').'/';
 				$rootCss = '-'.$this->CI->config->item('client');
 				$baseCss = $this->CI->config->item('client').'-';
-				$search = [$countriUri, $rootCss, $baseCss];
+				$search = [$countryUri, $rootCss, $baseCss];
 				$replace = ['default/', '-default', 'default-'];
 				$file = str_replace($search, $replace, $file);
 				$fileName = str_replace($search, $replace, $fileName);
@@ -83,6 +81,7 @@ class Asset {
 	public function insertFile($fileName, $folder = 'images', $country = FALSE)
 	{
 		log_message('INFO', 'NOVO Asset: insertFile method initialized');
+
 		$country = $country ? $country.'/' : '';
 		$file = assetPath($folder.'/'.$country.$fileName);
 

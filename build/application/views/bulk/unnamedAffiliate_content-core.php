@@ -96,7 +96,7 @@
 		</div>
 	</div>
 	<?php if($widget): ?>
-	<?php $this->load->view('widget/widget_enterprise-product_content'.$newViews, $widget) ?>
+	<?php $this->load->view('widget/widget_enterprise-product_content-core', $widget) ?>
 	<?php endif; ?>
 </div>
 <form id="get-data" action="<?= base_url('afiliacion-innominadas'); ?>" method="post"></form>

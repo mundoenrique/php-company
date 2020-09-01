@@ -47,6 +47,9 @@ $(function () {
 
 	$('.date-picker').datepicker({
 		onSelect: function (selectedDate) {
+			$(this)
+				.focus()
+				.blur();
 			var dateSelected = selectedDate.split('/');
 			dateSelected = dateSelected[1] + '/' + dateSelected[0] + '/' + dateSelected[2]
 			var inputDate = $(this).attr('id');
@@ -149,10 +152,11 @@ $(function () {
 						action: 'none'
 					},
 					btn2: {
+						text: lang.GEN_BTN_CANCEL,
 						action: 'close'
 					}
 				}
-				inputModal =	'<form id="delete-bulk-form" name="delete-bulk-form" class="form-group"> onsubmit="return false;">';
+				inputModal =	'<form id="delete-bulk-form" name="delete-bulk-form" class="form-group" onsubmit="return false;">';
 				inputModal+= 		'<span class="regular">'+lang.GEN_BULK_DELETE_SO+': '+inputSelected+'</span>';
 				inputModal+=		'<div class="input-group">';
 				inputModal+= 			'<input id="password" class="form-control pwd-input" name="password" type="password" autocomplete="off"';

@@ -37,11 +37,7 @@ class Novo_Business_Model extends NOVO_Model {
 		$this->dataRequest->filtroEmpresas = '';
 
 		$response = $this->sendToService('callWs_GetEnterprises');
-		$filters = FALSE;
-
-		if(!$dataRequest) {
-			$filters = $this->request_data->setFilters();
-		}
+		$filters = $this->request_data->setFilters();
 
 		switch($this->isResponseRc) {
 			case 0:
@@ -50,7 +46,6 @@ class Novo_Business_Model extends NOVO_Model {
 				$enterpriseArgs->sizePage = $sizePage;
 				$enterpriseList = $this->request_data->OrderEnterpriseList($enterpriseArgs, $filters, $dataRequest);
 				$this->response->data->list = $enterpriseList->list;
-				$this->response->data->listaa = $enterpriseList;
 				if(!$dataRequest) {
 					$access = [
 						'user_access',
@@ -239,7 +234,7 @@ class Novo_Business_Model extends NOVO_Model {
 			break;
 			case -138:
 				$this->response->code = 3;
-				$this->response->msg = 'No fue posible obtener la lista de productos asociados, vuelve a intentarlo';
+				$this->response->msg = lang('GEN_WARNING_PRODUCTS_LIST');
 			break;
 			case -430:
 			case -431:

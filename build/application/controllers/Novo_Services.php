@@ -85,7 +85,6 @@ Class Novo_Services extends Novo_Controller {
 			"third_party/jquery.validate",
 			"validate-core-forms",
 			"third_party/additional-methods",
-			"third_party/jquery.mask",
 			'services/transactionalLimits'
 		);
 		$this->responseAttr();

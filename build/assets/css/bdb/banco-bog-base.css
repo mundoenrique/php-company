@@ -272,7 +272,7 @@ footer.main-footer {
 	padding: .375rem .75rem;
 	font-size: .875rem;
 	font-weight: var(--font-weight-base);
-	line-height: 1.15;
+	line-height: inherit;
 	color: var(--color-eighth);
 	border: 1px solid var(--color-eleventh);
 	border-radius: .25rem;
@@ -973,7 +973,7 @@ label {
 }
 
 .form-control.has-error {
-	border-color: var(--danger);
+	border-color: var(--danger) !important;
 }
 
 /* Buttons
@@ -2010,6 +2010,7 @@ i[class*=" icon-"]:before {
 .icon-build-config:before	 	 { content: "\e001"; }
 .icon-downl-config:before	   { content: "\e002"; }
 .icon-user-config:before	   { content: "\e003"; }
+.icon-graph:before           { content: "\e054"; }
 .icon-phone:before           { content: "\e11f"; }
 .icon-view:before            { content: "\e0b3"; }
 .icon-remove:before          { content: "\e0b5"; }
@@ -2087,7 +2088,7 @@ i[class*=" icon-"]:before {
 
 .logo-banco {
 	width: 260px;
-	height: auto;
+	height: 52px;
 }
 
 /* Spinner */
@@ -3706,12 +3707,12 @@ a.ui-button:active,
   visibility: visible;
 }
 
-.nav-config .nav-config-box .nav-item-config > a > img {
-	width: 30%;
+.nav-config .nav-config-box .nav-item-config > a > i {
+	font-size: 30px;
 }
 
 .nav-config .nav-config-box .nav-item-config .bg {
-	width: 35%;
+	font-size: 35px;
 }
 
 .nav-config .nav-config-box .nav-item-config h4 {

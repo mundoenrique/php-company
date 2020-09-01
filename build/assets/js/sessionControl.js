@@ -1,32 +1,7 @@
 'use strict'
-var currentDate;
 var setTimesession;
 var resetTimesession;
 $(function() {
-	currentDate = new Date();
-  $.datepicker.regional['es'] = {
-    closeText: lang.GEN_PICKER_CLOSETEXT,
-    prevText: lang.GEN_PICKER_PREVTEXT,
-    nextText: lang.GEN_PICKER_NEXTTEXT,
-    currentText: lang.GEN_PICKER_CURRENTTEXT,
-    monthNames: lang.GEN_PICKER_MONTHNAMES,
-    monthNamesShort: lang.GEN_PICKER_MONTHNAMESSHORT,
-    dayNames: lang.GEN_PICKER_DAYNAMES,
-    dayNamesShort: lang.GEN_PICKER_DAYNAMESSHORT,
-    dayNamesMin: lang.GEN_PICKER_DAYNAMESMIN,
-    weekHeader: lang.GEN_PICKER_WEEKHEADER,
-    dateFormat: lang.GEN_PICKER_DATEFORMAT,
-    firstDay: lang.GEN_PICKER_FIRSTDATE,
-    isRTL: lang.GEN_PICKER_ISRLT,
-		showMonthAfterYear: lang.GEN_PICKER_SHOWMONTHAFTERYEAR,
-		yearRange: lang.GEN_PICKER_YEARRANGE + currentDate.getFullYear(),
-		maxDate: currentDate,
-		changeMonth: lang.GEN_PICKER_CHANGEMONTH,
-    changeYear: lang.GEN_PICKER_CHANGEYEAR,
-    showAnim: lang.SHOWANIM,
-    yearSuffix: lang.GEN_PICKER_YEARSUFFIX
-  };
-	$.datepicker.setDefaults($.datepicker.regional['es']);
 	clearTimeout(resetTimesession);
 	clearTimeout(setTimesession);
 	sessionExpire();
@@ -50,7 +25,7 @@ function finishSession() {
 	$('#accept').addClass('btn-large-xl')
 	data = {
 		btn1: {
-			text: 'Mantener sesión',
+			text: lang.GEN_BTN_KEEP_SESSION,
 			action: 'close'
 		}
 	}
@@ -76,7 +51,5 @@ function finishSession() {
 			.text(lang.GEN_BTN_ACCEPT)
 			.removeClass('btn-large-xl');
 		})
-
-
-	});
+	})
 }

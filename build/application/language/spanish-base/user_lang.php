@@ -50,3 +50,5 @@ $lang['PLACE_HOLDER_FISCAL_REGISTER'] = "00000000000";
 //PASS-CHANGE
 $lang['PASSWORD_NEWUSER'] = 'Por motivos de seguridad es necesario que cambies tu contraseña la primera vez que ingresas a nuestro sistema "<strong>%s</strong>".';
 $lang['PASSWORD_EXPIRED'] = 'Tu contraseña está vencida. Por motivos de seguridad es necesario que la cambies antes de continuar en nuestro sistema "<strong>%s</strong>".';
+//SESSION EXPIRES
+$lang['SESSION_EXPIRE_TIME'] = 'El tiempo permitido para realizar la operación expiró, intenta nuevamente.';

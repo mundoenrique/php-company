@@ -33,7 +33,7 @@
 								<th><?= lang('GEN_TABLE_TYPE'); ?></th>
 								<th><?= lang('GEN_TABLE_TYPE_ID'); ?></th>
 								<th><?= lang('GEN_TABLE_RECORDS'); ?></th>
-								<th><?= lang('GEN_TABLE_AMOUNT'); ?></th>
+								<th><?= lang('GEN_TABLE_FOR_DEBIT'); ?></th>
 								<th><?= lang('GEN_TABLE_OPTIONS'); ?></th>
 							</tr>
 						</thead>
@@ -110,7 +110,7 @@
 								<th><?= lang('GEN_TABLE_TYPE'); ?></th>
 								<th><?= lang('GEN_TABLE_TYPE_ID'); ?></th>
 								<th><?= lang('GEN_TABLE_RECORDS'); ?></th>
-								<th><?= lang('GEN_TABLE_AMOUNT'); ?></th>
+								<th><?= lang('GEN_TABLE_FOR_DEBIT'); ?></th>
 								<th><?= lang('GEN_TABLE_OPTIONS'); ?></th>
 							</tr>
 						</thead>
@@ -200,6 +200,6 @@
 		</div>
 	</div>
 	<?php if($widget): ?>
-	<?php $this->load->view('widget/widget_enterprise-product_content'.$newViews, $widget) ?>
+	<?php $this->load->view('widget/widget_enterprise-product_content-core', $widget) ?>
 	<?php endif; ?>
 </div>

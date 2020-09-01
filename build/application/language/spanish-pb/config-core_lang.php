@@ -10,7 +10,8 @@ $lang['CONF_INQUIRY_DOCTYPE'] = 'ON';
 $lang['CONF_CARDS_INQUIRY_ISSUE_STATUS'] = 'OFF';
 //SIGNIN
 $lang['CONF_SIGNIN_WIDGET_CONTACT'] = 'OFF';
-//FILES
-$lang['CONF_APPS_DOWNLOAD'] = [
-  ['download-ini', 'Archivo.ini']
-];
+//SETTINGS
+$lang['CONF_SETTINGS_EMAIL_UPDATE'] = 'OFF';
+$lang['CONF_SETTINGS_BRANCHES'] = 'OFF';
+$lang['CONF_SETTINGS_PHONES_UPDATE'] = 'OFF';
+$lang['CONF_SETTINGS_CONTACT'] = 'OFF';
