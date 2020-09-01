@@ -76,7 +76,7 @@ class Encrypt_Connect {
 		}
 
 		if (isset($response->bean)) {
-			$response->bean = gettype($response->bean) == 'object' ? $response->bean : json_decode($response->bean);
+			$response->bean = gettype(json_decode($response->bean)) == 'object' ? json_decode($response->bean) : $response->bean;
 			$this->logMessage->inBean = 'IN BEAN';
 		}
 

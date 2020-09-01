@@ -171,6 +171,7 @@ function callNovoCore(verb, who, where, request, _response_) {
 			icon: lang.GEN_ICON_DANGER,
 			data: {
 				btn1: {
+					text: lang.GEN_BTN_ACCEPT,
 					link: lang.GEN_ENTERPRISE_LIST,
 					action: 'redirect'
 				}
