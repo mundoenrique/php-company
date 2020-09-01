@@ -406,20 +406,14 @@ function validateForms(form) {
 
 	$.validator.methods.maxLimitZero = function(value, element, param) {
 		var valid = false;
-		if (Number($(param).val()) == 0 ) {
-			if (value > 0 && value <= 999999) {
+		if (Number($(param).val()) == 0) {
+			if (value > 0 ) {
 				valid = true
 			}else if (value == Number($(param).val())) {
 				valid = true;
 			}
-		}else if(Number($(param).val()) >= 999999){
-			if (value == 0) {
-				valid = true;
-			}else if (value > 0 && value <= Number($(param).val())) {
-				valid = true;
-			}
-		}else if (Number($(param).val()) > 0 && Number($(param).val()) < 999999) {
-			if (value <= Number($(param).val()) && value > 0 ) {
+		}else if (Number($(param).val()) > 0) {
+			if (value <= Number($(param).val())) {
 				valid = true;
 			}
 		}
