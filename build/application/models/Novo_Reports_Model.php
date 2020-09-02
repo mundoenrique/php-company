@@ -1440,16 +1440,10 @@ class Novo_Reports_Model extends NOVO_Model {
 				$this->response->code = 0;
 				$this->response->data = (array)$response;
 			break;
-			case -444:
+			case -3:
 				$this->response->icon = lang('GEN_ICON_DANGER');
 				$this->response->title = lang('REPORTS_TITLE');
-				$this->response->msg = "Registro no encontrado";
-				$this->response->data['btn1']['action'] = 'close';
-			break;
-			case -150:
-				$this->response->icon = lang('GEN_ICON_DANGER');
-				$this->response->title = lang('REPORTS_TITLE');
-				$this->response->msg = "No han sido encontrados registros existentes para la fecha";
+				$this->response->msg = lang('REPORTS_NO_FILE_CONSOLID');
 				$this->response->data['btn1']['action'] = 'close';
 			break;
 		}
@@ -1498,14 +1492,11 @@ class Novo_Reports_Model extends NOVO_Model {
 				$this->response->code = 0;
 				$this->response->data = (array)$response;
 			break;
-			case -444:
+			case -3:
 				$this->response->icon = lang('GEN_ICON_DANGER');
 				$this->response->title = lang('REPORTS_TITLE');
-				$this->response->msg = "Registro no encontrado";
+				$this->response->msg = lang('REPORTS_NO_FILE_CONSOLID');
 				$this->response->data['btn1']['action'] = 'close';
-			break;
-			case -150:
-				$this->response->code = 0;
 			break;
 		}
 
