@@ -22,3 +22,5 @@ $lang['CONF_MANUAL_FILE'] = [
 $lang['CONF_FILES_MANAGMENT'] = [
   ['lotes.rar', 'Gestión de Lotes']
 ];
+//DATEPICKER
+$lang['CONF_MAX_CONSULT_MONTH'] = '1';
