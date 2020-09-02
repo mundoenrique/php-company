@@ -56,6 +56,7 @@ $lang['GEN_LINK_REP_STATUS_BULK'] = 'estado-lote';//REPLOT
 $lang['GEN_MENU_REP_CARDHOLDERS'] = 'Tarjetahabientes';//TEBTHA
 $lang['GEN_MENU_LNK_CARDHOLDERS'] = 'tarjetahabientes';//TEBTHA
 $lang['GEN_LINK_REP_CARDHOLDERS'] = 'tarjetahabientes';//TEBTHA
+$lang['GEN_LINK_REP_STATUSACCOUNT'] = 'estado-de-cuenta';//TEBTHA
 $lang['GEN_MENU_UNNAMED_REQUEST'] = 'Solicitud de innominadas';
 $lang['GEN_MENU_UNNAMED_AFFIL'] = 'Afiliación de innominadas';
 $lang['GEN_MENU_LOT_REPROCESS'] = 'Reproceso de datos';//TEBGUR
@@ -402,7 +403,7 @@ $lang['GEN_TABLE_USERACT_DATE'] = 'Fecha';
 $lang['REPORTS_TITLE'] = 'Configuración';
 $lang['REPORTS_NO_FILE_EXIST'] = 'No fue posible generar el archivo, por favor intenta de nuevo';
 //DATATABLES LANG CLOSING BALANCE
-$lang['GEN_FISCAL_CLOSING_BALANCE'] = 'NIT';
+$lang['GEN_FISCAL_REGISTRY'] = 'NIT';
 $lang['GEN_ACCOUNT_CLOSING_BALANCE'] = 'Cuenta';
 $lang['GEN_LOGIN_IP_MSG'] = 'Estás ingresando desde un equipo no habitual, por seguridad te enviaremos un código de verificación a la dirección de correo <span class="semibold">%s</span>, indícalo a continuación.';
 $lang['GEN_LOGIN_IP_ASSERT'] = 'Confirmo que estoy ingresando desde un equipo de uso frecuente.';
