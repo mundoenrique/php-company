@@ -36,3 +36,8 @@ $lang['CONF_MANUAL_FILE'] = [];
 $lang['CONF_FILES_MANAGMENT'] = [
   ['lotes.rar', 'Gestión de Lotes']
 ];
+//STATUS ACCOUNT
+$lang['CONF_DNI_COLUMN']= 'OFF';
+$lang['CONF_TERMINAL_COLUMN']= 'OFF';
+$lang['CONF_SECUENCE_COLUMN']= 'OFF';
+$lang['CONF_STATUS_ACCOUNT_ADD_COLUMNS'] = 'OFF';
