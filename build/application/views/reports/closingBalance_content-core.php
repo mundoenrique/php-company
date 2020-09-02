@@ -79,27 +79,26 @@
 				</div>
 				<div id="blockBudgetResults" class="center mx-1 ">
 					<div id="block-btn-excel" class="flex mr-2 py-3 justify-end items-center hide">
-					<div class="cover-spin" ></div>
+						<div class="cover-spin" ></div>
 						<button id="export_excel" class="btn px-1 big-modal" title="Exportar a EXCEL" data-toggle="tooltip">
 							<i class="icon icon-file-excel" aria-hidden="true"></i>
 						</button>
 					</div>
-
-				<table id="balancesClosing" class="cell-border h6 display responsive w-100">
-					<thead class="bg-primary secondary regular">
-            <tr  id="datos-principales" >
-							<th><?= lang('REPORTS_TABLE_CARD') ?></th>
-							<th><?= lang('REPORTS_TABLE_CARDHOLDER') ?></th>
-							<th><?= lang('REPORTS_TABLE_DNI') ?></th>
-							<th><?= lang('REPORTS_TABLE_BALANCE') ?></th>
-							<?php if (lang('CONF_CLOSING_BALANCE_BOOL') == 'ON' ): ?>
-								<th><?= lang('REPORTS_TABLE_LAST_ACTIVITY') ?></th>
-							<?php endif; ?>
-						</tr>
-					</thead>
-          <tbody id="tbody-datos-general" class = "tbody-reportes">
-          </tbody>
-				</table>
+					<table id="balancesClosing" class="cell-border h6 display responsive w-100">
+						<thead class="bg-primary secondary regular">
+            	<tr  id="datos-principales" >
+								<th><?= lang('REPORTS_TABLE_CARD') ?></th>
+								<th><?= lang('REPORTS_TABLE_CARDHOLDER') ?></th>
+								<th><?= lang('REPORTS_TABLE_DNI') ?></th>
+								<th><?= lang('REPORTS_TABLE_BALANCE') ?></th>
+								<?php if (lang('CONF_CLOSING_BALANCE_BOOL') == 'ON' ): ?>
+									<th><?= lang('REPORTS_TABLE_LAST_ACTIVITY') ?></th>
+								<?php endif; ?>
+							</tr>
+						</thead>
+          	<tbody id="tbody-datos-general" class = "tbody-reportes">
+          	</tbody>
+					</table>
 					<div id="hid" class=" hide">
 						<div id="pre-loader" class="mt-2 mx-auto flex justify-center">
 							<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>

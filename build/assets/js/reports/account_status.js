@@ -95,14 +95,41 @@ function searchStatusAccount(passData){
 
 			$("#globalTable").html(personalizeRowsInfo);
 			$.each(dataResponse.users, function (key, value, index) {
-				createTable(dataResponse.users, key);
+				var name = '#resultsAccount';
+				createTable(name, dataResponse.users, key);
 			})
+		}else if(code == 1){
+			$('#blockResults').removeClass('hidden');
+			var principalTable= $("#globalTable").DataTable();
+			principalTable.destroy();
+			var data = [];
+			var key = '';
+			var name = '#globalTable';
+			var table, body = '';
+			table= '<div class="">'
+			table+= 	'<table id="resultsAccount" class="cell-border h6 display responsive w-100">';
+			table+= 	'<thead class="bg-primary secondary regular">';
+			table+= 		'<tr class="" style="margin-left: 0px;">';
+			table+= 			'<td>Fecha</td>';
+			table+= 			'<td>Fid</td>';
+			table+= 			'<td>Terminal</td>';
+			table+= 			'<td>Secuencia</td>';
+			table+= 			'<td>Referencia</td>';
+			table+= 			'<td>Descripción</td>';
+			table+= 			'<td>Abono</td>';
+			table+= 			'<td>Cargo</td>';
+			table+= 		'</tr>';
+			table+= 	'</thead>';
+			table+= 		'<tbody></tbody>'
+			table+= '</table>';
+			$("#globalTable").html(table);
+			createTable(name, data, key);
 		}
 	});
 };
 
-function createTable(data, index){
-	$('#resultsAccount'+ index).DataTable({
+function createTable(name, data, index){
+	$(name + index).DataTable({
 		"ordering": false,
 		"responsive": true,
 		"lengthChange": false,
@@ -162,7 +189,7 @@ function createTable(data, index){
 		],
 		"language": dataTableLang
 	});
-}
+};
 
 function exportFile(e){
 	e.preventDefault();

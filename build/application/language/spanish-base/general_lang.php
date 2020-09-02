@@ -403,7 +403,6 @@ $lang['GEN_TABLE_USERACT_DATE'] = 'Fecha';
 $lang['REPORTS_TITLE'] = 'Configuración';
 $lang['REPORTS_NO_FILE_EXIST'] = 'No fue posible generar el archivo, por favor intenta de nuevo';
 //DATATABLES LANG CLOSING BALANCE
-$lang['GEN_FISCAL_REGISTRY'] = 'NIT';
 $lang['GEN_ACCOUNT_CLOSING_BALANCE'] = 'Cuenta';
 $lang['GEN_LOGIN_IP_MSG'] = 'Estás ingresando desde un equipo no habitual, por seguridad te enviaremos un código de verificación a la dirección de correo <span class="semibold">%s</span>, indícalo a continuación.';
 $lang['GEN_LOGIN_IP_ASSERT'] = 'Confirmo que estoy ingresando desde un equipo de uso frecuente.';
