@@ -155,22 +155,16 @@ define('ACTIVE_RECAPTCHA', isset($_SERVER['ACTIVE_RECAPTCHA'])
 	boolval($_SERVER['ACTIVE_RECAPTCHA']) : FALSE
 );
 define('IP_VERIFY', $_SERVER['IP_VERIFY'] ?? 'ON');
-define('RESPONSE_SERV_COMPLETE', isset($_SERVER['RESPONSE_SERV_COMPLETE'])
-&& filter_var($_SERVER['RESPONSE_SERV_COMPLETE'], FILTER_VALIDATE_BOOLEAN) ?
-	boolval($_SERVER['RESPONSE_SERV_COMPLETE']) : FALSE
-);
 define('DOWNLOAD_ROUTE', isset($_SERVER['DOWNLOAD_ROUTE']) ?
 	$_SERVER['DOWNLOAD_ROUTE'] : ''
 );
 define('ACCESS_URL', isset($_SERVER['ACCESS_URL']) ?
 	$_SERVER['ACCESS_URL'] : ''
 );
-
 $typeIP = 'private';
 if (filter_var($_SERVER['REMOTE_ADDR'], FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE)) {
  $typeIP = 'public';
 }
-
 $ipReal = $typeIP == 'private'? $_SERVER['REMOTE_ADDR']: '';
 define('IP_PROXI', $ipReal);
 unset($ipReal, $typeIP);
