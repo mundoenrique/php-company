@@ -100,6 +100,7 @@ function searchStatusAccount(passData){
 			})
 		}else if(code == 1){
 			$('#blockResults').removeClass('hidden');
+			$('#export_excel').addClass('hidden');
 			var principalTable= $("#globalTable").DataTable();
 			principalTable.destroy();
 			var data = [];
