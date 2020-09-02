@@ -91,10 +91,10 @@
 						<button id="export_excel" class="big-modal btn px-1" title="Exportar a EXCEL" data-toggle="tooltip">
 							<i class=" icon icon-file-excel" aria-hidden="true"></i>
 						</button>
+						<?php if(FALSE): ?>
 						<button id="export_pdf" class="big-modal btn px-1" title="Exportar a PDF" data-toggle="tooltip">
 							<i class="icon icon-file-pdf" aria-hidden="true"></i>
 						</button>
-						<?php if(FALSE): ?>
 						<button class="btn px-1" title="Generar gráfica" data-toggle="tooltip">
 							<i class="icon icon-chart-pie" aria-hidden="true"></i>
 						</button>
