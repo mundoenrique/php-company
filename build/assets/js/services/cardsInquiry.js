@@ -59,14 +59,14 @@ $(function () {
 				action: 'destroy'
 			}
 		}
-		inputModal =	'<form id="modalCardsInquiryForm" name="modalCardsInquiryForm" class="w-100" onsubmit="return false;">';
+		inputModal =	'<form id="modalCardsInquiryForm" name="modalCardsInquiryForm" class="row col-auto p-0" onsubmit="return false;">';
 
 		if (action == 'UPDATE_DATA') {
 			data.maxHeight = 520
 			$(this).closest('tr').addClass('update');
 			cardsData = table.rows('.update').data();
 
-			inputModal +=		'<div class="form-group col-auto">';
+			inputModal +=		'<div class="form-group col-12">';
 			inputModal += 		'<label>Nombre(s)</label>';
 			inputModal += 		'<div class="input-group">';
 			inputModal += 			'<input class="form-control" type="text" id="firstName" name="firstName" autocomplete="off" ';
@@ -74,7 +74,7 @@ $(function () {
 			inputModal += 		'</div>';
 			inputModal += 		'<div class="help-block"></div>';
 			inputModal += 	'</div>';
-			inputModal +=		'<div class="form-group col-auto">';
+			inputModal +=		'<div class="form-group col-12">';
 			inputModal += 		'<label>Apellido(s)</label>';
 			inputModal += 		'<div class="input-group">';
 			inputModal += 			'<input class="form-control" type="text" id="lastName" name="lastName" autocomplete="off" ';
@@ -82,14 +82,14 @@ $(function () {
 			inputModal += 		'</div>';
 			inputModal += 		'<div class="help-block"></div>';
 			inputModal += 	'</div>';
-			inputModal +=		'<div class="form-group col-auto">';
+			inputModal +=		'<div class="form-group col-12">';
 			inputModal += 		'<label>Correo</label>';
 			inputModal += 		'<div class="input-group">';
 			inputModal += 			'<input class="form-control" type="text" id="email" name="email" autocomplete="off" value="'+cardsData[0].email+'">';
 			inputModal += 		'</div>';
 			inputModal += 		'<div class="help-block"></div>';
 			inputModal += 	'</div>';
-			inputModal +=		'<div class="form-group col-auto">';
+			inputModal +=		'<div class="form-group col-12">';
 			inputModal += 		'<label>Número movil</label>';
 			inputModal += 		'<div class="input-group">';
 			inputModal += 			'<input class="form-control" type="text" id="movil" name="movil" autocomplete="off" value="'+cardsData[0].celPhone+'">';
@@ -98,7 +98,7 @@ $(function () {
 			inputModal += 	'</div>';
 		}
 
-		inputModal +=		'<div class="form-group col-auto">';
+		inputModal +=		'<div class="form-group col-12">';
 		inputModal += 		'<div class="input-group">';
 		inputModal += 			'<input class="form-control pwd-input pwd" type="password" name="password" autocomplete="off"';
 		inputModal += 				'placeholder="' + lang.GEN_PLACE_PASSWORD + '">';
