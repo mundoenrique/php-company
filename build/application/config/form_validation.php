@@ -910,6 +910,11 @@ $config = [
 			'rules' => 'trim|required'
 		],
 		[
+			'field' => 'acrif',
+			'label' => 'acrif',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]'
+		],
+		[
 			'field' => 'monthYear',
 			'label' => 'monthYear',
 			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'

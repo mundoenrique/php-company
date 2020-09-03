@@ -71,45 +71,46 @@ $(function () {
 						$.each(response.data.issuedCardsList[0].lista, function (index, value) {
 							(!response.data.issuedCardsList[0].lista) ? $('.icon-file-excel').hide() : $('.icon-file-excel').show();
 							(!response.data.issuedCardsList[0].lista) ? $('.icon-graph').hide() : $('.icon-graph').show();
-							var iconG1 = $(document.createElement("div")).appendTo(contenedor);
+							var iconG1 = $("<div></div>").appendTo(contenedor);
 							iconG1.attr("class", "center mx-1");
 
-							var iconG2 = $(document.createElement("div")).appendTo(iconG1);
+							var iconG2 = $("<div></div>").appendTo(iconG1);
 							iconG2.attr("class", "flex");
 
-							var iconG3 = $(document.createElement("div")).appendTo(iconG2);
-							iconG3.attr("class", "flex mr-2 pt-3 flex-auto justify-end items-center download");
+							var iconG3 = $("<div></div>").appendTo(iconG2);
+							iconG3.attr("class", "flex mr-2 pt-3 flex-auto justify-end items-center");
 
-							var iconG4 = $(document.createElement("div")).appendTo(iconG3);
+							var iconG4 = $("<div></div>").appendTo(iconG3);
 							iconG4.attr("class", "download-icons");
 
 							if (index == 0) {
-								var buttonExcel = $(document.createElement("button")).appendTo(iconG4);
+								var buttonExcel = $("<button></button>").appendTo(iconG4);
 								buttonExcel.attr("class", "btn px-1 big-modal");
 								buttonExcel.attr("title", lang.GEN_BTN_DOWN_XLS);
 								buttonExcel.attr("data-toggle", "tooltip");
 
-								var iconButton = $(document.createElement("i")).appendTo(buttonExcel);
+								var iconButton = $("<i></i>").appendTo(buttonExcel);
 								iconButton.attr("class", "icon icon-file-excel");
 								iconButton.attr("aria-hidden", "true");
 							}
 
 							if (showButtonGrap) {
-								var buttonGraph = $(document.createElement("button")).appendTo(iconG4);
+								var buttonGraph = $("<button></button>").appendTo(iconG4);
 								buttonGraph.attr("class", "btn px-1 big-modal");
 								buttonGraph.attr("title", lang.GEN_BTN_SEE_GRAPH);
 								buttonGraph.attr("data-toggle", "tooltip");
 
-								var iconButton = $(document.createElement("i")).appendTo(buttonGraph);
+								var iconButton = $("<i></i>").appendTo(buttonGraph);
 								iconButton.attr("class", "icon icon-graph");
 								iconButton.attr("aria-hidden", "true");
 							}
 
-							var	tabla = $(document.createElement("table")).appendTo(contenedor);
-							tabla.attr("class", "cell-border h6 display responsive w-100 my-5");
+							var	tabla = $("<table></table>").appendTo(contenedor);
+							tabla.attr("class", "cell-border h6 display responsive center w-100 my-5");
 							tabla.attr("id", 'resultsIssued'+ index);
 
-							var	thead = $(document.createElement("thead")).appendTo(tabla);
+							var	thead = $("<thead></thead>").appendTo(tabla);
+							var	tbody = $("<tbody></tbody>").appendTo(tabla);
 							thead.attr("class", "bg-primary secondary regular");
 
 							var table = $('#resultsIssued'+ index).DataTable({
@@ -151,39 +152,40 @@ $(function () {
 							]).draw()
 						});
 					}else if(response.data.tipoConsulta == 0){
-						var iconG1 = $(document.createElement("div")).appendTo(contenedor);
+						var iconG1 = $("<div></div>").appendTo(contenedor);
 							iconG1.attr("class", "center mx-1");
 
-							var iconG2 = $(document.createElement("div")).appendTo(iconG1);
+							var iconG2 = $("<div></div>").appendTo(iconG1);
 							iconG2.attr("class", "flex");
 
-							var iconG3 = $(document.createElement("div")).appendTo(iconG2);
-							iconG3.attr("class", "flex mr-2 pt-3 flex-auto justify-end items-center download");
+							var iconG3 = $("<div></div>").appendTo(iconG2);
+							iconG3.attr("class", "flex mr-2 pt-3 flex-auto justify-end items-center");
 
-							var iconG4 = $(document.createElement("div")).appendTo(iconG3);
+							var iconG4 = $("<div></div>").appendTo(iconG3);
 							iconG4.attr("class", "download-icons");
 
-							var buttonExcel = $(document.createElement("button")).appendTo(iconG4);
+							var buttonExcel = $("<button></button>").appendTo(iconG4);
 							buttonExcel.attr("class", "btn px-1 big-modal");
 							buttonExcel.attr("title", lang.GEN_BTN_DOWN_XLS);
 							buttonExcel.attr("data-toggle", "tooltip");
 
-							var iconButton = $(document.createElement("i")).appendTo(buttonExcel);
+							var iconButton = $("<i></i>").appendTo(buttonExcel);
 							iconButton.attr("class", "icon icon-file-excel");
 							iconButton.attr("aria-hidden", "true");
 
 							if (showButtonGrap) {
-								var buttonGraph = $(document.createElement("button")).appendTo(iconG4);
+								var buttonGraph = $("<button></button>").appendTo(iconG4);
 								buttonGraph.attr("class", "btn px-1 big-modal");
 								buttonGraph.attr("title", lang.GEN_BTN_SEE_GRAPH);
 								buttonGraph.attr("data-toggle", "tooltip");
 
-								var iconButton = $(document.createElement("i")).appendTo(buttonGraph);
+								var iconButton = $("<i></i>").appendTo(buttonGraph);
 								iconButton.attr("class", "icon icon-graph");
 								iconButton.attr("aria-hidden", "true");
 							}
+
 						var	tabla = $(document.createElement("table")).appendTo(contenedor);
-						tabla.attr("class", "cell-border h6 display responsive w-100 my-5");
+						tabla.attr("class", "cell-border h6 display responsive center w-100 my-5");
 						tabla.attr("id", 'resultsIssued');
 
 						var	thead = $(document.createElement("thead")).appendTo(tabla);
@@ -239,6 +241,7 @@ $(function () {
 		var event = $(e.currentTarget);
 		var action = event.attr('title');
 		var accodcia = $('option:selected', "#enterpriseCode").val().trim();
+		var acrif =$('option:selected', "#enterpriseCode").attr("id-fiscal");
 		var nameEnterprise = $('option:selected', "#enterpriseCode").text().trim();
 		var initialDatemy = $('#monthYear').val();
 		var radioB = $('input:radio[name=results]:checked').val();
@@ -248,6 +251,7 @@ $(function () {
 		form.append('<input type="hidden" id="who" name="who" value="DownloadFiles"></input>');
 		form.append('<input type="hidden" id="where" name="where" value="IssuedCardsReport"></input>');
 		form.append('<input type="hidden" id="accodcia" name="accodcia" value="' + accodcia + '"></input>');
+		form.append('<input type="hidden" id="acrif" name="acrif" value="' + acrif + '"></input>');
 		form.append('<input type="hidden" id="nameEnterprise" name="nameEnterprise" value="' + nameEnterprise + '"></input>');
 		form.append('<input type="hidden" id="initialDatemy" name="initialDatemy" value="' + initialDatemy + '"></input>');
 		form.append('<input type="hidden" id="radioButton" name="radioButton" value="' + radioB + '"></input>');
