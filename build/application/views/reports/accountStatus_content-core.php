@@ -58,16 +58,18 @@
 						<div class="row">
 							<div class="form-group col-9">
 								<label class="block">Resultados</label>
-								<div class="custom-control custom-radio custom-control-inline">
+								<div class="custom-control custom-radio custom-control-inline align-top">
 									<input type="radio" id="allResults" name="results" class="custom-control-input" value="all">
 									<label class="custom-control-label mr-1" for="allResults">Todos</label>
 								</div>
 								<div class="custom-control custom-radio custom-control-inline">
 									<input type="radio" id="resultByNIT" name="results" class="custom-control-input">
 									<label class="custom-control-label mr-1" for="resultByNIT"><?= lang('GEN_TABLE_DNI'); ?></label>
-									<input id="resultByNITInput" name="radioDni" type="text" class="form-control col-auto visible" />
+									<div class="form-group col-auto">
+										<input id="resultByNITInput" name="radioDni" type="text" class="form-control visible" />
+										<div id="blockMessage" class="help-block"></div>
+									</div>
 								</div>
-								<div id="blockMessage" class="help-block"></div>
 							</div>
 							<div class="flex items-center justify-end col-3">
 								<button id="searchButton" type="button" class="btn btn-primary btn-small">
