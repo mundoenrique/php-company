@@ -47,6 +47,9 @@ $(function () {
 
 	$('.date-picker').datepicker({
 		onSelect: function (selectedDate) {
+			$(this)
+				.focus()
+				.blur();
 			var dateSelected = selectedDate.split('/');
 			dateSelected = dateSelected[1] + '/' + dateSelected[0] + '/' + dateSelected[2]
 			var inputDate = $(this).attr('id');
@@ -149,6 +152,7 @@ $(function () {
 						action: 'none'
 					},
 					btn2: {
+						text: lang.GEN_BTN_CANCEL,
 						action: 'close'
 					}
 				}
@@ -207,7 +211,7 @@ function format(bulk) {
 	table+= 			'<td>' + lang.GEN_TABLE_RECORDS + '</td>';
 	table+= 			'<td>' + lang.GEN_TABLE_STATUS + '</td>';
 	table+= 			'<td>' + lang.GEN_TABLE_AMOUNT + '</td>';
-	table+= 			'<td>' + lang.GEN_TABLE_COMMISSION + '</td>';
+	table+= 			'<td>' + lang.GEN_TABLE_COMMISSION_GMF + '</td>';
 	table+= 			'<td>' + lang.GEN_TABLE_DEPOSIT_AMOUNT + '</td>';
 	table+= 		'</tr>';
 	table+= 		body;

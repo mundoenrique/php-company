@@ -1,5 +1,4 @@
 'use strict'
-//app
 var currenTime;
 var screenSize;
 var verb, who, where, dataResponse, ceo_cook, btnText, form, cypherPass;
@@ -35,7 +34,7 @@ $(function () {
 	$('.big-modal').on('click', function () {
 		$('.cover-spin').show(0)
 	});
-	//dataTale lang
+
 	dataTableLang = {
 		"sLengthMenu": lang.GEN_TABLE_SLENGTHMENU,
 		"sZeroRecords": lang.GEN_TABLE_SZERORECORDS,
@@ -69,7 +68,7 @@ $(function () {
 			}
 		}
 	}
-	//datepicker
+
 	currentDate = new Date();
 	$.datepicker.regional['es'] = {
 		closeText: lang.GEN_PICKER_CLOSETEXT,
@@ -95,11 +94,7 @@ $(function () {
 	}
 	$.datepicker.setDefaults($.datepicker.regional['es']);
 });
-/**
- * @info Llama al core del servidor
- * @author J. Enrique Peñaloza Piñero
- * @date 15/04/2019
- */
+
 function callNovoCore(verb, who, where, request, _response_) {
 	request.screenSize = screen.width;
 	var dataRequest = JSON.stringify({
@@ -116,6 +111,7 @@ function callNovoCore(verb, who, where, request, _response_) {
 		formData.append('file', request.file);
 		delete request.file;
 	}
+
 	formData.append('request', dataRequest);
 	formData.append('ceo_name', ceo_cook);
 	formData.append('plot', btoa(ceo_cook));
@@ -146,7 +142,7 @@ function callNovoCore(verb, who, where, request, _response_) {
 		if ($('#system-info').parents('.ui-dialog').length && modalClose) {
 			$('#accept')
 				.prop('disabled', false)
-				.text(lang.GEN_BTN_ACCEPT)
+				.text(lang.GEN_BTN_ACCEPT);
 			$('#system-info').dialog('destroy');
 		}
 
@@ -168,9 +164,11 @@ function callNovoCore(verb, who, where, request, _response_) {
 		var response = {
 			code: codeResp,
 			title: lang.GEN_SYSTEM_NAME,
+			msg: lang.GEN_MESSAGE_SYSTEM,
 			icon: lang.GEN_ICON_DANGER,
 			data: {
 				btn1: {
+					text: lang.GEN_BTN_ACCEPT,
 					link: lang.GEN_ENTERPRISE_LIST,
 					action: 'redirect'
 				}
@@ -180,30 +178,19 @@ function callNovoCore(verb, who, where, request, _response_) {
 		_response_(response);
 	});
 }
-/**
- * @info Obtiene valor de cookie
- * @author J. Enrique Peñaloza Piñero
- * @date December 18th, 2019
- */
+
 function getCookieValue() {
 	return decodeURIComponent(
 		document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 	);
 }
-/**
- * @info Uso del modal informativo
- * @author J. Enrique Peñaloza Piñero
- * @date 05/03/2019
- */
+
 function notiSystem(title, message, icon, data) {
-	var btnAccept = $('#accept');
-	var btnCancel = $('#cancel');
-	var dialogMoldal = $('#system-info');
 	var btn1 = data.btn1;
 	var btn2 = data.btn2;
 	var maxHeight = data.maxHeight || 350;
 
-	dialogMoldal.dialog({
+	$('#system-info').dialog({
 		title: title || lang.GEN_SYSTEM_NAME,
 		modal: 'true',
 		position: { my: data.posMy || 'center', at: data.posAt || 'center' },
@@ -230,50 +217,53 @@ function notiSystem(title, message, icon, data) {
 			$('#system-icon').addClass(icon);
 			$('#system-msg').html(message);
 			$('#accept, #cancel').removeClass("ui-button ui-corner-all ui-widget");
-			createButton(dialogMoldal, btnAccept, btn1);
+
+			if (!btn1) {
+				$('#accept').hide();
+			} else {
+				createButton($('#accept'), btn1);
+			}
 
 			if (!btn2) {
-				btnCancel.hide();
-				btnAccept.addClass('modal-btn-primary');
+				$('#cancel').hide();
+				$('#accept').addClass('modal-btn-primary');
 				$('.novo-dialog-buttonset').addClass('modal-buttonset');
 			} else {
-				createButton(dialogMoldal, btnCancel, btn2);
+				createButton($('#cancel'), btn2);
 			}
 		}
 	});
 }
-/**
- * @info Crea botones para modal informativo
- * @author Pedro Torres
- * @date 16/09/2019
- */
-function createButton(dialogMoldal, elementButton, valuesButton) {
-	valuesButton.text || elementButton.text(valuesButton.text);
+
+function createButton(elementButton, valuesButton) {
+	elementButton.text(valuesButton.text);
 	elementButton.show();
 	elementButton.on('click', function (e) {
-		if (valuesButton.action === 'redirect') {
-			$(this)
-			.html(loader)
-			.prop('disabled', true);
-			$(this).children('span').addClass('spinner-border-sm');
-			if ($(this).attr('id') == 'cancel') {
-				$(this).children('span')
-					.removeClass('secondary')
-					.addClass('primary');
-			}
-			$(location).attr('href', baseURL+valuesButton.link);
+		switch (valuesButton.action) {
+			case 'redirect':
+				$(this)
+					.html(loader)
+					.prop('disabled', true);
+				$(this).children('span').addClass('spinner-border-sm');
+				if ($(this).attr('id') == 'cancel') {
+					$(this).children('span')
+						.removeClass('secondary')
+						.addClass('primary');
+				}
+				$(location).attr('href', baseURL + valuesButton.link);
+			break;
+			case 'close':
+				$('#system-info').dialog('close');
+			break;
+			case 'destroy':
+				$('#system-info').dialog('destroy');
+			break;
 		}
-		if (valuesButton.action === 'close') {
-			dialogMoldal.dialog('close');
-		}
+
 		$(this).off('click');
 	})
 }
-/**
- * @info Incorpora inputs a formularios
- * @author J. Enrique Peñaloza
- * @date November 18th, 2019
- */
+
 function insertFormInput(disabled, form) {
 	form = form == undefined ? false : form;
 	var notDisabled = '#product-select, #enterprise-widget-btn'
@@ -294,21 +284,12 @@ function insertFormInput(disabled, form) {
 		form.append('<input type="hidden" name="screenSize" value="' + screenSize + '"></input>');
 	}
 }
-/**
- * @info lee una propiedad especifica de un elemento html,
- * de no indicarse el elemento se toma por defecto el body
- * @author Pedro Torres
- * @date 27/08/2019
- */
+
 function getPropertyOfElement(property, element) {
 	var element = element || 'body';
 	return $(element).attr(property);
 }
-/**
- * @info quita espacios en blanco de los campos input
- * @author J. Enrique Peñaloza Piñero
- * @date November 18th, 2019
- */
+
 function formInputTrim(form) {
 	form.find('input, select').each(function () {
 		var thisValInput = $(this).val();
@@ -319,11 +300,7 @@ function formInputTrim(form) {
 		$(this).val(trimVal)
 	});
 }
-/**
- * @info Cifra la contraseña del usuario
- * @author J. Enrique Peñaloza Piñero
- * @date December 27th, 2019
- */
+
 function cryptoPass(jsonObject, req) {
 	req = req == undefined ? false : req;
 	ceo_cook = getCookieValue();
@@ -338,11 +315,7 @@ function cryptoPass(jsonObject, req) {
 
 	return cipherObject;
 }
-/**
- * @info Obtiene datos para el request
- * @author J. Enrique Peñaloza Piñero
- * @date April 25th, 2020
- */
+
 function getDataForm(form) {
 	var dataForm = {};
 	form.find('input, select').each(function (index, element) {

@@ -6,7 +6,6 @@
 	</div>
 	<? endif; ?>
 	<div class="flex flex-auto flex-wrap justify-around items-center">
-
 		<?php if(lang('CONF_FOOTER_NETWORKS') == 'ON'): ?>
 		<div class="order-first networks">
 			<?php foreach(lang('GEN_FOTTER_NETWORKS_IMG') AS $key => $value): ?>

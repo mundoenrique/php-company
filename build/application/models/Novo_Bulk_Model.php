@@ -301,7 +301,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 				break;
 			case -1:
 				$this->response->title = lang('BULK_DELETE_TITLE');
-				$this->response->msg = lang('RESP_PASSWORD_NO_VALID');
+				$this->response->msg = lang('GEN_PASSWORD_NO_VALID');
 				$this->response->icon = lang('GEN_ICON_WARNING');
 				$this->response->data['btn1'] = [
 					'text' => lang('GEN_BTN_ACCEPT'),
@@ -443,7 +443,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 			case -1:
 				$this->response->code = 0;
 				$this->response->title = lang('BULK_CONFIRM_TITLE');
-				$this->response->msg = lang('RESP_PASSWORD_NO_VALID');
+				$this->response->msg = lang('GEN_PASSWORD_NO_VALID');
 				$this->response->icon = lang('GEN_ICON_WARNING');
 				$this->response->data['btn1']['action'] = 'close';
 			break;
@@ -589,7 +589,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 				break;
 			case -1:
 				$this->response->title = lang('BULK_SIGN_TITLE');
-				$this->response->msg = lang('RESP_PASSWORD_NO_VALID');
+				$this->response->msg = lang('GEN_PASSWORD_NO_VALID');
 				$this->response->icon = lang('GEN_ICON_WARNING');
 				$this->response->data['btn1']['action'] = 'close';
 				break;
@@ -660,7 +660,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 			case -1:
 			case -22:
 				$this->response->title = lang('BULK_DELETE_TITLE');
-				$this->response->msg = lang('RESP_PASSWORD_NO_VALID');
+				$this->response->msg = lang('GEN_PASSWORD_NO_VALID');
 				$this->response->icon = lang('GEN_ICON_WARNING');
 				$this->response->data['btn1']['action'] = 'close';
 				break;
@@ -729,7 +729,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 			case -1:
 			case -22:
 				$this->response->title = lang('BULK_DISASS_TITLE');
-				$this->response->msg = lang('RESP_PASSWORD_NO_VALID');
+				$this->response->msg = lang('GEN_PASSWORD_NO_VALID');
 				$this->response->icon = lang('GEN_ICON_WARNING');
 				$this->response->data['btn1']['action'] = 'close';
 				break;
@@ -879,7 +879,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 			break;
 			case -1:
 				$this->response->title = lang('BULK_AUTH_TITLE');
-				$this->response->msg = lang('RESP_PASSWORD_NO_VALID');
+				$this->response->msg = lang('GEN_PASSWORD_NO_VALID');
 				$this->response->icon = lang('GEN_ICON_WARNING');
 				$this->response->data['btn1']['action'] = 'close';
 			break;
@@ -893,6 +893,18 @@ class Novo_Bulk_Model extends NOVO_Model {
 				$this->response->msg = novoLang(lang('BULK_AUTH_SUCCESS'), $this->userName);
 				$this->response->icon = lang('GEN_ICON_SUCCESS');
 				$this->response->data['btn1']['link'] = 'lotes-autorizacion';
+			break;
+			case -154:
+				$this->response->title = lang('BULK_AUTH_TITLE');
+				$this->response->msg = lang('BULK_DAILY_AMOUNT_EXCEEDED');
+				$this->response->icon = lang('GEN_ICON_WARNING');
+				$this->response->data['btn1']['action'] = 'close';
+			break;
+			case -250:
+				$this->response->title = lang('BULK_AUTH_TITLE');
+				$this->response->msg = lang('BULK_AMOUNT_EXCEEDED');
+				$this->response->icon = lang('GEN_ICON_WARNING');
+				$this->response->data['btn1']['action'] = 'close';
 			break;
 			case -439:
 				$this->response->title = lang('BULK_AUTH_TITLE');
@@ -915,6 +927,12 @@ class Novo_Bulk_Model extends NOVO_Model {
 			case -442:
 				$this->response->title = lang('BULK_AUTH_TITLE');
 				$this->response->msg = lang('BULK_EXPIRED_TIME');
+				$this->response->icon = lang('GEN_ICON_WARNING');
+				$this->response->data['btn1']['action'] = 'close';
+			break;
+			case -458:
+				$this->response->title = lang('BULK_AUTH_TITLE');
+				$this->response->msg = lang('BULK_MONTHLY_AMOUNT_EXCEEDED');
 				$this->response->icon = lang('GEN_ICON_WARNING');
 				$this->response->data['btn1']['action'] = 'close';
 			break;
@@ -1272,7 +1290,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 				break;
 			case -1:
 				$this->response->title = lang('BULK_UNNA_ACCOUNT');
-				$this->response->msg = lang('RESP_PASSWORD_NO_VALID');
+				$this->response->msg = lang('GEN_PASSWORD_NO_VALID');
 				$this->response->icon = lang('GEN_ICON_WARNING');
 				$this->response->data['btn1']['action'] = 'close';
 				break;
@@ -1335,7 +1353,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 
 		switch ($this->isResponseRc) {
 			case 0:
-				$unnamedList = json_decode($response->bean);
+				$unnamedList = $response->bean;
 				$this->response->code = 0;
 
 				if(isset($unnamedList->lista) && count($unnamedList->lista) > 0) {
@@ -1410,7 +1428,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 
 		switch ($this->isResponseRc) {
 			case 0:
-				$unnamedDetail = json_decode($response->bean);
+				$unnamedDetail = $response->bean;
 				$this->response->code = 0;
 
 				if(isset($unnamedDetail->tarjetasInnominadas) && count($unnamedDetail->tarjetasInnominadas) > 0) {

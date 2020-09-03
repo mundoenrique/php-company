@@ -97,6 +97,7 @@ class Novo_User_Model extends NOVO_Model {
 					'cl_addr' => $this->encrypt_connect->encode($this->input->ip_address(), $userName, 'REMOTE_ADDR'),
 					'countrySess' => $this->config->item('country'),
 					'countryUri' => $this->config->item('country-uri'),
+					'clientAgent' => $this->agent->agent_string(),
 					'autoLogin' => 'false',
 					'idUsuario' => $response->usuario->idUsuario,
 					'pais' => $this->config->item('country'),
@@ -120,7 +121,9 @@ class Novo_User_Model extends NOVO_Model {
 					'token' => $response->token,
 					'time' => $time,
 					'cl_addr' => $this->encrypt_connect->encode($this->input->ip_address(), $dataRequest->user, 'REMOTE_ADDR'),
-					'countrySess' => $this->config->item('country')
+					'countrySess' => $this->config->item('country'),
+					'countryUri' => $this->config->item('country-uri'),
+					'clientAgent' => $this->agent->agent_string()
 				];
 				$this->session->set_userdata($userData);
 				$this->response->code = 0;
@@ -293,6 +296,7 @@ class Novo_User_Model extends NOVO_Model {
 					'cl_addr' => $this->encrypt_connect->encode($this->input->ip_address(), $this->country, 'REMOTE_ADDR'),
 					'countrySess' => $this->config->item('country'),
 					'countryUri' => $this->config->item('country-uri'),
+					'clientAgent' => $this->agent->agent_string(),
 					'autoLogin' => 'true'
 				];
 				$this->session->set_userdata($userData);
@@ -601,12 +605,9 @@ class Novo_User_Model extends NOVO_Model {
 
 			$this->response->title = lang('GEN_PASSWORD_CHANGE_TITLE');
 			$this->response->icon = lang('GEN_ICON_WARNING');
-			$this->response->data = [
-				'btn1'=> [
-					'action'=> 'close'
-				]
-			];
+			$this->response->data['btn1']['action'] = 'close';
 		}
+
 		return $this->responseToTheView('CallWs_ChangePassword');
 	}
 	/**
@@ -652,13 +653,11 @@ class Novo_User_Model extends NOVO_Model {
 		$this->response->msg = lang('GEN_BTN_ACCEPT');
 		$this->response->data = FALSE;
 
-		$this->session->sess_destroy();
-		$access = [
-			'user_access',
-			'logged',
-			'userId'
-		];
-		$this->session->unset_userdata($access);
+		if (!$this->input->is_ajax_request()) {
+			$this->session->sess_destroy();
+		}
+
+		clearSessionsVars();
 
 		return $this->responseToTheView('callWs_FinishSession');
 	}

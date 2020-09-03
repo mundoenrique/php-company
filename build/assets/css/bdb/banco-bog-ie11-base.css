@@ -991,13 +991,6 @@ table.dataTable tr.selected td.select-checkbox::after, table.dataTable tr.select
 	margin-top: -4px !important;
 }
 
-table.dataTable tr.selected td.select-checkbox::after {
-	content: '' !important;
-	margin-top: -5px !important;
-	background-image: url("../../images/bdb/check_table.svg");
-	background-size: cover;
-}
-
 .dataTables_wrapper .dataTables_paginate .paginate_button.disabled,
 .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:hover,
 .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:active {

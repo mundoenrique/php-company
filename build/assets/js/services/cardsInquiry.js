@@ -56,7 +56,7 @@ $(function () {
 			},
 			btn2: {
 				text: lang.GEN_BTN_CANCEL,
-				action: 'close'
+				action: 'destroy'
 			}
 		}
 		inputModal =	'<form id="modalCardsInquiryForm" name="modalCardsInquiryForm" class="w-100" onsubmit="return false;">';
@@ -132,11 +132,6 @@ $(function () {
 		btnText = $(this).text().trim();
 		$('.help-block').text('');
 		$('input, select').removeClass('has-error');
-		/* cardsData = table.rows('.selected').data();
-		console.log(cardsData[0].options)
-		console.log($('#tableCardInquiry tbody').find('tr.selected'))
-
-		return false */
 		applyActions(action, form, $(this));
 	})
 })
@@ -368,7 +363,7 @@ function applyActions(currentAction, currentForm, currentBtn) {
 			.html(loader)
 			.prop('disabled', true)
 		insertFormInput(true)
-		verb = 'POST'; who = 'Services'; where = 'inquiriesActions'
+		verb = 'POST'; who = 'Services'; where = 'InquiriesActions'
 		callNovoCore(verb, who, where, data, function(response) {
 			if (response.success) {
 				$('#accept').addClass('reload-req');

@@ -1,23 +1,6 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed');
 
 $config = [
-	'validateCaptcha' => [
-		[
-			'field' => 'user',
-			'label' => 'user',
-			'rules' => 'trim|regex_match[/^([\wñÑ.\-+&]+)+$/i]|required'
-		],
-		[
-			'field' => 'pass',
-			'label' => 'pass',
-			'rules' => 'trim|required'
-		],
-		[
-			'field' => 'token',
-			'label' => 'token',
-			'rules' => 'trim|required'
-		]
-	],
 	'login' => [
 		[
 			'field' => 'user',
@@ -1290,5 +1273,35 @@ $config = [
 			'field' => 'weeklyAmountWithdraw',
 			'rules' => 'trim|regex_match[/^[0-9,.]*$/i]'
 		]
-	]
+		],
+	'searchStatusAccount' => [
+		[
+			'field' => 'resultByNITInput',
+			'rules' => 'trim|regex_match[/^[0-9]*$/i]'
+		],
+		[
+			'field' => 'initialDateAct',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+		]
+		],
+		'statusAccountExcelFile' => [
+			[
+				'field' => 'resultByNITInput',
+				'rules' => 'trim|regex_match[/^[0-9]*$/i]'
+			],
+			[
+				'field' => 'initialDateAct',
+				'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+			]
+			],
+		'statusAccountPdfFile' => [
+			[
+				'field' => 'resultByNITInput',
+				'rules' => 'trim|regex_match[/^[0-9]*$/i]'
+			],
+			[
+				'field' => 'initialDateAct',
+				'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+			]
+		]
 ];

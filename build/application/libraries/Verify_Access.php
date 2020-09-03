@@ -62,10 +62,10 @@ class Verify_Access {
 				case 'request':
 				case 'plot':
 				case 'ceo_name':
-					break;
+				break;
 				case 'screenSize':
 					$this->CI->session->set_userdata('screenSize', $value);
-					break;
+				break;
 				default:
 				$this->requestServ->$key = $value;
 			}
@@ -120,11 +120,16 @@ class Verify_Access {
 		log_message('INFO', 'NOVO Verify_Access: accessAuthorization method initialized');
 
 		$auth = FALSE;
-		$user = $user ?: $this->user;
-		$freeAccess = ['login', 'suggestion', 'validateCaptcha', 'finishSession', 'terms', 'singleSignOn'];
+		$user = $user ?? $this->user;
+		$freeAccess = ['login', 'suggestion', 'finishSession', 'terms', 'singleSignOn'];
 		$auth = in_array($module, $freeAccess);
 
 		if(!$auth) {
+			if ($this->CI->session->has_userdata('userId') && $this->CI->session->clientAgent != $this->CI->agent->agent_string()) {
+				clearSessionsVars();
+				$module = 'noModule';
+			}
+
 			switch($module) {
 				case 'recoverPass':
 					$auth = lang('CONF_RECOV_PASS') == 'ON';
@@ -267,7 +272,12 @@ class Verify_Access {
 					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPLOT'));
 				break;
 				case 'cardHolders':
-					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBTHA'));
+					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPEDO'));
+				break;
+				case 'statusAccountExcelFile':
+				case 'statusAccountPdfFile':
+				case 'searchStatusAccount':
+					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPEDO'));;
 				break;
 			}
 		}

@@ -1,5 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+$lang['CONF_VIEW_SUFFIX'] = '-core';
 //SUPPORT IE 11
 $lang['CONF_SUPPORT_IE'] = 'OFF';
 //SCORE RECAPTCHA
@@ -72,6 +73,17 @@ $lang['CONF_NAME_COLUMN']= 'ON';
 $lang['CONF_ID_COLUMN']= 'ON';
 $lang['CONF_BALANCE_COLUMN']= 'ON';
 $lang['CONF_LAST_UPDATE_COLUMN']= 'ON';
+//STATUS ACCOUNT
+$lang['CONF_CARD_COLUMN']= 'ON';
+$lang['CONF_DATE_COLUMN']= 'ON';
+$lang['CONF_DNI_COLUMN']= 'ON';
+$lang['CONF_TERMINAL_COLUMN']= 'ON';
+$lang['CONF_SECUENCE_COLUMN']= 'ON';
+$lang['CONF_REFERENCE_COLUMN']= 'ON';
+$lang['CONF_DESCRIPTION_COLUMN']= 'ON';
+$lang['CONF_DEBIT_COLUMN']= 'ON';
+$lang['CONF_CREDIT_COLUMN']= 'ON';
+$lang['CONF_STATUS_ACCOUNT_ADD_COLUMNS'] = 'ON';
 //SETTINGS
 $lang['CONF_SETTINGS_USER'] = 'ON';
 $lang['CONF_SETTINGS_EMAIL_UPDATE'] = 'ON';
@@ -104,3 +116,5 @@ $lang['CONF_GL_USER_MANUAL'] = 'Manual de Usuario Gestor de Lotes';
 //MODAL OTP
 $lang['MODAL_OTP'] = 'OFF';
 $lang['RESTART_LOGIN'] = 'OFF';
+//DATEPICKER
+$lang['CONF_MAX_CONSULT_MONTH'] = '3';

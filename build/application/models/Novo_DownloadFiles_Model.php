@@ -55,7 +55,7 @@ class Novo_DownloadFiles_Model extends NOVO_Model {
 
 		switch ($this->isResponseRc) {
 			case 0:
-				$fileInfo = json_decode($response->bean);
+				$fileInfo = $response->bean;
 				exportFile($fileInfo->archivo, 'xls', 'Afiliacion_innominadas');
 				break;
 			default:

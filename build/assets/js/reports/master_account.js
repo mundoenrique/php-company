@@ -43,6 +43,9 @@ $(function () {
 
 		datePicker.datepicker({
 		onSelect: function (selectedDate) {
+			$(this)
+				.focus()
+				.blur();
 			var dateSelected = selectedDate.split('/');
 			dateSelected = dateSelected[1] + '/' + dateSelected[0] + '/' + dateSelected[2]
 			var inputDate = $(this).attr('id');
@@ -113,6 +116,7 @@ function dialog(e){
 					action: 'close'
 				},
 				btn2: {
+					text: lang.GEN_BTN_CANCEL,
 					action: 'close'
 				}
 			}
@@ -149,6 +153,7 @@ function dialog(e){
 						action: 'close'
 						},
 					btn2: {
+						text: lang.GEN_BTN_CANCEL,
 						action: 'close'
 						}
 					}

@@ -76,7 +76,7 @@ class Encrypt_Connect {
 		}
 
 		if (isset($response->bean)) {
-			$response->bean = gettype($response->bean) == 'object' ? $response->bean : json_decode($response->bean);
+			$response->bean = gettype(json_decode($response->bean)) == 'object' ? json_decode($response->bean) : $response->bean;
 			$this->logMessage->inBean = 'IN BEAN';
 		}
 
@@ -89,13 +89,14 @@ class Encrypt_Connect {
 					}
 				break;
 				case 'msg':
-					$this->logMessage->msg = isset($response->msg) || $response->msg != '' ? $response->msg : 'Sin mensaje del servicio';
+					$this->logMessage->msg = $responseAttr;
 				break;
 				default:
 					$this->logMessage->$pos = $responseAttr;
 			}
 		}
 
+		$this->logMessage->msg = $this->logMessage->msg ?? 'Sin mensaje del servicio';
 		$this->logMessage->model = $model;
 		$this->logMessage->userName = $userName;
 		$this->writeLog($this->logMessage);
@@ -206,7 +207,7 @@ class Encrypt_Connect {
 		curl_exec ($ch);
 		$result = curl_errno($ch);
 
-		log_message('DEBUG','NOVO ['.$userName.'] UPLOAD FILE BULK SFTP '.$model.': '.$result.' '.lang('RESP_UPLOAD_SFTP('.$result.')'));
+		log_message('DEBUG','NOVO ['.$userName.'] UPLOAD FILE BULK SFTP '.$model.': '.$result.' '.lang('GEN_UPLOAD_SFTP('.$result.')'));
 
 		if($result != 0) {
 			$respUpload->rc = -105;

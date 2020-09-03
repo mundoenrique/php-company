@@ -1,5 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+$lang['GEN_FAVICON'] = 'favicon-bnt';
+$lang['GEN_FAVICON_EXT'] = 'ico';
 //MENU
 $lang['GEN_MENU_ENTERPRISE'] = 'Empresa';
 //SUBMENU
@@ -20,12 +22,6 @@ $lang['GEN_FOTTER_RIGHTS'] = '© Todos los derechos reservados. Grupo Financiero
 $lang['GEN_FOTTER_IMAGE_L'] = 'img-banorte_white.svg';
 $lang['GEN_FOTTER_IMAGE_R'] = 'img-pci_compliance.svg';
 $lang['GEN_FOTTER_MARK'] = 'img-ma.svg';
-$lang['GEN_FOTTER_NETWORKS_IMG'] = [
-	'facebook' => 'facebook.png',
-	'twitter' => 'twitter.png',
-	'youtube' => 'youtube.png',
-	'instagram' => 'instagram.png',
-];
 $lang['GEN_FOTTER_NETWORKS_LINK'] = [
 	'facebook' => 'https://www.facebook.com/banorte',
 	'twitter' => 'https://www.twitter.com/Banorte_mx',
@@ -34,5 +30,6 @@ $lang['GEN_FOTTER_NETWORKS_LINK'] = [
 ];
 $lang['GEN_DETAIL_BARND_COLOR'] = '_card-blue.svg';
 //Datables
-$lang['GEN_FISCAL_CLOSING_BALANCE'] = 'CURP';
+$lang['GEN_FISCAL_REGISTRY'] = 'RFC';
+
 $lang['GEN_ACCOUNT_CLOSING_BALANCE'] = 'Tarjetahabiente';
