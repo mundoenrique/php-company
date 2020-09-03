@@ -69,8 +69,7 @@
 				</div>
 				<div id="blockResultsUser" class="center mx-1 hide">
 					<div class="flex">
-
-						<div class="flex mr-2 py-3 flex-auto justify-end items-center">
+						<div id="buttonFiles" class="flex mr-2 py-3 flex-auto justify-end items-center">
 							<button id="export_excel" class="btn px-1 big-modal" title="Exportar a EXCEL" data-toggle="tooltip">
 								<i class="icon icon-file-excel" aria-hidden="true"></i>
 							</button>

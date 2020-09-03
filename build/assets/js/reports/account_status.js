@@ -18,6 +18,7 @@ $(function () {
 	});
 
 	$(":radio").on("change", function (e) {
+		$('#blockMessage').val('');
 		$('#resultByNITInput').val('');
 		if ($("input[name='results']:checked").val() == 'all') {
 			$('#resultByNITInput').addClass('visible');
@@ -63,7 +64,6 @@ function searchStatusAccount(passData){
 		dataResponse = response.data;
 		code = response.code
 		insertFormInput(false);
-
 		$('#spinnerBlock').addClass('hide');
 		if (code == 0) {
 			$('#blockResults').removeClass('hidden');
@@ -73,7 +73,7 @@ function searchStatusAccount(passData){
 			$.each(dataResponse.accounts, function (key, value, index) {
 				var table, body = '';
 				table= '<div class=""><div class="flex ml-4 py-3 flex-auto">'
-				table+=	'<p class="mr-5 h5 semibold tertiary">Nombre: <span class="light text">'+ dataResponse.accounts[key].client +'</span></p><p class="mr-5 h5 semibold tertiary">Tarjeta: <span class="light text">'+ dataResponse.accounts[key].account +'</span></p><p class="mr-5 h5 semibold tertiary">Cédula: <span class="light text">'+ dataResponse.accounts[key].id +'</span></p></div>'
+				table+=	'<p class="mr-5 h5 semibold tertiary">'+ lang.GEN_TABLE_DNI + ':<span class="light text">'+ dataResponse.accounts[key].id +'</span></p><p class="mr-5 h5 semibold tertiary">Tarjeta: <span class="light text">'+ dataResponse.accounts[key].account +'</span></p><p class="mr-5 h5 semibold tertiary">Nombre: <span class="light text">'+ dataResponse.accounts[key].client +'</span></p></div>'
 				table+= 	'<table id="resultsAccount'+  key + '" class="cell-border h6 display responsive w-100">';
 				table+= 	'<thead class="bg-primary secondary regular">';
 				table+= 		'<tr class="" style="margin-left: 0px;">';
@@ -95,14 +95,42 @@ function searchStatusAccount(passData){
 
 			$("#globalTable").html(personalizeRowsInfo);
 			$.each(dataResponse.users, function (key, value, index) {
-				createTable(dataResponse.users, key);
+				var name = '#resultsAccount';
+				createTable(name, dataResponse.users, key);
 			})
+		}else if(code == 1){
+			$('#blockResults').removeClass('hidden');
+			$('#export_excel').addClass('hidden');
+			var principalTable= $("#globalTable").DataTable();
+			principalTable.destroy();
+			var data = [];
+			var name = '#globalTable';
+			var table, key = '';
+			table= '<div class="">'
+			table+= 	'<table id="resultsAccount" class="cell-border h6 display responsive w-100">';
+			table+= 	'<thead class="bg-primary secondary regular">';
+			table+= 		'<tr class="" style="margin-left: 0px;">';
+			table+= 			'<td>Fecha</td>';
+			table+= 			'<td>Fid</td>';
+			table+= 			'<td>Terminal</td>';
+			table+= 			'<td>Secuencia</td>';
+			table+= 			'<td>Referencia</td>';
+			table+= 			'<td>Descripción</td>';
+			table+= 			'<td>Abono</td>';
+			table+= 			'<td>Cargo</td>';
+			table+= 		'</tr>';
+			table+= 	'</thead>';
+			table+= 		'<tbody></tbody>'
+			table+= '</table>';
+			$("#globalTable").html(table);
+			createTable(name, data, key);
 		}
+
 	});
 };
 
-function createTable(data, index){
-	$('#resultsAccount'+ index).DataTable({
+function createTable(name, data, index){
+	$(name + index).DataTable({
 		"ordering": false,
 		"responsive": true,
 		"lengthChange": false,
@@ -162,7 +190,7 @@ function createTable(data, index){
 		],
 		"language": dataTableLang
 	});
-}
+};
 
 function exportFile(e){
 	e.preventDefault();
