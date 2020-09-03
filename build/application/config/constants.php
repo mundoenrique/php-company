@@ -107,33 +107,17 @@ define('BULK_FTP_URL', $_SERVER['BULK_FTP_URL']);
 define('BULK_FTP_USERNAME', $_SERVER['BULK_FTP_USERNAME']);
 define('BULK_FTP_PASSWORD', $_SERVER['BULK_FTP_PASSWORD']);
 define('BULK_LOCAL_PATH', $_SERVER['BULK_LOCAL_PATH']);
-define('ENCRYPTION_KEY', isset($_SERVER['ENCRYPTION_KEY']) ?
-	$_SERVER['ENCRYPTION_KEY'] : 'n0v0p4ym3nt'
-);
-define('SESS_COOKIE_NAME', isset($_SERVER['SESS_COOKIE_NAME']) ?
-	$_SERVER['SESS_COOKIE_NAME'] : 'ceo_session'
-);
-define('SESS_EXPIRATION', isset($_SERVER['SESS_EXPIRATION'])
-&& filter_var($_SERVER['SESS_EXPIRATION'], FILTER_VALIDATE_INT) !== FALSE
-?  intval($_SERVER['SESS_EXPIRATION']) > 0 && intval($_SERVER['SESS_EXPIRATION']) < 20
-?  20 : intval($_SERVER['SESS_EXPIRATION']) : 7200
-);
-define('SESS_SAVE_PATH', isset($_SERVER['SESS_SAVE_PATH']) ?
-	$_SERVER['SESS_SAVE_PATH'] : NULL
-);
+define('ENCRYPTION_KEY', $_SERVER['ENCRYPTION_KEY'] ?? 'n0v0p4ym3nt');
+define('SESS_COOKIE_NAME', $_SERVER['SESS_COOKIE_NAME'] ?? 'empresas');
+define('SESS_EXPIRATION', $_SERVER['SESS_EXPIRATION'] ?? '0');
+define('SESS_SAVE_PATH', $_SERVER['SESS_SAVE_PATH'] ?? NULL);
 define('SESS_MATCH_IP', isset($_SERVER['SESS_MATCH_IP'])
 && filter_var($_SERVER['SESS_MATCH_IP'], FILTER_VALIDATE_BOOLEAN) ?
 	boolval($_SERVER['SESS_MATCH_IP']) : TRUE
 );
-define('COOKIE_PREFIX', isset($_SERVER['COOKIE_PREFIX']) ?
-	$_SERVER['COOKIE_PREFIX'] : 'ceo_'
-);
-define('COOKIE_DOMAIN', isset($_SERVER['COOKIE_DOMAIN']) ?
-	$_SERVER['COOKIE_DOMAIN'] : ''
-);
-define('COOKIE_PATH', isset($_SERVER['COOKIE_PATH']) ?
-	$_SERVER['COOKIE_PATH'] : '/'
-);
+define('COOKIE_PREFIX', $_SERVER['COOKIE_PREFIX'] ?? 'ceo_');
+define('COOKIE_DOMAIN', $_SERVER['COOKIE_DOMAIN'] ?? 'localhost');
+define('COOKIE_PATH', $_SERVER['COOKIE_PATH'] ?? '/');
 define('COOKIE_SECURE', isset($_SERVER['COOKIE_SECURE'])
 && filter_var($_SERVER['COOKIE_SECURE'], FILTER_VALIDATE_BOOLEAN) ?
 	boolval($_SERVER['COOKIE_SECURE']) : FALSE
@@ -141,11 +125,8 @@ define('COOKIE_SECURE', isset($_SERVER['COOKIE_SECURE'])
 $arrayUri = explode('/', $_SERVER['REQUEST_URI']);
 $lang = end($arrayUri);
 define('LANGUAGE', $lang === 'en' ? 'en' : 'es');
-unset($arrayUri, $lang);
 define('THRESHOLD', $_SERVER['CI_ENV'] === 'development' ? 4 : 2);
-define('CYPHER_BASE', isset($_SERVER['CYPHER_BASE']) ?
-	$_SERVER['CYPHER_BASE'] : ''
-);
+define('CYPHER_BASE', $_SERVER['CYPHER_BASE'] ??	'');
 define('AUTO_LOGIN', isset($_SERVER['AUTO_LOGIN'])
 && filter_var($_SERVER['AUTO_LOGIN'], FILTER_VALIDATE_BOOLEAN) ?
 	boolval($_SERVER['AUTO_LOGIN']) : FALSE
@@ -155,16 +136,12 @@ define('ACTIVE_RECAPTCHA', isset($_SERVER['ACTIVE_RECAPTCHA'])
 	boolval($_SERVER['ACTIVE_RECAPTCHA']) : FALSE
 );
 define('IP_VERIFY', $_SERVER['IP_VERIFY'] ?? 'ON');
-define('DOWNLOAD_ROUTE', isset($_SERVER['DOWNLOAD_ROUTE']) ?
-	$_SERVER['DOWNLOAD_ROUTE'] : ''
-);
-define('ACCESS_URL', isset($_SERVER['ACCESS_URL']) ?
-	$_SERVER['ACCESS_URL'] : ''
-);
+define('DOWNLOAD_ROUTE', $_SERVER['DOWNLOAD_ROUTE'] ?? '');
+define('ACCESS_URL', $_SERVER['ACCESS_URL'] ?? '');
 $typeIP = 'private';
 if (filter_var($_SERVER['REMOTE_ADDR'], FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE)) {
  $typeIP = 'public';
 }
-$ipReal = $typeIP == 'private'? $_SERVER['REMOTE_ADDR']: '';
+$ipReal = $typeIP == 'private' ? $_SERVER['REMOTE_ADDR'] : '';
 define('IP_PROXI', $ipReal);
-unset($ipReal, $typeIP);
+unset($arrayUri, $lang, $ipReal, $typeIP);
