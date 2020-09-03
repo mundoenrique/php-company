@@ -65,7 +65,7 @@
 								<div class="custom-control custom-radio custom-control-inline">
 									<input type="radio" id="resultByNIT" name="results" class="custom-control-input">
 									<label class="custom-control-label mr-1" for="resultByNIT"><?= lang('GEN_TABLE_DNI'); ?></label>
-									<input id="resultByNITInput" name="radioDni" type="text" class="form-control col-8 col-auto visible" />
+									<input id="resultByNITInput" name="radioDni" type="text" class="form-control col-auto visible" />
 								</div>
 								<div id="blockMessage" class="help-block"></div>
 							</div>

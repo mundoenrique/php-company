@@ -43,6 +43,7 @@ $(function () {
 		validateForms(form);
 
 		if (form.valid()) {
+			$('#spinnerBlock').removeClass('hide');
 			insertFormInput(true, form);
 			searchStatusAccount(data);
 		}
@@ -63,7 +64,7 @@ function searchStatusAccount(passData){
 		dataResponse = response.data;
 		code = response.code
 		insertFormInput(false);
-		$('#spinnerBlock').removeClass('hide');
+		$('#spinnerBlock').addClass('hide');
 		if (code == 0) {
 			$('#blockResults').removeClass('hidden');
 			var table= $("#globalTable").DataTable();
