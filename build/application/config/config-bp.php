@@ -5,5 +5,4 @@ $config['country-uri'] = 'bp';
 $config['base_url']	= BASE_URL.$config['country-uri'].'/';
 $config['language']	= 'spanish-bp';
 $config['favicon'] = 'favicon-bp';
-$config['new-views'] = '';
 $config['client'] = 'pichincha';
