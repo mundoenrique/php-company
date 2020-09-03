@@ -137,10 +137,6 @@ class NOVO_Controller extends CI_Controller {
 
 		if ($auth) {
 
-			if ($this->rule == 'login' && $this->session->has_userdata('userId')) {
-				clearSessionsVars();
-			}
-
 			$this->render->favicon = lang('GEN_FAVICON');
 			$this->render->ext = lang('GEN_FAVICON_EXT');
 			$this->render->loader = lang('GEN_LOADER');
