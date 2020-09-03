@@ -403,7 +403,6 @@ $lang['GEN_TABLE_USERACT_DATE'] = 'Fecha';
 $lang['REPORTS_TITLE'] = 'Configuración';
 $lang['REPORTS_NO_FILE_EXIST'] = 'No fue posible generar el archivo, por favor intenta de nuevo';
 //DATATABLES LANG CLOSING BALANCE
-$lang['GEN_FISCAL_REGISTRY'] = 'NIT';
 $lang['GEN_ACCOUNT_CLOSING_BALANCE'] = 'Cuenta';
 $lang['GEN_LOGIN_IP_MSG'] = 'Estás ingresando desde un equipo no habitual, por seguridad te enviaremos un código de verificación a la dirección de correo <span class="semibold">%s</span>, indícalo a continuación.';
 $lang['GEN_LOGIN_IP_ASSERT'] = 'Confirmo que estoy ingresando desde un equipo de uso frecuente.';
@@ -414,7 +413,7 @@ $lang['GEN_CODE_OTP_REQUIRED'] = 'Este campo es obligatorio.';
 $lang['GEN_CODE_OTP_INVALID_FORMAT'] = 'El formato de código es inválido.';
 $lang['GEN_WITHOUT_AUTHORIZATION'] = 'No tienes autorización para ejecutar esta acción.';
 $lang['GEN_RC_0'] = 'Proceso ejecutado exitosamente';
-$lang['GEN_FAILED_THIRD_PARTY'] = 'La respuesta del banco para este porceso no fue exitosa. (%s)';
+$lang['GEN_FAILED_THIRD_PARTY'] = 'La respuesta del banco para este proceso no fue exitosa. (%s)';
 $lang['GEN_MESSAGE_SYSTEM'] = 'En este momento no podemos atender tu solicitud, por favor intenta más tarde';
 $lang['GEN_TIMEOUT'] = "El servidor esta demorando mucho tiempo en responder, por favor intentalo de nuevo";
 $lang['GEN_RC_DEFAULT'] = -9999;
