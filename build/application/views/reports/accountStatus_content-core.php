@@ -64,10 +64,10 @@
 								</div>
 								<div class="custom-control custom-radio custom-control-inline">
 									<input type="radio" id="resultByNIT" name="results" class="custom-control-input">
-									<label class="custom-control-label mr-1" for="resultByNIT"><?= lang('GEN_FISCAL_REGISTRY'); ?></label>
-									<input id="resultByNITInput" name="results" type="text" class="form-control col-8 col-auto visible" />
+									<label class="custom-control-label mr-1" for="resultByNIT"><?= lang('GEN_TABLE_DNI'); ?></label>
+									<input id="resultByNITInput" name="radioDni" type="text" class="form-control col-8 col-auto visible" />
 								</div>
-								<div class="help-block"></div>
+								<div id="blockMessage" class="help-block"></div>
 							</div>
 							<div class="flex items-center justify-end col-3">
 								<button id="searchButton" type="button" class="btn btn-primary btn-small">

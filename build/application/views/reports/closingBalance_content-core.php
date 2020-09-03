@@ -52,15 +52,15 @@
 							</div>
 
 							<?php if (lang('CONF_NIT_INPUT_BOOL') == 'ON' ): ?>
-							<div class="form-group <?= lang('CONF_SETT_STYLE_SKIN') ?>">
-								<label ><?= lang('REPORTS_ID_FISCAL') ?></label>
-								<input id="Nit" class="form-control h5" name="nit" placeholder="<?= lang('REPORTS_ID_FISCAL_INPUT') ?>">
-								<div class="help-block"></div>
-							</div>
+								<div class="form-group <?= lang('CONF_SETT_STYLE_SKIN') ?>">
+									<label ><?= lang('REPORTS_ID_FISCAL') ?></label>
+									<input id="Nit" class="form-control h5" name="nit" placeholder="<?= lang('REPORTS_ID_FISCAL_INPUT') ?>">
+									<div class="help-block"></div>
+								</div>
 							<?php endif; ?>
 
 							<div class="flex items-center justify-end col-auto ml-auto">
-								<button type="button" id="closingBudgetsBtn" class="btn btn-primary btn-small">
+								<button id="closingBudgetsBtn" class="btn btn-primary btn-small">
 									Buscar
 								</button>
 							</div>
@@ -84,9 +84,9 @@
 							<i class="icon icon-file-excel" aria-hidden="true"></i>
 						</button>
 					</div>
-					<table id="balancesClosing" class="cell-border h6 display responsive w-100">
+					<table id="balancesClosing" class="cell-border h6 display w-100">
 						<thead class="bg-primary secondary regular">
-            	<tr  id="datos-principales" >
+            	<tr>
 								<th><?= lang('REPORTS_TABLE_CARD') ?></th>
 								<th><?= lang('REPORTS_TABLE_CARDHOLDER') ?></th>
 								<th><?= lang('REPORTS_TABLE_DNI') ?></th>
