@@ -19,9 +19,10 @@ $(function () {
 			var maxTime = new Date(dateSelected);
 
 			if (inputDate == 'initialDate') {
+				var maxMonth = parseInt(lang.CONF_MAX_CONSULT_MONTH);
 				$('#finalDate').datepicker('option', 'minDate', selectedDate);
 				maxTime.setDate(maxTime.getDate() - 1);
-				maxTime.setMonth(maxTime.getMonth() + 3);
+				maxTime.setMonth(maxTime.getMonth() + maxMonth);
 
 				if (currentDate > maxTime) {
 					$('#finalDate').datepicker('option', 'maxDate', maxTime);

@@ -280,13 +280,9 @@ class Novo_DownloadFiles_Model extends NOVO_Model {
 			break;
 		}
 
-		$enterpriseCode=explode("/",$dataRequest->enterpriseCode);
-		$accodcia=$enterpriseCode[0];
-		$rifEnterprise=$enterpriseCode[1];
-
-		$this->dataRequest->accodcia = $accodcia;
+		$this->dataRequest->accodcia = $dataRequest->accodcia;
 		$this->dataRequest->tipoConsulta = $dataRequest->radioButton;
-		$this->dataRequest->idExtEmp = $rifEnterprise;
+		$this->dataRequest->idExtEmp = $dataRequest->acrif;
 		$this->dataRequest->nombreEmpresa = $dataRequest->nameEnterprise;
 		$this->dataRequest->fechaMes = $dataRequest->initialDatemy;
 

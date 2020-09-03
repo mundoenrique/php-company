@@ -63,6 +63,7 @@ class NOVO_Controller extends CI_Controller {
 		languageLoad('specific', $this->router->fetch_class());
 		if($this->session->has_userdata('userId')) {
 			if($this->session->countrySess !== $this->config->item('country')) {
+				clientUrlValidate($this->session->countrySess);
 				$urlRedirect = str_replace($this->countryUri.'/', $this->session->countryUri.'/', base_url('cerrar-sesion/inicio'));
 				redirect($urlRedirect, 'location', 301);
 				exit();
@@ -136,10 +137,6 @@ class NOVO_Controller extends CI_Controller {
 
 		if ($auth) {
 
-			if ($this->rule == 'login' && $this->session->has_userdata('userId')) {
-				clearSessionsVars();
-			}
-
 			$this->render->favicon = lang('GEN_FAVICON');
 			$this->render->ext = lang('GEN_FAVICON_EXT');
 			$this->render->loader = lang('GEN_LOADER');
@@ -191,13 +188,9 @@ class NOVO_Controller extends CI_Controller {
 			}
 
 		} else {
-			/* $linkredirect = $this->session->has_userdata('productInf') ? 'detalle-producto' : 'empresas';
-			$linkredirect = !$this->session->has_userdata('logged') ? 'inicio' : $linkredirect;
-			$linkredirect = AUTO_LOGIN ? 'ingresar/fin' : $linkredirect; */
 			$linkredirect = uriRedirect(AUTO_LOGIN);
 			redirect(base_url($linkredirect), 'location');
 		}
-
 	}
 	/**
 	 * Método para cargar un modelo especifico

@@ -21,3 +21,5 @@ $lang['GEN_FOTTER_MARK'] = 'img-ma.svg';
 $lang['GEN_TABLE_BULK_NUMBER'] = 'Num. lote';
 $lang['GEN_TABLE_BULK_DATE_VALUE'] = 'Fecha de ult. estado';
 $lang['GEN_TABLE_AMOUNT'] = 'Monto lote';
+//RESPONSES
+$lang['RESP_PASSWORD_USED'] = 'La nueva contraseña no debe coincidir <strong>con las últimas diez usadas</strong>.';

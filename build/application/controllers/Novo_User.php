@@ -19,6 +19,17 @@ class Novo_User extends NOVO_Controller {
 	{
 		log_message('INFO', 'NOVO User: index Method Initialized');
 
+		if($this->session->has_userdata('logged')) {
+			$oldUrl = str_replace($this->countryUri.'/', $this->config->item('country').'/', base_url('dashboard'));
+			$urlRedirect = lang('CONF_VIEW_SUFFIX') != '-core' ? $oldUrl : base_url('empresas');
+			redirect($urlRedirect, 'location');
+			exit();
+		}
+
+		if ($this->session->has_userdata('userId')) {
+			clearSessionsVars();
+		}
+
 		$view = 'login';
 
 		if(ACTIVE_RECAPTCHA) {

@@ -15,6 +15,7 @@ function validateForms(form) {
 	var userPassword = validatePass;
 	var numeric = /^[0-9]+$/;
 	var alphabetical = /^[a-z]+$/i;
+	var alphabeticalspace = /^['a-z ']{3,100}$/i;
 	var text = /^['a-z0-9ñáéíóú ,.:()']+$/i;
 	var usdAmount = /^[0-9]+(\.[0-9]*)?$/;
 	var validCode = /^[a-z0-9]+$/i;
@@ -188,6 +189,9 @@ function validateForms(form) {
 			}, pattern: alphanum},
 			"documentType": {requiredSelect: true},
 			"optCode": {required: true, pattern: alphanum},
+			"firstName": { required: true, pattern: alphabeticalspace},
+			"lastName": { required: true, pattern: alphabeticalspace},
+			"movil": { required: true, pattern: numeric},
 			"numberDayPurchasesCtp": {required: true, pattern: numeric, maxLimitZero:'#numberWeeklyPurchasesCtp'},
 			"numberWeeklyPurchasesCtp": {required: true, pattern: numeric, maxLimitZero: '#numberMonthlyPurchasesCtp'},
 			"dailyPurchaseamountCtp": {required: true, pattern: numeric, maxLimitZero:'#weeklyAmountPurchasesCtp'},
@@ -314,6 +318,9 @@ function validateForms(form) {
 			"radioDni":  lang.VALIDATE_DOCUMENT_ID,
 			"documentType": lang.VALIDATE_SELECT_DOCTYPE,
 			"optCode": lang.VALIDATE_OTP_CODE,
+			"firstName": lang.VALIDATE_NAME_LASTNAME,
+			"lastName": lang.VALIDATE_NAME_LASTNAME,
+			"movil": lang.VALIDATE_PHONE,
 			"numberMonthlyPurchasesCtp": {
 				pattern: lang.VALIDATE_INVALID_NUMBER,
 				required: lang.VALIDATE_NUMBER_REQ

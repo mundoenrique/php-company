@@ -3,7 +3,7 @@ $(function () {
 	var userCred, forWho, forWhere;
 	var userLogin = $('#user_login');
 	var userPass = $('#user_pass');
-	var loginIpMsg, formcodeOTP, btn, btnTextOtp;
+	var loginIpMsg, formcodeOTP, btnTextOtp;
 	var captcha = lang.GEN_ACTIVE_RECAPTCHA;
 
 	$('#user_pass').on('keyup', function() {
@@ -26,7 +26,7 @@ $(function () {
 				inputDisabled(true);
 				$(this).html(loader);
 				recaptcha();
-			}else {
+			} else {
 				if (userLogin.val() == '' || userPass.val() == '') {
 					$(".general-form-msg").html('Todos los campos son requeridos');
 				} else {
@@ -36,7 +36,7 @@ $(function () {
 			}
 	});
 
-	function recaptcha(){
+	function recaptcha() {
 		if (captcha) {
 			grecaptcha.ready(function () {
 				grecaptcha
@@ -62,7 +62,7 @@ $(function () {
 		} else {
 			validateLogin();
 		}
-	};
+	}
 
 	function restartFormLogin() {
 		insertFormInput(false);
@@ -228,7 +228,7 @@ $(function () {
 		$('#login-form input').attr('disabled', disable);
 	}
 
-	function windowsStyle(){
+	function windowsStyle() {
 		$('#system-msg').css( "width", "auto" );
 		if (lang.MODAL_OTP=='ON') {
 			var styles = {

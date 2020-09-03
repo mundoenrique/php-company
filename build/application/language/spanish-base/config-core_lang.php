@@ -116,3 +116,5 @@ $lang['CONF_GL_USER_MANUAL'] = 'Manual de Usuario Gestor de Lotes';
 //MODAL OTP
 $lang['MODAL_OTP'] = 'OFF';
 $lang['RESTART_LOGIN'] = 'OFF';
+//DATEPICKER
+$lang['CONF_MAX_CONSULT_MONTH'] = '3';

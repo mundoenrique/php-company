@@ -4,4 +4,3 @@ $config['country'] = 'Ve';
 $config['country-uri'] = 've';
 $config['base_url']	= BASE_URL.$config['country-uri'].'/';
 $config['language']	= 'spanish-ve';
-$config['new-views'] = '';

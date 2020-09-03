@@ -57,3 +57,5 @@ $lang['VALIDATE_MAX_MONTH'] = 'Monto semanal no puede ser mayor al mensual';
 $lang['VALIDATE_MAX_DAY'] = 'Monto de transacción no puede ser mayor al monto diario';
 $lang['VALIDATE_INVALID_NUMBER'] = 'Formato inválido, solo se deben ingresar números';
 $lang['VALIDATE_NUMBER_REQ'] = 'Este número es requerido';
+$lang['VALIDATE_NAME_LASTNAME'] = 'Sólo se adminten letras y espacios (mín 3, máx 100)';
+$lang['VALIDATE_PHONE'] = 'Sólo se adminten números (mín 7, máx 15)';

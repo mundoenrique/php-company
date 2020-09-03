@@ -62,10 +62,10 @@ class Verify_Access {
 				case 'request':
 				case 'plot':
 				case 'ceo_name':
-					break;
+				break;
 				case 'screenSize':
 					$this->CI->session->set_userdata('screenSize', $value);
-					break;
+				break;
 				default:
 				$this->requestServ->$key = $value;
 			}
@@ -121,10 +121,15 @@ class Verify_Access {
 
 		$auth = FALSE;
 		$user = $user ?? $this->user;
-		$freeAccess = ['login', 'suggestion', 'validateCaptcha', 'finishSession', 'terms', 'singleSignOn'];
+		$freeAccess = ['login', 'suggestion', 'finishSession', 'terms', 'singleSignOn'];
 		$auth = in_array($module, $freeAccess);
 
 		if(!$auth) {
+			if ($this->CI->session->has_userdata('userId') && $this->CI->session->clientAgent != $this->CI->agent->agent_string()) {
+				clearSessionsVars();
+				$module = 'noModule';
+			}
+
 			switch($module) {
 				case 'recoverPass':
 					$auth = lang('CONF_RECOV_PASS') == 'ON';

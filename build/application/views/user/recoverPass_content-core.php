@@ -12,13 +12,13 @@
 				<p><?= novoLang(lang('RECOVER_PASS_FORGOTTEN'), lang('GEN_SYSTEM_NAME')); ?></p>
 				<div class="max-width-1 fit-lg mx-auto pt-3">
 					<form id="form-pass-recovery">
-						<div class="row  mb-2">
-							<div class="form-group col-lg-auto">
+						<div class="row mb-2">
+							<div class="form-group col-lg-3">
 								<label for="idUser"><?= lang('GEN_USER'); ?></label>
 								<input id="user-name" name="user-name" class="form-control" type="text" maxlength="15" disabled>
 								<div class="help-block"></div>
 							</div>
-							<div class="form-group col-lg-auto">
+							<div class="form-group col-lg-3">
 								<label for="id-company"><?= lang('GEN_FISCAL_REGISTRY'); ?></label>
 								<input id="id-company" name="id-company" class="form-control" type="text" maxlength="18"
 									placeholder="<?= lang('PLACE_HOLDER_FISCAL_REGISTER'); ?>" disabled>
