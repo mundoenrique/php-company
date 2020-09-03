@@ -1,5 +1,4 @@
 'use strict'
-//app
 var currenTime;
 var screenSize;
 var verb, who, where, dataResponse, ceo_cook, btnText, form, cypherPass;
@@ -35,7 +34,7 @@ $(function () {
 	$('.big-modal').on('click', function () {
 		$('.cover-spin').show(0)
 	});
-	//dataTale lang
+
 	dataTableLang = {
 		"sLengthMenu": lang.GEN_TABLE_SLENGTHMENU,
 		"sZeroRecords": lang.GEN_TABLE_SZERORECORDS,
@@ -69,7 +68,7 @@ $(function () {
 			}
 		}
 	}
-	//datepicker
+
 	currentDate = new Date();
 	$.datepicker.regional['es'] = {
 		closeText: lang.GEN_PICKER_CLOSETEXT,
@@ -95,11 +94,7 @@ $(function () {
 	}
 	$.datepicker.setDefaults($.datepicker.regional['es']);
 });
-/**
- * @info Llama al core del servidor
- * @author J. Enrique Peñaloza Piñero
- * @date 15/04/2019
- */
+
 function callNovoCore(verb, who, where, request, _response_) {
 	request.screenSize = screen.width;
 	var dataRequest = JSON.stringify({
@@ -116,6 +111,7 @@ function callNovoCore(verb, who, where, request, _response_) {
 		formData.append('file', request.file);
 		delete request.file;
 	}
+
 	formData.append('request', dataRequest);
 	formData.append('ceo_name', ceo_cook);
 	formData.append('plot', btoa(ceo_cook));
@@ -146,7 +142,7 @@ function callNovoCore(verb, who, where, request, _response_) {
 		if ($('#system-info').parents('.ui-dialog').length && modalClose) {
 			$('#accept')
 				.prop('disabled', false)
-				.text(lang.GEN_BTN_ACCEPT)
+				.text(lang.GEN_BTN_ACCEPT);
 			$('#system-info').dialog('destroy');
 		}
 
@@ -168,6 +164,7 @@ function callNovoCore(verb, who, where, request, _response_) {
 		var response = {
 			code: codeResp,
 			title: lang.GEN_SYSTEM_NAME,
+			msg: lang.GEN_MESSAGE_SYSTEM,
 			icon: lang.GEN_ICON_DANGER,
 			data: {
 				btn1: {
@@ -181,21 +178,13 @@ function callNovoCore(verb, who, where, request, _response_) {
 		_response_(response);
 	});
 }
-/**
- * @info Obtiene valor de cookie
- * @author J. Enrique Peñaloza Piñero
- * @date December 18th, 2019
- */
+
 function getCookieValue() {
 	return decodeURIComponent(
 		document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 	);
 }
-/**
- * @info Uso del modal informativo
- * @author J. Enrique Peñaloza Piñero
- * @date 05/03/2019
- */
+
 function notiSystem(title, message, icon, data) {
 	var btn1 = data.btn1;
 	var btn2 = data.btn2;
@@ -245,14 +234,9 @@ function notiSystem(title, message, icon, data) {
 		}
 	});
 }
-/**
- * @info Crea botones para modal informativo
- * @author Pedro Torres
- * @date 16/09/2019
- */
+
 function createButton(elementButton, valuesButton) {
-	var textModalBtn = valuesButton.text || elementButton.text(valuesButton.text);
-	elementButton.text(textModalBtn);
+	elementButton.text(valuesButton.text);
 	elementButton.show();
 	elementButton.on('click', function (e) {
 		switch (valuesButton.action) {
@@ -279,11 +263,7 @@ function createButton(elementButton, valuesButton) {
 		$(this).off('click');
 	})
 }
-/**
- * @info Incorpora inputs a formularios
- * @author J. Enrique Peñaloza
- * @date November 18th, 2019
- */
+
 function insertFormInput(disabled, form) {
 	form = form == undefined ? false : form;
 	var notDisabled = '#product-select, #enterprise-widget-btn'
@@ -304,21 +284,12 @@ function insertFormInput(disabled, form) {
 		form.append('<input type="hidden" name="screenSize" value="' + screenSize + '"></input>');
 	}
 }
-/**
- * @info lee una propiedad especifica de un elemento html,
- * de no indicarse el elemento se toma por defecto el body
- * @author Pedro Torres
- * @date 27/08/2019
- */
+
 function getPropertyOfElement(property, element) {
 	var element = element || 'body';
 	return $(element).attr(property);
 }
-/**
- * @info quita espacios en blanco de los campos input
- * @author J. Enrique Peñaloza Piñero
- * @date November 18th, 2019
- */
+
 function formInputTrim(form) {
 	form.find('input, select').each(function () {
 		var thisValInput = $(this).val();
@@ -329,11 +300,7 @@ function formInputTrim(form) {
 		$(this).val(trimVal)
 	});
 }
-/**
- * @info Cifra la contraseña del usuario
- * @author J. Enrique Peñaloza Piñero
- * @date December 27th, 2019
- */
+
 function cryptoPass(jsonObject, req) {
 	req = req == undefined ? false : req;
 	ceo_cook = getCookieValue();
@@ -348,11 +315,7 @@ function cryptoPass(jsonObject, req) {
 
 	return cipherObject;
 }
-/**
- * @info Obtiene datos para el request
- * @author J. Enrique Peñaloza Piñero
- * @date April 25th, 2020
- */
+
 function getDataForm(form) {
 	var dataForm = {};
 	form.find('input, select').each(function (index, element) {
