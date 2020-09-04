@@ -51,7 +51,7 @@
 							</div>
 							<div class="form-group col-4 col-xl-3">
 							<label for="initialDateAct"><?= lang('GEN_START_DAY'); ?></label>
-								<input id="initialDateAct" name="selected-date" class="form-control date-picker " type="text" placeholder="MM/AAAA" readonly="" autocomplete="off">
+									<input id="initialDateAct" name="selected-month-year" class="form-control date-picker " type="text" placeholder="MM/AAAA" readonly="" autocomplete="off">
 								<div class="help-block"></div>
 							</div>
 						</div>
@@ -65,7 +65,7 @@
 								<div class="custom-control custom-radio custom-control-inline">
 									<input type="radio" id="resultByNIT" name="results" class="custom-control-input">
 									<label class="custom-control-label mr-1" for="resultByNIT"><?= lang('GEN_TABLE_DNI'); ?></label>
-									<div class="form-group col-auto">
+									<div class="form-group col-11">
 										<input id="resultByNITInput" name="radioDni" type="text" class="form-control visible" />
 										<div id="blockMessage" class="help-block"></div>
 									</div>

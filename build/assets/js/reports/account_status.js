@@ -66,6 +66,7 @@ function searchStatusAccount(passData){
 		insertFormInput(false);
 		$('#spinnerBlock').addClass('hide');
 		if (code == 0) {
+			$('#export_excel').removeClass('hidden');
 			$('#blockResults').removeClass('hidden');
 			var table= $("#globalTable").DataTable();
 			var personalizeRowsInfo = []
