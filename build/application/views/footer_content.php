@@ -58,7 +58,7 @@
 </div>
 <div id="system-info" class="hidden">
 	<p class="system-content">
-		<span id="system-icon" class="<?= lang('GEN_ICON'); ?>"></span>
+		<span id="system-icon" class="<?= lang('CONF_ICON'); ?>"></span>
 		<span id="system-msg" class="system-msg"><?= lang('GEN_MESSAGE_SYSTEM'); ?></span>
 	</p>
 	<div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">

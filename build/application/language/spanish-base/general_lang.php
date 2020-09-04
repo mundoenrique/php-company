@@ -152,12 +152,6 @@ $lang['GEN_CONTACTS_REST_COUNTRY_NUMBER'] = 'XXX (XXXXXX)';
 //LINKS
 $lang['GEN_LINK_LOGIN'] = 'inicio';
 $lang['GEN_LINK_RECOVER_ACCESS'] = 'recuperar-clave';
-//MODAL STYLES
-$lang['GEN_ICON'] = 'ui-icon';
-$lang['GEN_ICON_SUCCESS'] = 'ui-icon-circle-check';
-$lang['GEN_ICON_INFO'] = 'ui-icon-info';
-$lang['GEN_ICON_WARNING'] = 'ui-icon-alert';
-$lang['GEN_ICON_DANGER'] = 'ui-icon-closethick';
 //FOOTER
 $lang['GEN_FOTTER_START'] = 'Inicio';
 $lang['GEN_FOTTER_BENEFITS'] = 'Beneficios';

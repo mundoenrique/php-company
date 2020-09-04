@@ -72,7 +72,7 @@ $(function () {
 					action: 'redirect'
 				}
 			}
-			appMessages(lang.REPORTS_TITLE, lang.REPORTS_NO_GMF, lang.GEN_ICON_INFO, data);
+			appMessages(lang.REPORTS_TITLE, lang.REPORTS_NO_GMF, lang.CONF_ICON_INFO, data);
 		}
 	});
 
