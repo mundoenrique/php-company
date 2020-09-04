@@ -98,8 +98,8 @@ class Novo_Services_Model extends NOVO_Model {
 				$this->response->code = 1;
 				$this->response->title = lang('GEN_MENU_SERV_MASTER_ACCOUNT');
 				$this->response->icon = lang('GEN_ICON_INFO');
-				$this->response->msg = 'No se encontraron resultados para tu busqueda';
-				$this->response->data['btn1']['action'] = 'close';
+				$this->response->msg = lang('GEN_TABLE_SEMPTYTABLE');
+				$this->response->data['btn1']['action'] = 'destroy';
 			break;
 		}
 
@@ -217,13 +217,14 @@ class Novo_Services_Model extends NOVO_Model {
 				$this->response->data['btn1']['action'] = 'close';
 
 				if ($dataRequest->action == lang('GEN_TEMPORARY_LOCK') || $dataRequest->action == lang('GEN_UNLOCK_CARD')) {
-					$blockType = $dataRequest->action == lang('GEN_TEMPORARY_LOCK') ? 'Bloqueda' : 'desbloqueda';
-					$this->response->msg =  novoLang('La tarjeta %s ha sido %s.', [$cardsList[0]['noTarjeta'], $blockType]);
+					$blockType = $dataRequest->action == lang('GEN_TEMPORARY_LOCK') ? 'Bloqueda' : 'Desbloqueda';
+					$this->response->msg =  novoLang(lang('SERVICES_BLOCKING_CARD'), [$cardsList[0]['noTarjeta'], $blockType]);
 					$this->response->update = TRUE;
 				}
 
 				if ($dataRequest->action == lang('GEN_CARD_ASSIGNMENT')) {
-					$this->response->msg =  novoLang('La tarjeta %s ha sido reemplazada por %s.', [$cardsList[0]['noTarjeta'], $cardsList[0]['noTarjetaAsig']]);
+					$maskCards = maskString($cardsList[0]['noTarjetaAsig'], 4, 6);
+					$this->response->msg =  novoLang(lang('SERVICES_ASSIGNMENT_CARD'), [$cardsList[0]['noTarjeta'], $maskCards]);
 				}
 
 				if ($dataRequest->action == lang('GEN_CHECK_BALANCE') || $dataRequest->action == 'Consulta') {
@@ -243,7 +244,7 @@ class Novo_Services_Model extends NOVO_Model {
 
 					if (count($listFail) > 0) {
 						$this->response->code = 2;
-						$this->response->msg = 'No fue posible obtener el saldo para';
+						$this->response->msg = lang('SERVICES_BALANCE_NO_FOUND');
 					}
 				}
 
@@ -257,7 +258,7 @@ class Novo_Services_Model extends NOVO_Model {
 					}
 
 					$this->response->code = 2;
-					$this->response->msg = 'Datos de la transacción';
+					$this->response->msg = lang('SERVICES_TRANSACTION_DATA');
 				}
 
 				$this->response->data['listResponse'] = $listResopnse;
@@ -276,56 +277,74 @@ class Novo_Services_Model extends NOVO_Model {
 			case -21:
 			case -22:
 				$this->response->title = $dataRequest->action;
-				$this->response->msg = 'No fue posible realizar la trasacción, intentalo de nuevo';
+				$this->response->msg = lang('SERVICES_TRANSACTION_FAIL');
 				$this->response->icon = lang('GEN_ICON_WARNING');
 				$this->response->data['btn1']['action'] = 'close';
 			break;
 			case -33:
 			case -100:
 				$this->response->title = $dataRequest->action;
-				$this->response->msg = 'El saldo no esta disponible';
+				$this->response->msg = lang('SERVICES_BALANCE_NO_AVAILABLE');
 				$this->response->icon = lang('GEN_ICON_WARNING');
 				$this->response->data['btn1']['action'] = 'close';
 			break;
 			case -152:
 				$this->response->title = $dataRequest->action;
-				$this->response->msg = 'La transacción no supera el monto mínimo por operación';
+				$this->response->msg = lang('SERVICES_MIN_AMOUNT');
 				$this->response->icon = lang('GEN_ICON_INFO');
 				$this->response->data['btn1']['action'] = 'close';
 			break;
 			case -153:
 				$this->response->title = $dataRequest->action;
-				$this->response->msg = 'Alcanzaste el monto maximo de operaciones semenales';
+				$this->response->msg = lang('SERVICES_MAX_WEEKLY_AMOUNT');
 				$this->response->icon = lang('GEN_ICON_INFO');
 				$this->response->data['btn1']['action'] = 'close';
 			break;
 			case -154:
 				$this->response->title = $dataRequest->action;
-				$this->response->msg = 'Alcanzaste el monto maximo de operaciones diarias';
+				$this->response->msg = lang('SERVICES_MAX_DAILY_AMOUNT');
 				$this->response->icon = lang('GEN_ICON_INFO');
 				$this->response->data['btn1']['action'] = 'close';
 			break;
 			case -155:
 				$this->response->title = $dataRequest->action;
-				$this->response->msg = 'Tu saldo no es suficiente para realizar la transacción';
+				$this->response->msg = lang('SERVICES_NO_BALANCE');
 				$this->response->icon = lang('GEN_ICON_INFO');
 				$this->response->data['btn1']['action'] = 'close';
 			break;
 			case -157:
 				$this->response->title = $dataRequest->action;
-				$this->response->msg = 'Alcanzaste el límite de operaciones diarias';
+				$this->response->msg = lang('SERVICES_MAX_DAILY_OPERATION');
 				$this->response->icon = lang('GEN_ICON_INFO');
 				$this->response->data['btn1']['action'] = 'close';
 			break;
 			case -242:
 				$this->response->title = $dataRequest->action;
-				$this->response->msg = 'Alcanzaste el límite de transacciones';
+				$this->response->msg = lang('SERVICES_MAX_OPERATION');
 				$this->response->icon = lang('GEN_ICON_INFO');
 				$this->response->data['btn1']['action'] = 'close';
 			break;
 			case -267:
 				$this->response->title = $dataRequest->action;
-				$this->response->msg = novoLang('La tarjeta %s ya se encunetra bloqueda.', $cardsList[0]['noTarjeta']);
+				$this->response->msg = novoLang(lang('SERVICES_BLOCKED_CARD'), $cardsList[0]['noTarjeta']);
+				$this->response->icon = lang('GEN_ICON_WARNING');
+				$this->response->data['btn1']['action'] = 'close';
+			break;
+			case -459:
+				$this->response->title = $dataRequest->action;
+				$this->response->msg = lang('SERVICES_PENDING_MEMBER_SHIP');
+				$this->response->icon = lang('GEN_ICON_WARNING');
+				$this->response->data['btn1']['action'] = 'close';
+			break;
+			case -460:
+				$this->response->title = $dataRequest->action;
+				$this->response->msg = lang('SERVICES_USER_BULK_CONFIRM');
+				$this->response->icon = lang('GEN_ICON_WARNING');
+				$this->response->data['btn1']['action'] = 'close';
+			break;
+			case -461:
+				$this->response->title = $dataRequest->action;
+				$this->response->msg = novoLang(lang('SERVICES_CARD_BULK_CONFIRM'), $cardsList[0]['noTarjeta']);
 				$this->response->icon = lang('GEN_ICON_WARNING');
 				$this->response->data['btn1']['action'] = 'close';
 			break;

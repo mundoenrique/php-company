@@ -66,7 +66,7 @@ $(function () {
 
 	const respLoadBulk = {
 		2: function(response) {
-			notiSystem(response.title, response.msg, response.icon, response.data);
+			appMessages(response.title, response.msg, response.icon, response.data);
 		},
 		3: function(response) {
 			var msgModal = '';
@@ -88,7 +88,7 @@ $(function () {
 				}
 			});
 
-			notiSystem(response.title, msgModal, response.icon, response.data);
+			appMessages(response.title, msgModal, response.icon, response.data);
 		}
 	}
 
@@ -163,7 +163,7 @@ $(function () {
 				inputModal+=		'</div>';
 				inputModal+= 		'<div class="help-block"></div>';
 				inputModal+= 	'</form>';
-				notiSystem(lang.BULK_DELETE_TITLE, inputModal, lang.GEN_ICON_INFO, data);
+				appMessages(lang.BULK_DELETE_TITLE, inputModal, lang.GEN_ICON_INFO, data);
 				$('#cancel').on('click', function(e) {
 					e.preventDefault();
 					$('#pending-bulk').find('tr').removeClass('select');

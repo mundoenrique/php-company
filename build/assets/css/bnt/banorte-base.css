@@ -39,6 +39,7 @@ footer.main-footer {
 ========================================================================== */
 
 .h00    { font-size: var(--h00) !important }
+.h01    { font-size: var(--h01) !important }
 .h0     { font-size: var(--h0) !important }
 .h1, h1 { font-size: var(--h1) !important; font-weight: 700 !important; }
 .h2, h2 { font-size: var(--h2) !important }
@@ -2087,6 +2088,8 @@ i[class*=" icon-"]:before {
 .icon-bag:before 					   { content: "\e102"; }
 .icon-book:before    			   { content: "\e0e2"; }
 .icon-email:before           { content: "\e0ba"; }
+.icon-500:before           	 { content: "\e901"; }
+.icon-404:before           	 { content: "\e902"; }
 
 .icon-user{
 	padding-right: 0 !important;
@@ -2110,6 +2113,11 @@ i[class*=" icon-"]:before {
 .logo-banco {
 	width: 260px;
 	height: 67px;
+}
+
+.bug-view {
+	font-size: 4rem !important;
+	opacity: 0.2;
 }
 
 /* Spinner */

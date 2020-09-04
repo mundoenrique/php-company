@@ -73,7 +73,7 @@ $(function () {
 				var codeDefaul = parseInt(lang.GEN_DEFAULT_CODE);
 
 				if (responseTable.code === codeDefaul) {
-					notiSystem(responseTable.title, responseTable.msg, responseTable.icon, responseTable.dataResp);
+					appMessages(responseTable.title, responseTable.msg, responseTable.icon, responseTable.dataResp);
 				}
 
 				access = responseTable.access;
@@ -234,7 +234,7 @@ $(function () {
 				},
 				btn2: {
 					text: lang.GEN_BTN_CANCEL,
-					action: 'close'
+					action: 'destroy'
 				}
 			}
 
@@ -262,7 +262,7 @@ $(function () {
 
 			inputModal += '</form>';
 
-			notiSystem(action, inputModal, lang.GEN_ICON_INFO, data);
+			appMessages(action, inputModal, lang.GEN_ICON_INFO, data);
 		}
 	})
 
@@ -354,7 +354,7 @@ function amountValidate(getAmount, classSelect, action) {
 			}
 		}
 
-		notiSystem(action, lang.GEN_VALID_AMOUNT, lang.GEN_ICON_WARNING, data);
+		appMessages(action, lang.GEN_VALID_AMOUNT, lang.GEN_ICON_WARNING, data);
 		$('#tableServicesMaster').find('thead > tr').removeClass("selected")
 		table.rows().deselect();
 	}
@@ -420,7 +420,6 @@ function sendRequest(action, modalReq, btn) {
 			}
 
 			if (action == lang.GEN_CHECK_BALANCE || action == 'Consulta') {
-
 				cardCheckBalance(response, action)
 			}
 
@@ -431,7 +430,6 @@ function sendRequest(action, modalReq, btn) {
 			if (action == lang.GEN_CREDIT_TO_CARD || action == 'Abono' || action == lang.GEN_DEBIT_TO_CARD || action == 'Cargo') {
 				buildList(response, action)
 			}
-
 		})
 	}
 }
@@ -463,7 +461,7 @@ function cardCheckBalance(response, action) {
 			inputModal += '<h6 class="light mr-1">' + value + '</h6>';
 		})
 
-		notiSystem(action, inputModal, lang.GEN_ICON_INFO, data);
+		appMessages(action, inputModal, lang.GEN_ICON_INFO, data);
 	}
 }
 
@@ -496,7 +494,7 @@ function buildList(response, action) {
 			inputModal += '<h6 class="light mr-1">Tarjeta: ' + value.cardNumber + ' Monto: ' + value.amount + '</h6>';
 		})
 
-		notiSystem(action, inputModal, lang.GEN_ICON_INFO, data);
+		appMessages(action, inputModal, lang.GEN_ICON_INFO, data);
 		$('#accept').addClass('update')
 		$('.update').on('click', function() {
 			dataTableReload(false)

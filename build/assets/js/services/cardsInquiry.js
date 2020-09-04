@@ -110,7 +110,7 @@ $(function () {
 		inputModal += 	'</div>';
 		inputModal += '</form>';
 
-		notiSystem(title, inputModal, lang.GEN_ICON_INFO, data);
+		appMessages(title, inputModal, lang.GEN_ICON_INFO, data);
 	})
 
 	$('#system-info').on('click', '.send-request', function () {
@@ -425,6 +425,6 @@ function evalResult(response, currentAction) {
 			inputModal += '<h6 class="light mr-1">' + value + '</h6>';
 		})
 
-		notiSystem(response.title, inputModal, lang.GEN_ICON_INFO, data);
+		appMessages(response.title, inputModal, lang.GEN_ICON_INFO, data);
 	}
 }

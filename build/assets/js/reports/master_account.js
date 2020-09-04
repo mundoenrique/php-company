@@ -127,7 +127,7 @@ function dialog(e){
 			inputModal+= 		'</div>';
 			inputModal+= 		'<div class="help-block"></div>';
 			inputModal+=	'</form>';
-			notiSystem(titleModalExcel, inputModal, lang.GEN_ICON_INFO, data);
+			appMessages(titleModalExcel, inputModal, lang.GEN_ICON_INFO, data);
 
 			var i=0;
 			var anioB;
@@ -163,7 +163,7 @@ function dialog(e){
 				inputModal+= 		'</div>';
 				inputModal+= 		'<div class="help-block"></div>';
 				inputModal+=	'</form>';
-				notiSystem(titleModalPdf, inputModal, lang.GEN_ICON_INFO, data);
+				appMessages(titleModalPdf, inputModal, lang.GEN_ICON_INFO, data);
 
 				var i=0;
 				var anioB;

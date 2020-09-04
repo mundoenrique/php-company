@@ -102,6 +102,6 @@ function buildList(code, dataResponse, msg, title) {
 			inputModal += '<h6 class="light mr-1">' + key + '</h6>';
 		})
 
-		notiSystem(title, inputModal, lang.GEN_ICON_WARNING, data);
+		appMessages(title, inputModal, lang.GEN_ICON_WARNING, data);
 	}
 };

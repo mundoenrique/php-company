@@ -54,7 +54,7 @@ $(function () {
 									action: 'redirect'
 								}
 							};
-							notiSystem(false, false, icon, data);
+							appMessages(false, false, icon, data);
 							restartFormLogin();
 						}
 					});
@@ -157,7 +157,7 @@ $(function () {
 				optionsData.posAt = "center top";
 				optionsData.posMy = lang.POSTMY_OTP;
 
-				notiSystem(response.title, loginIpMsg, response.icon, optionsData);
+				appMessages(response.title, loginIpMsg, response.icon, optionsData);
 				windowsStyle();
 
 				formcodeOTP = $('#formVerificationOTP');
@@ -195,7 +195,7 @@ $(function () {
 			} else {
 				restartFormLogin();
 			}
-			notiSystem(response.title, response.msg, response.icon, response.data);
+			appMessages(response.title, response.msg, response.icon, response.data);
 			if (btn.action == 'logout') {
 				$('#closed-btn').on('click', function () {
 					$(this)

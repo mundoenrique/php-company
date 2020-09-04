@@ -1,6 +1,22 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-//CARDS INQUIRY
+$lang['SERVICES_BLOCKING_CARD'] = 'La tarjeta %s ha sido %s.';
+$lang['SERVICES_ASSIGNMENT_CARD'] = 'La tarjeta %s ha sido reemplazada por %s.';
+$lang['SERVICES_BALANCE_NO_FOUND'] = 'No fue posible obtener el saldo para';
+$lang['SERVICES_TRANSACTION_DATA'] = 'Datos de la transacción';
+$lang['SERVICES_TRANSACTION_FAIL'] = 'No fue posible realizar la trasacción, por favor intentalo de nuevo.';
+$lang['SERVICES_BALANCE_NO_AVAILABLE'] = 'El saldo no esta disponible.';
+$lang['SERVICES_MIN_AMOUNT'] = 'La transacción no supera el monto mínimo por operación.';
+$lang['SERVICES_MAX_WEEKLY_AMOUNT'] = 'Alcanzaste el monto máximo de operaciones semenales.';
+$lang['SERVICES_MAX_DAILY_AMOUNT'] = 'Alcanzaste el monto máximo de operaciones diarias.';
+$lang['SERVICES_MAX_OPERATION'] = 'Alcanzaste el límite de transacciones.';
+$lang['SERVICES_MAX_WEEKLY_OPERATION'] = 'Alcanzaste el límite de operaciones semanales.';
+$lang['SERVICES_MAX_DAILY_OPERATION'] = 'Alcanzaste el límite de operaciones diarias.';
+$lang['SERVICES_NO_BALANCE'] = 'Tu saldo no es suficiente para realizar la transacción.';
+$lang['SERVICES_BLOCKED_CARD'] = 'La tarjeta %s ya se encunetra bloqueda.';
+$lang['SERVICES_PENDING_MEMBER_SHIP'] = 'El empleado tiene una afiliación pendiente';
+$lang['SERVICES_USER_BULK_CONFIRM'] = 'El empleado esta en un lote por confirmar';
+$lang['SERVICES_CARD_BULK_CONFIRM'] = 'La tarjeta %s esta en un lote por comfirmar.';
 $lang['SERVICES_INQUIRY_OPTIONS'] = [
 	'ACTUALIZAR_DATOS' => 'UPDATE_DATA',
 	'CONSULTA_SALDO_TARJETA' => 'INQUIRY_BALANCE',
