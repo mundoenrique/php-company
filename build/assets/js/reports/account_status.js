@@ -74,7 +74,7 @@ function searchStatusAccount(passData){
 			$.each(dataResponse.accounts, function (key, value, index) {
 				var table, body = '';
 				table= '<div class=""><div class="flex ml-4 py-3 flex-auto">'
-				table+=	'<p class="mr-5 h5 semibold tertiary">'+ lang.GEN_TABLE_DNI + ':<span class="light text">'+ dataResponse.accounts[key].id +'</span></p><p class="mr-5 h5 semibold tertiary">Tarjeta: <span class="light text">'+ dataResponse.accounts[key].account +'</span></p><p class="mr-5 h5 semibold tertiary">Nombre: <span class="light text">'+ dataResponse.accounts[key].client +'</span></p></div>'
+				table+=	'<p class="mr-5 h5 semibold tertiary">'+ lang.GEN_TABLE_DNI + ': <span class="light text">'+ dataResponse.accounts[key].id +'</span></p><p class="mr-5 h5 semibold tertiary">Tarjeta: <span class="light text">'+ dataResponse.accounts[key].account +'</span></p><p class="mr-5 h5 semibold tertiary">Nombre: <span class="light text">'+ dataResponse.accounts[key].client +'</span></p></div>'
 				table+= 	'<table id="resultsAccount'+  key + '" class="cell-border h6 display responsive w-100">';
 				table+= 	'<thead class="bg-primary secondary regular">';
 				table+= 		'<tr class="" style="margin-left: 0px;">';
