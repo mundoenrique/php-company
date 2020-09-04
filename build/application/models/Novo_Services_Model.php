@@ -223,7 +223,8 @@ class Novo_Services_Model extends NOVO_Model {
 				}
 
 				if ($dataRequest->action == lang('GEN_CARD_ASSIGNMENT')) {
-					$this->response->msg =  novoLang('La tarjeta %s ha sido reemplazada por %s.', [$cardsList[0]['noTarjeta'], $cardsList[0]['noTarjetaAsig']]);
+					$maskCards = maskString($cardsList[0]['noTarjetaAsig'], 4, 6);
+					$this->response->msg =  novoLang('La tarjeta %s ha sido reemplazada por %s.', [$cardsList[0]['noTarjeta'], $maskCards]);
 				}
 
 				if ($dataRequest->action == lang('GEN_CHECK_BALANCE') || $dataRequest->action == 'Consulta') {
