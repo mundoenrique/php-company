@@ -303,7 +303,7 @@ function dialogE(e){
   inputModal+=    '</div>';
   inputModal+=  '</form>';
 
-	notiSystem(titleModal, inputModal, lang.GEN_ICON_INFO, data);
+	appMessages(titleModal, inputModal, lang.GEN_ICON_INFO, data);
 	};
 
 function format(user) {

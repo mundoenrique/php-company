@@ -148,7 +148,7 @@ $(function () {
 				inputModal+= 		'</div>';
 				inputModal+= 		'<div class="help-block"></div>';
 				inputModal+=	'</form>';
-				notiSystem(titleModal, inputModal, lang.GEN_ICON_INFO, data);
+				appMessages(titleModal, inputModal, lang.GEN_ICON_INFO, data);
 				$('#'+currentIdBtn).on('click', function(e) {
 					e.preventDefault();
 					form = $('#delete-bulk-form');
@@ -263,7 +263,7 @@ function SignDeleteBulk(currentForm, action, btnId, passwordInput, modalReq) {
 			if(response.code == 0 && where == 'AuthorizeBulk') {
 				$(location).attr('href', response.data);
 			} else {
-				notiSystem(response.title, response.msg, response.icon, response.data);
+				appMessages(response.title, response.msg, response.icon, response.data);
 				btnAction.html(btnText);
 				insertFormInput(false);
 				passwordInput.val('');

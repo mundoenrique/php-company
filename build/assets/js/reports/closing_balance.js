@@ -203,7 +203,7 @@ function closingBudgets(dataForm) {
 				var codeDefaul = parseInt(lang.GEN_DEFAULT_CODE);
 
 				if (responseTable.code === codeDefaul) {
-					notiSystem(responseTable.title, responseTable.msg, responseTable.icon, responseTable.dataResp);
+					appMessages(responseTable.title, responseTable.msg, responseTable.icon, responseTable.dataResp);
 				}
 				access = responseTable.access;
 				return JSON.stringify(responseTable);

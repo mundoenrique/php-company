@@ -29,7 +29,7 @@ function finishSession() {
 			action: 'close'
 		}
 	}
-	notiSystem(lang.GEN_SYSTEM_NAME, lang.GEN_FINISH_TEXT, lang.GEN_ICON_INFO, data);
+	appMessages(lang.GEN_SYSTEM_NAME, lang.GEN_FINISH_TEXT, lang.GEN_ICON_INFO, data);
 	$('#accept').attr('id', 'keep-session');
 	resetTimesession = setTimeout(function() {
 		$('#keep-session')

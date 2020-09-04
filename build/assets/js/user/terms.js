@@ -19,6 +19,6 @@ $(function() {
 		$('#cancel').on('click', function(e) {
 			$('#terms').prop('checked', false);
 		})
-		notiSystem(title, msg, icon, data);
+		appMessages(title, msg, icon, data);
 	});
 });
