@@ -35,12 +35,12 @@
 							<div class="form-group col-4 col-xl-3">
 								<label for="orderNumber"><?= lang('GEN_ORDER_TITLE'); ?></label>
 								<input id="orderNumber" name="orderNumber" class="form-control h5 select-group" type="text" autocomplete="off" disabled>
-								<div class="help-block"></div>
+								<div class="help-block mb-1"></div>
 							</div>
 							<div class="form-group col-4 col-xl-3">
 								<label for="bulkNumber"><?= lang('GEN_TABLE_BULK_NUMBER'); ?></label>
 								<input id="bulkNumber" name="bulkNumber" class="form-control h5 select-group" type="text" autocomplete="off" disabled>
-								<div class="help-block"></div>
+								<div class="help-block mb-1"></div>
 							</div>
 							<?php if(lang('CONF_INQUIRY_DOCTYPE') == 'ON'): ?>
 							<div class="form-group col-4 col-xl-3">
@@ -50,18 +50,18 @@
 									<option value="<?= $key ?>"><?= $value ?></option>
 									<?php endforeach; ?>
 								</select>
-								<div class="help-block"></div>
+								<div class="help-block mb-1"></div>
 							</div>
 							<?php endif;?>
 							<div class="form-group col-4 col-xl-3">
 								<label for="idNumberP">Nro documento</label>
 								<input id="idNumberP" name="idNumberP" class="form-control h5 select-group" type="text" autocomplete="off" disabled>
-								<div class="help-block"></div>
+								<div class="help-block mb-1"></div>
 							</div>
 							<div class="form-group col-4 col-xl-3">
 								<label for="cardNumberP"><?= lang('GEN_CARD_NUMBER'); ?></label>
 								<input id="cardNumberP" name="cardNumberP" class="form-control h5 select-group" type="text" autocomplete="off" disabled>
-								<div class="help-block"></div>
+								<div class="help-block mb-1"></div>
 							</div>
 							<div class="flex col-xl-auto items-center ml-auto mr-2">
 								<button id="searchCardsBtn" class="btn btn-primary btn-small btn-loading">

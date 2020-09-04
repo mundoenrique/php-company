@@ -182,7 +182,7 @@ $(function () {
 
 					if (access.TRAASG) {
 						options += '<button class="btn mx-1 px-0" title="' + lang.GEN_CARD_ASSIGNMENT + '" data-toggle="tooltip" amount="0">';
-						options += '<i class="icon icon-card-allocation" aria-hidden="true"></i>';
+						options += '<i class="icon icon-deliver-card" aria-hidden="true"></i>';
 						options += '</button>';
 					}
 
@@ -238,8 +238,8 @@ $(function () {
 				}
 			}
 
-			inputModal =	'<form id="password-modal" name="password-modal" onsubmit="return false;">';
-			inputModal +=		'<div class="form-group col-auto">';
+			inputModal =	'<form id="password-modal" name="password-modal" class="row col-auto p-0" onsubmit="return false;">';
+			inputModal +=		'<div class="form-group col-12">';
 			inputModal += 		'<div class="input-group">';
 			inputModal += 			'<input class="form-control pwd-input pwd" type="password" name="password" autocomplete="off"';
 			inputModal += 				'placeholder="' + lang.GEN_PLACE_PASSWORD + '">';
@@ -251,7 +251,7 @@ $(function () {
 			inputModal += 	'</div>';
 
 			if (action == lang.GEN_CARD_ASSIGNMENT) {
-				inputModal += 	'<div class="form-group col-auto">';
+				inputModal += 	'<div class="form-group col-12">';
 				inputModal += 		'<div class="input-group">';
 				inputModal += 			'<input class="form-control" type="text" name="cardNumber" autocomplete="off"';
 				inputModal += 			'placeholder="' + lang.GEN_TABLE_CARD_NUMBER + '" req="yes">';
