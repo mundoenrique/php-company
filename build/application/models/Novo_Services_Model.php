@@ -329,6 +329,24 @@ class Novo_Services_Model extends NOVO_Model {
 				$this->response->icon = lang('GEN_ICON_WARNING');
 				$this->response->data['btn1']['action'] = 'close';
 			break;
+			case -459:
+				$this->response->title = $dataRequest->action;
+				$this->response->msg = 'El empleado tiene una afiliación pendiente';
+				$this->response->icon = lang('GEN_ICON_WARNING');
+				$this->response->data['btn1']['action'] = 'close';
+			break;
+			case -460:
+				$this->response->title = $dataRequest->action;
+				$this->response->msg = 'El empleado esta en un lote por confirmar';
+				$this->response->icon = lang('GEN_ICON_WARNING');
+				$this->response->data['btn1']['action'] = 'close';
+			break;
+			case -461:
+				$this->response->title = $dataRequest->action;
+				$this->response->msg = novoLang('La tarjeta %s esta en un lote por comfirmar.', $cardsList[0]['noTarjeta']);
+				$this->response->icon = lang('GEN_ICON_WARNING');
+				$this->response->data['btn1']['action'] = 'close';
+			break;
 		}
 
 		return $this->responseToTheView('callWs_ActionMasterAccount');

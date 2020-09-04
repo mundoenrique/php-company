@@ -234,7 +234,7 @@ $(function () {
 				},
 				btn2: {
 					text: lang.GEN_BTN_CANCEL,
-					action: 'close'
+					action: 'destroy'
 				}
 			}
 
@@ -420,7 +420,6 @@ function sendRequest(action, modalReq, btn) {
 			}
 
 			if (action == lang.GEN_CHECK_BALANCE || action == 'Consulta') {
-
 				cardCheckBalance(response, action)
 			}
 
@@ -431,7 +430,6 @@ function sendRequest(action, modalReq, btn) {
 			if (action == lang.GEN_CREDIT_TO_CARD || action == 'Abono' || action == lang.GEN_DEBIT_TO_CARD || action == 'Cargo') {
 				buildList(response, action)
 			}
-
 		})
 	}
 }
