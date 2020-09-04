@@ -262,7 +262,7 @@ $(function () {
 
 			inputModal += '</form>';
 
-			appMessages(action, inputModal, lang.GEN_ICON_INFO, data);
+			appMessages(action, inputModal, lang.CONF_ICON_INFO, data);
 		}
 	})
 
@@ -354,7 +354,7 @@ function amountValidate(getAmount, classSelect, action) {
 			}
 		}
 
-		appMessages(action, lang.GEN_VALID_AMOUNT, lang.GEN_ICON_WARNING, data);
+		appMessages(action, lang.GEN_VALID_AMOUNT, lang.CONF_ICON_WARNING, data);
 		$('#tableServicesMaster').find('thead > tr').removeClass("selected")
 		table.rows().deselect();
 	}
@@ -461,7 +461,7 @@ function cardCheckBalance(response, action) {
 			inputModal += '<h6 class="light mr-1">' + value + '</h6>';
 		})
 
-		appMessages(action, inputModal, lang.GEN_ICON_INFO, data);
+		appMessages(action, inputModal, lang.CONF_ICON_INFO, data);
 	}
 }
 
@@ -494,7 +494,7 @@ function buildList(response, action) {
 			inputModal += '<h6 class="light mr-1">Tarjeta: ' + value.cardNumber + ' Monto: ' + value.amount + '</h6>';
 		})
 
-		appMessages(action, inputModal, lang.GEN_ICON_INFO, data);
+		appMessages(action, inputModal, lang.CONF_ICON_INFO, data);
 		$('#accept').addClass('update')
 		$('.update').on('click', function() {
 			dataTableReload(false)

@@ -3,7 +3,7 @@ $(function() {
 	$('#terms').on('click', function() {
 		title = lang.GEN_SYSTEM_NAME;
 		msg = lang.GEN_ACCEPT_TERMS;
-		icon = lang.GEN_ICON_INFO;
+		icon = lang.CONF_ICON_INFO;
 		data = {
 			btn1: {
 				text: lang.GEN_BTN_ACCEPT,

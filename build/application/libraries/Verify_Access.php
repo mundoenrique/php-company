@@ -91,7 +91,7 @@ class Verify_Access {
 		$this->responseDefect->code = lang('GEN_DEFAULT_CODE');
 		$this->responseDefect->title = lang('GEN_SYSTEM_NAME');
 		$this->responseDefect->msg = lang('RESP_VALIDATION_INPUT');
-		$this->responseDefect->icon = lang('GEN_ICON_WARNING');
+		$this->responseDefect->icon = lang('CONF_ICON_WARNING');
 		$this->responseDefect->data = [
 			'btn1'=> [
 				'text'=> lang('GEN_BTN_ACCEPT'),

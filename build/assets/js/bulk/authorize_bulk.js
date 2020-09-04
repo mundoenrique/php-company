@@ -5,8 +5,6 @@ $(function () {
 	var sign = getPropertyOfElement('sign', '#sign-bulk');
 	var auth = getPropertyOfElement('auth', '#authorize-bulk');
 	var modalReq = {};
-	var signBulkDtn = $('#sign-bulk-btn');
-	var delSignBulkDtn = $('#del-sign-bulk-btn');
 
 	signBulk = $('#sign-bulk').DataTable({
     "ordering": false,
