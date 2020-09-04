@@ -167,7 +167,7 @@ $(function () {
 				inputModal+=		'</div>';
 				inputModal+= 		'<div class="help-block"></div>';
 				inputModal+= 	'</form>';
-				appMessages('Anular orden de servicio', inputModal, lang.GEN_ICON_INFO, data);
+				appMessages('Anular orden de servicio', inputModal, lang.CONF_ICON_INFO, data);
 				deleteBulk(oldID, inputSelected);
 
 				$('#cancel').on('click', function (e) {

@@ -176,7 +176,7 @@ class Novo_Reports_Model extends NOVO_Model {
 
 		switch($this->isResponseRc) {
 			case 0:
-				$this->response->icon = lang('GEN_ICON_DANGER');
+				$this->response->icon = lang('CONF_ICON_DANGER');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_NO_FILE_EXIST');
 				$this->response->data['btn1']['action'] = 'close';
@@ -191,7 +191,7 @@ class Novo_Reports_Model extends NOVO_Model {
 				}
 				break;
 			case -30:
-				$this->response->icon = lang('GEN_ICON_INFO');
+				$this->response->icon = lang('CONF_ICON_INFO');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_NO_CARDS');
 				$this->response->data['btn1']['action'] = 'close';
@@ -227,7 +227,7 @@ class Novo_Reports_Model extends NOVO_Model {
 
 		switch($this->isResponseRc) {
 			case 0:
-				$this->response->icon = lang('GEN_ICON_DANGER');
+				$this->response->icon = lang('CONF_ICON_DANGER');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_NO_FILE_EXIST');
 				$this->response->data['btn1']['action'] = 'close';
@@ -242,7 +242,7 @@ class Novo_Reports_Model extends NOVO_Model {
 				}
 				break;
 			case -30:
-				$this->response->icon = lang('GEN_ICON_INFO');
+				$this->response->icon = lang('CONF_ICON_INFO');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_NO_MOVES_ENTERPRISE');
 				$this->response->data['btn1']['action'] = 'close';
@@ -278,7 +278,7 @@ class Novo_Reports_Model extends NOVO_Model {
 
 		switch($this->isResponseRc) {
 			case 0:
-				$this->response->icon = lang('GEN_ICON_DANGER');
+				$this->response->icon = lang('CONF_ICON_DANGER');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_NO_FILE_EXIST');
 				$this->response->data['btn1']['action'] = 'close';
@@ -294,7 +294,7 @@ class Novo_Reports_Model extends NOVO_Model {
 				break;
 			case -30:
 			case -150:
-				$this->response->icon = lang('GEN_ICON_INFO');
+				$this->response->icon = lang('CONF_ICON_INFO');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_NO_MOVES_ENTERPRISE');
 				$this->response->data['btn1']['action'] = 'close';
@@ -331,7 +331,7 @@ class Novo_Reports_Model extends NOVO_Model {
 
 		switch($this->isResponseRc) {
 			case 0:
-				$this->response->icon = lang('GEN_ICON_DANGER');
+				$this->response->icon = lang('CONF_ICON_DANGER');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_NO_FILE_EXIST');
 				$this->response->data['btn1']['action'] = 'close';
@@ -346,7 +346,7 @@ class Novo_Reports_Model extends NOVO_Model {
 				}
 				break;
 			case -423:
-				$this->response->icon = lang('GEN_ICON_INFO');
+				$this->response->icon = lang('CONF_ICON_INFO');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_NO_CLIENT_STATEMENT');
 				$this->response->data['btn1']['action'] = 'close';
@@ -433,7 +433,7 @@ class Novo_Reports_Model extends NOVO_Model {
 				break;
 			case -30:
 			case -150:
-				$this->response->icon = lang('GEN_ICON_INFO');
+				$this->response->icon = lang('CONF_ICON_INFO');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_FOUND_CARD');
 				$this->response->data['btn1']['action'] = 'close';
@@ -506,7 +506,7 @@ class Novo_Reports_Model extends NOVO_Model {
 				break;
 			case -30:
 			case -150:
-				$this->response->icon = lang('GEN_ICON_INFO');
+				$this->response->icon = lang('CONF_ICON_INFO');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_NO_CARDS_PEOPLE');
 				$this->response->data['btn1']['action'] = 'close';
@@ -544,7 +544,7 @@ class Novo_Reports_Model extends NOVO_Model {
 
 		switch($this->isResponseRc) {
 			case 0:
-				$this->response->icon = lang('GEN_ICON_DANGER');
+				$this->response->icon = lang('CONF_ICON_DANGER');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_NO_FILE_EXIST');
 				$this->response->data['btn1']['action'] = 'close';
@@ -561,7 +561,7 @@ class Novo_Reports_Model extends NOVO_Model {
 			case -30:
 			case -150:
 				$this->session->set_flashdata('cardsPeople', $this->session->flashdata('cardsPeople'));
-				$this->response->icon = lang('GEN_ICON_INFO');
+				$this->response->icon = lang('CONF_ICON_INFO');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_NO_MOVES_ENTERPRISE');
 				$this->response->data['btn1']['action'] = 'close';
@@ -595,7 +595,7 @@ class Novo_Reports_Model extends NOVO_Model {
 
 		switch($this->isResponseRc) {
 			case 0:
-				$this->response->icon = lang('GEN_ICON_DANGER');
+				$this->response->icon = lang('CONF_ICON_DANGER');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_NO_FILE_EXIST');
 				$this->response->data['btn1']['action'] = 'close';
@@ -611,7 +611,7 @@ class Novo_Reports_Model extends NOVO_Model {
 				break;
 			case -30:
 			case -150:
-				$this->response->icon = lang('GEN_ICON_INFO');
+				$this->response->icon = lang('CONF_ICON_INFO');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = novoLang(lang('REPORTS_NO_GMF_FOR_YEAR'), $dataRequest->dateG);
 				$this->response->data['btn1']['action'] = 'close';
@@ -779,7 +779,7 @@ class Novo_Reports_Model extends NOVO_Model {
 
 			case -3:
 				$this->response->code = 4;
-				$this->response->icon = lang('GEN_ICON_DANGER');
+				$this->response->icon = lang('CONF_ICON_DANGER');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_NO_BUDGET');
 				$this->response->data['btn1']['action'] = 'close';
@@ -866,7 +866,7 @@ class Novo_Reports_Model extends NOVO_Model {
 
 			case -3:
 				$this->response->code = 4;
-				$this->response->icon = lang('GEN_ICON_DANGER');
+				$this->response->icon = lang('CONF_ICON_DANGER');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_NO_BUDGET');
 				$this->response->data['btn1']['action'] = 'close';
@@ -914,7 +914,7 @@ class Novo_Reports_Model extends NOVO_Model {
 
 			case -3:
 				$this->response->code = 4;
-				$this->response->icon = lang('GEN_ICON_DANGER');
+				$this->response->icon = lang('CONF_ICON_DANGER');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_NO_BUDGET');
 				$this->response->data['btn1']['action'] = 'close';
@@ -964,7 +964,7 @@ class Novo_Reports_Model extends NOVO_Model {
 
 			case -3:
 				$this->response->code = 4;
-				$this->response->icon = lang('GEN_ICON_DANGER');
+				$this->response->icon = lang('CONF_ICON_DANGER');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_NO_FILE');
 				$this->response->data['btn1']['action'] = 'close';
@@ -972,7 +972,7 @@ class Novo_Reports_Model extends NOVO_Model {
 
 			default:
 			$this->response->code = 4;
-			$this->response->icon = lang('GEN_ICON_DANGER');
+			$this->response->icon = lang('CONF_ICON_DANGER');
 			$this->response->title = lang('REPORTS_TITLE');
 			$this->response->msg = lang('REPORTS_NO_FILE_CONSOLID');
 			$this->response->data['btn1']['action'] = 'close';
@@ -1020,7 +1020,7 @@ class Novo_Reports_Model extends NOVO_Model {
 
 			case -3:
 				$this->response->code = 4;
-				$this->response->icon = lang('GEN_ICON_DANGER');
+				$this->response->icon = lang('CONF_ICON_DANGER');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_NO_FILE');
 				$this->response->data['btn1']['action'] = 'close';
@@ -1028,7 +1028,7 @@ class Novo_Reports_Model extends NOVO_Model {
 
 			default:
 			$this->response->code = 4;
-			$this->response->icon = lang('GEN_ICON_DANGER');
+			$this->response->icon = lang('CONF_ICON_DANGER');
 			$this->response->title = lang('REPORTS_TITLE');
 			$this->response->msg = lang('REPORTS_NO_FILE_CONSOLID');
 			$this->response->data['btn1']['action'] = 'close';
@@ -1241,7 +1241,7 @@ class Novo_Reports_Model extends NOVO_Model {
 
 			case -3:
 				$this->response->code = 4;
-				$this->response->icon = lang('GEN_ICON_DANGER');
+				$this->response->icon = lang('CONF_ICON_DANGER');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_NO_BUDGET');
 				$this->response->data['btn1']['action'] = 'close';
@@ -1379,7 +1379,7 @@ class Novo_Reports_Model extends NOVO_Model {
 				$this->response->data['accounts'] = $dataAccount;
 			break;
 			case -444:
-				$this->response->icon = lang('GEN_ICON_DANGER');
+				$this->response->icon = lang('CONF_ICON_DANGER');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_NO_REGISTRY_FOUND');
 				$this->response->data['btn1']['action'] = 'close';
@@ -1435,7 +1435,7 @@ class Novo_Reports_Model extends NOVO_Model {
 				$this->response->data = (array)$response;
 			break;
 			case -3:
-				$this->response->icon = lang('GEN_ICON_DANGER');
+				$this->response->icon = lang('CONF_ICON_DANGER');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_NO_FILE_CONSOLID');
 				$this->response->data['btn1']['action'] = 'close';
@@ -1487,7 +1487,7 @@ class Novo_Reports_Model extends NOVO_Model {
 				$this->response->data = (array)$response;
 			break;
 			case -3:
-				$this->response->icon = lang('GEN_ICON_DANGER');
+				$this->response->icon = lang('CONF_ICON_DANGER');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_NO_FILE_CONSOLID');
 				$this->response->data['btn1']['action'] = 'close';

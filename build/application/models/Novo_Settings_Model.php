@@ -59,7 +59,7 @@ class Novo_Settings_Model extends NOVO_Model {
 
 		if($this->isResponseRc != 0 && $this->response->code == 1) {
 			$this->response->title = lang('GEN_USER_TITLE');
-			$this->response->icon = lang('GEN_ICON_WARNING');
+			$this->response->icon = lang('CONF_ICON_WARNING');
 			$this->response->data = [
 				'btn1'=> [
 					'action'=> 'close'
@@ -98,7 +98,7 @@ class Novo_Settings_Model extends NOVO_Model {
 			case 0:
 				$this->response->code = 0;
 				$this->response->msg = lang('RESP_EMAIL_CHANGED');
-				$this->response->icon = lang('GEN_ICON_SUCCESS');
+				$this->response->icon = lang('CONF_ICON_SUCCESS');
 				$this->response->data = [
 					'btn1'=> [
 						'text'=> lang('GEN_BTN_CONTINUE'),
@@ -143,7 +143,7 @@ class Novo_Settings_Model extends NOVO_Model {
 			case 0:
 				$this->response->code = 0;
 				$this->response->msg = lang('RESP_EMAIL_CHANGED');
-				$this->response->icon = lang('GEN_ICON_SUCCESS');
+				$this->response->icon = lang('CONF_ICON_SUCCESS');
 				$enter = $response;
 				$this->response->data = $enter;
 				break;
@@ -159,7 +159,7 @@ class Novo_Settings_Model extends NOVO_Model {
 
 		if($this->isResponseRc != 0 && $this->response->code == 1) {
 			$this->response->title = lang('GEN_USER_TITLE');
-			$this->response->icon = lang('GEN_ICON_WARNING');
+			$this->response->icon = lang('CONF_ICON_WARNING');
 			$this->response->data = [
 				'btn1'=> [
 					'action'=> 'close'
@@ -196,7 +196,7 @@ class Novo_Settings_Model extends NOVO_Model {
 			case 0:
 				$this->response->code = 0;
 				$this->response->msg = lang('RESP_EMAIL_CHANGED');
-				$this->response->icon = lang('GEN_ICON_SUCCESS');
+				$this->response->icon = lang('CONF_ICON_SUCCESS');
 				$this->response->data = [
 					'btn1'=> [
 						'text'=> lang('GEN_BTN_CONTINUE'),
@@ -217,7 +217,7 @@ class Novo_Settings_Model extends NOVO_Model {
 
 		if($this->isResponseRc != 0 && $this->response->code == 1) {
 			$this->response->title = lang('GEN_EMAIL_CHANGE_TITLE');
-			$this->response->icon = lang('GEN_ICON_WARNING');
+			$this->response->icon = lang('CONF_ICON_WARNING');
 			$this->response->data = [
 				'btn1'=> [
 					'action'=> 'close'
@@ -258,7 +258,7 @@ class Novo_Settings_Model extends NOVO_Model {
 			case 0:
 				$this->response->code = 0;
 				$this->response->msg = lang('RESP_EMAIL_CHANGED');
-				$this->response->icon = lang('GEN_ICON_SUCCESS');
+				$this->response->icon = lang('CONF_ICON_SUCCESS');
 				$this->response->data = [
 					'btn1'=> [
 						'text'=> lang('GEN_BTN_CONTINUE'),
@@ -279,7 +279,7 @@ class Novo_Settings_Model extends NOVO_Model {
 
 		if($this->isResponseRc != 0 && $this->response->code == 1) {
 			$this->response->title = lang('GEN_EMAIL_CHANGE_TITLE');
-			$this->response->icon = lang('GEN_ICON_WARNING');
+			$this->response->icon = lang('CONF_ICON_WARNING');
 			$this->response->data = [
 				'btn1'=> [
 					'action'=> 'close'
@@ -332,7 +332,7 @@ class Novo_Settings_Model extends NOVO_Model {
 			break;
 			default:
 					$this->response->code = 4;
-					$this->response->icon = lang('GEN_ICON_WARNING');
+					$this->response->icon = lang('CONF_ICON_WARNING');
 					$this->response->msg = lang('GEN_WARNING_DOWNLOAD_FILE');
 					$this->response->data = [
 						'btn1'=> [
