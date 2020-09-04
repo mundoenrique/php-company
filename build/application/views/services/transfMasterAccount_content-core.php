@@ -24,12 +24,12 @@
 				<span class="line-text mb-2 h4 semibold primary">Recarga cuenta/tarjeta concentradora </span>
 				<div class="flex my-2 px-5">
 					<form id="#" method="post" class="w-100">
-						<p class="mr-5 mb-3 sh5 semibold tertiary">Saldo disponible <span class="light text">10,393,054.68</span></p>
+						<p class="mr-5 mb-3 sh5 semibold tertiary">Saldo disponible <span class="light text"></span></p>
 
 						<div class="row">
 							<div class="form-group col-3">
 								<label for="account" id="account"><?= lang('GEN_ACCOUNT'); ?></label>
-								<span id="account-user" class="form-control px-1" readonly="readonly">******1426</span>
+								<span id="account-user" class="form-control px-1" readonly="readonly"></span>
 								<div class="help-block"></div>
 							</div>
 
@@ -117,8 +117,8 @@
 					<div class="center mx-1">
 						<div class="flex ml-4 py-3 flex-auto justify-between">
 							<p class="mr-5 h5 semibold tertiary">Saldo disponible: <span id="balance-aviable" class="light text"></span></p>
-							<p class="mr-5 mb-0 h5 semibold tertiary">Comisión por transacción: <span id="cost-trans" class="light text">0</span></p>
-							<p class="mr-5 mb-0 h5 semibold tertiary">Comisión por Consultar saldo: <span id="cost-inquiry" class="light text">0</span></p>
+							<p class="mr-5 mb-0 h5 semibold tertiary">Comisión por transacción: <span id="cost-trans" class="light text"></span></p>
+							<p class="mr-5 mb-0 h5 semibold tertiary">Comisión por Consultar saldo: <span id="cost-inquiry" class="light text"></span></p>
 						</div>
 
 						<table id="tableServicesMaster" class="cell-border h6 display w-100">
