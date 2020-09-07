@@ -29,9 +29,9 @@ class Novo_Services_Model extends NOVO_Model {
 		$this->dataRequest->idOperation = 'buscarTransferenciaM';
 		$this->dataRequest->rifEmpresa = $this->session->enterpriseInf->idFiscal;
 		$this->dataRequest->idProducto = $this->session->productInf->productPrefix;
-		$idPersonal = $dataRequest->idNumber;
-		if(lang('CONF_INPUT_UPPERCASE') == 'OFF'){
-			$idPersonal = strtoupper($dataRequest->idNumber);
+		$idPersonal = strtoupper($dataRequest->idNumber);
+		if(lang('CONF_INPUT_UPPERCASE') == 'ON'){
+			$idPersonal = $dataRequest->idNumber;
 		}
 		$this->dataRequest->listaTarjetas = [
 			[
