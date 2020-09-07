@@ -25,6 +25,7 @@ $lang['VALIDATE_INITIAL_DATE'] = 'Indica fecha inicial';
 $lang['VALIDATE_FINAL_DATE'] = 'Indica fecha final';
 $lang['VALIDATE_ORDER_STATUS'] = 'Selecciona un estado de orden';
 $lang['VALIDATE_SELECTED_DATE'] = 'Selecciona una fecha válida mm/aa';
+$lang['VALIDATE_SELECTED_MONTH_YEAR'] = 'Selecciona una fecha válida mm/aaaa';
 $lang['VALIDATE_SELECTED_YEAR'] = 'Selecciona un año disponible';
 $lang['VALIDATE_ID_TYPE'] = 'Selecciona un tipo de identificación';
 $lang['VALIDATE_REG_ID_NUMBER'] = '^[0-9]+$';

@@ -165,7 +165,7 @@ function callNovoCore(verb, who, where, request, _response_) {
 			code: codeResp,
 			title: lang.GEN_SYSTEM_NAME,
 			msg: lang.GEN_MESSAGE_SYSTEM,
-			icon: lang.GEN_ICON_DANGER,
+			icon: lang.CONF_ICON_DANGER,
 			data: {
 				btn1: {
 					text: lang.GEN_BTN_ACCEPT,

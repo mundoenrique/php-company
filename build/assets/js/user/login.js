@@ -47,7 +47,7 @@ $(function () {
 						}
 					}, function (token) {
 						if (!token) {
-							icon = lang.GEN_ICON_WARNING;
+							icon = lang.CONF_ICON_WARNING;
 							data = {
 								btn1: {
 									link: 'inicio',
@@ -133,7 +133,6 @@ $(function () {
 				var oldID = $('#accept').attr('id');
 				var optionsData = response.data;
 				$('#accept').attr('id', 'send-otp-btn');
-				btn = response.data.btn1;
 
 				loginIpMsg ='<form id="formVerificationOTP" name="formVerificationOTP" class="mr-2" method="post" onsubmit="return false;">';
 				loginIpMsg+='<p class="pt-0 p-0">'+response.msg+'</p>';

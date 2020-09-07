@@ -146,7 +146,7 @@ $(function () {
 				inputModal+= 		'</div>';
 				inputModal+= 		'<div class="help-block"></div>';
 				inputModal+=	'</form>';
-				appMessages(titleModal, inputModal, lang.GEN_ICON_INFO, data);
+				appMessages(titleModal, inputModal, lang.CONF_ICON_INFO, data);
 				$('#'+currentIdBtn).on('click', function(e) {
 					e.preventDefault();
 					form = $('#delete-bulk-form');

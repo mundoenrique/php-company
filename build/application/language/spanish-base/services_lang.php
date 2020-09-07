@@ -17,6 +17,7 @@ $lang['SERVICES_BLOCKED_CARD'] = 'La tarjeta %s ya se encunetra bloqueda.';
 $lang['SERVICES_PENDING_MEMBER_SHIP'] = 'El empleado tiene una afiliación pendiente';
 $lang['SERVICES_USER_BULK_CONFIRM'] = 'El empleado esta en un lote por confirmar';
 $lang['SERVICES_CARD_BULK_CONFIRM'] = 'La tarjeta %s esta en un lote por comfirmar.';
+$lang['SERVICES_CARD_BULK_AFFILIATED'] = 'La tarjeta %s ya fue afiliada o esta por afiliar en un lote confirmado.';
 $lang['SERVICES_INQUIRY_OPTIONS'] = [
 	'ACTUALIZAR_DATOS' => 'UPDATE_DATA',
 	'CONSULTA_SALDO_TARJETA' => 'INQUIRY_BALANCE',

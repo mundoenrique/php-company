@@ -9,6 +9,12 @@ $lang['CONF_SCORE_CAPTCHA'] = [
 	'testing' => 0,
 	'production' => 0
 ];
+//ICONS MODALS
+$lang['CONF_ICON'] = '';
+$lang['CONF_ICON_SUCCESS'] = '';
+$lang['CONF_ICON_INFO'] = '';
+$lang['CONF_ICON_WARNING'] = '';
+$lang['CONF_ICON_DANGER'] = '';
 //VALIDATE FORMS
 $lang['CONF_VALID_ERROR'] = 'validate-error';
 $lang['CONF_VALID_VALID'] = 'success';

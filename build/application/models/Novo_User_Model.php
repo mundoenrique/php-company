@@ -157,7 +157,7 @@ class Novo_User_Model extends NOVO_Model {
 			case -262:
 				$this->response->code = 3;
 				$this->response->msg = lang('RESP_NO_PERMISSIONS');
-				$this->response->icon = lang('GEN_ICON_INFO');
+				$this->response->icon = lang('CONF_ICON_INFO');
 				$this->response->data = [
 					'btn1'=> [
 						'action'=> 'close'
@@ -167,7 +167,7 @@ class Novo_User_Model extends NOVO_Model {
 			case -28:
 				$this->response->code = 3;
 				$this->response->msg = lang('RESP_INCORRECTLY_CLOSED');
-				$this->response->icon = lang('GEN_ICON_WARNING');
+				$this->response->icon = lang('CONF_ICON_WARNING');
 				$this->response->data = [
 					'btn1'=> [
 						'link'=> [
@@ -183,7 +183,7 @@ class Novo_User_Model extends NOVO_Model {
 				$this->response->ipInvalid = TRUE;
 				$this->response->assert = lang('GEN_LOGIN_IP_ASSERT');
 				$this->response->labelInput = lang('GEN_LOGIN_IP_LABEL_INPUT');
-				$this->response->icon = lang('GEN_ICON_WARNING');
+				$this->response->icon = lang('CONF_ICON_WARNING');
 				$this->response->email = $response->usuario->emailEnc;
 				$this->response->msg = novoLang(lang('GEN_LOGIN_IP_MSG'), $this->response->email);
 				$this->response->data = [
@@ -203,7 +203,7 @@ class Novo_User_Model extends NOVO_Model {
 			case -286:
 					$this->response->code = 4;
 					$this->response->msg = lang('GEN_RESP_CODE_INVALID');
-					$this->response->icon = lang('GEN_ICON_WARNING');
+					$this->response->icon = lang('CONF_ICON_WARNING');
 					$this->response->data['btn1'] = [
 						'text' => lang('GEN_BTN_ACCEPT'),
 						'action' => 'close'
@@ -213,7 +213,7 @@ class Novo_User_Model extends NOVO_Model {
 			case -288:
 				$this->response->code = 4;
 				$this->response->msg = lang('GEN_RESP_CODE_OTP_INVALID');
-				$this->response->icon = lang('GEN_ICON_WARNING');
+				$this->response->icon = lang('CONF_ICON_WARNING');
 				$this->response->data['btn1'] = [
 					'text' => lang('GEN_BTN_ACCEPT'),
 					'action' => 'close'
@@ -223,7 +223,7 @@ class Novo_User_Model extends NOVO_Model {
 				$this->response->code = 4;
 				$this->response->msg = lang('SESSION_EXPIRE_TIME');
 				$this->response->title = lang('GEN_RECOVER_PASS_TITLE');
-				$this->response->icon = lang('GEN_ICON_INFO');
+				$this->response->icon = lang('CONF_ICON_INFO');
 				$this->response->data = [
 					'btn1'=> [
 						'action'=> 'close'
@@ -233,7 +233,7 @@ class Novo_User_Model extends NOVO_Model {
 			case 9999:
 				$this->response->code = 3;
 				$this->response->title = lang('GEN_SYSTEM_NAME');
-				$this->response->icon = lang('GEN_ICON_DANGER');
+				$this->response->icon = lang('CONF_ICON_DANGER');
 				$this->response->msg = lang('RESP_RECAPTCHA_VALIDATION_FAILED');
 				$this->response->data = [
 					'btn1'=> [
@@ -348,7 +348,7 @@ class Novo_User_Model extends NOVO_Model {
 			case 0:
 				$this->response->code = 0;
 				$this->response->msg = novoLang(lang('RESP_TEMP_PASS'), [$this->dataRequest->userName, $maskMail]);
-				$this->response->icon = lang('GEN_ICON_SUCCESS');
+				$this->response->icon = lang('CONF_ICON_SUCCESS');
 				$this->response->data = [
 					'btn1'=> [
 						'text'=> lang('GEN_BTN_CONTINUE'),
@@ -382,7 +382,7 @@ class Novo_User_Model extends NOVO_Model {
 
 		if($this->isResponseRc != 0 && $this->response->code == 1) {
 			$this->response->title = lang('GEN_RECOVER_PASS_TITLE');
-			$this->response->icon = lang('GEN_ICON_INFO');
+			$this->response->icon = lang('CONF_ICON_INFO');
 			$this->response->data = [
 				'btn1'=> [
 					'action'=> 'close'
@@ -430,7 +430,7 @@ class Novo_User_Model extends NOVO_Model {
 				$this->session->set_flashdata('userName', $response->logAccesoObject->userName);
 				$this->response->code = 0;
 				$this->response->msg = lang('GEN_OTP');
-				$this->response->icon = lang('GEN_ICON_SUCCESS');
+				$this->response->icon = lang('CONF_ICON_SUCCESS');
 				$this->response->data = [
 					'btn1'=> [
 						'text'=> lang('GEN_BTN_ACCEPT'),
@@ -449,7 +449,7 @@ class Novo_User_Model extends NOVO_Model {
 
 		if($this->isResponseRc != 0 && $map == 1) {
 			$this->response->title = lang('GEN_RECOVER_PASS_TITLE');
-			$this->response->icon = lang('GEN_ICON_INFO');
+			$this->response->icon = lang('CONF_ICON_INFO');
 			$this->response->data = [
 				'btn1'=> [
 					'action'=> 'close'
@@ -499,7 +499,7 @@ class Novo_User_Model extends NOVO_Model {
 		switch($this->isResponseRc) {
 			case 0:
 				$this->response->msg = novoLang(lang('GEN_SEND_ACCESS'), [$maskMail]);
-				$this->response->icon = lang('GEN_ICON_SUCCESS');
+				$this->response->icon = lang('CONF_ICON_SUCCESS');
 				$this->response->data = [
 					'btn1'=> [
 						'text'=> lang('GEN_BTN_ACCEPT'),
@@ -526,7 +526,7 @@ class Novo_User_Model extends NOVO_Model {
 
 		if($this->isResponseRc != 0 && $map == 1) {
 			$this->response->title = lang('GEN_RECOVER_PASS_TITLE');
-			$this->response->icon = lang('GEN_ICON_INFO');
+			$this->response->icon = lang('CONF_ICON_INFO');
 			$this->response->data = [
 				'btn1'=> [
 					'action'=> 'close'
@@ -579,7 +579,7 @@ class Novo_User_Model extends NOVO_Model {
 				$this->response->code = 4;
 				$goLogin = $this->session->has_userdata('logged') ? '' : lang('RESP_PASSWORD_LOGIN');
 				$this->response->msg = novoLang(lang('RESP_PASSWORD_CHANGED'), $goLogin);
-				$this->response->icon = lang('GEN_ICON_SUCCESS');
+				$this->response->icon = lang('CONF_ICON_SUCCESS');
 				$this->response->data = [
 					'btn1'=> [
 						'text'=> lang('GEN_BTN_CONTINUE'),
@@ -604,7 +604,7 @@ class Novo_User_Model extends NOVO_Model {
 			$this->session->set_flashdata('userType', $this->session->flashdata('userType'));
 
 			$this->response->title = lang('GEN_PASSWORD_CHANGE_TITLE');
-			$this->response->icon = lang('GEN_ICON_WARNING');
+			$this->response->icon = lang('CONF_ICON_WARNING');
 			$this->response->data['btn1']['action'] = 'close';
 		}
 

@@ -314,7 +314,7 @@ class Novo_DownloadFiles_Model extends NOVO_Model {
 		$this->response->code =  3;
 		$this->response->title = lang('GEN_DOWNLOAD_FILE');
 		$this->response->msg = lang('GEN_WARNING_DOWNLOAD_FILE');
-		$this->response->icon =  lang('GEN_ICON_WARNING');
+		$this->response->icon =  lang('CONF_ICON_WARNING');
 		$this->response->download =  TRUE;
 		$this->response->data->resp['btn1']['text'] = lang('GEN_BTN_ACCEPT');
 		$this->response->data->resp['btn1']['action'] = 'close';

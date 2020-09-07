@@ -20,6 +20,12 @@ $lang['CONF_VALID_INACTIVE_USER'] = 'inactive-user';
 $lang['CONF_VALID_POSITION'] = 'left';
 //MODAL STYLES
 $lang['CONF_MODAL_WIDTH'] = 370;
+//ICONS MODALS
+$lang['CONF_ICON'] = 'ui-icon';
+$lang['CONF_ICON_SUCCESS'] = 'ui-icon-circle-check';
+$lang['CONF_ICON_INFO'] = 'ui-icon-info';
+$lang['CONF_ICON_WARNING'] = 'ui-icon-alert';
+$lang['CONF_ICON_DANGER'] = 'ui-icon-closethick';
 //SIGNIN
 $lang['CONF_SIGIN_RECOVER_PASS'] = 'ON';
 $lang['CONF_SIGNIN_IMG'] = 'OFF';

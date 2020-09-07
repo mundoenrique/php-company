@@ -85,7 +85,7 @@ class NOVO_Model extends CI_Model {
 		$this->response->code = lang('GEN_DEFAULT_CODE');
 		$this->response->title = lang('GEN_SYSTEM_NAME');
 		$this->response->msg = '';
-		$this->response->icon = lang('GEN_ICON_WARNING');
+		$this->response->icon = lang('CONF_ICON_WARNING');
 
 		switch ($model) {
 			case 'callWs_GetProductDetail':
@@ -138,7 +138,7 @@ class NOVO_Model extends CI_Model {
 			break;
 			default:
 				$this->response->msg = lang('GEN_MESSAGE_SYSTEM');
-				$this->response->icon = lang('GEN_ICON_DANGER');
+				$this->response->icon = lang('CONF_ICON_DANGER');
 			break;
 		}
 

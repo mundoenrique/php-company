@@ -97,7 +97,7 @@ class Novo_Services_Model extends NOVO_Model {
 			case -150:
 				$this->response->code = 1;
 				$this->response->title = lang('GEN_MENU_SERV_MASTER_ACCOUNT');
-				$this->response->icon = lang('GEN_ICON_INFO');
+				$this->response->icon = lang('CONF_ICON_INFO');
 				$this->response->msg = lang('GEN_TABLE_SEMPTYTABLE');
 				$this->response->data['btn1']['action'] = 'destroy';
 			break;
@@ -213,7 +213,7 @@ class Novo_Services_Model extends NOVO_Model {
 		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->title = $dataRequest->action;
-				$this->response->icon = lang('GEN_ICON_SUCCESS');
+				$this->response->icon = lang('CONF_ICON_SUCCESS');
 				$this->response->data['btn1']['action'] = 'close';
 
 				if ($dataRequest->action == lang('GEN_TEMPORARY_LOCK') || $dataRequest->action == lang('GEN_UNLOCK_CARD')) {
@@ -271,81 +271,87 @@ class Novo_Services_Model extends NOVO_Model {
 			case -1:
 				$this->response->title = $dataRequest->action;
 				$this->response->msg = lang('GEN_PASSWORD_NO_VALID');
-				$this->response->icon = lang('GEN_ICON_INFO');
+				$this->response->icon = lang('CONF_ICON_INFO');
 				$this->response->data['btn1']['action'] = 'close';
 			break;
 			case -21:
 			case -22:
 				$this->response->title = $dataRequest->action;
 				$this->response->msg = lang('SERVICES_TRANSACTION_FAIL');
-				$this->response->icon = lang('GEN_ICON_WARNING');
+				$this->response->icon = lang('CONF_ICON_WARNING');
 				$this->response->data['btn1']['action'] = 'close';
 			break;
 			case -33:
 			case -100:
 				$this->response->title = $dataRequest->action;
 				$this->response->msg = lang('SERVICES_BALANCE_NO_AVAILABLE');
-				$this->response->icon = lang('GEN_ICON_WARNING');
+				$this->response->icon = lang('CONF_ICON_WARNING');
 				$this->response->data['btn1']['action'] = 'close';
 			break;
 			case -152:
 				$this->response->title = $dataRequest->action;
 				$this->response->msg = lang('SERVICES_MIN_AMOUNT');
-				$this->response->icon = lang('GEN_ICON_INFO');
+				$this->response->icon = lang('CONF_ICON_INFO');
 				$this->response->data['btn1']['action'] = 'close';
 			break;
 			case -153:
 				$this->response->title = $dataRequest->action;
 				$this->response->msg = lang('SERVICES_MAX_WEEKLY_AMOUNT');
-				$this->response->icon = lang('GEN_ICON_INFO');
+				$this->response->icon = lang('CONF_ICON_INFO');
 				$this->response->data['btn1']['action'] = 'close';
 			break;
 			case -154:
 				$this->response->title = $dataRequest->action;
 				$this->response->msg = lang('SERVICES_MAX_DAILY_AMOUNT');
-				$this->response->icon = lang('GEN_ICON_INFO');
+				$this->response->icon = lang('CONF_ICON_INFO');
 				$this->response->data['btn1']['action'] = 'close';
 			break;
 			case -155:
 				$this->response->title = $dataRequest->action;
 				$this->response->msg = lang('SERVICES_NO_BALANCE');
-				$this->response->icon = lang('GEN_ICON_INFO');
+				$this->response->icon = lang('CONF_ICON_INFO');
 				$this->response->data['btn1']['action'] = 'close';
 			break;
 			case -157:
 				$this->response->title = $dataRequest->action;
 				$this->response->msg = lang('SERVICES_MAX_DAILY_OPERATION');
-				$this->response->icon = lang('GEN_ICON_INFO');
+				$this->response->icon = lang('CONF_ICON_INFO');
 				$this->response->data['btn1']['action'] = 'close';
 			break;
 			case -242:
 				$this->response->title = $dataRequest->action;
 				$this->response->msg = lang('SERVICES_MAX_OPERATION');
-				$this->response->icon = lang('GEN_ICON_INFO');
+				$this->response->icon = lang('CONF_ICON_INFO');
 				$this->response->data['btn1']['action'] = 'close';
 			break;
 			case -267:
 				$this->response->title = $dataRequest->action;
 				$this->response->msg = novoLang(lang('SERVICES_BLOCKED_CARD'), $cardsList[0]['noTarjeta']);
-				$this->response->icon = lang('GEN_ICON_WARNING');
+				$this->response->icon = lang('CONF_ICON_WARNING');
+				$this->response->data['btn1']['action'] = 'close';
+			break;
+			case -429:
+				$this->response->title = $dataRequest->action;
+				$this->response->msg = novoLang(lang('SERVICES_CARD_BULK_AFFILIATED'), $cardsList[0]['noTarjeta']);
+				$this->response->icon = lang('CONF_ICON_WARNING');
 				$this->response->data['btn1']['action'] = 'close';
 			break;
 			case -459:
 				$this->response->title = $dataRequest->action;
 				$this->response->msg = lang('SERVICES_PENDING_MEMBER_SHIP');
-				$this->response->icon = lang('GEN_ICON_WARNING');
+				$this->response->icon = lang('CONF_ICON_WARNING');
 				$this->response->data['btn1']['action'] = 'close';
 			break;
 			case -460:
 				$this->response->title = $dataRequest->action;
 				$this->response->msg = lang('SERVICES_USER_BULK_CONFIRM');
-				$this->response->icon = lang('GEN_ICON_WARNING');
+				$this->response->icon = lang('CONF_ICON_WARNING');
 				$this->response->data['btn1']['action'] = 'close';
 			break;
 			case -461:
 				$this->response->title = $dataRequest->action;
 				$this->response->msg = novoLang(lang('SERVICES_CARD_BULK_CONFIRM'), $cardsList[0]['noTarjeta']);
-				$this->response->icon = lang('GEN_ICON_WARNING');
+				$this->response->icon = lang('CONF_ICON_WARNING');
 				$this->response->data['btn1']['action'] = 'close';
 			break;
 		}
@@ -449,7 +455,7 @@ class Novo_Services_Model extends NOVO_Model {
 			default:
 				if (isset($dataRequest->action) && $this->isResponseRc != -29 && $this->isResponseRc != -61) {
 					$this->response->title = lang('GEN_DOWNLOAD_FILE');
-					$this->response->icon =  lang('GEN_ICON_WARNING');
+					$this->response->icon =  lang('CONF_ICON_WARNING');
 					$this->response->msg = lang('GEN_WARNING_DOWNLOAD_FILE');
 					$this->response->data['btn1']['action'] = 'close';
 				}
@@ -540,7 +546,7 @@ class Novo_Services_Model extends NOVO_Model {
 		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->title = lang('SERVICES_INQUIRY_'.$dataRequest->action);
-				$this->response->icon = lang('GEN_ICON_SUCCESS');
+				$this->response->icon = lang('CONF_ICON_SUCCESS');
 				$this->response->data['btn1'] = [
 					'text' => lang('GEN_BTN_ACCEPT'),
 					'action' => 'close'
@@ -571,7 +577,7 @@ class Novo_Services_Model extends NOVO_Model {
 			case -1:
 				$this->response->title = lang('SERVICES_INQUIRY_'.$dataRequest->action);
 				$this->response->msg = lang('GEN_PASSWORD_NO_VALID');
-				$this->response->icon = lang('GEN_ICON_WARNING');
+				$this->response->icon = lang('CONF_ICON_WARNING');
 				$this->response->data['btn1'] = [
 					'text' => lang('GEN_BTN_ACCEPT'),
 					'action' => 'close'
@@ -580,7 +586,7 @@ class Novo_Services_Model extends NOVO_Model {
 			case -450:
 				$this->response->title = lang('SERVICES_INQUIRY_'.$dataRequest->action);
 				$this->response->msg = 'Alcanzaste el límite de consultas diarias';
-				$this->response->icon = lang('GEN_ICON_INFO');
+				$this->response->icon = lang('CONF_ICON_INFO');
 				$this->response->data['btn1'] = [
 					'text' => lang('GEN_BTN_ACCEPT'),
 					'action' => 'close'
@@ -651,7 +657,7 @@ class Novo_Services_Model extends NOVO_Model {
 				$shops = new stdClass();
 				$this->response->data['shops']= $response->bean->cards[0];
 				$this->response->title = lang('GEN_COMMERCIAL_TWIRLS_TITTLE');
-				$this->response->icon =  lang('GEN_ICON_WARNING');
+				$this->response->icon =  lang('CONF_ICON_WARNING');
         $this->response->data['btn1']['action'] = 'close';
 				switch ($response->bean->cards[0]->rc) {
 					case -266:
@@ -729,19 +735,19 @@ class Novo_Services_Model extends NOVO_Model {
 		switch($this->isResponseRc) {
 			case 0:
 				$this->response->title = lang('GEN_COMMERCIAL_TWIRLS_TITTLE');
-				$this->response->icon =  lang('GEN_ICON_SUCCESS');
+				$this->response->icon =  lang('CONF_ICON_SUCCESS');
         $this->response->msg = 	lang('RESP_SUCCESSFULL_UPDATE_TWIRLS');
         $this->response->data['btn1']['action'] = 'close';
 			break;
 			case -1:
 				$this->response->title = lang('GEN_COMMERCIAL_TWIRLS_TITTLE');
-				$this->response->icon =  lang('GEN_ICON_WARNING');
+				$this->response->icon =  lang('CONF_ICON_WARNING');
 				$this->response->msg = lang('GEN_PASSWORD_NO_VALID');
 				$this->response->data['btn1']['action'] = 'close';
 			break;
 			case -146:
 				$this->response->title = lang('GEN_COMMERCIAL_TWIRLS_TITTLE');
-				$this->response->icon =  lang('GEN_ICON_WARNING');
+				$this->response->icon =  lang('CONF_ICON_WARNING');
 				$this->response->msg = lang('RESP_NO_UPDATE_REGISTRY');
 				$this->response->data['btn1']['action'] = 'close';
 			break;
@@ -817,43 +823,43 @@ class Novo_Services_Model extends NOVO_Model {
 			break;
 			case -447:
 				$this->response->title = lang('GEN_TRANSACTIONAL_LIMITS_TITTLE');
-				$this->response->icon =  lang('GEN_ICON_WARNING');
+				$this->response->icon =  lang('CONF_ICON_WARNING');
 				$this->response->msg = lang('SERVICES_LIMITS_NO_REGISTRY');
 				$this->response->data['btn1']['action'] = 'close';
 			break;
 			case -448:
 				$this->response->title = lang('GEN_TRANSACTIONAL_LIMITS_TITTLE');
-				$this->response->icon =  lang('GEN_ICON_WARNING');
+				$this->response->icon =  lang('CONF_ICON_WARNING');
 				$this->response->msg = novoLang(lang('SERVICES_LIMITS_NO_CARDHOLDER'), maskString( $dataRequest->cardNumber, 5, 6));
 				$this->response->data['btn1']['action'] = 'close';
 			break;
 			case -455:
 				$this->response->title = lang('GEN_TRANSACTIONAL_LIMITS_TITTLE');
-				$this->response->icon =  lang('GEN_ICON_WARNING');
+				$this->response->icon =  lang('CONF_ICON_WARNING');
 				$this->response->msg = novoLang(lang('SERVICES_TWIRLS_NO_AVAILABLE_CARD'), maskString( $dataRequest->cardNumber, 5, 6));
 				$this->response->data['btn1']['action'] = 'close';
 			break;
 			case -444:
 				$this->response->title = lang('GEN_TRANSACTIONAL_LIMITS_TITTLE');
-				$this->response->icon =  lang('GEN_ICON_WARNING');
+				$this->response->icon =  lang('CONF_ICON_WARNING');
 				$this->response->msg = lang('SERVICES_TWIRLS_NO_FOUND_REGISTRY');
 				$this->response->data['btn1']['action'] = 'close';
 			break;
 			case -454:
 				$this->response->title = lang('GEN_TRANSACTIONAL_LIMITS_TITTLE');
-				$this->response->icon =  lang('GEN_ICON_WARNING');
+				$this->response->icon =  lang('CONF_ICON_WARNING');
 				$this->response->msg = novoLang(lang('SERVICES_TWIRLS_TEMPORARY_BLOCKED_CARD'), maskString( $dataRequest->cardNumber, 5, 6));
 				$this->response->data['btn1']['action'] = 'close';
 			break;
 			case -330:
 				$this->response->title = lang('GEN_TRANSACTIONAL_LIMITS_TITTLE');
-				$this->response->icon =  lang('GEN_ICON_WARNING');
+				$this->response->icon =  lang('CONF_ICON_WARNING');
 				$this->response->msg = novoLang(lang('SERVICES_TWIRLS_EXPIRED_CARD'), maskString( $dataRequest->cardNumber, 5, 6));
 				$this->response->data['btn1']['action'] = 'close';
 			break;
 			case -307:
 				$this->response->title = lang('GEN_TRANSACTIONAL_LIMITS_TITTLE');
-				$this->response->icon =  lang('GEN_ICON_WARNING');
+				$this->response->icon =  lang('CONF_ICON_WARNING');
 				$this->response->msg = novoLang(lang('SERVICES_TWIRLS_PERMANENT_BLOCKED_CARD'), maskString( $dataRequest->cardNumber, 5, 6));
 				$this->response->data['btn1']['action'] = 'close';
 			break;
@@ -907,26 +913,26 @@ class Novo_Services_Model extends NOVO_Model {
 			case 0:
 				$this->response->code= 4;
 				$this->response->title = lang('GEN_TRANSACTIONAL_LIMITS_TITTLE');
-				$this->response->icon =  lang('GEN_ICON_SUCCESS');
+				$this->response->icon =  lang('CONF_ICON_SUCCESS');
         $this->response->msg = 	lang('RESP_SUCCESSFULL_UPDATE_LIMITS');
         $this->response->data['btn1']['action'] = 'close';
 				break;
 			case -449:
 			case -450:
 				$this->response->title = lang('GEN_TRANSACTIONAL_LIMITS_TITTLE');
-				$this->response->icon =  lang('GEN_ICON_WARNING');
+				$this->response->icon =  lang('CONF_ICON_WARNING');
 				$this->response->msg = lang('SERVICES_LIMITS_NO_UPDATE');
 				$this->response->data['btn1']['action'] = 'close';
 				break;
 			case -456:
 				$this->response->title = lang('GEN_TRANSACTIONAL_LIMITS_TITTLE');
-				$this->response->icon =  lang('GEN_ICON_WARNING');
+				$this->response->icon =  lang('CONF_ICON_WARNING');
 				$this->response->msg = $response->msg;
 				$this->response->data['btn1']['action'] = 'close';
 				break;
 			case -457:
 				$this->response->title = lang('GEN_TRANSACTIONAL_LIMITS_TITTLE');
-				$this->response->icon =  lang('GEN_ICON_WARNING');
+				$this->response->icon =  lang('CONF_ICON_WARNING');
 				$this->response->msg = $response->msg;
 				$this->response->data['btn1']['action'] = 'close';
 				break;

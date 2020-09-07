@@ -8,9 +8,3 @@ $lang['GEN_ENTERPRISE_LIST'] = 'dashboard';
 $lang['GEN_WELCOME_TEXT'] = 'Bienvenido/a';
 $lang['GEN_LOGO_HEADER'] = 'logo-pichincha-azul.png';
 $lang['GEN_ALTERNATIVE_TEXT'] = 'Banco Pichincha';
-//MODAL STYLES
-$lang['GEN_ICON'] = '';
-$lang['GEN_ICON_SUCCESS'] = '';
-$lang['GEN_ICON_INFO'] = '';
-$lang['GEN_ICON_WARNING'] = '';
-$lang['GEN_ICON_DANGER'] = '';
