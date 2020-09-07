@@ -163,7 +163,7 @@ $(function () {
 				inputModal+=		'</div>';
 				inputModal+= 		'<div class="help-block"></div>';
 				inputModal+= 	'</form>';
-				appMessages(lang.BULK_DELETE_TITLE, inputModal, lang.GEN_ICON_INFO, data);
+				appMessages(lang.BULK_DELETE_TITLE, inputModal, lang.CONF_ICON_INFO, data);
 				$('#cancel').on('click', function(e) {
 					e.preventDefault();
 					$('#pending-bulk').find('tr').removeClass('select');
