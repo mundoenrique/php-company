@@ -1307,8 +1307,11 @@ class Novo_Reports_Model extends NOVO_Model {
 		}else {
 			$typeSearch = '1';
 		}
-		$this->dataRequest->idExtEmp = $dataRequest->enterpriseCode;
 		$this->dataRequest->idExtPer = $dataRequest->resultByNIT;
+		if(lang('CONF_INPUT_UPPERCASE') == 'OFF'){
+			$this->dataRequest->idExtPer = strtoupper($dataRequest->resultByNIT);
+		}
+		$this->dataRequest->idExtEmp = $dataRequest->enterpriseCode;
     $lastDayMonyh = date("t-m-Y", strtotime(str_replace( '/', '-', "1/".$dataRequest->initialDateAct)));
 		$this->dataRequest->fechaFin = str_replace( '-', '/', $lastDayMonyh);
 		$this->dataRequest->fechaIni = "1/".$dataRequest->initialDateAct;
