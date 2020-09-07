@@ -8,7 +8,7 @@ $lang['GEN-LOGO-BIG'] = 'logo-signin.png';
 $lang['GEN_ALTERNATIVE_TEXT'] = 'Produbanco';
 $lang['GEN_RECOVER_PASS_TITLE'] = 'Recuperar acceso';
 $lang['GEN_OTP'] = 'Te enviamos un correo con un código de seguridad, indícalo a continuación.';
-$lang['RESP_PASSWORD_NO_VALID'] = 'Usuario y/o contraseña incorrecta, por favor verifica y vuelve a intentar.';
+$lang['GEN_PASSWORD_NO_VALID'] = 'Usuario y/o contraseña incorrecta, por favor verifica y vuelve a intentar.';
 $lang['GEN_STATUS'] = 'Estado';
 //LINKS
 $lang['GEN_LINK_RECOVER_ACCESS'] = 'recuperar-acceso';
