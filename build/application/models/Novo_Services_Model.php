@@ -29,6 +29,10 @@ class Novo_Services_Model extends NOVO_Model {
 		$this->dataRequest->idOperation = 'buscarTransferenciaM';
 		$this->dataRequest->rifEmpresa = $this->session->enterpriseInf->idFiscal;
 		$this->dataRequest->idProducto = $this->session->productInf->productPrefix;
+		$idPersonal = strtoupper($dataRequest->idNumber);
+		if(lang('CONF_INPUT_UPPERCASE') == 'ON'){
+			$idPersonal = $dataRequest->idNumber;
+		}
 		$this->dataRequest->listaTarjetas = [
 			[
 				'paginaActual' => (int) ($dataRequest->start / 10) + 1,
@@ -43,7 +47,7 @@ class Novo_Services_Model extends NOVO_Model {
 			'lista' => [
 				[
 					'noTarjeta' => $dataRequest->cardNumber,
-					'id_ext_per' => $dataRequest->idNumber
+					'id_ext_per' => $idPersonal
 				]
 			]
 		];
