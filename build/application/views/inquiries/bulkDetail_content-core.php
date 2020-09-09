@@ -29,7 +29,7 @@
 
 					<div class="form-group mb-3 col-4">
 						<label for="confirmName" id="confirmName"><?= lang('GEN_ENTERPRISE_NAME') ?></label>
-						<span id="confirmName" class="form-control px-1" readonly="readonly"><?= $enterpriseName; ?></span>
+						<span id="confirmName" class="form-control px-1 truncate" readonly="readonly"><?= $enterpriseName; ?></span>
 					</div>
 
 					<div class="form-group mb-3 col-4">
