@@ -95,15 +95,13 @@
 				</div>
 				<div class="line mb-2"></div>
 			</div>
-
 			<div class="flex pb-5 flex-column">
 				<span id="titleResults" class="line-text mb-2 h4 semibold primary">Resultados</span>
-
-				<div id="spinnerBlockMasterAccount" class=" hide">
-									<div id="pre-loader" class="mt-2 mx-auto flex justify-center">
-										<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
-									</div>
-						</div>
+				<div id="spinnerBlock" class=" hide">
+					<div id="pre-loader" class="mt-2 mx-auto flex justify-center">
+						<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
+					</div>
+				</div>
 				<div id="blockMasterAccountResults" class="center mx-1">
 					<div class="flex">
 						<div class="flex mr-2 py-3 flex-auto justify-end items-center ">
@@ -151,7 +149,7 @@
 		</div>
 	</div>
 	<?php if($widget): ?>
-	<?php $this->load->view('widget/widget_enterprise-product_content'.$newViews, $widget) ?>
+	<?php $this->load->view('widget/widget_enterprise-product_content-core', $widget) ?>
 	<?php endif; ?>
 </div>
 

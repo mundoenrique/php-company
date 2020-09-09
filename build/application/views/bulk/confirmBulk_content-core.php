@@ -1,5 +1,5 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
-<h1 class="primary h3 regular inline"><?= lang('BULK_CONFIRM_TITLE') ?></h1>
+<h1 class="primary h3 regular inline"><?= lang('BULK_CONFIRM_TITLE'); ?></h1>
 <span class="ml-2 regular tertiary"><?= $productName ?></span>
 <div class="mb-2 flex items-center">
 	<div class="flex tertiary">
@@ -44,7 +44,7 @@
 					</div>
 
 					<div class="form-group mb-3 col-4">
-						<label for="amount" id="amount"><?= LANG('BULK_AMOUNT'); ?></label>
+						<label for="amount" id="amount"><?= LANG('GEN_TABLE_TOTAL_AMOUNT'); ?></label>
 						<span id="totalAmount" class="form-control px-1" readonly="readonly"><?= $detailBulk->amount ?></span>
 					</div>
 
@@ -97,6 +97,6 @@
 		</div>
 	</div>
 	<?php if($widget): ?>
-	<?php $this->load->view('widget/widget_enterprise-product_content'.$newViews, $widget) ?>
+	<?php $this->load->view('widget/widget_enterprise-product_content-core', $widget) ?>
 	<?php endif; ?>
 </div>

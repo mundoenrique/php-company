@@ -38,6 +38,7 @@ footer.main-footer {
 ========================================================================== */
 
 .h00    { font-size: var(--h00) !important }
+.h01    { font-size: var(--h01) !important }
 .h0     { font-size: var(--h0) !important }
 .h1, h1 { font-size: var(--h1) !important; font-weight: 700 !important; }
 .h2, h2 { font-size: var(--h2) !important }
@@ -275,7 +276,7 @@ footer.main-footer {
 	padding: .375rem .75rem;
 	font-size: .875rem;
 	font-weight: var(--font-weight-base);
-	line-height: 1.15;
+	line-height: inherit;
 	color: var(--color-sixth);
 	border: 1px solid var(--color-eighth);
 	transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
@@ -2002,7 +2003,7 @@ i[class*=" icon-"] {
 	display: inline-flex;
 	height: auto;
 	width: auto;
-	font-family: "NovoPayment Glyphs";
+	font-family: var(--font-family-novoglyphs);
 	font-size: inherit;
 	font-style: normal;
 	font-weight: normal;
@@ -2018,71 +2019,70 @@ i[class*=" icon-"]:before {
 	vertical-align: middle;
 }
 
-span[class^="icon-"].novoglyphs,
-span[class*=" icon-"].novoglyphs,
-i[class^="icon-"].novoglyphs,
-i[class*=" icon-"].novoglyphs {
-	font-family: var(--font-family-novoglyphs)
-}
-.icon-phone:before         { content: "\e06c"; }
-.icon-view:before          { content: "\e000"; }
-.icon-edit:before          { content: "\e001"; }
-.icon-remove:before        { content: "\e002"; }
-.icon-ok:before            { content: "\e003"; }
-.icon-cancel:before        { content: "\e004"; }
-.icon-find:before          { content: "\e005"; }
-.icon-download:before      { content: "\e008"; }
-.icon-upload:before        { content: "\e009"; }
-.icon-arrow-right:before   { content: "\e011"; }
-.icon-user:before          { content: "\e015"; }
-.icon-envelope-open:before { content: "\e022"; }
-.icon-lock:before 			   { content: "\e028"; }
-.icon-notification:before  { content: "\e025"; }
-.icon-card:before          { content: "\e029"; }
-.icon-credit-card:before	 { content: "\e031"; }
-.icon-thumbs-up:before     { content: "\e032"; }
-.icon-chevron-down:before  { content: "\e040"; }
-.icon-chevron-left:before  { content: "\e041"; }
-.icon-chevron-right:before { content: "\e042"; }
-.icon-hand-up:before       { content: "\e043"; }
-.icon-hand-down:before     { content: "\e044"; }
-.icon-hand-left:before     { content: "\e045"; }
-.icon-hand-right:before    { content: "\e046"; }
-.icon-food:before 				 { content: "\e050"; }
-.icon-film:before 				 { content: "\e051"; }
-.icon-lab:before 					 { content: "\e052"; }
-.icon-suitcase:before 		 { content: "\e053"; }
-.icon-plane:before 				 { content: "\e054"; }
-.icon-medkit:before 			 { content: "\e055"; }
-.icon-asterisk:before 		 { content: "\e056"; }
-.icon-file-blank:before 	 { content: "\e057"; }
-.icon-file-graph:before 	 { content: "\e058"; }
-.icon-file-pdf:before 		 { content: "\e059"; }
-.icon-spinner:before 			 { content: "\e060"; }
-.icon-building:before 	   { content: "\e062"; }
-.icon-balance:before 			 { content: "\e072"; }
-.icon-key:before 					 { content: "\e01a"; }
-.icon-file-word:before     { content: "\e05a"; }
-.icon-lock:before 				 { content: "\e01b"; }
-.icon-arrow-up:before      { content: "\e03b"; }
-.icon-info:before        	 { content: "\e04b"; }
-.icon-file-excel:before 	 { content: "\e05b"; }
-.icon-unlock:before 			 { content: "\e01c"; }
-.icon-arrow-down:before    { content: "\e03c"; }
-.icon-chart-pie:before  	 { content: "\e04c"; }
-.icon-user-building:before { content: "\e09c"; }
-.icon-user-edit:before     { content: "\e02d"; }
-.icon-arrow-left:before    { content: "\e03d"; }
-.icon-card-fee:before			 { content: "\e08d"; }
-/* .icon-arrow-right:before   { content: "\e03e"; } */
-.icon-car:before					 { content: "\e04e"; }
-.icon-user-card:before		 { content: "\e05e"; }
-.icon-chevron-up:before    { content: "\e03f"; }
-.icon-bag:before 					 { content: "\e04f"; }
-.icon-book:before    			 { content: "\e02f"; }
-.icon-chevron-up:before    { content: "\e03f"; }
-.icon-bag:before 					 { content: "\e04f"; }
-.icon-email:before         { content: "\e007"; }
+.icon-card-allocation:before { content: "\e041"; }
+.icon-brief-config:before	   { content: "\e000"; }
+.icon-build-config:before	 	 { content: "\e001"; }
+.icon-downl-config:before	   { content: "\e002"; }
+.icon-user-config:before	   { content: "\e003"; }
+.icon-graph:before           { content: "\e054"; }
+.icon-phone:before           { content: "\e11f"; }
+.icon-view:before            { content: "\e0b3"; }
+.icon-remove:before          { content: "\e0b5"; }
+.icon-ok:before              { content: "\e0b6"; }
+.icon-cancel:before          { content: "\e0b7"; }
+.icon-find:before            { content: "\e0b8"; }
+.icon-download:before        { content: "\e0bb"; }
+.icon-upload:before          { content: "\e0bc"; }
+.icon-deliver-card:before    { content: "\e015"; }
+.icon-user:before            { content: "\e0c8"; }
+.icon-envelope-open:before   { content: "\e026"; }
+.icon-lock:before 			     { content: "\e0ce"; }
+.icon-notification:before    { content: "\e0d8"; }
+.icon-card:before            { content: "\e0dc"; }
+.icon-credit-card:before	   { content: "\e035"; }
+.icon-thumbs-up:before       { content: "\e0e5"; }
+.icon-chevron-down:before    { content: "\e0f3"; }
+.icon-chevron-left:before    { content: "\e0f4"; }
+.icon-chevron-right:before   { content: "\e0f5"; }
+.icon-hand-up:before         { content: "\e0f6"; }
+.icon-hand-down:before       { content: "\e0f7"; }
+.icon-hand-left:before       { content: "\e0f8"; }
+.icon-hand-right:before      { content: "\e0f9"; }
+.icon-food:before 			  	 { content: "\e103"; }
+.icon-film:before 				   { content: "\e104"; }
+.icon-lab:before 				  	 { content: "\e105"; }
+.icon-suitcase:before 		   { content: "\e106"; }
+.icon-plane:before 				   { content: "\e107"; }
+.icon-medkit:before 		   	 { content: "\e108"; }
+.icon-asterisk:before 		   { content: "\e109"; }
+.icon-file-blank:before 	   { content: "\e10f"; }
+.icon-file-graph:before 	   { content: "\e10b"; }
+.icon-file-pdf:before 		   { content: "\e10c"; }
+.icon-spinner:before 			   { content: "\e113"; }
+.icon-building:before 	     { content: "\e066"; }
+.icon-balance:before 		  	 { content: "\e076"; }
+.icon-key:before 				   	 { content: "\e0cd"; }
+.icon-file-word:before       { content: "\e10d"; }
+.icon-lock:before 			  	 { content: "\e0ce"; }
+.icon-arrow-up:before        { content: "\e0ee"; }
+.icon-info:before        	   { content: "\e04f"; }
+.icon-file-excel:before 	   { content: "\e10e"; }
+.icon-unlock:before 			   { content: "\e0cf"; }
+.icon-arrow-down:before      { content: "\e0ef"; }
+.icon-chart-pie:before  	   { content: "\e0ff"; }
+.icon-user-building:before   { content: "\e0a0"; }
+.icon-user-edit:before       { content: "\e031"; }
+.icon-arrow-left:before      { content: "\e0f0"; }
+.icon-card-fee:before			   { content: "\e091"; }
+.icon-arrow-right:before     { content: "\e0f1"; }
+.icon-car:before					   { content: "\e101"; }
+.icon-shipping:before		     { content: "\e062"; }
+.icon-chevron-up:before      { content: "\e0f2"; }
+.icon-bag:before 					   { content: "\e102"; }
+.icon-book:before    			   { content: "\e0e2"; }
+.icon-email:before           { content: "\e0ba"; }
+.icon-500:before           	 { content: "\e901"; }
+.icon-404:before           	 { content: "\e902"; }
 
 .icon-user{
 	padding-right: 0 !important;
@@ -2103,9 +2103,13 @@ i[class*=" icon-"].novoglyphs {
 
 .logo-banco {
 	width: 260px;
-	height: auto;
+	height: 71px;
 }
 
+.bug-view {
+	font-size: 4rem !important;
+	opacity: 0.2;
+}
 /* Spinner */
 
 @-webkit-keyframes spinner-border {
@@ -2817,18 +2821,18 @@ table.dataTable thead th.select-checkbox:before {
 	table.dataTable thead th.select-checkbox:before {
 		margin-top: 2px;
 	}
-	table.dataTable tr.selected th.sorting_disabled:after{
-		content: '' !important;
-		margin-top: 1px !important;
-		background-image: url("../../images/icons/check-white_table.svg");
-		background-size: cover;
+	table.dataTable tr.selected th.sorting_disabled:nth-child(1):after{
+		content: "\e900" !important;
+		font-family: "novoglyphs";
+		margin-top: 0 !important;
+		font-size: 11px;
 	}
 
 	table.dataTable tr.selected td.select-checkbox::after {
-		content: '' !important;
-		margin-top: -5px !important;
-		background-image: url("../../images/pb/check_table.svg");
-		background-size: cover;
+		content: "\e900" !important;
+		font-family: "novoglyphs";
+		margin-top: -1px !important;
+		font-size: 11px !important;
 	}
 }
 
@@ -3466,7 +3470,7 @@ a.ui-button:active,
 	background: none;
 	overflow: auto;
 }
-.ui-dialog .ui-dialog-content p {
+.ui-dialog .ui-dialog-content > p {
 	display: flex;
 	padding: 1.2em 1em 1em;
 	min-height: 80px;
@@ -3575,7 +3579,7 @@ a.ui-button:active,
 
 .bg-img {
   background-image: linear-gradient(rgba(0,0,0,.8), rgba(0,0,0,.8)),
-    url("../../images/pb/bg-loading.jpg");
+    url("../../images/default/bg-loading.jpg");
   height: 100vh;
   background-position: center;
   background-repeat: no-repeat;
@@ -3694,13 +3698,13 @@ a.ui-button:active,
 	bottom: 20px;
 }
 .item-network.maestro {
-	background: transparent url("../../images/pb/logo_maestro.svg") no-repeat center / cover;
+	background: transparent url("../../images/brands/logo_maestro.svg") no-repeat center / cover;
 }
 .item-network.mastercard {
-	background: transparent url("../../images/pb/logo_mastercard.svg") no-repeat center / cover;
+	background: transparent url("../../images/brands/logo_mastercard.svg") no-repeat center / cover;
 }
 .item-network.visa {
-	background: transparent url("../../images/pb/logo_visa.svg") no-repeat center / cover;
+	background: transparent url("../../images/brands/logo_visa.svg") no-repeat center / cover;
 }
 
 .card-image {
@@ -3743,7 +3747,7 @@ a.ui-button:active,
   height: 106px;
   margin-bottom: 12px;
 	background-color: var(--color-secondary);
-	color: var(--color-sixth);
+	color: var(--color-fifth);
 	border: .5px solid var(--color-tertiary);
 	box-shadow: 4px 4px 8px 0 rgba(0,0,0,.1);
 	border-radius: 5px;
@@ -3777,12 +3781,12 @@ a.ui-button:active,
   visibility: visible;
 }
 
-.nav-config .nav-config-box .nav-item-config > a > img {
-	width: 30%;
+.nav-config .nav-config-box .nav-item-config > a > i {
+	font-size: 30px;
 }
 
 .nav-config .nav-config-box .nav-item-config .bg {
-	width: 35%
+	font-size: 35px;
 }
 
 .nav-config .nav-config-box .nav-item-config h4 {
@@ -3881,6 +3885,17 @@ a.ui-button:active,
 	border-radius: 5px;
 }
 
+.download {
+	transform: initial;
+  -moz-transform: initial;
+  -webkit-transform: initial;
+}
+
+.download:before {
+	box-shadow: none;
+	border: none;
+}
+
 .detail-lot tbody tr:first-child td {
 	border: 0 !important;
 	background-color: var(--color-secondary) !important;
@@ -3938,4 +3953,9 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 	top: 0;
 	width: 100%;
 	height: 100%;
+}
+
+#enterprise-widget-btn:hover {
+	color: var(--color-secondary);
+	background-color:var(--color-primary);
 }

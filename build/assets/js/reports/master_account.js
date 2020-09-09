@@ -43,6 +43,9 @@ $(function () {
 
 		datePicker.datepicker({
 		onSelect: function (selectedDate) {
+			$(this)
+				.focus()
+				.blur();
 			var dateSelected = selectedDate.split('/');
 			dateSelected = dateSelected[1] + '/' + dateSelected[0] + '/' + dateSelected[2]
 			var inputDate = $(this).attr('id');
@@ -113,6 +116,7 @@ function dialog(e){
 					action: 'close'
 				},
 				btn2: {
+					text: lang.GEN_BTN_CANCEL,
 					action: 'close'
 				}
 			}
@@ -123,7 +127,7 @@ function dialog(e){
 			inputModal+= 		'</div>';
 			inputModal+= 		'<div class="help-block"></div>';
 			inputModal+=	'</form>';
-			notiSystem(titleModalExcel, inputModal, lang.GEN_ICON_INFO, data);
+			appMessages(titleModalExcel, inputModal, lang.CONF_ICON_INFO, data);
 
 			var i=0;
 			var anioB;
@@ -149,6 +153,7 @@ function dialog(e){
 						action: 'close'
 						},
 					btn2: {
+						text: lang.GEN_BTN_CANCEL,
 						action: 'close'
 						}
 					}
@@ -158,7 +163,7 @@ function dialog(e){
 				inputModal+= 		'</div>';
 				inputModal+= 		'<div class="help-block"></div>';
 				inputModal+=	'</form>';
-				notiSystem(titleModalPdf, inputModal, lang.GEN_ICON_INFO, data);
+				appMessages(titleModalPdf, inputModal, lang.CONF_ICON_INFO, data);
 
 				var i=0;
 				var anioB;
@@ -357,7 +362,7 @@ $("#masterAc-btn").on('click', function(e){
 	if (form.valid()) {
 		insertFormInput(true, form);
 	  $('#blockMasterAccountResults').addClass("hide");
-	  $('#spinnerBlockMasterAccount').removeClass("hide");
+	  $('#spinnerBlock').removeClass("hide");
 		info();
 
 	}
@@ -411,7 +416,7 @@ function masterAccount(passData) {
 	verb = "POST"; who = 'Reports'; where = 'masterAccount'; data = passData;
 	callNovoCore(verb, who, where, data, function(response) {
 		insertFormInput(false);
-		$('#spinnerBlockMasterAccount').addClass("hide");
+		$('#spinnerBlock').addClass("hide");
 		$('#tbody-datos-general').removeClass('hide');
 		$('#titleResults').removeClass('hide');
 		var table = $('#concenAccount').DataTable();

@@ -48,15 +48,15 @@ class Novo_Plantilla_Model extends NOVO_Model {
 			case -7000:
 				$this->response->code = 3;
 				$this->response->msg = lang('REEMPLAZAR POR TRADUCCION DESDE RESPONSE-LANG');
-				$this->response->icon = 'ui-icon-info';
+				$this->response->icon = lang('CONF_ICON_SUCCESS');
 				$this->response->data = [
 					'btn1'=> [
-						'text'=> lang('BUTTON-ACCEPT'),
-						'link'=> 'inicio',
+						'text'=> lang('GEN_BTN_ACCEPT'),
+						'link'=> 'empresas',
 						'action'=> 'redirect'
 					],
 					'btn2'=> [
-						'text'=> lang('BUTTON-CANCEL'),
+						'text'=> lang('GEN_BTN_CANCEL'),
 						'link'=> FALSE,
 						'action'=> 'close'
 					]

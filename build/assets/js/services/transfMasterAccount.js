@@ -26,6 +26,7 @@ $(function () {
 			$('#pre-loader').remove();
 			$('.hide-out').removeClass('hide');
 		},
+		"autoWidth": false,
 		"ordering": false,
 		"searching": false,
 		"lengthChange": false,
@@ -70,10 +71,10 @@ $(function () {
 				responseTable = JSON.parse(
 					CryptoJS.AES.decrypt(responseTable.code, responseTable.plot, { format: CryptoJSAesJson }).toString(CryptoJS.enc.Utf8)
 				);
-				var codeDefaul = parseInt(lang.RESP_DEFAULT_CODE);
+				var codeDefaul = parseInt(lang.GEN_DEFAULT_CODE);
 
 				if (responseTable.code === codeDefaul) {
-					notiSystem(responseTable.title, responseTable.msg, responseTable.icon, responseTable.dataResp);
+					appMessages(responseTable.title, responseTable.msg, responseTable.icon, responseTable.dataResp);
 				}
 
 				access = responseTable.access;
@@ -112,7 +113,7 @@ $(function () {
 			{
 				"targets": 5,
 				"className": "amount-cc",
-				"width": "90px",
+				"width": "150px",
 			},
 			{
 				"targets": 6,
@@ -151,20 +152,20 @@ $(function () {
 
 					if (access.TRASAL && data.status == '') {
 						options += '<button class="btn mx-1 px-0" title="' + lang.GEN_CHECK_BALANCE + '" data-toggle="tooltip" amount="0">';
-						options += '<i class="icon novoglyphs icon-balance" aria-hidden="true"></i>';
+						options += '<i class="icon icon-balance" aria-hidden="true"></i>';
 						options += '</button>';
 					}
 
 					if (access.TRACAR && data.status == '') {
 						options += '<button class="btn mx-1 px-0" title="' + lang.GEN_CREDIT_TO_CARD + '" data-toggle="tooltip" amount="1">';
-						options += '<i class="icon novoglyphs icon-credit-card" aria-hidden="true"></i>';
+						options += '<i class="icon icon-credit-card" aria-hidden="true"></i>';
 						options += '</button>';
 
 					}
 
 					if (access.TRAABO && data.status == '') {
 						options += '<button class="btn mx-1 px-0" title="' + lang.GEN_DEBIT_TO_CARD + '" data-toggle="tooltip" amount="1">';
-						options += '<i class="icon novoglyphs icon-card-fee" aria-hidden="true"></i>';
+						options += '<i class="icon icon-card-fee" aria-hidden="true"></i>';
 						options += '</button>';
 					}
 
@@ -182,7 +183,7 @@ $(function () {
 
 					if (access.TRAASG) {
 						options += '<button class="btn mx-1 px-0" title="' + lang.GEN_CARD_ASSIGNMENT + '" data-toggle="tooltip" amount="0">';
-						options += '<i class="icon icon-arrow-left" aria-hidden="true"></i>';
+						options += '<i class="icon icon-deliver-card" aria-hidden="true"></i>';
 						options += '</button>';
 					}
 
@@ -234,12 +235,12 @@ $(function () {
 				},
 				btn2: {
 					text: lang.GEN_BTN_CANCEL,
-					action: 'close'
+					action: 'destroy'
 				}
 			}
 
-			inputModal =	'<form id="password-modal" name="password-modal" onsubmit="return false;">';
-			inputModal +=		'<div class="form-group col-auto">';
+			inputModal =	'<form id="password-modal" name="password-modal" class="row col-auto p-0" onsubmit="return false;">';
+			inputModal +=		'<div class="form-group col-12">';
 			inputModal += 		'<div class="input-group">';
 			inputModal += 			'<input class="form-control pwd-input pwd" type="password" name="password" autocomplete="off"';
 			inputModal += 				'placeholder="' + lang.GEN_PLACE_PASSWORD + '">';
@@ -251,7 +252,7 @@ $(function () {
 			inputModal += 	'</div>';
 
 			if (action == lang.GEN_CARD_ASSIGNMENT) {
-				inputModal += 	'<div class="form-group col-auto">';
+				inputModal += 	'<div class="form-group col-12">';
 				inputModal += 		'<div class="input-group">';
 				inputModal += 			'<input class="form-control" type="text" name="cardNumber" autocomplete="off"';
 				inputModal += 			'placeholder="' + lang.GEN_TABLE_CARD_NUMBER + '" req="yes">';
@@ -262,7 +263,7 @@ $(function () {
 
 			inputModal += '</form>';
 
-			notiSystem(action, inputModal, lang.GEN_ICON_INFO, data);
+			appMessages(action, inputModal, lang.CONF_ICON_INFO, data);
 		}
 	})
 
@@ -354,7 +355,7 @@ function amountValidate(getAmount, classSelect, action) {
 			}
 		}
 
-		notiSystem(action, lang.GEN_VALID_AMOUNT, lang.GEN_ICON_WARNING, data);
+		appMessages(action, lang.GEN_VALID_AMOUNT, lang.CONF_ICON_WARNING, data);
 		$('#tableServicesMaster').find('thead > tr').removeClass("selected")
 		table.rows().deselect();
 	}
@@ -420,7 +421,6 @@ function sendRequest(action, modalReq, btn) {
 			}
 
 			if (action == lang.GEN_CHECK_BALANCE || action == 'Consulta') {
-
 				cardCheckBalance(response, action)
 			}
 
@@ -431,7 +431,6 @@ function sendRequest(action, modalReq, btn) {
 			if (action == lang.GEN_CREDIT_TO_CARD || action == 'Abono' || action == lang.GEN_DEBIT_TO_CARD || action == 'Cargo') {
 				buildList(response, action)
 			}
-
 		})
 	}
 }
@@ -463,7 +462,7 @@ function cardCheckBalance(response, action) {
 			inputModal += '<h6 class="light mr-1">' + value + '</h6>';
 		})
 
-		notiSystem(action, inputModal, lang.GEN_ICON_INFO, data);
+		appMessages(action, inputModal, lang.CONF_ICON_INFO, data);
 	}
 }
 
@@ -496,7 +495,7 @@ function buildList(response, action) {
 			inputModal += '<h6 class="light mr-1">Tarjeta: ' + value.cardNumber + ' Monto: ' + value.amount + '</h6>';
 		})
 
-		notiSystem(action, inputModal, lang.GEN_ICON_INFO, data);
+		appMessages(action, inputModal, lang.CONF_ICON_INFO, data);
 		$('#accept').addClass('update')
 		$('.update').on('click', function() {
 			dataTableReload(false)

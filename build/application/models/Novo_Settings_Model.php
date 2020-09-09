@@ -17,42 +17,49 @@ class Novo_Settings_Model extends NOVO_Model {
 	 * @info Método para Obtener los datos del usuario
 	 * @author Diego Acosta García
 	 * @date April 29th, 2020
+	 * @modify J. Enrique Peñaloza Piñero
+	 * @date July 28th, 2020
 	 */
 	public function CallWs_GetUser_Settings()
 	{
 		log_message('INFO', 'NOVO Settings Model: getUser Method Initialized');
 
 		$this->className = 'com.novo.objects.TOs.UsuarioTO';
-		$this->dataAccessLog->modulo = 'configuracion';
-		$this->dataAccessLog->function = 'obtener-usuario';
-		$this->dataAccessLog->operation = 'getPerfilUsuario';
+		$this->dataAccessLog->modulo = 'Configuracion';
+		$this->dataAccessLog->function = 'usuario';
+		$this->dataAccessLog->operation = 'Obtener datos del usuario';
+
 		$this->dataRequest->idOperation = 'getPerfilUsuario';
 		$this->dataRequest->idUsuario = $this->userName;
-		$this->dataRequest->userName = $this->userName;
 
-		$response = $this->sendToService(' CallWs_GetUser');
+		$response = $this->sendToService('CallWs_GetUser');
 
 		switch($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
-				$this->response->msg = lang('RESP_EMAIL_CHANGED');
-				$this->response->icon = lang('GEN_ICON_SUCCESS');
-				$user = $response;
-				$this->response->data = $user;
-				break;
+				$dataUser = new stdClass();
+				$dataUser->userName = mb_strtoupper(trim($response->idUsuario));
+				$dataUser->firstName = mb_strtoupper(trim($response->primerNombre));
+				$dataUser->lastName = mb_strtoupper(trim($response->primerApellido));
+				$dataUser->position = mb_strtoupper(trim($response->cargo));
+				$dataUser->area = mb_strtoupper(trim($response->area));
+				$dataUser->email = mb_strtoupper(trim($response->email));
+
+				$this->response->data->dataUser = $dataUser;
+			break;
 			case -4:
 				$this->response->code = 1;
 				$this->response->msg = lang('RESP_USER_INCORRECT');
-				break;
+			break;
 			case -22:
 				$this->response->code = 1;
 				$this->response->msg = lang('RESP_USER_INCORRECT');
-				break;
+			break;
 		}
 
 		if($this->isResponseRc != 0 && $this->response->code == 1) {
 			$this->response->title = lang('GEN_USER_TITLE');
-			$this->response->icon = lang('GEN_ICON_WARNING');
+			$this->response->icon = lang('CONF_ICON_WARNING');
 			$this->response->data = [
 				'btn1'=> [
 					'action'=> 'close'
@@ -60,9 +67,8 @@ class Novo_Settings_Model extends NOVO_Model {
 			];
 		}
 
-		return $this->responseToTheView(' CallWs_GetUser');
+		return $this->responseToTheView('CallWs_GetUser');
 	}
-
 	/**
 	 * @info Método para el cambio de Email
 	 * @author Diego Acosta García
@@ -92,11 +98,11 @@ class Novo_Settings_Model extends NOVO_Model {
 			case 0:
 				$this->response->code = 0;
 				$this->response->msg = lang('RESP_EMAIL_CHANGED');
-				$this->response->icon = lang('GEN_ICON_SUCCESS');
+				$this->response->icon = lang('CONF_ICON_SUCCESS');
 				$this->response->data = [
 					'btn1'=> [
 						'text'=> lang('GEN_BTN_CONTINUE'),
-						'link'=> 'inicio',
+						'link'=> 'empresas',
 						'action'=> 'close'
 					]
 				];
@@ -131,13 +137,13 @@ class Novo_Settings_Model extends NOVO_Model {
 		$this->dataRequest->idOperation = 'getEmpresaXUsuario';
 
 		$this->dataRequest->accodusuario = $this->userName;
-		$response = $this->sendToService(' ListaEmpresas');
+		$response = $this->sendToService('callWS_ListaEmpresas');
 
 		switch($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
 				$this->response->msg = lang('RESP_EMAIL_CHANGED');
-				$this->response->icon = lang('GEN_ICON_SUCCESS');
+				$this->response->icon = lang('CONF_ICON_SUCCESS');
 				$enter = $response;
 				$this->response->data = $enter;
 				break;
@@ -153,7 +159,7 @@ class Novo_Settings_Model extends NOVO_Model {
 
 		if($this->isResponseRc != 0 && $this->response->code == 1) {
 			$this->response->title = lang('GEN_USER_TITLE');
-			$this->response->icon = lang('GEN_ICON_WARNING');
+			$this->response->icon = lang('CONF_ICON_WARNING');
 			$this->response->data = [
 				'btn1'=> [
 					'action'=> 'close'
@@ -161,32 +167,9 @@ class Novo_Settings_Model extends NOVO_Model {
 			];
 		}
 
-		return $this->responseToTheView(' ListaEmpresas');
+		return $this->responseToTheView('callWS_ListaEmpresas');
 	}
-
-			/**
-	 * @info Método para Obtener la posicion de la empresa
-	 * @author Diego Acosta García
-	 * @date May 2nd, 2020
-	 */
-	public function callWS_obtainNumPosition_Settings($dataRequest)
-	{
-		log_message('INFO', 'NOVO Settings Model: obtainNumPosition Method Initialized');
-		$this->className = 'com.novo.objects.MO.ListadoEmpresasMO';
-		$this->dataAccessLog->modulo = 'configuracion';
-		$this->dataAccessLog->function = 'obtener-posicion';
-		$this->dataAccessLog->operation = 'getInfoSelectConfig';
-		$this->dataRequest->idOperation = 'getSelectXUsuario';
-
-		$response = (array)$dataRequest;
-		$this->response->code = 0;
-		$user = $response;
-		$this->response->data = $user;
-
-		return $this->responseToTheView(' obtainNumPosition');
-	}
-
-		/**
+	/**
 	 * @info Método para el cambio de telefonos
 	 * @author Diego Acosta García
 	 * @date April 29th, 2020
@@ -207,17 +190,17 @@ class Novo_Settings_Model extends NOVO_Model {
 		$this->dataRequest->actel2 = $dataRequest->tlf2;
 		$this->dataRequest->actel3 = $dataRequest->tlf3;
 
-		$this->sendToService('ChangeTelephones');
+		$this->sendToService('CallWs_ChangeTelephones');
 
 		switch($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
 				$this->response->msg = lang('RESP_EMAIL_CHANGED');
-				$this->response->icon = lang('GEN_ICON_SUCCESS');
+				$this->response->icon = lang('CONF_ICON_SUCCESS');
 				$this->response->data = [
 					'btn1'=> [
 						'text'=> lang('GEN_BTN_CONTINUE'),
-						'link'=> 'inicio',
+						'link'=> 'empresas',
 						'action'=> 'close'
 					]
 				];
@@ -234,7 +217,7 @@ class Novo_Settings_Model extends NOVO_Model {
 
 		if($this->isResponseRc != 0 && $this->response->code == 1) {
 			$this->response->title = lang('GEN_EMAIL_CHANGE_TITLE');
-			$this->response->icon = lang('GEN_ICON_WARNING');
+			$this->response->icon = lang('CONF_ICON_WARNING');
 			$this->response->data = [
 				'btn1'=> [
 					'action'=> 'close'
@@ -242,9 +225,8 @@ class Novo_Settings_Model extends NOVO_Model {
 			];
 		}
 
-		return $this->responseToTheView('ChangeTelephones');
+		return $this->responseToTheView('CallWs_ChangeTelephones');
 	}
-
 	/**
 	 * @info Método para agregar contacto
 	 * @author Diego Acosta García
@@ -270,17 +252,17 @@ class Novo_Settings_Model extends NOVO_Model {
 		$this->dataRequest->tipoContacto = $dataRequest->tipoContacto;
 		$this->dataRequest->usuario = $dataRequest->usuario;
 
-		$this->sendToService('AddContact');
+		$this->sendToService('CallWs_AddContact');
 
 		switch($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
 				$this->response->msg = lang('RESP_EMAIL_CHANGED');
-				$this->response->icon = lang('GEN_ICON_SUCCESS');
+				$this->response->icon = lang('CONF_ICON_SUCCESS');
 				$this->response->data = [
 					'btn1'=> [
 						'text'=> lang('GEN_BTN_CONTINUE'),
-						'link'=> 'inicio',
+						'link'=> 'empresas',
 						'action'=> 'close'
 					]
 				];
@@ -297,7 +279,7 @@ class Novo_Settings_Model extends NOVO_Model {
 
 		if($this->isResponseRc != 0 && $this->response->code == 1) {
 			$this->response->title = lang('GEN_EMAIL_CHANGE_TITLE');
-			$this->response->icon = lang('GEN_ICON_WARNING');
+			$this->response->icon = lang('CONF_ICON_WARNING');
 			$this->response->data = [
 				'btn1'=> [
 					'action'=> 'close'
@@ -305,7 +287,7 @@ class Novo_Settings_Model extends NOVO_Model {
 			];
 		}
 
-		return $this->responseToTheView('AddContact');
+		return $this->responseToTheView('CallWs_AddContact');
 	}
 
 	/**
@@ -322,18 +304,21 @@ class Novo_Settings_Model extends NOVO_Model {
 		$this->dataAccessLog->operation = 'Descargar archivo';
 		$this->dataAccessLog->modulo = 'Reportes';
 
-		$this->dataRequest->idOperation = 216;
-		$this->dataRequest->rutaArchivo = DOWNLOAD_ROUTE;
+		$this->dataRequest->idOperation = '216';
+		$idFiscal = $this->session->enterpriseSelect->list[0]->acrif;
+		$enterpriseCode = $this->session->enterpriseSelect->list[0]->accodcia;
 
-		$rif = count($this->session->enterpriseSelect->list) > 1 ? $this->session->enterpriseInf->idFiscal : $this->session->enterpriseSelect->list[0]->acrif;
-		$accodcia = count($this->session->enterpriseSelect->list) > 1 ? $this->session->enterpriseInf->enterpriseCode : $this->session->enterpriseSelect->list[0]->accodcia;
+		if ($this->session->has_userdata('enterpriseInf')) {
+			$idFiscal = $this->session->enterpriseInf->idFiscal;
+			$enterpriseCode = $this->session->enterpriseInf->enterpriseCode;
+		}
 
 		$this->dataRequest->empresaCliente = [
-			'rif' => $rif,
-			'accodcia' => $accodcia
+			'rif' => $idFiscal,
+			'accodcia' => $enterpriseCode
 		];
 
-		$response = $this->sendToService('CallWs_GetFileIni: '.$this->dataRequest->idOperation);
+		$response = $this->sendToService('CallWs_GetFileIni');
 
 		switch($this->isResponseRc) {
 			case 0:
@@ -347,7 +332,7 @@ class Novo_Settings_Model extends NOVO_Model {
 			break;
 			default:
 					$this->response->code = 4;
-					$this->response->icon = lang('GEN_ICON_WARNING');
+					$this->response->icon = lang('CONF_ICON_WARNING');
 					$this->response->msg = lang('GEN_WARNING_DOWNLOAD_FILE');
 					$this->response->data = [
 						'btn1'=> [

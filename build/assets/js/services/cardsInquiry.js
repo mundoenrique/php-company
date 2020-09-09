@@ -56,17 +56,17 @@ $(function () {
 			},
 			btn2: {
 				text: lang.GEN_BTN_CANCEL,
-				action: 'close'
+				action: 'destroy'
 			}
 		}
-		inputModal =	'<form id="modalCardsInquiryForm" name="modalCardsInquiryForm" class="w-100" onsubmit="return false;">';
+		inputModal =	'<form id="modalCardsInquiryForm" name="modalCardsInquiryForm" class="row col-auto p-0" onsubmit="return false;">';
 
 		if (action == 'UPDATE_DATA') {
 			data.maxHeight = 520
 			$(this).closest('tr').addClass('update');
 			cardsData = table.rows('.update').data();
 
-			inputModal +=		'<div class="form-group col-auto">';
+			inputModal +=		'<div class="form-group col-12">';
 			inputModal += 		'<label>Nombre(s)</label>';
 			inputModal += 		'<div class="input-group">';
 			inputModal += 			'<input class="form-control" type="text" id="firstName" name="firstName" autocomplete="off" ';
@@ -74,7 +74,7 @@ $(function () {
 			inputModal += 		'</div>';
 			inputModal += 		'<div class="help-block"></div>';
 			inputModal += 	'</div>';
-			inputModal +=		'<div class="form-group col-auto">';
+			inputModal +=		'<div class="form-group col-12">';
 			inputModal += 		'<label>Apellido(s)</label>';
 			inputModal += 		'<div class="input-group">';
 			inputModal += 			'<input class="form-control" type="text" id="lastName" name="lastName" autocomplete="off" ';
@@ -82,14 +82,14 @@ $(function () {
 			inputModal += 		'</div>';
 			inputModal += 		'<div class="help-block"></div>';
 			inputModal += 	'</div>';
-			inputModal +=		'<div class="form-group col-auto">';
+			inputModal +=		'<div class="form-group col-12">';
 			inputModal += 		'<label>Correo</label>';
 			inputModal += 		'<div class="input-group">';
 			inputModal += 			'<input class="form-control" type="text" id="email" name="email" autocomplete="off" value="'+cardsData[0].email+'">';
 			inputModal += 		'</div>';
 			inputModal += 		'<div class="help-block"></div>';
 			inputModal += 	'</div>';
-			inputModal +=		'<div class="form-group col-auto">';
+			inputModal +=		'<div class="form-group col-12">';
 			inputModal += 		'<label>Número movil</label>';
 			inputModal += 		'<div class="input-group">';
 			inputModal += 			'<input class="form-control" type="text" id="movil" name="movil" autocomplete="off" value="'+cardsData[0].celPhone+'">';
@@ -98,7 +98,7 @@ $(function () {
 			inputModal += 	'</div>';
 		}
 
-		inputModal +=		'<div class="form-group col-auto">';
+		inputModal +=		'<div class="form-group col-12">';
 		inputModal += 		'<div class="input-group">';
 		inputModal += 			'<input class="form-control pwd-input pwd" type="password" name="password" autocomplete="off"';
 		inputModal += 				'placeholder="' + lang.GEN_PLACE_PASSWORD + '">';
@@ -110,7 +110,7 @@ $(function () {
 		inputModal += 	'</div>';
 		inputModal += '</form>';
 
-		notiSystem(title, inputModal, lang.GEN_ICON_INFO, data);
+		appMessages(title, inputModal, lang.CONF_ICON_INFO, data);
 	})
 
 	$('#system-info').on('click', '.send-request', function () {
@@ -132,11 +132,6 @@ $(function () {
 		btnText = $(this).text().trim();
 		$('.help-block').text('');
 		$('input, select').removeClass('has-error');
-		/* cardsData = table.rows('.selected').data();
-		console.log(cardsData[0].options)
-		console.log($('#tableCardInquiry tbody').find('tr.selected'))
-
-		return false */
 		applyActions(action, form, $(this));
 	})
 })
@@ -234,14 +229,14 @@ function getCardList(request) {
 						if (data.options.UPDATE_DATA) {
 							options += '<button class="btn mx-1 px-0 update" title="'+lang.SERVICES_INQUIRY_UPDATE_DATA+'" data-toggle="tooltip" ';
 							options += 'action="'+data.options.UPDATE_DATA+'">';
-							options += 	'<i class="icon novoglyphs icon-user-edit" aria-hidden="true"></i>';
+							options += 	'<i class="icon icon-user-edit" aria-hidden="true"></i>';
 							options += '</button>';
 						}
 
 						if (data.options.INQUIRY_BALANCE) {
 							options += '<button class="btn mx-1 px-0" title="'+lang.SERVICES_INQUIRY_INQUIRY_BALANCE+'" data-toggle="tooltip" ';
 							options += 'action="'+data.options.INQUIRY_BALANCE+'">';
-							options += 	'<i class="icon novoglyphs icon-envelope-open" aria-hidden="true"></i>';
+							options += 	'<i class="icon icon-envelope-open" aria-hidden="true"></i>';
 							options += '</button>';
 						}
 
@@ -255,35 +250,35 @@ function getCardList(request) {
 						if (data.options.UNLOCK_CARD) {
 							options += '<button class="btn mx-1 px-0" title="'+lang.SERVICES_INQUIRY_UNLOCK_CARD+'" data-toggle="tooltip" ';
 							options += 'action="'+data.options.UNLOCK_CARD+'">';
-							options += 	'<i class="icon novoglyphs icon-chevron-up" aria-hidden="true"></i>';
+							options += 	'<i class="icon icon-unlock" aria-hidden="true"></i>';
 							options += '</button>';
 						}
 
 						if (data.options.DELIVER_TO_CARDHOLDER) {
 							options += '<button class="btn mx-1 px-0" title="'+lang.SERVICES_INQUIRY_DELIVER_TO_CARDHOLDER+'" data-toggle="tooltip" ';
 							options += 'action="'+data.options.DELIVER_TO_CARDHOLDER+'">';
-							options += 	'<i class="icon novoglyphs icon-arrow-right" aria-hidden="true"></i>';
+							options += 	'<i class="icon icon-deliver-card" aria-hidden="true"></i>';
 							options += '</button>';
 						}
 
 						if (data.options.SEND_TO_ENTERPRISE) {
 							options += '<button class="btn mx-1 px-0" title="'+lang.SERVICES_INQUIRY_SEND_TO_ENTERPRISE+'" data-toggle="tooltip" ';
 							options += 'action="'+data.options.SEND_TO_ENTERPRISE+'">';
-							options += 	'<i class="icon novoglyphs icon-user-card" aria-hidden="true"></i>';
+							options += 	'<i class="icon icon-shipping" aria-hidden="true"></i>';
 							options += '</button>';
 						}
 
 						if (data.options.RECEIVE_IN_ENTERPRISE) {
 							options += '<button class="btn mx-1 px-0" title="'+lang.SERVICES_INQUIRY_RECEIVE_IN_ENTERPRISE+'" data-toggle="tooltip" ';
 							options += 'action="'+data.options.RECEIVE_IN_ENTERPRISE+'">';
-							options += 	'<i class="icon novoglyphs icon-building" aria-hidden="true"></i>';
+							options += 	'<i class="icon icon-building" aria-hidden="true"></i>';
 							options += '</button>';
 						}
 
 						if (data.options.RECEIVE_IN_BANK) {
 							options += '<button class="btn mx-1 px-0" title="'+lang.SERVICES_INQUIRY_RECEIVE_IN_BANK+'" data-toggle="tooltip" ';
 							options += 'action="'+data.options.RECEIVE_IN_BANK+'">';
-							options += 	'<i class="icon novoglyphs icon-user-building" aria-hidden="true"></i>';
+							options += 	'<i class="icon icon-user-building" aria-hidden="true"></i>';
 							options += '</button>';
 						}
 
@@ -368,7 +363,7 @@ function applyActions(currentAction, currentForm, currentBtn) {
 			.html(loader)
 			.prop('disabled', true)
 		insertFormInput(true)
-		verb = 'POST'; who = 'Services'; where = 'inquiriesActions'
+		verb = 'POST'; who = 'Services'; where = 'InquiriesActions'
 		callNovoCore(verb, who, where, data, function(response) {
 			if (response.success) {
 				$('#accept').addClass('reload-req');
@@ -430,6 +425,6 @@ function evalResult(response, currentAction) {
 			inputModal += '<h6 class="light mr-1">' + value + '</h6>';
 		})
 
-		notiSystem(response.title, inputModal, lang.GEN_ICON_INFO, data);
+		appMessages(response.title, inputModal, lang.CONF_ICON_INFO, data);
 	}
 }

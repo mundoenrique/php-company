@@ -10,7 +10,6 @@ class Novo_Business extends NOVO_Controller {
 	public function __construct()
 	{
 		parent:: __construct();
-		$this->load->library('session');
 		log_message('INFO', 'NOVO Business Controller Class Initialized');
 	}
 	/**
@@ -57,7 +56,7 @@ class Novo_Business extends NOVO_Controller {
 		$requestArray = (array)$this->request;
 
 		if(empty($requestArray) && !$this->session->has_userdata('enterpriseInf')) {
-			redirect(base_url('inicio'), 'location');
+			redirect(base_url('empresas'), 'location');
 		}
 
 		$view = 'getProducts';
@@ -110,7 +109,7 @@ class Novo_Business extends NOVO_Controller {
 		$requestArray = (array) $this->request;
 
 		if(empty($requestArray) && !$this->session->has_userdata('productInf')) {
-			redirect(base_url('inicio'), 'location');
+			redirect(base_url('empresas'), 'location');
 		}
 
 		$view = 'getProductDetail';

@@ -33,7 +33,7 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->dataRequest->accodcia = $this->session->enterpriseInf->enterpriseCode;
 		$this->dataRequest->nombre = $this->session->enterpriseInf->enterpriseName;
 
-		$response = $this->sendToService('GetReportsList');
+		$response = $this->sendToService('callWs_GetReportsList');
 		$headerCardsRep = [];
 
 		switch($this->isResponseRc) {
@@ -108,7 +108,7 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->response->data->IdTypeList = (object) $IdTypeList;
 		$this->response->data->mindateGmfReport = $mindateGmfReport;
 		$this->response->data->headerCardsRep = $headerCardsRep;
-		return $this->responseToTheView('GetReportsList');
+		return $this->responseToTheView('callWs_GetReportsList');
 	}
 	/**
 	 * @info Método para obtener un reporte selecionado por el usuario
@@ -176,14 +176,14 @@ class Novo_Reports_Model extends NOVO_Model {
 
 		switch($this->isResponseRc) {
 			case 0:
-				$this->response->icon = lang('GEN_ICON_DANGER');
+				$this->response->icon = lang('CONF_ICON_DANGER');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_NO_FILE_EXIST');
 				$this->response->data['btn1']['action'] = 'close';
 
 				if(file_exists(assetPath('downloads/'.$response->bean))) {
 					$this->response->code = 0;
-					$this->response->msg = lang('RESP_RC_0');
+					$this->response->msg = lang('GEN_RC_0');
 					$this->response->data = [
 						'file' => assetUrl('downloads/'.$response->bean),
 						'name' => $response->bean
@@ -191,7 +191,7 @@ class Novo_Reports_Model extends NOVO_Model {
 				}
 				break;
 			case -30:
-				$this->response->icon = lang('GEN_ICON_INFO');
+				$this->response->icon = lang('CONF_ICON_INFO');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_NO_CARDS');
 				$this->response->data['btn1']['action'] = 'close';
@@ -227,14 +227,14 @@ class Novo_Reports_Model extends NOVO_Model {
 
 		switch($this->isResponseRc) {
 			case 0:
-				$this->response->icon = lang('GEN_ICON_DANGER');
+				$this->response->icon = lang('CONF_ICON_DANGER');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_NO_FILE_EXIST');
 				$this->response->data['btn1']['action'] = 'close';
 
 				if(file_exists(assetPath('downloads/'.$response->bean))) {
 					$this->response->code = 0;
-					$this->response->msg = lang('RESP_RC_0');
+					$this->response->msg = lang('GEN_RC_0');
 					$this->response->data = [
 						'file' => assetUrl('downloads/'.$response->bean),
 						'name' => $response->bean
@@ -242,7 +242,7 @@ class Novo_Reports_Model extends NOVO_Model {
 				}
 				break;
 			case -30:
-				$this->response->icon = lang('GEN_ICON_INFO');
+				$this->response->icon = lang('CONF_ICON_INFO');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_NO_MOVES_ENTERPRISE');
 				$this->response->data['btn1']['action'] = 'close';
@@ -278,14 +278,14 @@ class Novo_Reports_Model extends NOVO_Model {
 
 		switch($this->isResponseRc) {
 			case 0:
-				$this->response->icon = lang('GEN_ICON_DANGER');
+				$this->response->icon = lang('CONF_ICON_DANGER');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_NO_FILE_EXIST');
 				$this->response->data['btn1']['action'] = 'close';
 
 				if(file_exists(assetPath('downloads/'.$response->bean))) {
 					$this->response->code = 0;
-					$this->response->msg = lang('RESP_RC_0');
+					$this->response->msg = lang('GEN_RC_0');
 					$this->response->data = [
 						'file' => assetUrl('downloads/'.$response->bean),
 						'name' => $response->bean
@@ -294,7 +294,7 @@ class Novo_Reports_Model extends NOVO_Model {
 				break;
 			case -30:
 			case -150:
-				$this->response->icon = lang('GEN_ICON_INFO');
+				$this->response->icon = lang('CONF_ICON_INFO');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_NO_MOVES_ENTERPRISE');
 				$this->response->data['btn1']['action'] = 'close';
@@ -331,14 +331,14 @@ class Novo_Reports_Model extends NOVO_Model {
 
 		switch($this->isResponseRc) {
 			case 0:
-				$this->response->icon = lang('GEN_ICON_DANGER');
+				$this->response->icon = lang('CONF_ICON_DANGER');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_NO_FILE_EXIST');
 				$this->response->data['btn1']['action'] = 'close';
 
 				if(file_exists(assetPath('downloads/'.$response->bean))) {
 					$this->response->code = 0;
-					$this->response->msg = lang('RESP_RC_0');
+					$this->response->msg = lang('GEN_RC_0');
 					$this->response->data = [
 						'file' => assetUrl('downloads/'.$response->bean),
 						'name' => $response->bean
@@ -346,7 +346,7 @@ class Novo_Reports_Model extends NOVO_Model {
 				}
 				break;
 			case -423:
-				$this->response->icon = lang('GEN_ICON_INFO');
+				$this->response->icon = lang('CONF_ICON_INFO');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_NO_CLIENT_STATEMENT');
 				$this->response->data['btn1']['action'] = 'close';
@@ -433,7 +433,7 @@ class Novo_Reports_Model extends NOVO_Model {
 				break;
 			case -30:
 			case -150:
-				$this->response->icon = lang('GEN_ICON_INFO');
+				$this->response->icon = lang('CONF_ICON_INFO');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_FOUND_CARD');
 				$this->response->data['btn1']['action'] = 'close';
@@ -506,7 +506,7 @@ class Novo_Reports_Model extends NOVO_Model {
 				break;
 			case -30:
 			case -150:
-				$this->response->icon = lang('GEN_ICON_INFO');
+				$this->response->icon = lang('CONF_ICON_INFO');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_NO_CARDS_PEOPLE');
 				$this->response->data['btn1']['action'] = 'close';
@@ -544,14 +544,14 @@ class Novo_Reports_Model extends NOVO_Model {
 
 		switch($this->isResponseRc) {
 			case 0:
-				$this->response->icon = lang('GEN_ICON_DANGER');
+				$this->response->icon = lang('CONF_ICON_DANGER');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_NO_FILE_EXIST');
 				$this->response->data['btn1']['action'] = 'close';
 
 				if(file_exists(assetPath('downloads/'.$response->bean))) {
 					$this->response->code = 0;
-					$this->response->msg = lang('RESP_RC_0');
+					$this->response->msg = lang('GEN_RC_0');
 					$this->response->data = [
 						'file' => assetUrl('downloads/'.$response->bean),
 						'name' => $response->bean
@@ -561,7 +561,7 @@ class Novo_Reports_Model extends NOVO_Model {
 			case -30:
 			case -150:
 				$this->session->set_flashdata('cardsPeople', $this->session->flashdata('cardsPeople'));
-				$this->response->icon = lang('GEN_ICON_INFO');
+				$this->response->icon = lang('CONF_ICON_INFO');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_NO_MOVES_ENTERPRISE');
 				$this->response->data['btn1']['action'] = 'close';
@@ -595,14 +595,14 @@ class Novo_Reports_Model extends NOVO_Model {
 
 		switch($this->isResponseRc) {
 			case 0:
-				$this->response->icon = lang('GEN_ICON_DANGER');
+				$this->response->icon = lang('CONF_ICON_DANGER');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_NO_FILE_EXIST');
 				$this->response->data['btn1']['action'] = 'close';
 
 				if(file_exists(assetPath('downloads/'.$response->bean))) {
 					$this->response->code = 0;
-					$this->response->msg = lang('RESP_RC_0');
+					$this->response->msg = lang('GEN_RC_0');
 					$this->response->data = [
 						'file' => assetUrl('downloads/'.$response->bean),
 						'name' => $response->bean
@@ -611,7 +611,7 @@ class Novo_Reports_Model extends NOVO_Model {
 				break;
 			case -30:
 			case -150:
-				$this->response->icon = lang('GEN_ICON_INFO');
+				$this->response->icon = lang('CONF_ICON_INFO');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = novoLang(lang('REPORTS_NO_GMF_FOR_YEAR'), $dataRequest->dateG);
 				$this->response->data['btn1']['action'] = 'close';
@@ -759,11 +759,11 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->dataAccessLog->function = 'Saldos amanecidos';
 		$this->dataAccessLog->operation = 'Obtener excel de tabla';
 		$this->dataRequest->idOperation = 'generaArchivoXls';
-		$this->dataRequest->producto =  $dataRequest->producto;
-		$this->dataRequest->idExtEmp =  $dataRequest->cedula;
-		$this->dataRequest->tamanoPagina = $dataRequest->tamPg;
-		$this->dataRequest->paginar = $dataRequest->paginar;
-		$this->dataRequest->paginaActual = $dataRequest->paginaActual;
+		$this->dataRequest->producto =  $dataRequest->product;
+		$this->dataRequest->idExtEmp =  $dataRequest->identificationCard;
+		$this->dataRequest->tamanoPagina = $dataRequest->pageLenght;
+		$this->dataRequest->paginar = $dataRequest->paged;
+		$this->dataRequest->paginaActual = $dataRequest->actualPage;
 		$this->dataRequest->descProd =  $dataRequest->descProd;
 
 
@@ -779,7 +779,7 @@ class Novo_Reports_Model extends NOVO_Model {
 
 			case -3:
 				$this->response->code = 4;
-				$this->response->icon = lang('GEN_ICON_DANGER');
+				$this->response->icon = lang('CONF_ICON_DANGER');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_NO_BUDGET');
 				$this->response->data['btn1']['action'] = 'close';
@@ -866,7 +866,7 @@ class Novo_Reports_Model extends NOVO_Model {
 
 			case -3:
 				$this->response->code = 4;
-				$this->response->icon = lang('GEN_ICON_DANGER');
+				$this->response->icon = lang('CONF_ICON_DANGER');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_NO_BUDGET');
 				$this->response->data['btn1']['action'] = 'close';
@@ -914,7 +914,7 @@ class Novo_Reports_Model extends NOVO_Model {
 
 			case -3:
 				$this->response->code = 4;
-				$this->response->icon = lang('GEN_ICON_DANGER');
+				$this->response->icon = lang('CONF_ICON_DANGER');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_NO_BUDGET');
 				$this->response->data['btn1']['action'] = 'close';
@@ -964,7 +964,7 @@ class Novo_Reports_Model extends NOVO_Model {
 
 			case -3:
 				$this->response->code = 4;
-				$this->response->icon = lang('GEN_ICON_DANGER');
+				$this->response->icon = lang('CONF_ICON_DANGER');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_NO_FILE');
 				$this->response->data['btn1']['action'] = 'close';
@@ -972,7 +972,7 @@ class Novo_Reports_Model extends NOVO_Model {
 
 			default:
 			$this->response->code = 4;
-			$this->response->icon = lang('GEN_ICON_DANGER');
+			$this->response->icon = lang('CONF_ICON_DANGER');
 			$this->response->title = lang('REPORTS_TITLE');
 			$this->response->msg = lang('REPORTS_NO_FILE_CONSOLID');
 			$this->response->data['btn1']['action'] = 'close';
@@ -1020,7 +1020,7 @@ class Novo_Reports_Model extends NOVO_Model {
 
 			case -3:
 				$this->response->code = 4;
-				$this->response->icon = lang('GEN_ICON_DANGER');
+				$this->response->icon = lang('CONF_ICON_DANGER');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_NO_FILE');
 				$this->response->data['btn1']['action'] = 'close';
@@ -1028,7 +1028,7 @@ class Novo_Reports_Model extends NOVO_Model {
 
 			default:
 			$this->response->code = 4;
-			$this->response->icon = lang('GEN_ICON_DANGER');
+			$this->response->icon = lang('CONF_ICON_DANGER');
 			$this->response->title = lang('REPORTS_TITLE');
 			$this->response->msg = lang('REPORTS_NO_FILE_CONSOLID');
 			$this->response->data['btn1']['action'] = 'close';
@@ -1077,6 +1077,103 @@ class Novo_Reports_Model extends NOVO_Model {
     return $this->responseToTheView('callWS_StatusCardHolders');
 	}
 
+	public function callWs_RechargeMade_Reports($dataRequest)
+	{
+		log_message('INFO', 'NOVO Reports Model: RechargeMade Method Initialized');
+
+		$this->className = 'com.novo.objects.TOs.RecargasRealizadasTO';
+
+		$this->dataAccessLog->modulo = 'Reportes';
+		$this->dataAccessLog->function = 'Reportes Recargas Realizadas';
+		$this->dataAccessLog->operation = 'Recargas Realizadas';
+
+		$this->dataRequest->idOperation = 'recargasRealizadas';
+		$this->dataRequest->paginaActual = 1;
+		$this->dataRequest->tamanoPagina = 10;
+		$this->dataRequest->fecha = '';
+		$this->dataRequest->fecha1 = '';
+		$this->dataRequest->fecha2 = '';
+		$this->dataRequest->accodcia = $dataRequest->enterpriseCode;
+    $fecha=$dataRequest->initialDatemy;
+    $arreglo=explode ("/",$fecha);
+    $mes=$arreglo[0];
+    $anio=$arreglo[1];
+		$this->dataRequest->mesSeleccionado = $mes;
+		$this->dataRequest->anoSeleccionado = $anio;
+		$response = $this->sendToService('callWs_RechargeMadeReport');
+		$rechargeMadeList = [];
+
+    switch($this->isResponseRc) {
+      case 0:
+        $this->response->code = 0;
+
+          $record = new stdClass();
+					$record->monthRecharge1 = $response->mesRecarga1;
+					$record->monthRecharge2 = $response->mesRecarga2;
+					$record->monthRecharge3 =$response->mesRecarga3;
+					$record->totalRecharge1 = $response->totalRecargas1;
+					$record->totalRecharge2 = $response->totalRecargas2;
+					$record->totalRecharge3 =$response->totalRecargas3;
+					$record->totalRecharge =$response->totalRecargas;
+					$record->recharge = $response->recargas;
+          array_push(
+            $rechargeMadeList,
+            $record
+          );
+
+      break;
+      case -150:
+        $this->response->code = 0;
+      break;
+    }
+    $this->response->data['rechargeMadeList'] = $rechargeMadeList;
+
+    return $this->responseToTheView('callWS_RechargeMadeReport');
+	}
+
+	public function callWs_IssuedCards_Reports($dataRequest)
+	{
+		log_message('INFO', 'NOVO Reports Model: IssuedCards Method Initialized');
+		$this->className = 'com.novo.objects.MO.ListadoEmisionesMO';
+
+		$this->dataAccessLog->modulo = 'Reportes';
+		$this->dataAccessLog->function = 'buscarTarjetasEmitidas';
+		$this->dataAccessLog->operation = 'buscarTarjetasEmitidas';
+
+		$this->dataRequest->idOperation = 'buscarTarjetasEmitidas';
+		$this->dataRequest->tipoConsulta = $dataRequest->radioButton;
+		$this->dataRequest->fechaMes = $dataRequest->monthYear;
+		$this->dataRequest->accodcia = $dataRequest->enterpriseCode;
+		$this->dataRequest->fechaIni = '';
+		$this->dataRequest->fechaFin = '';
+		$response = $this->sendToService('callWs_IssuedCardsReport');
+		$issuedCardsList = [];
+
+    switch($this->isResponseRc) {
+      case 0:
+        $this->response->code = 0;
+
+          $record = new stdClass();
+					$record->lista = isset($response->lista) ? $response->lista : '';
+          array_push(
+            $issuedCardsList,
+            $record
+          );
+
+      break;
+      case -150:
+        $this->response->code = 0;
+      break;
+    }
+		$this->response->data['issuedCardsList'] = $issuedCardsList;
+		$this->response->data['tipoConsulta'] = $this->dataRequest->tipoConsulta;
+
+    return $this->responseToTheView('callWS_IssuedCardsReport');
+	}
+
+
+
+
 		/**
 	 * @info Método para obtener actividad por ususario
 	 * @author Diego Acosta García
@@ -1104,14 +1201,8 @@ class Novo_Reports_Model extends NOVO_Model {
 				$this->response->data =  (array)$user;
 
 			break;
-
-			case -3:
-				$this->response->code = 4;
-				$this->response->icon = lang('GEN_ICON_DANGER');
-				$this->response->title = lang('REPORTS_TITLE');
-				$this->response->msg = lang('REPORTS_NO_BUDGET');
-				$this->response->data['btn1']['action'] = 'close';
-
+			case -150:
+				$this->response->code = 1;
 			break;
 		}
 
@@ -1150,7 +1241,7 @@ class Novo_Reports_Model extends NOVO_Model {
 
 			case -3:
 				$this->response->code = 4;
-				$this->response->icon = lang('GEN_ICON_DANGER');
+				$this->response->icon = lang('CONF_ICON_DANGER');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_NO_BUDGET');
 				$this->response->data['btn1']['action'] = 'close';
@@ -1193,5 +1284,219 @@ class Novo_Reports_Model extends NOVO_Model {
 		}
 
 		return $this->response;
+	}
+
+		/**
+	 * @info Método para obtener busqueda de estado de cuenta
+	 * @author Diego Acosta García
+	 * @date Aug 18, 2020
+	 */
+	public function callWs_searchStatusAccount_Reports($dataRequest)
+	{
+		log_message('INFO', 'NOVO Reports Model: searchStatusAccount Method Initialized');
+
+		$this->className = 'com.novo.objects.MO.EstadoCuentaMO';
+
+		$this->dataAccessLog->modulo = 'Reportes';
+		$this->dataAccessLog->function = 'movimientoEstadoCuentaDetalle';
+		$this->dataAccessLog->operation = 'movimientoEstadoCuentaDetalle';
+		$this->dataRequest->idOperation = 'movimientoEstadoCuentaDetalle';
+		if($dataRequest->resultByNIT === 'all'){
+			$dataRequest->resultByNIT = '';
+			$typeSearch = '0';
+		}else {
+			$typeSearch = '1';
+		}
+		$this->dataRequest->idExtPer = strtoupper($dataRequest->resultByNIT);
+		if(lang('CONF_INPUT_UPPERCASE') == 'ON'){
+			$this->dataRequest->idExtPer = $dataRequest->resultByNIT;
+		}
+		$this->dataRequest->idExtEmp = $dataRequest->enterpriseCode;
+    $lastDayMonyh = date("t-m-Y", strtotime(str_replace( '/', '-', "1/".$dataRequest->initialDateAct)));
+		$this->dataRequest->fechaFin = str_replace( '-', '/', $lastDayMonyh);
+		$this->dataRequest->fechaIni = "1/".$dataRequest->initialDateAct;
+		$this->dataRequest->tamanoPagina = '10';
+		$this->dataRequest->tipoConsulta = $typeSearch;
+		$this->dataRequest->pagActual = '2';
+		$this->dataRequest->prefix = $dataRequest->productCode;
+		$this->dataRequest->paginar = false;
+
+		$response = $this->sendToService('callWs_searchStatusAccount');
+
+		switch($this->isResponseRc) {
+			case 0:
+				$table =[];
+				$this->response->code = 0;
+				foreach ((array)$response->listadoEstadosCuentas as $key => $val){
+					$table[$key] = $val;
+					$valAccountStatus[$key]= $response->listadoEstadosCuentas[$key]->listaMovimientos;
+				}
+				$usersData = $valAccountStatus;
+				$usersTables = [];
+				$data = [];
+
+				foreach ($usersData as $key1 => $val){
+					$data[$key1] = $usersData[$key1];
+				}
+
+				foreach ($data as $key => $val){
+					foreach ($data[$key] as $key1 => $val){
+						$usersTables =(($data[$key])[$key1]);
+						$dataAccount = [];
+						$debit = '';
+						$credit = '';
+
+						if( lang('CONF_STATUS_ACCOUNT_ADD_COLUMNS') == 'ON' ){
+							$usersTables->secuencia = $usersTables->secuence;
+							$usersTables->terminal = $usersTables->terminal;
+							$usersTables->fid = $usersTables->fid;
+						}
+						if( $usersTables->tipoTransaccion == '+' ){
+							$debit = $usersTables->monto;
+							$credit = '0';
+						}else{
+							$credit = $usersTables->monto;
+							$debit = '0';
+						}
+						$objUserData[$key] =[
+							'secuence' => "",
+							'terminal' => "",
+							'fid' => "",
+							'reference' => $usersTables->referencia,
+							'description' => $usersTables->descripcion,
+							'date' => $usersTables->fecha,
+							'credit' => $credit,
+							'debit' => $debit,
+							'client' => $usersTables->cliente
+						];
+						($data[$key])[$key1]= $objUserData[$key];
+					}
+				}
+
+				foreach($response->listadoEstadosCuentas as $key => $value){
+					($dataAccount[$key])['account'] = $response->listadoEstadosCuentas[$key]->cuenta;
+					($dataAccount[$key])['client'] = $response->listadoEstadosCuentas[$key]->cliente;
+					($dataAccount[$key])['id'] = $response->listadoEstadosCuentas[$key]->idExtPer;
+				}
+				$this->response->data['users'] = $data;
+				$this->response->data['accounts'] = $dataAccount;
+			break;
+			case -444:
+				$this->response->icon = lang('CONF_ICON_DANGER');
+				$this->response->title = lang('REPORTS_TITLE');
+				$this->response->msg = lang('REPORTS_NO_REGISTRY_FOUND');
+				$this->response->data['btn1']['action'] = 'close';
+			break;
+			case -150:
+				$this->response->code = 1;
+				$this->response->data['users'] = '';
+			break;
+		}
+
+		return $this->responseToTheView('callWs_searchStatusAccount');
+	}
+
+			/**
+	 * @info Método para obtener EXCEL de estado de cuenta
+	 * @author Diego Acosta García
+	 * @date Aug 18, 2020
+	 */
+	public function callWs_statusAccountExcelFile_Reports($dataRequest)
+	{
+		log_message('INFO', 'NOVO Reports Model: statusAccountExcelFile Method Initialized');
+
+		$this->className = 'com.novo.objects.MO.EstadoCuentaMO';
+
+		$this->dataAccessLog->modulo = 'Reportes';
+		$this->dataAccessLog->function = 'generaArchivoXlsEdoCta';
+		$this->dataAccessLog->operation = 'generaArchivoXlsEdoCta';
+		$this->dataRequest->idOperation = 'generaArchivoXlsEdoCta';
+		if($dataRequest->resultByNIT === 'all'){
+			$dataRequest->resultByNIT = '';
+			$typeSearch = '0';
+		}else {
+			$typeSearch = '1';
+		}
+		$this->dataRequest->idExtEmp = $dataRequest->enterpriseCode;
+		$this->dataRequest->idExtPer = $dataRequest->resultByNIT;
+    $lastDayMonyh = date("t-m-Y", strtotime(str_replace( '/', '-', "1/".$dataRequest->initialDateAct)));
+		$this->dataRequest->fechaFin = str_replace( '-', '/', $lastDayMonyh);
+		$this->dataRequest->fechaIni = "1/".$dataRequest->initialDateAct;
+		$this->dataRequest->tamanoPagina = '5';
+		$this->dataRequest->tipoConsulta = $typeSearch;
+		$this->dataRequest->pagActual = '1';
+		$this->dataRequest->prefix = $dataRequest->productCode;
+		$this->dataRequest->paginar = false;
+		$this->dataRequest->nombreEmpresa = $dataRequest->enterpriseName;
+		$this->dataRequest->descProducto = $dataRequest->descProduct;
+
+		$response = $this->sendToService('callWs_statusAccountExcelFile');
+
+		switch($this->isResponseRc) {
+			case 0:
+				$this->response->code = 0;
+				$this->response->data = (array)$response;
+			break;
+			case -3:
+				$this->response->icon = lang('CONF_ICON_DANGER');
+				$this->response->title = lang('REPORTS_TITLE');
+				$this->response->msg = lang('REPORTS_NO_FILE_CONSOLID');
+				$this->response->data['btn1']['action'] = 'close';
+			break;
+		}
+
+		return $this->responseToTheView('callWs_statusAccountExcelFile');
+	}
+
+		/**
+	 * @info Método para obtener PDF de estado de cuenta
+	 * @author Diego Acosta García
+	 * @date Aug 18, 2020
+	 */
+	public function callWs_statusAccountpdfFile_Reports($dataRequest)
+	{
+		log_message('INFO', 'NOVO Reports Model: statusAccountpdfFile Method Initialized');
+
+		$this->className = 'com.novo.objects.MO.EstadoCuentaMO';
+
+		$this->dataAccessLog->modulo = 'Reportes';
+		$this->dataAccessLog->function = 'generarComprobante';
+		$this->dataAccessLog->operation = 'generarComprobante';
+		$this->dataRequest->idOperation = 'generarComprobante';
+		if($dataRequest->resultByNIT === 'all'){
+			$dataRequest->resultByNIT = '';
+			$typeSearch = '0';
+		}else {
+			$typeSearch = '1';
+		}
+		$this->dataRequest->idExtEmp = $dataRequest->enterpriseCode;
+		$this->dataRequest->idExtPer = $dataRequest->resultByNIT;
+    $lastDayMonyh = date("t-m-Y", strtotime(str_replace( '/', '-', "1/".$dataRequest->initialDateAct)));
+		$this->dataRequest->fechaFin = str_replace( '-', '/', $lastDayMonyh);
+		$this->dataRequest->fechaIni = "1/".$dataRequest->initialDateAct;
+		$this->dataRequest->tamanoPagina = '5';
+		$this->dataRequest->tipoConsulta = $typeSearch;
+		$this->dataRequest->pagActual = '1';
+		$this->dataRequest->prefix = $dataRequest->productCode;
+		$this->dataRequest->paginar = false;
+		$this->dataRequest->nombreEmpresa = $dataRequest->enterpriseName;
+		$this->dataRequest->descProducto = $dataRequest->descProduct;
+
+		$response = $this->sendToService('callWs_statusAccountPdfFile');
+
+		switch($this->isResponseRc) {
+			case 0:
+				$this->response->code = 0;
+				$this->response->data = (array)$response;
+			break;
+			case -3:
+				$this->response->icon = lang('CONF_ICON_DANGER');
+				$this->response->title = lang('REPORTS_TITLE');
+				$this->response->msg = lang('REPORTS_NO_FILE_CONSOLID');
+				$this->response->data['btn1']['action'] = 'close';
+			break;
+		}
+
+		return $this->responseToTheView('callWs_statusAccountpdfFile');
 	}
 }

@@ -29,6 +29,10 @@ class Novo_Services_Model extends NOVO_Model {
 		$this->dataRequest->idOperation = 'buscarTransferenciaM';
 		$this->dataRequest->rifEmpresa = $this->session->enterpriseInf->idFiscal;
 		$this->dataRequest->idProducto = $this->session->productInf->productPrefix;
+		$idPersonal = strtoupper($dataRequest->idNumber);
+		if(lang('CONF_INPUT_UPPERCASE') == 'ON'){
+			$idPersonal = $dataRequest->idNumber;
+		}
 		$this->dataRequest->listaTarjetas = [
 			[
 				'paginaActual' => (int) ($dataRequest->start / 10) + 1,
@@ -43,7 +47,7 @@ class Novo_Services_Model extends NOVO_Model {
 			'lista' => [
 				[
 					'noTarjeta' => $dataRequest->cardNumber,
-					'id_ext_per' => $dataRequest->idNumber
+					'id_ext_per' => $idPersonal
 				]
 			]
 		];
@@ -97,9 +101,9 @@ class Novo_Services_Model extends NOVO_Model {
 			case -150:
 				$this->response->code = 1;
 				$this->response->title = lang('GEN_MENU_SERV_MASTER_ACCOUNT');
-				$this->response->icon = lang('GEN_ICON_INFO');
-				$this->response->msg = 'No se encontraron resultados para tu busqueda';
-				$this->response->data['btn1']['action'] = 'close';
+				$this->response->icon = lang('CONF_ICON_INFO');
+				$this->response->msg = lang('GEN_TABLE_SEMPTYTABLE');
+				$this->response->data['btn1']['action'] = 'destroy';
 			break;
 		}
 
@@ -197,7 +201,7 @@ class Novo_Services_Model extends NOVO_Model {
 			utf8_encode($password->password)
 		);
 
-		if (lang('CONF_HASH_PASS') == 'ON' || $this->session->autoLogin == 'false') {
+		if (lang('CONF_HASH_PASS') == 'ON' || $this->singleSession == 'signIn') {
 			$password = md5($password);
 		}
 
@@ -213,17 +217,18 @@ class Novo_Services_Model extends NOVO_Model {
 		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->title = $dataRequest->action;
-				$this->response->icon = lang('GEN_ICON_SUCCESS');
+				$this->response->icon = lang('CONF_ICON_SUCCESS');
 				$this->response->data['btn1']['action'] = 'close';
 
 				if ($dataRequest->action == lang('GEN_TEMPORARY_LOCK') || $dataRequest->action == lang('GEN_UNLOCK_CARD')) {
-					$blockType = $dataRequest->action == lang('GEN_TEMPORARY_LOCK') ? 'Bloqueda' : 'desbloqueda';
-					$this->response->msg =  novoLang('La tarjeta %s ha sido %s.', [$cardsList[0]['noTarjeta'], $blockType]);
+					$blockType = $dataRequest->action == lang('GEN_TEMPORARY_LOCK') ? 'Bloqueda' : 'Desbloqueda';
+					$this->response->msg =  novoLang(lang('SERVICES_BLOCKING_CARD'), [$cardsList[0]['noTarjeta'], $blockType]);
 					$this->response->update = TRUE;
 				}
 
 				if ($dataRequest->action == lang('GEN_CARD_ASSIGNMENT')) {
-					$this->response->msg =  novoLang('La tarjeta %s ha sido reemplazada por %s.', [$cardsList[0]['noTarjeta'], $cardsList[0]['noTarjetaAsig']]);
+					$maskCards = maskString($cardsList[0]['noTarjetaAsig'], 4, 6);
+					$this->response->msg =  novoLang(lang('SERVICES_ASSIGNMENT_CARD'), [$cardsList[0]['noTarjeta'], $maskCards]);
 				}
 
 				if ($dataRequest->action == lang('GEN_CHECK_BALANCE') || $dataRequest->action == 'Consulta') {
@@ -243,7 +248,7 @@ class Novo_Services_Model extends NOVO_Model {
 
 					if (count($listFail) > 0) {
 						$this->response->code = 2;
-						$this->response->msg = 'No fue posible obtener el saldo para';
+						$this->response->msg = lang('SERVICES_BALANCE_NO_FOUND');
 					}
 				}
 
@@ -257,7 +262,7 @@ class Novo_Services_Model extends NOVO_Model {
 					}
 
 					$this->response->code = 2;
-					$this->response->msg = 'Datos de la transacción';
+					$this->response->msg = lang('SERVICES_TRANSACTION_DATA');
 				}
 
 				$this->response->data['listResponse'] = $listResopnse;
@@ -269,64 +274,88 @@ class Novo_Services_Model extends NOVO_Model {
 			break;
 			case -1:
 				$this->response->title = $dataRequest->action;
-				$this->response->msg = lang('RESP_PASSWORD_NO_VALID');
-				$this->response->icon = lang('GEN_ICON_INFO');
+				$this->response->msg = lang('GEN_PASSWORD_NO_VALID');
+				$this->response->icon = lang('CONF_ICON_INFO');
 				$this->response->data['btn1']['action'] = 'close';
 			break;
 			case -21:
 			case -22:
 				$this->response->title = $dataRequest->action;
-				$this->response->msg = 'No fue posible realizar la trasacción, intentalo de nuevo';
-				$this->response->icon = lang('GEN_ICON_WARNING');
+				$this->response->msg = lang('SERVICES_TRANSACTION_FAIL');
+				$this->response->icon = lang('CONF_ICON_WARNING');
 				$this->response->data['btn1']['action'] = 'close';
 			break;
 			case -33:
 			case -100:
 				$this->response->title = $dataRequest->action;
-				$this->response->msg = 'El saldo no esta disponible';
-				$this->response->icon = lang('GEN_ICON_WARNING');
+				$this->response->msg = lang('SERVICES_BALANCE_NO_AVAILABLE');
+				$this->response->icon = lang('CONF_ICON_WARNING');
 				$this->response->data['btn1']['action'] = 'close';
 			break;
 			case -152:
 				$this->response->title = $dataRequest->action;
-				$this->response->msg = 'La transacción no supera el monto mínimo por operación';
-				$this->response->icon = lang('GEN_ICON_INFO');
+				$this->response->msg = lang('SERVICES_MIN_AMOUNT');
+				$this->response->icon = lang('CONF_ICON_INFO');
 				$this->response->data['btn1']['action'] = 'close';
 			break;
 			case -153:
 				$this->response->title = $dataRequest->action;
-				$this->response->msg = 'Alcanzaste el monto maximo de operaciones semenales';
-				$this->response->icon = lang('GEN_ICON_INFO');
+				$this->response->msg = lang('SERVICES_MAX_WEEKLY_AMOUNT');
+				$this->response->icon = lang('CONF_ICON_INFO');
 				$this->response->data['btn1']['action'] = 'close';
 			break;
 			case -154:
 				$this->response->title = $dataRequest->action;
-				$this->response->msg = 'Alcanzaste el monto maximo de operaciones diarias';
-				$this->response->icon = lang('GEN_ICON_INFO');
+				$this->response->msg = lang('SERVICES_MAX_DAILY_AMOUNT');
+				$this->response->icon = lang('CONF_ICON_INFO');
 				$this->response->data['btn1']['action'] = 'close';
 			break;
 			case -155:
 				$this->response->title = $dataRequest->action;
-				$this->response->msg = 'Tu saldo no es suficiente para realizar la transacción';
-				$this->response->icon = lang('GEN_ICON_INFO');
+				$this->response->msg = lang('SERVICES_NO_BALANCE');
+				$this->response->icon = lang('CONF_ICON_INFO');
 				$this->response->data['btn1']['action'] = 'close';
 			break;
 			case -157:
 				$this->response->title = $dataRequest->action;
-				$this->response->msg = 'Alcanzaste el límite de operaciones diarias';
-				$this->response->icon = lang('GEN_ICON_INFO');
+				$this->response->msg = lang('SERVICES_MAX_DAILY_OPERATION');
+				$this->response->icon = lang('CONF_ICON_INFO');
 				$this->response->data['btn1']['action'] = 'close';
 			break;
 			case -242:
 				$this->response->title = $dataRequest->action;
-				$this->response->msg = 'Alcanzaste el límite de transacciones';
-				$this->response->icon = lang('GEN_ICON_INFO');
+				$this->response->msg = lang('SERVICES_MAX_OPERATION');
+				$this->response->icon = lang('CONF_ICON_INFO');
 				$this->response->data['btn1']['action'] = 'close';
 			break;
 			case -267:
 				$this->response->title = $dataRequest->action;
-				$this->response->msg = novoLang('La tarjeta %s ya se encunetra bloqueda.', $cardsList[0]['noTarjeta']);
-				$this->response->icon = lang('GEN_ICON_WARNING');
+				$this->response->msg = novoLang(lang('SERVICES_BLOCKED_CARD'), $cardsList[0]['noTarjeta']);
+				$this->response->icon = lang('CONF_ICON_WARNING');
+				$this->response->data['btn1']['action'] = 'close';
+			break;
+			case -429:
+				$this->response->title = $dataRequest->action;
+				$this->response->msg = novoLang(lang('SERVICES_CARD_BULK_AFFILIATED'), $cardsList[0]['noTarjeta']);
+				$this->response->icon = lang('CONF_ICON_WARNING');
+				$this->response->data['btn1']['action'] = 'close';
+			break;
+			case -459:
+				$this->response->title = $dataRequest->action;
+				$this->response->msg = lang('SERVICES_PENDING_MEMBER_SHIP');
+				$this->response->icon = lang('CONF_ICON_WARNING');
+				$this->response->data['btn1']['action'] = 'close';
+			break;
+			case -460:
+				$this->response->title = $dataRequest->action;
+				$this->response->msg = lang('SERVICES_USER_BULK_CONFIRM');
+				$this->response->icon = lang('CONF_ICON_WARNING');
+				$this->response->data['btn1']['action'] = 'close';
+			break;
+			case -461:
+				$this->response->title = $dataRequest->action;
+				$this->response->msg = novoLang(lang('SERVICES_CARD_BULK_CONFIRM'), $cardsList[0]['noTarjeta']);
+				$this->response->icon = lang('CONF_ICON_WARNING');
 				$this->response->data['btn1']['action'] = 'close';
 			break;
 		}
@@ -430,7 +459,7 @@ class Novo_Services_Model extends NOVO_Model {
 			default:
 				if (isset($dataRequest->action) && $this->isResponseRc != -29 && $this->isResponseRc != -61) {
 					$this->response->title = lang('GEN_DOWNLOAD_FILE');
-					$this->response->icon =  lang('GEN_ICON_WARNING');
+					$this->response->icon =  lang('CONF_ICON_WARNING');
 					$this->response->msg = lang('GEN_WARNING_DOWNLOAD_FILE');
 					$this->response->data['btn1']['action'] = 'close';
 				}
@@ -501,7 +530,7 @@ class Novo_Services_Model extends NOVO_Model {
 			utf8_encode($password->password)
 		);
 
-		if (lang('CONF_HASH_PASS') == 'ON' || $this->session->autoLogin == 'false') {
+		if (lang('CONF_HASH_PASS') == 'ON' || $this->singleSession == 'signIn') {
 			$password = md5($password);
 		}
 
@@ -521,13 +550,13 @@ class Novo_Services_Model extends NOVO_Model {
 		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->title = lang('SERVICES_INQUIRY_'.$dataRequest->action);
-				$this->response->icon = lang('GEN_ICON_SUCCESS');
+				$this->response->icon = lang('CONF_ICON_SUCCESS');
 				$this->response->data['btn1'] = [
 					'text' => lang('GEN_BTN_ACCEPT'),
 					'action' => 'close'
 				];
 				$this->response->success = TRUE;
-				$responseList = isset($response->bean) ? json_decode($response->bean) : FALSE;
+				$responseList = $response->bean ?? FALSE;
 
 				if ($responseList && is_array($responseList)) {
 					foreach ($responseList AS $cards) {
@@ -551,8 +580,8 @@ class Novo_Services_Model extends NOVO_Model {
 			break;
 			case -1:
 				$this->response->title = lang('SERVICES_INQUIRY_'.$dataRequest->action);
-				$this->response->msg = lang('RESP_PASSWORD_NO_VALID');
-				$this->response->icon = lang('GEN_ICON_WARNING');
+				$this->response->msg = lang('GEN_PASSWORD_NO_VALID');
+				$this->response->icon = lang('CONF_ICON_WARNING');
 				$this->response->data['btn1'] = [
 					'text' => lang('GEN_BTN_ACCEPT'),
 					'action' => 'close'
@@ -561,7 +590,7 @@ class Novo_Services_Model extends NOVO_Model {
 			case -450:
 				$this->response->title = lang('SERVICES_INQUIRY_'.$dataRequest->action);
 				$this->response->msg = 'Alcanzaste el límite de consultas diarias';
-				$this->response->icon = lang('GEN_ICON_INFO');
+				$this->response->icon = lang('CONF_ICON_INFO');
 				$this->response->data['btn1'] = [
 					'text' => lang('GEN_BTN_ACCEPT'),
 					'action' => 'close'
@@ -573,5 +602,345 @@ class Novo_Services_Model extends NOVO_Model {
 		$this->response->data['failList'] = $failList;
 
 		return $this->responseToTheView('callWs_InquiriesActions');
+	}
+
+		/**
+	 * @info Método para consulta tarjetas en giros comerciales
+	 * @author Diego Acosta García
+	 * @date July 15th, 2020
+	 */
+
+	public function callWs_commercialTwirls_Services($dataRequest)
+	{
+		log_message('INFO', 'NOVO Services Model: commercialTwirls Method Initialized');
+
+		$this->className = 'com.novo.objects.MO.GiroComercialMO';
+
+		$this->dataAccessLog->modulo = 'servicios';
+		$this->dataAccessLog->function = 'custom_mcc';
+		$this->dataAccessLog->operation = 'customMcc';
+		$this->dataRequest->opcion = 'find_mcc';
+		$this->dataRequest->companyId = $this->session->enterpriseInf->idFiscal;
+		$this->dataRequest->product = $this->session->productInf->productPrefix;
+		$this->dataRequest->cards = [
+			['numberCard' =>  $dataRequest->cardNumber,
+			'rc' => 0]
+		];
+		$this->dataRequest->usuario = [
+		'userName' => $this->session->userName,
+		'envioCorreoLogin'=> false,
+		'guardaIp' => false,
+		'rc' => 0
+	];
+
+		$this->dataRequest->idOperation = 'customMcc';
+
+		$response = $this->sendToService('callWs_commercialTwirls');
+
+		switch($this->isResponseRc) {
+			case 0:
+				$this->response->code = 0;
+				$responseBean = $response->bean->cards[0];
+				$dataTwirls = new stdClass();
+				$shops = new stdClass();
+				$dataTwirls->updateDate =  $responseBean->datetimeLastUpdate;
+				$dataTwirls->cardNumberP =  maskString($responseBean->numberCard, 4, 6);
+				$dataTwirls->customerName =  $responseBean->personName;
+				$dataTwirls->documentId =  $responseBean->personId;
+				$shops = (array)$responseBean->mccItems;
+
+				foreach ($shops as $key => $value) {
+					 $shops[lang('SERVICES_NAMES_PROPERTIES')[$key]] = $value;
+					 unset($shops[$key]);
+				 };
+
+				$this->response->data['dataTwirls'] = (array)$dataTwirls;
+				$this->response->data['shops'] = (array)$shops;
+			break;
+			case -438:
+				$shops = new stdClass();
+				$this->response->data['shops']= $response->bean->cards[0];
+				$this->response->title = lang('GEN_COMMERCIAL_TWIRLS_TITTLE');
+				$this->response->icon =  lang('CONF_ICON_WARNING');
+        $this->response->data['btn1']['action'] = 'close';
+				switch ($response->bean->cards[0]->rc) {
+					case -266:
+						$this->response->msg = 	novoLang(lang('SERVICES_TWIRLS_TEMPORARY_BLOCKED_CARD'), maskString( $dataRequest->cardNumber, 4, 6));
+						break;
+					case -307:
+						$this->response->msg = 	novoLang(lang('SERVICES_TWIRLS_PERMANENT_BLOCKED_CARD'), maskString( $dataRequest->cardNumber, 4, 6));
+						break;
+					case -439:
+						$this->response->msg = 	novoLang(lang('SERVICES_TWIRLS_NO_FOUND_REGISTRY'), maskString( $dataRequest->cardNumber, 4, 6));
+						break;
+					case -440:
+					case -441:
+						$this->response->msg = 	novoLang(lang('SERVICES_TWIRLS_NO_AVAILABLE_CARD'), maskString( $dataRequest->cardNumber, 4, 6));
+						break;
+					case -197:
+						$this->response->msg = 	novoLang(lang('SERVICES_TWIRLS_EXPIRED_CARD'), maskString( $dataRequest->cardNumber, 4, 6));
+						break;
+				}
+      break;
+		}
+
+		return $this->responseToTheView('callWs_commercialTwirls');
+	}
+
+		/**
+	 * @info Método actualización de tarjetas en giros comerciales
+	 * @author Diego Acosta García
+	 * @date July 16th, 2020
+	 */
+
+	public function callWs_updateCommercialTwirls_Services($dataRequest)
+	{
+		log_message('INFO', 'NOVO Services Model: updateCommercialTwirls Method Initialized');
+
+		$this->className = 'com.novo.objects.MO.GiroComercialMO';
+
+		$this->dataAccessLog->modulo = 'servicios';
+		$this->dataAccessLog->function = 'custom_mcc';
+		$this->dataAccessLog->operation = 'customMcc';
+		$this->dataRequest->opcion = 'act_mcc';
+		$this->dataRequest->companyId = $this->session->enterpriseInf->idFiscal;
+		$this->dataRequest->product = $this->session->productInf->productPrefix;
+		foreach ((object)lang('SERVICES_NAMES_PROPERTIES') as $key => $value) {
+    	$val[$key] = $dataRequest->$value;
+		}
+		$this->dataRequest->cards = [
+			['numberCard' => $dataRequest->cardNumber,
+			'mccItems' => $val,
+			'rc' => 0]
+		];
+		$password = json_decode(base64_decode($dataRequest->passwordAuth));
+		$password = $this->cryptography->decrypt(
+			base64_decode($password->plot),
+			utf8_encode($password->password)
+		);
+
+		if (lang('CONF_HASH_PASS') == 'ON' || $this->singleSession == 'signIn') {
+			$password = md5($password);
+		}
+
+		$this->dataRequest->usuario = [
+		'userName' => $this->session->userName,
+		'password' => $password,
+		'envioCorreoLogin'=> false,
+		'guardaIp' => false,
+		'isDriver' => 0,
+		'rc' => 0
+		];
+
+		$this->dataRequest->idOperation = 'customMcc';
+
+		$response = $this->sendToService('callWs_updateCommercialTwirls');
+
+		switch($this->isResponseRc) {
+			case 0:
+				$this->response->title = lang('GEN_COMMERCIAL_TWIRLS_TITTLE');
+				$this->response->icon =  lang('CONF_ICON_SUCCESS');
+        $this->response->msg = 	lang('RESP_SUCCESSFULL_UPDATE_TWIRLS');
+        $this->response->data['btn1']['action'] = 'close';
+			break;
+			case -1:
+				$this->response->title = lang('GEN_COMMERCIAL_TWIRLS_TITTLE');
+				$this->response->icon =  lang('CONF_ICON_WARNING');
+				$this->response->msg = lang('GEN_PASSWORD_NO_VALID');
+				$this->response->data['btn1']['action'] = 'close';
+			break;
+			case -146:
+				$this->response->title = lang('GEN_COMMERCIAL_TWIRLS_TITTLE');
+				$this->response->icon =  lang('CONF_ICON_WARNING');
+				$this->response->msg = lang('RESP_NO_UPDATE_REGISTRY');
+				$this->response->data['btn1']['action'] = 'close';
+			break;
+			case -65:
+				$this->response->code = 2;
+				$this->response->title = lang('GEN_COMMERCIAL_TWIRLS_TITTLE');
+				$this->response->msg= lang('SERVICES_TWIRLS_NO_UPDATE');
+
+				foreach ((array)$response->bean->cards[0]->mccItems as $key => $value) {
+					$mcc[lang('SERVICES_NAME_PROPERTIES_VIEW')[$key]] = $value;
+					unset($mcc[$key]);
+				};
+
+				$this->response->data= $mcc;
+			break;
+		}
+
+		return $this->responseToTheView('callWs_updateCommercialTwirls');
+	}
+		/**
+	 * @info Método para obtener formulario limites transaccionales
+	 * @author Diego Acosta García
+	 * @date July 21th, 2020
+	 */
+
+	public function callWs_transactionalLimits_Services($dataRequest)
+	{
+		log_message('INFO', 'NOVO Services Model: transactionalLimits Method Initialized');
+
+		$this->className = 'com.novo.objects.TO.LimitesTO';
+
+		$this->dataAccessLog->modulo = 'Servicios';
+		$this->dataAccessLog->function = 'Limites';
+		$this->dataAccessLog->operation = 'Consultar Limites de tarjeta';
+		$this->dataRequest->opcion = 'consultar';
+		$this->dataRequest->idEmpresa = $this->session->enterpriseInf->idFiscal;
+		$this->dataRequest->prefix = $this->session->productInf->productPrefix;
+		$this->dataRequest->cards = [
+			['card' =>  $dataRequest->cardNumber,
+			'personId' => '',
+			'personName' => '',
+			'lastUpdate' => ''
+			]
+		];
+		$this->dataRequest->usuario = [
+		'userName' => $this->session->userName
+	];
+
+		$this->dataRequest->idOperation = 'consultarLimites';
+
+		$response = $this->sendToService('callWs_transactionalLimits');
+
+		switch($this->isResponseRc) {
+			case 0:
+				$this->response->code = 0;
+				$responseBean = $response->bean->cards[0];
+				$dataLimits = new stdClass();
+				$limits = new stdClass();
+				$dataLimits->updateDate =  $responseBean->lastUpdate;
+				$dataLimits->cardNumberP =  maskString($responseBean->card, 4, 6);
+				$dataLimits->customerName =  $responseBean->personName;
+				$dataLimits->documentId =  $responseBean->personId;
+				$limits = (array)$responseBean->parameters;
+
+				foreach ($limits as $key => $value) {
+					 $limits[lang('SERVICES_NAMES_PROPERTIES_LIMITS')[$key]] = $value;
+					 unset($limits[$key]);
+				 };
+
+				$this->response->data['dataLimits'] = (array)$dataLimits;
+				$this->response->data['limits'] = (array)$limits;
+
+			break;
+			case -447:
+				$this->response->title = lang('GEN_TRANSACTIONAL_LIMITS_TITTLE');
+				$this->response->icon =  lang('CONF_ICON_WARNING');
+				$this->response->msg = lang('SERVICES_LIMITS_NO_REGISTRY');
+				$this->response->data['btn1']['action'] = 'close';
+			break;
+			case -448:
+				$this->response->title = lang('GEN_TRANSACTIONAL_LIMITS_TITTLE');
+				$this->response->icon =  lang('CONF_ICON_WARNING');
+				$this->response->msg = novoLang(lang('SERVICES_LIMITS_NO_CARDHOLDER'), maskString( $dataRequest->cardNumber, 5, 6));
+				$this->response->data['btn1']['action'] = 'close';
+			break;
+			case -455:
+				$this->response->title = lang('GEN_TRANSACTIONAL_LIMITS_TITTLE');
+				$this->response->icon =  lang('CONF_ICON_WARNING');
+				$this->response->msg = novoLang(lang('SERVICES_TWIRLS_NO_AVAILABLE_CARD'), maskString( $dataRequest->cardNumber, 5, 6));
+				$this->response->data['btn1']['action'] = 'close';
+			break;
+			case -444:
+				$this->response->title = lang('GEN_TRANSACTIONAL_LIMITS_TITTLE');
+				$this->response->icon =  lang('CONF_ICON_WARNING');
+				$this->response->msg = lang('SERVICES_TWIRLS_NO_FOUND_REGISTRY');
+				$this->response->data['btn1']['action'] = 'close';
+			break;
+			case -454:
+				$this->response->title = lang('GEN_TRANSACTIONAL_LIMITS_TITTLE');
+				$this->response->icon =  lang('CONF_ICON_WARNING');
+				$this->response->msg = novoLang(lang('SERVICES_TWIRLS_TEMPORARY_BLOCKED_CARD'), maskString( $dataRequest->cardNumber, 5, 6));
+				$this->response->data['btn1']['action'] = 'close';
+			break;
+			case -330:
+				$this->response->title = lang('GEN_TRANSACTIONAL_LIMITS_TITTLE');
+				$this->response->icon =  lang('CONF_ICON_WARNING');
+				$this->response->msg = novoLang(lang('SERVICES_TWIRLS_EXPIRED_CARD'), maskString( $dataRequest->cardNumber, 5, 6));
+				$this->response->data['btn1']['action'] = 'close';
+			break;
+			case -307:
+				$this->response->title = lang('GEN_TRANSACTIONAL_LIMITS_TITTLE');
+				$this->response->icon =  lang('CONF_ICON_WARNING');
+				$this->response->msg = novoLang(lang('SERVICES_TWIRLS_PERMANENT_BLOCKED_CARD'), maskString( $dataRequest->cardNumber, 5, 6));
+				$this->response->data['btn1']['action'] = 'close';
+			break;
+		}
+
+		return $this->responseToTheView('callWs_transactionalLimits');
+	}
+		/**
+	 * @info Método para la actualizacion de limites transaccionales
+	 * @author Diego Acosta García
+	 * @date July 21th, 2020
+	 */
+
+	public function callWs_updateTransactionalLimits_Services($dataRequest)
+	{
+		log_message('INFO', 'NOVO Services Model: updateTransactionalLimits Method Initialized');
+
+		$this->className = 'com.novo.objects.TO.LimitesTO';
+
+		$this->dataAccessLog->modulo = 'Servicios';
+		$this->dataAccessLog->function = 'Limites';
+		$this->dataAccessLog->operation = 'Actualizar Limites de tarjeta';
+		$this->dataRequest->opcion = 'actualizar';
+		$this->dataRequest->idEmpresa = $this->session->enterpriseInf->idFiscal;
+		$this->dataRequest->prefix = $this->session->productInf->productPrefix;
+		foreach ((array)lang('SERVICES_NAMES_PROPERTIES_LIMITS') as $key => $val) {
+			$cards[$key] = (int)$dataRequest->$val;
+		};
+		foreach ($cards as &$valor) {
+			if ($valor == '') {
+				$valor = '0';
+			}
+		};
+		$this->dataRequest->cards = [
+			[
+				'card' =>  $dataRequest->cardNumber,
+				'personId' => '',
+				'personName' => '',
+				'parameters' => $cards
+			]
+		];
+		$this->dataRequest->usuario = [
+		'userName' => $this->session->userName
+	];
+
+		$this->dataRequest->idOperation = 'actualizarLimites';
+
+		$response = $this->sendToService('callWs_updateTransactionalLimits');
+
+		switch($this->isResponseRc) {
+			case 0:
+				$this->response->code= 4;
+				$this->response->title = lang('GEN_TRANSACTIONAL_LIMITS_TITTLE');
+				$this->response->icon =  lang('CONF_ICON_SUCCESS');
+        $this->response->msg = 	lang('RESP_SUCCESSFULL_UPDATE_LIMITS');
+        $this->response->data['btn1']['action'] = 'close';
+				break;
+			case -449:
+			case -450:
+				$this->response->title = lang('GEN_TRANSACTIONAL_LIMITS_TITTLE');
+				$this->response->icon =  lang('CONF_ICON_WARNING');
+				$this->response->msg = lang('SERVICES_LIMITS_NO_UPDATE');
+				$this->response->data['btn1']['action'] = 'close';
+				break;
+			case -456:
+				$this->response->title = lang('GEN_TRANSACTIONAL_LIMITS_TITTLE');
+				$this->response->icon =  lang('CONF_ICON_WARNING');
+				$this->response->msg = $response->msg;
+				$this->response->data['btn1']['action'] = 'close';
+				break;
+			case -457:
+				$this->response->title = lang('GEN_TRANSACTIONAL_LIMITS_TITTLE');
+				$this->response->icon =  lang('CONF_ICON_WARNING');
+				$this->response->msg = $response->msg;
+				$this->response->data['btn1']['action'] = 'close';
+				break;
+		}
+		return $this->responseToTheView('callWs_updateTransactionalLimits');
 	}
 }

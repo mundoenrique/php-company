@@ -7,47 +7,46 @@ $(function () {
 	}
 
 	var LoadBulk = getPropertyOfElement('loadbulk', '.loadbulk');
-	var file = $('#file-bulk');
-	var inputFile = LoadBulk ? file.next('.js-label-file').html().trim() : '';
-	var selectBranchOffice = $('#branch-office');
-	var selectTypeBulk = $('#type-bulk');
-	var uploadFileBtn = $('#upload-file-btn');
+	var inputFile = LoadBulk ? $('#file-bulk').next('.js-label-file').html().trim() : '';
 
 	$('.input-file').each(function () {
-    var input = $(this);
-		var label = input.next('.js-label-file');
+		var label = $(this).next('.js-label-file');
     var labelVal = label.html();
 
-    input.on('change', function (element) {
+		$(this).on('change', function (element) {
+			$(this)
+				.focus()
+				.blur();
       var fileName = '';
       if (element.target.value) fileName = element.target.value.split('\\').pop();
-      fileName ? label.addClass('has-file').find('.js-file-name').html(fileName) : label.removeClass('has-file').html(labelVal);
+			fileName ? label.addClass('has-file').find('.js-file-name').html(fileName) : label.removeClass('has-file').html(labelVal);
+			validInputFile();
     });
 	});
 
-	selectTypeBulk.on('change', function() {
+	$('#type-bulk').on('change', function() {
 		var getBranchOffices = [lang.BULK_GET_BRANCHOFFICE];
 		if(getBranchOffices != []) {
 			getBranchOffices.indexOf($(this).val()) != -1
-			? selectBranchOffice.prop('disabled', false).parent().removeClass('hide')
-			: selectBranchOffice.prop('disabled', true).parent().addClass('hide');
+			? $('#branch-office').prop('disabled', false).parent().removeClass('hide')
+			: $('#branch-office').prop('disabled', true).parent().addClass('hide');
 		}
-
 	});
 
-	uploadFileBtn.on('click', function(e) {
+	$('#upload-file-btn').on('click', function(e) {
 		e.preventDefault();
 		var btnAction = $(this);
 		btnText = btnAction.text().trim();
 		form = $('#upload-file-form');
+		validInputFile();
 		validateForms(form);
 
 		if(form.valid()) {
-			btnAction.html(loader);
+			$(this).html(loader);
 			data = {
-				file: file[0].files[0],
-				branchOffice: selectBranchOffice.val(),
-				typeBulk: selectTypeBulk.val().trim(),
+				file: $('#file-bulk')[0].files[0],
+				branchOffice: $('#branch-office').val(),
+				typeBulk: $('#type-bulk').val().trim(),
 				formatBulk: $('#type-bulk option:selected').attr('format'),
 				typeBulkText: $('#type-bulk option:selected').text().trim()
 			}
@@ -56,10 +55,10 @@ $(function () {
 			callNovoCore(verb, who, where, data, function(response) {
 				btnAction.html(btnText);
 				insertFormInput(false);
-				file.val('');
-				file.next('.js-label-file').html(inputFile);
-				selectBranchOffice.prop('selectedIndex', 0);
-				selectTypeBulk.prop('selectedIndex', 0);
+				$('#file-bulk').val('');
+				$('#file-bulk').next('.js-label-file').html(inputFile);
+				$('#branch-office').prop('selectedIndex', 0);
+				$('#type-bulk').prop('selectedIndex', 0);
 				respLoadBulk[response.code](response);
 			});
 		}
@@ -67,7 +66,7 @@ $(function () {
 
 	const respLoadBulk = {
 		2: function(response) {
-			notiSystem(response.title, response.msg, response.icon, response.data);
+			appMessages(response.title, response.msg, response.icon, response.data);
 		},
 		3: function(response) {
 			var msgModal = '';
@@ -89,7 +88,7 @@ $(function () {
 				}
 			});
 
-			notiSystem(response.title, msgModal, response.icon, response.data);
+			appMessages(response.title, msgModal, response.icon, response.data);
 		}
 	}
 
@@ -148,6 +147,7 @@ $(function () {
 						action: 'none'
 					},
 					btn2: {
+						text: lang.GEN_BTN_CANCEL,
 						action: 'close'
 					}
 				}
@@ -163,7 +163,7 @@ $(function () {
 				inputModal+=		'</div>';
 				inputModal+= 		'<div class="help-block"></div>';
 				inputModal+= 	'</form>';
-				notiSystem(lang.BULK_DELETE_TITLE, inputModal, lang.GEN_ICON_INFO, data);
+				appMessages(lang.BULK_DELETE_TITLE, inputModal, lang.CONF_ICON_INFO, data);
 				$('#cancel').on('click', function(e) {
 					e.preventDefault();
 					$('#pending-bulk').find('tr').removeClass('select');
@@ -205,9 +205,21 @@ $(function () {
 				if(response.cod == 0) {
 					pendingBulk.row('.select').remove().draw(false);
 				}
+
 				insertFormInput(false);
 			});
 		}
 	});
 
 })
+
+function validInputFile() {
+	form = $('#upload-file-form');
+	validateForms(form);
+
+	if ($('#file-bulk').valid()) {
+		$('.js-label-file').removeClass('has-error');
+	} else {
+		$('.js-label-file').addClass('has-error');
+	}
+}

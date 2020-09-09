@@ -24,7 +24,7 @@ class Novo_Settings extends NOVO_Controller {
 	{
 		log_message('INFO', 'NOVO Settings: options Method Initialized');
 
-		$view = 'settings';
+		$view = 'options';
 
 		array_push(
 			$this->includeAssets->cssFiles,
@@ -34,40 +34,75 @@ class Novo_Settings extends NOVO_Controller {
 			$this->includeAssets->jsFiles,
 			"third_party/dataTables-1.10.20",
 			"third_party/jquery.validate",
-			"validate".$this->render->newViews."-forms",
+			"validate-core-forms",
 			"third_party/additional-methods",
-			"settings/settings",
+			"settings/options",
+			"user/changePassword-core",
 			"user/passValidate"
 		);
+		$userType = '';
+		$idFiscal = '';
+		$name = '';
+		$businessName = '';
+		$contact = '';
+		$address = '';
+		$billingAddress = '';
+		$phone1 = '';
+		$phone2 = '';
+		$phone3 = '';
+		$title = '';
+		$disabled = 'big-modal';
 
-		//LLama lista de empresas
-		$this->load->model('Novo_Business_Model', 'getEnterprises');
-		$enterpriseList = $this->getEnterprises->callWs_getEnterprises_Business(TRUE);
-		if ( lang('CONF_COMPANIES_BOOL') != FALSE ){
-		$this->render->enterpriseList1 = $enterpriseList->data->list;
+		if (lang('CONF_SETTINGS_USER') == 'ON') {
+			$this->load->model('Novo_Settings_Model', 'getUser');
+			$user = $this->getUser->CallWs_GetUser_Settings();
+			$userType = $this->session->userType;
+
+			foreach ($user->data->dataUser AS $index => $render) {
+				$this->render->$index = $render;
+			}
 		}
 
-		//LLama datos del usuario
-		$this->load->model('Novo_Settings_Model', 'getUser');
-		$user = $this->getUser->CallWs_GetUser_Settings(TRUE);
-		if ( lang('CONF_USER_BOOL') != FALSE ){
-		$this->render->name = $user->data->primerNombre;
-		$this->render->firstName = $user->data->primerApellido;
-		$this->render->position = $user->data->cargo;
-		$this->render->area = $user->data->area;
-		$this->render->email = strtolower($user->data->email);
+		if (lang('CONF_SETTINGS_ENTERPRISE') == 'ON') {
+			$this->load->model('Novo_Business_Model', 'getEnterprises');
+			$enterpriseList = $this->getEnterprises->callWs_getEnterprises_Business(TRUE);
+			$this->render->enterpriseSettList = $enterpriseList->data->list;
+			$this->render->countEnterpriseList = count($enterpriseList->data->list);
+
+			if ($this->render->countEnterpriseList == 1) {
+				$idFiscal = $this->render->enterpriseSettList[0]->acrif;
+				$name = $this->render->enterpriseSettList[0]->acnomcia;
+				$businessName = $this->render->enterpriseSettList[0]->acrazonsocial;
+				$contact = $this->render->enterpriseSettList[0]->acpercontac;
+				$address = $this->render->enterpriseSettList[0]->acdirubica;
+				$billingAddress = $this->render->enterpriseSettList[0]->acdirenvio;
+				$phone1 = $this->render->enterpriseSettList[0]->actel;
+				$phone2 = $this->render->enterpriseSettList[0]->actel2;
+				$phone3 = $this->render->enterpriseSettList[0]->actel3;
+			}
 		}
 
-		//Parámetros para validar descarga de archivo.ini
-		$countEnterprise = count($enterpriseList->data->list);
-		$enterpriseInf = $this->session->has_userdata('enterpriseInf') ? 1 : 0;
+		if (!$this->session->has_userdata('enterpriseInf') && count($this->session->enterpriseSelect->list) > 1) {
+			$title = lang('GEN_BTN_INI');
+			$disabled = '';
+		}
 
-		$this->render->countEnterprise = $countEnterprise;
-		$this->render->enterpriseInf = $enterpriseInf;
-		$this->render->titlePage =lang('GEN_SETTINGS_TITLE');
+		$this->render->titlePage = lang('GEN_SETTINGS_TITLE');
+		$this->render->userType = $userType;
+		$this->render->emailUpdate = lang('CONF_SETTINGS_EMAIL_UPDATE') == 'OFF' ? 'readonly' : '';
+		$this->render->phoneUpdate = lang('CONF_SETTINGS_PHONES_UPDATE') == 'OFF' ? 'readonly' : '';
+		$this->render->idFiscal = $idFiscal;
+		$this->render->name = $name;
+		$this->render->businessName = $businessName;
+		$this->render->contact = $contact;
+		$this->render->address = $address;
+		$this->render->billingAddress = $billingAddress;
+		$this->render->phone1 = $phone1;
+		$this->render->phone2 = $phone2;
+		$this->render->phone3 = $phone3;
+		$this->render->titleIniFile = $title;
+		$this->render->disabled = $disabled;
 		$this->views = ['settings/'.$view];
 		$this->loadView($view);
 	}
-
-
 }

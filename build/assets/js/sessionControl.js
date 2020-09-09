@@ -1,0 +1,55 @@
+'use strict'
+var setTimesession;
+var resetTimesession;
+$(function() {
+	clearTimeout(resetTimesession);
+	clearTimeout(setTimesession);
+	sessionExpire();
+});
+
+function sessionExpire() {
+	if(sessionTime > 0) {
+		setTimesession = setTimeout(function() {
+			finishSession()
+		}, (sessionTime - callModal));
+	}
+}
+
+function finishSession() {
+	var oldID = $('#accept').attr('id');
+
+	if ($('#system-info').parents('.ui-dialog').length) {
+		$('#system-info').dialog('close');
+	}
+
+	$('#accept').addClass('btn-large-xl')
+	data = {
+		btn1: {
+			text: lang.GEN_BTN_KEEP_SESSION,
+			action: 'close'
+		}
+	}
+	appMessages(lang.GEN_SYSTEM_NAME, lang.GEN_FINISH_TEXT, lang.CONF_ICON_INFO, data);
+	$('#accept').attr('id', 'keep-session');
+	resetTimesession = setTimeout(function() {
+		$('#keep-session')
+		.html(loader)
+		.prop('disabled', true);
+		$(location).attr('href', baseURL+'cerrar-sesion/fin');
+	}, callServer);
+
+	$('#keep-session').on('click', function() {
+		$(this)
+		.off('click')
+		.attr('id', oldID);
+		verb = 'POST'; who= 'User'; where = 'KeepSession';
+		data = {
+			modalReq: true,
+		}
+		callNovoCore(verb, who, where, data, function(response) {
+			$('#accept')
+			.text(lang.GEN_BTN_ACCEPT)
+			.removeClass('btn-large-xl');
+		})
+	})
+}
