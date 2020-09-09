@@ -53,28 +53,25 @@ class Request_Data {
 		log_message('INFO', 'NOVO Request_Data: OrderEnterpriseList Method Initialized');
 
 		$responseList = new stdClass();
+		$enterpriseSelect = new stdClass();
+		$enterpriseSelect->list = $enterpriseArgs->lista;
 		$item = 1; $page = 1; $cat = FALSE;
 		$itemAlphaBeFi = 1; $itemAlphaBeSec = 1; $itemAlphaBeTh = 1;  $itemAlphaBeFo = 1;
 		$itemAlphaBeFif = 1; $itemAlphaBeSi = 1; $itemAlphaBeSev = 1;
 		$pageAlphaBeFi = 1; $pageAlphaBeSec = 1; $pageAlphaBeTh = 1;  $pageAlphaBeFo = 1;
 		$pageAlphaBeFif = 1; $pageAlphaBeSi = 1; $pageAlphaBeSev = 1;
-		$delete =  [];
 
 		foreach($enterpriseArgs->lista AS $pos => $enterprises) {
+			if($enterprises->resumenProductos == 0) {
+				unset($enterpriseSelect->list[$pos]);
+			}
+
+			$string = (mb_strtoupper(trim($enterprises->acnomcia)));
+			$string = strlen($string) > 30 ? substr($string, 0, 30).'...' : $string;
+			$enterprises->enterpriseName = $string;
+
 			foreach($enterprises AS $key => $value) {
 				$enterpriseArgs->lista[$pos]->$key = trim($value);
-
-				if($dataRequest) {
-					if($key === 'resumenProductos' && $value == 0) {
-						$delete[] = $pos;
-					}
-					if($key == 'acnomcia') {
-						$string = (mb_strtoupper(trim($value)));
-						$string = strlen($string) > 30 ? substr($string, 0, 30).'...' : $string;
-						$enterpriseArgs->lista[$pos]->acnomcia = $string;
-					}
-					continue;
-				}
 
 				if($item > $enterpriseArgs->sizePage) {
 					$item = 1;
@@ -190,25 +187,9 @@ class Request_Data {
 			$item++;
 		}
 
-		if($dataRequest) {
-			foreach($delete AS $pos) {
-				unset($enterpriseArgs->lista[$pos]);
-			}
-		}
-
+		$this->CI->session->set_userdata('enterpriseSelect', $enterpriseSelect);
 		$responseList->list = $enterpriseArgs->lista;
-
-		if(!$dataRequest) {
-			$enterpriseSelect = new stdClass();
-			$enterpriseSelect->list = $responseList->list;
-
-			foreach($delete AS $pos) {
-				unset($enterpriseSelect->list[$pos]);
-			}
-
-			$this->CI->session->set_userdata('enterpriseSelect', $enterpriseSelect);
-			$responseList->filters = $filters;
-		}
+		$responseList->filters = $filters;
 
 		return $responseList;
 	}

@@ -30,7 +30,7 @@ class Novo_CallModels extends Novo_Controller {
 	{
 		log_message('INFO', 'NOVO CallModels: index Method Initialized');
 
-		if (!empty($this->dataRequest->data)){
+		if (!empty($this->dataRequest->data)) {
 			foreach($this->dataRequest->data AS $item => $value) {
 				$_POST[$item] = $value;
 			}

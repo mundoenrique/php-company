@@ -14,13 +14,13 @@
 					<?php continue; ?>
 					<?php endif;?>
 					<option value="<?= $enterprise->acrif; ?>" code="<?= $enterprise->accodcia; ?>" group="<?= $enterprise->accodgrupoe; ?>">
-						<?= $enterprise->acnomcia; ?>
+						<?= $enterprise->enterpriseName; ?>
 					</option>
 					<?php endforeach; ?>
 				</select>
 				<?php if(!isset($products)): ?>
 				<select id="product-select" class="select-box custom-select mt-1 mb-4 h6 w-100" disabled>
-					<option selected disabled><?= lang('GEN_MUST_SELECT_ENTERPRISE'); ?></option>
+					<option selected disabled><?= lang('GEN_SELECT_PRODUCTS'); ?></option>
 				</select>
 				<?php endif; ?>
 				<div>

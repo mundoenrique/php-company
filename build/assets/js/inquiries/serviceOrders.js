@@ -47,6 +47,9 @@ $(function () {
 
 	$('.date-picker').datepicker({
 		onSelect: function (selectedDate) {
+			$(this)
+				.focus()
+				.blur();
 			var dateSelected = selectedDate.split('/');
 			dateSelected = dateSelected[1] + '/' + dateSelected[0] + '/' + dateSelected[2]
 			var inputDate = $(this).attr('id');
@@ -149,10 +152,11 @@ $(function () {
 						action: 'none'
 					},
 					btn2: {
+						text: lang.GEN_BTN_CANCEL,
 						action: 'close'
 					}
 				}
-				inputModal =	'<form id="delete-bulk-form" name="delete-bulk-form" class="form-group"> onsubmit="return false;">';
+				inputModal =	'<form id="delete-bulk-form" name="delete-bulk-form" class="form-group" onsubmit="return false;">';
 				inputModal+= 		'<span class="regular">'+lang.GEN_BULK_DELETE_SO+': '+inputSelected+'</span>';
 				inputModal+=		'<div class="input-group">';
 				inputModal+= 			'<input id="password" class="form-control pwd-input" name="password" type="password" autocomplete="off"';
@@ -163,7 +167,7 @@ $(function () {
 				inputModal+=		'</div>';
 				inputModal+= 		'<div class="help-block"></div>';
 				inputModal+= 	'</form>';
-				notiSystem('Anular orden de servicio', inputModal, lang.GEN_ICON_INFO, data);
+				appMessages('Anular orden de servicio', inputModal, lang.CONF_ICON_INFO, data);
 				deleteBulk(oldID, inputSelected);
 
 				$('#cancel').on('click', function (e) {
@@ -207,7 +211,7 @@ function format(bulk) {
 	table+= 			'<td>' + lang.GEN_TABLE_RECORDS + '</td>';
 	table+= 			'<td>' + lang.GEN_TABLE_STATUS + '</td>';
 	table+= 			'<td>' + lang.GEN_TABLE_AMOUNT + '</td>';
-	table+= 			'<td>' + lang.GEN_TABLE_COMMISSION + '</td>';
+	table+= 			'<td>' + lang.GEN_TABLE_COMMISSION_GMF + '</td>';
 	table+= 			'<td>' + lang.GEN_TABLE_DEPOSIT_AMOUNT + '</td>';
 	table+= 		'</tr>';
 	table+= 		body;

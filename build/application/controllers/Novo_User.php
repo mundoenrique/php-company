@@ -19,18 +19,20 @@ class Novo_User extends NOVO_Controller {
 	{
 		log_message('INFO', 'NOVO User: index Method Initialized');
 
-		$view = 'Login';
-
 		if($this->session->has_userdata('logged')) {
 			$oldUrl = str_replace($this->countryUri.'/', $this->config->item('country').'/', base_url('dashboard'));
-			$urlRedirect = $this->render->newViews != '-core' ? $oldUrl : base_url('empresas');
+			$urlRedirect = lang('CONF_VIEW_SUFFIX') != '-core' ? $oldUrl : base_url('empresas');
 			redirect($urlRedirect, 'location');
 			exit();
 		}
 
-		$this->session->sess_destroy();
+		if ($this->session->has_userdata('userId')) {
+			clearSessionsVars();
+		}
 
-		if($this->render->activeRecaptcha) {
+		$view = 'login';
+
+		if(ACTIVE_RECAPTCHA) {
 			$this->load->library('recaptcha');
 			$this->render->scriptCaptcha = $this->recaptcha->getScriptTag();
 		}
@@ -43,10 +45,9 @@ class Novo_User extends NOVO_Controller {
 
 		array_push(
 			$this->includeAssets->jsFiles,
-			"third_party/jquery.md5",
 			"third_party/jquery.balloon",
 			"third_party/jquery.validate",
-			"validate".$this->render->newViews."-forms",
+			"validate".lang('CONF_VIEW_SUFFIX')."-forms",
 			"third_party/additional-methods",
 			"user/login"
 		);
@@ -66,6 +67,15 @@ class Novo_User extends NOVO_Controller {
 			);
 		}
 
+		$singleSession = [
+			'name' => 'singleSession',
+			'value' => base64_encode('signIn'),
+			'expire' => 0,
+			'httponly' => TRUE
+		];
+
+		$this->input->set_cookie($singleSession);
+
 		$this->render->skipProductInf = TRUE;
 		$this->render->titlePage = lang('GEN_SYSTEM_NAME');
 		$this->views = $views;
@@ -75,11 +85,11 @@ class Novo_User extends NOVO_Controller {
 	 * @info Método para el cierre de sesión
 	 * @author J. Enrique Peñaloza Piñero.
 	 */
-	public function singleSignon($sessionId = FALSE)
+	public function singleSignOn($sessionId = FALSE)
 	{
-		log_message('INFO', 'NOVO User: singleSignon Method Initialized');
+		log_message('INFO', 'NOVO User: singleSignOn Method Initialized');
 
-		$view = 'singleSignon';
+		$view = 'singleSignOn';
 		$this->render->send = FALSE;
 
 		if ($sessionId) {
@@ -89,19 +99,31 @@ class Novo_User extends NOVO_Controller {
 			$this->render->sessionId = $this->request->sessionId;
 		}
 
-		if ($sessionId != 'fin') {
-			array_push(
-				$this->includeAssets->jsFiles,
-				'user/singleSignon'
-			);
-		}
-
 		if($sessionId == 'fin') {
 			$view = 'finish';
 			$this->render->activeHeader = TRUE;
 			$this->render->showBtn = FALSE;
 			$this->render->sessionEnd = lang('RESP_SINGLE_SIGNON');
+
+			if ($this->session->flashdata('unauthorized') != NULL) {
+				$this->render->sessionEnd = $this->session->flashdata('unauthorized');
+			}
+		} else {
+			array_push(
+				$this->includeAssets->jsFiles,
+				'user/singleSignOn'
+			);
+			$this->render->skipmenu = TRUE;
 		}
+
+		$singleSession = [
+			'name' => 'singleSession',
+			'value' => base64_encode('SignThird'),
+			'expire' => 0,
+			'httponly' => TRUE
+		];
+
+		$this->input->set_cookie($singleSession);
 
 		$this->render->titlePage = lang('GEN_SYSTEM_NAME');
 		$this->render->skipProductInf = TRUE;
@@ -122,7 +144,7 @@ class Novo_User extends NOVO_Controller {
 			$this->includeAssets->jsFiles,
 			"user/recoverPass",
 			"third_party/jquery.validate",
-			"validate".$this->render->newViews."-forms",
+			"validate".lang('CONF_VIEW_SUFFIX')."-forms",
 			"third_party/additional-methods"
 		);
 		$this->render->titlePage = lang('GEN_RECOVER_PASS_TITLE');
@@ -144,7 +166,7 @@ class Novo_User extends NOVO_Controller {
 			$this->includeAssets->jsFiles,
 			"user/recoverAccess",
 			"third_party/jquery.validate",
-			"validate".$this->render->newViews."-forms",
+			"validate-core-forms",
 			"third_party/additional-methods"
 		);
 		$this->render->titlePage = lang('GEN_RECOVER_PASS_TITLE');
@@ -170,12 +192,11 @@ class Novo_User extends NOVO_Controller {
 
 		array_push(
 			$this->includeAssets->jsFiles,
-			"user/changePassword".$this->render->newViews,
+			"user/changePassword".lang('CONF_VIEW_SUFFIX'),
 			"user/passValidate",
-			"third_party/jquery.md5",
 			"third_party/jquery.balloon",
 			"third_party/jquery.validate",
-			"validate".$this->render->newViews."-forms",
+			"validate".lang('CONF_VIEW_SUFFIX')."-forms",
 			"third_party/additional-methods"
 		);
 
@@ -205,16 +226,17 @@ class Novo_User extends NOVO_Controller {
 		log_message('INFO', 'NOVO User: finishSession Method Initialized');
 
 		$view = 'finish';
+		$thirdPartySession = $this->singleSession == 'SignThird';
 
-		if($this->render->userId || $this->render->logged) {
+		if($this->session->has_userdata('userId')) {
 			$this->load->model('Novo_User_Model', 'finishSession');
 			$this->finishSession->callWs_FinishSession_User();
 		}
 
-		if($redirect == 'fin' || AUTO_LOGIN) {
-			$pos = array_search('menu-datepicker', $this->includeAssets->jsFiles);
+		if($redirect == 'fin' || $thirdPartySession) {
+			$pos = array_search('sessionControl', $this->includeAssets->jsFiles);
 			$this->render->action = base_url('inicio');
-			$this->render->showBtn = AUTO_LOGIN ? FALSE : TRUE;
+			$this->render->showBtn = !$thirdPartySession;
 			$this->render->sessionEnd = novoLang(lang('GEN_EXPIRED_SESSION'), lang('GEN_SYSTEM_NAME'));
 
 			if ($this->session->flashdata('unauthorized') != NULL) {
@@ -248,13 +270,13 @@ class Novo_User extends NOVO_Controller {
 		$view = 'suggestion';
 
 		if(!$this->session->flashdata('messageBrowser')) {
-			redirect(base_url('inicio'), 'location', 301);
+			redirect(base_url('empresas'), 'location', 301);
 			exit();
 		}
 
 		$views = ['staticpages/content-browser'];
 
-		if($this->render->newViews != '') {
+		if(lang('CONF_VIEW_SUFFIX') != '') {
 			$this->includeAssets->cssFiles = [
 				"$this->folder"."$this->skin-browser"
 			];

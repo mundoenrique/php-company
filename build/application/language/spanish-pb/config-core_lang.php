@@ -10,23 +10,17 @@ $lang['CONF_INQUIRY_DOCTYPE'] = 'ON';
 $lang['CONF_CARDS_INQUIRY_ISSUE_STATUS'] = 'OFF';
 //SIGNIN
 $lang['CONF_SIGNIN_WIDGET_CONTACT'] = 'OFF';
+//SETTINGS
+$lang['CONF_SETTINGS_EMAIL_UPDATE'] = 'OFF';
+$lang['CONF_SETTINGS_BRANCHES'] = 'OFF';
+$lang['CONF_SETTINGS_PHONES_UPDATE'] = 'OFF';
+$lang['CONF_SETTINGS_CONTACT'] = 'OFF';
 //FILES CONF
-$lang['CONF_MANUAL_BOOL'] = 'OFF';
-$lang['CONF_VIDEO_BOOL'] = 'OFF';
-$lang['CONF_APPS_BOOL'] = 'OFF';
-$lang['CONF_FILES_MANAGMENT_BOOL'] = 'OFF';
-$lang['CONF_FILE_SERVICE_BOOL'] = 'OFF';
-$lang['CONF_PDF_FILE'] = [
-  ['']
+$lang['CONF_MANUAL_FILE'] = [
+	['archivo.pdf', 'Manual']
 ];
-$lang['CONF_ZIP_FILE'] = [
-  ['']
+$lang['CONF_FILES_MANAGMENT'] = [
+  ['lotes.rar', 'Gestión de Lotes']
 ];
-$lang['CONF_RAR_FILE'] = [
-  ['']
-];
-$lang['CONF_MP4_VIDEO'] = [];
-//DOWNLOAD ICONS
-$lang['CONF_PDF_ICON'] = 'icon-pdf.svg';
-$lang['CONF_RAR_ICON'] = 'icon-rar.svg';
-$lang['CONF_ZIP_ICON'] = 'icon-zip.svg';
+//DATEPICKER
+$lang['CONF_MAX_CONSULT_MONTH'] = '1';

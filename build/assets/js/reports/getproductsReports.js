@@ -11,10 +11,11 @@ $(function () {
 		.remove()
 		data = {
 			idFiscal: $('#enterpriseCode').find('option:selected').attr('id-fiscal'),
+			enterpriseCode: $('#enterpriseCode').val(),
 			select: true
 		}
 		insertFormInput(true);
-		verb = 'POST'; who = 'Business'; where = 'getProducts';
+		verb = 'POST'; who = 'Business'; where = 'GetProducts';
 
 		callNovoCore(verb, who, where, data, function(response) {
 

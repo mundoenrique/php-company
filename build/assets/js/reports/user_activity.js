@@ -8,6 +8,9 @@ $(function () {
 
 	datePicker.datepicker({
 		onSelect: function (selectedDate) {
+			$(this)
+				.focus()
+				.blur();
 			var dateSelected = selectedDate.split('/');
 			dateSelected = dateSelected[1] + '/' + dateSelected[0] + '/' + dateSelected[2]
 			var inputDate = $(this).attr('id');
@@ -69,7 +72,7 @@ $("#userActivity-Btn").on('click', function(e){
 })
 
 function info(e){
-	$('#spinnerBlockMasterAccount').removeClass("hide");
+	$('#spinnerBlock').removeClass("hide");
   var acCodCia = $('#enterprise-report').find('option:selected').attr('code');
   var fechaIni =  $("#initialDateAct").val();
   var fechaFin = $("#finalDateAct").val();
@@ -86,107 +89,120 @@ function info(e){
 function userActivity(passData) {
   verb = "POST"; who = 'Reports'; where = 'userActivity'; data = passData;
   callNovoCore(verb, who, where, data, function(response) {
-    $('#spinnerBlockMasterAccount').addClass("hide");
+    $('#spinnerBlock').addClass("hide");
 		$('#tbody-datos-general').removeClass('hide');
 		$('#blockResultsUser').removeClass("hide");
 		$('#titleResults').removeClass("hide");
 		$('#files-btn').removeClass("hide");
     var table = $('#concenAccount').DataTable();
     table.destroy();
-			dataResponse = response.data
-      code = response.code
-      // if( code == 0){
-        var info = response.data.lista;
-        var info1 = [];
-        var info2 = {};
-        var info3 = [];
-				var info4 = [];
-        var info5 = [];
+		dataResponse = response.data
+    code = response.code
+    if( code == 0){
+			$('#buttonFiles').removeClass('hidden');
+      var info = response.data.lista;
+      var info1 = [];
+      var info2 = {};
+      var info3 = [];
+			var info4 = [];
+      var info5 = [];
 
-        $.each(info, function(key, val){
-          info1[key] = val.funciones.lista;
-          info5[key] = val.actividades.lista;
-       })
-       $.each(info1, function(key, val){
-        info2[key] = info1[key];
-        $.each(info2, function(key, val){
+      $.each(info, function(key, val){
+        info1[key] = val.funciones.lista;
+        info5[key] = val.actividades.lista;
+      })
+      $.each(info1, function(key, val){
+      	info2[key] = info1[key];
+      	$.each(info2, function(key, val){
           info3[key] = info2[key];
-       })
-		 })
+       	})
+		 	})
 
-		var i = 0;
-		table = $('#concenAccount').DataTable({
-		"ordering": false,
-		"pagingType": "full_numbers",
-		"data": info,
-		"language": dataTableLang,
-		"createdRow": function( row, data, dataIndex ) {
-		 $(row).attr( 'numRuf', dataIndex );
-		},
-    "columns": [
-      { data: 'userName' },
-      { data: 'estatus' },
-      { data: 'fechaUltimaConexion' },
-        {
-          "className":    'TableButtons',
-					"orderable":    false,
-          render: function (data, type, full, meta) {
-            return'<tr><td class="flex justify-center items-center"><button id="seeActivity" class="btn px-0 details-user" title="Ver actividades" data-toggle="tooltip"><i class="icon icon-find mr-1" aria-hidden="true"></i></button><button  id="seeActivity2" class="activity btn px-1"  title="funciones"><i class="icon novoglyphs icon-info" aria-hidden="true"></i></button></td></tr>'
-					}
+			table = $('#concenAccount').DataTable({
+				"ordering": false,
+				"pagingType": "full_numbers",
+				"data": info,
+				"language": dataTableLang,
+				"createdRow": function( row, data, dataIndex ) {
+		 			$(row).attr( 'numRuf', dataIndex );
 				},
-    ]
-})
+    		"columns": [
+      		{ data: 'userName' },
+      		{ data: 'estatus' },
+      		{ data: 'fechaUltimaConexion' },
+        	{
+          	"className":    'TableButtons',
+						"orderable":    false,
+          	render: function (data, type, full, meta) {
+            	return'<tr><td class="flex justify-center items-center"><button id="seeActivity" class="btn px-0 details-user" title="Ver actividades" data-toggle="tooltip"><i class="icon icon-find mr-1" aria-hidden="true"></i></button><button  id="seeActivity2" class="activity btn px-1"  title="funciones"><i class="icon icon-info" aria-hidden="true"></i></button></td></tr>'
+						}
+					},
+				]
+			})
 
-$('#tbody-datos-general').delegate('#seeActivity','click',function() {
-	var rowTable = $(this).closest('tr');
-  var complementaryRow = table.row(rowTable);
+			$('#tbody-datos-general').delegate('#seeActivity','click',function() {
+			var rowTable = $(this).closest('tr');
+			var complementaryRow = table.row(rowTable);
 
+			if (complementaryRow.child.isShown() ) {
+				$('.complementary').parents('tr').remove();
+				complementaryRow.child(format(info5[$(this).parents('tr').attr('numRuf')])).hide();
+			}
+			if($('.complementary').parents('tr')){
+				$('.complementary').parents('tr').remove();
+			}
+			complementaryRow.child(format(info5[$(this).parents('tr').attr('numRuf')])).show();
+			})
 
-	if (complementaryRow.child.isShown() ) {
-		$('.complementary').parents('tr').remove();
-		complementaryRow.child(format(info5[$(this).parents('tr').attr('numRuf')])).hide();
-}
-	if($('.complementary').parents('tr')){
-		$('.complementary').parents('tr').remove();
-	}
-	complementaryRow.child(format(info5[$(this).parents('tr').attr('numRuf')])).show();
-})
+			$('#tableAtivity').DataTable({
+  			"responsive": true,
+  			"ordering": false,
+				"pagingType": "full_numbers",
+				"oLanguage": {
+				"sEmptyTable": "No hay registros disponibles"
+				},
+				"language": dataTableLang,
+  			"data": info3,
+  			"columns": [
+    			{ data: 'accodusuario' },
+    			{ data: 'acnomfuncion' },
+    			{ data: 'accodfuncion' },
+				]
+			})
 
-$('#tableAtivity').DataTable({
-  "responsive": true,
-  "ordering": false,
-	"pagingType": "full_numbers",
-	"oLanguage": {
-		"sEmptyTable": "No hay registros disponibles"
-},
-	"language": dataTableLang,
-  "data": info3,
-  "columns": [
-    { data: 'accodusuario' },
-    { data: 'acnomfuncion' },
-    { data: 'accodfuncion' },
-	]
-})
-
-$('#tbody-datos-general').delegate('.activity','click',function(e) {
-	dialogE(e);
-
-	$('#activityTable').DataTable({
-		"paging":   false,
-		"bFilter": false,
-		"info":     false,
-		"order": false,
-		"bDestroy": true,
-		"oLanguage": {
-			"sEmptyTable": "No hay Funciones disponibles"
-	},
-		"data": info3[$(this).parents('tr').attr('numRuf')],
-		"columns": [
-			{ data: 'acnomfuncion' },
-		]
-	})
-	$("#activityTable thead").remove();
-		})
+			$('#tbody-datos-general').delegate('.activity','click',function(e) {
+				dialogE(e);
+				$('#activityTable').DataTable({
+					"paging":   false,
+					"bFilter": false,
+					"info":     false,
+					"order": false,
+					"bDestroy": true,
+					"oLanguage": {
+						"sEmptyTable": "No hay Funciones disponibles"
+					},
+					"data": info3[$(this).parents('tr').attr('numRuf')],
+					"columns": [
+						{ data: 'acnomfuncion' },
+					]
+				})
+				$("#activityTable thead").remove();
+			})
+		} else if(code == 1){
+			$('#buttonFiles').addClass('hidden');
+			$('#concenAccount').DataTable({
+				"ordering": false,
+				"pagingType": "full_numbers",
+				"data": [],
+				"language": dataTableLang,
+    		"columns": [
+      		{ data: 'userName' },
+      		{ data: 'estatus' },
+					{ data: 'fechaUltimaConexion' },
+					{ data: 'options' },
+				]
+			})
+		}
 	})
 }
 
@@ -224,8 +240,8 @@ function exportToExcel(passData) {
 				}
 				downLoadfiles (data);
       $('.cover-spin').removeAttr("style");
-    }
-})
+			}
+	})
 }
 
 function PDFPassData(){
@@ -287,7 +303,7 @@ function dialogE(e){
   inputModal+=    '</div>';
   inputModal+=  '</form>';
 
-	notiSystem(titleModal, inputModal, lang.GEN_ICON_INFO, data);
+	appMessages(titleModal, inputModal, lang.CONF_ICON_INFO, data);
 	};
 
 function format(user) {

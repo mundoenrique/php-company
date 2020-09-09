@@ -147,7 +147,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 			case -5:
 				$this->response->title = 'Órdenes de servicio';
 				$this->response->msg = 'No fue posible obtener las órdenes de servicio';
-				$this->response->icon = lang('GEN_ICON_WARNING');
+				$this->response->icon = lang('CONF_ICON_WARNING');
 				if($this->input->is_ajax_request()) {
 					$this->response->data['btn1']['action'] = 'close';
 				} else {
@@ -157,7 +157,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 			case -150:
 				$this->response->title = 'Órdenes de servicio';
 				$this->response->msg = novoLang(lang('RESP_SERVICE_ORDES'), $statusText);
-				$this->response->icon = lang('GEN_ICON_INFO');
+				$this->response->icon = lang('CONF_ICON_INFO');
 				if($this->input->is_ajax_request()) {
 					$this->response->data['btn1']['action'] = 'close';
 				} else {
@@ -188,7 +188,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 		unset($dataRequest->modalReq);
 
 		$this->dataRequest->idOperation = 'desconciliarOS';
-		$this->dataRequest->idOS = $dataRequest->OrderNumber;
+		$this->dataRequest->idOrden = $dataRequest->OrderNumber;
 		$this->dataRequest->rifEmpresa = $this->session->enterpriseInf->idFiscal;
 
 		$password = json_decode(base64_decode($dataRequest->pass));
@@ -197,7 +197,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 			utf8_encode($password->password)
 		);
 
-		if (lang('CONF_HASH_PASS') == 'ON' || $this->session->autoLogin == 'false') {
+		if (lang('CONF_HASH_PASS') == 'ON' || $this->singleSession == 'signIn') {
 			$password = md5($password);
 		}
 
@@ -206,14 +206,14 @@ class Novo_Inquiries_Model extends NOVO_Model {
 			'password' => $password
 		];
 
-		$response = $this->sendToService('ClearServiceOrders');
+		$response = $this->sendToService('callWs_ClearServiceOrders');
 
 		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->cod = 0;
 				$this->response->title = 'Anular Orden';
 				$this->response->msg = 'La orden fue anulada exitosamente';
-				$this->response->icon = lang('GEN_ICON_SUCCESS');
+				$this->response->icon = lang('CONF_ICON_SUCCESS');
 				$this->response->data['btn1'] = [
 					'text' => lang('GEN_BTN_ACCEPT'),
 					'action' => 'close'
@@ -221,8 +221,8 @@ class Novo_Inquiries_Model extends NOVO_Model {
 				break;
 			case -1:
 				$this->response->title = 'Anular Orden';
-				$this->response->msg = lang('RESP_PASSWORD_NO_VALID');
-				$this->response->icon = lang('GEN_ICON_WARNING');
+				$this->response->msg = lang('GEN_PASSWORD_NO_VALID');
+				$this->response->icon = lang('CONF_ICON_WARNING');
 				$this->response->data['btn1'] = [
 					'text' => lang('GEN_BTN_ACCEPT'),
 					'action' => 'close'
@@ -230,7 +230,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 				break;
 		}
 
-		return $this->responseToTheView('ClearServiceOrders');
+		return $this->responseToTheView('callWs_ClearServiceOrders');
 	}
 	/**
 	 * @info Ver el detalle de un lote
@@ -251,7 +251,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 		$this->dataRequest->idOperation = 'detalleLote';
 		$this->dataRequest->acidlote = $dataRequest->bulkId;
 
-		$response = $this->sendToService('BulkDetail');
+		$response = $this->sendToService('callWs_BulkDetail');
 
 		$detailInfo = [
 			'fiscalId' => '--',
@@ -316,8 +316,15 @@ class Novo_Inquiries_Model extends NOVO_Model {
 					break;
 					case '5':
 					case 'L':
-					case 'M':
 						$acceptAttr = ['idExtPer', 'id_ext_emp', 'monto', 'nro_cuenta', 'status'];
+
+						if(isset($response->registrosLoteRecarga) && count($response->registrosLoteRecarga) > 0) {
+							$bulkRecordsHeader = [lang('GEN_TABLE_DNI'), lang('GEN_TABLE_AMOUNT'), lang('GEN_TABLE_ACCOUNT_NUMBER'), lang('GEN_TABLE_STATUS')];
+							$detailInfo['bulkRecords'] = $this->buildCreditRecords_Bulk($response->registrosLoteRecarga, $acceptAttr);
+						}
+					break;
+					case 'M':
+						$acceptAttr = ['id_ext_per', 'id_ext_emp', 'monto', 'nro_cuenta', 'status'];
 
 						if(isset($response->registrosLoteRecarga) && count($response->registrosLoteRecarga) > 0) {
 							$bulkRecordsHeader = [lang('GEN_TABLE_DNI'), lang('GEN_TABLE_AMOUNT'), lang('GEN_TABLE_ACCOUNT_NUMBER'), lang('GEN_TABLE_STATUS')];
@@ -386,7 +393,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 		$detailInfo['bulkHeader'] = $bulkRecordsHeader;
 		$this->response->data->bulkInfo = (object) $detailInfo;
 
-		return $this->responseToTheView('BulkDetail');
+		return $this->responseToTheView('callWs_BulkDetail');
 	}
 	/**
 	 * @info Construye el cuerpo de la tabla del detalle de un lote de emisión
@@ -637,7 +644,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 		$this->dataRequest->acprefix = $this->session->userdata('productInf')->productPrefix;
 		$this->dataRequest->idOrden = $dataRequest->OrderNumber;
 
-		$response = $this->sendToService('exportFiles');
+		$response = $this->sendToService('callWs_ExportFiles');
 
 		switch ($this->isResponseRc) {
 			case 0:
@@ -652,7 +659,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 				$this->response->code =  $response->code != 0 ? $response->code : 3;
 				$this->response->title = $response->code != 0 ? $response->title : lang('GEN_DOWNLOAD_FILE');
 				$this->response->msg = $response->code != 0 ? $response->msg : lang('GEN_WARNING_DOWNLOAD_FILE');
-				$this->response->icon =  $response->code != 0 ? $response->icon : lang('GEN_ICON_WARNING');
+				$this->response->icon =  $response->code != 0 ? $response->icon : lang('CONF_ICON_WARNING');
 				$this->response->download =  $response->data->resp['btn1']['action'] == 'redirect' ? FALSE : TRUE;
 				$this->response->data->resp['btn1']['text'] = lang('GEN_BTN_ACCEPT');
 				$this->response->data->resp['btn1']['action'] = $response->code != 0 ? $response->data->resp['btn1']['action'] : 'close';

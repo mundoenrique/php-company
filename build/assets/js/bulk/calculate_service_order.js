@@ -68,7 +68,7 @@ function getServiceREsponse(btn) {
 		if(response.code == 0) {
 			$(location).attr('href', response.data);
 		} else {
-			notiSystem(response.title, response.msg, response.icon, response.data);
+			appMessages(response.title, response.msg, response.icon, response.data);
 			btn.html(btnText);
 			insertFormInput(false);
 			$('#otpCode').val('')
@@ -101,7 +101,7 @@ function format (bulk) {
 	table+= 			'<td>'+lang.GEN_TABLE_RECORDS+'</td>';
 	table+= 			'<td>'+lang.GEN_TABLE_STATUS+'</td>';
 	table+= 			'<td>'+lang.GEN_TABLE_AMOUNT+'</td>';
-	table+= 			'<td>'+lang.GEN_TABLE_COMMISSION+'</td>';
+	table+= 			'<td>' + lang.GEN_TABLE_COMMISSION_GMF+'</td>';
 	table+= 			'<td>'+lang.GEN_TABLE_DEPOSIT_AMOUNT+'</td>';
 	table+= 		'</tr>';
 	table+= 		body;

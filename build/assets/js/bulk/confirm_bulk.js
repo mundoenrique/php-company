@@ -31,7 +31,7 @@ $(function () {
 
 	const respConfirmBulk = {
 		0: function(response) {
-			notiSystem(response.title, response.msg, response.icon, response.data);
+			appMessages(response.title, response.msg, response.icon, response.data);
 		}
 	}
 });

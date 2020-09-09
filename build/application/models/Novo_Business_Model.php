@@ -36,12 +36,8 @@ class Novo_Business_Model extends NOVO_Model {
 		$this->dataRequest->tamanoPagina = $sizePage;
 		$this->dataRequest->filtroEmpresas = '';
 
-		$response = $this->sendToService('getEnterprises');
-		$filters = FALSE;
-
-		if(!$dataRequest) {
-			$filters = $this->request_data->setFilters();
-		}
+		$response = $this->sendToService('callWs_GetEnterprises');
+		$filters = $this->request_data->setFilters();
 
 		switch($this->isResponseRc) {
 			case 0:
@@ -50,7 +46,6 @@ class Novo_Business_Model extends NOVO_Model {
 				$enterpriseArgs->sizePage = $sizePage;
 				$enterpriseList = $this->request_data->OrderEnterpriseList($enterpriseArgs, $filters, $dataRequest);
 				$this->response->data->list = $enterpriseList->list;
-				$this->response->data->listaa = $enterpriseList;
 				if(!$dataRequest) {
 					$access = [
 						'user_access',
@@ -94,7 +89,6 @@ class Novo_Business_Model extends NOVO_Model {
 			break;
 			default:
 				$this->response->data->text = lang('GEN_ENTERPRISE_NOT_OBTEIN');
-				$this->response->data->resp['btn1']['link'] = 'cerrar-sesion/inicio';
 		}
 
 		if($this->response->code != 0) {
@@ -108,7 +102,7 @@ class Novo_Business_Model extends NOVO_Model {
 			$this->response->data->list = [];
 		}
 
-		return $this->responseToTheView('getEnterprises');
+		return $this->responseToTheView('callWs_GetEnterprises');
 	}
 	/**
 	 * @info obtiene lista de sucursales
@@ -143,7 +137,7 @@ class Novo_Business_Model extends NOVO_Model {
 			$response = $this->sendToService('callWs_GetBranchOffices');
 		} else {
 			$dataRequest->rc = $dataRequest->newGet;
-			$this->makeAnswer($dataRequest);
+			$this->makeAnswer($dataRequest, 'callWs_GetBranchOffices');
 		}
 
 		switch($this->isResponseRc) {
@@ -240,7 +234,7 @@ class Novo_Business_Model extends NOVO_Model {
 			break;
 			case -138:
 				$this->response->code = 3;
-				$this->response->msg = 'No fue posible obtener la lista de productos asociados, vuelve a intentarlo';
+				$this->response->msg = lang('GEN_WARNING_PRODUCTS_LIST');
 			break;
 			case -430:
 			case -431:
@@ -286,6 +280,7 @@ class Novo_Business_Model extends NOVO_Model {
 		if(isset($dataRequest->goToDetail)) {
 			unset($dataRequest->goToDetail, $dataRequest->productPrefix);
 			$enterpriseInf = $dataRequest;
+			$this->session->unset_userdata('productInf');
 			$this->session->set_userdata('enterpriseInf', $dataRequest);
 		}
 

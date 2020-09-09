@@ -1,44 +1,26 @@
 @font-face {
-  font-family: 'Gotham Book';
+  font-family: 'MuseoSans';
   font-style: normal;
   font-weight: 300;
-  src: url('../../fonts/bnt/Gotham-Book.ttf') format('truetype');
+  src: url('../../fonts/pb/MuseoSans_300.otf') format('opentype');
 }
 
 @font-face {
-  font-family: 'Gotham Book';
+  font-family: 'MuseoSans';
   font-style: normal;
   font-weight: 700;
-  src: url('../../fonts/bnt/Gotham-Bold.ttf') format('truetype');
+  src: url('../../fonts/pb/MuseoSans_700.otf') format('opentype');
 }
 
 @font-face {
-  font-family: 'Roboto';
-  font-style: normal;
-  font-weight: 300;
-  src: url('../../fonts/bnt/Roboto-Regular.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: 'Roboto';
-  font-style: normal;
-  font-weight: 700;
-  src: url('../../fonts/bnt/Roboto-Bold.ttf') format('truetype');
-}
-
-@font-face {
-	font-family: "NovoPayment Glyphs";
+  font-family: "novoglyphs";
+  font-weight: normal;
 	font-style: normal;
-	font-weight: normal;
-	src: url('../../fonts/novopayment-glyphs-webfont.eot?#iefix');
-	src: url(../fonts/novopayment-glyphs-webfont.eot?#iefix),
-			 url('../../fonts/novopayment-glyphs-webfont.eot?#iefix') format('embedded-opentype'),
-			 url(../fonts/novopayment-glyphs-webfont.eot?#iefix) format('embedded-opentype'),
-       url('../../fonts/novopayment-glyphs-webfont.woff') format('woff'),
-			 url('../../fonts/novopayment-glyphs-webfont.ttf') format('truetype'),
-			 url(../fonts/novopayment-glyphs-webfont.ttf) format('truetype'),
-       url('../../fonts/novopayment-glyphs-webfont.svg') format('svg'),
-       url(../fonts/novopayment-glyphs-webfont.svg) format('svg');
+	src: url('../fonts/novoglyphs-webicons.eot?#iefix');
+  src: url('../fonts/novoglyphs-webicons.eot?#iefix') format('eot'),
+       url('../fonts/novoglyphs-webicons.woff') format('woff'),
+       url('../fonts/novoglyphs-webicons.ttf') format('truetype'),
+       url('../fonts/novoglyphs-webicons.svg') format('svg');
 }
 
 *, ::before, ::after {
@@ -52,7 +34,7 @@ body {
   -ms-flex-direction: column;
   flex-direction: column;
   margin: 0;
-  font-family: 'Gotham Book', sans-serif;
+  font-family: 'MuseoSans', sans-serif;
   font-size: .875rem;
   font-weight: 300;
   line-height: 1.5;
@@ -167,7 +149,7 @@ header.main-head {
   display: inline-flex;
 	height: auto;
 	width: auto;
-	font-family: "NovoPayment Glyphs";
+	font-family: "novoglyphs";
 	font-size: 5rem;
 	font-style: normal;
 	font-weight: normal;
@@ -176,7 +158,7 @@ header.main-head {
 	vertical-align: middle;
 }
 
-.icon-update::before { content: "\e00d"; }
+.icon-update::before { content: "\e0c0"; }
 
 h1, h2 {
   margin-top: 0;

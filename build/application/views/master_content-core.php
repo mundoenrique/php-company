@@ -29,7 +29,7 @@
 	</main>
 	<a id="download-file" href="javascript:" download></a>
 	<?php $this->load->view('footer_content-core') ?>
-	<?= ($module == lang('GEN_LOGIN') && $activeRecaptcha) ?  $scriptCaptcha : ''; ?>
+	<?= ($module == 'login' && ACTIVE_RECAPTCHA) ?  $scriptCaptcha : ''; ?>
 	<?= $this->asset->insertJs(); ?>
 	<?php $this->load->view('insert_variables') ?>
 </body>

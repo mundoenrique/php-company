@@ -36,7 +36,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 			'userName' => $this->userName
 		];
 
-		$response = $this->sendToService('getPendingBulk');
+		$response = $this->sendToService('callWs_GetPendingBulk');
 		$pendingBulkList = [];
 
 		switch($this->isResponseRc) {
@@ -87,7 +87,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 
 		$this->response->data->pendingBulk = (object) $pendingBulkList;
 
-		return $this->responseToTheView('getPendingBulk');
+		return $this->responseToTheView('callWs_GetPendingBulk');
 	}
 	/**
 	 * @info Método para obtener los tipos de lte asociados a un programa
@@ -116,7 +116,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 			$response = $this->sendToService('callWs_getTypeLots');
 		} else {
 			$dataRequest->rc = $dataRequest->newGet;
-			$this->makeAnswer($dataRequest);
+			$this->makeAnswer($dataRequest, 'callWs_getTypeLots');
 		}
 
 		switch($this->isResponseRc) {
@@ -192,8 +192,8 @@ class Novo_Bulk_Model extends NOVO_Model {
 			switch ($this->isResponseRc) {
 				case 0:
 					$this->response->msg = lang('BULK_SUCCESS');
-					$this->response->icon = lang('GEN_ICON_SUCCESS');
-					$this->response->data['btn1']['link'] = 'cargar-lotes';
+					$this->response->icon = lang('CONF_ICON_SUCCESS');
+					$this->response->data['btn1']['link'] = lang('GEN_LINK_BULK_LOAD');
 					$respLoadBulk = TRUE;
 					break;
 				case -108:
@@ -201,7 +201,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 				case -256:
 				case -21:
 					$this->response->msg = lang('BULK_NO_LOAD');
-					$this->response->data['btn1']['link'] = 'cargar-lotes';
+					$this->response->data['btn1']['link'] = lang('GEN_LINK_BULK_LOAD');
 					$respLoadBulk = TRUE;
 					break;
 				case -280:
@@ -277,7 +277,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 			utf8_encode($password->password)
 		);
 
-		if (lang('CONF_HASH_PASS') == 'ON' || $this->session->autoLogin == 'false') {
+		if (lang('CONF_HASH_PASS') == 'ON' || $this->singleSession == 'signIn') {
 			$password = md5($password);
 		}
 
@@ -293,7 +293,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 				$this->response->cod = 0;
 				$this->response->title = lang('BULK_DELETE_TITLE');
 				$this->response->msg = novoLang(lang('BULK_DELETE_SUCCESS'), $dataRequest->bulkname);
-				$this->response->icon = lang('GEN_ICON_SUCCESS');
+				$this->response->icon = lang('CONF_ICON_SUCCESS');
 				$this->response->data['btn1'] = [
 					'text' => lang('GEN_BTN_ACCEPT'),
 					'action' => 'close'
@@ -301,8 +301,8 @@ class Novo_Bulk_Model extends NOVO_Model {
 				break;
 			case -1:
 				$this->response->title = lang('BULK_DELETE_TITLE');
-				$this->response->msg = lang('RESP_PASSWORD_NO_VALID');
-				$this->response->icon = lang('GEN_ICON_WARNING');
+				$this->response->msg = lang('GEN_PASSWORD_NO_VALID');
+				$this->response->icon = lang('CONF_ICON_WARNING');
 				$this->response->data['btn1'] = [
 					'text' => lang('GEN_BTN_ACCEPT'),
 					'action' => 'close'
@@ -343,7 +343,8 @@ class Novo_Bulk_Model extends NOVO_Model {
 			'bulkNumber' => '',
 			'totaRecords' => '',
 			'amount' => '',
-			'success' => 'Lote cargado exitosamente',
+			'bulkTicked' => '',
+			'success' => '',
 			'errors' => [],
 		];
 		$bulkConfirmInfo = new stdClass();
@@ -358,6 +359,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 				$detailBulk['totaRecords'] = $response->lotesTO->cantRegistros;
 				$detailBulk['amount'] = $response->lotesTO->monto;
 				$detailBulk['bulkTicked'] = $response->lotesTO->idTicket;
+				$detailBulk['success'] = 'Lote cargado exitosamente';
 
 				if(!empty($response->lotesTO->mensajes)) {
 					foreach($response->lotesTO->mensajes AS $pos => $msg) {
@@ -372,6 +374,16 @@ class Novo_Bulk_Model extends NOVO_Model {
 				$bulkConfirmInfo = $response->lotesTO;
 				$this->session->set_flashdata('bulkConfirmInfo', $bulkConfirmInfo);
 				$this->session->set_flashdata($dataRequest->bulkView, TRUE);
+			break;
+			case -437:
+				$this->response->title = lang('BULK_CONFIRM_TITLE');
+				$this->response->msg = novoLang(lang('GEN_FAILED_THIRD_PARTY'), $response->msg);
+				$this->response->data->resp['btn1']['link'] = lang('GEN_LINK_BULK_LOAD');
+			break;
+			case -443:
+				$this->response->title = lang('BULK_CONFIRM_TITLE');
+				$this->response->msg = lang('BULK_CONFIRM_EXCEED_LIMIT');
+				$this->response->data->resp['btn1']['link'] = lang('GEN_LINK_BULK_LOAD');
 			break;
 		}
 
@@ -407,7 +419,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 			utf8_encode($password->password)
 		);
 
-		if (lang('CONF_HASH_PASS') == 'ON' || $this->session->autoLogin == 'false') {
+		if (lang('CONF_HASH_PASS') == 'ON' || $this->singleSession == 'signIn') {
 			$password = md5($password);
 		}
 
@@ -424,39 +436,52 @@ class Novo_Bulk_Model extends NOVO_Model {
 				$this->response->code = 0;
 				$this->response->title = lang('BULK_CONFIRM_TITLE');
 				$this->response->msg = novolang(lang('BULK_CONFIRM_SUCCESS'), $bulkConfirmInfo->numLote);
-				$this->response->icon = lang('GEN_ICON_SUCCESS');
-				$this->response->data['btn1']['link'] = lang('GEN_LINK_BULK_AUTH');
+				$this->response->icon = lang('CONF_ICON_SUCCESS');
+				$link = $this->verify_access->verifyAuthorization('TEBAUT') ? lang('GEN_LINK_BULK_AUTH') : lang('GEN_LINK_BULK_LOAD');
+				$this->response->data['btn1']['link'] = $link;
 			break;
 			case -1:
 				$this->response->code = 0;
 				$this->response->title = lang('BULK_CONFIRM_TITLE');
-				$this->response->msg = lang('RESP_PASSWORD_NO_VALID');
-				$this->response->icon = lang('GEN_ICON_WARNING');
+				$this->response->msg = lang('GEN_PASSWORD_NO_VALID');
+				$this->response->icon = lang('CONF_ICON_WARNING');
 				$this->response->data['btn1']['action'] = 'close';
 			break;
 			case -19:
 				$this->response->code = 0;
 				$this->response->title = lang('BULK_CONFIRM_TITLE');
 				$this->response->msg = lang('BULK_CONFIRM_NO_DEAIL');
-				$this->response->data['btn1']['link'] = 'cargar-lotes';
+				$this->response->data['btn1']['link'] = lang('GEN_LINK_BULK_LOAD');
 			break;
 			case -142:
 				$this->response->code = 0;
 				$this->response->title = lang('BULK_CONFIRM_TITLE');
 				$this->response->msg = lang('BULK_CONFIRM_FAIL');
-				$this->response->data['btn1']['link'] = 'cargar-lotes';
+				$this->response->data['btn1']['link'] = lang('GEN_LINK_BULK_LOAD');
+			break;
+			case -236:
+				$this->response->code = 0;
+				$this->response->title = lang('BULK_CONFIRM_TITLE');
+				$this->response->msg = lang('BULK_CONFIRM_FAIL_DULPICATE');
+				$this->response->data['btn1']['link'] = lang('GEN_LINK_BULK_LOAD');
 			break;
 			case -436:
 				$this->response->code = 0;
 				$this->response->title = lang('BULK_CONFIRM_TITLE');
 				$this->response->msg = lang('BULK_CONFIRM_FAIL_BANK_RESPONSE');
-				$this->response->data['btn1']['link'] = 'cargar-lotes';
+				$this->response->data['btn1']['link'] = lang('GEN_LINK_BULK_LOAD');
+			break;
+			case -437:
+				$this->response->code = 0;
+				$this->response->title = lang('BULK_CONFIRM_TITLE');
+				$this->response->msg = novoLang(lang('GEN_FAILED_THIRD_PARTY'), $response->msg);
+				$this->response->data->resp['bnt1']['link'] = lang('GEN_LINK_BULK_LOAD');
 			break;
 			case -438:
 				$this->response->code = 0;
 				$this->response->title = lang('BULK_CONFIRM_TITLE');
 				$this->response->msg = lang('BULK_CONFIRM_DUPLICATE');
-				$this->response->data['btn1']['link'] = 'cargar-lotes';
+				$this->response->data['btn1']['link'] = lang('GEN_LINK_BULK_LOAD');
 			break;
 		}
 
@@ -541,7 +566,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 			utf8_encode($password->password)
 		);
 
-		if (lang('CONF_HASH_PASS') == 'ON' || $this->session->autoLogin == 'false') {
+		if (lang('CONF_HASH_PASS') == 'ON' || $this->singleSession == 'signIn') {
 			$password = md5($password);
 		}
 
@@ -552,25 +577,25 @@ class Novo_Bulk_Model extends NOVO_Model {
 			'password' => $password
 		];
 
-		$this->sendToService('SignBulkList');
+		$this->sendToService('callWs_SignBulkList');
 
 		switch ($this->isResponseRc) {
 			case 0:
 				$msgREsp = count($signListBulk) > 1 ? lang('BULK_SIGNEDS') : lang('BULK_SIGNED');
 				$this->response->title = lang('BULK_SIGN_TITLE');
 				$this->response->msg = $msgREsp;
-				$this->response->icon = lang('GEN_ICON_SUCCESS');
+				$this->response->icon = lang('CONF_ICON_SUCCESS');
 				$this->response->data['btn1']['link'] = 'lotes-autorizacion';
 				break;
 			case -1:
 				$this->response->title = lang('BULK_SIGN_TITLE');
-				$this->response->msg = lang('RESP_PASSWORD_NO_VALID');
-				$this->response->icon = lang('GEN_ICON_WARNING');
+				$this->response->msg = lang('GEN_PASSWORD_NO_VALID');
+				$this->response->icon = lang('CONF_ICON_WARNING');
 				$this->response->data['btn1']['action'] = 'close';
 				break;
 		}
 
-		return $this->responseToTheView('SignBulkList');
+		return $this->responseToTheView('callWs_SignBulkList');
 	}
 	/**
 	 * @info Firma lista de lotes
@@ -605,7 +630,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 			utf8_encode($password->password)
 		);
 
-		if (lang('CONF_HASH_PASS') == 'ON' || $this->session->autoLogin == 'false') {
+		if (lang('CONF_HASH_PASS') == 'ON' || $this->singleSession == 'signIn') {
 			$password = md5($password);
 		}
 
@@ -624,7 +649,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 			case 0:
 				$this->response->title = lang('BULK_DELETE_TITLE');
 				$this->response->msg = lang('BULK_DELETED');
-				$this->response->icon = lang('GEN_ICON_SUCCESS');
+				$this->response->icon = lang('CONF_ICON_SUCCESS');
 				$this->response->data['btn1']['link'] = 'lotes-autorizacion';
 				break;
 			case -16:
@@ -635,8 +660,8 @@ class Novo_Bulk_Model extends NOVO_Model {
 			case -1:
 			case -22:
 				$this->response->title = lang('BULK_DELETE_TITLE');
-				$this->response->msg = lang('RESP_PASSWORD_NO_VALID');
-				$this->response->icon = lang('GEN_ICON_WARNING');
+				$this->response->msg = lang('GEN_PASSWORD_NO_VALID');
+				$this->response->icon = lang('CONF_ICON_WARNING');
 				$this->response->data['btn1']['action'] = 'close';
 				break;
 		}
@@ -676,7 +701,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 			utf8_encode($password->password)
 		);
 
-		if (lang('CONF_HASH_PASS') == 'ON' || $this->session->autoLogin == 'false') {
+		if (lang('CONF_HASH_PASS') == 'ON' || $this->singleSession == 'signIn') {
 			$password = md5($password);
 		}
 
@@ -693,7 +718,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 			case 0:
 				$this->response->title = lang('BULK_DISASS_TITLE');
 				$this->response->msg = lang('BULK_DISASSOCIATED');
-				$this->response->icon = lang('GEN_ICON_SUCCESS');
+				$this->response->icon = lang('CONF_ICON_SUCCESS');
 				$this->response->data['btn1']['link'] = 'lotes-autorizacion';
 				break;
 			case -16:
@@ -704,8 +729,8 @@ class Novo_Bulk_Model extends NOVO_Model {
 			case -1:
 			case -22:
 				$this->response->title = lang('BULK_DISASS_TITLE');
-				$this->response->msg = lang('RESP_PASSWORD_NO_VALID');
-				$this->response->icon = lang('GEN_ICON_WARNING');
+				$this->response->msg = lang('GEN_PASSWORD_NO_VALID');
+				$this->response->icon = lang('CONF_ICON_WARNING');
 				$this->response->data['btn1']['action'] = 'close';
 				break;
 		}
@@ -742,7 +767,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 			utf8_encode($password->password)
 		);
 
-		if (lang('CONF_HASH_PASS') == 'ON' || $this->session->autoLogin == 'false') {
+		if (lang('CONF_HASH_PASS') == 'ON' || $this->singleSession == 'signIn') {
 			$password = md5($password);
 		}
 
@@ -778,22 +803,22 @@ class Novo_Bulk_Model extends NOVO_Model {
 						switch ($key) {
 							case 'idOrdenTemp':
 								$serviceOrders['tempOrderId'] = $value;
-								break;
+							break;
 							case 'montoComision':
 								$serviceOrders['commisAmount'] = $value;
-								break;
+							break;
 							case 'montoIVA':
 								$serviceOrders['VatAmount'] = $value;
-								break;
+							break;
 							case 'montoOS':
 								$serviceOrders['soAmount'] = $value;
-								break;
+							break;
 							case 'montoTotal':
 								$serviceOrders['totalAmount'] = $value;
-								break;
+							break;
 							case 'montoDeposito':
 								$serviceOrders['depositedAmount'] = $value;
-								break;
+							break;
 							case 'lotes':
 								$serviceOrders['bulk'] = [];
 								foreach($value AS $bulk) {
@@ -807,7 +832,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 									$bulkList['bulkTotalAmount'] = floatval($bulk->montoRecarga) + floatval($bulk->montoComision);
 									$serviceOrders['bulk'][] = (object) $bulkList;
 								}
-								break;
+							break;
 						}
 					}
 
@@ -822,22 +847,22 @@ class Novo_Bulk_Model extends NOVO_Model {
 							switch ($value) {
 								case 'acidlote':
 									$bulkList['bulkId'] = $value;
-									break;
+								break;
 								case 'acnumlote':
 									$bulkList['bulkNumber'] = $value;
-									break;
+								break;
 								case 'dtfechorcarga':
 									$bulkList['bulkLoadDate'] = $value;
-									break;
+								break;
 								case 'acnombre':
 									$bulkList['bulkLoadType'] = ucfirst(mb_strtolower($value));
-									break;
+								break;
 								case 'ncantregs':
 									$bulkList['bulkRecords'] = $value;
-									break;
+								break;
 								case 'status':
 									$bulkList['bulkStatus'] = ucfirst(mb_strtolower($value));
-									break;
+								break;
 							}
 						}
 
@@ -851,24 +876,66 @@ class Novo_Bulk_Model extends NOVO_Model {
 
 				$this->session->set_flashdata('serviceOrdersList', $serviceOrdersList);
 				$this->session->set_flashdata('bulkNotBillable', $bulkNotBillable);
-				break;
+			break;
 			case -1:
 				$this->response->title = lang('BULK_AUTH_TITLE');
-				$this->response->msg = lang('RESP_PASSWORD_NO_VALID');
-				$this->response->icon = lang('GEN_ICON_WARNING');
+				$this->response->msg = lang('GEN_PASSWORD_NO_VALID');
+				$this->response->icon = lang('CONF_ICON_WARNING');
 				$this->response->data['btn1']['action'] = 'close';
-				break;
+			break;
 			case -59:
 				$this->response->title = lang('BULK_AUTH_TITLE');
 				$this->response->msg = lang('RESP_AUTH_ORDER_SERV');
 				$this->response->data['btn1']['action'] = 'close';
-				break;
+			break;
 			case 100:
 				$this->response->title = lang('BULK_AUTH_TITLE');
 				$this->response->msg = novoLang(lang('BULK_AUTH_SUCCESS'), $this->userName);
-				$this->response->icon = lang('GEN_ICON_SUCCESS');
+				$this->response->icon = lang('CONF_ICON_SUCCESS');
 				$this->response->data['btn1']['link'] = 'lotes-autorizacion';
-				break;
+			break;
+			case -154:
+				$this->response->title = lang('BULK_AUTH_TITLE');
+				$this->response->msg = lang('BULK_DAILY_AMOUNT_EXCEEDED');
+				$this->response->icon = lang('CONF_ICON_WARNING');
+				$this->response->data['btn1']['action'] = 'close';
+			break;
+			case -250:
+				$this->response->title = lang('BULK_AUTH_TITLE');
+				$this->response->msg = lang('BULK_AMOUNT_EXCEEDED');
+				$this->response->icon = lang('CONF_ICON_WARNING');
+				$this->response->data['btn1']['action'] = 'close';
+			break;
+			case -439:
+				$this->response->title = lang('BULK_AUTH_TITLE');
+				$this->response->msg = lang('BULK_WITHOUT_AUTH_PENDING');
+				$this->response->icon = lang('CONF_ICON_WARNING');
+				$this->response->data['btn1']['action'] = 'close';
+			break;
+			case -440:
+				$this->response->title = lang('BULK_AUTH_TITLE');
+				$this->response->msg = lang('FILE_NOT_EXIST_ICBS');
+				$this->response->icon = lang('CONF_ICON_WARNING');
+				$this->response->data['btn1']['action'] = 'close';
+			break;
+			case -441:
+				$this->response->title = lang('BULK_AUTH_TITLE');
+				$this->response->msg = lang('AUTH_ALREADY_PERFORMED_BY_USER');
+				$this->response->icon = lang('CONF_ICON_WARNING');
+				$this->response->data['btn1']['action'] = 'close';
+			break;
+			case -442:
+				$this->response->title = lang('BULK_AUTH_TITLE');
+				$this->response->msg = lang('BULK_EXPIRED_TIME');
+				$this->response->icon = lang('CONF_ICON_WARNING');
+				$this->response->data['btn1']['action'] = 'close';
+			break;
+			case -458:
+				$this->response->title = lang('BULK_AUTH_TITLE');
+				$this->response->msg = lang('BULK_MONTHLY_AMOUNT_EXCEEDED');
+				$this->response->icon = lang('CONF_ICON_WARNING');
+				$this->response->data['btn1']['action'] = 'close';
+			break;
 		}
 
 		return $this->responseToTheView('callWs_AuthorizeBulk');
@@ -993,14 +1060,14 @@ class Novo_Bulk_Model extends NOVO_Model {
 			case -286:
 				$this->response->title = lang('BULK_SO_CREATE_TITLE');
 				$this->response->msg = lang('GEN_SO_CREATE_INCORRECT');
-				$this->response->icon = lang('GEN_ICON_INFO');
+				$this->response->icon = lang('CONF_ICON_INFO');
 				$this->response->data['btn1']['action'] = 'close';
 			break;
 			case -287:
 			case -288:
 				$this->response->title = lang('BULK_SO_CREATE_TITLE');
 				$this->response->msg = lang('GEN_SO_CREATE_EXPIRED');
-				$this->response->icon = lang('GEN_ICON_INFO');
+				$this->response->icon = lang('CONF_ICON_INFO');
 				$this->response->data['btn1']['link'] = 'lotes-autorizacion';
 				$this->response->data['btn1']['action'] = 'redirect';
 			break;
@@ -1180,7 +1247,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 			);
 		}
 
-		if (lang('CONF_HASH_PASS') == 'ON' || $this->session->autoLogin == 'false') {
+		if (lang('CONF_HASH_PASS') == 'ON' || $this->singleSession == 'signIn') {
 			$password = md5($password);
 		}
 
@@ -1218,19 +1285,19 @@ class Novo_Bulk_Model extends NOVO_Model {
 			case 0:
 				$this->response->title = lang('BULK_UNNA_ACCOUNT');
 				$this->response->msg = lang('BULK_UNNA_PROCESS_OK');
-				$this->response->icon = lang('GEN_ICON_SUCCESS');
+				$this->response->icon = lang('CONF_ICON_SUCCESS');
 				$this->response->data['btn1']['link'] = 'lotes-autorizacion';
 				break;
 			case -1:
 				$this->response->title = lang('BULK_UNNA_ACCOUNT');
-				$this->response->msg = lang('RESP_PASSWORD_NO_VALID');
-				$this->response->icon = lang('GEN_ICON_WARNING');
+				$this->response->msg = lang('GEN_PASSWORD_NO_VALID');
+				$this->response->icon = lang('CONF_ICON_WARNING');
 				$this->response->data['btn1']['action'] = 'close';
 				break;
 			case -142:
 				$this->response->title = lang('BULK_UNNA_ACCOUNT');
 				$this->response->msg = lang('BULK_NO_LOAD');
-				$this->response->icon = lang('GEN_ICON_WARNING');
+				$this->response->icon = lang('CONF_ICON_WARNING');
 				$this->response->data['btn1']['action'] = 'close';
 				break;
 		}
@@ -1286,7 +1353,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 
 		switch ($this->isResponseRc) {
 			case 0:
-				$unnamedList = json_decode($response->bean);
+				$unnamedList = $response->bean;
 				$this->response->code = 0;
 
 				if(isset($unnamedList->lista) && count($unnamedList->lista) > 0) {
@@ -1361,7 +1428,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 
 		switch ($this->isResponseRc) {
 			case 0:
-				$unnamedDetail = json_decode($response->bean);
+				$unnamedDetail = $response->bean;
 				$this->response->code = 0;
 
 				if(isset($unnamedDetail->tarjetasInnominadas) && count($unnamedDetail->tarjetasInnominadas) > 0) {
@@ -1389,7 +1456,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 			case -150:
 				$this->response->title = 'Cuentas Innominadas';
 				$this->response->msg = lang('BULK_UNNA_REQ_NONCARDS');
-				$this->response->icon = lang('GEN_ICON_INFO');
+				$this->response->icon = lang('CONF_ICON_INFO');
 				$this->response->data->resp['btn1']['link'] = lang('GEN_LINK_BULK_UNNAMED_AFFIL');
 			break;
 		}

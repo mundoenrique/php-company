@@ -58,7 +58,7 @@ if ( ! function_exists('verifyheader'))
 		switch ($link) {
 			case lang('GEN_SHOW_HEADER'):
 				$show = ['pichincha'];
-				$display = ($module !== lang('GEN_LOGIN') && in_array($client, $show));
+				$display = ($module !== 'login' && in_array($client, $show));
 				$show = ['novo'];
 				$display = (in_array($client, $show) || $display);
 				break;
@@ -199,7 +199,7 @@ if ( ! function_exists('verifyFooter'))
 		switch ($link) {
 			case lang('GEN_FOTTER_START'):
 				$show = ['novo', 'pichincha'];
-				$display = ($module !== lang('GEN_LOGIN') && $module !== 'suggestion' && !$logged);
+				$display = ($module !== 'login' && $module !== 'suggestion' && !$logged);
 				$display = (in_array($client, $show) && $display);
 				break;
 			case lang('GEN_FOTTER_BENEFITS'):
