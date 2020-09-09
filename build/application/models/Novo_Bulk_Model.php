@@ -1170,7 +1170,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 			$auth = FALSE;
 		}
 
-		if($order > 1) {
+		if($order == 2) {
 			$sign = FALSE;
 		}
 
