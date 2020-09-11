@@ -30,7 +30,7 @@
 
 					<div class="form-group mb-3 col-4">
 						<label for="confirmName" id="confirmName"><?= lang('BULK_ENTERPRISE_NAME') ?></label>
-						<span id="confirmName" class="form-control px-1" readonly="readonly"><?= $detailBulk->enterpriseName ?></span>
+						<span id="confirmName" class="form-control px-1 truncate" readonly="readonly"><?= $detailBulk->enterpriseName ?></span>
 					</div>
 
 					<div class="form-group mb-3 col-4">
