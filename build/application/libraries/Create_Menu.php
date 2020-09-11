@@ -43,6 +43,9 @@ class Create_Menu {
 			case 'COMBUS':
 				$mainMenuLang = lang('GEN_MENU_TRAJECTS');
 				break;
+			case 'GESUSR':
+				$mainMenuLang = lang('GEN_MENU_USERS');
+				break;
 			default:
 				$mainMenuLang = '';
 		}
@@ -216,6 +219,10 @@ class Create_Menu {
 			case 'REPALL':
 				$subMenuLang->text = lang('GEN_MENU_REP_ALL');
 				$subMenuLang->link = lang('GEN_LINK_REP_ALL');
+				break;
+			case 'USEREM':
+				$subMenuLang->text = lang('GEN_MENU_USER_CONFIG');
+				$subMenuLang->link = lang('GEN_LINK_USER_CONFIG');
 				break;
 			case 'UNNAMED':
 				$subMenuLang->text = lang('GEN_MENU_BULK_UNNAMED');

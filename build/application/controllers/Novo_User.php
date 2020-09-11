@@ -292,4 +292,32 @@ class Novo_User extends NOVO_Controller {
 		$this->views = $views;
 		$this->loadView($view);
 	}
+		/**
+	 * @info Método que renderiza la vista de consulta de usuario
+	 * @author Hector D. Corredor.
+	 */
+	public function userSettings()
+
+	{
+		log_message('INFO', 'NOVO User: userSettings Method Initialized');
+
+		$view = 'userSettings';
+		array_push(
+			$this->includeAssets->cssFiles,
+			"third_party/dataTables-1.10.20"
+		);
+		array_push(
+			$this->includeAssets->jsFiles,
+			"third_party/dataTables-1.10.20",
+			"third_party/jquery.validate",
+			"validate-core-forms",
+			"third_party/additional-methods",
+			"user/userSettings"
+		);
+		$this->responseAttr();
+		$this->render->titlePage = lang('GEN_MENU_USER_CONFIG');
+		$this->views = ['user/'.$view];
+		$this->loadView($view);
+
+	}
 }

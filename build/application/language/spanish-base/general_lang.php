@@ -11,6 +11,7 @@ $lang['GEN_MENU_CONSULTATIONS'] = 'Consultas';
 $lang['GEN_MENU_SERVICES'] = 'Servicios';
 $lang['GEN_MENU_TRAJECTS'] = 'Trayectos';
 $lang['GEN_MENU_REPORTS'] = 'Reportes';
+$lang['GEN_MENU_USERS'] = 'Usuarios';
 $lang['GEN_MENU_SIGN_OFF'] = 'Cerrar Sesión';
 //SUBMENU
 $lang['GEN_NO_LINK'] = 'javascript:';
@@ -57,6 +58,8 @@ $lang['GEN_MENU_REP_CARDHOLDERS'] = 'Tarjetahabientes';//TEBTHA
 $lang['GEN_MENU_LNK_CARDHOLDERS'] = 'tarjetahabientes';//TEBTHA
 $lang['GEN_LINK_REP_CARDHOLDERS'] = 'tarjetahabientes';//TEBTHA
 $lang['GEN_LINK_REP_STATUSACCOUNT'] = 'estado-de-cuenta';//TEBTHA
+$lang['GEN_MENU_USER_CONFIG'] = 'Consulta de usuario';//USEREM
+$lang['GEN_LINK_USER_CONFIG'] = 'consulta-usuario';//USEREM
 $lang['GEN_MENU_UNNAMED_REQUEST'] = 'Solicitud de innominadas';
 $lang['GEN_MENU_UNNAMED_AFFIL'] = 'Afiliación de innominadas';
 $lang['GEN_MENU_LOT_REPROCESS'] = 'Reproceso de datos';//TEBGUR

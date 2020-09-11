@@ -65,6 +65,7 @@ $route['(:any)/cerrar-sesion/(:any)'] = "Novo_User/finishSession/$2";
 $route['(:any)/recuperar-clave'] = "Novo_User/recoverPass";
 $route['(:any)/recuperar-acceso'] = "Novo_User/recoverAccess";
 $route['(:any)/cambiar-clave'] = "Novo_User/changePassword";
+$route['(:any)/consulta-usuario'] = "Novo_User/userSettings";
 $route['(:any)/obtener-usuario'] = "Novo_Settings/getUser";
 //Information
 $route['(:any)/inf-beneficios'] = "Novo_Information/benefits";
