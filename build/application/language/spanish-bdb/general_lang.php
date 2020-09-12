@@ -21,7 +21,7 @@ $lang['GEN_TABLE_AMOUNT_SO'] = 'Valor OS';
 $lang['GEN_TABLE_TOTAL_AMOUNT'] = 'Valor total';
 $lang['GEN_TABLE_DEPOSIT_AMOUNT'] = 'Valor transacción';
 $lang['GEN_TABLE_AMOUNT'] = 'Valor recarga';
-$lang['GEN_TABLE_FOR_DEBIT'] = 'Valor a debitar';
+$lang['GEN_TABLE_FOR_DEBIT'] = 'Valor transacción';
 $lang['GEN_TABLE_DNI'] = 'Cédula';
 $lang['GEN_TABLE_ACCOUNT_NUMBER'] = 'Número de tarjeta';
 //FOOTER
