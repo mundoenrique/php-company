@@ -15,7 +15,7 @@ function validateForms(form) {
 	var userPassword = validatePass;
 	var numeric = /^[0-9]+$/;
 	var alphabetical = /^[a-z]+$/i;
-	var alphabeticalspace = /^['a-z ']{3,100}$/i;
+	var alphabeticalspace = /^['a-z ']{3,40}$/i;
 	var text = /^['a-z0-9ñáéíóú ,.:()']+$/i;
 	var usdAmount = /^[0-9]+(\.[0-9]*)?$/;
 	var validCode = /^[a-z0-9]+$/i;
@@ -192,7 +192,7 @@ function validateForms(form) {
 			"optCode": {required: true, pattern: alphanum},
 			"firstName": { required: true, pattern: alphabeticalspace},
 			"lastName": { required: true, pattern: alphabeticalspace},
-			"movil": { required: true, pattern: numeric},
+			"movil": { required: true, pattern: numeric, maxlength: 10, minlength: 7},
 			"numberDayPurchasesCtp": {required: true, pattern: numeric, maxLimitZero:'#numberWeeklyPurchasesCtp'},
 			"numberWeeklyPurchasesCtp": {required: true, pattern: numeric, maxLimitZero: '#numberMonthlyPurchasesCtp'},
 			"dailyPurchaseamountCtp": {required: true, pattern: numeric, maxLimitZero:'#weeklyAmountPurchasesCtp'},
