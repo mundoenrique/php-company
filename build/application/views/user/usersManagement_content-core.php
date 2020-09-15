@@ -1,5 +1,5 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
-<h1 class="primary h3 regular inline"><?= lang('GEN_MENU_USER_CONFIG') ?></h1>
+<h1 class="primary h3 regular inline"><?= lang('GEN_MENU_USERS_MANAGEMENT') ?></h1>
 <span class="ml-2 regular tertiary"><?= $productName ?></span>
 <div class="mb-2 flex items-center">
   <div class="flex tertiary">
@@ -8,7 +8,7 @@
         <li class="inline"><a class="tertiary big-modal" href="<?= base_url('empresas') ?>"><?= lang('GEN_MENU_ENTERPRISE') ?></a></li> /
         <li class="inline"><a class="tertiary big-modal" href="<?= base_url('productos') ?>"><?= lang('GEN_PRODUCTS') ?></a></li> /
         <li class="inline"><a class="tertiary big-modal" href="<?= base_url('detalle-producto') ?>"><?= lang('PRODUCTS_DETAIL_TITLE') ?></a></li> /
-        <li class="inline"><a class="tertiary not-pointer" href="javascript:">Usuarios</a></li>
+        <li class="inline"><a class="tertiary not-pointer" href="javascript:"><?= lang('GEN_MENU_USERS') ?></a></li>
       </ul>
     </nav>
   </div>
@@ -19,7 +19,8 @@
 	</div>
 	<div class="w-100 hide-out hide center">
 		<div class="flex flex-auto flex-column <?= $widget ? '' : 'max-width-6'; ?>">
-			<table id="consultUserTable" class="cell-border h6 display">
+			<span class="line-text mb-2 h4 semibold primary">Listado de usuarios</span>
+			<table id="consultAdminTable" class="cell-border h6 display">
 				<thead class="regular secondary bg-primary">
 					<tr>
 						<th>Usuario</th>
@@ -30,24 +31,18 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr ticket-id="" bulk-id="">
+					<tr>
 						<td>1001001</td>
 						<td>José Gutierrez</td>
 						<td>josegutierrez@mail.com</td>
 						<td>Administrador</td>
 						<td class="py-0 px-1 flex justify-center items-center">
-							<button class="btn mx-1 px-0" title="<?= lang('GEN_BTN_CONFIRM'); ?>" data-toggle="tooltip">
-								<i class="icon icon-find" aria-hidden="true"></i>
+							<button class="btn mx-1 px-0" title="<?= lang('GEN_BTN_ENABLE_USER'); ?>" data-toggle="tooltip">
+								<i class="icon icon-user-building" aria-hidden="true"></i>
 							</button>
-							<button class="btn mx-1 px-0" title="<?= lang('GEN_BTN_SEE'); ?>" data-toggle="tooltip">
-								<i class="icon icon-find" aria-hidden="true"></i>
+							<button class="btn mx-1 px-0" title="<?= lang('GEN_BTN_EDIT_PERMITS'); ?>" data-toggle="tooltip">
+								<i class="icon icon-edit-permits" aria-hidden="true"></i>
 							</button>
-							<form id="" method="POST">
-								<input type="hidden" name="bulkStatus" value="">
-								<input type="hidden" name="bulkId" value="">
-								<input type="hidden" name="bulkTicked" value="">
-								<input type="hidden" name="bulkFile" value="">
-							</form>
 						</td>
 					</tr>
 				</tbody>

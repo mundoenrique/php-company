@@ -293,15 +293,15 @@ class Novo_User extends NOVO_Controller {
 		$this->loadView($view);
 	}
 		/**
-	 * @info Método que renderiza la vista de consulta de usuario
+	 * @info Método que renderiza la vista de administración de usuarios
 	 * @author Hector D. Corredor.
 	 */
-	public function userSettings()
+	public function usersManagement()
 
 	{
-		log_message('INFO', 'NOVO User: userSettings Method Initialized');
+		log_message('INFO', 'NOVO User: usersManagement Method Initialized');
 
-		$view = 'userSettings';
+		$view = 'usersManagement';
 		array_push(
 			$this->includeAssets->cssFiles,
 			"third_party/dataTables-1.10.20"
@@ -312,10 +312,10 @@ class Novo_User extends NOVO_Controller {
 			"third_party/jquery.validate",
 			"validate-core-forms",
 			"third_party/additional-methods",
-			"user/userSettings"
+			"user/usersManagement"
 		);
 		$this->responseAttr();
-		$this->render->titlePage = lang('GEN_MENU_USER_CONFIG');
+		$this->render->titlePage = lang('GEN_MENU_USERS_MANAGEMENT');
 		$this->views = ['user/'.$view];
 		$this->loadView($view);
 

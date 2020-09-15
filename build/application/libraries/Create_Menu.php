@@ -221,8 +221,8 @@ class Create_Menu {
 				$subMenuLang->link = lang('GEN_LINK_REP_ALL');
 				break;
 			case 'USEREM':
-				$subMenuLang->text = lang('GEN_MENU_USER_CONFIG');
-				$subMenuLang->link = lang('GEN_LINK_USER_CONFIG');
+				$subMenuLang->text = lang('GEN_MENU_USERS_MANAGEMENT');
+				$subMenuLang->link = lang('GEN_LINK_USERS_MANAGEMENT');
 				break;
 			case 'UNNAMED':
 				$subMenuLang->text = lang('GEN_MENU_BULK_UNNAMED');

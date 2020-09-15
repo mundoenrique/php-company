@@ -4,7 +4,7 @@ $(function () {
 	$('#pre-loader').remove();
 	$('.hide-out').removeClass('hide');
 
-	$('#consultUserTable').DataTable({
+	$('#consultAdminTable').DataTable({
 		"ordering": false,
 		"responsive": true,
 		"pagingType": "full_numbers",
