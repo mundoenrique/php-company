@@ -23,4 +23,5 @@ $lang['CONF_FILES_MANAGMENT'] = [
   ['lotes.rar', 'Gestión de Lotes']
 ];
 //DATEPICKER
-$lang['CONF_MAX_CONSULT_MONTH'] = '1';
+$lang['CONF_MAX_CONSULT_MONTH'] = 1;
+$lang['CONF_MIN_CONSULT_YEAR'] = 2020;
