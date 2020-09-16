@@ -102,6 +102,8 @@ $lang['GEN_BTN_KEEP_SESSION'] = 'Mantener sesión';
 $lang['GEN_BTN_EDIT_PERMITS'] = 'Editar permisos';
 $lang['GEN_BTN_ENABLE_USER'] = 'Habilitar usuario';
 $lang['GEN_BTN_ALL'] = 'Todos';
+$lang['GEN_BTN_ENABLE'] = 'Habilitar';
+$lang['GEN_BTN_UPDATE'] = 'Actualizar';
 //MODULES
 $lang['GEN_LOGIN'] = 'Login';
 $lang['GEN_ACTIVE_RECAPTCHA'] = ACTIVE_RECAPTCHA;
@@ -154,6 +156,9 @@ $lang['GEN_CONTACTS'] = [
 	'city' => '(XX) XXX XXXX',
 ];
 $lang['GEN_CONTACTS_REST_COUNTRY_NUMBER'] = 'XXX (XXXXXX)';
+$lang['GEN_ACCESS_PERMISSION_TITLE'] = 'Permiso de acceso';
+$lang['GEN_USER_DATA'] = 'Datos del usuario';
+$lang['GEN_LIST_PERMITS'] = 'Listado de permisos';
 //LINKS
 $lang['GEN_LINK_LOGIN'] = 'inicio';
 $lang['GEN_LINK_RECOVER_ACCESS'] = 'recuperar-clave';

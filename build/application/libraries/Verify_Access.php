@@ -280,6 +280,7 @@ class Verify_Access {
 					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPEDO'));;
 				break;
 				case 'usersManagement':
+				case 'usersAccessPermissions':
 					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('USEREM'));;
 				break;
 			}

@@ -17,10 +17,10 @@
 	<div id="pre-loader" class="mt-2 mx-auto">
 		<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
 	</div>
-	<div class="w-100 hide-out hide center">
+	<div class="w-100 hide-out hide">
 		<div class="flex flex-auto flex-column <?= $widget ? '' : 'max-width-6'; ?>">
 			<span class="line-text mb-2 h4 semibold primary">Listado de usuarios</span>
-			<table id="consultAdminTable" class="cell-border h6 display">
+			<table id="consultAdminTable" class="cell-border h6 display center">
 				<thead class="regular secondary bg-primary">
 					<tr>
 						<th>Usuario</th>
