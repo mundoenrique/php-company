@@ -1156,10 +1156,15 @@ class Novo_Bulk_Model extends NOVO_Model {
 		$authorizeBulk = [];
 		$authorizeAttr = [];
 		$noSeeDetail = ['Z', 'Y'];
-		$allBulk = 'no-select-checkbox';
+		$allBulkSign = 'no-select-checkbox';
+		$allBulkAuth = 'no-select-checkbox';
+
+		if(lang('CONF_BULK_SELECT_ALL_SIGN') == 'ON') {
+			$allBulkSign = 'toggle-all';
+		}
 
 		if(lang('CONF_BULK_SELECT_ALL_AUTH') == 'ON') {
-			$allBulk = 'toggle-all';
+			$allBulkAuth = 'toggle-all';
 		}
 
 		$sign = TRUE;
@@ -1209,8 +1214,9 @@ class Novo_Bulk_Model extends NOVO_Model {
 		}
 
 		$authorizeAttr = (object) [
-			'toPAy' => isset($bulkList->ordenXPagar) ? $bulkList->ordenXPagar : 'N',
-			'allBulk' => $allBulk,
+			'toPAy' => $bulkList->ordenXPagar ?? 'N',
+			'allBulkSign' => $allBulkSign,
+			'allBulkAuth' => $allBulkAuth,
 			'sign' => $sign,
 			'auth' => $auth
 		];
