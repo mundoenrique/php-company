@@ -896,13 +896,13 @@ class Novo_Bulk_Model extends NOVO_Model {
 			break;
 			case -154:
 				$this->response->title = lang('BULK_AUTH_TITLE');
-				$this->response->msg = lang('BULK_DAILY_AMOUNT_EXCEEDED');
+				$this->response->msg = lang('CONF_BULK_AUTH_MSG_SERV') == 'ON' ? $response->msg : lang('BULK_DAILY_AMOUNT_EXCEEDED');
 				$this->response->icon = lang('CONF_ICON_WARNING');
 				$this->response->data['btn1']['action'] = 'close';
 			break;
 			case -250:
 				$this->response->title = lang('BULK_AUTH_TITLE');
-				$this->response->msg = lang('BULK_AMOUNT_EXCEEDED');
+				$this->response->msg = lang('CONF_BULK_AUTH_MSG_SERV') == 'ON' ? $response->msg : lang('BULK_AMOUNT_EXCEEDED');
 				$this->response->icon = lang('CONF_ICON_WARNING');
 				$this->response->data['btn1']['action'] = 'close';
 			break;
@@ -932,7 +932,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 			break;
 			case -458:
 				$this->response->title = lang('BULK_AUTH_TITLE');
-				$this->response->msg = lang('BULK_MONTHLY_AMOUNT_EXCEEDED');
+				$this->response->msg = lang('CONF_BULK_AUTH_MSG_SERV') == 'ON' ? $response->msg : lang('BULK_MONTHLY_AMOUNT_EXCEEDED');
 				$this->response->icon = lang('CONF_ICON_WARNING');
 				$this->response->data['btn1']['action'] = 'close';
 			break;

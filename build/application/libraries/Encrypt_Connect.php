@@ -84,8 +84,22 @@ class Encrypt_Connect {
 			switch ($pos) {
 				case 'archivo':
 					$this->logMessage->archivo = 'OK';
+
 					if(!is_array($responseAttr)) {
 						$this->logMessage->archivo = 'Sin arreglo binario';
+					}
+				break;
+				case 'bean':
+					$this->logMessage->bean = new stdClass();
+
+					if (isset($responseAttr->archivo)) {
+						$this->logMessage->bean->archivo = 'OK';
+
+						if(!is_array($responseAttr->archivo)) {
+							$this->logMessage->bean->archivo = 'Sin arreglo binario';
+						}
+					} else {
+						$this->logMessage->bean = $responseAttr;
 					}
 				break;
 				case 'msg':
