@@ -943,4 +943,60 @@ class Novo_Services_Model extends NOVO_Model {
 		}
 		return $this->responseToTheView('callWs_updateTransactionalLimits');
 	}
+	/**
+	 * @info Método para consultar el saldo de la cuenta maestra
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date September 16th, 2020
+	 */
+	public function CallWs_MasterAccountBalance_Services($dataRequest)
+	{
+		log_message('INFO', 'NOVO Services Model: MasterAccountBalance Method Initialized');
+
+		$this->className = 'com.novo.objects.TOs.TarjetaTO';
+
+		$this->dataAccessLog->modulo = 'Servicios';
+		$this->dataAccessLog->function = 'Transferencia maestra';
+		$this->dataAccessLog->operation = 'Consulta de saldo';
+
+		$this->dataRequest->idOperation = 'saldoCuentaMaestraTM';
+		$this->dataRequest->rifEmpresa = $this->session->enterpriseInf->idFiscal;
+
+		$response = $this->sendToService('CallWs_MasterAccountBalance');
+		$this->response->code = 0;
+
+		switch ($this->isResponseRc) {
+			case 0:
+				$this->response->data->balance = $response->maestroDeposito->saldoDisponible;
+				$this->response->data->balanceTxt = novoLang('Saldo Disponible: '.lang('GEN_CURRENCY').' %s', currencyFormat($response->maestroDeposito->saldoDisponible));
+				$this->response->data->fundingAccount = $response->maestroDeposito->cuentaFondeo;
+
+				if (isset($response->maestroDeposito->cantidadTranxDia)) {
+
+				}
+
+				if (isset($response->maestroDeposito->cantidadTranxDia)) {
+
+				}
+
+				if (isset($response->maestroDeposito->parametrosRecarga)) {
+
+				}
+			break;
+			case -233:
+
+			break;
+			case -251:
+
+			break;
+			case -402:
+
+			break;
+			default:
+				if ($this->isResponseRc == -29 || $this->isResponseRc == -29 || $this->isResponseRc == 504) {
+					$this->response->code = 4;
+				}
+		}
+
+		return $this->responseToTheView('CallWs_MatesaccountBlanace');
+	}
 }

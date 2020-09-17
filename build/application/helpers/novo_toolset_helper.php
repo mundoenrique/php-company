@@ -225,3 +225,19 @@ if (!function_exists('uriRedirect')) {
 		return $linkredirect;
 	}
 }
+
+if (! function_exists('currencyFormat')) {
+	function currencyFormat($amount){
+		$CI =& get_instance();
+		$client = $CI->session->userdata('countrySess');
+		$decimalPoint = ['Ve', 'Co'];
+
+		if (in_array($client, $decimalPoint)) {
+			$amount =  number_format($amount, 2, ',', '.');
+		} else {
+			$amount = number_format($amount, 2);
+		}
+
+		return $amount;
+	}
+}

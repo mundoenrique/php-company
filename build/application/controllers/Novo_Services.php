@@ -31,9 +31,18 @@ Class Novo_Services extends Novo_Controller {
 			"third_party/jquery.validate",
 			"validate-core-forms",
 			"third_party/additional-methods",
-			'services/transfMasterAccount'
+			'services/transfMasterAccount',
+			'services/transfMasterRecharge',
 		);
-		$this->responseAttr();
+
+		$responseAttr = 0;
+
+		if (lang('CONF_PAY_ACCOUNT') == 'ON' && $this->verify_access->verifyAuthorization('TRAMAE', 'TRASAL')) {
+			$this->method = 'CallWs_MasterAccountBalance_Services';
+			$responseAttr = $this->loadModel();
+		}
+
+		$this->responseAttr($responseAttr);
 		$this->render->titlePage = lang('GEN_MENU_SERV_MASTER_ACCOUNT');
 		$this->views = ['services/'.$view];
 		$this->loadView($view);
