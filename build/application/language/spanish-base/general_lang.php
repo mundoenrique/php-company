@@ -156,7 +156,7 @@ $lang['GEN_CONTACTS'] = [
 	'city' => '(XX) XXX XXXX',
 ];
 $lang['GEN_CONTACTS_REST_COUNTRY_NUMBER'] = 'XXX (XXXXXX)';
-$lang['GEN_ACCESS_PERMISSION_TITLE'] = 'Permiso de acceso';
+$lang['GEN_USER_PERMISSION_TITLE'] = 'Permisos de usuario';
 $lang['GEN_USER_DATA'] = 'Datos del usuario';
 $lang['GEN_LIST_PERMITS'] = 'Listado de permisos';
 //LINKS

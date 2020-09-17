@@ -37,9 +37,11 @@
 						<td>josegutierrez@mail.com</td>
 						<td>Administrador</td>
 						<td class="py-0 px-1 flex justify-center items-center">
+							<?php if($this->verify_access->verifyAuthorization('USEREM')): ?>
 							<button class="btn mx-1 px-0" title="<?= lang('GEN_BTN_ENABLE_USER'); ?>" data-toggle="tooltip">
 								<i class="icon icon-user-building" aria-hidden="true"></i>
 							</button>
+							<?php endif; ?>
 							<button class="btn mx-1 px-0" title="<?= lang('GEN_BTN_EDIT_PERMITS'); ?>" data-toggle="tooltip">
 								<i class="icon icon-edit-permits" aria-hidden="true"></i>
 							</button>

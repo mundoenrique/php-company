@@ -322,21 +322,21 @@ class Novo_User extends NOVO_Controller {
 	}
 
 		/**
-	 * @info Método que renderiza la vista de permisos de accesos de usuarios
+	 * @info Método que renderiza la vista de permisos de usuario
 	 * @author Jennifer C. Cádiz.
 	 */
-	public function usersAccessPermissions()
+	public function userPermissions()
 
 	{
-		log_message('INFO', 'NOVO User: usersAccessPermissions Method Initialized');
+		log_message('INFO', 'NOVO User: userPermissions Method Initialized');
 
-		$view = 'usersAccessPermissions';
+		$view = 'userPermissions';
 		array_push(
 			$this->includeAssets->jsFiles,
 			"third_party/jquery.validate",
 			"validate-core-forms",
 			"third_party/additional-methods",
-			"user/usersAccessPermissions"
+			"user/userPermissions"
 		);
 		$this->responseAttr();
 		$this->render->titlePage = lang('GEN_ACCESS_PERMISSION_TITLE');
