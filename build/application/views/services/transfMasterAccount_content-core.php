@@ -23,32 +23,32 @@
       <div class="flex pb-3 flex-column w-100">
         <span class="line-text mb-2 h4 semibold primary">Recarga cuenta/tarjeta maestra </span>
         <div class="flex my-2 px-5">
-          <form id="#" method="post" class="w-100">
-            <p class="mr-5 mb-3 sh5 semibold tertiary">Saldo disponible <span class="light text"></span></p>
+          <form id="masterAccountRechargeForm" method="post" class="w-100">
+            <p class="mr-5 mb-3 sh5 semibold tertiary"><?= $balanceText ?> <span class="light text"><?= $balance; ?></span></p>
 
             <?php if (lang('CONF_SELECT_AMOUNT') == 'ON'): ?>
             <div class="row">
               <div class="form-group col-3">
                 <label for="account" id="account"><?= lang('GEN_ACCOUNT'); ?></label>
-                <span id="account-user" class="form-control px-1" readonly="readonly"></span>
+                <input type="text" id="accountUser" name="accountUser" class="form-control px-1" value="<?= $fundingAccount; ?>" readonly>
                 <div class="help-block"></div>
               </div>
 
               <div class="form-group col-3">
                 <div class="custom-option-c custom-radio custom-control-inline">
-                  <input type="radio" id="cash-out" name="cash" class="custom-option-input">
-                  <label class="custom-option-label nowrap" for="cash-out">Cargo</label>
+                  <input type="radio" id="debit" name="transferType" class="custom-option-input">
+                  <label class="custom-option-label nowrap" for="debit">Cargo</label>
                 </div>
                 <div class="custom-option-c custom-radio custom-control-inline">
-                  <input type="radio" id="cash-in" name="cash" class="custom-option-input">
-                  <label class="custom-option-label nowrap" for="cash-in">Abono</label>
+                  <input type="radio" id="pay" name="transferType" class="custom-option-input">
+                  <label class="custom-option-label nowrap" for="pay">Abono</label>
                 </div>
                 <div class="help-block"></div>
               </div>
 
               <div class="form-group col-3">
                 <label for="amount"><?= lang('GEN_TABLE_AMOUNT'); ?></label>
-                <input id="amount" class="form-control h5" type="text" placeholder="Ingresar monto" name="amount">
+                <input id="amount" class="form-control h5 text-right" type="text" placeholder="<?= '0'.lang('GEN_DECIMAL').'00'; ?>" name="amount">
                 <div class="help-block"></div>
               </div>
               <div class="form-group col-3">
@@ -72,7 +72,7 @@
                 <div class="help-block bulk-select text-left"></div>
               </div>
               <div class="col-3">
-                <button id="transfer" class="btn btn-primary btn-small btn-loading flex ml-auto">Transferir
+                <button id="masterAccountRechargeBtn" class="btn btn-primary btn-small btn-loading flex ml-auto">Transferir
                 </button>
               </div>
             </div>

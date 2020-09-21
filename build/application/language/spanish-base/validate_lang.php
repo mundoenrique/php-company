@@ -59,3 +59,5 @@ $lang['VALIDATE_INVALID_NUMBER'] = 'Formato inválido, solo se deben ingresar n�
 $lang['VALIDATE_NUMBER_REQ'] = 'Este número es requerido';
 $lang['VALIDATE_NAME_LASTNAME'] = 'Sólo se admiten letras y espacios (mín 3, máx 40)';
 $lang['VALIDATE_PHONE'] = 'Sólo se admiten números (mín 7, máx 10)';
+$lang['VALIDATE_RECHARGE_DESCRIPTION'] = '/^[a-z0-9ñáéíóú ,.:()]+$';
+$lang['VALIDATE_TRANSFER_TYPE'] = 'Elije una opción';

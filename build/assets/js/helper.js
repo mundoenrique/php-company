@@ -135,7 +135,7 @@ function callNovoCore(verb, who, where, request, _response_) {
 		dataType: 'json'
 	}).done(function (response, status, jqXHR) {
 
-		response = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, { format: CryptoJSAesJson }).toString(CryptoJS.enc.Utf8))
+		response = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, { format: CryptoJSAesJson }).toString(CryptoJS.enc.Utf8));
 
 		var modalClose = response.modal ? false : true;
 

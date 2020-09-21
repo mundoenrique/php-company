@@ -960,27 +960,38 @@ class Novo_Services_Model extends NOVO_Model {
 
 		$this->dataRequest->idOperation = 'saldoCuentaMaestraTM';
 		$this->dataRequest->rifEmpresa = $this->session->enterpriseInf->idFiscal;
+		$this->dataRequest->idProducto = $this->session->productInf->productPrefix;
 
 		$response = $this->sendToService('CallWs_MasterAccountBalance');
 		$this->response->code = 0;
+		$this->response->data->info['balance'] = '';
+		$this->response->data->info['balanceTxt'] = '';
+		$this->response->data->info['fundingAccount'] = '';
 
 		switch ($this->isResponseRc) {
 			case 0:
-				$this->response->data->balance = $response->maestroDeposito->saldoDisponible;
-				$this->response->data->balanceTxt = novoLang('Saldo Disponible: '.lang('GEN_CURRENCY').' %s', currencyFormat($response->maestroDeposito->saldoDisponible));
-				$this->response->data->fundingAccount = $response->maestroDeposito->cuentaFondeo;
+				$this->response->data->info['balanceText'] = 'Saldo Disponible: ';
+				$this->response->data->info['balance'] = lang('GEN_CURRENCY').' '.currencyFormat($response->maestroDeposito->saldoDisponible);
+				$this->response->data->info['fundingAccount'] = $response->maestroDeposito->cuentaFondeo ?? '';
 
-				if (isset($response->maestroDeposito->cantidadTranxDia)) {
-
-				}
-
-				if (isset($response->maestroDeposito->cantidadTranxDia)) {
-
-				}
+				$this->response->data->params['balance'] = (float )$response->maestroDeposito->saldoDisponible;
+				$this->response->data->params['dailyOper']['quantity'] = (int) $response->maestroDeposito->cantidadTranxDia->lista[0]->idCuenta ?? '';
+				$this->response->data->params['dailyOper']['amount'] = $response->maestroDeposito->cantidadTranxDia->lista[0]->montoOperacion ?? '';
+				$this->response->data->params['weeklyOper']['quantity'] = (int) $response->maestroDeposito->cantidadTranxSemana->lista[0]->idCuenta ?? '';
+				$this->response->data->params['weeklyOper']['amount'] = $response->maestroDeposito->cantidadTranxSemana->lista[0]->montoOperacion ?? '';
 
 				if (isset($response->maestroDeposito->parametrosRecarga)) {
-
+					unset(
+						$response->maestroDeposito->parametrosRecarga->idExtEmp,
+						$response->maestroDeposito->parametrosRecarga->acprefix,
+						$response->maestroDeposito->parametrosRecarga->usuarioReg,
+						$response->maestroDeposito->parametrosRecarga->tipoComision,
+						$response->maestroDeposito->parametrosRecarga->tipoFactura,
+					);
+					$this->response->data->params['rechargeParams'] = $response->maestroDeposito->parametrosRecarga ?? '';
 				}
+
+				$this->response->data->params = base64_encode(json_encode($this->cryptography->encrypt($this->response->data->params)));
 			break;
 			case -233:
 
@@ -992,9 +1003,7 @@ class Novo_Services_Model extends NOVO_Model {
 
 			break;
 			default:
-				if ($this->isResponseRc == -29 || $this->isResponseRc == -29 || $this->isResponseRc == 504) {
-					$this->response->code = 4;
-				}
+				$this->response->code = 4;
 		}
 
 		return $this->responseToTheView('CallWs_MatesaccountBlanace');

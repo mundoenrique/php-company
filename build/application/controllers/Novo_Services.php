@@ -33,6 +33,7 @@ Class Novo_Services extends Novo_Controller {
 			"third_party/additional-methods",
 			'services/transfMasterAccount',
 			'services/transfMasterRecharge',
+			'third_party/jquery.mask-1.14.16',
 		);
 
 		$responseAttr = 0;
@@ -40,6 +41,10 @@ Class Novo_Services extends Novo_Controller {
 		if (lang('CONF_PAY_ACCOUNT') == 'ON' && $this->verify_access->verifyAuthorization('TRAMAE', 'TRASAL')) {
 			$this->method = 'CallWs_MasterAccountBalance_Services';
 			$responseAttr = $this->loadModel();
+
+			foreach ($responseAttr->data->info AS $index => $render) {
+				$this->render->$index = $render;
+			}
 		}
 
 		$this->responseAttr($responseAttr);
