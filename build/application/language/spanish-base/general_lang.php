@@ -159,6 +159,8 @@ $lang['GEN_CONTACTS_REST_COUNTRY_NUMBER'] = 'XXX (XXXXXX)';
 $lang['GEN_USER_PERMISSION_TITLE'] = 'Permisos de usuario';
 $lang['GEN_USER_DATA'] = 'Datos del usuario';
 $lang['GEN_LIST_PERMITS'] = 'Listado de permisos';
+$lang['GEN_NOTE'] = 'Nota:';
+$lang['GEN_CHECK_COLOR'] = 'Si el check se encuentra en color';
 //LINKS
 $lang['GEN_LINK_LOGIN'] = 'inicio';
 $lang['GEN_LINK_RECOVER_ACCESS'] = 'recuperar-clave';

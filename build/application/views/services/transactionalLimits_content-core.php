@@ -69,7 +69,7 @@
 								<p class="h5 semibold tertiary"><?= lang('GEN_TABLE_DNI'); ?>: <span class="light text" id="documentId"></span></p>
 							</div>
 							<div class="form-group col-12 center">
-              	<p class="h6 bold mb-0 mt-2">Nota: <span class="light text">Si el campo es igual a 0, se tomará como límite el valor configurado para el producto.</span></p>
+              	<p class="h6 bold mb-0 mt-2"><?= lang('GEN_NOTE'); ?> <span class="light text">Si el campo es igual a 0, se tomará como límite el valor configurado para el producto.</span></p>
             	</div>
 						</div>
 					</div>

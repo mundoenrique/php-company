@@ -63,14 +63,14 @@
 						<div class="row flex justify-between mb-3">
 							<div class="form-group col-12 center flex justify-center items-end">
 								<span class="h6 bold mb-0 mt-2">
-									Nota:
-									<span class="light text">Si el check se encuentra en color</span>
+								<?= lang('GEN_NOTE'); ?>
+									<span class="light text"><?= lang('GEN_CHECK_COLOR'); ?></span>
 								</span>
 								<div class="custom-control custom-switch custom-control-inline p-0 pl-4 ml-1 mr-0">
 									<input class="custom-control-input" type="checkbox" disabled checked>
 									<label class="custom-control-label"></label>
 								</div>
-								<span class="h6 light text">el permiso está activo</span>
+								<span class="h6 light text"><?= lang('PERMITS_NOTE_ACTIVE'); ?></span>
 							</div>
 						</div>
 						<form id="checkFormPermits">
