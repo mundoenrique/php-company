@@ -132,7 +132,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 									$bulkList['bulkStatus'] = ucfirst(mb_strtolower($bulk->status));
 									$bulkList['bulkAmount'] = currencyFormat($bulk->montoRecarga);
 									$bulkList['bulkCommisAmount'] = currencyFormat($bulk->montoComision);
-									$bulkList['bulkTotalAmount'] = currencyFormat(floatval($bulk->montoRecarga) + floatval($bulk->montoComision));
+									$bulkList['bulkTotalAmount'] = currencyFormat($bulk->montoNeto);
 									$bulkList['bulkId'] = $bulk->acidlote;
 									$serviceOrders['bulk'][] = (object) $bulkList;
 								}
