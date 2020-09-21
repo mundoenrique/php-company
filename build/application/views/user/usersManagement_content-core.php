@@ -43,7 +43,7 @@
 							</button>
 							<?php endif; ?>
 							<?php if($this->verify_access->verifyAuthorization('USEREM')): ?>
-							<button class="btn mx-1 px-0 big-modal title="<?= lang('GEN_BTN_EDIT_PERMITS'); ?>" data-toggle="tooltip">
+							<button class="btn mx-1 px-0 big-modal" title="<?= lang('GEN_BTN_EDIT_PERMITS'); ?>" data-toggle="tooltip">
 								<i class="icon icon-edit-permits" aria-hidden="true"></i>
 							</button>
 							<?php endif; ?>
