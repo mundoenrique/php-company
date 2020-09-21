@@ -19,7 +19,7 @@
 	</div>
 	<div class="w-100 hide-out hide">
 		<div class="flex flex-auto flex-column <?= $widget ? '' : 'max-width-6'; ?>">
-			<span class="line-text mb-2 h4 semibold primary">Listado de usuarios</span>
+			<span class="line-text mb-2 h4 semibold primary"><?= lang('MANAGEMENT_LIST_USERS') ?></span>
 			<table id="consultAdminTable" class="cell-border h6 display center">
 				<thead class="regular secondary bg-primary">
 					<tr>
@@ -38,13 +38,21 @@
 						<td>Administrador</td>
 						<td class="py-0 px-1 flex justify-center items-center">
 							<?php if($this->verify_access->verifyAuthorization('USEREM')): ?>
-							<button class="btn mx-1 px-0" title="<?= lang('GEN_BTN_ENABLE_USER'); ?>" data-toggle="tooltip">
+							<button class="btn mx-1 px-0 big-modal" title="<?= lang('GEN_BTN_ENABLE_USER'); ?>" data-toggle="tooltip">
 								<i class="icon icon-user-building" aria-hidden="true"></i>
 							</button>
 							<?php endif; ?>
-							<button class="btn mx-1 px-0" title="<?= lang('GEN_BTN_EDIT_PERMITS'); ?>" data-toggle="tooltip">
+							<?php if($this->verify_access->verifyAuthorization('USEREM')): ?>
+							<button class="btn mx-1 px-0 big-modal title="<?= lang('GEN_BTN_EDIT_PERMITS'); ?>" data-toggle="tooltip">
 								<i class="icon icon-edit-permits" aria-hidden="true"></i>
 							</button>
+							<?php endif; ?>
+							<form id="formManagement">
+								<input type="hidden" name="adminUser" value="">
+								<input type="hidden" name="adminName" value="">
+								<input type="hidden" name="adminMail" value="">
+								<input type="hidden" name="adminType" value="">
+							</form>
 						</td>
 					</tr>
 				</tbody>

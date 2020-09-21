@@ -339,7 +339,7 @@ class Novo_User extends NOVO_Controller {
 			"user/userPermissions"
 		);
 		$this->responseAttr();
-		$this->render->titlePage = lang('GEN_ACCESS_PERMISSION_TITLE');
+		$this->render->titlePage = lang('GEN_USER_PERMISSION_TITLE');
 		$this->views = ['user/'.$view];
 		$this->loadView($view);
 
