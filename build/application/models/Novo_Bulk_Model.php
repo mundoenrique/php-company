@@ -805,19 +805,19 @@ class Novo_Bulk_Model extends NOVO_Model {
 								$serviceOrders['tempOrderId'] = $value;
 							break;
 							case 'montoComision':
-								$serviceOrders['commisAmount'] = $value;
+								$serviceOrders['commisAmount'] = currencyFormat($value);
 							break;
 							case 'montoIVA':
-								$serviceOrders['VatAmount'] = $value;
+								$serviceOrders['VatAmount'] = currencyFormat($value);
 							break;
 							case 'montoOS':
-								$serviceOrders['soAmount'] = $value;
+								$serviceOrders['soAmount'] = currencyFormat($value);
 							break;
 							case 'montoTotal':
-								$serviceOrders['totalAmount'] = $value;
+								$serviceOrders['totalAmount'] = currencyFormat($value);
 							break;
 							case 'montoDeposito':
-								$serviceOrders['depositedAmount'] = $value;
+								$serviceOrders['depositedAmount'] = currencyFormat($value);
 							break;
 							case 'lotes':
 								$serviceOrders['bulk'] = [];
@@ -827,9 +827,10 @@ class Novo_Bulk_Model extends NOVO_Model {
 									$bulkList['bulkLoadType'] = ucfirst(mb_strtolower($bulk->acnombre));
 									$bulkList['bulkRecords'] = $bulk->ncantregs;
 									$bulkList['bulkStatus'] = ucfirst(mb_strtolower($bulk->status));
-									$bulkList['bulkAmount'] = floatval($bulk->montoRecarga);
-									$bulkList['bulkCommisAmount'] = floatval($bulk->montoComision);
-									$bulkList['bulkTotalAmount'] = floatval($bulk->montoRecarga) + floatval($bulk->montoComision);
+									$bulkList['bulkAmount'] = currencyFormat($bulk->montoRecarga);
+									$bulkList['bulkCommisAmount'] = currencyFormat($bulk->montoComision);
+									$bulkList['bulkTotalAmount'] = currencyFormat($bulk->montoNeto);
+									$bulkList['bulkId'] = $bulk->acidlote;
 									$serviceOrders['bulk'][] = (object) $bulkList;
 								}
 							break;
@@ -1016,16 +1017,16 @@ class Novo_Bulk_Model extends NOVO_Model {
 								}
 								break;
 							case 'montoComision':
-								$serviceOrders['OrderCommission'] = $value;
+								$serviceOrders['OrderCommission'] = currencyFormat($value);
 								break;
 							case 'montoIVA':
-								$serviceOrders['OrderTax'] = $value;
+								$serviceOrders['OrderTax'] = currencyFormat($value);
 								break;
 							case 'montoOS':
-								$serviceOrders['OrderAmount'] = $value;
+								$serviceOrders['OrderAmount'] = currencyFormat($value);
 								break;
 							case 'montoDeposito':
-								$serviceOrders['OrderDeposit'] = $value;
+								$serviceOrders['OrderDeposit'] = currencyFormat($value);
 								break;
 							case 'lotes':
 								$serviceOrders['bulk'] = [];
@@ -1035,9 +1036,9 @@ class Novo_Bulk_Model extends NOVO_Model {
 									$bulkList['bulkLoadType'] = ucfirst(mb_strtolower($bulk->acnombre));
 									$bulkList['bulkRecords'] = $bulk->ncantregs;
 									$bulkList['bulkStatus'] = ucfirst(mb_strtolower($bulk->status));
-									$bulkList['bulkAmount'] = floatval($bulk->montoRecarga);
-									$bulkList['bulkCommisAmount'] = floatval($bulk->montoComision);
-									$bulkList['bulkTotalAmount'] = floatval($bulk->montoRecarga) + floatval($bulk->montoComision);
+									$bulkList['bulkAmount'] = currencyFormat($bulk->montoRecarga);
+									$bulkList['bulkCommisAmount'] = currencyFormat($bulk->montoComision);
+									$bulkList['bulkTotalAmount'] = currencyFormat($bulk->montoNeto);
 									$bulkList['bulkId'] = $bulk->acidlote;
 									$serviceOrders['bulk'][] = (object) $bulkList;
 								}
@@ -1187,7 +1188,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 				$detailBulk['idType'] = $bulk->ctipolote;
 				$detailBulk['type'] = ucwords(mb_strtolower(substr($bulk->acnombre, 0, 20)));
 				$detailBulk['records'] = $bulk->ncantregs;
-				$detailBulk['amount'] = $bulk->nmonto;
+				$detailBulk['amount'] = currencyFormat($bulk->nmonto);
 				$detailBulk['selectBulk'] = $sign ? '' : 'no-select-checkbox';
 				$signBulk[] = (object) $detailBulk;
 			}
@@ -1202,7 +1203,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 				$detailBulk['idType'] = $bulk->ctipolote;
 				$detailBulk['type'] = ucwords(mb_strtolower(substr($bulk->acnombre, 0, 20)));
 				$detailBulk['records'] = $bulk->ncantregs;
-				$detailBulk['amount'] = $bulk->nmonto;
+				$detailBulk['amount'] = currencyFormat($bulk->nmonto);
 				$detailBulk['selectBulk'] = $auth ? '' : 'no-select-checkbox';
 				$listAth = $bulk->accodusuarioa;
 				$listAth = explode(',', $listAth);
