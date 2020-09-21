@@ -3629,8 +3629,8 @@ a.ui-button:active,
 	/* height: 18.6px; */
 }
 .product-presentation .item-network {
-	right: 20px;
-	bottom: 20px;
+	right: 10px;
+	bottom: 10px;
 }
 .item-network.maestro {
 	background: transparent url("../../images/brands/logo_maestro.svg") no-repeat center / cover;
