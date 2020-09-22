@@ -262,8 +262,22 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataAccessLog->operation = 'Inicio de sesión único';
 		$this->dataAccessLog->userName = $this->country;
 
-		$this->dataRequest->idOperation = 'userByToken';
-		$this->token = $dataRequest->sessionId;
+		$this->dataRequest->idOperation = lang('CONF_SINGLE_SIGN_ON');
+		$this->token = $dataRequest->sessionId ?? $dataRequest->clave;
+
+		switch ($this->country) {
+			case 'Mx-Bn':
+				$this->dataRequest->userName = '';
+				$this->dataRequest->password = '';
+				$this->dataRequest->ctipo = $dataRequest->canal;
+				$this->dataRequest->codigoOtp = [
+					'tokenCliente' => '',
+					'authToken' => $dataRequest->clave,
+				];
+				$this->dataRequest->ctipo = $dataRequest->canal;
+				$this->dataRequest->guardaIp = FALSE;
+			break;
+		}
 
 		$response = $this->sendToService('callWs_SingleSignon');
 		$this->response->code = 0;
