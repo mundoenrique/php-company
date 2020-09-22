@@ -26,6 +26,8 @@ $lang['CONF_ICON_SUCCESS'] = 'ui-icon-circle-check';
 $lang['CONF_ICON_INFO'] = 'ui-icon-info';
 $lang['CONF_ICON_WARNING'] = 'ui-icon-alert';
 $lang['CONF_ICON_DANGER'] = 'ui-icon-closethick';
+//SINGLESIGNON
+$lang['CONF_SINGLE_SIGN_ON'] = 'userByToken';
 //SIGNIN
 $lang['CONF_SIGIN_RECOVER_PASS'] = 'ON';
 $lang['CONF_SIGNIN_IMG'] = 'OFF';
