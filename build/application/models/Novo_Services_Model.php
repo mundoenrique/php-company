@@ -943,4 +943,69 @@ class Novo_Services_Model extends NOVO_Model {
 		}
 		return $this->responseToTheView('callWs_updateTransactionalLimits');
 	}
+	/**
+	 * @info Método para consultar el saldo de la cuenta maestra
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date September 16th, 2020
+	 */
+	public function CallWs_MasterAccountBalance_Services($dataRequest)
+	{
+		log_message('INFO', 'NOVO Services Model: MasterAccountBalance Method Initialized');
+
+		$this->className = 'com.novo.objects.TOs.TarjetaTO';
+
+		$this->dataAccessLog->modulo = 'Servicios';
+		$this->dataAccessLog->function = 'Transferencia maestra';
+		$this->dataAccessLog->operation = 'Consulta de saldo';
+
+		$this->dataRequest->idOperation = 'saldoCuentaMaestraTM';
+		$this->dataRequest->rifEmpresa = $this->session->enterpriseInf->idFiscal;
+		$this->dataRequest->idProducto = $this->session->productInf->productPrefix;
+
+		$response = $this->sendToService('CallWs_MasterAccountBalance');
+		$this->response->code = 0;
+		$this->response->data->info['balance'] = '';
+		$this->response->data->info['balanceTxt'] = '';
+		$this->response->data->info['fundingAccount'] = '';
+
+		switch ($this->isResponseRc) {
+			case 0:
+				$this->response->data->info['balanceText'] = 'Saldo Disponible: ';
+				$this->response->data->info['balance'] = lang('GEN_CURRENCY').' '.currencyFormat($response->maestroDeposito->saldoDisponible);
+				$this->response->data->info['fundingAccount'] = $response->maestroDeposito->cuentaFondeo ?? '';
+
+				$this->response->data->params['balance'] = (float )$response->maestroDeposito->saldoDisponible;
+				$this->response->data->params['dailyOper']['quantity'] = (int) $response->maestroDeposito->cantidadTranxDia->lista[0]->idCuenta ?? '';
+				$this->response->data->params['dailyOper']['amount'] = $response->maestroDeposito->cantidadTranxDia->lista[0]->montoOperacion ?? '';
+				$this->response->data->params['weeklyOper']['quantity'] = (int) $response->maestroDeposito->cantidadTranxSemana->lista[0]->idCuenta ?? '';
+				$this->response->data->params['weeklyOper']['amount'] = $response->maestroDeposito->cantidadTranxSemana->lista[0]->montoOperacion ?? '';
+
+				if (isset($response->maestroDeposito->parametrosRecarga)) {
+					unset(
+						$response->maestroDeposito->parametrosRecarga->idExtEmp,
+						$response->maestroDeposito->parametrosRecarga->acprefix,
+						$response->maestroDeposito->parametrosRecarga->usuarioReg,
+						$response->maestroDeposito->parametrosRecarga->tipoComision,
+						$response->maestroDeposito->parametrosRecarga->tipoFactura,
+					);
+					$this->response->data->params['rechargeParams'] = $response->maestroDeposito->parametrosRecarga ?? '';
+				}
+
+				$this->response->data->params = base64_encode(json_encode($this->cryptography->encrypt($this->response->data->params)));
+			break;
+			case -233:
+
+			break;
+			case -251:
+
+			break;
+			case -402:
+
+			break;
+			default:
+				$this->response->code = 4;
+		}
+
+		return $this->responseToTheView('CallWs_MatesaccountBlanace');
+	}
 }
