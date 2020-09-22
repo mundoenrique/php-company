@@ -9,4 +9,5 @@
 	<?php foreach ($form AS $key => $value): ?>
 		<input type="hidden" id="<?= $key; ?>" name="<?= $key; ?>" value="<?= $value ?>">
 	<?php endforeach; ?>
+	<input type="hidden" id="route" name="route" value="single">
 </form>
