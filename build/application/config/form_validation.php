@@ -1314,5 +1314,11 @@ $config = [
 				'field' => 'initialDateAct',
 				'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
 			]
-		]
+			],
+			'userPermissions' => [
+				[
+					'field' => 'adminUser',
+					'rules' => 'trim'
+				],
+			]
 ];
