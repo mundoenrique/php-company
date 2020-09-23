@@ -179,12 +179,19 @@ class NOVO_Controller extends CI_Controller {
 				"helper"
 			];
 
-			if($this->session->has_userdata('logged')) {
+			if ($this->session->has_userdata('logged')) {
 				array_push(
 					$this->includeAssets->jsFiles,
 					"third_party/jquery.balloon",
 					"sessionControl"
 				);
+
+				if (lang('CONF_REMOTE_CONNECT') == 'ON' && $this->session->autoLogin == 'true') {
+					array_push(
+						$this->includeAssets->jsFiles,
+						"remote_connect/$this->countryUri-remoteConnect",
+					);
+				}
 			}
 
 		} else {
@@ -251,6 +258,8 @@ class NOVO_Controller extends CI_Controller {
 			$this->render->msg = $responseView->msg;
 			$this->render->icon = $responseView->icon;
 			$this->render->data = json_encode($responseView->data->resp);
+		} elseif(isset($responseView->data->params))  {
+			$this->render->params = json_encode($responseView->data->params);
 		}
 	}
 	/**

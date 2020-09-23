@@ -11,6 +11,7 @@
 	var msg = '<?= isset($msg) ? $msg : ' '; ?>';
 	var icon = '<?= isset($icon) ? $icon : ' '; ?>';
 	var data = <?= isset($data) ? $data : 0; ?> ;
+	var params = <?= isset($params) ? $params : 0; ?> ;
 	var logged = <?= json_encode($this->session->has_userdata('logged')); ?> ;
 	var sessionTime = <?= $sessionTime; ?> ;
 	var callModal = <?= $callModal; ?> ;

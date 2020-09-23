@@ -26,8 +26,19 @@ $config = [
 	'singleSignOn' => [
 		[
 			'field' => 'sessionId',
-			'label' => 'sessionId',
-			'rules' => 'trim|required'
+			'rules' => 'trim'
+		],
+		[
+			'field' => 'clave',
+			'rules' => 'trim'
+		],
+		[
+			'field' => 'IdServicio',
+			'rules' => 'trim'
+		],
+		[
+			'field' => 'canal',
+			'rules' => 'trim'
 		]
 	],
 	'finishSession' => [
@@ -1303,5 +1314,11 @@ $config = [
 				'field' => 'initialDateAct',
 				'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
 			]
-		]
+			],
+			'userPermissions' => [
+				[
+					'field' => 'adminUser',
+					'rules' => 'trim'
+				],
+			]
 ];

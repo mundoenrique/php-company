@@ -4,6 +4,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $lang['CONF_SUPPORT_IE'] = 'ON';
 //VALIDATE FORMS
 $lang['CONF_VALID_POSITION'] = 'right';
+//SINGLESIGNON
+$lang['CONF_SINGLE_SIGN_ON'] = 'loginFull';
 //SIGNIN
 $lang['CONF_SIGNIN_IMG'] = 'ON';
 $lang['CONF_SIGNIN_WIDGET_CONTACT'] = 'OFF';
@@ -44,3 +46,5 @@ $lang['CONF_SECUENCE_COLUMN']= 'OFF';
 $lang['CONF_STATUS_ACCOUNT_ADD_COLUMNS'] = 'OFF';
 //UPPER CASE INPUTS
 $lang['CONF_INPUT_UPPERCASE']= 'OFF';
+//REMOTE CONNECTION
+$lang['CONF_REMOTE_CONNECT'] = 'ON';
