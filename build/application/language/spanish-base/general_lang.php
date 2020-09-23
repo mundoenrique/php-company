@@ -11,6 +11,7 @@ $lang['GEN_MENU_CONSULTATIONS'] = 'Consultas';
 $lang['GEN_MENU_SERVICES'] = 'Servicios';
 $lang['GEN_MENU_TRAJECTS'] = 'Trayectos';
 $lang['GEN_MENU_REPORTS'] = 'Reportes';
+$lang['GEN_MENU_USERS'] = 'Usuarios';
 $lang['GEN_MENU_SIGN_OFF'] = 'Cerrar Sesión';
 //SUBMENU
 $lang['GEN_NO_LINK'] = 'javascript:';
@@ -57,6 +58,8 @@ $lang['GEN_MENU_REP_CARDHOLDERS'] = 'Tarjetahabientes';//TEBTHA
 $lang['GEN_MENU_LNK_CARDHOLDERS'] = 'tarjetahabientes';//TEBTHA
 $lang['GEN_LINK_REP_CARDHOLDERS'] = 'tarjetahabientes';//TEBTHA
 $lang['GEN_LINK_REP_STATUSACCOUNT'] = 'estado-de-cuenta';//TEBTHA
+$lang['GEN_MENU_USERS_MANAGEMENT'] = 'Administración';//USEREM
+$lang['GEN_LINK_USERS_MANAGEMENT'] = 'administracion-usuarios';//USEREM
 $lang['GEN_MENU_UNNAMED_REQUEST'] = 'Solicitud de innominadas';
 $lang['GEN_MENU_UNNAMED_AFFIL'] = 'Afiliación de innominadas';
 $lang['GEN_MENU_LOT_REPROCESS'] = 'Reproceso de datos';//TEBGUR
@@ -96,7 +99,11 @@ $lang['GEN_BTN_ENTERPRISE'] = 'Empresas';
 $lang['GEN_BTN_BRANCH'] = 'Sucursales';
 $lang['GEN_BTN_DOWNLOADS'] = 'Descargas';
 $lang['GEN_BTN_KEEP_SESSION'] = 'Mantener sesión';
+$lang['GEN_BTN_EDIT_PERMITS'] = 'Editar permisos';
+$lang['GEN_BTN_ENABLE_USER'] = 'Habilitar usuario';
 $lang['GEN_BTN_ALL'] = 'Todos';
+$lang['GEN_BTN_ENABLE'] = 'Habilitar';
+$lang['GEN_BTN_UPDATE'] = 'Actualizar';
 //MODULES
 $lang['GEN_LOGIN'] = 'Login';
 $lang['GEN_ACTIVE_RECAPTCHA'] = ACTIVE_RECAPTCHA;
@@ -149,6 +156,11 @@ $lang['GEN_CONTACTS'] = [
 	'city' => '(XX) XXX XXXX',
 ];
 $lang['GEN_CONTACTS_REST_COUNTRY_NUMBER'] = 'XXX (XXXXXX)';
+$lang['GEN_USER_PERMISSION_TITLE'] = 'Permisos de usuario';
+$lang['GEN_USER_DATA'] = 'Datos del usuario';
+$lang['GEN_LIST_PERMITS'] = 'Listado de permisos';
+$lang['GEN_NOTE'] = 'Nota:';
+$lang['GEN_CHECK_COLOR'] = 'Si el check se encuentra en color';
 //LINKS
 $lang['GEN_LINK_LOGIN'] = 'inicio';
 $lang['GEN_LINK_RECOVER_ACCESS'] = 'recuperar-clave';

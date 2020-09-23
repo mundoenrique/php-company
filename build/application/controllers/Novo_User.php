@@ -87,16 +87,16 @@ class Novo_User extends NOVO_Controller {
 	 */
 	public function singleSignOn($sessionId = FALSE)
 	{
-		log_message('INFO', 'NOVO User: singleSignOn Method Initialized');
+		log_message('INFO', 'NOVO User: singleSignOn Method Initialized ****'.$sessionId);
 
 		$view = 'singleSignOn';
 		$this->render->send = FALSE;
 
 		if ($sessionId) {
-			$this->render->sessionId = $sessionId;
+			$this->render->form['sessionId'] = $sessionId;
 			$this->render->send = TRUE;
 		} else {
-			$this->render->sessionId = $this->request->sessionId;
+			$this->render->form = $this->request;
 		}
 
 		if($sessionId == 'fin') {
@@ -291,5 +291,57 @@ class Novo_User extends NOVO_Controller {
 		$this->render->titlePage = lang('GEN_SYSTEM_NAME');
 		$this->views = $views;
 		$this->loadView($view);
+	}
+		/**
+	 * @info Método que renderiza la vista de administración de usuarios
+	 * @author Hector D. Corredor.
+	 */
+	public function usersManagement()
+
+	{
+		log_message('INFO', 'NOVO User: usersManagement Method Initialized');
+
+		$view = 'usersManagement';
+		array_push(
+			$this->includeAssets->cssFiles,
+			"third_party/dataTables-1.10.20"
+		);
+		array_push(
+			$this->includeAssets->jsFiles,
+			"third_party/dataTables-1.10.20",
+			"third_party/jquery.validate",
+			"validate-core-forms",
+			"third_party/additional-methods",
+			"user/usersManagement"
+		);
+		$this->responseAttr();
+		$this->render->titlePage = lang('GEN_MENU_USERS_MANAGEMENT');
+		$this->views = ['user/'.$view];
+		$this->loadView($view);
+
+	}
+
+		/**
+	 * @info Método que renderiza la vista de permisos de usuario
+	 * @author Jennifer C. Cádiz.
+	 */
+	public function userPermissions()
+
+	{
+		log_message('INFO', 'NOVO User: userPermissions Method Initialized');
+
+		$view = 'userPermissions';
+		array_push(
+			$this->includeAssets->jsFiles,
+			"third_party/jquery.validate",
+			"validate-core-forms",
+			"third_party/additional-methods",
+			"user/userPermissions"
+		);
+		$this->responseAttr();
+		$this->render->titlePage = lang('GEN_USER_PERMISSION_TITLE');
+		$this->views = ['user/'.$view];
+		$this->loadView($view);
+
 	}
 }

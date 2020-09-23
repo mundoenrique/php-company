@@ -10,7 +10,7 @@ $lang['GEN_MENU_SERV_CARD_INQUIRY'] = 'Entrega de tarjetas';//COPELO
 $lang['GEN_LOGO_HEADER'] = 'img-logo.svg';
 $lang['GEN-LOGO-BIG'] = 'img-banorte.png';
 $lang['GEN_ALTERNATIVE_TEXT'] = 'Banorte';
-$lang['GEN_FISCAL_REGISTRY'] = 'Identificador de la cuenta';
+$lang['GEN_FISCAL_REGISTRY'] = 'Cuenta';
 $lang['RESP_FISCAL_REGISTRY_OF'] = '';
 $lang['RESP_FISCAL_REGISTRY_OF_ENTERPRISE'] = '';
 //LOGIN IMAGE

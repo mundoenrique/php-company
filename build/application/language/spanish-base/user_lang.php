@@ -52,3 +52,8 @@ $lang['PASSWORD_NEWUSER'] = 'Por motivos de seguridad es necesario que cambies t
 $lang['PASSWORD_EXPIRED'] = 'Tu contraseña está vencida. Por motivos de seguridad es necesario que la cambies antes de continuar en nuestro sistema "<strong>%s</strong>".';
 //SESSION EXPIRES
 $lang['SESSION_EXPIRE_TIME'] = 'El tiempo permitido para realizar la operación expiró, intenta nuevamente.';
+//USERS MANAGEMENT
+$lang['MANAGEMENT_LIST_USERS'] = 'Listado de usuarios';
+//USERS PERMISSIONS
+$lang['PERMITS_DELETE_ALL_PERMITS'] = 'Eliminar todos los permisos';
+$lang['PERMITS_ALL_PERMITS'] = 'Todos los permisos';
