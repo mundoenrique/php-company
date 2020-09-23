@@ -271,8 +271,8 @@ class Novo_User_Model extends NOVO_Model {
 				$this->dataRequest->password = '';
 				$this->dataRequest->ctipo = $dataRequest->canal;
 				$this->dataRequest->codigoOtp = [
-					'tokenCliente' => '',
-					'authToken' => $dataRequest->clave,
+					'tokenCliente' => $dataRequest->ip,
+					'authToken' => $dataRequest->IdServicio,
 				];
 				$this->dataRequest->ctipo = $dataRequest->canal;
 				$this->dataRequest->guardaIp = FALSE;
