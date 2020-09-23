@@ -33,7 +33,8 @@
 	--danger: #EB0029;
 
   /* Type Scale */
-  --h00: 2.5rem;
+	--h00: 2.5rem;
+	--h01: 6rem;
   --h0: 2rem;
   --h1: 1.75rem;
   --h2: 1.5rem;

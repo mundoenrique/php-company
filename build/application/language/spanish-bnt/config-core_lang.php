@@ -4,6 +4,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $lang['CONF_SUPPORT_IE'] = 'ON';
 //VALIDATE FORMS
 $lang['CONF_VALID_POSITION'] = 'right';
+//SINGLESIGNON
+$lang['CONF_SINGLE_SIGN_ON'] = 'loginFull';
 //SIGNIN
 $lang['CONF_SIGNIN_IMG'] = 'ON';
 $lang['CONF_SIGNIN_WIDGET_CONTACT'] = 'OFF';
@@ -15,6 +17,7 @@ $lang['CONF_FOOTER_NETWORKS'] = 'ON';
 $lang['CONF_FOOTER_LOGO'] = 'OFF';
 //REQUEST UNNAMED
 $lang['CONF_UNNA_EXPIRED_DATE'] = 'OFF';
+$lang['CONF_UNNA_STARTING_LINE1'] = 'OFF';
 $lang['CONF_STARTING_LINE2_REQUIRED'] = 'OFF';
 //DETAIL UNNAMED
 $lang['CONF_UNNA_ACCOUNT_NUMBER'] = 'OFF';

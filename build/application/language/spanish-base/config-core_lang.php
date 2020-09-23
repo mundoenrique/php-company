@@ -26,6 +26,8 @@ $lang['CONF_ICON_SUCCESS'] = 'ui-icon-circle-check';
 $lang['CONF_ICON_INFO'] = 'ui-icon-info';
 $lang['CONF_ICON_WARNING'] = 'ui-icon-alert';
 $lang['CONF_ICON_DANGER'] = 'ui-icon-closethick';
+//SINGLESIGNON
+$lang['CONF_SINGLE_SIGN_ON'] = 'userByToken';
 //SIGNIN
 $lang['CONF_SIGIN_RECOVER_PASS'] = 'ON';
 $lang['CONF_SIGNIN_IMG'] = 'OFF';
@@ -59,12 +61,14 @@ $lang['CONF_FOOTER_LOGO'] = 'ON';
 $lang['CONF_BULK_AUTHORIZE'] = 'ON';
 $lang['CONF_BULK_SELECT_ALL_SIGN'] = 'ON';
 $lang['CONF_BULK_SELECT_ALL_AUTH'] = 'ON';
+$lang['CONF_BULK_AUTH_MSG_SERV'] = 'OFF';
 //HASH PASSWORD
 $lang['CONF_HASH_PASS'] = 'ON';
 //REPORT CLOSING BALANCE
 $lang['CONF_NIT_INPUT_BOOL'] = 'ON';
 //SERVICES TRANSFER MASTER ACCOUNT
 $lang['CONF_PAY_ACCOUNT'] = 'OFF';
+$lang['CONF_SELECT_AMOUNT'] = 'ON';
 //SETTINGS
 $lang['CONF_SETT_CONFIG'] = 'ON';
 //INPUT CARDS INQUIRY
@@ -123,6 +127,7 @@ $lang['CONF_GL_USER_MANUAL'] = 'Manual de Usuario Gestor de Lotes';
 $lang['MODAL_OTP'] = 'OFF';
 $lang['RESTART_LOGIN'] = 'OFF';
 //DATEPICKER
-$lang['CONF_MAX_CONSULT_MONTH'] = '3';
+$lang['CONF_MAX_CONSULT_MONTH'] = 3;
+$lang['CONF_MIN_CONSULT_YEAR'] = 2000;
 //UPPER CASE INPUTS
 $lang['CONF_INPUT_UPPERCASE']= 'ON';

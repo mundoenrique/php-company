@@ -51,7 +51,7 @@ $(function () {
 				.focus()
 				.blur();
 			var dateSelected = selectedDate.split('/');
-			dateSelected = dateSelected[1] + '/' + dateSelected[0] + '/' + dateSelected[2]
+			dateSelected = dateSelected[1] + '/' + dateSelected[0] + '/' + dateSelected[2];
 			var inputDate = $(this).attr('id');
 			var maxTime = new Date(dateSelected);
 

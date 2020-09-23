@@ -125,7 +125,7 @@ class Novo_Business extends NOVO_Controller {
 
 		$detailList = $this->loadModel($this->request);
 		$this->responseAttr($detailList);
-		$this->render->productName = $detailList->data->productDetail->name;
+		$this->render->detailProductName = $detailList->data->productDetail->name;
 		$this->render->productImg = $detailList->data->productDetail->imgProgram;
 		$this->render->productBrand = $detailList->data->productDetail->brand;
 		$this->render->productImgBrand = $detailList->data->productDetail->imgBrand;

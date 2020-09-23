@@ -89,6 +89,10 @@ class Novo_Business_Model extends NOVO_Model {
 			break;
 			default:
 				$this->response->data->text = lang('GEN_ENTERPRISE_NOT_OBTEIN');
+
+				if ($this->isResponseRc =! -29 || $this->isResponseRc =! -61) {
+					clearSessionsVars();
+				}
 		}
 
 		if($this->response->code != 0) {
@@ -327,9 +331,16 @@ class Novo_Business_Model extends NOVO_Model {
 			case 0:
 				// array_push($response->lista, json_decode('{"idPerfil":"GESUSR","modulos":[{"idModulo":"USEREM","descripcion":"USUARIO","status":"A","funciones":[{"accodfuncion":"CONUSU","acnomfuncion":"CONSULTA DE USUARIOS"},{"accodfuncion":"CREUSU","acnomfuncion":"CREACION DE USUARIOS"},{"accodfuncion":"ASGPER","acnomfuncion":"ASIGNACION DE PERMISOS"}],"rc":0}]}'));
 
-				log_message('INFO', 'NOVO ['.$this->userName.'] '.'getProductDetail'.' USER_ACCESS LIST: '.json_encode($response->lista));
+				log_message('INFO', 'NOVO ['.$this->userName.'] '.'callWs_GetProductDetail'.' USER_ACCESS LIST: '.json_encode($response->lista));
 
 				$this->response->code = 0;
+				$imgProgram = $productDetail['imgProgram'];
+
+				if(!file_exists(assetPath('images/programs/'.$this->session->countryUri.'/'.$imgProgram))) {
+					$imgProgram = 'default.svg';
+				}
+
+				$productDetail['imgProgram'] = $imgProgram;
 
 				if(isset($response->estadistica->producto->idProducto)) {
 					$imgBrand = url_title(trim(mb_strtolower($response->estadistica->producto->marca)));

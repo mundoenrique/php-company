@@ -1,5 +1,5 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
-<h1 class="primary h3 regular"><?= $productName; ?></h1>
+<h1 class="primary h3 regular"><?= $detailProductName; ?></h1>
 <div class="flex mb-2 items-center">
 	<div class="flex tertiary">
 		<nav class="main-nav nav-inferior">
@@ -28,7 +28,7 @@
 			<div class="flex flex-column">
 				<div class="flex flex-column">
 					<span class="mb-1 h3 semibold primary"><?= lang('PRODUCT') ?></span>
-					<span class="light"><?= $productName ?> - <?= $productBrand ?></span>
+					<span class="light"><?= $detailProductName; ?> - <?= $productBrand ?></span>
 				</div>
 
 				<div class="flex mt-3 flex-column items-start">

@@ -13,7 +13,8 @@ $(function () {
       {
         "targets": 0,
         "className": "select-checkbox",
-				"checkboxes": {"selectRow": true}
+				"checkboxes": {"selectRow": true},
+				'visible': sign != false,
       },
       {
         "targets": 2,
@@ -26,7 +27,8 @@ $(function () {
 		],
 		"autoWidth": false,
     "select": {
-      "style": lang.CONF_BULK_SELECT_ALL_SIGN == 'ON' ? 'multi' : 'single',
+			"style": lang.CONF_BULK_SELECT_ALL_SIGN == 'ON' ? 'multi' : 'single',
+			"info": false,
 			selector: ':not(td:nth-child(-n+6))'
     },
     "language": dataTableLang

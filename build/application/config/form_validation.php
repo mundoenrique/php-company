@@ -26,8 +26,19 @@ $config = [
 	'singleSignOn' => [
 		[
 			'field' => 'sessionId',
-			'label' => 'sessionId',
-			'rules' => 'trim|required'
+			'rules' => 'trim'
+		],
+		[
+			'field' => 'clave',
+			'rules' => 'trim'
+		],
+		[
+			'field' => 'IdServicio',
+			'rules' => 'trim'
+		],
+		[
+			'field' => 'canal',
+			'rules' => 'trim'
 		]
 	],
 	'finishSession' => [
@@ -827,7 +838,7 @@ $config = [
 		[
 			'field' => 'cards[]',
 			'label' => 'cards',
-			'rules' => 'regex_match[/^([\w{}"*:.,@ñÑáéíóúÑÁÉÍÓÚ ]*)+$/i]|required'
+			'rules' => 'regex_match[/^([\w{}"*:.\-+,@ñÑáéíóúÑÁÉÍÓÚ ]*)+$/i]|required'
 		],
 		[
 			'field' => 'action',

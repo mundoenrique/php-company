@@ -15,12 +15,13 @@ function validateForms(form) {
 	var userPassword = validatePass;
 	var numeric = /^[0-9]+$/;
 	var alphabetical = /^[a-z]+$/i;
-	var alphabeticalspace = /^['a-z ']{3,100}$/i;
+	var alphabeticalspace = /^['a-z ']{3,40}$/i;
 	var text = /^['a-z0-9ñáéíóú ,.:()']+$/i;
 	var usdAmount = /^[0-9]+(\.[0-9]*)?$/;
 	var validCode = /^[a-z0-9]+$/i;
 	var fiscalReg = lang.VALIDATE_FISCAL_REGISTRY;
 	var idNumberReg = new RegExp(lang.VALIDATE_REG_ID_NUMBER, 'i');
+	var rechargeDesc = new RegExp(lang.VALIDATE_RECHARGE_DESCRIPTION, 'i');
 	var date = {
 		dmy: /^(0?[1-9]|[12][0-9]|3[01])\/(0?[1-9]|1[012])\/[0-9]{4}$/,
 		my: /^(0?[1-9]|1[012])\/[0-9]{4}$/,
@@ -182,7 +183,7 @@ function validateForms(form) {
 				required: {
 					depends: function () {
 						var check = false;
-						if($('#resultByNIT:checked').val() == 'on'){
+						if($('#resultByNIT:checked').val() == 'on') {
 							check = true;
 						}
 						return check
@@ -192,7 +193,7 @@ function validateForms(form) {
 			"optCode": {required: true, pattern: alphanum},
 			"firstName": { required: true, pattern: alphabeticalspace},
 			"lastName": { required: true, pattern: alphabeticalspace},
-			"movil": { required: true, pattern: numeric},
+			"movil": { required: true, pattern: numeric, maxlength: 10, minlength: 7},
 			"numberDayPurchasesCtp": {required: true, pattern: numeric, maxLimitZero:'#numberWeeklyPurchasesCtp'},
 			"numberWeeklyPurchasesCtp": {required: true, pattern: numeric, maxLimitZero: '#numberMonthlyPurchasesCtp'},
 			"dailyPurchaseamountCtp": {required: true, pattern: numeric, maxLimitZero:'#weeklyAmountPurchasesCtp'},
@@ -221,6 +222,7 @@ function validateForms(form) {
 			"monthlyNumberCredit": {pattern: numeric, required: true },
 			"monthlyAmountCredit": {pattern: numeric , required: true },
 			"CreditTransaction": {pattern: numeric , required: true, maxLimitZero:'#dailyAmountCredit'},
+			"transferType": {required: true},
 		},
 		messages: {
 			"user_login": lang.VALIDATE_USERLOGIN,
@@ -455,6 +457,8 @@ function validateForms(form) {
 				pattern: lang.VALIDATE_INVALID_NUMBER,
 				required:lang.VALIDATE_NUMBER_REQ
 			},
+			"transferType": lang.VALIDATE_TRANSFER_TYPE
+
 		},
 		errorPlacement: function(error, element) {
 			$(element).closest('.form-group').find('.help-block').html(error.html());

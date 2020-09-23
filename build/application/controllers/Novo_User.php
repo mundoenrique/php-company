@@ -87,16 +87,16 @@ class Novo_User extends NOVO_Controller {
 	 */
 	public function singleSignOn($sessionId = FALSE)
 	{
-		log_message('INFO', 'NOVO User: singleSignOn Method Initialized');
+		log_message('INFO', 'NOVO User: singleSignOn Method Initialized ****'.$sessionId);
 
 		$view = 'singleSignOn';
 		$this->render->send = FALSE;
 
 		if ($sessionId) {
-			$this->render->sessionId = $sessionId;
+			$this->render->form['sessionId'] = $sessionId;
 			$this->render->send = TRUE;
 		} else {
-			$this->render->sessionId = $this->request->sessionId;
+			$this->render->form = $this->request;
 		}
 
 		if($sessionId == 'fin') {

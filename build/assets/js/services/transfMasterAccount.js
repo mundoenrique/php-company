@@ -26,6 +26,7 @@ $(function () {
 			$('#pre-loader').remove();
 			$('.hide-out').removeClass('hide');
 		},
+		"autoWidth": false,
 		"ordering": false,
 		"searching": false,
 		"lengthChange": false,
@@ -112,7 +113,7 @@ $(function () {
 			{
 				"targets": 5,
 				"className": "amount-cc",
-				"width": "90px",
+				"width": "150px",
 			},
 			{
 				"targets": 6,
