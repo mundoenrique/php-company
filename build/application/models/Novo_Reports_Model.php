@@ -1049,7 +1049,7 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->className = 'com.novo.objects.MO.TarjetaHabientesMO';
 		$this->dataRequest->paginaActual = 1;
 		$this->dataRequest->tamanoPagina = 10;
-		$this->dataRequest->paginar = true;
+		$this->dataRequest->paginar = FALSE;
 		$this->dataRequest->rifEmpresa = $dataRequest->enterpriseCode;
 		$this->dataRequest->idProducto = $dataRequest->productCode;
 		$response = $this->sendToService('callWS_StatusCardHolders');
@@ -1060,7 +1060,8 @@ class Novo_Reports_Model extends NOVO_Model {
         $this->response->code = 0;
         foreach($response->listadoTarjetaHabientes AS $cardHolders) {
           $record = new stdClass();
-          $record->cardHoldersId = $cardHolders->idExtPer;
+					$record->cardHoldersId = $cardHolders->idExtPer;
+					$record->cardHoldersNum = $cardHolders->nroTarjeta ?? '' ;
           $record->cardHoldersName = ucwords(mb_strtolower($cardHolders->Tarjetahabiente));
           array_push(
             $cardHoldersList,

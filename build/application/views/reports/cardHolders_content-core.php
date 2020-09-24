@@ -87,6 +87,7 @@
 							<thead class="bg-primary secondary regular">
 								<tr>
 									<th><?= lang('GEN_TABLE_DNI'); ?></th>
+									<th><?= lang('GEN_TABLE_CARD_NUMBER'); ?></th>
 									<th><?= lang('GEN_TABLE_CARDHOLDER'); ?></th>
 								</tr>
 							</thead>
