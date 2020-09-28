@@ -336,7 +336,8 @@ class Novo_Services_Model extends NOVO_Model {
 			break;
 			case -429:
 				$this->response->title = $dataRequest->action;
-				$this->response->msg = novoLang(lang('SERVICES_CARD_BULK_AFFILIATED'), $cardsList[0]['noTarjeta']);
+				$maskCards = maskString($cardsList[0]['noTarjetaAsig'], 4, 6);
+				$this->response->msg = novoLang(lang('SERVICES_CARD_BULK_AFFILIATED'), $maskCards);
 				$this->response->icon = lang('CONF_ICON_WARNING');
 				$this->response->data['btn1']['action'] = 'close';
 			break;
