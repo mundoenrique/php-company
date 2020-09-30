@@ -129,7 +129,7 @@ function validateForms(form) {
 			"enterpriseName": {required: true},
 			"productName": {required: true},
 			"enterpriseCode": {requiredSelect: true},
-			"productCode": {requiredSelect: true},
+			"productCode": {requiredSelect: true, required: true},
 			"checkbox": {pattern: binary},
 			"initialDate": {required: true, pattern: date.dmy},
 			"finalDate": {required: true, pattern: date.dmy},
