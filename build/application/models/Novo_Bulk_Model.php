@@ -411,7 +411,8 @@ class Novo_Bulk_Model extends NOVO_Model {
 		$bulkConfirmInfo->conceptoAbono = !isset($dataRequest->paymentConcept) ?: $dataRequest->paymentConcept;
 		$bulkConfirmInfo->codCia = $this->session->enterpriseInf->enterpriseCode;
 
-		$this->dataRequest->idOperation = $bulkConfirmInfo->idTipoLote == 'L' && $this->country != 'Ec-bp' ? 'reprocesarLoteGeneral' :'confirmarLote';
+		$this->dataRequest->idOperation = $bulkConfirmInfo->idTipoLote == 'L' && lang('CONF_BULK_REPROCESS') == 'ON' ? 'reprocesarLoteGeneral'
+			: 'confirmarLote';
 		$this->dataRequest->lotesTO = $bulkConfirmInfo;
 		$password = json_decode(base64_decode($dataRequest->pass));
 		$password = $this->cryptography->decrypt(
