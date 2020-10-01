@@ -283,7 +283,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 				$detailInfo['bulkDate'] = $response->dtfechorcarga;
 				$detailInfo['bulkStatus'] = $response->cestatus;
 				$detailInfo['bulkStatusText'] = ucfirst(mb_strtolower($response->status));
-				$detailInfo['bulkAmount'] = $response->montoNeto;
+				$detailInfo['bulkAmount'] = $response->nmonto;
 				$detailInfo['bulkId'] = $response->acidlote;
 
 				switch($response->ctipolote) {

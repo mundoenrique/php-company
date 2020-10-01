@@ -21,25 +21,13 @@ $(function () {
 			resultscardHolders.dataTable().fnDestroy();
 			verb = "POST"; who = 'Reports'; where = 'CardHolders';
 			callNovoCore(verb, who, where, data, function (response) {
-				var table = resultscardHolders.DataTable({
-					"ordering": false,
-					"responsive": true,
-					"pagingType": "full_numbers",
-					"language": dataTableLang
-				});
-
-				if (response.data.cardHoldersList.length == 0) {
+				var cardHolders = response.data.cardHoldersList;
+				createTable(cardHolders);
+				if (cardHolders.length == 0) {
 					$('.download-icons').addClass('hide')
 				} else {
 					$('.download-icons').removeClass('hide')
 				}
-
-				$.each(response.data.cardHoldersList, function (index, value) {
-					table.row.add([
-						value.cardHoldersId,
-						value.cardHoldersName,
-					]).draw()
-				});
 				form = $('#download-cardholders');
 				form.html('')
 				$.each(data, function (index, value) {
@@ -47,7 +35,6 @@ $(function () {
 						form.append('<input type="hidden" name="'+index+'" value="'+value+'">')
 					}
 				});
-
 				insertFormInput(false);
 				cardHolderBtn.html(btnText);
 				$('#pre-loade-result').addClass('hide')
@@ -55,6 +42,27 @@ $(function () {
 			})
 		}
 	});
+
+	function createTable(cardHolders){
+		resultscardHolders.DataTable({
+			"ordering": false,
+			"responsive": true,
+			"pagingType": "full_numbers",
+			"data": cardHolders,
+			"columns": [
+				{ data: 'cardHoldersId' },
+				{ data: 'cardHoldersNum' },
+				{ data: 'cardHoldersName' },
+			],
+			"columnDefs": [
+				{
+					"targets": 1,
+					"visible": lang.CONF_CARD_NUMBER_COLUMN == "ON",
+				},
+			],
+			"language": dataTableLang
+		});
+	};
 
 	downLoad.on('click', 'button', function (e) {
 		e.preventDefault();

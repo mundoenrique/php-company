@@ -561,7 +561,7 @@ class Novo_Services_Model extends NOVO_Model {
 					foreach ($responseList AS $cards) {
 						$record = new stdClass();
 						$record->cardNumber = substr($cards->numeroTarjeta, -6);
-						$record->balance = isset($cards->saldo) ?  lang('GEN_CURRENCY').' '.$cards->saldo : '--';
+						$record->balance = isset($cards->saldo) ?  lang('GEN_CURRENCY').' '.currencyformat($cards->saldo) : '--';
 						$balanceList[] = $record;
 
 						if ($cards->rcNovoTrans != '0') {
