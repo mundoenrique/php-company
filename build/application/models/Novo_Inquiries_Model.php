@@ -20,13 +20,13 @@ class Novo_Inquiries_Model extends NOVO_Model {
 	public function callWs_ServiceOrderStatus_Inquiries()
 	{
 		log_message('INFO', 'NOVO Inquiries Model: ServiceOrderStatus Method Initialized');
-		$this->className = 'com.novo.objects.MO.EstatusLotesMO';
 
 		$this->dataAccessLog->modulo = 'Consultas';
 		$this->dataAccessLog->function = 'Lista de ordenes de servicio';
 		$this->dataAccessLog->operation = 'Estados de orden de servicio';
 
 		$this->dataRequest->idOperation = 'estatusLotes';
+		$this->dataRequest->className = 'com.novo.objects.MO.EstatusLotesMO';
 		$this->dataRequest->tipoEstatus = 'TIPO_B';
 
 		$response = $this->sendToService('callWs_ServiceOrderStatus');
@@ -69,12 +69,12 @@ class Novo_Inquiries_Model extends NOVO_Model {
 
 		log_message('INFO', 'NOVO Inquiries Model: ServiceOrderStatus Method Initialized');
 
-		$this->className = 'com.novo.objects.MO.ListadoOrdenServicioMO';
 		$this->dataAccessLog->modulo = 'Consultas';
 		$this->dataAccessLog->function = 'Ordenes de servicio';
 		$this->dataAccessLog->operation = 'Lista de ordenes de servicio';
 
 		$this->dataRequest->idOperation = 'buscarOrdenServicio';
+		$this->dataRequest->className = 'com.novo.objects.MO.ListadoOrdenServicioMO';
 		$this->dataRequest->rifEmpresa = $this->session->enterpriseInf->idFiscal;
 		$this->dataRequest->acCodCia = $this->session->enterpriseInf->enterpriseCode;
 		$this->dataRequest->idProducto = $this->session->productInf->productPrefix;
@@ -176,10 +176,8 @@ class Novo_Inquiries_Model extends NOVO_Model {
 	 */
 	public function callWs_ClearServiceOrders_Inquiries($dataRequest)
 	{
-
 		log_message('INFO', 'NOVO Inquiries Model: ClearServiceOrders Method Initialized');
 
-		$this->className = 'com.novo.objects.TOs.OrdenServicioTO';
 		$this->dataAccessLog->modulo = 'Consultas';
 		$this->dataAccessLog->function = 'Ordenes de servicio';
 		$this->dataAccessLog->operation = 'Anular orden de servicio';
@@ -189,6 +187,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 		unset($dataRequest->modalReq);
 
 		$this->dataRequest->idOperation = 'desconciliarOS';
+		$this->dataRequest->className = 'com.novo.objects.TOs.OrdenServicioTO';
 		$this->dataRequest->idOrden = $dataRequest->OrderNumber;
 		$this->dataRequest->rifEmpresa = $this->session->enterpriseInf->idFiscal;
 
@@ -244,12 +243,12 @@ class Novo_Inquiries_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO Bulk Model: BulkDetail Method Initialized');
 
-		$this->className = 'com.novo.objects.MO.AutorizarLoteMO';
 		$this->dataAccessLog->modulo = 'Consultas';
 		$this->dataAccessLog->function = $dataRequest->bulkfunction;
 		$this->dataAccessLog->operation = 'Ver detalle del lote';
 
 		$this->dataRequest->idOperation = 'detalleLote';
+		$this->dataRequest->className = 'com.novo.objects.MO.AutorizarLoteMO';
 		$this->dataRequest->acidlote = $dataRequest->bulkId;
 
 		$response = $this->sendToService('callWs_BulkDetail');
@@ -634,12 +633,12 @@ class Novo_Inquiries_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO DownloadFiles Model: exportFiles Method Initialized');
 
-		$this->className = 'com.novo.objects.TOs.OrdenServicioTO';
 		$this->dataAccessLog->modulo = 'Consultas';
 		$this->dataAccessLog->function = 'Ordenes de servicio';
 		$this->dataAccessLog->operation = 'Descargar pdf orden de servicio';
 
 		$this->dataRequest->idOperation = 'visualizarOS';
+		$this->dataRequest->className = 'com.novo.objects.TOs.OrdenServicioTO';
 		$this->dataRequest->rifEmpresa = $this->session->userdata('enterpriseInf')->idFiscal;
 		$this->dataRequest->acCodCia = $this->session->userdata('enterpriseInf')->enterpriseCode;
 		$this->dataRequest->acprefix = $this->session->userdata('productInf')->productPrefix;

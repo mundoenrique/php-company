@@ -23,13 +23,13 @@ class Novo_Business_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO Business Model: getEnterprises Method Initialized');
 
-		$this->className = "com.novo.objects.MO.ListadoEmpresasMO";
 		$this->dataAccessLog->modulo = 'Negocios';
 		$this->dataAccessLog->function = 'Empresas';
 		$this->dataAccessLog->operation = 'lista de empresas';
 
 		$sizePage = $this->request_data->setPageSize($this->session->screenSize);
 		$this->dataRequest->idOperation = 'listaEmpresas';
+		$this->dataRequest->className = 'com.novo.objects.MO.ListadoEmpresasMO';
 		$this->dataRequest->accodusuario = $this->userName;
 		$this->dataRequest->paginaActual = 1;
 		$this->dataRequest->paginar = FALSE;
@@ -117,7 +117,6 @@ class Novo_Business_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO Bulk Model: GetBranchOffices Method Initialized');
 
-		$this->className = 'com.novo.objects.MO.ListadoSucursalesMO';
 		$this->dataAccessLog->modulo = 'Lotes';
 		$this->dataAccessLog->function = 'Carga de lotes';
 		$this->dataAccessLog->operation = 'Obtener sucursales';
@@ -126,6 +125,7 @@ class Novo_Business_Model extends NOVO_Model {
 		unset($dataRequest->select);
 		$this->dataRequest = new stdClass();
 		$this->dataRequest->idOperation = 'getConsultarSucursales';
+		$this->dataRequest->className = 'com.novo.objects.MO.ListadoSucursalesMO';
 		$this->dataRequest->paginaActual = '1';
 		$this->dataRequest->tamanoPagina = 10;
 		$this->dataRequest->paginar = FALSE;
@@ -202,12 +202,12 @@ class Novo_Business_Model extends NOVO_Model {
 			unset($dataRequest->select);
 		}
 
-		$this->className = "com.novo.objects.TOs.UsuarioTO";
 		$this->dataAccessLog->modulo = 'Negocios';
 		$this->dataAccessLog->function = 'Productos';
 		$this->dataAccessLog->operation = 'lista de productos';
 
 		$this->dataRequest->idOperation = 'menuEmpresa';
+		$this->dataRequest->className = 'com.novo.objects.TOs.UsuarioTO';
 		$this->dataRequest->ctipo = isset($dataRequest->type) ? $dataRequest->type : 'A';
 		$this->dataRequest->userName = $this->userName;
 		$this->dataRequest->idEmpresa = $dataRequest->idFiscal;
@@ -274,7 +274,6 @@ class Novo_Business_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO Business Model: getProductDetail Method Initialized');
 
-		$this->className = "com.novo.objects.MO.ListadoMenuMO";
 		$this->dataAccessLog->modulo = 'Negocios';
 		$this->dataAccessLog->function = 'Producto';
 		$this->dataAccessLog->operation = 'Detalle Producto';
@@ -289,6 +288,7 @@ class Novo_Business_Model extends NOVO_Model {
 		}
 
 		$this->dataRequest->idOperation = 'menuPorProducto';
+		$this->dataRequest->className = 'com.novo.objects.MO.ListadoMenuMO';
 		$this->dataRequest->menus = [
 			[
 				'app' => 'EOL',

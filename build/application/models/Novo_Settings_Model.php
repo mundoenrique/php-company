@@ -24,12 +24,12 @@ class Novo_Settings_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO Settings Model: getUser Method Initialized');
 
-		$this->className = 'com.novo.objects.TOs.UsuarioTO';
 		$this->dataAccessLog->modulo = 'Configuracion';
 		$this->dataAccessLog->function = 'usuario';
 		$this->dataAccessLog->operation = 'Obtener datos del usuario';
 
 		$this->dataRequest->idOperation = 'getPerfilUsuario';
+		$this->dataRequest->className = 'com.novo.objects.TOs.UsuarioTO';
 		$this->dataRequest->idUsuario = $this->userName;
 
 		$response = $this->sendToService('CallWs_GetUser');
@@ -76,22 +76,24 @@ class Novo_Settings_Model extends NOVO_Model {
 	 */
 	public function CallWs_changeEmail_Settings($dataRequest)
 	{
-
 		log_message('INFO', 'NOVO Settings Model: ChangeEmail Method Initialized');
 
-		$this->className = 'com.novo.objects.TOs.UsuarioTO';
 		$this->dataAccessLog->modulo = 'configuracion';
 		$this->dataAccessLog->function = 'actualizar-usuario';
 		$this->dataAccessLog->operation = 'getActualizarUsuario';
+
 		$this->dataRequest->idOperation = 'getActualizarUsuario';
+		$this->dataRequest->className = 'com.novo.objects.TOs.UsuarioTO';
 		$this->dataRequest->idUsuario = $this->session->userdata('userName');
 		$this->dataRequest->email = $dataRequest->email;
+
 		if(!$dataRequest) {
 			$access = [
 				'user_access',
 			];
 			$this->session->unset_userdata($access);
 		}
+
 		$this->sendToService('CallWs_ChangeEmail');
 
 		switch($this->isResponseRc) {
@@ -106,22 +108,20 @@ class Novo_Settings_Model extends NOVO_Model {
 						'action'=> 'close'
 					]
 				];
-				break;
-			}
-		if($this->isResponseRc != 0) {
-					$this->response->code = 1;
-					$branchOffice[] = (object) [
-						'key' => '',
-						'text' => lang('RESP_TRY_AGAIN')
-					];
-				}
+			break;
+		}
 
+		if ($this->isResponseRc != 0) {
+			$this->response->code = 1;
+			$branchOffice[] = (object) [
+				'key' => '',
+				'text' => lang('RESP_TRY_AGAIN')
+			];
+		}
 
 		return $this->responseToTheView('CallWs_ChangeEmail');
 	}
-
-
-		/**
+	/**
 	 * @info Método para Obtener los datos de empresa resumido
 	 * @author Diego Acosta García
 	 * @date May 2nd, 2020
@@ -130,13 +130,14 @@ class Novo_Settings_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO Business Model: getEnterprise Method Initialized');
 
-		$this->className = 'com.novo.objects.MO.ListadoEmpresasMO';
 		$this->dataAccessLog->modulo = 'configuracion';
 		$this->dataAccessLog->function = 'obtener empresa';
 		$this->dataAccessLog->operation = 'getInfoEmpresaConfig';
-		$this->dataRequest->idOperation = 'getEmpresaXUsuario';
 
+		$this->dataRequest->idOperation = 'getEmpresaXUsuario';
+		$this->dataRequest->className = 'com.novo.objects.MO.ListadoEmpresasMO';
 		$this->dataRequest->accodusuario = $this->userName;
+
 		$response = $this->sendToService('callWS_ListaEmpresas');
 
 		switch($this->isResponseRc) {
@@ -146,15 +147,15 @@ class Novo_Settings_Model extends NOVO_Model {
 				$this->response->icon = lang('CONF_ICON_SUCCESS');
 				$enter = $response;
 				$this->response->data = $enter;
-				break;
+			break;
 			case -4:
 				$this->response->code = 1;
 				$this->response->msg = lang('RESP_USER_INCORRECT');
-				break;
+			break;
 			case -22:
 				$this->response->code = 1;
 				$this->response->msg = lang('RESP_USER_INCORRECT');
-				break;
+			break;
 		}
 
 		if($this->isResponseRc != 0 && $this->response->code == 1) {
@@ -176,15 +177,15 @@ class Novo_Settings_Model extends NOVO_Model {
 	 */
 	public function CallWs_ChangeTelephones_Settings($dataRequest)
 	{
-
 		log_message('INFO', 'NOVO Settings Model: ChangeTelephones Method Initialized');
 
-		$this->className = 'com.novo.objects.TOs.EmpresaTO';
+
 		$this->dataAccessLog->modulo = 'configuracion';
 		$this->dataAccessLog->function = 'cambiar-telefono';
 		$this->dataAccessLog->operation = 'getActualizarTLFEmpresa';
 
 		$this->dataRequest->idOperation = 'getActualizarTLFEmpresa';
+		$this->dataRequest->className = 'com.novo.objects.TOs.EmpresaTO';
 		$this->dataRequest->acrif = $dataRequest->acrif;
 		$this->dataRequest->actel = $dataRequest->tlf1;
 		$this->dataRequest->actel2 = $dataRequest->tlf2;
@@ -204,15 +205,15 @@ class Novo_Settings_Model extends NOVO_Model {
 						'action'=> 'close'
 					]
 				];
-				break;
+			break;
 			case -4:
 				$this->response->code = 1;
 				$this->response->msg = lang('RESP_EMAIL_USED');
-				break;
+			break;
 			case -22:
 				$this->response->code = 1;
 				$this->response->msg = lang('RESP_EMAIL_INCORRECT');
-				break;
+			break;
 		}
 
 		if($this->isResponseRc != 0 && $this->response->code == 1) {
@@ -234,15 +235,14 @@ class Novo_Settings_Model extends NOVO_Model {
 	 */
 	public function CallWs_AddContact_Settings($dataRequest)
 	{
-
 		log_message('INFO', 'NOVO Settings Model: AddContact Method Initialized');
 
-		$this->className = 'com.novo.objects.TOs.ContactoTO';
 		$this->dataAccessLog->modulo = 'configuracion';
 		$this->dataAccessLog->function = 'agregar-contacto';
 		$this->dataAccessLog->operation = 'insertarContactoEmpresa';
 
 		$this->dataRequest->idOperation = 'insertarContactoEmpresa';
+		$this->dataRequest->className = 'com.novo.objects.TOs.ContactoTO';
 		$this->dataRequest->acrif = $dataRequest->acrif;
 		$this->dataRequest->idExtPer = $dataRequest->idExtPer;
 		$this->dataRequest->nombres = $dataRequest->nombres;
@@ -266,15 +266,15 @@ class Novo_Settings_Model extends NOVO_Model {
 						'action'=> 'close'
 					]
 				];
-				break;
+			break;
 			case -4:
 				$this->response->code = 1;
 				$this->response->msg = lang('RESP_EMAIL_USED');
-				break;
+			break;
 			case -22:
 				$this->response->code = 1;
 				$this->response->msg = lang('RESP_EMAIL_INCORRECT');
-				break;
+			break;
 		}
 
 		if($this->isResponseRc != 0 && $this->response->code == 1) {
@@ -299,12 +299,12 @@ class Novo_Settings_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO Setting Model: CallWs_GetFileIni Method Initialized');
 
-		$this->className = 'ReporteCEOTO.class';
 		$this->dataAccessLog->function = 'Listado de tarjetas';
 		$this->dataAccessLog->operation = 'Descargar archivo';
 		$this->dataAccessLog->modulo = 'Reportes';
 
 		$this->dataRequest->idOperation = '216';
+		$this->dataRequest->className = 'ReporteCEOTO.class';
 		$idFiscal = $this->session->enterpriseSelect->list[0]->acrif;
 		$enterpriseCode = $this->session->enterpriseSelect->list[0]->accodcia;
 
@@ -322,25 +322,25 @@ class Novo_Settings_Model extends NOVO_Model {
 
 		switch($this->isResponseRc) {
 			case 0:
-					$this->response->code = 0;
-					$file = $response->archivo;
-				    $name = $response->nombre;
-				    $ext =  mb_strtolower($response->formatoArchivo);
-					$this->response->data['file'] = $file;
-					$this->response->data['name'] = $name.'.'.$ext;
-					$this->response->data['ext'] = $ext;
+				$this->response->code = 0;
+				$file = $response->archivo;
+					$name = $response->nombre;
+					$ext =  mb_strtolower($response->formatoArchivo);
+				$this->response->data['file'] = $file;
+				$this->response->data['name'] = $name.'.'.$ext;
+				$this->response->data['ext'] = $ext;
 			break;
 			default:
-					$this->response->code = 4;
-					$this->response->icon = lang('CONF_ICON_WARNING');
-					$this->response->msg = lang('GEN_WARNING_DOWNLOAD_FILE');
-					$this->response->data = [
-						'btn1'=> [
-							'text'=> lang('GEN_BTN_ACCEPT'),
-							'link'=> 'configuracion',
-							'action'=> 'redirect'
-						]
-					];
+				$this->response->code = 4;
+				$this->response->icon = lang('CONF_ICON_WARNING');
+				$this->response->msg = lang('GEN_WARNING_DOWNLOAD_FILE');
+				$this->response->data = [
+					'btn1'=> [
+						'text'=> lang('GEN_BTN_ACCEPT'),
+						'link'=> 'configuracion',
+						'action'=> 'redirect'
+					]
+				];
 			break;
 		}
 
