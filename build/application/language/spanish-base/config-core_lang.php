@@ -32,6 +32,7 @@ $lang['CONF_SINGLE_SIGN_ON'] = 'userByToken';
 $lang['CONF_SIGIN_RECOVER_PASS'] = 'ON';
 $lang['CONF_SIGNIN_IMG'] = 'OFF';
 $lang['CONF_SIGNIN_WIDGET_CONTACT'] = 'ON';
+$lang['CONFIG_PASS_EXPIRED'] = 'ON';
 //RECOVER ACCESS
 $lang['CONF_RECOV_PASS'] = 'ON';
 $lang['CONF_RECOV_ACCESS'] = 'OFF';

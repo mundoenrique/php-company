@@ -21,13 +21,12 @@ class Novo_Reports_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO Reports Model: ReporstList Method Initialized');
 
-		$this->className = 'com.novo.objects.TOs.EmpresaTO';
-
 		$this->dataAccessLog->modulo = 'Reportes';
 		$this->dataAccessLog->function = 'Lista de reportes';
 		$this->dataAccessLog->operation = 'Obtener lista de reportes';
 
 		$this->dataRequest->idOperation = 'listadoReportesCEO';
+		$this->dataRequest->className = 'com.novo.objects.TOs.EmpresaTO';
 		$this->dataRequest->enterpriseGroup = $this->session->enterpriseInf->enterpriseGroup;
 		$this->dataRequest->rif = $this->session->enterpriseInf->idFiscal;
 		$this->dataRequest->accodcia = $this->session->enterpriseInf->enterpriseCode;
@@ -36,7 +35,7 @@ class Novo_Reports_Model extends NOVO_Model {
 		$response = $this->sendToService('callWs_GetReportsList');
 		$headerCardsRep = [];
 
-		switch($this->isResponseRc) {
+		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
 				$reportsList[] = (object) [
@@ -50,20 +49,21 @@ class Novo_Reports_Model extends NOVO_Model {
 
 				foreach ($response->listaConfigReportesCEO AS $reports) {
 					$report = [];
+
 					foreach ($reports AS $key => $value) {
 						switch ($key) {
 							case 'idOperation':
 								$report['key'] = $value;
-								break;
+							break;
 							case 'description':
 								$report['text'] = $value;
-								break;
+							break;
 							case 'result':
 								$report['type'] = $value;
 								if(count($reports->listFilter) > 0 && $value === 'DOWNLOAD') {
 									$report['type'] = 'FILTER';
 								}
-								break;
+							break;
 							case 'listFilter':
 								if(count($value) > 0 && $value[0]->idFilter == '3' && isset($value[0]->listDataSelection)) {
 									foreach($value[0]->listDataSelection AS $IdTypeObject) {
@@ -77,19 +77,20 @@ class Novo_Reports_Model extends NOVO_Model {
 								if(count($value) > 0 && $value[0]->idFilter == '7') {
 									$mindateGmfReport = $value[0]->minValue;
 								}
-								break;
+							break;
 							case 'listTableHeader':
 								if(count($value) > 0 && $reports->idReporte == '5') {
 									foreach($value AS $tableHeader) {
 										$headerCardsRep[] = $tableHeader->description;
 									}
 								}
-								break;
+							break;
 						}
 					}
+
 					$reportsList[] = (object) $report;
 				}
-				break;
+			break;
 		}
 
 		if($this->isResponseRc != 0) {
@@ -108,6 +109,7 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->response->data->IdTypeList = (object) $IdTypeList;
 		$this->response->data->mindateGmfReport = $mindateGmfReport;
 		$this->response->data->headerCardsRep = $headerCardsRep;
+
 		return $this->responseToTheView('callWs_GetReportsList');
 	}
 	/**
@@ -120,37 +122,37 @@ class Novo_Reports_Model extends NOVO_Model {
 		log_message('INFO', 'NOVO Reports Model: GetReport Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Reportes';
+
 		$this->dataRequest->idOperation = $dataRequest->operation;
+		$this->dataRequest->className = 'ReporteCEOTO.class';
 		$this->dataRequest->rutaArchivo = DOWNLOAD_ROUTE;
 
 		switch ($dataRequest->operation) {
 			case 'repListadoTarjetas':
 				$this->cardsList($dataRequest);
-				break;
+			break;
 			case 'repMovimientoPorEmpresa':
 				$this->movementsByEnterprise($dataRequest);
-				break;
+			break;
 			case 'repTarjeta':
 				$this->cardReport($dataRequest);
-				break;
+			break;
 			case 'repTarjetasPorPersona':
 				$this->cardsPeople($dataRequest);
-				break;
+			break;
 			case 'repMovimientoPorTarjeta':
 				$this->movementsByCards($dataRequest);
-				break;
+			break;
 			case 'repComprobantesVisaVale':
 				$this->VISAproofpayment($dataRequest);
-				break;
+			break;
 			case 'repExtractoCliente':
 				$this->clientStatement($dataRequest);
-				break;
+			break;
 			case 'repCertificadoGmf':
 				$this->GMPCertificate($dataRequest);
-				break;
+			break;
 		}
-
-
 
 		return $this->responseToTheView('GetReport: '.$dataRequest->operation);
 	}
@@ -166,7 +168,6 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->dataAccessLog->function = 'Listado de tarjetas';
 		$this->dataAccessLog->operation = 'Descargar archivo';
 
-		$this->className = 'ReporteCEOTO.class';
 		$this->dataRequest->empresaCliente = [
 			'rif' => $this->session->enterpriseInf->idFiscal,
 			'accodcia' => $this->session->enterpriseInf->enterpriseCode
@@ -174,7 +175,7 @@ class Novo_Reports_Model extends NOVO_Model {
 
 		$response = $this->sendToService('GetReport: '.$dataRequest->operation);
 
-		switch($this->isResponseRc) {
+		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->icon = lang('CONF_ICON_DANGER');
 				$this->response->title = lang('REPORTS_TITLE');
@@ -189,13 +190,13 @@ class Novo_Reports_Model extends NOVO_Model {
 						'name' => $response->bean
 					];
 				}
-				break;
+			break;
 			case -30:
 				$this->response->icon = lang('CONF_ICON_INFO');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_NO_CARDS');
 				$this->response->data['btn1']['action'] = 'close';
-				break;
+			break;
 		}
 
 		return $this->response;
@@ -212,8 +213,6 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->dataAccessLog->function = 'Moviminetos por empresa';
 		$this->dataAccessLog->operation = 'Descargar archivo';
 
-		$this->className = 'ReporteCEOTO.class';
-
 		$this->dataRequest->movPorEmpresa = [
 			'fechaDesde' => convertDate($dataRequest->enterpriseDateBegin),
 			'fechaHasta' => convertDate($dataRequest->enterpriseDateEnd)
@@ -225,7 +224,7 @@ class Novo_Reports_Model extends NOVO_Model {
 
 		$response = $this->sendToService('GetReport: '.$dataRequest->operation);
 
-		switch($this->isResponseRc) {
+		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->icon = lang('CONF_ICON_DANGER');
 				$this->response->title = lang('REPORTS_TITLE');
@@ -240,13 +239,13 @@ class Novo_Reports_Model extends NOVO_Model {
 						'name' => $response->bean
 					];
 				}
-				break;
+			break;
 			case -30:
 				$this->response->icon = lang('CONF_ICON_INFO');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_NO_MOVES_ENTERPRISE');
 				$this->response->data['btn1']['action'] = 'close';
-				break;
+			break;
 		}
 
 		return $this->response;
@@ -263,7 +262,6 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->dataAccessLog->function = 'Comprobante de pago VISA';
 		$this->dataAccessLog->operation = 'Descargar archivo';
 
-		$this->className = 'ReporteCEOTO.class';
 		$date = explode('/', $dataRequest->date);
 		$this->dataRequest->movPorEmpresa = [
 			'mes' => $date[0],
@@ -276,7 +274,7 @@ class Novo_Reports_Model extends NOVO_Model {
 
 		$response = $this->sendToService('GetReport: '.$dataRequest->operation);
 
-		switch($this->isResponseRc) {
+		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->icon = lang('CONF_ICON_DANGER');
 				$this->response->title = lang('REPORTS_TITLE');
@@ -291,14 +289,14 @@ class Novo_Reports_Model extends NOVO_Model {
 						'name' => $response->bean
 					];
 				}
-				break;
+			break;
 			case -30:
 			case -150:
 				$this->response->icon = lang('CONF_ICON_INFO');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_NO_MOVES_ENTERPRISE');
 				$this->response->data['btn1']['action'] = 'close';
-				break;
+			break;
 		}
 
 		return $this->response;
@@ -315,7 +313,6 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->dataAccessLog->function = 'Extracto del cliente';
 		$this->dataAccessLog->operation = 'Descargar archivo';
 
-		$this->className = 'ReporteCEOTO.class';
 		$date = explode('/', $dataRequest->dateEx);
 		$this->dataRequest->extractoEmpresa = [
 			'mes' => $date[0],
@@ -329,7 +326,7 @@ class Novo_Reports_Model extends NOVO_Model {
 
 		$response = $this->sendToService('GetReport: '.$dataRequest->operation);
 
-		switch($this->isResponseRc) {
+		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->icon = lang('CONF_ICON_DANGER');
 				$this->response->title = lang('REPORTS_TITLE');
@@ -344,13 +341,13 @@ class Novo_Reports_Model extends NOVO_Model {
 						'name' => $response->bean
 					];
 				}
-				break;
+			break;
 			case -423:
 				$this->response->icon = lang('CONF_ICON_INFO');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_NO_CLIENT_STATEMENT');
 				$this->response->data['btn1']['action'] = 'close';
-				break;
+			break;
 		}
 
 		return $this->response;
@@ -367,77 +364,77 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->dataAccessLog->function = 'Reporte de tarjetas';
 		$this->dataAccessLog->operation = 'Lista de tarjetas';
 
-		$this->className = 'TarjetaTO.class';
-
+		$this->dataRequest->className = 'TarjetaTO.class';
 		$this->dataRequest->noTarjeta = $dataRequest->cardNumber;
 		$this->dataRequest->rif = $this->session->enterpriseInf->idFiscal;
 		$this->dataRequest->acCodCia = $this->session->enterpriseInf->enterpriseCode;
 
 		$response = $this->sendToService('GetReport: '.$dataRequest->operation);
 
-		switch($this->isResponseRc) {
+		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
 				$cardsReport = is_array($response) ? $response : array ($response);
 				$cardsMove = [];
+
 				foreach ($response as $key => $value) {
 					switch ($key) {
 						case 'id_ext_per':
 							$value = explode('_', $value);
 							$cardsMove['idType'] = $value[0];
 							$cardsMove['idNumber'] = $value[1];
-							break;
+						break;
 						case 'NombreCliente':
 							$cardsMove['userName'] = $value;
-							break;
+						break;
 						case 'noTarjeta':
 							$cardsMove['cardNumber'] = $value;
-							break;
+						break;
 						case 'nombre_producto':
 							$cardsMove['product'] = $value;
-							break;
+						break;
 						case 'fechaAsignacion':
 							$cardsMove['createDate'] = $value;
-							break;
+						break;
 						case 'fechaExp':
 							$cardsMove['Expirydate'] = $value;
-							break;
+						break;
 						case 'estatus':
 							$cardsMove['currentState'] = $value;
-							break;
+						break;
 						case 'fechaRegistro':
 							$cardsMove['activeDate'] = $value;
-							break;
+						break;
 						case 'bloque':
 							$cardsMove['reasonBlock'] = $value;
-							break;
+						break;
 						case 'fechaBloqueo':
 							$cardsMove['dateBlock'] = $value;
-							break;
+						break;
 						case 'saldos':
 							$cardsMove['currentBalance'] = $value->actual;
-							break;
+						break;
 						case 'fechaUltimoCargue':
 							$cardsMove['lastCredit'] = $value;
-							break;
+						break;
 						case 'montoUltimoCargue':
 							$cardsMove['lastAmoutn'] = $value;
-							break;
+						break;
 						case 'gmf':
 							$cardsMove['chargeGMF'] = $value;
-							break;
+						break;
 					}
 				}
 
 				$this->response->data = $cardsMove;
-				break;
+			break;
 			case -30:
 			case -150:
 				$this->response->icon = lang('CONF_ICON_INFO');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_FOUND_CARD');
 				$this->response->data['btn1']['action'] = 'close';
-				break;
+			break;
 		}
 
 		return $this->response;
@@ -454,8 +451,6 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->dataAccessLog->function = 'Tarjetas por persona';
 		$this->dataAccessLog->operation = 'Lista de tarjetas';
 
-		$this->className = 'ReporteCEOTO.class';
-
 		$this->dataRequest->tarjetaHabiente = [
 			'id_ext_per' => $dataRequest->idType.'_'.$dataRequest->idNumber,
 			'id_ext_emp' => $this->session->enterpriseInf->idFiscal,
@@ -464,11 +459,12 @@ class Novo_Reports_Model extends NOVO_Model {
 
 		$response = $this->sendToService('GetReport: '.$dataRequest->operation);
 
-		switch($this->isResponseRc) {
+		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
 				$count = 0;
 				$cardsPeople = [];
+
 				foreach ($response->lista AS $cardsList) {
 					foreach ($cardsList as $key => $value) {
 						switch ($key) {
@@ -481,13 +477,11 @@ class Novo_Reports_Model extends NOVO_Model {
 									$cardsPeople,
 									$value
 								);
-
-								break;
+							break;
 						}
 					}
 					$count++;
 					$cardsToView[] = $cards;
-
 				}
 
 				if(count($cardsToView) > 1) {
@@ -503,14 +497,14 @@ class Novo_Reports_Model extends NOVO_Model {
 
 				$this->session->set_flashdata('cardsPeople', $cardsPeople);
 				$this->response->data = $cardsToView;
-				break;
+			break;
 			case -30:
 			case -150:
 				$this->response->icon = lang('CONF_ICON_INFO');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_NO_CARDS_PEOPLE');
 				$this->response->data['btn1']['action'] = 'close';
-				break;
+			break;
 		}
 
 		return $this->response;
@@ -527,8 +521,6 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->dataAccessLog->function = 'Movimientos por tarjeta';
 		$this->dataAccessLog->operation = 'Descargar archivo';
 
-		$this->className = 'ReporteCEOTO.class';
-
 		$this->dataRequest->movTarjeta = [
 			'tarjeta' => [
 				'noTarjeta' => $this->session->flashdata('cardsPeople')[$dataRequest->cardNumberId],
@@ -542,7 +534,7 @@ class Novo_Reports_Model extends NOVO_Model {
 
 		$response = $this->sendToService('GetReport: '.$dataRequest->operation);
 
-		switch($this->isResponseRc) {
+		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->icon = lang('CONF_ICON_DANGER');
 				$this->response->title = lang('REPORTS_TITLE');
@@ -582,7 +574,6 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->dataAccessLog->function = 'Obtener certificado GMF';
 		$this->dataAccessLog->operation = 'Descargar archivo';
 
-		$this->className = 'ReporteCEOTO.class';
 		$this->dataRequest->certificadoGmf = [
 			'anio' => $dataRequest->dateG
 		];
@@ -593,7 +584,7 @@ class Novo_Reports_Model extends NOVO_Model {
 
 		$response = $this->sendToService('GetReport: '.$dataRequest->operation);
 
-		switch($this->isResponseRc) {
+		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->icon = lang('CONF_ICON_DANGER');
 				$this->response->title = lang('REPORTS_TITLE');
@@ -608,14 +599,14 @@ class Novo_Reports_Model extends NOVO_Model {
 						'name' => $response->bean
 					];
 				}
-				break;
+			break;
 			case -30:
 			case -150:
 				$this->response->icon = lang('CONF_ICON_INFO');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = novoLang(lang('REPORTS_NO_GMF_FOR_YEAR'), $dataRequest->dateG);
 				$this->response->data['btn1']['action'] = 'close';
-				break;
+			break;
 		}
 
 		return $this->response;
@@ -629,13 +620,12 @@ class Novo_Reports_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO Reports Model: StatusBulk Method Initialized');
 
-		$this->className = 'com.novo.objects.TOs.EmpresaTO';
-
 		$this->dataAccessLog->modulo = 'Reportes';
 		$this->dataAccessLog->function = 'Estado de lote';
 		$this->dataAccessLog->operation = 'Obtener lista lotes por estado';
 
 		$this->dataRequest->idOperation = 'buscarEstatusLotes';
+		$this->dataRequest->className = 'com.novo.objects.TOs.EmpresaTO';
 		$this->dataRequest->acCodCia = $dataRequest->enterpriseCode;
 		$this->dataRequest->idProducto = $dataRequest->productCode;
 		$this->dataRequest->dtfechorcargaIni = $dataRequest->initialDate;
@@ -645,9 +635,10 @@ class Novo_Reports_Model extends NOVO_Model {
 		$statusBulkList = [];
 
 
-		switch($this->isResponseRc) {
+		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
+
 				foreach($response->lista AS $statusBulk) {
 					$record = new stdClass();
 					$record->bulkType = ucfirst(mb_strtolower($statusBulk->acnombre));
@@ -669,6 +660,7 @@ class Novo_Reports_Model extends NOVO_Model {
 				$this->response->code = 0;
 			break;
 		}
+
 		$this->response->data['statusBulkList'] = $statusBulkList;
 
 		return $this->responseToTheView('callWs_StatusBulk');
@@ -681,18 +673,19 @@ class Novo_Reports_Model extends NOVO_Model {
 	public function callWs_obtenerIdEmpresa_Reports($dataRequest)
 	{
 		log_message('INFO', 'NOVO Reports Model: obtenerIdEmpresa Method Initialized');
-		$this->className = 'com.novo.objects.TOs.EmpresaTO';
+
 		$this->dataAccessLog->modulo = 'Reportes';
 		$this->dataAccessLog->function = 'Id empresa';
 		$this->dataAccessLog->operation = 'Obtener id de empresa';
+
 		$this->dataRequest->idOperation = 'buscarIdEmpresa';
 		$response =  $dataRequest;
 
-		switch($this->isResponseRc = 0) {
+		switch ($this->isResponseRc = 0) {
 			case 0:
-			$user = $response;
-			$this->response->data =  (array)$user;
-				}
+				$user = $response;
+				$this->response->data =  (array)$user;
+		}
 
 		return $this->response;
 	}
@@ -705,12 +698,12 @@ class Novo_Reports_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO Reports Model: closingBudgets Method Initialized');
 
-		$this->className = 'com.novo.objects.MO.SaldosAmanecidosMO';
-
 		$this->dataAccessLog->modulo = 'Reportes';
 		$this->dataAccessLog->function = 'Saldos Amanecidos';
 		$this->dataAccessLog->operation = 'Obtener saldos';
+
 		$this->dataRequest->idOperation = 'saldosAmanecidos';
+		$this->dataRequest->className = 'com.novo.objects.MO.SaldosAmanecidosMO';
 		$this->dataRequest->idExtPer = $dataRequest->idExtPer;
 		$this->dataRequest->producto =  $dataRequest->product;
 		$this->dataRequest->idExtEmp =  $dataRequest->idExt;
@@ -723,7 +716,7 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->response->recordsTotal = 0;
 		$this->response->recordsFiltered = 0;
 
-		switch($this->isResponseRc) {
+		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
 				$user = $response->saldo->lista;
@@ -738,7 +731,6 @@ class Novo_Reports_Model extends NOVO_Model {
 			break;
 			case -150:
 				$this->response->code = 1;
-
 			break;
 		}
 
@@ -753,12 +745,12 @@ class Novo_Reports_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO Reports Model: exportToExcel Method Initialized');
 
-		$this->className = 'com.novo.objects.MO.SaldosAmanecidosMO';
-
 		$this->dataAccessLog->modulo = 'Reportes';
 		$this->dataAccessLog->function = 'Saldos amanecidos';
 		$this->dataAccessLog->operation = 'Obtener excel de tabla';
+
 		$this->dataRequest->idOperation = 'generaArchivoXls';
+		$this->dataRequest->className = 'com.novo.objects.MO.SaldosAmanecidosMO';
 		$this->dataRequest->producto =  $dataRequest->product;
 		$this->dataRequest->idExtEmp =  $dataRequest->identificationCard;
 		$this->dataRequest->tamanoPagina = $dataRequest->pageLenght;
@@ -766,24 +758,20 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->dataRequest->paginaActual = $dataRequest->actualPage;
 		$this->dataRequest->descProd =  $dataRequest->descProd;
 
-
 		$response = $this->sendToService('callWs_exportToExcel');
 
-		switch($this->isResponseRc) {
+		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
 				$user = $response;
 				$this->response->data =  (array)$user;
-
 			break;
-
 			case -3:
 				$this->response->code = 4;
 				$this->response->icon = lang('CONF_ICON_DANGER');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_NO_BUDGET');
 				$this->response->data['btn1']['action'] = 'close';
-
 			break;
 		}
 
@@ -799,11 +787,12 @@ class Novo_Reports_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO Reports Model: masterAccount Method Initialized');
 
-		$this->className = 'com.novo.objects.MO.DepositosGarantiaMO';
 		$this->dataAccessLog->modulo = 'Reportes';
 		$this->dataAccessLog->function = 'Obtener resultados de busqueda';
 		$this->dataAccessLog->operation = 'Cuenta maestra';
+
 		$this->dataRequest->idOperation = 'buscarDepositoGarantia';
+		$this->dataRequest->className = 'com.novo.objects.MO.DepositosGarantiaMO';
 		$this->dataRequest->idExtEmp = $dataRequest->idExtEmp;
 		$this->dataRequest->fechaIni = $dataRequest->dateStart;
 		$this->dataRequest->fechaFin =  $dataRequest->dateEnd;
@@ -814,13 +803,12 @@ class Novo_Reports_Model extends NOVO_Model {
 
 		$response = $this->sendToService('callWs_masterAccount');
 
-		switch($this->isResponseRc) {
+		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
 				$user = $response;
 				$this->response->data =  (array)$user;
 			break;
-
 			case -150:
 				$this->response->code = 1;
 			break;
@@ -828,8 +816,7 @@ class Novo_Reports_Model extends NOVO_Model {
 
 		return $this->response;
 	}
-
-		/**
+	/**
 	 * @info Método para obtener excel de tabla cuenta maestra
 	 * @author Diego Acosta García
 	 * @date May 21, 2020
@@ -838,12 +825,12 @@ class Novo_Reports_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO Reports Model: exportToExcelMasterAccount Method Initialized');
 
-		$this->className = 'com.novo.objects.MO.DepositosGarantiaMO';
-
 		$this->dataAccessLog->modulo = 'Reportes';
 		$this->dataAccessLog->function = 'cuenta maestra';
 		$this->dataAccessLog->operation = 'Obtener excel de tabla cuenta maestra';
+
 		$this->dataRequest->idOperation = 'generarDepositoGarantia';
+		$this->dataRequest->className = 'com.novo.objects.MO.DepositosGarantiaMO';
 		$this->dataRequest->idExtEmp = $dataRequest->idExtEmp;
 		$this->dataRequest->fechaIni =  $dataRequest->dateStart;
 		$this->dataRequest->fechaFin =  $dataRequest->dateEnd;
@@ -853,31 +840,26 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->dataRequest->producto =  $this->session->userdata('productInf')->productPrefix;
 		$this->dataRequest->tamanoPagina =  $dataRequest->pageSize;
 
-
 		$response = $this->sendToService('callWs_exportToExcelMasterAccount');
 
-		switch($this->isResponseRc) {
+		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
 				$user = $response;
 				$this->response->data =  (array)$user;
-
 			break;
-
 			case -3:
 				$this->response->code = 4;
 				$this->response->icon = lang('CONF_ICON_DANGER');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_NO_BUDGET');
 				$this->response->data['btn1']['action'] = 'close';
-
 			break;
 		}
 
 		return $this->response;
 	}
-
-		/**
+	/**
 	 * @info Método para obtener excel de tabla cuenta maestra
 	 * @author Diego Acosta García
 	 * @date May 21, 2020
@@ -886,12 +868,12 @@ class Novo_Reports_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO Reports Model: exportToPDFMasterAccount Method Initialized');
 
-		$this->className = 'com.novo.objects.MO.DepositosGarantiaMO';
-
 		$this->dataAccessLog->modulo = 'Reportes';
 		$this->dataAccessLog->function = 'cuenta maestra';
 		$this->dataAccessLog->operation = 'Obtener pdf de tabla cuenta maestra';
+
 		$this->dataRequest->idOperation = 'generarDepositoGarantiaPdf';
+		$this->dataRequest->className = 'com.novo.objects.MO.DepositosGarantiaMO';
 		$this->dataRequest->idExtEmp = $dataRequest->idExtEmp;
 		$this->dataRequest->fechaIni =  $dataRequest->dateStart;
 		$this->dataRequest->fechaFin =  $dataRequest->dateEnd;
@@ -901,32 +883,26 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->dataRequest->producto =  $this->session->userdata('productInf')->productPrefix;
 		$this->dataRequest->tamanoPagina =  $dataRequest->pageSize;
 
-
 		$response = $this->sendToService('callWs_exportToPDFMasterAccount');
 
-		switch($this->isResponseRc) {
+		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
 				$user = $response;
 				$this->response->data =  (array)$user;
-
 			break;
-
 			case -3:
 				$this->response->code = 4;
 				$this->response->icon = lang('CONF_ICON_DANGER');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_NO_BUDGET');
 				$this->response->data['btn1']['action'] = 'close';
-
 			break;
 		}
 
 		return $this->response;
 	}
-
-
-			/**
+	/**
 	 * @info Método para obtener excel de tabla cuenta maestra consolidado
 	 * @author Diego Acosta García
 	 * @date May 21, 2020
@@ -935,12 +911,12 @@ class Novo_Reports_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO Reports Model: exportToExcelMasterAccountConsolid Method Initialized');
 
-		$this->className = 'com.novo.objects.MO.DepositosGarantiaMO';
-
 		$this->dataAccessLog->modulo = 'Reportes';
 		$this->dataAccessLog->function = 'cuenta maestra';
 		$this->dataAccessLog->operation = 'Obtener excel de tabla cuenta maestra';
+
 		$this->dataRequest->idOperation = 'generaArchivoXlsConcil';
+		$this->dataRequest->className = 'com.novo.objects.MO.DepositosGarantiaMO';
 		$this->dataRequest->anio = $dataRequest->year;
 		$this->dataRequest->idExtEmp = $dataRequest->idExtEmp;
 		$this->dataRequest->fechaIni =  $dataRequest->dateStart;
@@ -951,17 +927,14 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->dataRequest->producto =  $this->session->userdata('productInf')->productPrefix;
 		$this->dataRequest->tamanoPagina =  $dataRequest->pageSize;
 
-
 		$response = $this->sendToService('callWs_exportToExcelMasterAccountConsolid');
 
-		switch($this->isResponseRc) {
+		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
 				$user = $response;
 				$this->response->data =  (array)$user;
-
 			break;
-
 			case -3:
 				$this->response->code = 4;
 				$this->response->icon = lang('CONF_ICON_DANGER');
@@ -969,14 +942,12 @@ class Novo_Reports_Model extends NOVO_Model {
 				$this->response->msg = lang('REPORTS_NO_FILE');
 				$this->response->data['btn1']['action'] = 'close';
 			break;
-
 			default:
-			$this->response->code = 4;
-			$this->response->icon = lang('CONF_ICON_DANGER');
-			$this->response->title = lang('REPORTS_TITLE');
-			$this->response->msg = lang('REPORTS_NO_FILE_CONSOLID');
-			$this->response->data['btn1']['action'] = 'close';
-
+				$this->response->code = 4;
+				$this->response->icon = lang('CONF_ICON_DANGER');
+				$this->response->title = lang('REPORTS_TITLE');
+				$this->response->msg = lang('REPORTS_NO_FILE_CONSOLID');
+				$this->response->data['btn1']['action'] = 'close';
 		}
 
 		return $this->response;
@@ -991,12 +962,12 @@ class Novo_Reports_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO Reports Model: exportToPDFMasterAccountConsolid Method Initialized');
 
-		$this->className = 'com.novo.objects.MO.DepositosGarantiaMO';
-
 		$this->dataAccessLog->modulo = 'Reportes';
 		$this->dataAccessLog->function = 'cuenta maestra';
 		$this->dataAccessLog->operation = 'Obtener pdf de tabla cuenta maestra consolidado';
+
 		$this->dataRequest->idOperation = 'generaArchivoConcilPdf';
+		$this->dataRequest->className = 'com.novo.objects.MO.DepositosGarantiaMO';
 		$this->dataRequest->anio = $dataRequest->year;
 		$this->dataRequest->idExtEmp = $dataRequest->idExtEmp;
 		$this->dataRequest->fechaIni =  $dataRequest->dateStart;
@@ -1007,17 +978,14 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->dataRequest->producto =  $this->session->userdata('productInf')->productPrefix;
 		$this->dataRequest->tamanoPagina =  $dataRequest->pageSize;
 
-
 		$response = $this->sendToService('callWs_exportToPDFMasterAccountConsolid');
 
-		switch($this->isResponseRc) {
+		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
 				$user = $response;
 				$this->response->data =  (array)$user;
-
 			break;
-
 			case -3:
 				$this->response->code = 4;
 				$this->response->icon = lang('CONF_ICON_DANGER');
@@ -1025,28 +993,27 @@ class Novo_Reports_Model extends NOVO_Model {
 				$this->response->msg = lang('REPORTS_NO_FILE');
 				$this->response->data['btn1']['action'] = 'close';
 			break;
-
 			default:
-			$this->response->code = 4;
-			$this->response->icon = lang('CONF_ICON_DANGER');
-			$this->response->title = lang('REPORTS_TITLE');
-			$this->response->msg = lang('REPORTS_NO_FILE_CONSOLID');
-			$this->response->data['btn1']['action'] = 'close';
+				$this->response->code = 4;
+				$this->response->icon = lang('CONF_ICON_DANGER');
+				$this->response->title = lang('REPORTS_TITLE');
+				$this->response->msg = lang('REPORTS_NO_FILE_CONSOLID');
+				$this->response->data['btn1']['action'] = 'close';
 		}
 
 		return $this->response;
 	}
 
-
-
 	public function callWs_CardHolders_Reports($dataRequest)
 	{
 		log_message('INFO', 'NOVO Reports Model: CardHolders Method Initialized');
+
 		$this->dataAccessLog->modulo = 'Reportes';
 		$this->dataAccessLog->function = 'TarjetaHabientes';
 		$this->dataAccessLog->operation = 'Lista TarjetaHabientes';
+
 		$this->dataRequest->idOperation = 'getConsultarTarjetaHabientes';
-		$this->className = 'com.novo.objects.MO.TarjetaHabientesMO';
+		$this->dataRequest->className = 'com.novo.objects.MO.TarjetaHabientesMO';
 		$this->dataRequest->paginaActual = 1;
 		$this->dataRequest->tamanoPagina = 10;
 		$this->dataRequest->paginar = FALSE;
@@ -1055,7 +1022,7 @@ class Novo_Reports_Model extends NOVO_Model {
 		$response = $this->sendToService('callWS_StatusCardHolders');
 		$cardHoldersList = [];
 
-    switch($this->isResponseRc) {
+    switch ($this->isResponseRc) {
       case 0:
         $this->response->code = 0;
         foreach($response->listadoTarjetaHabientes AS $cardHolders) {
@@ -1072,7 +1039,8 @@ class Novo_Reports_Model extends NOVO_Model {
       case -150:
         $this->response->code = 0;
       break;
-    }
+		}
+
     $this->response->data['cardHoldersList'] = $cardHoldersList;
 
     return $this->responseToTheView('callWS_StatusCardHolders');
@@ -1082,13 +1050,12 @@ class Novo_Reports_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO Reports Model: RechargeMade Method Initialized');
 
-		$this->className = 'com.novo.objects.TOs.RecargasRealizadasTO';
-
 		$this->dataAccessLog->modulo = 'Reportes';
 		$this->dataAccessLog->function = 'Reportes Recargas Realizadas';
 		$this->dataAccessLog->operation = 'Recargas Realizadas';
 
 		$this->dataRequest->idOperation = 'recargasRealizadas';
+		$this->dataRequest->className = 'com.novo.objects.TOs.RecargasRealizadasTO';
 		$this->dataRequest->paginaActual = 1;
 		$this->dataRequest->tamanoPagina = 10;
 		$this->dataRequest->fecha = '';
@@ -1104,10 +1071,9 @@ class Novo_Reports_Model extends NOVO_Model {
 		$response = $this->sendToService('callWs_RechargeMadeReport');
 		$rechargeMadeList = [];
 
-    switch($this->isResponseRc) {
+    switch ($this->isResponseRc) {
       case 0:
         $this->response->code = 0;
-
           $record = new stdClass();
 					$record->monthRecharge1 = $response->mesRecarga1;
 					$record->monthRecharge2 = $response->mesRecarga2;
@@ -1126,7 +1092,8 @@ class Novo_Reports_Model extends NOVO_Model {
       case -150:
         $this->response->code = 0;
       break;
-    }
+		}
+
     $this->response->data['rechargeMadeList'] = $rechargeMadeList;
 
     return $this->responseToTheView('callWS_RechargeMadeReport');
@@ -1135,13 +1102,13 @@ class Novo_Reports_Model extends NOVO_Model {
 	public function callWs_IssuedCards_Reports($dataRequest)
 	{
 		log_message('INFO', 'NOVO Reports Model: IssuedCards Method Initialized');
-		$this->className = 'com.novo.objects.MO.ListadoEmisionesMO';
 
 		$this->dataAccessLog->modulo = 'Reportes';
 		$this->dataAccessLog->function = 'buscarTarjetasEmitidas';
 		$this->dataAccessLog->operation = 'buscarTarjetasEmitidas';
 
 		$this->dataRequest->idOperation = 'buscarTarjetasEmitidas';
+		$this->dataRequest->className = 'com.novo.objects.MO.ListadoEmisionesMO';
 		$this->dataRequest->tipoConsulta = $dataRequest->radioButton;
 		$this->dataRequest->fechaMes = $dataRequest->monthYear;
 		$this->dataRequest->accodcia = $dataRequest->enterpriseCode;
@@ -1153,14 +1120,12 @@ class Novo_Reports_Model extends NOVO_Model {
     switch($this->isResponseRc) {
       case 0:
         $this->response->code = 0;
-
-          $record = new stdClass();
-					$record->lista = isset($response->lista) ? $response->lista : '';
-          array_push(
-            $issuedCardsList,
-            $record
-          );
-
+				$record = new stdClass();
+				$record->lista = isset($response->lista) ? $response->lista : '';
+				array_push(
+					$issuedCardsList,
+					$record
+				);
       break;
       case -150:
         $this->response->code = 0;
@@ -1184,23 +1149,23 @@ class Novo_Reports_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO Reports Model: userActivity Method Initialized');
 
-		$this->className = 'com.novo.objects.MO.ListadoEmpresasMO';
 		$this->dataAccessLog->modulo = 'Reportes';
 		$this->dataAccessLog->function = 'Actividad por usuario';
 		$this->dataAccessLog->operation = 'Obtener actividades por usuario';
+
 		$this->dataRequest->idOperation = 'buscarActividadesXUsuario';
+		$this->dataRequest->className = 'com.novo.objects.MO.ListadoEmpresasMO';
 		$this->dataRequest->fechaIni =  $dataRequest->fechaIni;
 		$this->dataRequest->fechaFin =  $dataRequest->fechaFin;
 		$this->dataRequest->acCodCia = $dataRequest->acCodCia;
 
 		$response = $this->sendToService('callWs_userActivity');
 
-		switch($this->isResponseRc) {
+		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
 				$user = $response;
 				$this->response->data =  (array)$user;
-
 			break;
 			case -150:
 				$this->response->code = 1;
@@ -1219,12 +1184,12 @@ class Novo_Reports_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO Reports Model: exportToExcelUserActivity Method Initialized');
 
-		$this->className = 'com.novo.objects.MO.DepositosGarantiaMO';
-
 		$this->dataAccessLog->modulo = 'Reportes';
 		$this->dataAccessLog->function = 'Actividad por usuario';
 		$this->dataAccessLog->operation = 'Obtener actividad por usuario en excel';
+
 		$this->dataRequest->idOperation = 'generarArchivoXlsActividadesXUsuario';
+		$this->dataRequest->className = 'com.novo.objects.MO.DepositosGarantiaMO';
 		$this->dataRequest->rifEmpresa = $dataRequest->rifEmpresa;
 		$this->dataRequest->fechaIni =  $dataRequest->fechaIni;
 		$this->dataRequest->fechaFin =  $dataRequest->fechaFin;
@@ -1232,28 +1197,24 @@ class Novo_Reports_Model extends NOVO_Model {
 
 		$response = $this->sendToService('callWs_exportToExcelUserActivity');
 
-		switch($this->isResponseRc) {
+		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
 				$user = $response;
 				$this->response->data =  (array)$user;
-
 			break;
-
 			case -3:
 				$this->response->code = 4;
 				$this->response->icon = lang('CONF_ICON_DANGER');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_NO_BUDGET');
 				$this->response->data['btn1']['action'] = 'close';
-
 			break;
 		}
 
 		return $this->response;
 	}
-
-		/**
+	/**
 	 * @info Método para obtener pdf de tabla cuenta maestra
 	 * @author Diego Acosta García
 	 * @date May 27, 2020
@@ -1262,12 +1223,12 @@ class Novo_Reports_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO Reports Model: exportToPDFUserActivity Method Initialized');
 
-		$this->className = 'com.novo.objects.MO.DepositosGarantiaMO';
-
 		$this->dataAccessLog->modulo = 'Reportes';
 		$this->dataAccessLog->function = 'Actividad por usuario';
 		$this->dataAccessLog->operation = 'Obtener actividad por usuario en pdf';
+
 		$this->dataRequest->idOperation = 'generarPdfActividadesXUsuario';
+		$this->dataRequest->className = 'com.novo.objects.MO.DepositosGarantiaMO';
 		$this->dataRequest->rifEmpresa = $dataRequest->rifEmpresa;
 		$this->dataRequest->fechaIni =  $dataRequest->fechaIni;
 		$this->dataRequest->fechaFin =  $dataRequest->fechaFin;
@@ -1275,19 +1236,17 @@ class Novo_Reports_Model extends NOVO_Model {
 
 		$response = $this->sendToService('callWs_exportToPDFUserActivity');
 
-		switch($this->isResponseRc) {
+		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
 				$user = $response;
 				$this->response->data =  (array)$user;
-
 			break;
 		}
 
 		return $this->response;
 	}
-
-		/**
+	/**
 	 * @info Método para obtener busqueda de estado de cuenta
 	 * @author Diego Acosta García
 	 * @date Aug 18, 2020
@@ -1296,22 +1255,26 @@ class Novo_Reports_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO Reports Model: searchStatusAccount Method Initialized');
 
-		$this->className = 'com.novo.objects.MO.EstadoCuentaMO';
-
 		$this->dataAccessLog->modulo = 'Reportes';
 		$this->dataAccessLog->function = 'movimientoEstadoCuentaDetalle';
 		$this->dataAccessLog->operation = 'movimientoEstadoCuentaDetalle';
+
 		$this->dataRequest->idOperation = 'movimientoEstadoCuentaDetalle';
-		if($dataRequest->resultByNIT === 'all'){
+		$this->dataRequest->className = 'com.novo.objects.MO.EstadoCuentaMO';
+
+		if ($dataRequest->resultByNIT === 'all') {
 			$dataRequest->resultByNIT = '';
 			$typeSearch = '0';
-		}else {
+		} else {
 			$typeSearch = '1';
 		}
+
 		$this->dataRequest->idExtPer = strtoupper($dataRequest->resultByNIT);
+
 		if(lang('CONF_INPUT_UPPERCASE') == 'ON'){
 			$this->dataRequest->idExtPer = $dataRequest->resultByNIT;
 		}
+
 		$this->dataRequest->idExtEmp = $dataRequest->enterpriseCode;
     $lastDayMonyh = date("t-m-Y", strtotime(str_replace( '/', '-', "1/".$dataRequest->initialDateAct)));
 		$this->dataRequest->fechaFin = str_replace( '-', '/', $lastDayMonyh);
@@ -1324,42 +1287,46 @@ class Novo_Reports_Model extends NOVO_Model {
 
 		$response = $this->sendToService('callWs_searchStatusAccount');
 
-		switch($this->isResponseRc) {
+		switch ($this->isResponseRc) {
 			case 0:
 				$table =[];
 				$this->response->code = 0;
-				foreach ((array)$response->listadoEstadosCuentas as $key => $val){
+
+				foreach ((array)$response->listadoEstadosCuentas as $key => $val) {
 					$table[$key] = $val;
 					$valAccountStatus[$key]= $response->listadoEstadosCuentas[$key]->listaMovimientos;
 				}
+
 				$usersData = $valAccountStatus;
 				$usersTables = [];
 				$data = [];
 
-				foreach ($usersData as $key1 => $val){
+				foreach ($usersData as $key1 => $val) {
 					$data[$key1] = $usersData[$key1];
 				}
 
-				foreach ($data as $key => $val){
-					foreach ($data[$key] as $key1 => $val){
+				foreach ($data as $key => $val) {
+					foreach ($data[$key] as $key1 => $val) {
 						$usersTables =(($data[$key])[$key1]);
 						$dataAccount = [];
 						$debit = '';
 						$credit = '';
 
-						if( lang('CONF_STATUS_ACCOUNT_ADD_COLUMNS') == 'ON' ){
+						if(lang('CONF_STATUS_ACCOUNT_ADD_COLUMNS') == 'ON') {
 							$usersTables->secuencia = $usersTables->secuence;
 							$usersTables->terminal = $usersTables->terminal;
 							$usersTables->fid = $usersTables->fid;
 						}
-						if( $usersTables->tipoTransaccion == '+' ){
+
+						if ($usersTables->tipoTransaccion == '+') {
 							$debit = $usersTables->monto;
 							$credit = '0';
-						}else{
+						} else {
 							$credit = $usersTables->monto;
 							$debit = '0';
 						}
-						$objUserData[$key] =[
+
+						$objUserData[$key] = [
 							'secuence' => "",
 							'terminal' => "",
 							'fid' => "",
@@ -1379,6 +1346,7 @@ class Novo_Reports_Model extends NOVO_Model {
 					($dataAccount[$key])['client'] = $response->listadoEstadosCuentas[$key]->cliente;
 					($dataAccount[$key])['id'] = $response->listadoEstadosCuentas[$key]->idExtPer;
 				}
+
 				$this->response->data['users'] = $data;
 				$this->response->data['accounts'] = $dataAccount;
 			break;
@@ -1396,8 +1364,7 @@ class Novo_Reports_Model extends NOVO_Model {
 
 		return $this->responseToTheView('callWs_searchStatusAccount');
 	}
-
-			/**
+	/**
 	 * @info Método para obtener EXCEL de estado de cuenta
 	 * @author Diego Acosta García
 	 * @date Aug 18, 2020
@@ -1406,18 +1373,20 @@ class Novo_Reports_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO Reports Model: statusAccountExcelFile Method Initialized');
 
-		$this->className = 'com.novo.objects.MO.EstadoCuentaMO';
-
 		$this->dataAccessLog->modulo = 'Reportes';
 		$this->dataAccessLog->function = 'generaArchivoXlsEdoCta';
 		$this->dataAccessLog->operation = 'generaArchivoXlsEdoCta';
+
 		$this->dataRequest->idOperation = 'generaArchivoXlsEdoCta';
-		if($dataRequest->resultByNIT === 'all'){
+		$this->dataRequest->className = 'com.novo.objects.MO.EstadoCuentaMO';
+
+		if ($dataRequest->resultByNIT === 'all') {
 			$dataRequest->resultByNIT = '';
 			$typeSearch = '0';
-		}else {
+		} else {
 			$typeSearch = '1';
 		}
+
 		$this->dataRequest->idExtEmp = $dataRequest->enterpriseCode;
 		$this->dataRequest->idExtPer = $dataRequest->resultByNIT;
     $lastDayMonyh = date("t-m-Y", strtotime(str_replace( '/', '-', "1/".$dataRequest->initialDateAct)));
@@ -1433,7 +1402,7 @@ class Novo_Reports_Model extends NOVO_Model {
 
 		$response = $this->sendToService('callWs_statusAccountExcelFile');
 
-		switch($this->isResponseRc) {
+		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
 				$this->response->data = (array)$response;
@@ -1448,8 +1417,7 @@ class Novo_Reports_Model extends NOVO_Model {
 
 		return $this->responseToTheView('callWs_statusAccountExcelFile');
 	}
-
-		/**
+	/**
 	 * @info Método para obtener PDF de estado de cuenta
 	 * @author Diego Acosta García
 	 * @date Aug 18, 2020
@@ -1458,18 +1426,20 @@ class Novo_Reports_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO Reports Model: statusAccountpdfFile Method Initialized');
 
-		$this->className = 'com.novo.objects.MO.EstadoCuentaMO';
-
 		$this->dataAccessLog->modulo = 'Reportes';
 		$this->dataAccessLog->function = 'generarComprobante';
 		$this->dataAccessLog->operation = 'generarComprobante';
+
 		$this->dataRequest->idOperation = 'generarComprobante';
-		if($dataRequest->resultByNIT === 'all'){
+		$this->dataRequest->className = 'com.novo.objects.MO.EstadoCuentaMO';
+
+		if ($dataRequest->resultByNIT === 'all') {
 			$dataRequest->resultByNIT = '';
 			$typeSearch = '0';
-		}else {
+		} else {
 			$typeSearch = '1';
 		}
+
 		$this->dataRequest->idExtEmp = $dataRequest->enterpriseCode;
 		$this->dataRequest->idExtPer = $dataRequest->resultByNIT;
     $lastDayMonyh = date("t-m-Y", strtotime(str_replace( '/', '-', "1/".$dataRequest->initialDateAct)));
@@ -1485,7 +1455,7 @@ class Novo_Reports_Model extends NOVO_Model {
 
 		$response = $this->sendToService('callWs_statusAccountPdfFile');
 
-		switch($this->isResponseRc) {
+		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
 				$this->response->data = (array)$response;

@@ -91,11 +91,11 @@
 					<table id="resultsRecharge" class="cell-border h6 display responsive w-100">
 						<thead class="bg-primary secondary regular">
 							<tr>
-								<th><?= lang('GEN_PRODUCT'); ?></th>
+								<th id="product"></th>
 								<th id="month1"></th>
 								<th id="month2"></th>
 								<th id="month3"></th>
-								<th><?= lang('GEN_TABLE_TOTAL'); ?></th>
+								<th id="total"></th>
 							</tr>
 						</thead>
 						<tbody>

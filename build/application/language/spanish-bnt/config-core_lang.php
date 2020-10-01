@@ -9,6 +9,7 @@ $lang['CONF_SINGLE_SIGN_ON'] = 'loginFull';
 //SIGNIN
 $lang['CONF_SIGNIN_IMG'] = 'ON';
 $lang['CONF_SIGNIN_WIDGET_CONTACT'] = 'OFF';
+$lang['CONFIG_PASS_EXPIRED'] = 'OFF';
 //RECOVER ACCESS
 $lang['CONF_RECOV_PASS'] = 'ON';
 $lang['CONF_RECOV_ACCESS'] = 'OFF';
