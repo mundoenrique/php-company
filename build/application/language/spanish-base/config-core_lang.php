@@ -3,6 +3,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $lang['CONF_VIEW_SUFFIX'] = '-core';
 //SUPPORT IE 11
 $lang['CONF_SUPPORT_IE'] = 'OFF';
+//AGENT INFO
+$lang['CONF_AGEN_INFO'] = 'OFF';
 //SCORE RECAPTCHA
 $lang['CONF_SCORE_CAPTCHA'] = [
 	'development' => 0,
