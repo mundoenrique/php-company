@@ -107,7 +107,7 @@ class Request_Data {
 							if(!$filters->FIRST['active']) {
 								$filters->FIRST['active'] = TRUE;
 							}
-							break;
+						break;
 						case strpos('DEFG', $cat) !== FALSE:
 							if($itemAlphaBeSec > $enterpriseArgs->sizePage) {
 								$itemAlphaBeSec = 1; 	$pageAlphaBeSec++;
@@ -119,7 +119,7 @@ class Request_Data {
 							if(!$filters->SECOND['active']) {
 								$filters->SECOND['active'] = TRUE;
 							}
-							break;
+						break;
 						case strpos('HIJK', $cat) !== FALSE:
 							if($itemAlphaBeTh > $enterpriseArgs->sizePage) {
 								$itemAlphaBeTh = 1; 	$pageAlphaBeTh++;
@@ -131,7 +131,7 @@ class Request_Data {
 							if(!$filters->THIRD['active']) {
 								$filters->THIRD['active'] = TRUE;
 							}
-							break;
+						break;
 						case strpos('LMNO', $cat) !== FALSE:
 							if($itemAlphaBeFo > $enterpriseArgs->sizePage) {
 								$itemAlphaBeFo = 1; 	$pageAlphaBeFo++;
@@ -143,7 +143,7 @@ class Request_Data {
 							if(!$filters->FOURTH['active']) {
 								$filters->FOURTH['active'] = TRUE;
 							}
-							break;
+						break;
 						case strpos('PQRS', $cat) !== FALSE:
 							if($itemAlphaBeFi > $enterpriseArgs->sizePage) {
 								$itemAlphaBeFi = 1; 	$pageAlphaBeFif++;
@@ -155,7 +155,7 @@ class Request_Data {
 							if(!$filters->FIFTH['active']) {
 								$filters->FIFTH['active'] = TRUE;
 							}
-							break;
+						break;
 						case strpos('TUVW', $cat) !== FALSE:
 							if($itemAlphaBeSi > $enterpriseArgs->sizePage) {
 								$itemAlphaBeSi = 1; 	$pageAlphaBeSi++;
@@ -167,7 +167,7 @@ class Request_Data {
 							if(!$filters->SIXTH['active']) {
 								$filters->SIXTH['active'] = TRUE;
 							}
-							break;
+						break;
 						case strpos('XYZ', $cat) !== FALSE:
 							if($itemAlphaBeSev > $enterpriseArgs->sizePage) {
 								$itemAlphaBeSev = 1; 	$pageAlphaBeSev++;
@@ -179,7 +179,7 @@ class Request_Data {
 							if(!$filters->SEVENTH['active']) {
 								$filters->SEVENTH['active'] = TRUE;
 							}
-							break;
+						break;
 					}
 				}
 

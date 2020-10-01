@@ -157,12 +157,14 @@ class Novo_Business_Model extends NOVO_Model {
 
 				foreach($response->lista AS $pos => $branchs) {
 					$branch = [];
+
 					if($select) {
 						$branch['key'] = $response->lista[$pos]->cod;
 						$branch['text'] = ucfirst(mb_strtolower($response->lista[$pos]->nomb_cia));
 						$branchOffice[] = (object) $branch;
 						continue;
 					}
+
 					$branch['idFiscal'] = $response->lista[$pos]->rif;
 					$branch['name'] = mb_strtoupper($response->lista[$pos]->nomb_cia);
 					$branchOffice[] = (object) $branch;
