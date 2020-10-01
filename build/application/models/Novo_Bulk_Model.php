@@ -21,12 +21,12 @@ class Novo_Bulk_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO Bulk Model: getPendingBulk Method Initialized');
 
-		$this->className = 'com.novo.objects.MO.ConfirmarLoteMO';
 		$this->dataAccessLog->modulo = 'Lotes';
 		$this->dataAccessLog->function = 'Cargar Lotes';
 		$this->dataAccessLog->operation = 'Lotes por confirmar';
 
 		$this->dataRequest->idOperation = 'buscarLotesPorConfirmar';
+		$this->dataRequest->className = 'com.novo.objects.MO.ConfirmarLoteMO';
 		$this->dataRequest->lotesTO = [
 			'idEmpresa' => $this->session->enterpriseInf->idFiscal,
 			'codCia' => $this->session->enterpriseInf->enterpriseCode,
@@ -98,12 +98,12 @@ class Novo_Bulk_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO Bulk Model: getTypeLots Method Initialized');
 
-		$this->className = 'com.novo.objects.MO.ConfirmarLoteMO';
 		$this->dataAccessLog->modulo = 'Lotes';
 		$this->dataAccessLog->function = 'Cargar Lotes';
 		$this->dataAccessLog->operation = 'Obtener tipos lote';
 
 		$this->dataRequest->idOperation = 'consultarTipoLote';
+		$this->dataRequest->className = 'com.novo.objects.MO.ConfirmarLoteMO';
 		$this->dataRequest->lotesTO = [
 			'codProducto' => $this->session->productInf->productPrefix
 		];
@@ -164,12 +164,12 @@ class Novo_Bulk_Model extends NOVO_Model {
 		$this->sendFile($dataRequest->fileName, 'LoadBulk');
 
 		if ($this->isResponseRc === 0) {
-			$this->className = 'com.novo.objects.MO.ConfirmarLoteMO';
 			$this->dataAccessLog->modulo = 'Lotes';
 			$this->dataAccessLog->function = 'Cargar Lotes';
 			$this->dataAccessLog->operation = 'Mover Archivo';
 
 			$this->dataRequest->idOperation = 'cargarArchivo';
+			$this->dataRequest->className = 'com.novo.objects.MO.ConfirmarLoteMO';
 			$this->dataRequest->lotesTO = [
 				'codProducto' => $this->session->productInf->productPrefix,
 				'formato' => $dataRequest->fileExt,
@@ -260,13 +260,13 @@ class Novo_Bulk_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO Bulk Model: DeleteNoConfirmBulk Method Initialized');
 
-		$this->className = 'com.novo.objects.MO.ConfirmarLoteMO';
 		$this->dataAccessLog->modulo = 'Lotes';
 		$this->dataAccessLog->function = 'Cargar lotes';
 		$this->dataAccessLog->operation = 'Eliminar lote no confirmado';
 
 		unset($dataRequest->modalReq);
 		$this->dataRequest->idOperation = 'eliminarLoteNoConfirmado';
+		$this->dataRequest->className = 'com.novo.objects.MO.ConfirmarLoteMO';
 		$this->dataRequest->lotesTO = [
 			'idTicket' => $dataRequest->bulkTicked,
 			'idLote' => $dataRequest->bulkId
@@ -321,12 +321,12 @@ class Novo_Bulk_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO Bulk Model: GetDetailBulk Method Initialized');
 
-		$this->className = 'com.novo.objects.MO.ConfirmarLoteMO';
 		$this->dataAccessLog->modulo = 'Lotes';
 		$this->dataAccessLog->function = 'Cargar Lotes';
 		$this->dataAccessLog->operation = 'Detalle del lote';
 
 		$this->dataRequest->idOperation = 'verDetalleBandeja';
+		$this->dataRequest->className = 'com.novo.objects.MO.ConfirmarLoteMO';
 		$this->dataRequest->lotesTO = [
 			'idTicket' => $dataRequest->bulkTicked
 		];
@@ -400,7 +400,6 @@ class Novo_Bulk_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO Bulk Model: ConfirmBulk Method Initialized');
 
-		$this->className = 'com.novo.objects.MO.ConfirmarLoteMO';
 		$this->dataAccessLog->modulo = 'Lotes';
 		$this->dataAccessLog->function = 'Validar Lote';
 		$this->dataAccessLog->operation = 'Confirmar Lote';
@@ -411,7 +410,9 @@ class Novo_Bulk_Model extends NOVO_Model {
 		$bulkConfirmInfo->conceptoAbono = !isset($dataRequest->paymentConcept) ?: $dataRequest->paymentConcept;
 		$bulkConfirmInfo->codCia = $this->session->enterpriseInf->enterpriseCode;
 
-		$this->dataRequest->idOperation = $bulkConfirmInfo->idTipoLote == 'L' && $this->country != 'Ec-bp' ? 'reprocesarLoteGeneral' :'confirmarLote';
+		$this->dataRequest->idOperation = $bulkConfirmInfo->idTipoLote == 'L' && lang('CONF_BULK_REPROCESS') == 'ON' ? 'reprocesarLoteGeneral'
+			: 'confirmarLote';
+		$this->dataRequest->className = 'com.novo.objects.MO.ConfirmarLoteMO';
 		$this->dataRequest->lotesTO = $bulkConfirmInfo;
 		$password = json_decode(base64_decode($dataRequest->pass));
 		$password = $this->cryptography->decrypt(
@@ -500,12 +501,12 @@ class Novo_Bulk_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO Bulk Model: AuthorizeBulkList Method Initialized');
 
-		$this->className = 'com.novo.objects.TOs.LoteTO';
 		$this->dataAccessLog->modulo = 'Lotes';
 		$this->dataAccessLog->function = 'Autorización de lotes';
 		$this->dataAccessLog->operation = 'Lista de lotes por autorizar';
 
 		$this->dataRequest->idOperation = 'cargarAutorizar';
+		$this->dataRequest->className = 'com.novo.objects.TOs.LoteTO';
 		$this->dataRequest->accodcia = $this->session->enterpriseInf->enterpriseCode;
 		$this->dataRequest->accodgrupo = $this->session->enterpriseInf->enterpriseGroup;
 		$this->dataRequest->acrif = $this->session->enterpriseInf->idFiscal;
@@ -542,7 +543,6 @@ class Novo_Bulk_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO Bulk Model: SignBulkList Method Initialized');
 
-		$this->className = 'com.novo.objects.MO.ListadoLotesMO';
 		$this->dataAccessLog->modulo = 'Lotes';
 		$this->dataAccessLog->function = 'Autorización de lotes';
 		$this->dataAccessLog->operation = 'Firmar lote';
@@ -571,6 +571,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 		}
 
 		$this->dataRequest->idOperation = 'firmarLote';
+		$this->dataRequest->className = 'com.novo.objects.MO.ListadoLotesMO';
 		$this->dataRequest->lista = $signListBulk;
 		$this->dataRequest->usuario = [
 			'userName' => $this->userName,
@@ -606,7 +607,6 @@ class Novo_Bulk_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO Bulk Model: DeleteConfirmBulk Method Initialized');
 
-		$this->className = 'com.novo.objects.MO.AutorizarLoteMO';
 		$this->dataAccessLog->modulo = 'Lotes';
 		$this->dataAccessLog->function = 'Autorización de lotes';
 		$this->dataAccessLog->operation = 'Eliminar lote';
@@ -635,6 +635,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 		}
 
 		$this->dataRequest->idOperation = 'eliminarLotesPorAutorizar';
+		$this->dataRequest->className = 'com.novo.objects.MO.AutorizarLoteMO';
 		$this->dataRequest->listaLotes = [
 			'lista' => $deleteListBulk
 		];
@@ -677,7 +678,6 @@ class Novo_Bulk_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO Bulk Model: DisassConfirmBulk Method Initialized');
 
-		$this->className = 'com.novo.objects.MO.ListadoLotesMO';
 		$this->dataAccessLog->modulo = 'Lotes';
 		$this->dataAccessLog->function = 'Autorización de lotes';
 		$this->dataAccessLog->operation = 'Desasociar firma';
@@ -706,6 +706,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 		}
 
 		$this->dataRequest->idOperation = 'desasociarFirma';
+		$this->dataRequest->className = 'com.novo.objects.MO.ListadoLotesMO';
 		$this->dataRequest->lista = $disassListBulk;
 		$this->dataRequest->usuario = [
 			'userName' => $this->userName,
@@ -746,7 +747,6 @@ class Novo_Bulk_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO Bulk Model: AuthorizeBulk Method Initialized');
 
-		$this->className = 'com.novo.objects.TOs.OrdenServicioTO';
 		$this->dataAccessLog->modulo = 'Lotes';
 		$this->dataAccessLog->function = 'Autorización de lotes';
 		$this->dataAccessLog->operation = 'Calcular orden de servicio';
@@ -772,6 +772,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 		}
 
 		$this->dataRequest->idOperation = 'calcularOS';
+		$this->dataRequest->className = 'com.novo.objects.TOs.OrdenServicioTO';
 		$this->dataRequest->datosEmpresa = [
 			'acrif' => $this->session->enterpriseInf->idFiscal
 		];
@@ -950,7 +951,6 @@ class Novo_Bulk_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO Bulk Model: ServiceOrder Method Initialized');
 
-		$this->className = 'com.novo.objects.MO.ListadoOrdenServicioMO';
 		$this->dataAccessLog->modulo = 'Lotes';
 		$this->dataAccessLog->function = 'Orden de servicio';
 		$this->dataAccessLog->operation = 'Generar orden de servicio';
@@ -979,6 +979,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 		}
 
 		$this->dataRequest->idOperation = 'generarOS';
+		$this->dataRequest->className = 'com.novo.objects.MO.ListadoOrdenServicioMO';
 		$this->dataRequest->rifEmpresa = $this->session->enterpriseInf->idFiscal;
 		$this->dataRequest->lista = $listTemp;
 		$this->dataRequest->lotesNF = $listTempNoBill;
@@ -1095,7 +1096,6 @@ class Novo_Bulk_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO Bulk Model: cancelServiceOrder Method Initialized');
 
-		$this->className = 'com.novo.objects.MO.ListadoOrdenServicioMO';
 		$this->dataAccessLog->modulo = 'Lotes';
 		$this->dataAccessLog->function = 'Orden de servicio';
 		$this->dataAccessLog->operation = 'Cancelar orden de servicio';
@@ -1113,6 +1113,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 		}
 
 		$this->dataRequest->idOperation = 'cancelarOS';
+		$this->dataRequest->className = 'com.novo.objects.MO.ListadoOrdenServicioMO';
 		$this->dataRequest->lista = $listTemp;
 		$this->dataRequest->lotesNF[] = [
 			'accodcia' => $this->session->enterpriseInf->enterpriseCode,
@@ -1237,7 +1238,6 @@ class Novo_Bulk_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO Bulk Model: UnnamedRequest Method Initialized');
 
-		$this->className = 'com.novo.objects.MO.ListadoSucursalesMO';
 		$this->dataAccessLog->modulo = 'lotes';
 		$this->dataAccessLog->function = 'Innominadas';
 		$this->dataAccessLog->operation = 'Solictud de cuentas innominadas';
@@ -1263,6 +1263,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 		$startingLine2 = isset($dataRequest->startingLine2) ?
 			implode(' ',array_filter(explode(' ', ucfirst(mb_strtolower($dataRequest->startingLine2))))) : '';
 		$this->dataRequest->idOperation = 'createCuentasInnominadas';
+		$this->dataRequest->className = 'com.novo.objects.MO.ListadoSucursalesMO';
 		$this->dataRequest->lotesTO = [
 			'usuario' => $this->userName,
 			'idEmpresa' => $this->session->enterpriseInf->idFiscal,
@@ -1320,7 +1321,6 @@ class Novo_Bulk_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO Bulk Model: unnamedAffiliate Method Initialized');
 
-		$this->className = 'com.novo.objects.MO.ListadoLotesMO';
 		$this->dataAccessLog->modulo = 'lotes';
 		$this->dataAccessLog->function = 'Innominadas';
 		$this->dataAccessLog->operation = 'Afiliación de cuentas innominadas';
@@ -1329,6 +1329,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 		$finalDate = $dataRequest->finalDate != '' ? convertDate($dataRequest->finalDate) : '';
 
 		$this->dataRequest->idOperation = 'getListadoLotes';
+		$this->dataRequest->className = 'com.novo.objects.MO.ListadoLotesMO';
 		$this->dataRequest->dtfechorcargaIni = $initialDate;
 		$this->dataRequest->dtfechorcargaFin = $finalDate;
 		$this->dataRequest->nombreEmpresa = '';
@@ -1394,12 +1395,12 @@ class Novo_Bulk_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO Bulk Model: unnmamedDetail Method Initialized');
 
-		$this->className = 'com.novo.objects.MO.ListadoLotesMO';
 		$this->dataAccessLog->modulo = 'lotes';
 		$this->dataAccessLog->function = 'Innominadas';
 		$this->dataAccessLog->operation = 'Detalle de lote';
 
 		$this->dataRequest->idOperation = 'getListadoTarjetasInnominadas';
+		$this->dataRequest->className = 'com.novo.objects.MO.ListadoLotesMO';
 		$this->dataRequest->idProducto = $this->session->productInf->productPrefix;
 		$this->dataRequest->tarjetasInnominadas = [
 			[
