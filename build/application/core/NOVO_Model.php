@@ -40,10 +40,19 @@ class NOVO_Model extends CI_Model {
 
 		$this->accessLog = accessLog($this->dataAccessLog);
 		$this->userName = $this->userName ?: mb_strtoupper($this->dataAccessLog->userName);
+		$device = 'desktop';
 
 		$this->dataRequest->pais = $this->country;
 		$this->dataRequest->token = $this->token;
 		$this->dataRequest->autoLogin = $this->autoLogin;
+
+		if (lang('CONF_AGEN_INFO') == 'ON') {
+			$this->dataRequest->aplicacion = $this->session->enterpriseInf->thirdApp ?? '';
+			$this->dataRequest->dispositivo = $this->agent->is_mobile() ? 'mobile' : 'desktop';
+			$this->dataRequest->marca = $this->agent->is_mobile() ? $this->agent->mobile() : '';
+			$this->dataRequest->navegador = $this->agent->browser().' V-'.floatval($this->agent->version());
+		}
+
 		$this->dataRequest->logAccesoObject = $this->accessLog;
 		$encryptData = $this->encrypt_connect->encode($this->dataRequest, $this->userName, $model);
 		$request = ['bean'=> $encryptData, 'pais'=> $this->country];
