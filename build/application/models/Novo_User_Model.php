@@ -63,7 +63,7 @@ class Novo_User_Model extends NOVO_Model {
 				$response = $this->sendToService('callWs_Login');
 			}
 
-			if(in_array($this->config->item('client'), ['banco-bog']) && ($this->isResponseRc == -2 || $this->isResponseRc == -185)) {
+			if(lang('CONFIG_PASS_EXPIRED') == 'OFF' && ($this->isResponseRc == -2 || $this->isResponseRc == -185)) {
 				$this->isResponseRc = 0;
 			}
 
