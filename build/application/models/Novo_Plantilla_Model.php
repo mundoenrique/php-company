@@ -16,10 +16,9 @@ class Novo_Plantilla_Model extends NOVO_Model {
 	 * @info Método para
 	 * @author
 	 */
-	public function callWs_Plantilla_User($dataRequest)
+	public function callWs_Plantilla_Plantilla($dataRequest)
 	{
 		log_message('INFO', 'NOVO Plantilla Model: Plantilla Method Initialized');
-		$this->className = '';
 
 		$this->dataAccessLog->modulo = '';
 		$this->dataAccessLog->function = '';
@@ -28,6 +27,7 @@ class Novo_Plantilla_Model extends NOVO_Model {
 		$this->dataAccessLog->userName = $dataRequest->user;
 
 		$this->dataRequest->idOperation = 'id-optation';
+		$this->dataRequest->className = 'class-name';
 
 		$response = $this->sendToService('callWs_Plantilla');
 

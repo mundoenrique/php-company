@@ -3,6 +3,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $lang['CONF_VIEW_SUFFIX'] = '-core';
 //SUPPORT IE 11
 $lang['CONF_SUPPORT_IE'] = 'OFF';
+//AGENT INFO
+$lang['CONF_AGEN_INFO'] = 'OFF';
 //SCORE RECAPTCHA
 $lang['CONF_SCORE_CAPTCHA'] = [
 	'development' => 0,
@@ -32,6 +34,7 @@ $lang['CONF_SINGLE_SIGN_ON'] = 'userByToken';
 $lang['CONF_SIGIN_RECOVER_PASS'] = 'ON';
 $lang['CONF_SIGNIN_IMG'] = 'OFF';
 $lang['CONF_SIGNIN_WIDGET_CONTACT'] = 'ON';
+$lang['CONFIG_PASS_EXPIRED'] = 'ON';
 //RECOVER ACCESS
 $lang['CONF_RECOV_PASS'] = 'ON';
 $lang['CONF_RECOV_ACCESS'] = 'OFF';
@@ -41,6 +44,8 @@ $lang['CONF_BENEFITS'] = 'ON';
 $lang['CONF_BULK_LOAD'] = 'ON';
 $lang['CONF_BULK_BRANCHOFFICE'] = 'OFF';
 $lang['CONF_BULK_AUTH'] = 'ON';
+//LOAD BULK
+$lang['CONF_BULK_REPROCESS'] = 'OFF';
 //REQUEST UNNAMED
 $lang['CONF_UNNA_STARTING_LINE1'] = 'ON';
 $lang['CONF_UNNA_STARTING_LINE2'] = 'ON';
@@ -94,6 +99,8 @@ $lang['CONF_DESCRIPTION_COLUMN']= 'ON';
 $lang['CONF_DEBIT_COLUMN']= 'ON';
 $lang['CONF_CREDIT_COLUMN']= 'ON';
 $lang['CONF_STATUS_ACCOUNT_ADD_COLUMNS'] = 'ON';
+//CARDHOLDERS
+$lang['CONF_CARD_NUMBER_COLUMN']= 'OFF';
 //SETTINGS
 $lang['CONF_SETTINGS_USER'] = 'ON';
 $lang['CONF_SETTINGS_EMAIL_UPDATE'] = 'ON';
