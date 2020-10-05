@@ -602,70 +602,13 @@ $(document).ready(function () {
 									$.each(abonos, function (pos, valor) {
 										if (item.codigo == valor) {
 											td = $(document.createElement("td")).appendTo(tr);
-											a = $(document.createElement("a")).appendTo(td);
-											a.attr("paginaActual", paginaActual);
-											a.attr("tarjeta", item.tarjeta.replace(",", ""));
-											a.attr("fecha", item.fecha);
-											a.attr("referencia", item.referencia);
-											a.attr("descripcion", item.descripcion);
-											a.attr("monto", item.monto);
-											a.attr("cliente", item.cliente);
-
-											a.attr("title", "Generar comprobante de abono");
-											a.html(item.monto);
+											td.html(item.monto);
 											td.attr("id", "Datos2-short");
 											td = $(document.createElement("td")).appendTo(tr);
 											td.html("0");
 											td.attr("id", "Datos2-short");
 										}
 									});
-
-									$("table a").on('click', function () {
-
-										/*datos = {
-											empresa:filtro_busq.empresa,
-											fechaInicial:filtro_busq.fechaInicial,
-											fechaFin:filtro_busq.fechaFin,
-											cedula:filtro_busq.cedula.replace(/ /g,''),
-											paginaActual:$(this).attr("paginaActual"),
-											producto:filtro_busq.producto,
-											tipoConsulta:filtro_busq.tipoConsulta,
-											tarjeta:$(this).attr("tarjeta"),
-											fecha:$(this).attr("fecha"),
-											referencia:$(this).attr("referencia"),
-											descripcion:$(this).attr("descripcion"),
-											monto:$(this).attr("monto"),
-											nomEmpresa:filtro_busq.acnomcia.replace(","," "),
-											cliente:$(this).attr("cliente")
-										}
-
-										descargarArchivo(datos, baseURL+api+isoPais+"/reportes/EstadosdeCuentaComp", "Generar Comprobante de pago" );*/
-										var ceo_cook = decodeURIComponent(
-											document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-										);
-										$('form#formulario').empty();
-										$('form#formulario').append('<input type="hidden" name="ceo_name" value="' + ceo_cook + '">');
-										$('form#formulario').append('<input type="hidden" name="empresa" value="' + filtro_busq.empresa + '" />');
-										$('form#formulario').append('<input type="hidden" name="fechaInicial" value="' + filtro_busq.fechaInicial + '" />');
-										$('form#formulario').append('<input type="hidden" name="fechaFin" value="' + filtro_busq.fechaFin + '" />');
-										$('form#formulario').append('<input type="hidden" name="cedula" value="' + filtro_busq.cedula.replace(/ /g, '') + '" />');
-										$('form#formulario').append('<input type="hidden" name="paginaActual" value="' + 1 + '" />');
-										$('form#formulario').append('<input type="hidden" name="producto" value="' + filtro_busq.producto + '" />');
-										$('form#formulario').append('<input type="hidden" name="tarjeta" value="' + $(this).attr("tarjeta") + '" />');
-										$('form#formulario').append('<input type="hidden" name="fecha" value="' + $(this).attr("fecha") + '" />');
-										$('form#formulario').append('<input type="hidden" name="referencia" value="' + $(this).attr("referencia") + '" />');
-										$('form#formulario').append('<input type="hidden" name="descripcion" value="' + $(this).attr("descripcion") + '" />');
-										$('form#formulario').append('<input type="hidden" name="tipoConsulta" value="' + filtro_busq.tipoConsulta + '" />');
-										$('form#formulario').append('<input type="hidden" name="monto" value="' + $(this).attr("monto") + '" />');
-										$('form#formulario').append('<input type="hidden" name="nomEmpresa" value="' + filtro_busq.acnomcia.replace(",", " ") + '" />');
-										$('form#formulario').append('<input type="hidden" name="cliente" value="' + $(this).attr("cliente") + '" />');
-										$('form#formulario').attr('action', baseURL + api + isoPais + "/reportes/EstadosdeCuentaMasivo");
-										$('form#formulario').submit()
-
-
-									})
-
-
 
 									$.each(cargos, function (pos, valor) {
 										if (item.codigo == valor) {
