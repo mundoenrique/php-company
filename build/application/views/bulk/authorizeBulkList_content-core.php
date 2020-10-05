@@ -120,7 +120,7 @@
               <?php foreach($authorizeBulk AS $bulk): ?>
               <tr class="<?= $bulk->selectRow; ?>">
                 <td class="p-0 <?= $bulk->selectRow; ?>"><?= $bulk->selectRowContent; ?></td>
-                <td><?= $bulk->bulkNumber; ?></td>
+                <td class="bulk-num"><?= $bulk->bulkNumber; ?></td>
                 <td><?= $bulk->idBulk; ?></td>
                 <td><?= $bulk->loadDate; ?></td>
                 <td><?= $bulk->type; ?></td>

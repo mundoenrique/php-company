@@ -21,10 +21,10 @@ class Novo_User_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO User Model: Login Method Initialized');
 
-		$this->className = 'com.novo.objects.TOs.UsuarioTO';
 		$this->dataAccessLog->modulo = 'Usuario';
 		$this->dataAccessLog->function = 'Ingreso al sistema';
 		$this->dataAccessLog->operation = 'Iniciar sesion';
+
 		$userName = mb_strtoupper($dataRequest->user);
 		$this->dataAccessLog->userName = $userName;
 
@@ -37,6 +37,7 @@ class Novo_User_Model extends NOVO_Model {
 		$authToken_str=str_replace('"','', $authToken);
 
 		$this->dataRequest->idOperation = 'loginFull';
+		$this->dataRequest->className = 'com.novo.objects.TOs.UsuarioTO';
 		$this->dataRequest->userName = $userName;
 		$this->dataRequest->password = md5($password);
 		$this->dataRequest->ctipo = $dataRequest->active;
@@ -62,7 +63,7 @@ class Novo_User_Model extends NOVO_Model {
 				$response = $this->sendToService('callWs_Login');
 			}
 
-			if(in_array($this->config->item('client'), ['banco-bog']) && ($this->isResponseRc == -2 || $this->isResponseRc == -185)) {
+			if(lang('CONFIG_PASS_EXPIRED') == 'OFF' && ($this->isResponseRc == -2 || $this->isResponseRc == -185)) {
 				$this->isResponseRc = 0;
 			}
 
@@ -256,13 +257,13 @@ class Novo_User_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO User Model: SingleSignon Method Initialized');
 
-		$this->className = 'com.novo.objects.TOs.RequestTO';
 		$this->dataAccessLog->modulo = 'Usuario';
 		$this->dataAccessLog->function = 'Ingreso al sistema';
 		$this->dataAccessLog->operation = 'Inicio de sesión único';
 		$this->dataAccessLog->userName = $this->country;
 
 		$this->dataRequest->idOperation = lang('CONF_SINGLE_SIGN_ON');
+		$this->dataRequest->className = 'com.novo.objects.TOs.RequestTO';
 		$this->token = $dataRequest->sessionId ?? $dataRequest->clave;
 
 		switch ($this->country) {
@@ -348,7 +349,6 @@ class Novo_User_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO User Model: RecoverPass Method Initialized');
 
-		$this->className = 'com.novo.objects.TO.UsuarioTO';
 		$this->dataAccessLog->modulo = 'Usuario';
 		$this->dataAccessLog->function = 'Recuperar Clave';
 		$this->dataAccessLog->operation = 'Enviar Clave';
@@ -356,6 +356,7 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataAccessLog->userName = $userName;
 
 		$this->dataRequest->idOperation = 'olvidoClave';
+		$this->dataRequest->className = 'com.novo.objects.TO.UsuarioTO';
 		$this->dataRequest->userName = $userName;
 		$this->dataRequest->idEmpresa = $dataRequest->idEmpresa;
 		$this->dataRequest->email = $dataRequest->email;
@@ -419,7 +420,6 @@ class Novo_User_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO User Model: RecoverAccess Method Initialized');
 
-		$this->className = 'com.novo.objects.MO.GenericBusinessObject';
 		$this->dataAccessLog->modulo = 'Usuario';
 		$this->dataAccessLog->function = 'Recuperar Acceso';
 		$this->dataAccessLog->operation = 'Generar código OTP';
@@ -427,6 +427,7 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataAccessLog->userName = $userName;
 
 		$this->dataRequest->idOperation = 'genericBusiness';
+		$this->dataRequest->className = 'com.novo.objects.MO.GenericBusinessObject';
 		$this->dataRequest->userName = $userName;
 		$this->dataRequest->tipoDocumento = $dataRequest->documentType;
 		$this->dataRequest->cedula = $dataRequest->documentId;
@@ -486,13 +487,13 @@ class Novo_User_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO User Model: ValidateOtp Method Initialized');
 
-		$this->className = 'com.novo.objects.MO.GenericBusinessObject';
 		$this->dataAccessLog->modulo = 'Usuario';
 		$this->dataAccessLog->function = 'Recuperar Acceso';
 		$this->dataAccessLog->operation = 'Validar código OTP';
 		$this->dataAccessLog->userName = $this->session->flashdata('userName');
 
 		$this->dataRequest->idOperation = 'genericBusiness';
+		$this->dataRequest->className = 'com.novo.objects.MO.GenericBusinessObject';
 		$this->dataRequest->userName = $this->session->flashdata('userName');
 		$this->dataRequest->opcion = 'validarOTP';
 		$this->dataRequest->TokenTO = [
@@ -565,7 +566,6 @@ class Novo_User_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO User Model: ChangePassword Method Initialized');
 
-		$this->className = 'com.novo.objects.TOs.UsuarioTO';
 		$this->dataAccessLog->modulo = 'Usuario';
 		$this->dataAccessLog->function = 'Clave';
 		$this->dataAccessLog->operation = 'Cambiar Clave';
@@ -582,6 +582,7 @@ class Novo_User_Model extends NOVO_Model {
 		);
 
 		$this->dataRequest->idOperation = 'cambioClave';
+		$this->dataRequest->className = 'com.novo.objects.TOs.UsuarioTO';
 		$this->dataRequest->userName = $this->userName;
 		$this->dataRequest->passwordOld = md5($current);
 		$this->dataRequest->password = md5($new);
@@ -652,8 +653,6 @@ class Novo_User_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO User Model: FinishSession Method Initialized');
 
-		$this->className = 'com.novo.objects.TOs.UsuarioTO';
-
 		$userName = $dataRequest ? mb_strtoupper($dataRequest->user) : $this->userName;
 
 		$this->dataAccessLog->userName = $userName;
@@ -662,6 +661,7 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataAccessLog->operation = 'Cerrar sesion';
 
 		$this->dataRequest->idOperation = 'desconectarUsuario';
+		$this->dataRequest->className = 'com.novo.objects.TOs.UsuarioTO';
 		$this->dataRequest->idUsuario = $userName;
 		$this->dataRequest->codigoGrupo = $this->session->codigoGrupo;
 

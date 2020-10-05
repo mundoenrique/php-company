@@ -2,6 +2,8 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 //SUPPORT IE 11
 $lang['CONF_SUPPORT_IE'] = 'ON';
+//AGENT INFO
+$lang['CONF_AGEN_INFO'] = 'ON';
 //VALIDATE FORMS
 $lang['CONF_VALID_POSITION'] = 'right';
 //SINGLESIGNON
@@ -9,6 +11,7 @@ $lang['CONF_SINGLE_SIGN_ON'] = 'loginFull';
 //SIGNIN
 $lang['CONF_SIGNIN_IMG'] = 'ON';
 $lang['CONF_SIGNIN_WIDGET_CONTACT'] = 'OFF';
+$lang['CONFIG_PASS_EXPIRED'] = 'OFF';
 //RECOVER ACCESS
 $lang['CONF_RECOV_PASS'] = 'ON';
 $lang['CONF_RECOV_ACCESS'] = 'OFF';

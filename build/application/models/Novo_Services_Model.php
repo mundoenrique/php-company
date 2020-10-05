@@ -20,13 +20,12 @@ class Novo_Services_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO Services Model: TransfMasterAccount Method Initialized');
 
-		$this->className = 'com.novo.objects.MO.TransferenciaMO';
-
 		$this->dataAccessLog->modulo = 'Servicios';
 		$this->dataAccessLog->function = 'Transferencia maestra';
 		$this->dataAccessLog->operation = 'Obtener lista de tarjetas';
 
 		$this->dataRequest->idOperation = 'buscarTransferenciaM';
+		$this->dataRequest->className = 'com.novo.objects.MO.TransferenciaMO';
 		$this->dataRequest->rifEmpresa = $this->session->enterpriseInf->idFiscal;
 		$this->dataRequest->idProducto = $this->session->productInf->productPrefix;
 		$idPersonal = strtoupper($dataRequest->idNumber);
@@ -122,8 +121,6 @@ class Novo_Services_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO Services Model: ActionMasterAccount Method Initialized');
 
-		$this->className = 'com.novo.objects.MO.TransferenciaMO';
-
 		$this->dataAccessLog->modulo = 'Servicios';
 		$this->dataAccessLog->function = 'Transferencia maestra';
 
@@ -183,6 +180,7 @@ class Novo_Services_Model extends NOVO_Model {
 			break;
 		}
 
+		$this->dataRequest->className = 'com.novo.objects.MO.TransferenciaMO';
 		$this->dataRequest->rifEmpresa = $this->session->enterpriseInf->idFiscal;
 		$this->dataRequest->idProducto = $this->session->productInf->productPrefix;
 		$this->dataRequest->listaTarjetas = [
@@ -336,7 +334,8 @@ class Novo_Services_Model extends NOVO_Model {
 			break;
 			case -429:
 				$this->response->title = $dataRequest->action;
-				$this->response->msg = novoLang(lang('SERVICES_CARD_BULK_AFFILIATED'), $cardsList[0]['noTarjeta']);
+				$maskCards = maskString($cardsList[0]['noTarjetaAsig'], 4, 6);
+				$this->response->msg = novoLang(lang('SERVICES_CARD_BULK_AFFILIATED'), $maskCards);
 				$this->response->icon = lang('CONF_ICON_WARNING');
 				$this->response->data['btn1']['action'] = 'close';
 			break;
@@ -371,13 +370,12 @@ class Novo_Services_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'Novo Services Model: CardsInquiry Method Initialized');
 
-		$this->className = 'com.novo.objects.MO.ListadoEmisionesMO';
-
 		$this->dataAccessLog->modulo = 'Servicios';
 		$this->dataAccessLog->function = 'Consulta de tarjetas';
 		$this->dataAccessLog->operation = isset($dataRequest->action) ? 'Descargar archivo' : 'Obtener lista de tarjetas';
 
 		$this->dataRequest->idOperation = isset($dataRequest->action) ? 'buscarTarjetasEmitidasExcel' : 'buscarTarjetasEmitidas';
+		$this->dataRequest->className = 'com.novo.objects.MO.ListadoEmisionesMO';
 		$this->dataRequest->rifEmpresa = $this->session->enterpriseInf->idFiscal;
 		$this->dataRequest->accodcia = $this->session->enterpriseInf->enterpriseCode;
 		$this->dataRequest->idProducto = $this->session->productInf->productPrefix;
@@ -480,7 +478,7 @@ class Novo_Services_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO Services Model: InquiriesActions Method Initialized');
 
-		$this->className = 'com.novo.objects.MO.SeguimientoLoteMO';
+		$className = 'com.novo.objects.MO.SeguimientoLoteMO';
 
 		$this->dataAccessLog->modulo = 'Servicios';
 		$this->dataAccessLog->function = 'Consulta de tarjetas';
@@ -490,7 +488,7 @@ class Novo_Services_Model extends NOVO_Model {
 			case 'INQUIRY_BALANCE':
 			case 'LOCK_CARD':
 			case 'UNLOCK_CARD':
-				$this->className = 'com.novo.business.lote.seguimiento.resources.NovoBusinessOperacionSeguimientoWS';
+				$className = 'com.novo.business.lote.seguimiento.resources.NovoBusinessOperacionSeguimientoWS';
 			break;
 			case 'UPDATE_DATA':
 			case 'DELIVER_TO_CARDHOLDER':
@@ -535,6 +533,7 @@ class Novo_Services_Model extends NOVO_Model {
 		}
 
 		$this->dataRequest->idOperation = 'operacionSeguimientoLoteCeo';
+		$this->dataRequest->className = $className;
 		$this->dataRequest->items = $dataList;
 		$this->dataRequest->usuario = [
 			'userName' => $this->session->userName,
@@ -562,7 +561,7 @@ class Novo_Services_Model extends NOVO_Model {
 					foreach ($responseList AS $cards) {
 						$record = new stdClass();
 						$record->cardNumber = substr($cards->numeroTarjeta, -6);
-						$record->balance = isset($cards->saldo) ?  lang('GEN_CURRENCY').' '.$cards->saldo : '--';
+						$record->balance = isset($cards->saldo) ?  lang('GEN_CURRENCY').' '.currencyformat($cards->saldo) : '--';
 						$balanceList[] = $record;
 
 						if ($cards->rcNovoTrans != '0') {
@@ -614,11 +613,12 @@ class Novo_Services_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO Services Model: commercialTwirls Method Initialized');
 
-		$this->className = 'com.novo.objects.MO.GiroComercialMO';
-
 		$this->dataAccessLog->modulo = 'servicios';
 		$this->dataAccessLog->function = 'custom_mcc';
 		$this->dataAccessLog->operation = 'customMcc';
+
+		$this->dataRequest->idOperation = 'customMcc';
+		$this->dataRequest->className = 'com.novo.objects.MO.GiroComercialMO';
 		$this->dataRequest->opcion = 'find_mcc';
 		$this->dataRequest->companyId = $this->session->enterpriseInf->idFiscal;
 		$this->dataRequest->product = $this->session->productInf->productPrefix;
@@ -627,13 +627,11 @@ class Novo_Services_Model extends NOVO_Model {
 			'rc' => 0]
 		];
 		$this->dataRequest->usuario = [
-		'userName' => $this->session->userName,
-		'envioCorreoLogin'=> false,
-		'guardaIp' => false,
-		'rc' => 0
-	];
-
-		$this->dataRequest->idOperation = 'customMcc';
+			'userName' => $this->session->userName,
+			'envioCorreoLogin'=> false,
+			'guardaIp' => false,
+			'rc' => 0
+		];
 
 		$response = $this->sendToService('callWs_commercialTwirls');
 
@@ -666,20 +664,20 @@ class Novo_Services_Model extends NOVO_Model {
 				switch ($response->bean->cards[0]->rc) {
 					case -266:
 						$this->response->msg = 	novoLang(lang('SERVICES_TWIRLS_TEMPORARY_BLOCKED_CARD'), maskString( $dataRequest->cardNumber, 4, 6));
-						break;
+					break;
 					case -307:
 						$this->response->msg = 	novoLang(lang('SERVICES_TWIRLS_PERMANENT_BLOCKED_CARD'), maskString( $dataRequest->cardNumber, 4, 6));
-						break;
+					break;
 					case -439:
 						$this->response->msg = 	novoLang(lang('SERVICES_TWIRLS_NO_FOUND_REGISTRY'), maskString( $dataRequest->cardNumber, 4, 6));
-						break;
+					break;
 					case -440:
 					case -441:
 						$this->response->msg = 	novoLang(lang('SERVICES_TWIRLS_NO_AVAILABLE_CARD'), maskString( $dataRequest->cardNumber, 4, 6));
-						break;
+					break;
 					case -197:
 						$this->response->msg = 	novoLang(lang('SERVICES_TWIRLS_EXPIRED_CARD'), maskString( $dataRequest->cardNumber, 4, 6));
-						break;
+					break;
 				}
       break;
 		}
@@ -697,11 +695,12 @@ class Novo_Services_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO Services Model: updateCommercialTwirls Method Initialized');
 
-		$this->className = 'com.novo.objects.MO.GiroComercialMO';
-
 		$this->dataAccessLog->modulo = 'servicios';
 		$this->dataAccessLog->function = 'custom_mcc';
 		$this->dataAccessLog->operation = 'customMcc';
+
+		$this->dataRequest->idOperation = 'customMcc';
+		$this->dataRequest->className = 'com.novo.objects.MO.GiroComercialMO';
 		$this->dataRequest->opcion = 'act_mcc';
 		$this->dataRequest->companyId = $this->session->enterpriseInf->idFiscal;
 		$this->dataRequest->product = $this->session->productInf->productPrefix;
@@ -724,15 +723,13 @@ class Novo_Services_Model extends NOVO_Model {
 		}
 
 		$this->dataRequest->usuario = [
-		'userName' => $this->session->userName,
-		'password' => $password,
-		'envioCorreoLogin'=> false,
-		'guardaIp' => false,
-		'isDriver' => 0,
-		'rc' => 0
+			'userName' => $this->session->userName,
+			'password' => $password,
+			'envioCorreoLogin'=> false,
+			'guardaIp' => false,
+			'isDriver' => 0,
+			'rc' => 0
 		];
-
-		$this->dataRequest->idOperation = 'customMcc';
 
 		$response = $this->sendToService('callWs_updateCommercialTwirls');
 
@@ -771,21 +768,21 @@ class Novo_Services_Model extends NOVO_Model {
 
 		return $this->responseToTheView('callWs_updateCommercialTwirls');
 	}
-		/**
+	/**
 	 * @info Método para obtener formulario limites transaccionales
 	 * @author Diego Acosta García
 	 * @date July 21th, 2020
 	 */
-
 	public function callWs_transactionalLimits_Services($dataRequest)
 	{
 		log_message('INFO', 'NOVO Services Model: transactionalLimits Method Initialized');
 
-		$this->className = 'com.novo.objects.TO.LimitesTO';
-
 		$this->dataAccessLog->modulo = 'Servicios';
 		$this->dataAccessLog->function = 'Limites';
 		$this->dataAccessLog->operation = 'Consultar Limites de tarjeta';
+
+		$this->dataRequest->idOperation = 'consultarLimites';
+		$this->dataRequest->className = 'com.novo.objects.TO.LimitesTO';
 		$this->dataRequest->opcion = 'consultar';
 		$this->dataRequest->idEmpresa = $this->session->enterpriseInf->idFiscal;
 		$this->dataRequest->prefix = $this->session->productInf->productPrefix;
@@ -797,10 +794,8 @@ class Novo_Services_Model extends NOVO_Model {
 			]
 		];
 		$this->dataRequest->usuario = [
-		'userName' => $this->session->userName
-	];
-
-		$this->dataRequest->idOperation = 'consultarLimites';
+			'userName' => $this->session->userName
+		];
 
 		$response = $this->sendToService('callWs_transactionalLimits');
 
@@ -871,32 +866,35 @@ class Novo_Services_Model extends NOVO_Model {
 
 		return $this->responseToTheView('callWs_transactionalLimits');
 	}
-		/**
+	/**
 	 * @info Método para la actualizacion de limites transaccionales
 	 * @author Diego Acosta García
 	 * @date July 21th, 2020
 	 */
-
 	public function callWs_updateTransactionalLimits_Services($dataRequest)
 	{
 		log_message('INFO', 'NOVO Services Model: updateTransactionalLimits Method Initialized');
 
-		$this->className = 'com.novo.objects.TO.LimitesTO';
-
 		$this->dataAccessLog->modulo = 'Servicios';
 		$this->dataAccessLog->function = 'Limites';
 		$this->dataAccessLog->operation = 'Actualizar Limites de tarjeta';
+
+		$this->dataRequest->idOperation = 'actualizarLimites';
+		$this->dataRequest->className = 'com.novo.objects.TO.LimitesTO';
 		$this->dataRequest->opcion = 'actualizar';
 		$this->dataRequest->idEmpresa = $this->session->enterpriseInf->idFiscal;
 		$this->dataRequest->prefix = $this->session->productInf->productPrefix;
+
 		foreach ((array)lang('SERVICES_NAMES_PROPERTIES_LIMITS') as $key => $val) {
 			$cards[$key] = (int)$dataRequest->$val;
 		};
+
 		foreach ($cards as &$valor) {
 			if ($valor == '') {
 				$valor = '0';
 			}
 		};
+
 		$this->dataRequest->cards = [
 			[
 				'card' =>  $dataRequest->cardNumber,
@@ -906,10 +904,8 @@ class Novo_Services_Model extends NOVO_Model {
 			]
 		];
 		$this->dataRequest->usuario = [
-		'userName' => $this->session->userName
-	];
-
-		$this->dataRequest->idOperation = 'actualizarLimites';
+			'userName' => $this->session->userName
+		];
 
 		$response = $this->sendToService('callWs_updateTransactionalLimits');
 
@@ -920,27 +916,28 @@ class Novo_Services_Model extends NOVO_Model {
 				$this->response->icon =  lang('CONF_ICON_SUCCESS');
         $this->response->msg = 	lang('RESP_SUCCESSFULL_UPDATE_LIMITS');
         $this->response->data['btn1']['action'] = 'close';
-				break;
+			break;
 			case -449:
 			case -450:
 				$this->response->title = lang('GEN_TRANSACTIONAL_LIMITS_TITTLE');
 				$this->response->icon =  lang('CONF_ICON_WARNING');
 				$this->response->msg = lang('SERVICES_LIMITS_NO_UPDATE');
 				$this->response->data['btn1']['action'] = 'close';
-				break;
+			break;
 			case -456:
 				$this->response->title = lang('GEN_TRANSACTIONAL_LIMITS_TITTLE');
 				$this->response->icon =  lang('CONF_ICON_WARNING');
 				$this->response->msg = $response->msg;
 				$this->response->data['btn1']['action'] = 'close';
-				break;
+			break;
 			case -457:
 				$this->response->title = lang('GEN_TRANSACTIONAL_LIMITS_TITTLE');
 				$this->response->icon =  lang('CONF_ICON_WARNING');
 				$this->response->msg = $response->msg;
 				$this->response->data['btn1']['action'] = 'close';
-				break;
+			break;
 		}
+
 		return $this->responseToTheView('callWs_updateTransactionalLimits');
 	}
 	/**
@@ -952,17 +949,17 @@ class Novo_Services_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO Services Model: MasterAccountBalance Method Initialized');
 
-		$this->className = 'com.novo.objects.TOs.TarjetaTO';
-
 		$this->dataAccessLog->modulo = 'Servicios';
 		$this->dataAccessLog->function = 'Transferencia maestra';
 		$this->dataAccessLog->operation = 'Consulta de saldo';
 
 		$this->dataRequest->idOperation = 'saldoCuentaMaestraTM';
+		$this->dataRequest->className = 'com.novo.objects.TOs.TarjetaTO';
 		$this->dataRequest->rifEmpresa = $this->session->enterpriseInf->idFiscal;
 		$this->dataRequest->idProducto = $this->session->productInf->productPrefix;
 
 		$response = $this->sendToService('CallWs_MasterAccountBalance');
+
 		$this->response->code = 0;
 		$this->response->data->info['balance'] = '';
 		$this->response->data->info['balanceTxt'] = '';

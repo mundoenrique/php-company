@@ -40,7 +40,7 @@
 							</div>
 							<div class="form-group col-4 col-xl-4">
 								<label><?= lang('GEN_PRODUCT'); ?></label>
-								<select id="productCode" name="productCode" class="select-box custom-select flex h6 w-100">
+								<select id="productCode" name="productCode" class="select-box custom-select form-control flex h6 w-100">
 									<option selected disabled><?= $selectProducts ?></option>
 									<?php if($productsSelect): ?>
 									<?php foreach($productsSelect AS $product): ?>
@@ -87,6 +87,7 @@
 							<thead class="bg-primary secondary regular">
 								<tr>
 									<th><?= lang('GEN_TABLE_DNI'); ?></th>
+									<th><?= lang('GEN_TABLE_CARD_NUMBER'); ?></th>
 									<th><?= lang('GEN_TABLE_CARDHOLDER'); ?></th>
 								</tr>
 							</thead>

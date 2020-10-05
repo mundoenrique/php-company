@@ -3,7 +3,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class NOVO_Model extends CI_Model {
 	public $dataAccessLog;
-	public $className;
 	public $accessLog;
 	public $token;
 	public $autoLogin;
@@ -41,12 +40,20 @@ class NOVO_Model extends CI_Model {
 
 		$this->accessLog = accessLog($this->dataAccessLog);
 		$this->userName = $this->userName ?: mb_strtoupper($this->dataAccessLog->userName);
+		$device = 'desktop';
 
-		$this->dataRequest->className = $this->className;
-		$this->dataRequest->logAccesoObject = $this->accessLog;
+		$this->dataRequest->pais = $this->country;
 		$this->dataRequest->token = $this->token;
 		$this->dataRequest->autoLogin = $this->autoLogin;
-		$this->dataRequest->pais = $this->country;
+
+		if (lang('CONF_AGEN_INFO') == 'ON') {
+			$this->dataRequest->aplicacion = $this->session->enterpriseInf->thirdApp ?? '';
+			$this->dataRequest->dispositivo = $this->agent->is_mobile() ? 'mobile' : 'desktop';
+			$this->dataRequest->marca = $this->agent->is_mobile() ? $this->agent->mobile() : '';
+			$this->dataRequest->navegador = $this->agent->browser().' V-'.floatval($this->agent->version());
+		}
+
+		$this->dataRequest->logAccesoObject = $this->accessLog;
 		$encryptData = $this->encrypt_connect->encode($this->dataRequest, $this->userName, $model);
 		$request = ['bean'=> $encryptData, 'pais'=> $this->country];
 		$response = $this->encrypt_connect->connectWs($request, $this->userName, $model);
