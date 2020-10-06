@@ -18,7 +18,7 @@
 	<?php $this->load->view('header_content-core') ?>
 	<main class="content bg-content">
 		<?php if(!isset($skipProductInf)): ?>
-		<div id="product-info" class="pt-3 px-5 pb-5" prefix-prod="<?= $prefix ?>">
+		<div id="product-info" class="pt-3 px-5 pb-5 mt-ie11" prefix-prod="<?= $prefix ?>">
 		<?php endif; ?>
 			<?php foreach($viewPage as $views): ?>
 			<?php $this->load->view($views.'_content-core'); ?>

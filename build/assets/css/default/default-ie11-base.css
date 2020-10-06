@@ -56,34 +56,21 @@ footer.main-footer {
 /* Forms
 ========================================================================== */
 
-#confirm-bulk-btn .form-group{
+.flex .mb-ie11{
 	margin-bottom: 4.5rem !important;
 }
 
-#auth-bulk-form .justify-end div:nth-of-type(3){
-	flex: 0 11%;
-}
-
-#auth-bulk-form .justify-end div:nth-of-type(2){
-	flex: 0 0 25%;
-}
-
-#repTarjeta .row div:nth-of-type(1){
+.repTarjeta .row div:nth-of-type(1){
 	flex: 0 0 30%;
 }
 
-#repComprobantesVisaVale div:nth-of-type(1){
+.repComprobantes div:nth-of-type(1){
 	flex: 0 0 30%;
 }
 
-#repComprobantesVisaVale div:nth-of-type(2){
+.repComprobantes div:nth-of-type(2){
 	flex: 0 0 66.6%;
 	max-width: 66.6%;
-}
-
-#resultByNIT{
-	padding: 0 !important;
-	height: 0 !important;
 }
 
 .form-control {
@@ -1252,11 +1239,11 @@ a.ui-button:active,
 
 /* Loading */
 /* Background para vista loading */
-#product-info {
+.mt-ie11 {
 	margin-top: 6.5rem;
 }
 
-#product-info span{
+.mt-ie11 span{
   color: #58595B;
 }
 
