@@ -73,7 +73,7 @@
 
 				<form id="confirm-bulk-btn" method="post">
 					<div class="flex flex-column mb-4 mt-4 px-5 justify-center items-center form-group">
-						<div class="form-group mb-3 col-5 col-lg-4 col-xl-3">
+						<div class="form-group mb-ie11 mb-3 col-5 col-lg-4 col-xl-3">
 							<div class="input-group">
 								<input id="bulkTicked" name="bulkTicked" type="hidden" value="<?= $detailBulk->bulkTicked ?>">
 								<input id="password" name="password" class="form-control pwd-input" type="password" autocomplete="off" placeholder="<?= lang('GEN_PLACE_PASSWORD'); ?>">
