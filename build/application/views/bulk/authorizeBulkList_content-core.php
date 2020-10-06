@@ -71,8 +71,8 @@
               <?php if($authBulk && $authorizeAttr->sign): ?>
               <div class="col-5 col-lg-3 col-xl-3 form-group">
                 <div class="input-group">
-                  <input id="password-sign" name="password" class="form-control pwd-input pr-0 pwd" type="password" autocomplete="off"
-                    placeholder="<?= lang('GEN_PLACE_PASSWORD'); ?>">
+                  <input id="password-sign" name="password" class="form-control pwd-input pr-0 pwd" type="password"
+                    value="<?= lang('GEN_GENERIC_PASS') ?>" autocomplete="off" placeholder="<?= lang('GEN_PLACE_PASSWORD'); ?>">
                   <div class="input-group-append">
                     <span id="pwd_action" class="input-group-text pwd-action" title="<?= lang('GEN_SHOW_PASS') ?>"><i
                         class="icon-view mr-0"></i></span>
@@ -85,7 +85,7 @@
                   <?= lang('GEN_BTN_SIGN'); ?>
                 </button>
               </div>
-							<?php endif; ?>
+              <?php endif; ?>
               <?php if($this->verify_access->verifyAuthorization('TEBAUT', 'TEBELI') && $authorizeAttr->allBulkSign == 'toggle-all' && $authorizeAttr->sign): ?>
               <div class="col-auto">
                 <button id="del-sign-bulk-btn" class="btn btn-primary btn-small btn-loading flex mx-auto">
@@ -164,8 +164,8 @@
               </div>
               <div class="col-5 col-lg-3 col-xl-3 form-group">
                 <div class="input-group">
-                  <input id="password-auth" name="password" class="form-control pwd-input pr-0 pwd" type="password" autocomplete="off"
-                    placeholder="<?= lang('GEN_PLACE_PASSWORD'); ?>">
+                  <input id="password-auth" name="password" class="form-control pwd-input pr-0 pwd" type="password"
+                    value="<?= lang('GEN_GENERIC_PASS') ?>" autocomplete="off" placeholder="<?= lang('GEN_PLACE_PASSWORD'); ?>">
                   <div class="input-group-append">
                     <span id="pwd_action" class="input-group-text pwd-action" title="<?= lang('GEN_SHOW_PASS') ?>"><i
                         class="icon-view mr-0"></i></span>

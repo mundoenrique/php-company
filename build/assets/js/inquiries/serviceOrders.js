@@ -159,8 +159,8 @@ $(function () {
 				inputModal =	'<form id="delete-bulk-form" name="delete-bulk-form" class="form-group" onsubmit="return false;">';
 				inputModal+= 		'<span class="regular">'+lang.GEN_BULK_DELETE_SO+': '+inputSelected+'</span>';
 				inputModal+=		'<div class="input-group">';
-				inputModal+= 			'<input id="password" class="form-control pwd-input" name="password" type="password" autocomplete="off"';
-				inputModal+=				'placeholder="'+lang.GEN_PLACE_PASSWORD+'">';
+				inputModal+=			'<input id="password" class="form-control pwd-input pwd" name="password" type="password" ';
+				inputModal+= 				'value="' + lang.GEN_GENERIC_PASS +'" autocomplete="off" placeholder="'+lang.GEN_PLACE_PASSWORD+'">';
 				inputModal+=			'<div class="input-group-append">';
 				inputModal+=				'<span class="input-group-text pwd-action" title="'+lang.GEN_SHOW_PASS+'"><i class="icon-view mr-0"></i></span>';
 				inputModal+=			'</div>';
@@ -239,7 +239,7 @@ function deleteBulk(oldID, inputSelected) {
 			.html(loader)
 			.prop('disabled', true)
 			.attr('id', oldID);
-			inputPass = cryptoPass($('#password').val());
+			inputPass = cryptoPass($('.pwd').val());
 			data = {
 				modalReq: true,
 				OrderNumber: inputSelected,

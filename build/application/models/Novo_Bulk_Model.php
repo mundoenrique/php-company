@@ -271,13 +271,9 @@ class Novo_Bulk_Model extends NOVO_Model {
 			'idTicket' => $dataRequest->bulkTicked,
 			'idLote' => $dataRequest->bulkId
 		];
-		$password = json_decode(base64_decode($dataRequest->pass));
-		$password = $this->cryptography->decrypt(
-			base64_decode($password->plot),
-			utf8_encode($password->password)
-		);
+		$password = $this->cryptography->decryptOnlyOneData($dataRequest->pass);
 
-		if (lang('CONF_HASH_PASS') == 'ON' || $this->singleSession == 'signIn') {
+		if (lang('CONF_HASH_PASS') == 'ON' && $this->singleSession == 'signIn') {
 			$password = md5($password);
 		}
 
@@ -414,13 +410,9 @@ class Novo_Bulk_Model extends NOVO_Model {
 			: 'confirmarLote';
 		$this->dataRequest->className = 'com.novo.objects.MO.ConfirmarLoteMO';
 		$this->dataRequest->lotesTO = $bulkConfirmInfo;
-		$password = json_decode(base64_decode($dataRequest->pass));
-		$password = $this->cryptography->decrypt(
-			base64_decode($password->plot),
-			utf8_encode($password->password)
-		);
+		$password = $this->cryptography->decryptOnlyOneData($dataRequest->pass);
 
-		if (lang('CONF_HASH_PASS') == 'ON' || $this->singleSession == 'signIn') {
+		if (lang('CONF_HASH_PASS') == 'ON' && $this->singleSession == 'signIn') {
 			$password = md5($password);
 		}
 
@@ -560,13 +552,9 @@ class Novo_Bulk_Model extends NOVO_Model {
 			$signListBulk[] = $bulkList;
 		}
 
-		$password = json_decode(base64_decode($dataRequest->pass));
-		$password = $this->cryptography->decrypt(
-			base64_decode($password->plot),
-			utf8_encode($password->password)
-		);
+		$password = $this->cryptography->decryptOnlyOneData($dataRequest->pass);
 
-		if (lang('CONF_HASH_PASS') == 'ON' || $this->singleSession == 'signIn') {
+		if (lang('CONF_HASH_PASS') == 'ON' && $this->singleSession == 'signIn') {
 			$password = md5($password);
 		}
 
@@ -624,13 +612,9 @@ class Novo_Bulk_Model extends NOVO_Model {
 			$deleteListBulk[] = $bulkList;
 		}
 
-		$password = json_decode(base64_decode($dataRequest->pass));
-		$password = $this->cryptography->decrypt(
-			base64_decode($password->plot),
-			utf8_encode($password->password)
-		);
+		$password = $this->cryptography->decryptOnlyOneData($dataRequest->pass);
 
-		if (lang('CONF_HASH_PASS') == 'ON' || $this->singleSession == 'signIn') {
+		if (lang('CONF_HASH_PASS') == 'ON' && $this->singleSession == 'signIn') {
 			$password = md5($password);
 		}
 
@@ -695,13 +679,9 @@ class Novo_Bulk_Model extends NOVO_Model {
 			$disassListBulk[] = $bulkList;
 		}
 
-		$password = json_decode(base64_decode($dataRequest->pass));
-		$password = $this->cryptography->decrypt(
-			base64_decode($password->plot),
-			utf8_encode($password->password)
-		);
+		$password = $this->cryptography->decryptOnlyOneData($dataRequest->pass);
 
-		if (lang('CONF_HASH_PASS') == 'ON' || $this->singleSession == 'signIn') {
+		if (lang('CONF_HASH_PASS') == 'ON' && $this->singleSession == 'signIn') {
 			$password = md5($password);
 		}
 
@@ -761,13 +741,9 @@ class Novo_Bulk_Model extends NOVO_Model {
 			$signListBulk[] = $bulkList;
 		}
 
-		$password = json_decode(base64_decode($dataRequest->pass));
-		$password = $this->cryptography->decrypt(
-			base64_decode($password->plot),
-			utf8_encode($password->password)
-		);
+		$password = $this->cryptography->decryptOnlyOneData($dataRequest->pass);
 
-		if (lang('CONF_HASH_PASS') == 'ON' || $this->singleSession == 'signIn') {
+		if (lang('CONF_HASH_PASS') == 'ON' && $this->singleSession == 'signIn') {
 			$password = md5($password);
 		}
 
@@ -1247,14 +1223,10 @@ class Novo_Bulk_Model extends NOVO_Model {
 		$password = '';
 
 		if (isset($dataRequest->password)) {
-			$password = json_decode(base64_decode($dataRequest->password));
-			$password = $this->cryptography->decrypt(
-				base64_decode($password->plot),
-				utf8_encode($password->password)
-			);
+			$password = $this->cryptography->decryptOnlyOneData($dataRequest->password);
 		}
 
-		if (lang('CONF_HASH_PASS') == 'ON' || $this->singleSession == 'signIn') {
+		if (lang('CONF_HASH_PASS') == 'ON' && $this->singleSession == 'signIn') {
 			$password = md5($password);
 		}
 

@@ -129,7 +129,7 @@ class Novo_Bulk extends NOVO_Controller {
 			"third_party/jquery.validate",
 			"validate-core-forms",
 			"third_party/additional-methods",
-			"bulk/authorize_bulk"
+			"bulk/authorizeBulkList"
 		);
 
 		if($this->session->flashdata('bulkList')) {

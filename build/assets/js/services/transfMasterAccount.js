@@ -243,7 +243,7 @@ $(function () {
 			inputModal +=		'<div class="form-group col-12">';
 			inputModal += 		'<div class="input-group">';
 			inputModal += 			'<input class="form-control pwd-input pwd" type="password" name="password" autocomplete="off"';
-			inputModal += 				'placeholder="' + lang.GEN_PLACE_PASSWORD + '">';
+			inputModal += 				'value="' + lang.GEN_GENERIC_PASS + '" placeholder="' + lang.GEN_PLACE_PASSWORD + '">';
 			inputModal += 			'<div class="input-group-append">';
 			inputModal += 				'<span class="input-group-text pwd-action" title="' + lang.GEN_SHOW_PASS + '"><i class="icon-view mr-0"></i></span>';
 			inputModal += 			'</div>';

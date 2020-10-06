@@ -28,12 +28,8 @@ class Novo_User_Model extends NOVO_Model {
 		$userName = mb_strtoupper($dataRequest->user);
 		$this->dataAccessLog->userName = $userName;
 
-		$password = json_decode(base64_decode($dataRequest->pass));
-		$password = $this->cryptography->decrypt(
-			base64_decode($password->plot),
-			utf8_encode($password->password)
-		);
-		$authToken = $this->session->flashdata('authToken') ? $this->session->flashdata('authToken') : '';
+		$password = $this->cryptography->decryptOnlyOneData($dataRequest->pass);
+		$authToken = $this->session->flashdata('authToken') ?? '';
 		$authToken_str=str_replace('"','', $authToken);
 
 		$this->dataRequest->idOperation = 'loginFull';
@@ -53,25 +49,21 @@ class Novo_User_Model extends NOVO_Model {
 		if($dataRequest->codeOTP != '' && $authToken == '') {
 			$this->isResponseRc = 998;
 		} else {
-			if(ACTIVE_RECAPTCHA) {
-				$this->isResponseRc = $this->callWs_ValidateCaptcha_User($dataRequest);
+			$this->isResponseRc = ACTIVE_RECAPTCHA ? $this->callWs_ValidateCaptcha_User($dataRequest) : 0;
 
-				if ($this->isResponseRc === 0) {
-					$response = $this->sendToService('callWs_Login');
-				}
-			} else {
+			if ($this->isResponseRc === 0) {
 				$response = $this->sendToService('callWs_Login');
 			}
-
-			if(lang('CONFIG_PASS_EXPIRED') == 'OFF' && ($this->isResponseRc == -2 || $this->isResponseRc == -185)) {
-				$this->isResponseRc = 0;
-			}
-
-			$time = (object) [
-				'customerTime' => (int) $dataRequest->currentTime,
-				'serverTime' => (int) date("H")
-			];
 		}
+
+		if(lang('CONFIG_PASS_EXPIRED') == 'OFF' && ($this->isResponseRc == -2 || $this->isResponseRc == -185)) {
+			$this->isResponseRc = 0;
+		}
+
+		$time = (object) [
+			'customerTime' => (int) $dataRequest->currentTime,
+			'serverTime' => (int) date("H")
+		];
 
 		switch($this->isResponseRc) {
 			case 0:
@@ -570,16 +562,8 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataAccessLog->function = 'Clave';
 		$this->dataAccessLog->operation = 'Cambiar Clave';
 
-		$current = json_decode(base64_decode($dataRequest->currentPass));
-		$current = $this->cryptography->decrypt(
-			base64_decode($current->plot),
-			utf8_encode($current->password)
-		);
-		$new = json_decode(base64_decode($dataRequest->newPass));
-		$new = $this->cryptography->decrypt(
-			base64_decode($new->plot),
-			utf8_encode($new->password)
-		);
+		$current = $this->cryptography->decryptOnlyOneData($dataRequest->currentPass);
+		$new = $this->cryptography->decryptOnlyOneData($dataRequest->newPass);
 
 		$this->dataRequest->idOperation = 'cambioClave';
 		$this->dataRequest->className = 'com.novo.objects.TOs.UsuarioTO';

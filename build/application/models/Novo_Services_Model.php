@@ -193,13 +193,9 @@ class Novo_Services_Model extends NOVO_Model {
 		$this->dataRequest->listadoTarjetas = [
 			'lista' => $cardsList
 		];
-		$password = json_decode(base64_decode($dataRequest->pass));
-		$password = $this->cryptography->decrypt(
-			base64_decode($password->plot),
-			utf8_encode($password->password)
-		);
+		$password = $this->cryptography->decryptOnlyOneData($dataRequest->pass);
 
-		if (lang('CONF_HASH_PASS') == 'ON' || $this->singleSession == 'signIn') {
+		if (lang('CONF_HASH_PASS') == 'ON' && $this->singleSession == 'signIn') {
 			$password = md5($password);
 		}
 
@@ -522,13 +518,9 @@ class Novo_Services_Model extends NOVO_Model {
 			$dataList[] = $data;
 		}
 
-		$password = json_decode(base64_decode($dataRequest->pass));
-		$password = $this->cryptography->decrypt(
-			base64_decode($password->plot),
-			utf8_encode($password->password)
-		);
+		$password = $this->cryptography->decryptOnlyOneData($dataRequest->pass);
 
-		if (lang('CONF_HASH_PASS') == 'ON' || $this->singleSession == 'signIn') {
+		if (lang('CONF_HASH_PASS') == 'ON' && $this->singleSession == 'signIn') {
 			$password = md5($password);
 		}
 
@@ -712,13 +704,9 @@ class Novo_Services_Model extends NOVO_Model {
 			'mccItems' => $val,
 			'rc' => 0]
 		];
-		$password = json_decode(base64_decode($dataRequest->passwordAuth));
-		$password = $this->cryptography->decrypt(
-			base64_decode($password->plot),
-			utf8_encode($password->password)
-		);
+		$password = $this->cryptography->decryptOnlyOneData($dataRequest->passwordAuth);
 
-		if (lang('CONF_HASH_PASS') == 'ON' || $this->singleSession == 'signIn') {
+		if (lang('CONF_HASH_PASS') == 'ON' && $this->singleSession == 'signIn') {
 			$password = md5($password);
 		}
 
