@@ -153,15 +153,19 @@ $(function () {
 				}
 				var bulkFile = $(this).closest('tr').find('td:nth-child(2)').text();
 				inputModal =	'<form id="delete-bulk-form" name="delete-bulk-form" class="form-group" onsubmit="return false;">';
-				inputModal+= 		'<span class="regular">'+lang.BULK_DELETE_NAME+': '+bulkFile+'</span>';
-				inputModal+=		'<div class="input-group">';
-				inputModal+= 			'<input class="form-control pwd-input pwd-auth" name="password" type="password" value="' + lang.GEN_GENERIC_PASS + '"';
-				inputModal+= 				'autocomplete="off" placeholder="' + lang.GEN_PLACE_PASSWORD + '">';
-				inputModal+=			'<div class="input-group-append">';
-				inputModal+=				'<span class="input-group-text pwd-action" title="'+lang.GEN_SHOW_PASS+'"><i class="icon-view mr-0"></i></span>';
-				inputModal+=			'</div>';
-				inputModal+=		'</div>';
-				inputModal+= 		'<div class="help-block"></div>';
+				inputModal+= 		'<span class="regular">' + lang.BULK_DELETE+' '+bulkFile+'</span>';
+
+				if (lang.CONF_SHOW_INPUT_PASS == 'ON') {
+					inputModal+=		'<div class="input-group">';
+					inputModal+= 			'<input class="form-control pwd-input pwd-auth" name="password" type="password" ';
+					inputModal+= 				'autocomplete="off" placeholder="' + lang.GEN_PLACE_PASSWORD + '">';
+					inputModal+=			'<div class="input-group-append">';
+					inputModal+=				'<span class="input-group-text pwd-action" title="'+lang.GEN_SHOW_PASS+'"><i class="icon-view mr-0"></i></span>';
+					inputModal+=			'</div>';
+					inputModal+=		'</div>';
+					inputModal+= 		'<div class="help-block"></div>';
+				}
+
 				inputModal+= 	'</form>';
 				appMessages(lang.BULK_DELETE_TITLE, inputModal, lang.CONF_ICON_INFO, data);
 				$('#cancel').on('click', function(e) {
@@ -190,14 +194,17 @@ $(function () {
 			.html(loader)
 			.prop('disabled', true)
 			.removeClass('delete-bulk-btn');
-			inputPass = cryptoPass($('.pwd-auth').val());
 			data = {
 				bulkId: form.find('input[name="bulkId"]').val(),
 				bulkTicked: form.find('input[name="bulkTicked"]').val(),
 				bulkStatus: form.find('input[name="bulkStatus"]').val(),
 				bulkname: form.find('input[name="bulkFile"]').val(),
-				pass: inputPass
 			}
+
+			if (lang.CONF_SHOW_INPUT_PASS == 'ON') {
+				data.pass = cryptoPass($('.pwd-auth').val());
+			}
+
 			insertFormInput(true, formDeleteBulk);
 			verb = 'POST'; who = 'Bulk'; where = 'DeleteNoConfirmBulk';
 			callNovoCore(verb, who, where, data, function(response) {

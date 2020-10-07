@@ -36,9 +36,12 @@ $(function () {
 
 		$('#spinnerBlock').addClass('hide');
 		delete passData.passwordAuth;
-		passData.passwordAuth = cryptoPass(form.find('input.pwd').val().trim());
-		passData.cardNumber = $('#cardNumber').val();
 
+		if (lang.CONF_SHOW_INPUT_PASS == 'ON') {
+			passData.passwordAuth = cryptoPass(form.find('input.pwd').val().trim());
+		}
+
+		passData.cardNumber = $('#cardNumber').val();
 		validateForms(form)
 
 		if (form.valid()) {

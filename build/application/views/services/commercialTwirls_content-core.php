@@ -239,17 +239,20 @@
             </div>
           </div>
           <div class="flex row mt-3 mb-2 mx-2 justify-end">
+            <?php if (lang('CONF_SHOW_INPUT_PASS') == 'ON'): ?>
             <div class="col-5 col-lg-3 col-xl-3 form-group">
               <div class="input-group">
-                <input id="passwordAuth" name="password" class="form-control pwd-input pr-0 pwd" type="password"
-                  value="<?= lang('GEN_GENERIC_PASS') ?>" autocomplete="new-password" placeholder="<?= lang('GEN_PLACE_PASSWORD'); ?>" disabled>
+                <input id="passwordAuth" name="password" class="form-control pwd-input pr-0 pwd" type="password" autocomplete="new-password"
+                  placeholder="<?= lang('GEN_PLACE_PASSWORD'); ?>" disabled>
                 <div class="input-group-append">
                   <span id="pwd_action" class="input-group-text pwd-action" title="<?= lang('GEN_SHOW_PASS') ?>">
-                    <i class="icon-view mr-0"></i></span>
+                    <i class="icon-view mr-0"></i>
+                  </span>
                 </div>
               </div>
               <div class="help-block bulk-select text-left"></div>
             </div>
+            <?php endif; ?>
             <div class="col-auto">
               <?php if($this->verify_access->verifyAuthorization('GIRCOM', 'ACTGIR')): ?>
               <button id="sign-btn" class="btn btn-primary btn-small btn-loading flex mx-auto">

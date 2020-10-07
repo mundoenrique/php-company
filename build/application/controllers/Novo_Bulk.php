@@ -95,7 +95,7 @@ class Novo_Bulk extends NOVO_Controller {
 			"third_party/jquery.validate",
 			"validate-core-forms",
 			"third_party/additional-methods",
-			"bulk/confirm_bulk"
+			"bulk/confirmBulk"
 		);
 		$this->load->model('Novo_Bulk_Model', 'Bulk');
 		$responseDetail = $this->Bulk->callWs_GetDetailBulk_Bulk($this->request);

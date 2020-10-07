@@ -271,7 +271,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 			'idTicket' => $dataRequest->bulkTicked,
 			'idLote' => $dataRequest->bulkId
 		];
-		$password = $this->cryptography->decryptOnlyOneData($dataRequest->pass);
+		$password = isset($dataRequest->pass) ? $this->cryptography->decryptOnlyOneData($dataRequest->pass) : lang('GEN_GENERIC_PASS');
 
 		if (lang('CONF_HASH_PASS') == 'ON' && $this->singleSession == 'signIn') {
 			$password = md5($password);
@@ -410,7 +410,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 			: 'confirmarLote';
 		$this->dataRequest->className = 'com.novo.objects.MO.ConfirmarLoteMO';
 		$this->dataRequest->lotesTO = $bulkConfirmInfo;
-		$password = $this->cryptography->decryptOnlyOneData($dataRequest->pass);
+		$password = isset($dataRequest->pass) ? $this->cryptography->decryptOnlyOneData($dataRequest->pass) : lang('GEN_GENERIC_PASS');
 
 		if (lang('CONF_HASH_PASS') == 'ON' && $this->singleSession == 'signIn') {
 			$password = md5($password);
@@ -612,7 +612,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 			$deleteListBulk[] = $bulkList;
 		}
 
-		$password = $this->cryptography->decryptOnlyOneData($dataRequest->pass);
+		$password = isset($dataRequest->pass) ? $this->cryptography->decryptOnlyOneData($dataRequest->pass) : lang('GEN_GENERIC_PASS');
 
 		if (lang('CONF_HASH_PASS') == 'ON' && $this->singleSession == 'signIn') {
 			$password = md5($password);
@@ -741,7 +741,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 			$signListBulk[] = $bulkList;
 		}
 
-		$password = $this->cryptography->decryptOnlyOneData($dataRequest->pass);
+		$password = isset($dataRequest->pass) ? $this->cryptography->decryptOnlyOneData($dataRequest->pass) : lang('GEN_GENERIC_PASS');
 
 		if (lang('CONF_HASH_PASS') == 'ON' && $this->singleSession == 'signIn') {
 			$password = md5($password);

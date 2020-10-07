@@ -70,14 +70,16 @@
             <div class="flex row mt-3 mb-2 mx-2 justify-end">
               <?php if($authBulk && $authorizeAttr->sign): ?>
               <div class="col-5 col-lg-3 col-xl-3 form-group">
+                <?php if(lang('CONF_SHOW_INPUT_PASS') == 'ON'): ?>
                 <div class="input-group">
-                  <input id="password-sign" name="password" class="form-control pwd-input pr-0 pwd" type="password"
-                    value="<?= lang('GEN_GENERIC_PASS') ?>" autocomplete="off" placeholder="<?= lang('GEN_PLACE_PASSWORD'); ?>">
+                  <input id="password-sign" name="password" class="form-control pwd-input pr-0 pwd" type="password" autocomplete="off"
+                    placeholder="<?= lang('GEN_PLACE_PASSWORD'); ?>">
                   <div class="input-group-append">
                     <span id="pwd_action" class="input-group-text pwd-action" title="<?= lang('GEN_SHOW_PASS') ?>"><i
                         class="icon-view mr-0"></i></span>
                   </div>
                 </div>
+                <?php endif; ?>
                 <div class="help-block bulk-select text-left"></div>
               </div>
               <div class="col-auto">
@@ -163,14 +165,16 @@
                 <div class="help-block"></div>
               </div>
               <div class="col-5 col-lg-3 col-xl-3 form-group">
+                <?php if(lang('CONF_SHOW_INPUT_PASS') == 'ON'): ?>
                 <div class="input-group">
-                  <input id="password-auth" name="password" class="form-control pwd-input pr-0 pwd" type="password"
-                    value="<?= lang('GEN_GENERIC_PASS') ?>" autocomplete="off" placeholder="<?= lang('GEN_PLACE_PASSWORD'); ?>">
+                  <input id="password-auth" name="password" class="form-control pwd-input pr-0 pwd" type="password" autocomplete="off"
+                    placeholder="<?= lang('GEN_PLACE_PASSWORD'); ?>">
                   <div class="input-group-append">
                     <span id="pwd_action" class="input-group-text pwd-action" title="<?= lang('GEN_SHOW_PASS') ?>"><i
                         class="icon-view mr-0"></i></span>
                   </div>
                 </div>
+                <?php endif; ?>
                 <div class="help-block bulk-select text-left"></div>
               </div>
               <?php endif; ?>

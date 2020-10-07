@@ -193,7 +193,7 @@ class Novo_Services_Model extends NOVO_Model {
 		$this->dataRequest->listadoTarjetas = [
 			'lista' => $cardsList
 		];
-		$password = $this->cryptography->decryptOnlyOneData($dataRequest->pass);
+		$password = isset($dataRequest->pass) ? $this->cryptography->decryptOnlyOneData($dataRequest->pass) : lang('GEN_GENERIC_PASS');
 
 		if (lang('CONF_HASH_PASS') == 'ON' && $this->singleSession == 'signIn') {
 			$password = md5($password);
@@ -704,7 +704,8 @@ class Novo_Services_Model extends NOVO_Model {
 			'mccItems' => $val,
 			'rc' => 0]
 		];
-		$password = $this->cryptography->decryptOnlyOneData($dataRequest->passwordAuth);
+
+		$password = isset($dataRequest->passwordAuth) ? $this->cryptography->decryptOnlyOneData($dataRequest->passwordAuth) : lang('GEN_GENERIC_PASS');
 
 		if (lang('CONF_HASH_PASS') == 'ON' && $this->singleSession == 'signIn') {
 			$password = md5($password);

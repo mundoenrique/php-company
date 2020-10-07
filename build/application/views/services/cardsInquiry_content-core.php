@@ -121,8 +121,8 @@
                 </div>
                 <div class="col-4 col-lg-3 col-xl-3 form-group">
                   <div class="input-group">
-                    <input id="passAction" name="password" class="form-control pwd-input pr-0 pwd" type="password"
-                      value="<?= lang('GEN_GENERIC_PASS') ?>" autocomplete="off" placeholder="<?= lang('GEN_PLACE_PASSWORD'); ?>">
+                    <input id="passAction" name="password" class="form-control pwd-input pr-0 pwd" type="password" autocomplete="off"
+                      placeholder="<?= lang('GEN_PLACE_PASSWORD'); ?>">
                     <div class="input-group-append">
                       <span id="pwd_action" class="input-group-text pwd-action" title="<?= lang('GEN_SHOW_PASS') ?>">
                         <i class="icon-view mr-0"></i>

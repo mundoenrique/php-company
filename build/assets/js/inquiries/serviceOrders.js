@@ -158,14 +158,18 @@ $(function () {
 				}
 				inputModal =	'<form id="delete-bulk-form" name="delete-bulk-form" class="form-group" onsubmit="return false;">';
 				inputModal+= 		'<span class="regular">'+lang.GEN_BULK_DELETE_SO+': '+inputSelected+'</span>';
-				inputModal+=		'<div class="input-group">';
-				inputModal+=			'<input id="password" class="form-control pwd-input pwd" name="password" type="password" ';
-				inputModal+= 				'value="' + lang.GEN_GENERIC_PASS +'" autocomplete="off" placeholder="'+lang.GEN_PLACE_PASSWORD+'">';
-				inputModal+=			'<div class="input-group-append">';
-				inputModal+=				'<span class="input-group-text pwd-action" title="'+lang.GEN_SHOW_PASS+'"><i class="icon-view mr-0"></i></span>';
-				inputModal+=			'</div>';
-				inputModal+=		'</div>';
-				inputModal+= 		'<div class="help-block"></div>';
+
+				if (lang.CONF_SHOW_INPUT_PASS == 'ON') {
+					inputModal+=		'<div class="input-group">';
+					inputModal+=			'<input id="password" class="form-control pwd-input pwd" name="password" type="password" ';
+					inputModal+= 				'autocomplete="off" placeholder="'+lang.GEN_PLACE_PASSWORD+'">';
+					inputModal+=			'<div class="input-group-append">';
+					inputModal+=				'<span class="input-group-text pwd-action" title="'+lang.GEN_SHOW_PASS+'"><i class="icon-view mr-0"></i></span>';
+					inputModal+=			'</div>';
+					inputModal+=		'</div>';
+					inputModal+= 		'<div class="help-block"></div>';
+				}
+
 				inputModal+= 	'</form>';
 				appMessages('Anular orden de servicio', inputModal, lang.CONF_ICON_INFO, data);
 				deleteBulk(oldID, inputSelected);
@@ -220,11 +224,7 @@ function format(bulk) {
 
 	return table;
 }
-/**
- * @info Elimina un lote
- * @author J. Enrique Peñaloza Piñero
- * @date December 18th, 2019
- */
+
 function deleteBulk(oldID, inputSelected) {
 	var deleteBulkBtn = $('#delete-bulk-btn')
 	var formDeleteBulk = $('#delete-bulk-form');
@@ -239,12 +239,15 @@ function deleteBulk(oldID, inputSelected) {
 			.html(loader)
 			.prop('disabled', true)
 			.attr('id', oldID);
-			inputPass = cryptoPass($('.pwd').val());
+
 			data = {
-				modalReq: true,
-				OrderNumber: inputSelected,
-				pass: inputPass
+				OrderNumber: inputSelected
 			}
+
+			if (lang.CONF_SHOW_INPUT_PASS == 'ON') {
+				data.pass = cryptoPass($('.pwd').val());
+			}
+
 			verb = 'POST'; who = 'Inquiries'; where = 'ClearServiceOrders';
 			callNovoCore(verb, who, where, data, function (response) {
 

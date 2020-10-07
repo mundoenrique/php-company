@@ -361,14 +361,18 @@
           </div>
           <div class="flex row mt-3 mb-2 mx-2 justify-end">
             <div class="col-5 col-lg-3 col-xl-3 form-group">
+              <?php if (lang('CONF_SHOW_INPUT_PASS') == 'ON'): ?>
               <div class="input-group">
-                <input id="passwordAuth" name="password" class="form-control pwd-input pr-0" type="password" value="<?= lang('GEN_GENERIC_PASS') ?>"
-                  autocomplete="off" placeholder="Contraseña" disabled>
+                <input id="passwordAuth" name="password" class="form-control pwd-input pr-0" type="password" autocomplete="off"
+                  placeholder="Contraseña" disabled>
                 <div class="input-group-append">
-                  <span id="pwd_action" class="input-group-text pwd-action" title="Mostrar contraseña"><i class="icon-view mr-0"></i></span>
+                  <span id="pwd_action" class="input-group-text pwd-action" title="Mostrar contraseña">
+                    <i class="icon-view mr-0"></i>
+                  </span>
                 </div>
               </div>
               <div class="help-block bulk-select text-left"></div>
+              <?php endif; ?>
             </div>
             <div class="col-auto">
               <?php if($this->verify_access->verifyAuthorization('LIMTRX', 'ACTLIM')): ?>

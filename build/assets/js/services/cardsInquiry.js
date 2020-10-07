@@ -100,7 +100,7 @@ $(function () {
 
 		inputModal +=		'<div class="form-group col-12">';
 		inputModal += 		'<div class="input-group">';
-		inputModal += 			'<input class="form-control pwd-input pwd" name="password" type="password" value="' + lang.GEN_GENERIC_PASS + '"';
+		inputModal += 			'<input class="form-control pwd-input pwd" name="password" type="password" ';
 		inputModal += 				'autocomplete="off" placeholder="' + lang.GEN_PLACE_PASSWORD + '">';
 		inputModal += 			'<div class="input-group-append">';
 		inputModal += 				'<span class="input-group-text pwd-action" title="' + lang.GEN_SHOW_PASS + '"><i class="icon-view mr-0"></i></span>';

@@ -32,3 +32,4 @@ $lang['GEN_DETAIL_BARND_COLOR'] = '_card-blue.svg';
 //Datables
 $lang['GEN_ACCOUNT_CLOSING_BALANCE'] = 'Tarjetahabiente';
 $lang['GEN_GENERIC_PASS'] = '3ef80265eefd9294845f671145630049';
+$lang['GEN_BULK_DELETE_SO'] = '¿Estás seguro que deseas anular la orden de servicio? ';

@@ -66,8 +66,7 @@
             <div class="form-group col-4 col-xl-3">
               <label for="password"><?= lang('GEN_PASSWORD');  ?></label>
               <div class="input-group">
-                <input id="password" name="password" class="form-control pwd-input h5" type="text" value="<?= lang('GEN_GENERIC_PASS') ?>"
-                  autocomplete="off">
+                <input id="password" name="password" class="form-control pwd-input h5" type="text" autocomplete="off">
                 <div class="input-group-append">
                   <span class="input-group-text pwd-action" title="<?= lang('GEN_SHOW_PASS') ?>">
                     <i class="icon-view mr-0"></i>

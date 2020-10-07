@@ -8,7 +8,6 @@ var inputModal;
 $(function () {
 	var action;
 	var getAmount;
-	var modalReq;
 
 	insertFormInput(false);
 	form = $('#masterAccountForm');
@@ -228,6 +227,13 @@ $(function () {
 
 		if (amountValidate(getAmount, '.select', action)) {
 			$('#accept').addClass('send-request');
+
+			if (lang.CONF_SHOW_INPUT_PASS == 'OFF' && action != lang.GEN_CHECK_BALANCE) {
+				$('#accept')
+					.removeClass('send-request')
+					.addClass('get-auth-key');
+			}
+
 			data = {
 				btn1: {
 					text: lang.GEN_BTN_SEND,
@@ -240,18 +246,25 @@ $(function () {
 			}
 
 			inputModal =	'<form id="password-modal" name="password-modal" class="row col-auto p-0" onsubmit="return false;">';
-			inputModal +=		'<div class="form-group col-12">';
-			inputModal += 		'<div class="input-group">';
-			inputModal += 			'<input class="form-control pwd-input pwd" type="password" name="password" autocomplete="off"';
-			inputModal += 				'value="' + lang.GEN_GENERIC_PASS + '" placeholder="' + lang.GEN_PLACE_PASSWORD + '">';
-			inputModal += 			'<div class="input-group-append">';
-			inputModal += 				'<span class="input-group-text pwd-action" title="' + lang.GEN_SHOW_PASS + '"><i class="icon-view mr-0"></i></span>';
-			inputModal += 			'</div>';
-			inputModal += 		'</div>';
-			inputModal += 		'<div class="help-block"></div>';
-			inputModal += 	'</div>';
+			var inputPassOff = '<span class="regular">¿Estás seguro que deseas realizar esta acción?</span>';
+
+			if (lang.CONF_SHOW_INPUT_PASS == 'ON') {
+				inputModal +=		'<div class="form-group col-12">';
+				inputModal += 		'<div class="input-group">';
+				inputModal += 			'<input class="form-control pwd-input pwd" type="password" name="password" autocomplete="off" ';
+				inputModal += 				'placeholder="' + lang.GEN_PLACE_PASSWORD + '">';
+				inputModal += 			'<div class="input-group-append">';
+				inputModal += 				'<span class="input-group-text pwd-action" title="' + lang.GEN_SHOW_PASS + '"><i class="icon-view mr-0"></i></span>';
+				inputModal += 			'</div>';
+				inputModal += 		'</div>';
+				inputModal += 		'<div class="help-block"></div>';
+				inputModal += 	'</div>';
+			}
+
+			inputModal += action == lang.GEN_CARD_ASSIGNMENT ? '' : inputPassOff;
 
 			if (action == lang.GEN_CARD_ASSIGNMENT) {
+
 				inputModal += 	'<div class="form-group col-12">';
 				inputModal += 		'<div class="input-group">';
 				inputModal += 			'<input class="form-control" type="text" name="cardNumber" autocomplete="off"';
@@ -273,22 +286,23 @@ $(function () {
 
 	$('#system-info').on('click', '.send-request', function () {
 		form = $('#password-modal')
-		modalReq = true
 		btnText = $(this).text().trim();
-		sendRequest(action, modalReq, $(this))
+		sendRequest(action, $(this))
 	})
 
 	$('#Consulta, #Abono, #Cargo').on('click', function (e) {
 		e.preventDefault()
+		$('#password-table').find('.bulk-select').text('');
 		$('#tableServicesMaster').find('tr').removeClass('select');
 		action = $(this).attr('id');
 		getAmount = $(this).attr('amount');
 
 		if (amountValidate(getAmount, '.selected', action)) {
 			form = $('#password-table');
-			modalReq = false;
 			btnText = $(this).text().trim();
-			sendRequest(action, modalReq, $(this))
+			if (lang.CONF_SHOW_INPUT_PASS == 'OFF' && action == 'Consulta') {
+				sendRequest(action, $(this));
+			}
 		}
 	});
 
@@ -363,7 +377,7 @@ function amountValidate(getAmount, classSelect, action) {
 	return valid;
 }
 
-function sendRequest(action, modalReq, btn) {
+function sendRequest(action, btn) {
 	formInputTrim(form)
 	validateForms(form)
 	if (cardsData.length == 0) {
@@ -392,10 +406,12 @@ function sendRequest(action, modalReq, btn) {
 			.prop('disabled', true);
 		insertFormInput(true)
 		data = {
-			modalReq: modalReq,
 			cards: cardsInfo,
-			action: action,
-			pass: cryptoPass(form.find('input.pwd').val().trim())
+			action: action
+		}
+
+		if (lang.CONF_SHOW_INPUT_PASS == 'ON') {
+			data.pass = cryptoPass(form.find('input.pwd').val().trim());
 		}
 
 		verb = 'POST'; who = 'Services'; where = 'ActionMasterAccount';
