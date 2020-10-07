@@ -414,18 +414,18 @@ class Novo_Business_Model extends NOVO_Model {
 				if(isset($response->estadistica->producto->mesesVencimiento)) {
 					$expMaxMonths = trim($response->estadistica->producto->mesesVencimiento);
 					$currentDate = date('Y-m');
-					$newDate = strtotime ('+'.$expMaxMonths.' month' , strtotime($currentDate));
-					$expireDate = date ('m/Y' , $newDate);
+					$newDate = strtotime('+'.$expMaxMonths.' month' , strtotime($currentDate));
+					$expireDate = date('m/Y' , $newDate);
 					$productInf->expMaxMonths = $expireDate;
 					$productInf->maxCards = trim($response->estadistica->producto->maxTarjetas);
 					$this->session->set_userdata('productInf', $productInf);
 				}
-				break;
+			break;
 			case -99:
 				$this->response->code = 3;
 				$this->response->msg = novoLang(lang('RESP_NO_ACCESS'), $this->userName);
 				$this->response->data->resp['btn1']['link'] = 'productos';
-				break;
+			break;
 		}
 
 		$this->response->data->productDetail = (object) $productDetail;
