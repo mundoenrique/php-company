@@ -171,7 +171,7 @@ class Novo_Bulk extends NOVO_Controller {
 			"third_party/jquery.validate",
 			"validate-core-forms",
 			"third_party/additional-methods",
-			"bulk/calculate_service_order"
+			"bulk/calculateServiceOrder"
 		);
 		$serviceOrdersList = $this->session->flashdata('serviceOrdersList');
 		$bulkNotBillable = $this->session->flashdata('bulkNotBillable');
@@ -217,7 +217,7 @@ class Novo_Bulk extends NOVO_Controller {
 			"third_party/jquery.validate",
 			"validate-core-forms",
 			"third_party/additional-methods",
-			'bulk/unnamed_request'
+			'bulk/unnamedRequest'
 		);
 
 		$this->responseAttr($branchOffices);
@@ -249,7 +249,7 @@ class Novo_Bulk extends NOVO_Controller {
 			"third_party/jquery.validate",
 			"validate-core-forms",
 			"third_party/additional-methods",
-			'bulk/unnamed_affiliate'
+			'bulk/unnamedAffiliate'
 		);
 
 		if (empty($requestArray)) {
@@ -289,7 +289,7 @@ class Novo_Bulk extends NOVO_Controller {
 			"third_party/jquery.validate",
 			"validate-core-forms",
 			"third_party/additional-methods",
-			'bulk/unnamed_detail'
+			'bulk/unnmamedDetail'
 		);
 
 		if ($this->session->flashdata('download')) {
