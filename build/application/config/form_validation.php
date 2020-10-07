@@ -1320,5 +1320,56 @@ $config = [
 					'field' => 'adminUser',
 					'rules' => 'trim'
 				],
+			],
+			'usersManagement' => [
+				[
+					'field' => 'adminUser',
+					'rules' => 'trim|regex_match[/^[a-zA-Z0-9]*$/i]'
+				],
+				[
+					'field' => 'adminName',
+					'rules' => 'trim|regex_match[/^[a-zA-Z0-9]*$/i]'
+				],
+				[
+					'field' => 'adminMail',
+					'rules' => 'trim|regex_match[/^[a-zA-Z0-9]*$/i]'
+				],
+				[
+					'field' => 'adminType',
+					'rules' => 'trim|regex_match[/^[a-zA-Z0-9]*$/i]'
+				],
+			],
+			'updatePermissions' => [
+				[
+					'field' => 'deleteServiceOrder',
+					'rules' => 'trim|regex_match[/^[A-Z]*$/i]'
+				],
+				[
+					'field' => 'consultOrderService',
+					'rules' => 'trim|regex_match[/^[A-Z]*$/i]'
+				],
+				[
+					'field' => 'payOrderService',
+					'rules' => 'trim|regex_match[/^[A-Z]*$/i]'
+				],
+				[
+					'field' => 'deleteBulk',
+					'rules' => 'trim|regex_match[/^[A-Z]*$/i]'
+				],
+				[
+					'field' => 'confirmBulk',
+					'rules' => 'trim|regex_match[/^[A-Z]*$/i]'
+				],
+				[
+					'field' => 'deleteBulkForConfirm',
+					'rules' => 'trim|regex_match[/^[A-Z]*$/i]'
+				],
+
+			],
+			'enableUser' => [
+				[
+					'field' => 'mail',
+					'rules' => 'trim'
+				],
 			]
 ];

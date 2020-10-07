@@ -700,4 +700,177 @@ class Novo_User_Model extends NOVO_Model {
 
 		return $result["score"] <= lang('CONF_SCORE_CAPTCHA')[ENVIRONMENT] ? 9999 : 0;
 	}
+		/**
+	 * @info Método para consulta de administración de usuarios.
+	 * @author Diego Acosta García
+	 * @date Oct 2st, 2020
+	 */
+	public function callWs_usersManagement_User($dataRequest = FALSE)
+	{
+		log_message('INFO', 'NOVO User Model: usersManagement Method Initialized');
+
+		$this->dataAccessLog->modulo = 'Usuario';
+		$this->dataAccessLog->function = 'Obtener usuarios banorte';
+		$this->dataAccessLog->operation = 'obtener usuarios banorte';
+		$this->dataRequest->idOperation = 'integracionBnt';
+		$this->dataRequestclassName = 'com.novo.objects.TOs.GestionUsuariosTO';
+		$this->dataRequest->opcion = 'getUsers';
+		$this->dataRequest->idEmpresa = $this->session->enterpriseInf->idFiscal;
+		// $this->dataRequest->idEmpresa = '1511440';
+
+		$response = $this->sendToService('callWs_usersManagement');
+
+		//CABLE FOR SIMULATE THE SERVICE RESPONSE
+		// $response = '{"rc":0,"msg":"Proceso OK","bean":"{\"users\":[{\"tranIdEmpresa\":1511440,\"tranIdUsuario\":\"DGONZALEZ1\",\"tranNumeroCliente\":52174189,\"tranIdUsuarioOperativo\":\"\",\"tranNombreUsuario\":\"Deiby Gonzalez\",\"tranCorreo\":\"pruebas@hotmail.com\",\"tranTipoUsuario\":0,\"registed\":false}, {\"tranIdEmpresa\":2622551,\"tranIdUsuario\":4238588,\"tranNumeroCliente\":63285298,\"tranIdUsuarioOperativo\":\"\",\"tranNombreUsuario\":\"Alberto López\",\"tranCorreo\":\"pruebas1@hotmail.com\",\"tranTipoUsuario\":1,\"registed\":true}]}"}';
+		// $this->isResponseRc = 0;
+
+		switch($this->isResponseRc)  {
+			case 0:
+				$this->response->code = 0;
+				$data = $response->bean->users;
+				// $data = (json_decode(json_decode($response)->bean)->users);
+				$this->response->data = $data;
+				break;
+		}
+
+		return $this->responseToTheView('callWs_usersManagement');
+	}
+		/**
+	 * @info Método para consulta de permisos de usuarios.
+	 * @author Diego Acosta García
+	 * @date Oct 2st, 2020
+	 */
+	public function callWs_userPermissions_User($dataRequest)
+	{
+		log_message('INFO', 'NOVO User Model: userPermissions Method Initialized');
+
+		$this->dataAccessLog->modulo = 'Usuario';
+		$this->dataAccessLog->function = 'Obtener usuarios banorte';
+		$this->dataAccessLog->operation = 'obtener usuarios banorte';
+
+		$this->dataRequest->idOperation = 'gestionUsuarios';
+		$this->dataRequest->opcion = 'obtenerFuncionesUsuario';
+		$this->dataRequest->userName = $dataRequest;
+		// $this->dataRequest->userName = 'DGONZALEZ1';
+
+		$response = $this->sendToService('callWs_userPermissions');
+
+		//CABLE FOR SIMULATE THE SERVICE RESPONSE
+		// $cableArray = '{"rc":0,"msg":"Proceso OK","bean":"{\"perfiles\":[{\"idPerfil\":\"CONSUL\",\"descripcion\":\"CONSULTAS\",\"status\":\"A\",\"modulos\":[{\"idModulo\":\"TEBORS\",\"status\":\"A\",\"funciones\":[{\"accodfuncion\":\"TEBANU\",\"acnomfuncion\":\"ANULAR ORDEN DE SERVICIO\",\"status\":\"A\"},{\"accodfuncion\":\"TEBCOS\",\"acnomfuncion\":\"CONSULTAR ORDEN DE SERVICIO\",\"status\":\"A\"},{\"accodfuncion\":\"TEBCOS\",\"acnomfuncion\":\"CONSULTAR ORDEN DE SERVICIO\",\"status\":\"A\"},{\"accodfuncion\":\"TEBPGO\",\"acnomfuncion\":\"PAGAR ORDEN DE SERVICIO\",\"status\":\"I\"}],\"rc\":0}]},{\"idPerfil\":\"GESLOT\",\"descripcion\":\"LOTES\",\"status\":\"A\",\"modulos\":[{\"idModulo\":\"TEBAUT\",\"status\":\"A\",\"funciones\":[{\"accodfuncion\":\"TEBELI\",\"acnomfuncion\":\"ELIMINACION DE LOTE\",\"status\":\"A\"},{\"accodfuncion\":\"TEBELI\",\"acnomfuncion\":\"ELIMINACION DE LOTE\",\"status\":\"A\"}],\"rc\":0},{\"idModulo\":\"TEBCAR\",\"status\":\"A\",\"funciones\":[{\"accodfuncion\":\"TEBCON\",\"acnomfuncion\":\"CONFIRMACION DE LOTE\",\"status\":\"A\"},{\"accodfuncion\":\"TEBCON\",\"acnomfuncion\":\"CONFIRMACION DE LOTE\",\"status\":\"A\"},{\"accodfuncion\":\"TEBELC\",\"acnomfuncion\":\"ELIMINACION DE LOTE POR CONFIRMAR\",\"status\":\"A\"},{\"accodfuncion\":\"TEBELC\",\"acnomfuncion\":\"ELIMINACION DE LOTE POR CONFIRMAR\",\"status\":\"A\"}],\"rc\":0},{\"idModulo\":\"TICARG\",\"status\":\"A\",\"funciones\":[{\"accodfuncion\":\"TICREA\",\"acnomfuncion\":\"GENERACIÓN DE LOTE\",\"status\":\"A\"},{\"accodfuncion\":\"TICREA\",\"acnomfuncion\":\"GENERACIÓN DE LOTE\",\"status\":\"A\"}],\"rc\":0},{\"idModulo\":\"TIINVN\",\"status\":\"A\",\"funciones\":[{\"accodfuncion\":\"TIREPO\",\"acnomfuncion\":\"REPORTE DE INNOMINADAS\",\"status\":\"A\"},{\"accodfuncion\":\"TIREPO\",\"acnomfuncion\":\"REPORTE DE INNOMINADAS\",\"status\":\"A\"}],\"rc\":0}]},{\"idPerfil\":\"GESREP\",\"descripcion\":\"REPORTES\",\"status\":\"A\",\"modulos\":[{\"idModulo\":\"REPCAT\",\"status\":\"A\",\"funciones\":[{\"accodfuncion\":\"REPCAT\",\"acnomfuncion\":\"REPORTES GASTOS POR CATEGORIAS\",\"status\":\"I\"}],\"rc\":0},{\"idModulo\":\"REPCON\",\"status\":\"A\",\"funciones\":[{\"accodfuncion\":\"REPCON\",\"acnomfuncion\":\"REPORTE CUENTA CONCENTRADORA\",\"status\":\"A\"},{\"accodfuncion\":\"REPCON\",\"acnomfuncion\":\"REPORTE CUENTA CONCENTRADORA\",\"status\":\"A\"},{\"accodfuncion\":\"TEBCOD\",\"acnomfuncion\":\"GENERAR CONSOLIDADO\",\"status\":\"I\"}],\"rc\":0},{\"idModulo\":\"REPEDO\",\"status\":\"A\",\"funciones\":[{\"accodfuncion\":\"REPEDO\",\"acnomfuncion\":\"REPORTE DE ESTADOS DE CUENTA\",\"status\":\"A\"},{\"accodfuncion\":\"REPEDO\",\"acnomfuncion\":\"REPORTE DE ESTADOS DE CUENTA\",\"status\":\"A\"}],\"rc\":0},{\"idModulo\":\"REPLOT\",\"status\":\"A\",\"funciones\":[{\"accodfuncion\":\"REPLOT\",\"acnomfuncion\":\"REPORTE DE ESTATUS DE LOTES\",\"status\":\"A\"},{\"accodfuncion\":\"REPLOT\",\"acnomfuncion\":\"REPORTE DE ESTATUS DE LOTES\",\"status\":\"A\"}],\"rc\":0},{\"idModulo\":\"REPPRO\",\"status\":\"A\",\"funciones\":[{\"accodfuncion\":\"REPPRO\",\"acnomfuncion\":\"REPORTE RECARGAS REALIZADAS\",\"status\":\"A\"},{\"accodfuncion\":\"REPPRO\",\"acnomfuncion\":\"REPORTE RECARGAS REALIZADAS\",\"status\":\"A\"}],\"rc\":0},{\"idModulo\":\"REPREP\",\"status\":\"A\",\"funciones\":[{\"accodfuncion\":\"REPREP\",\"acnomfuncion\":\"REPORTE REPOSICIONES\",\"status\":\"I\"}],\"rc\":0},{\"idModulo\":\"REPRTH\",\"status\":\"A\",\"funciones\":[{\"accodfuncion\":\"REPRTH\",\"acnomfuncion\":\"REPORTE RECARGA CON COMISIONES\",\"status\":\"I\"}],\"rc\":0},{\"idModulo\":\"REPSAL\",\"status\":\"A\",\"funciones\":[{\"accodfuncion\":\"REPSAL\",\"acnomfuncion\":\"REPORTE SALDOS AL CIERRE\",\"status\":\"I\"}],\"rc\":0},{\"idModulo\":\"REPTAR\",\"status\":\"A\",\"funciones\":[{\"accodfuncion\":\"REPTAR\",\"acnomfuncion\":\"REPORTE TARJETAS EMITIDAS\",\"status\":\"A\"},{\"accodfuncion\":\"REPTAR\",\"acnomfuncion\":\"REPORTE TARJETAS EMITIDAS\",\"status\":\"A\"}],\"rc\":0},{\"idModulo\":\"REPUSU\",\"status\":\"A\",\"funciones\":[{\"accodfuncion\":\"REPUSU\",\"acnomfuncion\":\"REPORTE ACTIVIDAD POR USUARIO\",\"status\":\"A\"},{\"accodfuncion\":\"REPUSU\",\"acnomfuncion\":\"REPORTE DE USUARIOS EMPRESA\",\"status\":\"I\"}],\"rc\":0},{\"idModulo\":\"SALDAM\",\"status\":\"A\",\"funciones\":[{\"accodfuncion\":\"SALDAM\",\"acnomfuncion\":\"SALDOS AMANECIDOS\",\"status\":\"I\"}],\"rc\":0},{\"idModulo\":\"TEBTHA\",\"status\":\"A\",\"funciones\":[{\"accodfuncion\":\"TEBTHA\",\"acnomfuncion\":\"REPORTE DE TARJETAHABIENTE\",\"status\":\"A\"}],\"rc\":0}]},{\"idPerfil\":\"GESUSR\",\"descripcion\":\"USUARIOS\",\"status\":\"A\",\"modulos\":[{\"idModulo\":\"USEREM\",\"status\":\"A\",\"funciones\":[{\"accodfuncion\":\"ACTUSU\",\"acnomfuncion\":\"ACTUALIZACION DE USUARIOS\",\"status\":\"I\"},{\"accodfuncion\":\"ASGPER\",\"acnomfuncion\":\"ASIGNACION DE PERMISOS\",\"status\":\"A\"},{\"accodfuncion\":\"CONPER\",\"acnomfuncion\":\"CONSULTA DE PERMISOS\",\"status\":\"I\"},{\"accodfuncion\":\"CONUSU\",\"acnomfuncion\":\"CONSULTA DE USUARIOS\",\"status\":\"A\"},{\"accodfuncion\":\"CREUSU\",\"acnomfuncion\":\"CREACION DE USUARIOS\",\"status\":\"A\"},{\"accodfuncion\":\"ELMPER\",\"acnomfuncion\":\"ELIMINACION DE PERMISOS\",\"status\":\"I\"}],\"rc\":0}]},{\"idPerfil\":\"SERVIC\",\"descripcion\":\"SERVICIOS\",\"status\":\"A\",\"modulos\":[{\"idModulo\":\"COPELO\",\"status\":\"A\",\"funciones\":[{\"accodfuncion\":\"OPCONL\",\"acnomfuncion\":\"CONSULTA DE ESTADO/OPERACION TARJETAS\",\"status\":\"A\"}],\"rc\":0},{\"idModulo\":\"GIRCOM\",\"status\":\"A\",\"funciones\":[{\"accodfuncion\":\"ACTGIR\",\"acnomfuncion\":\"ACTUALIZACION DE TARJETA\",\"status\":\"A\"},{\"accodfuncion\":\"CONGIR\",\"acnomfuncion\":\"CONSULTA A TARJETAS\",\"status\":\"A\"}],\"rc\":0},{\"idModulo\":\"LIMTRX\",\"status\":\"A\",\"funciones\":[{\"accodfuncion\":\"ACTLIM\",\"acnomfuncion\":\"ACTUALIZACION DE TARJETA\",\"status\":\"A\"},{\"accodfuncion\":\"CONLIM\",\"acnomfuncion\":\"CONSULTA A TARJETAS\",\"status\":\"A\"}],\"rc\":0},{\"idModulo\":\"TEBPOL\",\"status\":\"A\",\"funciones\":[{\"accodfuncion\":\"TEBPOL\",\"acnomfuncion\":\"EMISION DE POLIZA\",\"status\":\"I\"}],\"rc\":0},{\"idModulo\":\"TRAMAE\",\"status\":\"A\",\"funciones\":[{\"accodfuncion\":\"TRAABO\",\"acnomfuncion\":\"ABONOS A TARJETAS\",\"status\":\"A\"},{\"accodfuncion\":\"TRAASG\",\"acnomfuncion\":\"REASIGNACION DE TARJETA\",\"status\":\"A\"},{\"accodfuncion\":\"TRABLQ\",\"acnomfuncion\":\"BLOQUEO A TARJETAS\",\"status\":\"A\"},{\"accodfuncion\":\"TRACAR\",\"acnomfuncion\":\"CARGOS A TARJETAS\",\"status\":\"A\"},{\"accodfuncion\":\"TRADBL\",\"acnomfuncion\":\"DESBLOQUEO A TARJETA\",\"status\":\"A\"},{\"accodfuncion\":\"TRAPGO\",\"acnomfuncion\":\"ABONAR CUENTA CONCENTRADORA\",\"status\":\"A\"},{\"accodfuncion\":\"TRASAL\",\"acnomfuncion\":\"CONSULTA A TARJETAS\",\"status\":\"A\"}],\"rc\":0}]}]}"}';
+		// $this->isResponseRc = 0;
+
+		switch($this->isResponseRc)  {
+			case 0:
+				$this->response->code = 0;
+				$data = $response->bean->perfiles;
+				//$data = (json_decode(json_decode($response)->bean)->perfiles);
+				$this->response->data = $data;
+				break;
+		}
+
+		return $this->responseToTheView('callWs_userPermissions');
+	}
+
+	/**
+	 * @info Método para actualizar permisos de usuarios.
+	 * @author Diego Acosta García
+	 * @date Oct 5st, 2020
+	 */
+	public function callWs_updatePermissions_User($dataRequest)
+	{
+		log_message('INFO', 'NOVO User Model: updatePermissions Method Initialized');
+
+		$this->dataAccessLog->modulo = 'Usuario';
+		$this->dataAccessLog->function = 'Actualizar funciones usuario';
+		$this->dataAccessLog->operation = 'Actualizar funciones usuario';
+
+		$this->dataRequest->idOperation = 'gestionUsuarios';
+		$this->dataRequest->opcion = 'actualizarFuncionesUsuario';
+		$this->dataRequest->className = 'com.novo.objects.TOs.GestionUsuariosTO';
+		$this->dataRequest->userName = $dataRequest->user;
+		// $this->dataRequest->userName = 'DGONZALEZ1';
+
+		foreach ($dataRequest as $key => $value) {
+			$objeto[lang('PERMITS_UPDATE_ENGLISH_CHANGE')[$key]] = $value;
+			unset($objeto[$key]);
+		};
+
+		$i=0;
+		$j=0;
+		$functionsArray =[];
+
+		foreach ($objeto as $key => $value) {
+			if($value == "off"){
+				$objeto[$i] = ['accodfuncion' => $key,
+													'status'=> 'I'];
+			}else{
+				$objeto[$i] = ['accodfuncion' => $key,
+				'status'=> 'A'];
+			}
+			$i++;
+			unset($objeto[$key]);
+		}
+
+		foreach ($objeto as $key => $value) {
+			$functionsArray[$j] = $value;
+			$j++;
+		};
+
+		$this->dataRequest->perfiles = [['idPerfil' => 'TODOS',
+		'modulos' => [['idModulo' => 'TODOS',
+		'funciones' => $functionsArray]]]];
+
+		$response = $this->sendToService('callWs_updatePermissions');
+
+		// $this->isResponseRc = 0;
+
+		switch($this->isResponseRc)   {
+			case 0:
+				$this->response->code = 0;
+				$this->response->data = (array)$response;
+				break;
+		}
+
+		return $this->responseToTheView('callWs_updatePermissions');
+	}
+
+	/**
+	 * @info Método para habilitar usuario.
+	 * @author Diego Acosta García
+	 * @date Oct 5st, 2020
+	 */
+	public function callWs_enableUser_User($dataRequest)
+	{
+		log_message('INFO', 'NOVO User Model: enableUser Method Initialized');
+
+		$this->dataAccessLog->modulo = 'Usuario';
+		$this->dataAccessLog->function = 'Obtener usuarios banorte';
+		$this->dataAccessLog->operation = 'obtener usuarios banorte';
+
+		$this->dataRequest->idOperation = 'gestionUsuarios';
+		$this->dataRequest->opcion = 'crearUsuario';
+		$this->dataRequest->className = 'com.novo.objects.TOs.GestionUsuariosTO';
+		$this->dataRequest->userName = 'DGONZALEZ1';
+		$this->dataRequest->idUsuario = '16903005';
+		$this->dataRequest->nombre1 = 'DEIBY';
+		$this->dataRequest->nombre2 = 'GABRIEL';
+		$this->dataRequest->apellido1 = 'GONZALEZ';
+		$this->dataRequest->apellido2 = 'HERNANDEZ';
+		$this->dataRequest->clonarPermisos = 'true';
+		$this->dataRequest->mail = 'dehernandez@novopayment.onmicrosoft.com';
+		$this->dataRequest->empresa = '1234567890';
+		$this->dataRequest->usuarioPlantilla = 'DGONZALEZ1';
+
+		$response = $this->sendToService('callWs_enableUser');
+
+		switch($this->isResponseRc)   {
+			case 0:
+				$this->response->code = 0;
+				$this->response->data = (array)$response;
+				break;
+		}
+
+		return $this->responseToTheView('callWs_enableUser');
+	}
 }
+

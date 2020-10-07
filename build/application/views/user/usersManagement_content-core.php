@@ -14,7 +14,7 @@
   </div>
 </div>
 <div class="flex mt-1 bg-color flex-nowrap justify-between">
-	<div id="pre-loader" class="mt-2 mx-auto">
+	<div id="pre-loader" class="mt-2 mx-auto ">
 		<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
 	</div>
 	<div class="w-100 hide-out hide">
@@ -31,33 +31,40 @@
 					</tr>
 				</thead>
 				<tbody>
+				<?php foreach($userList AS $user) : ?>
 					<tr>
-						<td>1001001</td>
-						<td>José Gutierrez</td>
-						<td>josegutierrez@mail.com</td>
-						<td>Administrador</td>
+						<td><?= $user->tranIdUsuario ?></td>
+						<td><?= $user->tranNombreUsuario ?></td>
+						<td><?= $user->tranCorreo ?></td>
+						<td><?= $user->tranTipoUsuario ?></td>
 						<td class="py-0 px-1 flex justify-center items-center">
 							<?php if($this->verify_access->verifyAuthorization('USEREM')): ?>
-							<button class="btn mx-1 px-0 big-modal" title="<?= lang('GEN_BTN_ENABLE_USER'); ?>" data-toggle="tooltip">
-								<i class="icon icon-user-building" aria-hidden="true"></i>
-							</button>
+								<?php if($user->registed == false): ?>
+									<button class="btn mx-1 px-0 big-modal" title="<?= lang('GEN_BTN_ENABLE_USER'); ?>" data-toggle="tooltip">
+										<i class="icon icon-user-building" aria-hidden="true"></i>
+									</button>
+								<?php endif; ?>
 							<?php endif; ?>
 							<?php if($this->verify_access->verifyAuthorization('USEREM')): ?>
-							<button class="btn mx-1 px-0 big-modal" title="<?= lang('GEN_BTN_EDIT_PERMITS'); ?>" data-toggle="tooltip">
-								<i class="icon icon-edit-permits" aria-hidden="true"></i>
-							</button>
+								<?php if($user->registed == true): ?>
+									<button id="editButton" class="btn mx-1 px-0 big-modal" title="<?= lang('GEN_BTN_EDIT_PERMITS'); ?>" data-toggle="tooltip">
+										<i class="icon icon-edit-permits" aria-hidden="true"></i>
+									</button>
 							<?php endif; ?>
-							<form id="formManagement">
-								<input type="hidden" name="adminUser" value="">
-								<input type="hidden" name="adminName" value="">
-								<input type="hidden" name="adminMail" value="">
-								<input type="hidden" name="adminType" value="">
+
+							<?php endif; ?>
+							<form id="formManagement" name="formManagement" method="post">
+								<input type="hidden" name="adminUser" value="<?= $user->tranIdUsuario ?>">
+								<input type="hidden" name="adminName" value="<?= $user->tranNombreUsuario ?>">
+								<input type="hidden" name="adminMail" value="<?= $user->tranCorreo ?>">
+								<input type="hidden" name="adminType" value="<?= $user->tranTipoUsuario ?>">
 							</form>
 						</td>
 					</tr>
+				<?php endforeach; ?>
 				</tbody>
 			</table>
-		</div>
+			</div>
 	</div>
 	<?php if($widget): ?>
 	<?php $this->load->view('widget/widget_enterprise-product_content-core', $widget) ?>

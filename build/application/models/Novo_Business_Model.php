@@ -331,8 +331,6 @@ class Novo_Business_Model extends NOVO_Model {
 
 		switch($this->isResponseRc) {
 			case 0:
-				// array_push($response->lista, json_decode('{"idPerfil":"GESUSR","modulos":[{"idModulo":"USEREM","descripcion":"USUARIO","status":"A","funciones":[{"accodfuncion":"CONUSU","acnomfuncion":"CONSULTA DE USUARIOS"},{"accodfuncion":"CREUSU","acnomfuncion":"CREACION DE USUARIOS"},{"accodfuncion":"ASGPER","acnomfuncion":"ASIGNACION DE PERMISOS"}],"rc":0}]}'));
-
 				log_message('INFO', 'NOVO ['.$this->userName.'] '.'callWs_GetProductDetail'.' USER_ACCESS LIST: '.json_encode($response->lista));
 
 				$this->response->code = 0;
