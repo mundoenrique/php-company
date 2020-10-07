@@ -1220,11 +1220,13 @@ class Novo_Bulk_Model extends NOVO_Model {
 
 		$expiredDate = explode('/', $dataRequest->expiredDate);
 		$expiredDate = $expiredDate[0].substr($expiredDate[1], -2);
-		$password = '';
+		$password =  '';
 
 		if (isset($dataRequest->password)) {
 			$password = $this->cryptography->decryptOnlyOneData($dataRequest->password);
 		}
+
+		$password = lang('CONF_SHOW_INPUT_PASS') == 'OFF' ? lang('GEN_GENERIC_PASS') : $password;
 
 		if (lang('CONF_HASH_PASS') == 'ON' && $this->singleSession == 'signIn') {
 			$password = md5($password);
