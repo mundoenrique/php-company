@@ -245,11 +245,11 @@ $(function () {
 				}
 			}
 
-			inputModal =	'<form id="password-modal" name="password-modal" class="row col-auto p-0" onsubmit="return false;">';
+			inputModal =	'<form id="password-modal" name="password-modal" class="row col-auto" onsubmit="return false;">';
 			var inputPassOff = '<span class="regular">¿Estás seguro que deseas realizar esta acción?</span>';
 
 			if (lang.CONF_SHOW_INPUT_PASS == 'ON') {
-				inputModal +=		'<div class="form-group col-12">';
+				inputModal +=		'<div class="form-group col-12 pl-0">';
 				inputModal += 		'<div class="input-group">';
 				inputModal += 			'<input class="form-control pwd-input pwd" type="password" name="password" autocomplete="off" ';
 				inputModal += 				'placeholder="' + lang.GEN_PLACE_PASSWORD + '">';
