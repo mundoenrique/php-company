@@ -151,7 +151,7 @@ $(function () {
 
 					if (access.TRASAL && data.status == '') {
 						options += '<button class="btn mx-1 px-0" title="' + lang.GEN_CHECK_BALANCE + '" data-toggle="tooltip" amount="0">';
-						options += '<i class="icon icon-balance" aria-hidden="true"></i>';
+						options += '<i class="icon icon-envelope-open" aria-hidden="true"></i>';
 						options += '</button>';
 					}
 
@@ -266,7 +266,7 @@ $(function () {
 
 			if (action == lang.GEN_CARD_ASSIGNMENT) {
 
-				inputModal += 	'<div class="form-group col-12">';
+				inputModal += 	'<div class="form-group col-12 pl-0">';
 				inputModal += 		'<div class="input-group">';
 				inputModal += 			'<input class="form-control" type="text" name="cardNumber" autocomplete="off"';
 				inputModal += 			'placeholder="' + lang.GEN_TABLE_CARD_NUMBER + '" req="yes">';
