@@ -10,17 +10,17 @@
 			"items": [
 				{
 					"name": "Servicio administrativo mínimo",
-					"description": "Aplica a facturas cuyo servicio administrativo sea inferior a Bs. 1.700.000,00",
+					"description": "Aplica a facturas cuyo servicio administrativo sea inferior a Bs. 2.130.000,00",
 					"rates": [
-						1700000.00,
-						1700000.00
+						2130000.00,
+						2130000.00
 					]
 				},
 				{
 					"name": "Servicios operativos y de logística (cobro único mensual)",
 					"description": "Quedan exceptuadas las facturas con servicio administrativo mínimo","rates": [
-						1700000.00,
-						1700000.00
+					2130000.00,
+					2130000.00
 					]
 				}
 			]
@@ -33,16 +33,16 @@
 					"name": "Emisión (c/u)",
 					"description": null,
 					"rates": [
-						600000.00,
-						600000.00
+						700000.00,
+						700000.00
 					]
 				},
 				{
 					"name": "Reposición / Renovación (c/u)",
 					"description": null,
 					"rates": [
-						600000.00,
-						600000.00
+						700000.00,
+						700000.00
 					]
 				}
 			]
@@ -55,8 +55,8 @@
 					"name": "Reposición",
 					"description": null,
 					"rates": [
-						600000.00,
-						600000.00
+						700000.00,
+						700000.00
 					]
 				}
 			]
@@ -114,15 +114,15 @@
 			"description": null,
 			"items": [
 				{
-					"name": "A cuentas bancarias, montos menores a Bs. 13.333.333,00",
+					"name": "A cuentas bancarias, montos menores a Bs. 16.666.666,00",
 					"description": null,
 					"rates": [
 						null,
-						100000.00
+						125000.00
 					]
 				},
 				{
-					"name": "A cuentas bancarias, montos mayores a Bs. 13.333.333,00",
+					"name": "A cuentas bancarias, montos mayores a Bs. 16.666.666,00",
 					"description": null,
 					"rates": [
 						null,
@@ -136,15 +136,15 @@
 			"description": null,
 			"items": [
 				{
-					"name": "De tarjetas de crédito, montos menores a Bs. 13.333.333,00",
+					"name": "De tarjetas de crédito, montos menores a Bs. 16.666.666,00",
 					"description": null,
 					"rates": [
 						null,
-						100000.00
+						125000.00
 					]
 				},
 				{
-					"name": "De tarjetas de crédito, montos mayores a Bs. 13.333.333,00",
+					"name": "De tarjetas de crédito, montos mayores a Bs. 16.666.666,00",
 					"description": null,
 					"rates": [
 						null,
