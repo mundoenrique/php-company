@@ -117,7 +117,6 @@ $lang['PERMITS_UPDATE_ENGLISH_CHANGE'] = [
 	'rechargeWithCommissions' => 'REPRTH',
 	'closingBalance' => 'REPSAL',
 	'cardIssued' => 'REPTAR',
-	'activityUser' => 'REPUSU',
 	'userEnterprise' => 'REPUSU',
 	'balancesIssued' => 'SALDAM',
 	'cardHolder' => 'TEBTHA',
@@ -140,4 +139,12 @@ $lang['PERMITS_UPDATE_ENGLISH_CHANGE'] = [
 	'cardUnlock' => 'TRADBL',
 	'payConcentratorAccount' => 'TRAPGO',
 	'consultCardsTrasal' => 'TRASAL',
+];
+$lang['PERMITS_USER_MANAGMENET_PROPERTIES'] = [
+	'tranIdEmpresa' => 'idEnterprise',
+	'tranIdUsuario' => 'idUser',
+	'tranNombreUsuario' => 'name',
+	'tranCorreo' => 'mail',
+	'tranTipoUsuario' => 'type',
+	'registed' => 'registered'
 ];

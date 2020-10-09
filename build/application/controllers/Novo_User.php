@@ -319,14 +319,6 @@ class Novo_User extends NOVO_Controller {
 		$responseList = $this->loadModel();
 		$data = $responseList->data;
 
-		for ($i=0; $i < count($data); $i++) {
-			if ($data[$i]->tranTipoUsuario == 0) {
-				$data[$i]->tranTipoUsuario = 'Administrador';
-			}else{
-				$data[$i]->tranTipoUsuario = 'Operador';
-			}
-		}
-
 		$this->render->userList = $data;
 		$this->responseAttr($responseList);
 		$this->render->titlePage = lang('GEN_MENU_USERS_MANAGEMENT');
@@ -380,15 +372,15 @@ class Novo_User extends NOVO_Controller {
 
 		$this->render->deleteServiceOrder = $arrayList1[0][0][0]->status;
 		$this->render->consultOrderService = $arrayList1[0][0][1]->status;
-		$this->render->payOrderService = $arrayList1[0][0][3]->status;
+		$this->render->payOrderService = $arrayList1[0][0][2]->status;
 		$this->render->deleteBulk = $arrayList1[1][0][0]->status;
 		$this->render->confirmBulk = $arrayList1[1][1][0]->status;
-		$this->render->deleteBulkForConfirm = $arrayList1[1][1][2]->status;
+		$this->render->deleteBulkForConfirm = $arrayList1[1][1][1]->status;
 		$this->render->generationBulk = $arrayList1[1][2][0]->status;
 		$this->render->unnamedReport = $arrayList1[1][3][0]->status;
 		$this->render->expensesByCategory = $arrayList1[2][0][0]->status;
 		$this->render->concentratingAccount = $arrayList1[2][1][0]->status;
-		$this->render->generateConsolid = $arrayList1[2][1][2]->status;
+		$this->render->generateConsolid = $arrayList1[2][1][1]->status;
 		$this->render->stateAccount = $arrayList1[2][2][0]->status;
 		$this->render->statusBulk = $arrayList1[2][3][0]->status;
 		$this->render->rechargesMade = $arrayList1[2][4][0]->status;
@@ -396,8 +388,7 @@ class Novo_User extends NOVO_Controller {
 		$this->render->rechargeWithCommissions = $arrayList1[2][6][0]->status;
 		$this->render->closingBalance = $arrayList1[2][7][0]->status;
 		$this->render->cardIssued = $arrayList1[2][8][0]->status;
-		$this->render->activityUser = $arrayList1[2][9][0]->status;
-		$this->render->userEnterprise = $arrayList1[2][9][1]->status;
+		$this->render->userEnterprise = $arrayList1[2][9][0]->status;
 		$this->render->balancesIssued = $arrayList1[2][10][0]->status;
 		$this->render->cardHolder = $arrayList1[2][11][0]->status;
 		$this->render->updateUser = $arrayList1[3][0][0]->status;

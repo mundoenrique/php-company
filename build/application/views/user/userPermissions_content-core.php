@@ -26,7 +26,7 @@
 						<div class="row mb-2 px-5">
 							<div class="form-group mb-3 col-6">
 								<label for="idUser" id="idUser"><?= lang('GEN_USER') ?></label>
-								<span id="idUser" class="form-control px-1" readonly="readonly"><?= $user ?></span>
+								<input id="idUser" class="form-control px-1" readonly="readonly" value= <?= $user ?>>
 							</div>
 							<div class="form-group mb-3 col-6">
 								<label for="fullName" id="fullName"><?= lang('GEN_TABLE_FULL_NAME') ?></label>
@@ -102,12 +102,10 @@
 									<label class="custom-control-label " for="payOrderService"><?= lang('PERMITS_PAY_ORDER_SERVICE'); ?></span>
 									</label>
 								</div>
-								</div>
-
-
+							</div>
 							<div class="row mx-3 mb-1">
-							<h4 class="col-12 pl-0 bold"><?= lang('GEN_MENU_LOTS'); ?></h4>
-							<div class="form-group custom-control custom-switch col-4 col-lg-3 pb-2">
+								<h4 class="col-12 pl-0 bold"><?= lang('GEN_MENU_LOTS'); ?></h4>
+								<div class="form-group custom-control custom-switch col-4 col-lg-3 pb-2">
 									<input id="deleteBulk" class="permissions custom-control-input" type="checkbox" name="checkbox3" value=<?= $deleteBulk ?>>
 									<label class="custom-control-label " for="deleteBulk"><?= lang('PERMITS_DELETE_BULK'); ?></span>
 									</label>
@@ -130,8 +128,8 @@
 							</div>
 
 							<div class="row mx-3 mb-1">
-							<h4 class="col-12 pl-0 bold"><?= lang('GEN_MENU_REPORTS'); ?></h4>
-							<div class="form-group custom-control custom-switch col-4 col-lg-3 pb-2">
+								<h4 class="col-12 pl-0 bold"><?= lang('GEN_MENU_REPORTS'); ?></h4>
+								<div class="form-group custom-control custom-switch col-4 col-lg-3 pb-2">
 									<input id="unnamedReport" class="permissions custom-control-input" type="checkbox" name="checkbox7" value=<?= $unnamedReport ?>>
 									<label class="custom-control-label " for="unnamedReport"><?= lang('PERMITS_UNNAMED_REPORT'); ?></span>
 									</label>
@@ -186,23 +184,19 @@
 									<label class="custom-control-label " for="cardIssued"><?= lang('PERMITS_ISSUED_CARD_REPORT'); ?></span>
 									</label>
 								</div>
+
 								<div class="form-group custom-control custom-switch col-4 col-lg-3 pb-2">
-									<input id="activityUser" class="permissions custom-control-input" type="checkbox" name="checkbox18" value=<?= $activityUser ?>>
-									<label class="custom-control-label " for="activityUser"><?= lang('PERMITS_USER_ACTIVITY_REPORT'); ?></span>
-									</label>
-								</div>
-								<div class="form-group custom-control custom-switch col-4 col-lg-3 pb-2">
-									<input id="userEnterprise" class="permissions custom-control-input" type="checkbox" name="checkbox19" value=<?= $userEnterprise ?>>
+									<input id="userEnterprise" class="permissions custom-control-input" type="checkbox" name="checkbox18" value=<?= $userEnterprise ?>>
 									<label class="custom-control-label " for="userEnterprise"><?= lang('PERMITS_USER_ENTERPRISE_REPORT'); ?></span>
 									</label>
 								</div>
 								<div class="form-group custom-control custom-switch col-4 col-lg-3 pb-2">
-									<input id="balancesIssued" class="permissions custom-control-input" type="checkbox" name="checkbox20" value=<?= $balancesIssued ?>>
+									<input id="balancesIssued" class="permissions custom-control-input" type="checkbox" name="checkbox19" value=<?= $balancesIssued ?>>
 									<label class="custom-control-label " for="balancesIssued"><?= lang('PERMITS_BALANCES_DAWN'); ?></span>
 									</label>
 								</div>
 								<div class="form-group custom-control custom-switch col-4 col-lg-3 pb-2">
-									<input id="cardHolder" class="permissions custom-control-input" type="checkbox" name="checkbox21" value=<?= $cardHolder ?>>
+									<input id="cardHolder" class="permissions custom-control-input" type="checkbox" name="checkbox20" value=<?= $cardHolder ?>>
 									<label class="custom-control-label " for="cardHolder"><?= lang('PERMITS_CARDHOLDER_REPORT'); ?></span>
 									</label>
 								</div>
@@ -210,32 +204,32 @@
 							<div class="row mx-3 mb-1">
 								<h4 class="col-12 pl-0 bold"><?= lang('GEN_MENU_USERS'); ?></h4>
 								<div class="form-group custom-control custom-switch col-4 col-lg-3 pb-2">
-									<input id="updateUser" class="permissions custom-control-input" type="checkbox" name="checkbox22" value=<?= $updateUser ?>>
+									<input id="updateUser" class="permissions custom-control-input" type="checkbox" name="checkbox21" value=<?= $updateUser ?>>
 									<label class="custom-control-label " for="updateUser"><?= lang('PERMITS_USER_UPDATE'); ?></span>
 									</label>
 								</div>
 								<div class="form-group custom-control custom-switch col-4 col-lg-3 pb-2">
-									<input id="assignPermit" class="permissions custom-control-input" type="checkbox" name="checkbox23" value=<?= $assignPermit ?>>
+									<input id="assignPermit" class="permissions custom-control-input" type="checkbox" name="checkbox22" value=<?= $assignPermit ?>>
 									<label class="custom-control-label " for="assignPermit"><?= lang('PERMITS_ASSIGMENT_OF_PERMITS'); ?></span>
 									</label>
 								</div>
 								<div class="form-group custom-control custom-switch col-4 col-lg-3 pb-2">
-									<input id="consultPermit" class="permissions custom-control-input" type="checkbox" name="checkbox24" value=<?= $consultPermit ?>>
+									<input id="consultPermit" class="permissions custom-control-input" type="checkbox" name="checkbox23" value=<?= $consultPermit ?>>
 									<label class="custom-control-label " for="consultPermit"><?= lang('PERMITS_CONSULT_OF_PERMITS'); ?></span>
 									</label>
 								</div>
 								<div class="form-group custom-control custom-switch col-4 col-lg-3 pb-2">
-									<input id="consultUser" class="permissions custom-control-input" type="checkbox" name="checkbox25" value=<?= $consultUser ?>>
+									<input id="consultUser" class="permissions custom-control-input" type="checkbox" name="checkbox24" value=<?= $consultUser ?>>
 									<label class="custom-control-label " for="consultUser"><?= lang('PERMITS_CONSULT_USER'); ?></span>
 									</label>
 								</div>
 								<div class="form-group custom-control custom-switch col-4 col-lg-3 pb-2">
-									<input id="createUser" class="permissions custom-control-input" type="checkbox" name="checkbox26" value=<?= $createUser ?>>
+									<input id="createUser" class="permissions custom-control-input" type="checkbox" name="checkbox25" value=<?= $createUser ?>>
 									<label class="custom-control-label " for="createUser"><?= lang('PERMITS_CREATE_USER'); ?></span>
 									</label>
 								</div>
 								<div class="form-group custom-control custom-switch col-4 col-lg-3 pb-2">
-									<input id="deletePermit" class="permissions custom-control-input" type="checkbox" name="checkbox27" value=<?= $deletePermit ?>>
+									<input id="deletePermit" class="permissions custom-control-input" type="checkbox" name="checkbox26" value=<?= $deletePermit ?>>
 									<label class="custom-control-label " for="deletePermit"><?= lang('PERMITS_DELETE_PERMITS'); ?></span>
 									</label>
 								</div>
@@ -243,67 +237,67 @@
 							<div class="row mx-3 mb-1">
 								<h4 class="col-12 pl-0 bold"><?= lang('GEN_MENU_SERVICES'); ?></h4>
 								<div class="form-group custom-control custom-switch col-4 col-lg-3 pb-2">
-									<input id="consultStateOperation" class="permissions custom-control-input" type="checkbox" name="checkbox28" value=<?= $consultStateOperation ?>>
+									<input id="consultStateOperation" class="permissions custom-control-input" type="checkbox" name="checkbox27" value=<?= $consultStateOperation ?>>
 									<label class="custom-control-label " for="consultStateOperation"><?= lang('PERMITS_CONSULT_STATE_CARDS'); ?></span>
 									</label>
 								</div>
 								<div class="form-group custom-control custom-switch col-4 col-lg-3 pb-2">
-									<input id="updateCardTwirl" class="permissions custom-control-input" type="checkbox" name="checkbox29" value=<?= $updateCardTwirl ?>>
+									<input id="updateCardTwirl" class="permissions custom-control-input" type="checkbox" name="checkbox28" value=<?= $updateCardTwirl ?>>
 									<label class="custom-control-label " for="updateCardTwirl"><?= lang('PERMITS_UPDATE_CARD_TWIRLS'); ?></span>
 									</label>
 								</div>
 								<div class="form-group custom-control custom-switch col-4 col-lg-3 pb-2">
-									<input id="consultCardTwirl" class="permissions custom-control-input" type="checkbox" name="checkbox30" value=<?= $consultCardTwirl ?>>
+									<input id="consultCardTwirl" class="permissions custom-control-input" type="checkbox" name="checkbox29" value=<?= $consultCardTwirl ?>>
 									<label class="custom-control-label " for="consultCardTwirl"><?= lang('PERMITS_CONSULT_CARD_TWIRLS'); ?></span>
 									</label>
 								</div>
 								<div class="form-group custom-control custom-switch col-4 col-lg-3 pb-2">
-									<input id="updateCardLimit" class="permissions custom-control-input" type="checkbox" name="checkbox31" value=<?= $updateCardLimit ?>>
+									<input id="updateCardLimit" class="permissions custom-control-input" type="checkbox" name="checkbox30" value=<?= $updateCardLimit ?>>
 									<label class="custom-control-label " for="updateCardLimit"><?= lang('PERMITS_UPDATE_CARD_LIMITS'); ?></span>
 									</label>
 								</div>
 								<div class="form-group custom-control custom-switch col-4 col-lg-3 pb-2">
-									<input id="consultCardLimit" class="permissions custom-control-input" type="checkbox" name="checkbox32" value=<?= $consultCardLimit ?>>
+									<input id="consultCardLimit" class="permissions custom-control-input" type="checkbox" name="checkbox31" value=<?= $consultCardLimit ?>>
 									<label class="custom-control-label " for="consultCardLimit"><?= lang('PERMITS_CONSULT_CARD_LIMITS'); ?></span>
 									</label>
 								</div>
 								<div class="form-group custom-control custom-switch col-4 col-lg-3 pb-2">
-									<input id="issuancePolicy" class="permissions custom-control-input" type="checkbox" name="checkbox33" value=<?= $issuancePolicy ?>>
+									<input id="issuancePolicy" class="permissions custom-control-input" type="checkbox" name="checkbox32" value=<?= $issuancePolicy ?>>
 									<label class="custom-control-label " for="issuancePolicy"><?= lang('PERMITS_POLICY_ISSUANCE'); ?></span>
 									</label>
 								</div>
 								<div class="form-group custom-control custom-switch col-4 col-lg-3 pb-2">
-									<input id="creditCards" class="permissions custom-control-input" type="checkbox" name="checkbox34" value=<?= $creditCards ?>>
+									<input id="creditCards" class="permissions custom-control-input" type="checkbox" name="checkbox33" value=<?= $creditCards ?>>
 									<label class="custom-control-label " for="creditCards"><?= lang('PERMITS_CARD_PAYMENT'); ?></span>
 									</label>
 								</div>
 								<div class="form-group custom-control custom-switch col-4 col-lg-3 pb-2">
-									<input id="reassingCard" class="permissions custom-control-input" type="checkbox" name="checkbox35" value=<?= $reassingCard ?>>
+									<input id="reassingCard" class="permissions custom-control-input" type="checkbox" name="checkbox34" value=<?= $reassingCard ?>>
 									<label class="custom-control-label " for="reassingCard"><?= lang('PERMITS_CARD_REASSIGNMENT'); ?></span>
 									</label>
 								</div>
 								<div class="form-group custom-control custom-switch col-4 col-lg-3 pb-2">
-									<input id="cardLock" class="permissions custom-control-input" type="checkbox" name="checkbox36" value=<?= $cardLock ?>>
+									<input id="cardLock" class="permissions custom-control-input" type="checkbox" name="checkbox35" value=<?= $cardLock ?>>
 									<label class="custom-control-label " for="cardLock"><?= lang('PERMITS_CARD_LOCK'); ?></span>
 									</label>
 								</div>
 								<div class="form-group custom-control custom-switch col-4 col-lg-3 pb-2">
-									<input id="chargedCards" class="permissions custom-control-input" type="checkbox" name="checkbox37" value=<?= $chargedCards ?>>
+									<input id="chargedCards" class="permissions custom-control-input" type="checkbox" name="checkbox36" value=<?= $chargedCards ?>>
 									<label class="custom-control-label " for="chargedCards"><?= lang('PERMITS_CHARGES_CARDS'); ?></span>
 									</label>
 								</div>
 								<div class="form-group custom-control custom-switch col-4 col-lg-3 pb-2">
-									<input id="cardUnlock" class="permissions custom-control-input" type="checkbox" name="checkbox38" value=<?= $cardUnlock ?>>
+									<input id="cardUnlock" class="permissions custom-control-input" type="checkbox" name="checkbox37" value=<?= $cardUnlock ?>>
 									<label class="custom-control-label " for="cardUnlock"><?= lang('PERMITS_UNLOCK_CARDS'); ?></span>
 									</label>
 								</div>
 								<div class="form-group custom-control custom-switch col-4 col-lg-3 pb-2">
-									<input id="payConcentratorAccount" class="permissions custom-control-input" type="checkbox" name="checkbox39" value=<?= $payConcentratorAccount ?>>
+									<input id="payConcentratorAccount" class="permissions custom-control-input" type="checkbox" name="checkbox38" value=<?= $payConcentratorAccount ?>>
 									<label class="custom-control-label " for="payConcentratorAccount"><?= lang('PERMITS_PAY_CONCENTRATOR_ACCOUNT'); ?></span>
 									</label>
 								</div>
 								<div class="form-group custom-control custom-switch col-4 col-lg-3 pb-2">
-									<input id="consultCardsTrasal" class="permissions custom-control-input" type="checkbox" name="checkbox40" value=<?= $consultCardsTrasal ?>>
+									<input id="consultCardsTrasal" class="permissions custom-control-input" type="checkbox" name="checkbox39" value=<?= $consultCardsTrasal ?>>
 									<label class="custom-control-label " for="consultCardsTrasal"><?= lang('PERMITS_CONSULT_CARDS'); ?></span>
 									</label>
 								</div>

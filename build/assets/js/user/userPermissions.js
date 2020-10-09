@@ -5,7 +5,7 @@ $(function () {
 	insertFormInput(false);
 	$('#enableSectionBtn').addClass('hidden');
 
-	for (var i = 0; i <= 41; i++) {
+	for (var i = 0; i <= 39; i++) {
 		var checkboxValue = $("input[name=checkbox"+ i +"]");
 		if (checkboxValue.val() == "off") {
 			checkboxValue.prop("checked", false);
@@ -55,11 +55,12 @@ $(function () {
 		$('#spinnerBlock').addClass('hide');
 		delete passData.allPermits;
 		delete passData.removeAllPermissions;
-		validateForms(form);
+		delete passData.screenSize;
+		delete passData.undefined;
 
+		validateForms(form);
 		if (form.valid()) {
 			insertFormInput(true, form);
-			passData.userId = $('#idUser').val();
 			changeBtn.html(loader);
 			updatePermissions(passData, btnText);
 		}

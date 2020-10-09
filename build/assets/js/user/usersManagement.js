@@ -32,40 +32,52 @@ $(function () {
 		e.preventDefault();
 		var event = $(e.currentTarget);
 		var action = event.attr('title');
+		var form;
 		switch(action) {
 			case lang.GEN_BTN_ENABLE_USER:
-				form = $(this).parent().find('#formManagement')
+				form = $(this).parent().find('#formManagement');
 				insertFormInput(true, form);
-				form.attr('action', baseURL+'permisos-usuario');
-				form.append('<input type="hidden" name="enableUser" value="enable">');
-				var passData = getDataForm(form);
+				var passData = form.toArray();
+				var data;
+
+				data = {
+					name: passData[0][1].value,
+					user:passData[0][0].value,
+					mail: passData[0][2].value,
+					type: passData[0][3].value
+				}
+
 				$('#spinnerBlock').addClass('hide');
-				form.submit();
 
 				validateForms(form);
+
 				if (form.valid()) {
 					insertFormInput(true, form);
-					enableUser(passData, form);
+					enableUser(data);
 				}
+
 				break;
 			case lang.GEN_BTN_EDIT_PERMITS:
-				form = $(this).parent().find('#formManagement')
+				form = $(this).parent().find('#formManagement');
 				insertFormInput(true, form);
 				form.attr('action', baseURL+'permisos-usuario');
 				form.append('<input type="hidden" name="editPermits" value="edit">');
+				form.submit();
 				break;
 		}
-		form.submit();
 		insertFormInput(false);
 	});
-
 });
 
-function enableUser(passData, form) {
+
+function enableUser(passData) {
 	verb = 'POST'; who = 'User'; where = 'enableUser'; data = passData;
 	callNovoCore(verb, who, where, data, function(response) {
 		dataResponse = response.data;
 
+		if (response.code == 4) {
+			location.reload();
+		}
 		$('.cover-spin').removeAttr("style");
 		insertFormInput(false);
 	});

@@ -31,22 +31,23 @@
 					</tr>
 				</thead>
 				<tbody>
-				<?php foreach($userList AS $user) : ?>
+				<?php
+				foreach($userList AS $user) : ?>
 					<tr>
-						<td><?= $user->tranIdUsuario ?></td>
-						<td><?= $user->tranNombreUsuario ?></td>
-						<td><?= $user->tranCorreo ?></td>
-						<td><?= $user->tranTipoUsuario ?></td>
+						<td><?= $user->idUser ?></td>
+						<td><?= $user->name ?></td>
+						<td><?= $user->mail ?></td>
+						<td><?= $user->type ?></td>
 						<td class="py-0 px-1 flex justify-center items-center">
 							<?php if($this->verify_access->verifyAuthorization('USEREM')): ?>
-								<?php if($user->registed == false): ?>
+								<?php if($user->registered == false): ?>
 									<button class="btn mx-1 px-0 big-modal" title="<?= lang('GEN_BTN_ENABLE_USER'); ?>" data-toggle="tooltip">
 										<i class="icon icon-user-building" aria-hidden="true"></i>
 									</button>
 								<?php endif; ?>
 							<?php endif; ?>
 							<?php if($this->verify_access->verifyAuthorization('USEREM')): ?>
-								<?php if($user->registed == true): ?>
+								<?php if($user->registered == true): ?>
 									<button id="editButton" class="btn mx-1 px-0 big-modal" title="<?= lang('GEN_BTN_EDIT_PERMITS'); ?>" data-toggle="tooltip">
 										<i class="icon icon-edit-permits" aria-hidden="true"></i>
 									</button>
@@ -54,10 +55,10 @@
 
 							<?php endif; ?>
 							<form id="formManagement" name="formManagement" method="post">
-								<input type="hidden" name="adminUser" value="<?= $user->tranIdUsuario ?>">
-								<input type="hidden" name="adminName" value="<?= $user->tranNombreUsuario ?>">
-								<input type="hidden" name="adminMail" value="<?= $user->tranCorreo ?>">
-								<input type="hidden" name="adminType" value="<?= $user->tranTipoUsuario ?>">
+								<input type="hidden" name="adminUser" value="<?= $user->idUser ?>">
+								<input type="hidden" name="adminName" value="<?= $user->name ?>">
+								<input type="hidden" name="adminMail" value="<?= $user->mail ?>">
+								<input type="hidden" name="adminType" value="<?= $user->type ?>">
 							</form>
 						</td>
 					</tr>
