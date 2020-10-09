@@ -719,7 +719,7 @@ class Novo_User_Model extends NOVO_Model {
 
 		$response = $this->sendToService('callWs_usersManagement');
 
-		switch($this->isResponseRc)  {
+		switch ($this->isResponseRc)  {
 			case 0:
 				$this->response->code = 0;
 				$data = $response->bean->users;
@@ -749,6 +749,7 @@ class Novo_User_Model extends NOVO_Model {
 				break;
 			default:
 				$this->response->code = 0;
+				$this->response->data = [];
 		}
 
 		return $this->responseToTheView('callWs_usersManagement');
@@ -769,14 +770,60 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataRequest->idOperation = 'gestionUsuarios';
 		$this->dataRequest->opcion = 'obtenerFuncionesUsuario';
 		$this->dataRequest->userName = $dataRequest;
-		$this->session->set_userdata('userId', $dataRequest);
 
 		$response = $this->sendToService('callWs_userPermissions');
 
-		switch($this->isResponseRc)  {
+		switch ($this->isResponseRc)  {
 			case 0:
 				$this->response->code = 0;
-				$this->response->data = $response->bean->perfiles;
+				$data =  $response->bean->perfiles;
+				foreach ($data as $key => $val) {
+					foreach ($data[$key]->modulos as $key1 => $val) {
+						$arrayList1[$key][$key1] = $data[$key]->modulos[$key1]->funciones;
+					}
+				}
+
+				foreach($arrayList1 AS $key => $val){
+					foreach($arrayList1[$key] AS $key1 => $val1){
+						foreach($arrayList1[$key][$key1] AS $key2 => $val1){
+							if ($arrayList1[$key][$key1][$key2]->status == "A") {
+								$arrayList1[$key][$key1][$key2]->status = "on";
+							}else{
+								$arrayList1[$key][$key1][$key2]->status = "off";
+							}
+						}
+					}
+				}
+
+				$permissions = new stdClass();
+				$this->response->data['permissions']['deleteServiceOrder']= $arrayList1[0][0][0]->status;
+				$this->response->data['permissions']['consultOrderService']= $arrayList1[0][0][1]->status;
+				$this->response->data['permissions']['deleteBulk']= $arrayList1[1][0][0]->status;
+				$this->response->data['permissions']['confirmBulk']= $arrayList1[1][1][0]->status;
+				$this->response->data['permissions']['deleteBulkForConfirm']= $arrayList1[1][1][1]->status;
+				$this->response->data['permissions']['unnamedReport']= $arrayList1[1][2][0]->status;
+				$this->response->data['permissions']['concentratingAccount']= $arrayList1[2][0][0]->status;
+				$this->response->data['permissions']['stateAccount']= $arrayList1[2][1][0]->status;
+				$this->response->data['permissions']['statusBulk']= $arrayList1[2][2][0]->status;
+				$this->response->data['permissions']['rechargesMade']= $arrayList1[2][3][0]->status;
+				$this->response->data['permissions']['cardIssued']= $arrayList1[2][4][0]->status;
+				$this->response->data['permissions']['userActivity']= $arrayList1[2][5][0]->status;
+				$this->response->data['permissions']['cardHolder']= $arrayList1[2][6][0]->status;
+				$this->response->data['permissions']['assignPermit']= $arrayList1[3][0][0]->status;
+				$this->response->data['permissions']['consultUser']= $arrayList1[3][0][1]->status;
+				$this->response->data['permissions']['createUser']= $arrayList1[3][0][2]->status;
+				$this->response->data['permissions']['consultStateOperation']= $arrayList1[4][0][0]->status;
+				$this->response->data['permissions']['updateCardTwirl']= $arrayList1[4][1][0]->status;
+				$this->response->data['permissions']['consultCardTwirl']= $arrayList1[4][1][1]->status;
+				$this->response->data['permissions']['updateCardLimit']= $arrayList1[4][2][0]->status;
+				$this->response->data['permissions']['consultCardLimit']= $arrayList1[4][2][1]->status;
+				$this->response->data['permissions']['creditCards']= $arrayList1[4][3][0]->status;
+				$this->response->data['permissions']['reassingCard']= $arrayList1[4][3][1]->status;
+				$this->response->data['permissions']['cardLock']= $arrayList1[4][3][2]->status;
+				$this->response->data['permissions']['chargedCards']= $arrayList1[4][3][3]->status;
+				$this->response->data['permissions']['cardUnlock']= $arrayList1[4][3][4]->status;
+				$this->response->data['permissions']['payConcentratorAccount']= $arrayList1[4][3][5]->status;
+				$this->response->data['permissions']['consultCardsTrasal']= $arrayList1[4][3][6]->status;
 				break;
 		}
 
@@ -799,7 +846,11 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataRequest->idOperation = 'gestionUsuarios';
 		$this->dataRequest->opcion = 'actualizarFuncionesUsuario';
 		$this->dataRequest->className = 'com.novo.objects.TOs.GestionUsuariosTO';
-		$this->dataRequest->userName =$this->session->userdata('userId');
+		$this->dataRequest->userName =$dataRequest->idUser;
+
+		unset($dataRequest->idUser);
+		unset($dataRequest->allPermits);
+		unset($dataRequest->removeAllPermissions);
 
 		foreach ($dataRequest as $key => $value) {
 			$objet[lang('PERMITS_UPDATE_ENGLISH_CHANGE')[$key]] = $value;
@@ -811,9 +862,9 @@ class Novo_User_Model extends NOVO_Model {
 		$functionsArray =[];
 
 		foreach ($objet as $key => $value) {
-			if($value == "off"){
+			if ($value == "off") {
 				$objet[$i] = ['accodfuncion' => $key, 'status'=> 'I'];
-			}else{
+			} else {
 				$objet[$i] = ['accodfuncion' => $key, 'status'=> 'A'];
 			}
 			$i++;
@@ -829,7 +880,7 @@ class Novo_User_Model extends NOVO_Model {
 
 		$response = $this->sendToService('callWs_updatePermissions');
 
-		switch($this->isResponseRc)   {
+		switch ($this->isResponseRc)   {
 			case 0:
 				$this->response->code = 4;
 				$this->response->title = lang('GEN_USER_PERMISSION_TITLE');
@@ -871,8 +922,7 @@ class Novo_User_Model extends NOVO_Model {
 
 		$response = $this->sendToService('callWs_enableUser');
 
-		$this->isResponseRc= 0;
-		switch($this->isResponseRc)   {
+		switch ($this->isResponseRc)   {
 			case 0:
 				$this->response->code = 4;
 				$this->response->title = lang('GEN_MENU_USERS_MANAGEMENT');

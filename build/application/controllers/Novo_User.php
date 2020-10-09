@@ -326,7 +326,7 @@ class Novo_User extends NOVO_Controller {
 		$this->loadView($view);
 	}
 
-	/**
+		/**
 	 * @info Método que renderiza la vista de permisos de usuario
 	 * @author Jennifer C. Cádiz.
 	 */
@@ -349,67 +349,37 @@ class Novo_User extends NOVO_Controller {
 		$this->render->name = $data->adminName;
 		$this->render->email = $data->adminMail;
 		$this->render->type = $data->adminType;
+
 		$responseList = $this->loadModel($data->adminUser);
-		$this->render->permissionsList = $responseList->data;
-
-		foreach ($responseList->data as $key => $val) {
-			foreach ($responseList->data[$key]->modulos as $key1 => $val) {
-				$arrayList1[$key][$key1] = $responseList->data[$key]->modulos[$key1]->funciones;
-			}
-		}
-
-		foreach($arrayList1 AS $key => $val){
-			foreach($arrayList1[$key] AS $key1 => $val1){
-				foreach($arrayList1[$key][$key1] AS $key2 => $val1){
-					if ($arrayList1[$key][$key1][$key2]->status == "A") {
-						$arrayList1[$key][$key1][$key2]->status = "on";
-					}else{
-						$arrayList1[$key][$key1][$key2]->status = "off";
-					}
-				}
-			}
-		}
-
-		$this->render->deleteServiceOrder = $arrayList1[0][0][0]->status;
-		$this->render->consultOrderService = $arrayList1[0][0][1]->status;
-		$this->render->payOrderService = $arrayList1[0][0][2]->status;
-		$this->render->deleteBulk = $arrayList1[1][0][0]->status;
-		$this->render->confirmBulk = $arrayList1[1][1][0]->status;
-		$this->render->deleteBulkForConfirm = $arrayList1[1][1][1]->status;
-		$this->render->generationBulk = $arrayList1[1][2][0]->status;
-		$this->render->unnamedReport = $arrayList1[1][3][0]->status;
-		$this->render->expensesByCategory = $arrayList1[2][0][0]->status;
-		$this->render->concentratingAccount = $arrayList1[2][1][0]->status;
-		$this->render->generateConsolid = $arrayList1[2][1][1]->status;
-		$this->render->stateAccount = $arrayList1[2][2][0]->status;
-		$this->render->statusBulk = $arrayList1[2][3][0]->status;
-		$this->render->rechargesMade = $arrayList1[2][4][0]->status;
-		$this->render->replacementReport = $arrayList1[2][5][0]->status;
-		$this->render->rechargeWithCommissions = $arrayList1[2][6][0]->status;
-		$this->render->closingBalance = $arrayList1[2][7][0]->status;
-		$this->render->cardIssued = $arrayList1[2][8][0]->status;
-		$this->render->userEnterprise = $arrayList1[2][9][0]->status;
-		$this->render->balancesIssued = $arrayList1[2][10][0]->status;
-		$this->render->cardHolder = $arrayList1[2][11][0]->status;
-		$this->render->updateUser = $arrayList1[3][0][0]->status;
-		$this->render->assignPermit = $arrayList1[3][0][1]->status;
-		$this->render->consultPermit = $arrayList1[3][0][2]->status;
-		$this->render->consultUser = $arrayList1[3][0][3]->status;
-		$this->render->createUser = $arrayList1[3][0][4]->status;
-		$this->render->deletePermit = $arrayList1[3][0][5]->status;
-		$this->render->consultStateOperation = $arrayList1[4][0][0]->status;
-		$this->render->updateCardTwirl = $arrayList1[4][1][0]->status;
-		$this->render->consultCardTwirl = $arrayList1[4][1][1]->status;
-		$this->render->updateCardLimit = $arrayList1[4][2][0]->status;
-		$this->render->consultCardLimit = $arrayList1[4][2][1]->status;
-		$this->render->issuancePolicy = $arrayList1[4][3][0]->status;
-		$this->render->creditCards = $arrayList1[4][4][0]->status;
-		$this->render->reassingCard = $arrayList1[4][4][1]->status;
-		$this->render->cardLock = $arrayList1[4][4][2]->status;
-		$this->render->chargedCards = $arrayList1[4][4][3]->status;
-		$this->render->cardUnlock = $arrayList1[4][4][4]->status;
-		$this->render->payConcentratorAccount = $arrayList1[4][4][5]->status;
-		$this->render->consultCardsTrasal = $arrayList1[4][4][6]->status;
+		$arrayList1 = $responseList->data;
+		$this->render->deleteServiceOrder = $arrayList1['permissions']['deleteServiceOrder'];
+		$this->render->consultOrderService = $arrayList1['permissions']['consultOrderService'];
+		$this->render->deleteBulk = $arrayList1['permissions']['deleteBulk'];
+		$this->render->confirmBulk = $arrayList1['permissions']['confirmBulk'];
+		$this->render->deleteBulkForConfirm = $arrayList1['permissions']['deleteBulkForConfirm'];
+		$this->render->unnamedReport = $arrayList1['permissions']['unnamedReport'];
+		$this->render->concentratingAccount = $arrayList1['permissions']['concentratingAccount'];
+		$this->render->stateAccount = $arrayList1['permissions']['stateAccount'];
+		$this->render->statusBulk = $arrayList1['permissions']['statusBulk'];
+		$this->render->rechargesMade = $arrayList1['permissions']['rechargesMade'];;
+		$this->render->cardIssued = $arrayList1['permissions']['cardIssued'];
+		$this->render->userActivity = $arrayList1['permissions']['userActivity'];
+		$this->render->cardHolder = $arrayList1['permissions']['cardHolder'];
+		$this->render->assignPermit = $arrayList1['permissions']['assignPermit'];
+		$this->render->consultUser = $arrayList1['permissions']['consultUser'];
+		$this->render->createUser = $arrayList1['permissions']['createUser'];
+		$this->render->consultStateOperation = $arrayList1['permissions']['consultStateOperation'];
+		$this->render->updateCardTwirl = $arrayList1['permissions']['updateCardTwirl'];
+		$this->render->consultCardTwirl = $arrayList1['permissions']['consultCardTwirl'];
+		$this->render->updateCardLimit = $arrayList1['permissions']['updateCardLimit'];
+		$this->render->consultCardLimit = $arrayList1['permissions']['consultCardLimit'];
+		$this->render->creditCards = $arrayList1['permissions']['creditCards'];
+		$this->render->reassingCard = $arrayList1['permissions']['reassingCard'];
+		$this->render->cardLock = $arrayList1['permissions']['cardLock'];
+		$this->render->chargedCards = $arrayList1['permissions']['chargedCards'];
+		$this->render->cardUnlock = $arrayList1['permissions']['cardUnlock'];
+		$this->render->payConcentratorAccount = $arrayList1['permissions']['payConcentratorAccount'];
+		$this->render->consultCardsTrasal = $arrayList1['permissions']['consultCardsTrasal'];
 
 		$this->responseAttr($responseList);
 		$this->render->titlePage = lang('GEN_USER_PERMISSION_TITLE');

@@ -5,7 +5,7 @@ $(function () {
 	insertFormInput(false);
 	$('#enableSectionBtn').addClass('hidden');
 
-	for (var i = 0; i <= 39; i++) {
+	for (var i = 0; i <= 28; i++) {
 		var checkboxValue = $("input[name=checkbox"+ i +"]");
 		if (checkboxValue.val() == "off") {
 			checkboxValue.prop("checked", false);
@@ -45,25 +45,26 @@ $(function () {
 		$('#enableSectionBtn').remove();
 	});
 
-
 	$('#updateUserBtn').on('click', function(e){
 		var changeBtn = $(this);
 		var btnText = changeBtn.text().trim();
 		var form = $('#checkFormPermits');
 		var passData = getDataForm(form);
-
+;
 		$('#spinnerBlock').addClass('hide');
-		delete passData.allPermits;
-		delete passData.removeAllPermissions;
-		delete passData.screenSize;
-		delete passData.undefined;
+		passData.idUser = $('#idUser').text();
 
 		validateForms(form);
+
 		if (form.valid()) {
 			insertFormInput(true, form);
 			changeBtn.html(loader);
 			updatePermissions(passData, btnText);
 		}
+	});
+
+	$('#accept').on('click', function(e){
+		location.reload();
 	});
 });
 
@@ -71,6 +72,8 @@ function updatePermissions(passData, btnText) {
 	verb = 'POST'; who = 'User'; where = 'updatePermissions'; data = passData;
 	callNovoCore(verb, who, where, data, function(response) {
 		dataResponse = response.data;
+		if (response.code == 4) {
+		}
 		$('#updateUserBtn').html(btnText);
 		insertFormInput(false);
 	});

@@ -42,7 +42,7 @@ $(function () {
 
 				data = {
 					name: passData[0][1].value,
-					user:passData[0][0].value,
+					user:	passData[0][0].value,
 					mail: passData[0][2].value,
 					type: passData[0][3].value
 				}
@@ -67,6 +67,7 @@ $(function () {
 		}
 		insertFormInput(false);
 	});
+
 });
 
 
