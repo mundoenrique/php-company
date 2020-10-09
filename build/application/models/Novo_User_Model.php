@@ -751,6 +751,7 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataRequest->idOperation = 'gestionUsuarios';
 		$this->dataRequest->opcion = 'obtenerFuncionesUsuario';
 		$this->dataRequest->userName = $dataRequest;
+		$this->session->set_userdata('userId', $dataRequest);
 		// $this->dataRequest->userName = 'DGONZALEZ1';
 
 		$response = $this->sendToService('callWs_userPermissions');
@@ -787,8 +788,7 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataRequest->idOperation = 'gestionUsuarios';
 		$this->dataRequest->opcion = 'actualizarFuncionesUsuario';
 		$this->dataRequest->className = 'com.novo.objects.TOs.GestionUsuariosTO';
-		$this->dataRequest->userName = $dataRequest->user;
-		// $this->dataRequest->userName = 'DGONZALEZ1';
+		$this->dataRequest->userName =$this->session->userdata('userId');
 
 		foreach ($dataRequest as $key => $value) {
 			$objeto[lang('PERMITS_UPDATE_ENGLISH_CHANGE')[$key]] = $value;
