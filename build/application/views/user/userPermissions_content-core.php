@@ -73,6 +73,7 @@
 							</div>
 						</div>
 						<form id="checkFormPermits">
+							<input id="idUser" name="idUser" type="hidden" value= <?= $user ?>>
 							<div class="row mx-3">
 								<div class="form-group custom-control custom-switch col-6 col-lg-4 pb-3 my-3">
 									<input id="allPermits" class="custom-control-input" type="checkbox" name="allPermits" value="off">

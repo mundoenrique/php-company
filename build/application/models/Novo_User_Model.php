@@ -799,9 +799,12 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataRequest->idOperation = 'gestionUsuarios';
 		$this->dataRequest->opcion = 'actualizarFuncionesUsuario';
 		$this->dataRequest->className = 'com.novo.objects.TOs.GestionUsuariosTO';
-		$this->dataRequest->userName =$this->session->userdata('userId');
+		$this->dataRequest->userName = $dataRequest->idUser;
 
 		foreach ($dataRequest as $key => $value) {
+			if ($key == 'idUser') {
+				continue;
+			}
 			$objet[lang('PERMITS_UPDATE_ENGLISH_CHANGE')[$key]] = $value;
 			unset($objet[$key]);
 		};
