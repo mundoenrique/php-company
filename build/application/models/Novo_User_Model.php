@@ -264,7 +264,6 @@ class Novo_User_Model extends NOVO_Model {
 
 		$this->dataRequest->idOperation = lang('CONF_SINGLE_SIGN_ON');
 		$this->dataRequest->className = 'com.novo.objects.TOs.RequestTO';
-		$this->token = $dataRequest->sessionId ?? $dataRequest->clave;
 
 		switch ($this->country) {
 			case 'Bdb':
