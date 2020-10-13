@@ -33,8 +33,7 @@
 					</tr>
 				</thead>
 				<tbody>
-				<?php
-				foreach($userList AS $user) : ?>
+				<?php foreach ($userList AS $user) : ?>
 					<tr>
 						<td><?= $user->idUser ?></td>
 						<td><?= $user->name ?></td>

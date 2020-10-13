@@ -1341,165 +1341,121 @@ $config = [
 			],
 			'updatePermissions' => [
 				[
-					'field' => 'deleteServiceOrder',
-					'rules' => 'trim|regex_match[/^[A-Z]*$/i]'
+					'field' => 'idUser',
+					'rules' => 'trim|regex_match[/^[A-Za-z0-9]*$/i]|required'
 				],
 				[
-					'field' => 'consultOrderService',
-					'rules' => 'trim|regex_match[/^[A-Z]*$/i]'
+					'field' => 'ACTGIR',
+					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
 				],
 				[
-					'field' => 'payOrderService',
-					'rules' => 'trim|regex_match[/^[A-Z]*$/i]'
+					'field' => 'ACTLIM',
+					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
 				],
 				[
-					'field' => 'deleteBulk',
-					'rules' => 'trim|regex_match[/^[A-Z]*$/i]'
+					'field' => 'ASGPER',
+					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
 				],
 				[
-					'field' => 'confirmBulk',
-					'rules' => 'trim|regex_match[/^[A-Z]*$/i]'
+					'field' => 'CONGIR',
+					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
 				],
 				[
-					'field' => 'deleteBulkForConfirm',
-					'rules' => 'trim|regex_match[/^[A-Z]*$/i]'
+					'field' => 'CONLIM',
+					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
 				],
 				[
-					'field' => 'generationBulk',
-					'rules' => 'trim|regex_match[/^[A-Z]*$/i]'
+					'field' => 'CONUSU',
+					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
 				],
 				[
-					'field' => 'unnamedReport',
-					'rules' => 'trim|regex_match[/^[A-Z]*$/i]'
+					'field' => 'CREUSU',
+					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
 				],
 				[
-					'field' => 'expensesByCategory',
-					'rules' => 'trim|regex_match[/^[A-Z]*$/i]'
+					'field' => 'OPCONL',
+					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
 				],
 				[
-					'field' => 'concentratingAccount',
-					'rules' => 'trim|regex_match[/^[A-Z]*$/i]'
+					'field' => 'REPCON',
+					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
 				],
 				[
-					'field' => 'generateConsolid',
-					'rules' => 'trim|regex_match[/^[A-Z]*$/i]'
+					'field' => 'REPEDO',
+					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
 				],
 				[
-					'field' => 'stateAccount',
-					'rules' => 'trim|regex_match[/^[A-Z]*$/i]'
+					'field' => 'REPLOT',
+					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
 				],
 				[
-					'field' => 'statusBulk',
-					'rules' => 'trim|regex_match[/^[A-Z]*$/i]'
+					'field' => 'REPPRO',
+					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
 				],
 				[
-					'field' => 'rechargesMade',
-					'rules' => 'trim|regex_match[/^[A-Z]*$/i]'
+					'field' => 'REPTAR',
+					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
 				],
 				[
-					'field' => 'replacementReport',
-					'rules' => 'trim|regex_match[/^[A-Z]*$/i]'
+					'field' => 'REPUSU',
+					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
 				],
 				[
-					'field' => 'rechargeWithCommissions',
-					'rules' => 'trim|regex_match[/^[A-Z]*$/i]'
+					'field' => 'TEBANU',
+					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
 				],
 				[
-					'field' => 'closingBalance',
-					'rules' => 'trim|regex_match[/^[A-Z]*$/i]'
+					'field' => 'TEBCON',
+					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
 				],
 				[
-					'field' => 'cardIssued',
-					'rules' => 'trim|regex_match[/^[A-Z]*$/i]'
+					'field' => 'TEBCOS',
+					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
 				],
 				[
-					'field' => 'userEnterprise',
-					'rules' => 'trim|regex_match[/^[A-Z]*$/i]'
+					'field' => 'TEBELC',
+					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
 				],
 				[
-					'field' => 'balancesIssued',
-					'rules' => 'trim|regex_match[/^[A-Z]*$/i]'
+					'field' => 'TEBELI',
+					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
 				],
 				[
-					'field' => 'cardHolder',
-					'rules' => 'trim|regex_match[/^[A-Z]*$/i]'
+					'field' => 'TEBTHA',
+					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
 				],
 				[
-					'field' => 'updateUser',
-					'rules' => 'trim|regex_match[/^[A-Z]*$/i]'
+					'field' => 'TIREPO',
+					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
 				],
 				[
-					'field' => 'assignPermit',
-					'rules' => 'trim|regex_match[/^[A-Z]*$/i]'
+					'field' => 'TRAABO',
+					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
 				],
 				[
-					'field' => 'consultPermit',
-					'rules' => 'trim|regex_match[/^[A-Z]*$/i]'
+					'field' => 'TRAASG',
+					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
 				],
 				[
-					'field' => 'consultUser',
-					'rules' => 'trim|regex_match[/^[A-Z]*$/i]'
+					'field' => 'TRABLQ',
+					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
 				],
 				[
-					'field' => 'createUser',
-					'rules' => 'trim|regex_match[/^[A-Z]*$/i]'
+					'field' => 'TRACAR',
+					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
 				],
 				[
-					'field' => 'deletePermit',
-					'rules' => 'trim|regex_match[/^[A-Z]*$/i]'
+					'field' => 'TRADBL',
+					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
 				],
 				[
-					'field' => 'consultStateOperation',
-					'rules' => 'trim|regex_match[/^[A-Z]*$/i]'
+					'field' => 'TRAPGO',
+					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
 				],
 				[
-					'field' => 'updateCardTwirl',
-					'rules' => 'trim|regex_match[/^[A-Z]*$/i]'
-				],
-				[
-					'field' => 'consultCardTwirl',
-					'rules' => 'trim|regex_match[/^[A-Z]*$/i]'
-				],
-				[
-					'field' => 'updateCardLimit',
-					'rules' => 'trim|regex_match[/^[A-Z]*$/i]'
-				],
-				[
-					'field' => 'consultCardLimit',
-					'rules' => 'trim|regex_match[/^[A-Z]*$/i]'
-				],
-				[
-					'field' => 'issuancePolicy',
-					'rules' => 'trim|regex_match[/^[A-Z]*$/i]'
-				],
-				[
-					'field' => 'creditCards',
-					'rules' => 'trim|regex_match[/^[A-Z]*$/i]'
-				],
-				[
-					'field' => 'reassingCard',
-					'rules' => 'trim|regex_match[/^[A-Z]*$/i]'
-				],
-				[
-					'field' => 'cardLock',
-					'rules' => 'trim|regex_match[/^[A-Z]*$/i]'
-				],
-				[
-					'field' => 'chargedCards',
-					'rules' => 'trim|regex_match[/^[A-Z]*$/i]'
-				],
-				[
-					'field' => 'cardUnlock',
-					'rules' => 'trim|regex_match[/^[A-Z]*$/i]'
-				],
-				[
-					'field' => 'payConcentratorAccount',
-					'rules' => 'trim|regex_match[/^[A-Z]*$/i]'
-				],
-				[
-					'field' => 'consultCardsTrasal',
-					'rules' => 'trim|regex_match[/^[A-Z]*$/i]'
-				],
+					'field' => 'TRASAL',
+					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
+				]
 			],
 			'enableUser' => [
 				[

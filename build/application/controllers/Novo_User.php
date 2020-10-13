@@ -351,35 +351,16 @@ class Novo_User extends NOVO_Controller {
 		$this->render->type = $data->adminType;
 
 		$responseList = $this->loadModel($data->adminUser);
-		$arrayList1 = $responseList->data;
-		$this->render->deleteServiceOrder = $arrayList1['permissions']['deleteServiceOrder'];
-		$this->render->consultOrderService = $arrayList1['permissions']['consultOrderService'];
-		$this->render->deleteBulk = $arrayList1['permissions']['deleteBulk'];
-		$this->render->confirmBulk = $arrayList1['permissions']['confirmBulk'];
-		$this->render->deleteBulkForConfirm = $arrayList1['permissions']['deleteBulkForConfirm'];
-		$this->render->unnamedReport = $arrayList1['permissions']['unnamedReport'];
-		$this->render->concentratingAccount = $arrayList1['permissions']['concentratingAccount'];
-		$this->render->stateAccount = $arrayList1['permissions']['stateAccount'];
-		$this->render->statusBulk = $arrayList1['permissions']['statusBulk'];
-		$this->render->rechargesMade = $arrayList1['permissions']['rechargesMade'];;
-		$this->render->cardIssued = $arrayList1['permissions']['cardIssued'];
-		$this->render->userActivity = $arrayList1['permissions']['userActivity'];
-		$this->render->cardHolder = $arrayList1['permissions']['cardHolder'];
-		$this->render->assignPermit = $arrayList1['permissions']['assignPermit'];
-		$this->render->consultUser = $arrayList1['permissions']['consultUser'];
-		$this->render->createUser = $arrayList1['permissions']['createUser'];
-		$this->render->consultStateOperation = $arrayList1['permissions']['consultStateOperation'];
-		$this->render->updateCardTwirl = $arrayList1['permissions']['updateCardTwirl'];
-		$this->render->consultCardTwirl = $arrayList1['permissions']['consultCardTwirl'];
-		$this->render->updateCardLimit = $arrayList1['permissions']['updateCardLimit'];
-		$this->render->consultCardLimit = $arrayList1['permissions']['consultCardLimit'];
-		$this->render->creditCards = $arrayList1['permissions']['creditCards'];
-		$this->render->reassingCard = $arrayList1['permissions']['reassingCard'];
-		$this->render->cardLock = $arrayList1['permissions']['cardLock'];
-		$this->render->chargedCards = $arrayList1['permissions']['chargedCards'];
-		$this->render->cardUnlock = $arrayList1['permissions']['cardUnlock'];
-		$this->render->payConcentratorAccount = $arrayList1['permissions']['payConcentratorAccount'];
-		$this->render->consultCardsTrasal = $arrayList1['permissions']['consultCardsTrasal'];
+		$arrayList = $responseList->data;
+		$i = 0;
+
+		foreach ($arrayList as $key => $value) {
+			$titles[$i] = $key;
+			$i++;
+		}
+		$this->render->titles = $titles;
+		$this->render->modules = $arrayList;
+
 
 		$this->responseAttr($responseList);
 		$this->render->titlePage = lang('GEN_USER_PERMISSION_TITLE');
