@@ -3569,13 +3569,12 @@ a.ui-button:active,
 
 .img-log{
 	margin-left: 10%;
-	width: 673px;
 	z-index: 1;
 }
 
 .img-log img{
-	width: 673px;
-	height: 452px;
+	width: 100%;
+	height: 100%;
 }
 
 .bg-img {
