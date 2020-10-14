@@ -345,12 +345,28 @@ class Novo_User extends NOVO_Controller {
 		);
 
 		$data =$this->request;
-		$this->render->user = $data->adminUser;
-		$this->render->name = $data->adminName;
-		$this->render->email = $data->adminMail;
-		$this->render->type = $data->adminType;
 
-		$responseList = $this->loadModel($data->adminUser);
+		if (count((array)$data) != 0) {
+			$this->session->set_flashdata('userDataPermissions', $data);
+		}
+
+		$userDataList = $this->session->flashdata('userDataPermissions');
+		$this->session->set_flashdata('userDataPermissions', $userDataList);
+
+		if ($userDataList == NULL) {
+			$this->render->user = $data->idUser;
+			$this->render->name = $data->nameUser;
+			$this->render->email = $data->mailUser;
+			$this->render->type = $data->typeUser;
+			$responseList = $this->loadModel($data);
+		} else {
+			$this->render->user = $userDataList->idUser;
+			$this->render->name = $userDataList->nameUser;
+			$this->render->email = $userDataList->mailUser;
+			$this->render->type = $userDataList->typeUser;
+			$responseList = $this->loadModel($userDataList);
+		}
+
 		$arrayList = $responseList->data;
 		$i = 0;
 
@@ -360,7 +376,6 @@ class Novo_User extends NOVO_Controller {
 		}
 		$this->render->titles = $titles;
 		$this->render->modules = $arrayList;
-
 
 		$this->responseAttr($responseList);
 		$this->render->titlePage = lang('GEN_USER_PERMISSION_TITLE');

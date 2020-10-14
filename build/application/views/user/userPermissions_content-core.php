@@ -33,11 +33,11 @@
 								<span id="fullName" class="form-control px-1" readonly="readonly"><?= $name ?></span>
 							</div>
 							<div class="form-group mb-3 col-6">
-								<label for="email" id="email"><?= lang('GEN_EMAIL') ?></label>
+								<label for="email" ><?= lang('GEN_EMAIL') ?></label>
 								<span id="email" class="form-control px-1" readonly="readonly"><?= $email ?></span>
 							</div>
 							<div class="form-group mb-3 col-6">
-								<label for="typeUser" id="typeUser"><?= lang('GEN_TABLE_TYPE') ?></label>
+								<label for="typeUser" ><?= lang('GEN_TABLE_TYPE') ?></label>
 									<span id="typeUser" class="form-control px-1" readonly="readonly"><?= $type ?></span>
 							</div>
 						</div>

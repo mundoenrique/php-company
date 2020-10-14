@@ -53,6 +53,9 @@ $(function () {
 ;
 		$('#spinnerBlock').addClass('hide');
 		passData.idUser = $('#idUser').text();
+		passData.fullName = $('#fullName').text();
+		passData.email = $('#email').text();
+		passData.typeUser = $('#typeUser').text();
 
 		validateForms(form);
 
@@ -63,9 +66,6 @@ $(function () {
 		}
 	});
 
-	$('#accept').on('click', function(e){
-		location.reload();
-	});
 });
 
 function updatePermissions(passData, btnText) {
@@ -73,6 +73,9 @@ function updatePermissions(passData, btnText) {
 	callNovoCore(verb, who, where, data, function(response) {
 		dataResponse = response.data;
 		if (response.code == 4) {
+			$('#accept').on('click', function(e){
+				window.location.reload();
+			});
 		}
 		$('#updateUserBtn').html(btnText);
 		insertFormInput(false);

@@ -480,6 +480,7 @@ $lang['RESP_SUCCESSFULL_UPDATE_TWIRLS'] = "La restricción de giros en comercios
 $lang['RESP_SUCCESSFULL_UPDATE_LIMITS'] = "Los limites de transacciones han sido actualizados exitosamente";
 $lang['RESP_SUCCESSFULL_UPDATE_PERMISSIONS'] = "Los permisos del usuario %s han sido actualizados exitosamente";
 $lang['RESP_SUCCESSFULL_ENABLE_USER'] = "El usuario %s ha sido habilitado exitosamente";
+$lang['RESP_UNSUCCESSFULL_USER_LIST'] = "No fue posible obtener la lista de usuarios del banco";
 $lang['RESP_AUTH_ORDER_SERV'] = 'No fue posible obtener los datos para realizar el cálculo de la orden de servicio';
 $lang['RESP_NO_LIST'] = 'No fue posible obtener el listado';
 $lang['RESP_SERVICE_ORDES'] = 'No existen órdenes de servicio en estado "<strong>%s</strong>" para el rango de fecha seleccionado';

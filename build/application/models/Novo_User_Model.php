@@ -747,9 +747,18 @@ class Novo_User_Model extends NOVO_Model {
 
 				$this->response->data = $data	;
 				break;
-			default:
+			case -150:
 				$this->response->code = 0;
 				$this->response->data = [];
+			break;
+			case -437:
+				$this->response->code = 4;
+				$this->response->title = lang('GEN_MENU_USERS_MANAGEMENT');
+				$this->response->icon =  lang('CONF_ICON_WARNING');
+				$this->response->msg = lang('RESP_UNSUCCESSFULL_USER_LIST');
+				$this->response->data['btn1']['action'] = 'close';
+				break;
+
 		}
 
 		return $this->responseToTheView('callWs_usersManagement');
@@ -769,14 +778,25 @@ class Novo_User_Model extends NOVO_Model {
 
 		$this->dataRequest->idOperation = 'gestionUsuarios';
 		$this->dataRequest->opcion = 'obtenerFuncionesUsuario';
-		$this->dataRequest->userName = $dataRequest;
+		$this->dataRequest->userName = $dataRequest->idUser;
 
 		$response = $this->sendToService('callWs_userPermissions');
 
 		switch ($this->isResponseRc)  {
 			case 0:
+
+				$this->session->set_flashdata('userDataPermissions1',  $response->bean->perfiles);
 				$this->response->code = 0;
-				$data =  $response->bean->perfiles;
+
+				$flashVar = $this->session->flashdata('userDataPermissions1');
+
+				if ($flashVar == NULL) {
+					$data = $response->bean->perfiles;
+				} else {
+					$data = $flashVar;
+				}
+
+				$this->session->set_flashdata('userDataPermissions1', $flashVar);
 
 				foreach ($data as $key => $val) {
 					$titles[$key] = $data[$key]->descripcion;
@@ -821,7 +841,19 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataRequest->className = 'com.novo.objects.TOs.GestionUsuariosTO';
 		$this->dataRequest->userName =$dataRequest->idUser;
 
+		$userDataList =[];
+		$userData['idUser'] = $dataRequest->idUser;
+		$userData['nameUser'] = $dataRequest->fullName;
+		$userData['mailUser'] = $dataRequest->email;
+		$userData['typeUser'] = $dataRequest->typeUser;
+		$userDataList = (object) $userData;
+		$user = $dataRequest->idUser;
+		$this->session->set_flashdata('userDataPermissions', $userDataList);
+
 		unset($dataRequest->idUser);
+		unset($dataRequest->fullName);
+		unset($dataRequest->email);
+		unset($dataRequest->typeUser);
 
 		$i=0;
 		$j=0;
@@ -848,14 +880,12 @@ class Novo_User_Model extends NOVO_Model {
 
 		switch ($this->isResponseRc)   {
 			case 0:
-				$this->response->code = 4;
-				$this->response->title = lang('GEN_USER_PERMISSION_TITLE');
+				$this->response->title = lang('GEN_MENU_USERS_MANAGEMENT');
 				$this->response->icon =  lang('CONF_ICON_SUCCESS');
-				$this->response->msg = novoLang(lang('RESP_SUCCESSFULL_UPDATE_PERMISSIONS'), $this->dataRequest->userName);
+				$this->response->msg = novoLang(lang('RESP_SUCCESSFULL_UPDATE_PERMISSIONS'), $user);
 				$this->response->data['btn1']['action'] = 'close';
 				break;
 		}
-
 		return $this->responseToTheView('callWs_updatePermissions');
 	}
 

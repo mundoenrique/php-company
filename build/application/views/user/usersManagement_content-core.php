@@ -58,10 +58,10 @@
 
 							<?php endif; ?>
 							<form id="formManagement" name="formManagement" method="post">
-								<input type="hidden" name="adminUser" value="<?= $user->idUser ?>">
-								<input type="hidden" name="adminName" value="<?= $user->name ?>">
-								<input type="hidden" name="adminMail" value="<?= $user->mail ?>">
-								<input type="hidden" name="adminType" value="<?= $user->type ?>">
+								<input type="hidden" name="idUser" value="<?= $user->idUser ?>">
+								<input type="hidden" name="nameUser" value="<?= $user->name ?>">
+								<input type="hidden" name="mailUser" value="<?= $user->mail ?>">
+								<input type="hidden" name="typeUser" value="<?= $user->type ?>">
 							</form>
 						</td>
 						<? else: ?>
