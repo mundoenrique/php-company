@@ -344,28 +344,17 @@ class Novo_User extends NOVO_Controller {
 			"user/userPermissions"
 		);
 
-		$data =$this->request;
-
-		if (count((array)$data) != 0) {
-			$this->session->set_flashdata('userDataPermissions', $data);
+		if ($this->session->flashdata('userDataPermissions') != NULL) {
+			$userDataList = $this->session->flashdata('userDataPermissions');
+			$this->request = $userDataList;
+			$this->session->set_flashdata('userDataPermissions', $userDataList);
 		}
 
-		$userDataList = $this->session->flashdata('userDataPermissions');
-		$this->session->set_flashdata('userDataPermissions', $userDataList);
-
-		if ($userDataList == NULL) {
-			$this->render->user = $data->idUser;
-			$this->render->name = $data->nameUser;
-			$this->render->email = $data->mailUser;
-			$this->render->type = $data->typeUser;
-			$responseList = $this->loadModel($data);
-		} else {
-			$this->render->user = $userDataList->idUser;
-			$this->render->name = $userDataList->nameUser;
-			$this->render->email = $userDataList->mailUser;
-			$this->render->type = $userDataList->typeUser;
-			$responseList = $this->loadModel($userDataList);
-		}
+		$this->render->user = $this->request->idUser;
+		$this->render->name = $this->request->nameUser;
+		$this->render->email = $this->request->mailUser;
+		$this->render->type = $this->request->typeUser;
+		$responseList = $this->loadModel($this->request);
 
 		$arrayList = $responseList->data;
 		$i = 0;

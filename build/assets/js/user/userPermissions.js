@@ -72,11 +72,6 @@ function updatePermissions(passData, btnText) {
 	verb = 'POST'; who = 'User'; where = 'updatePermissions'; data = passData;
 	callNovoCore(verb, who, where, data, function(response) {
 		dataResponse = response.data;
-		if (response.code == 4) {
-			$('#accept').on('click', function(e){
-				window.location.reload();
-			});
-		}
 		$('#updateUserBtn').html(btnText);
 		insertFormInput(false);
 	});
