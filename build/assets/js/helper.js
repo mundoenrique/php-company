@@ -9,6 +9,8 @@ var inputPass = $('#password');
 var dataTableLang;
 var validator;
 var currentDate;
+var btnRemote = $('#btn-auth');
+var remoteFunction;
 $(function () {
 	$('input[type=text], input[type=password], input[type=email]').attr('autocomplete', 'off');
 
@@ -32,7 +34,7 @@ $(function () {
 	}
 
 	$('.big-modal').on('click', function () {
-		$('.cover-spin').show(0)
+		$('.cover-spin').show(0);
 	});
 
 	dataTableLang = {
@@ -93,6 +95,13 @@ $(function () {
 		yearSuffix: lang.GEN_PICKER_YEARSUFFIX
 	}
 	$.datepicker.setDefaults($.datepicker.regional['es']);
+
+	/* if (lang.CONF_REMOTE_CONNECT == 'ON') {//QUITAR IF
+		$('#system-info').on('click', '.sender', function () {
+			$('#accept').removeClass('sender');
+			getResponse(true, false)
+		});
+	} */
 });
 
 function callNovoCore(verb, who, where, request, _response_) {
@@ -199,7 +208,7 @@ function appMessages(title, message, icon, data) {
 		closeOnEscape: false,
 		width: data.width || lang.CONF_MODAL_WIDTH,
 		minWidth: data.minWidth || lang.CONF_MODAL_WIDTH,
-		minHeight: 100,
+		minHeight: data.minHeight || 100,
 		maxHeight: maxHeight !== 'none' ? maxHeight : false,
 		dialogClass: "border-none",
 		classes: {
@@ -207,14 +216,13 @@ function appMessages(title, message, icon, data) {
 		},
 		open: function (event, ui) {
 			$('.ui-dialog-titlebar-close').hide();
-			var classIcon = $('#system-icon').attr('class').split(' ');
-			classIcon = classIcon.pop();
 
-			if (classIcon != 'mt-0') {
-				$('#system-icon').removeClass(classIcon);
+			if (icon != '') {
+				$('#system-icon').addClass(lang.CONF_ICON + ' ' + icon);
+			} else {
+				$('#system-icon').removeAttr('class');
 			}
 
-			$('#system-icon').addClass(icon);
 			$('#system-msg').html(message);
 			$('#accept, #cancel').removeClass("ui-button ui-corner-all ui-widget");
 
@@ -340,4 +348,46 @@ function downLoadfiles (data) {
 		$('#download-file').attr('download', '')
 	}
 	$('.cover-spin').hide();
+}
+
+function getauhtKey() {
+	data = {
+		action: action
+	}
+	btnRemote
+		.html(loader)
+		.prop('disabled', true);
+	insertFormInput(true);
+	verb = 'POST'; who = 'Services'; where = 'AuthorizationKey';
+
+	callNovoCore(verb, who, where, data, function (response) {
+		$('.cover-spin').hide();
+		if (response.code == 0) {
+			$('#accept').addClass('sender');//QUITAR
+			data = {
+				/* btn1: {
+					text: lang.GEN_BTN_ACCEPT,
+					action: 'close'
+				},//quitar btn1 */
+				minHeight: 600,
+				width: 800,
+				posMy: 'top',
+				posAt: 'top'
+			}
+			appMessages(action, '', '', data);
+			AutorizacionCanales(response.data.authKey, 'system-msg', response.data.urlApp, '', 'getResponse');
+		}
+
+		insertFormInput(false);
+		btnRemote.html(btnText);
+	});
+}
+
+function getResponse(Exitoso, MensajeError) {
+	if (Exitoso) {
+		window[remoteFunction](action, btnRemote);
+		$('.cover-spin').show(0);
+	} else {
+
+	}
 }

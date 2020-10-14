@@ -12,6 +12,7 @@ Thumbs.db
 !**/logs/index.html
 !**/logs/.htaccess
 **/bulk/*
+!**/js/bulk/*
 
 **/vendor/
 **/sessions/

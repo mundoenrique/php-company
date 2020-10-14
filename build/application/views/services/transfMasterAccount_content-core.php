@@ -141,7 +141,7 @@
             <form id="password-table">
               <div class="flex row mt-3 mb-2 mx-2 justify-end">
                 <div class="col-3 col-lg-3 col-xl-3 form-group">
-									<?php if (lang('CONF_SHOW_INPUT_PASS') == 'ON'): ?>
+									<?php if (lang('CONF_REMOTE_CONNECT') == 'OFF'): ?>
                   <div class="input-group">
                     <input name="password" class="form-control pwd-input pr-0 pwd" type="password" autocomplete="off"
                       placeholder="<?= lang('GEN_PLACE_PASSWORD'); ?>">

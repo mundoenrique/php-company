@@ -23,7 +23,11 @@ $(function () {
 		if (form.valid()) {
 			formInputTrim(form);
 			data = getDataForm(form);
-			data.password = cryptoPass(data.password);
+
+			if (lang.CONF_REMOTE_CONNECT == 'OFF') {
+				data.password = cryptoPass(data.password);
+			}
+
 			insertFormInput(true, form);
 			unnamedBtn.html(loader);
 			unnamedRequest(unnamedBtn);

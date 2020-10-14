@@ -164,6 +164,9 @@ class Verify_Access {
 				case 'getProductDetail':
 					$auth = ($this->CI->session->has_userdata('logged') && $this->CI->session->has_userdata('enterpriseInf'));
 				break;
+				case 'authorizationKey':
+					$auth = ($this->CI->session->has_userdata('logged') && $this->CI->session->has_userdata('productInf'));
+				break;
 				case 'getPendingBulk':
 				case 'loadBulk':
 				case 'getDetailBulk':

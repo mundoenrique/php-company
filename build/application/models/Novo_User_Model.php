@@ -256,7 +256,6 @@ class Novo_User_Model extends NOVO_Model {
 
 		$this->dataRequest->idOperation = lang('CONF_SINGLE_SIGN_ON');
 		$this->dataRequest->className = 'com.novo.objects.TOs.RequestTO';
-		$this->token = $dataRequest->sessionId ?? $dataRequest->clave;
 
 		switch ($this->country) {
 			case 'Bdb':
@@ -265,13 +264,13 @@ class Novo_User_Model extends NOVO_Model {
 			case 'Mx-Bn':
 				$this->dataRequest->userName = '';
 				$this->dataRequest->password = '';
-				$this->dataRequest->ctipo = $dataRequest->canal;
+				$this->dataRequest->ctipo = $dataRequest->Canal;
 				$this->dataRequest->codigoOtp = [
 					'tokenCliente' => $dataRequest->ip ?? $this->input->ip_address(),
 					'authToken' => $dataRequest->IdServicio,
 				];
 				$this->dataRequest->guardaIp = FALSE;
-				$this->token = $dataRequest->clave;
+				$this->token = $dataRequest->Clave;
 			break;
 		}
 

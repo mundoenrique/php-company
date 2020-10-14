@@ -39,7 +39,7 @@ class NOVO_Controller extends CI_Controller {
 		$this->rule = lcfirst(str_replace('Novo_', '', $this->router->fetch_method()));
 		$this->model = ucfirst($this->router->fetch_class()).'_Model';
 		$this->method = 'callWs_'.ucfirst($this->router->fetch_method()).'_'.str_replace('Novo_', '', $this->router->fetch_class());
-		$this->countryUri = $this->uri->segment(1, 0) ? $this->uri->segment(1, 0) : 'null';
+		$this->countryUri = $this->uri->segment(1, 0) ?? 'null';
 		$this->render->widget =  FALSE;
 		$this->render->prefix = '';
 		$this->render->sessionTime = $this->config->item('session_time');
@@ -63,7 +63,7 @@ class NOVO_Controller extends CI_Controller {
 		languageLoad('specific', $this->router->fetch_class());
 		if($this->session->has_userdata('userId')) {
 			if($this->session->countrySess !== $this->config->item('country')) {
-				clientUrlValidate($this->session->countrySess);
+				clientUrlValidate($this->session->countryUri);
 				$urlRedirect = str_replace($this->countryUri.'/', $this->session->countryUri.'/', base_url('cerrar-sesion/inicio'));
 				redirect($urlRedirect, 'location', 301);
 				exit();
@@ -91,13 +91,13 @@ class NOVO_Controller extends CI_Controller {
 		switch ($this->greeting) {
 			case $this->greeting >= 19 && $this->greeting <= 23:
 				$this->render->greeting = lang('GEN_EVENING');
-				break;
+			break;
 			case $this->greeting >= 12 && $this->greeting < 19:
 				$this->render->greeting = lang('GEN_AFTERNOON');
-				break;
+			break;
 			case $this->greeting >= 0 && $this->greeting < 12:
 				$this->render->greeting = lang('GEN_MORNING');
-				break;
+			break;
 		}
 
 		if ($this->input->is_ajax_request()) {
