@@ -23,7 +23,7 @@ $lang['CONF_VALID_POSITION'] = 'left';
 //MODAL STYLES
 $lang['CONF_MODAL_WIDTH'] = 370;
 //ICONS MODALS
-$lang['CONF_ICON'] = 'ui-icon';
+$lang['CONF_ICON'] = 'ui-icon mt-0';
 $lang['CONF_ICON_SUCCESS'] = 'ui-icon-circle-check';
 $lang['CONF_ICON_INFO'] = 'ui-icon-info';
 $lang['CONF_ICON_WARNING'] = 'ui-icon-alert';
@@ -69,7 +69,6 @@ $lang['CONF_BULK_SELECT_ALL_AUTH'] = 'ON';
 $lang['CONF_BULK_AUTH_MSG_SERV'] = 'OFF';
 //HASH PASSWORD
 $lang['CONF_HASH_PASS'] = 'ON';
-$lang['CONF_SHOW_INPUT_PASS'] = 'ON';
 //REPORT CLOSING BALANCE
 $lang['CONF_NIT_INPUT_BOOL'] = 'ON';
 //SERVICES TRANSFER MASTER ACCOUNT
@@ -141,3 +140,18 @@ $lang['CONF_MIN_CONSULT_YEAR'] = 2000;
 $lang['CONF_INPUT_UPPERCASE']= 'ON';
 //REMOTE CONNECTION
 $lang['CONF_REMOTE_CONNECT'] = 'OFF';
+//SCORE RECAPTCHA
+$lang['CONF_REMOTE_URL'] = [
+	'development' => [
+		'BEM' => 'https://15.128.26.90/nbem11/AutorizacionRemota.aspx',
+		'BEP' => 'https://15.128.26.90/nbem11/AutorizacionRemota.aspx'
+	],
+	'testing' => [
+		'BEM' => 'https://15.128.26.90/nbem11/AutorizacionRemota.aspx',
+		'BEP' => 'https://15.128.26.90/nbem11/AutorizacionRemota.aspx'
+	],
+	'production' => [
+		'BEM' => 'https://15.128.26.90/nbem11/AutorizacionRemota.aspx',
+		'BEP' => 'https://15.128.26.90/nbem11/AutorizacionRemota.aspx'
+	]
+];

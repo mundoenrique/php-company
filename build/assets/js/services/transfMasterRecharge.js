@@ -1,6 +1,6 @@
 'use strict'
 $(function () {
-	/* if (code == 0) {
+	/* if (params && code == 0) {
 		var parameters = JSON.parse(atob(params))
 		parameters = JSON.parse(CryptoJS.AES.decrypt(parameters.code, parameters.plot, { format: CryptoJSAesJson }).toString(CryptoJS.enc.Utf8));
 		$('#amount').mask('#' + lang.GEN_THOUSANDS + '##0' + lang.GEN_DECIMAL + '00', { reverse: true });

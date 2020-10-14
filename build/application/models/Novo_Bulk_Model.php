@@ -468,7 +468,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 				$this->response->code = 0;
 				$this->response->title = lang('BULK_CONFIRM_TITLE');
 				$this->response->msg = novoLang(lang('GEN_FAILED_THIRD_PARTY'), $response->msg);
-				$this->response->data->resp['bnt1']['link'] = lang('GEN_LINK_BULK_LOAD');
+				$this->response->data->resp['btn1']['link'] = lang('GEN_LINK_BULK_LOAD');
 			break;
 			case -438:
 				$this->response->code = 0;
@@ -1226,7 +1226,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 			$password = $this->cryptography->decryptOnlyOneData($dataRequest->password);
 		}
 
-		$password = lang('CONF_SHOW_INPUT_PASS') == 'OFF' ? lang('GEN_GENERIC_PASS') : $password;
+		$password = lang('CONF_REMOTE_CONNECT') == 'ON' ? lang('GEN_GENERIC_PASS') : $password;
 
 		if (lang('CONF_HASH_PASS') == 'ON' && $this->singleSession == 'signIn') {
 			$password = md5($password);

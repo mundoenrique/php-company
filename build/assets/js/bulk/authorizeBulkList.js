@@ -139,7 +139,7 @@ $(function () {
 				}
 				inputModal = 	'<form id="delete-bulk-form" name="delete-bulk-form" class="form-group" onsubmit="return false;">';
 				inputModal+= 		'<span class="regular"> '+textModal+' '+bulkNum+'</span>';
-				if (lang.CONF_SHOW_INPUT_PASS == 'ON') {
+				if (lang.CONF_REMOTE_CONNECT == 'OFF') {
 					inputModal+= 		'<div class="input-group">';
 					inputModal+= 			'<input class="form-control pwd-input pwd-auth" name="password" type="password" ';
 					inputModal+= 				'autocomplete="off" placeholder="' + lang.GEN_PLACE_PASSWORD + '">';
@@ -229,7 +229,7 @@ function SignDeleteBulk(currentForm, action, btnId, passwordInput, modalReq) {
 			bulk: bulkInfo,
 		}
 
-		if (lang.CONF_SHOW_INPUT_PASS == 'ON') {
+		if (lang.CONF_REMOTE_CONNECT == 'OFF') {
 			data.pass = cryptoPass(passwordInput.val().trim());
 		}
 

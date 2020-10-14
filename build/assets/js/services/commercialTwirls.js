@@ -37,7 +37,7 @@ $(function () {
 		$('#spinnerBlock').addClass('hide');
 		delete passData.passwordAuth;
 
-		if (lang.CONF_SHOW_INPUT_PASS == 'ON') {
+		if (lang.CONF_REMOTE_CONNECT == 'OFF') {
 			passData.passwordAuth = cryptoPass(form.find('input.pwd').val().trim());
 		}
 

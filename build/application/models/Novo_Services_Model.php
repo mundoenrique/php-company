@@ -994,4 +994,53 @@ class Novo_Services_Model extends NOVO_Model {
 
 		return $this->responseToTheView('CallWs_MatesaccountBlanace');
 	}
+	/**
+	 * @info Método obtener clave de autorización
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date October 08th, 2020
+	 */
+	public function CallWs_AuthorizationKey_Services($dataRequest)
+	{
+		log_message('INFO', 'NOVO Services Model: AuthorizationKey Method Initialized');
+
+		$this->dataAccessLog->modulo = 'Servicios';
+		$this->dataAccessLog->function = 'Comunicación con tercero';
+		$this->dataAccessLog->operation = 'Obtener clave de autorización';
+
+		$this->dataRequest->idOperation = 'integracionBnt';
+		$this->dataRequest->className = 'com.novo.objects.TOs.GestionUsuariosTO';
+		$this->dataRequest->opcion = 'obtenerClaveAutorizacionBNT';
+		$this->dataRequest->idEmpresa = $this->session->enterpriseInf->idFiscal;
+		$this->dataRequest->idUsuario = $this->session->userName;
+		$this->dataRequest->operacion = '101';
+		$this->dataRequest->tipoOperacion = $dataRequest->action;
+		$this->dataRequest->idServicio = '1260';
+
+		$response = $this->sendToService('CallWs_AuthorizationKey');
+		$response = json_decode('{"rc":0,"msg":"Proceso OK","bean":{"tranClave":"nuR8Q+ntN8ECmrW7+Oe4m7fPuWCeo5QXlu8QtXSt7EL9dEmSAdzVYvIjIlv1pC9WhAZSLHe8yjUMIcGoswH4bRt78FJPX6MU5nHxHa4o+hi3csUGqmI5T3j8ZxbxdmpQ0pHewHVRgLTqIqd6v8Mmqg\\u003d\\u003d","tranExitoso":true,"tranDescripcionError":""}}');
+		$this->isResponseRc = 0;
+		switch ($this->isResponseRc) {
+			case 0:
+				$this->response->code = 0;
+				$this->response->data = [
+					'authKey' => $response->bean->tranClave,
+					'urlApp' => lang('CONF_REMOTE_URL')[ENVIRONMENT][$this->session->enterpriseInf->thirdApp]
+				];
+			break;
+			case -404:
+				$this->response->title = $dataRequest->action;
+				$this->response->icon = lang('CONF_ICON_WARNING');
+				$this->response->msg = lang('GEN_GET_AUTH_USER_FAIL');
+				$this->response->data['btn1']['action'] = 'destroy';
+			break;
+			case -65:
+				$this->response->title = $dataRequest->action;
+				$this->response->icon = lang('CONF_ICON_WARNING');
+				$this->response->msg = lang('GEN_GET_AUTH_KEY_FAIL');
+				$this->response->data['btn1']['action'] = 'destroy';
+			break;
+		}
+
+		return $this->responseToTheView('CallWs_AuthorizationKey');
+	}
 }

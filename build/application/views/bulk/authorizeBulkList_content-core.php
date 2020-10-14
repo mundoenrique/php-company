@@ -70,7 +70,7 @@
             <div class="flex row mt-3 mb-2 mx-2 justify-end">
               <?php if($authBulk && $authorizeAttr->sign): ?>
               <div class="col-5 col-lg-3 col-xl-3 form-group">
-                <?php if(lang('CONF_SHOW_INPUT_PASS') == 'ON'): ?>
+                <?php if(lang('CONF_REMOTE_CONNECT') == 'OFF'): ?>
                 <div class="input-group">
                   <input id="password-sign" name="password" class="form-control pwd-input pr-0 pwd" type="password" autocomplete="off"
                     placeholder="<?= lang('GEN_PLACE_PASSWORD'); ?>">
@@ -165,7 +165,7 @@
                 <div class="help-block"></div>
               </div>
               <div class="col-5 col-lg-3 col-xl-3 form-group">
-                <?php if(lang('CONF_SHOW_INPUT_PASS') == 'ON'): ?>
+                <?php if(lang('CONF_REMOTE_CONNECT') == 'OFF'): ?>
                 <div class="input-group">
                   <input id="password-auth" name="password" class="form-control pwd-input pr-0 pwd" type="password" autocomplete="off"
                     placeholder="<?= lang('GEN_PLACE_PASSWORD'); ?>">

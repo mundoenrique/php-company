@@ -5,9 +5,10 @@ var params;
 var balance;
 var cardsData;
 var inputModal;
+var action;
 $(function () {
-	var action;
 	var getAmount;
+	remoteFunction = 'sendRequest'
 
 	insertFormInput(false);
 	form = $('#masterAccountForm');
@@ -228,10 +229,8 @@ $(function () {
 		if (amountValidate(getAmount, '.select', action)) {
 			$('#accept').addClass('send-request');
 
-			if (lang.CONF_SHOW_INPUT_PASS == 'OFF' && action != lang.GEN_CHECK_BALANCE) {
-				$('#accept')
-					.removeClass('send-request')
-					.addClass('get-auth-key');
+			if (lang.CONF_REMOTE_CONNECT == 'ON') {
+				$('#accept').removeClass('send-request');
 			}
 
 			data = {
@@ -245,11 +244,8 @@ $(function () {
 				}
 			}
 
-			inputModal =	'<form id="password-modal" name="password-modal" class="row col-auto" onsubmit="return false;">';
-			var inputPassOff = '<span class="regular">¿Estás seguro que deseas realizar esta acción?</span>';
-
-			if (lang.CONF_SHOW_INPUT_PASS == 'ON') {
-				inputPassOff = '';
+			if (lang.CONF_REMOTE_CONNECT == 'OFF') {
+				inputModal =	'<form id="password-modal" name="password-modal" class="row col-auto" onsubmit="return false;">';
 				inputModal +=		'<div class="form-group col-12 pl-0">';
 				inputModal += 		'<div class="input-group">';
 				inputModal += 			'<input class="form-control pwd-input pwd" type="password" name="password" autocomplete="off" ';
@@ -260,36 +256,45 @@ $(function () {
 				inputModal += 		'</div>';
 				inputModal += 		'<div class="help-block"></div>';
 				inputModal += 	'</div>';
+
+				if (action == lang.GEN_CARD_ASSIGNMENT) {
+					inputModal += 	'<div class="form-group col-12 pl-0">';
+					inputModal += 		'<div class="input-group">';
+					inputModal += 			'<input class="form-control" type="text" name="cardNumber" autocomplete="off"';
+					inputModal += 			'placeholder="' + lang.GEN_TABLE_CARD_NUMBER + '" req="yes">';
+					inputModal += 		'</div>';
+					inputModal += 		'<div class="help-block"></div>';
+					inputModal += 	'</div>';
+				}
+
+				inputModal += '</form>';
+
+				appMessages(action, inputModal, lang.CONF_ICON_INFO, data);
+			} else {
+				form = $('#password-table');
+
+				if (action != lang.GEN_CHECK_BALANCE && formValidateTrim(action)) {
+					$('.cover-spin').show(1);
+					getauhtKey();
+				} else {
+					$('.cover-spin').show(0);
+					sendRequest(action, btnRemote);
+				}
 			}
 
-			inputModal += action == lang.GEN_CARD_ASSIGNMENT ? '' : inputPassOff;
 
-			if (action == lang.GEN_CARD_ASSIGNMENT) {
-
-				inputModal += 	'<div class="form-group col-12 pl-0">';
-				inputModal += 		'<div class="input-group">';
-				inputModal += 			'<input class="form-control" type="text" name="cardNumber" autocomplete="off"';
-				inputModal += 			'placeholder="' + lang.GEN_TABLE_CARD_NUMBER + '" req="yes">';
-				inputModal += 		'</div>';
-				inputModal += 		'<div class="help-block"></div>';
-				inputModal += 	'</div>';
-			}
-
-			inputModal += '</form>';
-
-			appMessages(action, inputModal, lang.CONF_ICON_INFO, data);
 		}
 	})
 
 	$('#tableServicesMaster').on( 'click', 'tbody td.amount-cc', function (e) {
-		$(this).find('input').removeClass('has-error')
-} );
+		$(this).find('input').removeClass('has-error');
+	});
 
 	$('#system-info').on('click', '.send-request', function () {
-		form = $('#password-modal')
+		form = $('#password-modal');
 		btnText = $(this).text().trim();
 		sendRequest(action, $(this))
-	})
+	});
 
 	$('#Consulta, #Abono, #Cargo').on('click', function (e) {
 		e.preventDefault()
@@ -301,7 +306,15 @@ $(function () {
 		if (amountValidate(getAmount, '.selected', action)) {
 			form = $('#password-table');
 			btnText = $(this).text().trim();
-			if (lang.CONF_SHOW_INPUT_PASS == 'OFF' && action == 'Consulta') {
+			btnRemote = $(this);
+
+			if (lang.CONF_REMOTE_CONNECT == 'ON' && action == 'Consulta') {
+				sendRequest(action, $(this));
+			} else if (lang.CONF_REMOTE_CONNECT == 'ON') {
+				if (formValidateTrim(action)) {
+					getauhtKey();
+				}
+			} else {
 				sendRequest(action, $(this));
 			}
 		}
@@ -334,7 +347,7 @@ $(function () {
 			}, 'input');
 		}
 	});
-})
+});
 
 function amountValidate(getAmount, classSelect, action) {
 	var valid = true
@@ -379,14 +392,7 @@ function amountValidate(getAmount, classSelect, action) {
 }
 
 function sendRequest(action, btn) {
-	formInputTrim(form)
-	validateForms(form)
-	if (cardsData.length == 0) {
-		form.validate().resetForm();
-		form.find('.bulk-select').text(lang.VALIDATE_SELECT);
-	}
-
-	if (cardsData.length > 0 && form.valid()) {
+	if (formValidateTrim(action)) {
 		var cardsInfo = [];
 
 		for (var i = 0; i < cardsData.length; i++) {
@@ -405,13 +411,13 @@ function sendRequest(action, btn) {
 		btn
 			.html(loader)
 			.prop('disabled', true);
-		insertFormInput(true)
+		insertFormInput(true);
 		data = {
 			cards: cardsInfo,
 			action: action
 		}
 
-		if (lang.CONF_SHOW_INPUT_PASS == 'ON') {
+		if (lang.CONF_REMOTE_CONNECT == 'OFF') {
 			data.pass = cryptoPass(form.find('input.pwd').val().trim());
 		}
 
@@ -430,8 +436,8 @@ function sendRequest(action, btn) {
 
 			btn.prop('disabled', false);
 			insertFormInput(false);
-			form.find('input.pwd').val('')
-			$('#tableServicesMaster').find('tbody > tr input').val('')
+			form.find('input.pwd').val('');
+			$('#tableServicesMaster').find('tbody > tr input').val('');
 
 			if (response.data.balance) {
 				$('#balance-aviable').text(response.data.balance)
@@ -448,6 +454,8 @@ function sendRequest(action, btn) {
 			if (action == lang.GEN_CREDIT_TO_CARD || action == 'Abono' || action == lang.GEN_DEBIT_TO_CARD || action == 'Cargo') {
 				buildList(response, action)
 			}
+
+			$('.cover-spin').hide();
 		})
 	}
 }
@@ -541,5 +549,24 @@ function verifyOperations() {
 		$('#password-table').removeClass('hide')
 		column = table.column('0');
 		column.visible(true);
+	}
+}
+
+function formValidateTrim(action) {
+	formInputTrim(form);
+	validateForms(form);
+
+	if (cardsData.length == 0) {
+		form.validate().resetForm();
+		data = {
+			btn1: {
+				text: lang.GEN_BTN_ACCEPT,
+				action: 'destroy'
+			}
+		}
+
+		appMessages(action, lang.VALIDATE_SELECT, lang.CONF_ICON_WARNING, data);
+	} else {
+		return cardsData.length > 0 && form.valid();
 	}
 }
