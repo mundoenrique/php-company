@@ -11,6 +11,7 @@ var validator;
 var currentDate;
 var btnRemote = $('#btn-auth');
 var remoteFunction;
+var remoteAuthArgs = {}
 $(function () {
 	$('input[type=text], input[type=password], input[type=email]').attr('autocomplete', 'off');
 
@@ -352,7 +353,7 @@ function downLoadfiles (data) {
 
 function getauhtKey() {
 	data = {
-		action: action
+		action: remoteAuthArgs.action
 	}
 	btnRemote
 		.html(loader)
@@ -374,7 +375,7 @@ function getauhtKey() {
 				posMy: 'top',
 				posAt: 'top'
 			}
-			appMessages(action, '', '', data);
+			appMessages(remoteAuthArgs.action, '', '', data);
 			AutorizacionCanales(response.data.authKey, 'system-msg', response.data.urlApp, '', 'getResponse');
 		}
 
@@ -385,7 +386,15 @@ function getauhtKey() {
 
 function getResponse(Exitoso, MensajeError) {
 	if (Exitoso) {
-		window[remoteFunction](action, btnRemote);
+		switch (remoteFunction) {
+			case 'sendRequest':
+				sendRequest(remoteAuthArgs.action, btnRemote);
+			break;
+			case 'SignDeleteBulk':
+				SignDeleteBulk(remoteAuthArgs.form, remoteAuthArgs.action, remoteAuthArgs.thisId, remoteAuthArgs.passwordSignAuht, remoteAuthArgs.modalReq);
+			break;
+
+		}
 		$('.cover-spin').show(0);
 	} else {
 

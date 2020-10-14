@@ -636,19 +636,20 @@ class Novo_Bulk_Model extends NOVO_Model {
 				$this->response->msg = lang('BULK_DELETED');
 				$this->response->icon = lang('CONF_ICON_SUCCESS');
 				$this->response->data['btn1']['link'] = 'lotes-autorizacion';
-				break;
+			break;
 			case -16:
+			case -43:
 				$this->response->title = lang('BULK_DELETE_TITLE');
 				$this->response->msg = novoLang(lang('BULK_NOT_DELETED'), $bulkInfo->bulkNumber);
 				$this->response->data['btn1']['action'] = 'close';
-				break;
+			break;
 			case -1:
 			case -22:
 				$this->response->title = lang('BULK_DELETE_TITLE');
 				$this->response->msg = lang('GEN_PASSWORD_NO_VALID');
 				$this->response->icon = lang('CONF_ICON_WARNING');
 				$this->response->data['btn1']['action'] = 'close';
-				break;
+			break;
 		}
 
 		return $this->responseToTheView('callWs_DeleteConfirmBulk');

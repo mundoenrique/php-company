@@ -5,10 +5,10 @@ var params;
 var balance;
 var cardsData;
 var inputModal;
-var action;
 $(function () {
+	var action;
 	var getAmount;
-	remoteFunction = 'sendRequest'
+	remoteFunction = 'sendRequest';
 
 	insertFormInput(false);
 	form = $('#masterAccountForm');
@@ -275,9 +275,10 @@ $(function () {
 
 				if (action != lang.GEN_CHECK_BALANCE && formValidateTrim(action)) {
 					$('.cover-spin').show(1);
+					remoteAuthArgs.action = action;
 					getauhtKey();
 				} else {
-					$('.cover-spin').show(0);
+					$('.cover-spin').show(1);
 					sendRequest(action, btnRemote);
 				}
 			}
@@ -312,6 +313,7 @@ $(function () {
 				sendRequest(action, $(this));
 			} else if (lang.CONF_REMOTE_CONNECT == 'ON') {
 				if (formValidateTrim(action)) {
+					remoteAuthArgs.action = action;
 					getauhtKey();
 				}
 			} else {
@@ -566,7 +568,8 @@ function formValidateTrim(action) {
 		}
 
 		appMessages(action, lang.VALIDATE_SELECT, lang.CONF_ICON_WARNING, data);
-	} else {
-		return cardsData.length > 0 && form.valid();
 	}
+
+	return cardsData.length > 0 && form.valid();
+
 }
