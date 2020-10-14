@@ -873,7 +873,12 @@ class Novo_User_Model extends NOVO_Model {
 				$this->response->title = lang('GEN_MENU_USERS_MANAGEMENT');
 				$this->response->icon =  lang('CONF_ICON_SUCCESS');
 				$this->response->msg = novoLang(lang('RESP_SUCCESSFULL_UPDATE_PERMISSIONS'), $user);
-				$this->response->data['btn1']['link'] = 'permisos-usuario';
+
+				if ($this->userName == $user) {
+					$this->response->data['btn1']['action'] = 'redirect';
+				} else {
+					$this->response->data['btn1']['link'] = 'permisos-usuario';
+				}
 				break;
 		}
 		return $this->responseToTheView('callWs_updatePermissions');
