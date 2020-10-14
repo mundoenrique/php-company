@@ -35,6 +35,10 @@ $(function () {
 		passData.cardNumber = $('#cardNumber').val();
 		validateForms(form);
 
+		if (lang.CONF_SHOW_INPUT_PASS == 'ON') {
+			passData.passwordAuth = cryptoPass(form.find('#passwordAuth').val().trim());
+		}
+
 		if (form.valid()) {
 			changeBtn.html(loader);
 			insertFormInput(true, form);

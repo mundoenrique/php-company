@@ -786,6 +786,7 @@ class Novo_Services_Model extends NOVO_Model {
 			'userName' => $this->session->userName
 		];
 
+
 		$response = $this->sendToService('callWs_transactionalLimits');
 
 		switch($this->isResponseRc) {
@@ -874,6 +875,12 @@ class Novo_Services_Model extends NOVO_Model {
 		$this->dataRequest->idEmpresa = $this->session->enterpriseInf->idFiscal;
 		$this->dataRequest->prefix = $this->session->productInf->productPrefix;
 
+		$password = isset($dataRequest->passwordAuth) ? $this->cryptography->decryptOnlyOneData($dataRequest->passwordAuth) : lang('GEN_GENERIC_PASS');
+
+		if (lang('CONF_HASH_PASS') == 'OFF' && $this->singleSession == 'signIn') {
+			$password = md5($password);
+		}
+
 		foreach ((array)lang('SERVICES_NAMES_PROPERTIES_LIMITS') as $key => $val) {
 			$cards[$key] = (int)$dataRequest->$val;
 		};
@@ -892,8 +899,10 @@ class Novo_Services_Model extends NOVO_Model {
 				'parameters' => $cards
 			]
 		];
+
 		$this->dataRequest->usuario = [
-			'userName' => $this->session->userName
+			'userName' => $this->session->userName,
+			'password' => $password
 		];
 
 		$response = $this->sendToService('callWs_updateTransactionalLimits');
