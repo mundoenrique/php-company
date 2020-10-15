@@ -3047,6 +3047,15 @@ ul.steps li.step-item i {
   padding-bottom: 4px;
 }
 
+/* Cursors */
+.cursor-pointer {
+	cursor: pointer !important;
+}
+
+.cursor-default {
+	cursor: default !important;
+}
+
 /* jQuery UI
 ========================================================================== */
 
