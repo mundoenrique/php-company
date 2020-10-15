@@ -484,6 +484,12 @@ class Novo_Bulk_Model extends NOVO_Model {
 				$this->response->msg = lang('BULK_CONFIRM_DUPLICATE');
 				$this->response->data['btn1']['link'] = lang('GEN_LINK_BULK_LOAD');
 			break;
+			case -464:
+				$this->response->code = 0;
+				$this->response->title = lang('BULK_CONFIRM_TITLE');
+				$this->response->msg = lang('BULK_CONFIRM_EXCEEDED_LIMIT');
+				$this->response->data['btn1']['link'] = lang('GEN_LINK_BULK_LOAD');
+			break;
 		}
 
 		if($this->isResponseRc != 0) {
