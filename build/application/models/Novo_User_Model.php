@@ -699,4 +699,230 @@ class Novo_User_Model extends NOVO_Model {
 
 		return $result["score"] <= lang('CONF_SCORE_CAPTCHA')[ENVIRONMENT] ? 9999 : 0;
 	}
+		/**
+	 * @info Método para consulta de administración de usuarios.
+	 * @author Diego Acosta García
+	 * @date Oct 2st, 2020
+	 */
+	public function callWs_usersManagement_User($dataRequest = FALSE)
+	{
+		log_message('INFO', 'NOVO User Model: usersManagement Method Initialized');
+
+		$this->dataAccessLog->modulo = 'Usuario';
+		$this->dataAccessLog->function = 'Obtener usuarios banorte';
+		$this->dataAccessLog->operation = 'obtener usuarios banorte';
+		$this->dataRequest->idOperation = 'integracionBnt';
+		$this->dataRequestclassName = 'com.novo.objects.TOs.GestionUsuariosTO';
+		$this->dataRequest->opcion = 'getUsers';
+		$this->dataRequest->idEmpresa = $this->session->enterpriseInf->idFiscal;
+
+		$response = $this->sendToService('callWs_usersManagement');
+
+		switch ($this->isResponseRc)  {
+			case 0:
+				$this->response->code = 0;
+				$data = $response->bean->users;
+
+				for ($i=0; $i < count($data); $i++) {
+					if ($data[$i]->tranTipoUsuario == 0) {
+						$data[$i]->tranTipoUsuario = 'Administrador';
+					}	else {
+						$data[$i]->tranTipoUsuario = 'Operador';
+					}
+					$data[$i]->idEnterprise = $data[$i]->tranIdEmpresa;
+					$data[$i]->idUser = $data[$i]->tranIdUsuario;
+					$data[$i]->name = $data[$i]->tranNombreUsuario;
+					$data[$i]->mail = $data[$i]->tranCorreo;
+					$data[$i]->type = $data[$i]->tranTipoUsuario;
+					$data[$i]->registered = $data[$i]->registed;
+					unset($data[$i]->tranIdEmpresa);
+					unset($data[$i]->tranIdUsuario);
+					unset($data[$i]->tranNombreUsuario);
+					unset($data[$i]->tranCorreo);
+					unset($data[$i]->tranTipoUsuario);
+					unset($data[$i]->registed);
+					unset($data[$i]->tranIdUsuarioOperativo);
+				}
+
+				$this->response->data = $data	;
+				break;
+			case -150:
+				$this->response->code = 0;
+			break;
+			case -437:
+				$this->response->title = lang('GEN_MENU_USERS_MANAGEMENT');
+				$this->response->icon =  lang('CONF_ICON_WARNING');
+				$this->response->msg = lang('RESP_UNSUCCESSFULL_USER_LIST');
+				$this->response->data->resp['btn1']['action'] = 'redirect';
+				break;
+
+		}
+
+		return $this->responseToTheView('callWs_usersManagement');
+	}
+		/**
+	 * @info Método para consulta de permisos de usuarios.
+	 * @author Diego Acosta García
+	 * @date Oct 2st, 2020
+	 */
+	public function callWs_userPermissions_User($dataRequest)
+	{
+		log_message('INFO', 'NOVO User Model: userPermissions Method Initialized');
+
+		$this->dataAccessLog->modulo = 'Usuario';
+		$this->dataAccessLog->function = 'Obtener usuarios banorte';
+		$this->dataAccessLog->operation = 'obtener usuarios banorte';
+
+		$this->dataRequest->idOperation = 'gestionUsuarios';
+		$this->dataRequest->opcion = 'obtenerFuncionesUsuario';
+		$this->dataRequest->userName = $dataRequest->idUser;
+		$this->session->set_flashdata('userDataPermissions', $dataRequest);
+
+		$response = $this->sendToService('callWs_userPermissions');
+
+		switch ($this->isResponseRc)  {
+			case 0:
+
+				$this->response->code = 0;
+				$data = $response->bean->perfiles;
+
+
+				foreach ($data as $key => $val) {
+					$titles[$key] = $data[$key]->descripcion;
+					$arrayList[$titles[$key]] = $data[$key]->modulos;
+				}
+
+				foreach ($titles as $key => $value) {
+					foreach ($arrayList[$titles[$key]]  as $key1 => $value1) {
+						$arrayList[$titles[$key]][$key1] = $arrayList[$titles[$key]][$key1]->funciones;
+						foreach($arrayList[$titles[$key]][$key1] AS $key2 => $val2){
+							if ($arrayList[$titles[$key]][$key1][$key2]->status == "A") {
+								$arrayList[$titles[$key]][$key1][$key2]->status = "on";
+							}else{
+								$arrayList[$titles[$key]][$key1][$key2]->status = "off";
+							}
+						}
+					}
+				}
+
+				$this->response->data = $arrayList;
+				break;
+		}
+
+		return $this->responseToTheView('callWs_userPermissions');
+	}
+
+	/**
+	 * @info Método para actualizar permisos de usuarios.
+	 * @author Diego Acosta García
+	 * @date Oct 5st, 2020
+	 */
+	public function callWs_updatePermissions_User($dataRequest)
+	{
+		log_message('INFO', 'NOVO User Model: updatePermissions Method Initialized');
+
+		$this->dataAccessLog->modulo = 'Usuario';
+		$this->dataAccessLog->function = 'Actualizar funciones usuario';
+		$this->dataAccessLog->operation = 'Actualizar funciones usuario';
+
+		$this->dataRequest->idOperation = 'gestionUsuarios';
+		$this->dataRequest->opcion = 'actualizarFuncionesUsuario';
+		$this->dataRequest->className = 'com.novo.objects.TOs.GestionUsuariosTO';
+		$this->dataRequest->userName =$dataRequest->idUser;
+
+		$userDataList =[];
+		$userData['idUser'] = $dataRequest->idUser;
+		$userData['nameUser'] = $dataRequest->fullName;
+		$userData['mailUser'] = $dataRequest->email;
+		$userData['typeUser'] = $dataRequest->typeUser;
+		$userDataList = (object) $userData;
+		$user = $dataRequest->idUser;
+		$this->session->set_flashdata('userDataPermissions', $userDataList);
+
+		unset($dataRequest->idUser);
+		unset($dataRequest->fullName);
+		unset($dataRequest->email);
+		unset($dataRequest->typeUser);
+
+		$i=0;
+		$j=0;
+		$functionsArray =[];
+
+		foreach ($dataRequest as $key => $value) {
+			if ($value == "off") {
+				$objet[$i] = ['accodfuncion' => $key, 'status'=> 'I'];
+			} else {
+				$objet[$i] = ['accodfuncion' => $key, 'status'=> 'A'];
+			}
+			$i++;
+			unset($objet[$key]);
+		}
+
+		foreach ($objet as $key => $value) {
+			$functionsArray[$j] = $value;
+			$j++;
+		};
+
+		$this->dataRequest->perfiles = [['idPerfil' => 'TODOS', 'modulos' => [      ['idModulo' => 'TODOS', 'funciones' => $functionsArray]]]];
+
+		$response = $this->sendToService('callWs_updatePermissions');
+
+		switch ($this->isResponseRc)   {
+			case 0:
+				$this->response->title = lang('GEN_MENU_USERS_MANAGEMENT');
+				$this->response->icon =  lang('CONF_ICON_SUCCESS');
+				$this->response->msg = novoLang(lang('RESP_SUCCESSFULL_UPDATE_PERMISSIONS'), $user);
+
+				if ($this->userName == $user) {
+					$this->response->data['btn1']['action'] = 'redirect';
+				} else {
+					$this->response->data['btn1']['link'] = 'permisos-usuario';
+				}
+				break;
+		}
+		return $this->responseToTheView('callWs_updatePermissions');
+	}
+
+	/**
+	 * @info Método para habilitar usuario.
+	 * @author Diego Acosta García
+	 * @date Oct 5st, 2020
+	 */
+	public function callWs_enableUser_User($dataRequest)
+	{
+		log_message('INFO', 'NOVO User Model: enableUser Method Initialized');
+
+		$this->dataAccessLog->modulo = 'Usuario';
+		$this->dataAccessLog->function = 'Obtener usuarios banorte';
+		$this->dataAccessLog->operation = 'obtener usuarios banorte';
+
+		$this->dataRequest->idOperation = 'gestionUsuarios';
+		$this->dataRequest->opcion = 'crearUsuario';
+		$this->dataRequest->className = 'com.novo.objects.TOs.GestionUsuariosTO';
+		$this->dataRequest->userName = $dataRequest->user;
+		$this->dataRequest->idUsuario = $dataRequest->user;
+		$this->dataRequest->nombre1 = $dataRequest->name;
+		$this->dataRequest->nombre2 = '';
+		$this->dataRequest->apellido1 = $dataRequest->name;;
+		$this->dataRequest->apellido2 = '';
+		$this->dataRequest->clonarPermisos = 'true';
+		$this->dataRequest->mail = $dataRequest->mail;;
+		$this->dataRequest->empresa = $this->session->enterpriseInf->idFiscal;
+		$this->dataRequest->usuarioPlantilla = $this->session->userName;
+
+		$response = $this->sendToService('callWs_enableUser');
+
+		switch ($this->isResponseRc)   {
+			case 0:
+				$this->response->code = 4;
+				$this->response->title = lang('GEN_MENU_USERS_MANAGEMENT');
+				$this->response->icon =  lang('CONF_ICON_SUCCESS');
+				$this->response->msg = novoLang(lang('RESP_SUCCESSFULL_ENABLE_USER'), $dataRequest->user);
+				$this->response->data['btn1']['action'] = 'close';
+				break;
+		}
+
+		return $this->responseToTheView('callWs_enableUser');
+	}
 }
+

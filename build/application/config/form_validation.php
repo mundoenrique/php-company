@@ -1318,7 +1318,157 @@ $config = [
 			'userPermissions' => [
 				[
 					'field' => 'adminUser',
-					'rules' => 'trim'
+					'rules' => 'trim|regex_match[/^[a-zA-Z0-9]*$/i]',
+				],
+			],
+			'usersManagement' => [
+				[
+					'field' => 'adminUser',
+					'rules' => 'trim|regex_match[/^[a-zA-Z0-9]*$/i]'
+				],
+				[
+					'field' => 'adminName',
+					'rules' => 'trim|regex_match[/^[a-zA-Z0-9]*$/i]'
+				],
+				[
+					'field' => 'adminMail',
+					'rules' => 'trim|regex_match[/^[a-zA-Z0-9]*$/i]'
+				],
+				[
+					'field' => 'adminType',
+					'rules' => 'trim|regex_match[/^[a-zA-Z0-9]*$/i]'
+				],
+			],
+			'updatePermissions' => [
+				[
+					'field' => 'idUser',
+					'rules' => 'trim|regex_match[/^[A-Za-z0-9]*$/i]|required'
+				],
+				[
+					'field' => 'ACTGIR',
+					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
+				],
+				[
+					'field' => 'ACTLIM',
+					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
+				],
+				[
+					'field' => 'ASGPER',
+					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
+				],
+				[
+					'field' => 'CONGIR',
+					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
+				],
+				[
+					'field' => 'CONLIM',
+					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
+				],
+				[
+					'field' => 'CONUSU',
+					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
+				],
+				[
+					'field' => 'CREUSU',
+					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
+				],
+				[
+					'field' => 'OPCONL',
+					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
+				],
+				[
+					'field' => 'REPCON',
+					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
+				],
+				[
+					'field' => 'REPEDO',
+					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
+				],
+				[
+					'field' => 'REPLOT',
+					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
+				],
+				[
+					'field' => 'REPPRO',
+					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
+				],
+				[
+					'field' => 'REPTAR',
+					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
+				],
+				[
+					'field' => 'REPUSU',
+					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
+				],
+				[
+					'field' => 'TEBANU',
+					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
+				],
+				[
+					'field' => 'TEBCON',
+					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
+				],
+				[
+					'field' => 'TEBCOS',
+					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
+				],
+				[
+					'field' => 'TEBELC',
+					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
+				],
+				[
+					'field' => 'TEBELI',
+					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
+				],
+				[
+					'field' => 'TEBTHA',
+					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
+				],
+				[
+					'field' => 'TIREPO',
+					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
+				],
+				[
+					'field' => 'TRAABO',
+					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
+				],
+				[
+					'field' => 'TRAASG',
+					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
+				],
+				[
+					'field' => 'TRABLQ',
+					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
+				],
+				[
+					'field' => 'TRACAR',
+					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
+				],
+				[
+					'field' => 'TRADBL',
+					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
+				],
+				[
+					'field' => 'TRAPGO',
+					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
+				],
+				[
+					'field' => 'TRASAL',
+					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
+				]
+			],
+			'enableUser' => [
+				[
+					'field' => 'user',
+					'rules' => 'trim|regex_match[/^[a-zA-Z0-9]*$/i]'
+				],
+				[
+					'field' => 'name',
+					'rules' => 'trim|regex_match[/^[a-zA-Z0-9]*$/i]'
+				],
+				[
+					'field' => 'mail',
+					'rules' => 'trim|regex_match[/^[a-zA-Z0-9@.]*$/i]'
 				],
 			]
 ];

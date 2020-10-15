@@ -25,23 +25,23 @@
 					<form id="user-data" action="" method="post" class="w-100">
 						<div class="row mb-2 px-5">
 							<div class="form-group mb-3 col-6">
-								<label for="idUser" id="idUser"><?= lang('GEN_USER') ?></label>
-								<span id="idUser" class="form-control px-1" readonly="readonly">100001</span>
+								<label for="idUser" ><?= lang('GEN_USER') ?></label>
+								<span id="idUser" class="form-control px-1" readonly="readonly"><?= $user ?></span>
 							</div>
 							<div class="form-group mb-3 col-6">
-								<label for="fullName" id="fullName"><?= lang('GEN_TABLE_FULL_NAME') ?></label>
-								<span id="fullName" class="form-control px-1" readonly="readonly">José Gutierrez</span>
+								<label for="fullName" ><?= lang('GEN_TABLE_FULL_NAME') ?></label>
+								<span id="fullName" class="form-control px-1" readonly="readonly"><?= $name ?></span>
 							</div>
 							<div class="form-group mb-3 col-6">
-								<label for="email" id="email"><?= lang('GEN_EMAIL') ?></label>
-								<span id="email" class="form-control px-1" readonly="readonly">jose.gutierrez@mail.com</span>
+								<label for="email" ><?= lang('GEN_EMAIL') ?></label>
+								<span id="email" class="form-control px-1" readonly="readonly"><?= $email ?></span>
 							</div>
 							<div class="form-group mb-3 col-6">
-								<label for="typeUser" id="typeUser"><?= lang('GEN_TABLE_TYPE') ?></label>
-								<span id="typeUser" class="form-control px-1" readonly="readonly">Administrador</span>
+								<label for="typeUser" ><?= lang('GEN_TABLE_TYPE') ?></label>
+									<span id="typeUser" class="form-control px-1" readonly="readonly"><?= $type ?></span>
 							</div>
 						</div>
-						<div id="enableSectionBtn" class="flex row mb-2 mx-2 items-center justify-end">
+						<div id="enableSectionBtn" class="flex row mb-2 mx-2 items-center justify-end ">
 							<a class="btn btn-link btn-small big-modal" href="<?= base_url('administracion-usuarios') ?>"><?= lang('GEN_BTN_CANCEL'); ?></a>
 							<button id="enableUserBtn" class="btn btn-small btn-loading btn-primary" type="submit">
 								<?= lang('GEN_BTN_ENABLE'); ?>
@@ -56,8 +56,7 @@
 						<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
 					</div>
 				</div>
-
-				<div class="w-100 cardholders-result hide-out hide">
+				<div class="w-100 cardholders-result ">
 					<div class="flex pb-5 flex-column">
 						<span class="line-text mb-2 h4 semibold primary"><?= lang('GEN_LIST_PERMITS'); ?></span>
 						<div class="row flex justify-between mb-3">
@@ -73,124 +72,40 @@
 								<span class="h6 light text"><?= lang('PERMITS_NOTE_ACTIVE'); ?></span>
 							</div>
 						</div>
+						<div class="row mx-3">
+							<div class="form-group custom-control custom-switch col-6 col-lg-4 pb-3 my-3">
+								<input id="allPermits" class="custom-control-input" type="checkbox" name="allPermits" value="off">
+								<label class="include custom-control-label semibold" for="allPermits"><?= lang('PERMITS_ALL_PERMITS'); ?></span>
+								</label>
+							</div>
+							<div class="form-group custom-control custom-switch col-6 col-lg-4 pb-3 my-3">
+								<input id="removeAllPermissions" class="custom-control-input" type="checkbox" name="removeAllPermissions" value="off">
+								<label class="include custom-control-label semibold" for="removeAllPermissions"><?= lang('PERMITS_DELETE_ALL_PERMITS'); ?></span>
+								</label>
+							</div>
+						</div>
 						<form id="checkFormPermits">
-							<div class="row mx-3">
-								<div class="form-group custom-control custom-switch col-6 col-lg-4 pb-3 my-3">
-									<input id="allPermits" class="custom-control-input" type="checkbox" name="checkbox" value="off">
-									<label class="custom-control-label semibold" for="allPermits"><?= lang('PERMITS_ALL_PERMITS'); ?></span>
-									</label>
+							<?php $i =0; foreach(($titles) AS $key => $value): ?>
+								<div class="row mx-3 mb-1">
+									<h4 class="col-12 pl-0 bold"><?=  $value?></h4>
+									<?php foreach(($modules[$value]) AS $key1 => $value1): ?>
+										<?php   foreach(($modules[$value][$key1]) AS $key2 => $value2):  ?>
+											<div class="form-group custom-control custom-switch col-4 col-lg-3 pb-2">
+												<input id="<?=$modules[$value][$key1][$key2]->accodfuncion ?>" class="permissions custom-control-input" type="checkbox" name=<?="checkbox". $i; $i++;?> value="<?= $modules[$value][$key1][$key2]->status; ?>">
+												<label class="custom-control-label" for="<?=$modules[$value][$key1][$key2]->accodfuncion ?>"><?= $modules[$value][$key1][$key2]->acnomfuncion ?></span>
+												</label>
+											</div>
+										<?php  endforeach; ?>
+									<?php endforeach; ?>
 								</div>
-								<div class="form-group custom-control custom-switch col-6 col-lg-4 pb-3 my-3">
-									<input id="removeAllPermissions" class="custom-control-input" type="checkbox" name="checkbox" value="off">
-									<label class="custom-control-label semibold" for="removeAllPermissions"><?= lang('PERMITS_DELETE_ALL_PERMITS'); ?></span>
-									</label>
-								</div>
-							</div>
-							<div class="row mx-3 mb-1">
-								<h4 class="col-12 pl-0 bold"><?= lang('GEN_MENU_LOTS'); ?></h4>
-								<div class="form-group custom-control custom-switch col-4 col-lg-3 pb-2">
-									<input id="bulkLoad" class="custom-control-input" type="checkbox" name="checkbox" value="off">
-									<label class="custom-control-label " for="bulkLoad"><?= lang('GEN_MENU_BULK_LOAD'); ?></span>
-									</label>
-								</div>
-								<div class="form-group custom-control custom-switch col-4 col-lg-3 pb-2">
-									<input id="bulkAuth" class="custom-control-input" type="checkbox" name="checkbox" value="off">
-									<label class="custom-control-label " for="bulkAuth"><?= lang('GEN_MENU_BULK_AUTH'); ?></span>
-									</label>
-								</div>
-								<div class="form-group custom-control custom-switch col-4 col-lg-3 pb-2">
-									<input id="bulkUnnamed" class="custom-control-input" type="checkbox" name="checkbox" value="off">
-									<label class="custom-control-label " for="bulkUnnamed"><?= lang('GEN_MENU_BULK_UNNAMED'); ?></span>
-									</label>
-								</div>
-							</div>
-							<div class="row mx-3 mb-1">
-								<h4 class="col-12 pl-0 bold"><?= lang('GEN_MENU_CONSULTATIONS'); ?></h4>
-								<div class="form-group custom-control custom-switch col-4 col-lg-3 pb-2">
-									<input id="consOrdersServ" class="custom-control-input" type="checkbox" name="checkbox" value="off">
-									<label class="custom-control-label " for="consOrdersServ"><?= lang('GEN_MENU_CONS_ORDERS_SERV'); ?></span>
-									</label>
-								</div>
-							</div>
-							<div class="row mx-3 mb-1">
-								<h4 class="col-12 pl-0 bold"><?= lang('GEN_MENU_SERVICES'); ?></h4>
-								<div class="form-group custom-control custom-switch col-4 col-lg-3 pb-2">
-									<input id="servMasterAccount" class="custom-control-input" type="checkbox" name="checkbox" value="off">
-									<label class="custom-control-label " for="servMasterAccount"><?= lang('GEN_MENU_SERV_MASTER_ACCOUNT'); ?></span>
-									</label>
-								</div>
-								<div class="form-group custom-control custom-switch col-4 col-lg-3 pb-2">
-									<input id="servCardInquiry" class="custom-control-input" type="checkbox" name="checkbox" value="off">
-									<label class="custom-control-label " for="servCardInquiry"><?= lang('GEN_MENU_SERV_CARD_INQUIRY'); ?></span>
-									</label>
-								</div>
-								<div class="form-group custom-control custom-switch col-4 col-lg-3 pb-2">
-									<input id="servCommMoneyOrders" class="custom-control-input" type="checkbox" name="checkbox" value="off">
-									<label class="custom-control-label " for="servCommMoneyOrders"><?= lang('GEN_MENU_SERV_COMM_MONEY_ORDERS'); ?></span>
-									</label>
-								</div>
-								<div class="form-group custom-control custom-switch col-4 col-lg-3 pb-2">
-									<input id="servTransLimits" class="custom-control-input" type="checkbox" name="checkbox" value="off">
-									<label class="custom-control-label " for="servTransLimits"><?= lang('GEN_MENU_SERV_TRANS_LIMITS'); ?></span>
-									</label>
-								</div>
-							</div>
-							<div class="row mx-3 mb-1">
-								<h4 class="col-12 pl-0 bold"><?= lang('GEN_MENU_REPORTS'); ?></h4>
-								<div class="form-group custom-control custom-switch col-4 col-lg-3 pb-2">
-									<input id="repCardReplace" class="custom-control-input" type="checkbox" name="checkbox" value="off">
-									<label class="custom-control-label " for="repCardReplace"><?= lang('GEN_MENU_REP_CARD_REPLACE'); ?></span>
-									</label>
-								</div>
-								<div class="form-group custom-control custom-switch col-4 col-lg-3 pb-2">
-									<input id="repClosingBalance" class="custom-control-input" type="checkbox" name="checkbox" value="off">
-									<label class="custom-control-label " for="repClosingBalance"><?= lang('GEN_MENU_REP_CLOSING_BAKANCE'); ?></span>
-									</label>
-								</div>
-								<div class="form-group custom-control custom-switch col-4 col-lg-3 pb-2">
-									<input id="repAccaountStatus" class="custom-control-input" type="checkbox" name="checkbox" value="off">
-									<label class="custom-control-label " for="repAccaountStatus"><?= lang('GEN_MENU_REP_ACCAOUNT_STATUS'); ?></span>
-									</label>
-								</div>
-								<div class="form-group custom-control custom-switch col-4 col-lg-3 pb-2">
-									<input id="repUserAct" class="custom-control-input" type="checkbox" name="checkbox" value="off">
-									<label class="custom-control-label " for="repUserAct"><?= lang('GEN_MENU_REP_USER_ACT'); ?></span>
-									</label>
-								</div>
-								<div class="form-group custom-control custom-switch col-4 col-lg-3 pb-2">
-									<input id="repRechargeMade" class="custom-control-input" type="checkbox" name="checkbox" value="off">
-									<label class="custom-control-label " for="repRechargeMade"><?= lang('GEN_MENU_REP_RECHARGE_MADE'); ?></span>
-									</label>
-								</div>
-								<div class="form-group custom-control custom-switch col-4 col-lg-3 pb-2">
-									<input id="repIssuedCards" class="custom-control-input" type="checkbox" name="checkbox" value="off">
-									<label class="custom-control-label " for="repIssuedCards"><?= lang('GEN_MENU_REP_ISSUED_CARDS'); ?></span>
-									</label>
-								</div>
-								<div class="form-group custom-control custom-switch col-4 col-lg-3 pb-2">
-									<input id="repCategoryExpense" class="custom-control-input" type="checkbox" name="checkbox" value="off">
-									<label class="custom-control-label " for="repCategoryExpense"><?= lang('GEN_MENU_REP_CATEGORY_EXPENSE'); ?></span>
-									</label>
-								</div>
-								<div class="form-group custom-control custom-switch col-4 col-lg-3 pb-2">
-									<input id="repMasterAccount" class="custom-control-input" type="checkbox" name="checkbox" value="off">
-									<label class="custom-control-label " for="repMasterAccount"><?= lang('GEN_MENU_REP_MASTER_ACCOUNT'); ?></span>
-									</label>
-								</div>
-							</div>
-							<div class="row mx-3 mb-1">
-								<h4 class="col-12 pl-0 bold"><?= lang('GEN_MENU_USERS'); ?></h4>
-								<div class="form-group custom-control custom-switch col-4 col-lg-3 pb-2">
-									<input id="usersManagement" class="custom-control-input" type="checkbox" name="checkbox" value="off">
-									<label class="custom-control-label " for="usersManagement"><?= lang('GEN_MENU_USERS_MANAGEMENT'); ?></span>
-									</label>
-								</div>
-							</div>
+							<?php endforeach; ?>
 							<div class="flex row mb-2 mx-2 items-center justify-end">
 								<a class="btn btn-link btn-small big-modal" href="<?= base_url('administracion-usuarios') ?>"><?= lang('GEN_BTN_CANCEL'); ?></a>
-								<button id="updateUserBtn" class="btn btn-small btn-loading btn-primary" type="submit">
+								<?php if($this->verify_access->verifyAuthorization('USEREM','ASGPER')): ?>
+									<button id="updateUserBtn" class="btn btn-small btn-loading btn-primary" type="submit">
 								<?= lang('GEN_BTN_UPDATE'); ?>
-								</button>
+									</button>
+									<?php endif; ?>
 							</div>
 						</form>
 						<div class="line mb-2"></div>

@@ -295,6 +295,7 @@ class Novo_User extends NOVO_Controller {
 		/**
 	 * @info Método que renderiza la vista de administración de usuarios
 	 * @author Hector D. Corredor.
+	 *
 	 */
 	public function usersManagement()
 
@@ -314,11 +315,20 @@ class Novo_User extends NOVO_Controller {
 			"third_party/additional-methods",
 			"user/usersManagement"
 		);
-		$this->responseAttr();
+
+		$responseList = $this->loadModel();
+		$data = $responseList->data;
+		$code = $responseList->code;
+		$this->render->userList = $data;
+
+		if(($code) == 4){
+			$this->render->userList= [];
+		}
+
+		$this->responseAttr($responseList);
 		$this->render->titlePage = lang('GEN_MENU_USERS_MANAGEMENT');
 		$this->views = ['user/'.$view];
 		$this->loadView($view);
-
 	}
 
 		/**
@@ -338,10 +348,32 @@ class Novo_User extends NOVO_Controller {
 			"third_party/additional-methods",
 			"user/userPermissions"
 		);
-		$this->responseAttr();
+
+		if ($this->session->flashdata('userDataPermissions') != NULL) {
+			$userDataList = $this->session->flashdata('userDataPermissions');
+			$this->request = $userDataList;
+			$this->session->set_flashdata('userDataPermissions', $userDataList);
+		}
+
+		$this->render->user = $this->request->idUser;
+		$this->render->name = $this->request->nameUser;
+		$this->render->email = $this->request->mailUser;
+		$this->render->type = $this->request->typeUser;
+		$responseList = $this->loadModel($this->request);
+
+		$arrayList = $responseList->data;
+		$i = 0;
+
+		foreach ($arrayList as $key => $value) {
+			$titles[$i] = $key;
+			$i++;
+		}
+		$this->render->titles = $titles;
+		$this->render->modules = $arrayList;
+
+		$this->responseAttr($responseList);
 		$this->render->titlePage = lang('GEN_USER_PERMISSION_TITLE');
 		$this->views = ['user/'.$view];
 		$this->loadView($view);
-
 	}
 }
