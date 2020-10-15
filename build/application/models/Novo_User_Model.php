@@ -754,7 +754,7 @@ class Novo_User_Model extends NOVO_Model {
 				$this->response->title = lang('GEN_MENU_USERS_MANAGEMENT');
 				$this->response->icon =  lang('CONF_ICON_WARNING');
 				$this->response->msg = lang('RESP_UNSUCCESSFULL_USER_LIST');
-				$this->response->data['btn1']['action'] = 'redirect';
+				$this->response->data->resp['btn1']['action'] = 'redirect';
 				break;
 
 		}

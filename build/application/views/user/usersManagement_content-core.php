@@ -27,7 +27,7 @@
 						<th>Nombre/Apellido</th>
 						<th>Correo Electrónico</th>
 						<th>Tipo usuario</th>
-						<?php if($this->verify_access->verifyAuthorization('USEREM', 'CRE	USU') || $this->verify_access->verifyAuthorization('USEREM', 'ASGPER')): ?>
+						<?php if($this->verify_access->verifyAuthorization('USEREM', 'CREUSU') || $this->verify_access->verifyAuthorization('USEREM', 'ASGPER')): ?>
 						<th>Opciones</th>
 						<?php endif; ?>
 					</tr>
