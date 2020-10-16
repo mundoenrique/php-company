@@ -397,6 +397,13 @@ function getResponse(Exitoso, MensajeError) {
 		}
 		$('.cover-spin').show(0);
 	} else {
-
+		$('#system-info').dialog('destroy');
+		data = {
+			 btn1: {
+				text: lang.GEN_BTN_ACCEPT,
+				action: 'destroy'
+			},
+		}
+		appMessages(remoteAuthArgs.action, MensajeError, lang.GEN_ICON_WARNING, data);
 	}
 }
