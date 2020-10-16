@@ -334,7 +334,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 			'userName' => $this->userName
 		];
 
-		$response = $this->sendToService('GetDetailBulk');
+		$response = $this->sendToService('callWs_GetDetailBulk');
 		$respLoadBulk = FALSE;
 		$detailBulk = [
 			'idFiscal' => '',
@@ -357,7 +357,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 				$detailBulk['bulkType'] = $response->lotesTO->tipoLote;
 				$detailBulk['bulkNumber'] = $response->lotesTO->numLote;
 				$detailBulk['totaRecords'] = $response->lotesTO->cantRegistros;
-				$detailBulk['amount'] = $response->lotesTO->monto;
+				$detailBulk['amount'] = currencyFormat($response->lotesTO->monto);
 				$detailBulk['bulkTicked'] = $response->lotesTO->idTicket;
 				$detailBulk['success'] = 'Lote cargado exitosamente';
 
@@ -389,7 +389,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 
 		$this->response->data->detailBulk = (object) $detailBulk;
 
-		return $this->responseToTheView('GetDetailBulk');
+		return $this->responseToTheView('callWs_GetDetailBulk');
 	}
 	/**
 	 * @info Confirma un lote
