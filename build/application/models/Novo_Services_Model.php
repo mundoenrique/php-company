@@ -1020,7 +1020,7 @@ class Novo_Services_Model extends NOVO_Model {
 		$this->dataRequest->idOperation = 'integracionBnt';
 		$this->dataRequest->className = 'com.novo.objects.TOs.GestionUsuariosTO';
 		$this->dataRequest->opcion = 'obtenerClaveAutorizacionBNT';
-		$this->dataRequest->idEmpresa = $this->session->enterpriseInf->idFiscal;
+		$this->dataRequest->idEmpresa = $this->session->enterpriseInf->fiscalNumber;
 		$this->dataRequest->idUsuario = $this->session->userName;
 		$this->dataRequest->operacion = '101';
 		$this->dataRequest->tipoOperacion = $dataRequest->action;
