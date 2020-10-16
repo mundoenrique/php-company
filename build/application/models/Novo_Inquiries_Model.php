@@ -98,7 +98,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 						switch ($key) {
 							case 'idOrden':
 								$serviceOrders['OrderNumber'] = $value;
-								break;
+							break;
 							case 'estatus':
 								$serviceOrders['OrderStatus'] = $value;
 								$serviceOrders['OrderVoidable'] = FALSE;
@@ -106,24 +106,25 @@ class Novo_Inquiries_Model extends NOVO_Model {
 								if($value == '0') {
 									$serviceOrders['OrderVoidable'] = $list->nofactura != '' && $list->fechafactura != '' ?: TRUE;
 								}
-								break;
+							break;
 							case 'fechaGeneracion':
 								$serviceOrders['Orderdate'] = $value;
-								break;
+							break;
 							case 'montoComision':
 								$serviceOrders['OrderCommission'] = currencyFormat($value);
-								break;
+							break;
 							case 'montoIVA':
 								$serviceOrders['OrderTax'] = currencyFormat($value);
-								break;
+							break;
 							case 'montoOS':
 								$serviceOrders['OrderAmount'] = currencyFormat($value);
-								break;
+							break;
 							case 'montoDeposito':
 								$serviceOrders['OrderDeposit'] = currencyFormat($value);
-								break;
+							break;
 							case 'lotes':
 								$serviceOrders['bulk'] = [];
+
 								foreach($value AS $bulk) {
 									$bulkList['bulkNumber'] = $bulk->acnumlote;
 									$bulkList['bulkLoadDate'] = $bulk->dtfechorcarga;
@@ -136,7 +137,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 									$bulkList['bulkId'] = $bulk->acidlote;
 									$serviceOrders['bulk'][] = (object) $bulkList;
 								}
-								break;
+							break;
 						}
 					}
 					$serviceOrdersList[] = (object) $serviceOrders;
@@ -144,27 +145,29 @@ class Novo_Inquiries_Model extends NOVO_Model {
 
 				$this->session->set_flashdata('serviceOrdersList', $serviceOrdersList);
 				$this->session->set_flashdata('requestOrdersList', $dataRequest);
-				break;
+			break;
 			case -5:
 				$this->response->title = 'Órdenes de servicio';
 				$this->response->msg = 'No fue posible obtener las órdenes de servicio';
 				$this->response->icon = lang('CONF_ICON_WARNING');
+
 				if($this->input->is_ajax_request()) {
 					$this->response->data['btn1']['action'] = 'close';
 				} else {
 					$this->response->data->resp['btn1']['action'] = 'close';
 				}
-				break;
+			break;
 			case -150:
 				$this->response->title = 'Órdenes de servicio';
 				$this->response->msg = novoLang(lang('RESP_SERVICE_ORDES'), $statusText);
 				$this->response->icon = lang('CONF_ICON_INFO');
+
 				if($this->input->is_ajax_request()) {
 					$this->response->data['btn1']['action'] = 'close';
 				} else {
 					$this->response->data->resp['btn1']['action'] = 'close';
 				}
-				break;
+			break;
 		}
 
 		return $this->responseToTheView('callWs_GetServiceOrders');
@@ -214,7 +217,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 					'text' => lang('GEN_BTN_ACCEPT'),
 					'action' => 'close'
 				];
-				break;
+			break;
 			case -1:
 				$this->response->title = 'Anular Orden';
 				$this->response->msg = lang('GEN_PASSWORD_NO_VALID');
@@ -223,7 +226,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 					'text' => lang('GEN_BTN_ACCEPT'),
 					'action' => 'close'
 				];
-				break;
+			break;
 		}
 
 		return $this->responseToTheView('callWs_ClearServiceOrders');
@@ -581,7 +584,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 				$nameFile = ltrim($response->nombre, 'OS');
 				$nameFile = rtrim($nameFile, '.pdf');
 				exportFile($response->archivo, 'pdf', 'Orden_de_servicio'.$nameFile);
-				break;
+			break;
 			default:
 				$requestOrdersList = $this->session->flashdata('requestOrdersList');
 				$this->load->model('Novo_inquiries_Model', 'getOrders');

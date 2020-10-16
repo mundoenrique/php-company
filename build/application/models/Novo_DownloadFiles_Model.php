@@ -57,7 +57,7 @@ class Novo_DownloadFiles_Model extends NOVO_Model {
 			case 0:
 				$fileInfo = $response->bean;
 				exportFile($fileInfo->archivo, 'xls', 'Afiliacion_innominadas');
-				break;
+			break;
 			default:
 				$this->load->model('Novo_Bulk_Model', 'DetailUnnamed');
 				unset($dataRequest->who, $dataRequest->where);
@@ -104,7 +104,7 @@ class Novo_DownloadFiles_Model extends NOVO_Model {
 		switch ($this->isResponseRc) {
 			case 0:
 				exportFile($response->archivo, $FileType, $response->nombre);
-				break;
+			break;
 			default:
 				$dataRequest->code = 0;
 				$request = new stdClass();
@@ -155,7 +155,7 @@ class Novo_DownloadFiles_Model extends NOVO_Model {
 		switch ($this->isResponseRc) {
 			case 0:
 				exportFile($response->archivo, $FileType, 'Estado_de_lote');
-				break;
+			break;
 			default:
 				$dataRequest->code = 0;
 				$this->responseFail_DownloadFiles($dataRequest);
@@ -201,7 +201,7 @@ class Novo_DownloadFiles_Model extends NOVO_Model {
 		switch ($this->isResponseRc) {
 			case 0:
 				exportFile($response->archivo, $FileType, 'Tarjetas_habientes');
-				break;
+			break;
 			default:
 				$dataRequest->code = 0;
 				$this->responseFail_DownloadFiles($dataRequest);
@@ -252,7 +252,7 @@ class Novo_DownloadFiles_Model extends NOVO_Model {
 		switch ($this->isResponseRc) {
 			case 0:
 				exportFile($response->archivo, $FileType, 'Recargas_realizadas');
-				break;
+			break;
 			default:
 				$dataRequest->code = 0;
 				$this->responseFail_DownloadFiles($dataRequest);
@@ -291,7 +291,7 @@ class Novo_DownloadFiles_Model extends NOVO_Model {
 		switch ($this->isResponseRc) {
 			case 0:
 				exportFile($response->archivo, $FileType, 'Tarjetas_emitidas');
-				break;
+			break;
 			default:
 				$dataRequest->code = 0;
 				$this->responseFail_DownloadFiles($dataRequest);

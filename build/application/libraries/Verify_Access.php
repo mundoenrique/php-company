@@ -280,11 +280,17 @@ class Verify_Access {
 				case 'statusAccountExcelFile':
 				case 'statusAccountPdfFile':
 				case 'searchStatusAccount':
-					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPEDO'));;
+					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPEDO'));
 				break;
 				case 'usersManagement':
+					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('USEREM', 'CONUSU'));
+				break;
+				case 'enableUser':
+					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('USEREM', 'CREUSU'));
+				break;
 				case 'userPermissions':
-					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('USEREM'));;
+				case 'updatePermissions':
+					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('USEREM', 'ASGPER'));;
 				break;
 			}
 		}
