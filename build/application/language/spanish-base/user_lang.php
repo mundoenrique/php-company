@@ -57,3 +57,11 @@ $lang['MANAGEMENT_LIST_USERS'] = 'Listado de usuarios';
 //USERS PERMISSIONS
 $lang['PERMITS_DELETE_ALL_PERMITS'] = 'Eliminar todos los permisos';
 $lang['PERMITS_ALL_PERMITS'] = 'Todos los permisos';
+$lang['PERMITS_USER_MANAGMENET_PROPERTIES'] = [
+	'tranIdEmpresa' => 'idEnterprise',
+	'tranIdUsuario' => 'idUser',
+	'tranNombreUsuario' => 'name',
+	'tranCorreo' => 'mail',
+	'tranTipoUsuario' => 'type',
+	'registed' => 'registered'
+];

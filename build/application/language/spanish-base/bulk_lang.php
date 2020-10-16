@@ -39,6 +39,7 @@ $lang['BULK_CONFIRM_FAIL'] = 'No fue posible confirmar el lote por favor intenta
 $lang['BULK_CONFIRM_FAIL_DULPICATE'] = 'No fue posible confirmar el lote, ya existe en los registros del banco, por favor eliminalo y vuelve a cargarlo';
 $lang['BULK_CONFIRM_EXCEED_LIMIT'] = 'El monto excede el límite de pago para cuenta nacional.';
 $lang['BULK_CONFIRM_DUPLICATE'] = 'No fue posible confirmar el lote, existen registros confirmados en otro lote.';
+$lang['BULK_CONFIRM_EXCEEDED_LIMIT'] = 'El monto del lote supera el límite permitido.';
 $lang['BULK_CONFIRM_FAIL_BANK_RESPONSE'] = 'No fue posible confirmar el lote, no se obtuvo autorización del banco.';
 $lang['BULK_AUTH_SUCCESS'] = '%s, tu autorización fue incluida satisfactoriamente.';
 $lang['BULK_CONFIRM'] = 'Confirmación';

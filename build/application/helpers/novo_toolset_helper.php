@@ -157,6 +157,11 @@ if (!function_exists('setCurrentPage')) {
 					$cssClass = 'page-current';
 				}
 				break;
+			case 'Novo_User':
+				if ($menu == lang('GEN_MENU_USERS')) {
+					$cssClass = 'page-current';
+				}
+				break;
 		}
 
 		return $cssClass;

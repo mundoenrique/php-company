@@ -502,6 +502,7 @@ $config['csrf_exclude_uris'] = array(
 	'[\w\-]+/lotes/innominada/generarReporteTarjetasInnominadas',
 	'[\w\-]+/reportes/saldosamanecidosExpXLS',
 	'[\w\-]+/lotes/innominada/afiliacion',
+	'[\w\-]+/permisos-usuario',
 );
 
 /*
