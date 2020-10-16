@@ -373,12 +373,12 @@ class Novo_Bulk_Model extends NOVO_Model {
 				$this->session->set_flashdata($dataRequest->bulkView, TRUE);
 			break;
 			case -437:
-				$this->response->title = lang('BULK_CONFIRM_TITLE');
-				$this->response->msg = novoLang(lang('GEN_FAILED_THIRD_PARTY'), $response->msg);
+				$this->response->title = lang('BULK_DETAIL');
+				$this->response->msg = lang('BULK_DETAIL_FAIL_COST');
 				$this->response->data->resp['btn1']['link'] = lang('GEN_LINK_BULK_LOAD');
 			break;
 			case -443:
-				$this->response->title = lang('BULK_CONFIRM_TITLE');
+				$this->response->title = lang('BULK_DETAIL');
 				$this->response->msg = lang('BULK_CONFIRM_EXCEED_LIMIT');
 				$this->response->data->resp['btn1']['link'] = lang('GEN_LINK_BULK_LOAD');
 			break;
