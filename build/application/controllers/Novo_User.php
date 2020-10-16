@@ -319,12 +319,26 @@ class Novo_User extends NOVO_Controller {
 		$responseList = $this->loadModel();
 		$data = $responseList->data;
 		$code = $responseList->code;
-		$this->render->userList = $data;
+		$registeredUser = 'OFF';
+		$countRegisteredUser = 0;
 
-		if(($code) == 4){
+		if (($code) == 4) {
 			$this->render->userList= [];
+		}else{
+			$this->render->userList = $data;
 		}
 
+		foreach ($data as $key => $value) {
+			if ($data[$key]->registered == "false") {
+				$countRegisteredUser++;
+			}
+		}
+
+		if ($countRegisteredUser > 0) {
+			$registeredUser = 'ON';
+		}
+
+		$this->render->userRegistered = $registeredUser;
 		$this->responseAttr($responseList);
 		$this->render->titlePage = lang('GEN_MENU_USERS_MANAGEMENT');
 		$this->views = ['user/'.$view];
