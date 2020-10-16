@@ -398,6 +398,7 @@ class Novo_Services_Model extends NOVO_Model {
 		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
+
 				if (isset($dataRequest->action)) {
 					$this->response->data['file'] = $response->archivo;
 					$this->response->data['name'] = $response->nombre.'.xls';

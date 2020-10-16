@@ -549,7 +549,7 @@ class Novo_Reports_Model extends NOVO_Model {
 						'name' => $response->bean
 					];
 				}
-				break;
+			break;
 			case -30:
 			case -150:
 				$this->session->set_flashdata('cardsPeople', $this->session->flashdata('cardsPeople'));
@@ -557,7 +557,7 @@ class Novo_Reports_Model extends NOVO_Model {
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_NO_MOVES_ENTERPRISE');
 				$this->response->data['btn1']['action'] = 'close';
-				break;
+			break;
 		}
 
 		return $this->response;
