@@ -19,6 +19,7 @@ function finishSession() {
 	$('#accept')
 		.removeClass('send-request')
 		.removeClass('get-auth-key');
+	$('#system-msg').removeClass('w-100 vh-100');
 
 	if ($('#system-info').parents('.ui-dialog').length) {
 		$('#system-info').dialog('destroy');

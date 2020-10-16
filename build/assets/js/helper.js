@@ -100,7 +100,7 @@ $(function () {
 	/* if (lang.CONF_REMOTE_CONNECT == 'ON') {//QUITAR IF
 		$('#system-info').on('click', '.sender', function () {
 			$('#accept').removeClass('sender');
-			getResponse(true, false)
+			getResponse(false, 'Hola mundo')
 		});
 	} */
 });
@@ -375,6 +375,7 @@ function getauhtKey() {
 				posMy: 'top',
 				posAt: 'top'
 			}
+			$('#system-msg').addClass('w-100 vh-100');
 			appMessages(remoteAuthArgs.action, '', '', data);
 			AutorizacionCanales(response.data.authKey, 'system-msg', response.data.urlApp, '', 'getResponse');
 		}
@@ -398,12 +399,13 @@ function getResponse(Exitoso, MensajeError) {
 		$('.cover-spin').show(0);
 	} else {
 		$('#system-info').dialog('destroy');
+		$('#system-msg').removeClass('w-100 vh-100');
 		data = {
 			 btn1: {
 				text: lang.GEN_BTN_ACCEPT,
 				action: 'destroy'
 			},
 		}
-		appMessages(remoteAuthArgs.action, MensajeError, lang.GEN_ICON_WARNING, data);
+		appMessages(remoteAuthArgs.action, MensajeError, lang.CONF_ICON_WARNING, data);
 	}
 }
