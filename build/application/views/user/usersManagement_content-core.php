@@ -66,7 +66,7 @@
 						</td>
 						<? else: ?>
 
-							<td></td>
+							<td class="hide"></td>
 
 						<?php endif; ?>
 
