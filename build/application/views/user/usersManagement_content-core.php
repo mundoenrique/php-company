@@ -27,7 +27,7 @@
 						<th>Nombre/Apellido</th>
 						<th>Correo Electrónico</th>
 						<th>Tipo usuario</th>
-						<?php if($this->verify_access->verifyAuthorization('USEREM', 'CREUSU') || $this->verify_access->verifyAuthorization('USEREM', 'ASGPER')): ?>
+						<?php if(($this->verify_access->verifyAuthorization('USEREM', 'CREUSU') && $userRegistered == 'ON' )|| $this->verify_access->verifyAuthorization('USEREM', 'ASGPER')): ?>
 						<th>Opciones</th>
 						<?php endif; ?>
 					</tr>
@@ -39,18 +39,18 @@
 						<td><?= $user->name ?></td>
 						<td><?= $user->mail ?></td>
 						<td><?= $user->type ?></td>
-						<?php if($this->verify_access->verifyAuthorization('USEREM', 'CREUSU') || $this->verify_access->verifyAuthorization('USEREM', 'ASGPER')): ?>
+						<?php if(($this->verify_access->verifyAuthorization('USEREM', 'CREUSU') && $userRegistered == 'ON' )|| $this->verify_access->verifyAuthorization('USEREM', 'ASGPER')): ?>
 
 						<td class="py-0 px-1 flex justify-center items-center">
 							<?php if($this->verify_access->verifyAuthorization('USEREM','CREUSU')): ?>
-								<?php if($user->registered == false): ?>
+								<?php if($user->registered == "false"): ?>
 									<button class="btn mx-1 px-0 big-modal" title="<?= lang('GEN_BTN_ENABLE_USER'); ?>" data-toggle="tooltip">
 										<i class="icon icon-user-building" aria-hidden="true"></i>
 									</button>
 								<?php endif; ?>
 							<?php endif; ?>
 							<?php if($this->verify_access->verifyAuthorization('USEREM','ASGPER')): ?>
-								<?php if($user->registered == true): ?>
+								<?php if($user->registered == "true"): ?>
 									<button id="editButton" class="btn mx-1 px-0 big-modal" title="<?= lang('GEN_BTN_EDIT_PERMITS'); ?>" data-toggle="tooltip">
 										<i class="icon icon-edit-permits" aria-hidden="true"></i>
 									</button>
