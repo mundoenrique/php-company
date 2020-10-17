@@ -11,7 +11,6 @@ $(function () {
 		$(".help-block").text("");
 	});
 
-
 	$('#card-holder-btn').on('click', function (e) {
 		e.preventDefault();
 		$('#passwordAuth').val('');
@@ -30,14 +29,15 @@ $(function () {
 	});
 
 	$('#sign-btn').on('click', function(e) {
+		e.preventDefault();
 		btnText = $(this).text().trim();
 		form = $('#limitsUpdateForm');
 		formInputTrim(form);
 		validateForms(form);
 
 		if (form.valid()) {
-			$(this).html(loader);
 			insertFormInput(true);
+			$(this).html(loader);
 
 			if (lang.CONF_REMOTE_CONNECT == 'ON') {
 				remoteFunction = 'updateLimits';
@@ -51,9 +51,9 @@ $(function () {
 	});
 });
 
-function getForm(){
-	verb = "POST"; who = 'Services'; where = 'transactionalLimits';
+function getForm() {
 	data = getDataForm(form);
+	verb = "POST"; who = 'Services'; where = 'transactionalLimits';
 
 	callNovoCore(verb, who, where, data, function(response) {
 		dataResponse = response.data;
@@ -83,11 +83,12 @@ function getForm(){
 function updateLimits() {
 	data = getDataForm(form);
 	data.cardNumber = cardnumber;
-	verb = "POST"; who = 'Services'; where = 'updateTransactionalLimits';
 
 	if (lang.CONF_REMOTE_CONNECT == 'OFF') {
-		data.passwordAuth = cryptoPass(form.find('#passwordAuth').val().trim());
+		data.passwordAuth = cryptoPass(data.passwordAuth);
 	}
+
+	verb = "POST"; who = 'Services'; where = 'updateTransactionalLimits';
 
 	callNovoCore(verb, who, where, data, function(response) {
 		dataResponse = response.data;
@@ -103,5 +104,5 @@ function updateLimits() {
 		}
 
 		$('.cover-spin').hide();
-	})
+	});
 };

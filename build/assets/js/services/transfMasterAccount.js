@@ -272,18 +272,15 @@ $(function () {
 				appMessages(action, inputModal, lang.CONF_ICON_INFO, data);
 			} else {
 				form = $('#password-table');
+				$('.cover-spin').show(0);
 
 				if (action != lang.GEN_CHECK_BALANCE && formValidateTrim(action)) {
-					$('.cover-spin').show(0);
 					remoteAuthArgs.action = action;
 					getauhtKey();
 				} else {
-					$('.cover-spin').show(0);
 					sendRequest(action, btnRemote);
 				}
 			}
-
-
 		}
 	})
 

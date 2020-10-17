@@ -96,13 +96,6 @@ $(function () {
 		yearSuffix: lang.GEN_PICKER_YEARSUFFIX
 	}
 	$.datepicker.setDefaults($.datepicker.regional['es']);
-
-	/* if (lang.CONF_REMOTE_CONNECT == 'ON') {//QUITAR IF
-		$('#system-info').on('click', '.sender', function () {
-			$('#accept').removeClass('sender');
-			getResponse(true, 'Hola mundo')
-		});
-	} */
 });
 
 function callNovoCore(verb, who, where, request, _response_) {
@@ -352,6 +345,13 @@ function downLoadfiles (data) {
 }
 
 function getauhtKey() {
+	/* if (lang.CONF_REMOTE_CONNECT == 'ON') {//QUITAR IF
+		$('#system-info').on('click', '.sender', function () {
+			$('#accept').removeClass('sender');
+			getResponse(true, 'Hola mundo')
+		});
+	} */
+
 	data = {
 		action: remoteAuthArgs.action
 	}
@@ -364,7 +364,7 @@ function getauhtKey() {
 	callNovoCore(verb, who, where, data, function (response) {
 		$('.cover-spin').hide();
 		if (response.code == 0) {
-			$('#accept').addClass('sender');//QUITAR
+			//$('#accept').addClass('sender');//QUITAR
 			data = {
 				/* btn1: {
 					text: lang.GEN_BTN_ACCEPT,
@@ -400,17 +400,19 @@ function getResponse(Exitoso, MensajeError) {
 			case 'updateLimits':
 				updateLimits();
 			break;
-
+			case 'updateTwirlsCard':
+				updateTwirlsCard();
+			break;
 		}
 		$('.cover-spin').show(0);
 	} else {
-
 		data = {
 			 btn1: {
 				text: lang.GEN_BTN_ACCEPT,
 				action: 'destroy'
 			},
 		}
+
 		appMessages(remoteAuthArgs.action, MensajeError, lang.CONF_ICON_WARNING, data);
 	}
 }
