@@ -100,7 +100,7 @@ $(function () {
 	/* if (lang.CONF_REMOTE_CONNECT == 'ON') {//QUITAR IF
 		$('#system-info').on('click', '.sender', function () {
 			$('#accept').removeClass('sender');
-			getResponse(false, 'Hola mundo')
+			getResponse(true, 'Hola mundo')
 		});
 	} */
 });
@@ -386,6 +386,9 @@ function getauhtKey() {
 }
 
 function getResponse(Exitoso, MensajeError) {
+	$('#system-info').dialog('destroy');
+	$('#system-msg').removeClass('w-100 vh-100');
+
 	if (Exitoso) {
 		switch (remoteFunction) {
 			case 'sendRequest':
@@ -394,12 +397,14 @@ function getResponse(Exitoso, MensajeError) {
 			case 'SignDeleteBulk':
 				SignDeleteBulk(remoteAuthArgs.form, remoteAuthArgs.action, remoteAuthArgs.thisId, remoteAuthArgs.passwordSignAuht, remoteAuthArgs.modalReq);
 			break;
+			case 'updateLimits':
+				updateLimits();
+			break;
 
 		}
 		$('.cover-spin').show(0);
 	} else {
-		$('#system-info').dialog('destroy');
-		$('#system-msg').removeClass('w-100 vh-100');
+
 		data = {
 			 btn1: {
 				text: lang.GEN_BTN_ACCEPT,

@@ -274,11 +274,11 @@ $(function () {
 				form = $('#password-table');
 
 				if (action != lang.GEN_CHECK_BALANCE && formValidateTrim(action)) {
-					$('.cover-spin').show(1);
+					$('.cover-spin').show(0);
 					remoteAuthArgs.action = action;
 					getauhtKey();
 				} else {
-					$('.cover-spin').show(1);
+					$('.cover-spin').show(0);
 					sendRequest(action, btnRemote);
 				}
 			}
