@@ -272,7 +272,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 			'idTicket' => $dataRequest->bulkTicked,
 			'idLote' => $dataRequest->bulkId
 		];
-		$password = isset($dataRequest->pass) ? $this->cryptography->decryptOnlyOneData($dataRequest->pass) : lang('GEN_GENERIC_PASS');
+		$password = isset($dataRequest->pass) ? $this->cryptography->decryptOnlyOneData($dataRequest->pass) : $this->session->passWord;
 
 		if (lang('CONF_HASH_PASS') == 'ON' && $this->singleSession == 'signIn') {
 			$password = md5($password);
@@ -411,7 +411,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 			: 'confirmarLote';
 		$this->dataRequest->className = 'com.novo.objects.MO.ConfirmarLoteMO';
 		$this->dataRequest->lotesTO = $bulkConfirmInfo;
-		$password = isset($dataRequest->pass) ? $this->cryptography->decryptOnlyOneData($dataRequest->pass) : lang('GEN_GENERIC_PASS');
+		$password = isset($dataRequest->pass) ? $this->cryptography->decryptOnlyOneData($dataRequest->pass) : $this->session->passWord;
 
 		if (lang('CONF_HASH_PASS') == 'ON' && $this->singleSession == 'signIn') {
 			$password = md5($password);
@@ -619,7 +619,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 			$deleteListBulk[] = $bulkList;
 		}
 
-		$password = isset($dataRequest->pass) ? $this->cryptography->decryptOnlyOneData($dataRequest->pass) : lang('GEN_GENERIC_PASS');
+		$password = isset($dataRequest->pass) ? $this->cryptography->decryptOnlyOneData($dataRequest->pass) : $this->session->passWord;
 
 		if (lang('CONF_HASH_PASS') == 'ON' && $this->singleSession == 'signIn') {
 			$password = md5($password);
@@ -749,7 +749,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 			$signListBulk[] = $bulkList;
 		}
 
-		$password = isset($dataRequest->pass) ? $this->cryptography->decryptOnlyOneData($dataRequest->pass) : lang('GEN_GENERIC_PASS');
+		$password = isset($dataRequest->pass) ? $this->cryptography->decryptOnlyOneData($dataRequest->pass) : $this->session->passWord;
 
 		if (lang('CONF_HASH_PASS') == 'ON' && $this->singleSession == 'signIn') {
 			$password = md5($password);
@@ -1238,7 +1238,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 			$password = $this->cryptography->decryptOnlyOneData($dataRequest->password);
 		}
 
-		$password = lang('CONF_REMOTE_CONNECT') == 'ON' ? lang('GEN_GENERIC_PASS') : $password;
+		$password = lang('CONF_REMOTE_CONNECT') == 'ON' ? $this->session->passWord : $password;
 
 		if (lang('CONF_HASH_PASS') == 'ON' && $this->singleSession == 'signIn') {
 			$password = md5($password);

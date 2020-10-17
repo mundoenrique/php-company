@@ -193,7 +193,7 @@ class Novo_Services_Model extends NOVO_Model {
 		$this->dataRequest->listadoTarjetas = [
 			'lista' => $cardsList
 		];
-		$password = isset($dataRequest->pass) ? $this->cryptography->decryptOnlyOneData($dataRequest->pass) : lang('GEN_GENERIC_PASS');
+		$password = isset($dataRequest->pass) ? $this->cryptography->decryptOnlyOneData($dataRequest->pass) : $this->session->passWord;
 
 		if (lang('CONF_HASH_PASS') == 'ON' && $this->singleSession == 'signIn') {
 			$password = md5($password);
@@ -567,7 +567,7 @@ class Novo_Services_Model extends NOVO_Model {
 
 				if ($dataRequest->action == 'INQUIRY_BALANCE') {
 					$this->response->code = 1;
-					$this->response->success = false;
+					$this->response->success = FALSE;
 				}
 			break;
 			case -1:
@@ -706,7 +706,7 @@ class Novo_Services_Model extends NOVO_Model {
 			'rc' => 0]
 		];
 
-		$password = isset($dataRequest->passwordAuth) ? $this->cryptography->decryptOnlyOneData($dataRequest->passwordAuth) : lang('GEN_GENERIC_PASS');
+		$password = isset($dataRequest->passwordAuth) ? $this->cryptography->decryptOnlyOneData($dataRequest->passwordAuth) : $this->session->passWord;
 
 		if (lang('CONF_HASH_PASS') == 'ON' && $this->singleSession == 'signIn') {
 			$password = md5($password);
@@ -876,9 +876,9 @@ class Novo_Services_Model extends NOVO_Model {
 		$this->dataRequest->idEmpresa = $this->session->enterpriseInf->idFiscal;
 		$this->dataRequest->prefix = $this->session->productInf->productPrefix;
 
-		$password = isset($dataRequest->passwordAuth) ? $this->cryptography->decryptOnlyOneData($dataRequest->passwordAuth) : lang('GEN_GENERIC_PASS');
+		$password = isset($dataRequest->passwordAuth) ? $this->cryptography->decryptOnlyOneData($dataRequest->passwordAuth) : $this->session->passWord;
 
-		if (lang('CONF_HASH_PASS') == 'OFF' && $this->singleSession == 'signIn') {
+		if (lang('CONF_HASH_PASS') == 'ON' && $this->singleSession == 'signIn') {
 			$password = md5($password);
 		}
 
@@ -910,11 +910,17 @@ class Novo_Services_Model extends NOVO_Model {
 
 		switch($this->isResponseRc) {
 			case 0:
-				$this->response->code= 4;
 				$this->response->title = lang('GEN_TRANSACTIONAL_LIMITS_TITTLE');
 				$this->response->icon =  lang('CONF_ICON_SUCCESS');
         $this->response->msg = 	lang('RESP_SUCCESSFULL_UPDATE_LIMITS');
+        $this->response->success = TRUE;
         $this->response->data['btn1']['action'] = 'close';
+			break;
+			case -1:
+				$this->response->title = lang('GEN_TRANSACTIONAL_LIMITS_TITTLE');
+				$this->response->msg = lang('GEN_PASSWORD_NO_VALID');
+				$this->response->icon = lang('CONF_ICON_INFO');
+				$this->response->data['btn1']['action'] = 'close';
 			break;
 			case -449:
 			case -450:
@@ -924,12 +930,14 @@ class Novo_Services_Model extends NOVO_Model {
 				$this->response->data['btn1']['action'] = 'close';
 			break;
 			case -456:
+				//Límites que no deben ser mayor a otro según configuración
 				$this->response->title = lang('GEN_TRANSACTIONAL_LIMITS_TITTLE');
 				$this->response->icon =  lang('CONF_ICON_WARNING');
 				$this->response->msg = $response->msg;
 				$this->response->data['btn1']['action'] = 'close';
 			break;
 			case -457:
+				//Límite menor supera al definido para el producto
 				$this->response->title = lang('GEN_TRANSACTIONAL_LIMITS_TITTLE');
 				$this->response->icon =  lang('CONF_ICON_WARNING');
 				$this->response->msg = $response->msg;

@@ -81,6 +81,7 @@ class Novo_User_Model extends NOVO_Model {
 					'logged' => TRUE,
 					'userId' => $response->usuario->idUsuario,
 					'userName' => $response->usuario->userName,
+					'passWord' => lang('CONF_REMOTE_CONNECT') == 'ON' ? $this->dataRequest->password : FALSE,
 					'fullName' => ucwords(mb_strtolower($fullName)),
 					'userType' => $response->usuario->ctipo,
 					'codigoGrupo' => $response->usuario->codigoGrupo,

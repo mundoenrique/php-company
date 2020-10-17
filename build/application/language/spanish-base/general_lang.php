@@ -484,7 +484,6 @@ $lang['RESP_UNSUCCESSFULL_USER_LIST'] = "No fue posible obtener la lista de usua
 $lang['RESP_AUTH_ORDER_SERV'] = 'No fue posible obtener los datos para realizar el cálculo de la orden de servicio';
 $lang['RESP_NO_LIST'] = 'No fue posible obtener el listado';
 $lang['RESP_SERVICE_ORDES'] = 'No existen órdenes de servicio en estado "<strong>%s</strong>" para el rango de fecha seleccionado';
-$lang['GEN_GENERIC_PASS'] = '';
 $lang['GEN_GET_AUTH_USER_FAIL'] = 'No fue posible identicarte en la aplicación';
 $lang['GEN_GET_AUTH_KEY_FAIL'] = 'No fue posible generar la llave de autorización';
 //UPLOAD FILE
