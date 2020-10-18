@@ -141,14 +141,15 @@ $lang['CONF_INPUT_UPPERCASE']= 'ON';
 //REMOTE AUTHORIZATIONS
 $lang['CONF_REMOTE_AUTH'] = 'OFF';
 $lang['CONF_AUTH_LIST'] = [];
+$lang['CONF_AUTH_VALIDATE'] = [];
 $lang['CONF_AUTH_URL'] = [
 	'development' => [
-
+		'ANY' => ''
 	],
 	'testing' => [
-
+		'ANY' => ''
 	],
 	'production' => [
-
+		'ANY' => ''
 	]
 ];

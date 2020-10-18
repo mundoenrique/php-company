@@ -851,9 +851,9 @@ $config = [
 			'rules' => 'trim|regex_match[/^([\w ]*)+$/i]|required'
 		],
 		[
-			'field' => 'pass',
-			'label' => 'pass',
-			'rules' => 'trim|regex_match[/^([a-zA-Z0-9=]+)+$/i]|required'
+			'field' => 'password',
+			'label' => 'password',
+			'rules' => 'trim|regex_match[/^([a-zA-Z0-9=]+)+$/i]'
 		]
 	],
 	'authorizationKey' => [

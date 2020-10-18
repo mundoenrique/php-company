@@ -519,7 +519,7 @@ class Novo_Services_Model extends NOVO_Model {
 			$dataList[] = $data;
 		}
 
-		$password = isset($dataRequest->pass) ? $this->cryptography->decryptOnlyOneData($dataRequest->pass) : FALSE;
+		$password = isset($dataRequest->password) ? $this->cryptography->decryptOnlyOneData($dataRequest->password) : FALSE;
 
 		if (lang('CONF_HASH_PASS') == 'ON' && $this->singleSession == 'signIn') {
 			$password = $this->session->passWord ?: md5($password);
@@ -530,7 +530,7 @@ class Novo_Services_Model extends NOVO_Model {
 		$this->dataRequest->items = $dataList;
 		$this->dataRequest->usuario = [
 			'userName' => $this->session->userName,
-			'password' => $password.'-2',
+			'password' => $password,
 			'idProducto' => $this->session->productInf->productPrefix
 		];
 		$this->dataRequest->opcion = lang('SERVICES_ACTION_'.$dataRequest->action);
@@ -1035,8 +1035,8 @@ class Novo_Services_Model extends NOVO_Model {
 		$this->dataRequest->idServicio = '1260';
 
 		$response = $this->sendToService('CallWs_AuthorizationKey');
-		$response = json_decode('{"rc":0,"msg":"Proceso OK","bean":{"tranClave":"nuR8Q+ntN8ECmrW7+Oe4m7fPuWCeo5QXlu8QtXSt7EL9dEmSAdzVYvIjIlv1pC9WhAZSLHe8yjUMIcGoswH4bRt78FJPX6MU5nHxHa4o+hi3csUGqmI5T3j8ZxbxdmpQ0pHewHVRgLTqIqd6v8Mmqg\\u003d\\u003d","tranExitoso":true,"tranDescripcionError":""}}');
-		$this->isResponseRc = 0;
+		/* $response = json_decode('{"rc":0,"msg":"Proceso OK","bean":{"tranClave":"nuR8Q+ntN8ECmrW7+Oe4m7fPuWCeo5QXlu8QtXSt7EL9dEmSAdzVYvIjIlv1pC9WhAZSLHe8yjUMIcGoswH4bRt78FJPX6MU5nHxHa4o+hi3csUGqmI5T3j8ZxbxdmpQ0pHewHVRgLTqIqd6v8Mmqg\\u003d\\u003d","tranExitoso":true,"tranDescripcionError":""}}');
+		$this->isResponseRc = 0; */
 		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;

@@ -7,5 +7,5 @@ $lang['VALIDATE_USERNAME'] = 'Debes indicar tu nombre de usuario';
 $lang['VALIDATE_REG_ID_NUMBER'] = '^[a-z0-9]+$';
 $lang['VALIDATE_ID_NUMBER'] = 'Indica un CURP válido';
 $lang['VALIDATE_CARD_NUMBER_MIN'] = 'Indica un número de tarjeta válido (16 dígitos)';
-//$lang['VALIDATE_MINLENGTH'] = 16;
+$lang['VALIDATE_MINLENGTH'] = 16;
 $lang['VALIDATE_DOCUMENT_ID'] = 'Indica un número de CURP válido';

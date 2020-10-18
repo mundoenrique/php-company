@@ -345,13 +345,15 @@ function downLoadfiles (data) {
 }
 
 function getauhtKey() {
-	if (lang.CONF_REMOTE_AUTH == 'ON') {//QUITAR IF
+	/* if (lang.CONF_REMOTE_AUTH == 'ON') {//QUITAR IF
+		$('#accept').addClass('sender');//QUITAR
 		$('#system-info').on('click', '.sender', function () {
 			$('#accept').removeClass('sender');
 			getResponse(true, 'Hola mundo')
 		});
-	}
-
+	} */
+	$('#accept').removeClass('get-auth-key');
+	$('#accept').removeClass('send-request');
 	data = {
 		action: remoteAuthArgs.action
 	}
@@ -364,12 +366,11 @@ function getauhtKey() {
 	callNovoCore(verb, who, where, data, function (response) {
 		$('.cover-spin').hide();
 		if (response.code == 0) {
-			$('#accept').addClass('sender');//QUITAR
 			data = {
-				btn1: {
+				/* btn1: {
 					text: lang.GEN_BTN_ACCEPT,
 					action: 'close'
-				},//quitar btn1
+				},//quitar btn1 */
 				minHeight: 600,
 				width: 800,
 				posMy: 'top',
@@ -404,7 +405,7 @@ function getResponse(Exitoso, MensajeError) {
 				updateTwirlsCard();
 			break;
 			case 'applyActions':
-				applyActions(remoteAuthArgs.form, remoteAuthArgs.action, btnRemote);
+				applyActions(remoteAuthArgs.action, remoteAuthArgs.form, btnRemote);
 			break;
 		}
 		$('.cover-spin').show(0);

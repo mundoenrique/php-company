@@ -55,16 +55,20 @@ $lang['CONF_INPUT_UPPERCASE']= 'OFF';
 //REMOTE AUTHORIZATIONS
 $lang['CONF_REMOTE_AUTH'] = 'ON';
 $lang['CONF_AUTH_LIST'] = ['RECEIVE_IN_ENTERPRISE'];
+$lang['CONF_AUTH_VALIDATE'] = ['UPDATE_DATA'];
 $lang['CONF_AUTH_URL'] = [
 	'development' => [
+		'ANY' => '',
 		'BEM' => 'https://15.128.26.90/nbem11/AutorizacionRemota.aspx',
 		'BEP' => 'https://15.128.26.90/nbem11/AutorizacionRemota.aspx'
 	],
 	'testing' => [
+		'ANY' => '',
 		'BEM' => 'https://15.128.26.90/nbem11/AutorizacionRemota.aspx',
 		'BEP' => 'https://15.128.26.90/nbem11/AutorizacionRemota.aspx'
 	],
 	'production' => [
+		'ANY' => '',
 		'BEM' => 'https://15.128.26.90/nbem11/AutorizacionRemota.aspx',
 		'BEP' => 'https://15.128.26.90/nbem11/AutorizacionRemota.aspx'
 	]
