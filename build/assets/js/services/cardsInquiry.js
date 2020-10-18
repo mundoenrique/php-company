@@ -61,8 +61,9 @@ $(function () {
 	});
 
 	$('#system-info').on('click', '.get-auth-key', function () {
-		form = $('#modalCardsInquiryForm')
+		form = $('#modalCardsInquiryForm');
 		btnText = $(this).text().trim();
+
 		if (InqValidateActions(action, form)) {
 			btnRemote = $(this);
 			remoteAuthArgs.action = action;
@@ -342,7 +343,10 @@ function InqBuildFormActions(currentBtn, currentTitle) {
 		$('#accept').addClass('get-auth-key');
 		currentBtn = btnRemote;
 		form = $('#nonForm');
-		$('.cover-spin').show(0);
+
+		if ($.inArray(currentAction, lang.CONF_AUTH_VALIDATE) == -1) {
+			$('.cover-spin').show(0);
+		}
 	}
 
 	inputModal += '</form>';

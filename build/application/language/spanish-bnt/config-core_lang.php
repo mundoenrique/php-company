@@ -57,7 +57,7 @@ $lang['CONF_REMOTE_AUTH'] = 'ON';
 $lang['CONF_AUTH_LIST'] = [
 	'CREDIT_TO_CARD', 'DEBIT_TO_CARD', 'TEMPORARY_LOCK', 'UNLOCK_CARD', 'CARD_ASSIGNMENT'
 ];
-$lang['CONF_AUTH_VALIDATE'] = ['UPDATE_DATA'];
+$lang['CONF_AUTH_VALIDATE'] = ['CARD_ASSIGNMENT', 'UPDATE_DATA'];
 $lang['CONF_AUTH_URL'] = [
 	'development' => [
 		'ANY' => '',

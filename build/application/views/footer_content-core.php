@@ -45,4 +45,4 @@
 	</div>
 </div>
 <div class="cover-spin"></div>
-<form id="nonForm"></form>
+<form id="nonForm" class="hide"></form>

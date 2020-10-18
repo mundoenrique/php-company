@@ -346,9 +346,11 @@ function downLoadfiles (data) {
 
 function getauhtKey() {
 	/* if (lang.CONF_REMOTE_AUTH == 'ON') {//QUITAR IF
-		$('#accept').addClass('sender');//QUITAR
+		$('#accept').addClass('sender');
 		$('#system-info').on('click', '.sender', function () {
-			$('#accept').removeClass('sender');
+			$('#accept')
+				.prop('disabled', false)
+				.removeClass('sender');
 			getResponse(true, 'Hola mundo')
 		});
 	} */
@@ -369,7 +371,7 @@ function getauhtKey() {
 			data = {
 				/* btn1: {
 					text: lang.GEN_BTN_ACCEPT,
-					action: 'close'
+					action: 'none'
 				},//quitar btn1 */
 				minHeight: 600,
 				width: 800,
@@ -382,7 +384,9 @@ function getauhtKey() {
 		}
 
 		insertFormInput(false);
-		btnRemote.html(btnText);
+		btnRemote
+			.prop('disabled', false)
+			.html(btnText);
 	});
 }
 
@@ -393,7 +397,7 @@ function getResponse(Exitoso, MensajeError) {
 	if (Exitoso) {
 		switch (remoteFunction) {
 			case 'sendRequest':
-				sendRequest(remoteAuthArgs.action, btnRemote);
+				sendRequest(remoteAuthArgs.action, remoteAuthArgs.title, btnRemote);
 			break;
 			case 'SignDeleteBulk':
 				SignDeleteBulk(remoteAuthArgs.form, remoteAuthArgs.action, remoteAuthArgs.thisId, remoteAuthArgs.passwordSignAuht, remoteAuthArgs.modalReq);

@@ -249,9 +249,14 @@ $(function () {
 
 	$('#system-info').on('click', '.get-auth-key', function () {
 		form = $('#password-modal');
+		btnText = $(this).text().trim();
 
-
-
+		if (formValidateTrim(form, action)) {
+			btnRemote = $(this);
+			remoteAuthArgs.action = action;
+			remoteAuthArgs.title = title;
+			getauhtKey();
+		}
 	});
 
 	$('#Consulta, #Abono, #Cargo').on('click', function (e) {
@@ -265,17 +270,6 @@ $(function () {
 			form = $('#password-table');
 			btnText = $(this).text().trim();
 			btnRemote = $(this);
-
-			if (lang.CONF_REMOTE_AUTH == 'ON' && action == 'CHECK_BALANCE') {
-				sendRequest(action, title, $(this));
-			} else if (lang.CONF_REMOTE_AUTH == 'ON') {
-				if (formValidateTrim(form, action)) {
-					remoteAuthArgs.action = action;
-					getauhtKey();
-				}
-			} else {
-				sendRequest(action, title, $(this));
-			}
 		}
 	});
 
@@ -347,15 +341,20 @@ function MasterAccBuildFormActions(currentAction, currentTitle, currentBtn) {
 		$('#accept').addClass('get-auth-key');
 		currentBtn = btnRemote;
 		form = $('#nonForm');
-		$('.cover-spin').show(0);
+
+		if ($.inArray(currentAction, lang.CONF_AUTH_VALIDATE) == -1) {
+			$('.cover-spin').show(0);
+		}
 	}
 
 	inputModal += '</form>';
 
 	if (lang.CONF_REMOTE_AUTH == 'OFF' || (lang.CONF_REMOTE_AUTH == 'ON' && $.inArray(currentAction, lang.CONF_AUTH_VALIDATE) != -1)) {
 		appMessages(currentTitle, inputModal, lang.CONF_ICON_INFO, data);
-	} else if ($.inArray(action, lang.CONF_AUTH_LIST) != -1) {
-
+	} else if ($.inArray(currentAction, lang.CONF_AUTH_LIST) != -1) {
+		remoteAuthArgs.action = currentAction;
+		remoteAuthArgs.title = currentTitle;
+		getauhtKey();
 	} else {
 		sendRequest(currentAction, currentTitle, currentBtn);
 	}
@@ -445,9 +444,6 @@ function sendRequest(currentAction, currentTitle, currentBtn) {
 				currentBtn.html(btnText)
 			}
 
-			currentBtn.prop('disabled', false);
-			insertFormInput(false);
-			form.find('input.pwd').val('');
 			$('#tableServicesMaster').find('tbody > tr input').val('');
 
 			if (response.data.balance) {
@@ -466,6 +462,9 @@ function sendRequest(currentAction, currentTitle, currentBtn) {
 				buildList(response, currentTitle)
 			}
 
+			currentBtn.prop('disabled', false);
+			insertFormInput(false);
+			form.find('input.pwd').val('');
 			$('.cover-spin').hide();
 		});
 	}
