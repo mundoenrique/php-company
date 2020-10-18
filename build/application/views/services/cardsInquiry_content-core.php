@@ -119,6 +119,7 @@
                   <select id="masiveOptions" name="masiveOptions" class="form-control select-box custom-select flex h6 w-100"></select>
                   <div class="help-block item-select text-left"></div>
                 </div>
+								<?php if (lang('CONF_REMOTE_AUTH') == 'OFF'): ?>
                 <div class="col-4 col-lg-3 col-xl-3 form-group">
                   <div class="input-group">
                     <input id="passAction" name="password" class="form-control pwd-input pr-0 pwd" type="password" autocomplete="off"
@@ -131,6 +132,7 @@
                   </div>
                   <div class="help-block text-left"></div>
                 </div>
+								<?php endif; ?>
                 <div class="col-3 col-lg-auto">
                   <button id="cardsInquiryBtn" class="btn btn-primary btn-small btn-loading flex mx-auto">
                     <?= lang('GEN_BTN_PROCESS'); ?>

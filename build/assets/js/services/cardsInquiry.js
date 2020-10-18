@@ -381,6 +381,10 @@ function applyActions(currentAction, currentForm, currentBtn) {
 	}
 }
 
+function InqValidateActions() {
+
+}
+
 function fileDownload(currentAction) {
 	verb = 'POST'; who = 'Services'; where = 'CardsInquiry'
 	data = dataRquest;

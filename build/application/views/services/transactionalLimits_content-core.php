@@ -361,7 +361,7 @@
           </div>
           <div class="flex row mt-3 mb-2 mx-2 justify-end">
             <div class="col-5 col-lg-3 col-xl-3 form-group">
-              <?php if (lang('CONF_REMOTE_CONNECT') == 'OFF'): ?>
+              <?php if (lang('CONF_REMOTE_AUTH') == 'OFF'): ?>
               <div class="input-group">
                 <input id="passwordAuth" name="password" class="form-control pwd-input pr-0" type="password" autocomplete="off"
                   placeholder="Contraseña" disabled>

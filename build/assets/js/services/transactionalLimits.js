@@ -39,7 +39,7 @@ $(function () {
 			insertFormInput(true);
 			$(this).html(loader);
 
-			if (lang.CONF_REMOTE_CONNECT == 'ON') {
+			if (lang.CONF_REMOTE_AUTH == 'ON') {
 				remoteFunction = 'updateLimits';
 				btnRemote = $(this);
 				remoteAuthArgs.action = lang.GEN_TRANSACTIONAL_LIMITS_TITTLE;
@@ -84,7 +84,7 @@ function updateLimits() {
 	data = getDataForm(form);
 	data.cardNumber = cardnumber;
 
-	if (lang.CONF_REMOTE_CONNECT == 'OFF') {
+	if (lang.CONF_REMOTE_AUTH == 'OFF') {
 		data.passwordAuth = cryptoPass(data.passwordAuth);
 	}
 

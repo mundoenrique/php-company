@@ -24,7 +24,7 @@ $(function () {
 			formInputTrim(form);
 			data = getDataForm(form);
 
-			if (lang.CONF_REMOTE_CONNECT == 'OFF') {
+			if (lang.CONF_REMOTE_AUTH == 'OFF') {
 				data.password = cryptoPass(data.password);
 			}
 

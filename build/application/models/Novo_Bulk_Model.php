@@ -272,10 +272,10 @@ class Novo_Bulk_Model extends NOVO_Model {
 			'idTicket' => $dataRequest->bulkTicked,
 			'idLote' => $dataRequest->bulkId
 		];
-		$password = isset($dataRequest->pass) ? $this->cryptography->decryptOnlyOneData($dataRequest->pass) : $this->session->passWord;
+		$password = isset($dataRequest->pass) ? $this->cryptography->decryptOnlyOneData($dataRequest->pass) : FALSE;
 
 		if (lang('CONF_HASH_PASS') == 'ON' && $this->singleSession == 'signIn') {
-			$password = md5($password);
+			$password = $this->session->passWord ?: md5($password);
 		}
 
 		$this->dataRequest->usuario = [
@@ -411,10 +411,11 @@ class Novo_Bulk_Model extends NOVO_Model {
 			: 'confirmarLote';
 		$this->dataRequest->className = 'com.novo.objects.MO.ConfirmarLoteMO';
 		$this->dataRequest->lotesTO = $bulkConfirmInfo;
-		$password = isset($dataRequest->pass) ? $this->cryptography->decryptOnlyOneData($dataRequest->pass) : $this->session->passWord;
+
+		$password = isset($dataRequest->pass) ? $this->cryptography->decryptOnlyOneData($dataRequest->pass) : FALSE;
 
 		if (lang('CONF_HASH_PASS') == 'ON' && $this->singleSession == 'signIn') {
-			$password = md5($password);
+			$password = $this->session->passWord ?: md5($password);
 		}
 
 		$this->dataRequest->usuario = [
@@ -559,10 +560,10 @@ class Novo_Bulk_Model extends NOVO_Model {
 			$signListBulk[] = $bulkList;
 		}
 
-		$password = $this->cryptography->decryptOnlyOneData($dataRequest->pass);
+		$password = isset($dataRequest->pass) ? $this->cryptography->decryptOnlyOneData($dataRequest->pass) : FALSE;
 
 		if (lang('CONF_HASH_PASS') == 'ON' && $this->singleSession == 'signIn') {
-			$password = md5($password);
+			$password = $this->session->passWord ?: md5($password);
 		}
 
 		$this->dataRequest->idOperation = 'firmarLote';
@@ -619,10 +620,10 @@ class Novo_Bulk_Model extends NOVO_Model {
 			$deleteListBulk[] = $bulkList;
 		}
 
-		$password = isset($dataRequest->pass) ? $this->cryptography->decryptOnlyOneData($dataRequest->pass) : $this->session->passWord;
+		$password = isset($dataRequest->pass) ? $this->cryptography->decryptOnlyOneData($dataRequest->pass) : FALSE;
 
 		if (lang('CONF_HASH_PASS') == 'ON' && $this->singleSession == 'signIn') {
-			$password = md5($password);
+			$password = $this->session->passWord ?: md5($password);
 		}
 
 		$this->dataRequest->idOperation = 'eliminarLotesPorAutorizar';
@@ -687,10 +688,10 @@ class Novo_Bulk_Model extends NOVO_Model {
 			$disassListBulk[] = $bulkList;
 		}
 
-		$password = $this->cryptography->decryptOnlyOneData($dataRequest->pass);
+		$password = isset($dataRequest->pass) ? $this->cryptography->decryptOnlyOneData($dataRequest->pass) : FALSE;
 
 		if (lang('CONF_HASH_PASS') == 'ON' && $this->singleSession == 'signIn') {
-			$password = md5($password);
+			$password = $this->session->passWord ?: md5($password);
 		}
 
 		$this->dataRequest->idOperation = 'desasociarFirma';
@@ -749,10 +750,10 @@ class Novo_Bulk_Model extends NOVO_Model {
 			$signListBulk[] = $bulkList;
 		}
 
-		$password = isset($dataRequest->pass) ? $this->cryptography->decryptOnlyOneData($dataRequest->pass) : $this->session->passWord;
+		$password = isset($dataRequest->pass) ? $this->cryptography->decryptOnlyOneData($dataRequest->pass) : FALSE;
 
 		if (lang('CONF_HASH_PASS') == 'ON' && $this->singleSession == 'signIn') {
-			$password = md5($password);
+			$password = $this->session->passWord ?: md5($password);
 		}
 
 		$this->dataRequest->idOperation = 'calcularOS';
@@ -1232,22 +1233,21 @@ class Novo_Bulk_Model extends NOVO_Model {
 
 		$expiredDate = explode('/', $dataRequest->expiredDate);
 		$expiredDate = $expiredDate[0].substr($expiredDate[1], -2);
-		$password =  '';
+		$password = '';
 
 		if (isset($dataRequest->password)) {
 			$password = $this->cryptography->decryptOnlyOneData($dataRequest->password);
 		}
 
-		$password = lang('CONF_REMOTE_CONNECT') == 'ON' ? $this->session->passWord : $password;
-
-		if (lang('CONF_HASH_PASS') == 'ON' && $this->singleSession == 'signIn') {
-			$password = md5($password);
+		if (lang('CONF_HASH_PASS') == 'ON' && $this->singleSession == 'signIn' && $password != '') {
+			$password = $this->session->passWord ?: md5($password);
 		}
 
 		$startingLine1 = isset($dataRequest->startingLine1) ?
 			implode(' ',array_filter(explode(' ', ucfirst(mb_strtolower($dataRequest->startingLine1))))) : '';
 		$startingLine2 = isset($dataRequest->startingLine2) ?
 			implode(' ',array_filter(explode(' ', ucfirst(mb_strtolower($dataRequest->startingLine2))))) : '';
+
 		$this->dataRequest->idOperation = 'createCuentasInnominadas';
 		$this->dataRequest->className = 'com.novo.objects.MO.ListadoSucursalesMO';
 		$this->dataRequest->lotesTO = [

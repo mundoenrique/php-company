@@ -42,7 +42,7 @@ $(function () {
 		if (form.valid()) {
 			insertFormInput(true);
 			$(this).html(loader);
-			if (lang.CONF_REMOTE_CONNECT == 'ON') {
+			if (lang.CONF_REMOTE_AUTH == 'ON') {
 				remoteFunction = 'updateTwirlsCard';
 				btnRemote = $(this);
 				remoteAuthArgs.action = lang.GEN_COMMERCIAL_TWIRLS_TITTLE;
@@ -88,7 +88,7 @@ function updateTwirlsCard() {
 	data = getDataForm(form);
 	data.cardNumber = cardnumber;
 
-	if (lang.CONF_REMOTE_CONNECT == 'OFF') {
+	if (lang.CONF_REMOTE_AUTH == 'OFF') {
 		passData.passwordAuth = cryptoPass(passData.passwordAuth);
 	}
 

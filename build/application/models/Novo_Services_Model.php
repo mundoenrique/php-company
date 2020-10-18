@@ -193,10 +193,10 @@ class Novo_Services_Model extends NOVO_Model {
 		$this->dataRequest->listadoTarjetas = [
 			'lista' => $cardsList
 		];
-		$password = isset($dataRequest->pass) ? $this->cryptography->decryptOnlyOneData($dataRequest->pass) : $this->session->passWord;
+		$password = isset($dataRequest->pass) ? $this->cryptography->decryptOnlyOneData($dataRequest->pass) : FALSE;
 
 		if (lang('CONF_HASH_PASS') == 'ON' && $this->singleSession == 'signIn') {
-			$password = md5($password);
+			$password = $this->session->passWord ?: md5($password);
 		}
 
 		$this->dataRequest->usuario = [
@@ -519,10 +519,10 @@ class Novo_Services_Model extends NOVO_Model {
 			$dataList[] = $data;
 		}
 
-		$password = $this->cryptography->decryptOnlyOneData($dataRequest->pass);
+		$password = isset($dataRequest->pass) ? $this->cryptography->decryptOnlyOneData($dataRequest->pass) : FALSE;
 
 		if (lang('CONF_HASH_PASS') == 'ON' && $this->singleSession == 'signIn') {
-			$password = md5($password);
+			$password = $this->session->passWord ?: md5($password);
 		}
 
 		$this->dataRequest->idOperation = 'operacionSeguimientoLoteCeo';
@@ -530,7 +530,7 @@ class Novo_Services_Model extends NOVO_Model {
 		$this->dataRequest->items = $dataList;
 		$this->dataRequest->usuario = [
 			'userName' => $this->session->userName,
-			'password' => $password,
+			'password' => $password.'-2',
 			'idProducto' => $this->session->productInf->productPrefix
 		];
 		$this->dataRequest->opcion = lang('SERVICES_ACTION_'.$dataRequest->action);
@@ -706,10 +706,10 @@ class Novo_Services_Model extends NOVO_Model {
 			'rc' => 0]
 		];
 
-		$password = isset($dataRequest->passwordAuth) ? $this->cryptography->decryptOnlyOneData($dataRequest->passwordAuth) : $this->session->passWord;
+		$password = isset($dataRequest->passwordAuth) ? $this->cryptography->decryptOnlyOneData($dataRequest->passwordAuth) : FALSE;
 
 		if (lang('CONF_HASH_PASS') == 'ON' && $this->singleSession == 'signIn') {
-			$password = md5($password);
+			$password = $this->session->passWord ?: md5($password);
 		}
 
 		$this->dataRequest->usuario = [
@@ -876,10 +876,10 @@ class Novo_Services_Model extends NOVO_Model {
 		$this->dataRequest->idEmpresa = $this->session->enterpriseInf->idFiscal;
 		$this->dataRequest->prefix = $this->session->productInf->productPrefix;
 
-		$password = isset($dataRequest->passwordAuth) ? $this->cryptography->decryptOnlyOneData($dataRequest->passwordAuth) : $this->session->passWord;
+		$password = isset($dataRequest->passwordAuth) ? $this->cryptography->decryptOnlyOneData($dataRequest->passwordAuth) : FALSE;
 
 		if (lang('CONF_HASH_PASS') == 'ON' && $this->singleSession == 'signIn') {
-			$password = md5($password);
+			$password = $this->session->passWord ?: md5($password);
 		}
 
 		foreach ((array)lang('SERVICES_NAMES_PROPERTIES_LIMITS') as $key => $val) {
@@ -1035,14 +1035,14 @@ class Novo_Services_Model extends NOVO_Model {
 		$this->dataRequest->idServicio = '1260';
 
 		$response = $this->sendToService('CallWs_AuthorizationKey');
-		/* $response = json_decode('{"rc":0,"msg":"Proceso OK","bean":{"tranClave":"nuR8Q+ntN8ECmrW7+Oe4m7fPuWCeo5QXlu8QtXSt7EL9dEmSAdzVYvIjIlv1pC9WhAZSLHe8yjUMIcGoswH4bRt78FJPX6MU5nHxHa4o+hi3csUGqmI5T3j8ZxbxdmpQ0pHewHVRgLTqIqd6v8Mmqg\\u003d\\u003d","tranExitoso":true,"tranDescripcionError":""}}');
-		$this->isResponseRc = 0; */
+		$response = json_decode('{"rc":0,"msg":"Proceso OK","bean":{"tranClave":"nuR8Q+ntN8ECmrW7+Oe4m7fPuWCeo5QXlu8QtXSt7EL9dEmSAdzVYvIjIlv1pC9WhAZSLHe8yjUMIcGoswH4bRt78FJPX6MU5nHxHa4o+hi3csUGqmI5T3j8ZxbxdmpQ0pHewHVRgLTqIqd6v8Mmqg\\u003d\\u003d","tranExitoso":true,"tranDescripcionError":""}}');
+		$this->isResponseRc = 0;
 		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
 				$this->response->data = [
 					'authKey' => $response->bean->tranClave,
-					'urlApp' => lang('CONF_REMOTE_URL')[ENVIRONMENT][$this->session->enterpriseInf->thirdApp]
+					'urlApp' => lang('CONF_AUTH_URL')[ENVIRONMENT][$this->session->enterpriseInf->thirdApp]
 				];
 			break;
 			case -404:

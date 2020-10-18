@@ -21,11 +21,11 @@ class Novo_User_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO User Model: Login Method Initialized');
 
+		$userName = mb_strtoupper($dataRequest->user);
+
 		$this->dataAccessLog->modulo = 'Usuario';
 		$this->dataAccessLog->function = 'Ingreso al sistema';
 		$this->dataAccessLog->operation = 'Iniciar sesion';
-
-		$userName = mb_strtoupper($dataRequest->user);
 		$this->dataAccessLog->userName = $userName;
 
 		$password = $this->cryptography->decryptOnlyOneData($dataRequest->pass);
@@ -81,7 +81,7 @@ class Novo_User_Model extends NOVO_Model {
 					'logged' => TRUE,
 					'userId' => $response->usuario->idUsuario,
 					'userName' => $response->usuario->userName,
-					'passWord' => lang('CONF_REMOTE_CONNECT') == 'ON' ? $this->dataRequest->password : FALSE,
+					'passWord' => lang('CONF_REMOTE_AUTH') == 'ON' ? $this->dataRequest->password : FALSE,
 					'fullName' => ucwords(mb_strtolower($fullName)),
 					'userType' => $response->usuario->ctipo,
 					'codigoGrupo' => $response->usuario->codigoGrupo,

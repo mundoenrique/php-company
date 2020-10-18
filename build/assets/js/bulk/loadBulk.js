@@ -155,7 +155,7 @@ $(function () {
 				inputModal =	'<form id="delete-bulk-form" name="delete-bulk-form" class="form-group" onsubmit="return false;">';
 				inputModal+= 		'<span class="regular">' + lang.BULK_DELETE+' '+bulkFile+'</span>';
 
-				if (lang.CONF_REMOTE_CONNECT == 'OFF') {
+				if (lang.CONF_REMOTE_AUTH == 'OFF') {
 					inputModal+=		'<div class="input-group">';
 					inputModal+= 			'<input class="form-control pwd-input pwd-auth" name="password" type="password" ';
 					inputModal+= 				'autocomplete="off" placeholder="' + lang.GEN_PLACE_PASSWORD + '">';
@@ -201,7 +201,7 @@ $(function () {
 				bulkname: form.find('input[name="bulkFile"]').val(),
 			}
 
-			if (lang.CONF_REMOTE_CONNECT == 'OFF') {
+			if (lang.CONF_REMOTE_AUTH == 'OFF') {
 				data.pass = cryptoPass($('.pwd-auth').val());
 			}
 

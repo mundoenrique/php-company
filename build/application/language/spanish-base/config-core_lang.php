@@ -138,20 +138,17 @@ $lang['CONF_MAX_CONSULT_MONTH'] = 3;
 $lang['CONF_MIN_CONSULT_YEAR'] = 2000;
 //UPPER CASE INPUTS
 $lang['CONF_INPUT_UPPERCASE']= 'ON';
-//REMOTE CONNECTION
-$lang['CONF_REMOTE_CONNECT'] = 'OFF';
-//SCORE RECAPTCHA
-$lang['CONF_REMOTE_URL'] = [
+//REMOTE AUTHORIZATIONS
+$lang['CONF_REMOTE_AUTH'] = 'OFF';
+$lang['CONF_AUTH_LIST'] = [];
+$lang['CONF_AUTH_URL'] = [
 	'development' => [
-		'BEM' => 'https://15.128.26.90/nbem11/AutorizacionRemota.aspx',
-		'BEP' => 'https://15.128.26.90/nbem11/AutorizacionRemota.aspx'
+
 	],
 	'testing' => [
-		'BEM' => 'https://15.128.26.90/nbem11/AutorizacionRemota.aspx',
-		'BEP' => 'https://15.128.26.90/nbem11/AutorizacionRemota.aspx'
+
 	],
 	'production' => [
-		'BEM' => 'https://15.128.26.90/nbem11/AutorizacionRemota.aspx',
-		'BEP' => 'https://15.128.26.90/nbem11/AutorizacionRemota.aspx'
+
 	]
 ];

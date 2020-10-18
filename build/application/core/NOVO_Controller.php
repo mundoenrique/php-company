@@ -186,7 +186,7 @@ class NOVO_Controller extends CI_Controller {
 					"sessionControl"
 				);
 
-				if (lang('CONF_REMOTE_CONNECT') == 'ON') {
+				if (lang('CONF_REMOTE_AUTH') == 'ON') {
 					array_push(
 						$this->includeAssets->jsFiles,
 						"remote_connect/$this->countryUri-remoteConnect",

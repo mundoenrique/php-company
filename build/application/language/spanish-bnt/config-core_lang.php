@@ -30,8 +30,6 @@ $lang['CONF_UNNA_ACCOUNT_NUMBER'] = 'OFF';
 //AUTHORIZE BULK LIST
 $lang['CONF_BULK_AUTHORIZE'] = 'OFF';
 $lang['CONF_BULK_SELECT_ALL_AUTH'] = 'OFF';
-//HASH PASSWORD
-$lang['CONF_HASH_PASS'] = 'OFF';
 //REPORT CLOSING BALANCE
 $lang['CONF_NIT_INPUT_BOOL'] = 'OFF';
 $lang['CONF_CLOSING_BALANCE_BOOL'] = 'OFF';
@@ -54,5 +52,20 @@ $lang['CONF_SECUENCE_COLUMN']= 'OFF';
 $lang['CONF_STATUS_ACCOUNT_ADD_COLUMNS'] = 'OFF';
 //UPPER CASE INPUTS
 $lang['CONF_INPUT_UPPERCASE']= 'OFF';
-//REMOTE CONNECTION
-$lang['CONF_REMOTE_CONNECT'] = 'ON';
+//REMOTE AUTHORIZATIONS
+$lang['CONF_REMOTE_AUTH'] = 'ON';
+$lang['CONF_AUTH_LIST'] = ['RECEIVE_IN_ENTERPRISE'];
+$lang['CONF_AUTH_URL'] = [
+	'development' => [
+		'BEM' => 'https://15.128.26.90/nbem11/AutorizacionRemota.aspx',
+		'BEP' => 'https://15.128.26.90/nbem11/AutorizacionRemota.aspx'
+	],
+	'testing' => [
+		'BEM' => 'https://15.128.26.90/nbem11/AutorizacionRemota.aspx',
+		'BEP' => 'https://15.128.26.90/nbem11/AutorizacionRemota.aspx'
+	],
+	'production' => [
+		'BEM' => 'https://15.128.26.90/nbem11/AutorizacionRemota.aspx',
+		'BEP' => 'https://15.128.26.90/nbem11/AutorizacionRemota.aspx'
+	]
+];

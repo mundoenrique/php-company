@@ -229,7 +229,7 @@ $(function () {
 		if (amountValidate(getAmount, '.select', action)) {
 			$('#accept').addClass('send-request');
 
-			if (lang.CONF_REMOTE_CONNECT == 'ON') {
+			if (lang.CONF_REMOTE_AUTH == 'ON') {
 				$('#accept').removeClass('send-request');
 			}
 
@@ -244,7 +244,7 @@ $(function () {
 				}
 			}
 
-			if (lang.CONF_REMOTE_CONNECT == 'OFF') {
+			if (lang.CONF_REMOTE_AUTH == 'OFF') {
 				inputModal =	'<form id="password-modal" name="password-modal" class="row col-auto" onsubmit="return false;">';
 				inputModal +=		'<div class="form-group col-12 pl-0">';
 				inputModal += 		'<div class="input-group">';
@@ -306,9 +306,9 @@ $(function () {
 			btnText = $(this).text().trim();
 			btnRemote = $(this);
 
-			if (lang.CONF_REMOTE_CONNECT == 'ON' && action == 'Consulta') {
+			if (lang.CONF_REMOTE_AUTH == 'ON' && action == 'Consulta') {
 				sendRequest(action, $(this));
-			} else if (lang.CONF_REMOTE_CONNECT == 'ON') {
+			} else if (lang.CONF_REMOTE_AUTH == 'ON') {
 				if (formValidateTrim(action)) {
 					remoteAuthArgs.action = action;
 					getauhtKey();
@@ -378,7 +378,7 @@ function amountValidate(getAmount, classSelect, action) {
 		data = {
 			btn1: {
 				text: lang.GEN_BTN_ACCEPT,
-				action: 'close'
+				action: 'destroy'
 			}
 		}
 
@@ -416,7 +416,7 @@ function sendRequest(action, btn) {
 			action: action
 		}
 
-		if (lang.CONF_REMOTE_CONNECT == 'OFF') {
+		if (lang.CONF_REMOTE_AUTH == 'OFF') {
 			data.pass = cryptoPass(form.find('input.pwd').val().trim());
 		}
 
@@ -477,7 +477,7 @@ function cardCheckBalance(response, action) {
 		data = {
 			btn1: {
 				text: lang.GEN_BTN_ACCEPT,
-				action: 'close'
+				action: 'destroy'
 			}
 		}
 
@@ -511,7 +511,7 @@ function buildList(response, action) {
 		data = {
 			btn1: {
 				text: lang.GEN_BTN_ACCEPT,
-				action: 'close'
+				action: 'destroy'
 			}
 		}
 		inputModal = '<h5 class="regular mr-1">' + response.msg + '</h5>'
@@ -568,5 +568,4 @@ function formValidateTrim(action) {
 	}
 
 	return cardsData.length > 0 && form.valid();
-
 }
