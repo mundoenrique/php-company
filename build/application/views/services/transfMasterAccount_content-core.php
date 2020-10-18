@@ -143,7 +143,7 @@
                 <div class="col-3 col-lg-3 col-xl-3 form-group">
 									<?php if (lang('CONF_REMOTE_AUTH') == 'OFF'): ?>
                   <div class="input-group">
-                    <input name="password" class="form-control pwd-input pr-0 pwd" type="password" autocomplete="off"
+                    <input id="passAction" name="password" class="form-control pwd-input pr-0 pwd" type="password" autocomplete="off"
                       placeholder="<?= lang('GEN_PLACE_PASSWORD'); ?>">
                     <div class="input-group-append">
                       <span id="pwd_action" class="input-group-text pwd-action" title="<?= lang('GEN_SHOW_PASS') ?>"><i
@@ -155,19 +155,22 @@
                 </div>
                 <?php if($this->verify_access->verifyAuthorization('TRAMAE', 'TRASAL')): ?>
                 <div class="col-auto">
-                  <button id="Consulta" class="btn btn-primary btn-small btn-loading flex mx-auto" amount="0">Consultar
+                  <button id="Consulta" class="btn btn-primary btn-small btn-loading flex mx-auto" amount="0" action="CHECK_BALANCE">
+										Consultar
                   </button>
                 </div>
                 <?php endif; ?>
                 <?php if($this->verify_access->verifyAuthorization('TRAMAE', 'TRAABO')): ?>
                 <div class="col-auto">
-                  <button id="Abono" class="btn btn-primary btn-small btn-loading flex mx-auto" amount="1">Abono
+                  <button id="Abono" class="btn btn-primary btn-small btn-loading flex mx-auto" amount="1" action="CREDIT_TO_CARD">
+										Abono
                   </button>
                 </div>
                 <?php endif; ?>
                 <?php if($this->verify_access->verifyAuthorization('TRAMAE', 'TRACAR')): ?>
                 <div class="col-auto">
-                  <button id="Cargo" class="btn btn-primary btn-small btn-loading flex mx-auto" amount="1">Cargo
+                  <button id="Cargo" class="btn btn-primary btn-small btn-loading flex mx-auto" amount="1" action="DEBIT_TO_CARD">
+										Cargo
                   </button>
                 </div>
                 <?php endif; ?>

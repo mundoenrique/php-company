@@ -153,7 +153,7 @@ $(function () {
 					},
 					btn2: {
 						text: lang.GEN_BTN_CANCEL,
-						action: 'close'
+						action: 'destroy'
 					}
 				}
 				inputModal =	'<form id="delete-bulk-form" name="delete-bulk-form" class="form-group" onsubmit="return false;">';

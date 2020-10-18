@@ -29,7 +29,7 @@ function finishSession() {
 	data = {
 		btn1: {
 			text: lang.GEN_BTN_KEEP_SESSION,
-			action: 'close'
+			action: 'destroy'
 		}
 	}
 	appMessages(lang.GEN_SYSTEM_NAME, lang.GEN_FINISH_TEXT, lang.CONF_ICON_INFO, data);

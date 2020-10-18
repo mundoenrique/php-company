@@ -6,10 +6,10 @@ var dataRquest;
 var cardsData;
 var userInfo;
 $(function () {
-	remoteFunction = 'applyActions';
 	$('#pre-loader').remove();
 	$('.hide-out').removeClass('hide');
 	insertFormInput(false);
+	remoteFunction = 'applyActions';
 
 	$('#tableCardInquiry').on('click', '.toggle-all', function () {
 		$(this).closest("tr").toggleClass("selected");
@@ -277,7 +277,7 @@ function verifymassiveOptions(massiveOptions) {
 function InqBuildFormActions(currentBtn, currentTitle) {
 	data = {
 		btn1: {
-			text: lang.GEN_BTN_SEND,
+			text: lang.GEN_BTN_ACCEPT,
 			action: 'none'
 		},
 		btn2: {
@@ -293,51 +293,51 @@ function InqBuildFormActions(currentBtn, currentTitle) {
 		currentBtn.closest('tr').addClass('update');
 		cardsData = table.rows('.update').data();
 
-		inputModal += '<div class="form-group col-12">';
-		inputModal += '<label>Nombre(s)</label>';
-		inputModal += '<div class="input-group">';
-		inputModal += '<input class="form-control" type="text" id="firstName" name="firstName" autocomplete="off" ';
-		inputModal += 'value="' + cardsData[0].names + '">';
-		inputModal += '</div>';
-		inputModal += '<div class="help-block"></div>';
-		inputModal += '</div>';
-		inputModal += '<div class="form-group col-12">';
-		inputModal += '<label>Apellido(s)</label>';
-		inputModal += '<div class="input-group">';
-		inputModal += '<input class="form-control" type="text" id="lastName" name="lastName" autocomplete="off" ';
-		inputModal += 'value="' + cardsData[0].lastName + '">';
-		inputModal += '</div>';
-		inputModal += '<div class="help-block"></div>';
-		inputModal += '</div>';
-		inputModal += '<div class="form-group col-12">';
-		inputModal += '<label>Correo</label>';
-		inputModal += '<div class="input-group">';
-		inputModal += '<input class="form-control" type="text" id="email" name="email" autocomplete="off" value="' + cardsData[0].email + '">';
-		inputModal += '</div>';
-		inputModal += '<div class="help-block"></div>';
-		inputModal += '</div>';
-		inputModal += '<div class="form-group col-12">';
-		inputModal += '<label>Número movil</label>';
-		inputModal += '<div class="input-group">';
-		inputModal += '<input class="form-control" type="text" id="movil" name="movil" autocomplete="off" value="' + cardsData[0].celPhone + '">';
-		inputModal += '</div>';
-		inputModal += '<div class="help-block"></div>';
-		inputModal += '</div>';
+		inputModal += 	'<div class="form-group col-12">';
+		inputModal += 		'<label>Nombre(s)</label>';
+		inputModal += 		'<div class="input-group">';
+		inputModal += 			'<input class="form-control" type="text" id="firstName" name="firstName" autocomplete="off" ';
+		inputModal += 				'value="' + cardsData[0].names + '">';
+		inputModal += 			'</div>';
+		inputModal += 		'<div class="help-block"></div>';
+		inputModal += 	'</div>';
+		inputModal += 	'<div class="form-group col-12">';
+		inputModal += 		'<label>Apellido(s)</label>';
+		inputModal += 		'<div class="input-group">';
+		inputModal += 			'<input class="form-control" type="text" id="lastName" name="lastName" autocomplete="off" ';
+		inputModal += 				'value="' + cardsData[0].lastName + '">';
+		inputModal += 		'</div>';
+		inputModal += 		'<div class="help-block"></div>';
+		inputModal += 	'</div>';
+		inputModal += 	'<div class="form-group col-12">';
+		inputModal += 		'<label>Correo</label>';
+		inputModal += 		'<div class="input-group">';
+		inputModal += 			'<input class="form-control" type="text" id="email" name="email" autocomplete="off" value="' + cardsData[0].email + '">';
+		inputModal += 		'</div>';
+		inputModal += 		'<div class="help-block"></div>';
+		inputModal += 	'</div>';
+		inputModal += 	'<div class="form-group col-12">';
+		inputModal += 		'<label>Número movil</label>';
+		inputModal += 		'<div class="input-group">';
+		inputModal += 			'<input class="form-control" type="text" id="movil" name="movil" autocomplete="off" value="' + cardsData[0].celPhone + '">';
+		inputModal += 		'</div>';
+		inputModal += 		'<div class="help-block"></div>';
+		inputModal += 	'</div>';
 	}
 
 	if (lang.CONF_REMOTE_AUTH == 'OFF') {
 		$('#accept').addClass('send-request');
 
-		inputModal += '<div class="form-group col-12">';
-		inputModal += '<div class="input-group">';
-		inputModal += '<input class="form-control pwd-input pwd" id="password" name="password" type="password" ';
-		inputModal += 'autocomplete="off" placeholder="' + lang.GEN_PLACE_PASSWORD + '">';
-		inputModal += '<div class="input-group-append">';
-		inputModal += '<span class="input-group-text pwd-action" title="' + lang.GEN_SHOW_PASS + '"><i class="icon-view mr-0"></i></span>';
-		inputModal += '</div>';
-		inputModal += '</div>';
-		inputModal += '<div class="help-block"></div>';
-		inputModal += '</div>';
+		inputModal += 	'<div class="form-group col-12">';
+		inputModal += 		'<div class="input-group">';
+		inputModal += 			'<input class="form-control pwd-input pwd" id="password" name="password" type="password" ';
+		inputModal += 				'autocomplete="off" placeholder="' + lang.GEN_PLACE_PASSWORD + '">';
+		inputModal += 			'<div class="input-group-append">';
+		inputModal += 				'<span class="input-group-text pwd-action" title="' + lang.GEN_SHOW_PASS + '"><i class="icon-view mr-0"></i></span>';
+		inputModal += 			'</div>';
+		inputModal += 		'</div>';
+		inputModal += 		'<div class="help-block"></div>';
+		inputModal += 	'</div>';
 	} else {
 		$('#accept').addClass('get-auth-key');
 		currentBtn = btnRemote;
@@ -349,14 +349,12 @@ function InqBuildFormActions(currentBtn, currentTitle) {
 
 	if (lang.CONF_REMOTE_AUTH == 'OFF' || (lang.CONF_REMOTE_AUTH == 'ON' && $.inArray(action, lang.CONF_AUTH_VALIDATE) != -1)) {
 		appMessages(currentTitle, inputModal, lang.CONF_ICON_INFO, data);
+	} else if ($.inArray(action, lang.CONF_AUTH_LIST) != -1) {
+		remoteAuthArgs.action = action;
+		remoteAuthArgs.form = form;
+		getauhtKey();
 	} else {
-		if ($.inArray(action, lang.CONF_AUTH_LIST) != -1) {
-			remoteAuthArgs.action = action;
-			remoteAuthArgs.form = form;
-			getauhtKey();
-		} else {
-			applyActions(action, form, currentBtn);
-		}
+		applyActions(action, form, currentBtn);
 	}
 }
 
@@ -364,6 +362,7 @@ function applyActions(currentAction, currentForm, currentBtn) {
 	if (InqValidateActions(currentAction, currentForm)) {
 		var cardsInfo = [];
 		$('#accept').removeClass('send-request');
+		$('#accept').removeClass('get-auth-key');
 		$.each(cardsData, function(key, data) {
 			var info = {};
 
@@ -390,7 +389,7 @@ function applyActions(currentAction, currentForm, currentBtn) {
 		}
 
 		if (lang.CONF_REMOTE_AUTH == 'OFF') {
-			data.password = cryptoPass(userInfo.password) || cryptoPass(userInfo.passAction);
+			data.pass = userInfo.password ? cryptoPass(userInfo.password) : cryptoPass(userInfo.passAction);
 		}
 
 		currentBtn
@@ -435,7 +434,7 @@ function InqValidateActions(currentAction, currentForm) {
 	}
 
 	if (currentForm.valid()) {
-		userInfo = getDataForm(form);
+		userInfo = getDataForm(currentForm);
 	}
 
 	return cardsData.length > 0 && currentForm.valid();

@@ -148,7 +148,7 @@ $(function () {
 					},
 					btn2: {
 						text: lang.GEN_BTN_CANCEL,
-						action: 'close'
+						action: 'destroy'
 					}
 				}
 				var bulkFile = $(this).closest('tr').find('td:nth-child(2)').text();
