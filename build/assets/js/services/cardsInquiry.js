@@ -1,11 +1,12 @@
 'use strict'
 var table;
-var action;
 var inputModal;
 var dataRquest;
 var cardsData;
 var userInfo;
 $(function () {
+	var action;
+	var title
 	$('#pre-loader').remove();
 	$('.hide-out').removeClass('hide');
 	insertFormInput(false);
@@ -44,14 +45,16 @@ $(function () {
 
 	$('#tableCardInquiry').on('click', 'button', function(e) {
 		var event = $(e.currentTarget);
-		var title = event.attr('title').trim();
+		title = event.attr('title').trim();
 		action = event.attr('action');
-		table.rows().deselect();
 		$('.help-block').text('');
 		$('input, select').removeClass('has-error');
+		table.rows().deselect();
+		$('#tableServicesMaster').find('thead > tr').removeClass("selected");
+		$('#tableServicesMaster').find('tbody > tr').removeClass("selected");
 		$(this).closest('tr').addClass('selected');
 
-		InqBuildFormActions($(this), title);
+		InqBuildFormActions(action, title, $(this));
 	});
 
 	$('#system-info').on('click', '.send-request', function () {
@@ -95,7 +98,8 @@ function getCardList(request) {
 	$('.hide-table').addClass('hide');
 	$('#tableCardInquiry').dataTable().fnClearTable();
 	$('#tableCardInquiry').dataTable().fnDestroy();
-	verb = 'POST'; who = 'services', where = 'CardsInquiry'
+	verb = 'POST'; who = 'services', where = 'CardsInquiry';
+
 	callNovoCore(verb, who, where, request, function (response) {
 		dataRquest = request;
 		insertFormInput(false);
@@ -275,7 +279,8 @@ function verifymassiveOptions(massiveOptions) {
 	$('.hide-table').removeClass('hide');
 }
 
-function InqBuildFormActions(currentBtn, currentTitle) {
+function InqBuildFormActions(currentAction, currentTitle, currentBtn) {
+	$('#accept').addClass('send-request');
 	data = {
 		btn1: {
 			text: lang.GEN_BTN_ACCEPT,
@@ -288,7 +293,7 @@ function InqBuildFormActions(currentBtn, currentTitle) {
 	}
 	inputModal = '<form id="modalCardsInquiryForm" name="modalCardsInquiryForm" class="row col-auto p-0" onsubmit="return false;">';
 
-	if (action == 'UPDATE_DATA') {
+	if (currentAction == 'UPDATE_DATA') {
 		data.maxHeight = 520;
 		$('#tableCardInquiry').find('tbody > tr').removeClass('update');
 		currentBtn.closest('tr').addClass('update');
@@ -327,7 +332,6 @@ function InqBuildFormActions(currentBtn, currentTitle) {
 	}
 
 	if (lang.CONF_REMOTE_AUTH == 'OFF') {
-		$('#accept').addClass('send-request');
 
 		inputModal += 	'<div class="form-group col-12">';
 		inputModal += 		'<div class="input-group">';
@@ -340,7 +344,6 @@ function InqBuildFormActions(currentBtn, currentTitle) {
 		inputModal += 		'<div class="help-block"></div>';
 		inputModal += 	'</div>';
 	} else {
-		$('#accept').addClass('get-auth-key');
 		currentBtn = btnRemote;
 		form = $('#nonForm');
 
@@ -351,14 +354,17 @@ function InqBuildFormActions(currentBtn, currentTitle) {
 
 	inputModal += '</form>';
 
-	if (lang.CONF_REMOTE_AUTH == 'OFF' || (lang.CONF_REMOTE_AUTH == 'ON' && $.inArray(action, lang.CONF_AUTH_VALIDATE) != -1)) {
+	if (lang.CONF_REMOTE_AUTH == 'OFF' || (lang.CONF_REMOTE_AUTH == 'ON' && $.inArray(currentAction, lang.CONF_AUTH_VALIDATE) != -1)) {
 		appMessages(currentTitle, inputModal, lang.CONF_ICON_INFO, data);
-	} else if ($.inArray(action, lang.CONF_AUTH_LIST) != -1) {
-		remoteAuthArgs.action = action;
+	} else if ($.inArray(currentAction, lang.CONF_AUTH_LIST) != -1) {
+		$('#accept').removeClass('send-request');
+		$('#accept').addClass('get-auth-key');
+		remoteAuthArgs.title = currentTitle;
+		remoteAuthArgs.action = currentAction;
 		remoteAuthArgs.form = form;
 		getauhtKey();
 	} else {
-		applyActions(action, form, currentBtn);
+		applyActions(currentAction, form, currentBtn);
 	}
 }
 
@@ -377,7 +383,7 @@ function applyActions(currentAction, currentForm, currentBtn) {
 				info[pos] = value
 			})
 
-			if (action == 'UPDATE_DATA') {
+			if (currentAction == 'UPDATE_DATA') {
 				info['names'] = userInfo.firstName;
 				info['lastName'] = userInfo.lastName;
 				info['email'] = userInfo.email

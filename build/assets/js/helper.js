@@ -379,7 +379,7 @@ function getauhtKey() {
 				posAt: 'top'
 			}
 			$('#system-msg').addClass('w-100 vh-100');
-			appMessages(remoteAuthArgs.action, '', '', data);
+			appMessages(remoteAuthArgs.title || remoteAuthArgs.action, '', '', data);
 			AutorizacionCanales(response.data.authKey, 'system-msg', response.data.urlApp, '', 'getResponse');
 		}
 
@@ -412,6 +412,7 @@ function getResponse(Exitoso, MensajeError) {
 				applyActions(remoteAuthArgs.action, remoteAuthArgs.form, btnRemote);
 			break;
 		}
+
 		$('.cover-spin').show(0);
 	} else {
 		data = {
@@ -421,6 +422,6 @@ function getResponse(Exitoso, MensajeError) {
 			},
 		}
 
-		appMessages(remoteAuthArgs.action, MensajeError, lang.CONF_ICON_WARNING, data);
+		appMessages(remoteAuthArgs.title || remoteAuthArgs.action, MensajeError, lang.CONF_ICON_WARNING, data);
 	}
 }

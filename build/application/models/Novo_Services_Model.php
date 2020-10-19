@@ -137,7 +137,7 @@ class Novo_Services_Model extends NOVO_Model {
 			switch ($dataRequest->action) {
 				case 'CHECK_BALANCE':
 				case 'TEMPORARY_LOCK':
-				case 'UNLOCK_CARD':
+				case 'TEMPORARY_UNLOCK':
 					unset($card['montoTransaccion']);
 				break;
 				case 'CARD_ASSIGNMENT':
@@ -166,8 +166,8 @@ class Novo_Services_Model extends NOVO_Model {
 				$this->dataAccessLog->operation = lang('GEN_TEMPORARY_LOCK');
 				$this->dataRequest->idOperation = 'bloqueoTM';
 			break;
-			case 'UNLOCK_CARD':
-				$this->dataAccessLog->operation = lang('GEN_UNLOCK_CARD');
+			case 'TEMPORARY_UNLOCK':
+				$this->dataAccessLog->operation = lang('GEN_TEMPORARY_UNLOCK');
 				$this->dataRequest->idOperation = 'desbloqueoTM';
 			break;
 			case 'CARD_ASSIGNMENT':
@@ -210,7 +210,7 @@ class Novo_Services_Model extends NOVO_Model {
 				$this->response->icon = lang('CONF_ICON_SUCCESS');
 				$this->response->data['btn1']['action'] = 'destroy';
 
-				if ($dataRequest->action == 'TEMPORARY_LOCK' || $dataRequest->action == 'UNLOCK_CARD') {
+				if ($dataRequest->action == 'TEMPORARY_LOCK' || $dataRequest->action == 'TEMPORARY_UNLOCK') {
 					$blockType = $dataRequest->action == 'TEMPORARY_LOCK' ? 'Bloqueda' : 'Desbloqueda';
 					$this->response->msg =  novoLang(lang('SERVICES_BLOCKING_CARD'), [$cardsList[0]['noTarjeta'], $blockType]);
 					$this->response->update = TRUE;
@@ -541,7 +541,7 @@ class Novo_Services_Model extends NOVO_Model {
 				$this->response->icon = lang('CONF_ICON_SUCCESS');
 				$this->response->data['btn1'] = [
 					'text' => lang('GEN_BTN_ACCEPT'),
-					'action' => 'close'
+					'action' => 'destroy'
 				];
 				$this->response->success = TRUE;
 				$responseList = $response->bean ?? FALSE;
@@ -572,7 +572,7 @@ class Novo_Services_Model extends NOVO_Model {
 				$this->response->icon = lang('CONF_ICON_WARNING');
 				$this->response->data['btn1'] = [
 					'text' => lang('GEN_BTN_ACCEPT'),
-					'action' => 'close'
+					'action' => 'destroy'
 				];
 			break;
 			case -450:
@@ -581,7 +581,7 @@ class Novo_Services_Model extends NOVO_Model {
 				$this->response->icon = lang('CONF_ICON_INFO');
 				$this->response->data['btn1'] = [
 					'text' => lang('GEN_BTN_ACCEPT'),
-					'action' => 'close'
+					'action' => 'destroy'
 				];
 			break;
 		}

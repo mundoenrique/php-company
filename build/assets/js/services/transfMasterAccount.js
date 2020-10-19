@@ -179,8 +179,8 @@ $(function () {
 					}
 
 					if (access.TRADBL && data.status == 'pb') {
-						options += 	'<button class="btn mx-1 px-0" title="' + lang.GEN_UNLOCK_CARD + '" data-toggle="tooltip" amount="0" ';
-						options += 			'action="UNLOCK_CARD">';
+						options += 	'<button class="btn mx-1 px-0" title="' + lang.GEN_TEMPORARY_UNLOCK + '" data-toggle="tooltip" amount="0" ';
+						options += 			'action="TEMPORARY_UNLOCK">';
 						options += 		'<i class="icon icon-unlock" aria-hidden="true"></i>';
 						options += 	'</button>';
 					}
@@ -454,7 +454,7 @@ function sendRequest(currentAction, currentTitle, currentBtn) {
 				cardCheckBalance(response, currentTitle)
 			}
 
-			if (currentAction == 'TEMPORARY_LOCK' || currentAction == 'UNLOCK_CARD' || currentAction == 'CARD_ASSIGNMENT') {
+			if (currentAction == 'TEMPORARY_LOCK' || currentAction == 'TEMPORARY_UNLOCK' || currentAction == 'CARD_ASSIGNMENT') {
 				cardBlockUnblock(response)
 			}
 
