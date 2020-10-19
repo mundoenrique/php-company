@@ -322,6 +322,7 @@ class Novo_User extends NOVO_Controller {
 
 		if (($code) == 4) {
 			$this->render->userList= [];
+			$this->render->userRegistered = '';
 		}else{
 			$this->render->userList = $data;
 			$registeredUser = 'OFF';
@@ -338,7 +339,6 @@ class Novo_User extends NOVO_Controller {
 			$this->render->userRegistered = $registeredUser;
 		}
 
-		$this->render->userRegistered = '';
 		$this->responseAttr($responseList);
 		$this->render->titlePage = lang('GEN_MENU_USERS_MANAGEMENT');
 		$this->views = ['user/'.$view];
