@@ -475,6 +475,7 @@ $lang['RESP_TRY_AGAIN'] = 'Intenta de nuevo';
 $lang['RESP_NO_PRODUCT'] = 'No hay productos asociados';
 $lang['GEN_PASSWORD_NO_VALID'] = 'Por favor verifica tu contraseña y vuelve a intentarlo';
 $lang['RESP_NO_UPDATE_REGISTRY'] = 'No fue posible actualizar los registros, por favor vuelve a intentarlo';
+$lang['RESP_REJECTED_REGISTRY'] = 'Todos los registros fueron rechazados';
 $lang['RESP_NO_CARD_FOUND'] = "El número de tarjeta <strong>%s</strong> no está registrado, por favor verifícalo e intenta de nuevo";
 $lang['RESP_SUCCESSFULL_UPDATE_TWIRLS'] = "La restricción de giros en comercios ha sido actualizada exitosamente";
 $lang['RESP_SUCCESSFULL_UPDATE_LIMITS'] = "Los limites de transacciones han sido actualizados exitosamente";

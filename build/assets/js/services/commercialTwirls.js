@@ -103,6 +103,11 @@ function updateTwirlsCard() {
 		insertFormInput(false);
 		$('#sign-btn').html(btnText);
 		$('#passwordAuth').val('');
+		if (response.success) {
+			$('#accept').on('click', function(){
+				$('#card-holder-btn').trigger('click');
+			});
+		}
 		$('.cover-spin').hide();
 	});
 };

@@ -658,7 +658,7 @@ class Novo_Services_Model extends NOVO_Model {
 						$this->response->msg = 	novoLang(lang('SERVICES_TWIRLS_PERMANENT_BLOCKED_CARD'), maskString( $dataRequest->cardNumber, 4, 6));
 					break;
 					case -439:
-						$this->response->msg = 	novoLang(lang('SERVICES_TWIRLS_NO_FOUND_REGISTRY'), maskString( $dataRequest->cardNumber, 4, 6));
+						$this->response->msg = 	novoLang(lang('SERVICES_NO_FOUND_REGISTRY'), maskString( $dataRequest->cardNumber, 4, 6));
 					break;
 					case -440:
 					case -441:
@@ -723,6 +723,7 @@ class Novo_Services_Model extends NOVO_Model {
 			case 0:
 				$this->response->title = lang('GEN_COMMERCIAL_TWIRLS_TITTLE');
 				$this->response->icon =  lang('CONF_ICON_SUCCESS');
+				$this->response->success = TRUE;
         $this->response->msg = 	lang('RESP_SUCCESSFULL_UPDATE_TWIRLS');
         $this->response->data['btn1']['action'] = 'close';
 			break;
@@ -736,6 +737,12 @@ class Novo_Services_Model extends NOVO_Model {
 				$this->response->title = lang('GEN_COMMERCIAL_TWIRLS_TITTLE');
 				$this->response->icon =  lang('CONF_ICON_WARNING');
 				$this->response->msg = lang('RESP_NO_UPDATE_REGISTRY');
+				$this->response->data['btn1']['action'] = 'close';
+			break;
+			case -438:
+				$this->response->title = lang('GEN_COMMERCIAL_TWIRLS_TITTLE');
+				$this->response->icon =  lang('CONF_ICON_WARNING');
+				$this->response->msg = lang('RESP_REJECTED_REGISTRY');
 				$this->response->data['btn1']['action'] = 'close';
 			break;
 			case -65:
@@ -816,7 +823,7 @@ class Novo_Services_Model extends NOVO_Model {
 			case -448:
 				$this->response->title = lang('GEN_TRANSACTIONAL_LIMITS_TITTLE');
 				$this->response->icon =  lang('CONF_ICON_WARNING');
-				$this->response->msg = novoLang(lang('SERVICES_LIMITS_NO_CARDHOLDER'), maskString( $dataRequest->cardNumber, 5, 6));
+				$this->response->msg = novoLang(lang('SERVICES_NO_FOUND_REGISTRY'), maskString( $dataRequest->cardNumber, 5, 6));
 				$this->response->data['btn1']['action'] = 'close';
 			break;
 			case -455:
