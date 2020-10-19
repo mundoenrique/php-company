@@ -251,7 +251,7 @@ $(function () {
 		form = $('#password-modal');
 		btnText = $(this).text().trim();
 
-		if (formValidateTrim(form, action)) {
+		if (formValidateTrim(form, title)) {
 			btnRemote = $(this);
 			remoteAuthArgs.action = action;
 			remoteAuthArgs.title = title;
@@ -261,7 +261,6 @@ $(function () {
 
 	$('#Consulta, #Abono, #Cargo').on('click', function (e) {
 		e.preventDefault()
-		$('#password-table').find('.bulk-select').text('');
 		title = $(this).attr('id');
 		action = $(this).attr('action');
 		getAmount = $(this).attr('amount');
@@ -269,7 +268,15 @@ $(function () {
 		if (amountValidate(getAmount, title)) {
 			form = $('#password-table');
 			btnText = $(this).text().trim();
-			btnRemote = $(this);
+
+			if (lang.CONF_REMOTE_AUTH == 'OFF' || (lang.CONF_REMOTE_AUTH == 'ON' && $.inArray(action, lang.CONF_AUTH_LIST) == -1)) {
+				sendRequest(action, title, $(this));
+			} else if (formValidateTrim(form, title)) {
+				btnRemote = $(this);
+				remoteAuthArgs.action = action;
+				remoteAuthArgs.title = title;
+				getauhtKey();
+			}
 		}
 	});
 
@@ -403,7 +410,7 @@ function amountValidate(getAmount, currentTitle) {
 }
 
 function sendRequest(currentAction, currentTitle, currentBtn) {
-	if (formValidateTrim(form, currentAction)) {
+	if (formValidateTrim(form, currentTitle)) {
 		$('#accept').removeClass('send-request');
 		$('#accept').removeClass('get-auth-key');
 		var cardsInfo = [];
@@ -503,9 +510,10 @@ function cardCheckBalance(response, currentTitle) {
 
 function cardBlockUnblock(response) {
 	if (response.update) {
-		$('#accept').addClass('update')
+		$('#accept').addClass('update');
 		$('.update').on('click', function() {
-			dataTableReload(false)
+			$('#accept').removeClass('update');
+			dataTableReload(false);
 		})
 	}
 }
@@ -531,8 +539,9 @@ function buildList(response, currentTitle) {
 		})
 
 		appMessages(currentTitle, inputModal, lang.CONF_ICON_INFO, data);
-		$('#accept').addClass('update')
+		$('#accept').addClass('update');
 		$('.update').on('click', function() {
+			$('#accept').removeClass('update');
 			dataTableReload(false)
 		})
 	}
