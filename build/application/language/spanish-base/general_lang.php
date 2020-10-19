@@ -213,6 +213,7 @@ $lang['GEN_TABLE_FILE_NAME'] = 'Nombre de archivo';
 $lang['GEN_TABLE_TYPE'] = 'Tipo';
 $lang['GEN_TABLE_TYPE_ID'] = 'Id Tipo';
 $lang['GEN_TABLE_STATUS'] = 'Estado';
+$lang['GEN_TABLE_LAST_SESSION'] = 'Última conexión';
 $lang['GEN_TABLE_FULL_NAME'] = 'Nombre y apellido';
 $lang['GEN_TABLE_RECORDS'] = 'Registros';
 $lang['GEN_TABLE_AMOUNT'] = 'Monto';
@@ -255,6 +256,8 @@ $lang['GEN_TABLE_BALANCE'] = 'Saldo';
 //DATATABLES LANG
 $lang['GEN_TABLE_SLENGTHMENU'] = 'Mostrar _MENU_ registros';
 $lang['GEN_TABLE_SZERORECORDS'] = 'No se encontraron resultados';
+$lang['GEN_TABLE_RESULTS'] = 'Resultados';
+$lang['GEN_TABLE_NO_RESULTS'] = 'No se encontraron resultados';
 $lang['GEN_TABLE_SEMPTYTABLE'] = 'No se encontraron registros para tu consulta';
 $lang['GEN_TABLE_SINFO'] = 'Mostrando registro(s) del _START_ al _END_ de un total de _TOTAL_ registro(s)';
 $lang['GEN_TABLE_SINFOEMPTY'] = 'Sin registros que mostrar';

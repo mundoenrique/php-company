@@ -31,6 +31,14 @@ $lang['REPORTS_TABLE_CARD']="Tarjeta";
 $lang['REPORTS_TABLE_CARDHOLDER']="Tarjetahabiente";
 $lang['REPORTS_TABLE_DNI']="NIT";
 $lang['REPORTS_TABLE_LAST_ACTIVITY']="Última actividad";
+//USERS ACTIVITY
+$lang['REPORTS_USERS_ACT_DATE_ACTION']="Fecha acción";
+$lang['REPORTS_USERS_ACT_DATE_ACTIVITY']="Fecha última actividad";
+$lang['REPORTS_USERS_ACT_MODULE']="Módulo";
+$lang['REPORTS_USERS_ACT_FUNCTION']="Función";
+$lang['REPORTS_USERS_ACT_RESULT']="Resultado (Cod. error / respuesta)";
+$lang['REPORTS_USERS_ACT_OBSERVATION']="Observación";
+$lang['REPORTS_USERS_ACT_STATE']="Estado";
 
 
 

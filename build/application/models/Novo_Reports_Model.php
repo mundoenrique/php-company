@@ -1175,6 +1175,82 @@ class Novo_Reports_Model extends NOVO_Model {
 		return $this->response;
 	}
 
+ /**
+  * @info Método para obtener actividad por usuario (Produbanco)
+  * @author Jhonnatan Vega
+  * @date October 13, 2020
+ */
+	public function callWs_usersActivity_Reports($dataRequest)
+	{
+		log_message('INFO', 'NOVO Reports Model: usersActivity Method Initialized');
+
+		$this->dataAccessLog->modulo = 'Reportes';
+		$this->dataAccessLog->function = 'Actividad por usuario';
+		$this->dataAccessLog->operation = 'Obtener actividades por usuario';
+
+		$this->dataRequest->idOperation = 'genericBusiness';
+		$this->dataRequest->className = 'com.novo.objects.MO.GenericBusinessObject';
+		$this->dataRequest->opcion = 'reporteLogAcceso';
+		$this->dataRequest->userName = $this->userName;
+		$this->dataRequest->accodcia = $dataRequest->enterpriseCode;
+		$this->dataRequest->acprefix = $this->session->productInf->productPrefix;
+		$this->dataRequest->fechaInicio =  $dataRequest->initialDate;
+		$this->dataRequest->fechaFin =  $dataRequest->finalDate;
+
+		$response = $this->sendToService('callWs_usersActivity');
+		$usersActivity = [];
+
+		switch ($this->isResponseRc) {
+			case 0:
+				$this->response->code = 0;
+
+				foreach($response->bean AS $userActivity) {
+					$record = new stdClass();
+					$record->user = $userActivity->usuario;
+					$record->userStatus = $userActivity->estadoUsuario;
+					$record->lastConnectionDate = $userActivity->fechaUltimaConexion;
+					$lastActions = [];
+
+					foreach($userActivity->opciones->ultimasAcciones AS $lastActionsList){
+						array_push(
+							$lastActions,
+							$lastActionsList
+						);
+					}
+
+					$record->lastActions = $lastActions;
+					$enabledFunctions = [];
+
+					foreach($userActivity->opciones->funcionesHabilitadas AS $enabledFunctionsList){
+						array_push(
+							$enabledFunctions,
+							$enabledFunctionsList
+						);
+					}
+
+					$record->enabledFunctions = $enabledFunctions;
+					array_push(
+						$usersActivity,
+						$record
+					);
+				}
+			break;
+			case -104:
+				$this->response->msg = 'Fallo';
+				$this->response->data = [
+					'btn1'=> [
+						'text'=> lang('GEN_BTN_ACCEPT'),
+						'action'=> 'destroy'
+					]
+				];
+			break;
+		}
+
+		$this->response->data['usersActivity'] = $usersActivity;
+
+		return $this->responseToTheView('callWs_usersActivity');
+	}
+
 		/**
 	 * @info Método para obtener excel de tabla cuenta maestra
 	 * @author Diego Acosta García

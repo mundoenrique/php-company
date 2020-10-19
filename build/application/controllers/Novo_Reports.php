@@ -206,7 +206,7 @@ class Novo_Reports extends NOVO_Controller {
 			"third_party/jquery.validate",
 			"validate-core-forms",
 			"third_party/additional-methods",
-			"reports/user_activity"
+			"reports/users_activity"
 		);
 		$this->responseAttr();
 		$this->render->titlePage = lang('GEN_MENU_REP_USER_ACT');
