@@ -75,7 +75,7 @@
           <div class="flex flex-column mb-4 mt-4 px-5 justify-center items-center form-group">
             <div class="form-group mb-ie11 mb-3 col-5 col-lg-4 col-xl-3">
 							<input id="bulkTicked" name="bulkTicked" type="hidden" value="<?= $detailBulk->bulkTicked ?>">
-							<?php if (lang('CONF_REMOTE_CONNECT') == 'OFF'): ?>
+							<?php if (lang('CONF_REMOTE_AUTH') == 'OFF'): ?>
               <div class="input-group">
                 <input id="password" name="password" class="form-control pwd-input" type="password" autocomplete="off"
                   placeholder="<?= lang('GEN_PLACE_PASSWORD'); ?>">
