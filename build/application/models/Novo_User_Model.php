@@ -298,6 +298,7 @@ class Novo_User_Model extends NOVO_Model {
 					'logged' => TRUE,
 					'userId' => $response->usuario->idUsuario,
 					'userName' => $response->usuario->userName,
+					'passWord' => $response->usuario->password ?? FALSE,
 					'fullName' => ucwords(mb_strtolower($fullName)),
 					'codigoGrupo' => $response->usuario->codigoGrupo,
 					'lastSession' => $lastSession,
