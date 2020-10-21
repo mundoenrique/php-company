@@ -23,7 +23,7 @@ $lang['CONF_VALID_POSITION'] = 'left';
 //MODAL STYLES
 $lang['CONF_MODAL_WIDTH'] = 370;
 //ICONS MODALS
-$lang['CONF_ICON'] = 'ui-icon';
+$lang['CONF_ICON'] = 'ui-icon mt-0';
 $lang['CONF_ICON_SUCCESS'] = 'ui-icon-circle-check';
 $lang['CONF_ICON_INFO'] = 'ui-icon-info';
 $lang['CONF_ICON_WARNING'] = 'ui-icon-alert';
@@ -138,5 +138,19 @@ $lang['CONF_MAX_CONSULT_MONTH'] = 3;
 $lang['CONF_MIN_CONSULT_YEAR'] = 2000;
 //UPPER CASE INPUTS
 $lang['CONF_INPUT_UPPERCASE']= 'ON';
-//REMOTE CONNECTION
-$lang['CONF_REMOTE_CONNECT'] = 'OFF';
+//REMOTE AUTHORIZATIONS
+$lang['CONF_REMOTE_AUTH'] = 'OFF';
+$lang['CONF_AUTH_LIST'] = [];
+$lang['CONF_AUTH_VALIDATE'] = [];
+$lang['CONF_AUTH_LOADING_URL'] = '';
+$lang['CONF_AUTH_URL'] = [
+	'development' => [
+		'ANY' => ''
+	],
+	'testing' => [
+		'ANY' => ''
+	],
+	'production' => [
+		'ANY' => ''
+	]
+];

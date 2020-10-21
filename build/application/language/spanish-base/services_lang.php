@@ -119,10 +119,9 @@ $lang['SERVICES_NAMES_PROPERTIES_LIMITS'] = [
 
 $lang['SERVICES_TWIRLS_TEMPORARY_BLOCKED_CARD'] = 'El número de tarjeta <strong>%s</strong> está bloqueada temporalmente.';
 $lang['SERVICES_TWIRLS_PERMANENT_BLOCKED_CARD'] = 'El número de tarjeta <strong>%s</strong> está bloqueada permanentemente';
-$lang['SERVICES_TWIRLS_NO_FOUND_REGISTRY'] = 'No ha sido encontrado el registro';
+$lang['SERVICES_NO_FOUND_REGISTRY'] = 'El número de tarjeta <strong>%s</strong> no se ha encontrado.';
 $lang['SERVICES_TWIRLS_EXPIRED_CARD'] = 'La tarjeta <strong>%s</strong> está vencida';
 $lang['SERVICES_TWIRLS_NO_AVAILABLE_CARD'] = 'El número de tarjeta <strong>%s</strong> no está disponible.';
 $lang['SERVICES_TWIRLS_NO_UPDATE'] = 'No fue posible actualizar la restricción de giros para:';
 $lang['SERVICES_LIMITS_NO_REGISTRY'] = 'No se han encontrado límites disponibles.';
-$lang['SERVICES_LIMITS_NO_CARDHOLDER'] = 'El número de tarjeta <strong>%s</strong> no se ha encontrado.';
 $lang['SERVICES_LIMITS_NO_UPDATE'] = 'No fue posible actualizar la restricción de límites';

@@ -21,19 +21,15 @@ class Novo_User_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO User Model: Login Method Initialized');
 
+		$userName = mb_strtoupper($dataRequest->user);
+
 		$this->dataAccessLog->modulo = 'Usuario';
 		$this->dataAccessLog->function = 'Ingreso al sistema';
 		$this->dataAccessLog->operation = 'Iniciar sesion';
-
-		$userName = mb_strtoupper($dataRequest->user);
 		$this->dataAccessLog->userName = $userName;
 
-		$password = json_decode(base64_decode($dataRequest->pass));
-		$password = $this->cryptography->decrypt(
-			base64_decode($password->plot),
-			utf8_encode($password->password)
-		);
-		$authToken = $this->session->flashdata('authToken') ? $this->session->flashdata('authToken') : '';
+		$password = $this->cryptography->decryptOnlyOneData($dataRequest->pass);
+		$authToken = $this->session->flashdata('authToken') ?? '';
 		$authToken_str=str_replace('"','', $authToken);
 
 		$this->dataRequest->idOperation = 'loginFull';
@@ -53,25 +49,21 @@ class Novo_User_Model extends NOVO_Model {
 		if($dataRequest->codeOTP != '' && $authToken == '') {
 			$this->isResponseRc = 998;
 		} else {
-			if(ACTIVE_RECAPTCHA) {
-				$this->isResponseRc = $this->callWs_ValidateCaptcha_User($dataRequest);
+			$this->isResponseRc = ACTIVE_RECAPTCHA ? $this->callWs_ValidateCaptcha_User($dataRequest) : 0;
 
-				if ($this->isResponseRc === 0) {
-					$response = $this->sendToService('callWs_Login');
-				}
-			} else {
+			if ($this->isResponseRc === 0) {
 				$response = $this->sendToService('callWs_Login');
 			}
-
-			if(lang('CONFIG_PASS_EXPIRED') == 'OFF' && ($this->isResponseRc == -2 || $this->isResponseRc == -185)) {
-				$this->isResponseRc = 0;
-			}
-
-			$time = (object) [
-				'customerTime' => (int) $dataRequest->currentTime,
-				'serverTime' => (int) date("H")
-			];
 		}
+
+		if(lang('CONFIG_PASS_EXPIRED') == 'OFF' && ($this->isResponseRc == -2 || $this->isResponseRc == -185)) {
+			$this->isResponseRc = 0;
+		}
+
+		$time = (object) [
+			'customerTime' => (int) $dataRequest->currentTime,
+			'serverTime' => (int) date("H")
+		];
 
 		switch($this->isResponseRc) {
 			case 0:
@@ -89,6 +81,7 @@ class Novo_User_Model extends NOVO_Model {
 					'logged' => TRUE,
 					'userId' => $response->usuario->idUsuario,
 					'userName' => $response->usuario->userName,
+					'passWord' => lang('CONF_REMOTE_AUTH') == 'ON' ? $this->dataRequest->password : FALSE,
 					'fullName' => ucwords(mb_strtolower($fullName)),
 					'userType' => $response->usuario->ctipo,
 					'codigoGrupo' => $response->usuario->codigoGrupo,
@@ -569,16 +562,8 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataAccessLog->function = 'Clave';
 		$this->dataAccessLog->operation = 'Cambiar Clave';
 
-		$current = json_decode(base64_decode($dataRequest->currentPass));
-		$current = $this->cryptography->decrypt(
-			base64_decode($current->plot),
-			utf8_encode($current->password)
-		);
-		$new = json_decode(base64_decode($dataRequest->newPass));
-		$new = $this->cryptography->decrypt(
-			base64_decode($new->plot),
-			utf8_encode($new->password)
-		);
+		$current = $this->cryptography->decryptOnlyOneData($dataRequest->currentPass);
+		$new = $this->cryptography->decryptOnlyOneData($dataRequest->newPass);
 
 		$this->dataRequest->idOperation = 'cambioClave';
 		$this->dataRequest->className = 'com.novo.objects.TOs.UsuarioTO';
@@ -749,13 +734,6 @@ class Novo_User_Model extends NOVO_Model {
 			case -150:
 				$this->response->code = 0;
 			break;
-			case -437:
-				$this->response->title = lang('GEN_MENU_USERS_MANAGEMENT');
-				$this->response->icon =  lang('CONF_ICON_WARNING');
-				$this->response->msg = lang('RESP_UNSUCCESSFULL_USER_LIST');
-				$this->response->data->resp['btn1']['action'] = 'redirect';
-				break;
-
 		}
 
 		return $this->responseToTheView('callWs_usersManagement');

@@ -9,6 +9,9 @@ var inputPass = $('#password');
 var dataTableLang;
 var validator;
 var currentDate;
+var btnRemote = $('#btn-auth');
+var remoteFunction;
+var remoteAuthArgs = {}
 $(function () {
 	$('input[type=text], input[type=password], input[type=email]').attr('autocomplete', 'off');
 
@@ -32,7 +35,7 @@ $(function () {
 	}
 
 	$('.big-modal').on('click', function () {
-		$('.cover-spin').show(0)
+		$('.cover-spin').show(0);
 	});
 
 	dataTableLang = {
@@ -199,22 +202,23 @@ function appMessages(title, message, icon, data) {
 		closeOnEscape: false,
 		width: data.width || lang.CONF_MODAL_WIDTH,
 		minWidth: data.minWidth || lang.CONF_MODAL_WIDTH,
-		minHeight: 100,
+		minHeight: data.minHeight || 100,
 		maxHeight: maxHeight !== 'none' ? maxHeight : false,
 		dialogClass: "border-none",
 		classes: {
 			"ui-dialog-titlebar": "border-none",
 		},
 		open: function (event, ui) {
-			$('.ui-dialog-titlebar-close').hide();
-			var classIcon = $('#system-icon').attr('class').split(' ');
-			classIcon = classIcon.pop();
-
-			if (classIcon != 'mt-0') {
-				$('#system-icon').removeClass(classIcon);
+			if (!data.close) {
+				$('.ui-dialog-titlebar-close').hide();
 			}
 
-			$('#system-icon').addClass(icon);
+			if (icon != '') {
+				$('#system-icon').addClass(lang.CONF_ICON + ' ' + icon);
+			} else {
+				$('#system-icon').removeAttr('class');
+			}
+
 			$('#system-msg').html(message);
 			$('#accept, #cancel').removeClass("ui-button ui-corner-all ui-widget");
 
@@ -232,6 +236,11 @@ function appMessages(title, message, icon, data) {
 				createButton($('#cancel'), btn2);
 			}
 		}
+	});
+
+	$('.ui-dialog-titlebar-close').on('click', function(e) {
+		$('#system-msg').removeClass('w-100 vh-100');
+		$('#system-info').dialog('destroy');
 	});
 }
 
@@ -253,8 +262,6 @@ function createButton(elementButton, valuesButton) {
 				$(location).attr('href', baseURL + valuesButton.link);
 			break;
 			case 'close':
-				$('#system-info').dialog('close');
-			break;
 			case 'destroy':
 				$('#system-info').dialog('destroy');
 			break;
@@ -340,4 +347,87 @@ function downLoadfiles (data) {
 		$('#download-file').attr('download', '')
 	}
 	$('.cover-spin').hide();
+}
+
+function getauhtKey() {
+	/* if (lang.CONF_REMOTE_AUTH == 'ON') {//QUITAR IF
+		$('#accept').addClass('sender');
+		$('#system-info').on('click', '.sender', function () {
+			$('#accept')
+				.prop('disabled', false)
+				.removeClass('sender');
+			getResponse(true, 'Hola mundo')
+		});
+	} */
+	$('#accept').removeClass('get-auth-key');
+	$('#accept').removeClass('send-request');
+	data = {
+		action: remoteAuthArgs.action
+	}
+	btnRemote
+		.html(loader)
+		.prop('disabled', true);
+	insertFormInput(true);
+	verb = 'POST'; who = 'Services'; where = 'AuthorizationKey';
+
+	callNovoCore(verb, who, where, data, function (response) {
+		$('.cover-spin').hide();
+		if (response.code == 0) {
+			data = {
+				/* btn1: {
+					text: lang.GEN_BTN_ACCEPT,
+					action: 'none'
+				},//quitar btn1 */
+				minHeight: 650,
+				width: 1000,
+				posMy: 'top',
+				posAt: 'top',
+				close: true
+			}
+			$('#system-msg').addClass('w-100 vh-100');
+			appMessages(remoteAuthArgs.title || remoteAuthArgs.action, '', '', data);
+			AutorizacionCanales(response.data.authKey, 'system-msg', response.data.urlApp, response.data.urlLoad, 'getResponse');
+		}
+
+		insertFormInput(false);
+		btnRemote
+			.prop('disabled', false)
+			.html(btnText);
+	});
+}
+
+function getResponse(Exitoso, MensajeError) {
+	$('#system-info').dialog('destroy');
+	$('#system-msg').removeClass('w-100 vh-100');
+
+	if (Exitoso) {
+		switch (remoteFunction) {
+			case 'sendRequest':
+				sendRequest(remoteAuthArgs.action, remoteAuthArgs.title, btnRemote);
+			break;
+			case 'SignDeleteBulk':
+				SignDeleteBulk(remoteAuthArgs.form, remoteAuthArgs.action, remoteAuthArgs.thisId, remoteAuthArgs.passwordSignAuht, remoteAuthArgs.modalReq);
+			break;
+			case 'updateLimits':
+				updateLimits();
+			break;
+			case 'updateTwirlsCard':
+				updateTwirlsCard();
+			break;
+			case 'applyActions':
+				applyActions(remoteAuthArgs.action, remoteAuthArgs.form, btnRemote);
+			break;
+		}
+
+		$('.cover-spin').show(0);
+	} else {
+		data = {
+			 btn1: {
+				text: lang.GEN_BTN_ACCEPT,
+				action: 'destroy'
+			},
+		}
+
+		appMessages(remoteAuthArgs.title || remoteAuthArgs.action, MensajeError, lang.CONF_ICON_WARNING, data);
+	}
 }

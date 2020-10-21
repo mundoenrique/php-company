@@ -33,7 +33,7 @@
 <div id="system-info" class="hide" name="system-info">
 	<p class="mb-0">
 		<span class="dialog-icon">
-			<i id="system-icon" class="ui-icon mt-0"></i>
+			<i id="system-icon"></i>
 		</span>
 		<span id="system-msg" class="system-msg"><?= lang('GEN_MESSAGE_SYSTEM'); ?></span>
 	</p>
@@ -45,3 +45,4 @@
 	</div>
 </div>
 <div class="cover-spin"></div>
+<form id="nonForm" class="hide"></form>

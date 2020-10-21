@@ -177,13 +177,21 @@ class Encrypt_Connect {
 			log_message('ERROR','NOVO ['.$userName.'] '.$CurlError);
 
 			$failResponse = new stdClass();
+			$failResponse->msg = lang('GEN_MESSAGE_SYSTEM');
 
-			if ($CurlErrorNo == 28) {
-				$failResponse->rc = 504;
-				$failResponse->msg = lang('GEN_TIMEOUT');
-			} else {
-				$failResponse->rc = lang('GEN_RC_DEFAULT');
-				$failResponse->msg = lang('GEN_MESSAGE_SYSTEM');
+			switch ($CurlErrorNo) {
+				case 28:
+					$failResponse->rc = 504;
+					$failResponse->msg = lang('GEN_TIMEOUT');
+				break;
+				default:
+					$failResponse->rc = lang('GEN_RC_DEFAULT');
+			}
+
+			switch ($httpCode) {
+				case 502:
+					$failResponse->rc = 502;
+				break;
 			}
 
 			$response = $failResponse;

@@ -31,3 +31,5 @@ $lang['GEN_FOTTER_NETWORKS_LINK'] = [
 $lang['GEN_DETAIL_BARND_COLOR'] = '_card-blue.svg';
 //Datables
 $lang['GEN_ACCOUNT_CLOSING_BALANCE'] = 'Tarjetahabiente';
+$lang['GEN_BULK_DELETE_SO'] = '¿Estás seguro que deseas anular la orden de servicio? ';
+$lang['GEN_FAILED_THIRD_PARTY'] = 'No se obtuvo respuesta del servicio externo, por favor vuelve a intentarlo. %s';

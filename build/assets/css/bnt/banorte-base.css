@@ -2113,7 +2113,6 @@ i[class*=" icon-"]:before {
 
 .logo-banco {
 	width: 260px;
-	height: 67px;
 }
 
 .bug-view {
@@ -3062,6 +3061,15 @@ ul.steps li.step-item i {
   padding-bottom: 4px;
 }
 
+/* Cursors */
+.cursor-pointer {
+	cursor: pointer !important;
+}
+
+.cursor-default {
+	cursor: default !important;
+}
+
 /* jQuery UI
 ========================================================================== */
 
@@ -3587,13 +3595,12 @@ a.ui-button:active,
 
 .img-log{
 	margin-left: 10%;
-	width: 673px;
 	z-index: 1;
 }
 
 .img-log img{
-	width: 673px;
-	height: 452px;
+	width: 100%;
+	height: 100%;
 }
 
 .bg-img {
