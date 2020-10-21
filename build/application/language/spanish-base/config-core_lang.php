@@ -142,6 +142,7 @@ $lang['CONF_INPUT_UPPERCASE']= 'ON';
 $lang['CONF_REMOTE_AUTH'] = 'OFF';
 $lang['CONF_AUTH_LIST'] = [];
 $lang['CONF_AUTH_VALIDATE'] = [];
+$lang['CONF_AUTH_LOADING_URL'] = '';
 $lang['CONF_AUTH_URL'] = [
 	'development' => [
 		'ANY' => ''

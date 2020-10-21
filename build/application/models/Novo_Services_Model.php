@@ -1045,7 +1045,8 @@ class Novo_Services_Model extends NOVO_Model {
 				$this->response->code = 0;
 				$this->response->data = [
 					'authKey' => $response->bean->tranClave,
-					'urlApp' => lang('CONF_AUTH_URL')[ENVIRONMENT][$this->session->enterpriseInf->thirdApp]
+					'urlApp' => lang('CONF_AUTH_URL')[ENVIRONMENT][$this->session->enterpriseInf->thirdApp],
+					'urlLoad' => lang('CONF_AUTH_LOADING_URL')
 				];
 			break;
 			case -404:

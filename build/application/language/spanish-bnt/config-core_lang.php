@@ -58,6 +58,7 @@ $lang['CONF_AUTH_LIST'] = [
 	'CREDIT_TO_CARD', 'DEBIT_TO_CARD', 'TEMPORARY_LOCK', 'TEMPORARY_UNLOCK', 'CARD_ASSIGNMENT'
 ];
 $lang['CONF_AUTH_VALIDATE'] = ['CARD_ASSIGNMENT', 'UPDATE_DATA'];
+$lang['CONF_AUTH_LOADING_URL'] = 'https://15.128.26.90/nbem11/images/loader.gif';
 $lang['CONF_AUTH_URL'] = [
 	'development' => [
 		'ANY' => '',

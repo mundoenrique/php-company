@@ -209,7 +209,9 @@ function appMessages(title, message, icon, data) {
 			"ui-dialog-titlebar": "border-none",
 		},
 		open: function (event, ui) {
-			$('.ui-dialog-titlebar-close').hide();
+			if (!data.close) {
+				$('.ui-dialog-titlebar-close').hide();
+			}
 
 			if (icon != '') {
 				$('#system-icon').addClass(lang.CONF_ICON + ' ' + icon);
@@ -235,6 +237,11 @@ function appMessages(title, message, icon, data) {
 			}
 		}
 	});
+
+	$('.ui-dialog-titlebar-close').on('click', function(e) {
+		$('#system-msg').removeClass('w-100 vh-100');
+		$('#system-info').dialog('destroy');
+	});
 }
 
 function createButton(elementButton, valuesButton) {
@@ -255,8 +262,6 @@ function createButton(elementButton, valuesButton) {
 				$(location).attr('href', baseURL + valuesButton.link);
 			break;
 			case 'close':
-				$('#system-info').dialog('close');
-			break;
 			case 'destroy':
 				$('#system-info').dialog('destroy');
 			break;
@@ -373,14 +378,15 @@ function getauhtKey() {
 					text: lang.GEN_BTN_ACCEPT,
 					action: 'none'
 				},//quitar btn1 */
-				minHeight: 600,
-				width: 800,
+				minHeight: 650,
+				width: 1000,
 				posMy: 'top',
-				posAt: 'top'
+				posAt: 'top',
+				close: true
 			}
 			$('#system-msg').addClass('w-100 vh-100');
 			appMessages(remoteAuthArgs.title || remoteAuthArgs.action, '', '', data);
-			AutorizacionCanales(response.data.authKey, 'system-msg', response.data.urlApp, '', 'getResponse');
+			AutorizacionCanales(response.data.authKey, 'system-msg', response.data.urlApp, response.data.urlLoad, 'getResponse');
 		}
 
 		insertFormInput(false);
