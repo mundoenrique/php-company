@@ -61,17 +61,17 @@ $lang['CONF_AUTH_VALIDATE'] = ['CARD_ASSIGNMENT', 'UPDATE_DATA'];
 $lang['CONF_AUTH_URL'] = [
 	'development' => [
 		'ANY' => '',
-		'BEM' => 'https://15.128.26.90/nbem11/AutorizacionRemota.aspx',
-		'BEP' => 'https://15.128.26.105/nbxi11/AutorizacionRemota.aspx'
+		'BEM' => 'https://nbxiatw/15.128.26.90/nbem11/AutorizacionRemota.aspx',
+		'BEP' => 'https://becwebat/15.128.26.105/nbxi11/AutorizacionRemota.aspx'
 	],
 	'testing' => [
 		'ANY' => '',
-		'BEM' => 'https://15.128.26.90/nbem11/AutorizacionRemota.aspx',
-		'BEP' => 'https://15.128.26.105/nbxi11/AutorizacionRemota.aspx'
+		'BEM' => 'https://nbxiatw/15.128.26.90/nbem11/AutorizacionRemota.aspx',
+		'BEP' => 'https://becwebat/15.128.26.105/nbxi11/AutorizacionRemota.aspx'
 	],
 	'production' => [
 		'ANY' => '',
-		'BEM' => 'https://15.128.26.90/nbem11/AutorizacionRemota.aspx',
-		'BEP' => 'https://15.128.26.105/nbxi11/AutorizacionRemota.aspx'
+		'BEM' => 'https://nbxiatw/15.128.26.90/nbem11/AutorizacionRemota.aspx',
+		'BEP' => 'https://becwebat/15.128.26.105/nbxi11/AutorizacionRemota.aspx'
 	]
 ];
