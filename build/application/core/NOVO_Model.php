@@ -139,6 +139,11 @@ class NOVO_Model extends CI_Model {
 			break;
 			case -437:
 				$this->response->msg = novoLang(lang('GEN_FAILED_THIRD_PARTY'), '');
+				switch ($this->countryUri) {
+					case 'bnt':
+						$arrayResponse['btn1']['action'] = 'destroy';
+					break;
+				}
 			break;
 			case 502:
 				$this->response->msg = lang('GEN_MESSAGE_SYSTEM');
