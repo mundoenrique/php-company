@@ -42,7 +42,7 @@
               </div>
 
               <div class="flex items-center justify-end col-3">
-                <?php if($this->verify_access->verifyAuthorization('GIRCOM', 	'CONGIR')): ?>
+                <?php if($this->verify_access->verifyAuthorization('GIRCOM', 	'CONGIR') || $this->verify_access->verifyAuthorization('GIRCOM', 	'ACTGIR')): ?>
                 <button id="card-holder-btn" class="btn btn-primary btn-small btn-loading">
                   <?= lang('GEN_BTN_SEARCH'); ?>
                 </button>

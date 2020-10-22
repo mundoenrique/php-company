@@ -32,7 +32,7 @@
               <div class="form-group col-4 col-xl-4">
               </div>
               <div class="flex items-center justify-end col-3">
-                <?php if($this->verify_access->verifyAuthorization('LIMTRX', 'CONLIM')): ?>
+                <?php if($this->verify_access->verifyAuthorization('LIMTRX', 'CONLIM') || $this->verify_access->verifyAuthorization('LIMTRX', 'ACTLIM')): ?>
                 <button id="card-holder-btn" class="btn btn-primary btn-small btn-loading"><?= lang('GEN_BTN_SEARCH'); ?></button>
                 <?php endif; ?>
               </div>
