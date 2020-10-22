@@ -289,7 +289,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 			case 0:
 				$this->response->cod = 0;
 				$this->response->title = lang('BULK_DELETE_TITLE');
-				$this->response->msg = novoLang(lang('BULK_DELETE_SUCCESS'), $dataRequest->bulkname);
+				$this->response->msg = novoLang(lang('BULK_DELETE_SUCCESS'), [$dataRequest->bulkname, $dataRequest->bulkDate]);
 				$this->response->icon = lang('CONF_ICON_SUCCESS');
 				$this->response->data['btn1'] = [
 					'text' => lang('GEN_BTN_ACCEPT'),

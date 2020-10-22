@@ -151,9 +151,10 @@ $(function () {
 						action: 'destroy'
 					}
 				}
-				var bulkFile = $(this).closest('tr').find('td:nth-child(2)').text();
-				inputModal =	'<form id="delete-bulk-form" name="delete-bulk-form" class="form-group" onsubmit="return false;">';
-				inputModal+= 		'<span class="regular">' + lang.BULK_DELETE+' '+bulkFile+'</span>';
+				var bulkFile = form.find('input[name="bulkFile"]').val();
+				var bulkDate = form.find('input[name="bulkDate"]').val();
+				inputModal = '<form id="delete-bulk-form" name="delete-bulk-form" class="form-group" onsubmit="return false;">';
+				inputModal += 	'<span>' + lang.BULK_DELETE + ' <strong>' + bulkFile + '</strong> de Fecha: <strong>' + bulkDate + '</strong></span>';
 
 				if (lang.CONF_REMOTE_AUTH == 'OFF') {
 					inputModal+=		'<div class="input-group">';
@@ -190,15 +191,16 @@ $(function () {
 
 		if(formDeleteBulk.valid()) {
 			$(this)
-			.off('click')
-			.html(loader)
-			.prop('disabled', true)
-			.removeClass('delete-bulk-btn');
+				.off('click')
+				.html(loader)
+				.prop('disabled', true)
+				.removeClass('delete-bulk-btn');
 			data = {
 				bulkId: form.find('input[name="bulkId"]').val(),
 				bulkTicked: form.find('input[name="bulkTicked"]').val(),
 				bulkStatus: form.find('input[name="bulkStatus"]').val(),
 				bulkname: form.find('input[name="bulkFile"]').val(),
+				bulkDate: form.find('input[name="bulkDate"]').val()
 			}
 
 			if (lang.CONF_REMOTE_AUTH == 'OFF') {

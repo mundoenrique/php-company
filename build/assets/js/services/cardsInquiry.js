@@ -14,12 +14,13 @@ $(function () {
 
 	$('#tableCardInquiry').on('click', '.toggle-all', function () {
 		$(this).closest("tr").toggleClass("selected");
+
 		if ($(this).closest("tr").hasClass("selected")) {
 			table.rows().select();
 		} else {
 			table.rows().deselect();
 		}
-	})
+	});
 
 	$('#searchCardsBtn').on('click', function (e) {
 		e.preventDefault();
