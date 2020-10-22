@@ -194,7 +194,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 		$this->dataRequest->idOrden = $dataRequest->OrderNumber;
 		$this->dataRequest->rifEmpresa = $this->session->enterpriseInf->idFiscal;
 
-		$password = isset($dataRequest->pass) ? $this->cryptography->decryptOnlyOneData($dataRequest->pass) : FALSE;
+		$password = isset($dataRequest->pass) ? $this->cryptography->decryptOnlyOneData($dataRequest->pass) : $this->session->passWord;
 
 		if (lang('CONF_HASH_PASS') == 'ON' && $this->singleSession == 'signIn') {
 			$password = $this->session->passWord ?: md5($password);

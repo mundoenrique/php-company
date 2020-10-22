@@ -276,6 +276,11 @@ class Novo_User_Model extends NOVO_Model {
 		}
 
 		$response = $this->sendToService('callWs_SingleSignon');
+
+		if(lang('CONFIG_PASS_EXPIRED') == 'OFF' && ($this->isResponseRc == -2 || $this->isResponseRc == -185)) {
+			$this->isResponseRc = 0;
+		}
+
 		$this->response->code = 0;
 
 		switch ($this->isResponseRc) {

@@ -195,6 +195,7 @@ function appMessages(title, message, icon, data) {
 
 	$('#system-info').dialog({
 		title: title || lang.GEN_SYSTEM_NAME,
+		closeText: '',
 		modal: 'true',
 		position: { my: data.posMy || 'center', at: data.posAt || 'center' },
 		draggable: false,
@@ -362,7 +363,7 @@ function getauhtKey() {
 	$('#accept').removeClass('get-auth-key');
 	$('#accept').removeClass('send-request');
 	data = {
-		action: remoteAuthArgs.action
+		action: remoteAuthArgs.title || remoteAuthArgs.action
 	}
 	btnRemote
 		.html(loader)

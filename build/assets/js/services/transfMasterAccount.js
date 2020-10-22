@@ -211,7 +211,7 @@ $(function () {
 			insertFormInput(true);
 			dataTableReload(true);
 		}
-	})
+	});
 
 	$('#tableServicesMaster').on('click', '.toggle-all', function () {
 		$(this).closest("tr").toggleClass("selected");

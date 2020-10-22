@@ -189,7 +189,7 @@ class Novo_Services_Model extends NOVO_Model {
 		$this->dataRequest->listadoTarjetas = [
 			'lista' => $cardsList
 		];
-		$password = isset($dataRequest->pass) ? $this->cryptography->decryptOnlyOneData($dataRequest->pass) : FALSE;
+		$password = isset($dataRequest->pass) ? $this->cryptography->decryptOnlyOneData($dataRequest->pass) : $this->session->passWord;
 
 		if (lang('CONF_HASH_PASS') == 'ON' && $this->singleSession == 'signIn') {
 			$password = $this->session->passWord ?: md5($password);
@@ -515,7 +515,7 @@ class Novo_Services_Model extends NOVO_Model {
 			$dataList[] = $data;
 		}
 
-		$password = isset($dataRequest->password) ? $this->cryptography->decryptOnlyOneData($dataRequest->password) : FALSE;
+		$password = isset($dataRequest->password) ? $this->cryptography->decryptOnlyOneData($dataRequest->password) : $this->session->passWord;
 
 		if (lang('CONF_HASH_PASS') == 'ON' && $this->singleSession == 'signIn') {
 			$password = $this->session->passWord ?: md5($password);
@@ -702,7 +702,7 @@ class Novo_Services_Model extends NOVO_Model {
 			'rc' => 0]
 		];
 
-		$password = isset($dataRequest->passwordAuth) ? $this->cryptography->decryptOnlyOneData($dataRequest->passwordAuth) : FALSE;
+		$password = isset($dataRequest->passwordAuth) ? $this->cryptography->decryptOnlyOneData($dataRequest->passwordAuth) : $this->session->passWord;
 
 		if (lang('CONF_HASH_PASS') == 'ON' && $this->singleSession == 'signIn') {
 			$password = $this->session->passWord ?: md5($password);
@@ -879,7 +879,7 @@ class Novo_Services_Model extends NOVO_Model {
 		$this->dataRequest->idEmpresa = $this->session->enterpriseInf->idFiscal;
 		$this->dataRequest->prefix = $this->session->productInf->productPrefix;
 
-		$password = isset($dataRequest->passwordAuth) ? $this->cryptography->decryptOnlyOneData($dataRequest->passwordAuth) : FALSE;
+		$password = isset($dataRequest->passwordAuth) ? $this->cryptography->decryptOnlyOneData($dataRequest->passwordAuth) : $this->session->passWord;
 
 		if (lang('CONF_HASH_PASS') == 'ON' && $this->singleSession == 'signIn') {
 			$password = $this->session->passWord ?: md5($password);
