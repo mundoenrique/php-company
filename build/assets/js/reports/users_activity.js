@@ -1,12 +1,10 @@
 'use strict'
-var modalReq = {};
 var datePicker = $('.date-picker');
 var usersActivityData;
 var lastActionsList = [];
 var enabledFunctionsList = [];
 var usersActivityTable = $('#usersActivity');
 var usersActivityMainTable;
-var excelExportBtn = $("#exportExcel");
 var userActivityOptions = '';
 userActivityOptions += '<tr>';
 userActivityOptions += 	'<td class="flex justify-center items-center">';
@@ -65,39 +63,54 @@ $(function () {
 			verb = "POST"; who = 'Reports'; where = 'usersActivity'; data;
 
 			callNovoCore(verb, who, where, data, function(response) {
-				$('#spinnerBlock').addClass("hide");
-				$('#titleResults').removeClass("hide");
-				$('#blockResultsUser').removeClass("hide");
-				usersActivityData = response.data.usersActivity;
 
-				$.each(usersActivityData, function(key, val){
-					lastActionsList[key] = val.lastActions;
-					enabledFunctionsList[key] = val.enabledFunctions;
-				});
+				if (response.code == 0) {
+					$('#spinnerBlock').addClass("hide");
+					$('#titleResults').removeClass("hide");
+					$('#blockResultsUser').removeClass("hide");
+					usersActivityData = response.data.usersActivity;
 
-				createTable(usersActivityData);
-				insertFormInput(false);
-				$('#blockResultsUser').removeClass("hide");
-				$('#spinnerBlock').addClass("hide");
+					$.each(usersActivityData, function(key, val){
+						lastActionsList[key] = val.lastActions;
+						enabledFunctionsList[key] = val.enabledFunctions;
+					});
+
+					createTable(usersActivityData);
+					insertFormInput(false);
+					$('#blockResultsUser').removeClass("hide");
+					$('#spinnerBlock').addClass("hide");
+				} else {
+					$('#spinnerBlock').addClass("hide");
+					insertFormInput(false);
+				}
 			});
 		}
 	});
 
 	//Tabla de Ultimas acciones realizadas
 	$('#usersActivityOptions').delegate('#lastActions', 'click', function () {
+		var oldTr = $(this).closest('tbody').find('tr.shown');
+		var oldRow = usersActivityMainTable.row(oldTr);
 		var tr = $(this).closest('tr');
 		var row = usersActivityMainTable.row( tr );
+		var user = lastActionsList[$(this).parents('tr').attr('userId')];
+
+		if (!tr.hasClass('shown')) {
+			oldRow.child.hide();
+			oldTr.removeClass('shown');
+		}
 
 		if (row.child.isShown() && tr.hasClass('enabledFunctions')) {
 			tr.removeClass('shown enabledFunctions');
-			row.child(lastActions(lastActionsList[$(this).parents('tr').attr('userId')])).show();
+			row.child(lastActions(user)).show();
 			tr.addClass('shown lastActions');
 		} else {
+
 			if (row.child.isShown()) {
 				row.child.hide();
 				tr.removeClass('shown lastActions');
 			} else {
-				row.child(lastActions(lastActionsList[$(this).parents('tr').attr('userId')])).show();
+				row.child(lastActions(user)).show();
 				tr.addClass('shown lastActions');
 			}
 		}
@@ -105,19 +118,28 @@ $(function () {
 
 	//Tabla de Funciones habilitadas
 	$('#usersActivityOptions').delegate('#enabledFunctions', 'click', function () {
+		var oldTr = $(this).closest('tbody').find('tr.shown');
+		var oldRow = usersActivityMainTable.row(oldTr);
 		var tr = $(this).closest('tr');
 		var row = usersActivityMainTable.row( tr );
+		var user = enabledFunctionsList[$(this).parents('tr').attr('userId')];
+
+		if (!tr.hasClass('shown')) {
+			oldRow.child.hide();
+			oldTr.removeClass('shown');
+		}
 
 		if (row.child.isShown() && tr.hasClass('lastActions')) {
 			tr.removeClass('shown lastActions');
-			row.child(enabledFunctions(enabledFunctionsList[$(this).parents('tr').attr('userId')])).show();
+			row.child(enabledFunctions(user)).show();
 			tr.addClass('shown enabledFunctions');
 		} else {
+
 			if ( row.child.isShown() ) {
 				row.child.hide();
 				tr.removeClass('shown enabledFunctions');
 			} else {
-				row.child(enabledFunctions(enabledFunctionsList[$(this).parents('tr').attr('userId')])).show();
+				row.child(enabledFunctions(user)).show();
 				tr.addClass('shown enabledFunctions');
 			}
 		}
@@ -125,36 +147,24 @@ $(function () {
 	});
 
 	//Exportar a Excel
-	excelExportBtn.on('click', function(){
-		var acCodCia = $('#enterprise-report').find('option:selected').attr('code');
-		var fechaIni =  $("#initialDateAct").val();
-		var fechaFin = $("#finalDateAct").val();
-		var rifEmpresa = $('#enterprise-report').find('option:selected').attr('acrif');
-		var passData = {
-			modalReq: true,
-			acCodCia: acCodCia,
-			fechaIni: fechaIni,
-			fechaFin: fechaFin,
-			rifEmpresa : rifEmpresa
-		};
-		verb = "POST"; who = 'Reports'; where = 'exportToExcelUserActivity'; data = passData;
-		callNovoCore(verb, who, where, data, function(response) {
-				dataResponse = response.data;
-				code = response.code
-				var info = dataResponse;
-				if(info.formatoArchivo == 'excel'){
-					info.formatoArchivo = '.xls'
+	$('#exportExcel').on('click', function(e){
+		e.preventDefault();
+		form = $('#userActivityForm');
+		formInputTrim(form);
+		validateForms(form);
+
+		if (form.valid()) {
+			data = getDataForm(form);
+			verb = "POST"; who = 'Reports'; where = 'exportExcelUsersActivity'; data;
+
+			callNovoCore(verb, who, where, data, function(response) {
+
+				if (response.code == 0) {
+					downLoadfiles (response.data);
 				}
-				if(code == 0){
-					data = {
-						"name": info.nombre.replace(/ /g, "")+info.formatoArchivo,
-						"ext": info.formatoArchivo,
-						"file": info.archivo
-					}
-					downLoadfiles (data);
-				$('.cover-spin').removeAttr("style");
-				}
-		})
+				$('.cover-spin').hide();
+			});
+		}
 	});
 });
 

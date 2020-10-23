@@ -19,6 +19,7 @@ $lang['REPORTS_NO_GMF'] = 'No existen certificados GMF disponibles';
 $lang['REPORTS_NO_GMF_FOR_YEAR'] = 'El certificado GMF para el año %s, no esta disponible';
 $lang['REPORTS_ID_FISCAL']= "NIT. (Opcional)";
 $lang['REPORTS_ID_FISCAL_INPUT']= "Ingresa NIT.";
+$lang['REPORTS_REQUEST_NO_RESULTS']= "No se encontraron resultados con la empresa y fecha seleccionada.";
 //MASTER ACCOUNT
 $lang['REPORTS_TABLE_DATE']="Fecha";
 $lang['REPORTS_TABLE_DESCRIPTION']="Descripción";

@@ -154,3 +154,8 @@ $lang['CONF_AUTH_URL'] = [
 		'ANY' => ''
 	]
 ];
+//REMOTE CONNECTION
+$lang['CONF_REMOTE_CONNECT'] = 'OFF';
+//USER ACTIVITY
+$lang['CONF_USER_ACTIVITY'] = 'ON';
+$lang['CONF_USERS_ACTIVITY'] = 'OFF';
