@@ -24,3 +24,5 @@ $lang['GEN_TABLE_AMOUNT'] = 'Monto lote';
 $lang['GEN_TABLE_DNI'] = 'Nro. de identificación';
 //RESPONSES
 $lang['RESP_PASSWORD_USED'] = 'La nueva contraseña no debe coincidir <strong>con las últimas diez usadas</strong>.';
+//SUBMENU
+$lang['GEN_LINK_REP_USER_ACT'] = 'actividad-usuarios';//REPUSU

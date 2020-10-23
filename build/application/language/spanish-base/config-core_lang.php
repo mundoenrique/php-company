@@ -154,3 +154,6 @@ $lang['CONF_AUTH_URL'] = [
 		'ANY' => ''
 	]
 ];
+//USER ACTIVITY
+$lang['CONF_USER_ACTIVITY'] = 'ON';
+$lang['CONF_USERS_ACTIVITY'] = 'OFF';
