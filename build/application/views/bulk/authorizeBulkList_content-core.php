@@ -70,6 +70,7 @@
             <div class="flex row mt-3 mb-2 mx-2 justify-end">
               <?php if($authBulk && $authorizeAttr->sign): ?>
               <div class="col-5 col-lg-3 col-xl-3 form-group">
+                <?php if(lang('CONF_REMOTE_AUTH') == 'OFF'): ?>
                 <div class="input-group">
                   <input id="password-sign" name="password" class="form-control pwd-input pr-0 pwd" type="password" autocomplete="off"
                     placeholder="<?= lang('GEN_PLACE_PASSWORD'); ?>">
@@ -78,6 +79,7 @@
                         class="icon-view mr-0"></i></span>
                   </div>
                 </div>
+                <?php endif; ?>
                 <div class="help-block bulk-select text-left"></div>
               </div>
               <div class="col-auto">
@@ -85,7 +87,7 @@
                   <?= lang('GEN_BTN_SIGN'); ?>
                 </button>
               </div>
-							<?php endif; ?>
+              <?php endif; ?>
               <?php if($this->verify_access->verifyAuthorization('TEBAUT', 'TEBELI') && $authorizeAttr->allBulkSign == 'toggle-all' && $authorizeAttr->sign): ?>
               <div class="col-auto">
                 <button id="del-sign-bulk-btn" class="btn btn-primary btn-small btn-loading flex mx-auto">
@@ -163,6 +165,7 @@
                 <div class="help-block"></div>
               </div>
               <div class="col-5 col-lg-3 col-xl-3 form-group">
+                <?php if(lang('CONF_REMOTE_AUTH') == 'OFF'): ?>
                 <div class="input-group">
                   <input id="password-auth" name="password" class="form-control pwd-input pr-0 pwd" type="password" autocomplete="off"
                     placeholder="<?= lang('GEN_PLACE_PASSWORD'); ?>">
@@ -171,6 +174,7 @@
                         class="icon-view mr-0"></i></span>
                   </div>
                 </div>
+                <?php endif; ?>
                 <div class="help-block bulk-select text-left"></div>
               </div>
               <?php endif; ?>

@@ -1,4 +1,5 @@
 'use strict'
+var cardnumber
 $(function () {
 	$('#pre-loader').remove();
 	$('.hide-out').removeClass('hide');
@@ -10,43 +11,55 @@ $(function () {
 		$(".help-block").text("");
 	});
 
-
 	$('#card-holder-btn').on('click', function (e) {
 		e.preventDefault();
 		$('#passwordAuth').val('');
 		$('.section').css("display", "none");
 		$('.money').removeClass("has-error");
 		$('#blockResults').addClass('hidden');
-		var form = $('#limitsForm');
-		var passData = getDataForm(form);
+		form = $('#limitsForm');
+		formInputTrim(form);
 		validateForms(form);
+
 		if (form.valid()) {
 			$('#spinnerBlock').removeClass("hide");
 			insertFormInput(true);
-			getForm(passData);
+			getForm();
 		}
 	});
 
-	$('#sign-btn').on('click', function(e){
-		var changeBtn = $(this);
-		var btnText = changeBtn.text().trim();
-		var form = $('#limitsUpdateForm');
-		var passData = getDataForm(form);
-		passData.cardNumber = $('#cardNumber').val();
+	$('#sign-btn').on('click', function(e) {
+		e.preventDefault();
+		btnText = $(this).text().trim();
+		form = $('#limitsUpdateForm');
+		formInputTrim(form);
 		validateForms(form);
 
 		if (form.valid()) {
-			changeBtn.html(loader);
-			insertFormInput(true, form);
-			updateLimits(passData, btnText);
+			insertFormInput(true);
+			$(this).html(loader);
+
+			if (lang.CONF_REMOTE_AUTH == 'ON') {
+				remoteFunction = 'updateLimits';
+				btnRemote = $(this);
+				remoteAuthArgs.action = lang.GEN_TRANSACTIONAL_LIMITS_TITTLE;
+				getauhtKey();
+			} else {
+				updateLimits();
+			}
 		}
 	});
 });
 
-function getForm(passData){
-	verb = "POST"; who = 'Services'; where = 'transactionalLimits'; data = passData;	callNovoCore(verb, who, where, data, function(response) {
+function getForm() {
+	data = getDataForm(form);
+	verb = "POST"; who = 'Services'; where = 'transactionalLimits';
+
+	callNovoCore(verb, who, where, data, function(response) {
 		dataResponse = response.data;
 		code = response.code
+		cardnumber = data.cardNumber
+
 		if (code == 0) {
 			insertFormInput(false);
 			$('#spinnerBlock').addClass('hide');
@@ -67,17 +80,29 @@ function getForm(passData){
 	});
 };
 
-function updateLimits(passData, btnText){
-	verb = "POST"; who = 'Services'; where = 'updateTransactionalLimits'; data = passData;	callNovoCore(verb, who, where, data, function(response) {
+function updateLimits() {
+	data = getDataForm(form);
+	data.cardNumber = cardnumber;
+
+	if (lang.CONF_REMOTE_AUTH == 'OFF') {
+		data.passwordAuth = cryptoPass(data.passwordAuth);
+	}
+
+	verb = "POST"; who = 'Services'; where = 'updateTransactionalLimits';
+
+	callNovoCore(verb, who, where, data, function(response) {
 		dataResponse = response.data;
 		code = response.code;
 		insertFormInput(false);
 		$('input[type=password]').val('');
 		$('#sign-btn').html(btnText);
-		if( code == 4){
+
+		if (response.success) {
 			$('#accept').on('click', function(){
 				$('#card-holder-btn').trigger('click');
 			});
 		}
-	})
+
+		$('.cover-spin').hide();
+	});
 };

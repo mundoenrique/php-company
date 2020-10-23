@@ -522,6 +522,11 @@ $config = [
 			'field' => 'bulkTicked',
 			'label' => 'bulkTicked',
 			'rules' => 'trim|regex_match[/^([\w]+)+$/i]|required'
+		],
+		[
+			'field' => 'pass',
+			'label' => 'pass',
+			'rules' => 'trim'
 		]
 	],
 	'deleteNoConfirmBulk' => [
@@ -543,14 +548,14 @@ $config = [
 		[
 			'field' => 'pass',
 			'label' => 'pass',
-			'rules' => 'trim|required'
+			'rules' => 'trim'
 		]
 	],
 	'signBulkList' => [
 		[
 			'field' => 'pass',
 			'label' => 'pass',
-			'rules' => 'trim|required'
+			'rules' => 'trim'
 		],
 		[
 			'field' => 'bulk[]',
@@ -562,7 +567,7 @@ $config = [
 		[
 			'field' => 'pass',
 			'label' => 'pass',
-			'rules' => 'trim|required'
+			'rules' => 'trim'
 		],
 		[
 			'field' => 'bulk[]',
@@ -574,7 +579,7 @@ $config = [
 		[
 			'field' => 'pass',
 			'label' => 'pass',
-			'rules' => 'trim|required'
+			'rules' => 'trim'
 		],
 		[
 			'field' => 'bulk[]',
@@ -695,7 +700,7 @@ $config = [
 		[
 			'field' => 'pass',
 			'label' => 'pass',
-			'rules' => 'trim|required'
+			'rules' => 'trim'
 		],
 		[
 			'field' => 'cards[]',
@@ -846,9 +851,16 @@ $config = [
 			'rules' => 'trim|regex_match[/^([\w ]*)+$/i]|required'
 		],
 		[
-			'field' => 'pass',
-			'label' => 'pass',
-			'rules' => 'trim|regex_match[/^([a-zA-Z0-9=]+)+$/i]|required'
+			'field' => 'password',
+			'label' => 'password',
+			'rules' => 'trim|regex_match[/^([a-zA-Z0-9=]+)+$/i]'
+		]
+	],
+	'authorizationKey' => [
+		[
+			'field' => 'action',
+			'label' => 'action',
+			'rules' => 'trim|regex_match[/^([\wñáéíóú ]+)+$/i]|required'
 		]
 	],
 	'statusBulk' => [
@@ -1095,7 +1107,7 @@ $config = [
 	'updateCommercialTwirls' => [
 		[
 			'field' => 'passwordAuth',
-			'rules' => 'trim|required'
+			'rules' => 'trim'
 		],
 		[
 			'field' => 'companyId',
@@ -1187,7 +1199,7 @@ $config = [
 	'updateTransactionalLimits' => [
 		[
 			'field' => 'passwordAuth',
-			'rules' => 'trim|required'
+			'rules' => 'trim'
 		],
 		[
 			'field' => 'dailyNumberCredit',

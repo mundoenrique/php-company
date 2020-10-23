@@ -164,6 +164,9 @@ class Verify_Access {
 				case 'getProductDetail':
 					$auth = ($this->CI->session->has_userdata('logged') && $this->CI->session->has_userdata('enterpriseInf'));
 				break;
+				case 'authorizationKey':
+					$auth = ($this->CI->session->has_userdata('logged') && $this->CI->session->has_userdata('productInf'));
+				break;
 				case 'getPendingBulk':
 				case 'loadBulk':
 				case 'getDetailBulk':
@@ -216,13 +219,13 @@ class Verify_Access {
 					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('COPELO'));
 				break;
 				case 'transactionalLimits':
-					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('LIMTRX', 'CONLIM'));
+					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('LIMTRX'));
 				break;
 				case 'updateTransactionalLimits':
 					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('LIMTRX', 'ACTLIM'));
 				break;
 				case 'commercialTwirls':
-					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('GIRCOM', 'CONGIR'));
+					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('GIRCOM'));
 				break;
 				case 'updateCommercialTwirls':
 					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('GIRCOM', 'ACTGIR'));
@@ -273,7 +276,7 @@ class Verify_Access {
 					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPLOT'));
 				break;
 				case 'cardHolders':
-					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPEDO'));
+					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBTHA'));
 				break;
 				case 'statusAccountExcelFile':
 				case 'statusAccountPdfFile':

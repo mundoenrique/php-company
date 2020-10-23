@@ -2,6 +2,8 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 //SUPPORT IE 11
 $lang['CONF_SUPPORT_IE'] = 'ON';
+//SIGNIN
+$lang['CONF_SIGIN_RECOVER_PASS'] = 'OFF';
 //AGENT INFO
 $lang['CONF_AGEN_INFO'] = 'ON';
 //VALIDATE FORMS
@@ -22,6 +24,7 @@ $lang['CONF_FOOTER_LOGO'] = 'OFF';
 $lang['CONF_UNNA_EXPIRED_DATE'] = 'OFF';
 $lang['CONF_UNNA_STARTING_LINE1'] = 'OFF';
 $lang['CONF_STARTING_LINE2_REQUIRED'] = 'OFF';
+$lang['CONF_UNNA_PASSWORD'] = 'OFF';
 //DETAIL UNNAMED
 $lang['CONF_UNNA_ACCOUNT_NUMBER'] = 'OFF';
 //AUTHORIZE BULK LIST
@@ -35,6 +38,7 @@ $lang['CONF_LAST_UPDATE_COLUMN']= 'OFF';
 $lang['CONF_SETTINGS_BRANCHES'] = 'OFF';
 $lang['CONF_SETTINGS_TELEPHONES'] = 'OFF';
 $lang['CONF_SETTINGS_CONTACT'] = 'OFF';
+$lang['CONF_SETTINGS_CHANGE_PASSWORD'] = 'OFF';
 //STYLE FORM
 $lang['CONF_SETT_STYLE_SKIN'] = 'col-4';
 //FILES CONF
@@ -49,5 +53,27 @@ $lang['CONF_SECUENCE_COLUMN']= 'OFF';
 $lang['CONF_STATUS_ACCOUNT_ADD_COLUMNS'] = 'OFF';
 //UPPER CASE INPUTS
 $lang['CONF_INPUT_UPPERCASE']= 'OFF';
-//REMOTE CONNECTION
-$lang['CONF_REMOTE_CONNECT'] = 'OFF';
+//REMOTE AUTHORIZATIONS
+$lang['CONF_REMOTE_AUTH'] = 'ON';
+$lang['CONF_AUTH_LIST'] = [
+	'CREDIT_TO_CARD', 'DEBIT_TO_CARD', 'TEMPORARY_LOCK', 'TEMPORARY_UNLOCK', 'CARD_ASSIGNMENT'
+];
+$lang['CONF_AUTH_VALIDATE'] = ['CARD_ASSIGNMENT', 'UPDATE_DATA'];
+$lang['CONF_AUTH_LOADING_URL'] = 'https://15.128.26.90/nbem11/images/loader.gif';
+$lang['CONF_AUTH_URL'] = [
+	'development' => [
+		'ANY' => '',
+		'BEM' => 'https://15.128.26.90/nbem11/AutorizacionRemota.aspx',
+		'BEP' => 'https://15.128.26.105/nbxi11/AutorizacionRemota.aspx'
+	],
+	'testing' => [
+		'ANY' => '',
+		'BEM' => 'https://15.128.26.90/nbem11/AutorizacionRemota.aspx',
+		'BEP' => 'https://15.128.26.105/nbxi11/AutorizacionRemota.aspx'
+	],
+	'production' => [
+		'ANY' => '',
+		'BEM' => 'https://15.128.26.90/nbem11/AutorizacionRemota.aspx',
+		'BEP' => 'https://15.128.26.105/nbxi11/AutorizacionRemota.aspx'
+	]
+];

@@ -148,20 +148,25 @@ $(function () {
 					},
 					btn2: {
 						text: lang.GEN_BTN_CANCEL,
-						action: 'close'
+						action: 'destroy'
 					}
 				}
-				var bulkFile = $(this).closest('tr').find('td:nth-child(2)').text();
-				inputModal =	'<form id="delete-bulk-form" name="delete-bulk-form" class="form-group" onsubmit="return false;">';
-				inputModal+= 		'<span class="regular">'+lang.BULK_DELETE_NAME+': '+bulkFile+'</span>';
-				inputModal+=		'<div class="input-group">';
-				inputModal+= 			'<input id="password" class="form-control pwd-input" name="password" type="password" autocomplete="off"';
-				inputModal+=				'placeholder="'+lang.GEN_PLACE_PASSWORD+'">';
-				inputModal+=			'<div class="input-group-append">';
-				inputModal+=				'<span class="input-group-text pwd-action" title="'+lang.GEN_SHOW_PASS+'"><i class="icon-view mr-0"></i></span>';
-				inputModal+=			'</div>';
-				inputModal+=		'</div>';
-				inputModal+= 		'<div class="help-block"></div>';
+				var bulkFile = form.find('input[name="bulkFile"]').val();
+				var bulkDate = form.find('input[name="bulkDate"]').val();
+				inputModal = '<form id="delete-bulk-form" name="delete-bulk-form" class="form-group" onsubmit="return false;">';
+				inputModal += 	'<span>' + lang.BULK_DELETE + ' <strong>' + bulkFile + '</strong> de Fecha: <strong>' + bulkDate + '</strong></span>';
+
+				if (lang.CONF_REMOTE_AUTH == 'OFF') {
+					inputModal+=		'<div class="input-group">';
+					inputModal+= 			'<input class="form-control pwd-input pwd-auth" name="password" type="password" ';
+					inputModal+= 				'autocomplete="off" placeholder="' + lang.GEN_PLACE_PASSWORD + '">';
+					inputModal+=			'<div class="input-group-append">';
+					inputModal+=				'<span class="input-group-text pwd-action" title="'+lang.GEN_SHOW_PASS+'"><i class="icon-view mr-0"></i></span>';
+					inputModal+=			'</div>';
+					inputModal+=		'</div>';
+					inputModal+= 		'<div class="help-block"></div>';
+				}
+
 				inputModal+= 	'</form>';
 				appMessages(lang.BULK_DELETE_TITLE, inputModal, lang.CONF_ICON_INFO, data);
 				$('#cancel').on('click', function(e) {
@@ -186,18 +191,22 @@ $(function () {
 
 		if(formDeleteBulk.valid()) {
 			$(this)
-			.off('click')
-			.html(loader)
-			.prop('disabled', true)
-			.removeClass('delete-bulk-btn');
-			inputPass = cryptoPass($('#password').val());
+				.off('click')
+				.html(loader)
+				.prop('disabled', true)
+				.removeClass('delete-bulk-btn');
 			data = {
 				bulkId: form.find('input[name="bulkId"]').val(),
 				bulkTicked: form.find('input[name="bulkTicked"]').val(),
 				bulkStatus: form.find('input[name="bulkStatus"]').val(),
 				bulkname: form.find('input[name="bulkFile"]').val(),
-				pass: inputPass
+				bulkDate: form.find('input[name="bulkDate"]').val()
 			}
+
+			if (lang.CONF_REMOTE_AUTH == 'OFF') {
+				data.pass = cryptoPass($('.pwd-auth').val());
+			}
+
 			insertFormInput(true, formDeleteBulk);
 			verb = 'POST'; who = 'Bulk'; where = 'DeleteNoConfirmBulk';
 			callNovoCore(verb, who, where, data, function(response) {

@@ -87,7 +87,7 @@ class Novo_User extends NOVO_Controller {
 	 */
 	public function singleSignOn($sessionId = FALSE)
 	{
-		log_message('INFO', 'NOVO User: singleSignOn Method Initialized ****'.$sessionId);
+		log_message('INFO', 'NOVO User: singleSignOn Method Initialized');
 
 		$view = 'singleSignOn';
 		$this->render->send = FALSE;
@@ -319,26 +319,26 @@ class Novo_User extends NOVO_Controller {
 		$responseList = $this->loadModel();
 		$data = $responseList->data;
 		$code = $responseList->code;
-		$registeredUser = 'OFF';
-		$countRegisteredUser = 0;
 
 		if (($code) == 4) {
 			$this->render->userList= [];
+			$this->render->userRegistered = '';
 		}else{
 			$this->render->userList = $data;
-		}
-
-		foreach ($data as $key => $value) {
-			if ($data[$key]->registered == "false") {
-				$countRegisteredUser++;
+			$registeredUser = 'OFF';
+			$countRegisteredUser = 0;
+			foreach ($data as $key => $value) {
+				if ($data[$key]->registered == "false") {
+					$countRegisteredUser++;
+				}
 			}
+
+			if ($countRegisteredUser > 0) {
+				$registeredUser = 'ON';
+			}
+			$this->render->userRegistered = $registeredUser;
 		}
 
-		if ($countRegisteredUser > 0) {
-			$registeredUser = 'ON';
-		}
-
-		$this->render->userRegistered = $registeredUser;
 		$this->responseAttr($responseList);
 		$this->render->titlePage = lang('GEN_MENU_USERS_MANAGEMENT');
 		$this->views = ['user/'.$view];

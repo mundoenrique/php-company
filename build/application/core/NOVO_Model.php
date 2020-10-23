@@ -140,6 +140,10 @@ class NOVO_Model extends CI_Model {
 			case -437:
 				$this->response->msg = novoLang(lang('GEN_FAILED_THIRD_PARTY'), '');
 			break;
+			case 502:
+				$this->response->msg = lang('GEN_MESSAGE_SYSTEM');
+				$this->session->sess_destroy();
+			break;
 			case 504:
 				$this->response->msg = lang('GEN_TIMEOUT');
 			break;
