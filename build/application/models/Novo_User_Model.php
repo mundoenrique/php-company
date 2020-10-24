@@ -885,9 +885,13 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataRequest->className = 'com.novo.objects.TOs.GestionUsuariosTO';
 		$this->dataRequest->userName = $dataRequest->user;
 		$this->dataRequest->idUsuario = $dataRequest->user;
-		$this->dataRequest->nombre1 = $dataRequest->name;
+		$name= explode(" ", $dataRequest->name);
+		$this->dataRequest->nombre1 = $name[0];
 		$this->dataRequest->nombre2 = '';
-		$this->dataRequest->apellido1 = $dataRequest->name;;
+		$this->dataRequest->apellido1 = $name[1];
+		if( $name[1] == NULL){
+			$this->dataRequest->apellido1 = "";
+		}
 		$this->dataRequest->apellido2 = '';
 		$this->dataRequest->clonarPermisos = 'true';
 		$this->dataRequest->mail = $dataRequest->mail;;
