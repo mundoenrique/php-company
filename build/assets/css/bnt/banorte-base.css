@@ -1460,6 +1460,10 @@ label {
 .right { float: right !important }
 .float-none { float: none !important }
 
+/* Coordinates */
+.l-0  { left: 0 !important }
+.r-0 { right: 0 !important }
+
 /* Overflow */
 .overflow-auto   { overflow: auto !important }
 .overflow-hidden { overflow: hidden !important }

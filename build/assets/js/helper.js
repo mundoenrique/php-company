@@ -357,7 +357,7 @@ function getauhtKey() {
 			$('#accept')
 				.prop('disabled', false)
 				.removeClass('sender');
-			getResponse(true, 'Hola mundo')
+			getResponse('false', 'Hola mundo')
 		});
 	} */
 	$('#accept').removeClass('get-auth-key');
@@ -400,6 +400,7 @@ function getauhtKey() {
 function getResponse(Exitoso, MensajeError) {
 	$('#system-info').dialog('destroy');
 	$('#system-msg').removeClass('w-100 vh-100');
+	Exitoso = (Exitoso === 'true');
 
 	if (Exitoso) {
 		switch (remoteFunction) {

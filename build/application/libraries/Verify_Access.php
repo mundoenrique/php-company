@@ -246,7 +246,11 @@ class Verify_Access {
 				case 'userActivity':
 				case 'exportToExcelUserActivity':
 				case 'exportToPDFUserActivity':
-					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPUSU'));
+					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPUSU') && lang('CONF_USER_ACTIVITY') == 'ON');
+				break;
+				case 'usersActivity':
+				case 'exportExcelUsersActivity':
+					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPUSU') && lang('CONF_USERS_ACTIVITY') == 'ON');
 				break;
 				case 'accountStatus':
 					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPEDO'));
