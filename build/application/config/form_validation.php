@@ -930,7 +930,7 @@ $config = [
 		[
 			'field' => 'modalReq',
 			'label' => 'modalReq',
-			'rules' => 'trim|required'
+			'rules' => 'trim'
 		]
 	],
 	'dash-products' => [
