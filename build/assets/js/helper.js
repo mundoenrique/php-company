@@ -400,7 +400,7 @@ function getauhtKey() {
 function getResponse(Exitoso, MensajeError) {
 	$('#system-info').dialog('destroy');
 	$('#system-msg').removeClass('w-100 vh-100');
-	Exitoso = (Exitoso === 'true');
+	Exitoso = (Exitoso === 'true' || Exitoso === true);
 
 	if (Exitoso) {
 		switch (remoteFunction) {
