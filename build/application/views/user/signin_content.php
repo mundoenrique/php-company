@@ -19,15 +19,15 @@
 			<?php endif; ?>
 
 			<div class="widget-content">
-				<form id="login-form" name="login-form" accept-charset="utf-8">
+				<form id="signInForm" name="signInForm" accept-charset="utf-8">
 					<fieldset>
-						<label for="user_login"><?= lang('GEN_USER'); ?></label>
-						<input type="text" id="user_login" name="user_login" maxlength="15" required disabled>
-						<label for="user_pass"><?= lang('GEN_PASSWORD'); ?></label>
-						<input type="password" id="user_pass" name="user_pass" maxlength="15" required disabled>
+						<label for="userName"><?= lang('GEN_USER'); ?></label>
+						<input type="text" id="userName" name="userName" maxlength="15" required disabled>
+						<label for="userPass"><?= lang('GEN_PASSWORD'); ?></label>
+						<input type="password" id="userPass" name="userPass" maxlength="15" required disabled>
 					</fieldset>
 					<div class="general-form-msg"></div>
-					<button id="login-btn" name="login-btn" class="btn-sidebar" disabled><?= lang('LOGIN_BTN') ?></button>
+					<button id="signInBtn" name="signInBtn" class="btn-sidebar" disabled><?= lang('LOGIN_BTN') ?></button>
 				</form>
 
 				<div class="align-center">

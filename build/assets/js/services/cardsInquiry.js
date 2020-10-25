@@ -1,6 +1,5 @@
 'use strict'
 var table;
-var inputModal;
 var dataRquest;
 var cardsData;
 var userInfo;
@@ -400,7 +399,7 @@ function applyActions(currentAction, currentForm, currentBtn) {
 		}
 
 		if (lang.CONF_REMOTE_AUTH == 'OFF') {
-			data.pass = userInfo.password ? cryptoPass(userInfo.password) : cryptoPass(userInfo.passAction);
+			data.password = userInfo.password ? cryptoPass(userInfo.password) : cryptoPass(userInfo.passAction);
 		}
 
 		currentBtn

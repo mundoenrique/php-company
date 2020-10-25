@@ -62,7 +62,7 @@
 		<span id="system-msg" class="system-msg"><?= lang('GEN_MESSAGE_SYSTEM'); ?></span>
 	</p>
 	<div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-		<div class="ui-dialog-buttonset novo-dialog-buttonset">
+		<div class="ui-dialog-buttonset novo-dialog-buttonset modal-buttonset">
 			<button type="button" id="cancel" class="btn-modal cancel-button novo-btn-secondary-modal dialog-buttons">
 				<?= lang('GEN_BTN_CANCEL'); ?>
 			</button>

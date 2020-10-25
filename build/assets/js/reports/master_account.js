@@ -107,7 +107,6 @@ function dialog(e){
 			lang.CONF_MODAL_WIDTH = 200;
 			var titleModalExcel = 'Exportar a EXCEL de consolidado';
 			var oldID = $('#accept').attr('id');
-			var inputModal;
 			modalReq['table'] = $(this).closest('table');
 			$('#accept').attr('id', 'download-consolid');
 			data = {
@@ -144,7 +143,6 @@ function dialog(e){
 			case 'Exportar a PDF consolidado':
 				var titleModalPdf = 'Exportar a PDF consolidado';
 				var oldID = $('#accept').attr('id');
-				var inputModal;
 				modalReq['table'] = $(this).closest('table');
 				$('#accept').attr('id', 'download-consolidpdf');
 				data = {

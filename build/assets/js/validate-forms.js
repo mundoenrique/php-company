@@ -95,7 +95,7 @@ function validateForms(form, options) {
 			"email": {pattern: emailValid},
 			"new-pass": {differs: "#current-pass", validatePass: true},
 			"confirm-pass": {equalTo: "#new-pass"},
-			"user_login":{
+			"userName":{
 				required: {
         	depends:function(){
             $(this).val($.trim($(this).val()));
@@ -104,8 +104,7 @@ function validateForms(form, options) {
 				},
 				pattern: alphanumunder
 			},
-
-			"user_pass":{
+			"userPass":{
 				required: {
         	depends:function(){
             $(this).val($.trim($(this).val()));
@@ -145,7 +144,7 @@ function validateForms(form, options) {
 			"idTipoLote": {pattern: numeric},
 			"id-document": {pattern: numeric},
 			"card-number": {pattern: numeric},
-			"codeOTP": {required: true, pattern: validCode, maxlength: 8},
+			"otpCode": {required: true, pattern: validCode},
 			"saveIP": {pattern: numeric}
 		},
 		messages: {
@@ -163,7 +162,7 @@ function validateForms(form, options) {
 				equalTo: 'Debe ser igual a su nueva contraseña'
 			},
 			"start-my-date": "Falla la fecha",
-			"codeOTP": {
+			"otpCode": {
 				required: 'Este campo es obligatorio.',
 				pattern: 'El formato de código es inválido.',
 				maxlength: 'El formato de código es inválido.'

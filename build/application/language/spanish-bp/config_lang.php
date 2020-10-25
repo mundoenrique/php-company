@@ -28,4 +28,4 @@ $lang['CONF_VALID_POSITION'] = 'left';
 $lang['CONF_MODAL_WIDTH'] = 310;
 //MODAL OTP
 $lang['MODAL_OTP'] = 'ON';
-$lang['RESTART_LOGIN'] = 'ON';
+$lang['CONF_RESTAR_USERNAME'] = 'ON';

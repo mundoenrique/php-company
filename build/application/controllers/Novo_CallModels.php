@@ -36,7 +36,7 @@ class Novo_CallModels extends Novo_Controller {
 			}
 		}
 
-		$this->appUserName = isset($_POST['user']) ? mb_strtoupper($_POST['user']) : $this->session->userName;
+		$this->appUserName = isset($_POST['userName']) ? mb_strtoupper($_POST['userName']) : $this->session->userName;
 
 		log_message('DEBUG', 'NOVO ['.$this->appUserName.'] REQUEST FROM THE VIEW '.json_encode($this->dataRequest, JSON_UNESCAPED_UNICODE));
 

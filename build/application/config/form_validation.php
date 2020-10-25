@@ -1,25 +1,21 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed');
 
 $config = [
-	'login' => [
+	'signIn' => [
 		[
-			'field' => 'user',
-			'label' => 'user',
+			'field' => 'userName',
 			'rules' => 'trim|regex_match[/^([\wñÑ.\-+&]+)+$/i]|required'
 		],
 		[
-			'field' => 'pass',
-			'label' => 'pass',
-			'rules' => 'trim|required'
+			'field' => 'userPass',
+			'rules' => 'trim|regex_match[/^([a-zA-Z0-9=]+)+$/i]|required'
 		],
 		[
-			'field' => 'codeOTP',
-			'label' => 'codeOTP',
+			'field' => 'otpCode',
 			'rules' => 'trim|regex_match[/^[a-z0-9]+$/i]'
 		],
 		[
 			'field' => 'saveIP',
-			'label' => 'saveIP',
 			'rules' => 'trim'
 		]
 	],
@@ -43,8 +39,7 @@ $config = [
 	],
 	'finishSession' => [
 		[
-			'field' => 'user',
-			'label' => 'user',
+			'field' => 'userName',
 			'rules' => 'trim|regex_match[/^([\wñÑ]+)+$/i]|required'
 		]
 	],
@@ -930,6 +925,25 @@ $config = [
 		[
 			'field' => 'modalReq',
 			'label' => 'modalReq',
+			'rules' => 'trim'
+		]
+	],
+	// Old Arquitectures
+	'login' => [
+		[
+			'field' => 'userName',
+			'rules' => 'trim|regex_match[/^([\wñÑ.\-+&]+)+$/i]|required'
+		],
+		[
+			'field' => 'userPass',
+			'rules' => 'trim|regex_match[/^([a-zA-Z0-9=]+)+$/i]|required'
+		],
+		[
+			'field' => 'otpCode',
+			'rules' => 'trim|regex_match[/^[a-z0-9]+$/i]'
+		],
+		[
+			'field' => 'saveIP',
 			'rules' => 'trim'
 		]
 	],

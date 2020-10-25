@@ -289,7 +289,6 @@ function dialogE(e){
   var submitForm = false;
   $(this).closest('tr').addClass('select');
   var titleModal = 'Funciones';
-  var inputModal;
   modalReq['table'] = $(this).closest('table');
   data = {
     btn1: {

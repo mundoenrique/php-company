@@ -5556,8 +5556,8 @@ fieldset {
 	padding: 0;
 }
 
-#user_pass,
-#user_login,
+#userName,
+#userPass,
 .input-middle {
 	width: calc(100% - 22px);
 	width: stretch;
@@ -5573,7 +5573,7 @@ fieldset {
 }
 
 .btn-middle,
-#login-btn {
+#signInBtn {
 	height: 35px;
 	position: relative;
 	width: 100%;

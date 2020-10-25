@@ -142,7 +142,6 @@ $(function () {
 				break;
 			case lang.GEN_BTN_CANCEL_ORDER:
 				var oldID = $('#accept').attr('id');
-				var inputModal;
 				var inputSelected = form.find('input[name="OrderNumber"]').val();
 				$(this).closest('tr').addClass('select');
 				$('#accept').attr('id', 'delete-bulk-btn');

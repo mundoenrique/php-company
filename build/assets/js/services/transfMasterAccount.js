@@ -4,7 +4,6 @@ var access;
 var params;
 var balance;
 var cardsData;
-var inputModal;
 var cardHolderInf;
 $(function () {
 	var getAmount;

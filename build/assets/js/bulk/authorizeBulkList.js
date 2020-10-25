@@ -145,7 +145,6 @@ $(function () {
 				var cancelDelete = $('#cancel');
 				$('#accept').attr('id', currentIdBtn);
 				var bulkNum = $(this).closest('tr').find('.bulk-num').text();
-				var inputModal;
 				modalReq['table'] = $(this).closest('table');
 				data = {
 					btn1: {

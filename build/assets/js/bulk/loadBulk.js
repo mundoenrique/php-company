@@ -140,7 +140,6 @@ $(function () {
 				form = $(this).parent().find('form')
 				$(this).closest('tr').addClass('select');
 				$('#accept').addClass('delete-bulk-btn');
-				var inputModal;
 				data = {
 					btn1: {
 						text: lang.GEN_BTN_DELETE,

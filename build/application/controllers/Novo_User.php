@@ -47,8 +47,9 @@ class Novo_User extends NOVO_Controller {
 			$this->includeAssets->jsFiles,
 			"third_party/jquery.balloon",
 			"third_party/jquery.validate",
-			"validate".lang('CONF_VIEW_SUFFIX')."-forms",
+			"validate-forms",
 			"third_party/additional-methods",
+			"googleRecaptcha",
 			"user/login"
 		);
 
@@ -59,6 +60,53 @@ class Novo_User extends NOVO_Controller {
 				"user/kwicks"
 			);
 		}
+
+		if($this->skin === 'pichincha' && ENVIRONMENT === 'production') {
+			array_push(
+				$this->includeAssets->jsFiles,
+				"third_party/borders"
+			);
+		}
+
+		$this->render->skipProductInf = TRUE;
+		$this->render->titlePage = lang('GEN_SYSTEM_NAME');
+		$this->views = $views;
+		$this->loadView($view);
+	}
+	/**
+	 * @info Método que renderiza la vista de inicio de sesión
+	 * @author J. Enrique Peñaloza Piñero.
+	 * @date October 24th, 2020
+	 */
+	public function signIn()
+	{
+		log_message('INFO', 'NOVO User: signIn Method Initialized');
+
+		if($this->session->has_userdata('logged')) {
+			redirect(base_url('empresas'), 'location', 301);
+			exit();
+		}
+
+		if ($this->session->has_userdata('userId')) {
+			clearSessionsVars();
+		}
+
+		$view = 'signIn';
+
+		if(ACTIVE_RECAPTCHA) {
+			$this->load->library('recaptcha');
+			$this->render->scriptCaptcha = $this->recaptcha->getScriptTag();
+		}
+
+		array_push(
+			$this->includeAssets->jsFiles,
+			"third_party/jquery.balloon",
+			"third_party/jquery.validate",
+			"validate-core-forms",
+			"third_party/additional-methods",
+			"googleRecaptcha",
+			"user/signIn"
+		);
 
 		if($this->skin === 'pichincha' && ENVIRONMENT === 'production') {
 			array_push(
@@ -78,7 +126,7 @@ class Novo_User extends NOVO_Controller {
 
 		$this->render->skipProductInf = TRUE;
 		$this->render->titlePage = lang('GEN_SYSTEM_NAME');
-		$this->views = $views;
+		$this->views = ['user/signin'];
 		$this->loadView($view);
 	}
 	/**

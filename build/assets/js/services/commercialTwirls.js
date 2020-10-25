@@ -1,5 +1,4 @@
 'use strict'
-var inputModal;
 var cardnumber;
 $(function () {
 	$('.hide-out').removeClass('hide');

@@ -1,6 +1,8 @@
 'use strict'
 var currenTime;
 var screenSize;
+var inputModal;
+var modalBtn;
 var verb, who, where, dataResponse, ceo_cook, btnText, form, cypherPass;
 var loader = $('#loader').html();
 var validatePass = /^[\w!@\*\-\?¡¿+\/.,#ñÑ]+$/;
@@ -107,7 +109,6 @@ function callNovoCore(verb, who, where, request, _response_) {
 	});
 	var codeResp = parseInt(lang.GEN_DEFAULT_CODE);
 	var formData = new FormData();
-
 	dataRequest = cryptoPass(dataRequest, true);
 
 	if (request.file) {
@@ -139,7 +140,6 @@ function callNovoCore(verb, who, where, request, _response_) {
 	}).done(function (response, status, jqXHR) {
 
 		response = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, { format: CryptoJSAesJson }).toString(CryptoJS.enc.Utf8));
-
 		var modalClose = response.modal ? false : true;
 
 		if ($('#system-info').parents('.ui-dialog').length && modalClose) {
@@ -149,8 +149,10 @@ function callNovoCore(verb, who, where, request, _response_) {
 			$('#system-info').dialog('destroy');
 		}
 
+		modalBtn = response.data.btn1 ? response.data : response.modalBtn
+
 		if (response.code === codeResp) {
-			appMessages(response.title, response.msg, response.icon, response.data);
+			appMessages(response.title, response.msg, response.icon, modalBtn);
 		}
 
 		_response_(response);
@@ -221,7 +223,6 @@ function appMessages(title, message, icon, data) {
 			}
 
 			$('#system-msg').html(message);
-			$('#accept, #cancel').removeClass("ui-button ui-corner-all ui-widget");
 
 			if (!btn1) {
 				$('#accept').hide();
@@ -231,8 +232,6 @@ function appMessages(title, message, icon, data) {
 
 			if (!btn2) {
 				$('#cancel').hide();
-				$('#accept').addClass('modal-btn-primary');
-				$('.novo-dialog-buttonset').addClass('modal-buttonset');
 			} else {
 				createButton($('#cancel'), btn2);
 			}

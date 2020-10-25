@@ -1,12 +1,197 @@
 'use strict'
+'use strict'
 $(function () {
+	$.balloon.defaults.css = null;
+	insertFormInput(false);
+
+	$('#userPass').on('keyup', function () {
+		$(this).attr('type', 'password')
+	});
+
+	$('#userName, #userPass').on('keyup', function () {
+		$(this).removeClass('validate-error');
+		if ($('#userName').val() != '' && $('#userPass').val() != '') {
+			$(".general-form-msg").html('');
+		}
+	});
+
+	$('#system-info').on('keyup', '#otpCode', function () {
+		$(this).removeClass('validate-error');
+		if ($('#otpCode').val() != '') {
+			$(".help-block").html('');
+		}
+	});
+
+	$('#signInBtn').on('click', function (e) {
+		e.preventDefault();
+		form = $('#signInForm');
+		formInputTrim(form);
+		validateForms(form, { handleMsg: false })
+
+		if (form.valid()) {
+			btnText = $(this).html();
+			data = getDataForm(form);
+			data.userPass = cryptoPass(data.userPass);
+			data.active = '';
+			data.currentTime = new Date().getHours();
+			$(this).html(loader);
+			insertFormInput(true);
+
+			getRecaptchaToken('SignIn', function (recaptchaToken) {
+				data.token = recaptchaToken;
+				getSignIn('SignIn');
+			});
+		} else if ($('#userName').val() == '' || $('#userPass').val() == '') {
+			$(".general-form-msg").html('Todos los campos son requeridos');
+		} else {
+			$(".general-form-msg").html('Combinación incorrecta de usuario y contraseña');
+		}
+	});
+
+	$('#system-info').on('click', '.session-close', function () {
+		$(this)
+			.html(loader)
+			.prop('disabled', true)
+			.removeClass('session-close');
+
+		getSignIn('FinishSession');
+	});
+
+	$('#system-info').on('click', '.send-otp', function () {
+		form = $('#formVerificationOTP');
+		formInputTrim(form);
+		validateForms(form, { handleMsg: false })
+
+		if (form.valid()) {
+			$(this)
+				.html(loader)
+				.prop('disabled', true)
+				.removeClass('send-otp');
+			insertFormInput(true);
+
+			getRecaptchaToken('verifyIP', function (recaptchaToken) {
+				data.token = recaptchaToken;
+				data.otpCode = $('#otpCode').val();
+				data.saveIP = $('#acceptAssert').is(':checked') ? true : false;
+				getSignIn('SignIn');
+			});
+		} else {
+			$(".help-block").html(lang.VALIDATE_OTP_CODE);
+		}
+	});
+});
+
+function getSignIn(forWhere) {
+	verb = 'POST'; who = 'User'; where = forWhere;
+	callNovoCore(verb, who, where, data, function (response) {
+		switch (response.code) {
+			case 0:
+				if (forWhere == 'SignIn') {
+					$(location).attr('href', response.data);
+				}
+				break;
+			case 1:
+				$('#userName').showBalloon({
+					html: true,
+					classname: response.className,
+					position: response.position,
+					contents: response.msg
+				});
+				break;
+			case 2:
+				$('#accept').addClass('send-otp');
+				response.modalBtn.minWidth = 480;
+				response.modalBtn.maxHeight = 'none';
+				response.modalBtn.posAt = 'center top';
+				response.modalBtn.posMy = 'center top+160';
+
+				inputModal = '<form id="formVerificationOTP" name="formVerificationOTP" class="mr-2" method="post" onsubmit="return false;">';
+				inputModal += '<p class="pt-0 p-0">' + response.msg + '</p>';
+				inputModal += '<div class="row">';
+				inputModal += '<div class="form-group col-8">';
+				inputModal += '<label for="otpCode">' + response.labelInput + '</label>'
+				inputModal += '<input id="otpCode" class="form-control" type="text" name="otpCode" autocomplete="off" maxlength="10">';
+				inputModal += '<div class="help-block"></div>'
+				inputModal += '</div">';
+				inputModal += '</div>';
+				inputModal += '<div class="form-group custom-control custom-switch mb-0">'
+				inputModal += '<input id="acceptAssert" class="custom-control-input" type="checkbox" name="acceptAssert">'
+				inputModal += '<label class="custom-control-label" for="acceptAssert">' + response.assert + '</label>'
+				inputModal += '</div">'
+				inputModal += '</form>';
+
+				windowsStyle();
+				appMessages(response.title, inputModal, '', response.modalBtn);
+				break;
+			default:
+				if (response.data == 'session-close') {
+					$('#accept').addClass(response.data);
+				}
+		}
+
+		if (response.code != 0) {
+			$('#userPass').val('');
+			$('#signInBtn').html(btnText);
+			insertFormInput(false);
+
+			if (lang.CONF_RESTAR_USERNAME == 'ON') {
+				$('#userPass').val('');
+			}
+
+			setTimeout(function () {
+				$("#userName").hideBalloon();
+			}, 2000);
+		}
+	});
+}
+
+function windowsStyle() {
+	$('#system-msg').css("width", "auto");
+	if (lang.MODAL_OTP == 'ON') {
+		var styles = {
+			float: "none",
+			margin: "auto"
+		};
+		$("#system-info .ui-dialog-buttonpane").css(styles).removeClass("modal-buttonset");
+		$("#system-info .ui-dialog-buttonset").removeClass("modal-buttonset");
+		$("#system-info .btn-modal").removeClass("modal-btn-primary");
+	} else {
+		$("#label_codeOTP").addClass("line-field");
+		$("#codeOTP").addClass("input-field");
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* $(function () {
 	var userCred, forWho, forWhere;
-	var userLogin = $('#user_login');
-	var userPass = $('#user_pass');
+	var userLogin = $('#userName');
+	var userPass = $('#userName');
 	var loginIpMsg, formcodeOTP, btnTextOtp;
 	var captcha = lang.GEN_ACTIVE_RECAPTCHA;
 
-	$('#user_pass').on('keyup', function() {
+	$('#userName').on('keyup', function() {
 		$(this).attr('type', 'password')
 	})
 	$.balloon.defaults.css = null;
@@ -69,23 +254,23 @@ $(function () {
 		inputDisabled(false);
 		$('#login-btn').html(btnText);
 		userPass.val('');
-		if (lang.RESTART_LOGIN=='ON') {
+
+		if (lang.CONF_RESTAR_USERNAME == 'ON') {
 			userLogin.val('');
 		}
+
 		setTimeout(function () {
-			$("#user_login").hideBalloon();
+			$("#userName").hideBalloon();
 		}, 2000);
 	};
 
 	function getCredentialsUser() {
-		cypherPass = (userPass.val() === '' && userCred) ? userCred.pass : cryptoPass(userPass.val());
 		return {
-			user: userLogin.val(),
-			pass: cypherPass,
+			userName: userLogin.val(),
+			userPass: cryptoPass(userPass.val()),
 			active: '',
 			codeotp: $('#codeOTP').val() ? $('#codeOTP').val() : '',
-			saveip : $('#acceptAssert').prop('checked') ? $('#acceptAssert').prop('checked') : '',
-			modalreq : $('#codeOTP').val() ? true : ''
+			saveIP : $('#acceptAssert').prop('checked') ? $('#acceptAssert').prop('checked') : ''
 		}
 	};
 
@@ -212,7 +397,7 @@ $(function () {
 		}
 	}
 
-	$('#user_login, #user_pass').on('focus keypress', function () {
+	$('#userName, #userName').on('focus keypress', function () {
 		$(this).removeClass('validate-error');
 		verifyPassValidate();
 	});
@@ -243,3 +428,4 @@ $(function () {
 		}
 	}
 })
+ */
