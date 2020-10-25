@@ -1041,7 +1041,7 @@ class Novo_Reports_Model extends NOVO_Model {
       break;
 		}
 
-    $this->response->data['cardHoldersList'] = $cardHoldersList;
+    $this->response->data->cardHoldersList = $cardHoldersList;
 
     return $this->responseToTheView('callWS_StatusCardHolders');
 	}
@@ -1094,7 +1094,7 @@ class Novo_Reports_Model extends NOVO_Model {
       break;
 		}
 
-    $this->response->data['rechargeMadeList'] = $rechargeMadeList;
+    $this->response->data->rechargeMadeList = $rechargeMadeList;
 
     return $this->responseToTheView('callWS_RechargeMadeReport');
 	}
@@ -1131,8 +1131,8 @@ class Novo_Reports_Model extends NOVO_Model {
         $this->response->code = 0;
       break;
     }
-		$this->response->data['issuedCardsList'] = $issuedCardsList;
-		$this->response->data['tipoConsulta'] = $this->dataRequest->tipoConsulta;
+		$this->response->data->issuedCardsList = $issuedCardsList;
+		$this->response->data->tipoConsulta = $this->dataRequest->tipoConsulta;
 
     return $this->responseToTheView('callWS_IssuedCardsReport');
 	}
@@ -1242,7 +1242,7 @@ class Novo_Reports_Model extends NOVO_Model {
 			break;
 		}
 
-		$this->response->data['usersActivity'] = $usersActivity;
+		$this->response->data->usersActivity = $usersActivity;
 
 		return $this->responseToTheView('callWs_usersActivity');
 	}
@@ -1277,9 +1277,9 @@ class Novo_Reports_Model extends NOVO_Model {
 				$file = $response->bean->archivo;
 				$name = $response->bean->nombreArchivo;
 				$ext =  '.xlsx';
-				$this->response->data['file'] = $file;
-				$this->response->data['name'] = $name;
-				$this->response->data['ext'] = $ext;
+				$this->response->data->file = $file;
+				$this->response->data->name = $name;
+				$this->response->data->ext = $ext;
 			break;
 			default:
 				$this->response->code = 4;
@@ -1464,8 +1464,8 @@ class Novo_Reports_Model extends NOVO_Model {
 					($dataAccount[$key])['id'] = $response->listadoEstadosCuentas[$key]->idExtPer;
 				}
 
-				$this->response->data['users'] = $data;
-				$this->response->data['accounts'] = $dataAccount;
+				$this->response->data->users = $data;
+				$this->response->data->accounts = $dataAccount;
 			break;
 			case -444:
 				$this->response->icon = lang('CONF_ICON_DANGER');
@@ -1475,7 +1475,7 @@ class Novo_Reports_Model extends NOVO_Model {
 			break;
 			case -150:
 				$this->response->code = 1;
-				$this->response->data['users'] = '';
+				$this->response->data->users = '';
 			break;
 		}
 

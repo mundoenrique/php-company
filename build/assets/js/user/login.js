@@ -87,7 +87,13 @@ function getSignIn(forWhere) {
 		switch (response.code) {
 			case 0:
 				if (forWhere == 'SignIn') {
-					$(location).attr('href', response.data);
+					var link = response.data;
+
+					if (link.indexOf('dashboard') != -1) {
+						link = link.replace('/' + country + '/', '/' + oldCountry + '/',);
+					}
+
+					$(location).attr('href', link);
 				}
 				break;
 			case 1:

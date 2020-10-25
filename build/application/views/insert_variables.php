@@ -4,6 +4,7 @@
 	var baseURL = '<?= base_url(); ?>';
 	var assetUrl = '<?= assetUrl(); ?>';
 	var country = '<?= $countryUri; ?>';
+	var oldCountry = '<?= $this->config->item('country'); ?>';
 	var client = '<?= $this->config->item('client'); ?>';
 	var newViews = '<?= lang('CONF_VIEW_SUFFIX'); ?>';
 	var code = <?= $code ?? 0; ?>;

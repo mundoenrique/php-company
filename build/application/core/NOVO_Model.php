@@ -92,6 +92,7 @@ class NOVO_Model extends CI_Model {
 		$this->response->code = lang('GEN_DEFAULT_CODE');
 		$this->response->icon = lang('CONF_ICON_WARNING');
 		$this->response->title = lang('GEN_SYSTEM_NAME');
+		$this->response->data = new stdClass();
 		$this->response->msg = '';
 
 		switch ($model) {
@@ -119,12 +120,6 @@ class NOVO_Model extends CI_Model {
 				'action'=> 'redirect'
 			]
 		];
-		$this->response->data = $arrayResponse;
-
-		if(!$this->input->is_ajax_request()) {
-			$this->response->data = new stdClass();
-			$this->response->data->resp = $arrayResponse;
-		}
 
 		switch($this->isResponseRc) {
 			case -29:

@@ -253,17 +253,14 @@ class NOVO_Controller extends CI_Controller {
 			}
 		}
 
-		log_message('info', '*********************'.json_encode($responseView));
-
-		//if ($this->render->code > 2) {
+		if ($this->render->code > 2) {
 			$this->render->title = $responseView->title;
 			$this->render->msg = $responseView->msg;
 			$this->render->icon = $responseView->icon;
-			$this->render->data = json_encode($responseView->data->resp);
 			$this->render->data = json_encode($responseView->modalBtn);
-		//} elseif(isset($responseView->data->params))  {
-			//$this->render->params = json_encode($responseView->data->params);
-		//}
+		} elseif(isset($responseView->data->params))  {
+			$this->render->params = json_encode($responseView->data->params);
+		}
 	}
 	/**
 	 * Método para validar la versión de browser

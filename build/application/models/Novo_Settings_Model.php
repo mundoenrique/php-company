@@ -295,9 +295,9 @@ class Novo_Settings_Model extends NOVO_Model {
 				$file = $response->archivo;
 					$name = $response->nombre;
 					$ext =  mb_strtolower($response->formatoArchivo);
-				$this->response->data['file'] = $file;
-				$this->response->data['name'] = $name.'.'.$ext;
-				$this->response->data['ext'] = $ext;
+				$this->response->data->file = $file;
+				$this->response->data->name = $name.'.'.$ext;
+				$this->response->data->ext = $ext;
 			break;
 			default:
 				$this->response->code = 4;

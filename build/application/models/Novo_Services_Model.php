@@ -255,11 +255,11 @@ class Novo_Services_Model extends NOVO_Model {
 					$this->response->msg = lang('SERVICES_TRANSACTION_DATA');
 				}
 
-				$this->response->data['listResponse'] = $listResopnse;
-				$this->response->data['listFail'] = $listFail;
+				$this->response->data->listResponse = $listResopnse;
+				$this->response->data->listFail = $listFail;
 
 				if (isset($response->maestroDeposito)) {
-					$this->response->data['balance'] = lang('GEN_CURRENCY').' '.$response->maestroDeposito->saldoDisponible;
+					$this->response->data->balance = lang('GEN_CURRENCY').' '.$response->maestroDeposito->saldoDisponible;
 				}
 			break;
 			case -1:
@@ -392,9 +392,9 @@ class Novo_Services_Model extends NOVO_Model {
 				$this->response->code = 0;
 
 				if (isset($dataRequest->action)) {
-					$this->response->data['file'] = $response->archivo;
-					$this->response->data['name'] = $response->nombre.'.xls';
-					$this->response->data['ext'] = 'xls';
+					$this->response->data->file = $response->archivo;
+					$this->response->data->name = $response->nombre.'.xls';
+					$this->response->data->ext = 'xls';
 				} else {
 					foreach ($response->detalleEmisiones AS $cards) {
 						$record = new stdClass();
@@ -456,9 +456,9 @@ class Novo_Services_Model extends NOVO_Model {
 				}
 		}
 
-		$this->response->data['cardsList'] = $cardsList;
-		$this->response->data['operList'] = $operList;
-		$this->response->data['massiveOptions'] = $massiveOptions;
+		$this->response->data->cardsList = $cardsList;
+		$this->response->data->operList = $operList;
+		$this->response->data->massiveOptions = $massiveOptions;
 
 		return $this->responseToTheView('callWs_CardsInquiry');
 	}
@@ -577,8 +577,8 @@ class Novo_Services_Model extends NOVO_Model {
 			break;
 		}
 
-		$this->response->data['balanceList'] = $balanceList;
-		$this->response->data['failList'] = $failList;
+		$this->response->data->balanceList = $balanceList;
+		$this->response->data->failList = $failList;
 
 		return $this->responseToTheView('callWs_InquiriesActions');
 	}
@@ -632,12 +632,12 @@ class Novo_Services_Model extends NOVO_Model {
 					 unset($shops[$key]);
 				 };
 
-				$this->response->data['dataTwirls'] = (array)$dataTwirls;
-				$this->response->data['shops'] = (array)$shops;
+				$this->response->data->dataTwirls = (array)$dataTwirls;
+				$this->response->data->shops = (array)$shops;
 			break;
 			case -438:
 				$shops = new stdClass();
-				$this->response->data['shops']= $response->bean->cards[0];
+				$this->response->data->shops = $response->bean->cards[0];
 				$this->response->title = lang('GEN_COMMERCIAL_TWIRLS_TITTLE');
 				$this->response->icon =  lang('CONF_ICON_WARNING');
         $this->response->modalBtn['btn1']['action'] = 'close';
@@ -801,8 +801,8 @@ class Novo_Services_Model extends NOVO_Model {
 					 unset($limits[$key]);
 				 };
 
-				$this->response->data['dataLimits'] = (array)$dataLimits;
-				$this->response->data['limits'] = (array)$limits;
+				$this->response->data->dataLimits = (array)$dataLimits;
+				$this->response->data->limits = (array)$limits;
 
 			break;
 			case -447:

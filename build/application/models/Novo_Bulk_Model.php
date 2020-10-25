@@ -348,7 +348,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 				$detailBulk['bulkType'] = $response->lotesTO->tipoLote;
 				$detailBulk['bulkNumber'] = $response->lotesTO->numLote;
 				$detailBulk['totaRecords'] = $response->lotesTO->cantRegistros;
-				$detailBulk['amount'] = currencyFormat($response->lotesTO->monto);
+				$detailBulk['amount'] = $response->lotesTO->monto != '' ? currencyFormat($response->lotesTO->monto) : '';
 				$detailBulk['bulkTicked'] = $response->lotesTO->idTicket;
 				$detailBulk['success'] = 'Lote cargado exitosamente';
 
