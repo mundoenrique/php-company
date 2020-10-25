@@ -112,18 +112,18 @@ function getSignIn(forWhere) {
 				response.modalBtn.posMy = 'center top+160';
 
 				inputModal = '<form id="formVerificationOTP" name="formVerificationOTP" class="mr-2" method="post" onsubmit="return false;">';
-				inputModal += '<p class="pt-0 p-0">' + response.msg + '</p>';
-				inputModal += '<div class="row">';
-				inputModal += '<div class="form-group col-8">';
-				inputModal += '<label for="otpCode">' + response.labelInput + '</label>'
-				inputModal += '<input id="otpCode" class="form-control" type="text" name="otpCode" autocomplete="off" maxlength="10">';
-				inputModal += '<div class="help-block"></div>'
-				inputModal += '</div">';
-				inputModal += '</div>';
-				inputModal += '<div class="form-group custom-control custom-switch mb-0">'
-				inputModal += '<input id="acceptAssert" class="custom-control-input" type="checkbox" name="acceptAssert">'
-				inputModal += '<label class="custom-control-label" for="acceptAssert">' + response.assert + '</label>'
-				inputModal += '</div">'
+				inputModal += 	'<p class="pt-0 p-0">' + response.msg + '</p>';
+				inputModal += 	'<div class="row">';
+				inputModal += 		'<div class="form-group col-8">';
+				inputModal += 			'<label for="otpCode">' + response.labelInput + '</label>'
+				inputModal += 			'<input id="otpCode" class="form-control" type="text" name="otpCode" autocomplete="off" maxlength="10">';
+				inputModal += 			'<div class="help-block"></div>'
+				inputModal += 		'</div">';
+				inputModal += 	'</div>';
+				inputModal += 	'<div class="form-group custom-control custom-switch mb-0">'
+				inputModal += 		'<input id="acceptAssert" class="custom-control-input" type="checkbox" name="acceptAssert">'
+				inputModal += 		'<label class="custom-control-label" for="acceptAssert">' + response.assert + '</label>'
+				inputModal += 	'</div">'
 				inputModal += '</form>';
 
 				windowsStyle();
