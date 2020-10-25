@@ -2,7 +2,6 @@
 var currenTime;
 var screenSize;
 var inputModal;
-var modalBtn;
 var verb, who, where, dataResponse, ceo_cook, btnText, form, cypherPass;
 var loader = $('#loader').html();
 var validatePass = /^[\w!@\*\-\?¡¿+\/.,#ñÑ]+$/;
@@ -33,7 +32,7 @@ $(function () {
 	});
 
 	if (code > 2) {
-		appMessages(title, msg, icon, data)
+		appMessages(title, msg, icon, modalBtn)
 	}
 
 	$('.big-modal').on('click', function () {
@@ -149,10 +148,8 @@ function callNovoCore(verb, who, where, request, _response_) {
 			$('#system-info').dialog('destroy');
 		}
 
-		modalBtn = response.data.btn1 ? response.data : response.modalBtn
-
 		if (response.code === codeResp) {
-			appMessages(response.title, response.msg, response.icon, modalBtn);
+			appMessages(response.title, response.msg, response.icon, response.modalBtn);
 		}
 
 		_response_(response);
@@ -171,7 +168,7 @@ function callNovoCore(verb, who, where, request, _response_) {
 			title: lang.GEN_SYSTEM_NAME,
 			msg: lang.GEN_MESSAGE_SYSTEM,
 			icon: lang.CONF_ICON_DANGER,
-			data: {
+			modalBtn: {
 				btn1: {
 					text: lang.GEN_BTN_ACCEPT,
 					link: lang.GEN_ENTERPRISE_LIST,
@@ -179,7 +176,7 @@ function callNovoCore(verb, who, where, request, _response_) {
 				}
 			}
 		};
-		appMessages(response.title, response.msg, response.icon, response.data);
+		appMessages(response.title, response.msg, response.icon, response.modalBtn);
 		_response_(response);
 	});
 }
@@ -190,29 +187,29 @@ function getCookieValue() {
 	);
 }
 
-function appMessages(title, message, icon, data) {
-	var btn1 = data.btn1;
-	var btn2 = data.btn2;
-	var maxHeight = data.maxHeight || 350;
+function appMessages(title, message, icon, modalBtn) {
+	var btn1 = modalBtn.btn1;
+	var btn2 = modalBtn.btn2;
+	var maxHeight = modalBtn.maxHeight || 350;
 
 	$('#system-info').dialog({
 		title: title || lang.GEN_SYSTEM_NAME,
 		closeText: '',
 		modal: 'true',
-		position: { my: data.posMy || 'center', at: data.posAt || 'center' },
+		position: { my: modalBtn.posMy || 'center', at: modalBtn.posAt || 'center' },
 		draggable: false,
 		resizable: false,
 		closeOnEscape: false,
-		width: data.width || lang.CONF_MODAL_WIDTH,
-		minWidth: data.minWidth || lang.CONF_MODAL_WIDTH,
-		minHeight: data.minHeight || 100,
+		width: modalBtn.width || lang.CONF_MODAL_WIDTH,
+		minWidth: modalBtn.minWidth || lang.CONF_MODAL_WIDTH,
+		minHeight: modalBtn.minHeight || 100,
 		maxHeight: maxHeight !== 'none' ? maxHeight : false,
 		dialogClass: "border-none",
 		classes: {
 			"ui-dialog-titlebar": "border-none",
 		},
 		open: function (event, ui) {
-			if (!data.close) {
+			if (!modalBtn.close) {
 				$('.ui-dialog-titlebar-close').hide();
 			}
 

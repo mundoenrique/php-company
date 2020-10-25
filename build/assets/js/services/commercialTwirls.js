@@ -113,7 +113,7 @@ function updateTwirlsCard() {
 
 function buildList(code, dataResponse, msg, title) {
 	if (code == 2) {
-		data = {
+		modalBtn = {
 			btn1: {
 				text: lang.GEN_BTN_ACCEPT,
 				action: 'destroy'
@@ -125,6 +125,6 @@ function buildList(code, dataResponse, msg, title) {
 			inputModal += '<h6 class="light mr-1">' + key + '</h6>';
 		})
 
-		appMessages(title, inputModal, lang.CONF_ICON_WARNING, data);
+		appMessages(title, inputModal, lang.CONF_ICON_WARNING, modalBtn);
 	}
 };

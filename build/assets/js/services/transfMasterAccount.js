@@ -308,7 +308,7 @@ $(function () {
 });
 
 function MasterAccBuildFormActions(currentAction, currentTitle, currentBtn) {
-	data = {
+	modalBtn = {
 		btn1: {
 			text: lang.GEN_BTN_ACCEPT,
 			action: 'none'
@@ -356,7 +356,7 @@ function MasterAccBuildFormActions(currentAction, currentTitle, currentBtn) {
 	inputModal += '</form>';
 
 	if (lang.CONF_REMOTE_AUTH == 'OFF' || (lang.CONF_REMOTE_AUTH == 'ON' && $.inArray(currentAction, lang.CONF_AUTH_VALIDATE) != -1)) {
-		appMessages(currentTitle, inputModal, lang.CONF_ICON_INFO, data);
+		appMessages(currentTitle, inputModal, lang.CONF_ICON_INFO, modalBtn);
 	} else if ($.inArray(currentAction, lang.CONF_AUTH_LIST) != -1) {
 		remoteAuthArgs.action = currentAction;
 		remoteAuthArgs.title = currentTitle;
@@ -393,14 +393,14 @@ function amountValidate(getAmount, currentTitle) {
 	}
 
 	if (!valid) {
-		data = {
+		modalBtn = {
 			btn1: {
 				text: lang.GEN_BTN_ACCEPT,
 				action: 'destroy'
 			}
 		}
 
-		appMessages(currentTitle, lang.GEN_VALID_AMOUNT, lang.CONF_ICON_WARNING, data);
+		appMessages(currentTitle, lang.GEN_VALID_AMOUNT, lang.CONF_ICON_WARNING, modalBtn);
 		$('#tableServicesMaster').find('thead > tr').removeClass("selected")
 		table.rows().deselect();
 	}
@@ -491,7 +491,7 @@ function cardCheckBalance(response, currentTitle) {
 	})
 
 	if (response.code == 2) {
-		data = {
+		modalBtn = {
 			btn1: {
 				text: lang.GEN_BTN_ACCEPT,
 				action: 'destroy'
@@ -503,7 +503,7 @@ function cardCheckBalance(response, currentTitle) {
 			inputModal += '<h6 class="light mr-1">' + value + '</h6>';
 		})
 
-		appMessages(currentTitle, inputModal, lang.CONF_ICON_INFO, data);
+		appMessages(currentTitle, inputModal, lang.CONF_ICON_INFO, modalBtn);
 	}
 }
 
@@ -526,7 +526,7 @@ function dataTableReload(resetPaging) {
 
 function buildList(response, currentTitle) {
 	if (response.code == 2) {
-		data = {
+		modalBtn = {
 			btn1: {
 				text: lang.GEN_BTN_ACCEPT,
 				action: 'destroy'
@@ -537,7 +537,7 @@ function buildList(response, currentTitle) {
 			inputModal += '<h6 class="light mr-1">Tarjeta: ' + value.cardNumber + ' Monto: ' + value.amount + '</h6>';
 		})
 
-		appMessages(currentTitle, inputModal, lang.CONF_ICON_INFO, data);
+		appMessages(currentTitle, inputModal, lang.CONF_ICON_INFO, modalBtn);
 		$('#accept').addClass('update');
 		$('.update').on('click', function() {
 			$('#accept').removeClass('update');
@@ -576,14 +576,14 @@ function formValidateTrim(currentForm, currentTitle) {
 
 	if (cardsData.length == 0) {
 		currentForm.validate().resetForm();
-		data = {
+		modalBtn = {
 			btn1: {
 				text: lang.GEN_BTN_ACCEPT,
 				action: 'destroy'
 			}
 		}
 
-		appMessages(currentTitle, lang.VALIDATE_SELECT, lang.CONF_ICON_WARNING, data);
+		appMessages(currentTitle, lang.VALIDATE_SELECT, lang.CONF_ICON_WARNING, modalBtn);
 	}
 
 	if (form.valid()) {

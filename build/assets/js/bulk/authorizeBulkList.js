@@ -146,7 +146,7 @@ $(function () {
 				$('#accept').attr('id', currentIdBtn);
 				var bulkNum = $(this).closest('tr').find('.bulk-num').text();
 				modalReq['table'] = $(this).closest('table');
-				data = {
+				modalBtn = {
 					btn1: {
 						text: lang.GEN_BTN_DELETE,
 						action: 'close'
@@ -169,7 +169,7 @@ $(function () {
 					inputModal+= 		'<div class="help-block"></div>';
 				}
 				inputModal+=	'</form>';
-				appMessages(titleModal, inputModal, lang.CONF_ICON_INFO, data);
+				appMessages(titleModal, inputModal, lang.CONF_ICON_INFO, modalBtn);
 				$('#'+currentIdBtn).on('click', function(e) {
 					e.preventDefault();
 					form = $('#delete-bulk-form');
@@ -254,7 +254,7 @@ function SignDeleteBulk(currentForm, action, btnId, passwordInput, modalReq) {
 				insertFormInput(false);
 				passwordInput.val('');
 				tableSelected.rows().deselect();
-				appMessages(response.title, response.msg, response.icon, response.data);
+				appMessages(response.title, response.msg, response.icon, response.modalBtn);
 				$('.cover-spin').hide();
 			}
 		});
@@ -288,14 +288,14 @@ function signAuthBulkValidate(currentForm, action, modalReq) {
 
 	if (bulkData.length == 0) {
 		currentForm.validate().resetForm();
-		data = {
+		modalBtn = {
 			btn1: {
 				text: lang.GEN_BTN_ACCEPT,
 				action: 'destroy'
 			}
 		}
 
-		appMessages(action, lang.BULK_SELECT, lang.CONF_ICON_WARNING, data);
+		appMessages(action, lang.BULK_SELECT, lang.CONF_ICON_WARNING, modalBtn);
 	}
 
 	return bulkData.length > 0 && currentForm.valid();

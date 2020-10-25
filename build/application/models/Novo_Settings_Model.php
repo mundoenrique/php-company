@@ -60,11 +60,7 @@ class Novo_Settings_Model extends NOVO_Model {
 		if($this->isResponseRc != 0 && $this->response->code == 1) {
 			$this->response->title = lang('GEN_USER_TITLE');
 			$this->response->icon = lang('CONF_ICON_WARNING');
-			$this->response->data = [
-				'btn1'=> [
-					'action'=> 'close'
-				]
-			];
+			$this->response->modalBtn['btn1']['action'] = 'destroy';
 		}
 
 		return $this->responseToTheView('CallWs_GetUser');
@@ -101,13 +97,8 @@ class Novo_Settings_Model extends NOVO_Model {
 				$this->response->code = 0;
 				$this->response->msg = lang('RESP_EMAIL_CHANGED');
 				$this->response->icon = lang('CONF_ICON_SUCCESS');
-				$this->response->data = [
-					'btn1'=> [
-						'text'=> lang('GEN_BTN_CONTINUE'),
-						'link'=> 'empresas',
-						'action'=> 'close'
-					]
-				];
+				$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_CONTINUE');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 		}
 
@@ -161,11 +152,7 @@ class Novo_Settings_Model extends NOVO_Model {
 		if($this->isResponseRc != 0 && $this->response->code == 1) {
 			$this->response->title = lang('GEN_USER_TITLE');
 			$this->response->icon = lang('CONF_ICON_WARNING');
-			$this->response->data = [
-				'btn1'=> [
-					'action'=> 'close'
-				]
-			];
+			$this->response->modalBtn['btn1']['action'] = 'destroy';
 		}
 
 		return $this->responseToTheView('callWS_ListaEmpresas');
@@ -198,13 +185,8 @@ class Novo_Settings_Model extends NOVO_Model {
 				$this->response->code = 0;
 				$this->response->msg = lang('RESP_EMAIL_CHANGED');
 				$this->response->icon = lang('CONF_ICON_SUCCESS');
-				$this->response->data = [
-					'btn1'=> [
-						'text'=> lang('GEN_BTN_CONTINUE'),
-						'link'=> 'empresas',
-						'action'=> 'close'
-					]
-				];
+				$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_CONTINUE');
+				$this->response->modalBtn['btn1']['link']  = 'empresas';
 			break;
 			case -4:
 				$this->response->code = 1;
@@ -219,11 +201,7 @@ class Novo_Settings_Model extends NOVO_Model {
 		if($this->isResponseRc != 0 && $this->response->code == 1) {
 			$this->response->title = lang('GEN_EMAIL_CHANGE_TITLE');
 			$this->response->icon = lang('CONF_ICON_WARNING');
-			$this->response->data = [
-				'btn1'=> [
-					'action'=> 'close'
-				]
-			];
+			$this->response->modalBtn['btn1']['action'] = 'destroy';
 		}
 
 		return $this->responseToTheView('CallWs_ChangeTelephones');
@@ -259,13 +237,8 @@ class Novo_Settings_Model extends NOVO_Model {
 				$this->response->code = 0;
 				$this->response->msg = lang('RESP_EMAIL_CHANGED');
 				$this->response->icon = lang('CONF_ICON_SUCCESS');
-				$this->response->data = [
-					'btn1'=> [
-						'text'=> lang('GEN_BTN_CONTINUE'),
-						'link'=> 'empresas',
-						'action'=> 'close'
-					]
-				];
+				$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_CONTINUE');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -4:
 				$this->response->code = 1;
@@ -280,11 +253,7 @@ class Novo_Settings_Model extends NOVO_Model {
 		if($this->isResponseRc != 0 && $this->response->code == 1) {
 			$this->response->title = lang('GEN_EMAIL_CHANGE_TITLE');
 			$this->response->icon = lang('CONF_ICON_WARNING');
-			$this->response->data = [
-				'btn1'=> [
-					'action'=> 'close'
-				]
-			];
+			$this->response->modalBtn['btn1']['action'] = 'destroy';
 		}
 
 		return $this->responseToTheView('CallWs_AddContact');
@@ -334,13 +303,7 @@ class Novo_Settings_Model extends NOVO_Model {
 				$this->response->code = 4;
 				$this->response->icon = lang('CONF_ICON_WARNING');
 				$this->response->msg = lang('GEN_WARNING_DOWNLOAD_FILE');
-				$this->response->data = [
-					'btn1'=> [
-						'text'=> lang('GEN_BTN_ACCEPT'),
-						'link'=> 'configuracion',
-						'action'=> 'redirect'
-					]
-				];
+				$this->response->modalBtn['btn1']['link']  = 'configuracion';
 			break;
 		}
 

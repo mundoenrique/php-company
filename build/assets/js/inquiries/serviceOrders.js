@@ -145,7 +145,7 @@ $(function () {
 				var inputSelected = form.find('input[name="OrderNumber"]').val();
 				$(this).closest('tr').addClass('select');
 				$('#accept').attr('id', 'delete-bulk-btn');
-				data = {
+				modalBtn = {
 					btn1: {
 						text: lang.GEN_BTN_CANCEL_ORDER,
 						action: 'none'
@@ -170,7 +170,7 @@ $(function () {
 				}
 
 				inputModal+= 	'</form>';
-				appMessages('Anular orden de servicio', inputModal, lang.CONF_ICON_INFO, data);
+				appMessages('Anular orden de servicio', inputModal, lang.CONF_ICON_INFO, modalBtn);
 				deleteBulk(oldID, inputSelected);
 
 				$('#cancel').on('click', function (e) {

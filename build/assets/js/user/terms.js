@@ -4,7 +4,7 @@ $(function() {
 		title = lang.GEN_SYSTEM_NAME;
 		msg = lang.GEN_ACCEPT_TERMS;
 		icon = lang.CONF_ICON_INFO;
-		data = {
+		modalBtn = {
 			btn1: {
 				text: lang.GEN_BTN_ACCEPT,
 				link: 'cambiar-clave',
@@ -19,6 +19,6 @@ $(function() {
 		$('#cancel').on('click', function(e) {
 			$('#terms').prop('checked', false);
 		})
-		appMessages(title, msg, icon, data);
+		appMessages(title, msg, icon, modalBtn);
 	});
 });

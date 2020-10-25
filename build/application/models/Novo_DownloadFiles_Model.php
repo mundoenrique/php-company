@@ -316,8 +316,8 @@ class Novo_DownloadFiles_Model extends NOVO_Model {
 		$this->response->msg = lang('GEN_WARNING_DOWNLOAD_FILE');
 		$this->response->icon =  lang('CONF_ICON_WARNING');
 		$this->response->download =  TRUE;
-		$this->response->data->resp['btn1']['text'] = lang('GEN_BTN_ACCEPT');
-		$this->response->data->resp['btn1']['action'] = 'close';
+		$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_ACCEPT');
+		$this->response->modalBtn['btn1']['action'] = 'close';
 
 		if ($dataResponse->code != 0) {
 			$this->response->code =  $dataResponse->code;
@@ -325,7 +325,7 @@ class Novo_DownloadFiles_Model extends NOVO_Model {
 			$this->response->msg = $dataResponse->msg;
 			$this->response->icon =  $dataResponse->icon;
 			$this->response->download =  FALSE;
-			$this->response->data->resp['btn1']['action'] = $dataResponse->data->resp['btn1']['action'];
+			$this->response->modalBtn['btn1']['action'] = $dataResponse->modalBtn['btn1']['action'];
 		}
 	}
 }

@@ -102,12 +102,12 @@ class Novo_Services_Model extends NOVO_Model {
 				$this->response->title = lang('GEN_MENU_SERV_MASTER_ACCOUNT');
 				$this->response->icon = lang('CONF_ICON_INFO');
 				$this->response->msg = lang('GEN_TABLE_SEMPTYTABLE');
-				$this->response->data['btn1']['action'] = 'destroy';
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 		}
 
 		$this->response->draw = (int) $dataRequest->draw;
-		$this->response->dataResp = $this->response->data;
+		$this->response->dataResp = $this->response->modalBtn;
 		$this->response->data = $cardsList;
 
 		return $this->responseToTheView('callWs_TransfMasterAccount');
@@ -208,7 +208,7 @@ class Novo_Services_Model extends NOVO_Model {
 			case 0:
 				$this->response->title = lang('GEN_'.$dataRequest->action);
 				$this->response->icon = lang('CONF_ICON_SUCCESS');
-				$this->response->data['btn1']['action'] = 'destroy';
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
 
 				if ($dataRequest->action == 'TEMPORARY_LOCK' || $dataRequest->action == 'TEMPORARY_UNLOCK') {
 					$blockType = $dataRequest->action == 'TEMPORARY_LOCK' ? 'Bloqueda' : 'Desbloqueda';
@@ -266,88 +266,88 @@ class Novo_Services_Model extends NOVO_Model {
 				$this->response->title = lang('GEN_'.$dataRequest->action);
 				$this->response->msg = lang('GEN_PASSWORD_NO_VALID');
 				$this->response->icon = lang('CONF_ICON_INFO');
-				$this->response->data['btn1']['action'] = 'destroy';
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -21:
 			case -22:
 				$this->response->title = lang('GEN_'.$dataRequest->action);
 				$this->response->msg = lang('SERVICES_TRANSACTION_FAIL');
 				$this->response->icon = lang('CONF_ICON_WARNING');
-				$this->response->data['btn1']['action'] = 'destroy';
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -33:
 			case -100:
 				$this->response->title = lang('GEN_'.$dataRequest->action);
 				$this->response->msg = lang('SERVICES_BALANCE_NO_AVAILABLE');
 				$this->response->icon = lang('CONF_ICON_WARNING');
-				$this->response->data['btn1']['action'] = 'destroy';
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -152:
 				$this->response->title = lang('GEN_'.$dataRequest->action);
 				$this->response->msg = lang('SERVICES_MIN_AMOUNT');
 				$this->response->icon = lang('CONF_ICON_INFO');
-				$this->response->data['btn1']['action'] = 'destroy';
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -153:
 				$this->response->title = lang('GEN_'.$dataRequest->action);
 				$this->response->msg = lang('SERVICES_MAX_WEEKLY_AMOUNT');
 				$this->response->icon = lang('CONF_ICON_INFO');
-				$this->response->data['btn1']['action'] = 'destroy';
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -154:
 				$this->response->title = lang('GEN_'.$dataRequest->action);
 				$this->response->msg = lang('SERVICES_MAX_DAILY_AMOUNT');
 				$this->response->icon = lang('CONF_ICON_INFO');
-				$this->response->data['btn1']['action'] = 'destroy';
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -155:
 				$this->response->title = lang('GEN_'.$dataRequest->action);
 				$this->response->msg = lang('SERVICES_NO_BALANCE');
 				$this->response->icon = lang('CONF_ICON_INFO');
-				$this->response->data['btn1']['action'] = 'destroy';
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -157:
 				$this->response->title = lang('GEN_'.$dataRequest->action);
 				$this->response->msg = lang('SERVICES_MAX_DAILY_OPERATION');
 				$this->response->icon = lang('CONF_ICON_INFO');
-				$this->response->data['btn1']['action'] = 'destroy';
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -242:
 				$this->response->title = lang('GEN_'.$dataRequest->action);
 				$this->response->msg = lang('SERVICES_MAX_OPERATION');
 				$this->response->icon = lang('CONF_ICON_INFO');
-				$this->response->data['btn1']['action'] = 'destroy';
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -267:
 				$this->response->title = lang('GEN_'.$dataRequest->action);
 				$this->response->msg = novoLang(lang('SERVICES_BLOCKED_CARD'), $cardsList[0]['noTarjeta']);
 				$this->response->icon = lang('CONF_ICON_WARNING');
-				$this->response->data['btn1']['action'] = 'destroy';
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -429:
 				$this->response->title = lang('GEN_'.$dataRequest->action);
 				$maskCards = maskString($cardsList[0]['noTarjetaAsig'], 4, 6);
 				$this->response->msg = novoLang(lang('SERVICES_CARD_BULK_AFFILIATED'), $maskCards);
 				$this->response->icon = lang('CONF_ICON_WARNING');
-				$this->response->data['btn1']['action'] = 'destroy';
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -459:
 				$this->response->title = lang('GEN_'.$dataRequest->action);
 				$this->response->msg = lang('SERVICES_PENDING_MEMBER_SHIP');
 				$this->response->icon = lang('CONF_ICON_WARNING');
-				$this->response->data['btn1']['action'] = 'destroy';
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -460:
 				$this->response->title = lang('GEN_'.$dataRequest->action);
 				$this->response->msg = lang('SERVICES_USER_BULK_CONFIRM');
 				$this->response->icon = lang('CONF_ICON_WARNING');
-				$this->response->data['btn1']['action'] = 'destroy';
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -461:
 				$this->response->title = lang('GEN_'.$dataRequest->action);
 				$this->response->msg = novoLang(lang('SERVICES_CARD_BULK_CONFIRM'), $cardsList[0]['noTarjeta']);
 				$this->response->icon = lang('CONF_ICON_WARNING');
-				$this->response->data['btn1']['action'] = 'destroy';
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 		}
 
@@ -452,7 +452,7 @@ class Novo_Services_Model extends NOVO_Model {
 					$this->response->title = lang('GEN_DOWNLOAD_FILE');
 					$this->response->icon =  lang('CONF_ICON_WARNING');
 					$this->response->msg = lang('GEN_WARNING_DOWNLOAD_FILE');
-					$this->response->data['btn1']['action'] = 'destroy';
+					$this->response->modalBtn['btn1']['action'] = 'destroy';
 				}
 		}
 
@@ -539,10 +539,7 @@ class Novo_Services_Model extends NOVO_Model {
 			case 0:
 				$this->response->title = lang('SERVICES_INQUIRY_'.$dataRequest->action);
 				$this->response->icon = lang('CONF_ICON_SUCCESS');
-				$this->response->data['btn1'] = [
-					'text' => lang('GEN_BTN_ACCEPT'),
-					'action' => 'destroy'
-				];
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
 				$this->response->success = TRUE;
 				$responseList = $response->bean ?? FALSE;
 
@@ -570,19 +567,13 @@ class Novo_Services_Model extends NOVO_Model {
 				$this->response->title = lang('SERVICES_INQUIRY_'.$dataRequest->action);
 				$this->response->msg = lang('GEN_PASSWORD_NO_VALID');
 				$this->response->icon = lang('CONF_ICON_WARNING');
-				$this->response->data['btn1'] = [
-					'text' => lang('GEN_BTN_ACCEPT'),
-					'action' => 'destroy'
-				];
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -450:
 				$this->response->title = lang('SERVICES_INQUIRY_'.$dataRequest->action);
 				$this->response->msg = 'Alcanzaste el límite de consultas diarias';
 				$this->response->icon = lang('CONF_ICON_INFO');
-				$this->response->data['btn1'] = [
-					'text' => lang('GEN_BTN_ACCEPT'),
-					'action' => 'destroy'
-				];
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 		}
 
@@ -649,7 +640,7 @@ class Novo_Services_Model extends NOVO_Model {
 				$this->response->data['shops']= $response->bean->cards[0];
 				$this->response->title = lang('GEN_COMMERCIAL_TWIRLS_TITTLE');
 				$this->response->icon =  lang('CONF_ICON_WARNING');
-        $this->response->data['btn1']['action'] = 'close';
+        $this->response->modalBtn['btn1']['action'] = 'close';
 				switch ($response->bean->cards[0]->rc) {
 					case -266:
 						$this->response->msg = 	novoLang(lang('SERVICES_TWIRLS_TEMPORARY_BLOCKED_CARD'), maskString( $dataRequest->cardNumber, 4, 6));
@@ -725,25 +716,25 @@ class Novo_Services_Model extends NOVO_Model {
 				$this->response->icon =  lang('CONF_ICON_SUCCESS');
 				$this->response->success = TRUE;
         $this->response->msg = 	lang('RESP_SUCCESSFULL_UPDATE_TWIRLS');
-        $this->response->data['btn1']['action'] = 'close';
+        $this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -1:
 				$this->response->title = lang('GEN_COMMERCIAL_TWIRLS_TITTLE');
 				$this->response->icon =  lang('CONF_ICON_WARNING');
 				$this->response->msg = lang('GEN_PASSWORD_NO_VALID');
-				$this->response->data['btn1']['action'] = 'close';
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -146:
 				$this->response->title = lang('GEN_COMMERCIAL_TWIRLS_TITTLE');
 				$this->response->icon =  lang('CONF_ICON_WARNING');
 				$this->response->msg = lang('RESP_NO_UPDATE_REGISTRY');
-				$this->response->data['btn1']['action'] = 'close';
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -438:
 				$this->response->title = lang('GEN_COMMERCIAL_TWIRLS_TITTLE');
 				$this->response->icon =  lang('CONF_ICON_WARNING');
 				$this->response->msg = lang('RESP_REJECTED_REGISTRY');
-				$this->response->data['btn1']['action'] = 'close';
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -65:
 				$this->response->code = 2;
@@ -818,43 +809,43 @@ class Novo_Services_Model extends NOVO_Model {
 				$this->response->title = lang('GEN_TRANSACTIONAL_LIMITS_TITTLE');
 				$this->response->icon =  lang('CONF_ICON_WARNING');
 				$this->response->msg = lang('SERVICES_LIMITS_NO_REGISTRY');
-				$this->response->data['btn1']['action'] = 'close';
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -448:
 				$this->response->title = lang('GEN_TRANSACTIONAL_LIMITS_TITTLE');
 				$this->response->icon =  lang('CONF_ICON_WARNING');
 				$this->response->msg = novoLang(lang('SERVICES_NO_FOUND_REGISTRY'), maskString( $dataRequest->cardNumber, 5, 6));
-				$this->response->data['btn1']['action'] = 'close';
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -455:
 				$this->response->title = lang('GEN_TRANSACTIONAL_LIMITS_TITTLE');
 				$this->response->icon =  lang('CONF_ICON_WARNING');
 				$this->response->msg = novoLang(lang('SERVICES_TWIRLS_NO_AVAILABLE_CARD'), maskString( $dataRequest->cardNumber, 5, 6));
-				$this->response->data['btn1']['action'] = 'close';
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -444:
 				$this->response->title = lang('GEN_TRANSACTIONAL_LIMITS_TITTLE');
 				$this->response->icon =  lang('CONF_ICON_WARNING');
 				$this->response->msg = lang('SERVICES_TWIRLS_NO_FOUND_REGISTRY');
-				$this->response->data['btn1']['action'] = 'close';
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -454:
 				$this->response->title = lang('GEN_TRANSACTIONAL_LIMITS_TITTLE');
 				$this->response->icon =  lang('CONF_ICON_WARNING');
 				$this->response->msg = novoLang(lang('SERVICES_TWIRLS_TEMPORARY_BLOCKED_CARD'), maskString( $dataRequest->cardNumber, 5, 6));
-				$this->response->data['btn1']['action'] = 'close';
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -330:
 				$this->response->title = lang('GEN_TRANSACTIONAL_LIMITS_TITTLE');
 				$this->response->icon =  lang('CONF_ICON_WARNING');
 				$this->response->msg = novoLang(lang('SERVICES_TWIRLS_EXPIRED_CARD'), maskString( $dataRequest->cardNumber, 5, 6));
-				$this->response->data['btn1']['action'] = 'close';
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -307:
 				$this->response->title = lang('GEN_TRANSACTIONAL_LIMITS_TITTLE');
 				$this->response->icon =  lang('CONF_ICON_WARNING');
 				$this->response->msg = novoLang(lang('SERVICES_TWIRLS_PERMANENT_BLOCKED_CARD'), maskString( $dataRequest->cardNumber, 5, 6));
-				$this->response->data['btn1']['action'] = 'close';
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 		}
 
@@ -917,34 +908,34 @@ class Novo_Services_Model extends NOVO_Model {
 				$this->response->icon =  lang('CONF_ICON_SUCCESS');
         $this->response->msg = 	lang('RESP_SUCCESSFULL_UPDATE_LIMITS');
         $this->response->success = TRUE;
-        $this->response->data['btn1']['action'] = 'close';
+        $this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -1:
 				$this->response->title = lang('GEN_TRANSACTIONAL_LIMITS_TITTLE');
 				$this->response->msg = lang('GEN_PASSWORD_NO_VALID');
 				$this->response->icon = lang('CONF_ICON_INFO');
-				$this->response->data['btn1']['action'] = 'close';
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -449:
 			case -450:
 				$this->response->title = lang('GEN_TRANSACTIONAL_LIMITS_TITTLE');
 				$this->response->icon =  lang('CONF_ICON_WARNING');
 				$this->response->msg = lang('SERVICES_LIMITS_NO_UPDATE');
-				$this->response->data['btn1']['action'] = 'close';
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -456:
 				//Límites que no deben ser mayor a otro según configuración
 				$this->response->title = lang('GEN_TRANSACTIONAL_LIMITS_TITTLE');
 				$this->response->icon =  lang('CONF_ICON_WARNING');
 				$this->response->msg = $response->msg;
-				$this->response->data['btn1']['action'] = 'close';
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -457:
 				//Límite menor supera al definido para el producto
 				$this->response->title = lang('GEN_TRANSACTIONAL_LIMITS_TITTLE');
 				$this->response->icon =  lang('CONF_ICON_WARNING');
 				$this->response->msg = $response->msg;
-				$this->response->data['btn1']['action'] = 'close';
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 		}
 
@@ -1053,13 +1044,13 @@ class Novo_Services_Model extends NOVO_Model {
 				$this->response->title = $dataRequest->action;
 				$this->response->icon = lang('CONF_ICON_WARNING');
 				$this->response->msg = lang('GEN_GET_AUTH_USER_FAIL');
-				$this->response->data['btn1']['action'] = 'destroy';
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -65:
 				$this->response->title = $dataRequest->action;
 				$this->response->icon = lang('CONF_ICON_WARNING');
 				$this->response->msg = lang('GEN_GET_AUTH_KEY_FAIL');
-				$this->response->data['btn1']['action'] = 'destroy';
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 		}
 

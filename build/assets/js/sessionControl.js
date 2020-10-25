@@ -26,13 +26,13 @@ function finishSession() {
 	}
 
 	$('#accept').addClass('btn-large-xl')
-	data = {
+	modalBtn = {
 		btn1: {
 			text: lang.GEN_BTN_KEEP_SESSION,
 			action: 'destroy'
 		}
 	}
-	appMessages(lang.GEN_SYSTEM_NAME, lang.GEN_FINISH_TEXT, lang.CONF_ICON_INFO, data);
+	appMessages(lang.GEN_SYSTEM_NAME, lang.GEN_FINISH_TEXT, lang.CONF_ICON_INFO, modalBtn);
 	$('#accept').addClass('keep-session');
 	resetTimesession = setTimeout(function() {
 		$('#accept')

@@ -290,10 +290,10 @@ function dialogE(e){
   $(this).closest('tr').addClass('select');
   var titleModal = 'Funciones';
   modalReq['table'] = $(this).closest('table');
-  data = {
+	modalBtn = {
     btn1: {
     text: 'Salir',
-    action: 'close'
+    action: 'destroy'
   	}
   }
 	inputModal =  '<form  class="form-group">';
@@ -302,7 +302,7 @@ function dialogE(e){
   inputModal+=    '</div>';
   inputModal+=  '</form>';
 
-	appMessages(titleModal, inputModal, lang.CONF_ICON_INFO, data);
+	appMessages(titleModal, inputModal, lang.CONF_ICON_INFO, modalBtn);
 	};
 
 function format(user) {

@@ -281,7 +281,7 @@ function verifymassiveOptions(massiveOptions) {
 
 function InqBuildFormActions(currentAction, currentTitle, currentBtn) {
 	$('#accept').addClass('send-request');
-	data = {
+	modalBtn = {
 		btn1: {
 			text: lang.GEN_BTN_ACCEPT,
 			action: 'none'
@@ -294,7 +294,7 @@ function InqBuildFormActions(currentAction, currentTitle, currentBtn) {
 	inputModal = '<form id="modalCardsInquiryForm" name="modalCardsInquiryForm" class="row col-auto p-0" onsubmit="return false;">';
 
 	if (currentAction == 'UPDATE_DATA') {
-		data.maxHeight = 520;
+		modalBtn.maxHeight = 520;
 		$('#tableCardInquiry').find('tbody > tr').removeClass('update');
 		currentBtn.closest('tr').addClass('update');
 		cardsData = table.rows('.update').data();
@@ -355,7 +355,7 @@ function InqBuildFormActions(currentAction, currentTitle, currentBtn) {
 	inputModal += '</form>';
 
 	if (lang.CONF_REMOTE_AUTH == 'OFF' || (lang.CONF_REMOTE_AUTH == 'ON' && $.inArray(currentAction, lang.CONF_AUTH_VALIDATE) != -1)) {
-		appMessages(currentTitle, inputModal, lang.CONF_ICON_INFO, data);
+		appMessages(currentTitle, inputModal, lang.CONF_ICON_INFO, modalBtn);
 	} else if ($.inArray(currentAction, lang.CONF_AUTH_LIST) != -1) {
 		$('#accept').removeClass('send-request');
 		$('#accept').addClass('get-auth-key');
@@ -433,14 +433,14 @@ function InqValidateActions(currentAction, currentForm) {
 
 	if (cardsData.length == 0) {
 		currentForm.validate().resetForm();
-		data = {
+		modalBtn = {
 			btn1: {
 				text: lang.GEN_BTN_ACCEPT,
 				action: 'destroy'
 			}
 		}
 
-		appMessages(currentAction, lang.VALIDATE_SELECT, lang.CONF_ICON_WARNING, data);
+		appMessages(currentAction, lang.VALIDATE_SELECT, lang.CONF_ICON_WARNING, modalBtn);
 	}
 
 	if (currentForm.valid()) {
@@ -482,7 +482,7 @@ function evalResult(response, currentAction) {
 	}
 
 	if (response.data.failList.length > 0) {
-		data = {
+		modalBtn = {
 			btn1: {
 				text: lang.GEN_BTN_ACCEPT,
 				action: 'destroy'
@@ -494,6 +494,6 @@ function evalResult(response, currentAction) {
 			inputModal += '<h6 class="light mr-1">' + value + '</h6>';
 		})
 
-		appMessages(response.title, inputModal, lang.CONF_ICON_INFO, data);
+		appMessages(response.title, inputModal, lang.CONF_ICON_INFO, modalBtn);
 	}
 }

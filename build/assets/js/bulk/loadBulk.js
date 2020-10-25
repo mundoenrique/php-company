@@ -66,7 +66,7 @@ $(function () {
 
 	const respLoadBulk = {
 		2: function(response) {
-			appMessages(response.title, response.msg, response.icon, response.data);
+			appMessages(response.title, response.msg, response.icon, response.modalBtn);
 		},
 		3: function(response) {
 			var msgModal = '';
@@ -88,7 +88,7 @@ $(function () {
 				}
 			});
 
-			appMessages(response.title, msgModal, response.icon, response.data);
+			appMessages(response.title, msgModal, response.icon, response.modalBtn);
 		}
 	}
 
@@ -140,7 +140,7 @@ $(function () {
 				form = $(this).parent().find('form')
 				$(this).closest('tr').addClass('select');
 				$('#accept').addClass('delete-bulk-btn');
-				data = {
+				modalBtn = {
 					btn1: {
 						text: lang.GEN_BTN_DELETE,
 						action: 'none'
@@ -167,7 +167,7 @@ $(function () {
 				}
 
 				inputModal+= 	'</form>';
-				appMessages(lang.BULK_DELETE_TITLE, inputModal, lang.CONF_ICON_INFO, data);
+				appMessages(lang.BULK_DELETE_TITLE, inputModal, lang.CONF_ICON_INFO, modalBtn);
 				$('#cancel').on('click', function(e) {
 					e.preventDefault();
 					$('#pending-bulk').find('tr').removeClass('select');

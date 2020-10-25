@@ -30,7 +30,7 @@ function passRecover(recoverData, textBtn) {
 		switch(response.code) {
 			case 0:
 			case 1:
-				appMessages(response.title, response.msg, response.icon, response.data)
+				appMessages(response.title, response.msg, response.icon, response.modalBtn)
 				break;
 		}
 		response.code == 0 ? $('form')[0].reset() : '';

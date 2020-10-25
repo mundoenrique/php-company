@@ -150,23 +150,17 @@ class Novo_Inquiries_Model extends NOVO_Model {
 				$this->response->title = 'Órdenes de servicio';
 				$this->response->msg = 'No fue posible obtener las órdenes de servicio';
 				$this->response->icon = lang('CONF_ICON_WARNING');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
 
-				if($this->input->is_ajax_request()) {
-					$this->response->data['btn1']['action'] = 'close';
-				} else {
-					$this->response->data->resp['btn1']['action'] = 'close';
-				}
+
+
 			break;
 			case -150:
 				$this->response->title = 'Órdenes de servicio';
 				$this->response->msg = novoLang(lang('RESP_SERVICE_ORDES'), $statusText);
 				$this->response->icon = lang('CONF_ICON_INFO');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
 
-				if($this->input->is_ajax_request()) {
-					$this->response->data['btn1']['action'] = 'close';
-				} else {
-					$this->response->data->resp['btn1']['action'] = 'close';
-				}
 			break;
 		}
 
@@ -213,19 +207,13 @@ class Novo_Inquiries_Model extends NOVO_Model {
 				$this->response->title = 'Anular Orden';
 				$this->response->msg = 'La orden fue anulada exitosamente';
 				$this->response->icon = lang('CONF_ICON_SUCCESS');
-				$this->response->data['btn1'] = [
-					'text' => lang('GEN_BTN_ACCEPT'),
-					'action' => 'close'
-				];
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -1:
 				$this->response->title = 'Anular Orden';
 				$this->response->msg = lang('GEN_PASSWORD_NO_VALID');
 				$this->response->icon = lang('CONF_ICON_WARNING');
-				$this->response->data['btn1'] = [
-					'text' => lang('GEN_BTN_ACCEPT'),
-					'action' => 'close'
-				];
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 		}
 
@@ -593,9 +581,9 @@ class Novo_Inquiries_Model extends NOVO_Model {
 				$this->response->title = $response->code != 0 ? $response->title : lang('GEN_DOWNLOAD_FILE');
 				$this->response->msg = $response->code != 0 ? $response->msg : lang('GEN_WARNING_DOWNLOAD_FILE');
 				$this->response->icon =  $response->code != 0 ? $response->icon : lang('CONF_ICON_WARNING');
-				$this->response->download =  $response->data->resp['btn1']['action'] == 'redirect' ? FALSE : TRUE;
-				$this->response->data->resp['btn1']['text'] = lang('GEN_BTN_ACCEPT');
-				$this->response->data->resp['btn1']['action'] = $response->code != 0 ? $response->data->resp['btn1']['action'] : 'close';
+				$this->response->download =  $response->modalBtn['btn1']['action'] == 'redirect' ? FALSE : TRUE;
+				$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_ACCEPT');
+				$this->response->modalBtn['btn1']['action'] = $response->code != 0 ? $response->modalBtn['btn1']['action'] : 'close';
 				$this->session->set_flashdata('download', $this->response);
 				redirect(base_url('consulta-orden-de-servicio'), 'location', 301);
 		}
