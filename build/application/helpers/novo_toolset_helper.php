@@ -157,6 +157,11 @@ if (!function_exists('setCurrentPage')) {
 					$cssClass = 'page-current';
 				}
 				break;
+			case 'Novo_User':
+				if ($menu == lang('GEN_MENU_USERS')) {
+					$cssClass = 'page-current';
+				}
+				break;
 		}
 
 		return $cssClass;
@@ -223,5 +228,21 @@ if (!function_exists('uriRedirect')) {
 		$linkredirect = $singleSignOn ? 'ingresar/fin' : $linkredirect;
 
 		return $linkredirect;
+	}
+}
+
+if (! function_exists('currencyFormat')) {
+	function currencyFormat($amount){
+		$CI =& get_instance();
+		$client = $CI->session->userdata('countrySess');
+		$decimalPoint = ['Ve', 'Co', 'Bdb'];
+
+		if (in_array($client, $decimalPoint)) {
+			$amount =  number_format($amount, 2, ',', '.');
+		} else {
+			$amount = number_format($amount, 2);
+		}
+
+		return $amount;
 	}
 }

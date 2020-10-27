@@ -1,5 +1,11 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+$lang['USER_SIGNIN_INVALID_USER']= "Usuario o contraseña inválido";
+$lang['USER_SIGNIN_WILL_BLOKED']= "Al siguiente intento fallido tu usuario será bloqueado";
+$lang['USER_SIGNIN_SUSPENDED'] = 'Usuario no disponible, se encuentra inactivo';
+$lang['USER_SIGNIN_NO_MIGRED'] = 'Estimado %s tu usuario no ha sido migrado de la aplicación anterior';
+$lang['USER_SIGNIN_OLD_APP'] = 'Usuario aplicación anterior';
+$lang['USER_EXPIRE_TIME'] = 'El tiempo permitido para realizar la operación expiró, intenta nuevamente.';
 //LOGIN
 $lang['LOGIN_WELCOME_TITLE'] = 'Conexión Empresas Online';
 $lang['LOGIN_RECOVER_PASS'] = '¿Olvidaste tu contraseña?';
@@ -50,5 +56,16 @@ $lang['PLACE_HOLDER_FISCAL_REGISTER'] = "00000000000";
 //PASS-CHANGE
 $lang['PASSWORD_NEWUSER'] = 'Por motivos de seguridad es necesario que cambies tu contraseña la primera vez que ingresas a nuestro sistema "<strong>%s</strong>".';
 $lang['PASSWORD_EXPIRED'] = 'Tu contraseña está vencida. Por motivos de seguridad es necesario que la cambies antes de continuar en nuestro sistema "<strong>%s</strong>".';
-//SESSION EXPIRES
-$lang['SESSION_EXPIRE_TIME'] = 'El tiempo permitido para realizar la operación expiró, intenta nuevamente.';
+//USERS MANAGEMENT
+$lang['MANAGEMENT_LIST_USERS'] = 'Listado de usuarios';
+//USERS PERMISSIONS
+$lang['PERMITS_DELETE_ALL_PERMITS'] = 'Eliminar todos los permisos';
+$lang['PERMITS_ALL_PERMITS'] = 'Todos los permisos';
+$lang['PERMITS_USER_MANAGMENET_PROPERTIES'] = [
+	'tranIdEmpresa' => 'idEnterprise',
+	'tranIdUsuario' => 'idUser',
+	'tranNombreUsuario' => 'name',
+	'tranCorreo' => 'mail',
+	'tranTipoUsuario' => 'type',
+	'registed' => 'registered'
+];

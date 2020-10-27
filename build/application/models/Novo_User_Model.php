@@ -17,63 +17,58 @@ class Novo_User_Model extends NOVO_Model {
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date May 14th, 2019
 	 */
-	public function callWs_Login_User($dataRequest)
+	public function callWs_SignIn_User($dataRequest)
 	{
 		log_message('INFO', 'NOVO User Model: Login Method Initialized');
 
-		$this->className = 'com.novo.objects.TOs.UsuarioTO';
+		$userName = mb_strtoupper($dataRequest->userName);
+		$password = $this->cryptography->decryptOnlyOneData($dataRequest->userPass);
+		$authToken = $this->session->flashdata('authToken') ?? '';
+
 		$this->dataAccessLog->modulo = 'Usuario';
 		$this->dataAccessLog->function = 'Ingreso al sistema';
 		$this->dataAccessLog->operation = 'Iniciar sesion';
-		$userName = mb_strtoupper($dataRequest->user);
 		$this->dataAccessLog->userName = $userName;
 
-		$password = json_decode(base64_decode($dataRequest->pass));
-		$password = $this->cryptography->decrypt(
-			base64_decode($password->plot),
-			utf8_encode($password->password)
-		);
-		$authToken = $this->session->flashdata('authToken') ? $this->session->flashdata('authToken') : '';
-		$authToken_str=str_replace('"','', $authToken);
-
 		$this->dataRequest->idOperation = 'loginFull';
+		$this->dataRequest->className = 'com.novo.objects.TOs.UsuarioTO';
 		$this->dataRequest->userName = $userName;
 		$this->dataRequest->password = md5($password);
 		$this->dataRequest->ctipo = $dataRequest->active;
 
 		if (IP_VERIFY == 'ON') {
-			$this->dataRequest->codigoOtp =[
-				'tokenCliente' => $dataRequest->codeOTP != '' ? $dataRequest->codeOTP : '',
-				'authToken' => $authToken_str
+			$this->dataRequest->codigoOtp = [
+				'tokenCliente' => $dataRequest->otpCode ?? '',
+				'authToken' => $authToken
 			];
-			$this->dataRequest->guardaIp = $dataRequest->saveIP !='' ? true : false;
+
+			if (isset($dataRequest->saveIP)) {
+				$this->dataRequest->guardaIp = $dataRequest->saveIP;
+			}
 		}
 
-		if($dataRequest->codeOTP != '' && $authToken == '') {
-			$this->isResponseRc = 998;
+		if (isset($dataRequest->otpCode) && $authToken == '') {
+			$this->isResponseRc = 9998;
 		} else {
-			if(ACTIVE_RECAPTCHA) {
-				$this->isResponseRc = $this->callWs_ValidateCaptcha_User($dataRequest);
+			$this->isResponseRc = ACTIVE_RECAPTCHA && !isset($dataRequest->skipCaptcha) ? $this->callWs_ValidateCaptcha_User($dataRequest) : 0;
 
-				if ($this->isResponseRc === 0) {
-					$response = $this->sendToService('callWs_Login');
-				}
-			} else {
+			if ($this->isResponseRc === 0) {
 				$response = $this->sendToService('callWs_Login');
 			}
-
-			if(in_array($this->config->item('client'), ['banco-bog']) && ($this->isResponseRc == -2 || $this->isResponseRc == -185)) {
-				$this->isResponseRc = 0;
-			}
-
-			$time = (object) [
-				'customerTime' => (int) $dataRequest->currentTime,
-				'serverTime' => (int) date("H")
-			];
 		}
+
+		if(lang('CONFIG_PASS_EXPIRED') == 'OFF' && ($this->isResponseRc == -2 || $this->isResponseRc == -185)) {
+			$this->isResponseRc = 0;
+		}
+
+		$time = (object) [
+			'customerTime' => (int) $dataRequest->currentTime,
+			'serverTime' => (int) date("H")
+		];
 
 		switch($this->isResponseRc) {
 			case 0:
+				$this->response->code = 0;
 				$fullName = mb_strtolower($response->usuario->primerNombre).' ';
 				$fullName.= mb_strtolower($response->usuario->primerApellido);
 				$formatDate = $this->config->item('format_date');
@@ -88,6 +83,7 @@ class Novo_User_Model extends NOVO_Model {
 					'logged' => TRUE,
 					'userId' => $response->usuario->idUsuario,
 					'userName' => $response->usuario->userName,
+					'passWord' => lang('CONF_REMOTE_AUTH') == 'ON' ? $this->dataRequest->password : FALSE,
 					'fullName' => ucwords(mb_strtolower($fullName)),
 					'userType' => $response->usuario->ctipo,
 					'codigoGrupo' => $response->usuario->codigoGrupo,
@@ -105,12 +101,12 @@ class Novo_User_Model extends NOVO_Model {
 					'logged_in' => TRUE
 				];
 				$this->session->set_userdata($userData);
-				$this->response->code = 0;
 				$this->response->data = base_url(lang('GEN_ENTERPRISE_LIST'));
 				$this->response->modal = TRUE;
 			break;
 			case -2:
 			case -185:
+				$this->response->code = 0;
 				$fullName = mb_strtolower($response->usuario->primerNombre.' '.$response->usuario->primerApellido);
 				$userData = [
 					'sessionId' => $response->logAccesoObject->sessionId,
@@ -120,13 +116,12 @@ class Novo_User_Model extends NOVO_Model {
 					'codigoGrupo' => $response->usuario->codigoGrupo,
 					'token' => $response->token,
 					'time' => $time,
-					'cl_addr' => $this->encrypt_connect->encode($this->input->ip_address(), $dataRequest->user, 'REMOTE_ADDR'),
+					'cl_addr' => $this->encrypt_connect->encode($this->input->ip_address(), $userName, 'REMOTE_ADDR'),
 					'countrySess' => $this->config->item('country'),
 					'countryUri' => $this->config->item('country-uri'),
 					'clientAgent' => $this->agent->agent_string()
 				];
 				$this->session->set_userdata($userData);
-				$this->response->code = 0;
 				$this->response->data = base_url('inf-condiciones');
 				$this->session->set_flashdata('changePassword', 'newUser');
 				$this->session->set_flashdata('userType', $response->usuario->ctipo);
@@ -137,111 +132,69 @@ class Novo_User_Model extends NOVO_Model {
 				}
 			break;
 			case -1:
+				$this->response->code = 1;
+				$this->response->msg = lang('USER_SIGNIN_INVALID_USER');
+				$this->response->className = lang('CONF_VALID_INVALID_USER');
+				$this->response->position = lang('CONF_VALID_POSITION');
+			break;
 			case -263:
 				$this->response->code = 1;
-				$this->response->msg = lang('RESP_INVALID_USER');
+				$this->response->msg = lang('USER_SIGNIN_WILL_BLOKED');
 				$this->response->className = lang('CONF_VALID_INVALID_USER');
 				$this->response->position = lang('CONF_VALID_POSITION');
 			break;
 			case -8:
 			case -35:
 				$this->response->code = 1;
-				$this->response->msg = lang('RESP_SUSPENDED_USER');
+				$this->response->msg = lang('USER_SIGNIN_SUSPENDED');
 				$this->response->className = lang('CONF_VALID_INACTIVE_USER');
 				$this->response->position = lang('CONF_VALID_POSITION');
 			break;
-			case -229:
-				$this->response->code = 3;
-				$this->response->msg = lang('RESP_OLD_USER');
-			break;
-			case -262:
-				$this->response->code = 3;
-				$this->response->msg = lang('RESP_NO_PERMISSIONS');
-				$this->response->icon = lang('CONF_ICON_INFO');
-				$this->response->data = [
-					'btn1'=> [
-						'action'=> 'close'
-					]
-				];
-			break;
-			case -28:
-				$this->response->code = 3;
-				$this->response->msg = lang('RESP_INCORRECTLY_CLOSED');
-				$this->response->icon = lang('CONF_ICON_WARNING');
-				$this->response->data = [
-					'btn1'=> [
-						'link'=> [
-							'who'=> 'User',
-							'where'=> 'FinishSession'
-						],
-						'action'=> 'logout'
-					]
-				];
-			break;
 			case -424:
 				$this->response->code = 2;
-				$this->response->ipInvalid = TRUE;
-				$this->response->assert = lang('GEN_LOGIN_IP_ASSERT');
+				$this->response->msg = novoLang(lang('GEN_LOGIN_IP_MSG'), $response->usuario->emailEnc);
 				$this->response->labelInput = lang('GEN_LOGIN_IP_LABEL_INPUT');
-				$this->response->icon = lang('CONF_ICON_WARNING');
-				$this->response->email = $response->usuario->emailEnc;
-				$this->response->msg = novoLang(lang('GEN_LOGIN_IP_MSG'), $this->response->email);
-				$this->response->data = [
-					'btn1'=> [
-						'text'=> lang('GEN_BTN_ACCEPT'),
-						'link'=> false,
-						'action'=> 'none'
-					],
-					'btn2'=> [
-						'text'=> lang('GEN_BTN_CANCEL'),
-						'link'=> false,
-						'action'=> 'close'
-					]
-				];
-				$this->session->set_flashdata('authToken',$response->usuario->codigoOtp->access_token);
+				$this->response->assert = lang('GEN_LOGIN_IP_ASSERT');
+				$this->response->modalBtn['btn1']['action'] = 'none';
+				$this->response->modalBtn['btn2']['text'] = lang('GEN_BTN_CANCEL');
+				$this->response->modalBtn['btn2']['action'] = 'destroy';
+				$this->session->set_flashdata('authToken', json_decode($response->usuario->codigoOtp->access_token));
+			break;
+			case -28:
+				$this->response->msg = lang('RESP_INCORRECTLY_CLOSED');
+				$this->response->data = 'session-close';
+				$this->response->modalBtn['btn1']['action'] = 'none';
+				$this->response->modalBtn['btn2']['text'] = lang('GEN_BTN_CANCEL');
+				$this->response->modalBtn['btn2']['action'] = 'destroy';
+			break;
+			break;
+			case -229:
+				$this->response->icon = lang('CONF_ICON_INFO');
+				$this->response->msg = lang('USER_SIGNIN_OLD_APP');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			break;
+			case -262:
+				$this->response->icon = lang('CONF_ICON_INFO');
+				$this->response->msg = novoLang(lang('USER_SIGNIN_NO_MIGRED'), $dataRequest->userName);
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -286:
-					$this->response->code = 4;
 					$this->response->msg = lang('GEN_RESP_CODE_INVALID');
-					$this->response->icon = lang('CONF_ICON_WARNING');
-					$this->response->data['btn1'] = [
-						'text' => lang('GEN_BTN_ACCEPT'),
-						'action' => 'close'
-					];
+					$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -287:
 			case -288:
-				$this->response->code = 4;
 				$this->response->msg = lang('GEN_RESP_CODE_OTP_INVALID');
-				$this->response->icon = lang('CONF_ICON_WARNING');
-				$this->response->data['btn1'] = [
-					'text' => lang('GEN_BTN_ACCEPT'),
-					'action' => 'close'
-				];
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
-			case 998:
-				$this->response->code = 4;
-				$this->response->msg = lang('SESSION_EXPIRE_TIME');
-				$this->response->title = lang('GEN_RECOVER_PASS_TITLE');
-				$this->response->icon = lang('CONF_ICON_INFO');
-				$this->response->data = [
-					'btn1'=> [
-						'action'=> 'close'
-					]
-				];
+			case 9998:
+				$this->response->msg = lang('USER_EXPIRE_TIME');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case 9999:
-				$this->response->code = 3;
-				$this->response->title = lang('GEN_SYSTEM_NAME');
 				$this->response->icon = lang('CONF_ICON_DANGER');
+				$this->response->title = lang('GEN_SYSTEM_NAME');
 				$this->response->msg = lang('RESP_RECAPTCHA_VALIDATION_FAILED');
-				$this->response->data = [
-					'btn1'=> [
-						'text'=> lang('GEN_BTN_ACCEPT'),
-						'link'=> 'inicio',
-						'action'=> 'redirect'
-					]
-				];
 			break;
 		}
 
@@ -256,16 +209,37 @@ class Novo_User_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO User Model: SingleSignon Method Initialized');
 
-		$this->className = 'com.novo.objects.TOs.RequestTO';
 		$this->dataAccessLog->modulo = 'Usuario';
 		$this->dataAccessLog->function = 'Ingreso al sistema';
 		$this->dataAccessLog->operation = 'Inicio de sesión único';
 		$this->dataAccessLog->userName = $this->country;
 
-		$this->dataRequest->idOperation = 'userByToken';
-		$this->token = $dataRequest->sessionId;
+		$this->dataRequest->idOperation = lang('CONF_SINGLE_SIGN_ON');
+		$this->dataRequest->className = 'com.novo.objects.TOs.RequestTO';
+
+		switch ($this->country) {
+			case 'Bdb':
+				$this->token = $dataRequest->sessionId;
+			break;
+			case 'Mx-Bn':
+				$this->dataRequest->userName = '';
+				$this->dataRequest->password = '';
+				$this->dataRequest->ctipo = $dataRequest->Canal;
+				$this->dataRequest->codigoOtp = [
+					'tokenCliente' => $dataRequest->ip ?? $this->input->ip_address(),
+					'authToken' => $dataRequest->IdServicio,
+				];
+				$this->dataRequest->guardaIp = FALSE;
+				$this->token = $dataRequest->Clave;
+			break;
+		}
 
 		$response = $this->sendToService('callWs_SingleSignon');
+
+		if(lang('CONFIG_PASS_EXPIRED') == 'OFF' && ($this->isResponseRc == -2 || $this->isResponseRc == -185)) {
+			$this->isResponseRc = 0;
+		}
+
 		$this->response->code = 0;
 
 		switch ($this->isResponseRc) {
@@ -288,6 +262,7 @@ class Novo_User_Model extends NOVO_Model {
 					'logged' => TRUE,
 					'userId' => $response->usuario->idUsuario,
 					'userName' => $response->usuario->userName,
+					'passWord' => $response->usuario->password ?? FALSE,
 					'fullName' => ucwords(mb_strtolower($fullName)),
 					'codigoGrupo' => $response->usuario->codigoGrupo,
 					'lastSession' => $lastSession,
@@ -297,7 +272,8 @@ class Novo_User_Model extends NOVO_Model {
 					'countrySess' => $this->config->item('country'),
 					'countryUri' => $this->config->item('country-uri'),
 					'clientAgent' => $this->agent->agent_string(),
-					'autoLogin' => 'true'
+					'autoLogin' => 'true',
+					'thirdPartyChannel' => $dataRequest->canal ?? ''
 				];
 				$this->session->set_userdata($userData);
 				$this->response->code = 0;
@@ -330,7 +306,6 @@ class Novo_User_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO User Model: RecoverPass Method Initialized');
 
-		$this->className = 'com.novo.objects.TO.UsuarioTO';
 		$this->dataAccessLog->modulo = 'Usuario';
 		$this->dataAccessLog->function = 'Recuperar Clave';
 		$this->dataAccessLog->operation = 'Enviar Clave';
@@ -338,6 +313,7 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataAccessLog->userName = $userName;
 
 		$this->dataRequest->idOperation = 'olvidoClave';
+		$this->dataRequest->className = 'com.novo.objects.TO.UsuarioTO';
 		$this->dataRequest->userName = $userName;
 		$this->dataRequest->idEmpresa = $dataRequest->idEmpresa;
 		$this->dataRequest->email = $dataRequest->email;
@@ -349,13 +325,9 @@ class Novo_User_Model extends NOVO_Model {
 				$this->response->code = 0;
 				$this->response->msg = novoLang(lang('RESP_TEMP_PASS'), [$this->dataRequest->userName, $maskMail]);
 				$this->response->icon = lang('CONF_ICON_SUCCESS');
-				$this->response->data = [
-					'btn1'=> [
-						'text'=> lang('GEN_BTN_CONTINUE'),
-						'link'=> 'inicio',
-						'action'=> 'redirect'
-					]
-				];
+				$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_CONTINUE');
+				$this->response->modalBtn['btn1']['link'] = 'inicio';
+				$this->response->modalBtn['btn1']['action'] = 'redirect';
 				break;
 			case -6:
 				$this->response->code = 1;
@@ -383,11 +355,7 @@ class Novo_User_Model extends NOVO_Model {
 		if($this->isResponseRc != 0 && $this->response->code == 1) {
 			$this->response->title = lang('GEN_RECOVER_PASS_TITLE');
 			$this->response->icon = lang('CONF_ICON_INFO');
-			$this->response->data = [
-				'btn1'=> [
-					'action'=> 'close'
-				]
-			];
+			$this->response->modalBtn['btn1']['action'] = 'close';
 		}
 
 		return $this->responseToTheView('callWs_RecoverPass');
@@ -401,7 +369,6 @@ class Novo_User_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO User Model: RecoverAccess Method Initialized');
 
-		$this->className = 'com.novo.objects.MO.GenericBusinessObject';
 		$this->dataAccessLog->modulo = 'Usuario';
 		$this->dataAccessLog->function = 'Recuperar Acceso';
 		$this->dataAccessLog->operation = 'Generar código OTP';
@@ -409,6 +376,7 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataAccessLog->userName = $userName;
 
 		$this->dataRequest->idOperation = 'genericBusiness';
+		$this->dataRequest->className = 'com.novo.objects.MO.GenericBusinessObject';
 		$this->dataRequest->userName = $userName;
 		$this->dataRequest->tipoDocumento = $dataRequest->documentType;
 		$this->dataRequest->cedula = $dataRequest->documentId;
@@ -431,12 +399,7 @@ class Novo_User_Model extends NOVO_Model {
 				$this->response->code = 0;
 				$this->response->msg = lang('GEN_OTP');
 				$this->response->icon = lang('CONF_ICON_SUCCESS');
-				$this->response->data = [
-					'btn1'=> [
-						'text'=> lang('GEN_BTN_ACCEPT'),
-						'action'=> 'none'
-					]
-				];
+				$this->response->modalBtn['btn1']['action'] = 'none';
 			break;
 			case -100:
 			case -101:
@@ -450,11 +413,7 @@ class Novo_User_Model extends NOVO_Model {
 		if($this->isResponseRc != 0 && $map == 1) {
 			$this->response->title = lang('GEN_RECOVER_PASS_TITLE');
 			$this->response->icon = lang('CONF_ICON_INFO');
-			$this->response->data = [
-				'btn1'=> [
-					'action'=> 'close'
-				]
-			];
+			$this->response->modalBtn['btn1']['action'] = 'close';
 		}
 
 		return $this->responseToTheView('callWs_RecoverAccess');
@@ -468,13 +427,13 @@ class Novo_User_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO User Model: ValidateOtp Method Initialized');
 
-		$this->className = 'com.novo.objects.MO.GenericBusinessObject';
 		$this->dataAccessLog->modulo = 'Usuario';
 		$this->dataAccessLog->function = 'Recuperar Acceso';
 		$this->dataAccessLog->operation = 'Validar código OTP';
 		$this->dataAccessLog->userName = $this->session->flashdata('userName');
 
 		$this->dataRequest->idOperation = 'genericBusiness';
+		$this->dataRequest->className = 'com.novo.objects.MO.GenericBusinessObject';
 		$this->dataRequest->userName = $this->session->flashdata('userName');
 		$this->dataRequest->opcion = 'validarOTP';
 		$this->dataRequest->TokenTO = [
@@ -500,13 +459,7 @@ class Novo_User_Model extends NOVO_Model {
 			case 0:
 				$this->response->msg = novoLang(lang('GEN_SEND_ACCESS'), [$maskMail]);
 				$this->response->icon = lang('CONF_ICON_SUCCESS');
-				$this->response->data = [
-					'btn1'=> [
-						'text'=> lang('GEN_BTN_ACCEPT'),
-						'link'=> 'inicio',
-						'action'=> 'redirect'
-					]
-				];
+				$this->response->modalBtn['btn1']['link'] = 'inicio';
 			break;
 			case -286:
 				$map = 1;
@@ -520,18 +473,14 @@ class Novo_User_Model extends NOVO_Model {
 			case 998:
 				$map = 1;
 				$this->response->code = 4;
-				$this->response->msg = lang('SESSION_EXPIRE_TIME');
+				$this->response->msg = lang('USER_EXPIRE_TIME');
 			break;
 		}
 
 		if($this->isResponseRc != 0 && $map == 1) {
 			$this->response->title = lang('GEN_RECOVER_PASS_TITLE');
 			$this->response->icon = lang('CONF_ICON_INFO');
-			$this->response->data = [
-				'btn1'=> [
-					'action'=> 'close'
-				]
-			];
+			$this->response->modalBtn['btn1']['action'] = 'destroy';
 		}
 
 		return $this->responseToTheView('callWs_ValidateOtp');
@@ -547,23 +496,15 @@ class Novo_User_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO User Model: ChangePassword Method Initialized');
 
-		$this->className = 'com.novo.objects.TOs.UsuarioTO';
 		$this->dataAccessLog->modulo = 'Usuario';
 		$this->dataAccessLog->function = 'Clave';
 		$this->dataAccessLog->operation = 'Cambiar Clave';
 
-		$current = json_decode(base64_decode($dataRequest->currentPass));
-		$current = $this->cryptography->decrypt(
-			base64_decode($current->plot),
-			utf8_encode($current->password)
-		);
-		$new = json_decode(base64_decode($dataRequest->newPass));
-		$new = $this->cryptography->decrypt(
-			base64_decode($new->plot),
-			utf8_encode($new->password)
-		);
+		$current = $this->cryptography->decryptOnlyOneData($dataRequest->currentPass);
+		$new = $this->cryptography->decryptOnlyOneData($dataRequest->newPass);
 
 		$this->dataRequest->idOperation = 'cambioClave';
+		$this->dataRequest->className = 'com.novo.objects.TOs.UsuarioTO';
 		$this->dataRequest->userName = $this->userName;
 		$this->dataRequest->passwordOld = md5($current);
 		$this->dataRequest->password = md5($new);
@@ -580,23 +521,19 @@ class Novo_User_Model extends NOVO_Model {
 				$goLogin = $this->session->has_userdata('logged') ? '' : lang('RESP_PASSWORD_LOGIN');
 				$this->response->msg = novoLang(lang('RESP_PASSWORD_CHANGED'), $goLogin);
 				$this->response->icon = lang('CONF_ICON_SUCCESS');
-				$this->response->data = [
-					'btn1'=> [
-						'text'=> lang('GEN_BTN_CONTINUE'),
-						'link'=> 'inicio',
-						'action'=> $this->session->has_userdata('logged') ? 'close' :  'redirect'
-					]
-				];
-				break;
+				$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_CONTINUE');
+				$this->response->modalBtn['btn1']['link']  = 'inicio';
+				$this->response->modalBtn['btn1']['action'] = $this->session->has_userdata('logged') ? 'destroy' :  'redirect';
+			break;
 			case -4:
 				$code = 1;
 				$this->response->msg = lang('RESP_PASSWORD_USED');
-				break;
+			break;
 			case -1:
 			case -22:
 				$code = 1;
 				$this->response->msg = lang('RESP_PASSWORD_INCORRECT');
-				break;
+			break;
 		}
 
 		if($this->isResponseRc != 0 && $code == 1) {
@@ -605,7 +542,7 @@ class Novo_User_Model extends NOVO_Model {
 
 			$this->response->title = lang('GEN_PASSWORD_CHANGE_TITLE');
 			$this->response->icon = lang('CONF_ICON_WARNING');
-			$this->response->data['btn1']['action'] = 'close';
+			$this->response->modalBtn['btn1']['action'] = 'close';
 		}
 
 		return $this->responseToTheView('CallWs_ChangePassword');
@@ -634,9 +571,7 @@ class Novo_User_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO User Model: FinishSession Method Initialized');
 
-		$this->className = 'com.novo.objects.TOs.UsuarioTO';
-
-		$userName = $dataRequest ? mb_strtoupper($dataRequest->user) : $this->userName;
+		$userName = $dataRequest ? mb_strtoupper($dataRequest->userName) : $this->userName;
 
 		$this->dataAccessLog->userName = $userName;
 		$this->dataAccessLog->modulo = 'Usuario';
@@ -644,6 +579,7 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataAccessLog->operation = 'Cerrar sesion';
 
 		$this->dataRequest->idOperation = 'desconectarUsuario';
+		$this->dataRequest->className = 'com.novo.objects.TOs.UsuarioTO';
 		$this->dataRequest->idUsuario = $userName;
 		$this->dataRequest->codigoGrupo = $this->session->codigoGrupo;
 
@@ -675,11 +611,234 @@ class Novo_User_Model extends NOVO_Model {
 		$this->load->library('recaptcha');
 
 		$result = $this->recaptcha->verifyResponse($dataRequest->token);
-		$logMessage = 'NOVO ['.$dataRequest->user.'] RESPONSE: recaptcha País: "' .$this->config->item('country');
+		$logMessage = 'NOVO ['.$dataRequest->userName.'] RESPONSE: recaptcha País: "' .$this->config->item('country');
 		$logMessage.= '", Score: "' . $result["score"] .'", Hostname: "'. $result["hostname"].'"';
 
 		log_message('DEBUG', $logMessage);
 
 		return $result["score"] <= lang('CONF_SCORE_CAPTCHA')[ENVIRONMENT] ? 9999 : 0;
 	}
+		/**
+	 * @info Método para consulta de administración de usuarios.
+	 * @author Diego Acosta García
+	 * @date Oct 2st, 2020
+	 */
+	public function callWs_usersManagement_User($dataRequest = FALSE)
+	{
+		log_message('INFO', 'NOVO User Model: usersManagement Method Initialized');
+
+		$this->dataAccessLog->modulo = 'Usuario';
+		$this->dataAccessLog->function = 'Obtener usuarios banorte';
+		$this->dataAccessLog->operation = 'obtener usuarios banorte';
+		$this->dataRequest->idOperation = 'integracionBnt';
+		$this->dataRequestclassName = 'com.novo.objects.TOs.GestionUsuariosTO';
+		$this->dataRequest->opcion = 'getUsers';
+		$this->dataRequest->idEmpresa = $this->session->enterpriseInf->idFiscal;
+
+		$response = $this->sendToService('callWs_usersManagement');
+
+		switch ($this->isResponseRc)  {
+			case 0:
+				$this->response->code = 0;
+				$data = $response->bean->users;
+
+				for ($i=0; $i < count($data); $i++) {
+					if ($data[$i]->tranTipoUsuario == 0) {
+						$data[$i]->tranTipoUsuario = 'Administrador';
+					}	else {
+						$data[$i]->tranTipoUsuario = 'Operador';
+					}
+					$data[$i]->idEnterprise = $data[$i]->tranIdEmpresa;
+					$data[$i]->idUser = $data[$i]->tranIdUsuario;
+					$data[$i]->name = $data[$i]->tranNombreUsuario;
+					$data[$i]->mail = $data[$i]->tranCorreo;
+					$data[$i]->type = $data[$i]->tranTipoUsuario;
+					$data[$i]->registered = $data[$i]->registed;
+					unset($data[$i]->tranIdEmpresa);
+					unset($data[$i]->tranIdUsuario);
+					unset($data[$i]->tranNombreUsuario);
+					unset($data[$i]->tranCorreo);
+					unset($data[$i]->tranTipoUsuario);
+					unset($data[$i]->registed);
+					unset($data[$i]->tranIdUsuarioOperativo);
+				}
+
+				$this->response->data = $data	;
+				break;
+			case -150:
+				$this->response->code = 0;
+			break;
+		}
+
+		return $this->responseToTheView('callWs_usersManagement');
+	}
+		/**
+	 * @info Método para consulta de permisos de usuarios.
+	 * @author Diego Acosta García
+	 * @date Oct 2st, 2020
+	 */
+	public function callWs_userPermissions_User($dataRequest)
+	{
+		log_message('INFO', 'NOVO User Model: userPermissions Method Initialized');
+
+		$this->dataAccessLog->modulo = 'Usuario';
+		$this->dataAccessLog->function = 'Obtener usuarios banorte';
+		$this->dataAccessLog->operation = 'obtener usuarios banorte';
+
+		$this->dataRequest->idOperation = 'gestionUsuarios';
+		$this->dataRequest->opcion = 'obtenerFuncionesUsuario';
+		$this->dataRequest->userName = $dataRequest->idUser;
+		$this->session->set_flashdata('userDataPermissions', $dataRequest);
+
+		$response = $this->sendToService('callWs_userPermissions');
+
+		switch ($this->isResponseRc)  {
+			case 0:
+
+				$this->response->code = 0;
+				$data = $response->bean->perfiles;
+
+
+				foreach ($data as $key => $val) {
+					$titles[$key] = $data[$key]->descripcion;
+					$arrayList[$titles[$key]] = $data[$key]->modulos;
+				}
+
+				foreach ($titles as $key => $value) {
+					foreach ($arrayList[$titles[$key]]  as $key1 => $value1) {
+						$arrayList[$titles[$key]][$key1] = $arrayList[$titles[$key]][$key1]->funciones;
+						foreach($arrayList[$titles[$key]][$key1] AS $key2 => $val2){
+							if ($arrayList[$titles[$key]][$key1][$key2]->status == "A") {
+								$arrayList[$titles[$key]][$key1][$key2]->status = "on";
+							}else{
+								$arrayList[$titles[$key]][$key1][$key2]->status = "off";
+							}
+						}
+					}
+				}
+
+				$this->response->data = $arrayList;
+				break;
+		}
+
+		return $this->responseToTheView('callWs_userPermissions');
+	}
+
+	/**
+	 * @info Método para actualizar permisos de usuarios.
+	 * @author Diego Acosta García
+	 * @date Oct 5st, 2020
+	 */
+	public function callWs_updatePermissions_User($dataRequest)
+	{
+		log_message('INFO', 'NOVO User Model: updatePermissions Method Initialized');
+
+		$this->dataAccessLog->modulo = 'Usuario';
+		$this->dataAccessLog->function = 'Actualizar funciones usuario';
+		$this->dataAccessLog->operation = 'Actualizar funciones usuario';
+
+		$this->dataRequest->idOperation = 'gestionUsuarios';
+		$this->dataRequest->opcion = 'actualizarFuncionesUsuario';
+		$this->dataRequest->className = 'com.novo.objects.TOs.GestionUsuariosTO';
+		$this->dataRequest->userName =$dataRequest->idUser;
+
+		$userDataList =[];
+		$userData['idUser'] = $dataRequest->idUser;
+		$userData['nameUser'] = $dataRequest->fullName;
+		$userData['mailUser'] = $dataRequest->email;
+		$userData['typeUser'] = $dataRequest->typeUser;
+		$userDataList = (object) $userData;
+		$user = $dataRequest->idUser;
+		$this->session->set_flashdata('userDataPermissions', $userDataList);
+
+		unset($dataRequest->idUser);
+		unset($dataRequest->fullName);
+		unset($dataRequest->email);
+		unset($dataRequest->typeUser);
+
+		$i=0;
+		$j=0;
+		$functionsArray =[];
+
+		foreach ($dataRequest as $key => $value) {
+			if ($value == "off") {
+				$objet[$i] = ['accodfuncion' => $key, 'status'=> 'I'];
+			} else {
+				$objet[$i] = ['accodfuncion' => $key, 'status'=> 'A'];
+			}
+			$i++;
+			unset($objet[$key]);
+		}
+
+		foreach ($objet as $key => $value) {
+			$functionsArray[$j] = $value;
+			$j++;
+		};
+
+		$this->dataRequest->perfiles = [['idPerfil' => 'TODOS', 'modulos' => [      ['idModulo' => 'TODOS', 'funciones' => $functionsArray]]]];
+
+		$response = $this->sendToService('callWs_updatePermissions');
+
+		switch ($this->isResponseRc)   {
+			case 0:
+				$this->response->title = lang('GEN_MENU_USERS_MANAGEMENT');
+				$this->response->icon =  lang('CONF_ICON_SUCCESS');
+				$this->response->msg = novoLang(lang('RESP_SUCCESSFULL_UPDATE_PERMISSIONS'), $user);
+
+				if ($this->userName == $user) {
+					$this->response->modalBtn['btn1']['action'] = 'redirect';
+				} else {
+					$this->response->modalBtn['btn1']['link'] = 'permisos-usuario';
+				}
+				break;
+		}
+		return $this->responseToTheView('callWs_updatePermissions');
+	}
+
+	/**
+	 * @info Método para habilitar usuario.
+	 * @author Diego Acosta García
+	 * @date Oct 5st, 2020
+	 */
+	public function callWs_enableUser_User($dataRequest)
+	{
+		log_message('INFO', 'NOVO User Model: enableUser Method Initialized');
+
+		$this->dataAccessLog->modulo = 'Usuario';
+		$this->dataAccessLog->function = 'Obtener usuarios banorte';
+		$this->dataAccessLog->operation = 'obtener usuarios banorte';
+
+		$this->dataRequest->idOperation = 'gestionUsuarios';
+		$this->dataRequest->opcion = 'crearUsuario';
+		$this->dataRequest->className = 'com.novo.objects.TOs.GestionUsuariosTO';
+		$this->dataRequest->userName = $dataRequest->user;
+		$this->dataRequest->idUsuario = $dataRequest->user;
+		$name= explode(" ", $dataRequest->name);
+		$this->dataRequest->nombre1 = $name[0];
+		$this->dataRequest->nombre2 = '';
+		$this->dataRequest->apellido1 = $name[1];
+		if( $name[1] == NULL){
+			$this->dataRequest->apellido1 = "";
+		}
+		$this->dataRequest->apellido2 = '';
+		$this->dataRequest->clonarPermisos = 'true';
+		$this->dataRequest->mail = $dataRequest->mail;;
+		$this->dataRequest->empresa = $this->session->enterpriseInf->idFiscal;
+		$this->dataRequest->usuarioPlantilla = $this->session->userName;
+
+		$response = $this->sendToService('callWs_enableUser');
+
+		switch ($this->isResponseRc)   {
+			case 0:
+				$this->response->code = 4;
+				$this->response->title = lang('GEN_MENU_USERS_MANAGEMENT');
+				$this->response->icon =  lang('CONF_ICON_SUCCESS');
+				$this->response->msg = novoLang(lang('RESP_SUCCESSFULL_ENABLE_USER'), $dataRequest->user);
+				$this->response->modalBtn['btn1']['action'] = 'close';
+				break;
+		}
+
+		return $this->responseToTheView('callWs_enableUser');
+	}
 }
+

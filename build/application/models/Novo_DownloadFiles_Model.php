@@ -35,12 +35,12 @@ class Novo_DownloadFiles_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO DownloadFiles Model: UnnmamedAffiliate Method Initialized');
 
-		$this->className = 'com.novo.objects.MO.ListadoLotesMO';
 		$this->dataAccessLog->modulo = 'lotes';
 		$this->dataAccessLog->function = 'Innominadas';
 		$this->dataAccessLog->operation = 'Detalle de lote';
 
 		$this->dataRequest->idOperation = 'generarReporteTarjetasInnominadas';
+		$this->dataRequest->className = 'com.novo.objects.MO.ListadoLotesMO';
 		$this->dataRequest->idProducto = $this->session->productInf->productPrefix;
 		$this->dataRequest->tarjetasInnominadas = [
 			[
@@ -57,7 +57,7 @@ class Novo_DownloadFiles_Model extends NOVO_Model {
 			case 0:
 				$fileInfo = $response->bean;
 				exportFile($fileInfo->archivo, 'xls', 'Afiliacion_innominadas');
-				break;
+			break;
 			default:
 				$this->load->model('Novo_Bulk_Model', 'DetailUnnamed');
 				unset($dataRequest->who, $dataRequest->where);
@@ -81,7 +81,6 @@ class Novo_DownloadFiles_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO DownloadFiles Model: StatusBulkReport Method Initialized');
 
-		$this->className = 'com.novo.objects.TOs.LoteTO';
 		$this->dataAccessLog->modulo = 'Consultas';
 		$this->dataAccessLog->function = 'Detalle de lote';
 		$this->dataAccessLog->operation = 'Descarga de archivos';
@@ -97,6 +96,7 @@ class Novo_DownloadFiles_Model extends NOVO_Model {
 			break;
 		}
 
+		$this->dataRequest->className = 'com.novo.objects.TOs.LoteTO';
 		$this->dataRequest->acidlote = $dataRequest->bulkId;
 
 		$response = $this->sendToService('callWs_StatusBulkReport');
@@ -104,7 +104,7 @@ class Novo_DownloadFiles_Model extends NOVO_Model {
 		switch ($this->isResponseRc) {
 			case 0:
 				exportFile($response->archivo, $FileType, $response->nombre);
-				break;
+			break;
 			default:
 				$dataRequest->code = 0;
 				$request = new stdClass();
@@ -128,7 +128,6 @@ class Novo_DownloadFiles_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO DownloadFiles Model: StatusBulkReport Method Initialized');
 
-		$this->className = 'com.novo.objects.MO.ListadoLotesMO';
 		$this->dataAccessLog->modulo = 'Reportes';
 		$this->dataAccessLog->function = 'Estado de Lote';
 		$this->dataAccessLog->operation = 'Descarga de archivos';
@@ -144,6 +143,7 @@ class Novo_DownloadFiles_Model extends NOVO_Model {
 			break;
 		}
 
+		$this->dataRequest->className = 'com.novo.objects.MO.ListadoLotesMO';
 		$this->dataRequest->acCodCia = $dataRequest->enterpriseCode;
 		$this->dataRequest->idProducto = $dataRequest->productCode;
 		$this->dataRequest->dtfechorcargaIni = $dataRequest->initialDate;
@@ -155,7 +155,7 @@ class Novo_DownloadFiles_Model extends NOVO_Model {
 		switch ($this->isResponseRc) {
 			case 0:
 				exportFile($response->archivo, $FileType, 'Estado_de_lote');
-				break;
+			break;
 			default:
 				$dataRequest->code = 0;
 				$this->responseFail_DownloadFiles($dataRequest);
@@ -172,7 +172,6 @@ class Novo_DownloadFiles_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO DownloadFiles Model: CardHoldersReport Method Initialized');
 
-		$this->className = 'com.novo.objects.MO.ListadoTarjetaHabientesMO';
 		$this->dataAccessLog->modulo = 'Reportes';
 		$this->dataAccessLog->function = 'Reportes Tarjetahabiente';
 		$this->dataAccessLog->operation = 'Descarga de archivos';
@@ -188,6 +187,7 @@ class Novo_DownloadFiles_Model extends NOVO_Model {
 			break;
 		}
 
+		$this->dataRequest->className = 'com.novo.objects.MO.ListadoTarjetaHabientesMO';
 		$this->dataRequest->paginaActual = 1;
 		$this->dataRequest->tamanoPagina = 10;
 		$this->dataRequest->paginar = false;
@@ -201,7 +201,7 @@ class Novo_DownloadFiles_Model extends NOVO_Model {
 		switch ($this->isResponseRc) {
 			case 0:
 				exportFile($response->archivo, $FileType, 'Tarjetas_habientes');
-				break;
+			break;
 			default:
 				$dataRequest->code = 0;
 				$this->responseFail_DownloadFiles($dataRequest);
@@ -217,7 +217,6 @@ class Novo_DownloadFiles_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO DownloadFiles Model: RechargeMadeReport Method Initialized');
 
-		$this->className = 'com.novo.objects.TOs.RecargasRealizadasTO';
 		$this->dataAccessLog->modulo = 'Reportes';
 		$this->dataAccessLog->function = 'Reportes RecargasRealizadas';
 		$this->dataAccessLog->operation = 'Descarga de archivos';
@@ -238,6 +237,7 @@ class Novo_DownloadFiles_Model extends NOVO_Model {
     $mes=$arreglo[0];
     $anio=$arreglo[1];
 
+		$this->dataRequest->className = 'com.novo.objects.TOs.RecargasRealizadasTO';
 		$this->dataRequest->paginaActual = 1;
 		$this->dataRequest->tamanoPagina = 10;
 		$this->dataRequest->fecha = '';
@@ -252,7 +252,7 @@ class Novo_DownloadFiles_Model extends NOVO_Model {
 		switch ($this->isResponseRc) {
 			case 0:
 				exportFile($response->archivo, $FileType, 'Recargas_realizadas');
-				break;
+			break;
 			default:
 				$dataRequest->code = 0;
 				$this->responseFail_DownloadFiles($dataRequest);
@@ -268,7 +268,6 @@ class Novo_DownloadFiles_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO DownloadFiles Model: IssuedCardsReport Method Initialized');
 
-		$this->className = 'com.novo.objects.MO.SaldosAmanecidosMO';
 		$this->dataAccessLog->modulo = 'Reportes';
 		$this->dataAccessLog->function = 'Reportes TarjetasEmitidas';
 		$this->dataAccessLog->operation = 'Descarga de archivos';
@@ -280,6 +279,7 @@ class Novo_DownloadFiles_Model extends NOVO_Model {
 			break;
 		}
 
+		$this->dataRequest->className = 'com.novo.objects.MO.SaldosAmanecidosMO';
 		$this->dataRequest->accodcia = $dataRequest->accodcia;
 		$this->dataRequest->tipoConsulta = $dataRequest->radioButton;
 		$this->dataRequest->idExtEmp = $dataRequest->acrif;
@@ -291,7 +291,7 @@ class Novo_DownloadFiles_Model extends NOVO_Model {
 		switch ($this->isResponseRc) {
 			case 0:
 				exportFile($response->archivo, $FileType, 'Tarjetas_emitidas');
-				break;
+			break;
 			default:
 				$dataRequest->code = 0;
 				$this->responseFail_DownloadFiles($dataRequest);
@@ -316,8 +316,8 @@ class Novo_DownloadFiles_Model extends NOVO_Model {
 		$this->response->msg = lang('GEN_WARNING_DOWNLOAD_FILE');
 		$this->response->icon =  lang('CONF_ICON_WARNING');
 		$this->response->download =  TRUE;
-		$this->response->data->resp['btn1']['text'] = lang('GEN_BTN_ACCEPT');
-		$this->response->data->resp['btn1']['action'] = 'close';
+		$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_ACCEPT');
+		$this->response->modalBtn['btn1']['action'] = 'close';
 
 		if ($dataResponse->code != 0) {
 			$this->response->code =  $dataResponse->code;
@@ -325,7 +325,7 @@ class Novo_DownloadFiles_Model extends NOVO_Model {
 			$this->response->msg = $dataResponse->msg;
 			$this->response->icon =  $dataResponse->icon;
 			$this->response->download =  FALSE;
-			$this->response->data->resp['btn1']['action'] = $dataResponse->data->resp['btn1']['action'];
+			$this->response->modalBtn['btn1']['action'] = $dataResponse->modalBtn['btn1']['action'];
 		}
 	}
 }

@@ -36,7 +36,7 @@ class Novo_CallModels extends Novo_Controller {
 			}
 		}
 
-		$this->appUserName = isset($_POST['user']) ? mb_strtoupper($_POST['user']) : $this->session->userName;
+		$this->appUserName = isset($_POST['userName']) ? mb_strtoupper($_POST['userName']) : $this->session->userName;
 
 		log_message('DEBUG', 'NOVO ['.$this->appUserName.'] REQUEST FROM THE VIEW '.json_encode($this->dataRequest, JSON_UNESCAPED_UNICODE));
 
@@ -58,8 +58,8 @@ class Novo_CallModels extends Novo_Controller {
 			$this->dataResponse = $this->verify_access->ResponseByDefect($this->appUserName);
 		}
 
-		$data = $this->dataResponse->data;
-		$this->dataResponse->data = $this->verify_access->validateRedirect($data, $this->countryUri);
+		$modalBtn = $this->dataResponse->modalBtn;
+		$this->dataResponse->modalBtn = $this->verify_access->validateRedirect($modalBtn, $this->countryUri);
 		$dataResponse = $this->cryptography->encrypt($this->dataResponse);
 		$this->output->set_content_type('application/json')->set_output(json_encode($dataResponse, JSON_UNESCAPED_UNICODE));
 	}

@@ -14,18 +14,18 @@ $recoverPwdLink = $this->config->item('base_url') .$pais. '/users/pass_recovery'
             'adminLoginForm','accept-charset'=>'utf-8'))?>
         <?=form_fieldset()?>
         <?=form_hidden('hash', '123456');?>
-        <?=form_label('Usuario', 'user_login');?>
+        <?=form_label('Usuario', 'userName');?>
         <?=form_input(array('name' =>
-            'user_login',
-            'id' => 'user_login',
+            'userName',
+            'id' => 'userName',
             'value' => '',
             'placeholder' => 'Usuario',
         ))?>
-        <?=form_label('Contraseña', 'user_pass');?>
+        <?=form_label('Contraseña', 'userName');?>
         <?=form_password(array(
             'name' =>
-                'user_pass',
-            'id' => 'user_pass',
+                'userName',
+            'id' => 'userName',
             'value' => '',
             'placeholder' => 'Contraseña'
         ))?>

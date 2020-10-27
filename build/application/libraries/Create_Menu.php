@@ -30,19 +30,22 @@ class Create_Menu {
 		switch ($firstLevel) {
 			case 'GESLOT':
 				$mainMenuLang = lang('GEN_MENU_LOTS');
-				break;
+			break;
 			case 'CONSUL':
 				$mainMenuLang = lang('GEN_MENU_CONSULTATIONS');
-				break;
+			break;
 			case 'SERVIC':
 				$mainMenuLang = lang('GEN_MENU_SERVICES');
-				break;
+			break;
 			case 'GESREP':
 				$mainMenuLang = lang('GEN_MENU_REPORTS');
-				break;
+			break;
 			case 'COMBUS':
 				$mainMenuLang = lang('GEN_MENU_TRAJECTS');
-				break;
+			break;
+			case 'GESUSR':
+				$mainMenuLang = lang('GEN_MENU_USERS');
+			break;
 			default:
 				$mainMenuLang = '';
 		}
@@ -96,131 +99,135 @@ class Create_Menu {
 			case 'TEBCAR':
 				$subMenuLang->text = lang('GEN_MENU_BULK_LOAD');
 				$subMenuLang->link = lang('GEN_LINK_BULK_LOAD');
-				break;
+			break;
 			case 'TEBAUT':
 				$subMenuLang->text = lang('GEN_MENU_BULK_AUTH');
 				$subMenuLang->link = lang('GEN_LINK_BULK_AUTH');
-				break;
+			break;
 			case 'TICARG':
 				$subMenuLang->text = lang('GEN_MENU_BULK_UNNAMED_REQ');
 				$subMenuLang->link = lang('GEN_LINK_BULK_UNNAMED_REQ');
-				break;
+			break;
 			case 'TIINVN':
 				$subMenuLang->text = lang('GEN_MENU_BULK_UNNAMED_AFFIL');
 				$subMenuLang->link = lang('GEN_LINK_BULK_UNNAMED_AFFIL');
-				break;
+			break;
 			case 'TEBGUR':
 				$subMenuLang->text = lang('GEN_MENU_LOT_REPROCESS');
 				$subMenuLang->link = 'javascript:';
-				break;
+			break;
 			case 'TEBORS':
 				$subMenuLang->text = lang('GEN_MENU_CONS_ORDERS_SERV');
 				$subMenuLang->link = lang('GEN_LINK_CONS_ORDERS_SERV');
-				break;
+			break;
 			case 'TEBPOL':
 				$subMenuLang->text = lang('GEN_MENU_CONS_DATA_UPGRADE');
 				$subMenuLang->link = 'javascript:';
-				break;
+			break;
 			case 'TRAMAE':
 				$subMenuLang->text = lang('GEN_MENU_SERV_MASTER_ACCOUNT');
 				$subMenuLang->link = lang('GEN_LINK_SERV_MASTER_ACCOUNT');
-				break;
+			break;
 			case 'COPELO':
 				$subMenuLang->text = lang('GEN_MENU_SERV_CARD_INQUIRY');
 				$subMenuLang->link = lang('GEN_LINK_SERV_CARD_INQUIRY');
-				break;
+			break;
 			case 'GIRCOM':
 				$subMenuLang->text = lang('GEN_MENU_SERV_COMM_MONEY_ORDERS');
 				$subMenuLang->link = lang('GEN_LINK_SERV_COMM_MONEY_ORDERS');
-				break;
+			break;
 			case 'LIMTRX':
 				$subMenuLang->text = lang('GEN_MENU_SERV_TRANS_LIMITS');
 				$subMenuLang->link = lang('GEN_LINK_SERV_TRANS_LIMITS');
-				break;
+			break;
 			case 'CONVIS':
 				$subMenuLang->text = lang('GEN_MENU_SERV_CONTROLS_PAY');
 				$subMenuLang->link = 'javascript:';
-				break;
+			break;
 			case 'PAGPRO':
 				$subMenuLang->text = lang('GEN_MENU_SERV_PROV_PAY');
 				$subMenuLang->link = 'javascript:';
-				break;
+			break;
 			case 'CMBCON':
 				$subMenuLang->text = lang('GEN_MENU_WAY_DRIVERS');
 				$subMenuLang->link = 'javascript:';
-				break;
+			break;
 			case 'CMBVHI':
 				$subMenuLang->text = lang('GEN_MENU_WAY_VEHICLES');
 				$subMenuLang->link = 'javascript:';
-				break;
+			break;
 			case 'CMBCTA':
 				$subMenuLang->text = lang('GEN_MENU_WAY_ACCOUNTS');
 				$subMenuLang->link = 'javascript:';
-				break;
+			break;
 			case 'CMBVJE':
 				$subMenuLang->text = lang('GEN_MENU_WAY_TRAVELS');
 				$subMenuLang->link = 'javascript:';
-				break;
+			break;
 			case 'TEBTHA':
 				$subMenuLang->text = lang('GEN_MENU_REP_CARDHOLDERS');
 				$subMenuLang->link = lang('GEN_MENU_LNK_CARDHOLDERS');
-				break;
+			break;
 			case 'REPREP':
 				$subMenuLang->text = lang('GEN_MENU_REP_CARD_REPLACE');
 				$subMenuLang->link = lang('GEN_LINK_REP_CARD_REPLACE');
-				break;
+			break;
 			case 'REPEDO':
 				$subMenuLang->text = lang('GEN_MENU_REP_ACCAOUNT_STATUS');
 				$subMenuLang->link = lang('GEN_LINK_REP_ACCAOUNT_STATUS');
-				break;
+			break;
 			case 'REPSAL':
 				$subMenuLang->text = lang('GEN_MENU_REP_CLOSING_BAKANCE');
 				$subMenuLang->link = lang('GEN_LINK_REP_CLOSING_BAKANCE');
-				break;
+			break;
 			case 'REPUSU':
 				$subMenuLang->text = lang('GEN_MENU_REP_USER_ACT');
 				$subMenuLang->link = lang('GEN_LINK_REP_USER_ACT');
-				break;
+			break;
 			case 'REPPRO':
 				$subMenuLang->text = lang('GEN_MENU_REP_RECHARGE_MADE');
 				$subMenuLang->link = lang('GEN_LINK_REP_RECHARGE_MADE');
-				break;
+			break;
 			case 'REPTAR':
 				$subMenuLang->text = lang('GEN_MENU_REP_ISSUED_CARDS');
 				$subMenuLang->link = lang('GEN_LINK_REP_ISSUED_CARDS');
-				break;
+			break;
 			case 'REPLOT':
 				$subMenuLang->text = lang('GEN_MENU_REP_STATUS_BULK');
 				$subMenuLang->link = lang('GEN_LINK_REP_STATUS_BULK');
-				break;
+			break;
 			case 'REPCAT':
 				$subMenuLang->text = lang('GEN_MENU_REP_CATEGORY_EXPENSE');
 				$subMenuLang->link = lang('GEN_LINK_REP_CATEGORY_EXPENSE');
-				break;
+			break;
 			case 'REPCON':
 				$subMenuLang->text = lang('GEN_MENU_REP_MASTER_ACCOUNT');
 				$subMenuLang->link = lang('GEN_LINK_REP_MASTER_ACCOUNT');;
-				break;
+			break;
 			case 'REPPGE':
 				$subMenuLang->text = lang('GEN_MENU_REP_KIDGARDEN_PAY');
 				$subMenuLang->link = 'javascript:';
-				break;
+			break;
 			case 'REPRTH':
 				$subMenuLang->text = lang('GEN_MENU_REP_RECHARGE_FEE');
 				$subMenuLang->link = 'javascript:';
-				break;
+			break;
 			case 'LOTFAC':
 				$subMenuLang->text = lang('GEN_MENU_REP_LOTS_BILLED');
 				$subMenuLang->link = 'javascript:';
-				break;
+			break;
 			case 'REPALL':
 				$subMenuLang->text = lang('GEN_MENU_REP_ALL');
 				$subMenuLang->link = lang('GEN_LINK_REP_ALL');
-				break;
+			break;
+			case 'USEREM':
+				$subMenuLang->text = lang('GEN_MENU_USERS_MANAGEMENT');
+				$subMenuLang->link = lang('GEN_LINK_USERS_MANAGEMENT');
+			break;
 			case 'UNNAMED':
 				$subMenuLang->text = lang('GEN_MENU_BULK_UNNAMED');
 				$subMenuLang->link = 'javascript:';
-				break;
+			break;
 			default:
 				$subMenuLang->text = '---';
 				$subMenuLang->link = 'javascript:';

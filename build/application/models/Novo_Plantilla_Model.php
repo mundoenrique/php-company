@@ -16,18 +16,18 @@ class Novo_Plantilla_Model extends NOVO_Model {
 	 * @info Método para
 	 * @author
 	 */
-	public function callWs_Plantilla_User($dataRequest)
+	public function callWs_Plantilla_Plantilla($dataRequest)
 	{
 		log_message('INFO', 'NOVO Plantilla Model: Plantilla Method Initialized');
-		$this->className = '';
 
 		$this->dataAccessLog->modulo = '';
 		$this->dataAccessLog->function = '';
 		$this->dataAccessLog->operation = '';
 		//usar de ser necesario
-		$this->dataAccessLog->userName = $dataRequest->user;
+		$this->dataAccessLog->userName = $dataRequest->userName;
 
 		$this->dataRequest->idOperation = 'id-optation';
+		$this->dataRequest->className = 'class-name';
 
 		$response = $this->sendToService('callWs_Plantilla');
 
@@ -49,18 +49,16 @@ class Novo_Plantilla_Model extends NOVO_Model {
 				$this->response->code = 3;
 				$this->response->msg = lang('REEMPLAZAR POR TRADUCCION DESDE RESPONSE-LANG');
 				$this->response->icon = lang('CONF_ICON_SUCCESS');
-				$this->response->data = [
-					'btn1'=> [
-						'text'=> lang('GEN_BTN_ACCEPT'),
-						'link'=> 'empresas',
-						'action'=> 'redirect'
-					],
-					'btn2'=> [
-						'text'=> lang('GEN_BTN_CANCEL'),
-						'link'=> FALSE,
-						'action'=> 'close'
-					]
-				];
+				$this->response->title = lang('SOME_LANGUAGE_VARIBLE');
+				$this->response->msg = lang('SOME_LANGUAGE_VARIBLE');
+				$this->response->data = 'data from service';
+				$this->response->modalBtn['btn1']['text'] = lang('SOME_LANGUAGE_VARIBLE');
+				$this->response->modalBtn['btn1']['link']  = 'link';
+				$this->response->modalBtn['btn1']['action'] = 'none|destroy|redirect';
+				$this->response->modalBtn['btn2']['text'] = lang('SOME_LANGUAGE_VARIBLE');
+				$this->response->modalBtn['btn2']['link']  = 'link';
+				$this->response->modalBtn['btn2']['action'] = 'none|destroy|redirect';
+
 				break;
 		}
 

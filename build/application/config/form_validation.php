@@ -1,39 +1,45 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed');
 
 $config = [
-	'login' => [
+	'signIn' => [
 		[
-			'field' => 'user',
-			'label' => 'user',
+			'field' => 'userName',
 			'rules' => 'trim|regex_match[/^([\wñÑ.\-+&]+)+$/i]|required'
 		],
 		[
-			'field' => 'pass',
-			'label' => 'pass',
-			'rules' => 'trim|required'
+			'field' => 'userPass',
+			'rules' => 'trim|regex_match[/^([a-zA-Z0-9=]+)+$/i]|required'
 		],
 		[
-			'field' => 'codeOTP',
-			'label' => 'codeOTP',
+			'field' => 'otpCode',
 			'rules' => 'trim|regex_match[/^[a-z0-9]+$/i]'
 		],
 		[
 			'field' => 'saveIP',
-			'label' => 'saveIP',
 			'rules' => 'trim'
 		]
 	],
 	'singleSignOn' => [
 		[
 			'field' => 'sessionId',
-			'label' => 'sessionId',
-			'rules' => 'trim|required'
+			'rules' => 'trim'
+		],
+		[
+			'field' => 'clave',
+			'rules' => 'trim'
+		],
+		[
+			'field' => 'IdServicio',
+			'rules' => 'trim'
+		],
+		[
+			'field' => 'canal',
+			'rules' => 'trim'
 		]
 	],
 	'finishSession' => [
 		[
-			'field' => 'user',
-			'label' => 'user',
+			'field' => 'userName',
 			'rules' => 'trim|regex_match[/^([\wñÑ]+)+$/i]|required'
 		]
 	],
@@ -511,6 +517,11 @@ $config = [
 			'field' => 'bulkTicked',
 			'label' => 'bulkTicked',
 			'rules' => 'trim|regex_match[/^([\w]+)+$/i]|required'
+		],
+		[
+			'field' => 'pass',
+			'label' => 'pass',
+			'rules' => 'trim'
 		]
 	],
 	'deleteNoConfirmBulk' => [
@@ -532,14 +543,14 @@ $config = [
 		[
 			'field' => 'pass',
 			'label' => 'pass',
-			'rules' => 'trim|required'
+			'rules' => 'trim'
 		]
 	],
 	'signBulkList' => [
 		[
 			'field' => 'pass',
 			'label' => 'pass',
-			'rules' => 'trim|required'
+			'rules' => 'trim'
 		],
 		[
 			'field' => 'bulk[]',
@@ -551,7 +562,7 @@ $config = [
 		[
 			'field' => 'pass',
 			'label' => 'pass',
-			'rules' => 'trim|required'
+			'rules' => 'trim'
 		],
 		[
 			'field' => 'bulk[]',
@@ -563,7 +574,7 @@ $config = [
 		[
 			'field' => 'pass',
 			'label' => 'pass',
-			'rules' => 'trim|required'
+			'rules' => 'trim'
 		],
 		[
 			'field' => 'bulk[]',
@@ -684,7 +695,7 @@ $config = [
 		[
 			'field' => 'pass',
 			'label' => 'pass',
-			'rules' => 'trim|required'
+			'rules' => 'trim'
 		],
 		[
 			'field' => 'cards[]',
@@ -827,7 +838,7 @@ $config = [
 		[
 			'field' => 'cards[]',
 			'label' => 'cards',
-			'rules' => 'regex_match[/^([\w{}"*:.,@ñÑáéíóúÑÁÉÍÓÚ ]*)+$/i]|required'
+			'rules' => 'regex_match[/^([\w{}"*:.\-+,@ñÑáéíóúÑÁÉÍÓÚ ]*)+$/i]|required'
 		],
 		[
 			'field' => 'action',
@@ -835,9 +846,16 @@ $config = [
 			'rules' => 'trim|regex_match[/^([\w ]*)+$/i]|required'
 		],
 		[
-			'field' => 'pass',
-			'label' => 'pass',
-			'rules' => 'trim|regex_match[/^([a-zA-Z0-9=]+)+$/i]|required'
+			'field' => 'password',
+			'label' => 'password',
+			'rules' => 'trim|regex_match[/^([a-zA-Z0-9=]+)+$/i]'
+		]
+	],
+	'authorizationKey' => [
+		[
+			'field' => 'action',
+			'label' => 'action',
+			'rules' => 'trim|regex_match[/^([\wñáéíóú ]+)+$/i]|required'
 		]
 	],
 	'statusBulk' => [
@@ -907,7 +925,26 @@ $config = [
 		[
 			'field' => 'modalReq',
 			'label' => 'modalReq',
-			'rules' => 'trim|required'
+			'rules' => 'trim'
+		]
+	],
+	// Old Arquitectures
+	'login' => [
+		[
+			'field' => 'userName',
+			'rules' => 'trim|regex_match[/^([\wñÑ.\-+&]+)+$/i]|required'
+		],
+		[
+			'field' => 'userPass',
+			'rules' => 'trim|regex_match[/^([a-zA-Z0-9=]+)+$/i]|required'
+		],
+		[
+			'field' => 'otpCode',
+			'rules' => 'trim|regex_match[/^[a-z0-9]+$/i]'
+		],
+		[
+			'field' => 'saveIP',
+			'rules' => 'trim'
 		]
 	],
 	'dash-products' => [
@@ -1022,6 +1059,40 @@ $config = [
 			'rules' => 'trim|regex_match[/^[0-9]*$/i]'
 		]
 	],
+	'usersActivity' => [
+		[
+			'field' => 'enterpriseCode',
+			'label' => 'enterpriseCode',
+			'rules' => 'trim|regex_match[/^[a-z0-9]+$/i]|required'
+		],
+		[
+			'field' => 'initialDate',
+			'label' => 'initialDate',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+		],
+		[
+			'field' => 'finalDate',
+			'label' => 'finalDate',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+		]
+	],
+	'exportExcelUsersActivity' => [
+		[
+			'field' => 'enterpriseCode',
+			'label' => 'enterpriseCode',
+			'rules' => 'trim|regex_match[/^[a-z0-9]+$/i]|required'
+		],
+		[
+			'field' => 'initialDate',
+			'label' => 'initialDate',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+		],
+		[
+			'field' => 'finalDate',
+			'label' => 'finalDate',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+		]
+	],
 	'exportToExcelUserActivity' => [
 		[
 			'field' => 'rifEmpresa',
@@ -1067,7 +1138,7 @@ $config = [
 	'updateCommercialTwirls' => [
 		[
 			'field' => 'passwordAuth',
-			'rules' => 'trim|required'
+			'rules' => 'trim'
 		],
 		[
 			'field' => 'companyId',
@@ -1159,7 +1230,7 @@ $config = [
 	'updateTransactionalLimits' => [
 		[
 			'field' => 'passwordAuth',
-			'rules' => 'trim|required'
+			'rules' => 'trim'
 		],
 		[
 			'field' => 'dailyNumberCredit',
@@ -1303,5 +1374,161 @@ $config = [
 				'field' => 'initialDateAct',
 				'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
 			]
-		]
+			],
+			'userPermissions' => [
+				[
+					'field' => 'adminUser',
+					'rules' => 'trim|regex_match[/^[a-zA-Z0-9]*$/i]',
+				],
+			],
+			'usersManagement' => [
+				[
+					'field' => 'adminUser',
+					'rules' => 'trim|regex_match[/^[a-zA-Z0-9]*$/i]'
+				],
+				[
+					'field' => 'adminName',
+					'rules' => 'trim|regex_match[/^[a-zA-Z0-9]*$/i]'
+				],
+				[
+					'field' => 'adminMail',
+					'rules' => 'trim|regex_match[/^[a-zA-Z0-9]*$/i]'
+				],
+				[
+					'field' => 'adminType',
+					'rules' => 'trim|regex_match[/^[a-zA-Z0-9]*$/i]'
+				],
+			],
+			'updatePermissions' => [
+				[
+					'field' => 'idUser',
+					'rules' => 'trim|regex_match[/^[A-Za-z0-9]*$/i]|required'
+				],
+				[
+					'field' => 'ACTGIR',
+					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
+				],
+				[
+					'field' => 'ACTLIM',
+					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
+				],
+				[
+					'field' => 'ASGPER',
+					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
+				],
+				[
+					'field' => 'CONGIR',
+					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
+				],
+				[
+					'field' => 'CONLIM',
+					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
+				],
+				[
+					'field' => 'CONUSU',
+					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
+				],
+				[
+					'field' => 'CREUSU',
+					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
+				],
+				[
+					'field' => 'OPCONL',
+					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
+				],
+				[
+					'field' => 'REPCON',
+					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
+				],
+				[
+					'field' => 'REPEDO',
+					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
+				],
+				[
+					'field' => 'REPLOT',
+					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
+				],
+				[
+					'field' => 'REPPRO',
+					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
+				],
+				[
+					'field' => 'REPTAR',
+					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
+				],
+				[
+					'field' => 'REPUSU',
+					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
+				],
+				[
+					'field' => 'TEBANU',
+					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
+				],
+				[
+					'field' => 'TEBCON',
+					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
+				],
+				[
+					'field' => 'TEBCOS',
+					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
+				],
+				[
+					'field' => 'TEBELC',
+					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
+				],
+				[
+					'field' => 'TEBELI',
+					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
+				],
+				[
+					'field' => 'TEBTHA',
+					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
+				],
+				[
+					'field' => 'TIREPO',
+					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
+				],
+				[
+					'field' => 'TRAABO',
+					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
+				],
+				[
+					'field' => 'TRAASG',
+					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
+				],
+				[
+					'field' => 'TRABLQ',
+					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
+				],
+				[
+					'field' => 'TRACAR',
+					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
+				],
+				[
+					'field' => 'TRADBL',
+					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
+				],
+				[
+					'field' => 'TRAPGO',
+					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
+				],
+				[
+					'field' => 'TRASAL',
+					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
+				]
+			],
+			'enableUser' => [
+				[
+					'field' => 'user',
+					'rules' => 'trim|regex_match[/^[a-zA-Z0-9]*$/i]'
+				],
+				[
+					'field' => 'name',
+					'rules' => 'trim|regex_match[/^[a-zA-Z0-9 áéíóúÁÉÍÓÚñÑ]*$/i]'
+				],
+				[
+					'field' => 'mail',
+					'rules' => 'trim|regex_match[/^[a-zA-Z0-9@.]*$/i]'
+				],
+			]
 ];

@@ -19,6 +19,7 @@ $lang['REPORTS_NO_GMF'] = 'No existen certificados GMF disponibles';
 $lang['REPORTS_NO_GMF_FOR_YEAR'] = 'El certificado GMF para el año %s, no esta disponible';
 $lang['REPORTS_ID_FISCAL']= "NIT. (Opcional)";
 $lang['REPORTS_ID_FISCAL_INPUT']= "Ingresa NIT.";
+$lang['REPORTS_REQUEST_NO_RESULTS']= "No se encontraron resultados con la empresa y fecha seleccionada.";
 //MASTER ACCOUNT
 $lang['REPORTS_TABLE_DATE']="Fecha";
 $lang['REPORTS_TABLE_DESCRIPTION']="Descripción";
@@ -31,6 +32,14 @@ $lang['REPORTS_TABLE_CARD']="Tarjeta";
 $lang['REPORTS_TABLE_CARDHOLDER']="Tarjetahabiente";
 $lang['REPORTS_TABLE_DNI']="NIT";
 $lang['REPORTS_TABLE_LAST_ACTIVITY']="Última actividad";
+//USERS ACTIVITY
+$lang['REPORTS_USERS_ACT_DATE_ACTION']="Fecha acción";
+$lang['REPORTS_USERS_ACT_DATE_ACTIVITY']="Fecha última actividad";
+$lang['REPORTS_USERS_ACT_MODULE']="Módulo";
+$lang['REPORTS_USERS_ACT_FUNCTION']="Función";
+$lang['REPORTS_USERS_ACT_RESULT']="Resultado (Cod. error / respuesta)";
+$lang['REPORTS_USERS_ACT_OBSERVATION']="Observación";
+$lang['REPORTS_USERS_ACT_STATE']="Estado";
 
 
 

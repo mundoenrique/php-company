@@ -58,12 +58,19 @@ $(function () {
 				});
 
 				if (response.data.rechargeMadeList.length == 0) {
-					$('.download-icons').addClass('hide')
+					$('.download-icons').addClass('hide');
+					$("#product").html("&nbsp;");
+					$("#month1").text("");
+					$("#month2").text("");
+					$("#month3").text("");
+					$("#total").text("");
 				} else {
 					$('.download-icons').removeClass('hide');
+					$("#product").text(lang.GEN_PRODUCT);
 					$("#month1").text(response.data.rechargeMadeList[0].monthRecharge1);
 					$("#month2").text(response.data.rechargeMadeList[0].monthRecharge2);
 					$("#month3").text(response.data.rechargeMadeList[0].monthRecharge3);
+					$("#total").text(lang.GEN_TABLE_TOTAL);
 					$.each(response.data.rechargeMadeList[0].recharge, function (index, value) {
 						table.row.add([
 							value.producto,

@@ -1,5 +1,5 @@
 'use strict'
-var inputModal;
+var cardnumber;
 $(function () {
 	$('.hide-out').removeClass('hide');
 	$('#blockResults').addClass('hidden');
@@ -7,57 +7,65 @@ $(function () {
 
 	$('#card-holder-btn').on('click', function (e) {
 		e.preventDefault();
-		var form = $('#formTwirls');
+		form = $('#formTwirls');
+		formInputTrim(form);
 		validateForms(form);
 
 		if (form.valid()) {
 			$('#blockResults').addClass('hidden');
 			$('#spinnerBlock').removeClass('hide');
 			insertFormInput(true);
-			getSwitchTwirls(getDataForm(form));
+			getSwitchTwirls();
 		}
 	});
 
-	$('input[type=checkbox]').on('change', function(){
+	$('input[type=checkbox]').on('change', function() {
 		var password = $('#passwordAuth').val();
-		if( $(this).is(':checked') == false ){
-			$( this).val(0);
-			$( '#passwordAuth').val(password);
-		}else{
-			$( this).val(1);
+
+		if ($(this).is(':checked') == false ) {
+			$(this).val(0);
+			$('#passwordAuth').val(password);
+		} else {
+			$(this).val(1);
 		}
 	});
 
-	$('#sign-btn').on('click', function(e){
-		var changeBtn = $(this);
-		var btnText = changeBtn.text().trim();
-		var form = $('#check-form');
-		var passData = getDataForm(form);
+	$('#sign-btn').on('click', function(e) {
+		btnText = $(this).text().trim();
+		form = $('#check-form');
 
 		$('#spinnerBlock').addClass('hide');
-		delete passData.passwordAuth;
-		passData.passwordAuth = cryptoPass(form.find('input.pwd').val().trim());
-		passData.cardNumber = $('#cardNumber').val();
-
+		formInputTrim(form);
 		validateForms(form)
 
 		if (form.valid()) {
-			insertFormInput(true, form);
-			changeBtn.html(loader);
-			updateTwirlsCard(passData, btnText);
+			insertFormInput(true);
+			$(this).html(loader);
+			if (lang.CONF_REMOTE_AUTH == 'ON') {
+				remoteFunction = 'updateTwirlsCard';
+				btnRemote = $(this);
+				remoteAuthArgs.action = lang.GEN_COMMERCIAL_TWIRLS_TITTLE;
+				getauhtKey();
+			} else {
+				updateTwirlsCard();
+			}
 		}
 	});
 });
 
 function getSwitchTwirls(passData) {
-	verb = 'POST'; who = 'Services'; where = 'commercialTwirls'; data = passData;
+	data = getDataForm(form);
+	verb = 'POST'; who = 'Services'; where = 'commercialTwirls';
+
 	callNovoCore(verb, who, where, data, function(response) {
 		dataResponse = response.data;
 		code = response.code
+
 		if (code == 0) {
 			insertFormInput(false);
 			$('#spinnerBlock').addClass('hide');
 			$('#blockResults').removeClass('hidden');
+			cardnumber = data.cardNumber
 
 			$.each (dataResponse.dataTwirls, function(key, val) {
 				$('#' + key).text(val);
@@ -75,8 +83,16 @@ function getSwitchTwirls(passData) {
 	});
 };
 
-function updateTwirlsCard(passData, btnText) {
-	verb = 'POST'; who = 'Services'; where = 'updateCommercialTwirls'; data = passData;
+function updateTwirlsCard() {
+	data = getDataForm(form);
+	data.cardNumber = cardnumber;
+
+	if (lang.CONF_REMOTE_AUTH == 'OFF') {
+		passData.passwordAuth = cryptoPass(passData.passwordAuth);
+	}
+
+	verb = 'POST'; who = 'Services'; where = 'updateCommercialTwirls';
+
 	callNovoCore(verb, who, where, data, function(response) {
 		dataResponse = response.data;
 		code = response.code;
@@ -86,22 +102,29 @@ function updateTwirlsCard(passData, btnText) {
 		insertFormInput(false);
 		$('#sign-btn').html(btnText);
 		$('#passwordAuth').val('');
+		if (response.success) {
+			$('#accept').on('click', function(){
+				$('#card-holder-btn').trigger('click');
+			});
+		}
+		$('.cover-spin').hide();
 	});
 };
 
 function buildList(code, dataResponse, msg, title) {
 	if (code == 2) {
-		data = {
+		modalBtn = {
 			btn1: {
 				text: lang.GEN_BTN_ACCEPT,
-				action: 'close'
+				action: 'destroy'
 			}
 		}
-		inputModal = '<h5 class="regular mr-1">' + msg + '</h5>'
+		inputModal = '<h5 class="regular mr-1">' + msg + '</h5>';
+
 		$.each(dataResponse, function (key) {
 			inputModal += '<h6 class="light mr-1">' + key + '</h6>';
 		})
 
-		appMessages(title, inputModal, lang.CONF_ICON_WARNING, data);
+		appMessages(title, inputModal, lang.CONF_ICON_WARNING, modalBtn);
 	}
 };

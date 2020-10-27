@@ -121,7 +121,7 @@ class Verify_Access {
 
 		$auth = FALSE;
 		$user = $user ?? $this->user;
-		$freeAccess = ['login', 'suggestion', 'finishSession', 'terms', 'singleSignOn'];
+		$freeAccess = ['signIn', 'login', 'suggestion', 'finishSession', 'terms', 'singleSignOn'];
 		$auth = in_array($module, $freeAccess);
 
 		if(!$auth) {
@@ -163,6 +163,9 @@ class Verify_Access {
 				break;
 				case 'getProductDetail':
 					$auth = ($this->CI->session->has_userdata('logged') && $this->CI->session->has_userdata('enterpriseInf'));
+				break;
+				case 'authorizationKey':
+					$auth = ($this->CI->session->has_userdata('logged') && $this->CI->session->has_userdata('productInf'));
 				break;
 				case 'getPendingBulk':
 				case 'loadBulk':
@@ -216,13 +219,13 @@ class Verify_Access {
 					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('COPELO'));
 				break;
 				case 'transactionalLimits':
-					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('LIMTRX', 'CONLIM'));
+					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('LIMTRX'));
 				break;
 				case 'updateTransactionalLimits':
 					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('LIMTRX', 'ACTLIM'));
 				break;
 				case 'commercialTwirls':
-					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('GIRCOM', 'CONGIR'));
+					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('GIRCOM'));
 				break;
 				case 'updateCommercialTwirls':
 					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('GIRCOM', 'ACTGIR'));
@@ -243,7 +246,11 @@ class Verify_Access {
 				case 'userActivity':
 				case 'exportToExcelUserActivity':
 				case 'exportToPDFUserActivity':
-					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPUSU'));
+					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPUSU') && lang('CONF_USER_ACTIVITY') == 'ON');
+				break;
+				case 'usersActivity':
+				case 'exportExcelUsersActivity':
+					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPUSU') && lang('CONF_USERS_ACTIVITY') == 'ON');
 				break;
 				case 'accountStatus':
 					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPEDO'));
@@ -272,12 +279,22 @@ class Verify_Access {
 					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPLOT'));
 				break;
 				case 'cardHolders':
-					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPEDO'));
+					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBTHA'));
 				break;
 				case 'statusAccountExcelFile':
 				case 'statusAccountPdfFile':
 				case 'searchStatusAccount':
-					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPEDO'));;
+					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPEDO'));
+				break;
+				case 'usersManagement':
+					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('USEREM', 'CONUSU'));
+				break;
+				case 'enableUser':
+					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('USEREM', 'CREUSU'));
+				break;
+				case 'userPermissions':
+				case 'updatePermissions':
+					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('USEREM', 'ASGPER'));;
 				break;
 			}
 		}

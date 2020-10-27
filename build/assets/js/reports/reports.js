@@ -65,14 +65,14 @@ $(function () {
 		reportsResults.row('tr').remove().draw( false );
 
 		if(reportSelected == 'repCertificadoGmf' && !firsrYear) {
-			data = {
+			modalBtn = {
 				btn1: {
 					text: lang.GEN_BTN_ACCEPT,
 					link: 'reportes',
 					action: 'redirect'
 				}
 			}
-			appMessages(lang.REPORTS_TITLE, lang.REPORTS_NO_GMF, lang.CONF_ICON_INFO, data);
+			appMessages(lang.REPORTS_TITLE, lang.REPORTS_NO_GMF, lang.CONF_ICON_INFO, modalBtn);
 		}
 	});
 

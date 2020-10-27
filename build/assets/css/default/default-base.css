@@ -1470,6 +1470,10 @@ label {
 .right { float: right !important }
 .float-none { float: none !important }
 
+/* Coordinates */
+.l-0  { left: 0 !important }
+.r-0 { right: 0 !important }
+
 /* Overflow */
 .overflow-auto   { overflow: auto !important }
 .overflow-hidden { overflow: hidden !important }
@@ -2038,6 +2042,7 @@ i[class*=" icon-"]:before {
 	vertical-align: middle;
 }
 
+.icon-edit-permits:before    { content: "\e034"; }
 .icon-card-allocation:before { content: "\e041"; }
 .icon-brief-config:before	   { content: "\e000"; }
 .icon-build-config:before	 	 { content: "\e001"; }
@@ -2124,7 +2129,6 @@ i[class*=" icon-"]:before {
 
 .logo-banco {
 	width: 230px;
-	height: 111px;
 	padding: 2rem 0 1rem 0;
 }
 
@@ -3115,6 +3119,15 @@ ul.steps li.step-item i {
   padding-bottom: 4px;
 }
 
+/* Cursors */
+.cursor-pointer {
+	cursor: pointer !important;
+}
+
+.cursor-default {
+	cursor: default !important;
+}
+
 /* jQuery UI
 ========================================================================== */
 
@@ -3645,13 +3658,12 @@ a.ui-button:active,
 
 .img-log{
 	margin-left: 10%;
-	width: 673px;
 	z-index: 1;
 }
 
 .img-log img{
-	width: 673px;
-	height: 452px;
+	width: 100%;
+	height: 100%;
 }
 
 .bg-img {
@@ -3772,8 +3784,8 @@ a.ui-button:active,
 }
 
 .product-presentation .item-network {
-	right: 20px;
-	bottom: 20px;
+	right: 10px;
+	bottom: 10px;
 }
 
 .item-network.maestro {

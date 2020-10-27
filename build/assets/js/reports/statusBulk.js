@@ -7,8 +7,10 @@ $(function () {
 	var resultStatusBulk = $('#resultStatusBulk');
 	var statusBulkBtn = $('#status-bulk-btn');
 	var downLoad = $('.download');
+	var minYear = lang.CONF_MIN_CONSULT_YEAR;
 
 	datePicker.datepicker({
+		minDate: new Date(minYear, 0, 1),
 		onSelect: function (selectedDate) {
 			$(this)
 				.focus()
@@ -19,7 +21,7 @@ $(function () {
 			var maxTime = new Date(dateSelected);
 
 			if (inputDate == 'initialDate') {
-				var maxMonth = parseInt(lang.CONF_MAX_CONSULT_MONTH);
+				var maxMonth = lang.CONF_MAX_CONSULT_MONTH;
 				$('#finalDate').datepicker('option', 'minDate', selectedDate);
 				maxTime.setDate(maxTime.getDate() - 1);
 				maxTime.setMonth(maxTime.getMonth() + maxMonth);

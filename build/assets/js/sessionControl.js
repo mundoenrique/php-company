@@ -16,40 +16,40 @@ function sessionExpire() {
 }
 
 function finishSession() {
-	var oldID = $('#accept').attr('id');
+	$('#accept')
+		.removeClass('send-request')
+		.removeClass('get-auth-key');
+	$('#system-msg').removeClass('w-100 vh-100');
 
 	if ($('#system-info').parents('.ui-dialog').length) {
-		$('#system-info').dialog('close');
+		$('#system-info').dialog('destroy');
 	}
 
 	$('#accept').addClass('btn-large-xl')
-	data = {
+	modalBtn = {
 		btn1: {
 			text: lang.GEN_BTN_KEEP_SESSION,
-			action: 'close'
+			action: 'destroy'
 		}
 	}
-	appMessages(lang.GEN_SYSTEM_NAME, lang.GEN_FINISH_TEXT, lang.CONF_ICON_INFO, data);
-	$('#accept').attr('id', 'keep-session');
+	appMessages(lang.GEN_SYSTEM_NAME, lang.GEN_FINISH_TEXT, lang.CONF_ICON_INFO, modalBtn);
+	$('#accept').addClass('keep-session');
 	resetTimesession = setTimeout(function() {
-		$('#keep-session')
-		.html(loader)
-		.prop('disabled', true);
+		$('#accept')
+			.html(loader)
+			.prop('disabled', true);
 		$(location).attr('href', baseURL+'cerrar-sesion/fin');
 	}, callServer);
 
-	$('#keep-session').on('click', function() {
-		$(this)
-		.off('click')
-		.attr('id', oldID);
+	$('#system-info').on('click', '.keep-session', function() {
+		$(this).off('click');
 		verb = 'POST'; who= 'User'; where = 'KeepSession';
-		data = {
-			modalReq: true,
-		}
+		data = {}
 		callNovoCore(verb, who, where, data, function(response) {
 			$('#accept')
-			.text(lang.GEN_BTN_ACCEPT)
-			.removeClass('btn-large-xl');
+				.text(lang.GEN_BTN_ACCEPT)
+				.removeClass('keep-session')
+				.removeClass('btn-large-xl');
 		})
 	})
 }

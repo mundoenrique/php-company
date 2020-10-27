@@ -68,7 +68,7 @@ function getServiceREsponse(btn) {
 		if(response.code == 0) {
 			$(location).attr('href', response.data);
 		} else {
-			appMessages(response.title, response.msg, response.icon, response.data);
+			appMessages(response.title, response.msg, response.icon, response.modalBtn);
 			btn.html(btnText);
 			insertFormInput(false);
 			$('#otpCode').val('')

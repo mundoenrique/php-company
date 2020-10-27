@@ -1,7 +1,8 @@
 'use strict'
 var currenTime;
 var screenSize;
-var verb, who, where, dataResponse, ceo_cook, btnText, form, cypherPass;
+var inputModal;
+var verb, who, where, dataResponse, ceo_cook, btnText, form, cypherPass, data;
 var loader = $('#loader').html();
 var validatePass = /^[\w!@\*\-\?¡¿+\/.,#ñÑ]+$/;
 var searchEnterprise = $('#sb-search');
@@ -9,6 +10,9 @@ var inputPass = $('#password');
 var dataTableLang;
 var validator;
 var currentDate;
+var btnRemote = $('#btn-auth');
+var remoteFunction;
+var remoteAuthArgs = {}
 $(function () {
 	$('input[type=text], input[type=password], input[type=email]').attr('autocomplete', 'off');
 
@@ -28,11 +32,11 @@ $(function () {
 	});
 
 	if (code > 2) {
-		appMessages(title, msg, icon, data)
+		appMessages(title, msg, icon, modalBtn)
 	}
 
 	$('.big-modal').on('click', function () {
-		$('.cover-spin').show(0)
+		$('.cover-spin').show(0);
 	});
 
 	dataTableLang = {
@@ -104,7 +108,6 @@ function callNovoCore(verb, who, where, request, _response_) {
 	});
 	var codeResp = parseInt(lang.GEN_DEFAULT_CODE);
 	var formData = new FormData();
-
 	dataRequest = cryptoPass(dataRequest, true);
 
 	if (request.file) {
@@ -135,8 +138,7 @@ function callNovoCore(verb, who, where, request, _response_) {
 		dataType: 'json'
 	}).done(function (response, status, jqXHR) {
 
-		response = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, { format: CryptoJSAesJson }).toString(CryptoJS.enc.Utf8))
-
+		response = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, { format: CryptoJSAesJson }).toString(CryptoJS.enc.Utf8));
 		var modalClose = response.modal ? false : true;
 
 		if ($('#system-info').parents('.ui-dialog').length && modalClose) {
@@ -147,7 +149,7 @@ function callNovoCore(verb, who, where, request, _response_) {
 		}
 
 		if (response.code === codeResp) {
-			appMessages(response.title, response.msg, response.icon, response.data);
+			appMessages(response.title, response.msg, response.icon, response.modalBtn);
 		}
 
 		_response_(response);
@@ -166,7 +168,7 @@ function callNovoCore(verb, who, where, request, _response_) {
 			title: lang.GEN_SYSTEM_NAME,
 			msg: lang.GEN_MESSAGE_SYSTEM,
 			icon: lang.CONF_ICON_DANGER,
-			data: {
+			modalBtn: {
 				btn1: {
 					text: lang.GEN_BTN_ACCEPT,
 					link: lang.GEN_ENTERPRISE_LIST,
@@ -174,7 +176,7 @@ function callNovoCore(verb, who, where, request, _response_) {
 				}
 			}
 		};
-		appMessages(response.title, response.msg, response.icon, response.data);
+		appMessages(response.title, response.msg, response.icon, response.modalBtn);
 		_response_(response);
 	});
 }
@@ -185,38 +187,39 @@ function getCookieValue() {
 	);
 }
 
-function appMessages(title, message, icon, data) {
-	var btn1 = data.btn1;
-	var btn2 = data.btn2;
-	var maxHeight = data.maxHeight || 350;
+function appMessages(title, message, icon, modalBtn) {
+	var btn1 = modalBtn.btn1;
+	var btn2 = modalBtn.btn2;
+	var maxHeight = modalBtn.maxHeight || 350;
 
 	$('#system-info').dialog({
 		title: title || lang.GEN_SYSTEM_NAME,
+		closeText: '',
 		modal: 'true',
-		position: { my: data.posMy || 'center', at: data.posAt || 'center' },
+		position: { my: modalBtn.posMy || 'center', at: modalBtn.posAt || 'center' },
 		draggable: false,
 		resizable: false,
 		closeOnEscape: false,
-		width: data.width || lang.CONF_MODAL_WIDTH,
-		minWidth: data.minWidth || lang.CONF_MODAL_WIDTH,
-		minHeight: 100,
+		width: modalBtn.width || lang.CONF_MODAL_WIDTH,
+		minWidth: modalBtn.minWidth || lang.CONF_MODAL_WIDTH,
+		minHeight: modalBtn.minHeight || 100,
 		maxHeight: maxHeight !== 'none' ? maxHeight : false,
 		dialogClass: "border-none",
 		classes: {
 			"ui-dialog-titlebar": "border-none",
 		},
 		open: function (event, ui) {
-			$('.ui-dialog-titlebar-close').hide();
-			var classIcon = $('#system-icon').attr('class').split(' ');
-			classIcon = classIcon.pop();
-
-			if (classIcon != 'mt-0') {
-				$('#system-icon').removeClass(classIcon);
+			if (!modalBtn.close) {
+				$('.ui-dialog-titlebar-close').hide();
 			}
 
-			$('#system-icon').addClass(icon);
+			if (icon != '') {
+				$('#system-icon').addClass(lang.CONF_ICON + ' ' + icon);
+			} else {
+				$('#system-icon').removeAttr('class');
+			}
+
 			$('#system-msg').html(message);
-			$('#accept, #cancel').removeClass("ui-button ui-corner-all ui-widget");
 
 			if (!btn1) {
 				$('#accept').hide();
@@ -226,12 +229,15 @@ function appMessages(title, message, icon, data) {
 
 			if (!btn2) {
 				$('#cancel').hide();
-				$('#accept').addClass('modal-btn-primary');
-				$('.novo-dialog-buttonset').addClass('modal-buttonset');
 			} else {
 				createButton($('#cancel'), btn2);
 			}
 		}
+	});
+
+	$('.ui-dialog-titlebar-close').on('click', function(e) {
+		$('#system-msg').removeClass('w-100 vh-100');
+		$('#system-info').dialog('destroy');
 	});
 }
 
@@ -253,8 +259,6 @@ function createButton(elementButton, valuesButton) {
 				$(location).attr('href', baseURL + valuesButton.link);
 			break;
 			case 'close':
-				$('#system-info').dialog('close');
-			break;
 			case 'destroy':
 				$('#system-info').dialog('destroy');
 			break;
@@ -340,4 +344,88 @@ function downLoadfiles (data) {
 		$('#download-file').attr('download', '')
 	}
 	$('.cover-spin').hide();
+}
+
+function getauhtKey() {
+	/* if (lang.CONF_REMOTE_AUTH == 'ON') {//QUITAR IF
+		$('#accept').addClass('sender');
+		$('#system-info').on('click', '.sender', function () {
+			$('#accept')
+				.prop('disabled', false)
+				.removeClass('sender');
+			getResponse('false', 'Hola mundo')
+		});
+	} */
+	$('#accept').removeClass('get-auth-key');
+	$('#accept').removeClass('send-request');
+	data = {
+		action: remoteAuthArgs.title || remoteAuthArgs.action
+	}
+	btnRemote
+		.html(loader)
+		.prop('disabled', true);
+	insertFormInput(true);
+	verb = 'POST'; who = 'Services'; where = 'AuthorizationKey';
+
+	callNovoCore(verb, who, where, data, function (response) {
+		$('.cover-spin').hide();
+		if (response.code == 0) {
+			data = {
+				/* btn1: {
+					text: lang.GEN_BTN_ACCEPT,
+					action: 'none'
+				},//quitar btn1 */
+				minHeight: 650,
+				width: 1000,
+				posMy: 'top',
+				posAt: 'top',
+				close: true
+			}
+			$('#system-msg').addClass('w-100 vh-100');
+			appMessages(remoteAuthArgs.title || remoteAuthArgs.action, '', '', data);
+			AutorizacionCanales(response.data.authKey, 'system-msg', response.data.urlApp, response.data.urlLoad, 'getResponse');
+		}
+
+		insertFormInput(false);
+		btnRemote
+			.prop('disabled', false)
+			.html(btnText);
+	});
+}
+
+function getResponse(Exitoso, MensajeError) {
+	$('#system-info').dialog('destroy');
+	$('#system-msg').removeClass('w-100 vh-100');
+	Exitoso = (Exitoso === 'true' || Exitoso === true);
+
+	if (Exitoso) {
+		switch (remoteFunction) {
+			case 'sendRequest':
+				sendRequest(remoteAuthArgs.action, remoteAuthArgs.title, btnRemote);
+			break;
+			case 'SignDeleteBulk':
+				SignDeleteBulk(remoteAuthArgs.form, remoteAuthArgs.action, remoteAuthArgs.thisId, remoteAuthArgs.passwordSignAuht, remoteAuthArgs.modalReq);
+			break;
+			case 'updateLimits':
+				updateLimits();
+			break;
+			case 'updateTwirlsCard':
+				updateTwirlsCard();
+			break;
+			case 'applyActions':
+				applyActions(remoteAuthArgs.action, remoteAuthArgs.form, btnRemote);
+			break;
+		}
+
+		$('.cover-spin').show(0);
+	} else {
+		data = {
+			 btn1: {
+				text: lang.GEN_BTN_ACCEPT,
+				action: 'destroy'
+			},
+		}
+
+		appMessages(remoteAuthArgs.title || remoteAuthArgs.action, MensajeError, lang.CONF_ICON_WARNING, data);
+	}
 }

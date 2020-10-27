@@ -65,6 +65,8 @@
 			<input type="hidden" name="enterpriseGroup" value="<?= $enterpriseaAttr->accodgrupoe; ?>">
 			<input type="hidden" name="idFiscal" value="<?= $enterpriseaAttr->acrif; ?>">
 			<input type="hidden" name="enterpriseName" value="<?= $enterpriseaAttr->acnomcia; ?>">
+			<input type="hidden" name="thirdApp" value="<?= $enterpriseaAttr->acobservacion ?: 'ANY'; ?>">
+			<input type="hidden" name="fiscalNumber" value="<?= $enterpriseaAttr->acnit; ?>">
 		</form>
 	</div>
 	<?php endforeach; ?>

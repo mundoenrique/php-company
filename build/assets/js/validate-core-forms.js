@@ -15,12 +15,12 @@ function validateForms(form) {
 	var userPassword = validatePass;
 	var numeric = /^[0-9]+$/;
 	var alphabetical = /^[a-z]+$/i;
-	var alphabeticalspace = /^['a-z ']{3,100}$/i;
+	var alphabeticalspace = /^['a-z ']{3,40}$/i;
 	var text = /^['a-z0-9ñáéíóú ,.:()']+$/i;
 	var usdAmount = /^[0-9]+(\.[0-9]*)?$/;
-	var validCode = /^[a-z0-9]+$/i;
 	var fiscalReg = lang.VALIDATE_FISCAL_REGISTRY;
 	var idNumberReg = new RegExp(lang.VALIDATE_REG_ID_NUMBER, 'i');
+	var rechargeDesc = new RegExp(lang.VALIDATE_RECHARGE_DESCRIPTION, 'i');
 	var date = {
 		dmy: /^(0?[1-9]|[12][0-9]|3[01])\/(0?[1-9]|1[012])\/[0-9]{4}$/,
 		my: /^(0?[1-9]|1[012])\/[0-9]{4}$/,
@@ -41,8 +41,8 @@ function validateForms(form) {
 	form.validate({
 		focusInvalid: false,
 		rules: {
-			"user_login":	{required: true, pattern: alphanumunder},
-			"user_pass": 	{verifyRequired: '#user_login', verifyPattern: '#user_login'},
+			"userName":	{required: true, pattern: alphanumunder},
+			"userPass": 	{verifyRequired: '#userName', verifyPattern: '#userName'},
 			"user-name": 	{required: true, pattern: alphanumunder},
 			"id-company": 	{required: true, fiscalRegistry: true},
 			"email": 	{required: true, pattern: emailValid},
@@ -91,10 +91,10 @@ function validateForms(form) {
 				},
 				pattern: date.dmy
 			},
-			"status-order": {required: true, requiredTypeOrder: true},
-			"selected-date": {required: true, pattern: date.my},
-			"selected-month-year": {required: true, pattern: date.my},
-			"selected-year": {required: true, pattern: date.y},
+			"status-order": { required: true, requiredTypeOrder: true },
+			"selected-date": { required: true, pattern: date.my },
+			"selected-month-year": { required: true, pattern: date.my },
+			"selected-year": { required: true, pattern: date.y},
 			"id-type": {requiredSelect: true},
 			"id-number": {required: true, pattern: numeric},
 			"id-number1": {pattern: numeric, maxlength: 15},
@@ -102,7 +102,6 @@ function validateForms(form) {
 			"card-number": {required: true, pattern: numeric, maxlength: 16, minlength: 16},
 			"card-number-sel": {requiredSelect: true},
 			"inquiry-type": {requiredSelect: true},
-			"codeOTP": {required: true, pattern: validCode, maxlength: 8},
 			"saveIP": {pattern: numeric},
 			"expired-date": {required: true, pattern: date.my},
 			"max-cards": {required: true, pattern: numeric, maxcards: true},
@@ -128,7 +127,7 @@ function validateForms(form) {
 			"enterpriseName": {required: true},
 			"productName": {required: true},
 			"enterpriseCode": {requiredSelect: true},
-			"productCode": {requiredSelect: true},
+			"productCode": {requiredSelect: true, required: true},
 			"checkbox": {pattern: binary},
 			"initialDate": {required: true, pattern: date.dmy},
 			"finalDate": {required: true, pattern: date.dmy},
@@ -150,7 +149,7 @@ function validateForms(form) {
 				},
 				pattern: numeric, maxlength: 16, minlength: 16
 			},
-			"otpCode": {required: true, pattern: alphanum},
+			"otpCode": { required: true, pattern: alphanum },
 			"orderNumber": {pattern: numeric, require_from_group: [1, '.select-group']},
 			"bulkNumber": {pattern: numeric, require_from_group: [1, '.select-group']},
 			"idNumberP": {
@@ -182,7 +181,7 @@ function validateForms(form) {
 				required: {
 					depends: function () {
 						var check = false;
-						if($('#resultByNIT:checked').val() == 'on'){
+						if($('#resultByNIT:checked').val() == 'on') {
 							check = true;
 						}
 						return check
@@ -192,7 +191,7 @@ function validateForms(form) {
 			"optCode": {required: true, pattern: alphanum},
 			"firstName": { required: true, pattern: alphabeticalspace},
 			"lastName": { required: true, pattern: alphabeticalspace},
-			"movil": { required: true, pattern: numeric},
+			"movil": { required: true, pattern: numeric, maxlength: 10, minlength: 7},
 			"numberDayPurchasesCtp": {required: true, pattern: numeric, maxLimitZero:'#numberWeeklyPurchasesCtp'},
 			"numberWeeklyPurchasesCtp": {required: true, pattern: numeric, maxLimitZero: '#numberMonthlyPurchasesCtp'},
 			"dailyPurchaseamountCtp": {required: true, pattern: numeric, maxLimitZero:'#weeklyAmountPurchasesCtp'},
@@ -221,10 +220,11 @@ function validateForms(form) {
 			"monthlyNumberCredit": {pattern: numeric, required: true },
 			"monthlyAmountCredit": {pattern: numeric , required: true },
 			"CreditTransaction": {pattern: numeric , required: true, maxLimitZero:'#dailyAmountCredit'},
+			"transferType": {required: true},
 		},
 		messages: {
-			"user_login": lang.VALIDATE_USERLOGIN,
-			"user_pass": {
+			"userName": lang.VALIDATE_USERLOGIN,
+			"userPass": {
 				verifyRequired: lang.VALIDATE_USERPASS_REQ,
 				verifyPattern: lang.VALIDATE_USERPASS_PATT
 			},
@@ -272,11 +272,6 @@ function validateForms(form) {
 			"card-number": lang.VALIDATE_CARD_NUMBER,
 			"card-number-sel": lang.VALIDATE_CARD_NUMBER_SEL,
 			"inquiry-type": lang.VALIDATE_INQUIRY_TYPE_SEL,
-			"codeOTP": {
-				required: lang.GEN_CODE_OTP_REQUIRED,
-				pattern: lang.GEN_CODE_OTP_INVALID_FORMAT,
-				maxlength: lang.GEN_CODE_OTP_INVALID_FORMAT
-			},
 			"expired-date": lang.VALIDATE_SELECTED_DATE,
 			"max-cards": lang.VALIDATE_TOTAL_CARDS,
 			"starting-line1": lang.VALIDATE_STARTING_LINE,
@@ -290,7 +285,7 @@ function validateForms(form) {
 			"monthYear": lang.VALIDATE_DATE_MY,
 			"idNumber": lang.VALIDATE_ID_NUMBER,
 			"cardNumber": lang.VALIDATE_CARD_NUMBER,
-			"otpCode": lang.VALIDATE_OS_OTP,
+			"otpCode": lang.VALIDATE_OTP_CODE,
 			"orderNumber": {
 				pattern: lang.VALIDATE_BULK_NUMBER,
 				require_from_group: lang.VALIDATE_SELECT_GROUP
@@ -455,6 +450,8 @@ function validateForms(form) {
 				pattern: lang.VALIDATE_INVALID_NUMBER,
 				required:lang.VALIDATE_NUMBER_REQ
 			},
+			"transferType": lang.VALIDATE_TRANSFER_TYPE
+
 		},
 		errorPlacement: function(error, element) {
 			$(element).closest('.form-group').find('.help-block').html(error.html());

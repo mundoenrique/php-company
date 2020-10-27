@@ -2,6 +2,8 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 //LOGIN
 $lang['LOGIN_WELCOME_TITLE'] = 'BEM/BEP';
+//USER PERMISSIONS
+$lang['PERMITS_NOTE_ACTIVE'] = 'el permiso está activo';
 //TERMS_CONTENT
 $lang["TERMS_TITLE"]='Términos y condiciones de la Tarjeta de Débito Empresarial Banorte';
 $lang["TERMS_CONTENT"] = '

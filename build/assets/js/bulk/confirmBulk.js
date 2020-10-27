@@ -2,10 +2,9 @@
 $(function () {
 	$('#pre-loader').remove();
 	$('.hide-out').removeClass('hide');
-	var btnConfirmBulk = $('#confirm-bulk');
 	form = $('#confirm-bulk-btn');
 
-	btnConfirmBulk.on('click', function(e) {
+	$('#confirm-bulk').on('click', function(e) {
 		e.preventDefault()
 		btnText = $(this).text();
 		formInputTrim(form);
@@ -14,14 +13,17 @@ $(function () {
 		if(form.valid()) {
 			insertFormInput(true)
 			$(this).html(loader);
-			var pwd = cryptoPass(inputPass.val());
 			data = {
 				bulkTicked: $('#bulkTicked').val(),
-				pass: pwd
 			}
+
+			if (lang.CONF_REMOTE_AUTH == 'OFF') {
+				data.pass = cryptoPass(inputPass.val());
+			}
+
 			verb = 'POST'; who = 'Bulk'; where = 'ConfirmBulk';
 			callNovoCore(verb, who, where, data, function(response) {
-				btnConfirmBulk.html(btnText);
+				$('#confirm-bulk').html(btnText);
 				insertFormInput(false);
 				inputPass.val('');
 				respConfirmBulk[response.code](response);
@@ -31,7 +33,7 @@ $(function () {
 
 	const respConfirmBulk = {
 		0: function(response) {
-			appMessages(response.title, response.msg, response.icon, response.data);
+			appMessages(response.title, response.msg, response.icon, response.modalBtn);
 		}
 	}
 });
