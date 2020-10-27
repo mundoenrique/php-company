@@ -58,6 +58,7 @@ $lang['BULK_DISASS'] = 'Por favor ingresa la contraseña para desasociar el lote
 $lang['BULK_DELETE_NAME'] = 'Por favor ingresa la contraseña para eliminar el lote';
 $lang['BULK_SELECT'] = 'Selecciona al menos un lote';
 $lang['BULK_NO_BILLABLE'] = 'Lotes no facturables';
+$lang['BULK_WITAOUT_TAX'] = 'La empresa no tiene impuesto asociado al producto.';
 $lang['BULK_CALCULATE_ORDER'] = 'Calcular Orden de servicio';
 $lang['BULK_SIGNEDS'] = 'Lotes firmados exitosamente';
 $lang['BULK_SIGNED'] = 'Lote firmado exitosamente.';

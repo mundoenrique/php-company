@@ -864,12 +864,17 @@ class Novo_Bulk_Model extends NOVO_Model {
 				$this->response->title = lang('BULK_AUTH_TITLE');
 				$this->response->msg = lang('GEN_PASSWORD_NO_VALID');
 				$this->response->icon = lang('CONF_ICON_WARNING');
-				$this->response->modalBtn['btn1']['action'] = 'close';
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			break;
+			case -51:
+				$this->response->title = lang('BULK_AUTH_TITLE');
+				$this->response->msg = lang('BULK_WITAOUT_TAX');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -59:
 				$this->response->title = lang('BULK_AUTH_TITLE');
 				$this->response->msg = lang('RESP_AUTH_ORDER_SERV');
-				$this->response->modalBtn['btn1']['action'] = 'close';
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case 100:
 				$this->response->title = lang('BULK_AUTH_TITLE');
@@ -881,13 +886,13 @@ class Novo_Bulk_Model extends NOVO_Model {
 				$this->response->title = lang('BULK_AUTH_TITLE');
 				$this->response->msg = lang('CONF_BULK_AUTH_MSG_SERV') == 'ON' ? $response->msg : lang('BULK_DAILY_AMOUNT_EXCEEDED');
 				$this->response->icon = lang('CONF_ICON_WARNING');
-				$this->response->modalBtn['btn1']['action'] = 'close';
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -250:
 				$this->response->title = lang('BULK_AUTH_TITLE');
 				$this->response->msg = lang('CONF_BULK_AUTH_MSG_SERV') == 'ON' ? $response->msg : lang('BULK_AMOUNT_EXCEEDED');
 				$this->response->icon = lang('CONF_ICON_WARNING');
-				$this->response->modalBtn['btn1']['action'] = 'close';
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -439:
 				$this->response->title = lang('BULK_AUTH_TITLE');
