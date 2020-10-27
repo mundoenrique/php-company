@@ -2,7 +2,7 @@
 var currenTime;
 var screenSize;
 var inputModal;
-var verb, who, where, dataResponse, ceo_cook, btnText, form, cypherPass;
+var verb, who, where, dataResponse, ceo_cook, btnText, form, cypherPass, data;
 var loader = $('#loader').html();
 var validatePass = /^[\w!@\*\-\?¡¿+\/.,#ñÑ]+$/;
 var searchEnterprise = $('#sb-search');
