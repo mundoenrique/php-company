@@ -76,7 +76,14 @@ class Encrypt_Connect {
 		}
 
 		if (isset($response->bean)) {
-			$response->bean = gettype(json_decode($response->bean)) == 'object' ? json_decode($response->bean) : $response->bean;
+			if (gettype($response->bean) == 'object' || gettype($response->bean) == 'array') {
+				$response->bean = $response->bean;
+			} elseif (gettype(json_decode($response->bean)) == 'object' || gettype(json_decode($response->bean)) == 'array') {
+				$response->bean = json_decode($response->bean);
+			} else {
+				$response->bean = $response->bean;
+			}
+
 			$this->logMessage->inBean = 'IN BEAN';
 		}
 
@@ -84,8 +91,22 @@ class Encrypt_Connect {
 			switch ($pos) {
 				case 'archivo':
 					$this->logMessage->archivo = 'OK';
+
 					if(!is_array($responseAttr)) {
 						$this->logMessage->archivo = 'Sin arreglo binario';
+					}
+				break;
+				case 'bean':
+					$this->logMessage->bean = new stdClass();
+
+					if (isset($responseAttr->archivo)) {
+						$this->logMessage->bean->archivo = 'OK';
+
+						if(!is_array($responseAttr->archivo)) {
+							$this->logMessage->bean->archivo = 'Sin arreglo binario';
+						}
+					} else {
+						$this->logMessage->bean = $responseAttr;
 					}
 				break;
 				case 'msg':
@@ -156,13 +177,21 @@ class Encrypt_Connect {
 			log_message('ERROR','NOVO ['.$userName.'] '.$CurlError);
 
 			$failResponse = new stdClass();
+			$failResponse->msg = lang('GEN_MESSAGE_SYSTEM');
 
-			if ($CurlErrorNo == 28) {
-				$failResponse->rc = 504;
-				$failResponse->msg = lang('GEN_TIMEOUT');
-			} else {
-				$failResponse->rc = lang('GEN_RC_DEFAULT');
-				$failResponse->msg = lang('GEN_MESSAGE_SYSTEM');
+			switch ($CurlErrorNo) {
+				case 28:
+					$failResponse->rc = 504;
+					$failResponse->msg = lang('GEN_TIMEOUT');
+				break;
+				default:
+					$failResponse->rc = lang('GEN_RC_DEFAULT');
+			}
+
+			switch ($httpCode) {
+				case 502:
+					$failResponse->rc = 502;
+				break;
 			}
 
 			$response = $failResponse;

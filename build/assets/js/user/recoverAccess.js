@@ -20,7 +20,6 @@ $(function() {
 
 				if (response.code == 0) {
 					$('#accept').addClass('send-otp');
-					var inputModal;
 					inputModal = response.msg;
 					inputModal +=	'<form id="otpModal" name="otpModal" onsubmit="return false" class="pt-2">';
 					inputModal +=		'<div class="form-group col-auto">';
@@ -31,7 +30,7 @@ $(function() {
 					inputModal += 	'</div>';
 					inputModal += '</form>';
 
-					appMessages(response.title, inputModal, response.icon, response.data)
+					appMessages(response.title, inputModal, response.icon, response.modalBtn)
 				}
 
 

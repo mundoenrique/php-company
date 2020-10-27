@@ -112,6 +112,7 @@
                   <input type="hidden" name="bulkId" value="<?= $bulk->bulkId; ?>">
                   <input type="hidden" name="bulkTicked" value="<?= $bulk->ticketId; ?>">
                   <input type="hidden" name="bulkFile" value="<?= $bulk->fileName; ?>">
+                  <input type="hidden" name="bulkDate" value="<?= $bulk->loadDate; ?>">
                 </form>
               </td>
             </tr>

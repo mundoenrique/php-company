@@ -52,7 +52,7 @@ class Users extends CI_Controller {
         if($logged_in && !$newuser && !$caducoPass){
             redirect($urlCountry.'/dashboard');
         }else{
-						redirect(base_url($this->config->item('countryUri').'/inicio'), 'location');
+						redirect(base_url($this->config->item('countryUri').'/inicio'), 'location', 301);
             //INSTANCIA PARA TITULO DE PAGINA
             $titlePage="Conexión Empresas Online";
             //INSTANCIA GENERAR  HEADER
@@ -108,8 +108,8 @@ class Users extends CI_Controller {
         //si es una petición realizada con ajax
         if($this->input->is_ajax_request()){
 
-            $username = $this->input->post('user_login');
-            $password = $this->input->post('user_pass');
+            $username = $this->input->post('userName');
+            $password = $this->input->post('userName');
             $useractive = $this->input->post('user_active');
 						$responseLoginFull = $this->callWSLoginFull($username,$password,$urlCountry,$useractive);
             echo $responseLoginFull;

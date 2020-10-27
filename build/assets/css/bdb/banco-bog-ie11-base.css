@@ -74,31 +74,21 @@ footer.main-footer {
 /* Forms
 ========================================================================== */
 
-#confirm-bulk-btn .form-group{
+.flex .mb-ie11{
 	margin-bottom: 4.5rem !important;
 }
 
-#auth-bulk-form .justify-end div:nth-of-type(3){
-	flex: 0 11%;
-}
-
-#auth-bulk-form .justify-end div:nth-of-type(2){
-	flex: 0 0 25%;
-}
-
-#repTarjeta .row div:nth-of-type(1){
+.repTarjeta .row div:nth-of-type(1){
 	flex: 0 0 30%;
 }
-#repComprobantesVisaVale div:nth-of-type(1){
+
+.repComprobantes div:nth-of-type(1){
 	flex: 0 0 30%;
 }
-#repComprobantesVisaVale div:nth-of-type(2){
+
+.repComprobantes div:nth-of-type(2){
 	flex: 0 0 66.6%;
 	max-width: 66.6%;
-}
-#resultByNIT{
-	padding: 0 !important;
-	height: 0 !important;
 }
 
 .form-control {
@@ -1073,10 +1063,6 @@ table.dataTable.dtr-inline.collapsed > tbody > tr.parent > td:first-child::befor
 	align-items: inherit !important;
 }
 
-#fiscal-reg{
-	text-align: center;
-}
-
 /* HR - Separators */
 
 .separador-one {
@@ -1227,7 +1213,8 @@ a.ui-button:active,
 	margin: 0 auto;
 	display: block !important;
 }
-#product-info {
+
+.mt-ie11 {
 	margin-top: 6.5rem;
 }
 
@@ -1745,34 +1732,10 @@ select::-ms-expand {
 	padding-top: 10rem;
 }
 
-@media screen and (max-width: 1024px) {
-	#confirm-bulk-btn .form-control{
-		width: auto !important;
-	}
-
-	#upload-file-form .col-6{
-		flex: 0 0 50%;
-	}
-
-	#upload-file-form .col-6:nth-child(3){
-		flex: 0 0 50%;
-	}
-}
-
 @media (max-width: 1200px) {
 		/* Otros */
 	.widget.optional {
 		display: none;
-	}
-}
-
-@media screen and (min-width: 1400px){
-	#upload-file-form .col-6:nth-child(3){
-		flex: 0 0 50% !important;
-	}
-
-	#upload-file-form .col-6{
-		flex: 0 0 21.8% !important;
 	}
 }
 

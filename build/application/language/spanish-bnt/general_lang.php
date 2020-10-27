@@ -10,7 +10,7 @@ $lang['GEN_MENU_SERV_CARD_INQUIRY'] = 'Entrega de tarjetas';//COPELO
 $lang['GEN_LOGO_HEADER'] = 'img-logo.svg';
 $lang['GEN-LOGO-BIG'] = 'img-banorte.png';
 $lang['GEN_ALTERNATIVE_TEXT'] = 'Banorte';
-$lang['GEN_FISCAL_REGISTRY'] = 'Identificador de la empresa';
+$lang['GEN_FISCAL_REGISTRY'] = 'Cuenta';
 $lang['RESP_FISCAL_REGISTRY_OF'] = '';
 $lang['RESP_FISCAL_REGISTRY_OF_ENTERPRISE'] = '';
 //LOGIN IMAGE
@@ -31,3 +31,5 @@ $lang['GEN_FOTTER_NETWORKS_LINK'] = [
 $lang['GEN_DETAIL_BARND_COLOR'] = '_card-blue.svg';
 //Datables
 $lang['GEN_ACCOUNT_CLOSING_BALANCE'] = 'Tarjetahabiente';
+$lang['GEN_BULK_DELETE_SO'] = '¿Estás seguro que deseas anular la orden de servicio? ';
+$lang['GEN_FAILED_THIRD_PARTY'] = 'No se obtuvo respuesta del servicio externo, por favor vuelve a intentarlo. %s';

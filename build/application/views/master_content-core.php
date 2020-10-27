@@ -18,7 +18,7 @@
 	<?php $this->load->view('header_content-core') ?>
 	<main class="content bg-content">
 		<?php if(!isset($skipProductInf)): ?>
-		<div id="product-info" class="pt-3 px-5 pb-5" prefix-prod="<?= $prefix ?>">
+		<div id="product-info" class="pt-3 px-5 pb-5 mt-ie11" prefix-prod="<?= $prefix ?>">
 		<?php endif; ?>
 			<?php foreach($viewPage as $views): ?>
 			<?php $this->load->view($views.'_content-core'); ?>
@@ -29,7 +29,7 @@
 	</main>
 	<a id="download-file" href="javascript:" download></a>
 	<?php $this->load->view('footer_content-core') ?>
-	<?= ($module == 'login' && ACTIVE_RECAPTCHA) ?  $scriptCaptcha : ''; ?>
+	<?= (in_array($module, lang('CONF_VALIDATE_CAPTCHA')) && ACTIVE_RECAPTCHA) ?  $scriptCaptcha : ''; ?>
 	<?= $this->asset->insertJs(); ?>
 	<?php $this->load->view('insert_variables') ?>
 </body>

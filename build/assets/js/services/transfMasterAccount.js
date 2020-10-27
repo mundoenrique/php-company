@@ -4,13 +4,13 @@ var access;
 var params;
 var balance;
 var cardsData;
-var inputModal;
+var cardHolderInf;
 $(function () {
-	var action;
 	var getAmount;
-	var modalReq;
-
+	var title;
+	var action;
 	insertFormInput(false);
+	remoteFunction = 'sendRequest';
 	form = $('#masterAccountForm');
 	var dataForm = getDataForm(form)
 
@@ -35,7 +35,6 @@ $(function () {
 		"table-layout": "fixed",
 		"select": {
 			"style": "multi",
-			"selector": ':not(td:nth-child(-n+6))',
 			"info": false
 		},
 		"language": dataTableLang,
@@ -151,38 +150,43 @@ $(function () {
 					var options = '';
 
 					if (access.TRASAL && data.status == '') {
-						options += '<button class="btn mx-1 px-0" title="' + lang.GEN_CHECK_BALANCE + '" data-toggle="tooltip" amount="0">';
-						options += '<i class="icon icon-balance" aria-hidden="true"></i>';
-						options += '</button>';
+						options += 	'<button class="btn mx-1 px-0" title="' + lang.GEN_CHECK_BALANCE + '" data-toggle="tooltip" amount="0" ';
+						options += 			'action="CHECK_BALANCE">';
+						options += 		'<i class="icon icon-envelope-open" aria-hidden="true"></i>';
+						options += 	'</button>';
 					}
 
 					if (access.TRACAR && data.status == '') {
-						options += '<button class="btn mx-1 px-0" title="' + lang.GEN_CREDIT_TO_CARD + '" data-toggle="tooltip" amount="1">';
-						options += '<i class="icon icon-credit-card" aria-hidden="true"></i>';
-						options += '</button>';
-
+						options += 	'<button class="btn mx-1 px-0" title="' + lang.GEN_CREDIT_TO_CARD + '" data-toggle="tooltip" amount="1" ';
+						options += 			'action="CREDIT_TO_CARD">';
+						options += 		'<i class="icon icon-credit-card" aria-hidden="true"></i>';
+						options += 	'</button>';
 					}
 
 					if (access.TRAABO && data.status == '') {
-						options += '<button class="btn mx-1 px-0" title="' + lang.GEN_DEBIT_TO_CARD + '" data-toggle="tooltip" amount="1">';
-						options += '<i class="icon icon-card-fee" aria-hidden="true"></i>';
-						options += '</button>';
+						options += 	'<button class="btn mx-1 px-0" title="' + lang.GEN_DEBIT_TO_CARD + '" data-toggle="tooltip" amount="1" ';
+						options += 			'action="DEBIT_TO_CARD">';
+						options += 		'<i class="icon icon-card-fee" aria-hidden="true"></i>';
+						options += 	'</button>';
 					}
 
 					if (access.TRABLQ && data.status == '') {
-						options += '<button class="btn mx-1 px-0" title="' + lang.GEN_TEMPORARY_LOCK + '" data-toggle="tooltip" amount="0">';
-						options += '<i class="icon icon-lock" aria-hidden="true"></i>';
-						options += '</button>';
+						options += 	'<button class="btn mx-1 px-0" title="' + lang.GEN_TEMPORARY_LOCK + '" data-toggle="tooltip" amount="0" ';
+						options += 			'action="TEMPORARY_LOCK">';
+						options += 		'<i class="icon icon-lock" aria-hidden="true"></i>';
+						options += 	'</button>';
 					}
 
 					if (access.TRADBL && data.status == 'pb') {
-						options += '<button class="btn mx-1 px-0" title="' + lang.GEN_UNLOCK_CARD + '" data-toggle="tooltip" amount="0">';
-						options += '<i class="icon icon-unlock" aria-hidden="true"></i>';
-						options += '</button>';
+						options += 	'<button class="btn mx-1 px-0" title="' + lang.GEN_TEMPORARY_UNLOCK + '" data-toggle="tooltip" amount="0" ';
+						options += 			'action="TEMPORARY_UNLOCK">';
+						options += 		'<i class="icon icon-unlock" aria-hidden="true"></i>';
+						options += 	'</button>';
 					}
 
 					if (access.TRAASG) {
-						options += '<button class="btn mx-1 px-0" title="' + lang.GEN_CARD_ASSIGNMENT + '" data-toggle="tooltip" amount="0">';
+						options += '<button class="btn mx-1 px-0" title="' + lang.GEN_CARD_ASSIGNMENT + '" data-toggle="tooltip" amount="0" ';
+						options += 'action="CARD_ASSIGNMENT">';
 						options += '<i class="icon icon-deliver-card" aria-hidden="true"></i>';
 						options += '</button>';
 					}
@@ -191,7 +195,7 @@ $(function () {
 				}
 			}
 		]
-	})
+	});
 
 	$('#masterAccountBtn').on('click', function (e) {
 		e.preventDefault();
@@ -202,11 +206,11 @@ $(function () {
 		validateForms(form);
 
 		if (form.valid()) {
-			dataForm = getDataForm(form)
-			insertFormInput(true)
-			dataTableReload(true)
+			dataForm = getDataForm(form);
+			insertFormInput(true);
+			dataTableReload(true);
 		}
-	})
+	});
 
 	$('#tableServicesMaster').on('click', '.toggle-all', function () {
 		$(this).closest("tr").toggleClass("selected");
@@ -215,85 +219,67 @@ $(function () {
 		} else {
 			table.rows().deselect();
 		}
-	})
+	});
 
 	$('#tableServicesMaster').on('click', 'button', function (e) {
 		var event = $(e.currentTarget);
-		action = event.attr('title');
+		action = event.attr('action');
+		title = event.attr('title');
 		getAmount = event.attr('amount');
 		table.rows().deselect();
-		$('#tableServicesMaster').find('thead > tr').removeClass("selected")
-		$(this).closest('tr').addClass('select');
+		$('#tableServicesMaster').find('thead > tr').removeClass("selected");
+		$('#tableServicesMaster').find('tbody > tr').removeClass("selected");
+		$(this).closest('tr').addClass('selected');
 
-
-		if (amountValidate(getAmount, '.select', action)) {
-			$('#accept').addClass('send-request');
-			data = {
-				btn1: {
-					text: lang.GEN_BTN_SEND,
-					action: 'none'
-				},
-				btn2: {
-					text: lang.GEN_BTN_CANCEL,
-					action: 'destroy'
-				}
-			}
-
-			inputModal =	'<form id="password-modal" name="password-modal" class="row col-auto p-0" onsubmit="return false;">';
-			inputModal +=		'<div class="form-group col-12">';
-			inputModal += 		'<div class="input-group">';
-			inputModal += 			'<input class="form-control pwd-input pwd" type="password" name="password" autocomplete="off"';
-			inputModal += 				'placeholder="' + lang.GEN_PLACE_PASSWORD + '">';
-			inputModal += 			'<div class="input-group-append">';
-			inputModal += 				'<span class="input-group-text pwd-action" title="' + lang.GEN_SHOW_PASS + '"><i class="icon-view mr-0"></i></span>';
-			inputModal += 			'</div>';
-			inputModal += 		'</div>';
-			inputModal += 		'<div class="help-block"></div>';
-			inputModal += 	'</div>';
-
-			if (action == lang.GEN_CARD_ASSIGNMENT) {
-				inputModal += 	'<div class="form-group col-12">';
-				inputModal += 		'<div class="input-group">';
-				inputModal += 			'<input class="form-control" type="text" name="cardNumber" autocomplete="off"';
-				inputModal += 			'placeholder="' + lang.GEN_TABLE_CARD_NUMBER + '" req="yes">';
-				inputModal += 		'</div>';
-				inputModal += 		'<div class="help-block"></div>';
-				inputModal += 	'</div>';
-			}
-
-			inputModal += '</form>';
-
-			appMessages(action, inputModal, lang.CONF_ICON_INFO, data);
+		if (amountValidate(getAmount, title)) {
+			MasterAccBuildFormActions(action, title, $(this));
 		}
-	})
+	});
 
 	$('#tableServicesMaster').on( 'click', 'tbody td.amount-cc', function (e) {
-		$(this).find('input').removeClass('has-error')
-} );
+		$(this).find('input').removeClass('has-error');
+	});
 
 	$('#system-info').on('click', '.send-request', function () {
-		form = $('#password-modal')
-		modalReq = true
+		form = $('#password-modal');
 		btnText = $(this).text().trim();
-		sendRequest(action, modalReq, $(this))
-	})
+		sendRequest(action, title, $(this))
+	});
+
+	$('#system-info').on('click', '.get-auth-key', function () {
+		form = $('#password-modal');
+		btnText = $(this).text().trim();
+
+		if (formValidateTrim(form, title)) {
+			btnRemote = $(this);
+			remoteAuthArgs.action = action;
+			remoteAuthArgs.title = title;
+			getauhtKey();
+		}
+	});
 
 	$('#Consulta, #Abono, #Cargo').on('click', function (e) {
 		e.preventDefault()
-		$('#tableServicesMaster').find('tr').removeClass('select');
-		action = $(this).attr('id');
+		title = $(this).attr('id');
+		action = $(this).attr('action');
 		getAmount = $(this).attr('amount');
 
-		if (amountValidate(getAmount, '.selected', action)) {
+		if (amountValidate(getAmount, title)) {
 			form = $('#password-table');
-			modalReq = false;
 			btnText = $(this).text().trim();
-			sendRequest(action, modalReq, $(this))
+
+			if (lang.CONF_REMOTE_AUTH == 'OFF' || (lang.CONF_REMOTE_AUTH == 'ON' && $.inArray(action, lang.CONF_AUTH_LIST) == -1)) {
+				sendRequest(action, title, $(this));
+			} else if (formValidateTrim(form, title)) {
+				btnRemote = $(this);
+				remoteAuthArgs.action = action;
+				remoteAuthArgs.title = title;
+				getauhtKey();
+			}
 		}
 	});
 
 	$('#system-info').on('click', '#cancel', function () {
-		$('#tableServicesMaster').find('tr').removeClass('select');
 		$('#tableServicesMaster').find('tr').removeClass('selected');
 	})
 
@@ -319,16 +305,75 @@ $(function () {
 			}, 'input');
 		}
 	});
-})
+});
 
-function amountValidate(getAmount, classSelect, action) {
+function MasterAccBuildFormActions(currentAction, currentTitle, currentBtn) {
+	modalBtn = {
+		btn1: {
+			text: lang.GEN_BTN_ACCEPT,
+			action: 'none'
+		},
+		btn2: {
+			text: lang.GEN_BTN_CANCEL,
+			action: 'destroy'
+		}
+	}
+	inputModal = 	'<form id="password-modal" name="password-modal" class="row col-auto" onsubmit="return false;">';
+
+	if (currentAction == 'CARD_ASSIGNMENT') {
+		inputModal += 	'<div class="form-group col-12 pl-0">';
+		inputModal += 		'<div class="input-group">';
+		inputModal += 		'<input class="form-control" type="text" id="cardNumber" name="cardNumber" autocomplete="off"';
+		inputModal += 			'placeholder="' + lang.GEN_TABLE_CARD_NUMBER + '" req="yes">';
+		inputModal += 		'</div>';
+		inputModal += 		'<div class="help-block"></div>';
+		inputModal += 	'</div>';
+	}
+
+	if (lang.CONF_REMOTE_AUTH == 'OFF') {
+		$('#accept').addClass('send-request');
+
+		inputModal += 	'<div class="form-group col-12 pl-0">';
+		inputModal += 		'<div class="input-group">';
+		inputModal += 			'<input class="form-control pwd-input pwd" type="password" id="password" name="password" autocomplete="off" ';
+		inputModal += 					'placeholder="' + lang.GEN_PLACE_PASSWORD + '">';
+		inputModal += 			'<div class="input-group-append">';
+		inputModal += 				'<span class="input-group-text pwd-action" title="' + lang.GEN_SHOW_PASS + '"><i class="icon-view mr-0"></i></span>';
+		inputModal += 			'</div>';
+		inputModal += 		'</div>';
+		inputModal += 		'<div class="help-block"></div>';
+		inputModal += 	'</div>';
+	} else {
+		$('#accept').addClass('get-auth-key');
+		currentBtn = btnRemote;
+		form = $('#nonForm');
+
+		if ($.inArray(currentAction, lang.CONF_AUTH_VALIDATE) == -1) {
+			$('.cover-spin').show(0);
+		}
+	}
+
+	inputModal += '</form>';
+
+	if (lang.CONF_REMOTE_AUTH == 'OFF' || (lang.CONF_REMOTE_AUTH == 'ON' && $.inArray(currentAction, lang.CONF_AUTH_VALIDATE) != -1)) {
+		appMessages(currentTitle, inputModal, lang.CONF_ICON_INFO, modalBtn);
+	} else if ($.inArray(currentAction, lang.CONF_AUTH_LIST) != -1) {
+		remoteAuthArgs.action = currentAction;
+		remoteAuthArgs.title = currentTitle;
+		getauhtKey();
+	} else {
+		sendRequest(currentAction, currentTitle, currentBtn);
+	}
+}
+
+function amountValidate(getAmount, currentTitle) {
 	var valid = true
-	cardsData = table.rows(classSelect).data();
+	cardsData = table.rows('.selected').data();
 
 	if (getAmount == '1') {
 		var currentamount
 		for (var i = 0; i < cardsData.length; i++) {
-			$('#tableServicesMaster').find('tbody > tr'+classSelect).each(function (index, element) {
+			$('#tableServicesMaster').find('tbody > tr.selected').each(function (index, element) {
 				currentamount = $(element).find('td.amount-cc input').val();
 				var amountArr =  currentamount.split(lang.GEN_DECIMAL);
 				amountArr[0] = amountArr[0].replace(/[,.]/g, '');
@@ -348,14 +393,14 @@ function amountValidate(getAmount, classSelect, action) {
 	}
 
 	if (!valid) {
-		data = {
+		modalBtn = {
 			btn1: {
 				text: lang.GEN_BTN_ACCEPT,
-				action: 'close'
+				action: 'destroy'
 			}
 		}
 
-		appMessages(action, lang.GEN_VALID_AMOUNT, lang.CONF_ICON_WARNING, data);
+		appMessages(currentTitle, lang.GEN_VALID_AMOUNT, lang.CONF_ICON_WARNING, modalBtn);
 		$('#tableServicesMaster').find('thead > tr').removeClass("selected")
 		table.rows().deselect();
 	}
@@ -363,15 +408,10 @@ function amountValidate(getAmount, classSelect, action) {
 	return valid;
 }
 
-function sendRequest(action, modalReq, btn) {
-	formInputTrim(form)
-	validateForms(form)
-	if (cardsData.length == 0) {
-		form.validate().resetForm();
-		form.find('.bulk-select').text(lang.VALIDATE_SELECT);
-	}
-
-	if (cardsData.length > 0 && form.valid()) {
+function sendRequest(currentAction, currentTitle, currentBtn) {
+	if (formValidateTrim(form, currentTitle)) {
+		$('#accept').removeClass('send-request');
+		$('#accept').removeClass('get-auth-key');
 		var cardsInfo = [];
 
 		for (var i = 0; i < cardsData.length; i++) {
@@ -380,62 +420,63 @@ function sendRequest(action, modalReq, btn) {
 			info['idNumber'] = cardsData[i].idNumber;
 			info['amount'] = cardsData[i].amount;
 
-			if (action == lang.GEN_CARD_ASSIGNMENT) {
-				info['cardNumberAs'] = form.find('input[name=cardNumber]').val()
+			if (currentAction == 'CARD_ASSIGNMENT') {
+				info['cardNumberAs'] = cardHolderInf.cardNumber
 			}
 
 			cardsInfo.push(JSON.stringify(info));
 		}
 
-		btn
+		currentBtn
 			.html(loader)
 			.prop('disabled', true);
-		insertFormInput(true)
+		insertFormInput(true);
 		data = {
-			modalReq: modalReq,
 			cards: cardsInfo,
-			action: action,
-			pass: cryptoPass(form.find('input.pwd').val().trim())
+			action: currentAction
+		}
+
+		if (lang.CONF_REMOTE_AUTH == 'OFF') {
+			data.pass = cardHolderInf.password ? cryptoPass(cardHolderInf.password) : cryptoPass(cardHolderInf.passAction);
 		}
 
 		verb = 'POST'; who = 'Services'; where = 'ActionMasterAccount';
 
 		callNovoCore(verb, who, where, data, function (response) {
-			$('#tableServicesMaster').find('tr').removeClass('select');
 			$('#tableServicesMaster').find('thead > tr').removeClass("selected")
 			table.rows().deselect();
-			$('#tableServicesMaster').find('thead > tr').removeClass("selected")
-			$('#accept').removeClass('send-request');
 
-			if(action == 'Consulta' || action == 'Cargo' || action == 'Abono') {
-				btn.html(btnText)
+			if (currentAction == 'CHECK_BALANCE' || currentAction == 'DEBIT_TO_CARD' || currentAction == 'CREDIT_TO_CARD') {
+				currentBtn.html(btnText)
 			}
 
-			btn.prop('disabled', false);
-			insertFormInput(false);
-			form.find('input.pwd').val('')
-			$('#tableServicesMaster').find('tbody > tr input').val('')
+			$('#tableServicesMaster').find('tbody > tr input').val('');
 
 			if (response.data.balance) {
 				$('#balance-aviable').text(response.data.balance)
 			}
 
-			if (action == lang.GEN_CHECK_BALANCE || action == 'Consulta') {
-				cardCheckBalance(response, action)
+			if (currentAction == 'CHECK_BALANCE') {
+				cardCheckBalance(response, currentTitle)
 			}
 
-			if (action == lang.GEN_TEMPORARY_LOCK || action == lang.GEN_UNLOCK_CARD || action == lang.GEN_CARD_ASSIGNMENT) {
+			if (currentAction == 'TEMPORARY_LOCK' || currentAction == 'TEMPORARY_UNLOCK' || currentAction == 'CARD_ASSIGNMENT') {
 				cardBlockUnblock(response)
 			}
 
-			if (action == lang.GEN_CREDIT_TO_CARD || action == 'Abono' || action == lang.GEN_DEBIT_TO_CARD || action == 'Cargo') {
-				buildList(response, action)
+			if (currentAction == 'CREDIT_TO_CARD' || currentAction == 'DEBIT_TO_CARD') {
+				buildList(response, currentTitle)
 			}
-		})
+
+			currentBtn.prop('disabled', false);
+			insertFormInput(false);
+			form.find('input.pwd').val('');
+			$('.cover-spin').hide();
+		});
 	}
 }
 
-function cardCheckBalance(response, action) {
+function cardCheckBalance(response, currentTitle) {
 	$.each(response.data.listResponse, function (key, value) {
 		$('#tableServicesMaster').find('tbody > tr').each(function (index, element) {
 			if (value.cardNumber == $(element).find('td.card-number').text()) {
@@ -450,10 +491,10 @@ function cardCheckBalance(response, action) {
 	})
 
 	if (response.code == 2) {
-		data = {
+		modalBtn = {
 			btn1: {
 				text: lang.GEN_BTN_ACCEPT,
-				action: 'close'
+				action: 'destroy'
 			}
 		}
 
@@ -462,15 +503,16 @@ function cardCheckBalance(response, action) {
 			inputModal += '<h6 class="light mr-1">' + value + '</h6>';
 		})
 
-		appMessages(action, inputModal, lang.CONF_ICON_INFO, data);
+		appMessages(currentTitle, inputModal, lang.CONF_ICON_INFO, modalBtn);
 	}
 }
 
 function cardBlockUnblock(response) {
 	if (response.update) {
-		$('#accept').addClass('update')
+		$('#accept').addClass('update');
 		$('.update').on('click', function() {
-			dataTableReload(false)
+			$('#accept').removeClass('update');
+			dataTableReload(false);
 		})
 	}
 }
@@ -482,12 +524,12 @@ function dataTableReload(resetPaging) {
 	$('#tableServicesMaster').DataTable().ajax.reload(null, resetPaging);
 }
 
-function buildList(response, action) {
+function buildList(response, currentTitle) {
 	if (response.code == 2) {
-		data = {
+		modalBtn = {
 			btn1: {
 				text: lang.GEN_BTN_ACCEPT,
-				action: 'close'
+				action: 'destroy'
 			}
 		}
 		inputModal = '<h5 class="regular mr-1">' + response.msg + '</h5>'
@@ -495,9 +537,10 @@ function buildList(response, action) {
 			inputModal += '<h6 class="light mr-1">Tarjeta: ' + value.cardNumber + ' Monto: ' + value.amount + '</h6>';
 		})
 
-		appMessages(action, inputModal, lang.CONF_ICON_INFO, data);
-		$('#accept').addClass('update')
+		appMessages(currentTitle, inputModal, lang.CONF_ICON_INFO, modalBtn);
+		$('#accept').addClass('update');
 		$('.update').on('click', function() {
+			$('#accept').removeClass('update');
 			dataTableReload(false)
 		})
 	}
@@ -525,4 +568,27 @@ function verifyOperations() {
 		column = table.column('0');
 		column.visible(true);
 	}
+}
+
+function formValidateTrim(currentForm, currentTitle) {
+	formInputTrim(currentForm);
+	validateForms(currentForm);
+
+	if (cardsData.length == 0) {
+		currentForm.validate().resetForm();
+		modalBtn = {
+			btn1: {
+				text: lang.GEN_BTN_ACCEPT,
+				action: 'destroy'
+			}
+		}
+
+		appMessages(currentTitle, lang.VALIDATE_SELECT, lang.CONF_ICON_WARNING, modalBtn);
+	}
+
+	if (form.valid()) {
+		cardHolderInf = getDataForm(currentForm);
+	}
+
+	return cardsData.length > 0 && form.valid();
 }

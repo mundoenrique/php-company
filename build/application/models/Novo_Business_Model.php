@@ -23,13 +23,13 @@ class Novo_Business_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO Business Model: getEnterprises Method Initialized');
 
-		$this->className = "com.novo.objects.MO.ListadoEmpresasMO";
 		$this->dataAccessLog->modulo = 'Negocios';
 		$this->dataAccessLog->function = 'Empresas';
 		$this->dataAccessLog->operation = 'lista de empresas';
 
 		$sizePage = $this->request_data->setPageSize($this->session->screenSize);
 		$this->dataRequest->idOperation = 'listaEmpresas';
+		$this->dataRequest->className = 'com.novo.objects.MO.ListadoEmpresasMO';
 		$this->dataRequest->accodusuario = $this->userName;
 		$this->dataRequest->paginaActual = 1;
 		$this->dataRequest->paginar = FALSE;
@@ -89,6 +89,10 @@ class Novo_Business_Model extends NOVO_Model {
 			break;
 			default:
 				$this->response->data->text = lang('GEN_ENTERPRISE_NOT_OBTEIN');
+
+				if ($this->isResponseRc =! -29 || $this->isResponseRc =! -61) {
+					clearSessionsVars();
+				}
 		}
 
 		if($this->response->code != 0) {
@@ -113,7 +117,6 @@ class Novo_Business_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO Bulk Model: GetBranchOffices Method Initialized');
 
-		$this->className = 'com.novo.objects.MO.ListadoSucursalesMO';
 		$this->dataAccessLog->modulo = 'Lotes';
 		$this->dataAccessLog->function = 'Carga de lotes';
 		$this->dataAccessLog->operation = 'Obtener sucursales';
@@ -122,6 +125,7 @@ class Novo_Business_Model extends NOVO_Model {
 		unset($dataRequest->select);
 		$this->dataRequest = new stdClass();
 		$this->dataRequest->idOperation = 'getConsultarSucursales';
+		$this->dataRequest->className = 'com.novo.objects.MO.ListadoSucursalesMO';
 		$this->dataRequest->paginaActual = '1';
 		$this->dataRequest->tamanoPagina = 10;
 		$this->dataRequest->paginar = FALSE;
@@ -153,12 +157,14 @@ class Novo_Business_Model extends NOVO_Model {
 
 				foreach($response->lista AS $pos => $branchs) {
 					$branch = [];
+
 					if($select) {
 						$branch['key'] = $response->lista[$pos]->cod;
 						$branch['text'] = ucfirst(mb_strtolower($response->lista[$pos]->nomb_cia));
 						$branchOffice[] = (object) $branch;
 						continue;
 					}
+
 					$branch['idFiscal'] = $response->lista[$pos]->rif;
 					$branch['name'] = mb_strtoupper($response->lista[$pos]->nomb_cia);
 					$branchOffice[] = (object) $branch;
@@ -198,12 +204,12 @@ class Novo_Business_Model extends NOVO_Model {
 			unset($dataRequest->select);
 		}
 
-		$this->className = "com.novo.objects.TOs.UsuarioTO";
 		$this->dataAccessLog->modulo = 'Negocios';
 		$this->dataAccessLog->function = 'Productos';
 		$this->dataAccessLog->operation = 'lista de productos';
 
 		$this->dataRequest->idOperation = 'menuEmpresa';
+		$this->dataRequest->className = 'com.novo.objects.TOs.UsuarioTO';
 		$this->dataRequest->ctipo = isset($dataRequest->type) ? $dataRequest->type : 'A';
 		$this->dataRequest->userName = $this->userName;
 		$this->dataRequest->idEmpresa = $dataRequest->idFiscal;
@@ -270,7 +276,6 @@ class Novo_Business_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO Business Model: getProductDetail Method Initialized');
 
-		$this->className = "com.novo.objects.MO.ListadoMenuMO";
 		$this->dataAccessLog->modulo = 'Negocios';
 		$this->dataAccessLog->function = 'Producto';
 		$this->dataAccessLog->operation = 'Detalle Producto';
@@ -285,6 +290,7 @@ class Novo_Business_Model extends NOVO_Model {
 		}
 
 		$this->dataRequest->idOperation = 'menuPorProducto';
+		$this->dataRequest->className = 'com.novo.objects.MO.ListadoMenuMO';
 		$this->dataRequest->menus = [
 			[
 				'app' => 'EOL',
@@ -325,9 +331,16 @@ class Novo_Business_Model extends NOVO_Model {
 
 		switch($this->isResponseRc) {
 			case 0:
-				log_message('INFO', 'NOVO ['.$this->userName.'] '.'getProductDetail'.' USER_ACCESS LIST: '.json_encode($response->lista));
+				log_message('INFO', 'NOVO ['.$this->userName.'] '.'callWs_GetProductDetail'.' USER_ACCESS LIST: '.json_encode($response->lista));
 
 				$this->response->code = 0;
+				$imgProgram = $productDetail['imgProgram'];
+
+				if(!file_exists(assetPath('images/programs/'.$this->session->countryUri.'/'.$imgProgram))) {
+					$imgProgram = 'default.svg';
+				}
+
+				$productDetail['imgProgram'] = $imgProgram;
 
 				if(isset($response->estadistica->producto->idProducto)) {
 					$imgBrand = url_title(trim(mb_strtolower($response->estadistica->producto->marca)));
@@ -376,7 +389,7 @@ class Novo_Business_Model extends NOVO_Model {
 					$this->response->code = 3;
 					$this->response->title = lang('PRODUCTS_DETAIL_TITLE');
 					$this->response->msg = lang('RESP_UNCONFIGURED_PRODUCT');
-					$this->response->data->resp['btn1']['link'] = 'productos';
+					$this->response->modalBtn['btn1']['link'] = 'productos';
 				}
 
 				$productSummary['lots'] = trim($response->estadistica->lote->total);
@@ -399,18 +412,18 @@ class Novo_Business_Model extends NOVO_Model {
 				if(isset($response->estadistica->producto->mesesVencimiento)) {
 					$expMaxMonths = trim($response->estadistica->producto->mesesVencimiento);
 					$currentDate = date('Y-m');
-					$newDate = strtotime ('+'.$expMaxMonths.' month' , strtotime($currentDate));
-					$expireDate = date ('m/Y' , $newDate);
+					$newDate = strtotime('+'.$expMaxMonths.' month' , strtotime($currentDate));
+					$expireDate = date('m/Y' , $newDate);
 					$productInf->expMaxMonths = $expireDate;
 					$productInf->maxCards = trim($response->estadistica->producto->maxTarjetas);
 					$this->session->set_userdata('productInf', $productInf);
 				}
-				break;
+			break;
 			case -99:
 				$this->response->code = 3;
 				$this->response->msg = novoLang(lang('RESP_NO_ACCESS'), $this->userName);
-				$this->response->data->resp['btn1']['link'] = 'productos';
-				break;
+				$this->response->modalBtn['btn1']['link'] = 'productos';
+			break;
 		}
 
 		$this->response->data->productDetail = (object) $productDetail;

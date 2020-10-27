@@ -74,11 +74,11 @@
           <?php if($pais == 'Ec-bp'): ?>
           <div id="search-1">
             <br>
-            <h5 style="float:left;"><?= "Cuenta" ?></h5>            
-            <span>            
-              
-							<div id="numberaccount" style="padding-top: 0.4rem;">								
-							</div>							
+            <h5 style="float:left;"><?= "Cuenta" ?></h5>
+            <span>
+
+							<div id="numberaccount" style="padding-top: 0.4rem;">
+							</div>
 
             </span>
           </div>
@@ -202,7 +202,7 @@
             <?php
 					}
 				?>
-            <input id='clave' class='input-TM' type='password' name='user_pass'
+            <input id='clave' class='input-TM' type='password' name='userName'
               placeholder="<?= lang('PLACEHOLDER_PASS'); ?>" />
             <?php
 					if($pais=='Ec-bp'){

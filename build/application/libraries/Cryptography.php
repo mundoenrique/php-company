@@ -80,4 +80,17 @@ class Cryptography {
 
     return $randomString;
 	}
+	/**
+	 * @info Método encargado de preparar un dato para su desencriptado
+	 * @author Pedro Torres
+	 * @date Septiembre 25th, 2020
+	 */
+	public function decryptOnlyOneData($data)
+	{
+		$data = json_decode(base64_decode($data));
+		return $this->decrypt(
+			base64_decode($data->plot),
+			utf8_encode($data->password)
+		);
+	}
 }

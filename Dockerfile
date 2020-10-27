@@ -19,5 +19,4 @@ RUN apt-get update -y \
 	&& chmod 0755 assets/bulk \
 	&& mkdir -p ../sessions \
 	&& chmod 0700 ../sessions \
-	&& chown -R www-data:www-data ../ \
-	&& apachectl restart
+	&& chown -R www-data:www-data ../

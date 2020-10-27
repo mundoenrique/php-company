@@ -107,10 +107,9 @@ function dialog(e){
 			lang.CONF_MODAL_WIDTH = 200;
 			var titleModalExcel = 'Exportar a EXCEL de consolidado';
 			var oldID = $('#accept').attr('id');
-			var inputModal;
 			modalReq['table'] = $(this).closest('table');
 			$('#accept').attr('id', 'download-consolid');
-			data = {
+			modalBtn = {
 				btn1: {
 					text: lang.GEN_BTN_DOWNLOAD,
 					action: 'close'
@@ -127,7 +126,7 @@ function dialog(e){
 			inputModal+= 		'</div>';
 			inputModal+= 		'<div class="help-block"></div>';
 			inputModal+=	'</form>';
-			appMessages(titleModalExcel, inputModal, lang.CONF_ICON_INFO, data);
+			appMessages(titleModalExcel, inputModal, lang.CONF_ICON_INFO, modalBtn);
 
 			var i=0;
 			var anioB;
@@ -144,10 +143,9 @@ function dialog(e){
 			case 'Exportar a PDF consolidado':
 				var titleModalPdf = 'Exportar a PDF consolidado';
 				var oldID = $('#accept').attr('id');
-				var inputModal;
 				modalReq['table'] = $(this).closest('table');
 				$('#accept').attr('id', 'download-consolidpdf');
-				data = {
+				modalBtn = {
 					btn1: {
 						text: lang.GEN_BTN_DOWNLOAD,
 						action: 'close'
@@ -163,7 +161,7 @@ function dialog(e){
 				inputModal+= 		'</div>';
 				inputModal+= 		'<div class="help-block"></div>';
 				inputModal+=	'</form>';
-				appMessages(titleModalPdf, inputModal, lang.CONF_ICON_INFO, data);
+				appMessages(titleModalPdf, inputModal, lang.CONF_ICON_INFO, modalBtn);
 
 				var i=0;
 				var anioB;

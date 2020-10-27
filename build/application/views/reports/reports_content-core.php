@@ -127,7 +127,7 @@
 					</div>
 
 
-					<div id="repTarjeta" class="no-select">
+					<div id="repTarjeta" class="no-select .repTarjeta">
 						<div class="row">
 							<div class="form-group col-6 col-lg-4">
 								<label for="cardNumber"><?= lang('REPORTS_CARD_NUMBER') ?></label>
@@ -161,7 +161,7 @@
 						</div>
 					</div>
 
-					<div id="repComprobantesVisaVale" class="row">
+					<div id="repComprobantesVisaVale" class="row .repComprobantes">
 						<div class="form-group col-6 col-lg-4">
 							<label for="datepicker"><?= lang('GEN_TABLE_DATE') ?></label>
 							<input id="date" class="form-control month-year" name="selected-date" type="text" readonly

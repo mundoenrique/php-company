@@ -47,8 +47,9 @@ class Novo_User extends NOVO_Controller {
 			$this->includeAssets->jsFiles,
 			"third_party/jquery.balloon",
 			"third_party/jquery.validate",
-			"validate".lang('CONF_VIEW_SUFFIX')."-forms",
+			"validate-forms",
 			"third_party/additional-methods",
+			"googleRecaptcha",
 			"user/login"
 		);
 
@@ -59,6 +60,53 @@ class Novo_User extends NOVO_Controller {
 				"user/kwicks"
 			);
 		}
+
+		if($this->skin === 'pichincha' && ENVIRONMENT === 'production') {
+			array_push(
+				$this->includeAssets->jsFiles,
+				"third_party/borders"
+			);
+		}
+
+		$this->render->skipProductInf = TRUE;
+		$this->render->titlePage = lang('GEN_SYSTEM_NAME');
+		$this->views = $views;
+		$this->loadView($view);
+	}
+	/**
+	 * @info Método que renderiza la vista de inicio de sesión
+	 * @author J. Enrique Peñaloza Piñero.
+	 * @date October 24th, 2020
+	 */
+	public function signIn()
+	{
+		log_message('INFO', 'NOVO User: signIn Method Initialized');
+
+		if($this->session->has_userdata('logged')) {
+			redirect(base_url('empresas'), 'location', 301);
+			exit();
+		}
+
+		if ($this->session->has_userdata('userId')) {
+			clearSessionsVars();
+		}
+
+		$view = 'signIn';
+
+		if(ACTIVE_RECAPTCHA) {
+			$this->load->library('recaptcha');
+			$this->render->scriptCaptcha = $this->recaptcha->getScriptTag();
+		}
+
+		array_push(
+			$this->includeAssets->jsFiles,
+			"third_party/jquery.balloon",
+			"third_party/jquery.validate",
+			"validate-core-forms",
+			"third_party/additional-methods",
+			"googleRecaptcha",
+			"user/signIn"
+		);
 
 		if($this->skin === 'pichincha' && ENVIRONMENT === 'production') {
 			array_push(
@@ -78,7 +126,7 @@ class Novo_User extends NOVO_Controller {
 
 		$this->render->skipProductInf = TRUE;
 		$this->render->titlePage = lang('GEN_SYSTEM_NAME');
-		$this->views = $views;
+		$this->views = ['user/signin'];
 		$this->loadView($view);
 	}
 	/**
@@ -93,10 +141,10 @@ class Novo_User extends NOVO_Controller {
 		$this->render->send = FALSE;
 
 		if ($sessionId) {
-			$this->render->sessionId = $sessionId;
+			$this->render->form['sessionId'] = $sessionId;
 			$this->render->send = TRUE;
 		} else {
-			$this->render->sessionId = $this->request->sessionId;
+			$this->render->form = $this->request;
 		}
 
 		if($sessionId == 'fin') {
@@ -290,6 +338,104 @@ class Novo_User extends NOVO_Controller {
 		$this->render->msg2 = $messageBrowser->msg2;
 		$this->render->titlePage = lang('GEN_SYSTEM_NAME');
 		$this->views = $views;
+		$this->loadView($view);
+	}
+		/**
+	 * @info Método que renderiza la vista de administración de usuarios
+	 * @author Hector D. Corredor.
+	 *
+	 */
+	public function usersManagement()
+
+	{
+		log_message('INFO', 'NOVO User: usersManagement Method Initialized');
+
+		$view = 'usersManagement';
+		array_push(
+			$this->includeAssets->cssFiles,
+			"third_party/dataTables-1.10.20"
+		);
+		array_push(
+			$this->includeAssets->jsFiles,
+			"third_party/dataTables-1.10.20",
+			"third_party/jquery.validate",
+			"validate-core-forms",
+			"third_party/additional-methods",
+			"user/usersManagement"
+		);
+
+		$responseList = $this->loadModel();
+		$data = $responseList->data;
+		$code = $responseList->code;
+
+		if (($code) == 4) {
+			$this->render->userList= [];
+			$this->render->userRegistered = '';
+		}else{
+			$this->render->userList = $data;
+			$registeredUser = 'OFF';
+			$countRegisteredUser = 0;
+			foreach ($data as $key => $value) {
+				if ($data[$key]->registered == "false") {
+					$countRegisteredUser++;
+				}
+			}
+
+			if ($countRegisteredUser > 0) {
+				$registeredUser = 'ON';
+			}
+			$this->render->userRegistered = $registeredUser;
+		}
+
+		$this->responseAttr($responseList);
+		$this->render->titlePage = lang('GEN_MENU_USERS_MANAGEMENT');
+		$this->views = ['user/'.$view];
+		$this->loadView($view);
+	}
+
+		/**
+	 * @info Método que renderiza la vista de permisos de usuario
+	 * @author Jennifer C. Cádiz.
+	 */
+	public function userPermissions()
+
+	{
+		log_message('INFO', 'NOVO User: userPermissions Method Initialized');
+
+		$view = 'userPermissions';
+		array_push(
+			$this->includeAssets->jsFiles,
+			"third_party/jquery.validate",
+			"validate-core-forms",
+			"third_party/additional-methods",
+			"user/userPermissions"
+		);
+
+		if ($this->session->flashdata('userDataPermissions') != NULL) {
+			$userDataList = $this->session->flashdata('userDataPermissions');
+			$this->request = $userDataList;
+			$this->session->set_flashdata('userDataPermissions', $userDataList);
+		}
+
+		$this->render->user = $this->request->idUser;
+		$this->render->name = $this->request->nameUser;
+		$this->render->email = $this->request->mailUser;
+		$this->render->type = $this->request->typeUser;
+		$responseList = $this->loadModel($this->request);
+
+		$arrayList = $responseList->data;
+		$i = 0;
+
+		foreach ($arrayList as $key => $value) {
+			$titles[$i] = $key;
+			$i++;
+		}
+		$this->render->titles = $titles;
+		$this->render->modules = $arrayList;
+
+		$this->responseAttr($responseList);
+		$this->render->titlePage = lang('GEN_USER_PERMISSION_TITLE');
+		$this->views = ['user/'.$view];
 		$this->loadView($view);
 	}
 }
