@@ -130,7 +130,7 @@
 						<thead class="bg-primary secondary regular">
 							<tr>
 								<th><?= lang('REPORTS_TABLE_DATE'); ?></th>
-								<th><?= lang('REPORTS_TABLE_DESCRIPTION'); ?></th>
+								<th><?= lang('GEN_DESCRIPTION'); ?></th>
 								<th><?= lang('REPORTS_TABLE_REFERENCE'); ?></th>
 								<th><?= lang('REPORTS_TABLE_DEBIT'); ?></th>
 								<th><?= lang('REPORTS_TABLE_CREDIT'); ?></th>

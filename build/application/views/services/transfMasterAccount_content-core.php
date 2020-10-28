@@ -19,51 +19,52 @@
   </div>
   <div class="w-100 hide-out hide">
     <div class="flex flex-auto flex-column <?= $widget ? '' : 'max-width-6'; ?>">
-      <?php if (lang('CONF_PAY_ACCOUNT') == 'ON' && $this->verify_access->verifyAuthorization('TRAMAE', 'TRASAL')): ?>
+      <?php if ($showRechargeAccount): ?>
       <div class="flex pb-3 flex-column w-100">
         <span class="line-text mb-2 h4 semibold primary">Recarga cuenta/tarjeta maestra </span>
         <div class="flex my-2 px-5">
           <form id="masterAccountRechargeForm" method="post" class="w-100">
             <p class="mr-5 mb-3 sh5 semibold tertiary"><?= $balanceText ?> <span class="light text"><?= $balance; ?></span></p>
-
-            <?php if (lang('CONF_SELECT_AMOUNT') == 'ON'): ?>
             <div class="row">
+              <?php if (lang('CONF_SELECT_AMOUNT') == 'ON'): ?>
               <div class="form-group col-3">
                 <label for="account" id="account"><?= lang('GEN_ACCOUNT'); ?></label>
-                <input type="text" id="accountUser" name="accountUser" class="form-control px-1" value="<?= $fundingAccount; ?>" readonly>
+                <input type="text" id="accountUser" name="accountUser" class="form-control px-1" value="<?= $fundingAccount; ?>" autocomplete="off"
+                  readonly disabled>
                 <div class="help-block"></div>
               </div>
 
               <div class="form-group col-3">
                 <div class="custom-option-c custom-radio custom-control-inline">
-                  <input type="radio" id="debit" name="transferType" class="custom-option-input">
+                  <input type="radio" id="debit" name="transferType" class="custom-option-input" disabled>
                   <label class="custom-option-label nowrap" for="debit">Cargo</label>
                 </div>
                 <div class="custom-option-c custom-radio custom-control-inline">
-                  <input type="radio" id="pay" name="transferType" class="custom-option-input">
+                  <input type="radio" id="pay" name="transferType" class="custom-option-input" disabled>
                   <label class="custom-option-label nowrap" for="pay">Abono</label>
                 </div>
                 <div class="help-block"></div>
               </div>
-
+              <?php endif; ?>
               <div class="form-group col-3">
-                <label for="amount"><?= lang('GEN_TABLE_AMOUNT'); ?></label>
-                <input id="amount" class="form-control h5 text-right" type="text" placeholder="<?= '0'.lang('GEN_DECIMAL').'00'; ?>" name="amount">
+                <label for="transferAmount"><?= lang('GEN_TABLE_AMOUNT'); ?></label>
+                <input id="transferAmount" class="form-control h5 text-right" type="text" placeholder="<?= '0'.lang('GEN_DECIMAL').'00'; ?>"
+                  name="transferAmount" autocomplete="off" disabled>
                 <div class="help-block"></div>
               </div>
               <div class="form-group col-3">
-                <label for="description">Descripción</label>
-                <input id="description" class="form-control h5" type="text" placeholder="Ingresa descripción" name="description">
+                <label for="description"><?= lang('GEN_DESCRIPTION'); ?></label>
+                <input id="description" class="form-control h5" type="text" placeholder="Ingresa descripción" name="description" autocomlpete="off"
+                  disabled>
                 <div class="help-block"></div>
               </div>
             </div>
-            <?php endif; ?>
 
             <div class="row flex justify-end my-3">
               <div class="col-4 col-lg-3 col-xl-3 form-group">
                 <div class="input-group">
                   <input id="password-tranfer" name="password" class="form-control pwd-input pr-0 pwd" type="password" autocomplete="off"
-                    placeholder="<?= lang('GEN_PLACE_PASSWORD'); ?>">
+                    placeholder="<?= lang('GEN_PLACE_PASSWORD'); ?>" disabled>
                   <div class="input-group-append">
                     <span id="pwd_action" class="input-group-text pwd-action" title="<?= lang('GEN_SHOW_PASS') ?>">
                       <i class="icon-view mr-0"></i>
@@ -73,10 +74,12 @@
                 <div class="help-block bulk-select text-left"></div>
               </div>
               <div class="col-3">
-                <button id="masterAccountRechargeBtn" class="btn btn-primary btn-small btn-loading flex ml-auto">Transferir
+                <button id="masterAccountRechargeBtn" class="btn btn-primary btn-small btn-loading flex ml-auto">
+                  <?= lang('GEN_BTN_TRANSFER'); ?>
                 </button>
               </div>
             </div>
+
           </form>
         </div>
         <div class="line mb-2"></div>
@@ -141,7 +144,7 @@
             <form id="password-table">
               <div class="flex row mt-3 mb-2 mx-2 justify-end">
                 <div class="col-3 col-lg-3 col-xl-3 form-group">
-									<?php if (lang('CONF_REMOTE_AUTH') == 'OFF'): ?>
+                  <?php if (lang('CONF_REMOTE_AUTH') == 'OFF'): ?>
                   <div class="input-group">
                     <input id="passAction" name="password" class="form-control pwd-input pr-0 pwd" type="password" autocomplete="off"
                       placeholder="<?= lang('GEN_PLACE_PASSWORD'); ?>">
@@ -150,27 +153,27 @@
                           class="icon-view mr-0"></i></span>
                     </div>
                   </div>
-									<?php endif; ?>
+                  <?php endif; ?>
                   <div class="help-block bulk-select text-left"></div>
                 </div>
                 <?php if($this->verify_access->verifyAuthorization('TRAMAE', 'TRASAL')): ?>
                 <div class="col-auto">
                   <button id="Consulta" class="btn btn-primary btn-small btn-loading flex mx-auto" amount="0" action="CHECK_BALANCE">
-										Consultar
+                    Consultar
                   </button>
                 </div>
                 <?php endif; ?>
                 <?php if($this->verify_access->verifyAuthorization('TRAMAE', 'TRAABO')): ?>
                 <div class="col-auto">
                   <button id="Abono" class="btn btn-primary btn-small btn-loading flex mx-auto" amount="1" action="CREDIT_TO_CARD">
-										Abono
+                    Abono
                   </button>
                 </div>
                 <?php endif; ?>
                 <?php if($this->verify_access->verifyAuthorization('TRAMAE', 'TRACAR')): ?>
                 <div class="col-auto">
                   <button id="Cargo" class="btn btn-primary btn-small btn-loading flex mx-auto" amount="1" action="DEBIT_TO_CARD">
-										Cargo
+                    Cargo
                   </button>
                 </div>
                 <?php endif; ?>

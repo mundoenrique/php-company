@@ -280,6 +280,7 @@ class Novo_Business_Model extends NOVO_Model {
 		$this->dataAccessLog->function = 'Producto';
 		$this->dataAccessLog->operation = 'Detalle Producto';
 		$enterpriseInf = $this->session->enterpriseInf;
+		$productPrefix = $dataRequest->productPrefix;
 
 		if(isset($dataRequest->goToDetail)) {
 			unset($dataRequest->goToDetail, $dataRequest->productPrefix);
@@ -293,14 +294,14 @@ class Novo_Business_Model extends NOVO_Model {
 		$this->dataRequest->menus = [
 			[
 				'app' => 'EOL',
-				'prod' => $dataRequest->productPrefix,
+				'prod' => $productPrefix,
 				'idUsuario' => $this->userName,
 				'idEmpresa' => $enterpriseInf->idFiscal,
 			]
 		];
 		$this->dataRequest->estadistica = [
 			'producto' => [
-				'prefijo' => $dataRequest->productPrefix,
+				'prefijo' => $productPrefix,
 				'rifEmpresa' => $enterpriseInf->idFiscal,
 				'acCodCia' => $enterpriseInf->enterpriseCode,
 				'acCodGrupo' => $enterpriseInf->enterpriseGroup
@@ -315,7 +316,7 @@ class Novo_Business_Model extends NOVO_Model {
 			'brand' => isset($dataRequest->productBrand) ? url_title(trim(mb_strtolower($dataRequest->productBrand))) : '',
 			'imgBrand' => isset($dataRequest->productBrand) ? $dataRequest->productBrand.lang('GEN_DETAIL_BARND_COLOR') : '',
 			'viewSomeAttr' => TRUE,
-			'prefix' => $dataRequest->productPrefix
+			'prefix' => $productPrefix
 		];
 
 		if(!file_exists(assetPath('images/programs/'.$this->session->countryUri.'/'.$imgProgram))) {
@@ -360,17 +361,17 @@ class Novo_Business_Model extends NOVO_Model {
 						$productDetail['imgProgram'] = $imgProgram;
 					}
 
-					$productDetail['name'] = ucwords(mb_strtolower($response->estadistica->producto->descripcion));
-					$productDetail['brand'] = trim($response->estadistica->producto->marca);
-
 					if (trim($response->estadistica->producto->idProducto) == 'G') {
 						$productDetail['viewSomeAttr'] = FALSE;
 					}
 
+
+					$productDetail['name'] = ucwords(mb_strtolower($response->estadistica->producto->descripcion));
+					$productDetail['brand'] = trim($response->estadistica->producto->marca);
 					$productInf = new stdClass();
 					$productInf->productPrefix = $productPrefix;
-					$productInf->productName = $productName;
-					$productInf->brand = $brand;
+					$productInf->productName = $productDetail['name'];
+					$productInf->brand = $productDetail['brand'];
 					$sess = [
 						'productInf' => $productInf,
 						'user_access' => $response->lista

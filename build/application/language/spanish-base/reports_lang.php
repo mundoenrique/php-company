@@ -22,7 +22,6 @@ $lang['REPORTS_ID_FISCAL_INPUT']= "Ingresa NIT.";
 $lang['REPORTS_REQUEST_NO_RESULTS']= "No se encontraron resultados con la empresa y fecha seleccionada.";
 //MASTER ACCOUNT
 $lang['REPORTS_TABLE_DATE']="Fecha";
-$lang['REPORTS_TABLE_DESCRIPTION']="Descripción";
 $lang['REPORTS_TABLE_REFERENCE']="Ref.";
 $lang['REPORTS_TABLE_DEBIT']="Crédito";
 $lang['REPORTS_TABLE_CREDIT']="Débito";
