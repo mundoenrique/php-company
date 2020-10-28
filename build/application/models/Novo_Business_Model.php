@@ -280,7 +280,6 @@ class Novo_Business_Model extends NOVO_Model {
 		$this->dataAccessLog->function = 'Producto';
 		$this->dataAccessLog->operation = 'Detalle Producto';
 		$enterpriseInf = $this->session->enterpriseInf;
-		$productPrefix = $dataRequest->productPrefix;
 
 		if(isset($dataRequest->goToDetail)) {
 			unset($dataRequest->goToDetail, $dataRequest->productPrefix);
@@ -294,14 +293,14 @@ class Novo_Business_Model extends NOVO_Model {
 		$this->dataRequest->menus = [
 			[
 				'app' => 'EOL',
-				'prod' => $productPrefix,
+				'prod' => $dataRequest->productPrefix,
 				'idUsuario' => $this->userName,
 				'idEmpresa' => $enterpriseInf->idFiscal,
 			]
 		];
 		$this->dataRequest->estadistica = [
 			'producto' => [
-				'prefijo' => $productPrefix,
+				'prefijo' => $dataRequest->productPrefix,
 				'rifEmpresa' => $enterpriseInf->idFiscal,
 				'acCodCia' => $enterpriseInf->enterpriseCode,
 				'acCodGrupo' => $enterpriseInf->enterpriseGroup
@@ -309,14 +308,20 @@ class Novo_Business_Model extends NOVO_Model {
 		];
 
 		$response = $this->sendToService('callWs_GetProductDetail');
+		$imgProgram = $this->countryUri.'_default.svg';
 		$productDetail = [
-			'name' => isset($dataRequest->productName) ? $dataRequest->productName : '',
-			'imgProgram' => $this->countryUri.'_default.svg',
+			'name' => $dataRequest->productName ?? '',
+			'imgProgram' => $imgProgram,
 			'brand' => isset($dataRequest->productBrand) ? url_title(trim(mb_strtolower($dataRequest->productBrand))) : '',
 			'imgBrand' => isset($dataRequest->productBrand) ? $dataRequest->productBrand.lang('GEN_DETAIL_BARND_COLOR') : '',
 			'viewSomeAttr' => TRUE,
-			'prefix' => $productPrefix
+			'prefix' => $dataRequest->productPrefix
 		];
+
+		if(!file_exists(assetPath('images/programs/'.$this->session->countryUri.'/'.$imgProgram))) {
+			$productDetail['imgProgram'] = 'default.svg';
+		}
+
 		$productSummary = [
 			'lots' => '--',
 			'toSign' => '--',
@@ -334,13 +339,6 @@ class Novo_Business_Model extends NOVO_Model {
 				log_message('INFO', 'NOVO ['.$this->userName.'] '.'callWs_GetProductDetail'.' USER_ACCESS LIST: '.json_encode($response->lista));
 
 				$this->response->code = 0;
-				$imgProgram = $productDetail['imgProgram'];
-
-				if(!file_exists(assetPath('images/programs/'.$this->session->countryUri.'/'.$imgProgram))) {
-					$imgProgram = 'default.svg';
-				}
-
-				$productDetail['imgProgram'] = $imgProgram;
 
 				if(isset($response->estadistica->producto->idProducto)) {
 					$imgBrand = url_title(trim(mb_strtolower($response->estadistica->producto->marca)));
@@ -351,28 +349,21 @@ class Novo_Business_Model extends NOVO_Model {
 						$imgBrand.= '_card.svg';
 					}
 
-					if(!file_exists(assetPath('images/brands/'.$imgBrand))) {
+					if (!file_exists(assetPath('images/brands/'.$imgBrand))) {
 						$imgBrand = 'default.svg';
 					}
 
+					$productDetail['imgBrand'] = $imgBrand;
 					$imgProgram = url_title(trim(mb_strtolower($response->estadistica->producto->nombre))).'.svg';
 
-					if(!file_exists(assetPath('images/programs/'.$this->session->countryUri.'/'.$imgProgram))) {
-						$imgProgram = $this->countryUri.'_default.svg';
-
-						if(!file_exists(assetPath('images/programs/'.$this->session->countryUri.'/'.$imgProgram))) {
-							$imgProgram = 'default.svg';
-						}
+					if (file_exists(assetPath('images/programs/'.$this->session->countryUri.'/'.$imgProgram))) {
+						$productDetail['imgProgram'] = $imgProgram;
 					}
 
-					$productName = ucwords(mb_strtolower($response->estadistica->producto->descripcion));
-					$productDetail['name'] = $productName;
-					$productDetail['imgProgram'] = $imgProgram;
-					$brand = trim($response->estadistica->producto->marca);
-					$productDetail['brand'] = $brand;
-					$productDetail['imgBrand'] = $imgBrand;
+					$productDetail['name'] = ucwords(mb_strtolower($response->estadistica->producto->descripcion));
+					$productDetail['brand'] = trim($response->estadistica->producto->marca);
 
-					if(trim($response->estadistica->producto->idProducto) == 'G') {
+					if (trim($response->estadistica->producto->idProducto) == 'G') {
 						$productDetail['viewSomeAttr'] = FALSE;
 					}
 
@@ -401,10 +392,10 @@ class Novo_Business_Model extends NOVO_Model {
 					$productSummary['serviceOrders'] = trim($response->estadistica->ordenServicio->Total);
 					$productSummary['serviceOrdersCon'] = trim($response->estadistica->ordenServicio->numConciliada);
 					$productSummary['serviceOrdersNoCon'] = trim($response->estadistica->ordenServicio->numNoConciliada);
-					$productSummary['totalCards'] = trim($response->estadistica->listadoTarjeta->numeroTarjetas);
 				}
 
-				if(isset($response->estadistica->ordenServicio)) {
+				if(isset($response->estadistica->listadoTarjeta)) {
+					$productSummary['totalCards'] = trim($response->estadistica->listadoTarjeta->numeroTarjetas);
 					$productSummary['activeCards'] = trim($response->estadistica->listadoTarjeta->numTarjetasActivas);
 					$productSummary['inactiveCards'] = trim($response->estadistica->listadoTarjeta->numTarjetasInactivas);
 				}
@@ -418,6 +409,11 @@ class Novo_Business_Model extends NOVO_Model {
 					$productInf->maxCards = trim($response->estadistica->producto->maxTarjetas);
 					$this->session->set_userdata('productInf', $productInf);
 				}
+			break;
+			case -38:
+				$this->response->code = 3;
+				$this->response->msg = lang('BUSINESS_NO_PRODUCT_INFO');
+				$this->response->modalBtn['btn1']['link'] = 'productos';
 			break;
 			case -99:
 				$this->response->code = 3;
