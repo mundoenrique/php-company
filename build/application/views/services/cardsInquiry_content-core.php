@@ -54,7 +54,7 @@
               </div>
               <?php endif;?>
               <div class="form-group col-4 col-xl-3">
-                <label for="idNumberP">Nro documento</label>
+                <label for="idNumberP">Nro. documento</label>
                 <input id="idNumberP" name="idNumberP" class="form-control h5 select-group" type="text" autocomplete="off" disabled>
                 <div class="help-block mb-1"></div>
               </div>

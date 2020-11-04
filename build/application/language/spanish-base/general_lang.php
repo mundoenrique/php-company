@@ -104,6 +104,7 @@ $lang['GEN_BTN_ENABLE_USER'] = 'Habilitar usuario';
 $lang['GEN_BTN_ALL'] = 'Todos';
 $lang['GEN_BTN_ENABLE'] = 'Habilitar';
 $lang['GEN_BTN_UPDATE'] = 'Actualizar';
+$lang['GEN_BTN_TRANSFER'] = 'Transferir';
 //MODULES
 $lang['GEN_LOGIN'] = 'Login';
 $lang['GEN_ACTIVE_RECAPTCHA'] = ACTIVE_RECAPTCHA;
@@ -148,6 +149,7 @@ $lang['GEN_FILE'] = 'Archivos de gestión Conexión Empresas Online';
 $lang['GEN_FILE_OPERATIONAL_BATCH'] = 'Archivos lotes operativos (194kb)';
 $lang['GEN_DOWNLOAD_FILE_INI'] = 'Archivo.ini';
 $lang['GEN_BTN_INI'] = 'Debes seleccionar una empresa para poder realizar la descarga';
+$lang['GEN_DESCRIPTION'] = 'Descripción';
 $lang['GEN_CONTACTS_TITLE_HELP'] = '¿Necesitas ayuda?';
 $lang['GEN_CONTACTS_TITLE'] = 'Líneas de atención a nivel nacional';
 $lang['GEN_CONTACTS_CITY'] = 'CIUDAD';
