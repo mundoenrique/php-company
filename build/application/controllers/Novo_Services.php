@@ -31,14 +31,19 @@ Class Novo_Services extends Novo_Controller {
 			"third_party/jquery.validate",
 			"validate-core-forms",
 			"third_party/additional-methods",
-			'services/transfMasterAccount',
-			'services/transfMasterRecharge',
+			"services/transfMasterAccount",
 			'third_party/jquery.mask-1.14.16',
 		);
 
 		$responseAttr = 0;
+		$showRechargeAccount = FALSE;
 
-		if (lang('CONF_PAY_ACCOUNT') == 'ON' && $this->verify_access->verifyAuthorization('TRAMAE', 'TRASAL')) {
+		if ($this->verify_access->verifyAuthorization('TRAMAE', 'TRAPGO')) {
+			$showRechargeAccount = TRUE;
+			array_push(
+				$this->includeAssets->jsFiles,
+				'services/transfMasterRecharge'
+			);
 			$this->method = 'CallWs_MasterAccountBalance_Services';
 			$responseAttr = $this->loadModel();
 
@@ -49,6 +54,7 @@ Class Novo_Services extends Novo_Controller {
 
 		$this->responseAttr($responseAttr);
 		$this->render->titlePage = lang('GEN_MENU_SERV_MASTER_ACCOUNT');
+		$this->render->showRechargeAccount = $showRechargeAccount;
 		$this->views = ['services/'.$view];
 		$this->loadView($view);
 	}

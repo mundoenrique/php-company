@@ -79,7 +79,7 @@ $(function () {
 		form = $('#searchCardsForm')
 		$('#accept').removeClass('reload-req');
 		getCardList(dataRquest);
-	})
+	});
 
 	$('#cardsInquiryBtn').on('click', function (e) {
 		e.preventDefault();
@@ -89,8 +89,8 @@ $(function () {
 		$('.help-block').text('');
 		$('input, select').removeClass('has-error');
 		applyActions(action, form, $(this));
-	})
-})
+	});
+});
 
 function getCardList(request) {
 	insertFormInput(true);

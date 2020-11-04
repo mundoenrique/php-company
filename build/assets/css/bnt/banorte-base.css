@@ -2117,6 +2117,7 @@ i[class*=" icon-"]:before {
 
 .logo-banco {
 	width: 260px;
+	height: 67px;
 }
 
 .bug-view {
@@ -3599,6 +3600,8 @@ a.ui-button:active,
 
 .img-log{
 	margin-left: 10%;
+	width: 638.1px;
+	height: 429.3px;
 	z-index: 1;
 }
 

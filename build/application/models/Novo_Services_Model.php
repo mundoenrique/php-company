@@ -970,15 +970,15 @@ class Novo_Services_Model extends NOVO_Model {
 			case 0:
 				$this->response->data->info['balanceText'] = 'Saldo Disponible: ';
 				$this->response->data->info['balance'] = lang('GEN_CURRENCY').' '.currencyFormat($response->maestroDeposito->saldoDisponible);
+				$this->response->data->params['balance'] = (float )$response->maestroDeposito->saldo;
 				$this->response->data->info['fundingAccount'] = $response->maestroDeposito->cuentaFondeo ?? '';
 
-				$this->response->data->params['balance'] = (float )$response->maestroDeposito->saldoDisponible;
-				$this->response->data->params['dailyOper']['quantity'] = (int) $response->maestroDeposito->cantidadTranxDia->lista[0]->idCuenta ?? '';
-				$this->response->data->params['dailyOper']['amount'] = $response->maestroDeposito->cantidadTranxDia->lista[0]->montoOperacion ?? '';
-				$this->response->data->params['weeklyOper']['quantity'] = (int) $response->maestroDeposito->cantidadTranxSemana->lista[0]->idCuenta ?? '';
-				$this->response->data->params['weeklyOper']['amount'] = $response->maestroDeposito->cantidadTranxSemana->lista[0]->montoOperacion ?? '';
-
 				if (isset($response->maestroDeposito->parametrosRecarga)) {
+					$this->response->data->params['dailyOper']['quantity'] = (int) $response->maestroDeposito->cantidadTranxDia->lista[0]->idCuenta;
+					$this->response->data->params['dailyOper']['amount'] = (float) $response->maestroDeposito->cantidadTranxDia->lista[0]->montoOperacion;
+					$this->response->data->params['weeklyOper']['quantity'] = (int) $response->maestroDeposito->cantidadTranxSemana->lista[0]->idCuenta;
+					$this->response->data->params['weeklyOper']['amount'] = (float) $response->maestroDeposito->cantidadTranxSemana->lista[0]->montoOperacion;
+
 					unset(
 						$response->maestroDeposito->parametrosRecarga->idExtEmp,
 						$response->maestroDeposito->parametrosRecarga->acprefix,
@@ -986,6 +986,7 @@ class Novo_Services_Model extends NOVO_Model {
 						$response->maestroDeposito->parametrosRecarga->tipoComision,
 						$response->maestroDeposito->parametrosRecarga->tipoFactura,
 					);
+
 					$this->response->data->params['rechargeParams'] = $response->maestroDeposito->parametrosRecarga ?? '';
 				}
 

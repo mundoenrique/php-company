@@ -16,11 +16,10 @@ function validateForms(form) {
 	var numeric = /^[0-9]+$/;
 	var alphabetical = /^[a-z]+$/i;
 	var alphabeticalspace = /^['a-z ']{3,40}$/i;
-	var text = /^['a-z0-9ñáéíóú ,.:()']+$/i;
-	var usdAmount = /^[0-9]+(\.[0-9]*)?$/;
+	var floatAmount = /^[0-9,.]+$/;
 	var fiscalReg = lang.VALIDATE_FISCAL_REGISTRY;
 	var idNumberReg = new RegExp(lang.VALIDATE_REG_ID_NUMBER, 'i');
-	var rechargeDesc = new RegExp(lang.VALIDATE_RECHARGE_DESCRIPTION, 'i');
+	var rechargeDesc = new RegExp(lang.VALIDATE_RECHAR_REGEX_DESC, 'i');
 	var date = {
 		dmy: /^(0?[1-9]|[12][0-9]|3[01])\/(0?[1-9]|1[012])\/[0-9]{4}$/,
 		my: /^(0?[1-9]|1[012])\/[0-9]{4}$/,
@@ -220,7 +219,9 @@ function validateForms(form) {
 			"monthlyNumberCredit": {pattern: numeric, required: true },
 			"monthlyAmountCredit": {pattern: numeric , required: true },
 			"CreditTransaction": {pattern: numeric , required: true, maxLimitZero:'#dailyAmountCredit'},
-			"transferType": {required: true},
+			"transferType": { required: true },
+			"transferAmount": { required: true, pattern: floatAmount},
+			"description": { required: true, pattern: rechargeDesc },
 		},
 		messages: {
 			"userName": lang.VALIDATE_USERLOGIN,
@@ -450,7 +451,12 @@ function validateForms(form) {
 				pattern: lang.VALIDATE_INVALID_NUMBER,
 				required:lang.VALIDATE_NUMBER_REQ
 			},
-			"transferType": lang.VALIDATE_TRANSFER_TYPE
+			"transferType": lang.VALIDATE_TRANSFER_TYPE,
+			"transferAmount": lang.VALIDATE_VALID_AMOUNT,
+			"description": {
+				required: lang.VALIDATE_RECHAR_DESC1,
+				pattern: lang.VALIDATE_RECHAR_DESC2
+			},
 
 		},
 		errorPlacement: function(error, element) {
