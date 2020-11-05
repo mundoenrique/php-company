@@ -134,10 +134,10 @@
 					<table id="table-lote-detail">
 						<thead>
 							<th id="td-width-80">'.lang('ID_PERSONA').'</th>
-							<th id="td-width-125" >'.lang('TABLA_REG_EMISION_NOMB').'</th>
-							<th id="td-width-125" >'.lang('TABLA_REG_EMISION_APELL').'</th>
-							<th id="td-width-125" >'.lang('TABLA_REG_EMISION_UBIC').'</th>
-							<th id="td-width-125" >'.lang('TABLA_REG_RECARGA_STATUS').'</th>
+							<th class="width-td">'.lang('TABLA_REG_EMISION_NOMB').'</th>
+							<th class="width-td">'.lang('TABLA_REG_EMISION_APELL').'</th>
+							<th class="width-td">'.lang('TABLA_REG_EMISION_UBIC').'</th>
+							<th class="width-td">'.lang('TABLA_REG_RECARGA_STATUS').'</th>
 						</thead>
 						<tbody>';
 				foreach ($data[0]->registrosLoteEmision as $registros) {
@@ -307,6 +307,11 @@
 						</thead>
 						<tbody>';
 				foreach ($data[0]->registrosLoteEmision as $registros) {
+					$statusEmision = ['0', '1', '7'];
+					$statusEmisionText = lang('STATUS_EMISION_'.$registros->status);
+					if(!in_array($registros->status, $statusEmision)) {
+						$statusEmisionText = 'N/A';
+					}
 					echo '
 						<tr>
 							<td>'.$registros->idExtPer.'</td>
@@ -358,8 +363,41 @@
 					echo '
 						<tr>
 							<td id="td-nombre-2">'.$registros->id_ext_per.'</td>
-							<td id="td-nombre-2">'.substr_replace($registros->nro_cuenta,'*************',0,-4).'</td>							
-							<td id="td-nombre-2">'.$registros->descripcion.'</td>							
+							<td id="td-nombre-2">'.substr_replace($registros->nro_cuenta,'*************',0,-4).'</td>
+							<td id="td-nombre-2">'.$registros->descripcion.'</td>
+						</tr>
+					';
+				}
+				echo '</table></tbody>';
+			}elseif($data[0]->ctipolote=='B' && count($data[0]->registrosLoteRecarga) == 0 ) {
+				echo "<h2>".lang('TABLA_REG_MSJ')."</h2>";
+			}
+			if($data[0]->ctipolote=='V' && count($data[0]->registrosLoteEmision) > 0 ){ //LOTES DE EMISION VIRTUAL
+				echo $html_view_results;
+				echo '
+					<table id="table-lote-detail">
+						<thead>
+							<th id="td-width-80">'.lang('ID_PERSONA').'</th>
+							<th class="width-td">'.lang('TABLA_REG_EMISION_NOMB').'</th>
+							<th class="width-td">'.lang('TABLA_REG_EMISION_APELL').'</th>
+							<th class="width-td">'.lang('TABLA_REG_EMAIL').'</th>
+							<th class="width-td">'.lang('TABLA_REG_RECARGA_STATUS').'</th>
+						</thead>
+						<tbody>';
+				foreach ($data[0]->registrosLoteEmision as $registros) {
+					$statusEmision = ['0', '1', '7'];
+					$statusEmisionText = lang('STATUS_EMISION_'.$registros->status);
+					if(!in_array($registros->status, $statusEmision)) {
+						$statusEmisionText = 'N/A';
+					}
+					$documentId = $registros->idExtPer ?? '';
+					echo '
+						<tr>
+							<td id="td-width-80">'.$documentId.'</td>
+							<td class="width-td">'.$registros->nombres.'</td>
+							<td class="width-td">'.$registros->apellidos.'</td>
+							<td class="width-td">'.$registros->email.'</td>
+							<td class="width-td">'.$statusEmisionText.'</td>
 						</tr>
 					';
 				}
