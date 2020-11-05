@@ -285,7 +285,7 @@ $item = $(this);
      //resetValuesFirm();
 
     }else{
-      notificacion("Autorizando lotes","Selecciona al menos un lote e ingresa tu contraseña");
+			notificacion("Eliminar lotes","Selecciona al menos un lote e ingresa tu contraseña");
     }
 
   });
@@ -303,7 +303,7 @@ $('#lotes-2').on('click','#borrar', function(){
       var ctipolote = $(this).attr('ctipolote')+",";
 
       var canvas = "<div id='dialog-confirm'>";
-      canvas +="<p>Lote nro.: "+acnumlote+"</p>";
+			canvas += "<p>Lote nro.: " + $(this).attr('numlote')+"</p>";
       canvas += "<fieldset><input type='password' id='pass' size=30 placeholder='Ingresa tu contraseña' class='text ui-widget-content ui-corner-all'/>";
       canvas += "<h5 id='msg'></h5></fieldset></div>";
       tabla = $(this).parents('table').attr('id');

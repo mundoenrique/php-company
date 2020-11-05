@@ -264,7 +264,7 @@ $(function () {
 			eliminarLotes(js_var.loteF, js_var.numloteF, js_var.tipoloteF, pass)
 
 		} else {
-			notificacion("Eliminar Lote", "Selecciona al menos un lote e ingresa tu contraseña");
+			notificacion("Eliminar lotes", "Selecciona al menos un lote e ingresa tu contraseña");
 		}
 
 	});
