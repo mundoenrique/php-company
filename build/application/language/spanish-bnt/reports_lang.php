@@ -5,7 +5,6 @@ $lang['REPORTS_ID_FISCAL']= "RFC. (Opcional)";
 $lang['REPORTS_ID_FISCAL_INPUT']= "Ingresa RFC.";
 //MASTER ACCOUNT
 $lang['REPORTS_TABLE_DATE']="Fecha";
-$lang['REPORTS_TABLE_DESCRIPTION']="Descripción";
 $lang['REPORTS_TABLE_REFERENCE']="Referencia";
 $lang['REPORTS_TABLE_DEBIT']="Cargo";
 $lang['REPORTS_TABLE_CREDIT']="Abono";
