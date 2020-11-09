@@ -4,7 +4,11 @@ $(function () {
 	insertFormInput(false);
 
 	$('#userPass').on('keyup', function() {
-		$(this).attr('type', 'password')
+		$(this).attr('type', 'password');
+
+		if ($(this).val() == '') {
+			$(this).attr('type', 'text');
+		}
 	});
 
 	$('#signInBtn').on('click', function(e) {
@@ -113,7 +117,7 @@ function getSignIn(forWhere) {
 			insertFormInput(false);
 
 			if (lang.CONF_RESTAR_USERNAME == 'ON') {
-				$('#userPass').val('');
+				$('#userName').val('');
 			}
 
 			setTimeout(function () {
