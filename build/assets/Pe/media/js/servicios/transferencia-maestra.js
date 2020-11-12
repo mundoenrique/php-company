@@ -546,14 +546,12 @@ $(function () {
 
 		var totalMontos = 0;
 		$.each(listaInputs, function(k, inputMonto){
-
 			if($(inputMonto).val()!=''){
 				totalMontos += parseInt($(inputMonto).val());
+				serv_var.monto.push(toFormat($(inputMonto).val()));
+				serv_var.noTarjetas += $(this).parents('tr').attr('tjta') + ",";
+				serv_var.dni_tarjetas += $(this).parents('tr').attr('id_ext_per') + ",";
 			}
-
-			serv_var.monto.push(toFormat($(inputMonto).val()));
-			serv_var.noTarjetas += $(this).parents('tr').attr('tjta') + ",";
-			serv_var.dni_tarjetas += $(this).parents('tr').attr('id_ext_per') + ",";
 		});
 		return totalMontos;
 		}
