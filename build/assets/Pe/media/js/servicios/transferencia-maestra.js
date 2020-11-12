@@ -547,7 +547,9 @@ $(function () {
 		var totalMontos = 0;
 		$.each(listaInputs, function(k, inputMonto){
 
-			totalMontos += parseInt($(inputMonto).val());
+			if($(inputMonto).val()!=''){
+				totalMontos += parseInt($(inputMonto).val());
+			}
 
 			serv_var.monto.push(toFormat($(inputMonto).val()));
 			serv_var.noTarjetas += $(this).parents('tr').attr('tjta') + ",";
