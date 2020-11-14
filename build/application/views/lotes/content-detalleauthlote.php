@@ -437,10 +437,10 @@
 				';
 				foreach ($tableContent->header AS $pos => $header) {
 					if ($pos == 0) {
-						echo '<th class="width-80">'.$header.'</th>';
+						echo '<th class="width-td">'.$header.'</th>';
 						continue;
 					}
-					echo '<th class="width-td">'.$header.'</th>';
+					echo '<th class="width-td-u">'.$header.'</th>';
 				}
 				echo '
 					</thead>
@@ -450,10 +450,10 @@
 					echo '<tr>';
 					foreach ($body AS $pos => $value) {
 						if ($pos == 'DNI') {
-							echo '<td class="width-80">'.$value.'</td>';
+							echo '<td class="width-td">'.$value.'</td>';
 							continue;
 						}
-						echo '<td class="width-td">'.$value.'</td>';
+						echo '<td class="width-td-u">'.$value.'</td>';
 					}
 
 					echo '</tr>';
