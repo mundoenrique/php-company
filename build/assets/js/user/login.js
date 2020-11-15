@@ -1,11 +1,14 @@
 'use strict'
-'use strict'
 $(function () {
 	$.balloon.defaults.css = null;
 	insertFormInput(false);
 
 	$('#userPass').on('keyup', function () {
-		$(this).attr('type', 'password')
+		$(this).attr('type', 'password');
+
+		if ($(this).val() == '') {
+			$(this).attr('type', 'text');
+		}
 	});
 
 	$('#userName, #userPass').on('keyup', function () {

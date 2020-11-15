@@ -4684,6 +4684,11 @@ tr.GC-first th {
 	min-width: 125px !important;
 }
 
+.width-td-u {
+	max-width: 200px !important;
+	min-width: 200px !important;
+}
+
 #td-nombre {
 	max-width: 150px !important;
 	min-width: 150px !important;
@@ -7442,7 +7447,7 @@ a.paginate_button:hover {
 	background: none;
 	color: #bbbbbb!important;
   }
-   
+
 a.paginate_button.current {
 	background: none;
 	color: #bbbbbb!important;

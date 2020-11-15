@@ -290,6 +290,12 @@ class Novo_Inquiries_Model extends NOVO_Model {
 							$detailInfo['bulkRecords'] = $this->buildEmisionRecords_Bulk($response->registrosLoteEmision, $tableContent->body);
 						}
 					break;
+					case 'V':
+						if (isset($response->registrosLoteEmision) && count($response->registrosLoteEmision) > 0) {
+							$tableContent = BulkAttrEmissionC();
+							$detailInfo['bulkRecords'] = $this->buildEmisionRecords_Bulk($response->registrosLoteEmision, $tableContent->body);
+						}
+					break;
 					case '2':
 						if (isset($response->registrosLoteRecarga) && count($response->registrosLoteRecarga) > 0) {
 							$tableContent = BulkAttrCreditsA();
@@ -386,7 +392,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 			$recordDetail = new stdClass();
 
 			foreach ($acceptAttr AS $pos => $attr) {
-				$recordDetail->$attr = $records->$attr;
+				$recordDetail->$attr = $records->$attr ?? '';
 
 				if ($attr == 'status') {
 					$status = [
@@ -437,7 +443,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 			$recordDetail = new stdClass();
 
 			foreach ($acceptAttr AS $pos => $attr) {
-				$recordDetail->$attr = $records->$attr;
+				$recordDetail->$attr = $records->$attr ?? '';
 
 				if ($attr == 'monto') {
 					$recordDetail->$attr = currencyFormat($recordDetail->$attr);
@@ -450,10 +456,10 @@ class Novo_Inquiries_Model extends NOVO_Model {
 				if ($attr == 'status') {
 					$status = [
 						'0' => 'Pendiente',
-						'1' => 'Procesada',
+						'1' => 'Procesado',
 						'2' => 'Inválida',
 						'3' => 'En proceso',
-						'6' => 'Procesada',
+						'6' => 'Procesado',
 						'7' => 'Rechazado',
 					];
 					$recordDetail->$attr = is_numeric($records->$attr) ? $status[$records->$attr] : $records->$attr;
@@ -481,7 +487,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 			$recordDetail = new stdClass();
 
 			foreach ($acceptAttr AS $pos => $attr) {
-				$recordDetail->$attr = $records->$attr;
+				$recordDetail->$attr = $records->$attr ?? '';
 
 				if ($attr == 'nombre') {
 					$recordDetail->$attr = ucwords(mb_strtolower($recordDetail->$attr));

@@ -408,7 +408,7 @@ $(function () {
 						pass = hex_md5($('#claveAuth').val());
 						eliminarLotes(idlote,acnumlote,ctipolote,pass);
 					} else
-						notificacion('Autorización de lotes', 'Verifica los datos ingresados e intenta nuevamente.');
+						notificacion('Eliminar lotes', 'Verifica los datos ingresados e intenta nuevamente.');
         }
 
 
