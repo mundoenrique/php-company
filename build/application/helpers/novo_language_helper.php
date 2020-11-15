@@ -53,6 +53,19 @@ if (!function_exists('BulkAttrEmissionB'))
 	}
 }
 
+if (!function_exists('BulkAttrEmissionC'))
+{
+	function BulkAttrEmissionC()
+	{
+		$CI = &get_instance();
+		$tableContent = new stdClass();
+		$tableContent->header = [lang('GEN_TABLE_DNI'), lang('GEN_TABLE_FULL_NAME'), lang('GEN_EMAIL'), lang('GEN_TABLE_STATUS')];
+		$tableContent->body = ['idExtPer', 'nombres', 'apellidos', 'email', 'status'];
+
+		return $tableContent;
+	}
+}
+
 if (!function_exists('BulkAttrCreditsA'))
 {
 	function BulkAttrCreditsA()

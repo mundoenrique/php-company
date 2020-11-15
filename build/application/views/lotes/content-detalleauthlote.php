@@ -128,16 +128,16 @@
 						<span aria-hidden=\"true\" class=\"icon\" data-icon=\"&#xe02e;\" title='".lang('DWL_PDF')."'></span>
 					</a>
 				</div>";
-			if( $data[0]->ctipolote=='1' && count($data[0]->registrosLoteEmision) > 0 ){ //LOTES DE EMISION
+			if ($data[0]->ctipolote=='1' && count($data[0]->registrosLoteEmision) > 0) { //LOTES DE EMISION
 				echo $html_view_results;
 				echo '
 					<table id="table-lote-detail">
 						<thead>
 							<th id="td-width-80">'.lang('ID_PERSONA').'</th>
-							<th id="td-width-125" >'.lang('TABLA_REG_EMISION_NOMB').'</th>
-							<th id="td-width-125" >'.lang('TABLA_REG_EMISION_APELL').'</th>
-							<th id="td-width-125" >'.lang('TABLA_REG_EMISION_UBIC').'</th>
-							<th id="td-width-125" >'.lang('TABLA_REG_RECARGA_STATUS').'</th>
+							<th class="width-td">'.lang('TABLA_REG_EMISION_NOMB').'</th>
+							<th class="width-td">'.lang('TABLA_REG_EMISION_APELL').'</th>
+							<th class="width-td">'.lang('TABLA_REG_EMISION_UBIC').'</th>
+							<th class="width-td">'.lang('TABLA_REG_RECARGA_STATUS').'</th>
 						</thead>
 						<tbody>';
 				foreach ($data[0]->registrosLoteEmision as $registros) {
@@ -169,11 +169,9 @@
 					}
 				}
 				echo '</table></tbody>';
-			}elseif ($data[0]->ctipolote=='1') {
+			} elseif ($data[0]->ctipolote=='1') {
 				echo "<h2>".lang('TABLA_REG_MSJ')."</h2>";
-			}
-
-			if( ($data[0]->ctipolote=='2' || $data[0]->ctipolote=='5' || $data[0]->ctipolote=='L') && count($data[0]->registrosLoteRecarga) > 0 ){ //LOTES DE RECARGA
+			} elseif(($data[0]->ctipolote=='2' || $data[0]->ctipolote=='5' || $data[0]->ctipolote=='L') && count($data[0]->registrosLoteRecarga) > 0) { //LOTES DE RECARGA
 				echo $html_view_results;
 				echo '
 					<table id="table-lote-detail">
@@ -202,11 +200,9 @@
 					';
 				}
 				echo '</table></tbody>';
-			}elseif ($data[0]->ctipolote=='2' || $data[0]->ctipolote=='5' || $data[0]->ctipolote=='L') {
+			} elseif ($data[0]->ctipolote=='2' || $data[0]->ctipolote=='5' || $data[0]->ctipolote=='L') {
 				echo "<h2>".lang('TABLA_REG_MSJ')."</h2>";
-			}
-
-			if( ($data[0]->ctipolote=='E' || $data[0]->ctipolote=='G') && count($data[0]->registrosLoteGuarderia) > 0 ){ //LOTES DE GUARDERIA  lang('TABLA_REG_GUARDERIA_NOMB') lang('TABLA_REG_GUARDERIA_APEL') lang('TABLA_REG_GUARDERIA_UBIC')
+			} elseif ( ($data[0]->ctipolote=='E' || $data[0]->ctipolote=='G') && count($data[0]->registrosLoteGuarderia) > 0 ) { //LOTES DE GUARDERIA  lang		('TABLA_REG_GUARDERIA_NOMB') lang('TABLA_REG_GUARDERIA_APEL') lang('TABLA_REG_GUARDERIA_UBIC')
 				echo $html_view_results;
 				echo '
 					<table id="table-lote-detail">
@@ -236,12 +232,9 @@
 					';
 				}
 				echo '</table></tbody>';
-			}elseif ($data[0]->ctipolote=='E' || $data[0]->ctipolote=='G') {
+			} elseif ($data[0]->ctipolote=='E' || $data[0]->ctipolote=='G') {
 				echo "<h2>".lang('TABLA_REG_MSJ')."</h2>";
-			}
-
-
-			if( ($data[0]->ctipolote=='R'||$data[0]->ctipolote=='C')  && count($data[0]->registrosLoteReposicion) > 0 ){ //LOTES DE REPOSICION
+			} elseif (($data[0]->ctipolote=='R'||$data[0]->ctipolote=='C')  && count($data[0]->registrosLoteReposicion) > 0 ) { //LOTES DE REPOSICION
 				echo $html_view_results;
 				echo '
 					<table id="table-lote-detail">
@@ -263,11 +256,9 @@
 						echo '</tr>';
 				}
 				echo '</table></tbody>';
-			}elseif ( $data[0]->ctipolote=='R'||$data[0]->ctipolote=='C' ) {
+			} elseif ( $data[0]->ctipolote=='R'||$data[0]->ctipolote=='C' ) {
 				echo "<h2>".lang('TABLA_REG_MSJ')."</h2>";
-			}
-
-			if( $data[0]->ctipolote=='3' && count($data[0]->registrosLoteEmision) > 0 ){ //LOTES INNOMINADA
+			} elseif ( $data[0]->ctipolote=='3' && count($data[0]->registrosLoteEmision) > 0 ) { //LOTES INNOMINADA
 				echo $html_view_results;
 				echo '
 					<table id="table-lote-detail">
@@ -291,11 +282,9 @@
 					';
 				}
 				echo '</table></tbody>';
-			}elseif ($data[0]->ctipolote=='3') {
+			} elseif ($data[0]->ctipolote=='3') {
 				echo "<h2>".lang('TABLA_REG_MSJ')."</h2>";
-			}
-
-			if( ($data[0]->ctipolote=='A' || $data[0]->ctipolote=='6') && count($data[0]->registrosLoteEmision) > 0 ){ //LOTES AFILIACIÓN Y DESAFILIACIÓN
+			}	elseif (($data[0]->ctipolote=='A' || $data[0]->ctipolote=='6') && count($data[0]->registrosLoteEmision) > 0 ) { //LOTES AFILIACIÓN Y DESAFILIACIÓN
 				echo $html_view_results;
 				echo '
 					<table id="table-lote-detail">
@@ -307,6 +296,11 @@
 						</thead>
 						<tbody>';
 				foreach ($data[0]->registrosLoteEmision as $registros) {
+					$statusEmision = ['0', '1', '7'];
+					$statusEmisionText = lang('STATUS_EMISION_'.$registros->status);
+					if(!in_array($registros->status, $statusEmision)) {
+						$statusEmisionText = 'N/A';
+					}
 					echo '
 						<tr>
 							<td>'.$registros->idExtPer.'</td>
@@ -317,11 +311,9 @@
 					';
 				}
 				echo '</table></tbody>';
-			}elseif ($data[0]->ctipolote=='A' || $data[0]->ctipolote=='6') {
+			} elseif ($data[0]->ctipolote=='A' || $data[0]->ctipolote=='6') {
 				echo "<h2>".lang('TABLA_REG_MSJ')."</h2>";
-			}
-
-			if(($data[0]->ctipolote=='N' || $data[0]->ctipolote=='Q') && count($data[0]->registrosLoteReposicion) > 0 ){
+			} elseif (($data[0]->ctipolote=='N' || $data[0]->ctipolote=='Q') && count($data[0]->registrosLoteReposicion) > 0 ) {
 				//LOTES RENOVACIÓN
 				echo $html_view_results;
 				echo '
@@ -340,10 +332,9 @@
 					';
 				}
 				echo '</table></tbody>';
-			}elseif(($data[0]->ctipolote=='N'  || $data[0]->ctipolote=='Q') && count($data[0]->registrosLoteReposicion) == 0 ) {
+			} elseif(($data[0]->ctipolote=='N'  || $data[0]->ctipolote=='Q') && count($data[0]->registrosLoteReposicion) == 0 ) {
 				echo "<h2>".lang('TABLA_REG_MSJ')."</h2>";
-			}
-			if($data[0]->ctipolote=='B' && count($data[0]->registrosLoteRecarga) > 0 ){
+			} elseif ($data[0]->ctipolote=='B' && count($data[0]->registrosLoteRecarga) > 0 ) {
 				//LOTES BLOQUEO
 				echo $html_view_results;
 				echo '
@@ -358,13 +349,120 @@
 					echo '
 						<tr>
 							<td id="td-nombre-2">'.$registros->id_ext_per.'</td>
-							<td id="td-nombre-2">'.substr_replace($registros->nro_cuenta,'*************',0,-4).'</td>							
-							<td id="td-nombre-2">'.$registros->descripcion.'</td>							
+							<td id="td-nombre-2">'.substr_replace($registros->nro_cuenta,'*************',0,-4).'</td>
+							<td id="td-nombre-2">'.$registros->descripcion.'</td>
 						</tr>
 					';
 				}
 				echo '</table></tbody>';
-			}elseif($data[0]->ctipolote=='B' && count($data[0]->registrosLoteRecarga) == 0 ) {
+			} elseif($data[0]->ctipolote=='B' && count($data[0]->registrosLoteRecarga) == 0 ) {
+				echo "<h2>".lang('TABLA_REG_MSJ')."</h2>";
+			} elseif ($data[0]->ctipolote=='V' && count($data[0]->registrosLoteEmision) > 0 ){ //LOTES DE EMISION VIRTUAL
+				echo $html_view_results;
+				echo '
+					<table id="table-lote-detail">
+						<thead>
+							<th id="td-width-80">'.lang('ID_PERSONA').'</th>
+							<th class="width-td">'.lang('TABLA_REG_EMISION_NOMB').'</th>
+							<th class="width-td">'.lang('TABLA_REG_EMISION_APELL').'</th>
+							<th class="width-td">'.lang('TABLA_REG_EMAIL').'</th>
+							<th class="width-td">'.lang('TABLA_REG_RECARGA_STATUS').'</th>
+						</thead>
+						<tbody>';
+				foreach ($data[0]->registrosLoteEmision as $registros) {
+					$statusEmision = ['0', '1', '7'];
+					$statusEmisionText = lang('STATUS_EMISION_'.$registros->status);
+					if(!in_array($registros->status, $statusEmision)) {
+						$statusEmisionText = 'N/A';
+					}
+					$documentId = $registros->idExtPer ?? '';
+					echo '
+						<tr>
+							<td id="td-width-80">'.$documentId.'</td>
+							<td class="width-td">'.$registros->nombres.'</td>
+							<td class="width-td">'.$registros->apellidos.'</td>
+							<td class="width-td">'.$registros->email.'</td>
+							<td class="width-td">'.$statusEmisionText.'</td>
+						</tr>
+					';
+				}
+				echo '</table></tbody>';
+			} elseif($data[0]->ctipolote=='V' && count($data[0]->registrosLoteEmision) == 0 ) {
+				echo "<h2>".lang('TABLA_REG_MSJ')."</h2>";
+			} elseif ($data[0]->ctipolote=='U') {
+				$detailInfo = [
+					'bulkHeader' => [],
+					'bulkRecords' => [],
+				];
+
+				$tableContent = new stdClass();
+				$tableContent->header = [];
+
+				if(isset($data[0]->registros) && count($data[0]->registros->detalle) > 0) {
+					array_shift($data[0]->registros->ordenAtributos);
+					$attrOrder = $data[0]->registros->ordenAtributos;
+					array_shift($data[0]->registros->nombresColumnas);
+					$headerName = $data[0]->registros->nombresColumnas;
+
+					foreach ($data[0]->registros->nombresColumnas as $key => $value) {
+						if ($key != 'DNI') {
+							$value = ucfirst(mb_strtolower($value));
+						}
+						array_push(
+							$tableContent->header,
+							$value
+						);
+					}
+
+					foreach ($data[0]->registros->detalle AS $key => $records) {
+						$record = new stdClass();
+						foreach ($attrOrder AS $attr) {
+							if ($attr == 'NUMERO_CUENTA') {
+								$records->$attr = maskString($records->$attr, 6, 4);
+							}
+
+							$record->$attr = $records->$attr;
+						}
+
+						array_push(
+							$detailInfo['bulkRecords'],
+							$record
+						);
+					}
+				}
+				echo $html_view_results;
+				echo '
+					<table id="table-lote-detail">
+						<thead>
+				';
+				foreach ($tableContent->header AS $pos => $header) {
+					if ($pos == 0) {
+						echo '<th class="width-td">'.$header.'</th>';
+						continue;
+					}
+					echo '<th class="width-td-u">'.$header.'</th>';
+				}
+				echo '
+					</thead>
+					<tbody>
+				';
+				foreach ($detailInfo['bulkRecords'] AS $body) {
+					echo '<tr>';
+					foreach ($body AS $pos => $value) {
+						if ($pos == 'DNI') {
+							echo '<td class="width-td">'.$value.'</td>';
+							continue;
+						}
+						echo '<td class="width-td-u">'.$value.'</td>';
+					}
+
+					echo '</tr>';
+				}
+				echo '
+					</tbody>
+					</table>
+				';
+			} elseif($data[0]->ctipolote=='U' && count($data[0]->registros->detalle) == 0 ) {
 				echo "<h2>".lang('TABLA_REG_MSJ')."</h2>";
 			}
 		?>

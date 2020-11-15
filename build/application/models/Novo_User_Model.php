@@ -413,7 +413,7 @@ class Novo_User_Model extends NOVO_Model {
 		if($this->isResponseRc != 0 && $map == 1) {
 			$this->response->title = lang('GEN_RECOVER_PASS_TITLE');
 			$this->response->icon = lang('CONF_ICON_INFO');
-			$this->response->modalBtn['btn1']['action'] = 'close';
+			$this->response->modalBtn['btn1']['action'] = 'destroy';
 		}
 
 		return $this->responseToTheView('callWs_RecoverAccess');

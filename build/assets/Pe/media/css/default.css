@@ -4459,6 +4459,11 @@ tr.GC-first th {
 	min-width: 125px !important;
 }
 
+.width-td-u {
+	max-width: 200px !important;
+	min-width: 200px !important;
+}
+
 #td-empresa {
 	width: 100px;
 	max-width: 100px !important;

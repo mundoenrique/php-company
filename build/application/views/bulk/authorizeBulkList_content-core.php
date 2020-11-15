@@ -41,7 +41,7 @@
               <?php foreach($signBulk AS $bulk): ?>
               <tr>
                 <td></td>
-                <td><?= $bulk->bulkNumber; ?></td>
+                <td class="bulk-num"><?= $bulk->bulkNumber; ?></td>
                 <td><?= $bulk->idBulk; ?></td>
                 <td><?= $bulk->loadDate; ?></td>
                 <td class="tool-ellipsis"><?= $bulk->type; ?></td>

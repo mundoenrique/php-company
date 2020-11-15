@@ -88,6 +88,7 @@ $lang['TABLA_REGISTRO_MONTO']='Monto';
 $lang['TABLA_REG_EMISION_NOMB'] = 'Nombres';
 $lang['TABLA_REG_EMISION_APELL'] = 'Apellidos';
 $lang['TABLA_REG_EMISION_UBIC'] = 'Ubicación';
+$lang['TABLA_REG_EMAIL'] = 'Correo';
 $lang['STATUS_EMISION_0'] = 'En Proceso';
 $lang['STATUS_EMISION_1'] = 'Procesado';
 $lang['STATUS_EMISION_7'] = 'Rechazado';
