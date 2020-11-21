@@ -12,17 +12,17 @@ $(function () {
 	insertFormInput(false);
 	remoteFunction = 'sendRequest';
 	form = $('#masterAccountForm');
-	var dataForm = getDataForm(form)
+	var dataForm = getDataForm(form);
 
 	table = $('#tableServicesMaster').DataTable({
 		drawCallback: function (d) {
-			$('#balance-aviable').text(lang.GEN_CURRENCY + ' ' + balance)
-			$('#cost-trans').text(lang.GEN_CURRENCY + ' ' + params.costoComisionTrans)
-			$('#cost-inquiry').text(lang.GEN_CURRENCY + ' ' + params.costoComisionCons)
-			insertFormInput(false)
-			verifyOperations()
-			$('#pre-loader-table').addClass('hide')
-			$('.hide-table').removeClass('hide')
+			$('#balance-aviable').text(lang.GEN_CURRENCY + ' ' + balance);
+			$('#cost-trans').text(lang.GEN_CURRENCY + ' ' + params.costoComisionTrans);
+			$('#cost-inquiry').text(lang.GEN_CURRENCY + ' ' + params.costoComisionCons);
+			insertFormInput(false);
+			verifyOperations();
+			$('#pre-loader-table').addClass('hide');
+			$('.hide-table').removeClass('hide');
 			$('#pre-loader').remove();
 			$('.hide-out').removeClass('hide');
 		},
@@ -46,7 +46,7 @@ $(function () {
 			dataType: 'json',
 			cache: false,
 			data: function (req) {
-				data = req
+				data = req;
 				data.idNumber = dataForm.idNumber;
 				data.cardNumber = dataForm.cardNumber;
 				data.screenSize = screen.width;
@@ -62,7 +62,7 @@ $(function () {
 					ceo_name: ceo_cook,
 					plot: btoa(ceo_cook)
 				}
-				return request
+				return request;
 			},
 			dataFilter: function (resp) {
 				$('#tableServicesMaster').find('thead > tr').removeClass("selected")
@@ -137,10 +137,10 @@ $(function () {
 				data: function (data) {
 					var ammount;
 					var disabeldInput = data.status == '' ? '' : 'disabled'
-					ammount =	'<form>';
-					ammount+= 	'<input class="form-control h6 text-right" type="text" placeholder="';
-					ammount+=		 data.amount + '" '+disabeldInput+'">';
-					ammount+=	'</form>';
+					ammount = '<form>';
+					ammount += '<input class="form-control h6 text-right" type="text" placeholder="';
+					ammount += data.amount + '" ' + disabeldInput + '">';
+					ammount += '</form>';
 
 					return ammount
 				}
@@ -150,38 +150,38 @@ $(function () {
 					var options = '';
 
 					if (access.TRASAL && data.status == '') {
-						options += 	'<button class="btn mx-1 px-0" title="' + lang.GEN_CHECK_BALANCE + '" data-toggle="tooltip" amount="0" ';
-						options += 			'action="CHECK_BALANCE">';
-						options += 		'<i class="icon icon-envelope-open" aria-hidden="true"></i>';
-						options += 	'</button>';
+						options += '<button class="btn mx-1 px-0" title="' + lang.GEN_CHECK_BALANCE + '" data-toggle="tooltip" amount="0" ';
+						options += 'action="CHECK_BALANCE">';
+						options += '<i class="icon icon-envelope-open" aria-hidden="true"></i>';
+						options += '</button>';
 					}
 
 					if (access.TRACAR && data.status == '') {
-						options += 	'<button class="btn mx-1 px-0" title="' + lang.GEN_CREDIT_TO_CARD + '" data-toggle="tooltip" amount="1" ';
-						options += 			'action="CREDIT_TO_CARD">';
-						options += 		'<i class="icon icon-credit-card" aria-hidden="true"></i>';
-						options += 	'</button>';
+						options += '<button class="btn mx-1 px-0" title="' + lang.GEN_CREDIT_TO_CARD + '" data-toggle="tooltip" amount="1" ';
+						options += 'action="CREDIT_TO_CARD">';
+						options += '<i class="icon icon-credit-card" aria-hidden="true"></i>';
+						options += '</button>';
 					}
 
 					if (access.TRAABO && data.status == '') {
-						options += 	'<button class="btn mx-1 px-0" title="' + lang.GEN_DEBIT_TO_CARD + '" data-toggle="tooltip" amount="1" ';
-						options += 			'action="DEBIT_TO_CARD">';
-						options += 		'<i class="icon icon-card-fee" aria-hidden="true"></i>';
-						options += 	'</button>';
+						options += '<button class="btn mx-1 px-0" title="' + lang.GEN_DEBIT_TO_CARD + '" data-toggle="tooltip" amount="1" ';
+						options += 'action="DEBIT_TO_CARD">';
+						options += '<i class="icon icon-card-fee" aria-hidden="true"></i>';
+						options += '</button>';
 					}
 
 					if (access.TRABLQ && data.status == '') {
-						options += 	'<button class="btn mx-1 px-0" title="' + lang.GEN_TEMPORARY_LOCK + '" data-toggle="tooltip" amount="0" ';
-						options += 			'action="TEMPORARY_LOCK">';
-						options += 		'<i class="icon icon-lock" aria-hidden="true"></i>';
-						options += 	'</button>';
+						options += '<button class="btn mx-1 px-0" title="' + lang.GEN_TEMPORARY_LOCK + '" data-toggle="tooltip" amount="0" ';
+						options += 'action="TEMPORARY_LOCK">';
+						options += '<i class="icon icon-lock" aria-hidden="true"></i>';
+						options += '</button>';
 					}
 
 					if (access.TRADBL && data.status == 'pb') {
-						options += 	'<button class="btn mx-1 px-0" title="' + lang.GEN_TEMPORARY_UNLOCK + '" data-toggle="tooltip" amount="0" ';
-						options += 			'action="TEMPORARY_UNLOCK">';
-						options += 		'<i class="icon icon-unlock" aria-hidden="true"></i>';
-						options += 	'</button>';
+						options += '<button class="btn mx-1 px-0" title="' + lang.GEN_TEMPORARY_UNLOCK + '" data-toggle="tooltip" amount="0" ';
+						options += 'action="TEMPORARY_UNLOCK">';
+						options += '<i class="icon icon-unlock" aria-hidden="true"></i>';
+						options += '</button>';
 					}
 
 					if (access.TRAASG) {
@@ -236,7 +236,7 @@ $(function () {
 		}
 	});
 
-	$('#tableServicesMaster').on( 'click', 'tbody td.amount-cc', function (e) {
+	$('#tableServicesMaster').on('click', 'tbody td.amount-cc', function (e) {
 		$(this).find('input').removeClass('has-error');
 	});
 
@@ -289,12 +289,12 @@ $(function () {
 		},
 		"keyup": function (event) {
 			$(event.target).val(function (index, value) {
-				if(value.indexOf('0') != -1 && value.indexOf('0') == 0) {
+				if (value.indexOf('0') != -1 && value.indexOf('0') == 0) {
 					value = value.replace(0, '');
 				}
 
 				if (value.length == 1 && /^[0-9,.]+$/.test(value)) {
-					value = '00'+value
+					value = '00' + value
 				}
 
 				value = value.replace(/\D/g, "")
@@ -318,31 +318,31 @@ function MasterAccBuildFormActions(currentAction, currentTitle, currentBtn) {
 			action: 'destroy'
 		}
 	}
-	inputModal = 	'<form id="password-modal" name="password-modal" class="row col-auto" onsubmit="return false;">';
+	inputModal = '<form id="password-modal" name="password-modal" class="row col-auto" onsubmit="return false;">';
 
 	if (currentAction == 'CARD_ASSIGNMENT') {
-		inputModal += 	'<div class="form-group col-12 pl-0">';
-		inputModal += 		'<div class="input-group">';
-		inputModal += 		'<input class="form-control" type="text" id="cardNumber" name="cardNumber" autocomplete="off"';
-		inputModal += 			'placeholder="' + lang.GEN_TABLE_CARD_NUMBER + '" req="yes">';
-		inputModal += 		'</div>';
-		inputModal += 		'<div class="help-block"></div>';
-		inputModal += 	'</div>';
+		inputModal += '<div class="form-group col-12 pl-0">';
+		inputModal += '<div class="input-group">';
+		inputModal += '<input class="form-control" type="text" id="cardNumber" name="cardNumber" autocomplete="off"';
+		inputModal += 'placeholder="' + lang.GEN_TABLE_CARD_NUMBER + '" req="yes">';
+		inputModal += '</div>';
+		inputModal += '<div class="help-block"></div>';
+		inputModal += '</div>';
 	}
 
 	if (lang.CONF_REMOTE_AUTH == 'OFF') {
 		$('#accept').addClass('send-request');
 
-		inputModal += 	'<div class="form-group col-12 pl-0">';
-		inputModal += 		'<div class="input-group">';
-		inputModal += 			'<input class="form-control pwd-input pwd" type="password" id="password" name="password" autocomplete="off" ';
-		inputModal += 					'placeholder="' + lang.GEN_PLACE_PASSWORD + '">';
-		inputModal += 			'<div class="input-group-append">';
-		inputModal += 				'<span class="input-group-text pwd-action" title="' + lang.GEN_SHOW_PASS + '"><i class="icon-view mr-0"></i></span>';
-		inputModal += 			'</div>';
-		inputModal += 		'</div>';
-		inputModal += 		'<div class="help-block"></div>';
-		inputModal += 	'</div>';
+		inputModal += '<div class="form-group col-12 pl-0">';
+		inputModal += '<div class="input-group">';
+		inputModal += '<input class="form-control pwd-input pwd" type="password" id="password" name="password" autocomplete="off" ';
+		inputModal += 'placeholder="' + lang.GEN_PLACE_PASSWORD + '">';
+		inputModal += '<div class="input-group-append">';
+		inputModal += '<span class="input-group-text pwd-action" title="' + lang.GEN_SHOW_PASS + '"><i class="icon-view mr-0"></i></span>';
+		inputModal += '</div>';
+		inputModal += '</div>';
+		inputModal += '<div class="help-block"></div>';
+		inputModal += '</div>';
 	} else {
 		$('#accept').addClass('get-auth-key');
 		currentBtn = btnRemote;
@@ -375,12 +375,12 @@ function amountValidate(getAmount, currentTitle) {
 		for (var i = 0; i < cardsData.length; i++) {
 			$('#tableServicesMaster').find('tbody > tr.selected').each(function (index, element) {
 				currentamount = $(element).find('td.amount-cc input').val();
-				var amountArr =  currentamount.split(lang.GEN_DECIMAL);
+				var amountArr = currentamount.split(lang.GEN_DECIMAL);
 				amountArr[0] = amountArr[0].replace(/[,.]/g, '');
-				currentamount = amountArr[0]+'.'+amountArr[1];
+				currentamount = amountArr[0] + '.' + amountArr[1];
 				currentamount = parseFloat(currentamount).toFixed(2)
 
-				if(currentamount == 'NaN' || currentamount <= 0) {
+				if (currentamount == 'NaN' || currentamount <= 0) {
 					$(element).find('td.amount-cc input').addClass('has-error')
 					valid = false
 				}
@@ -510,16 +510,16 @@ function cardCheckBalance(response, currentTitle) {
 function cardBlockUnblock(response) {
 	if (response.update) {
 		$('#accept').addClass('update');
-		$('.update').on('click', function() {
+		$('.update').on('click', function () {
 			$('#accept').removeClass('update');
 			dataTableReload(false);
-		})
+		});
 	}
 }
 
 function dataTableReload(resetPaging) {
-	$('.hide-table').addClass('hide')
-	$('#pre-loader-table').removeClass('hide')
+	$('.hide-table').addClass('hide');
+	$('#pre-loader-table').removeClass('hide');
 	$('#tableServicesMaster').DataTable().clear();
 	$('#tableServicesMaster').DataTable().ajax.reload(null, resetPaging);
 }
@@ -539,7 +539,7 @@ function buildList(response, currentTitle) {
 
 		appMessages(currentTitle, inputModal, lang.CONF_ICON_INFO, modalBtn);
 		$('#accept').addClass('update');
-		$('.update').on('click', function() {
+		$('.update').on('click', function () {
 			$('#accept').removeClass('update');
 			dataTableReload(false)
 		})
@@ -564,7 +564,7 @@ function verifyOperations() {
 		column = table.column('0');
 		column.visible(false);
 	} else {
-		$('#password-table').removeClass('hide')
+		$('#password-table').removeClass('hide');
 		column = table.column('0');
 		column.visible(true);
 	}
