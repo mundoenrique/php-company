@@ -294,7 +294,7 @@ $(function () {
 				}
 
 				if (value.length == 1 && /^[0-9,.]+$/.test(value)) {
-					value = '00' + value
+					value = '00' + value;
 				}
 
 				value = value.replace(/\D/g, "")
@@ -381,12 +381,12 @@ function amountValidate(getAmount, currentTitle) {
 				currentamount = parseFloat(currentamount).toFixed(2)
 
 				if (currentamount == 'NaN' || currentamount <= 0) {
-					$(element).find('td.amount-cc input').addClass('has-error')
-					valid = false
+					$(element).find('td.amount-cc input').addClass('has-error');
+					valid = false;
 				}
 
 				if (cardsData[i].idNumber == $(element).find('td.user-id').text()) {
-					cardsData[i].amount = currentamount
+					cardsData[i].amount = currentamount;
 				}
 			})
 		}
@@ -401,7 +401,7 @@ function amountValidate(getAmount, currentTitle) {
 		}
 
 		appMessages(currentTitle, lang.GEN_VALID_AMOUNT, lang.CONF_ICON_WARNING, modalBtn);
-		$('#tableServicesMaster').find('thead > tr').removeClass("selected")
+		$('#tableServicesMaster').find('thead > tr').removeClass("selected");
 		table.rows().deselect();
 	}
 
@@ -421,7 +421,7 @@ function sendRequest(currentAction, currentTitle, currentBtn) {
 			info['amount'] = cardsData[i].amount;
 
 			if (currentAction == 'CARD_ASSIGNMENT') {
-				info['cardNumberAs'] = cardHolderInf.cardNumber
+				info['cardNumberAs'] = cardHolderInf.cardNumber;
 			}
 
 			cardsInfo.push(JSON.stringify(info));
@@ -443,7 +443,7 @@ function sendRequest(currentAction, currentTitle, currentBtn) {
 		verb = 'POST'; who = 'Services'; where = 'ActionMasterAccount';
 
 		callNovoCore(verb, who, where, data, function (response) {
-			$('#tableServicesMaster').find('thead > tr').removeClass("selected")
+			$('#tableServicesMaster').find('thead > tr').removeClass("selected");
 			table.rows().deselect();
 
 			if (currentAction == 'CHECK_BALANCE' || currentAction == 'DEBIT_TO_CARD' || currentAction == 'CREDIT_TO_CARD') {
@@ -453,19 +453,19 @@ function sendRequest(currentAction, currentTitle, currentBtn) {
 			$('#tableServicesMaster').find('tbody > tr input').val('');
 
 			if (response.data.balance) {
-				$('#balance-aviable').text(response.data.balance)
+				$('#balance-aviable').text(response.data.balance);
 			}
 
 			if (currentAction == 'CHECK_BALANCE') {
-				cardCheckBalance(response, currentTitle)
+				cardCheckBalance(response, currentTitle);
 			}
 
 			if (currentAction == 'TEMPORARY_LOCK' || currentAction == 'TEMPORARY_UNLOCK' || currentAction == 'CARD_ASSIGNMENT') {
-				cardBlockUnblock(response)
+				cardBlockUnblock(response);
 			}
 
 			if (currentAction == 'CREDIT_TO_CARD' || currentAction == 'DEBIT_TO_CARD') {
-				buildList(response, currentTitle)
+				buildList(response, currentTitle);
 			}
 
 			currentBtn.prop('disabled', false);
@@ -480,11 +480,12 @@ function cardCheckBalance(response, currentTitle) {
 	$.each(response.data.listResponse, function (key, value) {
 		$('#tableServicesMaster').find('tbody > tr').each(function (index, element) {
 			if (value.cardNumber == $(element).find('td.card-number').text()) {
-				$(element).find('td.balance').text(value.balance)
+				$(element).find('td.balance').text(value.balance);
+
 				if (value.balance != '--') {
-					$(element).find('td.balance').addClass('text-right')
+					$(element).find('td.balance').addClass('text-right');
 				} else {
-					$(element).find('td.balance').removeClass('text-right')
+					$(element).find('td.balance').removeClass('text-right');
 				}
 			}
 		})
@@ -498,7 +499,7 @@ function cardCheckBalance(response, currentTitle) {
 			}
 		}
 
-		inputModal = '<h5 class="regular mr-1">' + response.msg + '</h5>'
+		inputModal = '<h5 class="regular mr-1">' + response.msg + '</h5>';
 		$.each(response.data.listFail, function (index, value) {
 			inputModal += '<h6 class="light mr-1">' + value + '</h6>';
 		})
@@ -532,7 +533,7 @@ function buildList(response, currentTitle) {
 				action: 'destroy'
 			}
 		}
-		inputModal = '<h5 class="regular mr-1">' + response.msg + '</h5>'
+		inputModal = '<h5 class="regular mr-1">' + response.msg + '</h5>';
 		$.each(response.data.listResponse, function (index, value) {
 			inputModal += '<h6 class="light mr-1">Tarjeta: ' + value.cardNumber + ' Monto: ' + value.amount + '</h6>';
 		})
@@ -541,7 +542,7 @@ function buildList(response, currentTitle) {
 		$('#accept').addClass('update');
 		$('.update').on('click', function () {
 			$('#accept').removeClass('update');
-			dataTableReload(false)
+			dataTableReload(false);
 		})
 	}
 }
