@@ -8,9 +8,9 @@ $(function() { // Document ready
  var top = ($('#sidebar-products').offset().top - 100) - parseFloat($('#sidebar-products').css('marginTop').replace(/auto/, 0));
  $(window).scroll(function (event) {
    var y = $(this).scrollTop();
-    if (y >= top) {       
+    if (y >= top) {
       $('#sidebar-products').css("margin-left", "0px");
-  } else {      
+  } else {
       $('#sidebar-products').removeAttr("style")
    }
 });
