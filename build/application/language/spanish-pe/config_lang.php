@@ -1,5 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+$lang['CONFIG_MAINTENANCE'] = 'ON';
 $lang['CONF_VIEW_SUFFIX'] = '';
 //SUPPORT IE 11
 $lang['CONF_SUPPORT_IE'] = 'ON';
