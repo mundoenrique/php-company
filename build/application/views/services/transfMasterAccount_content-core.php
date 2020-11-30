@@ -118,12 +118,29 @@
       </div>
       <div class="hide-table hide">
         <div class="flex pb-5 flex-column">
-          <span class="line-text mb-2 h4 semibold primary">Resultados</span>
+          <span class="line-text mb-2 h4 semibold primary"><?= lang('GEN_TABLE_RESULTS'); ?></span>
           <div class="center mx-1">
-            <div class="flex ml-4 py-3 flex-auto justify-between">
-              <p class="mr-5 h5 semibold tertiary">Saldo disponible: <span id="balance-aviable" class="light text"></span></p>
-              <p class="mr-5 mb-0 h5 semibold tertiary">Comisión por transacción: <span id="cost-trans" class="light text"></span></p>
-              <p class="mr-5 mb-0 h5 semibold tertiary">Comisión por Consultar saldo: <span id="cost-inquiry" class="light text"></span></p>
+            <div class="row flex py-2">
+              <div class="col-4">
+                <label><?= lang('SERVICES_AVAILABLE_BALANCE'); ?></label>
+                <span id="balance-aviable" class="light text form-control py-0"></span>
+              </div>
+              <?php if (lang('CONF_SECTION_COMMISSION') == 'ON'): ?>
+              <div class="col-4">
+                <label><?= lang('SERVICES_COMMISSION_TRANS'); ?></label>
+                <span id="cost-trans" class="light text form-control py-0"></span>
+              </div>
+              <div class="col-4">
+                <label><?= lang('SERVICES_COMMISSION_CONSULTATION'); ?></label>
+                <span id="cost-inquiry" class="light text form-control py-0"></span>
+              </div>
+              <?php endif; ?>
+              <?php if (lang('CONF_BALANCE_ACC_CONCENTRATOR') == 'ON'): ?>
+              <div class="col-4">
+                <label><?= lang('SERVICES_BALANCE_ACC_CONCENTRATOR'); ?></label>
+                <span id="balance-acc-concentrator" class="light text form-control py-0">$ 1.000.00</span>
+              </div>
+              <?php endif; ?>
             </div>
 
             <table id="tableServicesMaster" class="cell-border h6 display w-100">

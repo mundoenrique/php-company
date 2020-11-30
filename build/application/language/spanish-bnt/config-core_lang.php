@@ -93,3 +93,6 @@ $lang['CONF_AUTH_URL'] = [
 		'BEP' => 'https://nixe.ixe.com.mx/nbxi/autorizacionremota.aspx'
 	]
 ];
+//MASTER ACCOUNT
+$lang['CONF_SECTION_COMMISSION'] = 'OFF';
+$lang['CONF_BALANCE_ACC_CONCENTRATOR'] = 'ON';

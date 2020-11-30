@@ -125,3 +125,7 @@ $lang['SERVICES_TWIRLS_NO_AVAILABLE_CARD'] = 'El número de tarjeta <strong>%s</
 $lang['SERVICES_TWIRLS_NO_UPDATE'] = 'No fue posible actualizar la restricción de giros para:';
 $lang['SERVICES_LIMITS_NO_REGISTRY'] = 'No se han encontrado límites disponibles.';
 $lang['SERVICES_LIMITS_NO_UPDATE'] = 'No fue posible actualizar la restricción de límites';
+$lang['SERVICES_AVAILABLE_BALANCE'] = 'Saldo disponible:';
+$lang['SERVICES_COMMISSION_TRANS'] = 'Comisión por transacción:';
+$lang['SERVICES_COMMISSION_CONSULTATION'] = 'Comisión por consultar saldo:';
+$lang['SERVICES_BALANCE_ACC_CONCENTRATOR'] = 'Saldo cuenta concentradora:';
