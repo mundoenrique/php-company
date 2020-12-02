@@ -104,6 +104,16 @@ class Novo_Services_Model extends NOVO_Model {
 				$this->response->msg = lang('GEN_TABLE_SEMPTYTABLE');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
+			case -233:
+				$this->response->title = lang('GEN_MENU_SERV_MASTER_ACCOUNT');
+				$this->response->icon = lang('CONF_ICON_INFO');
+				$this->response->msg = 'El saldo no está disponible.';
+			break;
+			case -251:
+				$this->response->title = lang('GEN_MENU_SERV_MASTER_ACCOUNT');
+				$this->response->icon = lang('CONF_ICON_INFO');
+				$this->response->msg = 'No existen parámetros definidos para la empresa sobre éste producto.';
+			break;
 		}
 
 		$this->response->draw = (int) $dataRequest->draw;
@@ -963,21 +973,21 @@ class Novo_Services_Model extends NOVO_Model {
 
 		$this->response->code = 0;
 		$this->response->data->info['balance'] = '';
-		$this->response->data->info['balanceTxt'] = '';
+		$this->response->data->info['balanceText'] = '';
 		$this->response->data->info['fundingAccount'] = '';
 
 		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->data->info['balanceText'] = 'Saldo Disponible: ';
 				$this->response->data->info['balance'] = lang('GEN_CURRENCY').' '.currencyFormat($response->maestroDeposito->saldoDisponible);
-				$this->response->data->params['balance'] = (float )$response->maestroDeposito->saldo;
+				$this->response->data->params['balance'] = (float)$response->maestroDeposito->saldo;
 				$this->response->data->info['fundingAccount'] = $response->maestroDeposito->cuentaFondeo ?? '';
 
 				if (isset($response->maestroDeposito->parametrosRecarga)) {
-					$this->response->data->params['dailyOper']['quantity'] = (int) $response->maestroDeposito->cantidadTranxDia->lista[0]->idCuenta;
-					$this->response->data->params['dailyOper']['amount'] = (float) $response->maestroDeposito->cantidadTranxDia->lista[0]->montoOperacion;
-					$this->response->data->params['weeklyOper']['quantity'] = (int) $response->maestroDeposito->cantidadTranxSemana->lista[0]->idCuenta;
-					$this->response->data->params['weeklyOper']['amount'] = (float) $response->maestroDeposito->cantidadTranxSemana->lista[0]->montoOperacion;
+					$this->response->data->params['dailyOper']['quantity'] = (int)$response->maestroDeposito->cantidadTranxDia->lista[0]->idCuenta;
+					$this->response->data->params['dailyOper']['amount'] = (float)$response->maestroDeposito->cantidadTranxDia->lista[0]->montoOperacion;
+					$this->response->data->params['weeklyOper']['quantity'] = (int)$response->maestroDeposito->cantidadTranxSemana->lista[0]->idCuenta;
+					$this->response->data->params['weeklyOper']['amount'] = (float)$response->maestroDeposito->cantidadTranxSemana->lista[0]->montoOperacion;
 
 					unset(
 						$response->maestroDeposito->parametrosRecarga->idExtEmp,
@@ -987,19 +997,33 @@ class Novo_Services_Model extends NOVO_Model {
 						$response->maestroDeposito->parametrosRecarga->tipoFactura,
 					);
 
-					$this->response->data->params['rechargeParams'] = $response->maestroDeposito->parametrosRecarga ?? '';
+					$this->response->data->params['chargeParam']['commission'] = (float)$response->maestroDeposito->parametrosRecarga->costoComisionTrans
+						?? '';
+					$this->response->data->params['chargeParam']['minAmount'] = (float)$response->maestroDeposito->parametrosRecarga->montoMinTransDia
+						?? '';
+					$this->response->data->params['chargeParam']['maxAmount'] = (float)$response->maestroDeposito->parametrosRecarga->montoMaxTransaccion
+						?? '';
+					$this->response->data->params['chargeParam']['maxAmountWeek'] = (float)$response->maestroDeposito->parametrosRecarga->montoMaxTransSemanal
+						?? '';
+					$this->response->data->params['chargeParam']['accuAmountWeek'] = (float)$response->maestroDeposito->parametrosRecarga->montoMaxTransSemanal
+						?? '';
 				}
 
-				$this->response->data->params = base64_encode(json_encode($this->cryptography->encrypt($this->response->data->params)));
+				$this->response->data->params = $this->response->data->params;
 			break;
 			case -233:
-
+				$this->response->data->info['balanceText'] = 'El saldo no está disponible';
+				$this->response->data->info['fundingAccount'] = '-- --';
 			break;
 			case -251:
-
+				$this->response->data->info['balanceText'] = '';
+				$this->response->data->info['fundingAccount'] = '-- --';
 			break;
 			case -402:
-
+				$this->response->code = 1;
+				$this->response->data->info['balanceText'] = 'Saldo Disponible: ';
+				$this->response->data->info['balance'] = lang('GEN_CURRENCY').' '.currencyFormat($response->bean->saldoDisponible);
+				$this->response->data->info['fundingAccount'] = 'Empresa sin cuenta asociada';
 			break;
 			default:
 				$this->response->code = 4;
@@ -1030,8 +1054,7 @@ class Novo_Services_Model extends NOVO_Model {
 		$this->dataRequest->idServicio = '1260';
 
 		$response = $this->sendToService('CallWs_AuthorizationKey');
-		/* $response = json_decode('{"rc":0,"msg":"Proceso OK","bean":{"tranClave":"nuR8Q+ntN8ECmrW7+Oe4m7fPuWCeo5QXlu8QtXSt7EL9dEmSAdzVYvIjIlv1pC9WhAZSLHe8yjUMIcGoswH4bRt78FJPX6MU5nHxHa4o+hi3csUGqmI5T3j8ZxbxdmpQ0pHewHVRgLTqIqd6v8Mmqg\\u003d\\u003d","tranExitoso":true,"tranDescripcionError":""}}');
-		$this->isResponseRc = 0; */
+
 		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;

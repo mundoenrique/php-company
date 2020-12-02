@@ -1,7 +1,7 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 <div id="content">
 	<div class="img-back">
-		<h1 class="welcome-title"><?= lang('LOGIN_WELCOME_TITLE'); ?></h1>
+		<h1 class="welcome-title"><?= lang('USER_WELCOME_TITLE'); ?></h1>
 	</div>
 
 	<p><?= lang('LOGIN_WELCOME_MESSAGE') ?></p>
