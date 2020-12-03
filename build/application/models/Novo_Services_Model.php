@@ -84,7 +84,20 @@ class Novo_Services_Model extends NOVO_Model {
 
 				$this->response->code = 0;
 				$this->response->params = $response->maestroParametros;
-				$this->response->balance = $response->maestroDeposito->saldoDisponible;
+				$this->response->params->costoComisionTrans = (String)currencyFormat($this->response->params->costoComisionTrans);
+				$this->response->params->costoComisionCons = (String)currencyFormat($this->response->params->costoComisionCons);
+				$this->response->balance = (String)currencyFormat(($response->maestroDeposito->saldoDisponible));
+
+				if (array_key_exists('saldoCtaConcentradora', $response->maestroDeposito)) {
+					if ($response->maestroDeposito->saldoCtaConcentradora == "No disponible") {
+						$this->response->balanceConcentratingAccount = $response->maestroDeposito->saldoCtaConcentradora;
+					} else {
+						$this->response->balanceConcentratingAccount = currencyFormat($response->maestroDeposito->saldoCtaConcentradora) ;
+					}
+				} else {
+					$this->response->balanceConcentratingAccount = "";
+				}
+
 				$this->response->access = [
 					'TRASAL' => $this->verify_access->verifyAuthorization('TRAMAE', 'TRASAL'),
 					'TRACAR' => $this->verify_access->verifyAuthorization('TRAMAE', 'TRACAR'),
@@ -808,7 +821,7 @@ class Novo_Services_Model extends NOVO_Model {
 			case -447:
 				$this->response->title = lang('GEN_TRANSACTIONAL_LIMITS_TITTLE');
 				$this->response->icon =  lang('CONF_ICON_WARNING');
-				$this->response->msg = lang('SERVICES_LIMITS_NO_REGISTRY');
+				$this->response->msg = novoLang(lang('SERVICES_NO_FOUND_REGISTRY'), maskString( $dataRequest->cardNumber, 5, 6));
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -448:

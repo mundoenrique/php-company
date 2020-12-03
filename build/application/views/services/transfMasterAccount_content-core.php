@@ -123,22 +123,22 @@
             <div class="row flex py-2">
               <div class="col-4">
                 <label><?= lang('SERVICES_AVAILABLE_BALANCE'); ?></label>
-                <span id="balance-aviable" class="light text form-control py-0"></span>
+                <span id="balance-aviable" class="light text block py-0"></span>
               </div>
               <?php if (lang('CONF_SECTION_COMMISSION') == 'ON'): ?>
               <div class="col-4">
                 <label><?= lang('SERVICES_COMMISSION_TRANS'); ?></label>
-                <span id="cost-trans" class="light text form-control py-0"></span>
+                <span id="cost-trans" class="light text block py-0"></span>
               </div>
               <div class="col-4">
                 <label><?= lang('SERVICES_COMMISSION_CONSULTATION'); ?></label>
-                <span id="cost-inquiry" class="light text form-control py-0"></span>
+                <span id="cost-inquiry" class="light text block py-0"></span>
               </div>
               <?php endif; ?>
               <?php if (lang('CONF_BALANCE_ACC_CONCENTRATOR') == 'ON'): ?>
               <div class="col-4">
                 <label><?= lang('SERVICES_BALANCE_ACC_CONCENTRATOR'); ?></label>
-                <span id="balance-acc-concentrator" class="light text form-control py-0">$ 1.000.00</span>
+                <span id="balance-acc-concentrator" class="light text form-control py-0"></span>
               </div>
               <?php endif; ?>
             </div>
