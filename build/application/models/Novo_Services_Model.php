@@ -849,7 +849,7 @@ class Novo_Services_Model extends NOVO_Model {
 			case -444:
 				$this->response->title = lang('GEN_TRANSACTIONAL_LIMITS_TITTLE');
 				$this->response->icon =  lang('CONF_ICON_WARNING');
-				$this->response->msg = lang('SERVICES_NO_FOUND_REGISTRY');
+				novoLang(lang('SERVICES_NO_FOUND_REGISTRY'), maskString( $dataRequest->cardNumber, 5, 6));
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -454:
