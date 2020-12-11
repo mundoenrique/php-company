@@ -661,7 +661,7 @@ class Novo_Reports_Model extends NOVO_Model {
 			break;
 		}
 
-		$this->response->modalBtn['statusBulkList'] = $statusBulkList;
+		$this->response->data->statusBulkList = $statusBulkList;
 
 		return $this->responseToTheView('callWs_StatusBulk');
 	}
