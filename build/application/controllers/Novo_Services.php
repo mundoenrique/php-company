@@ -50,9 +50,9 @@ Class Novo_Services extends Novo_Controller {
 			foreach ($responseAttr->data->info AS $index => $render) {
 				$this->render->$index = $render;
 			}
+			$responseAttr->data->params['showRechargeAccount'] = $showRechargeAccount;
 		}
 
-		$responseAttr->data->params['showRechargeAccount'] = $showRechargeAccount;
 		$this->responseAttr($responseAttr);
 		$this->render->titlePage = lang('GEN_MENU_SERV_MASTER_ACCOUNT');
 		$this->render->showRechargeAccount = $showRechargeAccount;

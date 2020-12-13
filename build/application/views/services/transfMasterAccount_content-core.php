@@ -26,7 +26,7 @@
           <form id="masterAccountRechargeForm" method="post" class="w-100">
             <p class="mr-5 mb-3 sh5 semibold tertiary"><?= $balanceText ?> <span class="light text"><?= $balance; ?></span></p>
             <div class="row">
-              <?php if (lang('CONF_SELECT_AMOUNT') == 'ON'): ?>
+              <?php if (lang('CONF_SELECT_TYPE') == 'ON'): ?>
               <div class="form-group col-3">
                 <label for="account" id="account"><?= lang('GEN_ACCOUNT'); ?></label>
                 <input type="text" id="accountUser" name="accountUser" class="form-control px-1" value="<?= $fundingAccount; ?>" autocomplete="off"
@@ -61,6 +61,7 @@
             </div>
 
             <div class="row flex justify-end my-3">
+							<?php if (lang('CONF_INPUT_PASS') == 'ON'): ?>
               <div class="col-4 col-lg-3 col-xl-3 form-group">
                 <div class="input-group">
                   <input id="password-tranfer" name="password" class="form-control pwd-input pr-0 pwd" type="password" autocomplete="off"
@@ -73,6 +74,7 @@
                 </div>
                 <div class="help-block bulk-select text-left"></div>
               </div>
+							<?php endif; ?>
               <div class="col-3">
                 <button id="masterAccountRechargeBtn" class="btn btn-primary btn-small btn-loading flex ml-auto">
                   <?= lang('GEN_BTN_TRANSFER'); ?>
