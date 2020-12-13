@@ -47,7 +47,9 @@ class Novo_User_Model extends NOVO_Model {
 			}
 		}
 
-		if (isset($dataRequest->otpCode) && $authToken == '') {
+		if (lang('CONFIG_MAINTENANCE') == 'ON') {
+			$this->isResponseRc = 9997;
+		}	elseif (isset($dataRequest->otpCode) && $authToken == '') {
 			$this->isResponseRc = 9998;
 		} else {
 			$this->isResponseRc = ACTIVE_RECAPTCHA && !isset($dataRequest->skipCaptcha) ? $this->callWs_ValidateCaptcha_User($dataRequest) : 0;
@@ -187,11 +189,21 @@ class Novo_User_Model extends NOVO_Model {
 				$this->response->msg = lang('GEN_RESP_CODE_OTP_INVALID');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
+			case 9997:
+				$this->response->code = 4;
+				$this->response->icon = lang('CONF_ICON_INFO');
+				$this->response->title = lang('GEN_SYSTEM_NAME');
+				$this->response->msg = 'estamos haciendo mantenimiento a la plataforma para atenderte mejor';
+			break;
 			case 9998:
+				$this->response->code = 4;
+				$this->response->icon = lang('CONF_ICON_INFO');
+				$this->response->title = lang('GEN_SYSTEM_NAME');
 				$this->response->msg = lang('USER_EXPIRE_TIME');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case 9999:
+				$this->response->code = 4;
 				$this->response->icon = lang('CONF_ICON_DANGER');
 				$this->response->title = lang('GEN_SYSTEM_NAME');
 				$this->response->msg = lang('RESP_RECAPTCHA_VALIDATION_FAILED');

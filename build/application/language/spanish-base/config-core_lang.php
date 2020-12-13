@@ -1,5 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+$lang['CONFIG_MAINTENANCE'] = 'OFF';
 $lang['CONF_VIEW_SUFFIX'] = '-core';
 $lang['CONF_VALIDATE_CAPTCHA'] = ['signIn'];
 //SUPPORT IE 11
