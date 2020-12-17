@@ -236,7 +236,7 @@ if (! function_exists('currencyFormat')) {
 		$CI =& get_instance();
 		$client = $CI->session->userdata('countrySess');
 		$decimalPoint = ['Ve', 'Co', 'Bdb'];
-		$amount = (Float)$amount;
+		$amount = (float)$amount;
 
 		if (in_array($client, $decimalPoint)) {
 			$amount =  number_format($amount, 2, ',', '.');

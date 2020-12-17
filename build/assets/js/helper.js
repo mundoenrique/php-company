@@ -429,3 +429,11 @@ function getResponse(Exitoso, MensajeError) {
 		appMessages(remoteAuthArgs.title || remoteAuthArgs.action, MensajeError, lang.CONF_ICON_WARNING, data);
 	}
 }
+
+function normalizeAmount(amount) {
+	var valueAttr = amount.split(lang.GEN_DECIMAL);
+	amount = valueAttr[0].replace(/[,.]/g, '') + '.' + valueAttr[1];
+	amount = parseFloat(amount);
+
+	return amount;
+}
