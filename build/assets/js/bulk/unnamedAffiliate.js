@@ -15,7 +15,59 @@ $(function () {
 		},
 		"ordering": false,
 		"pagingType": "full_numbers",
-		"language": dataTableLang
+		"language": dataTableLang,
+		"columns": [
+			{ "data": "numberBulk"},
+			{ "data": "elemCards"},
+			{ "data": "emitionDate"},
+			{ "data": "status"},
+			{ "data": "affiliatedCards"},
+			{ "data": "forAffiliateCards"},
+			{ "data": "availableCards"},
+			{ "data": "options"}
+		],
+		"columnDefs": [
+			{
+				"targets": 0,
+				"className": "numberBulk",
+				"visible": lang.CONF_TABLE_UNNAMED_CARDS == "ON"
+			},
+			{
+				"targets": 1,
+				"className": "elemCards",
+				"visible": lang.CONF_TABLE_UNNAMED_CARDS == "ON"
+			},
+			{
+				"targets": 2,
+				"className": "emitionDate",
+				"visible": lang.CONF_TABLE_UNNAMED_CARDS == "ON"
+			},
+			{
+				"targets": 3,
+				"className": "status",
+				"visible": lang.CONF_TABLE_UNNAMED_CARDS == "ON"
+			},
+			{
+				"targets": 4,
+				"className": "affiliatedCards",
+				"visible": lang.CONF_TABLE_AFFILIATED_COLUMNS == "ON"
+			},
+			{
+				"targets": 5,
+				"className": "forAffiliateCards",
+				"visible": lang.CONF_TABLE_AFFILIATED_COLUMNS == "ON"
+			},
+			{
+				"targets": 6,
+				"className": "availableCards",
+				"visible": lang.CONF_TABLE_AFFILIATED_COLUMNS == "ON"
+			},
+			{
+				"targets": 7,
+				"className": "options",
+				"visible": lang.CONF_TABLE_UNNAMED_CARDS == "ON"
+			}
+		],
 	});
 
 	$('#initialDate, #finalDate').datepicker({
@@ -91,6 +143,7 @@ $(function () {
 		e.preventDefault();
 		form = $(this).parent().find('form')
 		insertFormInput(true, form);
+		$('.cover-spin').show(0);
 		form.submit();
 	});
 });
