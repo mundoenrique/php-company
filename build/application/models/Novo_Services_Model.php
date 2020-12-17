@@ -28,10 +28,7 @@ class Novo_Services_Model extends NOVO_Model {
 		$this->dataRequest->className = 'com.novo.objects.MO.TransferenciaMO';
 		$this->dataRequest->rifEmpresa = $this->session->enterpriseInf->idFiscal;
 		$this->dataRequest->idProducto = $this->session->productInf->productPrefix;
-		$idPersonal = strtoupper($dataRequest->idNumber);
-		if(lang('CONF_INPUT_UPPERCASE') == 'ON'){
-			$idPersonal = $dataRequest->idNumber;
-		}
+
 		$this->dataRequest->listaTarjetas = [
 			[
 				'paginaActual' => (int) ($dataRequest->start / 10) + 1,
@@ -46,12 +43,11 @@ class Novo_Services_Model extends NOVO_Model {
 			'lista' => [
 				[
 					'noTarjeta' => $dataRequest->cardNumber,
-					'id_ext_per' => $idPersonal
+					'id_ext_per' => lang('CONF_INPUT_UPPERCASE') == 'ON' ? mb_strtoupper($dataRequest->idNumber) : $dataRequest->idNumber
 				]
 			]
 		];
 
-		$response = $this->sendToService('callWs_TransfMasterAccount');
 		$cardsList = [];
 		$this->response->params['costoComisionTrans'] = '--';
 		$this->response->params['costoComisionCons'] = '--';
@@ -59,13 +55,15 @@ class Novo_Services_Model extends NOVO_Model {
 		$this->response->recordsTotal = 0;
 		$this->response->recordsFiltered = 0;
 		$this->response->access = [
-			'TRASAL' => FALSE,
-			'TRACAR' => FALSE,
-			'TRAABO' => FALSE,
-			'TRABLQ' => FALSE,
-			'TRAASG' => FALSE,
-			'TRADBL' => FALSE,
+			'TRASAL' => $this->verify_access->verifyAuthorization('TRAMAE', 'TRASAL'),
+			'TRACAR' => $this->verify_access->verifyAuthorization('TRAMAE', 'TRACAR'),
+			'TRAABO' => $this->verify_access->verifyAuthorization('TRAMAE', 'TRAABO'),
+			'TRABLQ' => $this->verify_access->verifyAuthorization('TRAMAE', 'TRABLQ'),
+			'TRAASG' => $this->verify_access->verifyAuthorization('TRAMAE', 'TRAASG'),
+			'TRADBL' => $this->verify_access->verifyAuthorization('TRAMAE', 'TRADBL'),
 		];
+
+		$response = $this->sendToService('callWs_TransfMasterAccount');
 
 		switch($this->isResponseRc) {
 			case 0:
@@ -84,31 +82,23 @@ class Novo_Services_Model extends NOVO_Model {
 
 				$this->response->code = 0;
 				$this->response->params = $response->maestroParametros;
-				$this->response->params->costoComisionTrans = (String)currencyFormat($this->response->params->costoComisionTrans);
-				$this->response->params->costoComisionCons = (String)currencyFormat($this->response->params->costoComisionCons);
-				$this->response->balance = (String)currencyFormat(($response->maestroDeposito->saldoDisponible));
+				$this->response->params->costoComisionTrans = lang('GEN_CURRENCY').' '.currencyFormat($this->response->params->costoComisionTrans);
+				$this->response->params->costoComisionCons = lang('GEN_CURRENCY').' '.currencyFormat($this->response->params->costoComisionCons);
+				$this->response->balance = lang('GEN_CURRENCY').' '.$response->maestroDeposito->saldoDisponible;
 
 				if (array_key_exists('saldoCtaConcentradora', $response->maestroDeposito)) {
-					if ($response->maestroDeposito->saldoCtaConcentradora == "No disponible") {
+					if ($response->maestroDeposito->saldoCtaConcentradora == 'No disponible') {
 						$this->response->balanceConcentratingAccount = $response->maestroDeposito->saldoCtaConcentradora;
 					} else {
-						$this->response->balanceConcentratingAccount = currencyFormat($response->maestroDeposito->saldoCtaConcentradora) ;
+						$this->response->balanceConcentratingAccount = lang('GEN_CURRENCY').' '.$response->maestroDeposito->saldoCtaConcentradora;
 					}
 				} else {
-					$this->response->balanceConcentratingAccount = "";
+					$this->response->balanceConcentratingAccount = '';
 				}
 
-				$this->response->access = [
-					'TRASAL' => $this->verify_access->verifyAuthorization('TRAMAE', 'TRASAL'),
-					'TRACAR' => $this->verify_access->verifyAuthorization('TRAMAE', 'TRACAR'),
-					'TRAABO' => $this->verify_access->verifyAuthorization('TRAMAE', 'TRAABO'),
-					'TRABLQ' => $this->verify_access->verifyAuthorization('TRAMAE', 'TRABLQ'),
-					'TRAASG' => $this->verify_access->verifyAuthorization('TRAMAE', 'TRAASG'),
-					'TRADBL' => $this->verify_access->verifyAuthorization('TRAMAE', 'TRADBL'),
-				];
-				$this->response->draw = (int) $dataRequest->draw;
-				$this->response->recordsTotal = (int) $response->listaTarjetas[0]->totalRegistros;
-				$this->response->recordsFiltered = (int) $response->listaTarjetas[0]->totalRegistros;
+				$this->response->draw = (int)$dataRequest->draw;
+				$this->response->recordsTotal = (int)$response->listaTarjetas[0]->totalRegistros;
+				$this->response->recordsFiltered = (int)$response->listaTarjetas[0]->totalRegistros;
 			break;
 			case -150:
 				$this->response->code = 1;
@@ -988,37 +978,40 @@ class Novo_Services_Model extends NOVO_Model {
 		$this->response->data->info['balance'] = '';
 		$this->response->data->info['balanceText'] = '';
 		$this->response->data->info['fundingAccount'] = '';
+		$this->response->data->params['validateParams'] = FALSE;
+		$this->response->data->params['commission'] = (float)0;
 
 		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->data->info['balanceText'] = 'Saldo Disponible: ';
 				$this->response->data->info['balance'] = lang('GEN_CURRENCY').' '.currencyFormat($response->maestroDeposito->saldoDisponible);
-				$this->response->data->params['balance'] = (float)$response->maestroDeposito->saldo;
+				$this->response->data->params['balance'] = (float)$response->maestroDeposito->saldoDisponible;
 				$this->response->data->info['fundingAccount'] = $response->maestroDeposito->cuentaFondeo ?? '';
 
 				if (isset($response->maestroDeposito->parametrosRecarga)) {
-					$this->response->data->params['dailyOper']['quantity'] = (int)$response->maestroDeposito->cantidadTranxDia->lista[0]->idCuenta;
-					$this->response->data->params['dailyOper']['amount'] = (float)$response->maestroDeposito->cantidadTranxDia->lista[0]->montoOperacion;
-					$this->response->data->params['weeklyOper']['quantity'] = (int)$response->maestroDeposito->cantidadTranxSemana->lista[0]->idCuenta;
-					$this->response->data->params['weeklyOper']['amount'] = (float)$response->maestroDeposito->cantidadTranxSemana->lista[0]->montoOperacion;
+					$this->response->data->params['validateParams'] = TRUE;
+					$this->response->data->params['dailyQuantity'] = (int)$response->maestroDeposito->cantidadTranxDia->lista[0]->idCuenta;
+					$this->response->data->params['dailyAmount'] = (float)$response->maestroDeposito->cantidadTranxDia->lista[0]->montoOperacion;
+					$this->response->data->params['weeklyQuantity'] = (int)$response->maestroDeposito->cantidadTranxSemana->lista[0]->idCuenta;
+					$this->response->data->params['weeklyAmount'] = (float)$response->maestroDeposito->cantidadTranxSemana->lista[0]->montoOperacion;
 
-					unset(
+					/* unset(
 						$response->maestroDeposito->parametrosRecarga->idExtEmp,
 						$response->maestroDeposito->parametrosRecarga->acprefix,
 						$response->maestroDeposito->parametrosRecarga->usuarioReg,
 						$response->maestroDeposito->parametrosRecarga->tipoComision,
 						$response->maestroDeposito->parametrosRecarga->tipoFactura,
-					);
+					); */
 
-					$this->response->data->params['chargeParam']['commission'] = (float)$response->maestroDeposito->parametrosRecarga->costoComisionTrans
+					$this->response->data->params['commission'] = (float)$response->maestroDeposito->parametrosRecarga->costoComisionTrans
 						?? '';
-					$this->response->data->params['chargeParam']['minAmount'] = (float)$response->maestroDeposito->parametrosRecarga->montoMinTransDia
+					$this->response->data->params['minAmount'] = (float)$response->maestroDeposito->parametrosRecarga->montoMinTransDia
 						?? '';
-					$this->response->data->params['chargeParam']['maxAmount'] = (float)$response->maestroDeposito->parametrosRecarga->montoMaxTransaccion
+					$this->response->data->params['maxAmount'] = (float)$response->maestroDeposito->parametrosRecarga->montoMaxTransaccion
 						?? '';
-					$this->response->data->params['chargeParam']['maxAmountWeek'] = (float)$response->maestroDeposito->parametrosRecarga->montoMaxTransSemanal
+					$this->response->data->params['maxAmountWeek'] = (float)$response->maestroDeposito->parametrosRecarga->montoMaxTransSemanal
 						?? '';
-					$this->response->data->params['chargeParam']['accuAmountWeek'] = (float)$response->maestroDeposito->parametrosRecarga->montoMaxTransSemanal
+					$this->response->data->params['accuAmountWeek'] = (float)$response->maestroDeposito->parametrosRecarga->montoMaxTransSemanal
 						?? '';
 				}
 
@@ -1040,6 +1033,106 @@ class Novo_Services_Model extends NOVO_Model {
 			break;
 			default:
 				$this->response->code = 4;
+		}
+
+		return $this->responseToTheView('CallWs_MatesaccountBlanace');
+	}
+	/**
+	 * @info Método para traferencias a la cuenta maestra
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date December 15th, 2020
+	 */
+	public function CallWs_MasterAccountTransfer_Services($dataRequest)
+	{
+		log_message('INFO', 'NOVO Services Model: MasterAccountTransfer Method Initialized');
+
+		$this->dataAccessLog->modulo = 'Servicios';
+		$this->dataAccessLog->function = 'Transferencia maestra';
+		$this->dataAccessLog->operation = 'Transferencia a la cuenta maestra';
+
+		$password = $dataRequest->passwordTranfer;
+
+		if (lang('CONF_INPUT_PASS') == 'ON') {
+			$password = md5($this->cryptography->decryptOnlyOneData($dataRequest->passwordTranfer));
+		}
+
+		$this->dataRequest->idOperation = 'cargoCuentaMaestraTM';
+		$this->dataRequest->className = 'com.novo.objects.MO.TransferenciaMO';
+		$this->dataRequest->maestroDeposito = [
+			'idExtEmp' => $this->session->enterpriseInf->idFiscal,
+			'saldo' => (float)$dataRequest->transferAmount,
+			'descrip' => $dataRequest->description,
+			'type' => $dataRequest->transferType ?? 'abono',
+			'tokenCliente' => $password,
+			'authToken' => $this->session->flashdata('authToken'),
+			'idProducto' => $this->session->productInf->productPrefix,
+			'usuario' => [
+				'userName' => $this->session->userName,
+				'password' => $password
+			]
+		];
+
+		$response = $this->sendToService('CallWs_MasterAccountTransfer');
+
+		switch ($this->isResponseRc) {
+			case 0:
+				$this->response->code = 0;
+				$this->response->title = 'Transferencia a Cuenta Maestra';
+				$this->response->msg = 'La transferencia fue realizada exitosamente';
+				$this->response->icon = lang('CONF_ICON_SUCCESS');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			break;
+			case -1:
+				$this->response->title = 'Transferencia a Cuenta Maestra';
+				$this->response->msg = lang('GEN_PASSWORD_NO_VALID');
+				$this->response->icon = lang('CONF_ICON_INFO');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			break;
+			case -1:
+				$this->response->title = 'Transferencia a Cuenta Maestra';
+				$this->response->icon = lang('CONF_ICON_INFO');
+				$this->response->msg = lang('GEN_PASSWORD_NO_VALID');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			break;
+			case -155:
+				$this->response->title = 'Transferencia a Cuenta Maestra';
+				$this->response->icon = lang('CONF_ICON_INFO');
+				$this->response->msg = lang('SERVICES_NO_BALANCE');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			break;
+			case -233:
+				$this->response->title = 'Transferencia a Cuenta Maestra';
+				$this->response->icon = lang('CONF_ICON_INFO');
+				$this->response->msg = 'El saldo no está disponible.';
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			break;
+			case -285:
+				$this->response->title = 'Transferencia a Cuenta Maestra';
+				$this->response->icon = lang('CONF_ICON_INFO');
+				$this->response->msg = 'La cuenta se encuentra inactiva.';
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			break;
+			case -286:
+			case -301:
+				$this->response->title = 'Transferencia a Cuenta Maestra';
+				$this->response->icon = lang('CONF_ICON_INFO');
+				$this->response->msg = lang('GEN_SO_CREATE_INCORRECT');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			break;
+			case -287:
+			case -288:
+				$this->response->title = 'Transferencia a Cuenta Maestra';
+				$this->response->icon = lang('CONF_ICON_INFO');
+				$this->response->msg = lang('GEN_SO_CREATE_EXPIRED');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			break;
+			case -208:
+			case -300:
+				$this->response->title = 'Transferencia a Cuenta Maestra';
+				$this->response->icon = lang('CONF_ICON_INFO');
+				$this->response->msg = $response->msg;
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			break;
 		}
 
 		return $this->responseToTheView('CallWs_MatesaccountBlanace');

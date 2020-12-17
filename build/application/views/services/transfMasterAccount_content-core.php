@@ -58,13 +58,10 @@
                   disabled>
                 <div class="help-block"></div>
               </div>
-            </div>
-
-            <div class="row flex justify-end my-3">
-							<?php if (lang('CONF_INPUT_PASS') == 'ON'): ?>
-              <div class="col-4 col-lg-3 col-xl-3 form-group">
+              <?php if (lang('CONF_INPUT_PASS') == 'ON') : ?>
+              <div class="col-3 form-group mt-3 ml-auto">
                 <div class="input-group">
-                  <input id="password-tranfer" name="password" class="form-control pwd-input pr-0 pwd" type="password" autocomplete="off"
+                  <input id="passwordTranfer" name="password" class="form-control pwd-input pr-0 pwd" type="password" autocomplete="off"
                     placeholder="<?= lang('GEN_PLACE_PASSWORD'); ?>" disabled>
                   <div class="input-group-append">
                     <span id="pwd_action" class="input-group-text pwd-action" title="<?= lang('GEN_SHOW_PASS') ?>">
@@ -74,14 +71,13 @@
                 </div>
                 <div class="help-block bulk-select text-left"></div>
               </div>
-							<?php endif; ?>
-              <div class="col-3">
+              <?php endif; ?>
+              <div class="col-3 mt-3 <?= $skipInputPass; ?>">
                 <button id="masterAccountRechargeBtn" class="btn btn-primary btn-small btn-loading flex ml-auto">
                   <?= lang('GEN_BTN_TRANSFER'); ?>
                 </button>
               </div>
             </div>
-
           </form>
         </div>
         <div class="line mb-2"></div>

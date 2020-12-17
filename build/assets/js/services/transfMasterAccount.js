@@ -1,7 +1,7 @@
 'use strict'
 var table;
 var access;
-var params;
+var costs;
 var balance;
 var balanceConcentratingAccount;
 var cardsData;
@@ -17,17 +17,14 @@ $(function () {
 
 	table = $('#tableServicesMaster').DataTable({
 		drawCallback: function (d) {
-			$('#balance-aviable').text(lang.GEN_CURRENCY + ' ' + balance);
-			if(lang.CONF_BALANCE_ACC_CONCENTRATOR == 'ON' ){
-				$('#balance-acc-concentrator').text(lang.GEN_CURRENCY + ' ' + balanceConcentratingAccount);
+			$('#balance-aviable').text(balance);
 
-				if (balanceConcentratingAccount == "No disponible") {
-					$('#balance-acc-concentrator').text(balanceConcentratingAccount);
-				}
+			if(lang.CONF_BALANCE_ACC_CONCENTRATOR == 'ON' ) {
+				$('#balance-acc-concentrator').text(balanceConcentratingAccount);
 			}
 
-			$('#cost-trans').text(lang.GEN_CURRENCY + ' ' + params.costoComisionTrans);
-			$('#cost-inquiry').text(lang.GEN_CURRENCY + ' ' + params.costoComisionCons);
+			$('#cost-trans').text(costs.costoComisionTrans);
+			$('#cost-inquiry').text(costs.costoComisionCons);
 			insertFormInput(false);
 			verifyOperations();
 			$('#pre-loader-table').addClass('hide');
@@ -88,7 +85,7 @@ $(function () {
 				access = responseTable.access;
 				balance = responseTable.balance;
 				balanceConcentratingAccount = responseTable.balanceConcentratingAccount
-				params = responseTable.params;
+				costs = responseTable.params;
 				return JSON.stringify(responseTable);
 			}
 		},

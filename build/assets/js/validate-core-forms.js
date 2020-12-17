@@ -220,7 +220,7 @@ function validateForms(form) {
 			"monthlyAmountCredit": {pattern: numeric , required: true },
 			"CreditTransaction": {pattern: numeric , required: true, maxLimitZero:'#dailyAmountCredit'},
 			"transferType": { required: true },
-			"transferAmount": { required: true, pattern: floatAmount},
+			"transferAmount": { required: true, pattern: floatAmount, lessBalance: true, dailyQuantity: true},
 			"description": { required: true, pattern: rechargeDesc },
 		},
 		messages: {
@@ -452,7 +452,12 @@ function validateForms(form) {
 				required:lang.VALIDATE_NUMBER_REQ
 			},
 			"transferType": lang.VALIDATE_TRANSFER_TYPE,
-			"transferAmount": lang.VALIDATE_VALID_AMOUNT,
+			"transferAmount": {
+				required: lang.VALIDATE_VALID_AMOUNT,
+				pattern: lang.VALIDATE_VALID_AMOUNT,
+				lessBalance: 'El saldo disponible no es suficiente para realizar la transacción.',
+				dailyQuantity: 'Has excedido la cantidad de transacciones por día.'
+			},
 			"description": {
 				required: lang.VALIDATE_RECHAR_DESC1,
 				pattern: lang.VALIDATE_RECHAR_DESC2
@@ -533,17 +538,36 @@ function validateForms(form) {
 
 	$.validator.methods.maxLimitZero = function(value, element, param) {
 		var valid = false;
+
 		if (Number($(param).val()) == 0) {
 			if (value > 0 ) {
 				valid = true
-			}else if (value == Number($(param).val())) {
+			} else if (value == Number($(param).val())) {
 				valid = true;
 			}
-		}else if (Number($(param).val()) > 0) {
+		} else if (Number($(param).val()) > 0) {
 			if (value <= Number($(param).val())) {
 				valid = true;
 			}
 		}
+
+		return valid;
+	}
+
+	$.validator.methods.lessBalance = function (value, element, param) {
+		value = normalizeAmount(value);
+
+		return (value + rechargeParam.commission) <= rechargeParam.balance;
+	}
+
+	$.validator.methods.dailyQuantity = function (value, element, param) {
+		var valid = true;
+		value = normalizeAmount(value);
+
+		if (rechargeParam.validateParams) {
+			valid = true;
+		}
+
 		return valid;
 	}
 

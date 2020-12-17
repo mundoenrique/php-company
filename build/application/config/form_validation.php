@@ -708,6 +708,23 @@ $config = [
 			'rules' => 'trim|regex_match[/^([\wñáéíóú ]+)+$/i]|required'
 		]
 	],
+	'masterAccountTransfer' => [
+		[
+			'field' => 'transferAmount',
+			'label' => 'transferAmount',
+			'rules' => 'trim'
+		],
+		[
+			'field' => 'description',
+			'label' => 'description',
+			'rules' => 'trim'
+		],
+		[
+			'field' => 'passwordTranfer',
+			'label' => 'passwordTranfer',
+			'rules' => 'trim'
+		]
+	],
 	'getReport' => [
 		[
 			'field' => 'operation',
