@@ -304,6 +304,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 					break;
 					case '5':
 					case 'L':
+					case 'F':
 						if (isset($response->registrosLoteRecarga) && count($response->registrosLoteRecarga) > 0) {
 							$tableContent = BulkAttrCreditsB();
 							$detailInfo['bulkRecords'] = $this->buildCreditRecords_Bulk($response->registrosLoteRecarga, $tableContent->body);
