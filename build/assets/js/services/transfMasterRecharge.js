@@ -3,7 +3,6 @@ var rechargeParam;
 $(function () {
 	if (params && code == 0) {
 		rechargeParam = params;
-		console.log(rechargeParam)
 		$('#transferAmount').mask('#' + lang.GEN_THOUSANDS + '##0' + lang.GEN_DECIMAL + '00', { reverse: true });
 		$('#transferAmount').on('keyup', function() {
 			$(this).val(function(_index, value) {
