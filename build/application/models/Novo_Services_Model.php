@@ -1079,8 +1079,8 @@ class Novo_Services_Model extends NOVO_Model {
 				$this->response->title = lang('GEN_MENU_SERV_MASTER_ACCOUNT');
 				$this->response->msg = lang('SERVICES_SUCCESSFUL_TRANSFER');
 				$this->response->icon = lang('CONF_ICON_SUCCESS');
-				$this->response->modalBtn['btn1']['link'] = $this->verify_access->verifyAuthorization('TEBAUT') ? 'lotes-autorizacion'
-					: 'transf-cuenta-maestra';
+				$this->response->modalBtn['btn1']['link'] = $this->verify_access->verifyAuthorization('TEBAUT') && lang('CONF_INPUT_PASS') == 'ON'
+				 ? 'lotes-autorizacion'	: 'transf-cuenta-maestra';
 				$this->response->modalBtn['btn1']['action'] = 'redirect';
 			break;
 			case -1:
