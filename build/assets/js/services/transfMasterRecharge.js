@@ -57,5 +57,7 @@ function rechargeAccount() {
 	verb = 'POST'; who = 'Services'; where = 'masterAccountTransfer';
 
 	callNovoCore(verb, who, where, data, function (response) {
+		$('#masterAccountRechargeBtn').html(btnText);
+		insertFormInput(false);
 	});
 }

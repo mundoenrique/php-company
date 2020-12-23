@@ -110,7 +110,7 @@ class Novo_Services_Model extends NOVO_Model {
 			case -233:
 				$this->response->title = lang('GEN_MENU_SERV_MASTER_ACCOUNT');
 				$this->response->icon = lang('CONF_ICON_INFO');
-				$this->response->msg = 'El saldo no está disponible.';
+				$this->response->msg = lang('SERVICES_UNAVAILABLE_BALANCE');
 			break;
 			case -251:
 				$this->response->title = lang('GEN_MENU_SERV_MASTER_ACCOUNT');
@@ -1018,7 +1018,7 @@ class Novo_Services_Model extends NOVO_Model {
 				$this->response->data->params = $this->response->data->params;
 			break;
 			case -233:
-				$this->response->data->info['balanceText'] = 'El saldo no está disponible';
+				$this->response->data->info['balanceText'] = lang('SERVICES_UNAVAILABLE_BALANCE');
 				$this->response->data->info['fundingAccount'] = '-- --';
 			break;
 			case -251:
@@ -1077,58 +1077,52 @@ class Novo_Services_Model extends NOVO_Model {
 		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
-				$this->response->title = 'Transferencia a Cuenta Maestra';
-				$this->response->msg = 'La transferencia fue realizada exitosamente';
+				$this->response->title = lang('GEN_MENU_SERV_MASTER_ACCOUNT');
+				$this->response->msg = lang('SERVICES_SUCCESSFUL_TRANSFER');
 				$this->response->icon = lang('CONF_ICON_SUCCESS');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -1:
-				$this->response->title = 'Transferencia a Cuenta Maestra';
+				$this->response->title = lang('GEN_MENU_SERV_MASTER_ACCOUNT');
 				$this->response->msg = lang('GEN_PASSWORD_NO_VALID');
 				$this->response->icon = lang('CONF_ICON_INFO');
-				$this->response->modalBtn['btn1']['action'] = 'destroy';
-			break;
-			case -1:
-				$this->response->title = 'Transferencia a Cuenta Maestra';
-				$this->response->icon = lang('CONF_ICON_INFO');
-				$this->response->msg = lang('GEN_PASSWORD_NO_VALID');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -155:
-				$this->response->title = 'Transferencia a Cuenta Maestra';
+				$this->response->title = lang('GEN_MENU_SERV_MASTER_ACCOUNT');
 				$this->response->icon = lang('CONF_ICON_INFO');
 				$this->response->msg = lang('SERVICES_NO_BALANCE');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -233:
-				$this->response->title = 'Transferencia a Cuenta Maestra';
+				$this->response->title = lang('GEN_MENU_SERV_MASTER_ACCOUNT');
 				$this->response->icon = lang('CONF_ICON_INFO');
-				$this->response->msg = 'El saldo no está disponible.';
+				$this->response->msg = lang('SERVICES_UNAVAILABLE_BALANCE');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -285:
-				$this->response->title = 'Transferencia a Cuenta Maestra';
+				$this->response->title = lang('GEN_MENU_SERV_MASTER_ACCOUNT');
 				$this->response->icon = lang('CONF_ICON_INFO');
-				$this->response->msg = 'La cuenta se encuentra inactiva.';
+				$this->response->msg = lang('SERVICES_INACTIVE_ACCOUNT');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -286:
 			case -301:
-				$this->response->title = 'Transferencia a Cuenta Maestra';
+				$this->response->title = lang('GEN_MENU_SERV_MASTER_ACCOUNT');
 				$this->response->icon = lang('CONF_ICON_INFO');
 				$this->response->msg = lang('GEN_SO_CREATE_INCORRECT');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -287:
 			case -288:
-				$this->response->title = 'Transferencia a Cuenta Maestra';
+				$this->response->title = lang('GEN_MENU_SERV_MASTER_ACCOUNT');
 				$this->response->icon = lang('CONF_ICON_INFO');
 				$this->response->msg = lang('GEN_SO_CREATE_EXPIRED');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -208:
 			case -300:
-				$this->response->title = 'Transferencia a Cuenta Maestra';
+				$this->response->title = lang('GEN_MENU_SERV_MASTER_ACCOUNT');
 				$this->response->icon = lang('CONF_ICON_INFO');
 				$this->response->msg = $response->msg;
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
