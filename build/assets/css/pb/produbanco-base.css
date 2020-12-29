@@ -330,6 +330,10 @@ textarea.form-control {
 	height: auto;
 }
 
+.input-height{
+	height: 85px;
+ }
+
 .form-group {
 	margin-bottom: .5rem;
 }

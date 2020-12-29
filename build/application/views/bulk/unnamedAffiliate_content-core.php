@@ -63,31 +63,43 @@
 						<thead class="regular secondary bg-primary">
 							<tr>
 								<?php foreach($bulkHeader AS $header): ?>
-								<th><?= $header; ?></th>
+									<th><?= $header; ?></th>
 								<?php endforeach; ?>
 							</tr>
 						</thead>
 						<tbody>
 							<?php foreach($bulkRecords AS $records): ?>
-							<tr>
-								<td><?= $records->bulkNumber ?></td>
-								<td><?= $records->totalCards ?></td>
-								<td><?= $records->issuanDate ?></td>
-								<td><?= $records->status ?></td>
-								<td class="p-0 flex justify-center items-center">
-									<form action="<?= base_url('detalle-innominadas') ?>" method="post">
-										<input type="hidden" name="bulkNumber" value="<?= $records->bulkNumber; ?>">
-										<input type="hidden" name="totalCards" value="<?= $records->totalCards; ?>">
-										<input type="hidden" name="issuanDate" value="<?= $records->issuanDate; ?>">
-										<input type="hidden" name="amount" value="<?= $records->amount; ?>">
-									</form>
-									<button class="btn mx-1 px-0 big-modal" title="<?= lang('GEN_BTN_SEE'); ?>" data-toggle="tooltip">
-										<i class="icon icon-find" aria-hidden="true"></i>
-									</button>
-								</td>
-							</tr>
+								<tr>
+									<td><?= $records->bulkNumber ?></td>
+									<td><?= $records->totalCards ?></td>
+									<td><?= $records->issuanDate ?></td>
+									<td><?= $records->status ?></td>
+									<td><?= $records->affiliatedCards ?></td>
+									<td><?= $records->forAffiliateCards ?></td>
+									<td><?= $records->availableCards ?></td>
+									<td class="p-0 flex justify-center items-center">
+										<form action="<?= base_url('detalle-innominadas') ?>" method="post">
+											<input type="hidden" name="bulkNumber" value="<?= $records->bulkNumber; ?>">
+											<input type="hidden" name="totalCards" value="<?= $records->totalCards; ?>">
+											<input type="hidden" name="issuanDate" value="<?= $records->issuanDate; ?>">
+											<input type="hidden" name="amount" value="<?= $records->amount; ?>">
+										</form>
+										<?php if ($records->forAffiliateCards != "" ): ?>
+											<?php if ($records->forAffiliateCards == 0): ?>
+												-
+												<?php else: ?>
+													<button class="btn mx-1 px-0 btn-loading" title="<?= lang('GEN_BTN_SEE'); ?>" data-toggle="tooltip">
+												<i class="icon icon-find btn-loading" aria-hidden="true"></i>
+											</button>
+											<?php endif ?>
+										<?php else: ?>
+											<button class="btn mx-1 px-0 btn-loading" title="<?= lang('GEN_BTN_SEE'); ?>" data-toggle="tooltip">
+												<i class="icon icon-find btn-loading" aria-hidden="true"></i>
+											</button>
+										<?php endif ?>
+									</td>
+								</tr>
 							<?php endforeach; ?>
-
 						</tbody>
 					</table>
 					<div class="line mb-2"></div>

@@ -26,7 +26,7 @@
           <form id="masterAccountRechargeForm" method="post" class="w-100">
             <p class="mr-5 mb-3 sh5 semibold tertiary"><?= $balanceText ?> <span class="light text"><?= $balance; ?></span></p>
             <div class="row">
-              <?php if (lang('CONF_SELECT_AMOUNT') == 'ON'): ?>
+              <?php if (lang('CONF_SELECT_TYPE') == 'ON'): ?>
               <div class="form-group col-3">
                 <label for="account" id="account"><?= lang('GEN_ACCOUNT'); ?></label>
                 <input type="text" id="accountUser" name="accountUser" class="form-control px-1" value="<?= $fundingAccount; ?>" autocomplete="off"
@@ -58,12 +58,10 @@
                   disabled>
                 <div class="help-block"></div>
               </div>
-            </div>
-
-            <div class="row flex justify-end my-3">
-              <div class="col-4 col-lg-3 col-xl-3 form-group">
+              <?php if (lang('CONF_INPUT_PASS') == 'ON') : ?>
+              <div class="col-3 form-group mt-3 ml-auto">
                 <div class="input-group">
-                  <input id="password-tranfer" name="password" class="form-control pwd-input pr-0 pwd" type="password" autocomplete="off"
+                  <input id="passwordTranfer" name="password" class="form-control pwd-input pr-0 pwd" type="password" autocomplete="off"
                     placeholder="<?= lang('GEN_PLACE_PASSWORD'); ?>" disabled>
                   <div class="input-group-append">
                     <span id="pwd_action" class="input-group-text pwd-action" title="<?= lang('GEN_SHOW_PASS') ?>">
@@ -73,13 +71,13 @@
                 </div>
                 <div class="help-block bulk-select text-left"></div>
               </div>
-              <div class="col-3">
+              <?php endif; ?>
+              <div class="col-3 mt-3 <?= $skipInputPass; ?>">
                 <button id="masterAccountRechargeBtn" class="btn btn-primary btn-small btn-loading flex ml-auto">
                   <?= lang('GEN_BTN_TRANSFER'); ?>
                 </button>
               </div>
             </div>
-
           </form>
         </div>
         <div class="line mb-2"></div>
@@ -118,12 +116,29 @@
       </div>
       <div class="hide-table hide">
         <div class="flex pb-5 flex-column">
-          <span class="line-text mb-2 h4 semibold primary">Resultados</span>
+          <span class="line-text mb-2 h4 semibold primary"><?= lang('GEN_TABLE_RESULTS'); ?></span>
           <div class="center mx-1">
-            <div class="flex ml-4 py-3 flex-auto justify-between">
-              <p class="mr-5 h5 semibold tertiary">Saldo disponible: <span id="balance-aviable" class="light text"></span></p>
-              <p class="mr-5 mb-0 h5 semibold tertiary">Comisión por transacción: <span id="cost-trans" class="light text"></span></p>
-              <p class="mr-5 mb-0 h5 semibold tertiary">Comisión por Consultar saldo: <span id="cost-inquiry" class="light text"></span></p>
+            <div class="row flex py-2">
+              <div class="col-4">
+                <label><?= lang('SERVICES_AVAILABLE_BALANCE'); ?></label>
+                <span id="balance-aviable" class="light text block py-0"></span>
+              </div>
+              <?php if (lang('CONF_SECTION_COMMISSION') == 'ON'): ?>
+              <div class="col-4">
+                <label><?= lang('SERVICES_COMMISSION_TRANS'); ?></label>
+                <span id="cost-trans" class="light text block py-0"></span>
+              </div>
+              <div class="col-4">
+                <label><?= lang('SERVICES_COMMISSION_CONSULTATION'); ?></label>
+                <span id="cost-inquiry" class="light text block py-0"></span>
+              </div>
+              <?php endif; ?>
+              <?php if (lang('CONF_BALANCE_ACC_CONCENTRATOR') == 'ON'): ?>
+              <div class="col-4">
+                <label><?= lang('SERVICES_BALANCE_ACC_CONCENTRATOR'); ?></label>
+                <span id="balance-acc-concentrator" class="light text form-control py-0"></span>
+              </div>
+              <?php endif; ?>
             </div>
 
             <table id="tableServicesMaster" class="cell-border h6 display w-100">

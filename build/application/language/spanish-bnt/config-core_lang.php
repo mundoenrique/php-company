@@ -58,7 +58,7 @@ $lang['CONF_TERMINAL_COLUMN']= 'OFF';
 $lang['CONF_SECUENCE_COLUMN']= 'OFF';
 $lang['CONF_STATUS_ACCOUNT_ADD_COLUMNS'] = 'OFF';
 //UPPER CASE INPUTS
-$lang['CONF_INPUT_UPPERCASE']= 'OFF';
+$lang['CONF_INPUT_UPPERCASE']= 'ON';
 //REMOTE AUTHORIZATIONS
 $lang['CONF_REMOTE_AUTH'] = 'ON';
 $lang['CONF_AUTH_LIST'] = [
@@ -99,3 +99,8 @@ $lang['CONF_AUTH_URL'] = [
 		'BEP' => 'https://nixe.ixe.com.mx/nbxi/autorizacionremota.aspx'
 	]
 ];
+//MASTER ACCOUNT
+$lang['CONF_SECTION_COMMISSION'] = 'ON';
+$lang['CONF_BALANCE_ACC_CONCENTRATOR'] = 'OFF';
+//BULK UNNAMED AFFILIATED CARDS
+$lang['CONF_TABLE_AFFILIATED_COLUMNS'] = 'OFF';
