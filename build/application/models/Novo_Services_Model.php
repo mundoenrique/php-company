@@ -236,11 +236,12 @@ class Novo_Services_Model extends NOVO_Model {
 
 				if ($dataRequest->action == 'CHECK_BALANCE') {
 					$this->response->code = 0;
+
 					foreach ($response->listadoTarjetas->lista as $key => $cards) {
 						$record = new stdClass();
 						$record->usersId = $cards->id_ext_per;
 						$record->cardNumber = $cards->noTarjetaConMascara;
-						$record->balance = isset($cards->saldos) ?  lang('GEN_CURRENCY').' '.currencyFormat($cards->saldos->disponible) : '--';
+						$record->balance = isset($cards->saldos) ? lang('GEN_CURRENCY').' '.$cards->saldos->disponible : '--';
 						$listResopnse[] = $record;
 
 						if ($record->balance == '--') {
