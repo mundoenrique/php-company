@@ -6,8 +6,7 @@ $lang['USER_SIGNIN_SUSPENDED'] = 'Usuario no disponible, se encuentra inactivo';
 $lang['USER_SIGNIN_NO_MIGRED'] = 'Estimado %s tu usuario no ha sido migrado de la aplicación anterior';
 $lang['USER_SIGNIN_OLD_APP'] = 'Usuario aplicación anterior';
 $lang['USER_EXPIRE_TIME'] = 'El tiempo permitido para realizar la operación expiró, intenta nuevamente.';
-//LOGIN
-$lang['LOGIN_WELCOME_TITLE'] = 'Conexión Empresas Online';
+$lang['USER_WELCOME_TITLE'] = '';
 $lang['LOGIN_RECOVER_PASS'] = '¿Olvidaste tu contraseña?';
 $lang['LOGIN_WELCOME_MESSAGE']='Con este sistema las gestiones de pago de tu empresa son más eficientes, seguras y rápidas. Empieza a disfrutar de todas las ventajas que te ofrece Conexión Empresas Online.';
 $lang['LOGIN_BTN'] = 'Ingresar';

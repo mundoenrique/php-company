@@ -1341,6 +1341,9 @@ class Novo_Bulk_Model extends NOVO_Model {
 				lang('GEN_TABLE_NUMBER_CARDS'),
 				lang('GEN_TABLE_BULK_ISSUE_DATE'),
 				lang('GEN_TABLE_STATUS'),
+				lang('GEN_TABLE_AFFILIATED_CARDS'),
+				lang('GEN_TABLE_FOR_AFFILIATE_CARDS'),
+				lang('GEN_TABLE_AVAILABLE_CARDS'),
 				lang('GEN_TABLE_OPTIONS')
 			],
 			'bulkRecords' => [],
@@ -1358,6 +1361,16 @@ class Novo_Bulk_Model extends NOVO_Model {
 						$record->bulkNumber = $records->acnumlote;
 						$record->totalCards = $records->ncantregs;
 						$record->issuanDate = $records->dtfechorcarga;
+						$record->affiliatedCards = "";
+						$record->forAffiliateCards = "";
+						$record->availableCards = "";
+
+						if (array_key_exists('numTarAfiliadas', $records)) {
+							$record->affiliatedCards = $records->numTarAfiliadas;
+							$record->forAffiliateCards = $records->numTarPorAfiliar;
+							$record->availableCards = $records->numTarDisponible;
+						}
+
 						$record->amount = $records->nmonto;
 						$record->status = ucfirst(mb_strtolower($records->status));
 						array_push(

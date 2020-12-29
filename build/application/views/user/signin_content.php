@@ -4,7 +4,7 @@
 <center class="margin-bottom">
 	<img src="<?= $this->asset->insertFile(lang('GEN_LOGO_HEADER')); ?>" alt="<?= lang('GEN_ALTERNATIVE_TEXT') ?>">
 </center>
-<h1 class="welcome-title-bp"><?= lang('LOGIN_WELCOME_TITLE'); ?></h1>
+<h1 class="welcome-title-bp"><?= lang('USER_WELCOME_TITLE'); ?></h1>
 <?php endif; ?>
 
 <div id="sidebar">

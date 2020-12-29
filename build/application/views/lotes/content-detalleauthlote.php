@@ -171,7 +171,7 @@
 				echo '</table></tbody>';
 			} elseif ($data[0]->ctipolote=='1') {
 				echo "<h2>".lang('TABLA_REG_MSJ')."</h2>";
-			} elseif(($data[0]->ctipolote=='2' || $data[0]->ctipolote=='5' || $data[0]->ctipolote=='L') && count($data[0]->registrosLoteRecarga) > 0) { //LOTES DE RECARGA
+			} elseif(($data[0]->ctipolote=='2' || $data[0]->ctipolote=='5' || $data[0]->ctipolote=='L' || $data[0]->ctipolote=='F') && count($data[0]->registrosLoteRecarga) > 0) { //LOTES DE RECARGA
 				echo $html_view_results;
 				echo '
 					<table id="table-lote-detail">
@@ -184,7 +184,7 @@
 						<tbody>';
 				foreach ($data[0]->registrosLoteRecarga as $registros) {
 
-					if($data[0]->ctipolote=='5') {//Lote Recarga en Línea
+					if($data[0]->ctipolote=='5' || $data[0]->ctipolote=='F') {//Lote Recarga en Línea
 						$estatus = ($registros->status == '3') ? 'En Proceso' : (($registros->status == '6') ? 'Procesada' : 'Rechazada');
 					}elseif($data[0]->ctipolote=='L') {//Lote Cargos en Línea
 						$estatus = ($registros->status == '1') ? 'Procesada' : (($registros->status == '2') ? 'Invalida' : (($registros->status == '0') ? 'Pendiente' : 'Rechazada'));
@@ -200,7 +200,7 @@
 					';
 				}
 				echo '</table></tbody>';
-			} elseif ($data[0]->ctipolote=='2' || $data[0]->ctipolote=='5' || $data[0]->ctipolote=='L') {
+			} elseif ($data[0]->ctipolote=='2' || $data[0]->ctipolote=='5' || $data[0]->ctipolote=='L' || $data[0]->ctipolote=='F') {
 				echo "<h2>".lang('TABLA_REG_MSJ')."</h2>";
 			} elseif ( ($data[0]->ctipolote=='E' || $data[0]->ctipolote=='G') && count($data[0]->registrosLoteGuarderia) > 0 ) { //LOTES DE GUARDERIA  lang		('TABLA_REG_GUARDERIA_NOMB') lang('TABLA_REG_GUARDERIA_APEL') lang('TABLA_REG_GUARDERIA_UBIC')
 				echo $html_view_results;

@@ -34,7 +34,6 @@ Class Novo_Services extends Novo_Controller {
 			"services/transfMasterAccount",
 			'third_party/jquery.mask-1.14.16',
 		);
-
 		$responseAttr = 0;
 		$showRechargeAccount = FALSE;
 
@@ -44,16 +43,19 @@ Class Novo_Services extends Novo_Controller {
 				$this->includeAssets->jsFiles,
 				'services/transfMasterRecharge'
 			);
+
 			$this->method = 'CallWs_MasterAccountBalance_Services';
 			$responseAttr = $this->loadModel();
 
 			foreach ($responseAttr->data->info AS $index => $render) {
 				$this->render->$index = $render;
 			}
+			$responseAttr->data->params['showRechargeAccount'] = $showRechargeAccount;
 		}
 
 		$this->responseAttr($responseAttr);
 		$this->render->titlePage = lang('GEN_MENU_SERV_MASTER_ACCOUNT');
+		$this->render->skipInputPass = lang('CONF_INPUT_PASS') == 'OFF' ? 'ml-auto' : '';
 		$this->render->showRechargeAccount = $showRechargeAccount;
 		$this->views = ['services/'.$view];
 		$this->loadView($view);

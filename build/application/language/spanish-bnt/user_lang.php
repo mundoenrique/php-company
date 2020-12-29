@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 //LOGIN
-$lang['LOGIN_WELCOME_TITLE'] = 'BEM/BEP';
+$lang['USER_WELCOME_TITLE'] = 'BEM/BEP';
 //USER PERMISSIONS
 $lang['PERMITS_NOTE_ACTIVE'] = 'el permiso está activo';
 //TERMS_CONTENT
