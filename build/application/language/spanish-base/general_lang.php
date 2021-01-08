@@ -395,6 +395,7 @@ $lang['GEN_CHECK_BALANCE'] = 'Consultar saldo';
 $lang['GEN_CREDIT_TO_CARD'] = 'Abonar a tarjeta';
 $lang['GEN_DEBIT_TO_CARD'] = 'Cargo a tarjeta';
 $lang['GEN_TEMPORARY_LOCK'] = 'Bloqueo temporal';
+$lang['GEN_LOCK_TYPES'] = 'Bloqueo de tarjeta';
 $lang['GEN_TEMPORARY_UNLOCK'] = 'Desbloqueo tarjeta';
 $lang['GEN_CARD_ASSIGNMENT'] = 'Asignación de tarjeta';
 $lang['GEN_VALID_AMOUNT'] = 'Indica un monto válido';
@@ -419,6 +420,12 @@ $lang['GEN_TABLE_USERACT_FUNCTION'] = 'Función';
 $lang['GEN_TABLE_USERACT_DATE'] = 'Fecha';
 $lang['REPORTS_TITLE'] = 'Configuración';
 $lang['REPORTS_NO_FILE_EXIST'] = 'No fue posible generar el archivo, por favor intenta de nuevo';
+$lang['GEN_LOCK_TYPES_BLOCK'] = [
+	'41' => 'Bloqueo por extravío',
+	'PB' => 'Bloqueo termporal',
+	'43' => 'Bloqueo por robo'
+];
+
 //DATATABLES LANG CLOSING BALANCE
 $lang['GEN_ACCOUNT_CLOSING_BALANCE'] = 'Cuenta';
 $lang['GEN_LOGIN_IP_MSG'] = 'Estás ingresando desde un equipo no habitual, por seguridad te enviaremos un código de verificación a la dirección de correo <span class="semibold">%s</span>, indícalo a continuación.';

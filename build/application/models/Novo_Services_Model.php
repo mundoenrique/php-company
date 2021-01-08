@@ -141,16 +141,26 @@ class Novo_Services_Model extends NOVO_Model {
 
 		foreach($dataRequest->cards AS $cardsInfo) {
 			$cardsInfo = json_decode($cardsInfo);
-			$card  = [
-				'noTarjeta' => $cardsInfo->Cardnumber,
-				'id_ext_per' => $cardsInfo->idNumber,
-				'montoTransaccion' => $cardsInfo->amount
-			];
+
+			if($dataRequest->action == "LOCK_TYPES"){
+				$card  = [
+					'noTarjeta' => $cardsInfo->Cardnumber,
+					'id_ext_per' => $cardsInfo->idNumber,
+					'codBloqueo' => $cardsInfo->status
+				];
+			} else {
+				$card  = [
+					'noTarjeta' => $cardsInfo->Cardnumber,
+					'id_ext_per' => $cardsInfo->idNumber,
+					'montoTransaccion' => $cardsInfo->amount
+				];
+			}
 
 			switch ($dataRequest->action) {
 				case 'CHECK_BALANCE':
 				case 'TEMPORARY_LOCK':
 				case 'TEMPORARY_UNLOCK':
+				case 'LOCK_TYPES':
 					unset($card['montoTransaccion']);
 				break;
 				case 'CARD_ASSIGNMENT':
@@ -176,6 +186,10 @@ class Novo_Services_Model extends NOVO_Model {
 				$this->dataRequest->idOperation = 'cargoTM';
 			break;
 			case 'TEMPORARY_LOCK':
+				$this->dataAccessLog->operation = lang('GEN_TEMPORARY_LOCK');
+				$this->dataRequest->idOperation = 'bloqueoTM';
+			break;
+			case 'LOCK_TYPES':
 				$this->dataAccessLog->operation = lang('GEN_TEMPORARY_LOCK');
 				$this->dataRequest->idOperation = 'bloqueoTM';
 			break;
@@ -219,12 +233,17 @@ class Novo_Services_Model extends NOVO_Model {
 
 		switch ($this->isResponseRc) {
 			case 0:
-				$this->response->title = lang('GEN_'.$dataRequest->action);
+
+				if($dataRequest->action == "LOCK_TYPES"){
+					$this->response->title = lang('GEN_LOCK_TYPES');
+				} else {
+					$this->response->title = lang('GEN_'.$dataRequest->action);
+				}
 				$this->response->icon = lang('CONF_ICON_SUCCESS');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 
-				if ($dataRequest->action == 'TEMPORARY_LOCK' || $dataRequest->action == 'TEMPORARY_UNLOCK') {
-					$blockType = $dataRequest->action == 'TEMPORARY_LOCK' ? 'Bloqueda' : 'Desbloqueda';
+				if ($dataRequest->action == 'TEMPORARY_LOCK' || $dataRequest->action == 'TEMPORARY_UNLOCK' || $dataRequest->action == 'LOCK_TYPES') {
+					$blockType = $dataRequest->action == 'LOCK_TYPES' ? 'Bloqueda' : 'Desbloqueda';
 					$this->response->msg =  novoLang(lang('SERVICES_BLOCKING_CARD'), [$cardsList[0]['noTarjeta'], $blockType]);
 					$this->response->update = TRUE;
 				}
