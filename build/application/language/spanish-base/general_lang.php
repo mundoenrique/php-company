@@ -420,6 +420,7 @@ $lang['GEN_TABLE_USERACT_FUNCTION'] = 'Función';
 $lang['GEN_TABLE_USERACT_DATE'] = 'Fecha';
 $lang['REPORTS_TITLE'] = 'Configuración';
 $lang['REPORTS_NO_FILE_EXIST'] = 'No fue posible generar el archivo, por favor intenta de nuevo';
+$lang['GEN_REASON_REQUEST'] = 'Tipo de solicitud';
 $lang['GEN_LOCK_TYPES_BLOCK'] = [
 	'41' => 'Bloqueo por extravío',
 	'PB' => 'Bloqueo termporal',
@@ -497,7 +498,7 @@ $lang['RESP_SUCCESSFULL_ENABLE_USER'] = "El usuario %s ha sido habilitado exitos
 $lang['RESP_AUTH_ORDER_SERV'] = 'No fue posible obtener los datos para realizar el cálculo de la orden de servicio';
 $lang['RESP_NO_LIST'] = 'No fue posible obtener el listado';
 $lang['RESP_SERVICE_ORDES'] = 'No existen órdenes de servicio en estado "<strong>%s</strong>" para el rango de fecha seleccionado';
-$lang['GEN_GET_AUTH_USER_FAIL'] = 'No fue posible identicarte en la aplicación';
+$lang['GEN_GET_AUTH_USER_FAIL'] = 'No fue posible identificarte en la aplicación';
 $lang['GEN_GET_AUTH_KEY_FAIL'] = 'No fue posible generar la llave de autorización';
 //UPLOAD FILE
 $lang['GEN_UPLOAD_SFTP(0)'] = 'CURLE_PROCESS_OK';

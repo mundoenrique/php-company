@@ -361,13 +361,12 @@ function MasterAccBuildFormActions(currentAction, currentTitle, currentBtn) {
 		inputModal += '</div>';
 	} else {
 		if (currentAction == 'LOCK_TYPES') {
-			inputModal += '<div class="form-group col-12 pl-0">';
-			inputModal += '<div class="input-group">';
-			inputModal += '	<label for="cars">Elige el tipo de bloqueo:</label><select name="lock-type" id="lock-type" >'
+			inputModal += '<div class="form-group col-10 pl-0">';
+			inputModal += '<label>'+ lang.GEN_REASON_REQUEST +'</label>'
+			inputModal += '<select class="custom-select form-control">'
 			$.each(lang.GEN_LOCK_TYPES_BLOCK, function(key, element){
 				inputModal += '<option value="'+ key +'">'+ element +'</option>'
 			})
-			inputModal += '</div>';
 			inputModal += '<div class="help-block"></div>';
 			inputModal += '</div>';
 		}
@@ -405,7 +404,7 @@ function MasterAccBuildFormActions(currentAction, currentTitle, currentBtn) {
 			sendRequest(currentAction, currentTitle, currentBtn, data);
 		}
 	}
-
+}
 // 	$('#system-info').on('click', '.send', function() {
 // 		$('#accept').removeClass('send');
 // 		data  = $("#lock-type").val();
