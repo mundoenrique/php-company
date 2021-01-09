@@ -394,11 +394,18 @@ function MasterAccBuildFormActions(currentAction, currentTitle, currentBtn) {
 					text: lang.GEN_BTN_ACCEPT,
 					action: 'destroy'
 				},
+				btn2: {
+					text: lang.GEN_BTN_CANCEL,
+					action: 'destroy'
+				}
 			}
 
 			var block_card_types = 'Bloqueo de tarjeta';
 			appMessages(block_card_types, inputModal, lang.CONF_ICON_INFO, modalBtn);
 			$('#accept').addClass('send-request');
+			$('#cancel').on('click', function(){
+				$('.cover-spin').removeAttr("style");
+				})
 		} else {
 			var data = 0;
 			sendRequest(currentAction, currentTitle, currentBtn, data);
