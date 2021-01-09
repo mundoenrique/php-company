@@ -57,7 +57,7 @@
 							<?php endif; ?>
 
 							<?php endif; ?>
-							<form id="formManagement" name="formManagement" method="post">
+							<form name="formManagement" method="post">
 								<input type="hidden" name="idUser" value="<?= $user->idUser ?>">
 								<input type="hidden" name="nameUser" value="<?= $user->name ?>">
 								<input type="hidden" name="mailUser" value="<?= $user->mail ?>">
