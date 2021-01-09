@@ -234,11 +234,7 @@ class Novo_Services_Model extends NOVO_Model {
 		switch ($this->isResponseRc) {
 			case 0:
 
-				if($dataRequest->action == "LOCK_TYPES"){
-					$this->response->title = lang('GEN_LOCK_TYPES');
-				} else {
-					$this->response->title = lang('GEN_'.$dataRequest->action);
-				}
+				$this->response->title = lang('GEN_'.$dataRequest->action);
 				$this->response->icon = lang('CONF_ICON_SUCCESS');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 

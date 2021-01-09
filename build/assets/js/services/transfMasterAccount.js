@@ -363,7 +363,7 @@ function MasterAccBuildFormActions(currentAction, currentTitle, currentBtn) {
 		if (currentAction == 'LOCK_TYPES') {
 			inputModal += '<div class="form-group col-10 pl-0">';
 			inputModal += '<label>'+ lang.GEN_REASON_REQUEST +'</label>'
-			inputModal += '<select class="custom-select form-control">'
+			inputModal += '<select class="custom-select form-control" name="lock-type" id="lock-type">'
 			$.each(lang.GEN_LOCK_TYPES_BLOCK, function(key, element){
 				inputModal += '<option value="'+ key +'">'+ element +'</option>'
 			})
