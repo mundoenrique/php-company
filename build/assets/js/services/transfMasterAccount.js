@@ -284,7 +284,7 @@ $(function () {
 			btnText = $(this).text().trim();
 
 			if (lang.CONF_REMOTE_AUTH == 'OFF' || (lang.CONF_REMOTE_AUTH == 'ON' && $.inArray(action, lang.CONF_AUTH_LIST) == -1)) {
-				data= 0
+				data = 0;
 				sendRequest(action, title, $(this), data);
 			} else if (formValidateTrim(form, title)) {
 				btnRemote = $(this);
@@ -346,6 +346,17 @@ function MasterAccBuildFormActions(currentAction, currentTitle, currentBtn) {
 		inputModal += '</div>';
 	}
 
+	if (currentAction == 'LOCK_TYPES') {
+		inputModal += '<div class="form-group col-10 pl-0">';
+		inputModal += '<label>'+ lang.GEN_REASON_REQUEST +'</label>'
+		inputModal += '<select class="custom-select form-control" name="lock-type" id="lock-type">'
+		$.each(lang.GEN_LOCK_TYPES_BLOCK, function(key, element){
+			inputModal += '<option value="'+ key +'">'+ element +'</option>'
+		})
+		inputModal += '<div class="help-block"></div>';
+		inputModal += '</div>';
+	}
+
 	if (lang.CONF_REMOTE_AUTH == 'OFF') {
 		$('#accept').addClass('send-request');
 
@@ -360,16 +371,6 @@ function MasterAccBuildFormActions(currentAction, currentTitle, currentBtn) {
 		inputModal += '<div class="help-block"></div>';
 		inputModal += '</div>';
 	} else {
-		if (currentAction == 'LOCK_TYPES') {
-			inputModal += '<div class="form-group col-10 pl-0">';
-			inputModal += '<label>'+ lang.GEN_REASON_REQUEST +'</label>'
-			inputModal += '<select class="custom-select form-control" name="lock-type" id="lock-type">'
-			$.each(lang.GEN_LOCK_TYPES_BLOCK, function(key, element){
-				inputModal += '<option value="'+ key +'">'+ element +'</option>'
-			})
-			inputModal += '<div class="help-block"></div>';
-			inputModal += '</div>';
-		}
 		$('#accept').addClass('get-auth-key');
 		currentBtn = btnRemote;
 		form = $('#nonForm');
@@ -387,7 +388,7 @@ function MasterAccBuildFormActions(currentAction, currentTitle, currentBtn) {
 		remoteAuthArgs.action = currentAction;
 		remoteAuthArgs.title = currentTitle;
 		getauhtKey();
-	} else {
+	}	else {
 		if (currentAction == 'LOCK_TYPES') {
 			modalBtn = {
 				btn1: {
@@ -399,22 +400,22 @@ function MasterAccBuildFormActions(currentAction, currentTitle, currentBtn) {
 					action: 'destroy'
 				}
 			}
-
 			var block_card_types = 'Bloqueo de tarjeta';
 			appMessages(block_card_types, inputModal, lang.CONF_ICON_INFO, modalBtn);
-			$('#accept').addClass('send-request');
+			$('#accept').addClass('get-auth-key');
 			$('#cancel').on('click', function(){
-				$('.cover-spin').removeAttr("style");
-				})
+			$('.cover-spin').removeAttr("style");
+			})
 		} else {
-			var data = 0;
-			sendRequest(currentAction, currentTitle, currentBtn, data);
+		var data = '';
+		sendRequest(currentAction, currentTitle, currentBtn, data);
 		}
 	}
 }
+// }
 // 	$('#system-info').on('click', '.send', function() {
 // 		$('#accept').removeClass('send');
-// 		data  = $("#lock-type").val();
+// 		data = $("#lock-type").val();
 // 		console.log(currentAction, data, currentBtn);
 // 	 sendRequest(currentAction, currentTitle, currentBtn, data);
 // 	});
