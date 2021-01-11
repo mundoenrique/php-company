@@ -1541,7 +1541,7 @@ $config = [
 				],
 				[
 					'field' => 'name',
-					'rules' => 'trim|regex_match[/^[a-zA-Z0-9 áéíóúÁÉÍÓÚñÑ]*$/i]'
+					'rules' => 'trim'
 				],
 				[
 					'field' => 'mail',
