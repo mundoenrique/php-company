@@ -426,6 +426,8 @@ $lang['GEN_LOCK_TYPES_BLOCK'] = [
 	'PB' => 'Bloqueo termporal',
 	'43' => 'Bloqueo por robo'
 ];
+$lang['GEN_BLOCK_CARD'] = 'Bloqueo de tarjeta';
+$lang['GEN_BLOCK_CARD'] = 'Selecciona un tipo';
 
 //DATATABLES LANG CLOSING BALANCE
 $lang['GEN_ACCOUNT_CLOSING_BALANCE'] = 'Cuenta';

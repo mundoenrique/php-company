@@ -186,6 +186,7 @@ function validateForms(form) {
 						return check
 					}
 			}, pattern: alphanum},
+			"lock-type": {required: true, pattern: alphanumunder},
 			"documentType": {requiredSelect: true},
 			"optCode": {required: true, pattern: alphanum},
 			"firstName": { required: true, pattern: alphabeticalspace},
@@ -224,6 +225,7 @@ function validateForms(form) {
 			"description": { required: true, pattern: rechargeDesc },
 		},
 		messages: {
+			"lock-type": lang.VALIDATE_LOCK_CARD_SELECT,
 			"userName": lang.VALIDATE_USERLOGIN,
 			"userPass": {
 				verifyRequired: lang.VALIDATE_USERPASS_REQ,

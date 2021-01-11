@@ -401,7 +401,7 @@ function getResponse(Exitoso, MensajeError) {
 	if (Exitoso) {
 		switch (remoteFunction) {
 			case 'sendRequest':
-				sendRequest(remoteAuthArgs.action, remoteAuthArgs.title, btnRemote);
+				sendRequest(remoteAuthArgs.action, remoteAuthArgs.title, btnRemote, remoteAuthArgs.selectBlockCard);
 			break;
 			case 'SignDeleteBulk':
 				SignDeleteBulk(remoteAuthArgs.form, remoteAuthArgs.action, remoteAuthArgs.thisId, remoteAuthArgs.passwordSignAuht, remoteAuthArgs.modalReq);

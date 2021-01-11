@@ -6,6 +6,7 @@ var balance;
 var balanceConcentratingAccount;
 var cardsData;
 var cardHolderInf;
+var selectBlockCard;
 $(function () {
 	var getAmount;
 	var title;
@@ -256,19 +257,22 @@ $(function () {
 
 	$('#system-info').on('click', '.send-request', function () {
 		form = $('#password-modal');
+		var type = getDataForm(form);
 		btnText = $(this).text().trim();
-		var data = $('#lock-type').val();
-		sendRequest(action, title, $(this), data)
+		selectBlockCard = type['lock-type'];
+		sendRequest(action, title, $(this), selectBlockCard)
 	});
 
 	$('#system-info').on('click', '.get-auth-key', function () {
 		form = $('#password-modal');
 		btnText = $(this).text().trim();
+		var type = getDataForm(form);
 
 		if (formValidateTrim(form, title)) {
 			btnRemote = $(this);
 			remoteAuthArgs.action = action;
 			remoteAuthArgs.title = title;
+			remoteAuthArgs.selectBlockCard = type['lock-type'];
 			getauhtKey();
 		}
 	});
@@ -284,8 +288,7 @@ $(function () {
 			btnText = $(this).text().trim();
 
 			if (lang.CONF_REMOTE_AUTH == 'OFF' || (lang.CONF_REMOTE_AUTH == 'ON' && $.inArray(action, lang.CONF_AUTH_LIST) == -1)) {
-				data = 0;
-				sendRequest(action, title, $(this), data);
+				sendRequest(action, title, $(this));
 			} else if (formValidateTrim(form, title)) {
 				btnRemote = $(this);
 				remoteAuthArgs.action = action;
@@ -297,6 +300,7 @@ $(function () {
 
 	$('#system-info').on('click', '#cancel', function () {
 		$('#tableServicesMaster').find('tr').removeClass('selected');
+		$('.cover-spin').removeAttr("style");
 	})
 
 	$("#tableServicesMaster").on({
@@ -350,9 +354,11 @@ function MasterAccBuildFormActions(currentAction, currentTitle, currentBtn) {
 		inputModal += '<div class="form-group col-10 pl-0">';
 		inputModal += '<label>'+ lang.GEN_REASON_REQUEST +'</label>'
 		inputModal += '<select class="custom-select form-control" name="lock-type" id="lock-type">'
+		inputModal += '<option value="" selected>Selecciona un tipo de bloqueo...</option>'
 		$.each(lang.GEN_LOCK_TYPES_BLOCK, function(key, element){
 			inputModal += '<option value="'+ key +'">'+ element +'</option>'
 		})
+		inputModal += '</select>';
 		inputModal += '<div class="help-block"></div>';
 		inputModal += '</div>';
 	}
@@ -393,33 +399,20 @@ function MasterAccBuildFormActions(currentAction, currentTitle, currentBtn) {
 			modalBtn = {
 				btn1: {
 					text: lang.GEN_BTN_ACCEPT,
-					action: 'destroy'
+					action: 'none'
 				},
 				btn2: {
 					text: lang.GEN_BTN_CANCEL,
 					action: 'destroy'
 				}
 			}
-			var block_card_types = 'Bloqueo de tarjeta';
-			appMessages(block_card_types, inputModal, lang.CONF_ICON_INFO, modalBtn);
-			$('#accept').addClass('get-auth-key');
-			$('#cancel').on('click', function(){
-			$('.cover-spin').removeAttr("style");
-			})
+
+			appMessages(lang.GEN_BLOCK_CARD, inputModal, lang.CONF_ICON_INFO, modalBtn);
 		} else {
-		var data = '';
-		sendRequest(currentAction, currentTitle, currentBtn, data);
+		sendRequest(currentAction, currentTitle, currentBtn);
 		}
 	}
 }
-// }
-// 	$('#system-info').on('click', '.send', function() {
-// 		$('#accept').removeClass('send');
-// 		data = $("#lock-type").val();
-// 		console.log(currentAction, data, currentBtn);
-// 	 sendRequest(currentAction, currentTitle, currentBtn, data);
-// 	});
-//  }
 
 function amountValidate(getAmount, currentTitle) {
 	var valid = true
@@ -463,7 +456,7 @@ function amountValidate(getAmount, currentTitle) {
 	return valid;
 }
 
-function sendRequest(currentAction, currentTitle, currentBtn, data) {
+function sendRequest(currentAction, currentTitle, currentBtn, selectBlockCard) {
 	if (formValidateTrim(form, currentTitle)) {
 		$('#accept').removeClass('send-request');
 		$('#accept').removeClass('get-auth-key');
@@ -480,8 +473,9 @@ function sendRequest(currentAction, currentTitle, currentBtn, data) {
 			}
 
 			if (currentAction == 'LOCK_TYPES') {
-				info['status'] = data;
+				info['status'] = selectBlockCard;
 			}
+
 			cardsInfo.push(JSON.stringify(info));
 		}
 
@@ -523,7 +517,6 @@ function sendRequest(currentAction, currentTitle, currentBtn, data) {
 			}
 
 			if (currentAction == 'TEMPORARY_LOCK' || currentAction == 'TEMPORARY_UNLOCK' || currentAction == 'CARD_ASSIGNMENT' || currentAction == 'LOCK_TYPES') {
-
 				cardBlockUnblock(response);
 			}
 

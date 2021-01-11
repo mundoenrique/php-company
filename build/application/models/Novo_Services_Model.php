@@ -146,7 +146,7 @@ class Novo_Services_Model extends NOVO_Model {
 				$card  = [
 					'noTarjeta' => $cardsInfo->Cardnumber,
 					'id_ext_per' => $cardsInfo->idNumber,
-					'codBloqueo' => $cardsInfo->status
+					'codBloqueo' => $cardsInfo->status,
 				];
 			} else {
 				$card  = [
