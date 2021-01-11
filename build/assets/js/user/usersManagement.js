@@ -35,7 +35,7 @@ $(function () {
 		var form;
 		switch(action) {
 			case lang.GEN_BTN_ENABLE_USER:
-				form = $(this).parent().find('#formManagement');
+				form = $(this).parent().find('form[name=formManagement]');
 				insertFormInput(true, form);
 				var passData = form.toArray();
 				var data;
@@ -58,7 +58,7 @@ $(function () {
 
 				break;
 			case lang.GEN_BTN_EDIT_PERMITS:
-				form = $(this).parent().find('#formManagement');
+				form = $(this).parent().find('form[name=formManagement]');
 				insertFormInput(true, form);
 				form.attr('action', baseURL+'permisos-usuario');
 				form.append('<input type="hidden" name="editPermits" value="edit">');
