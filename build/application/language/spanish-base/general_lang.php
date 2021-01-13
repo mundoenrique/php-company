@@ -420,15 +420,6 @@ $lang['GEN_TABLE_USERACT_FUNCTION'] = 'Función';
 $lang['GEN_TABLE_USERACT_DATE'] = 'Fecha';
 $lang['REPORTS_TITLE'] = 'Configuración';
 $lang['REPORTS_NO_FILE_EXIST'] = 'No fue posible generar el archivo, por favor intenta de nuevo';
-$lang['GEN_REASON_REQUEST'] = 'Tipo de solicitud';
-$lang['GEN_LOCK_TYPES_BLOCK'] = [
-	'41' => 'Bloqueo por extravío',
-	'PB' => 'Bloqueo termporal',
-	'43' => 'Bloqueo por robo'
-];
-$lang['GEN_BLOCK_CARD'] = 'Bloqueo de tarjeta';
-$lang['GEN_BLOCK_CARD'] = 'Selecciona un tipo';
-
 //DATATABLES LANG CLOSING BALANCE
 $lang['GEN_ACCOUNT_CLOSING_BALANCE'] = 'Cuenta';
 $lang['GEN_LOGIN_IP_MSG'] = 'Estás ingresando desde un equipo no habitual, por seguridad te enviaremos un código de verificación a la dirección de correo <span class="semibold">%s</span>, indícalo a continuación.';

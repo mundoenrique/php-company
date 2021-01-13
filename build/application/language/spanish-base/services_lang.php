@@ -21,6 +21,14 @@ $lang['SERVICES_PENDING_MEMBER_SHIP'] = 'El empleado tiene una afiliación pendi
 $lang['SERVICES_USER_BULK_CONFIRM'] = 'El empleado esta en un lote por confirmar';
 $lang['SERVICES_CARD_BULK_CONFIRM'] = 'La tarjeta %s esta en un lote por comfirmar.';
 $lang['SERVICES_CARD_BULK_AFFILIATED'] = 'La tarjeta %s ya fue afiliada o esta por afiliar en un lote confirmado.';
+$lang['SERVICES_REASON_REQUEST'] = 'Tipo de solicitud';
+$lang['SERVICES_LOCK_TYPES_BLOCK'] = [
+	'PB' => 'Bloqueo termporal',
+	'41' => 'Bloqueo por extravío',
+	'43' => 'Bloqueo por robo'
+];
+$lang['SERVICES_BLOCK_CARD'] = 'Bloqueo de tarjeta';
+$lang['SERVICES_BLOCK_CARD'] = 'Selecciona un tipo';
 $lang['SERVICES_INQUIRY_OPTIONS'] = [
 	'ACTUALIZAR_DATOS' => 'UPDATE_DATA',
 	'CONSULTA_SALDO_TARJETA' => 'INQUIRY_BALANCE',
