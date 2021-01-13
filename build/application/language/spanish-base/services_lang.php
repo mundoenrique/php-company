@@ -24,7 +24,7 @@ $lang['SERVICES_CARD_BULK_AFFILIATED'] = 'La tarjeta %s ya fue afiliada o esta p
 $lang['SERVICES_REASON_REQUEST'] = 'Tipo de solicitud';
 $lang['SERVICES_REASON_LOCK_TYPES'] = 'Indica el tipo de bloqueo';
 $lang['SERVICES_LOCK_TYPES_BLOCK'] = [
-	'PB' => 'Bloqueo termporal',
+	'PB' => 'Bloqueo temporal',
 	'41' => 'Bloqueo por extravío',
 	'43' => 'Bloqueo por robo'
 ];

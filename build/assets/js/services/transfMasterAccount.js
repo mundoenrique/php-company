@@ -328,7 +328,7 @@ function MasterAccBuildFormActions(currentAction, currentTitle, currentBtn) {
 	inputModal = '<form id="password-modal" name="password-modal" class="row col-auto" onsubmit="return false;">';
 
 	if (currentAction == 'CARD_ASSIGNMENT') {
-		inputModal += '<div class="form-group col-12 pl-0">';
+		inputModal += '<div class="form-group col-12 pl-0 w-160-ie">';
 		inputModal += '<div class="input-group">';
 		inputModal += '<input class="form-control" type="text" id="cardNumber" name="cardNumber" autocomplete="off"';
 		inputModal += 'placeholder="' + lang.GEN_TABLE_CARD_NUMBER + '" req="yes">';
@@ -338,7 +338,7 @@ function MasterAccBuildFormActions(currentAction, currentTitle, currentBtn) {
 	}
 
 	if (currentAction == 'LOCK_TYPES') {
-		inputModal += '<div class="form-group col-12 pl-0">';
+		inputModal += '<div class="form-group col-12 pl-0 w-160-ie">';
 		inputModal += '<label>' + lang.SERVICES_REASON_REQUEST + '</label>'
 		inputModal += '<select class="custom-select form-control" name="lockType" id="lockType">'
 		inputModal += '<option value="" selected>'+ lang.SERVICES_REASON_LOCK_TYPES +'</option>'
@@ -355,7 +355,7 @@ function MasterAccBuildFormActions(currentAction, currentTitle, currentBtn) {
 	if (lang.CONF_REMOTE_AUTH == 'OFF') {
 		$('#accept').addClass('send-request');
 
-		inputModal += '<div class="form-group col-12 pl-0">';
+		inputModal += '<div class="form-group col-12 pl-0 w-160-ie">';
 		inputModal += '<div class="input-group">';
 		inputModal += '<input class="form-control pwd-input pwd" type="password" id="password" name="password" autocomplete="off" ';
 		inputModal += 'placeholder="' + lang.GEN_PLACE_PASSWORD + '">';
