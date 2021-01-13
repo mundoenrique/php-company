@@ -64,3 +64,4 @@ $lang['VALIDATE_VALID_AMOUNT'] = 'Indica un monto válido';
 $lang['VALIDATE_RECHAR_REGEX_DESC'] = '^[a-z0-9ñáéíóú,.:()]+$';
 $lang['VALIDATE_RECHAR_DESC1'] = 'Indica la descripción';
 $lang['VALIDATE_RECHAR_DESC2'] = 'No admite caracteres especiales ni espacios';
+$lang['VALIDATE_LOCK_CARD_SELECT'] = 'Selecciona un tipo de bloqueo';
