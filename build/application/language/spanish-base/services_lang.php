@@ -21,6 +21,7 @@ $lang['SERVICES_PENDING_MEMBER_SHIP'] = 'El empleado tiene una afiliación pendi
 $lang['SERVICES_USER_BULK_CONFIRM'] = 'El empleado esta en un lote por confirmar';
 $lang['SERVICES_CARD_BULK_CONFIRM'] = 'La tarjeta %s esta en un lote por comfirmar.';
 $lang['SERVICES_CARD_BULK_AFFILIATED'] = 'La tarjeta %s ya fue afiliada o esta por afiliar en un lote confirmado.';
+$lang['SERVICES_CARD_TRANSFER_BALANCE'] = 'No fue posible transferir el saldo a la tarjeta destino, por favor intenta más tarde.';
 $lang['SERVICES_REASON_REQUEST'] = 'Tipo de solicitud';
 $lang['SERVICES_REASON_LOCK_TYPES'] = 'Indica el tipo de bloqueo';
 $lang['SERVICES_LOCK_TYPES_BLOCK'] = [

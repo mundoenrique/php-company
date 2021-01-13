@@ -235,6 +235,7 @@ class Novo_Services_Model extends NOVO_Model {
 				if ($dataRequest->action == 'CARD_ASSIGNMENT') {
 					$maskCards = maskString($cardsList[0]['noTarjetaAsig'], 4, 6);
 					$this->response->msg =  novoLang(lang('SERVICES_ASSIGNMENT_CARD'), [$cardsList[0]['noTarjeta'], $maskCards]);
+					$this->response->update = TRUE;
 				}
 
 				if ($dataRequest->action == 'CHECK_BALANCE') {
@@ -345,6 +346,12 @@ class Novo_Services_Model extends NOVO_Model {
 				$this->response->title = lang('GEN_'.$dataRequest->action);
 				$maskCards = maskString($cardsList[0]['noTarjetaAsig'], 4, 6);
 				$this->response->msg = novoLang(lang('SERVICES_CARD_BULK_AFFILIATED'), $maskCards);
+				$this->response->icon = lang('CONF_ICON_WARNING');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			break;
+			case -431:
+				$this->response->title = lang('GEN_'.$dataRequest->action);
+				$this->response->msg = lang('SERVICES_CARD_TRANSFER_BALANCE');
 				$this->response->icon = lang('CONF_ICON_WARNING');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
