@@ -151,7 +151,8 @@ class Novo_Services_Model extends NOVO_Model {
 				case 'CHECK_BALANCE':
 				case 'TEMPORARY_UNLOCK':
 					unset($card['montoTransaccion']);
-				break;case 'TEMPORARY_LOCK':
+				break;
+				case 'TEMPORARY_LOCK':
 					unset($card['montoTransaccion']);
 					$card['codBloqueo'] = $cardsInfo->lockType;
 				break;

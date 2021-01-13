@@ -338,10 +338,10 @@ function MasterAccBuildFormActions(currentAction, currentTitle, currentBtn) {
 	}
 
 	if (currentAction == 'TEMPORARY_LOCK') {
-		inputModal += '<div class="form-group col-10 pl-0">';
+		inputModal += '<div class="form-group col-12 pl-0">';
 		inputModal += '<label>' + lang.SERVICES_REASON_REQUEST + '</label>'
 		inputModal += '<select class="custom-select form-control" name="lockType" id="lockType">'
-		inputModal += '<option value="" selected>Indica el tipo de bloqueo</option>'
+		inputModal += '<option value="" selected>'+ lang.SERVICES_REASON_LOCK_TYPES +'</option>'
 
 		$.each(lang.SERVICES_LOCK_TYPES_BLOCK, function (key, element) {
 			inputModal += '<option value="' + key + '">' + element + '</option>'
