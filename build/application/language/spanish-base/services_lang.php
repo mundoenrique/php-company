@@ -28,7 +28,6 @@ $lang['SERVICES_LOCK_TYPES_BLOCK'] = [
 	'41' => 'Bloqueo por extravío',
 	'43' => 'Bloqueo por robo'
 ];
-$lang['SERVICES_BLOCK_CARD'] = 'Bloqueo de tarjeta';
 $lang['SERVICES_INQUIRY_OPTIONS'] = [
 	'ACTUALIZAR_DATOS' => 'UPDATE_DATA',
 	'CONSULTA_SALDO_TARJETA' => 'INQUIRY_BALANCE',

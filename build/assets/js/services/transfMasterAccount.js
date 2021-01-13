@@ -178,8 +178,8 @@ $(function () {
 					}
 
 					if (access.TRABLQ && data.status == '') {
-						options += '<button class="btn mx-1 px-0" title="' + lang.GEN_TEMPORARY_LOCK + '" data-toggle="tooltip" amount="0" ';
-						options += 'action="TEMPORARY_LOCK">';
+						options += '<button class="btn mx-1 px-0" title="' + lang.GEN_LOCK_TYPES + '" data-toggle="tooltip" amount="0" ';
+						options += 'action="LOCK_TYPES">';
 						options += '<i class="icon icon-lock" aria-hidden="true"></i>';
 						options += '</button>';
 					}
@@ -337,7 +337,7 @@ function MasterAccBuildFormActions(currentAction, currentTitle, currentBtn) {
 		inputModal += '</div>';
 	}
 
-	if (currentAction == 'TEMPORARY_LOCK') {
+	if (currentAction == 'LOCK_TYPES') {
 		inputModal += '<div class="form-group col-12 pl-0">';
 		inputModal += '<label>' + lang.SERVICES_REASON_REQUEST + '</label>'
 		inputModal += '<select class="custom-select form-control" name="lockType" id="lockType">'
@@ -446,7 +446,7 @@ function sendRequest(currentAction, currentTitle, currentBtn) {
 				info['cardNumberAs'] = cardHolderInf.cardNumber;
 			}
 
-			if (currentAction == 'TEMPORARY_LOCK') {
+			if (currentAction == 'LOCK_TYPES') {
 				info['lockType'] = cardHolderInf.lockType;
 			}
 
@@ -490,7 +490,7 @@ function sendRequest(currentAction, currentTitle, currentBtn) {
 				cardCheckBalance(response, currentTitle);
 			}
 
-			if (currentAction == 'TEMPORARY_LOCK' || currentAction == 'TEMPORARY_UNLOCK' || currentAction == 'CARD_ASSIGNMENT') {
+			if (currentAction == 'LOCK_TYPES' || currentAction == 'TEMPORARY_UNLOCK' || currentAction == 'CARD_ASSIGNMENT') {
 				cardBlockUnblock(response);
 			}
 
