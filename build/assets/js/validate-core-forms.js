@@ -11,7 +11,7 @@ function validateForms(form) {
 	var emailValid = /^([a-zA-Z]+[0-9_.+-]*)+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 	var alphanumunder = /^([\w.\-+&ñÑ ]+)+$/i;
 	var alphanum = /^[a-z0-9]+$/i;
-	var alphanumspace =  /^['a-z0-9 ']{4,25}$/i;
+	var alphanumspace = /^['a-z0-9 ']{4,25}$/i;
 	var userPassword = validatePass;
 	var numeric = /^[0-9]+$/;
 	var alphabetical = /^[a-z]+$/i;
@@ -40,30 +40,30 @@ function validateForms(form) {
 	form.validate({
 		focusInvalid: false,
 		rules: {
-			"userName":	{required: true, pattern: alphanumunder},
-			"userPass": 	{verifyRequired: '#userName', verifyPattern: '#userName'},
-			"user-name": 	{required: true, pattern: alphanumunder},
-			"id-company": 	{required: true, fiscalRegistry: true},
-			"email": 	{required: true, pattern: emailValid},
-			"nit": 	{ pattern: numeric},
-			"current-pass": {required: true},
-			"new-pass": {required: true, differs: "#currentPass", validatePass: true},
-			"confirm-pass": {required: true, equalTo: "#newPass"},
-			"branch-office": 	{requiredBranchOffice: true},
-			"type-bulk": 	{requiredTypeBulk: true},
-			"file-bulk":	{required: true, extension: lang.VALIDATE_FILES_EXTENSION, sizeFile: true},
-			"password": {required: true, pattern: userPassword},
-			"type-order": {required: true},
+			"userName": { required: true, pattern: alphanumunder },
+			"userPass": { verifyRequired: '#userName', verifyPattern: '#userName' },
+			"user-name": { required: true, pattern: alphanumunder },
+			"id-company": { required: true, fiscalRegistry: true },
+			"email": { required: true, pattern: emailValid },
+			"nit": { pattern: numeric },
+			"current-pass": { required: true },
+			"new-pass": { required: true, differs: "#currentPass", validatePass: true },
+			"confirm-pass": { required: true, equalTo: "#newPass" },
+			"branch-office": { requiredBranchOffice: true },
+			"type-bulk": { requiredTypeBulk: true },
+			"file-bulk": { required: true, extension: lang.VALIDATE_FILES_EXTENSION, sizeFile: true },
+			"password": { required: true, pattern: userPassword },
+			"type-order": { required: true },
 			"datepicker_start": {
-				required:{
-					depends: function(element) {
+				required: {
+					depends: function (element) {
 						var requireEl = true;
 
-						if(form.attr('id') === 'service-orders-form') {
+						if (form.attr('id') === 'service-orders-form') {
 							requireEl = !($('#five-days').is(':checked') || $('#ten-days').is(':checked'));
 						}
 
-						if(form.attr('id') === 'unna-list-form') {
+						if (form.attr('id') === 'unna-list-form') {
 							requireEl = $('#bulkNumber').val() == '' && !$('#all-bulks').is(':checked');
 						}
 
@@ -73,15 +73,15 @@ function validateForms(form) {
 				pattern: date.dmy
 			},
 			"datepicker_end": {
-				required:{
-					depends: function(element) {
+				required: {
+					depends: function (element) {
 						var requireEl = true;
 
-						if(form.attr('id') === 'service-orders-form') {
+						if (form.attr('id') === 'service-orders-form') {
 							requireEl = !($('#five-days').is(':checked') || $('#ten-days').is(':checked'));
 						}
 
-						if(form.attr('id') === 'unna-list-form') {
+						if (form.attr('id') === 'unna-list-form') {
 							requireEl = $('#bulkNumber').val() == '' && !$('#all-bulks').is(':checked');
 						}
 
@@ -93,20 +93,20 @@ function validateForms(form) {
 			"status-order": { required: true, requiredTypeOrder: true },
 			"selected-date": { required: true, pattern: date.my },
 			"selected-month-year": { required: true, pattern: date.my },
-			"selected-year": { required: true, pattern: date.y},
-			"id-type": {requiredSelect: true},
-			"id-number": {required: true, pattern: numeric},
-			"id-number1": {pattern: numeric, maxlength: 15},
-			"tlf1": {required: true, pattern: numeric , maxlength: 15 },
-			"card-number": {required: true, pattern: numeric, maxlength: 16, minlength: 16},
-			"card-number-sel": {requiredSelect: true},
-			"inquiry-type": {requiredSelect: true},
-			"saveIP": {pattern: numeric},
-			"expired-date": {required: true, pattern: date.my},
-			"max-cards": {required: true, pattern: numeric, maxcards: true},
+			"selected-year": { required: true, pattern: date.y },
+			"id-type": { requiredSelect: true },
+			"id-number": { required: true, pattern: numeric },
+			"id-number1": { pattern: numeric, maxlength: 15 },
+			"tlf1": { required: true, pattern: numeric, maxlength: 15 },
+			"card-number": { required: true, pattern: numeric, maxlength: 16, minlength: 16 },
+			"card-number-sel": { requiredSelect: true },
+			"inquiry-type": { requiredSelect: true },
+			"saveIP": { pattern: numeric },
+			"expired-date": { required: true, pattern: date.my },
+			"max-cards": { required: true, pattern: numeric, maxcards: true },
 			"starting-line1": {
 				required: {
-					depends: function() {
+					depends: function () {
 
 						return lang.CONF_STARTING_LINE1_REQUIRED == 'ON';
 					}
@@ -115,26 +115,26 @@ function validateForms(form) {
 			},
 			"starting-line2": {
 				required: {
-					depends: function() {
+					depends: function () {
 
 						return lang.CONF_STARTING_LINE2_REQUIRED == 'ON';
 					}
 				},
 				pattern: alphanumspace
 			},
-			"bulk-number": {pattern: numeric},
-			"enterpriseName": {required: true},
-			"productName": {required: true},
-			"enterpriseCode": {requiredSelect: true},
-			"productCode": {requiredSelect: true, required: true},
-			"checkbox": {pattern: binary},
-			"initialDate": {required: true, pattern: date.dmy},
-			"finalDate": {required: true, pattern: date.dmy},
-			"initialDatemy": {required: true, pattern: date.my},
-			"finalDatemy": {required: true, pattern: date.my},
-      "monthYear": {required: true, pattern: date.my},
-			"idNumber": {pattern: idNumberReg},
-			"anio-consolid": { requiredSelect: true, min: 1, pattern: date.y},
+			"bulk-number": { pattern: numeric },
+			"enterpriseName": { required: true },
+			"productName": { required: true },
+			"enterpriseCode": { requiredSelect: true },
+			"productCode": { requiredSelect: true, required: true },
+			"checkbox": { pattern: binary },
+			"initialDate": { required: true, pattern: date.dmy },
+			"finalDate": { required: true, pattern: date.dmy },
+			"initialDatemy": { required: true, pattern: date.my },
+			"finalDatemy": { required: true, pattern: date.my },
+			"monthYear": { required: true, pattern: date.my },
+			"idNumber": { pattern: idNumberReg },
+			"anio-consolid": { requiredSelect: true, min: 1, pattern: date.y },
 			"cardNumber": {
 				required: {
 					depends: function (element) {
@@ -148,9 +148,10 @@ function validateForms(form) {
 				},
 				pattern: numeric, maxlength: 16, minlength: 16
 			},
+			"lockType": { requiredSelect: true },
 			"otpCode": { required: true, pattern: alphanum },
-			"orderNumber": {pattern: numeric, require_from_group: [1, '.select-group']},
-			"bulkNumber": {pattern: numeric, require_from_group: [1, '.select-group']},
+			"orderNumber": { pattern: numeric, require_from_group: [1, '.select-group'] },
+			"bulkNumber": { pattern: numeric, require_from_group: [1, '.select-group'] },
 			"idNumberP": {
 				required: {
 					depends: function (element) {
@@ -173,59 +174,58 @@ function validateForms(form) {
 				},
 				pattern: alphabetical
 			},
-			"cardNumberP": {pattern: numeric, minlength: lang.VALIDATE_MINLENGTH, require_from_group: [1, '.select-group']},
-			"masiveOptions": {requiredSelect: true},
-			"documentId": {required: true, pattern: alphanum},
+			"cardNumberP": { pattern: numeric, minlength: lang.VALIDATE_MINLENGTH, require_from_group: [1, '.select-group'] },
+			"masiveOptions": { requiredSelect: true },
+			"documentId": { required: true, pattern: alphanum },
 			"radioDni": {
 				required: {
 					depends: function () {
 						var check = false;
-						if($('#resultByNIT:checked').val() == 'on') {
+						if ($('#resultByNIT:checked').val() == 'on') {
 							check = true;
 						}
 						return check
 					}
-			}, pattern: alphanum},
-			"lock-type": {required: true, pattern: alphanumunder},
-			"documentType": {requiredSelect: true},
-			"optCode": {required: true, pattern: alphanum},
-			"firstName": { required: true, pattern: alphabeticalspace},
-			"lastName": { required: true, pattern: alphabeticalspace},
-			"movil": { required: true, pattern: numeric, maxlength: 10, minlength: 7},
-			"numberDayPurchasesCtp": {required: true, pattern: numeric, maxLimitZero:'#numberWeeklyPurchasesCtp'},
-			"numberWeeklyPurchasesCtp": {required: true, pattern: numeric, maxLimitZero: '#numberMonthlyPurchasesCtp'},
-			"dailyPurchaseamountCtp": {required: true, pattern: numeric, maxLimitZero:'#weeklyAmountPurchasesCtp'},
-			"weeklyAmountPurchasesCtp": {required: true, pattern: numeric, maxLimitZero:'#monthlyPurchasesAmountCtp'},
-			"numberDayPurchasesStp": {required: true, pattern: numeric, maxLimitZero:'#numberWeeklyPurchasesStp'},
-			"numberWeeklyPurchasesStp": {required: true, pattern: numeric, maxLimitZero:'#numberMonthlyPurchasesStp'},
-			"dailyPurchaseamountStp": {required: true, pattern: numeric, maxLimitZero:'#weeklyAmountPurchasesStp'},
-			"weeklyAmountPurchasesStp": {required: true, pattern: numeric, maxLimitZero:'#monthlyPurchasesAmountStp'},
-			"dailyNumberWithdraw": {required: true, pattern: numeric, maxLimitZero:'#weeklyNumberWithdraw'},
-			"weeklyNumberWithdraw": {required: true, pattern: numeric, maxLimitZero:'#monthlyNumberWithdraw'},
-			"dailyAmountWithdraw": {required: true, pattern: numeric, maxLimitZero:'#weeklyAmountWithdraw'},
-			"weeklyAmountWithdraw": {required: true, pattern: numeric, maxLimitZero:'#monthlyAmountwithdraw'},
-			"dailyNumberCredit": {required: true, pattern: numeric, maxLimitZero:'#weeklyNumberCredit'},
-			"weeklyNumberCredit": {required: true, pattern: numeric, maxLimitZero:'#monthlyNumberCredit'},
-			"dailyAmountCredit": {required: true, pattern: numeric, maxLimitZero:'#weeklyAmountCredit'},
-			"weeklyAmountCredit": {required: true, pattern: numeric, maxLimitZero:'#monthlyAmountCredit'},
-			"numberMonthlyPurchasesCtp": {pattern: numeric , required: true },
-			"monthlyPurchasesAmountCtp": {pattern: numeric , required: true },
-			"purchaseTransactionCtp": {pattern: numeric , required: true, maxLimitZero: '#dailyPurchaseamountCtp'},
-			"numberMonthlyPurchasesStp": {pattern: numeric , required: true },
-			"monthlyPurchasesAmountStp": {pattern: numeric , required: true },
-			"purchaseTransactionStp": {pattern: numeric , required: true, maxLimitZero:'#dailyPurchaseamountStp'},
-			"monthlyNumberWithdraw": {pattern: numeric , required: true },
-			"monthlyAmountwithdraw": {pattern: numeric , required: true },
-			"WithdrawTransaction": {pattern: numeric , required: true, maxLimitZero:'#dailyAmountWithdraw'},
-			"monthlyNumberCredit": {pattern: numeric, required: true },
-			"monthlyAmountCredit": {pattern: numeric , required: true },
-			"CreditTransaction": {pattern: numeric , required: true, maxLimitZero:'#dailyAmountCredit'},
+				}, pattern: alphanum
+			},
+			"documentType": { requiredSelect: true },
+			"optCode": { required: true, pattern: alphanum },
+			"firstName": { required: true, pattern: alphabeticalspace },
+			"lastName": { required: true, pattern: alphabeticalspace },
+			"movil": { required: true, pattern: numeric, maxlength: 10, minlength: 7 },
+			"numberDayPurchasesCtp": { required: true, pattern: numeric, maxLimitZero: '#numberWeeklyPurchasesCtp' },
+			"numberWeeklyPurchasesCtp": { required: true, pattern: numeric, maxLimitZero: '#numberMonthlyPurchasesCtp' },
+			"dailyPurchaseamountCtp": { required: true, pattern: numeric, maxLimitZero: '#weeklyAmountPurchasesCtp' },
+			"weeklyAmountPurchasesCtp": { required: true, pattern: numeric, maxLimitZero: '#monthlyPurchasesAmountCtp' },
+			"numberDayPurchasesStp": { required: true, pattern: numeric, maxLimitZero: '#numberWeeklyPurchasesStp' },
+			"numberWeeklyPurchasesStp": { required: true, pattern: numeric, maxLimitZero: '#numberMonthlyPurchasesStp' },
+			"dailyPurchaseamountStp": { required: true, pattern: numeric, maxLimitZero: '#weeklyAmountPurchasesStp' },
+			"weeklyAmountPurchasesStp": { required: true, pattern: numeric, maxLimitZero: '#monthlyPurchasesAmountStp' },
+			"dailyNumberWithdraw": { required: true, pattern: numeric, maxLimitZero: '#weeklyNumberWithdraw' },
+			"weeklyNumberWithdraw": { required: true, pattern: numeric, maxLimitZero: '#monthlyNumberWithdraw' },
+			"dailyAmountWithdraw": { required: true, pattern: numeric, maxLimitZero: '#weeklyAmountWithdraw' },
+			"weeklyAmountWithdraw": { required: true, pattern: numeric, maxLimitZero: '#monthlyAmountwithdraw' },
+			"dailyNumberCredit": { required: true, pattern: numeric, maxLimitZero: '#weeklyNumberCredit' },
+			"weeklyNumberCredit": { required: true, pattern: numeric, maxLimitZero: '#monthlyNumberCredit' },
+			"dailyAmountCredit": { required: true, pattern: numeric, maxLimitZero: '#weeklyAmountCredit' },
+			"weeklyAmountCredit": { required: true, pattern: numeric, maxLimitZero: '#monthlyAmountCredit' },
+			"numberMonthlyPurchasesCtp": { pattern: numeric, required: true },
+			"monthlyPurchasesAmountCtp": { pattern: numeric, required: true },
+			"purchaseTransactionCtp": { pattern: numeric, required: true, maxLimitZero: '#dailyPurchaseamountCtp' },
+			"numberMonthlyPurchasesStp": { pattern: numeric, required: true },
+			"monthlyPurchasesAmountStp": { pattern: numeric, required: true },
+			"purchaseTransactionStp": { pattern: numeric, required: true, maxLimitZero: '#dailyPurchaseamountStp' },
+			"monthlyNumberWithdraw": { pattern: numeric, required: true },
+			"monthlyAmountwithdraw": { pattern: numeric, required: true },
+			"WithdrawTransaction": { pattern: numeric, required: true, maxLimitZero: '#dailyAmountWithdraw' },
+			"monthlyNumberCredit": { pattern: numeric, required: true },
+			"monthlyAmountCredit": { pattern: numeric, required: true },
+			"CreditTransaction": { pattern: numeric, required: true, maxLimitZero: '#dailyAmountCredit' },
 			"transferType": { required: true },
-			"transferAmount": { required: true, pattern: floatAmount, lessBalance: true, dailyQuantity: true},
+			"transferAmount": { required: true, pattern: floatAmount, lessBalance: true, dailyQuantity: true },
 			"description": { required: true, pattern: rechargeDesc },
 		},
 		messages: {
-			"lock-type": lang.VALIDATE_LOCK_CARD_SELECT,
 			"userName": lang.VALIDATE_USERLOGIN,
 			"userPass": {
 				verifyRequired: lang.VALIDATE_USERPASS_REQ,
@@ -288,6 +288,7 @@ function validateForms(form) {
 			"monthYear": lang.VALIDATE_DATE_MY,
 			"idNumber": lang.VALIDATE_ID_NUMBER,
 			"cardNumber": lang.VALIDATE_CARD_NUMBER,
+			"lockType": lang.VALIDATE_OPTION,
 			"otpCode": lang.VALIDATE_OTP_CODE,
 			"orderNumber": {
 				pattern: lang.VALIDATE_BULK_NUMBER,
@@ -315,7 +316,7 @@ function validateForms(form) {
 			},
 			"masiveOptions": lang.VALIDATE_OPTION,
 			"documentId": lang.VALIDATE_DOCUMENT_ID,
-			"radioDni":  lang.VALIDATE_DOCUMENT_ID,
+			"radioDni": lang.VALIDATE_DOCUMENT_ID,
 			"documentType": lang.VALIDATE_SELECT_DOCTYPE,
 			"optCode": lang.VALIDATE_OTP_CODE,
 			"firstName": lang.VALIDATE_NAME_LASTNAME,
@@ -381,7 +382,7 @@ function validateForms(form) {
 			"numberWeeklyPurchasesCtp": {
 				maxLimitZero: lang.VALIDATE_MAX_MONTH,
 				pattern: lang.VALIDATE_INVALID_NUMBER,
-				required:lang.VALIDATE_NUMBER_REQ
+				required: lang.VALIDATE_NUMBER_REQ
 			},
 			"dailyPurchaseamountCtp": {
 				maxLimitZero: lang.VALIDATE_MAX_WEEK,
@@ -391,7 +392,7 @@ function validateForms(form) {
 			"weeklyAmountPurchasesCtp": {
 				maxLimitZero: lang.VALIDATE_MAX_MONTH,
 				pattern: lang.VALIDATE_INVALID_NUMBER,
-				required:lang.VALIDATE_NUMBER_REQ
+				required: lang.VALIDATE_NUMBER_REQ
 			},
 			"numberDayPurchasesStp": {
 				maxLimitZero: lang.VALIDATE_MAX_WEEK,
@@ -401,7 +402,7 @@ function validateForms(form) {
 			"numberWeeklyPurchasesStp": {
 				maxLimitZero: lang.VALIDATE_MAX_MONTH,
 				pattern: lang.VALIDATE_INVALID_NUMBER,
-				required:lang.VALIDATE_NUMBER_REQ
+				required: lang.VALIDATE_NUMBER_REQ
 			},
 			"dailyPurchaseamountStp": {
 				maxLimitZero: lang.VALIDATE_MAX_WEEK,
@@ -411,7 +412,7 @@ function validateForms(form) {
 			"weeklyAmountPurchasesStp": {
 				maxLimitZero: lang.VALIDATE_MAX_MONTH,
 				pattern: lang.VALIDATE_INVALID_NUMBER,
-				required:lang.VALIDATE_NUMBER_REQ
+				required: lang.VALIDATE_NUMBER_REQ
 			},
 			"dailyNumberWithdraw": {
 				maxLimitZero: lang.VALIDATE_MAX_WEEK,
@@ -421,7 +422,7 @@ function validateForms(form) {
 			"weeklyNumberWithdraw": {
 				maxLimitZero: lang.VALIDATE_MAX_MONTH,
 				pattern: lang.VALIDATE_INVALID_NUMBER,
-				required:lang.VALIDATE_NUMBER_REQ
+				required: lang.VALIDATE_NUMBER_REQ
 			},
 			"dailyAmountWithdraw": {
 				maxLimitZero: lang.VALIDATE_MAX_WEEK,
@@ -431,7 +432,7 @@ function validateForms(form) {
 			"weeklyAmountWithdraw": {
 				maxLimitZero: lang.VALIDATE_MAX_MONTH,
 				pattern: lang.VALIDATE_INVALID_NUMBER,
-				required:lang.VALIDATE_NUMBER_REQ
+				required: lang.VALIDATE_NUMBER_REQ
 			},
 			"dailyNumberCredit": {
 				maxLimitZero: lang.VALIDATE_MAX_WEEK,
@@ -441,7 +442,7 @@ function validateForms(form) {
 			"weeklyNumberCredit": {
 				maxLimitZero: lang.VALIDATE_MAX_MONTH,
 				pattern: lang.VALIDATE_INVALID_NUMBER,
-				required:lang.VALIDATE_NUMBER_REQ
+				required: lang.VALIDATE_NUMBER_REQ
 			},
 			"dailyAmountCredit": {
 				maxLimitZero: lang.VALIDATE_MAX_WEEK,
@@ -451,7 +452,7 @@ function validateForms(form) {
 			"weeklyAmountCredit": {
 				maxLimitZero: lang.VALIDATE_MAX_MONTH,
 				pattern: lang.VALIDATE_INVALID_NUMBER,
-				required:lang.VALIDATE_NUMBER_REQ
+				required: lang.VALIDATE_NUMBER_REQ
 			},
 			"transferType": lang.VALIDATE_TRANSFER_TYPE,
 			"transferAmount": {
@@ -466,65 +467,65 @@ function validateForms(form) {
 			},
 
 		},
-		errorPlacement: function(error, element) {
+		errorPlacement: function (error, element) {
 			$(element).closest('.form-group').find('.help-block').html(error.html());
 		}
 	});
 
-	$.validator.methods.verifyRequired = function(value, element, param) {
+	$.validator.methods.verifyRequired = function (value, element, param) {
 		return value != '' && $(param).val() != '';
 	}
 
-	$.validator.methods.verifyPattern = function(value, element, param) {
+	$.validator.methods.verifyPattern = function (value, element, param) {
 		return userPassword.test(value) && alphanumunder.test($(param).val());
 	}
 
-	$.validator.methods.requiredTypeBulk = function(value, element, param) {
+	$.validator.methods.requiredTypeBulk = function (value, element, param) {
 		var eval1 = alphanum.test($(element).find('option:selected').attr('format').trim());
 		var eval2 = longPhrase.test($(element).find('option:selected').text().trim());
 		var eval3 = alphanum.test($(element).find('option:selected').val().trim());
 		return eval1 && eval2 && eval3;
 	}
 
-	$.validator.methods.requiredBranchOffice = function(value, element, param) {
+	$.validator.methods.requiredBranchOffice = function (value, element, param) {
 		return alphanum.test($(element).find('option:selected').val());
 	}
 
-	$.validator.methods.fiscalRegistry = function(value, element, param) {
+	$.validator.methods.fiscalRegistry = function (value, element, param) {
 		var RegExpfiscalReg = new RegExp(fiscalReg, 'i')
 		return RegExpfiscalReg.test(value);
 	}
 
-	$.validator.methods.validatePass = function(value, element, param) {
+	$.validator.methods.validatePass = function (value, element, param) {
 		return passStrength(value);
 	}
 
-	$.validator.methods.differs = function(value, element, param) {
+	$.validator.methods.differs = function (value, element, param) {
 		var target = $(param);
 		return value !== target.val();
 	}
 
-	$.validator.methods.requiredTypeOrder = function(value, element, param) {
+	$.validator.methods.requiredTypeOrder = function (value, element, param) {
 		var eval1 = alphanumunder.test($(element).find('option:selected').text().trim());
 		var eval2 = alphanum.test($(element).find('option:selected').val().trim());
 		return eval1 && eval2;
 	}
 
-	$.validator.methods.sizeFile = function(value, element, param) {
+	$.validator.methods.sizeFile = function (value, element, param) {
 		return element.files[0].size > 0;
 	}
 
-	$.validator.methods.requiredSelect = function(value, element, param) {
+	$.validator.methods.requiredSelect = function (value, element, param) {
 		var valid = true;
 
-		if($(element).find('option').length > 0 ) {
+		if ($(element).find('option').length > 0) {
 			valid = alphanumunder.test($(element).find('option:selected').val().trim());
 		}
 
 		return valid
 	}
 
-	$.validator.methods.maxcards = function(value, element, param) {
+	$.validator.methods.maxcards = function (value, element, param) {
 		var valid = true;
 		var cardsMax = parseInt($(element).attr('max-cards'));
 		var cards = parseInt(value);
@@ -538,11 +539,11 @@ function validateForms(form) {
 		return valid
 	}
 
-	$.validator.methods.maxLimitZero = function(value, element, param) {
+	$.validator.methods.maxLimitZero = function (value, element, param) {
 		var valid = false;
 
 		if (Number($(param).val()) == 0) {
-			if (value > 0 ) {
+			if (value > 0) {
 				valid = true
 			} else if (value == Number($(param).val())) {
 				valid = true;

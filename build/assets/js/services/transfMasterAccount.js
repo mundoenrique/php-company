@@ -6,7 +6,6 @@ var balance;
 var balanceConcentratingAccount;
 var cardsData;
 var cardHolderInf;
-var selectBlockCard;
 $(function () {
 	var getAmount;
 	var title;
@@ -20,7 +19,7 @@ $(function () {
 		drawCallback: function (d) {
 			$('#balance-aviable').text(balance);
 
-			if(lang.CONF_BALANCE_ACC_CONCENTRATOR == 'ON' ) {
+			if (lang.CONF_BALANCE_ACC_CONCENTRATOR == 'ON') {
 				$('#balance-acc-concentrator').text(balanceConcentratingAccount);
 			}
 
@@ -178,15 +177,8 @@ $(function () {
 						options += '</button>';
 					}
 
-					// if (access.TRABLQ && data.status == '') {
-					// 	options += '<button class="btn mx-1 px-0" title="' + lang.GEN_TEMPORARY_LOCK + '" data-toggle="tooltip" amount="0" ';
-					// 	options += 'action="TEMPORARY_LOCK">';
-					// 	options += '<i class="icon icon-lock" aria-hidden="true"></i>';
-					// 	options += '</button>';
-					// }
-
 					if (access.TRABLQ && data.status == '') {
-						options += '<button class="btn mx-1 px-0" title="' + lang.GEN_TEMPORARY_LOCK + '" data-toggle="tooltip" amount="0" ';
+						options += '<button class="btn mx-1 px-0" title="' + lang.GEN_LOCK_TYPES + '" data-toggle="tooltip" amount="0" ';
 						options += 'action="LOCK_TYPES">';
 						options += '<i class="icon icon-lock" aria-hidden="true"></i>';
 						options += '</button>';
@@ -257,22 +249,18 @@ $(function () {
 
 	$('#system-info').on('click', '.send-request', function () {
 		form = $('#password-modal');
-		var type = getDataForm(form);
 		btnText = $(this).text().trim();
-		selectBlockCard = type['lock-type'];
-		sendRequest(action, title, $(this), selectBlockCard)
+		sendRequest(action, title, $(this))
 	});
 
 	$('#system-info').on('click', '.get-auth-key', function () {
 		form = $('#password-modal');
 		btnText = $(this).text().trim();
-		var type = getDataForm(form);
 
 		if (formValidateTrim(form, title)) {
 			btnRemote = $(this);
 			remoteAuthArgs.action = action;
 			remoteAuthArgs.title = title;
-			remoteAuthArgs.selectBlockCard = type['lock-type'];
 			getauhtKey();
 		}
 	});
@@ -300,7 +288,6 @@ $(function () {
 
 	$('#system-info').on('click', '#cancel', function () {
 		$('#tableServicesMaster').find('tr').removeClass('selected');
-		$('.cover-spin').removeAttr("style");
 	})
 
 	$("#tableServicesMaster").on({
@@ -341,7 +328,7 @@ function MasterAccBuildFormActions(currentAction, currentTitle, currentBtn) {
 	inputModal = '<form id="password-modal" name="password-modal" class="row col-auto" onsubmit="return false;">';
 
 	if (currentAction == 'CARD_ASSIGNMENT') {
-		inputModal += '<div class="form-group col-12 pl-0">';
+		inputModal += '<div class="form-group col-12 pl-0 w-160-ie">';
 		inputModal += '<div class="input-group">';
 		inputModal += '<input class="form-control" type="text" id="cardNumber" name="cardNumber" autocomplete="off"';
 		inputModal += 'placeholder="' + lang.GEN_TABLE_CARD_NUMBER + '" req="yes">';
@@ -351,13 +338,15 @@ function MasterAccBuildFormActions(currentAction, currentTitle, currentBtn) {
 	}
 
 	if (currentAction == 'LOCK_TYPES') {
-		inputModal += '<div class="form-group col-10 pl-0">';
-		inputModal += '<label>'+ lang.GEN_REASON_REQUEST +'</label>'
-		inputModal += '<select class="custom-select form-control" name="lock-type" id="lock-type">'
-		inputModal += '<option value="" selected>Selecciona un tipo de bloqueo...</option>'
-		$.each(lang.GEN_LOCK_TYPES_BLOCK, function(key, element){
-			inputModal += '<option value="'+ key +'">'+ element +'</option>'
-		})
+		inputModal += '<div class="form-group col-12 pl-0 w-160-ie">';
+		inputModal += '<label>' + lang.SERVICES_REASON_REQUEST + '</label>'
+		inputModal += '<select class="custom-select form-control" name="lockType" id="lockType">'
+		inputModal += '<option value="" selected>'+ lang.SERVICES_REASON_LOCK_TYPES +'</option>'
+
+		$.each(lang.SERVICES_LOCK_TYPES_BLOCK, function (key, element) {
+			inputModal += '<option value="' + key + '">' + element + '</option>'
+		});
+
 		inputModal += '</select>';
 		inputModal += '<div class="help-block"></div>';
 		inputModal += '</div>';
@@ -366,7 +355,7 @@ function MasterAccBuildFormActions(currentAction, currentTitle, currentBtn) {
 	if (lang.CONF_REMOTE_AUTH == 'OFF') {
 		$('#accept').addClass('send-request');
 
-		inputModal += '<div class="form-group col-12 pl-0">';
+		inputModal += '<div class="form-group col-12 pl-0 w-160-ie">';
 		inputModal += '<div class="input-group">';
 		inputModal += '<input class="form-control pwd-input pwd" type="password" id="password" name="password" autocomplete="off" ';
 		inputModal += 'placeholder="' + lang.GEN_PLACE_PASSWORD + '">';
@@ -394,23 +383,8 @@ function MasterAccBuildFormActions(currentAction, currentTitle, currentBtn) {
 		remoteAuthArgs.action = currentAction;
 		remoteAuthArgs.title = currentTitle;
 		getauhtKey();
-	}	else {
-		if (currentAction == 'LOCK_TYPES') {
-			modalBtn = {
-				btn1: {
-					text: lang.GEN_BTN_ACCEPT,
-					action: 'none'
-				},
-				btn2: {
-					text: lang.GEN_BTN_CANCEL,
-					action: 'destroy'
-				}
-			}
-
-			appMessages(lang.GEN_BLOCK_CARD, inputModal, lang.CONF_ICON_INFO, modalBtn);
-		} else {
+	} else {
 		sendRequest(currentAction, currentTitle, currentBtn);
-		}
 	}
 }
 
@@ -456,7 +430,7 @@ function amountValidate(getAmount, currentTitle) {
 	return valid;
 }
 
-function sendRequest(currentAction, currentTitle, currentBtn, selectBlockCard) {
+function sendRequest(currentAction, currentTitle, currentBtn) {
 	if (formValidateTrim(form, currentTitle)) {
 		$('#accept').removeClass('send-request');
 		$('#accept').removeClass('get-auth-key');
@@ -473,7 +447,7 @@ function sendRequest(currentAction, currentTitle, currentBtn, selectBlockCard) {
 			}
 
 			if (currentAction == 'LOCK_TYPES') {
-				info['status'] = selectBlockCard;
+				info['lockType'] = cardHolderInf.lockType;
 			}
 
 			cardsInfo.push(JSON.stringify(info));
@@ -508,7 +482,7 @@ function sendRequest(currentAction, currentTitle, currentBtn, selectBlockCard) {
 				$('#balance-aviable').text(response.data.balance);
 			}
 
-			if (response.data.balanceConcentratingAccount){
+			if (response.data.balanceConcentratingAccount) {
 				$('#balance-acc-concentrator').text(response.data.balanceConcentratingAccount);
 			}
 
@@ -516,7 +490,7 @@ function sendRequest(currentAction, currentTitle, currentBtn, selectBlockCard) {
 				cardCheckBalance(response, currentTitle);
 			}
 
-			if (currentAction == 'TEMPORARY_LOCK' || currentAction == 'TEMPORARY_UNLOCK' || currentAction == 'CARD_ASSIGNMENT' || currentAction == 'LOCK_TYPES') {
+			if (currentAction == 'LOCK_TYPES' || currentAction == 'TEMPORARY_UNLOCK' || currentAction == 'CARD_ASSIGNMENT') {
 				cardBlockUnblock(response);
 			}
 
