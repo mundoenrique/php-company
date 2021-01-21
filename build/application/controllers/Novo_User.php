@@ -93,18 +93,12 @@ class Novo_User extends NOVO_Controller {
 
 		$view = 'signIn';
 
-		if(ACTIVE_RECAPTCHA) {
-			$this->load->library('recaptcha');
-			$this->render->scriptCaptcha = $this->recaptcha->getScriptTag();
-		}
-
 		array_push(
 			$this->includeAssets->jsFiles,
 			"third_party/jquery.balloon",
 			"third_party/jquery.validate",
 			"validate-core-forms",
 			"third_party/additional-methods",
-			"googleRecaptcha",
 			"user/signIn"
 		);
 
