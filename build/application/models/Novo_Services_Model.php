@@ -84,6 +84,11 @@ class Novo_Services_Model extends NOVO_Model {
 				$this->response->params = $response->maestroParametros;
 				$this->response->params->costoComisionTrans = lang('GEN_CURRENCY').' '.currencyFormat($this->response->params->costoComisionTrans);
 				$this->response->params->costoComisionCons = lang('GEN_CURRENCY').' '.currencyFormat($this->response->params->costoComisionCons);
+
+				if ((float)$response->maestroDeposito->saldo < 0) {
+					$response->maestroDeposito->saldoDisponible = '0'.lang('GEN_DECIMAL').'00';
+				}
+
 				$this->response->balance = lang('GEN_CURRENCY').' '.$response->maestroDeposito->saldoDisponible;
 
 				if (array_key_exists('saldoCtaConcentradora', $response->maestroDeposito)) {
