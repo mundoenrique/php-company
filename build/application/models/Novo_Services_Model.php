@@ -84,6 +84,11 @@ class Novo_Services_Model extends NOVO_Model {
 				$this->response->params = $response->maestroParametros;
 				$this->response->params->costoComisionTrans = lang('GEN_CURRENCY').' '.currencyFormat($this->response->params->costoComisionTrans);
 				$this->response->params->costoComisionCons = lang('GEN_CURRENCY').' '.currencyFormat($this->response->params->costoComisionCons);
+
+				if ((float)$response->maestroDeposito->saldo < 0) {
+					$response->maestroDeposito->saldoDisponible = '0'.lang('GEN_DECIMAL').'00';
+				}
+
 				$this->response->balance = lang('GEN_CURRENCY').' '.$response->maestroDeposito->saldoDisponible;
 
 				if (array_key_exists('saldoCtaConcentradora', $response->maestroDeposito)) {
@@ -149,9 +154,12 @@ class Novo_Services_Model extends NOVO_Model {
 
 			switch ($dataRequest->action) {
 				case 'CHECK_BALANCE':
-				case 'TEMPORARY_LOCK':
 				case 'TEMPORARY_UNLOCK':
 					unset($card['montoTransaccion']);
+				break;
+				case 'LOCK_TYPES':
+					unset($card['montoTransaccion']);
+					$card['codBloqueo'] = $cardsInfo->lockType;
 				break;
 				case 'CARD_ASSIGNMENT':
 					unset($card['montoTransaccion']);
@@ -175,8 +183,8 @@ class Novo_Services_Model extends NOVO_Model {
 				$this->dataAccessLog->operation = lang('GEN_DEBIT_TO_CARD');
 				$this->dataRequest->idOperation = 'cargoTM';
 			break;
-			case 'TEMPORARY_LOCK':
-				$this->dataAccessLog->operation = lang('GEN_TEMPORARY_LOCK');
+			case 'LOCK_TYPES':
+				$this->dataAccessLog->operation = lang('GEN_LOCK_TYPES');
 				$this->dataRequest->idOperation = 'bloqueoTM';
 			break;
 			case 'TEMPORARY_UNLOCK':
@@ -223,8 +231,8 @@ class Novo_Services_Model extends NOVO_Model {
 				$this->response->icon = lang('CONF_ICON_SUCCESS');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 
-				if ($dataRequest->action == 'TEMPORARY_LOCK' || $dataRequest->action == 'TEMPORARY_UNLOCK') {
-					$blockType = $dataRequest->action == 'TEMPORARY_LOCK' ? 'Bloqueda' : 'Desbloqueda';
+				if ($dataRequest->action == 'LOCK_TYPES' || $dataRequest->action == 'TEMPORARY_UNLOCK') {
+					$blockType = $dataRequest->action == 'LOCK_TYPES' ? 'Bloqueda' : 'Desbloqueda';
 					$this->response->msg =  novoLang(lang('SERVICES_BLOCKING_CARD'), [$cardsList[0]['noTarjeta'], $blockType]);
 					$this->response->update = TRUE;
 				}
@@ -232,6 +240,7 @@ class Novo_Services_Model extends NOVO_Model {
 				if ($dataRequest->action == 'CARD_ASSIGNMENT') {
 					$maskCards = maskString($cardsList[0]['noTarjetaAsig'], 4, 6);
 					$this->response->msg =  novoLang(lang('SERVICES_ASSIGNMENT_CARD'), [$cardsList[0]['noTarjeta'], $maskCards]);
+					$this->response->update = TRUE;
 				}
 
 				if ($dataRequest->action == 'CHECK_BALANCE') {
@@ -342,6 +351,12 @@ class Novo_Services_Model extends NOVO_Model {
 				$this->response->title = lang('GEN_'.$dataRequest->action);
 				$maskCards = maskString($cardsList[0]['noTarjetaAsig'], 4, 6);
 				$this->response->msg = novoLang(lang('SERVICES_CARD_BULK_AFFILIATED'), $maskCards);
+				$this->response->icon = lang('CONF_ICON_WARNING');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			break;
+			case -431:
+				$this->response->title = lang('GEN_'.$dataRequest->action);
+				$this->response->msg = lang('SERVICES_CARD_TRANSFER_BALANCE');
 				$this->response->icon = lang('CONF_ICON_WARNING');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
@@ -1156,7 +1171,8 @@ class Novo_Services_Model extends NOVO_Model {
 		$this->dataRequest->idServicio = '1260';
 
 		$response = $this->sendToService('CallWs_AuthorizationKey');
-
+		/* $response = json_decode('{"rc":0,"msg":"Proceso OK","bean":{"tranClave":"nuR8Q+ntN8ECmrW7+Oe4m7fPuWCeo5QXlu8QtXSt7EL9dEmSAdzVYvIjIlv1pC9WhAZSLHe8yjUMIcGoswH4bRt78FJPX6MU5nHxHa4o+hi3csUGqmI5T3j8ZxbxdmpQ0pHewHVRgLTqIqd6v8Mmqg\\u003d\\u003d","tranExitoso":true,"tranDescripcionError":""}}');
+		$this->isResponseRc = 0; */
 		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
