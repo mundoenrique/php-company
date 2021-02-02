@@ -34,7 +34,6 @@ $lang['GEN_ACCOUNT_CLOSING_BALANCE'] = 'Tarjetahabiente';
 $lang['GEN_BULK_DELETE_SO'] = '¿Estás seguro que deseas anular la orden de servicio? ';
 $lang['GEN_FAILED_THIRD_PARTY'] = 'No se obtuvo respuesta del servicio externo. %s';
 $lang['GEN_WARNING_DOWNLOAD_FILE'] = 'No fue posible descargar el archivo.';
-
 $lang['GEN_INVALID_OTP'] = 'No fué posible verificar el código de seguridad.';
 $lang['GEN_INVALID_DATA'] = 'Uno de los datos es incorrecto';
 $lang['GEN_SO_CREATE_INCORRECT'] = 'El código de seguridad es incorrecto.';
@@ -45,7 +44,7 @@ $lang['RESP_RECAPTCHA_VALIDATION_FAILED'] = 'El sistema ha detectado una activid
 $lang['RESP_EMAIL_NO_FOUND'] = 'El correo %s es incorrecto.';
 $lang['RESP_EMAIL_NO_SENT'] = 'No fue posible enviar el correo de recuperación.';
 $lang['RESP_EMAIL_INCORRECT'] = 'El correo %s es incorrecto.';
-$lang['RESP_PASSWORD_INCORRECT'] = 'La contraseña actual es incorrecta.<br>';
+$lang['RESP_PASSWORD_INCORRECT'] = 'La contraseña actual es incorrecta.';
 $lang['RESP_NO_UPDATE_REGISTRY'] = 'No fue posible actualizar los registros.';
 $lang['GEN_PASSWORD_NO_VALID'] = 'Por favor verifica tu contraseña.';
 $lang['RESP_NO_UPDATE_REGISTRY'] = 'No fue posible actualizar los registros.';
