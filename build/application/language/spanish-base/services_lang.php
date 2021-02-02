@@ -2,6 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 $lang['SERVICES_BLOCKING_CARD'] = 'La tarjeta %s ha sido %s.';
 $lang['SERVICES_ASSIGNMENT_CARD'] = 'La tarjeta %s ha sido reemplazada por %s.';
+$lang['SERVICES_NOT_LOCKED'] = 'No fue posible realizar el bloqueo %s';
 $lang['SERVICES_BALANCE_NO_FOUND'] = 'No fue posible obtener el saldo para';
 $lang['SERVICES_TRANSACTION_DATA'] = 'Datos de la transacción';
 $lang['SERVICES_TRANSACTION_FAIL'] = 'No fue posible realizar la trasacción, por favor intentalo de nuevo.';
