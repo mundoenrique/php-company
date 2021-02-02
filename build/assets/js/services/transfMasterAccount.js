@@ -261,7 +261,6 @@ $(function () {
 			btnRemote = $(this);
 			remoteAuthArgs.action = action;
 			remoteAuthArgs.title = title;
-			remoteAuthArgs.reason = $('#lockType').val();
 			getauhtKey();
 		}
 	});

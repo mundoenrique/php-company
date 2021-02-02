@@ -378,6 +378,12 @@ class Novo_Services_Model extends NOVO_Model {
 				$this->response->icon = lang('CONF_ICON_WARNING');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
+			case -300:
+				$this->response->title = lang('GEN_'.$dataRequest->action);
+				$this->response->msg = novoLang(lang('SERVICES_NOT_LOCKED'), $card['codBloqueo'] == 'PB' ? 'temporal' : 'permanente');
+				$this->response->icon = lang('CONF_ICON_WARNING');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			break;
 		}
 
 		return $this->responseToTheView('callWs_ActionMasterAccount');
@@ -1192,12 +1198,6 @@ class Novo_Services_Model extends NOVO_Model {
 				$this->response->title = $dataRequest->action;
 				$this->response->icon = lang('CONF_ICON_WARNING');
 				$this->response->msg = lang('GEN_GET_AUTH_KEY_FAIL');
-				$this->response->modalBtn['btn1']['action'] = 'destroy';
-			break;
-			case -300:
-				$this->response->title = $dataRequest->action;
-				$this->response->msg = novoLang(lang('SERVICES_NOT_LOCKED'), $dataRequest->reason == 'PB' ? 'temporal' : 'permanente');
-				$this->response->icon = lang('CONF_ICON_WARNING');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 		}
