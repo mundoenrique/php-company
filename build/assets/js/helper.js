@@ -359,7 +359,8 @@ function getauhtKey() {
 	$('#accept').removeClass('get-auth-key');
 	$('#accept').removeClass('send-request');
 	data = {
-		action: remoteAuthArgs.title || remoteAuthArgs.action
+		action: remoteAuthArgs.title || remoteAuthArgs.action,
+		reason: remoteAuthArgs.reason || ''
 	}
 	btnRemote
 		.html(loader)
