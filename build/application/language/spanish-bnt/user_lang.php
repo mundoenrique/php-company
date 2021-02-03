@@ -102,3 +102,4 @@ $lang["TERMS_CONTENT"] = '
 	</li>
 </ol>
 ';
+$lang['USER_EXPIRE_TIME'] = 'El tiempo permitido para realizar la operación expiró.';

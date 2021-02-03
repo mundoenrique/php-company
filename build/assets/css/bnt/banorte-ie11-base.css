@@ -575,6 +575,10 @@ footer.main-footer {
 .z4 { z-index: 4 }
 
 /* Sizing */
+.w-160-ie {
+	width: 160px !important;
+	flex: auto !important;
+ }
 
 .max-width-1 { max-width: 24rem }
 .max-width-2 { max-width: 32rem }
@@ -801,6 +805,10 @@ i[class*=" icon-"] {
 
 .icon-chevron-down:hover {
   color: #ffffff !important;
+}
+
+.logo-banco {
+	height: auto !important;
 }
 
 /* Spinner */
