@@ -580,6 +580,12 @@ class Novo_Inquiries_Model extends NOVO_Model {
 				$nameFile = rtrim($nameFile, '.pdf');
 				exportFile($response->archivo, 'pdf', 'Orden_de_servicio'.$nameFile);
 			break;
+			case -52:
+				$this->response->title = lang('GEN_ORDER_TITLE');
+				$this->response->msg = lang('RESP_NO_BULK_AUTHORIZATION');
+				$this->response->icon = lang('CONF_ICON_WARNING');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			break;
 			default:
 				$requestOrdersList = $this->session->flashdata('requestOrdersList');
 				$this->load->model('Novo_inquiries_Model', 'getOrders');
