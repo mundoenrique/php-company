@@ -130,6 +130,8 @@ class NOVO_Controller extends CI_Controller {
 	 * Método para realizar la precarga de las vistas
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date October 31th, 2019
+	 * @modified Luis Molina
+	 * @date January 19th, 2021
 	 */
 	protected function preloadView($auth)
 	{
@@ -145,6 +147,8 @@ class NOVO_Controller extends CI_Controller {
 			$this->render->novoName = $this->security->get_csrf_token_name();
 			$this->render->novoCook = $this->security->get_csrf_hash();
 			$this->folder = lang('CONF_VIEW_SUFFIX') === '-core' ? $this->countryUri.'/' : '';
+			$validateRecaptcha = in_array($this->router->fetch_method(), lang('CONF_VALIDATE_CAPTCHA'));
+
 			$this->includeAssets->cssFiles = [
 				"$this->folder"."$this->skin-base"
 			];
@@ -191,6 +195,15 @@ class NOVO_Controller extends CI_Controller {
 						$this->includeAssets->jsFiles,
 						"remote_connect/$this->countryUri-remoteConnect",
 					);
+				}
+			} else if ($validateRecaptcha) {
+				array_push(
+					$this->includeAssets->jsFiles,
+					"googleRecaptcha"
+				);
+				if(ACTIVE_RECAPTCHA){
+					$this->load->library('recaptcha');
+					$this->render->scriptCaptcha = $this->recaptcha->getScriptTag();
 				}
 			}
 
