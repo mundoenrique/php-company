@@ -1,10 +1,10 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 <footer class="main-footer">
-	<? if ($countryUri == 'bdb'): ?>
+	<?php if ($countryUri == 'bdb'): ?>
 	<div class="flex pr-2 pr-lg-0">
 		<img src="<?= $this->asset->insertFile(lang('GEN_FOTTER_MARK'), 'images', $countryUri); ?> " alt="Logo Superintendencia">
 	</div>
-	<? endif; ?>
+	<?php endif; ?>
 	<div class="flex flex-auto flex-wrap justify-around items-center">
 		<?php if(lang('CONF_FOOTER_NETWORKS') == 'ON'): ?>
 		<div class="order-first networks">
