@@ -4,7 +4,8 @@ $lang['CONFIG_MAINTENANCE'] = 'OFF';
 $lang['CONF_VIEW_SUFFIX'] = '-core';
 $lang['CONF_VALIDATE_CAPTCHA'] = [
 	'signIn',
-  'recoverAccess'
+	'recoverAccess',
+	'recoverPass'
 ];
 //SUPPORT IE 11
 $lang['CONF_SUPPORT_IE'] = 'OFF';
