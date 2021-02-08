@@ -4,6 +4,7 @@ $lang['CONFIG_MAINTENANCE'] = 'OFF';
 $lang['CONF_VIEW_SUFFIX'] = '-core';
 $lang['CONF_VALIDATE_CAPTCHA'] = [
 	'signIn',
+	'login',
 	'recoverAccess',
 	'recoverPass'
 ];

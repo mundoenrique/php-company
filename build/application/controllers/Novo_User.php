@@ -31,12 +31,6 @@ class Novo_User extends NOVO_Controller {
 		}
 
 		$view = 'login';
-
-		if(ACTIVE_RECAPTCHA) {
-			$this->load->library('recaptcha');
-			$this->render->scriptCaptcha = $this->recaptcha->getScriptTag();
-		}
-
 		$views = ['user/login', 'user/signin'];
 
 		if($this->skin !== 'novo') {
@@ -49,7 +43,6 @@ class Novo_User extends NOVO_Controller {
 			"third_party/jquery.validate",
 			"validate-forms",
 			"third_party/additional-methods",
-			"googleRecaptcha",
 			"user/login"
 		);
 
@@ -183,18 +176,12 @@ class Novo_User extends NOVO_Controller {
 
 		$view = 'recoverPass';
 
-		if(ACTIVE_RECAPTCHA) {
-			$this->load->library('recaptcha');
-			$this->render->scriptCaptcha = $this->recaptcha->getScriptTag();
-		}
-
 		array_push(
 			$this->includeAssets->jsFiles,
 			"user/recoverPass",
 			"third_party/jquery.validate",
 			"validate".lang('CONF_VIEW_SUFFIX')."-forms",
-			"third_party/additional-methods",
-			"googleRecaptcha"
+			"third_party/additional-methods"
 		);
 
 		$this->render->titlePage = lang('GEN_RECOVER_PASS_TITLE');
