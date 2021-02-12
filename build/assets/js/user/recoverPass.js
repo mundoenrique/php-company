@@ -18,7 +18,10 @@ $(function() {
 			}
 			$('form input, form button').attr('disabled', true);
 			recoverBtn.html(loader);
-			passRecover(recoverData, textBtn);
+			getRecaptchaToken('recoverPass', function (recaptchaToken) {
+				recoverData.token = recaptchaToken;
+				passRecover(recoverData, textBtn);
+			});
 		}
 	});
 })
