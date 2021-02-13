@@ -89,6 +89,16 @@ class Novo_Inquiries extends NOVO_Controller {
 			$responseAttr = $download;
 		}
 
+		if (isset($this->request->orderList)) {
+			$orderList = json_decode(base64_decode($this->request->orderList));
+			$orderList = json_decode($this->cryptography->decrypt(
+				base64_decode($orderList->plot),
+				utf8_encode($orderList->password)
+			));
+			$this->session->set_flashdata('serviceOrdersList', $orderList);
+			unset($this->request->orderList);
+		}
+
 		$response = $this->loadModel($this->request);
 
 		if(!$download) {

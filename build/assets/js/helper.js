@@ -284,8 +284,8 @@ function insertFormInput(disabled, form) {
 	if (form) {
 		ceo_cook = getCookieValue();
 		screenSize = screen.width;
-		form.append('<input type="hidden" name="ceo_name" value="' + ceo_cook + '"></input>');
-		form.append('<input type="hidden" name="screenSize" value="' + screenSize + '"></input>');
+		form.append('<input type="hidden" name="ceo_name" value="' + ceo_cook + '">');
+		form.append('<input type="hidden" name="screenSize" value="' + screenSize + '">');
 	}
 }
 
