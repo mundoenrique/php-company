@@ -3,7 +3,6 @@ var resultServiceOrders;
 $(function () {
 	$('#pre-loader').remove();
 	$('.hide-out').removeClass('hide');
-	var serviceOrdersBtn = $('#service-orders-btn');
 	var firstDate;
 	var lastdate;
 
@@ -90,7 +89,7 @@ $(function () {
 		lastdate = finalDate;
 	});
 
-	serviceOrdersBtn.on('click', function (e) {
+	$('#service-orders-btn').on('click', function (e) {
 		e.preventDefault();
 		var btnAction = $(this);
 		var statusOrder = $('#status-order');
@@ -185,13 +184,16 @@ $(function () {
 
 function format(bulk) {
 	var table, body = '';
+	var orderList = cryptoPass($('#resultServiceOrders').attr('orderList'));
+	console.log(orderList)
 	bulk = JSON.parse(bulk)
 	$.each(bulk, function (key, value) {
 		body+=	'<tr>';
 		body+= 		'<td>';
 		body+=			'<a class="btn-link big-modal this-bulk">'+value.bulkNumber+'</a>';
 		body+= 			'<form class="form-group" action="'+baseURL+'consulta-lote" method="post">';
-		body+= 				'<input type="hidden" name="bulkId" value='+value.bulkId+'>';
+		body+= 				'<input type="hidden" name="bulkId" value="'+value.bulkId+'">';
+		body+= 				'<input type="hidden" name="orderList" value="'+orderList+'">';
 		body+= 				'<input type="hidden" name="bulkfunction" value="Consulta de orden de servicio">';
 		body+=			'</form>';
 		body+=		'</td>';
