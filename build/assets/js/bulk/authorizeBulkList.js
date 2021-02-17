@@ -143,7 +143,7 @@ $(function () {
 				var oldId = $('#accept').attr('id');
 				var currentIdBtn = 'delete-bulk-btn';
 				var cancelDelete = $('#cancel');
-				$('#accept').attr('id', currentIdBtn);
+				$('#accept').show().attr('id', currentIdBtn);
 				var bulkNum = $(this).closest('tr').find('.bulk-num').text();
 				modalReq['table'] = $(this).closest('table');
 				modalBtn = {

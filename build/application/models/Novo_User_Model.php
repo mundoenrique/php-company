@@ -202,12 +202,6 @@ class Novo_User_Model extends NOVO_Model {
 				$this->response->msg = lang('USER_EXPIRE_TIME');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
-			case 9999:
-				$this->response->code = 4;
-				$this->response->icon = lang('CONF_ICON_DANGER');
-				$this->response->title = lang('GEN_SYSTEM_NAME');
-				$this->response->msg = lang('RESP_RECAPTCHA_VALIDATION_FAILED');
-			break;
 		}
 
 		return $this->responseToTheView('callWs_Login');
@@ -330,7 +324,12 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataRequest->idEmpresa = $dataRequest->idEmpresa;
 		$this->dataRequest->email = $dataRequest->email;
 		$maskMail = maskString($dataRequest->email, 4, $end = 6, '@');
-		$response = $this->sendToService('callWs_RecoverPass');
+
+		$this->isResponseRc = ACTIVE_RECAPTCHA ? $this->callWs_ValidateCaptcha_User($dataRequest) : 0;
+
+		if ($this->isResponseRc === 0) {
+			$response = $this->sendToService('callWs_RecoverPass');
+		}
 
 		switch($this->isResponseRc) {
 			case 0:
@@ -402,7 +401,11 @@ class Novo_User_Model extends NOVO_Model {
 		];
 		$map = 0;
 
-		$response = $this->sendToService('callWs_RecoverAccess');
+		$this->isResponseRc = ACTIVE_RECAPTCHA ? $this->callWs_ValidateCaptcha_User($dataRequest) : 0;
+
+		if ($this->isResponseRc === 0) {
+			$response = $this->sendToService('callWs_AccessRecover');
+		}
 
 		switch($this->isResponseRc) {
 			case 200:
@@ -461,10 +464,14 @@ class Novo_User_Model extends NOVO_Model {
 		$maskMail = maskString($dataRequest->email, 4, $end = 6, '@');
 		$map = 0;
 
-		if ($this->session->flashdata('authToken') != NULL) {
-			$response = $this->sendToService('callWs_ValidateOtp');
-		} else {
-			$this->isResponseRc = 998;
+		$this->isResponseRc = ACTIVE_RECAPTCHA ? $this->callWs_ValidateCaptcha_User($dataRequest) : 0;
+
+		if ($this->isResponseRc === 0){
+			if ($this->session->flashdata('authToken') != NULL) {
+				$response = $this->sendToService('callWs_ValidateOtp');
+			} else {
+				$this->isResponseRc = 998;
+			}
 		}
 
 		switch($this->isResponseRc) {
@@ -615,6 +622,8 @@ class Novo_User_Model extends NOVO_Model {
 	 * @date May 16th, 2019
 	 * @modified J. Enrique Peñaloza Piñero
 	 * @date October 21st, 2019
+	 * @modified Luis Molina
+	 * @date January 18th, 2021
 	 */
 	public function callWs_ValidateCaptcha_User($dataRequest)
 	{
@@ -622,14 +631,28 @@ class Novo_User_Model extends NOVO_Model {
 
 		$this->load->library('recaptcha');
 
+		$userName = $dataRequest->userName ?? ($dataRequest->user ?? '');
+
 		$result = $this->recaptcha->verifyResponse($dataRequest->token);
-		$logMessage = 'NOVO ['.$dataRequest->userName.'] RESPONSE: recaptcha País: "' .$this->config->item('country');
+		$logMessage = 'NOVO ['.$userName.'] RESPONSE: recaptcha País: "' .$this->config->item('country');
 		$logMessage.= '", Score: "' . $result["score"] .'", Hostname: "'. $result["hostname"].'"';
 
 		log_message('DEBUG', $logMessage);
 
-		return $result["score"] <= lang('CONF_SCORE_CAPTCHA')[ENVIRONMENT] ? 9999 : 0;
+		$resultRecaptcha = $result["score"] <= lang('CONF_SCORE_CAPTCHA')[ENVIRONMENT] ? 9999 : 0;
+
+		if ($resultRecaptcha == 9999) {
+			$this->response->code = 4;
+			$this->response->title = lang('GEN_SYSTEM_NAME');
+			$this->response->icon = lang('CONF_ICON_DANGER');
+			$this->response->msg = lang('RESP_RECAPTCHA_VALIDATION_FAILED');
+			$this->response->modalBtn['btn1']['link'] = 'inicio';
+			$this->response->modalBtn['btn1']['action'] = 'redirect';
+		}
+
+		return $resultRecaptcha;
 	}
+
 		/**
 	 * @info Método para consulta de administración de usuarios.
 	 * @author Diego Acosta García

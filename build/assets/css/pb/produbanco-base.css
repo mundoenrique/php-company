@@ -2374,6 +2374,7 @@ i[class*=" icon-"]:before {
 	-ms-transition: all .25s ease;
 	-o-transition: all .25s ease;
 	transition: all .25s ease;
+	min-width: 136px;
 }
 
 .main-nav-dropdown li ul {
