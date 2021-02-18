@@ -7,9 +7,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Encrypt_Connect {
 	private $CI;
 	private $userName;
-	private $countryConf;
 	private $iv;
-	private $keyNovo;
 	private $logMessage;
 
 	public function __construct()
@@ -17,7 +15,6 @@ class Encrypt_Connect {
 		log_message('INFO', 'NOVO Encrypt_Connect Library Class Initialized');
 
 		$this->CI = &get_instance();
-		$this->keyNovo = $this->CI->config->item('keyNovo');
 		$this->iv = "\0\0\0\0\0\0\0\0";
 		$this->logMessage = new stdClass();
 
@@ -43,7 +40,7 @@ class Encrypt_Connect {
 		}
 
 		$cryptData = mcrypt_encrypt(
-			MCRYPT_DES, $this->keyNovo, $dataB, MCRYPT_MODE_CBC, $this->iv
+			MCRYPT_DES, base64_decode(WS_KEY), $dataB, MCRYPT_MODE_CBC, $this->iv
 		);
 
 		return base64_encode($cryptData);
@@ -58,7 +55,7 @@ class Encrypt_Connect {
 
 		$data = base64_decode($cryptData);
 		$descryptData = mcrypt_decrypt(
-			MCRYPT_DES, $this->keyNovo, $data, MCRYPT_MODE_CBC, $this->iv
+			MCRYPT_DES, base64_decode(WS_KEY), $data, MCRYPT_MODE_CBC, $this->iv
 		);
 		$decryptData = base64_decode(trim($descryptData));
 		$response = json_decode($decryptData);
@@ -134,23 +131,22 @@ class Encrypt_Connect {
 		log_message('INFO', 'NOVO Encrypt_Connect: connectWs Method Initialized');
 
 		$fail = FALSE;
-		$subFix = '_'.strtoupper($this->CI->config->item('country-uri'));
+		$subFix = '_' . strtoupper($this->CI->config->item('country-uri'));
+		$wsUrl = $_SERVER['WS_URL'];
 
-		if(isset($_SERVER['WS_URL'.$subFix])) {
-			$this->CI->config->set_item('urlWS', $_SERVER['WS_URL'.$subFix]);
+		if (isset($_SERVER['WS_URL' . $subFix])) {
+			$wsUrl = $_SERVER['WS_URL' . $subFix];
 		}
 
-		$urlWS = $this->CI->config->item('urlWS').'eolwebInterfaceWS';
-
-		log_message('DEBUG', 'NOVO ['.$userName.'] REQUEST BY COUNTRY: '.$request['pais'].', AND WEBSERVICE URL: '.$urlWS);
+		log_message('DEBUG', 'NOVO ['.$userName.'] REQUEST BY COUNTRY: '.$request['pais'].', AND WEBSERVICE URL: '.$wsUrl);
 
 		$requestSerV = json_encode($request, JSON_UNESCAPED_UNICODE);
 
 		$ch = curl_init();
-		curl_setopt($ch, CURLOPT_URL, $urlWS);
+		curl_setopt($ch, CURLOPT_URL, $wsUrl);
 		curl_setopt($ch, CURLOPT_POST, TRUE);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-		curl_setopt($ch, CURLOPT_TIMEOUT, 59);
+		curl_setopt($ch, CURLOPT_TIMEOUT, 58);
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $requestSerV);
 		curl_setopt($ch, CURLOPT_HTTPHEADER, array(
 			'Content-Type: text/plain',

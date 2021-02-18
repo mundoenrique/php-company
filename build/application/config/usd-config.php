@@ -12,7 +12,7 @@ $config['countryUri']='us';
 */
 
 //RUTA BASE PARA ARCHIVOS CDN  Ejemplo: https://cdn.novopayment.dev/empresas/Usd/
-$config['base_url_cdn'] = BASE_CDN_URL.$config['country'].'/';
+$config['base_url_cdn'] = ASSET_URL.$config['country'].'/';
 
 //URL PARA CONECTAR POR SFTP A SERVIDOR
 $config['URL_TEMPLOTES'] = BULK_FTP_URL.$config['country'].'/';
@@ -21,7 +21,7 @@ $config['URL_TEMPLOTES'] = BULK_FTP_URL.$config['country'].'/';
 $config['FOLDER_UPLOAD_LOTES'] = BULK_LOCAL_PATH.$config['country'].'/'.'bash/';
 
 //PATH CARPETA BASE CDN DEL PAÍS
-$config['CDN'] = BASE_CDN_PATH.$config['country'].'/';
+$config['CDN'] = ASSET_PATH.$config['country'].'/';
 
 /*
 |--------------------------------------------------------------------------
