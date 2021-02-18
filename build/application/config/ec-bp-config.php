@@ -4,6 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 //País
 $config['country']='Ec-bp';
 $config['countryUri']='bp';
+$config['sess_expiration'] = 7200;
 $config['client'] = 'pichincha';
 /*
 |--------------------------------------------------------------------------

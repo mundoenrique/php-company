@@ -4,6 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 //País
 $config['country']='Usd';
 $config['countryUri']='us';
+$config['sess_expiration'] = 7200;
 
 /*
 |--------------------------------------------------------------------------
