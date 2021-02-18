@@ -141,6 +141,7 @@ class Encrypt_Connect {
 		log_message('DEBUG', 'NOVO ['.$userName.'] REQUEST BY COUNTRY: '.$request['pais'].', AND WEBSERVICE URL: '.$wsUrl);
 
 		$requestSerV = json_encode($request, JSON_UNESCAPED_UNICODE);
+		$start = microtime(true);
 
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, $wsUrl);
@@ -156,9 +157,12 @@ class Encrypt_Connect {
 		$httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 		$CurlError = curl_error($ch);
 		$CurlErrorNo = curl_errno($ch);
-		curl_close($ch);
 
-		log_message('DEBUG','NOVO ['.$userName.'] RESPONSE CURL HTTP CODE: ' . $httpCode);
+		curl_close($ch);
+		$final = microtime(true);
+		$executionTime = round($final - $start, 2, PHP_ROUND_HALF_UP) ;
+
+		log_message('DEBUG','NOVO ['.$userName.'] RESPONSE IN '. $executionTime .' sec CURL HTTP CODE: ' . $httpCode);
 
 		$failResponse = json_decode($response);
 
