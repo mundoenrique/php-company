@@ -68,7 +68,7 @@ class Lists_and_requirements_model extends CI_Model {
 
 		$dataEncry = np_Hoplite_Encryption($dataRequest, 'callWSListaEmpresasPaginar');
 		$dataRequest = json_encode(['bean' => $dataEncry, 'pais' => $this->pais]);
-		$response = np_Hoplite_GetWS('eolwebInterfaceWS', $dataRequest);
+		$response = np_Hoplite_GetWS($dataRequest);
 		$jsonResponse = np_Hoplite_Decrypt($response, 'callWSListaEmpresasPaginar');
 		log_message('INFO', '--[' . $this->userName . '] RESPONSE Lista de empresas: '. $jsonResponse);
 		$responseSerV = json_decode($jsonResponse);
