@@ -1,6 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 $lang['CONFIG_MAINTENANCE'] = 'OFF';
+$lang['CONFIG_CYPHER_DATA'] = ACTIVE_SAFETY ?? 'ON';
 $lang['CONF_VIEW_SUFFIX'] = '-core';
 $lang['CONF_VALIDATE_CAPTCHA'] = [
 	'signIn',

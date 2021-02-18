@@ -60,7 +60,7 @@ class Novo_CallModels extends Novo_Controller {
 
 		$modalBtn = $this->dataResponse->modalBtn;
 		$this->dataResponse->modalBtn = $this->verify_access->validateRedirect($modalBtn, $this->countryUri);
-		$dataResponse = $this->cryptography->encrypt($this->dataResponse);
+		$dataResponse = $dataResponse = lang('CONFIG_CYPHER_DATA') == 'ON' ?  $this->cryptography->encrypt($this->dataResponse) : $this->dataResponse;
 		$this->output->set_content_type('application/json')->set_output(json_encode($dataResponse, JSON_UNESCAPED_UNICODE));
 	}
 	/**

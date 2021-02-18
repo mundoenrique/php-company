@@ -116,8 +116,11 @@ function callNovoCore(verb, who, where, request, _response_) {
 	}
 
 	formData.append('request', dataRequest);
-	formData.append('ceo_name', ceo_cook);
-	formData.append('plot', btoa(ceo_cook));
+
+	if (lang.CONFIG_CYPHER_DATA == 'ON') {
+		formData.append('ceo_name', ceo_cook);
+		formData.append('plot', btoa(ceo_cook));
+	}
 
 	if (logged) {
 		clearTimeout(resetTimesession);
@@ -138,7 +141,10 @@ function callNovoCore(verb, who, where, request, _response_) {
 		dataType: 'json'
 	}).done(function (response, status, jqXHR) {
 
-		response = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, { format: CryptoJSAesJson }).toString(CryptoJS.enc.Utf8));
+		if (lang.CONFIG_CYPHER_DATA == 'ON') {
+			response = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, { format: CryptoJSAesJson }).toString(CryptoJS.enc.Utf8))
+		}
+
 		var modalClose = response.modal ? false : true;
 
 		if ($('#system-info').parents('.ui-dialog').length && modalClose) {
@@ -308,14 +314,19 @@ function formInputTrim(form) {
 function cryptoPass(jsonObject, req) {
 	req = req == undefined ? false : req;
 	ceo_cook = getCookieValue();
-	var cipherObject = CryptoJS.AES.encrypt(jsonObject, ceo_cook, { format: CryptoJSAesJson }).toString();
+	var cipherObject = jsonObject;
 
-	if(!req) {
-		cipherObject = btoa(JSON.stringify({
-			password: cipherObject,
-			plot: btoa(ceo_cook)
-		}));
+	if (lang.CONFIG_CYPHER_DATA == 'ON') {
+		cipherObject = CryptoJS.AES.encrypt(jsonObject, ceo_cook, { format: CryptoJSAesJson }).toString();
+
+		if (!req) {
+			cipherObject = btoa(JSON.stringify({
+				password: cipherObject,
+				plot: btoa(ceo_cook)
+			}));
+		}
 	}
+
 
 	return cipherObject;
 }
