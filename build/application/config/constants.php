@@ -127,7 +127,7 @@ defined('ACTIVE_RECAPTCHA')	OR define('ACTIVE_RECAPTCHA', $_SERVER['ACTIVE_RECAP
 defined('LANGUAGE')					OR define('LANGUAGE', end($uriSegments) === 'en' ? 'en' : 'es');
 defined('IP_VERIFY')				OR define('IP_VERIFY', $_SERVER['IP_VERIFY'] ?? 'ON');
 defined('SINGLE_SIGN_ON')		OR define('SINGLE_SIGN_ON', $_SERVER['SINGLE_SIGN_ON'] == 'ON' ? TRUE : FALSE);
-defined('BULK_LOCAL_PATH')	OR define('BULK_LOCAL_PATH', $_SERVER['BULK_LOCAL_PATH']);
+defined('ASSET_PATH')	OR define('ASSET_PATH', $_SERVER['ASSET_PATH']);
 defined('API_CONTENT_URL')	OR define('API_CONTENT_URL', $_SERVER['API_CONTENT_URL']);
 
 /*
