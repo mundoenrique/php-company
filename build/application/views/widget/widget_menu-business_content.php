@@ -3,9 +3,9 @@
   <nav id="nav2">
     <ul>
       <li>
-        <a href="<?=base_url($enterpriseList)?>" rel="start">
+        <a href="<?= base_url($enterpriseList)?>" rel="start">
           <span aria-hidden="true" class="icon" data-icon="&#xe097;"></span>
-          <?=lang('MENU_INICIO')?>
+          <?= lang('MENU_INICIO')?>
         </a>
       </li>
       <?php foreach ($menu as $lvlOneOpt): ?>
@@ -21,8 +21,8 @@
           </div>
           <?php foreach ($lvlOneOpt['suboptions'] as $lvlTwoOpt): ?>
           <li>
-            <a href="<?=$lvlTwoOpt['route']?>">
-              <?=$lvlTwoOpt['text']?>
+            <a href="<?= $lvlTwoOpt['route']?>">
+              <?= $lvlTwoOpt['text']?>
             </a>
             <?php if (isset($lvlTwoOpt['suboptions'])&&!empty($lvlTwoOpt['suboptions'])): ?>
             <ul>
@@ -34,21 +34,21 @@
               </li>
               <?php endforeach; ?>
             </ul>
-            <? endif; ?>
+            <?php endif; ?>
           </li>
           <?php endforeach; ?>
           <div id="scrolldown" style="display:none">
             <span class="ui-icon ui-icon-triangle-1-s"></span>
           </div>
         </ul>
-        <? endif; ?>
+        <?php endif; ?>
       </li>
       <?php endforeach; ?>
       <?php if(verifyDisplay('header', '', lang('GEN_TAG_GOUT_MENU'))): ?>
       <li>
-        <a href="<?=base_url($pais.'/cerrar-sesion/inicio')?>" rel="subsection">
+        <a href="<?= base_url($pais.'/cerrar-sesion/inicio')?>" rel="subsection">
           <span aria-hidden="true" class="icon" data-icon="&#xe03e;"></span>
-          <?=lang("SUBMENU_LOGOUT")?>
+          <?= lang("SUBMENU_LOGOUT")?>
         </a>
       </li>
       <?php endif; ?>
