@@ -14,6 +14,7 @@ $(function () {
 	remoteFunction = 'sendRequest';
 	form = $('#masterAccountForm');
 	var dataForm = getDataForm(form);
+	dataTableLang.emptyTable = lang.SERVICES_TABLE_NO_REGISTRY_MASTERACCOUNT;
 
 	table = $('#tableServicesMaster').DataTable({
 		drawCallback: function (d) {
