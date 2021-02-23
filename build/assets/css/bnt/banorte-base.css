@@ -614,6 +614,8 @@ label {
 .secondary { color: var(--color-secondary) !important }
 .tertiary  { color: var(--color-tertiary) }
 .text      { color: var(--color-sixth) !important }
+.regular    { color: var(--color-sixth) }
+.semibold    { color: var(--color-sixth) }
 .bg-items      { color: var(--color-secondary) !important }
 
 /* Icons, Logos

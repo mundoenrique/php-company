@@ -708,7 +708,7 @@ textarea.form-control {
 .custom-select {
 	display: inline-block;
 	padding-right: 1.75rem;
-	background: rgba(255,255,255,1) url("../../images/icons/icon-chevron_down_gray.svg") right .75rem center / 14px 14px no-repeat;
+	background: rgba(255,255,255,1) url("../images/icons/icon-chevron_down_gray.svg") right .75rem center / 14px 14px no-repeat;
   -webkit-appearance: none;
   -moz-appearance: none;
 	appearance: none;
@@ -718,7 +718,7 @@ textarea.form-control {
 .custom-select:hover:not(:disabled) {
 	display: inline-block;
 	padding-right: 1.75rem;
-	background: rgba(255,255,255,1) url("../../images/icons/icon-chevron_down_black.svg") right .75rem center / 14px 14px no-repeat;
+	background: rgba(255,255,255,1) url("../images/icons/icon-chevron_down_black.svg") right .75rem center / 14px 14px no-repeat;
   -webkit-appearance: none;
   -moz-appearance: none;
 	appearance: none;
@@ -1061,7 +1061,7 @@ textarea.form-control {
 }
 @supports (-webkit-appearance:none) {
 	.sb-icon-search	.icon-find{
-		margin-top: 2px;
+		margin-top: 4px;
 	}
 }
 
@@ -1134,8 +1134,8 @@ textarea.form-control {
 
 /* sizes */
 .btn-small {
-	padding: var(--button-small-padding-y) var(--button-small-padding-x);
-	font-size: .875rem;
+	padding: var(--button-small-padding-y) var(--button-small-padding-x) !important;
+	font-size: .875rem !important;
 }
 
 .btn-large {
@@ -1860,7 +1860,7 @@ textarea.form-control {
 
 /* Font weight */
 .light      {font-weight: var(--light-font-weight) !important }
-.regular    { font-weight: var(--light-font-weight) !important }
+.regular    { font-weight: var(--light-font-weight) }
 .semibold   { font-weight: var(--bold-font-weight) !important }
 .bold       { font-weight: var(--bold-font-weight) !important }
 
@@ -2015,9 +2015,9 @@ i[class*=" icon-"]:before {
 }
 
 .spinner-border-lg {
-  width: 5.5rem;
-  height: 5.5rem;
-  border-width: .3em;
+  width: 5.5rem !important;
+  height: 5.5rem !important;
+  border-width: .3em !important;
 }
 
 .cover-spin {
@@ -2360,7 +2360,7 @@ i[class*=" icon-"]:before {
 .dataTables_length select {
 	display: inline-block;
 	padding-right: 1.75rem;
-	background: rgba(255,255,255,1) url("../../images/icons/icon-chevron_down_gray.svg") right .75rem center / 14px 14px no-repeat;
+	background: rgba(255,255,255,1) url("../images/icons/icon-chevron_down_gray.svg") right .75rem center / 14px 14px no-repeat;
   -webkit-appearance: none;
   -moz-appearance: none;
 	appearance: none;
@@ -2368,7 +2368,7 @@ i[class*=" icon-"]:before {
 }
 
 .dataTables_length select:hover {
-	background: rgba(255,255,255,1) url("../../images/icons/icon-chevron_down_gray.svg") right .75rem center / 14px 14px no-repeat;
+	background: rgba(255,255,255,1) url("../images/icons/icon-chevron_down_gray.svg") right .75rem center / 14px 14px no-repeat;
 }
 
 .dataTables_info {
