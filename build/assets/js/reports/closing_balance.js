@@ -37,7 +37,7 @@ $(function () {
 		validateForms(form)
 
 		if (form.valid()) {
-			insertFormInput(false);
+			insertFormInput(true, form);
 			form = $('#closingBudgetForm');
 			var dataForm = getDataForm(form)
 			closingBudgets(dataForm)
@@ -116,15 +116,15 @@ function closingBudgets(dataForm) {
 			$('.hide-table').removeClass('hide')
 			$('.hide-out').removeClass('hide');
 		},
+		"autoWidth": false,
 		"ordering": false,
 		"searching": false,
 		"lengthChange": false,
-		"length": 10,
+		"pagelength": 10,
 		"pagingType": "full_numbers",
 		"table-layout": "fixed",
 		"select": {
 			"style": "multi",
-			"selector": ':not(td:nth-child(-n+6))',
 			"info": false
 		},
 		"language": dataTableLang,
