@@ -112,14 +112,14 @@ class Novo_Services_Model extends NOVO_Model {
 				$this->response->msg = lang('GEN_TABLE_SEMPTYTABLE');
 
 				if ( array_key_exists('saldoCtaConcentradora',
-				$response->maestroDeposito) ) {
-					$this->response->balanceConcentratingAccount = $response->maestroDeposito->saldoCtaConcentradora;
+				$response->bean->maestroDeposito) ) {
+					$this->response->balanceConcentratingAccount = $response->bean->maestroDeposito->saldoCtaConcentradora;
 			}
 
-			if ( $response->maestroDeposito->saldoDisponible <= 0 ){
+			if ( $response->bean->maestroDeposito->saldoDisponible <= 0 ){
 				$this->response->balance = lang('GEN_CURRENCY').' '. currencyFormat(0);
 			 } else {
-				$this->response->balance = lang('GEN_CURRENCY').' '.($response->maestroDeposito->saldoDisponible);
+				$this->response->balance = lang('GEN_CURRENCY').' '.($response->bean->maestroDeposito->saldoDisponible);
 			}
 
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
