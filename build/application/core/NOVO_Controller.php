@@ -166,7 +166,8 @@ class NOVO_Controller extends CI_Controller {
 				array_unshift(
 					$this->includeAssets->cssFiles,
 					"$this->countryUri/root-$this->skin",
-					"reboot"
+					"root-general",
+					"reboot",
 				);
 			} else {
 				array_unshift(
