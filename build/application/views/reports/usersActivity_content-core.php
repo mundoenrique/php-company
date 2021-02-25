@@ -66,13 +66,6 @@
 					</div>
 				</div>
 				<div id="blockResultsUser" class="center mx-1 hide">
-					<div class="flex">
-						<div id="buttonFiles" class="flex mr-2 py-3 flex-auto justify-end items-center">
-							<button id="exportExcel" class="btn px-1 big-modal" title="Exportar a EXCEL" data-toggle="tooltip">
-								<i class="icon icon-file-excel" aria-hidden="true"></i>
-							</button>
-						</div>
-					</div>
 					<table id="usersActivity" class="cell-border h6 display responsive w-100">
 						<thead class="bg-primary secondary regular">
 							<tr>

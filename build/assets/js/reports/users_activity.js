@@ -8,11 +8,14 @@ var usersActivityMainTable;
 var userActivityOptions = '';
 userActivityOptions += '<tr>';
 userActivityOptions += 	'<td class="flex justify-center items-center">';
-userActivityOptions += 		'<button id="lastActions" class="btn px-0 details-user" title="Ultimas acciones" data-toggle="tooltip">';
+userActivityOptions += 		'<button class="btn px-0 details-user lastActionsBtn" title="Ultimas acciones" data-toggle="tooltip">';
 userActivityOptions += 			'<i class="icon icon-user mr-1" aria-hidden="true"></i>';
 userActivityOptions += 		'</button>';
-userActivityOptions += 		'<button id="enabledFunctions" class="btn px-0 details-user" title="Funciones habilitadas" data-toggle="tooltip">';
+userActivityOptions += 		'<button class="btn px-0 details-user enabledFunctionsBtn" title="Funciones habilitadas" data-toggle="tooltip">';
 userActivityOptions += 			'<i class="icon icon-user-config mr-1" aria-hidden="true"></i>';
+userActivityOptions += 		'</button>';
+userActivityOptions += 		'<button class="btn px-0 details-user big-modal exportExcel" title="Exportar a EXCEL" data-toggle="tooltip">';
+userActivityOptions += 			'<i class="icon icon-file-excel mr-1" aria-hidden="true"></i>';
 userActivityOptions += 		'</button>';
 userActivityOptions += 	'</td>';
 userActivityOptions += '</tr>';
@@ -88,7 +91,7 @@ $(function () {
 	});
 
 	//Tabla de Ultimas acciones realizadas
-	$('#usersActivityOptions').delegate('#lastActions', 'click', function () {
+	$('#usersActivityOptions').delegate('.lastActionsBtn', 'click', function () {
 		var oldTr = $(this).closest('tbody').find('tr.shown');
 		var oldRow = usersActivityMainTable.row(oldTr);
 		var tr = $(this).closest('tr');
@@ -117,7 +120,7 @@ $(function () {
 	});
 
 	//Tabla de Funciones habilitadas
-	$('#usersActivityOptions').delegate('#enabledFunctions', 'click', function () {
+	$('#usersActivityOptions').delegate('.enabledFunctionsBtn', 'click', function () {
 		var oldTr = $(this).closest('tbody').find('tr.shown');
 		var oldRow = usersActivityMainTable.row(oldTr);
 		var tr = $(this).closest('tr');
@@ -146,17 +149,18 @@ $(function () {
 
 	});
 
-	//Exportar a Excel
-	$('#exportExcel').on('click', function(e){
-		e.preventDefault();
+	//Descargar archivo Excel
+	$('#usersActivityOptions').delegate('.exportExcel', 'click', function () {
 		form = $('#userActivityForm');
 		formInputTrim(form);
 		validateForms(form);
+		var userToDownload = $(this).parents('tr').attr('username');
 
 		if (form.valid()) {
+			$('.cover-spin').show();
 			data = getDataForm(form);
+			data.userToDownload = userToDownload;
 			verb = "POST"; who = 'Reports'; where = 'exportExcelUsersActivity'; data;
-
 			callNovoCore(verb, who, where, data, function(response) {
 
 				if (response.code == 0) {
@@ -177,6 +181,7 @@ function createTable(usersActivityData){
 		"data": usersActivityData,
 		"createdRow": function( row, data, dataIndex ) {
 			$(row).attr( 'userId', dataIndex );
+			$(row).attr( 'username', data.user );
 		},
 		"language": dataTableLang,
 		"columns": [

@@ -1268,6 +1268,7 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->dataRequest->acprefix = $this->session->productInf->productPrefix;
 		$this->dataRequest->fechaInicio =  $dataRequest->initialDate;
 		$this->dataRequest->fechaFin =  $dataRequest->finalDate;
+		$this->dataRequest->nombreUsuario =  $dataRequest->userToDownload;
 
 		$response = $this->sendToService('callWs_exportExcelUsersActivity');
 
