@@ -982,7 +982,7 @@ table.dataTable thead th.select-checkbox:before {
 }
 
 table.dataTable tr.selected td.select-checkbox::after, table.dataTable tr.selected th.select-checkbox::after{
-	margin-top: -4px !important !important;
+	margin-top: -4px !important;
 }
 
 .dataTables_wrapper .dataTables_paginate .paginate_button.disabled,
@@ -1213,9 +1213,27 @@ a.ui-button:active,
 /* Loading */
 /* Background para vista loading */
 
+.logo-banco{
+	height: auto;
+}
+
 .login-content {
-	margin: 0 auto;
-	display: block !important;
+	/* margin: 0 auto;
+	display: block !important; */
+	padding: 8rem 0;
+}
+
+.login-content::before {
+	content: ' ';
+	display: block;
+	position: absolute;
+	width: auto;
+	height: auto;
+	z-index: 0;
+	opacity: .4;
+	background-image: url("../../images/bdb/bg-content.png");
+	background-repeat: no-repeat;
+	background-size: 35%;
 }
 
 .mt-ie11 {
@@ -1305,9 +1323,7 @@ select::-ms-expand {
 .detail-lot tbody tr td {
 	background-color: #d8d8d8 !important;
 }
-
 }
-
 @media (min-width: 768px) {
 	/* Forms */
 	.sb-search.sb-search-open, .no-js .sb-search {

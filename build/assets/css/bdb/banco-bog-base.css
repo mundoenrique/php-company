@@ -1409,7 +1409,7 @@ a.ui-button:active,
 /* Loading */
 /* Background para vista loading */
 
-.login-content:before {
+.login-content::before {
 	content: ' ';
 	display: block;
 	position: absolute;
