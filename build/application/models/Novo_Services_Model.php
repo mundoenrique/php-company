@@ -110,6 +110,18 @@ class Novo_Services_Model extends NOVO_Model {
 				$this->response->title = lang('GEN_MENU_SERV_MASTER_ACCOUNT');
 				$this->response->icon = lang('CONF_ICON_INFO');
 				$this->response->msg = lang('GEN_TABLE_SEMPTYTABLE');
+
+				if ( array_key_exists('saldoCtaConcentradora',
+				$response->bean->maestroDeposito) ) {
+					$this->response->balanceConcentratingAccount = $response->bean->maestroDeposito->saldoCtaConcentradora;
+			}
+
+			if ( $response->bean->maestroDeposito->saldoDisponible <= 0 ){
+				$this->response->balance = lang('GEN_CURRENCY').' '. currencyFormat(0);
+			 } else {
+				$this->response->balance = lang('GEN_CURRENCY').' '.($response->bean->maestroDeposito->saldoDisponible);
+			}
+
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -233:
