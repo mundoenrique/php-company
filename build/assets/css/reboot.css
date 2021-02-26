@@ -2142,17 +2142,6 @@ i[class*=" icon-"]:before {
 	font-weight: var(--bold-font-weight) !important;
 }
 
-.page-number span:hover::before,
-.page-number .page-current::before,
-.page-number span:hover::after,
-.page-number .page-current::after,
-.main-nav-user  li:hover::before,
-.main-nav-user  .page-current::before,
-.main-nav-user  li:hover::after,
-.main-nav-user  .page-current::after  {
-	width: 100%;
-}
-
 .page-number span::after, .main-nav-user  li::after {
 	bottom: 0;
 	right: 0;
