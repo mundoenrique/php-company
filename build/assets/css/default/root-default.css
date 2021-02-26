@@ -9,17 +9,17 @@
 :root {
 
 	/* Brand colors */
-	--color-primary: #005AA9;
+	--color-primary: #1500a1;
 	--color-secondary: #ffffff;
 	--color-tertiary: #E6E7E8;
 	--color-fifth: #D2D3D4;
 	--color-sixth: #58595B;
-	--color-seventh:#0363b8;
+	--color-seventh:#060060;
 	--color-eighth: #BCBEC0;
 
 	/* Others */
 	--option-not-active: #ffffff;
-	--option-active: #005AA9;
+	--option-active: #1500a1;
 	--black: #111111;
 
 	/* Typography */

@@ -16,7 +16,7 @@ header.main-head {
 	height: 3.75rem;
 	background-color: var(--color-primary);
 	font-weight: var(--light-font-weight);
-	border-bottom: 3px solid rgba(123, 193, 67, 1);
+	border-bottom: 3px solid rgba(00, 220, 201)
 }
 
 /* Content */
@@ -31,7 +31,7 @@ footer.main-footer {
 	padding: 1rem 1rem;
 	color: var(--color-secondary);
 	background-color: var(--color-primary);
-	border-top: 3px solid rgba(123, 193, 67, 1);
+	border-top: 3px solid rgba(00, 220, 201)
 }
 
 /* Type Scale
