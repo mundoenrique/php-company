@@ -1666,12 +1666,31 @@ a.ui-button:active,
 }
 
 .file:before {
+  position: absolute;
+  top: 0%;
+  height: 108%;
+  content: ' ';
+  z-index: -1;
+}
+
+.file:before {
 	width: 4rem;
 	background-color: var(--color-tertiary);
 	box-shadow: 5px 5px 20px var(--color-eighth);
 	border: 2px solid var(--color-eighth);
 	left: 4px;
 	border-radius: 5px;
+}
+
+.download {
+	transform: initial;
+  -moz-transform: initial;
+  -webkit-transform: initial;
+}
+
+.download:before {
+	box-shadow: none;
+	border: none;
 }
 
 .detail-lot tbody tr:first-child td {
