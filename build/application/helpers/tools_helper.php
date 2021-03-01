@@ -55,23 +55,23 @@ if ( ! function_exists('np_hoplite_countryCheck')) {
 		switch ($countryISO) {
 			case 'Ve':
 			case 've':
-				$CI->config->load('ve-config');
+				$CI->config->load('conf-ve-config');
 				break;
 			case 'Co':
 			case 'co':
-				$CI->config->load('co-config');
+				$CI->config->load('conf-co-config');
 				break;
 			case 'Pe':
 			case 'pe':
-				$CI->config->load('pe-config');
+				$CI->config->load('conf-pe-config');
 				break;
 			case 'Usd':
 			case 'us':
-				$CI->config->load('usd-config');
+				$CI->config->load('conf-usd-config');
 				break;
 			case 'Ec-bp':
 			case 'bp':
-				$CI->config->load('ec-bp-config');
+				$CI->config->load('conf-ec-bp-config');
 				break;
 			default:
 				redirect('/Pe/login');
