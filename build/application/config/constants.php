@@ -95,6 +95,19 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
 */
 $uriSegments  =  explode( "/", parse_url($_SERVER[ 'REQUEST_URI'], PHP_URL_PATH ));
 $proxy_ips = filter_var($_SERVER['REMOTE_ADDR'], FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE) ? 'public' : 'private';
+$timeZone = [
+	'bdb' => 	'America/Bogota',
+	'bg' => 	'America/Guayaquil',
+	'bnt' => 	'America/Mexico_City',
+	'bp' => 	'America/Guayaquil',
+	'co' => 	'America/Bogota',
+	'pb' => 	'America/Guayaquil',
+	'pe' => 	'America/Lima',
+	'us' => 	'America/Lima',
+	've' => 	'America/Caracas',
+];
+$timeZone = array_key_exists($uriSegments[1], $timeZone) ? $timeZone[$uriSegments[1]] : 'UTC';
+date_default_timezone_set($timeZone);
 /*
 |--------------------------------------------------------------------------
 | FRAMEWORK SETTINGS
