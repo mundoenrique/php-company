@@ -53,22 +53,22 @@ class Novo_Bulk_Model extends NOVO_Model {
 							$bulk['statusPr'] = '';
 							$bulk['statusColor'] = ' bg-being-validated';
 							$bulk['statusText'] = lang('BULK_VALIDATING');
-							break;
+						break;
 						case '1':
 							$bulk['statusPr'] = 'status-pr ';
 							$bulk['statusColor'] = ' bg-will-processed';
 							$bulk['statusText'] = lang('BULK_VALID');
-							break;
+						break;
 						case '5':
 							$bulk['statusPr'] = '';
 							$bulk['statusColor'] = 'bg-not-processed';
 							$bulk['statusText'] = lang('BULK_NO_VALID');
-							break;
+						break;
 						case '6':
 							$bulk['statusPr'] = 'status-pr ';
 							$bulk['statusColor'] = ' bg-will-not-processed';
 							$bulk['statusText'] = lang('BULK_VALID');
-							break;
+						break;
 					}
 
 					$bulk['status'] = $bulktatus;
@@ -82,7 +82,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 				break;
 				case -15:
 					$this->response->code = 0;
-					break;
+				break;
 		}
 
 		$this->response->data->pendingBulk = (object) $pendingBulkList;
@@ -135,7 +135,6 @@ class Novo_Bulk_Model extends NOVO_Model {
 					$type['text'] = ucfirst(mb_strtolower($response->lista[$pos]->tipoLote));
 					$typesLot[] = (object) $type;
 				}
-
 			break;
 		}
 
