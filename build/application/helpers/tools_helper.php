@@ -74,7 +74,7 @@ if ( ! function_exists('np_hoplite_countryCheck')) {
 				$CI->config->load('conf-ec-bp-config');
 				break;
 			default:
-				redirect('/Pe/login');
+				redirect('pe/inicio');
 		}
 	}
 }
