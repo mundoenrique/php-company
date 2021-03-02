@@ -12,7 +12,7 @@ $lang['CONF_VALIDATE_CAPTCHA'] = [
 //SUPPORT IE 11
 $lang['CONF_SUPPORT_IE'] = 'OFF';
 //AGENT INFO
-$lang['CONF_AGEN_INFO'] = 'OFF';
+$lang['CONF_AGENT_INFO'] = 'OFF';
 //SCORE RECAPTCHA
 $lang['CONF_SCORE_CAPTCHA'] = [
 	'development' => 0,
