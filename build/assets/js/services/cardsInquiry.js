@@ -286,6 +286,12 @@ function InqBuildFormActions(currentAction, currentTitle, currentBtn) {
 		inputModal += 	'</div>';
 	}
 
+	if (currentAction == 'CARD_CANCELLATION') {
+		inputModal += '<div class="form-group col-12 w-160-ie">';
+		inputModal += '<p class="mb-0">' + lang.SERVICES_RESPONSE_CARD_CANCELED + '</p>';
+		inputModal += '</div>';
+	}
+
 	if (lang.CONF_REMOTE_AUTH == 'OFF') {
 
 		inputModal += 	'<div class="form-group col-12">';
