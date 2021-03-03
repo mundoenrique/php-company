@@ -2099,6 +2099,7 @@ i[class*=" icon-"]:before {
 .icon-email:before           { content: "\e0ba"; }
 .icon-500:before           	 { content: "\e901"; }
 .icon-404:before           	 { content: "\e902"; }
+.icon-card-canceled:before   { content: "\e014"; }
 
 .icon-user{
 	padding-right: 0 !important;
