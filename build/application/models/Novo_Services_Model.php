@@ -471,7 +471,7 @@ class Novo_Services_Model extends NOVO_Model {
 							if ($status->edoTarjeta == $cards->edoEmision) {
 								foreach ($status->operacion AS $oper) {
 									$key = mb_strtoupper(str_replace(' ', '_', $oper));
-									$options[lang('SERVICES_INQUIRY_OPTIONS')[$key]] = lang('SERVICES_INQUIRY_OPTIONS')[$key];
+									$options[lang('SERVICES_INQUIRY_OPTIONS')[$key]] = lang('SERVICES_INQUIRY_OPTIONS_ICON')[lang('SERVICES_INQUIRY_OPTIONS')[$key]];
 									$massiveOptions[lang('SERVICES_INQUIRY_OPTIONS')[$key]] = lang('SERVICES_INQUIRY_'.lang('SERVICES_INQUIRY_OPTIONS')[$key]);
 								}
 								unset($options['NO_OPER']);
@@ -535,6 +535,7 @@ class Novo_Services_Model extends NOVO_Model {
 			case 'SEND_TO_ENTERPRISE':
 			case 'RECEIVE_IN_ENTERPRISE':
 			case 'RECEIVE_IN_BANK':
+			case 'CARD_CANCELLATION':
 			break;
 		}
 

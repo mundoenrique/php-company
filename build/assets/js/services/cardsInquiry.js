@@ -183,63 +183,18 @@ function getCardList(request) {
 				{
 					data: function (data) {
 						var options = '<div class="flex justify-center items-center">';
-						if (data.options.UPDATE_DATA) {
-							options += '<button class="btn mx-1 px-0 update" title="'+lang.SERVICES_INQUIRY_UPDATE_DATA+'" data-toggle="tooltip" ';
-							options += 'action="'+data.options.UPDATE_DATA+'">';
-							options += 	'<i class="icon icon-user-edit" aria-hidden="true"></i>';
-							options += '</button>';
-						}
 
-						if (data.options.INQUIRY_BALANCE) {
-							options += '<button class="btn mx-1 px-0" title="'+lang.SERVICES_INQUIRY_INQUIRY_BALANCE+'" data-toggle="tooltip" ';
-							options += 'action="'+data.options.INQUIRY_BALANCE+'">';
-							options += 	'<i class="icon icon-envelope-open" aria-hidden="true"></i>';
-							options += '</button>';
-						}
-
-						if (data.options.LOCK_CARD) {
-							options += '<button class="btn mx-1 px-0" title="'+lang.SERVICES_INQUIRY_LOCK_CARD+'" data-toggle="tooltip" ';
-							options += 'action="'+data.options.LOCK_CARD+'">';
-							options += 	'<i class="icon icon-lock" aria-hidden="true"></i>';
-							options += '</button>';
-						}
-
-						if (data.options.UNLOCK_CARD) {
-							options += '<button class="btn mx-1 px-0" title="'+lang.SERVICES_INQUIRY_UNLOCK_CARD+'" data-toggle="tooltip" ';
-							options += 'action="'+data.options.UNLOCK_CARD+'">';
-							options += 	'<i class="icon icon-unlock" aria-hidden="true"></i>';
-							options += '</button>';
-						}
-
-						if (data.options.DELIVER_TO_CARDHOLDER) {
-							options += '<button class="btn mx-1 px-0" title="'+lang.SERVICES_INQUIRY_DELIVER_TO_CARDHOLDER+'" data-toggle="tooltip" ';
-							options += 'action="'+data.options.DELIVER_TO_CARDHOLDER+'">';
-							options += 	'<i class="icon icon-deliver-card" aria-hidden="true"></i>';
-							options += '</button>';
-						}
-
-						if (data.options.SEND_TO_ENTERPRISE) {
-							options += '<button class="btn mx-1 px-0" title="'+lang.SERVICES_INQUIRY_SEND_TO_ENTERPRISE+'" data-toggle="tooltip" ';
-							options += 'action="'+data.options.SEND_TO_ENTERPRISE+'">';
-							options += 	'<i class="icon icon-shipping" aria-hidden="true"></i>';
-							options += '</button>';
-						}
-
-						if (data.options.RECEIVE_IN_ENTERPRISE) {
-							options += '<button class="btn mx-1 px-0" title="'+lang.SERVICES_INQUIRY_RECEIVE_IN_ENTERPRISE+'" data-toggle="tooltip" ';
-							options += 'action="'+data.options.RECEIVE_IN_ENTERPRISE+'">';
-							options += 	'<i class="icon icon-building" aria-hidden="true"></i>';
-							options += '</button>';
-						}
-
-						if (data.options.RECEIVE_IN_BANK) {
-							options += '<button class="btn mx-1 px-0" title="'+lang.SERVICES_INQUIRY_RECEIVE_IN_BANK+'" data-toggle="tooltip" ';
-							options += 'action="'+data.options.RECEIVE_IN_BANK+'">';
-							options += 	'<i class="icon icon-user-building" aria-hidden="true"></i>';
-							options += '</button>';
-						}
-
-						if (data.options.NO_OPER) {
+						if ( !data.options.NO_OPER ) {
+							$.each(data.options, function(key,val){
+								var title = "SERVICES_INQUIRY_".concat(key);
+								if ( data.options[key] ) {
+									options += '<button class="btn mx-1 px-0" title="'+lang[title] + '" data-toggle="tooltip" ';
+									options += 'action="' + key + '">';
+									options += 	'<i class="icon icon-' + data.options[key] + '" aria-hidden="true"></i>';
+									options += '</button>';
+								}
+							})
+						} else {
 							options += '<span class="btn mx-1 px-0" data-toggle="tooltip">';
 							options += 	data.options.NO_OPER;
 							options += '</span>';
