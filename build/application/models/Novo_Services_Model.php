@@ -687,7 +687,7 @@ class Novo_Services_Model extends NOVO_Model {
 				$this->response->data->shops = $response->bean->cards[0];
 				$this->response->title = lang('GEN_COMMERCIAL_TWIRLS_TITTLE');
 				$this->response->icon =  lang('CONF_ICON_WARNING');
-        $this->response->modalBtn['btn1']['action'] = 'close';
+        $this->response->modalBtn['btn1']['action'] = 'destroy';
 				switch ($response->bean->cards[0]->rc) {
 					case -266:
 						$this->response->msg = 	novoLang(lang('SERVICES_TWIRLS_TEMPORARY_BLOCKED_CARD'), maskString( $dataRequest->cardNumber, 4, 6));

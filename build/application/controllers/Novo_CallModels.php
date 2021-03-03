@@ -97,7 +97,7 @@ class Novo_CallModels extends Novo_Controller {
 		$filenameT = time().'_'.date('s').$this->countryUri.$filename;
 		$filenameT = mb_strtolower($filenameT.'.'.$ext);
 		$config['file_name'] = $filenameT;
-		$config['upload_path'] = $this->config->item('upload_bulk');
+		$config['upload_path'] = UPLOAD_PATH;
 		$config['allowed_types'] = lang('VALIDATE_FILES_EXTENSION');
 		$this->load->library('upload', $config);
 

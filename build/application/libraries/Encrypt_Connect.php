@@ -217,26 +217,25 @@ class Encrypt_Connect {
 	{
 		log_message('INFO', 'NOVO Encrypt_Connect: moveFile Method Initialized');
 
-		$urlBulkService = $this->CI->config->item('url_bulk_service');
-		$userpassBulk = $this->CI->config->item('userpass_bulk');
-		$uploadBulk = $this->CI->config->item('upload_bulk');
+		$urlBulkService = BULK_FTP_URL.$this->CI->config->item('country').'/';
+		$userpassBulk =  BULK_FTP_USERNAME.':'.BULK_FTP_PASSWORD;
 		$respUpload = new stdClass;
 		$respUpload->rc = 0;
 
 		log_message('INFO', 'NOVO UPLOAD FILE BY: '.$urlBulkService.' AND: '.$userpassBulk);
 
 		$ch = curl_init();
-		$Fclose = $fOpen = fopen($uploadBulk.$file, 'r');
+		$Fclose = $fOpen = fopen(UPLOAD_PATH.$file, 'r');
 		curl_setopt($ch, CURLOPT_URL, $urlBulkService.$file);
 		curl_setopt($ch, CURLOPT_USERPWD, $userpassBulk);
 		curl_setopt($ch, CURLOPT_UPLOAD, 1);
 		curl_setopt($ch, CURLOPT_PROTOCOLS, CURLPROTO_SFTP);
 		curl_setopt($ch, CURLOPT_INFILE, $fOpen);
-		curl_setopt($ch, CURLOPT_INFILESIZE, filesize($uploadBulk.$file));
+		curl_setopt($ch, CURLOPT_INFILESIZE, filesize(UPLOAD_PATH.$file));
 		curl_exec ($ch);
 		$result = curl_errno($ch);
 
-		log_message('DEBUG','NOVO ['.$userName.'] UPLOAD FILE BULK SFTP '.$model.': '.$result.' '.lang('GEN_UPLOAD_SFTP('.$result.')'));
+		log_message('DEBUG', 'NOVO ['.$userName.'] UPLOAD FILE BULK SFTP '.$model.': '.$result.' '.lang('GEN_UPLOAD_SFTP('.$result.')'));
 
 		if($result != 0) {
 			$respUpload->rc = -105;
@@ -244,7 +243,7 @@ class Encrypt_Connect {
 
 		curl_close ($ch);
 		fclose($Fclose);
-		unlink($uploadBulk.$file);
+		unlink(UPLOAD_PATH.$file);
 
 		return $respUpload;
 	}
