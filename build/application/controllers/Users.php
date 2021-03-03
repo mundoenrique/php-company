@@ -2612,7 +2612,18 @@ class Users extends CI_Controller {
             $this->lang->load('upload');
             $this->lang->load('erroreseol');
 
-            $config['upload_path'] = $this->config->item('FOLDER_UPLOAD_LOTES');
+            $createDirectory = lang('GEN_UPLOAD_NOT_CREATE_DIRECTORY');
+
+						if (!is_dir(UPLOAD_PATH.$this->config->item('country'))) {
+							if (mkdir(UPLOAD_PATH.$this->config->item('country'), 0755, TRUE)) {
+								$createDirectory = lang('GEN_UPLOAD_CREATE_DIRECTORY');
+							};
+						}
+
+						$config['upload_path'] = UPLOAD_PATH.$this->config->item('country').'/';
+
+						log_message('DEBUG', 'uploadFiles directory '.$config['upload_path'].' ' .$createDirectory);
+
             $config['allowed_types'] = '*';
 
             $this->load->library('upload', $config);
@@ -2636,8 +2647,8 @@ class Users extends CI_Controller {
                 $localfile = $config['upload_path'].$nombreArchivo.$extensionArchivo;
                 $fp = fopen($localfile, 'r');
                 $nombreArchivoNuevo = date("YmdHis").$nombreArchivo.$extensionArchivo;
-                $URL_TEMPLOTES = $this->config->item('URL_TEMPLOTES');
-                $LOTES_USERPASS = $this->config->item('LOTES_USERPASS');
+                $URL_TEMPLOTES = BULK_FTP_URL.$this->config->item('country');
+                $LOTES_USERPASS = BULK_FTP_USERNAME.':'.BULK_FTP_PASSWORD;
 
                 curl_setopt($ch, CURLOPT_URL, $URL_TEMPLOTES.$nombreArchivoNuevo);
                 curl_setopt($ch, CURLOPT_USERPWD, $LOTES_USERPASS);
