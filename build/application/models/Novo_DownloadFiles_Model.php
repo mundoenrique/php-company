@@ -24,6 +24,7 @@ class Novo_DownloadFiles_Model extends NOVO_Model {
 		unlink(assetPath('downloads/'.$dataRequest->fileName));
 		$this->response->code = 0;
 		$this->response->data = '';
+		$this->response->modalBtn['btn1']['action'] = 'none';
 		return $this->responseToTheView('callWs_DeleteFile');
 	}
 	/**
