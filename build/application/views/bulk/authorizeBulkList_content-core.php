@@ -103,6 +103,7 @@
       <?php endif; ?>
       <div class="flex pb-5 flex-column">
         <span class="line-text mb-2 h4 semibold primary"><?= lang('BULK_PENDING_AUTH'); ?></span>
+				<?php if(lang('CONF_IMAGE_CLOCK') == 'ON'): ?>
 				<div class="row mx-1 mb-3">
 					<div class="col-6 my-auto">
 						<h5><?= lang('BULK_IMPORTANT'); ?></h5>
@@ -113,6 +114,7 @@
 						<img class="mt-1" src="<?= $this->asset->insertFile(lang('GEN_IMG_CLOCK'), 'images', $countryUri); ?>" alt=<?= lang('GEN_ALTERNATIVE_TEXT'); ?>>
 					</div>
 				</div>
+				<?php endif; ?>
         <div class="center mx-1">
           <table id="authorize-bulk" class="cell-border h6 display" auth="<?= $authorizeAttr->auth; ?>" order-to-pay="<?= $authorizeAttr->toPAy; ?>">
             <thead class="bg-primary secondary regular">
