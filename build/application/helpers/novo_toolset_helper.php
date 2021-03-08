@@ -23,7 +23,7 @@ if (!function_exists('assetUrl')) {
 if (!function_exists('clientUrlValidate')) {
 	function clientUrlValidate($country) {
 		$CI = &get_instance();
-		$accessUrl = $CI->config->item('access_url');
+		$accessUrl = explode(',', ACCESS_URL);
 		array_walk($accessUrl, 'arrayTrim');
 		reset($accessUrl);
 
@@ -221,11 +221,11 @@ if (!function_exists('convertDateMDY')) {
 }
 
 if (!function_exists('uriRedirect')) {
-	function uriRedirect($singleSignOn) {
+	function uriRedirect() {
 		$CI = &get_instance();
 		$linkredirect = $CI->session->has_userdata('productInf') ? 'detalle-producto' : 'empresas';
 		$linkredirect = !$CI->session->has_userdata('logged') ? 'inicio' : $linkredirect;
-		$linkredirect = $singleSignOn ? 'ingresar/fin' : $linkredirect;
+		$linkredirect = SINGLE_SIGN_ON ? 'ingresar/fin' : $linkredirect;
 
 		return $linkredirect;
 	}

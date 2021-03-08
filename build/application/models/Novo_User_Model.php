@@ -368,7 +368,7 @@ class Novo_User_Model extends NOVO_Model {
 		if($this->isResponseRc != 0 && $this->response->code == 1) {
 			$this->response->title = lang('GEN_RECOVER_PASS_TITLE');
 			$this->response->icon = lang('CONF_ICON_INFO');
-			$this->response->modalBtn['btn1']['action'] = 'close';
+			$this->response->modalBtn['btn1']['action'] = 'destroy';
 		}
 
 		return $this->responseToTheView('callWs_RecoverPass');
@@ -563,7 +563,7 @@ class Novo_User_Model extends NOVO_Model {
 
 			$this->response->title = lang('GEN_PASSWORD_CHANGE_TITLE');
 			$this->response->icon = lang('CONF_ICON_WARNING');
-			$this->response->modalBtn['btn1']['action'] = 'close';
+			$this->response->modalBtn['btn1']['action'] = 'destroy';
 		}
 
 		return $this->responseToTheView('CallWs_ChangePassword');
@@ -871,7 +871,7 @@ class Novo_User_Model extends NOVO_Model {
 				$this->response->title = lang('GEN_MENU_USERS_MANAGEMENT');
 				$this->response->icon =  lang('CONF_ICON_SUCCESS');
 				$this->response->msg = novoLang(lang('RESP_SUCCESSFULL_ENABLE_USER'), $dataRequest->user);
-				$this->response->modalBtn['btn1']['action'] = 'close';
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
 				break;
 		}
 

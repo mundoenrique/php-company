@@ -50,7 +50,7 @@ class Users_Model extends CI_Model {
 		$dataEncry = np_Hoplite_Encryption($data, 'callWSConsultarSucursales');
 		$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
 		$data = json_encode($data);
-		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+		$response = np_Hoplite_GetWS($data);
 		$jsonResponse = np_Hoplite_Decrypt($response, 'callWSConsultarSucursales');
 		$response = json_decode($jsonResponse);
 

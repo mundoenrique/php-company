@@ -1,6 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 $lang['CONFIG_MAINTENANCE'] = 'OFF';
+$lang['CONFIG_CYPHER_DATA'] = ACTIVE_SAFETY ?? 'ON';
 $lang['CONF_VIEW_SUFFIX'] = '-core';
 $lang['CONF_VALIDATE_CAPTCHA'] = [
 	'signIn',
@@ -11,7 +12,7 @@ $lang['CONF_VALIDATE_CAPTCHA'] = [
 //SUPPORT IE 11
 $lang['CONF_SUPPORT_IE'] = 'OFF';
 //AGENT INFO
-$lang['CONF_AGEN_INFO'] = 'OFF';
+$lang['CONF_AGENT_INFO'] = 'OFF';
 //SCORE RECAPTCHA
 $lang['CONF_SCORE_CAPTCHA'] = [
 	'development' => 0,

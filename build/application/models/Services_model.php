@@ -64,7 +64,7 @@ class Services_model extends CI_Model {
 
 		$dataEncrypt = np_Hoplite_Encryption($requestData, 'getBanckAccountlist');
 		$request = json_encode(['bean' => $dataEncrypt, 'pais' => $this->country]);
-		$responseWs = np_Hoplite_GetWS('eolwebInterfaceWS', $request);
+		$responseWs = np_Hoplite_GetWS($request);
 		$responseJson = np_Hoplite_Decrypt($responseWs, 'getBanckAccountlist');
 		$responseWs = json_decode($responseJson);
 		/*
