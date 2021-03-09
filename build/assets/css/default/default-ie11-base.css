@@ -1247,7 +1247,7 @@ a.ui-button:active,
   color: #58595B;
 }
 
-.login-content:before {
+.login-content::before {
 	top: 0;
 	left: 0;
 }
