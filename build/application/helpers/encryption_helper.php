@@ -33,7 +33,7 @@ if ( ! function_exists('np_hoplite_Encryption'))
 			$dataB .= " ";
 		}
 		$cryptData = mcrypt_encrypt(
-			MCRYPT_DES, $CI->config->item('keyNovo'), $dataB, MCRYPT_MODE_CBC, $iv
+			MCRYPT_DES, base64_decode(WS_KEY), $dataB, MCRYPT_MODE_CBC, $iv
 		);
 		return base64_encode($cryptData);
 	}
@@ -52,7 +52,7 @@ if ( ! function_exists('np_hoplite_Decrypt'))
 		$data = base64_decode($cryptDataBase64);
 		$iv = "\0\0\0\0\0\0\0\0";
 		$descryptData = mcrypt_decrypt(
-			MCRYPT_DES, $CI->config->item('keyNovo'), $data, MCRYPT_MODE_CBC, $iv
+			MCRYPT_DES, base64_decode(WS_KEY), $data, MCRYPT_MODE_CBC, $iv
 		);
 		$decryptData = base64_decode(trim($descryptData));
 		$response = json_decode($decryptData);

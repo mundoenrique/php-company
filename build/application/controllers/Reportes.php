@@ -193,7 +193,7 @@ class Reportes extends CI_Controller {
 			$dataEncry = np_Hoplite_Encryption($data, 'callWSCuentaConcentradora');
 			$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
 			$data = json_encode($data);
-			$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+			$response = np_Hoplite_GetWS($data);
 			$jsonResponse = np_Hoplite_Decrypt($response, 'callWSCuentaConcentradora');
 
 			$response =  json_decode($jsonResponse);
@@ -291,7 +291,7 @@ class Reportes extends CI_Controller {
 					$dataEncry = np_Hoplite_Encryption($data, 'expCuentaConcentradoraXLS');
 					$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
 					$data = json_encode($data);
-					$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+					$response = np_Hoplite_GetWS($data);
 					$jsonResponse = np_Hoplite_Decrypt($response, 'expCuentaConcentradoraXLS');
 
 					$response =  json_decode($jsonResponse);
@@ -412,7 +412,7 @@ class Reportes extends CI_Controller {
 					$dataEncry = np_Hoplite_Encryption($data, 'expCuentaConcentradoraPDF');
 					$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
 					$data = json_encode($data);
-					$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+					$response = np_Hoplite_GetWS($data);
 					$jsonResponse = np_Hoplite_Decrypt($response, 'expCuentaConcentradoraPDF');
 
 					$response =  json_decode($jsonResponse);
@@ -541,7 +541,7 @@ class Reportes extends CI_Controller {
 					$dataEncry = np_Hoplite_Encryption($data, 'graficoCuentaConcentradora');
 					$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
 					$data = json_encode($data);
-					$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+					$response = np_Hoplite_GetWS($data);
 					$jsonResponse = np_Hoplite_Decrypt($response, 'graficoCuentaConcentradora');
 					$response = json_decode($jsonResponse);
 					if($response){
@@ -645,7 +645,7 @@ class Reportes extends CI_Controller {
 					$dataEncry = np_Hoplite_Encryption($data, 'expCuentaConcentradoraConsolidadoXLS');
 					$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
 					$data = json_encode($data);
-					$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+					$response = np_Hoplite_GetWS($data);
 					$jsonResponse = np_Hoplite_Decrypt($response, 'expCuentaConcentradoraConsolidadoXLS');
 
 					$response =  json_decode($jsonResponse);
@@ -754,7 +754,7 @@ class Reportes extends CI_Controller {
 					$dataEncry = np_Hoplite_Encryption($data, 'expCuentaConcentradoraConsolidadoPDF');
 					$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
 					$data = json_encode($data);
-					$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+					$response = np_Hoplite_GetWS($data);
 					$jsonResponse = np_Hoplite_Decrypt($response, 'expCuentaConcentradoraConsolidadoPDF');
 
 					$response =  json_decode($jsonResponse);
@@ -972,7 +972,7 @@ class Reportes extends CI_Controller {
 			$dataEncry = np_Hoplite_Encryption($data, 'callWSTarjetasEmitidas');
 			$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
 			$data = json_encode($data);
-			$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+			$response = np_Hoplite_GetWS($data);
 			$jsonResponse = np_Hoplite_Decrypt($response, 'callWSTarjetasEmitidas');
 			$response =  json_decode($jsonResponse);
 
@@ -1069,7 +1069,7 @@ class Reportes extends CI_Controller {
 					$dataEncry = np_Hoplite_Encryption($data, 'expTarjetasEmitidasXLS');
 					$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
 					$data = json_encode($data);
-					$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+					$response = np_Hoplite_GetWS($data);
 					$jsonResponse = np_Hoplite_Decrypt($response, 'expTarjetasEmitidasXLS');
 
 					$response =  json_decode($jsonResponse);
@@ -1168,7 +1168,7 @@ class Reportes extends CI_Controller {
 					$dataEncry = np_Hoplite_Encryption($data, 'expTarjetasEmitidasPDF');
 					$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
 					$data = json_encode($data);
-					$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+					$response = np_Hoplite_GetWS($data);
 					$jsonResponse = np_Hoplite_Decrypt($response, 'expTarjetasEmitidasPDF');
 
 					$response =  json_decode($jsonResponse);
@@ -1384,7 +1384,7 @@ class Reportes extends CI_Controller {
 			$dataEncry = np_Hoplite_Encryption($data, 'callWSSaldosAmanecidos');
 			$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
 			$data = json_encode($data);
-			$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+			$response = np_Hoplite_GetWS($data);
 			$jsonResponse = np_Hoplite_Decrypt($response, 'callWSSaldosAmanecidos');
 
 			log_message('info', 'RESPONSE callWSSaldosAmanecidos'.$jsonResponse);
@@ -1476,7 +1476,7 @@ class Reportes extends CI_Controller {
 					$dataEncry = np_Hoplite_Encryption($data, 'expSaldosAmanecidosXLS');
 					$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
 					$data = json_encode($data);
-					$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+					$response = np_Hoplite_GetWS($data);
 					$jsonResponse = np_Hoplite_Decrypt($response, 'expSaldosAmanecidosXLS');
 
 					$response =  json_decode($jsonResponse);
@@ -1676,7 +1676,7 @@ class Reportes extends CI_Controller {
 			$dataEncry = np_Hoplite_Encryption($data, 'callWSEstatusTarjetasHabientes');
 			$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
 			$data = json_encode($data);
-			$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+			$response = np_Hoplite_GetWS($data);
 			$jsonResponse = np_Hoplite_Decrypt($response, 'callWSEstatusTarjetasHabientes');
 			$response =  json_decode($jsonResponse);
 			$data1 = json_encode($response);
@@ -1814,7 +1814,7 @@ class Reportes extends CI_Controller {
 			$dataEncry = np_Hoplite_Encryption($data, 'callWSEstatusLotes');
 			$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
 			$data = json_encode($data);
-			$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+			$response = np_Hoplite_GetWS($data);
 			$jsonResponse = np_Hoplite_Decrypt($response, 'callWSEstatusLotes');
 
 			$response =  json_decode($jsonResponse);
@@ -1899,7 +1899,7 @@ class Reportes extends CI_Controller {
 					$dataEncry = np_Hoplite_Encryption($data, 'expEstatusLotesPDF');
 					$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
 					$data = json_encode($data);
-					$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+					$response = np_Hoplite_GetWS($data);
 					$jsonResponse = np_Hoplite_Decrypt($response, 'expEstatusLotesPDF');
 
 					$response =  json_decode($jsonResponse);
@@ -1994,7 +1994,7 @@ class Reportes extends CI_Controller {
 					$dataEncry = np_Hoplite_Encryption($data, 'expEstatusLotesXLS');
 					$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
 					$data = json_encode($data);
-					$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+					$response = np_Hoplite_GetWS($data);
 					$jsonResponse = np_Hoplite_Decrypt($response, 'expEstatusLotesXLS');
 
 					$response =  json_decode($jsonResponse);
@@ -2097,7 +2097,7 @@ class Reportes extends CI_Controller {
 					$dataEncry = np_Hoplite_Encryption($data, 'expEstatusTarjetasHabientesXLS');
 					$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
 					$data = json_encode($data);
-					$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+					$response = np_Hoplite_GetWS($data);
 					$jsonResponse = np_Hoplite_Decrypt($response, 'expEstatusTarjetasHabientesXLS');
 
 					$response =  json_decode($jsonResponse);
@@ -2200,7 +2200,7 @@ class Reportes extends CI_Controller {
 					$dataEncry = np_Hoplite_Encryption($data, 'expEstatusTarjetasHabientesPDF');
 					$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
 					$data = json_encode($data);
-					$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+					$response = np_Hoplite_GetWS($data);
 					$jsonResponse = np_Hoplite_Decrypt($response, 'expEstatusTarjetasHabientesPDF');
 
 					$response =  json_decode($jsonResponse);
@@ -2397,7 +2397,7 @@ class Reportes extends CI_Controller {
 			$dataEncry = np_Hoplite_Encryption($data, 'callWSReposiciones');
 			$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
 			$data = json_encode($data);
-			$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+			$response = np_Hoplite_GetWS($data);
 			$jsonResponse = np_Hoplite_Decrypt($response, 'callWSReposiciones');
 
 			$response =  json_decode($jsonResponse);
@@ -2494,7 +2494,7 @@ class Reportes extends CI_Controller {
 					$dataEncry = np_Hoplite_Encryption($data, 'reposicionesExpXLS');
 					$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
 					$data = json_encode($data);
-					$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+					$response = np_Hoplite_GetWS($data);
 					$jsonResponse = np_Hoplite_Decrypt($response, 'reposicionesExpXLS');
 
 					$response =  json_decode($jsonResponse);
@@ -2706,7 +2706,7 @@ class Reportes extends CI_Controller {
 			$dataEncry = np_Hoplite_Encryption($data, 'callWSRecargasRealizadas');
 			$data = array('bean' => $dataEncry, 'pais' =>$urlCountry);
 			$data = json_encode($data);
-			$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+			$response = np_Hoplite_GetWS($data);
 			$jsonResponse = np_Hoplite_Decrypt($response, 'callWSRecargasRealizadas');
 
 			$response =  json_decode($jsonResponse);
@@ -2794,7 +2794,7 @@ class Reportes extends CI_Controller {
 					$dataEncry = np_Hoplite_Encryption($data, 'expRecargasrealizadasXLS');
 					$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
 					$data = json_encode($data);
-					$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+					$response = np_Hoplite_GetWS($data);
 					$jsonResponse = np_Hoplite_Decrypt($response, 'expRecargasrealizadasXLS');
 
 					$response =  json_decode($jsonResponse);
@@ -2891,7 +2891,7 @@ class Reportes extends CI_Controller {
 					$dataEncry = np_Hoplite_Encryption($data, 'expRecargasRealizadasPDF');
 					$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
 					$data = json_encode($data);
-					$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+					$response = np_Hoplite_GetWS($data);
 					$jsonResponse = np_Hoplite_Decrypt($response, 'expRecargasRealizadasPDF');
 
 					$response =  json_decode($jsonResponse);
@@ -3095,7 +3095,7 @@ class Reportes extends CI_Controller {
 			$dataEncry = np_Hoplite_Encryption($data, 'callWSActividadPorUsuario');
 			$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
 			$data = json_encode($data);
-			$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+			$response = np_Hoplite_GetWS($data);
 			$jsonResponse = np_Hoplite_Decrypt($response, 'callWSActividadPorUsuario');
 
 			$response =  json_decode($jsonResponse);
@@ -3186,7 +3186,7 @@ class Reportes extends CI_Controller {
 					$dataEncry = np_Hoplite_Encryption($data, 'downPDFactividadUsuario');
 					$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
 					$data = json_encode($data);
-					$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+					$response = np_Hoplite_GetWS($data);
 					$jsonResponse = np_Hoplite_Decrypt($response, 'downPDFactividadUsuario');
 
 					$response =  json_decode($jsonResponse);
@@ -3285,7 +3285,7 @@ class Reportes extends CI_Controller {
 					$dataEncry = np_Hoplite_Encryption($data, 'downXLSactividadUsuario');
 					$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
 					$data = json_encode($data);
-					$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+					$response = np_Hoplite_GetWS($data);
 					$jsonResponse = np_Hoplite_Decrypt($response, 'downXLSactividadUsuario');
 
 					$response =  json_decode($jsonResponse);
@@ -3515,7 +3515,7 @@ class Reportes extends CI_Controller {
 			$dataEncry = np_Hoplite_Encryption($data, 'callWSGastosPorCategorias');
 			$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
 			$data = json_encode($data);
-			$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+			$response = np_Hoplite_GetWS($data);
 			$jsonResponse = np_Hoplite_Decrypt($response, 'callWSGastosPorCategorias');
 			$response =  json_decode($jsonResponse);
 
@@ -3606,7 +3606,7 @@ class Reportes extends CI_Controller {
 					$dataEncry = np_Hoplite_Encryption($data, 'expGastosporCategoriasPDF');
 					$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
 					$data = json_encode($data);
-					$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+					$response = np_Hoplite_GetWS($data);
 					$jsonResponse = np_Hoplite_Decrypt($response, 'expGastosporCategoriasPDF');
 					$response =  json_decode($jsonResponse);
 
@@ -3705,7 +3705,7 @@ class Reportes extends CI_Controller {
 					$dataEncry = np_Hoplite_Encryption($data, 'expGastosporCategoriasXLS');
 					$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
 					$data = json_encode($data);
-					$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+					$response = np_Hoplite_GetWS($data);
 					$jsonResponse = np_Hoplite_Decrypt($response, 'expGastosporCategoriasXLS');
 
 					$response =  json_decode($jsonResponse);
@@ -3934,7 +3934,7 @@ class Reportes extends CI_Controller {
 			$dataEncry = np_Hoplite_Encryption($data, 'callWSEstadosDeCuenta');
 			$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
 			$data = json_encode($data);
-			$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+			$response = np_Hoplite_GetWS($data);
 			$jsonResponse = np_Hoplite_Decrypt($response, 'callWSEstadosDeCuenta');
 
 			$response =  json_decode($jsonResponse);
@@ -4031,7 +4031,7 @@ class Reportes extends CI_Controller {
 					$dataEncry = np_Hoplite_Encryption($data, 'expEstadosdeCuentaPDF');
 					$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
 					$data = json_encode($data);
-					$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+					$response = np_Hoplite_GetWS($data);
 					$jsonResponse = np_Hoplite_Decrypt($response, 'expEstadosdeCuentaPDF');
 					$response =  json_decode($jsonResponse);
 
@@ -4138,7 +4138,7 @@ class Reportes extends CI_Controller {
 					$dataEncry = np_Hoplite_Encryption($data, 'expEstadosdeCuentaXLS');
 					$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
 					$data = json_encode($data);
-					$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+					$response = np_Hoplite_GetWS($data);
 					$jsonResponse = np_Hoplite_Decrypt($response, 'expEstadosdeCuentaXLS');
 					$response =  json_decode($jsonResponse);
 
@@ -4259,7 +4259,7 @@ class Reportes extends CI_Controller {
 					$dataEncry = np_Hoplite_Encryption($data, 'EstadosdeCuentaComprobante');
 					$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
 					$data = json_encode($data);
-					$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+					$response = np_Hoplite_GetWS($data);
 					$jsonResponse = np_Hoplite_Decrypt($response, 'EstadosdeCuentaComprobante');
 
 					$response =  json_decode($jsonResponse);
@@ -4368,7 +4368,7 @@ class Reportes extends CI_Controller {
 					$dataEncry = np_Hoplite_Encryption($data, 'expEstadosdeCuentaComprobanteMasivo');
 					$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
 					$data = json_encode($data);
-					$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+					$response = np_Hoplite_GetWS($data);
 					$jsonResponse = np_Hoplite_Decrypt($response, 'expEstadosdeCuentaComprobanteMasivo');
 
 					$response =  json_decode($jsonResponse);
@@ -4506,7 +4506,7 @@ class Reportes extends CI_Controller {
 			$dataEncry = np_Hoplite_Encryption($data, 'callWSGraficoEstadosdeCuenta');
 			$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
 			$data = json_encode($data);
-			$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+			$response = np_Hoplite_GetWS($data);
 			$jsonResponse = np_Hoplite_Decrypt($response, 'callWSGraficoEstadosdeCuenta');
 			$response = json_decode($jsonResponse);
 
@@ -4732,7 +4732,7 @@ class Reportes extends CI_Controller {
 			$dataEncry = np_Hoplite_Encryption( $data, 'callWSGuarderia');
 			$data = array( 'bean' => $dataEncry, 'pais' =>$urlCountry );
 			$data = json_encode($data);
-			$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+			$response = np_Hoplite_GetWS($data);
 			$jsonResponse = np_Hoplite_Decrypt($response, 'callWSGuarderia');
 			$response =  json_decode($jsonResponse);
 			$data1 = json_encode($response);
@@ -4816,7 +4816,7 @@ class Reportes extends CI_Controller {
 					$dataEncry = np_Hoplite_Encryption($data, 'guarderiaExpXLS');
 					$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
 					$data = json_encode($data);
-					$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+					$response = np_Hoplite_GetWS($data);
 					$jsonResponse = np_Hoplite_Decrypt($response, 'guarderiaExpXLS');
 
 					$response =  json_decode($jsonResponse);
@@ -4913,7 +4913,7 @@ class Reportes extends CI_Controller {
 					$dataEncry = np_Hoplite_Encryption($data, 'guarderiaExpPDF');
 					$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
 					$data = json_encode($data);
-					$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+					$response = np_Hoplite_GetWS($data);
 					$jsonResponse = np_Hoplite_Decrypt($response, 'guarderiaExpPDF');
 
 					$response =  json_decode($jsonResponse);

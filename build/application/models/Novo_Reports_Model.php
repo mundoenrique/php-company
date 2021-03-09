@@ -180,7 +180,7 @@ class Novo_Reports_Model extends NOVO_Model {
 				$this->response->icon = lang('CONF_ICON_DANGER');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_NO_FILE_EXIST');
-				$this->response->modalBtn['btn1']['action'] = 'close';
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
 
 				if(file_exists(assetPath('downloads/'.$response->bean))) {
 					$this->response->code = 0;
@@ -195,7 +195,7 @@ class Novo_Reports_Model extends NOVO_Model {
 				$this->response->icon = lang('CONF_ICON_INFO');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_NO_CARDS');
-				$this->response->modalBtn['btn1']['action'] = 'close';
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 		}
 
@@ -229,7 +229,7 @@ class Novo_Reports_Model extends NOVO_Model {
 				$this->response->icon = lang('CONF_ICON_DANGER');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_NO_FILE_EXIST');
-				$this->response->modalBtn['btn1']['action'] = 'close';
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
 
 				if(file_exists(assetPath('downloads/'.$response->bean))) {
 					$this->response->code = 0;
@@ -244,7 +244,7 @@ class Novo_Reports_Model extends NOVO_Model {
 				$this->response->icon = lang('CONF_ICON_INFO');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_NO_MOVES_ENTERPRISE');
-				$this->response->modalBtn['btn1']['action'] = 'close';
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 		}
 
@@ -279,7 +279,7 @@ class Novo_Reports_Model extends NOVO_Model {
 				$this->response->icon = lang('CONF_ICON_DANGER');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_NO_FILE_EXIST');
-				$this->response->modalBtn['btn1']['action'] = 'close';
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
 
 				if(file_exists(assetPath('downloads/'.$response->bean))) {
 					$this->response->code = 0;
@@ -295,7 +295,7 @@ class Novo_Reports_Model extends NOVO_Model {
 				$this->response->icon = lang('CONF_ICON_INFO');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_NO_MOVES_ENTERPRISE');
-				$this->response->modalBtn['btn1']['action'] = 'close';
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 		}
 
@@ -331,7 +331,7 @@ class Novo_Reports_Model extends NOVO_Model {
 				$this->response->icon = lang('CONF_ICON_DANGER');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_NO_FILE_EXIST');
-				$this->response->modalBtn['btn1']['action'] = 'close';
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
 
 				if(file_exists(assetPath('downloads/'.$response->bean))) {
 					$this->response->code = 0;
@@ -346,7 +346,7 @@ class Novo_Reports_Model extends NOVO_Model {
 				$this->response->icon = lang('CONF_ICON_INFO');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_NO_CLIENT_STATEMENT');
-				$this->response->modalBtn['btn1']['action'] = 'close';
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 		}
 
@@ -433,7 +433,7 @@ class Novo_Reports_Model extends NOVO_Model {
 				$this->response->icon = lang('CONF_ICON_INFO');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_FOUND_CARD');
-				$this->response->modalBtn['btn1']['action'] = 'close';
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 		}
 
@@ -503,7 +503,7 @@ class Novo_Reports_Model extends NOVO_Model {
 				$this->response->icon = lang('CONF_ICON_INFO');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_NO_CARDS_PEOPLE');
-				$this->response->modalBtn['btn1']['action'] = 'close';
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 		}
 
@@ -539,7 +539,7 @@ class Novo_Reports_Model extends NOVO_Model {
 				$this->response->icon = lang('CONF_ICON_DANGER');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_NO_FILE_EXIST');
-				$this->response->modalBtn['btn1']['action'] = 'close';
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
 
 				if(file_exists(assetPath('downloads/'.$response->bean))) {
 					$this->response->code = 0;
@@ -556,7 +556,7 @@ class Novo_Reports_Model extends NOVO_Model {
 				$this->response->icon = lang('CONF_ICON_INFO');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_NO_MOVES_ENTERPRISE');
-				$this->response->modalBtn['btn1']['action'] = 'close';
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 		}
 
@@ -589,7 +589,7 @@ class Novo_Reports_Model extends NOVO_Model {
 				$this->response->icon = lang('CONF_ICON_DANGER');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_NO_FILE_EXIST');
-				$this->response->modalBtn['btn1']['action'] = 'close';
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
 
 				if(file_exists(assetPath('downloads/'.$response->bean))) {
 					$this->response->code = 0;
@@ -605,7 +605,7 @@ class Novo_Reports_Model extends NOVO_Model {
 				$this->response->icon = lang('CONF_ICON_INFO');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = novoLang(lang('REPORTS_NO_GMF_FOR_YEAR'), $dataRequest->dateG);
-				$this->response->modalBtn['btn1']['action'] = 'close';
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 		}
 
@@ -771,7 +771,7 @@ class Novo_Reports_Model extends NOVO_Model {
 				$this->response->icon = lang('CONF_ICON_DANGER');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_NO_BUDGET');
-				$this->response->modalBtn['btn1']['action'] = 'close';
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 		}
 
@@ -853,7 +853,7 @@ class Novo_Reports_Model extends NOVO_Model {
 				$this->response->icon = lang('CONF_ICON_DANGER');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_NO_BUDGET');
-				$this->response->modalBtn['btn1']['action'] = 'close';
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 		}
 
@@ -896,7 +896,7 @@ class Novo_Reports_Model extends NOVO_Model {
 				$this->response->icon = lang('CONF_ICON_DANGER');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_NO_BUDGET');
-				$this->response->modalBtn['btn1']['action'] = 'close';
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 		}
 
@@ -940,14 +940,14 @@ class Novo_Reports_Model extends NOVO_Model {
 				$this->response->icon = lang('CONF_ICON_DANGER');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_NO_FILE');
-				$this->response->modalBtn['btn1']['action'] = 'close';
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			default:
 				$this->response->code = 4;
 				$this->response->icon = lang('CONF_ICON_DANGER');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_NO_FILE_CONSOLID');
-				$this->response->modalBtn['btn1']['action'] = 'close';
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
 		}
 
 		return $this->response;
@@ -991,14 +991,14 @@ class Novo_Reports_Model extends NOVO_Model {
 				$this->response->icon = lang('CONF_ICON_DANGER');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_NO_FILE');
-				$this->response->modalBtn['btn1']['action'] = 'close';
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			default:
 				$this->response->code = 4;
 				$this->response->icon = lang('CONF_ICON_DANGER');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_NO_FILE_CONSOLID');
-				$this->response->modalBtn['btn1']['action'] = 'close';
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
 		}
 
 		return $this->response;
@@ -1325,7 +1325,7 @@ class Novo_Reports_Model extends NOVO_Model {
 				$this->response->icon = lang('CONF_ICON_DANGER');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_NO_BUDGET');
-				$this->response->modalBtn['btn1']['action'] = 'close';
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 		}
 
@@ -1471,7 +1471,7 @@ class Novo_Reports_Model extends NOVO_Model {
 				$this->response->icon = lang('CONF_ICON_DANGER');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_NO_REGISTRY_FOUND');
-				$this->response->modalBtn['btn1']['action'] = 'close';
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -150:
 				$this->response->code = 1;
@@ -1528,7 +1528,7 @@ class Novo_Reports_Model extends NOVO_Model {
 				$this->response->icon = lang('CONF_ICON_DANGER');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_NO_FILE_CONSOLID');
-				$this->response->modalBtn['btn1']['action'] = 'close';
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 		}
 
@@ -1581,7 +1581,7 @@ class Novo_Reports_Model extends NOVO_Model {
 				$this->response->icon = lang('CONF_ICON_DANGER');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_NO_FILE_CONSOLID');
-				$this->response->modalBtn['btn1']['action'] = 'close';
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 		}
 

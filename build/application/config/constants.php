@@ -93,55 +93,70 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
 | as part of global configuration settings.
 |
 */
-define('BASE_URL', $_SERVER['BASE_URL']);
-define('BASE_CDN_URL', $_SERVER['BASE_CDN_URL']);
-define('BASE_CDN_PATH', $_SERVER['BASE_CDN_PATH']);
-define('WS_URL', $_SERVER['WS_URL']);
-define('WS_KEY', $_SERVER['WS_KEY']);
-define('API_URL', $_SERVER['API_URL']);
-define('API_CONTENT_URL', $_SERVER['API_CONTENT_URL']);
-define('SERVICE_URL', $_SERVER['SERVICE_URL']);
-define('SERVICE_CLIENT_ID', $_SERVER['SERVICE_CLIENT_ID']);
-define('SERVICE_CLIENT_SECRET', $_SERVER['SERVICE_CLIENT_SECRET']);
-define('BULK_FTP_URL', $_SERVER['BULK_FTP_URL']);
-define('BULK_FTP_USERNAME', $_SERVER['BULK_FTP_USERNAME']);
-define('BULK_FTP_PASSWORD', $_SERVER['BULK_FTP_PASSWORD']);
-define('BULK_LOCAL_PATH', $_SERVER['BULK_LOCAL_PATH']);
-define('ENCRYPTION_KEY', $_SERVER['ENCRYPTION_KEY'] ?? 'n0v0p4ym3nt');
-define('SESS_COOKIE_NAME', $_SERVER['SESS_COOKIE_NAME'] ?? 'empresas');
-define('SESS_EXPIRATION', $_SERVER['SESS_EXPIRATION'] ?? '0');
-define('SESS_SAVE_PATH', $_SERVER['SESS_SAVE_PATH'] ?? NULL);
-define('SESS_MATCH_IP', isset($_SERVER['SESS_MATCH_IP'])
-&& filter_var($_SERVER['SESS_MATCH_IP'], FILTER_VALIDATE_BOOLEAN) ?
-	boolval($_SERVER['SESS_MATCH_IP']) : TRUE
-);
-define('COOKIE_PREFIX', $_SERVER['COOKIE_PREFIX'] ?? 'ceo_');
-define('COOKIE_DOMAIN', $_SERVER['COOKIE_DOMAIN'] ?? 'localhost');
-define('COOKIE_PATH', $_SERVER['COOKIE_PATH'] ?? '/');
-define('COOKIE_SECURE', isset($_SERVER['COOKIE_SECURE'])
-&& filter_var($_SERVER['COOKIE_SECURE'], FILTER_VALIDATE_BOOLEAN) ?
-	boolval($_SERVER['COOKIE_SECURE']) : FALSE
-);
-$arrayUri = explode('/', $_SERVER['REQUEST_URI']);
-$lang = end($arrayUri);
-define('LANGUAGE', $lang === 'en' ? 'en' : 'es');
-define('THRESHOLD', $_SERVER['CI_ENV'] === 'development' ? 4 : 2);
-define('CYPHER_BASE', $_SERVER['CYPHER_BASE'] ??	'');
-define('AUTO_LOGIN', isset($_SERVER['AUTO_LOGIN'])
-&& filter_var($_SERVER['AUTO_LOGIN'], FILTER_VALIDATE_BOOLEAN) ?
-	boolval($_SERVER['AUTO_LOGIN']) : FALSE
-);
-define('ACTIVE_RECAPTCHA', isset($_SERVER['ACTIVE_RECAPTCHA'])
-&& filter_var($_SERVER['ACTIVE_RECAPTCHA'], FILTER_VALIDATE_BOOLEAN) ?
-	boolval($_SERVER['ACTIVE_RECAPTCHA']) : FALSE
-);
-define('IP_VERIFY', $_SERVER['IP_VERIFY'] ?? 'ON');
-define('DOWNLOAD_ROUTE', $_SERVER['DOWNLOAD_ROUTE'] ?? '');
-define('ACCESS_URL', $_SERVER['ACCESS_URL'] ?? '');
-$typeIP = 'private';
-if (filter_var($_SERVER['REMOTE_ADDR'], FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE)) {
- $typeIP = 'public';
-}
-$ipReal = $typeIP == 'private' ? $_SERVER['REMOTE_ADDR'] : '';
-define('IP_PROXI', $ipReal);
-unset($arrayUri, $lang, $ipReal, $typeIP);
+$uriSegments  =  explode( "/", parse_url($_SERVER[ 'REQUEST_URI'], PHP_URL_PATH ));
+$proxyIps = filter_var($_SERVER['REMOTE_ADDR'], FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE) ? 'public' : 'private';
+$timeZone = [
+	'bdb' => 	'America/Bogota',
+	'bg' => 	'America/Guayaquil',
+	'bnt' => 	'America/Mexico_City',
+	'bp' => 	'America/Guayaquil',
+	'co' => 	'America/Bogota',
+	'pb' => 	'America/Guayaquil',
+	'pe' => 	'America/Lima',
+	'us' => 	'America/Lima',
+	've' => 	'America/Caracas',
+];
+$timeZone = array_key_exists($uriSegments[1], $timeZone) ? $timeZone[$uriSegments[1]] : 'UTC';
+date_default_timezone_set($timeZone);
+/*
+|--------------------------------------------------------------------------
+| FRAMEWORK SETTINGS
+|--------------------------------------------------------------------------
+*/
+defined('BASE_URL')					OR define('BASE_URL', $_SERVER['BASE_URL']);
+defined('ASSET_URL')				OR define('ASSET_URL', $_SERVER['ASSET_URL']);
+defined('ASSET_PATH')				OR define('ASSET_PATH', $_SERVER['ASSET_PATH']);
+defined('THRESHOLD')				OR define('THRESHOLD', $_SERVER['CI_ENV'] === 'development' ? 4 : 2);
+defined('LOG_PATH')					OR define('LOG_PATH', $_SERVER['LOG_PATH'] ?? '');
+defined('ENCRYPTION_KEY')		OR define('ENCRYPTION_KEY', $_SERVER['ENCRYPTION_KEY'] ?? '3NCRYPT10N');
+defined('SESS_DRIVER')			OR define('SESS_DRIVER', $_SERVER['SESS_DRIVER'] ?? 'files');
+defined('SESS_COOKIE_NAME')	OR define('SESS_COOKIE_NAME', $_SERVER['SESS_COOKIE_NAME'] ?? 'session');
+defined('SESS_EXPIRATION')	OR define('SESS_EXPIRATION', intval($_SERVER['SESS_EXPIRATION']));
+defined('SESS_SAVE_PATH')		OR define('SESS_SAVE_PATH', $_SERVER['SESS_SAVE_PATH'] ?? NULL);
+defined('COOKIE_PREFIX')		OR define('COOKIE_PREFIX', $_SERVER['COOKIE_PREFIX']);
+defined('COOKIE_DOMAIN')		OR define('COOKIE_DOMAIN', $_SERVER['COOKIE_DOMAIN']);
+defined('COOKIE_SECURE')		OR define('COOKIE_SECURE', $_SERVER['COOKIE_SECURE']);
+defined('PROXY_IPS')				OR define('PROXY_IPS', $proxyIps == 'private' ? $_SERVER['REMOTE_ADDR'] : '');
+
+/*
+|--------------------------------------------------------------------------
+| APPLICATION SETTINGS
+|--------------------------------------------------------------------------
+*/
+defined('ACTIVE_SAFETY')		OR define('ACTIVE_SAFETY', $_SERVER['ACTIVE_SAFETY']);
+defined('CYPHER_BASE')			OR define('CYPHER_BASE', $_SERVER['CYPHER_BASE']);
+defined('ACCESS_URL')				OR define('ACCESS_URL', $_SERVER['ACCESS_URL']);
+defined('ACTIVE_RECAPTCHA')	OR define('ACTIVE_RECAPTCHA', $_SERVER['ACTIVE_RECAPTCHA'] == 'ON' ? TRUE : FALSE);
+defined('LANGUAGE')					OR define('LANGUAGE', end($uriSegments) === 'en' ? 'en' : 'es');
+defined('IP_VERIFY')				OR define('IP_VERIFY', $_SERVER['IP_VERIFY'] ?? 'ON');
+defined('SINGLE_SIGN_ON')		OR define('SINGLE_SIGN_ON', $_SERVER['SINGLE_SIGN_ON'] == 'ON' ? TRUE : FALSE);
+defined('ASSET_PATH')				OR define('ASSET_PATH', $_SERVER['ASSET_PATH']);
+defined('API_CONTENT_URL')	OR define('API_CONTENT_URL', $_SERVER['API_CONTENT_URL']);
+defined('UPLOAD_PATH')			OR define('UPLOAD_PATH', $_SERVER['UPLOAD_PATH']);
+
+/*
+|--------------------------------------------------------------------------
+| SERVICE ENVIROMENT VARIABLES
+|--------------------------------------------------------------------------
+*/
+defined('WS_KEY')			 						OR define('WS_KEY', $_SERVER['WS_KEY']);
+defined('DOWNLOAD_ROUTE')					OR define('DOWNLOAD_ROUTE', $_SERVER['DOWNLOAD_ROUTE']);
+defined('BULK_FTP_USERNAME')			OR define('BULK_FTP_USERNAME', $_SERVER['BULK_FTP_USERNAME']);
+defined('BULK_FTP_PASSWORD')			OR define('BULK_FTP_PASSWORD', $_SERVER['BULK_FTP_PASSWORD']);
+defined('BULK_FTP_URL')						OR define('BULK_FTP_URL', $_SERVER['BULK_FTP_URL']);
+defined('API_URL')								OR define('API_URL', $_SERVER['API_URL']);
+defined('SERVICE_URL')						OR define('SERVICE_URL', $_SERVER['SERVICE_URL']);
+defined('SERVICE_CLIENT_ID')			OR define('SERVICE_CLIENT_ID', $_SERVER['SERVICE_CLIENT_ID']);
+defined('SERVICE_CLIENT_SECRET')	OR define('SERVICE_CLIENT_SECRET', $_SERVER['SERVICE_CLIENT_SECRET']);
+
+unset($uriSegments, $proxyIps, $timeZone);

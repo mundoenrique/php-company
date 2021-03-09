@@ -3,8 +3,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 define(ENVIRONMENT, $_SERVER['CI_ENV']);
 define(BASE_URL, $_SERVER['BASE_URL']);
-define(BASE_CDN_URL, $_SERVER['BASE_CDN_URL']);
-define(BASE_CDN_PATH, $_SERVER['BASE_CDN_PATH']);
+define(ASSET_URL, $_SERVER['ASSET_URL']);
+define(ASSET_PATH, $_SERVER['ASSET_PATH']);
 
 require_once('error_helpers.php');
 
