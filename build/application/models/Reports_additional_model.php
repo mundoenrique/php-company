@@ -84,7 +84,7 @@ class Reports_additional_model extends CI_Model {
 
 		$dataEncry = np_Hoplite_Encryption($dataRequest, 'callWSReportRecharWithComm');
 		$dataRequest = json_encode(['bean' => $dataEncry, 'pais' => $this->pais]);
-		$response = np_Hoplite_GetWS('eolwebInterfaceWS', $dataRequest);
+		$response = np_Hoplite_GetWS($dataRequest);
 		$jsonResponse = np_Hoplite_Decrypt($response, 'callWSReportRecharWithComm');
 
 		log_message('INFO', '--[' . $this->userName . '] RESPONSE recarga/comision: ' . $jsonResponse);
@@ -195,7 +195,7 @@ class Reports_additional_model extends CI_Model {
 
 		$dataEncry = np_Hoplite_Encryption($dataRequest, 'callWSDownloadReport');
 		$dataRequest = json_encode(['bean' => $dataEncry, 'pais' => $this->pais]);
-		$response = np_Hoplite_GetWS('eolwebInterfaceWS', $dataRequest);
+		$response = np_Hoplite_GetWS($dataRequest);
 		$jsonResponse = np_Hoplite_Decrypt($response, 'callWSDownloadReport');
 		$responseServ = json_decode($jsonResponse);
 

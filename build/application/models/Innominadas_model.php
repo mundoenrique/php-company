@@ -78,7 +78,7 @@ class Innominadas_Model extends CI_Model {
 		$dataEncry = np_Hoplite_Encryption($data, 'callWSCreateInnominadas');
 		$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
 		$data = json_encode($data);
-		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+		$response = np_Hoplite_GetWS($data);
 		$jsonResponse = np_Hoplite_Decrypt($response, 'callWSCreateInnominadas');
 
 		log_message('info','solicitud data response => '.$jsonResponse);
@@ -163,7 +163,7 @@ class Innominadas_Model extends CI_Model {
 		log_message('info','inno_report_xls 2 data request=>'.json_encode($data,JSON_UNESCAPED_UNICODE));
 
 		$data = json_encode($data);
-		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+		$response = np_Hoplite_GetWS($data);
 		$jsonResponse = np_Hoplite_Decrypt($response, 'callWSReporteInnominadas');
 		$response = json_decode($jsonResponse);
 
@@ -260,7 +260,7 @@ class Innominadas_Model extends CI_Model {
 		log_message('info','lista inno_en_proceso 2 data request=>'.json_encode($data,JSON_UNESCAPED_UNICODE));
 
 		$data = json_encode($data);
-		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+		$response = np_Hoplite_GetWS($data);
 		$jsonResponse = np_Hoplite_Decrypt($response, 'callWSListaInnominadasEnProc');
 
 		log_message('info','lista inno_en_proceso data response=>'.$jsonResponse);
@@ -348,7 +348,7 @@ class Innominadas_Model extends CI_Model {
 		$data = array('bean'=>$dataEncry, 'pais' =>$urlCountry );
 
 		$data = json_encode($data);
-		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+		$response = np_Hoplite_GetWS($data);
 		$jsonResponse = np_Hoplite_Decrypt($response, 'callWSListaTarjetasInnominadas');
 
 		log_message('info','lista tarjetas_innominada data response=>'.$jsonResponse);
@@ -418,7 +418,7 @@ class Innominadas_Model extends CI_Model {
 		$data = array('bean'=>$dataEncry, 'pais' =>$urlCountry );
 
 		$data = json_encode($data);
-		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+		$response = np_Hoplite_GetWS($data);
 		$jsonResponse = np_Hoplite_Decrypt($response, 'callWSEliminarInnominadas');
 
 		log_message('info','eliminar_lote data response=>'.$jsonResponse);

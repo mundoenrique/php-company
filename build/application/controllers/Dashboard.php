@@ -172,7 +172,7 @@ class Dashboard extends CI_Controller {
 		$dataEncry = np_Hoplite_Encryption($data, 'callWSListaEmpresasUsuario');
 		$data = array('bean' => $dataEncry, 'pais' =>$pais );
 		$data = json_encode($data);
-		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+		$response = np_Hoplite_GetWS($data);
 		$jsonResponse = np_Hoplite_Decrypt($response, 'callWSListaEmpresasUsuario');
 		$response = json_decode($jsonResponse);
 
@@ -786,7 +786,7 @@ class Dashboard extends CI_Controller {
 		$dataEncry = np_Hoplite_Encryption($data, 'callWSListaEmpresas');
 		$data = array('bean' => $dataEncry, 'pais' =>$pais );
 		$data = json_encode($data);
-		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+		$response = np_Hoplite_GetWS($data);
 		$jsonResponse = np_Hoplite_Decrypt($response, 'callWSListaEmpresas');
 		$response = json_decode($jsonResponse);
 
@@ -861,7 +861,7 @@ class Dashboard extends CI_Controller {
 		$dataEncry = np_Hoplite_Encryption($data, 'callWSListaEmpresasPaginar');
 		$data = array('bean' => $dataEncry, 'pais' =>$pais );
 		$data = json_encode($data);
-		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+		$response = np_Hoplite_GetWS($data);
 		$jsonResponse = np_Hoplite_Decrypt($response, 'callWSListaEmpresasPaginar');
 
 		$response = json_decode($jsonResponse);
@@ -928,7 +928,7 @@ class Dashboard extends CI_Controller {
 		$dataEncry = np_Hoplite_Encryption($data, 'callWSMenuEmpresa');
 		$data = array('bean' => $dataEncry, 'pais' =>$pais );
 		$data = json_encode($data);
-		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+		$response = np_Hoplite_GetWS($data);
 		$jsonResponse = np_Hoplite_Decrypt($response, 'callWSMenuEmpresa');
 		$response = json_decode($jsonResponse);
 
@@ -998,7 +998,7 @@ class Dashboard extends CI_Controller {
 		$dataEncry = np_Hoplite_Encryption($data, 'callWSMenuEmpresaTarjetaHambiente');
 		$data = array('bean' => $dataEncry, 'pais' =>$pais );
 		$data = json_encode($data);
-		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+		$response = np_Hoplite_GetWS($data);
 		$jsonResponse = np_Hoplite_Decrypt($response, 'callWSMenuEmpresaTarjetaHambiente');
 		$response = json_decode($jsonResponse);
 
@@ -1086,7 +1086,7 @@ class Dashboard extends CI_Controller {
 
 		$data = array('bean' => $dataEncry, 'pais' =>$pais );
 		$data = json_encode($data);
-		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+		$response = np_Hoplite_GetWS($data);
 		$jsonResponse = np_Hoplite_Decrypt($response, 'callWSMenuPorProducto');
 		$response = json_decode($jsonResponse);
 

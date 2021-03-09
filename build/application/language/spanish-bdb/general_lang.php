@@ -5,6 +5,7 @@ $lang['GEN_FAVICON_EXT'] = 'ico';
 //GENERAL LANGUAGE
 $lang['GEN_LOGO_HEADER'] = 'img-logo.svg';
 $lang['GEN-LOGO-BIG'] = 'img-banco_bogota.svg';
+$lang['GEN_IMG_CLOCK'] = 'img-clock.svg';
 $lang['GEN_ALTERNATIVE_TEXT'] = 'Banco de Bogotá';
 $lang['GEN_FISCAL_REGISTRY'] = 'Identificación';
 $lang['GEN_PLACE_PASSWORD'] = 'token';

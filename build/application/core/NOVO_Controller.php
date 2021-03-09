@@ -101,7 +101,7 @@ class NOVO_Controller extends CI_Controller {
 		}
 
 		if ($this->input->is_ajax_request()) {
-			$this->dataRequest = json_decode(
+			$this->dataRequest = lang('CONFIG_CYPHER_DATA') == 'ON' ? json_decode(
 				$this->security->xss_clean(
 					strip_tags(
 						$this->cryptography->decrypt(
@@ -110,7 +110,7 @@ class NOVO_Controller extends CI_Controller {
 						)
 					)
 				)
-			);
+			) : json_decode(utf8_encode($this->input->get_post('request')));
 		} else {
 			$access = $this->verify_access->accessAuthorization($this->router->fetch_method(), $this->countryUri, $this->appUserName);
 			$valid = TRUE;
@@ -166,6 +166,7 @@ class NOVO_Controller extends CI_Controller {
 				array_unshift(
 					$this->includeAssets->cssFiles,
 					"$this->countryUri/root-$this->skin",
+					"root-general",
 					"reboot"
 				);
 			} else {
@@ -195,7 +196,7 @@ class NOVO_Controller extends CI_Controller {
 				if (lang('CONF_REMOTE_AUTH') == 'ON') {
 					array_push(
 						$this->includeAssets->jsFiles,
-						"remote_connect/$this->countryUri-remoteConnect",
+						"remote_connect/$this->countryUri-remoteConnect"
 					);
 				}
 			} else if ($validateRecaptcha) {
@@ -210,7 +211,7 @@ class NOVO_Controller extends CI_Controller {
 			}
 
 		} else {
-			$linkredirect = uriRedirect(AUTO_LOGIN);
+			$linkredirect = uriRedirect();
 			redirect(base_url($linkredirect), 'location');
 		}
 	}

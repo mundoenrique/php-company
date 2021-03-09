@@ -78,7 +78,7 @@ class Payments_model extends CI_Model {
            'bean' => $dataEncrypt,
            'pais' => $urlCountry
        ]);
-		$responseWs = np_Hoplite_GetWS('eolwebInterfaceWS', $request);
+		$responseWs = np_Hoplite_GetWS($request);
 		$responseJson = np_Hoplite_Decrypt($responseWs);
 		$responseWs = json_decode($responseJson);
 
