@@ -181,7 +181,7 @@ class Servicios extends CI_Controller {
 		$dataEncry = np_Hoplite_Encryption($data, 'callWSbuscarTransferenciaM');
 		$data = ['bean' => $dataEncry, 'pais' =>$urlCountry];
 		$data = json_encode($data);
-		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+		$response = np_Hoplite_GetWS($data);
 		$jsonResponse = np_Hoplite_Decrypt($response, 'callWSbuscarTransferenciaM');
 		$response = json_decode($jsonResponse);
 
@@ -330,7 +330,7 @@ class Servicios extends CI_Controller {
 		$dataEncry = np_Hoplite_Encryption($data, 'callWSconsultarTM');
 		$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
 		$data = json_encode($data);
-		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+		$response = np_Hoplite_GetWS($data);
 		$jsonResponse = np_Hoplite_Decrypt($response, 'callWSconsultarTM');
 		$response = json_decode($jsonResponse);
 
@@ -488,7 +488,7 @@ class Servicios extends CI_Controller {
 		$dataEncry = np_Hoplite_Encryption($data, 'callWSabonarTM');
 		$data = ['bean' => $dataEncry, 'pais' =>$urlCountry ];
 		$data = json_encode($data);
-		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+		$response = np_Hoplite_GetWS($data);
 		$jsonResponse = np_Hoplite_Decrypt($response, 'callWSabonarTM');
 		$response = json_decode($jsonResponse);
 
@@ -659,7 +659,7 @@ class Servicios extends CI_Controller {
 		$dataEncry = np_Hoplite_Encryption($data, 'callWScargarTM');
 		$data = ['bean' => $dataEncry, 'pais' =>$urlCountry];
 		$data = json_encode($data, JSON_UNESCAPED_UNICODE);
-		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+		$response = np_Hoplite_GetWS($data);
 		$jsonResponse = np_Hoplite_Decrypt($response, 'callWScargarTM');
 		$response = json_decode($jsonResponse);
 
@@ -805,7 +805,7 @@ class Servicios extends CI_Controller {
 		$dataEncry = np_Hoplite_Encryption($data, 'callWsEstatusArchivo');
 		$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
 		$data = json_encode($data);
-		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+		$response = np_Hoplite_GetWS($data);
 		$jsonResponse = np_Hoplite_Decrypt($response, 'callWsEstatusArchivo');
 		$response = json_decode($jsonResponse);
 
@@ -862,7 +862,17 @@ class Servicios extends CI_Controller {
 			$this->lang->load('upload');
 			$this->lang->load('erroreseol');
 
-			$config['upload_path'] = $this->config->item('FOLDER_UPLOAD_LOTES');
+			$createDirectory = lang('GEN_UPLOAD_NOT_CREATE_DIRECTORY');
+
+			if (!is_dir(UPLOAD_PATH.$this->config->item('country'))) {
+				if (mkdir(UPLOAD_PATH.$this->config->item('country'), 0755, TRUE)) {
+					$createDirectory = lang('GEN_UPLOAD_CREATE_DIRECTORY');
+				};
+			}
+
+			$config['upload_path'] = UPLOAD_PATH.$this->config->item('country').'/';
+
+			log_message('DEBUG', 'uploadFiles directory '.$config['upload_path'].' ' .$createDirectory);
 			$config['allowed_types'] = 'xls|xlsx';
 
 			$this->load->library('upload', $config);
@@ -883,8 +893,8 @@ class Servicios extends CI_Controller {
 				$localfile = $config['upload_path'].$nombreArchivo;
 				$fp = fopen($localfile, 'r');
 
-				$URL_TEMPLOTES = $this->config->item('URL_TEMPLOTES');
-				$LOTES_USERPASS = $this->config->item('LOTES_USERPASS');
+				$URL_TEMPLOTES = BULK_FTP_URL.$this->config->item('country');
+				$LOTES_USERPASS = BULK_FTP_USERNAME.':'.BULK_FTP_PASSWORD;
 
 				curl_setopt($ch, CURLOPT_URL, $URL_TEMPLOTES.$nombreArchivo);
 				curl_setopt($ch, CURLOPT_USERPWD, $LOTES_USERPASS);
@@ -963,7 +973,7 @@ class Servicios extends CI_Controller {
 		$dataEncry = np_Hoplite_Encryption($data, 'callWScargarArchivo');
 		$data = array('bean'=> $dataEncry, 'pais'=> $urlCountry );
 		$data = json_encode($data);
-		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+		$response = np_Hoplite_GetWS($data);
 		$jsonResponse = np_Hoplite_Decrypt($response, 'callWScargarArchivo');
 		$response = json_decode($jsonResponse);
 
@@ -1094,7 +1104,7 @@ class Servicios extends CI_Controller {
 		$dataEncry = np_Hoplite_Encryption($data, 'callWSbuscarDatos');
 		$data = array('bean'=> $dataEncry, 'pais'=> $urlCountry );
 		$data = json_encode($data);
-		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+		$response = np_Hoplite_GetWS($data);
 		$jsonResponse = np_Hoplite_Decrypt($response, 'callWSbuscarDatos');
 		$response = json_decode($jsonResponse);
 
@@ -1179,7 +1189,7 @@ class Servicios extends CI_Controller {
 			$dataEncry = np_Hoplite_Encryption($data, 'downXLS_AD');
 			$data = array('bean'=> $dataEncry, 'pais'=> $urlCountry);
 			$data = json_encode($data);
-			$response = np_Hoplite_GetWS('eolwebInterfaceWS', $data);
+			$response = np_Hoplite_GetWS($data);
 			$jsonResponse = np_Hoplite_Decrypt($response, 'downXLS_AD');
 			$response =  json_decode($jsonResponse);
 
@@ -1304,7 +1314,7 @@ class Servicios extends CI_Controller {
 		$dataEncry = np_Hoplite_Encryption($data, 'callWsConsultaSaldo');
 		$data = ['bean'=> $dataEncry, 'pais'=> $urlCountry];
 		$request = json_encode($data);
-		$encrypResponse = np_Hoplite_GetWS('eolwebInterfaceWS', $request);
+		$encrypResponse = np_Hoplite_GetWS($request);
 		$jsonResponse = np_Hoplite_Decrypt($encrypResponse, 'callWsConsultaSaldo');
 		$response = json_decode($jsonResponse);
 
@@ -1385,7 +1395,7 @@ class Servicios extends CI_Controller {
 		$data = ['bean' => $dataEncry, 'pais' =>$urlCountry];
 
 		$request = json_encode($data);
-		$encrypResponse = np_Hoplite_GetWS('eolwebInterfaceWS', $request);
+		$encrypResponse = np_Hoplite_GetWS($request);
 		$jsonResponse = np_Hoplite_Decrypt($encrypResponse, 'callWsRecargaTM');
 		$response =  json_decode($jsonResponse);
 
@@ -1541,7 +1551,7 @@ class Servicios extends CI_Controller {
 		$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
 
 		$data = json_encode($data);
-		$response = np_Hoplite_GetWS('eolwebInterfaceWS', $data);
+		$response = np_Hoplite_GetWS($data);
 		$jsonResponse = np_Hoplite_Decrypt($response, 'callWsRecargaTMProcede');
 		$response = json_decode($jsonResponse);
 
@@ -1759,7 +1769,7 @@ public function consultaTarjetas($urlCountry)
 		$dataEncry = np_Hoplite_Encryption($data, 'callWSbuscarTarjetasemitidas');
 		$data = ['bean' => $dataEncry, 'pais' =>$urlCountry];
 		$data = json_encode($data);
-		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+		$response = np_Hoplite_GetWS($data);
 		$jsonResponse = np_Hoplite_Decrypt($response, 'callWSbuscarTarjetasemitidas');
 		$response = json_decode($jsonResponse);
 
@@ -1856,7 +1866,7 @@ public function consultaTarjetas($urlCountry)
 				$dataEncry = np_Hoplite_Encryption($data, 'expConsultaTarejtasXLS');
 				$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
 				$data = json_encode($data);
-				$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+				$response = np_Hoplite_GetWS($data);
 				$jsonResponse = np_Hoplite_Decrypt($response, 'expConsultaTarejtasXLS');
 
 				$response =  json_decode($jsonResponse);
@@ -2033,7 +2043,7 @@ public function consultaTarjetas($urlCountry)
 		$dataEncry = np_Hoplite_Encryption($data, 'callWScambiarEstadoemision');
 		$data = ['bean' => $dataEncry, 'pais' =>$urlCountry];
 		$data = json_encode($data);
-		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+		$response = np_Hoplite_GetWS($data);
 		$originalResponse = $response;
 		$jsonResponse = np_Hoplite_Decrypt($response, 'callWScambiarEstadoemision');
 		$response = json_decode($jsonResponse);
@@ -2196,7 +2206,7 @@ public function consultaTarjetas($urlCountry)
 		$dataEncry = np_Hoplite_Encryption($data, 'callWScambiarEstadotarjeta');
 		$data = ['bean' => $dataEncry, 'pais' =>$urlCountry];
 		$data = json_encode($data);
-		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+		$response = np_Hoplite_GetWS($data);
 		$originalResponse = $response;
 		$jsonResponse = np_Hoplite_Decrypt($response, 'callWScambiarEstadotarjeta');
 		$response = json_decode($jsonResponse);

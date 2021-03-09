@@ -75,7 +75,7 @@ class Additional_inquiries_model extends NOVO_Model {
 
 		$encryptionData = np_Hoplite_Encryption($dataRequest, 'callWsGetBatchesByInvoice');
 		$dataRequest = json_encode(["bean" => $encryptionData, "pais" => $this->country]);
-		$response = np_Hoplite_GetWS('eolwebInterfaceWS', $dataRequest);
+		$response = np_Hoplite_GetWS($dataRequest);
 		$jsonResponse = np_Hoplite_Decrypt($response, 'callWsGetBatchesByInvoice');
 
 		log_message('INFO', '--[' . $this->userName . '] RESPONSE LOTES POR FACTURAR: ' . $jsonResponse);

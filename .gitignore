@@ -1,5 +1,4 @@
 .env
-.idea
 .vscode
 .DS_Store
 Thumbs.db
@@ -11,8 +10,20 @@ Thumbs.db
 **/logs/*
 !**/logs/index.html
 !**/logs/.htaccess
-**/bulk/*
-!**/js/bulk/*
 
 **/vendor/
 **/sessions/
+
+# IDE Files
+#-------------------------
+/nbproject/
+.idea/*
+
+## Sublime Text cache files
+*.tmlanguage.cache
+*.tmPreferences.cache
+*.stTheme.cache
+*.sublime-workspace
+*.sublime-project
+/tests/tests/
+/tests/results/

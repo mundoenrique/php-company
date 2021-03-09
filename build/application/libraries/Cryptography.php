@@ -5,16 +5,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @author J. Enrique Peñaloza Piñero
  */
 class Cryptography {
-	private $CI;
-	private $CypherBase;
-	private $keyPhrase;
-
 	public function __construct()
 	{
 		log_message('INFO', 'NOVO Cryptography Library Class Initialized');
-
-		$this->CI = &get_instance();
-		$this->CypherBase = $this->CI->config->item('cypher_base');
 	}
 
 	public function encrypt($object)
@@ -87,10 +80,14 @@ class Cryptography {
 	 */
 	public function decryptOnlyOneData($data)
 	{
-		$data = json_decode(base64_decode($data));
-		return $this->decrypt(
-			base64_decode($data->plot),
-			utf8_encode($data->password)
-		);
+		if (lang('CONFIG_CYPHER_DATA') == 'ON') {
+			$data = json_decode(base64_decode($data));
+			$data = $this->decrypt(
+				base64_decode($data->plot),
+				utf8_encode($data->password)
+			);
+		}
+
+		return $data;
 	}
 }
