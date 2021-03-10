@@ -536,6 +536,7 @@ class Novo_Services_Model extends NOVO_Model {
 			case 'RECEIVE_IN_ENTERPRISE':
 			case 'RECEIVE_IN_BANK':
 			case 'CARD_CANCELLATION':
+				$className = 'com.novo.objects.MO.TransferenciaMO';
 			break;
 		}
 
@@ -553,6 +554,8 @@ class Novo_Services_Model extends NOVO_Model {
 				'accodcia' => $this->session->enterpriseInf->enterpriseCode,
 			];
 
+			$this->dataRequest->idOperation = 'operacionSeguimientoLoteCeo';
+
 			if ($dataRequest->action == 'UPDATE_DATA') {
 				$data['firstName'] = $list->names;
 				$data['lastName'] = $list->lastName;
@@ -560,6 +563,31 @@ class Novo_Services_Model extends NOVO_Model {
 				$data['phone'] = $list->celPhone;
 			}
 
+			if ($dataRequest->action == 'CARD_CANCELLATION') {
+
+				$this->dataAccessLog->function = 'Transferencia maestra';
+				$this->dataAccessLog->operation = 'Cancelar tarjeta';
+				$this->dataRequest->idOperation = 'bloqueoTM';
+
+				$card  = [
+					'noTarjeta' => $list->cardNumber,
+					'id_ext_per' => $list->idNumber,
+					'codBloqueo' => '17'
+				];
+
+				$this->dataRequest->rifEmpresa = $this->session->enterpriseInf->idFiscal;
+				$this->dataRequest->idProducto = $this->session->productInf->productPrefix;
+				$this->dataRequest->listaTarjetas = [
+					[
+						'paginaActual' => 1,
+						'tamanoPagina' => 1,
+						'paginar' => FALSE
+					]
+				];
+				$this->dataRequest->listadoTarjetas = [
+					'lista' => [$card]
+				];
+			}
 			$dataList[] = $data;
 		}
 
@@ -569,7 +597,6 @@ class Novo_Services_Model extends NOVO_Model {
 			$password = $this->session->passWord ?: md5($password);
 		}
 
-		$this->dataRequest->idOperation = 'operacionSeguimientoLoteCeo';
 		$this->dataRequest->className = $className;
 		$this->dataRequest->items = $dataList;
 		$this->dataRequest->usuario = [

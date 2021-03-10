@@ -323,7 +323,11 @@ function InqBuildFormActions(currentAction, currentTitle, currentBtn) {
 		remoteAuthArgs.title = currentTitle;
 		remoteAuthArgs.action = currentAction;
 		remoteAuthArgs.form = form;
-		getauhtKey();
+		if (currentAction == 'CARD_CANCELLATION') {
+			appMessages(currentTitle, inputModal, lang.CONF_ICON_INFO, modalBtn);
+		} else {
+			getauhtKey();
+		}
 	} else {
 		applyActions(currentAction, form, currentBtn);
 	}
