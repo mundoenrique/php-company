@@ -246,7 +246,7 @@ function InqBuildFormActions(currentAction, currentTitle, currentBtn) {
 			action: 'destroy'
 		}
 	}
-	inputModal = '<form id="modalCardsInquiryForm" name="modalCardsInquiryForm" class="row col-auto p-0" onsubmit="return false;">';
+	inputModal = '<form id="modalCardsInquiryForm" name="modalCardsInquiryForm" class="row col-auto p-0 w-335-ie" onsubmit="return false;">';
 
 	if (currentAction == 'UPDATE_DATA') {
 		modalBtn.maxHeight = 520;
@@ -287,7 +287,7 @@ function InqBuildFormActions(currentAction, currentTitle, currentBtn) {
 	}
 
 	if (currentAction == 'CARD_CANCELLATION') {
-		inputModal += '<div class="form-group col-12 w-160-ie">';
+		inputModal += '<div class="form-group col-12 w-335-ie">';
 		inputModal += '<p class="mb-0">' + lang.SERVICES_RESPONSE_CARD_CANCELED + '</p>';
 		inputModal += '</div>';
 	}
