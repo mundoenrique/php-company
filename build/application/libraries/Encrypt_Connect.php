@@ -225,12 +225,12 @@ class Encrypt_Connect {
 		log_message('INFO', 'NOVO UPLOAD FILE BY: '.$urlBulkService.' AND: '.$userpassBulk);
 
 		$ch = curl_init();
-		$Fclose = $fOpen = fopen(UPLOAD_PATH.$file, 'r');
+		$sftp = fopen(UPLOAD_PATH.$file, 'r');
 		curl_setopt($ch, CURLOPT_URL, $urlBulkService.$file);
 		curl_setopt($ch, CURLOPT_USERPWD, $userpassBulk);
 		curl_setopt($ch, CURLOPT_UPLOAD, 1);
 		curl_setopt($ch, CURLOPT_PROTOCOLS, CURLPROTO_SFTP);
-		curl_setopt($ch, CURLOPT_INFILE, $fOpen);
+		curl_setopt($ch, CURLOPT_INFILE, $sftp);
 		curl_setopt($ch, CURLOPT_INFILESIZE, filesize(UPLOAD_PATH.$file));
 		curl_exec ($ch);
 		$result = curl_errno($ch);
@@ -242,7 +242,7 @@ class Encrypt_Connect {
 		}
 
 		curl_close ($ch);
-		fclose($Fclose);
+		fclose($sftp);
 		unlink(UPLOAD_PATH.$file);
 
 		return $respUpload;
