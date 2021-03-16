@@ -1246,7 +1246,7 @@ a.ui-button:active,
 	padding: 5.75rem 0;
 }
 
-.login-content:before {
+.login-content::before {
 	content: none !important;
 }
 

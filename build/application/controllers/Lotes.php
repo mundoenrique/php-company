@@ -2847,8 +2847,6 @@ class Lotes extends CI_Controller {
 				curl_close ($ch);
 
 				if ($error_no == 0) {
-					fclose($fp);
-					unlink("$localfile"); //BORRAR ARCHIVO
 					$error = 'Archivo Movido.';
 					//COLOCAR LLAMADO DE LA FUNCION CUANDO ESTE CORRECTO
 					$formatoArchivo=substr($extensionArchivo, 1);
@@ -2863,6 +2861,9 @@ class Lotes extends CI_Controller {
 					$error = array('ERROR' => 'Falla al mover archivo.');
 					$this->output->set_content_type('application/json')->set_output(json_encode($error));
 				}
+
+				fclose($fp);
+				unlink("$localfile"); //BORRAR ARCHIVO
 			}
 		}elseif($paisS!=$urlCountry && $paisS!=''){
 			$this->session->sess_destroy();
