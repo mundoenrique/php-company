@@ -48,7 +48,7 @@
 								<div class="help-block "></div>
 							</div>
 							<div class="flex items-center justify-end col-4 col-lg-4 col-xl-3 ml-auto mb-1">
-								<button id="userActivityBtn" name="userActivity_Btn" class="btn btn-primary btn-small mb-5" type="button">
+								<button id="userActivityBtn" name="userActivityBtn" class="btn btn-primary btn-small mb-5" type="button">
 									<?= lang('GEN_BTN_SEARCH'); ?>
 								</button>
 							</div>

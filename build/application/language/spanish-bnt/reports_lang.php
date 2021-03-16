@@ -14,6 +14,3 @@ $lang['REPORTS_TABLE_CARD']="Tarjeta";
 $lang['REPORTS_TABLE_CARDHOLDER']="Tarjetahabiente";
 $lang['REPORTS_TABLE_DNI']="CURP";
 $lang['REPORTS_NO_FILE_EXIST'] = 'No fue posible generar el archivo.';
-$lang['REPORTS_NO_FILE_CONSOLID'] = 'No fue posible obtener al archivo.';
-
-
