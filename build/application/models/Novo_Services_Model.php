@@ -54,6 +54,7 @@ class Novo_Services_Model extends NOVO_Model {
 		$this->response->balance = '--';
 		$this->response->recordsTotal = 0;
 		$this->response->recordsFiltered = 0;
+		$this->response->cssNegativeBalance = "text";
 		$this->response->access = [
 			'TRASAL' => $this->verify_access->verifyAuthorization('TRAMAE', 'TRASAL'),
 			'TRACAR' => $this->verify_access->verifyAuthorization('TRAMAE', 'TRACAR'),
@@ -85,8 +86,8 @@ class Novo_Services_Model extends NOVO_Model {
 				$this->response->params->costoComisionTrans = lang('GEN_CURRENCY').' '.currencyFormat($this->response->params->costoComisionTrans);
 				$this->response->params->costoComisionCons = lang('GEN_CURRENCY').' '.currencyFormat($this->response->params->costoComisionCons);
 
-				if ((float)$response->maestroDeposito->saldo < 0) {
-					$response->maestroDeposito->saldoDisponible = '0'.lang('GEN_DECIMAL').'00';
+				if ( (float)$response->maestroDeposito->saldo < 0 ){
+					$this->response->cssNegativeBalance = "danger";
 				}
 
 				$this->response->balance = lang('GEN_CURRENCY').' '.$response->maestroDeposito->saldoDisponible;
@@ -114,14 +115,13 @@ class Novo_Services_Model extends NOVO_Model {
 				if ( array_key_exists('saldoCtaConcentradora',
 				$response->bean->maestroDeposito) ) {
 					$this->response->balanceConcentratingAccount = $response->bean->maestroDeposito->saldoCtaConcentradora;
-			}
+				}
 
-			if ( $response->bean->maestroDeposito->saldoDisponible <= 0 ){
-				$this->response->balance = lang('GEN_CURRENCY').' '. currencyFormat(0);
-			 } else {
-				$this->response->balance = lang('GEN_CURRENCY').' '.($response->bean->maestroDeposito->saldoDisponible);
-			}
+				if ( (float)$response->bean->maestroDeposito->saldo < 0 ){
+					$this->response->cssNegativeBalance = "danger";
+				}
 
+				$this->response->balance = lang('GEN_CURRENCY').' '. 				   $response->bean->maestroDeposito->saldoDisponible;
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -233:

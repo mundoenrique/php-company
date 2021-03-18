@@ -85,6 +85,7 @@ $(function () {
 
 				access = responseTable.access;
 				balance = responseTable.balance;
+				$('#balance-aviable').addClass(responseTable.cssNegativeBalance);
 				balanceConcentratingAccount = responseTable.balanceConcentratingAccount
 				costs = responseTable.params;
 				return JSON.stringify(responseTable);
