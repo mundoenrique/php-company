@@ -121,7 +121,7 @@
             <div class="row flex py-2">
               <div class="col-4">
                 <label><?= lang('SERVICES_AVAILABLE_BALANCE'); ?></label>
-                <span id="balance-aviable" class="light text block py-0"></span>
+                <span id="balance-aviable" class="light block py-0"></span>
               </div>
               <?php if (lang('CONF_SECTION_COMMISSION') == 'ON'): ?>
               <div class="col-4">
