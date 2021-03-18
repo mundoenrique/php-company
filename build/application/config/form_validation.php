@@ -1064,16 +1064,43 @@ $config = [
 		],
 	'userActivity' => [
 		[
-			'field' => 'fechaIni',
-			'rules' => 'trim|regex_match[/^[0-9\/]*$/i]'
+			'field' => 'enterpriseCode',
+			'label' => 'enterpriseCode',
+			'rules' => 'trim|regex_match[/^[a-z0-9]+$/i]|required'
 		],
 		[
-			'field' => 'fechaFin',
-			'rules' => 'trim|regex_match[/^[0-9\/]*$/i]'
+			'field' => 'initialDate',
+			'label' => 'initialDate',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
 		],
 		[
-			'field' => 'acCodCia',
-			'rules' => 'trim|regex_match[/^[0-9]*$/i]'
+			'field' => 'finalDate',
+			'label' => 'finalDate',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+		]
+	],
+	'exportReportUserActivity' => [
+		[
+			'field' => 'initialDate',
+			'label' => 'initialDate',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+		],
+		[
+			'field' => 'finalDate',
+			'label' => 'finalDate',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+		],
+		[
+			'field' => 'enterpriseCode',
+			'rules' => 'trim|regex_match[/^[0-9]*$/i]|required'
+		],
+		[
+			'field' => 'rifEnterprise',
+			'rules' => 'trim|regex_match[/^[0-9]*$/i]|required'
+		],
+		[
+			'field' => 'downloadFormat',
+			'rules' => 'trim|regex_match[/^[a-z0-9]+$/i]|required'
 		]
 	],
 	'usersActivity' => [
@@ -1108,42 +1135,6 @@ $config = [
 			'field' => 'finalDate',
 			'label' => 'finalDate',
 			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
-		]
-	],
-	'exportToExcelUserActivity' => [
-		[
-			'field' => 'rifEmpresa',
-			'rules' => 'trim|regex_match[/^[0-9]*$/i]'
-		],
-		[
-			'field' => 'fechaIni',
-			'rules' => 'trim|regex_match[/^[0-9\/]*$/i]'
-		],
-		[
-			'field' => 'fechaFin',
-			'rules' => 'trim|regex_match[/^[0-9\/]*$/i]'
-		],
-		[
-			'field' => 'acCodCia',
-			'rules' => 'trim|regex_match[/^[0-9]*$/i]'
-		]
-	],
-	'exportToPDFUserActivity' => [
-		[
-			'field' => 'rifEmpresa',
-			'rules' => 'trim|regex_match[/^[0-9]*$/i]'
-		],
-		[
-			'field' => 'fechaIni',
-			'rules' => 'trim|regex_match[/^[0-9\/]*$/i]'
-		],
-		[
-			'field' => 'fechaFin',
-			'rules' => 'trim|regex_match[/^[0-9\/]*$/i]'
-		],
-		[
-			'field' => 'acCodCia',
-			'rules' => 'trim|regex_match[/^[0-9]*$/i]'
 		]
 	],
 	'commercialTwirls' => [

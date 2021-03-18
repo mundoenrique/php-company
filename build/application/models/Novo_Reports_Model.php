@@ -766,11 +766,9 @@ class Novo_Reports_Model extends NOVO_Model {
 				$user = $response;
 				$this->response->data =  (array)$user;
 			break;
-			case -3:
-				$this->response->code = 4;
-				$this->response->icon = lang('CONF_ICON_DANGER');
+			default:
 				$this->response->title = lang('REPORTS_TITLE');
-				$this->response->msg = lang('REPORTS_NO_BUDGET');
+				$this->response->msg = lang('REPORTS_NO_FILE_EXIST');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 		}
@@ -848,11 +846,9 @@ class Novo_Reports_Model extends NOVO_Model {
 				$user = $response;
 				$this->response->data =  (array)$user;
 			break;
-			case -3:
-				$this->response->code = 4;
-				$this->response->icon = lang('CONF_ICON_DANGER');
+			default:
 				$this->response->title = lang('REPORTS_TITLE');
-				$this->response->msg = lang('REPORTS_NO_BUDGET');
+				$this->response->msg = lang('REPORTS_NO_FILE_EXIST');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 		}
@@ -891,11 +887,9 @@ class Novo_Reports_Model extends NOVO_Model {
 				$user = $response;
 				$this->response->data =  (array)$user;
 			break;
-			case -3:
-				$this->response->code = 4;
-				$this->response->icon = lang('CONF_ICON_DANGER');
+			default:
 				$this->response->title = lang('REPORTS_TITLE');
-				$this->response->msg = lang('REPORTS_NO_BUDGET');
+				$this->response->msg = lang('REPORTS_NO_FILE_EXIST');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 		}
@@ -935,19 +929,11 @@ class Novo_Reports_Model extends NOVO_Model {
 				$user = $response;
 				$this->response->data =  (array)$user;
 			break;
-			case -3:
-				$this->response->code = 4;
-				$this->response->icon = lang('CONF_ICON_DANGER');
+			default:
 				$this->response->title = lang('REPORTS_TITLE');
-				$this->response->msg = lang('REPORTS_NO_FILE');
+				$this->response->msg = lang('REPORTS_NO_FILE_EXIST');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
-			default:
-				$this->response->code = 4;
-				$this->response->icon = lang('CONF_ICON_DANGER');
-				$this->response->title = lang('REPORTS_TITLE');
-				$this->response->msg = lang('REPORTS_NO_FILE_CONSOLID');
-				$this->response->modalBtn['btn1']['action'] = 'destroy';
 		}
 
 		return $this->response;
@@ -986,19 +972,11 @@ class Novo_Reports_Model extends NOVO_Model {
 				$user = $response;
 				$this->response->data =  (array)$user;
 			break;
-			case -3:
-				$this->response->code = 4;
-				$this->response->icon = lang('CONF_ICON_DANGER');
+			default:
 				$this->response->title = lang('REPORTS_TITLE');
-				$this->response->msg = lang('REPORTS_NO_FILE');
+				$this->response->msg = lang('REPORTS_NO_FILE_EXIST');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
-			default:
-				$this->response->code = 4;
-				$this->response->icon = lang('CONF_ICON_DANGER');
-				$this->response->title = lang('REPORTS_TITLE');
-				$this->response->msg = lang('REPORTS_NO_FILE_CONSOLID');
-				$this->response->modalBtn['btn1']['action'] = 'destroy';
 		}
 
 		return $this->response;
@@ -1144,6 +1122,8 @@ class Novo_Reports_Model extends NOVO_Model {
 	 * @info Método para obtener actividad por ususario
 	 * @author Diego Acosta García
 	 * @date May 27, 2020
+	 * @modified Jhonnatan Vega
+	 * @date March 10th, 2021
 	 */
 	public function callWs_userActivity_Reports($dataRequest)
 	{
@@ -1155,27 +1135,111 @@ class Novo_Reports_Model extends NOVO_Model {
 
 		$this->dataRequest->idOperation = 'buscarActividadesXUsuario';
 		$this->dataRequest->className = 'com.novo.objects.MO.ListadoEmpresasMO';
-		$this->dataRequest->fechaIni =  $dataRequest->fechaIni;
-		$this->dataRequest->fechaFin =  $dataRequest->fechaFin;
-		$this->dataRequest->acCodCia = $dataRequest->acCodCia;
+		$this->dataRequest->fechaIni =  $dataRequest->initialDate;
+		$this->dataRequest->fechaFin =  $dataRequest->finalDate;
+		$this->dataRequest->acCodCia = $dataRequest->enterpriseCode;
 
 		$response = $this->sendToService('callWs_userActivity');
+		$usersActivity = [];
 
 		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
-				$user = $response;
-				$this->response->data =  (array)$user;
+
+				foreach($response->lista AS $userActivity) {
+					$record = new stdClass();
+					$record->user = $userActivity->userName;
+					$record->userStatus = $userActivity->estatus;
+					$record->lastConnectionDate = $userActivity->fechaUltimaConexion;
+					$lastActions = [];
+
+					foreach($userActivity->actividades->lista AS $lastActionsList){
+						array_push(
+							$lastActions,
+							$lastActionsList
+						);
+					}
+
+					$record->lastActions = $lastActions;
+					$enabledFunctions = [];
+
+					foreach($userActivity->funciones->lista AS $enabledFunctionsList){
+						array_push(
+							$enabledFunctions,
+							$enabledFunctionsList
+						);
+					}
+
+					$record->enabledFunctions = $enabledFunctions;
+					array_push(
+						$usersActivity,
+						$record
+					);
+				}
 			break;
 			case -150:
 				$this->response->code = 1;
 			break;
 		}
 
-		return $this->response;
+		$this->response->data->usersActivity = $usersActivity;
+
+		return $this->responseToTheView('callWs_userActivity');
 	}
 
- /**
+		/**
+	 * Método para descargar reporte de actividad por usuario (Global)
+	 * @author Diego Acosta García
+	 * @date May 27, 2020
+	 * @modified Jhonnatan Vega
+	 * @date March 12th, 2021
+	 */
+	public function callWs_exportReportUserActivity_Reports($dataRequest)
+	{
+		log_message('INFO', 'NOVO Reports Model: exportToExcelUserActivity Method Initialized');
+
+		$this->dataAccessLog->modulo = 'Reportes';
+		$this->dataAccessLog->function = 'Actividad por usuario';
+
+		if ($dataRequest->downloadFormat == 'Excel') {
+			$this->dataAccessLog->operation = 'Descargar reporte en excel';
+			$this->dataRequest->idOperation = 'generarArchivoXlsActividadesXUsuario';
+			$ext =  '.xls';
+		} else {
+			$this->dataAccessLog->operation = 'Descargar reporte en pdf';
+			$this->dataRequest->idOperation = 'generarPdfActividadesXUsuario';
+			$ext =  '.pdf';
+		}
+
+		$this->dataRequest->className = 'com.novo.objects.MO.DepositosGarantiaMO';
+		$this->dataRequest->rifEmpresa = $dataRequest->rifEnterprise;
+		$this->dataRequest->fechaIni =  $dataRequest->initialDate;
+		$this->dataRequest->fechaFin =  $dataRequest->finalDate;
+		$this->dataRequest->acCodCia = $dataRequest->enterpriseCode;
+
+		$response = $this->sendToService('callWs_exportToExcelUserActivity');
+
+		switch ($this->isResponseRc) {
+			case 0:
+				$this->response->code = 0;
+				$file = $response->archivo;
+				$name = $response->nombre;
+
+				$this->response->data->file = $file;
+				$this->response->data->name = $name.$ext;
+				$this->response->data->ext = $ext;
+			break;
+			default:
+				$this->response->title = lang('REPORTS_TITLE');
+				$this->response->msg = lang('REPORTS_NO_FILE_EXIST');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			break;
+		}
+
+		return $this->responseToTheView('callWs_exportToExcelUserActivity');
+	}
+
+	/**
   * @info Método para obtener actividad por usuario (Produbanco)
   * @author Jhonnatan Vega
   * @date October 13, 2020
@@ -1248,10 +1312,10 @@ class Novo_Reports_Model extends NOVO_Model {
 	}
 
 	/**
-  * @info Método para descargar reporte de actividad por usuario (Produbanco)
-  * @author Jhonnatan Vega
-  * @date October 22, 2020
- */
+	* @info Método para descargar reporte de actividad por usuario (Produbanco)
+	* @author Jhonnatan Vega
+	* @date October 22, 2020
+	*/
 	public function callWs_exportExcelUsersActivity_Reports($dataRequest)
 	{
 		log_message('INFO', 'NOVO Reports Model: exportExcelUsersActivity Method Initialized');
@@ -1268,6 +1332,7 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->dataRequest->acprefix = $this->session->productInf->productPrefix;
 		$this->dataRequest->fechaInicio =  $dataRequest->initialDate;
 		$this->dataRequest->fechaFin =  $dataRequest->finalDate;
+		$this->dataRequest->nombreUsuario =  $dataRequest->userToDownload;
 
 		$response = $this->sendToService('callWs_exportExcelUsersActivity');
 
@@ -1292,77 +1357,6 @@ class Novo_Reports_Model extends NOVO_Model {
 		return $this->responseToTheView('callWs_exportExcelUsersActivity');
 	}
 
-		/**
-	 * @info Método para obtener excel de tabla cuenta maestra
-	 * @author Diego Acosta García
-	 * @date May 27, 2020
-	 */
-	public function callWs_exportToExcelUserActivity_Reports($dataRequest)
-	{
-		log_message('INFO', 'NOVO Reports Model: exportToExcelUserActivity Method Initialized');
-
-		$this->dataAccessLog->modulo = 'Reportes';
-		$this->dataAccessLog->function = 'Actividad por usuario';
-		$this->dataAccessLog->operation = 'Obtener actividad por usuario en excel';
-
-		$this->dataRequest->idOperation = 'generarArchivoXlsActividadesXUsuario';
-		$this->dataRequest->className = 'com.novo.objects.MO.DepositosGarantiaMO';
-		$this->dataRequest->rifEmpresa = $dataRequest->rifEmpresa;
-		$this->dataRequest->fechaIni =  $dataRequest->fechaIni;
-		$this->dataRequest->fechaFin =  $dataRequest->fechaFin;
-		$this->dataRequest->acCodCia = $dataRequest->acCodCia;
-
-		$response = $this->sendToService('callWs_exportToExcelUserActivity');
-
-		switch ($this->isResponseRc) {
-			case 0:
-				$this->response->code = 0;
-				$user = $response;
-				$this->response->data =  (array)$user;
-			break;
-			case -3:
-				$this->response->code = 4;
-				$this->response->icon = lang('CONF_ICON_DANGER');
-				$this->response->title = lang('REPORTS_TITLE');
-				$this->response->msg = lang('REPORTS_NO_BUDGET');
-				$this->response->modalBtn['btn1']['action'] = 'destroy';
-			break;
-		}
-
-		return $this->response;
-	}
-	/**
-	 * @info Método para obtener pdf de tabla cuenta maestra
-	 * @author Diego Acosta García
-	 * @date May 27, 2020
-	 */
-	public function callWs_exportToPDFUserActivity_Reports($dataRequest)
-	{
-		log_message('INFO', 'NOVO Reports Model: exportToPDFUserActivity Method Initialized');
-
-		$this->dataAccessLog->modulo = 'Reportes';
-		$this->dataAccessLog->function = 'Actividad por usuario';
-		$this->dataAccessLog->operation = 'Obtener actividad por usuario en pdf';
-
-		$this->dataRequest->idOperation = 'generarPdfActividadesXUsuario';
-		$this->dataRequest->className = 'com.novo.objects.MO.DepositosGarantiaMO';
-		$this->dataRequest->rifEmpresa = $dataRequest->rifEmpresa;
-		$this->dataRequest->fechaIni =  $dataRequest->fechaIni;
-		$this->dataRequest->fechaFin =  $dataRequest->fechaFin;
-		$this->dataRequest->acCodCia = $dataRequest->acCodCia;
-
-		$response = $this->sendToService('callWs_exportToPDFUserActivity');
-
-		switch ($this->isResponseRc) {
-			case 0:
-				$this->response->code = 0;
-				$user = $response;
-				$this->response->data =  (array)$user;
-			break;
-		}
-
-		return $this->response;
-	}
 	/**
 	 * @info Método para obtener busqueda de estado de cuenta
 	 * @author Diego Acosta García
@@ -1524,10 +1518,9 @@ class Novo_Reports_Model extends NOVO_Model {
 				$this->response->code = 0;
 				$this->response->data = (array)$response;
 			break;
-			case -3:
-				$this->response->icon = lang('CONF_ICON_DANGER');
+			default:
 				$this->response->title = lang('REPORTS_TITLE');
-				$this->response->msg = lang('REPORTS_NO_FILE_CONSOLID');
+				$this->response->msg = lang('REPORTS_NO_FILE_EXIST');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 		}
@@ -1577,10 +1570,9 @@ class Novo_Reports_Model extends NOVO_Model {
 				$this->response->code = 0;
 				$this->response->data = (array)$response;
 			break;
-			case -3:
-				$this->response->icon = lang('CONF_ICON_DANGER');
+			default:
 				$this->response->title = lang('REPORTS_TITLE');
-				$this->response->msg = lang('REPORTS_NO_FILE_CONSOLID');
+				$this->response->msg = lang('REPORTS_NO_FILE_EXIST');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 		}

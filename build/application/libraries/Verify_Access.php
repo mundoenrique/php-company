@@ -247,8 +247,7 @@ class Verify_Access {
 					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPCON'));
 				break;
 				case 'userActivity':
-				case 'exportToExcelUserActivity':
-				case 'exportToPDFUserActivity':
+				case 'exportReportUserActivity':
 					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPUSU') && lang('CONF_USER_ACTIVITY') == 'ON');
 				break;
 				case 'usersActivity':
