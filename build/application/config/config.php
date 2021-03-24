@@ -24,29 +24,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 $config['base_url'] = BASE_URL;
-$config['asset_url'] = BASE_CDN_URL;
-$config['asset_path'] = BASE_CDN_PATH;
-$config['favicon'] = 'favicon-novo';
-$config['channel'] = 'ceo';
-// Main web service access
-$config['urlWS'] = WS_URL;
-$config['keyNovo'] = base64_decode(WS_KEY);
-// APIs access
-$config['urlAPI'] = API_URL;
-$config['urlAPIContent'] = API_CONTENT_URL;
-// Next-gen service access
-$config['urlServ'] = SERVICE_URL;
-$config['client_id'] = SERVICE_CLIENT_ID;
-$config['client_secret'] = SERVICE_CLIENT_SECRET;
-// Bulk upload management
-$config['upload_bulk'] = BULK_LOCAL_PATH.'bulk/';
-$config['userpass_bulk'] = BULK_FTP_USERNAME.':'.BULK_FTP_PASSWORD;
-$config['LOTES_USERPASS'] = BULK_FTP_USERNAME.':'.BULK_FTP_PASSWORD;
-$config['format_date'] = 'j/m/Y';
-$config['format_time'] = 'g:i A';
-$config['cypher_base'] = CYPHER_BASE;
-$config['client'] = 'novo';
-$config['access_url'] = explode(',', ACCESS_URL);
+$config['asset_url'] = ASSET_URL;
+$config['asset_path'] = ASSET_PATH;
+
 /*
 |--------------------------------------------------------------------------
 | Index File
@@ -256,7 +236,7 @@ $config['log_threshold'] = THRESHOLD;
 | application/logs/ directory. Use a full server path with trailing slash.
 |
 */
-$config['log_path'] = '';
+$config['log_path'] = LOG_PATH;
 
 /*
 |--------------------------------------------------------------------------
@@ -399,17 +379,13 @@ $config['encryption_key'] = ENCRYPTION_KEY;
 | except for 'cookie_prefix' and 'cookie_httponly', which are ignored here.
 |
 */
-$config['sess_driver'] = 'files';
+$config['sess_driver'] = SESS_DRIVER;
 $config['sess_cookie_name'] = SESS_COOKIE_NAME;
 $config['sess_expiration'] = SESS_EXPIRATION > 0 ? SESS_EXPIRATION + 50 : SESS_EXPIRATION;
-$config['sess_save_path'] = SESS_SAVE_PATH;
-$config['sess_match_ip'] = SESS_MATCH_IP;
-$config['sess_time_to_update'] = 10;
+$config['sess_save_path'] =  SESS_SAVE_PATH;
+$config['sess_match_ip'] = TRUE;
+$config['sess_time_to_update'] = ACTIVE_SAFETY == 'ON' ? 30 : 0;
 $config['sess_regenerate_destroy'] = TRUE;
-/*
-| Configura control de tiempo de sesión
-*/
-$config['session_time'] = SESS_EXPIRATION * 1000;
 
 /*
 |--------------------------------------------------------------------------
@@ -428,8 +404,8 @@ $config['session_time'] = SESS_EXPIRATION * 1000;
 */
 $config['cookie_prefix']	= COOKIE_PREFIX;
 $config['cookie_domain']	= COOKIE_DOMAIN;
-$config['cookie_path']		= COOKIE_PATH;
-$config['cookie_secure']	= COOKIE_SECURE;
+$config['cookie_path']		= '/';
+$config['cookie_secure']	= COOKIE_SECURE == 'ON' ? TRUE : FALSE;;
 $config['cookie_httponly'] 	= FALSE;
 
 /*
@@ -474,7 +450,7 @@ $config['global_xss_filtering'] = TRUE;
 | 'csrf_regenerate' = Regenerate token on every submission
 | 'csrf_exclude_uris' = Array of URIs which ignore CSRF checks
 */
-$config['csrf_protection'] = TRUE;
+$config['csrf_protection'] = ACTIVE_SAFETY == 'ON' ? TRUE : FALSE;
 $config['csrf_token_name'] = 'ceo_name';
 $config['csrf_cookie_name'] = 'cook';
 $config['csrf_expire'] = 7200;
@@ -525,7 +501,7 @@ $config['csrf_exclude_uris'] = array(
 | by the output class.  Do not 'echo' any values with compression enabled.
 |
 */
-$config['compress_output'] = FALSE;
+$config['compress_output'] = TRUE;
 
 /*
 |--------------------------------------------------------------------------
@@ -552,7 +528,7 @@ $config['time_reference'] = 'local';
 | Note: You need to have eval() enabled for this to work.
 |
 */
-$config['rewrite_short_tags'] = TRUE;
+$config['rewrite_short_tags'] = FALSE;
 
 /*
 |--------------------------------------------------------------------------
@@ -570,4 +546,4 @@ $config['rewrite_short_tags'] = TRUE;
 | Comma-separated:	'10.0.1.200,192.168.5.0/24'
 | Array:		array('10.0.1.200', '192.168.5.0/24')
 */
-$config['proxy_ips'] = IP_PROXI;
+$config['proxy_ips'] = PROXY_IPS;

@@ -2,7 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 $lang['GEN_SYSTEM_NAME']= 'Conexión Empresas Online';
 $lang['GEN_FAVICON'] = 'favicon-novo';
-$lang['GEN_FAVICON_EXT'] = 'png';
+$lang['GEN_FAVICON_EXT'] = 'ico';
 $lang['GEN_LOADER'] = 'loading-novo.gif';
 //MENU
 $lang['GEN_MENU_ENTERPRISE'] = 'Empresas';
@@ -573,3 +573,6 @@ $lang['GEN_UPLOAD_SFTP(85)'] = 'CURLE_RTSP_CSEQ_ERROR';
 $lang['GEN_UPLOAD_SFTP(86)'] = 'CURLE_RTSP_SESSION_ERROR';
 $lang['GEN_UPLOAD_SFTP(87)'] = 'CURLE_FTP_BAD_FILE_LIST';
 $lang['GEN_UPLOAD_SFTP(88)'] = 'CURLE_CHUNK_FAILED';
+// UPLOAD FILE
+$lang['GEN_UPLOAD_CREATE_DIRECTORY'] = 'Directorio creado.';
+$lang['GEN_UPLOAD_NOT_CREATE_DIRECTORY'] = 'Directorio existe.';

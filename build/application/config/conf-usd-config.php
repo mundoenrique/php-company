@@ -2,8 +2,9 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 //País
-$config['country']='Ve';
-$config['countryUri']='ve';
+$config['country']='Usd';
+$config['countryUri']='us';
+$config['sess_expiration'] = 7200;
 
 /*
 |--------------------------------------------------------------------------
@@ -11,17 +12,11 @@ $config['countryUri']='ve';
 |--------------------------------------------------------------------------
 */
 
-//RUTA BASE PARA ARCHIVOS CDN  Ejemplo: https://cdn.novopayment.dev/empresas/Ve/
-$config['base_url_cdn'] = BASE_CDN_URL.$config['country'].'/';
-
-//URL PARA CONECTAR POR SFTP A SERVIDOR
-$config['URL_TEMPLOTES'] = BULK_FTP_URL.$config['country'].'/';
-
-//PATCH CARPETA DONDE SE SUBEN LOS LOTES Ejemplo: '/opt/httpd-2.4.4/vhost/cdn/empresas/Co/bash/''
-$config['FOLDER_UPLOAD_LOTES'] = BULK_LOCAL_PATH.$config['country'].'/'.'bash/';
+//RUTA BASE PARA ARCHIVOS CDN  Ejemplo: https://cdn.novopayment.dev/empresas/Usd/
+$config['base_url_cdn'] = ASSET_URL.$config['country'].'/';
 
 //PATH CARPETA BASE CDN DEL PAÍS
-$config['CDN'] = BASE_CDN_PATH.$config['country'].'/';
+$config['CDN'] = ASSET_PATH.$config['country'].'/';
 
 /*
 |--------------------------------------------------------------------------
@@ -33,7 +28,7 @@ $config['CDN'] = BASE_CDN_PATH.$config['country'].'/';
 | than english.
 |
 */
-$config['language']	= 've-spanish';
+$config['language']	= 'usd-spanish';
 
 /* End of file config.php */
 /* Location: ./application/config/config.php */

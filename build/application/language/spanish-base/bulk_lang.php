@@ -84,3 +84,6 @@ $lang['BULK_AMOUNT_EXCEEDED'] = 'Has excedido el monto máximo por transacción.
 $lang['FILE_NOT_EXIST_ICBS'] = 'Transacción no encontrada en portal ICBS.';
 $lang['AUTH_ALREADY_PERFORMED_BY_USER'] = 'Usuario ya realizo aprobación.';
 $lang['BULK_EXPIRED_TIME'] = 'El periodo para ser aprobado el lote ha caducado.';
+$lang['BULK_IMPORTANT'] = '¡Importante!';
+$lang['BULK_REQUEST_500_CARDS'] = 'Si tu solicitud es de emisión y supera 500 tarjetas, ésta será procesada 20 minutos después del próximo horario de creación de tarjetas.';
+$lang['BULK_CREATION_SCHEDULE'] = 'Los horarios para creación de tarjetas son los siguientes:';

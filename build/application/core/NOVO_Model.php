@@ -46,7 +46,7 @@ class NOVO_Model extends CI_Model {
 		$this->dataRequest->token = $this->token;
 		$this->dataRequest->autoLogin = $this->autoLogin;
 
-		if (lang('CONF_AGEN_INFO') == 'ON') {
+		if (lang('CONF_AGENT_INFO') == 'ON') {
 			$this->dataRequest->aplicacion = $this->session->enterpriseInf->thirdApp ?? '';
 			$this->dataRequest->dispositivo = $this->agent->is_mobile() ? 'mobile' : 'desktop';
 			$this->dataRequest->marca = $this->agent->is_mobile() ? $this->agent->mobile() : '';

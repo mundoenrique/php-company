@@ -24,6 +24,7 @@ class Novo_DownloadFiles_Model extends NOVO_Model {
 		unlink(assetPath('downloads/'.$dataRequest->fileName));
 		$this->response->code = 0;
 		$this->response->data = '';
+		$this->response->modalBtn['btn1']['action'] = 'none';
 		return $this->responseToTheView('callWs_DeleteFile');
 	}
 	/**
@@ -317,7 +318,7 @@ class Novo_DownloadFiles_Model extends NOVO_Model {
 		$this->response->icon =  lang('CONF_ICON_WARNING');
 		$this->response->download =  TRUE;
 		$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_ACCEPT');
-		$this->response->modalBtn['btn1']['action'] = 'close';
+		$this->response->modalBtn['btn1']['action'] = 'destroy';
 
 		if ($dataResponse->code != 0) {
 			$this->response->code =  $dataResponse->code;

@@ -400,7 +400,7 @@ class Lotes extends CI_Controller {
 		$dataEncry = np_Hoplite_Encryption($data, 'callWSbuscarLotesAutorizar');
 		$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
 		$data = json_encode($data);
-		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+		$response = np_Hoplite_GetWS($data);
 		$jsonResponse = np_Hoplite_Decrypt($response, 'callWSbuscarLotesAutorizar');
 		$response = json_decode($jsonResponse);
 
@@ -488,7 +488,7 @@ class Lotes extends CI_Controller {
 		$dataEncry = np_Hoplite_Encryption($data, 'callWScancelarCalculoOS');
 		$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
 		$data = json_encode($data);
-		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+		$response = np_Hoplite_GetWS($data);
 		$jsonResponse = np_Hoplite_Decrypt($response, 'callWScancelarCalculoOS');
 		$response = json_decode($jsonResponse);
 
@@ -641,7 +641,7 @@ class Lotes extends CI_Controller {
 		$dataEncry = np_Hoplite_Encryption($data, 'callWSfirmarLote');
 		$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
 		$data = json_encode($data);
-		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+		$response = np_Hoplite_GetWS($data);
 		$jsonResponse = np_Hoplite_Decrypt($response, 'callWSfirmarLote');
 		$response = json_decode($jsonResponse);
 
@@ -778,7 +778,7 @@ class Lotes extends CI_Controller {
 		$dataEncry = np_Hoplite_Encryption($data, 'callWSdesasociarFirma');
 		$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
 		$data = json_encode($data);
-		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+		$response = np_Hoplite_GetWS($data);
 		$jsonResponse = np_Hoplite_Decrypt($response, 'callWSdesasociarFirma');
 		$response = json_decode($jsonResponse);
 
@@ -930,7 +930,7 @@ class Lotes extends CI_Controller {
 		$dataEncry = np_Hoplite_Encryption($data, 'callWSeliminarLotesPorAutorizar');
 		$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
 		$data = json_encode($data);
-		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+		$response = np_Hoplite_GetWS($data);
 		$jsonResponse = np_Hoplite_Decrypt($response, 'callWSeliminarLotesPorAutorizar');
 		$response = json_decode($jsonResponse);
 
@@ -1075,7 +1075,7 @@ class Lotes extends CI_Controller {
 		$dataEncry = np_Hoplite_Encryption($data, 'callWSdetalleLoteAutorizar');
 		$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
 		$data = json_encode($data);
-		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+		$response = np_Hoplite_GetWS($data);
 		$jsonResponse = np_Hoplite_Decrypt($response, 'callWSdetalleLoteAutorizar');
 
 		log_message('info','detalle loteAuth '.$jsonResponse);
@@ -1155,7 +1155,7 @@ class Lotes extends CI_Controller {
             $dataEncry = np_Hoplite_Encryption($data, 'expdetalleLoteAuthXLS');
             $data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
             $data = json_encode($data);
-            $response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+            $response = np_Hoplite_GetWS($data);
             $jsonResponse = np_Hoplite_Decrypt($response, 'expdetalleLoteAuthXLS');
 
             $response =  json_decode($jsonResponse);
@@ -1252,7 +1252,7 @@ class Lotes extends CI_Controller {
             $dataEncry = np_Hoplite_Encryption($data,'expdetalleLoteAuthPDF');
             $data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
             $data = json_encode($data);
-            $response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+            $response = np_Hoplite_GetWS($data);
             $jsonResponse = np_Hoplite_Decrypt($response,'expdetalleLoteAuthPDF');
 
             $response =  json_decode($jsonResponse);
@@ -1342,7 +1342,7 @@ class Lotes extends CI_Controller {
 		$dataEncry = np_Hoplite_Encryption($data,'callWSbuscarLotesPorConfirmar');
 		$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
 		$data = json_encode($data);
-		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+		$response = np_Hoplite_GetWS($data);
 		$jsonResponse = np_Hoplite_Decrypt($response,'callWSbuscarLotesPorConfirmar');
 		$response = json_decode($jsonResponse);
 
@@ -1420,7 +1420,7 @@ class Lotes extends CI_Controller {
 		$dataEncry = np_Hoplite_Encryption($data,'callWSconsultarTipoLote');
 		$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
 		$data = json_encode($data);
-		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+		$response = np_Hoplite_GetWS($data);
 		$jsonResponse = np_Hoplite_Decrypt($response,'callWSconsultarTipoLote');
 		log_message('DEBUG', 'NOVO ['.$username.'] RESPONSE: callWSconsultarTipoLote: ' . $jsonResponse);
 		$response = json_decode($jsonResponse);
@@ -1513,7 +1513,7 @@ class Lotes extends CI_Controller {
 
 		$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
 		$data = json_encode($data);
-		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+		$response = np_Hoplite_GetWS($data);
 		$jsonResponse = np_Hoplite_Decrypt($response, 'callWScargarArchivo');
 		$response = json_decode($jsonResponse);
 		log_message('info',"cargaLote ".$jsonResponse);
@@ -1589,7 +1589,7 @@ class Lotes extends CI_Controller {
 		$dataEncry = np_Hoplite_Encryption($data, 'callWSeliminarLoteNoConfirmado');
 		$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
 		$data = json_encode($data);
-		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+		$response = np_Hoplite_GetWS($data);
 		$jsonResponse = np_Hoplite_Decrypt($response, 'callWSeliminarLoteNoConfirmado');
 		$response = json_decode($jsonResponse);
 
@@ -1678,9 +1678,18 @@ class Lotes extends CI_Controller {
 			$this->lang->load('upload');
 			$this->lang->load('erroreseol');
 			$this->load->library('parser');
-			//$config['FOLDER_UPLOAD_LOTES']
-			$config['upload_path'] = $this->config->item('FOLDER_UPLOAD_LOTES');
-			log_message('DEBUG', 'upload_path: ' . $config['upload_path']);
+			$createDirectory = lang('GEN_UPLOAD_NOT_CREATE_DIRECTORY');
+
+			if (!is_dir(UPLOAD_PATH.$this->config->item('country'))) {
+				if (mkdir(UPLOAD_PATH.$this->config->item('country'), 0755, TRUE)) {
+					$createDirectory = lang('GEN_UPLOAD_CREATE_DIRECTORY');
+				};
+			}
+
+			$config['upload_path'] = UPLOAD_PATH.$this->config->item('country').'/';
+
+			log_message('DEBUG', 'uploadFiles directory '.$config['upload_path'].' ' .$createDirectory);
+
 			$config['allowed_types'] = '*';
 			$this->load->library('upload', $config);
 			//VERIFICAR SI NO SUBIO ARCHIVO
@@ -1713,8 +1722,8 @@ class Lotes extends CI_Controller {
 				$localfile = $config['upload_path'].$nombreArchivo.$extensionArchivo;
 				$fp = fopen($localfile, 'r');
 				$nombreArchivoNuevo = date("YmdHis").$nombreArchivo.$extensionArchivo;
-				$URL_TEMPLOTES = $this->config->item('URL_TEMPLOTES');
-				$LOTES_USERPASS = $this->config->item('LOTES_USERPASS');
+				$URL_TEMPLOTES = BULK_FTP_URL.$this->config->item('country');
+				$LOTES_USERPASS = BULK_FTP_USERNAME.':'.BULK_FTP_PASSWORD;
 
 				log_message('INFO', 'NOVO UPLOAD FILE BY: '.$URL_TEMPLOTES.' AND: '.$LOTES_USERPASS);
 
@@ -1879,7 +1888,7 @@ class Lotes extends CI_Controller {
 			$dataEncry = np_Hoplite_Encryption($data, 'callWSverDetalleBandeja');
 			$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
 			$data = json_encode($data);
-			$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+			$response = np_Hoplite_GetWS($data);
 			$jsonResponse = np_Hoplite_Decrypt($response, 'callWSverDetalleBandeja');
 			$response = json_decode($jsonResponse);
 
@@ -2040,7 +2049,7 @@ class Lotes extends CI_Controller {
 		$dataEncry = np_Hoplite_Encryption($data, 'callWSconfirmarLote');
 		$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
 		$data = json_encode($data);
-		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+		$response = np_Hoplite_GetWS($data);
 		$jsonResponse = np_Hoplite_Decrypt($response, 'callWSconfirmarLote');
 		$response = json_decode($jsonResponse);
 
@@ -2300,7 +2309,7 @@ class Lotes extends CI_Controller {
 		$dataEncry = np_Hoplite_Encryption($data, 'callWScalcularOS');
 		$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
 		$data = json_encode($data);
-		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+		$response = np_Hoplite_GetWS($data);
 		$jsonResponse = np_Hoplite_Decrypt($response, 'callWScalcularOS');
 		$response = json_decode($jsonResponse);
 
@@ -2438,7 +2447,7 @@ class Lotes extends CI_Controller {
 		$dataEncry = np_Hoplite_Encryption($data, 'callWSgenerarOS');
 		$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
 		$data = json_encode($data);
-		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+		$response = np_Hoplite_GetWS($data);
 		$jsonResponse = np_Hoplite_Decrypt($response, 'callWSgenerarOS');
 		$response = json_decode($jsonResponse);
 
@@ -2748,7 +2757,7 @@ class Lotes extends CI_Controller {
 		$dataEncry = np_Hoplite_Encryption($data, 'callWScrearBeneficiario');
 		$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
 		$data = json_encode($data);
-		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+		$response = np_Hoplite_GetWS($data);
 		$jsonResponse = np_Hoplite_Decrypt($response, 'callWScrearBeneficiario');
 		$response = json_decode($jsonResponse);
 
@@ -2794,8 +2803,18 @@ class Lotes extends CI_Controller {
 
 			$this->lang->load('upload');
 			$this->lang->load('erroreseol');
+			$createDirectory = lang('GEN_UPLOAD_NOT_CREATE_DIRECTORY');
 
-			$config['upload_path'] = $this->config->item('FOLDER_UPLOAD_LOTES');
+			if (!is_dir(UPLOAD_PATH.$this->config->item('country'))) {
+				if (mkdir(UPLOAD_PATH.$this->config->item('country'), 0755, TRUE)) {
+					$createDirectory = lang('GEN_UPLOAD_CREATE_DIRECTORY');
+				};
+			}
+
+			$config['upload_path'] = UPLOAD_PATH.$this->config->item('country').'/';
+
+			log_message('DEBUG', 'uploadFiles directory '.$config['upload_path'].' ' .$createDirectory);
+
 			$config['allowed_types'] = '*';
 			$this->load->library('upload', $config);
 			//VERIFICAR SI NO SUBIO ARCHIVO
@@ -2814,8 +2833,8 @@ class Lotes extends CI_Controller {
 				$localfile = $config['upload_path'].$nombreArchivo.$extensionArchivo;
 				$fp = fopen($localfile, 'r');
 				$nombreArchivoNuevo = date("YmdHis").$nombreArchivo.$extensionArchivo;
-				$URL_TEMPLOTES = $this->config->item('URL_TEMPLOTES');
-				$LOTES_USERPASS = $this->config->item('LOTES_USERPASS');
+				$URL_TEMPLOTES = BULK_FTP_URL.$this->config->item('country');
+				$LOTES_USERPASS = BULK_FTP_USERNAME.':'.BULK_FTP_PASSWORD;
 
 				curl_setopt($ch, CURLOPT_URL, $URL_TEMPLOTES.$nombreArchivoNuevo);
 				curl_setopt($ch, CURLOPT_USERPWD, $LOTES_USERPASS);
@@ -2828,8 +2847,6 @@ class Lotes extends CI_Controller {
 				curl_close ($ch);
 
 				if ($error_no == 0) {
-					fclose($fp);
-					unlink("$localfile"); //BORRAR ARCHIVO
 					$error = 'Archivo Movido.';
 					//COLOCAR LLAMADO DE LA FUNCION CUANDO ESTE CORRECTO
 					$formatoArchivo=substr($extensionArchivo, 1);
@@ -2844,6 +2861,9 @@ class Lotes extends CI_Controller {
 					$error = array('ERROR' => 'Falla al mover archivo.');
 					$this->output->set_content_type('application/json')->set_output(json_encode($error));
 				}
+
+				fclose($fp);
+				unlink("$localfile"); //BORRAR ARCHIVO
 			}
 		}elseif($paisS!=$urlCountry && $paisS!=''){
 			$this->session->sess_destroy();
@@ -2901,7 +2921,7 @@ class Lotes extends CI_Controller {
 		$dataEncry = np_Hoplite_Encryption($data, 'callWScargarArchivoReproceso');
 		$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
 		$data = json_encode($data);
-		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+		$response = np_Hoplite_GetWS($data);
 		$jsonResponse = np_Hoplite_Decrypt($response, 'callWScargarArchivoReproceso');
 		$response = json_decode($jsonResponse);
 
@@ -3017,7 +3037,7 @@ class Lotes extends CI_Controller {
 		$dataEncry = np_Hoplite_Encryption($data, 'callWSListaBeneficiarios');
 		$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
 		$data = json_encode($data);
-		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+		$response = np_Hoplite_GetWS($data);
 		$jsonResponse = np_Hoplite_Decrypt($response, 'callWSListaBeneficiarios');
 		$response = json_decode($jsonResponse);
 
@@ -3183,7 +3203,7 @@ class Lotes extends CI_Controller {
 		$dataEncry = np_Hoplite_Encryption($data, 'callWSmodificarBeneficiario');
 		$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
 		$data = json_encode($data);
-		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+		$response = np_Hoplite_GetWS($data);
 		$jsonResponse = np_Hoplite_Decrypt($response, 'callWSmodificarBeneficiario');
 		$response = json_decode($jsonResponse);
 
@@ -3324,7 +3344,7 @@ class Lotes extends CI_Controller {
 		$dataEncry = np_Hoplite_Encryption($data, 'callWSeliminarBeneficiario');
 		$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
 		$data = json_encode($data);
-		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+		$response = np_Hoplite_GetWS($data);
 		$jsonResponse = np_Hoplite_Decrypt($response, 'callWSeliminarBeneficiario');
 		$response = json_decode($jsonResponse);
 
@@ -3479,7 +3499,7 @@ class Lotes extends CI_Controller {
         $data = array('bean' => $dataEncry, 'pais' => $urlCountry);
         $data = json_encode($data);
         log_message('info', 'callWSreprocesarMasivo Encrypt ====>> ' . $data);
-        $response = np_Hoplite_GetWS('eolwebInterfaceWS', $data);
+        $response = np_Hoplite_GetWS($data);
         $jsonResponse = np_Hoplite_Decrypt($response, 'callWSreprocesarMasivo');
         $response = json_decode($jsonResponse);
         //log_message('info', 'Response ' . $response);
@@ -3572,7 +3592,7 @@ class Lotes extends CI_Controller {
 		$dataEncry = np_Hoplite_Encryption($data, 'callWSreprocesar');
 		$data = array('bean' => $dataEncry, 'pais' =>$urlCountry );
 		$data = json_encode($data);
-		$response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+		$response = np_Hoplite_GetWS($data);
 		$jsonResponse = np_Hoplite_Decrypt($response, 'callWSreprocesar');
 		$response = json_decode($jsonResponse);
 

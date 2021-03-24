@@ -53,7 +53,7 @@ class Embozados_model extends CI_Model {
         $dataEncry = np_Hoplite_Encryption($data, 'cambioStatus');
         $data = array('bean' => $dataEncry, 'pais' =>$this->pais );
         $data = json_encode($data);
-        $response = np_Hoplite_GetWS('eolwebInterfaceWS',$data);
+        $response = np_Hoplite_GetWS($data);
 				$jsonResponse = np_Hoplite_Decrypt($response, 'cambioStatus');
 
 				$jsonResponse = json_decode($jsonResponse);

@@ -92,7 +92,7 @@ class Verify_Access {
 		$this->responseDefect->title = lang('GEN_SYSTEM_NAME');
 		$this->responseDefect->msg = lang('RESP_VALIDATION_INPUT');
 		$this->responseDefect->icon = lang('CONF_ICON_WARNING');
-		$this->responseDefect->data = [
+		$this->responseDefect->modalBtn = [
 			'btn1'=> [
 				'text'=> lang('GEN_BTN_ACCEPT'),
 				'link'=> $linkredirect,
@@ -247,8 +247,7 @@ class Verify_Access {
 					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPCON'));
 				break;
 				case 'userActivity':
-				case 'exportToExcelUserActivity':
-				case 'exportToPDFUserActivity':
+				case 'exportReportUserActivity':
 					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPUSU') && lang('CONF_USER_ACTIVITY') == 'ON');
 				break;
 				case 'usersActivity':

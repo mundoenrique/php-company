@@ -1,7 +1,7 @@
 <?php
 function insert_js($filename = '') {
-	$fileurl = BASE_CDN_URL . 'js/' . $filename;
-	$filepath = BASE_CDN_PATH . 'js/' . $filename;
+	$fileurl = ASSET_URL . 'js/' . $filename;
+	$filepath = ASSET_PATH . 'js/' . $filename;
 	$version = '';
 	if (file_exists($filepath)) {
 		$version = '?v=' . date('Ymd-U', filemtime($filepath));
@@ -13,8 +13,8 @@ function insert_js($filename = '') {
 
 
 function insert_css($filename = '', $media = 'screen') {
-	$fileurl = BASE_CDN_URL . 'css/' . $filename;
-	$filepath = BASE_CDN_PATH . 'css/' . $filename;
+	$fileurl = ASSET_URL . 'css/' . $filename;
+	$filepath = ASSET_PATH . 'css/' . $filename;
 	$version = '';
 	if (file_exists($filepath)) {
 		$version = '?v=' . date('Ymd-U', filemtime($filepath));
@@ -34,7 +34,7 @@ function insert_favicon($country) {
 		$filetype = 'image/icon';
 	}
 
-	$fileurl = BASE_CDN_URL . $country . '/media/img/favicon.' . $fileext;
+	$fileurl = ASSET_URL . $country . '/media/img/favicon.' . $fileext;
 
 	$favicon = '<link href="' . $fileurl . '" rel="icon" type="' . $filetype . '">';
 	return $favicon;

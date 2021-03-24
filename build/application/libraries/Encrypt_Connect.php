@@ -7,9 +7,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Encrypt_Connect {
 	private $CI;
 	private $userName;
-	private $countryConf;
 	private $iv;
-	private $keyNovo;
 	private $logMessage;
 
 	public function __construct()
@@ -17,7 +15,6 @@ class Encrypt_Connect {
 		log_message('INFO', 'NOVO Encrypt_Connect Library Class Initialized');
 
 		$this->CI = &get_instance();
-		$this->keyNovo = $this->CI->config->item('keyNovo');
 		$this->iv = "\0\0\0\0\0\0\0\0";
 		$this->logMessage = new stdClass();
 
@@ -43,7 +40,7 @@ class Encrypt_Connect {
 		}
 
 		$cryptData = mcrypt_encrypt(
-			MCRYPT_DES, $this->keyNovo, $dataB, MCRYPT_MODE_CBC, $this->iv
+			MCRYPT_DES, base64_decode(WS_KEY), $dataB, MCRYPT_MODE_CBC, $this->iv
 		);
 
 		return base64_encode($cryptData);
@@ -58,7 +55,7 @@ class Encrypt_Connect {
 
 		$data = base64_decode($cryptData);
 		$descryptData = mcrypt_decrypt(
-			MCRYPT_DES, $this->keyNovo, $data, MCRYPT_MODE_CBC, $this->iv
+			MCRYPT_DES, base64_decode(WS_KEY), $data, MCRYPT_MODE_CBC, $this->iv
 		);
 		$decryptData = base64_decode(trim($descryptData));
 		$response = json_decode($decryptData);
@@ -134,23 +131,23 @@ class Encrypt_Connect {
 		log_message('INFO', 'NOVO Encrypt_Connect: connectWs Method Initialized');
 
 		$fail = FALSE;
-		$subFix = '_'.strtoupper($this->CI->config->item('country-uri'));
+		$subFix = '_' . strtoupper($this->CI->config->item('country-uri'));
+		$wsUrl = $_SERVER['WS_URL'];
 
-		if(isset($_SERVER['WS_URL'.$subFix])) {
-			$this->CI->config->set_item('urlWS', $_SERVER['WS_URL'.$subFix]);
+		if (isset($_SERVER['WS_URL' . $subFix])) {
+			$wsUrl = $_SERVER['WS_URL' . $subFix];
 		}
 
-		$urlWS = $this->CI->config->item('urlWS').'eolwebInterfaceWS';
-
-		log_message('DEBUG', 'NOVO ['.$userName.'] REQUEST BY COUNTRY: '.$request['pais'].', AND WEBSERVICE URL: '.$urlWS);
+		log_message('DEBUG', 'NOVO ['.$userName.'] REQUEST BY COUNTRY: '.$request['pais'].', AND WEBSERVICE URL: '.$wsUrl);
 
 		$requestSerV = json_encode($request, JSON_UNESCAPED_UNICODE);
+		$start = microtime(true);
 
 		$ch = curl_init();
-		curl_setopt($ch, CURLOPT_URL, $urlWS);
+		curl_setopt($ch, CURLOPT_URL, $wsUrl);
 		curl_setopt($ch, CURLOPT_POST, TRUE);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-		curl_setopt($ch, CURLOPT_TIMEOUT, 59);
+		curl_setopt($ch, CURLOPT_TIMEOUT, 58);
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $requestSerV);
 		curl_setopt($ch, CURLOPT_HTTPHEADER, array(
 			'Content-Type: text/plain',
@@ -160,9 +157,12 @@ class Encrypt_Connect {
 		$httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 		$CurlError = curl_error($ch);
 		$CurlErrorNo = curl_errno($ch);
-		curl_close($ch);
 
-		log_message('DEBUG','NOVO ['.$userName.'] RESPONSE CURL HTTP CODE: ' . $httpCode);
+		curl_close($ch);
+		$final = microtime(true);
+		$executionTime = round($final - $start, 2, PHP_ROUND_HALF_UP) ;
+
+		log_message('DEBUG','NOVO ['.$userName.'] RESPONSE IN '. $executionTime .' sec CURL HTTP CODE: ' . $httpCode);
 
 		$failResponse = json_decode($response);
 
@@ -217,34 +217,33 @@ class Encrypt_Connect {
 	{
 		log_message('INFO', 'NOVO Encrypt_Connect: moveFile Method Initialized');
 
-		$urlBulkService = $this->CI->config->item('url_bulk_service');
-		$userpassBulk = $this->CI->config->item('userpass_bulk');
-		$uploadBulk = $this->CI->config->item('upload_bulk');
+		$urlBulkService = BULK_FTP_URL.$this->CI->config->item('country').'/';
+		$userpassBulk =  BULK_FTP_USERNAME.':'.BULK_FTP_PASSWORD;
 		$respUpload = new stdClass;
 		$respUpload->rc = 0;
 
 		log_message('INFO', 'NOVO UPLOAD FILE BY: '.$urlBulkService.' AND: '.$userpassBulk);
 
 		$ch = curl_init();
-		$Fclose = $fOpen = fopen($uploadBulk.$file, 'r');
+		$sftp = fopen(UPLOAD_PATH.$file, 'r');
 		curl_setopt($ch, CURLOPT_URL, $urlBulkService.$file);
 		curl_setopt($ch, CURLOPT_USERPWD, $userpassBulk);
 		curl_setopt($ch, CURLOPT_UPLOAD, 1);
 		curl_setopt($ch, CURLOPT_PROTOCOLS, CURLPROTO_SFTP);
-		curl_setopt($ch, CURLOPT_INFILE, $fOpen);
-		curl_setopt($ch, CURLOPT_INFILESIZE, filesize($uploadBulk.$file));
+		curl_setopt($ch, CURLOPT_INFILE, $sftp);
+		curl_setopt($ch, CURLOPT_INFILESIZE, filesize(UPLOAD_PATH.$file));
 		curl_exec ($ch);
 		$result = curl_errno($ch);
 
-		log_message('DEBUG','NOVO ['.$userName.'] UPLOAD FILE BULK SFTP '.$model.': '.$result.' '.lang('GEN_UPLOAD_SFTP('.$result.')'));
+		log_message('DEBUG', 'NOVO ['.$userName.'] UPLOAD FILE BULK SFTP '.$model.': '.$result.' '.lang('GEN_UPLOAD_SFTP('.$result.')'));
 
 		if($result != 0) {
 			$respUpload->rc = -105;
 		}
 
 		curl_close ($ch);
-		fclose($Fclose);
-		unlink($uploadBulk.$file);
+		fclose($sftp);
+		unlink(UPLOAD_PATH.$file);
 
 		return $respUpload;
 	}

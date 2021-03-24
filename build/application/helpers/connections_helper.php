@@ -19,21 +19,26 @@ if ( ! function_exists('np_Hoplite_GetWS')) {
 	 * @param  json $cryptDataBase64
 	 * @return json
 	 */
-	function np_Hoplite_GetWS($nameWS, $cryptDataBase64)
+	function np_Hoplite_GetWS($cryptDataBase64)
 	{
 		$getPais = json_decode($cryptDataBase64);
 		$pais = $getPais->pais;
 
 		$CI =& get_instance();
-		$urlcurlWS=$CI->config->item('urlWS').$nameWS;
+		$subFix = '_' . strtoupper($CI->config->item('countryUri'));
+		$wsUrl = $_SERVER['WS_URL'];
 
-		log_message('DEBUG', 'BY COUNTRY: '.$pais.', AND WEBSERVICE URL: '.$urlcurlWS);
+		if (isset($_SERVER['WS_URL' . $subFix])) {
+			$wsUrl = $_SERVER['WS_URL' . $subFix];
+		}
+
+		log_message('DEBUG', 'BY COUNTRY: '.$pais.', AND WEBSERVICE URL: '.$wsUrl);
 
 		$ch = curl_init();
 		$dataPost = $cryptDataBase64;
-		curl_setopt($ch, CURLOPT_URL, $urlcurlWS);
+		curl_setopt($ch, CURLOPT_URL, $wsUrl);
 		curl_setopt($ch, CURLOPT_POST, TRUE);
-		curl_setopt($ch, CURLOPT_TIMEOUT, 59);
+		curl_setopt($ch, CURLOPT_TIMEOUT, 58);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $dataPost);
 		curl_setopt($ch, CURLOPT_HTTPHEADER, array(
