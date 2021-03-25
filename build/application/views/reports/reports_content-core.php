@@ -18,7 +18,7 @@
 		<div class="search-criteria-order flex pb-3 flex-column w-100">
 			<span class="line-text mb-2 h4 semibold primary"><?= lang('GEN_SELECTION_REPORTS'); ?></span>
 			<div class="flex my-2 px-5">
-				<form method="post" class="w-100">
+				<form method="post" class="w-100" onsubmit="return false">
 					<div class="row flex items-center justify-between">
 						<div class="form-group col-6 col-xl-6">
 							<label>Tipo de reporte</label>
@@ -48,7 +48,7 @@
 		<div class="flex pb-5 flex-column">
 			<span id="search-criteria" class="none line-text mb-2 h4 semibold primary"><?= lang('GEN_SEARCH_CRITERIA') ?></span>
 			<div class="flex my-2 px-5">
-				<form id="form-report" method="post" class="reports-form w-100 none">
+				<form id="form-report" method="post" class="reports-form w-100 none" onsubmit="return false">
 					<div id="repMovimientoPorEmpresa" class="row">
 						<div class="form-group col-4">
 							<label for="enterpriseDateBegin"><?= lang('GEN_START_DAY'); ?></label>
