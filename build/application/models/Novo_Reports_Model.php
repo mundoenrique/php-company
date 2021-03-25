@@ -246,6 +246,18 @@ class Novo_Reports_Model extends NOVO_Model {
 				$this->response->msg = lang('REPORTS_NO_MOVES_ENTERPRISE');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
+			case -466:
+				$this->response->icon = lang('CONF_ICON_INFO');
+				$this->response->title = lang('REPORTS_TITLE');
+				$this->response->msg = lang('REPORTS_DATE_RANGE_ERROR');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			break;
+			case -467:
+				$this->response->icon = lang('CONF_ICON_INFO');
+				$this->response->title = lang('REPORTS_TITLE');
+				$this->response->msg = lang('REPORTS_DATE_RANGE_NOT_ALLOWED');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			break;
 		}
 
 		return $this->response;
@@ -556,6 +568,18 @@ class Novo_Reports_Model extends NOVO_Model {
 				$this->response->icon = lang('CONF_ICON_INFO');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_NO_MOVES_ENTERPRISE');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			break;
+			case -466:
+				$this->response->icon = lang('CONF_ICON_INFO');
+				$this->response->title = lang('REPORTS_TITLE');
+				$this->response->msg = lang('REPORTS_DATE_RANGE_ERROR');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			break;
+			case -467:
+				$this->response->icon = lang('CONF_ICON_INFO');
+				$this->response->title = lang('REPORTS_TITLE');
+				$this->response->msg = lang('REPORTS_DATE_RANGE_NOT_ALLOWED');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 		}
