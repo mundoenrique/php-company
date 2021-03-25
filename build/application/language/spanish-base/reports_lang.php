@@ -37,6 +37,9 @@ $lang['REPORTS_USERS_ACT_FUNCTION']="Función";
 $lang['REPORTS_USERS_ACT_RESULT']="Resultado (Cod. error / respuesta)";
 $lang['REPORTS_USERS_ACT_OBSERVATION']="Observación";
 $lang['REPORTS_USERS_ACT_STATE']="Estado";
+//MOVEMENTS BY ENTERPRISE
+$lang['REPORTS_DATE_RANGE_ERROR'] = 'No se pueden mostrar transacciones con fecha inferior a un año atrás';
+$lang['REPORTS_DATE_RANGE_NOT_ALLOWED'] = 'El rango de fecha permitido es de máximo un mes';
 
 
 
