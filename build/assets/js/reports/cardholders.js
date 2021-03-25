@@ -1,14 +1,12 @@
 'use strict'
-var reportsResults;
 $(function () {
 	$('#pre-loader').remove();
 	$('.hide-out').removeClass('hide');
 	var resultscardHolders = $('#resultscardHolders');
-	var cardHolderBtn = $('#card-holder-btn');
-	var downLoad = $('.download');
+	var cardHolderBtn = $('#cardholder-btn');
 
 	cardHolderBtn.on('click', function (e) {
-		form = $('#card-holder-form');
+		form = $('#cardholder-form');
 		btnText = $(this).text().trim()
 		validateForms(form);
 
@@ -28,13 +26,6 @@ $(function () {
 				} else {
 					$('.download-icons').removeClass('hide')
 				}
-				form = $('#download-cardholders');
-				form.html('')
-				$.each(data, function (index, value) {
-					if (index != 'screenSize') {
-						form.append('<input type="hidden" name="'+index+'" value="'+value+'">')
-					}
-				});
 				insertFormInput(false);
 				cardHolderBtn.html(btnText);
 				$('#pre-loade-result').addClass('hide')
@@ -64,29 +55,31 @@ $(function () {
 		});
 	};
 
-	downLoad.on('click', 'button', function (e) {
+	//Descargar reporte en formato Excel o PDF
+	$('.downloadReport').on('click', function(e) {
 		e.preventDefault();
-		var event = $(e.currentTarget);
-		var action = event.attr('title');
+		form = $('#cardholder-form');
+		formInputTrim(form);
+		validateForms(form);
 
-		var enterpriseName = $('option:selected', "#enterpriseCode").text().trim();
-		var acrif = $('option:selected', "#enterpriseCode").val().trim();
-		var productName = $('option:selected', "#productCode").text().trim();
-		var productLots = $('option:selected', "#productCode").val().trim();
+		if (form.valid()) {
+			$('.cover-spin').show();
+			data = getDataForm(form);
+			data.enterpriseName = $('option:selected', "#enterpriseCode").text().trim();
+			data.productName = $('option:selected', "#productCode").text().trim();
+			data.downloadFormat = $(this).attr('format');
 
-		form = $('#download-cardholders');
-		form.append('<input type="hidden" name="type" value="' + action + '"></input>');
-		form.append('<input type="hidden" name="who" value="DownloadFiles"></input>');
-		form.append('<input type="hidden" name="where" value="CardHoldersReport"></input>');
-		form.append('<input type="hidden" name="enterpriseName" value="' + enterpriseName + '"></input>');
-		form.append('<input type="hidden" name="acrif" value="' + acrif + '"></input>');
-		form.append('<input type="hidden" name="productName" value="' + productName + '"></input>');
-		form.append('<input type="hidden" name="productLots" value="' + productLots + '"></input>');
-		insertFormInput(true, form);
-		form.submit();
-		setTimeout(function () {
-			insertFormInput(false);
-			$('.cover-spin').hide();
-		}, lang.GEN_TIME_DOWNLOAD_FILE);
+			verb = "POST"; who = 'Reports'; where = 'exportReportCardHolders'; data;
+
+			callNovoCore(verb, who, where, data, function(response) {
+
+				if (response.code == 0) {
+					downLoadfiles (response.data);
+				}
+
+				$('.cover-spin').hide();
+			});
+
+		}
 	});
 });
