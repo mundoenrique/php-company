@@ -2833,8 +2833,10 @@ class Lotes extends CI_Controller {
 				$localfile = $config['upload_path'].$nombreArchivo.$extensionArchivo;
 				$fp = fopen($localfile, 'r');
 				$nombreArchivoNuevo = date("YmdHis").$nombreArchivo.$extensionArchivo;
-				$URL_TEMPLOTES = BULK_FTP_URL.$this->config->item('country');
+				$URL_TEMPLOTES = BULK_FTP_URL.$this->config->item('country').'/';
 				$LOTES_USERPASS = BULK_FTP_USERNAME.':'.BULK_FTP_PASSWORD;
+
+				log_message('DEBUG', 'uploadFiles sftp '.$URL_TEMPLOTES);
 
 				curl_setopt($ch, CURLOPT_URL, $URL_TEMPLOTES.$nombreArchivoNuevo);
 				curl_setopt($ch, CURLOPT_USERPWD, $LOTES_USERPASS);
