@@ -47,8 +47,20 @@
 
 		<div class="flex pb-5 flex-column">
 			<span id="search-criteria" class="none line-text mb-2 h4 semibold primary"><?= lang('GEN_SEARCH_CRITERIA') ?></span>
+			<div id="select-type" class="row mb-3 none">
+				<div class="form-group col-12">
+					<div class="custom-control custom-radio custom-control-inline align-top">
+						<input type="radio" id="resultIdNumber" name="results" class="custom-control-input" value="byIdNumber">
+						<label class="custom-control-label mr-1" for="resultIdNumber"><?= lang('REPORTS_BY_INDENTIFICATION_NUMBER')?></label>
+					</div>
+					<div class="custom-control custom-radio custom-control-inline">
+						<input type="radio" id="resultByCard" name="results" class="custom-control-input" value="ByCard">
+						<label class="custom-control-label mr-1" for="resultByCard"><?= lang('REPORTS_BY_CARD_NUMBER')?></label>
+					</div>
+				</div>
+			</div>
 			<div class="flex my-2 px-5">
-				<form id="form-report" method="post" class="reports-form w-100 none" onsubmit="return false">
+				<form id="form-report" method="post" class="reports-form w-100" onsubmit="return false">
 					<div id="repMovimientoPorEmpresa" class="row">
 						<div class="form-group col-4">
 							<label for="enterpriseDateBegin"><?= lang('GEN_START_DAY'); ?></label>
@@ -71,18 +83,6 @@
 
 					<div id="repMovimientoPorTarjeta">
 						<div id="MovimientoPorTarjeta">
-							<div class="row mb-3">
-								<div class="form-group col-12">
-									<div class="custom-control custom-radio custom-control-inline align-top">
-										<input type="radio" id="resultIdNumber" name="results" class="custom-control-input" value="byIdNumber">
-										<label class="custom-control-label mr-1" for="resultIdNumber">Por número de identificación</label>
-									</div>
-									<div class="custom-control custom-radio custom-control-inline">
-										<input type="radio" id="resultByCard" name="results" class="custom-control-input" value="ByCard">
-										<label class="custom-control-label mr-1" for="resultByCard">Por tarjeta</label>
-									</div>
-								</div>
-							</div>
 							<div id="sectionByIdNumber" class="row none">
 								<div class="form-group col-3">
 									<label><?= lang('REPORTS_ID_TYPE'); ?></label>

@@ -40,6 +40,9 @@ $lang['REPORTS_USERS_ACT_STATE']="Estado";
 //MOVEMENTS BY ENTERPRISE
 $lang['REPORTS_DATE_RANGE_ERROR'] = 'No se pueden mostrar transacciones con fecha inferior a un año atrás';
 $lang['REPORTS_DATE_RANGE_NOT_ALLOWED'] = 'El rango de fecha permitido es de máximo un mes';
+$lang['REPORTS_BY_INDENTIFICATION_NUMBER'] = 'Por número de identificación';
+$lang['REPORTS_BY_CARD_NUMBER'] = 'Por número de tarjeta';
+
 
 
 

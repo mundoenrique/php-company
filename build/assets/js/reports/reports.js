@@ -36,11 +36,13 @@ $(function () {
 
 		if (reportSelected == "repListadoTarjetas") {
 			$("#search-criteria").addClass('none');
+			$("#select-type").addClass('none');
 			$("#line-reports").addClass('none');
 			$("#div-download").removeClass('none');
 			$("#div-download").fadeIn(700, 'linear');
 		} else {
 			$("#search-criteria").removeClass('none');
+			$("#select-type").removeClass('none');
 			$("#line-reports").removeClass('none');
 			$("#div-download").addClass('none');
 		}
@@ -171,7 +173,7 @@ $(function () {
 		reportsResults.row('tr').remove().draw( false );
 		validateForms(form);
 
-		if(form.valid()) {
+		if(form.validate()) {
 
 			data.operation = cardsPeople || data.operation
 			btnAction.html(loader);
