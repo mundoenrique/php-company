@@ -1,5 +1,7 @@
 'use strict'
 var reportsResults;
+var radioType = 'input:radio[name=results]';
+
 $(function () {
 	var optionValues = [];
 	var optiondiv = [];
@@ -81,6 +83,22 @@ $(function () {
 		changeYear: true,
 		maxDate: currentDate,
 		yearRange: '-10:' + currentDate.getFullYear(),
+		showAnim: "slideDown",
+		beforeShow: function (input, inst) {
+			inst.dpDiv.removeClass("ui-datepicker-month-year");
+		},
+		onSelect: function (selectDate) {
+			$(this)
+				.focus()
+				.blur();
+		}
+	});
+
+	$(".date-picker-card").datepicker({
+		changeMonth: true,
+		changeYear: true,
+		minDate: '-12m',
+		yearRange: currentDate.getFullYear()-1 +':'+ currentDate.getFullYear(),
 		showAnim: "slideDown",
 		beforeShow: function (input, inst) {
 			inst.dpDiv.removeClass("ui-datepicker-month-year");
@@ -199,6 +217,18 @@ $(function () {
 		"language": dataTableLang
 	})
 
+	$(radioType).change(function() {
+		console.log($(this).attr('value'));
+		if($(this).attr('value') == 'byIdNumber'){
+			$('#sectionByCard').addClass('none')
+			$('#sectionByIdNumber').removeClass('none')
+		} else {
+			$('#sectionByIdNumber').addClass('none')
+			$('#sectionByCard').removeClass('none')
+		}
+		resetInput();
+	});
+
 })
 
 function getReport(data, btn) {
@@ -281,4 +311,10 @@ function getReport(data, btn) {
 		.prop('disabled', true);
 		$('.cover-spin').hide();
 	})
+}
+
+function resetInput(){
+	form.find('input:text').val('').removeAttr('aria-describedby');
+	form.find('.help-block').text('');
+	form.find('.has-error').removeClass('has-error');
 }
