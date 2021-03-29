@@ -533,15 +533,27 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->dataAccessLog->function = 'Movimientos por tarjeta';
 		$this->dataAccessLog->operation = 'Descargar archivo';
 
+		if (isset($dataRequest->cardNumber)) {
+			$cardNumber = $dataRequest->cardNumber;
+			$numberId = '';
+			$fechaInicio = convertDate($dataRequest->cardDateBegin);
+			$fechaFin = convertDate($dataRequest->cardDateEnd);
+		}else{
+			$cardNumber = $this->session->flashdata('cardsPeople')[$dataRequest->cardNumberId];
+			$numberId = $dataRequest->idType.'_'.$dataRequest->idNumber;
+			$fechaInicio = convertDate($dataRequest->peopleDateBegin);
+			$fechaFin = convertDate($dataRequest->peopleDateEnd);
+		}
+
 		$this->dataRequest->movTarjeta = [
 			'tarjeta' => [
-				'noTarjeta' => $this->session->flashdata('cardsPeople')[$dataRequest->cardNumberId],
-				'id_ext_per' => $dataRequest->idType.'_'.$dataRequest->idNumber,
+				'noTarjeta' => $cardNumber,
+				'id_ext_per' => $numberId,
 				'rif' => $this->session->enterpriseInf->idFiscal,
 				'acCodCia' => $this->session->enterpriseInf->enterpriseCode
 			],
-			'fechaInicio' => convertDate($dataRequest->peopleDateBegin),
-			'fechaFin' => convertDate($dataRequest->peopleDateEnd)
+			'fechaInicio' => $fechaInicio,
+			'fechaFin' => $fechaFin
 		];
 
 		$response = $this->sendToService('GetReport: '.$dataRequest->operation);
@@ -571,15 +583,24 @@ class Novo_Reports_Model extends NOVO_Model {
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -466:
+				$this->session->set_flashdata('cardsPeople', $this->session->flashdata('cardsPeople'));
 				$this->response->icon = lang('CONF_ICON_INFO');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_DATE_RANGE_ERROR');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -467:
+				$this->session->set_flashdata('cardsPeople', $this->session->flashdata('cardsPeople'));
 				$this->response->icon = lang('CONF_ICON_INFO');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_DATE_RANGE_NOT_ALLOWED');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			break;
+			case -430:
+				$this->session->set_flashdata('cardsPeople', $this->session->flashdata('cardsPeople'));
+				$this->response->icon = lang('CONF_ICON_INFO');
+				$this->response->title = lang('REPORTS_TITLE');
+				$this->response->msg = lang('REPORTS_FOUND_CARD');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 		}

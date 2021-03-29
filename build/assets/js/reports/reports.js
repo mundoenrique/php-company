@@ -62,7 +62,7 @@ $(function () {
 			$('#result-repMovimientoPorTarjeta').addClass('none')
 			$('#result-repMovimientoPorTarjeta input, #result-repMovimientoPorTarjeta select').prop('disabled', true)
 		}
-		$('#cardNumberId').empty()
+		// $('#cardNumberId').empty()
 		$('#repTarjeta-result').addClass('none');
 		reportsResults.row('tr').remove().draw(false);
 
@@ -198,7 +198,7 @@ $(function () {
 
 		$('#result-repMovimientoPorTarjeta').find('input, select').prop('disabled', true).val("");
 		$('#result-repMovimientoPorTarjeta').removeClass('has-error').addClass('none');
-		$('#cardNumberId').empty();
+		// $('#cardNumberId').empty();
 		$('#MovimientoPorTarjeta input').not(radioType).prop('readonly', false).val("");
 		$('#MovimientoPorTarjeta button').removeClass('none');
 	});
@@ -263,7 +263,7 @@ function getReport(data, btn) {
 				case 'repMovimientoPorTarjeta':
 					$('#result-repMovimientoPorTarjeta').addClass('none')
 					$('#result-repMovimientoPorTarjeta input, #result-repMovimientoPorTarjeta select').prop('disabled', true)
-					$('#cardNumberId').empty()
+					// $('#cardNumberId').empty()
 					$('#MovimientoPorTarjeta button').removeClass('none')
 					$('#MovimientoPorTarjeta input').prop('readonly', false)
 				case 'repListadoTarjetas':
