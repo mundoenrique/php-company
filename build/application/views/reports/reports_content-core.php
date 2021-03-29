@@ -47,20 +47,8 @@
 
 		<div class="flex pb-5 flex-column">
 			<span id="search-criteria" class="none line-text mb-2 h4 semibold primary"><?= lang('GEN_SEARCH_CRITERIA') ?></span>
-			<div id="select-type" class="row mb-3 none">
-				<div class="form-group col-12">
-					<div class="custom-control custom-radio custom-control-inline align-top">
-						<input type="radio" id="resultIdNumber" name="results" class="custom-control-input" value="byIdNumber">
-						<label class="custom-control-label mr-1" for="resultIdNumber"><?= lang('REPORTS_BY_INDENTIFICATION_NUMBER')?></label>
-					</div>
-					<div class="custom-control custom-radio custom-control-inline">
-						<input type="radio" id="resultByCard" name="results" class="custom-control-input" value="ByCard">
-						<label class="custom-control-label mr-1" for="resultByCard"><?= lang('REPORTS_BY_CARD_NUMBER')?></label>
-					</div>
-				</div>
-			</div>
 			<div class="flex my-2 px-5">
-				<form id="form-report" method="post" class="reports-form w-100" onsubmit="return false">
+				<form id="form-report" method="post" class="reports-form w-100 none" onsubmit="return false">
 					<div id="repMovimientoPorEmpresa" class="row">
 						<div class="form-group col-4">
 							<label for="enterpriseDateBegin"><?= lang('GEN_START_DAY'); ?></label>
@@ -83,6 +71,18 @@
 
 					<div id="repMovimientoPorTarjeta">
 						<div id="MovimientoPorTarjeta">
+							<div class="row mb-3">
+								<div class="form-group col-12">
+									<div class="custom-control custom-radio custom-control-inline align-top">
+										<input type="radio" id="resultIdNumber" name="results" class="custom-control-input" value="byIdNumber">
+										<label class="custom-control-label mr-1" for="resultIdNumber">Por número de identificación</label>
+									</div>
+									<div class="custom-control custom-radio custom-control-inline">
+										<input type="radio" id="resultByCard" name="results" class="custom-control-input" value="ByCard">
+										<label class="custom-control-label mr-1" for="resultByCard">Por tarjeta</label>
+									</div>
+								</div>
+							</div>
 							<div id="sectionByIdNumber" class="row none">
 								<div class="form-group col-3">
 									<label><?= lang('REPORTS_ID_TYPE'); ?></label>
@@ -106,30 +106,29 @@
 									</button>
 								</div>
 							</div>
-
 							<div id="sectionByCard" class="row none">
 								<div class="form-group col-3">
-									<label for="cardNumber"><?= lang('REPORTS_CARD_NUMBER') ?></label>
-									<input id="cardNumber" name="card-number" class="form-control" type="text" disabled>
+									<label for="cardNumber2"><?= lang('REPORTS_CARD_NUMBER') ?></label>
+									<input id="cardNumber2" name="card-number" class="form-control" type="text" disabled>
 									<div class="help-block"></div>
 								</div>
 
 								<div class="form-group col-3">
-									<label for="peopleDateBegin"><?= lang('GEN_START_DAY'); ?></label>
-									<input id="peopleDateBegin" class="form-control date-picker-card" name="datepicker_start" type="text" readonly
+									<label for="cardDateBegin2"><?= lang('GEN_START_DAY'); ?></label>
+									<input id="cardDateBegin2" class="form-control date-picker-card" name="datepicker_start" type="text" readonly
 										placeholder="<?= lang('GEN_PLACE_DATE_COMPLETTE'); ?>" disabled>
 									<div class="help-block"></div>
 								</div>
 
 								<div class="form-group col-3">
-									<label for="peopleDateEnd"><?= lang('GEN_END_DAY'); ?></label>
-									<input id="peopleDateEnd" class="form-control date-picker-card" name="datepicker_end" type="text" readonly
+									<label for="cardDateEnd2"><?= lang('GEN_END_DAY'); ?></label>
+									<input id="cardDateEnd2" class="form-control date-picker-card" name="datepicker_end" type="text" readonly
 										placeholder="<?= lang('GEN_PLACE_DATE_COMPLETTE'); ?>" disabled>
 									<div class="help-block"></div>
 								</div>
 
 								<div class="flex items-center justify-end col-3">
-								<button class="btn-report btn btn-primary btn-small btn-loading" cards="repPorTarjetas">
+									<button class="btn-report btn btn-primary btn-small btn-loading">
 										<?= lang('GEN_BTN_SEARCH'); ?>
 									</button>
 								</div>
