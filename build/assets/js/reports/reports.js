@@ -173,22 +173,25 @@ $(function () {
 
 		if (form.valid()) {
 
-			data.operation = cardsPeople || data.operation
+			// data = {
+			// 	operation: reportSelected
+			// };
+			data.operation = cardsPeople || data.operation;
 			btnAction.html(loader);
 			insertFormInput(true);
 
+
+			$('#' + reportSelected + ' input, #' + reportSelected + ' select')
+				.not('[type=search], [type=radio], .ignore')
+				.each(function (index, element) {
+					tempId = $(element).attr('id')
+					tempVal = $(element).val()
+					data[tempId] = tempVal;
+				})
+
 			if (data.operation == "repMovimientoPorTarjeta" && $(radioType + ':checked').val() == "ByCard") {
-				data.cardNumber = $('#cardNumber2').val();
-				data.cardDateBegin = $('#cardDateBegin2').val();
-				data.cardDateEnd = $('#cardDateEnd2').val();
-			} else {
-				$('#' + reportSelected + ' input, #' + reportSelected + ' select')
-					.not('[type=search], [type=radio]')
-					.each(function (index, element) {
-						tempId = $(element).attr('id')
-						tempVal = $(element).val()
-						data[tempId] = tempVal;
-					})
+				data.cardNumber = data.cardNumber2;
+				delete data.cardNumber2;
 			}
 			getReport(data, btnAction)
 		}
@@ -225,6 +228,10 @@ $(function () {
 	})
 
 	$(radioType).change(function () {
+		data = {
+			operation: reportSelected
+		};
+
 		if ($(this).attr('value') == 'byIdNumber') {
 			$('#sectionByCard, #result-repMovimientoPorTarjeta').find('input, select')
 				.prop('disabled', true).val("")
@@ -292,6 +299,7 @@ function getReport(data, btn) {
 					$('#result-repMovimientoPorTarjeta')
 						.find('input, select')
 						.prop('disabled', false)
+						.removeClass('ignore');
 					$('#result-repMovimientoPorTarjeta')
 						.removeClass('none')
 					break;

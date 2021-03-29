@@ -114,15 +114,15 @@
 								</div>
 
 								<div class="form-group col-3">
-									<label for="cardDateBegin2"><?= lang('GEN_START_DAY'); ?></label>
-									<input id="cardDateBegin2" class="form-control date-picker-card" name="datepicker_start" type="text" readonly
+									<label for="cardDateBegin"><?= lang('GEN_START_DAY'); ?></label>
+									<input id="cardDateBegin" class="form-control date-picker-card" name="datepicker_start" type="text" readonly
 										placeholder="<?= lang('GEN_PLACE_DATE_COMPLETTE'); ?>" disabled>
 									<div class="help-block"></div>
 								</div>
 
 								<div class="form-group col-3">
-									<label for="cardDateEnd2"><?= lang('GEN_END_DAY'); ?></label>
-									<input id="cardDateEnd2" class="form-control date-picker-card" name="datepicker_end" type="text" readonly
+									<label for="cardDateEnd"><?= lang('GEN_END_DAY'); ?></label>
+									<input id="cardDateEnd" class="form-control date-picker-card" name="datepicker_end" type="text" readonly
 										placeholder="<?= lang('GEN_PLACE_DATE_COMPLETTE'); ?>" disabled>
 									<div class="help-block"></div>
 								</div>
