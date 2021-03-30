@@ -1,5 +1,7 @@
 'use strict'
 var reportsResults;
+var radioType = 'input:radio[name=results]';
+
 $(function () {
 	var optionValues = [];
 	var optiondiv = [];
@@ -20,16 +22,16 @@ $(function () {
 	optionValues.splice(0, 2);
 
 	for (var i = 0; i < optiondiv.length; i++) {
-		$('#'+optiondiv[i]+'').hide();
+		$('#' + optiondiv[i] + '').hide();
 	}
 
 	$("#reports").change(function () {
 		$('#form-report').trigger("reset")
 		$('#form-report input, #form-report select')
-		.removeClass('has-error')
-		.prop('disabled', true);
+			.removeClass('has-error')
+			.prop('disabled', true);
 		$('.help-block').text('');
-		$("#idType").prop('selectedIndex',0);
+		$("#idType").prop('selectedIndex', 0);
 		reportSelected = $(this).val()
 
 		if (reportSelected == "repListadoTarjetas") {
@@ -44,9 +46,9 @@ $(function () {
 		}
 
 		$('#' + reportSelected)
-		.fadeIn(700, 'linear')
-		.find('input, select')
-		.prop('disabled', false)
+			.fadeIn(700, 'linear')
+			.find('input, select')
+			.prop('disabled', false)
 		$(prevOption).hide();
 		$('#' + reportSelected).show();
 		prevOption = '#' + reportSelected;
@@ -60,11 +62,11 @@ $(function () {
 			$('#result-repMovimientoPorTarjeta').addClass('none')
 			$('#result-repMovimientoPorTarjeta input, #result-repMovimientoPorTarjeta select').prop('disabled', true)
 		}
-		$('#cardNumberId').empty()
+		// $('#cardNumberId').empty()
 		$('#repTarjeta-result').addClass('none');
-		reportsResults.row('tr').remove().draw( false );
+		reportsResults.row('tr').remove().draw(false);
 
-		if(reportSelected == 'repCertificadoGmf' && !firsrYear) {
+		if (reportSelected == 'repCertificadoGmf' && !firsrYear) {
 			modalBtn = {
 				btn1: {
 					text: lang.GEN_BTN_ACCEPT,
@@ -81,6 +83,22 @@ $(function () {
 		changeYear: true,
 		maxDate: currentDate,
 		yearRange: '-10:' + currentDate.getFullYear(),
+		showAnim: "slideDown",
+		beforeShow: function (input, inst) {
+			inst.dpDiv.removeClass("ui-datepicker-month-year");
+		},
+		onSelect: function (selectDate) {
+			$(this)
+				.focus()
+				.blur();
+		}
+	});
+
+	$(".date-picker-card").datepicker({
+		changeMonth: true,
+		changeYear: true,
+		minDate: '-12m',
+		yearRange: currentDate.getFullYear() - 1 + ':' + currentDate.getFullYear(),
 		showAnim: "slideDown",
 		beforeShow: function (input, inst) {
 			inst.dpDiv.removeClass("ui-datepicker-month-year");
@@ -122,7 +140,7 @@ $(function () {
 		changeMonth: false,
 		changeYear: true,
 		showButtonPanel: true,
-		yearRange: firsrYear+':'+currentDate.getFullYear(),
+		yearRange: firsrYear + ':' + currentDate.getFullYear(),
 		dateFormat: 'yy',
 		closeText: 'Aceptar',
 		onClose: function (dateText, inst) {
@@ -142,7 +160,7 @@ $(function () {
 		getReport(data)
 	})
 
-	$('.btn-report').on('click', function(e) {
+	$('.btn-report').on('click', function (e) {
 		e.preventDefault()
 		var btnAction = $(this);
 		var cardsPeople = btnAction.attr('cards')
@@ -150,21 +168,31 @@ $(function () {
 		var tempVal;
 		btnText = btnAction.text().trim();
 		$('#repTarjeta-result').addClass('none');
-		reportsResults.row('tr').remove().draw( false );
+		reportsResults.row('tr').remove().draw(false);
 		validateForms(form);
 
-		if(form.valid()) {
+		if (form.valid()) {
 
-			data.operation = cardsPeople || data.operation
+			// data = {
+			// 	operation: reportSelected
+			// };
+			data.operation = cardsPeople || data.operation;
 			btnAction.html(loader);
 			insertFormInput(true);
-			$('#'+reportSelected+' input, #'+reportSelected+' select')
-			.not('[type=search]')
-			.each(function(index, element) {
-				tempId = $(element).attr('id')
-				tempVal = $(element).val()
-				data[tempId] = tempVal;
-			})
+
+
+			$('#' + reportSelected + ' input, #' + reportSelected + ' select')
+				.not('[type=search], [type=radio], .ignore')
+				.each(function (index, element) {
+					tempId = $(element).attr('id')
+					tempVal = $(element).val()
+					data[tempId] = tempVal;
+				})
+
+			if (data.operation == "repMovimientoPorTarjeta" && $(radioType + ':checked').val() == "ByCard") {
+				data.cardNumber = data.cardNumber2;
+				delete data.cardNumber2;
+			}
 			getReport(data, btnAction)
 		}
 	})
@@ -173,13 +201,13 @@ $(function () {
 
 		$('#result-repMovimientoPorTarjeta').find('input, select').prop('disabled', true).val("");
 		$('#result-repMovimientoPorTarjeta').removeClass('has-error').addClass('none');
-		$('#cardNumberId').empty();
-		$('#MovimientoPorTarjeta input').prop('readonly', false).val("");
+		// $('#cardNumberId').empty();
+		$('#MovimientoPorTarjeta input').not(radioType).prop('readonly', false).val("");
 		$('#MovimientoPorTarjeta button').removeClass('none');
 	});
 
 	reportsResults = $('#reports-results').DataTable({
-		drawCallback: function(d) {
+		drawCallback: function (d) {
 			$('input[type=search]').attr('name', 'search')
 		},
 		"ordering": false,
@@ -199,6 +227,35 @@ $(function () {
 		"language": dataTableLang
 	})
 
+	$(radioType).change(function () {
+		data = {
+			operation: reportSelected
+		};
+
+		if ($(this).attr('value') == 'byIdNumber') {
+			$('#sectionByCard, #result-repMovimientoPorTarjeta').find('input, select')
+				.prop('disabled', true).val("")
+				.addClass('ignore');
+			$('#sectionByCard, #result-repMovimientoPorTarjeta').removeClass('has-error').addClass('none');
+
+			$('#sectionByIdNumber').find('input, select')
+				.prop('disabled', false)
+				.removeClass('ignore');
+			$('#sectionByIdNumber').removeClass('none');
+		} else {
+			$('#sectionByIdNumber, #result-repMovimientoPorTarjeta').find('input, select')
+				.prop('disabled', true).val("")
+				.addClass('ignore');
+			$('#sectionByIdNumber, #result-repMovimientoPorTarjeta').removeClass('has-error').addClass('none');
+
+			$('#sectionByCard').find('input, select')
+				.prop('disabled', false)
+				.prop('readonly', false)
+				.removeClass('ignore');
+			$('#sectionByCard, #sectionByCard button').removeClass('none');
+		}
+	});
+
 })
 
 function getReport(data, btn) {
@@ -208,12 +265,12 @@ function getReport(data, btn) {
 	verb = 'POST'; who = 'Reports'; where = 'getReport';
 	var downloadFile = $('#download-file');
 	callNovoCore(verb, who, where, data, function (response) {
-		if(response.code == 0) {
+		if (response.code == 0) {
 			switch (data.operation) {
 				case 'repMovimientoPorTarjeta':
 					$('#result-repMovimientoPorTarjeta').addClass('none')
 					$('#result-repMovimientoPorTarjeta input, #result-repMovimientoPorTarjeta select').prop('disabled', true)
-					$('#cardNumberId').empty()
+					// $('#cardNumberId').empty()
 					$('#MovimientoPorTarjeta button').removeClass('none')
 					$('#MovimientoPorTarjeta input').prop('readonly', false)
 				case 'repListadoTarjetas':
@@ -225,7 +282,7 @@ function getReport(data, btn) {
 					document.getElementById('download-file').click()
 					who = 'DownloadFiles'; where = 'DeleteFile';
 					data.fileName = response.data.name
-					callNovoCore(verb, who, where, data, function (response) {})
+					callNovoCore(verb, who, where, data, function (response) { })
 					break;
 				case 'repTarjetasPorPersona':
 					var option;
@@ -233,17 +290,18 @@ function getReport(data, btn) {
 					$('#MovimientoPorTarjeta button').addClass('none')
 					$('#MovimientoPorTarjeta input').prop('readonly', true);
 
-					$.each(response.data, function(index, element) {
-						option = '<option value="'+element.key+'">'+element.cardMask+'</option>'
+					$.each(response.data, function (index, element) {
+						option = '<option value="' + element.key + '">' + element.cardMask + '</option>'
 						$('#cardNumberId').append(option)
 					});
 
 					disabledNot = '#result-repMovimientoPorTarjeta input, #result-repMovimientoPorTarjeta select'
 					$('#result-repMovimientoPorTarjeta')
-					.find('input, select')
-					.prop('disabled', false)
+						.find('input, select')
+						.prop('disabled', false)
+						.removeClass('ignore');
 					$('#result-repMovimientoPorTarjeta')
-					.removeClass('none')
+						.removeClass('none')
 					break;
 				case 'repTarjeta':
 					$('#repTarjeta-result').removeClass('none');
@@ -268,7 +326,7 @@ function getReport(data, btn) {
 					break;
 			}
 		}
-		if(btn) {
+		if (btn) {
 			btn.html(btnText)
 		}
 		insertFormInput(false);
@@ -276,9 +334,15 @@ function getReport(data, btn) {
 		$('#form-report').validate().resetForm();
 		data.operation = data.operation == 'repTarjetasPorPersona' ? 'MovimientoPorTarjeta' : data.operation;
 		$('#form-report input, #form-report select')
-		.not('#'+data.operation+' input, #'+data.operation+' select')
-		.not(disabledNot)
-		.prop('disabled', true);
+			.not('#' + data.operation + ' input, #' + data.operation + ' select')
+			.not(disabledNot)
+			.prop('disabled', true);
 		$('.cover-spin').hide();
 	})
+}
+
+function resetInput(form) {
+	form.find('input:text').val('').removeAttr('aria-describedby');
+	form.find('.help-block').text('');
+	form.find('.has-error').removeClass('has-error');
 }
