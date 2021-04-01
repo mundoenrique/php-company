@@ -60,7 +60,7 @@ $lang['CONF_STATUS_ACCOUNT_ADD_COLUMNS'] = 'OFF';
 //UPPER CASE INPUTS
 $lang['CONF_INPUT_UPPERCASE']= 'ON';
 //REMOTE AUTHORIZATIONS
-$lang['CONF_REMOTE_AUTH'] = 'OFF';
+$lang['CONF_REMOTE_AUTH'] = 'ON';
 $lang['CONF_AUTH_LIST'] = [
 	'CREDIT_TO_CARD', 'DEBIT_TO_CARD', 'LOCK_TYPES', 'TEMPORARY_UNLOCK', 'CARD_ASSIGNMENT', 'CARD_CANCELLATION'
 ];
@@ -68,13 +68,13 @@ $lang['CONF_AUTH_VALIDATE'] = ['LOCK_TYPES', 'CARD_ASSIGNMENT', 'UPDATE_DATA'];
 $lang['CONF_AUTH_LOADING_URL'] = [
 	'development' => [
 		'ANY' =>	'',
-		'BEM' =>	'https://15.128.26.90/nbem11/images/loader.gif',
-		'BEP' =>	'https://15.128.26.90/nbem11/images/loader.gif'
+		'BEM' =>	'https://15.128.26.90/nbem03/images/loader.gif',
+		'BEP' =>	'https://15.128.26.90/nbem03/images/loader.gif'
 	],
 	'testing' => [
 		'ANY' =>	'',
-		'BEM' =>	'https://15.128.26.90/nbem11/images/loader.gif',
-		'BEP' =>	'https://15.128.26.90/nbem11/images/loader.gif'
+		'BEM' =>	'https://15.128.26.90/nbem03/images/loader.gif',
+		'BEP' =>	'https://15.128.26.90/nbem03/images/loader.gif'
 	],
 	'production' => [
 		'ANY' =>	'',
@@ -85,13 +85,13 @@ $lang['CONF_AUTH_LOADING_URL'] = [
 $lang['CONF_AUTH_URL'] = [
 	'development' => [
 		'ANY' => '',
-		'BEM' => 'https://15.128.26.90/nbem11/AutorizacionRemota.aspx',
-		'BEP' => 'https://15.128.26.105/nbxi11/AutorizacionRemota.aspx'
+		'BEM' => 'https://15.128.26.90/nbem03/AutorizacionRemota.aspx',
+		'BEP' => 'https://15.128.26.105/nbxi03/AutorizacionRemota.aspx'
 	],
 	'testing' => [
 		'ANY' => '',
-		'BEM' => 'https://15.128.26.90/nbem11/AutorizacionRemota.aspx',
-		'BEP' => 'https://15.128.26.105/nbxi11/AutorizacionRemota.aspx'
+		'BEM' => 'https://15.128.26.90/nbem03/AutorizacionRemota.aspx',
+		'BEP' => 'https://15.128.26.105/nbxi03/AutorizacionRemota.aspx'
 	],
 	'production' => [
 		'ANY' => '',
