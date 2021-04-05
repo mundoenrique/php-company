@@ -62,7 +62,7 @@ $lang['SERVICES_INQUIRY_DELIVER_TO_CARDHOLDER'] = 'Entregar a tarjetahabiente';
 $lang['SERVICES_INQUIRY_SEND_TO_ENTERPRISE'] = 'Enviar a empresa';
 $lang['SERVICES_INQUIRY_RECEIVE_IN_ENTERPRISE'] = 'Recibir en empresa';
 $lang['SERVICES_INQUIRY_RECEIVE_IN_BANK'] = 'Recibir en banco';
-$lang['SERVICES_INQUIRY_CARD_CANCELLATION'] = 'Cancelacion de tarjeta';
+$lang['SERVICES_INQUIRY_CARD_CANCELLATION'] = 'Cancelación de tarjeta';
 //INQUIRY ACTIONS
 $lang['SERVICES_ACTION_UPDATE_DATA'] = 'act_datos';
 $lang['SERVICES_ACTION_INQUIRY_BALANCE'] = 'saldo';

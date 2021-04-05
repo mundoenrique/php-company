@@ -479,6 +479,7 @@ class Novo_Services_Model extends NOVO_Model {
 									$key = mb_strtoupper(str_replace(' ', '_', $oper));
 									$options[lang('SERVICES_INQUIRY_OPTIONS')[$key]] = lang('SERVICES_INQUIRY_OPTIONS_ICON')[lang('SERVICES_INQUIRY_OPTIONS')[$key]];
 									$massiveOptions[lang('SERVICES_INQUIRY_OPTIONS')[$key]] = lang('SERVICES_INQUIRY_'.lang('SERVICES_INQUIRY_OPTIONS')[$key]);
+									unset($massiveOptions['CARD_CANCELLATION']);
 								}
 								unset($options['NO_OPER']);
 							}
