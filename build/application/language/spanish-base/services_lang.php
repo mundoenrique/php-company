@@ -24,6 +24,7 @@ $lang['SERVICES_USER_BULK_CONFIRM'] = 'El empleado esta en un lote por confirmar
 $lang['SERVICES_CARD_BULK_CONFIRM'] = 'La tarjeta %s esta en un lote por comfirmar.';
 $lang['SERVICES_CARD_BULK_AFFILIATED'] = 'La tarjeta %s ya fue afiliada o esta por afiliar en un lote confirmado.';
 $lang['SERVICES_CARD_TRANSFER_BALANCE'] = 'No fue posible transferir el saldo a la tarjeta destino, por favor intenta más tarde.';
+$lang['SERVICES_RESPONSE_CARD_CANCELED'] = '¿Está seguro de que desea cancelar la tarjeta? Esta operación no puede ser reversada.';
 $lang['SERVICES_REASON_REQUEST'] = 'Tipo de solicitud';
 $lang['SERVICES_REASON_LOCK_TYPES'] = 'Indica el tipo de bloqueo';
 $lang['SERVICES_LOCK_TYPES_BLOCK'] = [
@@ -39,7 +40,19 @@ $lang['SERVICES_INQUIRY_OPTIONS'] = [
 	'ENTREGAR_A_TARJETAHABIENTE' => 'DELIVER_TO_CARDHOLDER',
 	'ENVIAR_A_EMPRESA' => 'SEND_TO_ENTERPRISE',
 	'RECIBIR_EN_EMPRESA' => 'RECEIVE_IN_ENTERPRISE',
-	'RECIBIR_EN_BANCO' => 'RECEIVE_IN_BANK'
+	'RECIBIR_EN_BANCO' => 'RECEIVE_IN_BANK',
+	'CANCELAR_TARJETA' => 'CARD_CANCELLATION'
+];
+$lang['SERVICES_INQUIRY_OPTIONS_ICON'] = [
+	'UPDATE_DATA' => 'user-edit',
+	'INQUIRY_BALANCE' => 'envelope-open',
+	'LOCK_CARD' => 'lock',
+	'UNLOCK_CARD' => 'unlock',
+	'DELIVER_TO_CARDHOLDER' => 'deliver-card',
+	'SEND_TO_ENTERPRISE' => 'shipping',
+	'RECEIVE_IN_ENTERPRISE' => 'building',
+	'RECEIVE_IN_BANK' => 'user-building',
+	'CARD_CANCELLATION' => 'card-canceled'
 ];
 $lang['SERVICES_INQUIRY_UPDATE_DATA'] = 'Actualizar datos';
 $lang['SERVICES_INQUIRY_INQUIRY_BALANCE'] = 'Consultar saldo';
@@ -49,6 +62,7 @@ $lang['SERVICES_INQUIRY_DELIVER_TO_CARDHOLDER'] = 'Entregar a tarjetahabiente';
 $lang['SERVICES_INQUIRY_SEND_TO_ENTERPRISE'] = 'Enviar a empresa';
 $lang['SERVICES_INQUIRY_RECEIVE_IN_ENTERPRISE'] = 'Recibir en empresa';
 $lang['SERVICES_INQUIRY_RECEIVE_IN_BANK'] = 'Recibir en banco';
+$lang['SERVICES_INQUIRY_CARD_CANCELLATION'] = 'Cancelación de tarjeta';
 //INQUIRY ACTIONS
 $lang['SERVICES_ACTION_UPDATE_DATA'] = 'act_datos';
 $lang['SERVICES_ACTION_INQUIRY_BALANCE'] = 'saldo';

@@ -95,7 +95,7 @@ footer.main-footer {
 }
 
 .form-control:-ms-input-placeholder {
-  color: #DDDDDD;
+  color: #4E4044;
 }
 
 .form-control::-ms-input-placeholder {
@@ -577,6 +577,11 @@ footer.main-footer {
 /* Sizing */
 .w-160-ie {
 	width: 160px !important;
+	flex: auto !important;
+ }
+
+ .w-335-ie {
+	width: 335px !important;
 	flex: auto !important;
  }
 

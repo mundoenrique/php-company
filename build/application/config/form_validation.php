@@ -901,13 +901,35 @@ $config = [
 		[
 			'field' => 'enterpriseCode',
 			'label' => 'enterpriseCode',
-			'rules' => 'trim|regex_match[/^[a-z0-9]+$/i]|required'
+			'rules' => 'trim|regex_match[/^[a-zA-Z0-9\-.]+$/i]|required'
 		],
 		[
 			'field' => 'productCode',
 			'label' => 'enterpriseCode',
-			'rules' => 'trim|regex_match[/^[a-z0-9]+$/i]|required'
+			'rules' => 'trim|regex_match[/^[a-zA-Z0-9\-.]+$/i]|required'
 		],
+	],
+	'exportReportCardHolders' => [
+		[
+			'field' => 'enterpriseName',
+			'rules' => 'trim|regex_match[/^([\w\-.,#ñÑáéíóúÑÁÉÍÓÚ\(\)&:\+]+[\s]*)+$/i]|required'
+		],
+		[
+			'field' => 'enterpriseCode',
+			'rules' => 'trim|regex_match[/^[a-zA-Z0-9\-.]+$/i]|required'
+		],
+		[
+			'field' => 'productName',
+			'rules' => 'trim|regex_match[/^([\wñÑáéíóúÑÁÉÍÓÚ\(\) ]+)+$/i]|required'
+		],
+		[
+			'field' => 'productCode',
+			'rules' => 'trim|regex_match[/^[a-zA-Z0-9\-.]+$/i]|required'
+		],
+		[
+			'field' => 'downloadFormat',
+			'rules' => 'trim|regex_match[/^[a-zA-Z]+$/i]|required'
+		]
 	],
 	'rechargeMade' => [
 		[
@@ -1066,7 +1088,7 @@ $config = [
 		[
 			'field' => 'enterpriseCode',
 			'label' => 'enterpriseCode',
-			'rules' => 'trim|regex_match[/^[a-z0-9]+$/i]|required'
+			'rules' => 'trim|regex_match[/^[a-zA-Z0-9\-.]+$/i]|required'
 		],
 		[
 			'field' => 'initialDate',
@@ -1092,7 +1114,7 @@ $config = [
 		],
 		[
 			'field' => 'enterpriseCode',
-			'rules' => 'trim|regex_match[/^[0-9]*$/i]|required'
+			'rules' => 'trim|regex_match[/^[a-zA-Z0-9\-.]+$/i]|required'
 		],
 		[
 			'field' => 'rifEnterprise',
@@ -1100,14 +1122,14 @@ $config = [
 		],
 		[
 			'field' => 'downloadFormat',
-			'rules' => 'trim|regex_match[/^[a-z0-9]+$/i]|required'
+			'rules' => 'trim|regex_match[/^[a-zA-Z]+$/i]|required'
 		]
 	],
 	'usersActivity' => [
 		[
 			'field' => 'enterpriseCode',
 			'label' => 'enterpriseCode',
-			'rules' => 'trim|regex_match[/^[a-z0-9]+$/i]|required'
+			'rules' => 'trim|regex_match[/^[a-zA-Z0-9\-.]+$/i]|required'
 		],
 		[
 			'field' => 'initialDate',
@@ -1124,7 +1146,7 @@ $config = [
 		[
 			'field' => 'enterpriseCode',
 			'label' => 'enterpriseCode',
-			'rules' => 'trim|regex_match[/^[a-z0-9]+$/i]|required'
+			'rules' => 'trim|regex_match[/^[a-zA-Z0-9\-.]+$/i]|required'
 		],
 		[
 			'field' => 'initialDate',
