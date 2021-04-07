@@ -246,6 +246,18 @@ class Novo_Reports_Model extends NOVO_Model {
 				$this->response->msg = lang('REPORTS_NO_MOVES_ENTERPRISE');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
+			case -466:
+				$this->response->icon = lang('CONF_ICON_INFO');
+				$this->response->title = lang('REPORTS_TITLE');
+				$this->response->msg = lang('REPORTS_DATE_RANGE_ERROR');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			break;
+			case -467:
+				$this->response->icon = lang('CONF_ICON_INFO');
+				$this->response->title = lang('REPORTS_TITLE');
+				$this->response->msg = lang('REPORTS_DATE_RANGE_NOT_ALLOWED');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			break;
 		}
 
 		return $this->response;
@@ -521,15 +533,27 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->dataAccessLog->function = 'Movimientos por tarjeta';
 		$this->dataAccessLog->operation = 'Descargar archivo';
 
+		if (isset($dataRequest->cardNumber)) {
+			$cardNumber = $dataRequest->cardNumber;
+			$numberId = '';
+			$fechaInicio = convertDate($dataRequest->cardDateBegin);
+			$fechaFin = convertDate($dataRequest->cardDateEnd);
+		}else{
+			$cardNumber = $this->session->flashdata('cardsPeople')[$dataRequest->cardNumberId];
+			$numberId = $dataRequest->idType.'_'.$dataRequest->idNumber;
+			$fechaInicio = convertDate($dataRequest->peopleDateBegin);
+			$fechaFin = convertDate($dataRequest->peopleDateEnd);
+		}
+
 		$this->dataRequest->movTarjeta = [
 			'tarjeta' => [
-				'noTarjeta' => $this->session->flashdata('cardsPeople')[$dataRequest->cardNumberId],
-				'id_ext_per' => $dataRequest->idType.'_'.$dataRequest->idNumber,
+				'noTarjeta' => $cardNumber,
+				'id_ext_per' => $numberId,
 				'rif' => $this->session->enterpriseInf->idFiscal,
 				'acCodCia' => $this->session->enterpriseInf->enterpriseCode
 			],
-			'fechaInicio' => convertDate($dataRequest->peopleDateBegin),
-			'fechaFin' => convertDate($dataRequest->peopleDateEnd)
+			'fechaInicio' => $fechaInicio,
+			'fechaFin' => $fechaFin
 		];
 
 		$response = $this->sendToService('GetReport: '.$dataRequest->operation);
@@ -556,6 +580,27 @@ class Novo_Reports_Model extends NOVO_Model {
 				$this->response->icon = lang('CONF_ICON_INFO');
 				$this->response->title = lang('REPORTS_TITLE');
 				$this->response->msg = lang('REPORTS_NO_MOVES_ENTERPRISE');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			break;
+			case -466:
+				$this->session->set_flashdata('cardsPeople', $this->session->flashdata('cardsPeople'));
+				$this->response->icon = lang('CONF_ICON_INFO');
+				$this->response->title = lang('REPORTS_TITLE');
+				$this->response->msg = lang('REPORTS_DATE_RANGE_ERROR');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			break;
+			case -467:
+				$this->session->set_flashdata('cardsPeople', $this->session->flashdata('cardsPeople'));
+				$this->response->icon = lang('CONF_ICON_INFO');
+				$this->response->title = lang('REPORTS_TITLE');
+				$this->response->msg = lang('REPORTS_DATE_RANGE_NOT_ALLOWED');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			break;
+			case -430:
+				$this->session->set_flashdata('cardsPeople', $this->session->flashdata('cardsPeople'));
+				$this->response->icon = lang('CONF_ICON_INFO');
+				$this->response->title = lang('REPORTS_TITLE');
+				$this->response->msg = lang('REPORTS_FOUND_CARD');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 		}
@@ -982,6 +1027,11 @@ class Novo_Reports_Model extends NOVO_Model {
 		return $this->response;
 	}
 
+	/**
+  * @info Método para renderizar tabla de Tarjetahabiente
+  * @author Jhonnatan Vega
+  * @date September 24th, 2020
+ 	*/
 	public function callWs_CardHolders_Reports($dataRequest)
 	{
 		log_message('INFO', 'NOVO Reports Model: CardHolders Method Initialized');
@@ -1022,6 +1072,60 @@ class Novo_Reports_Model extends NOVO_Model {
     $this->response->data->cardHoldersList = $cardHoldersList;
 
     return $this->responseToTheView('callWS_StatusCardHolders');
+	}
+
+	/**
+  * @info Método para descargar reporte de Tarjetahabiente
+  * @author Jhonnatan Vega
+  * @date March 23th, 2021
+ 	*/
+	public function callWs_exportReportCardHolders_Reports($dataRequest)
+	{
+		log_message('INFO', 'NOVO Reports Model: exportReportCardHolders Method Initialized');
+
+		$this->dataAccessLog->modulo = 'Reportes';
+		$this->dataAccessLog->function = 'Reportes Tarjetahabiente';
+
+		if ($dataRequest->downloadFormat == 'Excel') {
+			$this->dataAccessLog->operation = 'Descargar reporte en excel';
+			$this->dataRequest->idOperation = 'consultarTarjetaHabientesExcel';
+			$ext =  '.xls';
+		} else {
+			$this->dataAccessLog->operation = 'Descargar reporte en pdf';
+			$this->dataRequest->idOperation = 'consultarTarjetaHabientesPDF';
+			$ext =  '.pdf';
+		}
+
+		$this->dataRequest->className = 'com.novo.objects.MO.ListadoTarjetaHabientesMO';
+		$this->dataRequest->paginaActual = 1;
+		$this->dataRequest->tamanoPagina = 10;
+		$this->dataRequest->paginar = false;
+		$this->dataRequest->nombreEmpresa = $dataRequest->enterpriseName;
+		$this->dataRequest->rifEmpresa = $dataRequest->enterpriseCode;
+		$this->dataRequest->nombreProducto = $dataRequest->productName;
+		$this->dataRequest->idProducto = $dataRequest->productCode;
+
+		$response = $this->sendToService('callWs_exportReportCardHolders');
+
+		switch ($this->isResponseRc) {
+			case 0:
+				$this->response->code = 0;
+				$file = $response->archivo;
+				$name = 'Tarjetahabientes';
+
+				$this->response->data->file = $file;
+				$this->response->data->name = $name.$ext;
+				$this->response->data->ext = $ext;
+			break;
+			default:
+				$this->response->title = lang('REPORTS_TITLE');
+				$this->response->msg = lang('REPORTS_NO_FILE_EXIST');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			break;
+		}
+
+
+		return $this->responseToTheView('callWs_exportReportCardHolders');
 	}
 
 	public function callWs_RechargeMade_Reports($dataRequest)
@@ -1196,7 +1300,7 @@ class Novo_Reports_Model extends NOVO_Model {
 	 */
 	public function callWs_exportReportUserActivity_Reports($dataRequest)
 	{
-		log_message('INFO', 'NOVO Reports Model: exportToExcelUserActivity Method Initialized');
+		log_message('INFO', 'NOVO Reports Model: exportReportUserActivity Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Reportes';
 		$this->dataAccessLog->function = 'Actividad por usuario';
@@ -1217,7 +1321,7 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->dataRequest->fechaFin =  $dataRequest->finalDate;
 		$this->dataRequest->acCodCia = $dataRequest->enterpriseCode;
 
-		$response = $this->sendToService('callWs_exportToExcelUserActivity');
+		$response = $this->sendToService('callWs_exportReportUserActivity');
 
 		switch ($this->isResponseRc) {
 			case 0:
@@ -1236,7 +1340,7 @@ class Novo_Reports_Model extends NOVO_Model {
 			break;
 		}
 
-		return $this->responseToTheView('callWs_exportToExcelUserActivity');
+		return $this->responseToTheView('callWs_exportReportUserActivity');
 	}
 
 	/**

@@ -148,19 +148,15 @@ class Novo_Inquiries_Model extends NOVO_Model {
 			break;
 			case -5:
 				$this->response->title = 'Órdenes de servicio';
-				$this->response->msg = 'No fue posible obtener las órdenes de servicio';
+				$this->response->msg = lang('INQ_NO_SERVICE_ORDER');
 				$this->response->icon = lang('CONF_ICON_WARNING');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
-
-
-
 			break;
 			case -150:
 				$this->response->title = 'Órdenes de servicio';
 				$this->response->msg = novoLang(lang('RESP_SERVICE_ORDES'), $statusText);
 				$this->response->icon = lang('CONF_ICON_INFO');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
-
 			break;
 		}
 

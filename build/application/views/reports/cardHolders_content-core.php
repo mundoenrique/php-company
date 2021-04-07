@@ -22,7 +22,7 @@
 			<div class="search-criteria-order flex pb-3 flex-column w-100">
 				<span class="line-text mb-2 h4 semibold primary"><?= lang('GEN_SEARCH_CRITERIA'); ?></span>
 				<div class="flex my-2 px-5">
-					<form id="card-holder-form" action="<?= base_url(lang('GEN_LINK_REP_CARDHOLDERS')); ?>" method="post" class="w-100">
+					<form id="cardholder-form" action="<?= base_url(lang('GEN_LINK_REP_CARDHOLDERS')); ?>" method="post" class="w-100">
 						<div class="row flex justify-between">
 							<div class="form-group col-4 col-xl-4">
 								<label><?= lang('GEN_ENTERPRISE'); ?></label>
@@ -51,7 +51,7 @@
 								<div class="help-block"></div>
 							</div>
 							<div class="flex items-center justify-end col-3">
-								<button type="submit" id="card-holder-btn" class="btn btn-primary btn-small btn-loading">
+								<button type="submit" id="cardholder-btn" class="btn btn-primary btn-small btn-loading">
 									<?= lang('GEN_BTN_SEARCH'); ?>
 								</button>
 							</div>
@@ -68,19 +68,18 @@
 			</div>
 			<div class="w-100 cardholders-result hide">
 				<div class="flex pb-5 flex-column">
-					<span class="line-text mb-2 h4 semibold primary">Resultados</span>
+					<span class="line-text mb-2 h4 semibold primary"><?= lang('GEN_TABLE_RESULTS'); ?></span>
 					<div class="center mx-1">
 						<div class="flex">
-							<div class="flex mr-2 py-3 flex-auto justify-end items-center download">
+							<div class="flex mr-2 py-3 flex-auto justify-end items-center">
 								<div class="download-icons">
-									<button class="btn px-1 big-modal" title="<?= lang('GEN_BTN_DOWN_XLS'); ?>" data-toggle="tooltip">
+									<button class="btn px-1 big-modal downloadReport" format="Excel" title="<?= lang('GEN_BTN_DOWN_XLS'); ?>" data-toggle="tooltip">
 										<i class="icon icon-file-excel" aria-hidden="true"></i>
 									</button>
-									<button class="btn px-1 big-modal" title="<?= lang('GEN_BTN_DOWN_PDF'); ?>" data-toggle="tooltip">
+									<button class="btn px-1 big-modal downloadReport" format="PDF" title="<?= lang('GEN_BTN_DOWN_PDF'); ?>" data-toggle="tooltip">
 										<i class="icon icon-file-pdf" aria-hidden="true"></i>
 									</button>
 								</div>
-								<form id="download-cardholders" action="<?= base_url('descargar-archivo'); ?>" method="post"></form>
 							</div>
 						</div>
 						<table id="resultscardHolders" class="cell-border h6 display responsive w-100">

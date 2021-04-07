@@ -281,6 +281,7 @@ class Verify_Access {
 					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('REPLOT'));
 				break;
 				case 'cardHolders':
+				case 'exportReportCardHolders':
 					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TEBTHA'));
 				break;
 				case 'statusAccountExcelFile':
