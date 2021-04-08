@@ -101,7 +101,7 @@
 									<div class="help-block"></div>
 								</div>
 								<div class="flex items-center justify-end col-6">
-									<button class="btn-report btn btn-primary btn-small btn-loading" cards="repTarjetasPorPersona">
+									<button id="repTarjetasPorPersona" class="btn-report btn btn-primary btn-small btn-loading" cards="repTarjetasPorPersona">
 										<?= lang('GEN_BTN_SEARCH'); ?>
 									</button>
 								</div>

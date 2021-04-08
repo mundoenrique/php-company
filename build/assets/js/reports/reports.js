@@ -173,9 +173,6 @@ $(function () {
 
 		if (form.valid()) {
 
-			// data = {
-			// 	operation: reportSelected
-			// };
 			data.operation = cardsPeople || data.operation;
 			btnAction.html(loader);
 			insertFormInput(true);
@@ -253,6 +250,14 @@ $(function () {
 				.prop('readonly', false)
 				.removeClass('ignore');
 			$('#sectionByCard, #sectionByCard button').removeClass('none');
+		}
+	});
+
+	$('#sectionByIdNumber').on('keyup keypress', function (e) {
+		var keyCode = e.keyCode || e.which;
+		if (keyCode === 13) {
+			e.preventDefault();
+			$('#repTarjetasPorPersona').trigger("click");
 		}
 	});
 
