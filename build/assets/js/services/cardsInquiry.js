@@ -90,6 +90,11 @@ $(function () {
 		$('input, select').removeClass('has-error');
 		applyActions(action, form, $(this));
 	});
+
+	$('#system-info').on('click', '#cancel', function () {
+    $('.cover-spin').hide();
+  });
+
 });
 
 function getCardList(request) {
