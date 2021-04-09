@@ -71,6 +71,7 @@ $(function () {
 			btnRemote = $(this);
 			remoteAuthArgs.action = action;
 			remoteAuthArgs.form = form;
+			remoteAuthArgs.title = title;
 			getauhtKey();
 		}
 	});
@@ -235,7 +236,7 @@ function verifymassiveOptions(massiveOptions) {
 }
 
 function InqBuildFormActions(currentAction, currentTitle, currentBtn) {
-	$('#accept').addClass('send-request');
+
 	modalBtn = {
 		btn1: {
 			text: lang.GEN_BTN_ACCEPT,
@@ -293,6 +294,7 @@ function InqBuildFormActions(currentAction, currentTitle, currentBtn) {
 	}
 
 	if (lang.CONF_REMOTE_AUTH == 'OFF') {
+		$('#accept').addClass('send-request');
 
 		inputModal += 	'<div class="form-group col-12">';
 		inputModal += 		'<div class="input-group">';
@@ -305,6 +307,7 @@ function InqBuildFormActions(currentAction, currentTitle, currentBtn) {
 		inputModal += 		'<div class="help-block"></div>';
 		inputModal += 	'</div>';
 	} else {
+		$('#accept').addClass('get-auth-key');
 		currentBtn = btnRemote;
 		form = $('#nonForm');
 
@@ -318,16 +321,10 @@ function InqBuildFormActions(currentAction, currentTitle, currentBtn) {
 	if (lang.CONF_REMOTE_AUTH == 'OFF' || (lang.CONF_REMOTE_AUTH == 'ON' && $.inArray(currentAction, lang.CONF_AUTH_VALIDATE) != -1)) {
 		appMessages(currentTitle, inputModal, lang.CONF_ICON_INFO, modalBtn);
 	} else if ($.inArray(currentAction, lang.CONF_AUTH_LIST) != -1) {
-		$('#accept').removeClass('send-request');
-		$('#accept').addClass('get-auth-key');
 		remoteAuthArgs.title = currentTitle;
 		remoteAuthArgs.action = currentAction;
 		remoteAuthArgs.form = form;
-		if (currentAction == 'CARD_CANCELLATION') {
-			appMessages(currentTitle, inputModal, lang.CONF_ICON_INFO, modalBtn);
-		} else {
-			getauhtKey();
-		}
+		getauhtKey();
 	} else {
 		applyActions(currentAction, form, currentBtn);
 	}
