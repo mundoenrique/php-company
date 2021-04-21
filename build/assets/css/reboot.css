@@ -1808,6 +1808,7 @@ i[class*=" icon-"]:before {
 .icon-download:before        { content: "\e0bb"; }
 .icon-upload:before          { content: "\e0bc"; }
 .icon-deliver-card:before    { content: "\e015"; }
+.icon-warning:before    		 { content: "\e0c6"; }
 .icon-user:before            { content: "\e0c8"; }
 .icon-envelope-open:before   { content: "\e026"; }
 .icon-lock:before 			     { content: "\e0ce"; }

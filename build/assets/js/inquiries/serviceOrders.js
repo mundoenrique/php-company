@@ -204,7 +204,12 @@ function format(bulk) {
 		body+= 		'<td>'+value.bulkAmount+'</td>';
 		body+= 		'<td>'+value.bulkCommisAmount+'</td>';
 		body+= 		'<td>'+value.bulkTotalAmount+'</td>';
-		body+=	'</tr>';
+		body+=		'</tr>';
+		body+=		'<tr>';
+		body+=			'<td colspan="8">';
+		body+=				'<span>' + 'Su solicitud no ha sido posible, por favor comunicarse con su ejecutivo de cuenta del Banco de Bogotá' + '</span>';
+		body+=			'</td>';
+		body+=		'</tr>';
 
 	})
 	table= 	'<table class="detail-lot h6 cell-border primary semibold" style="width:100%">';
