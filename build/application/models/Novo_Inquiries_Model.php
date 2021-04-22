@@ -135,8 +135,18 @@ class Novo_Inquiries_Model extends NOVO_Model {
 									$bulkList['bulkCommisAmount'] = currencyFormat($bulk->montoComision);
 									$bulkList['bulkTotalAmount'] = currencyFormat($bulk->montoNeto);
 									$bulkList['bulkId'] = $bulk->acidlote;
+									$bulkList['bulkObservation'] = isset($bulk->obs) && ($bulk->cestatus == lang('CONF_STATUS_REJECTED')) ? $bulk->obs : '';
+
 									$serviceOrders['bulk'][] = (object) $bulkList;
 								}
+
+								$serviceOrders['bulkEnabled'] = FALSE;
+								foreach($serviceOrders['bulk'] AS $list) {
+									if($list->bulkObservation != ''){
+										$serviceOrders['bulkEnabled'] = TRUE;
+									}
+								}
+
 							break;
 						}
 					}
