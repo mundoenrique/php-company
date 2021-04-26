@@ -736,7 +736,7 @@ $config = [
 		[
 			'field' => 'fileName',
 			'label' => 'fileName',
-			'rules' => 'trim|regex_match[/^[\w./-]+$/i]'
+			'rules' => 'trim|regex_match[/^[\w.\-]+$/i]'
 		]
 	],
 	'getFileIni' => [
