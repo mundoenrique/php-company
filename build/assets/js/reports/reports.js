@@ -114,7 +114,7 @@ $(function () {
 		changeMonth: true,
 		changeYear: true,
 		showButtonPanel: true,
-		yearRange: "-20:+0",
+		minDate: '-12m',
 		maxDate: '-M',
 		dateFormat: 'mm/yy',
 		closeText: 'Aceptar',
