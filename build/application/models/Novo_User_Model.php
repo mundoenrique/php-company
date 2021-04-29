@@ -281,7 +281,9 @@ class Novo_User_Model extends NOVO_Model {
 					'countryUri' => $this->config->item('country-uri'),
 					'clientAgent' => $this->agent->agent_string(),
 					'autoLogin' => 'true',
-					'thirdPartyChannel' => $dataRequest->canal ?? ''
+          'enterpriseInf' => [
+            'thirdApp' => $dataRequest->Canal ?? ''
+          ]
 				];
 				$this->session->set_userdata($userData);
 				$this->response->code = 0;
