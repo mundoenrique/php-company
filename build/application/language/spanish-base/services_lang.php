@@ -72,6 +72,7 @@ $lang['SERVICES_ACTION_DELIVER_TO_CARDHOLDER'] = 'Entregada a Tarjetahabiente / 
 $lang['SERVICES_ACTION_SEND_TO_ENTERPRISE'] = 'Enviar a empresa';
 $lang['SERVICES_ACTION_RECEIVE_IN_ENTERPRISE'] = 'Recibido en empresa';
 $lang['SERVICES_ACTION_RECEIVE_IN_BANK'] = 'Recibido en Banco';
+$lang['SERVICES_ACTION_CARD_CANCELLATION'] = 'Cancelar tarjeta';
 $lang['SERVICES_NAMES_PROPERTIES'] = [
 	'agenciaViajes' => 'travelAgency',
 	'aseguradoras' => 'insurers',
