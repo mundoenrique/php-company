@@ -1047,7 +1047,7 @@ class Novo_Services_Model extends NOVO_Model {
 		$this->response->data->info['balance'] = '';
 		$this->response->data->info['balanceText'] = '';
 		$this->response->data->info['fundingAccount'] = '';
-		$this->response->data->params['validateParams'] = FALSE;
+		$this->response->data->params['validateParams'] = lang('CONF_VALIDATE_PARAMS') == 'OFF' ? FALSE : TRUE;
 		$this->response->data->params['commission'] = (float)0;
 
 		switch ($this->isResponseRc) {
@@ -1058,7 +1058,6 @@ class Novo_Services_Model extends NOVO_Model {
 				$this->response->data->info['fundingAccount'] = $response->maestroDeposito->cuentaFondeo ?? '';
 
 				if (isset($response->maestroDeposito->parametrosRecarga)) {
-					$this->response->data->params['validateParams'] = TRUE;
 					$this->response->data->params['dailyQuantity'] = (int)$response->maestroDeposito->cantidadTranxDia->lista[0]->idCuenta;
 					$this->response->data->params['dailyAmount'] = (float)$response->maestroDeposito->cantidadTranxDia->lista[0]->montoOperacion;
 					$this->response->data->params['weeklyQuantity'] = (int)$response->maestroDeposito->cantidadTranxSemana->lista[0]->idCuenta;
@@ -1089,9 +1088,9 @@ class Novo_Services_Model extends NOVO_Model {
 			case -233:
 				$this->response->data->info['balanceText'] = lang('SERVICES_UNAVAILABLE_BALANCE');
 				$this->response->data->info['fundingAccount'] = '-- --';
+				$this->response->data->params['balance'] = (float)$response->bean->saldoDisponible;
 			break;
 			case -251:
-				$this->response->data->info['balanceText'] = '';
 				$this->response->data->info['fundingAccount'] = '-- --';
 			break;
 			case -402:

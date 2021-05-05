@@ -50,6 +50,7 @@ Class Novo_Services extends Novo_Controller {
 			foreach ($responseAttr->data->info AS $index => $render) {
 				$this->render->$index = $render;
 			}
+
 			$responseAttr->data->params['showRechargeAccount'] = $showRechargeAccount;
 		}
 
