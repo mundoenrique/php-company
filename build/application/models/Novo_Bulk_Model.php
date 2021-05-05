@@ -986,7 +986,6 @@ class Novo_Bulk_Model extends NOVO_Model {
 				$serviceOrdersList = [];
 
 				foreach($response->lista AS $list) {
-					$orderList = [];
 
 					foreach($list AS $key => $value) {
 						switch ($key) {
@@ -1017,7 +1016,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 							break;
 							case 'lotes':
 								$serviceOrders['bulk'] = [];
-
+								$serviceOrders['warningEnabled'] = FALSE;
 								foreach($value AS $bulk) {
 									$bulkList['bulkNumber'] = $bulk->acnumlote;
 									$bulkList['bulkLoadDate'] = $bulk->dtfechorcarga;
@@ -1028,6 +1027,12 @@ class Novo_Bulk_Model extends NOVO_Model {
 									$bulkList['bulkCommisAmount'] = currencyFormat($bulk->montoComision);
 									$bulkList['bulkTotalAmount'] = currencyFormat($bulk->montoNeto);
 									$bulkList['bulkId'] = $bulk->acidlote;
+									$bulkList['bulkObservation'] = '';
+									
+									if(isset($bulk->obs)  && $bulk->obs != '' && $bulk->cestatus == lang('CONF_STATUS_REJECTED')){
+										$bulkList['bulkObservation'] = $bulk->obs;
+										$serviceOrders['warningEnabled'] = TRUE;
+									}
 									$serviceOrders['bulk'][] = (object) $bulkList;
 								}
 							break;

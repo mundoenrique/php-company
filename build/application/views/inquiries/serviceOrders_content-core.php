@@ -99,6 +99,11 @@
                   <td><?= $list->OrderAmount; ?></td>
                   <td><?= $list->OrderDeposit; ?></td>
                   <td class="p-0 nowrap">
+                    <?php if(lang('CONF_SERVICEORDERS_ICON') == 'ON' && $list->warningEnabled == TRUE): ?>
+										<span class="btn mx-1 px-0">
+                      <i class="icon icon-warning warning not-pointer" aria-hidden="true"></i>
+                    </span>
+                    <?php endif; ?>
                     <?php if($this->verify_access->verifyAuthorization('TEBORS')):?>
                     <button class="btn mx-1 px-0 details-control" title="<?= lang('GEN_BTN_SEE'); ?>" data-toggle="tooltip">
                       <i class="icon icon-find" aria-hidden="true"></i>

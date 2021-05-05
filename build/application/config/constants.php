@@ -106,7 +106,7 @@ $timeZone = [
 	'us' => 	'America/Lima',
 	've' => 	'America/Caracas',
 ];
-$timeZone = array_key_exists($uriSegments[1], $timeZone) ? $timeZone[$uriSegments[1]] : 'UTC';
+$timeZone = array_key_exists($uriSegments[1], $timeZone) ? $timeZone[$uriSegments[1]] : 'America/New_York';
 date_default_timezone_set($timeZone);
 /*
 |--------------------------------------------------------------------------

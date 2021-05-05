@@ -8,6 +8,7 @@ $(function () {
 	var prevOption;
 	var reportSelected;
 	var firsrYear = getPropertyOfElement('firts-year', '#repCertificadoGmf');
+	var minDate;
 	form = $('#form-report')
 
 	$('#reports option').each(function () {
@@ -76,6 +77,42 @@ $(function () {
 			}
 			appMessages(lang.REPORTS_TITLE, lang.REPORTS_NO_GMF, lang.CONF_ICON_INFO, modalBtn);
 		}
+
+		$('.month-year').datepicker({
+			changeMonth: true,
+			changeYear: true,
+			showButtonPanel: true,
+			maxDate: '-M',
+			dateFormat: 'mm/yy',
+			closeText: 'Aceptar',
+			onClose: function (dateText, inst) {
+				var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
+				var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+				$(this).datepicker('setDate', new Date(year, month, 1));
+			},
+			beforeShow: function (input, inst) {
+				if(reportSelected == 'repComprobantesVisaVale'){
+					minDate = '-12M';
+				}
+				else if(reportSelected == 'repExtractoCliente'){
+					minDate = '-18M';
+				}
+				else{
+					minDate = '';
+				}
+				$(this).datepicker('option', 'minDate', minDate);
+
+				var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
+				var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+				inst.dpDiv.addClass("ui-datepicker-month-year");
+				$(this).datepicker('option', 'defaultDate', new Date(year, month, 1));
+			},
+			onSelect: function (selectDate) {
+				$(this)
+					.focus()
+					.blur();
+			}
+		});
 	});
 
 	$(".date-picker").datepicker({
@@ -110,31 +147,7 @@ $(function () {
 		}
 	});
 
-	$('.month-year').datepicker({
-		changeMonth: true,
-		changeYear: true,
-		showButtonPanel: true,
-		yearRange: "-20:+0",
-		maxDate: '-M',
-		dateFormat: 'mm/yy',
-		closeText: 'Aceptar',
-		onClose: function (dateText, inst) {
-			var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
-			var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
-			$(this).datepicker('setDate', new Date(year, month, 1));
-		},
-		beforeShow: function (input, inst) {
-			var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
-			var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
-			inst.dpDiv.addClass("ui-datepicker-month-year");
-			$(this).datepicker('option', 'defaultDate', new Date(year, month, 1));
-		},
-		onSelect: function (selectDate) {
-			$(this)
-				.focus()
-				.blur();
-		}
-	});
+
 
 	$('.year').datepicker({
 		changeMonth: false,
@@ -173,9 +186,6 @@ $(function () {
 
 		if (form.valid()) {
 
-			// data = {
-			// 	operation: reportSelected
-			// };
 			data.operation = cardsPeople || data.operation;
 			btnAction.html(loader);
 			insertFormInput(true);
@@ -253,6 +263,14 @@ $(function () {
 				.prop('readonly', false)
 				.removeClass('ignore');
 			$('#sectionByCard, #sectionByCard button').removeClass('none');
+		}
+	});
+
+	$('#sectionByIdNumber').on('keyup keypress', function (e) {
+		var keyCode = e.keyCode || e.which;
+		if (keyCode === 13) {
+			e.preventDefault();
+			$('#repTarjetasPorPersona').trigger("click");
 		}
 	});
 

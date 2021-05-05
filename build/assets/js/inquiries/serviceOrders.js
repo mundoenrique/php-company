@@ -185,7 +185,6 @@ $(function () {
 function format(bulk) {
 	var table, body = '';
 	var orderList = cryptoPass($('#resultServiceOrders').attr('orderList'));
-	console.log(orderList)
 	bulk = JSON.parse(bulk)
 	$.each(bulk, function (key, value) {
 		body+=	'<tr>';
@@ -204,8 +203,14 @@ function format(bulk) {
 		body+= 		'<td>'+value.bulkAmount+'</td>';
 		body+= 		'<td>'+value.bulkCommisAmount+'</td>';
 		body+= 		'<td>'+value.bulkTotalAmount+'</td>';
-		body+=	'</tr>';
-
+		body+=		'</tr>';
+		if (lang.CONF_SERVICEORDERS_ICON == 'ON' && value.bulkObservation != '') {
+			body+=		'<tr>';
+			body+=			'<td colspan="8">';
+			body+=				'<span>'+value.bulkObservation+'</span>';
+			body+=			'</td>';
+			body+=		'</tr>';
+		}
 	})
 	table= 	'<table class="detail-lot h6 cell-border primary semibold" style="width:100%">';
 	table+= 	'<tbody>';
