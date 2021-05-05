@@ -558,9 +558,14 @@ function validateForms(form) {
 	}
 
 	$.validator.methods.lessBalance = function (value, element, param) {
+		var valid = true
 		value = normalizeAmount(value);
 
-		return (value + rechargeParam.commission) <= rechargeParam.balance;
+		if (rechargeParam.validateParams) {
+			valid = (value + rechargeParam.commission) > rechargeParam.balance;
+		}
+
+		return valid
 	}
 
 	$.validator.methods.dailyQuantity = function (value, element, param) {
@@ -568,7 +573,7 @@ function validateForms(form) {
 		value = normalizeAmount(value);
 
 		if (rechargeParam.validateParams) {
-			valid = true;
+
 		}
 
 		return valid;
