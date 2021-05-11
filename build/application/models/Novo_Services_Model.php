@@ -1198,7 +1198,7 @@ class Novo_Services_Model extends NOVO_Model {
 			break;
 		}
 
-		return $this->responseToTheView('CallWs_MatesaccountBlanace');
+		return $this->responseToTheView('CallWs_MasterAccountTransfer');
 	}
 	/**
 	 * @info Método obtener clave de autorización
