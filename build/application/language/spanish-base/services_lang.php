@@ -8,6 +8,7 @@ $lang['SERVICES_BALANCE_NO_FOUND'] = 'No fue posible obtener el saldo para';
 $lang['SERVICES_TRANSACTION_DATA'] = 'Datos de la transacción';
 $lang['SERVICES_TRANSACTION_FAIL'] = 'No fue posible realizar la trasacción, por favor intentalo de nuevo.';
 $lang['SERVICES_BALANCE_NO_AVAILABLE'] = 'El saldo no esta disponible.';
+$lang['SERVICES_BALANCE_NO_SEARCH'] = 'No fue posible realizar la consulta de saldo, intenta de nuevo';
 $lang['SERVICES_MIN_AMOUNT'] = 'La transacción no supera el monto mínimo por operación.';
 $lang['SERVICES_MAX_WEEKLY_AMOUNT'] = 'Alcanzaste el monto máximo de operaciones semenales.';
 $lang['SERVICES_MAX_DAILY_AMOUNT'] = 'Alcanzaste el monto máximo de operaciones diarias.';
