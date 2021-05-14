@@ -311,6 +311,10 @@ class Novo_Services_Model extends NOVO_Model {
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -33:
+				$this->response->title = lang('GEN_'.$dataRequest->action);
+				$this->response->msg = lang('SERVICES_BALANCE_NO_SEARCH');
+				$this->response->icon = lang('CONF_ICON_WARNING');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			case -100:
 				$this->response->title = lang('GEN_'.$dataRequest->action);
 				$this->response->msg = lang('SERVICES_BALANCE_NO_AVAILABLE');
