@@ -1,8 +1,18 @@
 'use strict'
 var rechargeParam;
+var checkType;
+
 $(function () {
 	if (params && code == 0) {
 		rechargeParam = params;
+
+		$("#pay").prop("checked", true);
+		checkType = $("input:radio[name=transferType]:checked").val();
+
+		$("input[name=transferType]").click(function() {
+			 checkType = $("input:radio[name=transferType]:checked").val();
+		})
+		
 		$('#transferAmount').mask('#' + lang.GEN_THOUSANDS + '##0' + lang.GEN_DECIMAL + '00', { reverse: true });
 		$('#transferAmount').on('keyup', function() {
 			$(this).val(function(_index, value) {
@@ -18,7 +28,7 @@ $(function () {
 				return value
 			})
 		});
-
+		
 		$('#masterAccountRechargeBtn').on('click', function(e) {
 			e.preventDefault();
 			form = $('#masterAccountRechargeForm');

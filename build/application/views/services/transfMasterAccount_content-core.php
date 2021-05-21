@@ -36,11 +36,11 @@
 
               <div class="form-group col-3">
                 <div class="custom-option-c custom-radio custom-control-inline">
-                  <input type="radio" id="debit" name="transferType" class="custom-option-input" disabled>
+                  <input type="radio" id="debit" name="transferType" class="custom-option-input" value="cargo" disabled>
                   <label class="custom-option-label nowrap" for="debit">Cargo</label>
                 </div>
                 <div class="custom-option-c custom-radio custom-control-inline">
-                  <input type="radio" id="pay" name="transferType" class="custom-option-input" disabled>
+                  <input type="radio" id="pay" name="transferType" class="custom-option-input" value="abono" disabled>
                   <label class="custom-option-label nowrap" for="pay">Abono</label>
                 </div>
                 <div class="help-block"></div>

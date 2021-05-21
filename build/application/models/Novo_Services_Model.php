@@ -1079,7 +1079,9 @@ class Novo_Services_Model extends NOVO_Model {
 						?? '';
 					$this->response->data->params['maxAmountWeek'] = (float)$response->maestroDeposito->parametrosRecarga->montoMaxTransSemanal
 						?? '';
-					$this->response->data->params['accuAmountWeek'] = (float)$response->maestroDeposito->parametrosRecarga->montoMaxTransSemanal
+					$this->response->data->params['maxQuanTransDaily'] = (float)$response->maestroDeposito->parametrosRecarga->cantidadMaxTransDia
+						?? '';
+					$this->response->data->params['maxAmountTransDaily'] = (float)$response->maestroDeposito->parametrosRecarga->montoMaxTransDia
 						?? '';
 				}
 

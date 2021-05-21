@@ -222,7 +222,7 @@ function validateForms(form) {
 			"monthlyAmountCredit": { pattern: numeric, required: true },
 			"CreditTransaction": { pattern: numeric, required: true, maxLimitZero: '#dailyAmountCredit' },
 			"transferType": { required: true },
-			"transferAmount": { required: true, pattern: floatAmount, lessBalance: true, dailyQuantity: true },
+			"transferAmount": { required: true, pattern: floatAmount, lessBalance: true, dailyQuantity: true, minAmount: true, maxAmount: true, maxAmountTransDaily: true, maxAmountTransweekly: true},
 			"description": { required: true, pattern: rechargeDesc },
 		},
 		messages: {
@@ -458,8 +458,12 @@ function validateForms(form) {
 			"transferAmount": {
 				required: lang.VALIDATE_VALID_AMOUNT,
 				pattern: lang.VALIDATE_VALID_AMOUNT,
-				lessBalance: 'El saldo disponible no es suficiente para realizar la transacción.',
-				dailyQuantity: 'Has excedido la cantidad de transacciones por día.'
+				lessBalance: lang.VALIDATE_LESS_BALANCE,
+				dailyQuantity: lang.VALIDATE_DAILY_QUANTITY,
+				minAmount: lang.VALIDATE_MIN_AMOUNT,
+				maxAmount: lang.VALIDATE_MAX_AMOUNT,
+				maxAmountTransDaily: lang.VALIDATE_MAX_AMOUNT_TRANSDAILY,
+				maxAmountTransweekly: lang.VALIDATE_MAX_AMOUNT_TRANSWEEKLY
 			},
 			"description": {
 				required: lang.VALIDATE_RECHAR_DESC1,
@@ -561,21 +565,58 @@ function validateForms(form) {
 		var valid = true
 		value = normalizeAmount(value);
 
-		if (rechargeParam.validateParams) {
-			valid = (value + rechargeParam.commission) > rechargeParam.balance;
+		if (rechargeParam.validateParams && checkType !== lang.VALIDATE_TRANSFERTYPE) {
+			if(value > rechargeParam.balance ){
+				valid = false;
+			}else if((value + rechargeParam.commission) > rechargeParam.balance){
+				valid = false;
+			}
 		}
-
 		return valid
 	}
 
 	$.validator.methods.dailyQuantity = function (value, element, param) {
 		var valid = true;
-		value = normalizeAmount(value);
 
 		if (rechargeParam.validateParams) {
-
+			valid = (rechargeParam.maxQuanTransDaily > 0) && (rechargeParam.maxQuanTransDaily < (rechargeParam.accumTransDaily + 1)) ? false : true ;
 		}
+		return valid;
+	}
 
+	$.validator.methods.minAmount = function (value, element, param) {
+		var valid = true;
+
+		if (rechargeParam.validateParams) {
+			valid = (rechargeParam.minAmount > 0) && (value < rechargeParam.minAmount) ? false : true ;
+		}
+		return valid;
+	}
+
+	$.validator.methods.maxAmount = function (value, element, param) {
+		var valid = true;
+
+		if (rechargeParam.validateParams) {
+			valid = (rechargeParam.maxAmount > 0) && (value > rechargeParam.maxAmount) ? false : true ;
+		}
+		return valid;
+	}
+
+	$.validator.methods.maxAmountTransDaily = function (value, element, param) {
+		var valid = true;
+
+		if (rechargeParam.validateParams) {
+			valid = (rechargeParam.maxAmountTransDaily > 0) && ((value + rechargeParam.dailyAmount) > rechargeParam.maxAmountTransDaily) ? false : true ;
+		}
+		return valid;
+	}
+
+	$.validator.methods.maxAmountTransweekly = function (value, element, param) {
+		var valid = true;
+
+		if (rechargeParam.validateParams) {
+			valid = (rechargeParam.maxAmountWeek > 0) && ((value + rechargeParam.weeklyAmount) > rechargeParam.maxAmountWeek) ? false : true ;
+		}
 		return valid;
 	}
 
