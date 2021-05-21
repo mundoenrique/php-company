@@ -1063,14 +1063,6 @@ class Novo_Services_Model extends NOVO_Model {
 					$this->response->data->params['weeklyQuantity'] = (int)$response->maestroDeposito->cantidadTranxSemana->lista[0]->idCuenta;
 					$this->response->data->params['weeklyAmount'] = (float)$response->maestroDeposito->cantidadTranxSemana->lista[0]->montoOperacion;
 
-					/* unset(
-						$response->maestroDeposito->parametrosRecarga->idExtEmp,
-						$response->maestroDeposito->parametrosRecarga->acprefix,
-						$response->maestroDeposito->parametrosRecarga->usuarioReg,
-						$response->maestroDeposito->parametrosRecarga->tipoComision,
-						$response->maestroDeposito->parametrosRecarga->tipoFactura,
-					); */
-
 					$this->response->data->params['commission'] = (float)$response->maestroDeposito->parametrosRecarga->costoComisionTrans
 						?? '';
 					$this->response->data->params['minAmount'] = (float)$response->maestroDeposito->parametrosRecarga->montoMinTransDia
