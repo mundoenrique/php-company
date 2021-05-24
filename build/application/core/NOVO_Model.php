@@ -7,7 +7,7 @@ class NOVO_Model extends CI_Model {
 	public $token;
 	public $autoLogin;
 	public $country;
-	public $countryUri;
+	public $customerUri;
 	public $dataRequest;
 	public $isResponseRc;
 	public $response;
@@ -23,9 +23,9 @@ class NOVO_Model extends CI_Model {
 		$this->dataRequest = new stdClass();
 		$this->response = new stdClass();
 		$this->country = $this->session->has_userdata('countrySess') ? $this->session->countrySess : $this->config->item('country');
-		$this->countryUri = $this->session->countryUri;
-		$this->token = $this->session->token ?: '';
-		$this->autoLogin = $this->session->autoLogin ?: '';
+		$this->customerUri = $this->session->customerUri;
+		$this->token = $this->session->token ?? '';
+		$this->autoLogin = $this->session->autoLogin ?? '';
 		$this->userName = $this->session->userName;
 		$this->singleSession = base64_decode($this->input->cookie($this->config->item('cookie_prefix').'singleSession'));
 	}

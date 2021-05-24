@@ -309,7 +309,7 @@ class Novo_Business_Model extends NOVO_Model {
 		];
 
 		$response = $this->sendToService('callWs_GetProductDetail');
-		$imgProgram = $this->countryUri.'_default.svg';
+		$imgProgram = $this->customerUri.'_default.svg';
 		$productDetail = [
 			'name' => $dataRequest->productName ?? '',
 			'imgProgram' => $imgProgram,
@@ -319,7 +319,7 @@ class Novo_Business_Model extends NOVO_Model {
 			'prefix' => $productPrefix
 		];
 
-		if(!file_exists(assetPath('images/programs/'.$this->session->countryUri.'/'.$imgProgram))) {
+		if(!file_exists(assetPath('images/programs/'.$this->session->customerUri.'/'.$imgProgram))) {
 			$productDetail['imgProgram'] = 'default.svg';
 		}
 
@@ -357,7 +357,7 @@ class Novo_Business_Model extends NOVO_Model {
 					$productDetail['imgBrand'] = $imgBrand;
 					$imgProgram = url_title(trim(mb_strtolower($response->estadistica->producto->nombre))).'.svg';
 
-					if (file_exists(assetPath('images/programs/'.$this->session->countryUri.'/'.$imgProgram))) {
+					if (file_exists(assetPath('images/programs/'.$this->session->customerUri.'/'.$imgProgram))) {
 						$productDetail['imgProgram'] = $imgProgram;
 					}
 

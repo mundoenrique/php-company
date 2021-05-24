@@ -108,6 +108,20 @@ $timeZone = [
 ];
 $timeZone = array_key_exists($uriSegments[1], $timeZone) ? $timeZone[$uriSegments[1]] : 'America/New_York';
 date_default_timezone_set($timeZone);
+$baseLanguage = 'spanish';
+
+switch(end($uriSegments)) {
+	case 'es':
+		$baseLanguage = 'spanish';
+	break;
+	case 'en':
+		$baseLanguage = 'english';
+	break;
+	default:
+		if (isset($_COOKIE['cpo_baseLanguage'])) {
+			$baseLanguage = $_COOKIE['cpo_baseLanguage'];
+		}
+}
 /*
 |--------------------------------------------------------------------------
 | FRAMEWORK SETTINGS
@@ -116,6 +130,7 @@ date_default_timezone_set($timeZone);
 defined('BASE_URL')					OR define('BASE_URL', $_SERVER['BASE_URL']);
 defined('ASSET_URL')				OR define('ASSET_URL', $_SERVER['ASSET_URL']);
 defined('ASSET_PATH')				OR define('ASSET_PATH', $_SERVER['ASSET_PATH']);
+defined('BASE_LANGUAGE')		OR define('BASE_LANGUAGE', $baseLanguage);
 defined('THRESHOLD')				OR define('THRESHOLD', $_SERVER['CI_ENV'] === 'development' ? 4 : 2);
 defined('LOG_PATH')					OR define('LOG_PATH', $_SERVER['LOG_PATH'] ?? '');
 defined('ENCRYPTION_KEY')		OR define('ENCRYPTION_KEY', $_SERVER['ENCRYPTION_KEY'] ?? '3NCRYPT10N');
@@ -137,7 +152,7 @@ defined('ACTIVE_SAFETY')		OR define('ACTIVE_SAFETY', $_SERVER['ACTIVE_SAFETY']);
 defined('CYPHER_BASE')			OR define('CYPHER_BASE', $_SERVER['CYPHER_BASE']);
 defined('ACCESS_URL')				OR define('ACCESS_URL', $_SERVER['ACCESS_URL']);
 defined('ACTIVE_RECAPTCHA')	OR define('ACTIVE_RECAPTCHA', $_SERVER['ACTIVE_RECAPTCHA'] == 'ON' ? TRUE : FALSE);
-defined('LANGUAGE')					OR define('LANGUAGE', end($uriSegments) === 'en' ? 'en' : 'es');
+defined('LANGUAGE')					OR define('LANGUAGE', BASE_LANGUAGE === 'english' ? 'en' : 'es');
 defined('IP_VERIFY')				OR define('IP_VERIFY', $_SERVER['IP_VERIFY'] ?? 'ON');
 defined('SINGLE_SIGN_ON')		OR define('SINGLE_SIGN_ON', $_SERVER['SINGLE_SIGN_ON'] == 'ON' ? TRUE : FALSE);
 defined('ASSET_PATH')				OR define('ASSET_PATH', $_SERVER['ASSET_PATH']);

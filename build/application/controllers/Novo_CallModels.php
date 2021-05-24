@@ -41,14 +41,14 @@ class Novo_CallModels extends Novo_Controller {
 		log_message('DEBUG', 'NOVO ['.$this->appUserName.'] REQUEST FROM THE VIEW '.json_encode($this->dataRequest, JSON_UNESCAPED_UNICODE));
 
 		unset($this->dataRequest);
-		$valid = $this->verify_access->accessAuthorization($this->rule, $this->countryUri, $this->appUserName);;
+		$valid = $this->verify_access->accessAuthorization($this->rule, $this->customerUri, $this->appUserName);;
 
 		if(!empty($_FILES) && $valid) {
 			$valid = $this->manageFile();
 		}
 
 		if($valid) {
-			$valid = $this->verify_access->validateForm($this->rule, $this->countryUri, $this->appUserName, $this->class);
+			$valid = $this->verify_access->validateForm($this->rule, $this->customerUri, $this->appUserName, $this->class);
 		}
 
 		if($valid) {
@@ -59,7 +59,7 @@ class Novo_CallModels extends Novo_Controller {
 		}
 
 		$modalBtn = $this->dataResponse->modalBtn;
-		$this->dataResponse->modalBtn = $this->verify_access->validateRedirect($modalBtn, $this->countryUri);
+		$this->dataResponse->modalBtn = $this->verify_access->validateRedirect($modalBtn, $this->customerUri);
 		$dataResponse = $dataResponse = lang('CONFIG_CYPHER_DATA') == 'ON' ?  $this->cryptography->encrypt($this->dataResponse) : $this->dataResponse;
 		$this->output->set_content_type('application/json')->set_output(json_encode($dataResponse, JSON_UNESCAPED_UNICODE));
 	}
@@ -94,7 +94,7 @@ class Novo_CallModels extends Novo_Controller {
 			'n', 'N', 'c', 'C'
 		];
 		$filename = '_'.substr(preg_replace($pattern, $replace, $_POST['typeBulkText']), 0, 19);
-		$filenameT = time().'_'.date('s').$this->countryUri.$filename;
+		$filenameT = time().'_'.date('s').$this->customerUri.$filename;
 		$filenameT = mb_strtolower($filenameT.'.'.$ext);
 		$config['file_name'] = $filenameT;
 		$config['upload_path'] = UPLOAD_PATH;
@@ -111,7 +111,7 @@ class Novo_CallModels extends Novo_Controller {
 			$uploadData = (object) $this->upload->data();
 			$_POST['fileName'] = $uploadData->file_name;
 			$_POST['filePath'] = $uploadData->file_path;
-			$_POST['rawName'] = mb_strtolower($this->countryUri.$filename);
+			$_POST['rawName'] = mb_strtolower($this->customerUri.$filename);
 			$_POST['fileExt'] = substr($uploadData->file_ext, 1);
 			unset($_POST['typeBulkText'], $_POST['file']);
 

@@ -93,7 +93,7 @@ function getSignIn(forWhere) {
 					var link = response.data;
 
 					if (link.indexOf('dashboard') != -1) {
-						link = link.replace('/' + country + '/', '/' + oldCountry + '/',);
+						link = link.replace('/' + customerUri + '/', '/' + oldCustomerUri + '/',);
 					}
 
 					$(location).attr('href', link);

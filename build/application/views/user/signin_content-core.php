@@ -3,7 +3,7 @@
 	<div class="row">
 		<div class="col-auto px-0">
 			<div class="flex flex-column items-center z1 h-100">
-				<img class="logo-banco mb-2" src="<?= $this->asset->insertFile(lang('GEN-LOGO-BIG'), 'images', $countryUri); ?>"
+				<img class="logo-banco mb-2" src="<?= $this->asset->insertFile(lang('GEN-LOGO-BIG'), 'images', $customerUri); ?>"
 					alt="<?= lang('GEN_ALTERNATIVE_TEXT'); ?>">
 				<span class="mb-2 secondary center h3"><?= lang('USER_WELCOME_TITLE') ?></span>
 				<div id="widget-signin" class="widget rounded h-100">
@@ -39,7 +39,7 @@
 		<div class="col-auto px-0">
 			<div class="h-100">
 				<div class="flex pr-2 pr-lg-0 img-log h-100">
-					<img src="<?= $this->asset->insertFile(lang('GEN_IMAGE_LOGIN'), 'images', $countryUri); ?> " alt="Imagen de referencia">
+					<img src="<?= $this->asset->insertFile(lang('GEN_IMAGE_LOGIN'), 'images', $customerUri); ?> " alt="Imagen de referencia">
 				</div>
 			</div>
 		</div>

@@ -1,6 +1,5 @@
 'use strict'
 function validateForms(form) {
-	var validCountry = country;
 	var onlyNumber = /^[0-9]{6,8}$/;
 	var namesValid = /^([a-zñáéíóú.]+[\s]*)+$/i;
 	var validNickName = /^([a-z]{2,}[0-9_]*)$/i;

@@ -530,7 +530,7 @@
                 <div class="row">
                   <?php foreach(lang('CONF_MANUAL_FILE') AS $value): ?>
                   <div class="mb-3 col-auto col-lg-6 col-xl-5">
-                    <a href="<?= $this->asset->insertFile($value[0], 'statics', $countryUri); ?>" download>
+                    <a href="<?= $this->asset->insertFile($value[0], 'statics', $customerUri); ?>" download>
                       <div class="files btn-link flex items-center">
                         <div class="file">
                           <img src="<?= $this->asset->insertFile(lang('CONF_PDF_ICON'), 'images/icons');?>" />
@@ -550,7 +550,7 @@
                 <div class="row">
                   <?php foreach(lang('CONF_APPS_FILE') as $value): ?>
                   <div class="mb-3 col-auto col-lg-6 col-xl-5">
-                    <a href="<?= $this->asset->insertFile($value[0], 'statics', $countryUri); ?>" download>
+                    <a href="<?= $this->asset->insertFile($value[0], 'statics', $customerUri); ?>" download>
                       <div class="files btn-link flex items-center">
                         <div class="file">
                           <img src="<?= $this->asset->insertFile(lang('CONF_ZIP_ICON'), 'images/icons');?>" />
@@ -582,7 +582,7 @@
                 <div class="row">
                   <?php foreach(lang('CONF_FILES_MANAGMENT') as $value): ?>
                   <div class="form-group col-auto mb-3 col-xl-5">
-                    <a href="<?= $this->asset->insertFile($value[0], 'statics', $countryUri); ?>" download>
+                    <a href="<?= $this->asset->insertFile($value[0], 'statics', $customerUri); ?>" download>
                       <div class="files btn-link flex items-center">
                         <div class="file">
                           <img src=<?= $this->asset->insertFile(lang('CONF_RAR_ICON'), 'images/icons');?> />
@@ -604,7 +604,7 @@
                   <div class="col-sm-12 col-lg-11 col-xl-12 py-2">
                     <div class="manual-video">
                       <video controls preload>
-                        <source src="<?= $this->asset->insertFile($value, 'statics', $countryUri);?>" type="video/mp4">
+                        <source src="<?= $this->asset->insertFile($value, 'statics', $customerUri);?>" type="video/mp4">
                       </video>
                     </div>
                   </div>

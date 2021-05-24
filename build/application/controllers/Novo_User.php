@@ -20,7 +20,7 @@ class Novo_User extends NOVO_Controller {
 		log_message('INFO', 'NOVO User: index Method Initialized');
 
 		if($this->session->has_userdata('logged')) {
-			$oldUrl = str_replace($this->countryUri.'/', $this->config->item('country').'/', base_url('dashboard'));
+			$oldUrl = str_replace($this->customerUri.'/', $this->config->item('country').'/', base_url('dashboard'));
 			$urlRedirect = lang('CONF_VIEW_SUFFIX') != '-core' ? $oldUrl : base_url('empresas');
 			redirect($urlRedirect, 'location');
 			exit();
@@ -33,7 +33,7 @@ class Novo_User extends NOVO_Controller {
 		$view = 'login';
 		$views = ['user/login', 'user/signin'];
 
-		if($this->skin !== 'novo') {
+		if($this->customerUri == 'bp') {
 			$views = ['user/signin'];
 		}
 
@@ -46,7 +46,7 @@ class Novo_User extends NOVO_Controller {
 			"user/login"
 		);
 
-		if($this->skin !== 'pichincha') {
+		if($this->customerUri !== 'bp') {
 			array_push(
 				$this->includeAssets->jsFiles,
 				"third_party/jquery.kwicks",
@@ -54,7 +54,7 @@ class Novo_User extends NOVO_Controller {
 			);
 		}
 
-		if($this->skin === 'pichincha' && ENVIRONMENT === 'production') {
+		if($this->customerUri === 'bp' && ENVIRONMENT === 'production') {
 			array_push(
 				$this->includeAssets->jsFiles,
 				"third_party/borders"
@@ -95,7 +95,7 @@ class Novo_User extends NOVO_Controller {
 			"user/signIn"
 		);
 
-		if($this->skin === 'pichincha' && ENVIRONMENT === 'production') {
+		if($this->customerUri === 'bp' && ENVIRONMENT === 'production') {
 			array_push(
 				$this->includeAssets->jsFiles,
 				"third_party/borders"
@@ -315,7 +315,7 @@ class Novo_User extends NOVO_Controller {
 
 		if(lang('CONF_VIEW_SUFFIX') != '') {
 			$this->includeAssets->cssFiles = [
-				"$this->folder"."$this->skin-browser"
+				"$this->customerUri/"."$this->customerUri-browser"
 			];
 		}
 

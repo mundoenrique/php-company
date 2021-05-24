@@ -53,7 +53,7 @@
 			<?php foreach($productList AS $pos => $products): ?>
 			<div data-jplist-item class="select-product flex mb-1 pl-3 pr-4 py-1 bg-white justify-between items-center">
 				<div class="flex mr-3 mx-1 items-center flex-auto">
-					<img class="img-product-list" src="<?= $this->asset->insertFile($products->programImg, 'images/programs', $countryUri); ?>" alt="<?= $products->programImg; ?>">
+					<img class="img-product-list" src="<?= $this->asset->insertFile($products->programImg, 'images/programs', $customerUri); ?>" alt="<?= $products->programImg; ?>">
 					<img class="filter-<?= strtolower($products->marca); ?> mx-2 img-brand-list" src="<?= $this->asset->insertFile($products->imgBrand, 'images/brands'); ?>" alt="<?= $products->imgBrand; ?>">
 					<div class="flex flex-column flex-auto">
 						<span class="product-description semibold primary"><?= $products->descripcion; ?></span>

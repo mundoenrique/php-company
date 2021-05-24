@@ -27,7 +27,7 @@ class Verify_Access {
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date October 31th, 2019
 	 */
-	public function validateForm($rule, $countryUri, $user, $class = FALSE)
+	public function validateForm($rule, $customerUri, $user, $class = FALSE)
 	{
 
 		log_message('INFO', 'NOVO Verify_Access: validateForm method initialized');
@@ -42,7 +42,7 @@ class Verify_Access {
 
 		if ($class) {
 			languageLoad('generic', $class);
-			$this->CI->config->set_item('language', 'spanish-'.$countryUri);
+			$this->CI->config->set_item('language', 'spanish-'.$customerUri);
 			languageLoad('specific', $class);
 		}
 
@@ -115,7 +115,7 @@ class Verify_Access {
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date October 31th, 2019
 	 */
-	public function accessAuthorization($module, $countryUri, $user = FALSE)
+	public function accessAuthorization($module, $customerUri, $user = FALSE)
 	{
 		log_message('INFO', 'NOVO Verify_Access: accessAuthorization method initialized');
 
@@ -159,7 +159,7 @@ class Verify_Access {
 					$auth = $this->CI->session->has_userdata('logged') || $this->CI->session->flashdata('changePassword') != NULL;
 				break;
 				case 'rates':
-					$auth = ($this->CI->session->has_userdata('logged') && $countryUri === 've');
+					$auth = ($this->CI->session->has_userdata('logged') && $customerUri === 've');
 				break;
 				case 'getProductDetail':
 					$auth = ($this->CI->session->has_userdata('logged') && $this->CI->session->has_userdata('enterpriseInf'));
@@ -350,16 +350,16 @@ class Verify_Access {
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date October 31th, 2019
 	 */
-	public function validateRedirect($redirectUrl, $countryUri)
+	public function validateRedirect($redirectUrl, $customerUri)
 	{
 		log_message('INFO', 'NOVO Verify_Access: validateRedirect method initialized');
 
 		$dataLink = isset($redirectUrl['btn1']['link']) ? $redirectUrl['btn1']['link'] : FALSE;
 
 		if(!is_array($redirectUrl) && strpos($redirectUrl, 'dashboard') !== FALSE) {
-			$redirectUrl = str_replace($countryUri.'/', $this->CI->config->item('country').'/', $redirectUrl);
+			$redirectUrl = str_replace($customerUri.'/', $this->CI->config->item('country').'/', $redirectUrl);
 		} elseif($dataLink && !is_array($dataLink) && strpos($dataLink, 'dashboard') !== FALSE) {
-			$dataLink = str_replace($countryUri.'/', $this->CI->config->item('country').'/', $dataLink);
+			$dataLink = str_replace($customerUri.'/', $this->CI->config->item('country').'/', $dataLink);
 			$redirectUrl['btn1']['link'] =  $dataLink;
 		}
 

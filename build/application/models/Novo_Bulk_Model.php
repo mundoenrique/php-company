@@ -73,7 +73,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 
 					$bulk['status'] = $bulktatus;
 					$fileName = explode('.', $response->lista[$pos]->nombreArchivo);
-					$bulk['fileName'] = substr_replace($fileName[0], '', 0, strlen($this->countryUri.'_'));
+					$bulk['fileName'] = substr_replace($fileName[0], '', 0, strlen($this->customerUri.'_'));
 					$bulk['ticketId'] = $response->lista[$pos]->idTicket;
 					$bulk['bulkId'] = $response->lista[$pos]->idLote;
 					$bulk['loadDate'] = $response->lista[$pos]->fechaCarga;
@@ -1028,7 +1028,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 									$bulkList['bulkTotalAmount'] = currencyFormat($bulk->montoNeto);
 									$bulkList['bulkId'] = $bulk->acidlote;
 									$bulkList['bulkObservation'] = '';
-									
+
 									if(isset($bulk->obs)  && $bulk->obs != '' && $bulk->cestatus == lang('CONF_STATUS_REJECTED')){
 										$bulkList['bulkObservation'] = $bulk->obs;
 										$serviceOrders['warningEnabled'] = TRUE;
