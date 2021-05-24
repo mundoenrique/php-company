@@ -357,9 +357,9 @@ class Verify_Access {
 		$dataLink = isset($redirectUrl['btn1']['link']) ? $redirectUrl['btn1']['link'] : FALSE;
 
 		if(!is_array($redirectUrl) && strpos($redirectUrl, 'dashboard') !== FALSE) {
-			$redirectUrl = str_replace($customerUri.'/', $this->CI->config->item('country').'/', $redirectUrl);
+			$redirectUrl = str_replace($customerUri.'/', $this->CI->config->item('customer').'/', $redirectUrl);
 		} elseif($dataLink && !is_array($dataLink) && strpos($dataLink, 'dashboard') !== FALSE) {
-			$dataLink = str_replace($customerUri.'/', $this->CI->config->item('country').'/', $dataLink);
+			$dataLink = str_replace($customerUri.'/', $this->CI->config->item('customer').'/', $dataLink);
 			$redirectUrl['btn1']['link'] =  $dataLink;
 		}
 

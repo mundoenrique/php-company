@@ -78,21 +78,21 @@ class Asset {
 	 * @info Método para insertar imagenes, json, etc
 	 * @author J. Enrique Peñaloza Piñero.
 	 */
-	public function insertFile($fileName, $folder = 'images', $country = FALSE)
+	public function insertFile($fileName, $folder = 'images', $customer = FALSE)
 	{
 		log_message('INFO', 'NOVO Asset: insertFile method initialized');
 
-		$country = $country ? $country.'/' : '';
-		$file = assetPath($folder.'/'.$country.$fileName);
+		$customer = $customer ? $customer.'/' : '';
+		$file = assetPath($folder.'/'.$customer.$fileName);
 
 		if (!file_exists($file)) {
 			$file = assetPath($folder.'/default'.'/'.$fileName);
-			$country = 'default/';
+			$customer = 'default/';
 		}
 
 		$version = '?V'.date('Ymd-U', filemtime($file));
 
-		return assetUrl($folder.'/'.$country.$fileName.$version);
+		return assetUrl($folder.'/'.$customer.$fileName.$version);
 	}
 	/**
 	 * @info Método para versionar archivos

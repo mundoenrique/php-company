@@ -21,18 +21,18 @@ if (!function_exists('assetUrl')) {
 }
 
 if (!function_exists('clientUrlValidate')) {
-	function clientUrlValidate($country) {
+	function clientUrlValidate($customer) {
 		$CI = &get_instance();
 		$accessUrl = explode(',', ACCESS_URL);
 		array_walk($accessUrl, 'arrayTrim');
 		reset($accessUrl);
 
-		if (!in_array($country, $accessUrl)) {
-			$country = current($accessUrl);
-			redirect(base_url($country.'/inicio'), 'location', 301);
+		if (!in_array($customer, $accessUrl)) {
+			$customer = current($accessUrl);
+			redirect(base_url($customer.'/inicio'), 'location', 301);
 		}
 
-		$CI->config->load('config-'.$country);
+		$CI->config->load('config-'.$customer);
 	}
 }
 
@@ -234,7 +234,7 @@ if (!function_exists('uriRedirect')) {
 if (! function_exists('currencyFormat')) {
 	function currencyFormat($amount){
 		$CI =& get_instance();
-		$client = $CI->session->userdata('countrySess');
+		$client = $CI->session->userdata('customerSess');
 		$decimalPoint = ['Ve', 'Co', 'Bdb'];
 		$amount = (float)$amount;
 

@@ -6,7 +6,7 @@ class NOVO_Model extends CI_Model {
 	public $accessLog;
 	public $token;
 	public $autoLogin;
-	public $country;
+	public $customer;
 	public $customerUri;
 	public $dataRequest;
 	public $isResponseRc;
@@ -22,7 +22,7 @@ class NOVO_Model extends CI_Model {
 		$this->dataAccessLog = new stdClass();
 		$this->dataRequest = new stdClass();
 		$this->response = new stdClass();
-		$this->country = $this->session->has_userdata('countrySess') ? $this->session->countrySess : $this->config->item('country');
+		$this->customer = $this->session->has_userdata('customerSess') ? $this->session->customerSess : $this->config->item('customer');
 		$this->customerUri = $this->session->customerUri;
 		$this->token = $this->session->token ?? '';
 		$this->autoLogin = $this->session->autoLogin ?? '';
@@ -42,7 +42,7 @@ class NOVO_Model extends CI_Model {
 		$this->userName = $this->userName ?: mb_strtoupper($this->dataAccessLog->userName);
 		$device = 'desktop';
 
-		$this->dataRequest->pais = $this->country;
+		$this->dataRequest->pais = $this->customer;
 		$this->dataRequest->token = $this->token;
 		$this->dataRequest->autoLogin = $this->autoLogin;
 
@@ -55,7 +55,7 @@ class NOVO_Model extends CI_Model {
 
 		$this->dataRequest->logAccesoObject = $this->accessLog;
 		$encryptData = $this->encrypt_connect->encode($this->dataRequest, $this->userName, $model);
-		$request = ['bean'=> $encryptData, 'pais'=> $this->country];
+		$request = ['bean'=> $encryptData, 'pais'=> $this->customer];
 		$response = $this->encrypt_connect->connectWs($request, $this->userName, $model);
 
 		if(isset($response->rc)) {

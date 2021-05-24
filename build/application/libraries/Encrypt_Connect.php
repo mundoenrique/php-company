@@ -68,8 +68,8 @@ class Encrypt_Connect {
 		}
 
 		if(!isset($response->pais)) {
-			log_message('INFO', 'NOVO ['.$userName.'] INSERTING COUNTRY TO THE RESPONSE');
-			$response->pais = $this->CI->config->item('country');
+			log_message('INFO', 'NOVO ['.$userName.'] INSERTING CUSTOMER TO THE RESPONSE');
+			$response->pais = $this->CI->config->item('customer');
 		}
 
 		if (isset($response->bean)) {
@@ -138,7 +138,7 @@ class Encrypt_Connect {
 			$wsUrl = $_SERVER['WS_URL' . $subFix];
 		}
 
-		log_message('DEBUG', 'NOVO ['.$userName.'] REQUEST BY COUNTRY: '.$request['pais'].', AND WEBSERVICE URL: '.$wsUrl);
+		log_message('DEBUG', 'NOVO ['.$userName.'] REQUEST BY CUSTOMER: '.$request['pais'].', AND WEBSERVICE URL: '.$wsUrl);
 
 		$requestSerV = json_encode($request, JSON_UNESCAPED_UNICODE);
 		$start = microtime(true);
@@ -217,7 +217,7 @@ class Encrypt_Connect {
 	{
 		log_message('INFO', 'NOVO Encrypt_Connect: moveFile Method Initialized');
 
-		$urlBulkService = BULK_FTP_URL.$this->CI->config->item('country').'/';
+		$urlBulkService = BULK_FTP_URL.$this->CI->config->item('customer').'/';
 		$userpassBulk =  BULK_FTP_USERNAME.':'.BULK_FTP_PASSWORD;
 		$respUpload = new stdClass;
 		$respUpload->rc = 0;

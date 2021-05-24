@@ -62,7 +62,7 @@ class NOVO_Controller extends CI_Controller {
 		$this->customerUri = $this->config->item('customer-uri');
 
 		if($this->session->has_userdata('userId')) {
-			if($this->session->countrySess !== $this->config->item('country')) {
+			if($this->session->customerSess !== $this->config->item('customer')) {
 				clientUrlValidate($this->session->customerUri);
 				$urlRedirect = str_replace($this->customerUri.'/', $this->session->customerUri.'/', base_url('cerrar-sesion/inicio'));
 				redirect($urlRedirect, 'location', 'GET');
@@ -143,7 +143,6 @@ class NOVO_Controller extends CI_Controller {
 			$this->render->favicon = lang('GEN_FAVICON');
 			$this->render->ext = lang('GEN_FAVICON_EXT');
 			$this->render->loader = lang('GEN_LOADER');
-			$this->render->countryConf = $this->config->item('country');
 			$this->render->customerUri = $this->customerUri;
 			$this->render->novoName = $this->security->get_csrf_token_name();
 			$this->render->novoCook = $this->security->get_csrf_hash();

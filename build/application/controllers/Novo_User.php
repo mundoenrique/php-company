@@ -20,7 +20,7 @@ class Novo_User extends NOVO_Controller {
 		log_message('INFO', 'NOVO User: index Method Initialized');
 
 		if($this->session->has_userdata('logged')) {
-			$oldUrl = str_replace($this->customerUri.'/', $this->config->item('country').'/', base_url('dashboard'));
+			$oldUrl = str_replace($this->customerUri.'/', $this->config->item('customer').'/', base_url('dashboard'));
 			$urlRedirect = lang('CONF_VIEW_SUFFIX') != '-core' ? $oldUrl : base_url('empresas');
 			redirect($urlRedirect, 'location');
 			exit();

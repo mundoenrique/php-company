@@ -93,12 +93,12 @@ class Novo_User_Model extends NOVO_Model {
 					'token' => $response->token,
 					'time' => $time,
 					'cl_addr' => $this->encrypt_connect->encode($this->input->ip_address(), $userName, 'REMOTE_ADDR'),
-					'countrySess' => $this->config->item('country'),
+					'customerSess' => $this->config->item('customer'),
 					'customerUri' => $this->config->item('customer-uri'),
 					'clientAgent' => $this->agent->agent_string(),
 					'autoLogin' => 'false',
 					'idUsuario' => $response->usuario->idUsuario,
-					'pais' => $this->config->item('country'),
+					'pais' => $this->config->item('customer'),
 					'nombreCompleto' => $fullName,
 					'logged_in' => TRUE
 				];
@@ -119,7 +119,7 @@ class Novo_User_Model extends NOVO_Model {
 					'token' => $response->token,
 					'time' => $time,
 					'cl_addr' => $this->encrypt_connect->encode($this->input->ip_address(), $userName, 'REMOTE_ADDR'),
-					'countrySess' => $this->config->item('country'),
+					'customerSess' => $this->config->item('customer'),
 					'customerUri' => $this->config->item('customer-uri'),
 					'clientAgent' => $this->agent->agent_string()
 				];
@@ -220,12 +220,12 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataAccessLog->modulo = 'Usuario';
 		$this->dataAccessLog->function = 'Ingreso al sistema';
 		$this->dataAccessLog->operation = 'Inicio de sesión único';
-		$this->dataAccessLog->userName = $this->country;
+		$this->dataAccessLog->userName = $this->customer;
 
 		$this->dataRequest->idOperation = lang('CONF_SINGLE_SIGN_ON');
 		$this->dataRequest->className = 'com.novo.objects.TOs.RequestTO';
 
-		switch ($this->country) {
+		switch ($this->customer) {
 			case 'Bdb':
 				$this->token = $dataRequest->sessionId;
 			break;
@@ -276,8 +276,8 @@ class Novo_User_Model extends NOVO_Model {
 					'lastSession' => $lastSession,
 					'token' => $response->token,
 					'time' => $time,
-					'cl_addr' => $this->encrypt_connect->encode($this->input->ip_address(), $this->country, 'REMOTE_ADDR'),
-					'countrySess' => $this->config->item('country'),
+					'cl_addr' => $this->encrypt_connect->encode($this->input->ip_address(), $this->customer, 'REMOTE_ADDR'),
+					'customerSess' => $this->config->item('customer'),
 					'customerUri' => $this->config->item('customer-uri'),
 					'clientAgent' => $this->agent->agent_string(),
 					'autoLogin' => 'true',
@@ -294,7 +294,7 @@ class Novo_User_Model extends NOVO_Model {
 					'userId' => $response->usuario->idUsuario,
 					'userName' => $response->usuario->userName,
 					'codigoGrupo' => $response->usuario->codigoGrupo,
-					'countrySess' => $this->config->item('country')
+					'customerSess' => $this->config->item('customer')
 				];
 				$this->session->set_userdata($userData);
 				$this->session->set_flashdata('unauthorized', lang('RESP_SESSION_DUPLICATE'));
@@ -638,7 +638,7 @@ class Novo_User_Model extends NOVO_Model {
 		$userName = $dataRequest->userName ?? ($dataRequest->user ?? '');
 
 		$result = $this->recaptcha->verifyResponse($dataRequest->token);
-		$logMessage = 'NOVO ['.$userName.'] RESPONSE: recaptcha País: "' .$this->config->item('country');
+		$logMessage = 'NOVO ['.$userName.'] RESPONSE: recaptcha País: "' .$this->config->item('customer');
 		$logMessage.= '", Score: "' . $result["score"] .'", Hostname: "'. $result["hostname"].'"';
 
 		log_message('DEBUG', $logMessage);
