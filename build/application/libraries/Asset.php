@@ -52,7 +52,7 @@ class Asset {
 			}
 
 			$file = $this->versionFiles($file, $fileName, '.css');
-			$file_url .= '<link rel="stylesheet" href="'.assetUrl('css/'.$file).'"/>'.PHP_EOL;
+			$file_url .= '<link rel="stylesheet" href="'.assetUrl('css/'.$file).'" media="all">'.PHP_EOL;
 		}
 
 		return $file_url;
