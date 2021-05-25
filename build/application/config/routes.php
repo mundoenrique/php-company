@@ -52,19 +52,37 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'Novo_User/login';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+/*
+|--------------------------------------------------------------------------
+| TEMPORAL ROUTES
+|--------------------------------------------------------------------------
+*/
+//User
+$route['(bp|co|pe|us|ve)/inicio'] = "Novo_User/login";
+$route['(bp|co|pe|us|ve)/recuperar-clave'] = "Novo_User/recoverPass";
+$route['(bp|co|pe|us|ve)/cambiar-clave'] = "Novo_User/changePassword";
+//Information
+$route['(bp|co|pe|us|ve)/inf-beneficios'] = "Novo_Information/benefits";
+$route['(bp|co|pe|us|ve)/inf-condiciones'] = "Novo_Information/terms";
+$route['(bp|co|pe|us|ve)/inf-tarifas'] = "Novo_Information/rates";
+/*
+|--------------------------------------------------------------------------
+| CURRENT ROUTES
+|--------------------------------------------------------------------------
+*/
 //Asynchronous
 $route['(:any)/async-call'] = "novo_CallModels";
 $route['(:any)/single'] = "novo_CallModels";
 //User
+$route['(:any)/inicio'] = function ($customer) {
+	header('Location: '.BASE_URL.$customer.'/sign-in', 302);
+	exit;
+};
+
 $route['(:any)/ingresar/(:any)']['GET'] = "Novo_User/singleSignOn/$2";
 $route['(:any)/ingresar']['POST'] = "Novo_User/singleSignOn";
-$route['(:any)/sugerencia'] = "Novo_User/suggestion";
-$route['bp/inicio'] = "Novo_User/login";
-$route['co/inicio'] = "Novo_User/login";
-$route['pe/inicio'] = "Novo_User/login";
-$route['us/inicio'] = "Novo_User/login";
-$route['ve/inicio'] = "Novo_User/login";
-$route['(:any)/inicio'] = "Novo_User/signIn";
+$route['(:any)/suggestion'] = "Novo_User/suggestion";
+$route['(:any)/sign-in'] = "Novo_User/signIn";
 $route['(:any)/cerrar-sesion/(:any)'] = "Novo_User/finishSession/$2";
 $route['(:any)/recuperar-clave'] = "Novo_User/recoverPass";
 $route['(:any)/recuperar-acceso'] = "Novo_User/recoverAccess";
@@ -126,7 +144,11 @@ $route['(:any)/empresa'] = "Novo_Settings/getEnterprise";
 $route['(:any)/Contact'] = "Novo_Settings/addContact";
 $route['(:any)/cambiar-email'] = "Novo_Settings/changeEmail";
 $route['(:any)/cambiar-telefonos'] = "Novo_Settings/changeTelephones";
-//old routes
+/*
+|--------------------------------------------------------------------------
+| OLD ROUTES
+|--------------------------------------------------------------------------
+*/
 $route['(:any)/login'] = "users/login/$1";
 $route['(:any)/validation'] = "users/validationAuth/$1";
 $route['(:any)/terminos'] = "users/terminosCondiciones/$1";
@@ -181,19 +203,6 @@ $route['(:any)/lotes/innominada/generarReporteTarjetasInnominadas'] = "lotes_inn
 $route['(:any)/lotes/innominada/listaTarjetasInnominadas'] = "lotes_innominada/listaTarjetasInnominadas/$1";
 $route['(:any)/lotes/innominada/eliminarLotesInnominadas'] = "lotes_innominada/eliminarLotesInnominadas/$1";
 $route['(:any)/lotes/innominada/detalle'] = "lotes_innominada/pantallaDetalleInnoLote/$1";
-///////////////////////////////////////////////////////
-//ROUTES PARA TEST
-/*
-$route['(:any)/testSSH'] = "tests/testSSH/$1";
-$route['(:any)/testGettext'] = "tests/testGettext/$1";
-$route['(:any)/testZip'] = "tests/testZip/$1";
-$route['(:any)/testExif'] = "tests/testExif/$1";
-$route['(:any)/testFtp'] = "tests/testFtp/$1";
-$route['(:any)/test/file'] = "tests/testFile/$1";
-$route['(:any)/test'] = "tests/test/$1";
-$route['(:any)/test/barra'] = "Tests/testBarra/$1";
-$route['(:any)/testaes'] = "tests/test/$1";*/
-//
 $route['(:any)/getListaEmpresasJSON'] = "dashboard/getListaEmpresasJSON/$1";
 $route['(:any)/getListaProductosJSON'] = "dashboard/getListaProductosJSON/$1";
 $route['(:any)/getLotesPorConfirmarJSON'] = "lotes/getLotesPorConfirmarJSON/$1";
