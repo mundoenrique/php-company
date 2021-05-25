@@ -1,9 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 $lang['GEN_SYSTEM_NAME']= 'Conexión Empresas Online';
-$lang['GEN_FAVICON'] = 'favicon-novo';
-$lang['GEN_FAVICON_EXT'] = 'ico';
-$lang['GEN_LOADER'] = 'loading-novo.gif';
 //MENU
 $lang['GEN_MENU_ENTERPRISE'] = 'Empresas';
 $lang['GEN_MENU_LOTS'] = 'Lotes';
@@ -106,9 +103,6 @@ $lang['GEN_BTN_ENABLE'] = 'Habilitar';
 $lang['GEN_BTN_UPDATE'] = 'Actualizar';
 $lang['GEN_BTN_TRANSFER'] = 'Transferir';
 //MODULES
-$lang['GEN_LOGIN'] = 'Login';
-$lang['GEN_ACTIVE_RECAPTCHA'] = ACTIVE_RECAPTCHA;
-$lang['GEN_KEY_RECAPTCHA'] = '6Lejt6MUAAAAANd7KndpsZ2mRSQXuYHncIxFJDYf';
 $lang['ENTERPRISE_FILTER_1']= 'A-C';
 $lang['ENTERPRISE_FILTER_2']= 'D-G';
 $lang['ENTERPRISE_FILTER_3']= 'H-K';
@@ -173,17 +167,9 @@ $lang['GEN_FOTTER_BENEFITS'] = 'Beneficios';
 $lang['GEN_FOTTER_TERMS'] = 'Condiciones';
 $lang['GEN_FOTTER_RATES'] = 'Tarifas';
 $lang['GEN_FOTTER_LOGOUT'] = 'Salir';
-$lang['GEN_FOTTER_IMAGE_L'] = 'img-default_white.svg';
-$lang['GEN_FOTTER_IMAGE_R'] = 'img-pci_compliance.svg';
 $lang['GEN_FOTTER_OWNERSHIP'] = 'Powered by NovoPayment, Inc.';
 $lang['GEN_FOTTER_OWNER_URL'] = 'https://www.novopayment.com';
 $lang['GEN_FOTTER_RIGHTS'] = 'NovoPayment Inc. All rights reserved.';
-$lang['GEN_FOTTER_NETWORKS_IMG'] = [
-	'facebook' => 'facebook.png',
-	'twitter' => 'twitter.png',
-	'youtube' => 'youtube.png',
-	'instagram' => 'instagram.png',
-];
 $lang['GEN_FOTTER_NETWORKS_LINK'] = [
 	'facebook' => $lang['GEN_NO_LINK'],
 	'twitter' => $lang['GEN_NO_LINK'],
@@ -306,14 +292,12 @@ $lang['GEN_PICKER_CHANGEYEAR'] = TRUE;
 $lang['GEN_PICKER_SHOWANIM'] = 'slideDown';
 $lang['GEN_PICKER_YEARSUFFIX'] = '';
 //GENERAL LANGUAGE
-$lang['GEN_LOGO_HEADER'] = 'img-logo.svg';
 $lang['GEN_CURRENCY'] = '$';
 $lang['GEN_DECIMAL'] = '.';
 $lang['GEN_THOUSANDS'] = ',';
 $lang['GEN_TRY_AGAIN']= 'Intenta de nuevo';
 $lang['GEN_WELCOME_TEXT'] = 'Bienvenido(a)';
 $lang['GEN_ENTERPRISE_LIST'] = 'empresas';
-$lang['GEN-LOGO-BIG'] = 'logo-signin.png';
 $lang['GEN_ALT_LOADER'] = 'Verificando...';
 $lang['GEN_USER'] = 'Usuario';
 $lang['GEN_PASSWORD'] = 'Contraseña';
@@ -390,7 +374,6 @@ $lang['GEN_ORDER_TITLE'] = 'Orden de servicio';
 $lang['GEN_BULK_NUMBER'] = 'Lote nro.';
 $lang['GEN_DOCUMENT_TITLE'] = 'Cédula nro.';
 $lang['GEN_CARD_NUMBER'] = 'Nro. de tarjeta';
-$lang['GEN_DETAIL_BARND_COLOR'] = '_card-white.svg';
 $lang['GEN_CHECK_BALANCE'] = 'Consultar saldo';
 $lang['GEN_CREDIT_TO_CARD'] = 'Abonar a tarjeta';
 $lang['GEN_DEBIT_TO_CARD'] = 'Cargo a tarjeta';

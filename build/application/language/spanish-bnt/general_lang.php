@@ -1,14 +1,10 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-$lang['GEN_FAVICON'] = 'favicon-bnt';
-$lang['GEN_FAVICON_EXT'] = 'ico';
 //MENU
 $lang['GEN_MENU_ENTERPRISE'] = 'Empresa';
 //SUBMENU
 $lang['GEN_MENU_SERV_CARD_INQUIRY'] = 'Entrega de tarjetas';//COPELO
 //GENERAL LANGUAGE
-$lang['GEN_LOGO_HEADER'] = 'img-logo.svg';
-$lang['GEN-LOGO-BIG'] = 'img-banorte.png';
 $lang['GEN_ALTERNATIVE_TEXT'] = 'Banorte';
 $lang['GEN_FISCAL_REGISTRY'] = 'Cuenta';
 $lang['RESP_FISCAL_REGISTRY_OF'] = '';
@@ -19,16 +15,12 @@ $lang['GEN_IMAGE_LOGIN'] = 'banorte-login.jpg';
 $lang['GEN_TABLE_DNI'] = 'CURP';
 //FOOTER
 $lang['GEN_FOTTER_RIGHTS'] = '© Todos los derechos reservados. Grupo Financiero Banorte - ';
-$lang['GEN_FOTTER_IMAGE_L'] = 'img-banorte_white.svg';
-$lang['GEN_FOTTER_IMAGE_R'] = 'img-pci_compliance.svg';
-$lang['GEN_FOTTER_MARK'] = 'img-ma.svg';
 $lang['GEN_FOTTER_NETWORKS_LINK'] = [
 	'facebook' => 'https://www.facebook.com/banorte',
 	'twitter' => 'https://www.twitter.com/Banorte_mx',
 	'youtube' => 'https://www.youtube.com/user/banortemovil',
 	'instagram' => 'https://www.instagram.com/banorte_mx',
 ];
-$lang['GEN_DETAIL_BARND_COLOR'] = '_card-blue.svg';
 //Datables
 $lang['GEN_ACCOUNT_CLOSING_BALANCE'] = 'Tarjetahabiente';
 $lang['GEN_BULK_DELETE_SO'] = '¿Estás seguro que deseas anular la orden de servicio? ';

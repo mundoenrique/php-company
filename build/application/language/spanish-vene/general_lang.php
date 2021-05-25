@@ -1,5 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+
+$lang['GEN_LOADER'] = 'loading-novo.gif';
 $lang['GEN_FISCAL_REGISTRY'] = 'RIF.';
 $lang['GEN_ENTERPRISE_LIST'] = 'dashboard';
 $lang['RESP_SUPPORT'] = 'Por favor envía un correo a %s %s';

@@ -90,9 +90,32 @@ if (!function_exists('languageLoad')) {
 		$CI = &get_instance();
 		$languagesFile = [];
 		$loadLanguages = FALSE;
-		$pathLang = APPPATH.'language'.DIRECTORY_SEPARATOR.$CI->config->item('language').DIRECTORY_SEPARATOR;
+		$configLanguage = $CI->config->item('language');
+		$pathLang = APPPATH.'language'.DIRECTORY_SEPARATOR.$configLanguage.DIRECTORY_SEPARATOR;
+		$customerUri = $call == 'specific' ? $CI->config->item('customer-uri') : '';
 		$class = lcfirst(str_replace('Novo_', '', $class));
+		$CI->config->set_item('language', 'global');
+
 		log_message('INFO', 'NOVO Language '.$call.', HELPER: Language Load Initialized for class: '.$class);
+
+		switch ($call) {
+			case 'generic':
+				$CI->lang->load(['config-core', 'images']);
+			break;
+			case 'specific':
+				$globalLan = APPPATH.'language'.DIRECTORY_SEPARATOR.'global'.DIRECTORY_SEPARATOR;
+
+				if(file_exists($globalLan.'config-core-'.$customerUri.'_lang.php')) {
+					$CI->lang->load('config-core-'.$customerUri,);
+				}
+
+				if(file_exists($globalLan.'images_'.$customerUri.'_lang.php')) {
+					$CI->lang->load('images_'.$customerUri);
+				}
+			break;
+		}
+
+		$CI->config->set_item('language', $configLanguage);
 
 		if ($call == 'specific') {
 			if (file_exists($pathLang.'general_lang.php')) {
@@ -105,11 +128,7 @@ if (!function_exists('languageLoad')) {
 				$loadLanguages = TRUE;
 			}
 
-			if (file_exists($pathLang.'config-core_lang.php')) {
-				array_push($languagesFile, 'config-core');
-				$loadLanguages = TRUE;
-			}
-
+			//eliminar despues de la certificación
 			if (file_exists($pathLang.'config_lang.php')) {
 				array_push($languagesFile, 'config');
 				$loadLanguages = TRUE;

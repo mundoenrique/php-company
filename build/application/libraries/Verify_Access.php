@@ -41,8 +41,9 @@ class Verify_Access {
 		}
 
 		if ($class) {
+			$this->CI->config->set_item('language', BASE_LANGUAGE.'-base');
 			languageLoad('generic', $class);
-			$this->CI->config->set_item('language', 'spanish-'.$customerUri);
+			$this->CI->config->set_item('language', BASE_LANGUAGE.'-'.$customerUri);
 			languageLoad('specific', $class);
 		}
 
