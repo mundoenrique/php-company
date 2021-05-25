@@ -56,7 +56,8 @@ class Novo_Business extends NOVO_Controller {
 		$requestArray = (array)$this->request;
 
 		if(empty($requestArray) && !$this->session->has_userdata('enterpriseInf')) {
-			redirect(base_url('empresas'), 'location');
+			redirect(base_url('empresas'), 'Location', 302);
+			exit;
 		}
 
 		$view = 'getProducts';
@@ -109,7 +110,8 @@ class Novo_Business extends NOVO_Controller {
 		$requestArray = (array) $this->request;
 
 		if(empty($requestArray) && !$this->session->has_userdata('productInf')) {
-			redirect(base_url('empresas'), 'location');
+			redirect(base_url('empresas'), 'Location', 302);
+			exit;
 		}
 
 		$view = 'getProductDetail';

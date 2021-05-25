@@ -76,7 +76,8 @@ class Novo_Inquiries extends NOVO_Controller {
 		log_message('INFO', 'NOVO Inquiries: bulkDetail Method Initialized');
 
 		if(!isset($this->request->bulkId) && !$this->session->flashdata('download'))  {
-			redirect(base_url('detalle-producto'), 'location');
+			redirect(base_url('detalle-producto'), 'Location', 302);
+			exit;
 		}
 
 		$responseAttr = new stdClass();

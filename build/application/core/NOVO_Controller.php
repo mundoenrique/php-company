@@ -65,8 +65,8 @@ class NOVO_Controller extends CI_Controller {
 			if($this->session->customerSess !== $this->config->item('customer')) {
 				clientUrlValidate($this->session->customerUri);
 				$urlRedirect = str_replace($this->customerUri.'/', $this->session->customerUri.'/', base_url('cerrar-sesion/inicio'));
-				redirect($urlRedirect, 'location', 'GET');
-				exit();
+				redirect($urlRedirect, 'Location', 302);
+				exit;
 			}
 		}
 
@@ -209,7 +209,8 @@ class NOVO_Controller extends CI_Controller {
 
 		} else {
 			$linkredirect = uriRedirect();
-			redirect(base_url($linkredirect), 'location', 'GET');
+			redirect(base_url($linkredirect), 'Location', 302);
+			exit;
 		}
 	}
 	/**
@@ -288,8 +289,8 @@ class NOVO_Controller extends CI_Controller {
 		$valid = $this->tool_browser->validBrowser($this->customerUri);
 
 		if (!$valid) {
-			redirect(base_url('sugerencia'),'location', 301);
-			exit();
+			redirect(base_url('suggestion'), 'location', 302);
+			exit;
 		}
 
 		return $valid;

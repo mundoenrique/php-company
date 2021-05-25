@@ -75,17 +75,20 @@ class Novo_Business_Model extends NOVO_Model {
 			case -430:
 			case -431:
 				$this->session->set_flashdata('unauthorized', lang('RESP_SINGLE_SIGNON'));
-				redirect(base_url('cerrar-sesion/fin'), 'localtion', 301);
+				redirect(base_url('cerrar-sesion/fin'), 'Localtion', 302);
+				exit;
 			break;
 			case -432:
 			case -433:
 				$this->session->set_flashdata('unauthorized', lang('RESP_NO_PERMISSIONS'));
-				redirect(base_url('cerrar-sesion/fin'), 'localtion', 301);
+				redirect(base_url('cerrar-sesion/fin'), 'Localtion', 302);
+				exit;
 			break;
 			case -434:
 			case -435:
 				$this->session->set_flashdata('unauthorized', lang('ENTERPRISE_NOT_ASSIGNED'));
-				redirect(base_url('cerrar-sesion/fin'), 'localtion', 301);
+				redirect(base_url('cerrar-sesion/fin'), 'Localtion', 302);
+				exit;
 			break;
 			default:
 				$this->response->data->text = lang('GEN_ENTERPRISE_NOT_OBTEIN');
@@ -245,17 +248,20 @@ class Novo_Business_Model extends NOVO_Model {
 			case -430:
 			case -431:
 				$this->session->set_flashdata('unauthorized', lang('RESP_SINGLE_SIGNON'));
-				redirect(base_url('cerrar-sesion/fin'), 'localtion', 301);
+				redirect(base_url('cerrar-sesion/fin'), 'Localtion', 302);
+				exit;
 			break;
 			case -432:
 			case -433:
 				$this->session->set_flashdata('unauthorized', lang('RESP_NO_PERMISSIONS'));
-				redirect(base_url('cerrar-sesion/fin'), 'localtion', 301);
+				redirect(base_url('cerrar-sesion/fin'), 'Localtion', 302);
+				exit;
 			break;
 			case -434:
 			case -435:
 				$this->session->set_flashdata('unauthorized', lang('ENTERPRISE_NOT_ASSIGNED'));
-				redirect(base_url('cerrar-sesion/fin'), 'localtion', 301);
+				redirect(base_url('cerrar-sesion/fin'), 'Localtion', 302);
+				exit;
 			break;
 		}
 

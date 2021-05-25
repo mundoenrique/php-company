@@ -29,7 +29,8 @@ if (!function_exists('clientUrlValidate')) {
 
 		if (!in_array($customer, $accessUrl)) {
 			$customer = current($accessUrl);
-			redirect(base_url($customer.'/inicio'), 'location', 301);
+			redirect(base_url($customer.'/inicio'), 'Location', 302);
+			exit;
 		}
 
 		$CI->config->load('config-'.$customer);

@@ -600,7 +600,8 @@ class Novo_Inquiries_Model extends NOVO_Model {
 				$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_ACCEPT');
 				$this->response->modalBtn['btn1']['action'] = $response->code != 0 ? $response->modalBtn['btn1']['action'] : 'close';
 				$this->session->set_flashdata('download', $this->response);
-				redirect(base_url('consulta-orden-de-servicio'), 'location', 301);
+				redirect(base_url('consulta-orden-de-servicio'), 'Location', 302);
+				exit;
 		}
 	}
 }

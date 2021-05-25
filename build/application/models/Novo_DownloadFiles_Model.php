@@ -67,7 +67,8 @@ class Novo_DownloadFiles_Model extends NOVO_Model {
 				$this->response->data->request = $dataRequest;
 				$this->responseFail_DownloadFiles($response);
 				$this->session->set_flashdata('download', $this->response);
-				redirect(base_url('detalle-innominadas'), 'location', 301);
+				redirect(base_url('detalle-innominadas'), 'Location', 302);
+				exit;
 		}
 
 
@@ -114,7 +115,8 @@ class Novo_DownloadFiles_Model extends NOVO_Model {
 				$this->response->data->request = $request;
 				$this->responseFail_DownloadFiles($dataRequest);
 				$this->session->set_flashdata('download', $this->response);
-				redirect(base_url('consulta-lote'), 'location', 301);
+				redirect(base_url('consulta-lote'), 'Location', 302);
+				exit;
 		}
 
 
@@ -161,7 +163,8 @@ class Novo_DownloadFiles_Model extends NOVO_Model {
 				$dataRequest->code = 0;
 				$this->responseFail_DownloadFiles($dataRequest);
 				$this->session->set_flashdata('download', $this->response);
-				redirect(base_url(lang('GEN_LINK_REP_STATUS_BULK')), 'location', 301);
+				redirect(base_url(lang('GEN_LINK_REP_STATUS_BULK')), 'Location', 302);
+				exit;
 		}
 
 
@@ -212,7 +215,8 @@ class Novo_DownloadFiles_Model extends NOVO_Model {
 				$dataRequest->code = 0;
 				$this->responseFail_DownloadFiles($dataRequest);
 				$this->session->set_flashdata('download', $this->response);
-				redirect(base_url(lang('GEN_LINK_REP_RECHARGE_MADE')), 'location', 301);
+				redirect(base_url(lang('GEN_LINK_REP_RECHARGE_MADE')), 'Location', 302);
+				exit;
 		}
 
 
@@ -251,7 +255,8 @@ class Novo_DownloadFiles_Model extends NOVO_Model {
 				$dataRequest->code = 0;
 				$this->responseFail_DownloadFiles($dataRequest);
 				$this->session->set_flashdata('download', $this->response);
-				redirect(base_url(lang('GEN_LINK_REP_ISSUED_CARDS')), 'location', 301);
+				redirect(base_url(lang('GEN_LINK_REP_ISSUED_CARDS')), 'Location', 302);
+				exit;
 		}
 
 		return $this->responseToTheView('callWs_UnnmamedAffiliate');

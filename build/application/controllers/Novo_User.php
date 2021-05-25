@@ -22,8 +22,8 @@ class Novo_User extends NOVO_Controller {
 		if($this->session->has_userdata('logged')) {
 			$oldUrl = str_replace($this->customerUri.'/', $this->config->item('customer').'/', base_url('dashboard'));
 			$urlRedirect = lang('CONF_VIEW_SUFFIX') != '-core' ? $oldUrl : base_url('empresas');
-			redirect($urlRedirect, 'location');
-			exit();
+			redirect($urlRedirect, 'Location', 302);
+			exit;
 		}
 
 		if ($this->session->has_userdata('userId')) {
@@ -76,8 +76,8 @@ class Novo_User extends NOVO_Controller {
 		log_message('INFO', 'NOVO User: signIn Method Initialized');
 
 		if($this->session->has_userdata('logged')) {
-			redirect(base_url('empresas'), 'location', 301);
-			exit();
+			redirect(base_url('empresas'), 'Location', 302);
+			exit;
 		}
 
 		if ($this->session->has_userdata('userId')) {
@@ -223,8 +223,8 @@ class Novo_User extends NOVO_Controller {
 		$view = 'changePassword';
 
 		if(!$this->session->flashdata('changePassword')) {
-			redirect(base_url('inicio'), 'location');
-			exit();
+			redirect(base_url(lang('CONF_LINK_SIGNIN')), 'Location', 302);
+			exit;
 		}
 
 		array_push(
@@ -291,7 +291,8 @@ class Novo_User extends NOVO_Controller {
 			$this->views = ['user/'.$view];
 			$this->loadView($view);
 		} else {
-			redirect(base_url(lang('GEN_LINK_LOGIN')), 'location');
+			redirect(base_url(lang('GEN_LINK_LOGIN')), 'Location', 302);
+			exit;
 		}
 
 	}
@@ -307,8 +308,8 @@ class Novo_User extends NOVO_Controller {
 		$view = 'suggestion';
 
 		if(!$this->session->flashdata('messageBrowser')) {
-			redirect(base_url('empresas'), 'location', 301);
-			exit();
+			redirect(base_url('empresas'), 'Location', 302);
+			exit;
 		}
 
 		$views = ['staticpages/content-browser'];

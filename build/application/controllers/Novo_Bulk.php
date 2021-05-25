@@ -65,7 +65,8 @@ class Novo_Bulk extends NOVO_Controller {
 		log_message('INFO', 'NOVO Bulk: getDetailBulk Method Initialized');
 
 		if(!isset($this->request->bulkView) || $this->request->bulkView != 'detail') {
-			redirect(base_url('detalle-producto'), 'location');
+			redirect(base_url('detalle-producto'), 'Location', 302);
+			exit;
 		}
 
 		$view = 'seeBulkDetail';
@@ -86,7 +87,8 @@ class Novo_Bulk extends NOVO_Controller {
 		log_message('INFO', 'NOVO Bulk: confirmBulk Method Initialized');
 
 		if(!isset($this->request->bulkView) || $this->request->bulkView != 'confirm') {
-			redirect(base_url('detalle-producto'), 'location');
+			redirect(base_url('detalle-producto'), 'Location', 302);
+			exit;
 		}
 
 		$view = 'confirmBulk';
@@ -115,7 +117,8 @@ class Novo_Bulk extends NOVO_Controller {
 		log_message('INFO', 'NOVO Bulk: authorizeBulkList Method Initialized');
 
 		/* if(!isset($this->request->bulkView) || $this->request->bulkView != 'confirm') {
-			redirect(base_url('detalle-producto'), 'location');
+			redirect(base_url('detalle-producto'), 'Location', 302);
+			exit;
 		} */
 
 		$view = 'authorizeBulkList';
@@ -157,7 +160,8 @@ class Novo_Bulk extends NOVO_Controller {
 		log_message('INFO', 'NOVO Bulk: calculateServiceOrder Method Initialized');
 
 		if(!$this->session->flashdata('serviceOrdersList')) {
-			redirect(base_url('lotes-autorizacion'), 'location');
+			redirect(base_url('lotes-autorizacion'), 'Location', 302);
+			exit;
 		}
 
 		$view = 'calculateServiceOrder';
