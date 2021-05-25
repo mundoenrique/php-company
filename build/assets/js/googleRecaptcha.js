@@ -15,7 +15,7 @@ function getRecaptchaToken(module, _function_) {
 						modalBtn = {
 							btn1: {
 								text: lang.GEN_BTN_ACCEPT,
-								link: 'inicio',
+								link: lang.CONF_LINK_SIGNIN,
 								action: 'redirect'
 							}
 						};

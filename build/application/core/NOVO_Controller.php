@@ -315,7 +315,7 @@ class NOVO_Controller extends CI_Controller {
 			$this->session->productInf->productName.' / '.$this->session->productInf->brand;
 		$this->render->settingsMenu = $userMenu;
 		$this->render->goOut = ($this->session->has_userdata('logged') || $this->session->flashdata('changePassword'))
-			? 'cerrar-sesion/inicio' : 'inicio';
+			? 'cerrar-sesion/inicio' : lang('CONF_LINK_SIGNIN');
 		$this->render->module = $module;
 		$this->render->viewPage = $this->views;
 		$this->asset->initialize($this->includeAssets);

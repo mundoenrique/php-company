@@ -103,7 +103,7 @@ class NOVO_Model extends CI_Model {
 				$linkredirect = 'empresas';
 			break;
 			default:
-				$linkredirect = 'inicio';
+				$linkredirect = lang('CONF_LINK_SIGNIN');
 
 				if ($this->session->has_userdata('logged')) {
 					$linkredirect = lang('GEN_ENTERPRISE_LIST');

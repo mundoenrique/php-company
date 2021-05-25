@@ -272,7 +272,7 @@ class Novo_User extends NOVO_Controller {
 
 		if($redirect == 'fin' || $thirdPartySession) {
 			$pos = array_search('sessionControl', $this->includeAssets->jsFiles);
-			$this->render->action = base_url('inicio');
+			$this->render->action = base_url(lang('CONF_LINK_SIGNIN'));
 			$this->render->showBtn = !$thirdPartySession;
 			$this->render->sessionEnd = novoLang(lang('GEN_EXPIRED_SESSION'), lang('GEN_SYSTEM_NAME'));
 
@@ -291,7 +291,7 @@ class Novo_User extends NOVO_Controller {
 			$this->views = ['user/'.$view];
 			$this->loadView($view);
 		} else {
-			redirect(base_url(lang('GEN_LINK_LOGIN')), 'Location', 302);
+			redirect(base_url(lang('CONF_LINK_SIGNIN')), 'Location', 302);
 			exit;
 		}
 
@@ -308,7 +308,7 @@ class Novo_User extends NOVO_Controller {
 		$view = 'suggestion';
 
 		if(!$this->session->flashdata('messageBrowser')) {
-			redirect(base_url('empresas'), 'Location', 302);
+			redirect(base_url(lang('CONF_LINK_SIGNIN')), 'Location', 302);
 			exit;
 		}
 
@@ -428,4 +428,9 @@ class Novo_User extends NOVO_Controller {
 		$this->views = ['user/'.$view];
 		$this->loadView($view);
 	}
+	/*
+	|--------------------------------------------------------------------------
+	| TEMPORAL METHODS
+	|--------------------------------------------------------------------------
+	*/
 }

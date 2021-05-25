@@ -341,7 +341,7 @@ class Novo_User_Model extends NOVO_Model {
 				$this->response->msg = novoLang(lang('RESP_TEMP_PASS'), [$this->dataRequest->userName, $maskMail]);
 				$this->response->icon = lang('CONF_ICON_SUCCESS');
 				$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_CONTINUE');
-				$this->response->modalBtn['btn1']['link'] = 'inicio';
+				$this->response->modalBtn['btn1']['link'] = lang('CONF_LINK_SIGNIN');
 				$this->response->modalBtn['btn1']['action'] = 'redirect';
 				break;
 			case -6:
@@ -482,7 +482,7 @@ class Novo_User_Model extends NOVO_Model {
 			case 0:
 				$this->response->msg = novoLang(lang('GEN_SEND_ACCESS'), [$maskMail]);
 				$this->response->icon = lang('CONF_ICON_SUCCESS');
-				$this->response->modalBtn['btn1']['link'] = 'inicio';
+				$this->response->modalBtn['btn1']['link'] = lang('CONF_LINK_SIGNIN');
 			break;
 			case -286:
 				$map = 1;
@@ -545,7 +545,7 @@ class Novo_User_Model extends NOVO_Model {
 				$this->response->msg = novoLang(lang('RESP_PASSWORD_CHANGED'), $goLogin);
 				$this->response->icon = lang('CONF_ICON_SUCCESS');
 				$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_CONTINUE');
-				$this->response->modalBtn['btn1']['link']  = 'inicio';
+				$this->response->modalBtn['btn1']['link']  = lang('CONF_LINK_SIGNIN');
 				$this->response->modalBtn['btn1']['action'] = $this->session->has_userdata('logged') ? 'destroy' :  'redirect';
 			break;
 			case -4:
@@ -650,7 +650,7 @@ class Novo_User_Model extends NOVO_Model {
 			$this->response->title = lang('GEN_SYSTEM_NAME');
 			$this->response->icon = lang('CONF_ICON_DANGER');
 			$this->response->msg = lang('RESP_RECAPTCHA_VALIDATION_FAILED');
-			$this->response->modalBtn['btn1']['link'] = 'inicio';
+			$this->response->modalBtn['btn1']['link'] = lang('CONF_LINK_SIGNIN');
 			$this->response->modalBtn['btn1']['action'] = 'redirect';
 		}
 

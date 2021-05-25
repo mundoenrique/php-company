@@ -159,7 +159,7 @@ $lang['GEN_LIST_PERMITS'] = 'Listado de permisos';
 $lang['GEN_NOTE'] = 'Nota:';
 $lang['GEN_CHECK_COLOR'] = 'Si el check se encuentra en color';
 //LINKS
-$lang['GEN_LINK_LOGIN'] = 'inicio';
+
 $lang['GEN_LINK_RECOVER_ACCESS'] = 'recuperar-clave';
 //FOOTER
 $lang['GEN_FOTTER_START'] = 'Inicio';
