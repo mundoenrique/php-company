@@ -38,7 +38,7 @@ function finishSession() {
 		$('#accept')
 			.html(loader)
 			.prop('disabled', true);
-		$(location).attr('href', baseURL+'cerrar-sesion/fin');
+		$(location).attr('href', baseURL + lang.CONF_LINK_SIGNOUT + lang.CONF_LINK_SIGNOUT_END);
 	}, callServer);
 
 	$('#system-info').on('click', '.keep-session', function() {

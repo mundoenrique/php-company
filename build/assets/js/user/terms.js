@@ -12,7 +12,7 @@ $(function() {
 			},
 			btn2: {
 				text: lang.GEN_BTN_CANCEL,
-				link: 'cerrar-sesion/inicio',
+				link: lang.CONF_LINK_SIGNOUT + lang.CONF_LINK_SIGNOUT_START,
 				action: 'redirect'
 			}
 		};

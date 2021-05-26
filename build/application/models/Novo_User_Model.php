@@ -298,10 +298,10 @@ class Novo_User_Model extends NOVO_Model {
 				];
 				$this->session->set_userdata($userData);
 				$this->session->set_flashdata('unauthorized', lang('RESP_SESSION_DUPLICATE'));
-				$this->response->data = base_url('cerrar-sesion/fin');
+				$this->response->data = base_url(lang('CONF_LINK_SIGNOUT').lang('CONF_LINK_SIGNOUT_END'));
 			break;
 			default:
-				$this->response->data = base_url('ingresar/fin');
+				$this->response->data = base_url('ingresar/'.lang('CONF_LINK_SIGNOUT_END'));
 			break;
 		}
 

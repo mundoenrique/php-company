@@ -184,5 +184,8 @@ $lang['CONF_TABLE_AFFILIATED_COLUMNS'] = 'OFF';
 $lang['CONF_SERVICEORDERS_ICON'] = 'OFF';
 //EXTERNAL LINKS
 $lang['CONF_LINK_SIGNIN'] = 'sign-in';
+$lang['CONF_LINK_SIGNOUT'] = 'sign-out/';
+$lang['CONF_LINK_SIGNOUT_START'] = 'start';
+$lang['CONF_LINK_SIGNOUT_END'] = 'end';
 //INTERNAL LINKS
 $lang['CONF_LINK_SUGGESTION'] = 'suggestion';

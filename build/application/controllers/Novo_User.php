@@ -79,7 +79,7 @@ class Novo_User extends NOVO_Controller {
 			$this->render->form = $this->request;
 		}
 
-		if($sessionId == 'fin') {
+		if($sessionId == lang('CONF_LINK_SIGNOUT_END')) {
 			$view = 'finish';
 			$this->render->activeHeader = TRUE;
 			$this->render->showBtn = FALSE;
@@ -215,7 +215,7 @@ class Novo_User extends NOVO_Controller {
 			$this->finishSession->callWs_FinishSession_User();
 		}
 
-		if($redirect == 'fin' || $thirdPartySession) {
+		if($redirect == lang('CONF_LINK_SIGNOUT_END') || $thirdPartySession) {
 			$pos = array_search('sessionControl', $this->includeAssets->jsFiles);
 			$this->render->action = base_url(lang('CONF_LINK_SIGNIN'));
 			$this->render->showBtn = !$thirdPartySession;
@@ -225,7 +225,7 @@ class Novo_User extends NOVO_Controller {
 				$this->render->sessionEnd = $this->session->flashdata('unauthorized');
 			}
 
-			if($redirect == 'inicio') {
+			if($redirect == lang('CONF_LINK_SIGNOUT_START')) {
 				$this->render->sessionEnd = novoLang(lang('GEN_FINISHED_SESSION'), lang('GEN_SYSTEM_NAME'));
 			}
 

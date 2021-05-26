@@ -64,7 +64,10 @@ class NOVO_Controller extends CI_Controller {
 		if($this->session->has_userdata('userId')) {
 			if($this->session->customerSess !== $this->config->item('customer')) {
 				clientUrlValidate($this->session->customerUri);
-				$urlRedirect = str_replace($this->customerUri.'/', $this->session->customerUri.'/', base_url('cerrar-sesion/inicio'));
+				$urlRedirect = str_replace(
+					$this->customerUri.'/', $this->session->customerUri.'/',
+					base_url(lang('CONF_LINK_SIGNOUT').lang('CONF_LINK_SIGNOUT_START'))
+				);
 				redirect($urlRedirect, 'Location', 302);
 				exit;
 			}
@@ -315,7 +318,7 @@ class NOVO_Controller extends CI_Controller {
 			$this->session->productInf->productName.' / '.$this->session->productInf->brand;
 		$this->render->settingsMenu = $userMenu;
 		$this->render->goOut = ($this->session->has_userdata('logged') || $this->session->flashdata('changePassword'))
-			? 'cerrar-sesion/inicio' : lang('CONF_LINK_SIGNIN');
+			? lang('CONF_LINK_SIGNOUT').lang('CONF_LINK_SIGNOUT_START') : lang('CONF_LINK_SIGNIN');
 		$this->render->module = $module;
 		$this->render->viewPage = $this->views;
 		$this->asset->initialize($this->includeAssets);
