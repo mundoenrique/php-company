@@ -68,7 +68,7 @@ class Verify_Access {
 					$this->CI->session->set_userdata('screenSize', $value);
 				break;
 				default:
-				$this->requestServ->$key = $value;
+					$this->requestServ->$key = $value;
 			}
 		}
 
@@ -122,7 +122,7 @@ class Verify_Access {
 
 		$auth = FALSE;
 		$user = $user ?? $this->user;
-		$freeAccess = ['signIn', 'login', 'suggestion', 'finishSession', 'terms', 'singleSignOn'];
+		$freeAccess = ['signIn', 'login', 'suggestion', 'browsers', 'finishSession', 'terms', 'singleSignOn'];
 		$auth = in_array($module, $freeAccess);
 
 		if(!$auth) {
@@ -133,6 +133,7 @@ class Verify_Access {
 
 			switch($module) {
 				case 'recoverPass':
+				case 'passwordRecovery':
 					$auth = lang('CONF_RECOV_PASS') == 'ON';
 				break;
 				case 'recoverAccess':
@@ -157,6 +158,7 @@ class Verify_Access {
 					$auth = ($this->CI->session->has_userdata('logged'));
 				break;
 				case 'changePassword':
+				case 'changePass':
 					$auth = $this->CI->session->has_userdata('logged') || $this->CI->session->flashdata('changePassword') != NULL;
 				break;
 				case 'rates':

@@ -26,6 +26,8 @@ $lang['CONF_VALID_INACTIVE_USER'] = 'login-inactive';
 $lang['CONF_VALID_POSITION'] = 'left';
 //MODAL STYLES
 $lang['CONF_MODAL_WIDTH'] = 310;
-//MODAL OTP
-$lang['MODAL_OTP'] = 'ON';
 $lang['CONF_RESTAR_USERNAME'] = 'ON';
+//EXTERNAL LINKS
+$lang['CONF_LINK_SIGNIN'] = 'inicio';
+//INTERNAL LINKS
+$lang['CONF_LINK_SUGGESTION'] = 'browsers';

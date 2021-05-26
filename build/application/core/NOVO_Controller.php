@@ -73,7 +73,7 @@ class NOVO_Controller extends CI_Controller {
 		$this->form_validation->set_error_delimiters('', '---');
 		$this->config->set_item('language', 'global');
 
-		if ($this->rule !== 'suggestion') {
+		if ($this->rule !== lang('CONF_LINK_SUGGESTION')) {
 			$this->ValidateBrowser = $this->checkBrowser();
 		}
 
@@ -289,7 +289,7 @@ class NOVO_Controller extends CI_Controller {
 		$valid = $this->tool_browser->validBrowser($this->customerUri);
 
 		if (!$valid) {
-			redirect(base_url('suggestion'), 'location', 302);
+			redirect(base_url(lang('CONF_LINK_SUGGESTION')), 'location', 302);
 			exit;
 		}
 

@@ -58,9 +58,10 @@ $route['translate_uri_dashes'] = FALSE;
 |--------------------------------------------------------------------------
 */
 //User
+$route['(bp|co|pe|us|ve)/browsers'] = "Novo_User/browsers";
 $route['(bp|co|pe|us|ve)/inicio'] = "Novo_User/login";
-$route['(bp|co|pe|us|ve)/recuperar-clave'] = "Novo_User/recoverPass";
-$route['(bp|co|pe|us|ve)/cambiar-clave'] = "Novo_User/changePassword";
+$route['(bp|co|pe|us|ve)/recuperar-clave'] = "Novo_User/passwordRecovery";
+$route['(bp|co|pe|us|ve)/cambiar-clave'] = "Novo_User/changePass";
 //Information
 $route['(bp|co|pe|us|ve)/inf-beneficios'] = "Novo_Information/benefits";
 $route['(bp|co|pe|us|ve)/inf-condiciones'] = "Novo_Information/terms";

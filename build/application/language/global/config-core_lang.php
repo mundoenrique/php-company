@@ -9,7 +9,8 @@ $lang['CONF_VALIDATE_CAPTCHA'] = [
 	'signIn',
 	'login',
 	'recoverAccess',
-	'recoverPass'
+	'recoverPass',
+	'passwordRecovery'
 ];
 //SUPPORT IE 11
 $lang['CONF_SUPPORT_IE'] = 'OFF';
@@ -143,8 +144,6 @@ $lang['CONF_APPLICATIONS'] = 'Aplicaciones';
 $lang['CONF_FILE'] = 'Archivos de gestión Conexión Empresas Online';
 $lang['CONF_CEO_USER_MANUAL'] = 'Manual de Usuario Conexión Empresas Online';
 $lang['CONF_GL_USER_MANUAL'] = 'Manual de Usuario Gestor de Lotes';
-//MODAL OTP
-$lang['MODAL_OTP'] = 'OFF';
 $lang['CONF_RESTAR_USERNAME'] = 'OFF';
 //DATEPICKER
 $lang['CONF_MAX_CONSULT_MONTH'] = 3;
@@ -185,3 +184,5 @@ $lang['CONF_TABLE_AFFILIATED_COLUMNS'] = 'OFF';
 $lang['CONF_SERVICEORDERS_ICON'] = 'OFF';
 //EXTERNAL LINKS
 $lang['CONF_LINK_SIGNIN'] = 'sign-in';
+//INTERNAL LINKS
+$lang['CONF_LINK_SUGGESTION'] = 'suggestion';

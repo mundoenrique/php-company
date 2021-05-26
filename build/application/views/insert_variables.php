@@ -5,8 +5,6 @@
 	var assetUrl = '<?= assetUrl(); ?>';
 	var customerUri = '<?= $customerUri; ?>';
 	var oldCustomerUri = '<?= $this->config->item('customer'); ?>';
-	var client = '<?= $this->config->item('client'); ?>';
-	var newViews = '<?= lang('CONF_VIEW_SUFFIX'); ?>';
 	var code = <?= $code ?? 0; ?>;
 	var title = '<?= $title ?? ' '; ?>';
 	var msg = '<?= $msg ?? ' '; ?>';
