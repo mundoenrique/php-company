@@ -7,7 +7,7 @@ $(function() {
 		modalBtn = {
 			btn1: {
 				text: lang.GEN_BTN_ACCEPT,
-				link: 'cambiar-clave',
+				link: lang.CONF_LINK_CHANGE_PASS,
 				action: 'redirect'
 			},
 			btn2: {

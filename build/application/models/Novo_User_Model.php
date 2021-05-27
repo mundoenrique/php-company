@@ -129,7 +129,7 @@ class Novo_User_Model extends NOVO_Model {
 				$this->session->set_flashdata('userType', $response->usuario->ctipo);
 
 				if($this->isResponseRc === -185) {
-					$this->response->data = base_url('cambiar-clave');
+					$this->response->data = base_url(lang('CONF_LINK_CHANGE_PASS'));
 					$this->session->set_flashdata('changePassword', 'expiredPass');
 				}
 			break;
