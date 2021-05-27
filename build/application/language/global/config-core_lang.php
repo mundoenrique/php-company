@@ -47,7 +47,7 @@ $lang['CONF_SINGLE_SIGN_ON'] = 'userByToken';
 $lang['CONF_SIGIN_RECOVER_PASS'] = 'ON';
 $lang['CONF_SIGNIN_IMG'] = 'OFF';
 $lang['CONF_SIGNIN_WIDGET_CONTACT'] = 'ON';
-$lang['CONFIG_PASS_EXPIRED'] = 'ON';
+$lang['CONF_PASS_EXPIRED'] = 'ON';
 //RECOVER ACCESS
 $lang['CONF_RECOV_PASS'] = 'ON';
 $lang['CONF_RECOV_ACCESS'] = 'OFF';
@@ -190,5 +190,6 @@ $lang['CONF_LINK_SIGNOUT'] = 'sign-out/';
 $lang['CONF_LINK_SIGNOUT_START'] = 'start';
 $lang['CONF_LINK_SIGNOUT_END'] = 'end';
 $lang['CONF_LINK_RECOVER_ACCESS'] = 'recover-password';
+$lang['CONF_LINK_CHANGE_PASS'] = 'change-password';
 //INTERNAL LINKS
 $lang['CONF_LINK_SUGGESTION'] = 'suggestion';
