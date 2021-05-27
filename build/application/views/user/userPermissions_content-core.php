@@ -20,7 +20,7 @@
 	<div class="w-100 hide-out hide">
 		<div class="flex flex-auto flex-column <?= $widget ? '' : 'max-width-6'; ?>">
 			<div class="search-criteria-order flex pb-3 flex-column w-100">
-				<span class="line-text mb-2 h4 semibold text-primary"><?= lang('GEN_USER_DATA') ?></span>
+				<span class="line-text mb-2 h4 semibold primary"><?= lang('GEN_USER_DATA') ?></span>
 				<div class="flex my-2">
 					<form id="user-data" action="" method="post" class="w-100">
 						<div class="row mb-2 px-5">
