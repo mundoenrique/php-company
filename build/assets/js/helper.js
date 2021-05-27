@@ -106,7 +106,7 @@ function callNovoCore(verb, who, where, request, _response_) {
 		where: where,
 		data: request
 	});
-	var codeResp = parseInt(lang.GEN_DEFAULT_CODE);
+	var codeResp = parseInt(lang.CONF_DEFAULT_CODE);
 	var formData = new FormData();
 	dataRequest = cryptoPass(dataRequest, true);
 

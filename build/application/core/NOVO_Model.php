@@ -89,7 +89,7 @@ class NOVO_Model extends CI_Model {
 		log_message('INFO', 'NOVO Model: makeAnswer Method Initialized');
 
 		$this->isResponseRc = (int) $responseModel->rc;
-		$this->response->code = lang('GEN_DEFAULT_CODE');
+		$this->response->code = lang('CONF_DEFAULT_CODE');
 		$this->response->icon = lang('CONF_ICON_WARNING');
 		$this->response->title = lang('GEN_SYSTEM_NAME');
 		$this->response->data = new stdClass();

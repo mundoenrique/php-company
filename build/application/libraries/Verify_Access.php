@@ -89,7 +89,7 @@ class Verify_Access {
 		$singleSession = base64_decode($this->CI->input->cookie($this->CI->config->item('cookie_prefix').'singleSession'));
 		$linkredirect = $singleSession == 'SignThird' ? 'ingresar/fin' : lang('CONF_LINK_SIGNIN');
 		$this->responseDefect = new stdClass();
-		$this->responseDefect->code = lang('GEN_DEFAULT_CODE');
+		$this->responseDefect->code = lang('CONF_DEFAULT_CODE');
 		$this->responseDefect->title = lang('GEN_SYSTEM_NAME');
 		$this->responseDefect->msg = lang('RESP_VALIDATION_INPUT');
 		$this->responseDefect->icon = lang('CONF_ICON_WARNING');
