@@ -30,3 +30,5 @@ $lang['CONF_CARD_NUMBER_COLUMN']= 'ON';
 //USER ACTIVITY
 $lang['CONF_USER_ACTIVITY'] = 'OFF';
 $lang['CONF_USERS_ACTIVITY'] = 'ON';
+//EXTERNAL LINKS
+$lang['CONF_LINK_RECOVER_ACCESS'] = 'recover-access';

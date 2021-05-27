@@ -189,5 +189,6 @@ $lang['CONF_LINK_SIGNIN'] = 'sign-in';
 $lang['CONF_LINK_SIGNOUT'] = 'sign-out/';
 $lang['CONF_LINK_SIGNOUT_START'] = 'start';
 $lang['CONF_LINK_SIGNOUT_END'] = 'end';
+$lang['CONF_LINK_RECOVER_ACCESS'] = 'recover-password';
 //INTERNAL LINKS
 $lang['CONF_LINK_SUGGESTION'] = 'suggestion';
