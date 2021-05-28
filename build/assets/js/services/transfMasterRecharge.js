@@ -79,7 +79,7 @@ function getTokenRecharge() {
 				inputModal +=  'onsubmit="return false">';
 				inputModal += 		'<p class="pt-0 p-0">' + response.msg +'</p>';
 				inputModal += 		'<div class="row">';
-				inputModal +=			'<div class="form-group col-12">';
+				inputModal +=			'<div class="form-group col-11">';
 				inputModal +=				'<input id="otpCode" class="form-control" type="text" name="otpCode" autocomplete="off" ';
 				inputModal +=       ' maxlength="10">';
 				inputModal +=				'<div class="help-block"></div>';

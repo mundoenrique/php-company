@@ -1266,11 +1266,18 @@ class Novo_Services_Model extends NOVO_Model {
 			case 0:
 				$this->response->code = 0;
 				$this->response->title = lang('GEN_MENU_SERV_MASTER_ACCOUNT');
+				$this->response->icon = lang('CONF_ICON_INFO');
 				$this->response->msg = lang('GEN_OTP');
 				$this->response->modalBtn['btn1']['action'] = 'none';
 				$this->response->modalBtn['btn2']['text'] = lang('GEN_BTN_CANCEL');
 				$this->response->modalBtn['btn2']['action'] = 'destroy';
-				$this->session->set_flashdata('authToken', $response->bean);
+			  $this->session->set_flashdata('authToken', $response->bean);
+			break;
+			default:
+				$this->response->title = lang('GEN_MENU_SERV_MASTER_ACCOUNT');
+				$this->response->icon = lang('CONF_ICON_WARNING');
+				$this->response->msg = lang('RESP_EMAIL_NO_SENT');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 		}
 		return $this->responseToTheView('CallWs_RechargeAuthorization');
