@@ -1217,8 +1217,7 @@ class Novo_Services_Model extends NOVO_Model {
 		$this->dataRequest->idServicio = '1260';
 
 		$response = $this->sendToService('CallWs_AuthorizationKey');
-		/* $response = json_decode('{"rc":0,"msg":"Proceso OK","bean":{"tranClave":"nuR8Q+ntN8ECmrW7+Oe4m7fPuWCeo5QXlu8QtXSt7EL9dEmSAdzVYvIjIlv1pC9WhAZSLHe8yjUMIcGoswH4bRt78FJPX6MU5nHxHa4o+hi3csUGqmI5T3j8ZxbxdmpQ0pHewHVRgLTqIqd6v8Mmqg\\u003d\\u003d","tranExitoso":true,"tranDescripcionError":""}}');
-		$this->isResponseRc = 0; */
+
 		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
@@ -1243,5 +1242,37 @@ class Novo_Services_Model extends NOVO_Model {
 		}
 
 		return $this->responseToTheView('CallWs_AuthorizationKey');
+	}
+
+	/**
+	 * @info Método para solictar OTP para abono en cuenta maestra
+	 * @author Luis Molina
+	 * @date May 27th, 2021
+	 */
+	public function CallWs_RechargeAuthorization_Services($dataRequest)
+	{
+		log_message('INFO', 'NOVO Services Model: RechargeAuthorization Method Initialized');
+
+		$this->dataAccessLog->modulo = 'Pagos';
+		$this->dataAccessLog->function = 'Doble Autenticacion';
+		$this->dataAccessLog->operation = 'Generar Token';
+
+		$this->dataRequest->idOperation = 'dobleAutenticacion';
+		$this->dataRequest->className = 'com.novo.objects.TO.UsuarioTO';
+
+		$response = $this->sendToService('CallWs_RechargeAuthorization');
+
+		switch ($this->isResponseRc) {
+			case 0:
+				$this->response->code = 0;
+				$this->response->title = lang('GEN_MENU_SERV_MASTER_ACCOUNT');
+				$this->response->msg = lang('GEN_OTP');
+				$this->response->modalBtn['btn1']['action'] = 'none';
+				$this->response->modalBtn['btn2']['text'] = lang('GEN_BTN_CANCEL');
+				$this->response->modalBtn['btn2']['action'] = 'destroy';
+				$this->session->set_flashdata('authToken', $response->bean);
+			break;
+		}
+		return $this->responseToTheView('CallWs_RechargeAuthorization');
 	}
 }

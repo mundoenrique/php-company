@@ -218,6 +218,7 @@ class Verify_Access {
 					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TRAMAE'));
 				break;
 				case 'masterAccountTransfer':
+				case 'rechargeAuthorization':
 					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TRAMAE', 'TRAPGO'));
 				break;
 				case 'cardsInquiry':

@@ -725,6 +725,12 @@ $config = [
 			'rules' => 'trim'
 		]
 	],
+	'rechargeAuthorization' => [
+		[
+			'field' => 'passwordTranfer',
+			'rules' => 'trim'
+		]
+	],
 	'getReport' => [
 		[
 			'field' => 'operation',
