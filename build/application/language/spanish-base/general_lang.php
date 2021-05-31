@@ -56,7 +56,6 @@ $lang['GEN_MENU_LNK_CARDHOLDERS'] = 'tarjetahabientes';//TEBTHA
 $lang['GEN_LINK_REP_CARDHOLDERS'] = 'tarjetahabientes';//TEBTHA
 $lang['GEN_LINK_REP_STATUSACCOUNT'] = 'estado-de-cuenta';//TEBTHA
 $lang['GEN_MENU_USERS_MANAGEMENT'] = 'Administración';//USEREM
-$lang['GEN_LINK_USERS_MANAGEMENT'] = 'administracion-usuarios';//USEREM
 $lang['GEN_MENU_UNNAMED_REQUEST'] = 'Solicitud de innominadas';
 $lang['GEN_MENU_UNNAMED_AFFIL'] = 'Afiliación de innominadas';
 $lang['GEN_MENU_LOT_REPROCESS'] = 'Reproceso de datos';//TEBGUR

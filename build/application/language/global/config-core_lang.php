@@ -191,5 +191,7 @@ $lang['CONF_LINK_SIGNOUT_START'] = 'start';
 $lang['CONF_LINK_SIGNOUT_END'] = 'end';
 $lang['CONF_LINK_RECOVER_ACCESS'] = 'recover-password';
 $lang['CONF_LINK_CHANGE_PASS'] = 'change-password';
+$lang['CONF_LINK_USERS_MANAGEMENT'] = 'users-management';//permiso asociado USEREM
+$lang['CONF_LINK_USERS_PERMISSIONS'] = 'user-permissions';//permiso asociado CREUSU y ASGPER
 //INTERNAL LINKS
 $lang['CONF_LINK_SUGGESTION'] = 'suggestion';

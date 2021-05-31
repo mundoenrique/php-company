@@ -827,7 +827,7 @@ class Novo_User_Model extends NOVO_Model {
 				if ($this->userName == $user) {
 					$this->response->modalBtn['btn1']['action'] = 'redirect';
 				} else {
-					$this->response->modalBtn['btn1']['link'] = 'permisos-usuario';
+					$this->response->modalBtn['btn1']['link'] = lang('CONF_LINK_USERS_PERMISSIONS');
 				}
 				break;
 		}

@@ -88,9 +88,8 @@ $route['(:any)/sign-out/(:any)'] = "Novo_User/finishSession/$2";
 $route['(:any)/recover-password'] = "Novo_User/recoverPass";
 $route['(:any)/recover-access'] = "Novo_User/recoverAccess";
 $route['(:any)/change-password'] = "Novo_User/changePassword";
-$route['(:any)/administracion-usuarios'] = "Novo_User/usersManagement";
-$route['(:any)/permisos-usuario'] = "Novo_User/userPermissions";
-$route['(:any)/obtener-usuario'] = "Novo_Settings/getUser";
+$route['(:any)/users-management'] = "Novo_User/usersManagement";
+$route['(:any)/user-permissions'] = "Novo_User/userPermissions";
 //Information
 $route['(:any)/inf-beneficios'] = "Novo_Information/benefits";
 $route['(:any)/inf-condiciones'] = "Novo_Information/terms";
