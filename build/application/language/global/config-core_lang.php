@@ -33,6 +33,8 @@ $lang['CONF_VALID_ELEMENT'] = 'div';
 $lang['CONF_VALID_INVALID_USER'] = 'invalid-user';
 $lang['CONF_VALID_INACTIVE_USER'] = 'inactive-user';
 $lang['CONF_VALID_POSITION'] = 'left';
+//NAVBAR STYLES
+$lang['CONF_HEADER_BORDER'] = 'OFF';
 //MODAL STYLES
 $lang['CONF_MODAL_WIDTH'] = 370;
 //ICONS MODALS

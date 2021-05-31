@@ -308,6 +308,7 @@ $lang['GEN_DOCUMENT_TYPE'] = 'Tipo de documento';
 $lang['GEN_DOCUMENT_ID'] = 'Documento de identidad';
 $lang['GEN_USER_TITLE'] = 'Obtener usuario';
 $lang['GEN_ALTERNATIVE_TEXT'] = 'Novopayment';
+$lang['GEN_TITLE_NAVBAR'] = 'Empresas';
 $lang['GEN_PRODUCTS'] = 'Productos';
 $lang['GEN_PRODUCT'] = 'Producto';
 $lang['GEN_ENTERPRISES'] = 'Empresas';
