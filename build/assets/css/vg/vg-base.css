@@ -133,8 +133,8 @@ label {
 
 /* Input Group */
 
-.pwd-action .icon-view{
-	color: var(--color-sixth);
+.pwd-action .icon-view, .icon-book, .icon-notification, .icon-color {
+	color: var(--color-primary);
 }
 
 /* Search input */
@@ -632,6 +632,10 @@ table.dataTable tbody > tr.selected, table.dataTable tbody > tr > .selected {
 .line-text {
   box-shadow: 0 2px 0 0 rgba(210, 211, 212,.35), inset 0 -2px 1px -1px rgba(210, 211, 212,.3);
   padding-bottom: 4px;
+}
+
+.vertical-line {
+	border-left: var(--border-width) solid rgba(255,255,255,1);
 }
 
 /* Interaction Cues

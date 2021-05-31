@@ -351,7 +351,7 @@ function downLoadfiles (data) {
 		$('#download-file').attr('download', data.name)
 		document.getElementById('download-file').click()
 		window.URL.revokeObjectURL(url);
-		$('#download-file').attr('href', lang.GEN_NO_LINK)
+		$('#download-file').attr('href', lang.CONF_NO_LINK)
 		$('#download-file').attr('download', '')
 	}
 	$('.cover-spin').hide();

@@ -9,7 +9,7 @@
 		<?php if(lang('CONF_FOOTER_NETWORKS') == 'ON'): ?>
 		<div class="order-first networks">
 			<?php foreach(lang('GEN_FOTTER_NETWORKS_IMG') AS $key => $value): ?>
-			<a href="<?= lang('GEN_FOTTER_NETWORKS_LINK')[$key]; ?>" target="_blank">
+			<a href="<?= lang('CONF_FOTTER_NETWORKS_LINK')[$key]; ?>" target="_blank">
 				<img src="<?= $this->asset->insertFile($value, 'images/networks'); ?>"
 					alt="<?= $key; ?>">
 				</a>

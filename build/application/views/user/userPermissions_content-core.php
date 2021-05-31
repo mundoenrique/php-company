@@ -42,7 +42,9 @@
 							</div>
 						</div>
 						<div id="enableSectionBtn" class="flex row mb-2 mx-2 items-center justify-end ">
-							<a class="btn btn-link btn-small big-modal" href="<?= base_url('administracion-usuarios') ?>"><?= lang('GEN_BTN_CANCEL'); ?></a>
+							<a class="btn btn-link btn-small big-modal" href="<?= base_url(lang('CONF_LINK_USERS_MANAGEMENT')) ?>">
+								<?= lang('GEN_BTN_CANCEL'); ?>
+							</a>
 							<button id="enableUserBtn" class="btn btn-small btn-loading btn-primary" type="submit">
 								<?= lang('GEN_BTN_ENABLE'); ?>
 							</button>
@@ -100,7 +102,9 @@
 								</div>
 							<?php endforeach; ?>
 							<div class="flex row mb-2 mx-2 items-center justify-end">
-								<a class="btn btn-link btn-small big-modal" href="<?= base_url('administracion-usuarios') ?>"><?= lang('GEN_BTN_CANCEL'); ?></a>
+								<a class="btn btn-link btn-small big-modal" href="<?= base_url(lang('CONF_LINK_USERS_MANAGEMENT')) ?>">
+									<?= lang('GEN_BTN_CANCEL'); ?>
+								</a>
 								<?php if($this->verify_access->verifyAuthorization('USEREM','ASGPER')): ?>
 									<button id="updateUserBtn" class="btn btn-small btn-loading btn-primary" type="submit">
 								<?= lang('GEN_BTN_UPDATE'); ?>

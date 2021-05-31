@@ -104,3 +104,10 @@ $lang['CONF_SECTION_COMMISSION'] = 'OFF';
 $lang['CONF_BALANCE_ACC_CONCENTRATOR'] = 'ON';
 //BULK UNNAMED AFFILIATED CARDS
 $lang['CONF_TABLE_AFFILIATED_COLUMNS'] = 'OFF';
+//EXTERNAL LINKS
+$lang['CONF_FOTTER_NETWORKS_LINK'] = [
+	'facebook' => 'https://www.facebook.com/banorte',
+	'twitter' => 'https://www.twitter.com/Banorte_mx',
+	'youtube' => 'https://www.youtube.com/user/banortemovil',
+	'instagram' => 'https://www.instagram.com/banorte_mx',
+];

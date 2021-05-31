@@ -569,9 +569,14 @@ table.dataTable tbody > tr.selected, table.dataTable tbody > tr > .selected {
   box-shadow: -1px 0 1px 0 rgba(227,217,201,.5),
 	inset 0 -3px 3px 0 rgba(227,217,201,.5);
 }
+
 .line-text {
   box-shadow: 0 2px 0 0 rgba(227,217,201,.35), inset 0 -2px 1px -1px rgba(227,217,201,.3);
   padding-bottom: 4px;
+}
+
+.vertical-line {
+	border-left: var(--border-width) solid rgba(255,255,255,1);
 }
 
 /* Interaction Cues

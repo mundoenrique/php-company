@@ -467,6 +467,7 @@ $config['csrf_exclude_uris'] = array(
 	'[\w\-]+/afiliacion-innominadas',
 	'[\w\-]+/detalle-innominadas',
 	'[\w\-]+/estado-lote',
+	'[\w\-]+/user-permissions',
 	'[\w\-]+/dashboard/productos',
 	'[\w\-]+/dashboard/productos/detalle',
 	'[\w\-]+/consulta/ordenes-de-servicio',
@@ -478,7 +479,6 @@ $config['csrf_exclude_uris'] = array(
 	'[\w\-]+/lotes/innominada/generarReporteTarjetasInnominadas',
 	'[\w\-]+/reportes/saldosamanecidosExpXLS',
 	'[\w\-]+/lotes/innominada/afiliacion',
-	'[\w\-]+/permisos-usuario',
 );
 
 /*

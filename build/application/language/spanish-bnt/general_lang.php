@@ -15,12 +15,6 @@ $lang['GEN_IMAGE_LOGIN'] = 'banorte-login.jpg';
 $lang['GEN_TABLE_DNI'] = 'CURP';
 //FOOTER
 $lang['GEN_FOTTER_RIGHTS'] = '© Todos los derechos reservados. Grupo Financiero Banorte - ';
-$lang['GEN_FOTTER_NETWORKS_LINK'] = [
-	'facebook' => 'https://www.facebook.com/banorte',
-	'twitter' => 'https://www.twitter.com/Banorte_mx',
-	'youtube' => 'https://www.youtube.com/user/banortemovil',
-	'instagram' => 'https://www.instagram.com/banorte_mx',
-];
 //Datables
 $lang['GEN_ACCOUNT_CLOSING_BALANCE'] = 'Tarjetahabiente';
 $lang['GEN_BULK_DELETE_SO'] = '¿Estás seguro que deseas anular la orden de servicio? ';
