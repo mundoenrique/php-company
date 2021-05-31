@@ -1217,6 +1217,9 @@ class Novo_Services_Model extends NOVO_Model {
 		$this->dataRequest->idServicio = '1260';
 
 		$response = $this->sendToService('CallWs_AuthorizationKey');
+		
+		/* $response = json_decode('{"rc":0,"msg":"Proceso OK","bean":{"tranClave":"nuR8Q+ntN8ECmrW7+Oe4m7fPuWCeo5QXlu8QtXSt7EL9dEmSAdzVYvIjIlv1pC9WhAZSLHe8yjUMIcGoswH4bRt78FJPX6MU5nHxHa4o+hi3csUGqmI5T3j8ZxbxdmpQ0pHewHVRgLTqIqd6v8Mmqg\\u003d\\u003d","tranExitoso":true,"tranDescripcionError":""}}');
+		$this->isResponseRc = 0; */
 
 		switch ($this->isResponseRc) {
 			case 0:
@@ -1260,7 +1263,8 @@ class Novo_Services_Model extends NOVO_Model {
 		$this->dataRequest->idOperation = 'dobleAutenticacion';
 		$this->dataRequest->className = 'com.novo.objects.TO.UsuarioTO';
 
-		$response = $this->sendToService('CallWs_RechargeAuthorization');
+		//$response = $this->sendToService('CallWs_RechargeAuthorization');
+		$response = json_decode('{"inBean":"IN BEAN","rc":10,"msg":"Proceso OK","className":"com.novo.objects.TOs.ResponseTO","bean":"af6ffb26a831875c30ad53ea8cba7cb45489f22601a61cbd9b3bdad86707a0ab","logAcceso":"","logAccesoObject":{"sessionId":"f59e888c19157f3f3520c09c26f9262e","userName":"LIGLESIAS","canal":"ceo","modulo":"Pagos","funcion":"","function":"Doble Autenticacion","operacion":"","RC":0,"IP":"127.0.0.1","dttimesstamp":"05\/31\/2021 11:44","lenguaje":"ES"},"pais":"Co","model":"CallWs_RechargeAuthorization","userName":"LIGLESIAS"}');
 
 		switch ($this->isResponseRc) {
 			case 0:
@@ -1276,7 +1280,7 @@ class Novo_Services_Model extends NOVO_Model {
 			default:
 				$this->response->title = lang('GEN_MENU_SERV_MASTER_ACCOUNT');
 				$this->response->icon = lang('CONF_ICON_WARNING');
-				$this->response->msg = lang('RESP_EMAIL_NO_SENT');
+				$this->response->msg = lang('GEN_OTP_NO_SENT');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 		}
