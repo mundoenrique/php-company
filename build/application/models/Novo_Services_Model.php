@@ -1263,8 +1263,7 @@ class Novo_Services_Model extends NOVO_Model {
 		$this->dataRequest->idOperation = 'dobleAutenticacion';
 		$this->dataRequest->className = 'com.novo.objects.TO.UsuarioTO';
 
-		//$response = $this->sendToService('CallWs_RechargeAuthorization');
-		$response = json_decode('{"inBean":"IN BEAN","rc":10,"msg":"Proceso OK","className":"com.novo.objects.TOs.ResponseTO","bean":"af6ffb26a831875c30ad53ea8cba7cb45489f22601a61cbd9b3bdad86707a0ab","logAcceso":"","logAccesoObject":{"sessionId":"f59e888c19157f3f3520c09c26f9262e","userName":"LIGLESIAS","canal":"ceo","modulo":"Pagos","funcion":"","function":"Doble Autenticacion","operacion":"","RC":0,"IP":"127.0.0.1","dttimesstamp":"05\/31\/2021 11:44","lenguaje":"ES"},"pais":"Co","model":"CallWs_RechargeAuthorization","userName":"LIGLESIAS"}');
+		$response = $this->sendToService('CallWs_RechargeAuthorization');
 
 		switch ($this->isResponseRc) {
 			case 0:
