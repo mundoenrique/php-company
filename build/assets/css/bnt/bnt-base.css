@@ -586,6 +586,10 @@ table.dataTable tbody > tr.selected, table.dataTable tbody > tr > .selected {
   padding-bottom: 4px;
 }
 
+.vertical-line {
+	border-left: var(--border-width) solid rgba(255,255,255,1);
+}
+
 /* Interaction Cues
 ----------------------------------*/
 
