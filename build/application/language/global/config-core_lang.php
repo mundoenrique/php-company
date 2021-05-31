@@ -185,12 +185,19 @@ $lang['CONF_TABLE_AFFILIATED_COLUMNS'] = 'OFF';
 //ICON WARNING SERVICE ORDERS
 $lang['CONF_SERVICEORDERS_ICON'] = 'OFF';
 //EXTERNAL LINKS
+$lang['CONF_NO_LINK'] = 'javascript:';
 $lang['CONF_LINK_SIGNIN'] = 'sign-in';
 $lang['CONF_LINK_SIGNOUT'] = 'sign-out/';
 $lang['CONF_LINK_SIGNOUT_START'] = 'start';
 $lang['CONF_LINK_SIGNOUT_END'] = 'end';
 $lang['CONF_LINK_RECOVER_ACCESS'] = 'recover-password';
 $lang['CONF_LINK_CHANGE_PASS'] = 'change-password';
+$lang['CONF_FOTTER_NETWORKS_LINK'] = [
+	'facebook' => $lang['CONF_NO_LINK'],
+	'twitter' => $lang['CONF_NO_LINK'],
+	'youtube' => $lang['CONF_NO_LINK'],
+	'instagram' => $lang['CONF_NO_LINK'],
+];
 $lang['CONF_LINK_USERS_MANAGEMENT'] = 'users-management';//permiso asociado USEREM
 $lang['CONF_LINK_USERS_PERMISSIONS'] = 'user-permissions';//permiso asociado CREUSU y ASGPER
 //INTERNAL LINKS

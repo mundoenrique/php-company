@@ -11,7 +11,6 @@ $lang['GEN_MENU_REPORTS'] = 'Reportes';
 $lang['GEN_MENU_USERS'] = 'Usuarios';
 $lang['GEN_MENU_SIGN_OFF'] = 'Cerrar Sesión';
 //SUBMENU
-$lang['GEN_NO_LINK'] = 'javascript:';
 $lang['GEN_MENU_BULK_LOAD'] = 'Cargar lotes';//TEBCAR
 $lang['GEN_LINK_BULK_LOAD'] = 'cargar-lotes';//TEBCAR
 $lang['GEN_MENU_BULK_AUTH'] = 'Autorización';//TEBAUT
@@ -166,12 +165,6 @@ $lang['GEN_FOTTER_LOGOUT'] = 'Salir';
 $lang['GEN_FOTTER_OWNERSHIP'] = 'Powered by NovoPayment, Inc.';
 $lang['GEN_FOTTER_OWNER_URL'] = 'https://www.novopayment.com';
 $lang['GEN_FOTTER_RIGHTS'] = 'NovoPayment Inc. All rights reserved.';
-$lang['GEN_FOTTER_NETWORKS_LINK'] = [
-	'facebook' => $lang['GEN_NO_LINK'],
-	'twitter' => $lang['GEN_NO_LINK'],
-	'youtube' => $lang['GEN_NO_LINK'],
-	'instagram' => $lang['GEN_NO_LINK'],
-];
 //HTML TAG DISPLAY
 $lang['GEN_SHOW_HEADER'] = 'Mostrar encabezado';
 $lang['GEN_SHOW_HEADER_LOGO'] = 'Mostrar logo en el encabezado';

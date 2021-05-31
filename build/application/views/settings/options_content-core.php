@@ -562,7 +562,7 @@
                   <?php endforeach; ?>
                   <?php foreach(lang('CONF_APPS_DOWNLOAD') as $value): ?>
                   <div class="mb-3 col-auto col-lg-6 col-xl-5">
-                    <a href="<?= lang('GEN_NO_LINK'); ?>" class="<?= $disabled.' '.$value[0]; ?>" title="<?= $titleIniFile; ?>" download>
+                    <a href="<?= lang('CONF_NO_LINK'); ?>" class="<?= $disabled.' '.$value[0]; ?>" title="<?= $titleIniFile; ?>" download>
                       <div class="files btn-link flex items-center">
                         <div class="file download">
                           <img src="<?= $this->asset->insertFile(lang('CONF_SETT_ICON'), 'images/icons');?>" />
