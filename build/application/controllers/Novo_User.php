@@ -21,7 +21,7 @@ class Novo_User extends NOVO_Controller {
 		log_message('INFO', 'NOVO User: signIn Method Initialized');
 
 		if($this->session->has_userdata('logged')) {
-			redirect(base_url('empresas'), 'Location', 302);
+			redirect(base_url(lang('CONF_LINK_ENTERPRISES')), 'Location', 302);
 			exit;
 		}
 
