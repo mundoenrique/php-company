@@ -32,7 +32,7 @@
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-4 col-lg-2">
-								<label for="bulkNumber"><?= LANG('BULK_NUMBER'); ?></label>
+								<label for="bulkNumber"><?= lang('BULK_NUMBER'); ?></label>
 								<input type="text" id="bulkNumber" name="bulk-number" class="form-control h5">
 								<div class="help-block"></div>
 							</div>

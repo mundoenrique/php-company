@@ -17,7 +17,7 @@
 <div class="flex mt-1 mb-5 bg-color flex-nowrap justify-between">
   <div class="flex flex-auto flex-column <?= $widget ? '' : 'max-width-6'; ?>">
     <div class="flex flex-column">
-      <span class="line-text mb-2 h4 semibold primary"><?= LANG('BULK_CONFIRM'); ?></span>
+      <span class="line-text mb-2 h4 semibold primary"><?= lang('BULK_CONFIRM'); ?></span>
       <div id="pre-loader" class="mx-auto flex justify-center">
         <span class="spinner-border spinner-border-lg mt-2 mb-3" role="status" aria-hidden="true"></span>
       </div>
@@ -45,7 +45,7 @@
           </div>
 
           <div class="form-group mb-3 col-4">
-            <label for="amount" id="amount"><?= LANG('GEN_TABLE_TOTAL_AMOUNT'); ?></label>
+            <label for="amount" id="amount"><?= lang('GEN_TABLE_TOTAL_AMOUNT'); ?></label>
             <span id="totalAmount" class="form-control px-1" readonly="readonly"><?= $detailBulk->amount ?></span>
           </div>
 

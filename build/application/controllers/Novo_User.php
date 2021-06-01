@@ -194,7 +194,7 @@ class Novo_User extends NOVO_Controller {
 		$this->render->userType = $this->session->flashdata('userType');
 		$this->session->set_flashdata('changePassword', $this->session->flashdata('changePassword'));
 		$this->session->set_flashdata('userType', $this->session->flashdata('userType'));
-		$this->render->titlePage = LANG('GEN_PASSWORD_CHANGE_TITLE');
+		$this->render->titlePage = lang('GEN_PASSWORD_CHANGE_TITLE');
 		$this->render->activeHeader = TRUE;
 		$this->views = ['user/'.$view];
 		$this->loadView($view);
@@ -232,7 +232,7 @@ class Novo_User extends NOVO_Controller {
 			unset($this->includeAssets->jsFiles[$pos]);
 			$this->render->activeHeader = TRUE;
 			$this->render->skipProductInf = TRUE;
-			$this->render->titlePage = LANG('GEN_FINISH_TITLE');
+			$this->render->titlePage = lang('GEN_FINISH_TITLE');
 			$this->views = ['user/'.$view];
 			$this->loadView($view);
 		} else {
@@ -490,7 +490,7 @@ class Novo_User extends NOVO_Controller {
 		$this->render->userType = $this->session->flashdata('userType');
 		$this->session->set_flashdata('changePassword', $this->session->flashdata('changePassword'));
 		$this->session->set_flashdata('userType', $this->session->flashdata('userType'));
-		$this->render->titlePage = LANG('GEN_PASSWORD_CHANGE_TITLE');
+		$this->render->titlePage = lang('GEN_PASSWORD_CHANGE_TITLE');
 		$this->render->activeHeader = TRUE;
 		$this->views = ['user/'.$view];
 		$this->loadView($view);
