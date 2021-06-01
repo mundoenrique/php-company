@@ -103,7 +103,7 @@ class Novo_User_Model extends NOVO_Model {
 					'logged_in' => TRUE
 				];
 				$this->session->set_userdata($userData);
-				$this->response->data = base_url(lang('GEN_ENTERPRISE_LIST'));
+				$this->response->data = base_url(lang('CONF_LINK_ENTERPRISES'));
 				$this->response->modal = TRUE;
 			break;
 			case -2:
@@ -287,7 +287,7 @@ class Novo_User_Model extends NOVO_Model {
 				];
 				$this->session->set_userdata($userData);
 				$this->response->code = 0;
-				$this->response->data = base_url(lang('GEN_ENTERPRISE_LIST'));
+				$this->response->data = base_url(lang('CONF_LINK_ENTERPRISES'));
 			break;
 			case -28:
 				$userData = [

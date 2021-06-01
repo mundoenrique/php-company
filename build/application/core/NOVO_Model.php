@@ -100,13 +100,13 @@ class NOVO_Model extends CI_Model {
 				$linkredirect = 'productos';
 			break;
 			case 'callWs_GetProducts':
-				$linkredirect = 'empresas';
+				$linkredirect = lang('CONF_LINK_ENTERPRISES');
 			break;
 			default:
 				$linkredirect = lang('CONF_LINK_SIGNIN');
 
 				if ($this->session->has_userdata('logged')) {
-					$linkredirect = lang('GEN_ENTERPRISE_LIST');
+					$linkredirect = lang('CONF_LINK_ENTERPRISES');
 				}
 		}
 

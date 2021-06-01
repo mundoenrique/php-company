@@ -286,7 +286,6 @@ $lang['GEN_DECIMAL'] = '.';
 $lang['GEN_THOUSANDS'] = ',';
 $lang['GEN_TRY_AGAIN']= 'Intenta de nuevo';
 $lang['GEN_WELCOME_TEXT'] = 'Bienvenido(a)';
-$lang['GEN_ENTERPRISE_LIST'] = 'empresas';
 $lang['GEN_ALT_LOADER'] = 'Verificando...';
 $lang['GEN_USER'] = 'Usuario';
 $lang['GEN_PASSWORD'] = 'Contraseña';

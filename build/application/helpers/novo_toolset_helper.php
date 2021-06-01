@@ -243,7 +243,7 @@ if (!function_exists('convertDateMDY')) {
 if (!function_exists('uriRedirect')) {
 	function uriRedirect() {
 		$CI = &get_instance();
-		$linkredirect = $CI->session->has_userdata('productInf') ? 'detalle-producto' : 'empresas';
+		$linkredirect = $CI->session->has_userdata('productInf') ? 'detalle-producto' : lang('CONF_LINK_ENTERPRISES');
 		$linkredirect = !$CI->session->has_userdata('logged') ? lang('CONF_LINK_SIGNIN') : $linkredirect;
 		$linkredirect = SINGLE_SIGN_ON ? 'ingresar/fin' : $linkredirect;
 

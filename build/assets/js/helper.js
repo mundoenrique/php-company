@@ -177,7 +177,7 @@ function callNovoCore(verb, who, where, request, _response_) {
 			modalBtn: {
 				btn1: {
 					text: lang.GEN_BTN_ACCEPT,
-					link: lang.GEN_ENTERPRISE_LIST,
+					link: lang.CONF_LINK_ENTERPRISES,
 					action: 'redirect'
 				}
 			}

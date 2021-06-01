@@ -95,7 +95,7 @@ $route['(:any)/benefits'] = "Novo_Information/benefitsInf";
 $route['(:any)/terms'] = "Novo_Information/termsInf";
 $route['(:any)/rates'] = "Novo_Information/ratesInf";
 //Business
-$route['(:any)/empresas'] = "Novo_Business/getEnterprises";
+$route['(:any)/enterprises'] = "Novo_Business/getEnterprises";
 $route['(:any)/productos'] = "Novo_Business/getProducts";
 $route['(:any)/detalle-producto'] = "Novo_Business/getProductDetail";
 //Bulk

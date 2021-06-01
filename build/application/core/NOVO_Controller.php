@@ -309,7 +309,7 @@ class NOVO_Controller extends CI_Controller {
 
 		$userMenu = new stdClass();
 		$userMenu->userAccess = $this->session->user_access;
-		$userMenu->enterpriseUrl = lang('GEN_ENTERPRISE_LIST');
+		$userMenu->enterpriseUrl = lang('CONF_LINK_ENTERPRISES');
 		$userMenu->currentClass = $this->router->fetch_class();
 		$this->render->logged = $this->session->has_userdata('logged');
 		$this->appUserName = $this->session->userName;
