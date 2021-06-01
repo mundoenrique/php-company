@@ -91,9 +91,9 @@ $route['(:any)/change-password'] = "Novo_User/changePassword";
 $route['(:any)/users-management'] = "Novo_User/usersManagement";
 $route['(:any)/user-permissions'] = "Novo_User/userPermissions";
 //Information
-$route['(:any)/inf-beneficios'] = "Novo_Information/benefits";
-$route['(:any)/inf-condiciones'] = "Novo_Information/terms";
-$route['(:any)/inf-tarifas'] = "Novo_Information/rates";
+$route['(:any)/benefits'] = "Novo_Information/benefitsInf";
+$route['(:any)/terms'] = "Novo_Information/termsInf";
+$route['(:any)/rates'] = "Novo_Information/ratesInf";
 //Business
 $route['(:any)/empresas'] = "Novo_Business/getEnterprises";
 $route['(:any)/productos'] = "Novo_Business/getProducts";
