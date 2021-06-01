@@ -72,15 +72,17 @@ function getTokenRecharge() {
 
 	callNovoCore(verb, who, where, data, function (response) {
 		$('#masterAccountRechargeBtn').html(btnText);
+		response.modalBtn.posAt = 'center top';
+		response.modalBtn.posMy = 'center top+260';
 		switch (response.code) {
 			case 0:
 				$('#accept').addClass('send-otp');
-				inputModal = '<form id="formVerificationOTP" name="formVerificationOTP" class="mr-2" method="post" ';
+			  inputModal = '<form id="formVerificationOTP" name="formVerificationOTP" class="mr-2" method="post" ';
 				inputModal +=  'onsubmit="return false">';
-				inputModal += 		'<p class="pt-0 p-0">' + response.msg +'</p>';
+			  inputModal += 		'<p class="pt-0 p-0">' + response.msg +'</p>';
 				inputModal += 		'<div class="row">';
 				inputModal +=			'<div class="form-group col-11">';
-				inputModal +=				'<input id="otpCode" class="form-control" type="text" name="otpCode" autocomplete="off" ';
+				inputModal +=				'<input  id="otpCode" class="form-control" type="text" name="otpCode" autocomplete="off" ';
 				inputModal +=       ' maxlength="10">';
 				inputModal +=				'<div class="help-block"></div>';
 				inputModal +=			'</div">';

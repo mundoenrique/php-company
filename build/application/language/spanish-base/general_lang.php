@@ -380,6 +380,7 @@ $lang['GEN_SO_CREATE_EXPIRED'] = 'El código de seguridad expiró o fue usado.';
 $lang['GEN_ACCEPT_TERMS'] = 'Al presionar "Aceptar" declaras que has leído y aceptado los términos de uso de nuestra plataforma.';
 $lang['MIN_WIDTH_OTP'] = '480';
 $lang['POSTMY_OTP'] = 'center top+160';
+$lang['GEN_OTP_NO_SENT'] = 'No fue posible enviar el correo con el código de verificación, por favor intentalo más tarde.';
 // RECOVER ACCESS
 $lang['GEN_RECOVER_DOC_TYPE'] = [
 	'' => 'Selecciona',

@@ -1217,6 +1217,9 @@ class Novo_Services_Model extends NOVO_Model {
 		$this->dataRequest->idServicio = '1260';
 
 		$response = $this->sendToService('CallWs_AuthorizationKey');
+		
+		/* $response = json_decode('{"rc":0,"msg":"Proceso OK","bean":{"tranClave":"nuR8Q+ntN8ECmrW7+Oe4m7fPuWCeo5QXlu8QtXSt7EL9dEmSAdzVYvIjIlv1pC9WhAZSLHe8yjUMIcGoswH4bRt78FJPX6MU5nHxHa4o+hi3csUGqmI5T3j8ZxbxdmpQ0pHewHVRgLTqIqd6v8Mmqg\\u003d\\u003d","tranExitoso":true,"tranDescripcionError":""}}');
+		$this->isResponseRc = 0; */
 
 		switch ($this->isResponseRc) {
 			case 0:
@@ -1276,7 +1279,7 @@ class Novo_Services_Model extends NOVO_Model {
 			default:
 				$this->response->title = lang('GEN_MENU_SERV_MASTER_ACCOUNT');
 				$this->response->icon = lang('CONF_ICON_WARNING');
-				$this->response->msg = lang('RESP_EMAIL_NO_SENT');
+				$this->response->msg = lang('GEN_OTP_NO_SENT');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 		}
