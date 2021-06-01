@@ -2180,7 +2180,7 @@ i[class*=" icon-"]:before {
 .icon-downl-config:before	   { content: "\e002"; }
 .icon-user-config:before	   { content: "\e003"; }
 .icon-graph:before           { content: "\e054"; }
-.icon-phone:before           { content: "\e11f"; }
+.icon-phone:before           { content: "\e12d"; }
 .icon-view:before            { content: "\e0b3"; }
 .icon-remove:before          { content: "\e0b5"; }
 .icon-ok:before              { content: "\e0b6"; }
@@ -3731,4 +3731,82 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 	top: 0;
 	width: 100%;
 	height: 100%;
+}
+
+
+/* widget support login */
+
+.widget-support {
+	position: fixed;
+	bottom: 90px;
+	right: -255px;
+	padding-top: 12px;
+	padding-bottom: 20px;
+	overflow: visible;
+	transition: all .3s ease 0s;
+	background-color: rgb(249, 249, 249);
+	z-index: 9;
+}
+
+.widget-support:hover {
+	right: 2px;
+}
+
+.login-content .widget-support{
+	width: 255px !important;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+}
+
+.widget-support-btn{
+	width: 35px;
+	height: 64px;
+	background-color: rgb(249, 249, 249);
+	border-right: 0px;
+	border-radius: 3px 0 0 3px;
+	transform: translate(-59px, -48px);
+	position: fixed;
+}
+
+.widget-support:hover .widget-support-btn{
+	opacity: 0;
+}
+
+/* Language switch button */
+
+.btn-lang {
+	background-color: rgb(249, 249, 249);
+	bottom: 90px;
+	border-radius: 50%;
+	cursor: pointer;
+	left: 5px;
+	position: fixed;
+	z-index: 9;
+}
+
+.btn-lang-img img{
+	height: 45px;
+	padding: 5px;
+	position: relative;
+	width: 45px;
+}
+
+.btn-lang-img span{
+	font-size: var(--h2);
+	border-radius: 50%;
+	height: 45px;
+	left: 0;
+	opacity: 0;
+	position: absolute;
+	text-align: center;
+	width: 45px;
+}
+
+.btn-lang-img span:hover{
+	background: rgb(255, 255, 255, .6);
+	font-size: var(--h1);
+	opacity: 1;
+	transition-property: all;
+	transition-duration: .2s;
 }

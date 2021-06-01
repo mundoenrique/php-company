@@ -586,6 +586,24 @@ class Novo_User_Model extends NOVO_Model {
 		return $this->responseToTheView('callWs_KeepSession');
 	}
 	/**
+	 * @info Método para el cambiar el idioma de la aplicaición
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date May 16th, 2021
+	 */
+	public function callWs_ChangeLanguage_User($dataRequest)
+	{
+		log_message('INFO', 'NOVO User Model: ChangeLanguage Method Initialized');
+
+		$response = new stdClass();
+		$response->rc =  0;
+		$this->makeAnswer($response, 'callWs_ChangeLanguage');
+		$this->response->code = 0;
+
+		languageCookie(lang('GEN_AFTER_LANG'));
+
+		return $this->responseToTheView('ChangeLanguage');
+	}
+	/**
 	 * @info Método para el cierre de sesión
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date May 1st, 2019

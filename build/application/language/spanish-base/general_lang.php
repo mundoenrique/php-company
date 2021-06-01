@@ -143,11 +143,14 @@ $lang['GEN_BTN_INI'] = 'Debes seleccionar una empresa para poder realizar la des
 $lang['GEN_DESCRIPTION'] = 'Descripción';
 $lang['GEN_CONTACTS_TITLE_HELP'] = '¿Necesitas ayuda?';
 $lang['GEN_CONTACTS_TITLE'] = 'Líneas de atención a nivel nacional';
-$lang['GEN_CONTACTS_CITY'] = 'CIUDAD';
-$lang['GEN_CONTACTS_CONTACT'] = 'CONTACTO';
+$lang['GEN_CONTACTS_CITY'] = '';
+$lang['GEN_CONTACTS_CONTACT'] = '';
 $lang['GEN_CONTACTS_REST_COUNTRY'] = 'RESTO DEL PAÍS';
 $lang['GEN_CONTACTS'] = [
-	'city' => '(XX) XXX XXXX',
+	'Teléfono' => '(51-1) 619-8900',
+	'Fax' => '(51-1) 619-8900',
+	'' => 'anexo 200',
+	'E-mail' => 'ventas@tebca.com.pe',
 ];
 $lang['GEN_CONTACTS_REST_COUNTRY_NUMBER'] = 'XXX (XXXXXX)';
 $lang['GEN_USER_PERMISSION_TITLE'] = 'Permisos de usuario';
@@ -546,9 +549,7 @@ $lang['GEN_UPLOAD_SFTP(88)'] = 'CURLE_CHUNK_FAILED';
 // UPLOAD FILE
 $lang['GEN_UPLOAD_CREATE_DIRECTORY'] = 'Directorio creado.';
 $lang['GEN_UPLOAD_NOT_CREATE_DIRECTORY'] = 'Directorio existe.';
-
-
-
+// LANG IMAGE
 $lang['GEN_LANG_IMG'] = 'en.png';
 $lang['GEN_AFTER_COD_LANG'] = 'en';
 $lang['GEN_BEFORE_COD_LANG'] = 'es';

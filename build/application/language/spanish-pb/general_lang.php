@@ -17,3 +17,9 @@ $lang['GEN_TABLE_DNI'] = 'Nro. de identificación';
 $lang['RESP_PASSWORD_USED'] = 'La nueva contraseña no debe coincidir <strong>con las últimas diez usadas</strong>.';
 //SUBMENU
 $lang['GEN_LINK_REP_USER_ACT'] = 'actividad-usuarios';//REPUSU
+//CONTACT
+$lang['GEN_CONTACTS_CITY'] = 'CIUDAD';
+$lang['GEN_CONTACTS_CONTACT'] = 'CONTACTO';
+$lang['GEN_CONTACTS'] = [
+	'XXXXX' => 'XXXXXXX',
+];

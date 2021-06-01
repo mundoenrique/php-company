@@ -37,3 +37,12 @@ $lang['RESP_NO_LIST'] = 'No fue posible obtener el listado, verifica los criteri
 $lang['GEN_GET_AUTH_KEY_FAIL'] = 'No fue posible generar la llave de autorización, intenta esta operación de nuevo';
 $lang['RESP_REJECTED_REGISTRY'] = 'Todos los registros fueron rechazados, verifica';
 $lang['GEN_TIMEOUT'] = "El servidor no se encuentra disponible, intenta de nuevo.";
+//CONTACT
+$lang['GEN_CONTACTS_CITY'] = 'CIUDAD';
+$lang['GEN_CONTACTS_CONTACT'] = 'CONTACTO';
+$lang['GEN_CONTACTS'] = [
+	'CDMX' => '(55) 5140 5640',
+	'MTY' => '(81) 8156 9640',
+	'GDL' => '(33) 3669 9040',
+];
+$lang['GEN_CONTACTS_REST_COUNTRY_NUMBER'] = '800 DIRECTA (3473282)';

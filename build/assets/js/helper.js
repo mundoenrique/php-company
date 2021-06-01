@@ -32,12 +32,12 @@ $(function () {
 	});
 
 	$('#change-lang').on('click', function () {
-		who = 'User'; where = 'changeLanguage';
+		verb = 'POST'; who = 'User'; where = 'changeLanguage';
 		data = {
 			lang: $(this).find('span.text').text()
 		};
 
-		callNovoCore(who, where, data, function (response) {
+		callNovoCore(verb, who, where, data, function (response) {
 			if (response.code === 0) {
 				var url = $(location).attr('href').split("/");
 				var currentCodLan = url[url.length - 1];

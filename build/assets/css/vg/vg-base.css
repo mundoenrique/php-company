@@ -539,7 +539,7 @@ table.dataTable tbody > tr.selected, table.dataTable tbody > tr > .selected {
 }
 
 .login-content .widget{
-	width: 350px !important;
+	width: 350px;
 	-webkit-box-shadow: none;
 	-moz-box-shadow: none;
 	box-shadow: none;
@@ -558,43 +558,12 @@ table.dataTable tbody > tr.selected, table.dataTable tbody > tr > .selected {
 /* widget support login */
 
 .widget-support {
-	position: fixed;
-	bottom: 90px;
-	right: -255px;
-	padding-top: 12px;
-	padding-bottom: 20px;
-	overflow: visible;
-	transition: all .3s ease 0s;
-	background-color: rgb(249, 249, 249);
-	z-index: 9;
 	border: 1px solid var(--color-primary);
-}
-
-.widget-support:hover {
-	right: 2px;
-}
-
-.login-content .widget-support{
-	width: 255px !important;
-	-webkit-box-shadow: none;
-	-moz-box-shadow: none;
-	box-shadow: none;
 }
 
 .widget-support-btn{
-	width: 72px;
-	height: 64px;
-	background-color: rgb(249, 249, 249);
 	border: 1px solid var(--color-primary);
-	border-right: 0px;
-	border-radius: 3px 0 0 3px;
-	transform: translate(-107px, -42.5px);
-	position: fixed;
 	color: var(--color-sixth);
-}
-
-.widget-support:hover .widget-support-btn{
-	opacity: 0;
 }
 
 /* HR - Separators */
@@ -864,3 +833,12 @@ ul.pwd-rules li.pwd-rules-item.rule-valid {
 	color: var(--success);
 }
 
+/* Language switch button */
+
+.btn-lang {
+	border: 1px solid var(--color-primary);
+}
+
+.btn-lang-img span:hover{
+	color: var(--color-sixth);
+}
