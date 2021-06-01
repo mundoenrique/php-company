@@ -205,3 +205,5 @@ $lang['CONF_LINK_USERS_MANAGEMENT'] = 'users-management';//permiso asociado USER
 $lang['CONF_LINK_USERS_PERMISSIONS'] = 'user-permissions';//permiso asociado CREUSU y ASGPER
 //INTERNAL LINKS
 $lang['CONF_LINK_SUGGESTION'] = 'suggestion';
+//LANGUAGE
+$lang['CONF_BTN_LANG'] = 'OFF';

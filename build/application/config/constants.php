@@ -93,7 +93,7 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
 | as part of global configuration settings.
 |
 */
-$uriSegments  =  explode( "/", parse_url($_SERVER[ 'REQUEST_URI'], PHP_URL_PATH ));
+$uriSegments  =  explode( "/", parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
 $proxyIps = filter_var($_SERVER['REMOTE_ADDR'], FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE) ? 'public' : 'private';
 $timeZone = [
 	'bdb' => 	'America/Bogota',
@@ -118,8 +118,8 @@ switch(end($uriSegments)) {
 		$baseLanguage = 'english';
 	break;
 	default:
-		if (isset($_COOKIE['cpo_baseLanguage'])) {
-			$baseLanguage = $_COOKIE['cpo_baseLanguage'];
+		if (isset($_COOKIE['ceo_baseLanguage'])) {
+			$baseLanguage = $_COOKIE['ceo_baseLanguage'];
 		}
 }
 /*

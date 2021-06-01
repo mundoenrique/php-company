@@ -31,6 +31,27 @@ $(function () {
 		}
 	});
 
+	$('#change-lang').on('click', function () {
+		who = 'User'; where = 'changeLanguage';
+		data = {
+			lang: $(this).find('span.text').text()
+		};
+
+		callNovoCore(who, where, data, function (response) {
+			if (response.code === 0) {
+				var url = $(location).attr('href').split("/");
+				var currentCodLan = url[url.length - 1];
+
+				if (currentCodLan == lang.GEN_BEFORE_COD_LANG) {
+					var module = url[url.length - 2];
+					$(location).attr('href', baseURL + module + '/' + lang.GEN_AFTER_COD_LANG);
+				} else {
+					location.reload();
+				}
+			}
+		});
+	});
+
 	if (code > 2) {
 		appMessages(title, msg, icon, modalBtn)
 	}

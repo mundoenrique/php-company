@@ -15,3 +15,4 @@ $lang['GEN_LOGO_HEADER'] = 'img-logo.svg';
 $lang['GEN-LOGO-BIG'] = 'logo-signin.png';
 $lang['GEN_IMG_CLOCK'] = 'img-clock.svg';
 $lang['GEN_DETAIL_BARND_COLOR'] = '_card-white.svg';
+$lang['GEN_IMAGE_LOGIN'] = '';
