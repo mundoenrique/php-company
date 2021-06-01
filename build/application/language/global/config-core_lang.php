@@ -195,6 +195,7 @@ $lang['CONF_LINK_SIGNOUT_END'] = 'end';
 $lang['CONF_LINK_RECOVER_ACCESS'] = 'recover-password';
 $lang['CONF_LINK_CHANGE_PASS'] = 'change-password';
 $lang['CONF_LINK_ENTERPRISES'] = 'enterprises';
+$lang['CONF_LINK_PRODUCTS'] = 'products';
 $lang['CONF_FOTTER_NETWORKS_LINK'] = [
 	'facebook' => $lang['CONF_NO_LINK'],
 	'twitter' => $lang['CONF_NO_LINK'],

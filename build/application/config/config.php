@@ -458,7 +458,7 @@ $config['csrf_regenerate'] = TRUE;
 $config['csrf_exclude_uris'] = array(
 	'[\w\-]+/ingresar',
 	'[\w\-]+/single',
-	'[\w\-]+/productos',
+	'[\w\-]+/products',
 	'[\w\-]+/detalle-producto',
 	'[\w\-]+/detalle-lote',
 	'[\w\-]+/confirmar-lote',

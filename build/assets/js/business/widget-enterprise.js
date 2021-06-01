@@ -22,7 +22,7 @@ $(function() {
 		idFiscal = WidgetSelcet.val()
 		enterpriseName = WidgetSelcet.find('option:selected').text();
 
-		if(formAction == 'productos') {
+		if (formAction == lang.CONF_LINK_PRODUCTS) {
 			enterpriseWidgetBtn
 			.prop('disabled', false)
 			.removeAttr('title');

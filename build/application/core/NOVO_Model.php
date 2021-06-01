@@ -97,7 +97,7 @@ class NOVO_Model extends CI_Model {
 
 		switch ($model) {
 			case 'callWs_GetProductDetail':
-				$linkredirect = 'productos';
+				$linkredirect = lang('CONF_LINK_PRODUCTS');
 			break;
 			case 'callWs_GetProducts':
 				$linkredirect = lang('CONF_LINK_ENTERPRISES');

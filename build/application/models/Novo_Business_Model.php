@@ -387,7 +387,7 @@ class Novo_Business_Model extends NOVO_Model {
 					$this->response->code = 3;
 					$this->response->title = lang('PRODUCTS_DETAIL_TITLE');
 					$this->response->msg = lang('RESP_UNCONFIGURED_PRODUCT');
-					$this->response->modalBtn['btn1']['link'] = 'productos';
+					$this->response->modalBtn['btn1']['link'] = lang('CONF_LINK_PRODUCTS');
 				}
 
 				$productSummary['lots'] = trim($response->estadistica->lote->total);
@@ -420,12 +420,12 @@ class Novo_Business_Model extends NOVO_Model {
 			case -38:
 				$this->response->code = 3;
 				$this->response->msg = lang('BUSINESS_NO_PRODUCT_INFO');
-				$this->response->modalBtn['btn1']['link'] = 'productos';
+				$this->response->modalBtn['btn1']['link'] = lang('CONF_LINK_PRODUCTS');
 			break;
 			case -99:
 				$this->response->code = 3;
 				$this->response->msg = novoLang(lang('RESP_NO_ACCESS'), $this->userName);
-				$this->response->modalBtn['btn1']['link'] = 'productos';
+				$this->response->modalBtn['btn1']['link'] = lang('CONF_LINK_PRODUCTS');
 			break;
 		}
 
