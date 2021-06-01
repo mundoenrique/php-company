@@ -266,7 +266,8 @@ class Novo_User extends NOVO_Controller {
 		$views = ['staticpages/content-browser'];
 
 		$this->includeAssets->cssFiles = [
-			"$this->customerUri/"."$this->customerUri-browser"
+			"$this->customerUri/"."$this->customerUri-browser",
+			"reboot"
 		];
 
 		$messageBrowser = $this->session->flashdata('messageBrowser');
