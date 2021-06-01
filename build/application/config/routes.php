@@ -129,6 +129,8 @@ $route['(:any)/tarjetas-emitidas'] = "Novo_Reports/issuedCards";
 $route['(:any)/gastos-catgoria'] = "Novo_Reports/categoryExpense";
 $route['(:any)/cuenta-maestra'] = "Novo_Reports/masterAccount";
 $route['(:any)/estado-lote'] = "Novo_Reports/statusBulk";
+$route['(:any)/tarjetahabientes'] = "Novo_Reports/cardHolders";
+
 $route['(:any)/id-empresa-ob'] = "Novo_Reports/obtenerIdEmpresa";
 $route['(:any)/closing-budgets'] = "Novo_Reports/closingBudgets";
 $route['(:any)/closing-budgets-excel'] = "Novo_Reports/exportToExcel";
@@ -137,7 +139,6 @@ $route['(:any)/master-account-pdf'] = "Novo_Reports/exportToPDFMasterAccount";
 $route['(:any)/master-account-excel-consolid'] = "Novo_Reports/exportToExcelMasterAccountConsolid";
 $route['(:any)/master-account-pdf-consolid'] = "Novo_Reports/exportToPDFMasterAccountConsolid";
 $route['(:any)/master-account'] = "Novo_Reports/masterAccount";
-$route['(:any)/tarjetahabientes'] = "Novo_Reports/cardHolders";
 //settings
 $route['(:any)/configuracion'] = "Novo_Settings/options";
 $route['(:any)/empresa'] = "Novo_Settings/getEnterprise";
