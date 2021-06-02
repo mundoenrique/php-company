@@ -67,7 +67,11 @@ class Verify_Access {
 					$this->CI->session->set_userdata('screenSize', $value);
 				break;
 				default:
-				$this->requestServ->$key = $value;
+					if (!$this->CI->input->is_ajax_request()) {
+						$value = $this->CI->security->xss_clean(strip_tags($value));
+					}
+
+					$this->requestServ->$key = $value;
 			}
 		}
 
