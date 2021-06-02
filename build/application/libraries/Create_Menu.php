@@ -98,7 +98,7 @@ class Create_Menu {
 		switch ($subMenu) {
 			case 'TEBCAR':
 				$subMenuLang->text = lang('GEN_MENU_BULK_LOAD');
-				$subMenuLang->link = lang('GEN_LINK_BULK_LOAD');
+				$subMenuLang->link = lang('CONF_LINK_BULK_LOAD');
 			break;
 			case 'TEBAUT':
 				$subMenuLang->text = lang('GEN_MENU_BULK_AUTH');

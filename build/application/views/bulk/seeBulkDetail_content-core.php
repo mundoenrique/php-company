@@ -8,7 +8,7 @@
 				<li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('CONF_LINK_ENTERPRISES')) ?>"><?= lang('GEN_MENU_ENTERPRISE') ?></a></li> /
 				<li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('CONF_LINK_PRODUCTS')) ?>"><?= lang('GEN_PRODUCTS') ?></a></li> /
 				<li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('CONF_LINK_PRODUCT_DETAIL')) ?>"><?= lang('PRODUCTS_DETAIL_TITLE') ?></a></li> /
-				<li class="inline"><a class="tertiary big-modal" href="<?= base_url('cargar-lotes') ?>"><?= lang('GEN_MENU_BULK_LOAD') ?></a></li> /
+				<li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('CONF_LINK_BULK_LOAD')) ?>"><?= lang('GEN_MENU_BULK_LOAD') ?></a></li> /
 				<li class="inline"><a class="tertiary not-pointer" href="javascript:"><?= lang('GEN_SHOW_BULK') ?></a></li>
 			</ul>
 		</nav>
@@ -43,7 +43,7 @@
 				<div class="flex flex-column mb-4 mt-4 px-5 justify-center items-center">
 					<div class="flex flex-row">
 						<div class="mb-3 mr-4">
-							<a href="<?= base_url('cargar-lotes') ?>" class="btn btn-link btn-small big-modal"><?= lang('GEN_BTN_BACK') ?></a>
+							<a href="<?= base_url(lang('CONF_LINK_BULK_LOAD')) ?>" class="btn btn-link btn-small big-modal"><?= lang('GEN_BTN_BACK') ?></a>
 						</div>
 					</div>
 				</div>

@@ -192,7 +192,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 				case 0:
 					$this->response->msg = lang('BULK_SUCCESS');
 					$this->response->icon = lang('CONF_ICON_SUCCESS');
-					$this->response->modalBtn['btn1']['link'] = lang('GEN_LINK_BULK_LOAD');
+					$this->response->modalBtn['btn1']['link'] = lang('CONF_LINK_BULK_LOAD');
 					$respLoadBulk = TRUE;
 				break;
 				case -108:
@@ -200,7 +200,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 				case -256:
 				case -21:
 					$this->response->msg = lang('BULK_NO_LOAD');
-					$this->response->modalBtn['btn1']['link'] = lang('GEN_LINK_BULK_LOAD');
+					$this->response->modalBtn['btn1']['link'] = lang('CONF_LINK_BULK_LOAD');
 					$respLoadBulk = TRUE;
 				break;
 				case -280:
@@ -368,12 +368,12 @@ class Novo_Bulk_Model extends NOVO_Model {
 			case -437:
 				$this->response->title = lang('BULK_DETAIL');
 				$this->response->msg = lang('BULK_DETAIL_FAIL_COST');
-				$this->response->modalBtn['btn1']['link'] = lang('GEN_LINK_BULK_LOAD');
+				$this->response->modalBtn['btn1']['link'] = lang('CONF_LINK_BULK_LOAD');
 			break;
 			case -443:
 				$this->response->title = lang('BULK_DETAIL');
 				$this->response->msg = lang('BULK_CONFIRM_EXCEED_LIMIT');
-				$this->response->modalBtn['btn1']['link'] = lang('GEN_LINK_BULK_LOAD');
+				$this->response->modalBtn['btn1']['link'] = lang('CONF_LINK_BULK_LOAD');
 			break;
 		}
 
@@ -425,7 +425,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 				$this->response->title = lang('BULK_CONFIRM_TITLE');
 				$this->response->msg = novolang(lang('BULK_CONFIRM_SUCCESS'), $bulkConfirmInfo->numLote);
 				$this->response->icon = lang('CONF_ICON_SUCCESS');
-				$link = $this->verify_access->verifyAuthorization('TEBAUT') ? lang('GEN_LINK_BULK_AUTH') : lang('GEN_LINK_BULK_LOAD');
+				$link = $this->verify_access->verifyAuthorization('TEBAUT') ? lang('GEN_LINK_BULK_AUTH') : lang('CONF_LINK_BULK_LOAD');
 				$this->response->modalBtn['btn1']['link'] = $link;
 			break;
 			case -1:
@@ -439,43 +439,43 @@ class Novo_Bulk_Model extends NOVO_Model {
 				$this->response->code = 0;
 				$this->response->title = lang('BULK_CONFIRM_TITLE');
 				$this->response->msg = lang('BULK_CONFIRM_NO_DEAIL');
-				$this->response->modalBtn['btn1']['link'] = lang('GEN_LINK_BULK_LOAD');
+				$this->response->modalBtn['btn1']['link'] = lang('CONF_LINK_BULK_LOAD');
 			break;
 			case -142:
 				$this->response->code = 0;
 				$this->response->title = lang('BULK_CONFIRM_TITLE');
 				$this->response->msg = lang('BULK_CONFIRM_FAIL');
-				$this->response->modalBtn['btn1']['link'] = lang('GEN_LINK_BULK_LOAD');
+				$this->response->modalBtn['btn1']['link'] = lang('CONF_LINK_BULK_LOAD');
 			break;
 			case -236:
 				$this->response->code = 0;
 				$this->response->title = lang('BULK_CONFIRM_TITLE');
 				$this->response->msg = lang('BULK_CONFIRM_FAIL_DULPICATE');
-				$this->response->modalBtn['btn1']['link'] = lang('GEN_LINK_BULK_LOAD');
+				$this->response->modalBtn['btn1']['link'] = lang('CONF_LINK_BULK_LOAD');
 			break;
 			case -436:
 				$this->response->code = 0;
 				$this->response->title = lang('BULK_CONFIRM_TITLE');
 				$this->response->msg = lang('BULK_CONFIRM_FAIL_BANK_RESPONSE');
-				$this->response->modalBtn['btn1']['link'] = lang('GEN_LINK_BULK_LOAD');
+				$this->response->modalBtn['btn1']['link'] = lang('CONF_LINK_BULK_LOAD');
 			break;
 			case -437:
 				$this->response->code = 0;
 				$this->response->title = lang('BULK_CONFIRM_TITLE');
 				$this->response->msg = novoLang(lang('GEN_FAILED_THIRD_PARTY'), '('.$response->msg.')');
-				$this->response->modalBtn['btn1']['link'] = lang('GEN_LINK_BULK_LOAD');
+				$this->response->modalBtn['btn1']['link'] = lang('CONF_LINK_BULK_LOAD');
 			break;
 			case -438:
 				$this->response->code = 0;
 				$this->response->title = lang('BULK_CONFIRM_TITLE');
 				$this->response->msg = lang('BULK_CONFIRM_DUPLICATE');
-				$this->response->modalBtn['btn1']['link'] = lang('GEN_LINK_BULK_LOAD');
+				$this->response->modalBtn['btn1']['link'] = lang('CONF_LINK_BULK_LOAD');
 			break;
 			case -464:
 				$this->response->code = 0;
 				$this->response->title = lang('BULK_CONFIRM_TITLE');
 				$this->response->msg = lang('BULK_CONFIRM_EXCEEDED_LIMIT');
-				$this->response->modalBtn['btn1']['link'] = lang('GEN_LINK_BULK_LOAD');
+				$this->response->modalBtn['btn1']['link'] = lang('CONF_LINK_BULK_LOAD');
 			break;
 		}
 

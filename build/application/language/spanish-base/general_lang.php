@@ -12,7 +12,6 @@ $lang['GEN_MENU_USERS'] = 'Usuarios';
 $lang['GEN_MENU_SIGN_OFF'] = 'Cerrar Sesión';
 //SUBMENU
 $lang['GEN_MENU_BULK_LOAD'] = 'Cargar lotes';//TEBCAR
-$lang['GEN_LINK_BULK_LOAD'] = 'cargar-lotes';//TEBCAR
 $lang['GEN_MENU_BULK_AUTH'] = 'Autorización';//TEBAUT
 $lang['GEN_LINK_BULK_AUTH'] = 'lotes-autorizacion';//TEBAUT
 $lang['GEN_MENU_BULK_UNNAMED'] = 'Tarjetas innominadas';
