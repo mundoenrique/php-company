@@ -127,15 +127,15 @@ $(function () {
 			case lang.GEN_BTN_SEE:
 				form = $(this).parent().find('form')
 				insertFormInput(true, form);
-				form.attr('action', baseURL+'detalle-lote');
+				form.attr('action', baseURL + lang.CONF_LINK_BULK_DETAIL);
 				form.append('<input type="hidden" name="bulkView" value="detail">');
-				break;
+			break;
 			case lang.GEN_BTN_CONFIRM:
 				form = $(this).parent().find('form')
 				insertFormInput(true, form);
 				form.attr('action', baseURL+'confirmar-lote');
 				form.append('<input type="hidden" name="bulkView" value="confirm">');
-				break;
+			break;
 			case lang.GEN_BTN_DELETE:
 				form = $(this).parent().find('form')
 				$(this).closest('tr').addClass('select');
@@ -172,7 +172,7 @@ $(function () {
 					e.preventDefault();
 					$('#pending-bulk').find('tr').removeClass('select');
 				});
-				break;
+			break;
 		}
 
 		if(action != lang.GEN_BTN_DELETE) {

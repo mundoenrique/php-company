@@ -103,7 +103,7 @@ $route['(:any)/products'] = "Novo_Business/getProducts";
 $route['(:any)/product-detail'] = "Novo_Business/getProductDetail";
 //Bulk
 $route['(:any)/bulk-load'] = "Novo_Bulk/getPendingBulk";
-$route['(:any)/detalle-lote'] = "Novo_Bulk/getDetailBulk";
+$route['(:any)/bulk-detail'] = "Novo_Bulk/getDetailBulk";
 $route['(:any)/confirmar-lote'] = "Novo_Bulk/confirmBulk";
 $route['(:any)/lotes-autorizacion'] = "Novo_Bulk/authorizeBulkList";
 $route['(:any)/lotes-calcular-orden'] = "Novo_Bulk/calculateServiceOrder";
