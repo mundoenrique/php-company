@@ -133,7 +133,7 @@ $(function () {
 			case lang.GEN_BTN_CONFIRM:
 				form = $(this).parent().find('form')
 				insertFormInput(true, form);
-				form.attr('action', baseURL+'confirmar-lote');
+				form.attr('action', baseURL + lang.CONF_LINK_BULK_CONFIRM);
 				form.append('<input type="hidden" name="bulkView" value="confirm">');
 			break;
 			case lang.GEN_BTN_DELETE:

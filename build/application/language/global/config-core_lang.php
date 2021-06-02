@@ -203,10 +203,11 @@ $lang['CONF_FOTTER_NETWORKS_LINK'] = [
 	'youtube' => $lang['CONF_NO_LINK'],
 	'instagram' => $lang['CONF_NO_LINK'],
 ];
-$lang['CONF_LINK_BULK_LOAD'] = 'bulk-load';////permiso asociado TEBCAR
-$lang['CONF_LINK_BULK_DETAIL'] = 'bulk-detail';////permiso asociado TEBCAR
 $lang['CONF_LINK_USERS_MANAGEMENT'] = 'users-management';//permiso asociado USEREM
 $lang['CONF_LINK_USERS_PERMISSIONS'] = 'user-permissions';//permiso asociado CREUSU y ASGPER
+$lang['CONF_LINK_BULK_LOAD'] = 'bulk-load';//permiso asociado TEBCAR
+$lang['CONF_LINK_BULK_DETAIL'] = 'bulk-detail';//permiso asociado TEBCAR
+$lang['CONF_LINK_BULK_CONFIRM'] = 'bulk-confirm';//permiso asociado TEBCAR-->TEBCON
 //INTERNAL LINKS
 $lang['CONF_LINK_SUGGESTION'] = 'suggestion';
 //LANGUAGE
