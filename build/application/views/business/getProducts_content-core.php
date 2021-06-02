@@ -67,7 +67,7 @@
 					<button class="product-detail btn btn-primary btn-small btn-loading flex mx-auto justify-center">
 						<?= lang('GEN_BTN_SELECT') ?>
 					</button>
-					<form id="product-<?= $products->idProducto; ?>" action="<?= base_url('detalle-producto') ?>" method="POST">
+					<form id="product-<?= $products->idProducto; ?>" action="<?= base_url(lang('CONF_LINK_PRODUCT_DETAIL')) ?>" method="POST">
 						<input type="hidden" name="productPrefix" value="<?= $products->idProducto; ?>">
 						<input type="hidden" name="productName" value="<?= $products->descripcion; ?>">
 						<input type="hidden" name="productBrand" value="<?= $products->marca; ?>">

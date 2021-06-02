@@ -100,7 +100,7 @@ $route['(:any)/rates'] = "Novo_Information/ratesInf";
 //Business
 $route['(:any)/enterprises'] = "Novo_Business/getEnterprises";
 $route['(:any)/products'] = "Novo_Business/getProducts";
-$route['(:any)/detalle-producto'] = "Novo_Business/getProductDetail";
+$route['(:any)/product-detail'] = "Novo_Business/getProductDetail";
 //Bulk
 $route['(:any)/cargar-lotes'] = "Novo_Bulk/getPendingBulk";
 $route['(:any)/detalle-lote'] = "Novo_Bulk/getDetailBulk";
@@ -133,6 +133,9 @@ $route['(:any)/gastos-catgoria'] = "Novo_Reports/categoryExpense";
 $route['(:any)/cuenta-maestra'] = "Novo_Reports/masterAccount";
 $route['(:any)/estado-lote'] = "Novo_Reports/statusBulk";
 $route['(:any)/tarjetahabientes'] = "Novo_Reports/cardHolders";
+//settings
+$route['(:any)/configuracion'] = "Novo_Settings/options";
+
 
 $route['(:any)/id-empresa-ob'] = "Novo_Reports/obtenerIdEmpresa";
 $route['(:any)/closing-budgets'] = "Novo_Reports/closingBudgets";
@@ -142,8 +145,6 @@ $route['(:any)/master-account-pdf'] = "Novo_Reports/exportToPDFMasterAccount";
 $route['(:any)/master-account-excel-consolid'] = "Novo_Reports/exportToExcelMasterAccountConsolid";
 $route['(:any)/master-account-pdf-consolid'] = "Novo_Reports/exportToPDFMasterAccountConsolid";
 $route['(:any)/master-account'] = "Novo_Reports/masterAccount";
-//settings
-$route['(:any)/configuracion'] = "Novo_Settings/options";
 $route['(:any)/empresa'] = "Novo_Settings/getEnterprise";
 $route['(:any)/Contact'] = "Novo_Settings/addContact";
 $route['(:any)/cambiar-email'] = "Novo_Settings/changeEmail";
