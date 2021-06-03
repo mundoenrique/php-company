@@ -160,7 +160,7 @@ class Novo_Bulk extends NOVO_Controller {
 		log_message('INFO', 'NOVO Bulk: calculateServiceOrder Method Initialized');
 
 		if(!$this->session->flashdata('serviceOrdersList')) {
-			redirect(base_url('lotes-autorizacion'), 'Location', 302);
+			redirect(base_url(lang('CONF_LINK_BULK_AUTH')), 'Location', 302);
 			exit;
 		}
 

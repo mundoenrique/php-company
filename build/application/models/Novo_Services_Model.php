@@ -1147,7 +1147,7 @@ class Novo_Services_Model extends NOVO_Model {
 				$this->response->msg = lang('SERVICES_SUCCESSFUL_TRANSFER');
 				$this->response->icon = lang('CONF_ICON_SUCCESS');
 				$this->response->modalBtn['btn1']['link'] = $this->verify_access->verifyAuthorization('TEBAUT') && lang('CONF_INPUT_PASS') == 'ON'
-				 ? 'lotes-autorizacion'	: 'transf-cuenta-maestra';
+				 ? lang('CONF_LINK_BULK_AUTH')	: 'transf-cuenta-maestra';
 				$this->response->modalBtn['btn1']['action'] = 'redirect';
 			break;
 			case -1:
@@ -1222,7 +1222,7 @@ class Novo_Services_Model extends NOVO_Model {
 		$this->dataRequest->idServicio = '1260';
 
 		$response = $this->sendToService('CallWs_AuthorizationKey');
-		
+
 		/* $response = json_decode('{"rc":0,"msg":"Proceso OK","bean":{"tranClave":"nuR8Q+ntN8ECmrW7+Oe4m7fPuWCeo5QXlu8QtXSt7EL9dEmSAdzVYvIjIlv1pC9WhAZSLHe8yjUMIcGoswH4bRt78FJPX6MU5nHxHa4o+hi3csUGqmI5T3j8ZxbxdmpQ0pHewHVRgLTqIqd6v8Mmqg\\u003d\\u003d","tranExitoso":true,"tranDescripcionError":""}}');
 		$this->isResponseRc = 0; */
 

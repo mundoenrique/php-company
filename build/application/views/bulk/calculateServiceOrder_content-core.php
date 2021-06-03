@@ -8,7 +8,7 @@
 				<li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('CONF_LINK_ENTERPRISES')) ?>"><?= lang('GEN_MENU_ENTERPRISE') ?></a></li> /
 				<li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('CONF_LINK_PRODUCTS')) ?>"><?= lang('GEN_PRODUCTS') ?></a></li> /
 				<li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('CONF_LINK_PRODUCT_DETAIL')) ?>"><?= lang('PRODUCTS_DETAIL_TITLE') ?></a></li> /
-				<li class="inline"><a class="tertiary big-modal" href="<?= base_url('lotes-autorizacion') ?>"><?= lang('GEN_AUTHORIZE_BULK_TITLE') ?></a></li>
+				<li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('CONF_LINK_BULK_AUTH')) ?>"><?= lang('GEN_AUTHORIZE_BULK_TITLE') ?></a></li>
 				/
 				<li class="inline"><a class="tertiary not-pointer" href="javascript:"><?= lang('GEN_CACULATE_SERVICE_ORDERS') ?></a></li>
 			</ul>
