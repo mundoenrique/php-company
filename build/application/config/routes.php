@@ -106,10 +106,10 @@ $route['(:any)/bulk-load'] = "Novo_Bulk/getPendingBulk";
 $route['(:any)/bulk-detail'] = "Novo_Bulk/getDetailBulk";
 $route['(:any)/bulk-confirm'] = "Novo_Bulk/confirmBulk";
 $route['(:any)/bulk-authorize'] = "Novo_Bulk/authorizeBulkList";
-$route['(:any)/calc-serv-order'] = "Novo_Bulk/calculateServiceOrder";
 $route['(:any)/unnamed-request'] = "Novo_Bulk/unnamedRequest";
 $route['(:any)/unnamed-affiliation'] = "Novo_Bulk/unnamedAffiliate";
-$route['(:any)/detalle-innominadas'] = "Novo_Bulk/unnmamedDetail";
+$route['(:any)/unnmamed-detail'] = "Novo_Bulk/unnmamedDetail";
+$route['(:any)/calc-serv-order'] = "Novo_Bulk/calculateServiceOrder";
 //Inquiries
 $route['(:any)/consulta-orden-de-servicio'] = "Novo_Inquiries/serviceOrders";
 $route['(:any)/consulta-lote'] = "Novo_Inquiries/bulkDetail";

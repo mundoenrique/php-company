@@ -78,7 +78,7 @@
 									<td><?= $records->forAffiliateCards ?></td>
 									<td><?= $records->availableCards ?></td>
 									<td class="p-0 flex justify-center items-center">
-										<form action="<?= base_url('detalle-innominadas') ?>" method="post">
+										<form action="<?= base_url(lang('CONF_LINK_BULK_UNNAMED_DETAIL')) ?>" method="post">
 											<input type="hidden" name="bulkNumber" value="<?= $records->bulkNumber; ?>">
 											<input type="hidden" name="totalCards" value="<?= $records->totalCards; ?>">
 											<input type="hidden" name="issuanDate" value="<?= $records->issuanDate; ?>">

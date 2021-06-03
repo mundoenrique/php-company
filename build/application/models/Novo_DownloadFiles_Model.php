@@ -67,7 +67,7 @@ class Novo_DownloadFiles_Model extends NOVO_Model {
 				$this->response->data->request = $dataRequest;
 				$this->responseFail_DownloadFiles($response);
 				$this->session->set_flashdata('download', $this->response);
-				redirect(base_url('detalle-innominadas'), 'Location', 302);
+				redirect(base_url(lang('CONF_LINK_BULK_UNNAMED_DETAIL')), 'Location', 302);
 				exit;
 		}
 
