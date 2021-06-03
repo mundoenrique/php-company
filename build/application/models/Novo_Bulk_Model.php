@@ -1469,7 +1469,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 				$this->response->title = 'Cuentas Innominadas';
 				$this->response->msg = lang('BULK_UNNA_REQ_NONCARDS');
 				$this->response->icon = lang('CONF_ICON_INFO');
-				$this->response->modalBtn['btn1']['link'] = lang('GEN_LINK_BULK_UNNAMED_AFFIL');
+				$this->response->modalBtn['btn1']['link'] = lang('CONF_LINK_BULK_UNNAMED_AFFIL');
 			break;
 		}
 

@@ -209,8 +209,9 @@ $lang['CONF_LINK_BULK_LOAD'] = 'bulk-load';//permiso asociado TEBCAR
 $lang['CONF_LINK_BULK_DETAIL'] = 'bulk-detail';//permiso asociado TEBCAR
 $lang['CONF_LINK_BULK_CONFIRM'] = 'bulk-confirm';//permiso asociado TEBCAR-->TEBCON
 $lang['CONF_LINK_BULK_AUTH'] = 'bulk-authorize';//permiso asociado TEBAUT
-$lang['CONF_LINK_CALC_SERV_ORDER'] = 'calc-serv-order';//permiso asociado TEBAUT
 $lang['CONF_LINK_BULK_UNNAMED_REQ'] = 'unnamed-request';//permiso asociado TICARG
+$lang['CONF_LINK_BULK_UNNAMED_AFFIL'] = 'unnamed-affiliation';//permiso asociado TIINVN
+$lang['CONF_LINK_CALC_SERV_ORDER'] = 'calc-serv-order';//permiso asociado TEBAUT
 //INTERNAL LINKS
 $lang['CONF_LINK_SUGGESTION'] = 'suggestion';
 //LANGUAGE

@@ -111,4 +111,4 @@
 	<?php $this->load->view('widget/widget_enterprise-product_content-core', $widget) ?>
 	<?php endif; ?>
 </div>
-<form id="get-data" action="<?= base_url('afiliacion-innominadas'); ?>" method="post"></form>
+<form id="get-data" action="<?= base_url(lang('CONF_LINK_BULK_UNNAMED_AFFIL')); ?>" method="post"></form>

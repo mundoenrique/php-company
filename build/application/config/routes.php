@@ -108,7 +108,7 @@ $route['(:any)/bulk-confirm'] = "Novo_Bulk/confirmBulk";
 $route['(:any)/bulk-authorize'] = "Novo_Bulk/authorizeBulkList";
 $route['(:any)/calc-serv-order'] = "Novo_Bulk/calculateServiceOrder";
 $route['(:any)/unnamed-request'] = "Novo_Bulk/unnamedRequest";
-$route['(:any)/afiliacion-innominadas'] = "Novo_Bulk/unnamedAffiliate";
+$route['(:any)/unnamed-affiliation'] = "Novo_Bulk/unnamedAffiliate";
 $route['(:any)/detalle-innominadas'] = "Novo_Bulk/unnmamedDetail";
 //Inquiries
 $route['(:any)/consulta-orden-de-servicio'] = "Novo_Inquiries/serviceOrders";
