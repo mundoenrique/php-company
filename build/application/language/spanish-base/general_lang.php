@@ -15,7 +15,6 @@ $lang['GEN_MENU_BULK_LOAD'] = 'Cargar lotes';//TEBCAR
 $lang['GEN_MENU_BULK_AUTH'] = 'Autorización';//TEBAUT
 $lang['GEN_MENU_BULK_UNNAMED'] = 'Tarjetas innominadas';
 $lang['GEN_MENU_BULK_UNNAMED_REQ'] = 'Solicitud';//TICARG
-$lang['GEN_LINK_BULK_UNNAMED_REQ'] = 'solicitud-innominadas';//TICARG
 $lang['GEN_MENU_BULK_UNNAMED_AFFIL'] = 'Afiliación';//TIINVN
 $lang['GEN_LINK_BULK_UNNAMED_AFFIL'] = 'afiliacion-innominadas';//TIINVN
 $lang['GEN_MENU_CONS_ORDERS_SERV'] = 'Órdenes de servicio';//TEBORS

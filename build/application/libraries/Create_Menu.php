@@ -106,7 +106,7 @@ class Create_Menu {
 			break;
 			case 'TICARG':
 				$subMenuLang->text = lang('GEN_MENU_BULK_UNNAMED_REQ');
-				$subMenuLang->link = lang('GEN_LINK_BULK_UNNAMED_REQ');
+				$subMenuLang->link = lang('CONF_LINK_BULK_UNNAMED_REQ');
 			break;
 			case 'TIINVN':
 				$subMenuLang->text = lang('GEN_MENU_BULK_UNNAMED_AFFIL');
