@@ -773,7 +773,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
-				$this->response->data = base_url('lotes-calcular-orden');
+				$this->response->data = base_url(lang('CONF_LINK_CALC_SERV_ORDER'));
 				$serviceOrdersList = [];
 
 				foreach($response->lista AS $dataOrder) {
