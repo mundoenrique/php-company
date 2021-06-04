@@ -34,15 +34,14 @@ class Novo_Reports extends NOVO_Controller {
 			"third_party/additional-methods",
 			"reports/reports"
 		);
+
 		$responseReports = $this->loadModel($this->request);
-		$this->responseAttr($responseReports);
 
 		foreach($responseReports->data AS $index => $render) {
-			if($index !== 'resp') {
-				$this->render->$index = $render;
-			}
+			$this->render->$index = $render;
 		}
-
+		
+		$this->responseAttr($responseReports);
 		$this->render->titlePage =lang('GEN_MENU_REPORTS');
 		$this->views = ['reports/'.$view];
 		$this->loadView($view);

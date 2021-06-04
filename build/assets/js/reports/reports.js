@@ -1,14 +1,12 @@
 'use strict'
 var reportsResults;
 var radioType = 'input:radio[name=results]';
-
 $(function () {
 	var optionValues = [];
 	var optiondiv = [];
 	var prevOption;
 	var reportSelected;
 	var firsrYear = getPropertyOfElement('firts-year', '#repCertificadoGmf');
-	var minDate;
 	form = $('#form-report')
 
 	$('#reports option').each(function () {
@@ -33,7 +31,7 @@ $(function () {
 			.prop('disabled', true);
 		$('.help-block').text('');
 		$("#idType").prop('selectedIndex', 0);
-		reportSelected = $(this).val()
+		reportSelected = $(this).val();
 
 		if (reportSelected == "repListadoTarjetas") {
 			$("#search-criteria").addClass('none');
@@ -82,7 +80,6 @@ $(function () {
 			changeMonth: true,
 			changeYear: true,
 			showButtonPanel: true,
-			maxDate: '-M',
 			dateFormat: 'mm/yy',
 			closeText: 'Aceptar',
 			onClose: function (dateText, inst) {
@@ -91,19 +88,27 @@ $(function () {
 				$(this).datepicker('setDate', new Date(year, month, 1));
 			},
 			beforeShow: function (input, inst) {
-				if(reportSelected == 'repComprobantesVisaVale'){
-					minDate = '-12M';
-				}
-				else if(reportSelected == 'repExtractoCliente'){
-					minDate = '-18M';
-				}
-				else{
-					minDate = '';
-				}
-				$(this).datepicker('option', 'minDate', minDate);
+				var minDate,maxDate,month,year;
 
-				var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
-				var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+				switch (reportSelected) {
+					case 'repComprobantesVisaVale':
+						minDate = '-12M';
+					break;
+					case 'repExtractoCliente':
+						minDate = new Date(params['minYear'],params['minMonth']-1,params['minDay']);
+						maxDate = new Date(params['maxYear'],params['maxMonth']-1,params['maxDay']);
+					break;
+					default:
+						minDate = '';
+						maxDate = '-M';
+					break;
+				}
+
+				$(this).datepicker('option', 'minDate', minDate);
+				$(this).datepicker('option', 'maxDate', maxDate);
+
+				month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
+				year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
 				inst.dpDiv.addClass("ui-datepicker-month-year");
 				$(this).datepicker('option', 'defaultDate', new Date(year, month, 1));
 			},
