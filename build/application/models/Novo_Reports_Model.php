@@ -49,7 +49,6 @@ class Novo_Reports_Model extends NOVO_Model {
 
 				foreach ($response->listaConfigReportesCEO AS $reports) {
 					$report = [];
-
 					foreach ($reports AS $key => $value) {
 						switch ($key) {
 							case 'idOperation':
@@ -72,6 +71,17 @@ class Novo_Reports_Model extends NOVO_Model {
 										$idType['text'] = $IdTypeObject->description;
 										$IdTypeList[] = (object) $idType;
 									}
+								}
+
+								if(count($value) > 0 && $value[0]->idFilter == '4') {
+									$minDate = explode('/',$value[0]->minValue);
+									$maxDate = explode('/',$value[0]->maxValue);
+								  $this->response->data->params['minYear']=(float)$minDate[2];
+									$this->response->data->params['minMonth']=(float)$minDate[1];
+									$this->response->data->params['minDay']=(float)$minDate[0];
+									$this->response->data->params['maxYear']=(float)$maxDate[2];
+									$this->response->data->params['maxMonth']=(float)$maxDate[1];
+									$this->response->data->params['maxDay']=(float)$maxDate[0];
 								}
 
 								if(count($value) > 0 && $value[0]->idFilter == '7') {
