@@ -7,4 +7,4 @@ $lang['LOGIN_INFO-2'] = '';
 $lang['LOGIN_INFO-3'] = 'E-mail: soporteempresas@tebca.com';
 $lang['LOGIN_WIDGET_TITLE'] = 'Cliente afiliado Venezuela';
 //PAS-RECOVER
-$lang['PLACE_HOLDER_FISCAL_REGISTER'] = "J-00000000-0";
+$lang['USER_EXAMPLE_FISCAL_REGISTER'] = "J-00000000-0";

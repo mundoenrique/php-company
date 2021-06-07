@@ -7,3 +7,4 @@ $lang['GEN_CONTACTS'] = [
 	' ' => '(0212) 2807575',
 	'E-mail' => 'soporteempresas@tebca.com'
 ];
+$lang['GEN_FISCAL_REGISTRY'] = 'RIF.';

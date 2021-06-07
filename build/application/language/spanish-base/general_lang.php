@@ -379,6 +379,7 @@ $lang['GEN_ACCEPT_TERMS'] = 'Al presionar "Aceptar" declaras que has leído y ac
 $lang['MIN_WIDTH_OTP'] = '480';
 $lang['POSTMY_OTP'] = 'center top+160';
 $lang['GEN_OTP_NO_SENT'] = 'No fue posible enviar el correo con el código de verificación, por favor intentalo más tarde.';
+$lang['RECOVER_PASS_FISCAL_REGISTRY']= '%s de la Empresa';
 // RECOVER ACCESS
 $lang['GEN_RECOVER_DOC_TYPE'] = [
 	'' => 'Selecciona',

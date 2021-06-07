@@ -51,7 +51,8 @@ $lang["TERMS_CONTENT"] = "<p><strong>Tebca Perú, Transferencia Electrónica de 
 //PASS-RECOVER
 $lang['RECOVER_PASS_FORGOTTEN']= "Si olvidaste o bloqueaste tu contraseña de acceso a <strong>%s</strong>, por favor ingresa los datos que se solicitan a continuación.";
 $lang['RECOVER_PASS_FISCAL_REGISTRY']= '%s de la Empresa';
-$lang['PLACE_HOLDER_FISCAL_REGISTER'] = "00000000000";
+//$lang['PLACE_HOLDER_FISCAL_REGISTER'] = "00000000000";
+$lang['USER_EXAMPLE_FISCAL_REGISTER'] = "00000000000";
 //PASS-CHANGE
 $lang['PASSWORD_NEWUSER'] = 'Por motivos de seguridad es necesario que cambies tu contraseña la primera vez que ingresas a nuestro sistema "<strong>%s</strong>".';
 $lang['PASSWORD_EXPIRED'] = 'Tu contraseña está vencida. Por motivos de seguridad es necesario que la cambies antes de continuar en nuestro sistema "<strong>%s</strong>".';

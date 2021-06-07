@@ -8,3 +8,5 @@ $lang['GEN_CONTACTS'] = [
 	'Sugerencias' => 'info@servitebca.com.co',
 	' ' => 'info@servitebca.com.co',
 ];
+//PASSWORD RECOVERY
+$lang['GEN_FISCAL_REGISTRY'] = 'NIT.';
