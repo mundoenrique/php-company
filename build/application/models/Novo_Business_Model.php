@@ -368,7 +368,7 @@ class Novo_Business_Model extends NOVO_Model {
 
 
 					$productDetail['name'] = ucwords(mb_strtolower($response->estadistica->producto->descripcion));
-					$productDetail['brand'] = $response->estadistica->producto->marca;
+					$productDetail['brand'] = trim($response->estadistica->producto->marca);
 					$productInf = new stdClass();
 					$productInf->productPrefix = $productPrefix;
 					$productInf->productName = $productDetail['name'];
