@@ -309,12 +309,13 @@ class Novo_Business_Model extends NOVO_Model {
 		];
 
 		$response = $this->sendToService('callWs_GetProductDetail');
+
 		$imgProgram = $this->countryUri.'_default.svg';
 		$productDetail = [
 			'name' => $dataRequest->productName ?? '',
 			'imgProgram' => $imgProgram,
 			'brand' => isset($dataRequest->productBrand) ? url_title(trim(mb_strtolower($dataRequest->productBrand))) : '',
-			'imgBrand' => isset($dataRequest->productBrand) ? $dataRequest->productBrand.lang('GEN_DETAIL_BARND_COLOR') : '',
+			'imgBrand' => isset($dataRequest->productBrand) ? trim(mb_strtolower($dataRequest->productBrand.lang('GEN_DETAIL_BARND_COLOR'))) : '',
 			'viewSomeAttr' => TRUE,
 			'prefix' => $productPrefix
 		];
