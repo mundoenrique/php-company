@@ -315,7 +315,7 @@ class Novo_Business_Model extends NOVO_Model {
 			'name' => $dataRequest->productName ?? '',
 			'imgProgram' => $imgProgram,
 			'brand' => isset($dataRequest->productBrand) ? url_title(trim(mb_strtolower($dataRequest->productBrand))) : '',
-			'imgBrand' => isset($dataRequest->productBrand) ? $dataRequest->productBrand.lang('GEN_DETAIL_BARND_COLOR') : '',
+			'imgBrand' => isset($dataRequest->productBrand) ? trim(mb_strtolower($dataRequest->productBrand.lang('GEN_DETAIL_BARND_COLOR'))) : '',
 			'viewSomeAttr' => TRUE,
 			'prefix' => $productPrefix
 		];
@@ -368,7 +368,7 @@ class Novo_Business_Model extends NOVO_Model {
 
 
 					$productDetail['name'] = ucwords(mb_strtolower($response->estadistica->producto->descripcion));
-					$productDetail['brand'] = trim(mb_strtolower($response->estadistica->producto->marca));
+					$productDetail['brand'] = $response->estadistica->producto->marca;
 					$productInf = new stdClass();
 					$productInf->productPrefix = $productPrefix;
 					$productInf->productName = $productDetail['name'];
