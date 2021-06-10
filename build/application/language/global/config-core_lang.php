@@ -213,6 +213,7 @@ $lang['CONF_LINK_BULK_UNNAMED_REQ'] = 'unnamed-request';//permiso asociado TICAR
 $lang['CONF_LINK_BULK_UNNAMED_AFFIL'] = 'unnamed-affiliation';//permiso asociado TIINVN
 $lang['CONF_LINK_BULK_UNNAMED_DETAIL'] = 'unnmamed-detail';//permiso asociado TIINVN
 $lang['CONF_LINK_CALC_SERV_ORDER'] = 'calc-serv-order';//permiso asociado TEBAUT
+$lang['CONF_LINK_SERVICE_ORDERS'] = 'service-orders';//permiso asociado TEBORS
 //INTERNAL LINKS
 $lang['CONF_LINK_SUGGESTION'] = 'suggestion';
 //LANGUAGE

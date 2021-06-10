@@ -89,7 +89,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
-				$this->response->data = 'consulta-orden-de-servicio';
+				$this->response->data = lang('CONF_LINK_SERVICE_ORDERS');
 
 				foreach($response->lista AS $list) {
 					foreach($list AS $key => $value) {
@@ -600,7 +600,7 @@ class Novo_Inquiries_Model extends NOVO_Model {
 				$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_ACCEPT');
 				$this->response->modalBtn['btn1']['action'] = $response->code != 0 ? $response->modalBtn['btn1']['action'] : 'close';
 				$this->session->set_flashdata('download', $this->response);
-				redirect(base_url('consulta-orden-de-servicio'), 'Location', 302);
+				redirect(base_url(lang('CONF_LINK_SERVICE_ORDERS')), 'Location', 302);
 				exit;
 		}
 	}

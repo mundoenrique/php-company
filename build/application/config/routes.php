@@ -111,7 +111,7 @@ $route['(:any)/unnamed-affiliation'] = "Novo_Bulk/unnamedAffiliate";
 $route['(:any)/unnmamed-detail'] = "Novo_Bulk/unnmamedDetail";
 $route['(:any)/calc-serv-order'] = "Novo_Bulk/calculateServiceOrder";
 //Inquiries
-$route['(:any)/consulta-orden-de-servicio'] = "Novo_Inquiries/serviceOrders";
+$route['(:any)/service-orders'] = "Novo_Inquiries/serviceOrders";
 $route['(:any)/consulta-lote'] = "Novo_Inquiries/bulkDetail";
 //services
 $route['(:any)/transf-cuenta-maestra'] = "Novo_Services/transfMasterAccount";
