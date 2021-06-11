@@ -115,7 +115,7 @@ class Novo_DownloadFiles_Model extends NOVO_Model {
 				$this->response->data->request = $request;
 				$this->responseFail_DownloadFiles($dataRequest);
 				$this->session->set_flashdata('download', $this->response);
-				redirect(base_url('consulta-lote'), 'Location', 302);
+				redirect(base_url(lang('CONF_LINK_INQUIRY_BULK_DETAIL')), 'Location', 302);
 				exit;
 		}
 

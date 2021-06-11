@@ -214,6 +214,7 @@ $lang['CONF_LINK_BULK_UNNAMED_AFFIL'] = 'unnamed-affiliation';//permiso asociado
 $lang['CONF_LINK_BULK_UNNAMED_DETAIL'] = 'unnmamed-detail';//permiso asociado TIINVN
 $lang['CONF_LINK_CALC_SERV_ORDER'] = 'calc-serv-order';//permiso asociado TEBAUT
 $lang['CONF_LINK_SERVICE_ORDERS'] = 'service-orders';//permiso asociado TEBORS
+$lang['CONF_LINK_INQUIRY_BULK_DETAIL'] = 'inquiry-bulk-detail';//permiso asociado TEBAUT || TEBORS
 //INTERNAL LINKS
 $lang['CONF_LINK_SUGGESTION'] = 'suggestion';
 //LANGUAGE

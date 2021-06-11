@@ -112,7 +112,7 @@ $route['(:any)/unnmamed-detail'] = "Novo_Bulk/unnmamedDetail";
 $route['(:any)/calc-serv-order'] = "Novo_Bulk/calculateServiceOrder";
 //Inquiries
 $route['(:any)/service-orders'] = "Novo_Inquiries/serviceOrders";
-$route['(:any)/consulta-lote'] = "Novo_Inquiries/bulkDetail";
+$route['(:any)/inquiry-bulk-detail'] = "Novo_Inquiries/bulkDetail";
 //services
 $route['(:any)/transf-cuenta-maestra'] = "Novo_Services/transfMasterAccount";
 $route['(:any)/consulta-tarjetas'] = "Novo_Services/cardsInquiry";

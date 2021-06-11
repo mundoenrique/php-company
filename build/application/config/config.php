@@ -463,7 +463,7 @@ $config['csrf_exclude_uris'] = array(
 	'[\w\-]+/bulk-detail',
 	'[\w\-]+/bulk-confirm',
 	'[\w\-]+/unnamed-affiliation',
-	'[\w\-]+/consulta-lote',
+	'[\w\-]+/inquiry-bulk-detail',
 	'[\w\-]+/detalle-orden-de-servicio',
 	'[\w\-]+/unnmamed-detail',
 	'[\w\-]+/estado-lote',

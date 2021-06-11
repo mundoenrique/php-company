@@ -49,7 +49,7 @@
                 <td><?= $bulk->records; ?></td>
                 <td><?= $bulk->amount; ?></td>
                 <td class="p-0 flex justify-center items-center">
-                  <form id="id-<?= $bulk->idBulk; ?>" action="<?= base_url('consulta-lote') ?>" method="post">
+                  <form id="id-<?= $bulk->idBulk; ?>" action="<?= base_url(lang('CONF_LINK_INQUIRY_BULK_DETAIL')) ?>" method="post">
                     <input type="hidden" name="bulkId" value="<?= $bulk->idBulk; ?>">
                     <input type="hidden" name="bulkfunction" value="Autorización de lotes">
                   </form>
@@ -142,7 +142,7 @@
                 <td><?= $bulk->records; ?></td>
                 <td><?= $bulk->amount; ?></td>
                 <td class="p-0 flex justify-center items-center">
-                  <form id="id-<?= $bulk->idBulk; ?>" action="<?= base_url('consulta-lote') ?>" method="post">
+                  <form id="id-<?= $bulk->idBulk; ?>" action="<?= base_url(lang('CONF_LINK_INQUIRY_BULK_DETAIL')) ?>" method="post">
                     <input type="hidden" name="bulkId" value="<?= $bulk->idBulk; ?>">
                     <input type="hidden" name="bulkfunction" value="Autorización de lotes">
                   </form>
