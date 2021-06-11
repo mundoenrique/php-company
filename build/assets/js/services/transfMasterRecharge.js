@@ -1,11 +1,9 @@
 'use strict'
 var rechargeParam;
 var checkType;
-
 $(function () {
+	rechargeParam = params;
 	if (params && code == 0) {
-		rechargeParam = params;
-
 		$("#pay").prop("checked", true);
 		checkType = $("input:radio[name=transferType]:checked").val();
 
@@ -29,26 +27,6 @@ $(function () {
 			})
 		});
 		
-		$('#masterAccountRechargeBtn').on('click', function(e) {
-			e.preventDefault();
-			form = $('#masterAccountRechargeForm');
-			btnText = $(this).text();
-			validateForms(form);
-
-			if (form.valid()) {
-				data = getDataForm(form);
-				data.transferAmount = normalizeAmount(data.transferAmount);
-				$(this).html(loader);
-				insertFormInput(true);
-
-				if (lang.CONF_INPUT_PASS == 'OFF') {
-					getTokenRecharge();
-				} else {
-					rechargeAccount();
-				}
-			}
-		});
-
 		$('#system-info').on('click', '.send-otp', function() {
 			form = $('#formVerificationOTP');
 			formInputTrim(form);
@@ -65,6 +43,24 @@ $(function () {
 			}
 		});
 	}
+	$('#masterAccountRechargeBtn').on('click', function(e) {
+		e.preventDefault();
+		form = $('#masterAccountRechargeForm');
+		btnText = $(this).text();
+		validateForms(form);
+
+		if (form.valid()) {
+			data = getDataForm(form);
+			data.transferAmount = normalizeAmount(data.transferAmount);
+			$(this).html(loader);
+			insertFormInput(true);
+			if (lang.CONF_INPUT_PASS == 'OFF') {
+				getTokenRecharge();
+			} else {
+				rechargeAccount();
+			}
+		}
+	});
 });
 
 function getTokenRecharge() {
