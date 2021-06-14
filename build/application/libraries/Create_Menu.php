@@ -138,7 +138,7 @@ class Create_Menu {
 			break;
 			case 'LIMTRX':
 				$subMenuLang->text = lang('GEN_MENU_SERV_TRANS_LIMITS');
-				$subMenuLang->link = lang('GEN_LINK_SERV_TRANS_LIMITS');
+				$subMenuLang->link = lang('CONF_LINK_TRANSACTIONAL_LIMITS');
 			break;
 			case 'CONVIS':
 				$subMenuLang->text = lang('GEN_MENU_SERV_CONTROLS_PAY');
