@@ -144,7 +144,7 @@ class Novo_Business extends NOVO_Controller {
 		$this->render->serviceOrders = $detailList->data->productSummary->serviceOrders;
 		$this->render->serviceOrdersNoCon = $detailList->data->productSummary->serviceOrdersNoCon;
 		$this->render->serviceOrdersCon = $detailList->data->productSummary->serviceOrdersCon;
-		$this->render->masterTransLink = $this->verify_access->verifyAuthorization('TRAMAE') ? lang('GEN_LINK_SERV_MASTER_ACCOUNT') : lang('CONF_NO_LINK');
+		$this->render->masterTransLink = $this->verify_access->verifyAuthorization('TRAMAE') ? lang('CONF_LINK_TRANSF_MASTER_ACCOUNT') : lang('CONF_NO_LINK');
 		$this->render->masterTransDisabled = $this->render->masterTransLink == lang('CONF_NO_LINK') ? 'is-disabled' : '';
 		$this->render->totalCards = $detailList->data->productSummary->totalCards;
 		$this->render->activeCards = $detailList->data->productSummary->activeCards;

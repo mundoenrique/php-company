@@ -18,7 +18,6 @@ $lang['GEN_MENU_BULK_UNNAMED_REQ'] = 'Solicitud';//TICARG
 $lang['GEN_MENU_BULK_UNNAMED_AFFIL'] = 'Afiliación';//TIINVN
 $lang['GEN_MENU_CONS_ORDERS_SERV'] = 'Órdenes de servicio';//TEBORS
 $lang['GEN_MENU_SERV_MASTER_ACCOUNT'] = 'Cuenta maestra';//TRAMAE
-$lang['GEN_LINK_SERV_MASTER_ACCOUNT'] = 'transf-cuenta-maestra'; //TRAMAE
 $lang['GEN_MENU_SERV_CARD_INQUIRY'] = 'Consulta de Tarjetas';//COPELO
 $lang['GEN_LINK_SERV_CARD_INQUIRY'] = 'consulta-tarjetas';//COPELO
 $lang['GEN_MENU_SERV_COMM_MONEY_ORDERS'] = 'Giros comerciales';//GIRCOM

@@ -126,7 +126,7 @@ class Create_Menu {
 			break;
 			case 'TRAMAE':
 				$subMenuLang->text = lang('GEN_MENU_SERV_MASTER_ACCOUNT');
-				$subMenuLang->link = lang('GEN_LINK_SERV_MASTER_ACCOUNT');
+				$subMenuLang->link = lang('CONF_LINK_TRANSF_MASTER_ACCOUNT');
 			break;
 			case 'COPELO':
 				$subMenuLang->text = lang('GEN_MENU_SERV_CARD_INQUIRY');
