@@ -115,7 +115,7 @@ $route['(:any)/service-orders'] = "Novo_Inquiries/serviceOrders";
 $route['(:any)/inquiry-bulk-detail'] = "Novo_Inquiries/bulkDetail";
 //services
 $route['(:any)/transf-master-account'] = "Novo_Services/transfMasterAccount";
-$route['(:any)/consulta-tarjetas'] = "Novo_Services/cardsInquiry";
+$route['(:any)/cards-inquiry'] = "Novo_Services/cardsInquiry";
 $route['(:any)/limites-transaccionales'] = "Novo_Services/transactionalLimits";
 $route['(:any)/giros-comerciales'] = "Novo_Services/commercialTwirls";
 //DownloadFile

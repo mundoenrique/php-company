@@ -216,6 +216,7 @@ $lang['CONF_LINK_CALC_SERV_ORDER'] = 'calc-serv-order';//permiso asociado TEBAUT
 $lang['CONF_LINK_SERVICE_ORDERS'] = 'service-orders';//permiso asociado TEBORS
 $lang['CONF_LINK_INQUIRY_BULK_DETAIL'] = 'inquiry-bulk-detail';//permiso asociado TEBAUT || TEBORS
 $lang['CONF_LINK_TRANSF_MASTER_ACCOUNT'] = 'transf-master-account';//permiso asociado TRAMAE
+$lang['CONF_LINK_CARDS_INQUIRY'] = 'cards-inquiry';//permiso asociado COPELO
 //INTERNAL LINKS
 $lang['CONF_LINK_SUGGESTION'] = 'suggestion';
 //LANGUAGE

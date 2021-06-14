@@ -130,7 +130,7 @@ class Create_Menu {
 			break;
 			case 'COPELO':
 				$subMenuLang->text = lang('GEN_MENU_SERV_CARD_INQUIRY');
-				$subMenuLang->link = lang('GEN_LINK_SERV_CARD_INQUIRY');
+				$subMenuLang->link = lang('CONF_LINK_CARDS_INQUIRY');
 			break;
 			case 'GIRCOM':
 				$subMenuLang->text = lang('GEN_MENU_SERV_COMM_MONEY_ORDERS');
