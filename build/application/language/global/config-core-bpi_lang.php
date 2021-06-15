@@ -7,3 +7,5 @@ $lang['CONF_INPUT_PASS'] = 'ON';
 $lang['CONF_VALIDATE_PARAMS'] = 'ON';
 //SIGNIN
 $lang['CONF_SIGNIN_WELCOME_MSG'] = 'ON';
+//FOOTER
+$lang['CONF_FOOTER_INFO'] = 'OFF';
