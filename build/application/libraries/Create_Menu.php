@@ -134,7 +134,7 @@ class Create_Menu {
 			break;
 			case 'GIRCOM':
 				$subMenuLang->text = lang('GEN_MENU_SERV_COMM_MONEY_ORDERS');
-				$subMenuLang->link = lang('GEN_LINK_SERV_COMM_MONEY_ORDERS');
+				$subMenuLang->link = lang('CONF_LINK_COMMERCIAL_TWIRLS');
 			break;
 			case 'LIMTRX':
 				$subMenuLang->text = lang('GEN_MENU_SERV_TRANS_LIMITS');

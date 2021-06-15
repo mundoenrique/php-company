@@ -218,6 +218,7 @@ $lang['CONF_LINK_INQUIRY_BULK_DETAIL'] = 'inquiry-bulk-detail';//permiso asociad
 $lang['CONF_LINK_TRANSF_MASTER_ACCOUNT'] = 'transf-master-account';//permiso asociado TRAMAE
 $lang['CONF_LINK_CARDS_INQUIRY'] = 'cards-inquiry';//permiso asociado COPELO
 $lang['CONF_LINK_TRANSACTIONAL_LIMITS'] = 'transactional-limits';//permiso asociado LIMTRX
+$lang['CONF_LINK_COMMERCIAL_TWIRLS'] = 'commercial-twirls';//permiso asociado GIRCOM
 //INTERNAL LINKS
 $lang['CONF_LINK_SUGGESTION'] = 'suggestion';
 //LANGUAGE

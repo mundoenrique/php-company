@@ -20,7 +20,6 @@ $lang['GEN_MENU_CONS_ORDERS_SERV'] = 'Órdenes de servicio';//TEBORS
 $lang['GEN_MENU_SERV_MASTER_ACCOUNT'] = 'Cuenta maestra';//TRAMAE
 $lang['GEN_MENU_SERV_CARD_INQUIRY'] = 'Consulta de Tarjetas';//COPELO
 $lang['GEN_MENU_SERV_COMM_MONEY_ORDERS'] = 'Giros comerciales';//GIRCOM
-$lang['GEN_LINK_SERV_COMM_MONEY_ORDERS'] = 'giros-comerciales';//GIRCOM
 $lang['GEN_MENU_SERV_TRANS_LIMITS'] = 'Límites';//LIMTRX
 $lang['GEN_MENU_REP_CATEGORY_EXPENSE'] = 'Gastos por categoría';//REPCAT
 $lang['GEN_LINK_REP_CATEGORY_EXPENSE'] = 'gastos-catgoria';// REPCAT
