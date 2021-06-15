@@ -7,6 +7,7 @@ function validateForms(form) {
 	var shortPhrase = /^['a-z0-9ñáéíóú ().']{4,25}$/i;
 	var middlePhrase = /^['a-z0-9ñáéíóú ().']{5,45}$/i;
 	var longPhrase = /^[a-z0-9ñáéíóú ().-]{6,70}$/i;
+	var longPhraseUpper = /^([a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ (),.-])+$/i;
 	var emailValid = /^([a-zA-Z]+[0-9_.+-]*)+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 	var alphanumunder = /^([\w.\-+&ñÑ ]+)+$/i;
 	var alphanum = /^[a-z0-9]+$/i;
@@ -223,6 +224,19 @@ function validateForms(form) {
 			"transferType": { required: true },
 			"transferAmount": { required: true, pattern: floatAmount, lessBalance: true, dailyQuantity: true, minAmount: true, maxAmount: true, maxAmountTransDaily: true, maxAmountTransweekly: true},
 			"description": { required: true, pattern: rechargeDesc },
+			"branchName": { required: true, pattern: longPhraseUpper },
+			"zoneName": { required: true, pattern: numeric },
+			"address": { required: true, pattern: longPhraseUpper },
+			"address2": { pattern: longPhraseUpper },
+			"address3": { pattern: longPhraseUpper },
+			"countryCode": { required: true, pattern: numeric },
+			"stateCodeBranch": { required: true, pattern: numeric },
+			"cityCodeBranch": { required: true, pattern: numeric },
+			"districtCodeBranch": { required: true, pattern: numeric },
+			"areaCode": { required: true, pattern: numeric },
+			"phone": { required: true, pattern: numeric },
+			"person": { required: true, pattern: alphanumspace },
+			"branchCode": { required: true, pattern: numeric }
 		},
 		messages: {
 			"userName": lang.VALIDATE_USERLOGIN,
@@ -466,9 +480,60 @@ function validateForms(form) {
 			},
 			"description": {
 				required: lang.VALIDATE_RECHAR_DESC1,
-				pattern: lang.VALIDATE_RECHAR_DESC2
+				pattern: lang.VALIDATE_NAME_BRANCHES
 			},
-
+			"branchName": {
+				required: lang.VALIDATE_INPUT_REQUIRED,
+				pattern: lang.VALIDATE_NAME_BRANCHES
+			},
+			"zoneName": {
+				required: lang.VALIDATE_INPUT_REQUIRED,
+				pattern: lang.VALIDATE_NIT
+			},
+			"address": {
+				required: lang.VALIDATE_INPUT_REQUIRED,
+				pattern: lang.VALIDATE_ADDRESS_BRANCHES
+			},
+			"address2": {
+				required: lang.VALIDATE_INPUT_REQUIRED,
+				pattern: lang.VALIDATE_ADDRESS_BRANCHES
+			},
+			"address3": {
+				required: lang.VALIDATE_INPUT_REQUIRED,
+				pattern: lang.VALIDATE_ADDRESS_BRANCHES
+			},
+			"countryCode": {
+				required: lang.VALIDATE_INPUT_REQUIRED,
+				pattern: lang.VALIDATE_NIT
+			},
+			"stateCodeBranch": {
+				required: lang.VALIDATE_INPUT_REQUIRED,
+				pattern: lang.VALIDATE_NIT
+			},
+			"cityCodeBranch": {
+				required: lang.VALIDATE_INPUT_REQUIRED,
+				pattern: lang.VALIDATE_NIT
+			},
+			"districtCodeBranch": {
+				required: lang.VALIDATE_INPUT_REQUIRED,
+				pattern: lang.VALIDATE_NIT
+			},
+			"areaCode": {
+				required: lang.VALIDATE_INPUT_REQUIRED,
+				pattern: lang.VALIDATE_NIT
+			},
+			"phone": {
+				required: lang.VALIDATE_INPUT_REQUIRED,
+				pattern: lang.VALIDATE_NIT
+			},
+			"person": {
+				required: lang.VALIDATE_INPUT_REQUIRED,
+				pattern: lang.VALIDATE_NAME_BRANCHES
+			},
+			"branchCode": {
+				required: lang.VALIDATE_INPUT_REQUIRED,
+				pattern: lang.VALIDATE_NIT
+			}
 		},
 		errorPlacement: function (error, element) {
 			$(element).closest('.form-group').find('.help-block').html(error.html());

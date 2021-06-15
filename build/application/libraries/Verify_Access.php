@@ -157,6 +157,9 @@ class Verify_Access {
 				case 'keepSession':
 				case 'options':
 				case 'getFileIni':
+				case 'getBranches':
+				case 'uploadFileBranches':
+				case 'updateBranch':
 				case 'deleteFile':
 				case 'getProducts':
 					$auth = ($this->CI->session->has_userdata('logged'));

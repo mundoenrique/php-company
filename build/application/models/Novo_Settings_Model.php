@@ -230,7 +230,7 @@ class Novo_Settings_Model extends NOVO_Model {
 		$this->dataRequest->tipoContacto = $dataRequest->tipoContacto;
 		$this->dataRequest->usuario = $dataRequest->usuario;
 
-		$this->sendToService('CallWs_AddContact');
+		$response = $this->sendToService('CallWs_AddContact');
 
 		switch($this->isResponseRc) {
 			case 0:
@@ -308,5 +308,190 @@ class Novo_Settings_Model extends NOVO_Model {
 		}
 
 		return $this->responseToTheView('CallWs_GetFileIni: '.$this->dataRequest->idOperation);
+	}
+
+	/**
+	 * @info Método para busqueda de sucursales
+	 * @author Diego Acosta García
+	 * @date May 20th, 2021
+	 */
+	public function CallWs_getBranches_Settings($dataRequest)
+	{
+		log_message('INFO', 'NOVO Settings Model: getBranches Method Initialized');
+
+		$this->dataAccessLog->modulo = 'getConsultarSucursales';
+		$this->dataAccessLog->function = 'getConsultarSucursales';
+		$this->dataAccessLog->operation = 'getConsultarSucursales';
+		$this->dataRequest->lista = [
+			[
+				"rif" => $dataRequest->branchListBr
+			]
+		];
+		$this->dataRequest->paginaActual = 1;
+		$this->dataRequest->tamanoPagina = 10;
+		$this->dataRequest->paginar = false;
+		$this->dataRequest->idOperation = 'getConsultarSucursales';
+		$this->dataRequest->className = 'com.novo.objects.MO.ListadoSucursalesMO';
+		$profile = 'S';
+		$country = $this->customerUri;
+
+		$response = $this->sendToService('CallWs_getBranches');
+
+		switch ($this->isResponseRc) {
+			case 0:
+				$this->response->code = 0;
+				$infoBranches = $response->lista;
+				$tableBranches = [];
+
+				foreach ($infoBranches as $key0 => $value0) {
+
+					$geographic[$key0] = [
+						"state" => $infoBranches[$key0]->estado,
+						"city"=> $infoBranches[$key0]->ciudad
+					];
+
+					$tableBranches[$key0] = [
+						"id" => $key0,
+						"rifB" => $infoBranches[$key0]->rif,
+						"codB" => $infoBranches[$key0]->cod,
+						"person" => $infoBranches[$key0]->persona,
+						"userNameB" => $infoBranches[$key0]->usuario,
+						"branchName" =>$infoBranches[$key0]->nomb_cia,
+						"branchCode" =>$infoBranches[$key0]->codigo,
+						"contact" =>$infoBranches[$key0]->persona,
+						"phone" =>$infoBranches[$key0]->telefono,
+						"zoneName" =>$infoBranches[$key0]->zona,
+						"address1" =>$infoBranches[$key0]->direccion_1,
+						"address2" =>$infoBranches[$key0]->direccion_2,
+						"address3" =>$infoBranches[$key0]->direccion_3,
+						"areaCode" =>$infoBranches[$key0]->cod_area
+					];
+
+					if (array_key_exists("paisTo", $response)) {
+						$country = $response->paisTo->pais;
+
+						foreach ($response->paisTo->listaEstados as $key1 => $value1) {
+							if( $response->paisTo->listaEstados[$key1]->codEstado == $infoBranches[$key0]->estado){
+								$stateName = $response->paisTo->listaEstados[$key1]->estados;
+
+								foreach ($response->paisTo->listaEstados[$key1]->listaCiudad as $key2 => $value2) {
+									$cities = [$response->paisTo->listaEstados[$key1]->listaCiudad, $response->paisTo->listaEstados[$key1]->listaCiudad[$key2]->ciudad];
+								};
+							};
+						};
+
+						foreach ($cities[0] as $key => $value) {
+							if (array_key_exists('listaDistrito', ($cities[0][$key]))) {
+								$profile = 'L';
+								$districts[$key] = $cities[0][$key]->ListaDistrito;
+							};
+						};
+					};
+
+					$this->response->country = [
+						"countryCodeBranch" =>  $infoBranches[0]->codPais,
+						"countryNameBranch" =>  $country,
+						"statesList" => $response->paisTo->listaEstados
+					];
+				};
+
+				$this->response->data = $tableBranches;
+				$this->response->geoUserData = $geographic;
+				$this->response->geoInfo = $response->paisTo;
+				$this->response->longProfile = $profile;
+				$this->response->infoBranches = $stateName;
+
+				break;
+			case -150:
+				$this->response->code = 1;
+				$this->response->geoInfo = $response->paisTo;
+				$this->response->longProfile = $profile;
+				$this->response->country = [
+					"countryCodeBranch" =>  $response->paisTo->codPais,
+					"countryNameBranch" =>  $country,
+				];
+				break;
+			default:
+				$this->response->code = 2;
+				break;
+		};
+
+		return $this->responseToTheView('CallWs_getBranches');
+	}
+
+	/**
+	 * @info Método para subir archivo de sucursales
+	 * @author Diego Acosta García
+	 * @date May 28th, 2021
+	 */
+	public function CallWs_uploadFileBranches_Settings($dataRequest)
+	{
+		log_message('INFO', 'NOVO Settings Model: uploadFileBranches Method Initialized');
+
+		$this->dataAccessLog->modulo = 'getSucursalTxt';
+		$this->dataAccessLog->function = 'getSucursalTxt';
+		$this->dataAccessLog->operation = 'getSucursalTxt';
+		$this->dataRequest->idOperation = 'getSucursalTxt';
+		$this->dataRequest->className = 'com.novo.objects.MO.ListadoSucursalesMO';
+		$this->dataRequest->file = $dataRequest->file;
+		$this->isResponseRc = 0;
+
+		switch($this->isResponseRc ) {
+			case 0:
+				$this->response->code = 0;
+				$this->response->data = $dataRequest->file;
+			break;
+		}
+
+		return $this->responseToTheView('CallWs_uploadFileBranches');
+	}
+
+	/**
+	 * @info Método para actualizar sucursal
+	 * @author Diego Acosta García
+	 * @date May 29th, 2021
+	 */
+	public function CallWs_updateBranch_Settings($dataRequest)
+	{
+		log_message('INFO', 'NOVO Settings Model: updateBranch Method Initialized');
+
+		$this->dataAccessLog->modulo = 'getActualizarSucursal';
+		$this->dataAccessLog->function = 'getActualizarSucursal';
+		$this->dataAccessLog->operation = 'getActualizarSucursal';
+		$this->dataRequest->idOperation = 'getActualizarSucursal';
+		$this->dataRequest->className = 'com.novo.objects.TOs.SucursalTO';
+
+		$this->dataRequest->rif = $dataRequest->rifB;
+		$this->dataRequest->cod = $dataRequest->codB;
+		$this->dataRequest->nom_cia = $dataRequest->branchName;
+		$this->dataRequest->direccion_1 = $dataRequest->address1;
+		$this->dataRequest->direccion_2 = $dataRequest->address2;
+		$this->dataRequest->direccion_3 = $dataRequest->address3;
+		$this->dataRequest->zona = $dataRequest->branchCode;
+		$this->dataRequest->codPais = $dataRequest->countryCodeBranch;
+		$this->dataRequest->estado = $dataRequest->stateCodeBranch;
+		$this->dataRequest->ciudad = $dataRequest->cityCodeBranch;
+		$this->dataRequest->persona = $dataRequest->person;
+		$this->dataRequest->cod_area = $dataRequest->areaCode;
+		$this->dataRequest->telefono = $dataRequest->phone;
+		$this->dataRequest->usuario = $dataRequest->userNameB;
+
+		$password = isset($dataRequest->pass) ? $this->cryptography->decryptOnlyOneData($dataRequest->pass) : $this->session->passWord;
+
+		if (lang('CONF_HASH_PASS') == 'ON' && $this->singleSession == 'signIn') {
+			$password = $this->session->pass ?: md5($password);
+		}
+
+		$this->dataRequest->password = $password;
+
+		$response = $this->sendToService('CallWs_updateBranch');
+
+		switch($this->isResponseRc) {
+			case 0:
+				$this->response->code = 0;
+			break;
+		}
+
+		return $this->responseToTheView('CallWs_updateBranch');
 	}
 }

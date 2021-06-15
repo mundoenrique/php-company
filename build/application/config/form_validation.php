@@ -752,6 +752,99 @@ $config = [
 			'rules' => 'null'
 		]
 	],
+	'getBranches' => [
+		[
+			'field' => 'branchListBr',
+			'label' => 'branchListBr',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+		]
+	],
+	'uploadFileBranches' => [
+		[
+			'field' => 'file',
+			'label' => 'file',
+			'rules' => 'trim|regex_match[/^[0-9a-zA-z.\/]+$/]|required'
+		],
+		[
+			'field' => 'typeBulkText',
+			'label' => 'typeBulkText',
+			'rules' => 'trim|regex_match[/^[a-z0-9ñáéíóú \(\).]{10,70}$/i]'
+		]
+	],
+	'geoFilter' => [
+		[
+			'field' => 'data[]',
+			'label' => 'data',
+			'rules' => 'required'
+		]
+	],
+	'updateBranch' => [
+		[
+			'field' => 'rifB',
+			'label' => 'rifB',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]'
+		],
+		[
+			'field' => 'codB',
+			'label' => 'codB',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]'
+		],
+		[
+			'field' => 'branchName',
+			'label' => 'branchName',
+			'rules' => 'trim|regex_match[/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ (),.-\/]+$/]|required'
+		],
+		[
+			'field' => 'address1',
+			'label' => 'address1',
+			'rules' => 'trim|regex_match[/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ (),.-\/]+$/]|required'
+		],
+		[
+			'field' => 'address2',
+			'label' => 'address2',
+			'rules' => 'trim|regex_match[/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ (),.-\/]+$/]'
+		],
+		[
+			'field' => 'address3',
+			'label' => 'address3',
+			'rules' => 'trim|regex_match[/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ (),.-\/]+$/]'
+		],
+		[
+			'field' => 'countryCodeBranch',
+			'label' => 'countryCodeBranch',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+		],
+		[
+			'field' => 'stateCodeBranch',
+			'label' => 'stateCodeBranch',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+		],
+		[
+			'field' => 'cityCodeBranch',
+			'label' => 'cityCodeBranch',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+		],
+		[
+			'field' => 'person',
+			'label' => 'person',
+			'rules' => 'trim|regex_match[/^[a-zA-ZñÑáéíóúÁÉÍÓÚ \/]+$/]|required'
+		],
+		[
+			'field' => 'areaCode',
+			'label' => 'areaCode',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+		],
+		[
+			'field' => 'phone',
+			'label' => 'phone',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+		],
+		[
+			'field' => 'userNameB',
+			'label' => 'userNameB',
+			'rules' => 'trim|regex_match[/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\/]+$/]'
+		]
+	],
 	'unnamedRequest' => [
 		[
 			'field' => 'expiredDate',
