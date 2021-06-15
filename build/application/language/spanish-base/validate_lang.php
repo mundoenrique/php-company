@@ -73,3 +73,6 @@ $lang['VALIDATE_MAX_AMOUNT_TRANSDAILY'] = 'El monto a transferir no debe superar
 $lang['VALIDATE_MAX_AMOUNT_TRANSWEEKLY'] = 'El monto a transferir no debe superar el monto máximo semanal.';
 $lang['VALIDATE_TRANSFERTYPE'] = 'abono';
 $lang['VALIDATE_EXAMPLE_ID_FISCAL'] = '. Ejm: 00000000000';
+$lang['VALIDATE_NAME_BRANCHES'] = 'Indica un nombre válido';
+$lang['VALIDATE_ADDRESS_BRANCHES'] = 'Indica un dirección válido';
+$lang['VALIDATE_INPUT_REQUIRED'] = 'Este campo es requerido';
