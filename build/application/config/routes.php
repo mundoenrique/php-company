@@ -119,7 +119,7 @@ $route['(:any)/cards-inquiry'] = "Novo_Services/cardsInquiry";
 $route['(:any)/transactional-limits'] = "Novo_Services/transactionalLimits";
 $route['(:any)/commercial-twirls'] = "Novo_Services/commercialTwirls";
 //DownloadFile
-$route['(:any)/descargar-archivo'] = "Novo_DownloadFiles/exportFiles";
+$route['(:any)/download-files'] = "Novo_DownloadFiles/exportFiles";
 //Reports
 $route['(:any)/reportes'] = "Novo_Reports/getReportsList";
 $route['(:any)/estado-de-cuenta'] = "Novo_Reports/accountStatus";

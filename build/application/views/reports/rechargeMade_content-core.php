@@ -85,7 +85,7 @@
 							<span id = "grafica"  title="Ver Grafica" aria-hidden="true" class="icon grafica" data-icon="&#xe050;"></span>
 						</a>
 							</div>
-							<form id="download-rechargemade" action="<?= base_url('descargar-archivo'); ?>" method="post"></form>
+							<form id="download-rechargemade" action="<?= base_url(lang('CONF_LINK_DOWNLOAD_FILES')); ?>" method="post"></form>
 						</div>
 					</div>
 					<table id="resultsRecharge" class="cell-border h6 display responsive w-100">

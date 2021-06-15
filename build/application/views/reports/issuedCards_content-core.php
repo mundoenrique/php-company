@@ -79,7 +79,7 @@
 		<div class="w-100 issuedCards-result hide">
 		<div class="flex pb-5 flex-column">
 			<span class="line-text mb-2 h4 semibold primary">Resultados</span>
-						<form id="download-issuedcards" action="<?= base_url('descargar-archivo'); ?>" method="post"></form>
+						<form id="download-issuedcards" action="<?= base_url(lang('CONF_LINK_DOWNLOAD_FILES')); ?>" method="post"></form>
 				<div id="div_tablaDetalle" class="download "></div>
 				<div class="line my-2"></div>
 		</div>

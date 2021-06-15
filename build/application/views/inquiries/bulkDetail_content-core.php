@@ -83,7 +83,7 @@
 							<button class="btn px-1 big-modal" title="<?= lang('GEN_BTN_DOWN_PDF'); ?>" data-toggle="tooltip">
 								<i class="icon icon-file-pdf" aria-hidden="true"></i>
 							</button>
-							<form id="download-detail-bulk" action="<?= base_url('descargar-archivo'); ?>" method="post">
+							<form id="download-detail-bulk" action="<?= base_url(lang('CONF_LINK_DOWNLOAD_FILES')); ?>" method="post">
 								<input type="hidden" name="bulkId" value="<?= $bulkId; ?>">
 								<input type="hidden" name="bulkfunction" value="<?= $function; ?>">
 							</form>

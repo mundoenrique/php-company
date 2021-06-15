@@ -61,7 +61,7 @@
 							<button id="download-file" class="btn px-1 big-modal" title="Exportar a EXCEL" data-toggle="tooltip">
 								<i class="icon icon-file-excel" aria-hidden="true"></i>
 							</button>
-							<form method="POST" action="<?= base_url('descargar-archivo'); ?>">
+							<form method="POST" action="<?= base_url(lang('CONF_LINK_DOWNLOAD_FILES')); ?>">
 								<input type="hidden" name="bulkNumber" value="<?= $bulkNumber; ?>">
 								<input type="hidden" name="issuanDate" value="<?= $issuanDate; ?>">
 								<input type="hidden" name="amount" value="<?= $ammount; ?>">

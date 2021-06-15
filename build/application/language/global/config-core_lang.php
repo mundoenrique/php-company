@@ -220,6 +220,7 @@ $lang['CONF_LINK_TRANSF_MASTER_ACCOUNT'] = 'transf-master-account';//permiso aso
 $lang['CONF_LINK_CARDS_INQUIRY'] = 'cards-inquiry';//permiso asociado COPELO
 $lang['CONF_LINK_TRANSACTIONAL_LIMITS'] = 'transactional-limits';//permiso asociado LIMTRX
 $lang['CONF_LINK_COMMERCIAL_TWIRLS'] = 'commercial-twirls';//permiso asociado GIRCOM
+$lang['CONF_LINK_DOWNLOAD_FILES'] = 'download-files';//permiso asociado TEBORS
 //INTERNAL LINKS
 $lang['CONF_LINK_SUGGESTION'] = 'suggestion';
 //LANGUAGE

@@ -117,7 +117,7 @@
                       <i class="icon icon-remove" aria-hidden="true"></i>
                     </button>
                     <?php endif; ?>
-                    <form method="POST" action="<?= base_url('descargar-archivo'); ?>">
+                    <form method="POST" action="<?= base_url(lang('CONF_LINK_DOWNLOAD_FILES')); ?>">
                       <input type="hidden" name="OrderNumber" value="<?= $list->OrderNumber; ?>">
                       <input type="hidden" name="who" value="Inquiries">
                       <input type="hidden" name="where" value="ExportFiles">

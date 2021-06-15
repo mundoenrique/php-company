@@ -91,7 +91,7 @@
                     <i class="icon icon-file-pdf" aria-hidden="true"></i>
                   </button>
                 </div>
-                <form id="download-status" action="<?= base_url('descargar-archivo'); ?>" method="post"></form>
+                <form id="download-status" action="<?= base_url(lang('CONF_LINK_DOWNLOAD_FILES')); ?>" method="post"></form>
               </div>
             </div>
             <table id="resultStatusBulk" class="cell-border h6 display responsive w-100">
