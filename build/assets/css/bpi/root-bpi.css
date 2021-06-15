@@ -1,3 +1,56 @@
+@font-face {
+	font-family: 'Prelo';
+	font-style: normal;
+	font-weight: 400;
+	src: url('../../fonts/bpi/prelo-book-webfont.eot');
+	src: url('../../fonts/bpi/prelo-book-webfont.eot?#iefix') format('eot'),
+	     url('../../fonts/bpi/prelo-book-webfont.woff2') format('woff2'),
+	     url('../../fonts/bpi/prelo-book-webfont.woff') format('woff'),
+	     url('../../fonts/bpi/prelo-book-webfont.ttf') format('truetype');
+}
+
+@font-face {
+	font-family: 'Prelo';
+	font-style: normal;
+	font-weight: 700;
+	src: url('../../fonts/bpi/prelo-semibold-webfont.eot');
+	src: url('../../fonts/bpi/prelo-semibold-webfont.eot?#iefix') format('eot'),
+	     url('../../fonts/bpi/prelo-semibold-webfont.woff2') format('woff2'),
+	     url('../../fonts/bpi/prelo-semibold-webfont.woff') format('woff'),
+	     url('../../fonts/bpi/prelo-semibold-webfont.ttf') format('truetype');
+}
+
+@font-face {
+	font-family: 'Prelo Slab';
+	font-style: normal;
+	font-weight: 500;
+	src: url('../../fonts/bpi/preloslab-book-webfont.eot');
+	src: url('../../fonts/bpi/preloslab-book-webfont.eot?#iefix') format('eot'),
+	     url('../../fonts/bpi/preloslab-book-webfont.woff2') format('woff2'),
+	     url('../../fonts/bpi/preloslab-book-webfont.woff') format('woff'),
+	     url('../../fonts/bpi/preloslab-book-webfont.ttf') format('truetype');
+}
+
+@font-face {
+	font-family: 'Prelo Slab';
+	font-style: normal;
+	font-weight: 700;
+	src: url('../../fonts/bpi/preloslab-semibold-webfont.eot');
+	src: url('../../fonts/bpi/preloslab-semibold-webfont.eot?#iefix') format('eot'),
+	     url('../../fonts/bpi/preloslab-semibold-webfont.woff2') format('woff2'),
+	     url('../../fonts/bpi/preloslab-semibold-webfont.woff') format('woff'),
+	     url('../../fonts/bpi/preloslab-semibold-webfont.ttf') format('truetype');
+}
+
+@font-face {
+	font-family: "Prelo Medium";
+  src: url('../../fonts/bpi/prelo-medium-webfont.eot');
+  src: url('../../fonts/bpi/prelo-medium-webfont.eot?#iefix') format('eot'),
+			 url('../../fonts/bpi/prelo-medium-webfont.woff2') format('woff2'),
+			 url('../../fonts/bpi/prelo-medium-webfont.woff') format('woff'),
+			 url('../../fonts/bpi/prelo-medium-webfont.ttf') format('truetype');
+}
+
 :root {
 
 	/* Brand colors */
