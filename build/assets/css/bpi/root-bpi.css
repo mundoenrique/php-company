@@ -1,0 +1,29 @@
+:root {
+
+	/* Brand colors */
+	--color-primary: #0f265c;
+	--color-secondary: #ffffff;
+	--color-tertiary: #E6E7E8;
+	--color-fifth: #0C1F50;
+	--color-sixth: #4A4A50;
+	--color-seventh:#060060;
+	--color-eighth: #eeeeee;
+
+	/* Others */
+	--color-nineth: #ffdd00;
+	--color-tenth: #d8d8d8;
+	--color-eleventh: #FFD100;
+	--option-not-active: #ffffff;
+	--option-active: #0f265c;
+	--black: #111111;
+
+	/* Typography */
+	--font-family-base-first: 'Prelo', Helvetica, Arial, sans-serif;
+	--font-family-base: 'sourcesanspro-regular', sans-serif;
+  --font-family-monospace: monospace, "Courier New";
+  --font-family-novoglyphs: 'novoglyphs';
+	--h6: .8rem !important;
+
+  /* Border radius */
+  --border-radius: 5px;
+}
