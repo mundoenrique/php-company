@@ -1,0 +1,82 @@
+@font-face {
+	font-family: 'Prelo';
+	font-style: normal;
+	font-weight: 400;
+	src: url('../../fonts/bpi/prelo-book-webfont.eot');
+	src: url('../../fonts/bpi/prelo-book-webfont.eot?#iefix') format('eot'),
+	     url('../../fonts/bpi/prelo-book-webfont.woff2') format('woff2'),
+	     url('../../fonts/bpi/prelo-book-webfont.woff') format('woff'),
+	     url('../../fonts/bpi/prelo-book-webfont.ttf') format('truetype');
+}
+
+@font-face {
+	font-family: 'Prelo';
+	font-style: normal;
+	font-weight: 700;
+	src: url('../../fonts/bpi/prelo-semibold-webfont.eot');
+	src: url('../../fonts/bpi/prelo-semibold-webfont.eot?#iefix') format('eot'),
+	     url('../../fonts/bpi/prelo-semibold-webfont.woff2') format('woff2'),
+	     url('../../fonts/bpi/prelo-semibold-webfont.woff') format('woff'),
+	     url('../../fonts/bpi/prelo-semibold-webfont.ttf') format('truetype');
+}
+
+@font-face {
+	font-family: 'Prelo Slab';
+	font-style: normal;
+	font-weight: 500;
+	src: url('../../fonts/bpi/preloslab-book-webfont.eot');
+	src: url('../../fonts/bpi/preloslab-book-webfont.eot?#iefix') format('eot'),
+	     url('../../fonts/bpi/preloslab-book-webfont.woff2') format('woff2'),
+	     url('../../fonts/bpi/preloslab-book-webfont.woff') format('woff'),
+	     url('../../fonts/bpi/preloslab-book-webfont.ttf') format('truetype');
+}
+
+@font-face {
+	font-family: 'Prelo Slab';
+	font-style: normal;
+	font-weight: 700;
+	src: url('../../fonts/bpi/preloslab-semibold-webfont.eot');
+	src: url('../../fonts/bpi/preloslab-semibold-webfont.eot?#iefix') format('eot'),
+	     url('../../fonts/bpi/preloslab-semibold-webfont.woff2') format('woff2'),
+	     url('../../fonts/bpi/preloslab-semibold-webfont.woff') format('woff'),
+	     url('../../fonts/bpi/preloslab-semibold-webfont.ttf') format('truetype');
+}
+
+@font-face {
+	font-family: "Prelo Medium";
+  src: url('../../fonts/bpi/prelo-medium-webfont.eot');
+  src: url('../../fonts/bpi/prelo-medium-webfont.eot?#iefix') format('eot'),
+			 url('../../fonts/bpi/prelo-medium-webfont.woff2') format('woff2'),
+			 url('../../fonts/bpi/prelo-medium-webfont.woff') format('woff'),
+			 url('../../fonts/bpi/prelo-medium-webfont.ttf') format('truetype');
+}
+
+:root {
+
+	/* Brand colors */
+	--color-primary: #0f265c;
+	--color-secondary: #ffffff;
+	--color-tertiary: #E6E7E8;
+	--color-fifth: #0C1F50;
+	--color-sixth: #4A4A50;
+	--color-seventh:#060060;
+	--color-eighth: #eeeeee;
+
+	/* Others */
+	--color-nineth: #ffdd00;
+	--color-tenth: #d8d8d8;
+	--color-eleventh: #FFD100;
+	--option-not-active: #ffffff;
+	--option-active: #0f265c;
+	--black: #111111;
+
+	/* Typography */
+	--font-family-base-first: 'Prelo', Helvetica, Arial, sans-serif;
+	--font-family-base: 'sourcesanspro-regular', sans-serif;
+  --font-family-monospace: monospace, "Courier New";
+  --font-family-novoglyphs: 'novoglyphs';
+	--h6: .8rem !important;
+
+  /* Border radius */
+  --border-radius: 5px;
+}

@@ -47,6 +47,7 @@ $lang['CONF_ICON_DANGER'] = 'ui-icon-closethick';
 $lang['CONF_SINGLE_SIGN_ON'] = 'userByToken';
 //SIGNIN
 $lang['CONF_SIGIN_RECOVER_PASS'] = 'ON';
+$lang['CONF_SIGNIN_WELCOME_MSG'] = 'OFF';
 $lang['CONF_SIGNIN_IMG'] = 'OFF';
 $lang['CONF_SIGNIN_WIDGET_CONTACT'] = 'ON';
 $lang['CONF_PASS_EXPIRED'] = 'ON';
@@ -79,6 +80,7 @@ $lang['CONF_SERVICE_ORDER_OTP'] = 'OFF';
 //FOOTER
 $lang['CONF_FOOTER_NETWORKS'] = 'OFF';
 $lang['CONF_FOOTER_LOGO'] = 'ON';
+$lang['CONF_FOOTER_INFO'] = 'ON';
 //AUTHORIZE BULK LIST
 $lang['CONF_BULK_AUTHORIZE'] = 'ON';
 $lang['CONF_BULK_SELECT_ALL_SIGN'] = 'ON';
