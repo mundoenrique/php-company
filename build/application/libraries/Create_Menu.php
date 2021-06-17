@@ -174,7 +174,7 @@ class Create_Menu {
 			break;
 			case 'REPEDO':
 				$subMenuLang->text = lang('GEN_MENU_REP_ACCAOUNT_STATUS');
-				$subMenuLang->link = lang('GEN_LINK_REP_ACCAOUNT_STATUS');
+				$subMenuLang->link = lang('CONF_LINK_ACCOUNT_STATUS');
 			break;
 			case 'REPSAL':
 				$subMenuLang->text = lang('GEN_MENU_REP_CLOSING_BAKANCE');

@@ -30,7 +30,6 @@ $lang['GEN_LINK_REP_CARD_REPLACE'] = 'reposiciones';// REPREP
 $lang['GEN_MENU_REP_CLOSING_BAKANCE'] = 'Saldo al cierre';//REPSAL
 $lang['GEN_LINK_REP_CLOSING_BAKANCE'] = 'saldo-al-cierre';//REPSAL
 $lang['GEN_MENU_REP_ACCAOUNT_STATUS'] = 'Estado de cuenta';//REPEDO
-$lang['GEN_LINK_REP_ACCAOUNT_STATUS'] = 'estado-de-cuenta';// REPEDO
 $lang['GEN_MENU_REP_USER_ACT'] = 'Actividad por usuario';//REPUSU
 $lang['GEN_LINK_REP_USER_ACT'] = 'actividad-usuario';//REPUSU
 $lang['GEN_MENU_REP_MASTER_ACCOUNT'] = 'Cuenta maestra';//REPCON

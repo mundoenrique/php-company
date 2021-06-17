@@ -122,7 +122,7 @@ $route['(:any)/commercial-twirls'] = "Novo_Services/commercialTwirls";
 $route['(:any)/download-files'] = "Novo_DownloadFiles/exportFiles";
 //Reports
 $route['(:any)/reportes'] = "Novo_Reports/getReportsList";
-$route['(:any)/estado-de-cuenta'] = "Novo_Reports/accountStatus";
+$route['(:any)/account-status'] = "Novo_Reports/accountStatus";
 $route['(:any)/reposiciones'] = "Novo_Reports/replacement";
 $route['(:any)/saldo-al-cierre'] = "Novo_Reports/closingBalance";
 $route['(:any)/actividad-usuario'] = "Novo_Reports/userActivity";
