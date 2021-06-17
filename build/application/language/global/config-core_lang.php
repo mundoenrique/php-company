@@ -224,6 +224,7 @@ $lang['CONF_LINK_TRANSACTIONAL_LIMITS'] = 'transactional-limits';//permiso asoci
 $lang['CONF_LINK_COMMERCIAL_TWIRLS'] = 'commercial-twirls';//permiso asociado GIRCOM
 $lang['CONF_LINK_DOWNLOAD_FILES'] = 'download-files';//permiso asociado TEBORS
 $lang['CONF_LINK_ACCOUNT_STATUS'] = 'account-status';//permiso asociado REPEDO
+$lang['CONF_LINK_REPLACEMENT'] = 'replacement';//permiso asociado REPREP
 //INTERNAL LINKS
 $lang['CONF_LINK_SUGGESTION'] = 'suggestion';
 //LANGUAGE
