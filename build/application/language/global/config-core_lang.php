@@ -226,6 +226,7 @@ $lang['CONF_LINK_DOWNLOAD_FILES'] = 'download-files';//permiso asociado TEBORS
 $lang['CONF_LINK_ACCOUNT_STATUS'] = 'account-status';//permiso asociado REPEDO
 $lang['CONF_LINK_REPLACEMENT'] = 'replacement';//permiso asociado REPREP
 $lang['CONF_LINK_CLOSING_BALANCE'] = 'closing-balance';//permiso asociado REPSAL
+$lang['CONF_LINK_RECHARGE_MADE'] = 'recharge-made';//permiso asociado REPPRO
 //INTERNAL LINKS
 $lang['CONF_LINK_SUGGESTION'] = 'suggestion';
 //LANGUAGE
