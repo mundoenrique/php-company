@@ -178,7 +178,7 @@ class Create_Menu {
 			break;
 			case 'REPSAL':
 				$subMenuLang->text = lang('GEN_MENU_REP_CLOSING_BAKANCE');
-				$subMenuLang->link = lang('GEN_LINK_REP_CLOSING_BAKANCE');
+				$subMenuLang->link = lang('CONF_LINK_CLOSING_BALANCE');
 			break;
 			case 'REPUSU':
 				$subMenuLang->text = lang('GEN_MENU_REP_USER_ACT');
