@@ -375,7 +375,7 @@ label {
 .tertiary  { color: var(--color-tertiary) }
 .text      { color: var(--color-sixth) !important }
 
-.bg-items      { color: var(--color-secondary) !important }
+.bg-items      { color: var(--color-primary) !important }
 
 /* Icons, Logos
 ========================================================================== */
@@ -868,10 +868,6 @@ ul.pwd-rules li.pwd-rules-item.rule-valid {
 
 .btn-lang-img span:hover{
 	color: var(--color-sixth);
-}
-
-.bg-items {
-	color: var(--color-primary) !important;
 }
 
 .hyper-link {
