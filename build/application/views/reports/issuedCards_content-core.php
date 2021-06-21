@@ -22,7 +22,7 @@
 		<div class="search-criteria-order flex pb-3 flex-column w-100">
 			<span class="line-text mb-2 h4 semibold primary"><?= lang('GEN_SEARCH_CRITERIA'); ?></span>
 			<div class="flex my-2 px-5">
-				<form id="issued-cards-form" action="<?= base_url(lang('GEN_LINK_REP_ISSUED_CARDS')); ?>" method="post" class="w-100">
+				<form id="issued-cards-form" action="<?= base_url(lang('CONF_LINK_ISSUED_CARDS')); ?>" method="post" class="w-100">
 					<div class="row flex justify-between">
 						<div class="form-group col-6 col-lg-4 col-xl-4">
 							<label><?= lang('GEN_ENTERPRISE') ?></label>
