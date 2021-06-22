@@ -34,7 +34,6 @@ $lang['GEN_LINK_REP_MASTER_ACCOUNT'] = 'cuenta-maestra';//REPCON
 $lang['GEN_MENU_REP_RECHARGE_MADE'] = 'Recargas realizadas';//REPPRO
 $lang['GEN_MENU_REP_ISSUED_CARDS'] = 'Tarjetas emitidas';//REPTAR
 $lang['GEN_MENU_REP_STATUS_BULK'] = 'Estado de lote';//REPLOT
-$lang['GEN_LINK_REP_STATUS_BULK'] = 'estado-lote';//REPLOT
 $lang['GEN_MENU_REP_CARDHOLDERS'] = 'Tarjetahabientes';//TEBTHA
 $lang['GEN_MENU_LNK_CARDHOLDERS'] = 'tarjetahabientes';//TEBTHA
 $lang['GEN_LINK_REP_CARDHOLDERS'] = 'tarjetahabientes';//TEBTHA

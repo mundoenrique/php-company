@@ -131,7 +131,7 @@ $route['(:any)/recharge-made'] = "Novo_Reports/rechargeMade";
 $route['(:any)/issued-cards'] = "Novo_Reports/issuedCards";
 $route['(:any)/category-expense'] = "Novo_Reports/categoryExpense";
 $route['(:any)/cuenta-maestra'] = "Novo_Reports/masterAccount";
-$route['(:any)/estado-lote'] = "Novo_Reports/statusBulk";
+$route['(:any)/status-bulk'] = "Novo_Reports/statusBulk";
 $route['(:any)/tarjetahabientes'] = "Novo_Reports/cardHolders";
 //settings
 $route['(:any)/configuracion'] = "Novo_Settings/options";

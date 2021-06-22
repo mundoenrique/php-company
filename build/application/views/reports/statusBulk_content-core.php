@@ -21,7 +21,7 @@
       <div class="search-criteria-order flex pb-3 flex-column w-100">
         <span class="line-text mb-2 h4 semibold primary"><?= lang('GEN_SEARCH_CRITERIA'); ?></span>
         <div class="flex mt-2 mb-3 px-5">
-          <form id="status-bulk-form" action="<?= base_url(lang('GEN_LINK_REP_STATUS_BULK')); ?>" method="post" class="w-100">
+          <form id="status-bulk-form" action="<?= base_url(lang('CONF_LINK_STATUS_BULK')); ?>" method="post" class="w-100">
             <div class="row flex justify-between">
               <div class="form-group col-4 col-xl-3">
                 <label><?= lang('GEN_ENTERPRISE'); ?></label>

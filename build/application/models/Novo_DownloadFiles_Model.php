@@ -163,7 +163,7 @@ class Novo_DownloadFiles_Model extends NOVO_Model {
 				$dataRequest->code = 0;
 				$this->responseFail_DownloadFiles($dataRequest);
 				$this->session->set_flashdata('download', $this->response);
-				redirect(base_url(lang('GEN_LINK_REP_STATUS_BULK')), 'Location', 302);
+				redirect(base_url(lang('CONF_LINK_STATUS_BULK')), 'Location', 302);
 				exit;
 		}
 
