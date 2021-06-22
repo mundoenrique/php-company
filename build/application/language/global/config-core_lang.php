@@ -230,6 +230,7 @@ $lang['CONF_LINK_RECHARGE_MADE'] = 'recharge-made';//permiso asociado REPPRO
 $lang['CONF_LINK_ISSUED_CARDS'] = 'issued-cards';//permiso asociado REPTAR
 $lang['CONF_LINK_CATEGORY_EXPENSE'] = 'category-expense';//permiso asociado REPCAT
 $lang['CONF_LINK_STATUS_BULK'] = 'status-bulk';//permiso asociado REPLOT
+$lang['CONF_LINK_CARD_HOLDERS'] = 'card-holders';//permiso asociado TEBTHA
 //INTERNAL LINKS
 $lang['CONF_LINK_SUGGESTION'] = 'suggestion';
 //LANGUAGE

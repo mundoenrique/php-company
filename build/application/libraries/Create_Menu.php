@@ -166,7 +166,7 @@ class Create_Menu {
 			break;
 			case 'TEBTHA':
 				$subMenuLang->text = lang('GEN_MENU_REP_CARDHOLDERS');
-				$subMenuLang->link = lang('GEN_MENU_LNK_CARDHOLDERS');
+				$subMenuLang->link = lang('CONF_LINK_CARD_HOLDERS');
 			break;
 			case 'REPREP':
 				$subMenuLang->text = lang('GEN_MENU_REP_CARD_REPLACE');
