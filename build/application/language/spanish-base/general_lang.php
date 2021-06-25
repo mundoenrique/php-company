@@ -23,7 +23,6 @@ $lang['GEN_MENU_SERV_COMM_MONEY_ORDERS'] = 'Giros comerciales';//GIRCOM
 $lang['GEN_MENU_SERV_TRANS_LIMITS'] = 'Límites';//LIMTRX
 $lang['GEN_MENU_REP_CATEGORY_EXPENSE'] = 'Gastos por categoría';//REPCAT
 $lang['GEN_MENU_REP_ALL'] = 'Todos los reportes';//REPALL
-$lang['GEN_LINK_REP_ALL'] = 'reportes';//REPALL
 $lang['GEN_MENU_REP_CARD_REPLACE'] = 'Reposiciones';//REPREP
 $lang['GEN_MENU_REP_CLOSING_BAKANCE'] = 'Saldo al cierre';//REPSAL
 $lang['GEN_MENU_REP_ACCAOUNT_STATUS'] = 'Estado de cuenta';//REPEDO

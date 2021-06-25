@@ -121,7 +121,7 @@ $route['(:any)/commercial-twirls'] = "Novo_Services/commercialTwirls";
 //DownloadFile
 $route['(:any)/download-files'] = "Novo_DownloadFiles/exportFiles";
 //Reports
-$route['(:any)/reportes'] = "Novo_Reports/getReportsList";
+$route['(:any)/reports'] = "Novo_Reports/getReportsList";
 $route['(:any)/account-status'] = "Novo_Reports/accountStatus";
 $route['(:any)/replacement'] = "Novo_Reports/replacement";
 $route['(:any)/closing-balance'] = "Novo_Reports/closingBalance";
