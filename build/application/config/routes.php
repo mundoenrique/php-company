@@ -125,8 +125,8 @@ $route['(:any)/reports'] = "Novo_Reports/getReportsList";
 $route['(:any)/account-status'] = "Novo_Reports/accountStatus";
 $route['(:any)/replacement'] = "Novo_Reports/replacement";
 $route['(:any)/closing-balance'] = "Novo_Reports/closingBalance";
-$route['(:any)/actividad-usuario'] = "Novo_Reports/userActivity";
-$route['(:any)/actividad-usuarios'] = "Novo_Reports/usersActivity";
+$route['(:any)/user-activity'] = "Novo_Reports/userActivity";
+$route['(:any)/users-activity'] = "Novo_Reports/usersActivity";
 $route['(:any)/recharge-made'] = "Novo_Reports/rechargeMade";
 $route['(:any)/issued-cards'] = "Novo_Reports/issuedCards";
 $route['(:any)/category-expense'] = "Novo_Reports/categoryExpense";
@@ -352,4 +352,3 @@ $route['(:any)/payments'] = "payment/callAPImodel/$1";
 //cuenta maestra
 $route['(:any)/user-activity-excel'] = "Novo_Reports/exportToExcelUserActivity";
 $route['(:any)/user-activity-pdf'] = "Novo_Reports/exportToPDFUserActivity";
-$route['(:any)/user-activity'] = "Novo_Reports/userActivity";
