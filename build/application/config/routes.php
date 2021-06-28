@@ -134,7 +134,7 @@ $route['(:any)/master-account'] = "Novo_Reports/masterAccount";
 $route['(:any)/status-bulk'] = "Novo_Reports/statusBulk";
 $route['(:any)/card-holders'] = "Novo_Reports/cardHolders";
 //settings
-$route['(:any)/configuracion'] = "Novo_Settings/options";
+$route['(:any)/setting'] = "Novo_Settings/options";
 
 
 $route['(:any)/id-empresa-ob'] = "Novo_Reports/obtenerIdEmpresa";

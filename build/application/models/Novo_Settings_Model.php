@@ -303,7 +303,7 @@ class Novo_Settings_Model extends NOVO_Model {
 				$this->response->code = 4;
 				$this->response->icon = lang('CONF_ICON_WARNING');
 				$this->response->msg = lang('GEN_WARNING_DOWNLOAD_FILE');
-				$this->response->modalBtn['btn1']['link']  = 'configuracion';
+				$this->response->modalBtn['btn1']['link']  = lang('CONF_LINK_SETTING');
 			break;
 		}
 

@@ -8,7 +8,7 @@
       <ul class="dropdown regular tertiary bg-secondary">
         <?php if(lang('CONF_SETT_CONFIG') == 'ON'): ?>
         <li>
-          <a class="pl-2 pr-1 h6 big-modal" href="<?= base_url('configuracion') ?>"><?= lang('GEN_SETTINGS_TITLE'); ?></a>
+          <a class="pl-2 pr-1 h6 big-modal" href="<?= base_url(lang('CONF_LINK_SETTING')) ?>"><?= lang('GEN_SETTINGS_TITLE'); ?></a>
         </li>
         <?php endif; ?>
         <li>
