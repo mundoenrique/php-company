@@ -233,6 +233,7 @@ $lang['CONF_LINK_STATUS_BULK'] = 'status-bulk';//permiso asociado REPLOT
 $lang['CONF_LINK_CARD_HOLDERS'] = 'card-holders';//permiso asociado TEBTHA
 $lang['CONF_LINK_REPORTS'] = 'reports';//permiso asociado REPALL
 $lang['CONF_LINK_MASTER_ACCOUNT'] = 'master-account';//permiso asociado REPCON
+$lang['CONF_LINK_USER_ACTIVITY'] = 'user-activity';//permiso asociado REPUSU
 $lang['CONF_LINK_SETTING'] = 'setting';
 //INTERNAL LINKS
 $lang['CONF_LINK_SUGGESTION'] = 'suggestion';
