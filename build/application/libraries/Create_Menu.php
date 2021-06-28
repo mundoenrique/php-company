@@ -202,7 +202,7 @@ class Create_Menu {
 			break;
 			case 'REPCON':
 				$subMenuLang->text = lang('GEN_MENU_REP_MASTER_ACCOUNT');
-				$subMenuLang->link = lang('GEN_LINK_REP_MASTER_ACCOUNT');;
+				$subMenuLang->link = lang('CONF_LINK_MASTER_ACCOUNT');
 			break;
 			case 'REPPGE':
 				$subMenuLang->text = lang('GEN_MENU_REP_KIDGARDEN_PAY');

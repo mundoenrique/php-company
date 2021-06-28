@@ -130,7 +130,7 @@ $route['(:any)/actividad-usuarios'] = "Novo_Reports/usersActivity";
 $route['(:any)/recharge-made'] = "Novo_Reports/rechargeMade";
 $route['(:any)/issued-cards'] = "Novo_Reports/issuedCards";
 $route['(:any)/category-expense'] = "Novo_Reports/categoryExpense";
-$route['(:any)/cuenta-maestra'] = "Novo_Reports/masterAccount";
+$route['(:any)/master-account'] = "Novo_Reports/masterAccount";
 $route['(:any)/status-bulk'] = "Novo_Reports/statusBulk";
 $route['(:any)/card-holders'] = "Novo_Reports/cardHolders";
 //settings
@@ -144,7 +144,6 @@ $route['(:any)/master-account-excel'] = "Novo_Reports/exportToExcelMasterAccount
 $route['(:any)/master-account-pdf'] = "Novo_Reports/exportToPDFMasterAccount";
 $route['(:any)/master-account-excel-consolid'] = "Novo_Reports/exportToExcelMasterAccountConsolid";
 $route['(:any)/master-account-pdf-consolid'] = "Novo_Reports/exportToPDFMasterAccountConsolid";
-$route['(:any)/master-account'] = "Novo_Reports/masterAccount";
 $route['(:any)/empresa'] = "Novo_Settings/getEnterprise";
 $route['(:any)/Contact'] = "Novo_Settings/addContact";
 $route['(:any)/cambiar-email'] = "Novo_Settings/changeEmail";
