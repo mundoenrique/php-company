@@ -10,6 +10,8 @@ $(function() {
 	var enterpriseCode;
 	var enterpriseGroup;
 	var idFiscal;
+	var fiscalNumber;
+	var thirdApp;
 	var enterpriseName;
 	var productPrefix;
 	var productName;
@@ -21,8 +23,14 @@ $(function() {
 		enterpriseGroup = WidgetSelcet.find('option:selected').attr('group');
 		idFiscal = WidgetSelcet.val()
 		enterpriseName = WidgetSelcet.find('option:selected').text();
+		fiscalNumber = WidgetSelcet.find('option:selected').attr('fiscalNumber');
+		thirdApp = WidgetSelcet.find('option:selected').attr('thirdApp');
 
+<<<<<<< HEAD
 		if (formAction == lang.CONF_LINK_PRODUCTS) {
+=======
+		if (formAction == 'productos') {
+>>>>>>> origin/master
 			enterpriseWidgetBtn
 			.prop('disabled', false)
 			.removeAttr('title');
@@ -42,7 +50,9 @@ $(function() {
 				enterpriseCode: enterpriseCode,
 				enterpriseGroup: enterpriseGroup,
 				idFiscal: idFiscal,
+				fiscalName: fiscalNumber,
 				enterpriseName: enterpriseName,
+				thirdApp: thirdApp,
 				select: true
 			}
 			callNovoCore(verb, who, where, data, function(response) {
@@ -86,6 +96,8 @@ $(function() {
 		enterpriseWidgetForm.append('<input type="hidden" name="enterpriseGroup" value="' + enterpriseGroup + '">');
 		enterpriseWidgetForm.append('<input type="hidden" name="idFiscal" value="' + idFiscal + '">');
 		enterpriseWidgetForm.append('<input type="hidden" name="enterpriseName" value="' + enterpriseName + '">');
+		enterpriseWidgetForm.append('<input type="hidden" name="fiscalNumber" value="' + fiscalNumber + '">');
+		enterpriseWidgetForm.append('<input type="hidden" name="thirdApp" value="' + thirdApp + '">');
 
 		if(goToDetail) {
 			enterpriseWidgetForm.append('<input type="hidden" name="productPrefix" value="' + productPrefix + '">');
