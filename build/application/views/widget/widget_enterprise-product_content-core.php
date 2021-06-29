@@ -13,7 +13,7 @@
 					<?php if($enterprise->acrif == $enterpriseData->idFiscal && !$countProducts): ?>
 					<?php continue; ?>
 					<?php endif;?>
-					<option value="<?= $enterprise->acrif; ?>" code="<?= $enterprise->accodcia; ?>" group="<?= $enterprise->accodgrupoe; ?>">
+					<option value="<?= $enterprise->acrif; ?>" code="<?= $enterprise->accodcia; ?>" group="<?= $enterprise->accodgrupoe; ?>" fiscalNumber="<?= $enterprise->acnit ?>" thirdApp="<?= $enterprise->acobservacion ? $enterprise->acobservacion : '' ?>">
 						<?= $enterprise->enterpriseName; ?>
 					</option>
 					<?php endforeach; ?>
