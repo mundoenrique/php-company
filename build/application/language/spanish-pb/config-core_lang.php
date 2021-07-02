@@ -16,9 +16,7 @@ $lang['CONF_SETTINGS_BRANCHES'] = 'OFF';
 $lang['CONF_SETTINGS_PHONES_UPDATE'] = 'OFF';
 $lang['CONF_SETTINGS_CONTACT'] = 'OFF';
 //FILES CONF
-$lang['CONF_MANUAL_FILE'] = [
-	['archivo.pdf', 'Manual']
-];
+$lang['CONF_MANUAL_FILE'] = [];
 $lang['CONF_FILES_MANAGMENT'] = [
   ['lotes.rar', 'Gestión de Lotes']
 ];
