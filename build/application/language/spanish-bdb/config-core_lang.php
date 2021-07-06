@@ -35,7 +35,7 @@ $lang['CONF_MANUAL_FILE'] = [
   ['archivo.pdf', 'Manual de Usuario Conexión Empresas Online']
 ];
 $lang['CONF_FILES_MANAGMENT'] = [
-  ['archivos_autogestion_ceo.rar', 'Archivos de autogestión']
+  ['lotes.rar', 'Archivos de autogestión']
 ];
 $lang['CONF_APPS_DOWNLOAD'] = [
   ['download-ini', 'Archivo.ini']
