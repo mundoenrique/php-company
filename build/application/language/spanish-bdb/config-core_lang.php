@@ -46,4 +46,4 @@ $lang['MODAL_OTP'] = 'ON';
 //ICON WARNING SERVICE ORDERS
 $lang['CONF_SERVICEORDERS_ICON'] = 'ON';
 //TEXT CONF
-$lang['CONF_FILE'] = 'Archivos de Autogestión Conexión Empresas Online';
+$lang['CONF_FILE'] = 'Archivos de Autogestión %s';

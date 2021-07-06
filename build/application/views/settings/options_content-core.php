@@ -577,7 +577,7 @@
 
                 <?php if (count(lang('CONF_FILES_MANAGMENT')) > 0): ?>
                 <div class="my-2 tertiary h4 semibold">
-                  <span><?= lang('CONF_FILE') ?></span>
+                  <span><?= novoLang(lang('CONF_FILE'), lang('GEN_SYSTEM_NAME')) ?></span>
                 </div>
                 <div class="row">
                   <?php foreach(lang('CONF_FILES_MANAGMENT') as $value): ?>

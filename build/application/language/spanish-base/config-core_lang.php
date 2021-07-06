@@ -138,7 +138,7 @@ $lang['CONF_SETT_ICON'] = 'icon-settings.svg';
 $lang['CONF_DOWNLOADS'] = 'Descargas';
 $lang['CONF_MANUALS'] = 'Manuales';
 $lang['CONF_APPLICATIONS'] = 'Aplicaciones';
-$lang['CONF_FILE'] = 'Archivos de gestión Conexión Empresas Online';
+$lang['CONF_FILE'] = 'Archivos de gestión %s';
 $lang['CONF_CEO_USER_MANUAL'] = 'Manual de Usuario Conexión Empresas Online';
 $lang['CONF_GL_USER_MANUAL'] = 'Manual de Usuario Gestor de Lotes';
 //MODAL OTP
