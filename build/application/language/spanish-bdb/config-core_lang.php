@@ -34,6 +34,9 @@ $lang['CONF_SETTINGS_BRANCHES'] = 'OFF';
 $lang['CONF_MANUAL_FILE'] = [
   ['archivo.pdf', 'Manual de Usuario Conexión Empresas Online']
 ];
+$lang['CONF_FILES_MANAGMENT'] = [
+  ['archivos_autogestion_ceo.rar', 'Archivos de autogestión']
+];
 $lang['CONF_APPS_DOWNLOAD'] = [
   ['download-ini', 'Archivo.ini']
 ];
@@ -42,3 +45,5 @@ $lang['CONF_MP4_VIDEO'] = ['video.mp4'];
 $lang['MODAL_OTP'] = 'ON';
 //ICON WARNING SERVICE ORDERS
 $lang['CONF_SERVICEORDERS_ICON'] = 'ON';
+//TEXT CONF
+$lang['CONF_FILE'] = 'Archivos de Autogestión Conexión Empresas Online';
