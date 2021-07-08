@@ -24,6 +24,7 @@ $lang['GEN_TABLE_AMOUNT'] = 'Monto lote';
 $lang['GEN_TABLE_DNI'] = 'Nro. de identificación';
 $lang['GEN_INVALID_DATA'] = 'Los datos ingresados son incorrectos.';
 //RESPONSES
-$lang['RESP_PASSWORD_USED'] = 'La nueva contraseña no debe coincidir <strong>con las últimas diez usadas</strong>.';
+$lang['RESP_PASSWORD_USED'] = 'Tu contraseña nueva debe ser diferente a las anteriores.';
+$lang['RESP_PASSWORD_CHANGED'] = 'Tu transacción ha sido procesada exitosamente.';
 //SUBMENU
 $lang['GEN_LINK_REP_USER_ACT'] = 'actividad-usuarios';//REPUSU
