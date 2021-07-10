@@ -282,6 +282,9 @@
                         <button id="btnChangeTelephones" class="btn btn-primary btn-small " type="submit">
                           Guardar cambios
                         </button>
+												<button id="showContacts" type="button" class="btn btn-primary btn-small ">
+                          Mostrar contactos
+                        </button>
                       </div>
                     </div>
                     <?php endif; ?>
@@ -291,83 +294,95 @@
               </div>
             </div>
           </div>
+					<table id="tableContacts" class="cell-border h6 display w-100">
+							<thead>
+							</thead>
+							<tbody>
+							</tbody>
+          </table>
+					<div id="existingContactButton">
+						<div class="col-3 col-lg-2 col-xl-auto">
+							<button id="modifyContact" class="modifyContact btn btn-primary btn-small " type="button">Modificar</button>
+						</div>
+						<div class="col-3 col-lg-2 col-xl-auto">';
+							<button id="deleteContact" type="button" class="btn btn-primary btn-small ">Eliminar</button>
+						</div>
+					</div>
           <?php if (lang('CONF_SETTINGS_CONTACT') == 'ON'): ?>
-          <div class="flex flex-auto flex-column">
-            <div class="flex flex-column mx-4 mb-5">
-              <span class="line-text slide-slow flex mb-2 h4 semibold primary"><?= lang('GEN_ADD_CONTACT') ?>
-                <i class="flex mr-1 pl-2 icon icon-chevron-down flex-auto" aria-hidden="true"></i>
-              </span>
-              <div class="section my-2 px-5">
-                <form id="formAddContact">
-                  <div class="container">
-                    <div class="row">
-                      <div class="form-group mb-3 col-6 col-lg-4 col-xl-4" hidden>
-                        <label for="contUser"></label>
-                        <input id="contUser" name="contUser" type="text" class="form-control" />
-                        <div class="help-block"></div>
-                      </div>
-                      <div class="form-group mb-3 col-6 col-lg-4 col-xl-4" hidden>
-                        <label for="contAcrif"></label>
-                        <input id="contAcrif" name="contAcrif" type="text" class="form-control" />
-                        <div class="help-block"></div>
-                      </div>
-                      <div class="form-group mb-1 col-6 col-lg-4 col-xl-4">
-                        <label for="contName">Nombre</label>
-                        <input id="contName" name="contName" type="text" class="form-control" />
-                        <div class="help-block"></div>
-                      </div>
-                      <div class="form-group mb-1 col-6 col-lg-4 col-xl-4">
-                        <label for="surname">Apellido</label>
-                        <input id="surname" name="surname" type="text" class="form-control" value="" />
-                        <div class="help-block"></div>
-                      </div>
-                      <div class="form-group mb-1 col-6 col-lg-4 col-xl-4">
-                        <label for="contOcupation">Cargo</label>
-                        <input id="contOcupation" name="contOcupation" type="text" class="form-control" value="" />
-                        <div class="help-block"></div>
-                      </div>
-                      <div class="form-group mb-1 col-6 col-lg-4 col-xl-4">
-                        <label for="contNIT">NIT</label>
-                        <input id="contNIT" name="contNIT" type="text" class="form-control" value="" />
-                        <div class="help-block"></div>
-                      </div>
-                      <div class="form-group mb-1 col-6 col-lg-4 col-xl-4">
-                        <label for="contEmail">Correo Electrónico</label>
-                        <input type="email" class="form-control" id="contEmail" name="email" value="">
-                        <div class="help-block"></div>
-                      </div>
-                      <div class="form-group mb-1 col-6 col-lg-4 col-xl-4">
-                        <label for="contType">Empresa</label>
-                        <select class="select-box custom-select mb-3 h6 w-100" name="contType" id="contType">
-                          <option selected disabled>Seleccionar</option>
-                          <option value="F">Contacto Administracion y finanzas</option>
-                          <option value="H">Contacto RRHH</option>
-                          <option value="C">Contacto</option>
-                        </select>
-                      </div>
-                    </div>
-                    <div class="row flex mb-4 mt-2 justify-end items-center form-group">
-                      <div class="col-6 col-lg-4 col-xl-3 input-group">
-                        <label for="contPass"></label>
-                        <input id="contPass" class="form-control pwd-input" autocomplete="new-password" name="Ingresa tu contraseña"
-                          placeholder="Ingresa tu contraseña">
-                        <div class="input-group-append">
-                          <span id="pwd-addon" class="input-group-text pwd-action" title="<?= lang('GEN_SHOW_PASS') ?>"><i
-                              class="icon-view mr-0"></i></span>
-                        </div>
-                      </div>
-                      <div class="col-3 col-lg-2 col-xl-auto">
-                        <button class="btn btn-primary btn-small flex mx-auto " id="btnLimpiar" type="button">Limpiar</button>
-                      </div>
-                      <div class="col-3 col-lg-2 col-xl-auto">
-                        <button class="btn btn-primary btn-small flex mx-auto " id="btnAddContact" type="submit">Agregar</button>
-                      </div>
-                    </div>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
+						<div id="sectionConctact" >
+							<div class="flex flex-auto flex-column">
+							<div class="flex flex-column mx-4 mb-5">
+								<span class="line-text slide-slow flex mb-2 h4 semibold primary"><?= lang('GEN_ADD_CONTACT') ?>
+									<i class="flex mr-1 pl-2 icon icon-chevron-down flex-auto" aria-hidden="true"></i>
+								</span>
+								<div class=" my-2 px-5">
+									<form id="formAddContact">
+										<div class="container">
+											<div class="row">
+												<div class="form-group mb-1 col-6 col-lg-4 col-xl-4">
+													<label for="nameNewContact">Nombre</label>
+													<input id="nameNewContact" name="person" type="text" class="form-control" value=""/>
+													<div class="help-block"></div>
+												</div>
+												<div class="form-group mb-1 col-6 col-lg-4 col-xl-4">
+													<label for="surnameNewContact">Apellido</label>
+													<input id="surnameNewContact" name="surnameModifyContact" type="text" class="form-control" value="" />
+													<div class="help-block"></div>
+												</div>
+												<div class="form-group mb-1 col-6 col-lg-4 col-xl-4">
+													<label for="positionNewContact">Cargo</label>
+													<input id="positionNewContact" name="positionModifyContact" type="text" class="form-control" value="" />
+													<div class="help-block"></div>
+												</div>
+												<div class="form-group mb-1 col-6 col-lg-4 col-xl-4">
+													<label for="dniNewContact">NIT</label>
+													<input id="dniNewContact" name="zoneName" type="text" class="form-control" value="" />
+													<div class="help-block"></div>
+												</div>
+												<div class="form-group mb-1 col-6 col-lg-4 col-xl-4">
+													<label for="emailNewContact">Correo Electrónico</label>
+													<input type="email" class="form-control" id="emailNewContact" name="email" value="">
+													<div class="help-block"></div>
+												</div>
+												<div class="form-group mb-1 col-6 col-lg-4 col-xl-4">
+													<label for="typeNewContact">Empresa</label>
+													<select class="select-box custom-select mb-3 h6 w-100" name="typeModifyContact" id="typeNewContact">
+														<option selected value="" disabled>Seleccionar</option>
+														<option value="F">Contacto Administracion y finanzas</option>
+														<option value="H">Contacto RRHH</option>
+														<option value="C">Contacto</option>
+													</select>
+													<div class="help-block"></div>
+												</div>
+											</div>
+											<div class="row flex mb-4 mt-2 justify-end items-center form-group">
+												<div class="col-6 col-lg-4 col-xl-3 input-group">
+													<label for="newContPass"></label>
+													<input id="newContPass" class="form-control pwd-input" autocomplete="new-password" name="password"
+														placeholder="Ingresa tu contraseña">
+													<div class="input-group-append">
+														<span id="pwd-addon" class="input-group-text pwd-action" title="<?= lang('GEN_SHOW_PASS') ?>"><i
+																class="icon-view mr-0"></i></span>
+													</div>
+													<div class="help-block"></div>
+												</div>
+												<div class="row">
+                      		<div class="flex mb-2 justify-end col-12">
+														<div class="col-3 col-lg-2 col-xl-auto">
+															<button class="btn btn-primary btn-small flex mx-auto " id="btnLimpiar" type="button">Limpiar</button>
+														</div>
+														<div class="col-3 col-lg-2 col-xl-auto">
+															<button class="btn btn-primary btn-small flex mx-auto " id="btnAddContact" type="submit">Agregar</button>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+						</div>
           <?php endif; ?>
         </div>
         <?php endif; ?>
@@ -380,7 +395,7 @@
               <div class="container">
                 <div class="row">
                   <div class="form-group col-7">
-                    <form id="branchSettListForm" method="post">
+                    <form id="branchSettListForm" >
 											<label class="mt-1" or="">Empresa</label>
                       <select type="submit" id="branchListBr" name="branchListBr" class="select-box custom-select mt-3 mb-4 h6 w-100">
                         <?php if ($countEnterpriseList == 1): ?>
@@ -423,7 +438,7 @@
 									<tbody>
 									</tbody>
             		</table>
-								<div class="secondarySectionBranch">
+								<div class="secondarySectionBranch" id="secondarySectionBranch">
 									<form id="txtBranchesForm" method="post">
 										<div class="row mb-2">
 												<div class="col-7 mt-1 ml-5 bg-color">
@@ -535,9 +550,8 @@
 																<div class="input-group-append">
 																	<span id="pwd-addon" class="input-group-text pwd-action" title="<?= lang('GEN_SHOW_PASS') ?>"><i class="icon-view mr-0"></i></span>
 																</div>
-																<div class="help-block"></div>
-															</div>
-
+															<div class="help-block"></div>
+														</div>
 														<div class="col-auto">
 																<button id="btn-update-branch" type="button" class="btn btn-primary btn-small flex mx-auto">Guardar</button>
 															</div>

@@ -150,6 +150,7 @@ class Verify_Access {
 				case 'changeEmail':
 				case 'changeTelephones':
 				case 'addContact':
+				case 'deleteContact':
 				case 'getEnterprises':
 				case 'getEnterprise':
 				case 'getUser':
@@ -158,8 +159,10 @@ class Verify_Access {
 				case 'options':
 				case 'getFileIni':
 				case 'getBranches':
+				case 'getContacts':
 				case 'uploadFileBranches':
 				case 'updateBranch':
+				case 'updateContact':
 				case 'deleteFile':
 				case 'getProducts':
 					$auth = ($this->CI->session->has_userdata('logged'));

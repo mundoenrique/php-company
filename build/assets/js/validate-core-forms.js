@@ -236,7 +236,10 @@ function validateForms(form) {
 			"areaCode": { required: true, pattern: numeric },
 			"phone": { required: true, pattern: numeric },
 			"person": { required: true, pattern: alphanumspace },
-			"branchCode": { required: true, pattern: numeric }
+			"branchCode": { required: true, pattern: numeric },
+			"surnameModifyContact":{ required: true, pattern: alphanumspace },
+			"positionModifyContact":{ required: true, pattern: alphanumspace },
+			"typeModifyContact":{ required: true },
 		},
 		messages: {
 			"userName": lang.VALIDATE_USERLOGIN,
@@ -533,6 +536,17 @@ function validateForms(form) {
 			"branchCode": {
 				required: lang.VALIDATE_INPUT_REQUIRED,
 				pattern: lang.VALIDATE_NIT
+			},
+			"surnameModifyContact":{
+				required: lang.VALIDATE_INPUT_REQUIRED,
+				pattern: lang.VALIDATE_INPUT_SURNAME
+			},
+			"positionModifyContact":{
+				required: lang.VALIDATE_INPUT_REQUIRED,
+				pattern: lang.VALIDATE_INPUT_POSITION
+			},
+			"typeModifyContact":{
+				required: lang.VALIDATE_SELECT
 			}
 		},
 		errorPlacement: function (error, element) {

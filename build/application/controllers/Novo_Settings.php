@@ -55,12 +55,11 @@ class Novo_Settings extends NOVO_Controller {
 			}
 		}
 
-		$this->load->model('Novo_Business_Model', 'getEnterprises');
-		$enterpriseList = $this->getEnterprises->callWs_getEnterprises_Business(TRUE);
+		$enterpriseList = $this->session->enterpriseSelect->list;
 
 		if (lang('CONF_SETTINGS_ENTERPRISE') == 'ON') {
-			$this->render->enterpriseSettList = $enterpriseList->data->list;
-			$this->render->countEnterpriseList = count($enterpriseList->data->list);
+			$this->render->enterpriseSettList = $enterpriseList;
+			$this->render->countEnterpriseList = count($enterpriseList);
 
 			if ($this->render->countEnterpriseList == 1) {
 				foreach((Object)lang('SETTINGS_RENDER_CONTROLLER_VARIABLES') as $key => $value){
@@ -70,10 +69,10 @@ class Novo_Settings extends NOVO_Controller {
 		}
 
 		if (lang('CONF_SETTINGS_BRANCHES') == 'ON') {
-			$this->render->enterpriseSettList = $enterpriseList->data->list;
+			$this->render->enterpriseSettList = $enterpriseList;
 		}
 
-		if (!$this->session->has_userdata('enterpriseInf') && count($this->session->enterpriseSelect->list) > 1) {
+		if (!$this->session->has_userdata('enterpriseInf') && count($enterpriseList) > 1) {
 			$title = lang('GEN_BTN_INI');
 			$disabled = '';
 		}
