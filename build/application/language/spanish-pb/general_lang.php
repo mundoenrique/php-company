@@ -23,6 +23,7 @@ $lang['GEN_TABLE_BULK_DATE_VALUE'] = 'Fecha de ult. estado';
 $lang['GEN_TABLE_AMOUNT'] = 'Monto lote';
 $lang['GEN_TABLE_DNI'] = 'Nro. de identificación';
 $lang['GEN_INVALID_DATA'] = 'Los datos ingresados son incorrectos.';
+$lang['GEN_MESSAGE_SYSTEM'] = 'En este momento no podemos atender la solicitud, por favor intenta más tarde.';
 //RESPONSES
 $lang['RESP_PASSWORD_USED'] = 'Tu contraseña nueva debe ser diferente a las anteriores.';
 $lang['RESP_PASSWORD_CHANGED'] = 'Tu transacción ha sido procesada exitosamente.';
