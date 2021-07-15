@@ -544,7 +544,6 @@ class Novo_Services_Model extends NOVO_Model {
 			break;
 			case 'UPDATE_DATA':
 			case 'DELIVER_TO_CARDHOLDER':
-			case 'SEND_TO_ENTERPRISE':
 			case 'RECEIVE_IN_ENTERPRISE':
 			case 'RECEIVE_IN_BANK':
 			case 'CARD_CANCELLATION':
@@ -661,6 +660,16 @@ class Novo_Services_Model extends NOVO_Model {
 				$this->response->msg = 'Alcanzaste el límite de consultas diarias';
 				$this->response->icon = lang('CONF_ICON_INFO');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			break;
+			case 504:
+				switch ($dataRequest->action) {
+					case 'SEND_TO_ENTERPRISE':
+					case 'INQUIRY_BALANCE':
+					case 'LOCK_CARD':
+					case 'UNLOCK_CARD':
+						$this->response->msg = lang('GEN_TIMEOUT_HTTP');
+					break;
+				}
 			break;
 		}
 

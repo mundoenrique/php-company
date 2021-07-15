@@ -363,6 +363,7 @@ $lang['MIN_WIDTH_OTP'] = '480';
 $lang['POSTMY_OTP'] = 'center top+160';
 $lang['GEN_OTP_NO_SENT'] = 'No fue posible enviar el correo con el código de verificación, por favor intentalo más tarde.';
 $lang['RECOVER_PASS_FISCAL_REGISTRY']= '%s de la Empresa';
+$lang['GEN_TIMEOUT_HTTP'] = 'Tu solicitud continua procesandose, por favor espera.';
 // RECOVER ACCESS
 $lang['GEN_RECOVER_DOC_TYPE'] = [
 	'' => 'Selecciona',
