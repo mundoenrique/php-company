@@ -212,7 +212,7 @@ class NOVO_Controller extends CI_Controller {
 
 		} else {
 			$linkredirect = uriRedirect();
-			redirect(base_url($linkredirect), 'Location', 302);
+			redirect(base_url($linkredirect), 'Location', 'GET');
 			exit;
 		}
 	}

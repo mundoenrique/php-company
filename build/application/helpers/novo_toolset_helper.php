@@ -259,7 +259,7 @@ if (! function_exists('currencyFormat')) {
 		$amount = (float)$amount;
 
 		if (in_array($client, $decimalPoint)) {
-			$amount =  number_format($amount, 2, ',', '.');
+			$amount = number_format($amount, 2, ',', '.');
 		} else {
 			$amount = number_format($amount, 2);
 		}
