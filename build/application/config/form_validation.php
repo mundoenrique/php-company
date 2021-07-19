@@ -57,7 +57,7 @@ $config = [
 		[
 			'field' => 'email',
 			'label' => 'email',
-			'rules' => 'trim|regex_match[/^([a-zA-Z]+[0-9_.+\-]*)+\@(([a-zA-Z0-9])+\.)+([a-zA-Z0-9]{2,4})+$/]|required'
+			'rules' => 'trim|regex_match[/^([a-zA-Z]+[0-9_.+\-]*)+\@(([a-zA-Z0-9_\-])+\.)+([a-zA-Z0-9]{2,4})+$/]|required'
 		]
 	],
 	'recoverAccess' => [
@@ -74,7 +74,7 @@ $config = [
 		[
 			'field' => 'email',
 			'label' => 'email',
-			'rules' => 'trim|regex_match[/^([a-zA-Z]+[0-9_.+\-]*)+\@(([a-zA-Z0-9])+\.)+([a-zA-Z0-9]{2,4})+$/]|required'
+			'rules' => 'trim|regex_match[/^([a-zA-Z]+[0-9_.+\-]*)+\@(([a-zA-Z0-9_\-])+\.)+([a-zA-Z0-9]{2,4})+$/]|required'
 		]
 	],
 	'validateOtp' => [
@@ -105,7 +105,7 @@ $config = [
 		[
 			'field' => 'email',
 			'label' => 'email',
-			'rules' => 'trim|regex_match[/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9]+\.)+[a-z]{2,6}$/ix]|required'
+			'rules' => 'trim|regex_match[/^([a-zA-Z]+[0-9_.+\-]*)+\@(([a-zA-Z0-9_\-])+\.)+([a-zA-Z0-9]{2,4})+$/]|required'
 		]
 	],
 	'closingBudgets' => [
@@ -721,7 +721,7 @@ $config = [
 			'label' => 'where',
 			'rules' => 'trim|regex_match[/^([\w]+)+$/i]|required'
 		]
-		],
+	],
 	'getServiceOrders' => [
 		[
 			'field' => 'initialDate',
@@ -1119,136 +1119,6 @@ $config = [
 			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
 		]
 	],
-	'keepSession' => [
-		[
-			'field' => 'modalReq',
-			'label' => 'modalReq',
-			'rules' => 'trim'
-		]
-	],
-	'changeLanguage' => [
-		[
-			'field' => 'lang',
-			'rules' => 'trim|alpha|regex_match[/es|en/]|required'
-		]
-	],
-	// Old Arquitectures
-	'login' => [
-		[
-			'field' => 'userName',
-			'rules' => 'trim|regex_match[/^([\wñÑ.\-+&]+)+$/i]|required'
-		],
-		[
-			'field' => 'userPass',
-			'rules' => 'trim|regex_match[/^([a-zA-Z0-9=]+)+$/i]|required'
-		],
-		[
-			'field' => 'otpCode',
-			'rules' => 'trim|regex_match[/^[a-z0-9]+$/i]'
-		],
-		[
-			'field' => 'saveIP',
-			'rules' => 'trim'
-		]
-	],
-	'dash-products' => [
-		[
-			'field' => 'data-accodgrupoe',
-			'label' => 'data-accodgrupoe',
-			'rules' => 'trim|regex_match[/^([\w\-]+)+$/i]|required'
-		],
-		[
-			'field' => 'data-acrif',
-			'label' => 'data-acrif',
-			'rules' => 'trim|regex_match[/^([\w\-]+[\s]*)+$/i]|required'
-		],
-		[
-			'field' => 'data-acnomcia',
-			'label' => 'data-acnomcia',
-			'rules' => 'trim|regex_match[/^([\w\-.,#ñÑáéíóúÑÁÉÍÓÚ\(\)&:\+]+[\s]*)+$/i]|required'
-		],
-		[
-			'field' => 'data-acrazonsocial',
-			'label' => 'data-acrazonsocial',
-			'rules' => 'trim|regex_match[/^([\w\-.,#ñÑáéíóúÑÁÉÍÓÚ\(\)&:\+]+[\s]*)+$/i]|required'
-		],
-		[
-			'field' => 'data-acdesc',
-			'label' => 'data-acdesc',
-			'rules' => 'trim|regex_match[/^([\w\-.,#ñÑáéíóúÑÁÉÍÓÚ\(\)&:\+]+[\s]*)+$/i]'
-		],
-		[
-			'field' => 'data-accodcia',
-			'label' => 'data-accodcia',
-			'rules' => 'trim|regex_match[/^([\w]+)+$/i]|required'
-		]
-	],
-	'products-detail' => [
-		[
-			'field' => 'data-marcaProducto',
-			'label' => 'data-marcaProducto',
-			'rules' => 'trim|regex_match[/^([\w\-.,#ñÑáéíóúÑÁÉÍÓÚ\(\)&:\+]+[\s]*)+$/i]|required'
-		],
-		[
-			'field' => 'data-nombreProducto',
-			'label' => 'data-nombreProducto',
-			'rules' => 'trim|regex_match[/^([\w\-.,#ñÑáéíóúÑÁÉÍÓÚ\(\)&:\+]+[\s]*)+$/i]|required'
-		],
-		[
-			'field' => 'data-idproducto',
-			'label' => 'data-idproducto',
-			'rules' => 'trim|regex_match[/^([\w]+)+$/i]|required'
-		]
-	],
-	'enterprise' => [
-		[
-			'field' => 'group',
-			'label' => 'group',
-			'rules' => 'trim|regex_match[/^([\w\-]+)+$/i]|required'
-		],
-		[
-			'field' => 'fiscal-inf',
-			'label' => 'fiscal-inf',
-			'rules' => 'trim|regex_match[/^([\w\-]+[\s]*)+$/i]|required'
-		],
-		[
-			'field' => 'name',
-			'label' => 'name',
-			'rules' => 'trim|regex_match[/^([\w\-.,#ñÑáéíóúÑÁÉÍÓÚ\(\)&:\+]+[\s]*)+$/i]|required'
-		],
-		[
-			'field' => 'business-name',
-			'label' => 'business-name',
-			'rules' => 'trim|regex_match[/^([\w\-.,#ñÑáéíóúÑÁÉÍÓÚ\(\)&:\+]+[\s]*)+$/i]|required'
-		],
-		[
-			'field' => 'description',
-			'label' => 'description',
-			'rules' => 'trim|regex_match[/^([\w\-.,#ñÑáéíóúÑÁÉÍÓÚ\(\)&:\+]+[\s]*)+$/i]'
-		],
-		[
-			'field' => 'code',
-			'label' => 'code',
-			'rules' => 'trim|regex_match[/^([\w]+)+$/i]|required'
-		]
-	],
-	'products' => [
-		[
-			'field' => 'idProductoPost',
-			'label' => 'idProductoPost',
-			'rules' => 'trim|regex_match[/^([\w\-]+)+$/i]|required'
-		],
-		[
-			'field' => 'nomProduc',
-			'label' => 'nomProduc',
-			'rules' => 'trim|regex_match[/^([\w\-.,#ñÑáéíóúÑÁÉÍÓÚ\(\)&:\+]+[\s]*)+$/i]|required'
-		],
-		[
-			'field' => 'marcProduc',
-			'label' => 'marcProduc',
-			'rules' => 'trim|regex_match[/^([\w\-.,#ñÑáéíóúÑÁÉÍÓÚ\(\)&:\+]+[\s]*)+$/i]|required'
-		]
-		],
 	'userActivity' => [
 		[
 			'field' => 'enterpriseCode',
@@ -1539,7 +1409,7 @@ $config = [
 			'field' => 'weeklyAmountWithdraw',
 			'rules' => 'trim|regex_match[/^[0-9,.]*$/i]'
 		]
-		],
+	],
 	'searchStatusAccount' => [
 		[
 			'field' => 'resultByNITInput',
@@ -1549,181 +1419,305 @@ $config = [
 			'field' => 'initialDateAct',
 			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
 		]
+	],
+	'statusAccountExcelFile' => [
+		[
+			'field' => 'resultByNITInput',
+			'rules' => 'trim|regex_match[/^[0-9]*$/i]'
 		],
-		'statusAccountExcelFile' => [
+		[
+			'field' => 'initialDateAct',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+		]
+	],
+	'statusAccountPdfFile' => [
+		[
+			'field' => 'resultByNITInput',
+			'rules' => 'trim|regex_match[/^[0-9]*$/i]'
+		],
+		[
+			'field' => 'initialDateAct',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+		]
+	],
+	'userPermissions' => [
 			[
-				'field' => 'resultByNITInput',
-				'rules' => 'trim|regex_match[/^[0-9]*$/i]'
+				'field' => 'adminUser',
+				'rules' => 'trim|regex_match[/^[a-zA-Z0-9]*$/i]',
 			],
-			[
-				'field' => 'initialDateAct',
-				'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
-			]
-			],
-		'statusAccountPdfFile' => [
-			[
-				'field' => 'resultByNITInput',
-				'rules' => 'trim|regex_match[/^[0-9]*$/i]'
-			],
-			[
-				'field' => 'initialDateAct',
-				'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
-			]
-			],
-			'userPermissions' => [
-				[
-					'field' => 'adminUser',
-					'rules' => 'trim|regex_match[/^[a-zA-Z0-9]*$/i]',
-				],
-			],
-			'usersManagement' => [
-				[
-					'field' => 'adminUser',
-					'rules' => 'trim|regex_match[/^[a-zA-Z0-9]*$/i]'
-				],
-				[
-					'field' => 'adminName',
-					'rules' => 'trim|regex_match[/^[a-zA-Z0-9]*$/i]'
-				],
-				[
-					'field' => 'adminMail',
-					'rules' => 'trim|regex_match[/^[a-zA-Z0-9]*$/i]'
-				],
-				[
-					'field' => 'adminType',
-					'rules' => 'trim|regex_match[/^[a-zA-Z0-9]*$/i]'
-				],
-			],
-			'updatePermissions' => [
-				[
-					'field' => 'idUser',
-					'rules' => 'trim|regex_match[/^[A-Za-z0-9]*$/i]|required'
-				],
-				[
-					'field' => 'ACTGIR',
-					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
-				],
-				[
-					'field' => 'ACTLIM',
-					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
-				],
-				[
-					'field' => 'ASGPER',
-					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
-				],
-				[
-					'field' => 'CONGIR',
-					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
-				],
-				[
-					'field' => 'CONLIM',
-					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
-				],
-				[
-					'field' => 'CONUSU',
-					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
-				],
-				[
-					'field' => 'CREUSU',
-					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
-				],
-				[
-					'field' => 'OPCONL',
-					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
-				],
-				[
-					'field' => 'REPCON',
-					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
-				],
-				[
-					'field' => 'REPEDO',
-					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
-				],
-				[
-					'field' => 'REPLOT',
-					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
-				],
-				[
-					'field' => 'REPPRO',
-					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
-				],
-				[
-					'field' => 'REPTAR',
-					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
-				],
-				[
-					'field' => 'REPUSU',
-					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
-				],
-				[
-					'field' => 'TEBANU',
-					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
-				],
-				[
-					'field' => 'TEBCON',
-					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
-				],
-				[
-					'field' => 'TEBCOS',
-					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
-				],
-				[
-					'field' => 'TEBELC',
-					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
-				],
-				[
-					'field' => 'TEBELI',
-					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
-				],
-				[
-					'field' => 'TEBTHA',
-					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
-				],
-				[
-					'field' => 'TIREPO',
-					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
-				],
-				[
-					'field' => 'TRAABO',
-					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
-				],
-				[
-					'field' => 'TRAASG',
-					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
-				],
-				[
-					'field' => 'TRABLQ',
-					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
-				],
-				[
-					'field' => 'TRACAR',
-					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
-				],
-				[
-					'field' => 'TRADBL',
-					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
-				],
-				[
-					'field' => 'TRAPGO',
-					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
-				],
-				[
-					'field' => 'TRASAL',
-					'rules' => 'trim|regex_match[/^[a-z]*$/i]'
-				]
-			],
-			'enableUser' => [
-				[
-					'field' => 'user',
-					'rules' => 'trim|regex_match[/^[a-zA-Z0-9]*$/i]'
-				],
-				[
-					'field' => 'name',
-					'rules' => 'trim'
-				],
-				[
-					'field' => 'mail',
-					'rules' => 'trim|regex_match[/^[a-zA-Z0-9@.]*$/i]'
-				],
-			]
+	],
+	'usersManagement' => [
+		[
+			'field' => 'adminUser',
+			'rules' => 'trim|regex_match[/^[a-zA-Z0-9]*$/i]'
+		],
+		[
+			'field' => 'adminName',
+			'rules' => 'trim|regex_match[/^[a-zA-Z0-9]*$/i]'
+		],
+		[
+			'field' => 'adminMail',
+			'rules' => 'trim|regex_match[/^([a-zA-Z]+[0-9_.+\-]*)+\@(([a-zA-Z0-9_\-])+\.)+([a-zA-Z0-9]{2,4})+$/]'
+		],
+		[
+			'field' => 'adminType',
+			'rules' => 'trim|regex_match[/^[a-zA-Z0-9]*$/i]'
+		],
+	],
+	'updatePermissions' => [
+		[
+			'field' => 'idUser',
+			'rules' => 'trim|regex_match[/^[A-Za-z0-9]*$/i]|required'
+		],
+		[
+			'field' => 'ACTGIR',
+			'rules' => 'trim|regex_match[/^[a-z]*$/i]'
+		],
+		[
+			'field' => 'ACTLIM',
+			'rules' => 'trim|regex_match[/^[a-z]*$/i]'
+		],
+		[
+			'field' => 'ASGPER',
+			'rules' => 'trim|regex_match[/^[a-z]*$/i]'
+		],
+		[
+			'field' => 'CONGIR',
+			'rules' => 'trim|regex_match[/^[a-z]*$/i]'
+		],
+		[
+			'field' => 'CONLIM',
+			'rules' => 'trim|regex_match[/^[a-z]*$/i]'
+		],
+		[
+			'field' => 'CONUSU',
+			'rules' => 'trim|regex_match[/^[a-z]*$/i]'
+		],
+		[
+			'field' => 'CREUSU',
+			'rules' => 'trim|regex_match[/^[a-z]*$/i]'
+		],
+		[
+			'field' => 'OPCONL',
+			'rules' => 'trim|regex_match[/^[a-z]*$/i]'
+		],
+		[
+			'field' => 'REPCON',
+			'rules' => 'trim|regex_match[/^[a-z]*$/i]'
+		],
+		[
+			'field' => 'REPEDO',
+			'rules' => 'trim|regex_match[/^[a-z]*$/i]'
+		],
+		[
+			'field' => 'REPLOT',
+			'rules' => 'trim|regex_match[/^[a-z]*$/i]'
+		],
+		[
+			'field' => 'REPPRO',
+			'rules' => 'trim|regex_match[/^[a-z]*$/i]'
+		],
+		[
+			'field' => 'REPTAR',
+			'rules' => 'trim|regex_match[/^[a-z]*$/i]'
+		],
+		[
+			'field' => 'REPUSU',
+			'rules' => 'trim|regex_match[/^[a-z]*$/i]'
+		],
+		[
+			'field' => 'TEBANU',
+			'rules' => 'trim|regex_match[/^[a-z]*$/i]'
+		],
+		[
+			'field' => 'TEBCON',
+			'rules' => 'trim|regex_match[/^[a-z]*$/i]'
+		],
+		[
+			'field' => 'TEBCOS',
+			'rules' => 'trim|regex_match[/^[a-z]*$/i]'
+		],
+		[
+			'field' => 'TEBELC',
+			'rules' => 'trim|regex_match[/^[a-z]*$/i]'
+		],
+		[
+			'field' => 'TEBELI',
+			'rules' => 'trim|regex_match[/^[a-z]*$/i]'
+		],
+		[
+			'field' => 'TEBTHA',
+			'rules' => 'trim|regex_match[/^[a-z]*$/i]'
+		],
+		[
+			'field' => 'TIREPO',
+			'rules' => 'trim|regex_match[/^[a-z]*$/i]'
+		],
+		[
+			'field' => 'TRAABO',
+			'rules' => 'trim|regex_match[/^[a-z]*$/i]'
+		],
+		[
+			'field' => 'TRAASG',
+			'rules' => 'trim|regex_match[/^[a-z]*$/i]'
+		],
+		[
+			'field' => 'TRABLQ',
+			'rules' => 'trim|regex_match[/^[a-z]*$/i]'
+		],
+		[
+			'field' => 'TRACAR',
+			'rules' => 'trim|regex_match[/^[a-z]*$/i]'
+		],
+		[
+			'field' => 'TRADBL',
+			'rules' => 'trim|regex_match[/^[a-z]*$/i]'
+		],
+		[
+			'field' => 'TRAPGO',
+			'rules' => 'trim|regex_match[/^[a-z]*$/i]'
+		],
+		[
+			'field' => 'TRASAL',
+			'rules' => 'trim|regex_match[/^[a-z]*$/i]'
+		]
+	],
+	'enableUser' => [
+		[
+			'field' => 'user',
+			'rules' => 'trim|regex_match[/^[a-zA-Z0-9]*$/i]'
+		],
+		[
+			'field' => 'name',
+			'rules' => 'trim'
+		],
+		[
+			'field' => 'mail',
+			'rules' => 'trim|regex_match[/^([a-zA-Z]+[0-9_.+\-]*)+\@(([a-zA-Z0-9_\-])+\.)+([a-zA-Z0-9]{2,4})+$/]'
+		],
+	],
+	'keepSession' => [
+		[
+			'field' => 'modalReq',
+			'label' => 'modalReq',
+			'rules' => 'trim'
+		]
+	],
+	// Old Arquitectures
+	'login' => [
+		[
+			'field' => 'userName',
+			'rules' => 'trim|regex_match[/^([\wñÑ.\-+&]+)+$/i]|required'
+		],
+		[
+			'field' => 'userPass',
+			'rules' => 'trim|regex_match[/^([a-zA-Z0-9=]+)+$/i]|required'
+		],
+		[
+			'field' => 'otpCode',
+			'rules' => 'trim|regex_match[/^[a-z0-9]+$/i]'
+		],
+		[
+			'field' => 'saveIP',
+			'rules' => 'trim'
+		]
+	],
+	'dash-products' => [
+		[
+			'field' => 'data-accodgrupoe',
+			'label' => 'data-accodgrupoe',
+			'rules' => 'trim|regex_match[/^([\w\-]+)+$/i]|required'
+		],
+		[
+			'field' => 'data-acrif',
+			'label' => 'data-acrif',
+			'rules' => 'trim|regex_match[/^([\w\-]+[\s]*)+$/i]|required'
+		],
+		[
+			'field' => 'data-acnomcia',
+			'label' => 'data-acnomcia',
+			'rules' => 'trim|regex_match[/^([\w\-.,#ñÑáéíóúÑÁÉÍÓÚ\(\)&:\+]+[\s]*)+$/i]|required'
+		],
+		[
+			'field' => 'data-acrazonsocial',
+			'label' => 'data-acrazonsocial',
+			'rules' => 'trim|regex_match[/^([\w\-.,#ñÑáéíóúÑÁÉÍÓÚ\(\)&:\+]+[\s]*)+$/i]|required'
+		],
+		[
+			'field' => 'data-acdesc',
+			'label' => 'data-acdesc',
+			'rules' => 'trim|regex_match[/^([\w\-.,#ñÑáéíóúÑÁÉÍÓÚ\(\)&:\+]+[\s]*)+$/i]'
+		],
+		[
+			'field' => 'data-accodcia',
+			'label' => 'data-accodcia',
+			'rules' => 'trim|regex_match[/^([\w]+)+$/i]|required'
+		]
+	],
+	'products-detail' => [
+		[
+			'field' => 'data-marcaProducto',
+			'label' => 'data-marcaProducto',
+			'rules' => 'trim|regex_match[/^([\w\-.,#ñÑáéíóúÑÁÉÍÓÚ\(\)&:\+]+[\s]*)+$/i]|required'
+		],
+		[
+			'field' => 'data-nombreProducto',
+			'label' => 'data-nombreProducto',
+			'rules' => 'trim|regex_match[/^([\w\-.,#ñÑáéíóúÑÁÉÍÓÚ\(\)&:\+]+[\s]*)+$/i]|required'
+		],
+		[
+			'field' => 'data-idproducto',
+			'label' => 'data-idproducto',
+			'rules' => 'trim|regex_match[/^([\w]+)+$/i]|required'
+		]
+	],
+	'enterprise' => [
+		[
+			'field' => 'group',
+			'label' => 'group',
+			'rules' => 'trim|regex_match[/^([\w\-]+)+$/i]|required'
+		],
+		[
+			'field' => 'fiscal-inf',
+			'label' => 'fiscal-inf',
+			'rules' => 'trim|regex_match[/^([\w\-]+[\s]*)+$/i]|required'
+		],
+		[
+			'field' => 'name',
+			'label' => 'name',
+			'rules' => 'trim|regex_match[/^([\w\-.,#ñÑáéíóúÑÁÉÍÓÚ\(\)&:\+]+[\s]*)+$/i]|required'
+		],
+		[
+			'field' => 'business-name',
+			'label' => 'business-name',
+			'rules' => 'trim|regex_match[/^([\w\-.,#ñÑáéíóúÑÁÉÍÓÚ\(\)&:\+]+[\s]*)+$/i]|required'
+		],
+		[
+			'field' => 'description',
+			'label' => 'description',
+			'rules' => 'trim|regex_match[/^([\w\-.,#ñÑáéíóúÑÁÉÍÓÚ\(\)&:\+]+[\s]*)+$/i]'
+		],
+		[
+			'field' => 'code',
+			'label' => 'code',
+			'rules' => 'trim|regex_match[/^([\w]+)+$/i]|required'
+		]
+	],
+	'products' => [
+		[
+			'field' => 'idProductoPost',
+			'label' => 'idProductoPost',
+			'rules' => 'trim|regex_match[/^([\w\-]+)+$/i]|required'
+		],
+		[
+			'field' => 'nomProduc',
+			'label' => 'nomProduc',
+			'rules' => 'trim|regex_match[/^([\w\-.,#ñÑáéíóúÑÁÉÍÓÚ\(\)&:\+]+[\s]*)+$/i]|required'
+		],
+		[
+			'field' => 'marcProduc',
+			'label' => 'marcProduc',
+			'rules' => 'trim|regex_match[/^([\w\-.,#ñÑáéíóúÑÁÉÍÓÚ\(\)&:\+]+[\s]*)+$/i]|required'
+		]
+	]
 ];
