@@ -115,7 +115,7 @@ class NOVO_Controller extends CI_Controller {
 				)
 			) : json_decode(utf8_encode($this->input->get_post('request')));
 		} else {
-			$access = $this->verify_access->accessAuthorization($this->router->fetch_method(), $this->countryUri, $this->appUserName);
+			$access = $this->verify_access->accessAuthorization($this->router->fetch_method(), $this->customerUri, $this->appUserName);
 			$this->appUserName = isset($_POST['userName']) ? mb_strtoupper($_POST['userName']) : $this->session->userName;
 			$valid = TRUE;
 
