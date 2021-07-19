@@ -76,7 +76,7 @@ class Verify_Access {
 		}
 
 		unset($_POST);
-		log_message('INFO', 'NOVO ['.$user.'] '.$rule.' REQUEST CREATED '.json_encode($this->requestServ, JSON_UNESCAPED_UNICODE));
+		log_message('DEBUG', 'NOVO ['.$user.'] '.$rule.' REQUEST CREATED '.json_encode($this->requestServ, JSON_UNESCAPED_UNICODE));
 
 		return $this->requestServ;
 	}
