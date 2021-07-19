@@ -47,3 +47,5 @@ $lang['MODAL_OTP'] = 'ON';
 $lang['CONF_SERVICEORDERS_ICON'] = 'ON';
 //TEXT CONF
 $lang['CONF_FILE'] = 'Archivos de Autogestión %s';
+//FRANCHISE LOGO
+$lang['CONF_FRANCHISE_LOGO'] = 'OFF';
