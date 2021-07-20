@@ -259,7 +259,7 @@ function validateForms(form) {
 			},
 			"confirm-pass": {
 				required: lang.VALIDATE_CONFIRM_PASS,
-				equalTo: 'Debe ser igual a la nueva contraseña'
+				equalTo: lang.VALIDATE_EQUAL_PASS
 			},
 			"branch-office": lang.VALIDATE_BRANCH_OFFICE,
 			"type-bulk": lang.VALIDATE_BULK_TYPE,

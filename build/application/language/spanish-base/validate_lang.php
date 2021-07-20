@@ -12,6 +12,7 @@ $lang['VALIDATE_EMAIL'] = 'Indica un correo válido';
 $lang['VALIDATE_CURRENT_PASS'] = 'Indica tu contraseña actual';
 $lang['VALIDATE_NEW_PASS'] = 'Indica tu nueva contraseña';
 $lang['VALIDATE_DIFFERS_PASS'] = 'La nueva contraseña debe ser diferente a la actual';
+$lang['VALIDATE_EQUAL_PASS'] = 'Debe ser igual a la nueva contraseña';
 $lang['VALIDATE_REQUIREMENTS_PASS'] = 'La contraseña debe cumplir los requisitos';
 $lang['VALIDATE_CONFIRM_PASS'] = 'Confirma tu contraseña';
 $lang['VALIDATE_BRANCH_OFFICE'] = 'Selecciona una sucursal';

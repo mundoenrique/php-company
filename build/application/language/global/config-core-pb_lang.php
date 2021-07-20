@@ -16,10 +16,12 @@ $lang['CONF_SETTINGS_EMAIL_UPDATE'] = 'OFF';
 $lang['CONF_SETTINGS_BRANCHES'] = 'OFF';
 $lang['CONF_SETTINGS_PHONES_UPDATE'] = 'OFF';
 $lang['CONF_SETTINGS_CONTACT'] = 'OFF';
+//TEXT CONF
+$lang['CONF_APPLICATIONS'] = 'Archivos de gestión';
 //FILES CONF
 $lang['CONF_MANUAL_FILE'] = [];
-$lang['CONF_FILES_MANAGMENT'] = [
-  ['lotes.rar', 'Gestión de Lotes']
+$lang['CONF_APPS_FILE'] = [
+  ['lotes.zip', 'Gestión de Lotes']
 ];
 //DATEPICKER
 $lang['CONF_MAX_CONSULT_MONTH'] = 1;

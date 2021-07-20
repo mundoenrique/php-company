@@ -177,7 +177,7 @@ class NOVO_Controller extends CI_Controller {
 
 			$this->includeAssets->jsFiles = [
 				"third_party/html5",
-				"third_party/jquery-3.4.0",
+				"third_party/jquery-3.6.0",
 				"third_party/jquery-ui-1.12.1",
 				"third_party/aes",
 				"aes-json-format",
