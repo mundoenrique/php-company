@@ -3,6 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $lang['USER_SIGNIN_INVALID_USER']= "Usuario o contraseña inválido";
 $lang['USER_SIGNIN_WILL_BLOKED']= "Al siguiente intento fallido tu usuario será bloqueado";
 $lang['USER_SIGNIN_SUSPENDED'] = 'Usuario no disponible, se encuentra inactivo';
+$lang['USER_SIGNIN_BLOCKED'] = 'Usuario bloqueado por intentos fallidos.';
 $lang['USER_SIGNIN_NO_MIGRED'] = 'Estimado %s tu usuario no ha sido migrado de la aplicación anterior';
 $lang['USER_SIGNIN_OLD_APP'] = 'Usuario aplicación anterior';
 $lang['USER_EXPIRE_TIME'] = 'El tiempo permitido para realizar la operación expiró, intenta nuevamente.';
