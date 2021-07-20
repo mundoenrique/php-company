@@ -146,9 +146,14 @@ class Novo_User_Model extends NOVO_Model {
 				$this->response->position = lang('CONF_VALID_POSITION');
 			break;
 			case -8:
-			case -35:
 				$this->response->code = 1;
 				$this->response->msg = lang('USER_SIGNIN_SUSPENDED');
+				$this->response->className = lang('CONF_VALID_INACTIVE_USER');
+				$this->response->position = lang('CONF_VALID_POSITION');
+			break;
+			case -35:
+				$this->response->code = 1;
+				$this->response->msg = lang('USER_SIGNIN_BLOCKED');
 				$this->response->className = lang('CONF_VALID_INACTIVE_USER');
 				$this->response->position = lang('CONF_VALID_POSITION');
 			break;
