@@ -35,7 +35,7 @@ class Combustible extends CI_Controller {
 			'combustible/combustibleMaster.css'
 		];
 		$this->addJs = [
-			'jquery-1.10.2.min.js',
+			'jquery-3.6.0.min.js',
 			'jquery-ui-1.10.3.custom.min.js',
 			'jquery-md5.js',
 			'jquery.balloon.min.js',
