@@ -54,6 +54,14 @@
             <span id="numLot" class="form-control px-1" readonly="readonly"><?= $detailBulk->bulkNumber ?></span>
           </div>
 
+					<?php if (lang('CONF_CONFIRM_MSG') === 'ON' && $detailBulk->bulkId == 'RE'): ?>
+					<div class="form-group mb-4 col-12">
+						<span class="form-control" readonly="readonly">
+              <?= lang('BULK_CONFIRM_MSG'); ?>
+            </span>
+					</div>
+					<?php endif; ?>
+
           <div class="form-group mb-3 col-12">
             <label for="obsConfirm" id="obsConfirm"><?= lang('BULK_OBSERVATIONS'); ?></label>
             <?php if(!empty($detailBulk->errors)): ?>
