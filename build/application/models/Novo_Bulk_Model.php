@@ -329,6 +329,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 		$detailBulk = [
 			'idFiscal' => '',
 			'enterpriseName' => '',
+			'bulkId' => '',
 			'bulkType' => '',
 			'bulkNumber' => '',
 			'totaRecords' => '',
@@ -344,6 +345,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 				$this->response->code = 0;
 				$detailBulk['idFiscal'] = $response->lotesTO->idEmpresa;
 				$detailBulk['enterpriseName'] = mb_strtoupper($response->lotesTO->nombreEmpresa);
+				$detailBulk['bulkId'] = $response->lotesTO->idTipoLote ?? '';
 				$detailBulk['bulkType'] = $response->lotesTO->tipoLote;
 				$detailBulk['bulkNumber'] = $response->lotesTO->numLote;
 				$detailBulk['totaRecords'] = $response->lotesTO->cantRegistros;
@@ -1028,7 +1030,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 									$bulkList['bulkTotalAmount'] = currencyFormat($bulk->montoNeto);
 									$bulkList['bulkId'] = $bulk->acidlote;
 									$bulkList['bulkObservation'] = '';
-									
+
 									if(isset($bulk->obs)  && $bulk->obs != '' && $bulk->cestatus == lang('CONF_STATUS_REJECTED')){
 										$bulkList['bulkObservation'] = $bulk->obs;
 										$serviceOrders['warningEnabled'] = TRUE;

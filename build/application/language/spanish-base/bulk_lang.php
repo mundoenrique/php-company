@@ -52,6 +52,7 @@ $lang['BULK_AMOUNT'] = 'Monto total';
 $lang['BULK_OBSERVATIONS'] = 'Observaciones';
 $lang['BULK_SEE'] = 'Ver lote';
 $lang['BULK_DETAIL'] = 'Detalle del lote';
+$lang['BULK_CONFIRM_MSG'] = '“El valor total corresponde a la comisión de reexpedición de tus tarjetas prepago pay+ según las condiciones negociadas con el Banco, puede que el costo no aplique para todas tus tarjetas”';
 $lang['BULK_DETAIL_FAIL_COST'] = 'En este momento la consulta de costos no está disponible, por favor intenta más tarde.';
 $lang['BULK_DELETE'] = 'Por favor ingresa la contraseña para eliminar el lote';
 $lang['BULK_DISASS'] = 'Por favor ingresa la contraseña para desasociar el lote';
