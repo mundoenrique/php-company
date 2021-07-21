@@ -56,7 +56,8 @@
 
 					<?php if (lang('CONF_CONFIRM_MSG') === 'ON' && $detailBulk->bulkId == 'RE'): ?>
 					<div class="form-group mb-4 col-12">
-						<span class="form-control" readonly="readonly">
+						<label for="msg-confirm"><?= lang('BULK_IMPORTANT'); ?></label>
+						<span id="msg-confirm" class="form-control" readonly="readonly">
               <?= lang('BULK_CONFIRM_MSG'); ?>
             </span>
 					</div>
