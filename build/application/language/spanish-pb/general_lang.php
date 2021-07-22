@@ -19,6 +19,8 @@ $lang['GEN_FOTTER_IMAGE_L'] = 'logo-footer.png';
 $lang['GEN_FOTTER_IMAGE_R'] = 'img-pci_compliance.svg';
 $lang['GEN_FOTTER_MARK'] = 'img-ma.svg';
 //DATATABLES
+$lang['GEN_START_DAY']= 'Fecha inicio';
+$lang['GEN_END_DAY']= 'Fecha fin';
 $lang['GEN_TABLE_BULK_NUMBER'] = 'Num. lote';
 $lang['GEN_TABLE_BULK_DATE_VALUE'] = 'Fecha de ult. estado';
 $lang['GEN_TABLE_AMOUNT'] = 'Monto lote';
