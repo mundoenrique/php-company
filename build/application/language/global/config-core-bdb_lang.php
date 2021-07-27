@@ -46,3 +46,5 @@ $lang['CONF_MP4_VIDEO'] = ['video.mp4'];
 $lang['CONF_SERVICEORDERS_ICON'] = 'ON';
 //TEXT CONF
 $lang['CONF_FILE'] = 'Archivos de Autogestión %s';
+//FRANCHISE LOGO
+$lang['CONF_FRANCHISE_LOGO'] = 'OFF';
