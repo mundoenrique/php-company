@@ -317,7 +317,7 @@ class Novo_Business_Model extends NOVO_Model {
 		$response = $this->sendToService('callWs_GetProductDetail');
 		$productImg = $dataRequest->productImg;
 		$brandName = $dataRequest->productBrand;
-		$productName = $dataRequest->productName;
+		$productName = ucwords(mb_strtolower($dataRequest->productName));
 
 		$productDetail = [
 			'name' => $productName,
@@ -359,7 +359,7 @@ class Novo_Business_Model extends NOVO_Model {
 						$productDetail['viewSomeAttr'] = FALSE;
 					}
 
-					$productDetail['name'] = ucwords(mb_strtolower($productName));
+					$productDetail['name'] = $productName;
 					$productDetail['imgBrand'] = $imgBrand;
 					$productInf = new stdClass();
 					$productInf->productPrefix = $productPrefix;
