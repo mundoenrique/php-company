@@ -18,11 +18,6 @@ $lang['CONF_SETTINGS_PHONES_UPDATE'] = 'OFF';
 $lang['CONF_SETTINGS_CONTACT'] = 'OFF';
 //TEXT CONF
 $lang['CONF_APPLICATIONS'] = 'Archivos de gestión';
-//FILES CONF
-$lang['CONF_MANUAL_FILE'] = [];
-$lang['CONF_APPS_FILE'] = [
-  ['lotes.zip', 'Gestión de Lotes']
-];
 //DATEPICKER
 $lang['CONF_MAX_CONSULT_MONTH'] = 1;
 $lang['CONF_MIN_CONSULT_YEAR'] = 2020;
@@ -34,3 +29,9 @@ $lang['CONF_USERS_ACTIVITY'] = 'ON';
 //EXTERNAL LINKS
 $lang['CONF_LINK_RECOVER_ACCESS'] = 'recover-access';
 $lang['CONF_LINK_USER_ACTIVITY'] = 'users-activity';//permiso asociado REPUSU
+//FILES DOWNLOAD
+$lang['CONF_FILES_GENERAL'] = [
+  'Archivos de gestión'=>[
+    ['lotes','zip', 'Gestión de Lotes','download']
+  ]
+];

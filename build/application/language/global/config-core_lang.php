@@ -137,16 +137,13 @@ $lang['CONF_SETTINGS_PHONES_UPDATE'] = 'ON';
 $lang['CONF_SETTINGS_CONTACT'] = 'ON';
 $lang['CONF_SETTINGS_CHANGE_PASSWORD'] = 'ON';
 //FILES CONF
-$lang['CONF_MANUAL_FILE'] = [];
-$lang['CONF_APPS_FILE'] = [];
-$lang['CONF_APPS_DOWNLOAD'] = [];
-$lang['CONF_FILES_MANAGMENT'] = [];
-$lang['CONF_MP4_VIDEO'] = [];
+$lang['CONF_FILES_GENERAL'] = [];
 //DOWNLOAD ICONS
 $lang['CONF_PDF_ICON'] = 'icon-pdf.svg';
 $lang['CONF_RAR_ICON'] = 'icon-rar.svg';
 $lang['CONF_ZIP_ICON'] = 'icon-zip.svg';
 $lang['CONF_SETT_ICON'] = 'icon-settings.svg';
+$lang['CONF_XLS_ICON'] = 'icon-xls.svg';
 //TEXT CONF
 $lang['CONF_DOWNLOADS'] = 'Descargas';
 $lang['CONF_MANUALS'] = 'Manuales';

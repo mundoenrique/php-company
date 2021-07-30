@@ -112,20 +112,24 @@ $(function () {
 		}
 	})
 
-	if (lang.CONF_APPS_DOWNLOAD.length > 0) {
-		$('a.' + lang.CONF_APPS_DOWNLOAD[0][0]).on('click', function () {
-			if ($(this).attr('title') == '') {
-				verb = 'POST'; who = 'Settings'; where = 'GetFileIni';
-				data = {};
-				callNovoCore(verb, who, where, data, function (response) {
-					if (response.code == 0) {
-						downLoadfiles(response.data);
+	$.each(lang.CONF_FILES_GENERAL, function( index, header ) {
+		$.each(header, function( index2, detail ) {
+			if (detail[3] == 'request') {
+				$('a.' + detail[0]).on('click', function () {
+					if ($(this).attr('title') == '') {
+						verb = 'POST'; who = 'Settings'; where = 'GetFileIni';
+						data = {};
+						callNovoCore(verb, who, where, data, function (response) {
+							if (response.code == 0) {
+								downLoadfiles(response.data);
+							}
+							$('.cover-spin').hide();
+						})
 					}
-					$('.cover-spin').hide();
 				})
 			}
-		})
-	}
+		});
+	});
 
 	$('#branchListBr').on('change', function (e) {
 		e.preventDefault;

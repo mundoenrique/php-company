@@ -48,10 +48,11 @@ $lang['CONF_SETTINGS_CONTACT'] = 'OFF';
 $lang['CONF_SETTINGS_CHANGE_PASSWORD'] = 'OFF';
 //STYLE FORM
 $lang['CONF_SETT_STYLE_SKIN'] = 'col-4';
-//FILES CONF
-$lang['CONF_MANUAL_FILE'] = [];
-$lang['CONF_FILES_MANAGMENT'] = [
-  ['lotes.rar', 'Gestión de Lotes']
+//FILES DOWNLOAD
+$lang['CONF_FILES_GENERAL'] = [
+  'Archivos de gestión'=>[
+    ['lotes','rar', 'Gestión de Lotes','download']
+  ]
 ];
 //STATUS ACCOUNT
 $lang['CONF_DNI_COLUMN']= 'OFF';
