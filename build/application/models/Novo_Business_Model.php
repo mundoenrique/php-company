@@ -315,19 +315,18 @@ class Novo_Business_Model extends NOVO_Model {
 		];
 
 		$response = $this->sendToService('callWs_GetProductDetail');
-		$imgProgram = $this->customerUri.'_default.svg';
+		$productImg = $dataRequest->productImg;
+		$brandName = $dataRequest->productBrand;
+		$productName = ucwords(mb_strtolower($dataRequest->productName));
+
 		$productDetail = [
-			'name' => $dataRequest->productName ?? '',
-			'imgProgram' => $imgProgram,
-			'brand' => isset($dataRequest->productBrand) ? url_title(trim(mb_strtolower($dataRequest->productBrand))) : '',
-			'imgBrand' => isset($dataRequest->productBrand) ? trim(mb_strtolower($dataRequest->productBrand.lang('GEN_DETAIL_BARND_COLOR'))) : '',
+			'name' => $productName,
+			'productImg' => $productImg,
+			'brand' => $brandName,
+			'imgBrand' => isset($dataRequest->productBrand) ? trim(mb_strtolower($dataRequest->productBrand.lang('GEN_DETAIL_BRAND_COLOR'))) : '',
 			'viewSomeAttr' => TRUE,
 			'prefix' => $productPrefix
 		];
-
-		if(!file_exists(assetPath('images/programs/'.$this->session->customerUri.'/'.$imgProgram))) {
-			$productDetail['imgProgram'] = 'default.svg';
-		}
 
 		$productSummary = [
 			'lots' => '--',
@@ -350,34 +349,23 @@ class Novo_Business_Model extends NOVO_Model {
 				if(isset($response->estadistica->producto->idProducto)) {
 					$imgBrand = url_title(trim(mb_strtolower($response->estadistica->producto->marca)));
 
-					if ($imgBrand == 'visa') {
-						$imgBrand.= lang('GEN_DETAIL_BARND_COLOR');
-					} else {
-						$imgBrand.= '_card.svg';
-					}
+					$imgBrand == 'visa' ? $imgBrand.= lang('GEN_DETAIL_BRAND_COLOR') : $imgBrand.= '_card.svg';
 
 					if (!file_exists(assetPath('images/brands/'.$imgBrand))) {
 						$imgBrand = 'default.svg';
-					}
-
-					$productDetail['imgBrand'] = $imgBrand;
-					$imgProgram = url_title(trim(mb_strtolower($response->estadistica->producto->nombre))).'.svg';
-
-					if (file_exists(assetPath('images/programs/'.$this->session->customerUri.'/'.$imgProgram))) {
-						$productDetail['imgProgram'] = $imgProgram;
 					}
 
 					if (trim($response->estadistica->producto->idProducto) == 'G') {
 						$productDetail['viewSomeAttr'] = FALSE;
 					}
 
-
-					$productDetail['name'] = ucwords(mb_strtolower($response->estadistica->producto->descripcion));
-					$productDetail['brand'] = trim($response->estadistica->producto->marca);
+					$productDetail['name'] = $productName;
+					$productDetail['imgBrand'] = $imgBrand;
 					$productInf = new stdClass();
 					$productInf->productPrefix = $productPrefix;
-					$productInf->productName = $productDetail['name'];
-					$productInf->brand = $productDetail['brand'];
+					$productInf->productImg = $productImg;
+					$productInf->productName = $productName;
+					$productInf->brand = $brandName;
 					$sess = [
 						'productInf' => $productInf,
 						'user_access' => $response->lista

@@ -1,0 +1,33 @@
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+// PROGRAM IMAGES
+$lang['IMG_PROGRAM_IMAGES'] = [
+	'bankity' => 'bankity',
+	'eslop' => 'eslop',
+	'plata-combustible' => 'plata_gasolina',
+	'plata-compras' => 'plata_dorada',
+	'pmi-americas' => 'pmi_americas',
+	'bonus-alimentacion' => 'bonus_alimentacion',
+	'bonus-regalo' => 'bonus_alimentacion',
+	'clasic-pichincha-3in' => 'plata_clasica',
+	'clasica-pagos-in' => 'plata_clasica',
+	'clasica-pichincha-3in' => 'plata_clasica',
+	'clasica-pichincha-3r' => 'plata_clasica',
+	'clasica-pichincha-in' => 'plata_clasica',
+	'clasica-pichincha' => 'plata_clasica',
+	'pichincha-viatico-in' => 'plata_clasica',
+	'plata-caja-menor' => 'plata_clasica',
+	'plata-clasica-in' => 'plata_clasica',
+	'plata-clasica-innominado' => 'plata_clasica',
+	'plata-clasica' => 'plata_clasica',
+	'plata-compras-regalo' => 'plata_clasica',
+	'plata-compras-rg' => 'plata_clasica',
+	'plata-incentivos' => 'plata_clasica',
+	'plata-ropa-y-calzado' => 'plata_clasica',
+	'plata-solo-compras-in' => 'plata_clasica',
+	'plata-solo-compras-innominado' => 'plata_clasica',
+	'plata-solo-compras' => 'plata_clasica',
+	'plata-transporte' => 'plata_clasica',
+	'rappi-cash' => 'plata_clasica',
+	'rappi' => 'plata_clasica',
+];
