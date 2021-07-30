@@ -130,9 +130,9 @@ class Novo_Business extends NOVO_Controller {
 		$detailList = $this->loadModel($this->request);
 		$this->responseAttr($detailList);
 		$this->render->detailProductName = $detailList->data->productDetail->name;
-		$this->render->productImg = $detailList->data->productDetail->imgProgram;
-		$this->render->productBrand = $detailList->data->productDetail->brand;
+		$this->render->productImg = $detailList->data->productDetail->productImg;
 		$this->render->productImgBrand = $detailList->data->productDetail->imgBrand;
+		$this->render->productBrand = $detailList->data->productDetail->brand;
 		$this->render->viewSomeAttr = $detailList->data->productDetail->viewSomeAttr;
 		$this->render->loadBulkLink = $this->verify_access->verifyAuthorization('TEBCAR') ? lang('CONF_LINK_BULK_LOAD') : lang('CONF_NO_LINK');
 		$this->render->loadDisabled = $this->render->loadBulkLink == lang('CONF_NO_LINK') ? 'is-disabled' : '';
