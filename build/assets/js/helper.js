@@ -138,7 +138,7 @@ function callNovoCore(verb, who, where, request, _response_) {
 
 	formData.append('request', dataRequest);
 
-	if (lang.CONFIG_CYPHER_DATA == 'ON') {
+	if (lang.CONF_CYPHER_DATA == 'ON') {
 		formData.append('ceo_name', ceo_cook);
 		formData.append('plot', btoa(ceo_cook));
 	}
@@ -162,7 +162,7 @@ function callNovoCore(verb, who, where, request, _response_) {
 		dataType: 'json'
 	}).done(function (response, status, jqXHR) {
 
-		if (lang.CONFIG_CYPHER_DATA == 'ON') {
+		if (lang.CONF_CYPHER_DATA == 'ON') {
 			response = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, { format: CryptoJSAesJson }).toString(CryptoJS.enc.Utf8))
 		}
 
@@ -337,7 +337,7 @@ function cryptoPass(jsonObject, req) {
 	ceo_cook = getCookieValue();
 	var cipherObject = jsonObject;
 
-	if (lang.CONFIG_CYPHER_DATA == 'ON') {
+	if (lang.CONF_CYPHER_DATA == 'ON') {
 		cipherObject = CryptoJS.AES.encrypt(jsonObject, ceo_cook, { format: CryptoJSAesJson }).toString();
 
 		if (!req) {

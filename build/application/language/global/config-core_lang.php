@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $lang['CONFIG_MAINTENANCE'] = 'OFF';
 $lang['GEN_ACTIVE_RECAPTCHA'] = ACTIVE_RECAPTCHA;
 $lang['GEN_KEY_RECAPTCHA'] = '6Lejt6MUAAAAANd7KndpsZ2mRSQXuYHncIxFJDYf';
-$lang['CONFIG_CYPHER_DATA'] = ACTIVE_SAFETY ?? 'ON';
+$lang['CONF_CYPHER_DATA'] = ACTIVE_SAFETY ?? 'ON';
 $lang['CONF_VIEW_SUFFIX'] = '-core';
 $lang['CONF_RC_DEFAULT'] = -9999;
 $lang['CONF_DEFAULT_CODE'] = 4;
