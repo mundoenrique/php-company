@@ -34,7 +34,7 @@ class Novo_Settings extends NOVO_Controller {
 			$this->includeAssets->jsFiles,
 			"third_party/dataTables-1.10.20",
 			"third_party/jquery.validate",
-			"validate-core-forms",
+			"form_validation",
 			"third_party/additional-methods",
 			"settings/options",
 			"user/changePassword-core",
