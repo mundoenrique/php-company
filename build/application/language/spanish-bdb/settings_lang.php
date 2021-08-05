@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 //FILES DOWNLOAD
 $lang['CONF_FILES_GENERAL'] = [
   'Manuales'=>[
-    ['archivo','pdf','Manual de Usuario Conexión Empresas Online','download']
+    ['Manual_de_Usuario_Conexión_Empresas_Online','pdf','Manual de Usuario Conexión Empresas Online','download']
   ],
   'Aplicaciones'=>[
     ['download-ini','ini','Archivo.ini','request']
