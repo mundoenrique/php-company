@@ -29,9 +29,3 @@ $lang['CONF_USERS_ACTIVITY'] = 'ON';
 //EXTERNAL LINKS
 $lang['CONF_LINK_RECOVER_ACCESS'] = 'recover-access';
 $lang['CONF_LINK_USER_ACTIVITY'] = 'users-activity';//permiso asociado REPUSU
-//FILES DOWNLOAD
-$lang['CONF_FILES_GENERAL'] = [
-  'Archivos de gestión'=>[
-    ['lotes','zip', 'Gestión de Lotes','download']
-  ]
-];
