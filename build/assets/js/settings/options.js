@@ -153,7 +153,7 @@ $(function () {
 		}
 	});
 
-	var inputFile =  $('#file-branch').next('.js-label-file').html().trim() ;
+	var inputFile =  $('#file-branch').next('.js-label-file').html();
 
 	$('.input-file').each(function () {
 		var label = $(this).next('.js-label-file');
