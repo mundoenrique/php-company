@@ -1,7 +1,7 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 <?php if (lang('CONF_FOOTER_INFO') == 'ON') : ?>
 	<footer class="main-footer">
-		<?php if ($customerUri == 'bdb'): ?>
+		<?php if (lang('CONF_SUPERINTENDENCY_LOGO') == 'ON'): ?>
 		<div class="flex pr-2 pr-lg-0">
 			<img src="<?= $this->asset->insertFile(lang('GEN_FOTTER_MARK'), 'images', $customerUri); ?> " alt="Logo Superintendencia">
 		</div>
