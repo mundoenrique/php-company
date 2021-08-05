@@ -53,6 +53,10 @@ footer.main-footer {
 	transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 }
 
+.form-control[type="text"], .form-control[type="password"], .form-control::placeholder {
+	color: var(--color-eighth) !important;
+}
+
 .form-control:focus:not([readonly]):not(:disabled) {
 	border: 1px solid var(--color-eleventh);
 	outline: 0;
@@ -886,12 +890,13 @@ label {
 
 
 /* Main-nav-user  */
-.main-nav-user > .nav-item > .nav-link{
+.main-nav-user > .nav-item > .nav-link {
   -webkit-transition: all .4s ease;
 	transition: all .4s ease;
 	padding-top: 12px;
 	padding-bottom: 12px;
 	opacity: 1;
+	color: var(--color-eighth) !important;
 }
 
 .dropdown-user li:not(:last-child) {
