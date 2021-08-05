@@ -30,7 +30,7 @@ class Novo_Bulk extends NOVO_Controller {
 			$this->includeAssets->jsFiles,
 			"third_party/dataTables-1.10.20",
 			"third_party/jquery.validate",
-			"validate-core-forms",
+			"form_validation",
 			"third_party/additional-methods",
 			"bulk/loadBulk"
 		);
@@ -95,7 +95,7 @@ class Novo_Bulk extends NOVO_Controller {
 		array_push(
 			$this->includeAssets->jsFiles,
 			"third_party/jquery.validate",
-			"validate-core-forms",
+			"form_validation",
 			"third_party/additional-methods",
 			"bulk/confirmBulk"
 		);
@@ -130,7 +130,7 @@ class Novo_Bulk extends NOVO_Controller {
 			$this->includeAssets->jsFiles,
 			"third_party/dataTables-1.10.20",
 			"third_party/jquery.validate",
-			"validate-core-forms",
+			"form_validation",
 			"third_party/additional-methods",
 			"bulk/authorizeBulkList"
 		);
@@ -173,7 +173,7 @@ class Novo_Bulk extends NOVO_Controller {
 			$this->includeAssets->jsFiles,
 			"third_party/dataTables-1.10.20",
 			"third_party/jquery.validate",
-			"validate-core-forms",
+			"form_validation",
 			"third_party/additional-methods",
 			"bulk/calculateServiceOrder"
 		);
@@ -219,7 +219,7 @@ class Novo_Bulk extends NOVO_Controller {
 		array_push(
 			$this->includeAssets->jsFiles,
 			"third_party/jquery.validate",
-			"validate-core-forms",
+			"form_validation",
 			"third_party/additional-methods",
 			'bulk/unnamedRequest'
 		);
@@ -251,7 +251,7 @@ class Novo_Bulk extends NOVO_Controller {
 			$this->includeAssets->jsFiles,
 			"third_party/dataTables-1.10.20",
 			"third_party/jquery.validate",
-			"validate-core-forms",
+			"form_validation",
 			"third_party/additional-methods",
 			'bulk/unnamedAffiliate'
 		);
@@ -291,7 +291,7 @@ class Novo_Bulk extends NOVO_Controller {
 			$this->includeAssets->jsFiles,
 			"third_party/dataTables-1.10.20",
 			"third_party/jquery.validate",
-			"validate-core-forms",
+			"form_validation",
 			"third_party/additional-methods",
 			'bulk/unnmamedDetail'
 		);

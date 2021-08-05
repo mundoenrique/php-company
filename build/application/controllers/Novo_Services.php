@@ -29,7 +29,7 @@ Class Novo_Services extends Novo_Controller {
 			$this->includeAssets->jsFiles,
 			"third_party/dataTables-1.10.20",
 			"third_party/jquery.validate",
-			"validate-core-forms",
+			"form_validation",
 			"third_party/additional-methods",
 			"services/transfMasterAccount",
 			'third_party/jquery.mask-1.14.16',
@@ -79,7 +79,7 @@ Class Novo_Services extends Novo_Controller {
 			$this->includeAssets->jsFiles,
 			"third_party/dataTables-1.10.20",
 			"third_party/jquery.validate",
-			"validate-core-forms",
+			"form_validation",
 			"third_party/additional-methods",
 			'services/cardsInquiry'
 		);
@@ -106,7 +106,7 @@ Class Novo_Services extends Novo_Controller {
 			$this->includeAssets->jsFiles,
 			"third_party/dataTables-1.10.20",
 			"third_party/jquery.validate",
-			"validate-core-forms",
+			"form_validation",
 			"third_party/additional-methods",
 			'services/transactionalLimits'
 		);
@@ -130,7 +130,7 @@ Class Novo_Services extends Novo_Controller {
 		array_push(
 			$this->includeAssets->jsFiles,
 			"third_party/jquery.validate",
-			"validate-core-forms",
+			"form_validation",
 			"third_party/additional-methods",
 			'services/commercialTwirls'
 		);

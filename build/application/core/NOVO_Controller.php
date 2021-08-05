@@ -104,7 +104,7 @@ class NOVO_Controller extends CI_Controller {
 		}
 
 		if ($this->input->is_ajax_request()) {
-			$this->dataRequest = lang('CONFIG_CYPHER_DATA') == 'ON' ? json_decode(
+			$this->dataRequest = lang('CONF_CYPHER_DATA') == 'ON' ? json_decode(
 				$this->security->xss_clean(
 					strip_tags(
 						$this->cryptography->decrypt(

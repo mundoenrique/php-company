@@ -33,6 +33,17 @@ $lang['CONF_SETTINGS_BRANCHES'] = 'OFF';
 $lang['CONF_SETTINGS_USER'] = 'OFF';
 $lang['CONF_SETTINGS_ENTERPRISE'] = 'OFF';
 $lang['CONF_SETTINGS_BRANCHES'] = 'OFF';
+//FILES
+$lang['CONF_MANUAL_FILE'] = [
+  ['archivo.pdf', 'Manual de Usuario Conexión Empresas Online']
+];
+$lang['CONF_FILES_MANAGMENT'] = [
+  ['archivo_autogestion_ceo.rar', 'Archivos de autogestión']
+];
+$lang['CONF_APPS_DOWNLOAD'] = [
+  ['download-ini', 'Archivo.ini']
+];
+$lang['CONF_MP4_VIDEO'] = ['video.mp4'];
 //ICON WARNING SERVICE ORDERS
 $lang['CONF_SERVICEORDERS_ICON'] = 'ON';
 //TEXT CONF

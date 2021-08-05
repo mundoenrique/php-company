@@ -37,7 +37,7 @@ class Novo_User extends NOVO_Controller {
 			$this->includeAssets->jsFiles,
 			"third_party/jquery.balloon",
 			"third_party/jquery.validate",
-			"validate-core-forms",
+			"form_validation",
 			"third_party/additional-methods",
 			"user/signIn"
 		);
@@ -129,7 +129,7 @@ class Novo_User extends NOVO_Controller {
 			$this->includeAssets->jsFiles,
 			"user/recoverPass",
 			"third_party/jquery.validate",
-			"validate-core-forms",
+			"form_validation",
 			"third_party/additional-methods"
 		);
 
@@ -154,7 +154,7 @@ class Novo_User extends NOVO_Controller {
 			$this->includeAssets->jsFiles,
 			"user/recoverAccess",
 			"third_party/jquery.validate",
-			"validate-core-forms",
+			"form_validation",
 			"third_party/additional-methods"
 		);
 		$this->render->titlePage = lang('GEN_RECOVER_PASS_TITLE');
@@ -184,7 +184,7 @@ class Novo_User extends NOVO_Controller {
 			"user/passValidate",
 			"third_party/jquery.balloon",
 			"third_party/jquery.validate",
-			"validate-core-forms",
+			"form_validation",
 			"third_party/additional-methods"
 		);
 
@@ -298,7 +298,7 @@ class Novo_User extends NOVO_Controller {
 			$this->includeAssets->jsFiles,
 			"third_party/dataTables-1.10.20",
 			"third_party/jquery.validate",
-			"validate-core-forms",
+			"form_validation",
 			"third_party/additional-methods",
 			"user/usersManagement"
 		);
@@ -345,7 +345,7 @@ class Novo_User extends NOVO_Controller {
 		array_push(
 			$this->includeAssets->jsFiles,
 			"third_party/jquery.validate",
-			"validate-core-forms",
+			"form_validation",
 			"third_party/additional-methods",
 			"user/userPermissions"
 		);
