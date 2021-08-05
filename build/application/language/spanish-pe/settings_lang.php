@@ -4,8 +4,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 //FILES DOWNLOAD
 $lang['CONF_FILES_GENERAL'] = [
   'Manuales'=>[
-    ['TV-MUS-002-conexion-empresas-online-V10','pdf', 'Manual de Usuario Conexión Empresas Online','download'],
-    ['TP-MUS-002_gestor_lotes_V_1','pdf', 'Manual de Usuario Gestor de Lotes','download'],
+    ['Manual_de_Usuario_Conexión_Empresas_Online','pdf', 'Manual de Usuario Conexión Empresas Online','download'],
+    ['Manual_de_Usuario_Gestor_Lotes','pdf', 'Manual de Usuario Gestor de Lotes','download'],
   ],
   'Aplicaciones'=>[
     ['Gestor','rar','Gestor de lotes','download'],

@@ -4,6 +4,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 //FILES DOWNLOAD
 $lang['CONF_FILES_GENERAL'] = [
   'Archivos de gestión'=>[
-    ['lotes','rar', 'Gestión de Lotes','download']
+    ['ArchivosLotes','rar', 'Gestión de Lotes','download']
   ]
 ];
