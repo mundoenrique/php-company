@@ -1,13 +1,13 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
-<h1 class="text-primary h3 regular inline"><?= lang('GEN_DETAIL_BULK_TITLE') ?></h1>
+<h1 class="primary h3 regular inline"><?= lang('GEN_DETAIL_BULK_TITLE') ?></h1>
 <span class="ml-2 regular tertiary"><?= $productName ?></span>
 <div class="mb-2 flex items-center">
 	<div class="flex tertiary">
 		<nav class="main-nav nav-inferior">
 			<ul class="mb-0 h6 light tertiary list-style-none list-inline">
-				<li class="inline"><a class="tertiary big-modal" href="<?= base_url('empresas') ?>"><?= lang('GEN_MENU_ENTERPRISE') ?></a></li> /
-				<li class="inline"><a class="tertiary big-modal" href="<?= base_url('productos') ?>"><?= lang('GEN_PRODUCTS') ?></a></li> /
-				<li class="inline"><a class="tertiary big-modal" href="<?= base_url('detalle-producto') ?>"><?= lang('PRODUCTS_DETAIL_TITLE') ?></a></li> /
+				<li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('CONF_LINK_ENTERPRISES')) ?>"><?= lang('GEN_MENU_ENTERPRISE') ?></a></li> /
+				<li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('CONF_LINK_PRODUCTS')) ?>"><?= lang('GEN_PRODUCTS') ?></a></li> /
+				<li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('CONF_LINK_PRODUCT_DETAIL')) ?>"><?= lang('PRODUCTS_DETAIL_TITLE') ?></a></li> /
 				<li class="inline"><a class="tertiary big-modal" href="javascript:"><?= lang('GEN_MENU_CONSULTATIONS') ?></a></li>
 			</ul>
 		</nav>
@@ -20,7 +20,7 @@
 		</div>
 		<div class="hide-out hide">
 			<div class="flex flex-column">
-				<span class="line-text mb-2 h4 semibold text-primary"><?= lang('GEN_DETAILS') ?></span>
+				<span class="line-text mb-2 h4 semibold primary"><?= lang('GEN_DETAILS') ?></span>
 				<div class="row mb-2 px-5">
 					<div class="form-group mb-3 col-4">
 						<label for="confirmNIT" id="confirmNIT"><?= lang('GEN_FISCAL_REGISTRY') ?></label>
@@ -70,7 +70,7 @@
 			</div>
 			<?php if(count($bulkRecords) > 0): ?>
 			<div class="flex pb-5 flex-column">
-				<span class="line-text mb-2 h4 semibold text-primary"><?= lang('GEN_RECORDS_BULK') ?></span>
+				<span class="line-text mb-2 h4 semibold primary"><?= lang('GEN_RECORDS_BULK') ?></span>
 				<div id="loader-table" class="mt-2 mx-auto">
 					<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
 				</div>
@@ -83,7 +83,7 @@
 							<button class="btn px-1 big-modal" title="<?= lang('GEN_BTN_DOWN_PDF'); ?>" data-toggle="tooltip">
 								<i class="icon icon-file-pdf" aria-hidden="true"></i>
 							</button>
-							<form id="download-detail-bulk" action="<?= base_url('descargar-archivo'); ?>" method="post">
+							<form id="download-detail-bulk" action="<?= base_url(lang('CONF_LINK_DOWNLOAD_FILES')); ?>" method="post">
 								<input type="hidden" name="bulkId" value="<?= $bulkId; ?>">
 								<input type="hidden" name="bulkfunction" value="<?= $function; ?>">
 							</form>

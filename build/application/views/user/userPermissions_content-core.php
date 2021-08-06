@@ -5,9 +5,9 @@
 	<div class="flex tertiary">
 		<nav class="main-nav nav-inferior">
 			<ul class="mb-0 h6 light tertiary list-style-none list-inline">
-				<li class="inline"><a class="tertiary big-modal" href="<?= base_url('empresas') ?>"><?= lang('GEN_MENU_ENTERPRISE') ?></a></li> /
-				<li class="inline"><a class="tertiary big-modal" href="<?= base_url('productos') ?>"><?= lang('GEN_PRODUCTS') ?></a></li> /
-				<li class="inline"><a class="tertiary big-modal" href="<?= base_url('detalle-producto') ?>"><?= lang('PRODUCTS_DETAIL_TITLE') ?></a></li> /
+				<li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('CONF_LINK_ENTERPRISES')) ?>"><?= lang('GEN_MENU_ENTERPRISE') ?></a></li> /
+				<li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('CONF_LINK_PRODUCTS')) ?>"><?= lang('GEN_PRODUCTS') ?></a></li> /
+				<li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('CONF_LINK_PRODUCT_DETAIL')) ?>"><?= lang('PRODUCTS_DETAIL_TITLE') ?></a></li> /
 				<li class="inline"><a class="tertiary not-pointer" href="javascript:"><?= lang('GEN_MENU_USERS') ?></a></li>
 			</ul>
 		</nav>
@@ -20,7 +20,7 @@
 	<div class="w-100 hide-out hide">
 		<div class="flex flex-auto flex-column <?= $widget ? '' : 'max-width-6'; ?>">
 			<div class="search-criteria-order flex pb-3 flex-column w-100">
-				<span class="line-text mb-2 h4 semibold text-primary"><?= lang('GEN_USER_DATA') ?></span>
+				<span class="line-text mb-2 h4 semibold primary"><?= lang('GEN_USER_DATA') ?></span>
 				<div class="flex my-2">
 					<form id="user-data" action="" method="post" class="w-100">
 						<div class="row mb-2 px-5">
@@ -42,7 +42,9 @@
 							</div>
 						</div>
 						<div id="enableSectionBtn" class="flex row mb-2 mx-2 items-center justify-end ">
-							<a class="btn btn-link btn-small big-modal" href="<?= base_url('administracion-usuarios') ?>"><?= lang('GEN_BTN_CANCEL'); ?></a>
+							<a class="btn btn-link btn-small big-modal" href="<?= base_url(lang('CONF_LINK_USERS_MANAGEMENT')) ?>">
+								<?= lang('GEN_BTN_CANCEL'); ?>
+							</a>
 							<button id="enableUserBtn" class="btn btn-small btn-loading btn-primary" type="submit">
 								<?= lang('GEN_BTN_ENABLE'); ?>
 							</button>
@@ -100,7 +102,9 @@
 								</div>
 							<?php endforeach; ?>
 							<div class="flex row mb-2 mx-2 items-center justify-end">
-								<a class="btn btn-link btn-small big-modal" href="<?= base_url('administracion-usuarios') ?>"><?= lang('GEN_BTN_CANCEL'); ?></a>
+								<a class="btn btn-link btn-small big-modal" href="<?= base_url(lang('CONF_LINK_USERS_MANAGEMENT')) ?>">
+									<?= lang('GEN_BTN_CANCEL'); ?>
+								</a>
 								<?php if($this->verify_access->verifyAuthorization('USEREM','ASGPER')): ?>
 									<button id="updateUserBtn" class="btn btn-small btn-loading btn-primary" type="submit">
 								<?= lang('GEN_BTN_UPDATE'); ?>

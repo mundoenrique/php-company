@@ -30,7 +30,7 @@ class Novo_Bulk extends NOVO_Controller {
 			$this->includeAssets->jsFiles,
 			"third_party/dataTables-1.10.20",
 			"third_party/jquery.validate",
-			"validate-core-forms",
+			"form_validation",
 			"third_party/additional-methods",
 			"bulk/loadBulk"
 		);
@@ -65,7 +65,8 @@ class Novo_Bulk extends NOVO_Controller {
 		log_message('INFO', 'NOVO Bulk: getDetailBulk Method Initialized');
 
 		if(!isset($this->request->bulkView) || $this->request->bulkView != 'detail') {
-			redirect(base_url('detalle-producto'), 'location');
+			redirect(base_url(lang('CONF_LINK_PRODUCT_DETAIL')), 'Location', 302);
+			exit;
 		}
 
 		$view = 'seeBulkDetail';
@@ -86,14 +87,15 @@ class Novo_Bulk extends NOVO_Controller {
 		log_message('INFO', 'NOVO Bulk: confirmBulk Method Initialized');
 
 		if(!isset($this->request->bulkView) || $this->request->bulkView != 'confirm') {
-			redirect(base_url('detalle-producto'), 'location');
+			redirect(base_url(lang('CONF_LINK_PRODUCT_DETAIL')), 'Location', 302);
+			exit;
 		}
 
 		$view = 'confirmBulk';
 		array_push(
 			$this->includeAssets->jsFiles,
 			"third_party/jquery.validate",
-			"validate-core-forms",
+			"form_validation",
 			"third_party/additional-methods",
 			"bulk/confirmBulk"
 		);
@@ -115,7 +117,8 @@ class Novo_Bulk extends NOVO_Controller {
 		log_message('INFO', 'NOVO Bulk: authorizeBulkList Method Initialized');
 
 		/* if(!isset($this->request->bulkView) || $this->request->bulkView != 'confirm') {
-			redirect(base_url('detalle-producto'), 'location');
+			redirect(base_url(lang('CONF_LINK_PRODUCT_DETAIL')), 'Location', 302);
+			exit;
 		} */
 
 		$view = 'authorizeBulkList';
@@ -127,7 +130,7 @@ class Novo_Bulk extends NOVO_Controller {
 			$this->includeAssets->jsFiles,
 			"third_party/dataTables-1.10.20",
 			"third_party/jquery.validate",
-			"validate-core-forms",
+			"form_validation",
 			"third_party/additional-methods",
 			"bulk/authorizeBulkList"
 		);
@@ -157,7 +160,8 @@ class Novo_Bulk extends NOVO_Controller {
 		log_message('INFO', 'NOVO Bulk: calculateServiceOrder Method Initialized');
 
 		if(!$this->session->flashdata('serviceOrdersList')) {
-			redirect(base_url('lotes-autorizacion'), 'location');
+			redirect(base_url(lang('CONF_LINK_BULK_AUTH')), 'Location', 302);
+			exit;
 		}
 
 		$view = 'calculateServiceOrder';
@@ -169,7 +173,7 @@ class Novo_Bulk extends NOVO_Controller {
 			$this->includeAssets->jsFiles,
 			"third_party/dataTables-1.10.20",
 			"third_party/jquery.validate",
-			"validate-core-forms",
+			"form_validation",
 			"third_party/additional-methods",
 			"bulk/calculateServiceOrder"
 		);
@@ -215,7 +219,7 @@ class Novo_Bulk extends NOVO_Controller {
 		array_push(
 			$this->includeAssets->jsFiles,
 			"third_party/jquery.validate",
-			"validate-core-forms",
+			"form_validation",
 			"third_party/additional-methods",
 			'bulk/unnamedRequest'
 		);
@@ -247,7 +251,7 @@ class Novo_Bulk extends NOVO_Controller {
 			$this->includeAssets->jsFiles,
 			"third_party/dataTables-1.10.20",
 			"third_party/jquery.validate",
-			"validate-core-forms",
+			"form_validation",
 			"third_party/additional-methods",
 			'bulk/unnamedAffiliate'
 		);
@@ -287,7 +291,7 @@ class Novo_Bulk extends NOVO_Controller {
 			$this->includeAssets->jsFiles,
 			"third_party/dataTables-1.10.20",
 			"third_party/jquery.validate",
-			"validate-core-forms",
+			"form_validation",
 			"third_party/additional-methods",
 			'bulk/unnmamedDetail'
 		);

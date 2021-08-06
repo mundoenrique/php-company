@@ -5,9 +5,9 @@
 	<div class="flex tertiary">
 		<nav class="main-nav nav-inferior">
 			<ul class="mb-0 h6 light tertiary list-style-none list-inline">
-				<li class="inline"><a class="tertiary big-modal" href="<?= base_url('empresas') ?>"><?= lang('GEN_MENU_ENTERPRISE') ?></a></li> /
-				<li class="inline"><a class="tertiary big-modal" href="<?= base_url('productos') ?>"><?= lang('GEN_PRODUCTS') ?></a></li> /
-				<li class="inline"><a class="tertiary big-modal" href="<?= base_url('detalle-producto') ?>"><?= lang('PRODUCTS_DETAIL_TITLE') ?></a></li> /
+				<li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('CONF_LINK_ENTERPRISES')) ?>"><?= lang('GEN_MENU_ENTERPRISE') ?></a></li> /
+				<li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('CONF_LINK_PRODUCTS')) ?>"><?= lang('GEN_PRODUCTS') ?></a></li> /
+				<li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('CONF_LINK_PRODUCT_DETAIL')) ?>"><?= lang('PRODUCTS_DETAIL_TITLE') ?></a></li> /
 				<li class="inline"><a class="tertiary not-pointer" href="javascript:"><?= lang('GEN_MENU_BULK_UNNAMED'); ?></a></li>
 			</ul>
 		</nav>
@@ -32,7 +32,7 @@
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-4 col-lg-2">
-								<label for="bulkNumber"><?= LANG('BULK_NUMBER'); ?></label>
+								<label for="bulkNumber"><?= lang('BULK_NUMBER'); ?></label>
 								<input type="text" id="bulkNumber" name="bulk-number" class="form-control h5">
 								<div class="help-block"></div>
 							</div>
@@ -78,7 +78,7 @@
 									<td><?= $records->forAffiliateCards ?></td>
 									<td><?= $records->availableCards ?></td>
 									<td class="p-0 flex justify-center items-center">
-										<form action="<?= base_url('detalle-innominadas') ?>" method="post">
+										<form action="<?= base_url(lang('CONF_LINK_BULK_UNNAMED_DETAIL')) ?>" method="post">
 											<input type="hidden" name="bulkNumber" value="<?= $records->bulkNumber; ?>">
 											<input type="hidden" name="totalCards" value="<?= $records->totalCards; ?>">
 											<input type="hidden" name="issuanDate" value="<?= $records->issuanDate; ?>">
@@ -111,4 +111,4 @@
 	<?php $this->load->view('widget/widget_enterprise-product_content-core', $widget) ?>
 	<?php endif; ?>
 </div>
-<form id="get-data" action="<?= base_url('afiliacion-innominadas'); ?>" method="post"></form>
+<form id="get-data" action="<?= base_url(lang('CONF_LINK_BULK_UNNAMED_AFFIL')); ?>" method="post"></form>

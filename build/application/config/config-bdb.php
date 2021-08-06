@@ -1,8 +1,6 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed');
 
-$config['country'] = 'Bdb';
-$config['country-uri'] = 'bdb';
-$config['base_url']	= BASE_URL.$config['country-uri'].'/';
-$config['language']	= 'spanish-bdb';
-$config['favicon'] = 'favicon-bdb';
-$config['client'] = 'banco-bog';
+$config['customer'] = 'Bdb';
+$config['customer-uri'] = 'bdb';
+$config['base_url']	= BASE_URL.$config['customer-uri'].'/';
+$config['language']	= BASE_LANGUAGE.'-'.$config['customer-uri'];

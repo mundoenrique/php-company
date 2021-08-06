@@ -3,10 +3,8 @@
 	var lang = <?php print_r(json_encode($this->lang->language)); ?>;
 	var baseURL = '<?= base_url(); ?>';
 	var assetUrl = '<?= assetUrl(); ?>';
-	var country = '<?= $countryUri; ?>';
-	var oldCountry = '<?= $this->config->item('country'); ?>';
-	var client = '<?= $this->config->item('client'); ?>';
-	var newViews = '<?= lang('CONF_VIEW_SUFFIX'); ?>';
+	var customerUri = '<?= $customerUri; ?>';
+	var oldCustomerUri = '<?= $this->config->item('customer'); ?>';
 	var code = <?= $code ?? 0; ?>;
 	var title = '<?= $title ?? ' '; ?>';
 	var msg = '<?= $msg ?? ' '; ?>';

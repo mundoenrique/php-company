@@ -28,7 +28,7 @@ class Tool_Browser {
 		$browsersIn = FALSE;
 
 		if($this->CI->agent->is_browser()) {
-			$platform = 'desktop';
+			$platform = 'browser';
 			$validBrowser = [
 				'Chrome' => 47,
 				'Firefox' => 29,
@@ -67,7 +67,7 @@ class Tool_Browser {
 
 		if(!$valid) {
 			switch ($platform) {
-				case 'desktop':
+				case 'browser':
 					$title = 'Algunos componentes de esta página podrían no funcionar correctamente.';
 					$msg1 = 'Para mejorar la experiencia en nuestro sitio asegúrate que estés usando:';
 
@@ -91,9 +91,9 @@ class Tool_Browser {
 
 			$message = (object) [
 				'platform' => $platform,
-				'title' => $title ?? $title,
+				'title' => isset($title) ? $title : '',
 				'msg1' => $msg1,
-				'msg2' => $msg2 ?? ''
+				'msg2' => isset($msg2) ? $msg2 : ''
 			];
 			$this->CI->session->set_flashdata('messageBrowser', $message);
 		}

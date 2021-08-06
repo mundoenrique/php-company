@@ -5,9 +5,9 @@
   <div class="flex tertiary">
     <nav class="main-nav nav-inferior">
       <ul class="mb-0 h6 light tertiary list-style-none list-inline">
-        <li class="inline"><a class="tertiary big-modal" href="<?= base_url('empresas') ?>"><?= lang('GEN_MENU_ENTERPRISE') ?></a></li> /
-        <li class="inline"><a class="tertiary big-modal" href="<?= base_url('productos') ?>"><?= lang('GEN_PRODUCTS') ?></a></li> /
-        <li class="inline"><a class="tertiary big-modal" href="<?= base_url('detalle-producto') ?>"><?= lang('PRODUCTS_DETAIL_TITLE') ?></a></li> /
+        <li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('CONF_LINK_ENTERPRISES')) ?>"><?= lang('GEN_MENU_ENTERPRISE') ?></a></li> /
+        <li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('CONF_LINK_PRODUCTS')) ?>"><?= lang('GEN_PRODUCTS') ?></a></li> /
+        <li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('CONF_LINK_PRODUCT_DETAIL')) ?>"><?= lang('PRODUCTS_DETAIL_TITLE') ?></a></li> /
         <li class="inline"><a class="tertiary not-pointer" href="javascript:"><?= lang('GEN_MENU_LOTS') ?></a></li>
       </ul>
     </nav>
@@ -49,7 +49,7 @@
                 <td><?= $bulk->records; ?></td>
                 <td><?= $bulk->amount; ?></td>
                 <td class="p-0 flex justify-center items-center">
-                  <form id="id-<?= $bulk->idBulk; ?>" action="<?= base_url('consulta-lote') ?>" method="post">
+                  <form id="id-<?= $bulk->idBulk; ?>" action="<?= base_url(lang('CONF_LINK_INQUIRY_BULK_DETAIL')) ?>" method="post">
                     <input type="hidden" name="bulkId" value="<?= $bulk->idBulk; ?>">
                     <input type="hidden" name="bulkfunction" value="Autorización de lotes">
                   </form>
@@ -111,7 +111,7 @@
 					</div>
 					<div class="col-6 center">
 						<span class="light"><?= lang('BULK_CREATION_SCHEDULE'); ?> &nbsp;</span><br>
-						<img class="mt-1" src="<?= $this->asset->insertFile(lang('GEN_IMG_CLOCK'), 'images', $countryUri); ?>" alt=<?= lang('GEN_ALTERNATIVE_TEXT'); ?>>
+						<img class="mt-1" src="<?= $this->asset->insertFile(lang('GEN_IMG_CLOCK'), 'images', $customerUri); ?>" alt=<?= lang('GEN_ALTERNATIVE_TEXT'); ?>>
 					</div>
 				</div>
 				<?php endif; ?>
@@ -142,7 +142,7 @@
                 <td><?= $bulk->records; ?></td>
                 <td><?= $bulk->amount; ?></td>
                 <td class="p-0 flex justify-center items-center">
-                  <form id="id-<?= $bulk->idBulk; ?>" action="<?= base_url('consulta-lote') ?>" method="post">
+                  <form id="id-<?= $bulk->idBulk; ?>" action="<?= base_url(lang('CONF_LINK_INQUIRY_BULK_DETAIL')) ?>" method="post">
                     <input type="hidden" name="bulkId" value="<?= $bulk->idBulk; ?>">
                     <input type="hidden" name="bulkfunction" value="Autorización de lotes">
                   </form>

@@ -1,23 +1,13 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-//GENERAL LANGUAGE
-$lang['GEN_FAVICON'] = 'favicon-pb';
-$lang['GEN_FAVICON_EXT'] = 'ico';
-$lang['GEN_LOGO_HEADER'] = 'logo-menu.svg';
-$lang['GEN-LOGO-BIG'] = 'logo-signin.png';
 $lang['GEN_ALTERNATIVE_TEXT'] = 'Produbanco';
 $lang['GEN_RECOVER_PASS_TITLE'] = 'Recuperar acceso';
 $lang['GEN_OTP'] = 'Te enviamos un correo con un código de seguridad, indícalo a continuación.';
 $lang['GEN_PASSWORD_NO_VALID'] = 'Los datos ingresados son incorrectos.';
 $lang['GEN_STATUS'] = 'Estado';
 $lang['GEN_SEND_ACCESS'] = 'Tu transacción ha sido procesada exitosamente. Enviamos un correo a %s, con tus datos de acceso.';
-//LINKS
-$lang['GEN_LINK_RECOVER_ACCESS'] = 'recuperar-acceso';
 //FOOTER
 $lang['GEN_FOTTER_RIGHTS'] = '© Todos los derechos reservados. Produbanco - ';
-$lang['GEN_FOTTER_IMAGE_L'] = 'logo-footer.png';
-$lang['GEN_FOTTER_IMAGE_R'] = 'img-pci_compliance.svg';
-$lang['GEN_FOTTER_MARK'] = 'img-ma.svg';
 //DATATABLES
 $lang['GEN_START_DAY']= 'Fecha inicio';
 $lang['GEN_END_DAY']= 'Fecha fin';
@@ -31,5 +21,9 @@ $lang['GEN_TABLE_LAST_SESSION'] = 'Fecha última conexión';
 //RESPONSES
 $lang['RESP_PASSWORD_USED'] = 'Tu contraseña nueva debe ser diferente a las anteriores.';
 $lang['RESP_PASSWORD_CHANGED'] = 'Tu transacción ha sido procesada exitosamente.';
-//SUBMENU
-$lang['GEN_LINK_REP_USER_ACT'] = 'actividad-usuarios';//REPUSU
+//CONTACT
+$lang['GEN_CONTACTS_CITY'] = 'CIUDAD';
+$lang['GEN_CONTACTS_CONTACT'] = 'CONTACTO';
+$lang['GEN_CONTACTS'] = [
+	'XXXXX' => 'XXXXXXX',
+];

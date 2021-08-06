@@ -78,7 +78,7 @@ $config['url_suffix'] = '';
 | than english.
 |
 */
-$config['language']	= 'spanish-base';
+$config['language']	= BASE_LANGUAGE.'-base';
 
 /*
 |--------------------------------------------------------------------------
@@ -458,15 +458,16 @@ $config['csrf_regenerate'] = TRUE;
 $config['csrf_exclude_uris'] = array(
 	'[\w\-]+/ingresar',
 	'[\w\-]+/single',
-	'[\w\-]+/productos',
-	'[\w\-]+/detalle-producto',
-	'[\w\-]+/detalle-lote',
-	'[\w\-]+/confirmar-lote',
-	'[\w\-]+/consulta-lote',
+	'[\w\-]+/products',
+	'[\w\-]+/product-detail',
+	'[\w\-]+/bulk-detail',
+	'[\w\-]+/bulk-confirm',
+	'[\w\-]+/unnamed-affiliation',
+	'[\w\-]+/inquiry-bulk-detail',
 	'[\w\-]+/detalle-orden-de-servicio',
-	'[\w\-]+/afiliacion-innominadas',
-	'[\w\-]+/detalle-innominadas',
-	'[\w\-]+/estado-lote',
+	'[\w\-]+/unnmamed-detail',
+	'[\w\-]+/status-bulk',
+	'[\w\-]+/user-permissions',
 	'[\w\-]+/dashboard/productos',
 	'[\w\-]+/dashboard/productos/detalle',
 	'[\w\-]+/consulta/ordenes-de-servicio',
@@ -478,7 +479,6 @@ $config['csrf_exclude_uris'] = array(
 	'[\w\-]+/lotes/innominada/generarReporteTarjetasInnominadas',
 	'[\w\-]+/reportes/saldosamanecidosExpXLS',
 	'[\w\-]+/lotes/innominada/afiliacion',
-	'[\w\-]+/permisos-usuario',
 );
 
 /*

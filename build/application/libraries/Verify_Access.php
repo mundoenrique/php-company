@@ -27,7 +27,7 @@ class Verify_Access {
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date October 31th, 2019
 	 */
-	public function validateForm($rule, $countryUri, $user, $class = FALSE)
+	public function validateForm($rule, $customerUri, $user, $class = FALSE)
 	{
 
 		log_message('INFO', 'NOVO Verify_Access: validateForm method initialized');
@@ -41,8 +41,9 @@ class Verify_Access {
 		}
 
 		if ($class) {
+			$this->CI->config->set_item('language', BASE_LANGUAGE.'-base');
 			languageLoad('generic', $class);
-			$this->CI->config->set_item('language', 'spanish-'.$countryUri);
+			$this->CI->config->set_item('language', BASE_LANGUAGE.'-'.$customerUri);
 			languageLoad('specific', $class);
 		}
 
@@ -90,9 +91,9 @@ class Verify_Access {
 		log_message('INFO', 'NOVO Verify_Access: ResponseByDefect method initialized');
 
 		$singleSession = base64_decode($this->CI->input->cookie($this->CI->config->item('cookie_prefix').'singleSession'));
-		$linkredirect = $singleSession == 'SignThird' ? 'ingresar/fin' : 'inicio';
+		$linkredirect = $singleSession == 'SignThird' ? 'ingresar/fin' : lang('CONF_LINK_SIGNIN');
 		$this->responseDefect = new stdClass();
-		$this->responseDefect->code = lang('GEN_DEFAULT_CODE');
+		$this->responseDefect->code = lang('CONF_DEFAULT_CODE');
 		$this->responseDefect->title = lang('GEN_SYSTEM_NAME');
 		$this->responseDefect->msg = lang('RESP_VALIDATION_INPUT');
 		$this->responseDefect->icon = lang('CONF_ICON_WARNING');
@@ -119,13 +120,13 @@ class Verify_Access {
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date October 31th, 2019
 	 */
-	public function accessAuthorization($module, $countryUri, $user = FALSE)
+	public function accessAuthorization($module, $customerUri, $user = FALSE)
 	{
 		log_message('INFO', 'NOVO Verify_Access: accessAuthorization method initialized');
 
 		$auth = FALSE;
 		$user = $user ?? $this->user;
-		$freeAccess = ['signIn', 'login', 'suggestion', 'finishSession', 'terms', 'singleSignOn'];
+		$freeAccess = ['signIn', 'login', 'suggestion', 'browsers', 'finishSession', 'terms', 'singleSignOn', 'changeLanguage'];
 		$auth = in_array($module, $freeAccess);
 
 		if(!$auth) {
@@ -136,6 +137,7 @@ class Verify_Access {
 
 			switch($module) {
 				case 'recoverPass':
+				case 'passwordRecovery':
 					$auth = lang('CONF_RECOV_PASS') == 'ON';
 				break;
 				case 'recoverAccess':
@@ -148,6 +150,7 @@ class Verify_Access {
 				case 'changeEmail':
 				case 'changeTelephones':
 				case 'addContact':
+				case 'deleteContact':
 				case 'getEnterprises':
 				case 'getEnterprise':
 				case 'getUser':
@@ -155,15 +158,21 @@ class Verify_Access {
 				case 'keepSession':
 				case 'options':
 				case 'getFileIni':
+				case 'getBranches':
+				case 'getContacts':
+				case 'uploadFileBranches':
+				case 'updateBranch':
+				case 'updateContact':
 				case 'deleteFile':
 				case 'getProducts':
 					$auth = ($this->CI->session->has_userdata('logged'));
 				break;
 				case 'changePassword':
+				case 'changePass':
 					$auth = $this->CI->session->has_userdata('logged') || $this->CI->session->flashdata('changePassword') != NULL;
 				break;
 				case 'rates':
-					$auth = ($this->CI->session->has_userdata('logged') && $countryUri === 've');
+					$auth = ($this->CI->session->has_userdata('logged') && $customerUri === 've');
 				break;
 				case 'getProductDetail':
 					$auth = ($this->CI->session->has_userdata('logged') && $this->CI->session->has_userdata('enterpriseInf'));
@@ -219,6 +228,7 @@ class Verify_Access {
 					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TRAMAE'));
 				break;
 				case 'masterAccountTransfer':
+				case 'rechargeAuthorization':
 					$auth = ($this->CI->session->has_userdata('productInf') && $this->verifyAuthorization('TRAMAE', 'TRAPGO'));
 				break;
 				case 'cardsInquiry':
@@ -354,16 +364,16 @@ class Verify_Access {
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date October 31th, 2019
 	 */
-	public function validateRedirect($redirectUrl, $countryUri)
+	public function validateRedirect($redirectUrl, $customerUri)
 	{
 		log_message('INFO', 'NOVO Verify_Access: validateRedirect method initialized');
 
 		$dataLink = isset($redirectUrl['btn1']['link']) ? $redirectUrl['btn1']['link'] : FALSE;
 
 		if(!is_array($redirectUrl) && strpos($redirectUrl, 'dashboard') !== FALSE) {
-			$redirectUrl = str_replace($countryUri.'/', $this->CI->config->item('country').'/', $redirectUrl);
+			$redirectUrl = str_replace($customerUri.'/', $this->CI->config->item('customer').'/', $redirectUrl);
 		} elseif($dataLink && !is_array($dataLink) && strpos($dataLink, 'dashboard') !== FALSE) {
-			$dataLink = str_replace($countryUri.'/', $this->CI->config->item('country').'/', $dataLink);
+			$dataLink = str_replace($customerUri.'/', $this->CI->config->item('customer').'/', $dataLink);
 			$redirectUrl['btn1']['link'] =  $dataLink;
 		}
 

@@ -87,13 +87,14 @@ $(function () {
 function getSignIn(forWhere) {
 	verb = 'POST'; who = 'User'; where = forWhere;
 	callNovoCore(verb, who, where, data, function (response) {
+		console.log(response)
 		switch (response.code) {
 			case 0:
 				if (forWhere == 'SignIn') {
 					var link = response.data;
 
 					if (link.indexOf('dashboard') != -1) {
-						link = link.replace('/' + country + '/', '/' + oldCountry + '/',);
+						link = link.replace('/' + customerUri + '/', '/' + oldCustomerUri + '/');
 					}
 
 					$(location).attr('href', link);
@@ -135,6 +136,7 @@ function getSignIn(forWhere) {
 			default:
 				if (response.data == 'session-close') {
 					$('#accept').addClass(response.data);
+					windowsStyle();
 				}
 		}
 
@@ -156,7 +158,7 @@ function getSignIn(forWhere) {
 
 function windowsStyle() {
 	$('#system-msg').css("width", "auto");
-	if (lang.MODAL_OTP == 'ON') {
+	if (customerUri == 'bp') {
 		var styles = {
 			float: "none",
 			margin: "auto"

@@ -31,6 +31,27 @@ $(function () {
 		}
 	});
 
+	$('#change-lang').on('click', function () {
+		verb = 'POST'; who = 'User'; where = 'changeLanguage';
+		data = {
+			lang: $(this).find('span.text').text()
+		};
+
+		callNovoCore(verb, who, where, data, function (response) {
+			if (response.code === 0) {
+				var url = $(location).attr('href').split("/");
+				var currentCodLan = url[url.length - 1];
+
+				if (currentCodLan == lang.GEN_BEFORE_COD_LANG) {
+					var module = url[url.length - 2];
+					$(location).attr('href', baseURL + module + '/' + lang.GEN_AFTER_COD_LANG);
+				} else {
+					location.reload();
+				}
+			}
+		});
+	});
+
 	if (code > 2) {
 		appMessages(title, msg, icon, modalBtn)
 	}
@@ -106,7 +127,7 @@ function callNovoCore(verb, who, where, request, _response_) {
 		where: where,
 		data: request
 	});
-	var codeResp = parseInt(lang.GEN_DEFAULT_CODE);
+	var codeResp = parseInt(lang.CONF_DEFAULT_CODE);
 	var formData = new FormData();
 	dataRequest = cryptoPass(dataRequest, true);
 
@@ -117,7 +138,7 @@ function callNovoCore(verb, who, where, request, _response_) {
 
 	formData.append('request', dataRequest);
 
-	if (lang.CONFIG_CYPHER_DATA == 'ON') {
+	if (lang.CONF_CYPHER_DATA == 'ON') {
 		formData.append('ceo_name', ceo_cook);
 		formData.append('plot', btoa(ceo_cook));
 	}
@@ -141,7 +162,7 @@ function callNovoCore(verb, who, where, request, _response_) {
 		dataType: 'json'
 	}).done(function (response, status, jqXHR) {
 
-		if (lang.CONFIG_CYPHER_DATA == 'ON') {
+		if (lang.CONF_CYPHER_DATA == 'ON') {
 			response = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, { format: CryptoJSAesJson }).toString(CryptoJS.enc.Utf8))
 		}
 
@@ -177,7 +198,7 @@ function callNovoCore(verb, who, where, request, _response_) {
 			modalBtn: {
 				btn1: {
 					text: lang.GEN_BTN_ACCEPT,
-					link: lang.GEN_ENTERPRISE_LIST,
+					link: lang.CONF_LINK_ENTERPRISES,
 					action: 'redirect'
 				}
 			}
@@ -316,7 +337,7 @@ function cryptoPass(jsonObject, req) {
 	ceo_cook = getCookieValue();
 	var cipherObject = jsonObject;
 
-	if (lang.CONFIG_CYPHER_DATA == 'ON') {
+	if (lang.CONF_CYPHER_DATA == 'ON') {
 		cipherObject = CryptoJS.AES.encrypt(jsonObject, ceo_cook, { format: CryptoJSAesJson }).toString();
 
 		if (!req) {
@@ -351,7 +372,7 @@ function downLoadfiles (data) {
 		$('#download-file').attr('download', data.name)
 		document.getElementById('download-file').click()
 		window.URL.revokeObjectURL(url);
-		$('#download-file').attr('href', lang.GEN_NO_LINK)
+		$('#download-file').attr('href', lang.CONF_NO_LINK)
 		$('#download-file').attr('download', '')
 	}
 	$('.cover-spin').hide();

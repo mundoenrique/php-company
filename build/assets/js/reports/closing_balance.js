@@ -200,7 +200,7 @@ function closingBudgets(dataForm) {
 				responseTable = JSON.parse(
 					CryptoJS.AES.decrypt(responseTable.code, responseTable.plot, { format: CryptoJSAesJson }).toString(CryptoJS.enc.Utf8)
 				);
-				var codeDefaul = parseInt(lang.GEN_DEFAULT_CODE);
+				var codeDefaul = parseInt(lang.CONF_DEFAULT_CODE);
 
 				if (responseTable.code === codeDefaul) {
 					appMessages(responseTable.title, responseTable.msg, responseTable.icon, responseTable.dataResp);

@@ -73,7 +73,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 
 					$bulk['status'] = $bulktatus;
 					$fileName = explode('.', $response->lista[$pos]->nombreArchivo);
-					$bulk['fileName'] = substr_replace($fileName[0], '', 0, strlen($this->countryUri.'_'));
+					$bulk['fileName'] = substr_replace($fileName[0], '', 0, strlen($this->customerUri.'_'));
 					$bulk['ticketId'] = $response->lista[$pos]->idTicket;
 					$bulk['bulkId'] = $response->lista[$pos]->idLote;
 					$bulk['loadDate'] = $response->lista[$pos]->fechaCarga;
@@ -192,7 +192,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 				case 0:
 					$this->response->msg = lang('BULK_SUCCESS');
 					$this->response->icon = lang('CONF_ICON_SUCCESS');
-					$this->response->modalBtn['btn1']['link'] = lang('GEN_LINK_BULK_LOAD');
+					$this->response->modalBtn['btn1']['link'] = lang('CONF_LINK_BULK_LOAD');
 					$respLoadBulk = TRUE;
 				break;
 				case -108:
@@ -200,7 +200,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 				case -256:
 				case -21:
 					$this->response->msg = lang('BULK_NO_LOAD');
-					$this->response->modalBtn['btn1']['link'] = lang('GEN_LINK_BULK_LOAD');
+					$this->response->modalBtn['btn1']['link'] = lang('CONF_LINK_BULK_LOAD');
 					$respLoadBulk = TRUE;
 				break;
 				case -280:
@@ -370,12 +370,12 @@ class Novo_Bulk_Model extends NOVO_Model {
 			case -437:
 				$this->response->title = lang('BULK_DETAIL');
 				$this->response->msg = lang('BULK_DETAIL_FAIL_COST');
-				$this->response->modalBtn['btn1']['link'] = lang('GEN_LINK_BULK_LOAD');
+				$this->response->modalBtn['btn1']['link'] = lang('CONF_LINK_BULK_LOAD');
 			break;
 			case -443:
 				$this->response->title = lang('BULK_DETAIL');
 				$this->response->msg = lang('BULK_CONFIRM_EXCEED_LIMIT');
-				$this->response->modalBtn['btn1']['link'] = lang('GEN_LINK_BULK_LOAD');
+				$this->response->modalBtn['btn1']['link'] = lang('CONF_LINK_BULK_LOAD');
 			break;
 		}
 
@@ -427,7 +427,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 				$this->response->title = lang('BULK_CONFIRM_TITLE');
 				$this->response->msg = novolang(lang('BULK_CONFIRM_SUCCESS'), $bulkConfirmInfo->numLote);
 				$this->response->icon = lang('CONF_ICON_SUCCESS');
-				$link = $this->verify_access->verifyAuthorization('TEBAUT') ? lang('GEN_LINK_BULK_AUTH') : lang('GEN_LINK_BULK_LOAD');
+				$link = $this->verify_access->verifyAuthorization('TEBAUT') ? lang('CONF_LINK_BULK_AUTH') : lang('CONF_LINK_BULK_LOAD');
 				$this->response->modalBtn['btn1']['link'] = $link;
 			break;
 			case -1:
@@ -441,43 +441,43 @@ class Novo_Bulk_Model extends NOVO_Model {
 				$this->response->code = 0;
 				$this->response->title = lang('BULK_CONFIRM_TITLE');
 				$this->response->msg = lang('BULK_CONFIRM_NO_DEAIL');
-				$this->response->modalBtn['btn1']['link'] = lang('GEN_LINK_BULK_LOAD');
+				$this->response->modalBtn['btn1']['link'] = lang('CONF_LINK_BULK_LOAD');
 			break;
 			case -142:
 				$this->response->code = 0;
 				$this->response->title = lang('BULK_CONFIRM_TITLE');
 				$this->response->msg = lang('BULK_CONFIRM_FAIL');
-				$this->response->modalBtn['btn1']['link'] = lang('GEN_LINK_BULK_LOAD');
+				$this->response->modalBtn['btn1']['link'] = lang('CONF_LINK_BULK_LOAD');
 			break;
 			case -236:
 				$this->response->code = 0;
 				$this->response->title = lang('BULK_CONFIRM_TITLE');
 				$this->response->msg = lang('BULK_CONFIRM_FAIL_DULPICATE');
-				$this->response->modalBtn['btn1']['link'] = lang('GEN_LINK_BULK_LOAD');
+				$this->response->modalBtn['btn1']['link'] = lang('CONF_LINK_BULK_LOAD');
 			break;
 			case -436:
 				$this->response->code = 0;
 				$this->response->title = lang('BULK_CONFIRM_TITLE');
 				$this->response->msg = lang('BULK_CONFIRM_FAIL_BANK_RESPONSE');
-				$this->response->modalBtn['btn1']['link'] = lang('GEN_LINK_BULK_LOAD');
+				$this->response->modalBtn['btn1']['link'] = lang('CONF_LINK_BULK_LOAD');
 			break;
 			case -437:
 				$this->response->code = 0;
 				$this->response->title = lang('BULK_CONFIRM_TITLE');
 				$this->response->msg = novoLang(lang('GEN_FAILED_THIRD_PARTY'), '('.$response->msg.')');
-				$this->response->modalBtn['btn1']['link'] = lang('GEN_LINK_BULK_LOAD');
+				$this->response->modalBtn['btn1']['link'] = lang('CONF_LINK_BULK_LOAD');
 			break;
 			case -438:
 				$this->response->code = 0;
 				$this->response->title = lang('BULK_CONFIRM_TITLE');
 				$this->response->msg = lang('BULK_CONFIRM_DUPLICATE');
-				$this->response->modalBtn['btn1']['link'] = lang('GEN_LINK_BULK_LOAD');
+				$this->response->modalBtn['btn1']['link'] = lang('CONF_LINK_BULK_LOAD');
 			break;
 			case -464:
 				$this->response->code = 0;
 				$this->response->title = lang('BULK_CONFIRM_TITLE');
 				$this->response->msg = lang('BULK_CONFIRM_EXCEEDED_LIMIT');
-				$this->response->modalBtn['btn1']['link'] = lang('GEN_LINK_BULK_LOAD');
+				$this->response->modalBtn['btn1']['link'] = lang('CONF_LINK_BULK_LOAD');
 			break;
 		}
 
@@ -577,7 +577,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 				$this->response->title = lang('BULK_SIGN_TITLE');
 				$this->response->msg = $msgREsp;
 				$this->response->icon = lang('CONF_ICON_SUCCESS');
-				$this->response->modalBtn['btn1']['link'] = 'lotes-autorizacion';
+				$this->response->modalBtn['btn1']['link'] = lang('CONF_LINK_BULK_AUTH');
 			break;
 			case -1:
 				$this->response->title = lang('BULK_SIGN_TITLE');
@@ -638,7 +638,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 				$this->response->title = lang('BULK_DELETE_TITLE');
 				$this->response->msg = lang('BULK_DELETED');
 				$this->response->icon = lang('CONF_ICON_SUCCESS');
-				$this->response->modalBtn['btn1']['link'] = 'lotes-autorizacion';
+				$this->response->modalBtn['btn1']['link'] = lang('CONF_LINK_BULK_AUTH');
 			break;
 			case -16:
 			case -43:
@@ -704,7 +704,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 				$this->response->title = lang('BULK_DISASS_TITLE');
 				$this->response->msg = lang('BULK_DISASSOCIATED');
 				$this->response->icon = lang('CONF_ICON_SUCCESS');
-				$this->response->modalBtn['btn1']['link'] = 'lotes-autorizacion';
+				$this->response->modalBtn['btn1']['link'] = lang('CONF_LINK_BULK_AUTH');
 			break;
 			case -16:
 				$this->response->title = lang('BULK_DISASS_TITLE');
@@ -775,7 +775,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
-				$this->response->data = base_url('lotes-calcular-orden');
+				$this->response->data = base_url(lang('CONF_LINK_CALC_SERV_ORDER'));
 				$serviceOrdersList = [];
 
 				foreach($response->lista AS $dataOrder) {
@@ -881,7 +881,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 				$this->response->title = lang('BULK_AUTH_TITLE');
 				$this->response->msg = novoLang(lang('BULK_AUTH_SUCCESS'), $this->userName);
 				$this->response->icon = lang('CONF_ICON_SUCCESS');
-				$this->response->modalBtn['btn1']['link'] = 'lotes-autorizacion';
+				$this->response->modalBtn['btn1']['link'] = lang('CONF_LINK_BULK_AUTH');
 			break;
 			case -154:
 				$this->response->title = lang('BULK_AUTH_TITLE');
@@ -984,7 +984,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
-				$this->response->data = 'consulta-orden-de-servicio';
+				$this->response->data = lang('CONF_LINK_SERVICE_ORDERS');
 				$serviceOrdersList = [];
 
 				foreach($response->lista AS $list) {
@@ -1064,7 +1064,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 				$this->response->title = lang('BULK_SO_CREATE_TITLE');
 				$this->response->msg = lang('GEN_SO_CREATE_EXPIRED');
 				$this->response->icon = lang('CONF_ICON_INFO');
-				$this->response->modalBtn['btn1']['link'] = 'lotes-autorizacion';
+				$this->response->modalBtn['btn1']['link'] = lang('CONF_LINK_BULK_AUTH');
 				$this->response->modalBtn['btn1']['action'] = 'redirect';
 			break;
 		}
@@ -1126,7 +1126,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 				$responseList->code = 0;
 				$responseList->data = $this->callWs_MakeBulkList_Bulk($response);
 				$this->session->set_flashdata('bulkList', $responseList);
-				$this->response->modalBtn = base_url('lotes-autorizacion');
+				$this->response->modalBtn = base_url(lang('CONF_LINK_BULK_AUTH'));
 			break;
 		}
 
@@ -1287,7 +1287,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 				$this->response->title = lang('BULK_UNNA_ACCOUNT');
 				$this->response->msg = lang('BULK_UNNA_PROCESS_OK');
 				$this->response->icon = lang('CONF_ICON_SUCCESS');
-				$this->response->modalBtn['btn1']['link'] = 'lotes-autorizacion';
+				$this->response->modalBtn['btn1']['link'] = lang('CONF_LINK_BULK_AUTH');
 			break;
 			case -1:
 				$this->response->title = lang('BULK_UNNA_ACCOUNT');
@@ -1471,7 +1471,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 				$this->response->title = 'Cuentas Innominadas';
 				$this->response->msg = lang('BULK_UNNA_REQ_NONCARDS');
 				$this->response->icon = lang('CONF_ICON_INFO');
-				$this->response->modalBtn['btn1']['link'] = lang('GEN_LINK_BULK_UNNAMED_AFFIL');
+				$this->response->modalBtn['btn1']['link'] = lang('CONF_LINK_BULK_UNNAMED_AFFIL');
 			break;
 		}
 

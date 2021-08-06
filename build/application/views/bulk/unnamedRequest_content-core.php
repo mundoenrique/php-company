@@ -5,9 +5,9 @@
   <div class="flex tertiary">
     <nav class="main-nav nav-inferior">
       <ul class="mb-0 h6 light tertiary list-style-none list-inline">
-        <li class="inline"><a class="tertiary big-modal" href="<?= base_url('empresas') ?>"><?= lang('GEN_MENU_ENTERPRISE') ?></a></li> /
-        <li class="inline"><a class="tertiary big-modal" href="<?= base_url('productos') ?>"><?= lang('GEN_PRODUCTS') ?></a></li> /
-        <li class="inline"><a class="tertiary big-modal" href="<?= base_url('detalle-producto') ?>"><?= lang('PRODUCTS_DETAIL_TITLE') ?></a></li> /
+        <li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('CONF_LINK_ENTERPRISES')) ?>"><?= lang('GEN_MENU_ENTERPRISE') ?></a></li> /
+        <li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('CONF_LINK_PRODUCTS')) ?>"><?= lang('GEN_PRODUCTS') ?></a></li> /
+        <li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('CONF_LINK_PRODUCT_DETAIL')) ?>"><?= lang('PRODUCTS_DETAIL_TITLE') ?></a></li> /
         <li class="inline"><a class="tertiary not-pointer" href="javascript:"><?= lang('GEN_MENU_BULK_UNNAMED') ?></a></li>
       </ul>
     </nav>
@@ -24,13 +24,13 @@
         <form id="unnamed-request-form" name="unnamed-request-form" autocomplete="off">
           <div class="flex px-5 pb-4 items-center row">
             <div class="form-group col-4 col-xl-3">
-              <label><?= LANG('BULK_UNNA_EXPIRED_DATE'); ?></label>
+              <label><?= lang('BULK_UNNA_EXPIRED_DATE'); ?></label>
               <input type="text" id="expiredDate" name="expired-date" class="form-control read-only h5" <?= $editable; ?>
                 value="<?= $expMaxMonths; ?>" autocomplete="off">
               <div class="help-block mb-1"></div>
             </div>
             <div class="form-group col-4 col-xl-3">
-              <label><?= LANG('BULK_UNNA_MAX_CARDS'); ?></label>
+              <label><?= lang('BULK_UNNA_MAX_CARDS'); ?></label>
               <input type="text" id="maxCards" name="max-cards" class="form-control h5" max-cards="<?= $maxCards ?>" autocomplete="off">
               <div class="help-block mb-1"></div>
             </div>

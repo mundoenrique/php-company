@@ -7,12 +7,12 @@ $(function() {
 		modalBtn = {
 			btn1: {
 				text: lang.GEN_BTN_ACCEPT,
-				link: 'cambiar-clave',
+				link: lang.CONF_LINK_CHANGE_PASS,
 				action: 'redirect'
 			},
 			btn2: {
 				text: lang.GEN_BTN_CANCEL,
-				link: 'cerrar-sesion/inicio',
+				link: lang.CONF_LINK_SIGNOUT + lang.CONF_LINK_SIGNOUT_START,
 				action: 'redirect'
 			}
 		};

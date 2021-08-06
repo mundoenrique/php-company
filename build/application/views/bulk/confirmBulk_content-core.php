@@ -5,10 +5,10 @@
   <div class="flex tertiary">
     <nav class="main-nav nav-inferior">
       <ul class="mb-0 h6 light tertiary list-style-none list-inline">
-        <li class="inline"><a class="tertiary big-modal" href="<?= base_url('empresas') ?>"><?= lang('GEN_MENU_ENTERPRISE') ?></a></li> /
-        <li class="inline"><a class="tertiary big-modal" href="<?= base_url('productos') ?>"><?= lang('GEN_PRODUCTS') ?></a></li> /
-        <li class="inline"><a class="tertiary big-modal" href="<?= base_url('detalle-producto') ?>"><?= lang('PRODUCTS_DETAIL_TITLE') ?></a></li> /
-        <li class="inline"><a class="tertiary big-modal" href="<?= base_url('cargar-lotes') ?>"><?= lang('GEN_MENU_BULK_LOAD') ?></a></li> /
+        <li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('CONF_LINK_ENTERPRISES')) ?>"><?= lang('GEN_MENU_ENTERPRISE') ?></a></li> /
+        <li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('CONF_LINK_PRODUCTS')) ?>"><?= lang('GEN_PRODUCTS') ?></a></li> /
+        <li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('CONF_LINK_PRODUCT_DETAIL')) ?>"><?= lang('PRODUCTS_DETAIL_TITLE') ?></a></li> /
+        <li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('CONF_LINK_BULK_LOAD')) ?>"><?= lang('GEN_MENU_BULK_LOAD') ?></a></li> /
         <li class="inline"><a class="tertiary not-pointer" href="javascript:"><?= lang('GEN_CONFIRM_BULK_TITLE') ?></a></li>
       </ul>
     </nav>
@@ -17,7 +17,7 @@
 <div class="flex mt-1 mb-5 bg-color flex-nowrap justify-between">
   <div class="flex flex-auto flex-column <?= $widget ? '' : 'max-width-6'; ?>">
     <div class="flex flex-column">
-      <span class="line-text mb-2 h4 semibold primary"><?= LANG('BULK_CONFIRM'); ?></span>
+      <span class="line-text mb-2 h4 semibold primary"><?= lang('BULK_CONFIRM'); ?></span>
       <div id="pre-loader" class="mx-auto flex justify-center">
         <span class="spinner-border spinner-border-lg mt-2 mb-3" role="status" aria-hidden="true"></span>
       </div>
@@ -45,7 +45,7 @@
           </div>
 
           <div class="form-group mb-3 col-4">
-            <label for="amount" id="amount"><?= LANG('GEN_TABLE_TOTAL_AMOUNT'); ?></label>
+            <label for="amount" id="amount"><?= lang('GEN_TABLE_TOTAL_AMOUNT'); ?></label>
             <span id="totalAmount" class="form-control px-1" readonly="readonly"><?= $detailBulk->amount ?></span>
           </div>
 
@@ -97,7 +97,7 @@
             </div>
             <div class="flex flex-row">
               <div class="mb-3 mr-2">
-                <a href="<?= base_url('cargar-lotes') ?>" class="btn btn-link btn-small big-modal"><?= lang('GEN_BTN_CANCEL'); ?></a>
+                <a href="<?= base_url(lang('CONF_LINK_BULK_LOAD')) ?>" class="btn btn-link btn-small big-modal"><?= lang('GEN_BTN_CANCEL'); ?></a>
               </div>
               <div class="mb-3 mr-2">
                 <button id="confirm-bulk" class="btn btn-primary  btn-loading btn-small"><?= lang('GEN_BTN_CONFIRM'); ?></button>

@@ -8,7 +8,7 @@
 		<div id="widget-area">
 			<div class="widget tooltip" id="widget-signin">
 				<h2 class="widget-title">
-					<?php if($countryConf != 'Ec-bp'): ?>
+					<?php if($this->config->item('customer') != 'Ec-bp'): ?>
 					<span aria-hidden="true" class="icon" data-icon="&#xe03f;"></span>
 					<?php endif; ?>
 					<?= lang('GEN_CHANGE_PASS'); ?>

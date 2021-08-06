@@ -5,9 +5,9 @@
   <div class="flex tertiary">
     <nav class="main-nav nav-inferior">
       <ul class="mb-0 h6 light tertiary list-style-none list-inline">
-        <li class="inline"><a class="tertiary big-modal" href="<?= base_url('empresas') ?>"><?= lang('GEN_MENU_ENTERPRISE') ?></a></li> /
-        <li class="inline"><a class="tertiary big-modal" href="<?= base_url('productos') ?>"><?= lang('GEN_PRODUCTS') ?></a></li> /
-        <li class="inline"><a class="tertiary big-modal" href="<?= base_url('detalle-producto') ?>"><?= lang('PRODUCTS_DETAIL_TITLE') ?></a></li> /
+        <li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('CONF_LINK_ENTERPRISES')) ?>"><?= lang('GEN_MENU_ENTERPRISE') ?></a></li> /
+        <li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('CONF_LINK_PRODUCTS')) ?>"><?= lang('GEN_PRODUCTS') ?></a></li> /
+        <li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('CONF_LINK_PRODUCT_DETAIL')) ?>"><?= lang('PRODUCTS_DETAIL_TITLE') ?></a></li> /
         <li class="inline"><a class="tertiary not-pointer" href="javascript:"><?= lang('GEN_MENU_SERVICES'); ?></a></li>
       </ul>
     </nav>
@@ -36,11 +36,11 @@
 
               <div class="form-group col-3">
                 <div class="custom-option-c custom-radio custom-control-inline">
-                  <input type="radio" id="debit" name="transferType" class="custom-option-input" disabled>
+                  <input type="radio" id="debit" name="transferType" class="custom-option-input" value="cargo" disabled>
                   <label class="custom-option-label nowrap" for="debit">Cargo</label>
                 </div>
                 <div class="custom-option-c custom-radio custom-control-inline">
-                  <input type="radio" id="pay" name="transferType" class="custom-option-input" disabled>
+                  <input type="radio" id="pay" name="transferType" class="custom-option-input" value="abono" disabled>
                   <label class="custom-option-label nowrap" for="pay">Abono</label>
                 </div>
                 <div class="help-block"></div>
