@@ -33,3 +33,5 @@ $lang['CONF_LINK_CHANGE_PASS'] = 'cambiar-clave';
 $lang['CONF_LINK_ENTERPRISES'] = 'dashboard';
 //INTERNAL LINKS
 $lang['CONF_LINK_SUGGESTION'] = 'browsers';
+$lang['GEN_FAVICON'] = 'favicon-bp';
+$lang['GEN_LOGO_HEADER'] = 'logo-pichincha-azul.png';
