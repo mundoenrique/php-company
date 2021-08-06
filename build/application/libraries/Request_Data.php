@@ -275,20 +275,13 @@ class Request_Data {
 					case 'descripcion':
 						$productImgName = url_title(mb_strtolower($value));
 						$productImg = lang('IMG_PROGRAM_IMG_DEFAULT');
-						$productUrl = 'images/programs/'.$this->CI->session->customerUri;
 
 						if (array_key_exists($productImgName, lang('IMG_PROGRAM_IMAGES'))) {
 							$productImg = lang('IMG_PROGRAM_IMAGES')[$productImgName].'.svg';
 						}
 
-						if (!file_exists(assetPath('images/programs/'.$this->CI->session->customerUri.'/'.$productImg))) {
-							$productUrl = 'images/programs';
-						}
-
-						$products->productUrl = $productUrl;
 						$products->productImg = $productImg;
 						$products->$key = trim(mb_strtoupper($value));
-
 					break;
 					case 'categoria':
 						$products->$key = trim(ucwords(mb_strtolower($value)));
