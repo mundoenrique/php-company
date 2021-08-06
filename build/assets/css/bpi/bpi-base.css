@@ -407,7 +407,7 @@ label {
 }
 
 .spinner-border {
-	background-image: url("../../images/bpi/spinner.svg");
+	background-image: url("../../images/bp/spinner.svg");
 	background-size: 30%;
 	background-size: contain;
 	background-repeat: no-repeat;
@@ -450,7 +450,7 @@ label {
 	width: 7.5rem;
 	height: 7.5rem;
 	border: none;
-	background-image: url("../../images/bpi/spinner.svg");
+	background-image: url("../../images/bp/spinner.svg");
 	background-size: 30%;
 	background-size: contain;
 	background-repeat: no-repeat;
