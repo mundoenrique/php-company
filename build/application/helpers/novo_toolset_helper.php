@@ -21,18 +21,19 @@ if (!function_exists('assetUrl')) {
 }
 
 if (!function_exists('clientUrlValidate')) {
-	function clientUrlValidate($country) {
+	function clientUrlValidate($customer) {
 		$CI = &get_instance();
 		$accessUrl = explode(',', ACCESS_URL);
 		array_walk($accessUrl, 'arrayTrim');
 		reset($accessUrl);
 
-		if (!in_array($country, $accessUrl)) {
-			$country = current($accessUrl);
-			redirect(base_url($country.'/inicio'), 'location', 301);
+		if (!in_array($customer, $accessUrl)) {
+			$customer = current($accessUrl);
+			redirect(base_url($customer.'/inicio'), 'Location', 302);
+			exit;
 		}
 
-		$CI->config->load('config-'.$country);
+		$CI->config->load('config-'.$customer);
 	}
 }
 
@@ -90,9 +91,34 @@ if (!function_exists('languageLoad')) {
 		$CI = &get_instance();
 		$languagesFile = [];
 		$loadLanguages = FALSE;
-		$pathLang = APPPATH.'language'.DIRECTORY_SEPARATOR.$CI->config->item('language').DIRECTORY_SEPARATOR;
+		$configLanguage = $CI->config->item('language');
+		$pathLang = APPPATH.'language'.DIRECTORY_SEPARATOR.$configLanguage.DIRECTORY_SEPARATOR;
+		$customerUri = $call == 'specific' ? $CI->config->item('customer-uri') : '';
 		$class = lcfirst(str_replace('Novo_', '', $class));
+		$CI->config->set_item('language', 'global');
+
 		log_message('INFO', 'NOVO Language '.$call.', HELPER: Language Load Initialized for class: '.$class);
+
+		switch ($call) {
+			case 'generic':
+				$CI->lang->load(['config-core', 'images']);
+			break;
+			case 'specific':
+				$globalLan = APPPATH.'language'.DIRECTORY_SEPARATOR.'global'.DIRECTORY_SEPARATOR;
+				//eliminar despues de la certificación
+				$customerUri = checkTemporalTenant($customerUri);
+
+				if(file_exists($globalLan.'config-core-'.$customerUri.'_lang.php')) {
+					$CI->lang->load('config-core-'.$customerUri,);
+				}
+
+				if(file_exists($globalLan.'images_'.$customerUri.'_lang.php')) {
+					$CI->lang->load('images_'.$customerUri);
+				}
+			break;
+		}
+
+		$CI->config->set_item('language', $configLanguage);
 
 		if ($call == 'specific') {
 			if (file_exists($pathLang.'general_lang.php')) {
@@ -105,11 +131,7 @@ if (!function_exists('languageLoad')) {
 				$loadLanguages = TRUE;
 			}
 
-			if (file_exists($pathLang.'config-core_lang.php')) {
-				array_push($languagesFile, 'config-core');
-				$loadLanguages = TRUE;
-			}
-
+			//eliminar despues de la certificación
 			if (file_exists($pathLang.'config_lang.php')) {
 				array_push($languagesFile, 'config');
 				$loadLanguages = TRUE;
@@ -168,7 +190,6 @@ if (!function_exists('setCurrentPage')) {
 	}
 }
 
-
 if (!function_exists('exportFile')) {
 	function exportFile($file, $typeFile, $filename, $bytes = TRUE) {
 		switch ($typeFile) {
@@ -223,8 +244,8 @@ if (!function_exists('convertDateMDY')) {
 if (!function_exists('uriRedirect')) {
 	function uriRedirect() {
 		$CI = &get_instance();
-		$linkredirect = $CI->session->has_userdata('productInf') ? 'detalle-producto' : 'empresas';
-		$linkredirect = !$CI->session->has_userdata('logged') ? 'inicio' : $linkredirect;
+		$linkredirect = $CI->session->has_userdata('productInf') ? lang('CONF_LINK_PRODUCT_DETAIL') : lang('CONF_LINK_ENTERPRISES');
+		$linkredirect = !$CI->session->has_userdata('logged') ? lang('CONF_LINK_SIGNIN') : $linkredirect;
 		$linkredirect = SINGLE_SIGN_ON ? 'ingresar/fin' : $linkredirect;
 
 		return $linkredirect;
@@ -234,16 +255,43 @@ if (!function_exists('uriRedirect')) {
 if (! function_exists('currencyFormat')) {
 	function currencyFormat($amount){
 		$CI =& get_instance();
-		$client = $CI->session->userdata('countrySess');
+		$client = $CI->session->userdata('customerSess');
 		$decimalPoint = ['Ve', 'Co', 'Bdb'];
 		$amount = (float)$amount;
 
 		if (in_array($client, $decimalPoint)) {
-			$amount =  number_format($amount, 2, ',', '.');
+			$amount = number_format($amount, 2, ',', '.');
 		} else {
 			$amount = number_format($amount, 2);
 		}
 
 		return $amount;
+	}
+}
+
+if (! function_exists('languageCookie')) {
+	function languageCookie($language) {
+
+		$CI =& get_instance();
+		$baseLanguage = [
+			'name' => 'baseLanguage',
+			'value' => $language,
+			'expire' => 0,
+			'httponly' => TRUE
+		];
+
+		$CI->input->set_cookie($baseLanguage);
+
+	}
+}
+//eliminar despues de la certificación
+if (! function_exists('checkTemporalTenant')) {
+	function checkTemporalTenant($customer) {
+		log_message('info', "--------------- in $customer -------    ");
+		$pattern = ['/bog/', '/bpi/', '/col/', '/per/', '/usd/', '/ven/'];
+		$replace = ['bdb', 'bp', 'co', 'pe', 'us', 've'];
+		$customer = preg_replace($pattern, $replace, $customer);
+		log_message('info', "--------------- out $customer -------    ");
+		return $customer;
 	}
 }

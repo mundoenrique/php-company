@@ -4,7 +4,7 @@
 	<div class="flex tertiary">
 		<nav class="main-nav nav-inferior">
 			<ul class="mb-0 h6 light tertiary list-style-none list-inline">
-				<li class="inline"><a class="tertiary big-modal" href="<?= base_url('empresas') ?>"><?= lang('GEN_MENU_ENTERPRISE') ?> /</a></li>
+				<li class="inline"><a class="tertiary big-modal" href="<?= base_url(lang('CONF_LINK_ENTERPRISES')) ?>"><?= lang('GEN_MENU_ENTERPRISE') ?> /</a></li>
 				<li class="inline"><a class="tertiary not-pointer" href="javascript:"><?= lang('GEN_PRODUCTS') ?></a></li>
 			</ul>
 		</nav>
@@ -53,8 +53,8 @@
 			<?php foreach($productList AS $pos => $products): ?>
 			<div data-jplist-item class="select-product flex mb-1 pl-3 pr-4 py-1 bg-white justify-between items-center">
 				<div class="flex mr-3 mx-1 items-center flex-auto">
-					<img class="img-product-list" src="<?= $this->asset->insertFile($products->programImg, 'images/programs', $countryUri); ?>" alt="<?= $products->programImg; ?>">
-					<img class="filter-<?= strtolower($products->marca); ?> mx-2 img-brand-list" src="<?= $this->asset->insertFile($products->imgBrand, 'images/brands'); ?>" alt="<?= $products->imgBrand; ?>">
+					<img class="img-product-list" src="<?= $this->asset->insertFile($products->productImg, 'images/programs', $customerUri); ?>" alt="<?= $products->productImg; ?>">
+					<img class="filter-<?= $products->marca; ?> mx-2 img-brand-list" src="<?= $this->asset->insertFile($products->imgBrand, 'images/brands'); ?>" alt="<?= $products->imgBrand; ?>">
 					<div class="flex flex-column flex-auto">
 						<span class="product-description semibold primary"><?= $products->descripcion; ?></span>
 						<span class="h6 light text truncate">
@@ -67,8 +67,9 @@
 					<button class="product-detail btn btn-primary btn-small btn-loading flex mx-auto justify-center">
 						<?= lang('GEN_BTN_SELECT') ?>
 					</button>
-					<form id="product-<?= $products->idProducto; ?>" action="<?= base_url('detalle-producto') ?>" method="POST">
+					<form id="product-<?= $products->idProducto; ?>" action="<?= base_url(lang('CONF_LINK_PRODUCT_DETAIL')) ?>" method="POST">
 						<input type="hidden" name="productPrefix" value="<?= $products->idProducto; ?>">
+						<input type="hidden" name="productImg" value="<?= $products->productImg; ?>">
 						<input type="hidden" name="productName" value="<?= $products->descripcion; ?>">
 						<input type="hidden" name="productBrand" value="<?= $products->marca; ?>">
 					</form>

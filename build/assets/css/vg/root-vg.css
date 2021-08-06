@@ -1,0 +1,40 @@
+@font-face {
+  font-family: "Sofia Pro";
+  font-style: normal;
+  font-weight: normal;
+  src: url('../../fonts/vg/sofiaprolight-webfont.eot?#iefix');
+  src: url('../../fonts/vg/sofiaprolight-webfont.eot?#iefix') format('embedded-opentype'), url('../../fonts/vg/sofiaprolight-webfont.woff') format('woff'), url('../../fonts/vg/sofiaprolight-webfont.ttf') format('truetype'), url('../../fonts/vg/sofiaprolight-webfont.svg') format('svg');
+}
+
+@font-face {
+	font-family: "Sofia Pro";
+  font-style: normal;
+  font-weight: bold;
+  src: url('../../fonts/vg/sofiapromedium-webfont.eot?#iefix');
+  src: url('../../fonts/vg/sofiapromedium-webfont.eot?#iefix') format('embedded-opentype'), url('../../fonts/vg/sofiapromedium-webfont.woff') format('woff'), url('../../fonts/vg/sofiapromedium-webfont.ttf') format('truetype'), url('../../fonts/vg/sofiapromedium-webfont.svg') format('svg');
+}
+
+:root {
+
+	/* Brand colors */
+	--color-primary: #583F99;
+	--color-secondary: #FFFFFF;
+	--color-tertiary: #E3E3E3;
+	--color-fifth: #707070;
+	--color-sixth: #555555;
+	--color-seventh:#7b73a9;
+	--color-eighth: #999999;
+
+	/* Others */
+	--option-not-active: #ffffff;
+	--option-active: #583F99;
+	--black: #111111;
+
+  /* Typography */
+	--font-family-base-first: "Sofia Pro", Helvetica, Arial, sans-serif;
+  --font-family-monospace: monospace, "Courier New";
+  --font-family-novoglyphs: 'novoglyphs';
+
+  /* Border radius */
+  --border-radius: 5px;
+}

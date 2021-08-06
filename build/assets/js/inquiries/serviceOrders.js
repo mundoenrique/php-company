@@ -190,7 +190,7 @@ function format(bulk) {
 		body+=	'<tr>';
 		body+= 		'<td>';
 		body+=			'<a class="btn-link big-modal this-bulk">'+value.bulkNumber+'</a>';
-		body+= 			'<form class="form-group" action="'+baseURL+'consulta-lote" method="post">';
+		body+= 			'<form class="form-group" action="'+ baseURL + lang.CONF_LINK_INQUIRY_BULK_DETAIL +'" method="post">';
 		body+= 				'<input type="hidden" name="bulkId" value="'+value.bulkId+'">';
 		body+= 				'<input type="hidden" name="orderList" value="'+orderList+'">';
 		body+= 				'<input type="hidden" name="bulkfunction" value="Consulta de orden de servicio">';

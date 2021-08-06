@@ -380,43 +380,96 @@ $config = [
 			'rules' => 'trim|regex_match[/^[0-9]*$/i]'
 		],
 	],
+	'deleteContact' => [
+		[
+			'field' => 'acrif',
+			'label' => 'acrif',
+			'rules' => 'trim|regex_match[/^[0-9]*$/i]|required'
+		],
+		[
+			'field' => 'idExper',
+			'label' => 'idExper',
+			'rules' => 'trim|regex_match[/^[0-9]*$/i]|required'
+		],
+		[
+			'field' => 'pass',
+			'label' => 'pass',
+			'rules' => 'trim|required'
+		]
+	],
+	'updateContact' => [
+		[
+			'field' => 'nameModifyContact',
+			'label' => 'nameModifyContact',
+			'rules' => 'trim|regex_match[/^[a-zA-Z ]*$/i]|required'
+		],
+		[
+			'field' => 'dniModifyContact',
+			'label' => 'dniModifyContact',
+			'rules' => 'trim|regex_match[/^[a-zA-Z0-9 ]*$/i]|required'
+		],
+		[
+			'field' => 'emailModifyContact',
+			'label' => 'emailModifyContact',
+			'rules' => 'trim|regex_match[/^([a-zA-Z]+[0-9_.+\-]*)+\@(([a-zA-Z0-9])+\.)+([a-zA-Z0-9]{2,4})+$/]|required'
+		],
+		[
+			'field' => 'modifyContactPass',
+			'label' => 'modifyContactPass',
+			'rules' => 'trim|required'
+		],
+		[
+			'field' => 'positionModifyContact',
+			'label' => 'positionModifyContact',
+			'rules' => 'trim|regex_match[/^[a-zA-Z ]*$/i]|required'
+		],
+		[
+			'field' => 'surnameModifyContact',
+			'label' => 'surnameModifyContact',
+			'rules' => 'trim|regex_match[/^[a-zA-Z ]*$/i]|required'
+		],
+		[
+			'field' => 'typeModifyContact',
+			'label' => 'typeModifyContact',
+			'rules' => 'trim|regex_match[/^[a-zA-Z ]*$/i]|required'
+		]
+	],
 	'addContact' => [
 		[
-			'field' => 'contName',
-			'label' => 'contName',
-			'rules' => 'trim'
+			'field' => 'nameNewContact',
+			'label' => 'nameNewContact',
+			'rules' => 'trim|regex_match[/^[a-zA-Z ]*$/i]|required'
 		],
 		[
-			'field' => 'password',
-			'label' => 'password',
-			'rules' => 'trim'
+			'field' => 'dniNewContact',
+			'label' => 'dniNewContact',
+			'rules' => 'trim|regex_match[/^[a-zA-Z0-9 ]*$/i]|required'
 		],
 		[
-			'field' => 'surname',
-			'label' => 'surname',
-			'rules' => 'trim'
+			'field' => 'emailNewContact',
+			'label' => 'emailNewContact',
+			'rules' => 'trim|regex_match[/^([a-zA-Z]+[0-9_.+\-]*)+\@(([a-zA-Z0-9])+\.)+([a-zA-Z0-9]{2,4})+$/]|required'
 		],
 		[
-			'field' => 'contOcupation',
-			'label' => 'contOcupation',
-			'rules' => 'trim'
+			'field' => 'newContPass',
+			'label' => 'newContPass',
+			'rules' => 'trim|required'
 		],
 		[
-			'field' => 'contNIT',
-			'label' => 'contNIT',
-			'rules' => 'trim'
+			'field' => 'positionNewContact',
+			'label' => 'positionNewContact',
+			'rules' => 'trim|regex_match[/^[a-zA-Z ]*$/i]|required'
 		],
 		[
-			'field' => 'contType',
-			'label' => 'contType',
-			'rules' => 'trim'
+			'field' => 'surnameNewContact',
+			'label' => 'surnameNewContact',
+			'rules' => 'trim|regex_match[/^[a-zA-Z ]*$/i]|required'
 		],
 		[
-			'field' => 'contEmail',
-			'label' => 'contEmail',
-			'rules' => 'trim'
+			'field' => 'typeNewContact',
+			'label' => 'typeNewContact',
+			'rules' => 'trim|regex_match[/^[a-zA-Z ]*$/i]|required'
 		]
-
 	],
 	'getProducts' => [
 		[
@@ -725,6 +778,12 @@ $config = [
 			'rules' => 'trim'
 		]
 	],
+	'rechargeAuthorization' => [
+		[
+			'field' => 'passwordTranfer',
+			'rules' => 'trim'
+		]
+	],
 	'getReport' => [
 		[
 			'field' => 'operation',
@@ -744,6 +803,106 @@ $config = [
 			'field' => 'operation',
 			'label' => 'operation',
 			'rules' => 'null'
+		]
+	],
+	'getBranches' => [
+		[
+			'field' => 'branchListBr',
+			'label' => 'branchListBr',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+		]
+	],
+	'getContacts' =>[
+		[
+			'field' => 'acrif',
+			'label' => 'acrif',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+		],
+	],
+	'uploadFileBranches' => [
+		[
+			'field' => 'file',
+			'label' => 'file',
+			'rules' => 'trim|regex_match[/^[0-9a-zA-z.\/]+$/]|required'
+		],
+		[
+			'field' => 'typeBulkText',
+			'label' => 'typeBulkText',
+			'rules' => 'trim|regex_match[/^[a-z0-9ñáéíóú \(\).]{10,70}$/i]'
+		]
+	],
+	'geoFilter' => [
+		[
+			'field' => 'data[]',
+			'label' => 'data',
+			'rules' => 'required'
+		]
+	],
+	'updateBranch' => [
+		[
+			'field' => 'rifB',
+			'label' => 'rifB',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]'
+		],
+		[
+			'field' => 'codB',
+			'label' => 'codB',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]'
+		],
+		[
+			'field' => 'branchName',
+			'label' => 'branchName',
+			'rules' => 'trim|regex_match[/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ (),.-\/]+$/]|required'
+		],
+		[
+			'field' => 'address1',
+			'label' => 'address1',
+			'rules' => 'trim|regex_match[/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ (),.-\/]+$/]|required'
+		],
+		[
+			'field' => 'address2',
+			'label' => 'address2',
+			'rules' => 'trim|regex_match[/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ (),.-\/]+$/]'
+		],
+		[
+			'field' => 'address3',
+			'label' => 'address3',
+			'rules' => 'trim|regex_match[/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ (),.-\/]+$/]'
+		],
+		[
+			'field' => 'countryCodeBranch',
+			'label' => 'countryCodeBranch',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+		],
+		[
+			'field' => 'stateCodeBranch',
+			'label' => 'stateCodeBranch',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+		],
+		[
+			'field' => 'cityCodeBranch',
+			'label' => 'cityCodeBranch',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+		],
+		[
+			'field' => 'person',
+			'label' => 'person',
+			'rules' => 'trim|regex_match[/^[a-zA-ZñÑáéíóúÁÉÍÓÚ \/]+$/]|required'
+		],
+		[
+			'field' => 'areaCode',
+			'label' => 'areaCode',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+		],
+		[
+			'field' => 'phone',
+			'label' => 'phone',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+		],
+		[
+			'field' => 'userNameB',
+			'label' => 'userNameB',
+			'rules' => 'trim|regex_match[/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\/]+$/]'
 		]
 	],
 	'unnamedRequest' => [

@@ -3,7 +3,7 @@
 		<h1><?= $title ?></h1>
 		<h2><?= $msg1 ?></h2>
 		<h2><?= $msg2 ?></h2>
-		<?php if($platform == 'desktop'): ?>
+		<?php if($platform == 'browser'): ?>
 		<ul class="list-inline w-list flex justify-between">
 			<li class="list-inline-item">
 				<img class="browser-img" src="<?= $this->asset->insertFile('icon-chrome.svg', 'images/browsers'); ?>" alt="Icono chrome">

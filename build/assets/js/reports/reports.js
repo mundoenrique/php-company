@@ -69,7 +69,7 @@ $(function () {
 			modalBtn = {
 				btn1: {
 					text: lang.GEN_BTN_ACCEPT,
-					link: 'reportes',
+					link: lang.CONF_LINK_REPORTS,
 					action: 'redirect'
 				}
 			}

@@ -56,7 +56,8 @@ class Novo_Business extends NOVO_Controller {
 		$requestArray = (array)$this->request;
 
 		if(empty($requestArray) && !$this->session->has_userdata('enterpriseInf')) {
-			redirect(base_url('empresas'), 'location');
+			redirect(base_url(lang('CONF_LINK_ENTERPRISES')), 'Location', 302);
+			exit;
 		}
 
 		$view = 'getProducts';
@@ -92,7 +93,7 @@ class Novo_Business extends NOVO_Controller {
 			$this->render->widget->products = FALSE;
 			$this->render->widget->widgetBtnTitle = lang('PRODUCTS_WIDGET_BTN');
 			$this->render->widget->countProducts = FALSE;
-			$this->render->widget->actionForm = 'productos';
+			$this->render->widget->actionForm = lang('CONF_LINK_PRODUCTS');
 		}
 
 		$this->render->titlePage = lang('PRODUCTS_TITLE');
@@ -111,7 +112,8 @@ class Novo_Business extends NOVO_Controller {
 		$requestArray = (array) $this->request;
 
 		if(empty($requestArray) && !$this->session->has_userdata('productInf')) {
-			redirect(base_url('empresas'), 'location');
+			redirect(base_url(lang('CONF_LINK_ENTERPRISES')), 'Location', 302);
+			exit;
 		}
 
 		$view = 'getProductDetail';
@@ -128,24 +130,24 @@ class Novo_Business extends NOVO_Controller {
 		$detailList = $this->loadModel($this->request);
 		$this->responseAttr($detailList);
 		$this->render->detailProductName = $detailList->data->productDetail->name;
-		$this->render->productImg = $detailList->data->productDetail->imgProgram;
-		$this->render->productBrand = $detailList->data->productDetail->brand;
+		$this->render->productImg = $detailList->data->productDetail->productImg;
 		$this->render->productImgBrand = $detailList->data->productDetail->imgBrand;
+		$this->render->productBrand = $detailList->data->productDetail->brand;
 		$this->render->viewSomeAttr = $detailList->data->productDetail->viewSomeAttr;
-		$this->render->loadBulkLink = $this->verify_access->verifyAuthorization('TEBCAR') ? lang('GEN_LINK_BULK_LOAD') : lang('GEN_NO_LINK');
-		$this->render->loadDisabled = $this->render->loadBulkLink == lang('GEN_NO_LINK') ? 'is-disabled' : '';
-		$this->render->bulkAuthLink = $this->verify_access->verifyAuthorization('TEBAUT') ? lang('GEN_LINK_BULK_AUTH') : lang('GEN_NO_LINK');
-		$this->render->authDisabled = $this->render->bulkAuthLink == lang('GEN_NO_LINK') ? 'is-disabled' : '';
+		$this->render->loadBulkLink = $this->verify_access->verifyAuthorization('TEBCAR') ? lang('CONF_LINK_BULK_LOAD') : lang('CONF_NO_LINK');
+		$this->render->loadDisabled = $this->render->loadBulkLink == lang('CONF_NO_LINK') ? 'is-disabled' : '';
+		$this->render->bulkAuthLink = $this->verify_access->verifyAuthorization('TEBAUT') ? lang('CONF_LINK_BULK_AUTH') : lang('CONF_NO_LINK');
+		$this->render->authDisabled = $this->render->bulkAuthLink == lang('CONF_NO_LINK') ? 'is-disabled' : '';
 		$this->render->lotsTotal = $detailList->data->productSummary->lots;
 		$this->render->toSign = $detailList->data->productSummary->toSign;
 		$this->render->toAuthorize = $detailList->data->productSummary->toAuthorize;
-		$this->render->OrderServLink = $this->verify_access->verifyAuthorization('TEBORS') ? lang('GEN_LINK_CONS_ORDERS_SERV') : lang('GEN_NO_LINK');
-		$this->render->orderDisabled = $this->render->OrderServLink == lang('GEN_NO_LINK') ? 'is-disabled' : '';
+		$this->render->OrderServLink = $this->verify_access->verifyAuthorization('TEBORS') ? lang('CONF_LINK_SERVICE_ORDERS') : lang('CONF_NO_LINK');
+		$this->render->orderDisabled = $this->render->OrderServLink == lang('CONF_NO_LINK') ? 'is-disabled' : '';
 		$this->render->serviceOrders = $detailList->data->productSummary->serviceOrders;
 		$this->render->serviceOrdersNoCon = $detailList->data->productSummary->serviceOrdersNoCon;
 		$this->render->serviceOrdersCon = $detailList->data->productSummary->serviceOrdersCon;
-		$this->render->masterTransLink = $this->verify_access->verifyAuthorization('TRAMAE') ? lang('GEN_LINK_SERV_MASTER_ACCOUNT') : lang('GEN_NO_LINK');
-		$this->render->masterTransDisabled = $this->render->masterTransLink == lang('GEN_NO_LINK') ? 'is-disabled' : '';
+		$this->render->masterTransLink = $this->verify_access->verifyAuthorization('TRAMAE') ? lang('CONF_LINK_TRANSF_MASTER_ACCOUNT') : lang('CONF_NO_LINK');
+		$this->render->masterTransDisabled = $this->render->masterTransLink == lang('CONF_NO_LINK') ? 'is-disabled' : '';
 		$this->render->totalCards = $detailList->data->productSummary->totalCards;
 		$this->render->activeCards = $detailList->data->productSummary->activeCards;
 		$this->render->inactiveCards = $detailList->data->productSummary->inactiveCards;

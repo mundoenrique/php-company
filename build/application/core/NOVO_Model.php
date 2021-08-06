@@ -6,8 +6,8 @@ class NOVO_Model extends CI_Model {
 	public $accessLog;
 	public $token;
 	public $autoLogin;
-	public $country;
-	public $countryUri;
+	public $customer;
+	public $customerUri;
 	public $dataRequest;
 	public $isResponseRc;
 	public $response;
@@ -22,10 +22,10 @@ class NOVO_Model extends CI_Model {
 		$this->dataAccessLog = new stdClass();
 		$this->dataRequest = new stdClass();
 		$this->response = new stdClass();
-		$this->country = $this->session->has_userdata('countrySess') ? $this->session->countrySess : $this->config->item('country');
-		$this->countryUri = $this->session->countryUri;
-		$this->token = $this->session->token ?: '';
-		$this->autoLogin = $this->session->autoLogin ?: '';
+		$this->customer = $this->session->has_userdata('customerSess') ? $this->session->customerSess : $this->config->item('customer');
+		$this->customerUri = $this->session->customerUri;
+		$this->token = $this->session->token ?? '';
+		$this->autoLogin = $this->session->autoLogin ?? '';
 		$this->userName = $this->session->userName;
 		$this->singleSession = base64_decode($this->input->cookie($this->config->item('cookie_prefix').'singleSession'));
 	}
@@ -42,7 +42,7 @@ class NOVO_Model extends CI_Model {
 		$this->userName = $this->userName ?: mb_strtoupper($this->dataAccessLog->userName);
 		$device = 'desktop';
 
-		$this->dataRequest->pais = $this->country;
+		$this->dataRequest->pais = $this->customer;
 		$this->dataRequest->token = $this->token;
 		$this->dataRequest->autoLogin = $this->autoLogin;
 
@@ -55,7 +55,7 @@ class NOVO_Model extends CI_Model {
 
 		$this->dataRequest->logAccesoObject = $this->accessLog;
 		$encryptData = $this->encrypt_connect->encode($this->dataRequest, $this->userName, $model);
-		$request = ['bean'=> $encryptData, 'pais'=> $this->country];
+		$request = ['bean'=> $encryptData, 'pais'=> $this->customer];
 		$response = $this->encrypt_connect->connectWs($request, $this->userName, $model);
 
 		if(isset($response->rc)) {
@@ -89,7 +89,7 @@ class NOVO_Model extends CI_Model {
 		log_message('INFO', 'NOVO Model: makeAnswer Method Initialized');
 
 		$this->isResponseRc = (int) $responseModel->rc;
-		$this->response->code = lang('GEN_DEFAULT_CODE');
+		$this->response->code = lang('CONF_DEFAULT_CODE');
 		$this->response->icon = lang('CONF_ICON_WARNING');
 		$this->response->title = lang('GEN_SYSTEM_NAME');
 		$this->response->data = new stdClass();
@@ -97,20 +97,20 @@ class NOVO_Model extends CI_Model {
 
 		switch ($model) {
 			case 'callWs_GetProductDetail':
-				$linkredirect = 'productos';
+				$linkredirect = lang('CONF_LINK_PRODUCTS');
 			break;
 			case 'callWs_GetProducts':
-				$linkredirect = 'empresas';
+				$linkredirect = lang('CONF_LINK_ENTERPRISES');
 			break;
 			default:
-				$linkredirect = 'inicio';
+				$linkredirect = lang('CONF_LINK_SIGNIN');
 
 				if ($this->session->has_userdata('logged')) {
-					$linkredirect = lang('GEN_ENTERPRISE_LIST');
+					$linkredirect = lang('CONF_LINK_ENTERPRISES');
 				}
 		}
 
-		$linkredirect = $this->session->has_userdata('productInf') ? 'detalle-producto' : $linkredirect;
+		$linkredirect = $this->session->has_userdata('productInf') ? lang('CONF_LINK_PRODUCT_DETAIL') : $linkredirect;
 		$linkredirect = $this->singleSession == 'SignThird' && ($this->isResponseRc == -29 || $this->isResponseRc == -61)
 			? 'ingresar/fin' : $linkredirect;
 		$arrayResponse = [

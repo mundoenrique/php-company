@@ -52,7 +52,7 @@ if ( ! function_exists('verifyheader'))
 
 		$CI = &get_instance();
 		$client = $CI->config->item('client');
-		$countryUri = $CI->config->item('country-uri');
+		$customerUri = $CI->config->item('customer-uri');
 		$logged = $CI->session->has_userdata('logged');
 
 		switch ($link) {
@@ -84,7 +84,7 @@ if ( ! function_exists('verifyheader'))
 				break;
 			case lang('GEN_TAG_HELPER'):
 				$show = ['novo'];
-				$display = (in_array($client, $show) && $countryUri == 've');
+				$display = (in_array($client, $show) && $customerUri == 've');
 				break;
 		}
 
@@ -104,7 +104,7 @@ if ( ! function_exists('verifyBody'))
 
 		$CI = &get_instance();
 		$client = $CI->config->item('client');
-		$country = $CI->config->item('country-uri');
+		$customerUri = $CI->config->item('customer-uri');
 
 		switch ($link) {
 			case lang('GEN_SIGNIN_TOP'):
@@ -137,7 +137,7 @@ if ( ! function_exists('verifyBody'))
 				break;
 			case lang('GEN_TAG_ORDER_TYPE'):
 				$show = ['novo', 'pichincha', 'banorte'];
-				$display = (in_array($client, $show) && $country != 've');
+				$display = (in_array($client, $show) && $customerUri != 've');
 				break;
 			case lang('GEN_TAG_CANCEL_BUTTON'):
 				$show = ['novo', 'pichincha', 'banorte'];
@@ -193,27 +193,27 @@ if ( ! function_exists('verifyFooter'))
 
 		$CI = &get_instance();
 		$client = $CI->config->item('client');
-		$countryUri = $CI->config->item('country-uri');
+		$customerUri = $CI->config->item('customer-uri');
 		$logged = $CI->session->has_userdata('logged');
 
 		switch ($link) {
 			case lang('GEN_FOTTER_START'):
 				$show = ['novo', 'pichincha'];
-				$display = ($module !== 'login' && $module !== 'suggestion' && !$logged);
+				$display = ($module !== 'login' && $module !== lang('CONF_LINK_SUGGESTION') && !$logged);
 				$display = (in_array($client, $show) && $display);
 				break;
 			case lang('GEN_FOTTER_BENEFITS'):
 				$show = ['novo', 'pichincha'];
-				$display = ($module !== 'benefits' && $module !== 'change-password' && $module !== 'suggestion');
-				$display = (in_array($client, $show) && $display && $countryUri != 'bp');
+				$display = ($module !== 'benefits' && $module !== 'change-password' && $module !== lang('CONF_LINK_SUGGESTION'));
+				$display = (in_array($client, $show) && $display && $customerUri != 'bp');
 				break;
 			case lang('GEN_FOTTER_TERMS'):
 				$show = ['novo', 'pichincha'];
-				$display = ($module !== 'terms' && $module !== 'change-password' && $module !== 'suggestion');
-				$display = (in_array($client, $show) && $display && $countryUri != 'bp');
+				$display = ($module !== 'terms' && $module !== 'change-password' && $module !== lang('CONF_LINK_SUGGESTION'));
+				$display = (in_array($client, $show) && $display && $customerUri != 'bp');
 				break;
 			case lang('GEN_FOTTER_RATES'):
-				$display = ($module !== 'rates' && $logged && $countryUri == 've');
+				$display = ($module !== 'rates' && $logged && $customerUri == 've');
 				break;
 			case lang('GEN_FOTTER_LOGOUT'):
 				$show = ['novo'];

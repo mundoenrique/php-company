@@ -1,9 +1,9 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 <div class="login-content flex items-center justify-center bg-primary">
-	<div class="row">
+	<div class="row justify-center">
 		<div class="col-auto px-0">
 			<div class="flex flex-column items-center z1 h-100">
-				<img class="logo-banco mb-2" src="<?= $this->asset->insertFile(lang('GEN-LOGO-BIG'), 'images', $countryUri); ?>"
+				<img class="logo-banco mb-2" src="<?= $this->asset->insertFile(lang('GEN-LOGO-BIG'), 'images', $customerUri); ?>"
 					alt="<?= lang('GEN_ALTERNATIVE_TEXT'); ?>">
 				<span class="mb-2 secondary center h3"><?= lang('USER_WELCOME_TITLE') ?></span>
 				<div id="widget-signin" class="widget rounded h-100">
@@ -28,7 +28,7 @@
 							<?= lang('LOGIN_BTN') ?>
 						</button>
 						<?php if(lang('CONF_SIGIN_RECOVER_PASS') == 'ON'): ?>
-						<a class="block mb-1 h5 primary hyper-link" href="<?= base_url(lang('GEN_LINK_RECOVER_ACCESS'));?>"><?= lang('LOGIN_RECOVER_PASS'); ?></a>
+						<a class="block mb-1 h5 primary hyper-link" href="<?= base_url(lang('CONF_LINK_RECOVER_ACCESS'));?>"><?= lang('LOGIN_RECOVER_PASS'); ?></a>
 						<?php endif; ?>
 					</form>
 				</div>
@@ -39,13 +39,15 @@
 		<div class="col-auto px-0">
 			<div class="h-100">
 				<div class="flex pr-2 pr-lg-0 img-log h-100">
-					<img src="<?= $this->asset->insertFile(lang('GEN_IMAGE_LOGIN'), 'images', $countryUri); ?> " alt="Imagen de referencia">
+					<img src="<?= $this->asset->insertFile(lang('GEN_IMAGE_LOGIN'), 'images', $customerUri); ?> " alt="Imagen de referencia">
 				</div>
 			</div>
 		</div>
 		<?php endif; ?>
+		<?php if (lang('CONF_SIGNIN_WELCOME_MSG') == 'ON') : ?>
+			<div class="col-12 mt-2 center h6">
+				<p><?= lang('USER_WELCOME_MSG') ?></p>
+			</div>
+    <?php endif; ?>
 	</div>
-  <?php if(lang('CONF_SIGNIN_WIDGET_CONTACT') == 'ON'): ?>
-  <?php $this->load->view('widget/widget_contacts_content-core') ?>
-  <?php endif; ?>
 </div>

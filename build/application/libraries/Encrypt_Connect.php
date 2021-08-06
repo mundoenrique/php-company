@@ -63,13 +63,13 @@ class Encrypt_Connect {
 		if(!$response) {
 			log_message('ERROR', 'NOVO ['.$userName.'] NO SERVICE RESPONSE');
 			$response = new stdClass();
-			$response->rc = lang('GEN_RC_DEFAULT');
+			$response->rc = lang('CONF_RC_DEFAULT');
 			$response->msg = lang('GEN_MESSAGE_SYSTEM');
 		}
 
 		if(!isset($response->pais)) {
-			log_message('INFO', 'NOVO ['.$userName.'] INSERTING COUNTRY TO THE RESPONSE');
-			$response->pais = $this->CI->config->item('country');
+			log_message('INFO', 'NOVO ['.$userName.'] INSERTING CUSTOMER TO THE RESPONSE');
+			$response->pais = $this->CI->config->item('customer');
 		}
 
 		if (isset($response->bean)) {
@@ -131,14 +131,14 @@ class Encrypt_Connect {
 		log_message('INFO', 'NOVO Encrypt_Connect: connectWs Method Initialized');
 
 		$fail = FALSE;
-		$subFix = '_' . strtoupper($this->CI->config->item('country-uri'));
+		$subFix = '_' . strtoupper($this->CI->config->item('customer-uri'));
 		$wsUrl = $_SERVER['WS_URL'];
 
 		if (isset($_SERVER['WS_URL' . $subFix])) {
 			$wsUrl = $_SERVER['WS_URL' . $subFix];
 		}
 
-		log_message('DEBUG', 'NOVO ['.$userName.'] REQUEST BY COUNTRY: '.$request['pais'].', AND WEBSERVICE URL: '.$wsUrl);
+		log_message('DEBUG', 'NOVO ['.$userName.'] REQUEST BY CUSTOMER: '.$request['pais'].', AND WEBSERVICE URL: '.$wsUrl);
 
 		$requestSerV = json_encode($request, JSON_UNESCAPED_UNICODE);
 		$start = microtime(true);
@@ -185,7 +185,7 @@ class Encrypt_Connect {
 					$failResponse->msg = lang('GEN_TIMEOUT');
 				break;
 				default:
-					$failResponse->rc = lang('GEN_RC_DEFAULT');
+					$failResponse->rc = lang('CONF_RC_DEFAULT');
 			}
 
 			switch ($httpCode) {
@@ -217,7 +217,7 @@ class Encrypt_Connect {
 	{
 		log_message('INFO', 'NOVO Encrypt_Connect: moveFile Method Initialized');
 
-		$urlBulkService = BULK_FTP_URL.$this->CI->config->item('country').'/';
+		$urlBulkService = BULK_FTP_URL.$this->CI->config->item('customer').'/';
 		$userpassBulk =  BULK_FTP_USERNAME.':'.BULK_FTP_PASSWORD;
 		$respUpload = new stdClass;
 		$respUpload->rc = 0;

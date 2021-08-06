@@ -1,5 +1,4 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
-
 <div class="pt-3 pb-5">
   <div class="logout-content max-width-4 mx-auto p-responsive py-4">
     <h1 class="primary h0"><?= lang('GEN_RECOVER_PASS_TITLE'); ?></h1>
@@ -19,9 +18,9 @@
                 <div class="help-block"></div>
               </div>
               <div class="form-group col-lg-3">
-                <label for="id-company"><?= lang('GEN_FISCAL_REGISTRY'); ?></label>
+                <label for="id-company"><?= novoLang(lang('RECOVER_PASS_FISCAL_REGISTRY'), lang('GEN_FISCAL_REGISTRY')); ?></label>
                 <input id="id-company" name="id-company" class="form-control" type="text" maxlength="18"
-                  placeholder="<?= lang('PLACE_HOLDER_FISCAL_REGISTER'); ?>" disabled>
+                  placeholder="<?= lang('USER_EXAMPLE_FISCAL_REGISTER'); ?>" disabled>
                 <div class="help-block"></div>
               </div>
               <div class="form-group col-lg-4">
@@ -33,7 +32,7 @@
             </div>
             <hr class="separador-one">
             <div class="flex items-center justify-end pt-3">
-              <a class="btn btn-link btn-small big-modal" href="<?= base_url('inicio') ?>"><?= lang('GEN_BTN_CANCEL'); ?></a>
+              <a class="btn btn-link btn-small big-modal" href="<?= base_url(lang('CONF_LINK_SIGNIN')) ?>"><?= lang('GEN_BTN_CANCEL'); ?></a>
               <button id="btn-pass-recover" class="btn btn-small btn-primary btn-loading" type="submit"
                 disabled><?= lang('GEN_BTN_CONTINUE'); ?></button>
             </div>
