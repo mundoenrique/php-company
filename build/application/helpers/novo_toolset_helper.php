@@ -287,11 +287,10 @@ if (! function_exists('languageCookie')) {
 //eliminar despues de la certificación
 if (! function_exists('checkTemporalTenant')) {
 	function checkTemporalTenant($customer) {
-		log_message('info', "--------------- in $customer -------    ");
 		$pattern = ['/bog/', '/bpi/', '/col/', '/per/', '/usd/', '/ven/'];
 		$replace = ['bdb', 'bp', 'co', 'pe', 'us', 've'];
 		$customer = preg_replace($pattern, $replace, $customer);
-		log_message('info', "--------------- out $customer -------    ");
+
 		return $customer;
 	}
 }
