@@ -146,7 +146,7 @@ class NOVO_Controller extends CI_Controller {
 		if ($auth) {
 			$this->render->favicon = lang('GEN_FAVICON');
 			$this->render->ext = lang('GEN_FAVICON_EXT');
-			$this->render->loader = lang('GEN_LOADER');
+			$this->render->loader = lang('IMG_LOADER');
 			$this->render->customerUri = $this->customerUri;
 			$this->render->novoName = $this->security->get_csrf_token_name();
 			$this->render->novoCook = $this->security->get_csrf_hash();

@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-$lang['GEN_LOADER'] = 'loading-novo.gif';
+$lang['IMG_LOADER'] = 'loading-novo.gif';
 $lang['GEN_FISCAL_REGISTRY'] = 'RIF.';
 $lang['RESP_SUPPORT'] = 'Por favor envía un correo a %s %s';
 $lang['RESP_SUPPORT_MAIL'] = '<br><strong>soporteempresas@tebca.com</strong>';

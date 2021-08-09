@@ -16,6 +16,8 @@ $lang['GEN-LOGO-BIG'] = 'logo-signin.png';
 $lang['GEN_IMG_CLOCK'] = 'img-clock.svg';
 $lang['GEN_DETAIL_BRAND_COLOR'] = '_card-white.svg';
 $lang['GEN_IMAGE_LOGIN'] = '';
+//LOADER
+$lang['IMG_LOADER'] = '';
 // PROGRAM IMAGES
 $lang['IMG_PROGRAM_IMG_DEFAULT'] =	'default.svg';
 $lang['IMG_PROGRAM_IMAGES'] = [];
