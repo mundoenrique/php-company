@@ -273,7 +273,7 @@ class Request_Data {
 			foreach($products AS $key => $value) {
 				switch ($key) {
 					case 'descripcion':
-						$productImgName = url_title(mb_strtolower($value));
+						$productImgName = normalizeName(mb_strtolower($value));
 						$productImg = lang('IMG_PROGRAM_IMG_DEFAULT');
 
 						if (array_key_exists($productImgName, lang('IMG_PROGRAM_IMAGES'))) {
@@ -288,10 +288,10 @@ class Request_Data {
 					break;
 					case 'idCategoria':
 						$noDeleteCat[] =  $value;
-						break;
+					break;
 					case 'filial':
 						$products->$key = trim(mb_strtoupper($value));
-						break;
+					break;
 					case 'marca':
 						$imgBrand = url_title(trim(mb_strtolower($value))).'_product.svg';
 
@@ -301,7 +301,7 @@ class Request_Data {
 
 						$products->imgBrand = $imgBrand;
 						$noDeleteBrand[] =  $value;
-						break;
+					break;
 				}
 			}
 		}
