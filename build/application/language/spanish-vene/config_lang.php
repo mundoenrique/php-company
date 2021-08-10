@@ -18,5 +18,6 @@ $lang['CONF_MODAL_WIDTH'] = 310;
 $lang['CONF_LINK_SIGNIN'] = 'inicio';
 $lang['CONF_LINK_CHANGE_PASS'] = 'cambiar-clave';
 $lang['CONF_LINK_ENTERPRISES'] = 'dashboard';
+$lang['CONF_LINK_TERMS'] = 'inf-condiciones';
 //INTERNAL LINKS
 $lang['CONF_LINK_SUGGESTION'] = 'browsers';
