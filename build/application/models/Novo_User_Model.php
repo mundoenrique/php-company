@@ -124,7 +124,7 @@ class Novo_User_Model extends NOVO_Model {
 					'clientAgent' => $this->agent->agent_string()
 				];
 				$this->session->set_userdata($userData);
-				$this->response->data = base_url('inf-condiciones');
+				$this->response->data = base_url(lang('CONF_LINK_TERMS'));
 				$this->session->set_flashdata('changePassword', 'newUser');
 				$this->session->set_flashdata('userType', $response->usuario->ctipo);
 
