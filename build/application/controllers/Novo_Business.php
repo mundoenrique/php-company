@@ -124,6 +124,7 @@ class Novo_Business extends NOVO_Controller {
 
 		if(empty($requestArray)) {
 			$request = $this->session->productInf;
+			$this->request->isGet = TRUE;
 			$this->request->productPrefix = $request->productPrefix;
 		}
 
