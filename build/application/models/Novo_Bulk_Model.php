@@ -983,8 +983,18 @@ class Novo_Bulk_Model extends NOVO_Model {
 
 		switch ($this->isResponseRc) {
 			case 0:
-				$this->response->code = 0;
-				$this->response->data = lang('CONF_LINK_SERVICE_ORDERS');
+				
+				if (!$this->verify_access->verifyAuthorization('TEBORS')) {
+					$this->response->title = lang('BULK_SO_CREATE_TITLE');
+					$this->response->msg = lang('GEN_SO_SUCCESSFULL');
+					$this->response->icon = lang('CONF_ICON_INFO');
+					$this->response->modalBtn['btn1']['link'] = lang('CONF_LINK_BULK_AUTH');
+					$this->response->modalBtn['btn1']['action'] = 'redirect';
+        }else{
+					$this->response->code = 0;
+					$this->response->data = lang('CONF_LINK_SERVICE_ORDERS');
+				}
+
 				$serviceOrdersList = [];
 
 				foreach($response->lista AS $list) {
@@ -1126,7 +1136,7 @@ class Novo_Bulk_Model extends NOVO_Model {
 				$responseList->code = 0;
 				$responseList->data = $this->callWs_MakeBulkList_Bulk($response);
 				$this->session->set_flashdata('bulkList', $responseList);
-				$this->response->modalBtn = base_url(lang('CONF_LINK_BULK_AUTH'));
+				$this->response->data = base_url(lang('CONF_LINK_BULK_AUTH'));
 			break;
 		}
 

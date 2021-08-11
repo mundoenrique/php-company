@@ -27,3 +27,5 @@ $lang['GEN_CONTACTS_CONTACT'] = 'CONTACTO';
 $lang['GEN_CONTACTS'] = [
 	'XXXXX' => 'XXXXXXX',
 ];
+$lang['GEN_SO_SUCCESSFULL'] = 'Tu transacción ha sido procesada exitosamente.';
+$lang['GEN_SO_CREATE_INCORRECT'] = 'Los datos ingresados son incorrectos.';
